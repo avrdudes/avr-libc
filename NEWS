@@ -3,6 +3,11 @@
 * Bugs fixed:
 
   [no-id] Fix pow(N,0) yielding 0.5 instead of 1.0.
+  [#9669] Incorrect example for strings in flash.
+          The FAQ entry did not extract the pointers from a ROM table
+          using memcpy_P() but used the ROM table directly.  This works
+          only incidentally for compile-time constant indexes since the
+          compiler would then insert the appropriate ROM address.
 
 * Other changes:
 
