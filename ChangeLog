@@ -1,3 +1,8 @@
+2003-02-08  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* include/avr/ioat94k.h: Fix external/FPGA interrupts.
+	(Thanks to Nishiyama Naoki for catching this.)
+
 2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/io.h: Document SPM_PAGESIZE.
