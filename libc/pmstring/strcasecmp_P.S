@@ -51,9 +51,7 @@
     \brief Compare two strings ignoring case.
 
     The strcasecmp_P() function compares the two strings s1 and s2, ignoring
-    the case of the characters.  It returns an integer less than, equal to, or
-    greater than zero if s1 is found, respectively, to be less than, to match,
-    or be greater than s2.
+    the case of the characters.
 
     \param s1 A pointer to a string in the devices SRAM.
     \param s2 A pointer to a string in the devices Flash.

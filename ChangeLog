@@ -1,3 +1,8 @@
+2002-08-05  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/pmstring/strcasecmp_P.S: remove redundant sentence about return
+		value.
+	
 2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/inline_asm.dox: bump nesting level by one to
