@@ -107,8 +107,8 @@ or may not be of use for you.
   http://savannah.gnu.org/projects/uisp/<br>
   \ref install_uisp "Installation"
 
-- <b>avrprog</b> (2.1.0) <br>
-  http://www.bsdhome.com/avrprog/ <br>
+- <b>avrdude</b> (3.1.0) <br>
+  http://savannah.nongnu.org/projects/avrdude/ <br>
   \ref install_avrprog "Installation" <br>
   \ref using_avrprog "Usage Notes"
 
@@ -281,23 +281,40 @@ $ make
 $ make install
 \endverbatim
 
-\section install_avrprog Avrprog
+\section install_avrprog Avrdude
 \addindex installation, avrprog
+\addindex installation, avrdude
 
 \note This is currently a FreeBSD only program, although adaptation to
 other systems should not be hard.
 
-<tt><b>avrprog</b></tt> is part of the FreeBSD ports system. To install it,
+\note It has been ported to windows (via cygwin) and linux. Other unix systems
+should be trivial to port to.
+
+<tt><b>avrdude</b></tt> is part of the FreeBSD ports system. To install it,
 simply do the following:
 
 \verbatim
-# cd /usr/ports/devel/avrprog
+# cd /usr/ports/devel/avrdude
 # make install
 \endverbatim
 
 \note Installation into the default location usually requires root
 permissions.  However, running the program only requires access
 permissions to the appropriate \c ppi(4) device.
+
+Building and installing on other systems should use the \c configure system,
+as such:
+
+\verbatim
+$ gunzip -c avrdude-<version>.tar.gz | tar xf -
+$ cd avrdude-<version>
+$ mkdir obj-avr
+$ cd obj-avr
+$ ../configure --prefix=$PREFIX
+$ make
+$ make install
+\endverbatim
 
 \section install_gdb GDB for the AVR target
 \addindex Installation, gdb

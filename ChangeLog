@@ -1,3 +1,10 @@
+2003-02-27  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/acknowledge.dox:
+	* doc/api/tools-install.dox:
+	* doc/api/using-avrprog.dox:
+	Update avrdude information.
+
 2003-02-26  Theodore A. Roth  <troth@openavr.org>
 
 	* doc/api/acknowledge.dox: Add Rich Neswold.

@@ -45,9 +45,10 @@
 	tools to the FreeBSD [ http://www.freebsd.org ] ports tree and for
 	providing the basics for the \ref demo_project "demo project".
 
-	- Brian Dean [ bsd@bsdhome.com ] for developing \b avrprog (an alternate
+	- Brian Dean [ bsd@bsdhome.com ] for developing \b avrdude (an alternative
 	to <b>uisp</b>) and for contributing \ref using_avrprog "documentation"
-	which describes how to use it.
+	which describes how to use it. \b Avrdude was previously called 
+	\b avrprog.
 
 	- Eric Weddington [ eric@umginc.net ] for maintaining the \b WinAVR
 	package and thus making the continued improvements to the
