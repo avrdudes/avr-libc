@@ -1,5 +1,16 @@
 2005-02-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/faq.dox: sbi() has been removed, document standard
+	C bit operators instead (fixes savannah bug #12040); mention
+	that external RAM initialization as a C function would
+	preferrably go into .init3 where __zero_reg__ has already
+	been initialized.
+
+	* doc/api/sections.dox: mention that .init2 also clears
+	__zero_reg__, remove old outp() macro usage in example code.
+
+2005-02-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdio/vfscanf.c: fix field width accounting for leading
 	signs and/or 0/0x prefixes.  Fixes bug #11987.
 
