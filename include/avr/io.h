@@ -152,7 +152,7 @@
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
 #elif defined (__AVR_AT43USB320__)
-#  include <avr/io43u320.h>
+#  include <avr/io43u32x.h>
 #elif defined (__AVR_AT43USB355__)
 #  include <avr/io43u35x.h>
 #elif defined (__AVR_AT76C711__)

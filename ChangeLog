@@ -1,3 +1,13 @@
+2003-02-28  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* NEWS, doc/api/main_page.dox: Note AT43USB320 support.
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in, include/avr/io.h: Add support for AT43USB320.
+	* include/avr/io43u32x.h: New file, thanks to Keith Gudger.
+	* include/avr/io43u35x.h: Remove defines for the non-existent
+	UART and analog comparator.  Remove IAR compatibility defines.
+	(RAMEND, XRAMEND, FLASHEND): Update to match the datasheet.
+
 2003-02-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: add entry about integer promotion with

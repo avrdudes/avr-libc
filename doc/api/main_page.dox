@@ -102,6 +102,7 @@ The following is a list of AVR devices currently supported by the library.
 
 - at94K \ref supp_dev_footnote_two "[2]"
 - at76c711 \ref supp_dev_footnote_three "[3]"
+- at43usb320
 - at43usb355
 - at86rf401
 

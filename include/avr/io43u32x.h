@@ -23,10 +23,10 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* avr/io43u35x.h - definitions for AT43USB35x */
+/* avr/io43u32x.h - definitions for AT43USB32x */
 
-#ifndef _AVR_IO43U35X_H_
-#define _AVR_IO43U35X_H_ 1
+#ifndef _AVR_IO43U32X_H_
+#define _AVR_IO43U32X_H_ 1
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -35,46 +35,36 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "io43u35x.h"
+#  define _AVR_IOXXX_H_ "io43u32x.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
 /* I/O registers */
 
-/* ADC Data Register */
-#ifndef __ASSEMBLER__
-#define ADC 	_SFR_IO16(0x02)
-#endif
-#define ADCL	_SFR_IO8(0x02)
-#define ADCH	_SFR_IO8(0x03)
-
-/* ADC Control and status register */
-#define ADCSR	_SFR_IO8(0x07)
-
-/* ADC Multiplexer select */
-#define ADMUX	_SFR_IO8(0x08)
-
 /* Analog Comparator Control and Status Register */
 #define ACSR	_SFR_IO8(0x08)
 
-/* Input Pins, Port F */
-#define PINF	_SFR_IO8(0x04)
+/* UART Baud Rate Register */
+#define UBRR	_SFR_IO8(0x09)
 
-/* Data Direction Register, Port F */
-#define DDRF    _SFR_IO8(0x05)
+/* UART Control Register */
+#define UCR	_SFR_IO8(0x0A)
 
-/* Data Register, Port F */
-#define PORTF   _SFR_IO8(0x06)
+/* UART Status Register */
+#define USR	_SFR_IO8(0x0B)
 
-/* Input Pins, Port E */
+/* UART I/O Data Register */
+#define UDR	_SFR_IO8(0x0C)
+
+/* Input Pins, Port E */                  // new port for 43324/6
 #define PINE	_SFR_IO8(0x01)
 
 /* Data Direction Register, Port E */
 #define DDRE	_SFR_IO8(0x02)
 
 /* Data Register, Port E */
-#define PORTE	_SFR_IO8(0x03)
+#define PORTE	_SFR_IO8(0x03) 
 
 /* SPI Control Register */
 #define SPCR	_SFR_IO8(0x0D)
@@ -175,7 +165,7 @@
 
 /* Interrupt vectors */
 
-#define SIG_INTERRUPT0		_VECTOR(1)  /* suspend/resume */
+#define SIG_INTERRUPT0		_VECTOR(1)
 #define SIG_INTERRUPT1		_VECTOR(2)
 #define SIG_TIMER1_CAPT1	_VECTOR(3)
 #define SIG_OUTPUT_COMPARE1A		_VECTOR(4)
@@ -183,8 +173,9 @@
 #define SIG_OVERFLOW1		_VECTOR(6)
 #define SIG_OVERFLOW0		_VECTOR(7)
 #define SIG_SPI				_VECTOR(8)
-/* 9, 10: reserved */
-#define SIG_ADC         	_VECTOR(11)
+#define SIG_UART_RECV		_VECTOR(9)
+#define SIG_UART_DATA    	_VECTOR(10)
+#define SIG_UART_TRANS     	_VECTOR(11)
 #define SIG_USB_INT         _VECTOR(12)
 
 #define _VECTORS_SIZE 52
@@ -364,22 +355,35 @@
 #define    PIND1        1
 #define    PIND0        0
 
-/* Data Register, Port F */
-#define    PF3          3
-#define    PF2          2
-#define    PF1          1
-#define    PF0          0
+/* Data Register, Port E */
+#define    PE7          7
+#define    PE6          6
+#define    PE5          5
+#define    PE4          4
+#define    PE3          3
+#define    PE2          2
+#define    PE1          1
+#define    PE0          0
 
-/* Data Direction Register, Port F */
-#define    DDF3         3
-#define    DDF2         2
-#define    DDF1         1
+/* Data Direction Register, Port E */
+#define    DDE7         7
+#define    DDE6         6
+#define    DDE5         5
+#define    DDE4         4
+#define    DDE3         3
+#define    DDE2         2
+#define    DDE1         1
+#define    DDE0         0
 
-/* Input Pins, Port F */
-#define    PINF3        3
-#define    PINF2        2
-#define    PINF1        1
-#define    PINF0        0
+/* Input Pins, Port E */
+#define    PINE7        7
+#define    PINE6        6
+#define    PINE5        5
+#define    PINE4        4
+#define    PINE3        3
+#define    PINE2        2
+#define    PINE1        1
+#define    PINE0        0
 
 /* SPI Status Register */
 #define    SPIF         7
@@ -395,25 +399,30 @@
 #define    SPR1         1
 #define    SPR0         0
 
-/* ADC Multiplexer select */
-#define    MUX2         2
-#define    MUX1         1
-#define    MUX0         0
+/* UART Status Register */
+#define    RXC          7
+#define    TXC          6
+#define    UDRE         5
+#define    FE           4
+#define    DOR          3
 
-/* ADC Control and Status Register */
-#define    ADEN     7
-#define    ADSC     6
-#define    ADFR     5
-#define    ADIF     4
-#define    ADIE     3
-#define    ADPS2    2
-#define    ADPS1    1
-#define    ADPS0    0  
+/* UART Control Register */
+#define    RXCIE        7
+#define    TXCIE        6
+#define    UDRIE        5
+#define    RXEN         4
+#define    TXEN         3
+#define    CHR9         2
+#define    RXB8         1
+#define    TXB8         0
 
 /* Constants */
-#define    RAMEND   0x045F     /*Last On-Chip SRAM Location*/
-#define    XRAMEND  0x045F
+#define    RAMEND   0x025F     /*Last On-Chip SRAM Location*/
+#define    XRAMEND  0x025F
 #define    E2END    0x0000
-#define    FLASHEND 0x5FFF
 
-#endif /* _AVR_43USB355_H_ */
+/* FIXME: should be 0x1FFFF for max 128K (64K*16) external program memory,
+   but no RAMPZ causes gcrt1.S build to fail, so assume 64K for now...  */
+#define    FLASHEND 0x0FFFF
+
+#endif /* _AVR_43USB32X_H_ */
