@@ -51,6 +51,19 @@ $(AVR_CRT_MEGA): crtm%.o: gcrt1.S
 $(AVR_CRT_TINY): crttn%.o: gcrt1.S
 	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=attiny$* -c $< -o $@
 
-$(AVR_CRT_OTHER): crt%.o: gcrt1.S
-	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=$* -c $< -o $@
+# $(AVR_CRT_OTHER) - devices that don't follow a common naming convention.
+crtat94k.o: gcrt1.S
+	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at94k -c $< -o $@
+
+crt43320.o: gcrt1.S
+	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at43usb320 -c $< -o $@
+
+crt43355.o: gcrt1.S
+	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at43usb355 -c $< -o $@
+
+crt76711.o: gcrt1.S
+	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at76c711 -c $< -o $@
+
+crt86401.o: gcrt1.S
+	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at86rf401 -c $< -o $@
 

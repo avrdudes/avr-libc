@@ -151,8 +151,14 @@
 
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
+#elif defined (__AVR_AT43USB320__)
+#  include <avr/io43u320.h>
+#elif defined (__AVR_AT43USB355__)
+#  include <avr/io43u35x.h>
 #elif defined (__AVR_AT76C711__)
 #  include <avr/io76c711.h>
+#elif defined (__AVR_AT86RF401__)
+#  include <avr/io86r401.h>
 #elif defined (__AVR_ATmega128__)
 #  include <avr/iom128.h>
 #elif defined (__AVR_ATmega64__)

@@ -141,7 +141,7 @@ dnl
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 20030225cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20030227cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)
@@ -304,6 +304,7 @@ if test -z "${with_multisubdir}"; then
                 crts4414.o crts4433.o crts4434.o crts8515.o crts8535.o \\\
                 crtc8534.o'
   AVR_CRT_TINY='crttn11.o crttn12.o crttn15.o crttn28.o crttn22.o crttn26.o'
+  AVR_CRT_OTHER='crt86401.o'
 
   dnl We only want to build the docs for the default target case and only
   dnl if the user has passed "--enable-doc" to configure.
@@ -315,6 +316,7 @@ else
   avr3) avrlib_cflags=${avrlib_opt_speed}
         avrlib_asflags='-mmcu=avr3'
         AVR_CRT_MEGA='crtm103.o'
+        AVR_CRT_OTHER='crt43355.o crt76711.o # crt43320.o'
   ;;
   avr4) avrlib_cflags=${avrlib_opt_space}
         avrlib_asflags='-mmcu=avr4'

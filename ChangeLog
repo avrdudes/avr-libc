@@ -1,3 +1,11 @@
+2003-02-27  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in, crt1/Makefile.am, include/avr/io.h:
+	Add support for AT43USB355, AT76C711, AT86RF401.
+	* include/avr/io43u35x.h: New file, thanks to Keith Gudger.
+	* include/avr/io86r401.h: New file, thanks to Colin O'Flynn.
+
 2003-02-27  Theodore A. Roth  <troth@openavr.org>
 
 	* doc/api/acknowledge.dox:
