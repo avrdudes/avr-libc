@@ -1,5 +1,13 @@
 2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/examples/twitest/twitest.c: TWI example, new file.
+	* doc/examples/twitest/twitest.dox: TWI example, docs.
+	* doc/examples/twitest/Makefile: TWI example, sample makefile.
+	* doc/api/doxygen.config.in: include twitest.
+	* doc/examples/Makefile.am: include twitest.
+
+2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/iom163.h: add bit definitions for TWSR.
 	* include/avr/iom323.h: ditto.
 

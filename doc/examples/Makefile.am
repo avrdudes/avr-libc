@@ -43,4 +43,7 @@ EXTRA_DIST           = avr-recv.c \
                        demo/Makefile \
                        demo/demo.c \
                        demo/demo.fig \
-                       demo/demo.dox
+                       demo/demo.dox \
+                       twitest/Makefile \
+                       twitest/twitest.c \
+                       twitest/twitest.dox

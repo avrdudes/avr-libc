@@ -334,7 +334,8 @@ INPUT                  = @top_srcdir@/include \
                          @top_srcdir@/libc \
                          @top_srcdir@/libm \
                          @top_srcdir@/doc/api \
-                         @top_srcdir@/doc/examples/demo
+                         @top_srcdir@/doc/examples/demo \
+                         @top_srcdir@/doc/examples/twitest
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -375,7 +376,8 @@ EXCLUDE_PATTERNS       = *CVS*
 # directories that contain example code fragments that are included (see 
 # the \include command).
 
-EXAMPLE_PATH           = @top_srcdir@/doc/examples/demo
+EXAMPLE_PATH           = @top_srcdir@/doc/examples/demo \
+                         @top_srcdir@/doc/examples/twitest
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the 
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
