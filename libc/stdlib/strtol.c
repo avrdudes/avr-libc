@@ -1,6 +1,7 @@
 /*-
  * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
+ * Copyright (c) 2005, Dmitry Xmelkov
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -25,17 +26,14 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ * $Id$
  */
-
-#if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)strtol.c	8.1 (Berkeley) 6/4/93";
-#endif /* LIBC_SCCS and not lint */
 
 #include <limits.h>
 #include <ctype.h>
 #include <errno.h>
 #include <stdlib.h>
-
 
 /*
  * Convert a string to a long integer.
@@ -49,18 +47,18 @@ strtol(nptr, endptr, base)
 	char **endptr;
 	register int base;
 {
-	register const char *s = nptr;
 	register unsigned long acc;
 	register unsigned char c;
-#if 0
 	register unsigned long cutoff;
-	register int cutlim;
-#else
-	ldiv_t cut;
-#define cutoff (cut.quot)
-#define cutlim ((int) cut.rem)
-#endif
-	register signed char neg = 0, any;
+	register signed char any;
+	unsigned char flag = 0;
+#define FL_NEG	0x01		/* number is negative */
+#define FL_0X	0x02		/* number has a 0x prefix */
+
+	if (endptr)
+		*endptr = (char *)nptr;
+	if (base != 0 && (base < 2 || base > 36))
+		return 0;
 
 	/*
 	 * Skip white space and pick up leading +/- sign if any.
@@ -68,18 +66,19 @@ strtol(nptr, endptr, base)
 	 * assume decimal; if base is already 16, allow 0x.
 	 */
 	do {
-		c = *s++;
+		c = *nptr++;
 	} while (isspace(c));
 	if (c == '-') {
-		neg = 1;
-		c = *s++;
+		flag = FL_NEG;
+		c = *nptr++;
 	} else if (c == '+')
-		c = *s++;
+		c = *nptr++;
 	if ((base == 0 || base == 16) &&
-	    c == '0' && (*s == 'x' || *s == 'X')) {
-		c = s[1];
-		s += 2;
+	    c == '0' && (*nptr == 'x' || *nptr == 'X')) {
+		c = nptr[1];
+		nptr += 2;
 		base = 16;
+		flag |= FL_0X;
 	}
 	if (base == 0)
 		base = c == '0' ? 8 : 10;
@@ -89,51 +88,85 @@ strtol(nptr, endptr, base)
 	 * numbers.  That is the largest legal value, divided by the
 	 * base.  An input number that is greater than this value, if
 	 * followed by a legal input character, is too big.  One that
-	 * is equal to this value may be valid or not; the limit
-	 * between valid and invalid numbers is then based on the last
-	 * digit.  For instance, if the range for longs is
-	 * [-2147483648..2147483647] and the input base is 10,
-	 * cutoff will be set to 214748364 and cutlim to either
-	 * 7 (neg==0) or 8 (neg==1), meaning that if we have accumulated
-	 * a value > 214748364, or equal but the next digit is > 7 (or 8),
-	 * the number is too big, and we will return a range error.
+	 * is equal to this value may be valid or not; the decision
+	 * about this is done as outlined below.
+	 *
+	 * Overflow detections works as follows:
+	 *
+	 * As:
+	 *    acc_old <= cutoff
+	 * then:
+	 *    acc_old * base <= 0x80000000        (unsigned)
+	 * then:
+	 *    acc_old * base + c <= 0x80000000 + c
+	 * or:
+	 *    acc_new <= 0x80000000 + 35
+	 *
+	 * i.e. carry from MSB (by calculating acc_new) is impossible
+	 * and we can check result directly:
+	 *
+	 *    if (acc_new > 0x80000000) then overflow
 	 *
 	 * Set any if any `digits' consumed; make it negative to indicate
 	 * overflow.
 	 */
-#if 0
-	cutoff = neg ? -(unsigned long)LONG_MIN : LONG_MAX;
-	cutlim = cutoff % (unsigned long)base;
-	cutoff /= (unsigned long)base;
-#else
-	cut = ldiv(neg ? -(unsigned long)LONG_MIN : LONG_MAX,
-		(unsigned long)base);
+#if  LONG_MIN != -LONG_MAX - 1
+#  error "This implementation of strtol() does not work on this platform."
 #endif
-	for (acc = 0, any = 0;; c = *s++) {
-		if (!isascii(c))
-			break;
-		if (isdigit(c))
+	switch (base) {
+	    case 10:
+		cutoff = ((unsigned long)LONG_MAX + 1) / 10;
+		break;
+	    case 16:
+		cutoff = ((unsigned long)LONG_MAX + 1) / 16;
+		break;
+	    case 8:
+		cutoff = ((unsigned long)LONG_MAX + 1) / 8;
+		break;
+	    case 2:
+		cutoff = ((unsigned long)LONG_MAX + 1) / 2;
+		break;
+	    default:
+		cutoff = ((unsigned long)LONG_MAX + 1) / base;
+	}
+
+	for (acc = 0, any = 0;; c = *nptr++) {
+		if (c >= '0' && c <= '9')
 			c -= '0';
-		else if (isalpha(c))
-			c = (c & ~0x20) - 'A' + 10;
+		else if (c >= 'A' && c <= 'Z')
+			c -= 'A' - 10;
+		else if (c >= 'a' && c <= 'z')
+			c -= 'a' - 10;
 		else
 			break;
 		if (c >= base)
 			break;
-		if (any < 0 || acc > cutoff || (acc == cutoff && c > cutlim))
+		if (any < 0)
+			continue;
+		if (acc > cutoff) {
 			any = -1;
-		else {
-			any = 1;
-			acc *= base;
-			acc += c;
+			continue;
 		}
+		acc = acc * base + c;
+		if (acc > (unsigned long)LONG_MAX + 1)
+			any = -1;
+		else
+			any = 1;
+	}
+	if (endptr) {
+		if (any)
+		    *endptr = (char *)nptr - 1;
+		else if (flag & FL_0X)
+		    *endptr = (char *)nptr - 2;
 	}
 	if (any < 0) {
-		acc = neg ? LONG_MIN : LONG_MAX;
+		acc = (flag & FL_NEG) ? LONG_MIN : LONG_MAX;
 		errno = ERANGE;
-	} else if (neg)
+	} else if (flag & FL_NEG) {
 		acc = -acc;
-	if (endptr != 0)
-		*endptr = (char *)(any ? s - 1 : nptr);
+	} else if ((signed long)acc < 0) {
+		acc = LONG_MAX;
+		errno = ERANGE;
+	}
 	return (acc);
 }

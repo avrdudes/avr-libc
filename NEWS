@@ -7,10 +7,12 @@
   [#4101]  setjmp/longjmp destroy changes in global registers.
   [#11479] Add missing pin definitions for iotn16.h.
   [#11486] Put the port bit defintions back in for mega16.
+  [#11494] strtol() return wrong value in the underflow case
   [#11505] Remove doxygen comment about the deprecated inp/outp items.
   [#11510] Abstract the change enable bit in wdt.h for mega32.
   [#11522] Rewrite wdt_disable() to match datasheet algorithm.
   [#11684] realloc overwrites first to bytes of memory block when shrinking
+  [patch #3618] Optimization strtol(), a little (related to bug #11494).
 
 * Extend stdio and pmstring APIs:
 
