@@ -489,6 +489,16 @@ extern int	puts(const char *__str);
 extern int	puts_P(const char *__str);
 
 /**
+   Write \c nmemb objects, \c size bytes each, to \c stream.
+   The first byte of the first object is referenced by \c ptr.
+
+   Returns the number of objects successfully written, i. e.
+   \c nmemb unless an output error occured.
+ */
+extern size_t	fwrite(const void *__ptr, size_t __size, size_t __nmemb,
+		       FILE *__stream);
+
+/**
    The function \c fgetc reads a character from \c stream.  It returns
    the character, or \c EOF in case end-of-file was encountered or an
    error occurred.  The routines feof() or ferror() must be used to
@@ -533,6 +543,18 @@ extern char	*fgets(char *__str, int __size, FILE *__stream);
    It is the caller's responsibility to provide enough storage to hold
    the characters read.  */
 extern char	*gets(char *__str);
+
+/**
+   Read \c nmemb objects, \c size bytes each, from \c stream,
+   to the buffer pointed to by \c ptr.
+
+   Returns the number of objects successfully read, i. e.
+   \c nmemb unless an input error occured or end-of-file was
+   encountered.  feof() and ferror() must be used to distinguish
+   between these two conditions.
+ */
+extern size_t	fread(void *__ptr, size_t __size, size_t __nmemb,
+		      FILE *__stream);
 
 /**
    Clear the error and end-of-file flags of \c stream.

@@ -1,6 +1,10 @@
 2002-12-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/using-tools.doc: explain side-effects of -ffreestanding.
+	* include/stdio.h: add fread() and fwrite().
+	* libc/stdio/Makefile.am: Ditto.
+	* libc/stdio/fread.c: New file.
+	* libc/stdio/fwrite.c: New file.
 
 2002-12-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
