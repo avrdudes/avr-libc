@@ -37,9 +37,10 @@ contain far more data than we need. In addition, there is information that we
 need which they do not provide. Also, it may not be legal for us to include
 those files with avr-libc.
 
-I hope to write a python program which will read ATMEL's XML files and spit
-out a file which will validate against this DTD so that we can leverage the
-data in those file.
+I have written a python program (Atmel2libc.py) which will read ATMEL's XML
+files and spit out a file which will validate against this DTD so that we can
+leverage the data in those files. We will still have to manually add some data
+to our generated xml files before we can use them to generate our headers.
 
 -->
 
@@ -115,11 +116,14 @@ data in those file.
     <!-- If the is no bootloader element in the XML file, the device does not
          have bootloader support. -->
 
+    <!-- The pagesize value is in bytes. Atmel's datasheets give it in
+         words. -->
+
     <!ELEMENT bootloader (mode+)>
         <!ATTLIST bootloader
             pagesize CDATA #REQUIRED
-            rww_start CDATA #REQUIRED
-            rww_end CDATA #REQUIRED
+            rww_start CDATA #IMPLIED
+            rww_end CDATA #IMPLIED
             nrww_start CDATA #IMPLIED
             nrww_end CDATA #IMPLIED
         >

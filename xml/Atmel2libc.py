@@ -1,5 +1,30 @@
 #! /usr/bin/env python
 #
+# Copyright (c) 2004  Theodore A. Roth
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright
+#   notice, this list of conditions and the following disclaimer in
+#   the documentation and/or other materials provided with the
+#   distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
 # $Id$
 #
 
@@ -366,7 +391,7 @@ def dump_boot_info (root):
         if data == 'x':
             nrww_start = ''
         else:
-            nrww_start = 'nrww_start="0x%x"' % (int (data, 16))
+            nrww_start = ' nrww_start="0x%x"' % (int (data, 16))
         
         data = info.getElements ('NRWW_STOP_ADDR')[0].getData ()
         if data[0] == '$':
@@ -374,7 +399,7 @@ def dump_boot_info (root):
         if data == 'x':
             nrww_end = ''
         else:
-            nrww_end = 'nrww_end="0x%x"' % (int (data, 16))
+            nrww_end = ' nrww_end="0x%x"' % (int (data, 16))
         
         data = info.getElements ('RWW_START_ADDR')[0].getData ()
         if data[0] == '$':
@@ -382,7 +407,7 @@ def dump_boot_info (root):
         if data == 'x':
             rww_start = ''
         else:
-            rww_start = 'rww_start="0x%x"' % (int (data, 16))
+            rww_start = ' rww_start="0x%x"' % (int (data, 16))
 
         data = info.getElements ('RWW_STOP_ADDR')[0].getData ()
         if data[0] == '$':
@@ -390,13 +415,16 @@ def dump_boot_info (root):
         if data == 'x':
             rww_end = ''
         else:
-            rww_end = 'rww_end="0x%x"' % (int (data, 16))
+            rww_end = ' rww_end="0x%x"' % (int (data, 16))
+
+        # The Atmel files give the pagesize in words, we need it in bytes.
         
         pagesize = 'pagesize="%d"' % ( \
-            int (info.getElements ('PAGESIZE')[0].getData ()))
+            2 * int (info.getElements ('PAGESIZE')[0].getData ()))
 
-        nrww = ' %s %s' % (nrww_start, nrww_end)
-        print '  <bootloader %s %s %s%s' % (pagesize, rww_start, rww_end, nrww)
+        rww = '%s%s' % (rww_start, rww_end)
+        nrww = '%s%s' % (nrww_start, nrww_end)
+        print '  <bootloader %s%s%s>' % (pagesize, rww, nrww)
 
         for i in range (8):
             try:
@@ -404,7 +432,10 @@ def dump_boot_info (root):
             except IndexError:
                 continue
 
-            pages = 'pages="%s"' % (mode.getElements ('PAGES')[0].getData ())
+            data = mode.getElements ('PAGES')[0].getData ()
+            if data == 'x':
+                data = 'FIXME!'
+            pages = 'pages="%s"' % (data)
 
             data = mode.getElements ('BOOTSTART')[0].getData ()
             if data[0] == '$':

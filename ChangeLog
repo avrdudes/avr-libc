@@ -1,3 +1,13 @@
+2004-07-02  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: Add copyright/license.
+	Tweaks to handle inconsistencies in Atmel's files.
+	* xml/Desc-parser.py: New file.
+	* xml/Device.dtd: Make rww_start and rww_end optional since some
+	devices don't have rww.
+	* xml/Validate.py: Allow shell gobbing to work so you can validate more
+	than one file at a time.
+
 2004-06-30  Theodore A. Roth  <troth@openavr.org>
 
 	* xml/Atmel2libc.py: Work around bugs in Atmel's xml files.
