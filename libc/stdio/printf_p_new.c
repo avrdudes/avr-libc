@@ -163,7 +163,7 @@ void _printf_p (char const *fmt0, ...) {
 							*pb+'0';
 						*pb++;
 						a.ul /= base;
-					} while(a.ul);
+					} while (a.ul);
 					if (flags & FLPREC) {
 						a.u8 = (uint8_t)(pb - b);
 						while (prec-- > a.u8)
@@ -182,7 +182,7 @@ void _printf_p (char const *fmt0, ...) {
 					width -= (uint8_t)(pb - b);
 				  nextitem:
 					if (!(flags & FLLPAD))
-						while(width-- > 0)
+						while (width-- > 0)
 							printf_char(' ');
 					if (c == 'c')
 						printf_char(a.c);
