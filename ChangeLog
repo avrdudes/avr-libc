@@ -1,5 +1,13 @@
 2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
 
+	* include/avr/io43u32x.h: Correct license with permission from Keith Gudger.
+	* include/avr/io43u35x.h: Ditto.
+	* include/avr/io86r401.h: Correct license with permission from Colin 
+	O'Flynn.
+	* include/avr/iocan128.h: Ditto.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/avr/iom165.h: Correct license on my files.
 	* include/avr/iom325.h: Ditto.
 	* include/avr/iom3250.h: Ditto.
