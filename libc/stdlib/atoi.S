@@ -27,11 +27,12 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 /*
-   atoi.S
+   $Id$
 
    Contributors:
      Created by Reiner Patommel
      Changes: Jochen Pernsteiner, Marek Michalkiewicz
+     Changes: Reiner Patommel, 8 Feb 2003
  */
 
 #include "macros.inc"
@@ -40,7 +41,6 @@
 #define str_lo	r24
 #define num_hi	r25
 #define num_lo	r24
-#define sign	r19
 #define tmp	r18
 
 ; int atoi(const char *string)
@@ -59,17 +59,18 @@
 _U(atoi):
 	LOAD_Z	(str_lo, str_hi)	; set pointer to string
 	CLR	num_lo
-	CLR	num_hi
-	CLR	sign			; sign
+	CLR	num_hi			; clear number
+	CLT				; clear sign flag
+
 .atoi_loop:
 	LD	tmp, Z+			; get (next) character
-	TST	tmp			; is it end of string
+	TST	tmp			; is it end of string?
 	BREQ	.atoi_sig
-	CPI	tmp, ' '		; if space, skip
+	CPI	tmp, ' '		; skip whitespace
 	BREQ	.atoi_loop
-	CPI	tmp, '\t'		; if tab, skip
+	CPI	tmp, '\t'
 	BREQ	.atoi_loop
-	CPI	tmp, '\n'		; skip other whitespace
+	CPI	tmp, '\n'
 	BREQ	.atoi_loop
 	CPI	tmp, '\f'
 	BREQ	.atoi_loop
@@ -77,17 +78,19 @@ _U(atoi):
 	BREQ	.atoi_loop
 	CPI	tmp, '\v'
 	BREQ	.atoi_loop
-	CPI	tmp, '+'		; if '+' go on
+	CPI	tmp, '+'		; if '+' convert
 	BREQ	.atoi_loop2
 	CPI	tmp, '-'		; if '-' remember sign
 	BRNE	.atoi_digit
+
 .atoi_neg:
-	LDI	sign, 1			; remember number is negative
+	SET				; remember number is negative
 
 .atoi_loop2:
 	LD	tmp, Z+
 	TST	tmp
 	BREQ	.atoi_sig
+
 .atoi_digit:
 	CPI	tmp, '0'		; test on [0 .. 9]
 	BRLT	.atoi_sig
@@ -103,8 +106,7 @@ _U(atoi):
 	CP	num_lo, __zero_reg__
 	CPC	num_hi, __zero_reg__	; did we get a number?
 	BREQ	.atoi_done		; no, drop sign and return
-	TST	 sign			; positive number?
-	BREQ	.atoi_done
+	BRTC	.atoi_done		; positive number? -> return
 	COM	num_lo
 	COM	num_hi
 	ADIW	num_lo, 1		; make number negative
