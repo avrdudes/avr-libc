@@ -100,7 +100,7 @@ GLOBAL(pow)
    LDI   rA3,0x3F
    LDI   rA2,0x80
    CLR   rA1
-   CLR   rA2
+   CLR   rA0
    RET
 
           ENDFUNC
