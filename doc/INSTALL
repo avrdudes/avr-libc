@@ -4,7 +4,7 @@ Installation instructions:
    2.13 when available - older releases are not supported) for AVR target
    (configure --target=avr).  See http://sources.redhat.com/binutils/ .
 
-2. Build and install the current version of GCC from CVS (or release 3.2
+2. Build and install the current version of GCC from CVS (or release 3.3
    when available - older releases are not supported) for AVR target
    (configure --target=avr --enable-languages=c,c++).  C++ support is
    still experimental and incomplete (no libstdc++), and needs testing.
@@ -21,6 +21,6 @@ that if you execute "PREFIX='what_you_want' ./doconf". There are other
 configure options if you like.  Type "./configure --help" to see them.
 
 Important: you MUST use the current CVS or snapshots of GCC and binutils
-(which will be released as GCC 3.2 and binutils 2.13).  Older versions
+(which will be released as GCC 3.3 and binutils 2.13).  Older versions
 are not supported anymore, and will fail in various strange ways.
 
