@@ -78,6 +78,15 @@ The main loop of the program does nothing -- all the work is done by the
 interrupt routine! If this was a real product, we'd probably put a \c SLEEP
 instruction in this loop to conserve power.
 
+\par Note [7]:
+Early AVR devices saturate their outputs at rather low currents when
+sourcing current, so the LED can be connected directly, the resulting
+current through the LED will be about 15 mA.  For modern parts (at
+least for the ATmega 128), however Atmel has drastically increased the
+IO source capability, so when operating at 5 V Vcc, R2 is needed.  Its
+value should be about 150 Ohms.  When operating the circuit at 3 V, it
+can still be omitted though.
+
 \subsection demo_project_src The Source Code
 
 \include demo.c
