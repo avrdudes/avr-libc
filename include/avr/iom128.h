@@ -45,12 +45,14 @@
 #define PORTE     _SFR_IO8(0x03)
 
 /* ADC Data Register */
-#define ADCW	_SFR_IO16(0x04)
+#define ADCW	_SFR_IO16(0x04) /* for backwards compatibility */
+#define ADC	_SFR_IO16(0x04)
 #define ADCL	_SFR_IO8(0x04)
 #define ADCH	_SFR_IO8(0x05)
 
 /* ADC Control and status register */
 #define ADCSR     _SFR_IO8(0x06)
+#define ADCSRA    _SFR_IO8(0x06) /* new name in datasheet (2467E-AVR-05/02) */
 
 /* ADC Multiplexer select */
 #define ADMUX     _SFR_IO8(0x07)
@@ -184,6 +186,7 @@
 
 /* MCU Status Register */
 #define MCUSR     _SFR_IO8(0x34)
+#define MCUCSR    _SFR_IO8(0x34) /* new name in datasheet (2467E-AVR-05/02) */
 
 /* MCU general Control Register */
 #define MCUCR     _SFR_IO8(0x35)
@@ -234,8 +237,9 @@
 /* Data Register, Port G */
 #define PORTG	  _SFR_MEM8(0x65)
 
-/* Store Program Memory Control Register */
+/* Store Program Memory Control and Status Register */
 #define SPMCR	  _SFR_MEM8(0x68)
+#define SPMCSR    _SFR_MEM8(0x68) /* new name in datasheet (2467E-AVR-05/02) */
 
 /* External Interrupt Control Register A */
 #define EICRA	  _SFR_MEM8(0x6A)
