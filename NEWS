@@ -26,6 +26,7 @@ See ChangeLog for details.
           NOTE: boot_lock_bits_set() was broken. Please see the new
           documentation for examples of how the new version works.
   [#8119] _wdt_write macro in wdt.h doesn't work with ATmega169
+  [#8649] sfr_defs.h: missed _SFR_BYTE() in bit_is_set/clear
 
 *** Changes in avr-libc-1.0.3:
 
