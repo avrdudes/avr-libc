@@ -85,6 +85,21 @@ important optimization.
 #define BOOTLOADER_SECTION    __attribute__ ((section (".bootloader")))
 
 
+/* Create common bit definitions. */
+#ifdef ASB
+#define __COMMON_ASB    ASB
+#else
+#define __COMMON_ASB    RWWSB
+#endif
+
+#ifdef ASRE
+#define __COMMON_ASRE   ASRE
+#else
+#define __COMMON_ASRE   RWWSRE
+#endif
+
+
+
 /** \ingroup avr_boot
     \def boot_spm_interrupt_enable()
     Enable the SPM interrupt. */
@@ -107,7 +122,7 @@ important optimization.
     \def boot_rww_busy()
     Check if the RWW section is busy. */
 
-#define boot_rww_busy()                 (SPMCR & (unsigned char)_BV(RWWSB))
+#define boot_rww_busy()                 (SPMCR & (unsigned char)_BV(__COMMON_ASB))
 
 /** \ingroup avr_boot
     \def boot_spm_busy()
@@ -126,7 +141,7 @@ important optimization.
 #define __BOOT_PAGE_ERASE         (_BV(SPMEN) | _BV(PGERS))
 #define __BOOT_PAGE_WRITE         (_BV(SPMEN) | _BV(PGWRT))
 #define __BOOT_PAGE_FILL          _BV(SPMEN)
-#define __BOOT_RWW_ENABLE         (_BV(SPMEN) | _BV(RWWSRE))
+#define __BOOT_RWW_ENABLE         (_BV(SPMEN) | _BV(__COMMON_ASRE))
 #define __BOOT_LOCK_BITS_SET      (_BV(SPMEN) | _BV(BLBSET))
 
 #define __BOOT_LOCK_BITS_MASK   (_BV(BLB01) | _BV(BLB02) | _BV(BLB11) | _BV(BLB12))

@@ -1,3 +1,7 @@
+2003-07-21  Eric B. Weddington  <eric@ecentral.com>
+
+	* include/avr/boot.h: Make common bit definitions to handle the mega323.
+
 2003-07-17  Eric B. Weddington  <eric@ecentral.com>
 
 	New functions eeprom_write_word and eeprom_write_block from
