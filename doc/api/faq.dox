@@ -44,6 +44,7 @@
 -# \ref faq_gdboptimize
 -# \ref faq_asmstabs
 -# \ref faq_port_pass
+-# \ref faq_reg_usage
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -594,6 +595,80 @@ Of course, in a real application, you might be doing a lot more in your
 function which uses a passed by reference io port address and thus the use of
 a function over a macro could save you some code space, but still at a cost of
 execution speed.
+
+<small>Back to \ref faq_index.</small>
+
+\subsection faq_reg_usage What registers are used by the C compiler?
+
+- <strong>Data types:</strong><br>
+\c char is 8 bits, \c int is 16 bits, \c long is 32 bits, \c long long
+is 64 bits, \c float and \c double are 32 bits (this is the only
+supported floating point format), pointers are 16 bits (function
+pointers are word addresses, to allow addressing the whole 128K
+program memory space on the ATmega devices with &gt; 64 KB of flash
+ROM).  There is a \c -mint8 option (see \ref using_avr_gcc) to make
+\c int 8 bits, but that is not supported by avr-libc and violates C
+standards (\c int \e must be at least 16 bits).  It may be removed in
+a future release.
+
+- <strong>Call-used registers (r18-r27, r30-r31):</strong><br>
+May be allocated by gcc for local data.
+You \e may use them freely in assembler subroutines.
+Calling C subroutines can clobber any of them -
+the caller is responsible for saving and restoring.
+
+- <strong>Call-saved registers (r2-r17, r28-r29):</strong><br>
+May be allocated by gcc for local data.
+Calling C subroutines leaves them unchanged.
+Assembler subroutines are responsible for saving
+and restoring these registers, if changed.
+r29:r28 (Y pointer) is used as a frame pointer
+(points to local data on stack) if necessary.
+
+- <strong>Fixed registers (r0, r1):</strong><br>
+Never allocated by gcc for local data, but often
+used for fixed purposes:
+<p>
+r0 - temporary register, can be clobbered by any
+C code (except interrupt handlers which save it),
+\e may be used to remember something for a while
+within one piece of assembler code
+</p>
+<p>
+r1 - assumed to be always zero in any C code,
+\e may be used to remember something for a while
+within one piece of assembler code, but \e must
+then be cleared after use (<tt>clr r1</tt>).  This
+includes any use of the <tt>[f]mul[s[u]]</tt> instructions,
+which return their result in r1:r0.
+Interrupt handlers save and clear r1 on entry,
+and restore r1 on exit (in case it was non-zero).
+</p>
+
+- <strong>Function call conventions:</strong><br>
+Arguments - allocated left to right, r25 to r8.
+All arguments are aligned to start in even-numbered
+registers (odd-sized arguments, including \c char, have
+one free register above them).  This allows making better
+use of the \c movw instruction on the enhanced core.
+<p>
+If too many, those that don't fit are passed on
+the stack.
+</p>
+<p>
+Return values: 8-bit in r24 (not r25!), 16-bit in r25:r24,
+up to 32 bits in r22-r25, up to 64 bits in r18-r25.
+8-bit return values are zero/sign-extended to
+16 bits by the caller (<tt>unsigned char</tt> is more
+efficient than <tt>signed char</tt> - just <tt>clr r25</tt>).
+Arguments to functions with variable argument lists
+(printf etc.) are all passed on stack, and \c char
+is extended to \c int.
+</p>
+\warning
+There was no such alignment before 2000-07-01,
+including the old patches for gcc-2.95.2.  Check your old
+assembler subroutines, and adjust them accordingly.
 
 <small>Back to \ref faq_index.</small>
 */

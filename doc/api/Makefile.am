@@ -43,6 +43,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        sfr.dox \
                        tools-install.dox \
                        using-avrprog.dox \
+                       using-tools.dox \
                        faq.dox
 
 SUFFIXES             = .pdf
@@ -116,6 +117,12 @@ latex_src/refman.tex: doxygen.config
 		-e '/Signal Name/s/\\\\\\hline/\\endhead\\hline/' \
 		group__avr__interrupts.tex > tmp.$$ && \
 		mv -f tmp.$$ group__avr__interrupts.tex
+	cd latex_src && \
+		sed -e '/{TabularC}{3}/s/{TabularC}{3}/{longtable}{|l|l|l|}/' \
+		-e '/{longtable}{|l|l|l|}/,/TabularC/s/TabularC/longtable/' \
+		-e '/Architecture/s/\\\\\\hline/\\endhead\\hline/' \
+		using_tools.tex > tmp.$$ && \
+		mv -f tmp.$$ using_tools.tex
 
 latex_pdf_src/refman.tex: doxygen-pdf.config
 	doxygen doxygen-pdf.config
@@ -130,6 +137,12 @@ latex_pdf_src/refman.tex: doxygen-pdf.config
 		-e '/Signal Name/s/\\\\\\hline/\\endhead\\hline/' \
 		group__avr__interrupts.tex > tmp.$$ && \
 		mv -f tmp.$$ group__avr__interrupts.tex
+	cd latex_pdf_src && \
+		sed -e '/{TabularC}{3}/s/{TabularC}{3}/{longtable}{|l|l|l|}/' \
+		-e '/{longtable}{|l|l|l|}/,/TabularC/s/TabularC/longtable/' \
+		-e '/Architecture/s/\\\\\\hline/\\endhead\\hline/' \
+		using_tools.tex > tmp.$$ && \
+		mv -f tmp.$$ using_tools.tex
 	cd latex_pdf_src && \
 		sed -e '/{demo.eps}/s/demo.eps/demo.pdf/' \
 		demo_project.tex > tmp.$$ && \

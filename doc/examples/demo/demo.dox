@@ -25,7 +25,7 @@
 
 /* $Id$ */
 
-/** \page demo_project Using the GNU Tools: A simple project
+/** \page demo_project A simple project
 
 At this point, you should have the GNU tools configured, built, and installed
 on your system. In this chapter, we present a simple example of using the GNU

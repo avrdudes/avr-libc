@@ -1,3 +1,13 @@
+2002-10-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/using-tools.dox: New file.
+	* doc/examples/demo/demo.dox: Change title.
+	* doc/api/faq.dox: describe register usage.
+	* doc/register-usage.txt: file gone, it's in the
+		FAQ now.
+	* doc/api/Makefile.am: wire the new using-tools.dox
+		into the make infrastructure.
+
 2002-10-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/demo/demo.fig: Introduce R2.

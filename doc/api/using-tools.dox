@@ -1,0 +1,485 @@
+/* Copyright (c) 2002, Joerg Wunsch
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \page using_tools Using the GNU tools
+
+This is a short summary of the AVR-specific aspects of using the GNU
+tools.  Normally, the generic documentation of these tools is fairly
+large and maintained in \c texinfo files.  Command-line options are
+explained in detail in the manual page.
+
+\subsection using_avr_gcc Options for the C compiler avr-gcc
+
+<h3>Machine-specific options for the AVR</h3>
+
+The following machine-specific options are recognized by the C
+compiler frontend.
+
+- <tt>-mmcu=</tt><em>architecture</em>
+  <p>
+  Compile code for \e architecture.  Currently known architectures
+  are
+  </p>
+  <p>
+  <table>
+  <tr><td>avr1</td><td>Simple CPU core, only assembler support</td></tr>
+  <tr><td>avr2</td><td>"Classic" CPU core, up to 8 KB of ROM</td></tr>
+  <tr><td>avr3</td><td>"Classic" CPU core, more than 8 KB of ROM</td></tr>
+  <tr><td>avr4</td><td>"Enhanced" CPU core, up to 8 KB of ROM</td></tr>
+  <tr><td>avr5</td><td>"Enhanced" CPU core, more than 8 KB of ROM</td></tr>
+  </table>
+  </p>
+  <p>
+  By default, code is generated for the avr2 architecture.
+  </p>
+  <p>
+  Note that when only using <tt>-mmcu=</tt><em>architecture</em> but
+  no <tt>-mmcu=</tt><em>MCU type</em>, including the file
+  <tt>&lt;avr/io.h&gt;</tt> cannot work since it cannot decide which
+  device's definitions to select.
+  </p>
+
+- <tt>-mmcu=</tt><em>MCU type</em>
+  <p>
+  The following MCU types are currently understood by avr-gcc.  The
+  table matches them against the corresponding avr-gcc architecture
+  name, and shows the preprocessor symbol declared by the \c -mmcu
+  option.
+  </p>
+  <p>
+  <table>
+  <tr><td>Architecture</td><td>MCU name</td><td>Macro</td></tr>
+  <tr><td>avr1</td><td>at90s1200</td><td>__AVR_AT90S1200__</td></tr>
+  <tr><td>avr1</td><td>attiny11</td><td>__AVR_ATtiny11__</td></tr>
+  <tr><td>avr1</td><td>attiny12</td><td>__AVR_ATtiny12__</td></tr>
+  <tr><td>avr1</td><td>attiny15</td><td>__AVR_ATtiny15__</td></tr>
+  <tr><td>avr1</td><td>attiny28</td><td>__AVR_ATtiny28__</td></tr>
+  <tr><td>avr2</td><td>at90s2313</td><td>__AVR_AT90S2313__</td></tr>
+  <tr><td>avr2</td><td>at90s2323</td><td>__AVR_AT90S2323__</td></tr>
+  <tr><td>avr2</td><td>at90s2333</td><td>__AVR_AT90S2333__</td></tr>
+  <tr><td>avr2</td><td>at90s2343</td><td>__AVR_AT90S2343__</td></tr>
+  <tr><td>avr2</td><td>attiny22</td><td>__AVR_ATtiny22__</td></tr>
+  <tr><td>avr2</td><td>attiny26</td><td>__AVR_ATtiny26__</td></tr>
+  <tr><td>avr2</td><td>at90s4414</td><td>__AVR_AT90S4414__</td></tr>
+  <tr><td>avr2</td><td>at90s4433</td><td>__AVR_AT90S4433__</td></tr>
+  <tr><td>avr2</td><td>at90s4434</td><td>__AVR_AT90S4434__</td></tr>
+  <tr><td>avr2</td><td>at90s8515</td><td>__AVR_AT90S8515__</td></tr>
+  <tr><td>avr2</td><td>at90c8534</td><td>__AVR_AT90C8534__</td></tr>
+  <tr><td>avr2</td><td>at90s8535</td><td>__AVR_AT90S8535__</td></tr>
+  <tr><td>avr2</td><td>at86rf401</td><td>__AVR_AT86RF401__</td></tr>
+  <tr><td>avr3</td><td>atmega103</td><td>__AVR_ATmega103__</td></tr>
+  <tr><td>avr3</td><td>atmega603</td><td>__AVR_ATmega603__</td></tr>
+  <tr><td>avr3</td><td>at43usb320</td><td>__AVR_AT43USB320__</td></tr>
+  <tr><td>avr3</td><td>at43usb355</td><td>__AVR_AT43USB355__</td></tr>
+  <tr><td>avr3</td><td>at76c711</td><td>__AVR_AT76C711__</td></tr>
+  <tr><td>avr4</td><td>atmega8</td><td>__AVR_ATmega8__</td></tr>
+  <tr><td>avr4</td><td>atmega8515</td><td>__AVR_ATmega8515__</td></tr>
+  <tr><td>avr4</td><td>atmega8535</td><td>__AVR_ATmega8535__</td></tr>
+  <tr><td>avr5</td><td>atmega16</td><td>__AVR_ATmega16__</td></tr>
+  <tr><td>avr5</td><td>atmega161</td><td>__AVR_ATmega161__</td></tr>
+  <tr><td>avr5</td><td>atmega162</td><td>__AVR_ATmega162__</td></tr>
+  <tr><td>avr5</td><td>atmega163</td><td>__AVR_ATmega163__</td></tr>
+  <tr><td>avr5</td><td>atmega169</td><td>__AVR_ATmega169__</td></tr>
+  <tr><td>avr5</td><td>atmega32</td><td>__AVR_ATmega32__</td></tr>
+  <tr><td>avr5</td><td>atmega323</td><td>__AVR_ATmega323__</td></tr>
+  <tr><td>avr5</td><td>atmega64</td><td>__AVR_ATmega64__</td></tr>
+  <tr><td>avr5</td><td>atmega128</td><td>__AVR_ATmega128__</td></tr>
+  <tr><td>avr5</td><td>at94k</td><td>__AVR_AT94K__</td></tr>
+  </table>
+  </p>
+
+- \c -morder1
+- \c -morder2
+  <p>
+  Change the order of register assignment.  The default is
+  </p>
+  <p>
+    r24, r25, r18, r19, r20, r21, r22, r23, r30, r31, r26, r27, r28,
+    r29, r17, r16, r15, r14, r13, r12, r11, r10, r9, r8, r7, r6, r5,
+    r4, r3, r2, r0, r1
+  </p>
+  <p>
+  Order 1 uses
+  </p>
+  <p>
+    r18, r19, r20, r21, r22, r23, r24, r25, r30, r31, r26, r27, r28,
+    r29, r17, r16, r15, r14, r13, r12, r11, r10, r9, r8, r7, r6, r5,
+    r4, r3, r2, r0, r1
+  </p>
+  <p>
+  Order 2 uses
+  </p>
+  <p>
+    r25, r24, r23, r22, r21, r20, r19, r18, r30, r31, r26, r27, r28,
+    r29, r17, r16, r15, r14, r13, r12, r11, r10, r9, r8, r7, r6, r5,
+    r4, r3, r2, r1, r0
+  </p>
+
+- \c -mint8
+  <p>
+  Assume \c int to be an 8-bit integer.  Note that this is not really
+  supported by \c avr-libc, so it should normally not be used.  The
+  default is to use 16-bit integers.
+  </p>
+
+- \c -mno-interrupts
+  <p>
+  Generates code that changes the stack pointer without disabling
+  interrupts.  Normally, the state of the status register \c SREG
+  is saved in a temporary register, interrupts are disabled while
+  changing the stack pointer, and \c SREG is restored.
+  </p>
+
+- \c -mcall-prologues
+  <p>
+  Use subroutines for function prologue/epilogue.  For complex
+  functions that use many registers (that needs to be saved/restored
+  on function entry/exit), this saves some space at the cost of a
+  slightly increased execution time.
+  </p>
+
+- <tt>-minit-stack=</tt><em>nnnn</em>
+  <p>
+  Set the initial stack pointer to \e nnnn.  By default, the stack
+  pointer is initialized to the symbol \c __stack, which is set to
+  \c RAMEND by the run-time initialization code.
+  </p>
+
+- \c -mtiny-stack
+  <p>
+  Change only the low 8 bits of the stack pointer.
+  </p>
+
+- \c -mno-tablejump
+  <p>
+  Do not generate tablejump instructions.  By default, jump tables can
+  be used to optimize \c switch statements.  When turned off,
+  sequences of compare statements are used instead.  Jump tables are
+  usually faster to execute on average, but in particular for \c switch
+  statements where most of the jumps would go to the default label,
+  they might waste a bit of flash memory.
+  </p>
+
+- \c -mshort-calls
+  <p>
+  Use \c rjmp/rcall (limited range) on >8K devices.  On \c avr2 and
+  \c avr4 architectures (less than 8 KB or flash memory), this is
+  always the case.  On \c avr3 and \c avr5 architectures, calls and
+  jumps to targets outside the current function will by default
+  use \c jmp/call instructions that can cover the entire address
+  range, but that require more flash ROM and execution time.
+  </p>
+
+- \c -mrtl
+  <p>
+  Dump the internal compilation result called "RTL" into comments in
+  the generated assembler code.  Used for debugging avr-gcc.
+  </p>
+
+- \c -msize
+  <p>
+  Dump the address, size, and relative cost of each statement into
+  comments in the generated assembler code.  Used for debugging avr-gcc.
+  </p>
+
+- \c -mdeb
+  <p>
+  Generate lots of debugging information to \c stderr.
+  </p>
+
+
+<h3>Selected general compiler options</h3>
+
+The following general gcc options might be of some interest to AVR
+users.
+
+- <tt>-O</tt><em>n</em>
+  <p>
+  Optimization level \e n.  Increasing \e n is meant to optimize more,
+  an optimization level of 0 means no optimization at all, which is
+  the default if no \c -O option is present.  The special option \c
+  -Os is meant to turn on all \c -O2 optimizations that are not
+  expected to increase code size.
+  </p>
+  <p>
+  Note that at \c -O3, gcc attempts to inline all "simple" functions.
+  For the AVR target, this will normally constitute a large
+  pessimization due to the code increasement.  The only other
+  optimization turned on with \c -O3 is \c -frename-registers, which
+  could rather be enabled manually instead.
+  </p>
+  <p>
+  A simple \c -O option is equivalent to \c -O1.
+  </p>
+  <p>
+  Note also that turning off all optimizations will prevent some
+  warnings from being issued since the generation of those warnings
+  depends on code analysis steps that are only performed when
+  optimizing (unreachable code, unused variables).
+  </p>
+  <p>
+  See also the \ref faq_gdboptimize "appropriate FAQ entry" for
+  issues regarding debugging optimized code.
+  </p>
+
+- <tt>-Wa,</tt><em>assembler-options</em>
+- <tt>-Wl,</tt><em>linker-options</em>
+  <p>
+  \anchor gcc_minusW
+  Pass the listed options to the assembler, or linker, respectively.
+  </p>
+
+- \c -g
+  <p>
+  Generate debugging information that can be used by avr-gdb.
+  </p>
+
+- \c -ffreestanding
+  <p>
+  Assume a "freestanding" environment as per the C standard.  This
+  turns off automatic builtin functions (though they can still be
+  reached by prepending \c __builtin_ to the actual function name).
+  It also makes the compiler not complain when \c main() is declared
+  with a \c void return type which makes some sense in a
+  microcontroller environment where the application cannot
+  meaningfully provide a return value to its environment (in most
+  cases, \c main() won't even return anyway).
+  </p>
+
+\subsection using_avr_as Options for the assembler avr-as
+
+<h3>Machine-specific assembler options</h3>
+
+- <tt>-mmcu=</tt><em>architecture</em>
+- <tt>-mmcu=</tt><em>MCU name</em>
+  <p>
+  avr-as understands the same \c -mmcu= options as
+  \ref using_avr_gcc "avr-gcc".  By default, avr2 is assumed,
+  but this can be altered by using the appropriate \c .arch
+  pseudo-instruction inside the assembler source file.
+  </p>
+
+- \c -mall-opcodes
+  <p>
+  Turns off opcode checking for the actual MCU type, and allows any
+  possible AVR opcode to be assembled.
+  </p>
+
+- \c -mno-skip-bug
+  <p>
+  Don't emit a warning when trying to skip a 2-word instruction
+  with a <tt>CPSE/SBIC/SBIS/SBRC/SBRS</tt> instruction.  Early AVR
+  devices suffered from a hardware bug where these instructions
+  could not be properly skipped.
+  </p>
+
+- \c -mno-wrap
+  <p>
+  For <tt>RJMP/RCALL</tt> instructions, don't allow the target address
+  to wrap around for devices that have more than 8 KB of memory.
+  </p>
+
+- \c --gstabs
+  <p>
+  Generate \c .stabs debugging symbols for assembler source lines.
+  This enables avr-gdb to trace through assembler source files.  This
+  option <em>must not</em> be used when assembling sources that have
+  been generated by the C compiler; these files already contain the
+  appropriate line number information from the C source files.
+  </p>
+
+- <tt>-a[cdhlmns=</tt><em>file</em><tt>]</tt>
+  <p>
+  Turn on the assembler listing.  The sub-options are:
+  </p>
+  <p>
+  <ul>
+    <li>\c c     omit false conditionals</li>
+    <li>\c d     omit debugging directives</li>
+    <li>\c h     include high-level source</li>
+    <li>\c l     include assembly</li>
+    <li>\c m     include macro expansions</li>
+    <li>\c n     omit forms processing</li>
+    <li>\c s     include symbols</li>
+    <li><tt>=</tt><em>file</em>   set the name of the listing file</li>
+  </ul>
+  </p>
+  <p>
+  The various sub-options can be combined into a single \c -a option
+  list; \e =file must be the last one in that case.
+  </p>
+
+<h3>Examples for assembler options passed through the C compiler</h3>
+
+Remember that assembler options can be passed from the C compiler
+frontend using \c -Wa (see \ref gcc_minusW "above"), so in order to
+include the C source code into the assembler listing in file
+\c foo.lst, when compiling \c foo.c, the following compiler command-line
+can be used:
+
+<code>avr-gcc -c -O foo.c -o foo.o -Wa,-ahls=foo.lst</code>
+
+In order to pass an assembler file through the C preprocessor first,
+and have the assembler generate line number debugging information for
+it, the following command can be used:
+
+<code>avr-gcc -c -x assembler-with-cpp -o foo.o foo.S -Wa,--gstabs</code>
+
+Note that on Unix systems that have case-distinguishing file systems,
+specifying a file name with the suffix \c .S (upper-case letter S)
+will make the compiler automatically assume <tt>-x assembler-with-cpp</tt>,
+while using \c .s would pass the file directly to the assembler (no
+preprocessing done).
+
+\subsection using_avr_ld Controlling the linker avr-ld
+
+<h3>Selected linker options</h3>
+
+While there are no machine-specific options for avr-ld, a number of
+the standard options might be of interest to AVR users.
+
+- <tt>-l</tt><em>name</em>
+  <p>
+  Locate the archive library named <tt>lib</tt><em>name</em><tt>.a</tt>,
+  and use it to resolve currently unresolved symbols from it.  The
+  library is searched along a path that consists of builtin pathname
+  entries that have been specified at compile time (e. g.
+  \c /usr/local/avr/lib on Unix systems), possibly extended by
+  pathname entries as specified by \c -L options (that must precede the
+  \c -l options on the command-line).
+  </p>
+
+- <tt>-L</tt><em>path</em>
+  <p>
+  Additional location to look for archive libraries requested by
+  \c -l options.
+  </p>
+
+- <tt>--defsym </tt><em>symbol=expr</em>
+  <p>
+  Define a global symbol \e symbol using \e expr as the value.
+  </p>
+
+- \c -M
+  <p>
+  Print a linker map to \c stdout.
+  </p>
+
+- <tt>-Map </tt><em>mapfile</em>
+  <p>
+  Print a linker map to \e mapfile.
+  </p>
+
+- \c --cref
+  <p>
+  Output a cross reference table to the map file (in case \c -Map is
+  also present), or to \c stdout.
+  </p>
+
+- <tt>--section-start </tt><em>sectionname=org</em>
+  <p>
+  Start section \e sectionname at absolute address \e org.
+  </p>
+
+- <tt>-Tbss </tt><em>org</em>
+- <tt>-Tdata </tt><em>org</em>
+- <tt>-Ttext </tt><em>org</em>
+  <p>
+  Start the \c bss, \c data, or \c text section at \e org,
+  respectively.
+  </p>
+
+- <tt>-T </tt><em>scriptfile</em>
+  <p>
+  Use \e scriptfile as the linker script, replacing the default linker
+  script.  Default linker scripts are stored in a system-specific
+  location (e. g. under \c /usr/local/avr/lib/ldscripts on Unix
+  systems), and consist of the AVR architecture name (avr2 through avr5)
+  with the suffix \c .x appended.  They describe how the various
+  \ref mem_sections "memory sections" will be linked together.
+  </p>
+
+<h3>Passing linker options from the C compiler</h3>
+
+By default, all unknown non-option arguments on the avr-gcc
+command-line (i. e., all filename arguments that don't have a suffix
+that is handled by avr-gcc) are passed straight to the linker.  Thus,
+all files ending in \c .o (object files) and \c .a (object libraries)
+are provided to the linker.
+
+System libraries are usually not passed by their explicit filename but
+rather using the \c -l option which uses an abbreviated form of the
+archive filename (see above).  avr-libc ships two system libraries,
+\c libc.a, and \c libm.a.  While the standard library \c libc.a will
+always be searched for unresolved references when the linker is started
+using the C compiler frontend (i. e., there's always at least one
+implied \c -lc option), the mathematics library \c libm.a needs to be
+explicitly requested using \c -lm.  See also the
+\ref faq_libm "entry in the FAQ" explaining this.
+
+Conventionally, Makefiles use the \c make macro \c LDLIBS to keep
+track of \c -l (and possibly \c -L) options that should only be
+appended to the C compiler command-line when linking the final binary.
+In contrast, the macro \c LDFLAGS is used to store other command-line
+options to the C compiler that should be passed as options during the
+linking stage.  The difference is that options are placed early on the
+command-line, while libraries are put at the end since they are to be
+used to resolve global symbols that are still unresolved at this
+point.
+
+Specific linker flags can be passed from the C compiler command-line
+using the \c -Wl compiler option, see \ref gcc_minusW "above".
+This option requires that there be no spaces in the appended linker
+option, while some of the linker options above (like \c -Map or
+\c --defsym) would require a space.  In these situations, the space
+can be replaced by an equal sign as well.  For example, the following
+command-line can be used to compile \c foo.c into an executable, and
+also produce a link map that contains a cross-reference list in the
+file \c foo.map:
+
+<code>avr-gcc -O -o foo.out -Wl,-Map=foo.map -Wl,--cref foo.c</code>
+
+Alternatively, a comma as a placeholder will be replaced by a space
+before passing the option to the linker.  So for a device with
+external SRAM, the following command-line would cause the linker to
+place the data segment at address 0x2000 in the SRAM:
+
+<code>avr-gcc -mmcu=atmega128 -o foo.out -Wl,-Tdata,0x802000</code>
+
+See the explanation of the \ref sec_dot_data "data section" for why
+0x800000 needs to be added to the actual value.  Note that unless
+a \c -minit-stack option has been given when compiling the C source
+file that contains the function \c main(), the stack will still
+remain in internal RAM, through the symbol \c __stack that is provided
+by the run-time startup code.  This is probably a good idea anyway
+(since internal RAM access is faster), and even required for some
+early devices that had hardware bugs preventing them from using a
+stack in external RAM.  Note also that the heap for \c malloc()
+will still be placed after all the variables in the data section,
+so in this situation, no stack/heap collision can occur.
+
+*/
