@@ -330,6 +330,15 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 					goto leave;
 
 				if ((char)i == '-' || (char)i == '+') {
+#if SCANF_LEVEL > SCANF_MIN
+					if (--width <= 0)
+						/*
+						 * Incomplete conversion
+						 * due to field width
+						 * truncation.
+						 */
+						goto leave;
+#endif /* SCANF_LEVEL > SCANF_MIN */
 					if ((char)i == '-')
 						flags |= FLMINUS;
 					if ((i = getc(stream)) == EOF)
@@ -338,7 +347,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 
 				if ((char)i == '0') {
 					/*
-					 * %d conversions default to base
+					 * %i conversions default to base
 					 * 10, but allow for base 8
 					 * indicated by a leading 0 in
 					 * input, or base 16 indicated by
@@ -357,6 +366,10 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 					 */
 					a.ul = 0;
 
+#if SCANF_LEVEL > SCANF_MIN
+					if (--width <= 0)
+						goto intdone;
+#endif /* SCANF_LEVEL > SCANF_MIN */
 					if ((i = getc(stream)) == EOF)
 						goto intdone;
 					if ((char)tolower(i) == 'x') {
