@@ -1,3 +1,7 @@
+2003-06-20  Eric B. Weddington  <eric@ecentral.com>
+
+	* libc/stdlib/atoi.S: Fix bug with extra text.
+
 2003-06-19  Eric B. Weddington  <eric@ecentral.com>
 
 	New string functions from Reiner Patommel.
