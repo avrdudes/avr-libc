@@ -1,5 +1,12 @@
 2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
 
+	* LICENSE: Show correct license statements, with full list of authors.
+	* AUTHORS: Update list of authors.
+	* GPL: New file. Contains the GNU Public License referenced in the
+	fplib license.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/inttypes.h: Correct license with permission from Joerg Wunsch.
 	* include/stdio.h: Ditto.
 	* libc/stdio/vfscanf.c: Ditto.

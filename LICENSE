@@ -1,65 +1,57 @@
-Copyright information for avr-libc - additions and corrections are welcome.
-This is just a quick summary - see the individual source files for details.
+The contents of avr-libc have two licenses. Most files are licensed with
+a Modified BSD License (no advertising clause). Some files in the math
+library are licensed with a Modified GPL.
+
 All of this is supposed to be Free Software, Open Source, DFSG-free,
 GPL-compatible, and OK to use in both free and proprietary applications.
 
-*******************************************************************************
+See the license information in the individual source files for details.
 
-NOTE: Anything that was noted as "public domain" or "free for any purpose"
-has been changed to use the Modified BSD license (no advertising clause).
-Changes were made 23 May 2002 by Theodore A. Roth <troth@verinet.com> with
-Marek's permission so that the project can be moved to savannah.gnu.org.
+Additions and corrections to this file are welcome.
 
 *******************************************************************************
+Portions of avr-libc are Copyright (c) 1999-2004
+Keith Gudger,
+Steinar Haugen,
+Peter Jansen,
+Reinhard Jessich,
+Magnus Johansson,
+Artur Lipowski,
+Marek Michalkiewicz,
+Colin O'Flynn,
+Bob Paddock,
+Reiner Patommel,
+Michael Rickman,
+Theodore A. Roth,
+Juergen Schilling,
+Philip Soeberg,
+Nils Kristian Strom,
+Michael Stumpf,
+Stefan Swanepoel,
+Eric B. Weddington,
+Joerg Wunsch,
+The Regents of the University of California. 
+All rights reserved.
 
-fplib (except atan.S, atan2.S) - Michael Stumpf <Michael.Stumpf@t-online.de>,
-GPL + exception as in gcrt1.S and libgcc (previously it was pure GPL,
-changed 20010717, now OK to link with proprietary applications too).
+Portions of avr-libc documentation Copyright (c) 1990, 1991, 1993, 1994
+The Regents of the University of California.
+All rights reserved.
 
-stdlib/ qsort.c, strtol.c, strtoul.c, bsearch.c, rand.c -
-Regents of the University of California, Modified BSD license
-
-stdlib/malloc.c - Joerg Wunsch <joerg_wunsch@interface-systems.de>,
-Modified BSD license, with one more restriction removed
-("... endorse or promote products derived from this software ...")
-
-misc/itoa.S - Michael Rickmann <mrickma@gwdg.de>, Modified BSD license
-
-fplib/atan.S, fplib/atan2.S, pmstring/strcat_P.S, pmstring/strcasecmp_P.S,
-pmstring/strncasecmp_P.S, stdlib/atoi.S, string/strlwr.S, string/strrev.S,
-string/strupr.S, string/strcasecmp.S, string/strncasecmp.S -
-Reiner Patommel <rpato@post4.tele.dk>, Modified BSD license
-
-string/strstr.S -
-Jochen Pernsteiner <jochen.pernsteiner@stud.fh-regensburg.de>,
-Modified BSD license
-
-Unless otherwise noted, the rest was written by me, Marek Michalkiewicz
-<marekm@amelek.gda.pl> and is now under a Modified BSD license.  (If you
-contributed some code to avr-libc and you are not listed above, please
-contact me and I will be happy to add you.)
-
-*******************************************************************************
-
-If you add a new file to the project, please consider using the following
-license template and add it to the beginning of the file.  Using this license
-will insure that your contribution is safe to use in any project someone wishes
-to pursue, be it open source or proprietary.
-
-Template follows (replace <YEAR> and <OWNER>):
-
-/* Copyright (c) <YEAR>, <OWNER>
-   All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
+   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
+     
+   * Neither the name of the copyright holders nor the names of
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
 
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -71,5 +63,30 @@ Template follows (replace <YEAR> and <OWNER>):
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. */
+   POSSIBILITY OF SUCH DAMAGE. 
 
+
+Portions of avr-libc are Copyright (c) 2002, Michael Stumpf.
+All rights reserved.
+
+  The files contained in fplib are free software; you can redistribute it 
+  and/or modify it under the terms of the GNU General Public License as 
+  published by the Free Software Foundation; either version 2, or (at your 
+  option) any later version.
+
+  In addition to the permissions in the GNU General Public License, the
+  author gives you unlimited permission to link the
+  compiled version of this file into combinations with other programs,
+  and to distribute those combinations without any restriction coming
+  from the use of this file.  (The General Public License restrictions
+  do apply in other respects; for example, they cover modification of
+  the file, and distribution when not linked into a combine
+  executable.)
+
+  This file is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+   
+*******************************************************************************
