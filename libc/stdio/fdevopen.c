@@ -57,7 +57,7 @@ fdevopen(int (*put)(char), int (*get)(void), int opts __attribute__((unused)))
 
 	if (put != 0) {
 		s->put = put;
-		s->flags = __SWR;
+		s->flags |= __SWR;
 		if (stdout == 0) {
 			stdout = s;
 			if (stderr == 0)
