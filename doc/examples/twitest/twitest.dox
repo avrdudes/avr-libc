@@ -29,10 +29,11 @@
 
 Some newer devices of the ATmega series contain builtin support for
 interfacing the microcontroller to a two-wire bus, called TWI.  This
-is essentially the same called I²C by Philips, but that term is
+is essentially the same called I2C by Philips, but that term is
 avoided in Atmel's documentation due to patenting issues.
 
 For the original Philips documentation, see
+
 http://www.semiconductors.philips.com/buses/i2c/index.html
 
 \section twi_demo_intro Introduction into TWI

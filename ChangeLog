@@ -1,3 +1,7 @@
+2004-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/twitest/twitest.dox: Fix formatting bugs.
+
 2004-02-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/inline_asm.dox: Fix use of _SFR_IO_ADDR() in inline asm.
