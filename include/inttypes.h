@@ -44,7 +44,14 @@
     over rolling your own typedefs.
 
     \note If avr-gcc's \c -mint8 option is used, no 32-bit types will be
-    available. */
+    available.
+
+    \todo There is a pending patch that may go into gcc to change the
+    behaviour of the -mint8 option.  The current (2003-09-17) situation for
+    -mint8 is sizeof(int) == 1, sizeof(long) == 2 and sizeof(long long) == 8.
+    Note the absence of a 4-byte, 32-bit type.  The patch proposes to change
+    sozeof(long long) to be 4 bytes (32 bits).  When and if the patch is
+    included in gcc, we will need to change avr-libc accordingly.  */
 
 #if __INT_MAX__ == 127
 # define __USING_MINT8 1

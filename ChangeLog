@@ -1,3 +1,16 @@
+2003-09-18  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/inttypes.h: Add note about -mint8 patch for gcc to change the
+	size of long long from 64 bits to 32 bits.
+	* include/avr/pgmspace.h: Replace prog_int with prog_int16_t.
+	Replace prog_long with prog_int32_t.
+	Replace prog_long_long with prog_int64_t.
+	Add typedefs for prog_int8_t, prog_uint8_t, prog_uint16_t,
+	prog_uint32_t and prog_uint64_t.
+	Only define pgm_read_byte_far or pgm_read_word_far if RAMPZ is defined
+	and __USING_MINT8 is not defined.
+
 2003-09-17  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

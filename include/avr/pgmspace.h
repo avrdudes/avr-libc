@@ -89,9 +89,17 @@ extern "C" {
 typedef void prog_void PROGMEM;
 typedef char prog_char PROGMEM;
 typedef unsigned char prog_uchar PROGMEM;
-typedef int prog_int PROGMEM;
-typedef long prog_long PROGMEM;
-typedef long long prog_long_long PROGMEM;
+
+typedef int8_t    prog_int8_t   PROGMEM;
+typedef uint8_t   prog_uint8_t  PROGMEM;
+typedef int16_t   prog_int16_t  PROGMEM;
+typedef uint16_t  prog_uint16_t PROGMEM;
+#if !defined(__USING_MINT8)
+typedef int32_t   prog_int32_t  PROGMEM;
+typedef uint32_t  prog_uint32_t PROGMEM;
+#endif
+typedef int64_t   prog_int64_t  PROGMEM;
+typedef uint64_t  prog_uint64_t PROGMEM;
 
 /** \ingroup avr_pgmspace
     \def PSTR(s)
@@ -184,10 +192,13 @@ typedef long long prog_long_long PROGMEM;
 
 #define pgm_read_word_near(address_short) __LPM_word((uint16_t)(address_short))
 
-#ifdef RAMPZ  /* >64K program memory (ATmega103, ATmega128) */
+#if defined(RAMPZ) && !defined(__USING_MINT8)
 
 /* Only for devices with more than 64K of program memory.
-   RAMPZ must be defined (see iom103.h, iom128.h).  */
+   RAMPZ must be defined (see iom103.h, iom128.h).
+
+   These can not be defined if the user is compiling with the -mint8 option
+   since (u)int32_t is not defined in that case. */
 
 /* The classic functions are needed for ATmega103. */
 
@@ -278,10 +289,6 @@ typedef long long prog_long_long PROGMEM;
 #define __ELPM_word(addr)   __ELPM_word_classic__(addr)
 #endif
 
-#endif
-
-#ifdef RAMPZ
-
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_far(address_long)
     Read a byte from the program space with a 32-bit (far) address. 
@@ -289,7 +296,7 @@ typedef long long prog_long_long PROGMEM;
     \note The address is a byte address. 
     The address is in the program space. */
 
-#define pgm_read_byte_far(address_long)     __ELPM((unsigned long)(address_long))
+#define pgm_read_byte_far(address_long)  __ELPM((uint32_t)(address_long))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_far(address_long)
@@ -298,14 +305,9 @@ typedef long long prog_long_long PROGMEM;
     \note The address is a byte address.
     The address is in the program space. */
 
-#define pgm_read_word_far(address_long)     __ELPM_word((unsigned long)(address_long))
+#define pgm_read_word_far(address_long)  __ELPM_word((uint32_t)(address_long))
 
-#else
-
-#define pgm_read_byte_far(address_long)     pgm_read_byte_near(address_long)
-#define pgm_read_word_far(address_long)     pgm_read_word_near(address_long)
-
-#endif
+#endif /* RAMPZ and ! __USING_MINT8 */
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte(address_short)
