@@ -1,5 +1,14 @@
 2004-04-28  Theodore A. Roth  <troth@openavr.org>
 
+	* AvrCommon.am: New file.
+	* configure.ac: Add tool check for AS.
+	Move new devices to separate AC_CONFIG_FILES section.
+	* devtools/gen-avr-lib-tree.sh: Look for AvrCommon.am at top level only
+	instead of in avr/lib/.
+	Split out new devices to avoid compile failures with older tool chain.
+
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
 	* Makefile.am: Scrap old version and rewrite.
 	* bootstrap: Add temp hook to run gen-avr-lib-tree.sh.
 	* configure.ac: Bump version.

@@ -78,6 +78,7 @@ AM_INIT_AUTOMAKE
 # Checks for programs.
 
 AC_PROG_CC
+AC_CHECK_TOOL(AS, as, as)
 AM_PROG_AS
 AC_PROG_RANLIB
 AC_CHECK_TOOL(AR, ar, ar)
@@ -153,10 +154,8 @@ AC_CONFIG_FILES([
 	avr/lib/at90c8534/Makefile
 	avr/lib/attiny11/Makefile
 	avr/lib/attiny12/Makefile
-	avr/lib/attiny13/Makefile
 	avr/lib/attiny15/Makefile
 	avr/lib/attiny22/Makefile
-	avr/lib/attiny2313/Makefile
 	avr/lib/attiny26/Makefile
 	avr/lib/attiny28/Makefile
 	avr/lib/atmega103/Makefile
@@ -165,16 +164,12 @@ AC_CONFIG_FILES([
 	avr/lib/atmega161/Makefile
 	avr/lib/atmega162/Makefile
 	avr/lib/atmega163/Makefile
-	avr/lib/atmega168/Makefile
 	avr/lib/atmega169/Makefile
 	avr/lib/atmega8/Makefile
 	avr/lib/atmega8515/Makefile
 	avr/lib/atmega8535/Makefile
-	avr/lib/atmega88/Makefile
 	avr/lib/atmega32/Makefile
 	avr/lib/atmega323/Makefile
-	avr/lib/atmega48/Makefile
-	avr/lib/atmega603/Makefile
 	avr/lib/atmega64/Makefile
 	avr/lib/at86rf401/Makefile
 	avr/lib/at43usb320/Makefile
@@ -182,6 +177,15 @@ AC_CONFIG_FILES([
 	avr/lib/at76c711/Makefile
 	avr/lib/at94k/Makefile
 ])
+
+## Skip the new deivces for now.
+#AC_CONFIG_FILES([
+#	avr/lib/attiny13/Makefile
+#	avr/lib/attiny2313/Makefile
+#	avr/lib/atmega168/Makefile
+#	avr/lib/atmega48/Makefile
+#	avr/lib/atmega88/Makefile
+#])
 
 AC_OUTPUT
 

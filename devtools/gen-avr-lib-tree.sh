@@ -72,24 +72,16 @@ EOF
 
 cd lib || exit 1
 
-# Create a dummy place-holder for the avr/lib/AvrCommon.am file.
-
-[ -e ${top_dir}/AvrCommon.am ] && cp ${top_dir}/AvrCommon.am .
-
-if test ! -e AvrCommon.am
-then
-	cat > AvrCommon.am <<-EOF
-	# -*- Makefile -*-
-	#
-	# Dummy place-holder file for now.
-	# Eventually, all the rules to build the libs for given target will be
-	# defined in this file.
-	#
-	# vim: set ft=make ts=4 sw=4:
-	EOF
-fi
+SKIP_NEW_DEVS="\
+attiny13:crttn13.o::: \
+attiny2313:crttn2313.o::: \
+atmega168:crtm168.o::: \
+atmega48:crtm48.o::: \
+atmega88:crtm88.o::: \
+"
 
 DEV_INFO="\
+${NEW_DEVS} \
 at90s1200:crts1200.o::: \
 at90s2313:crts2313.o::: \
 at90s2323:crts2323.o::: \
@@ -103,10 +95,8 @@ at90s8535:crts8535.o::: \
 at90c8534:crtc8534.o::: \
 attiny11:crttn11.o::: \
 attiny12:crttn12.o::: \
-attiny13:crttn13.o::: \
 attiny15:crttn15.o::: \
 attiny22:crttn22.o::: \
-attiny2313:crttn2313.o::: \
 attiny26:crttn26.o::: \
 attiny28:crttn28.o::: \
 atmega103:crtm103.o::: \
@@ -115,16 +105,12 @@ atmega16:crtm16.o::: \
 atmega161:crtm161.o::: \
 atmega162:crtm162.o::: \
 atmega163:crtm163.o::: \
-atmega168:crtm168.o::: \
 atmega169:crtm169.o::: \
 atmega8:crtm8.o::: \
 atmega8515:crtm8515.o::: \
 atmega8535:crtm8535.o::: \
-atmega88:crtm88.o::: \
 atmega32:crtm32.o::: \
 atmega323:crtm323.o::: \
-atmega48:crtm48.o::: \
-atmega603:crtm603.o::: \
 atmega64:crtm64.o::: \
 at86rf401:crt86401.o::: \
 at43usb320:crt43320.o::: \
@@ -226,7 +212,7 @@ do
 	# NOTE: Automake will be performing the following include, not GNU Make.
 	# Automake will also be scanning the included file.
 	
-	include \$(top_srcdir)/avr/lib/AvrCommon.am
+	include \$(top_srcdir)/AvrCommon.am
 	
 	# vim: set ft=make ts=4 sw=4:
 	EOF
