@@ -56,9 +56,6 @@ extern "C" {
 */
 
 /*@{*/
-/** \name Standard functionality.
- \ingroup avr_stdlib
-*/
 /** Result type for function div(). */
 typedef struct {
 	int quot;
@@ -455,7 +452,7 @@ extern char *ultoa(unsigned long int __val, char *__s, int __radix);
 
 /**
    The dtostre() function converts the double value passed in \c val into
-   an ASCII representationthat will be stored under \c s.  The caller
+   an ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
    Conversion is done into in the style [-]d.ddde±dd where there is
