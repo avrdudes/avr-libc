@@ -1,3 +1,10 @@
+2002-10-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: Include some pictures.
+	* doc/api/Makefile.am: pictures' infrastructure.
+	* doc/api/doxygen.conf.in: pictures' infrastructure.
+	* doc/api/malloc*.fig: picture sources.
+
 2002-10-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/malloc.dox: Explain malloc details.
