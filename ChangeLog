@@ -1,3 +1,15 @@
+2002-07-16  Theodore A. Roth  <troth@verinet.com>
+
+	* Makefile.am: Integrate doxygen in to build system.
+	* configure.in: Integrate doxygen in to build system.
+	* configure.in (AM_INIT_AUTOMAKE): Updated version.
+	* doc/Makefile.am: New file.
+	* doc/api/Makefile.am: New file.
+	* doc/api/dox.css: New file.
+	* doc/api/dox_html_footer: New file.
+	* doc/api/dox_html_header: New file.
+	* doc/api/doxygen.config.in: New file.
+								
 2002-07-14  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* configure.in (AM_INIT_AUTOMAKE): Update version.

@@ -72,7 +72,7 @@ AM_MAKEFLAGS = \
 
 FLAGS_TO_PASS = $(AM_MAKEFLAGS)
 
-SUBDIRS = crt1 libc libm
+SUBDIRS = crt1 libc libm doc
 
 tooldir = $(exec_prefix)/$(host_alias)
 toollibdir = $(tooldir)/lib$(MULTISUBDIR)
@@ -86,7 +86,7 @@ toollib_DATA = $(AVR_CRT_AT90) $(AVR_CRT_TINY) $(AVR_CRT_MEGA) $(AVR_CRT_OTHER)
 libc_a_SOURCES =
 libm_a_SOURCES =
 
-EXTRA_DIST = config-ml.in doconf dodist domake reconf LICENSE common include doc
+EXTRA_DIST = config-ml.in doconf dodist domake reconf LICENSE common include
 
 libc.a: libc/libc.a
 	rm -f $@
