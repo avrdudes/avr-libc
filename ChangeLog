@@ -1,5 +1,9 @@
 2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
 
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
+
 	* libm/fplib/readme.dtostre: Change Michael Stumpf's email address.
 	* libm/fplib/readme.strtod: Ditto.
 	* libm/fplib/readme.fplib: Ditto. Remove license as this is a README 
