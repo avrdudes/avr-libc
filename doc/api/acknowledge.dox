@@ -54,6 +54,10 @@
 	to <b>uisp</b>) and for contributing \ref using_avrprog "documentation"
 	which describes how to use it.
 
+	- Eric Weddington [ eric@umginc.net ] for maintaining the \b WinAVR
+	package and thus making the continued improvements to the
+	Opensource AVR toolchain available to many users.
+
 	- All the people who have submitted suggestions, patches and bug reports.
     (See the AUTHORS files of the various tools.)
 
