@@ -1,5 +1,6 @@
 2002-10-22  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* avr-libc.spec.in: Require doxygen >= 1.2.16 for build.
 
 2002-10-20  Theodore A. Roth  <troth@openavr.org>
