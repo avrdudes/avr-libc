@@ -37,14 +37,14 @@
 #include <stdlib.h>
 
 /* Verify assumptions implied in the code below. */
-#if DTOSTRE_ALWAYS_SIGN != 0x01
-#error "DTOSTRE_ALWAYS_SIGN must be 0x01"
+#if DTOSTR_ALWAYS_SIGN != 0x01
+#error "DTOSTR_ALWAYS_SIGN must be 0x01"
 #endif
-#if DTOSTRE_PLUS_SIGN != 0x02
-#error "DTOSTRE_PLUS_SIGN must be 0x02"
+#if DTOSTR_PLUS_SIGN != 0x02
+#error "DTOSTR_PLUS_SIGN must be 0x02"
 #endif
-#if DTOSTRE_UPPERCASE != 0x04
-#error "DTOSTRE_UPPERCASE must be 0x04"
+#if DTOSTR_UPPERCASE != 0x04
+#error "DTOSTR_UPPERCASE must be 0x04"
 #endif
 
 #define FP_0_1     0x3dcccccd

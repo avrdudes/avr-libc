@@ -439,11 +439,11 @@ extern char *ultoa(unsigned long int __val, char *__s, int __radix);
 /*@{*/
 /** \name Conversion functions for double arguments. */
 /** Bit value that can be passed in \c flags to dtostre(). */
-#define DTOSTRE_ALWAYS_SIGN 0x01        /* put '+' or ' ' for positives */
+#define DTOSTR_ALWAYS_SIGN 0x01        /* put '+' or ' ' for positives */
 /** Bit value that can be passed in \c flags to dtostre(). */
-#define DTOSTRE_PLUS_SIGN   0x02        /* put '+' rather than ' ' */
+#define DTOSTR_PLUS_SIGN   0x02        /* put '+' rather than ' ' */
 /** Bit value that can be passed in \c flags to dtostre(). */
-#define DTOSTRE_UPPERCASE   0x04        /* put 'E' rather 'e' */
+#define DTOSTR_UPPERCASE   0x04        /* put 'E' rather 'e' */
 
 #ifndef __ASSEMBLER__
 
