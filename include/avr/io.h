@@ -23,6 +23,43 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/** \defgroup avr_io AVR device-specific IO definitions
+    \code #include <avr/io.h> \endcode
+
+    This header file includes the apropriate IO definitions for the
+    device that has been specified by the <tt>-mmcu=</tt> compiler
+    command-line switch.
+
+    Included are definitions of the IO register set and their
+    respective bit values as specified in the Atmel documentation.
+    Note that Atmel is not very consistent in its naming conventions,
+    so even identical functions sometimes get different names on
+    different devices.
+
+    Also included are the specific names useable for interrupt
+    function definitions as documented
+    \ref avr_signames "here".
+
+    Finally, the following macros are defined:
+
+    - \b RAMEND
+
+    A constant describing the last on-chip RAM location.
+
+    - \b XRAMEND
+
+    A constant describing the last possible location in RAM.
+    This is equal to RAMEND for devices that do not allow for
+    external RAM.
+
+    - \b E2END
+
+    A constant describing the address of the last EEPROM cell.
+
+    - \b FLASHEND
+
+    A constant describing the last byte address in flash ROM. */
+
 #ifndef _AVR_IO_H_
 #define _AVR_IO_H_
 
