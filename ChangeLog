@@ -1,3 +1,11 @@
+2004-04-16  Theodore A. Roth  <troth@openavr.org>
+[Contributed by Wolfgang Haidinger <wh@vmars.tuwien.ac.at>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Add note about new pgmspaces macros.
+	* include/avr/pgmspace.h: Extend API to allow access of 32 bit
+	unsigned double words.
+
 2004-04-14  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

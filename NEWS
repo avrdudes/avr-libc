@@ -1,5 +1,14 @@
 *** Changes since avr-libc-1.0:
 
+* Extend pgmspace API.
+
+The pgmspace API has had the following macros added to allow accessing of
+unsigned 32-bit values:
+
+  pgm_read_dword_near
+  pgm_read_dword_far
+  pgm_read_dword
+
 * Change boot API.
 
 The boot API internals have changed such that it is not compatible with the
