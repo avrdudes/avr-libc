@@ -73,7 +73,8 @@ void _printf_p (char const *fmt0, ...) {
 	char  c;	/* holds a char from the format string */
 	int8_t width;
 	uint8_t base, prec;
-	char b[12];	/* contains character representation of the number and its prefix */
+	char b[12];	/* contains character representation of the
+			   number and its prefix */
 	char *pb;	/* used as pointer to an element in b */
 
 	uint8_t flags;
@@ -91,113 +92,123 @@ void _printf_p (char const *fmt0, ...) {
 
 	flags=0;
 
-	while ((c=PRG_RDB(fmt++))) {
-		if(flags&FLHASPERCENT) {
-			if(c>='0' && c<='9') { /* digit */
-				prec*=10;
-				prec+=c-'0';
-				if(!(flags&FLPREC)) 
-					width=prec;
+	while ((c = PRG_RDB(fmt++))) {
+		if (flags & FLHASPERCENT) {
+			if (c >= '0' && c <= '9') {
+				/* digit */
+				prec *= 10;
+				prec += c - '0';
+				if (!(flags & FLPREC)) 
+					width = prec;
 			} else {
-				if((flags&FLPREC) && prec==0)
-					prec=1;
+				if ((flags & FLPREC) && prec == 0)
+					prec = 1;
 				switch (c) {
 				case '+':
-					flags|=FLSIGNCHAR;
+					flags |= FLSIGNCHAR;
 					break;
 				case '-':
-					flags|=FLLPAD;
+					flags |= FLLPAD;
 					break;
 				case '#' :
-					flags|=FLALT;
+					flags |= FLALT;
 					break;
 				case '.':
-					flags|=FLPREC;
-					prec=0;
+					flags |= FLPREC;
+					prec = 0;
 					break;
 				case 'l':
-					flags|=FLLONG;
+					flags |= FLLONG;
 					break;
 				case 'c':
-					a.c=(char)va_arg(ap, int); /* char is promoted to int via va_arg */
+					/* char is promoted to int via va_arg */
+					a.c = (char)va_arg(ap, int);
 					width--;
 					goto nextitem;
 				case 's':
-					a.pc=va_arg(ap, char *);
-					for(base=0;a.pc[base];base++); /* calc length of string */
-					if((flags&FLPREC) && prec<base)
-						base=prec;
-					width-=base;
+					a.pc = va_arg(ap, char *);
+					for (base = 0; a.pc[base]; base++)
+						; /* calc length of string */
+					if ((flags & FLPREC) && prec < base)
+						base = prec;
+					width -= base;
 					goto nextitem;
 				case 'd':
-					a.l=flags&FLLONG ? va_arg(ap, long) : va_arg(ap, int);
-					if(a.l<0) {
-						flags|=FLNEGATIVE;
-						a.l=-a.l;
+					a.l = flags & FLLONG ?
+						va_arg(ap, long):
+						va_arg(ap, int);
+					if (a.l < 0) {
+						flags |= FLNEGATIVE;
+						a.l = -a.l;
 					}
 					goto processnum;
 				case 'o' : /* octal number */
-					base=8;
+					base = 8;
 					goto getulong; 
-				case 'x' : case 'X' :
-					base=16;
+				case 'x' :
+				case 'X' :
+					base = 16;
 					/* FALLTHROUGH */
 				case 'u':
 				  getulong:
-					a.ul=flags&FLLONG ? va_arg(ap, unsigned long) : va_arg(ap, unsigned int);
+					a.ul = flags & FLLONG?
+						va_arg(ap, unsigned long):
+						va_arg(ap, unsigned int);
 				  processnum:
-					pb=b;
+					pb = b;
 					do {
-						*pb=a.ul%base;
-						*pb=*pb>9 ? *pb+c-'X'+'A'-10 : *pb+'0';
+						*pb = a.ul % base;
+						*pb = *pb > 9?
+							*pb + c - 'X' + 'A' - 10:
+							*pb+'0';
 						*pb++;
-						a.ul/=base;
+						a.ul /= base;
 					} while(a.ul);
-					if(flags&FLPREC) {
-						a.u8=(uint8_t)(pb-b);
-						while(prec-->a.u8)
-							*pb++='0';
+					if (flags & FLPREC) {
+						a.u8 = (uint8_t)(pb - b);
+						while (prec-- > a.u8)
+							*pb++ = '0';
 					}
-					if(flags&FLNEGATIVE)
-						*pb++='-';
-					else if(flags&FLSIGNCHAR)
-						*pb++='+';
-					if(flags&FLALT) {
-						if(base==16)
-							*pb++=c;
-						if(base!=10)
-							*pb++='0';
+					if (flags & FLNEGATIVE)
+						*pb++ = '-';
+					else if (flags & FLSIGNCHAR)
+						*pb++ = '+';
+					if(flags & FLALT) {
+						if (base == 16)
+							*pb++ = c;
+						if (base != 10)
+							*pb++ = '0';
 					}
-					width-=(uint8_t)(pb-b);
+					width -= (uint8_t)(pb - b);
 				  nextitem:
-					if(!(flags&FLLPAD))
-						while(width-->0)
+					if (!(flags & FLLPAD))
+						while(width-- > 0)
 							printf_char(' ');
-					if(c=='c')
+					if (c == 'c')
 						printf_char(a.c);
-					else if(c=='s')
-						while(base--)
+					else if (c == 's')
+						while (base--)
 							printf_char(*a.pc++);
 					else 
-						while(pb!=b)
+						while (pb != b)
 							printf_char(*--pb);
-					if(flags&FLLPAD)
-						while(width-->0)
+					if (flags & FLLPAD)
+						while (width-- > 0)
 							printf_char(' ');
 					goto clearflags;
 
 				default :
 					printf_char(c);
 				  clearflags:
-					flags=0;
+					flags = 0;
 					break;
 				}
 			}
 		} else
-			if(c=='%') {
-				flags=FLHASPERCENT;
-				prec=width=0;
-				base=10;
+			if (c == '%') {
+				flags = FLHASPERCENT;
+				prec = width = 0;
+				base = 10;
 			} else
 				printf_char(c);
 	}
