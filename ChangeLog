@@ -1,3 +1,8 @@
+2005-01-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/eeprom.h: Document all devices that are not supported
+	by the library routines; add a #warning as well.
+
 2005-01-12  Eric B. Weddington  <ericw@evcohs.com>
 
     * LICENSE: Update copyright year.
