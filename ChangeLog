@@ -1,5 +1,11 @@
 2005-01-06  Eric B. Weddington  <ericw@evcohs.com>
 
+    * include/avr/iom16.h: Put the port bit defintions back in for mega16.
+    [Fix for bug #11486]
+    * include/avr/iom16.h: Remove Windows line endings.
+
+2005-01-06  Eric B. Weddington  <ericw@evcohs.com>
+
     * include/avr/wdt.h: Abstract the change enable bit for the mega32.
     [Fix for bug #11510]
 

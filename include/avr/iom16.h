@@ -149,19 +149,125 @@
 
 #define SPDR    _SFR_IO8(0x0F)
 
-/* The bit numbers for the Port A-D registers are defined in <avr/portpins.h> */
 #define PIND    _SFR_IO8(0x10)
+#define PIND0   0
+#define PIND1   1
+#define PIND2   2
+#define PIND3   3
+#define PIND4   4
+#define PIND5   5
+#define PIND6   6
+#define PIND7   7
+
 #define DDRD    _SFR_IO8(0x11)
+#define DDD0    0
+#define DDD1    1
+#define DDD2    2
+#define DDD3    3
+#define DDD4    4
+#define DDD5    5
+#define DDD6    6
+#define DDD7    7
+
 #define PORTD   _SFR_IO8(0x12)
+#define PD0     0
+#define PD1     1
+#define PD2     2
+#define PD3     3
+#define PD4     4
+#define PD5     5
+#define PD6     6
+#define PD7     7
+
 #define PINC    _SFR_IO8(0x13)
+#define PINC0   0
+#define PINC1   1
+#define PINC2   2
+#define PINC3   3
+#define PINC4   4
+#define PINC5   5
+#define PINC6   6
+#define PINC7   7
+
 #define DDRC    _SFR_IO8(0x14)
+#define DDC0    0
+#define DDC1    1
+#define DDC2    2
+#define DDC3    3
+#define DDC4    4
+#define DDC5    5
+#define DDC6    6
+#define DDC7    7
+
 #define PORTC   _SFR_IO8(0x15)
+#define PC0     0
+#define PC1     1
+#define PC2     2
+#define PC3     3
+#define PC4     4
+#define PC5     5
+#define PC6     6
+#define PC7     7
+
 #define PINB    _SFR_IO8(0x16)
+#define PINB0   0
+#define PINB1   1
+#define PINB2   2
+#define PINB3   3
+#define PINB4   4
+#define PINB5   5
+#define PINB6   6
+#define PINB7   7
+
 #define DDRB    _SFR_IO8(0x17)
+#define DDB0    0
+#define DDB1    1
+#define DDB2    2
+#define DDB3    3
+#define DDB4    4
+#define DDB5    5
+#define DDB6    6
+#define DDB7    7
+
 #define PORTB   _SFR_IO8(0x18)
+#define PB0     0
+#define PB1     1
+#define PB2     2
+#define PB3     3
+#define PB4     4
+#define PB5     5
+#define PB6     6
+#define PB7     7
+
 #define PINA    _SFR_IO8(0x19)
+#define PINA0   0
+#define PINA1   1
+#define PINA2   2
+#define PINA3   3
+#define PINA4   4
+#define PINA5   5
+#define PINA6   6
+#define PINA7   7
+
 #define DDRA    _SFR_IO8(0x1A)
+#define DDA0    0
+#define DDA1    1
+#define DDA2    2
+#define DDA3    3
+#define DDA4    4
+#define DDA5    5
+#define DDA6    6
+#define DDA7    7
+
 #define PORTA   _SFR_IO8(0x1B)
+#define PA0     0
+#define PA1     1
+#define PA2     2
+#define PA3     3
+#define PA4     4
+#define PA5     5
+#define PA6     6
+#define PA7     7
 
 /* EEPROM [0x1C..0X1F] The bit numbers are defined in <avr/io.h> */
 
