@@ -1,5 +1,11 @@
 2002-08-28  Theodore A. Roth  <troth@verinet.com>
 
+	* include/avr/iom128.h: Sync up io register bit names with latest
+		datasheet (2467E-AVR-05/02). [modification of submission by 
+		Svein E. Seldal <Svein.Seldal@solidas.com>].
+
+2002-08-28  Theodore A. Roth  <troth@verinet.com>
+
 	* configure.in(AM_INIT_AUTOMAKE): Bump version
 	* doc/api/interrupts.dox: Fix typo (s/Overflow2/Overflow3/).
 

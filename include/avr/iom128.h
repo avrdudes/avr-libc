@@ -23,7 +23,10 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* avr/iom128.h - defines for ATmega128 */
+/* avr/iom128.h - defines for ATmega128 
+
+   As of 2002-08-27:
+   - This should be up to date with data sheet 2467E-AVR-05/02 */
 
 #ifndef _AVR_IOM128_H_
 #define _AVR_IOM128_H_ 1
@@ -69,7 +72,7 @@
 /* USART0 Control and Status Register A */
 #define UCSR0A    _SFR_IO8(0x0B)
 
-/* USART I/O Data Register */
+/* USART0 I/O Data Register */
 #define UDR0      _SFR_IO8(0x0C)
 
 /* SPI Control Register */
@@ -384,7 +387,7 @@
    The Register Bit names are represented by their bit number (0-7).
 */
 
-/* 2-wire Control Register */
+/* 2-wire Control Register - TWCR */
 #define    TWINT        7
 #define    TWEA         6
 #define    TWSTA        5
@@ -393,7 +396,7 @@
 #define    TWEN         2
 #define    TWIE         0
 
-/* 2-wire Address Register */
+/* 2-wire Address Register - TWAR */
 #define    TWA6         7
 #define    TWA5         6
 #define    TWA4         5
@@ -403,7 +406,7 @@
 #define    TWA0         1
 #define    TWGCE        0
 
-/* 2-wire Status Register */
+/* 2-wire Status Register - TWSR */
 #define    TWS7         7
 #define    TWS6         6
 #define    TWS5         5
@@ -412,7 +415,7 @@
 #define    TWPS1        1
 #define    TWPS0        0
 
-/* External Memory Control Register A */
+/* External Memory Control Register A - XMCRA */
 #define    SRL2         6
 #define    SRL1         5
 #define    SRL0         4
@@ -420,13 +423,13 @@
 #define    SRW00        2
 #define    SRW11        1
 
-/* External Memory Control Register B */
+/* External Memory Control Register B - XMCRA */
 #define    XMBK         7
 #define    XMM2         2
 #define    XMM1         1
 #define    XMM0         0
 
-/* XDIV Divide control register*/
+/* XDIV Divide control register - XDIV */
 #define    XDIVEN       7
 #define    XDIV6        6
 #define    XDIV5        5
@@ -436,10 +439,10 @@
 #define    XDIV1        1
 #define    XDIV0        0
 
-/* RAM Page Z select register */
+/* RAM Page Z select register - RAMPZ */
 #define     RAMPZ0      0
 
-/* External Interrupt Control Register A */
+/* External Interrupt Control Register A - EICRA */
 #define    ISC31        7
 #define    ISC30        6
 #define    ISC21        5
@@ -449,7 +452,7 @@
 #define    ISC01        1
 #define    ISC00        0
 
-/* External Interrupt Control Register B */
+/* External Interrupt Control Register B - EICRB */
 #define    ISC71        7
 #define    ISC70        6
 #define    ISC61        5
@@ -459,7 +462,7 @@
 #define    ISC41        1
 #define    ISC40        0
 
-/* Store Program Memory Control Register */
+/* Store Program Memory Control Register - SPMCSR, SPMCR */
 #define    SPMIE        7
 #define    RWWSB        6
 #define    RWWSRE       4
@@ -468,7 +471,7 @@
 #define    PGERS        1
 #define    SPMEN        0
 
-/* External Interrupt MaSK register */
+/* External Interrupt MaSK register - EIMSK */
 #define    INT7         7
 #define    INT6         6
 #define    INT5         5
@@ -478,13 +481,17 @@
 #define    INT1         1
 #define    INT0         0
 
-/* External Interrupt Flag Register */
+/* External Interrupt Flag Register - EIFR */
 #define    INTF7        7
 #define    INTF6        6
 #define    INTF5        5
 #define    INTF4        4
+#define    INTF3        3
+#define    INTF2        2
+#define    INTF1        1
+#define    INTF0        0
 
-/* Timer/Counter Interrupt MaSK register */
+/* Timer/Counter Interrupt MaSK register - TIMSK */
 #define    OCIE2        7
 #define    TOIE2        6
 #define    TICIE1       5
@@ -494,7 +501,7 @@
 #define    OCIE0        1
 #define    TOIE0        0
 
-/* Timer/Counter Interrupt Flag Register */
+/* Timer/Counter Interrupt Flag Register - TIFR */
 #define    OCF2         7
 #define    TOV2         6
 #define    ICF1         5
@@ -504,7 +511,7 @@
 #define    OCF0         1
 #define    TOV0         0
 
-/* Extended Timer Interrupt MaSK register */
+/* Extended Timer Interrupt MaSK register - ETIMSK */
 #define    TICIE3       5
 #define    OCIE3A       4
 #define    OCIE3B       3
@@ -512,7 +519,7 @@
 #define    OCIE3C       1
 #define    OCIE1C       0
 
-/* Extended Timer Interrupt Flag Register */
+/* Extended Timer Interrupt Flag Register - ETIFR */
 #define    ICF3         5
 #define    OCF3A        4
 #define    OCF3B        3
@@ -520,9 +527,10 @@
 #define    OCF3C        1
 #define    OCF1C        0
 
-/* MCU general Control Register */
+/* MCU general Control Register - MCUCR */
 #define    SRE          7
 #define    SRW          6
+#define    SRW10        6       /* new name in datasheet (2467E-AVR-05/02) */
 #define    SE           5
 #define    SM1          4
 #define    SM0          3
@@ -530,7 +538,7 @@
 #define    IVSEL        1
 #define    IVCE         0
 
-/* MCU Status Register */
+/* MCU Status Register - MCUSR, MCUCSR */
 #define    JTD          7
 #define    JTRF         4
 #define    WDRF         3
@@ -538,7 +546,7 @@
 #define    EXTRF        1
 #define    PORF         0
 
-/* Timer/Counter Control Register */
+/* Timer/Counter Control Register (generic) */
 #define    FOC          7
 #define    WGM0         6
 #define    COM1         5
@@ -548,13 +556,33 @@
 #define    CS1          1
 #define    CS0          0
 
-/* Timer/Counter 0 Asynchronous Control & Status Register */
+/* Timer/Counter 0 Control Register - TCCR0 */
+#define    FOC0         7
+#define    WGM00        6
+#define    COM01        5
+#define    COM00        4
+#define    WGM01        3
+#define    CS12         2
+#define    CS11         1
+#define    CS10         0
+
+/* Timer/Counter 2 Control Register - TCCR2 */
+#define    FOC2         7
+#define    WGM20        6
+#define    COM21        5
+#define    COM20        4
+#define    WGM21        3
+#define    CS22         2
+#define    CS21         1
+#define    CS20         0
+
+/* Timer/Counter 0 Asynchronous Control & Status Register - ASSR */
 #define    AS0          3
 #define    TCN0UB       2
 #define    OCR0UB       1
 #define    TCR0UB       0
 
-/* Timer/Counter Control Register A */
+/* Timer/Counter Control Register A (generic) */
 #define    COMA1        7
 #define    COMA0        6
 #define    COMB1        5
@@ -564,7 +592,27 @@
 #define    WGMA1        1
 #define    WGMA0        0
 
-/* Timer/Counter Control and Status Register B */
+/* Timer/Counter 1 Control and Status Register A - TCCR1A */
+#define    COM1A1       7
+#define    COM1A0       6
+#define    COM1B1       5
+#define    COM1B0       4
+#define    COM1C1       3
+#define    COM1C0       2
+#define    WGM11        1
+#define    WGM10        0
+
+/* Timer/Counter 3 Control and Status Register A - TCCR3A */
+#define    COM3A1       7
+#define    COM3A0       6
+#define    COM3B1       5
+#define    COM3B0       4
+#define    COM3C1       3
+#define    COM3C0       2
+#define    WGM31        1
+#define    WGM30        0
+
+/* Timer/Counter Control and Status Register B (generic) */
 #define    ICNC         7
 #define    ICES         6
 #define    WGMB3        4
@@ -573,12 +621,41 @@
 #define    CSB1         1
 #define    CSB0         0
 
-/* Timer/Counter Control Register C */
+/* Timer/Counter 1 Control and Status Register B - TCCR1B */
+#define    ICNC1        7
+#define    ICES1        6
+#define    WGM13        4
+#define    WGM12        3
+#define    CS12         2
+#define    CS11         1
+#define    CS10         0
+
+/* Timer/Counter 3 Control and Status Register B - TCCR3B */
+#define    ICNC3        7
+#define    ICES3        6
+#define    WGM33        4
+#define    WGM32        3
+#define    CS32         2
+#define    CS31         1
+#define    CS30         0
+
+/* Timer/Counter Control Register C (generic) */
 #define    FOCA         7
 #define    FOCB         6
 #define    FOCC         5
 
-/* On-chip Debug Register */
+/* Timer/Counter 3 Control Register C - TCCR3C */
+#define    FOC3A        7
+#define    FOC3B        6
+#define    FOC3C        5
+
+/* Timer/Counter 1 Control Register C - TCCR1C */
+#define    FOC1A        7
+#define    FOC1B        6
+#define    FOC1C        5
+
+/* On-chip Debug Register - OCDR */
+#define    IDRD         7
 #define    OCDR7        7
 #define    OCDR6        6
 #define    OCDR5        5
@@ -588,14 +665,14 @@
 #define    OCDR1        1
 #define    OCDR0        0
 
-/* Watchdog Timer Control Register */
+/* Watchdog Timer Control Register - WDTCR */
 #define    WDCE         4
 #define    WDE          3
 #define    WDP2         2
 #define    WDP1         1
 #define    WDP0         0
 
-/* Special Function I/O Register */
+/* Special Function I/O Register - SFIOR */
 #define    TSM          7
 #define    ADHSM        4
 #define    ACME         3
@@ -603,13 +680,13 @@
 #define    PSR0         1
 #define    PSR321       0
 
-/* EEPROM Control Register */
+/* EEPROM Control Register - EECR */
 #define    EERIE        3
 #define    EEMWE        2
 #define    EEWE         1
 #define    EERE         0
 
-/* Port Data Register */
+/* Port Data Register (generic) */
 #define    PORT7        7
 #define    PORT6        6
 #define    PORT5        5
@@ -619,7 +696,7 @@
 #define    PORT1        1
 #define    PORT0        0
 
-/* Port Data Direction Register */
+/* Port Data Direction Register (generic) */
 #define    DD7          7
 #define    DD6          6
 #define    DD5          5
@@ -629,7 +706,7 @@
 #define    DD1          1
 #define    DD0          0
 
-/* Port Input Pins */
+/* Port Input Pins (generic) */
 #define    PIN7         7
 #define    PIN6         6
 #define    PIN5         5
@@ -639,7 +716,7 @@
 #define    PIN1         1
 #define    PIN0         0
 
-/* Status Register */
+/* Status Register - SREG */
 #define    SREG_I       7
 #define    SREG_T       6
 #define    SREG_H       5
@@ -649,12 +726,12 @@
 #define    SREG_Z       1
 #define    SREG_C       0
 
-/* SPI Status Register */
+/* SPI Status Register - SPSR */
 #define    SPIF         7
 #define    WCOL         6
 #define    SPI2X        0
 
-/* SPI Control Register */
+/* SPI Control Register - SPCR */
 #define    SPIE         7
 #define    SPE          6
 #define    DORD         5
@@ -664,7 +741,7 @@
 #define    SPR1         1
 #define    SPR0         0
 
-/* USART Register C */
+/* USART Register C (generic) */
 #define    UMSEL        6
 #define    UPM1         5
 #define    UPM0         4
@@ -673,7 +750,25 @@
 #define    UCSZ0        1
 #define    UCPOL        0
 
-/* USART Status Register A */
+/* USART1 Register C - UCSR1C */
+#define    UMSEL1       6
+#define    UPM11        5
+#define    UPM10        4
+#define    USBS1        3
+#define    UCSZ11       2
+#define    UCSZ10       1
+#define    UCPOL1       0
+
+/* USART0 Register C - UCSR0C */
+#define    UMSEL0       6
+#define    UPM01        5
+#define    UPM00        4
+#define    USBS0        3
+#define    UCSZ01       2
+#define    UCSZ00       1
+#define    UCPOL0       0
+
+/* USART Status Register A (generic) */
 #define    RXC          7
 #define    TXC          6
 #define    UDRE         5
@@ -683,17 +778,58 @@
 #define    U2X          1
 #define    MPCM         0
 
-/* USART Control Register B */
+/* USART1 Status Register A - UCSR1A */
+#define    RXC1         7
+#define    TXC1         6
+#define    UDRE1        5
+#define    FE1          4
+#define    DOR1         3
+#define    UPE1         2
+#define    U2X1         1
+#define    MPCM1        0
+
+/* USART0 Status Register A - UCSR0A */
+#define    RXC0         7
+#define    TXC0         6
+#define    UDRE0        5
+#define    FE0          4
+#define    DOR0         3
+#define    UPE0         2
+#define    U2X0         1
+#define    MPCM0        0
+
+/* USART Control Register B (generic) */
 #define    RXCIE        7
 #define    TXCIE        6
 #define    UDRIE        5
 #define    RXEN         4
 #define    TXEN         3
 #define    UCSZ         2
+#define    UCSZ2        2       /* new name in datasheet (2467E-AVR-05/02) */
 #define    RXB8         1
 #define    TXB8         0
 
-/* Analog Comparator Control and Status Register */
+/* USART1 Control Register B - UCSR1B */
+#define    RXCIE1       7
+#define    TXCIE1       6
+#define    UDRIE1       5
+#define    RXEN1        4
+#define    TXEN1        3
+#define    UCSZ12       2
+#define    RXB81        1
+#define    TXB81        0
+
+/* USART0 Control Register B - UCSR0B */
+#define    RXCIE0       7
+#define    TXCIE0       6
+#define    UDRIE0       5
+#define    RXEN0        4
+#define    TXEN0        3
+#define    UCSZ02       2
+#define    RXB80        1
+#define    TXB80        0
+
+/* Analog Comparator Control and Status Register - ACSR */
 #define    ACD          7
 #define    ACBG         6
 #define    ACO          5
@@ -703,7 +839,7 @@
 #define    ACIS1        1
 #define    ACIS0        0
 
-/* ADC Control and status register */
+/* ADC Control and status register - ADCSRA */
 #define    ADEN         7
 #define    ADSC         6
 #define    ADFR         5
@@ -713,7 +849,7 @@
 #define    ADPS1        1
 #define    ADPS0        0
 
-/* ADC Multiplexer select */
+/* ADC Multiplexer select - ADMUX */
 #define    REFS1        7
 #define    REFS0        6
 #define    ADLAR        5
@@ -722,6 +858,207 @@
 #define    MUX2         2
 #define    MUX1         1
 #define    MUX0         0
+
+/* Port A Data Register - PORTA */
+#define    PORTA7       7
+#define    PORTA6       6
+#define    PORTA5       5
+#define    PORTA4       4
+#define    PORTA3       3
+#define    PORTA2       2
+#define    PORTA1       1
+#define    PORTA0       0
+
+/* Port A Data Direction Register - DDRA */
+#define    DDA7         7
+#define    DDA6         6
+#define    DDA5         5
+#define    DDA4         4
+#define    DDA3         3
+#define    DDA2         2
+#define    DDA1         1
+#define    DDA0         0
+
+/* Port A Input Pins - PINA */
+#define    PINA7        7
+#define    PINA6        6
+#define    PINA5        5
+#define    PINA4        4
+#define    PINA3        3
+#define    PINA2        2 
+#define    PINA1        1
+#define    PINA0        0
+
+/* Port B Data Register - PORTB */
+#define    PORTB7       7
+#define    PORTB6       6
+#define    PORTB5       5
+#define    PORTB4       4
+#define    PORTB3       3
+#define    PORTB2       2
+#define    PORTB1       1
+#define    PORTB0       0
+
+/* Port B Data Direction Register - DDRB */
+#define    DDB7         7
+#define    DDB6         6
+#define    DDB5         5
+#define    DDB4         4
+#define    DDB3         3
+#define    DDB2         2
+#define    DDB1         1
+#define    DDB0         0
+
+/* Port B Input Pins - PINB */
+#define    PINB7        7
+#define    PINB6        6
+#define    PINB5        5
+#define    PINB4        4
+#define    PINB3        3
+#define    PINB2        2 
+#define    PINB1        1
+#define    PINB0        0
+
+/* Port C Data Register - PORTC */
+#define    PORTC7       7
+#define    PORTC6       6
+#define    PORTC5       5
+#define    PORTC4       4
+#define    PORTC3       3
+#define    PORTC2       2
+#define    PORTC1       1
+#define    PORTC0       0
+
+/* Port C Data Direction Register - DDRC */
+#define    DDC7         7
+#define    DDC6         6
+#define    DDC5         5
+#define    DDC4         4
+#define    DDC3         3
+#define    DDC2         2
+#define    DDC1         1
+#define    DDC0         0
+
+/* Port C Input Pins - PINC */
+#define    PINC7        7
+#define    PINC6        6
+#define    PINC5        5
+#define    PINC4        4
+#define    PINC3        3
+#define    PINC2        2 
+#define    PINC1        1
+#define    PINC0        0
+
+/* Port D Data Register - PORTD */
+#define    PORTD7       7
+#define    PORTD6       6
+#define    PORTD5       5
+#define    PORTD4       4
+#define    PORTD3       3
+#define    PORTD2       2
+#define    PORTD1       1
+#define    PORTD0       0
+
+/* Port D Data Direction Register - DDRD */
+#define    DDD7         7
+#define    DDD6         6
+#define    DDD5         5
+#define    DDD4         4
+#define    DDD3         3
+#define    DDD2         2
+#define    DDD1         1
+#define    DDD0         0
+
+/* Port D Input Pins - PIND */
+#define    PIND7        7
+#define    PIND6        6
+#define    PIND5        5
+#define    PIND4        4
+#define    PIND3        3
+#define    PIND2        2 
+#define    PIND1        1
+#define    PIND0        0
+
+/* Port E Data Register - PORTE */
+#define    PORTE7       7
+#define    PORTE6       6
+#define    PORTE5       5
+#define    PORTE4       4
+#define    PORTE3       3
+#define    PORTE2       2
+#define    PORTE1       1
+#define    PORTE0       0
+
+/* Port E Data Direction Register - DDRE */
+#define    DDE7         7
+#define    DDE6         6
+#define    DDE5         5
+#define    DDE4         4
+#define    DDE3         3
+#define    DDE2         2
+#define    DDE1         1
+#define    DDE0         0
+
+/* Port E Input Pins - PINE */
+#define    PINE7        7
+#define    PINE6        6
+#define    PINE5        5
+#define    PINE4        4
+#define    PINE3        3
+#define    PINE2        2 
+#define    PINE1        1
+#define    PINE0        0
+
+/* Port F Data Register - PORTF */
+#define    PORTF7       7
+#define    PORTF6       6
+#define    PORTF5       5
+#define    PORTF4       4
+#define    PORTF3       3
+#define    PORTF2       2
+#define    PORTF1       1
+#define    PORTF0       0
+
+/* Port F Data Direction Register - DDRF */
+#define    DDF7         7
+#define    DDF6         6
+#define    DDF5         5
+#define    DDF4         4
+#define    DDF3         3
+#define    DDF2         2
+#define    DDF1         1
+#define    DDF0         0
+
+/* Port F Input Pins - PINF */
+#define    PINF7        7
+#define    PINF6        6
+#define    PINF5        5
+#define    PINF4        4
+#define    PINF3        3
+#define    PINF2        2 
+#define    PINF1        1
+#define    PINF0        0
+
+/* Port G Data Register - PORTG */
+#define    PORTG4       4
+#define    PORTG3       3
+#define    PORTG2       2
+#define    PORTG1       1
+#define    PORTG0       0
+
+/* Port G Data Direction Register - DDRG */
+#define    DDG4         4
+#define    DDG3         3
+#define    DDG2         2
+#define    DDG1         1
+#define    DDG0         0
+
+/* Port G Input Pins - PING */
+#define    PING4        4
+#define    PING3        3
+#define    PING2        2 
+#define    PING1        1
+#define    PING0        0
 
 /* Pointer definition */
 #define    XL       r26
