@@ -1,6 +1,8 @@
 2004-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/stdlib.h: enable and document atof().
+	Delete realloc() from the #if 0 part, it's already
+	declared and documented anyway.
 
 2004-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

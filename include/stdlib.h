@@ -624,7 +624,6 @@ extern char *dtostrf(double __val, char __width, char __prec, char *__s);
 
 #if 0  /* not yet implemented */
 extern int atexit(void (*)(void));
-extern void *realloc(void *, size_t);
 #endif
 
 #ifdef __cplusplus
