@@ -57,7 +57,7 @@ AC_ARG_ENABLE(doc,
   yes) enable_doc=yes ;;
   no)  enable_doc=no ;;
   *)   AC_MSG_ERROR(bad value ${enableval} for global doc option) ;;
- esac], [enable_doc=no])dnl
+ esac], [enable_doc=yes])dnl
 
 dnl Various documentation options.  By default, we enable all of them,
 dnl i. e. HTML, Postscript, PDF, and Unix-style man pages.
@@ -102,7 +102,7 @@ AC_ARG_ENABLE(versioned-doc,
   yes) versioned_doc=yes ;;
   no)  versioned_doc=no ;;
   *)   AC_MSG_ERROR(bad value ${enableval} for versioned-doc option) ;;
- esac], [versioned_doc=yes])dnl
+ esac], [versioned_doc=no])dnl
 
 if test "${target}" = "NONE"; then
    target=avr
@@ -345,12 +345,19 @@ if test -z "${with_multisubdir}"; then
   dnl default build directory -> avr1 and avr2
   avrlib_cflags="-mmcu=avr2 ${avrlib_opt_space}"
   avrlib_asflags='-mmcu=avr2'
+  CHECK_AVR_DEVICE(attiny13)
+  CHECK_AVR_DEVICE(attiny2313)
   AVR_CRT_AT90='crts1200.o crts2313.o crts2323.o crts2333.o crts2343.o \\\
                 crts4414.o crts4433.o crts4434.o crts8515.o crts8535.o \\\
                 crtc8534.o'
   AVR_CRT_TINY='crttn11.o crttn12.o crttn15.o crttn28.o crttn22.o crttn26.o'
   AVR_CRT_OTHER='crt86401.o'
-
+  if test "x$HAS_attiny13" = "xyes"; then
+    AVR_CRT_TINY="$AVR_CRT_TINY crttn13.o"
+  fi
+  if test "x$HAS_attiny2313" = "xyes"; then
+    AVR_CRT_TINY="$AVR_CRT_TINY crttn2313.o"
+  fi
   dnl We only want to build the docs for the default target case and only
   dnl if the user has passed "--enable-doc" to configure.
   if test "$enable_doc" = "yes"; then
@@ -364,8 +371,6 @@ else
         AVR_CRT_OTHER='crt43320.o crt43355.o crt76711.o'
   ;;
   avr4)
-        CHECK_AVR_DEVICE(attiny13)
-        CHECK_AVR_DEVICE(attiny2313)
         CHECK_AVR_DEVICE(atmega48)
         CHECK_AVR_DEVICE(atmega88)
         avrlib_cflags=${avrlib_opt_space}
@@ -376,12 +381,6 @@ else
         fi
         if test "x$HAS_atmega88" = "xyes"; then
           AVR_CRT_MEGA="$AVR_CRT_MEGA crtm88.o"
-        fi
-        if test "x$HAS_attiny13" = "xyes"; then
-          AVR_CRT_TINY="$AVR_CRT_TINY crttn13.o"
-        fi
-        if test "x$HAS_attiny2313" = "xyes"; then
-          AVR_CRT_TINY="$AVR_CRT_TINY crttn2313.o"
         fi
   ;;
   avr5)

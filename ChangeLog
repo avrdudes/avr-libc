@@ -1,4 +1,10 @@
 2004-12-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+[Contributed by Frederik Rouleau <frouleau .at. naotek .dot. com>]
+
+	* configure.in: move ATtiny2313 and ATtiny13 from avr5 to
+	avr2 (by now, until a more appropriate solution can be found).
+
+2004-12-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/delay.h: Document the requirement of F_CPU.
 
