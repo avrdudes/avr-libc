@@ -61,7 +61,7 @@ GLOBAL(dtostre)
 	mov	rSI1, rA2	; and ..
 	add	rSI1, rSI1
 	adc	rSI0, rSI0
-	brne	_not_zero
+	brne	2f		; not zero
 
 	ldi	rA3, '0'
 	ldi	rA2, '.'
@@ -71,37 +71,37 @@ GLOBAL(dtostre)
 	ldi	rA0, '+'
 	st	Y+,rA3
 	st	Y+,rA2
-L0010:	st	Y+, rA3
+1:	st	Y+, rA3
 	dec	rP6
-	brpl	L0010
+	brpl	1b
 	st	Y+, rA1		/* 'E' */
 	st	Y+, rA0		/* '+' */
 	st	Y+, rA3		/* '0' */
 	st	Y+, rA3		/* '0' */
-	rjmp	_dtostr_exit
+	rjmp	99f		; exit
 
-_not_zero:
+2:
 	cpi	rSI0, 0xff
-	brne	_not_NaN	; check for zero and NaN
+	brne	3f		; check for zero and NaN
 
 	ldi	rA3, 'N'
 	ldi	rA2, 'A'
 	st	Y+, rA3		/* 'N' */
 	st	Y+, rA2		/* 'A' */
 	st	Y+, rA3		/* 'N' */
-	rjmp	_dtostr_exit
+	rjmp	99f		; exit
 
-_not_NaN:
+3:				; not NaN
 	tst	rA3
-	brpl	L001
+	brpl	4f
 	ldi	rSI1, '-'
 	andi	rA3, 0x7F	; now f is positive
-	rjmp	L002
-L001:	ldi	rSI1, ' '
+	rjmp	5f
+4:	ldi	rSI1, ' '
 	sbrc	rP7, 1
 	ldi	rSI1, '+'	; rSI1 = (flags&bitSign?'+':' ')
 	sbrc	rP7, 0
-L002:
+5:
 	st	Y+, rSI1
 
 	mov	rSI0, rP6	; store ndig
@@ -135,7 +135,7 @@ L002:
 
 ; if ( iexp  != 0 )
 	tst	rA0
-	breq	prepare_loop
+	breq	1f
 
 ; dblno *= pow(10.0, -(double) iexp)
 	rcall	_U(__floatsisf)	; to float
@@ -158,22 +158,23 @@ L002:
 	mov	rS1, rA1
 	mov	rS2, rA2
 	mov	rS3, rA3
-prepare_loop:
+1:				; for (rSI1 = 0; rSI1 <= rSI0; rSI1++)
 ;	dec	rSI0
 	eor	rSI1, rSI1
-	rjmp	cmp_count
-head_of_loop:
+	rjmp	8f
+2:
 	cpi	rSI1, ACCURACY
-	breq	check_rounding
-	brcc	padd_zero
-check_rounding:
+	breq	3f		; least significant digit => round
+	brcc	5f		; more digits than accuracy => pad 0s
+
+3:				; check rounding
 	mov	rA0, rS0	; dblno
 	mov	rA1, rS1
 	mov	rA2, rS2
 	mov	rA3, rS3
-	breq	get_digit
+	breq	4f
 	cp	rSI1, rSI0	; compare count - ndig
-	brne	get_digit
+	brne	4f
 
 ; dblno += 0.5;
 	ldi	rB0, 0x00	; argument_2 = 0.5
@@ -183,7 +184,7 @@ check_rounding:
 	rcall	_U(__addsf3)
 
 ; dblno = modf(dblno, (double *) dest) * 10.0;
-get_digit:
+4:				; next digit
 	mov	rB2, YL
 	mov	rB3, YH
 	rcall	_U(modf)
@@ -209,18 +210,16 @@ get_digit:
 
 ; if (i == 0)
 	tst	rSI1
-	brne	inc_count
+	brne	7f
 	ldi	rA2, '.'
-	rjmp	store_char
-padd_zero:
+	rjmp	6f
+5:				; pad with zeros
 	ldi	rA2, '0'
-store_char:
-	st	Y+, rA2
-inc_count:
-	inc	rSI1
-cmp_count:
+6:	st	Y+, rA2
+7:	inc	rSI1		; rSI1++
+8:				; loop test rSI1 <= rSI0
 	cp	rSI0, rSI1	; compare count - ndig
-	brcc	head_of_loop
+	brcc	2b
 
 	pop	rA3		; restore exponent
 	pop	rA2		; and flags
@@ -230,23 +229,23 @@ cmp_count:
 	ST	Y+, rA1		; put exponent
 	ldi	rA1, '+'	;
 	tst	rA3
-	brpl	exp_positive
+	brpl	1f
 	neg	rA3
 	ldi	rA1, '-'
-exp_positive:
+1:
 	st	Y+, rA1
 
 	; dividend in r24, divisor in r22
 	mov	r24, rA3	; rA3 is r25 (arg1 in the old call convention)
-	ldi	r22, 10		; divisor (10 not 0x10 -MM 2000-11-25)
-	XCALL	_U(__udivmodqi4) ; libgcc.S (CVS after 2001-01-20)
+	ldi	r22, 10		; divisor
+	XCALL	_U(__udivmodqi4)
 	; quotient in r24, remainder in r25
 
 	subi	rByte, -'0'
 	st	Y+, rByte
 	subi	r25, -'0'
 	st	Y+, r25
-_dtostr_exit:
+99:
 	st	Y,__zero_reg__
 
 	pop	rByte		; char *dest
