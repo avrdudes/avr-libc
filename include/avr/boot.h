@@ -26,6 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+#ifndef _AVR_BOOT_H_
+#define _AVR_BOOT_H_    1
+
 /** \defgroup avr_boot Bootloader Support Utilities
     \code
     #include <avr/io.h>
@@ -36,20 +39,62 @@
     bootloader support functionality of certain AVR processors. These
     macros are designed to work with all sizes of flash memory.
 
-    \note Not all AVR processors provide bootloader support. See your processor 
-    datasheet to see if it provides bootloader support.*/
+    \note Not all AVR processors provide bootloader support. See your
+    processor datasheet to see if it provides bootloader support.
 
-/*
-TODO:
-From email with Marek:
-On smaller devices (all except ATmega64/128), __SPM_REG is in the I/O
-space, accessible with the shorter "in" and "out" instructions -
-since the boot loader has a limited size, this could be an
-important optimization.
-*/
+    \todo From email with Marek: On smaller devices (all except ATmega64/128),
+    __SPM_REG is in the I/O space, accessible with the shorter "in" and "out"
+    instructions - since the boot loader has a limited size, this could be an
+    important optimization.
 
-#ifndef _AVR_BOOT_H_
-#define _AVR_BOOT_H_    1
+    \par API Usage Example
+    The following code shows typical usage of the boot API.
+
+    \code
+    #include <avr/interrupt.h>
+    #include <avr/pgmspace.h>
+    
+    #define ADDRESS     0x1C000UL
+    
+    void boot_test(void)
+    {
+        unsigned char buffer[8];
+    
+        cli();
+    
+        // Erase page.
+        boot_page_erase((unsigned long)ADDRESS);
+        while(boot_rww_busy())
+        {
+            boot_rww_enable();
+        }
+    
+        // Write data to buffer a word at a time. Note incrementing address
+        // by 2. SPM_PAGESIZE is defined in the microprocessor IO header file.
+        for(unsigned long i = ADDRESS; i < ADDRESS + SPM_PAGESIZE; i += 2)
+        {
+            boot_page_fill(i, (i-ADDRESS) + ((i-ADDRESS+1) << 8));
+        }
+    
+        // Write page.
+        boot_page_write((unsigned long)ADDRESS);
+        while(boot_rww_busy())
+        {
+            boot_rww_enable();
+        }
+    
+        sei();
+    
+        // Read back the values and display.
+        // (The show() function is undefined and is used here as an example
+        // only.)
+        for(unsigned long i = ADDRESS; i < ADDRESS + 256; i++)
+        {
+            show(utoa(pgm_read_byte(i), buffer, 16));
+        }
+    
+        return;
+    }\endcode */
 
 #include <avr/eeprom.h>
 #include <avr/io.h>
@@ -441,55 +486,5 @@ important optimization.
 #define boot_lock_bits_set(lock_bits) __boot_lock_bits_set(lock_bits)
 
 #endif
-
-/** \ingroup avr_boot
-
-    API Usage Example:
-
-\code
-#include <avr/interrupt.h>
-#include <avr/pgmspace.h>
-
-#define ADDRESS     0x1C000UL
-
-void boot_test(void)
-{
-    unsigned char buffer[8];
-
-    cli();
-
-    // Erase page.
-    boot_page_erase((unsigned long)ADDRESS);
-    while(boot_rww_busy())
-    {
-        boot_rww_enable();
-    }
-
-    // Write data to buffer a word at a time. Note incrementing address by 2.
-    // SPM_PAGESIZE is defined in the microprocessor IO header file.
-    for(unsigned long i = ADDRESS; i < ADDRESS + SPM_PAGESIZE; i += 2)
-    {
-        boot_page_fill(i, (i-ADDRESS) + ((i-ADDRESS+1) << 8));
-    }
-
-    // Write page.
-    boot_page_write((unsigned long)ADDRESS);
-    while(boot_rww_busy())
-    {
-        boot_rww_enable();
-    }
-
-    sei();
-
-    // Read back the values and display.
-    // (The show() function is undefined and is used here as an example only.)
-    for(unsigned long i = ADDRESS; i < ADDRESS + 256; i++)
-    {
-        show(utoa(pgm_read_byte(i), buffer, 16));
-    }
-
-    return;
-}
-\endcode */
 
 #endif /* _AVR_BOOT_H_ */
