@@ -9,7 +9,8 @@
   + <inttypes.h> is now prepared for the changed -mint8 behaviour of the
     next GCC release where [u]int32_t will be possible even with -mint8.
 
-  + doc/examples/demo/demo.c can now handle the ATmega8 MCU type.
+  + doc/examples/demo/demo.c can now handle the ATmega8 and ATmega32
+    MCU types.
 
 *** Changes in avr-libc-1.0.4:
 

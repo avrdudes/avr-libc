@@ -1,3 +1,7 @@
+2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo.c: Update for ATmega32
+
 2004-07-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/pow.S: localize labels, fix pow(N, 0).
