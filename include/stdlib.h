@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
+   Copyright (c) 2004, Joerg Wunsch
 
    Portions of documentation Copyright (c) 1990, 1991, 1993, 1994
    The Regents of the University of California.
@@ -324,6 +325,25 @@ extern char *__malloc_heap_end;
    allocated memory will be cleared to zero.
 */
 extern void *calloc(size_t __nele, size_t __size) __ATTR_MALLOC__;
+
+/**
+   The realloc() function tries to change the size of the region
+   allocated at \c ptr to the new \c size value.  It returns a
+   pointer to the new region.  The returned pointer might be the
+   same as the old pointer, or a pointer to a completely different
+   region.
+
+   The contents of the returned region up to either the old or the new
+   size value (whatever is less) will be identical to the contents of
+   the old region, even in case a new region had to be allocated.
+
+   It is acceptable to pass \c ptr as NULL, in which case realloc()
+   will behave identical to malloc().
+
+   If the new memory cannot be allocated, realloc() returns NULL, and
+   the region at \c ptr will not be changed.
+*/
+extern void *realloc(void *__ptr, size_t __size) __ATTR_MALLOC__;
 
 /**
      The strtod() function converts the initial portion of the string pointed

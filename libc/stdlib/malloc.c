@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Joerg Wunsch
+ * Copyright (c) 2002, 2004 Joerg Wunsch
  *
  * All rights reserved.
  *
@@ -28,53 +28,12 @@
 
 #include <stdlib.h>
 
-#include <avr/io.h>
-
-#ifndef __AVR__
-
-/*
- * When compiling this file natively on a host machine, it will
- * include a main() that performs a regression test.  This is meant as
- * a debugging aid, where a normal source-level debugger will help to
- * verify that the various allocator structures have the desired
- * appearance at each stage.
- *
- * When cross-compiling with avr-gcc, it will compile into just the
- * library functions malloc() and free().
- */
-#define MALLOC_TEST
-
-#endif /* !__AVR__ */
-
-#if !defined(DOXYGEN)
-
-struct freelist {
-	size_t sz;
-	struct freelist *nx;
-};
-
-#endif /* not DOXYGEN */
-
-static char *brkval;
-static struct freelist *flp;
+#include "stdlib_private.h"
 
 #ifdef MALLOC_TEST
-
-#define malloc mymalloc
-#define free myfree
-#define __heap_start mymem
-#define __heap_end ((char *)0)
-
 char mymem[256];
-#define STACK_POINTER() (mymem + 256)
-
-#else /* !MALLOC_TEST */
-
-extern char __heap_start;
-extern char __heap_end;
-
-#define STACK_POINTER() ((char *)SP)
-
+#else
+#include <avr/io.h>
 #endif /* MALLOC_TEST */
 
 /*
@@ -94,10 +53,13 @@ size_t __malloc_margin = 32;
 char *__malloc_heap_start = &__heap_start;
 char *__malloc_heap_end = &__heap_end;
 
+char *__brkval;
+struct __freelist *__flp;
+
 void *
 malloc(size_t len)
 {
-	struct freelist *fp1, *fp2;
+	struct __freelist *fp1, *fp2;
 	char *cp;
 	size_t s, avail;
 
@@ -107,8 +69,8 @@ malloc(size_t len)
 	 * this), otherwise we could not possibly fit a freelist entry
 	 * into the chunk later.
 	 */
-	if (len < sizeof(struct freelist) - sizeof(size_t))
-		len = sizeof(struct freelist) - sizeof(size_t);
+	if (len < sizeof(struct __freelist) - sizeof(size_t))
+		len = sizeof(struct __freelist) - sizeof(size_t);
 
 	/*
 	 * First, walk the free list and try finding a chunk that
@@ -117,7 +79,7 @@ malloc(size_t len)
 	 * that would still fit the request -- we need it for step 2.
 	 *
 	 */
-	for (s = 0, fp1 = flp, fp2 = 0;
+	for (s = 0, fp1 = __flp, fp2 = 0;
 	     fp1;
 	     fp2 = fp1, fp1 = fp1->nx) {
 		if (fp1->sz == len) {
@@ -128,7 +90,7 @@ malloc(size_t len)
 			if (fp2)
 				fp2->nx = fp1->nx;
 			else
-				flp = fp1->nx;
+				__flp = fp1->nx;
 			return &(fp1->nx);
 		}
 		if (fp1->sz > len) {
@@ -147,9 +109,9 @@ malloc(size_t len)
 	 * and use the entire chunk.
 	 */
 	if (s) {
-		if (s - len < sizeof(struct freelist))
+		if (s - len < sizeof(struct __freelist))
 			len = s;
-		for (fp1 = flp, fp2 = 0;
+		for (fp1 = __flp, fp2 = 0;
 		     fp1;
 		     fp2 = fp1, fp1 = fp1->nx) {
 			if (fp1->sz == s) {
@@ -161,7 +123,7 @@ malloc(size_t len)
 					if (fp2)
 						fp2->nx = fp1->nx;
 					else
-						flp = fp1->nx;
+						__flp = fp1->nx;
 					return &(fp1->nx);
 				}
 				/*
@@ -179,7 +141,7 @@ malloc(size_t len)
 				cp = (char *)fp1;
 				s -= len;
 				cp += s;
-				fp2 = (struct freelist *)cp;
+				fp2 = (struct __freelist *)cp;
 				fp2->sz = len;
 				fp1->sz = s - sizeof(size_t);
 				return &(fp2->nx);
@@ -196,18 +158,18 @@ malloc(size_t len)
 	 * Since we don't have an operating system, just make sure
 	 * that we don't collide with the stack.
 	 */
-	if (brkval == 0)
-		brkval = __malloc_heap_start;
+	if (__brkval == 0)
+		__brkval = __malloc_heap_start;
 	cp = __malloc_heap_end;
 	if (cp == 0)
 		cp = STACK_POINTER() - __malloc_margin;
-	avail = cp - brkval;
+	avail = cp - __brkval;
 	/*
 	 * Both tests below are needed to catch the case len >= 0xfffe.
 	 */
 	if (avail >= len && avail >= len + sizeof(size_t)) {
-		fp1 = (struct freelist *)brkval;
-		brkval += len + sizeof(size_t);
+		fp1 = (struct freelist *)__brkval;
+		__brkval += len + sizeof(size_t);
 		fp1->sz = len;
 		return &(fp1->nx);
 	}
@@ -220,7 +182,7 @@ malloc(size_t len)
 void
 free(void *p)
 {
-	struct freelist *fp1, *fp2, *fpnew;
+	struct __freelist *fp1, *fp2, *fpnew;
 	char *cp1, *cp2, *cpnew;
 
 	/* ISO C says free(NULL) must be a no-op */
@@ -229,15 +191,15 @@ free(void *p)
 
 	cpnew = p;
 	cpnew -= sizeof(size_t);
-	fpnew = (struct freelist *)cpnew;
+	fpnew = (struct __freelist *)cpnew;
 	fpnew->nx = 0;
 
 	/*
 	 * Trivial case first: if there's no freelist yet, our entry
 	 * will be the only one on it.
 	 */
-	if (flp == 0) {
-		flp = fpnew;
+	if (__flp == 0) {
+		__flp = fpnew;
 		return;
 	}
 
@@ -246,7 +208,7 @@ free(void *p)
 	 * freelist.  Try to aggregate the chunk with adjacent chunks
 	 * if possible.
 	 */
-	for (fp1 = flp, fp2 = 0;
+	for (fp1 = __flp, fp2 = 0;
 	     fp1;
 	     fp2 = fp1, fp1 = fp1->nx) {
 		if (fp1 < fpnew)
@@ -260,7 +222,7 @@ free(void *p)
 		}
 		if (fp2 == 0) {
 			/* new head of freelist */
-			flp = fpnew;
+			__flp = fpnew;
 			return;
 		}
 		break;
@@ -283,6 +245,7 @@ free(void *p)
 #ifdef MALLOC_TEST
 
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -304,15 +267,15 @@ alloc(size_t s)
 void
 printfreelist(void)
 {
-	struct freelist *fp1;
+	struct __freelist *fp1;
 	int i;
 
-	if (!flp) {
+	if (!__flp) {
 		printf("no free list\n");
 		return;
 	}
 
-	for (i = 0, fp1 = flp; fp1; i++, fp1 = fp1->nx) {
+	for (i = 0, fp1 = __flp; fp1; i++, fp1 = fp1->nx) {
 		printf("entry %d @ %u: size %u, next ",
 		       i, (char *)fp1 - mymem, fp1->sz);
 		if (fp1->nx)
@@ -331,10 +294,11 @@ compare(const void *p1, const void *p2)
 void
 printalloc(void)
 {
-	int i, j, k;
+	int j, k;
+	size_t i;
 	size_t sum, sum2;
 	void *sortedhandles[32];
-	struct freelist *fp;
+	struct __freelist *fp;
 	char *cp;
 
 	for (i = j = k = sum = sum2 = 0;
@@ -350,13 +314,13 @@ printalloc(void)
 		}
 	printf("brkval: %d, %d request%s => sum %u bytes "
 	       "(actually %d reqs => %u bytes)\n",
-	       (char *)brkval - mymem, j, j == 1? "": "s", sum, k, sum2);
+	       (char *)__brkval - mymem, j, j == 1? "": "s", sum, k, sum2);
 	memcpy(sortedhandles, handles, sizeof sortedhandles);
 	qsort(sortedhandles, 32, sizeof(void *), compare);
 	for (i = j = 0; i < sizeof sortedhandles / sizeof (void *); i++)
 		if ((cp = sortedhandles[i])) {
 			cp -= sizeof(size_t);
-			fp = (struct freelist *)cp;
+			fp = (struct __freelist *)cp;
 			printf("block %d @ %u: %u bytes\n",
 			       j, (char *)&fp->nx - mymem, fp->sz);
 			j++;
@@ -389,7 +353,7 @@ main(void)
 			for (i = s = 0; i < j; i++)
 				if (handles[i])
 					s++;
-			if (s == j)
+			if (s == (unsigned)j)
 				break;
 
 			if (m / om > 10) {

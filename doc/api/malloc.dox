@@ -209,4 +209,30 @@ entries, yielding a single larger entry available for further
 allocations.  That way, the potential for heap fragmentation is hopefully
 reduced.
 
+A call to realloc() first determines whether the operation is about to
+grow or shrink the current allocation.  When shrinking, the case is
+easy: the existing chunk is split, and the tail of the region that is
+no longer to be used is passed to the standard free() function for
+insertion into the freelist.  Checks are first made whether the tail
+chunk is large enough to hold a chunk of its own at all, otherwise
+realloc() will simply do nothing, and return the original region.
+
+When growing the region, it is first checked whether the existing
+allocation can be extended in-place.  If so, this is done, and the
+original pointer is returned without copying any data contents.  As a
+side-effect, this check will also record the size of the largest chunk
+on the freelist.
+
+If the region cannot be extended in-place, but the old chunk is at the
+top of heap, and the above freelist walk did not reveal a large enough
+chunk on the freelist to satisfy the new request, an attempt is made
+to quickly extend this topmost chunk (and thus the heap), so no need
+arises to copy over the existing data.  If there's no more space
+available in the heap (same check is done as in malloc()), the entire
+request will fail.
+
+Otherwise, malloc() will be called with the new request size, the
+existing data will be copied over, and free() will be called on the
+old region.
+
 */

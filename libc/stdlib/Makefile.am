@@ -40,6 +40,7 @@ lib_a_c_sources = \
 	qsort.c		\
 	rand.c		\
 	random.c	\
+	realloc.c	\
 	strtol.c	\
 	strtoul.c
 
