@@ -1,3 +1,29 @@
+2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
+
+	* crt1/gcrt1.S: Correct license with permission from Marek 
+	Michalkiewicz.
+	* common/macros.inc: Ditto.
+	* include/errno.h: Ditto.
+	* include/setjmp.h: Ditto.
+	* include/stdint.h: Ditto.
+	* include/string.h: Ditto.
+	* include/avr/crc16.h: Ditto.
+	* include/avr/delay.h: Ditto.
+	* include/avr/eeprom.h: Ditto.
+	* include/avr/interrupt.h: Ditto.
+	* include/avr/io1200.h: Ditto.
+	* include/avr/io2313.h: Ditto.
+	* include/avr/io2323.h: Ditto.
+	* include/avr/io2333.h: Ditto.
+	* include/avr/io2343.h: Ditto.
+	* include/avr/io4414.h: Ditto.
+	* include/avr/io4433.h: Ditto.
+	* include/avr/io4434.h: Ditto.
+	* include/avr/io76c711.h: Ditto.
+	* include/avr/sfr_defs.h: Ditto.
+	* include/avr/signal.h: Ditto.
+	* include/avr/twi.h: Ditto.
+
 2004-11-01  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
