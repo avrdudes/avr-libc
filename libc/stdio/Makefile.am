@@ -36,16 +36,26 @@ lib_a_c_sources =	\
 	fprintf.c	\
 	fprintf_p.c	\
 	fputc.c		\
+	fputs.c		\
+	fputs_p.c	\
 	printf.c	\
 	printf_p.c	\
+	putchar.c	\
+	puts.c		\
+	puts_p.c	\
 	snprintf.c	\
 	snprintf_p.c	\
 	sprintf.c	\
 	sprintf_p.c
 
-lib_a_SOURCES = $(lib_a_c_sources)
+lib_a_asm_sources =	\
+	putc.S
+
+lib_a_SOURCES = $(lib_a_c_sources) $(lib_a_asm_sources)
 
 lib_a_c_objs = $(lib_a_c_sources:%.c=%.o)
+
+lib_a_asm_objs = $(lib_a_c_sources:%.S=%.o)
 
 lib_a_LIBADD = vfprintf_std.o
 
@@ -66,6 +76,9 @@ EXTRA_DIST = vfprintf.c stdio_private.h
 
 $(lib_a_c_objs): %.o: %.c
 	$(COMPILE) $(AVRLIB_CFLAGS) -c $< -o $@
+
+$(lib_a_asm_objs): %.o: %.S
+	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
 
 # vfprintf is compiled best with -O1 -mno-tablejump, this gives the
 # smallest code.

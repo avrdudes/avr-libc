@@ -1,5 +1,16 @@
 2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/stdio/fputs.c: New file.
+	* libc/stdio/fputs_p.c: Ditto.
+	* libc/stdio/putc.S: Ditto.
+	* libc/stdio/putchar.c: Ditto.
+	* libc/stdio/puts.c: Ditto.
+	* libc/stdio/puts_p.c: Ditto.
+	* include/stdio.h: document fputs*(), putc*(), puts*().
+	* libc/stdio/Makefile.am: include new files.
+
+2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libm/fplib/atan.S: completely rewritten, much better accuracy.
 	* libm/fplib/atan2.S: completely rewritten;
 		both contributed by Reiner Patommel.

@@ -395,6 +395,12 @@ extern int	vfprintf(FILE *__stream, const char *__fmt, va_list __ap);
 */
 extern int	fputc(int __c, FILE *__stream);
 
+/* putc() function implementation, required by standard */
+extern int	putc(int __c, FILE *__stream);
+
+/* putchar() function implementation, required by standard */
+extern int	putchar(int __c);
+
 /**
    The macro \c putc used to be a "fast" macro implementation with a
    functionality identical to \c fputc().  For space constraints, in
@@ -459,6 +465,28 @@ extern int	fprintf(FILE *__stream, const char *__fmt, ...);
 */
 extern int	fprintf_P(FILE *__stream, const char *__fmt, ...);
 
+/**
+   Write the string pointed to by \c str to stream \c stream.
+
+   Returns 0 on success and EOF on error.
+*/
+extern int	fputs(const char *__str, FILE *__stream);
+
+/**
+   Variant of fputs() where \c str resides in program memory.
+*/
+extern int	fputs_P(const char *__str, FILE *__stream);
+
+/**
+   Write the string pointed to by \c str, and a trailing newline
+   character, to \c stdout.
+*/
+extern int	puts(const char *__str);
+
+/**
+   Variant of puts() where \c str resides in program memory.
+*/
+extern int	puts_P(const char *__str);
 
 #ifdef __cplusplus
 }
