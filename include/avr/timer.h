@@ -30,6 +30,12 @@
 
 #include <avr/io.h>
 
+#warning "<avr/timer.h> is deprecated, and will be removed in the next major release of avr-libc"
+
+#if defined(__AVR_ATmega128__) || defined(__AVR_ATmega64__)
+# warning "This file is known to be incorrect for your MCU type"
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -50,6 +56,9 @@ static __inline__ void timer0_source (unsigned int src)
     TCCR0 = src;
 }
 
+/*
+ * NB: this is completely bogus.
+ */
 static __inline__ void timer0_stop (void)
 {
     TCNT0 = 0;

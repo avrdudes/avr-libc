@@ -1,5 +1,10 @@
 2004-02-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/timer.h: Warn about deprecation, warn for ATmega{64,128}
+	* include/timer.h: Warn about deprecation of <avr/timer.h>
+
+2004-02-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Merge from HEAD:
 	* libc/stdlib/malloc.c: Fix bug #2143 (malloc wrap around top of RAM)
 
