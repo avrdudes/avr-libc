@@ -1,5 +1,9 @@
 2003-09-21  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20030921.
+
+2003-09-21  Theodore A. Roth  <troth@openavr.org>
+
 	Released avr-libc-1.0.
 
 2003-09-21  Theodore A. Roth  <troth@openavr.org>
