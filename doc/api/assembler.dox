@@ -217,7 +217,7 @@ declared \c .global in order to be acceptable for this purpose.
 As explained in the section about
 \ref avr_sfr_notes "special function registers",
 the actual IO port address should be obtained using the macro
-\c_SFR_IO_ADDR.  (The AT90S1200 does not have RAM thus the memory-mapped
+\c _SFR_IO_ADDR.  (The AT90S1200 does not have RAM thus the memory-mapped
 approach to access the IO registers is not available.  It would be
 slower than using \c in / \c out instructions anyway.)
 <br>
