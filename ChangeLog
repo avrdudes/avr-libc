@@ -1,5 +1,20 @@
 2002-12-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/stdio.h: include declarations for basic
+		input functions.
+	* libc/stdio/Makefile.am: include the new files below.
+	* libc/stdio/stdio_private.h: activate the __SERR flag.
+	* libc/stdio/clearerr.c: New file.
+	* libc/stdio/feof.c: New file.
+	* libc/stdio/ferror.c: New file.
+	* libc/stdio/fgetc.c: New file.
+	* libc/stdio/fgets.c: New file.
+	* libc/stdio/getc.S: New file.
+	* libc/stdio/getchar.c: New file.
+	* libc/stdio/gets.c: New file.
+
+2002-12-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdio/fdevopen.c: don't clobber flags when
 		opening a stream for reading and writing.
 	* libc/stdio/fputc.c: check __SWR before writing.

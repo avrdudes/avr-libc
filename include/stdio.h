@@ -389,7 +389,7 @@ extern int	fclose(FILE *__stream);
 extern int	vfprintf(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
-   The function \c fputc sends the character \c (though given as type
+   The function \c fputc sends the character \c c (though given as type
    \c int) to \c stream.  It returns the character, or \c EOF in case
    an error occurred.
 */
@@ -403,7 +403,7 @@ extern int	putchar(int __c);
 
 /**
    The macro \c putc used to be a "fast" macro implementation with a
-   functionality identical to \c fputc().  For space constraints, in
+   functionality identical to fputc().  For space constraints, in
    \c avr-libc, it is just an alias for \c fputc.
 */
 #define putc(__c, __stream) fputc(__c, __stream)
@@ -487,6 +487,73 @@ extern int	puts(const char *__str);
    Variant of puts() where \c str resides in program memory.
 */
 extern int	puts_P(const char *__str);
+
+/**
+   The function \c fgetc reads a character from \c stream.  It returns
+   the character, or \c EOF in case end-of-file was encountered or an
+   error occurred.  The routines feof() or ferror() must be used to
+   distinguish between both situations.
+*/
+extern int	fgetc(FILE *__stream);
+
+/* getc() function implementation, required by standard */
+extern int	getc(FILE *__stream);
+
+/* getchar() function implementation, required by standard */
+extern int	getchar(void);
+
+/**
+   The macro \c getc used to be a "fast" macro implementation with a
+   functionality identical to fgetc().  For space constraints, in
+   \c avr-libc, it is just an alias for \c fgetc.
+*/
+#define getc(__stream) fgetc(__stream)
+
+/**
+   The macro \c getchar reads a character from \c stdin.  Return
+   values and error handling is identical to fgetc().
+*/
+#define getchar() fgetc(stdin)
+
+/**
+   Read at most <tt>size - 1</tt> bytes from \c stream, until a
+   newline character was encountered, and store the characters in the
+   buffer pointed to by \c str.  Unless an error was encountered while
+   reading, the string will then be terminated with a \c NUL
+   character.
+
+   If an error was encountered, the function returns NULL and sets the
+   error flag of \c stream, which can be tested using ferror().
+   Otherwise, a pointer to the string will be returned.  */
+extern char	*fgets(char *__str, int __size, FILE *__stream);
+
+/**
+   Similar to fgets() except that it will operate on stream \c stdin,
+   and the trailing newline (if any) will not be stored in the string.
+   It is the caller's responsibility to provide enough storage to hold
+   the characters read.  */
+extern char	*gets(char *__str);
+
+/**
+   Clear the error and end-of-file flags of \c stream.
+ */
+extern void	clearerr(FILE *__stream);
+
+/**
+   Test the end-of-file flag of \c stream.  This flag can only be cleared
+   by a call to clearerr().
+
+   \note
+   Since there is currently no notion for end-of-file on a device, this
+   function will always return a false value.
+ */
+extern int	feof(FILE *__stream);
+
+/**
+   Test the error flag of \c stream.  This flag can only be cleared
+   by a call to clearerr().
+ */
+extern int	ferror(FILE *__stream);
 
 #ifdef __cplusplus
 }
