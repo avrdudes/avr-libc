@@ -34,7 +34,7 @@ FIXME: need to discuss the .weak directive.
 
 The following describes the various sections available. 
 
-\subsection sec_dot_text The .text Section
+\section sec_dot_text The .text Section
 
 The .text section contains the actual machine instructions which make up
 your program.  This section is further subdivided by the .initN and .finiN
@@ -46,7 +46,7 @@ background, doesn't account for the .data initialization space added to the
 consume, one needs to add the values for both, .text and .data (but not .bss),
 while the amount of pre-allocated SRAM is the sum of .data and .bss.
 
-\subsection sec_dot_data The .data Section
+\section sec_dot_data The .data Section
 
 This section contains static data which was defined in your code. Things like
 the following would end up in .data:
@@ -70,15 +70,15 @@ in the SRAM memory space. Thus, if you want the .data section to start at
 When using \c malloc() in the application (which could even happen inside
 library calls), \ref malloc_extram "additional adjustments" are required.
 
-\subsection sec_dot_bss The .bss Section
+\section sec_dot_bss The .bss Section
 
 Uninitialized global or static variables end up in the .bss section.
 
-\subsection sec_dot_eeprom The .eeprom Section
+\section sec_dot_eeprom The .eeprom Section
 
 This is where eeprom variables are stored.
 
-\subsection sec_dot_noinit The .noinit Section
+\section sec_dot_noinit The .noinit Section
 
 This sections is a part of the .bss section. What makes the .noinit section
 special is that variables which are defined as such:
@@ -114,7 +114,7 @@ into the .text section instead of .data/.bss and will complain.
 Alternatively, you can write your own linker script to automate this. [FIXME:
 need an example or ref to dox for writing linker scripts.]
 
-\subsection sec_dot_init The .initN Sections
+\section sec_dot_init The .initN Sections
 
 These sections are used to define the startup code from reset up through
 the start of main(). These all are subparts of the 
@@ -169,7 +169,7 @@ Unused. User definable.
 \par .init9:
 Jumps into main().
 
-\subsection sec_dot_fini The .finiN Sections
+\section sec_dot_fini The .finiN Sections
 
 These sections are used to define the exit code executed after return from
 main() or a call to exit(). These all are subparts of the 
@@ -208,7 +208,7 @@ Unused. User definable.
 Goes into an infinite loop after program termination and completion of any
 _exit() code (execution of code in the .fini9 -> .fini1 sections).
 
-\subsection asm_sections Using Sections in Assembler Code
+\section asm_sections Using Sections in Assembler Code
 
 Example:
 
@@ -226,7 +226,7 @@ allocatable ("a"), executable ("x") and contains data ("@progbits"). For more
 detailed information on the .section directive, see the gas user manual.
 
 <!-- I know, poorly named section. - TRoth -->
-\subsection c_sections Using Sections in C Code
+\section c_sections Using Sections in C Code
 
 Example:
 

@@ -1,3 +1,20 @@
+2002-11-16  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/faq.dox: Fix broken subject headers (doxygen-1.2.18 doesn't
+		like them being bold when generating ps or pdf).
+	Change \subsection to \section since doxygen-1.2.18 handles it properly
+		now.
+	New FAQ entry for arrays of strings in rom.
+	* doc/api/inline_asm.dox: Change \subsection to \section since
+		doxygen-1.2.18 handles it properly now.
+	* doc/api/malloc.dox: Ditto.
+	* doc/api/sections.dox: Ditto.
+	* doc/api/tools-install.dox: Ditto.
+	* doc/examples/demo/demo.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	Change <h3> headings to \subsection's.
+
 2002-11-12  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

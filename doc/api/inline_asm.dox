@@ -87,7 +87,7 @@ harald.kipp@egnite.de
 documentation for avr-libc. The latest version is now available at 
 http://www.freesoftware.fsf.org/avr-libc/ .
 
-\subsection gcc_asm GCC asm Statement
+\section gcc_asm GCC asm Statement
 
 Let's start with a simple example of reading a value from port D:
 
@@ -161,7 +161,7 @@ disable interrupts:
 asm volatile("cli"::);
 \endcode
 
-\subsection asm_code Assembler Code
+\section asm_code Assembler Code
 
 You can use the same assembler instruction mnemonics as you'd use with any
 other AVR assembler. And you can write as many assembler statements into one
@@ -217,7 +217,7 @@ restored at the end of your code. It's a good idea to use \c __tmp_reg__ and
 \c __zero_reg__ instead of \c r0 or \c r1, just in case a new compiler version
 changes the register usage definitions.
 
-\subsection io_ops Input and Output Operands
+\section io_ops Input and Output Operands
 
 Each input and output operand is described by a constraint string followed by
 a C expression in parantheses. <tt>AVR-GCC</tt> 3.3 knows the following
@@ -705,7 +705,7 @@ ld r24, %a0
 with a lower case \c a following the percent sign, then the compiler will
 create the proper assembler line.
 
-\subsection clobbers Clobbers
+\section clobbers Clobbers
 
 As stated previously, the last part of the \c asm statement, the list of
 clobbers, may be omitted, including the colon seperator. However, if you are
@@ -824,7 +824,7 @@ be better ways. Clobbered registers will force the compiler to store their
 values before and reload them after your assembler code. Avoiding clobbers
 gives the compiler more freedom while optimizing your code.
 
-\subsection asm_macros Assembler Macros
+\section asm_macros Assembler Macros
 
 In order to reuse your assembler language parts, it is useful to define them
 as macros and put them into include files. AVR Libc comes with a bunch of
@@ -854,7 +854,7 @@ When used for the first time, \c L_%= may be translated to \c L_1404, the next
 usage might create \c L_1405 or whatever. In any case, the labels became unique
 too.
 
-\subsection asm_c_stubs C Stub Functions
+\section asm_c_stubs C Stub Functions
 
 Macro definitions will include the same assembler code whenever they are
 referenced. This may not be acceptable for larger routines. In this case you
@@ -907,7 +907,7 @@ uint16_t inw(uint8_t port)
 
 \note inw() is supplied by avr-libc.
 
-\subsection c_names_in_asm C Names Used in Assembler Code
+\section c_names_in_asm C Names Used in Assembler Code
 
 By default \c AVR-GCC uses the same symbolic names of functions or variables
 in C and assembler code. You can specify a different name for the assembler
@@ -954,7 +954,7 @@ extern long Calc(void) asm ("CALCULATE");
 Calling the function \c Calc() will create assembler instructions to call the
 function \c CALCULATE.
 
-\subsection links Links
+\section links Links
 
 <b><em>A GNU Development Environment for the AVR Microcontroller</em></b>
 covers the details of the GNU Tools that are specific to the AVR family of

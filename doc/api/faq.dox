@@ -27,8 +27,7 @@
 
 /** \page FAQ Frequently Asked Questions
 
-<b>\subsection faq_index FAQ Index
-</b>
+\section faq_index FAQ Index
 
 \addindex FAQ
 
@@ -45,9 +44,9 @@
 -# \ref faq_asmstabs
 -# \ref faq_port_pass
 -# \ref faq_reg_usage
+-# \ref faq_rom_array
 
-<b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
-</b>
+\section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
 When using the optimizer, in a loop like the following one:
 
@@ -74,8 +73,7 @@ volatile uint8_t flag;
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_libm I get "undefined reference to..." for functions like "sin()"
-</b>
+\section faq_libm I get "undefined reference to..." for functions like "sin()"
 
 In order to access the mathematical functions that are declared in
 <tt>\<math.h\></tt>, the linker needs to be told to also link the
@@ -98,8 +96,7 @@ library files, this is deprecated for system libraries.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_regbind How to permanently bind a variable to a register?
-</b>
+\section faq_regbind How to permanently bind a variable to a register?
 
 This can be done with
 
@@ -112,8 +109,7 @@ See \ref c_names_in_asm for more details.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_startup How to modify MCUCR or WDTCR early?
-</b>
+\section faq_startup How to modify MCUCR or WDTCR early?
 
 The method of early initialization (<tt>MCUCR</tt>, <tt>WDTCR</tt> or
 anything else) is different (and more flexible) in the current
@@ -157,8 +153,7 @@ see \ref mem_sections.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_use_bv What is all this _BV() stuff about?
-</b>
+\section faq_use_bv What is all this _BV() stuff about?
 
 When performing low-level output work, which is a very central point
 in microcontroller programming, it is quite common that a particular
@@ -197,8 +192,7 @@ However, using the macro often makes the program better readable.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_cplusplus Can I use C++ on the AVR?
-</b>
+\section faq_cplusplus Can I use C++ on the AVR?
 
 Basically yes, C++ is supported (assuming your compiler has been
 configured and compiled to support it, of course).  Source files
@@ -242,8 +236,7 @@ wasted.  Thus, casual inspection of the generated assembler code
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_varinit Shouldn't I initialize all my variables?
-</b>
+\section faq_varinit Shouldn't I initialize all my variables?
 
 Global and static variables are guaranteed to be initialized to 0 by
 the C standard.  \c avr-gcc does this by placing the appropriate code
@@ -284,8 +277,7 @@ value is non-zero.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
-</b>
+\section faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
 
 Some of the timer-related 16-bit IO registers use a temporary register
 (called TEMP in the Atmel datasheet) to guarantee an atomic access to
@@ -332,8 +324,7 @@ read_timer1(void)
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_asmconst How do I use a #define'd constant in an asm statement?
-</b>
+\section faq_asmconst How do I use a #define'd constant in an asm statement?
 
 So you tried this:
 
@@ -365,8 +356,7 @@ in C programs.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_gdboptimize Why does the PC randomly jump around when single-stepping through my program in avr-gdb?
-</b>
+\section faq_gdboptimize Why does the PC randomly jump around when single-stepping through my program in avr-gdb?
 
 When compiling a program with both optimization (\c -O) and debug
 information (\c -g) which is fortunately possible in \c avr-gcc, the
@@ -403,8 +393,7 @@ optimizations enabled while debugging.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_asmstabs How do I trace an assembler file in avr-gdb?
-</b>
+\section faq_asmstabs How do I trace an assembler file in avr-gdb?
 
 When using the \c -g compiler option, <tt>avr-gcc</tt> only generates
 line number and other debug information for C (and C++) files that
@@ -491,7 +480,8 @@ myfunc:	push	r16
 <small>Back to \ref faq_index.
 </small>
 
-\subsection faq_port_pass How do I pass an IO port as a parameter to a function?
+\section faq_port_pass How do I pass an IO port as a parameter to a function?
+
 Consider this example code:
 
 \code
@@ -598,7 +588,7 @@ execution speed.
 
 <small>Back to \ref faq_index.</small>
 
-\subsection faq_reg_usage What registers are used by the C compiler?
+\section faq_reg_usage What registers are used by the C compiler?
 
 - <strong>Data types:</strong><br>
 \c char is 8 bits, \c int is 16 bits, \c long is 32 bits, \c long long
@@ -671,4 +661,88 @@ including the old patches for gcc-2.95.2.  Check your old
 assembler subroutines, and adjust them accordingly.
 
 <small>Back to \ref faq_index.</small>
+
+\section faq_rom_array How do I put an array of strings completely in ROM?
+
+There are times when you may need an array of strings which will never be
+modified. In this case, you don't want to waste ram storing the constant
+strings. This most obvious thing to do is this:
+
+\code
+#include <avr/pgmspace.h>
+
+PGM_P array[2] PROGMEM = {
+    "Foo",
+    "Bar"
+};
+
+int main (void)
+{
+    char buf[32];
+    strcpy_P (buf, array[1]);
+    return 0;
+}
+\endcode
+
+The result is not want you want though. What you end up with is the array
+stored in ROM, while the individual strings end up in RAM (in the \c .data
+section).
+
+To work around this, you need to do something like this:
+
+\code
+#include <avr/pgmspace.h>
+
+const char foo[] PROGMEM = "Foo";
+const char bar[] PROGMEM = "Bar";
+
+PGM_P array[2] PROGMEM = {
+    foo,
+    bar
+};
+
+int main (void)
+{
+    char buf[32];
+    strcpy_P (buf, array[1]);
+    return 0;
+}
+\endcode
+
+Looking at the disassembly of the resulting object file we see that array is 
+in flash as such:
+
+\code
+0000008c <foo>:
+  8c:   46 6f           ori r20, 0xF6   ; 246
+  8e:   6f 00           .word   0x006f  ; ????
+
+00000090 <bar>:
+  90:   42 61           ori r20, 0x12   ; 18
+  92:   72 00           .word   0x0072  ; ????
+
+00000094 <array>:
+  94:   8c 00           .word   0x008c  ; ????
+  96:   90 00           .word   0x0090  ; ????
+\endcode
+
+\c foo is at addr 0x008c.<br>
+\c bar is at addr 0x0090.<br>
+\c array is at addr 0x0094.<br>
+
+Then in main we see this:
+
+    strcpy_P (buf, array[1]);   /* copy bar into buf */
+  de:   60 e9           ldi r22, 0x90   ; 144
+  e0:   70 e0           ldi r23, 0x00   ; 0
+  e2:   ce 01           movw    r24, r28
+  e4:   01 96           adiw    r24, 0x01   ; 1
+  e6:   0e 94 79 00     call    0xf2
+
+The addr of bar (0x0090) is loaded into the r23:r22 pair which is the second
+parameter passed to strcpy_P. The r25:r24 pair is the addr of buf.
+
+
+<small>Back to \ref faq_index.</small>
+
 */

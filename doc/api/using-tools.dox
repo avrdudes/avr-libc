@@ -32,9 +32,9 @@ tools.  Normally, the generic documentation of these tools is fairly
 large and maintained in \c texinfo files.  Command-line options are
 explained in detail in the manual page.
 
-\subsection using_avr_gcc Options for the C compiler avr-gcc
+\section using_avr_gcc Options for the C compiler avr-gcc
 
-<h3>Machine-specific options for the AVR</h3>
+\subsection using_avr_gcc_mach_opt Machine-specific options for the AVR
 
 The following machine-specific options are recognized by the C
 compiler frontend.
@@ -212,7 +212,7 @@ compiler frontend.
   </p>
 
 
-<h3>Selected general compiler options</h3>
+\subsection using_sel_gcc_opts Selected general compiler options
 
 The following general gcc options might be of some interest to AVR
 users.
@@ -270,9 +270,9 @@ users.
   cases, \c main() won't even return anyway).
   </p>
 
-\subsection using_avr_as Options for the assembler avr-as
+\section using_avr_as Options for the assembler avr-as
 
-<h3>Machine-specific assembler options</h3>
+\subsection using_avr_as_mach_opts Machine-specific assembler options
 
 - <tt>-mmcu=</tt><em>architecture</em>
 - <tt>-mmcu=</tt><em>MCU name</em>
@@ -333,7 +333,7 @@ users.
   list; \e =file must be the last one in that case.
   </p>
 
-<h3>Examples for assembler options passed through the C compiler</h3>
+\subsection using_avr_example Examples for assembler options passed through the C compiler
 
 Remember that assembler options can be passed from the C compiler
 frontend using \c -Wa (see \ref gcc_minusW "above"), so in order to
@@ -355,9 +355,9 @@ will make the compiler automatically assume <tt>-x assembler-with-cpp</tt>,
 while using \c .s would pass the file directly to the assembler (no
 preprocessing done).
 
-\subsection using_avr_ld Controlling the linker avr-ld
+\section using_avr_ld Controlling the linker avr-ld
 
-<h3>Selected linker options</h3>
+\subsection using_sel_ld_opts Selected linker options
 
 While there are no machine-specific options for avr-ld, a number of
 the standard options might be of interest to AVR users.
@@ -423,7 +423,7 @@ the standard options might be of interest to AVR users.
   \ref mem_sections "memory sections" will be linked together.
   </p>
 
-<h3>Passing linker options from the C compiler</h3>
+\subsection using_pass_ld_opts Passing linker options from the C compiler
 
 By default, all unknown non-option arguments on the avr-gcc
 command-line (i. e., all filename arguments that don't have a suffix

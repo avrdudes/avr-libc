@@ -76,7 +76,7 @@ $ export PATH
 \note The versions for the packages listed below are known to work together.
 If you mix and match different versions, you may have problems.
 
-\subsection required_tools Required Tools
+\section required_tools Required Tools
 \addindex tools, required
 
 - <b>GNU Binutils</b> (2.14) <br>
@@ -97,7 +97,7 @@ latest cvs versions are available at the URLs noted above.  Significant changes
 have been made which are not compatible with previous stable releases.  These
 incompatilities should be noted in the documentation.
 
-\subsection optional_tools Optional Tools
+\section optional_tools Optional Tools
 \addindex tools, optional
 
 You can develop programs for AVR devices without the following tools.  They may
@@ -124,7 +124,7 @@ or may not be of use for you.
   http://avarice.sourceforge.net/ <br>
   \ref install_avarice "Installation"
 
-\subsection install_avr_binutils GNU Binutils for the AVR target
+\section install_avr_binutils GNU Binutils for the AVR target
 \addindex installation, binutils
 
 The <tt><b>binutils</b></tt> package provides all the low-level utilities
@@ -197,7 +197,7 @@ You should now have the programs from binutils installed into
 <tt>$PREFIX/bin</tt>.  Don't forget to \ref path "set your PATH" environment
 variable before going to build avr-gcc.
 
-\subsection install_avr_gcc GCC for the AVR target
+\section install_avr_gcc GCC for the AVR target
 \addindex installation, gcc
 
 \warning You <em><b>must</b></em> install 
@@ -228,7 +228,7 @@ part and should only enable the C language support.
 \note The stdc++ libs are not included with C++ for AVR due to the size
 limitations of the devices.
 
-\subsection install_avr_libc AVR Libc
+\section install_avr_libc AVR Libc
 \addindex installation, avr-libc
 
 \warning You <em><b>must</b></em> install 
@@ -266,7 +266,7 @@ $ make
 $ make install
 \endverbatim
 
-\subsection install_uisp UISP
+\section install_uisp UISP
 \addindex installation, uisp
 
 Uisp also uses the \c configure system, so to build and install:
@@ -281,7 +281,7 @@ $ make
 $ make install
 \endverbatim
 
-\subsection install_avrprog Avrprog
+\section install_avrprog Avrprog
 \addindex installation, avrprog
 
 \note This is currently a FreeBSD only program, although adaptation to
@@ -299,7 +299,7 @@ simply do the following:
 permissions.  However, running the program only requires access
 permissions to the appropriate \c ppi(4) device.
 
-\subsection install_gdb GDB for the AVR target
+\section install_gdb GDB for the AVR target
 \addindex Installation, gdb
 
 Gdb also uses the \c configure system, so to build and install:
@@ -319,7 +319,7 @@ install either \ref install_simulavr "simulavr" or
 \ref install_avarice "avarice" since avr-gdb needs one of these to run as a
 a remote target.
 
-\subsection install_simulavr Simulavr
+\section install_simulavr Simulavr
 \addindex installation, simulavr
 
 Simulavr also uses the \c configure system, so to build and install:
@@ -340,7 +340,7 @@ $ make install
 \ref install_avr_libc "avr-libc"
 if you want to have the test programs built in the simulavr source.
 
-\subsection install_avarice AVaRice
+\section install_avarice AVaRice
 \addindex installation, avarice
 
 \note These install notes are specific to avarice-1.5.

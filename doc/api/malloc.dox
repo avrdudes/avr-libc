@@ -27,7 +27,7 @@
 
 /** \page malloc Using malloc()
 
-\subsection malloc_intro Introduction
+\section malloc_intro Introduction
 
 On a simple device like a microcontroller, implementing dynamic memory
 allocation is quite a challenge.
@@ -77,7 +77,7 @@ The memory allocator implemented in avr-libc tries to cope with all of
 these constraints, and offers some tuning options that can be used if
 there are more resources available than in the default configuration.
 
-\subsection malloc_where Internal vs. external RAM
+\section malloc_where Internal vs. external RAM
 
 Obviously, the constraints are much harder to satisfy in the default
 configuration where only internal RAM is available.  Extreme care must
@@ -95,7 +95,7 @@ faster since no extra wait states are required.  When using dynamic memory
 allocation and stack and heap are separated in distinct memory areas, this is the safest way to avoid a
 stack-heap collision.
 
-\subsection malloc_tunables Tunables for malloc()
+\section malloc_tunables Tunables for malloc()
 
 There are a number of variables that can be tuned to adapt the
 behavior of malloc() to the expected requirements and constraints
@@ -160,7 +160,7 @@ stack space, or they will risk colliding with the data segment.
 
 The default value of \c __malloc_margin is set to 32.
 
-\subsection malloc_impl Implementation details
+\section malloc_impl Implementation details
 
 Dynamic memory allocation requests will be returned with a two-byte
 header prepended that records the size of the allocation.  This is
