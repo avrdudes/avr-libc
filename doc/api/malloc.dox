@@ -119,8 +119,8 @@ link-time, by adjusting the value of the symbol \c __heap_end.
 
 \anchor malloc_extram
 The following example shows a linker command to relocate the entire \c .data 
-and \c .bss segments, and the heap to location 0x2000 in external RAM.  The
-heap will extend up to address 0x3fff.
+and \c .bss segments, and the heap to location 0x1100 in external RAM.  The
+heap will extend up to address 0xffff.
 
 \code
 avr-gcc ... -Wl,-Tdata=0x801100,--defsym=__heap_end=0x80ffff ...
@@ -134,18 +134,13 @@ options.
 \image html malloc-x1.png "Internal RAM: stack only, external RAM: variables and heap"
 \image latex malloc-x1.eps "Internal RAM: stack only, external RAM: variables and heap" width=12cm
 
-<<<<<<< malloc.dox
-If only dynamic memory should be placed in external RAM, while keeping
+If dynamic memory should be placed in external RAM, while keeping
 the variables in internal RAM, something like the following could be
 used.  Note that for demonstration purposes, the assignment of the
 various regions has not been made adjacent in this example, so there
 are "holes" below and above the heap in external RAM that remain
 completely unaccessible by regular variables or dynamic memory
 allocations (shown in light bisque color in the picture below).
-=======
-If dynamic memory should be placed in external RAM, while keeping
-the variables in internal RAM, the following could be used:
->>>>>>> 1.5
 
 \code
 avr-gcc ... -Wl,--defsym=__heap_start=0x802000,--defsym=__heap_end=0x803fff ...

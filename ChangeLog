@@ -1,5 +1,9 @@
 2002-10-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/malloc.dox: Fix the fix.
+
+2002-10-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/malloc.dox: Make the addresses used consistent.
 	* doc/api/malloc-x*.fig: Ditto.
 
