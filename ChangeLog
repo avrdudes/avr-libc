@@ -1,5 +1,9 @@
 2003-05-08  Eric B. Weddington  <eric@umginc.net>
 
+	* doc/TODO: Update, add items.
+
+2003-05-08  Eric B. Weddington  <eric@umginc.net>
+
 	* include/avr/signal.h: Add EMPTY_INTERRUPT macro.
 	[Contributed by Artur Lipowski <LAL@pro.onet.pl>]
 
