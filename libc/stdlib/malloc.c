@@ -28,6 +28,8 @@
 
 #include <stdlib.h>
 
+#include <avr/sfr_defs.h>
+
 #ifndef __AVR__
 
 /*
@@ -67,7 +69,7 @@ char mymem[256];
 extern char __heap_start;
 extern char __heap_end;
 
-#define STACK_POINTER() ((char *)(*(volatile unsigned int *)0x3d))
+#define STACK_POINTER() ((char *)(*(volatile int *)(_SFR_IO16(0x3D))))
 
 #endif /* MALLOC_TEST */
 
