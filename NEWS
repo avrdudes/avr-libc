@@ -10,6 +10,7 @@
           is used.
   [#5799] error(?) in iom162.h
   [#2233] Documentation issues with inline asm
+  [#6352] Sleep mode for ATmega162, ATmega161, and ATmega8515 
   [#7469] "Problem" by using the library function "boot_lock_bits_set"
   [#7556] printf and friends improperly handle non-null terminated strings when
           a %s argument has a precision.
@@ -26,7 +27,14 @@
           are undefined.
   [#8649] sfr_defs.h: missed _SFR_BYTE() in bit_is_set/clear
   [#9345] Zero-Padding on vfprintf
+  [#10150] Update release versions compatible with avr-libc and instructions.
+  [#10489] Sleep mode for atmega48/88/168 family 
+  [#10733] Fix bit identifer ADFR to ADATE in mega64.
+  [#10828] Fix licenses on files to have same BSD license.
+  [#11242] Add the EEARH register definition for the mega48.
   [#11275] fdevopen() should document its use of malloc()
+  [#11315] Add USART* signal names to match datasheet for mega32 and mega16.
+  [#11425] sleep.h missing semicolon
 
 * Remove deprecated items:
   + obsolete headers from the base include directory (moved to the avr/
