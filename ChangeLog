@@ -1,5 +1,12 @@
 2003-03-17  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/interrupt.h (enable_external_int): There are now 3
+	different registers used by various AVR devices to enable external
+	interrupts: EIMSK, GIMSK, and GICR. If one of those is not defined,
+	generate a compile time error.
+
+2003-03-17  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/pgmspace.h: Document PRG_RDB [Bug #2839].
 	Change strncat to strncat_P [Bug #2838].
 

@@ -96,18 +96,20 @@ extern "C" {
     \code#include <avr/interrupt.h>\endcode
 
     This function gives access to the \c gimsk register (or \c eimsk register
-    if using an AVR Mega device). Although this function is essentially the
-    same as using the outb() function, it does adapt slightly to the type of
-    device being used. */
+    if using an AVR Mega device or \c gicr register for others). Although this
+    function is essentially the same as using the outb() function, it does
+    adapt slightly to the type of device being used. */
 
 extern inline void enable_external_int (unsigned char ints)
 {
-#ifdef EIMSK
-  outb(EIMSK, ints);
+#if defined(EIMSK)
+  EIMSK = ints;
+#elif defined(GIMSK)
+  GIMSK = ints;
+#elif defined(GICR)
+  GICR = ints;
 #else
-#ifdef GIMSK
-  outb(GIMSK, ints);
-#endif
+# error "No valid external interrupt control register defined."
 #endif
 }
 
