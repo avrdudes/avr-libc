@@ -1,3 +1,8 @@
+2002-11-26  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am: Fix bad anchors.
+
 2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: add section about external RAM.

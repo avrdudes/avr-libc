@@ -92,7 +92,7 @@ IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 ps: demo $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: demo $(TARGET_DOX_HTML) fix_png
+html: demo $(TARGET_DOX_HTML) fix_png fix_anchors
 
 # Make the background color of the png's transparent.
 fix_png:
@@ -102,6 +102,17 @@ fix_png:
 		$(PNGTOPNM) $$png > tmp.pnm; \
 		$(PNMTOPNG) -transparent white tmp.pnm > $$png && rm tmp.pnm; \
 	done
+
+# doxygen generates bogus anchors if you unless you use anchor in the \mainpage
+# or \page sections. It is easily fixed though.
+fix_anchors:
+	cd $(USER_MANUAL) || exit 0; \
+	sed 's/"avr_\(stdio.html#stdio_note\)/"group__avr__\1/g' \
+		group__avr__stdio.html > fix.html; \
+	mv fix.html group__avr__stdio.html; \
+	sed 's/"avr_\(interrupts.html#avr_signames\)"/"group__avr__\1"/g' \
+		assembler.html > fix.html; \
+	mv fix.html assembler.html
 
 # Rule for generating PDF output
 pdf: demo $(TARGET_DOX_PDF)
