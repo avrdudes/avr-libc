@@ -1,5 +1,9 @@
 2002-12-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/math.h: document isnan() and isinf().
+
+2002-12-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/*: add CVS Ids (where missing).
 
 2002-12-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

@@ -291,6 +291,22 @@ extern double pow(double __x, double __y) __ATTR_CONST__;
   /**
      \ingroup avr_math
 
+     The function isnan() returns 1 if the argument \c x represents a
+     "not-a-number" (NaN) object, otherwise 0.
+  */
+extern int isnan(double __x) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The function isinf() returns 1 if the argument \c x is either
+     positive or negative infinity, otherwise 0.
+  */
+extern int isinf(double __x) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
      The function square() returns <tt>x * x</tt>.
 
      \note
