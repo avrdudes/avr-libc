@@ -45,8 +45,8 @@ programs available in the net. Hopefully this document will help to increase
 their number.
 
 It's assumed, that you are familiar with writing AVR assembler programs,
-because this is no AVR assembler programming tutorial. It's no C language
-tutorial either.
+because this is not an AVR assembler programming tutorial. It's not a C
+language tutorial either.
 
 Copyright (C) 2001-2002 by egnite Software GmbH
 

@@ -98,7 +98,7 @@ This can be done with
 register unsigned char counter asm("r3");
 \endcode
 
-See \ref inline_asm for more details.
+See \ref c_names_in_asm for more details.
 
 <small>Back to \ref faq_index.
 </small>
@@ -112,7 +112,7 @@ version.  Basically, write a small assembler file which looks like
 this:
 
 \code
-/* xram.S begin */
+;; begin xram.S
 
 #include <io.h>
 
@@ -121,7 +121,7 @@ this:
         ldi r16,_BV(SRE) | _BV(SRW)
         out _SFR_IO_ADDR(MCUCR),r16
 
-/* xram.S end */
+;; end xram.S
 \endcode
 
 Assemble it, link the resulting <tt>xram.o</tt> with other files in
