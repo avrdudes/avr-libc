@@ -117,7 +117,7 @@
 #endif
 
 /* _EEGET, _EEPUT */
-#include <eeprom.h>
+#include <avr/eeprom.h>
 
 #define input(port) inb(port)
 #define output(port, val) outb(port, val)

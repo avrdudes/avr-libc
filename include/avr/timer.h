@@ -26,7 +26,7 @@
 #ifndef _AVR_TIMER_H_
 #define _AVR_TIMER_H_
 
-#include <io.h>
+#include <avr/io.h>
 
 #ifdef __cplusplus
 extern "C" {

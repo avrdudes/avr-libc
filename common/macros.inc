@@ -30,7 +30,7 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
-#include <io.h>
+#include <avr/io.h>
 
 /* if not defined, assume old version with underscores */
 #ifndef __USER_LABEL_PREFIX__

@@ -26,7 +26,7 @@
 #ifndef _AVR_INTERRUPT_H_
 #define _AVR_INTERRUPT_H_
 
-#include <io.h>
+#include <avr/io.h>
 
 /** \name Global manipulation of the interrupt flag
 

@@ -114,7 +114,7 @@ this:
 \code
 ;; begin xram.S
 
-#include <io.h>
+#include <avr/io.h>
 
         .section .init1,"ax",@progbits
 

@@ -36,7 +36,7 @@
 #define __need_size_t
 #include <stddef.h>
 
-#include <io.h>
+#include <avr/io.h>
 
 /** \defgroup avr_eeprom EEPROM handling
     \code #include <avr/eeprom.h> \endcode

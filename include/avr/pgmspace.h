@@ -34,7 +34,7 @@
  */
 
 /** \defgroup avr_pgmspace Program Space String Utilities
-    \code #include <pgmspace.h> \endcode
+    \code #include <avr/pgmspace.h> \endcode
 
     The functions in this module provide interfaces for a program to access
     data stored in program space (flash memory) of the device.  In order to
@@ -52,7 +52,7 @@
 #define __need_size_t
 #include <stddef.h>
 
-/* #include <io.h> */
+/* #include <avr/io.h> */
 
 #ifndef __ATTR_CONST__
 #define __ATTR_CONST__ __attribute__((__const__))
@@ -87,7 +87,7 @@ typedef long long prog_long_long PROGMEM;
 #define PSTR(s) ({static char __c[] PROGMEM = (s); __c;})
 
 /* _LPM(), _ELPM() */
-#include <ina90.h>
+#include <avr/ina90.h>
 
 static inline unsigned char __lpm_inline(unsigned short __addr) __ATTR_CONST__;
 static inline unsigned char __lpm_inline(unsigned short __addr)

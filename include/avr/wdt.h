@@ -30,7 +30,7 @@
 #ifndef _AVR_WDT_H_
 #define _AVR_WDT_H_
 
-#include <io.h>
+#include <avr/io.h>
 
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 

@@ -1,3 +1,25 @@
+2002-08-22  Theodore A. Roth  <troth@verinet.com>
+
+	* common/macros.inc: Use <avr/io.h> instead of <io.h>.
+	* doc/api/faq.dox: Use <avr/io.h> instead of <io.h>.
+	* include/eeprom.h: Add deprecated #warning.
+	* include/ina90.h: Add deprecated #warning.
+	* include/interrupt.h: Add deprecated #warning.
+	* include/io.h: Add deprecated #warning.
+	* include/pgmspace.h: Add deprecated #warning.
+	* include/progmem.h: Add deprecated #warning.
+	* include/sig-avr.h: Add deprecated #warning.
+	* include/timer.h: Add deprecated #warning.
+	* include/twi.h: Add deprecated #warning.
+	* include/wdt.h: Add deprecated #warning.
+	* include/avr/eeprom.h: Use <avr/io.h> instead of <io.h>.
+	* include/avr/ina90.h: Use <avr/eeprom.h> instead of <eeprom.h>.
+	* include/avr/interrupt.h: Use <avr/io.h> instead of <io.h>.
+	* include/avr/pgmspace.h: Use <avr/pgmspace.h> instead of <pgmspace.h>.
+		Same for <io.h> and <ina90.h>
+	* include/avr/timer.h: Use <avr/io.h> instead of <io.h>.
+	* include/avr/wdt.h: Use <avr/io.h> instead of <io.h>.
+
 2002-08-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/eeprom.h: document.
