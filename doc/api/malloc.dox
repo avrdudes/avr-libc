@@ -158,7 +158,7 @@ frames of interrupt routines that could interrupt the current
 function, plus all further nested function calls must not require more
 stack space, or they will risk colliding with the data segment.
 
-The default value of \c __malloc_heap_end is set to 32.
+The default value of \c __malloc_margin is set to 32.
 
 \subsection malloc_impl Implementation details
 
