@@ -133,7 +133,7 @@ GLOBAL(dtostre)
 	mov	rB3, YH
 	XCALL	_U(frexp)	; destroys argument_1
 
-; iexp = *(int*) dest * log2;
+; iexp = *(int*) dest * log10(2);
 	ldd	rA0, Y+0
 	ldd	rA1, Y+1	; exponent
 	eor	rA2, rA2	; to longint argument
@@ -178,6 +178,7 @@ GLOBAL(dtostre)
 	FPLOAD(rB, FP_10)
 	XCALL	_U(__mulsf3)
 	FPMOV(rS, rA)		; dblno
+	rjmp	1b
 
 1:
 ; determine rounding:
