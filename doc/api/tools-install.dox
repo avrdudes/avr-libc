@@ -283,10 +283,10 @@ $ make install
 \subsection install_avrprog Avrprog
 \addindex installation, avrprog
 
-\note This is a FreeBSD only program. [FIXME: troth/2002-08-15: Is this
-correct?]
+\note This is currently a FreeBSD only program, although adaptation to
+other systems should not be hard.
 
-<tt><b>avrprog</b></tt> is part of the FreeBsd ports system. To install it,
+<tt><b>avrprog</b></tt> is part of the FreeBSD ports system. To install it,
 simply do the following:
 
 \verbatim
@@ -294,7 +294,9 @@ simply do the following:
 # make install
 \endverbatim
 
-\note [FIXME: do you have to be root to do the install?]
+\note Installation into the default location usually requires root
+permissions.  However, running the program only requires access
+permissions to the appropriate \c ppi(4) device.
 
 \subsection install_gdb GDB for the AVR target
 \addindex Installation, gdb
