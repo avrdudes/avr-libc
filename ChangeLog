@@ -1,5 +1,9 @@
 2003-06-17  Eric B. Weddington  <eric@ecentral.com>
 
+	* include/avr/interrupt.h: Fix for bug #3508.
+
+2003-06-17  Eric B. Weddington  <eric@ecentral.com>
+
 	* include/avr/pgmspace.h: Revert volatile on macros, fix macros to
 	specify which registers are used.
 

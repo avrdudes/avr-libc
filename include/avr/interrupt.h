@@ -92,26 +92,32 @@ extern "C" {
 /*@{*/
 
 /** \ingroup avr_interrupts
-
+    \def enable_external_int(mask)
     \code#include <avr/interrupt.h>\endcode
 
-    This function gives access to the \c gimsk register (or \c eimsk register
-    if using an AVR Mega device or \c gicr register for others). Although this
-    function is essentially the same as assigning to the register, it does
-    adapt slightly to the type of device being used. */
+    This macro gives access to the \c GIMSK register (or \c EIMSK register
+    if using an AVR Mega device or \c GICR register for others). Although this
+    macro is essentially the same as assigning to the register, it does
+    adapt slightly to the type of device being used. This macro is 
+    unavailable if none of the registers listed above are defined. */
 
-extern inline void enable_external_int (unsigned char ints)
-{
+/* Define common register definition if available. */
 #if defined(EIMSK)
-  EIMSK = ints;
-#elif defined(GIMSK)
-  GIMSK = ints;
-#elif defined(GICR)
-  GICR = ints;
-#else
-# error "No valid external interrupt control register defined."
+#define __EICR  EIMSK
 #endif
-}
+#if defined(GIMSK)
+#define __EICR  GIMSK
+#endif
+#if defined(GICR)
+#define __EICR  GICR
+#endif
+
+/* If common register defined, define macro. */
+#if defined(__EICR)
+#define enable_external_int(mask)               (__EICR = mask)
+#endif
+
+
 
 /** \ingroup avr_interrupts
 
