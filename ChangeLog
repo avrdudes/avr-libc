@@ -1,3 +1,10 @@
+2004-03-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/dtostrf.S: fix bug # 7989 (preserve r16/r17); use
+	movw when possible.
+	* include/stdlib.h: document the return values of dtostre() and
+	dtostrf().
+
 2004-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/dtostrf.S: make labels local.
