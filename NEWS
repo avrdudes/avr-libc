@@ -76,6 +76,21 @@ it also benefits from this.
 The arguments for outb()/outw() have been reversed.
   (value,port) -> (port,value)
 
+* New pgmspace.h API.
+
+Changed function names and added new functions to read the Program Space
+FLASH. Added new functions to read 16-bit (word) values. The new API should 
+also clear up problems with reading data from devices with > 64K of FLASH.
+
+The API now includes:
+pgm_read_byte       (maps to the *_near function below)
+pgm_read_word       (maps to the *_near function below)
+pgm_read_byte_near
+pgm_read_word_near
+pgm_read_byte_far
+pgm_read_word_far
+
+
 *** Changes up to avr-libc-20020203:
 
 See the ChangeLog file up to 2002-02-03 for details.

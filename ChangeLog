@@ -1,3 +1,7 @@
+2003-05-19  Eric B. Weddington  <eric@ecentral.com>
+
+	* NEWS: Add note about new pgmspace.h API.
+
 2003-05-19  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
