@@ -99,7 +99,7 @@ malloc(size_t len)
 {
 	struct freelist *fp1, *fp2;
 	char *cp;
-	size_t s;
+	size_t s, avail;
 
 	/*
 	 * Our minimum chunk size is the size of a pointer (plus the
@@ -201,7 +201,11 @@ malloc(size_t len)
 	cp = __malloc_heap_end;
 	if (cp == 0)
 		cp = STACK_POINTER() - __malloc_margin;
-	if (brkval + len + sizeof(size_t) < cp) {
+	avail = cp - brkval;
+	/*
+	 * Both tests below are needed to catch the case len >= 0xfffe.
+	 */
+	if (avail >= len && avail >= len + sizeof(size_t)) {
 		fp1 = (struct freelist *)brkval;
 		brkval += len + sizeof(size_t);
 		fp1->sz = len;

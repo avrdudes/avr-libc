@@ -1,3 +1,7 @@
+2004-02-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/malloc.c: Fix bug #2143 (malloc wrap around top of RAM)
+
 2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/interrupt.h: make timer_enable_int() static inline;
