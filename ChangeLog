@@ -1,3 +1,12 @@
+2003-06-10  Eric B. Weddington  <eric@ecentral.com>
+
+	* include/avr/sfr_defs.h: Deprecate inb,outb,inw,outw,cbi,sbi macros.
+	Remove usage of above macros.
+	* include/avr/ina90.h: Remove usage of inb / outb macros.
+	* include/avr/interrupt.h: ditto.
+	* include/avr/timer.h: ditto.
+	* NEWS: Note about deprecation of macros.
+
 2003-06-06  Eric B. Weddington  <eric@ecentral.com>
 
 	* include/avr/boot.h: Add file. Provides new bootloader support API.

@@ -97,7 +97,7 @@ extern "C" {
 
     This function gives access to the \c gimsk register (or \c eimsk register
     if using an AVR Mega device or \c gicr register for others). Although this
-    function is essentially the same as using the outb() function, it does
+    function is essentially the same as assigning to the register, it does
     adapt slightly to the type of device being used. */
 
 extern inline void enable_external_int (unsigned char ints)
@@ -117,13 +117,13 @@ extern inline void enable_external_int (unsigned char ints)
 
     \code#include <avr/interrupt.h>\endcode
 
-	This function modifies the \c timsk register using the outb() function.
+	This function modifies the \c timsk register.
 	The value you pass via \c ints is device specific. */
 
 extern inline void timer_enable_int (unsigned char ints)
 {
 #ifdef TIMSK
-  outb(TIMSK, ints);
+    TIMSK = ints;
 #endif
 }
 

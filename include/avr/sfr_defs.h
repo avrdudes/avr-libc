@@ -189,84 +189,11 @@
 
 #ifndef __ASSEMBLER__
 
-#define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
-#define _SFR_WORD(sfr) _MMIO_WORD(_SFR_ADDR(sfr))
-
-/* The outb/outw macros now have the correct order of arguments.  */
-
-/** \name IO operations */
-
-/*@{*/
-
-/** \def inb
-    \ingroup avr_sfr
-
-    \code #include <avr/io.h>\endcode
-
-    Read a byte from IO register \c sfr. */
-
-#define inb(sfr) _SFR_BYTE(sfr)
-
-/** \def inw
-    \ingroup avr_sfr
-
-    \code #include <avr/io.h>\endcode
-
-    Read a 16-bit word from IO register pair \c sfr. */
-
-#define inw(sfr) _SFR_WORD(sfr)
-
-/** \def outb
-    \ingroup avr_sfr
-
-    \code #include <avr/io.h>\endcode
-
-    Write \c val to IO register \c sfr. 
-
-    \note The order of the arguments was switched in older versions of
-    avr-libc (versions <= 20020203). */
-
-#define outb(sfr, val) (_SFR_BYTE(sfr) = (val))
-
-/** \def outw
-    \ingroup avr_sfr
-
-    \code #include <avr/io.h>\endcode
-
-    Write the 16-bit value \c val to IO register pair \c sfr.  Care
-    will be taken to write the lower register first.  When used to
-    update 16-bit registers where the timing is critical and the
-    operation can be interrupted, the programmer is the responsible for
-    disabling interrupts before accessing the register pair.
-
-    \note The order of the arguments was switched in older versions of
-    avr-libc (versions <= 20020203). */
-
-#define outw(sfr, val) (_SFR_WORD(sfr) = (val))
-
-/*@}*/
 
 /** \name IO register bit manipulation */
 
 /*@{*/
 
-/** \def cbi
-    \ingroup avr_sfr
-
-    \code #include <avr/io.h>\endcode
-
-    Clear bit \c bit in IO register \c sfr. */
-
-#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
-
-/** \def sbi
-    \ingroup avr_sfr
-
-    \code #include <avr/io.h>\endcode
-
-    Set bit \c bit in IO register \c sfr. */
-
-#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 
 
 /** \def bit_is_set
@@ -276,7 +203,7 @@
 
     Test whether bit \c bit in IO register \c sfr is set. */
 
-#define bit_is_set(sfr, bit) (inb(sfr) & _BV(bit))
+#define bit_is_set(sfr, bit) (sfr & _BV(bit))
 
 /** \def bit_is_clear
     \ingroup avr_sfr
@@ -285,7 +212,7 @@
 
     Test whether bit \c bit in IO register \c sfr is clear. */
 
-#define bit_is_clear(sfr, bit) (!(inb(sfr) & _BV(bit)))
+#define bit_is_clear(sfr, bit) (!(sfr & _BV(bit)))
 
 /** \def loop_until_bit_is_set
     \ingroup avr_sfr
@@ -314,13 +241,107 @@
 /** \name Deprecated Macros */
 /*@{*/
 
+
+/** \def cbi
+    \ingroup avr_sfr
+    \deprecated
+    \code #include <avr/io.h>\endcode
+    For backwards compatibility only. This macro will eventually be removed.
+
+    Clear bit \c bit in IO register \c sfr. */
+
+#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+
+/** \def sbi
+    \ingroup avr_sfr
+    \deprecated
+    \code #include <avr/io.h>\endcode
+    For backwards compatibility only. This macro will eventually be removed.
+
+    Set bit \c bit in IO register \c sfr. */
+
+#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+
+
+
+/** \def inb
+    \ingroup avr_sfr
+    \deprecated
+    \code #include <avr/io.h>\endcode
+    For backwards compatibility only. This macro will eventually be removed.
+
+    \par
+    <b>Use direct access in new programs</b>. */
+
+#define inb(sfr) _SFR_BYTE(sfr)
+
+
+
+/** \def outb
+    \ingroup avr_sfr
+    \deprecated
+    \code #include <avr/io.h>\endcode
+
+    For backwards compatibility only. This macro will eventually be removed.
+
+    \par
+    <b>Use direct access in new programs</b>.
+    
+    \note The order of the arguments was switched in older versions of
+    avr-libc (versions <= 20020203). */
+
+
+#define outb(sfr, val) (_SFR_BYTE(sfr) = (val))
+
+
+#define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
+#define _SFR_WORD(sfr) _MMIO_WORD(_SFR_ADDR(sfr))
+
+/* The outb/outw macros now have the correct order of arguments.  */
+
+/** \def inw
+    \ingroup avr_sfr
+    \deprecated
+    \code #include <avr/io.h>\endcode
+    For backwards compatibility only. This macro will eventually be removed.
+
+    Read a 16-bit word from IO register pair \c sfr. 
+    
+    \par
+    <b>Use direct access in new programs</b>. */
+
+#define inw(sfr) _SFR_WORD(sfr)
+
+
+/** \def outw
+    \ingroup avr_sfr
+    \deprecated
+    \code #include <avr/io.h>\endcode
+    For backwards compatibility only. This macro will eventually be removed.
+
+    Write the 16-bit value \c val to IO register pair \c sfr.  Care
+    will be taken to write the lower register first.  When used to
+    update 16-bit registers where the timing is critical and the
+    operation can be interrupted, the programmer is the responsible for
+    disabling interrupts before accessing the register pair.
+
+    \par
+    <b>Use direct access in new programs</b>.
+
+    \note The order of the arguments was switched in older versions of
+    avr-libc (versions <= 20020203). */
+
+
+#define outw(sfr, val) (_SFR_WORD(sfr) = (val))
+
+
 /** \def outp
     \ingroup avr_sfr
     \deprecated
     For backwards compatibility only. This macro will eventually be removed.
 
     \par
-    <b>Use outb() in new programs</b>. */
+    <b>Use direct access in new programs</b>. */
 
 #define outp(val, sfr) outb(sfr, val)
 
@@ -330,7 +351,7 @@
     For backwards compatibility only. This macro will eventually be removed.
 
     \par
-    <b>Use inb() in new programs</b>. */
+    <b>Use direct access in new programs</b>. */
 
 #define inp(sfr) inb(sfr)
 

@@ -98,6 +98,8 @@ pgm_read_word_far
 This provides bootloader support functions to those processors that have 
 builtin bootloader support.
 
+* inb / outb / inw / outw / cbi / sbi macros are deprecated.
+
 
 *** Changes up to avr-libc-20020203:
 

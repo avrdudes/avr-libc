@@ -59,8 +59,8 @@
 /* _EEGET, _EEPUT */
 #include <avr/eeprom.h>
 
-#define input(port) inb(port)
-#define output(port, val) outb(port, val)
+#define input(port) (port)
+#define output(port, val) (port = val)
 
 #define __inp_blk__(port, addr, cnt, op) {	\
 	unsigned char __i = (cnt);		\

@@ -47,17 +47,17 @@ enum {
 
 static inline void timer0_source (unsigned int src)
 {
-  outb(TCCR0, src);
+    TCCR0 = src;
 }
 
 static inline void timer0_stop (void)
 {
-  outb(TCNT0, 0);
+    TCNT0 = 0;
 }
 
 static inline void timer0_start (void)
 {
-  outb(TCNT0, 1);
+    TCNT0 = 1;
 }
 
 #ifdef __cplusplus
