@@ -1,4 +1,13 @@
 2004-09-10  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iomx8.h (OCIE0B): Fix value. [Bug #10001]
+	(OCIE0A): Ditto.
+	(OCIE1B): Ditto.
+	(OCIE1A): Ditto.
+	(OCIE2B): Ditto.
+	(OCIE2A): Ditto.
+
+2004-09-10  Theodore A. Roth  <troth@openavr.org>
 [Contributed by Ren Liebscher <R.Liescher@gmx.de>]
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

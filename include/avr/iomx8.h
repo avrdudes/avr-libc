@@ -384,21 +384,21 @@
 
 #define TIMSK0  _SFR_MEM8 (0x6E)
 /* TIMSK0 */
-#define OCIE0B  3
-#define OCIE0A  2
+#define OCIE0B  2
+#define OCIE0A  1
 #define TOIE0   0
 
 #define TIMSK1  _SFR_MEM8 (0x6F)
 /* TIMSK1 */
 #define ICIE1   5
-#define OCIE1B  3
-#define OCIE1A  2
+#define OCIE1B  2
+#define OCIE1A  1
 #define TOIE1   0
 
 #define TIMSK2  _SFR_MEM8 (0x70)
 /* TIMSK2 */
-#define OCIE2B  3
-#define OCIE2A  2
+#define OCIE2B  2
+#define OCIE2A  1
 #define TOIE2   0
 
 #ifndef __ASSEMBLER__
