@@ -1,3 +1,10 @@
+2002-08-31  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* configure.in (AM_INIT_AUTOMAKE): Update version.
+	(AVR_CRT_MEGA): Add crtm169.o.
+	* include/avr/iom169.h: New file.
+	* include/avr/iom323.h: Fix typo (SIG_INTERRUPT3 -> 2).
+
 2002-08-30  Theodore A. Roth  <troth@verinet.com>
 
 	* doc/api/inline_asm.dox: Remove _PC_ from dox. It doesn't seem to
