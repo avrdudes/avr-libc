@@ -36,8 +36,11 @@ lib_a_asm_sources = \
 	strcat_P.S      \
 	strcmp_P.S      \
 	strcpy_P.S      \
+	strlcat_P.S     \
+	strlcpy_P.S     \
 	strlen_P.S      \
 	strncasecmp_P.S \
+	strncat_P.S     \
 	strncmp_P.S     \
 	strncpy_P.S
 

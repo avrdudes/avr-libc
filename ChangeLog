@@ -1,3 +1,18 @@
+2003-06-19  Eric B. Weddington  <eric@ecentral.com>
+
+	New string functions from Reiner Patommel.
+	* libc/string/strlcat.S: Add file.
+	* libc/string/strlcpy.S: Add file.
+	* libc/string/strsep.S: Add file.
+	* libc/string/strtok_r.S: Add file.
+	* libc/string/Makefile.am: Modify for new functions.
+	* libc/pmstring/strlcat_P.S: Add file.
+	* libc/pmstring/strlcpy_P.S: Add file.
+	* libc/pmstring/strncat_P.S: Add file.
+	* libc/pmstring/Makefile.am: Modify for new functions.
+	* doc/TODO: Remove item about optimize strlcpy, strlcat.
+	* NEWS: Note about new functions.
+
 2003-06-18  Eric B. Weddington  <eric@ecentral.com>
 
 	* libc/stdlib/atol.S: Fix for Bug #3576, by Reiner Patommel.

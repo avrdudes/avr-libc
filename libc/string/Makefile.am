@@ -30,9 +30,7 @@
 
 noinst_LIBRARIES = lib.a
 
-lib_a_c_sources = \
-	strlcat.c	\
-	strlcpy.c
+lib_a_c_sources = 
 
 lib_a_asm_sources = \
 	memccpy.S     \
@@ -46,6 +44,8 @@ lib_a_asm_sources = \
 	strchr.S      \
 	strcmp.S      \
 	strcpy.S      \
+	strlcat.S     \
+	strlcpy.S     \
 	strlen.S      \
 	strlwr.S      \
 	strncasecmp.S \
@@ -55,7 +55,9 @@ lib_a_asm_sources = \
 	strnlen.S     \
 	strrchr.S     \
 	strrev.S      \
+	strsep.S      \
 	strstr.S      \
+	strtok_r.S    \
 	strupr.S
 
 lib_a_SOURCES = $(lib_a_c_sources) $(lib_a_asm_sources)

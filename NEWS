@@ -100,6 +100,19 @@ builtin bootloader support.
 
 * inb / outb / inw / outw / cbi / sbi macros are deprecated.
 
+* New string functions and optimized string functions.
+
+strlcpy   (optimized)
+strlcat   (optimized)
+strsep    (new)
+strtok_r  (new)
+strlcat_P (new)
+strlcpy_P (new)
+strncat_P (new)
+
+Contributed by Reiner Patommel with some work on strlcpy, strlcat by
+Eric Weddington.
+
 
 *** Changes up to avr-libc-20020203:
 
