@@ -12,7 +12,21 @@ TODO for avr-libc:
  - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
    sys/systemcfg.h?, stdio.h?
  - Figure out how to remove __ prefix from function args in dox.
-
+ - Doxument the following:
+   * interfaces in:
+     + include/ctype.h
+     + include/math.h
+     + include/stdlib.h
+	 + include/avr/crc16.h  ???
+	 + include/avr/ina90.h  ???
+	 + include/avr/twi.h
+	 + include/avr/wdt.h
+	 + include/avr/parity.h
+   * the mechanism behind include/avr/io*.h ???
+   * merge chapters 2/3 from Rich Neswold's doc. Needs some rewriting to
+     update for newer tools. (Joerg, update your example???)
+   * gcrt1.S
+   * introduction
 
 [1] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000084.html
 [2] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000033.html
