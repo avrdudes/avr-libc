@@ -1,5 +1,13 @@
 2002-11-26  Theodore A. Roth  <troth@openavr.org>
 
+	* NEWS: Note support for new devices (mega32, mega64, mega8515,
+	mega8535).
+	* configure.in: Add support for new megas.
+	* doc/TODO: Remove note about new mega header files.
+	* doc/api/main_page.dox: Add note about new megas.
+
+2002-11-26  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/Makefile.am: Fix bad anchors.
 

@@ -52,6 +52,10 @@ See the "Special Function Registers" documentation for details.
 mega128
 mega169
 mega16
+mega32 [untested]
+mega64 [untested]
+mega8515 [untested]
+mega8535 [untested]
 tiny26
 
 * Incompatibilities with previous version.

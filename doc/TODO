@@ -25,11 +25,6 @@ TODO for avr-libc:
      update for newer tools. (explanation of start code)
    * gcrt1.S
  - testsuite [4]
- - The following headers are #include'd in io.h, but don't exist:
-   * iom32.h
-   * iom64.h
-   * iom8515.h
-   * iom8535.h
  - finish porting newlib to AVR (may be useful especially for
    larger devices, and for testing avr-gcc itself...)
 
