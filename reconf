@@ -13,32 +13,59 @@
 #  happen during the build process.
 #
 
-AUTOMAKE_VER=`automake --version | head -n 1 | cut -d ' ' -f 4 | cut -c -3`
-if [ "$AUTOMAKE_VER" != "1.4" ]
+export AUTOMAKE AUTOCONF ACLOCAL
+
+status="fail"
+for AUTOMAKE in automake automake14
+do
+	AUTOMAKE_VER=`(${AUTOMAKE} --version | head -n 1 | cut -d ' ' -f 4 | cut -c -3) 2>/dev/null`
+	if [ $? != 0 ]
+	then
+		continue
+	fi
+	if [ "$AUTOMAKE_VER" = "1.4" ]
+	then
+		status=""
+		ACLOCAL=aclocal`expr "$AUTOMAKE" : 'automake\(.*\)'`
+		break
+	fi
+done
+
+if [ -n "$status" ]
 then
 	echo "You need to use automake version 1.4 (preferrable 1.4-p5)."
 	echo "You are using `automake --version | head -n 1`."
 	echo
-	status="fail"
+	exit 1
 fi
 
-AUTOCONF_VER=`autoconf --version | head -n 1 | cut -d ' ' -f 3 | cut -c -4`
-if [ "$AUTOCONF_VER" != "2.13" ]
+status="fail"
+
+for AUTOCONF in autoconf autoconf213
+do
+	AUTOCONF_VER=`(${AUTOCONF} --version 2>/dev/null | head -n 1 | cut -d ' ' -f 3 | cut -c -4) 2>/dev/null`
+	if [ $? != 0 ]
+	then
+		continue
+	fi
+	if [ "$AUTOCONF_VER" = "2.13" ]
+	then
+		status=""
+		break
+	fi
+done
+
+if [ -n "$status" ]
 then
 	echo "You need to use autoconf version 2.13."
 	echo "You are using `autoconf --version | head -n 1`."
 	echo
-	status="fail"
-fi
-
-if [ -n "$status" ]
-then
 	exit 1
 fi
 
 # to see what is executed
 set -x
 
-aclocal
-autoconf
-automake --foreign --add-missing --copy
+${ACLOCAL}
+${AUTOCONF}
+${AUTOMAKE} --foreign --add-missing --copy
