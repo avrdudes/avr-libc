@@ -38,11 +38,11 @@
 
 GLOBAL(pow)
    TST   rB3
-   BREQ  _pow_100		; x ^ 0 = 1.0
+   BREQ  10f		; x ^ 0 = 1.0
    TST   rA3
-   BRMI  _pow_10
-   BREQ  _pow_100
- _pow_00:
+   BRMI  1f
+   BREQ  10f
+
    PUSH  rB3
    PUSH  rB2
    PUSH  rB1
@@ -55,7 +55,7 @@ GLOBAL(pow)
    RCALL _U(__mulsf3)
    RJMP  _U(exp)
 
- _pow_10:
+1:
 	/* x < 0 -> no rational power allowed
 	 *          check if B is an integer number
 	 * if yes then pow(x,y) =
@@ -87,19 +87,18 @@ GLOBAL(pow)
    POP   rA1
    POP   rA2
    POP   rA3
-   BREQ  _pow_20
+   BREQ  2f
    ANDI  rA3,0x7F
    SUBI  rB3,0x80
-   RCALL _pow_10
+   RCALL 1b
    SUBI  rB3,0x80
 
- _pow_20:
+2:
    RJMP  _U(__fp_nanEDOM)
 
- _pow_100:
+10:
    LDI   rA3,0x3F
    LDI   rA2,0x80
- _pow_101:
    CLR   rA1
    CLR   rA2
    RET
