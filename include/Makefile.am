@@ -26,7 +26,8 @@
 # $Id$
 #
 
-EXTRA_DIST = \
+avrdir = $(prefix)/avr/include
+avr_HEADERS = \
     ctype.h \
     errno.h \
     inttypes.h \

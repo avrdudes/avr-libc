@@ -37,7 +37,7 @@ AVRLIB_ASFLAGS = -x assembler-with-cpp -Wa,-gstabs -mmcu=$(AVR_TARGET) $(AVR_TAR
 AM_CFLAGS = $(AVRLIB_CFLAGS)
 AM_CCASFLAGS = $(AM_CPPFLAGS) $(AVRLIB_ASFLAGS)
 
-__install_dir = $(exec_prefix)/avr/lib/$(AVR_TARGET)
+__install_dir = $(prefix)/avr/lib/$(AVR_TARGET)
 
 avrdir = $(__install_dir)
 avrlibdir = $(__install_dir)

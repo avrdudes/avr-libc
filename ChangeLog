@@ -1,5 +1,13 @@
 2004-04-28  Theodore A. Roth  <troth@openavr.org>
 
+	* AvrCommon.am (__install_dir): Use prefix instead of exec_prefix.
+	* crt1/Makefile.am: Complete rewrite. Not much is needed anymore.
+	* include/Makefile.am: Replace EXTRA_DIST with avr_HEADERS so that
+	the headers are installed.
+	* include/avr/Makefile.am: Ditto.
+
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
 	* AvrCommon.am: New file.
 	* configure.ac: Add tool check for AS.
 	Move new devices to separate AC_CONFIG_FILES section.

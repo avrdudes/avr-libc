@@ -26,7 +26,8 @@
 # $Id$
 #
 
-EXTRA_DIST = \
+avrdir = $(prefix)/avr/include/avr
+avr_HEADERS = \
     boot.h \
     crc16.h \
     delay.h \
