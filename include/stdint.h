@@ -64,15 +64,23 @@ typedef signed char int8_t;
 
 typedef unsigned char uint8_t;
 
+/* When you use the -mint8 gcc option, you get either int32_t or int64_t, but
+   not both. */
+
+#define __HAS_INT32_T__ 1
+#define __HAS_INT64_T__ 1
+
 #if __USING_MINT8
 
 typedef long int16_t;
 typedef unsigned long uint16_t;
 
 #if (__GNUC__ > 3) || (__GNUC__ == 3 && __GNUC_MINOR__ >= 5)
+#  undef __HAS_INT64_T__
 typedef long long int32_t;
 typedef unsigned long long uint32_t;
 #else
+#  undef __HAS_INT32_T__
 typedef long long int64_t;
 typedef unsigned long long uint64_t;
 #endif

@@ -95,12 +95,14 @@ typedef int8_t    prog_int8_t   PROGMEM;
 typedef uint8_t   prog_uint8_t  PROGMEM;
 typedef int16_t   prog_int16_t  PROGMEM;
 typedef uint16_t  prog_uint16_t PROGMEM;
-#if !defined(__USING_MINT8)
+#if defined(__HAS_INT32_T__)
 typedef int32_t   prog_int32_t  PROGMEM;
 typedef uint32_t  prog_uint32_t PROGMEM;
 #endif
+#if defined(__HAS_INT64_T__)
 typedef int64_t   prog_int64_t  PROGMEM;
 typedef uint64_t  prog_uint64_t PROGMEM;
+#endif
 
 /* Although in C, we can get away with just using __c, it does not work in
    C++. We need to use &__c[0] to avoid the compiler puking. Dave Hylands

@@ -1,5 +1,16 @@
 2004-09-19  Theodore A. Roth  <troth@openavr.org>
 
+	* include/stdint.h (__HAS_INT32_T__): Define if gcc can supply us with
+	a 32 bit integer.
+	(__HAS_INT64_T__): Define if gcc can supply us with a 64 bit integer.
+	* include/avr/pgmspace.h (prog_int32_t): Use __HAS_INT32_T__ when
+	typedef'ing.
+	(prog_uint32_t): Ditto.
+	(prog_int64_t): Use __HAS_INT64_T__ when typedef'ing.
+	(prog_uint64_t): Ditto.
+
+2004-09-19  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 
 	* configure.in: Don't generate version.h.
