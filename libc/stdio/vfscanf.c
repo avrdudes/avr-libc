@@ -374,9 +374,29 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 				a.ul = 0;
 				for (;;) {
 					j = tolower(i);
+					/*
+					 * First, assume it is a decimal
+					 * digit.
+					 */
 					j -= '0';
-					if (j > 9)
-						j -= 'a' - '0' - 10;
+					if (j > 9) {
+						/*
+						 * Not a decimal digit.
+						 * Try hex next.
+						 */
+						j += '0'; /* undo "- '0'"
+							   * above */
+						j -= 'a'; /* 'a' is first
+							   * hex digit */
+						if (j >= 0)
+							/* 'a' has value
+							 * 10 */
+							j += 10;
+						/*
+						 * else: not a hex digit,
+						 * gets caught below.
+						 */
+					}
 					if (j < 0 || j >= base) {
 						ungetc(i, stream);
 						break;

@@ -1,3 +1,9 @@
+2004-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfscanf.c: Fix a logical flaw that caused
+	characters > 'Z' && < 'a' to be misdetected as valid
+	hex digits.  Fix for bug #10420.
+
 2004-09-19  Theodore A. Roth  <troth@openavr.org>
 
 	* include/stdint.h (__HAS_INT32_T__): Define if gcc can supply us with
