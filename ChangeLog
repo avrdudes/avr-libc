@@ -1,3 +1,11 @@
+2002-11-19  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in: Don't recurse into doc dir while building unless
+	"--enable-doc is passed to configure. This allows a default build to
+	bypass building the docs, but still allows the user to cd into the doc
+	dir and build the docs if they feel lucky. Do you feel lucky, punk?
+
 2002-11-18  Theodore A. Roth  <troth@openavr.org>
 
 	* libc/string/memcmp.S: Add note about unsigned nature of compare.

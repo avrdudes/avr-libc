@@ -141,7 +141,7 @@ dnl
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 20021118cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20021119cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)
@@ -188,19 +188,17 @@ if test "x$dox_ver" = "x"; then
 else
 	# FIXME: should also check for dox_ver >= 1.2.16
 	AC_MSG_RESULT(yes)
-	if test "$enable_doc" = "yes"; then
-		if test "$ps_doc" = "yes"; then
-			TARGET_DOX_PS=dox-ps
-			INSTALL_DOX_PS=install-dox-ps
-		fi
-		if test "$pdf_doc" = "yes"; then
-			TARGET_DOX_PDF=dox-pdf
-			INSTALL_DOX_PDF=install-dox-pdf
-		fi
-		if test "$html_doc" = "yes"; then
-			TARGET_DOX_HTML=dox-html
-			INSTALL_DOX_HTML=install-dox-html
-		fi
+	if test "$ps_doc" = "yes"; then
+		TARGET_DOX_PS=dox-ps
+		INSTALL_DOX_PS=install-dox-ps
+	fi
+	if test "$pdf_doc" = "yes"; then
+		TARGET_DOX_PDF=dox-pdf
+		INSTALL_DOX_PDF=install-dox-pdf
+	fi
+	if test "$html_doc" = "yes"; then
+		TARGET_DOX_HTML=dox-html
+		INSTALL_DOX_HTML=install-dox-html
 	fi
 fi
 dnl
@@ -306,8 +304,11 @@ if test -z "${with_multisubdir}"; then
                 crtc8534.o'
   AVR_CRT_TINY='crttn11.o crttn12.o crttn15.o crttn28.o crttn22.o crttn26.o'
 
-  dnl We only want to build the docs for the default case
-  DOCSDIR='doc'
+  dnl We only want to build the docs for the default target case and only
+  dnl if the user has passed "--enable-doc" to configure.
+  if test "$enable_doc" = "yes"; then
+	DOCSDIR='doc'
+  fi
 else
   case $with_multisubdir in
   avr3) avrlib_cflags=${avrlib_opt_speed}
