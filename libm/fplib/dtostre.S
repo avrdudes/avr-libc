@@ -46,6 +46,7 @@ GLOBAL(dtostre)
 	mov	rP6, r18	/* rP6 == r19 */
 	mov	rP7, r16	/* rP7 == r18 */
 
+	push	r11
 	push	r12
 	push	r13
 	push	r14
@@ -65,11 +66,17 @@ GLOBAL(dtostre)
 	adc	rSI0, rSI0
 	brne	2f		; not zero
 
+	ldi	rSI1, ' '
+	sbrc	rP7, 1
+	ldi	rSI1, '+'	; rSI1 = (flags&bitSign?'+':' ')
+	sbrc	rP7, 0
+	st	Y+, rSI1
+	dec	rP6
 	ldi	rA3, '0'
 	ldi	rA2, '.'
 	ldi	rA1, 'E'
-	bst	rP7, 2		; if bitUppercase was set
-	bld	rA1, 6
+	sbrs	rP7, 2		; if bitUppercase was set
+	ori	rA1, 'E' ^ 'e'
 	ldi	rA0, '+'
 	st	Y+,rA3
 	st	Y+,rA2
@@ -87,9 +94,9 @@ GLOBAL(dtostre)
 	brne	3f		; check for zero and NaN
 
 	ldi	rA3, 'N'
-	ldi	rA2, 'A'
+	ldi	rA2, 'a'
 	st	Y+, rA3		/* 'N' */
-	st	Y+, rA2		/* 'A' */
+	st	Y+, rA2		/* 'a' */
 	st	Y+, rA3		/* 'N' */
 	rjmp	99f		; exit
 
@@ -127,13 +134,13 @@ GLOBAL(dtostre)
 	com	rA2
 	mov	rA3, rA2
 	rcall	_U(__floatsisf)	; to float
-	ldi	rB0, 0x53	; log2 is 2nd argument
-	ldi	rB1, 0x3F
-	ldi	rB2, 0x9F
+	ldi	rB0, 0x9B	; lg(2) is 2nd argument
+	ldi	rB1, 0x20	; lg(2) = 0.30103 = 0x3e9a209b
+	ldi	rB2, 0x9A
 	ldi	rB3, 0x3E
 	rcall	_U(__mulsf3)	; multiply
 	rcall	_U(__fixsfsi)	; to integer
-	push	rA0		; save exponent, 1 byte only
+	mov	rS4, rA0	; save exponent, 1 byte only
 
 ; if ( iexp  != 0 )
 	tst	rA0
@@ -160,33 +167,76 @@ GLOBAL(dtostre)
 	mov	rS1, rA1
 	mov	rS2, rA2
 	mov	rS3, rA3
-1:				; for (rSI1 = 0; rSI1 <= rSI0; rSI1++)
-;	dec	rSI0
+1:
+; The algorithm to determine the decimal exponent above has the
+; potential to erroneously return an exponent that might be too
+; large.  So we need to give it a try before applying the rounding
+; below.  If we find the first digit to become 0, we decrease the
+; exponent, and multiply our number again by 10.
+
+	mov	rA0, rS0
+	mov	rA1, rS1
+	mov	rA2, rS2
+	mov	rA3, rS3
+	mov	rB2, YL
+	mov	rB3, YH
+	rcall	_U(modf)
+	ldd	rSI1, Y+3	; no need to convert from float to int,
+	tst	rSI1		; float 0.0 always has 0 in the MSB
+	brne	1f
+
+	dec	rS4		; exp--
+	ldi	rB0, 0x00	; argument_2 = 10
+	ldi	rB1, 0x00
+	ldi	rB2, 0x20
+	ldi	rB3, 0x41
+	rcall	_U(__mulsf3)
+	mov	rS0, rA0	; dblno
+	mov	rS1, rA1
+	mov	rS2, rA2
+	mov	rS3, rA3
+
+1:
+; determine rounding:
+; if (ndig < ACCURACY) { t = .5; t *= 0.1**ndig; dblno += t; }
+	cpi	rSI0, ACCURACY
+	brcc	1f
+	ldi	rA0, 0x00	; t = 0.5
+	ldi	rA1, 0x00
+	ldi	rA2, 0x00
+	ldi	rA3, 0x3F
+	eor	rSI1, rSI1	; for (rSI1 = 0; rSI1 < ndig; rSI1++)
+	rjmp	3f
+2:	ldi	rB0, 0xCD	; 0.1 => 0x3dcccccd
+	ldi	rB1, 0xCC
+	ldi	rB2, 0xCC
+	ldi	rB3, 0x3D
+	rcall	_U(__mulsf3)	; t *= 0.1
+	inc	rSI1
+3:	cp	rSI1, rSI0
+	brlo	2b
+	mov	rB0, rS0
+	mov	rB1, rS1
+	mov	rB2, rS2
+	mov	rB3, rS3
+	rcall	_U(__addsf3)	; dblno += t
+	mov	rS0, rA0	; new dblno
+	mov	rS1, rA1
+	mov	rS2, rA2
+	mov	rS3, rA3
+1:
+				; for (rSI1 = 0; rSI1 <= ndig; rSI1++)
 	eor	rSI1, rSI1
 	rjmp	8f
 2:
 	cpi	rSI1, ACCURACY
-	breq	3f		; least significant digit => round
 	brcc	5f		; more digits than accuracy => pad 0s
 
-3:				; check rounding
-	mov	rA0, rS0	; dblno
+; dblno = modf(dblno, (double *) dest) * 10.0;
+	mov	rA0, rS0	; next digit
 	mov	rA1, rS1
 	mov	rA2, rS2
 	mov	rA3, rS3
-	breq	4f
-	cp	rSI1, rSI0	; compare count - ndig
-	brne	4f
-
-; dblno += 0.5;
-	ldi	rB0, 0x00	; argument_2 = 0.5
-	ldi	rB1, 0x00
-	ldi	rB2, 0x00
-	ldi	rB3, 0x3F
-	rcall	_U(__addsf3)
-
-; dblno = modf(dblno, (double *) dest) * 10.0;
-4:				; next digit
 	mov	rB2, YL
 	mov	rB3, YH
 	rcall	_U(modf)
@@ -223,22 +273,21 @@ GLOBAL(dtostre)
 	cp	rSI0, rSI1	; compare count - ndig
 	brcc	2b
 
-	pop	rA3		; restore exponent
 	pop	rA2		; and flags
-	ldi	rA1, 'e'	; 'e' = 0x65 'E' = 0x45
-	bst	rA2, 2		; if bitUppercase was set its compelmented now
-	bld	rA1, 5
+	ldi	rA1, 'E'
+	sbrs	rA2, 2		; if bitUppercase was set
+	ori	rA1, 'E' ^ 'e'
 	ST	Y+, rA1		; put exponent
 	ldi	rA1, '+'	;
-	tst	rA3
+	tst	rS4		; exponent
 	brpl	1f
-	neg	rA3
+	neg	rS4
 	ldi	rA1, '-'
 1:
 	st	Y+, rA1
 
 	; dividend in r24, divisor in r22
-	mov	r24, rA3	; rA3 is r25 (arg1 in the old call convention)
+	mov	r24, rS4
 	ldi	r22, 10		; divisor
 	XCALL	_U(__udivmodqi4)
 	; quotient in r24, remainder in r25
@@ -260,6 +309,7 @@ GLOBAL(dtostre)
 	pop	r14
 	pop	r13
 	pop	r12
+	pop	r11
 	ret
 
           ENDFUNC
