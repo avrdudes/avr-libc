@@ -1,6 +1,6 @@
 PRG            = demo
 OBJ            = demo.o
-MCU_TARGET     = at90s2313
+MCU_TARGET     = atmega8
 OPTIMIZE       = -O2
 
 DEFS           =

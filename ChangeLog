@@ -1,5 +1,9 @@
 2004-12-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/examples/demo/Makefile: Default to an ATmega8 now.
+
+2004-12-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.in: Enable man page building.
 	* doc/api/Makefile.am: (ditto)
 	* doc/api/doxygen.config.in: (ditto)
