@@ -6,10 +6,12 @@
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
+
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
+
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -44,23 +46,23 @@
 #ifndef _INA90_H_
 #define _INA90_H_ 1
 
-#define _CLI() do { __asm__ __volatile__ ("cli") } while (0)
-#define _SEI() do { __asm__ __volatile__ ("sei") } while (0)
-#define _NOP() do { __asm__ __volatile__ ("nop") } while (0)
-#define _WDR() do { __asm__ __volatile__ ("wdr") } while (0)
-#define _SLEEP() do { __asm__ __volatile__ ("sleep") } while (0)
-#define _OPC(op) do { __asm__ __volatile__ (".word %0" : : "n" (op)) } while (0)
+#define _CLI() do { __asm__ __volatile__ ("cli"); } while (0)
+#define _SEI() do { __asm__ __volatile__ ("sei"); } while (0)
+#define _NOP() do { __asm__ __volatile__ ("nop"); } while (0)
+#define _WDR() do { __asm__ __volatile__ ("wdr"); } while (0)
+#define _SLEEP() do { __asm__ __volatile__ ("sleep"); } while (0)
+#define _OPC(op) do { __asm__ __volatile__ (".word %0" : : "n" (op)); } while (0)
 
 /* _LPM, _ELPM */
 #include <avr/pgmspace.h>
-#define _LPM(x) do { __LPM(x) } while (0)
-#define _ELPM(x) do { __ELPM(x) } while (0)
+#define _LPM(x) do { __LPM(x); } while (0)
+#define _ELPM(x) do { __ELPM(x); } while (0)
 
 /* _EEGET, _EEPUT */
 #include <avr/eeprom.h>
 
 #define input(port) (port)
-#define output(port, val) do { (port = val) } while (0)
+#define output(port, val) do { (port) = (val); } while (0)
 
 #define __inp_blk__(port, addr, cnt, op) do {	\
 	unsigned char __i = (cnt);		\

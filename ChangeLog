@@ -1,4 +1,19 @@
-2004-11-03  Eric B. Weddington  <ericw@evcohs.com>
+2004-11-09  Eric B. Weddington  <ericw@evcohs.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	
+	* include/avr/ina90.h (_NOP): Add semicolon to statement in block to
+	avoid parse error. [Bug #10946]
+	(_CLI): Ditto.
+	(_SEI): Ditto.
+	(_WDR): Ditto.
+	(_SLEEP): Ditto.
+	(_OPC): Ditto.
+	(_LPM): Ditto.
+	(_ELPM): Ditto.
+	(output(port, val)): Ditto. Also correct parentheses around parameters.
+
+2004-11-08  Eric B. Weddington  <ericw@evcohs.com>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 
