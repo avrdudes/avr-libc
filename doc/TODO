@@ -11,6 +11,7 @@ TODO for avr-libc:
  - Document how to pre-program the EEPROM.
  - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
    sys/systemcfg.h?, stdio.h?
+ - Figure out how to remove __ prefix from function args in dox.
 
 
 [1] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000084.html
