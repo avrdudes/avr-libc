@@ -34,6 +34,7 @@
 -# \ref faq_volatile
 -# \ref faq_libm
 -# \ref faq_regbind
+-# \ref faq_startup
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -97,6 +98,61 @@ register unsigned char counter asm("r3");
 \endcode
 
 See \ref inline_asm for more details.
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_startup How to modify MCUCR or WDTCR early?
+</b>
+
+The method of early initialization (<tt>MCUCR</tt>, <tt>WDTCR</tt> or
+anything else) is different (and more flexible) in the current
+version.  Basically, write a small assembler file which looks like
+this:
+
+\code
+/* xram.S begin */
+
+#include <io.h>
+
+        .section .init1,"ax",@progbits
+
+        ldi r16,_BV(SRE) | _BV(SRW)
+        out _SFR_IO_ADDR(MCUCR),r16
+
+/* xram.S end */
+\endcode
+
+Assemble it, link the resulting <tt>xram.o</tt> with other files in
+your program, and this piece of code will be inserted in
+initialization code, which is run right after reset.  See the linker
+script for comments about the new <tt>.init</tt><em>N</em> sections
+(which one to use, etc.).
+
+The advantage of this method is that you can insert any initialization
+code you want (just remember that this is very early startup -- no
+stack and no <tt>__zero_reg__</tt> yet), and no program memory space
+is wasted if this feature is not used.
+
+There should be no need to modify linker scripts anymore, except for
+some very special cases.  It is best to leave <tt>__stack</tt> at its
+default value (end of internal SRAM -- faster, and required on some
+devices like ATmega161 because of errata), and add
+<tt>-Wl,-Tdata,0x801100</tt> to start the data section above the
+stack.
+
+There's also a way to modify the startup sequence from within C:
+
+\code
+void my_init (void) __attribute__ ((naked)) \
+    __attribute__ ((section (".init1")));
+
+void
+my_init (void)
+{
+      /* your init code here; C or inline asm */
+}
+\endcode
 
 <small>Back to \ref faq_index.
 </small>
