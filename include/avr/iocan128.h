@@ -343,6 +343,9 @@
 #define UBRR0L _SFR_MEM8(0xC4)
 #define UBRR0H _SFR_MEM8(0xC5)
 
+/* RegDef:  USART0 I/O Data Register */
+#define UDR0   _SFR_MEM8(0xC6)
+
 /* RegDef:  USART1 Control and Status Register A */
 #define UCSR1A _SFR_MEM8(0xC8)
 
