@@ -32,14 +32,14 @@
 
 avr_LIBRARIES = \
 	lib_stdlib.a \
-	lib_pmstring.a
-
-#	libc.a \
-#	libm.a \
-#	libprintf_min.a \
-#	libprintf_flt.a \
-#	libscanf_min.a \
-#	libscanf_flt.a
+	lib_pmstring.a \
+	lib_string.a \
+	lib_misc.a \
+	lib_stdio.a \
+	libprintf_min.a \
+	libprintf_flt.a \
+	libscanf_min.a \
+	libscanf_flt.a
 
 #libc_a_SOURCES =
 #libm_a_SOURCES =
@@ -50,8 +50,8 @@ avr_LIBRARIES = \
 
 include $(top_srcdir)/libc/stdlib/Rules.am
 include $(top_srcdir)/libc/pmstring/Rules.am
-#include $(top_srcdir)/libc/string/Rules.am
-#include $(top_srcdir)/libc/misc/Rules.am
-#include $(top_srcdir)/libc/stdio/Rules.am
+include $(top_srcdir)/libc/string/Rules.am
+include $(top_srcdir)/libc/misc/Rules.am
+include $(top_srcdir)/libc/stdio/Rules.am
 
 # vim: set ft=make ts=4 sw=4:

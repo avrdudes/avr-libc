@@ -1,3 +1,20 @@
+2004-04-29  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.ac (AC_INIT): Bump version.
+	* AvrCommonLibC.am: Enable building of libc/ files.
+	* common/Makefile.am: New file.
+	* libc/misc/Files.am: New file.
+	* libc/misc/Makefile.am: Rewrite.
+	* libc/misc/Rules.am: New file.
+	* libc/misc/eeprom.S: Conditional compile only if E2END > 0.
+	* libc/pmstring/Rules.am: New file.
+	* libc/stdio/Files.am: New file.
+	* libc/stdio/Makefile.am: Rewrite.
+	* libc/stdio/Rules.am: New file.
+	* libc/string/Files.am: New file.
+	* libc/string/Makefile.am: Rewrite.
+	* libc/string/Rules.am: New file.
+
 2004-04-28  Theodore A. Roth  <troth@openavr.org>
 
 	* AvrCommon.am: Split C library macros off into AvrCommonLibC.am.

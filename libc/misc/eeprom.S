@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2003, 2004, Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -36,6 +36,8 @@
 
 #include "macros.inc"
 #include "ctoasm.inc"
+
+#if E2END > 0
 
 /* the same library is used for 2313 and 8515 for now -
    I hope writing 0 to non-existent EEARH doesn't hurt... */
@@ -240,3 +242,5 @@ eeprom_write_block_done:
 #endif /* L_eeprom_write_block */
 
 .end
+
+#endif /* if E2END > 0 */ 
