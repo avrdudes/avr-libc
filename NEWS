@@ -1,6 +1,29 @@
 *** Changes since avr-libc-1.0:
 
-[[Merge the list from the 1.0 branch, too!]]
+* Bugs fixed:
+
+  [no-id] Fix TICIE1 value in usb header files.
+  [no-id] Fix bug introduced in fix for bug #7802 (missing parens).
+  [#2143] malloc() routines chunk smaller than requested
+  [#5454] Inline functions results in undefined reference when optimize level 0
+          is used.
+  [#5799] error(?) in iom162.h
+  [#2233] Documentation issues with inline asm
+  [#7469] "Problem" by using the library function "boot_lock_bits_set"
+  [#7556] printf and friends improperly handle non-null terminated strings when
+          a %s argument has a precision.
+  [#7802] vfscanf problem with unsigned long (patch #2554)
+  [#7989] dtostrf() destroys string pointer registers?
+  [#8119] _wdt_write macro in wdt.h doesn't work with ATmega169
+  [#8391] Fuse mask in boot.h wrong?
+          NOTE: boot_lock_bits_set() was broken. Please see the new
+          documentation for examples of how the new version works.
+  [#8452] some SFR and bit names in iom169.h are incorrect
+          NOTE: Where possible, the old names are retained to avoid breaking
+          existing code, but the OCR1A and OCR1B names where just plain wrong
+          so they have been changed and the incorrect names (OCRA1 and OCRB1) 
+          are undefined.
+  [#8649] sfr_defs.h: missed _SFR_BYTE() in bit_is_set/clear
 
 * Remove deprecated items:
   + obsolete headers from the base include directory (moved to the avr/
@@ -9,6 +32,25 @@
     . <avr/eeprom.h> (eeprom_rb, eeprom_rw, eeprom_wb),
     . <avr/io.h>  (cbi, sbi, inb, outb, inw, outw, inp, outp, BV),
     . <avr/pgmspace.h> (PRG_RDB).
+  + . <avr/timer.h> removed completely.
+
+* New devices supported:
+
+  + ATmega165
+  + ATmega325
+  + ATmega3250
+  + ATmega645
+  + ATmega6450
+  + ATmega48
+  + ATmega88
+  + ATmega168
+  + ATtiny13
+  + ATtiny2313
+  + AT90CAN128
+
+* Pin names for ports are now consistent for all devices.
+
+* dtostrf() now uses movw where possible
 
 * realloc() has been implemented.
 
@@ -61,6 +103,10 @@ New functions:
 New functions:
   vfprintf_P
   vfscanf_P
+  vsprintf
+  vsprintf_P
+  vsnprintf
+  vsnprintf_P
 
 * Use newer Doxygen.
 

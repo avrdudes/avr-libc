@@ -1,5 +1,9 @@
 2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* NEWS: Update, merge all fixes from 1.0 branch.
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/main_page.dox: Mention all newly supported devices.
 	* doc/api/using-tools.dox: Mention all newly supported devices.
 
