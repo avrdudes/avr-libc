@@ -1,3 +1,8 @@
+2004-06-20  Theodore A. Roth  <troth@openavr.org>
+
+	* xml: New directory.
+	* xml/Device.dtd: New file.
+
 2004-06-04  Theodore A. Roth  <troth@openavr.org>
 
 	* Makefile.am (install-data-local): Install version.h file.
