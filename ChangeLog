@@ -1,3 +1,9 @@
+2005-01-10  Eric B. Weddington  <ericw@evcohs.com>
+
+    * include/avr/wdt.h: Rewrite wdt_disable() to match datasheet algorithm.
+    [Fix for bug #11522]
+    * NEWS: Update bugs fixed list.
+
 2005-01-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/ldexp.S: remove jump to itself.

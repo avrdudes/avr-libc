@@ -8,6 +8,7 @@
   [#11486] Put the port bit defintions back in for mega16.
   [#11505] Remove doxygen comment about the deprecated inp/outp items.
   [#11510] Abstract the change enable bit in wdt.h for mega32.
+  [#11522] Rewrite wdt_disable() to match datasheet algorithm.
 
 *** Changes in avr-libc-1.2:
 
