@@ -1,5 +1,11 @@
 2004-05-07  Theodore A. Roth  <troth@openavr.org>
 
+	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Add libm.a sources to
+	libc.a so that float point libs are available even if the end user
+	forgets to use the -lm to link to the math lib.
+
+2004-05-07  Theodore A. Roth  <troth@openavr.org>
+
 	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Revert addition of libm.a
 	C and asm sources. I forget this change was in my tree when I made the
 	previous change to this file. Will reapply it separately.

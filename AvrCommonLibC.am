@@ -55,7 +55,9 @@ nodist_libc_a_SOURCES = \
 	$(misc_a_c_sources) \
 	$(misc_a_asm_sources) \
 	$(stdio_a_c_sources) \
-	$(stdio_a_asm_sources)
+	$(stdio_a_asm_sources) \
+	$(libm_a_c_sources) \
+	$(libm_a_asm_sources)
 
 nodist_libm_a_SOURCES = \
 	$(libm_a_c_sources) \
