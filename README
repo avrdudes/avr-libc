@@ -7,6 +7,9 @@ The current branch (1.0), requires the following versions of gcc and binutils:
   binutils            2.13                   2.14
   gcc                 3.3                 Latest 3.3.x
 
+NOTE: gcc-3.3.3 will not build for avr. This is a known bug, see the gcc bug
+database.
+
 For details on installing and using AVR Libc, see the users manual in the
 doc/api directory or online at:
 
