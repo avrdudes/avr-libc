@@ -1,3 +1,8 @@
+2002-10-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/calloc.c: new file.
+	* include/stdlib.h libc/stdlib/Makefile.am: add calloc().
+
 2002-10-11  Theodore A. Roth  <troth@openavr.org>
 
 	* include/errno.h: Add dox.

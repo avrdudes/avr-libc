@@ -33,6 +33,7 @@ noinst_LIBRARIES = lib.a
 lib_a_c_sources = \
 	abs.c		\
 	bsearch.c	\
+	calloc.c	\
 	errno.c		\
 	labs.c		\
 	malloc.c	\

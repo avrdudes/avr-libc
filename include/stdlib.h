@@ -338,6 +338,13 @@ extern char *__malloc_heap_start;
 extern char *__malloc_heap_end;
 
 /**
+   Allocate \c nele elements of \c size each.  Identical to calling
+   \c malloc() using <tt>nele * size</tt> as argument, except the
+   allocated memory will be cleared to zero.
+*/
+extern void *calloc(size_t __nele, size_t __size) __ATTR_MALLOC__;
+
+/**
      The strtod() function converts the initial portion of the string pointed
      to by \c nptr to double representation.
 
@@ -489,7 +496,6 @@ extern char *dtostrf(double __val, char __width, char __prec, char *__s);
 #if 0  /* not yet implemented */
 extern int atexit(void (*)(void));
 extern double atof(const char *);
-extern void *calloc(size_t, size_t);
 extern int rand(void);
 extern void *realloc(void *, size_t);
 extern void srand(unsigned int);
