@@ -1,3 +1,9 @@
+*** Changes since avr-libc-1.2.2:
+
+* Bugs fixed:
+
+  [#11987] sscanf parsing problem : leading zero ignored in %u
+
 *** Changes since avr-libc-1.2.1:
 
 * Bugs fixed:
