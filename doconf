@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Do configure for the avr libc.
+#
+# usage: doconf
+#        or
+#        doconf any_other_configure_option
+#
+# This script will execute configure in the build directory. It will
+# erase the build directories if they exist already.
+# The main build directory is created. The multilib build directories
+# are created by the main configure.
+# It will first set the path to the path, where the cross compiler
+# can be found. If your cross compiler is in an other directory,
+# please change the "PREFIX:" line below or specify it at the command line
+# ("PREFIX=what_you_want doconf").
+# If you have the path to the cross compiler in you default path, erase
+# the "PATH=" line below.
+#
+# It is very important that you check the installation path. It has to
+# be the same as for the avr gcc.
+#
+
+# where does it go? (allow to overwrite it at the command line)
+: ${PREFIX:=/usr/local}
+
+# remove all build directories
+rm -rf avr3 avr4 avr5 build
+mkdir -p build
+cd build
+
+PATH=$PREFIX/bin:$PATH
+../configure --prefix=$PREFIX $*
+
+cd ..

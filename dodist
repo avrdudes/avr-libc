@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Make the distribution package.
+#
+# usage: dodist
+#
+# This script reconfigures the project and makes the distribution package.
+# It is for the developer only. If you don't know anything about
+# automake/autoconf, do never execute this script.
+
+set -e
+./reconf
+./doconf
+./domake        # to be sure the distribution can be compiled
+./domake distcheck

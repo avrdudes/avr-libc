@@ -1,0 +1,249 @@
+PLEASE read doc/INSTALL first for installation instructions.
+
+Changes:
+
+avr-libc-20011208
+
+Add ATmega8 support (not yet enabled), thanks to Pieter Conradie.
+Add missing UCSR1C and fix INT_VECT_SIZE in iom128.h.
+
+=====
+
+avr-libc-20011126
+
+Changes to support ATmega128 (for now commented out in Makefile
+until the necessary changes are made to gcc and binutils) and make
+it easier to add other new devices (cleaned up gcrt1.S interrupt
+vectors), thanks to Peter Jansen <peter@smartcontainer.net>.
+Note: I haven't tested anything yet, other than it compiles ;)
+
+=====
+
+avr-libc-20011029
+
+Fix strtod() link error (fp_zero -> __fp_zero).
+Split eeprom.o into 4 object files (one function in each file).
+
+=====
+
+Changes:
+
+avr-libc-20011007
+
+Add avr-libc-reference.html document.
+Use "install -c" (ignored by GNU fileutils, needed on FreeBSD).
+Add isblank().
+
+=====
+
+avr-libc-20010821
+
+Add atan2() and new atan(), thanks to Reiner Patommel.
+
+=====
+
+avr-libc-20010717
+
+Remember to update version in Makefile this time, this only matters
+for Makefile-win32 which has some known bugs, please help fix them.
+Update fplib license, now GPL + exception as in gcrt1.S and libgcc,
+now OK for proprietary applications too, thanks to Michael Stumpf.
+Fix strtod() whitespace handling, as in atoi().
+More atoi() changes (now it's smaller) by Jochen Pernsteiner.
+
+=====
+
+avr-libc-20010708
+
+Add atan(), contributed by Reiner Patommel.
+Fix atoi() whitespace handling, reported by Jochen Pernsteiner.
+Alternative version of bit_is_set/bit_is_clear macros that can
+make better optimized code, suggested by Thomas Husterer.
+Fix bug in __fixsfsi for numbers <1.0, thanks to Michael Stumpf.
+Fix fplib/strtod.S and stdlib/atoi.S to not call __mulhi3, call a new
+optimized function __mulhi_const_10 instead.  Use XCALL to call any
+external functions (might not be reachable for RCALL on >8K devices).
+
+=====
+
+avr-libc-20010701
+
+Add a few more asm string functions, thanks to Reiner Patommel
+(atoi, strcasecmp, strcasecmp_P, strcat_P, strncasecmp,
+strncasecmp_P, strlwr, strrev, strupr), changed by me to use
+standard (glibc, BSD) instead of DOS (stricmp etc.) names.
+
+=====
+
+avr-libc-20010616
+
+Tested with gcc 3.0 20010526 and binutils 010609 snapshots.
+Add strstr() (in assembler), thanks to Jochen Pernsteiner.
+Fix fplib/asin.S (P3 value), thanks to Dean Ferreyra.
+Fix itoa() again... even tested it this time ;).
+Fix div() and ldiv() to call the new libgcc functions, too.
+Fix gnu/qsort.c to compile without <ansidecl.h>.
+Separate Makefile-win32 for now (patches welcome and probably
+needed, it's just that I don't want them to break the Linux/*BSD
+Makefile in subtle unexpected ways that only show up on the first
+"make install" so I didn't catch them), help needed from someone
+who is good at writing portable Makefiles as I'm not :(.
+Move README to doc/CHANGES as that's what it really is.
+
+=====
+
+avr-libc-20010331
+
+Updated itoa() to work with current CVS libgcc (use __udivmodhi4).
+Updated iotn15.h (ATtiny15 I/O registers defines).
+
+=====
+
+avr-libc-20010303
+
+Merged some Makefile changes for win32 support (don't ask me how it
+works :), thanks to Gunnar.Henne@gmx.de (http://combio.de/avr/).
+
+=====
+
+avr-libc-20010211
+
+Minor changes (there are no bugs :), added new parity_even_bit() macro.
+Now available from http://www.amelek.gda.pl/avr/ (the previous URL -
+http://www.itnet.pl/amelektr/avr/ - will be available for some time).
+
+=====
+
+avr-libc-20001125
+
+More fplib bug fixes (can't depend on r1 being 0 in fp_split, fixsfsi
+should correctly return 0 for very small numbers, dtostre fixes).
+Again thanks to Kovesdi Gyorgy.
+
+=====
+
+avr-libc-20001118
+
+Some fplib fixes (compare return values changed to match what GCC
+expects; fp_split does not set the "hidden bit" if exponent is 0).
+Thanks to Kovesdi Gyorgy <gkovesdi@gw.cdk.bme.hu>.
+
+Updated ATmega163 defines (iom163.h) now that the official datasheet
+is released.  Added preliminary AT76C711 defines (io76c711.h).
+
+Added copyright information (doc/LICENSE), released the files written
+by me as public domain (they have always been open source, but the
+wording of the copyright was a bit unfortunate).
+
+=====
+
+avr-libc-20000730
+
+Added multilib support for latest CVS avr-gcc changes.
+Renamed gcrt1-*.o to crt*.o (unique on 8.3 filesystems).
+
+Many other changes.
+
+=====
+
+avr-libc-20000514
+
+Minor tweaks, _end_of_ram_ -> __bss_end in malloc (please test -
+I've never had to use malloc on AVR yet), added -mcall-prologues
+so big C functions are smaller (prologue/epilogue only pulled in
+from libgcc if any of these functions are used - in this case it
+is a win to compile everything else with -mcall-prologues too),
+made strtod() use libgcc prologue/epilogue instead of its own.
+
+=====
+
+avr-libc-20000503
+
+More optimized asm string functions, more gcrt1.S hacks,
+added almost-IAR-compatible <ina90.h> and <pgmspace.h>.
+Please test with current CVS binutils and gcc - thanks.
+
+Marek
+
+=====
+
+README for avr-libc-20000402
+
+OK, approved :) - finally found some time and made some more cleanups,
+added early MCUCR and WDTCR initialization in gcrt1.S - for example,
+to enable WDT with maximum timeout and enable slow external SRAM,
+add these options to linker command line (via avr-gcc -Wl,...):
+	--defsym __init_wdtcr__=0x0F --defsym __init_mcucr__=0xC0
+
+Marek
+
+=====
+
+README for additions / changes in avr-libc-20000207 as compared to avr-libc-20000201
+  which have not been tested or approved by Marek Michalkiewicz yet.
+
+These additions were done with the Win32 port of avr-gcc. Thus Linux users
+may have to
+	change CR/LFs to CRs
+	tune the Makefile to their needs
+
+Makefile: The new Makefile is needed to build all the additions to the lib.
+	I tried to make it compatible with both Linux and Win32. Mareks original
+	Makefile has been renamed to Makefile.orig.
+
+libm:	Michael Stumpfs FPlib3.0 ported to avr-as
+	Michael Stumpfs strtod function ported to avr-as but not tested yet
+	
+libc:	Michael Stumpfs ctype routines ported to avr-as
+
+non-ANSI C standard additions:
+	dtostre (stdlib.h, libm.a) largely rewritten, Unix-like
+	itoa (stdlib.h, libc.a), Windows / OS2-like
+
+changes to macros.inc
+	added FARCALL (rcall / call) in analogy to VECTOR (rjmp / jmp)
+changes to progmem.h
+	disabled #define PRG_RDB(addr) __elpm_inline(addr) because of too many complaints
+	by mega103 users.
+	If you use > 64kB program memory, try experimenting with __elpm_inline directly.
+	
+
+Michael Rickmann <mrickma@gwdg.de>
+
+=====
+
+README for avr-libc-20000201
+
+This release fixes a few little bugs in the previous release.
+Most important: should work on ATmega103 now - gcrt1.S uses
+"jmp" instead of "rjmp" to jump to main().
+
+=====
+
+README for avr-libc-19991224
+
+This release requires the latest avr-binutils and avr-gcc versions.
+Use of AVA assembler and linker is no longer supported (sorry,
+right now I'm extremely busy and backward compatibility was too
+much work - when finished, everyone would have been using binutils
+for years anyway :).
+
+Warning: this is work in progress.  Not all features of previous
+avr-libc releases are supported yet:
+ - fplib (needs to be ported to binutils first)
+ - early MCUCR (required for external SRAM) and WDTCR initialization
+ - optimized asm string functions (slightly larger/slower C versions
+   available for now)
+ - anything else I forgot?
+
+If you need support for AVA and/or any of the missing features,
+please use the older avr-libc-19991010 release, or help me by
+sending patches to implement features you need.
+
+Installation instructions are in doc/INSTALL.  I have tested this
+version a little with AT90S8535 (used in the project I'm working on).
+Please test it more.  Suggestions, bug reports, patches and new code
+are welcome.  Thanks!
+
+Marek Michalkiewicz <marekm@amelek.gda.pl>
+

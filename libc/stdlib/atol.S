@@ -1,0 +1,125 @@
+/* Copyright (c) 2002, Reiner Patommel
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+   * Neither the name of the copyright holders nor the names of
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/*
+   atol.S
+
+   Contributors:
+     Created by Reiner Patommel
+ */
+
+#include "macros.inc"
+
+#define str_hi 		r25
+#define str_lo 		r24
+#define num_hi_hi 	r25
+#define num_hi_lo	r24
+#define	num_lo_hi	r23
+#define num_lo_lo	r22
+#define tmp    		r17
+
+; long atol(const char *string)
+
+    .text
+    .global _U(atol)
+    .type   _U(atol), @function
+
+/*
+   Skip leading spaces and tabs.  Process optional sign.  Stop conversion
+   on detection of a non-numeric character.  Return 0 if string contains
+   no numeric characters.
+ */
+
+_U(atol):
+	push	r17
+	LOAD_Z(str_lo, str_hi)      	; set pointer to string
+	CLR		num_hi_hi
+	CLR		num_hi_lo
+	CLR		num_lo_hi
+	CLR		num_lo_lo				; clear number
+	CLT								; clear sign
+.atol_loop:
+	LD		tmp, Z+             	; get (next) character
+	TST		tmp                 	; is it end of string
+	BREQ	.atol_sig
+	CPI		tmp, ' '            	; if space, skip
+	BREQ	.atol_loop
+	CPI		tmp, '\t'	        	; if tab, skip
+	BREQ	.atol_loop
+	CPI		tmp, '\n'           	; skip other whitespace
+	BREQ	.atol_loop
+	CPI		tmp, '\f'
+	BREQ	.atol_loop
+	CPI		tmp, '\r'
+	BREQ	.atol_loop
+	CPI		tmp, '\v'
+	BREQ	.atol_loop
+	CPI		tmp, '+'	         	; if '+' go on
+	BREQ	.atol_loop2
+	CPI		tmp, '-'             	; if '-' remember sign
+	BRNE	.atol_digit
+.atol_neg:
+	SET				             	; remember number is negative
+.atol_loop2:
+	LD		tmp, Z+
+	TST		tmp
+	BREQ	.atol_sig
+.atol_digit:
+	CPI		tmp, '0'             	; test on [0 .. 9]
+	BRLT	.atol_sig
+	CPI		tmp, '9'+1
+	BRGE	.atol_sig
+	SUBI	tmp, '0'             	; make figure a number
+	XCALL	__mulsi_const_10     	; r25:r24:r23:r22 *= 10
+	ADD		num_lo_lo, tmp          ; num = (num * 10) + (tmp - '0')
+	adc		num_lo_hi, __zero_reg__
+	adc		num_hi_lo, __zero_reg__
+	adc		num_hi_hi, __zero_reg__
+	RJMP	.atol_loop2          	; next figure
+.atol_sig:
+	CP		num_lo_lo, __zero_reg__
+	CPC		num_lo_hi, __zero_reg__
+	CPC		num_hi_lo, __zero_reg__
+	CPC		num_hi_hi, __zero_reg__	; did we get a number?
+	BREQ	.atol_done           	; no, drop sign and return
+	BLD		tmp, 0					; get sign again
+	TST		tmp                 	; positive number?
+	BREQ	.atol_done
+	COM		num_hi_hi
+	COM		num_hi_lo
+	COM		num_lo_hi
+	NEG		num_lo_lo
+	SBCI	num_lo_hi, 0xff
+	SBCI	num_hi_lo, 0xff
+	SBCI	num_hi_hi, 0xff			; make number negative
+.atol_done:
+	pop		r17;
+	RET
+.atol_end:
+	.size _U(atol), .atol_end - _U(atol)
+

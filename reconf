@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Reconfigure the whole project.
+#
+# usage: reconf
+#
+# This script will rerun all auto tools. It is for the developer
+# only. If you don't know anything about automake/autoconf, do
+# never execute this script.
+#
+# ATTENTION:
+#  You need automake 1.4-p5, otherwise make dist will not work.
+#
+
+# to what is executed
+set -x
+
+aclocal
+autoconf
+automake --foreign --add-missing --copy

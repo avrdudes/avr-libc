@@ -1,0 +1,52 @@
+/* ----------------------------------------------------------------------------------------------
+
+  strtod.s
+
+  Copyright (c) Michael Stumpf   <Michael.Stumpf@t-online.de>
+
+  addition to Floating point library for Atmel AVR uC
+  converts a string to a double ( = float)
+  double := [ws]*[+|-][0123456789]*[.0123456789]*[e|E][+|-][0123456789]*
+
+  Author : Michael Stumpf
+          Michael.Stumpf@t-online.de
+
+
+  Version : 0.1.0
+
+  Date : 17.09.1999
+
+  Algorithm:
+              -0123456789.01234567e+012
+              converted to
+
+              unsigned long integer fraction :
+                ul = 1234567890 (=0x49 96 02 D2) with
+              (max 4 byte, breaks if uppermost nibble != 0)
+                fraction power (rFracPower) = 9 and
+                decimal point shift (rDPshift) = -1
+
+              integer exponent : rExp = 12 rDPshift-1
+
+              then if no overflow/underflow occurs the fp number is
+              (corrected by decimal point shift)
+                fp = (float)ul * 10^(rExp+rDPshift)
+
+              overflow occurs if exp>0 && exp+fraction power > 38
+              or
+              fp results in NaN
+                fp = +/-MAX_FLT then, errno = ERANGE (if __ERRNO__ is defined)
+
+              underflow occurs if exp<0 && |exp|-fraction power > 38
+              or
+              fp results in zero and exp<0 && |exp|-fraction power > 38
+                fp = 0.0 then, errno = ERANGE (if __ERRNO__ is defined)
+
+  Exceptions: no NAN INF IND strings are recognized
+
+ ================================================================================
+  Version Date         Changes
+  0.1.0                * first release
+  0.1.1   02.11.99     * macro mask(bit) replaced by BV(bit)
+
+

@@ -1,0 +1,198 @@
+# Autoconf configure script for avr libc/libm main directory.
+# Process this file with autoconf to produce a configure script.
+
+# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright
+#   notice, this list of conditions and the following disclaimer in
+#   the documentation and/or other materials provided with the
+#   distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+AC_PREREQ(2.13)
+AC_INIT(libc)
+
+dnl Default to --enable-multilib
+AC_ARG_ENABLE(multilib,
+[  --enable-multilib       build many library versions (default)],
+[case "${enableval}" in
+  yes) multilib=yes ;;
+  no)  multilib=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for multilib option) ;;
+ esac], [multilib=yes])dnl
+
+if test "${target}" = "NONE"; then
+   target=avr
+fi
+
+case "${target}" in
+   avr) ;;
+   *) AC_MSG_ERROR(This is libc for the avr target only!) ;;
+esac
+
+if test "${host}" = "NONE"; then
+   host=avr
+fi
+
+if test "${build}" = "NONE"; then
+   build=`${srcdir}/config.guess`
+fi
+
+dnl We may get other options which we don't document:
+dnl --with-target-subdir, --with-multisrctop, --with-multisubdir
+
+test -z "${with_target_subdir}" && with_target_subdir=.
+
+if test "${srcdir}" = "."; then
+  if test "${with_target_subdir}" != "."; then
+    avrlib_basedir="${srcdir}/${with_multisrctop}.."
+  else
+    avrlib_basedir="${srcdir}/${with_multisrctop}"
+  fi
+else
+  avrlib_basedir="${srcdir}"
+fi
+AC_SUBST(avrlib_basedir)
+
+# Determine the host, build, and target systems
+AC_CANONICAL_SYSTEM
+
+dnl maybe the release number sould be changed to major.minor.bugfix
+dnl (e.g.: 1.0.0) to be able to tell the users of the avr-libc if
+dnl it is compatible to their current version or not.
+AM_INIT_AUTOMAKE(avr-libc, 20020630)
+
+dnl Use the AC_CHECK_TOOL macro to find also cross tools
+AC_CHECK_TOOL(AS, as, as)
+AC_CHECK_TOOL(AR, ar, ar)
+AC_CHECK_TOOL(RANLIB, ranlib, ranlib)
+AC_CHECK_TOOL(CC, gcc, gcc)
+
+case "${CC}" in
+   *avr-gcc*) ;;
+   *) AC_MSG_ERROR(Wrong C compiler found; check the PATH!) ;;
+esac
+case "${AS}" in
+   *avr-as*) ;;
+   *) AC_MSG_ERROR(Wrong assembler found; check the PATH!) ;;
+esac
+case "${AR}" in
+   *avr-ar*) ;;
+   *) AC_MSG_ERROR(Wrong archiver found; check the PATH!) ;;
+esac
+case "${RANLIB}" in
+   *avr-ranlib*) ;;
+   *) AC_MSG_ERROR(Wrong ranlib found; check the PATH!) ;;
+esac
+
+AC_PROG_INSTALL
+
+dnl we need to set some compiler switches according to the current
+dnl avr library configuration
+
+dnl FIXME: I am sure it is possible to use the original several -O, -mmcu and -g
+dnl        switches, because the latest one is the one gcc will use.
+dnl        If this is not true, we must change the content of CFLAGS and several
+dnl        other variables.
+dnl        Maybe some else has more experience than I to check this.
+dnl        I think also the -x option for the assembler is not necessary.
+dnl        
+dnl        I have tried to find why objdump -x shows different outputs for files
+dnl        compiled / assembled with the old Makefile and with this procedures.
+dnl        Sorry, but I couldn't find the reason.
+ 
+dnl special flags for different sub-targets
+dnl optimize for speed on ATmega (lots of flash, but slower)
+dnl optimize for size on <=8K MCUs (not clear what is better: -O3 or -Os)
+avrlib_opt_space='-mcall-prologues -Os'
+avrlib_opt_speed='-O3'
+
+AVR_CRT_AT90=''
+AVR_CRT_TINY=''
+AVR_CRT_MEGA=''
+AVR_CRT_OTHER=''
+avrlib_cflags=''
+avrlib_asflags=''
+if test -z "${with_multisubdir}"; then
+  dnl default build directory -> avr1 and avr2
+  avrlib_cflags="-mmcu=avr2 ${avrlib_opt_space}"
+  avrlib_asflags='-mmcu=at90s8515'
+  AVR_CRT_AT90='crts1200.o crts2313.o crts2323.o crts2333.o crts2343.o \\\
+                crts4414.o crts4433.o crts4434.o crts8515.o crts8535.o \\\
+                crtc8534.o'
+  AVR_CRT_TINY='crttn11.o crttn12.o crttn15.o crttn28.o crttn22.o # crttn26.o'
+else
+  case $with_multisubdir in
+  avr3) avrlib_cflags=${avrlib_opt_speed}
+        avrlib_asflags='-mmcu=atmega103'
+        AVR_CRT_MEGA='crtm103.o'
+  ;;
+  avr4) avrlib_cflags=${avrlib_opt_space}
+        avrlib_asflags='-mmcu=atmega8'
+        AVR_CRT_MEGA='crtm8.o # crtm8515.o crtm83.o crtm85.o'
+  ;;
+  avr5) avrlib_cflags=${avrlib_opt_speed}
+        avrlib_asflags='-mmcu=atmega161'
+        AVR_CRT_MEGA='crtm161.o crtm163.o crtm323.o crtm128.o # crtm16.o crtm162.o crtm32.o crtm64.o'
+        AVR_CRT_OTHER='crtat94k.o'
+  ;;
+  *)    AC_MSG_ERROR(unexpected value '${with_multisubdir}' for with_multisubdir)
+  ;;
+  esac
+fi
+
+AVRLIB_CFLAGS="-g -Wall -W -Wstrict-prototypes ${avrlib_cflags}"
+AC_SUBST(AVRLIB_CFLAGS)
+AVRLIB_ASFLAGS="-x assembler-with-cpp -Wa,-gstabs ${avrlib_asflags}"
+AC_SUBST(AVRLIB_ASFLAGS)
+AVR_CRT_ASFLAGS='-x assembler-with-cpp -Wa,-gstabs'
+AC_SUBST(AVR_CRT_ASFLAGS)
+AC_SUBST(AVR_CRT_AT90)
+AC_SUBST(AVR_CRT_TINY)
+AC_SUBST(AVR_CRT_MEGA)
+AC_SUBST(AVR_CRT_OTHER)
+
+dnl the includes for the avr libc
+INCLUDES='-I$(top_srcdir)/include -I$(top_srcdir)/common'
+AC_SUBST(INCLUDES)
+
+if test "${multilib}" = "yes"; then
+  multilib_arg="--enable-multilib"
+else
+  multilib_arg=
+fi
+
+dnl the top Makefile must be the last of the list
+AC_OUTPUT(crt1/Makefile libc/Makefile libc/stdlib/Makefile
+          libc/pmstring/Makefile libc/string/Makefile libc/misc/Makefile
+          libm/Makefile libm/fplib/Makefile
+          Makefile,
+[if test -n "$CONFIG_FILES"; then
+  . ${avrlib_basedir}/config-ml.in
+fi],  
+srcdir=${srcdir}
+host=${host}
+target=${target}
+with_multisubdir=${with_multisubdir}
+ac_configure_args="${multilib_arg} ${ac_configure_args}"
+CONFIG_SHELL=${CONFIG_SHELL-/bin/sh}
+avrlib_basedir=${avrlib_basedir}
+CC="${CC}"
+)

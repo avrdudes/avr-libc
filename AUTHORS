@@ -1,0 +1,22 @@
+Main maintainer:
+Marek Michalkiewicz <marekm@amelek.gda.pl>
+
+gcrt1.S:
+Denis Chertykov <denisc@overta.ru>
+
+fplib:
+Michael Stumpf <Michael.Stumpf@t-online.de>
+Reiner Patommel <rpato@post4.tele.dk>
+
+string:
+Reiner Patommel <rpato@post4.tele.dk>
+
+misc/itoa.S:
+Michael Rickmann <mrickma@gwdg.de>
+
+string/strstr.S:
+Jochen Pernsteiner <jochen.pernsteiner@stud.fh-regensburg.de>
+
+autoconf/automake files (*.in/*.am):
+Reinhard Jessich <reinhard.jessich@telering.at>
+                 or <reinhard.jessich@frequentis.com>

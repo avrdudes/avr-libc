@@ -1,0 +1,6 @@
+TODO for avr-libc:
+
+ - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
+ - finish porting newlib to AVR (may be useful especially for
+   larger devices, and for testing avr-gcc itself...)
+ - optimize strlcpy and strlcat

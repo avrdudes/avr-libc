@@ -1,0 +1,94 @@
+2002-06-20  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* crt1/gcrt1.S: Check GCC version (3.2 required, 3.1 will not work).
+	Set __heap_end to 0 so the symbol is defined for malloc().
+	* include/stdlib.h: Declare __malloc_margin, __malloc_heap_start
+	and __malloc_heap_end.
+	* include/io*.h: Rename OVR bit to DOR.
+	* include/iom161.h: Define the same bits for both UARTs.
+	Define SPMCR bits.
+
+2002-06-12  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* crt1/gcrt1.S: Fix bug with interrupt vectors always pointing to
+	the reset address (no __vector_* relocs) on all <=8K chips.  Oops.
+	This also restores the "handle unexpected interrupts" feature that
+	was present in the old gcrt1.S - define a "signal" function named
+	__vector_default to handle all interrupts not handled elsewhere.
+	* doc/INSTALL: Update.
+
+2002-06-01  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Rewrite gcrt1.S, make use of the new ld scripts that allow
+	inserting user code at various stages of initialization.
+
+2002-05-31  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Rewrite I/O access macros so that you can use I/O registers
+	directly in C expressions.  See <sfr_defs.h> for description.
+	Many files changed, please test - I have tried to maintain some
+	backwards compatibility, but applications (especially assembler
+	sources) will need to be modified.  Also check C code for any
+	outb/outw macro calls as now their arguments are in the correct
+	(port, value) order, consistent with C assignment operators.
+
+2002-05-30  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Fix multilib build failure (some *.S files) after the 20020529 GCC
+	changes in handling of predefined __AVR_AT*__ preprocessor macros.
+	Do not set AM_CFLAGS in Makefile.am files.  Add our own rules that
+	add AVRLIB_ASFLAGS after CFLAGS, so that our -mmcu=atmega103 comes
+	after multilib -mmcu=avr3 (not the other way around), now that the
+	last -mmcu=* option completely overrides any previous one.
+	* Move gcrt1.S from libc/ into a new crt1/ directory.
+	* Move libc/bsd/*.c to libc/stdlib/ and remove libc/bsd/ directory.
+	* Move strlcat.c and strlcpy.c from libc/stdlib/ to libc/string/ .
+	* Add "set -e" and do "make distcheck" in dodist script.
+	* libc/stdlib/malloc.c: New implementation, thanks to Joerg Wunsch.
+
+2002-05-26  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	The patch mentioned below is now in the binutils CVS tree.
+	* Add copyright notices to all files in preparation for moving
+	the project to savannah.gnu.org.  Thanks to Theodore A. Roth
+	<troth@verinet.com> for help with this boring task...
+	* Remove libc/gnu/ subdir and include/string-avr.h (LGPL).
+	* Update doc/avr-libc-reference.html (string-avr.h gone).
+
+2002-05-11  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	WARNING: Test release - for use only with current CVS GCC and
+	binutils with applied patch from
+	http://www.amelek.gda.pl/avr/test/avr-binutils-patch-20020511.gz
+	* configure.in: Default to avr target, enable ATmega128 support.
+	* include/io-avr.h: More known devices.
+	* include/pgmspace.h (strncasecmp_P): Add missing third argument.
+	* include/string.h (strlcat, strlcpy): Declare.
+	* libc/gcrt1.S (__stack): Weak, default to RAMEND from <io*.h>.
+	* libc/stdlib/Makefile.am (lib_a_c_sources): Update.
+	* libc/stdlib/strlcat.c, libc/stdlib/strlcpy.c: New.
+
+2002-02-03  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Add dtostrf(), optimize atol(), itoa(), utoa() from Reiner Patommel.
+	* libc/stdlib/ctype.S (isalnum): Bugfix from Jens Meyer.
+	* include/iomactos.h: change constraints, add inw/outw, clean up.
+	* doc/avr-libc-reference.html: Update.
+
+2002-01-15  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Add ltoa() and ultoa(), thanks to Reiner Patommel.
+	* Optimize parity_even_bit, thanks to Greg Smith.
+	* doc/avr-libc-reference.html: Fix CR/LF newlines.
+
+Sun Jan 06 00:11:00 2002  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* configure.in: Add the "-g" option to AVRLIB_CFLAGS.
+	* reconf: Add "set -x" to see whta is executed.
+	* Makefile.am: Remove the comment about automake 1.4.
+
+Sat Dec 29 22:44:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* Bugfix in configure.in: Now avr-libc can be configured, without
+	  a present avr-libc installed.
+	
+Sat Dec 29 01:29:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* libm is working with autoconf/automake, too.
+	* Create the new distribution package avr-libc-20011229.tar.gz.
+	
+Sat Dec 28 23:34:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* libc is working with autoconf/automake.
+	
+Sat Dec 22 22:12:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* First tries to use the autoconf/automake for the building of the avr libc.
+	
+see doc/CHANGES for old changes (before autoconf/automake) support.
