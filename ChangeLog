@@ -1,5 +1,10 @@
 2003-09-30  Theodore A. Roth  <troth@openavr.org>
 
+	* NEWS: Add note about doxygen upgrade.
+	* doc/TODO: Updates.
+
+2003-09-30  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/dox.css: Add spec for TD.mdRow.
 

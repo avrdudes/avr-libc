@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.0:
 
+* Use newer Doxygen.
+
+To build the documentation, doxygen-1.3.4 or newer is strongly recommended.
+
 *** Changes in avr-libc-1.0:
 
 * Move source to cvs repositiory at http://savannah.gnu.org/projects/avr-libc
