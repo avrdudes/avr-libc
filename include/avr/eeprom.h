@@ -38,32 +38,71 @@
 
 #include <io.h>
 
-/* return 1 if EEPROM is ready for a new read/write operation, 0 if not */
+/** \defgroup avr_eeprom EEPROM handling
+    \code #include <avr/eeprom.h> \endcode
+
+    This header file declares the interface to some simple library
+    routines suitable for handling the data EEPROM contained in the
+    AVR microcontrollers.  The implementation uses a simple polled
+    mode interface.  Applications that require interrupt-controlled
+    EEPROM access to ensure that no time will be wasted in spinloops
+    will have to deploy their own implementation.
+
+    \note All of the read/write functions first make sure the EEPROM
+     is ready to be accessed.  Since this may cause long delays if a
+     write operation is still pending, time-critical applications
+     should first poll the EEPROM e. g. using eeprom_is_ready() before
+     attempting any actual I/O. */
+
+/** \name avr-libc declarations */
+
+/*@{*/
+/** \def eeprom_is_ready
+    \ingroup avr_eeprom
+    return 1 if EEPROM is ready for a new read/write operation, 0 if not */
 #define eeprom_is_ready() bit_is_clear(EECR, EEWE)
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* read one byte from EEPROM address ADDR */
+/** \ingroup avr_eeprom
+    read one byte from EEPROM address \c addr */
 extern unsigned char eeprom_rb(unsigned int addr);
 
-/* read one 16-bit word (little endian) from EEPROM address ADDR */
+/** \ingroup avr_eeprom
+    read one 16-bit word (little endian) from EEPROM address \c addr */
 extern unsigned int eeprom_rw(unsigned int addr);
 
-/* write a byte VAL to EEPROM address ADDR */
+/** \ingroup avr_eeprom
+    write a byte \c val to EEPROM address \c addr */
 extern void eeprom_wb(unsigned int addr, unsigned char val);
 
-/* read a block of SIZE bytes from EEPROM address ADDR to BUF */
+/** \ingroup avr_eeprom
+    read a block of \c n bytes from EEPROM address \c addr to
+    \c buf */
 extern void eeprom_read_block(void *buf, unsigned int addr, size_t n);
-
 
 #ifdef __cplusplus
 }
 #endif
 
-/* IAR C compatibility defines */
+/*@}*/
+
+/** \name IAR C compatibility defines */
+
+/*@{*/
+
+/** \def _EEPUT
+    \ingroup avr_eeprom
+    write a byte to EEPROM */
 #define _EEPUT(addr, val) eeprom_wb(addr, val)
+
+/** \def _EEGET
+    \ingroup avr_eeprom
+    read a byte from EEPROM */
 #define _EEGET(var, addr) (var) = eeprom_rb(addr)
+
+/*@}*/
 
 #endif /* _EEPROM_H_ */

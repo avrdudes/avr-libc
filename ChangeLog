@@ -1,5 +1,9 @@
 2002-08-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/eeprom.h: document.
+
+2002-08-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/acknowledge.dox: Mention Ted's work.
 
 2002-08-22  Theodore A. Roth  <troth@verinet.com>
