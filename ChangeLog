@@ -1,3 +1,9 @@
+2003-09-08  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/boot.h: Formatting cleanups - remove extra empty lines,
+	wrap or shorten line lines.
+
 2003-08-29  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
