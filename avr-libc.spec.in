@@ -7,6 +7,12 @@
 
 %define libc_version @VERSION@
 
+# We don't want rpm stripping any files
+%define __spec_install_post %{nil}
+
+# Don't build the debuginfo rpm
+%define debug_package %{nil}
+
 Summary: AVR libc.
 Name: avr-libc
 Version: %{libc_version}
@@ -94,6 +100,10 @@ rm -rf ${RPM_BUILD_ROOT}
 %doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.pdf.gz
 
 %changelog
+* Thu Apr 17 2003 Theodore Roth <troth@openavr.org>
+- Don't build debuginfo package.
+- Don't run post install since it strips binaries.
+
 * Mon Nov 11 2002 Theodore Roth <troth@openavr.org>
 - Add --enable-doc to configure command.
 

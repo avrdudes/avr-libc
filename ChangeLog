@@ -1,3 +1,10 @@
+2003-04-17  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* avr-libc.spec.in: Rpm in RedHat-9 is stripping avr binaries when it
+	has no business doing so. Disable the install post scriptlet to stop
+	this behaviour.
+
 2003-04-14  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/ioat94k.h: Add comment to signal defs noting official
