@@ -25,18 +25,37 @@
 
 /* $Id$ */
 
-/*
-   avr/crc16.h - optimized CRC-16
-
-   Polynomial: x^16 + x^15 + x^2 + 1 (0xa001)
-   Initial value: 0xffff
-
-   See the Dallas Semiconductor app note 27 for 8051 assembler example
-   and general CRC optimization suggestions.
- */
-
 #ifndef _AVR_CRC16_H_
 #define _AVR_CRC16_H_
+
+/** \defgroup avr_crc CRC Computations
+    \code#include <avr/crc16.h>\endcode
+
+    This header file provides a optimized inline functions for calculating 16
+    bit cyclic redundancy checks (CRC) using common polynomials.
+
+    \par References:
+
+    \par
+
+    See the Dallas Semiconductor app note 27 for 8051 assembler example and
+    general CRC optimization suggestions. The table on the last page of the
+    app note is the key to understanding these implementations.
+
+    \par
+
+    Jack Crenshaw's "Impementing CRCs" article in the January 1992 isue of \e
+    Embedded \e Systems \e Programming. This may be difficult to find, but it
+    explains CRC's in very clear and concise terms. Well worth the effort to
+    obtain a copy. */
+
+/** \ingroup avr_crc
+    Optimized CRC-16 calcutation.
+
+    Polynomial: x^16 + x^15 + x^2 + 1 (0xa001)
+    Initial value: 0xffff
+
+    This CRC is normally used in disk-drive controllers. */
 
 static inline unsigned int
 _crc16_update(unsigned int __crc, unsigned char __data)
@@ -73,6 +92,80 @@ _crc16_update(unsigned int __crc, unsigned char __data)
 		: "r0"
 	);
 	return __ret;
+}
+
+/** \ingroup avr_crc
+    Optimized CRC-XMODEM calculation.
+
+    Polynomial: x^16 + x^12 + x^5 + 1 (0x1021)
+    Initial value: 0x0
+
+    This is the CRC used by the Xmodem-CRC protocol.
+
+    The following is the equivalent functionality written in C.
+
+    \code
+    uint16_t
+    crc_xmodem_update (uint16_t crc, uint8_t data)
+    {
+        int i;
+
+        crc = crc ^ ((uint16_t)data << 8);
+        for (i=0; i<8; i++)
+        {
+            if (crc & 0x8000)
+                crc = (crc << 1) ^ 0x1021;
+            else
+                crc <<= 1;
+        }
+
+        return crc;
+    }
+    \endcode */
+
+static inline unsigned int
+_crc_xmodem_update(unsigned int __crc, unsigned char __data)
+{
+    unsigned int __ret;         /* %B0:%A0 (alias for __crc) */
+    unsigned char __tmp1;       /* %1 */
+    unsigned char __tmp2;       /* %2 */
+                                /* %3  __data */
+
+    __asm__ (
+        "eor    %B0,%3"          "\n\t" /* crc.hi ^ data */
+        "mov    __tmp_reg__,%B0" "\n\t"
+        "swap   __tmp_reg__"     "\n\t" /* swap(crc.hi ^ data) */
+
+        /* Calculate the ret.lo of the CRC. */
+        "mov    %1,__tmp_reg__"  "\n\t"
+        "andi   %1,0x0f"         "\n\t"
+        "eor    %1,%B0"          "\n\t"
+        "mov    %2,%B0"          "\n\t"
+        "eor    %2,__tmp_reg__"  "\n\t"
+        "lsl    %2"              "\n\t"
+        "andi   %2,0xe0"         "\n\t"
+        "eor    %1,%2"           "\n\t" /* __tmp1 is now ret.lo. */
+        
+        /* Calculate the ret.hi of the CRC. */
+        "mov    %2,__tmp_reg__"  "\n\t"
+        "eor    %2,%B0"          "\n\t"
+        "andi   %2,0xf0"         "\n\t"
+        "lsr    %2"              "\n\t"
+        "mov    __tmp_reg__,%B0" "\n\t"
+        "lsl    __tmp_reg__"     "\n\t"
+        "rol    %2"              "\n\t"
+        "lsr    %B0"             "\n\t"
+        "lsr    %B0"             "\n\t"
+        "lsr    %B0"             "\n\t"
+        "andi   %B0,0x1f"        "\n\t"
+        "eor    %B0,%2"          "\n\t"
+        "eor    %B0,%A0"         "\n\t" /* ret.hi is now ready. */
+        "mov    %A0,%1"          "\n\t" /* ret.lo is now ready. */
+        : "=d" (__ret), "=d" (__tmp1), "=d" (__tmp2)
+        : "r" (__data), "0" (__crc)
+        : "r0"
+    );
+    return __ret;
 }
 
 #endif /* _AVR_CRC16_H_ */

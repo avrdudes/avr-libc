@@ -1,9 +1,23 @@
+*** Changes in avr-libc-1.0.2:
+
+* Extend crc16 API.
+
+New functions:
+  _crc_xmodem_update
+
+* Pin names for ports are now consistent for all devices.
+
+Previously, some devices defined Pxn and others defined PORTxn for pin n of
+port x. Both names are now available for all devices. Mega162 users should 
+note that this redefines PE0 and PE1 to be pins 0 and 1 of Port E (see fix for
+bug #5799 below).
+
 *** Changes in avr-libc-1.0.1:
 
 * Fix bug #5799.
 
 If you are using the mega162, note that the PE0 and PE1 bit names have changed
-to UP0 and UP1 for the UCSR0A and UCSR1A registers respectively. This is a
+to UPE0 and UPE1 for the UCSR0A and UCSR1A registers respectively. This is a
 namespace clash with other devices which define PE0 and PE1 as bits 0 and 1 of
 port E.
 
