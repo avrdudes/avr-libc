@@ -263,7 +263,7 @@ given about this situation.
   </tr>
   <tr>
     <td>SIG_OVERFLOW3</td>
-    <td>Overflow2 Interrupt</td>
+    <td>Overflow3 Interrupt</td>
   </tr>
   <tr>
     <td>SIG_PIN</td>
