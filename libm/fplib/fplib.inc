@@ -82,6 +82,8 @@
 /* Unfortunately, we need both an assembler and a C preprocessor macro for
    these.  Assembler macros cannot do string concatenation for macro
    parameters, and cpp macros cannot generate multiple lines.  We need both. */
+
+/* load floating point constant into fp pseudo register reg */
 .macro	fpload	reg0, reg1, reg2, reg3, val
 	ldi	\reg0, lo8(\val)
 	ldi	\reg1, hi8(\val)
@@ -92,6 +94,7 @@
 #define FPLOAD(reg, val) \
 	fpload reg##0, reg##1, reg##2, reg##3, val
 
+/* move fp pseudo register src into dst */
 .macro	fpmov	dst0, dst1, dst2, dst3, src0, src1, src2, src3
 	mov	\dst0, \src0
 	mov	\dst1, \src1
@@ -102,6 +105,56 @@
 #define FPMOV(dst, src) \
 	fpmov	dst##0, dst##1, dst##2, dst##3, \
 		src##0, src##1, src##2, src##3
+
+/* push/pop fp pseudo register reg */
+.macro	fppush	reg0, reg1, reg2, reg3
+	push	\reg0
+	push	\reg1
+	push	\reg2
+	push	\reg3
+.endm
+
+#define FPPUSH(reg) \
+	fppush reg##0, reg##1, reg##2, reg##3
+
+.macro	fppop	reg3, reg2, reg1, reg0
+	pop	\reg3
+	pop	\reg2
+	pop	\reg1
+	pop	\reg0
+.endm
+
+#define FPPOP(reg) \
+	fppop reg##3, reg##2, reg##1, reg##0
+
+.macro	fpclr	reg0, reg1, reg2, reg3
+	clr	\reg0
+	clr	\reg1
+	clr	\reg2
+	clr	\reg3
+.endm
+
+#define FPCLR(reg) \
+	fpclr reg##0, reg##1, reg##2, reg##3
+
+/* swap fp pseudo registers A and B */
+.macro	fpswap
+	eor	rA3, rB3
+	eor	rB3, rA3
+	eor	rA3, rB3
+	eor	rA2, rB2
+	eor	rB2, rA2
+	eor	rA2, rB2
+	eor	rA1, rB1
+	eor	rB1, rA1
+	eor	rA1, rB1
+	eor	rA0, rB0
+	eor	rB0, rA0
+	eor	rA0, rB0
+.endm
+
+#define FPSWAP \
+	fpswap
 
 #endif
 

@@ -1,3 +1,8 @@
+2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/fplib.inc: add FPPUSH, FPPOP, FPCLR, and FPSWAP
+		macros; contributed by Reiner Patommel.
+
 2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/twitest/twitest.c: TWI example, new file.
