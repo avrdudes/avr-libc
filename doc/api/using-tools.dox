@@ -277,6 +277,30 @@ users.
   \c -ffreestanding, it will always call strlen() at run-time.
   </p>
 
+- \c -funsigned-char
+  <p>
+  Make any unqualfied \c char type an unsigned char.  Without this
+  option, they default to a signed char.
+  </p>
+
+- \c -funsigned-bitfields
+  <p>
+  Make any unqualified bitfield type unsigned.  By default, they
+  are signed.
+  </p>
+
+- \c -fshort-enums
+  <p>
+  Allocate to an \c enum type only as many bytes as it needs for the
+  declared range of possible values. Specifically, the enum type will
+  be equivalent to the smallest integer type which has enough room.
+  </p>
+
+- \c -fpack-struct
+  <p>
+  Pack all structure members together without holes.
+  </p>
+
 \section using_avr_as Options for the assembler avr-as
 
 \subsection using_avr_as_mach_opts Machine-specific assembler options
