@@ -70,11 +70,11 @@ void _printf_p (char const *fmt0, ...) {
 		unsigned long ul;
 		char *pc;
 	} a;
-	char  c;	// holds a char from the format string
+	char  c;	/* holds a char from the format string */
 	int8_t width;
 	uint8_t base, prec;
-	char b[12];	// contains character representation of the number and its prefix
-	char *pb;	// used as pointer to an element in b
+	char b[12];	/* contains character representation of the number and its prefix */
+	char *pb;	/* used as pointer to an element in b */
 
 	uint8_t flags;
 
@@ -93,7 +93,7 @@ void _printf_p (char const *fmt0, ...) {
 
 	while ((c=PRG_RDB(fmt++))) {
 		if(flags&FLHASPERCENT) {
-			if(c>='0' && c<='9') { // digit
+			if(c>='0' && c<='9') { /* digit */
 				prec*=10;
 				prec+=c-'0';
 				if(!(flags&FLPREC)) 
@@ -119,12 +119,12 @@ void _printf_p (char const *fmt0, ...) {
 					flags|=FLLONG;
 					break;
 				case 'c':
-					a.c=(char)va_arg(ap, int); // char is promoted to int via va_arg
+					a.c=(char)va_arg(ap, int); /* char is promoted to int via va_arg */
 					width--;
 					goto nextitem;
 				case 's':
 					a.pc=va_arg(ap, char *);
-					for(base=0;a.pc[base];base++); // calc length of string
+					for(base=0;a.pc[base];base++); /* calc length of string */
 					if((flags&FLPREC) && prec<base)
 						base=prec;
 					width-=base;
@@ -136,11 +136,12 @@ void _printf_p (char const *fmt0, ...) {
 						a.l=-a.l;
 					}
 					goto processnum;
-				case 'o' : // octal number
+				case 'o' : /* octal number */
 					base=8;
 					goto getulong; 
 				case 'x' : case 'X' :
-					base=16; // fall through   
+					base=16;
+					/* FALLTHROUGH */
 				case 'u':
 				  getulong:
 					a.ul=flags&FLLONG ? va_arg(ap, unsigned long) : va_arg(ap, unsigned int);
