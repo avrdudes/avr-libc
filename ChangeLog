@@ -1,5 +1,10 @@
 2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/stdio/fdevopen.c: document the use of calloc()
+	[fix for savannah bug #11275]
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* NEWS: Update, merge all fixes from 1.0 branch.
 
 2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

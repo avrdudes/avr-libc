@@ -68,7 +68,11 @@ FILE *__iob[3];			/* stdin, stdout, stderr */
    \c stdout and \c stderr.
 
    The third parameter \c opts is currently unused, but reserved for
-   future extensions.  */
+   future extensions.
+
+   fdevopen() uses calloc() (und thus malloc()) in order to allocate
+   the storage for the new stream.
+*/
 
 FILE *
 fdevopen(int (*put)(char), int (*get)(void), int opts __attribute__((unused)))

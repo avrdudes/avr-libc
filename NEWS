@@ -4,6 +4,7 @@
 
   [no-id] Fix TICIE1 value in usb header files.
   [no-id] Fix bug introduced in fix for bug #7802 (missing parens).
+  [no-id] Move ATtiny2313 and ATtiny13 from avr4 to avr2 (by now).
   [#2143] malloc() routines chunk smaller than requested
   [#5454] Inline functions results in undefined reference when optimize level 0
           is used.
@@ -21,9 +22,10 @@
   [#8452] some SFR and bit names in iom169.h are incorrect
           NOTE: Where possible, the old names are retained to avoid breaking
           existing code, but the OCR1A and OCR1B names where just plain wrong
-          so they have been changed and the incorrect names (OCRA1 and OCRB1) 
+          so they have been changed and the incorrect names (OCRA1 and OCRB1)
           are undefined.
   [#8649] sfr_defs.h: missed _SFR_BYTE() in bit_is_set/clear
+  [#11275] fdevopen() should document its use of malloc()
 
 * Remove deprecated items:
   + obsolete headers from the base include directory (moved to the avr/
