@@ -39,7 +39,10 @@
  * Library shapening :
  */
 
-#define __OPTIMIZE__
+/* __OPTIMIZE__ seems to be defined by gcc-3.4.x. */
+#ifndef __OPTIMIZE__
+#  define __OPTIMIZE__
+#endif
 /* #define __SIMPLE__NaNs simple NaNs implemented now */
 /* #define __COMPLEX__NaNs */ /* not yet tested (and discarded anyway) */
 /* #define __ERRNO__ */ /* not yet fully implemented */

@@ -116,6 +116,10 @@ AC_SUBST(AVR_CRT_OTHER)
 AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
 AC_SUBST(AVR_LIBC_USER_MANUAL)
 
+# Temp hack to ignore DOCSDIR.
+DOCSDIR=""
+AC_SUBST(DOCSDIR)
+
 # Generate all files from *.in sources.
 
 AC_CONFIG_FILES([

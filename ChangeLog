@@ -1,5 +1,20 @@
 2004-04-29  Theodore A. Roth  <troth@openavr.org>
 
+	* AvrCommon.am (VPATH): Add fplib to search path.
+	* AvrCommonLibC.am: Enable building of libm.
+	* configure.ac: Set DOCSDIR so it gets substituted in Makefile.am
+	files.
+	* libm/Makefile.am: Rewrite.
+	* libm/fplib/Files.am: New file.
+	* libm/fplib/Makefile.am: Rewrite.
+	* libm/fplib/Rules.am: New file.
+	* libm/fplib/fplib.inc: Don't redefine __OPTIMIZE__. Gcc-3.4 seems to
+	define it.
+	* libm/fplib/strtod.S: Don't read in SPH if it's not defined for the
+	target device.
+
+2004-04-29  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.ac (AC_INIT): Bump version.
 	* AvrCommonLibC.am: Enable building of libc/ files.
 	* common/Makefile.am: New file.

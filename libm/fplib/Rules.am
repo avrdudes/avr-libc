@@ -1,6 +1,4 @@
-# -*- Makefile -*-
-#
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -12,6 +10,9 @@
 #   notice, this list of conditions and the following disclaimer in
 #   the documentation and/or other materials provided with the
 #   distribution.
+# * Neither the name of the copyright holders nor the names of
+#   contributors may be used to endorse or promote products derived
+#   from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -24,31 +25,16 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
-# The Makefile.am fragment is only used by targets that support C programming.
+include $(top_srcdir)/libm/fplib/Files.am
 
-avr_LIBRARIES = \
-	lib_stdlib.a \
-	lib_pmstring.a \
-	lib_string.a \
-	lib_misc.a \
-	lib_stdio.a \
-	libprintf_min.a \
-	libprintf_flt.a \
-	libscanf_min.a \
-	libscanf_flt.a \
-	libm.a
+nodist_libm_a_SOURCES = $(libm_a_asm_sources)
 
-#libc_a_SOURCES =
+libm_a_asm_objs = $(libm_a_asm_sources:%.S=%.o)
 
-include $(top_srcdir)/libc/stdlib/Rules.am
-include $(top_srcdir)/libc/pmstring/Rules.am
-include $(top_srcdir)/libc/string/Rules.am
-include $(top_srcdir)/libc/misc/Rules.am
-include $(top_srcdir)/libc/stdio/Rules.am
-include $(top_srcdir)/libm/fplib/Rules.am
+# content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
+# according to the multilib subdir (see acinclude.m4 in top directory)
 
-# vim: set ft=make ts=4 sw=4:
+$(libm_a_asm_objs): %.o: %.S
+	$(COMPILE) $(AVRLIB_ASFLAGS) -c -o $@ $<
+

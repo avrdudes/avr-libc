@@ -231,7 +231,9 @@ GLOBAL(strtod)
 1:
 	LDI	ZL,18-6 ; number of all 'pushed' registers - not pushed ones
 	IN	YL,_SFR_IO_ADDR(SPL)
+#if defined (SPH)
 	IN	YH,_SFR_IO_ADDR(SPH)
+#endif
 	EPILOGUE_RESTORES(6)
 
 .L_overflow:

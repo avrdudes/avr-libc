@@ -1,5 +1,3 @@
-# -*- Makefile -*-
-#
 # Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
@@ -28,27 +26,55 @@
 # $Id$
 #
 
-# The Makefile.am fragment is only used by targets that support C programming.
+libm_a_asm_sources = \
+	acos.S \
+	addsf3.S \
+	addsf3x.S \
+	asin.S \
+	atan.S \
+	atan2.S \
+	ceil.S \
+	cos.S \
+	cosh.S \
+	divsf3.S \
+	divsf3x.S \
+	dtostre.S \
+	dtostrf.S \
+	exp.S \
+	fixsfsi.S \
+	floatsisf.S \
+	floor.S \
+	fmod.S \
+	fp_cmp.S \
+	fp_cosinus.S \
+	fp_flashconst.S \
+	fp_merge.S \
+	fp_nan.S \
+	fp_powerseries.S \
+	fp_split.S \
+	fp_zero.S \
+	frexp.S	\
+	isinfnan.S \
+	ldexp.S \
+	log.S \
+	log10.S \
+	modf.S \
+	mulsf3.S \
+	mulsf3x.S \
+	negsf2.S\
+	pow.S \
+	sin.S \
+	sinh.S \
+	sqrt.S \
+	strtod.S \
+	tan.S \
+	tanh.S
 
-avr_LIBRARIES = \
-	lib_stdlib.a \
-	lib_pmstring.a \
-	lib_string.a \
-	lib_misc.a \
-	lib_stdio.a \
-	libprintf_min.a \
-	libprintf_flt.a \
-	libscanf_min.a \
-	libscanf_flt.a \
-	libm.a
+libm_a_extra_dist = \
+	fplib.inc \
+	readme.dtostre \
+	readme.fplib \
+	readme.strtod
 
-#libc_a_SOURCES =
 
-include $(top_srcdir)/libc/stdlib/Rules.am
-include $(top_srcdir)/libc/pmstring/Rules.am
-include $(top_srcdir)/libc/string/Rules.am
-include $(top_srcdir)/libc/misc/Rules.am
-include $(top_srcdir)/libc/stdio/Rules.am
-include $(top_srcdir)/libm/fplib/Rules.am
-
-# vim: set ft=make ts=4 sw=4:
+# vim: set ft=make:
