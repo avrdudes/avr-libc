@@ -1,3 +1,19 @@
+2004-04-06  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iom169.h: Update copyright year.
+	Fixes for bug #8452.
+	(OCR1A): Fix register name.
+	(OCR1B): Ditto.
+	(UCSRA): Ditto.
+	(UCSRB): Ditto.
+	(UCSRC): Ditto.
+	(UBRR): Ditto.
+	(UDR): Ditto.
+	(PG5): Remove define.
+	(ADHSM): Ditto.
+	(WDCE): Fix bit name.
+	(ISC01, ISC00): Define for EICRA register.
+
 2004-04-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: Add items for "clock skew detected", why

@@ -1,4 +1,5 @@
-/* Copyright (c) 2002, Juergen Schilling <juergen.schilling@honeywell.com>
+/* Copyright (c) 2002, 2003, 2004
+   Juergen Schilling <juergen.schilling@honeywell.com>
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,6 +27,8 @@
 /* $Id$ */
 
 /* iom169.h - definitions for ATmega169 */
+
+/* This should be up to date with data sheet version 2514J-AVR-12/03. */
 
 #ifndef _AVR_IOM169_H_
 #define _AVR_IOM169_H_ 1
@@ -230,14 +233,14 @@
 #define ICR1H  _SFR_MEM8(0x87)
 
 /* Timer/Counter1 Output Compare Register A */
-#define OCRA1  _SFR_MEM16(0x88)
-#define OCRA1L _SFR_MEM8(0x88)
-#define OCRA1H _SFR_MEM8(0x89)
+#define OCR1A  _SFR_MEM16(0x88)
+#define OCR1AL _SFR_MEM8(0x88)
+#define OCR1AH _SFR_MEM8(0x89)
 
 /* Timer/Counter1 Output Compare Registare B */
-#define OCRB1  _SFR_MEM16(0x8A)
-#define OCRB1L _SFR_MEM8(0x8A)
-#define OCRB1H _SFR_MEM8(0x8B)
+#define OCR1B  _SFR_MEM16(0x8A)
+#define OCR1BL _SFR_MEM8(0x8A)
+#define OCR1BH _SFR_MEM8(0x8B)
 
 /* Timer/Counter2 Control Register A */
 #define TCCR2A _SFR_MEM8(0xB0)
@@ -261,21 +264,21 @@
 #define USIDR  _SFR_MEM8(0xBA)
 
 /* USART0 Control and Status Register A */
-#define UCSR0A _SFR_MEM8(0xC0)
+#define UCSRA  _SFR_MEM8(0xC0)
 
 /* USART0 Control and Status Register B */
-#define UCSR0B _SFR_MEM8(0xC1)
+#define UCSRB  _SFR_MEM8(0xC1)
 
 /* USART0 Control and Status Register C */
-#define UCSR0C _SFR_MEM8(0xC2)
+#define UCSRC  _SFR_MEM8(0xC2)
 
 /* USART0 Baud Rate Register */
-#define UBRR0  _SFR_MEM16(0xC4)
-#define UBRR0L _SFR_MEM8(0xC4)
-#define UBRR0H _SFR_MEM8(0xC5)
+#define UBRR   _SFR_MEM16(0xC4)
+#define UBRRL  _SFR_MEM8(0xC4)
+#define UBRRH  _SFR_MEM8(0xC5)
 
 /* USART0 I/O Data Register */
-#define UDR0   _SFR_MEM8(0xC6)
+#define UDR    _SFR_MEM8(0xC6)
 
 /* LCD Control and Status Register A */
 #define LCDCRA _SFR_MEM8(0xE4)
@@ -592,7 +595,6 @@
  */
 
 /* PORTG */
-#define PG5 5
 #define PG4 4
 #define PG3 3
 #define PG2 2
@@ -724,7 +726,7 @@
 #define SPMEN  0
 
 /* WDTCR */
-#define WDTCE	4
+#define WDCE	4
 #define WDE	   3
 #define WDP2	2
 #define WDP1	1
@@ -736,6 +738,10 @@
 #define CLKPS2 2
 #define CLKPS1 1
 #define CLKPS0 0
+
+/* EICRA */
+#define ISC01  1
+#define ISC00  0
 
 /* PCMSK0 */
 #define PCINT7 7
@@ -782,7 +788,6 @@
 #define ADPS0  0
 
 /* ADCSRB */
-#define ADHSM  7
 #define ACME   6
 #define ADTS2  2
 #define ADTS1  1
@@ -798,11 +803,11 @@
 #define MUX1   1
 #define MUX0   0
 
-/* DIDR0 */
+/* DIDR1 */
 #define AIN1D  1
 #define AIN0D  0
 
-/* DIDR1 */
+/* DIDR0 */
 #define ADC7D  7
 #define ADC6D  6
 #define ADC5D  5
@@ -870,34 +875,34 @@
 #define USICNT1 1
 #define USICNT0 0
 
-/* UCSR0A */
-#define RXC0	7
-#define TXC0	6
-#define UDRE0	5
-#define FE0	   4
-#define DOR0	3
-#define UPE0 	2
-#define U2X0   1
-#define MPCM0	0
+/* UCSRA */
+#define RXC	7
+#define TXC	6
+#define UDRE	5
+#define FE	4
+#define DOR	3
+#define UPE 	2
+#define U2X     1
+#define MPCM	0
 
-/* UCSR0B */
-#define RXCIE0	7
-#define TXCIE0	6
-#define UDRIE0	5
-#define RXEN0	4
-#define TXEN0	3
-#define UCSZ02 2
-#define RXB80	1
-#define TXB80	0
+/* UCSRB */
+#define RXCIE	7
+#define TXCIE	6
+#define UDRIE	5
+#define RXEN	4
+#define TXEN	3
+#define UCSZ2   2
+#define RXB8	1
+#define TXB8	0
 
-/* UCSR0C */
-#define UMSEL0 6
-#define UPM01  5
-#define UPM00  4
-#define USBS0  3
-#define UCSZ01 2
-#define UCSZ00 1
-#define UCPOL0 0
+/* UCSRC */
+#define UMSEL   6
+#define UPM1    5
+#define UPM0    4
+#define USBS    3
+#define UCSZ1   2
+#define UCSZ0   1
+#define UCPOL   0
 
 /* LCDCRA */
 #define LCDEN  7
