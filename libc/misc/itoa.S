@@ -31,7 +31,8 @@
 
    Copyright (C) 2000 Michael Rickmann <mrickma@gwdg.de>
    Changes: Reiner Patommel <rpato@post4.tele.dk>
-   	    (no stack space used anymore)
+	(no stack space used anymore)
+   Changes: Reiner Patommel <rpato@post4.tele.dk> bug# 4010 		  		
 
    #include <stdlib.h>
    char *itoa(int value, char *string, int radix);
@@ -41,8 +42,8 @@
 #include "macros.inc"
 #include "ctoasm.inc"
 
-   .global _U(itoa)
-   .func _U(itoa)
+	.global _U(itoa)
+	.func _U(itoa)
 
 /* arguments */
 #define r_val_hi r25
@@ -55,19 +56,22 @@
 #define r_lstr_hi r19
 #define r_lstr_lo r18
 
+
 _U(itoa):
-	mov	ZL, r_str_lo	; *string
+	mov	ZL, r_str_lo	; &string
 	mov	ZH, r_str_hi
 	mov	r_lstr_lo, ZL	; save &string
 	mov	r_lstr_hi, ZH
+	clt			; make sure T flag is clear
 	cpi	r_radix, 2	; no radix < 2
-	brlt	terminate
+	brlt	terminate	; return with \0
+	cpi	r_radix, 37	; no radix > 36
+	brge	terminate	; return with \0
 	cpi	r_radix, 10	; decimal number ?
-	brne	divide_loop
-	bst	r_val_hi, 7	; remember sign of value
-	tst	r_val_hi	; sign of value ?
-	brge	divide_loop
-	com	r_val_hi	; make positive
+	brne	divide_loop	; no -> convert
+	bst	r_val_hi, 7	; for decimal numbers remember sign of value
+	brtc	divide_loop	; positive number -> convert
+	com	r_val_hi	; negative number -> make positive
 	neg	r_val_lo
 	sbci	r_val_hi, 0xff
 divide_loop:
@@ -86,18 +90,15 @@ L_10:
 	mov	r_val_hi, r23
 	sbiw	r_val_lo, 0	; value == 0 ?
 	brne	divide_loop
-	clr	r21
-	bld	r21, 0		; get sign again
-	tst	r21		; negative number?
-	breq	n_terminate	; no, positive
+	brtc	terminate	; T flag clear? -> positive number		
 	ldi	r21, '-'
 	st	Z+, r21		; write minus sign to string
-n_terminate:			; restore &string as return value
+terminate:			; restore &string as return value
 	mov	r_val_hi, r_lstr_hi
 	mov	r_val_lo, r_lstr_lo
-terminate:
 	st	Z, __zero_reg__	; terminate string
 	XJMP	_U(strrev)	; reverse string
 
 	.endfunc
+
 

@@ -32,6 +32,7 @@
    Contributors:
    Created by Reiner Patommel based on
    itoa.s by Michael Rickmann <mrickma@gwdg.de>
+   19 June 2003 changed by Reiner Patommel bug# 4010
 
 	#include <stdlib.h>
 	char *utoa(unsigned int value, char *string, int radix);
@@ -55,19 +56,23 @@
 #define r_lstr_hi r19
 #define r_lstr_lo r18
 
+
+
 _U(utoa):
-	mov	ZL, r_str_lo	; *string
+	mov	ZL, r_str_lo	; &string
 	mov	ZH, r_str_hi
 	mov	r_lstr_lo, ZL	; save &string
 	mov	r_lstr_hi, ZH
 	cpi	r_radix, 2	; no radix < 2
 	brlt	terminate
+	cpi	r_radix, 37	; no radix > 36
+	brge	terminate	
 divide_loop:
 	mov	r22, r_radix	; radix
 	clr	r23		;  dividend in r25:r24,   divisor in r23:r22
 	XCALL	_U(__udivmodhi4);  quotient in r23:r22, remainder in r25:r24
 				;  clobbered: r0, r21, r26, r27
-				;  call-used but preserved: r18, r19, r20, r30, r31
+				;  call-used but preserved: r18,r19,r20,r30,r31
 	subi	r24, 0xd0	; + '0'
 	cpi	r24, 0x3a	; > '9' ?
 	brlt	L_10
@@ -78,11 +83,12 @@ L_10:
 	mov	r_val_hi,r23
 	sbiw	r_val_lo,0	; value == 0 ?
 	brne	divide_loop
+terminate:
 	mov	r_val_hi, r_lstr_hi	; restore &string as return value
 	mov	r_val_lo, r_lstr_lo
-terminate:
 	st	Z, __zero_reg__	; terminate string
 	XJMP	_U(strrev)	; reverse string
 
 	.endfunc
+
 

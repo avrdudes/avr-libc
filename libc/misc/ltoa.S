@@ -32,6 +32,7 @@
    Contributors:
      Created by Reiner Patommel based on
    	 itoa.s by Michael Rickmann <mrickma@gwdg.de>
+     Changes: Reiner Patommel <rpato@post4.tele.dk> bug# 4010 	
 
 	#include <stdlib.h>
 	char *ltoa(long int value, char *string, int radix);
@@ -56,64 +57,65 @@
 
 /* local variables */
 #define r_radix		r28
-#define r_minus  	r28
+
+
 
 _U(ltoa):
-	mov		ZH, a_str_hi		; Z = *string
-	mov		ZL, a_str_lo
-	push	r_radix				; save radix
-	push	ZH					; keep *string
+	mov	ZH, a_str_hi	; Z = &string
+	mov	ZL, a_str_lo
+	push	r28		; save r28
+	push	ZH		; keep &string
 	push	ZL
-	cpi		a_radix, 2			; no radix < 2
-	brlt	conv_finished		; return with \0
-	mov		r_radix, a_radix	; save radix
-	cpi		r_radix, 10			; decimal number ?
+	cpi	a_radix, 2	; no radix < 2
+	brlt	conv_finished	; return with \0
+	cpi	a_radix, 37	; no radix > 36
+	brge	conv_finished	; return with \0
+	mov	r_radix, a_radix; save radix
+	clt			; make sure T flag is clear
+	cpi	r_radix, 10	; decimal number?
 	brne	divide_loop
-	bst		a_val_hhi, 7		; remember sign of number
-	tst		a_val_hhi			; positive ?
-	brge	divide_loop			; yes
-	com		a_val_hhi			; make number positive
-	com		a_val_hlo
-	com		a_val_hi
-	neg		a_val_lo
+	bst	a_val_hhi, 7	; remember sign of decimal number
+	brtc	divide_loop	; number positive? -> convert
+	com	a_val_hhi	; make decimal number positive
+	com	a_val_hlo
+	com	a_val_hi
+	neg	a_val_lo
 	sbci	a_val_hi,  lo8(-1)
 	sbci	a_val_hlo, lo8(-1)
 	sbci	a_val_hhi, lo8(-1)
 divide_loop:
-	mov		r18, r_radix		; radix is divisor
-	clr		r19					; remainder of number is dividend
-	clr		r20
-	clr		r21
-	push	ZH					; Z will be clobbered
-	push	ZL					; dividend in r25:r22, divisor in r21:r18
-	XCALL	_U(__udivmodsi4)	; quotient in r21:r18, remainder in r25:r22
-	pop		ZL
-	pop		ZH
-	subi	r22, 0xd0			; + '0'
-	cpi		r22, 0x3a			; > '9' ?
+	mov	r18, r_radix	; radix is divisor
+	clr	r19		; remainder of number is dividend
+	clr	r20
+	clr	r21
+	push	ZH		; Z will be clobbered
+	push	ZL		; dividend in r25:r22, divisor in r21:r18
+	XCALL	_U(__udivmodsi4); quotient in r21:r18, remainder in r25:r22
+	pop	ZL
+	pop	ZH
+	subi	r22, 0xd0	; + '0'
+	cpi	r22, 0x3a	; > '9' ?
 	brlt	L_10
-	subi	r22, 0xd9			; + 'a' - 10 - '0'
+	subi	r22, 0xd9	; + 'a' - 10 - '0'
 L_10:
-	st		Z+, r22				; write character to string in reverse order!
-	mov		a_val_lo, r18		; quotient -> dividend
-	mov		a_val_hi, r19
+	st	Z+, r22		; write character to string in reverse order!
+	mov	a_val_lo, r18	; quotient -> dividend
+	mov	a_val_hi, r19
 	mov 	a_val_hlo, r20
 	mov 	a_val_hhi, r21
 	subi 	a_val_lo, 0
 	sbci	a_val_hi, 0
 	sbci	a_val_hlo, 0
-	sbci 	a_val_hhi,0 		; value == 0 ?
+	sbci 	a_val_hhi,0 	; value == 0 ?
 	brne	divide_loop
-	clr		r_minus
-	bld		r_minus, 0			; get sign again
-	tst		r_minus				; minus sign ?
-	breq	conv_finished		; no, positive
-	ldi		r_minus, '-'
-	st		Z+, r_minus			; write minus sign to string
+	brtc	conv_finished	; decimal number positive -> finish
+	ldi	r28, '-'
+	st	Z+, r28		; write minus sign to string
 conv_finished:
-	st		Z, __zero_reg__		; terminate string
-	pop		a_val_hlo			; restore &string as return value
-	pop		a_val_hhi
-	pop		r_radix				; restore r28
-	XJMP	_U(strrev)			; reverse string
+	st	Z, __zero_reg__	; terminate string
+	pop	a_val_hlo	; restore &string as return value
+	pop	a_val_hhi
+	pop	r28		; restore r28
+	XJMP	_U(strrev)	; reverse string
 	.endfunc
+

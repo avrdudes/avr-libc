@@ -396,6 +396,8 @@ extern int rand_r(unsigned long *ctx);
  \ingroup avr_stdlib
 */
 /**
+   \brief Convert an integer to a string.
+
    The function itoa() converts the integer value from \c val into an
    ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
@@ -404,6 +406,8 @@ extern int rand_r(unsigned long *ctx);
    number between 2 (binary conversion) and up to 36.  If \c radix
    is greater than 10, the next digit after \c '9' will be the letter
    \c 'a'.
+    
+    If radix is 10 and val is negative, a minus sign will be prepended.
 
    The itoa() function returns the pointer passed as \c s.
 */
@@ -411,6 +415,9 @@ extern char *itoa(int __val, char *__s, int __radix);
 
 /**
  \ingroup avr_stdlib
+ 
+   \brief Convert a long integer to a string.
+
    The function ltoa() converts the long integer value from \c val into an
    ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
@@ -420,12 +427,17 @@ extern char *itoa(int __val, char *__s, int __radix);
    is greater than 10, the next digit after \c '9' will be the letter
    \c 'a'.
 
+   If radix is 10 and val is negative, a minus sign will be prepended.
+
    The ltoa() function returns the pointer passed as \c s.
 */
 extern char *ltoa(long int __val, char *__s, int __radix);
 
 /**
  \ingroup avr_stdlib
+
+   \brief Convert an unsigned integer to a string.
+
    The function utoa() converts the unsigned integer value from \c val into an
    ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
@@ -441,6 +453,8 @@ extern char *utoa(unsigned int __val, char *__s, int __radix);
 
 /**
  \ingroup avr_stdlib
+   \brief Convert an unsigned long integer to a string.
+
    The function ultoa() converts the unsigned long integer value from
    \c val into an
    ASCII representation that will be stored under \c s.  The caller
