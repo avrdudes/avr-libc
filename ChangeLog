@@ -1,3 +1,7 @@
+2002-12-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom169.h: fix typo.
+
 2002-12-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/main_page.dox: fix typo, remove non-existent tiny10.
