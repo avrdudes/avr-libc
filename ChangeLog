@@ -1,5 +1,12 @@
 2003-11-11  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/crc16.h: Use inttypes.h defined types to allow use
+	with -mint8.
+	* include/avr/delay.h: Ditto.
+	[Submitted by Tomas Vanek <vanekt@fbl.cz>]
+
+2003-11-11  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/crc16.h (_crc16_update): Add dox.
 	(_crc_xmodem_update): New function.
