@@ -1,5 +1,10 @@
 2003-11-11  Theodore A. Roth  <troth@openavr.org>
 
+	* avr-libc.spec.in (BuildRequires): Don't require doxygen or tetex if
+	"--without docs" was given.
+
+2003-11-11  Theodore A. Roth  <troth@openavr.org>
+
 	* avr-libc.spec.in: Allow disabling build of docs sub-package with 
 	"--without docs".
 
