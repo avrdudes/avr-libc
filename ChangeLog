@@ -1,3 +1,7 @@
+2002-11-12  Theodore A. Roth  <troth@openavr.org>
+
+	* avr-libc.spec.in: Add --enable-doc to configure command.
+
 2002-11-11  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in: Add --enable-doc option and disable building of docs

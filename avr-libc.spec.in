@@ -38,7 +38,8 @@ rm -fr obj-%{_target_platform}
 mkdir obj-%{_target_platform}
 cd obj-%{_target_platform}
 
-../configure --prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir}
+../configure --prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir} \
+	--enable-doc
 
 make
 
@@ -93,8 +94,10 @@ rm -rf ${RPM_BUILD_ROOT}
 %doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.pdf.gz
 
 %changelog
-* Sun Oct 13 2002 Theodore Roth <troth@openavr.org>
+* Mon Nov 11 2002 Theodore Roth <troth@openavr.org>
+- Add --enable-doc to configure command.
 
+* Sun Oct 13 2002 Theodore Roth <troth@openavr.org>
 - Drop avr-gcc requirement to >= 3.2.75 to allow building snapshot packages.
 - Add docs sub-package for user manual.
 
