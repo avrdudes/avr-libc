@@ -32,6 +32,7 @@
    Contributors:
      Created by Reiner Patommel
      Modified by Reiner Patommel 8 Feb 2003, Bug #2481
+     Modified by Reiner Patommel 13 May 2003, (DOXYGEN)
  */
 
 #include "macros.inc"
@@ -44,7 +45,19 @@
 #define num_lo_lo	r22
 #define tmp		r17
 
-; long atol(const char *string)
+
+/** \ingroup avr_stdlib
+    \fn long int atol(const char *string)
+    \brief Convert a string to a long integer.
+
+    The atol() function converts the initial portion of the string
+    pointed to by \c stringp to integer representation.
+
+    It is equivalent to:
+
+           \code strtol(nptr, (char **)NULL, 10); \endcode
+           except that atol() does not detect errors.
+*/
 
 	.text
 	.global _U(atol)
@@ -128,4 +141,5 @@ _U(atol):
 
 .atol_end:
 	.size _U(atol), .atol_end - _U(atol)
+
 

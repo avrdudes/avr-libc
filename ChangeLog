@@ -1,5 +1,9 @@
 2003-06-18  Eric B. Weddington  <eric@ecentral.com>
 
+	* libc/stdlib/atol.S: Fix for Bug #3576, by Reiner Patommel.
+
+2003-06-18  Eric B. Weddington  <eric@ecentral.com>
+
 	* libc/stdlib/atoi.S: Fix for Bug #3575, by Reiner Patommel.
 
 2003-06-17  Eric B. Weddington  <eric@ecentral.com>
