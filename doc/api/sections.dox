@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Theodore Roth
+/* Copyright (c) 2002,2005, Theodore Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -139,7 +139,8 @@ immediately after a reset.
 Unused. User definable.
 
 \par .init2:
-In C programs, weakly bound to initialize the stack.
+In C programs, weakly bound to initialize the stack, and to clear
+__zero_reg__ (r1).
 
 \par .init3:
 Unused. User definable.
@@ -239,8 +240,8 @@ void my_init_portb (void) __attribute__ ((naked)) \
 void
 my_init_portb (void)
 {
-	outb (PORTB, 0xff);
-	outb (DDRB,  0xff);
+	PORTB = 0xff;
+	DDRB = 0xff;
 }
 \endcode
 

@@ -1,5 +1,10 @@
 *** Changes since avr-libc-1.2.3:
 
+* Bugs fixed:
+
+  [#12040] overview: sbi in FAQ
+
+
 *** Changes in avr-libc-1.2.3:
 
 * Bugs fixed:

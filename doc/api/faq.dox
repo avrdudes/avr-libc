@@ -160,7 +160,9 @@ devices like ATmega161 because of errata), and add
 stack.
 
 For more information on using sections, including how to use them from C code,
-see \ref mem_sections.
+see \ref mem_sections.  Note that in C code, any such function would
+preferrably be placed into section \c .init3 as the code in \c .init2
+ensures the internal register <tt>__zero_reg__</tt> is already cleared.
 
 <small>Back to \ref faq_index.
 </small>
@@ -175,7 +177,7 @@ registers, and the \ref avr_io reflect these names in definitions for
 numerical constants, a way is needed to convert a bit number (usually
 within a byte register) into a byte value that can be assigned
 directly to the register.  However, sometimes the direct bit numbers
-are needed as well (e. g. in an <tt>sbi()</tt> call), so the
+are needed as well (e. g. in an <tt>SBI()</tt> instruction), so the
 definitions cannot usefully be made as byte values in the first place.
 
 So in order to access a particular bit number as a byte value, use the
@@ -362,8 +364,10 @@ assembler. One way to avoid this problem is:
 asm volatile("sbi %0, 0x07" : "I" (_SFR_IO_ADDR(PORTB)):);
 \endcode
 
-\note \c avr/io.h already provides a sbi() macro definition, which can be used
-in C programs.
+\note For C programs, rather use the standard C bit operators instead,
+so the above would be expressed as <tt>PORTB |= (1 << 7)</tt>.  The
+optimizer will take care to transform this into a single SBI
+instruction, assuming the operands allow for this.
 
 <small>Back to \ref faq_index.
 </small>
@@ -841,7 +845,7 @@ private data storage kept outside the domain of the C compiler
 particular address), it would be sufficient to defer the
 initialization of the external RAM interface to the beginning of
 <tt><b>main</b><b>()</b></tt>,
-so no tweaking of the \c .init1 section is necessary.  The
+so no tweaking of the \c .init3 section is necessary.  The
 same applies if only the heap is going to be located there, since the
 application start-up code does not affect the heap.
 
