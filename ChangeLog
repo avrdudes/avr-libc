@@ -1,6 +1,7 @@
 2003-04-14  Theodore A. Roth  <troth@openavr.org>
 
-	* include/avr/ioat94k.h: Add comment to signal defs noting official ATMEL names.
+	* include/avr/ioat94k.h: Add comment to signal defs noting official
+	ATMEL names.
 	[Contributed by Thibaud Gaillard <thibaud.gaillard@free.fr>]
 
 2003-04-14  Theodore A. Roth  <troth@openavr.org>
