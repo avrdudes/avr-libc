@@ -50,7 +50,16 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-all-local: ps html pdf
+DEMO_LIBS            = $(shell find $(top_srcdir) -name crts2313.o)
+
+all-local: demo ps html pdf
+
+# Before we can build the dox, we need to build the demo project so that some
+# included files get generated.
+demo:
+	-cd $(top_srcdir)/doc/examples/demo && \
+		${MAKE} DEFS="-I$(top_srcdir)/include"  \
+			LIBS="-nostartfiles -nodefaultlibs $(DEMO_LIBS)" dox all
 
 # Rule for generating postscript output.
 ps: $(TARGET_DOX_PS)
@@ -69,6 +78,7 @@ uninstall-local:
 
 clean-local:
 	rm -rf $(USER_MANUAL) latex_src latex_pdf_src man
+	cd $(top_srcdir)/doc/examples/demo && ${MAKE} clean
 
 #
 # Rules for generating documentation with doxygen
@@ -119,6 +129,10 @@ latex_pdf_src/refman.tex: doxygen-pdf.config
 		-e '/Signal Name/s/\\\\\\hline/\\endhead\\hline/' \
 		group__avr__interrupts.tex > tmp.$$ && \
 		mv -f tmp.$$ group__avr__interrupts.tex
+	cd latex_pdf_src && \
+		sed -e '/{demo.eps}/s/demo.eps/demo.pdf/' \
+		demo_project.tex > tmp.$$ && \
+		mv -f tmp.$$ demo_project.tex
 
 doxygen-pdf.config: doxygen.config
 	sed \

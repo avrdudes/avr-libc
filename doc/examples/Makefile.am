@@ -33,8 +33,14 @@
 
 MAINTAINERCLEANFILES = Makefile.in
 
-SUBDIRS              = examples api
-DIST_SUBDIRS         = examples api
-
-EXTRA_DIST           = CHANGES.old ChangeLog INSTALL TODO \
-                       avr-libc-reference.html register-usage.txt
+EXTRA_DIST           = avr-recv.c \
+                       io.c \
+                       prg \
+                       printf.h \
+                       progmem.c \
+                       send_byte.s \
+                       signal.c \
+                       demo/Makefile \
+                       demo/demo.c \
+                       demo/demo.fig \
+                       demo/demo.dox

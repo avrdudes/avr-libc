@@ -1,0 +1,237 @@
+/* Copyright (c) 2002, Theodore Roth
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \page demo_project Using the GNU Tools: A simple project
+
+At this point, you should have the GNU tools configured, built, and installed
+on your system. In this chapter, we present a simple example of using the GNU
+tools in an AVR project. After reading this chapter, you should have a better
+feel as to how the tools are used and how a \c Makefile can be configured.
+
+\subsection demo_project_desc The Project
+
+This project will use the pulse-width modulator ( \c PWM ) to ramp an LED on
+and off every two seconds.  An AT90S2313 processor will be used as the
+controller.  The circuit for this demonstration is shown in the
+\ref demo_project_schematic "schematic diagram". If you have a development
+kit, you should be able to use it, rather than build the circuit, for this
+project.
+
+\anchor demo_project_schematic
+\image html demo.png "Schematic of circuit for demo project"
+\image latex demo.eps "Schematic of circuit for demo project" width=4in
+
+The source code is given in \ref demo_project_src "demo.c".  For the sake of
+this example, create a file called \c demo.c containing this source code.
+Some of the more important parts of the code are:
+
+\par Note [1]:
+The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
+remember the current value.
+
+\par Note [2]:
+SIGNAL() is a macro that marks the function as an interrupt routine. In this
+case, the function will get called when the timer overflows. Setting up
+interrupts is explained in greater detail in \c ref avr_interrupts.
+
+\par Note [3]:
+ This section determines the new value of the \c PWM.
+
+\par Note [4]:
+Here's where the newly computed value is loaded into the \c PWM regsiter.
+Since we are in an interrupt routine, it is safe to use outw().  Outside of an
+interrupt, outw_atomic() should be used. [FIXME: this is old stuff]
+
+\par Note [5]:
+This routine gets called after a reset. It initializes the \c PWM and enables
+interrupts.
+
+\par Note [6]:
+The main loop of the program does nothing -- all the work is done by the
+interrupt routine! If this was a real product, we'd probably put a \c SLEEP
+instruction in this loop to conserve power.
+
+\subsection demo_project_src The Source Code
+
+\include demo.c
+
+\subsection demo_project_compile Compiling and Linking
+
+This first thing that needs to be done is compile the source. When compiling,
+the compiler needs to know the processor type so the \c -mmcu option is
+specified. The \c -Os option will tell the compiler to optimize the code for
+efficient space usage (at the possible expense of code execution speed). The
+\c -g is used to embed debug info. The debug info is useful for disassemblies
+and doesn't end up in the \c .hex files, so I usually specify it. Finally, the
+\c -c tells the compiler to compile and stop -- don't link. This demo is small
+enough that we could compile and link in one step. However, real-world
+projects will have several modules and will typically need to break up the
+building of the project into several compiles and one link.
+
+\verbatim
+    $ avr-gcc -g -Os -mmcu=at90s2333 -c demo.c
+\endverbatim
+
+The compilation will create a \c demo.o file. Next we link it into a binary
+called \c demo.elf.
+
+\verbatim
+    $ avr-gcc -g -mmcu=at90s2333 -o demo.elf demo.o
+\endverbatim
+
+It is important to specify the MCU type when linking. The compiler uses the \c
+-mmcu option to choose start-up files and run-time libraries that get linked
+together. If this option isn't specified, the compiler defaults to the 8515
+processor environment, which is most certainly what you didn't want.
+
+\subsection demo_project_obj Examining the Object File
+
+\addindex disassembling
+
+Now we have a binary file. Can we do anything useful with it (besides put it
+into the processor?) The GNU Binutils suite is made up of many useful tools
+for manipulating object files that get generated. One tool is \c avr-objdump,
+which takes information from the object file and displays it in many useful
+ways. Typing the command by itself will cause it to list out its
+options.
+
+For instance, to get a feel of the application's size, the \c -h option can be
+used. The output of this option shows how much space is used in each of the
+sections (the \c .stab and \c .stabstr sections hold the debugging information
+and won't make it into the ROM file).
+
+An even more useful option is \c -S. This option disassembles the binary file
+and intersperses the source code in the output! This method is much better, in
+my opinion, than using the \c -S with the compiler because this listing
+includes routines from the libraries and the vector table contents. Also, all
+the "fix-ups" have been satisfied. In other words, the listing generated by
+this option reflects the actual code that the processor will run.
+
+\verbatim
+    $ avr-objdump -h -S demo.elf > demo.lst
+\endverbatim
+
+Here's the output as saved in the \c demo.lst file:
+
+\verbinclude demo.lst
+
+\subsection demo_project_map Linker Map Files
+
+\c avr-objdump is very useful, but sometimes it's necessary to see information
+about the link that can only be generated by the linker. A map file contains
+this information. A map file is useful for monitoring the sizes of your code
+and data. It also shows where modules are loaded and which modules were loaded
+from libraries. It is yet another view of your application. To get a map file,
+I usually add <tt><b>-Wl,-Map,demo.map</b></tt> to my link command. Relink the
+application using the following command to generate \c demo.map (a portion of
+which is shown below).
+
+\verbatim
+    $ avr-gcc -g -mmcu=at90s2313 -Wl,-Map,demo.map -o demo.elf demo.o
+\endverbatim
+
+\dontinclude demo.map
+
+Some points of interest in the \c demo.map file are:
+
+\skip .rela.plt
+\until __ctors_start
+
+The \c .text segment (where program instructions are stored) starts at
+location 0x0.
+
+\skipline *(.fini2) 
+\until __eeprom_end
+
+The last address in the \c .text segment is location \c 0xf2 ( denoted by \c
+_etext ), so the instructions use up 242 bytes of FLASH.
+
+The \c .data segment (where initialized static variables are stored) starts
+at location \c 0x60, which is the first address after the register bank on a
+2313 processor.
+
+The next available address in the \c .data segment is also location \c 0x60,
+so the application has no initialized data.
+
+The \c .bss segment (where uninitialized data is stored) starts at location
+\c 0x60.
+
+The next available address in the \c .bss segment is location 0x63, so the
+application uses 3 bytes of uninitialized data.
+
+The \c .eeprom segment (where EEPROM variables are stored) starts at
+location 0x0.
+
+The next available address in the \c .eeprom segment is also location 0x0,
+so there aren't any EEPROM variables.
+
+\subsection Generating Intel Hex Files
+
+We have a binary of the application, but how do we get it into the processor?
+Most (if not all) programmers will not accept a GNU executable as an input
+file, so we need to do a little more processing. The next step is to extract
+portions of the binary and save the information into \c .hex files. The GNU
+utility that does this is called \c avr-objcopy.
+
+The ROM contents can be pulled from our project's binary and put into the file
+demo.hex using the following command:
+
+\verbatim
+    $ avr-objcopy -j .text -O ihex demo.elf demo.hex
+\endverbatim
+
+The resulting \c demo.hex file contains:
+
+\verbinclude demo.hex
+
+The \c -j option indicates that we want the information from the \c .text
+segment extracted. If we specify the EEPROM segment, we can generate a \c .hex
+file that can be used to program the EEPROM:
+
+\verbatim
+    $ avr-objcopy -j .eeprom -O ihex demo.elf demo_eeprom.hex
+\endverbatim
+
+The resulting \c demo_eeprom.hex file contains:
+
+\verbinclude demo_eeprom.hex
+
+which is an empty \c .hex file (which is expected, since we didn't define any
+EEPROM variables).
+
+\subsection Letting Make Build the Project
+
+Rather than type these commands over and over, they can all be placed in a
+make file. To build the demo project using \c make,
+save the following in a file called \c Makefile.
+
+\note This \c Makefile can only be used as input for the GNU version of \c
+make.
+
+\include demo/Makefile
+
+*/
