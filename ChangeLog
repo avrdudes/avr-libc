@@ -1,3 +1,22 @@
+2003-10-09  Theodore A. Roth  <troth@openavr.org>
+[Submitted by Steven Borley <steven.borley@diode.demon.co.uk>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031009.
+
+	* include/stdio.h: Escape '\' character in dox.
+	* include/stdlib.h: Ditto.
+	* libc/string/strcat.S: Ditto.
+	* libc/string/strcpy.S: Ditto.
+	* libc/string/strlen.S: Ditto.
+	* libc/string/strnlen.S: Ditto.
+	* libc/string/strstr.S: Ditto.
+
+	* libc/string/strsep.S: Add \fn for function definition dox.
+	Escape '\' character in dox.
+	* libc/string/strtok_r.S: Ditto.
+
+	* include/avr/signal.h: Add a space after \code in dox.
+
 2003-10-08  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031008.

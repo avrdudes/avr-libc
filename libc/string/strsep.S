@@ -30,17 +30,17 @@
  
  
  /** \ingroup avr_string
-     \char *strsep(char **string, const char *delim)
+     \fn char *strsep(char **string, const char *delim)
      \brief Parse a string into tokens.
  
      The strsep() function locates, in the string referenced by *string,
      the first occurrence of any character in the string delim (or the
-     terminating `\0' character) and replaces it with a `\0'.  The location
+     terminating '\\0' character) and replaces it with a '\\0'.  The location
      of the next character after the delimiter character (or NULL, if the
      end of the string was reached) is stored in *string. An ``empty''
      field, i.e. one caused by two adjacent delimiter characters, can be
      detected by comparing the location referenced by the pointer returned
-     in *string to `\0'.
+     in *string to '\\0'.
    
      \returns The strtok_r() function returns a pointer to the original
      value of *string.  If *stringp is initially NULL, strsep() returns NULL.

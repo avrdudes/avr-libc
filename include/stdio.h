@@ -87,9 +87,9 @@
     is provided to associate a stream to a device, where the device
     needs to provide a function to send a character, to receive a
     character, or both.  There is no differentiation between "text" and
-    "binary" streams inside avr-libc.  Character \c \n is sent
+    "binary" streams inside avr-libc.  Character \c \\n is sent
     literally down to the device's \c put() function.  If the device
-    requires a carriage return (\c \r) character to be sent before
+    requires a carriage return (\c \\r) character to be sent before
     the linefeed, its \c put() routine must implement this (see
     \ref stdio_note2 "note 2").
 

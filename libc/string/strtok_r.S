@@ -29,13 +29,13 @@
 */
 
 /** \ingroup avr_string
-    \char *strtok_r(char *string, const char *delim, char **last)
+    \fn char *strtok_r(char *string, const char *delim, char **last)
     \brief Parses the string s into tokens.
 
     strtok_r parses the string s into tokens. The first call to strtok_r
     should have string as its first argument. Subsequent calls should have
     the first argument set to NULL. If a token ends with a delimiter, this
-    delimiting character is overwritten with a \0 and a pointer to the next
+    delimiting character is overwritten with a '\\0' and a pointer to the next
     character is saved for the next call to strtok_r. The delimiter string
     delim may be different for each call. last is a user allocated char*
     pointer. It must be the same while parsing the same string. strtok_r is
