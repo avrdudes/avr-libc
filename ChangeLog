@@ -1,5 +1,10 @@
 2002-10-11  Theodore A. Roth  <troth@openavr.org>
 
+	* include/errno.h: Add dox.
+	* include/stdlib.h: Add xref to errno.
+
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
 	* doc/api/main_page.dox: Updated.
 
 2002-10-11  Theodore A. Roth  <troth@openavr.org>

@@ -201,8 +201,8 @@ extern void qsort(void *__base, size_t __nmemb, size_t __size,
     The strtol() function returns the result of the conversion, unless
     the value would underflow or overflow.  If no conversion could be
     performed, 0 is returned.  If an overflow or underflow occurs, \c
-    errno is set to ERANGE and the function return value is clamped to
-    \c LONG_MIN or \c LONG_MAX, respectively.
+    errno is set to \ref avr_errno "ERANGE" and the function return value
+    is clamped to \c LONG_MIN or \c LONG_MAX, respectively.
 */
 extern long strtol(const char *__nptr, char **__endptr, int __base);
 
@@ -235,8 +235,8 @@ extern long strtol(const char *__nptr, char **__endptr, int __base);
     or, if there was a leading minus sign, the negation of the result
     of the conversion, unless the original (non-negated) value would
     overflow; in the latter case, strtoul() returns ULONG_MAX, and \c
-    errno is set to ERANGE.  If no conversion could be performed, 0 is
-    returned.
+    errno is set to \ref avr_errno "ERANGE".  If no conversion could 
+    be performed, 0 is returned.
 */
 extern unsigned long strtoul(const char *__nptr, char **__endptr, int __base);
 

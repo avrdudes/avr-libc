@@ -26,6 +26,20 @@
 #ifndef __ERRNO_H_
 #define __ERRNO_H_ 1
 
+/** \defgroup avr_errno System Errors (errno)
+
+    \code #include <errno.h>\endcode
+
+    Some functions in the library set the global variable \c errno when an
+    error occurs. The file, \c <errno.h>, provides symbolic names for various
+    error codes. 
+
+    \warning The \c errno global variable is not safe to use in a threaded or
+    multi-task system. A race condition can occur if a task is interrupted
+    between the call which sets \c error and when the task examines \c
+    errno. If another task changes \c errno during this time, the result will
+    be incorrect for the interrupted task. */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -36,7 +50,16 @@ extern int errno;
 }
 #endif
 
-#define EDOM 33
-#define ERANGE 34
+/** \ingroup avr_errno
+    \def EDOM
+
+    Domain error. */
+#define EDOM       33
+
+/** \ingroup avr_errno
+    \def ERANGE
+
+    Range error. */
+#define ERANGE     34
 
 #endif
