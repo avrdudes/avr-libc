@@ -1,3 +1,12 @@
+2003-08-11  Theodore A. Roth  <troth@openavr.org>
+
+	* include/string.h: Remove extra carriage returns.
+	* include/avr/interrupt.h: Remove extra carriage returns.
+	* include/avr/pgmspace.h: Remove extra carriage returns.
+	* include/avr/sfr_defs.h: Remove extra carriage returns.
+	* libc/misc/ee_wblk.S: Remove extra carriage returns.
+	* libc/misc/ee_ww.S: Remove extra carriage returns.
+
 2003-08-06  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
