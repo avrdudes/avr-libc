@@ -8,6 +8,10 @@
           using memcpy_P() but used the ROM table directly.  This works
           only incidentally for compile-time constant indexes since the
           compiler would then insert the appropriate ROM address.
+  [#2924] strtod returns incorrect endptr
+  [no-id] strtod returned 0.0 when parsing a number with a partial
+          exponent (e. g. "1.234e+"); this also affects scanf as it
+          uses strtod for parsing floating point numbers
 
 * Other changes:
 

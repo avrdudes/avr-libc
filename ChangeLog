@@ -1,3 +1,8 @@
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/strtod.S: fix parsing of a partial
+	exponent, fix *endp return value (savanna bug #2924)
+
 2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: Fix the use of progmem tables, closes
