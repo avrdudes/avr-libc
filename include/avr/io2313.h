@@ -91,6 +91,9 @@
 #define OCR1	_SFR_IO16(0x2A)
 #define OCR1L	_SFR_IO8(0x2A)
 #define OCR1H	_SFR_IO8(0x2B)
+#define OCR1A	_SFR_IO16(0x2A)
+#define OCR1AL	_SFR_IO8(0x2A)
+#define OCR1AH	_SFR_IO8(0x2B)
 
 /* Timer/Counter 1 */
 #define TCNT1	_SFR_IO16(0x2C)

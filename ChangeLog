@@ -1,3 +1,7 @@
+2003-02-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io2333.h: the datasheet says OCR1_A_.
+
 2003-02-17  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* include/avr/iom8.h, include/avr/iom8535.h, include/avr/iom32.h,
