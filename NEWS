@@ -52,6 +52,7 @@ See the "Special Function Registers" documentation for details.
 mega128
 mega169
 mega16
+tiny26
 
 * Incompatibilities with previous version.
 

@@ -170,9 +170,10 @@
 #define SIG_UART_TRANS		_VECTOR(13)
 #define SIG_ADC			_VECTOR(14)
 #define SIG_EEPROM_READY	_VECTOR(15)
-#define SIG_2WIRE_SERIAL	_VECTOR(16)
+#define SIG_COMPARATOR		_VECTOR(16)
+#define SIG_2WIRE_SERIAL	_VECTOR(17)
 
-#define _VECTORS_SIZE 68
+#define _VECTORS_SIZE 72
 
 /* Bit numbers */
 
