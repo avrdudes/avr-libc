@@ -1,3 +1,8 @@
+2005-01-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/setjmp.h: Document that longjmp() might destroy global
+	register variables; see savannah bug #4101.
+
 2005-01-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/eeprom.h: Document all devices that are not supported

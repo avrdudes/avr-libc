@@ -67,6 +67,9 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN + 1]; } jmp_buf[1];
     \note setjmp() and longjmp() make programs hard to understand and maintain.
     If possible, an alternative should be used.
 
+    \note longjmp() can destroy changes made to global register
+    variables (see \ref faq_regbind).
+
     For a very detailed discussion of setjmp()/longjmp(), see Chapter 7 of
     <em>Advanced Programming in the UNIX Environment</em>, by W. Richard
     Stevens.
