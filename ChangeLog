@@ -1,5 +1,9 @@
 2004-06-22  Theodore A. Roth  <troth@openavr.org>
 
+	* xml/Device.dtd: Fix some syntax errors.
+
+2004-06-22  Theodore A. Roth  <troth@openavr.org>
+
 	* xml/Atmel2libc.py: Now dumps header, memory size info and interrupts
 	data as well-formed XML.
 	* xml/Device.dtd: Change memory info to memory sizes.
