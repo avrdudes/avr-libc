@@ -110,7 +110,7 @@ void _printf_p (char const *fmt0, ...) {
 				case '-':
 					flags |= FLLPAD;
 					break;
-				case '#' :
+				case '#':
 					flags |= FLALT;
 					break;
 				case '.':
@@ -142,11 +142,11 @@ void _printf_p (char const *fmt0, ...) {
 						a.l = -a.l;
 					}
 					goto processnum;
-				case 'o' : /* octal number */
+				case 'o': /* octal number */
 					base = 8;
 					goto getulong; 
-				case 'x' :
-				case 'X' :
+				case 'x':
+				case 'X':
 					base = 16;
 					/* FALLTHROUGH */
 				case 'u':
@@ -197,7 +197,7 @@ void _printf_p (char const *fmt0, ...) {
 							printf_char(' ');
 					goto clearflags;
 
-				default :
+				default:
 					printf_char(c);
 				  clearflags:
 					flags = 0;
