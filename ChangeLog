@@ -1,3 +1,8 @@
+2002-10-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: implement %p.
+	* include/stdio.h: document %p.
+
 2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* Makefile.am: add hooks for libprintf_*.a.

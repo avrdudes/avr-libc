@@ -199,7 +199,13 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					goto processnum;
 				case 'o': /* octal number */
 					base = 8;
-					goto getulong; 
+					goto getulong;
+				case 'p':
+#if PRINTF_LEVEL > 1
+					flags |= FLALT;
+#endif
+					c = 'x';
+					/* FALLTHROUGH */
 				case 'x':
 				case 'X':
 					base = 16;

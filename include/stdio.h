@@ -307,6 +307,8 @@ extern int	fclose(FILE *__stream);
            precision, if any, gives the minimum number of digits that
            must appear; if the converted value requires fewer digits,
            it is padded on the left with zeros.
+   - \c p  The <tt>void *</tt> argument is taken as an unsigned integer,
+           and converted similarly as a <tt>%#x</tt> command would do.
    - \c c  The \c int argument is converted to an \c "unsigned char", and the
            resulting character is written.
    - \c s  The \c "char *" argument is expected to be a pointer to an array
