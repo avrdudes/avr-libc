@@ -1,5 +1,9 @@
 2002-11-04  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/Makefile.am: Fix all pngs to have proper transparency.
+
+2002-11-04  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/TODO: Updated.
 	* include/avr/sleep.h: New file.

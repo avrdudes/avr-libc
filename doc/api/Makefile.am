@@ -80,8 +80,6 @@ FIG2DEV= fig2dev
 
 .fig.png:
 	$(FIG2DEV) -L png $< $@
-	$(PNGTOPNM) $@ > tmp.pnm
-	$(PNMTOPNG) -transparent white tmp.pnm >$@ && rm tmp.pnm
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig
 
@@ -93,7 +91,16 @@ IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 ps: demo $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: demo $(TARGET_DOX_HTML)
+html: demo $(TARGET_DOX_HTML) fix_png
+
+# Make the background color of the png's transparent.
+fix_png:
+	cd $(USER_MANUAL); \
+	for png in *.png; do \
+		echo "Fixing tranparency for $$png"; \
+		$(PNGTOPNM) $$png > tmp.pnm; \
+		$(PNMTOPNG) -transparent white tmp.pnm > $$png && rm tmp.pnm; \
+	done
 
 # Rule for generating PDF output
 pdf: demo $(TARGET_DOX_PDF)
@@ -224,5 +231,5 @@ install-dox-ps: dox-ps
 
 
 .PHONY: html latex ps pdf dox dox-pdf install-pdf install-html install-ps \
-	install-dox-html install-dox-ps install-dox-pdf
+	install-dox-html install-dox-ps install-dox-pdf fix_png
 
