@@ -48,7 +48,8 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        tools-install.dox \
                        using-avrprog.dox \
                        using-tools.dox \
-                       faq.dox
+                       faq.dox \
+                       unjs.pl
 
 SUFFIXES             = .pdf
 

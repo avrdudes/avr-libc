@@ -1,5 +1,9 @@
 2003-01-20  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/Makefile.am (EXTRA_DIST): Add unjs.pl.
+
+2003-01-20  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/TODO: Remove note about sleep.h.
 	* include/avr/sleep.h: Make it work with any device (mostly).
