@@ -1,3 +1,8 @@
+2002-10-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: Make the addresses used consistent.
+	* doc/api/malloc-x*.fig: Ditto.
+
 2002-10-28  Theodore A. Roth  <troth@openavr.org>
 
 	* doc/api/malloc-std.fig: Make figs more consistent.
