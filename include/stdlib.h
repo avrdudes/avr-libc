@@ -223,9 +223,9 @@ extern long strtol(const char *__nptr, char **__endptr, int __base);
     letter \c 'A' in either upper or lower case represents 10, \c 'B'
     represents 11, and so forth, with \c 'Z' representing 35.)
 
-    If \c endptr is not NULL, strtol() stores the address of the first
+    If \c endptr is not NULL, strtoul() stores the address of the first
     invalid character in \c *endptr.  If there were no digits at all,
-    however, strtol() stores the original value of \c nptr in \c
+    however, strtoul() stores the original value of \c nptr in \c
     *endptr.  (Thus, if \c *nptr is not \c '\0' but \c **endptr is \c '\0'
     on return, the entire string was valid.)
 
