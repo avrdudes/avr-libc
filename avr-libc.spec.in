@@ -22,8 +22,8 @@ Group: Avr/Development/Tools
 URL: http://savannah.gnu.org/projects/avr-libc
 Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.gz
 Buildroot: /var/tmp/avr-libc-%{version}-root
-BuildRequires: gzip doxygen >= 1.2.16 tetex avr-gcc >= 3.2.75
-Requires: avr-gcc >= 3.2.75
+BuildRequires: gzip doxygen >= 1.2.16 tetex avr-gcc >= 3.3
+Requires: avr-gcc >= 3.3
 
 %description
 Avr-libc is a C library for developing applications for Atmel AVR
@@ -100,6 +100,9 @@ rm -rf ${RPM_BUILD_ROOT}
 %doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.pdf.gz
 
 %changelog
+* Wed Aug 20 2003 Theodore Roth <troth@openavr.org>
+- Require avr-gcc >= 3.3.
+
 * Thu Apr 17 2003 Theodore Roth <troth@openavr.org>
 - Don't build debuginfo package.
 - Don't run post install since it strips binaries.

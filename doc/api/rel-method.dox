@@ -118,9 +118,9 @@ The following steps should be taken to cut a branch in cvs:
 
 A stable release will only be done on a branch, not from the cvs HEAD.
 
-The following steps should be taken way making a release:
+The following steps should be taken when making a release:
 
--# Make sure the source tree you are working from is on the correct brach:<br>
+-# Make sure the source tree you are working from is on the correct branch:<br>
    'cvs update -r avr-lib-<major>_<minor>-branch'
 -# Update the package version in configure.in and commit it to cvs.
 -# Update the gnu tool chain version requirements in the README and commit
@@ -133,9 +133,9 @@ The following steps should be taken way making a release:
    source tarball.
 -# Tag the release (_<patch> is not given if this is the first release on this
    branch):<br>
-   'cvs tag -b avr-lib-<major>_<minor>_<patch>-release'
+   'cvs tag avr-lib-<major>_<minor>_<patch>-release'
 -# Upload the tarball to savannah.
--# Generate and upload the latest documentation to savannah.
+-# Generate the latest documentation and upload to savannah.
 -# Announce the release.
 
 The following hypothetical diagram should help clarify version and branch
