@@ -561,7 +561,8 @@
 #define MUX1    1
 #define MUX0    0
 
-/* Last memory addresses */
+/* Constants */
+#define SPM_PAGESIZE 128
 #define RAMEND      0x85F
 #define XRAMEND     0x85F
 #define E2END       0x3FF

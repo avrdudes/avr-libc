@@ -1,5 +1,20 @@
 2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/iom128.h: Add SPM_PAGESIZE.
+	* include/avr/iom16.h: Add SPM_PAGESIZE.
+	* include/avr/iom161.h: Add SPM_PAGESIZE.
+	* include/avr/iom162.h: Add SPM_PAGESIZE.
+	* include/avr/iom163.h: Add SPM_PAGESIZE.
+	* include/avr/iom169.h: Add SPM_PAGESIZE.
+	* include/avr/iom32.h: Add SPM_PAGESIZE.
+	* include/avr/iom323.h: Add SPM_PAGESIZE.
+	* include/avr/iom64.h: Add SPM_PAGESIZE.
+	* include/avr/iom8.h: Add SPM_PAGESIZE.
+	* include/avr/iom8515.h: Add SPM_PAGESIZE.
+	* include/avr/iom8535.h: Add SPM_PAGESIZE.
+
+2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/acknowledge.dox: mention Eric Weddington.
 
 2003-02-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

@@ -516,6 +516,7 @@
 #define    PINE0        0
 
 /* Constants */
+#define    SPM_PAGESIZE 64
 #define    RAMEND       0x25F    /* Last On-Chip SRAM Location */
 #define    XRAMEND      0xFFFF
 #define    E2END        0x1FF

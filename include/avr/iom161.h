@@ -556,7 +556,8 @@
 #define ACIS1	1
 #define ACIS0	0
 
-/* Last memory addresses */
+/* Constants */
+#define SPM_PAGESIZE 128
 #define RAMEND		0x45F
 #define XRAMEND		0xFFFF
 #define E2END		0x1FF

@@ -804,8 +804,8 @@
 #define TXB81	0
 
 
-/* Last memory addresses */
-
+/* Constants */
+#define SPM_PAGESIZE 128
 #define RAMEND		0x4FF
 #define XRAMEND		0xFFFF
 #define E2END		0x1FF

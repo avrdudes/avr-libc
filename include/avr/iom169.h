@@ -947,7 +947,8 @@
 #define SEG1   1
 #define SEG0   0
 
-/* Last memory addresses */
+/* Constants */
+#define SPM_PAGESIZE 128
 #define RAMEND		0x4FF
 #define XRAMEND		0x4FF
 #define E2END		0x1FF
