@@ -3,6 +3,7 @@
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/TODO: Updated.
 	* include/avr/sleep.h: New file.
+	* include/avr/sfr_defs.h: Fix spelling in dox comments.
 
 2002-10-31  Theodore A. Roth  <troth@openavr.org>
 

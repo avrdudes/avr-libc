@@ -317,7 +317,7 @@
 /** \def outp
     \ingroup avr_sfr
     \deprecated
-    For backwards compatibility only. This macro will evetually be removed.
+    For backwards compatibility only. This macro will eventually be removed.
 
     \par
     <b>Use outb() in new programs</b>. */
@@ -327,7 +327,7 @@
 /** \def inp
     \ingroup avr_sfr
     \deprecated
-    For backwards compatibility only. This macro will evetually be removed.
+    For backwards compatibility only. This macro will eventually be removed.
 
     \par
     <b>Use inb() in new programs</b>. */
@@ -337,7 +337,7 @@
 /** \def BV
     \ingroup avr_sfr
     \deprecated
-    For backwards compatibility only. This macro will evetually be removed.
+    For backwards compatibility only. This macro will eventually be removed.
 
     \par
     <b>Use _BV() in new programs</b>. */
