@@ -757,9 +757,9 @@
 
 /* PORTE bit definitions */
 
-#define PORTE2	2
-#define PORTE1	1
-#define PORTE0	0
+#define PE2	2
+#define PE1	1
+#define PE0	0
 
 
 

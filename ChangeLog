@@ -1,3 +1,14 @@
+2003-10-20  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/io.h: Include portpins.h.
+	* include/avr/portpins.h: New file.
+	* include/avr/ioat94k.h: Convert PORTxn to Pxn.
+	* include/avr/iom128.h: Convert PORTxn to Pxn.
+	* include/avr/iom162.h: Convert PORTxn to Pxn.
+	* include/avr/iom64.h: Convert PORTxn to Pxn.
+	* include/avr/iotn15.h: Convert PORTxn to Pxn.
+
 2003-10-18  Theodore A. Roth  <troth@openavr.org>
 [Fix for Bug #5976]
 

@@ -844,14 +844,14 @@
 #define    MUX0         0
 
 /* Port A Data Register - PORTA */
-#define    PORTA7       7
-#define    PORTA6       6
-#define    PORTA5       5
-#define    PORTA4       4
-#define    PORTA3       3
-#define    PORTA2       2
-#define    PORTA1       1
-#define    PORTA0       0
+#define    PA7       7
+#define    PA6       6
+#define    PA5       5
+#define    PA4       4
+#define    PA3       3
+#define    PA2       2
+#define    PA1       1
+#define    PA0       0
 
 /* Port A Data Direction Register - DDRA */
 #define    DDA7         7
@@ -874,14 +874,14 @@
 #define    PINA0        0
 
 /* Port B Data Register - PORTB */
-#define    PORTB7       7
-#define    PORTB6       6
-#define    PORTB5       5
-#define    PORTB4       4
-#define    PORTB3       3
-#define    PORTB2       2
-#define    PORTB1       1
-#define    PORTB0       0
+#define    PB7       7
+#define    PB6       6
+#define    PB5       5
+#define    PB4       4
+#define    PB3       3
+#define    PB2       2
+#define    PB1       1
+#define    PB0       0
 
 /* Port B Data Direction Register - DDRB */
 #define    DDB7         7
@@ -904,14 +904,14 @@
 #define    PINB0        0
 
 /* Port C Data Register - PORTC */
-#define    PORTC7       7
-#define    PORTC6       6
-#define    PORTC5       5
-#define    PORTC4       4
-#define    PORTC3       3
-#define    PORTC2       2
-#define    PORTC1       1
-#define    PORTC0       0
+#define    PC7       7
+#define    PC6       6
+#define    PC5       5
+#define    PC4       4
+#define    PC3       3
+#define    PC2       2
+#define    PC1       1
+#define    PC0       0
 
 /* Port C Data Direction Register - DDRC */
 #define    DDC7         7
@@ -934,14 +934,14 @@
 #define    PINC0        0
 
 /* Port D Data Register - PORTD */
-#define    PORTD7       7
-#define    PORTD6       6
-#define    PORTD5       5
-#define    PORTD4       4
-#define    PORTD3       3
-#define    PORTD2       2
-#define    PORTD1       1
-#define    PORTD0       0
+#define    PD7       7
+#define    PD6       6
+#define    PD5       5
+#define    PD4       4
+#define    PD3       3
+#define    PD2       2
+#define    PD1       1
+#define    PD0       0
 
 /* Port D Data Direction Register - DDRD */
 #define    DDD7         7
@@ -964,14 +964,14 @@
 #define    PIND0        0
 
 /* Port E Data Register - PORTE */
-#define    PORTE7       7
-#define    PORTE6       6
-#define    PORTE5       5
-#define    PORTE4       4
-#define    PORTE3       3
-#define    PORTE2       2
-#define    PORTE1       1
-#define    PORTE0       0
+#define    PE7       7
+#define    PE6       6
+#define    PE5       5
+#define    PE4       4
+#define    PE3       3
+#define    PE2       2
+#define    PE1       1
+#define    PE0       0
 
 /* Port E Data Direction Register - DDRE */
 #define    DDE7         7
@@ -994,14 +994,14 @@
 #define    PINE0        0
 
 /* Port F Data Register - PORTF */
-#define    PORTF7       7
-#define    PORTF6       6
-#define    PORTF5       5
-#define    PORTF4       4
-#define    PORTF3       3
-#define    PORTF2       2
-#define    PORTF1       1
-#define    PORTF0       0
+#define    PF7       7
+#define    PF6       6
+#define    PF5       5
+#define    PF4       4
+#define    PF3       3
+#define    PF2       2
+#define    PF1       1
+#define    PF0       0
 
 /* Port F Data Direction Register - DDRF */
 #define    DDF7         7
@@ -1024,11 +1024,11 @@
 #define    PINF0        0
 
 /* Port G Data Register - PORTG */
-#define    PORTG4       4
-#define    PORTG3       3
-#define    PORTG2       2
-#define    PORTG1       1
-#define    PORTG0       0
+#define    PG4       4
+#define    PG3       3
+#define    PG2       2
+#define    PG1       1
+#define    PG0       0
 
 /* Port G Data Direction Register - DDRG */
 #define    DDG4         4

@@ -226,6 +226,8 @@
 #  endif
 #endif
 
+#include <avr/portpins.h>
+
 #if __AVR_ARCH__ != 1
 #  if XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__)
 #    undef SP

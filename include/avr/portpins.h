@@ -1,0 +1,228 @@
+/* Copyright (c) 2003  Theodore A. Roth
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+#ifndef _AVR_PORTPINS_H_
+#define _AVR_PORTPINS_H_ 1
+
+/* This file should only be included from <avr/io.h>, never directly. */
+
+#ifndef _AVR_IO_H_
+#  error "Include <avr/io.h> instead of this file."
+#endif
+
+/* Define PORTxn values for all possible port pins. */
+
+/* PORT A */
+
+#if defined(PA0)
+#  define PORTA0 PA0
+#endif
+#if defined(PA1)
+#  define PORTA1 PA1
+#endif
+#if defined(PA2)
+#  define PORTA2 PA2
+#endif
+#if defined(PA3)
+#  define PORTA3 PA3
+#endif
+#if defined(PA4)
+#  define PORTA4 PA4
+#endif
+#if defined(PA5)
+#  define PORTA5 PA5
+#endif
+#if defined(PA6)
+#  define PORTA6 PA6
+#endif
+#if defined(PA7)
+#  define PORTA7 PA7
+#endif
+
+/* PORT B */
+
+#if defined(PB0)
+#  define PORTB0 PB0
+#endif
+#if defined(PB1)
+#  define PORTB1 PB1
+#endif
+#if defined(PB2)
+#  define PORTB2 PB2
+#endif
+#if defined(PB3)
+#  define PORTB3 PB3
+#endif
+#if defined(PB4)
+#  define PORTB4 PB4
+#endif
+#if defined(PB5)
+#  define PORTB5 PB5
+#endif
+#if defined(PB6)
+#  define PORTB6 PB6
+#endif
+#if defined(PB7)
+#  define PORTB7 PB7
+#endif
+
+/* PORT C */
+
+#if defined(PC0)
+#  define PORTC0 PC0
+#endif
+#if defined(PC1)
+#  define PORTC1 PC1
+#endif
+#if defined(PC2)
+#  define PORTC2 PC2
+#endif
+#if defined(PC3)
+#  define PORTC3 PC3
+#endif
+#if defined(PC4)
+#  define PORTC4 PC4
+#endif
+#if defined(PC5)
+#  define PORTC5 PC5
+#endif
+#if defined(PC6)
+#  define PORTC6 PC6
+#endif
+#if defined(PC7)
+#  define PORTC7 PC7
+#endif
+
+/* PORT D */
+
+#if defined(PD0)
+#  define PORTD0 PD0
+#endif
+#if defined(PD1)
+#  define PORTD1 PD1
+#endif
+#if defined(PD2)
+#  define PORTD2 PD2
+#endif
+#if defined(PD3)
+#  define PORTD3 PD3
+#endif
+#if defined(PD4)
+#  define PORTD4 PD4
+#endif
+#if defined(PD5)
+#  define PORTD5 PD5
+#endif
+#if defined(PD6)
+#  define PORTD6 PD6
+#endif
+#if defined(PD7)
+#  define PORTD7 PD7
+#endif
+
+/* PORT E */
+
+#if defined(PE0)
+#  define PORTE0 PE0
+#endif
+#if defined(PE1)
+#  define PORTE1 PE1
+#endif
+#if defined(PE2)
+#  define PORTE2 PE2
+#endif
+#if defined(PE3)
+#  define PORTE3 PE3
+#endif
+#if defined(PE4)
+#  define PORTE4 PE4
+#endif
+#if defined(PE5)
+#  define PORTE5 PE5
+#endif
+#if defined(PE6)
+#  define PORTE6 PE6
+#endif
+#if defined(PE7)
+#  define PORTE7 PE7
+#endif
+
+/* PORT F */
+
+#if defined(PF0)
+#  define PORTF0 PF0
+#endif
+#if defined(PF1)
+#  define PORTF1 PF1
+#endif
+#if defined(PF2)
+#  define PORTF2 PF2
+#endif
+#if defined(PF3)
+#  define PORTF3 PF3
+#endif
+#if defined(PF4)
+#  define PORTF4 PF4
+#endif
+#if defined(PF5)
+#  define PORTF5 PF5
+#endif
+#if defined(PF6)
+#  define PORTF6 PF6
+#endif
+#if defined(PF7)
+#  define PORTF7 PF7
+#endif
+
+/* PORT G */
+
+#if defined(PG0)
+#  define PORTG0 PG0
+#endif
+#if defined(PG1)
+#  define PORTG1 PG1
+#endif
+#if defined(PG2)
+#  define PORTG2 PG2
+#endif
+#if defined(PG3)
+#  define PORTG3 PG3
+#endif
+#if defined(PG4)
+#  define PORTG4 PG4
+#endif
+#if defined(PG5)
+#  define PORTG5 PG5
+#endif
+#if defined(PG6)
+#  define PORTG6 PG6
+#endif
+#if defined(PG7)
+#  define PORTG7 PG7
+#endif
+
+#endif /* _AVR_PORTPINS_H_ */
