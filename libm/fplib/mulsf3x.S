@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     mulsf3x.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -56,25 +58,24 @@
 
 GLOBAL(__mulsf3x)
     TST     rA3
-    BREQ    ___mulsf3x_ZERO
- ___mulsf3_10:
-    TST     rB3
-    BREQ    ___mulsf3x_ZERO
+    BREQ    2f
 
- ___mulsf3x_00:
+    TST     rB3
+    BREQ    2f
+
      SUBI    rA3,0x7F          ; exp(A) now signed char
      SUBI    rB3,0x7F          ; exp(B) now signed char
 
      ADD     rA3,rB3           ; add two signed registers
-     BRVC    ___mulsf3x_20     ; no signed overflow
-     BRMI    ___mulsf3x_INF    ; signed overflow : if now negative -> positive overflow
- ___mulsf3x_ZERO:
+     BRVC    1f                ; no signed overflow
+     BRMI    100f              ; signed overflow : if now negative -> positive overflow
+2:
      RJMP    _U(__fp_zerox)
 
- ___mulsf3x_20:
+1:
      SUBI    rA3,0x81          ; = ADI,0x7F
      CPI     rA3,0xFF
-     BREQ    ___mulsf3x_ZERO   ; no (unsigned overflow) -> signed underflow
+     BREQ    2b                ; no (unsigned overflow) -> signed underflow
 
     ; now multiply mantissa A[rA2:rA1:rA0] * B[rb5:rb4:rb3:rB2:rB1:rB0]
     ; result : [rr5:rr4:rr3:rr2:rr1:rr0]
@@ -97,71 +98,71 @@ GLOBAL(__mulsf3x)
     CLR     rb3
 
     LDI     loop,8           ; loop counter
- ___mulsf3x_100:
+1:
     LSR     rb4
-    BRCC    ___mulsf3x_101
+    BRCC    2f
     ADD     rr0,rB0
     adc     rr1,rB1
     adc     rr2,rB2
     adc     rr3,rb3
- ___mulsf3x_101:
+2:
     ADD     rB0,rB0
     adc     rB1,rB1
     adc     rB2,rB2
     adc     rb3,rb3
     DEC     loop
-    BRNE    ___mulsf3x_100    ;
+    BRNE    1b
     LDI     loop,8           ; loop counter
 
     MOV     rb5,rA1          ; rb5 not yet needed
     CLR     rr4              ; rb4 is allready clear
     LDI     loop,8           ; loop counter
- ___mulsf3x_200:
+1:
     LSR     rb5
-    BRCC    ___mulsf3x_201
+    BRCC    2f
     ADD     rr1,rB1
     adc     rr2,rB2
     adc     rr3,rb3
     adc     rr4,rb4
- ___mulsf3x_201:
+2:
     ADD     rB1,rB1
     adc     rB2,rB2
     adc     rb3,rb3
     adc     rb4,rb4
     DEC     loop
-    BRNE    ___mulsf3x_200    ;
+    BRNE    1b
 
     MOV     loop,rA2          ; loop no longer needed, check
     CLR     rr5               ; rb5 is allready clear
- ___mulsf3x_300:
+1:
     LSR     loop
-    BRCC    ___mulsf3x_301
+    BRCC    2f
     ADD     rr2,rB2
     adc     rr3,rb3
     adc     rr4,rb4
     adc     rr5,rb5
- ___mulsf3x_301:
+2:
     ADD     rB2,rB2
     adc     rb3,rb3
     adc     rb4,rb4
     adc     rb5,rb5
     TST     loop
-    BRNE    ___mulsf3x_300    ;
+    BRNE    1b
 
     ; multiplication done : result in rr5:rr4:rr3:rr2:rr1:rr0
     ;                              =  rA2:rA1:rA0:rAE:rr1:rr0
- ___mulsf3x_400: ;  normalize  1.0 * 1.0      = 1.0
-               ;                          0x800000 * 0x800000 = 0x40 00 00 00 00 00
-               ;                          1.999999 * 1.999999 = 3.99999 ~ 4.0
-               ;                          0xFFFFFF * 0xFFFFFF = 0xFF FF FE 00 00 01
+    ;  normalize  1.0 * 1.0      = 1.0
+    ;                          0x800000 * 0x800000 = 0x40 00 00 00 00 00
+    ;                          1.999999 * 1.999999 = 3.99999 ~ 4.0
+    ;                          0xFFFFFF * 0xFFFFFF = 0xFF FF FE 00 00 01
 
     TST     rA2
-    BRPL    ___mulsf3x_405    ; if MSB erg is clr
+    BRPL    1f                ; if MSB erg is clr
     INC     rA3               ;
-    BRNE    ___mulsf3x_420
- ___mulsf3x_INF:
+    BRNE    2f
+100:
     RJMP    _U(__fp_nanx)     ; returns to ___mulsf3 or a high level function : rT1c ok
- ___mulsf3x_405:
+1:
     ADD     rr0,rr0
     adc     rr1,rr1
     adc     rAE,rAE
@@ -169,7 +170,7 @@ GLOBAL(__mulsf3x)
     adc     rA1,rA1
     adc     rA2,rA2
 
- ___mulsf3x_420:
+2:
     OR    rr0,rr1             ; rr0 = rT0 which holds the mantissae extension beyond rAE
     RET
 

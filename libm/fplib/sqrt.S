@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     sqrt.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -67,9 +69,9 @@ GLOBAL(sqrt)
 
     MOV     rB2,rA2		; needed later on
     TST     rA3
-    BREQ    _sqrt_ZERO		; sqrt(0) = 0
+    BREQ    100f		; sqrt(0) = 0
     RCALL   _U(__fp_split1)	; does not return on NaN
- _sqrt_00:
+
     MOV     rTI0,rA3
     SUBI    rTI0,0x7F
     ASR     rTI0		; this is dExp!
@@ -99,7 +101,7 @@ GLOBAL(sqrt)
     MOV     rS2,rA2
     MOV     rS1,rA1
     MOV     rS0,rA0 		; Abak = A
- _sqrt_10:
+1:
     MOV     rA0,rS0		;
     MOV     rA1,rS1		;
     MOV     rA2,rS2		;
@@ -132,7 +134,7 @@ GLOBAL(sqrt)
     CPC     rS5,rB1		;
     CPC     rS6,rB2
     CPC     rS7,rB3		; cmp B to Bbak
-    BRNE    _sqrt_10
+    BRNE    1b
 
     POP     rS7
     POP     rS6
@@ -145,10 +147,10 @@ GLOBAL(sqrt)
 
     POP     rT0
     ADD     rA3,rT0		;
- _sqrt_100:
+
     CLR     rT0			; no rounding beyond rAE
     RJMP    _U(__fp_merge)
- _sqrt_ZERO:
+100:
     RET
 
           ENDFUNC

@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     ceil.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -67,36 +69,36 @@ GLOBAL(ceil)
     RCALL   _U(__fp_split1)   ; split up in sign : exp : fraction   : fraction extention
                               ;          x  T      R19   R18:rSI0:R16: R1
     CPI     rA3,0x7F          ; Exp >= 0x7F -> arg >= 1.0
-    BRCC    _ceil_100         ;
-    BRTS    _ceil_01          ; |arg| < 1.0 -> ceil  = / 1.0  fÅr X >  0.0
+    BRCC    100f
+    BRTS    1f                ; |arg| < 1.0 -> ceil  = / 1.0  fÅr X >  0.0
     TST     rA3               ;                        \ 0.0  fÅr X <= 0.0
-    BREQ    _ceil_01
+    BREQ    1f
     LDI     rA3,0x3F
     LDI     rA2,0x80
     CLR     rA1
     CLR     rA0
     RET
- _ceil_01:
+1:
     RJMP    _U(__fp_zero)
- _ceil_100_1:
+1:
     LSR     rA2        ;
     ROR     rA1        ; shift out fractional bits to the right
     ROR     rA0        ; until mantissa is a normalized unsigned
     adc     rAE,rT1c   ; rAE cleard by fp_split1, rT1c = __zero_reg__
     INC     rA3        ;
     ; |arg| >= 1.0
- _ceil_100:            ; |arg| >= 1.0
+100:                   ; |arg| >= 1.0
     CPI     rA3,0x96   ;
-    BRCS    _ceil_100_1;
+    BRCS    1b
 
- _ceil_200:
-    BRTS    _ceil_300  ; LSB now is exactely 1 or greater
+2:
+    BRTS    3f         ; LSB now is exactely 1 or greater
     TST     rAE        ; any bit shiftet out? if LSB > 1 then rAE is zero
-    BREQ    _ceil_300  ; no!
+    BREQ    3f         ; no!
     SUBI    rA0,0xFF   ; else next bigger value
     SBCI    rA1,0xFF
     SBCI    rA2,0xFF
- _ceil_300:
+3:
     CLR     rAE        ; rT0 must not be cleared : rAE=0 no rounding anyway
     RJMP    _U(__fp_merge)
 

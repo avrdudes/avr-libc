@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     log10.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib

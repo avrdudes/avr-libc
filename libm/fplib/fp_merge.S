@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     fp_merge.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -47,9 +49,9 @@
 #include "fplib.inc"
 
           TEXT_SEG(fplib, __fp_merge)
-          .func fp_merge_10
+          FUNCTION(__fp_merge)
 
- fp_merge_10:
+1:
     DEC     rA3
     ADD     rAE,rAE
     adc     rA0,rA0
@@ -59,35 +61,35 @@
 GLOBAL(__fp_merge)
     CLR     rT1c           ; clr rT1c on all return paths
     TST     rA3            ; exponent == 0
-    BREQ    fp_merge300  ; underflow
+    BREQ    3f           ; underflow
     TST     rA2
-    BRPL    fp_merge_10  ; shift left until MSB set
+    BRPL    1b           ; shift left until MSB set
 
     CPI     rA3,0xFF
-    BREQ    fp_merge200  ; keep exp == 0xFF, no rounding
+    BREQ    2f           ; keep exp == 0xFF, no rounding
 
  ;  if rAE == 0x80 (exactely 0.5 LSB, half way between two numbers )
  ;  choose the one which makes the lsb of the answer 0.
  ;  what about rAE:rr1:rr0 of mul
     ADD   rAE,rAE
-    BRCC  fp_merge200        ; no LSB : round to lower number
-    BRNE  fp_merge100        ; rAE > 0x80 : round to upper number
+    BRCC  2f                 ; no LSB : round to lower number
+    BRNE  1f                 ; rAE > 0x80 : round to upper number
     TST   rT0
-    BRNE  fp_merge100        ; rAE=0x80:NN:MM , rT1c = NN | MM
+    BRNE  1f                 ; rAE=0x80:NN:MM , rT1c = NN | MM
     SBRS  rA0,0              ; R1 == 0x80 : round to even
-    RJMP  fp_merge200        ;
- fp_merge100:                ;
+    RJMP  2f                 ;
+1:
     SUBI  rA0,0xFF
     SBCI  rA1,0xFF
     SBCI  rA2,0xFF
     SBCI  rA3,0xFF
- fp_merge200:                ; pack expanded FP number
+2:                           ; pack expanded FP number
     ROL     rA2              ; MSB is hidden 1
     ROR     rA3
     ROR     rA2
     BLD     rA3,7            ; get sign
     RET
- fp_merge300:
+3:
     RJMP    _U(__fp_zero)   ; merge segments
 
           ENDFUNC

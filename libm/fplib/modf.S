@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     modf.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -62,11 +64,10 @@ GLOBAL(modf)
         CLR     rB0		; preset zero integral part
 
         TST     rA3		; if zero return zero for *int and mantissa
-        BREQ    _modf_200
+        BREQ    10f
         CPI     rA3,0x7F	; Exp < 0x7F -> arg < 1.0 -> no integer part
-        BRCS    _modf_200	;
+        BRCS    10f
 
- _modf_100:
         MOV     rTI0,rA3	; keep temporarily
         RCALL   _U(__fp_merge)	; rT0 must not be cleared : rAE=0 no rounding anyway
         MOV     rB3,rA3
@@ -75,35 +76,35 @@ GLOBAL(modf)
         MOV     rB0,rA0
 
         CPI     rTI0,0x96	; rA3 >= 0x96 -> no fractional part
-        BRCC    _modf_150	;
+        BRCC    2f
         RCALL   _U(__fixsfsi)	;
         RCALL   _U(__floatsisf)	;
         CPI     YL,0
         CPC     YL,YH
-        BREQ    _modf_130
+        BREQ    1f
         ST      Y+,rA0
         ST      Y+,rA1
         ST      Y+,rA2
         ST      Y+,rA3		; A = integer part
- _modf_130:
+1:
         SUBI    rA3,0x80	; A = -int(x)
         POP     YH
         POP     YL
         RJMP    _U(__addsf3)
- _modf_150:
+2:
         CLR     rA3
         CLR     rA2
         CLR     rA1
         CLR     rA0
- _modf_200:
+10:
         CPI     YL,0
         CPC     YL,YH
-        BREQ    _modf_250
+        BREQ    1f
         ST      Y+,rB0
         ST      Y+,rB1
         ST      Y+,rB2
         ST      Y+,rB3		; no fractional part
- _modf_250:
+1:
         POP     YH
         POP     YL
         RJMP    _U(__fp_merge)	; rT0 must not be cleared : rAE=0 no rounding anyway

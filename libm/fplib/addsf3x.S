@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     addsf3x.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -59,12 +61,12 @@ GLOBAL(__addsf3x)
     CPC     rA1,rB1         ;
     CPC     rA2,rB2         ;
     CPC     rA3,rB3         ; A - B
-    BREQ    ___addsf3x_300
-    BRCC    ___addsf3x_100  ; A >= B
+    BREQ    300f
+    BRCC    100f            ; A >= B
 
-    BRTC    ___addsf3x_01   ; if T clear the A & B of same sign
+    BRTC    1f              ; if T clear the A & B of same sign
     COM     rT1c            ; else complement sign
- ___addsf3x_01:
+1:
     MOV     rT0,rAE
     MOV     rAE,rBE
     MOV     rBE,rT0
@@ -82,54 +84,54 @@ GLOBAL(__addsf3x)
     MOV     rB3,rT0
 
  ; now A > B
- ___addsf3x_100:               ; denormalize lower mantissa until exponents are the same
+100:                           ; denormalize lower mantissa until exponents are the same
     CLR     rTI0               ; holds mantissa extension beyond rBE
     TST     rB3                ;
-    BREQ    ___addsf3x_130     ; A + 0
+    BREQ    50f                ; A + 0
 
     SUB     rB3,rA3            ; get difference, rB3 negative
-    BREQ    ___addsf3x_120     ; same : no shift
+    BREQ    2f                 ; same : no shift
     CPI     rB3,LOW(-25)       ; no significant digits left after shift
-    BRCS    ___addsf3x_130     ;
- ___addsf3x_110:                                                     ;
+    BRCS    50f                ;
+1:                                                     ;
     LSR     rB2                                                      ;
     ROR     rB1                                                      ;
     ROR     rB0                                                      ;
     ROR     rBE                ; fraction >> 1                       ;
     SBCI    rTI0,0             ; mark if any overflow beyond rBE     ;
     INC     rB3                ; exponent ++
-    BRNE    ___addsf3x_110     ;
+    BRNE    1b
 
- ___addsf3x_120:
-    BRTS    ___addsf3x_200     ; branch if different sign
+2:
+    BRTS    200f               ; branch if different sign
     ADD     rAE,rBE            ; maybe rAE and rBE are preset
     adc     rA0,rB0            ;
     adc     rA1,rB1            ;
     adc     rA2,rB2            ; add both mantissae
-    BRCC    ___addsf3x_130     ; no fraction overflow if C = 0
+    BRCC    50f                ; no fraction overflow if C = 0
     ROR     rA2                ; correct overflow
     ROR     rA1
     ROR     rA0
     ROR     rAE               ; fraction >> 1
     SBCI    rTI0,0            ; mark if any overflow beyond rBE
     INC     rA3               ; exponent++
- ___addsf3x_130:
+50:
     BST     rT1c,7
     MOV     rT0,rTI0
     RET
 
- ___addsf3x_200:
+200:
     SUB     rAE,rTI0          ; extended mantissa : 0 - lost bits
     CLR     rAE
     SBC     rAE,rBE           ; subtract the lower from the larger
     SBC     rA0,rB0           ; extended mantissa : if rBE == 0x80 -> rAE = 0x80
     SBC     rA1,rB1           ;
     SBC     rA2,rB2           ;
-    RJMP    ___addsf3x_130    ;
+    RJMP    50b               ;
 
  ; A == B
- ___addsf3x_300:
-    BRTC    ___addsf3x_100    ; same sign, test for zero & add
+300:
+    BRTC    100b              ; same sign, test for zero & add
     RJMP    _U(__fp_zerox)     ; different signs
 
           ENDFUNC

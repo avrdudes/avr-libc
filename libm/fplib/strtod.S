@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     strtod.S is an addition to     FPlib V 0.3.0       ported to avr-as
     for details see readme.strtod

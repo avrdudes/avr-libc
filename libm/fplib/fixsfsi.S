@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     fixsfsi.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -54,27 +56,27 @@ GLOBAL(__fixunssfsi)
    BST     rA3,7
    RCALL   _U(__fp_split1)
    cpi     rA3,0x7F
-   brcs    ___fixsfsi_zero  ; fabs(x) < 1.0, shift count >= 32
+   brcs    1f		; fabs(x) < 1.0, shift count >= 32
    LDI     rTI0,0x7F+31
    SUB     rTI0,rA3
    MOV     rA3,rA2
    MOV     rA2,rA1
    MOV     rA1,rA0
    MOV     rA0,rAE
-   RJMP    ___fixsfsi_10
+   RJMP    5f
 
- ___fixsfsi_zero:
+1:
    rjmp    _U(__fp_zero)
 
- ___fixsfsi_05:
+2:
    LSR    rA3
    ROR    rA2
    ROR    rA1
    ROR    rA0
- ___fixsfsi_10:
+5:
    SUBI   rTI0,1
-   BRCC   ___fixsfsi_05
-   BRTC   no_neg
+   BRCC   2b
+   BRTC   1f
    /* TEXT_SEG(fp_lneg) */
 GLOBAL(__fp_lneg)
    COM     rA3
@@ -84,7 +86,7 @@ GLOBAL(__fp_lneg)
    SBCI    rA1,0xFF
    SBCI    rA2,0xFF
    SBCI    rA3,0xFF
- no_neg:
+1:
    RET
 
           ENDFUNC

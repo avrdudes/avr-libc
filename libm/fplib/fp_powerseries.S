@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     fp_powerseries.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -77,11 +79,11 @@ GLOBAL(__fp_powerseries)
     MOV    rArg1,rA1
     MOV    rArg0,rA0
     LPMRdZpp(rGrade)		; first entry of fp table is byte with entry count
-    RCALL  fp_powerloop
+    RCALL  100f
 
     LPMRdZpp(rGrade)		; increment first (last access or loop counter)
     TST    rGrade
-    BREQ   fp_power200		; no dividing
+    BREQ   1f			; no dividing
 
     PUSH   rA3
     PUSH   rA2
@@ -92,7 +94,7 @@ GLOBAL(__fp_powerseries)
     MOV    rA1,rArg1
     MOV    rA2,rArg2
     MOV    rA3,rArg3		; get power series argument again
-    RCALL  fp_powerloop
+    RCALL  100f
 
     POP    rB0
     POP    rB1
@@ -100,7 +102,7 @@ GLOBAL(__fp_powerseries)
     POP    rB3
     RCALL  _U(__divsf3x)	; this clears rT0
 
- fp_power200:
+1:
     POP    rS5
     POP    rS4
     POP    rS3
@@ -115,21 +117,21 @@ GLOBAL(__fp_powerseries)
 	 */
     RJMP   _U(__fp_merge)
 
- fp_powerloop:
+100:
                                ; AX preset with argument, rFlags.7 sign of AX
     RCALL  _U(__fp_flashconst)  ; BX = *array[n]
 
     BST    rB2,7               ; store sign(B) to T
     ORI    rB2,0x80            ; set implicit one
-    RJMP   fp_powerloop11
+    RJMP   2f
 
- fp_powerloop10:
+1:
     MOV    rB0,rArg0
     MOV    rB1,rArg1
     MOV    rB2,rArg2
     MOV    rB3,rArg3            ; get power series argument
 
- fp_powerloop11:
+2:
 
     PUSH   ZL
     PUSH   ZH
@@ -159,20 +161,20 @@ GLOBAL(__fp_powerseries)
     POP    ZH
 				; now normalize and round
     TST    rA3			; exponent == 0
-    BREQ   fp_powerloop20	; underflow
- fp_powerloop19:
+    BREQ   4f			; underflow
+3:
     TST    rA2
-    BRMI   fp_powerloop20	; shift left until MSB set
+    BRMI   4f			; shift left until MSB set
     DEC    rA3
     ADD    rAE,rAE
     adc    rA0,rA0
     adc    rA1,rA1
     adc    rA2,rA2
-    RJMP   fp_powerloop19
+    RJMP   3b
 
- fp_powerloop20:
+4:
     DEC    rGrade
-    BRNE   fp_powerloop10	;
+    BRNE   1b
     RET
 
           ENDFUNC

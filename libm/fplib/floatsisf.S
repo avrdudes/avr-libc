@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     floatsisf.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -52,7 +54,7 @@
 
 GLOBAL(__floatunssisf)           ; - convert signed long to float
            CLT                   ; fp_merge expects T:sign
-           RJMP    ___floatsisf_10
+           RJMP    1f
 
 /*-------------------------------------------------------------------------------------------
  * A = (float)(signed long)A
@@ -60,9 +62,9 @@ GLOBAL(__floatunssisf)           ; - convert signed long to float
 
 GLOBAL(__floatsisf)              ; - convert signed long to float
            BST     rA3,7         ; fp_merge expects T:sign
-           BRTC    ___floatsisf_10
+           BRTC    1f
            RCALL   _U(__fp_lneg)
- ___floatsisf_10:
+1:
            MOV     rAE,rA0       ; rA2::rA0:rAE mantissa
            MOV     rA0,rA1
            MOV     rA1,rA2

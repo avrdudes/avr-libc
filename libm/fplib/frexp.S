@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     frexp.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -62,7 +64,7 @@ GLOBAL(frexp)
 
         RCALL   _U(__fp_split1)	;
         TST     rA3
-        BREQ    _frexp_200
+        BREQ    1f
         SUBI    rA3,0x7E	; 0.5 -> 0.5 * 2^0
 				; 1.0 -> 0.5 * 2^1
         SBC     rB0,rB0		; sign expand rA3
@@ -74,7 +76,7 @@ GLOBAL(frexp)
         BLD     rA3,7
         RET
 
- _frexp_200:
+1:
         ST      Z,rA3
         STD     Z+1,rT1c
         RJMP    _U(__fp_zero)	; frexp(0) returns 0 not A = 0x00800000 of fp_split1

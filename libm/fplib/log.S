@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     log.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -74,13 +76,13 @@
 GLOBAL(log)
    SBRC  rA3,7
    RJMP  _U(__fp_nanEDOM)	; A < 0 argument range error
- _log_10:
+1:
    RCALL _U(__fp_split1)
    TST   rA3
-   BRNE  _log_20
+   BRNE  2f
    RJMP  _U(__fp_nanEDOM)	; A == 0 argument range error
 
- _log_20:
+2:
    PUSH  rS0
    PUSH  rS1
    PUSH  rS2
@@ -129,7 +131,7 @@ GLOBAL(log)
 	 * 						3rd & 4th byte : mantissa
 	 */
 
- table_log:
+table_log:
    DCB 5		; no of table entries - 1 (preload value)
    DCB 0x81,0x35,0x04,0xF4 /* Q5 = 5.65685   */
    DCB 0x83,0x20,0x00,0x01 /* Q4 = 20        */

@@ -66,11 +66,11 @@ GLOBAL(asin)
 	CPC	rA1, __zero_reg__
 	CPC	rA2, rB2
 	CPC	rA3, rB3	; A - 1.0000001192092896
-	BRCS	_asin_calc	; A <= 1.0
+	BRCS	1f		; A <= 1.0
 	XCALL	(__fp_nanEDOM)	; A > 1.0 -> argument range error
 	POP	sign		; clean-up
 	RET			; return with NAN
- _asin_calc:			; here x <= 1.0
+1:				; here x <= 1.0
 	PUSH	rA3
 	PUSH	rA2
 	PUSH	rA1
@@ -129,7 +129,7 @@ GLOBAL(asin)
 
 	PGM_SECTION
 
- table_asin: DCB 7
+table_asin: DCB 7
 	DCB 0x75, 0xA5, 0x7A, 0x2C  ; P7
 	DCB 0x77, 0x5A, 0x90, 0xC5  ; P6
 	DCB 0x79, 0x8B, 0xFC, 0x66  ; P5

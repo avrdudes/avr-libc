@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     tanh.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -68,7 +70,7 @@ GLOBAL(tanh)
    CPC   rA1,rB1
    CPC   rA2,rB2
    CPC   rA3,rB3	; compare with 8.3177661895751953 = | ln(2^24)/2 |
-   BRCS  _tanh_00
+   BRCS  1f
    LDI   rA3,0x3F
    LDI   rA2,0x80
    LDI   rA1,0x00
@@ -76,7 +78,7 @@ GLOBAL(tanh)
    BLD   rA3,7		; if x positivive _tanh(x) = 1
    RET
 
- _tanh_00:
+1:
    BLD   rA3,7
 
    PUSH  rA0			/* LDI    rB3,1                 */

@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     negsf2.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -47,21 +49,8 @@
           FUNCTION(__negsf2)
 
 GLOBAL(__negsf2)
-#if 0 /* XXX why so complicated?  Just flip the sign bit... -MM 2000-11-18 */
-     ADD     rA2,rA2
-     adc     rA3,rA3
-     BREQ    ___negsf2_100
-     SBC     rT0,rT0        ; if C = 1 (negative) -> rT0 = 0xFF = ~0
-                            ; if C = 0 (positive) -> rT0 = 0x00 = ~0xFF
-     COM     rT0
-     ROR     rT0
- ___negsf2_100: ; zero, negate
-     ROR     rA3
-     ROR     rA2
-#else
      ldi     rTI0,0x80
      eor     rA3,rTI0
-#endif
      RET
 
           ENDFUNC

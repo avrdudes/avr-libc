@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     divsf3.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib

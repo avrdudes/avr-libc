@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     exp.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -55,7 +57,7 @@
 GLOBAL(exp)
    MOV   rT0,rA3
    TST   rA3
-   BRMI  _exp_100
+   BRMI  1f
    LDI   rB3,0x42
    LDI   rB2,0xB1
    LDI   rB1,0x72
@@ -63,10 +65,10 @@ GLOBAL(exp)
    CPC   rA1,rB1
    CPC   rA2,rB2
    CPC   rA3,rB3		; compare with 88.72283935546875 = | ln(FLT_MAX) |
-   BRCS  _exp_200		; no overflow
+   BRCS  2f			; no overflow
    RJMP  _U(__fp_nanERANGE)
 
- _exp_100: ; A < 0, check for underflow
+1: ; A < 0, check for underflow
    ANDI  rA3,0x7F
    LDI   rB3,0x42
    LDI   rB2,0xAE
@@ -75,10 +77,10 @@ GLOBAL(exp)
    CPC   rA1,rB1
    CPC   rA2,rB2
    CPC   rA3,rB3		; compare with 87.3365478515625 = | ln(FLT_MIN) |
-   BRCS  _exp_200		; no underflow
+   BRCS  2f			; no underflow
    RJMP  _U(__fp_zero)
 
- _exp_200:
+2:
    PUSH  rT0			; push sign only
    LDI   rB3,0x3F
    LDI   rB2,0xB8
@@ -114,15 +116,15 @@ GLOBAL(exp)
    SUB     rTI0,rB3	;
    CLR     rB3
    ORI     rB2,0x80
-   RJMP   _exp_300
- _exp_200_1:
+   RJMP   2f
+1:
    LSR    rB2
    ROR    rB1
    ROR    rB0
    ROR    rB3
- _exp_300:
+2:
    DEC    rTI0
-   BRPL   _exp_200_1
+   BRPL   1b
 			; now rB2::rB0:rB3 = long integer (only rB3 should be set)
    MOV    rB2,rB3
    ADD    rB3,rB3

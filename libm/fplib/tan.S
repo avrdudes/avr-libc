@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     tan.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -61,7 +63,7 @@ GLOBAL(tan)
        ANDI    rSI0,0x80	; assume inversion flag zero
        ANDI    rA3,0x7F
        CPI     rA3,0x39
-       BRCS    _tan_100		; (tan(A < 0x39000000)=A)
+       BRCS    100f		; (tan(A < 0x39000000)=A)
 
        LDI     rB3,0x40
        LDI     rB2,0x49
@@ -77,15 +79,15 @@ GLOBAL(tan)
        CPC     rB1,rA1
        CPC     rB2,rA2
        CPC     rB3,rA3		; B(=PI/2) - A
-       BREQ    _tan_INF
-       BRCC    _tan_10
+       BREQ    101f
+       BRCC    1f
        LDI     rB3,0x40
        LDI     rB2,0x49		; load PI
        ORI     rA3,0x80		; A = -A
        RCALL   _U(__addsf3)	; A = A+B = B + (-A)
        LDI     rB3,0x80
        EOR     rSI0,rB3
- _tan_10:
+1:
        LDI     rB3,0x3F
        LDI     rB2,0x49
        LDI     rB1,0x0F
@@ -94,12 +96,12 @@ GLOBAL(tan)
        CPC     rB1,rA1
        CPC     rB2,rA2
        CPC     rB3,rA3		; B(=PI/4) - A
-       BRCC    _tan_00
+       BRCC    1f
        INC     rSI0
        ORI     rA3,0x80		; negate A
        LDI     rB2,0xC9		; P/4 -> PI/2
        RCALL   _U(__addsf3)	; PI/2 - A
- _tan_00:
+1:
        PUSH    rA3
        PUSH    rA2
        PUSH    rA1
@@ -115,14 +117,14 @@ GLOBAL(tan)
        POP     rB3
        RCALL   _U(__mulsf3)
        SBRS    rSI0,0
-       RJMP    _tan_100
+       RJMP    100f
        RCALL   _U(__fp_inverse)
- _tan_100:
+100:
        SBRC    rSI0,7
        ORI     rA3,0x80
        POP     rSI0
        RET
- _tan_INF:
+101:
        POP     rSI0
        RJMP    _U(__fp_nan)
 
@@ -153,7 +155,7 @@ GLOBAL(tan)
 	 *						2nd byte   : msb of mantissa with sign as bit 7
 	 *						3rd & 4th byte : mantissa
 	 */
- table_tan:  DCB 3 ; no of table entries - 1 (preload value)
+table_tan:  DCB 3 ; no of table entries - 1 (preload value)
              DCB 0x73, 0x05, 0x27, 0x60     ; h - first calculate denominator
              DCB 0x79, 0x48, 0xDE, 0x92
              DCB 0x7D, 0x6D, 0xB0, 0xCA

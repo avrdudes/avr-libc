@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     sin.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -53,7 +55,7 @@ GLOBAL(sin)
        PUSH   rA3
        ANDI   rA3,0x7F
        CPI    rA3,0x39
-       BRCS   _sin_00		; |A| < 0x38FFFFFF -> sin(A) = A
+       BRCS   1f		; |A| < 0x38FFFFFF -> sin(A) = A
 
        LDI    rB3,0x40
        LDI    rB2,0xC9
@@ -67,7 +69,7 @@ GLOBAL(sin)
        LDI    rB0,0xDB		; load -PI/2
        RCALL  _U(__addsf3)	; A - PI/2
        RCALL  _U(fp_cosinus)
- _sin_00:
+1:
        POP    rB3
        ANDI   rB3,0x80
        EOR    rA3,rB3		; invert sign, if

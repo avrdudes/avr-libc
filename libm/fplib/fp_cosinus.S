@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     fp_cosinus.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -81,13 +83,13 @@ GLOBAL(__fp_cosinus)		; input A = [-2PI...2PI[
        CPC     rA1,rB1		;
        CPC     rA2,rB2
        CPC     rA3,rB3		; cmp A to PI/2
-       BRCS    fp_cosinus_00	; branch if lower
+       BRCS    1f		; branch if lower
 			; now (A = x) > PI/2, B = PI/2
        LDI     rB3,0xC0
        LDI     rB2,0x49		; B = -PI
        RCALL   _U(__addsf3)	; PI-A = -(A+-PI)
        CLR     rSI0		; no sign complement (a,d)
- fp_cosinus_00:
+1:
        RCALL   _U(square)		; xý
        ORI     rA3,0x80 		; -xý
 					;
@@ -110,7 +112,7 @@ GLOBAL(__fp_cosinus)		; input A = [-2PI...2PI[
 	 *                                             2nd byte   : msb of mantissa with sign as bit 7
 	 *                                             3rd & 4th byte : mantissa
    */
- table_cos:
+table_cos:
              DCB 8  ; no of table entries - 1 (preload value)
              ; looks like 6 steps are sufficient
              ;            7 steps for sin(pi) == 0

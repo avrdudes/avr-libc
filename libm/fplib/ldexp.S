@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     ldexp.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -55,25 +57,24 @@ GLOBAL(ldexp)
         BST     rA3,7
         RCALL   _U(__fp_split1)		; clears rAE
         TST     rA3			;
-        BREQ    _ldexp_01		; 2^x*0 = 0
+        BREQ    1f			; 2^x*0 = 0
         CPI     rPH,0xFF
-        BREQ    _ldexp_10		; negative
+        BREQ    10f			; negative
         TST     rPH
-        BREQ    _ldexp_10
+        BREQ    10f
 				; overflow or underflow
- _dlexp_00:
-        BRPL    _ldexp_NaN		; overflow
- _ldexp_01:
+        BRPL    2f		; overflow
+1:
         RJMP    _U(__fp_zero)
- _ldexp_NaN:
+2:
         RJMP    _U(__fp_nanERANGE)	; overflow
 
- _ldexp_10:
+10:
         ADD     rA3,rPL
         adc     rT1c,rPH		;
 				; check for overflow
-        BRNE    _ldexp_20
- _ldexp_20:
+        BRNE    1f
+1:
         RJMP    _U(__fp_merge)		; rT0 must not be cleared : rAE=0 no rounding anyway
 
           ENDFUNC
