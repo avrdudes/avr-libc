@@ -1,5 +1,9 @@
 2003-08-14  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/rel-method.dox: Fix typo.
+
+2003-08-14  Theodore A. Roth  <troth@openavr.org>
+
 	* README: Discuss required versions of gcc and binutils.
 	* doc/api/Makefile.am (EXTRA_DIST): Add rel-method.dox.
 	(IMAGE_SRC): Add releases.fig.
