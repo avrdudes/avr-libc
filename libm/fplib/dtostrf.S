@@ -63,6 +63,13 @@
 #define ret_hi		r25
 #define ret_lo		r24	/* return value	*/
 
+				/*
+				 * NB: r16 and r17 must not be
+				 * clobbered, but we can easily
+				 * restore them at return time since
+				 * we are going to return the string
+				 * pointer anyway.
+				 */
 #define r_count   	r17	/* exponent and loop counter */
 #define r_dp      	r16	/* position of decimal point */
 
@@ -225,6 +232,12 @@ GLOBAL(dtostrf)
 11:
 	pop	ret_lo
 	pop	ret_hi		; restore &string as return address
+#if __AVR_ENHANCED__
+	movw	p_str_lo, ret_lo
+#else
+	mov	p_str_lo, ret_lo
+	mov	p_str_hi, ret_hi
+#endif
 	pop	YL
 	pop	YH		; restore frame pointer
 	ret
