@@ -723,7 +723,7 @@
 #define UDRE0	5
 #define FE0	4
 #define DOR0	3
-#define PE0	2
+#define UPE0	2
 #define U2X0	1
 #define MPCM0	0
 
@@ -786,7 +786,7 @@
 #define UDRE1	5
 #define FE1	4
 #define DOR1	3
-#define PE1     2
+#define UPE1    2
 #define U2X1	1
 #define MPCM1	0
 

@@ -1,6 +1,10 @@
+2003-10-17  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031017.
+	* include/avr/iom162.h: Change PE[01] to UPE[01]. [Bug #5799]
+
 2003-10-16  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031016.
 	* NEWS: Add note about new vfprintf_P and vfscanf_P functions.
 	* include/stdio.h: Add prototypes and dox for vfprintf_P and vfscanf_P.
 	* libc/stdio/Makefile.am (lib_a_c_sources): Add vfprintf_p.c and
