@@ -7,6 +7,7 @@
           exponent (e. g. "1.234e+"); this also affects scanf as it
           uses strtod for parsing floating point numbers
   [#2924] strtod returns incorrect endptr
+  [#8633] The PSTR() macro doesn't work with C++.
   [#9013] Macroses as a program block.
   [#9514] missing stdint.h.
   [#9669] Incorrect example for strings in flash.
