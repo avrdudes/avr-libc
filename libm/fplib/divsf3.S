@@ -49,9 +49,9 @@
 #include "fplib.inc"
 
           TEXT_SEG(fplib, __divsf3)
-          FUNCTION(inverse)
+          FUNCTION(__fp_inverse)
 
-GLOBAL(inverse)
+GLOBAL(__fp_inverse)
      MOV     rB3,rA3
      MOV     rB2,rA2
      MOV     rB1,rA1

@@ -1,3 +1,20 @@
+2005-01-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/asin.S: prefix internal global symbols
+	with "__fp_".
+	* libm/fplib/atan.S: (Ditto.)
+	* libm/fplib/cos.S: (Ditto.)
+	* libm/fplib/cosh.S: (Ditto.)
+	* libm/fplib/divsf3.S: (Ditto.)
+	* libm/fplib/exp.S: (Ditto.)
+	* libm/fplib/fp_cosinus.S: (Ditto.)
+	* libm/fplib/fp_flashconst.S: (Ditto.)
+	* libm/fplib/fp_powerseries.S: (Ditto.)
+	* libm/fplib/log.S: (Ditto.)
+	* libm/fplib/sinh.S: (Ditto.)
+	* libm/fplib/strtod.S: (Ditto.)
+	* libm/fplib/tan.S: (Ditto.)
+
 2005-01-07  Eric B. Weddington  <ericw@evcohs.com>
 
     * include/avr/sfr_defs.h: Remove doxygen comment about the deprecated 

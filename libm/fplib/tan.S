@@ -108,7 +108,7 @@ GLOBAL(tan)
        ORI     rA3,0x80 		; -xý
        LDI     ZL,LOW(table_tan)
        LDI     ZH,HIGH(table_tan)
-       RCALL   _U(fp_powerseries)
+       RCALL   _U(__fp_powerseries)
        POP     rB0
        POP     rB1
        POP     rB2
@@ -116,7 +116,7 @@ GLOBAL(tan)
        RCALL   _U(__mulsf3)
        SBRS    rSI0,0
        RJMP    _tan_100
-       RCALL   _U(inverse)
+       RCALL   _U(__fp_inverse)
  _tan_100:
        SBRC    rSI0,7
        ORI     rA3,0x80

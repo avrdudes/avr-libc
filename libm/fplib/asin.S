@@ -77,7 +77,7 @@ GLOBAL(asin)
 	PUSH	rA0		; save x
 	LDI	ZL,LOW(table_asin)
 	LDI	ZH,HIGH(table_asin)	; point to table
-	XCALL	_U(fp_powerseries)	; A = P0 + x(P1 + x(P2 + x(P3 + x(P4 +
+	XCALL	_U(__fp_powerseries)	; A = P0 + x(P1 + x(P2 + x(P3 + x(P4 +
 					;  x(P5 + x(P6 + x(P7)))))))
 	POP	rB0
 	POP	rB1

@@ -73,14 +73,14 @@ GLOBAL(atan)
 	CPC	rA3, rB3		; A - 1.0000001192092896
 	BRCS	1f			; |x| <= 1.0 --> calculate atan(x)
 	ORI	magn, 0x80		; set magn.b7 as |x| > 1
-	XCALL	_U(inverse)		; A = 1.0 / x
+	XCALL	_U(__fp_inverse)		; A = 1.0 / x
 1:
 	OR	rA3, sign		; restore sign of x
 	FPPUSH	(rA)			; save x
 	XCALL	_U(square)		; A = x^2
 	LDI	ZL,LOW(.Ltable_atan)
 	LDI	ZH,HIGH(.Ltable_atan)	; point to table
-	RCALL	_U(fp_powerseries)
+	RCALL	_U(__fp_powerseries)
 	FPPOP	(rB)			; get x again
 	XCALL	_U(__mulsf3)		; now A = atan(x) for -1 <= x <= 1
 	TST	magn			; |x| > 1 ?

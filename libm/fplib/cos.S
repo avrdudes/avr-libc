@@ -53,7 +53,7 @@ GLOBAL(cos)
        LDI    rB1,0x0F
        LDI    rB0,0xDB		; load 2*PI
        RCALL  _U(fmod)		; X = remainder X/2PI
-       RJMP   _U(fp_cosinus)
+       RJMP   _U(__fp_cosinus)
 
           ENDFUNC
 

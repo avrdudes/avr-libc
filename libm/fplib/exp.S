@@ -95,7 +95,7 @@ GLOBAL(exp)
 
    LDI     ZL,LOW(table_exp)
    LDI     ZH,HIGH(table_exp)
-   RCALL   _U(fp_powerseries)
+   RCALL   _U(__fp_powerseries)
 
    MOV   rB3,rS0
    MOV   rB2,rS1		;
@@ -131,7 +131,7 @@ GLOBAL(exp)
 
    POP   rT0
    SBRC  rT0,7
-   RJMP  _U(inverse)
+   RJMP  _U(__fp_inverse)
    RET
 
           ENDFUNC

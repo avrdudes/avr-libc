@@ -53,7 +53,7 @@ GLOBAL(cosh)
    PUSH  rA1
    PUSH  rA2
    PUSH  rA3
-   RCALL _U(inverse)
+   RCALL _U(__fp_inverse)
    POP   rB3
    POP   rB2
    POP   rB1

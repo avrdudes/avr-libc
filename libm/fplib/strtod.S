@@ -206,7 +206,7 @@ GLOBAL(strtod)
 	ASR    rExp
 	BRCC   .L_nextPower
 
-	RCALL  fp_flashconst	; load constnat to B
+	RCALL  __fp_flashconst	; load constnat to B
 
 	PUSH   R30
 	PUSH   R31
