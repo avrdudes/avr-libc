@@ -52,7 +52,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        rel-method.dox \
                        unjs.pl
 
-SUFFIXES             = .pdf
+SUFFIXES             = .pdf .fig .png .eps
 
 DOC_INST_DIR         = @DOC_INST_DIR@
 
@@ -74,7 +74,6 @@ demo:
 			LIBS="$$NODEFLIBS $(DEMO_LIBS)" dox all
 
 # images for inclusion in HTML and LaTeX documents
-SUFFIXES= .fig .png .eps
 
 FIG2DEV= fig2dev
 
