@@ -1,3 +1,8 @@
+2002-12-17  Theodore A. Roth  <troth@openavr.org>
+
+	* include/inttypes.h: Added more dox, since doxygen isn't generating
+	them by default anymore.
+
 2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/wdt.h: fix typo.

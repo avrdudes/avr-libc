@@ -40,16 +40,28 @@
 
     Use [u]intN_t if you need exactly N bits.
 
-    \note If avr-gcc's \c -mint8 option is used, no 32-bit types will be
-    available.
+    Since these typedefs are mandated by the C99 standard, they are preferred
+    over rolling your own typedefs.
 
-    @{ */
+    \note If avr-gcc's \c -mint8 option is used, no 32-bit types will be
+    available. */
 
 #if __INT_MAX__ == 127
 # define __USING_MINT8 1
 #endif
 
+/** \name 8-bit types. */
+
+/*@{*/
+
+/** \ingroup avr_inttypes
+    8-bit signed type. */
+
 typedef signed char int8_t;
+
+/** \ingroup avr_inttypes
+    8-bit unsigned type. */
+
 typedef unsigned char uint8_t;
 
 #if __USING_MINT8
@@ -59,20 +71,73 @@ typedef unsigned long uint16_t;
 
 #else /* no -mint8 */
 
+/*@}*/
+
+/** \name 16-bit types. */
+
+/*@{*/
+
+/** \ingroup avr_inttypes
+    16-bit signed type. */
+
 typedef int int16_t;
+
+/** \ingroup avr_inttypes
+    16-bit unsigned type. */
+
 typedef unsigned int uint16_t;
 
+/*@}*/
+
+/** \name 32-bit types. */
+
+/*@{*/
+
+/** \ingroup avr_inttypes
+    32-bit signed type. */
+
 typedef long int32_t;
+
+/** \ingroup avr_inttypes
+    32-bit unsigned type. */
+
 typedef unsigned long uint32_t;
 
 #endif
 
+/*@}*/
+
+/** \name 64-bit types. */
+
+/*@{*/
+
+/** \ingroup avr_inttypes
+    64-bit signed type. */
+
 typedef long long int64_t;
+
+/** \ingroup avr_inttypes
+    64-bit unsigned type. */
+
 typedef unsigned long long uint64_t;
 
+/*@}*/
+
+/** \name Pointer types.
+    These allow you to declare variables of the same size as a pointer. */
+
+/*@{*/
+
+/** \ingroup avr_inttypes
+    Signed pointer compatible type. */
+
 typedef int16_t intptr_t;
+
+/** \ingroup avr_inttypes
+    Unsigned pointer compatible type. */
+
 typedef uint16_t uintptr_t;
 
-/* @} */
+/*@}*/
 
 #endif
