@@ -10,6 +10,11 @@
 	* doc/avr-libc-reference.html: Remove obsolete file.
 	* doc/examples/twitest/twitest.c: twi.h is in compat/ now.
 	* doc/examples/twitest/twitest.dox: Ditto.
+	* doc/TODO: Delete items done.
+	* README: Upgrade info on tool versions.
+	* NEWS: Mention forgotten items: realloc(), Copyright
+	unification, extended delay API, man page generation,
+	moved header files.
 
 2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
 

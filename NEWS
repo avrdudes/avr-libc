@@ -50,6 +50,11 @@
     . <avr/pgmspace.h> (PRG_RDB).
   + . <avr/timer.h> removed completely.
 
+* Moved header files:
+
+  + <avr/ina90.h> moved to <compat/ina90.h>
+  + <avr/twi.h> moved to <compat/twi.h>
+
 * New devices supported:
 
   + ATmega165
@@ -124,9 +129,33 @@ New functions:
   vsnprintf
   vsnprintf_P
 
-* Use newer Doxygen.
+* Extend malloc API.
+
+Implement realloc().
+
+* Extend delay API (<avr/delay.h>).
+
+Implement inline functions for specifying delays in microseconds, or
+milliseconds directly (based on the macro F_CPU specifying the CPU
+clock frequency).
+
+* Documentation changes:
+
+  + Use newer Doxygen.
+  + Many fixes and added documentation.
+  + Unix-style man pages are generated now when doc generation has been
+    enabled in ./configure
 
 * Optimize slightly strtol and strtoul functions.
+
+* Unified copyright.
+
+All of the avr-libc files are now distributed under a single license.
+All of the authors of the files agreed to this step.  The new license
+is a 3-clause simplified ``BSD-style'' license which is believed to be
+fully compatible with the GPL on one hand, yet imposes as minimal
+restrictions as possible for any kind of commercial use in
+applications based on avr-libc.
 
 To build the documentation, doxygen-1.3.4 or newer is strongly recommended.
 
