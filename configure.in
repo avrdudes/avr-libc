@@ -141,7 +141,7 @@ dnl
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 20021126cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20021127cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)
@@ -317,7 +317,7 @@ else
   ;;
   avr4) avrlib_cflags=${avrlib_opt_space}
         avrlib_asflags='-mmcu=atmega8'
-        AVR_CRT_MEGA='crtm8.o crtm8515.o crtm8535 # crtm83.o crtm85.o'
+        AVR_CRT_MEGA='crtm8.o crtm8515.o crtm8535.o # crtm83.o crtm85.o'
   ;;
   avr5) avrlib_cflags=${avrlib_opt_speed}
         avrlib_asflags='-mmcu=atmega161'

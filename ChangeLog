@@ -1,3 +1,8 @@
+2002-11-27  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in: Add missing ".o" to "crtm8535".
+
 2002-11-26  Theodore A. Roth  <troth@openavr.org>
 
 	* NEWS: Note support for new devices (mega32, mega64, mega8515,
