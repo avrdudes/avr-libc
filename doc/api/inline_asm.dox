@@ -491,88 +491,95 @@ and bit clear operations.
     <td>r,r</td>
   </tr>
   <tr>
+    <td>movw</td>
+    <td>r,r</td>
+    <td> </td>
     <td>mul</td>
     <td>r,r</td>
-    <td> </td>
+  </tr>
+  <tr>
     <td>neg</td>
     <td>r</td>
-  </tr>
-  <tr>
+    <td> </td>
     <td>or</td>
     <td>r,r</td>
-    <td> </td>
+  </tr>
+  <tr>
     <td>ori</td>
     <td>d,M</TD>
-  </tr>
-  <tr>
+    <td> </td>
     <td>out</td>
     <td>I,r</td>
-    <td> </td>
+  </tr>
+  <tr>
     <td>pop</td>
     <td>r</td>
-  </tr>
-  <tr>
+    <td> </td>
     <td>push</td>
     <td>r</td>
-    <td> </td>
+  </tr>
+  <tr>
     <td>rol</td>
     <td>r</td>
-  </tr>
-  <tr>
+    <td> </td>
     <td>ror</td>
     <td>r</td>
-    <td> </td>
+  </tr>
+  <tr>
     <td>sbc</td>
     <td>r,r</td>
-  </tr>
-  <tr>
+    <td> </td>
     <td>sbci</td>
     <td>d,M</TD>
-    <td> </td>
+  </tr>
+  <tr>
     <td>sbi</td>
     <td>I,I</TD>
-  </tr>
-  <tr>
+    <td> </td>
     <td>sbic</td>
     <td>I,I</TD>
-    <td> </td>
+  </tr>
+  <tr>
     <td>sbiw</td>
     <td>w,I</TD>
-  </tr>
-  <tr>
+    <td> </td>
     <td>sbr</td>
     <td>d,M</TD>
-    <td> </td>
+  </tr>
+  <tr>
     <td>sbrc</td>
     <td>r,I</TD>
-  </tr>
-  <tr>
+    <td> </td>
     <td>sbrs</td>
     <td>r,I</TD>
-    <td> </td>
+  </tr>
+  <tr>
     <td>ser</td>
     <td>d</td>
-  </tr>
-  <tr>
+    <td> </td>
     <td>st</td>
     <td>e,r</td>
-    <td> </td>
+  </tr>
+  <tr>
     <td>std</td>
     <td>b,r</td>
-  </tr>
-  <tr>
+    <td> </td>
     <td>sts</td>
     <td>label,r</td>
-    <td> </td>
-    <td>sub</td>
-    <td>r,r</td>
   </tr>
   <tr>
+    <td>sub</td>
+    <td>r,r</td>
+    <td> </td>
     <td>subi</td>
     <td>d,M</TD>
-    <td> </td>
+  </tr>
+  <tr>
     <td>swap</td>
     <td>r</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
   </tr>
 </table>
 
