@@ -38,8 +38,11 @@
 -# \ref faq_startup
 -# \ref faq_use_bv
 -# \ref faq_cplusplus
+-# \ref faq_varinit
 -# \ref faq_16bitio
 -# \ref faq_asmconst
+-# \ref faq_gdboptimize
+-# \ref faq_asmstabs
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -237,6 +240,48 @@ wasted.  Thus, casual inspection of the generated assembler code
 <small>Back to \ref faq_index.
 </small>
 
+<b>\subsection faq_varinit Shouldn't I better initialize all my variables?
+</b>
+
+Global and static variables are guaranteed to be initialized to 0 by
+the C standard.  \c avr-gcc does this by placing the appropriate code
+into section \c .init4, see \ref sec_dot_init.  With respect to the
+standard, this sentence is somewhat simplified (because the standard
+would allow for machines where the actual bit pattern used differs
+from all bits 0), but for the AVR target, in effect all integer-type
+variables are set to 0, all pointers to a NULL pointer, and all
+floating-point variables to 0.0.
+
+As long as these variables are not initialized (i. e. they don't have
+an equal sign and an initialization expression to the right within the
+definition of the variable), they go into the \ref sec_dot_bss ".bss"
+section of the file.  This section simply records the size of the
+variable, but otherwise doesn't consume space, neither within the
+object file nor within flash memory.  (Of course, being a variable, it
+will consume space in the target's RAM.)
+
+In contrast, global and static variables that have an initializer go
+into the \ref sec_dot_data ".data" section of the file.  This will
+cause them to consume space in the file (in order to record the
+initializing value), \e and in the flash ROM of the target device.
+The latter is needed since the flash ROM is the only way how the
+compiler can tell the target device the value this variable is going
+to be initialized to.
+
+Now if some programmer "wants to make doubly sure" their variables
+really get a 0 at program startup, and adds an initializer just
+containing 0 on the right-hand side, they waste space.  While this
+waste of space applies to virtually any platform C is implemented on,
+it's usually not noticeable on larger machines like PCs, while the
+waste of flash ROM storage can be very painful on a small
+microcontroller like the AVR.
+
+So in general, initializers should only be written if they are
+non-zero.
+
+<small>Back to \ref faq_index.
+</small>
+
 <b>\subsection faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
 </b>
 
@@ -285,7 +330,8 @@ read_timer1(void)
 <small>Back to \ref faq_index.
 </small>
 
-\subsection faq_asmconst How do I use a #define'd constant in an asm statement?
+<b>\subsection faq_asmconst How do I use a #define'd constant in an asm statement?
+</b>
 
 So you tried this:
 
@@ -313,6 +359,115 @@ asm volatile("sbi %0, 0x07" : "I" (PORTB):);
 
 \note \c avr/io.h already provides a sbi() macro definition, which can be used
 in C programs.
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_gdboptimize When single-stepping through my program in avr-gdb, the PC "jumps around"
+</b>
+
+When compiling a program with both optimization (\c -O) and debug
+information (\c -g) which is fortunately possible in \c avr-gcc, the
+code watched in the debugger is optimized code.  While it is not
+guaranteed, very often this code runs with the exact same
+optimizations as it would run without the \c -g switch.
+
+This can have unwanted side effects.  Since the compiler is free in
+reordering code execution as long as the semantics do not change, code
+is often rearranged in order to make it possible to use a single
+branch instruction for conditional operations.  Branch instructions
+can only cover a short range for the target PC (-63 through +64 words
+from the current PC).  If a branch instruction cannot be used
+directly, the compiler needs to work around it by combining a skip
+instruction together with a relative jump (\c rjmp) instruction, which
+will need one additional word of ROM.
+
+Other side effects of optimzation are that variable usage is
+restricted to the area of code where it is actually used.  So if a
+variable was placed in a register at the beginning of some function,
+this same register can be re-used later on if the compiler notices
+that the first variable is no longer used inside that function, even
+though the function is still in lexical scope.  When trying to examine
+the variable in \c avr-gdb, the displayed result will then look
+garbled.
+
+So in order to avoid these side effects, optimization can be turned
+off while debugging.  However, some of these optimizations might also
+have the side effect of uncovering bugs that would otherwise not be
+obvious, so it must be noted that turning off optimization can easily
+change the bug pattern.
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_asmstabs How do I trace an assembler file in avr-gdb?
+</b>
+
+When using the \c -g compiler option, <tt>avr-gcc</tt> only generates
+line number and other debug information for C (and C++) files that
+pass the compiler.  Functions that don't have line number information
+will be completely skipped by a single \c step command in \c gdb.
+This includes functions linked from a standard library, but by default
+also functions defined in an assembler source file, since the \c -g
+compiler switch does not apply to the assembler.
+
+So in order to debug an assembler input file (possibly one that has to
+be passed through the C preprocessor), it's the assembler that needs
+to be told to include line-number information into the output file.
+(Other debug information like data types and variable allocation
+cannot be generated, since unlike a compiler, the assembler basically
+doesn't know about this.)  This is done using the (GNU) assembler
+option \c --gstabs.
+
+When the assembler is not called directly but through the C compiler
+frontend (either implicitly by passing a source file ending in \c .S,
+or explicitly using <tt>-x assembler-with-cpp</tt>), the compiler
+frontend needs to be told to pass the \c --gstabs option down to the
+assembler.  This is done using <tt>-Wa,--gstabs</tt>.  Please take
+care to \e only pass this option when compiling an assembler input
+file.  Otherwise, the assembler code that results from the C
+compilation stage will also get line number information, which greatly
+confuses the debugger.
+
+Also note that the debugger might get confused when entering a piece
+of code that has a non-local label before, since it then takes this
+label as the name of a new function that appears to has been entered.
+Thus, the best practice to avoid this confusion is to only use
+non-local labels when declaring a new function, and restrict anything
+else to local labels.  Local labels consist just of a number only.
+References to these labels consist of the number, followed by the
+letter \b b for a backward reference, or \b f for a forward reference.
+These local labels may be re-used within the source file, references
+will pick the closest label with the same number and given direction.
+
+Example:
+
+\code
+myfunc:	push	r16
+	push	r17
+	push	r18
+	push	YL
+	push	YH
+	...
+	eor	r16, r16	; start loop
+	ldi	YL, lo8(sometable)
+	ldi	YH, hi8(sometable)
+	rjmp	2f		; jump to loop test at end
+1:	ld	r17, Y+		; loop continues here
+	...
+	breq	1f		; return from myfunc prematurely
+	...
+	inc	r16
+2:	cmp	r16, r18
+	brlo	1b		; jump back to top of loop
+
+1:	pop	YH
+	pop	YL
+	pop	r18
+	pop	r17
+	pop	r16
+	ret
+\endcode
 
 <small>Back to \ref faq_index.
 </small>

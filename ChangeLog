@@ -1,3 +1,7 @@
+2002-09-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add three subsections.
+
 2002-09-09  Theodore A. Roth  <troth@verinet.com>
 
 	* doc/TODO: Added note about testsuite.
