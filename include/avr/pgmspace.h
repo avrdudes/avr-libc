@@ -33,6 +33,7 @@
 
    Contributors:
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
+     Eric B. Weddington <eric@ecentral.com>
  */
 
 /** \defgroup avr_pgmspace Program Space String Utilities
@@ -59,6 +60,7 @@
 
 #define __need_size_t
 #include <stddef.h>
+#include <avr/io.h>
 
 #ifndef __ATTR_CONST__
 #define __ATTR_CONST__ __attribute__((__const__))
@@ -92,16 +94,7 @@ typedef long long prog_long_long PROGMEM;
 
 #define PSTR(s) ({static char __c[] PROGMEM = (s); __c;})
 
-#define __LPM_enhanced__(addr) ({		\
-	unsigned short __addr16 = (unsigned short)(addr); \
-	unsigned char __result;			\
-	__asm__ (				\
-		"lpm %0, Z"			\
-		: "=r" (__result)		\
-		: "z" (__addr16)		\
-	);					\
-	__result;				\
- })
+
 
 #define __LPM_classic__(addr) ({		\
 	unsigned short __addr16 = (unsigned short)(addr); \
@@ -116,23 +109,89 @@ typedef long long prog_long_long PROGMEM;
 	__result;				\
  })
 
-/* Only for devices with more than 64K of program memory.
-   RAMPZ must be defined (see iom103.h).  */
 
-#define __ELPM_enhanced__(addr) ({		\
-	unsigned long __addr32 = (unsigned long)(addr); \
+
+#define __LPM_enhanced__(addr) ({		\
+	unsigned short __addr16 = (unsigned short)(addr); \
 	unsigned char __result;			\
 	__asm__ (				\
-		"out %2, %C1" "\n\t"		\
-		"movw r30, %1" "\n\t"		\
-		"elpm %0, Z"			\
+		"lpm %0, Z"			\
 		: "=r" (__result)		\
-		: "r" (__addr32),		\
-		  "I" (_SFR_IO_ADDR(RAMPZ))	\
-		: "r30", "r31"			\
+		: "z" (__addr16)		\
 	);					\
 	__result;				\
  })
+
+
+#define __LPM_word_classic__(addr)      \
+({                                      \
+	unsigned short __addr16 = (unsigned short)(addr);   \
+	unsigned short __result;            \
+	__asm__ (                           \
+		"lpm"           "\n\t"          \
+		"mov %A0, r0"   "\n\t"          \
+        "adiw r30, 1"   "\n\t"          \
+        "lpm"           "\n\t"          \
+        "mov %B0, r0"   "\n\t"          \
+		: "=r" (__result)               \
+		: "z" (__addr16)                \
+		: "r0"                          \
+	);                                  \
+	__result;                           \
+})
+
+
+#define __LPM_word_enhanced__(addr)     \
+({                                      \
+    unsigned short __addr16 = (unsigned short)(addr);   \
+    unsigned short __result;            \
+    __asm__ (                           \
+        "lpm %A0, Z+"   "\n\t"          \
+        "lpm %B0, Z"    "\n\t"          \
+        : "=r" (__result)               \
+        : "z" (__addr16)                \
+    );                                  \
+    __result;                           \
+})
+
+
+
+#if defined (__AVR_ENHANCED__)
+#define __LPM(addr)         __LPM_enhanced__(addr)
+#define __LPM_word(addr)    __LPM_word_enhanced__(addr)
+#else
+#define __LPM(addr)         __LPM_classic__(addr)
+#define __LPM_word(addr)    __LPM_word_classic__(addr)
+#endif
+
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_byte_near(address_short)
+    Read a byte from the program space with a 16-bit (near) address. 
+    \note The address is a byte address.
+    The address is in the program space. */
+
+#define pgm_read_byte_near(address_short)   __LPM((unsigned short)(address_short))
+
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_word_near(address_short)
+    Read a word from the program space with a 16-bit (near) address. 
+    \note The address is a byte address. 
+    The address is in the program space. */
+
+#define pgm_read_word_near(address_short)   __LPM_word((unsigned short)(address_short))
+
+
+
+
+
+#ifdef RAMPZ  /* >64K program memory (ATmega103, ATmega128) */
+
+/* Only for devices with more than 64K of program memory.
+   RAMPZ must be defined (see iom103.h, iom128.h).  */
+
+/* The classic functions are needed for ATmega103. */
 
 #define __ELPM_classic__(addr) ({		\
 	unsigned long __addr32 = (unsigned long)(addr); \
@@ -149,53 +208,135 @@ typedef long long prog_long_long PROGMEM;
 		: "r0", "r30", "r31"		\
 	);					\
 	__result;				\
- })
+})
+
+
+#define __ELPM_enhanced__(addr) ({		\
+	unsigned long __addr32 = (unsigned long)(addr); \
+	unsigned char __result;			\
+	__asm__ (				\
+		"out %2, %C1" "\n\t"		\
+		"movw r30, %1" "\n\t"		\
+		"elpm %0, Z"			\
+		: "=r" (__result)		\
+		: "r" (__addr32),		\
+		  "I" (_SFR_IO_ADDR(RAMPZ))	\
+		: "r30", "r31"			\
+	);					\
+	__result;				\
+})
+
+
+#define __ELPM_word_classic__(addr)     \
+({                                      \
+    unsigned long __addr32 = (unsigned long)(addr); \
+    unsigned short __result;            \
+    __asm__                             \
+    (                                   \
+        "out %2, %C1"   "\n\t"          \
+        "mov r31, %B1"  "\n\t"          \
+        "mov r30, %A1"  "\n\t"          \
+        "elpm"          "\n\t"          \
+        "mov %A0, r0"   "\n\t"          \
+        "in r0, %2"     "\n\t"          \
+        "adiw r30, 1"   "\n\t"          \
+        "adc r0, __zero_reg__" "\n\t"   \
+        "out %2, r0"    "\n\t"          \
+        "elpm"          "\n\t"          \
+        "mov %B0, r0"   "\n\t"          \
+        : "=r" (__result)               \
+        : "r" (__addr32),               \
+          "I" (_SFR_IO_ADDR(RAMPZ))     \
+        : "r0", "r30", "r31"            \
+    );                                  \
+    __result;                           \
+})
+
+
+
+#define __ELPM_word_enhanced__(addr)    \
+({                                      \
+    unsigned long __addr32 = (unsigned long)(addr); \
+    unsigned short __result;            \
+    __asm__                             \
+    (                                   \
+        "out %2, %C1"   "\n\t"          \
+        "movw r30, %1"  "\n\t"          \
+        "elpm %A0, Z+"  "\n\t"          \
+        "elpm %B0, Z"   "\n\t"          \
+        : "=r" (__result)               \
+        : "r" (__addr32),               \
+          "I" (_SFR_IO_ADDR(RAMPZ))     \
+        : "r30", "r31"                  \
+    );                                  \
+    __result;                           \
+})
+
 
 #if defined (__AVR_ENHANCED__)
-#define  __LPM(addr)  __LPM_enhanced__(addr)
-#define __ELPM(addr) __ELPM_enhanced__(addr)
+#define __ELPM(addr)        __ELPM_enhanced__(addr)
+#define __ELPM_word(addr)   __ELPM_word_enhanced__(addr)
 #else
-#define  __LPM(addr)  __LPM_classic__(addr)
-#define __ELPM(addr) __ELPM_classic__(addr)
+#define __ELPM(addr)        __ELPM_classic__(addr)
+#define __ELPM_word(addr)   __ELPM_word_classic__(addr)
 #endif
 
 
-static inline unsigned char __lpm_inline(unsigned short __addr) __ATTR_CONST__;
-static inline unsigned char __lpm_inline(unsigned short __addr)
-{
-	return __LPM(__addr);
-}
+#endif
 
-#ifdef RAMPZ  /* >64K program memory (ATmega103) */
+
+
 
 /** \ingroup avr_pgmspace
-    \fn inline unsigned char __elpm_inline(unsigned long __addr)
+    \def pgm_read_byte_far(address_long)
+    Read a byte from the program space with a 32-bit (far) address. 
+    \note The address is a byte address. 
+    The address is in the program space. */
 
-    Use this for access to >64K program memory (ATmega103, ATmega128),
-    addr = RAMPZ:r31:r30
-
-    \note If possible, put your constant tables in the lower 64K and use "lpm"
-    since it is more efficient that way, and you can still use the upper 64K
-    for executable code.  */
-
-static inline unsigned char __elpm_inline(unsigned long __addr) __ATTR_CONST__;
-static inline unsigned char __elpm_inline(unsigned long __addr)
-{
-	return __ELPM(__addr);
-}
-#endif
+/** \ingroup avr_pgmspace
+    \def pgm_read_word_far(address_long)
+    Read a word from the program space with a 32-bit (far) address. 
+    \note The address is a byte address.
+    The address is in the program space. */
 
 /** \ingroup avr_pgmspace
 
-    Read a byte from program space using the \c lpm instruction.
+    \note If possible, put your constant tables in the lower 64K and use 
+    pgm_read_byte_near() or pgm_read_word_near() since it is more 
+    efficient that way, and you can still use the upper 64K for 
+    executable code. */
 
-    \note The \c lpm instruction is not available for some AVR devices. */
+#ifdef RAMPZ
 
-#if 0
-#define PRG_RDB(addr) __lpm_inline((unsigned short)(addr))
+#define pgm_read_byte_far(address_long)     __ELPM((unsigned long)(address_long))
+#define pgm_read_word_far(address_long)     __ELPM_word((unsigned long)(address_long))
+
 #else
-#define PRG_RDB(addr) __LPM((unsigned short)(addr))
+
+#define pgm_read_byte_far(address_long)     pgm_read_byte_near(address_long)
+#define pgm_read_word_far(address_long)     pgm_read_word_near(address_long)
+
 #endif
+
+
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_byte(address_short)
+    Read a byte from the program space with a 16-bit (near) address. 
+    \note The address is a byte address. 
+    The address is in the program space. */
+
+#define pgm_read_byte(address_short)    pgm_read_byte_near(address_short)
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_word(address_short)
+    Read a word from the program space with a 16-bit (near) address. 
+    \note The address is a byte address. 
+    The address is in the program space. */
+
+#define pgm_read_word(address_short)    pgm_read_word_near(address_short)
+
+
 
 /** \ingroup avr_pgmspace
     \def PGM_P
@@ -207,6 +348,7 @@ static inline unsigned char __elpm_inline(unsigned long __addr)
 #define PGM_P const prog_char *
 #endif
 
+
 /** \ingroup avr_pgmspace
     \def PGM_VOID_P
 
@@ -215,6 +357,7 @@ static inline unsigned char __elpm_inline(unsigned long __addr)
 #ifndef PGM_VOID_P
 #define PGM_VOID_P const prog_void *
 #endif
+
 
 extern void *memcpy_P(void *, PGM_VOID_P, size_t);
 extern char *strcat_P(char *, PGM_P);
@@ -239,6 +382,20 @@ extern PGM_P strerror_P(int);
 #ifdef __cplusplus
 }
 #endif
+
+
+/** \name Backwards compatibility macros */
+
+
+/** \ingroup avr_pgmspace
+    \def PRG_RDB
+    \deprecated
+    Use pgm_read_byte() in new programs. */
+
+#define PRG_RDB(addr)       pgm_read_byte(addr)
+
+
+
 
 #endif /* __PGMSPACE_H_ */
 

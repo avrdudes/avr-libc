@@ -1,5 +1,9 @@
 2003-05-14  Eric B. Weddington <eric@ecentral.com>
 
+	* include/avr/pgmspace.h: New API.
+
+2003-05-14  Eric B. Weddington <eric@ecentral.com>
+
 	* include/avr/iotn26.h: Update interrupt vector names to match the
 	datasheet. [Contributed by Artur Lipowski <LAL@pro.onet.pl>]
 
