@@ -569,6 +569,8 @@ extern long random_r(unsigned long *ctx);
 
    If \c flags has the DTOSTRE_PLUS_SIGN bit set, a plus sign will be
    used instead of a space character in this case.
+
+   The dtostre() function returns the pointer to the converted string \c s.
 */
 extern char *dtostre(double __val, char *__s, unsigned char __prec,
 		     unsigned char __flags);
@@ -582,6 +584,8 @@ extern char *dtostre(double __val, char *__s, unsigned char __prec,
    width of the output string (including the \c '.' and the possible
    sign for negative values) is given in \c width, and \c prec determines
    the number of digits after the decimal sign.
+
+   The dtostrf() function returns the pointer to the converted string \c s.
 */
 extern char *dtostrf(double __val, char __width, char __prec, char *__s);
 

@@ -11,9 +11,17 @@ New macro:
   [#2233] Documentation issues with inline asm
   [#5454] Inline functions results in undefined reference when optimize level 0
           is used.
-  [#7556] printf and friends improperly handle non-null termnated strings when
+  [#7556] printf and friends improperly handle non-null terminated strings when
           a %s argument has a precision.
   [#7802] vfscanf problem with unsigned long (patch #2554)
+  [#7989] dtostrf() destroys string pointer registers?
+
+* Other changes:
+
+  + dtostrf() now uses movw where possible
+  + minor documentation updates
+  + <avr/timer.h> is deprecated
+
 
 *** Changes in avr-libc-1.0.2:
 
@@ -26,7 +34,7 @@ New functions:
 * Pin names for ports are now consistent for all devices.
 
 Previously, some devices defined Pxn and others defined PORTxn for pin n of
-port x. Both names are now available for all devices. Mega162 users should 
+port x. Both names are now available for all devices. Mega162 users should
 note that this redefines PE0 and PE1 to be pins 0 and 1 of Port E (see fix for
 bug #5799 below).
 
@@ -62,8 +70,8 @@ list set up for discussion of development of avr-libc.
 
 * License changes.
 
-All the files in the project now are covered by a modified BSD license. This 
-allows royalty free use of the library in commerical products. All of the 
+All the files in the project now are covered by a modified BSD license. This
+allows royalty free use of the library in commerical products. All of the
 public domain files in the project have been switched to the new license and
 copyright given to the contributors of the files.
 
@@ -86,7 +94,7 @@ prone to fragmentation.
 * Documentation!
 
 Joerg Wunsch and Ted Roth and have been working on using the doxygen program to
-embed documentation comments into source code. Additionally, Harald Kipp's 
+embed documentation comments into source code. Additionally, Harald Kipp's
 inline asm cookbook and Rich Neswold's Avr Tools document have been merged into
 the user manual. The goal is to have a single place for all the documentation
 a user would need to get started developing for AVR microcontrollers using
@@ -134,7 +142,7 @@ The arguments for outb()/outw() have been reversed.
 * New pgmspace.h API.
 
 Changed function names and added new functions to read the Program Space
-FLASH. Added new functions to read 16-bit (word) values. The new API should 
+FLASH. Added new functions to read 16-bit (word) values. The new API should
 also clear up problems with reading data from devices with > 64K of FLASH.
 
 The API now includes:
@@ -150,7 +158,7 @@ pgm_read_word_far
 
 #include <avr/boot.h>
 
-This provides bootloader support functions to those processors that have 
+This provides bootloader support functions to those processors that have
 builtin bootloader support.
 
 * inb / outb / inw / outw / cbi / sbi macros are deprecated.

@@ -1,3 +1,12 @@
+2004-03-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Merge from HEAD:
+	* libm/fplib/dtostrf.S: use Unix-assembler style local
+	labels, preserve r16/r17, use movw when possible.
+	* include/stdlib.h: document return values of dtostre()
+	and dtostrf().
+	* NEWS: mention bugfix for # 7989, add `other changes'.
+
 2004-03-04  Theodore A. Roth  <troth@openavr.org>
 
 	* NEWS: Add note about new eeprom macro.
