@@ -37,5 +37,5 @@ void
 clearerr(FILE *stream)
 {
 
-	stream->flags &= ~__SERR;
+	stream->flags &= ~(__SERR | __SEOF);
 }

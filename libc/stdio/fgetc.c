@@ -41,8 +41,13 @@ fgetc(FILE *stream)
 	if ((stream->flags & __SRD) == 0)
 		return EOF;
 
+	if ((stream->flags & __SUNGET) != 0) {
+		stream->flags &= ~__SUNGET;
+		return stream->unget;
+	}
+
 	rv = stream->get();
-	if (rv != 0) {
+	if (rv == -1) {
 		stream->flags |= __SERR;
 		return EOF;
 	}

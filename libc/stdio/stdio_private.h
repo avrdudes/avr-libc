@@ -34,19 +34,21 @@
 
 struct __file {
 	char	*buf;		/* buffer pointer */
+	unsigned char unget;	/* ungetc() buffer */
 	uint8_t	flags;		/* flags, see below */
 #define __SRD	0x0001		/* OK to read */
 #define __SWR	0x0002		/* OK to write */
 #define __SSTR	0x0004		/* this is an sprintf/snprintf string */
 #define __SPGM	0x0008		/* fmt string is in progmem */
 #define __SERR	0x0010		/* found error */
+#define __SEOF	0x0020		/* found EOF */
+#define __SUNGET 0x040		/* ungetc() happened */
 #if 0
 /* possible future extensions, will require uint16_t flags */
-#define __SEOF	0x0020		/* found EOF */
-#define __SRW	0x0040		/* open for reading & writing */
-#define __SLBF	0x0080		/* line buffered */
-#define __SNBF	0x0100		/* unbuffered */
-#define __SMBF	0x0200		/* buf is from malloc */
+#define __SRW	0x0080		/* open for reading & writing */
+#define __SLBF	0x0100		/* line buffered */
+#define __SNBF	0x0200		/* unbuffered */
+#define __SMBF	0x0400		/* buf is from malloc */
 #endif
 	int	size;		/* size of buffer */
 	int	len;		/* characters written so far */

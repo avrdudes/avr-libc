@@ -43,7 +43,7 @@ gets(char *str)
 		return NULL;
 
 	for (c = 0, cp = str; c != '\n'; cp++) {
-		if ((c = stdin->get()) == -1) {
+		if ((c = getchar()) == EOF) {
 			stdin->flags |= __SERR;
 			return NULL;
 		}

@@ -45,8 +45,8 @@ fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
 
 	for (i = 0, cp = (uint8_t *)ptr; i < nmemb; i++)
 		for (j = 0; j < size; j++) {
-			c = stream->get();
-			if (c == -1)
+			c = getc(stream);
+			if (c == EOF)
 				return i;
 			*cp++ = (uint8_t)c;
 		}

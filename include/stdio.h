@@ -526,6 +526,22 @@ extern int	getchar(void);
 #define getchar() fgetc(stdin)
 
 /**
+   The ungetc() function pushes the character \c c (converted to an
+   unsigned char) back onto the input stream pointed to by \c stream.
+   The pushed-back character will be returned by a subsequent read on
+   the stream.
+
+   Currently, only a single character can be pushed back onto the
+   stream.
+   
+   The ungetc() function returns the character pushed back after the
+   conversion, or \c EOF if the operation fails.  If the value of the
+   argument \c c character equals \c EOF, the operation will fail and
+   the stream will remain unchanged.
+*/
+extern int	ungetc(int __c, FILE *__stream);
+
+/**
    Read at most <tt>size - 1</tt> bytes from \c stream, until a
    newline character was encountered, and store the characters in the
    buffer pointed to by \c str.  Unless an error was encountered while

@@ -34,8 +34,24 @@
 #include "stdio_private.h"
 
 int
-feof(FILE *stream)
+ungetc(int c, FILE *stream)
 {
 
-	return stream->flags & __SEOF;
+	/*
+	 * Streams that are not readable, or streams that already had
+	 * had an ungetc() before will cause an error.
+	 *
+	 * ungetc(EOF, ...) causes an error per definitionem.
+	 */
+	if ((stream->flags & __SRD) == 0 ||
+	    (stream->flags & __SUNGET) != 0 ||
+	    c == EOF)
+		return EOF;
+
+	stream->unget = c;
+	stream->flags |= __SUNGET;
+	stream->flags &= ~__SEOF;
+
+	return stream->unget;
 }
+

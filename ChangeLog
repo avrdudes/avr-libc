@@ -1,3 +1,15 @@
+2002-12-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: add fgetc().
+	* libc/stdio/Makefile.am: Ditto.
+	* libc/stdio/clearerr.c: add __SEOF.
+	* libc/stdio/feof.c: Ditto.
+	* libc/stdio/fgetc.c: add unget functionality, fix a blatant bug
+		that caused and char except \0 to return EOF.
+	* libc/stdio/fgets.c: use getc() instead of stream->get().
+	* libc/stdio/fread.c: Ditto.
+	* libc/stdio/stdio_private.h: add ungetc() stuff, activate __SEOF.
+
 2002-12-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/using-tools.doc: explain side-effects of -ffreestanding.

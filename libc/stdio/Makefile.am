@@ -55,7 +55,8 @@ lib_a_c_sources =	\
 	snprintf.c	\
 	snprintf_p.c	\
 	sprintf.c	\
-	sprintf_p.c
+	sprintf_p.c	\
+	ungetc.c
 
 lib_a_asm_sources =	\
 	getc.S		\
