@@ -1,3 +1,8 @@
+2002-10-28  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/Makefile.am: Use png instead of gif images.
+	* doc/api/malloc.dox: Ditto.
+
 2002-10-27  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/malloc*.fig: Improve pictures.

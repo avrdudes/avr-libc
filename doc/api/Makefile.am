@@ -66,19 +66,19 @@ demo:
 			LIBS="-nostartfiles -nodefaultlibs $(DEMO_LIBS)" dox all
 
 # images for inclusion in HTML and LaTeX documents
-SUFFIXES= .fig .gif .eps
+SUFFIXES= .fig .png .eps
 
 FIG2DEV= fig2dev
 
 .fig.eps:
 	$(FIG2DEV) -L eps $< $@
 
-.fig.gif:
-	$(FIG2DEV) -L gif -t '#ffffff' $< $@
+.fig.png:
+	$(FIG2DEV) -L png $< $@
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig
 
-IMAGE_GIF=	$(IMAGE_SRC:.fig=.gif)
+IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
@@ -123,7 +123,7 @@ clean-local:
 # heading by \endhead so longtable will know what heading to repeat in
 # table continuations.
 
-latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_GIF)
+latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' \
