@@ -1,3 +1,10 @@
+2004-03-22  Theodore A. Roth  <troth@openavr.org>
+[Thanks to Tim Lapawa <lapawa@insynergie.de>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/io43u32x.h (TICIE1): Fix value.
+	* include/avr/io43u35x.h (TICIE1): Fix value.
+
 2004-03-08  Theodore A. Roth  <troth@openavr.org>
 
 	* ChangeLog: Move 2003 entries to ChangeLog-2003.
