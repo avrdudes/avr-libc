@@ -1,5 +1,53 @@
 2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
 
+	* libm/fplib/readme.dtostre: Change Michael Stumpf's email address.
+	* libm/fplib/readme.strtod: Ditto.
+	* libm/fplib/readme.fplib: Ditto. Remove license as this is a README 
+	file, not software. This matches the other readme files.
+	* libm/fplib/acos.S: Change license with permission of Michael Stumpf.
+	Change Michael Stumpf's email address.
+	* libm/fplib/addsf3.S: Ditto.
+	* libm/fplib/addsf3x.S: Ditto.
+	* libm/fplib/ceil.S: Ditto.
+	* libm/fplib/cos.S: Ditto.
+	* libm/fplib/cosh.S: Ditto.
+	* libm/fplib/divsf3.S: Ditto.
+	* libm/fplib/divsf3x.S: Ditto.
+	* libm/fplib/dtostre.S: Ditto.
+	* libm/fplib/exp.S: Ditto.
+	* libm/fplib/fixsfsi.S: Ditto.
+	* libm/fplib/floatsisf.S: Ditto.
+	* libm/fplib/floor.S: Ditto.
+	* libm/fplib/fmod.S: Ditto.
+	* libm/fplib/fp_cmp.S: Ditto.
+	* libm/fplib/fp_cosinus.S: Ditto.
+	* libm/fplib/fp_flashconst.S: Ditto.
+	* libm/fplib/fp_merge.S: Ditto.
+	* libm/fplib/fp_nan.S: Ditto.
+	* libm/fplib/fp_powerseries.S: Ditto.
+	* libm/fplib/fp_split.S: Ditto.
+	* libm/fplib/fp_zero.S: Ditto.
+	* libm/fplib/fplib.inc: Ditto.
+	* libm/fplib/frexp.S: Ditto.
+	* libm/fplib/ldexp.S: Ditto.
+	* libm/fplib/log10.S: Ditto.
+	* libm/fplib/log.S: Ditto.
+	* libm/fplib/modf.S: Ditto.
+	* libm/fplib/mulsf3.S: Ditto.
+	* libm/fplib/mulsf3x.S: Ditto.
+	* libm/fplib/negsf2.S: Ditto.
+	* libm/fplib/pow.S: Ditto.
+	* libm/fplib/sin.S: Ditto.
+	* libm/fplib/sinh.S: Ditto.
+	* libm/fplib/sqrt.S: Ditto.
+	* libm/fplib/strtod.S: Ditto.
+	* libm/fplib/tan.S: Ditto.
+	* libm/fplib/tanh.S: Ditto.
+	* LICENSE: Update.
+	* GPL: Remove. No longer needed.
+
+2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/avr/iom128.h: Correct license with permission from Peter 
 	Jansen.
 	* configure.in: Correct license with permission from Reinhard Jessich.

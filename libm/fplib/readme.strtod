@@ -2,14 +2,14 @@
 
   strtod.s
 
-  Copyright (c) Michael Stumpf   <Michael.Stumpf@t-online.de>
+  Copyright (c) Michael Stumpf   <mistumpf@de.pepperl-fuchs.com>
 
   addition to Floating point library for Atmel AVR uC
   converts a string to a double ( = float)
   double := [ws]*[+|-][0123456789]*[.0123456789]*[e|E][+|-][0123456789]*
 
   Author : Michael Stumpf
-          Michael.Stumpf@t-online.de
+           mistumpf@de.pepperl-fuchs.com
 
 
   Version : 0.1.0

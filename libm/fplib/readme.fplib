@@ -9,33 +9,14 @@
 
     V 0.3.0
 
-    Copyright (c) Michael Stumpf   <Michael.Stumpf@t-online.de>
-
-  This file is free software; you can redistribute it and/or modify it
-  under the terms of the GNU General Public License as published by the
-  Free Software Foundation; either version 2, or (at your option) any
-  later version.
-
-  In addition to the permissions in the GNU General Public License, the
-  author gives you unlimited permission to link the
-  compiled version of this file into combinations with other programs,
-  and to distribute those combinations without any restriction coming
-  from the use of this file.  (The General Public License restrictions
-  do apply in other respects; for example, they cover modification of
-  the file, and distribution when not linked into a combine
-  executable.)
-
-  This file is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  General Public License for more details.
+    Copyright (c) Michael Stumpf   <mistumpf@de.pepperl-fuchs.com>
 
     Floating point library for Atmel AVR uC
     full arithmetic and maths functionality
     do not mix up this file with the FPalib source - doesn't work!
 
     Author : Michael Stumpf
-             Michael.Stumpf@t-online.de
+             mistumpf@de.pepperl-fuchs.com
 
     Versions : The floating point library comes in three different versions (sometimes...)
                FPlibOs.s90 - optimized for size, rather slow
