@@ -360,9 +360,12 @@
 #define SIG_OVERFLOW1           _VECTOR(8)
 #define SIG_OVERFLOW0           _VECTOR(9)
 #define SIG_SPI                 _VECTOR(10)
-#define SIG_UART_RECV           _VECTOR(11)
-#define SIG_UART_DATA           _VECTOR(12)
-#define SIG_UART_TRANS          _VECTOR(13)
+#define SIG_USART_RECV          _VECTOR(11)
+#define SIG_UART_RECV           _VECTOR(11) /* For backwards compatibility */ 
+#define SIG_USART_DATA          _VECTOR(12)
+#define SIG_UART_DATA           _VECTOR(12) /* For backwards compatibility */ 
+#define SIG_USART_TRANS         _VECTOR(13)
+#define SIG_UART_TRANS          _VECTOR(13) /* For backwards compatibility */ 
 #define SIG_ADC                 _VECTOR(14)
 #define SIG_EEPROM_READY        _VECTOR(15)
 #define SIG_COMPARATOR          _VECTOR(16)

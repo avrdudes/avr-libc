@@ -1,5 +1,10 @@
 2004-12-21  Eric B. Weddington  <ericw@evcohs.com>
 
+	* include/avr/iom16.h: Add USART* signal names to match datasheet.
+	[Fix for bug #11315, mentioned in comment.]
+
+2004-12-21  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/avr/iom32.h: Add USART* signal names to match datasheet.
 	[Fix for bug #11315]
 
