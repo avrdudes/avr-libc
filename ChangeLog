@@ -1,3 +1,7 @@
+2005-01-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/Makefile.am (EXTRA_DIST): add all-demos.dox.
+
 2005-01-25  Eric B. Weddington  <ericw@evcohs.com>
 
     * doc/examples/progmem.c: Update to use the latest API.
