@@ -2,6 +2,7 @@
 
   [no-id]  Prefix all internal global symbols in libm with __fp_ so
            they do not collide with the application namespace.
+  [#4101]  setjmp/longjmp destroy changes in global registers.
 
 *** Changes in avr-libc-1.0.5:
 
