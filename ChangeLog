@@ -1,5 +1,10 @@
 2004-06-30  Theodore A. Roth  <troth@openavr.org>
 
+	* xml/Atmel2libc.py: Work around bugs in Atmel's xml files.
+	* xml/Device.dtd: Change order of nrww and rww bootloader attributes.
+
+2004-06-30  Theodore A. Roth  <troth@openavr.org>
+
 	* xml/Atmel2libc.py: Add code to handle the boot loader information.
 	* xml/Device.dtd: Add bootloader element.
 

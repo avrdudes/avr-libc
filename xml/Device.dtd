@@ -118,10 +118,10 @@ data in those file.
     <!ELEMENT bootloader (mode+)>
         <!ATTLIST bootloader
             pagesize CDATA #REQUIRED
-            nrww_start CDATA #REQUIRED
-            nrww_end CDATA #REQUIRED
             rww_start CDATA #REQUIRED
             rww_end CDATA #REQUIRED
+            nrww_start CDATA #IMPLIED
+            nrww_end CDATA #IMPLIED
         >
 
         <!-- The boot mode size is (pagesize * pages). -->

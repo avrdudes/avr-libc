@@ -277,6 +277,10 @@ def gather_io_info (root):
             path[2] = reg
             element = io_module.getSubTree (path)
             if io_reg_info.has_key (reg):
+                # NOTE: The ATtiny2313.xml has a bug (There's 2 'ICR1H'
+                # entries in the reg list) that causes the following for loop
+                # to go infinite. Argh! Removing the extra entry seems to get
+                # things working again.
                 for child in element.getElements ():
                     io_reg_info[reg].AddChild (child, element.depth+1)
             else:
@@ -298,8 +302,15 @@ def dump_ioregs (root):
 
     for ioreg in ioregs[6:]:
         name = ioreg.name
-        reg_info = ioreg_info_dict[name]
-        reg_desc = reg_info.getElements ('DESCRIPTION')[0].getData ()
+        try:
+            reg_info = ioreg_info_dict[name]
+            try:
+                reg_desc = reg_info.getElements ('DESCRIPTION')[0].getData ()
+            except IndexError:
+                reg_desc = ''
+        except KeyError:
+            reg_info = None
+
         addr = ioreg.getElements ('IO_ADDR')[0].getData ()
         if addr[0] == '$':
             addr = '0x' + addr[1:]
@@ -313,13 +324,21 @@ def dump_ioregs (root):
         print_wrapped ('      ','<description>%s</description>' % (reg_desc))
         print '      <alt_name></alt_name>'
         for i in range (8):
+            if reg_info is None:
+                continue
             bit = 'BIT%d' % (i)
             bit_el = reg_info.getSubTree ([name, bit])
             if bit_el is None:
                 continue
             bit_name = bit_el.getElements ('NAME')[0].getData ()
-            bit_desc = bit_el.getElements ('DESCRIPTION')[0].getData ()
-            bit_access = bit_el.getElements ('ACCESS')[0].getData ()
+            try:
+                bit_desc = bit_el.getElements ('DESCRIPTION')[0].getData ()
+            except IndexError:
+                bit_desc = ''
+            try:
+                bit_access = bit_el.getElements ('ACCESS')[0].getData ()
+            except IndexError:
+                bit_access = 'FIXME!'
             bit_init_val = bit_el.getElements ('INIT_VAL')[0].getData ()
             print '      <bit_field name="%s"' % (bit_name),
             print 'bit="%d"' % (i),
@@ -344,28 +363,40 @@ def dump_boot_info (root):
         data = info.getElements ('NRWW_START_ADDR')[0].getData ()
         if data[0] == '$':
             data = '0x' + data[1:]
-        nrww_start = 'nrww_start="0x%x"' % (int (data, 16))
+        if data == 'x':
+            nrww_start = ''
+        else:
+            nrww_start = 'nrww_start="0x%x"' % (int (data, 16))
         
         data = info.getElements ('NRWW_STOP_ADDR')[0].getData ()
         if data[0] == '$':
             data = '0x' + data[1:]
-        nrww_end = 'nrww_end="0x%x"' % (int (data, 16))
+        if data == 'x':
+            nrww_end = ''
+        else:
+            nrww_end = 'nrww_end="0x%x"' % (int (data, 16))
         
         data = info.getElements ('RWW_START_ADDR')[0].getData ()
         if data[0] == '$':
             data = '0x' + data[1:]
-        rww_start = 'rww_start="0x%x"' % (int (data, 16))
-        
+        if data == 'x':
+            rww_start = ''
+        else:
+            rww_start = 'rww_start="0x%x"' % (int (data, 16))
+
         data = info.getElements ('RWW_STOP_ADDR')[0].getData ()
         if data[0] == '$':
             data = '0x' + data[1:]
-        rww_end = 'rww_end="0x%x"' % (int (data, 16))
+        if data == 'x':
+            rww_end = ''
+        else:
+            rww_end = 'rww_end="0x%x"' % (int (data, 16))
         
         pagesize = 'pagesize="%d"' % ( \
             int (info.getElements ('PAGESIZE')[0].getData ()))
-        
-        print '  <bootloader %s %s %s' % (pagesize, nrww_start, nrww_end)
-        print '    %s %s>' % (rww_start, rww_end)
+
+        nrww = ' %s %s' % (nrww_start, nrww_end)
+        print '  <bootloader %s %s %s%s' % (pagesize, rww_start, rww_end, nrww)
 
         for i in range (8):
             try:
@@ -378,7 +409,10 @@ def dump_boot_info (root):
             data = mode.getElements ('BOOTSTART')[0].getData ()
             if data[0] == '$':
                 data = '0x' + data[1:]
-            start = 'start="0x%x"' % (int (data,16))
+            if data == 'x':
+                start = 'start="FIXME: Broken xml from Atmel!"'
+            else:
+                start = 'start="0x%x"' % (int (data,16))
 
             print '    <mode num="%d" %s %s />' % (i, pages, start)
 
