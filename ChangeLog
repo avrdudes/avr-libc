@@ -1,3 +1,7 @@
+2003-02-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: eplain PSTR() to move strings out to flash.
+
 2003-02-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/io2333.h: the datasheet says OCR1_A_.

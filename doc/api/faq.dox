@@ -49,6 +49,7 @@
 -# \ref faq_optflags
 -# \ref faq_reloc_code
 -# \ref faq_fuses
+-# \ref faq_flashstrings
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -929,6 +930,69 @@ upon the first function return).
 - Devices with a JTAG interface have the \c JTAGEN fuse programmed by
 default.  This will make the respective port pins that are used for
 the JTAG interface unavailable for regular IO.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_flashstrings Why do all my "foo...bar" strings eat up the SRAM?
+
+By default, all strings are handled as all other initialized
+variables: they occupy RAM (even though the compiler might warn you
+when it detects write attempts to these RAM locations), and occupy the
+same amount of flash ROM so they can be initialized to the actual
+string by startup code.  The compiler can optimize multiple identical
+strings into a single one, but obviously only for one compilation unit
+(i. e., a single C source file).
+
+That way, any string literal will be a valid argument to any C
+function that expects a <tt>const char *</tt> argument.
+
+Of course, this is going to waste a lot of SRAM.  In
+\ref avr_pgmspace, a method is described how such
+constant data can be moved out to flash ROM.  However, a constant
+string located in flash ROM is no longer a valid argument to pass to a
+function that expects a <tt>const char *</tt>-type string, since the
+AVR processor needs the special instruction \c LPM to access these
+strings.  Thus, separate functions are needed that take this into
+account.  Many of the standard C library functions have equivalents
+available where one of the string arguments can be located in flash
+ROM.  Private functions in the applications need to handle this, too.
+For example, the following can be used to implement simple debugging
+messages that will be sent through a UART:
+
+\code
+#include <inttypes.h>
+#include <avr/io.h>
+#include <avr/pgmspace.h>
+
+void
+uart_putchar(char c)
+{
+  if (c == '\n')
+    uart_putchar('\r');
+  loop_until_bit_is_set(USR, UDRE);
+  UDR = c;
+}
+
+void
+debug_P(const char *addr)
+{
+  char c;
+
+  while ((c = __lpm_inline((unsigned short)addr++)))
+    uart_putchar(c);
+}
+
+int
+main(void)
+{
+  debug_P(PSTR("foo was here\n"));
+  return 0;
+}
+\endcode
+
+\note By convention, the suffix \b _P to the function name is used as
+an indication that this function is going to accept a "program-space
+string".  Note also the use of the PSTR() macro.
 
 <small>Back to \ref faq_index.</small>
 
