@@ -235,6 +235,9 @@ limitations of the devices.
 \ref install_avr_gcc "avr-gcc" and make sure your
 \ref path "path is set" properly before installing avr-libc.
 
+\note If you have obtained the latest avr-libc from cvs, you will have to run
+the \c reconf script before using either of the build methods described below.
+
 To build and install avr-libc:
 
 \verbatim
@@ -261,9 +264,6 @@ $ ../configure --prefix=$PREFIX
 $ make
 $ make install
 \endverbatim
-
-\note If you have obtained the latest avr-libc from cvs, you will have to run
-the \c reconf script before using either of the above build methods.
 
 \subsection install_uisp UISP
 \addindex installation, uisp
