@@ -1,3 +1,11 @@
+2004-05-03  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.ac (AC_INIT): Bump version.
+	* devtools/gen-avr-lib-tree.sh: Improve portability by eliminating the
+	use of '<<-EOF' and 'mkdir -p'.
+	Move all the generated copyright headers into a tmp file so only one
+	copy will need to be maintained.
+
 2004-04-30  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.ac (AC_INIT): Bump version.
