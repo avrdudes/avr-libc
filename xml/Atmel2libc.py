@@ -144,8 +144,74 @@ def convert_vect_addr (addr):
 
     return int (addr[1:], 16) * 2
 
+def print_wrapped (indent, line):
+    ilen = len (indent)
+    llen = len (line)
+    print indent[:-1],
+    if ilen + llen > 78:
+        i = 78 - ilen
+        while i:
+            if line[i] == ' ':
+                print line[:i]
+                print_wrapped (indent+'  ', line[i+1:])
+                break
+            i -= 1
+        else:
+            # Couldn't find a place to wrap before col 78, try to find one
+            # after.
+            i = 79 - ilen
+            while i < llen:
+                if line[i] == ' ':
+                    print line[:i]
+                    print_wrapped (indent+'  ', line[i+1:])
+                    break
+                i += 1
+            else:
+                # Give up and just print the line.
+                print line
+    else:
+        print line
+
+def dump_header (root, depth=0):
+    name = root.getSubTree (['AVRPART', 'ADMIN', 'PART_NAME']).getData()
+    print '<?xml version="1.0"?>'
+    print '<!DOCTYPE device SYSTEM "Device.dtd">'
+    print '<device name="%s">' % (name)
+
+    # Avoid CVS changing ID in python script.
+    print '  <version>%s</version>' % ('$'+'Id$')
+    print '  <description></description>'
+
+def dump_footer (root):
+    print '</device>'
+
+def dump_memory_info (root):
+    path = ['AVRPART', 'MEMORY']
+    mem = root.getSubTree (path)
+
+    flash_size = int (mem.getElements ('PROG_FLASH')[0].getData ())
+    eep_size = int (mem.getElements ('EEPROM')[0].getData ())
+
+    isram = mem.getSubTree (['MEMORY', 'INT_SRAM'])
+    isram_size = int (isram.getElements ('SIZE')[0].getData ())
+    isram_start = isram.getElements ('START_ADDR')[0].getData ()[1:]
+
+    xsram = mem.getSubTree (['MEMORY', 'EXT_SRAM'])
+    xsram_size = int (xsram.getElements ('SIZE')[0].getData ())
+    xsram_start = xsram.getElements ('START_ADDR')[0].getData ()[1:]
+
+    print '  <memory_info>'
+    print '    <flash_size>0x%x</flash_size>' % (flash_size)
+    print '    <eeprom_size>0x%x</eeprom_size>' % (eep_size)
+    print '    <int_sram_size start_addr="0x%s">0x%x</int_sram_size>' % (
+        isram_start, isram_size)
+    print '    <ext_sram_size start_addr="0x%s">0x%x</ext_sram_size>' % (
+        xsram_start, xsram_size)
+    print '  </memory_info>'
+
 def dump_vectors (root):
-    # Get the interupt vectors
+    """Get the interupt vectors.
+    """
     path = [ 'AVRPART', 'INTERRUPT_VECTOR' ]
 
     irqs = root.getSubTree (path)
@@ -162,20 +228,21 @@ def dump_vectors (root):
 
         addr = convert_vect_addr (saddr)
 
-        vectors.append( (addr, name, desc) )
+        vectors.append ((addr, name, desc))
 
     # Determine the size of the vector insn from the address of the 2nd vector.
     insn_size = vectors[1][0]
 
-    print '<interrupts vector_size="%d" num_vects="%d">' % (insn_size, nvects)
+    print '  <interrupts vector_size="%d" num_vects="%d">' % (insn_size,
+                                                              nvects)
     n = 0
     for v in vectors:
-        print '  <vector addr="0x%04x" num="%d" name="%s">' % (v[0], n, v[1])
-        print '    <description>%s</description>' % (v[2])
-        print '    <sig_name></sig_name>'
-        print '  </vector>'
+        print '    <vector addr="0x%04x" num="%d" name="%s">' % (v[0], n, v[1])
+        print_wrapped ('      ', '<description>%s</description>' % (v[2]))
+        print '      <sig_name></sig_name>'
+        print '    </vector>'
         n += 1
-    print '</interrupts>'
+    print '  </interrupts>'
 
 if __name__ == '__main__':
     import sys
@@ -183,4 +250,7 @@ if __name__ == '__main__':
     parser = Xml2Obj()
     root = parser.Parse(sys.argv[1])
 
+    dump_header (root)
+    dump_memory_info (root)
     dump_vectors (root)
+    dump_footer (root)

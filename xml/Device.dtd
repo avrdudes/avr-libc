@@ -59,13 +59,12 @@ data in those file.
     <!ELEMENT version (#PCDATA)>
     <!ELEMENT description (#PCDATA)>
 
-    <!ELEMENT memory_info (
+    <!ELEMENT memory_sizes (
         flash_size,
         eeprom_size,
         int_sram_size,
         ext_sram_size
     >
-
         <!ELEMENT flash_size (#PCDATA)>
         <!ELEMENT eeprom_size (#PCDATA)>
         <!ELEMENT int_sram_size (#PCDATA)>
@@ -108,3 +107,4 @@ data in those file.
                 name CDATA #REQUIRED
                 bit CDATA #REQUIRED
             >
+    <!-- TODO: Need to define boot loader block information. -->
