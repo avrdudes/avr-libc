@@ -26,6 +26,10 @@
 #ifndef __SETJMP_H_
 #define __SETJMP_H_ 1
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
    jmp_buf:
 	offset	size	description
@@ -152,5 +156,9 @@ extern int setjmp(jmp_buf __jmpb);
     \returns This function never returns. */
 
 extern void longjmp(jmp_buf __jmpb, int __ret) __ATTR_NORETURN__;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  /* !__SETJMP_H_ */
