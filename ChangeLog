@@ -1,3 +1,8 @@
+2003-02-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add entry about integer promotion with
+	bitwise operators.
+
 2003-02-27  Theodore A. Roth  <troth@openavr.org>
 
 	* NEWS:

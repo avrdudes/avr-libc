@@ -50,6 +50,7 @@
 -# \ref faq_reloc_code
 -# \ref faq_fuses
 -# \ref faq_flashstrings
+-# \ref faq_intpromote
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -993,6 +994,30 @@ main(void)
 \note By convention, the suffix \b _P to the function name is used as
 an indication that this function is going to accept a "program-space
 string".  Note also the use of the PSTR() macro.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_intpromote Why does the compiler compile an 8-bit operation that uses bitwise operators into a 16-bit operation in assembly?
+
+Bitwise operations in Standard C will automatically promote their
+operands to an int, which is (by default) 16 bits in avr-gcc.
+
+To work around this use typecasts on the operands, including
+literals, to declare that the values are to be 8 bit operands.
+
+This may be especially important when clearing a bit:
+
+\code
+var &= ~mask;  /* wrong way! */
+\endcode
+
+The bitwise "not" operator (\c ~) will also promote the value in \c mask
+to an int. To keep it an 8-bit value, typecast before the "not"
+operator:
+
+\code
+var &= (unsigned char)~mask;
+\endcode
 
 <small>Back to \ref faq_index.</small>
 
