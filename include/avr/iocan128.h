@@ -556,10 +556,10 @@
 #define    SRL2        6
 #define    SRL1        5
 #define    SRL0        4
-#define    SRLW11      3
-#define    SRLW10      2
-#define    SRLW01      1
-#define    SRLW00      0
+#define    SRW11       3
+#define    SRW10       2
+#define    SRW01       1
+#define    SRW00       0
 /* End Register Bits */
 
 /* Register Bits [RAMPZ]  */
@@ -628,10 +628,10 @@
 
 /* Register Bits [TCCR2]  */
 /* Timer/Counter 2 Control Register - TCCR2 */
-#define    FOC2         7
+#define    FOC2A        7
 #define    WGM20        6
-#define    COM21        5
-#define    COM20        4
+#define    COM2A1       5
+#define    COM2A0       4
 #define    WGM21        3
 #define    CS22         2
 #define    CS21         1

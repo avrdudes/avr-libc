@@ -1,3 +1,10 @@
+2004-05-14  Theodore A. Roth  <troth@openavr.org>
+[Thanks to Bruce Graham <bgraham@huronnet.com> for reporting these.]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iocan128.h (SRW00, SRW01, SRW10, SRW11): Fix bit name.
+	(FOC2A, COM2A1, COM2A0): Ditto.
+
 2004-05-13  Theodore A. Roth  <troth@openavr.org>
 [Thanks to Bruce Graham <bgraham@huronnet.com> for reporting these.]
 
