@@ -1,3 +1,8 @@
+*** Changes since avr-libc-1.0.5:
+
+  [no-id]  Prefix all internal global symbols in libm with __fp_ so
+           they do not collide with the application namespace.
+
 *** Changes in avr-libc-1.0.5:
 
 * Bugs fixed:
