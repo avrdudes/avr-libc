@@ -219,6 +219,7 @@ users.
 
 - <tt>-O</tt><em>n</em>
   <p>
+  \anchor gcc_optO
   Optimization level \e n.  Increasing \e n is meant to optimize more,
   an optimization level of 0 means no optimization at all, which is
   the default if no \c -O option is present.  The special option \c
