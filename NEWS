@@ -11,6 +11,7 @@ New macro:
   [#2233] Documentation issues with inline asm
   [#5454] Inline functions results in undefined reference when optimize level 0
           is used.
+  [#7469] "Problem" by using the library function "boot_lock_bits_set"
   [#7556] printf and friends improperly handle non-null terminated strings when
           a %s argument has a precision.
   [#7802] vfscanf problem with unsigned long (patch #2554)
