@@ -28,70 +28,82 @@
 #ifndef _AVR_SFR_DEFS_H_
 #define _AVR_SFR_DEFS_H_ 1
 
-/*
-   This file is included by all of the <ioXXXX.h> files, which use macros
-   defined here to make the special function register definitions look like
-   C variables or simple constants, depending on the _SFR_ASM_COMPAT define.
-   Some examples from <iom128.h> to show how to define such macros:
+/** \defgroup avr_sfr_notes Additional notes from <avr/sfr_defs.h>
+    \ingroup avr_sfr
 
+   The \c <avr/sfr_defs.h> file is included by all of the \c <avr/ioXXXX.h> files, which use macros
+   defined here to make the special function register definitions look like
+   C variables or simple constants, depending on the <tt>_SFR_ASM_COMPAT</tt> define.
+   Some examples from \c <avr/iom128.h> to show how to define such macros:
+
+\code
 #define PORTA _SFR_IO8(0x1b)
 #define TCNT1 _SFR_IO16(0x2c)
 #define PORTF _SFR_MEM8(0x61)
 #define TCNT3 _SFR_MEM16(0x88)
+\endcode
 
-   If _SFR_ASM_COMPAT is not defined, C programs can use names like PORTA
+   If \c _SFR_ASM_COMPAT is not defined, C programs can use names like <tt>PORTA</tt>
    directly in C expressions (also on the left side of assignment operators)
    and GCC will do the right thing (use short I/O instructions if possible).
-   The __SFR_OFFSET definition is not used in any way in this case.
+   The \c __SFR_OFFSET definition is not used in any way in this case.
 
-   Define _SFR_ASM_COMPAT as 1 to make these names work as simple constants
+   Define \c _SFR_ASM_COMPAT as 1 to make these names work as simple constants
    (addresses of the I/O registers).  This is necessary when included in
    preprocessed assembler (*.S) source files, so it is done automatically
-   if __ASSEMBLER__ is defined.  By default, all addresses are defined as
-   if they were memory addresses (used in lds/sts instructions).  To use
-   these addresses in in/out instructions, you must subtract 0x20 from them.
+   if \c __ASSEMBLER__ is defined.  By default, all addresses are defined as
+   if they were memory addresses (used in \c lds/sts instructions).  To use
+   these addresses in \c in/out instructions, you must subtract 0x20 from them.
 
    For more backwards compatibility, insert the following at the start of
    your old assembler source file:
 
+\code
 #define __SFR_OFFSET 0
+\endcode
 
    This automatically subtracts 0x20 from I/O space addresses, but it's
    a hack, so it is recommended to change your source: wrap such addresses
    in macros defined here, as shown below.  After this is done, the
-   __SFR_OFFSET definition is no longer necessary and can be removed.
+   <tt>__SFR_OFFSET</tt> definition is no longer necessary and can be removed.
 
    Real example - this code could be used in a boot loader that is portable
-   between devices with SPMCR at different addresses.
+   between devices with \c SPMCR at different addresses.
 
-   <iom163.h>: #define SPMCR _SFR_IO8(0x37)
-   <iom128.h>: #define SPMCR _SFR_MEM8(0x68)
+\verbatim
+<avr/iom163.h>: #define SPMCR _SFR_IO8(0x37)
+<avr/iom128.h>: #define SPMCR _SFR_MEM8(0x68)
+\endverbatim
 
+\code
 #if _SFR_IO_REG_P(SPMCR)
 	out	_SFR_IO_ADDR(SPMCR), r24
 #else
 	sts	_SFR_MEM_ADDR(SPMCR), r24
 #endif
+\endcode
 
-   You can use the in/out/cbi/sbi/sbic/sbis instructions, without the
-   _SFR_IO_REG_P test, if you know that the register is in the I/O space
-   (as with SREG, for example).  If it isn't, the assembler will complain
+   You can use the \c in/out/cbi/sbi/sbic/sbis instructions, without the
+   <tt>_SFR_IO_REG_P</tt> test, if you know that the register is in the I/O space
+   (as with \c SREG, for example).  If it isn't, the assembler will complain
    (I/O address out of range 0...0x3f), so this should be fairly safe.
 
-   If you do not define __SFR_OFFSET (so it will be 0x20 by default), all
-   special register addresses are defined as memory addresses (so SREG is
+   If you do not define \c __SFR_OFFSET (so it will be 0x20 by default), all
+   special register addresses are defined as memory addresses (so \c SREG is
    0x5f), and (if code size and speed are not important, and you don't
    like the ugly #if above) you can always use lds/sts to access them.
-   But, this will not work if __SFR_OFFSET != 0x20, so use a different
-   macro (defined only if __SFR_OFFSET == 0x20) for safety:
+   But, this will not work if <tt>__SFR_OFFSET</tt> != 0x20, so use a different
+   macro (defined only if <tt>__SFR_OFFSET</tt> == 0x20) for safety:
 
+\code
 	sts	_SFR_ADDR(SPMCR), r24
+\endcode
 
-   In C programs, all 3 combinations of _SFR_ASM_COMPAT and __SFR_OFFSET
-   are supported - the _SFR_ADDR(SPMCR) macro can be used to get the
-   address of the SPMCR register (0x57 or 0x68 depending on device).
+   In C programs, all 3 combinations of \c _SFR_ASM_COMPAT and <tt>__SFR_OFFSET</tt>
+   are supported - the \c _SFR_ADDR(SPMCR) macro can be used to get the
+   address of the \c SPMCR register (0x57 or 0x68 depending on device).
 
-   The old inp/outp macros are still supported, but not recommended
+   The old inp()/outp() macros are still supported, but not recommended
    to use in new code.  The order of outp() arguments is confusing.
  */
 
@@ -156,7 +168,11 @@
 
     \code #include <avr/io.h>\endcode
 
-    Converts a bit number into a byte value. */
+    Converts a bit number into a byte value.
+
+    \note The bit shift is performed by the compiler which then inserts the
+    result into the code. Thus, there is no run-time overhead when using
+    _BV(). */
     
 #define _BV(bit) (1 << (bit))
 
@@ -200,7 +216,10 @@
 
     \code #include <avr/io.h>\endcode
 
-    Write \c val to IO register \c sfr. */
+    Write \c val to IO register \c sfr. 
+
+    \note The order of the arguments was switched in older versions of
+    avr-libc (versions <= 20020203). */
 
 #define outb(sfr, val) (_SFR_BYTE(sfr) = (val))
 
@@ -212,8 +231,11 @@
     Write the 16-bit value \c val to IO register pair \c sfr.  Care
     will be taken to write the lower register first.  When used to
     update 16-bit registers where the timing is critical and the
-    operation can be interrupted, the programmer is responsible to
-    disable interrupts before accessing the register pair. */
+    operation can be interrupted, the programmer is the responsible for
+    disabling interrupts before accessing the register pair.
+
+    \note The order of the arguments was switched in older versions of
+    avr-libc (versions <= 20020203). */
 
 #define outw(sfr, val) (_SFR_WORD(sfr) = (val))
 
@@ -283,8 +305,40 @@
 #endif /* !__ASSEMBLER__ */
 
 /* Backwards compatibility, do not use in new programs.  */
+
+/** \name Deprecated Macros */
+/*@{*/
+
+/** \def outp
+    \ingroup avr_sfr
+    \deprecated
+    For backwards compatibility only. This macro will evetually be removed.
+
+    \par
+    <b>Use outb() in new programs</b>. */
+
 #define outp(val, sfr) outb(sfr, val)
+
+/** \def inp
+    \ingroup avr_sfr
+    \deprecated
+    For backwards compatibility only. This macro will evetually be removed.
+
+    \par
+    <b>Use inb() in new programs</b>. */
+
 #define inp(sfr) inb(sfr)
+
+/** \def BV
+    \ingroup avr_sfr
+    \deprecated
+    For backwards compatibility only. This macro will evetually be removed.
+
+    \par
+    <b>Use _BV() in new programs</b>. */
+
 #define BV(bit) _BV(bit)
+
+/*@}*/
 
 #endif  /* _SFR_DEFS_H_ */

@@ -27,7 +27,7 @@
 
 /** \defgroup avr_sfr Special function registers
 
-When working with microcontrollers, a lot of the task usually consists
+When working with microcontrollers, many of the tasks usually consist
 of controlling the peripherals that are connected to the device,
 respectively programming the subsystems that are contained in the
 controller (which by itself communicate with the circuitry connected
@@ -35,7 +35,7 @@ to the controller).
 
 The AVR series of microcontrollers offers two different paradigms to
 perform this task.  There's a separate IO address space available (as
-it's e. g. known from some high-level CISC CPUs) that can be addressed
+it is known from some high-level CISC CPUs) that can be addressed
 with specific IO instructions that are applicable to some or all of
 the IO address space (\c in, \c out, \c sbi etc.).  The entire IO
 address space is also made available as <em>memory-mapped IO</em>,
@@ -65,7 +65,7 @@ or they can assign a value directly to the symbolic address:
 \endcode
 
 The compiler's choice of which method to use when actually accessing
-the IO port is completely independent of the programmer's way to write
+the IO port is completely independent of the way the programmer chooses to write
 the code.  So even if the programmer uses the memory-mapped paradigm
 and writes
 
@@ -80,7 +80,7 @@ constant value known at compile-time).
 
 The advantage of using the memory-mapped paradigm in C programs is
 that it makes the programs more portable to other C compilers for the
-AVR platform.  Some people might also feel this to be better readable.
+AVR platform.  Some people might also feel that this is more readable.
 For example, the following two statements would be equivalent:
 
 \code
