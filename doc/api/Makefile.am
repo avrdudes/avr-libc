@@ -95,7 +95,7 @@ html: demo $(TARGET_DOX_HTML) fix_png
 
 # Make the background color of the png's transparent.
 fix_png:
-	cd $(USER_MANUAL) 2>/dev/null || exit 0; \
+	cd $(USER_MANUAL) || exit 0; \
 	for png in *.png; do \
 		echo "Fixing transparency for $$png"; \
 		$(PNGTOPNM) $$png > tmp.pnm; \

@@ -38,6 +38,21 @@ AC_ARG_ENABLE(multilib,
   *)   AC_MSG_ERROR(bad value ${enableval} for multilib option) ;;
  esac], [multilib=yes])dnl
 
+dnl TODO: Check for various tools used to build the documentation. If anything
+dnl is missing, don't build the docs by default.
+
+dnl Disable building of dox by default since it they may not build properly on
+dnl all systems. This isn't optimal, but how do we work around the user not
+dnl having fig2dev and still build all the formats?
+
+AC_ARG_ENABLE(doc,
+[  --enable-doc            build all doc formats (disabled is default)],
+[case "${enableval}" in
+  yes) enable_doc=yes ;;
+  no)  enable_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for global doc option) ;;
+ esac], [enable_doc=no])dnl
+
 dnl Various documentation options.  By default, we enable all of them,
 dnl i. e. HTML, Postscript, PDF, and Unix-style man pages.
 AC_ARG_ENABLE(html-doc,
@@ -173,17 +188,19 @@ if test "x$dox_ver" = "x"; then
 else
 	# FIXME: should also check for dox_ver >= 1.2.16
 	AC_MSG_RESULT(yes)
-	if test "$ps_doc" = "yes"; then
-		TARGET_DOX_PS=dox-ps
-		INSTALL_DOX_PS=install-dox-ps
-	fi
-	if test "$pdf_doc" = "yes"; then
-		TARGET_DOX_PDF=dox-pdf
-		INSTALL_DOX_PDF=install-dox-pdf
-	fi
-	if test "$html_doc" = "yes"; then
-		TARGET_DOX_HTML=dox-html
-		INSTALL_DOX_HTML=install-dox-html
+	if test "$enable_doc" = "yes"; then
+		if test "$ps_doc" = "yes"; then
+			TARGET_DOX_PS=dox-ps
+			INSTALL_DOX_PS=install-dox-ps
+		fi
+		if test "$pdf_doc" = "yes"; then
+			TARGET_DOX_PDF=dox-pdf
+			INSTALL_DOX_PDF=install-dox-pdf
+		fi
+		if test "$html_doc" = "yes"; then
+			TARGET_DOX_HTML=dox-html
+			INSTALL_DOX_HTML=install-dox-html
+		fi
 	fi
 fi
 dnl

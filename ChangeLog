@@ -1,5 +1,13 @@
 2002-11-11  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in: Add --enable-doc option and disable building of docs
+	as the default.
+	* doc/TODO: Remove note about sleep api.
+	* doc/api/Makefile.am: Remove sending error to /dev/null since that
+	confuses windows systems.
+
+2002-11-11  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/eeprom.h (eeprom_read_byte): New function, replaces
 	eeprom_rb.
