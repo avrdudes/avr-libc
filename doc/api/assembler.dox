@@ -211,6 +211,12 @@ Interrupt functions can get the \ref avr_signames "usual names" that
 are also available to C programs.  The linker will then put them into
 the appropriate interrupt vector slots.  Note that they must be
 declared \c .global in order to be acceptable for this purpose.
+This will only work if <tt>&lt;avr/io.h&gt;</tt> has been included.
+Note that the assembler or linker have no chance to check the correct
+spelling of an interrupt function, so it should be double-checked.
+(When analyzing the resulting object file using \c avr-objdump or
+\c avr-nm, a name like <tt>__vector_<em>N</em></tt> should appear,
+with \e N being a small integer number.)
 
 \par Note [8]
 
