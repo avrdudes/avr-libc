@@ -69,13 +69,13 @@ clean-local:
 # Rules for generating documentation with doxygen
 #
 
-latex: doxygen.config
+latex_src/refman.tex: doxygen.config
 	doxygen doxygen.config
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
 
-latex-pdf: doxygen-pdf.config
+latex_pdf_src/refman.tex: doxygen-pdf.config
 	doxygen doxygen-pdf.config
 	cd latex_pdf_src && \
 		sed -e '/tocdepth/s/1/3/' refman.tex > tmp.$$ && \
@@ -92,15 +92,21 @@ doxygen-pdf.config: doxygen.config
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only
 # a prerequisite for ps.
-dox-html: latex
+dox-html: $(USER_MANUAL)/index.html
 
-dox-pdf: latex-pdf
-	cd latex_pdf_src && ${MAKE} refman.pdf
-	cp latex_pdf_src/refman.pdf $(USER_MANUAL).pdf
+$(USER_MANUAL)/index.html: latex_src/refman.tex
 
-dox-ps: latex
+dox-ps: $(USER_MANUAL).ps
+
+$(USER_MANUAL).ps: latex_src/refman.tex
 	cd latex_src && ${MAKE} ps
 	cp latex_src/refman.ps $(USER_MANUAL).ps
+
+dox-pdf: $(USER_MANUAL).pdf
+
+$(USER_MANUAL).pdf: latex_pdf_src/refman.tex
+	cd latex_pdf_src && ${MAKE} refman.pdf
+	cp latex_pdf_src/refman.pdf $(USER_MANUAL).pdf
 
 # Install rules for the various documentation parts.  The actual
 # access to those rules is from the install-data-local target above,

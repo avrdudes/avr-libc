@@ -1,5 +1,10 @@
 2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/Makefile.am: restructure to make the docs targets depend on
+		actual files as opposed to .phony targets.
+
+2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/faq.dox: add Q/A about early initialization.
 
 2002-08-05  Theodore A. Roth  <troth@verinet.com>
