@@ -16,8 +16,8 @@ Group: Development/Tools
 URL: http://savannah.gnu.org/projects/avr-libc
 Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.gz
 Buildroot: /var/tmp/avr-libc-%{version}-root
-BuildRequires: avr-gcc >= 3.2-1
-Requires: avr-gcc >= 3.2-1
+BuildRequires: avr-gcc >= 3.3
+Requires: avr-gcc >= 3.3
 
 %description
 Avr-libc is a C library for developing applications for Atmel AVR microcontrollers.
