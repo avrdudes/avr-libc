@@ -1,5 +1,9 @@
 2002-08-22  Theodore A. Roth  <troth@verinet.com>
 
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+
+2002-08-22  Theodore A. Roth  <troth@verinet.com>
+
 	* doc/api/sfr.dox: Reformat paragraphs that are too wide.
 	* include/avr/sfr_defs.h: Reformat paragraphs that are too wide.
 		Added cvs Id keyword.
