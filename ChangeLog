@@ -1,3 +1,8 @@
+2005-01-03  Eric B. Weddington  <ericw@evcohs.com>
+
+    * include/avr/iotn26.h: Add missing pin definitions.
+    [Fix for bug #11479]
+
 2005-01-01  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* Makefile.am (install-data-local uninstall-local):
