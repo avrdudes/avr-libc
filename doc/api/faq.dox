@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002-2004 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -569,7 +569,7 @@ set_bits_func_correct (volatile uint8_t *port, uint8_t mask)
   fc:   86 2b           or      r24, r22
   fe:   80 83           st      Z, r24
 }
- 100:   08 95           ret 
+ 100:   08 95           ret
 \endverbatim
 
 Notice that we are accessing the io port via the \c LD and \c ST instructions.
@@ -736,7 +736,7 @@ int main (void)
 }
 \endcode
 
-Looking at the disassembly of the resulting object file we see that array is 
+Looking at the disassembly of the resulting object file we see that array is
 in flash as such:
 
 \code
@@ -807,7 +807,7 @@ private data storage kept outside the domain of the C compiler
 (e. g. through a <tt>char *</tt> variable initialized directly to a
 particular address), it would be sufficient to defer the
 initialization of the external RAM interface to the beginning of
-<tt><b>main</b><b>()</b></tt>, 
+<tt><b>main</b><b>()</b></tt>,
 so no tweaking of the \c .init1 section is necessary.  The
 same applies if only the heap is going to be located there, since the
 application start-up code does not affect the heap.

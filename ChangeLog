@@ -1,3 +1,8 @@
+2004-04-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Cosmetics: update (C) year, remove some
+	vestiges of trailing whitespace.
+
 2004-04-06  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/iom169.h: Update copyright year.
