@@ -1,5 +1,9 @@
 2004-02-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/stdio/vfscanf.c: Apply patch #2554: fix %ul format.
+
+2004-02-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdio/vfprintf.c: Fix bug #7556 (%s format with precision issue)
 
 2003-11-18  Theodore A. Roth  <troth@openavr.org>

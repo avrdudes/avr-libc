@@ -401,7 +401,8 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 #if SCANF_LEVEL > SCANF_MIN
 				if (!(flags & FLSTAR)) {
 #endif /* SCANF_LEVEL > SCANF_MIN */
-					if (flags & (FLLONG & FLUNSIGNED))
+					if (flags & (FLLONG | FLUNSIGNED)
+					    == (FLLONG | FLUNSIGNED))
 						*(va_arg(ap, unsigned long *)) =
 							a.ul;
 					else if (flags & (FLUNSIGNED))
