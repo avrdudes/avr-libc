@@ -169,6 +169,7 @@ AVR_CRT_MEGA=''
 AVR_CRT_OTHER=''
 avrlib_cflags=''
 avrlib_asflags=''
+DOCSDIR=''
 if test -z "${with_multisubdir}"; then
   dnl default build directory -> avr1 and avr2
   avrlib_cflags="-mmcu=avr2 ${avrlib_opt_space}"
@@ -177,6 +178,9 @@ if test -z "${with_multisubdir}"; then
                 crts4414.o crts4433.o crts4434.o crts8515.o crts8535.o \\\
                 crtc8534.o'
   AVR_CRT_TINY='crttn11.o crttn12.o crttn15.o crttn28.o crttn22.o # crttn26.o'
+
+  dnl We only want to build the docs for the default caes
+  DOCSDIR='doc'
 else
   case $with_multisubdir in
   avr3) avrlib_cflags=${avrlib_opt_speed}
@@ -211,6 +215,8 @@ AC_SUBST(AVR_CRT_OTHER)
 dnl the includes for the avr libc
 INCLUDES='-I$(top_srcdir)/include -I$(top_srcdir)/common'
 AC_SUBST(INCLUDES)
+
+AC_SUBST(DOCSDIR)
 
 if test "${multilib}" = "yes"; then
   multilib_arg="--enable-multilib"
