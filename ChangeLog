@@ -1,5 +1,12 @@
 2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/crc16.h: use __inline__ instead of inline.
+	* include/avr/delay.h: Ditto.
+	* include/avr/interrupt.h: Ditto:
+	* include/avr/timer.h: Ditto.
+	
+2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdio/vfscanf.c: Apply patch #2554: fix %ul format.
 
 2004-02-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
