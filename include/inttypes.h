@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002,2004 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -44,14 +44,7 @@
     over rolling your own typedefs.
 
     \note If avr-gcc's \c -mint8 option is used, no 32-bit types will be
-    available.
-
-    \todo There is a pending patch that may go into gcc to change the
-    behaviour of the -mint8 option.  The current (2003-09-17) situation for
-    -mint8 is sizeof(int) == 1, sizeof(long) == 2 and sizeof(long long) == 8.
-    Note the absence of a 4-byte, 32-bit type.  The patch proposes to change
-    sozeof(long long) to be 4 bytes (32 bits).  When and if the patch is
-    included in gcc, we will need to change avr-libc accordingly.  */
+    available for all versions of GCC below 3.5.  */
 
 #if __INT_MAX__ == 127
 # define __USING_MINT8 1
@@ -75,6 +68,14 @@ typedef unsigned char uint8_t;
 
 typedef long int16_t;
 typedef unsigned long uint16_t;
+
+#if (__GNUC__ > 3) || (__GNUC__ == 3 && __GNUC_MINOR__ >= 5)
+typedef long long int32_t;
+typedef unsigned long long uint32_t;
+#else
+typedef long long int64_t;
+typedef unsigned long long uint64_t;
+#endif
 
 #else /* no -mint8 */
 
@@ -110,8 +111,6 @@ typedef long int32_t;
 
 typedef unsigned long uint32_t;
 
-#endif
-
 /*@}*/
 
 /** \name 64-bit types. */
@@ -127,6 +126,8 @@ typedef long long int64_t;
     64-bit unsigned type. */
 
 typedef unsigned long long uint64_t;
+
+#endif
 
 /*@}*/
 

@@ -1,3 +1,8 @@
+2004-07-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/inttypes.h: avr-gcc >= 3.5 will be able to
+	provide [u]int32_t when -mint8 is in effect.
+
 2004-07-02  Theodore A. Roth  <troth@openavr.org>
 
 	* xml/Atmel2libc.py: Add copyright/license.
