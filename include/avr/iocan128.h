@@ -22,16 +22,15 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/*
-Revision: 20040422
+/* $Id$ */
 
-This file is based largely on:
---iom128.h by Peter Jansen (bit defines)
---iom169.h by Juergen Schilling <juergen.schilling@honeywell.com> (register addresses)
---AT90CAN128 Datasheet (bit defines and register addresses)
---Appnote on Mega128 --> AT90Can128 Conversion (for what registers I need to change)
-*/
-
+/* This file is based largely on:
+   - iom128.h by Peter Jansen (bit defines)
+   - iom169.h by Juergen Schilling <juergen.schilling@honeywell.com>
+     (register addresses)
+   - AT90CAN128 Datasheet (bit defines and register addresses)
+   - Appnote on Mega128 --> AT90Can128 Conversion (for what registers I need
+     to change) */
 
 /* iocan128.h - definitions for CAN128 */
 
@@ -448,7 +447,6 @@ This file is based largely on:
 #define CANSTML _SFR_MEM8(0xF8)
 #define CANSTMH _SFR_MEM8(0xF9)
 
-
 /* Interrupt vectors */
 
 #define SIG_INTERRUPT0          _VECTOR(1)
@@ -490,15 +488,10 @@ This file is based largely on:
 
 #define _VECTORS_SIZE 148
 
-/*
-   The Register Bit names are represented by their bit number (0-7).
-*/
+/* The Register Bit names are represented by their bit number (0-7). */
 
 /* Register Bits [ASSR]  */
 /* Asynchronous Status Register */
-//#define         7
-//#define         6
-//#define         5
 #define    EXCLK      4
 #define    AS2        3
 #define    TCN2UB     2
@@ -835,9 +828,6 @@ This file is based largely on:
 /* ADC Control and status register - ADCSRB */
 #define    ADHSM        7
 #define    ACME         6
-//#define             5
-//#define             4
-//#define             3
 #define    ADTS2        2
 #define    ADTS1        1
 #define    ADTS0        0
@@ -869,12 +859,6 @@ This file is based largely on:
 
 /* Register Bits [DIDR1]  */
 /* Digital Input Disable Register 1 */
-//#define            7
-//#define            6
-//#define            5
-//#define            4
-//#define            3
-//#define            2
 #define    AIN1D        1
 #define    AIN0D        0
 /* End Register Bits */
@@ -1125,22 +1109,13 @@ This file is based largely on:
 
 /* Register Bits [TIFR0]  */
 /* Timer/Counter 0 interrupt Flag Register */
-//#define           7
-//#define           6
-//#define           5
-//#define           4
-//#define           3
-//#define           2
-#define    OCF0A       1
-#define    TOV0       0
+#define    OCF0A        1
+#define    TOV0         0
 /* End Register Bits */
 
 /* Register Bits [TIFR1]  */
 /* Timer/Counter 1 interrupt Flag Register */
-//#define           7
-//#define           6
 #define    ICF1       5
-//#define           4
 #define    OCF1C      3
 #define    OCF1B      2
 #define    OCF1A      1
@@ -1149,22 +1124,13 @@ This file is based largely on:
 
 /* Register Bits [TIFR2]  */
 /* Timer/Counter 2 interrupt Flag Register */
-//#define           7
-//#define           6
-//#define           5
-//#define           4
-//#define           3
-//#define           2
-#define    OCF2A       1
+#define    OCF2A      1
 #define    TOV2       0
 /* End Register Bits */
 
 /* Register Bits [TIFR3]  */
 /* Timer/Counter 3 interrupt Flag Register */
-//#define           7
-//#define           6
 #define    ICF3       5
-//#define           4
 #define    OCF3C      3
 #define    OCF3B      2
 #define    OCF3A      1
@@ -1209,14 +1175,10 @@ This file is based largely on:
 
 /* Register Bits [EECR]  */
 /* EEPROM Control Register */
-//#define         7
-//#define         6
-//#define         5
-//#define         4
-#define    EERIE    3
-#define    EEMWE    2
-#define    EEWE     1
-#define    EERE     0
+#define    EERIE       3
+#define    EEMWE       2
+#define    EEWE        1
+#define    EERE        0
 /* End Register Bits */
 
 /* Register Bits [EEDR]  */
@@ -1245,10 +1207,6 @@ This file is based largely on:
 
 /* Register Bits [EEARH]  */
 /* EEPROM Address Register */
-//#define         7
-//#define         6
-//#define         5
-//#define         4
 #define    EEAR11    3
 #define    EEAR10    2
 #define    EEAR9     1
@@ -1258,11 +1216,6 @@ This file is based largely on:
 /* Register Bits [GTCCR]  */
 /* General Timer/Counter Control Register  */
 #define    TSM      7
-//#define         6
-//#define         5
-//#define         4
-//#define         3
-//#define         2
 #define    PSR2     1
 #define    PSR310   0
 /* End Register Bits */
@@ -1307,10 +1260,6 @@ This file is based largely on:
 
 /* Register Bits [SMCR]  */
 /* Sleep Mode Control Register */
-//#define         7
-//#define         6
-//#define         5
-//#define         4
 #define    SM2     3
 #define    SM1     2
 #define    SM0     1
@@ -1319,9 +1268,6 @@ This file is based largely on:
 
 /* Register Bits [MCUSR]  */
 /* MCU Status Register */
-//#define         7
-//#define         6
-//#define         5
 #define    JTRF    4
 #define    WDRF    3
 #define    BORF    2
@@ -1332,11 +1278,7 @@ This file is based largely on:
 /* Register Bits [MCUCR]  */
 /* MCU Control Register */
 #define    JTD     7
-//#define         6
-//#define         5
 #define    PUD     4
-//#define         3
-//#define         2
 #define    IVSE    1
 #define    IVCE    0
 /* End Register Bits */
@@ -1344,9 +1286,6 @@ This file is based largely on:
 /* Register Bits [CLKPR]  */
 /* Clock Prescale Register */
 #define    CLKPCE     7
-//#define         6
-//#define         5
-//#define         4
 #define    CLKPS3     3
 #define    CLKPS2     2
 #define    CLKPS1     1
@@ -1355,7 +1294,6 @@ This file is based largely on:
 
 /* Register Bits [OSCCAL]  */
 /* Oscillator Calibration Register */
-//#define         7
 #define    CAL6     6
 #define    CAL5     5
 #define    CAL4     4
@@ -1367,22 +1305,13 @@ This file is based largely on:
 
 /* Register Bits [TIMSK0]  */
 /* Timer/Counter 0 interrupt mask Register */
-//#define           7
-//#define           6
-//#define           5
-//#define           4
-//#define           3
-//#define           2
 #define    OCIE0A      1
 #define    TOIE0       0
 /* End Register Bits */
 
 /* Register Bits [TIMSK1]  */
 /* Timer/Counter 1 interrupt mask Register */
-//#define           7
-//#define           6
 #define    ICIE1       5
-//#define           4
 #define    OCIE1C      3
 #define    OCIE1B      2
 #define    OCIE1A      1
@@ -1391,22 +1320,13 @@ This file is based largely on:
 
 /* Register Bits [TIMSK2]  */
 /* Timer/Counter 2 interrupt mask Register */
-//#define           7
-//#define           6
-//#define           5
-//#define           4
-//#define           3
-//#define           2
-#define    OCIE2A       1
+#define    OCIE2A      1
 #define    TOIE2       0
 /* End Register Bits */
 
 /* Register Bits [TIMSK3]  */
 /* Timer/Counter 3 interrupt mask Register */
-//#define           7
-//#define           6
 #define    ICIE3       5
-//#define           4
 #define    OCIE3C      3
 #define    OCIE3B      2
 #define    OCIE3A      1
@@ -1429,9 +1349,7 @@ This file is based largely on:
 
 /* Register Bits [CANGSTA]  */
 /* CAN General Status Register */
-//#define           7
 #define    OVRG       6
-//#define           5
 #define    TXBSY      4
 #define    RXBSY      3
 #define    ENFG       2
@@ -1477,7 +1395,6 @@ This file is based largely on:
 
 /* Register Bits [CANEN1]  */
 /* CAN Enable MOb Register */
-//#define        7
 #define    ENMOB14      6
 #define    ENMOB13      5
 #define    ENMOB12      4
@@ -1501,7 +1418,6 @@ This file is based largely on:
 
 /* Register Bits [CANIE1]  */
 /* CAN Interrupt Enable MOb Register */
-//#define        7
 #define    IEMOB14      6
 #define    IEMOB13      5
 #define    IEMOB12      4
@@ -1525,7 +1441,6 @@ This file is based largely on:
 
 /* Register Bits [CANSIT1]  */
 /* CAN Status Interrupt MOb Register */
-//#define        7
 #define    SIT14      6
 #define    SIT13      5
 #define    SIT12      4
@@ -1537,31 +1452,25 @@ This file is based largely on:
 
 /* Register Bits [CANBT1]  */
 /* Bit Timing Register 1 */
-//#define           7
 #define    BRP5       6
 #define    BRP4       5
 #define    BRP3       4
 #define    BRP2       3
 #define    BRP1       2
 #define    BRP0       1
-//#define           0
 /* End Register Bits */
 
 /* Register Bits [CANBT2]  */
 /* Bit Timing Register 2 */
-//#define           7
 #define    SJW1       6
-//#define           5
 #define    SJW0       4
 #define    PRS2       3
 #define    PRS1       2
 #define    PRS0       1
-//#define           0
 /* End Register Bits */
 
 /* Register Bits [CANBT3]  */
 /* Bit Timing Register 3 */
-//#define           7
 #define    PHS22      6
 #define    PHS21      5
 #define    PHS20      4
@@ -1759,7 +1668,6 @@ This file is based largely on:
 #define    IDMSK1       4
 #define    IDMSK0       3
 #define    RTRMSK       2
-//#define           1
 #define    IDEMSK       0
 /* End Register Bits */
 
@@ -1812,7 +1720,7 @@ This file is based largely on:
 /* End Register Bits */
 
 /* Register Bits [CANSTMH]  */
-/* CAN Timer Register of some sort, high*/
+/* CAN Timer Register of some sort, high */
 #define    TIMSTM15       7
 #define    TIMSTM14       6
 #define    TIMSTM13       5
@@ -1834,7 +1742,6 @@ This file is based largely on:
 #define    MSG1           1
 #define    MSG0           0
 /* End Register Bits */
-
 
 /* Begin Verbatim */
 
@@ -1933,7 +1840,6 @@ This file is based largely on:
 #define    UCPOL        0
 
 /* End Verbatim */
-
 
 /* Constants */
 #define SPM_PAGESIZE 256

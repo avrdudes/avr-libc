@@ -1,4 +1,9 @@
 2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iocan128.h: Deleted commented out #defines.
+	Formatting cleanups.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
 [Contributed by Colin O'Flynn <coflynn@newae.com>]
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
