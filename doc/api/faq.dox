@@ -43,6 +43,7 @@
 -# \ref faq_asmconst
 -# \ref faq_gdboptimize
 -# \ref faq_asmstabs
+-# \ref faq_port_pass
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -488,4 +489,111 @@ myfunc:	push	r16
 
 <small>Back to \ref faq_index.
 </small>
+
+\subsection faq_port_pass How do I pass an IO port as a parameter to a function?
+Consider this example code:
+
+\code
+#include <inttypes.h>
+#include <avr/io.h>
+
+void
+set_bits_func_wrong (volatile uint8_t port, uint8_t mask)
+{
+    port |= mask;
+}
+
+void
+set_bits_func_correct (volatile uint8_t *port, uint8_t mask)
+{
+    *port |= mask;
+}
+
+#define set_bits_macro(port,mask) ((port) |= (mask))
+
+int main (void)
+{
+    set_bits_func_wrong (PORTB, 0xaa);
+    set_bits_func_correct (&PORTB, 0x55);
+    set_bits_macro (PORTB, 0xf0);
+
+    return (0);
+}
+\endcode
+
+The first function will generate object code which is not even close to what
+is intended. The major problem arises when the function is called. When the
+compiler sees this call, it will actually pass the value in the the \c PORTB
+register (using an \c IN instruction), instead of passing the address of \c
+PORTB (e.g. memory mapped io addr of \c 0x38, io port \c 0x18 for the
+mega128). This is seen clearly when looking at the disassembly of the call:
+
+\verbatim
+    set_bits_func_wrong (PORTB, 0xaa);
+ 10a:   6a ea           ldi     r22, 0xAA       ; 170
+ 10c:   88 b3           in      r24, 0x18       ; 24
+ 10e:   0e 94 65 00     call    0xca
+\endverbatim
+
+So, the function, once called, only sees the value of the port register and
+knows nothing about which port it came from. At this point, whatever object
+code is generated for the function by the compiler is irrelevant. The
+interested reader can examine the full disassembly to see the the function's
+body is completely fubar.
+
+The second function shows how to pass (by reference) the memory mapped address
+of the io port to the function so that you can read and write to it in the
+function. Here's the object code generated for the function call:
+
+\verbatim
+    set_bits_func_correct (&PORTB, 0x55);
+ 112:   65 e5           ldi     r22, 0x55       ; 85
+ 114:   88 e3           ldi     r24, 0x38       ; 56
+ 116:   90 e0           ldi     r25, 0x00       ; 0
+ 118:   0e 94 7c 00     call    0xf8
+\endverbatim
+
+You can clearly see that \c 0x0038 is correctly passed for the address of the
+io port. Looking at the disassembled object code for the body of the function,
+we can see that the function is indeed performing the operation we intended:
+
+\verbatim
+void
+set_bits_func_correct (volatile uint8_t *port, uint8_t mask)
+{
+  f8:   fc 01           movw    r30, r24
+    *port |= mask;
+  fa:   80 81           ld      r24, Z
+  fc:   86 2b           or      r24, r22
+  fe:   80 83           st      Z, r24
+}
+ 100:   08 95           ret 
+\endverbatim
+
+Notice that we are accessing the io port via the \c LD and \c ST instructions.
+
+The \c port parameter must be volatile to avoid a compiler warning.
+
+\note Because of the nature of the \c IN and \c OUT assembly instructions,
+they can not be used inside the function when passing the port in this way.
+Readers interested in the details should consult the <em>Instruction Set</em>
+data sheet.
+
+Finally we come to the macro version of the operation. In this contrived
+example, the macro is the most efficient method with respect to both execution
+speed and code size:
+
+\verbatim
+    set_bits_macro (PORTB, 0xf0);
+ 11c:   88 b3           in      r24, 0x18       ; 24
+ 11e:   80 6f           ori     r24, 0xF0       ; 240
+ 120:   88 bb           out     0x18, r24       ; 24
+\endverbatim
+
+Of course, in a real application, you might be doing a lot more in your
+function which uses a passed by reference io port address and thus the use of
+a function over a macro could save you some code space, but still at a cost of
+execution speed.
+
+<small>Back to \ref faq_index.</small>
 */
