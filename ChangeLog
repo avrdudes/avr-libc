@@ -1,3 +1,9 @@
+2002-08-29  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/faq.dox: Move asm faq to faq dox.
+	* doc/api/inline_asm.dox: Move asm faq to faq dox.
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+
 2002-08-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: 16-bit timer IO registers and interrupts.

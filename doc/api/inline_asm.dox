@@ -960,41 +960,6 @@ extern long Calc(void) asm ("CALCULATE");
 Calling the function \c Calc() will create assembler instructions to call the
 function \c CALCULATE.
 
-\subsection inlasm_faq Frequently Answered Questions
-
-- <b>Using Constants</b>
-
-\b Question: When I do the following:
-
-\code
-asm volatile("sbi 0x15,0x07;");
-\endcode
-
-everything is OK! But when I do the same but replacing the address of the port
-by its label, like:
-
-\code
-asm volatile("sbi PORTB,0x07;");
-\endcode
-
-I get a compilation error: <tt>"Error: constant value required"</tt>.
-
-\code
-asm volatile("sbi PORTB,0x07;");
-\endcode
-
-\b Answer: \c PORTB is a precompiler definition included in the processor
-specific file included in \c avr/io.h. As you may know, the precompiler will
-not touch strings and \c PORTB is passed to the assembler. One way to avoid
-this problem is:
-
-\code
-asm volatile("sbi %0, 0x07" : "I" ((unsigned short)(PORTB)):);
-\endcode
-
-\note \c avr/io.h already provides a sbi() macro definition, which can be used
-in C programs.
-
 \subsection links Links
 
 <b><em>A GNU Development Environment for the AVR Microcontroller</em></b>

@@ -30,7 +30,8 @@
 <b>\subsection faq_index FAQ Index
 </b>
 
--# \ref faq_index
+\addindex FAQ
+
 -# \ref faq_volatile
 -# \ref faq_libm
 -# \ref faq_regbind
@@ -38,6 +39,7 @@
 -# \ref faq_use_bv
 -# \ref faq_cplusplus
 -# \ref faq_16bitio
+-# \ref faq_asmconst
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -293,4 +295,35 @@ read_timer1(void)
 <small>Back to \ref faq_index.
 </small>
 
+\subsection faq_asmconst How do I use a #define'd constant in an asm statement?
+
+So you tried this:
+
+\code
+asm volatile("sbi 0x18,0x07;");
+\endcode
+
+Which works. When you do the same thing but replace the address of the port
+by its macro name, like this:
+
+\code
+asm volatile("sbi PORTB,0x07;");
+\endcode
+
+you get a compilation error: <tt>"Error: constant value required"</tt>.
+
+\c PORTB is a precompiler definition included in the processor specific file
+included in \c avr/io.h. As you may know, the precompiler will not touch
+strings and <tt>PORTB</tt>, instead of <tt>0x18</tt>, gets passed to the
+assembler. One way to avoid this problem is:
+
+\code
+asm volatile("sbi %0, 0x07" : "I" (PORTB):);
+\endcode
+
+\note \c avr/io.h already provides a sbi() macro definition, which can be used
+in C programs.
+
+<small>Back to \ref faq_index.
+</small>
 */
