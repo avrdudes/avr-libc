@@ -1,34 +1,47 @@
 TODO for avr-libc:
 
- - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
-     [Joerg has patch [1] for this that just needs some love before it's
-     committed.]
- - optimize strlcpy and strlcat
-     [Eric Weddington has submitted a patch [2] with optimized versions.
-	 Needs review/testing before commit.]
- - Fix asin(). Seems to be rather inaccurate for small numbers.
- - Document how to pre-program the EEPROM.
- - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
-   sys/systemcfg.h?
- - Figure out how to remove __ prefix from function args in dox.
- - Doxument the following:
-   * interfaces in:
-     + include/avr/crc16.h  ???
-     + include/avr/delay.h  ???
-     + include/avr/ina90.h  ???
-     + include/avr/timer.h  ???
-     + include/avr/twi.h (move to examples?)
-     + include/avr/wdt.h (move to examples?)
-     + include/avr/parity.h (move to examples?)
-   * the mechanism behind include/avr/io*.h ???
-   * merge chapter 3 from Rich Neswold's doc. Needs some rewriting to
-     update for newer tools. (explanation of start code)
-   * gcrt1.S
- - testsuite [4]
- - finish porting newlib to AVR (may be useful especially for
-   larger devices, and for testing avr-gcc itself...)
+Before 1.0:
+    - Move the following to include/compat and document
+        * include/avr/ina90.h
+        * include/avr/timer.h
+        * include/avr/twi.h
+    - Verify that include/avr/*.h do not reference anything in include/avr/ina90.h
+    - Genericize include/avr/sleep.h
+    - Complete and document include/avr/wdt.h
+    - Move the following to examples and document
+        * include/avr/parity.h
+    - In include/avr/delay.h, add macros to allow specifying delays directly 
+      in microseconds (with MCU clock frequency defined by the user).  With 
+      constant delays, all floating point math would be done at compile time. 
+    - Document:
+        * include/avr/crc16.h
+        * include/avr/parity.h
+        * include/avr/delay.h (also see above)
+        * merge chapter 3 from Rich Neswold's doc. Needs some rewriting to
+          update for newer tools. (explanation of start code)
+        * gcrt1.S
+        * how to pre-program the EEPROM.
+        * how to roll your own crt*.o ???
+        * the mechanism behind include/avr/io*.h [Joerg has patch [5].]
+    - Move out the common register definitions into <avr/io.h>
+      [Joerg has patch [5].]
+
+After 1.0:
+    - Figure out how to remove __ prefix from function args in dox.
+      [Ted has workaround [6].]
+    - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
+      [Joerg has patch [1] for this that just needs some love before it's
+      committed.]
+    - optimize strlcpy and strlcat
+      [Eric Weddington has submitted a patch [2] with optimized versions.
+	  Needs review/testing before commit.]
+    - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
+      sys/systemcfg.h?
+    - testsuite [4]
 
 [1] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000084.html
 [2] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000033.html
 [3] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000147.html
 [4] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-September/000246.html
+[5] http://mail.gnu.org/pipermail/avr-libc-dev/2002-December/000655.html
+[6] [Mail has yet to be archived. See: Re: [avr-libc-dev] Ordered todo on Wed, 11 Dec 2002]
