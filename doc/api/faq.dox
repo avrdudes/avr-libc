@@ -25,7 +25,7 @@
 
 /* $Id$ */
 
-/** \page faq Frequently Asked Questions
+/** \page FAQ Frequently Asked Questions
 
 <b>\subsection faq_index FAQ Index
 </b>
@@ -36,6 +36,7 @@
 -# \ref faq_regbind
 -# \ref faq_startup
 -# \ref faq_use_bv
+-# \ref faq_cplusplus
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -194,6 +195,51 @@ However, using the macro often makes the program better readable.
 	TCCR2 = _BV(COM20)|_BV(CTC2)|_BV(CS20);
 	DDRD = _BV(PD7);
 \endcode
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_cplusplus Can I use C++ on the AVR?
+</b>
+
+Basically yes, C++ is supported (assuming your compiler has been
+configured and compiled to support it, of course).  Source files
+ending in \c .cc, \c .cpp or \c .C will automatically cause the
+compiler frontend to invoke the C++ compiler.  Alternatively, the C++
+compiler could be explicitly called by the name \c avr-c++.
+
+However, there's currently no support for \c libstdc++, the standard
+support library needed for a complete C++ implementation.  This
+imposes a number of restrictions on the C++ programs that can be
+compiled.  Among them are:
+
+- Obviously, none of the C++ related standard functions, classes,
+  and template classes are available.
+
+- The operators \c new and \c delete are not implemented, attempting
+  to use them will cause the linker to complain about undefined
+  external references.  (This could perhaps be fixed.)
+
+- None of the supplied include files are C++ safe, i. e. they need
+  to be wrapped into \code extern "C" { . . . } \endcode
+  (This could certainly be fixed, too.)
+
+- Exceptions are not supported.  Since exceptions are enabled by
+  default in the C++ frontend, they explicitly need to be turned
+  off using \c -fno-exceptions in the compiler options.  Failing
+  this, the linker will complain about an undefined external
+  reference to \c __gxx_personality_sj0.
+
+Constructors and destructors \e are supported though, including global
+ones.
+
+When programming C++ in space- and runtime-sensitive environments like
+microcontrollers, extra care should be taken to avoid unwanted side
+effects of the C++ calling conventions like implied copy constructors
+that could be called upon function invocation etc.  These things could
+easily add up into a considerable amount of time and program memory
+wasted.  Thus, casual inspection of the generated assembler code
+(using the \c -S compiler option) seems to be warranted.
 
 <small>Back to \ref faq_index.
 </small>
