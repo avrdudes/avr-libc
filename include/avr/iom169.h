@@ -234,13 +234,19 @@
 
 /* Timer/Counter1 Output Compare Register A */
 #define OCR1A  _SFR_MEM16(0x88)
+#define OCRA1  OCR1A            /* For compatibility with previous releases. */
 #define OCR1AL _SFR_MEM8(0x88)
+#define OCRA1L OCR1AL           /* For compatibility with previous releases. */
 #define OCR1AH _SFR_MEM8(0x89)
+#define OCRA1H OCR1AH           /* For compatibility with previous releases. */
 
 /* Timer/Counter1 Output Compare Registare B */
 #define OCR1B  _SFR_MEM16(0x8A)
+#define OCRB1  OCR1B            /* For compatibility with previous releases. */
 #define OCR1BL _SFR_MEM8(0x8A)
+#define OCRB1L OCR1BL           /* For compatibility with previous releases. */
 #define OCR1BH _SFR_MEM8(0x8B)
+#define OCRB1H OCR1BH           /* For compatibility with previous releases. */
 
 /* Timer/Counter2 Control Register A */
 #define TCCR2A _SFR_MEM8(0xB0)
