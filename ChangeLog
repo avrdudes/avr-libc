@@ -1,3 +1,7 @@
+2003-07-10  Eric B. Weddington  <eric@ecentral.com>
+
+	* include/avr/boot.h: Fix doxygen.
+
 2003-06-20  Eric B. Weddington  <eric@ecentral.com>
 
 	* include/string.h: Add declarations of new functions from Reiner.

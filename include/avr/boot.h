@@ -74,7 +74,7 @@ important optimization.
 #endif
 #endif
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def BOOTLOADER_SECTION
 
     Used to declare a function or variable to be placed into a
@@ -85,37 +85,37 @@ important optimization.
 #define BOOTLOADER_SECTION    __attribute__ ((section (".bootloader")))
 
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_spm_interrupt_enable()
     Enable the SPM interrupt. */
 
 #define boot_spm_interrupt_enable()     (SPMCR |= (unsigned char)_BV(SPMIE))
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_spm_interrupt_disable()
     Disable the SPM interrupt. */
 
 #define boot_spm_interrupt_disable()    (SPMCR &= (unsigned char)~_BV(SPMIE))
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_is_spm_interrupt()
     Check if the SPM interrupt is enabled. */
 
 #define boot_is_spm_interrupt()         (SPMCR & (unsigned char)_BV(SPMIE))
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_rww_busy()
     Check if the RWW section is busy. */
 
 #define boot_rww_busy()                 (SPMCR & (unsigned char)_BV(RWWSB))
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_spm_busy()
     Check if the SPM instruction is busy. */
 
 #define boot_spm_busy()                 (SPMCR & (unsigned char)_BV(SPMEN))
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_spm_busy_wait()
     Wait while the SPM instruction is busy. */
 
@@ -379,7 +379,7 @@ important optimization.
 })
 
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_page_fill(address, data)
 
     Fill the bootloader temporary page buffer for flash 
@@ -391,7 +391,7 @@ important optimization.
     data bytes in a word format! The LSB of the data is written to the lower 
     address; the MSB of the data is written to the higher address.*/
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_page_erase(address)
 
     Erase the flash page that contains address.
@@ -399,7 +399,7 @@ important optimization.
     \note address is a byte address in flash, not a word address. */
 
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_page_write(address)
 
     Write the bootloader temporary page buffer 
@@ -408,7 +408,7 @@ important optimization.
     \note address is a byte address in flash, not a word address. */
 
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_rww_enable()
 
     Enable the Read-While-Write memory section.
@@ -416,7 +416,7 @@ important optimization.
     */
 
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
     \def boot_lock_bits_set(lock_bits)
 
     Set the bootloader lock bits.
@@ -464,7 +464,7 @@ USHRT_MAX is defined in <limits.h>.
 #endif
 
 
-/** \ingroup avr_bootloader
+/** \ingroup avr_boot
 
     API Usage Example:
 
