@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Juergen Schilling
+/* Copyright (c) 2002, Juergen Schilling <juergen.schilling@honeywell.com>
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -306,31 +306,30 @@
 
 /* Interrupt vectors */
 
-#define SIG_INTERRUPT0		_VECTOR(1)
-#define SIG_INTERRUPT1		_VECTOR(2)
-#define SIG_INTERRUPT2		_VECTOR(3)
-#define SIG_INTERRUPT3     _VECTOR(4)
-#define SIG_OUTPUT_COMPARE2	_VECTOR(5)
-#define SIG_OVERFLOW2		_VECTOR(6)
-#define SIG_INPUT_CAPTURE1	_VECTOR(7)
-#define SIG_OUTPUT_COMPARE1A	_VECTOR(8)
-#define SIG_OUTPUT_COMPARE1B	_VECTOR(9)
-#define SIG_OVERFLOW1		_VECTOR(10)
-#define SIG_OUTPUT_COMPARE0	_VECTOR(11)
-#define SIG_OVERFLOW0		_VECTOR(12)
-#define SIG_SPI			_VECTOR(13)
-#define SIG_UART0_RECV		_VECTOR(14)
-#define SIG_UART0_DATA		_VECTOR(15)
-#define SIG_UART0_TRANS		_VECTOR(16)
-#define SIG_USI_START		_VECTOR(17)
-#define SIG_USI_OVERFLOW   _VECTOR(18)
-#define SIG_COMPERATOR     _VECTOR(19)
-#define SIG_ADC            _VECTOR(20)
-#define SIG_EEPROM_READY	_VECTOR(21)
-#define SIG_SPM_READY		_VECTOR(22)
-#define SIG_LCD            _VECTOR(23)
+#define SIG_INTERRUPT0          _VECTOR(1)
+#define SIG_PIN_CHANGE0         _VECTOR(2)
+#define SIG_PIN_CHANGE1         _VECTOR(3)
+#define SIG_OUTPUT_COMPARE2     _VECTOR(4)
+#define SIG_OVERFLOW2           _VECTOR(5)
+#define SIG_INPUT_CAPTURE1      _VECTOR(6)
+#define SIG_OUTPUT_COMPARE1A    _VECTOR(7)
+#define SIG_OUTPUT_COMPARE1B    _VECTOR(8)
+#define SIG_OVERFLOW1           _VECTOR(9)
+#define SIG_OUTPUT_COMPARE0     _VECTOR(10)
+#define SIG_OVERFLOW0           _VECTOR(11)
+#define SIG_SPI                 _VECTOR(12)
+#define SIG_UART0_RECV          _VECTOR(13)
+#define SIG_UART0_DATA          _VECTOR(14)
+#define SIG_UART0_TRANS         _VECTOR(15)
+#define SIG_USI_START           _VECTOR(16)
+#define SIG_USI_OVERFLOW        _VECTOR(17)
+#define SIG_COMPERATOR          _VECTOR(18)
+#define SIG_ADC                 _VECTOR(19)
+#define SIG_EEPROM_READY        _VECTOR(20)
+#define SIG_SPM_READY           _VECTOR(21)
+#define SIG_LCD                 _VECTOR(22)
 
-#define _VECTORS_SIZE 96
+#define _VECTORS_SIZE 92
 
 /* Bit numbers */
 
@@ -604,15 +603,13 @@
 #define DDG1	1
 #define DDG0	0
 
-/* PINE */
-#define PINE7	7
-#define PINE6	6
-#define PINE5	5
-#define PINE4	4
-#define PINE3	3
-#define PINE2	2
-#define PINE1	1
-#define PINE0	0
+/* PING */
+#define PING5	5
+#define PING4	4
+#define PING3	3
+#define PING2	2
+#define PING1	1
+#define PING0	0
 
 /* TIFR0 */
 #define OCF0A	1
