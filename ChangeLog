@@ -1,5 +1,9 @@
 2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/io.h: Document SPM_PAGESIZE.
+
+2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/iom128.h: Add SPM_PAGESIZE.
 	* include/avr/iom16.h: Add SPM_PAGESIZE.
 	* include/avr/iom161.h: Add SPM_PAGESIZE.

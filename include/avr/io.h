@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002,2003 Marek Michalkiewicz, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -68,7 +68,12 @@
 
     - \b FLASHEND
 
-    A constant describing the last byte address in flash ROM. */
+    A constant describing the last byte address in flash ROM.
+
+    - \b SPM_PAGESIZE
+
+    For devices with bootloader support, the flash pagesize
+    (in bytes) to be used for the \c SPM instruction. */
 
 #ifndef _AVR_IO_H_
 #define _AVR_IO_H_
