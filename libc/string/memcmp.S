@@ -55,6 +55,8 @@
     \warning This function is not -mint8 compatible, although if you only care
     about testing for equality, this function should be safe to use. */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global	_U(memcmp)
 	.type	_U(memcmp), @function
@@ -80,3 +82,4 @@ _U(memcmp):
 .memcmp_end:
 	.size	_U(memcmp), .memcmp_end - _U(memcmp)
 
+#endif /* not DOXYGEN */

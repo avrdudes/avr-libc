@@ -29,6 +29,8 @@
  *	A = sin(A) = cos(A-PI/2)
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -61,4 +63,4 @@ GLOBAL(sin)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

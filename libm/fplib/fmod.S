@@ -28,6 +28,8 @@
  * A = remainder( A/B )
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -64,4 +66,4 @@ GLOBAL(fmod)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

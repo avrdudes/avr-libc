@@ -39,6 +39,8 @@
   ----------------------------------------------------------------------
 */
 
+#if !defined(DOXYGEN)
+
 #include "macros.inc"
 #include "ctoasm.inc"
 
@@ -103,3 +105,4 @@ conv_finished:
 	XJMP	_U(strrev)	; reverse string
 	.endfunc
 
+#endif /* not DOXYGEN */

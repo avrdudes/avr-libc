@@ -43,6 +43,7 @@
     \returns The strlcpy_P() function returns strlen(src). If retval >= siz,
     truncation occurred.  */
 
+#if !defined(DOXYGEN)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -101,3 +102,4 @@ _U(strlcpy_P):
 .strlcpy_P_end:
 	.size	_U(strlcpy_P), .strlcpy_P_end - _U(strlcpy_P)
 
+#endif /* not DOXYGEN */

@@ -58,14 +58,14 @@ extern "C" {
 /*@{*/
 /** Result type for function div(). */
 typedef struct {
-	int quot;
-	int rem;
+	int quot;                   /**< The Quotient. */
+	int rem;                    /**< The Remainder. */
 } div_t;
 
 /** Result type for function ldiv(). */
 typedef struct {
-	long quot;
-	long rem;
+	long quot;                  /**< The Quotient. */
+	long rem;                   /**< The Remainder. */
 } ldiv_t;
 
 /** Comparision function type for qsort(), just for convenience. */
@@ -193,7 +193,7 @@ extern void qsort(void *__base, size_t __nmemb, size_t __size,
     If \c endptr is not NULL, strtol() stores the address of the first
     invalid character in \c *endptr.  If there were no digits at all,
     however, strtol() stores the original value of \c nptr in \c
-    *endptr.  (Thus, if \c *nptr is not \c '\0' but \c **endptr is \c '\0'
+    *endptr.  (Thus, if \c *nptr is not \c '\\0' but \c **endptr is \c '\\0'
     on return, the entire string was valid.)
 
     The strtol() function returns the result of the conversion, unless
@@ -226,7 +226,7 @@ extern long strtol(const char *__nptr, char **__endptr, int __base);
     If \c endptr is not NULL, strtoul() stores the address of the first
     invalid character in \c *endptr.  If there were no digits at all,
     however, strtoul() stores the original value of \c nptr in \c
-    *endptr.  (Thus, if \c *nptr is not \c '\0' but \c **endptr is \c '\0'
+    *endptr.  (Thus, if \c *nptr is not \c '\\0' but \c **endptr is \c '\\0'
     on return, the entire string was valid.)
 
     The strtoul() function return either the result of the conversion

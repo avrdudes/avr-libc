@@ -29,6 +29,8 @@
  *	A = exp(A)
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -140,3 +142,4 @@ GLOBAL(exp)
              DCB 0x7F, 0x00, 0x00, 0x00     ; 1.0
              DCB 0x00
 
+#endif /* not DOXYGEN */

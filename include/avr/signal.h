@@ -79,7 +79,7 @@ void signame (void)
     any prolog or epilog code and will only return from the ISR. Do not
     define a function body as this will define it for you.
     Example:
-    \codeEMPTY_INTERRUPT(SIG_ADC);\endcode */
+    \code EMPTY_INTERRUPT(SIG_ADC);\endcode */
 
 #ifdef __cplusplus
 #define EMPTY_INTERRUPT(signame)                \

@@ -42,6 +42,8 @@
  * sign complement for sections b + c
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -112,3 +114,4 @@ GLOBAL(fp_cosinus)		; input A = [-2PI...2PI[
              DCB 0x7F, 0x00, 0x00, 0x00 ;, 0x00     ; 1.0
              DCB 0x00
 
+#endif /* not DOXYGEN */

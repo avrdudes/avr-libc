@@ -45,6 +45,8 @@
 * The number will be rounded based on precision.
 *----------------------------------------------------------------------------------*/
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 #include "macros.inc"
@@ -227,3 +229,5 @@ _exit:
 
 	ENDFUNC
 ;-----------------------------------------------------------------------------------
+
+#endif /* not DOXYGEN */

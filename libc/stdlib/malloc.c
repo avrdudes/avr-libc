@@ -46,10 +46,14 @@
 
 #endif /* !__AVR__ */
 
+#if !defined(DOXYGEN)
+
 struct freelist {
 	size_t sz;
 	struct freelist *nx;
 };
+
+#endif /* not DOXYGEN */
 
 static char *brkval;
 static struct freelist *flp;

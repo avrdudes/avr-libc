@@ -45,7 +45,7 @@ address, you may wish to post a message to the avr-gcc mailing list. Most of
 the developers of the AVR binutils and gcc ports in addition to the devleopers
 of avr-libc subscribe to the list, so you will usually be able to get your
 problem resolved. You can subscribe to the list at
-http://www.avr1.org/mailman/listinfo/avr-gcc-list/. Before posting to the
+http://www.avr1.org/mailman/listinfo/avr-gcc-list/ . Before posting to the
 list, you might want to try reading the \ref FAQ chapter of this document.
 
 \note This document is a work in progress. As such, it may contain incorrect

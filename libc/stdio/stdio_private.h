@@ -32,6 +32,8 @@
 #include <inttypes.h>
 #include <stdio.h>
 
+#if !defined(DOXYGEN)
+
 struct __file {
 	char	*buf;		/* buffer pointer */
 	unsigned char unget;	/* ungetc() buffer */
@@ -55,6 +57,8 @@ struct __file {
 	int	(*put)(char);	/* function to write one char to device */
 	int	(*get)(void);	/* function to read one char from device */
 };
+
+#endif /* not DOXYGEN */
 
 /* values for PRINTF_LEVEL */
 #define PRINTF_MIN 1

@@ -133,7 +133,7 @@ options.
 
 For instance, to get a feel of the application's size, the \c -h option can be
 used. The output of this option shows how much space is used in each of the
-\sections (the \c .stab and \c .stabstr sections hold the debugging information
+sections (the \c .stab and \c .stabstr sections hold the debugging information
 and won't make it into the ROM file).
 
 An even more useful option is \c -S. This option disassembles the binary file

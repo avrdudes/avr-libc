@@ -52,6 +52,8 @@
     string.  The pointer is the same as that passed in since the operation is
     perform in place. */
 
+#if !defined(DOXYGEN)
+
     .text
     .global _U(strupr)
     .type   _U(strupr), @function
@@ -75,3 +77,5 @@ _U(strupr):
     RET
 .strupr_end:
 	.size _U(strupr), .strupr_end - _U(strupr)
+
+#endif /* not DOXYGEN */

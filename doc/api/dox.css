@@ -44,6 +44,10 @@ DIV.ah {
     margin-bottom: 3px;
     margin-top: 3px
 }
+TD.mdRow {
+    background-color: #ccccbb;
+    font-weight: bold;
+}
 TD.md {
     background-color: #ccccbb;
     font-weight: bold;

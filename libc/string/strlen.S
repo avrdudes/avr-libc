@@ -36,10 +36,12 @@
     \brief Calculate the length of a string.
 
     The strlen() function calculates the length of the string src, not
-    including the terminating `\0' character.
+    including the terminating `\\0' character.
 
     \returns The strlen() function returns the number of characters in
     src.  */
+
+#if !defined(DOXYGEN)
 
 ; 10 words, (14 + strlen(src) * 5) cycles
 
@@ -62,3 +64,4 @@ _U(strlen):
 .strlen_end:
 	.size	_U(strlen), .strlen_end - _U(strlen)
 
+#endif /* not DOXYGEN */

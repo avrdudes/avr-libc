@@ -225,7 +225,7 @@ $ make install
 \endverbatim
 
 To save your self some download time, you can alternatively download only the
-<tt>gcc-core-<version>.tar.bz2</tt> and <tt>gcc-c++-<version>.tar.bz2</tt>
+<tt>gcc-core-\<version\>.tar.bz2</tt> and <tt>gcc-c++-\<version\>.tar.bz2</tt>
 parts of the gcc.  Also, if you don't need C++ support, you only need the core
 part and should only enable the C language support.
 
@@ -382,8 +382,8 @@ $ make install
 \note AVaRice uses the bfd library for accessing various binary file formats.
 You may need to tell the configure script where to find the lib and headers
 for the link to work. This is usually done by invoking the configure script
-like this (Replace <tt><hdr_path></tt> with the path to the \c bfd.h file on
-your system. Replace <tt><lib_path></tt> with the path to \c libbfd.a on your
+like this (Replace <tt>\<hdr_path\></tt> with the path to the \c bfd.h file on
+your system. Replace <tt>\<lib_path\></tt> with the path to \c libbfd.a on your
 system.):
 
 \verbatim

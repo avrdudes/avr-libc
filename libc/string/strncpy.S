@@ -49,6 +49,8 @@
     \returns The strncpy() function returns a pointer to the destination
     string dest.  */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global	_U(strncpy)
 	.type	_U(strncpy), @function
@@ -79,3 +81,4 @@ _U(strncpy):
 .strncpy_end:
 	.size	_U(strncpy), .strncpy_end - _U(strncpy)
 
+#endif /* not DOXYGEN */

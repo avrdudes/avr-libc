@@ -44,6 +44,8 @@
 
 /* $Id$ */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -137,3 +139,5 @@ GLOBAL(asin)
 	DCB 0x00                    ; 0.0
 
  /*--------------------------------------------------------------------------*/
+
+#endif /* not DOXYGEN */

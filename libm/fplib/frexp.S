@@ -35,6 +35,8 @@
  * fract(0) -> 0/0
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -67,4 +69,4 @@ GLOBAL(frexp)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

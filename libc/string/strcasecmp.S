@@ -57,6 +57,8 @@
     or greater than zero if s1 is found, respectively, to be less than, to
     match, or be greater than s2.  */
 
+#if !defined(DOXYGEN)
+
     .text
     .global _U(strcasecmp)
     .type   _U(strcasecmp), @function
@@ -86,3 +88,4 @@ _U(strcasecmp):
 .strcasecmp_end:
     .size   _U(strcasecmp), .strcasecmp_end - _U(strcasecmp)
 
+#endif /* not DOXYGEN */

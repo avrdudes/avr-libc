@@ -29,6 +29,8 @@
  *----------------------------------------------------------------------------------------------
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -366,3 +368,5 @@ GLOBAL(strtod)
 
 	.size strtod, .-strtod
 	ENDFUNC
+
+#endif /* not DOXYGEN */

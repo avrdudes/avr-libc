@@ -51,6 +51,8 @@
 	dest after val, or NULL if val was not found in the first len characters
 	of src.  */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global	_U(memccpy)
 	.type	_U(memccpy), @function
@@ -75,3 +77,4 @@ _U(memccpy):
 .memccpy_end:
 	.size	_U(memccpy), .memccpy_end - _U(memccpy)
 
+#endif /* not DOXYGEN */

@@ -39,6 +39,8 @@
 
     \returns The strlen() function returns the number of characters in src. */
 
+#if !defined(DOXYGEN)
+
 ; 11 words, (14 + strlen_P(src) * 8) cycles
 
 	.text
@@ -59,3 +61,4 @@ _U(strlen_P):
 .strlen_P_end:
 	.size	_U(strlen_P), .strlen_P_end - _U(strlen_P)
 
+#endif /* not DOXYGEN */

@@ -34,6 +34,8 @@
  * the formula tan(x) = 1/tan(PI/2 - x) is used for values > PI/4
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -150,4 +152,4 @@ GLOBAL(tan)
              DCB 0x7C, 0x06, 0x0C, 0x3E
              DCB 0x7F, 0x00, 0x00, 0x00
 
-
+#endif /* not DOXYGEN */

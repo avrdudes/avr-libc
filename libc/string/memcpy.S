@@ -45,6 +45,8 @@
 
     \returns The memcpy() function returns a pointer to dest.  */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global	_U(memcpy)
 	.type	_U(memcpy), @function
@@ -81,3 +83,4 @@ _U(memcpy):
 .memcpy_end:
 	.size	_U(memcpy), .memcpy_end - _U(memcpy)
 
+#endif /* not DOXYGEN */

@@ -51,6 +51,7 @@
  * Q5 = 5.65685  [40 B5 04 F4]
  */
 
+#if !defined(DOXYGEN)
 
 #include "gasava.inc"
 #include "fplib.inc"
@@ -132,4 +133,4 @@ GLOBAL(log)
    DCB 0x81,0xE1,0xD8,0xA1 /* P1 = -7.05769  */
    DCB 0x80,0xDB,0x67,0x82 /* P0 = -3.42819  */
 
-
+#endif /* not DOXYGEN */

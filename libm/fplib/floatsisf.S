@@ -30,6 +30,8 @@
  * A = (float)(unsigned long)A
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -61,3 +63,4 @@ GLOBAL(__floatsisf)              ; - convert signed long to float
 
           ENDFUNC
 
+#endif /* not DOXYGEN */

@@ -49,6 +49,8 @@
     greater than zero if s1 (or the first n bytes thereof) is found,
     respectively, to be less than, to match, or be greater than s2.  */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global	_U(strncmp)
 	.type	_U(strncmp), @function
@@ -74,3 +76,4 @@ _U(strncmp):
 .strncmp_end:
 	.size	_U(strncmp), .strncmp_end - _U(strncmp)
 
+#endif /* not DOXYGEN */

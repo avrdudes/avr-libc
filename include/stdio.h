@@ -87,9 +87,9 @@
     is provided to associate a stream to a device, where the device
     needs to provide a function to send a character, to receive a
     character, or both.  There is no differentiation between "text" and
-    "binary" streams inside avr-libc.  Character \c \n is sent
+    "binary" streams inside avr-libc.  Character \c \\n is sent
     literally down to the device's \c put() function.  If the device
-    requires a carriage return (\c \r) character to be sent before
+    requires a carriage return (\c \\r) character to be sent before
     the linefeed, its \c put() routine must implement this (see
     \ref stdio_note2 "note 2").
 
@@ -201,9 +201,13 @@ struct __file;
 extern "C" {
 #endif
 
+#if !defined(DOXYGEN)
+
 extern struct __file *__iob[];
 
 extern FILE	*fdevopen(int (*__put)(char), int (*__get)(void), int __opts);
+
+#endif /* not DOXYGEN */
 
 /**
    This function closes \c stream, and disallows and further
@@ -364,11 +368,15 @@ extern int	vfprintf(FILE *__stream, const char *__fmt, va_list __ap);
 */
 extern int	fputc(int __c, FILE *__stream);
 
+#if !defined(DOXYGEN)
+
 /* putc() function implementation, required by standard */
 extern int	putc(int __c, FILE *__stream);
 
 /* putchar() function implementation, required by standard */
 extern int	putchar(int __c);
+
+#endif /* not DOXYGEN */
 
 /**
    The macro \c putc used to be a "fast" macro implementation with a
@@ -475,11 +483,15 @@ extern size_t	fwrite(const void *__ptr, size_t __size, size_t __nmemb,
 */
 extern int	fgetc(FILE *__stream);
 
+#if !defined(DOXYGEN)
+
 /* getc() function implementation, required by standard */
 extern int	getc(FILE *__stream);
 
 /* getchar() function implementation, required by standard */
 extern int	getchar(void);
+
+#endif /* not DOXYGEN */
 
 /**
    The macro \c getc used to be a "fast" macro implementation with a

@@ -42,6 +42,8 @@
 
 /* $Id$ */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 #include "macros.inc"
@@ -103,3 +105,4 @@ GLOBAL(atan2)
 
 	ENDFUNC
 
+#endif /* not DOXYGEN */

@@ -42,6 +42,8 @@
     \returns The strcpy_P() function returns a pointer to the destination
     string dest. */
 
+#if !defined(DOXYGEN)
+
 ; 10 words, (17 + strlen_P(src) * 10) cycles
 
 	.text
@@ -60,3 +62,4 @@ _U(strcpy_P):
 .strcpy_P_end:
 	.size	_U(strcpy_P), .strcpy_P_end - _U(strcpy_P)
 
+#endif /* not DOXYGEN */

@@ -33,6 +33,8 @@
  *   pointer to power factor table at Z  ( PFT[] )
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -163,4 +165,4 @@ GLOBAL(fp_powerseries)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

@@ -34,6 +34,8 @@
  * RX  rA3 : rA2:rA1:rA0:rAE
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -161,4 +163,4 @@ GLOBAL(__mulsf3x)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

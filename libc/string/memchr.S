@@ -49,6 +49,8 @@
     \returns The memchr() function returns a pointer to the matching byte or
     NULL if the character does not occur in the given memory area.  */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global	_U(memchr)
 	.type	_U(memchr), @function
@@ -72,3 +74,4 @@ _U(memchr):
 .memchr_end:
 	.size	_U(memchr), .memchr_end - _U(memchr)
 
+#endif /* not DOXYGEN */

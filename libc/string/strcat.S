@@ -38,12 +38,14 @@
     \brief Concatenate two strings.
 
     The strcat() function appends the src string to the dest string
-    overwriting the `\0' character at the end of dest, and then adds a
-    terminating `\0' character.  The strings may not overlap, and the dest
+    overwriting the `\\0' character at the end of dest, and then adds a
+    terminating `\\0' character.  The strings may not overlap, and the dest
     string must have enough space for the result.
 
     \returns The strcat() function returns a pointer to the resulting string
     dest.  */
+
+#if !defined(DOXYGEN)
 
 	.text
 	.global	_U(strcat)
@@ -66,3 +68,4 @@ _U(strcat):
 .strcat_end:
 	.size	_U(strcat), .strcat_end - _U(strcat)
 
+#endif /* not DOXYGEN */

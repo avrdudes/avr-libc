@@ -28,6 +28,8 @@
 
 ;; $Id$
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 ;================================================================================
 ; ctype.s
@@ -335,3 +337,4 @@ _toupper00:
           ENDFUNC
 #endif
 
+#endif /* not DOXYGEN */

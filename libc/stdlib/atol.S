@@ -59,6 +59,8 @@
            except that atol() does not detect errors.
 */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global _U(atol)
 	.type   _U(atol), @function
@@ -142,4 +144,4 @@ _U(atol):
 .atol_end:
 	.size _U(atol), .atol_end - _U(atol)
 
-
+#endif /* not DOXYGEN */

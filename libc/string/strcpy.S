@@ -38,7 +38,7 @@
     \brief Copy a string.
 
     The strcpy() function copies the string pointed to by src (including the
-    terminating `\0' character) to the array pointed to by dest.  The strings
+    terminating `\\0' character) to the array pointed to by dest.  The strings
     may not overlap, and the destination string dest must be large enough to
     receive the copy.
 
@@ -49,6 +49,8 @@
     is, if the programmer was stupid/lazy, and failed to check the size before
     copying) then anything might happen.  Overflowing fixed length strings is
     a favourite cracker technique. */
+
+#if !defined(DOXYGEN)
 
 ; 9 words, (14 + strlen(src) * 7) cycles
 
@@ -68,3 +70,4 @@ _U(strcpy):
 .strcpy_end:
 	.size	_U(strcpy), .strcpy_end - _U(strcpy)
 
+#endif /* not DOXYGEN */

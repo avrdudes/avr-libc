@@ -49,6 +49,8 @@
     \returns The strchr() function returns a pointer to the matched character
     or NULL if the character is not found. */
 
+#if !defined(DOXYGEN)
+
 	.text
 	.global	_U(strchr)
 	.type	_U(strchr), @function
@@ -72,3 +74,4 @@ _U(strchr):
 .strchr_end:
 	.size	_U(strchr), .strchr_end - _U(strchr)
 
+#endif /* not DOXYGEN */

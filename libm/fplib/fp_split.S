@@ -37,6 +37,8 @@
  * split 2 incoming operands , x and y, y first
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -80,4 +82,4 @@ GLOBAL(__fp_split1)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

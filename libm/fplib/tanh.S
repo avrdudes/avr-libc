@@ -36,6 +36,8 @@
  * if exp(x) +- exp(-x) == exp(x) => exp(2x) +- 1 == exp(2x) => exp(2x) >= 2^24 -> x = ln(2^24)/2
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -99,4 +101,4 @@ GLOBAL(tanh)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

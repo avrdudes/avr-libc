@@ -31,6 +31,8 @@
 
  *------------------------------------------------------------------------------*/
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -288,3 +290,4 @@ GLOBAL(dtostre)
 
           ENDFUNC
 
+#endif /* not DOXYGEN */

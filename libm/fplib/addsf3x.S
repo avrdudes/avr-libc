@@ -33,6 +33,8 @@
  * RX  rA3 : rA2:rA1:rA0:rAE resulting sign stored in rT1c.7 (rT1c.7 complemented, if B > A)
  */
 
+#if !defined(DOXYGEN)
+
 #include "gasava.inc"
 #include "fplib.inc"
 
@@ -120,4 +122,4 @@ GLOBAL(__addsf3x)
 
           ENDFUNC
 
-
+#endif /* not DOXYGEN */

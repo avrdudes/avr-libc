@@ -113,7 +113,7 @@ extern "C" {
 #endif
 
 /* If common register defined, define macro. */
-#if defined(__EICR)
+#if defined(__EICR) || defined(DOXYGEN)
 #define enable_external_int(mask)               (__EICR = mask)
 #endif
 

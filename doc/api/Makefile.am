@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2002  Theodore A. Roth
+# Copyright (c) 2002, 2003  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
 CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config \
-                       *.png *.eps fix_png fix_anchors fix_javascript
+                       *.png *.eps fix_png
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        main_page.dox \
@@ -49,8 +49,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        using-avrprog.dox \
                        using-tools.dox \
                        faq.dox \
-                       rel-method.dox \
-                       unjs.pl
+                       rel-method.dox
 
 SUFFIXES             = .pdf .fig .png .eps
 
@@ -93,7 +92,7 @@ IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 ps: demo $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: demo $(TARGET_DOX_HTML) fix_png fix_anchors fix_javascript
+html: demo $(TARGET_DOX_HTML) fix_png
 
 # Make the background color of the png's transparent.
 fix_png: $(wildcard $(USER_MANUAL)/*.png)
@@ -104,30 +103,6 @@ fix_png: $(wildcard $(USER_MANUAL)/*.png)
 		$(PNMTOPNG) -transparent white tmp.pnm > $$png && rm tmp.pnm; \
 	done
 	echo timestamp > fix_png
-
-# doxygen generates bogus anchors unless you use anchor in the \mainpage
-# or \page sections. It is easily fixed though.
-
-FIX_ANCHORS = $(USER_MANUAL)/assembler.html \
-              $(USER_MANUAL)/group__avr__stdio.html
-
-fix_anchors: $(FIX_ANCHORS)
-	cd $(USER_MANUAL) || exit 0; \
-	sed 's/"avr_\(stdio.html#stdio_note\)/"group__avr__\1/g' \
-		group__avr__stdio.html > fix.html; \
-	mv fix.html group__avr__stdio.html; \
-	sed 's/"avr_\(interrupts.html#avr_signames\)"/"group__avr__\1"/g' \
-		assembler.html > fix.html; \
-	mv fix.html assembler.html
-	echo timestamp > fix_anchors
-
-fix_javascript: $(USER_MANUAL)/tree.js $(USER_MANUAL)/tree.html \
-	$(USER_MANUAL)/index.html
-	perl $(top_srcdir)/doc/api/unjs.pl \
-		$(USER_MANUAL)/tree.js \
-		$(USER_MANUAL)/tree.html \
-		$(USER_MANUAL)/index.html
-	echo timestamp > fix_javascript
 
 # Rule for generating PDF output
 pdf: demo $(TARGET_DOX_PDF)

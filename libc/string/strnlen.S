@@ -38,13 +38,15 @@
     \brief Determine the length of a fixed-size string.
 
     The strnlen function returns the number of characters in the string
-    pointed to by src, not including the terminating '\0' character, but at
+    pointed to by src, not including the terminating '\\0' character, but at
     most len. In doing this, strnlen looks only at the first len characters at
     src and never beyond src+len.
 
     \returns The strnlen function returns strlen(src), if that is less than
-    len, or len if there is no '\0' character among the first len
+    len, or len if there is no '\\0' character among the first len
     characters pointed to by src. */
+
+#if !defined(DOXYGEN)
 
 	.text
 	.global	_U(strnlen)
@@ -67,3 +69,4 @@ _U(strnlen):
 .strnlen_end:
 	.size	_U(strnlen), .strnlen_end - _U(strnlen)
 
+#endif /* not DOXYGEN */

@@ -33,6 +33,8 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
+#if !defined(DOXYGEN)
+
 #include "macros.inc"
 
 #define r_hi r25
@@ -73,3 +75,4 @@ _U(__mulhi_const_10):
 #endif
 	ret
 
+#endif /* not DOXYGEN */

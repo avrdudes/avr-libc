@@ -221,9 +221,9 @@ Example:
 	out	  _SFR_IO_ADDR(DDRB), r0
 \endcode
 
-\note The <b><tt>,"ax",@progbits</tt></b> tells the assembler that the section is
-allocatable ("a"), executable ("x") and contains data ("@progbits"). For more
-detailed information on the .section directive, see the gas user manual.
+\note The <b><tt>,"ax",\@progbits</tt></b> tells the assembler that the section
+is allocatable ("a"), executable ("x") and contains data ("@progbits"). For
+more detailed information on the .section directive, see the gas user manual.
 
 <!-- I know, poorly named section. - TRoth -->
 \section c_sections Using Sections in C Code

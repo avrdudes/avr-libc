@@ -1,3 +1,94 @@
+2003-09-30  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/dox.css: Add spec for TD.mdRow.
+
+	* doc/api/Makefile.am:
+	* doc/api/doxygen.config.in:
+	Convert for using doxygen-1.3.4.
+
+	* doc/api/main_page.dox: Add a space after avr-gcc-list URL.
+
+	* doc/api/rel-method.dox:
+	* doc/api/sections.dox:
+	* doc/api/tools-install.dox:
+	* doc/examples/demo/demo.dox:
+	* include/setjmp.h:
+	* include/stdio.h:
+	* include/stdlib.h:
+	* include/avr/interrupt.h:
+	* include/avr/signal.h:
+	* libc/misc/itoa.S:
+	* libc/misc/ltoa.S:
+	* libc/misc/mul10.S:
+	* libc/misc/mulsi10.S:
+	* libc/misc/ultoa.S:
+	* libc/misc/utoa.S:
+	* libc/pmstring/memcpy_P.S:
+	* libc/pmstring/strcasecmp_P.S:
+	* libc/pmstring/strcat_P.S:
+	* libc/pmstring/strcmp_P.S:
+	* libc/pmstring/strcpy_P.S:
+	* libc/pmstring/strlcat_P.S:
+	* libc/pmstring/strlcpy_P.S:
+	* libc/pmstring/strlen_P.S:
+	* libc/pmstring/strncasecmp_P.S:
+	* libc/pmstring/strncat_P.S:
+	* libc/pmstring/strncmp_P.S:
+	* libc/pmstring/strncpy_P.S:
+	* libc/stdio/stdio_private.h:
+	* libc/stdlib/atoi.S:
+	* libc/stdlib/atol.S:
+	* libc/stdlib/ctype.S:
+	* libc/stdlib/malloc.c:
+	* libc/string/memccpy.S:
+	* libc/string/memchr.S:
+	* libc/string/memcmp.S:
+	* libc/string/memcpy.S:
+	* libc/string/memmove.S:
+	* libc/string/memset.S:
+	* libc/string/strcasecmp.S:
+	* libc/string/strcat.S:
+	* libc/string/strchr.S:
+	* libc/string/strcmp.S:
+	* libc/string/strcpy.S:
+	* libc/string/strlcat.S:
+	* libc/string/strlcpy.S:
+	* libc/string/strlen.S:
+	* libc/string/strlwr.S:
+	* libc/string/strncasecmp.S:
+	* libc/string/strncat.S:
+	* libc/string/strncmp.S:
+	* libc/string/strncpy.S:
+	* libc/string/strnlen.S:
+	* libc/string/strrchr.S:
+	* libc/string/strrev.S:
+	* libc/string/strsep.S:
+	* libc/string/strstr.S:
+	* libc/string/strtok_r.S:
+	* libc/string/strupr.S:
+	* libm/fplib/addsf3x.S:
+	* libm/fplib/asin.S:
+	* libm/fplib/atan2.S:
+	* libm/fplib/dtostre.S:
+	* libm/fplib/dtostrf.S:
+	* libm/fplib/exp.S:
+	* libm/fplib/floatsisf.S:
+	* libm/fplib/fmod.S:
+	* libm/fplib/fp_cosinus.S:
+	* libm/fplib/fp_merge.S:
+	* libm/fplib/fp_powerseries.S:
+	* libm/fplib/fp_split.S:
+	* libm/fplib/frexp.S:
+	* libm/fplib/ldexp.S:
+	* libm/fplib/log.S:
+	* libm/fplib/mulsf3x.S:
+	* libm/fplib/sin.S:
+	* libm/fplib/strtod.S:
+	* libm/fplib/tan.S:
+	* libm/fplib/tanh.S:
+	Quell doxygen warnings.
+
 2003-09-22  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

@@ -43,8 +43,12 @@ extern "C" {
 	24 = total size
  */
 
+#if !defined(DOXYGEN)
+
 #define _JBLEN 24
 typedef struct _jmp_buf { unsigned char _jb[_JBLEN + 1]; } jmp_buf[1];
+
+#endif /* not DOXYGEN */
 
 /** \defgroup setjmp Setjmp and Longjmp
 

@@ -39,6 +39,8 @@
   ----------------------------------------------------------------------
 */
 
+#if !defined(DOXYGEN)
+
 #include "macros.inc"
 #include "ctoasm.inc"
 
@@ -91,4 +93,5 @@ terminate:
 
 	.endfunc
 
+#endif /* not DOXYGEN */
 

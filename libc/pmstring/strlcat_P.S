@@ -47,6 +47,7 @@
     \returns The strlcat_P() function returns strlen(src) + MIN(siz,
     strlen(initial dst)).  If retval >= siz, truncation occurred.  */
 
+#if !defined(DOXYGEN)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -133,3 +134,4 @@ _U(strlcat_P):
 .strlcat_P_end:
 .size	_U(strlcat_P), .strlcat_P_end - _U(strlcat)
 
+#endif /* not DOXYGEN */
