@@ -134,14 +134,10 @@ AC_SUBST(avrlib_basedir)
 # Determine the host, build, and target systems
 AC_CANONICAL_SYSTEM
 
-dnl maybe the release number sould be changed to major.minor.bugfix
-dnl (e.g.: 1.0.0) to be able to tell the users of the avr-libc if
-dnl it is compatible to their current version or not.
-dnl
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20030826)
+AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20030829)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)

@@ -1,3 +1,9 @@
+2003-08-29  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	Remove obsolete comment about version numbering.
+	* doc/api/Makefile.am: Combine multiple definitions of SUFFIXES var. 
+
 2003-08-26  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
