@@ -1,5 +1,10 @@
 2003-01-14  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/iom169.h: Fix typo (TCNT9 -> TCNT0).
+	* include/avr/iom64.h: Fix typo (For TCCR0, CS1n -> CS0n).
+
+2003-01-14  Theodore A. Roth  <troth@openavr.org>
+
 	* ChangeLog: Moved 2002 entries to ChangeLog-2002.
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* libm/fplib/Makefile.am (EXTRA_DIST): Remove readme.atan2.

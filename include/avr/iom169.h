@@ -120,7 +120,7 @@
 #define TCCR0A _SFR_IO8(0x24)
 
 /* Timer/Counter Register */
-#define TCNT9  _SFR_IO8(0x26)
+#define TCNT0  _SFR_IO8(0x26)
 
 /* Output Compare Register A */
 #define OCR0A  _SFR_IO8(0x27)
