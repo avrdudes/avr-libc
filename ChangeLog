@@ -1,5 +1,13 @@
 2004-11-02  Eric B. Weddington  <ericw@evcohs.com>
 
+	* include/avr/iom32.h: Correct license with permission from
+	Steinar Haugen.
+	* include/avr/iom64.h: Ditto.
+	* include/avr/iom8515.h: Ditto.
+	* include/avr/iom8535.h: Ditto.
+
+2004-11-02  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/avr/iotn2313.h: Correct license with permission from
 	Bob Paddock.
 	* include/avr/wdt.h: Correct license with permission from Marek
