@@ -1,4 +1,4 @@
-*** Changes since avr-libc-1.2.1:
+*** Changes since avr-libc-1.2.2:
 
 * Bugs fixed:
 
@@ -9,7 +9,7 @@
   [#11898] Change optimisation level for building printf libraries to -Os.
   
   
-*** Changes since avr-libc-1.2.0:
+*** Changes in avr-libc-1.2.1:
 
 * Bugs fixed:
 

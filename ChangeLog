@@ -1,3 +1,7 @@
+2005-02-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Released avr-libc-1.2.2.
+
 2005-02-08  Eric B. Weddington  <ericw@evcohs.com>
 
     * libc/stdio/Makefile.am: Change optimisation level for building
