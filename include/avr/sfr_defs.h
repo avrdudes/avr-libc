@@ -118,8 +118,10 @@
 
 #ifndef __ASSEMBLER__
 /* These only work in C programs.  */
-#define _MMIO_BYTE(mem_addr) (*(volatile unsigned char *)(mem_addr))
-#define _MMIO_WORD(mem_addr) (*(volatile unsigned int *)(mem_addr))
+#include <inttypes.h>
+
+#define _MMIO_BYTE(mem_addr) (*(volatile uint8_t *)(mem_addr))
+#define _MMIO_WORD(mem_addr) (*(volatile uint16_t *)(mem_addr))
 #endif
 
 #if _SFR_ASM_COMPAT
@@ -157,7 +159,7 @@
 #define _SFR_IO8(io_addr) _MMIO_BYTE((io_addr) + 0x20)
 #define _SFR_IO16(io_addr) _MMIO_WORD((io_addr) + 0x20)
 
-#define _SFR_MEM_ADDR(sfr) ((unsigned int) &(sfr))
+#define _SFR_MEM_ADDR(sfr) ((uint16_t) &(sfr))
 #define _SFR_IO_ADDR(sfr) (_SFR_MEM_ADDR(sfr) - 0x20)
 #define _SFR_IO_REG_P(sfr) (_SFR_MEM_ADDR(sfr) < 0x60)
 

@@ -1,3 +1,9 @@
+2003-10-08  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/sfr_defs.h: Use inttypes.h defined types to allow use
+	with -mint8.
+	[Submitted by Tomas Vanek <vanekt@fbl.cz>]
+
 2003-09-30  Theodore A. Roth  <troth@openavr.org>
 
 	* NEWS: Add note about doxygen upgrade.
