@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2003, 2004  Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -65,7 +65,7 @@ _crc16_update(uint16_t __crc, uint8_t __data)
 	uint8_t __tmp;
 	uint16_t __ret;
 
-	__asm__ (
+	__asm__ __volatile__ (
 		"eor %A0,%2" "\n\t"
 		"mov %1,%A0" "\n\t"
 		"swap %1" "\n\t"
@@ -133,7 +133,7 @@ _crc_xmodem_update(uint16_t __crc, uint8_t __data)
     uint8_t __tmp2;             /* %2 */
                                 /* %3  __data */
 
-    __asm__ (
+    __asm__ __volatile__ (
         "eor    %B0,%3"          "\n\t" /* crc.hi ^ data */
         "mov    __tmp_reg__,%B0" "\n\t"
         "swap   __tmp_reg__"     "\n\t" /* swap(crc.hi ^ data) */
@@ -204,7 +204,7 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
 {
     uint16_t __ret;
 
-    __asm__ (
+    __asm__ __volatile__ (
         "eor    %A0,%1"          "\n\t"
 
         "mov    __tmp_reg__,%A0" "\n\t"

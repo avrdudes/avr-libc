@@ -20,6 +20,7 @@
   [#10420] sscanf(), If there is a decimal number followed by the
            character '_' in the buffer, you can't get the the number.
   [#10423] atof is not declared in stdlib.h
+  [#10450] missing __volatile__ in CRC functions core
 
 * Other changes:
 
