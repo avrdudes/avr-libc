@@ -1,3 +1,7 @@
+2003-08-11  Eric B. Weddington  <eric@ecentral.com>
+
+	* include/avr/boot.h: Fix bug with not using generic SPM Control Register.
+
 2003-08-11  Theodore A. Roth  <troth@openavr.org>
 
 	* devtools/cr_check.py: New file.

@@ -45,7 +45,7 @@
 /*
 TODO:
 From email with Marek:
-On smaller devices (all except ATmega64/128), SPMCR is in the I/O
+On smaller devices (all except ATmega64/128), __SPM_REG is in the I/O
 space, accessible with the shorter "in" and "out" instructions -
 since the boot loader has a limited size, this could be an
 important optimization.
@@ -104,31 +104,31 @@ important optimization.
     \def boot_spm_interrupt_enable()
     Enable the SPM interrupt. */
 
-#define boot_spm_interrupt_enable()     (SPMCR |= (unsigned char)_BV(SPMIE))
+#define boot_spm_interrupt_enable()     (__SPM_REG |= (unsigned char)_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_spm_interrupt_disable()
     Disable the SPM interrupt. */
 
-#define boot_spm_interrupt_disable()    (SPMCR &= (unsigned char)~_BV(SPMIE))
+#define boot_spm_interrupt_disable()    (__SPM_REG &= (unsigned char)~_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_is_spm_interrupt()
     Check if the SPM interrupt is enabled. */
 
-#define boot_is_spm_interrupt()         (SPMCR & (unsigned char)_BV(SPMIE))
+#define boot_is_spm_interrupt()         (__SPM_REG & (unsigned char)_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_rww_busy()
     Check if the RWW section is busy. */
 
-#define boot_rww_busy()                 (SPMCR & (unsigned char)_BV(__COMMON_ASB))
+#define boot_rww_busy()                 (__SPM_REG & (unsigned char)_BV(__COMMON_ASB))
 
 /** \ingroup avr_boot
     \def boot_spm_busy()
     Check if the SPM instruction is busy. */
 
-#define boot_spm_busy()                 (SPMCR & (unsigned char)_BV(SPMEN))
+#define boot_spm_busy()                 (__SPM_REG & (unsigned char)_BV(SPMEN))
 
 /** \ingroup avr_boot
     \def boot_spm_busy_wait()
