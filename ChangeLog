@@ -1,3 +1,8 @@
+2002-10-27  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc*.fig: Improve pictures.
+	* doc/api/malloc.dox: fix LaTeX pic widths.
+
 2002-10-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/malloc.dox: Include some pictures.
