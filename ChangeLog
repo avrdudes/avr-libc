@@ -2,6 +2,7 @@
   (Thanks to Steinar Haugen <xoplanet@msn.com> for contributing the iom32.h,
   iom64.h, iom8515.h and iom8535.h files.)
 
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/iom128.h: Reformat.
 	* include/avr/iom32.h: New file.
 	* include/avr/iom64.h: New file.
