@@ -157,7 +157,7 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					prec += c - '0';
 					if (prec < 0)
 						prec = SCHAR_MAX;
-					if (!(flags & FLPREC)) 
+					if (!(flags & FLPREC))
 						width = prec;
 				}
 #endif
@@ -282,7 +282,7 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					c -= 'G' - 'E';
 					goto dostyle_e;
 				}
-#endif /* PRINTF_LEVEL >= PRINTF_FLT */				
+#endif /* PRINTF_LEVEL >= PRINTF_FLT */
 			} else {
 #if PRINTF_LEVEL > PRINTF_MIN
 				if ((flags & FLPREC) && prec == 0)
