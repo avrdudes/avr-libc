@@ -1,5 +1,9 @@
 2004-04-27  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in: Fix typo when adding crtm168.o to AVR_CRT_MEGA.
+
+2004-04-27  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/iocan128.h (RAMPZ): Define.
 
