@@ -1,3 +1,7 @@
+2004-12-30  Theodore A. Roth  <troth@openavr.org>
+
+	* libc/stdlib/Makefile.am (lib_a_c_sources): Add stdlib_private.h.
+
 2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
 
     Apply patch #2155:
