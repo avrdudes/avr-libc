@@ -1,5 +1,10 @@
 2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/inline_asm.dox: bump nesting level by one to
+		make TOC display look more natural in PDF.
+
+2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.in: Make HTML/PS/PDF generation configurable.
 	* doc/api/Makefile.am: Make documentation generation and
 		installation configurable, more cleanup, make PDF
