@@ -185,6 +185,12 @@ static inline unsigned char __elpm_inline(unsigned long __addr)
 }
 #endif
 
+/** \ingroup avr_pgmspace
+
+    Write a byte to program space using the \c lpm instruction.
+
+    \note The \c lpm instruction is not available for some AVR devices. */
+
 #if 0
 #define PRG_RDB(addr) __lpm_inline((unsigned short)(addr))
 #else
@@ -221,7 +227,7 @@ extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern char *strncpy_P(char *, PGM_P, size_t);
 
 #if 0  /* not implemented yet */
-extern char *strncat(char *, PGM_P, size_t);
+extern char *strncat_P(char *, PGM_P, size_t);
 extern int printf_P(PGM_P, ...);
 extern int puts_P(PGM_P);
 extern int scanf_P(PGM_P, ...);
