@@ -33,7 +33,7 @@
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
 CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config \
-                       *.png *.eps
+                       *.png *.eps fix_png fix_anchors
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        main_page.dox \
@@ -95,17 +95,22 @@ ps: demo $(TARGET_DOX_PS)
 html: demo $(TARGET_DOX_HTML) fix_png fix_anchors
 
 # Make the background color of the png's transparent.
-fix_png:
+fix_png: $(wildcard $(USER_MANUAL)/*.png)
 	cd $(USER_MANUAL) || exit 0; \
 	for png in *.png; do \
 		echo "Fixing transparency for $$png"; \
 		$(PNGTOPNM) $$png > tmp.pnm; \
 		$(PNMTOPNG) -transparent white tmp.pnm > $$png && rm tmp.pnm; \
 	done
+	echo timestamp > fix_png
 
-# doxygen generates bogus anchors if you unless you use anchor in the \mainpage
+# doxygen generates bogus anchors unless you use anchor in the \mainpage
 # or \page sections. It is easily fixed though.
-fix_anchors:
+
+FIX_ANCHORS = $(USER_MANUAL)/assembler.html \
+              $(USER_MANUAL)/group__avr__stdio.html
+
+fix_anchors: $(FIX_ANCHORS)
 	cd $(USER_MANUAL) || exit 0; \
 	sed 's/"avr_\(stdio.html#stdio_note\)/"group__avr__\1/g' \
 		group__avr__stdio.html > fix.html; \
@@ -113,6 +118,7 @@ fix_anchors:
 	sed 's/"avr_\(interrupts.html#avr_signames\)"/"group__avr__\1"/g' \
 		assembler.html > fix.html; \
 	mv fix.html assembler.html
+	echo timestamp > fix_anchors
 
 # Rule for generating PDF output
 pdf: demo $(TARGET_DOX_PDF)
@@ -243,5 +249,4 @@ install-dox-ps: dox-ps
 
 
 .PHONY: html latex ps pdf dox dox-pdf install-pdf install-html install-ps \
-	install-dox-html install-dox-ps install-dox-pdf fix_png
-
+	install-dox-html install-dox-ps install-dox-pdf

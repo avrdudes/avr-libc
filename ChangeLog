@@ -1,3 +1,9 @@
+2002-12-06  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am: Generate a time-stamp file after fixing png's
+	and anchors to inhibit unnecessary fixes. [Bug #1808]
+
 2002-12-03  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
