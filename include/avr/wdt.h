@@ -77,6 +77,12 @@ Contributers: Eric B. Weddington
 #define _WD_PS3_MASK        0x00
 #endif
 
+#if defined(WDTOE)
+#define _WD_CHANGE_BIT      WDTOE
+#else
+#define _WD_CHANGE_BIT      WDCE
+#endif
+
 
 #if defined (__AVR_ATmega169__) || defined(__AVR_AT90CAN128__) \
 || defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
@@ -92,7 +98,7 @@ Contributers: Eric B. Weddington
         "sts %0,%2" \
         : /* no outputs */  \
         : "M" (_SFR_MEM_ADDR(_WD_CONTROL_REG)), \
-        "r" (_BV(WDCE) | _BV(WDE)), \
+        "r" (_BV(_WD_CHANGE_BIT) | _BV(WDE)), \
         "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
             _BV(WDE) | (value & 0x07)) ) \
         : "r0"  \
@@ -110,7 +116,7 @@ Contributers: Eric B. Weddington
         "out %0,%2" \
         : /* no outputs */  \
         : "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)), \
-        "r" (_BV(WDCE) | _BV(WDE)),   \
+        "r" (_BV(_WD_CHANGE_BIT) | _BV(WDE)),   \
         "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
             _BV(WDE) | (value & 0x07)) ) \
         : "r0"  \
