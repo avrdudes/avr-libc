@@ -81,10 +81,15 @@ GLOBAL(dtostrf)
 	push	YL		; save frame pointer
 	push	p_str_hi
 	push	p_str_lo	; save &string
+#if __AVR_ENHANCED__
+	movw	YL, p_str_lo	; Y points to string
+	movw	r16, p_num_hi_lo
+#else
 	mov	YH, p_str_hi
 	mov	YL, p_str_lo	; Y points to string
 	mov	r17, p_num_hi_hi
 	mov	r16, p_num_hi_lo
+#endif
 	add	r16, r16
 	adc	r17, r17
 	cpi	r17, 0xff	; NAN ?
@@ -115,10 +120,15 @@ GLOBAL(dtostrf)
 	clr	rA3		; A = precision
 	XCALL   _U(__floatsisf) ; now A = (float)precision
 	ori	rA3, 0x80	; now A = (float) -precision
+#if __AVR_ENHANCED__
+	movw	rB2, rA2
+	movw	rB0, rA0
+#else
 	mov	rB3, rA3
 	mov	rB2, rA2
 	mov	rB1, rA1
 	mov	rB0, rA0	; now B = (float) -precision
+#endif
 	ldi	rA3, 0x41
 	ldi	rA2, 0x20
 	clr	rA1
@@ -194,10 +204,15 @@ GLOBAL(dtostrf)
 				; Need // in next line to stop doxygen
 				; from thinking strlen is a variable.
 1:				; // strlen = Y - Z
+#if __AVR_ENHANCED__
+	movw	rA2, YL
+	movw	rA0, ZL
+#else
 	mov	rA3, YH
 	mov	rA2, YL
 	mov	rA1, ZH
 	mov	rA0, ZL
+#endif
 	sub	rA2, rA0
 	sbc	rA3, rA1	; rA2 = strlen
 	mov	r_count, p_width
