@@ -179,7 +179,7 @@ if test -z "${with_multisubdir}"; then
                 crtc8534.o'
   AVR_CRT_TINY='crttn11.o crttn12.o crttn15.o crttn28.o crttn22.o # crttn26.o'
 
-  dnl We only want to build the docs for the default caes
+  dnl We only want to build the docs for the default case
   DOCSDIR='doc'
 else
   case $with_multisubdir in
