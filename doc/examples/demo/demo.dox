@@ -213,14 +213,14 @@ The ROM contents can be pulled from our project's binary and put into the file
 demo.hex using the following command:
 
 \verbatim
-    $ avr-objcopy -j .text -O ihex demo.elf demo.hex
+    $ avr-objcopy -j .text -j .data -O ihex demo.elf demo.hex
 \endverbatim
 
 The resulting \c demo.hex file contains:
 
 \verbinclude demo.hex
 
-The \c -j option indicates that we want the information from the \c .text
+The \c -j option indicates that we want the information from the \c .text and \c .data
 segment extracted. If we specify the EEPROM segment, we can generate a \c .hex
 file that can be used to program the EEPROM:
 

@@ -1,3 +1,8 @@
+2002-11-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/Makefile: Use -j .text -j .data for avr-objcopy.
+	* doc/examples/demo/demo.dox: Ditto.
+
 2002-11-16  Theodore A. Roth  <troth@openavr.org>
 
 	* doc/api/faq.dox: Add \code and \endcode around example. D'oh!

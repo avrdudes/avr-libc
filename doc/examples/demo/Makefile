@@ -41,13 +41,13 @@ bin:  $(PRG).bin
 srec: $(PRG).srec
 
 %.hex: %.elf
-	$(OBJCOPY) -j .text -O ihex $< $@
+	$(OBJCOPY) -j .text -j .data -O ihex $< $@
 
 %.srec: %.elf
-	$(OBJCOPY) -j .text -O srec $< $@
+	$(OBJCOPY) -j .text -j .data -O srec $< $@
 
 %.bin: %.elf
-	$(OBJCOPY) -j .text -O binary $< $@
+	$(OBJCOPY) -j .text -j .data -O binary $< $@
 
 # Rules for building the .eeprom rom images
 
