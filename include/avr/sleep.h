@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Theodore A. Roth
+/* Copyright (c) 2002,2004 Theodore A. Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -128,9 +128,13 @@
 extern void set_sleep_mode (uint8_t mode);
 #else
 # if defined (SMCR)
-#  define set_sleep_mode(mode) (SMCR = ((SMCR & ~_SLEEP_MODE_MASK) | (mode)))
+#  define set_sleep_mode(mode) do { \
+	(SMCR = ((SMCR & ~_SLEEP_MODE_MASK) | (mode))) \
+} while (0)
 # else
-#  define set_sleep_mode(mode) (MCUCR = ((MCUCR & ~_SLEEP_MODE_MASK) | (mode)))
+#  define set_sleep_mode(mode) do { \
+	(MCUCR = ((MCUCR & ~_SLEEP_MODE_MASK) | (mode))) \
+} while (0)
 # endif
 #endif
 
@@ -144,11 +148,11 @@ extern void set_sleep_mode (uint8_t mode);
 extern void sleep_mode (void);
 #else
 #define sleep_mode() \
-{                                              \
+do {                                           \
     MCUCR |= _BV(SE);                          \
     __asm__ __volatile__ ("sleep" "\n\t" :: ); \
     MCUCR &= ~_BV(SE);                         \
-}
+} while (0)
 #endif
 
 /*@}*/
