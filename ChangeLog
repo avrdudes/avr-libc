@@ -1,5 +1,10 @@
 2003-09-22  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/TODO: Update to denote 1.0 release.
+
+2003-09-22  Theodore A. Roth  <troth@openavr.org>
+
 	* doc/api/rel-method.dox (Making a release): Fix some typos.
 
 2003-09-21  Theodore A. Roth  <troth@openavr.org>

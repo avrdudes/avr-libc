@@ -1,6 +1,6 @@
 TODO for avr-libc:
 
-Before 1.0:
+Before 1.2:
     - Move the following to include/compat and document
         * include/avr/ina90.h
         * include/avr/timer.h
@@ -22,7 +22,6 @@ Before 1.0:
         * how to roll your own crt*.o
     - Document Windows Build guide.
 
-After 1.0:
     - Figure out how to remove __ prefix from function args in dox.
       [Ted has workaround [5].]
     - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
