@@ -1,5 +1,9 @@
 2003-08-11  Theodore A. Roth  <troth@openavr.org>
 
+	* devtools/cr_check.py: New file.
+
+2003-08-11  Theodore A. Roth  <troth@openavr.org>
+
 	* include/string.h: Remove extra carriage returns.
 	* include/avr/interrupt.h: Remove extra carriage returns.
 	* include/avr/pgmspace.h: Remove extra carriage returns.
