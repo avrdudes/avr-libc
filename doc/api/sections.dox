@@ -123,8 +123,8 @@ the start of main(). These all are subparts of the
 The purpose of these sections is to allow for more specific placement of code
 within your program.
 
-\note Sometimes it is convenient to think of the .initN and .finiN sections as
-functions, but in reality they are just symbolic names the tell the linker
+\note Sometimes, it is convenient to think of the .initN and .finiN sections as
+functions, but in reality they are just symbolic names which tell the linker
 where to stick a chunk of code which is \em not a function. Notice that the
 examples for \ref asm_sections "asm" and \ref c_sections "C" can not be called
 as functions and should not be jumped into.
