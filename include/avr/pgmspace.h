@@ -187,7 +187,7 @@ static inline unsigned char __elpm_inline(unsigned long __addr)
 
 /** \ingroup avr_pgmspace
 
-    Write a byte to program space using the \c lpm instruction.
+    Read a byte from program space using the \c lpm instruction.
 
     \note The \c lpm instruction is not available for some AVR devices. */
 
