@@ -146,6 +146,7 @@ install-data-local:	install-toollibLIBRARIES
 	  for i in $(srcdir)/include/avr/*.h; do \
 	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/avr/`basename $$i`; \
 	  done; \
+	  $(INSTALL_DATA) version.h $(DESTDIR)$(tooldir)/include/avr/version.h; \
 	else true; fi
 
 # Multilib support.

@@ -138,7 +138,11 @@ AC_CANONICAL_SYSTEM
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20040521)
+AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20040604)
+AM_CONFIG_HEADER(version.h:version-h.in)
+
+AC_DEFINE(__AVRLIBC__,1)
+AC_DEFINE(__AVRLIBC_MINOR__,1)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)

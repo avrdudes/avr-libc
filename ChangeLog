@@ -1,3 +1,13 @@
+2004-06-04  Theodore A. Roth  <troth@openavr.org>
+
+	* Makefile.am (install-data-local): Install version.h file.
+	* acconfig.h: New file.
+	* config-ml.in: When adding the Multi.tem fragment to the Makefile,
+	don't use a variable or the fragment will be added to the version.h
+	file instead of the Makefile.
+	* configure.in: Generate the version.h config header file.
+	* reconf: Run autoheader.
+
 2004-05-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/demo.c: Update for ATmega8
