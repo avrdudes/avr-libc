@@ -9,7 +9,6 @@ TODO for avr-libc:
      [Eric Weddington has submitted a patch [2] with optimized versions.
 	 Needs review/testing before commit.]
  - Document how to pre-program the EEPROM.
- - Document .section directives.
  - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
    sys/systemcfg.h?, stdio.h?
 

@@ -146,18 +146,8 @@ devices like ATmega161 because of errata), and add
 <tt>-Wl,-Tdata,0x801100</tt> to start the data section above the
 stack.
 
-There's also a way to modify the startup sequence from within C:
-
-\code
-void my_init (void) __attribute__ ((naked)) \
-    __attribute__ ((section (".init1")));
-
-void
-my_init (void)
-{
-      /* your init code here; C or inline asm */
-}
-\endcode
+For more information on using sections, including how to use them from C code,
+see \ref mem_sections.
 
 <small>Back to \ref faq_index.
 </small>

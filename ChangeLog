@@ -1,5 +1,13 @@
 2002-08-30  Theodore A. Roth  <troth@verinet.com>
 
+	* doc/TODO: Updated.
+	* doc/api/faq.dox: Remove C example for .init1; refer to sections dox.
+	* doc/api/sections.dox: Remove faq_startup ref.
+		Add note about -Wl,-Tdata,<addr>.
+		Add explanation of ',"ax",@progbits'.
+
+2002-08-30  Theodore A. Roth  <troth@verinet.com>
+
 	* configure.in(AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/Makefile.am: Add sections.dox.
 	* doc/api/sections.dox: New file.

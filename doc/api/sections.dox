@@ -27,8 +27,6 @@
 
 /** \page mem_sections Memory Sections
 
-See \ref faq_startup for a simple intro to this for now.
-
 \remarks Need to list all the sections which are available to the avr.
 
 \par Weak Bindings
@@ -58,6 +56,15 @@ char err_str[] = "Your program has died a horrible death!";
 
 struct point pt = { 1, 1 };
 \endcode
+
+It is possible to tell the linker the SRAM address of the beginning of the
+.data section. This is accomplished by adding
+<b><tt>-Wl,-Tdata,<em>addr</em></tt></b> to the \c avr-gcc command used to the
+link your program. Not that <em><tt>addr</tt></em> must be offset by adding
+0x800000 the to real SRAM address so that the linker knows that the address is
+in the SRAM memory space. Thus, if you want the .data section to start at
+0x1100, pass 0x801100 at the address to the linker.
+[offset \ref harvard_arch "explained"]
 
 \subsection sec_dot_bss The .bss Section
 
@@ -94,6 +101,7 @@ wish to place the .noinit section at SRAM address 0x2000:
 	$ avr-gcc ... -Wl,--section-start=.noinit=0x802000 ...
 \endverbatim
 
+\anchor harvard_arch
 \note Because of the Harvard architecture of the AVR devices, you must
 manually add 0x800000 to the address you pass to the linker as the start of
 the section.  Otherwise, the linker thinks you want to put the .noinit section
@@ -209,7 +217,9 @@ Example:
 	out	  _SFR_IO_ADDR(DDRB), r0
 \endcode
 
-\remarks What is <tt>,"ax",@progbits</tt> part doing???
+\note The <b><tt>,"ax",@progbits</tt></b> tells the assembler that the section is
+allocatable ("a"), executable ("x") and contains data ("@progbits"). For more
+detailed information on the .section directive, see the gas user manual.
 
 <!-- I know, poorly named section. - TRoth -->
 \subsection c_sections Using Sections in C Code
