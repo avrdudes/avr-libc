@@ -185,6 +185,7 @@
 
 /* The eeprom API won't work with this header. :-( */
 
+#undef EECR
 #define EECR    _SFR_IO8 (0x1F)
 /* EECT - EEPROM Control Register */
 #define EEPM1   5
@@ -194,9 +195,13 @@
 #define EEPE    1
 #define EERE    0
 
+#undef EEDR
+#undef EEARL
 #define EEDR    _SFR_IO8 (0x20)
 #define EEARL   _SFR_IO8 (0x21)
 
+#undef EEAR
+#undef EEARH
 #if defined (__AVR_ATmega88__) || defined (__AVR_ATmega168__)
 #  define EEAR  _SFR_IO16 (0x21)
 #  define EEARH _SFR_IO8 (0x22)

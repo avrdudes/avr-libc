@@ -1,5 +1,11 @@
 2004-04-23  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/iomx8.h: Undefine EECR, EEDR, EEAR, EEARL, and EEARH
+	before defining them to avoid conflict with predfined values in
+	io.h.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/iocan128.h (UDR0): Define.
 
 2004-04-23  Theodore A. Roth  <troth@openavr.org>
