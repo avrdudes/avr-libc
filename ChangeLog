@@ -1,3 +1,8 @@
+2005-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/realloc.c: fix bug #11868.
+	Fix submitted by Peter Fuhrmann <tixiv at gmx dot net>
+
 2005-02-07  Eric B. Weddington  <ericw@evcohs.com>
 
     * doc/api/main_page.dox: Remove the untested label on devices list.

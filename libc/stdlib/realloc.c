@@ -51,11 +51,14 @@ realloc(void *ptr, size_t len)
 	if (ptr == 0)
 		return malloc(len);
 
-	cp = (char *)ptr;
-	cp -= sizeof(size_t);
-	fp1 = (struct __freelist *)cp;
+	cp1 = (char *)ptr;
+	cp1 -= sizeof(size_t);
+	fp1 = (struct __freelist *)cp1;
 
 	cp = (char *)ptr + len; /* new next pointer */
+	if (cp < cp1)
+		/* Pointer wrapped across top of RAM, fail. */
+		return 0;
 	fp2 = (struct __freelist *)cp;
 
 	/*
@@ -127,6 +130,7 @@ realloc(void *ptr, size_t len)
 	 */
 	if (__brkval == (char *)ptr + fp1->sz && len > s) {
 		cp1 = __malloc_heap_end;
+		cp = (char *)ptr + len;
 		if (cp1 == 0)
 			cp1 = STACK_POINTER() - __malloc_margin;
 		if (cp < cp1) {
