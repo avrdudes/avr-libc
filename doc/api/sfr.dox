@@ -92,4 +92,8 @@ compiler strictly generates code following the memory-mapped paradigm,
 while with optimization turned on, code is generated using the (faster
 and smaller) \c in/out MCU instructions.
 
+Note that special care must be taken when accessing some of the 16-bit
+timer IO registers where access from both the main program and within
+an interrupt context can happen.  See \ref faq_16bitio.
+
 */

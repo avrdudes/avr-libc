@@ -37,6 +37,7 @@
 -# \ref faq_startup
 -# \ref faq_use_bv
 -# \ref faq_cplusplus
+-# \ref faq_16bitio
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -240,6 +241,54 @@ that could be called upon function invocation etc.  These things could
 easily add up into a considerable amount of time and program memory
 wasted.  Thus, casual inspection of the generated assembler code
 (using the \c -S compiler option) seems to be warranted.
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
+</b>
+
+Some of the timer-related 16-bit IO registers use a temporary register
+(called TEMP in the Atmel datasheet) to guarantee an atomic access to
+the register despite the fact that two separate 8-bit IO transfers are
+required to actually move the data.  Typically, this includes access
+to the current timer/counter value register (<tt>TCNT</tt><em>n</em>),
+the input capture register (<tt>ICR</tt><em>n</em>), and write access
+to the output compare registers (<tt>OCR</tt><em>nM</em>).  Refer to
+the actual datasheet for each device's set of registers that involves
+the TEMP register.
+
+When accessing one of the registers that use TEMP from the main
+application, and possibly any other one from within an interrupt
+routine, care must be taken that no access from within an interrupt
+context could clobber the TEMP register data of an in-progress
+transaction that has just started elsewhere.
+
+To protect interrupt routines against other interrupt routines, it's
+usually best to use the SIGNAL() macro when declaring the interrupt
+function, and to ensure that interrupts are still disabled when
+accessing those 16-bit timer registers.
+
+Within the main program, access to those registers could be
+encapsulated in calls to the cli() and sei() macros.  If the status of
+the global interrupt flag before accessing one of those registers is
+uncertain, something like the following example code can be used.
+
+\code
+uint16_t
+read_timer1(void)
+{
+	uint8_t sreg;
+	uint16_t val;
+
+	sreg = SREG;
+	cli();
+	val = TCNT1;
+	SREG = sreg;
+
+	return val;
+}
+\endcode
 
 <small>Back to \ref faq_index.
 </small>
