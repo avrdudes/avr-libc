@@ -55,7 +55,3 @@ struct __file {
 	int	(*get)(void);	/* function to read one char from device */
 };
 
-
-extern char	*__ecvt(double arg, int8_t ndigits, int8_t *decpt, int8_t *sign);
-extern char	*__fcvt(double arg, int8_t ndigits, int8_t *decpt, int8_t *sign);
-extern char	*__gcvt(double arg, int8_t ndigits, char *buf);
