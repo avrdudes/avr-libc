@@ -1,3 +1,11 @@
+2004-09-09  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Add note about bug #10078.
+	* include/string.h (strsep): Remove __ATTR_PURE__, bug #10078.
+	(strtok_r): Remove __ATTR_PURE__ too.
+	(strncmp): Add __ATTR_PURE__.
+
 2004-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/twitest/twitest.c: Make it work on 1 MHz clock.
@@ -10,7 +18,8 @@
 
 2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
-	* include/avr/sleep.h: protect function-like macros, fix savannah bug #9013.
+	* include/avr/sleep.h: protect function-like macros, fix savannah bug
+	#9013.
 	* include/avr/ina90.h: Ditto.
 
 2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

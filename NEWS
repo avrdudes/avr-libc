@@ -15,6 +15,7 @@
           only incidentally for compile-time constant indexes since the
           compiler would then insert the appropriate ROM address.
   [#9704] suggested putc() behavior breaks binary transfer (doc fix)
+  [#10078] strsep() should not be pure
 
 * Other changes:
 
