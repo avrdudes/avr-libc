@@ -262,14 +262,14 @@ GLOBAL(isspace)
 
 GLOBAL(ispunct)
           mov   __tmp_reg__, rLow    ; **changed** they do not use it
-          RCALL _isprint             ; false: CLR rLow -> EQ, rLow changed
+          RCALL _U(isprint)          ; false: CLR rLow -> EQ, rLow changed
           BREQ  _ispunct00           ; true : CPI rLow,0x7E+1 -> NE, rLow unchanged
 
-          RCALL _isspace
+          RCALL _U(isspace)
           TST   rLow
           BRNE  __ctype_isfalse
           mov   rLow, __tmp_reg__    ; **changed**
-          RCALL _isalnum
+          RCALL _U(isalnum)
           TST   rLow
           BRNE  __ctype_isfalse
           SER   rLow

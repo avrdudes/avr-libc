@@ -1,3 +1,10 @@
+2002-11-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/ctype.S: cleanup empty comments.
+	* libc/stdlib/ctype.S: add CVS Id.
+	* libc/stdlib/ctype.S: rename cty_is* into __ctype_is*.
+	* libc/stdlib/ctype.S: ispunct(): encapsulate func. calls using _U().
+
 2002-11-19  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
