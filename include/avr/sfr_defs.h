@@ -112,10 +112,7 @@
    In C programs, all 3 combinations of \c _SFR_ASM_COMPAT and
    <tt>__SFR_OFFSET</tt> are supported - the \c _SFR_ADDR(SPMCR) macro can be
    used to get the address of the \c SPMCR register (0x57 or 0x68 depending on
-   device).
-
-   The old inp()/outp() macros are still supported, but not recommended to use
-   in new code.  The order of outp() arguments is confusing. */
+   device). */
 
 #ifdef __ASSEMBLER__
 #define _SFR_ASM_COMPAT 1
