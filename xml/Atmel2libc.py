@@ -301,6 +301,8 @@ def dump_ioregs (root):
         reg_info = ioreg_info_dict[name]
         reg_desc = reg_info.getElements ('DESCRIPTION')[0].getData ()
         addr = ioreg.getElements ('IO_ADDR')[0].getData ()
+        if addr[0] == '$':
+            addr = '0x' + addr[1:]
         if addr == "NA":
             addr = ioreg.getElements ('MEM_ADDR')[0].getData ()
         else:
@@ -332,6 +334,56 @@ def dump_ioregs (root):
 
     print '  </ioregisters>'
 
+def dump_boot_info (root):
+    path = ['AVRPART', 'MEMORY', 'BOOT_CONFIG']
+
+    info = root.getSubTree (path)
+    if info:
+        # The device has bootloader support.
+        
+        data = info.getElements ('NRWW_START_ADDR')[0].getData ()
+        if data[0] == '$':
+            data = '0x' + data[1:]
+        nrww_start = 'nrww_start="0x%x"' % (int (data, 16))
+        
+        data = info.getElements ('NRWW_STOP_ADDR')[0].getData ()
+        if data[0] == '$':
+            data = '0x' + data[1:]
+        nrww_end = 'nrww_end="0x%x"' % (int (data, 16))
+        
+        data = info.getElements ('RWW_START_ADDR')[0].getData ()
+        if data[0] == '$':
+            data = '0x' + data[1:]
+        rww_start = 'rww_start="0x%x"' % (int (data, 16))
+        
+        data = info.getElements ('RWW_STOP_ADDR')[0].getData ()
+        if data[0] == '$':
+            data = '0x' + data[1:]
+        rww_end = 'rww_end="0x%x"' % (int (data, 16))
+        
+        pagesize = 'pagesize="%d"' % ( \
+            int (info.getElements ('PAGESIZE')[0].getData ()))
+        
+        print '  <bootloader %s %s %s' % (pagesize, nrww_start, nrww_end)
+        print '    %s %s>' % (rww_start, rww_end)
+
+        for i in range (8):
+            try:
+                mode = info.getElements ('BOOTSZMODE%d' % (i))[0]
+            except IndexError:
+                continue
+
+            pages = 'pages="%s"' % (mode.getElements ('PAGES')[0].getData ())
+
+            data = mode.getElements ('BOOTSTART')[0].getData ()
+            if data[0] == '$':
+                data = '0x' + data[1:]
+            start = 'start="0x%x"' % (int (data,16))
+
+            print '    <mode num="%d" %s %s />' % (i, pages, start)
+
+        print '  </bootloader>'
+
 if __name__ == '__main__':
     import sys
 
@@ -342,4 +394,5 @@ if __name__ == '__main__':
     dump_memory_sizes (root)
     dump_vectors (root)
     dump_ioregs (root)
+    dump_boot_info (root)
     dump_footer (root)

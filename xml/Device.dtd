@@ -48,7 +48,8 @@ data in those file.
     description?,
     memory_sizes,
     interrupts,
-    ioregisters
+    ioregisters,
+    bootloader?
 )>
     <!ATTLIST device
         name CDATA #REQUIRED
@@ -111,4 +112,23 @@ data in those file.
                 init CDATA #REQUIRED
             >
 
-    <!-- TODO: Need to define boot loader block information. -->
+    <!-- If the is no bootloader element in the XML file, the device does not
+         have bootloader support. -->
+
+    <!ELEMENT bootloader (mode+)>
+        <!ATTLIST bootloader
+            pagesize CDATA #REQUIRED
+            nrww_start CDATA #REQUIRED
+            nrww_end CDATA #REQUIRED
+            rww_start CDATA #REQUIRED
+            rww_end CDATA #REQUIRED
+        >
+
+        <!-- The boot mode size is (pagesize * pages). -->
+
+        <!ELEMENT mode EMPTY>
+            <!ATTLIST mode
+                num CDATA #REQUIRED
+                pages CDATA #REQUIRED
+                start CDATA #REQUIRED
+            >

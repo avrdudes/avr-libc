@@ -1,3 +1,8 @@
+2004-06-30  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: Add code to handle the boot loader information.
+	* xml/Device.dtd: Add bootloader element.
+
 2004-06-23  Theodore A. Roth  <troth@openavr.org>
 
 	* xml/Atmel2libc.py (gather_io_info): New function.
