@@ -1,5 +1,10 @@
 2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/stdint.h: created from old inttypes.h.
+	* include/inttypes.h: reduced to #include <stdint.h>.
+
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/stdio.h: Doc update: binary vs. raw streams explained,
 	fix for savannah bug #9704.
 
