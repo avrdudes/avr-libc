@@ -11,6 +11,7 @@
 	* doc/examples/twitest/twitest.c: twi.h is in compat/ now.
 	* doc/examples/twitest/twitest.dox: Ditto.
 	* doc/TODO: Delete items done.
+	* AUTHORS: Mention Ted Roth as alumni admin.
 	* README: Upgrade info on tool versions.
 	* NEWS: Mention forgotten items: realloc(), Copyright
 	unification, extended delay API, man page generation,
