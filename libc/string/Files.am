@@ -26,7 +26,7 @@
 # $Id$
 #
 
-#string_a_c_sources =
+string_a_c_sources =
 
 string_a_asm_sources = \
 	memccpy.S \

@@ -1,3 +1,13 @@
+2004-05-07  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.ac (AC_INIT): Bump version.
+	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Add stubs to trivialize 
+	adding C source files to currently asm only lib source dirs.
+	* libc/misc/Files.am (misc_a_c_sources): Define.
+	* libc/pmstring/Files.am (pmstring_a_c_sources): Define.
+	* libc/string/Files.am (string_a_c_sources): Define.
+	* libm/fplib/Files.am (libm_a_c_sources): Define.
+
 2004-05-03  Theodore A. Roth  <troth@openavr.org>
 
 	* devtools/gen-avr-lib-tree.sh: Set CFLAGS for all devices.

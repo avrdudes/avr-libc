@@ -48,13 +48,19 @@ include $(top_srcdir)/libm/fplib/Rules.am
 nodist_libc_a_SOURCES = \
 	$(stdlib_a_c_sources) \
 	$(stdlib_a_asm_sources) \
+	$(pmstring_a_c_sources) \
 	$(pmstring_a_asm_sources) \
+	$(string_a_c_sources) \
 	$(string_a_asm_sources) \
+	$(misc_a_c_sources) \
 	$(misc_a_asm_sources) \
 	$(stdio_a_c_sources) \
-	$(stdio_a_asm_sources)
+	$(stdio_a_asm_sources) \
+	$(libm_a_c_sources) \
+	$(libm_a_asm_sources)
 
 nodist_libm_a_SOURCES = \
+	$(libm_a_c_sources) \
 	$(libm_a_asm_sources)
 
 libc_a_LIBADD = \

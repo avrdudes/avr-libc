@@ -26,6 +26,8 @@
 # $Id$
 #
 
+misc_a_c_sources =
+
 misc_a_asm_sources = \
 	ee_rb.S \
 	ee_rblk.S \

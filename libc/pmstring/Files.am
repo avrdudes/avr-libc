@@ -26,6 +26,8 @@
 # $Id$
 #
 
+pmstring_a_c_sources =
+
 pmstring_a_asm_sources = \
 	memcpy_P.S \
 	strcasecmp_P.S \
