@@ -1,7 +1,13 @@
-2004-04-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+2004-04-13  Theodore A. Roth  <troth@openavr.org>
 
-	* include/avr/wdt.h: fix _wdt_write() for the ATmega169,
-	closes bug # 8119); contributed by adebeun@enatel.net
+	* include/avr/iotn2313.h: Don't define the EERIE, EEMPE, EEPE and EERE
+	bits since they're defined in <avr/io.h>.
+
+2004-04-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+[Contributed by <adebeun@enatel.net>]
+
+	* include/avr/wdt.h: Fix _wdt_write() for the ATmega169,
+	closes bug #8119.
 
 2004-04-13  Theodore A. Roth  <troth@openavr.org>
 [Contributed by Bob Paddock <bpaddock@csonline.net>]

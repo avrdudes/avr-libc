@@ -293,10 +293,13 @@
 
 #define EEPM1   5
 #define EEPM0   4
+#if 0
+/* These are defined in <avr/io.h> */
 #define EERIE   3
 #define EEMPE   2
 #define EEPE    1
 #define EERE    0
+#endif
 
 /* The EEPROM Address Register EEAR[6:0] */
 
