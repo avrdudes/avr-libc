@@ -1,3 +1,9 @@
+2004-04-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Add items for "clock skew detected", why
+	are interrupt bits cleared by a `1', and why are programmed
+	fuse bits at logical 0.
+
 2004-04-06  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/iomx8.h (ADC): Fix to make it 16 bit.

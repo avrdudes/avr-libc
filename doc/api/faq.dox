@@ -53,6 +53,9 @@
 -# \ref faq_intpromote
 -# \ref faq_ramoverlap
 -# \ref faq_tinyavr_c
+-# \ref faq_clockskew
+-# \ref faq_intbits
+-# \ref faq_fuselow
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1067,6 +1070,98 @@ Bruce D. Lightner wrote an excellent description of how to do this,
 and offers this together with a toolkit on his web page:
 
 http://lightner.net/avr/ATtinyAvrGcc.html
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_clockskew What is this "clock skew detected" messsage?
+
+It's a known problem of the MS-DOS FAT file system. Since the FAT file
+system has only a granularity of 2 seconds for maintaining a file's
+timestamp, and it seems that some MS-DOS derivative (Win9x) perhaps
+rounds up the current time to the next second when calculating the
+timestamp of an updated file in case the current time cannot be
+represented in FAT's terms, this causes a situation where \c make sees
+a "file coming from the future".
+
+Since all make decisions are based on file timestamps, and their
+dependencies, make warns about this situation.
+
+Solution: don't use inferior file systems / operating systems.
+Neither Unix file systems nor HPFS (aka NTFS) do experience that
+problem.
+
+Workaround: after saving the file, wait a second before starting \c
+make. Or simply ignore the warning.  If you are paranoid, execute a
+<tt>make clean all</tt> to make sure everything gets rebuilt.
+
+In networked environments where the files are accessed from a file
+server, this message can also happen if the file server's clock
+differs too much from the network client's clock.  In this case, the
+solution is to use a proper time keeping protocol on both systems,
+like NTP.  As a workaround, synchronize the client's clock frequently
+with the server's clock.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_intbits Why are (many) interrupt flags cleared by writing a logical 1?
+
+Usually, each interrupt has its own interrupt flag bit in some control
+register, indicating the specified interrupt condition has been met by
+representing a logical 1 in the respective bit position.  When working
+with interrupt handlers, this interrupt flag bit usually gets cleared
+automatically in the course of processing the interrupt, sometimes by
+just calling the handler at all, sometimes (e. g. for the U[S]ART) by
+reading a particular hardware register that will normally happen
+anyway when processing the interrupt.
+
+From the hardware's point of view, an interrupt is asserted as long as
+the respective bit is set, while global interrupts are enabled.  Thus,
+it is essential to have the bit cleared before interrupts get
+re-enabled again (which usually happens when returning from an
+interrupt handler).
+
+Only few subsystems require an explicit action to clear the interrupt
+request when using interrupt handlers.  (The notable exception is the
+TWI interface, where clearing the interrupt indicates to proceed with
+the TWI bus hardware handshake, so it's never done automatically.)
+
+However, if no normal interrupt handlers are to be used, or in order
+to make extra sure any pending interrupt gets cleared before
+re-activating global interrupts (e. g. an external edge-triggered
+one), it can be necessary to explicitly clear the respective hardware
+interrupt bit by software.  This is usually done by writing a logical
+1 into this bit position.  This seems to be illogical at first, the
+bit position already carries a logical 1 when reading it, so why does
+writing a logical 1 to it <i>clear</i> the interrupt bit?
+
+The solution is simple: writing a logical 1 to it requires only a
+single \c OUT instruction, and it is clear that only this single
+interrupt request bit will be cleared.  There is no need to perform a
+read-modify-write cycle (like, an \c SBI instruction), since all bits
+in these control registers are interrupt bits, and writing a logical 0
+to the remaining bits (as it is done by the simple \c OUT instruction)
+will not alter them, so there is no risk of any race condition that
+might accidentally clear another interrupt request bit.  So instead of
+writing
+
+\code
+TIFR |= _BV(TOV0); /* wrong! */
+\endcode
+
+simply use
+
+\code
+TIFR = _BV(TOV0);
+\endcode
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_fuselow Why have "programmed" fuses the bit value 0?
+
+Basically, fuses are just a bit in a special EEPROM area.  For
+technical reasons, erased E[E]PROM cells have all bits set to the
+value 1, so unprogrammed fuses also have a logical 1.  Conversely,
+programmed fuse cells read out as bit value 0.
 
 <small>Back to \ref faq_index.</small>
 
