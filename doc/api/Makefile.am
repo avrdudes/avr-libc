@@ -40,6 +40,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        interrupts.dox \
                        acknowledge.dox \
                        malloc.dox \
+                       $(IMAGE_SRC) \
                        sections.dox \
                        sfr.dox \
                        tools-install.dox \
@@ -63,6 +64,23 @@ demo:
 	-cd $(top_srcdir)/doc/examples/demo && \
 		${MAKE} DEFS="-I$(top_srcdir)/include"  \
 			LIBS="-nostartfiles -nodefaultlibs $(DEMO_LIBS)" dox all
+
+# images for inclusion in HTML and LaTeX documents
+SUFFIXES= .fig .gif .eps
+
+FIG2DEV= fig2dev
+
+.fig.eps:
+	$(FIG2DEV) -L eps $< $@
+
+.fig.gif:
+	$(FIG2DEV) -L gif -t '#ffffff' $< $@
+
+IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig
+
+IMAGE_GIF=	$(IMAGE_SRC:.fig=.gif)
+
+IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating postscript output.
 ps: $(TARGET_DOX_PS)
@@ -105,7 +123,7 @@ clean-local:
 # heading by \endhead so longtable will know what heading to repeat in
 # table continuations.
 
-latex_src/refman.tex: doxygen.config
+latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_GIF)
 	doxygen doxygen.config
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' \
@@ -125,7 +143,7 @@ latex_src/refman.tex: doxygen.config
 		using_tools.tex > tmp.$$ && \
 		mv -f tmp.$$ using_tools.tex
 
-latex_pdf_src/refman.tex: doxygen-pdf.config
+latex_pdf_src/refman.tex: doxygen-pdf.config $(IMAGE_EPS)
 	doxygen doxygen-pdf.config
 	cd latex_pdf_src && \
 		sed -e '/tocdepth/s/1/3/' \

@@ -59,6 +59,13 @@ stack space requirements can happen if there are many or large local
 variables in a C function, of for example when recursively calling
 functions.
 
+\note
+The pictures shown in this document represent possible typical
+situations, where the RAM locations refer to an ATmega128.
+
+\image html malloc-std.gif "RAM map of a device with internal RAM"
+\image latex malloc-std.eps "RAM map of a device with internal RAM" width=4in
+
 Finally, there's a challenge to make the memory allocator not too
 complicated (so the code size requirements will remain low), yet
 powerful enough to avoid unnecessary memory fragmentation and to get
@@ -118,10 +125,13 @@ heap will extend up to address 0x3fff.
 avr-gcc ... -Wl,-Tdata=0x802000,--defsym=__heap_end=0x803fff ...
 \endcode
 
+\note
 See \ref harvard_arch "explanation" for offset 0x800000.
-
 See the chapter about \ref gcc_minusW "using gcc" for the \c -Wl
 options.
+
+\image html malloc-x1.gif "Internal RAM: stack only, external RAM: variables and heap"
+\image latex malloc-x1.eps "Internal RAM: stack only, external RAM: variables and heap" width=4in
 
 If only dynamic memory should be placed in external RAM, while keeping
 the variables in internal RAM, the following could be used.
@@ -129,6 +139,9 @@ the variables in internal RAM, the following could be used.
 \code
 avr-gcc ... -Wl,--defsym=__heap_start=0x802000,--defsym=__heap_end=0x803fff ...
 \endcode
+
+\image html malloc-x2.gif "Internal RAM: variables and stack, external RAM: heap"
+\image latex malloc-x2.eps "Internal RAM: variables and stack, external RAM: heap" width=4in
 
 If \c __malloc_heap_end is 0, the allocator attempts to detect the
 bottom of stack in order to prevent a stack-heap collision when
