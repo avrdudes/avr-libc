@@ -201,16 +201,19 @@
 #define EERE    0
 
 #undef EEDR
-#undef EEARL
-#define EEDR    _SFR_IO8 (0x20)
-#define EEARL   _SFR_IO8 (0x21)
-
 #undef EEAR
+#undef EEARL
 #undef EEARH
-#if defined (__AVR_ATmega88__) || defined (__AVR_ATmega168__)
-#  define EEAR  _SFR_IO16 (0x21)
-#  define EEARH _SFR_IO8 (0x22)
-#endif
+
+#define EEDR    _SFR_IO8 (0x20)
+#define EEAR    _SFR_IO16 (0x21)
+#define EEARL   _SFR_IO8 (0x21)
+#define EEARH   _SFR_IO8 (0x22)
+/* 
+Even though EEARH is not used by the mega48, the EEAR8 bit in the register
+must be written to 0, according to the datasheet, hence the EEARH register
+must be defined for the mega48.
+*/
 
 #define GTCCR   _SFR_IO8 (0x23)
 /* GTCCR */
