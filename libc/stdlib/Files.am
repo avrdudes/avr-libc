@@ -26,9 +26,32 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/stdlib/Files.am
+stdlib_a_c_sources = \
+	abs.c \
+	bsearch.c \
+	calloc.c \
+	errno.c \
+	labs.c \
+	malloc.c \
+	qsort.c \
+	rand.c \
+	random.c \
+	strtol.c \
+	strtoul.c
 
-EXTRA_DIST = \
-	$(stdlib_a_c_sources) \
-	$(stdlib_a_asm_sources) \
-	$(stdlib_a_extra_dist)
+stdlib_a_asm_sources = \
+	abort.S \
+	atoi.S \
+	atol.S \
+	div.S \
+	exit.S \
+	ldiv.S \
+	setjmp.S
+
+stdlib_a_extra_dist = \
+	ctype.S \
+	abort.c \
+	atoi.c \
+	atol.c
+
+# vim: set ft=make:

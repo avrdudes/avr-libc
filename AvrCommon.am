@@ -28,7 +28,7 @@
 # $Id$
 #
 
-AM_CPPFLAGS = -I$(top_srcdir)/common
+AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include
 
 AVRLIB_CFLAGS = -g -Wall -W -Wstrict-prototypes $(AVR_TARGET_DEFS) $(AVR_TARGET_CFLAGS)
 
@@ -37,32 +37,17 @@ AVRLIB_ASFLAGS = -x assembler-with-cpp -Wa,-gstabs -mmcu=$(AVR_TARGET) $(AVR_TAR
 AM_CFLAGS = $(AVRLIB_CFLAGS)
 AM_CCASFLAGS = $(AM_CPPFLAGS) $(AVRLIB_ASFLAGS)
 
+VPATH = $(top_srcdir)/crt1:$(top_srcdir)/libc/stdlib:$(top_srcdir)/libc/pmstring:$(top_srcdir)/libc/string:$(top_srcdir)/libc/misc:$(top_srcdir)/libc/stdio
+
 __install_dir = $(prefix)/avr/lib/$(AVR_TARGET)
 
 avrdir = $(__install_dir)
 avrlibdir = $(__install_dir)
 
-#avr_LIBRARIES = \
-#	libc.a \
-#	libm.a \
-#	libprintf_min.a \
-#	libprintf_flt.a \
-#	libscanf_min.a \
-#	libscanf_flt.a
-
-#libc_a_SOURCES =
-#libm_a_SOURCES =
-#libprintf_min_a_SOURCES =
-#libprintf_flt_a_SOURCES =
-#libscanf_min_a_SOURCES =
-#libscanf_flt_a_SOURCES =
-
 noinst_LIBRARIES = libcrt.a
 nodist_libcrt_a_SOURCES = gcrt1.S
 
 avr_DATA = $(AVR_TARGET_CRT)
-
-VPATH = $(top_srcdir)/crt1
 
 $(AVR_TARGET_CRT): gcrt1.o
 	rm -f $@

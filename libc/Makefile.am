@@ -1,4 +1,4 @@
-# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -10,9 +10,6 @@
 #   notice, this list of conditions and the following disclaimer in
 #   the documentation and/or other materials provided with the
 #   distribution.
-# * Neither the name of the copyright holders nor the names of
-#   contributors may be used to endorse or promote products derived
-#   from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -25,35 +22,10 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id$
+#
 
-## Process this file with automake to generate Makefile.in
-
-SUBDIRS = stdlib pmstring string misc stdio .
-DIST_SUBDIRS = stdlib pmstring string misc stdio .
-
-noinst_LIBRARIES = libc.a
-
-# must be defined as empty, so that make dist will work
-libc_a_SOURCES =
-
-SUBLIBS = \
-	stdlib/lib.a   \
-	pmstring/lib.a \
-	string/lib.a   \
-	misc/lib.a \
-	stdio/lib.a
-
-libc.a: $(SUBLIBS)
-	rm -f $@
-	rm -rf tmp
-	mkdir tmp
-	cd tmp; \
-	 for i in $(SUBLIBS); do \
-	   $(AR) x ../$$i; \
-	 done; \
-	$(AR) $(AR_FLAGS) ../$@ *.o
-	$(RANLIB) $@
-	rm -rf tmp
-
-$(SUBLIBS): ; @true
+SUBDIRS = stdlib pmstring string misc stdio
+DIST_SUBDIRS = stdlib pmstring string misc stdio
 

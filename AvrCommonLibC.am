@@ -1,3 +1,5 @@
+# -*- Makefile -*-
+#
 # Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
@@ -26,9 +28,30 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/stdlib/Files.am
+# The Makefile.am fragment is only used by targets that support C programming.
 
-EXTRA_DIST = \
-	$(stdlib_a_c_sources) \
-	$(stdlib_a_asm_sources) \
-	$(stdlib_a_extra_dist)
+avr_LIBRARIES = \
+	lib_stdlib.a \
+	lib_pmstring.a
+
+#	libc.a \
+#	libm.a \
+#	libprintf_min.a \
+#	libprintf_flt.a \
+#	libscanf_min.a \
+#	libscanf_flt.a
+
+#libc_a_SOURCES =
+#libm_a_SOURCES =
+#libprintf_min_a_SOURCES =
+#libprintf_flt_a_SOURCES =
+#libscanf_min_a_SOURCES =
+#libscanf_flt_a_SOURCES =
+
+include $(top_srcdir)/libc/stdlib/Rules.am
+include $(top_srcdir)/libc/pmstring/Rules.am
+#include $(top_srcdir)/libc/string/Rules.am
+#include $(top_srcdir)/libc/misc/Rules.am
+#include $(top_srcdir)/libc/stdio/Rules.am
+
+# vim: set ft=make ts=4 sw=4:

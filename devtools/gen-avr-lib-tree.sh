@@ -170,6 +170,14 @@ do
 		CONT_CHR=""
 	fi
 
+	case $dev in
+		at90s1200|attiny11|attiny12|attiny15|attiny22|attiny28)
+			INCLUDE_C_LIB=
+			;;
+		*)
+			INCLUDE_C_LIB="include \$(top_srcdir)/AvrCommonLibC.am"
+	esac
+
 	echo "	lib/$dev/Makefile" >> ${CONF_FRAG}
 
 	echo "	$dev $CONT_CHR" >> Makefile.am
@@ -213,6 +221,7 @@ do
 	# Automake will also be scanning the included file.
 	
 	include \$(top_srcdir)/AvrCommon.am
+	${INCLUDE_C_LIB}
 	
 	# vim: set ft=make ts=4 sw=4:
 	EOF

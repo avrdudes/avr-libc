@@ -1,5 +1,19 @@
 2004-04-28  Theodore A. Roth  <troth@openavr.org>
 
+	* AvrCommon.am: Split C library macros off into AvrCommonLibC.am.
+	* AvrCommonLibC.am: New file.
+	* devtools/gen-avr-lib-tree.sh: Don't include AvrCommonLibC.am for
+	targets that don't support C programming.
+	* libc/Makefile.am: Rewrite.
+	* libc/pmstring/Files.am: New file.
+	* libc/pmstring/Makefile.am: Rewrite.
+	* libc/pmstring/Rules.am: New file.
+	* libc/stdlib/Files.am: New file.
+	* libc/stdlib/Makefile.am: Rewrite.
+	* libc/stdlib/Rules.am: New file.
+
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
 	* AvrCommon.am (__install_dir): Use prefix instead of exec_prefix.
 	* crt1/Makefile.am: Complete rewrite. Not much is needed anymore.
 	* include/Makefile.am: Replace EXTRA_DIST with avr_HEADERS so that
