@@ -1,3 +1,8 @@
+2004-11-10  Theodore A. Roth  <troth@openavr.org>
+
+	* Makefile.am (install-data-local): Don't try to install version.h. My
+	implementation of that broke the build. :-(
+
 2004-11-09  Eric B. Weddington  <ericw@evcohs.com>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
