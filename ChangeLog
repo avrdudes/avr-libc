@@ -1,3 +1,8 @@
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am (DEMO_LIBS): Only grab the first lib found.
+
 2002-10-10  Theodore A. Roth  <troth@verinet.com>
 
 	* doc/TODO: Removed ctype.h.

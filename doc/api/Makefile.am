@@ -52,7 +52,7 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-DEMO_LIBS            = $(shell find $(top_srcdir) -name crts2313.o)
+DEMO_LIBS            = $(shell find $(top_srcdir) -name crts2313.o | head -n 1)
 
 all-local: demo ps html pdf
 
