@@ -160,7 +160,7 @@ void _printf_p (char const *fmt0, ...) {
 						*pb = a.ul % base;
 						*pb = *pb > 9?
 							*pb + c - 'X' + 'A' - 10:
-							*pb+'0';
+							*pb + '0';
 						*pb++;
 						a.ul /= base;
 					} while (a.ul);
