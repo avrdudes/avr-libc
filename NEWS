@@ -1,5 +1,17 @@
 *** Changes since avr-libc-1.0:
 
+[[Merge the list from the 1.0 branch, too!]]
+
+* Remove deprecated items:
+  + obsolete headers from the base include directory (moved to the avr/
+    subdirectory long ago)
+  + deprecated macros and functions from
+    . <avr/eeprom.h> (eeprom_rb, eeprom_rw, eeprom_wb),
+    . <avr/io.h>  (cbi, sbi, inb, outb, inw, outw, inp, outp, BV),
+    . <avr/pgmspace.h> (PRG_RDB).
+
+* realloc() has been implemented.
+
 * Extend pgmspace API.
 
 The pgmspace API has had the following macros added to allow accessing of
@@ -48,7 +60,7 @@ New functions:
 
 New functions:
   vfprintf_P
-  vfscnaf_P
+  vfscanf_P
 
 * Use newer Doxygen.
 
