@@ -1,3 +1,10 @@
+2002-10-01  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Updated.
+	* doc/api/Makefile.am: Add using-avrprog.dox.
+	* doc/api/tools-install.dox: Add ref to using-avrprog.dox.
+	* doc/api/using-avrprog.dox: New file.
+
 2002-10-01  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* include/avr/iom163.h: Add SIG_COMPARATOR, fix SIG_2WIRE_SERIAL.

@@ -42,6 +42,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        sections.dox \
                        sfr.dox \
                        tools-install.dox \
+                       using-avrprog.dox \
                        faq.dox
 
 SUFFIXES             = .pdf

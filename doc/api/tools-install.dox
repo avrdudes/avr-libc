@@ -109,7 +109,8 @@ or may not be of use for you.
 
 - <b>avrprog</b> (2.1.0) <br>
   http://www.bsdhome.com/avrprog/ <br>
-  \ref install_avrprog "Installation"
+  \ref install_avrprog "Installation" <br>
+  \ref using_avrprog "Usage Notes"
 
 - <b>GDB</b> (5.2.1) <br>
   http://sources.redhat.com/gdb/ <br>

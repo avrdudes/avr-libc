@@ -16,14 +16,14 @@ TODO for avr-libc:
    * interfaces in:
      + include/ctype.h
      + include/math.h
-	 + include/avr/crc16.h  ???
-	 + include/avr/ina90.h  ???
-	 + include/avr/twi.h
-	 + include/avr/wdt.h
-	 + include/avr/parity.h
+     + include/avr/crc16.h  ???
+     + include/avr/ina90.h  ???
+     + include/avr/twi.h (move to examples?)
+     + include/avr/wdt.h (move to examples?)
+     + include/avr/parity.h (move to examples?)
    * the mechanism behind include/avr/io*.h ???
-   * merge chapters 2/3 from Rich Neswold's doc. Needs some rewriting to
-     update for newer tools. (Joerg, update your example???)
+   * merge chapter 3 from Rich Neswold's doc. Needs some rewriting to
+     update for newer tools.
    * gcrt1.S
    * introduction
  - testsuite [4]
