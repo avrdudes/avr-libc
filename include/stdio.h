@@ -437,6 +437,33 @@ extern int	snprintf(char *__s, size_t __n, const char *__fmt, ...);
 extern int	snprintf_P(char *__s, size_t __n, const char *__fmt, ...);
 
 /**
+   Like \c sprintf() but takes a variable argument list for the
+   arguments.
+*/
+extern int	vsprintf(char *__s, const char *__fmt, va_list ap);
+
+/**
+   Variant of \c vsprintf() that uses a \c fmt string that resides
+   in program memory.
+*/
+extern int	vsprintf_P(char *__s, const char *__fmt, va_list ap);
+
+/**
+   Like \c vsprintf(), but instead of assuming \c s to be of infinite
+   size, no more than \c n characters (including the trailing NUL
+   character) will be converted to \c s.
+
+   Returns the number of characters that would have been written to
+   \c s if there were enough space.
+*/
+extern int	vsnprintf(char *__s, size_t __n, const char *__fmt, va_list ap);
+
+/**
+   Variant of \c vsnprintf() that uses a \c fmt string that resides
+   in program memory.
+*/
+extern int	vsnprintf_P(char *__s, size_t __n, const char *__fmt, va_list ap);
+/**
    The function \c fprintf performs formatted output to \c stream.
    See \c vfprintf() for details.
 */
