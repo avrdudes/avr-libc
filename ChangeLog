@@ -1,3 +1,10 @@
+2002-07-08  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Updated version.
+	* configure.in (AC_OUTPUT): Intgrated rpm spec file into build.
+	* Makefile.am: Intgrated rpm spec file into build.
+	* avr-libc.spec.in: New file.
+
 2002-07-05  Theodore A. Roth  <troth@verinet.com>
 
 	* configure.in (AM_INIT_AUTOMAKE): Updated version.
