@@ -39,6 +39,7 @@ lib_a_c_sources = \
 	malloc.c	\
 	qsort.c		\
 	rand.c		\
+	random.c	\
 	strtol.c	\
 	strtoul.c
 
