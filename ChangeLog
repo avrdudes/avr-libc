@@ -1,3 +1,8 @@
+2002-11-08  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom169.h: Fix typo in UCSR0A register bit def.
+
 2002-11-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/setjmp.h: make -mint8 proof.

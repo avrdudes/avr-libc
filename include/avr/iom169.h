@@ -876,7 +876,7 @@
 #define UDRE0	5
 #define FE0	   4
 #define DOR0	3
-#define PE0 	2
+#define UPE0 	2
 #define U2X0   1
 #define MPCM0	0
 
