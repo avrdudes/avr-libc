@@ -34,6 +34,38 @@
 #  error "Include <avr/io.h> instead of this file."
 #endif
 
+/* Define Generic PORTn, DDn, and PINn values. */
+
+/* Port Data Register (generic) */
+#define    PORT7        7
+#define    PORT6        6
+#define    PORT5        5
+#define    PORT4        4
+#define    PORT3        3
+#define    PORT2        2
+#define    PORT1        1
+#define    PORT0        0
+
+/* Port Data Direction Register (generic) */
+#define    DD7          7
+#define    DD6          6
+#define    DD5          5
+#define    DD4          4
+#define    DD3          3
+#define    DD2          2
+#define    DD1          1
+#define    DD0          0
+
+/* Port Input Pins (generic) */
+#define    PIN7         7
+#define    PIN6         6
+#define    PIN5         5
+#define    PIN4         4
+#define    PIN3         3
+#define    PIN2         2
+#define    PIN1         1
+#define    PIN0         0
+
 /* Define PORTxn values for all possible port pins. */
 
 /* PORT A */

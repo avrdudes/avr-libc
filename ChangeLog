@@ -1,5 +1,11 @@
 2003-10-20  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/iom128.h:
+	* include/avr/portpins.h:
+	Move generic PORTn, DDn and PINn defs to portpins.h.
+
+2003-10-20  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/io.h: Include portpins.h.
 	* include/avr/portpins.h: New file.
