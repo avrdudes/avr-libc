@@ -1,3 +1,10 @@
+2005-01-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/acknowledge.dox: Mention Ted Roth, fix Eric's
+	email address.
+	* doc/api/tools-install.dox: Remove all explicit version
+	numbers, recommend the latest released version instead.
+
 2005-01-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/realloc.c: Do not mess with "nx" pointers for

@@ -77,24 +77,23 @@ $ export PATH
 environment, this will cause the configure script to fail. It is best to not
 have \c CC set at all.
 
-\note The versions for the packages listed below are known to work together.
-If you mix and match different versions, you may have problems.
+\note It is usually the best to use the latest released version of
+each of the tools.
 
 \section required_tools Required Tools
 \addindex tools, required
 
-- <b>GNU Binutils</b> (2.14) <br>
+- <b>GNU Binutils</b><br>
   http://sources.redhat.com/binutils/ <br>
   \ref install_avr_binutils "Installation"
 
-- <b>GCC</b> (3.3.1) <br>
+- <b>GCC</b><br>
   http://gcc.gnu.org/ <br>
   \ref install_avr_gcc "Installation"
 
-- <b>AVR Libc</b> (1.0) <br>
+- <b>AVR Libc</b><br>
   http://savannah.gnu.org/projects/avr-libc/ <br>
   \ref install_avr_libc "Installation"<br>
-  Note 2003-08-15: The 1.0 branch was created today.
 
 \section optional_tools Optional Tools
 \addindex tools, optional
@@ -102,33 +101,26 @@ If you mix and match different versions, you may have problems.
 You can develop programs for AVR devices without the following tools.  They may
 or may not be of use for you.
 
-\note The following programs are in constant development and the stated
-versions may be less than current when you read this. Check the given websites
-for the latest versions.
-
-- <b>uisp</b> (20030618)<br>
+- <b>uisp</b><br>
   http://savannah.gnu.org/projects/uisp/<br>
   \ref install_uisp "Installation"
 
-- <b>avrdude</b> (4.1.0) <br>
+- <b>avrdude</b><br>
   http://savannah.nongnu.org/projects/avrdude/ <br>
   \ref install_avrprog "Installation" <br>
   \ref using_avrprog "Usage Notes"
 
-- <b>GDB</b> (6.0) <br>
+- <b>GDB</b><br>
   http://sources.redhat.com/gdb/ <br>
   \ref install_gdb "Installation"<br>
-  Note 2003-08-15: gdb-6.0 should be released soon.
 
-- <b>Simulavr</b> (0.1.1) <br>
+- <b>Simulavr</b><br>
   http://savannah.gnu.org/projects/simulavr/ <br>
   \ref install_simulavr "Installation"
 
-- <b>AVaRice</b> (2.0) <br>
+- <b>AVaRice</b><br>
   http://avarice.sourceforge.net/ <br>
   \ref install_avarice "Installation"<br>
-  Note 2003-08-15: avarice-2.0 only exists in cvs, there should be 2.1 release
-  soon.
 
 \section install_avr_binutils GNU Binutils for the AVR target
 \addindex installation, binutils
@@ -389,8 +381,5 @@ system.):
 \verbatim
 $ CPPFLAGS=-I<hdr_path> LDFLAGS=-L<lib_path> ../configure --prefix=$PREFIX
 \endverbatim
-
-\note As of 2003-08-15, no offical AVaRice release works like this. Use a
-2.0 snapshot until the 2.1 release is made, or use obtain the source from cvs.
 
 */
