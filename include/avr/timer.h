@@ -45,17 +45,17 @@ enum {
   T0_RISING_EDGE   = 7
 };
 
-static inline void timer0_source (unsigned int src)
+static __inline__ void timer0_source (unsigned int src)
 {
     TCCR0 = src;
 }
 
-static inline void timer0_stop (void)
+static __inline__ void timer0_stop (void)
 {
     TCNT0 = 0;
 }
 
-static inline void timer0_start (void)
+static __inline__ void timer0_start (void)
 {
     TCNT0 = 1;
 }

@@ -59,7 +59,7 @@
 
     This CRC is normally used in disk-drive controllers. */
 
-static inline uint16_t
+static __inline__ uint16_t
 _crc16_update(uint16_t __crc, uint8_t __data)
 {
 	uint8_t __tmp;
@@ -125,7 +125,7 @@ _crc16_update(uint16_t __crc, uint8_t __data)
     }
     \endcode */
 
-static inline uint16_t
+static __inline__ uint16_t
 _crc_xmodem_update(uint16_t __crc, uint8_t __data)
 {
     uint16_t __ret;             /* %B0:%A0 (alias for __crc) */
@@ -199,7 +199,7 @@ _crc_xmodem_update(uint16_t __crc, uint8_t __data)
     }
     \endcode */
 
-static inline uint16_t
+static __inline__ uint16_t
 _crc_ccitt_update (uint16_t __crc, uint8_t __data)
 {
     uint16_t __ret;

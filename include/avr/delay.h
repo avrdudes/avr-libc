@@ -35,7 +35,7 @@
 #include <inttypes.h>
 
 /* 8-bit count, 3 cycles/loop */
-static inline void
+static __inline__ void
 _delay_loop_1(uint8_t __count)
 {
 	asm volatile (
@@ -47,7 +47,7 @@ _delay_loop_1(uint8_t __count)
 }
 
 /* 16-bit count, 4 cycles/loop */
-static inline void
+static __inline__ void
 _delay_loop_2(uint16_t __count)
 {
 	asm volatile (
