@@ -185,7 +185,9 @@
 #define TIMSK2 _SFR_MEM8(0x70)
 
 /* ADC Data Register */
+#ifndef __ASSEMBLER__
 #define ADC    _SFR_MEM16(0x78)
+#endif
 #define ADCL   _SFR_MEM8(0x78)
 #define ADCH   _SFR_MEM8(0x79)
 

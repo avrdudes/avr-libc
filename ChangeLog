@@ -1,3 +1,9 @@
+2003-02-17  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* include/avr/iom8.h, include/avr/iom8535.h, include/avr/iom32.h,
+	include/avr/iom64.h, include/avr/iom128.h, include/avr/iom169.h:
+	Protect the ADC definition with #ifndef __ASSEMBLER__ .
+
 2003-02-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/TODO: update.
