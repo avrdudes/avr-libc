@@ -1,3 +1,8 @@
+2002-07-31  Theodore A. Roth  <troth@verinet.com>
+
+	* crt1/gcrt1.S: Allow gcc versions >= 3.2.
+	* libc/pmstring/strncpy_P.S: Fix typo is doxy comment.
+
 2002-07-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/Makefile.am: Add faq.dox file.

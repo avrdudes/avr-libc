@@ -23,8 +23,8 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-#if (__GNUC__ != 3) || (__GNUC_MINOR__ != 2)
-#error "GCC version 3.2 required"
+#if (__GNUC__ < 3) || (__GNUC__ == 3 && __GNUC_MINOR__ < 2)
+#error "GCC version >= 3.2 required"
 #endif
 
 #include "macros.inc"

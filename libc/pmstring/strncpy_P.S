@@ -39,7 +39,7 @@
 /** \ingroup avr_pgmspace
     \fn char *strncpy_P(char *dest, PGM_P src, size_t n)
 
-    The strncpy_P() function is similar to strncpy_P() except that not more
+    The strncpy_P() function is similar to strcpy_P() except that not more
     than n bytes of src are copied.  Thus, if there is no null byte among the
     first n bytes of src, the result will not be null-terminated.
 
