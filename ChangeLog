@@ -1,3 +1,9 @@
+2005-01-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/realloc.c: Do not mess with "nx" pointers for
+	the current entry as it is not really of struct __freelist.
+	Fixes savannah bug #11684.
+
 2005-01-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Implement savannah patch #3516: %S format for printf().

@@ -10,6 +10,7 @@
   [#11505] Remove doxygen comment about the deprecated inp/outp items.
   [#11510] Abstract the change enable bit in wdt.h for mega32.
   [#11522] Rewrite wdt_disable() to match datasheet algorithm.
+  [#11684] realloc overwrites first to bytes of memory block when shrinking
 
 * Extend stdio and pmstring APIs:
 
