@@ -83,7 +83,7 @@ The following is a list of AVR devices currently supported by the library.
 - atmega162
 - atmega163
 - atmega169
-- atmega32 [untested]
+- atmega32
 - atmega323
 - atmega64 [untested]
 - atmega8515 [untested]

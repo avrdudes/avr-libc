@@ -1,3 +1,8 @@
+2002-12-03  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/main_page.dox: Remove untested note from mega32.
+
 2002-11-27  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
