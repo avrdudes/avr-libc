@@ -1,1 +1,62 @@
-see file Changelog.
+*** Changes since avr-libc-20020203:
+
+* Move source to cvs repositiory at http://savannah.gnu.org/projects/avr-libc
+
+Anonymous cvs access to the source is now available. There is also a mailing
+list set up for discussion of development of avr-libc.
+
+* License changes.
+
+All the files in the project now are covered by a modified BSD license. This 
+allows royalty free use of the library in commerical products. All of the 
+public domain files in the project have been switched to the new license and
+copyright given to the contributors of the files.
+
+There were some files taken from GNU GPL'd projects which were removed from
+avr-libc to simplify the licensing. The removed files only supplied alternate
+implementations, so nothing was lost by their removal.
+
+* Requires latest binutils and gcc
+
+Marek did some fairly major work with binutils and gcc to make adding support
+for new devices easier. His changes in those tools required changes to avr-libc
+which make it incompatible with older versions of binutils and gcc. Gcc version
+3.3 (still in cvs) and binutils version 2.14 (still in cvs) are required.
+
+* New malloc implementation.
+
+Joerg Wunsch has supplied an improved malloc implementation which is less
+prone to fragmentation.
+
+* Documentation!
+
+Joerg Wunsch and Ted Roth and have been working on using the doxygen program to
+embed documentation comments into source code. Additionally, Harald Kipp's 
+inline asm cookbook and Rich Neswold's Avr Tools document have been merged into
+the user manual. The goal is to have a single place for all the documentation
+a user would need to get started developing for AVR microcontrollers using
+the GNU development tool chain.
+
+The latest documentation is available online at
+  http://www.freesoftware.fsf.org/avr-libc/
+
+* I/O registers accessible directly in C expressions
+
+You can now do this in your code:
+  PORTA |= 0x02;
+
+See the "Special Function Registers" documentation for details.
+
+* New devices supported
+
+mega128
+
+* Incompatibilities with previous version.
+
+The arguments for outb()/outw() have been reversed.
+  (value,port) -> (port,value)
+
+*** Changes up to avr-libc-20020203:
+
+See the ChangeLog file up to 2002-02-03 for details.
+
