@@ -1,3 +1,8 @@
+2003-02-25  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/faq.dox: Minor clarification.
+
 2003-02-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: eplain PSTR() to move strings out to flash.

@@ -687,7 +687,7 @@ assembler subroutines, and adjust them accordingly.
 
 There are times when you may need an array of strings which will never be
 modified. In this case, you don't want to waste ram storing the constant
-strings. This most obvious thing to do is this:
+strings. The most obvious (and incorrect) thing to do is this:
 
 \code
 #include <avr/pgmspace.h>
