@@ -35,6 +35,7 @@
 -# \ref faq_libm
 -# \ref faq_regbind
 -# \ref faq_startup
+-# \ref faq_use_bv
 
 <b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 </b>
@@ -152,6 +153,46 @@ my_init (void)
 {
       /* your init code here; C or inline asm */
 }
+\endcode
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_use_bv What is all this _BV() stuff about?
+</b>
+
+When performing low-level output work, which is a very central point
+in microcontroller programming, it is quite common that a particular
+bit needs to be set or cleared in some IO register.  While the chip
+documentation provides mnemonic names for the various bits in the IO
+registers, and the \ref avr_io reflect these names in definitions for
+numerical constants, a way is needed to convert a bit number (usually
+within a byte register) into a byte value that can be assigned
+directly to the register.  However, sometimes the direct bit numbers
+are needed as well (e. g. in an <tt>sbi()</tt> call), so the
+definitions cannot usefully be made as byte values in the first place.
+
+So in order to access a particular bit number as a byte value, use the
+<tt>_BV()</tt> macro.  Of course, the implementation of this macro is
+just the usual bit shift (which is done by the compiler anyway, thus
+doesn't impose any run-time penalty), so the following applies:
+
+\code
+_BV(3) => 1 << 3 => 0x08
+\endcode
+
+However, using the macro often makes the program better readable.
+
+"BV" stands for "bit value", in case someone might ask you. :-)
+
+<b>Example:</b> clock timer 2 with full IO clock
+(<tt>CS2</tt><em>x</em> = 0b001), toggle OC2 output on compare match
+(<tt>COM2</tt><em>x</em> = 0b01), and clear timer on compare match
+(<tt>CTC2</tt> = 1).  Make OC2 (<tt>PD7</tt>) an output.
+
+\code
+	TCCR2 = BV(COM20)|BV(CTC2)|BV(CS20);
+	DDRD = BV(PD7);
 \endcode
 
 <small>Back to \ref faq_index.
