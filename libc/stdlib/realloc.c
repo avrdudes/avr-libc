@@ -72,9 +72,7 @@ realloc(void *ptr, size_t len)
 		    len > fp1->sz - sizeof(struct __freelist))
 			return ptr;
 		fp2->sz = fp1->sz - len - sizeof(size_t);
-		fp2->nx = fp1->nx;
 		fp1->sz = len;
-		fp1->nx = fp2;
 		free(&(fp2->nx));
 		return ptr;
 	}
