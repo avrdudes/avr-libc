@@ -179,9 +179,6 @@
 #define __BOOT_RWW_ENABLE         (_BV(SPMEN) | _BV(__COMMON_ASRE))
 #define __BOOT_LOCK_BITS_SET      (_BV(SPMEN) | _BV(BLBSET))
 
-#define __BOOT_LOCK_BITS_MASK     (_BV(BLB01) | _BV(BLB02) \
-                                   | _BV(BLB11) | _BV(BLB12))
-
 #define __boot_page_fill_normal(address, data)   \
 ({                                               \
     __asm__ __volatile__                         \
@@ -353,9 +350,26 @@
     );                                           \
 })
 
+/* From the mega16/mega128 data sheets (maybe others):
+
+     Bits by SPM To set the Boot Loader Lock bits, write the desired data to
+     R0, write "X0001001" to SPMCR and execute SPM within four clock cycles
+     after writing SPMCR. The only accessible Lock bits are the Boot Lock bits
+     that may prevent the Application and Boot Loader section from any
+     software update by the MCU.
+
+     If bits 5..2 in R0 are cleared (zero), the corresponding Boot Lock bit
+     will be programmed if an SPM instruction is executed within four cycles
+     after BLBSET and SPMEN are set in SPMCR. The Z-pointer is don t care
+     during this operation, but for future compatibility it is recommended to
+     load the Z-pointer with $0001 (same as used for reading the Lock
+     bits). For future compatibility It is also recommended to set bits 7, 6,
+     1, and 0 in R0 to 1 when writing the Lock bits. When programming the Lock
+     bits the entire Flash can be read during the operation. */
+
 #define __boot_lock_bits_set(lock_bits)                    \
 ({                                                         \
-    uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
+    uint8_t value = (uint8_t)(~(lock_bits));               \
     __asm__ __volatile__                                   \
     (                                                      \
         "ldi r30, 1\n\t"                                   \
@@ -372,7 +386,7 @@
 
 #define __boot_lock_bits_set_alternate(lock_bits)          \
 ({                                                         \
-    uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
+    uint8_t value = (uint8_t)(~(lock_bits));               \
     __asm__ __volatile__                                   \
     (                                                      \
         "ldi r30, 1\n\t"                                   \
@@ -424,7 +438,24 @@
 /** \ingroup avr_boot
     \def boot_lock_bits_set(lock_bits)
 
-    Set the bootloader lock bits. */
+    Set the bootloader lock bits.
+
+    \param lock_bits A mask of which Boot Loader Lock Bits to set.
+
+    \note In this context, a 'set bit' will be written to a zero value.
+
+    For example, to disallow the SPM instruction from writing to the Boot
+    Loader memory section of flash, you would use this macro as such:
+
+    \code
+    boot_lock_bits_set (_BV (BLB12));
+    \endcode
+
+    And to remove any SPM restrictions, you would do this:
+
+    \code
+    boot_lock_bits_set (0);
+    \endcode */
 
 /* Normal versions of the macros use 16-bit addresses.
    Extended versions of the macros use 32-bit addresses.

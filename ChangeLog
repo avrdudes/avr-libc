@@ -1,3 +1,13 @@
+2004-04-20  Theodore A. Roth  <troth@openavr.org>
+
+	[This change should fix bug #8391]
+	* include/avr/boot.h (__BOOT_LOCK_BITS_MASK): Remove.
+	(__boot_lock_bits_set): Use the compliment of lock_bits arg so the user
+	specifies only which bits are to be set. NOTE that this changes the
+	usage but the previous usage was confusing and not well documented.
+	(__boot_lock_bits_set_alternate): Ditto.
+	(boot_lock_bits_set): Improve documentation.
+
 2004-04-16  Theodore A. Roth  <troth@openavr.org>
 [Contributed by Wolfgang Haidinger <wh@vmars.tuwien.ac.at>]
 
