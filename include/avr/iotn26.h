@@ -44,6 +44,28 @@
 
 /* I/O registers */
 
+/* ADC */
+#define ADCW    _SFR_IO16(0x04)
+#ifndef __ASSEMBLER__
+#define ADC     _SFR_IO16(0x04)
+#endif
+#define ADCL    _SFR_IO8(0x04)
+#define ADCH    _SFR_IO8(0x05)
+#define ADCSR   _SFR_IO8(0x06)
+#define ADMUX   _SFR_IO8(0x07)
+
+/* Analog Comparator Control and Status Register */
+#define ACSR    _SFR_IO8(0x08)
+
+/* USI Control Register */
+#define USICR  _SFR_IO8(0x0D)
+
+/* USI Status Register */
+#define USISR  _SFR_IO8(0x0E)
+
+/* USI Data Register */
+#define USIDR  _SFR_IO8(0x0F)
+
 /* Input Pins, Port A */
 #define PINA	_SFR_IO8(0x19)
 
@@ -67,11 +89,8 @@
 /* Watchdog Timer Control Register */
 #define WDTCR	_SFR_IO8(0x21)
 
-/* Timer/Counter 0 */
-#define TCNT0	_SFR_IO8(0x32)
-
-/* Timer/Counter 0 Control Register */
-#define TCCR0	_SFR_IO8(0x33)
+/* PLL Control and Status Register */
+#define PLLCSR  _SFR_IO8(0x29)
 
 /* Timer/Counter 1 Control Register A */
 #define TCCR1A _SFR_IO8(0x30)
@@ -90,6 +109,15 @@
 
 /* Timer/Counter 1 Output Compare Register C */
 #define OCR1C	_SFR_IO8(0x2B)
+
+/* Oscillator Calibration Register */
+#define OSCCAL  _SFR_IO8(0x31)
+
+/* Timer/Counter 0 */
+#define TCNT0	_SFR_IO8(0x32)
+
+/* Timer/Counter 0 Control Register */
+#define TCCR0	_SFR_IO8(0x33)
 
 /* MCU Status Register */
 #define MCUSR	_SFR_IO8(0x34)
@@ -135,22 +163,68 @@
 
 /* General Interrupt MaSK register */
 #define    INT0    6
-#define    INTF0   6
+#define    PCIE1   5
+#define    PCIE0   4
 
 /* General Interrupt Flag Register */
+#define    INTF0   6
+#define    PCIF    5
+
+/* Timer/Counter Interrupt MaSK register */
+#define    OCIE1A  6
+#define    OCIE1B  5
+#define    TOIE1   2
 #define    TOIE0   1
+
+/* Timer/Counter Interrupt Flag register */
+#define    OCF1A   6
+#define    OCF1B   5
+#define    TOV1    2
 #define    TOV0    1
 
+/* PLL Control and Status Register */
+#define    PCKE    2
+#define    PLLE    1
+#define    PLOCK   0
+
+/* MCU Status Register */
+#define    WDRF    3
+#define    BORF    2
+#define    EXTRF   1
+#define    PORF    0
+
 /* MCU general Control Register */
+#define    PUD     6
 #define    SE      5
-#define    SM      4
+#define    SM1     4
+#define    SM0     3
 #define    ISC01   1
 #define    ISC00   0
 
-/* Timer/Counter 0 Control Register */
+/* Timer/Counter 0 Control Register TCCR0 */
+#define    PSR0    3
 #define    CS02    2
 #define    CS01    1
 #define    CS00    0
+
+/* Timer/Counter 1 Control Register TCCR1A */
+#define    COM1A1  7
+#define    COM1A0  6
+#define    COM1B1  5
+#define    COM1B0  4
+#define    FOC1A   3
+#define    FOC1B   2
+#define    PWM1A   1
+#define    PWM1B   0
+
+/* Timer/Counter 1 Control Register TCCR1B */
+#define    CTC1    7
+#define    PSR1    6
+#define    CS13    3
+#define    CS12    2
+#define    CS11    1
+#define    CS10    0
+
 
 /* Watchdog Timer Control Register */
 #define    WDTOE   4
@@ -158,6 +232,36 @@
 #define    WDP2    2
 #define    WDP1    1
 #define    WDP0    0
+
+/* Analog Comparator control and Status Register */
+#define ACD     7
+#define ACBG    6
+#define ACO     5
+#define ACI     4
+#define ACIE    3
+#define ACME    2
+#define ACIS1   1
+#define ACIS0   0
+
+/* ADMUX */
+#define REFS1   7
+#define REFS0   6
+#define ADLAR   5
+#define MUX4    4
+#define MUX3    3
+#define MUX2    2
+#define MUX1    1
+#define MUX0    0
+
+/* ADCSR */
+#define ADEN    7
+#define ADSC    6
+#define ADFR    5
+#define ADIF    4
+#define ADIE    3
+#define ADPS2   2
+#define ADPS1   1
+#define ADPS0   0
 
 /* Data Register, Port A */
 #define    PA7     7
