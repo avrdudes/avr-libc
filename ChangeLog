@@ -1,5 +1,9 @@
 2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/iom163.h: add bit definitions for TWSR.
+
+2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/twi.h: add some more useful macros.
 
 2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
