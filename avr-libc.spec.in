@@ -11,10 +11,10 @@ Summary: AVR libc.
 Name: avr-libc
 Version: %{libc_version}
 Release: 1
-Copyright: GPL, LGPL, BSD, Public Domain
-Group: Avr/Development/Tools
-URL: http://www.amelek.gda.pl/avr/libc
-Source0: http://www.amelek.gda.pl/avr/libc/avr-libc-%{version}.tar.gz
+Copyright: BSD
+Group: Development/Tools
+URL: http://savannah.gnu.org/projects/avr-libc
+Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.gz
 Buildroot: /var/tmp/avr-libc-%{version}-root
 BuildRequires: avr-gcc >= 3.2-1
 Requires: avr-gcc >= 3.2-1
