@@ -95,7 +95,7 @@
 #define __zero_reg__ r1
 #endif
 
-#if FLASHEND > 0x2000  /* ATmega */
+#if __AVR_MEGA__
   #define XJMP jmp
   #define XCALL call
 #else

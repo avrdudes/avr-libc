@@ -1,3 +1,8 @@
+2003-04-12  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* common/macros.inc: Check __AVR_MEGA__, not FLASHEND [Bug #3184].
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
 2003-04-08  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/iotn26.h: Add bit defines for USISR and USICR registers.
