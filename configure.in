@@ -259,9 +259,15 @@ CHECK_PNG_UTILS
 
 if test "$versioned_doc" = "yes"; then
 	DOC_INST_DIR='$(DESTDIR)$(datadir)/doc/avr-libc-$(VERSION)'
+	AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
 else
 	DOC_INST_DIR='$(DESTDIR)$(datadir)/doc/avr-libc'
+	AVR_LIBC_USER_MANUAL="avr-libc-user-manual"
 fi
+
+dnl Define this here so all files agree on the name of the manual.
+dnl This also centralizes the name so it's easier to change.
+AC_SUBST(AVR_LIBC_USER_MANUAL)
 
 AC_SUBST(DOC_INST_DIR)
 
@@ -391,11 +397,6 @@ AC_SUBST(AVR_CRT_AT90)
 AC_SUBST(AVR_CRT_TINY)
 AC_SUBST(AVR_CRT_MEGA)
 AC_SUBST(AVR_CRT_OTHER)
-
-dnl Define this here so all files agree on the name of the manual.
-dnl This also centralizes the name so it's easier to change.
-AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
-AC_SUBST(AVR_LIBC_USER_MANUAL)
 
 dnl the includes for the avr libc
 INCLUDES='-I$(top_srcdir)/include -I$(top_srcdir)/common'

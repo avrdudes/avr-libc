@@ -1,3 +1,8 @@
+2004-04-29  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in: Set AVR_LIBC_USER_MANUAL with version number appended
+	only if versioned docs are requested (that's the default).
+
 2004-04-28  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/eeprom.h (eeprom_rb): Remove deprecated interface.
