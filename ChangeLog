@@ -1,3 +1,8 @@
+2003-10-17  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom162.h: Change PE[01] to UPE[01]. [Bug #5799]
+
 2003-10-16  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
