@@ -1,5 +1,18 @@
 2004-11-03  Eric B. Weddington  <ericw@evcohs.com>
 
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/iomx8.h (WDEE): Correct bit name WDEE to WDE to match the 
+	data sheet.
+	* include/avr/wdt.h (_wdt_write): Add ability to switch the watchdog 
+	control register being used if device is tiny2313, mega48, mega88,
+	mega168. Add new watchdog timeout constants. [Bug #10811, Bug #10872] 
+	Select correct macro to use for at90can128. [Bug #10905]
+	* include/avr/wdt.h: Add include of <stdint.h>. Typecast value in
+	_wdt_write to uint8_t to make macro -mint8 compatible.
+
+2004-11-03  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/avr/iom162.h: Correct license with permission from Nils 
 	Kristian Strom.
 	* include/avr/iom169.h: Correct license with permission from Juergen 

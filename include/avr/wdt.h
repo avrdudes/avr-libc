@@ -30,6 +30,10 @@
 
 /* $Id$ */
 
+/* 
+Contributers: Eric B. Weddington
+*/
+
 /*
    avr/wdt.h - macros for AVR watchdog timer
  */
@@ -38,6 +42,7 @@
 #define _AVR_WDT_H_
 
 #include <avr/io.h>
+#include <stdint.h>
 
 /** \defgroup avr_watchdog Watchdog timer handling
     \code #include <avr/wdt.h> \endcode
@@ -63,47 +68,67 @@
 
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 
-#if defined (__AVR_ATmega169__)
-#define _wdt_write(value)				\
-	__asm__ __volatile__ (				\
-		"in __tmp_reg__,__SREG__" "\n\t"	\
-		"cli" "\n\t"				\
-		"wdr" "\n\t"				\
-		"sts %0,%1" "\n\t"			\
-		"out __SREG__,__tmp_reg__" "\n\t"	\
-		"sts %0,%2"				\
-		: /* no outputs */			\
-		: "M" (_SFR_MEM_ADDR(WDTCR)),		\
-		  "r" (0x18),/* _BV(WDCE) | _BV(WDE) */	\
-		  "r" ((unsigned char)(value))		\
-		: "r0"					\
-	)
+#if defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) \
+|| defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
+#define _WD_CONTROL_REG     WDTCSR
+#define _WD_PS3_MASK        _BV(WDP3)
 #else
-#define _wdt_write(value)				\
-	__asm__ __volatile__ (				\
-		"in __tmp_reg__,__SREG__" "\n\t"	\
-		"cli" "\n\t"				\
-		"wdr" "\n\t"				\
-		"out %0,%1" "\n\t"			\
-		"out __SREG__,__tmp_reg__" "\n\t"	\
-		"out %0,%2"				\
-		: /* no outputs */			\
-		: "I" (_SFR_IO_ADDR(WDTCR)),		\
-		  "r" (0x18),/* _BV(WDCE) | _BV(WDE) */	\
-		  "r" ((unsigned char)(value))		\
-		: "r0"					\
-	)
+#define _WD_CONTROL_REG     WDTCR
+#define _WD_PS3_MASK        0x00
+#endif
+
+
+#if defined (__AVR_ATmega169__) || defined(__AVR_AT90CAN128__) \
+|| defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega168__)
+ 
+#define _wdt_write(value)   \
+    __asm__ __volatile__ (  \
+        "in __tmp_reg__,__SREG__" "\n\t"    \
+        "cli" "\n\t"    \
+        "wdr" "\n\t"    \
+        "sts %0,%1" "\n\t"  \
+        "out __SREG__,__tmp_reg__" "\n\t"   \
+        "sts %0,%2" \
+        : /* no outputs */  \
+        : "M" (_SFR_MEM_ADDR(_WD_CONTROL_REG)), \
+        "r" (_BV(WDCE) | _BV(WDE)), \
+        "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
+            _BV(WDE) | (value & 0x07)) ) \
+        : "r0"  \
+    )
+    
+#else
+
+#define _wdt_write(value)   \
+    __asm__ __volatile__ (  \
+        "in __tmp_reg__,__SREG__" "\n\t"    \
+        "cli" "\n\t"    \
+        "wdr" "\n\t"    \
+        "out %0,%1" "\n\t"  \
+        "out __SREG__,__tmp_reg__" "\n\t"   \
+        "out %0,%2" \
+        : /* no outputs */  \
+        : "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)), \
+        "r" (_BV(WDCE) | _BV(WDE)),   \
+        "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
+            _BV(WDE) | (value & 0x07)) ) \
+        : "r0"  \
+    )
+    
 #endif
 
 /**
    \ingroup avr_watchdog
    Enable the watchdog timer, configuring it for expiry after
    \c timeout (which is a combination of the \c WDP0 through
-   \c WDP2 to write into the \c WDTCR register).
+   \c WDP2 bits to write into the \c WDTCR register; For those devices 
+   that have a \c WDTCSR register, it uses the combination of the \c WDP0 
+   through \c WDP3 bits).
 
    See also the symbolic constants \c WDTO_15MS et al.
 */
-#define wdt_enable(timeout) _wdt_write((timeout) | _BV(WDE))
+#define wdt_enable(timeout) _wdt_write(timeout)
 
 /**
    \ingroup avr_watchdog
@@ -131,34 +156,54 @@
    wdt_enable(WDTO_500MS);
    \endcode
 */
-#define WDTO_15MS	0
+#define WDTO_15MS   0
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS */
-#define WDTO_30MS	1
+#define WDTO_30MS   1
 
 /** \ingroup avr_watchdog See
     \c WDT0_15MS */
-#define WDTO_60MS	2
+#define WDTO_60MS   2
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS */
-#define WDTO_120MS	3
+#define WDTO_120MS  3
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS */
-#define WDTO_250MS	4
+#define WDTO_250MS  4
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS */
-#define WDTO_500MS	5
+#define WDTO_500MS  5
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS */
-#define WDTO_1S		6
+#define WDTO_1S     6
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS */
-#define WDTO_2S		7
+#define WDTO_2S     7
+
+#if defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) || \
+defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS
+    Note: This is only available on the ATtiny2313, ATmega48, ATmega88,
+    and the ATmega168.
+    */
+#define WDTO_4S     8
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS 
+    Note: This is only available on the ATtiny2313, ATmega48, ATmega88,
+    and the ATmega168.
+    */
+#define WDTO_8S     9
+
+#endif
+
 
 #endif /* _AVR_WDT_H_ */
