@@ -1,4 +1,14 @@
-2002-11-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+2002-11-18  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/inline_asm.dox: Update URL for project.
+	Remove link to Rich Neswold's document since it is now (mostly) merged
+	in with avr-libc.
+	* doc/api/main_page.dox: Update URL for project.
+	Update avr-libc-dev list address.
+	Add note about avr-gcc mailing list.
+
+2002-11-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/demo/Makefile: Use -j .text -j .data for avr-objcopy.
 	* doc/examples/demo/demo.dox: Ditto.

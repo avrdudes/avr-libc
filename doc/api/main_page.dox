@@ -28,7 +28,7 @@
 /** \mainpage AVR Libc
 
 The latest version of this document is always available from
-http://www.freesoftware.fsf.org/avr-libc/.
+http://savannah.nongnu.org/projects/avr-libc/.
 
 The AVR Libc package provides a subset of the standard C library for Atmel AVR
 8-bit RISC microcontrollers. In addition, the library provides the basic
@@ -40,9 +40,17 @@ this document provides enough information to get a new AVR developer up to
 speed quickly using the freely available development tools: binutils, gcc
 avr-libc and many others.
 
+If you find yourself stuck on a problem which this document doesn't quite
+address, you may wish to post a message to the avr-gcc mailing list. Most of
+the developers of the AVR binutils and gcc ports in addition to the devleopers
+of avr-libc subscribe to the list, so you will usually be able to get your
+problem resolved. You can subscribe to the list at
+http://www.avr1.org/mailman/listinfo/avr-gcc-list/. Before posting to the
+list, you might want to try reading the \ref FAQ chapter of this document.
+
 \note This document is a work in progress. As such, it may contain incorrect
 information. If you find a mistake, please send an email to the
-avr-libc-dev@mail.freesoftware.fsf.org describing the mistake. Also, send us an
+avr-libc-dev@nongnu.org describing the mistake. Also, send us an
 email if you find that a specific topic is missing from the document.
 
 \section supp_devices Supported Devices

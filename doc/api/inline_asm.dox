@@ -85,7 +85,7 @@ harald.kipp@egnite.de
 
 \note As of 26th of July 2002, this document has been merged into the
 documentation for avr-libc. The latest version is now available at 
-http://www.freesoftware.fsf.org/avr-libc/ .
+http://savannah.nongnu.org/projects/avr-libc/.
 
 \section gcc_asm GCC asm Statement
 
@@ -955,11 +955,6 @@ Calling the function \c Calc() will create assembler instructions to call the
 function \c CALCULATE.
 
 \section links Links
-
-<b><em>A GNU Development Environment for the AVR Microcontroller</em></b>
-covers the details of the GNU Tools that are specific to the AVR family of
-processors.  By Rich Neswold.
-http://www.enteract.com/~rneswold/avr/
 
 For a more thorough discussion of inline assembly usage, see the gcc user
 manual. The latest version of the gcc manual is always available here:
