@@ -174,7 +174,7 @@ typedef long long prog_long_long PROGMEM;
     \note The address is a byte address.
     The address is in the program space. */
 
-#define pgm_read_byte_near(address_short)   __LPM((unsigned short)(address_short))
+#define pgm_read_byte_near(address_short) __LPM((uint16_t)(address_short))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_near(address_short)
@@ -182,7 +182,7 @@ typedef long long prog_long_long PROGMEM;
     \note The address is a byte address. 
     The address is in the program space. */
 
-#define pgm_read_word_near(address_short)   __LPM_word((unsigned short)(address_short))
+#define pgm_read_word_near(address_short) __LPM_word((uint16_t)(address_short))
 
 #ifdef RAMPZ  /* >64K program memory (ATmega103, ATmega128) */
 
