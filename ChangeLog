@@ -1,5 +1,10 @@
 2003-11-11  Theodore A. Roth  <troth@openavr.org>
 
+	* avr-libc.spec.in: Allow disabling build of docs sub-package with 
+	"--without docs".
+
+2003-11-11  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/crc16.h: Use inttypes.h defined types to allow use
 	with -mint8.
 	* include/avr/delay.h: Ditto.
