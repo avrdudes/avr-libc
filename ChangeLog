@@ -1,3 +1,7 @@
+2003-02-26  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/acknowledge.dox: Add Rich Neswold.
+
 2003-02-25  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/iom169.h: Update some comments only.

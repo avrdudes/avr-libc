@@ -48,7 +48,7 @@
 
 	- Joerg Wunsch [ joerg@FreeBSD.ORG ] for adding all the AVR development
 	tools to the FreeBSD [ http://www.freebsd.org ] ports tree and for
-	providing the \ref demo_project "demo project".
+	providing the basics for the \ref demo_project "demo project".
 
 	- Brian Dean [ bsd@bsdhome.com ] for developing \b avrprog (an alternate
 	to <b>uisp</b>) and for contributing \ref using_avrprog "documentation"
@@ -57,6 +57,10 @@
 	- Eric Weddington [ eric@umginc.net ] for maintaining the \b WinAVR
 	package and thus making the continued improvements to the
 	Opensource AVR toolchain available to many users.
+
+	- Rich Neswold for writing the original avr-tools document (which he
+	graciously allowed to be merged into this document) and his
+	improvements to the \ref demo_project "demo project".
 
 	- All the people who have submitted suggestions, patches and bug reports.
     (See the AUTHORS files of the various tools.)
