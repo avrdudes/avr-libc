@@ -56,7 +56,9 @@ extern "C" {
 */
 
 /*@{*/
-/** \name Standard functionality. */
+/** \name Standard functionality.
+ \ingroup avr_stdlib
+*/
 /** Result type for function div(). */
 typedef struct {
 	int quot;
@@ -374,7 +376,9 @@ extern double strtod(const char *__nptr, char **__endptr);
 /*@}*/
 
 /*@{*/
-/** \name Non-standard (i.e. non-ISO C) functions */
+/** \name Non-standard (i.e. non-ISO C) functions.
+ \ingroup avr_stdlib
+*/
 /**
    The function itoa() converts the integer value from \c val into an
    ASCII representation that will be stored under \c s.  The caller
@@ -437,7 +441,9 @@ extern char *ultoa(unsigned long int __val, char *__s, int __radix);
 /*@}*/
 
 /*@{*/
-/** \name Conversion functions for double arguments. */
+/** \name Conversion functions for double arguments.
+ \ingroup avr_stdlib
+*/
 /** Bit value that can be passed in \c flags to dtostre(). */
 #define DTOSTR_ALWAYS_SIGN 0x01        /* put '+' or ' ' for positives */
 /** Bit value that can be passed in \c flags to dtostre(). */
