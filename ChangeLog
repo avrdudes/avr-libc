@@ -1,3 +1,7 @@
+2003-03-24  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
 2003-03-17  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/interrupt.h (enable_external_int): There are now 3
