@@ -1,5 +1,9 @@
 2004-04-23  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AVR_LIBC_USER_MANUAL): Append version number.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/iomx8.h: Undefine EECR, EEDR, EEAR, EEARL, and EEARH
 	before defining them to avoid conflict with predfined values in
 	io.h.

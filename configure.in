@@ -342,7 +342,7 @@ AC_SUBST(AVR_CRT_OTHER)
 
 dnl Define this here so all files agree on the name of the manual.
 dnl This also centralizes the name so it's easier to change.
-AVR_LIBC_USER_MANUAL="avr-libc-user-manual"
+AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
 AC_SUBST(AVR_LIBC_USER_MANUAL)
 
 dnl the includes for the avr libc
