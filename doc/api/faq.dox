@@ -48,6 +48,7 @@
 -# \ref faq_ext_ram
 -# \ref faq_optflags
 -# \ref faq_reloc_code
+-# \ref faq_fuses
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -887,6 +888,31 @@ using the \ref gcc_minusW "-Wl compiler option":
 The name after section-start is the name of the section to be
 relocated. The number after the section name is the beginning address
 of the named section.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_fuses My UART is generating nonsense!  My ATmega128 keeps crashing! Port F is completely broken!
+
+Well, certain odd problems arise out of the situation that the AVR
+devices as shipped by Atmel often come with a default fuse bit
+configuration that doesn't match the user's expectations.  Here is a
+list of things to care for:
+
+- All devices that have an internal RC oscillator ship with the fuse
+enabled that causes the device to run off this oscillator, instead of
+an external crystal.  This often remains unnoticed until the first
+attempt is made to use something critical in timing, like UART
+communication.
+- The ATmega128 ships with the fuse enabled that turns this device
+into ATmega103 compatibility mode.  This means that some ports are not
+fully usable, and in particular that the internal SRAM is located at
+lower addresses.  Since by default, the stack is located at the top of
+internal SRAM, a program compiled for an ATmega128 running on such a
+device will immediately crash upon the first function call (or rather,
+upon the first function return).
+- Devices with a JTAG interface have the \c JTAGEN fuse programmed by
+default.  This will make the respective port pins that are used for
+the JTAG interface unavailable for regular IO.
 
 <small>Back to \ref faq_index.</small>
 

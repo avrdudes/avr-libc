@@ -1,3 +1,7 @@
+2003-01-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add an entry about default fuse bits.
+
 2003-01-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/strtod.S: style police: tabs, comments, local labels.
