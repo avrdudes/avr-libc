@@ -8,6 +8,7 @@
           uses strtod for parsing floating point numbers
   [#2924] strtod returns incorrect endptr
   [#9013] Macroses as a program block.
+  [#9514] missing stdint.h.
   [#9669] Incorrect example for strings in flash.
           The FAQ entry did not extract the pointers from a ROM table
           using memcpy_P() but used the ROM table directly.  This works
@@ -17,11 +18,15 @@
 
 * Other changes:
 
-  + <inttypes.h> is now prepared for the changed -mint8 behaviour of the
+  + <stdint.h> is now prepared for the changed -mint8 behaviour of the
     next GCC release where [u]int32_t will be possible even with -mint8.
 
   + doc/examples/demo/demo.c can now handle the ATmega8 and ATmega32
     MCU types.
+
+  + According to C99, <stdint.h> is now used to declare exact-width
+    integer types.  <inttypes.h> includes that header, but is meant to
+    extend it.  For just the exact-width integer types only, use <stdint.h>.
 
 *** Changes in avr-libc-1.0.4:
 
