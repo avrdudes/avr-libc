@@ -1,5 +1,11 @@
 2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libm/fplib/atan.S: completely rewritten, much better accuracy.
+	* libm/fplib/atan2.S: completely rewritten;
+		both contributed by Reiner Patommel.
+
+2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libm/fplib/fplib.inc: add FPPUSH, FPPOP, FPCLR, and FPSWAP
 		macros; contributed by Reiner Patommel.
 

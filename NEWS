@@ -58,6 +58,13 @@ mega8515 [untested]
 mega8535 [untested]
 tiny26
 
+* Improved trigonometrical functions:
+
+Reiner Patommel provided complete rewrites for asin(), atan() and atan2()
+that feature a better (for some argument ranges even much better)
+accuracy than the previous versions.  Note that since acos() uses asin(),
+it also benefits from this.
+
 * Incompatibilities with previous version.
 
 The arguments for outb()/outw() have been reversed.
