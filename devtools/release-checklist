@@ -1,0 +1,8 @@
+  $ cvs up -dP
+  $ vim configure.ac                # set the version number.
+  $ vim ChangeLog                   # update to note the release.
+  $ vim <foo>                       # Edit any other files to note release.
+  $ ./bootstrap                     # or whatever for that project
+  $ mkdir obj-rel && cd obj-rel
+  $ ../configure --prefix=$PWD/_install <other-opts>
+  $ make && make install
