@@ -1,3 +1,8 @@
+2004-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/twitest/twitest.c: Make it work on 1 MHz clock.
+	* doc/examples/twitest/twitest.dox: Renumber annotations.
+
 2004-07-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/Makefile.am: rearrange demos into their own group.
