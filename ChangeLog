@@ -1,4 +1,12 @@
 2004-04-20  Theodore A. Roth  <troth@openavr.org>
+[Contributed by LAL@pro.onet.pl]
+
+	[This closes patch #2651]
+	* include/avr/iom169.h: Change SIG_UART0_RECV to SIG_USART_RECV.
+	Change SIG_UART0_DATA to SIG_USART_DATA.
+	Change SIG_UART0_TRANS to SIG_USART_TRANS.
+
+2004-04-20  Theodore A. Roth  <troth@openavr.org>
 
 	[This change should fix bug #8391]
 	* include/avr/boot.h (__BOOT_LOCK_BITS_MASK): Remove.
