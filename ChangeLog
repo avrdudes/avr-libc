@@ -1,5 +1,10 @@
 2004-04-06  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/iomx8.h (ADC): Fix to make it 16 bit.
+	(ADCW): Ditto.
+
+2004-04-06  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/iom168.h: New file.
 	* include/avr/iom48.h: New file.
