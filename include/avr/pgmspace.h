@@ -63,7 +63,6 @@
 #include <stddef.h>
 #include <avr/io.h>
 
-
 #ifndef __ATTR_CONST__
 #define __ATTR_CONST__ __attribute__((__const__))
 #endif
@@ -89,14 +88,12 @@ typedef int prog_int PROGMEM;
 typedef long prog_long PROGMEM;
 typedef long long prog_long_long PROGMEM;
 
-
 /** \ingroup avr_pgmspace
     \def PSTR(s)
 
     Used to declare a static pointer to a string in program space. */
 
 #define PSTR(s) ({static char __c[] PROGMEM = (s); __c;})
-
 
 #define __LPM_classic__(addr)   \
 ({                              \
@@ -113,8 +110,6 @@ typedef long long prog_long_long PROGMEM;
     __result;                   \
 })
 
-
-
 #define __LPM_enhanced__(addr)  \
 ({                              \
     uint16_t __addr16 = (uint16_t)(addr); \
@@ -127,7 +122,6 @@ typedef long long prog_long_long PROGMEM;
     );                          \
     __result;                   \
 })
-
 
 #define __LPM_word_classic__(addr)          \
 ({                                          \
@@ -147,7 +141,6 @@ typedef long long prog_long_long PROGMEM;
     __result;                               \
 })
 
-
 #define __LPM_word_enhanced__(addr)         \
 ({                                          \
     uint16_t __addr16 = (uint16_t)(addr);   \
@@ -162,8 +155,6 @@ typedef long long prog_long_long PROGMEM;
     __result;                               \
 })
 
-
-
 #if defined (__AVR_ENHANCED__)
 #define __LPM(addr)         __LPM_enhanced__(addr)
 #define __LPM_word(addr)    __LPM_word_enhanced__(addr)
@@ -171,7 +162,6 @@ typedef long long prog_long_long PROGMEM;
 #define __LPM(addr)         __LPM_classic__(addr)
 #define __LPM_word(addr)    __LPM_word_classic__(addr)
 #endif
-
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_near(address_short)
@@ -181,7 +171,6 @@ typedef long long prog_long_long PROGMEM;
 
 #define pgm_read_byte_near(address_short)   __LPM((unsigned short)(address_short))
 
-
 /** \ingroup avr_pgmspace
     \def pgm_read_word_near(address_short)
     Read a word from the program space with a 16-bit (near) address. 
@@ -189,10 +178,6 @@ typedef long long prog_long_long PROGMEM;
     The address is in the program space. */
 
 #define pgm_read_word_near(address_short)   __LPM_word((unsigned short)(address_short))
-
-
-
-
 
 #ifdef RAMPZ  /* >64K program memory (ATmega103, ATmega128) */
 
@@ -220,7 +205,6 @@ typedef long long prog_long_long PROGMEM;
     __result;                       \
 })
 
-
 #define __ELPM_enhanced__(addr)     \
 ({                                  \
     uint32_t __addr32 = (uint32_t)(addr); \
@@ -237,7 +221,6 @@ typedef long long prog_long_long PROGMEM;
     );                              \
     __result;                       \
 })
-
 
 #define __ELPM_word_classic__(addr)     \
 ({                                      \
@@ -264,8 +247,6 @@ typedef long long prog_long_long PROGMEM;
     __result;                           \
 })
 
-
-
 #define __ELPM_word_enhanced__(addr)    \
 ({                                      \
     uint32_t __addr32 = (uint32_t)(addr); \
@@ -284,7 +265,6 @@ typedef long long prog_long_long PROGMEM;
     __result;                           \
 })
 
-
 #if defined (__AVR_ENHANCED__)
 #define __ELPM(addr)        __ELPM_enhanced__(addr)
 #define __ELPM_word(addr)   __ELPM_word_enhanced__(addr)
@@ -293,21 +273,19 @@ typedef long long prog_long_long PROGMEM;
 #define __ELPM_word(addr)   __ELPM_word_classic__(addr)
 #endif
 
-
 #endif
-
-
-
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_far(address_long)
     Read a byte from the program space with a 32-bit (far) address. 
+
     \note The address is a byte address. 
     The address is in the program space. */
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_far(address_long)
     Read a word from the program space with a 32-bit (far) address. 
+
     \note The address is a byte address.
     The address is in the program space. */
 
@@ -330,11 +308,10 @@ typedef long long prog_long_long PROGMEM;
 
 #endif
 
-
-
 /** \ingroup avr_pgmspace
     \def pgm_read_byte(address_short)
     Read a byte from the program space with a 16-bit (near) address. 
+
     \note The address is a byte address. 
     The address is in the program space. */
 
@@ -343,12 +320,11 @@ typedef long long prog_long_long PROGMEM;
 /** \ingroup avr_pgmspace
     \def pgm_read_word(address_short)
     Read a word from the program space with a 16-bit (near) address. 
+
     \note The address is a byte address. 
     The address is in the program space. */
 
 #define pgm_read_word(address_short)    pgm_read_word_near(address_short)
-
-
 
 /** \ingroup avr_pgmspace
     \def PGM_P
@@ -360,7 +336,6 @@ typedef long long prog_long_long PROGMEM;
 #define PGM_P const prog_char *
 #endif
 
-
 /** \ingroup avr_pgmspace
     \def PGM_VOID_P
 
@@ -369,7 +344,6 @@ typedef long long prog_long_long PROGMEM;
 #ifndef PGM_VOID_P
 #define PGM_VOID_P const prog_void *
 #endif
-
 
 extern void *memcpy_P(void *, PGM_VOID_P, size_t);
 extern char *strcat_P(char *, PGM_P);
@@ -384,7 +358,6 @@ extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern char *strncat_P(char *, PGM_P, size_t);
 extern char *strncpy_P(char *, PGM_P, size_t);
 
-
 #if 0  /* not implemented yet */
 extern int printf_P(PGM_P, ...);
 extern int puts_P(PGM_P);
@@ -398,9 +371,7 @@ extern PGM_P strerror_P(int);
 }
 #endif
 
-
 /** \name Backwards compatibility macros */
-
 
 /** \ingroup avr_pgmspace
     \def PRG_RDB
@@ -409,8 +380,4 @@ extern PGM_P strerror_P(int);
 
 #define PRG_RDB(addr)       pgm_read_byte(addr)
 
-
-
-
 #endif /* __PGMSPACE_H_ */
-
