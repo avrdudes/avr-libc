@@ -1,24 +1,37 @@
-2003-11-18  Theodore A. Roth  <troth@openavr.org>
+2003-11-26  Theodore A. Roth  <troth@openavr.org>
 
-	* NEWS: Add note about new crc update functions.
+	Released avr-libc-1.0.2.
 
-2003-11-18  Theodore A. Roth  <troth@openavr.org>
+2003-11-26  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
-	* include/avr/crc16.h (_crc16_update): Add line break to dox.
-	(_crc_xmodem_update): Ditto.
-	(_crc_ccitt_update): New function.
-	[Submitted by Tomas Vanek <vanekt@fbl.cz>]
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.2.
+	* NEWS: Add note about now stdio functions.
 
-2003-11-12 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+2003-11-24  Joerg Wunsch  <j.gnu@uriah.heep.sax.de>
 
 	* include/stdio.h: Implement missing stdio members: vsprintf(),
-		vsprintf_P(), vsnprintf(), vsnprintf_P()
+		 vsprintf_P(), vsnprintf(), vsnprintf_P()
 	* libc/stdio/Makefile.am: ditto.
 	* libc/stdio/vsprintf.c: New file.
 	* libc/stdio/vsprintf_p.c: New file.
 	* libc/stdio/vsnprintf.c: New file.
 	* libc/stdio/vsnprintf_p.c: New file.
+
+2003-11-18  Theodore A. Roth  <troth@openavr.org>
+
+	* NEWS: Add note about new _crc_ccitt_update function.
+
+2003-11-18  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.1.20031118.
+	* include/avr/crc16.h (_crc16_update): Add line break to dox.
+	(_crc_xmodem_update): Ditto.
+	(_crc_ccitt_update): New function.
+	[Submitted by Tomas Vanek <vanekt@fbl.cz>]
+
+2003-11-11  Theodore A. Roth  <troth@openavr.org>
+
+	* avr-libc.spec.in: Require doxygen 1.2.16, not 1.3.4.
 
 2003-11-11  Theodore A. Roth  <troth@openavr.org>
 
@@ -39,7 +52,10 @@
 
 2003-11-11  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.1.20031111.
+	* NEWS: Add note about new crc function.
+	Add note about port pin changes and warn mega162 users about PE0 and
+	PE1 changing again.
 	* include/avr/crc16.h (_crc16_update): Add dox.
 	(_crc_xmodem_update): New function.
 
@@ -57,7 +73,7 @@
 
 2003-10-20  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.1.20031020.
 	* include/avr/io.h: Include portpins.h.
 	* include/avr/portpins.h: New file.
 	* include/avr/ioat94k.h: Convert PORTxn to Pxn.
@@ -66,10 +82,19 @@
 	* include/avr/iom64.h: Convert PORTxn to Pxn.
 	* include/avr/iotn15.h: Convert PORTxn to Pxn.
 
+2003-10-19  Theodore A. Roth  <troth@openavr.org>
+
+	Released avr-libc-1.0.1.
+
+2003-10-19  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.1.
+
 2003-10-18  Theodore A. Roth  <troth@openavr.org>
 [Fix for Bug #5976]
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031018.
+	* NEWS: Add note warning mega162 users about fix for bug #5799.
 	* doc/api/faq.dox: Use pgm_read_byte() instead of __lpm_inline() in the
 	debug_P() example.
 	* include/stdlib.h (itoa): Add note and warning about minimal buffer
@@ -80,12 +105,11 @@
 
 2003-10-17  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031017.
 	* include/avr/iom162.h: Change PE[01] to UPE[01]. [Bug #5799]
 
 2003-10-16  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* NEWS: Add note about new vfprintf_P and vfscanf_P functions.
 	* include/stdio.h: Add prototypes and dox for vfprintf_P and vfscanf_P.
 	* libc/stdio/Makefile.am (lib_a_c_sources): Add vfprintf_p.c and
@@ -94,137 +118,44 @@
 	* libc/stdio/vfscanf_p.c: New file.
 
 2003-10-09  Theodore A. Roth  <troth@openavr.org>
+[Submitted by Steven Borley <steven.borley@diode.demon.co.uk>]
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
-	* README: Change current branch version to 1.1.
-	* libc/string/strcat.S: Don't use backtick to quote a C char.
-	* libc/string/strcpy.S: Don't use backtick to quote a C char.
-	* libc/string/strlen.S: Don't use backtick to quote a C char.
-	* libc/string/strtok_r.S: Don't use backtick to quote a C char.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031009.
 
-	[Submitted by Steven Borley <steven.borley@diode.demon.co.uk>]
-	* libc/string/strsep.S: Don't use backtick to quote a C char.
-	Add \fn for function definition dox.
-	Exscape '\' char.
-	* libc/string/strstr.S: Don't use backtick to quote a C char.
-	Add \fn for function definition dox.
-	Exscape '\' char.
+	* include/stdio.h: Escape '\' character in dox.
+	* include/stdlib.h: Ditto.
+	* libc/string/strcat.S: Ditto.
+	* libc/string/strcpy.S: Ditto.
+	* libc/string/strlen.S: Ditto.
+	* libc/string/strnlen.S: Ditto.
+	* libc/string/strstr.S: Ditto.
+
+	* libc/string/strsep.S: Add \fn for function definition dox.
+	Escape '\' character in dox.
+	* libc/string/strtok_r.S: Ditto.
+
+	* include/avr/signal.h: Add a space after \code in dox.
 
 2003-10-08  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20031008.
 	* include/avr/sfr_defs.h: Use inttypes.h defined types to allow use
 	with -mint8.
 	[Submitted by Tomas Vanek <vanekt@fbl.cz>]
 
-2003-09-30  Theodore A. Roth  <troth@openavr.org>
+2003-09-21  Theodore A. Roth  <troth@openavr.org>
 
-	* NEWS: Add note about doxygen upgrade.
-	* doc/TODO: Updates.
-
-2003-09-30  Theodore A. Roth  <troth@openavr.org>
-
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
-	* doc/api/dox.css: Add spec for TD.mdRow.
-
-	* doc/api/Makefile.am:
-	* doc/api/doxygen.config.in:
-	Convert for using doxygen-1.3.4.
-
-	* doc/api/main_page.dox: Add a space after avr-gcc-list URL.
-
-	* doc/api/rel-method.dox:
-	* doc/api/sections.dox:
-	* doc/api/tools-install.dox:
-	* doc/examples/demo/demo.dox:
-	* include/setjmp.h:
-	* include/stdio.h:
-	* include/stdlib.h:
-	* include/avr/interrupt.h:
-	* include/avr/signal.h:
-	* libc/misc/itoa.S:
-	* libc/misc/ltoa.S:
-	* libc/misc/mul10.S:
-	* libc/misc/mulsi10.S:
-	* libc/misc/ultoa.S:
-	* libc/misc/utoa.S:
-	* libc/pmstring/memcpy_P.S:
-	* libc/pmstring/strcasecmp_P.S:
-	* libc/pmstring/strcat_P.S:
-	* libc/pmstring/strcmp_P.S:
-	* libc/pmstring/strcpy_P.S:
-	* libc/pmstring/strlcat_P.S:
-	* libc/pmstring/strlcpy_P.S:
-	* libc/pmstring/strlen_P.S:
-	* libc/pmstring/strncasecmp_P.S:
-	* libc/pmstring/strncat_P.S:
-	* libc/pmstring/strncmp_P.S:
-	* libc/pmstring/strncpy_P.S:
-	* libc/stdio/stdio_private.h:
-	* libc/stdlib/atoi.S:
-	* libc/stdlib/atol.S:
-	* libc/stdlib/ctype.S:
-	* libc/stdlib/malloc.c:
-	* libc/string/memccpy.S:
-	* libc/string/memchr.S:
-	* libc/string/memcmp.S:
-	* libc/string/memcpy.S:
-	* libc/string/memmove.S:
-	* libc/string/memset.S:
-	* libc/string/strcasecmp.S:
-	* libc/string/strcat.S:
-	* libc/string/strchr.S:
-	* libc/string/strcmp.S:
-	* libc/string/strcpy.S:
-	* libc/string/strlcat.S:
-	* libc/string/strlcpy.S:
-	* libc/string/strlen.S:
-	* libc/string/strlwr.S:
-	* libc/string/strncasecmp.S:
-	* libc/string/strncat.S:
-	* libc/string/strncmp.S:
-	* libc/string/strncpy.S:
-	* libc/string/strnlen.S:
-	* libc/string/strrchr.S:
-	* libc/string/strrev.S:
-	* libc/string/strsep.S:
-	* libc/string/strstr.S:
-	* libc/string/strtok_r.S:
-	* libc/string/strupr.S:
-	* libm/fplib/addsf3x.S:
-	* libm/fplib/asin.S:
-	* libm/fplib/atan2.S:
-	* libm/fplib/dtostre.S:
-	* libm/fplib/dtostrf.S:
-	* libm/fplib/exp.S:
-	* libm/fplib/floatsisf.S:
-	* libm/fplib/fmod.S:
-	* libm/fplib/fp_cosinus.S:
-	* libm/fplib/fp_merge.S:
-	* libm/fplib/fp_powerseries.S:
-	* libm/fplib/fp_split.S:
-	* libm/fplib/frexp.S:
-	* libm/fplib/ldexp.S:
-	* libm/fplib/log.S:
-	* libm/fplib/mulsf3x.S:
-	* libm/fplib/sin.S:
-	* libm/fplib/strtod.S:
-	* libm/fplib/tan.S:
-	* libm/fplib/tanh.S:
-	Quell doxygen warnings.
-
-2003-09-22  Theodore A. Roth  <troth@openavr.org>
-
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
-	* doc/TODO: Update to denote 1.0 release.
-
-2003-09-22  Theodore A. Roth  <troth@openavr.org>
-
-	* doc/api/rel-method.dox (Making a release): Fix some typos.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.0.20030921.
 
 2003-09-21  Theodore A. Roth  <troth@openavr.org>
 
-	* NEWS: Post-branch update.
+	Released avr-libc-1.0.
+
+2003-09-21  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.
 	* avr-libc.spec.in: Update gcc requirement to >= 3.3.
+	* doc/api/rel-method.dox (Making a relelase): Fix some typos.
 
 2003-09-18  Eric B. Weddington  <eric@ecentral.com>
 
@@ -232,7 +163,7 @@
 
 2003-09-18  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 0.99.90.20030918.
 	* include/inttypes.h: Add note about -mint8 patch for gcc to change the
 	size of long long from 64 bits to 32 bits.
 	* include/avr/pgmspace.h: Replace prog_int with prog_int16_t.
@@ -245,7 +176,7 @@
 
 2003-09-17  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 0.99.90.20030917.
 	* doc/api/faq.dox: Grammar fixes.
 
 2003-09-17  Theodore A. Roth  <troth@openavr.org>
@@ -295,12 +226,8 @@
 
 2003-08-26  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 0.99.90.20030826.
 	* include/avr/iom162.h (TCCR1A): Add missing bit values.
-
-2003-08-15  Theodore A. Roth  <troth@openavr.org>
-
-	* Cut 1.0 branch. Branch tag is avr-libc-1_0-branch.
 
 2003-08-15  Theodore A. Roth  <troth@openavr.org>
 
