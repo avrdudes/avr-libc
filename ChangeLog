@@ -1,5 +1,9 @@
 2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/faq.dox: add section about external RAM.
+
+2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/assembler.dox: New file.
 	* doc/api/Makefile.am: use assembler.dox.
 	* doc/api/inline_asm.dox: refer to assembler.dox.

@@ -45,6 +45,7 @@
 -# \ref faq_port_pass
 -# \ref faq_reg_usage
 -# \ref faq_rom_array
+-# \ref faq_ext_ram
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -744,6 +745,50 @@ Then in main we see this:
 The addr of bar (0x0090) is loaded into the r23:r22 pair which is the second
 parameter passed to strcpy_P. The r25:r24 pair is the addr of buf.
 
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_ext_ram How to use external RAM?
+
+Well, there is no universal answer to this question; it depends on
+what the external RAM is going to be used for.
+
+Basically, the bit \c SRE (SRAM enable) in the \c MCUCR register needs
+to be set in order to enable the external memory interface.  Depending
+on the device to be used, and the application details, further
+registers affecting the external memory operation like \c XMCRA and
+\c XMCRB, and/or further bits in \c MCUCR might be configured.
+Refer to the datasheet for details.
+
+If the external RAM is going to be used to store the variables from
+the C program (i. e., the \c .data and/or \c .bss segment) in that
+memory area, it is essential to set up the external memory interface
+early during the \ref sec_dot_init "device initialization" so the
+initialization of these variable will take place.  Refer to
+\ref faq_startup for a description how to do this using few lines of
+assembler code, or to the chapter about memory sections for an
+\ref c_sections "example written in C".
+
+The explanation of malloc() contains a \ref malloc_where "discussion"
+about the use of internal RAM vs. external RAM in particular with
+respect to the various possible locations of the \e heap (area
+reserved for malloc()).  It also explains the linker command-line
+options that are required to move the memory regions away from their
+respective standard locations in internal RAM.
+
+Finally, if the application simply wants to use the additional RAM for
+private data storage kept outside the domain of the C compiler
+(e. g. through a <tt>char *</tt> variable initialized directly to a
+particular address), it would be sufficient to defer the
+initialization of the external RAM interface to the beginning of
+main(), so no tweaking of the \c .init1 section is necessary.  The
+same applies if only the heap is going to be located there, since the
+application start-up code does not affect the heap.
+
+It is not recommended to locate the stack in external RAM.  In
+general, accessing external RAM is slower than internal RAM, and
+errata of some AVR devices even prevent this configuration from
+working properly at all.
 
 <small>Back to \ref faq_index.</small>
 
