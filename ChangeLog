@@ -1,10 +1,12 @@
 2004-12-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Last-minute cleanup for release 1.2.0:
 	* include/compat: New directory.
 	* include/compat/ina90.h: Moved from avr/ina90.h.
 	* include/compat/twi.h: Moved from avr/twi.h.
 	* include/avr/ina90.h: Removed from old location.
 	* include/avr/twi.h: Ditto.
+	* doc/avr-libc-reference.html: Remove obsolete file.
 
 2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
 
