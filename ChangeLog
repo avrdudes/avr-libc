@@ -1,5 +1,10 @@
 2004-04-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/faq.dox: Cosmetics: update (C) year, remove some
+	vestiges of trailing whitespace.
+
+2004-04-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/faq.dox: Add items for "clock skew detected", why
 	are interrupt bits cleared by a `1', and why are programmed
 	fuse bits at logical 0.
