@@ -42,7 +42,7 @@
     may not overlap, and the destination string dest must be large enough to
     receive the copy.
 
-    \returns The strncpy() function returns a pointer to the destination
+    \returns The strcpy() function returns a pointer to the destination
     string dest. 
 
     \note If the destination string of a strcpy() is not large enough (that
