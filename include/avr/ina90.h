@@ -83,8 +83,8 @@
 	}					\
  }
 
-#define output_block_inc(port, addr, cnt, op) __out_blk__(port, addr, cnt, ++)
-#define output_block_dec(port, addr, cnt, op) __out_blk__(port, addr, cnt, --)
+#define output_block_inc(port, addr, cnt) __out_blk__(port, addr, cnt, ++)
+#define output_block_dec(port, addr, cnt) __out_blk__(port, addr, cnt, --)
 
 #endif
 
