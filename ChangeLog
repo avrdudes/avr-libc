@@ -1,6 +1,7 @@
 2005-01-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/ldexp.S: remove jump to itself.
+	* libm/fplib/ceil.S: translate German comments, drop IBM437 chars.
 
 2005-01-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

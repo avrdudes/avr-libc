@@ -42,11 +42,11 @@
  *
  *	A = ceil(A)
  *
- * gr˜òter ganzzahliger Wert, der nicht kleiner als arg ist
- * fÅr X > 4B 7F FF FF : X = X (Zahlen haben keinen Bruchteil mehr)
+ * largest integer value not smaller than arg
+ * for X > 4B 7F FF FF : X = X (numbers miss the fractional part then)
  *     X >= 0
- *      X == (float)(long)X   X = X (Zahlen hat keinen Bruchteil)
- *      X != (float)(long)X   X = (float)(long)X+1 (Zahlen hat einen Bruchteil)
+ *      X == (float)(long)X   X = X (no fractional part)
+ *      X != (float)(long)X   X = (float)(long)X+1 (fractional part present)
  *     X <  0 then
  *      X =  (float)(long)X
  *
@@ -70,8 +70,8 @@ GLOBAL(ceil)
                               ;          x  T      R19   R18:rSI0:R16: R1
     CPI     rA3,0x7F          ; Exp >= 0x7F -> arg >= 1.0
     BRCC    100f
-    BRTS    1f                ; |arg| < 1.0 -> ceil  = / 1.0  fÅr X >  0.0
-    TST     rA3               ;                        \ 0.0  fÅr X <= 0.0
+    BRTS    1f                ; |arg| < 1.0 -> ceil  = / 1.0  for X >  0.0
+    TST     rA3               ;                        \ 0.0  for X <= 0.0
     BREQ    1f
     LDI     rA3,0x3F
     LDI     rA2,0x80
