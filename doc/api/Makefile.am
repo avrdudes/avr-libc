@@ -57,14 +57,18 @@ USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
 DEMO_LIBS            = $(shell find $(top_srcdir) -name crts2313.o | head -n 1)
 
-all-local: demo ps html pdf
+all-local: ps html pdf
 
 # Before we can build the dox, we need to build the demo project so that some
-# included files get generated.
+# included files get generated. This could fail if crts2313.o is neither built
+# nor installed, but there's not much we can do about that.
 demo:
-	-cd $(top_srcdir)/doc/examples/demo && \
+	if test -n "$(DEMO_LIBS)" ; then \
+		NODEFLIBS="-nostartfiles -nodefaultlibs" ; \
+	fi; \
+	cd $(top_srcdir)/doc/examples/demo && \
 		${MAKE} DEFS="-I$(top_srcdir)/include"  \
-			LIBS="-nostartfiles -nodefaultlibs $(DEMO_LIBS)" dox all
+			LIBS="$$NODEFLIBS $(DEMO_LIBS)" dox all
 
 # images for inclusion in HTML and LaTeX documents
 SUFFIXES= .fig .png .eps
@@ -86,13 +90,13 @@ IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating postscript output.
-ps: $(TARGET_DOX_PS)
+ps: demo $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: $(TARGET_DOX_HTML)
+html: demo $(TARGET_DOX_HTML)
 
 # Rule for generating PDF output
-pdf: $(TARGET_DOX_PDF)
+pdf: demo $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
 install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF)

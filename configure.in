@@ -126,7 +126,7 @@ dnl
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 20021028cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20021030cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)

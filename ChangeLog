@@ -1,5 +1,10 @@
 2002-10-30  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in: Bump version.
+	* doc/api/Makefile.am: Make `make demo` less likely to fail.
+
+2002-10-30  Theodore A. Roth  <troth@openavr.org>
+
 	* doc/api/dox.css: Change default html colors.
 	* doc/api/dox_html_header: Don't spec body bgcolor.
 
