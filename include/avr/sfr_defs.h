@@ -183,11 +183,11 @@
 
 /*@}*/
 
-#ifndef __ASSEMBLER__
-
 #ifndef _VECTOR
 #define _VECTOR(N) __vector_ ## N
 #endif
+
+#ifndef __ASSEMBLER__
 
 #define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
 #define _SFR_WORD(sfr) _MMIO_WORD(_SFR_ADDR(sfr))
