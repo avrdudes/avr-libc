@@ -5,13 +5,12 @@ Before 1.0:
         * include/avr/ina90.h
         * include/avr/timer.h
         * include/avr/twi.h
-    - Verify that include/avr/*.h do not reference anything in
-      include/avr/ina90.h
     - Move the following to examples and document
         * include/avr/parity.h
     - In include/avr/delay.h, add macros to allow specifying delays directly 
       in microseconds (with MCU clock frequency defined by the user).  With 
       constant delays, all floating point math would be done at compile time. 
+      A patch has been posted to the avr-libc list, see [6].
     - Document:
         * include/avr/crc16.h
         * include/avr/parity.h
@@ -21,10 +20,6 @@ Before 1.0:
         * gcrt1.S
         * how to pre-program the EEPROM.
         * how to roll your own crt*.o ???
-        * the mechanism behind include/avr/io*.h [Joerg has patch [5].]
-    - Move out the common register definitions into <avr/io.h>
-      [Joerg has done a major part of it, but there might be more to move
-      around.]
 
 After 1.0:
     - Figure out how to remove __ prefix from function args in dox.
@@ -45,3 +40,4 @@ After 1.0:
 [3] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-08/msg00117.html
 [4] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-09/msg00038.html
 [5] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-12/msg00034.html
+[6] http://mail.gnu.org/archive/html/avr-libc-dev/2003-01/msg00040.html

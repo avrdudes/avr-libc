@@ -1,3 +1,7 @@
+2003-02-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/TODO: update.
+
 2003-02-08  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* include/avr/ioat94k.h: Fix external/FPGA interrupts.
