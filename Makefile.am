@@ -80,12 +80,14 @@ toollibdir = $(tooldir)/lib$(MULTISUBDIR)
 
 AR_FLAGS = rc
 
-toollib_LIBRARIES = libc.a libm.a
+toollib_LIBRARIES = libc.a libm.a libprintf_min.a # libprintf_flt.a
 toollib_DATA = $(AVR_CRT_AT90) $(AVR_CRT_TINY) $(AVR_CRT_MEGA) $(AVR_CRT_OTHER)
 
 # must be defined as empty, so that make dist will work
 libc_a_SOURCES =
 libm_a_SOURCES =
+libprintf_min_a_SOURCES =
+#libprintf_flt_a_SOURCES =
 
 EXTRA_DIST = config-ml.in doconf dodist domake reconf LICENSE common include
 
@@ -98,6 +100,20 @@ libc/libc.a: ; @true
 libm.a: libm/libm.a
 	rm -f $@
 	ln libm/libm.a $@ >/dev/null 2>/dev/null || cp libm/libm.a $@
+
+libm/libm.a: ; @true
+
+libprintf_min.a: libc/stdio/libprintf_min.a
+	rm -f $@
+	ln libc/stdio/libprintf_min.a $@ >/dev/null 2>/dev/null ||\
+	cp libc/stdio/libprintf_min.a $@
+
+libm/libprintf_min.a: ; @true
+
+libprintf_flt.a: libc/stdio/libprintf_flt.a
+	rm -f $@
+	ln libc/stdio/libprintf_flt.a $@ >/dev/null 2>/dev/null ||\
+	cp libc/stdio/libprintf_flt.a $@
 
 libm/libm.a: ; @true
 

@@ -28,7 +28,7 @@
 
 ## Process this file with automake to generate Makefile.in
 
-noinst_LIBRARIES = lib.a
+noinst_LIBRARIES = lib.a libprintf_min.a # libprintf_flt.a
 
 lib_a_c_sources =	\
 	fclose.c	\
@@ -41,19 +41,45 @@ lib_a_c_sources =	\
 	snprintf.c	\
 	snprintf_p.c	\
 	sprintf.c	\
-	sprintf_p.c	\
-	vfprintf.c
+	sprintf_p.c
 
 lib_a_SOURCES = $(lib_a_c_sources)
 
 lib_a_c_objs = $(lib_a_c_sources:%.c=%.o)
 
+lib_a_LIBADD = vfprintf_std.o
+
+libprintf_min_a_SOURCES=
+
+libprintf_min_a_LIBADD = vfprintf_min.o
+
+#libprintf_flt_a_SOURCES=
+
+#libprintf_flt_a_LIBADD = vfprintf_flt.o
+
 # must be added to the package, but automake doesn't know them as source
 # files until now
-EXTRA_DIST = stdio_private.h
+EXTRA_DIST = vfprintf.c stdio_private.h
 
 # content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
 # according to the multilib subdir (see acinclude.m4 in top directory)
 
 $(lib_a_c_objs): %.o: %.c
 	$(COMPILE) $(AVRLIB_CFLAGS) -c $< -o $@
+
+# vfprintf is compiled best with -O1 -mno-tablejump, this gives the
+# smallest code.
+PRINTF_CFLAGS = $(AVRLIB_CFLAGS) -O1 -mno-tablejump
+
+vfprintf_min.o: vfprintf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=1 \
+	-c $(srcdir)/vfprintf.c -o $@
+
+vfprintf_std.o: vfprintf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=2 \
+	-c $(srcdir)/vfprintf.c -o $@
+
+vfprintf_flt.o: vfprintf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=3 \
+	-c $(srcdir)/vfprintf.c -o $@
+

@@ -1,5 +1,31 @@
 2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* Makefile.am: add hooks for libprintf_*.a.
+	* libc/stdio/Makefile.am: ditto.
+	* libc/stdio/vfprintf.c: add printf levels.
+
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in libc/Makefile.am: wire stdio
+		into the infrastructure.
+	* include/stdio.h: new file.
+	* libc/stdio/Makefile.am: new file.
+	* libc/stdio/fclose.c: new file.
+	* libc/stdio/fdevopen.c: new file.
+	* libc/stdio/fprintf.c: new file.
+	* libc/stdio/fprintf_p.c: new file.
+	* libc/stdio/fputc.c: new file.
+	* libc/stdio/printf.c: new file.
+	* libc/stdio/printf_p.c: new file.
+	* libc/stdio/snprintf.c: new file.
+	* libc/stdio/snprintf_p.c: new file.
+	* libc/stdio/sprintf.c: new file.
+	* libc/stdio/sprintf_p.c: new file.
+	* libc/stdio/stdio_private.h: new file.
+	* libc/stdio/vfprintf.c: new file.
+
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/stdlib.h: fix rand() & Co.
 	* libc/stdlib/rand.c: fix rand() & Co.
 	* libc/stdlib/random.c: New file.

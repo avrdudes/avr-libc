@@ -40,6 +40,26 @@
 
 #define BUFLEN 12
 
+/*
+ * This file can be compiled into more than one flavour.  The default
+ * is to offer the usual modifiers and integer formatting support
+ * (level 2).  Level 1 maintains a minimal version that just offers
+ * integer formatting, but no modifier support whatsoever.  Level 3 is
+ * intented for floating point support.
+ */
+
+#ifndef PRINTF_LEVEL
+#  define PRINTF_LEVEL 2
+#endif
+
+#if PRINTF_LEVEL == 1 || PRINTF_LEVEL == 2
+/* OK */
+#elif PRINTF_LEVEL == 3
+#  error "Not yet implemented."
+#else
+#  error "Not a known printf level."
+#endif
+
 int
 vfprintf(FILE *stream, const char *fmt, va_list ap) {
 	union {
@@ -51,26 +71,36 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 		char *pc;
 	} a;
 	char	c;	/* holds a char from the format string */
-	int8_t	width;
-	uint8_t	base, prec;
+	uint8_t	base;
 	char	b[BUFLEN]; /*
 			    * Contains character representation of the
 			    * number and its prefix, written from back
 			    * to front.
 			    */
 	char	*pb;	/* used as pointer to an element in b */
+#if PRINTF_LEVEL > 1
+	int8_t	width;
+	uint8_t	prec;
+#endif
 
+#if PRINTF_LEVEL < 2
+	uint8_t flags;
+#else
 	uint16_t flags;
+#endif
 
 #define FLHASPERCENT	0x01	/* first % found */
 #define FLNEGATIVE	0x02	/* arg is negative int */
 #define FLLONG		0x04	/* arg is long int */
+
+#if PRINTF_LEVEL > 1
 #define FLPREC		0x08	/* .prec given */
 #define FLSIGNPLUS	0x10	/* always print '+' sign */
 #define FLSIGN		0x20	/* always print sign */
 #define FLALT		0x40	/* # alternate specification given */
 #define FLLPAD		0x80	/* left-align result */
 #define FLZFILL		0x100	/* zero-fill up to width */
+#endif /* PRINTF_LEVEL > 1 */
 
 	flags = 0;
 	stream->len = 0;
@@ -81,6 +111,7 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 	while ((c = ((stream->flags & __SPGM)? PRG_RDB(fmt++): *fmt++))) {
 		if (flags & FLHASPERCENT) {
 			if (c >= '0' && c <= '9') {
+#if PRINTF_LEVEL > 1
 				if (c == '0' && prec == 0 && width == 0) {
 					flags |= FLZFILL;
 				} else {
@@ -90,26 +121,39 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					if (!(flags & FLPREC) && prec < 128) 
 						width = prec;
 				}
+#endif
 			} else {
+#if PRINTF_LEVEL > 1
 				if ((flags & FLPREC) && prec == 0)
 					prec = 1;
+#endif /* PRINTF_LEVEL > 1 */
 				switch (c) {
 				case '+':
+#if PRINTF_LEVEL > 1
 					flags |= FLSIGNPLUS;
 					/* FALLTHROUGH */
+#endif /* PRINTF_LEVEL > 1 */
 				case ' ':
+#if PRINTF_LEVEL > 1
 					flags |= FLSIGN;
+#endif /* PRINTF_LEVEL > 1 */
 					break;
 				case '-':
+#if PRINTF_LEVEL > 1
 					flags |= FLLPAD;
+#endif /* PRINTF_LEVEL > 1 */
 					break;
 				case '#':
+#if PRINTF_LEVEL > 1
 					flags |= FLALT;
+#endif /* PRINTF_LEVEL > 1 */
 					break;
 				case '.':
+#if PRINTF_LEVEL > 1
 					flags |= FLPREC;
 					flags &= ~FLZFILL;
 					prec = 0;
+#endif /* PRINTF_LEVEL > 1 */
 					break;
 				case 'l':
 					flags |= FLLONG;
@@ -118,21 +162,27 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 				case 'f':
 				case 'g':
 					a.c = '?';
+#if PRINTF_LEVEL > 1
 					width--;
+#endif /* PRINTF_LEVEL > 1 */
 					c = 'c';
 					goto nextitem;
 				case 'c':
 					/* char is promoted to int via va_arg */
 					a.c = (char)va_arg(ap, int);
+#if PRINTF_LEVEL > 1
 					width--;
+#endif
 					goto nextitem;
 				case 's':
 					a.pc = va_arg(ap, char *);
 					for (base = 0; a.pc[base]; base++)
 						; /* calc length of string */
+#if PRINTF_LEVEL > 1
 					if ((flags & FLPREC) && prec < base)
 						base = prec;
 					width -= base;
+#endif
 					goto nextitem;
 				case 'd':
 				case 'i':
@@ -143,7 +193,9 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 						flags |= FLNEGATIVE;
 						a.l = -a.l;
 					}
+#if PRINTF_LEVEL > 1
 					flags &= ~FLALT;
+#endif
 					goto processnum;
 				case 'o': /* octal number */
 					base = 8;
@@ -157,7 +209,9 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					a.ul = flags & FLLONG?
 						va_arg(ap, unsigned long):
 						va_arg(ap, unsigned int);
+#if PRINTF_LEVEL > 1
 					flags &= ~(FLSIGNPLUS | FLSIGN);
+#endif
 				  processnum:
 					pb = b;
 					do {
@@ -168,6 +222,7 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 						*pb++;
 						a.ul /= base;
 					} while (a.ul);
+#if PRINTF_LEVEL > 1
 					if (flags & FLZFILL) {
 						a.i8 = width;
 						if (flags & FLALT)
@@ -192,8 +247,10 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 						while (prec-- > a.u8)
 							*pb++ = '0';
 					}
+#endif
 					if (flags & FLNEGATIVE)
 						*pb++ = '-';
+#if PRINTF_LEVEL > 1
 					else if (flags & FLSIGNPLUS)
 						*pb++ = '+';
 					else if (flags & FLSIGN)
@@ -204,10 +261,13 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 						*pb++ = '0';
 					}
 					width -= (uint8_t)(pb - b);
+#endif
 				  nextitem:
+#if PRINTF_LEVEL > 1
 					if (!(flags & FLLPAD))
 						while (width-- > 0)
 							putc(' ', stream);
+#endif
 					if (c == 'c')
 						putc(a.c, stream);
 					else if (c == 's')
@@ -216,9 +276,11 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					else 
 						while (pb != b)
 							putc(*--pb, stream);
+#if PRINTF_LEVEL > 1
 					if (flags & FLLPAD)
 						while (width-- > 0)
 							putc(' ', stream);
+#endif
 					goto clearflags;
 
 				default:
@@ -231,7 +293,9 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 		} else
 			if (c == '%') {
 				flags = FLHASPERCENT;
+#if PRINTF_LEVEL > 1
 				prec = width = 0;
+#endif
 				base = 10;
 			} else
 				putc(c, stream);
