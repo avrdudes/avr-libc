@@ -1,3 +1,13 @@
+2004-04-26  Theodore A. Roth  <troth@openavr.org>
+
+	* config-ml.in: Remove file for autoconf/automake rewrite.
+	* config.sub: Ditto.
+	* configure.in: Ditto.
+	* doconf: Ditto.
+	* dodist: Ditto.
+	* domake: Ditto.
+	* reconf: Ditto.
+
 2004-04-15  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in:
