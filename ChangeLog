@@ -1,3 +1,10 @@
+2005-02-08  Eric B. Weddington  <ericw@evcohs.com>
+
+    * libc/stdio/Makefile.am: Change optimisation level for building
+    printf libraries to -Os.
+    [Fixes bug #11898]
+    * NEWS: Update bugs fixed list.
+
 2005-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/realloc.c: fix bug #11868.

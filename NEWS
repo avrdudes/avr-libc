@@ -6,6 +6,8 @@
   [#11817] Replace SYSCLK with F_CPU in twitest example.
   [#11868] realloc doesn't work correctly on block at end of freelist
            when growing
+  [#11898] Change optimisation level for building printf libraries to -Os.
+
 
 *** Changes since avr-libc-1.2.0:
 
