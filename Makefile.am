@@ -72,8 +72,8 @@ AM_MAKEFLAGS = \
 
 FLAGS_TO_PASS = $(AM_MAKEFLAGS)
 
-SUBDIRS = crt1 libc libm @DOCSDIR@
-DIST_SUBDIRS = crt1 libc libm doc
+SUBDIRS = crt1 libc libm scripts @DOCSDIR@
+DIST_SUBDIRS = crt1 libc libm doc scripts
 
 tooldir = $(exec_prefix)/$(host_alias)
 toollibdir = $(tooldir)/lib$(MULTISUBDIR)

@@ -108,7 +108,8 @@ fix_png: $(wildcard $(USER_MANUAL)/*.png)
 pdf: demo $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
-install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF)
+install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF) \
+	$(INSTALL_DOX_MAN)
 
 uninstall-local:
 	rm -rf $(DOC_INST_DIR)
@@ -231,6 +232,14 @@ install-dox-ps: dox-ps
 	$(mkinstalldirs) $(DOC_INST_DIR)
 	$(INSTALL_DATA) $(USER_MANUAL).ps $(DOC_INST_DIR)/$(USER_MANUAL).ps
 
+install-dox-man: dox-html
+	$(mkinstalldirs) $(DOC_INST_DIR)/man/man3
+	@list='$(wildcard man/man3/*.3)'; \
+	for file in $$list ; do \
+	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file"; \
+	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
+	done
 
 .PHONY: html latex ps pdf dox dox-pdf install-pdf install-html install-ps \
-	install-dox-html install-dox-ps install-dox-pdf
+	install-dox-html install-dox-ps install-dox-pdf \
+	install-dox-man

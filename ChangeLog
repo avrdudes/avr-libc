@@ -1,3 +1,13 @@
+2004-12-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in: Enable man page building.
+	* doc/api/Makefile.am: (ditto)
+	* doc/api/doxygen.config.in: (ditto)
+	* scripts: new directory 
+	* scripts/avr-man.in: Wrapper script for man(1).
+	* scripts/Makefile.am: Link avr-man.in into the build.
+	* Makefile.am: Include the scripts subdir.
+
 2004-12-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/delay.h: Document the inline functions; implement

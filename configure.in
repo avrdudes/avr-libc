@@ -86,15 +86,15 @@ AC_ARG_ENABLE(pdf-doc,
  esac], [pdf_doc=yes])dnl
 
 dnl Man pages are currently not tunable; they'll be built whenever
-dnl the HTML documentation is built.
-dnl
-dnl AC_ARG_ENABLE(man-doc,
-dnl [  --enable-man-doc       build Unix-style manual pages (default)],
-dnl [case "${enableval}" in
-dnl   yes) man_doc=yes ;;
-dnl   no)  man_doc=no ;;
-dnl   *)   AC_MSG_ERROR(bad value ${enableval} for man-doc option) ;;
-dnl  esac], [man_doc=yes])dnl
+dnl the HTML documentation is built.  However, it can be configured
+dnl whether the result is about to be installed or not.
+AC_ARG_ENABLE(man-doc,
+[  --enable-man-doc        build Unix-style manual pages (default)],
+[case "${enableval}" in
+  yes) man_doc=yes ;;
+  no)  man_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for man-doc option) ;;
+ esac], [man_doc=yes])dnl
 
 AC_ARG_ENABLE(versioned-doc,
 [  --enable-versioned-doc  install docs in directory with version name (default)],
@@ -206,6 +206,12 @@ else
 		TARGET_DOX_HTML=dox-html
 		INSTALL_DOX_HTML=install-dox-html
 	fi
+dnl The creation of man pages is a side-effect of the HTML
+dnl generation, so a different target is only needed for installation.
+	if test "$man_doc" = "yes"; then
+		TARGET_DOX_HTML=dox-html
+		INSTALL_DOX_MAN=install-dox-man
+	fi
 fi
 dnl
 AC_SUBST(TARGET_DOX_PS)
@@ -214,6 +220,7 @@ AC_SUBST(TARGET_DOX_HTML)
 AC_SUBST(INSTALL_DOX_PS)
 AC_SUBST(INSTALL_DOX_PDF)
 AC_SUBST(INSTALL_DOX_HTML)
+AC_SUBST(INSTALL_DOX_MAN)
 ])dnl
 
 CHECK_DOXYGEN
@@ -267,10 +274,10 @@ AC_SUBST(PNMTOPNG)
 CHECK_PNG_UTILS
 
 if test "$versioned_doc" = "yes"; then
-	DOC_INST_DIR='$(DESTDIR)$(datadir)/doc/avr-libc-$(VERSION)'
+	DOC_INST_DIR='${DESTDIR}${datadir}/doc/avr-libc-$(VERSION)'
 	AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
 else
-	DOC_INST_DIR='$(DESTDIR)$(datadir)/doc/avr-libc'
+	DOC_INST_DIR='${DESTDIR}${datadir}/doc/avr-libc'
 	AVR_LIBC_USER_MANUAL="avr-libc-user-manual"
 fi
 
@@ -446,6 +453,7 @@ AC_OUTPUT(crt1/Makefile libc/Makefile libc/stdlib/Makefile
           libm/Makefile libm/fplib/Makefile avr-libc.spec
           doc/Makefile doc/examples/Makefile
           doc/api/Makefile doc/api/doxygen.config
+          scripts/Makefile scripts/avr-man
           Makefile,
 [if test -n "$CONFIG_FILES"; then
   . ${avrlib_basedir}/config-ml.in
