@@ -92,11 +92,11 @@ The following is a list of AVR devices currently supported by the library.
 - atmega325
 - atmega3250
 - atmega48
-- atmega64 [untested]
+- atmega64
 - atmega645
 - atmega6450
-- atmega8515 [untested]
-- atmega8535 [untested]
+- atmega8515
+- atmega8535
 - atmega88
 
 \par ATtiny Type Devices:
