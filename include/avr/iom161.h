@@ -28,6 +28,18 @@
 #ifndef _AVR_IOM161_H_
 #define _AVR_IOM161_H_ 1
 
+/* This file should only be included from <avr/io.h>, never directly. */
+
+#ifndef _AVR_IO_H_
+#  error "Include <avr/io.h> instead of this file."
+#endif
+
+#ifndef _AVR_IOXXX_H_
+#  define _AVR_IOXXX_H_ "iom161.h"
+#else
+#  error "Attempt to include more than one <avr/ioXXX.h> file."
+#endif 
+
 #include <avr/sfr_defs.h>
 
 /* I/O registers */

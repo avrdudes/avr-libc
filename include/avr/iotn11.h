@@ -28,6 +28,18 @@
 #ifndef _AVR_IOTN11_H_
 #define _AVR_IOTN11_H_ 1
 
+/* This file should only be included from <avr/io.h>, never directly. */
+
+#ifndef _AVR_IO_H_
+#  error "Include <avr/io.h> instead of this file."
+#endif
+
+#ifndef _AVR_IOXXX_H_
+#  define _AVR_IOXXX_H_ "iotn11.h"
+#else
+#  error "Attempt to include more than one <avr/ioXXX.h> file."
+#endif 
+
 #ifndef __ASSEMBLER__
 #  warning "MCU not supported by the C compiler"
 #endif
