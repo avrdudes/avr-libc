@@ -1,5 +1,9 @@
 2002-12-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/stdio/vfprintf.c: recognize Inf and NaN.
+
+2002-12-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/math.h: add isinf()/isnan().
 	* libc/fplib/Makefile.am: ditto.
 	* libc/fplib/isinfnan.S: new file.

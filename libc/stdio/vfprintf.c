@@ -164,9 +164,35 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 				}
 				if (!(flags & FLPREC))
 					prec = 6;
-				flags |= FLFLOAT;
 				/* FLPREC is used for integer formats only */
 				flags &= ~(FLALT | FLPREC);
+				if (isnan(a.d)) {
+					b[0] = b[2] = 'N';
+					b[1] = 'A';
+					pb = b + 3;
+				  dofltexcpt:
+					/*
+					 * XXX: this makes assumptions about
+					 * ASCII being used.  Should probably
+					 * use ctype, but would cause more
+					 * bloat.
+					 */
+					if (c >= 'e' && c <= 'g') {
+						b[0] += 'a' - 'A';
+						b[1] += 'a' - 'A';
+						b[2] += 'a' - 'A';
+					}
+					goto nextitem;
+				} else if (isinf(a.d)) {
+					b[2] = 'I';
+					b[1] = 'N';
+					b[0] = 'F';
+					pb = b + 3;
+					if (a.d < 0.0)
+						*pb++ = '-';
+					goto dofltexcpt;
+				}
+				flags |= FLFLOAT;
 				switch (c) {
 				case 'e':
 				case 'E':
