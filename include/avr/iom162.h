@@ -446,14 +446,14 @@
 
 /* TCCR1A bit definitions */
 
-#define COM1A1
-#define COM1A0
-#define COM1B1
-#define COM1B0
-#define FOC1A
-#define FOC1B
-#define WGM11
-#define WGM10
+#define COM1A1  7
+#define COM1A0  6
+#define COM1B1  5
+#define COM1B0  4
+#define FOC1A   3
+#define FOC1B   2
+#define WGM11   1
+#define WGM10   0
 
 
 
