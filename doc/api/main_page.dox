@@ -102,6 +102,8 @@ The following is a list of AVR devices currently supported by the library.
 
 - at94K \ref supp_dev_footnote_two "[2]"
 - at76c711 \ref supp_dev_footnote_three "[3]"
+- at43usb355
+- at86rf401
 
 \anchor supp_dev_footnote_one
 
@@ -117,8 +119,6 @@ these. More information would be welcomed.]
 \anchor supp_dev_footnote_three
 
 \note <b>[3]</b> The at76c711 is a USB to fast serial interface bridge chip
-using an AVR core. It seems to be supported by binutils and gcc, but is only
-partially supported by avr-libc. The missing piece seems to be
-<tt>crt76711.o</tt>.
+using an AVR core.
 
 */

@@ -1,3 +1,9 @@
+2003-02-27  Theodore A. Roth  <troth@openavr.org>
+
+	* NEWS:
+	* doc/api/main_page.dox:
+	Note support for new devices (AT43USB355, AT76C711, AT86RF401).
+
 2003-02-27  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
