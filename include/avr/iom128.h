@@ -368,9 +368,12 @@
 #define SIG_OUTPUT_COMPARE0     _VECTOR(15)
 #define SIG_OVERFLOW0           _VECTOR(16)
 #define SIG_SPI                 _VECTOR(17)
-#define SIG_UART0_RECV          _VECTOR(18)
-#define SIG_UART0_DATA          _VECTOR(19)
-#define SIG_UART0_TRANS         _VECTOR(20)
+#define SIG_USART0_RECV         _VECTOR(18)
+#define SIG_UART0_RECV          _VECTOR(18) /* Keep for compatibility */
+#define SIG_USART0_DATA         _VECTOR(19)
+#define SIG_UART0_DATA          _VECTOR(19) /* Keep for compatibility */
+#define SIG_USART0_TRANS        _VECTOR(20)
+#define SIG_UART0_TRANS         _VECTOR(20) /* Keep for compatibility */
 #define SIG_ADC                 _VECTOR(21)
 #define SIG_EEPROM_READY        _VECTOR(22)
 #define SIG_COMPARATOR          _VECTOR(23)
@@ -380,9 +383,12 @@
 #define SIG_OUTPUT_COMPARE3B    _VECTOR(27)
 #define SIG_OUTPUT_COMPARE3C    _VECTOR(28)
 #define SIG_OVERFLOW3           _VECTOR(29)
-#define SIG_UART1_RECV          _VECTOR(30)
-#define SIG_UART1_DATA          _VECTOR(31)
-#define SIG_UART1_TRANS         _VECTOR(32)
+#define SIG_USART1_RECV         _VECTOR(30)
+#define SIG_UART1_RECV          _VECTOR(30) /* Keep for compatibility */
+#define SIG_USART1_DATA         _VECTOR(31)
+#define SIG_UART1_DATA          _VECTOR(31) /* Keep for compatibility */
+#define SIG_USART1_TRANS        _VECTOR(32)
+#define SIG_UART1_TRANS         _VECTOR(32) /* Keep for compatibility */
 #define SIG_2WIRE_SERIAL        _VECTOR(33)
 #define SIG_SPM_READY           _VECTOR(34)
 

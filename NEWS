@@ -34,6 +34,7 @@
   [#11242] Add the EEARH register definition for the mega48.
   [#11275] fdevopen() should document its use of malloc()
   [#11315] Add USART* signal names to match datasheet for mega32 and mega16.
+  [#11405] Add USART* signal names to match datasheet for mega128.
   [#11425] sleep.h missing semicolon
 
 * Remove deprecated items:
