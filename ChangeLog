@@ -1,5 +1,9 @@
 2003-11-11  Theodore A. Roth  <troth@openavr.org>
 
+	* avr-libc.spec.in: Require doxygen 1.2.16, not 1.3.4.
+
+2003-11-11  Theodore A. Roth  <troth@openavr.org>
+
 	* avr-libc.spec.in (BuildRequires): Don't require doxygen or tetex if
 	"--without docs" was given.
 

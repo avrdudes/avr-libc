@@ -27,7 +27,7 @@ Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.gz
 Buildroot: /var/tmp/avr-libc-%{version}-root
 BuildRequires: gzip avr-gcc >= 3.3
 %if %{_with_docs}
-BuildRequires: doxygen >= 1.3.4 tetex
+BuildRequires: doxygen >= 1.2.16 tetex
 %endif
 Requires: avr-gcc >= 3.3
 
