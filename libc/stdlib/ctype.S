@@ -112,13 +112,13 @@ GLOBAL(isalnum)
 #endif
 
 #if defined (Lcty_isfalse)
-          TEXT_SEG(ctype, cty_isfalse)
-          FUNCTION(cty_isfalse)
+          TEXT_SEG(ctype, __ctype_isfalse)
+          FUNCTION(__ctype_isfalse)
 
-GLOBAL(cty_isfalse)
+GLOBAL(__ctype_isfalse)
           CLR   rHigh
           CLR   rLow
-GLOBAL(cty_istrue)
+GLOBAL(__ctype_istrue)
           RET
 
           ENDFUNC
