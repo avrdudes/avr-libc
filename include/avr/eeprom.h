@@ -63,10 +63,29 @@
      should first poll the EEPROM e. g. using eeprom_is_ready() before
      attempting any actual I/O.
 
-    \note This library will \e not work with the ATmega169 since this
-    device has the EEPROM IO ports at different locations!
+    \note This library will \e not work with the following devices since these
+    devices have the EEPROM IO ports at different locations:
+
+    - AT90CAN128
+    - ATmega48
+    - ATmega88
+    - ATmega165
+    - ATmega168
+    - ATmega169
+    - ATmega325
+    - ATmega3250
+    - ATmega645
+    - ATmega6450
 
 */
+
+#if defined(__AVR_AT90CAN128__) || defined(__AVR_ATmega48__) ||\
+    defined(__AVR_ATmega88__) || defined(__AVR_ATmega165__) ||\
+    defined(__AVR_ATmega168__) || defined(__AVR_ATmega169__) ||\
+    defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) ||\
+    defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__)
+# warning "The functions from <avr/eeprom.h> are not supported on this MCU."
+#endif
 
 /** \name avr-libc declarations */
 
