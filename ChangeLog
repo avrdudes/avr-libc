@@ -1,3 +1,8 @@
+2002-09-29  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* include/avr/delay.h: New.
+	* configure.in (AM_INIT_AUTOMAKE): Update version.
+
 2002-09-29  Reiner Patommel  <rpato@post4.tele.dk>
 
 	* libm/fplib/atan.S, libm/fplib/atan2.S: Fix swapped atan2()
