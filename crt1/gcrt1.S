@@ -156,7 +156,7 @@ __do_copy_data:
 #ifdef __AVR_ENHANCED__
 	elpm	r0, Z+
 #else
-	lpm
+	elpm
 #endif
 	st	X+, r0
 #ifndef __AVR_ENHANCED__
