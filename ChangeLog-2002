@@ -1,0 +1,1293 @@
+2002-12-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: add fgetc().
+	* libc/stdio/Makefile.am: Ditto.
+	* libc/stdio/clearerr.c: add __SEOF.
+	* libc/stdio/feof.c: Ditto.
+	* libc/stdio/fgetc.c: add unget functionality, fix a blatant bug
+		that caused and char except \0 to return EOF.
+	* libc/stdio/fgets.c: use getc() instead of stream->get().
+	* libc/stdio/fread.c: Ditto.
+	* libc/stdio/stdio_private.h: add ungetc() stuff, activate __SEOF.
+
+2002-12-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/using-tools.doc: explain side-effects of -ffreestanding.
+	* include/stdio.h: add fread() and fwrite().
+	* libc/stdio/Makefile.am: Ditto.
+	* libc/stdio/fread.c: New file.
+	* libc/stdio/fwrite.c: New file.
+
+2002-12-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: include declarations for basic
+		input functions.
+	* libc/stdio/Makefile.am: include the new files below.
+	* libc/stdio/stdio_private.h: activate the __SERR flag.
+	* libc/stdio/clearerr.c: New file.
+	* libc/stdio/feof.c: New file.
+	* libc/stdio/ferror.c: New file.
+	* libc/stdio/fgetc.c: New file.
+	* libc/stdio/fgets.c: New file.
+	* libc/stdio/getc.S: New file.
+	* libc/stdio/getchar.c: New file.
+	* libc/stdio/gets.c: New file.
+
+2002-12-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fdevopen.c: don't clobber flags when
+		opening a stream for reading and writing.
+	* libc/stdio/fputc.c: check __SWR before writing.
+	* libc/stdio/fputs.c: check __SWR before writing,
+		call stream->put() directly.
+	* libc/stdio/fputs_p.c: Ditto.
+	* libc/stdio/puts.c: Ditto.
+	* libc/stdio/puts_p.c: Ditto.
+
+2002-12-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/readme.atan2: remove now unrelated file.
+
+2002-12-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom163.h: UBRRH -> UBRRHI.
+
+2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fputs.c: New file.
+	* libc/stdio/fputs_p.c: Ditto.
+	* libc/stdio/putc.S: Ditto.
+	* libc/stdio/putchar.c: Ditto.
+	* libc/stdio/puts.c: Ditto.
+	* libc/stdio/puts_p.c: Ditto.
+	* include/stdio.h: document fputs*(), putc*(), puts*().
+	* libc/stdio/Makefile.am: include new files.
+
+2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/atan.S: completely rewritten, much better accuracy.
+	* libm/fplib/atan2.S: completely rewritten;
+		both contributed by Reiner Patommel.
+
+2002-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/fplib.inc: add FPPUSH, FPPOP, FPCLR, and FPSWAP
+		macros; contributed by Reiner Patommel.
+
+2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/twitest/twitest.c: TWI example, new file.
+	* doc/examples/twitest/twitest.dox: TWI example, docs.
+	* doc/examples/twitest/Makefile: TWI example, sample makefile.
+	* doc/api/doxygen.config.in: include twitest.
+	* doc/examples/Makefile.am: include twitest.
+
+2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom163.h: add bit definitions for TWSR.
+	* include/avr/iom323.h: ditto.
+
+2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/twi.h: add some more useful macros.
+
+2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add Eric's entry about relocating code to a
+		fixed address.
+
+2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/using-tools.dox: add an anchor used in the FAQ.
+
+2002-12-17  Theodore A. Roth  <troth@openavr.org>
+
+	* include/inttypes.h: Added more dox, since doxygen isn't generating
+	them by default anymore.
+
+2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/wdt.h: fix typo.
+
+2002-12-17  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom169.h: Revert premature patch (from Joerg's work in
+	progress).
+
+2002-12-16  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/faq.dox: Fix broken link where doxygen tried to xref to 
+	"main()" when it should not.
+
+2002-12-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add entry about effect of -Ox.
+
+2002-12-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/wdt.h: Document, invent symbolic timeout constants.
+	* doc/TODO: delete wdt.h.
+
+2002-12-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/TODO: update per mailing list discussion.
+
+2002-12-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom169.h: fix typo.
+
+2002-12-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/main_page.dox: fix typo, remove non-existent tiny10.
+
+2002-12-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/math.h: document isnan() and isinf().
+
+2002-12-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/*: add CVS Ids (where missing).
+
+2002-12-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/string/strstr.S: complete fixed rewrite, thanks to
+		Philip Soeberg.
+
+2002-12-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/asin.S: complete rewrite, kudos to Reiner Patommel.
+
+2002-12-09  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+2002-12-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/isinfnan.S: micro-optimize.
+
+2002-12-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/sqrt.S: move the detection of 0 earlier [Bug #1837].
+
+2002-12-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: recognize Inf and NaN.
+
+2002-12-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/math.h: add isinf()/isnan().
+	* libc/fplib/Makefile.am: ditto.
+	* libc/fplib/isinfnan.S: new file.
+
+2002-12-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom128.h: fix defs for CS0[012].
+
+2002-12-06  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am: Generate a time-stamp file after fixing png's
+	and anchors to inhibit unnecessary fixes. [Bug #1808]
+
+2002-12-03  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/main_page.dox: Remove untested note from mega32.
+
+2002-11-27  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in: Add missing ".o" to "crtm8535".
+
+2002-11-26  Theodore A. Roth  <troth@openavr.org>
+
+	* NEWS: Note support for new devices (mega32, mega64, mega8515,
+	mega8535).
+	* configure.in: Add support for new megas.
+	* doc/TODO: Remove note about new mega header files.
+	* doc/api/main_page.dox: Add note about new megas.
+
+2002-11-26  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am: Fix bad anchors.
+
+2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add section about external RAM.
+
+2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/assembler.dox: New file.
+	* doc/api/Makefile.am: use assembler.dox.
+	* doc/api/inline_asm.dox: refer to assembler.dox.
+	* doc/api/interrupts.dox: Ditto.
+
+2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: fix typos.
+
+2002-11-25  Theodore A. Roth  <troth@openavr.org>
+  (Thanks to Steinar Haugen <xoplanet@msn.com> for contributing the iom32.h,
+  iom64.h, iom8515.h and iom8535.h files.)
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom128.h: Reformat.
+	* include/avr/iom32.h: New file.
+	* include/avr/iom64.h: New file.
+	* include/avr/iom8515.h: New file.
+	* include/avr/iom8535.h: New file.
+
+2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/TODO: remove obsolete entries.
+
+2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/math.h: document.
+
+2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/ctype.h: remove a wrong comment.
+
+2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/inttypes.h: make -mint8 aware.
+
+2002-11-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Makefile.am: enable libprintf_flt.a.
+	* include/stdio.h: explain floating point printf().
+	* libc/stdio/Makefile.am: enable libprintf_flt.a.
+	* libc/stdio/stdio_private.h: define values for PRINTF_LEVEL.
+	* libc/stdio/vfprintf.c: implement optional floating point support.
+
+2002-11-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/ctype.S: cleanup empty comments.
+	* libc/stdlib/ctype.S: add CVS Id.
+	* libc/stdlib/ctype.S: rename cty_is* into __ctype_is*.
+	* libc/stdlib/ctype.S: ispunct(): encapsulate func. calls using _U().
+
+2002-11-19  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in: Don't recurse into doc dir while building unless
+	"--enable-doc is passed to configure. This allows a default build to
+	bypass building the docs, but still allows the user to cd into the doc
+	dir and build the docs if they feel lucky. Do you feel lucky, punk?
+
+2002-11-18  Theodore A. Roth  <troth@openavr.org>
+
+	* libc/string/memcmp.S: Add note about unsigned nature of compare.
+
+2002-11-18  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/inline_asm.dox: Update URL for project.
+	Remove link to Rich Neswold's document since it is now (mostly) merged
+	in with avr-libc.
+	* doc/api/main_page.dox: Update URL for project.
+	Update avr-libc-dev list address.
+	Add note about avr-gcc mailing list.
+
+2002-11-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/Makefile: Use -j .text -j .data for avr-objcopy.
+	* doc/examples/demo/demo.dox: Ditto.
+
+2002-11-16  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/faq.dox: Add \code and \endcode around example. D'oh!
+	* doc/api/using-tools.dox: Use \verbatim instead of <code>.
+	* include/avr/pgmspace.h: Put both #includes in a single \code statement.
+
+2002-11-16  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/faq.dox: Fix broken subject headers (doxygen-1.2.18 doesn't
+		like them being bold when generating ps or pdf).
+	Change \subsection to \section since doxygen-1.2.18 handles it properly
+		now.
+	New FAQ entry for arrays of strings in rom.
+	* doc/api/inline_asm.dox: Change \subsection to \section since
+		doxygen-1.2.18 handles it properly now.
+	* doc/api/malloc.dox: Ditto.
+	* doc/api/sections.dox: Ditto.
+	* doc/api/tools-install.dox: Ditto.
+	* doc/examples/demo/demo.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	Change <h3> headings to \subsection's.
+
+2002-11-12  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/TODO: Add note about missing io*.h files.
+	* doc/api/main_page.dox: Update notes for at94K and at76c711.
+	* include/avr/io.h: Include existing io76c711.h file.
+
+2002-11-12  Theodore A. Roth  <troth@openavr.org>
+	[thanks to Juergen Schilling <juergen.schilling@honeywell.com>]
+
+	* include/avr/iom169.h: Fix interrupt vector defs.
+	Remove duplicate PINE defs.
+	Add PING defs.
+
+2002-11-12  Theodore A. Roth  <troth@openavr.org>
+
+	* avr-libc.spec.in: Add --enable-doc to configure command.
+
+2002-11-11  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in: Add --enable-doc option and disable building of docs
+	as the default.
+	* doc/TODO: Remove note about sleep api.
+	* doc/api/Makefile.am: Remove sending error to /dev/null since that
+	confuses windows systems.
+
+2002-11-11  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/eeprom.h (eeprom_read_byte): New function, replaces
+	eeprom_rb.
+	(eeprom_read_word): New function, replaces eeprom_rw.
+	(eeprom_write_byte): New function, replaces eeprom_wb.
+	(eeprom_read_block): Change interface to take pointer to eeprom addr.
+	(eeprom_rb): Deprecate and make macro to eeprom_read_byte.
+	(eeprom_rw): Deprecate and make macro to eeprom_read_word.
+	(eeprom_rw): Deprecate and make macro to eeprom_write_byte.
+	* libc/misc/ee_rb.S: L_eeprom_rb -> L_eeprom_read_byte.
+	* libc/misc/ee_rw.S: L_eeprom_rw -> L_eeprom_read_word.
+	* libc/misc/ee_wb.S: L_eeprom_wb -> L_eeprom_write_byte.
+	* libc/misc/eeprom.S: Convert to use new interfaces.
+
+2002-11-10  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/Makefile.am (fix_png): Gracefully handle missing USER_MANUAL
+	directory.
+	Fix spelling mistake.
+	* include/avr/iom8.h: Fix copy/paste error in TWAR reg bit defs.
+
+2002-11-09  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* eeprom.h: Formatting and punctuation changes.
+
+2002-11-08  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/examples/demo/Makefile: Remove png transparency fix-up since it's
+	done later anyways.
+
+2002-11-08  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/INSTALL: Add note about reconf and autoconf/automake.
+
+2002-11-08  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom169.h: Fix typo in UCSR0A register bit def.
+
+2002-11-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/setjmp.h: make -mint8 proof.
+
+2002-11-05  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom8.h: Sync up with latest datasheet (2486H-AVR-09/02).
+
+2002-11-04  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/Makefile.am: Fix all pngs to have proper transparency.
+
+2002-11-04  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/TODO: Updated.
+	* include/avr/sleep.h: New file.
+	* include/avr/sfr_defs.h: Fix spelling in dox comments.
+
+2002-10-31  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/examples/demo/Makefile: Set eeprom base addr to 0x0.
+
+2002-10-30  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: fix typo.
+
+2002-10-30  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am: Make `make demo` less likely to fail.
+
+2002-10-30  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/dox.css: Change default html colors.
+	* doc/api/dox_html_header: Don't spec body bgcolor.
+
+2002-10-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: Fix the fix.
+
+2002-10-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: Make the addresses used consistent.
+	* doc/api/malloc-x*.fig: Ditto.
+
+2002-10-28  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/malloc-std.fig: Make figs more consistent.
+	* doc/api/malloc-x1.fig: Make figs more consistent.
+	* doc/api/malloc-x2.fig: Make figs more consistent.
+	* doc/api/malloc.dox: Grammar and spelling fixups.
+
+2002-10-28  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in: Fix typo.
+	Update my email address.
+	Add CHECK_PNG_UTILS.
+	* doc/api/Makefile.am: Add png and eps files to clean list.
+	Add transparency to png images.
+	* doc/examples/demo/Makefile: Add transparency to png images.
+
+2002-10-28  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/Makefile.am: Use png instead of gif images.
+	* doc/api/malloc.dox: Ditto.
+
+2002-10-27  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc*.fig: Improve pictures.
+	* doc/api/malloc.dox: fix LaTeX pic widths.
+
+2002-10-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: Include some pictures.
+	* doc/api/Makefile.am: pictures' infrastructure.
+	* doc/api/doxygen.conf.in: pictures' infrastructure.
+	* doc/api/malloc*.fig: picture sources.
+
+2002-10-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: Explain malloc details.
+	* include/stdlib.h: refer to malloc explanation.
+	* doc/api/Makefile.am: include malloc.dox.
+	* doc/api/sections.dox: refer to malloc explanation.
+
+2002-10-22  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* avr-libc.spec.in: Require doxygen >= 1.2.16 for build.
+
+2002-10-20  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* reconf: Make compatible with RedHat-8.0 autotools.
+
+2002-10-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: make doxygen work.
+
+2002-10-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: implement %p.
+	* include/stdio.h: document %p.
+
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Makefile.am: add hooks for libprintf_*.a.
+	* libc/stdio/Makefile.am: ditto.
+	* libc/stdio/vfprintf.c: add printf levels.
+
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in libc/Makefile.am: wire stdio
+		into the infrastructure.
+	* include/stdio.h: new file.
+	* libc/stdio/Makefile.am: new file.
+	* libc/stdio/fclose.c: new file.
+	* libc/stdio/fdevopen.c: new file.
+	* libc/stdio/fprintf.c: new file.
+	* libc/stdio/fprintf_p.c: new file.
+	* libc/stdio/fputc.c: new file.
+	* libc/stdio/printf.c: new file.
+	* libc/stdio/printf_p.c: new file.
+	* libc/stdio/snprintf.c: new file.
+	* libc/stdio/snprintf_p.c: new file.
+	* libc/stdio/sprintf.c: new file.
+	* libc/stdio/sprintf_p.c: new file.
+	* libc/stdio/stdio_private.h: new file.
+	* libc/stdio/vfprintf.c: new file.
+
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: fix rand() & Co.
+	* libc/stdlib/rand.c: fix rand() & Co.
+	* libc/stdlib/random.c: New file.
+
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/ina90.h include/avr/pgmspace.h:
+		Move __LPM & Co from ina90.h to pgmspace.h
+
+2002-10-13  Theodore A. Roth  <troth@openavr.org>
+
+	* avr-libc.spec.in: Added docs subpackage for user manual.
+		Dropped avr-gcc version to 3.2.75 to allow snapshots.
+	* configure.in: Bumped version and made it rpm compatible.
+	* doc/Makefile.am (EXTRA_DIST): Removed register-usage.txt.
+	* doc/TODO: Updated.
+
+2002-10-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/calloc.c: new file.
+	* include/stdlib.h libc/stdlib/Makefile.am: add calloc().
+
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
+	* include/errno.h: Add dox.
+	* include/stdlib.h: Add xref to errno.
+
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/main_page.dox: Updated.
+
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
+	* include/string.h: Add note about flash based strings.
+	* include/avr/pgmspace.h: Add note about ram based strings.
+
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am (DEMO_LIBS): Only grab the first lib found.
+
+2002-10-10  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Removed ctype.h.
+	* include/ctype.h: Add dox comments.
+
+2002-10-10  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/acknowledge.dox: Add cross references.
+
+2002-10-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/using-tools.dox: New file.
+	* doc/examples/demo/demo.dox: Change title.
+	* doc/api/faq.dox: describe register usage.
+	* doc/register-usage.txt: file gone, it's in the
+		FAQ now.
+	* doc/api/Makefile.am: wire the new using-tools.dox
+		into the make infrastructure.
+
+2002-10-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/demo.fig: Introduce R2.
+	* doc/examples/demo/demo.dox: Document R2.
+
+2002-10-04  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/faq.dox: Add io port passing entry.
+
+2002-10-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/demo.dox: Fix Ted's FIXME.
+
+2002-10-01  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Updated.
+	* doc/api/Makefile.am: Add using-avrprog.dox.
+	* doc/api/tools-install.dox: Add ref to using-avrprog.dox.
+	* doc/api/using-avrprog.dox: New file.
+
+2002-10-01  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* include/avr/iom163.h: Add SIG_COMPARATOR, fix SIG_2WIRE_SERIAL.
+	* include/avr/iotn26.h: New file, from
+	Stefan Swanepoel <sswanepoel@tellumat.com>.
+	* doc/api/main_page.dox: Add attiny26 as supported.
+	* NEWS: Add tiny26 to new device list.
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	(AVR_CRT_TINY): Add crttn26.o.
+
+2002-09-30  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/main_page.dox: Add atmega16 as supported.
+
+2002-09-30  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/stdlib/malloc.c: Quell compiler warning.
+
+2002-09-30  Theodore A. Roth  <troth@verinet.com>
+
+	* include/avr/io1200.h: Generate compiler warning if not included
+		from avr/io.h.
+	* include/avr/io2313.h: Ditto.
+	* include/avr/io2323.h: Ditto.
+	* include/avr/io2333.h: Ditto.
+	* include/avr/io2343.h: Ditto.
+	* include/avr/io4414.h: Ditto.
+	* include/avr/io4433.h: Ditto.
+	* include/avr/io4434.h: Ditto.
+	* include/avr/io76c711.h: Ditto.
+	* include/avr/io8515.h: Ditto.
+	* include/avr/io8534.h: Ditto.
+	* include/avr/io8535.h: Ditto.
+	* include/avr/ioat94k.h: Ditto.
+	* include/avr/iom103.h: Ditto.
+	* include/avr/iom128.h: Ditto.
+	* include/avr/iom16.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom162.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iom169.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom8.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+
+2002-09-30  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/Makefile.am: Move examples to SUBDIRS.
+	* doc/api/Makefile.am: New rules for demo project.
+	* doc/api/doxygen.config.in: Add paths to demo project.
+	* doc/examples/Makefile.am: New file.
+	* doc/examples/demo/Makefile: New file.
+	* doc/examples/demo/demo.c: New file.
+	* doc/examples/demo/demo.dox: New file.
+	* doc/examples/demo/demo.fig: New file.
+
+2002-09-30  Theodore A. Roth  <troth@verinet.com>
+
+	* NEWS: Add mega16 to new device list.
+
+2002-09-29  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* configure.in (AVR_CRT_MEGA): Add crtm16.o.
+	* include/avr/iom16.h: New, from Magnus Johansson <rnd@bredband.net>.
+
+2002-09-29  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* include/avr/delay.h: New.
+	* configure.in (AM_INIT_AUTOMAKE): Update version.
+
+2002-09-29  Reiner Patommel  <rpato@post4.tele.dk>
+
+	* libm/fplib/atan.S, libm/fplib/atan2.S: Fix swapped atan2()
+	arguments to match C standards.
+
+2002-09-27  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/stdlib/malloc.c: Remove cast from STACK_POINTER macro.
+
+2002-09-27  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* include/setjmp.h: Add extern "C" for C++ usage.
+
+2002-09-25  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/tools-install.dox: Move note about reconf and cvs up.
+
+2002-09-17  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* include/avr/sfr_defs.h (_VECTOR): Move above #ifndef __ASSEMBLER__.
+
+2002-09-11  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/faq.dox: Cleanups and add examples.
+
+2002-09-11  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Remove include/stdlib.h.
+	* include/stdlib.h: Misc cleanups.
+
+2002-09-10  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+
+2002-09-09  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/string/strstr.S: Fix dox (s/needle/s2/ and s/haystack/s1/).
+
+2002-09-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add three subsections.
+
+2002-09-09  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Added note about testsuite.
+
+2002-09-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: improve grouping for old doxygen versions.
+
+2002-09-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/malloc.c: use _SFR_IO16() around the SP address.
+
+2002-09-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: rename DTOSTRE_* into DTOSTR_*.
+	* libm/fplib/dtostre.S: rename DTOSTRE_* into DTOSTR_*.
+
+2002-09-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: document this file.
+	* libm/fplib/dtostre.S: use <stdlib.h>.
+
+2002-09-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/dtostre.S: another leading "0" fix.
+
+2002-09-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/dtostre.S: don't print "." iff prec == 0.
+
+2002-09-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/fplib.inc: introduce FPMOV and FPLOAD.
+	* libm/fplib/dtostre.S: use FPMOV, FPLOAD, and XCALL.
+
+2002-09-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/dtostre.S: fix numerous bugs and nits.
+
+2002-09-04  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Add what needs to be doxumented still.
+
+2002-09-04  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/TODO: Add note about __ prefix of args in dox.
+	* include/setjmp.h: Add dox comments.
+
+2002-09-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: implement --enable-versioned-doc
+	* configure.in: implement --enable-versioned-doc
+
+2002-09-02  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Note mega169 as new supported device.
+	* doc/api/main_page.dox: Add list of supported devices.
+
+2002-08-31  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* configure.in (AM_INIT_AUTOMAKE): Update version.
+	(AVR_CRT_MEGA): Add crtm169.o.
+	* include/avr/iom169.h: New file.
+	* include/avr/iom323.h: Fix typo (SIG_INTERRUPT3 -> 2).
+
+2002-08-30  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/inline_asm.dox: Remove _PC_ from dox. It doesn't seem to
+		be available to the user.
+
+2002-08-30  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Updated.
+	* doc/api/faq.dox: Remove C example for .init1; refer to sections dox.
+	* doc/api/sections.dox: Remove faq_startup ref.
+		Add note about -Wl,-Tdata,<addr>.
+		Add explanation of ',"ax",@progbits'.
+
+2002-08-30  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am: Add sections.dox.
+	* doc/api/sections.dox: New file.
+
+2002-08-29  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/faq.dox: Move asm faq to faq dox.
+	* doc/api/inline_asm.dox: Move asm faq to faq dox.
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+
+2002-08-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: 16-bit timer IO registers and interrupts.
+	* doc/api/sfr.dox: xref to the FAQ.
+
+2002-08-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Mention C++ support.
+
+2002-08-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/malloc.c: Fix STACK_POINTER().
+
+2002-08-28  Theodore A. Roth  <troth@verinet.com>
+
+	* NEWS: Updated with summary of change log.
+
+2002-08-28  Theodore A. Roth  <troth@verinet.com>
+
+	* include/avr/iom128.h: Sync up io register bit names with latest
+		datasheet (2467E-AVR-05/02). [modification of submission by 
+		Svein E. Seldal <Svein.Seldal@solidas.com>].
+
+2002-08-28  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version
+	* doc/api/interrupts.dox: Fix typo (s/Overflow2/Overflow3/).
+
+2002-08-27  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/TODO: Updated.
+
+2002-08-27  Theodore A. Roth  <troth@verinet.com>
+
+	* include/avr/iom128.h: Updated IO register names to match latest
+		datasheet from Atmel. (modified submission from Svein E. Seldal
+		<Svein.Seldal@solidas.com>)
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+
+2002-08-22  Theodore A. Roth  <troth@verinet.com>
+
+	* common/macros.inc: Use <avr/io.h> instead of <io.h>.
+	* doc/api/faq.dox: Use <avr/io.h> instead of <io.h>.
+	* include/eeprom.h: Add deprecated #warning.
+	* include/ina90.h: Add deprecated #warning.
+	* include/interrupt.h: Add deprecated #warning.
+	* include/io.h: Add deprecated #warning.
+	* include/pgmspace.h: Add deprecated #warning.
+	* include/progmem.h: Add deprecated #warning.
+	* include/sig-avr.h: Add deprecated #warning.
+	* include/timer.h: Add deprecated #warning.
+	* include/twi.h: Add deprecated #warning.
+	* include/wdt.h: Add deprecated #warning.
+	* include/avr/eeprom.h: Use <avr/io.h> instead of <io.h>.
+	* include/avr/ina90.h: Use <avr/eeprom.h> instead of <eeprom.h>.
+	* include/avr/interrupt.h: Use <avr/io.h> instead of <io.h>.
+	* include/avr/pgmspace.h: Use <avr/pgmspace.h> instead of <pgmspace.h>.
+		Same for <io.h> and <ina90.h>
+	* include/avr/timer.h: Use <avr/io.h> instead of <io.h>.
+	* include/avr/wdt.h: Use <avr/io.h> instead of <io.h>.
+
+2002-08-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/eeprom.h: document.
+
+2002-08-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/acknowledge.dox: Mention Ted's work.
+
+2002-08-22  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+
+2002-08-22  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/sfr.dox: Reformat paragraphs that are too wide.
+	* include/avr/sfr_defs.h: Reformat paragraphs that are too wide.
+		Added cvs Id keyword.
+
+2002-08-22  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/sfr.dox: Grammar cleanups.
+	* include/avr/sfr_defs.h: Make Marek's notes into dox.
+		Added compiler note to _BV().
+		Added note about switched arg order for outb()/outw().
+		Documented deprecated macros.
+
+2002-08-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am
+	* doc/api/sfr.dox
+	* include/avr/io.h
+	* include/avr/sfr_defs.h: document <avr/sfr_defs.h>.
+
+2002-08-21  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/inline_asm.dox: Move old history into non-doxy comment.
+		Change GCC-AVR to AVR-GCC. Add note about new location.
+
+2002-08-21  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/inline_asm.dox: Removed `n' and `v' constraints from table.
+		Grammar fixes. Add link to gcc online docs.
+
+2002-08-16  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/Makefile.am(EXTRA_DIST): Add tools-install.dox file.
+	* doc/api/dox_html_header: Fix title.
+	* doc/api/tools.dox: New file.
+
+2002-08-14  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/inline_asm.dox: Fixed variable name in clobber section. New 
+		section C stubs added. (thanks to Harald Kipp)
+
+2002-08-14  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/faq.dox: Minor dox update.
+	* doc/api/inline_asm.dox: Minor dox update.
+	* doc/api/main_page.dox: Minor dox update.
+
+2002-08-13  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/doxygen.config.in: Updated to use doxygen-1.2.17.
+
+2002-08-13  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/acknowledge.dox: Minor updates.
+
+2002-08-13  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/string/memset.S: Fix dox comment (s/src/dest/).
+
+2002-08-12  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+
+2002-08-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* crt1/gcrt1.S: avr-gcc >= 3.3 is required.
+	* avr-libc.spec.in: avr-gcc >= 3.3 is required.
+
+2002-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add a subsection about _BV().
+
+2002-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io.h: add documentation.
+
+2002-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: Black magic to split a long table.
+	* doc/api/interrupts.dox: minor changes and additions.
+
+2002-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* domake: Allow for environmental override of ${MAKE}.
+
+2002-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* reconf: Extend the automake/autoconf checks to allow for
+		customized executable names for the versions required.
+
+2002-08-09  Theodore A. Roth  <troth@verinet.com>
+
+	* reconf: Check for correct versions of automake/autoconf.
+
+2002-08-09  Theodore A. Roth  <troth@verinet.com>
+
+	* .cvsignore: New file.
+	* crt1/.cvsignore: New file.
+	* doc/.cvsignore: New file.
+	* doc/api/.cvsignore: New file.
+	* libc/.cvsignore: New file.
+	* libc/misc/.cvsignore: New file.
+	* libc/pmstring/.cvsignore: New file.
+	* libc/stdlib/.cvsignore: New file.
+	* libc/string/.cvsignore: New file.
+	* libm/.cvsignore: New file.
+	* libm/fplib/.cvsignore: New file.
+
+2002-08-09  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am(EXTRA_DIST): Add new dox files.
+	* doc/api/interrupts.dox: New file.
+	* doc/api/acknowledge.dox: New file.
+	* include/avr/interrupt.h: Added doxy comments.
+	* include/avr/signal.h: Updated doxy comments.
+
+2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: restructure to make the docs targets depend on
+		actual files as opposed to .phony targets.
+
+2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: add Q/A about early initialization.
+
+2002-08-05  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/pmstring/strcasecmp_P.S: remove redundant sentence about return
+		value.
+	
+2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/inline_asm.dox: bump nesting level by one to
+		make TOC display look more natural in PDF.
+
+2002-08-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in: Make HTML/PS/PDF generation configurable.
+	* doc/api/Makefile.am: Make documentation generation and
+		installation configurable, more cleanup, make PDF
+		generation usable with doxygen 1.2.17.
+
+2002-08-05  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/string/memccpy.S: Doxy cleanups.
+	* libc/string/memchr.S: Doxy cleanups.
+	* libc/string/memcmp.S: Doxy cleanups.
+	* libc/string/memcpy.S: Doxy cleanups.
+	* libc/string/memmove.S: Doxy cleanups.
+	* libc/string/memset.S: Doxy cleanups.
+	* libc/string/strcasecmp.S: Doxy cleanups.
+	* libc/string/strchr.S: Doxy cleanups.
+	* libc/string/strcmp.S: Doxy cleanups.
+	* libc/string/strlen.S: Doxy cleanups.
+	* libc/string/strlwr.S: Doxy cleanups.
+	* libc/string/strnlen.S: Doxy cleanups.
+	* libc/string/strrchr.S: Doxy cleanups.
+
+2002-08-05  Theodore A. Roth  <troth@verinet.com>
+
+	* libc/string/strcpy.S: Fix incorrect reference in dox to strncpy().
+
+2002-08-05  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am(install-dox-html): Fix to install .js and .png files.
+
+2002-08-03  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* configure.in: Add AVR_LIBC_USER_MANUAL.
+	* doc/api/Makefile.am: Use AVR_LIBC_USER_MANUAL instead of hard coded name.
+	* doc/api/doxygen.config.in: Ditto.
+
+2002-08-03  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am: Change osavr -> avr-libc.
+	* doc/api/doxygen.config.in: Ditto.
+
+2002-08-03  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am: Remove use of directories as targets.
+	* doc/api/Makefile.am: Remove use of `${MAKE} -C` to improve portability.
+	* doc/api/doxygen.config.in: Changed html and latex output dirs to 
+	avr-libc-api and latex_src respectively.
+
+2002-08-02  Theodore A. Roth  <troth@verinet.com>
+
+	* Makefile.am: Make doc subdir conditional.
+	* configure.in: Fix so docs are only built once.
+
+2002-08-02  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am(clean-local): Added man dir for cleanup.
+	* doc/api/Makefile.am: Fixed circular dependancy for dox-html <-> html.
+
+2002-07-31  Theodore A. Roth  <troth@verinet.com>
+
+	* crt1/gcrt1.S: Allow gcc versions >= 3.2.
+	* libc/pmstring/strncpy_P.S: Fix typo is doxy comment.
+
+2002-07-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/inline_asm.dox: fix hrefs.
+
+2002-07-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: Add faq.dox file.
+	* doc/api/faq.dox: New file.
+
+2002-07-26  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am(dox-pdf): Use ${MAKE} instead of make.
+	* doc/api/Makefile.am(dox-ps): Use ${MAKE} instead of make.
+
+2002-07-25  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am(EXTRA_DIST): Add *.dox files.
+	* doc/api/doxygen.config.in: Config tweaks.
+	* doc/api/main_page.dox: New file.
+	* doc/api/inline_asm.dox: New file. (Thanks to Harald Kipp)
+	* include/inttypes.h: Updated comments for doxygen.
+	* include/string.h: Updated comments for doxygen.
+	* include/avr/signal.h: Updated comments for doxygen.
+	* libc/string/memccpy.S: Updated comments for doxygen.
+	* libc/string/memchr.S: Updated comments for doxygen.
+	* libc/string/memcmp.S: Updated comments for doxygen.
+	* libc/string/memcpy.S: Updated comments for doxygen.
+	* libc/string/memmove.S: Updated comments for doxygen.
+	* libc/string/memset.S: Updated comments for doxygen.
+	* libc/string/strcasecmp.S: Updated comments for doxygen.
+	* libc/string/strcat.S: Updated comments for doxygen.
+	* libc/string/strchr.S: Updated comments for doxygen.
+	* libc/string/strcmp.S: Updated comments for doxygen.
+	* libc/string/strcpy.S: Updated comments for doxygen.
+	* libc/string/strlcat.c: Updated comments for doxygen.
+	* libc/string/strlcpy.c: Updated comments for doxygen.
+	* libc/string/strlen.S: Updated comments for doxygen.
+	* libc/string/strlwr.S: Updated comments for doxygen.
+	* libc/string/strncasecmp.S: Updated comments for doxygen.
+	* libc/string/strncat.S: Updated comments for doxygen.
+	* libc/string/strncmp.S: Updated comments for doxygen.
+	* libc/string/strncpy.S: Updated comments for doxygen.
+	* libc/string/strnlen.S: Updated comments for doxygen.
+	* libc/string/strrchr.S: Updated comments for doxygen.
+	* libc/string/strrev.S: Updated comments for doxygen.
+	* libc/string/strstr.S: Updated comments for doxygen.
+	* libc/string/strupr.S: Updated comments for doxygen.
+	* libm/fplib/dtostrf.S: Change comment so doxygen isn't confused.
+	* include/avr/pgmspace.h: Updated comments for doxygen.
+	* libc/pmstring/memcpy_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcasecmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcat_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcpy_P.S: Updated comments for doxygen.
+	* libc/pmstring/strlen_P.S: Updated comments for doxygen.
+	* libc/pmstring/strncasecmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strncmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strncpy_P.S: Updated comments for doxygen.
+
+2002-07-16  Theodore A. Roth  <troth@verinet.com>
+
+	* Makefile.am: Integrate doxygen in to build system.
+	* configure.in: Integrate doxygen in to build system.
+	* configure.in (AM_INIT_AUTOMAKE): Updated version.
+	* doc/Makefile.am: New file.
+	* doc/api/Makefile.am: New file.
+	* doc/api/dox.css: New file.
+	* doc/api/dox_html_footer: New file.
+	* doc/api/dox_html_header: New file.
+	* doc/api/doxygen.config.in: New file.
+								
+2002-07-14  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* configure.in (AM_INIT_AUTOMAKE): Update version.
+	(AVR_CRT_MEGA): Add crtm162.o.
+	* include/avr/iom162.h: New file.
+	* ChangeLog: Add 2002-06-30 entry that got lost.
+
+2002-07-08  Theodore A. Roth  <troth@verinet.com>
+
+	* avr-libc.spec.in: Updated License and URL info.
+
+2002-07-08  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Updated version.
+	* configure.in (AC_OUTPUT): Intgrated rpm spec file into build.
+	* Makefile.am: Intgrated rpm spec file into build.
+	* avr-libc.spec.in: New file.
+
+2002-07-05  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Updated version.
+
+2002-06-30  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* libm/fplib/*.S: Move constant tables to the .progmem.gcc_fplib
+	section (guaranteed below 64K even on 128K devices).
+	* Move AVR-specific include/*.h files to include/avr/ .
+	* include/avr/crc16.h: New file.
+	* Fix wdt.h, should work on ATmega128 now.
+	* LICENSE: Remove the third restriction.
+
+2002-06-20  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* crt1/gcrt1.S: Check GCC version (3.2 required, 3.1 will not work).
+	Set __heap_end to 0 so the symbol is defined for malloc().
+	* include/stdlib.h: Declare __malloc_margin, __malloc_heap_start
+	and __malloc_heap_end.
+	* include/io*.h: Rename OVR bit to DOR.
+	* include/iom161.h: Define the same bits for both UARTs.
+	Define SPMCR bits.
+
+2002-06-12  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* crt1/gcrt1.S: Fix bug with interrupt vectors always pointing to
+	the reset address (no __vector_* relocs) on all <=8K chips.  Oops.
+	This also restores the "handle unexpected interrupts" feature that
+	was present in the old gcrt1.S - define a "signal" function named
+	__vector_default to handle all interrupts not handled elsewhere.
+	* doc/INSTALL: Update.
+
+2002-06-01  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Rewrite gcrt1.S, make use of the new ld scripts that allow
+	inserting user code at various stages of initialization.
+
+2002-05-31  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Rewrite I/O access macros so that you can use I/O registers
+	directly in C expressions.  See <sfr_defs.h> for description.
+	Many files changed, please test - I have tried to maintain some
+	backwards compatibility, but applications (especially assembler
+	sources) will need to be modified.  Also check C code for any
+	outb/outw macro calls as now their arguments are in the correct
+	(port, value) order, consistent with C assignment operators.
+
+2002-05-30  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Fix multilib build failure (some *.S files) after the 20020529 GCC
+	changes in handling of predefined __AVR_AT*__ preprocessor macros.
+	Do not set AM_CFLAGS in Makefile.am files.  Add our own rules that
+	add AVRLIB_ASFLAGS after CFLAGS, so that our -mmcu=atmega103 comes
+	after multilib -mmcu=avr3 (not the other way around), now that the
+	last -mmcu=* option completely overrides any previous one.
+	* Move gcrt1.S from libc/ into a new crt1/ directory.
+	* Move libc/bsd/*.c to libc/stdlib/ and remove libc/bsd/ directory.
+	* Move strlcat.c and strlcpy.c from libc/stdlib/ to libc/string/ .
+	* Add "set -e" and do "make distcheck" in dodist script.
+	* libc/stdlib/malloc.c: New implementation, thanks to Joerg Wunsch.
+
+2002-05-26  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	The patch mentioned below is now in the binutils CVS tree.
+	* Add copyright notices to all files in preparation for moving
+	the project to savannah.gnu.org.  Thanks to Theodore A. Roth
+	<troth@verinet.com> for help with this boring task...
+	* Remove libc/gnu/ subdir and include/string-avr.h (LGPL).
+	* Update doc/avr-libc-reference.html (string-avr.h gone).
+
+2002-05-11  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	WARNING: Test release - for use only with current CVS GCC and
+	binutils with applied patch from
+	http://www.amelek.gda.pl/avr/test/avr-binutils-patch-20020511.gz
+	* configure.in: Default to avr target, enable ATmega128 support.
+	* include/io-avr.h: More known devices.
+	* include/pgmspace.h (strncasecmp_P): Add missing third argument.
+	* include/string.h (strlcat, strlcpy): Declare.
+	* libc/gcrt1.S (__stack): Weak, default to RAMEND from <io*.h>.
+	* libc/stdlib/Makefile.am (lib_a_c_sources): Update.
+	* libc/stdlib/strlcat.c, libc/stdlib/strlcpy.c: New.
+
+2002-02-03  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Add dtostrf(), optimize atol(), itoa(), utoa() from Reiner Patommel.
+	* libc/stdlib/ctype.S (isalnum): Bugfix from Jens Meyer.
+	* include/iomactos.h: change constraints, add inw/outw, clean up.
+	* doc/avr-libc-reference.html: Update.
+
+2002-01-15  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* Add ltoa() and ultoa(), thanks to Reiner Patommel.
+	* Optimize parity_even_bit, thanks to Greg Smith.
+	* doc/avr-libc-reference.html: Fix CR/LF newlines.
+
+Sun Jan 06 00:11:00 2002  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* configure.in: Add the "-g" option to AVRLIB_CFLAGS.
+	* reconf: Add "set -x" to see whta is executed.
+	* Makefile.am: Remove the comment about automake 1.4.
+
+Sat Dec 29 22:44:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* Bugfix in configure.in: Now avr-libc can be configured, without
+	  a present avr-libc installed.
+	
+Sat Dec 29 01:29:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* libm is working with autoconf/automake, too.
+	* Create the new distribution package avr-libc-20011229.tar.gz.
+	
+Sat Dec 28 23:34:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* libc is working with autoconf/automake.
+	
+Sat Dec 22 22:12:00 2001  Reinhard Jessich  <reinhard.jessich@telering.at>
+	* First tries to use the autoconf/automake for the building of the avr libc.
+	
+see doc/CHANGES for old changes (before autoconf/automake) support.
