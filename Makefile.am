@@ -93,7 +93,10 @@ libprintf_flt_a_SOURCES =
 libscanf_min_a_SOURCES =
 libscanf_flt_a_SOURCES =
 
-EXTRA_DIST = config-ml.in doconf dodist domake reconf LICENSE common include \
+EXTRA_DIST = \
+             LICENSE \
+             bootstrap \
+             common \
              ChangeLog-2003 \
              ChangeLog-2002
 

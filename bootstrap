@@ -1,0 +1,65 @@
+#! /bin/sh
+#
+# $Id$
+#
+# bootstrap script to build all the *.in files and configure script.
+#
+
+export AUTOMAKE AUTOCONF ACLOCAL AUTOHEADER
+
+status="fail"
+for AUTOMAKE in automake automake17 automake-1.7 automake1.7
+do
+	AUTOMAKE_VER=`(${AUTOMAKE} --version | head -n 1 | cut -d ' ' -f 4 | cut -c -3) 2>/dev/null`
+	if [ $? != 0 ]
+	then
+		continue
+	fi
+	if [ "$AUTOMAKE_VER" = "1.7" ]
+	then
+		status=""
+		ACLOCAL=aclocal`expr "$AUTOMAKE" : 'automake\(.*\)'`
+		break
+	fi
+done
+
+if [ -n "$status" ]
+then
+	echo "You need to use automake version 1.7.x (preferrably 1.7.6)."
+	echo "You are using `automake --version | head -n 1`."
+	echo
+	exit 1
+fi
+
+status="fail"
+
+for AUTOCONF in autoconf autoconf257 autoconf-2.57 autoconf2.57
+do
+	AUTOCONF_VER=`(${AUTOCONF} --version 2>/dev/null | head -n 1 | cut -d ' ' -f 4) 2>/dev/null`
+	if [ $? != 0 ]
+	then
+		continue
+	fi
+	if [ "$AUTOCONF_VER" = "2.57" ]
+	then
+		status=""
+		AUTOHEADER=autoheader`expr "$AUTOCONF" : 'autoconf\(.*\)'`
+		break
+	fi
+done
+
+if [ -n "$status" ]
+then
+	echo "You need to use autoconf version 2.57."
+	echo "You are using `autoconf --version | head -n 1`."
+	echo
+	exit 1
+fi
+
+# to see what is executed
+set -x
+
+${ACLOCAL}
+${AUTOHEADER}
+${AUTOCONF}
+${AUTOMAKE} --foreign --add-missing --copy
