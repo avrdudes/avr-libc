@@ -1,3 +1,9 @@
+2002-08-21  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/inline_asm.dox: Removed `n' and `v' constraints from table.
+		Grammar fixes. Add link to gcc online docs.
+
 2002-08-16  Theodore A. Roth  <troth@verinet.com>
 
 	* configure.in(AM_INIT_AUTOMAKE): Bump version.
