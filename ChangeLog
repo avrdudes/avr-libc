@@ -1,5 +1,13 @@
 2004-11-18  Eric B. Weddington  <ericw@evcohs.com>
 
+	* include/avr/iotn26.h: Replace file.
+	This file is replaced to conform to the license since the original
+	author could not be contacted. The new file matches the latest
+	data sheet from Atmel.
+	* AUTHORS: Updated.
+
+2004-11-18  Eric B. Weddington  <ericw@evcohs.com>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 
 	* include/avr/iom16.h: Replace file.
