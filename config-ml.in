@@ -583,9 +583,9 @@ multi-clean:
 	fi
 EOF
 
-cat ${Makefile} Multi.tem > Makefile.tem
-rm -f ${Makefile} Multi.tem
-mv Makefile.tem ${Makefile}
+cat Makefile Multi.tem > Makefile.tem
+rm -f Makefile Multi.tem
+mv Makefile.tem Makefile
 
 fi # ${ml_toplevel_p} = yes
 

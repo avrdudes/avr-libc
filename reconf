@@ -13,7 +13,7 @@
 #  happen during the build process.
 #
 
-export AUTOMAKE AUTOCONF ACLOCAL
+export AUTOMAKE AUTOCONF ACLOCAL AUTOHEADER
 
 status="fail"
 for AUTOMAKE in automake automake14 automake-1.4
@@ -51,6 +51,7 @@ do
 	if [ "$AUTOCONF_VER" = "2.13" ]
 	then
 		status=""
+		AUTOHEADER=autoheader`expr "$AUTOCONF" : 'autoconf\(.*\)'`
 		break
 	fi
 done
@@ -67,5 +68,6 @@ fi
 set -x
 
 ${ACLOCAL}
+${AUTOHEADER}
 ${AUTOCONF}
 ${AUTOMAKE} --foreign --add-missing --copy
