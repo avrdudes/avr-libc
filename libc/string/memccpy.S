@@ -44,11 +44,12 @@
 	\fn void *memccpy(void *dest, const void *src, int val, size_t len)
     \brief Copy memory area.
 
-	The memccpy() function copies no more than n bytes from memory area src to
-	memory area dest, stopping when the character c is found.
+	The memccpy() function copies no more than len bytes from memory area src
+	to memory area dest, stopping when the character val is found.
 
 	\returns The memccpy() function returns a pointer to the next character in
-	dest after c, or NULL if c was not found in the first n characters of src.  */
+	dest after val, or NULL if val was not found in the first len characters
+	of src.  */
 
 	.text
 	.global	_U(memccpy)

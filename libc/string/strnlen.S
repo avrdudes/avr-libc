@@ -38,13 +38,13 @@
     \brief Determine the length of a fixed-size string.
 
     The strnlen function returns the number of characters in the string
-    pointed to by s, not including the terminating '\0' character, but at most
-    maxlen. In doing this, strnlen looks only at the first maxlen characters
-    at s and never beyond s+maxlen.
+    pointed to by src, not including the terminating '\0' character, but at
+    most len. In doing this, strnlen looks only at the first len characters at
+    src and never beyond src+len.
 
-    \returns The strnlen function returns strlen(s), if that is less than
-    maxlen, or maxlen if there is no '\0' character among the first maxlen
-    characters pointed to by s. */
+    \returns The strnlen function returns strlen(src), if that is less than
+    len, or len if there is no '\0' character among the first len
+    characters pointed to by src. */
 
 	.text
 	.global	_U(strnlen)

@@ -48,8 +48,7 @@
     characters will not be changed.
 
     \returns The strlwr() function returns a pointer to the converted
-    string.  The pointer is the same as that passed in since the operation is
-    perform in place. */
+    string. */
 
     .text
     .global _U(strlwr)

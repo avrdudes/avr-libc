@@ -39,10 +39,10 @@
     \fn void *memset(void *dest, int val, size_t len)
     \brief Fill memory with a constant byte.
 
-    The memset() function fills the first n bytes of the memory area pointed
-    to by s with the constant byte c.
+    The memset() function fills the first len bytes of the memory area pointed
+    to by src with the constant byte val.
 
-    \returns The memset() function returns a pointer to the memory area s.  */
+    \returns The memset() function returns a pointer to the memory area src.  */
 
 	.text
 	.global	_U(memset)

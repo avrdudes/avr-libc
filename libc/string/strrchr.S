@@ -41,7 +41,7 @@
     \brief Locate character in string.
 
     The strrchr() function returns a pointer to the last occurrence of the
-    character c in the string s.
+    character val in the string src.
 
     Here "character" means "byte" - these functions do not work with wide or
     multi-byte characters.

@@ -1,5 +1,21 @@
 2002-08-05  Theodore A. Roth  <troth@verinet.com>
 
+	* libc/string/memccpy.S: Doxy cleanups.
+	* libc/string/memchr.S: Doxy cleanups.
+	* libc/string/memcmp.S: Doxy cleanups.
+	* libc/string/memcpy.S: Doxy cleanups.
+	* libc/string/memmove.S: Doxy cleanups.
+	* libc/string/memset.S: Doxy cleanups.
+	* libc/string/strcasecmp.S: Doxy cleanups.
+	* libc/string/strchr.S: Doxy cleanups.
+	* libc/string/strcmp.S: Doxy cleanups.
+	* libc/string/strlen.S: Doxy cleanups.
+	* libc/string/strlwr.S: Doxy cleanups.
+	* libc/string/strnlen.S: Doxy cleanups.
+	* libc/string/strrchr.S: Doxy cleanups.
+
+2002-08-05  Theodore A. Roth  <troth@verinet.com>
+
 	* libc/string/strcpy.S: Fix incorrect reference in dox to strncpy().
 
 2002-08-05  Theodore A. Roth  <troth@verinet.com>

@@ -39,8 +39,8 @@
     \fn void *memcpy(void *dest, const void *src, size_t len)
     \brief Copy a memory area.
 
-    The memcpy() function copies n bytes from memory area src to memory area
-    dest.  The memory areas may not overlap.  Use memmove(3) if the memory
+    The memcpy() function copies len bytes from memory area src to memory area
+    dest.  The memory areas may not overlap.  Use memmove() if the memory
     areas do overlap.
 
     \returns The memcpy() function returns a pointer to dest.  */
