@@ -1,3 +1,9 @@
+2003-11-11  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/crc16.h (_crc16_update): Add dox.
+	(_crc_xmodem_update): New function.
+
 2003-11-04  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
