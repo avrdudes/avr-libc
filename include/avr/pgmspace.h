@@ -102,7 +102,7 @@ typedef long long prog_long_long PROGMEM;
 ({                              \
     uint16_t __addr16 = (uint16_t)(addr); \
     uint8_t __result;           \
-    __asm__ __volatile__        \
+    __asm__                     \
     (                           \
         "lpm" "\n\t"            \
         "mov %0, r0" "\n\t"     \
@@ -119,9 +119,9 @@ typedef long long prog_long_long PROGMEM;
 ({                              \
     uint16_t __addr16 = (uint16_t)(addr); \
     uint8_t __result;           \
-    __asm__ __volatile__        \
+    __asm__                     \
     (                           \
-        "lpm %0, Z+" "\n\t"     \
+        "lpm %0, Z" "\n\t"      \
         : "=r" (__result)       \
         : "z" (__addr16)        \
     );                          \
@@ -129,37 +129,37 @@ typedef long long prog_long_long PROGMEM;
 })
 
 
-#define __LPM_word_classic__(addr)      \
-({                                      \
+#define __LPM_word_classic__(addr)          \
+({                                          \
     uint16_t __addr16 = (uint16_t)(addr);   \
-    uint16_t __result;                  \
-    __asm__ __volatile__                \
-    (                                   \
-        "lpm"           "\n\t"          \
-        "mov %A0, r0"   "\n\t"          \
-        "adiw r30, 1"   "\n\t"          \
-        "lpm"           "\n\t"          \
-        "mov %B0, r0"   "\n\t"          \
-        : "=r" (__result)               \
-        : "z" (__addr16)                \
-        : "r0"                          \
-    );                                  \
-    __result;                           \
+    uint16_t __result;                      \
+    __asm__                                 \
+    (                                       \
+        "lpm"           "\n\t"              \
+        "mov %A0, r0"   "\n\t"              \
+        "adiw r30, 1"   "\n\t"              \
+        "lpm"           "\n\t"              \
+        "mov %B0, r0"   "\n\t"              \
+        : "=r" (__result), "=z" (__addr16)  \
+        : "1" (__addr16)                    \
+        : "r0"                              \
+    );                                      \
+    __result;                               \
 })
 
 
-#define __LPM_word_enhanced__(addr)     \
-({                                      \
+#define __LPM_word_enhanced__(addr)         \
+({                                          \
     uint16_t __addr16 = (uint16_t)(addr);   \
-    uint16_t __result;                  \
-    __asm__ __volatile__                \
-    (                                   \
-        "lpm %A0, Z+"   "\n\t"          \
-        "lpm %B0, Z+"   "\n\t"          \
-        : "=r" (__result)               \
-        : "z" (__addr16)                \
-    );                                  \
-    __result;                           \
+    uint16_t __result;                      \
+    __asm__                                 \
+    (                                       \
+        "lpm %A0, Z+"   "\n\t"              \
+        "lpm %B0, Z"    "\n\t"              \
+        : "=r" (__result), "=z" (__addr16)  \
+        : "1" (__addr16)                    \
+    );                                      \
+    __result;                               \
 })
 
 
@@ -205,7 +205,7 @@ typedef long long prog_long_long PROGMEM;
 ({                                  \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint8_t __result;               \
-    __asm__ __volatile__            \
+    __asm__                         \
     (                               \
         "out %2, %C1" "\n\t"        \
         "mov r31, %B1" "\n\t"       \
@@ -225,7 +225,7 @@ typedef long long prog_long_long PROGMEM;
 ({                                  \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint8_t __result;               \
-    __asm__ __volatile__            \
+    __asm__                         \
     (                               \
         "out %2, %C1" "\n\t"        \
         "movw r30, %1" "\n\t"       \
@@ -243,7 +243,7 @@ typedef long long prog_long_long PROGMEM;
 ({                                      \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint16_t __result;                  \
-    __asm__ __volatile__                \
+    __asm__                             \
     (                                   \
         "out %2, %C1"   "\n\t"          \
         "mov r31, %B1"  "\n\t"          \
@@ -270,12 +270,12 @@ typedef long long prog_long_long PROGMEM;
 ({                                      \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint16_t __result;                  \
-    __asm__ __volatile__                \
+    __asm__                             \
     (                                   \
         "out %2, %C1"   "\n\t"          \
         "movw r30, %1"  "\n\t"          \
         "elpm %A0, Z+"  "\n\t"          \
-        "elpm %B0, Z+"  "\n\t"          \
+        "elpm %B0, Z"   "\n\t"          \
         : "=r" (__result)               \
         : "r" (__addr32),               \
           "I" (_SFR_IO_ADDR(RAMPZ))     \

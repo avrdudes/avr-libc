@@ -1,3 +1,8 @@
+2003-06-17  Eric B. Weddington  <eric@ecentral.com>
+
+	* include/avr/pgmspace.h: Revert volatile on macros, fix macros to
+	specify which registers are used.
+
 2003-06-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/strtoul.c: fix broken unsigned handling.
