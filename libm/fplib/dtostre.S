@@ -34,9 +34,18 @@
 #include "gasava.inc"
 #include "fplib.inc"
 
-#define bitAlignSign 0x01        /* put '+' or ' ' for positives */
-#define bitSign      0x02        /* put '+' rather than ' ' */
-#define bitUppercase 0x04        /* put 'E' rather 'e' */
+#include <stdlib.h>
+
+/* Verify assumptions implied in the code below. */
+#if DTOSTRE_ALWAYS_SIGN != 0x01
+#error "DTOSTRE_ALWAYS_SIGN must be 0x01"
+#endif
+#if DTOSTRE_PLUS_SIGN != 0x02
+#error "DTOSTRE_PLUS_SIGN must be 0x02"
+#endif
+#if DTOSTRE_UPPERCASE != 0x04
+#error "DTOSTRE_UPPERCASE must be 0x04"
+#endif
 
 #define FP_0_1     0x3dcccccd
 #define	FP_0_30103 0x3e9a209b
@@ -73,13 +82,13 @@ GLOBAL(dtostre)
 
 	ldi	rSI1, ' '
 	sbrc	rP7, 1
-	ldi	rSI1, '+'	; rSI1 = (flags&bitSign?'+':' ')
-	sbrc	rP7, 0
+	ldi	rSI1, '+'	; rSI1 = (flags & DTOSTRE_PLUS_SIGN?'+':' ')
+	sbrc	rP7, 0		; if (!(flags & DTOSTRE_ALWAYS_SIGN)) skip
 	st	Y+, rSI1
 	ldi	rA3, '0'
 	ldi	rA2, '.'
 	ldi	rA1, 'E'
-	sbrs	rP7, 2		; if bitUppercase was set
+	sbrs	rP7, 2		; if DTOSTRE_UPPERCASE was set
 	ori	rA1, 'E' ^ 'e'
 	ldi	rA0, '+'
 	st	Y+,rA3
@@ -115,8 +124,8 @@ GLOBAL(dtostre)
 	rjmp	6f
 5:	ldi	rSI1, ' '
 	sbrc	rP7, 1
-	ldi	rSI1, '+'	; rSI1 = (flags&bitSign?'+':' ')
-	sbrc	rP7, 0
+	ldi	rSI1, '+'	; rSI1 = (flags & DTOSTRE_PLUS_SIGN?'+':' ')
+	sbrc	rP7, 0		; if (!(flags & DTOSTRE_ALWAYS_SIGN)) skip
 6:
 	st	Y+, rSI1
 
@@ -240,7 +249,7 @@ GLOBAL(dtostre)
 
 	pop	rA2		; and flags
 	ldi	rA1, 'E'
-	sbrs	rA2, 2		; if bitUppercase was set
+	sbrs	rA2, 2		; if DTOSTRE_UPPERCASE was set
 	ori	rA1, 'E' ^ 'e'
 	ST	Y+, rA1		; put exponent
 	ldi	rA1, '+'	;
