@@ -66,6 +66,10 @@ in the SRAM memory space. Thus, if you want the .data section to start at
 0x1100, pass 0x801100 at the address to the linker.
 [offset \ref harvard_arch "explained"]
 
+\note
+When using \c malloc() in the application (which could even happen inside
+library calls), \ref malloc_extram "additional adjustments" are required.
+
 \subsection sec_dot_bss The .bss Section
 
 Uninitialized global or static variables end up in the .bss section.

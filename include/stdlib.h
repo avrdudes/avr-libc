@@ -290,6 +290,9 @@ extern void exit(int __status) __ATTR_NORETURN__;
 
    Note that malloc() does \e not initialize the returned memory to
    zero bytes.
+
+   See the chapter about \ref malloc "malloc() usage" for implementation
+   details.
 */
 extern void *malloc(size_t __size) __ATTR_MALLOC__;
 
@@ -301,37 +304,17 @@ extern void *malloc(size_t __size) __ATTR_MALLOC__;
 extern void free(void *__ptr);
 
 /**
- * When extending the data segment in malloc(), the allocator will not try to go
- * beyond the current stack limit, decreased by \c __malloc_margin bytes.
- * Thus, all possible stack frames of interrupt routines that could
- * interrupt the current function, plus all further nested function
- * calls must not require more stack space, or they'll risk to collide
- * with the data segment.
- *
- * The default is set to 32.  \c __malloc_margin should be changed before
- * the very first call to malloc() within the application.
- *
- * All this is only relevant in situations where the heap is allocated
- * below the stack.  For devices with external memory, the heap can
- * be located in external memory while the stack is usually located in
- * internal SRAM, so no special guard area is needed between both.
- */
+   \c malloc() \ref malloc_tunables "tunable".
+*/
 extern size_t __malloc_margin;
 
-/** See \c __malloc_heap_end. */
-extern char *__malloc_heap_start;
 /**
-   The variables \c __malloc_heap_start and \c __malloc_heap_end can
-   be used to restrict the malloc() function to a certain memory
-   region.  These variables are statically initialized to point to
-   \c __heap_start and \c __heap_end, respectively, where
-   \c __heap_start is filled in by the linker, and \c __heap_end is
-   set to 0 which makes malloc() assume the heap is below the stack.
-   Any changes need to be made before the very first call to malloc().
+   \c malloc() \ref malloc_tunables "tunable".
+*/
+extern char *__malloc_heap_start;
 
-   In case of a device with external SRAM where the heap is going to
-   be allocated in external RAM, it's good practice to already define
-   those symbols from the linker command line. [FIXME: show example]
+/**
+   \c malloc() \ref malloc_tunables "tunable".
 */
 extern char *__malloc_heap_end;
 
