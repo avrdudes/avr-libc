@@ -50,7 +50,7 @@
 	which describes how to use it. \b Avrdude was previously called 
 	\b avrprog.
 
-	- Eric Weddington [ eric@umginc.net ] for maintaining the \b WinAVR
+	- Eric Weddington [ eric@ecentral.com ] for maintaining the \b WinAVR
 	package and thus making the continued improvements to the
 	Opensource AVR toolchain available to many users.
 
