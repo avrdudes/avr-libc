@@ -70,6 +70,30 @@ void signame (void) __attribute__ ((interrupt));	\
 void signame (void)
 #endif
 
+/** \def EMPTY_INTERRUPT(signame) 
+    \ingroup avr_interrupts
+
+    \code#include <avr/signal.h>\endcode
+
+    Defines an empty interrupt handler function. This will not generate
+    any prolog or epilog code and will only return from the ISR. Do not
+    define a function body as this will define it for you.
+    Example:
+    \codeEMPTY_INTERRUPT(SIG_ADC);\endcode */
+
+#ifdef __cplusplus
+#define EMPTY_INTERRUPT(signame)                \
+extern "C" void signame(void);                  \
+void signame (void) __attribute__ ((naked));    \
+void signame (void) {  __asm__ __volatile__ ("reti" ::); }
+#else
+#define EMPTY_INTERRUPT(signame)                \
+void signame (void) __attribute__ ((naked));    \
+void signame (void) { __asm__ __volatile__ ("reti" ::); }
+#endif
+
+
+
 /*@}*/
 
 #endif /* _AVR_SIGNAL_H_ */

@@ -1,3 +1,8 @@
+2003-05-08  Eric B. Weddington  <eric@umginc.net>
+
+	* include/avr/signal.h: Add EMPTY_INTERRUPT macro.
+	[Contributed by Artur Lipowski <LAL@pro.onet.pl>]
+
 2003-05-05  Eric B. Weddington  <eric@umginc.net>
 
 	* include/avr/io86r401.h: Update to match datasheet.
