@@ -1,3 +1,21 @@
+2004-11-02  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iotn2313.h: Correct license with permission from
+	Bob Paddock.
+	* include/avr/wdt.h: Correct license with permission from Marek
+	Michalkiewicz.
+	* acconfig.h: Correct license with permission from Theodore A. Roth.
+	* include/avr/iom168.h: Ditto.
+	* include/avr/iom48.h: Ditto.
+	* include/avr/iom88.h: Ditto.
+	* include/avr/iomx8.h: Ditto.
+	* include/avr/iotn13.h: Ditto.
+	* include/avr/portpins.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* xml/Atmel2libc.py: Ditto.
+	* xml/Desc-parser.py: Ditto.
+	* xml/Device.dtd: Ditto.
+
 2004-11-02  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
