@@ -81,21 +81,21 @@ GLOBAL(dtostrf)
 	add	r16, r16
 	adc	r17, r17
 	cpi	r17, 0xff	; NAN ?
-	brne	_sign
+	brne	1f
 	ldi	rA3, 'N'
 	ldi	rA2, 'A'
 	st	Y+, rA3		; 'N'
 	st	Y+, rA2		; 'A'
 	st	Y+, rA3		; 'N'
-	rjmp	_dtostrf_exit
-_sign:				; if (num < 0) {num = -num; *string = '-';}
+	rjmp	10f
+1:				; if (num < 0) {num = -num; *string = '-';}
 	push	p_width		; save width
 	tst	p_num_hi_hi	; num < 0?
-	brpl	_rounding
+	brpl	1f
 	ldi	r16, '-'	; num is negative
 	st	Y+, r16		;  write '-' sign
 	andi	rA3, 0x7F	;  make num positive
-_rounding:			; num += (0.5 * 10^-p_precision);
+1:				; num += (0.5 * 10^-p_precision);
 	mov	r_dp, p_prec	; decimal point is at precision + 1
 	inc	r_dp		;  when counting down to 0
 	push	p_num_hi_hi
@@ -127,9 +127,9 @@ _rounding:			; num += (0.5 * 10^-p_precision);
 	XCALL	_U(__addsf3)	; now A = num + (0.5 * 10^-precision)
 	mov	r_count, r_dp	; count becomes power10 + dp.
 	cpi	r_dp, 1		; force dp to 0 if dp = 1 i.e. precision = 0
-	brne	_normalize_loop
+	brne	1f
 	clr	r_dp
-_normalize_loop:		; while (num >= 10.0) {num /= 10; count++;}
+1:			   ; while (num >= 10.0) {num /= 10; count++;}
 	ldi	rB3, 0x41
 	ldi	rB2, 0x20
 	clr	rB1
@@ -138,11 +138,11 @@ _normalize_loop:		; while (num >= 10.0) {num /= 10; count++;}
 	cpc	rA1, rB1
 	cpc	rA2, rB2
 	cpc	rA3, rB3	; num >= 10.0?
-	brlt	_conversion_loop
+	brlt	2f
 	XCALL	_U(__divsf3)	; num /= 10.0
 	inc	r_count		; count++
-	rjmp	_normalize_loop
-_conversion_loop:		; for (i = count; i > 0; count--;)
+	rjmp	1b
+2:				; for (i = count; i > 0; count--;)
 	push	rA3		;  {n = num; n += '0'; *string++ = n; num -= n;
 	push	rA2		;   num *= 10; if (i == dp) *string = '.';}
 	push	rA1
@@ -164,13 +164,15 @@ _conversion_loop:		; for (i = count; i > 0; count--;)
 	clr	rB0		; B = 10.0
 	XCALL	_U(__mulsf3)	; num *= 10
 	cp	r_count, r_dp	; decimal point here?
-	brne	_next
+	brne	3f
 	ldi	r21 , '.'
 	st	Y+, r21		; write decimal point
-_next:
+3:
 	dec	r_count
-	brne	_conversion_loop
-_adjust:
+	brne	2b
+
+				; adjust result
+
 	st	Y, __zero_reg__	; terminate string
 	pop	r21		; get width again
 	pop	ZL		; Y points to end of string
@@ -179,12 +181,12 @@ _adjust:
 	push	ZL		; save &string again
 	mov	p_width, r21
 	tst	p_width		; width < 0?
-	brpl	_adjust_1
+	brpl	1f
 	com	p_width		; make width positive
 	inc	p_width
 				; Need // in next line to stop doxygen
 				; from thinking strlen is a variable.
-_adjust_1:			; // strlen = Y - Z
+1:				; // strlen = Y - Z
 	mov	rA3, YH
 	mov	rA2, YL
 	mov	rA1, ZH
@@ -195,32 +197,32 @@ _adjust_1:			; // strlen = Y - Z
 	sub	r_count, rA2	; r_count = # of leading/trailing spaces
 	ldi	rA3, ' '
 	cp	rA2, p_width	; if (strlen >= abs(width)) exit
-	brge	_exit
+	brge	11f
 	tst	r21		; width < 0?
-	brmi	_l_adjust
-_r_adjust:			; right adjust with leading spaces
+	brmi	4f
+				; right adjust with leading spaces
 	adiw	YL, 1		; now Y points to end+1 of string
 	adiw	ZL, 1
 	add	ZL, p_width
 	adc	ZH, __zero_reg__ ; now Z points to end+1 of final string
 	inc	rA2		; rA2 = strlen+1
-_r_adjust_loop:			; right shift string
+2:				; right shift string
 	ld	r21, -Y
 	st	-Z, r21
 	dec	rA2
-	brne	_r_adjust_loop
-_r_adjust_spaces:		; make leading spaces
+	brne	2b
+3:				; make leading spaces
 	st	-Z, rA3
 	dec	r_count
-	brne	_r_adjust_spaces
-	rjmp	_exit
-_l_adjust:			; make trailing spaces
+	brne	3b
+	rjmp	11f
+4:				; left adjust -- make trailing spaces
 	st	Y+, rA3
 	dec	r_count
-	brne	_l_adjust
-_dtostrf_exit:
+	brne	4b
+10:
 	st	Y, __zero_reg__	; terminate string
-_exit:
+11:
 	pop	ret_lo
 	pop	ret_hi		; restore &string as return address
 	pop	YL

@@ -1,3 +1,7 @@
+2004-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/dtostrf.S: make labels local.
+
 2004-03-04  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/boot.h: Define BLBnx bit positions. [Bug #7469]
