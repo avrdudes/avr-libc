@@ -1,5 +1,8 @@
 *** Changes since avr-libc-1.2:
 
+* Bugs fixed:
+
+  [#11479] Add missing pin definitions for iotn16.h.
 
 *** Changes in avr-libc-1.2:
 

@@ -115,13 +115,66 @@
 
 /* Reserved [0x10..0x15] */
 
-/* The bit numbers for the Port A-B registers are defined in <avr/portpins.h> */
+
 #define PINB    _SFR_IO8(0x16)
+#define PINB0   0
+#define PINB1   1
+#define PINB2   2
+#define PINB3   3
+#define PINB4   4
+#define PINB5   5
+#define PINB6   6
+#define PINB7   7
+
 #define DDRB    _SFR_IO8(0x17)
+#define DDB0    0
+#define DDB1    1
+#define DDB2    2
+#define DDB3    3
+#define DDB4    4
+#define DDB5    5
+#define DDB6    6
+#define DDB7    7
+
 #define PORTB   _SFR_IO8(0x18)
+#define PB0     0
+#define PB1     1
+#define PB2     2
+#define PB3     3
+#define PB4     4
+#define PB5     5
+#define PB6     6
+#define PB7     7
+
 #define PINA    _SFR_IO8(0x19)
+#define PINA0   0
+#define PINA1   1
+#define PINA2   2
+#define PINA3   3
+#define PINA4   4
+#define PINA5   5
+#define PINA6   6
+#define PINA7   7
+
 #define DDRA    _SFR_IO8(0x1A)
+#define DDA0    0
+#define DDA1    1
+#define DDA2    2
+#define DDA3    3
+#define DDA4    4
+#define DDA5    5
+#define DDA6    6
+#define DDA7    7
+
 #define PORTA   _SFR_IO8(0x1B)
+#define PA0     0
+#define PA1     1
+#define PA2     2
+#define PA3     3
+#define PA4     4
+#define PA5     5
+#define PA6     6
+#define PA7     7
 
 /* EEPROM [0x1C..0X1E] The bit numbers are defined in <avr/io.h> */
 
