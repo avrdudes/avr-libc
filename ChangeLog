@@ -1,7 +1,16 @@
+2004-10-28  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/iotn2313.h: Remove duplicate defines for PORTxn (they
+	are defined in portpins.h). [Bug #10812]
+	* include/avr/iocan128.h: Rename PORTxn defines to Pxn (let portpins.h
+	define PORTxn).
+
 2004-10-21  Eric B. Weddington <ericW@evcohs.com>
 
-    * include/avr/iom64.h: Fix bit identifer ADFR to ADATE.
-    [Bug #10733]
+	* include/avr/iom64.h: Fix bit identifer ADFR to ADATE.
+	[Bug #10733]
 
 2004-10-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

@@ -202,14 +202,6 @@
 #define PD1     1
 #define PD0     0
 
-#define PORTD6  6
-#define PORTD5  5
-#define PORTD4  4
-#define PORTD3  3
-#define PORTD2  2
-#define PORTD1  1
-#define PORTD0  0
-
 /* ATtiny General Purpose I/O Register Zero GPIOR0[7:0] */
 #define GPIOR0  _SFR_IO8(0x13)
 
@@ -255,15 +247,6 @@
 #define PB1     1
 #define PB0     0
 
-#define PORTB7  7
-#define PORTB6  6
-#define PORTB5  5
-#define PORTB4  4
-#define PORTB3  3
-#define PORTB2  2
-#define PORTB1  1
-#define PORTB0  0
-
 /* Port A Input Pins Address PINA[2:0] */
 #define PINA    _SFR_IO8(0x19)
 
@@ -284,10 +267,6 @@
 #define PA2     2
 #define PA1     1
 #define PA0     0
-
-#define PORTA2  2
-#define PORTA1  1
-#define PORTA0  0
 
 /* ATtiny EEPROM Control Register EECR */
 
