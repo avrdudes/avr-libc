@@ -1,5 +1,13 @@
 2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
 
+	* include/avr/iom165.h: Correct license on my files.
+	* include/avr/iom325.h: Ditto.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom645.h: Ditto.
+	* include/avr/iom6450.h: Ditto.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
 	* LICENSE: Show correct license statements, with full list of authors.
 	* AUTHORS: Update list of authors.
 	* GPL: New file. Contains the GNU Public License referenced in the
