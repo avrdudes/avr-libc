@@ -1,5 +1,11 @@
 2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
 
+    * include/avr/iom169.h: Add PRR register and bit definitions.
+    [Fix for bug #11418]
+    * NEWS: Update bugs fixed list.
+
+2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
+
     * include/avr/iom128.h: Add USART* signal names to match datasheet.
     [Fix for bug #11405]
     * NEWS: Update bugs fixed list.

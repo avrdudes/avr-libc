@@ -172,6 +172,13 @@
 /* Clock Prescale Register */
 #define CLKPR  _SFR_MEM8(0x61)
 
+#define PRR    _SFR_MEM8(0x64)
+#define PRADC       0
+#define PRUSART0    1
+#define PRSPI       2
+#define PRTIM1      3
+#define PRLCD       4
+
 /* Oscillator Calibration Register */
 #define OSCCAL _SFR_MEM8(0x66)
 
