@@ -64,6 +64,8 @@ lib_a_c_sources =	\
 	sprintf_p.c	\
 	sscanf.c	\
 	sscanf_p.c	\
+	vfprintf_p.c	\
+	vfscanf_p.c	\
 	ungetc.c
 
 lib_a_asm_sources =	\

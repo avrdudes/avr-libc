@@ -1,3 +1,11 @@
+*** Changes in avr-libc-1.0.1:
+
+* Extend stdio API.
+
+New functions:
+  vfprintf_P
+  vfscnaf_P
+
 *** Changes in avr-libc-1.0:
 
 * Move source to cvs repositiory at http://savannah.gnu.org/projects/avr-libc
