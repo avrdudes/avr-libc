@@ -1,1 +1,7 @@
+2005-01-01  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Makefile.am (install-data-local uninstall-local):
+	Do also install .../include/compat.  While being here, repair
+	uninstalling the entire world as well.
+
 For older changes see ChangeLog-2004

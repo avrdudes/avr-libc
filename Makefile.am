@@ -136,17 +136,29 @@ crt%.o: crt1/crt%.o
 
 crt1/crt%.o: ; @true
 
+INCLUDEDIRS="" /avr /compat
+
 install-data-local:	install-toollibLIBRARIES
 	$(MULTIDO) $(AM_MAKEFLAGS) DO=install multi-do
 	-if [ -z "$(MULTISUBDIR)" ]; then \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include; \
-	  for i in $(srcdir)/include/*.h; do \
-	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/`basename $$i`; \
+	  for dir in $(INCLUDEDIRS); do \
+	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include$${dir}; \
+	    for i in $(srcdir)/include$${dir}/*.h; do \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include$${dir}/`basename $$i`; \
+	    done; \
 	  done; \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include/avr; \
-	  for i in $(srcdir)/include/avr/*.h; do \
-	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/avr/`basename $$i`; \
+	else true; fi
+
+uninstall-local:	uninstall-toollibLIBRARIES
+	$(MULTIDO) $(AM_MAKEFLAGS) DO=uninstall multi-do
+	-if [ -z "$(MULTISUBDIR)" ]; then \
+	  for dir in $(INCLUDEDIRS); do \
+	    for i in $(DESTDIR)$(tooldir)/include$${dir}/*.h; do \
+	     rm -f $$i; \
+	    done; \
+	    rmdir $(DESTDIR)$(tooldir)/include$${dir} 2>/dev/null; \
 	  done; \
+	  rmdir $(DESTDIR)$(tooldir)/include 2>/dev/null; \
 	else true; fi
 
 # Multilib support.
