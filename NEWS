@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#11805] Fix call to __fp_cosinus in sin().
+  [#11817] Replace SYSCLK with F_CPU in twitest example.
 
 *** Changes since avr-libc-1.2.0:
 

@@ -26,7 +26,7 @@
 /*
  * System clock in Hz.
  */
-#define SYSCLK 14745600UL	/* Note [2] */
+#define F_CPU 14745600UL	/* Note [2] */
 
 /*
  * Compatibility defines.  This should work on ATmega8, ATmega16,
@@ -98,15 +98,15 @@ void
 ioinit(void)
 {
 
-#if SYSCLK <= 1000000UL
+#if F_CPU <= 1000000UL
   /*
    * Note [4]
    * Slow system clock, double Baud rate to improve rate error.
    */
   UCSRA = _BV(U2X);
-  UBRR = (SYSCLK / (8 * 9600UL)) - 1; /* 9600 Bd */
+  UBRR = (F_CPU / (8 * 9600UL)) - 1; /* 9600 Bd */
 #else
-  UBRR = (SYSCLK / (16 * 9600UL)) - 1; /* 9600 Bd */
+  UBRR = (F_CPU / (16 * 9600UL)) - 1; /* 9600 Bd */
 #endif
   UCSRB = _BV(TXEN);		/* tx enable */
 
@@ -116,10 +116,10 @@ ioinit(void)
   TWSR = 0;
 #endif
 
-#if SYSCLK < 3600000UL
+#if F_CPU < 3600000UL
   TWBR = 10;			/* smallest TWBR value, see note [5] */
 #else
-  TWBR = (SYSCLK / 100000UL - 16) / 2;
+  TWBR = (F_CPU / 100000UL - 16) / 2;
 #endif
 }
 
