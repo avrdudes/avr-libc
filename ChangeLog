@@ -1,5 +1,11 @@
 2004-05-07  Theodore A. Roth  <troth@openavr.org>
 
+	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Revert addition of libm.a
+	C and asm sources. I forget this change was in my tree when I made the
+	previous change to this file. Will reapply it separately.
+
+2004-05-07  Theodore A. Roth  <troth@openavr.org>
+
 	* .cvsignore: Update to reflect current reality.
 	* common/.cvsignore: New file.
 	* doc/examples/.cvsignore: New file.
