@@ -1,5 +1,11 @@
 2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
 
+	* doc/INSTALL: Update release versions compatible with avr-libc and
+	instructions.
+	[Bug #10150]
+
+2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/avr/io8515.h: Correct license with permission from Marek 
 	Michalkiewicz.
 	* include/avr/io8534.h: Ditto.
