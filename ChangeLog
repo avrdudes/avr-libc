@@ -1,3 +1,7 @@
+2004-05-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo.c: Update for ATmega8
+
 2004-05-21  Theodore A. Roth  <troth@openavr.org>
 [Contributed by Bruce Graham <bgraham@huronnet.com>]
 
