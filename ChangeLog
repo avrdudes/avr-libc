@@ -1,3 +1,7 @@
+2004-07-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/pow.S: localize labels, fix pow(N, 0).
+
 2004-07-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/inttypes.h: avr-gcc >= 3.5 will be able to

@@ -1,3 +1,16 @@
+*** Changes in avr-libc-1.0.5:
+
+* Bugs fixed:
+
+  [no-id] Fix pow(N,0) yielding 0.5 instead of 1.0.
+
+* Other changes:
+
+  + <inttypes.h> is now prepared for the changed -mint8 behaviour of the
+    next GCC release where [u]int32_t will be possible even with -mint8.
+
+  + doc/examples/demo/demo.c can now handle the ATmega8 MCU type.
+
 *** Changes in avr-libc-1.0.4:
 
 * Extend pgmspace API.
