@@ -1,0 +1,234 @@
+/* Copyright (c) 2002, Theodore Roth
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \page mem_sections Memory Sections
+
+See \ref faq_startup for a simple intro to this for now.
+
+\remarks Need to list all the sections which are available to the avr.
+
+\par Weak Bindings
+FIXME: need to discuss the .weak directive.
+
+The following describes the various sections available. 
+
+\subsection sec_dot_text The .text Section
+
+The .text section contains the actual machine instructions which make up
+your program.  This section is further subdivided by the .initN and .finiN
+sections dicussed below.
+
+\note The \c avr-size program (part of binutils), coming from a Unix
+background, doesn't account for the .data initialization space added to the
+.text section, so in order to know how much flash the final program will
+consume, one needs to add the values for both, .text and .data (but not .bss),
+while the amount of pre-allocated SRAM is the sum of .data and .bss.
+
+\subsection sec_dot_data The .data Section
+
+This section contains static data which was defined in your code. Things like
+the following would end up in .data:
+
+\code
+char err_str[] = "Your program has died a horrible death!";
+
+struct point pt = { 1, 1 };
+\endcode
+
+\subsection sec_dot_bss The .bss Section
+
+Uninitialized global or static variables end up in the .bss section.
+
+\subsection sec_dot_text The .eeprom Section
+
+This is where eeprom variables are stored.
+
+\subsection sec_dot_noinit The .noinit Section
+
+This sections is a part of the .bss section. What makes the .noinit section
+special is that variables which are defined as such:
+
+\code
+int foo __attribute__ ((section (".noinit")));
+\endcode
+
+will not be initialized to zero during startup as would normal .bss data.
+
+Only uninitialized variables can be placed in the .noinit section. Thus, the
+following code will cause \c avr-gcc to issue an error:
+
+\code
+int bar __attribute__ ((section (".noinit"))) = 0xaa;
+\endcode
+
+It is possible to tell the linker explicitly where to place the .noinit
+section by adding <tt>-Wl,--section-start=.noinit=0x802000</tt> to the
+<tt>avr-gcc</tt> command line at the linking stage. For example, suppose you
+wish to place the .noinit section at SRAM address 0x2000:
+
+\verbatim
+	$ avr-gcc ... -Wl,--section-start=.noinit=0x802000 ...
+\endverbatim
+
+\note Because of the Harvard architecture of the AVR devices, you must
+manually add 0x800000 to the address you pass to the linker as the start of
+the section.  Otherwise, the linker thinks you want to put the .noinit section
+into the .text section instead of .data/.bss and will complain.
+
+Alternatively, you can write your own linker script to automate this. [FIXME:
+need an example or ref to dox for writing linker scripts.]
+
+\subsection sec_dot_init The .initN Sections
+
+These sections are used to define the startup code from reset up through
+the start of main(). These all are subparts of the 
+\ref sec_dot_text ".text section".
+
+The purpose of these sections is to allow for more specific placement of code
+within your program.
+
+\note Sometimes it is convenient to think of the .initN and .finiN sections as
+functions, but in reality they are just symbolic names the tell the linker
+where to stick a chunk of code which is \em not a function. Notice that the
+examples for \ref asm_sections "asm" and \ref c_sections "C" can not be called
+as functions and should not be jumped into.
+
+The <b>.initN</b> sections are  executed in order from 0 to 9.
+
+\par .init0:
+Weakly bound to __init(). If user defines __init(), it will be jumped into
+immediately after a reset.
+
+\par .init1:
+Unused. User definable.
+
+\par .init2:
+In C programs, weakly bound to initialize the stack.
+
+\par .init3:
+Unused. User definable.
+
+\par .init4:
+
+Copies the .data section from flash to SRAM.  Also sets up and zeros out the
+.bss section.  In Unix-like targets, .data is normally initialized by the OS
+directly from the executable file.  Since this is impossible in an MCU
+environment, \c avr-gcc instead takes care of appending the .data variables
+after .text in the flash ROM image.  .init4 then defines the code (weakly
+bound) which takes care of copying the contents of .data from the flash to
+SRAM.
+
+\par .init5:
+Unused. User definable.
+
+\par .init6:
+Unused for C programs, but used for constructors in C++ programs.
+
+\par .init7:
+Unused. User definable.
+
+\par .init8:
+Unused. User definable.
+
+\par .init9:
+Jumps into main().
+
+\subsection sec_dot_fini The .finiN Sections
+
+These sections are used to define the exit code executed after return from
+main() or a call to exit(). These all are subparts of the 
+\ref sec_dot_text ".text section".
+
+The <b>.finiN</b> sections are executed in descending order from 9 to 0.
+
+\par .finit9:
+Unused. User definable. This is effectively where _exit() starts.
+
+\par .fini8:
+Unused. User definable.
+
+\par .fini7:
+Unused. User definable.
+
+\par .fini6:
+Unused for C programs, but used for destructors in C++ programs.
+
+\par .fini5:
+Unused. User definable.
+
+\par .fini4:
+Unused. User definable.
+
+\par .fini3:
+Unused. User definable.
+
+\par .fini2:
+Unused. User definable.
+
+\par .fini1:
+Unused. User definable.
+
+\par .fini0:
+Goes into an infinite loop after program termination and completion of any
+_exit() code (execution of code in the .fini9 -> .fini1 sections).
+
+\subsection asm_sections Using Sections in Assembler Code
+
+Example:
+
+\code
+#include <avr/io.h>
+
+	.section .init1,"ax",@progbits
+	ldi	  r0, 0xff
+	out	  _SFR_IO_ADDR(PORTB), r0
+	out	  _SFR_IO_ADDR(DDRB), r0
+\endcode
+
+\remarks What is <tt>,"ax",@progbits</tt> part doing???
+
+<!-- I know, poorly named section. - TRoth -->
+\subsection c_sections Using Sections in C Code
+
+Example:
+
+\code
+#include <avr/io.h>
+
+void my_init_portb (void) __attribute__ ((naked)) \
+    __attribute__ ((section (".init1")));
+
+void
+my_init_portb (void)
+{
+	outb (PORTB, 0xff);
+	outb (DDRB,  0xff);
+}
+\endcode
+
+*/
+
