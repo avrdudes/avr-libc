@@ -52,7 +52,7 @@ lib_a_asm_sources = \
 	ldiv.S   \
 	setjmp.S
 
-# this objects are all generated from ctype.S
+# these objects are all generated from ctype.S
 libc_ctype_asm_objs = \
 	isascii.o toascii.o isalnum.o cty_isfalse.o \
 	isalpha.o isdigit.o isxdigit.o iscntrl.o    \

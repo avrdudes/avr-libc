@@ -59,6 +59,8 @@ fi
 # to see what is executed
 set -x
 
+rm -rf autom4te.cache
+
 ${ACLOCAL}
 ${AUTOHEADER}
 ${AUTOCONF}

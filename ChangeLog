@@ -1,5 +1,11 @@
 2004-04-26  Theodore A. Roth  <troth@openavr.org>
 
+	* bootstrap: Remove left-over autom4te.cache directory.
+	* configure.ac: New file.
+	* libc/stdlib/Makefile.am (libc_ctype_asm_objs): Fix a comment typo.
+
+2004-04-26  Theodore A. Roth  <troth@openavr.org>
+
 	* Makefile.am (EXTRA_DIST): Remove references to deleted files.
 	Add bootstrap.
 	* bootstrap: New file.
