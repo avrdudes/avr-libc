@@ -1,5 +1,16 @@
 2005-01-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/stdlib/strtol.c: Dmitry Xmelkov's fixes and speedups
+	for strtol and strtoul (check base against legal values,
+	correctly report ERANGE on under-/overflow, avoid costly
+	division for common base values, parse string "0x" correctly
+	as 0 with returning the "x" as final string); bugfix for
+	savannah bug  #11494, and savannah patch #3618.
+	* libc/stdlib/strtoul.c: Ditto.
+	* AUTHORS: Mention Dmitry Xmelkov for his contribution.
+
+2005-01-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/acknowledge.dox: Mention Ted Roth, fix Eric's
 	email address.
 	* doc/api/tools-install.dox: Remove all explicit version

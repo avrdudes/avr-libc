@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
+ * Copyright (c) 2005, Dmitry Xmelkov
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -25,11 +26,9 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ * $Id$
  */
-
-#if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)strtoul.c	8.1 (Berkeley) 6/4/93";
-#endif /* LIBC_SCCS and not lint */
 
 #include <limits.h>
 #include <ctype.h>
@@ -48,59 +47,103 @@ strtoul(nptr, endptr, base)
 	char **endptr;
 	register int base;
 {
-	register const char *s = nptr;
 	register unsigned long acc;
 	register unsigned char c;
 	register unsigned long cutoff;
-	register int cutlim;
-	register signed char neg = 0, any;
+	register signed char any;
+	unsigned char flag = 0;
+#define FL_NEG	0x01		/* number is negative */
+#define FL_0X	0x02		/* number has a 0x prefix */
+
+	if (endptr)
+		*endptr = (char *)nptr;
+	if (base != 0 && (base < 2 || base > 36))
+		return 0;
 
 	/*
 	 * See strtol for comments as to the logic used.
 	 */
 	do {
-		c = *s++;
+		c = *nptr++;
 	} while (isspace(c));
 	if (c == '-') {
-		neg = 1;
-		c = *s++;
+		flag = FL_NEG;
+		c = *nptr++;
 	} else if (c == '+')
-		c = *s++;
+		c = *nptr++;
 	if ((base == 0 || base == 16) &&
-	    c == '0' && (*s == 'x' || *s == 'X')) {
-		c = s[1];
-		s += 2;
+	    c == '0' && (*nptr == 'x' || *nptr == 'X')) {
+		c = nptr[1];
+		nptr += 2;
 		base = 16;
+		flag |= FL_0X;
 	}
 	if (base == 0)
 		base = c == '0' ? 8 : 10;
-	cutoff = (unsigned long)ULONG_MAX / (unsigned long)base;
-	cutlim = (unsigned long)ULONG_MAX % (unsigned long)base;
-	for (acc = 0, any = 0;; c = *s++) {
-		if (!isascii(c))
-			break;
-		if (isdigit(c))
+
+	/*
+	 * cutoff computation is similar to strtol().
+	 *
+	 * Description of the overflow detection logic used.
+	 *
+	 * First, let us assume an overflow.
+	 *
+	 * Result of `acc_old * base + c' is cut to 32 bits:
+	 *  acc_new <-- acc_old * base + c - 0x100000000
+	 *
+	 *  `acc_old * base' is <= 0xffffffff   (cutoff control)
+	 *
+	 * then:   acc_new <= 0xffffffff + c - 0x100000000
+	 *
+	 * or:     acc_new <= c - 1
+	 *
+	 * or:     acc_new < c
+	 *
+	 * Second:
+	 * if (no overflow) then acc * base + c >= c
+	 *                        (or: acc_new >= c)
+	 * is clear (alls are unsigned).
+	 *
+	 */
+	switch (base) {
+		case 16:    cutoff = ULONG_MAX / 16;  break;
+		case 10:    cutoff = ULONG_MAX / 10;  break;
+		case 8:     cutoff = ULONG_MAX / 8;   break;
+		default:    cutoff = ULONG_MAX / base;
+	}
+
+	for (acc = 0, any = 0;; c = *nptr++) {
+		if (c >= '0' && c <= '9')
 			c -= '0';
-		else if (isalpha(c))
-			c = (c & ~0x20) - 'A' + 10;
+		else if (c >= 'A' && c <= 'Z')
+			c -= 'A' - 10;
+		else if (c >= 'a' && c <= 'z')
+			c -= 'a' - 10;
 		else
 			break;
 		if (c >= base)
 			break;
-		if (any < 0 || acc > cutoff || (acc == cutoff && c > cutlim))
+		if (any < 0)
+			continue;
+		if (acc > cutoff) {
 			any = -1;
-		else {
-			any = 1;
-			acc *= base;
-			acc += c;
+			continue;
 		}
+		acc = acc * base + c;
+		any = (c > acc) ? -1 : 1;
 	}
+
+	if (endptr) {
+		if (any)
+			*endptr = (char *)nptr - 1;
+		else if (flag & FL_0X)
+			*endptr = (char *)nptr - 2;
+	}
+	if (flag & FL_NEG)
+		acc = -acc;
 	if (any < 0) {
 		acc = ULONG_MAX;
 		errno = ERANGE;
-	} else if (neg)
-		acc = -acc;
-	if (endptr != 0)
-		*endptr = (char *)(any ? s - 1 : nptr);
+	}
 	return (acc);
 }
