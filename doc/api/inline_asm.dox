@@ -23,13 +23,26 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
+/* History [From the original document; not needed since we're in cvs now.]
+
+- 2001/05/07 V 1.1: Output and input lists sequence corrected in chapter
+  1. Multibyte operands added. Index added. Some typos corrected.
+- 2001/05/07 V 1.2: subi replaced by inc in clobber samples. Pointer type is
+  mandantory.
+- 2001/05/07 V 1.3: Pointer register modifier added.
+- 2002/05/16 V 1.4: Fixed the funny "risk" typo. New chapters C Names, FAQ and
+  Links added.
+- 2002/07/23: Converted to doxygen and merged into avr-libc project by 
+  Theodore A. Roth.
+- 2002/08/10 V 1.5: Fixed variable name in clobber section. New section C
+  stubs added. (Harald Kipp)
+
+*/
+
 /** \page inline_asm Inline Asm
 
-GCC-AVR<br>
-Inline Assembler<br>
-Cookbook<br>
-Version 1.5
-
+AVR-GCC<br>
+Inline Assembler Cookbook
 
 About this Document
 
@@ -70,20 +83,9 @@ Herne, 17th of May 2002
 Harald Kipp
 harald.kipp@egnite.de
 
-
-\par History
-
-- 2001/05/07 V 1.1: Output and input lists sequence corrected in chapter
-  1. Multibyte operands added. Index added. Some typos corrected.
-- 2001/05/07 V 1.2: subi replaced by inc in clobber samples. Pointer type is
-  mandantory.
-- 2001/05/07 V 1.3: Pointer register modifier added.
-- 2002/05/16 V 1.4: Fixed the funny "risk" typo. New chapters C Names, FAQ and
-  Links added.
-- 2002/07/23: Converted to doxygen and merged into avr-libc project by 
-  Theodore A. Roth.
-- 2002/08/10 V 1.5: Fixed variable name in clobber section. New section C
-  stubs added. (Harald Kipp)
+\note As of 26th of July 2002, this document has been merged into the
+documentation for avr-libc. The latest version is now available at 
+http://www.freesoftware.fsf.org/avr-libc/ .
 
 \subsection gcc_asm GCC asm Statement
 
@@ -224,8 +226,8 @@ changes the register usage definitions.
 \subsection io_ops Input and Output Operands
 
 Each input and output operand is described by a constraint string followed by
-a C expression in parantheses. GCC-AVR 2.95.2 knows the following constraint
-characters:
+a C expression in parantheses. <tt>AVR-GCC</tt> 3.3 knows the following
+constraint characters:
 
 \note The most up-to-date and detailed information on contraints for the avr
 can be found in the gcc manual.
@@ -913,7 +915,7 @@ uint16_t inw(uint8_t port)
 
 \subsection c_names_in_asm C Names Used in Assembler Code
 
-By default \c avr-gcc uses the same symbolic names of functions or variables
+By default \c AVR-GCC uses the same symbolic names of functions or variables
 in C and assembler code. You can specify a different name for the assembler
 code by using a special form of the \c asm statement:
 
@@ -926,7 +928,7 @@ value. This makes sense only for external or static variables, because local
 variables do not have symbolic names in the assembler code. However, local
 variables may be held in registers.
 
-With \c avr-gcc you can specify the use of a specific register:
+With \c AVR-GCC you can specify the use of a specific register:
 
 \code
 void Count(void)
@@ -940,7 +942,7 @@ void Count(void)
 \endcode
 
 The assembler instruction, <tt>"clr r3"</tt>, will clear the variable counter.
-\c avr-gcc will not completely reserve the specified register. If the
+\c AVR-GCC will not completely reserve the specified register. If the
 optimizer recognizes that the variable will not be referenced any longer, the
 register may be re-used. But the compiler is not able to check wether this
 register usage conflicts with any predefined register. If you reserve too many
