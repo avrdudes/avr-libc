@@ -1,3 +1,7 @@
+2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/twi.h: add some more useful macros.
+
 2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: add Eric's entry about relocating code to a

@@ -37,6 +37,8 @@
 #ifndef _AVR_TWI_H_
 #define _AVR_TWI_H_ 1
 
+#include <avr/io.h>
+
 /* TWSR values (not bits) */
 /* Master */
 #define TW_START		0x08
@@ -72,5 +74,19 @@
 /* Misc */
 #define TW_NO_INFO		0xF8
 #define TW_BUS_ERROR		0x00
+
+/*
+ * The lower 3 bits of TWSR are reserved on the ATmega163.
+ * The 2 LSB carry the prescaler bits on the newer ATmegas.
+ */
+#define TW_STATUS_MASK		(_BV(TWS7)|_BV(TWS6)|_BV(TWS5)|_BV(TWS4)|\
+				_BV(TWS3))
+#define TW_STATUS		(TWSR & TW_STATUS_MASK)
+
+/*
+ * R/~W bit in SLA+R/W address field.
+ */
+#define TW_READ		1
+#define TW_WRITE	0
 
 #endif  /* _AVR_TWI_H_ */
