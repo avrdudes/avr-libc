@@ -31,70 +31,65 @@
 
    Contributors:
      Created by Reiner Patommel
+     Changed by Reiner Patommel 31 August 2002
+     Changes: swapped arguments x and y
 
  -*- Mode: Asm -*-
 
 *----------------------------------------------------------------------------------------
-* A = atan2(float A, float B)
+* A = atan2(float A, float B) = atan2(float y, float x)
 *---------------------------------------------------------------------------------------*/
 
 #include "gasava.inc"
 #include "fplib.inc"
 #include "macros.inc"
-#define Y_hi    r25
-#define Y_lo    r24
-#define X_hi    r23
-#define X_lo    r22
-#define Z_hi    r21
-#define Z_lo    r20
-#define tmp_hi  r19
-#define tmp_lo  r18
+#define Y_hi    r25                 /* rA3 */
+#define Y_lo    r24                 /* rA2 */
+#define X_hi    r23                 /* rA1 */
+#define X_lo    r22                 /* rA0 */
+#define Z_hi    r21                 /* rB3 */
+#define Z_lo    r20                 /* rB2 */
+#define tmp_hi  r19                 /* rB1 */
+#define tmp_lo  r18                 /* rB0 */
 #define sign    r26
 #define lcount  r26
 
-    TEXT_SEG(fplib, atan2)
-    FUNCTION(atan2)
+TEXT_SEG(fplib, atan2)
+FUNCTION(atan2)
 
 GLOBAL(atan2)
-    CP      rB3, __zero_reg__       ; if (y != 0)
+    CP      rA3, __zero_reg__       ; if (y != 0)
     BRNE    _atan2_normalize        ;   calculate
-    CP      rA3, __zero_reg__       ; if (y == 0 && x == 0)
+    CP      rB3, __zero_reg__       ; if (y == 0 && x == 0)
     BREQ    _atan2_NAN              ;   return Argument Error
-    SBRC    rA3, 7                  ; if (y == 0 && x < 0)
+    SBRC    rB3, 7                  ; if (y == 0 && x < 0)
     RJMP    _atan2_PI               ;   return PI
-    XJMP    _U(__fp_zero)           ; if (x == 0 && y == 0) return 0
+    XJMP    _U(__fp_zero)           ; if (y == 0 && x > 0) return 0
 
 _atan2_PI:
     LDI     rA3, 0x40
     LDI     rA2, 0x49
     LDI     rA1, 0x0F
-    LDI     rA0, 0xDB               ; load PI
+    LDI     rA0, 0xDB               ; load and return PI
     RET
+
 _atan2_NAN:
     XJMP    _U(__fp_nanERANGE)
 
 _atan2_normalize:                   ; normalize x and y to be LESS or EQUAL 1
     CLR     sign
-    SBRC    rA3, 7
-    ORI     sign, 1                 ; remember sign of x (bit 0 set: x < 0)
     SBRC    rB3, 7
+    ORI     sign, 1                 ; remember sign of x (bit 0 set: x < 0)
+    SBRC    rA3, 7
     ORI     sign, 2                 ; remember sign of y (bit 1 set: y < 0)
     PUSH    sign
-    ANDI    rA3, 0x7F               ; make |x|
-    ANDI    rB3, 0x7F               ; make |y|
-    CP      rA0, rB0
-    CPC     rA1, rB1
-    CPC     rA2, rB2
-    CPC     rA3, rB3                ; |x| >= |y| ?
+    ANDI    rB3, 0x7F               ; make |x|
+    ANDI    rA3, 0x7F               ; make |y|
+    CP      rB0, rA0
+    CPC     rB1, rA1
+    CPC     rB2, rA2
+    CPC     rB3, rA3                ; |x| >= |y| ?
     BRGE    _atan2_X_GT
-_atan2_Y_GT:
-    RCALL   _atan2_scale            ; rA3:rA2 = int(28140 * x / y)
-    MOV     X_hi, rA3
-    MOV     X_lo, rA2               ; X = int(28140 * x / y)
-    LDI     Y_hi, 0x6D
-    LDI     Y_lo, 0xEC              ; Y = 28140
-    RJMP    _atan2_cordic_loop_init
-_atan2_X_GT:
     EOR     rA3, rB3
     EOR     rB3, rA3
     EOR     rA3, rB3
@@ -107,7 +102,15 @@ _atan2_X_GT:
     EOR     rA0, rB0
     EOR     rB0, rA0
     EOR     rA0, rB0                ; swap A and B
-    RCALL   _atan2_scale            ; Y = int(28140 * y / x)
+    RCALL   _atan2_scale            ; rA3:rA2 = int(28140 * x / y)
+    MOV     X_hi, rA3
+    MOV     X_lo, rA2               ; X = int(28140 * x / y)
+    LDI     Y_hi, 0x6D
+    LDI     Y_lo, 0xEC              ; Y = 28140
+    RJMP    _atan2_cordic_loop_init
+
+_atan2_X_GT:
+    RCALL   _atan2_scale            ; Y = rA3:rA2 = int(28140 * y / x)
     LDI     X_hi, 0x6D
     LDI     X_lo, 0xEC              ; X = 28140
 
@@ -117,10 +120,12 @@ _atan2_cordic_loop_init:            ; run cordic in vectoring mode
     CLR     lcount                  ; lcount = 0
     LDI     ZL, LOW(table_atan2)
     LDI     ZH, HIGH(table_atan2)   ; set pointer to table
+
 _atan2_cordic_loop:
     CPI     lcount, 15              ; lcount >= 15 ?
     BRLO    _atan2_cordic_loop_2
     RJMP    _atan2_finish           ; ok done with cordic
+
 _atan2_cordic_loop_2:
     PUSH    Y_hi
     PUSH    Y_lo                    ; save Y
@@ -139,9 +144,10 @@ _atan2_cordic_loop_2:
     CP      Y_lo, __zero_reg__
     CPC     Y_hi, __zero_reg__      ; Y < 0 ?
     BRLT    _atan2_Y_neg
+
 _atan2_Y_pos:
     ADD     X_lo, rA2
-    adc     X_hi, rA3               ; X = X + Y >> lcount
+    ADC     X_hi, rA3               ; X = X + Y >> lcount
     POP     Y_lo
     POP     Y_hi                    ; restore Y
     SUB     Y_lo, tmp_lo
@@ -149,16 +155,17 @@ _atan2_Y_pos:
     LPMRdZpp(tmp_lo)                ; tmp = Rad[lcount]
     LPMRdZpp(tmp_hi)
     ADD     Z_lo, tmp_lo
-    adc     Z_hi, tmp_hi            ; Z = Z + Rad[lcount]
+    ADC     Z_hi, tmp_hi            ; Z = Z + Rad[lcount]
     INC     lcount                  ; lcount++
     RJMP    _atan2_cordic_loop
+
 _atan2_Y_neg:
     SUB     X_lo, rA2
     SBC     X_hi, rA3               ; X = X - Y >> lcount
     POP     Y_lo
     POP     Y_hi                    ; restore Y
     ADD     Y_lo, tmp_lo
-    adc     Y_hi, tmp_hi            ; Y = Y + tmp >> lcount
+    ADC     Y_hi, tmp_hi            ; Y = Y + tmp >> lcount
     LPMRdZpp(tmp_lo)
     LPMRdZpp(tmp_hi)                ; tmp = Rad[lcount]
     SUB     Z_lo, tmp_lo
@@ -168,6 +175,7 @@ _atan2_Y_neg:
 
 _atan2_shift:                       ; A = A >> lcount
     MOV     __tmp_reg__, lcount     ; get current loop count
+
 _atan2_shift_loop:
     TST     __tmp_reg__
     BREQ    _atan2_shift_done       ; we are done
@@ -176,6 +184,7 @@ _atan2_shift_loop:
     BLD     rA3, 7                  ;  LSR for "unsigned" int. ASR for "signed" int
     DEC     __tmp_reg__
     RJMP    _atan2_shift_loop
+
 _atan2_shift_done:
     RET
 
@@ -205,6 +214,7 @@ _atan2_finish:                      ; convert to float and clean-up
     PUSH    sign
     SBRC    sign, 0                 ; x < 0 ?
     RJMP    _atan2_xneg
+
 _atan2_xpos:                        ; here: x > 0
     RCALL   _atan2_scale_load       ; B = 28140.0
     XCALL   _U(__divsf3)            ; A = A / B
@@ -212,6 +222,7 @@ _atan2_xpos:                        ; here: x > 0
     SBRC    sign, 1                 ; y < 0 ?
     RJMP    _atan2_yneg
     RET                             ; return (A / B)
+
 _atan2_xneg:                        ; here: x < 0
     LDI     rB3, 0x47
     LDI     rB2, 0xAC
@@ -225,15 +236,14 @@ _atan2_xneg:                        ; here: x < 0
     SBRC    sign, 1                 ; y < 0 ?
     RJMP    _atan2_yneg
     RET                             ; return (A / B)
+
 _atan2_yneg:                        ; here: y < 0
     ORI     rA3, 0x80               ; negate A
     RET                             ; return -(A / B)
-          ENDFUNC
+ ENDFUNC
 
-; ---------------------------------------------------------------------------
-	PGM_SECTION
-
+; --------------------------------------------------------------------------------------
 table_atan2:
     .word 22101, 13047, 6893, 3499, 1756, 879, 439, 219, 109, 54, 27, 13, 6, 3, 1
-; ---------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------
 

@@ -3,7 +3,7 @@
   atan2.S
 
   Author:   Reiner Patommel
-  
+
 atan2.S uses CORDIC, an algorithm which was developed in 1956 by Jack Volder.
 CORDIC can be used to calculate trigonometric, hyperbolic and linear
 functions and is until today implemented in most pocket calculators.
@@ -20,7 +20,7 @@ The rotation angles are limited to -PI/2 and PI/2 i.e.
 For the calculation of atan2(x,y) we need a small pre-calculated table of
 angles or radians with the values Tn = atan(1/2^i).
 We rotate the vector(Xo,Yo) in steps to the x-axis i.e. we drive Y to 0 and
-accumulate the rotated angles or radians in Z.  The direction of the rotation 
+accumulate the rotated angles or radians in Z.  The direction of the rotation
 will be positive or negative depending on the sign of Y after the previous
 rotation and the rotation angle will decrease from step to step. (The first
 step is 45 degrees, the last step is 0.002036 degrees for n = 15).
@@ -35,7 +35,7 @@ approx. 1.64676 for n = 15.
 
 In order to represent X, Y and Z as integers we introduce a scaling factor Q
 which is chosen as follows:
-1.	We normalize Xo and Yo (starting values) to be less than or equal to 1*Q and 
+1.	We normalize Xo and Yo (starting values) to be less than or equal to 1*Q and
 	set Zo = 0 i.e. Xomax = 1*Q, Yomax = 1*Q, Zo = 0.
 2.	With Xo = 1*Q and Yo = 1*Q, Xn will be Xnmax = Q*c*sqrt(2) = 2.329*Q
 3.	In order to boost accuracy we only cover the rotation angles between 0 and PI/2
@@ -47,7 +47,7 @@ which is chosen as follows:
 	Ynmax = +/- 28140				--> signed int
 	Znmax = PI/2 * 28140 = 44202	--> unsigned int
 	The systematic error is 90/44202 = 0.002036 degrees or 0.0000355 rad.
-	
+
 
 Below is atan2 and atan in C:
 
@@ -72,7 +72,7 @@ Below is atan2 and atan in C:
 /* ---------------------------------------------------------------------*/
 void make_table(void);
 float my_atan(float x);
-float my_atan2(float x, float y);
+float my_atan2(float y, float x);
 
 /* ---------------------------------------------------------------------*/
 /* GLOBAL VARIABLES														*/
@@ -96,9 +96,9 @@ int main(int argc,char *argv[])
 	}
 
 	x =  1;  y = 1;
-	res = my_atan2(x,y);
+	res = my_atan2(y, x);
 	printf("\nmy_atan2(%9.8f,%9.8f) = %9.8f err = %9.8f",
-		x, y, res, res - atan2(x, y));
+		x, y, res, res - atan2(y, x));
 	return 0;
 }
 
@@ -120,11 +120,11 @@ void make_table(void)
 /* ---------------------------------------------------------------------*/
 float my_atan(float x)
 {
-	return (my_atan2(1.0, (float)x));
+	return (my_atan2((float)x), 1.0);
 }
 
 /* ---------------------------------------------------------------------*/
-float my_atan2(float x, float y)
+float my_atan2(float y, float x)
 {
 	unsigned char i;
 	unsigned short int X;

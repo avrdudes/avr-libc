@@ -26,14 +26,15 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/*
+/* ---------------------------------------------------------------------------------------
    atan.S
 
    Contributors:
      Created by Reiner Patommel
-*/
+     Changed by Reiner Patommel 31 August 2002
+     Changes: swapped arguments x and y for call of atan2 because of change to atan2
 
- /*  -*- Mode: Asm -*-  */
+ -*- Mode: Asm -*-
 
  /*----------------------------------------------------------------------------------------
  *  A = atan(A)
@@ -42,17 +43,15 @@
  #include "gasava.inc"
  #include "fplib.inc"
 
-             TEXT_SEG(fplib, atan)
-             FUNCTION(atan)
+ TEXT_SEG(fplib, atan)
+ FUNCTION(atan)
 
  GLOBAL(atan)
-    MOV     rB3, rA3
-    MOV     rB2, rA2
-    MOV     rB1, rA1
-    MOV     rB0, rA0        ; B = A
-    LDI     rA3, 0x3F
-    LDI     rA2, 0x80
-    CLR     rA1
-    CLR     rA0             ; load 1.0
-    XJMP    _U(atan2)       ; atan(A) = atan2(1.0, A)
+    LDI     rB3, 0x3F
+    LDI     rB2, 0x80
+    CLR     rB1
+    CLR     rB0             ; load 1.0
+    XJMP    _U(atan2)       ; atan(A) = atan2(A, 1.0)
+ ENDFUNC
+ ; --------------------------------------------------------------------------------------
 
