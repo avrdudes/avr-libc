@@ -56,15 +56,18 @@ remember the current value.
 \par Note [2]:
 SIGNAL() is a macro that marks the function as an interrupt routine. In this
 case, the function will get called when the timer overflows. Setting up
-interrupts is explained in greater detail in \c ref avr_interrupts.
+interrupts is explained in greater detail in \ref avr_interrupts.
 
 \par Note [3]:
- This section determines the new value of the \c PWM.
+This section determines the new value of the \c PWM.
 
 \par Note [4]:
-Here's where the newly computed value is loaded into the \c PWM regsiter.
-Since we are in an interrupt routine, it is safe to use outw().  Outside of an
-interrupt, outw_atomic() should be used. [FIXME: this is old stuff]
+Here's where the newly computed value is loaded into the \c PWM register.
+Since we are in an interrupt routine, it is safe to use a 16-bit assignment
+to the register.  Outside of an interrupt, the assignment should only be
+performed with interrupts disabled if there's a chance that an interrupt
+routine could also access this register (or another register that uses
+\c TEMP), see the appropriate \ref faq_16bitio "FAQ entry".
 
 \par Note [5]:
 This routine gets called after a reset. It initializes the \c PWM and enables
