@@ -16,7 +16,6 @@ TODO for avr-libc:
    * interfaces in:
      + include/ctype.h
      + include/math.h
-     + include/stdlib.h
 	 + include/avr/crc16.h  ???
 	 + include/avr/ina90.h  ???
 	 + include/avr/twi.h

@@ -140,7 +140,7 @@ extern long labs(long __i) __ATTR_CONST__;
      members compare as equal, which member is matched is unspecified.
 */
 extern void *bsearch(const void *__key, const void *__base, size_t __nmemb,
-		     size_t size, int (*__compar)(const void *, const void *));
+		     size_t __size, int (*__compar)(const void *, const void *));
 
 /* __divmodhi4 and __divmodsi4 from libgcc.a */
 /**
@@ -160,7 +160,7 @@ extern ldiv_t ldiv(long __num, long __denom) __asm__("__divmodsi4") __ATTR_CONST
      The qsort() function is a modified partition-exchange sort, or
      quicksort.
 
-     The qsort() function sort an array of \c nmemb objects, the
+     The qsort() function sorts an array of \c nmemb objects, the
      initial member of which is pointed to by \c base.  The size of
      each object is specified by \c size.  The contents of the array
      base are sorted in ascending order according to a comparison
@@ -180,22 +180,22 @@ extern void qsort(void *__base, size_t __nmemb, size_t __size,
     must be between 2 and 36 inclusive, or be the special value 0.
 
     The string may begin with an arbitrary amount of white space (as
-    determined by isspace()) followed by a single optional `+' or `-'
+    determined by isspace()) followed by a single optional \c '+' or \c '-'
     sign.  If \c base is zero or 16, the string may then include a
-    ``0x'' prefix, and the number will be read in base 16; otherwise,
+    \c "0x" prefix, and the number will be read in base 16; otherwise,
     a zero base is taken as 10 (decimal) unless the next character is
-    `0', in which case it is taken as 8 (octal).
+    \c '0', in which case it is taken as 8 (octal).
 
     The remainder of the string is converted to a long value in the
     obvious manner, stopping at the first character which is not a
-    valid digit in the given base.  (In bases above 10, the letter `A'
-    in either upper or lower case represents 10, `B' represents 11,
-    and so forth, with `Z' representing 35.)
+    valid digit in the given base.  (In bases above 10, the letter \c 'A'
+    in either upper or lower case represents 10, \c 'B' represents 11,
+    and so forth, with \c 'Z' representing 35.)
 
     If \c endptr is not NULL, strtol() stores the address of the first
     invalid character in \c *endptr.  If there were no digits at all,
     however, strtol() stores the original value of \c nptr in \c
-    *endptr.  (Thus, if \c *nptr is not `\0' but \c **endptr is `\0'
+    *endptr.  (Thus, if \c *nptr is not \c '\0' but \c **endptr is \c '\0'
     on return, the entire string was valid.)
 
     The strtol() function returns the result of the conversion, unless
@@ -213,22 +213,22 @@ extern long strtol(const char *__nptr, char **__endptr, int __base);
     special value 0.
 
     The string may begin with an arbitrary amount of white space (as
-    determined by isspace()) followed by a single optional `+' or `-'
+    determined by isspace()) followed by a single optional \c '+' or \c '-'
     sign.  If \c base is zero or 16, the string may then include a
-    ``0x'' prefix, and the number will be read in base 16; otherwise,
+    \c "0x" prefix, and the number will be read in base 16; otherwise,
     a zero base is taken as 10 (decimal) unless the next character is
-    `0', in which case it is taken as 8 (octal).
+    \c '0', in which case it is taken as 8 (octal).
 
     The remainder of the string is converted to an unsigned long value
     in the obvious manner, stopping at the first character which is
     not a valid digit in the given base.  (In bases above 10, the
-    letter `A' in either upper or lower case represents 10, `B'
-    represents 11, and so forth, with `Z' representing 35.)
+    letter \c 'A' in either upper or lower case represents 10, \c 'B'
+    represents 11, and so forth, with \c 'Z' representing 35.)
 
     If \c endptr is not NULL, strtol() stores the address of the first
     invalid character in \c *endptr.  If there were no digits at all,
     however, strtol() stores the original value of \c nptr in \c
-    *endptr.  (Thus, if \c *nptr is not `\0' but \c **endptr is `\0'
+    *endptr.  (Thus, if \c *nptr is not \c '\0' but \c **endptr is \c '\0'
     on return, the entire string was valid.)
 
     The strtoul() function return either the result of the conversion
@@ -248,7 +248,7 @@ extern unsigned long strtoul(const char *__nptr, char **__endptr, int __base);
 
            \code strtol(nptr, (char **)NULL, 10); \endcode
 */
-extern __inline__ long atol(const char *nptr) __ATTR_PURE__;
+extern __inline__ long atol(const char *__nptr) __ATTR_PURE__;
 extern __inline__ long
 atol(const char *__nptr)
 {
@@ -333,23 +333,21 @@ extern char *__malloc_heap_start;
 
    In case of a device with external SRAM where the heap is going to
    be allocated in external RAM, it's good practice to already define
-   those symbols from the linker command line.
+   those symbols from the linker command line. [FIXME: show example]
 */
 extern char *__malloc_heap_end;
 
-/* implemented but not tested */
 /**
      The strtod() function converts the initial portion of the string pointed
      to by \c nptr to double representation.
 
-     The expected form of the string is an optional plus (``+'') or minus sign
-     (``-'') followed by a sequence of digits optionally containing a decimal-
-     point character, optionally followed by an exponent.  An exponent con­
-     sists of an ``E'' or ``e'', followed by an optional plus or minus sign,
-     followed by a sequence of digits.
+     The expected form of the string is an optional plus ( \c '+' ) or minus sign
+     ( \c '-' ) followed by a sequence of digits optionally containing a
+     decimal-point character, optionally followed by an exponent.  An exponent
+     consists of an \c 'E' or \c 'e', followed by an optional plus or minus
+     sign, followed by a sequence of digits.
 
-     Leading white-space characters in the string
-     are skipped.
+     Leading white-space characters in the string are skipped.
 
      The strtod() function returns the converted value, if any.
 
@@ -367,6 +365,9 @@ extern char *__malloc_heap_end;
 
      FIXME: HUGE_VAL needs to be defined somewhere.  The bit pattern is
      0x7fffffff, but what number would this be?
+
+     \note Implemented but not tested.
+
  */
 
 extern double strtod(const char *__nptr, char **__endptr);
@@ -383,8 +384,8 @@ extern double strtod(const char *__nptr, char **__endptr);
 
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
-   is greater than 10, the next digit after ``9'' will be the letter
-   ``a''.
+   is greater than 10, the next digit after \c '9' will be the letter
+   \c 'a'.
 
    The itoa() function returns the pointer passed as \c s.
 */
@@ -397,8 +398,8 @@ extern char *itoa(int __val, char *__s, int __radix);
 
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
-   is greater than 10, the next digit after ``9'' will be the letter
-   ``a''.
+   is greater than 10, the next digit after \c '9' will be the letter
+   \c 'a'.
 
    The ltoa() function returns the pointer passed as \c s.
 */
@@ -411,8 +412,8 @@ extern char *ltoa(long int __val, char *__s, int __radix);
 
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
-   is greater than 10, the next digit after ``9'' will be the letter
-   ``a''.
+   is greater than 10, the next digit after \c '9' will be the letter
+   \c 'a'.
 
    The utoa() function returns the pointer passed as \c s.
 */
@@ -426,11 +427,10 @@ extern char *utoa(unsigned int __val, char *__s, int __radix);
 
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
-   is greater than 10, the next digit after ``9'' will be the letter
-   ``a''.
+   is greater than 10, the next digit after \c '9' will be the letter
+   \c 'a'.
 
-   The i
-   ultoa() function returns the pointer passed as \c s.
+   The ultoa() function returns the pointer passed as \c s.
 */
 extern char *ultoa(unsigned long int __val, char *__s, int __radix);
 
@@ -455,13 +455,13 @@ extern char *ultoa(unsigned long int __val, char *__s, int __radix);
    an ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
-   Conversion is done into in the style [-]d.ddde±dd where there is
+   Conversion is done in the format \c "[-]d.ddde±dd" where there is
    one digit before the decimal-point character and the number of
    digits after it is equal to the precision \c prec; if the precision
    is zero, no decimal-point character appears.  If \c flags has the
-   DTOSTRE_UPPERCASE bit set, the letter `E' (rather than `e') will be
+   DTOSTRE_UPPERCASE bit set, the letter \c 'E' (rather than \c 'e' ) will be
    used to introduce the exponent.  The exponent always contains two
-   digits; if the value is zero, the exponent is 00.
+   digits; if the value is zero, the exponent is \c "00".
 
    If \c flags has the DTOSTRE_ALWAYS_SIGN bit set, a space character
    will be placed into the leading position for positive numbers.
@@ -477,8 +477,8 @@ extern char *dtostre(double __val, char *__s, unsigned char __prec,
    an ASCII representationthat will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
-   Conversion is done into in the style [-]d.ddd.  The minimum field
-   width of the output string (including the ``.'' and the possible
+   Conversion is done in the format \c "[-]d.ddd".  The minimum field
+   width of the output string (including the \c '.' and the possible
    sign for negative values) is given in \c width, and \c prec determines
    the number of digits after the decimal sign.
 */
