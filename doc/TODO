@@ -1,6 +1,19 @@
 TODO for avr-libc:
 
  - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
+     [Joerg has patch [1] for this that just needs some love before it's
+     committed.]
  - finish porting newlib to AVR (may be useful especially for
    larger devices, and for testing avr-gcc itself...)
  - optimize strlcpy and strlcat
+     [Eric Weddington has submitted a patch [2] with optimized versions.
+	 Needs review/testing before commit.]
+ - Document how to pre-program the EEPROM.
+ - Document .section directives.
+ - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
+   sys/systemcfg.h?, stdio.h?
+
+
+[1] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000084.html
+[2] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000033.html
+[3] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000147.html
