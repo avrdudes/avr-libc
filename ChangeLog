@@ -1,7 +1,14 @@
+2005-02-07  Eric B. Weddington  <ericw@evcohs.com>
+
+    * doc/examples/twitest/twitest.c: Replace SYSCLK with F_CPU.
+    [Fixes bug #11817]
+    * NEWS: Update bugs fixed list.
+
 2005-02-01  Eric B. Weddington  <ericw@evcohs.com>
 
     * libm/fplib/sin.S: Fix call to __fp_cosinus.
     [Fixes bug #11805]
+    * NEWS: Update bugs fixed list.
 
 2005-01-27  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
