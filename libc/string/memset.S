@@ -40,9 +40,9 @@
     \brief Fill memory with a constant byte.
 
     The memset() function fills the first len bytes of the memory area pointed
-    to by src with the constant byte val.
+    to by dest with the constant byte val.
 
-    \returns The memset() function returns a pointer to the memory area src.  */
+    \returns The memset() function returns a pointer to the memory area dest. */
 
 	.text
 	.global	_U(memset)
