@@ -1,3 +1,8 @@
+2003-01-05  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/sleep.h: Fix incorrect use of bit numbers.
+
 2003-01-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: add an entry about default fuse bits.

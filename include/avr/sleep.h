@@ -55,27 +55,27 @@
 /** \ingroup avr_sleep
     \def SLEEP_MODE_ADC
     ADC Noise Reduction Mode. */
-#define SLEEP_MODE_ADC          SM0
+#define SLEEP_MODE_ADC          _BV(SM0)
 
 /** \ingroup avr_sleep
     \def SLEEP_MODE_PWR_DOWN
     Power Down Mode. */
-#define SLEEP_MODE_PWR_DOWN     SM1
+#define SLEEP_MODE_PWR_DOWN     _BV(SM1)
 
 /** \ingroup avr_sleep
     \def SLEEP_MODE_PWR_SAVE
     Power Save Mode. */
-#define SLEEP_MODE_PWR_SAVE     (SM0 | SM1)
+#define SLEEP_MODE_PWR_SAVE     (_BV(SM0) | _BV(SM1))
 
 /** \ingroup avr_sleep
     \def SLEEP_MODE_STANDBY
     Standby Mode. */
-#define SLEEP_MODE_STANDBY      (SM1 | SM2)
+#define SLEEP_MODE_STANDBY      (_BV(SM1) | _BV(SM2))
 
 /** \ingroup avr_sleep
     \def SLEEP_MODE_EXT_STANDBY
     Extended Standby Mode. */
-#define SLEEP_MODE_EXT_STANDBY  (SM0 | SM1 | SM2)
+#define SLEEP_MODE_EXT_STANDBY  (_BV(SM0) | _BV(SM1) | _BV(SM2))
 
 /* @} */
 
