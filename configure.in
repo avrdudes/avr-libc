@@ -77,7 +77,7 @@ AC_CANONICAL_SYSTEM
 dnl maybe the release number sould be changed to major.minor.bugfix
 dnl (e.g.: 1.0.0) to be able to tell the users of the avr-libc if
 dnl it is compatible to their current version or not.
-AM_INIT_AUTOMAKE(avr-libc, 200200708_cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20020714-cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)
@@ -150,7 +150,7 @@ else
   ;;
   avr5) avrlib_cflags=${avrlib_opt_speed}
         avrlib_asflags='-mmcu=atmega161'
-        AVR_CRT_MEGA='crtm161.o crtm163.o crtm323.o crtm128.o # crtm16.o crtm162.o crtm32.o crtm64.o'
+        AVR_CRT_MEGA='crtm161.o crtm162.o crtm163.o crtm323.o crtm128.o # crtm16.o crtm32.o crtm64.o'
         AVR_CRT_OTHER='crtat94k.o'
   ;;
   *)    AC_MSG_ERROR(unexpected value '${with_multisubdir}' for with_multisubdir)

@@ -1,3 +1,10 @@
+2002-07-14  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* configure.in (AM_INIT_AUTOMAKE): Update version.
+	(AVR_CRT_MEGA): Add crtm162.o.
+	* include/avr/iom162.h: New file.
+	* ChangeLog: Add 2002-06-30 entry that got lost.
+
 2002-07-08  Theodore A. Roth  <troth@verinet.com>
 
 	* avr-libc.spec.in: Updated License and URL info.
@@ -12,6 +19,14 @@
 2002-07-05  Theodore A. Roth  <troth@verinet.com>
 
 	* configure.in (AM_INIT_AUTOMAKE): Updated version.
+
+2002-06-30  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+	* libm/fplib/*.S: Move constant tables to the .progmem.gcc_fplib
+	section (guaranteed below 64K even on 128K devices).
+	* Move AVR-specific include/*.h files to include/avr/ .
+	* include/avr/crc16.h: New file.
+	* Fix wdt.h, should work on ATmega128 now.
+	* LICENSE: Remove the third restriction.
 
 2002-06-20  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 	* crt1/gcrt1.S: Check GCC version (3.2 required, 3.1 will not work).
