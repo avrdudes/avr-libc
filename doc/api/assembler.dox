@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002,2004, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -259,5 +259,69 @@ handler that gets all unassigned interrupt vectors can be installed
 using the name \c __vector_default.  This must be \c .global, and
 obviously, should end in a \c reti instruction.  (By default, a jump
 to location 0 would be implied instead.)
+
+\section ass_pseudoops Pseudo-ops and operators
+
+The available pseudo-ops in the assembler are described in the GNU
+assembler (gas) manual.  The manual can be found online as part of the
+current binutils release under http://sources.redhat.com/binutils/.
+
+As gas comes from a Unix origin, its pseudo-op and overall assembler
+syntax is slightly different than the one being used by other
+assemblers.  Numeric constants follow the C notation (prefix \c 0x for
+hexadecimal constants), expressions use a C-like syntax.
+
+Some common pseudo-ops include:
+
+- \c .byte allocates single byte constants
+
+- \c .ascii allocates a non-terminated string of characters
+
+
+- \c .asciz allocates a \\0-terminated string of characters (C string)
+
+- \c .data switches to the .data section (initialized RAM variables)
+
+- \c .text switches to the .text section (code and ROM constants)
+
+- \c .set declares a symbol as a constant expression (identical to
+  \c .equ)
+
+- \c .global (or \c .globl) declares a public symbol that is visible
+  to the linker (e. g. function entry point, global variable)
+
+- \c .extern declares a symbol to be externally defined; this is
+  effectively a comment only, as gas treats all undefined symbols
+  it encounters as globally undefined anyway
+
+Note that \c .org is available in gas as well, but is a fairly
+pointless pseudo-op in an assembler environment that uses relocatable
+object files, as it is the linker that determines the final position
+of some object in ROM or RAM.
+
+Along with the architecture-independent standard operators, there are
+some AVR-specific operators available which are unfortunately not yet
+descriebed in the official documentation.  The most notable operators
+are:
+
+- \c lo8 Takes the least significant 8 bits of a 16-bit integer
+
+- \c hi8 Takes the most significant 8 bits of a 16-bit integer
+
+- \c pm Takes a program-memory (ROM) address, and converts it into a
+  RAM address.  This implies a division by 2 as the AVR handles ROM
+  addresses as 16-bit words (e.g. in an \c IJMP or \c ICALL
+  instruction), and can also handle relocatable symbols on the
+  right-hand side.
+
+Example:
+\verbatim
+	ldi	r24, lo8(pm(somefunc))
+	ldi	r25, hi8(pm(somefunc))
+	call	something
+\endverbatim
+
+This passes the address of function \c somefunc as the first parameter
+to function \c something.
 
 */
