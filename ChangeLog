@@ -1,5 +1,10 @@
 2002-11-08  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/examples/demo/Makefile: Remove png transparency fix-up since it's
+	done later anyways.
+
+2002-11-08  Theodore A. Roth  <troth@openavr.org>
+
 	* doc/INSTALL: Add note about reconf and autoconf/automake.
 
 2002-11-08  Theodore A. Roth  <troth@openavr.org>
