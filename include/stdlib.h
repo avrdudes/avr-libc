@@ -388,7 +388,7 @@ extern double strtod(const char *__nptr, char **__endptr);
 
      It is equivalent to calling
 
-     <tt>strtod(nptr, (char **)NULL);</tt>
+     		\code strtod(nptr, (char **)NULL); \endcode
  */
 
 extern double atof(const char *__nptr);
