@@ -77,7 +77,7 @@ AC_CANONICAL_SYSTEM
 dnl maybe the release number sould be changed to major.minor.bugfix
 dnl (e.g.: 1.0.0) to be able to tell the users of the avr-libc if
 dnl it is compatible to their current version or not.
-AM_INIT_AUTOMAKE(avr-libc, 20020716-cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20020803-cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)
@@ -211,6 +211,11 @@ AC_SUBST(AVR_CRT_AT90)
 AC_SUBST(AVR_CRT_TINY)
 AC_SUBST(AVR_CRT_MEGA)
 AC_SUBST(AVR_CRT_OTHER)
+
+dnl Define this here so all files agree on the name of the manual.
+dnl This also centralizes the name so it's easier to change.
+AVR_LIBC_USER_MANUAL="avr-libc-user-manual"
+AC_SUBST(AVR_LIBC_USER_MANUAL)
 
 dnl the includes for the avr libc
 INCLUDES='-I$(top_srcdir)/include -I$(top_srcdir)/common'

@@ -43,6 +43,8 @@ SUFFIXES             = .pdf
 
 DOC_INST_DIR         = $(DESTDIR)$(datadir)/doc/avr-libc-$(VERSION)
 
+USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
+
 all-local: ps html $(TARGET_PDF)
 
 # Rule for generating postscript output.
@@ -50,7 +52,7 @@ ps: $(TARGET_DOX_PS)
 
 install-ps: ps $(INSTALL_DOX_PS)
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) avr-libc-api.ps $(DOC_INST_DIR)/avr-libc-api.ps
+	$(INSTALL_DATA) $(USER_MANUAL).ps $(DOC_INST_DIR)/$(USER_MANUAL).ps
 
 # Rule for generating html output.
 html: $(TARGET_DOX_HTML)
@@ -64,14 +66,14 @@ uninstall-local:
 	rm -rf $(DOC_INST_DIR)
 
 clean-local:
-	rm -rf avr-libc-api latex_src man
+	rm -rf $(USER_MANUAL) latex_src man
 
 # Rule for generating PDF output
 pdf: $(TARGET_DOX_PDF)
 
 install-pdf: $(INSTALL_DOX_PDF)
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) avr-libc-api.pdf $(DOC_INST_DIR)/avr-libc-api.pdf
+	$(INSTALL_DATA) $(USER_MANUAL).pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
 
 #
 # Rules for generating documentation with doxygen
@@ -84,15 +86,15 @@ dox-html latex:
 
 dox-pdf: latex
 	cd latex_src && ${MAKE} pdf
-	cp latex_src/refman.pdf avr-libc-api.pdf
+	cp latex_src/refman.pdf $(USER_MANUAL).pdf
 
 dox-ps: latex
 	cd latex_src && ${MAKE} ps
-	cp latex_src/refman.ps avr-libc-api.ps
+	cp latex_src/refman.ps $(USER_MANUAL).ps
 
 install-dox-html: html
-	$(mkinstalldirs) $(DOC_INST_DIR)/html
-	@list='$(wildcard html/*.html html/*.css)' ; \
+	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)
+	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css)'; \
 	for file in $$list ; do \
 	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file"; \
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
@@ -100,11 +102,11 @@ install-dox-html: html
 
 install-dox-pdf: dox-pdf
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) latex_src/refman.pdf $(DOC_INST_DIR)/avr-libc-api.pdf
+	$(INSTALL_DATA) latex_src/refman.pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
 
 install-dox-ps: dox-ps
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) latex_src/refman.ps $(DOC_INST_DIR)/avr-libc-api.ps
+	$(INSTALL_DATA) latex_src/refman.ps $(DOC_INST_DIR)/$(USER_MANUAL).ps
 
 .PHONY: html latex ps pdf dox dox-pdf install-pdf install-html install-ps \
 	install-dox-html install-dox-ps install-dox-pdf
