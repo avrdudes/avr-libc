@@ -1,5 +1,14 @@
 2004-05-07  Theodore A. Roth  <troth@openavr.org>
 
+	* .cvsignore: Update to reflect current reality.
+	* common/.cvsignore: New file.
+	* doc/examples/.cvsignore: New file.
+	* include/.cvsignore: New file.
+	* include/avr/.cvsignore: New file.
+	* libc/stdio/.cvsignore: New file.
+
+2004-05-07  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.ac (AC_INIT): Bump version.
 	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Add stubs to trivialize 
 	adding C source files to currently asm only lib source dirs.
