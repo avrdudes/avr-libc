@@ -1,3 +1,13 @@
+2003-10-16  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Add note about new vfprintf_P and vfscanf_P functions.
+	* include/stdio.h: Add prototypes and dox for vfprintf_P and vfscanf_P.
+	* libc/stdio/Makefile.am (lib_a_c_sources): Add vfprintf_p.c and
+	vfscanf_p.c.
+	* libc/stdio/vfprintf_p.c: New file.
+	* libc/stdio/vfscanf_p.c: New file.
+
 2003-10-09  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

@@ -1,5 +1,11 @@
 *** Changes since avr-libc-1.0:
 
+* Extend stdio API.
+
+New functions:
+  vfprintf_P
+  vfscnaf_P
+
 * Use newer Doxygen.
 
 To build the documentation, doxygen-1.3.4 or newer is strongly recommended.

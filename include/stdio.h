@@ -362,6 +362,12 @@ extern int	fclose(FILE *__stream);
 extern int	vfprintf(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
+   Variant of \c vfprintf() that uses a \c fmt string that resides
+   in program memory.
+*/
+extern int	vfprintf_P(FILE *__stream, const char *__fmt, va_list __ap);
+
+/**
    The function \c fputc sends the character \c c (though given as type
    \c int) to \c stream.  It returns the character, or \c EOF in case
    an error occurred.
@@ -718,6 +724,11 @@ extern int	ferror(FILE *__stream);
      that support it is implemented.
 */
 extern int	vfscanf(FILE *__stream, const char *__fmt, va_list __ap);
+
+/**
+   Variant of vfscanf() using a \c fmt string in program memory.
+ */
+extern int	vfscanf_P(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
    The function \c fscanf performs formatted input, reading the
