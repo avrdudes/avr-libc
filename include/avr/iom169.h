@@ -638,6 +638,12 @@
 #define PCIE0  6
 #define INT0   0
 
+/* EECR */
+#define EERIE   3
+#define EEMWE   2
+#define EEWE    1
+#define EERE    0
+
 /* GTCCR */
 #define TSM    7
 #define PSR2   1
