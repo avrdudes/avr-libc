@@ -99,7 +99,7 @@
 #define EEARL	_SFR_IO8(0x1E)
 #define EEARH	_SFR_IO8(0x1F)
 
-#define UBRRH	_SFR_IO8(0x20)
+#define UBRRHI	_SFR_IO8(0x20)
 
 #define WDTCR	_SFR_IO8(0x21)
 
