@@ -38,19 +38,32 @@
 
     Use [u]intN_t if you need exactly N bits.
 
-    \note These should probably not be used if avr-gcc's \c -mint8 option is
-    used. 
+    \note If avr-gcc's \c -mint8 option is used, no 32-bit types will be
+    available.
 
     @{ */
 
+#if __INT_MAX__ == 127
+# define __USING_MINT8 1
+#endif
+
 typedef signed char int8_t;
 typedef unsigned char uint8_t;
+
+#if __USING_MINT8
+
+typedef long int16_t;
+typedef unsigned long uint16_t;
+
+#else /* no -mint8 */
 
 typedef int int16_t;
 typedef unsigned int uint16_t;
 
 typedef long int32_t;
 typedef unsigned long uint32_t;
+
+#endif
 
 typedef long long int64_t;
 typedef unsigned long long uint64_t;
