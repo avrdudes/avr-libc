@@ -1,3 +1,14 @@
+2004-05-13  Theodore A. Roth  <troth@openavr.org>
+[Thanks to Bruce Graham <bgraham@huronnet.com> for reporting these.]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iocan128.h (OCR1A, OCR1AL, OCR1AH): Fix register name.
+	(OCR1B, OCR1BL, OCR1BH, OCR1CL, OCR1CH): Ditto.
+	(OCR3A, OCR3AL, OCR13H, OCR3B, OCR3BL, OCR3BH): Ditto.
+	(OCR3CL, OCR3CH): Ditto.
+	(OCR1C, OCR3C): Fix register name and address.
+	(CANMSG): Define.
+
 2004-04-29  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in: Set AVR_LIBC_USER_MANUAL with version number appended

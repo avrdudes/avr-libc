@@ -257,19 +257,19 @@
 #define ICR1H  _SFR_MEM8(0x87)
 
 /* RegDef:  Timer/Counter1 Output Compare Register A */
-#define OCRA1  _SFR_MEM16(0x88)
-#define OCRA1L _SFR_MEM8(0x88)
-#define OCRA1H _SFR_MEM8(0x89)
+#define OCR1A  _SFR_MEM16(0x88)
+#define OCR1AL _SFR_MEM8(0x88)
+#define OCR1AH _SFR_MEM8(0x89)
 
 /* RegDef:  Timer/Counter1 Output Compare Register B */
-#define OCRB1  _SFR_MEM16(0x8A)
-#define OCRB1L _SFR_MEM8(0x8A)
-#define OCRB1H _SFR_MEM8(0x8B)
+#define OCR1B  _SFR_MEM16(0x8A)
+#define OCR1BL _SFR_MEM8(0x8A)
+#define OCR1BH _SFR_MEM8(0x8B)
 
 /* RegDef:  Timer/Counter1 Output Compare Register C */
-#define OCRC1  _SFR_MEM16(0x8A)
-#define OCRC1L _SFR_MEM8(0x8C)
-#define OCRC1H _SFR_MEM8(0x8D)
+#define OCR1C  _SFR_MEM16(0x8C)
+#define OCR1CL _SFR_MEM8(0x8C)
+#define OCR1CH _SFR_MEM8(0x8D)
 
 /* RegDef:  Timer/Counter3 Control Register A */
 #define TCCR3A _SFR_MEM8(0x90)
@@ -291,19 +291,19 @@
 #define ICR3H  _SFR_MEM8(0x97)
 
 /* RegDef:  Timer/Counter3 Output Compare Register A */
-#define OCRA3  _SFR_MEM16(0x98)
-#define OCRA3L _SFR_MEM8(0x98)
-#define OCRA3H _SFR_MEM8(0x99)
+#define OCR3A  _SFR_MEM16(0x98)
+#define OCR3AL _SFR_MEM8(0x98)
+#define OCR3AH _SFR_MEM8(0x99)
 
 /* RegDef:  Timer/Counter3 Output Compare Register B */
-#define OCRB3  _SFR_MEM16(0x9A)
-#define OCRB3L _SFR_MEM8(0x9A)
-#define OCRB3H _SFR_MEM8(0x9B)
+#define OCR3B  _SFR_MEM16(0x9A)
+#define OCR3BL _SFR_MEM8(0x9A)
+#define OCR3BH _SFR_MEM8(0x9B)
 
 /* RegDef:  Timer/Counter3 Output Compare Register C */
-#define OCRC3  _SFR_MEM16(0x9A)
-#define OCRC3L _SFR_MEM8(0x9C)
-#define OCRC3H _SFR_MEM8(0x9D)
+#define OCR3C  _SFR_MEM16(0x9C)
+#define OCR3CL _SFR_MEM8(0x9C)
+#define OCR3CH _SFR_MEM8(0x9D)
 
 /* RegDef:  Timer/Counter2 Control Register A */
 #define TCCR2A _SFR_MEM8(0xB0)
@@ -452,6 +452,9 @@
 #define CANSTM _SFR_MEM16(0xF8)
 #define CANSTML _SFR_MEM8(0xF8)
 #define CANSTMH _SFR_MEM8(0xF9)
+
+/* RegDef:  CAN Message Register*/
+#define CANMSG _SFR_MEM8(0xFA)
 
 /* Interrupt vectors */
 
