@@ -1,3 +1,7 @@
+2003-02-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/TODO: remove the ina.90 xref check, Eric did it.
+
 2003-02-03  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
