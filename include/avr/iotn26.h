@@ -144,7 +144,7 @@
 /* Interrupt vectors */
 
 #define SIG_INTERRUPT0		    _VECTOR(1)
-#define SIG_INTERRUPT1		    _VECTOR(2)
+#define SIG_PIN_CHANGE		    _VECTOR(2)
 #define SIG_OUTPUT_COMPARE1A  _VECTOR(3)
 #define SIG_OUTPUT_COMPARE1B  _VECTOR(4)
 #define SIG_OVERFLOW1	        _VECTOR(5)
