@@ -50,7 +50,7 @@
 	which describes how to use it. \b Avrdude was previously called 
 	\b avrprog.
 
-	- Eric Weddington [ eric@ecentral.com ] for maintaining the \b WinAVR
+	- Eric Weddington [ eric@evcohs.com ] for maintaining the \b WinAVR
 	package and thus making the continued improvements to the
 	Opensource AVR toolchain available to many users.
 
@@ -58,7 +58,12 @@
 	graciously allowed to be merged into this document) and his
 	improvements to the \ref demo_project "demo project".
 
-	- All the people who have submitted suggestions, patches and bug reports.
+	- Theodore A. Roth for having been a long-time maintainer of
+	many of the tools (\b AVR-Libc, the AVR port of \b GDB, \b AVaRICE,
+	\b uisp, \b avrdude).
+
+	- All the people who currently maintain the tools, and/or
+	have submitted suggestions, patches and bug reports.
     (See the AUTHORS files of the various tools.)
 
 	- And lastly, all the users who use the software. If nobody used the
