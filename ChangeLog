@@ -1,4 +1,9 @@
-2002-07-24  Theodore A. Roth  <troth@verinet.com>
+2002-07-26  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am(dox-pdf): Use ${MAKE} instead of make.
+	* doc/api/Makefile.am(dox-ps): Use ${MAKE} instead of make.
+
+2002-07-25  Theodore A. Roth  <troth@verinet.com>
 
 	* doc/api/Makefile.am(EXTRA_DIST): Add *.dox files.
 	* doc/api/doxygen.config.in: Config tweaks.

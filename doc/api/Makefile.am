@@ -84,11 +84,11 @@ html latex:
 dox-html: html
 
 dox-pdf: latex
-	make -C latex pdf
+	${MAKE} -C latex pdf
 	cp latex/refman.pdf avr-libc-api.pdf
 
 dox-ps: latex
-	make -C latex ps
+	${MAKE} -C latex ps
 	cp latex/refman.ps avr-libc-api.ps
 
 install-dox-html: html
