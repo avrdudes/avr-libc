@@ -1,3 +1,8 @@
+2003-04-08  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iotn26.h: Add bit defines for USISR and USICR registers.
+	[Contributed by Artur Lipowski <LAL@pro.onet.pl>]
+
 2003-04-07  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/sleep.h: Add adc mode to sleep type 2 [Bug #3088].

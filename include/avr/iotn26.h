@@ -225,6 +225,25 @@
 #define    CS11    1
 #define    CS10    0
 
+/* USI Status Register USISR */
+#define    USISIF  7
+#define    USIOIF  6
+#define    USIPF   5
+#define    USIDC   4
+#define    USICNT3 3
+#define    USICNT2 2
+#define    USICNT1 1
+#define    USICNT0 0
+
+/* USI Control Register USICR */
+#define    USISIE  7
+#define    USIOIE  6
+#define    USIWM1  5
+#define    USIWM0  4
+#define    USICS1  3
+#define    USICS0  2
+#define    USICLK  1
+#define    USITC   0
 
 /* Watchdog Timer Control Register */
 #define    WDTOE   4
