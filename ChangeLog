@@ -1,4 +1,9 @@
-2004-04-15  Theodore A. Roth  <troth@openavr.org>
+2004-04-27  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iocan128.h (RAMPZ): Define.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in:
 	* crt1/Makefile.am:

@@ -179,6 +179,9 @@
 /* RegDef:  Store Program Memory Control and Status Register */
 #define SPMCSR _SFR_IO8(0x37)
 
+/* RegDef:  RAMPZ register. */
+#define RAMPZ  _SFR_IO8(0x3B)
+
 /* RegDef:  Watchdog Timer Control Register */
 #define WDTCR  _SFR_MEM8(0x60)
 
