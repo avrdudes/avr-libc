@@ -1,6 +1,7 @@
 2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iom163.h: add bit definitions for TWSR.
+	* include/avr/iom323.h: ditto.
 
 2002-12-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

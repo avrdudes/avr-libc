@@ -242,6 +242,14 @@
 /* TWAR */
 #define TWGCE	0
 
+/* TWSR */
+#define    TWS7         7
+#define    TWS6         6
+#define    TWS5         5
+#define    TWS4         4
+#define    TWS3         3
+/* bits 2-0 reserved */
+
 /* MCUCR */
 /* bit 7 reserved (SM2?) */
 #define SE	7
