@@ -1,4 +1,4 @@
-/* Copyright (c) 2002-2004 Joerg Wunsch
+/* Copyright (c) 2002-2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -1003,13 +1003,14 @@ messages that will be sent through a UART:
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
-void
+int
 uart_putchar(char c)
 {
   if (c == '\n')
     uart_putchar('\r');
   loop_until_bit_is_set(USR, UDRE);
   UDR = c;
+  return 0; /* so it could be used for fdevopen(), too */
 }
 
 void
@@ -1024,6 +1025,7 @@ debug_P(const char *addr)
 int
 main(void)
 {
+  ioinit(); /* initialize UART, ... */
   debug_P(PSTR("foo was here\n"));
   return 0;
 }
