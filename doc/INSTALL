@@ -24,3 +24,6 @@ Important: you MUST use the current CVS or snapshots of GCC and binutils
 (which will be released as GCC 3.3 and binutils 2.13).  Older versions
 are not supported anymore, and will fail in various strange ways.
 
+Note: If you obtained avr-libc directly from cvs, you will need to run the
+reconf script. Be sure that you have autoconf-2.13 and automake-1.4 (patch
+level >=4 should work but 1.5 or 1.6 will not).
