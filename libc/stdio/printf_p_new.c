@@ -61,7 +61,7 @@
 extern void printf_char(char c);
 
 void _printf_p (char const *fmt0, ...) {
-	va_list ap;
+	va_list	ap;
 	char const *fmt;
 	union {
 		char c;
@@ -70,14 +70,14 @@ void _printf_p (char const *fmt0, ...) {
 		unsigned long ul;
 		char *pc;
 	} a;
-	char  c;	/* holds a char from the format string */
-	int8_t width;
-	uint8_t base, prec;
-	char b[12];	/* contains character representation of the
+	char	c;	/* holds a char from the format string */
+	int8_t	width;
+	uint8_t	base, prec;
+	char	b[12];	/* contains character representation of the
 			   number and its prefix */
-	char *pb;	/* used as pointer to an element in b */
+	char	*pb;	/* used as pointer to an element in b */
 
-	uint8_t flags;
+	uint8_t	flags;
 
 #define FLHASPERCENT	0x01
 #define FLPREC		0x02
@@ -90,7 +90,7 @@ void _printf_p (char const *fmt0, ...) {
 	va_start(ap, fmt0);
 	fmt = fmt0;
 
-	flags=0;
+	flags = 0;
 
 	while ((c = PRG_RDB(fmt++))) {
 		if (flags & FLHASPERCENT) {
@@ -173,7 +173,7 @@ void _printf_p (char const *fmt0, ...) {
 						*pb++ = '-';
 					else if (flags & FLSIGNCHAR)
 						*pb++ = '+';
-					if(flags & FLALT) {
+					if (flags & FLALT) {
 						if (base == 16)
 							*pb++ = c;
 						if (base != 10)
