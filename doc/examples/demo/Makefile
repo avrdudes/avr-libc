@@ -58,13 +58,13 @@ ebin:  $(PRG)_eeprom.bin
 esrec: $(PRG)_eeprom.srec
 
 %_eeprom.hex: %.elf
-	$(OBJCOPY) -j .eeprom -O ihex $< $@
+	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O ihex $< $@
 
 %_eeprom.srec: %.elf
-	$(OBJCOPY) -j .eeprom -O srec $< $@
+	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O srec $< $@
 
 %_eeprom.bin: %.elf
-	$(OBJCOPY) -j .eeprom -O binary $< $@
+	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O binary $< $@
 
 # Every thing below here is used by avr-libc's build system and can be ignored
 # by the casual user.

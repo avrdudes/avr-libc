@@ -1,10 +1,15 @@
+2002-10-31  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/examples/demo/Makefile: Set eeprom base addr to 0x0.
+
 2002-10-30  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/malloc.dox: fix typo.
 
 2002-10-30  Theodore A. Roth  <troth@openavr.org>
 
-	* configure.in: Bump version.
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/Makefile.am: Make `make demo` less likely to fail.
 
 2002-10-30  Theodore A. Roth  <troth@openavr.org>
