@@ -73,6 +73,10 @@ $ PATH=$PATH:$PREFIX/bin
 $ export PATH
 \endverbatim
 
+\warning If you have \c CC set to anything other than \c avr-gcc in your
+environment, this will cause the configure script to fail. It is best to not
+have \c CC set at all.
+
 \note The versions for the packages listed below are known to work together.
 If you mix and match different versions, you may have problems.
 

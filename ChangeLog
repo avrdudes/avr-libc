@@ -1,5 +1,15 @@
 2003-08-15  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 0.99.90.20030815.
+	* NEWS: Prepare for branch.
+	* doconf: Export PATH.
+	Try to catch CC=gcc in env to avoid configure failure.
+	* doc/api/rel-method.dox: Update branch/release instructions.
+	* doc/api/tools-install.dox: Add warning about having CC=gcc causing
+	configure to fail.
+
+2003-08-15  Theodore A. Roth  <troth@openavr.org>
+
 	* doc/api/rel-method.dox: Add note about updating NEWS file.
 	* doc/api/tools-install.dox: Update program versions.
 	Update avarice install notes.

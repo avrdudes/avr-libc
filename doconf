@@ -29,7 +29,17 @@ rm -rf avr3 avr4 avr5 build
 mkdir -p build
 cd build
 
+local_CC=${CC}
+
+if [ "x$local_CC" = xgcc ]
+then
+	# Configuring avr-libc will fail is CC=gcc, so force it to avr-gcc.
+	local_CC=avr-gcc
+fi
+
 PATH=$PREFIX/bin:$PATH
-../configure --prefix=$PREFIX $*
+export PATH
+
+CC=${local_CC} ../configure --prefix=$PREFIX $*
 
 cd ..
