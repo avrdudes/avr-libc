@@ -36,8 +36,8 @@ describe everything thing we need to generate the <avr/io*.h> header files.
 
 Although ATMEL supplies XML device files already with AvrStudio >= 4.x, they
 contain far more data than we need. In addition, there is information that we
-which they do not provide. Also, it may not be legal for us to include those
-files with avr-libc.
+need which they do not provide. Also, it may not be legal for us to include
+those files with avr-libc.
 
 I hope to write a python program which will read ATMEL's XML files and spit
 out a file which will validate against this DTD so that we can leverage the
@@ -46,39 +46,48 @@ data in those file.
 -->
 
 <!ELEMENT device (
-    copyright,
     version,
-    name,
     description?,
+    memory_info,
     interrupts,
     ioreg+
 )>
-
-    <!ELEMENT copyright (
-        owner,
-        year+,
-        license
-    )>
-
-    <!ELEMENT owner (#PCDATA)>
-    <!ELEMENT year (#PCDATA)>
-    <!ELEMENT license (#PCDATA)>
+    <!ATTLIST device
+        name CDATA #REQUIRED
+    >
 
     <!ELEMENT version (#PCDATA)>
-    <!ELEMENT name (PC#DATA)>
-    <!ELEMENT description (PC#DATA)>
+    <!ELEMENT description (#PCDATA)>
+
+    <!ELEMENT memory_info (
+        flash_size,
+        eeprom_size,
+        int_sram_size,
+        ext_sram_size
+    >
+
+        <!ELEMENT flash_size (#PCDATA)>
+        <!ELEMENT eeprom_size (#PCDATA)>
+        <!ELEMENT int_sram_size (#PCDATA)>
+            <!ATTLIST int_sram_size start_addr CDATA #REQUIRED>
+        <!ELEMENT ext_sram_size (#PCDATA)>
+            <!ATTLIST int_sram_size start_addr CDATA #REQUIRED>
 
     <!ELEMENT interrupts (vector+)>
         <!ATTLIST interrupts
-            vector_size (2 | 4) #REQUIRED <!-- in bytes -->
+            insn_size (2 | 4) #REQUIRED <!-- in bytes -->
+            num_vects CDATA #REQUIRED
         >
         <!ELEMENT vector (
-            description?
+            description?,
+            sig_name
         )>
             <!ATTLIST vector
-                name CDATA #REQUIRED
+                addr CDATA #REQUIRED
                 num CDATA #REQUIRED
+                name CDATA #REQUIRED
             >
+            <!ELEMENT sig_name (#PCDATA)>
 
     <!ELEMENT ioreg (
         description?,

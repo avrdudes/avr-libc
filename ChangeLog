@@ -1,3 +1,12 @@
+2004-06-21  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: New file.
+	* xml/Device.dtd: Don't force copyright/license in doc (just use a
+	comment).
+	Make device name an attribute of device.
+	Add memory_info element of device.
+	Massage the interrupt and vector elements.
+
 2004-06-20  Theodore A. Roth  <troth@openavr.org>
 
 	* xml: New directory.
