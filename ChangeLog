@@ -1,5 +1,15 @@
 2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
 
+    Apply patch #2155:
+    
+    2004-04-07  Theodore A. Roth  <troth@openavr.org>
+    [Contriubuted by Luca Matteini]
+
+	* libc/stdlib/strtol.c: Make a couple of optimizations.
+	* libc/stdlib/strtoul.c: Ditto.
+
+2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
+
     * include/avr/iom169.h: Add PRR register and bit definitions.
     [Fix for bug #11418]
     * NEWS: Update bugs fixed list.

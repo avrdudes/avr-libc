@@ -53,7 +53,7 @@ strtoul(nptr, endptr, base)
 	register unsigned char c;
 	register unsigned long cutoff;
 	register int cutlim;
-	register int neg = 0, any;
+	register signed char neg = 0, any;
 
 	/*
 	 * See strtol for comments as to the logic used.
@@ -82,7 +82,7 @@ strtoul(nptr, endptr, base)
 		if (isdigit(c))
 			c -= '0';
 		else if (isalpha(c))
-			c -= isupper(c) ? 'A' - 10 : 'a' - 10;
+			c = (c & ~0x20) - 'A' + 10;
 		else
 			break;
 		if (c >= base)

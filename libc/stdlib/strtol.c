@@ -60,7 +60,7 @@ strtol(nptr, endptr, base)
 #define cutoff (cut.quot)
 #define cutlim ((int) cut.rem)
 #endif
-	register int neg = 0, any;
+	register signed char neg = 0, any;
 
 	/*
 	 * Skip white space and pick up leading +/- sign if any.
@@ -115,7 +115,7 @@ strtol(nptr, endptr, base)
 		if (isdigit(c))
 			c -= '0';
 		else if (isalpha(c))
-			c -= isupper(c) ? 'A' - 10 : 'a' - 10;
+			c = (c & ~0x20) - 'A' + 10;
 		else
 			break;
 		if (c >= base)
