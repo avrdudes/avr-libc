@@ -32,7 +32,7 @@
 #
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
-CLEANFILES           = *.html *.pdf *.ma *.mas *.ps
+CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        main_page.dox \
@@ -45,54 +45,68 @@ DOC_INST_DIR         = $(DESTDIR)$(datadir)/doc/avr-libc-$(VERSION)
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-all-local: ps html $(TARGET_PDF)
+all-local: ps html pdf
 
 # Rule for generating postscript output.
 ps: $(TARGET_DOX_PS)
 
-install-ps: ps $(INSTALL_DOX_PS)
-	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) $(USER_MANUAL).ps $(DOC_INST_DIR)/$(USER_MANUAL).ps
-
 # Rule for generating html output.
 html: $(TARGET_DOX_HTML)
 
-install-html: $(INSTALL_DOX_HTML)
+# Rule for generating PDF output
+pdf: $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
-install-data-local: install-html install-ps $(INSTALL_PDF)
+install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF)
 
 uninstall-local:
 	rm -rf $(DOC_INST_DIR)
 
 clean-local:
-	rm -rf $(USER_MANUAL) latex_src man
-
-# Rule for generating PDF output
-pdf: $(TARGET_DOX_PDF)
-
-install-pdf: $(INSTALL_DOX_PDF)
-	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) $(USER_MANUAL).pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
+	rm -rf $(USER_MANUAL) latex_src latex_pdf_src man
 
 #
 # Rules for generating documentation with doxygen
 #
 
-dox: html latex
-
-dox-html latex:
+latex: doxygen.config
 	doxygen doxygen.config
+	cd latex_src && \
+		sed -e '/tocdepth/s/1/2/' refman.tex > tmp.$$ && \
+		mv -f tmp.$$ refman.tex
 
-dox-pdf: latex
-	cd latex_src && ${MAKE} pdf
-	cp latex_src/refman.pdf $(USER_MANUAL).pdf
+latex-pdf: doxygen-pdf.config
+	doxygen doxygen-pdf.config
+	cd latex_pdf_src && \
+		sed -e '/tocdepth/s/1/3/' refman.tex > tmp.$$ && \
+		mv -f tmp.$$ refman.tex
+
+doxygen-pdf.config: doxygen.config
+	sed \
+		-e '/USE_PDFLATEX/s/NO/YES/' \
+		-e '/LATEX_OUTPUT/s/latex_src/latex_pdf_src/' \
+		-e '/GENERATE_HTML/s/YES/NO/' \
+		-e '/GENERATE_MAN/s/YES/NO/' \
+		doxygen.config > doxygen-pdf.config
+
+# XXX currently, HTML and LaTeX documentation will always be built
+# together.  HTML doesn't need any postprocessing, while latex is only
+# a prerequisite for ps.
+dox-html: latex
+
+dox-pdf: latex-pdf
+	cd latex_pdf_src && ${MAKE} refman.pdf
+	cp latex_pdf_src/refman.pdf $(USER_MANUAL).pdf
 
 dox-ps: latex
 	cd latex_src && ${MAKE} ps
 	cp latex_src/refman.ps $(USER_MANUAL).ps
 
-install-dox-html: html
+# Install rules for the various documentation parts.  The actual
+# access to those rules is from the install-data-local target above,
+# where the toplevel configure decides which of them will become a
+# prerequisite of install-data-local.
+install-dox-html: dox-html
 	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)
 	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css \
 	                  $(USER_MANUAL)/*.js $(USER_MANUAL)/*.png)'; \
@@ -103,11 +117,12 @@ install-dox-html: html
 
 install-dox-pdf: dox-pdf
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) latex_src/refman.pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
+	$(INSTALL_DATA) $(USER_MANUAL).pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
 
 install-dox-ps: dox-ps
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) latex_src/refman.ps $(DOC_INST_DIR)/$(USER_MANUAL).ps
+	$(INSTALL_DATA) $(USER_MANUAL).ps $(DOC_INST_DIR)/$(USER_MANUAL).ps
+
 
 .PHONY: html latex ps pdf dox dox-pdf install-pdf install-html install-ps \
 	install-dox-html install-dox-ps install-dox-pdf
