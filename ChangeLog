@@ -1,3 +1,7 @@
+2003-01-02  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: printf_flt() needs <math.h>.
+
 2002-12-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/stdio.h: add fgetc().

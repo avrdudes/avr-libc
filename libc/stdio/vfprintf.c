@@ -60,6 +60,10 @@
 #  error "Not a known printf level."
 #endif
 
+#if PRINTF_LEVEL >= PRINTF_FLT
+#include <math.h>
+#endif
+
 #if PRINTF_LEVEL >= PRINTF_MIN
 #define FLHASPERCENT	0x01	/* first % found */
 #define FLNEGATIVE	0x02	/* arg is negative int */
