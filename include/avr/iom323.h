@@ -23,6 +23,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /* avr/iom323.h - definitions for ATmega323 */
 
 #ifndef _AVR_IOM323_H_

@@ -23,6 +23,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /* avr/iotn11.h - definitions for ATtiny10/11 */
 
 #ifndef _AVR_IOTN11_H_

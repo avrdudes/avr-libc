@@ -23,6 +23,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /* avr/ioat94k.h - definitions for AT94K series FPSLIC(tm) */
 
 #ifndef _AVR_IOAT94K_H_

@@ -23,6 +23,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /* avr/parity.h - optimized code to calculate parity bit of a byte */
 
 #ifndef _AVR_PARITY_H_
