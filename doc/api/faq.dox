@@ -51,6 +51,7 @@
 -# \ref faq_fuses
 -# \ref faq_flashstrings
 -# \ref faq_intpromote
+-# \ref faq_ramoverlap
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1021,4 +1022,37 @@ var &= (unsigned char)~mask;
 
 <small>Back to \ref faq_index.</small>
 
+\section faq_ramoverlap How to detect RAM memory and variable overlap problems?
+
+You can simply run <tt>avr-nm</tt> on your output (ELF) file.
+Run it with the <tt>-n</tt> option, and it will sort the symbols
+numerically (by default, they are sorted alphabetically).
+
+Look for the symbol \c _end, that's the first address in
+RAM that is not allocated by a variable. (avr-gcc
+internally adds 0x800000 to all data/bss variable
+addresses, so please ignore this offset.) Then, the
+run-time initialization code initializes the stack
+pointer (by default) to point to the last avaialable
+address in (internal) SRAM. Thus, the region between
+\c _end and the end of SRAM is what is available for stack.
+(If your application uses malloc(), which e. g. also
+can happen inside printf(), the heap for dynamic
+memory is also located there. See \ref malloc.)
+
+The amount of stack required for your application
+cannot be determined that easily. For example, if
+you recursively call a function and forget to break
+that recursion, the amount of stack required is
+infinite. :-) You can look at the generated assembler
+code (<tt>avr-gcc ... -S</tt>), there's a comment in each
+generated assembler file that tells you the frame
+size for each generated function. That's the amount
+of stack required for this function, you have to add
+up that for all functions where you know that the
+calls could be nested.
+
+<small>Back to \ref faq_index.</small>
+
 */
+
