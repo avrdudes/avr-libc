@@ -37,4 +37,55 @@ The AVR Libc package provides a subset of the standard C library for Atmel AVR
 index.html (for html output) or the first chapter (in \f$\mbox{\LaTeX}\f$
 output).</b>
 
+\section supp_devices Supported Devices
+
+\addindex supported devices
+
+\par AT90S Type Devices:
+
+- at90s1200 \ref supp_dev_footnote_one "[1]"
+- at90s2313
+- at90s2323
+- at90s2333
+- at90s2343
+- at90s4414
+- at90s4433
+- at90s4434
+- at90s8515
+- at90s8534
+- at90s8535
+
+\par ATmega Type Devices:
+
+- atmega8
+- atmega103
+- atmega128
+- atmega161
+- atmega162
+- atmega163
+- atmega169
+- atmega323
+
+\par ATtiny Type Devices:
+
+- attiny10 \ref supp_dev_footnote_one "[1]"
+- attiny11 \ref supp_dev_footnote_one "[1]"
+- attiny12 \ref supp_dev_footnote_one "[1]"
+- attiny15 \ref supp_dev_footnote_one "[1]"
+- attiny22
+- attiny28 \ref supp_dev_footnote_one "[1]"
+
+\par Misc Devices:
+
+- at94K
+- at76c711
+
+[FIXME: troth/2002-09-02: How do the at94 and at76 devices fit into the grand
+scheme of all things AVR?]
+
+\anchor supp_dev_footnote_one
+
+\note <b>[1]</b> Assembly only. There is no support for these devices to be
+programmed in C since they do not have a ram based stack.
+
 */

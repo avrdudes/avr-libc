@@ -1,3 +1,9 @@
+2002-09-02  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in(AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Note mega69 as new supported device.
+	* doc/api/main_page.dox: Add list of supported devices.
+
 2002-08-31  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* configure.in (AM_INIT_AUTOMAKE): Update version.

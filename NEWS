@@ -50,6 +50,7 @@ See the "Special Function Registers" documentation for details.
 * New devices supported
 
 mega128
+mega169
 
 * Incompatibilities with previous version.
 
