@@ -479,6 +479,10 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 					}
 					if ((char)i == 'e' ||
 					    (char)i == 'E') {
+						/*
+						 * Prevent another 'E'
+						 * from being recognized.
+						 */
 						fltchars[10] = 0;
 						*bp++ = i;
 						if ((i = getc(stream)) == EOF)
@@ -487,6 +491,13 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 						    (char)i != '+')
 							continue;
 					} else if ((char)i == '.')
+						/*
+						 * Prevent another dot from
+						 * being recognized.  If we
+						 * already saw an 'E'
+						 * above, we could not get
+						 * here at all.
+						 */
 						fltchars[12] = 0;
 					*bp++ = i;
 					if ((i = getc(stream)) == EOF)
@@ -497,6 +508,12 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 				if (flags & FLMINUS)
 					a.d = -a.d;
 				*(va_arg(ap, double *)) = a.d;
+				/*
+				 * Restore the 'E' and '.' chars that
+				 * might have been clobbered above.
+				 */
+				fltchars[10] = 'E';
+				fltchars[12] = '.';
 				break;
 
 			case '[':
