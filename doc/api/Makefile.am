@@ -64,7 +64,7 @@ uninstall-local:
 	rm -rf $(DOC_INST_DIR)
 
 clean-local:
-	rm -rf html latex
+	rm -rf html latex man
 
 # Rule for generating PDF output
 pdf: $(TARGET_DOX_PDF)
@@ -79,10 +79,8 @@ install-pdf: $(INSTALL_DOX_PDF)
 
 dox: html latex
 
-html latex:
+dox-html latex:
 	doxygen doxygen.config
-
-dox-html: html
 
 dox-pdf: latex
 	${MAKE} -C latex pdf
