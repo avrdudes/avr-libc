@@ -38,7 +38,7 @@
     \brief Copy a string.
 
     The strcpy() function copies the string pointed to by src (including the
-    terminating `\\0' character) to the array pointed to by dest.  The strings
+    terminating '\\0' character) to the array pointed to by dest.  The strings
     may not overlap, and the destination string dest must be large enough to
     receive the copy.
 

@@ -1,3 +1,20 @@
+2003-10-09  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* README: Change current branch version to 1.1.
+	* libc/string/strcat.S: Don't use backtick to quote a C char.
+	* libc/string/strcpy.S: Don't use backtick to quote a C char.
+	* libc/string/strlen.S: Don't use backtick to quote a C char.
+	* libc/string/strtok_r.S: Don't use backtick to quote a C char.
+
+	[Submitted by Steven Borley <steven.borley@diode.demon.co.uk>]
+	* libc/string/strsep.S: Don't use backtick to quote a C char.
+	Add \fn for function definition dox.
+	Exscape '\' char.
+	* libc/string/strstr.S: Don't use backtick to quote a C char.
+	Add \fn for function definition dox.
+	Exscape '\' char.
+
 2003-10-08  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/sfr_defs.h: Use inttypes.h defined types to allow use

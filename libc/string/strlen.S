@@ -36,7 +36,7 @@
     \brief Calculate the length of a string.
 
     The strlen() function calculates the length of the string src, not
-    including the terminating `\\0' character.
+    including the terminating '\\0' character.
 
     \returns The strlen() function returns the number of characters in
     src.  */
