@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Peter Jansen
+/* Copyright (c) 2002, Steinar Haugen
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -23,13 +23,13 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* avr/iom128.h - defines for ATmega128 
+/* avr/iom64.h - defines for ATmega64 
 
-   As of 2002-08-27:
-   - This should be up to date with data sheet 2467E-AVR-05/02 */
+   As of 2002-11-23:
+   - This should be up to date with data sheet Rev. 2490C-AVR-09/02 */
 
-#ifndef _AVR_IOM128_H_
-#define _AVR_IOM128_H_ 1
+#ifndef _AVR_IOM64_H_
+#define _AVR_IOM64_H_ 1
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iom128.h"
+#  define _AVR_IOXXX_H_ "iom64.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
@@ -65,9 +65,9 @@
 #define ADCL      _SFR_IO8(0x04)
 #define ADCH      _SFR_IO8(0x05)
 
-/* ADC Control and status register */
-#define ADCSR     _SFR_IO8(0x06)
-#define ADCSRA    _SFR_IO8(0x06) /* new name in datasheet (2467E-AVR-05/02) */
+/* ADC Control and Status Register A */
+#define ADCSR     _SFR_IO8(0x06) /* for backwards compatibility */
+#define ADCSRA    _SFR_IO8(0x06) 
 
 /* ADC Multiplexer select */
 #define ADMUX     _SFR_IO8(0x07)
@@ -200,8 +200,8 @@
 #define TCCR0     _SFR_IO8(0x33)
 
 /* MCU Status Register */
-#define MCUSR     _SFR_IO8(0x34)
-#define MCUCSR    _SFR_IO8(0x34) /* new name in datasheet (2467E-AVR-05/02) */
+#define MCUSR     _SFR_IO8(0x34) /* for backwards compatibility */
+#define MCUCSR    _SFR_IO8(0x34) 
 
 /* MCU general Control Register */
 #define MCUCR     _SFR_IO8(0x35)
@@ -220,9 +220,6 @@
 
 /* External Interrupt Control Register B */
 #define EICRB     _SFR_IO8(0x3A)
-
-/* RAM Page Z select register */
-#define RAMPZ     _SFR_IO8(0x3B)
 
 /* XDIV Divide control register */
 #define XDIV      _SFR_IO8(0x3C)
@@ -253,8 +250,8 @@
 #define PORTG     _SFR_MEM8(0x65)
 
 /* Store Program Memory Control and Status Register */
-#define SPMCR     _SFR_MEM8(0x68)
-#define SPMCSR    _SFR_MEM8(0x68) /* new name in datasheet (2467E-AVR-05/02) */
+#define SPMCR     _SFR_MEM8(0x68) 
+#define SPMCSR    _SFR_MEM8(0x68) /* for backwards compatibility with m128*/
 
 /* External Interrupt Control Register A */
 #define EICRA     _SFR_MEM8(0x6A)
@@ -330,6 +327,9 @@
 
 /* Timer/Counter 3 Control Register C */
 #define TCCR3C    _SFR_MEM8(0x8C)
+
+/* ADC Control and Status Register B */
+#define ADCSRB    _SFR_MEM8(0x8E)
 
 /* USART0 Baud Rate Register High */
 #define UBRR0H    _SFR_MEM8(0x90)
@@ -450,9 +450,6 @@
 #define    XDIV1        1
 #define    XDIV0        0
 
-/* RAM Page Z select register - RAMPZ */
-#define     RAMPZ0      0
-
 /* External Interrupt Control Register A - EICRA */
 #define    ISC31        7
 #define    ISC30        6
@@ -538,10 +535,9 @@
 #define    OCF3C        1
 #define    OCF1C        0
 
-/* MCU general Control Register - MCUCR */
+/* MCU Control Register - MCUCR */
 #define    SRE          7
-#define    SRW          6
-#define    SRW10        6       /* new name in datasheet (2467E-AVR-05/02) */
+#define    SRW10        6
 #define    SE           5
 #define    SM1          4
 #define    SM0          3
@@ -549,7 +545,7 @@
 #define    IVSEL        1
 #define    IVCE         0
 
-/* MCU Status Register - MCUSR, MCUCSR */
+/* MCU Control And Status Register - MCUCSR */
 #define    JTD          7
 #define    JTRF         4
 #define    WDRF         3
@@ -850,7 +846,12 @@
 #define    ACIS1        1
 #define    ACIS0        0
 
-/* ADC Control and status register - ADCSRA */
+/* ADC Control and Status Register B - ADCSRB */
+#define    ADTS2        2
+#define    ADTS1        1
+#define    ADTS0        0
+
+/* ADC Control and status Register A - ADCSRA */
 #define    ADEN         7
 #define    ADSC         6
 #define    ADFR         5
@@ -1082,7 +1083,7 @@
 /* Constants */
 #define    RAMEND   0x10FF     /* Last On-Chip SRAM Location */
 #define    XRAMEND  0xFFFF
-#define    E2END    0x0FFF
-#define    FLASHEND 0x1FFFF
+#define    E2END    0x07FF
+#define    FLASHEND 0xFFFF
 
-#endif /* _AVR_IOM128_H_ */
+#endif /* _AVR_IOM64_H_ */
