@@ -353,9 +353,6 @@ extern void *calloc(size_t __nele, size_t __size) __ATTR_MALLOC__;
 
      FIXME: HUGE_VAL needs to be defined somewhere.  The bit pattern is
      0x7fffffff, but what number would this be?
-
-     \note Implemented but not tested.
-
  */
 
 extern double strtod(const char *__nptr, char **__endptr);
