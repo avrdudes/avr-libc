@@ -27,6 +27,8 @@
 
 /* avr/iotn13.h - definitions for ATtiny13 */
 
+/* Verified 5/20/04 by Bruce Graham */
+
 #ifndef _AVR_IOTN13_H_
 #define _AVR_IOTN13_H_ 1
 
@@ -44,12 +46,14 @@
 
 /* I/O registers and bit names */
 
+/* ADC Control and Status Register B */
 #define ADCSRB               _SFR_IO8(0x03)
 #  define ACME                 6
 #  define ADTS2                2
 #  define ADTS1                1
 #  define ADTS0                0
 
+/* ADC Data Register */
 #ifndef __ASSEMBLER__
 #define ADC                  _SFR_IO16 (0x04)
 #endif
@@ -57,6 +61,7 @@
 #define ADCL                 _SFR_IO8(0x04)
 #define ADCH                 _SFR_IO8(0x05)
 
+/* ADC Control and Status Register A */
 #define ADCSRA               _SFR_IO8(0x06)
 #  define ADEN                 7
 #  define ADSC                 6
@@ -67,12 +72,14 @@
 #  define ADPS1                1
 #  define ADPS0                0
 
+/* ADC Multiplex Selection Register */
 #define ADMUX                _SFR_IO8(0x07)
 #  define REFS0                6
 #  define ADLAR                5
 #  define MUX1                 1
 #  define MUX0                 0
 
+/* Analog Comparator Control and Status Register */
 #define ACSR                 _SFR_IO8(0x08)
 #  define ACD                  7
 #  define ACBG                 6
@@ -82,6 +89,7 @@
 #  define ACIS1                1
 #  define ACIS0                0
 
+/* Digital Input Disable Register 0 */
 #define DIDR0                _SFR_IO8(0x14)
 #  define ADC0D                5
 #  define ADC2D                4
@@ -90,6 +98,7 @@
 #  define EIN1D                1
 #  define AIN0D                0
 
+/* PIN Change Mask Register */
 #define PCMSK                _SFR_IO8(0x15)
 #  define PCINT5               5
 #  define PCINT4               4
@@ -98,6 +107,15 @@
 #  define PCINT1               1
 #  define PCINT0               0
 
+/* Port B Pin Utilization [2535D-AVR-04/04]
+   - PORTB5 = PCINT5/RESET#/ADC0/dW
+   - PORTB4 = PCINT4/ADC2
+   - PORTB3 = PCINT3/CLKI/ADC3
+   - PORTB2 = SCK/ADC1/T0/PCINT2
+   - PORTB1 = MISO/AIN1/OC0B/INT0/PCINT1
+   - PORTB0 = MOSI/AIN0/OC0A/PCINT0 */
+
+/* Input Pins, Port B */
 #define PINB                 _SFR_IO8(0x16)
 #  define PINB5                5
 #  define PINB4                4
@@ -106,6 +124,7 @@
 #  define PINB1                1
 #  define PINB0                0
 
+/* Data Direction Register, Port B */
 #define DDRB                 _SFR_IO8(0x17)
 #  define DDB5                 5
 #  define DDB4                 4
@@ -114,6 +133,7 @@
 #  define DDB1                 1
 #  define DDB0                 0
 
+/* Data Register, Port B */
 #define PORTB                _SFR_IO8(0x18)
 #  define PB5                  5
 #  define PB4                  4
@@ -126,6 +146,7 @@
 #  define EEPM1                5
 #  define EEPM0                4
 
+/* Watchdog Timer Control Register */
 #define WDTCR                _SFR_IO8(0x21)
 #  define WDTIF                7
 #  define WDTIE                6
@@ -136,6 +157,7 @@
 #  define WDP1                 1
 #  define WDP0                 0
 
+/* Clock Prescale Register */
 #define CLKPR                _SFR_IO8(0x26)
 #  define CLKPCE               7
 #  define CLKPS3               3
@@ -143,14 +165,18 @@
 #  define CLKPS1               1
 #  define CLKPS0               0
 
+/* General Timer/Counter Control Register */
 #define GTCCR                _SFR_IO8(0x28)
 #  define TSM                  7
 #  define PSR10                0
 
+/* Output Compare 0 Register B */
 #define OCR0B                _SFR_IO8(0x29)
 
+/* debugWIRE Data Register */
 #define DWDR                 _SFR_IO8(0x2e)
 
+/* Timer/Counter 0 Control Register A */
 #define TCCR0A               _SFR_IO8(0x2f)
 #  define COM0A1               7
 #  define COM0A0               6
@@ -159,10 +185,13 @@
 #  define WGM01                1
 #  define WGM00                0
 
+/* Oscillator Calibration Register */
 #define OSCCAL               _SFR_IO8(0x31)
 
+/* Timer/Counter0 (8-bit) */
 #define TCNT0                _SFR_IO8(0x32)
 
+/* Timer/Counter 0 Control Register B */
 #define TCCR0B               _SFR_IO8(0x33)
 #  define FOC0A                7
 #  define FOC0B                6
@@ -171,12 +200,14 @@
 #  define CS01                 1
 #  define CS00                 0
 
+/* MCU General Status Register */
 #define MCUSR                _SFR_IO8(0x34)
 #  define WDRF                 3
 #  define BORF                 2
 #  define EXTRF                1
 #  define PORF                 0
 
+/* MCU General Control Register */
 #define MCUCR                _SFR_IO8(0x35)
 #  define PUD                  6
 #  define SE                   5
@@ -185,30 +216,36 @@
 #  define ISC01                1
 #  define ISC00                0
 
+/* Output Compare 0 REgister A */
 #define OCR0A                _SFR_IO8(0x36)
 
+/* Store Program Memory Control and Status Register */
 #define SPMCSR               _SFR_IO8(0x37)
 #  define CTPB                 4
 #  define RFLB                 3
 #  define PGWRT                2
 #  define PGERS                1
-#  define SPEN                 0
+#  define SPMEN                0
 #  define SELFPRGEN            0
 
+/* Timer/Counter 0 Interrupt Flag Register */
 #define TIFR0                _SFR_IO8(0x38)
 #  define OCF0B                3
 #  define OCF0A                2
 #  define TOV0                 1
 
+/* Timer/Counter 0 Interrupt MaSK Register */
 #define TIMSK0               _SFR_IO8(0x39)
 #  define OCIE0B               3
 #  define OCIE0A               2
 #  define TOIE0                1
 
+/* General Interrupt Flag Register */
 #define GIFR                 _SFR_IO8(0x3a)
 #  define INF0                 6
 #  define PCIF                 5
 
+/* General Interrupt MaSK register */
 #define GIMSK                _SFR_IO8(0x3b)
 #  define INT0                 6
 #  define PCIE                 5
