@@ -225,7 +225,7 @@ segment extracted. If we specify the EEPROM segment, we can generate a \c .hex
 file that can be used to program the EEPROM:
 
 \verbatim
-    $ avr-objcopy -j .eeprom -O ihex demo.elf demo_eeprom.hex
+    $ avr-objcopy -j .eeprom --change-section-lma .eeprom=0 -O ihex demo.elf demo_eeprom.hex
 \endverbatim
 
 The resulting \c demo_eeprom.hex file contains:
