@@ -43,6 +43,8 @@ lib_a_c_sources =	\
 	fputc.c		\
 	fputs.c		\
 	fputs_p.c	\
+	fread.c		\
+	fwrite.c	\
 	getchar.c	\
 	gets.c		\
 	printf.c	\
