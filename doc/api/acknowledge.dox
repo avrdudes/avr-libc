@@ -48,8 +48,11 @@
 	to <b>uisp</b>) and for contributing [FIXME: need to merge section on
 	<b>avrprog</b>] which describes how to use it.
 
+	- All the people you have submitted suggestions, patches and bug reports.
+    (See the AUTHORS files of the various tools.)
+
 	- And lastly, all the users who use the software. If nobody used the
-	software, we probably would be very motivated to continue to develop
+	software, we would probably not be very motivated to continue to develop
 	it. Keep those bug reports coming. ;-)
 
 */
