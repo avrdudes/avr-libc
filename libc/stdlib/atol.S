@@ -63,6 +63,7 @@ _U(atol):
 	CLR	num_lo_hi
 	CLR	num_lo_lo		; clear number
 	CLT				; clear sign
+
 .atol_loop:
 	LD	tmp, Z+			; get (next) character
 	TST	tmp			; is it end of string
@@ -83,12 +84,15 @@ _U(atol):
 	BREQ	.atol_loop2
 	CPI	tmp, '-'		; if '-' remember sign
 	BRNE	.atol_digit
+
 .atol_neg:
 	SET				; remember number is negative
+
 .atol_loop2:
 	LD	tmp, Z+
 	TST	tmp
 	BREQ	.atol_sig
+
 .atol_digit:
 	CPI	tmp, '0'		; test on [0 .. 9]
 	BRLT	.atol_sig
@@ -96,11 +100,12 @@ _U(atol):
 	BRGE	.atol_sig
 	SUBI	tmp, '0'		; make figure a number
 	XCALL	__mulsi_const_10	; r25:r24:r23:r22 *= 10
-	ADD	num_lo_lo, tmp          ; num = (num * 10) + (tmp - '0')
+	ADD	num_lo_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_lo_hi, __zero_reg__
 	ADC	num_hi_lo, __zero_reg__
 	ADC	num_hi_hi, __zero_reg__
 	RJMP	.atol_loop2		; next figure
+
 .atol_sig:
 	CP	num_lo_lo, __zero_reg__
 	CPC	num_lo_hi, __zero_reg__
@@ -117,9 +122,11 @@ _U(atol):
 	SBCI	num_lo_hi, 0xff
 	SBCI	num_hi_lo, 0xff
 	SBCI	num_hi_hi, 0xff		; make number negative
+
 .atol_done:
 	POP	r17
 	RET
+
 .atol_end:
 	.size _U(atol), .atol_end - _U(atol)
 
