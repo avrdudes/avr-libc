@@ -113,9 +113,9 @@ $(lib_a_c_objs): %.o: %.c
 $(lib_a_asm_objs): %.o: %.S
 	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
 
-# vfprintf is compiled best with -O1 -mno-tablejump, this gives the
+# vfprintf is compiled best with -Os -mno-tablejump, this gives the
 # smallest code.
-PRINTF_CFLAGS = $(AVRLIB_CFLAGS) -O1 -mno-tablejump
+PRINTF_CFLAGS = $(AVRLIB_CFLAGS) -Os -mno-tablejump
 
 vfprintf_min.o: vfprintf.c
 	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_MIN \
