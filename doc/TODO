@@ -5,7 +5,8 @@ Before 1.0:
         * include/avr/ina90.h
         * include/avr/timer.h
         * include/avr/twi.h
-    - Verify that include/avr/*.h do not reference anything in include/avr/ina90.h
+    - Verify that include/avr/*.h do not reference anything in
+      include/avr/ina90.h
     - Move the following to examples and document
         * include/avr/parity.h
     - In include/avr/delay.h, add macros to allow specifying delays directly 

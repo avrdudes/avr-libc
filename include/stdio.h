@@ -52,7 +52,7 @@
 
     This file declares the standard IO facilities that are implemented
     in \c avr-libc.  Due to the nature of the underlying hardware,
-    only a limited subset of standard IO is implemented.  There's no
+    only a limited subset of standard IO is implemented.  There is no
     actual file implementation available, so only device IO can be
     performed.  Since there's no operating system, the application
     needs to provide enough details about their devices in order to
@@ -61,11 +61,11 @@
     Due to space constraints, some functionality has not been
     implemented at all (like some of the \c printf conversions that
     have been left out).  Nevertheless, potential users of this
-    implementation should be warned: the \c printf and \c scanf families, although
+    implementation should be warned: the \c printf and \c scanf families of functions, although
     usually associated with presumably simple things like the
-    famous "Hello, world!" program, is actually a fairly complex
-    one which causes quite some amount of code space to be taken,
-    and it's not fast either due to the nature of interpreting the
+    famous "Hello, world!" program, are actually fairly complex
+    which causes their inclusion to eat up a fair amount of code space.
+    Also, they are not fast due to the nature of interpreting the
     format string at run-time.  Whenever possible, resorting to the
     (sometimes non-standard) predetermined conversion facilities that are
     offered by avr-libc will usually cost much less in terms of speed
@@ -80,13 +80,13 @@
     The standard streams \c stdin, \c stdout, and \c stderr are
     provided, but contrary to the C standard, since avr-libc has no
     knowledge about applicable devices, these streams are not already
-    pre-initialized at application startup.  Also, since there's no
-    notion of "file" whatsoever to avr-libc, there's no function
+    pre-initialized at application startup.  Also, since there is no
+    notion of "file" whatsoever to avr-libc, there is no function
     \c fopen() that could be used to associate a stream to some device.
-    (See \ref stdio_note1 "note 1".)  Instead, function \c fdevopen()
+    (See \ref stdio_note1 "note 1".)  Instead, the function \c fdevopen()
     is provided to associate a stream to a device, where the device
     needs to provide a function to send a character, to receive a
-    character, or both.  There's no differentiation between "text" and
+    character, or both.  There is no differentiation between "text" and
     "binary" streams inside avr-libc.  Character \c \n is sent
     literally down to the device's \c put() function.  If the device
     requires a carriage return (\c \r) character to be sent before
@@ -97,25 +97,25 @@
     stream for reading will cause the resulting stream to be aliased
     to \c stdin.  Likewise, the first call to \c fdevopen() that opens
     a stream for writing will cause the resulting stream to be aliased
-    to both, \c stdout, and \c stderr.  (Thus, if the open was done
+    to both, \c stdout, and \c stderr.  Thus, if the open was done
     with both, read and write intent, all three standard streams will
-    be identical.)  Note that these aliases are indistinguishable from
-    each other, thus calling \c fclose() on such a stream will
-    effectively also close all of its aliases (\ref stdio_note3 "note 3").
+    be identical.  Note that these aliases are indistinguishable from
+    each other, thus calling \c fclose() on such a stream will also
+    effectively close all of its aliases (\ref stdio_note3 "note 3").
 
     All the \c printf and \c scanf family functions come in two flavours: the
     standard name, where the format string is expected to be in
-    SRAM, as well as a version with "_P" appended where the format
+    SRAM, as well as a version with the suffix "_P" where the format
     string is expected to reside in the flash ROM.  The macro
-    \c PSTR (explained in \ref avr_pgmspace) will become very handy
-    to declare these format strings.
+    \c PSTR (explained in \ref avr_pgmspace) becomes very handy
+    for declaring these format strings.
 
     \anchor stdio_note1 \par Note 1:
     It might have been possible to implement a device abstraction that
     is compatible with \c fopen() but since this would have required
     to parse a string, and to take all the information needed either
-    out of this string, or out of an additional table that were to be
-    provided by the application, this approach has not been taken.
+    out of this string, or out of an additional table that would need to be
+    provided by the application, this approach was not taken.
 
     \anchor stdio_note2 \par Note 2:
     This basically follows the Unix approach: if a device such as a
@@ -260,7 +260,7 @@ extern int	fclose(FILE *__stream);
    stream; and conversion specifications, each of which results in
    fetching zero or more subsequent arguments.  Each conversion
    specification is introduced by the \c % character.  The arguments must
-   correspond properly (after type promotion) with the conversion
+   properly correspond (after type promotion) with the conversion
    specifier.  After the \c %, the following appear in sequence:
 
    - Zero or more of the following flags:
@@ -288,6 +288,7 @@ extern int	fclose(FILE *__stream);
             signed conversion.  A + overrides a space if both are
             used.</li>
       </ul>
+      
    -   An optional decimal digit string specifying a minimum field width.
        If the converted value has fewer characters than the field width, it
        will be padded with spaces on the left (or right, if the left-adjust­
@@ -296,8 +297,8 @@ extern int	fclose(FILE *__stream);
        optional digit string.  If the digit string is omitted, the
        precision is taken as zero.  This gives the minimum number of
        digits to appear for d, i, o, u, x, and X conversions, or the
-       maximum number of characters to be printed from a string for s
-       con­ versions.
+       maximum number of characters to be printed from a string for \c s
+       conversions.
    -   An optional \c l length modifier, that specifies that the
        argument for the d, i, o, u, x, or X conversion is a \c "long int"
        rather than \c int.
@@ -679,7 +680,7 @@ extern int	ferror(FILE *__stream);
      special; when placed between two other characters, it adds all
      intervening characters to the set.  To include a hyphen, make it
      the last character before the final close bracket.  For instance,
-     <tt>[^]0-9-]</tt> means the set <em>everything except close
+     <tt>[^]0-9-]</tt> means the set of <em>everything except close
      bracket, zero through nine, and hyphen</em>.  The string ends
      with the appearance of a character not in the (or, with a
      circumflex, in) set or when the field width runs out.
@@ -695,7 +696,7 @@ extern int	ferror(FILE *__stream);
      These functions return the number of input items assigned, which
      can be fewer than provided for, or even zero, in the event of a
      matching failure.  Zero indicates that, while there was input
-     available, no conver­ sions were assigned; typically this is due
+     available, no conversions were assigned; typically this is due
      to an invalid input character, such as an alphabetic character
      for a <tt>%d</tt> conversion.  The value \c EOF is returned if an input
      failure occurs before any conversion such as an end-of-file
@@ -703,7 +704,7 @@ extern int	ferror(FILE *__stream);
      begun, the number of conversions which were successfully
      completed is returned.
 
-     By default, all the conversion described above are available
+     By default, all the conversions described above are available
      except the floating-point conversions, and the <tt>%[</tt> conversion.
      These conversions will be available in the extended version
      provided by the library \c libscanf_flt.a.  Note that either of
