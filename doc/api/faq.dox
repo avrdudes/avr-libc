@@ -782,7 +782,8 @@ private data storage kept outside the domain of the C compiler
 (e. g. through a <tt>char *</tt> variable initialized directly to a
 particular address), it would be sufficient to defer the
 initialization of the external RAM interface to the beginning of
-main(), so no tweaking of the \c .init1 section is necessary.  The
+<tt><b>main</b><b>()</b></tt>, 
+so no tweaking of the \c .init1 section is necessary.  The
 same applies if only the heap is going to be located there, since the
 application start-up code does not affect the heap.
 
