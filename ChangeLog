@@ -1,5 +1,9 @@
 2003-11-18  Theodore A. Roth  <troth@openavr.org>
 
+	* NEWS: Add note about new crc update functions.
+
+2003-11-18  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/crc16.h (_crc16_update): Add line break to dox.
 	(_crc_xmodem_update): Ditto.

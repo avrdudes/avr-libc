@@ -1,5 +1,11 @@
 *** Changes since avr-libc-1.0:
 
+* Extend crc16 API.
+
+New functions:
+  _crc_xmodem_update
+  _crc_ccitt_update
+
 * Extend stdio API.
 
 New functions:
