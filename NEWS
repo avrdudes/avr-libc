@@ -4,6 +4,11 @@
 
   [no-id] Fix TICIE1 value in usb header files.
   [no-id] Fix bug introduced in fix for bug #7802 (missing parens).
+  [#8452] some SFR and bit names in iom169.h are incorrect
+          NOTE: Where possible, the old names are retained to avoid breaking
+          existing code, but the OCR1A and OCR1B names where just plain wrong
+          so they have been changed and the incorrect names (OCRA1 and OCRB1) 
+          are undefined.
 
 *** Changes in avr-libc-1.0.3:
 
