@@ -1,3 +1,7 @@
+2002-09-30  Theodore A. Roth  <troth@verinet.com>
+
+	* NEWS: Add mega16 to new device list.
+
 2002-09-29  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* configure.in (AVR_CRT_MEGA): Add crtm16.o.
