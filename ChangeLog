@@ -8,6 +8,7 @@
 	* include/avr/twi.h: Ditto.
 	* include/avr/parity.h: Document.
 	* doc/avr-libc-reference.html: Remove obsolete file.
+	* doc/Makefile.am: Note removal of avr-libc-reference.html.
 	* doc/examples/twitest/twitest.c: twi.h is in compat/ now.
 	* doc/examples/twitest/twitest.dox: Ditto.
 	* doc/TODO: Delete items done.
