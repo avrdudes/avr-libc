@@ -1,3 +1,12 @@
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* configure.in (AVR_LIBC_USER_MANUAL): Append version number.
+	* doc/api/Makefile.am (latex_src/refman.tex): Filter out setting of
+	the footrulewidth length since it was breaking the build on
+	debian/testing.
+
 2004-04-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/demo.c: Update for ATmega{64,128}

@@ -169,6 +169,7 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' \
 		-e '/usepackage{times}/s/$$/\\usepackage{longtable}/' \
+		-e '/^\\setlength{\\footrulewidth}{0.4pt}/d' \
 		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
 	cd latex_src && \
@@ -189,6 +190,7 @@ latex_pdf_src/refman.tex: doxygen-pdf.config $(IMAGE_EPS)
 	cd latex_pdf_src && \
 		sed -e '/tocdepth/s/1/3/' \
 		-e '/usepackage{times}/s/$$/\\usepackage{longtable}/' \
+		-e '/^\\setlength{\\footrulewidth}{0.4pt}/d' \
 		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
 	cd latex_pdf_src && \
