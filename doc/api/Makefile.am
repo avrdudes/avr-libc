@@ -94,7 +94,8 @@ dox-ps: latex
 
 install-dox-html: html
 	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)
-	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css)'; \
+	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css \
+	                  $(USER_MANUAL)/*.js $(USER_MANUAL)/*.png)'; \
 	for file in $$list ; do \
 	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file"; \
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
