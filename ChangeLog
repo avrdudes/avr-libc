@@ -1,5 +1,10 @@
 2002-09-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/stdlib.h: document this file.
+	* libm/fplib/dtostre.S: use <stdlib.h>.
+
+2002-09-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libm/fplib/dtostre.S: another leading "0" fix.
 
 2002-09-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
