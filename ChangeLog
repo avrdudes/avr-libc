@@ -1,3 +1,9 @@
+2003-01-13  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/sleep.h: Clear MCUCR before setting the new mode.
+	(Thanks to Volkmar Dierkes for catching this bug.)
+
 2003-01-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.in: add __COMPILING_AVR_LIBC__, drop use of fake

@@ -40,6 +40,10 @@
     \c MCUCR ). Refer to the datasheet for the details relating to the device
     you are using. */
 
+/* Mask of all the sleep mode bits. */
+
+#define SLEEP_MODE_MASK (_BV(SM0) | _BV(SM1) | _BV(SM2))
+
 /** \name Sleep Modes
 
     \note FIXME: TRoth/2002-11-01: These modes were taken from the mega128
@@ -90,7 +94,7 @@
 #if defined(DOXYGEN)
 extern void set_sleep_mode (uint8_t mode);
 #else
-#define set_sleep_mode(mode)   (MCUCR |= (mode))
+#define set_sleep_mode(mode)   (MCUCR = ((MCUCR & ~SLEEP_MODE_MASK) | (mode))
 #endif
 
 /** \ingroup avr_sleep 
