@@ -3,6 +3,11 @@
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/faq.dox: Minor clarification.
 
+2003-02-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/atoi.S: fix bug #2481.
+	* libc/stdlib/atol.S: Ditto.
+
 2003-02-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: eplain PSTR() to move strings out to flash.
