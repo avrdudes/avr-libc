@@ -1,5 +1,10 @@
 2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/interrupt.h: make timer_enable_int() static inline;
+	fixes bug #5454.
+
+2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/crc16.h: use __inline__ instead of inline.
 	* include/avr/delay.h: Ditto.
 	* include/avr/interrupt.h: Ditto:
