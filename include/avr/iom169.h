@@ -333,9 +333,9 @@
 #define SIG_OUTPUT_COMPARE0     _VECTOR(10)
 #define SIG_OVERFLOW0           _VECTOR(11)
 #define SIG_SPI                 _VECTOR(12)
-#define SIG_UART0_RECV          _VECTOR(13)
-#define SIG_UART0_DATA          _VECTOR(14)
-#define SIG_UART0_TRANS         _VECTOR(15)
+#define SIG_USART_RECV          _VECTOR(13)
+#define SIG_USART_DATA          _VECTOR(14)
+#define SIG_USART_TRANS         _VECTOR(15)
 #define SIG_USI_START           _VECTOR(16)
 #define SIG_USI_OVERFLOW        _VECTOR(17)
 #define SIG_COMPERATOR          _VECTOR(18)
@@ -345,6 +345,12 @@
 #define SIG_LCD                 _VECTOR(22)
 
 #define _VECTORS_SIZE 92
+
+/* These are to avoid breaking code compiled against old names. */
+
+#define SIG_UART0_RECV          SIG_USART_RECV 
+#define SIG_UART0_DATA          SIG_USART_DATA
+#define SIG_UART0_TRANS         SIG_USART_TRANS
 
 /* Bit numbers */
 
