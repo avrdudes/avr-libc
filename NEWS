@@ -22,6 +22,7 @@ Marek did some fairly major work with binutils and gcc to make adding support
 for new devices easier. His changes in those tools required changes to avr-libc
 which make it incompatible with older versions of binutils and gcc. Gcc version
 3.3 (still in cvs) and binutils version 2.14 (still in cvs) are required.
+Binutils 2.13 is also acceptable.
 
 * New malloc implementation.
 
@@ -52,7 +53,7 @@ See the "Special Function Registers" documentation for details.
 mega128
 mega169
 mega16
-mega32 [untested]
+mega32
 mega64 [untested]
 mega8515 [untested]
 mega8535 [untested]

@@ -1,3 +1,9 @@
+2003-01-03  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Add note about Binutils 2.13 being usable.
+		Remove note about mega32 being untested.
+
 2003-01-02  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdio/vfprintf.c: printf_flt() needs <math.h>.
