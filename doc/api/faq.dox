@@ -46,6 +46,7 @@
 -# \ref faq_reg_usage
 -# \ref faq_rom_array
 -# \ref faq_ext_ram
+-# \ref faq_optflags
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -789,6 +790,69 @@ It is not recommended to locate the stack in external RAM.  In
 general, accessing external RAM is slower than internal RAM, and
 errata of some AVR devices even prevent this configuration from
 working properly at all.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_optflags Which -O flag to use?
+
+There's a common misconception that larger numbers behind the \c -O
+option might automatically cause "better" optimization.  First,
+there's no universal definition for "better", with optimization often
+being a speed vs. code size tradeoff.  See the
+\ref gcc_optO "detailed discussion" for which option affects which
+part of the code generation.
+
+A test case was run on an ATmega128 to judge the effect of compiling
+the library itself using different optimization levels.  The following
+table lists the results.  The test case consisted of around 2 KB of
+strings to sort.  Test #1 used qsort() using the standard library
+strcmp(), test #2 used a function that sorted the strings by their
+size (thus had two calls to strlen() per invocation).
+
+When comparing the resulting code size, it should be noted that a
+floating point version of fvprintf() was linked into the binary (in
+order to print out the time elapsed) which is entirely not affected by
+the different optimization levels, and added about 2.5 KB to the code.
+
+<table>
+ <tr>
+  <td><strong>Optimization flags</strong></td>
+  <td><strong>Size of .text</strong></td>
+  <td><strong>Time for test #1</strong></td>
+  <td><strong>Time for test #2</strong></td>
+ </tr>
+ <tr>
+  <td>-O3</td>
+  <td>6898</td>
+  <td>903 탎</td>
+  <td>19.7 ms</td>
+ </tr>
+ <tr>
+  <td>-O2</td>
+  <td>6666</td>
+  <td>972 탎</td>
+  <td>20.1 ms</td>
+ </tr>
+ <tr>
+  <td>-Os</td>
+  <td>6618</td>
+  <td>955 탎</td>
+  <td>20.1 ms</td>
+ </tr>
+ <tr>
+  <td>-Os -mcall-prologues</td>
+  <td>6474</td>
+  <td>972 탎</td>
+  <td>20.1 ms</td>
+ </tr>
+</table>
+
+(The difference between 955 탎 and 972 탎 was just a single
+timer-tick, so take this with a grain of salt.)
+
+So generally, it seems <tt>-Os -mcall-prologues</tt> is the most
+universal "best" optimization level.  Only applications that need to
+get the last few percent of speed benefit from using \c -O3.
 
 <small>Back to \ref faq_index.</small>
 
