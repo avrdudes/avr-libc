@@ -83,7 +83,6 @@ lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
 EXTRA_DIST = \
 	fplib.inc      \
 	irexp.S        \
-	readme.atan2   \
 	readme.dtostre \
 	readme.fplib   \
 	readme.strtod
