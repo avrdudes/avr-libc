@@ -1,6 +1,11 @@
 2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/io.h: Document SPM_PAGESIZE.
+	* doc/api/using-tools.dox: Add a few more gcc options.
+
+2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io.h: Document SPM_PAGESIZE.
 
 2003-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

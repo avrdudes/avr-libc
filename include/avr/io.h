@@ -53,25 +53,25 @@
     Finally, the following macros are defined:
 
     - \b RAMEND
-
+    <br>
     A constant describing the last on-chip RAM location.
-
+    <br>
     - \b XRAMEND
-
+    <br>
     A constant describing the last possible location in RAM.
     This is equal to RAMEND for devices that do not allow for
     external RAM.
-
+    <br>
     - \b E2END
-
+    <br>
     A constant describing the address of the last EEPROM cell.
-
+    <br>
     - \b FLASHEND
-
+    <br>
     A constant describing the last byte address in flash ROM.
-
+    <br>
     - \b SPM_PAGESIZE
-
+    <br>
     For devices with bootloader support, the flash pagesize
     (in bytes) to be used for the \c SPM instruction. */
 
