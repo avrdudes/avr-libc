@@ -25,7 +25,10 @@ Group: Avr/Development/Tools
 URL: http://savannah.gnu.org/projects/avr-libc
 Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.gz
 Buildroot: /var/tmp/avr-libc-%{version}-root
-BuildRequires: gzip doxygen >= 1.2.16 tetex avr-gcc >= 3.3
+BuildRequires: gzip avr-gcc >= 3.3
+%if %{_with_docs}
+BuildRequires: doxygen >= 1.3.4 tetex
+%endif
 Requires: avr-gcc >= 3.3
 
 %description
