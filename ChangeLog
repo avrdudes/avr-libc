@@ -1,3 +1,7 @@
+2004-12-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/delay.h: Move _delay_ms and _delay_us to double.
+
 2004-12-21  Eric B. Weddington  <ericw@evcohs.com>
 
 	* include/avr/iomx8.h: Add the EEARH register definition for the 

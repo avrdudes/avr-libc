@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
+   Copyright (c) 2004, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -44,7 +45,7 @@
     #include <avr/delay.h>
     \endcode
 
-    The macros in this header file implement simple delay loops
+    The functions in this header file implement simple delay loops
     that perform a busy-waiting.  They are typically used to
     facilitate short delays in the program execution.  They are
     implemented as count-down loops with a well-known CPU cycle
@@ -59,17 +60,14 @@
     overhead of setting up a hardware timer is too much compared
     to the overall delay time.
 
-    Two inline functions are provided for the actual delay
-    algorithms.  Two wrapper macros allow the specification of
-    microsecond, and millisecond delays directly, using the
-    application-supplied macro F_CPU as the CPU clock frequency
-    (in Hertz).
+    Two inline functions are provided for the actual delay algorithms.
 
-    \note While these macros perform all calculation at compile-time
-    using the C preprocessor, so no run-time overhead results, care
-    should be taken to not overflow the argument domain range, as the
-    macros cannot detect such an overflow but would rather truncate
-    the loop count, yielding unintented delay values.
+    Two wrapper functions allow the specification of microsecond, and
+    millisecond delays directly, using the application-supplied macro
+    F_CPU as the CPU clock frequency (in Hertz).  These functions
+    operate on double typed arguments, however when optimization is
+    turned on, the entire floating-point calculation will be done at
+    compile-time.
 */
 
 /** \ingroup avr_delay
@@ -86,7 +84,7 @@
 static __inline__ void
 _delay_loop_1(uint8_t __count)
 {
-	asm volatile (
+	__asm__ volatile (
 		"1: dec %0" "\n\t"
 		"brne 1b"
 		: "=r" (__count)
@@ -108,7 +106,7 @@ _delay_loop_1(uint8_t __count)
 static __inline__ void
 _delay_loop_2(uint16_t __count)
 {
-	asm volatile (
+	__asm__ volatile (
 		"1: sbiw %0,1" "\n\t"
 		"brne 1b"
 		: "=w" (__count)
@@ -116,33 +114,53 @@ _delay_loop_2(uint16_t __count)
 	);
 }
 
-
 /**
    \ingroup avr_delay
-   \def _delay_us
 
-   Perform a delay of \c count microseconds, using _delay_loop_1().
+   Perform a delay of \c __us microseconds, using _delay_loop_1().
 
-   The macro F_CPU is supposed to be defined to an unsigned long
-   integer constant defining the CPU clock frequency (in Hertz).
+   The macro F_CPU is supposed to be defined to a
+   constant defining the CPU clock frequency (in Hertz).
 
    The maximal possible delay is 768 us / F_CPU in MHz.
  */
-#define _delay_us(count) \
-_delay_loop_1((uint8_t)(((unsigned long)(F_CPU) * (count)) / 3000000UL))
+static __inline__ void
+_delay_us(double __us)
+{
+	uint8_t __ticks;
+	double __tmp = ((F_CPU) / 3e6) * __us;
+	if (__tmp < 1.0)
+		__ticks = 1;
+	else if (__tmp > 255)
+		__ticks = 0;	/* i.e. 256 */
+	else
+		__ticks = (uint8_t)__tmp;
+	_delay_loop_1(__ticks);
+}
+
 
 /**
    \ingroup avr_delay
-   \def _delay_ms
 
-   Perform a delay of \c count milliseconds, using _delay_loop_2().
+   Perform a delay of \c __ms milliseconds, using _delay_loop_2().
 
-   The macro F_CPU is supposed to be defined to an unsigned long
-   integer constant defining the CPU clock frequency (in Hertz).
+   The macro F_CPU is supposed to be defined to a
+   constant defining the CPU clock frequency (in Hertz).
 
    The maximal possible delay is 262.14 ms / F_CPU in MHz.
  */
-#define _delay_ms(count) \
-_delay_loop_2((uint16_t)(((unsigned long)(F_CPU) * (count)) / 4000UL))
+static __inline__ void
+_delay_ms(double __ms)
+{
+	uint16_t __ticks;
+	double __tmp = ((F_CPU) / 4e3) * __ms;
+	if (__tmp < 1.0)
+		__ticks = 1;
+	else if (__tmp > 65535)
+		__ticks = 0;	/* i.e. 65536 */
+	else
+		__ticks = (uint16_t)__tmp;
+	_delay_loop_2(__ticks);
+}
 
 #endif /* _AVR_DELAY_H_ */
