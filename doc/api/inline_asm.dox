@@ -95,17 +95,17 @@ http://savannah.nongnu.org/projects/avr-libc/.
 Let's start with a simple example of reading a value from port D:
 
 \code
-asm("in %0, %1" : "=r" (value) : "I" (PORTD) : );
+asm("in %0, %1" : "=r" (value) : "I" (_SFR_IO_ADDR(PORTD)) );
 \endcode
 
-Each \c asm statement is devided by colons into four parts:
+Each \c asm statement is devided by colons into (up to) four parts:
 
 -# The assembler instructions, defined as a single string constant:
    \code "in %0, %1" \endcode
 -# A list of output operands, separated by commas. Our example uses just one:
    \code "=r" (value) \endcode
 -# A comma separated list of input operands. Again our example uses one
-   operand only: \code "I" (PORTD) \endcode
+   operand only: \code "I" (_SFR_IO_ADDR(PORTD)) \endcode
 -# Clobbered registers, left empty in our example.
 
 You can write assembler instructions in much the same way as you would write
@@ -116,7 +116,7 @@ registers and C operands is specified in the second and third part of the
 The general form is
 
 \code
-asm(code : output operand list : input operand list : clobber list);
+asm(code : output operand list : input operand list [: clobber list]);
 \endcode
 
 In the code section, operands are referenced by a percent sign followed by a
@@ -124,7 +124,7 @@ single digit. \c %0 refers to the first \c %1 to the second operand and so
 forth. From the above example:
 
 \c %0 refers to <tt>"=r" (value)</tt> and<br>
-\c %1 refers to <tt>"I" (PORTD)</tt>.
+\c %1 refers to <tt>"I" (_SFR_IO_ADDR(PORTD))</tt>.
 
 This may still look a little odd now, but the syntax of an operand list will
 be explained soon. Let us first examine the part of a compiler listing which
@@ -150,7 +150,7 @@ will most likely remove your code unless you switched off optimization. To
 avoid this, you can add the volatile attribute to the \c asm statement:
 
 \code
-asm volatile("in %0, %1" : "=r" (value) : "I" (PORTD) : );
+asm volatile("in %0, %1" : "=r" (value) : "I" (_SFR_IO_ADDR(PORTD)));
 \endcode
 
 The last part of the \c asm instruction, the clobber list, is mainly used to
@@ -636,7 +636,7 @@ problem:
 asm volatile("in %0,%1"    "\n\t"
              "out %1, %2"  "\n\t" 
              : "=&r" (input) 
-             : "I" (port), "r" (output)
+             : "I" (_SFR_IO_ADDR(port)), "r" (output)
             );
 \endcode
 
@@ -855,14 +855,28 @@ unique number on each \c asm statement. The following code had been taken from
         "L_%=: " "sbic %0, %1" "\n\t"      \
                  "rjmp L_%="               \
                  : /* no outputs */        \
-                 : "I" ((uint8_t)(port)),  \
-                   "I" ((uint8_t)(bit))    \
+                 : "I" (_SFR_IO_ADDR(port)),  \
+                   "I" (bit)    \
         )
 \endverbatim
 
 When used for the first time, \c L_%= may be translated to \c L_1404, the next
 usage might create \c L_1405 or whatever. In any case, the labels became unique
 too.
+
+Another option is to use Unix-assembler style numeric labels.  They are
+explained in \ref faq_asmstabs.  The above example would then look like:
+
+\verbatim#define loop_until_bit_is_clear(port,bit)  \
+        __asm__ __volatile__ (             \
+        "1: " "sbic %0, %1" "\n\t"      \
+                 "rjmp 1b"               \
+                 : /* no outputs */        \
+                 : "I" (_SFR_IO_ADDR(port)),  \
+                   "I" (bit)    \
+        )
+\endverbatim
+
 
 \section asm_c_stubs C Stub Functions
 
@@ -909,7 +923,7 @@ uint16_t inw(uint8_t port)
         "in %A0,%1" "\n\t"
         "in %B0,(%1) + 1"
         : "=r" (result)
-        : "I" (port)
+        : "I" (_SFR_IO_ADDR(port))
         );
     return result;
 }

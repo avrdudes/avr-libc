@@ -354,7 +354,7 @@ strings and <tt>PORTB</tt>, instead of <tt>0x18</tt>, gets passed to the
 assembler. One way to avoid this problem is:
 
 \code
-asm volatile("sbi %0, 0x07" : "I" (PORTB):);
+asm volatile("sbi %0, 0x07" : "I" (_SFR_IO_ADDR(PORTB)):);
 \endcode
 
 \note \c avr/io.h already provides a sbi() macro definition, which can be used

@@ -1,3 +1,8 @@
+2004-02-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/inline_asm.dox: Fix use of _SFR_IO_ADDR() in inline asm.
+	* doc/api/faq.dox: Ditto.
+
 2004-02-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/malloc.c: Fix bug #2143 (malloc wrap around top of RAM)
@@ -15,7 +20,7 @@
 	* include/avr/delay.h: Ditto.
 	* include/avr/interrupt.h: Ditto:
 	* include/avr/timer.h: Ditto.
-	
+
 2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdio/vfscanf.c: Apply patch #2554: fix %ul format.
