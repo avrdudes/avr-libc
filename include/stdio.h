@@ -93,6 +93,12 @@
     the linefeed, its \c put() routine must implement this (see
     \ref stdio_note2 "note 2").
 
+    It should be noted that the automatic conversion of a newline
+    character into a carriage return - newline sequence breaks binary
+    transfers.  If binary transfers are desired, no automatic
+    conversion should be performed, but instead any string that aims
+    to issue a CR-LF sequence must use <tt>"\r\n"</tt> explicitly.
+
     For convenience, the first call to \c fdevopen() that opens a
     stream for reading will cause the resulting stream to be aliased
     to \c stdin.  Likewise, the first call to \c fdevopen() that opens
