@@ -28,6 +28,19 @@
 
 #include <stdlib.h>
 
+/*
+ * Exported interface:
+ *
+ * When extending the data segment, the allocator will not try to go
+ * beyond the current stack limit, decreased by "malloc_margin" bytes.
+ * Thus, all possible stack frames of interrupt routines that could
+ * interrupt the current function, plus all further nested function
+ * calls must not require more stack space, or they'll risk to collide
+ * with the data segment.
+ */
+ 
+size_t malloc_margin = 20;
+
 #ifndef __AVR__
 
 /*
@@ -56,37 +69,19 @@ static struct freelist *flp;
 
 #define malloc mymalloc
 #define free myfree
-#define __heap_start mymem
-#define __heap_end ((char *)0)
+#define __bss_end mymem
 
 char mymem[256];
-#define STACK_POINTER() (mymem + 256)
+#define MAX_BRK(h) do { h = mymem + 256; } while(0)
 
 #else /* !MALLOC_TEST */
 
-extern char __heap_start;
-extern char __heap_end;
+extern char __bss_end;
 
-#define STACK_POINTER() (*(volatile unsigned int *)0x3d)
+#define MAX_BRK(h) asm volatile ("in %A0, __SP_L__\n\t"            \
+                                 "in %B0, __SP_H__" : "=r" (h) :)
 
 #endif /* MALLOC_TEST */
-
-/*
- * Exported interface:
- *
- * When extending the data segment, the allocator will not try to go
- * beyond the current stack limit, decreased by __malloc_margin bytes.
- * Thus, all possible stack frames of interrupt routines that could
- * interrupt the current function, plus all further nested function
- * calls must not require more stack space, or they'll risk to collide
- * with the data segment.
- */
- 
-/* May be changed by the user only before the first malloc() call.  */
-
-size_t __malloc_margin = 32;
-char *__malloc_heap_start = &__heap_start;
-char *__malloc_heap_end = &__heap_end;
 
 void *
 malloc(size_t len)
@@ -191,10 +186,9 @@ malloc(size_t len)
 	 * that we don't collide with the stack.
 	 */
 	if (brkval == 0)
-		brkval = __malloc_heap_start;
-	cp = __malloc_heap_end;
-	if (cp == 0)
-		cp = STACK_POINTER() - __malloc_margin;
+		brkval = &__bss_end;
+	MAX_BRK(cp);
+	cp -= malloc_margin;	/* 20 bytes safety margin */
 	if (brkval + len + sizeof(size_t) < cp) {
 		fp1 = (struct freelist *)brkval;
 		brkval += len + sizeof(size_t);
@@ -415,4 +409,3 @@ main(void)
 }
 
 #endif /* MALLOC_TEST */
-
