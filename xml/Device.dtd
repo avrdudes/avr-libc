@@ -48,7 +48,7 @@ data in those file.
     description?,
     memory_sizes,
     interrupts,
-    ioreg+
+    ioregisters
 )>
     <!ATTLIST device
         name CDATA #REQUIRED
@@ -87,6 +87,7 @@ data in those file.
             >
             <!ELEMENT sig_name (#PCDATA)>
 
+    <!ELEMENT ioregisters (ioreg+)>
     <!ELEMENT ioreg (
         description?,
         alt_name*,
@@ -100,10 +101,14 @@ data in those file.
         <!ELEMENT alt_name (#PCDATA)>
 
         <!ELEMENT bit_field (
+            description?,
             alt_name*
         )>
             <!ATTLIST bit_field
                 name CDATA #REQUIRED
                 bit CDATA #REQUIRED
+                access CDATA #REQUIRED
+                init CDATA #REQUIRED
             >
+
     <!-- TODO: Need to define boot loader block information. -->

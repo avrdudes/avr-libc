@@ -1,3 +1,10 @@
+2004-06-23  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py (gather_io_info): New function.
+	(dump_ioregs): Implement dumping ioregisters.
+	* xml/Device.dtd: Move ioreg elements into ioregisters element.
+	Add access and init attributes to bit_field element.
+
 2004-06-22  Theodore A. Roth  <troth@openavr.org>
 
 	* xml/Atmel2libc.py: Fixes to allow validation of generated file.

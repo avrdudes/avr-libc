@@ -68,7 +68,7 @@ class Element:
 
         return None
 
-    def __str__(self):
+    def __repr__(self):
         indent = '  ' * self.depth
         s ='%s[ %s, %s, "%s", {' % (indent, self.name, self.attributes,
                                       self.cdata)
@@ -244,9 +244,93 @@ def dump_vectors (root):
         n += 1
     print '  </interrupts>'
 
+def gather_io_info (root):
+    """
+    The bit information may be spread across multiple IO_MODULES.
+
+    Man that sucks. :-(
+
+    Oh, and it gets worse. They have duplicate bit elements, but the
+    duplicates are not quite complete (see SFIOR in the mega128 file). Now,
+    why couldn't they just list all the register info in a single linear
+    table, then in the modules, just list the registers used by the module and
+    look up the register info in the linear table?
+
+    So what we will do is walk all modules the extract register info and put
+    that info into a dictionary so we can look it up later.
+    """
+    io_reg_info = {}
+
+    path = ['AVRPART', 'IO_MODULE']
+    io_module = root.getSubTree (path)
+
+    # Get the list of all modules.
+    mod_list = io_module.getElements ('MODULE_LIST')[0].getData ()
+    mod_list = mod_list[1:-1].split (':')
+
+    for mod in mod_list:
+        # Get the list of registers for the module.
+        path = ['IO_MODULE', mod, 'LIST']
+        reg_list = io_module.getSubTree (path).getData ()
+        reg_list = reg_list[1:-1].split (':')
+        for reg in reg_list:
+            path[2] = reg
+            element = io_module.getSubTree (path)
+            if io_reg_info.has_key (reg):
+                for child in element.getElements ():
+                    io_reg_info[reg].AddChild (child, element.depth+1)
+            else:
+                io_reg_info[reg] = element
+
+    return io_reg_info
+
 def dump_ioregs (root):
-    print '  <ioreg name="" addr="">'
-    print '  </ioreg>'
+    path = ['AVRPART', 'MEMORY', 'IO_MEMORY']
+    io_mem = root.getSubTree (path)
+    ioregs = io_mem.getElements ()
+
+    ioreg_info_dict = gather_io_info (root)
+
+    print '  <ioregisters>'
+
+    # Skip the first 6 elements since they are just give start and stop
+    # addresses.
+
+    for ioreg in ioregs[6:]:
+        name = ioreg.name
+        reg_info = ioreg_info_dict[name]
+        reg_desc = reg_info.getElements ('DESCRIPTION')[0].getData ()
+        addr = ioreg.getElements ('IO_ADDR')[0].getData ()
+        if addr == "NA":
+            addr = ioreg.getElements ('MEM_ADDR')[0].getData ()
+        else:
+            # Add 0x20 so all addresses are memory mapped.
+            addr = '0x%02x' % (int (addr, 16) + 0x20)
+        
+        print '    <ioreg name="%s" addr="%s">' % (name, addr)
+        print_wrapped ('      ','<description>%s</description>' % (reg_desc))
+        print '      <alt_name></alt_name>'
+        for i in range (8):
+            bit = 'BIT%d' % (i)
+            bit_el = reg_info.getSubTree ([name, bit])
+            if bit_el is None:
+                continue
+            bit_name = bit_el.getElements ('NAME')[0].getData ()
+            bit_desc = bit_el.getElements ('DESCRIPTION')[0].getData ()
+            bit_access = bit_el.getElements ('ACCESS')[0].getData ()
+            bit_init_val = bit_el.getElements ('INIT_VAL')[0].getData ()
+            print '      <bit_field name="%s"' % (bit_name),
+            print 'bit="%d"' % (i),
+            print 'access="%s"' % (bit_access),
+            print 'init="%s">' % (bit_init_val)
+            if bit_desc:
+                print_wrapped ('        ',
+                               '<description>%s</description>' % (bit_desc))
+            print '        <alt_name></alt_name>'
+            print '      </bit_field>'
+        print '    </ioreg>'
+
+    print '  </ioregisters>'
 
 if __name__ == '__main__':
     import sys
