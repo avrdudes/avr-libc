@@ -1,5 +1,11 @@
 2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/stdlib.h: fix rand() & Co.
+	* libc/stdlib/rand.c: fix rand() & Co.
+	* libc/stdlib/random.c: New file.
+
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/ina90.h include/avr/pgmspace.h:
 		Move __LPM & Co from ina90.h to pgmspace.h
 

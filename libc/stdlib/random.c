@@ -38,18 +38,9 @@ static char sccsid[] = "@(#)rand.c	8.1 (Berkeley) 6/14/93";
 
 #include <stdlib.h>
 
-static int
-do_rand(unsigned long *ctx)
+static long
+do_random(unsigned long *ctx)
 {
-#ifdef  USE_WEAK_SEEDING
-	/*
-	 * Historic implementation compatibility.
-	 * The random sequences do not vary much with the seed,
-	 * even with overflowing.
-	 */
-	return ((*ctx = *ctx * 1103515245L + 12345L) %
-		((unsigned long)RAND_MAX + 1));
-#else   /* !USE_WEAK_SEEDING */
 	/*
 	 * Compute x = (7^5 * x) mod (2^31 - 1)
 	 * wihout overflowing 31 bits:
@@ -65,28 +56,27 @@ do_rand(unsigned long *ctx)
 	x = 16807L * lo - 2836L * hi;
 	if (x <= 0)
 		x += 0x7fffffffL;
-	return ((*ctx = x) % ((unsigned long)RAND_MAX + 1));
-#endif  /* !USE_WEAK_SEEDING */
+	return ((*ctx = x) % ((unsigned long)RANDOM_MAX + 1));
 }
 
 
-int
-rand_r(unsigned long *ctx)
+long
+random_r(unsigned long *ctx)
 {
-	return do_rand(ctx);
+	return do_random(ctx);
 }
 
 
 static unsigned long next = 1;
 
-int
-rand(void)
+long
+random(void)
 {
-	return do_rand(&next);
+	return do_random(&next);
 }
 
 void
-srand(unsigned int seed)
+srandom(unsigned long seed)
 {
 	next = seed;
 }
