@@ -83,7 +83,7 @@ not based on the actual filename from the file system.
 Alternatively, the language can explicitly be specified using the
 <tt>-x assembler-with-cpp</tt> option.
 
-\section ass_example
+\section ass_example Example program
 
 The following annotated example features a simple 100 kHz square wave
 generator using an AT90S1200 clocked with a 10.7 MHz crystal.  Pin
