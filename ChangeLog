@@ -1,5 +1,10 @@
 2002-12-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/string/strstr.S: complete fixed rewrite, thanks to
+		Philip Soeberg.
+
+2002-12-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libm/fplib/asin.S: complete rewrite, kudos to Reiner Patommel.
 
 2002-12-09  Theodore A. Roth  <troth@openavr.org>
