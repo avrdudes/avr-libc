@@ -14,7 +14,6 @@ TODO for avr-libc:
  - Figure out how to remove __ prefix from function args in dox.
  - Doxument the following:
    * interfaces in:
-     + include/ctype.h
      + include/math.h
      + include/avr/crc16.h  ???
      + include/avr/ina90.h  ???

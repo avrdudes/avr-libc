@@ -1,5 +1,10 @@
 2002-10-10  Theodore A. Roth  <troth@verinet.com>
 
+	* doc/TODO: Removed ctype.h.
+	* include/ctype.h: Add dox comments.
+
+2002-10-10  Theodore A. Roth  <troth@verinet.com>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/acknowledge.dox: Add cross references.
 
