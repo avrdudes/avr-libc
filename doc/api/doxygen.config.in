@@ -4,7 +4,7 @@
 
 # Doxygen configuration file for the avr-libc project.
 
-# Doxyfile 1.2.16
+# Doxyfile 1.2.17
 
 # This file describes the settings to be used by the documentation system
 # doxygen (www.doxygen.org) for a project
@@ -43,9 +43,9 @@ OUTPUT_DIRECTORY       =
 # information to generate all constant output in the proper language. 
 # The default language is English, other supported languages are: 
 # Brazilian, Chinese, Chinese-Traditional, Croatian, Czech, Danish, Dutch, 
-# Finnish, French, German, Greek, Hungarian, Italian, Japanese, Korean, 
-# Norwegian, Polish, Portuguese, Romanian, Russian, Slovak, Slovene, 
-# Spanish, Swedish and Ukrainian.
+# Finnish, French, German, Greek, Hungarian, Italian, Japanese, Japanese-en 
+# (Japanese with english messages), Korean, Norwegian, Polish, Portuguese, 
+# Romanian, Russian, Serbian, Slovak, Slovene, Spanish, Swedish and Ukrainian.
 
 OUTPUT_LANGUAGE        = English
 
@@ -179,6 +179,14 @@ SHOW_INCLUDE_FILES     = NO
 # explict @brief command for a brief description.
 
 JAVADOC_AUTOBRIEF      = NO
+
+# The MULTILINE_CPP_IS_BRIEF tag can be set to YES to make Doxygen 
+# treat a multi-line C++ special comment block (i.e. a block of //! or /// 
+# comments) as a brief description. This used to be the default behaviour. 
+# The new default is to treat a multi-line C++ comment block as a detailed 
+# description. Set this tag to YES if you prefer the old behaviour instead.
+
+MULTILINE_CPP_IS_BRIEF = NO
 
 # If the DETAILS_AT_TOP tag is set to YES then Doxygen 
 # will output the detailed description near the top, like JavaDoc.
@@ -322,7 +330,10 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = @top_srcdir@/include @top_srcdir@/libc @top_srcdir@/libm @top_srcdir@/doc/api
+INPUT                  = @top_srcdir@/include \
+                         @top_srcdir@/libc \
+                         @top_srcdir@/libm \
+                         @top_srcdir@/doc/api
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -331,7 +342,10 @@ INPUT                  = @top_srcdir@/include @top_srcdir@/libc @top_srcdir@/lib
 # *.c *.cc *.cxx *.cpp *.c++ *.java *.ii *.ixx *.ipp *.i++ *.inl *.h *.hh *.hxx *.hpp 
 # *.h++ *.idl *.odl
 
-FILE_PATTERNS          =  *.c *.h *.S *.dox
+FILE_PATTERNS          = *.c \
+                         *.h \
+                         *.S \
+                         *.dox
 
 # The RECURSIVE tag can be used to turn specify whether or not subdirectories 
 # should be searched for input files as well. Possible values are YES and NO. 
@@ -498,6 +512,20 @@ HTML_ALIGN_MEMBERS     = YES
 # of the generated HTML documentation.
 
 GENERATE_HTMLHELP      = NO
+
+# If the GENERATE_HTMLHELP tag is set to YES, the CHM_FILE tag can 
+# be used to specify the file name of the resulting .chm file. You 
+# can add a path in front of the file if the result should not be 
+# written to the html output dir.
+
+CHM_FILE               = 
+
+# If the GENERATE_HTMLHELP tag is set to YES, the HHC_LOCATION tag can 
+# be used to specify the location (absolute path including file name) of 
+# the HTML help compiler (hhc.exe). If non empty doxygen will try to run 
+# the html help compiler on the generated index.hhp.
+
+HHC_LOCATION           = 
 
 # If the GENERATE_HTMLHELP tag is set to YES, the GENERATE_CHI flag 
 # controls if a separate .chi index file is generated (YES) or that 
@@ -753,7 +781,9 @@ INCLUDE_FILE_PATTERNS  =
 # or name=definition (no spaces). If the definition and the = are 
 # omitted =1 is assumed.
 
-PREDEFINED             = MACRO_DOCUMENTATION DOXYGEN RAMPZ
+PREDEFINED             = MACRO_DOCUMENTATION \
+                         DOXYGEN \
+                         RAMPZ
 
 # If the MACRO_EXPANSION and EXPAND_PREDEF_ONLY tags are set to YES then 
 # this tag can be used to specify a list of macro names that should be expanded. 
@@ -764,8 +794,9 @@ EXPAND_AS_DEFINED      =
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES (the default) then 
 # doxygen's preprocessor will remove all function-like macros that are alone 
-# on a line and do not end with a semicolon. Such function macros are typically 
-# used for boiler-plate code, and will confuse the parser if not removed.
+# on a line, have an all uppercase name, and do not end with a semicolon. Such 
+# function macros are typically used for boiler-plate code, and will confuse the 
+# parser if not removed.
 
 SKIP_FUNCTION_MACROS   = YES
 
