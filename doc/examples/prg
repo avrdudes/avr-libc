@@ -1,9 +1,0 @@
-#! /bin/bash
-#
-if test -f "$1"
-then
-    uisp 0 --DPCAvr --erase
-    uisp 0 --DPCAvr --upload $1
-else
-    echo "Usage: prg <file-name>"
-fi
