@@ -3,7 +3,6 @@ TODO for avr-libc:
 Before 1.2:
     - Move the following to include/compat and document
         * include/avr/ina90.h
-        * include/avr/timer.h
         * include/avr/twi.h
     - Move the following to examples and document
         * include/avr/parity.h
