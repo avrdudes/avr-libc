@@ -25,16 +25,19 @@
 
 /* avr/sfr_defs.h - macros for accessing AVR special function registers */
 
+/* $Id$ */
+
 #ifndef _AVR_SFR_DEFS_H_
 #define _AVR_SFR_DEFS_H_ 1
 
 /** \defgroup avr_sfr_notes Additional notes from <avr/sfr_defs.h>
     \ingroup avr_sfr
 
-   The \c <avr/sfr_defs.h> file is included by all of the \c <avr/ioXXXX.h> files, which use macros
-   defined here to make the special function register definitions look like
-   C variables or simple constants, depending on the <tt>_SFR_ASM_COMPAT</tt> define.
-   Some examples from \c <avr/iom128.h> to show how to define such macros:
+   The \c <avr/sfr_defs.h> file is included by all of the \c <avr/ioXXXX.h>
+   files, which use macros defined here to make the special function register
+   definitions look like C variables or simple constants, depending on the
+   <tt>_SFR_ASM_COMPAT</tt> define.  Some examples from \c <avr/iom128.h> to
+   show how to define such macros:
 
 \code
 #define PORTA _SFR_IO8(0x1b)
@@ -43,28 +46,29 @@
 #define TCNT3 _SFR_MEM16(0x88)
 \endcode
 
-   If \c _SFR_ASM_COMPAT is not defined, C programs can use names like <tt>PORTA</tt>
-   directly in C expressions (also on the left side of assignment operators)
-   and GCC will do the right thing (use short I/O instructions if possible).
-   The \c __SFR_OFFSET definition is not used in any way in this case.
+   If \c _SFR_ASM_COMPAT is not defined, C programs can use names like
+   <tt>PORTA</tt> directly in C expressions (also on the left side of
+   assignment operators) and GCC will do the right thing (use short I/O
+   instructions if possible).  The \c __SFR_OFFSET definition is not used in
+   any way in this case.
 
    Define \c _SFR_ASM_COMPAT as 1 to make these names work as simple constants
    (addresses of the I/O registers).  This is necessary when included in
-   preprocessed assembler (*.S) source files, so it is done automatically
-   if \c __ASSEMBLER__ is defined.  By default, all addresses are defined as
-   if they were memory addresses (used in \c lds/sts instructions).  To use
-   these addresses in \c in/out instructions, you must subtract 0x20 from them.
+   preprocessed assembler (*.S) source files, so it is done automatically if
+   \c __ASSEMBLER__ is defined.  By default, all addresses are defined as if
+   they were memory addresses (used in \c lds/sts instructions).  To use these
+   addresses in \c in/out instructions, you must subtract 0x20 from them.
 
-   For more backwards compatibility, insert the following at the start of
-   your old assembler source file:
+   For more backwards compatibility, insert the following at the start of your
+   old assembler source file:
 
 \code
 #define __SFR_OFFSET 0
 \endcode
 
-   This automatically subtracts 0x20 from I/O space addresses, but it's
-   a hack, so it is recommended to change your source: wrap such addresses
-   in macros defined here, as shown below.  After this is done, the
+   This automatically subtracts 0x20 from I/O space addresses, but it's a
+   hack, so it is recommended to change your source: wrap such addresses in
+   macros defined here, as shown below.  After this is done, the
    <tt>__SFR_OFFSET</tt> definition is no longer necessary and can be removed.
 
    Real example - this code could be used in a boot loader that is portable
@@ -84,28 +88,29 @@
 \endcode
 
    You can use the \c in/out/cbi/sbi/sbic/sbis instructions, without the
-   <tt>_SFR_IO_REG_P</tt> test, if you know that the register is in the I/O space
-   (as with \c SREG, for example).  If it isn't, the assembler will complain
-   (I/O address out of range 0...0x3f), so this should be fairly safe.
+   <tt>_SFR_IO_REG_P</tt> test, if you know that the register is in the I/O
+   space (as with \c SREG, for example).  If it isn't, the assembler will
+   complain (I/O address out of range 0...0x3f), so this should be fairly
+   safe.
 
    If you do not define \c __SFR_OFFSET (so it will be 0x20 by default), all
    special register addresses are defined as memory addresses (so \c SREG is
-   0x5f), and (if code size and speed are not important, and you don't
-   like the ugly #if above) you can always use lds/sts to access them.
-   But, this will not work if <tt>__SFR_OFFSET</tt> != 0x20, so use a different
-   macro (defined only if <tt>__SFR_OFFSET</tt> == 0x20) for safety:
+   0x5f), and (if code size and speed are not important, and you don't like
+   the ugly #if above) you can always use lds/sts to access them.  But, this
+   will not work if <tt>__SFR_OFFSET</tt> != 0x20, so use a different macro
+   (defined only if <tt>__SFR_OFFSET</tt> == 0x20) for safety:
 
 \code
 	sts	_SFR_ADDR(SPMCR), r24
 \endcode
 
-   In C programs, all 3 combinations of \c _SFR_ASM_COMPAT and <tt>__SFR_OFFSET</tt>
-   are supported - the \c _SFR_ADDR(SPMCR) macro can be used to get the
-   address of the \c SPMCR register (0x57 or 0x68 depending on device).
+   In C programs, all 3 combinations of \c _SFR_ASM_COMPAT and
+   <tt>__SFR_OFFSET</tt> are supported - the \c _SFR_ADDR(SPMCR) macro can be
+   used to get the address of the \c SPMCR register (0x57 or 0x68 depending on
+   device).
 
-   The old inp()/outp() macros are still supported, but not recommended
-   to use in new code.  The order of outp() arguments is confusing.
- */
+   The old inp()/outp() macros are still supported, but not recommended to use
+   in new code.  The order of outp() arguments is confusing. */
 
 #ifdef __ASSEMBLER__
 #define _SFR_ASM_COMPAT 1

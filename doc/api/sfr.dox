@@ -64,10 +64,9 @@ or they can assign a value directly to the symbolic address:
 	PORTA = 0x33;
 \endcode
 
-The compiler's choice of which method to use when actually accessing
-the IO port is completely independent of the way the programmer chooses to write
-the code.  So even if the programmer uses the memory-mapped paradigm
-and writes
+The compiler's choice of which method to use when actually accessing the IO
+port is completely independent of the way the programmer chooses to write the
+code.  So even if the programmer uses the memory-mapped paradigm and writes
 
 \code
 	PORTA |= 0x40;
