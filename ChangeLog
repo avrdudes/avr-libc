@@ -1,3 +1,8 @@
+2002-10-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/ina90.h include/avr/pgmspace.h:
+		Move __LPM & Co from ina90.h to pgmspace.h
+
 2002-10-13  Theodore A. Roth  <troth@openavr.org>
 
 	* avr-libc.spec.in: Added docs subpackage for user manual.

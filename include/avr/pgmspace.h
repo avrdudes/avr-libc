@@ -34,6 +34,7 @@
  */
 
 /** \defgroup avr_pgmspace Program Space String Utilities
+    \code #include <avr/io.h> \endcode
     \code #include <avr/pgmspace.h> \endcode
 
     The functions in this module provide interfaces for a program to access
@@ -54,8 +55,6 @@
 
 #define __need_size_t
 #include <stddef.h>
-
-/* #include <avr/io.h> */
 
 #ifndef __ATTR_CONST__
 #define __ATTR_CONST__ __attribute__((__const__))
@@ -89,13 +88,78 @@ typedef long long prog_long_long PROGMEM;
 
 #define PSTR(s) ({static char __c[] PROGMEM = (s); __c;})
 
-/* _LPM(), _ELPM() */
-#include <avr/ina90.h>
+#define __LPM_enhanced__(addr) ({		\
+	unsigned short __addr16 = (unsigned short)(addr); \
+	unsigned char __result;			\
+	__asm__ (				\
+		"lpm %0, Z"			\
+		: "=r" (__result)		\
+		: "z" (__addr16)		\
+	);					\
+	__result;				\
+ })
+
+#define __LPM_classic__(addr) ({		\
+	unsigned short __addr16 = (unsigned short)(addr); \
+	unsigned char __result;			\
+	__asm__ (				\
+		"lpm" "\n\t"			\
+		"mov %0, r0"			\
+		: "=r" (__result)		\
+		: "z" (__addr16)		\
+		: "r0"				\
+	);					\
+	__result;				\
+ })
+
+/* Only for devices with more than 64K of program memory.
+   RAMPZ must be defined (see iom103.h).  */
+
+#define __ELPM_enhanced__(addr) ({		\
+	unsigned long __addr32 = (unsigned long)(addr); \
+	unsigned char __result;			\
+	__asm__ (				\
+		"out %2, %C1" "\n\t"		\
+		"movw r30, %1" "\n\t"		\
+		"elpm %0, Z"			\
+		: "=r" (__result)		\
+		: "r" (__addr32),		\
+		  "I" (_SFR_IO_ADDR(RAMPZ))	\
+		: "r30", "r31"			\
+	);					\
+	__result;				\
+ })
+
+#define __ELPM_classic__(addr) ({		\
+	unsigned long __addr32 = (unsigned long)(addr); \
+	unsigned char __result;			\
+	__asm__ (				\
+		"out %2, %C1" "\n\t"		\
+		"mov r31, %B1" "\n\t"		\
+		"mov r30, %A1" "\n\t"		\
+		"elpm" "\n\t"			\
+		"mov %0, r0"			\
+		: "=r" (__result)		\
+		: "r" (__addr32),		\
+		  "I" (_SFR_IO_ADDR(RAMPZ))	\
+		: "r0", "r30", "r31"		\
+	);					\
+	__result;				\
+ })
+
+#if defined (__AVR_ENHANCED__)
+#define  __LPM(addr)  __LPM_enhanced__(addr)
+#define __ELPM(addr) __ELPM_enhanced__(addr)
+#else
+#define  __LPM(addr)  __LPM_classic__(addr)
+#define __ELPM(addr) __ELPM_classic__(addr)
+#endif
+
 
 static inline unsigned char __lpm_inline(unsigned short __addr) __ATTR_CONST__;
 static inline unsigned char __lpm_inline(unsigned short __addr)
 {
-	return _LPM(__addr);
+	return __LPM(__addr);
 }
 
 #ifdef RAMPZ  /* >64K program memory (ATmega103) */
@@ -113,14 +177,14 @@ static inline unsigned char __lpm_inline(unsigned short __addr)
 static inline unsigned char __elpm_inline(unsigned long __addr) __ATTR_CONST__;
 static inline unsigned char __elpm_inline(unsigned long __addr)
 {
-	return _ELPM(__addr);
+	return __ELPM(__addr);
 }
 #endif
 
 #if 0
 #define PRG_RDB(addr) __lpm_inline((unsigned short)(addr))
 #else
-#define PRG_RDB(addr) _LPM((unsigned short)(addr))
+#define PRG_RDB(addr) __LPM((unsigned short)(addr))
 #endif
 
 /** \ingroup avr_pgmspace
