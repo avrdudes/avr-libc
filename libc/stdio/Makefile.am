@@ -31,13 +31,20 @@
 noinst_LIBRARIES = lib.a libprintf_min.a libprintf_flt.a
 
 lib_a_c_sources =	\
+	clearerr.c	\
 	fclose.c	\
 	fdevopen.c	\
+	feof.c		\
+	ferror.c	\
+	fgetc.c		\
+	fgets.c		\
 	fprintf.c	\
 	fprintf_p.c	\
 	fputc.c		\
 	fputs.c		\
 	fputs_p.c	\
+	getchar.c	\
+	gets.c		\
 	printf.c	\
 	printf_p.c	\
 	putchar.c	\
@@ -49,6 +56,7 @@ lib_a_c_sources =	\
 	sprintf_p.c
 
 lib_a_asm_sources =	\
+	getc.S		\
 	putc.S
 
 lib_a_SOURCES = $(lib_a_c_sources) $(lib_a_asm_sources)
