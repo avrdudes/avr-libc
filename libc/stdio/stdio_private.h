@@ -51,7 +51,7 @@ struct __file {
 #define __SMBF	0x0400		/* buf is from malloc */
 #endif
 	int	size;		/* size of buffer */
-	int	len;		/* characters written so far */
+	int	len;		/* characters read or written so far */
 	int	(*put)(char);	/* function to write one char to device */
 	int	(*get)(void);	/* function to read one char from device */
 };
@@ -60,3 +60,8 @@ struct __file {
 #define PRINTF_MIN 1
 #define PRINTF_STD 2
 #define PRINTF_FLT 3
+
+/* values for SCANF_LEVEL */
+#define SCANF_MIN 1
+#define SCANF_STD 2
+#define SCANF_FLT 3

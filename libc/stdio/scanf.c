@@ -29,30 +29,18 @@
 
 /* $Id$ */
 
+#include <stdarg.h>
 #include <stdio.h>
 
-#include "stdio_private.h"
-
 int
-ungetc(int c, FILE *stream)
+scanf(const char *fmt, ...)
 {
+	va_list ap;
+	int i;
 
-	/*
-	 * Streams that are not readable, or streams that already had
-	 * had an ungetc() before will cause an error.
-	 *
-	 * ungetc(EOF, ...) causes an error per definitionem.
-	 */
-	if ((stream->flags & __SRD) == 0 ||
-	    (stream->flags & __SUNGET) != 0 ||
-	    c == EOF)
-		return EOF;
+	va_start(ap, fmt);
+	i = vfscanf(stdin, fmt, ap);
+	va_end(ap);
 
-	stream->unget = c;
-	stream->flags |= __SUNGET;
-	stream->flags &= ~__SEOF;
-	stream->len--;
-
-	return stream->unget;
+	return i;
 }
-

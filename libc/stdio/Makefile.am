@@ -28,7 +28,9 @@
 
 ## Process this file with automake to generate Makefile.in
 
-noinst_LIBRARIES = lib.a libprintf_min.a libprintf_flt.a
+noinst_LIBRARIES = lib.a \
+	libprintf_min.a libprintf_flt.a \
+	libscanf_min.a libscanf_flt.a
 
 lib_a_c_sources =	\
 	clearerr.c	\
@@ -44,6 +46,8 @@ lib_a_c_sources =	\
 	fputs.c		\
 	fputs_p.c	\
 	fread.c		\
+	fscanf.c	\
+	fscanf_p.c	\
 	fwrite.c	\
 	getchar.c	\
 	gets.c		\
@@ -52,10 +56,14 @@ lib_a_c_sources =	\
 	putchar.c	\
 	puts.c		\
 	puts_p.c	\
+	scanf.c		\
+	scanf_p.c	\
 	snprintf.c	\
 	snprintf_p.c	\
 	sprintf.c	\
 	sprintf_p.c	\
+	sscanf.c	\
+	sscanf_p.c	\
 	ungetc.c
 
 lib_a_asm_sources =	\
@@ -68,7 +76,7 @@ lib_a_c_objs = $(lib_a_c_sources:%.c=%.o)
 
 lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
 
-lib_a_LIBADD = vfprintf_std.o
+lib_a_LIBADD = vfprintf_std.o vfscanf_std.o
 
 libprintf_min_a_SOURCES=
 
@@ -78,9 +86,17 @@ libprintf_flt_a_SOURCES=
 
 libprintf_flt_a_LIBADD = vfprintf_flt.o
 
+libscanf_min_a_SOURCES=
+
+libscanf_min_a_LIBADD = vfscanf_min.o
+
+libscanf_flt_a_SOURCES=
+
+libscanf_flt_a_LIBADD = vfscanf_flt.o
+
 # must be added to the package, but automake doesn't know them as source
 # files until now
-EXTRA_DIST = vfprintf.c stdio_private.h
+EXTRA_DIST = vfprintf.c vfscanf.c stdio_private.h
 
 # content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
 # according to the multilib subdir (see acinclude.m4 in top directory)
@@ -107,3 +123,14 @@ vfprintf_flt.o: vfprintf.c
 	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_FLT \
 	-c $(srcdir)/vfprintf.c -o $@
 
+vfscanf_min.o: vfscanf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_MIN \
+	-c $(srcdir)/vfscanf.c -o $@
+
+vfscanf_std.o: vfscanf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_STD \
+	-c $(srcdir)/vfscanf.c -o $@
+
+vfscanf_flt.o: vfscanf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_FLT \
+	-c $(srcdir)/vfscanf.c -o $@

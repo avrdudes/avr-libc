@@ -1,5 +1,21 @@
 2003-01-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* Makefile.am: include the scanf family.
+	* include/stdio.h: Ditto.
+	* libc/stdio/Makefile.am: Ditto.
+	* libc/stdio/fgetc.c: Account len, used by scanf.
+	* libc/stdio/stdio_private.h: New defs for scanf..
+	* libc/stdio/ungetc.c: Account len, used by scanf.
+	* libc/stdio/fscanf.c: New file.
+	* libc/stdio/fscanf_p.c: New file.
+	* libc/stdio/scanf.c: New file.
+	* libc/stdio/scanf_p.c: New file.
+	* libc/stdio/sscanf.c: New file.
+	* libc/stdio/sscanf_p.c: New file.
+	* libc/stdio/vfscanf.c: New file.
+
+2003-01-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/examples/demo/demo.dox: fix the command line for
 		extracting the contents of .eeprom.
 

@@ -80,7 +80,9 @@ toollibdir = $(tooldir)/lib$(MULTISUBDIR)
 
 AR_FLAGS = rc
 
-toollib_LIBRARIES = libc.a libm.a libprintf_min.a libprintf_flt.a
+toollib_LIBRARIES = libc.a libm.a \
+	libprintf_min.a libprintf_flt.a \
+	libscanf_min.a libscanf_flt.a
 toollib_DATA = $(AVR_CRT_AT90) $(AVR_CRT_TINY) $(AVR_CRT_MEGA) $(AVR_CRT_OTHER)
 
 # must be defined as empty, so that make dist will work
@@ -88,6 +90,8 @@ libc_a_SOURCES =
 libm_a_SOURCES =
 libprintf_min_a_SOURCES =
 libprintf_flt_a_SOURCES =
+libscanf_min_a_SOURCES =
+libscanf_flt_a_SOURCES =
 
 EXTRA_DIST = config-ml.in doconf dodist domake reconf LICENSE common include
 
@@ -108,14 +112,20 @@ libprintf_min.a: libc/stdio/libprintf_min.a
 	ln libc/stdio/libprintf_min.a $@ >/dev/null 2>/dev/null ||\
 	cp libc/stdio/libprintf_min.a $@
 
-libm/libprintf_min.a: ; @true
-
 libprintf_flt.a: libc/stdio/libprintf_flt.a
 	rm -f $@
 	ln libc/stdio/libprintf_flt.a $@ >/dev/null 2>/dev/null ||\
 	cp libc/stdio/libprintf_flt.a $@
 
-libm/libm.a: ; @true
+libscanf_min.a: libc/stdio/libscanf_min.a
+	rm -f $@
+	ln libc/stdio/libscanf_min.a $@ >/dev/null 2>/dev/null ||\
+	cp libc/stdio/libscanf_min.a $@
+
+libscanf_flt.a: libc/stdio/libscanf_flt.a
+	rm -f $@
+	ln libc/stdio/libscanf_flt.a $@ >/dev/null 2>/dev/null ||\
+	cp libc/stdio/libscanf_flt.a $@
 
 crt%.o: crt1/crt%.o
 	rm -f $@					       

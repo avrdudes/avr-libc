@@ -61,7 +61,7 @@
     Due to space constraints, some functionality has not been
     implemented at all (like some of the \c printf conversions that
     have been left out).  Nevertheless, potential users of this
-    implementation should be warned: the \c printf family, although
+    implementation should be warned: the \c printf and \c scanf families, although
     usually associated with presumably simple things like the
     famous "Hello, world!" program, is actually a fairly complex
     one which causes quite some amount of code space to be taken,
@@ -74,7 +74,8 @@
     In order to allow programmers a code size vs. functionality tradeoff,
     the function vfprintf() which is the heart of the printf family can be
     selected in different flavours using linker options.  See the
-    documentation of vfprintf() for a detailed description.
+    documentation of vfprintf() for a detailed description.  The same
+    applies to vfscanf() and the \c scanf family of functions.
 
     The standard streams \c stdin, \c stdout, and \c stderr are
     provided, but contrary to the C standard, since avr-libc has no
@@ -102,7 +103,7 @@
     each other, thus calling \c fclose() on such a stream will
     effectively also close all of its aliases (\ref stdio_note3 "note 3").
 
-    All the \c printf family functions come in two flavours: the
+    All the \c printf and \c scanf family functions come in two flavours: the
     standard name, where the format string is expected to be in
     SRAM, as well as a version with "_P" appended where the format
     string is expected to reside in the flash ROM.  The macro
@@ -342,7 +343,6 @@ extern int	fclose(FILE *__stream);
            If the precision is missing, it is taken as 6; if the precision
            is explicitly zero, no decimal-point character appears.  If a
            decimal point appears, at least one digit appears before it.
-
    - \c gG The double argument is converted in style \c f or \c e (or
            \c F or \c E for \c G conversions).  The precision
            specifies the number of significant digits.  If the
@@ -592,6 +592,189 @@ extern int	feof(FILE *__stream);
    by a call to clearerr().
  */
 extern int	ferror(FILE *__stream);
+
+/**
+   Formatted input.  This function is the heart of the \c scanf
+   family of functions.
+
+   Characters are read from \c stream and processed in a way
+   described by \c fmt.  Conversion results will be assigned to the
+   parameters passed via \c ap.
+
+   The format string \c fmt is scanned for conversion specifications.
+   Anything that doesn't comprise a conversion specification is taken
+   as text that is matched literally against the input.  White space
+   in the format string will match any white space in the data
+   (including none), all other characters match only itself.
+   Processing is aborted as soon as the data and format string no
+   longer match, or there is an error or end-of-file condition on
+   \c stream.
+
+   Most conversions skip leading white space before starting the
+   actual conversion.
+
+   Conversions are introduced with the character \b %.  Possible
+   options can follow the \b %:
+
+   - a \c * indicating that the conversion should be performed but
+     the conversion result is to be discarded; no parameters will
+     be processed from \c ap,
+   - the character \c h indicating that the argument is a pointer
+     to <tt>short int</tt> (rather than <tt>int</tt>),
+   - the character \c l indicating that the argument is a pointer
+     to <tt>long int</tt> (rather than <tt>int</tt>, for integer
+     type conversions), or a pointer to \c double (for floating
+     point conversions).
+
+   In addition, a maximal field width may be specified as a nonzero
+   positive decimal integer, which will restrict the conversion to at
+   most this many characters from the input stream.  This field width
+   is limited to at most 127 characters which is also the default
+   value (except for the <tt>%c</tt> conversion that defaults to 1).
+
+   The following conversion flags are supported:
+
+   - \c % Matches a literal \c % character.  This is not a conversion.
+   - \c d Matches an optionally signed decimal integer; the next
+     pointer must be a pointer to \c int.
+   - \c i Matches an optionally signed integer; the next pointer must
+     be a pointer to \c int.  The integer is read in base 16 if it
+     begins with \b 0x or \b 0X, in base 8 if it begins with \b 0, and
+     in base 10 otherwise.  Only characters that correspond to the
+     base are used.
+   - \c o Matches an octal integer; the next pointer must be a pointer to
+     <tt>unsigned int</tt>.
+   - \c u Matches an optionally signed decimal integer; the next
+     pointer must be a pointer to <tt>unsigned int</tt>.
+   - \c x Matches an optionally signed hexadecimal integer; the next
+     pointer must be a pointer to <tt>unsigned int</tt>.
+   - \c f Matches an optionally signed floating-point number; the next
+     pointer must be a pointer to \c float.
+   - <tt>e, g, E, G</tt> Equivalent to \c f.
+   - \c s
+     Matches a sequence of non-white-space characters; the next pointer
+     must be a pointer to \c char, and the array must be large enough to
+     accept all the sequence and the terminating \c NUL character.  The
+     input string stops at white space or at the maximum field width,
+     whichever occurs first.
+   - \c c
+     Matches a sequence of width count characters (default 1); the next
+     pointer must be a pointer to \c char, and there must be enough room
+     for all the characters (no terminating \c NUL is added).  The usual
+     skip of leading white space is suppressed.  To skip white space
+     first, use an explicit space in the format.
+   - \c [
+     Matches a nonempty sequence of characters from the specified set
+     of accepted characters; the next pointer must be a pointer to \c
+     char, and there must be enough room for all the characters in the
+     string, plus a terminating \c NUL character.  The usual skip of
+     leading white space is suppressed.  The string is to be made up
+     of characters in (or not in) a particular set; the set is defined
+     by the characters between the open bracket \c [ character and a
+     close bracket \c ] character.  The set excludes those characters
+     if the first character after the open bracket is a circumflex
+     \c ^.  To include a close bracket in the set, make it the first
+     character after the open bracket or the circumflex; any other
+     position will end the set.  The hyphen character \c - is also
+     special; when placed between two other characters, it adds all
+     intervening characters to the set.  To include a hyphen, make it
+     the last character before the final close bracket.  For instance,
+     <tt>[^]0-9-]</tt> means the set <em>everything except close
+     bracket, zero through nine, and hyphen</em>.  The string ends
+     with the appearance of a character not in the (or, with a
+     circumflex, in) set or when the field width runs out.
+   - \c p
+     Matches a pointer value (as printed by <tt>%p</tt> in printf()); the
+     next pointer must be a pointer to \c void.
+   - \c n
+     Nothing is expected; instead, the number of characters consumed
+     thus far from the input is stored through the next pointer, which
+     must be a pointer to \c int.  This is not a conversion, although it
+     can be suppressed with the \c * flag.
+
+     These functions return the number of input items assigned, which
+     can be fewer than provided for, or even zero, in the event of a
+     matching failure.  Zero indicates that, while there was input
+     available, no conver­ sions were assigned; typically this is due
+     to an invalid input character, such as an alphabetic character
+     for a <tt>%d</tt> conversion.  The value \c EOF is returned if an input
+     failure occurs before any conversion such as an end-of-file
+     occurs.  If an error or end-of-file occurs after conversion has
+     begun, the number of conversions which were successfully
+     completed is returned.
+
+     By default, all the conversion described above are available
+     except the floating-point conversions, and the <tt>%[</tt> conversion.
+     These conversions will be available in the extended version
+     provided by the library \c libscanf_flt.a.  Note that either of
+     these conversions requires the availability of a buffer that
+     needs to be obtained at run-time using malloc().  If this buffer
+     cannot be obtained, the operation is aborted, returning the
+     value \c EOF.  To link a program against the extended version,
+     use the following compiler flags in the link stage:
+
+     \code
+     -Wl,-u,vfscanf -lscanf_flt -lm
+     \endcode
+
+     A third version is available for environments that are tight
+     on space.  This version is provided in the library
+     \c libscanf_min.a, and can be requested using the following
+     options in the link stage:
+
+     \code
+     -Wl,-u,vfscanf -lscanf_min -lm
+     \endcode
+
+     In addition to the restrictions of the standard version, this
+     version implements no field width specification, no conversion
+     assignment suppression flag (\c *), no <tt>%n</tt> specification, and
+     no general format character matching at all.  All characters in
+     \c fmt that do not comprise a conversion specification will
+     simply be ignored, including white space (that is normally used
+     to consume \e any amount of white space in the input stream).
+     However, the usual skip of initial white space in the formats
+     that support it is implemented.
+*/
+extern int	vfscanf(FILE *__stream, const char *__fmt, va_list __ap);
+
+/**
+   The function \c fscanf performs formatted input, reading the
+   input data from \c stream.
+
+   See vfscanf() for details.
+ */
+extern int	fscanf(FILE *__stream, const char *__fmt, ...);
+
+/**
+   Variant of fscanf() using a \c fmt string in program memory.
+ */
+extern int	fscanf_P(FILE *__stream, const char *__fmt, ...);
+
+/**
+   The function \c scanf performs formatted input from stream \c stdin.
+
+   See vfscanf() for details.
+ */
+extern int	scanf(const char *__fmt, ...);
+
+/**
+   Variant of scanf() where \c fmt resides in program memory.
+ */
+extern int	scanf_P(const char *__fmt, ...);
+
+/**
+   The function \c sscanf performs formatted input, reading the
+   input data from the buffer pointed to by \c buf.
+
+   See vfscanf() for details.
+ */
+extern int	sscanf(const char *__buf, const char *__fmt, ...);
+
+/**
+   Variant of sscanf() using a \c fmt string in program memory.
+ */
+extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
 
 #ifdef __cplusplus
 }
