@@ -1,3 +1,8 @@
+2004-10-21  Eric B. Weddington <ericW@evcohs.com>
+
+    * include/avr/iom64.h: Fix bit identifer ADFR to ADATE.
+    [Bug #10733]
+
 2004-10-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/assembler.dox: Add section about gas

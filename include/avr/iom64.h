@@ -827,7 +827,7 @@
 /* ADC Control and status Register A - ADCSRA */
 #define    ADEN         7
 #define    ADSC         6
-#define    ADFR         5
+#define    ADATE        5
 #define    ADIF         4
 #define    ADIE         3
 #define    ADPS2        2
