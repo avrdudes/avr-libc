@@ -39,11 +39,6 @@
 	- Denis Chertykov and Marek Michalkiewicz [ marekm@linux.org.pl ] for
 	developing the standard libraries and startup code for \b AVR-GCC.
 
-	- Theodore A. Roth [ troth@verinet.com ] for setting up avr-libc's
-	CVS repository, bootstrapping the documentation project using
-	doxygen, and continued maintenance of the project on
-	http://savannah.gnu.org/projects/avr-libc
-
 	- Uros Platise for developing the AVR programmer tool, \b uisp.
 
 	- Joerg Wunsch [ joerg@FreeBSD.ORG ] for adding all the AVR development
