@@ -1,3 +1,20 @@
+*** Changes in avr-libc-1.0.3:
+
+* Extend eeprom API.
+
+New macro:
+  eeprom_busy_wait
+
+* Bugs fixed:
+
+  [#2143] malloc() routines chunk smaller than requested
+  [#2233] Documentation issues with inline asm
+  [#5454] Inline functions results in undefined reference when optimize level 0
+          is used.
+  [#7556] printf and friends improperly handle non-null termnated strings when
+          a %s argument has a precision.
+  [#7802] vfscanf problem with unsigned long (patch #2554)
+
 *** Changes in avr-libc-1.0.2:
 
 * Extend crc16 API.
