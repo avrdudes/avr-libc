@@ -17,6 +17,8 @@
           compiler would then insert the appropriate ROM address.
   [#9704] suggested putc() behavior breaks binary transfer (doc fix)
   [#10078] strsep() should not be pure
+  [#10420] sscanf(), If there is a decimal number followed by the
+           character '_' in the buffer, you can't get the the number.
 
 * Other changes:
 
