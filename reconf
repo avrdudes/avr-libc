@@ -68,6 +68,6 @@ fi
 set -x
 
 ${ACLOCAL}
-${AUTOHEADER}
+#${AUTOHEADER}
 ${AUTOCONF}
 ${AUTOMAKE} --foreign --add-missing --copy

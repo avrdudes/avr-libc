@@ -1,3 +1,10 @@
+2004-09-19  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* configure.in: Don't generate version.h.
+	* reconf: Don't run autoheader.
+
 2004-09-10  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/iomx8.h (OCIE0B): Fix value. [Bug #10001]
