@@ -65,7 +65,8 @@
 /* Data Register, Port E */
 #define PORTE	_SFR_IO8(0x07)
 
-/* 0x08 reserved */
+/* On Chip Debug Register (reserved) */
+#define OCDR    _SFR_IO8(0x08)
 
 /* UART0 Baud Rate Register */
 #define UBRR0	_SFR_IO8(0x09)
@@ -119,6 +120,7 @@
 
 /* UART Baud Register High */
 #define UBRRH	_SFR_IO8(0x20)
+#define UBRRHI	UBRRH           /* New name in datasheet (1138F-FPSLI-06/02) */
 
 /* Watchdog Timer Control Register */
 #define WDTCR	_SFR_IO8(0x21)
@@ -241,7 +243,291 @@
 
 #define _VECTORS_SIZE 144
 
-/* Bit numbers - XXX not here yet */
+/* Bit numbers (SFRs alphabetically sorted) */
+
+/* ASSR */
+#define AS2           3
+#define TCN2UB        2
+#define OCR2UB        1
+#define TCR2UB        0
+
+/* DDRD */
+#define DDD7          7
+#define DDD6          6
+#define DDD5          5
+#define DDD4          4
+#define DDD3          3
+#define DDD2          2
+#define DDD1          1
+#define DDD0          0
+
+/* DDRE */
+#define DDE7          7
+#define DDE6          6
+#define DDE5          5
+#define DDE4          4
+#define DDE3          3
+#define DDE2          2
+#define DDE1          1
+#define DDE0          0
+
+/* EIMF */
+#define INTF3         7
+#define INTF2         6
+#define INTF1         5
+#define INTF0         4
+#define INT3          3
+#define INT2          2
+#define INT1          1
+#define INT0          0
+
+/* FISCR */
+#define FIADR         7
+#define XFIS1         1
+#define XFIS0         0
+
+/* FISUA */
+#define FIF3          7
+#define FIF2          6
+#define FIF1          5
+#define FIF0          4
+#define FINT3         3
+#define FINT2         2
+#define FINT1         1
+#define FINT0         0
+
+/* FISUB */
+#define FIF7          7
+#define FIF6          6
+#define FIF5          5
+#define FIF4          4
+#define FINT7         3
+#define FINT6         2
+#define FINT5         1
+#define FINT4         0
+
+/* FISUC */
+#define FIF11         7
+#define FIF10         6
+#define FIF9          5
+#define FIF8          4
+#define FINT11        3
+#define FINT10        2
+#define FINT9         1
+#define FINT8         0
+
+/* FISUD */
+#define FIF15         7
+#define FIF14         6
+#define FIF13         5
+#define FIF12         4
+#define FINT15        3
+#define FINT14        2
+#define FINT13        1
+#define FINT12        0
+
+/* MCUR */
+#define JTRF          7
+#define JTD           6
+#define SE            5
+#define SM1           4
+#define SM0           3
+#define PORF          2
+#define WDRF          1
+#define EXTRF         0
+
+/* OCDR (reserved) */
+#define IDRD          7
+
+/* PIND */
+#define PIND7         7
+#define PIND6         6
+#define PIND5         5
+#define PIND4         4
+#define PIND3         3
+#define PIND2         2
+#define PIND1         1
+#define PIND0         0
+
+/* PINE */
+#define PINE7         7
+#define PINE6         6
+#define PINE5         5
+#define PINE4         4
+#define PINE3         3
+#define PINE2         2
+#define PINE1         1
+#define PINE0         0
+
+/* PORTD */
+#define PORTD7        7
+#define PORTD6        6
+#define PORTD5        5
+#define PORTD4        4
+#define PORTD3        3
+#define PORTD2        2
+#define PORTD1        1
+#define PORTD0        0
+
+/* PORTE */
+/*
+   PE7 = IC1  / INT3 (alternate)
+   PE6 = OC1A / INT2 (alternate)
+   PE5 = OC1B / INT1 (alternate)
+   PE4 = ET11 / INT0 (alternate)
+   PE3 = OC2  / RX1  (alternate)
+   PE2 =      / TX1  (alternate)
+   PE1 = OC0  / RX0  (alternate)
+   PE0 = ET0  / TX0  (alternate)
+ */
+#define PORTE7        7
+#define PORTE6        6
+#define PORTE5        5
+#define PORTE4        4
+#define PORTE3        3
+#define PORTE2        2
+#define PORTE1        1
+#define PORTE0        0
+
+/* SFIOR */
+#define PSR2          1
+#define PSR10         0
+
+/* SFTCR */
+#define FMXOR         3
+#define WDTS          2
+#define DBG           1
+#define SRST          0
+
+/* TCCR0 */
+#define FOC0          7
+#define PWM0          6
+#define COM01         5
+#define COM00         4
+#define CTC0          3
+#define CS02          2
+#define CS01          1
+#define CS00          0
+
+/* TCCR1A */
+#define COM1A1        7
+#define COM1A0        6
+#define COM1B1        5
+#define COM1B0        4
+#define FOC1A         3
+#define FOC1B         2
+#define PWM11         1
+#define PWM10         0
+
+/* TCCR1B */
+#define ICNC1         7
+#define ICES1         6
+#define ICPE          5
+#define CTC1          3
+#define CS12          2
+#define CS11          1
+#define CS10          0
+
+/* TCCR2 */
+#define FOC2          7
+#define PWM2          6
+#define COM21         5
+#define COM20         4
+#define CTC2          3
+#define CS22          2
+#define CS21          1
+#define CS20          0
+
+/* TIFR */
+#define TOV1          7
+#define OCF1A         6
+#define OCF1B         5
+#define TOV2          4
+#define ICF1          3
+#define OCF2          2
+#define TOV0          1
+#define OCF0          0
+
+/* TIMSK */
+#define TOIE1         7
+#define OCIE1A        6
+#define OCIE1B        5
+#define TOIE2         4
+#define TICIE1        3
+#define OCIE2         2
+#define TOIE0         1
+#define OCIE0         0
+
+/* TWAR */
+/* #define TWA           1 */ /* TWA is bits 7:1 */
+#define TWGCE         0
+
+/* TWCR */
+#define TWINT         7
+#define TWEA          6
+#define TWSTA         5
+#define TWSTO         4
+#define TWWC          3
+#define TWEN          2
+#define TWIE          0
+
+/* TWSR */
+#define TWS7          7
+#define TWS6          6
+#define TWS5          5
+#define TWS4          4
+#define TWS3          3
+
+/* UBRRHI
+   Bits 11..8 of UART1 are bits 7..4 of UBRRHI.
+   Bits 11..8 of UART0 are bits 3..0 of UBRRHI. */
+/* #define UBRRHI1       4 */
+/* #define UBRRHI0       0 */
+
+/* UCSR0A */
+#define RXC0          7
+#define TXC0          6
+#define UDRE0         5
+#define FE0           4
+#define OR0           3
+#define U2X0          1
+#define MPCM0         0
+
+/* UCSR0B */
+#define RXCIE0        7
+#define TXCIE0        6
+#define UDRIE0        5
+#define RXEN0         4
+#define TXEN0         3
+#define CHR90         2
+#define RXB80         1
+#define TXB80         0
+
+/* UCSR1A */
+#define RXC1          7
+#define TXC1          6
+#define UDRE1         5
+#define FE1           4
+#define OR1           3
+#define U2X1          1
+#define MPCM1         0
+
+/* UCSR1B */
+#define RXCIE1        7
+#define TXCIE1        6
+#define UDRIE1        5
+#define RXEN1         4
+#define TXEN1         3
+#define CHR91         2
+#define RXB81         1
+#define TXB81         0
+
+/* WDTCR */
+#define WDTOE         4
+#define WDE           3
+#define WDP2          2
+#define WDP1          1
+#define WDP0          0
 
 /*
    Last memory addresses - depending on configuration, it is possible

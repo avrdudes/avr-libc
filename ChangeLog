@@ -1,3 +1,9 @@
+2003-04-14  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/ioat94k.h: Add missing register bit definitions.
+	[Contributed by Thibaud Gaillard <thibaud.gaillard@free.fr>]
+
 2003-04-12  Marek Michalkiewicz  <marekm@amelek.gda.pl>
 
 	* common/macros.inc: Check __AVR_MEGA__, not FLASHEND [Bug #3184].
