@@ -120,10 +120,12 @@ fix_anchors: $(FIX_ANCHORS)
 	mv fix.html assembler.html
 	echo timestamp > fix_anchors
 
-fix_javascript: $(USER_MANUAL)/tree.js $(USER_MANUAL)/tree.html
+fix_javascript: $(USER_MANUAL)/tree.js $(USER_MANUAL)/tree.html \
+	$(USER_MANUAL)/index.html
 	perl $(top_srcdir)/doc/api/unjs.pl \
 		$(USER_MANUAL)/tree.js \
-		$(USER_MANUAL)/tree.html 
+		$(USER_MANUAL)/tree.html \
+		$(USER_MANUAL)/index.html
 	echo timestamp > fix_javascript
 
 # Rule for generating PDF output

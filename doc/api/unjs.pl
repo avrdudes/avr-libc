@@ -12,8 +12,13 @@
 # $Id$
 #
 
+die "usage: unjs tree.js tree.html index.html" unless $#ARGV == 2;
+
 $treejs = $ARGV[0];
 $treehtml = $ARGV[1];
+$indexhtml = $ARGV[2];
+
+parsejs($treejs) || exit 1;
 
 open(HTML, $treehtml) || die "Cannot open $treehtml: $!\n";
 open(NEW, ">${treehtml}.new") ||
@@ -23,7 +28,7 @@ while (<HTML>) {
     print NEW;
     if (/^<\/script>$/) {
 	print NEW "<noscript>\n";
-	parsejs($treejs);
+	print NEW $nojs;
 	print NEW "</noscript>\n";
     }
 }
@@ -31,11 +36,29 @@ close(NEW);
 close(HTML);
 rename($treehtml, "${treehtml}.bak") &&
     rename("${treehtml}.new", $treehtml);
+
+open(HTML, $indexhtml) || die "Cannot open $indexhtml: $!\n";
+open(NEW, ">${indexhtml}.new") ||
+    die "Cannot create ${indexhtml}.new: $!\n";
+
+while (<HTML>) {
+    print NEW;
+    if (/^<\/frameset>$/) {
+	print NEW "<noframes>\n";
+	print NEW $nojs;
+	print NEW "</noframes>\n";
+    }
+}
+close(NEW);
+close(HTML);
+rename($indexhtml, "${indexhtml}.bak") &&
+    rename("${indexhtml}.new", $indexhtml);
 exit(0);
 
 sub parsejs
 {
     my ($f) = @_;
+    my ($i, $err);
 
     open(JS, $f) || die "Cannot open $f: $!\n";
 
@@ -51,9 +74,14 @@ sub parsejs
 	    $resvar = $1;
 	    $l = $';
 	}
-	$i = parsefun($l) || next;
+	$i = parsefun($l);
+	if ($i == 0) {
+	    $errs++;
+	    next;
+	}
     }
     close(JS);
+    return $errs == 0;
 }
 
 sub parsefun
@@ -95,17 +123,17 @@ sub parseg
 
     if ($name eq "Fld") {
 	if ($lnk ne "") {
-	    print NEW "<a href=\"$lnk\" target=\"basefrm\"><b>$text</b></a><br>\n";
+	    $nojs .= "<a href=\"$lnk\" target=\"basefrm\"><b>$text</b></a><br>\n";
 	} else {
-	    print NEW "$text<br>\n";
+	    $nojs .= "$text<br>\n";
 	}
     } else {
 	# gLnk
 	if ($lnk ne "") {
-	    print NEW "<a href=\"$lnk\" target=\"basefrm\">$text</a><br>\n";
+	    $nojs .= "<a href=\"$lnk\" target=\"basefrm\">$text</a><br>\n";
 	} else {
 	    # Huh, link without target?
-	    print NEW "$text<br>\n";
+	    $nojs .= "$text<br>\n";
 	}
     }
 }
