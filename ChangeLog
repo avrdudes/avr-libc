@@ -1,3 +1,8 @@
+2003-06-05  Eric B. Weddington  <eric@ecentral.com>
+
+	* include/avr/pgmspace.h: Add __volatile__ to asm macros to fix optimizer
+	blunders; use inttypes.h; formatting.
+
 2003-06-03  Theodore A. Roth  <troth@openavr.org>
 
 	* include/avr/signal.h: Remove carriage returns.

@@ -59,8 +59,10 @@
 #define __PGMSPACE_H_ 1
 
 #define __need_size_t
+#include <inttypes.h>
 #include <stddef.h>
 #include <avr/io.h>
+
 
 #ifndef __ATTR_CONST__
 #define __ATTR_CONST__ __attribute__((__const__))
@@ -87,6 +89,7 @@ typedef int prog_int PROGMEM;
 typedef long prog_long PROGMEM;
 typedef long long prog_long_long PROGMEM;
 
+
 /** \ingroup avr_pgmspace
     \def PSTR(s)
 
@@ -95,59 +98,64 @@ typedef long long prog_long_long PROGMEM;
 #define PSTR(s) ({static char __c[] PROGMEM = (s); __c;})
 
 
+#define __LPM_classic__(addr)   \
+({                              \
+    uint16_t __addr16 = (uint16_t)(addr); \
+    uint8_t __result;           \
+    __asm__ __volatile__        \
+    (                           \
+        "lpm" "\n\t"            \
+        "mov %0, r0" "\n\t"     \
+        : "=r" (__result)       \
+        : "z" (__addr16)        \
+        : "r0"                  \
+    );                          \
+    __result;                   \
+})
 
-#define __LPM_classic__(addr) ({		\
-	unsigned short __addr16 = (unsigned short)(addr); \
-	unsigned char __result;			\
-	__asm__ (				\
-		"lpm" "\n\t"			\
-		"mov %0, r0"			\
-		: "=r" (__result)		\
-		: "z" (__addr16)		\
-		: "r0"				\
-	);					\
-	__result;				\
- })
 
 
-
-#define __LPM_enhanced__(addr) ({		\
-	unsigned short __addr16 = (unsigned short)(addr); \
-	unsigned char __result;			\
-	__asm__ (				\
-		"lpm %0, Z"			\
-		: "=r" (__result)		\
-		: "z" (__addr16)		\
-	);					\
-	__result;				\
- })
+#define __LPM_enhanced__(addr)  \
+({                              \
+    uint16_t __addr16 = (uint16_t)(addr); \
+    uint8_t __result;           \
+    __asm__ __volatile__        \
+    (                           \
+        "lpm %0, Z+" "\n\t"     \
+        : "=r" (__result)       \
+        : "z" (__addr16)        \
+    );                          \
+    __result;                   \
+})
 
 
 #define __LPM_word_classic__(addr)      \
 ({                                      \
-	unsigned short __addr16 = (unsigned short)(addr);   \
-	unsigned short __result;            \
-	__asm__ (                           \
-		"lpm"           "\n\t"          \
-		"mov %A0, r0"   "\n\t"          \
+    uint16_t __addr16 = (uint16_t)(addr);   \
+    uint16_t __result;                  \
+    __asm__ __volatile__                \
+    (                                   \
+        "lpm"           "\n\t"          \
+        "mov %A0, r0"   "\n\t"          \
         "adiw r30, 1"   "\n\t"          \
         "lpm"           "\n\t"          \
         "mov %B0, r0"   "\n\t"          \
-		: "=r" (__result)               \
-		: "z" (__addr16)                \
-		: "r0"                          \
-	);                                  \
-	__result;                           \
+        : "=r" (__result)               \
+        : "z" (__addr16)                \
+        : "r0"                          \
+    );                                  \
+    __result;                           \
 })
 
 
 #define __LPM_word_enhanced__(addr)     \
 ({                                      \
-    unsigned short __addr16 = (unsigned short)(addr);   \
-    unsigned short __result;            \
-    __asm__ (                           \
+    uint16_t __addr16 = (uint16_t)(addr);   \
+    uint16_t __result;                  \
+    __asm__ __volatile__                \
+    (                                   \
         "lpm %A0, Z+"   "\n\t"          \
-        "lpm %B0, Z"    "\n\t"          \
+        "lpm %B0, Z+"   "\n\t"          \
         : "=r" (__result)               \
         : "z" (__addr16)                \
     );                                  \
@@ -193,45 +201,49 @@ typedef long long prog_long_long PROGMEM;
 
 /* The classic functions are needed for ATmega103. */
 
-#define __ELPM_classic__(addr) ({		\
-	unsigned long __addr32 = (unsigned long)(addr); \
-	unsigned char __result;			\
-	__asm__ (				\
-		"out %2, %C1" "\n\t"		\
-		"mov r31, %B1" "\n\t"		\
-		"mov r30, %A1" "\n\t"		\
-		"elpm" "\n\t"			\
-		"mov %0, r0"			\
-		: "=r" (__result)		\
-		: "r" (__addr32),		\
-		  "I" (_SFR_IO_ADDR(RAMPZ))	\
-		: "r0", "r30", "r31"		\
-	);					\
-	__result;				\
+#define __ELPM_classic__(addr)      \
+({                                  \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    uint8_t __result;               \
+    __asm__ __volatile__            \
+    (                               \
+        "out %2, %C1" "\n\t"        \
+        "mov r31, %B1" "\n\t"       \
+        "mov r30, %A1" "\n\t"       \
+        "elpm" "\n\t"               \
+        "mov %0, r0" "\n\t"         \
+        : "=r" (__result)           \
+        : "r" (__addr32),           \
+          "I" (_SFR_IO_ADDR(RAMPZ)) \
+        : "r0", "r30", "r31"        \
+    );                              \
+    __result;                       \
 })
 
 
-#define __ELPM_enhanced__(addr) ({		\
-	unsigned long __addr32 = (unsigned long)(addr); \
-	unsigned char __result;			\
-	__asm__ (				\
-		"out %2, %C1" "\n\t"		\
-		"movw r30, %1" "\n\t"		\
-		"elpm %0, Z"			\
-		: "=r" (__result)		\
-		: "r" (__addr32),		\
-		  "I" (_SFR_IO_ADDR(RAMPZ))	\
-		: "r30", "r31"			\
-	);					\
-	__result;				\
+#define __ELPM_enhanced__(addr)     \
+({                                  \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    uint8_t __result;               \
+    __asm__ __volatile__            \
+    (                               \
+        "out %2, %C1" "\n\t"        \
+        "movw r30, %1" "\n\t"       \
+        "elpm %0, Z+" "\n\t"        \
+        : "=r" (__result)           \
+        : "r" (__addr32),           \
+          "I" (_SFR_IO_ADDR(RAMPZ)) \
+        : "r30", "r31"              \
+    );                              \
+    __result;                       \
 })
 
 
 #define __ELPM_word_classic__(addr)     \
 ({                                      \
-    unsigned long __addr32 = (unsigned long)(addr); \
-    unsigned short __result;            \
-    __asm__                             \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    uint16_t __result;                  \
+    __asm__ __volatile__                \
     (                                   \
         "out %2, %C1"   "\n\t"          \
         "mov r31, %B1"  "\n\t"          \
@@ -256,14 +268,14 @@ typedef long long prog_long_long PROGMEM;
 
 #define __ELPM_word_enhanced__(addr)    \
 ({                                      \
-    unsigned long __addr32 = (unsigned long)(addr); \
-    unsigned short __result;            \
-    __asm__                             \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    uint16_t __result;                  \
+    __asm__ __volatile__                \
     (                                   \
         "out %2, %C1"   "\n\t"          \
         "movw r30, %1"  "\n\t"          \
         "elpm %A0, Z+"  "\n\t"          \
-        "elpm %B0, Z"   "\n\t"          \
+        "elpm %B0, Z+"  "\n\t"          \
         : "=r" (__result)               \
         : "r" (__addr32),               \
           "I" (_SFR_IO_ADDR(RAMPZ))     \
