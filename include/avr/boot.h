@@ -51,49 +51,46 @@
     The following code shows typical usage of the boot API.
 
     \code
+    #include <inttypes.h>
     #include <avr/interrupt.h>
     #include <avr/pgmspace.h>
     
-    #define ADDRESS     0x1C000UL
-    
-    void boot_test(void)
+    void boot_program_page (uint32_t page, uint8_t *buf)
     {
-        unsigned char buffer[8];
-    
+        uint16_t i;
+        uint8_t sreg;
+
+        // Disable interrupts.
+
+        sreg = SREG;
         cli();
     
-        // Erase page.
-        boot_page_erase((unsigned long)ADDRESS);
-        while(boot_rww_busy())
+        eeprom_busy_wait ();
+
+        boot_page_erase (page);
+        boot_spm_busy_wait ();      // Wait until the memory is erased.
+
+        for (i=0; i<SPM_PAGESIZE; i+=2)
         {
-            boot_rww_enable();
+            // Set up little-endian word.
+
+            uint16_t w = *buf++;
+            w += (*buf++) << 8;
+        
+            boot_page_fill (page + i, w);
         }
-    
-        // Write data to buffer a word at a time. Note incrementing address
-        // by 2. SPM_PAGESIZE is defined in the microprocessor IO header file.
-        for(unsigned long i = ADDRESS; i < ADDRESS + SPM_PAGESIZE; i += 2)
-        {
-            boot_page_fill(i, (i-ADDRESS) + ((i-ADDRESS+1) << 8));
-        }
-    
-        // Write page.
-        boot_page_write((unsigned long)ADDRESS);
-        while(boot_rww_busy())
-        {
-            boot_rww_enable();
-        }
-    
-        sei();
-    
-        // Read back the values and display.
-        // (The show() function is undefined and is used here as an example
-        // only.)
-        for(unsigned long i = ADDRESS; i < ADDRESS + 256; i++)
-        {
-            show(utoa(pgm_read_byte(i), buffer, 16));
-        }
-    
-        return;
+
+        boot_page_write (page);     // Store buffer in flash page.
+        boot_spm_busy_wait();       // Wait until the memory is written.
+
+        // Reenable RWW-section again. We need this if we want to jump back
+        // to the application after bootloading.
+
+        boot_rww_enable ();
+
+        // Re-enable interrupts (if they were ever enabled).
+
+        SREG = sreg;
     }\endcode */
 
 #include <avr/eeprom.h>
@@ -180,8 +177,6 @@
 
 #define __boot_page_fill_normal(address, data)   \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
@@ -199,8 +194,6 @@
 
 #define __boot_page_fill_alternate(address, data)\
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
@@ -220,8 +213,6 @@
 
 #define __boot_page_fill_extended(address, data) \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %4\n\t"                       \
@@ -241,8 +232,6 @@
 
 #define __boot_page_erase_normal(address)        \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -257,8 +246,6 @@
 
 #define __boot_page_erase_alternate(address)     \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -275,8 +262,6 @@
 
 #define __boot_page_erase_extended(address)      \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
@@ -293,8 +278,6 @@
 
 #define __boot_page_write_normal(address)        \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -309,8 +292,6 @@
 
 #define __boot_page_write_alternate(address)     \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -327,8 +308,6 @@
 
 #define __boot_page_write_extended(address)      \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
@@ -345,8 +324,6 @@
 
 #define __boot_rww_enable()                      \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "sts %0, %1\n\t"                         \
@@ -358,8 +335,6 @@
 
 #define __boot_rww_enable_alternate()            \
 ({                                               \
-    boot_spm_busy_wait();                        \
-    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "sts %0, %1\n\t"                         \
@@ -374,8 +349,6 @@
 #define __boot_lock_bits_set(lock_bits)                    \
 ({                                                         \
     uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
-    boot_spm_busy_wait();                                  \
-    eeprom_busy_wait();                                    \
     __asm__ __volatile__                                   \
     (                                                      \
         "ldi r30, 1\n\t"                                   \
@@ -393,8 +366,6 @@
 #define __boot_lock_bits_set_alternate(lock_bits)          \
 ({                                                         \
     uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
-    boot_spm_busy_wait();                                  \
-    eeprom_busy_wait();                                    \
     __asm__ __volatile__                                   \
     (                                                      \
         "ldi r30, 1\n\t"                                   \
@@ -485,5 +456,52 @@
 #define boot_lock_bits_set(lock_bits) __boot_lock_bits_set(lock_bits)
 
 #endif
+
+#define __boot_eeprom_spm_safe(func, address, data) \
+do { \
+    boot_spm_busy_wait();                       \
+    eeprom_busy_wait();                         \
+    func (address, data);                       \
+} while (0)
+
+/** \ingroup avr_boot
+
+    Same as boot_page_fill() except it waits for eeprom and spm operations to
+    complete before filling the page. */
+
+#define boot_page_fill_safe(address, data) \
+    __boot_eeprom_spm_safe (boot_page_fill, address, data)
+
+/** \ingroup avr_boot
+
+    Same as boot_page_erase() except it waits for eeprom and spm operations to
+    complete before erasing the page. */
+
+#define boot_page_erase_safe(address, data) \
+    __boot_eeprom_spm_safe (boot_page_erase, address, data)
+
+/** \ingroup avr_boot
+
+    Same as boot_page_write() except it waits for eeprom and spm operations to
+    complete before writing the page. */
+
+#define boot_page_write_safe(address, data) \
+    __boot_eeprom_spm_safe (boot_page_wrte, address, data)
+
+/** \ingroup avr_boot
+
+    Same as boot_rww_enable() except waits for eeprom and spm operations to
+    complete before enabling the RWW mameory. */
+
+#define boot_rww_enable_safe(address, data) \
+    __boot_eeprom_spm_safe (boot_rww_enable, address, data)
+
+/** \ingroup avr_boot
+
+    Same as boot_lock_bits_set() except waits for eeprom and spm operations to
+    complete before setting the lock bits. */
+
+#define boot_lock_bits_set_safe(address, data) \
+    __boot_eeprom_spm_safe (boot_lock_bits_set, address, data)
 
 #endif /* _AVR_BOOT_H_ */

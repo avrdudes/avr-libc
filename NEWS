@@ -1,5 +1,29 @@
 *** Changes since avr-libc-1.0:
 
+* Change boot API.
+
+The boot API internals have changed such that it is not compatible with the
+1.0.x API.
+
+These macros have been changed so that they no longer wait for SPM and EEPROM
+operations to complete. It turns out that doing those checks all the time is
+not needed and tends to bloat the code. Removing the checks allows you to
+write more compact code (see the example in avr/boot.h).
+
+  boot_page_fill
+  boot_page_erase
+  boot_page_write
+  boot_rww_enable
+  boot_lock_bits_set
+
+If you want the old behaviour (1.0.x compatible), use these new macros:
+
+  boot_page_fill_safe
+  boot_page_erase_safe
+  boot_page_write_safe
+  boot_rww_enable_safe
+  boot_lock_bits_set_safe
+
 * Extend eeprom API.
 
 New macro:

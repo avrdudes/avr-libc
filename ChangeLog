@@ -1,3 +1,28 @@
+2004-03-04  Theodore A. Roth  <troth@openavr.org>
+
+	* NEWS: Add note about boot API changes.
+	* include/avr/boot.h: Change example to show a more efficient usage
+	of the API.
+	(__boot_page_fill_normal): Remove checks for spm and eeprom busy. These
+	are redundant checks in normal usage and just bloat the bootloader.
+	(__boot_page_fill_alternate): Ditto.
+	(__boot_page_fill_extended): Ditto.
+	(__boot_page_erase_normal): Ditto.
+	(__boot_page_erase_alternate): Ditto.
+	(__boot_page_erase_extended): Ditto.
+	(__boot_page_write_normal): Ditto.
+	(__boot_page_write_alternate): Ditto.
+	(__boot_page_write_extended): Ditto.
+	(__boot_rww_enable): Ditto.
+	(__boot_rww_enable_alternate): Ditto.
+	(__boot_lock_bits_set): Ditto.
+	(__boot_lock_bits_set_alternate): Ditto.
+	(boot_page_fill_safe): New macro.
+	(boot_page_erase_safe): New macro.
+	(boot_page_write_safe): New macro.
+	(boot_rww_enable_safe): New macro.
+	(boot_lock_bits_set_safe): New macro.
+
 2004-02-25  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
