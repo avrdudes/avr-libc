@@ -1,3 +1,12 @@
+2004-09-20  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/crc16.h: Update copyright year.
+	(_crc16_update): Add __volatile__ to inline asm. [Bug #10450]
+	(_crc_xmodem_update): Ditto.
+	(_crc_ccitt_update): Ditto.
+
 2004-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/stdlib.h: enable and document atof().
