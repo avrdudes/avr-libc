@@ -33,7 +33,8 @@
 
 MAINTAINERCLEANFILES = Makefile.in
 
-EXTRA_DIST           = avr-recv.c \
+EXTRA_DIST           = all-demos.dox \
+                       avr-recv.c \
                        io.c \
                        prg \
                        printf.h \
