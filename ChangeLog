@@ -8,7 +8,7 @@
 	(OCIE2A): Ditto.
 
 2004-09-10  Theodore A. Roth  <troth@openavr.org>
-[Contributed by Ren Liebscher <R.Liescher@gmx.de>]
+[Contributed by Rene Liebscher <R.Liebscher@gmx.de>]
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/avr/pgmspace.h (PSTR): Fix to allow PSTR to work with C++.
