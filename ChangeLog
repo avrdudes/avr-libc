@@ -1,3 +1,9 @@
+2004-10-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/assembler.dox: Add section about gas
+	pseudo-ops and AVR-specific operators
+	* doc/api/faq.dox: add xref to that section here.
+
 2004-10-18  Eric B. Weddington <ericw@evcohs.com>
 
 	* include/avr/iom169.h: Add compatibility defines to previous releases for

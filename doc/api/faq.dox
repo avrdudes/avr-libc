@@ -56,6 +56,7 @@
 -# \ref faq_clockskew
 -# \ref faq_intbits
 -# \ref faq_fuselow
+-# \ref faq_asmops
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1194,6 +1195,12 @@ Basically, fuses are just a bit in a special EEPROM area.  For
 technical reasons, erased E[E]PROM cells have all bits set to the
 value 1, so unprogrammed fuses also have a logical 1.  Conversely,
 programmed fuse cells read out as bit value 0.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_asmops Which AVR-specific assembler operators are available?
+
+See \ref ass_pseudoops.
 
 <small>Back to \ref faq_index.</small>
 
