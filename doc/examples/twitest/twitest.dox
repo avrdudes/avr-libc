@@ -54,7 +54,7 @@ master).  The bus is multi-master capable, and a particular device
 implementation can act as either master or slave at different times.
 Devices are addressed using a 7-bit address (coordinated by Philips)
 transfered as the first byte after the so-called start condition.  The
-LSB of that byte is R/¬W, i. e. it determines whether the request to
+LSB of that byte is R/~W, i. e. it determines whether the request to
 the slave is to read or write data during the next cycles.  (There is
 also an option to have devices using 10-bit addresses but that is not
 covered by this example.)
@@ -138,7 +138,7 @@ device).
 \par Note [6]
 
 When reading the EEPROM, a first device selection must be made with
-write intent (R/¬W bit set to 0 indicating a write operation) in order
+write intent (R/~W bit set to 0 indicating a write operation) in order
 to transfer the EEPROM address to start reading from.  This is called
 <em>master transmitter mode</em>.  Each completion of a particular
 step in TWI communication is indicated by an asserted TWINT bit in
@@ -171,7 +171,7 @@ the currently active master has released the bus.
 Next, the device slave is going to be reselected (using a so-called
 repeated start condition which is meant to guarantee that the bus
 arbitration will remain at the current master) using the same slave
-address (SLA), but this time with read intent (R/¬W bit set to 1) in
+address (SLA), but this time with read intent (R/~W bit set to 1) in
 order to request the device slave to start transfering data from the
 slave to the master in the next packet.
 
@@ -229,7 +229,7 @@ incremented after each write operation.
 
 \par Note [14]
 
-24Cxx devices can become write-protected by strapping their ¬WC pin to
+24Cxx devices can become write-protected by strapping their ~WC pin to
 logic high.  (Leaving it unconnected is explicitly allowed, and
 constitutes logic low level, i. e. no write protection.)  In case of a
 write protected device, all data transfer attempts will be NACKed by

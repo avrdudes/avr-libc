@@ -1,3 +1,7 @@
+2004-02-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/twitest/twitest.dox: Fix more formatting bugs.
+
 2004-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/twitest/twitest.dox: Fix formatting bugs.
