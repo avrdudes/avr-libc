@@ -240,15 +240,15 @@ wasted.  Thus, casual inspection of the generated assembler code
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_varinit Shouldn't I better initialize all my variables?
+<b>\subsection faq_varinit Shouldn't I initialize all my variables?
 </b>
 
 Global and static variables are guaranteed to be initialized to 0 by
 the C standard.  \c avr-gcc does this by placing the appropriate code
-into section \c .init4, see \ref sec_dot_init.  With respect to the
+into section \c .init4 (see \ref sec_dot_init).  With respect to the
 standard, this sentence is somewhat simplified (because the standard
-would allow for machines where the actual bit pattern used differs
-from all bits 0), but for the AVR target, in effect all integer-type
+allows for machines where the actual bit pattern used differs
+from all bits being 0), but for the AVR target, in general, all integer-type
 variables are set to 0, all pointers to a NULL pointer, and all
 floating-point variables to 0.0.
 
@@ -258,13 +258,13 @@ definition of the variable), they go into the \ref sec_dot_bss ".bss"
 section of the file.  This section simply records the size of the
 variable, but otherwise doesn't consume space, neither within the
 object file nor within flash memory.  (Of course, being a variable, it
-will consume space in the target's RAM.)
+will consume space in the target's SRAM.)
 
 In contrast, global and static variables that have an initializer go
 into the \ref sec_dot_data ".data" section of the file.  This will
-cause them to consume space in the file (in order to record the
+cause them to consume space in the object file (in order to record the
 initializing value), \e and in the flash ROM of the target device.
-The latter is needed since the flash ROM is the only way how the
+The latter is needed since the flash ROM is the only way that the
 compiler can tell the target device the value this variable is going
 to be initialized to.
 
@@ -276,8 +276,8 @@ it's usually not noticeable on larger machines like PCs, while the
 waste of flash ROM storage can be very painful on a small
 microcontroller like the AVR.
 
-So in general, initializers should only be written if they are
-non-zero.
+So in general, variables should only be explicitly initialized if the initial
+value is non-zero.
 
 <small>Back to \ref faq_index.
 </small>
@@ -363,7 +363,7 @@ in C programs.
 <small>Back to \ref faq_index.
 </small>
 
-<b>\subsection faq_gdboptimize When single-stepping through my program in avr-gdb, the PC "jumps around"
+<b>\subsection faq_gdboptimize Why does the PC randomly jump around when single-stepping through my program in avr-gdb?
 </b>
 
 When compiling a program with both optimization (\c -O) and debug
@@ -372,8 +372,8 @@ code watched in the debugger is optimized code.  While it is not
 guaranteed, very often this code runs with the exact same
 optimizations as it would run without the \c -g switch.
 
-This can have unwanted side effects.  Since the compiler is free in
-reordering code execution as long as the semantics do not change, code
+This can have unwanted side effects.  Since the compiler is free to
+reorder code execution as long as the semantics do not change, code
 is often rearranged in order to make it possible to use a single
 branch instruction for conditional operations.  Branch instructions
 can only cover a short range for the target PC (-63 through +64 words
@@ -382,12 +382,12 @@ directly, the compiler needs to work around it by combining a skip
 instruction together with a relative jump (\c rjmp) instruction, which
 will need one additional word of ROM.
 
-Other side effects of optimzation are that variable usage is
+Another side effect of optimzation is that variable usage is
 restricted to the area of code where it is actually used.  So if a
 variable was placed in a register at the beginning of some function,
 this same register can be re-used later on if the compiler notices
 that the first variable is no longer used inside that function, even
-though the function is still in lexical scope.  When trying to examine
+though the variable is still in lexical scope.  When trying to examine
 the variable in \c avr-gdb, the displayed result will then look
 garbled.
 
@@ -395,7 +395,8 @@ So in order to avoid these side effects, optimization can be turned
 off while debugging.  However, some of these optimizations might also
 have the side effect of uncovering bugs that would otherwise not be
 obvious, so it must be noted that turning off optimization can easily
-change the bug pattern.
+change the bug pattern. In most cases, you are better off leaving
+optimizations enabled while debugging.
 
 <small>Back to \ref faq_index.
 </small>
@@ -419,6 +420,12 @@ cannot be generated, since unlike a compiler, the assembler basically
 doesn't know about this.)  This is done using the (GNU) assembler
 option \c --gstabs.
 
+Example:
+
+\verbatim
+  $ avr-as -mmcu=atmega128 --gstabs -o foo.o foo.s
+\endverbatim
+
 When the assembler is not called directly but through the C compiler
 frontend (either implicitly by passing a source file ending in \c .S,
 or explicitly using <tt>-x assembler-with-cpp</tt>), the compiler
@@ -426,12 +433,22 @@ frontend needs to be told to pass the \c --gstabs option down to the
 assembler.  This is done using <tt>-Wa,--gstabs</tt>.  Please take
 care to \e only pass this option when compiling an assembler input
 file.  Otherwise, the assembler code that results from the C
-compilation stage will also get line number information, which greatly
+compilation stage will also get line number information, which
 confuses the debugger.
+
+\note You can also use <tt>-Wa,-gstabs</tt> since the compiler will add the
+extra \c '-' for you.
+
+Example:
+
+\verbatim
+  $ EXTRA_OPTS="-Wall -mmcu=atmega128 -x assembler-with-cpp"
+  $ avr-gcc -Wa,--gstabs ${EXTRA_OPTS} -c -o foo.o foo.S
+\endverbatim
 
 Also note that the debugger might get confused when entering a piece
 of code that has a non-local label before, since it then takes this
-label as the name of a new function that appears to has been entered.
+label as the name of a new function that appears to have been entered.
 Thus, the best practice to avoid this confusion is to only use
 non-local labels when declaring a new function, and restrict anything
 else to local labels.  Local labels consist just of a number only.
