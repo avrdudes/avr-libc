@@ -43,7 +43,7 @@ fputs_P(const char *str, FILE *stream)
 	if ((stream->flags & __SWR) == 0)
 		return EOF;
 
-	while ((c = PRG_RDB(str++)) != '\0')
+	while ((c = pgm_read_byte(str++)) != '\0')
 		if (stream->put(c) != 0)
 			rv = EOF;
 

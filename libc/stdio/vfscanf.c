@@ -120,7 +120,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 	if ((stream->flags & __SRD) == 0)
 		return EOF;
 
-	while ((c = ((stream->flags & __SPGM)? PRG_RDB(fmt++): *fmt++))) {
+	while ((c = ((stream->flags & __SPGM)? pgm_read_byte(fmt++): *fmt++))) {
 #if SCANF_LEVEL >= SCANF_FLT
 		if (flags & FLBRACKET) {
 			if (c == '^' && i == 0 && !(flags & FLNEGATE)) {

@@ -1,3 +1,10 @@
+2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fputs_p.c: replace PRG_RDB by pgm_read_byte
+	* libc/stdio/puts_p.c: Ditto.
+	* libc/stdio/vfprintf.c: Ditto.
+	* libc/stdio/vfscanf.c: Ditto.
+
 2004-07-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/strtod.S: fix parsing of a partial

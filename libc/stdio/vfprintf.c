@@ -138,7 +138,7 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 	if ((stream->flags & __SWR) == 0)
 		return EOF;
 
-	while ((c = ((stream->flags & __SPGM)? PRG_RDB(fmt++): *fmt++))) {
+	while ((c = ((stream->flags & __SPGM)? pgm_read_byte(fmt++): *fmt++))) {
 		if (flags & FLHASPERCENT) {
 			if (c >= '0' && c <= '9') {
 #if PRINTF_LEVEL > PRINTF_MIN

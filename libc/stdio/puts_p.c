@@ -43,7 +43,7 @@ puts_P(const char *str)
 	if ((stdout->flags & __SWR) == 0)
 		return EOF;
 
-	while ((c = PRG_RDB(str++)) != '\0')
+	while ((c = pgm_read_byte(str++)) != '\0')
 		if (stdout->put(c) != 0)
 			rv = EOF;
 	if (stdout->put('\n') != 0)
