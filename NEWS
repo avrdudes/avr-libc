@@ -9,6 +9,7 @@
   [#2924] strtod returns incorrect endptr
   [#8633] The PSTR() macro doesn't work with C++.
   [#9013] Macroses as a program block.
+  [#9348] asin (acos) & atan problem (64K boundary)
   [#9514] missing stdint.h.
   [#9669] Incorrect example for strings in flash.
           The FAQ entry did not extract the pointers from a ROM table

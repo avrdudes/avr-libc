@@ -1,8 +1,17 @@
+2004-11-01  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* NEWS: Add note about fix for bug #9348.
+	* libm/fplib/asin.S: Put lookup table into .progmem.gcc_fplib section.
+	[Bug #9348]
+	* libm/fplib/atan.S: Ditto.
+
 2004-10-21  Eric B. Weddington <ericw@evcohs.com>
 
-    * include/avr/iom64.h: Fix bit identifer ADFR to ADATE.
-    Left ADFR as a comptability with previous releases.
-    [Bug #10733]
+	* include/avr/iom64.h: Fix bit identifer ADFR to ADATE.
+	Left ADFR as a comptability with previous releases.
+	[Bug #10733]
 
 2004-10-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -12,8 +21,8 @@
 
 2004-10-18  Eric B. Weddington <ericw@evcohs.com>
 
-	* include/avr/iom169.h: Add compatibility defines to previous releases for
-	OCR1A[L/H] and OCR1B[L/H]. [Bug #9708]
+	* include/avr/iom169.h: Add compatibility defines to previous releases
+	for OCR1A[L/H] and OCR1B[L/H]. [Bug #9708]
 
 2004-09-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
