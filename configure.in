@@ -1,7 +1,8 @@
 # Autoconf configure script for avr libc/libm main directory.
 # Process this file with autoconf to produce a configure script.
 
-# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2002, 2003, 2004 
+#   Reinhard Jessich  <reinhard.jessich@telering.at>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -137,7 +138,7 @@ AC_CANONICAL_SYSTEM
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20031118)
+AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20040225)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)

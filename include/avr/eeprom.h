@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2003, 2004 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -72,6 +72,15 @@
     \returns 1 if EEPROM is ready for a new read/write operation, 0 if not. */
 
 #define eeprom_is_ready() bit_is_clear(EECR, EEWE)
+
+/** \def eeprom_busy_wait
+    \ingroup avr_eeprom
+
+    Loops until the eeprom is no longer busy.
+
+    \returns Nothing. */
+
+#define eeprom_busy_wait() do {} while (!eeprom_is_ready())
 
 #ifdef __cplusplus
 extern "C" {

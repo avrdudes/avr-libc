@@ -1,4 +1,4 @@
-/* Copyright (c) 2002-2003, Eric B. Weddington
+/* Copyright (c) 2002, 2003, 2004  Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -181,7 +181,7 @@
 #define __boot_page_fill_normal(address, data)   \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
@@ -200,7 +200,7 @@
 #define __boot_page_fill_alternate(address, data)\
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
@@ -221,7 +221,7 @@
 #define __boot_page_fill_extended(address, data) \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %4\n\t"                       \
@@ -242,7 +242,7 @@
 #define __boot_page_erase_normal(address)        \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -258,7 +258,7 @@
 #define __boot_page_erase_alternate(address)     \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -276,7 +276,7 @@
 #define __boot_page_erase_extended(address)      \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
@@ -294,7 +294,7 @@
 #define __boot_page_write_normal(address)        \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -310,7 +310,7 @@
 #define __boot_page_write_alternate(address)     \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -328,7 +328,7 @@
 #define __boot_page_write_extended(address)      \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
@@ -346,7 +346,7 @@
 #define __boot_rww_enable()                      \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "sts %0, %1\n\t"                         \
@@ -359,7 +359,7 @@
 #define __boot_rww_enable_alternate()            \
 ({                                               \
     boot_spm_busy_wait();                        \
-    while(!eeprom_is_ready());                   \
+    eeprom_busy_wait();                          \
     __asm__ __volatile__                         \
     (                                            \
         "sts %0, %1\n\t"                         \
@@ -375,7 +375,7 @@
 ({                                                         \
     uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
     boot_spm_busy_wait();                                  \
-    while(!eeprom_is_ready());                             \
+    eeprom_busy_wait();                                    \
     __asm__ __volatile__                                   \
     (                                                      \
         "ldi r30, 1\n\t"                                   \
@@ -394,7 +394,7 @@
 ({                                                         \
     uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
     boot_spm_busy_wait();                                  \
-    while(!eeprom_is_ready());                             \
+    eeprom_busy_wait();                                    \
     __asm__ __volatile__                                   \
     (                                                      \
         "ldi r30, 1\n\t"                                   \

@@ -1,5 +1,10 @@
 *** Changes since avr-libc-1.0:
 
+* Extend eeprom API.
+
+New macro:
+  eeprom_busy_wait
+
 * Extend crc16 API.
 
 New functions:

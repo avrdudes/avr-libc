@@ -1,3 +1,24 @@
+2004-02-25  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Add note about new eeprom macro.
+	* include/avr/boot.h: Update copyright year.
+	(__boot_page_fill_normal): Replace while loop with eeprom_busy_wait.
+	(__boot_page_fill_alternate): Ditto.
+	(__boot_page_fill_extended): Ditto.
+	(__boot_page_erase_normal): Ditto.
+	(__boot_page_erase_alternate): Ditto.
+	(__boot_page_erase_extended): Ditto.
+	(__boot_page_write_normal): Ditto.
+	(__boot_page_write_alternate): Ditto.
+	(__boot_page_write_extended): Ditto.
+	(__boot_rww_enable): Ditto.
+	(__boot_rww_enable_alternate): Ditto.
+	(__boot_lock_bits_set): Ditto.
+	(__boot_lock_bits_set_alternate): Ditto.
+	* include/avr/eeprom.h: Update copyright year.
+	(eeprom_busy_wait): New macro interface.
+
 2004-02-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/twitest/twitest.dox: Fix more formatting bugs.
