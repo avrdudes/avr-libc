@@ -1,5 +1,9 @@
 2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/TODO: remove obsolete entries.
+
+2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/math.h: document.
 
 2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

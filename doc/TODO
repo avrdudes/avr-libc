@@ -3,19 +3,16 @@ TODO for avr-libc:
  - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
      [Joerg has patch [1] for this that just needs some love before it's
      committed.]
- - finish porting newlib to AVR (may be useful especially for
-   larger devices, and for testing avr-gcc itself...)
  - optimize strlcpy and strlcat
      [Eric Weddington has submitted a patch [2] with optimized versions.
 	 Needs review/testing before commit.]
  - Fix asin(). Seems to be rather inaccurate for small numbers.
  - Document how to pre-program the EEPROM.
  - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
-   sys/systemcfg.h?, stdio.h?
+   sys/systemcfg.h?
  - Figure out how to remove __ prefix from function args in dox.
  - Doxument the following:
    * interfaces in:
-     + include/math.h
      + include/avr/crc16.h  ???
      + include/avr/delay.h  ???
      + include/avr/ina90.h  ???
@@ -27,13 +24,14 @@ TODO for avr-libc:
    * merge chapter 3 from Rich Neswold's doc. Needs some rewriting to
      update for newer tools. (explanation of start code)
    * gcrt1.S
-   * introduction
  - testsuite [4]
  - The following headers are #include'd in io.h, but don't exist:
    * iom32.h
    * iom64.h
    * iom8515.h
    * iom8535.h
+ - finish porting newlib to AVR (may be useful especially for
+   larger devices, and for testing avr-gcc itself...)
 
 [1] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000084.html
 [2] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000033.html
