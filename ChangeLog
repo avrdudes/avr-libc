@@ -1,10 +1,15 @@
 2003-06-20  Eric B. Weddington  <eric@ecentral.com>
 
-    * libc/misc/itoa.S: Fix for bug #4010 from Reiner Patommel.
-    * libc/misc/ltoa.S: ditto
-    * libc/misc/ultoa.S: ditto
-    * libc/misc/utoa.S: ditto
-    * include/stdlib.h: Update doxygen for these functions.
+	* include/string.h: Add declarations of new functions from Reiner.
+	* include/avr/pgmspace.h: ditto.
+
+2003-06-20  Eric B. Weddington  <eric@ecentral.com>
+
+	* libc/misc/itoa.S: Fix for bug #4010 from Reiner Patommel.
+	* libc/misc/ltoa.S: ditto
+	* libc/misc/ultoa.S: ditto
+	* libc/misc/utoa.S: ditto
+	* include/stdlib.h: Update doxygen for these functions.
 
 2003-06-20  Eric B. Weddington  <eric@ecentral.com>
 

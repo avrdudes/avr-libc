@@ -78,7 +78,9 @@ extern int strncasecmp(const char *, const char *, size_t) __ATTR_PURE__;
 extern size_t strnlen(const char *, size_t) __ATTR_PURE__;
 extern char *strrchr(const char *, int) __ATTR_PURE__;
 extern char *strrev(char *);
+extern char *strsep(char **, const char *) __ATTR_PURE__;
 extern char *strstr(const char *, const char *) __ATTR_PURE__;
+extern char *strtok_r(char *, const char *, char **) __ATTR_PURE__;
 extern char *strupr(char *);
 
 #ifdef __cplusplus

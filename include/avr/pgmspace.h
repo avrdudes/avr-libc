@@ -376,13 +376,16 @@ extern char *strcat_P(char *, PGM_P);
 extern int strcmp_P(const char *, PGM_P) __ATTR_PURE__;
 extern char *strcpy_P(char *, PGM_P);
 extern int strcasecmp_P(const char *, PGM_P) __ATTR_PURE__;
+extern size_t strlcat_P (char *, PGM_P, size_t );
+extern size_t strlcpy_P (char *, PGM_P, size_t );
 extern size_t strlen_P(PGM_P) __ATTR_CONST__; /* program memory can't change */
 extern int strncmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
+extern char *strncat_P(char *, PGM_P, size_t);
 extern char *strncpy_P(char *, PGM_P, size_t);
 
+
 #if 0  /* not implemented yet */
-extern char *strncat_P(char *, PGM_P, size_t);
 extern int printf_P(PGM_P, ...);
 extern int puts_P(PGM_P);
 extern int scanf_P(PGM_P, ...);
