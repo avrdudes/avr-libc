@@ -70,7 +70,7 @@ The following is a list of AVR devices currently supported by the library.
 - at90s4433
 - at90s4434
 - at90s8515
-- at90s8534
+- at90c8534
 - at90s8535
 
 \par ATmega Type Devices:
@@ -91,7 +91,6 @@ The following is a list of AVR devices currently supported by the library.
 
 \par ATtiny Type Devices:
 
-- attiny10 \ref supp_dev_footnote_one "[1]"
 - attiny11 \ref supp_dev_footnote_one "[1]"
 - attiny12 \ref supp_dev_footnote_one "[1]"
 - attiny15 \ref supp_dev_footnote_one "[1]"
