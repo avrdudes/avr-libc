@@ -90,6 +90,7 @@ GLOBAL(__fp_split1)
  #ifdef __ERRNO__
     LDI     rA3,EDOM       ; NaN is argument domain error !
  #endif
+    clr     r1
     RJMP    _U(__fp_nan)
 
           ENDFUNC

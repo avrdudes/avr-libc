@@ -1,3 +1,8 @@
+2004-12-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/fp_split.S: Clear r1 (__zero_reg__) upon NaN.
+	Fix for (serious) savannah bug #7667.
+
 2004-12-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/stdlib.h: Cosmetical doc change (for atof()).
