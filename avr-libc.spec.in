@@ -13,6 +13,9 @@
 # Don't build the debuginfo rpm
 %define debug_package %{nil}
 
+%define _with_docs 1
+%{?_without_docs: %define _with_docs 0}
+
 Summary: AVR libc.
 Name: avr-libc
 Version: %{libc_version}
@@ -29,12 +32,14 @@ Requires: avr-gcc >= 3.3
 Avr-libc is a C library for developing applications for Atmel AVR
 microcontrollers.
 
+%if %{_with_docs}
 ## The avr-libc-docs subpackage
 %package docs
 Summary: Documentation for avr-libc.
 Group: Avr/Documentation
 %description docs
 Documentation for avr-libc in html, postscript and pdf formats.
+%endif
 
 %prep
 %setup -q
@@ -44,8 +49,11 @@ rm -fr obj-%{_target_platform}
 mkdir obj-%{_target_platform}
 cd obj-%{_target_platform}
 
-../configure --prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir} \
-	--enable-doc
+../configure \
+%if %{_with_docs}
+	--enable-doc \
+%endif
+	--prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir}
 
 make
 
@@ -56,8 +64,10 @@ cd obj-%{_target_platform}
 make prefix=$RPM_BUILD_ROOT%{_prefix} mandir=$RPM_BUILD_ROOT%{_mandir} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} install
 
+%if %{_with_docs}
 gzip -9 doc/api/*.ps
 gzip -9 doc/api/*.pdf
+%endif
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
@@ -93,13 +103,18 @@ rm -rf ${RPM_BUILD_ROOT}
 ## will stay there. Rpm should _not_ removing things we've installed, but alas
 ## it does. Be sure to watch the output when you are building the packages.
 
+%if %{_with_docs}
 %files docs
 %defattr(-,root,root)
 %doc obj-%{_target_platform}/doc/api/avr-libc-user-manual
 %doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.ps.gz
 %doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.pdf.gz
+%endif
 
 %changelog
+* Tue Oct 21 2003 Theodore Roth <troth@openavr.org>
+- Allow disabling build of docs sub-package with "--without docs".
+
 * Thu Apr 17 2003 Theodore Roth <troth@openavr.org>
 - Don't build debuginfo package.
 - Don't run post install since it strips binaries.
