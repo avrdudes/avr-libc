@@ -1,5 +1,9 @@
 2005-02-07  Eric B. Weddington  <ericw@evcohs.com>
 
+    * doc/api/main_page.dox: Remove the untested label on devices list.
+
+2005-02-07  Eric B. Weddington  <ericw@evcohs.com>
+
     * doc/examples/twitest/twitest.c: Replace SYSCLK with F_CPU.
     [Fixes bug #11817]
     * NEWS: Update bugs fixed list.
