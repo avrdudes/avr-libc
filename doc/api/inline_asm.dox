@@ -28,7 +28,7 @@
 GCC-AVR<br>
 Inline Assembler<br>
 Cookbook<br>
-Version 1.4
+Version 1.5
 
 
 About this Document
@@ -82,6 +82,8 @@ harald.kipp@egnite.de
   Links added.
 - 2002/07/23: Converted to doxygen and merged into avr-libc project by 
   Theodore A. Roth.
+- 2002/08/10 V 1.5: Fixed variable name in clobber section. New section C
+  stubs added. (Harald Kipp)
 
 \subsection gcc_asm GCC asm Statement
 
@@ -781,7 +783,7 @@ variable.
         "inc __tmp_reg__"           "\n\t"
         "st %a1, __tmp_reg__"       "\n\t"
         "out __SREG__, %0"          "\n\t"
-        : "=&r" (t)
+        : "=&r" (s)
         : "e" (ptr)
     );
 }
@@ -805,7 +807,7 @@ case:
         "inc __tmp_reg__"           "\n\t"
         "st %a1, __tmp_reg__"       "\n\t"
         "out __SREG__, %0"          "\n\t"
-        : "=&r" (t)
+        : "=&r" (s)
         : "e" (ptr)
         : "memory"
     );
@@ -861,6 +863,59 @@ avr/include/iomacros.h:
 When used for the first time, \c L_%= may be translated to \c L_1404, the next
 usage might create \c L_1405 or whatever. In any case, the labels became unique
 too.
+
+\subsection asm_c_stubs C Stub Functions
+
+Macro definitions will include the same assembler code whenever they are
+referenced. This may not be acceptable for larger routines. In this case you
+may define a C stub function, containing nothing other than your assembler
+code.
+
+\code
+void delay(uint8_t ms)
+{
+    uint16_t cnt;
+    asm volatile (
+        "\n"
+        "L_dl1%=:" "\n\t"
+        "mov %A0, %A2" "\n\t"
+        "mov %B0, %B2" "\n"
+        "L_dl2%=:" "\n\t"
+        "sbiw %A0, 1" "\n\t"
+        "brne L_dl2%=" "\n\t"
+        "dec %1" "\n\t"
+        "brne L_dl1%=" "\n\t"
+        : "=&w" (cnt)
+        : "r" (ms), "r" (delay_count)
+        );
+}
+\endcode
+
+The purpose of this function is to delay the program execution by a specified
+number of milliseconds, using a counting loop. The global 16 bit variable
+delay_count must contain the CPU clock frequency in Hertz divided by 4000 and
+must have been set before calling this routine for the first time.  Like
+described in the clobber section, the routine uses a local variable to hold a
+temporary value.
+
+Another use for a local variable is a return value. The following function
+returns a 16 bit value read from two successive port addresses.
+
+\code
+uint16_t inw(uint8_t port)
+{
+    uint16_t result;
+    asm volatile (
+        "in %A0,%1" "\n\t"
+        "in %B0,(%1) + 1"
+        : "=r" (result)
+        : "I" (port)
+        );
+    return result;
+}
+\endcode
+
+\note inw() is supplied by avr-libc.
 
 \subsection c_names_in_asm C Names Used in Assembler Code
 
