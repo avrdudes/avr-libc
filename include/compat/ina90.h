@@ -29,6 +29,7 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
+/* copied from: Id: avr/ina90.h,v 1.8 2004/11/09 19:16:09 arcanum Exp */
 
 /*
    ina90.h
@@ -38,7 +39,7 @@
  */
 
 /*
-   ina90.h - this is an attempt to provide some compatibility with
+   compat/ina90.h - this is an attempt to provide some compatibility with
    header files that come with IAR C, to make porting applications
    between different compilers easier.  No 100% compatibility though.
  */

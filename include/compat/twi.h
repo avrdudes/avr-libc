@@ -29,9 +29,10 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
+/* copied from: Id: avr/twi.h,v 1.4 2004/11/01 21:19:54 arcanum Exp */
 
 /*
-   avr/twi.h - definitions for TWI: Two-Wire Interface or Twi Was I2c(tm).
+   compat/twi.h - definitions for TWI: Two-Wire Interface or Twi Was I2c(tm).
 
    Contributors:
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
