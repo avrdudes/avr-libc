@@ -8,6 +8,8 @@ TODO for avr-libc:
  - optimize strlcpy and strlcat
      [Eric Weddington has submitted a patch [2] with optimized versions.
 	 Needs review/testing before commit.]
+ - Fix asin(). Seems to be rather inaccurate for small numbers.
+ - Add API for sleep instruction.
  - Document how to pre-program the EEPROM.
  - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
    sys/systemcfg.h?, stdio.h?
@@ -24,7 +26,7 @@ TODO for avr-libc:
      + include/avr/parity.h (move to examples?)
    * the mechanism behind include/avr/io*.h ???
    * merge chapter 3 from Rich Neswold's doc. Needs some rewriting to
-     update for newer tools.
+     update for newer tools. (explanation of start code)
    * gcrt1.S
    * introduction
  - testsuite [4]
