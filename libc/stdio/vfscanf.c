@@ -73,9 +73,9 @@
 #define FLNEGATE	0x40	/* negate %[ set */
 
 /* bit set macros for %[ format */
-#define set_bit(i) \
+#define vscanf_set_bit(i) \
 	buf[(unsigned char)(i) / 8] |= (1 << (unsigned char)(i) % 8)
-#define bit_is_set(i) \
+#define vscanf_bit_is_set(i) \
 	(buf[(unsigned char)(i) / 8] & (1 << (unsigned char)(i) % 8))
 
 /*
@@ -130,7 +130,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 			if (c == '-') {
 				if (i == 0) {
 				  addbit:
-					set_bit(c);
+					vscanf_set_bit(c);
 					i++;
 					continue;
 				}
@@ -142,7 +142,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 				if (i == 0)
 					goto addbit;
 				if (flags & FLMINUS) /* trailing - before ] */
-					set_bit('-');
+					vscanf_set_bit('-');
 				if (flags & FLNEGATE)
 					for (i = 0; i < 256 / 8; i++)
 						buf[i] = ~buf[i];
@@ -151,7 +151,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 				while (width-- > 0) {
 					if ((i = getc(stream)) == EOF)
 						break;
-					if (!bit_is_set(i)) {
+					if (!vscanf_bit_is_set(i)) {
 						ungetc(i, stream);
 						break;
 					}
@@ -165,7 +165,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 			if (flags & FLMINUS) {
 				flags &= ~FLMINUS;
 				while ((unsigned char)j < (unsigned char)c) {
-					set_bit(j);
+					vscanf_set_bit(j);
 					j++;
 				}
 			}
@@ -401,7 +401,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 #if SCANF_LEVEL > SCANF_MIN
 				if (!(flags & FLSTAR)) {
 #endif /* SCANF_LEVEL > SCANF_MIN */
-					if (flags & (FLLONG | FLUNSIGNED)
+					if ((flags & (FLLONG | FLUNSIGNED))
 					    == (FLLONG | FLUNSIGNED))
 						*(va_arg(ap, unsigned long *)) =
 							a.ul;

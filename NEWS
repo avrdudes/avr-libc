@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [no-id] Fix TICIE1 value in usb header files.
+  [no-id] Fix bug introduced in fix for bug #7802 (missing parens).
 
 *** Changes in avr-libc-1.0.3:
 
