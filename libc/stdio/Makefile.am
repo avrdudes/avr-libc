@@ -66,7 +66,7 @@ lib_a_SOURCES = $(lib_a_c_sources) $(lib_a_asm_sources)
 
 lib_a_c_objs = $(lib_a_c_sources:%.c=%.o)
 
-lib_a_asm_objs = $(lib_a_c_sources:%.S=%.o)
+lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
 
 lib_a_LIBADD = vfprintf_std.o
 
