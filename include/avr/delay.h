@@ -32,9 +32,11 @@
 #ifndef _AVR_DELAY_H_
 #define _AVR_DELAY_H_ 1
 
+#include <inttypes.h>
+
 /* 8-bit count, 3 cycles/loop */
 static inline void
-_delay_loop_1(unsigned char __count)
+_delay_loop_1(uint8_t __count)
 {
 	asm volatile (
 		"1: dec %0" "\n\t"
@@ -46,7 +48,7 @@ _delay_loop_1(unsigned char __count)
 
 /* 16-bit count, 4 cycles/loop */
 static inline void
-_delay_loop_2(unsigned int __count)
+_delay_loop_2(uint16_t __count)
 {
 	asm volatile (
 		"1: sbiw %0,1" "\n\t"

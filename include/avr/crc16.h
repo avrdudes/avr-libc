@@ -28,6 +28,8 @@
 #ifndef _AVR_CRC16_H_
 #define _AVR_CRC16_H_
 
+#include <inttypes.h>
+
 /** \defgroup avr_crc CRC Computations
     \code#include <avr/crc16.h>\endcode
 
@@ -57,11 +59,11 @@
 
     This CRC is normally used in disk-drive controllers. */
 
-static inline unsigned int
-_crc16_update(unsigned int __crc, unsigned char __data)
+static inline uint16_t
+_crc16_update(uint16_t __crc, uint8_t __data)
 {
-	unsigned char __tmp;
-	unsigned int __ret;
+	uint8_t __tmp;
+	uint16_t __ret;
 
 	__asm__ (
 		"eor %A0,%2" "\n\t"
@@ -123,12 +125,12 @@ _crc16_update(unsigned int __crc, unsigned char __data)
     }
     \endcode */
 
-static inline unsigned int
-_crc_xmodem_update(unsigned int __crc, unsigned char __data)
+static inline uint16_t
+_crc_xmodem_update(uint16_t __crc, uint8_t __data)
 {
-    unsigned int __ret;         /* %B0:%A0 (alias for __crc) */
-    unsigned char __tmp1;       /* %1 */
-    unsigned char __tmp2;       /* %2 */
+    uint16_t __ret;             /* %B0:%A0 (alias for __crc) */
+    uint8_t __tmp1;             /* %1 */
+    uint8_t __tmp2;             /* %2 */
                                 /* %3  __data */
 
     __asm__ (
