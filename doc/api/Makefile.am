@@ -64,7 +64,7 @@ uninstall-local:
 	rm -rf $(DOC_INST_DIR)
 
 clean-local:
-	rm -rf html latex man
+	rm -rf avr-libc-api latex_src man
 
 # Rule for generating PDF output
 pdf: $(TARGET_DOX_PDF)
@@ -83,12 +83,12 @@ dox-html latex:
 	doxygen doxygen.config
 
 dox-pdf: latex
-	${MAKE} -C latex pdf
-	cp latex/refman.pdf avr-libc-api.pdf
+	cd latex_src && ${MAKE} pdf
+	cp latex_src/refman.pdf avr-libc-api.pdf
 
 dox-ps: latex
-	${MAKE} -C latex ps
-	cp latex/refman.ps avr-libc-api.ps
+	cd latex_src && ${MAKE} ps
+	cp latex_src/refman.ps avr-libc-api.ps
 
 install-dox-html: html
 	$(mkinstalldirs) $(DOC_INST_DIR)/html
@@ -100,12 +100,12 @@ install-dox-html: html
 
 install-dox-pdf: dox-pdf
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) latex/refman.pdf $(DOC_INST_DIR)/avr-libc-api.pdf
+	$(INSTALL_DATA) latex_src/refman.pdf $(DOC_INST_DIR)/avr-libc-api.pdf
 
 install-dox-ps: dox-ps
 	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) latex/refman.ps $(DOC_INST_DIR)/avr-libc-api.ps
+	$(INSTALL_DATA) latex_src/refman.ps $(DOC_INST_DIR)/avr-libc-api.ps
 
-.PHONY: ps pdf dox dox-pdf install-pdf install-html install-ps install-dox-html \
-	install-dox-ps install-dox-pdf
+.PHONY: html latex ps pdf dox dox-pdf install-pdf install-html install-ps \
+	install-dox-html install-dox-ps install-dox-pdf
 

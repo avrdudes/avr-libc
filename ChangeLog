@@ -1,3 +1,10 @@
+2002-08-03  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am: Remove use of directories as targets.
+	* doc/api/Makefile.am: Remove use of `${MAKE} -C` to improve portability.
+	* doc/api/doxygen.config.in: Changed html and latex output dirs to 
+	avr-libc-api and latex_src respectively.
+
 2002-08-02  Theodore A. Roth  <troth@verinet.com>
 
 	* Makefile.am: Make doc subdir conditional.
