@@ -167,6 +167,9 @@
 
 #endif /* !_SFR_ASM_COMPAT */
 
+#define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
+#define _SFR_WORD(sfr) _MMIO_WORD(_SFR_ADDR(sfr))
+
 /** \name Bit manipulation */
 
 /*@{*/
@@ -207,7 +210,7 @@
     This will return a 0 if the bit is clear, and non-zero
     if the bit is set. */
 
-#define bit_is_set(sfr, bit) (sfr & _BV(bit))
+#define bit_is_set(sfr, bit) (_SFR_BYTE(sfr) & _BV(bit))
 
 /** \def bit_is_clear
     \ingroup avr_sfr
@@ -218,7 +221,7 @@
     This will return non-zero if the bit is clear, and a 0
     if the bit is set. */
 
-#define bit_is_clear(sfr, bit) (!(sfr & _BV(bit)))
+#define bit_is_clear(sfr, bit) (!(_SFR_BYTE(sfr) & _BV(bit)))
 
 /** \def loop_until_bit_is_set
     \ingroup avr_sfr
@@ -298,10 +301,6 @@
 
 
 #define outb(sfr, val) (_SFR_BYTE(sfr) = (val))
-
-
-#define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
-#define _SFR_WORD(sfr) _MMIO_WORD(_SFR_ADDR(sfr))
 
 /* The outb/outw macros now have the correct order of arguments.  */
 

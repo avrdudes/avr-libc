@@ -1,3 +1,13 @@
+2004-04-22  Theodore A. Roth  <troth@openavr.org>
+
+	[This fixes bug #8649.]
+	* include/avr/sfr_defs.h (bit_is_set): Wrap sfr arg with _SFR_BYTE().
+	(bit_is_clear): Ditto.
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/sfr_defs.h: Move _SFR_BYTE() and _SFR_WORD() #defines to
+	be before first usage.
+
 2004-04-20  Theodore A. Roth  <troth@openavr.org>
 [Contributed by LAL@pro.onet.pl]
 
