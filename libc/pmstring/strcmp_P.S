@@ -36,7 +36,15 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; int strcmp_P(const char *s1, const char flash *s2)
+/** \ingroup avr_pgmspace
+    \fn int strcmp_P(const char *s1, PGM_P s2)
+
+    The strcmp_P() function is similar to strcmp() except that s2 is pointer
+    to a string in program space.
+
+    \returns The strcmp_P() function returns an integer less than, equal to,
+    or greater than zero if s1 is found, respectively, to be less than, to
+    match, or be greater than s2.  */
 
 	.text
 	.global	_U(strcmp_P)

@@ -179,7 +179,9 @@ _adjust:
 	brpl	_adjust_1
 	com		p_width					; make width positive
 	inc		p_width
-_adjust_1:							; strlen = Y - Z
+									; Need // in next line to stop doxygen
+									; from thinking strlen is a variable.
+_adjust_1:							; // strlen = Y - Z
 	mov		rA3, YH
 	mov		rA2, YL
 	mov		rA1, ZH

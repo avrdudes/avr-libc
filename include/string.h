@@ -45,6 +45,12 @@
 extern "C" {
 #endif
 
+/** \defgroup avr_string Strings
+    \code #include <string.h> \endcode
+
+    The string functions perform string operations on NULL terminated
+    strings.  */
+
 extern void *memccpy(void *, const void *, int, size_t);
 extern void *memchr(const void *, int, size_t) __ATTR_PURE__;
 extern int memcmp(const void *, const void *, size_t) __ATTR_PURE__;

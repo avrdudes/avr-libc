@@ -31,7 +31,15 @@
 #define src_hi r25
 #define src_lo r24
 
-; size_t strlen(const char *src)
+/** \ingroup avr_string
+    \fn size_t strlen(const char *src)
+    \brief Calculate the length of a string.
+
+    The strlen() function calculates the length of the string s, not including
+    the terminating `\0' character.
+
+    \returns The strlen() function returns the number of characters in s.  */
+
 ; 10 words, (14 + strlen(src) * 5) cycles
 
 	.text

@@ -46,7 +46,21 @@
 #define tmp r22
 #define cht r21
 
-; int strcasecmp_P(const char *s1, const char *s2)
+/** \ingroup avr_pgmspace
+    \fn int strcasecmp_P(const char *s1, PGM_P s2)
+    \brief Compare two strings ignoring case.
+
+    The strcasecmp_P() function compares the two strings s1 and s2, ignoring
+    the case of the characters.  It returns an integer less than, equal to, or
+    greater than zero if s1 is found, respectively, to be less than, to match,
+    or be greater than s2.
+
+    \param s1 A pointer to a string in the devices SRAM.
+    \param s2 A pointer to a string in the devices Flash.
+
+    \returns The strcasecmp_P() function returns an integer less than, equal
+    to, or greater than zero if s1 is found, respectively, to be less than, to
+    match, or be greater than s2.  */
 
     .text
     .global _U(strcasecmp_P)

@@ -33,7 +33,18 @@
 #define len_hi r23
 #define len_lo r22
 
-; size_t strnlen(const char *src, size_t len)
+/** \ingroup avr_string
+    \fn size_t strnlen(const char *src, size_t len)
+    \brief Determine the length of a fixed-size string.
+
+    The strnlen function returns the number of characters in the string
+    pointed to by s, not including the terminating '\0' character, but at most
+    maxlen. In doing this, strnlen looks only at the first maxlen characters
+    at s and never beyond s+maxlen.
+
+    \returns The strnlen function returns strlen(s), if that is less than
+    maxlen, or maxlen if there is no '\0' character among the first maxlen
+    characters pointed to by s. */
 
 	.text
 	.global	_U(strnlen)

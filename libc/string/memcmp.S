@@ -38,7 +38,18 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; int memcmp(const void *s1, const void *s2, size_t len)
+/** \ingroup avr_string
+    \fn int memcmp(const void *s1, const void *s2, size_t len)
+    \brief Compare memory areas
+    
+    The memcmp() function compares the first n bytes of the memory areas s1
+    and s2.  It returns an integer less than, equal to, or greater than zero
+    if s1 is found, respectively, to be less than, to match, or be greater
+    than s2.
+    
+    \returns The memcmp() function returns an integer less than, equal to, or
+    greater than zero if the first n bytes of s1 is found, respectively, to be
+    less than, to match, or be greater than the first n bytes of s2. */
 
 	.text
 	.global	_U(memcmp)

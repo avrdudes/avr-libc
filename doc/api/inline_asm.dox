@@ -1,0 +1,955 @@
+/* Copyright (c) 2001, 2002, Harald Kipp
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGE. */
+
+/** \page inline_asm Inline Asm
+
+GCC-AVR<br>
+Inline Assembler<br>
+Cookbook<br>
+Version 1.4
+
+
+About this Document
+
+The GNU C compiler for Atmel AVR RISC processors offers, to embed assembly
+language code into C programs. This cool feature may be used for manually
+optimizing time critical parts of the software or to use specific processor
+instruction, which are not available in the C language.
+
+Because of a lack of documentation, especially for the AVR version of the
+compiler, it may take some time to figure out the implementation details by
+studying the compiler and assembler source code. There are also a few sample
+programs available in the net. Hopefully this document will help to increase
+their number.
+
+It's assumed, that you are familiar with writing AVR assembler programs,
+because this is no AVR assembler programming tutorial. It's no C language
+tutorial either.
+
+Copyright (C) 2001-2002 by egnite Software GmbH
+
+Permission is granted to copy and distribute verbatim copies of this manual
+provided that the copyright notice and this permission notice are preserved on
+all copies. Permission is granted to copy and distribute modified versions of
+this manual provided that the entire resulting derived work is distributed
+under the terms of a permission notice identical to this one.
+
+This document describes version 3.0.2 of the compiler. There may be some
+parts, which hadn't been completely understood by the author himself and not
+all samples had been tested so far. Because the author is German and not
+familiar with the English language, there are definitely some typos and syntax
+errors in the text. As a programmer the author knows, that a wrong
+documentation sometimes might be worse than none. Anyway, he decided to offer
+his little knowledge to the public, in the hope to get enough response to
+improve this document. Feel free to contact the author via e-mail. For the
+latest release check http://www.ethernut.de.
+
+Herne, 17th of May 2002
+Harald Kipp
+harald.kipp@egnite.de
+
+
+\par History
+
+- 2001/05/07 V 1.1: Output and input lists sequence corrected in chapter
+  1. Multibyte operands added. Index added. Some typos corrected.
+- 2001/05/07 V 1.2: subi replaced by inc in clobber samples. Pointer type is
+  mandantory.
+- 2001/05/07 V 1.3: Pointer register modifier added.
+- 2002/05/16 V 1.4: Fixed the funny "risk" typo. New chapters C Names, FAQ and
+  Links added.
+- 2002/07/23: Converted to doxygen and merged into avr-libc project by 
+  Theodore A. Roth.
+
+\section gcc_asm GCC asm Statement
+
+Let's start with a simple example of reading a value from port D:
+
+\code
+asm("in %0, %1" : "=r" (value) : "I" (PORTD) : );
+\endcode
+
+Each \c asm statement is devided by colons into four parts:
+
+-# The assembler instructions, defined as a single string constant:
+   \code "in %0, %1" \endcode
+-# A list of output operands, separated by commas. Our example uses just one:
+   \code "=r" (value) \endcode
+-# A comma separated list of input operands. Again our example uses one
+   operand only: \code "I" (PORTD) \endcode
+-# Clobbered registers, left empty in our example.
+
+You can write assembler instructions in much the same way like normal
+assembler programs. However, registers and constants are used in a different
+way, if they refer to expressions of your C program. The connection between
+registers and C operands is specified in the second and third part of the \c asm
+instruction, resp. the list of input and output operands. The general form is
+
+\code
+asm(code : output operand list : input operand list : clobber list);
+\endcode
+
+In the code section operands are refered by a percent sign followed by a
+single digit. \c %0 refers to the first \c %1 to the second operand and so
+forth. In example above
+
+\c %0 refers to <tt>"=r" (value)</tt> and<br>
+\c %1 refers to <tt>"P" (port)</tt>.
+
+
+This may still look a little odd now, but the syntax of an operand list will
+be explained soon. Let us first look to that part of a compiler listing, which
+may have been generated from our example:
+
+\code
+        lds r24,value
+/* #APP */
+        in r24, 12
+/* #NOAPP */
+        sts value,r24
+\endcode
+
+The comments have been added by the compiler to inform the assembler, that the
+included code has not been generated by the compilation of C statements, but
+by inline assembler statements. The compiler selected \c r24, to get the
+value. It may have selected any other register, though. It may not explicitely
+load or store the value and it may even decide not to include your assembler
+code at all. All these decisions are part of the compiler's optimization
+strategie. For example, if you never use the variable value in the remaining
+part of the C program, the compiler will most likely remove your code, unless
+you switched off optimization. To avoid this, you can add the volatile
+attribute to the \c asm statement:
+
+\code
+asm volatile("in %0, %1" : "=r" (value) : "I" (PORTD) : );
+\endcode
+
+The last part of the \c asm instruction, the clobber list, is mainly used to tell
+the compiler about modifications done by the assembler code. This part may be
+omitted, all other parts are required, but may be left empty. If your
+assembler routine won't use any input or output operand, still two colons must
+follow the assembler code string. A good example is a simple statement to
+disable interrupts:
+
+\code
+asm volatile("cli"::);
+\endcode
+
+\section asm_code Assembler Code
+
+You can use the same assembler instruction mnemonics, as you'd use with any
+other AVR assembler. And you can write as many assembler statements into one
+code string as you like and your flash memory is able to hold.
+
+To make it more readable, you should put each statement on a seperate line:
+
+\code
+asm volatile("nop\n\t"
+             "nop\n\t"
+             "nop\n\t"
+             "nop\n\t"
+             ::);
+\endcode
+
+The linefeed and tab characters will make the assembler listing generated by
+the compiler more readable. It may look a bit odd for the first time, but
+that's the way the compiler creates it's own assembler code.
+
+You may also make use of some special registers.
+
+<table>
+  <tr>
+    <td><b>Symbol</b></td>
+    <td><b>Register</b></td>
+  </tr>
+  <tr>
+    <td><tt>__SREG__</tt></td>
+    <td>Status register at address 0x3F</td>
+  </tr>
+  <tr>
+    <td><tt>__SP_H__</tt></td>
+    <td>Stack pointer high byte at address 0x3E</td>
+  </tr>
+  <tr>
+    <td><tt>__SP_L__</tt></td>
+    <td>Stack pointer low byte at address 0x3D</td>
+  </tr>
+  <tr>
+    <td><tt>__tmp_reg__</tt></td>
+    <td>Register r0, used for temporary storage</td>
+  </tr>
+  <tr>
+    <td><tt>__zero_reg__</tt></td>
+    <td>Register r1, always zero</td>
+  </tr>
+  <tr>
+    <td><tt>__PC__</tt></td>
+    <td>Program counter</td>
+  </tr>
+</table>
+
+FIXME: troth: is it __PC__ or _PC_?
+
+Register r0 may be freely used by your assembler code and need not to be
+restored at the end of your code. It's a good idea to use \c __tmp_reg__ and
+\c __zero_reg__ instead of \c r0 or \c r1, just in case a new compiler version
+might change the register definitions.
+
+\section io_ops Input and Output Operands
+
+Each input and output operand is described by a constraint string followed by
+a C expression in parantheses. GCC-AVR 2.95.2 knows the following constraint
+characters:
+
+\note The most up-to-date and detailed information on contraints for the avr
+can be found in the gcc manual.
+
+<table>
+  <tr>
+    <td><b>Constraint</b></td>
+    <td><b>Used for</b></td>
+    <td><b>Range</b></td>
+  </tr>
+  <tr>
+    <td>a</td>
+    <td>Simple upper registers</td>
+    <td>r16 to r23</td>
+  </tr>
+  <tr>
+    <td>b</td>
+    <td>Base pointer registers pairs</td>
+    <td>y,z</td>
+  </tr>
+  <tr>
+    <td>d</td>
+    <td>Upper register</td>
+    <td>r16 to r31</td>
+  </tr>
+  <tr>
+    <td>e</td>
+    <td>Pointer register pairs</td>
+    <td>x,y,z</td>
+  </tr>
+  <tr>
+    <td>G</td>
+    <td>Floating point constant</td>
+    <td>0.0</td>
+  </tr>
+  <tr>
+    <td>I</td>
+    <td>6-bit positive integer constant</td>
+    <td>0 to 63</td>
+  </tr>
+  <tr>
+    <td>J</td>
+    <td>6-bit negative integer constant</td>
+    <td>-63 to 0</td>
+  </tr>
+  <tr>
+    <td>K</td>
+    <td>Integer constant</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>L</td>
+    <td>Integer constant</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>l</td>
+    <td>Lower registers</td>
+    <td>r0 to r15</td>
+   </tr>
+ <tr>
+    <td>M</td>
+    <td>8-bit integer constant</td>
+    <td>0 to 255</td>
+  </tr>
+  <tr>
+    <td>n</td>
+    <td>16-bit integer constant?</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>N</td>
+    <td>Integer constant</td>
+    <td>-1</td>
+  </tr>
+  <tr>
+    <td>O</td>
+    <td>Integer constant</td>
+    <td>8, 16, 24</td>
+  </tr>
+  <tr>
+    <td>P</td>
+    <td>Integer constant</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>q</td>
+    <td>Stack pointer register</td>
+    <td>SPH:SPL</td>
+  </tr>
+  <tr>
+    <td>r</td>
+    <td>Any register</td>
+    <td>r0 to r31</td>
+  </tr>
+  <tr>
+    <td>t</td>
+    <td>Temporary register</td>
+    <td>r0</td>
+  </tr>
+  <tr>
+    <td>v</td>
+    <td>32-bit integer constant?</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>w</td>
+    <td>Special upper register pairs</td>
+    <td>r24, r26, r28, r30</td>
+  </tr>
+  <tr>
+    <td>x</td>
+    <td>Pointer register pair X</td>
+    <td>x (r27:r26)</td>
+  </tr>
+  <tr>
+    <td>y</td>
+    <td>Pointer register pair Y</td>
+    <td>y (r29:r28)</td>
+  </tr>
+  <tr>
+    <td>z</td>
+    <td>Pointer register pair Z</td>
+    <td>z (r31:r30)</td>
+  </tr>
+</table>
+
+These definitions seem not to fit properly to the AVR instruction set. The
+author's assumption is, that this part of the compiler has never been really
+finished in this version, but that assumption may be wrong. The selection of
+the proper contraint depends on the range of the constants or registers, which
+must be acceptable to the AVR instruction they are used with. The C compiler
+doesn't check any line of your assembler code. But it is able to check the
+constraint against your C expression. However, if you specify the wrong
+constraints, then the compiler may silently pass wrong code to the assembler.
+And, of course, the assembler will fail with some cryptic output or internal
+errors. For example, if you specify the constraint \c "r" and you are using
+this register with an \c "ori" instruction in your assembler code, then the
+compiler may select any register. This will fail, if the compiler chooses \c
+r2 to \c r15. (It will never choose \c r0 or \c r1, because these are uses for
+special purposes.) That's why the correct constraint in that case is \c
+"d". On the other hand, if you use the constraint \c "M", the compiler will
+take care, that you don't pass anything else but an 8-bit value. Later on we
+will see, how to pass multibyte expression results to the assembler code.
+
+The following table shows all AVR assembler mnemonics which require operands,
+and the related contraints. Because of the improper constraint definitions in
+version 2.95.2, they aren't strict enough. There is, for example, no
+constraint, which restricts integer constants to the range 0 to 7 for bit set
+and bit clear operations.
+
+<table>
+  <tr>
+    <td><b>Mnemonic</b></td>
+    <td><b>Constraints</b></td>
+    <td> </td>
+    <td><b>Mnemonic</b></td>
+    <td><b>Constraints</b></td>
+  </tr>
+  <tr>
+    <td>adc</td>
+    <td>r,r</td>
+    <td> </td>
+    <td>add</td>
+    <td>r,r</td>
+  </tr>
+  <tr>
+    <td>adiw</td>
+    <td>w,I</TD>
+    <td> </td>
+    <td>and</td>
+    <td>r,r</td>
+  </tr>
+  <tr>
+    <td>andi</td>
+    <td>d,M</TD>
+    <td> </td>
+    <td>asr</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>bclr</td>
+    <td>I</TD>
+    <td> </td>
+    <td>bld</td>
+    <td>r,I</TD>
+  </tr>
+  <tr>
+    <td>brbc</td>
+    <td>I,label</td>
+    <td> </td>
+    <td>brbs</td>
+    <td>I,label</td>
+  </tr>
+  <tr>
+    <td>bset</td>
+    <td>I</TD>
+    <td> </td>
+    <td>bst</td>
+    <td>r,I</TD>
+  </tr>
+  <tr>
+    <td>cbi</td>
+    <td>I,I</TD>
+    <td> </td>
+    <td>cbr</td>
+    <td>d,I</TD>
+  </tr>
+  <tr>
+    <td>com</td>
+    <td>r</td>
+    <td> </td>
+    <td>cp</td>
+    <td>r,r</td>
+  </tr>
+  <tr>
+    <td>cpc</td>
+    <td>r,r</td>
+    <td> </td>
+    <td>cpi</td>
+    <td>d,M</TD>
+  </tr>
+  <tr>
+    <td>cpse</td>
+    <td>r,r</td>
+    <td> </td>
+    <td>dec</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>elpm</td>
+    <td>t,z</td>
+    <td> </td>
+    <td>eor</td>
+    <td>r,r</td>
+  </tr>
+  <tr>
+    <td>in</td>
+    <td>r,I</TD>
+    <td> </td>
+    <td>inc</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>ld</td>
+    <td>r,e</td>
+    <td> </td>
+    <td>ldd</td>
+    <td>r,b</td>
+  </tr>
+  <tr>
+    <td>ldi</td>
+    <td>d,M</TD>
+    <td> </td>
+    <td>lds</td>
+    <td>r,label</td>
+  </tr>
+  <tr>
+    <td>lpm</td>
+    <td>t,z</td>
+    <td> </td>
+    <td>lsl</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>lsr</td>
+    <td>r</td>
+    <td> </td>
+    <td>mov</td>
+    <td>r,r</td>
+  </tr>
+  <tr>
+    <td>mul</td>
+    <td>r,r</td>
+    <td> </td>
+    <td>neg</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>or</td>
+    <td>r,r</td>
+    <td> </td>
+    <td>ori</td>
+    <td>d,M</TD>
+  </tr>
+  <tr>
+    <td>out</td>
+    <td>I,r</td>
+    <td> </td>
+    <td>pop</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>push</td>
+    <td>r</td>
+    <td> </td>
+    <td>rol</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>ror</td>
+    <td>r</td>
+    <td> </td>
+    <td>sbc</td>
+    <td>r,r</td>
+  </tr>
+  <tr>
+    <td>sbci</td>
+    <td>d,M</TD>
+    <td> </td>
+    <td>sbi</td>
+    <td>I,I</TD>
+  </tr>
+  <tr>
+    <td>sbic</td>
+    <td>I,I</TD>
+    <td> </td>
+    <td>sbiw</td>
+    <td>w,I</TD>
+  </tr>
+  <tr>
+    <td>sbr</td>
+    <td>d,M</TD>
+    <td> </td>
+    <td>sbrc</td>
+    <td>r,I</TD>
+  </tr>
+  <tr>
+    <td>sbrs</td>
+    <td>r,I</TD>
+    <td> </td>
+    <td>ser</td>
+    <td>d</td>
+  </tr>
+  <tr>
+    <td>st</td>
+    <td>e,r</td>
+    <td> </td>
+    <td>std</td>
+    <td>b,r</td>
+  </tr>
+  <tr>
+    <td>sts</td>
+    <td>label,r</td>
+    <td> </td>
+    <td>sub</td>
+    <td>r,r</td>
+  </tr>
+  <tr>
+    <td>subi</td>
+    <td>d,M</TD>
+    <td> </td>
+    <td>swap</td>
+    <td>r</td>
+  </tr>
+</table>
+
+
+Constraint characters may be prepended by a single constraint
+modifier. Contraints without a modifier specify read-only operands. Modifiers
+are:
+
+<table>
+  <tr>
+    <td><b>Modifier</b></td>
+    <td><b>Specifies</b></td>
+  </tr>
+  <tr>
+    <td>=</td>
+    <td>Write-only operand, usually used for all output operands.</td>
+  </tr>
+  <tr>
+    <td>+</td>
+    <td>Read-write operand (not supported by inline assembler)</td>
+  </tr>
+  <tr>
+    <td>&</td>
+    <td>Register should be used for output only</td>
+  </tr>
+</table>
+
+Output operands must be write-only and the C expression result must be an
+lvalue, which means that they must be valid on the left side of
+assignments. Note, that the compiler will not check, if they are of reasonable
+type for the kind of operation used in the assembler instructions.
+
+Input operands are, you guessed it, read-only. But what, if you need the same
+operand for input and output, as read-write operands are not supported? As
+stated above, read-write operands are not supported in inline assembler
+code. But there's another solution. For input operators it is possible to use
+a single digit in the constraint string. Using digit n tells the compiler to
+use the same register as for the n-th operand, starting with zero. Here is an
+example:
+
+\code
+asm volatile("swap %0" : "=r" (value) : "0" (value));
+\endcode
+
+This statement will swap the nibbles of an 8-bit variable named value.
+Constraint \c "0" tells the compiler, to use the same input register as for
+the first operand. Note however, that this doesn't automatically imply the
+reverse case. The compiler may choose the same registers for input and output,
+even if not told to do so. This is no problem in most cases, but may be fatal,
+if the output operator is modified by the assembler code before the input
+operator is used. In situation, where your code depends on different registers
+used for input and output operands, you must add the \c & constraint
+modifier to your output operand. The following example demonstrates this
+problem:
+
+\code
+asm volatile("in %0,%1"    "\n\t"
+             "out %1, %2"  "\n\t" 
+             : "=&r" (input) 
+             : "I" (port), "r" (output)
+            );
+\endcode
+
+In this example an input value is read from a port and then an output value is
+written to the same port. If the compiler would have choosen the same register
+for input and output, then the output value would have been destroyed on the
+first assembler instruction. Fortunately this example uses the \c &
+constraint modifier to instruct the compiler not to select any register for
+the output value, which is used for any of the input operands.  Back to
+swapping. Here is the code to swap high and low byte of a 16-bit value:
+
+\code
+asm volatile("mov __tmp_reg__, %A0" "\n\t"
+             "mov %A0, %B0"         "\n\t"
+             "mov %B0, __tmp_reg__" "\n\t"
+             : "=r" (value)
+             : "0" (value)
+            );
+\endcode
+
+First you will notice the usage of register \c __tmp_reg__, which we listed
+among other special registers in the \ref asm_code section. You can use this
+register without saving its contents. Completely new are those letters \c A
+and \c B in <tt>\%A0</tt> and <tt>\%B0</tt>. In fact they refer to two
+different 8-bit registers, both containing a part of value.
+
+Another example to swap bytes of a 32-bit value:
+
+\code
+asm volatile("mov __tmp_reg__, %A0" "\n\t"
+             "mov %A0, %D0"         "\n\t"
+             "mov %D0, __tmp_reg__" "\n\t"
+             "mov __tmp_reg__, %B0" "\n\t"
+             "mov %B0, %C0"         "\n\t"
+             "mov %C0, __tmp_reg__" "\n\t"
+             : "=r" (value)
+             : "0" (value)
+            );
+\endcode
+
+If operands do not fit into a single register, the compiler will automatically
+assign enough registers to hold the entire operand. In the assembler code you
+use <tt>\%A0</tt> to refer to the lowest byte of the first operand,
+<tt>\%A1</tt> to the lowest byte of the second operand and so on. The next
+byte of the first operand will be <tt>\%B0</tt>, the next byte <tt>\%C0</tt>
+and so on.
+
+This also implies, that it is often neccessary to cast the type of an input
+operand to the desired size.
+
+A final problem may arise while using pointer register pairs. If you define an
+input operand
+
+\code
+"e" (ptr)
+\endcode
+
+and the compiler selects register \c Z \c (r30:r31), then 
+
+<tt>\%A0</tt> refers to \c r30 and<br>
+<tt>\%B0</tt> refers to \c r31.
+
+But both versions will fail during the assembly stage of the compiler, if you
+explicitely need \c Z, like in
+
+\code
+ld r24,Z
+\endcode
+
+If you write
+
+\code
+ld r24, %a0
+\endcode
+
+with a lower case a following the percent sign, then the compiler will create
+the proper assembler line.
+
+\section clobbers Clobbers
+
+As stated previously, the last part of the \c asm statement, the list of
+clobbers, may be omitted, including the colon seperator. However, if you are
+using registers, which had not been passed as operands, you need to inform the
+compiler about this. The following example will do an atomic increment. It
+increments an 8-bit value pointed to by a pointer variable in one go, without
+being interrupted by an interrupt routine or another thread in a multithreaded
+environment. Note, that we must use a pointer, because the incremented value
+needs to be stored before interrupts are enabled.
+
+\code
+asm volatile(
+    "cli"               "\n\t"
+    "ld r24, %a0"       "\n\t"
+    "inc r24"           "\n\t"
+    "st %a0, r24"       "\n\t"
+    "sei"               "\n\t"
+    :
+    : "e" (ptr)
+    : "r24"
+);
+\endcode
+
+The compiler might produce the following code:
+
+\code
+    cli
+    ld r24, Z
+    inc r24
+    st Z, r24
+    sei
+\endcode
+
+One easy solution to avoid clobbering register \c r24 is, to make use of the
+special temporary register \c __tmp_reg__ defined by the compiler.
+
+\code
+asm volatile(
+    "cli"                       "\n\t"
+    "ld __tmp_reg__, %a0"       "\n\t"
+    "inc __tmp_reg__"           "\n\t"
+    "st %a0, __tmp_reg__"       "\n\t"
+    "sei"                       "\n\t"
+    :
+    : "e" (ptr)
+);
+\endcode
+
+The compiler is prepared to reload this register next time it uses it. Another
+problem with the above code is, that it should not be called in code sections,
+where interrupts are disabled and should be kept disabled, because it will
+enable interrupts at the end. We may store the current status, but then we
+need another register. Again we can solve this without clobbering a fixed, but
+let the compiler select it. This could be done with the help of a local C
+variable.
+
+\code
+{
+    uint8_t s;
+    asm volatile(
+        "in %0, __SREG__"           "\n\t"
+        "cli"                       "\n\t"
+        "ld __tmp_reg__, %a1"       "\n\t"
+        "inc __tmp_reg__"           "\n\t"
+        "st %a1, __tmp_reg__"       "\n\t"
+        "out __SREG__, %0"          "\n\t"
+        : "=&r" (t)
+        : "e" (ptr)
+    );
+}
+\endcode
+
+Now anything seems correct, but it isn't really. The assembler code modifies
+the variable, that ptr points to. The compiler will not recognize this and may
+keep its value in any of the other registers. Not only, that the compiler
+works with the wrong value, but also the assembler code does, because the C
+program may have modified the value too, but the compiler didn't update the
+memory location for optimization reasons. The worst thing you can do in this
+case:
+
+\code
+{
+    uint8_t s;
+    asm volatile(
+        "in %0, __SREG__"           "\n\t"
+        "cli"                       "\n\t"
+        "ld __tmp_reg__, %a1"       "\n\t"
+        "inc __tmp_reg__"           "\n\t"
+        "st %a1, __tmp_reg__"       "\n\t"
+        "out __SREG__, %0"          "\n\t"
+        : "=&r" (t)
+        : "e" (ptr)
+        : "memory"
+    );
+}
+\endcode
+
+The special clobber "memory" informs the compiler, that the assembler code may
+modify any memory location. It forces the compiler to update all variables,
+which contents is currently hold in a register before executing the assembler
+code. And of course, everything has to be reloaded again after this code.
+
+In most situations a much better solution would be to declare the pointer
+destination itself volatile:
+
+\code
+volatile uint8_t *ptr;
+\endcode
+
+This way, the compiler expects the value pointed to by ptr to be changed and
+will load it whenever used and store it whenever modified.
+
+Situation, in which you need clobbers, are very rare. In most cases there will
+be better ways. Clobbered registers will force the compiler to store their
+values before and reload them after your assembler code. Avoiding them,
+enables the full optimization power.
+
+\section asm_macros Assembler Macros
+
+In order to reuse your assembler language parts, it is useful to define them
+as macros and put them into include files. AVR Libc comes with a bunch of
+them, which could be found in the directory \c avr/include. Using such include
+files may produce compiler warnings, if they are used in modules, which are
+compiled in strict ANSI mode. To avoid that, you can write \c __asm__ instead
+of \c asm and \c __volatile__ instead of \c volatile. These are equivalent
+aliases.
+
+Another problem with reused macros arises, if you are using labels. In such
+cases you may make use of the special pattern \c %=, which is replaced by a
+unique number on each \c asm statement. The following code had been taken from
+avr/include/iomacros.h:
+
+
+\verbatim#define loop_until_bit_is_clear(port,bit)  \
+        __asm__ __volatile__ (             \
+        "L_%=: " "sbic %0, %1" "\n\t"      \
+                 "rjmp L_%="               \
+                 : /* no outputs */        \
+                 : "I" ((uint8_t)(port)),  \
+                   "I" ((uint8_t)(bit))    \
+        )
+\endverbatim
+
+When used for the first time, \c L_%= may be translated to \c L_1404, the next
+usage might create \c L_1405 or whatever. In any case, the labels became unique
+too.
+
+\section c_names_in_asm C Names Used in Assembler Code
+
+By default GCC-AVR uses the same symbolic names of functions or variables in C
+and assembler code. You can specify a different name for the assembler code by
+using a special form of the \c asm statement:
+
+\code
+unsigned long value asm("clock") = 3686400;
+\endcode
+
+This statement instructs the compiler to use the symbol name clock rather than
+value. This makes sense only for external or static variables, because local
+variables do not have symbolic names in the assembler code. However, local
+variables may be held in registers.
+
+With GCC-AVR you can specify the use of a specific register:
+
+\code
+void Count(void)
+{
+    register unsigned char counter asm("r3");
+
+    ... some code...
+    asm volatile("clr r3");
+    ... more code...
+}
+\endcode
+
+The assembler instruction \c "clr r3" will clear the variable
+counter. GCC-AVR will not completely reserve the specified register. If the
+optimizer recognizes, that the variable will not be referenced any longer, the
+register may be re-used. But the compiler is not able to check wether this
+register usage conflicts with any predefined register. If you reserve too many
+registers in this way, the compiler may be even run out of registers during
+code generation.
+
+In order to change the name of a function you need a prototype declaration,
+because the compiler will not accept the \c asm keyword in the function
+definition:
+
+\code
+extern long Calc(void) asm ("CALCULATE");
+\endcode
+
+Calling the function \c Calc() will create assembler instructions to call the
+function \c CALCULATE.
+
+\section faq Frequently Answered Questions
+
+\subsection constants Using Constants
+
+\b Question: When I do the following:
+
+\code
+asm volatile("sbi 0x15,0x07;");
+\endcode
+
+everything is OK! But when I do the same but replacing the address of the port
+by its label, like:
+
+\code
+asm volatile("sbi PORTB,0x07;");
+\endcode
+
+I get a compilation error: <tt>"Error: constant value required"</tt>.
+
+\code
+asm volatile("sbi PORTB,0x07;");
+\endcode
+
+\b Answer: \c PORTB is a precompiler definition included in the processor
+specific file included in \c io-avr.h. As you may know, the precompiler will not
+touch strings and \c PORTB is passed to the assembler. One way to avoid this
+problem is:
+
+\code
+asm volatile("sbi %0, 0x07" : "I" ((unsigned short)(PORTB)):);
+\endcode
+
+Note, that \c iomacros.h already provides a \c sbi() macro definition, which
+can be used in C programs.
+
+\section links Links
+
+<b><em>A GNU Development Environment for the AVR Microcontroller</em></b>
+covers the details of the GNU Tools that are specific to the AVR family of
+processors.  By Rich Neswold.
+<a href="http://www.enteract.com/~rneswold/avr/">
+http://www.enteract.com/~rneswold/avr/</a>
+
+*/

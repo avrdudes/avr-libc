@@ -39,7 +39,17 @@
 #define str_lo r24
 #define temp   r21
 
-; char *strlwr(char *string)
+/** \ingroup avr_string
+    \fn char *strlwr(char *string)
+    \brief Convert a string to lower case.
+
+    The strlwr() function will convert a string to lower case. Only the upper
+    case alphabetic characters [A .. Z] are converted.  Non-alphabetic
+    characters will not be changed.
+
+    \returns The strlwr() function returns a pointer to the converted
+    string.  The pointer is the same as that passed in since the operation is
+    perform in place. */
 
     .text
     .global _U(strlwr)

@@ -38,7 +38,16 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; int strncmp(const char *s1, const char *s2, size_t len)
+/** \ingroup avr_string
+    \fn int strncmp(const char *s1, const char *s2, size_t len)
+    \brief Compare two strings.
+
+    The strncmp() function is similar to strcmp(), except it only compares the
+    first (at most) n characters of s1 and s2.
+
+    \returns The strncmp() function returns an integer less than, equal to, or
+    greater than zero if s1 (or the first n bytes thereof) is found,
+    respectively, to be less than, to match, or be greater than s2.  */
 
 	.text
 	.global	_U(strncmp)

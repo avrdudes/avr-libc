@@ -38,7 +38,21 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; void *memchr(const void *src, int val, size_t len)
+/** \ingroup avr_string
+	\fn void *memchr(const void *src, int val, size_t len)
+    \brief Scan memory for a character.
+
+    The memchr() function scans the first n bytes of the memory area pointed
+    to by s for the character c.  The first byte to match c (interpreted as an
+    unsigned character) stops the operation.
+
+    The memrchr() function is like the memchr() function, except that it
+    searches backwards from the end of the n bytes pointed to by s instead of
+    forwards from the front.
+
+    \returns The memchr() and memrchr() functions return a pointer to the
+    matching byte or NULL if the character does not occur in the given memory
+    area.  */
 
 	.text
 	.global	_U(memchr)

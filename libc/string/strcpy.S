@@ -33,7 +33,23 @@
 #define src_hi r23
 #define src_lo r22
 
-; char *strcpy(char *dest, const char *src)
+/** \ingroup avr_string
+    \fn char *strcpy(char *dest, const char *src)
+    \brief Copy a string.
+
+    The strcpy() function copies the string pointed to by src (including the
+    terminating `\0' character) to the array pointed to by dest.  The strings
+    may not overlap, and the destination string dest must be large enough to
+    receive the copy.
+
+    \returns The strncpy() function returns a pointer to the destination
+    string dest. 
+
+    \note If the destination string of a strcpy() is not large enough (that
+    is, if the programmer was stupid/lazy, and failed to check the size before
+    copying) then anything might happen.  Overflowing fixed length strings is
+    a favourite cracker technique. */
+
 ; 9 words, (14 + strlen(src) * 7) cycles
 
 	.text

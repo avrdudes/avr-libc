@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, Theodore Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -23,41 +23,15 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#ifndef _AVR_SIGNAL_H_
-#define _AVR_SIGNAL_H_
+/* $Id$ */
 
-/** \defgroup avr_signals Signals and Interrupts
-    \code #include <sig-avr.h> \endcode
+/** \mainpage AVR Libc
 
-    FIXME: discuss the SIGNAL() and INTERRUPT() macros. Rich Neswold's
-    document has a good discussion of this. */
+The AVR Libc package provides a subset of the standard C library for Atmel AVR
+8-bit RISC microcontrollers..........
 
-/** \def SIGNAL(signame)
-    \ingroup avr_signals */
+<b>There's a lot of work to be done on this. This file will produce the
+index.html (for html output) or the first chapter (in \f$\mbox{\LaTeX}\f$
+output).</b>
 
-#ifdef __cplusplus
-#define SIGNAL(signame)					\
-extern "C" void signame(void);				\
-void signame (void) __attribute__ ((signal));		\
-void signame (void)
-#else
-#define SIGNAL(signame)					\
-void signame (void) __attribute__ ((signal));		\
-void signame (void)
-#endif
-
-/** \def INTERRUPT(signame) 
-    \ingroup avr_signals */
-
-#ifdef __cplusplus
-#define INTERRUPT(signame)				\
-extern "C" void signame(void);				\
-void signame (void) __attribute__ ((interrupt));	\
-void signame (void)
-#else
-#define INTERRUPT(signame)				\
-void signame (void) __attribute__ ((interrupt));	\
-void signame (void)
-#endif
-
-#endif /* _AVR_SIGNAL_H_ */
+*/

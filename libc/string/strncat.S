@@ -35,7 +35,15 @@
 #define len_hi r21
 #define len_lo r20
 
-; char *strncat(char *dest, const char *src, size_t len)
+/** \ingroup avr_string
+    \fn char *strncat(char *dest, const char *src, size_t len)
+    \brief Concatenate two strings.
+
+    The strncat() function is similar to strcat(), except that only the first
+    n characters of src are appended to dest.
+
+    \returns The strncat() function returns a pointer to the resulting string
+    dest.  */
 
 	.text
 	.global	_U(strncat)

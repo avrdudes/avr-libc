@@ -35,7 +35,14 @@
 #define len_hi r21
 #define len_lo r20
 
-; void *memmove(void *dest, const void *src, size_t len)
+/** \ingroup avr_string
+    \fn void *memmove(void *dest, const void *src, size_t len)
+    \brief Copy memory area.
+
+    The memmove() function copies n bytes from memory area src to memory area
+    dest.  The memory areas may overlap.
+
+    \returns The memmove() function returns a pointer to dest.  */
 
 	.extern _U(memcpy)
 	.text

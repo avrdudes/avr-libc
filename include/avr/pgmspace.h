@@ -33,12 +33,18 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
-/*
-   pgmspace.h - this is an attempt to provide some compatibility with
-   header files that come with IAR C, to make porting applications
-   between different compilers easier.  No 100% compatibility though
-   (GCC does not have full support for multiple address spaces yet).
- */
+/** \defgroup avr_pgmspace Program Space String Utilities
+    \code #include <pgmspace.h> \endcode
+
+    The functions in this module provide interfaces for a program to access
+    data stored in program space (flash memory) of the device.  In order to
+    use these functions, the target device must support either the \c LPM or
+    \c ELPM instructions.
+
+    \note These function are an attempt to provide some compatibility with
+    header files that come with IAR C, to make porting applications between
+    different compilers easier.  This is not 100% compatibility though (GCC
+    does not have full support for multiple address spaces yet). */
 
 #ifndef __PGMSPACE_H_
 #define __PGMSPACE_H_ 1
@@ -73,6 +79,11 @@ typedef int prog_int PROGMEM;
 typedef long prog_long PROGMEM;
 typedef long long prog_long_long PROGMEM;
 
+/** \ingroup avr_pgmspace
+    \def PSTR(s)
+
+    Used to declare a static pointer to a string in program space. */
+
 #define PSTR(s) ({static char __c[] PROGMEM = (s); __c;})
 
 /* _LPM(), _ELPM() */
@@ -85,12 +96,16 @@ static inline unsigned char __lpm_inline(unsigned short __addr)
 }
 
 #ifdef RAMPZ  /* >64K program memory (ATmega103) */
-/*
-   use this for access to >64K program memory (ATmega103),
-   addr = RAMPZ:r31:r30 (if possible, put your constant tables in the
-   lower 64K and use "lpm" - it is more efficient that way, and you can
-   still use the upper 64K for executable code).
- */
+
+/** \ingroup avr_pgmspace
+    \fn inline unsigned char __elpm_inline(unsigned long __addr)
+
+    Use this for access to >64K program memory (ATmega103, ATmega128),
+    addr = RAMPZ:r31:r30
+
+    \note If possible, put your constant tables in the lower 64K and use "lpm"
+    since it is more efficient that way, and you can still use the upper 64K
+    for executable code.  */
 
 static inline unsigned char __elpm_inline(unsigned long __addr) __ATTR_CONST__;
 static inline unsigned char __elpm_inline(unsigned long __addr)
@@ -105,9 +120,20 @@ static inline unsigned char __elpm_inline(unsigned long __addr)
 #define PRG_RDB(addr) _LPM((unsigned short)(addr))
 #endif
 
+/** \ingroup avr_pgmspace
+    \def PGM_P
+
+    Used to declare a variable that is a pointer to a string in program
+    space. */
+
 #ifndef PGM_P
 #define PGM_P const prog_char *
 #endif
+
+/** \ingroup avr_pgmspace
+    \def PGM_VOID_P
+
+    Used to declare a generic pointer to an object in program space. */
 
 #ifndef PGM_VOID_P
 #define PGM_VOID_P const prog_void *
@@ -124,6 +150,7 @@ extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern char *strncpy_P(char *, PGM_P, size_t);
 
 #if 0  /* not implemented yet */
+extern char *strncat(char *, PGM_P, size_t);
 extern int printf_P(PGM_P, ...);
 extern int puts_P(PGM_P);
 extern int scanf_P(PGM_P, ...);

@@ -31,7 +31,14 @@
 #define src_hi r25
 #define src_lo r24
 
-; size_t strlen_P(const char flash *src)
+/** \ingroup avr_pgmspace
+    \fn size_t strlen_P(PGM_P src)
+
+    The strlen_P() function is similar to strlen(), except that src is a
+    pointer to a string in program space.
+
+    \returns The strlen() function returns the number of characters in src. */
+
 ; 11 words, (14 + strlen_P(src) * 8) cycles
 
 	.text

@@ -47,7 +47,20 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; int strncasecmp_P(const char *s1, const char flash *s2, size_t len)
+/** \ingroup avr_pgmspace
+    \fn int strncasecmp_P(const char *s1, PGM_P s2, size_t n)
+    \brief Compare two strings ignoring case.
+
+    The strncasecmp_P() function is similar to strcasecmp_P(), except it only
+    compares the first n characters of s1.
+
+    \param s1 A pointer to a string in the devices SRAM.
+    \param s2 A pointer to a string in the devices Flash.
+    \param n The maximum number of bytes to compare.
+
+    \returns The strcasecmp_P() function returns an integer less than, equal
+    to, or greater than zero if s1 (or the first n bytes thereof) is found,
+    respectively, to be less than, to match, or be greater than s2.  */
 
     .text
     .global _U(strncasecmp_P)

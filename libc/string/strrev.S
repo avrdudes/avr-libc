@@ -40,7 +40,14 @@
 #define ltemp  r23
 #define rtemp  r22
 
-; char *strrev(char *string)
+/** \ingroup avr_string
+    \fn char *strrev(char *string)
+    \brief Reverse a string.
+
+    The strrev() function reverses the order of the string.
+
+    \returns The strrev() function returns a pointer to the beginning of the
+    reversed string.  */
 
     .text
     .global _U(strrev)

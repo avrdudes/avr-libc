@@ -44,7 +44,15 @@
 #define ret_hi r25
 #define ret_lo r24
 
-;char *strstr(const char *s1, const char *s2)
+/** \ingroup avr_string
+    \fn char *strstr(const char *s1, const char *s2)
+    \brief Locate a substring.
+
+    The strstr() function finds the first occurrence of the substring needle
+    in the string haystack.  The terminating `\0' characters are not compared.
+
+    \returns The strstr() function returns a pointer to the beginning of the
+    substring, or NULL if the substring is not found.  */
 
 .text
 .global _U(strstr)

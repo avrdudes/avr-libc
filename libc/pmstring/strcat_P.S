@@ -40,7 +40,14 @@
 #define src_hi r23
 #define src_lo r22
 
-; char *strcat_P(char *dest, const char flash *src)
+/** \ingroup avr_pgmspace
+    \fn char *strcat_P(char *dest, PGM_P src)
+
+    The strcat_P() function is similar to strcat() except that the \e src
+    string must be located in program space (flash).
+
+    \returns The strcat() function returns a pointer to the resulting string
+    \e dest. */
 
 	.text
 	.global	_U(strcat_P)

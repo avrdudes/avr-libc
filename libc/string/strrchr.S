@@ -36,7 +36,18 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; char *strrchr(const char *src, int val)
+/** \ingroup avr_string
+    \fn char *strrchr(const char *src, int val)
+    \brief Locate character in string.
+
+    The strrchr() function returns a pointer to the last occurrence of the
+    character c in the string s.
+
+    Here "character" means "byte" - these functions do not work with wide or
+    multi-byte characters.
+
+    \returns The strrchr() function returns a pointer to the matched character
+    or NULL if the character is not found. */
 
 	.text
 	.global	_U(strrchr)

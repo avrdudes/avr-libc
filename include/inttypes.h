@@ -33,8 +33,15 @@
 #ifndef __INTTYPES_H_
 #define __INTTYPES_H_
 
-/* Use [u]intN_t if you need exactly N bits.
-   XXX - doesn't handle the -mint8 option.  */
+/** \defgroup avr_inttypes Integer Types
+    \code #include <inttypes.h> \endcode
+
+    Use [u]intN_t if you need exactly N bits.
+
+    \note These should probably not be used if avr-gcc's \c -mint8 option is
+    used. 
+
+    @{ */
 
 typedef signed char int8_t;
 typedef unsigned char uint8_t;
@@ -50,5 +57,7 @@ typedef unsigned long long uint64_t;
 
 typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
+
+/* @} */
 
 #endif

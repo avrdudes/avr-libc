@@ -46,7 +46,18 @@
 #define tmp r22
 #define cht r21
 
-; int strcasecmp(const char *s1, const char *s2)
+/** \ingroup avr_string
+    \fn int strcasecmp(const char *s1, const char *s2)
+    \brief Compare two strings ignoring case.
+
+    The strcasecmp() function compares the two strings s1 and s2, ignoring the
+    case of the characters.  It returns an integer less than, equal to, or
+    greater than zero if s1 is found, respectively, to be less than, to match,
+    or be greater than s2.
+
+    \returns The strcasecmp() function returns an integer less than, equal to,
+    or greater than zero if s1 is found, respectively, to be less than, to
+    match, or be greater than s2.  */
 
     .text
     .global _U(strcasecmp)

@@ -35,7 +35,14 @@
 #define len_hi r21
 #define len_lo r20
 
-; void *memset(void *dest, int val, size_t len)
+/** \ingroup avr_string
+    \fn void *memset(void *dest, int val, size_t len)
+    \brief Fill memory with a constant byte.
+
+    The memset() function fills the first n bytes of the memory area pointed
+    to by s with the constant byte c.
+
+    \returns The memset() function returns a pointer to the memory area s.  */
 
 	.text
 	.global	_U(memset)

@@ -34,7 +34,9 @@ MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
 CLEANFILES           = *.html *.pdf *.ma *.mas *.ps
 
-EXTRA_DIST           = dox.css dox_html_header dox_html_footer
+EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
+                       main_page.dox \
+                       inline_asm.dox
 
 SUFFIXES             = .pdf
 

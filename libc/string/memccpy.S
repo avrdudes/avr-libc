@@ -40,7 +40,15 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; void *memccpy(void *dest, const void *src, int val, size_t len)
+/** \ingroup avr_string
+	\fn void *memccpy(void *dest, const void *src, int val, size_t len)
+    \brief Copy memory area.
+
+	The memccpy() function copies no more than n bytes from memory area src to
+	memory area dest, stopping when the character c is found.
+
+	\returns The memccpy() function returns a pointer to the next character in
+	dest after c, or NULL if c was not found in the first n characters of src.  */
 
 	.text
 	.global	_U(memccpy)

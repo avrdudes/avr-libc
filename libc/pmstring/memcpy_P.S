@@ -35,7 +35,13 @@
 #define len_hi r21
 #define len_lo r20
 
-; void *memcpy_P(void *dest, const void flash *src, size_t len)
+/** \ingroup avr_pgmspace
+    \fn void *memcpy_P(void *dest, PGM_VOID_P src, size_t n)
+
+    The memcpy_P() function is similar to memcpy(), except the src string
+    resides in program space.
+
+    \returns The memcpy_P() function returns a pointer to dest.  */
 
 	.text
 	.global	_U(memcpy_P)

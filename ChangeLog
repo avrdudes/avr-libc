@@ -1,3 +1,48 @@
+2002-07-24  Theodore A. Roth  <troth@verinet.com>
+
+	* doc/api/Makefile.am(EXTRA_DIST): Add *.dox files.
+	* doc/api/doxygen.config.in: Config tweaks.
+	* doc/api/main_page.dox: New file.
+	* doc/api/inline_asm.dox: New file. (Thanks to Harald Kipp)
+	* include/inttypes.h: Updated comments for doxygen.
+	* include/string.h: Updated comments for doxygen.
+	* include/avr/signal.h: Updated comments for doxygen.
+	* libc/string/memccpy.S: Updated comments for doxygen.
+	* libc/string/memchr.S: Updated comments for doxygen.
+	* libc/string/memcmp.S: Updated comments for doxygen.
+	* libc/string/memcpy.S: Updated comments for doxygen.
+	* libc/string/memmove.S: Updated comments for doxygen.
+	* libc/string/memset.S: Updated comments for doxygen.
+	* libc/string/strcasecmp.S: Updated comments for doxygen.
+	* libc/string/strcat.S: Updated comments for doxygen.
+	* libc/string/strchr.S: Updated comments for doxygen.
+	* libc/string/strcmp.S: Updated comments for doxygen.
+	* libc/string/strcpy.S: Updated comments for doxygen.
+	* libc/string/strlcat.c: Updated comments for doxygen.
+	* libc/string/strlcpy.c: Updated comments for doxygen.
+	* libc/string/strlen.S: Updated comments for doxygen.
+	* libc/string/strlwr.S: Updated comments for doxygen.
+	* libc/string/strncasecmp.S: Updated comments for doxygen.
+	* libc/string/strncat.S: Updated comments for doxygen.
+	* libc/string/strncmp.S: Updated comments for doxygen.
+	* libc/string/strncpy.S: Updated comments for doxygen.
+	* libc/string/strnlen.S: Updated comments for doxygen.
+	* libc/string/strrchr.S: Updated comments for doxygen.
+	* libc/string/strrev.S: Updated comments for doxygen.
+	* libc/string/strstr.S: Updated comments for doxygen.
+	* libc/string/strupr.S: Updated comments for doxygen.
+	* libm/fplib/dtostrf.S: Change comment so doxygen isn't confused.
+	* include/avr/pgmspace.h: Updated comments for doxygen.
+	* libc/pmstring/memcpy_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcasecmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcat_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strcpy_P.S: Updated comments for doxygen.
+	* libc/pmstring/strlen_P.S: Updated comments for doxygen.
+	* libc/pmstring/strncasecmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strncmp_P.S: Updated comments for doxygen.
+	* libc/pmstring/strncpy_P.S: Updated comments for doxygen.
+
 2002-07-16  Theodore A. Roth  <troth@verinet.com>
 
 	* Makefile.am: Integrate doxygen in to build system.

@@ -38,7 +38,15 @@
 #define ret_hi r25
 #define ret_lo r24
 
-; int strncmp_P(const char *s1, const char flash *s2, size_t len)
+/** \ingroup avr_pgmspace
+    \fn int strncmp_P(const char *s1, PGM_P s2, size_t n)
+
+    The strncmp_P() function is similar to strcmp_P() except it only compares
+    the first (at most) n characters of s1 and s2.
+
+    \returns The strncmp_P() function returns an integer less than, equal to,
+    or greater than zero if s1 (or the first n bytes thereof) is found,
+    respectively, to be less than, to match, or be greater than s2.  */
 
 	.text
 	.global	_U(strncmp_P)
