@@ -47,6 +47,7 @@
 -# \ref faq_rom_array
 -# \ref faq_ext_ram
 -# \ref faq_optflags
+-# \ref faq_reloc_code
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -854,6 +855,38 @@ timer-tick, so take this with a grain of salt.)
 So generally, it seems <tt>-Os -mcall-prologues</tt> is the most
 universal "best" optimization level.  Only applications that need to
 get the last few percent of speed benefit from using \c -O3.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_reloc_code How do I relocate code to a fixed address?
+
+First, the code should be put into a new
+\ref mem_sections "named section".
+This is done with a section attribute:
+
+\code
+__attribute__ ((section (".bootloader")))
+\endcode
+
+In this example, \c .bootloader is the name of the new section.  This
+attribute needs to be placed after the prototype of any function to
+force the function into the new section.
+
+\code
+void boot(void) __attribute__ ((section (".bootloader")));
+\endcode
+
+To relocate the section to a fixed address the linker flag
+\c --section-start is used.  This option can be passed to the linker
+using the \ref gcc_minusW "-Wl compiler option":
+
+\code
+-Wl,--section-start=.bootloader=0x1E000
+\endcode
+
+The name after section-start is the name of the section to be
+relocated. The number after the section name is the beginning address
+of the named section.
 
 <small>Back to \ref faq_index.</small>
 

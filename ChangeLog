@@ -1,5 +1,10 @@
 2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/faq.dox: add Eric's entry about relocating code to a
+		fixed address.
+
+2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/using-tools.dox: add an anchor used in the FAQ.
 
 2002-12-17  Theodore A. Roth  <troth@openavr.org>
