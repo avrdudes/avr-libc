@@ -1,0 +1,37 @@
+From troth@openavr.org Thu Nov 11 11:57:48 2004
+Date: Tue, 2 Nov 2004 08:56:48 -0800 (PST)
+From: Theodore A. Roth <troth@openavr.org>
+To: E. Weddington <ericw@evcohs.com>
+Cc: avr-libc-dev <avr-libc-dev@nongnu.org>
+Subject: [avr-libc-dev] Re: Missing copyrights?
+
+On Tue, 2 Nov 2004, E. Weddington wrote:
+
+> Theodore A. Roth wrote:
+>
+> >I have just added copyrights to the files I wrote in CVS HEAD. [See
+> >attached patch.]
+> >
+> >
+> >
+> Thanks. One note though: acconfig.h just has the two-clause license.
+> While I'm at it, can I have your permission to fix all of your
+> copyrighted files in avr-libc to add the missing clause?
+
+Pooh. I tried to add all those with the 3 clause, but looks like
+copy-paste got me again. ;-)
+
+Yes, got ahead and add the 3rd clause on any of my files that are
+missing it.
+
+---
+Ted Roth
+PGP Key ID: 0x18F846E9
+Jabber ID: troth@jabber.org
+
+
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+

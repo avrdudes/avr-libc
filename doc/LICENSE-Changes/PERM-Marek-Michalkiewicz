@@ -1,0 +1,69 @@
+From marekm@amelek.gda.pl Thu Nov 11 11:54:55 2004
+Date: Fri, 29 Oct 2004 23:38:08 +0200
+From: Marek Michalkiewicz <marekm@amelek.gda.pl>
+To: E. Weddington <ericw@evcohs.com>
+Cc: avr-libc-dev@nongnu.org
+Subject: Re: [avr-libc-dev] avr-libc license audit
+
+On Fri, Oct 29, 2004 at 02:56:02PM -0600, E. Weddington wrote:
+> 
+> The problem is that the original LICENSE file said that avr-libc is 
+> licensed with
+> "Modified BSD license (no advertising clause)"
+> There are many files in there that are *not licensed this way*, only 
+> having 2 clauses and not including the "no advertising" clause.
+
+Poorly defined operator precedence ;) - it was meant to be read as:
+
+(no (advertising clause))
+
+not as:
+
+((no advertising) clause)
+
+where the "advertising clause" is the one which was removed from the
+original (4-clause) BSD license.  The problem (full-page ads, etc.)
+is explained in http://www.gnu.org/philosophy/bsd.html .
+
+Some time ago, I chose the 3-clause BSD license as a fairly simple,
+liberal and standard one.  Later, BSD people made it even simpler by
+removing another clause (I guess it was a problem for someone again...
+licensing issues are evil), and I have no problem with that, so I
+started using the 2-clause license in newer files (and probably
+forgot to update some of the older ones).
+
+> The "no advertising" is only marginally restrictive:
+> 
+>   * Neither the name of the copyright holders nor the names of
+>     contributors may be used to endorse or promote products derived
+>     from this software without specific prior written permission.
+> 
+> It only restricts the user of avr-libc so they don't go off and say 
+> "Marek Michalkiewicz endorses the use of this product! :-) Buy it!". 
+> This is a fairly reaonable restriction for users.
+
+No problem for me either way - it was never my intent to add more
+restrictions, as they only make things more complicated for everyone
+(especially if one program contains code with different licenses: you
+have to check each license if it is compatible with all others, grrr...).
+
+> So, then do I have your permission to change the files that you hold a 
+> copyright on to include the "no adverstising" clause? If yes, could you 
+> CC avr-libc-dev?
+
+Yes.  But, you could just as well do the reverse: ask authors who
+hold copyright on files with 3-clause license if they agree to
+remove that one clause (I agree, if I forgot to remove that clause
+from any of the files I wrote).  It's up to you.  Sorry for not
+speaking up about this earlier (I'm overworked as usual).
+
+Thanks,
+Marek
+
+
+
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+

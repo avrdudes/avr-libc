@@ -1,0 +1,70 @@
+From mistumpf@de.pepperl-fuchs.com Thu Nov 11 11:50:21 2004
+Date: Wed, 10 Nov 2004 10:13:19 +0100
+From: Stumpf Michael <mistumpf@de.pepperl-fuchs.com>
+To: 'E. Weddington' <ericw@evcohs.com>,
+     Stumpf Michael <mistumpf@de.pepperl-fuchs.com>
+Cc: avr-libc-dev <avr-libc-dev@nongnu.org>
+Subject: [avr-libc-dev] AW: avr-libc license audit
+
+Hello,
+
+I never cared much about licences, so feel free to apply the 
+modifications as you suggested.
+No problem with relicencing the math lib either.
+
+best regards, 
+Michael Stumpf
+
+> -----Ursprüngliche Nachricht-----
+> Von: E. Weddington [mailto:ericw@evcohs.com]
+> Gesendet: Dienstag, 9. November 2004 21:49
+> An: MiStumpf@de.pepperl-fuchs.com
+> Cc: avr-libc-dev
+> Betreff: avr-libc license audit
+> 
+> 
+> Michael Stumpf,
+> 
+> I've been conducting an audit of the licenses in the files in 
+> avr-libc 
+> <http://savannah.nongnu.org/projects/avr-libc/>. avr-libc is 
+> supposed to 
+> be licensed with a modified BSD license that contains a "no 
+> endorsement" 
+> clause. I've discovered a number of files that have incorrect 
+> licensing 
+> and are missing this clause including some files where you hold the 
+> copyright, specifically I am referring to include/ctype.h and 
+> include/math.h, NOT the math library.
+> 
+> May I have your permission to modify the licenses of the two files in 
+> avr-libc listed above where you hold the copyright, to add 
+> the missing 
+> clause reproduced below?
+> 
+>    * Neither the name of the copyright holders nor the names of
+>      contributors may be used to endorse or promote products derived
+>      from this software without specific prior written permission.
+> 
+> If I have your permission please respond to this email that you give 
+> your permission and be sure to keep the CC to the 
+> avr-libc-dev mailing 
+> list where it may be archived.
+> 
+> As a seperate issue, would you be willing to relicense the 
+> avr-libc math 
+> library functions written by you to have the Modified BSD 
+> License (the 
+> same as the rest of avr-libc)? This would greatly help in making the 
+> licensing for all of avr-libc consistent. I also understand if you do 
+> not wish to do this.
+> 
+> Thank you.
+> Eric Weddington
+> avr-libc developer
+> 
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+

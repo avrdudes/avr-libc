@@ -1,0 +1,67 @@
+From peter.jansen@aad.gov.au Thu Nov 11 11:50:50 2004
+Date: Wed, 10 Nov 2004 09:35:52 +1100
+From: Peter Jansen <peter.jansen@aad.gov.au>
+To: E. Weddington <ericw@evcohs.com>
+Cc: avr-libc-dev <avr-libc-dev@nongnu.org>
+Subject: [avr-libc-dev] Re: avr-libc contribution?
+
+E. Weddington wrote:
+> Peter Jansen wrote:
+> 
+>> E. Weddington wrote:
+>>
+>>> Peter,
+>>>
+>>> I'm trying to find the Peter Jansen that made a contribution of the 
+>>> iom128.h header file to the avr-libc project:
+>>> <http://savannah.nongnu.org/projects/avr-libc/>
+>>>
+>>> This email was suggested to me by one of the admins of that project. 
+>>> Are you the original submitter of this file?
+>>
+>>
+>>
+>> Yes I think I submitted that file, I have not worked on AVR's for a 
+>> while, do you have some questions?
+>>
+>>
+> Yes, I've been conducting an audit of the licenses in the files in 
+> avr-libc <http://savannah.nongnu.org/projects/avr-libc/>. avr-libc is 
+> supposed to be licensed with a modified BSD license that contains a "no 
+> endorsement" clause. I've discovered a number of files that have 
+> incorrect licensing and are missing this clause including that file 
+> (iom128.h) where you hold the copyright.
+> 
+> May I have your permission to modify the licenses of all the files in 
+> avr-libc where you hold the copyright, to add the missing clause 
+> reproduced below?
+> 
+>   * Neither the name of the copyright holders nor the names of
+>     contributors may be used to endorse or promote products derived
+>     from this software without specific prior written permission.
+> 
+> If I have your permission please respond to this email that you give 
+> your permission and be sure to keep the CC to the avr-libc-dev mailing 
+> list where it may be archived.
+
+Yes you have my permission to modify the license as per your above text.
+
+Thanks it must be difficult to follow all those up.
+
+-- 
+Peter Jansen
+STS
+Australian Antarctic Division
+Channel Highway
+Kingston
+TAS        7050
+AUSTRALIA
+Ph  (03) 62 323 533
+Fax (03) 62 323 351
+
+
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+

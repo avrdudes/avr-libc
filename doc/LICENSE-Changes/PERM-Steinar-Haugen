@@ -1,0 +1,50 @@
+From xoplanet@msn.com Thu Nov 11 11:53:40 2004
+Date: Tue, 02 Nov 2004 19:32:35 +0100
+From: Stone Hill <xoplanet@msn.com>
+To: ericw@evcohs.com
+Cc: avr-libc-dev@nongnu.org
+Subject: [avr-libc-dev] RE: avr-libc license audit
+
+Yes, You have my permission to modify those
+files to which I have a copyright.
+
+Best regards,
+Steinar Haugen
+
+
+>From: "E. Weddington" <ericw@evcohs.com>
+>To: Steinar Haugen <xoplanet@msn.com>
+>CC: avr-libc-dev <avr-libc-dev@nongnu.org>
+>Subject: avr-libc license audit
+>Date: Mon, 01 Nov 2004 15:28:25 -0700
+>
+>I've been conducting an audit of the licenses in the files in avr-libc 
+><http://savannah.nongnu.org/projects/avr-libc/>. avr-libc is supposed to be 
+>licensed with a modified BSD license that contains a "no endorsement" 
+>clause. I've discovered a number of files that have incorrect licensing and 
+>are missing this clause including some files where you hold the copyright.
+>
+>May I have your permission to modify the licenses of all the files in 
+>avr-libc where you hold the copyright, to add the missing clause reproduced 
+>below?
+>
+>   * Neither the name of the copyright holders nor the names of
+>     contributors may be used to endorse or promote products derived
+>     from this software without specific prior written permission.
+>
+>If I have your permission please respond to this email that you give your 
+>permission and be sure to keep the CC to the avr-libc-dev mailing list 
+>where it may be archived.
+>
+>Thank you.
+>Eric Weddington
+>avr-libc developer
+
+
+
+
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+

@@ -1,3 +1,21 @@
+2004-11-12  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/LICENSE-Changes/PERM-Bob-Paddock:
+	* doc/LICENSE-Changes/PERM-Colin-OFlynn:
+	* doc/LICENSE-Changes/PERM-Joerg-Wunsch:
+	* doc/LICENSE-Changes/PERM-Juergen-Schilling:
+	* doc/LICENSE-Changes/PERM-Keith-Gudger:
+	* doc/LICENSE-Changes/PERM-Marek-Michalkiewicz:
+	* doc/LICENSE-Changes/PERM-Micheal-Stumpf:
+	* doc/LICENSE-Changes/PERM-Nils-Kristian-Strom:
+	* doc/LICENSE-Changes/PERM-Peter-Jansen:
+	* doc/LICENSE-Changes/PERM-Reinhard-Jessich:
+	* doc/LICENSE-Changes/PERM-Steinar-Haugen:
+	* doc/LICENSE-Changes/PERM-Theodore-A-Roth:
+	New files. These are for documenting the granting of permission for
+	copyright and licensing changes from various contributors. The files
+	are the email messages we received from each individual.
+
 2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

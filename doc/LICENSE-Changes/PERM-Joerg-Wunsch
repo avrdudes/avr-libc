@@ -1,0 +1,40 @@
+From j@ida.interface-business.de Thu Nov 11 11:56:45 2004
+Date: Thu, 28 Oct 2004 23:25:05 +0200
+From: Joerg Wunsch <j@ida.interface-business.de>
+Reply-To: Joerg Wunsch <joerg_wunsch@interface-systems.de>
+To: avr-libc-dev <avr-libc-dev@nongnu.org>
+Subject: Re: [avr-libc-dev] [RFC] Licensing information
+
+As E. Weddington wrote:
+
+> Attached are IMO what the LICENSING and AUTHORS file should be.
+
+Thank you!
+
+> Now to the big problem: The original license file said that avr-libc was 
+> a Modified BSD License (with the No Advertising clause). However the 
+> "template" that it gave for new authors, only showed the original two 
+> clauses of the BSD license.
+
+The original BSD license had four clauses, where the `No advertising'
+clause was #3, and later officially dropped.  Individual *BSD
+developers later on also dropped clause #4 ("name ... may not be used
+to endorse"), which led to the two-clause template we had by now.
+
+For those files where I hold the copyright, I don't mind whether it's
+the 2-clause or 3-clause version.  I agree we should settle for one of
+both, and see to convert the remaining files (given author's
+permission).  It seems converting everything to the 3-clause version
+is less work, so let's pick this one.
+
+Thanks again!
+-- 
+J"org Wunsch                                           Unix support engineer
+joerg_wunsch@interface-systems.de        http://www.interface-systems.de/~j/
+
+
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+

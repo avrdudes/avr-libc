@@ -1,0 +1,31 @@
+From nilsst@invalid.ed.ntnu.no Thu Nov 11 11:52:24 2004
+Date: Wed, 03 Nov 2004 08:12:27 +0100
+From: Nils Kristian Strom <nilsst@invalid.ed.ntnu.no>
+To: E. Weddington <ericw@evcohs.com>
+Cc: avr-libc-dev <avr-libc-dev@nongnu.org>,
+     Nils Kristian Strom <nilsst@omegav.ntnu.no>
+Subject: [avr-libc-dev] Re: avr-libc license audit
+
+On Tue, 2004-11-02 at 11:47 -0700, E. Weddington wrote:
+> May I have your permission to modify the licenses of all the files in 
+> avr-libc where you hold the copyright, to add the missing clause 
+> reproduced below?
+
+Yes, you have my permission to modify those files to which I have a
+copyright.
+
+>    * Neither the name of the copyright holders nor the names of
+>      contributors may be used to endorse or promote products derived
+>      from this software without specific prior written permission.
+
+Best regards,
+Nils Strom
+
+
+
+
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+

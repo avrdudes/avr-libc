@@ -1,0 +1,45 @@
+From bpaddock@csonline.net Thu Nov 11 11:54:04 2004
+Date: Mon, 1 Nov 2004 19:49:51 +0000
+From: Bob Paddock <bpaddock@csonline.net>
+To: E. Weddington <ericw@evcohs.com>
+Cc: avr-libc-dev <avr-libc-dev@nongnu.org>
+Subject: [avr-libc-dev] Re: avr-libc licensing audit
+
+On Monday 01 November 2004 10:30 pm, E. Weddington wrote:
+> Bob Paddock,
+>
+> I've been conducting an audit of the licenses in the files in avr-libc
+>...
+> May I have your permission to modify the licenses of all the files in
+> avr-libc where you hold the copyright, to add the missing clause
+> reproduced below?
+
+Yes you may change the file.  I have been following the discussion on the 
+list.
+
+>    * Neither the name of the copyright holders nor the names of
+>      contributors may be used to endorse or promote products derived
+>      from this software without specific prior written permission.
+
+Just so this is clear in my own mind, is is ok to say "This product was 
+developed using GCC and avr-libc" on my web site if I ever have a product to 
+sell?
+
+It would be bad if I listed anyones name that I find in the code on the web 
+site where trying to sell product?
+
+> If I have your permission please respond to this email that you give
+> your permission and be sure to keep the CC to the avr-libc-dev mailing
+> list where it may be archived.
+
+-- 
+                          http://www.softwaresafety.net/
+ http://www.unusualresearch.com/ http://www.bpaddock.com/
+
+
+
+_______________________________________________
+AVR-libc-dev mailing list
+AVR-libc-dev@nongnu.org
+http://lists.nongnu.org/mailman/listinfo/avr-libc-dev
+
