@@ -102,12 +102,22 @@ typedef uint32_t  prog_uint32_t PROGMEM;
 typedef int64_t   prog_int64_t  PROGMEM;
 typedef uint64_t  prog_uint64_t PROGMEM;
 
+/* Although in C, we can get away with just using __c, it does not work in
+   C++. We need to use &__c[0] to avoid the compiler puking. Dave Hylands
+   explaned it thusly,
+
+     Let's suppose that we use PSTR("Test"). In this case, the type returned
+     by __c is a prog_char[5] and not a prog_char *. While these are
+     compatible, they aren't the same thing (especially in C++). The type
+     returned by &__c[0] is a prog_char *, which explains why it works
+     fine. */
+
 /** \ingroup avr_pgmspace
     \def PSTR(s)
 
     Used to declare a static pointer to a string in program space. */
 
-#define PSTR(s) ({static char __c[] PROGMEM = (s); __c;})
+#define PSTR(s) ({static char __c[] PROGMEM = (s); &__c[0];})
 
 #define __LPM_classic__(addr)   \
 ({                              \

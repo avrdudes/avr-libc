@@ -1,3 +1,9 @@
+2004-09-10  Theodore A. Roth  <troth@openavr.org>
+[Contributed by Ren Liebscher <R.Liescher@gmx.de>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/pgmspace.h (PSTR): Fix to allow PSTR to work with C++.
+
 2004-09-09  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
