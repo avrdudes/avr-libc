@@ -28,7 +28,7 @@
 /** \mainpage AVR Libc
 
 The latest version of this document is always available from
-http://savannah.nongnu.org/projects/avr-libc/.
+http://savannah.nongnu.org/projects/avr-libc/
 
 The AVR Libc package provides a subset of the standard C library for Atmel AVR
 8-bit RISC microcontrollers. In addition, the library provides the basic

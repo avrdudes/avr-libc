@@ -1,3 +1,7 @@
+2003-02-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/main_page.dox: fix an HREF.
+
 2003-02-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/TODO: remove the ina.90 xref check, Eric did it.
