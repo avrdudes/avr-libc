@@ -49,7 +49,10 @@ extern "C" {
     \code #include <string.h> \endcode
 
     The string functions perform string operations on NULL terminated
-    strings.  */
+    strings. 
+
+    \note If the strings you are working on resident in program space (flash),
+    you will need to use the string functions described in \ref avr_pgmspace. */
 
 extern void *memccpy(void *, const void *, int, size_t);
 extern void *memchr(const void *, int, size_t) __ATTR_PURE__;

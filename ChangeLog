@@ -1,5 +1,10 @@
 2002-10-11  Theodore A. Roth  <troth@openavr.org>
 
+	* include/string.h: Add note about flash based strings.
+	* include/avr/pgmspace.h: Add note about ram based strings.
+
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/Makefile.am (DEMO_LIBS): Only grab the first lib found.
 

@@ -44,7 +44,10 @@
     \note These function are an attempt to provide some compatibility with
     header files that come with IAR C, to make porting applications between
     different compilers easier.  This is not 100% compatibility though (GCC
-    does not have full support for multiple address spaces yet). */
+    does not have full support for multiple address spaces yet).
+
+    \note If you are working with strings which are completely based in ram,
+    use the standard string functions described in \ref avr_string. */
 
 #ifndef __PGMSPACE_H_
 #define __PGMSPACE_H_ 1
