@@ -1,3 +1,13 @@
+2003-11-12 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: Implement missing stdio members: vsprintf(),
+		vsprintf_P(), vsnprintf(), vsnprintf_P()
+	* libc/stdio/Makefile.am: ditto.
+	* libc/stdio/vsprintf.c: New file.
+	* libc/stdio/vsprintf_p.c: New file.
+	* libc/stdio/vsnprintf.c: New file.
+	* libc/stdio/vsnprintf_p.c: New file.
+
 2003-11-11  Theodore A. Roth  <troth@openavr.org>
 
 	* avr-libc.spec.in (BuildRequires): Don't require doxygen or tetex if
