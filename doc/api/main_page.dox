@@ -108,8 +108,9 @@ The following is a list of AVR devices currently supported by the library.
 
 \anchor supp_dev_footnote_one
 
-\note <b>[1]</b> Assembly only. There is no support for these devices to be
-programmed in C since they do not have a ram based stack.
+\note <b>[1]</b> Assembly only. There is no direct support for these devices to be
+programmed in C since they do not have a RAM based stack.  Still, it could be
+possible to program them in C, see the \ref faq_tinyavr_c "FAQ" for an option.
 
 \anchor supp_dev_footnote_two
 
