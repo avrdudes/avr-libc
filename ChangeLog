@@ -1,5 +1,11 @@
 2004-05-03  Theodore A. Roth  <troth@openavr.org>
 
+	* devtools/gen-avr-lib-tree.sh: Set CFLAGS for all devices.
+	Stub out DEV_DEFS and DEV_ASFLAGS.
+	Remove un-needed CONF_FRAG.
+
+2004-05-03  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.ac (AC_INIT): Bump version.
 	* devtools/gen-avr-lib-tree.sh: Improve portability by eliminating the
 	use of '<<-EOF' and 'mkdir -p'.

@@ -109,51 +109,58 @@ EOF
 
 cd lib || exit 1
 
+# Define the special flags for special sub-targets.
+#   FIXME: Do we really want to use -O3 for speed???
+
+CFLAGS_SPACE="-mcall-prologues -Os"
+CFLAGS_SPEED="-O3"
+
 SKIP_NEW_DEVS="\
-attiny13:crttn13.o::: \
-attiny2313:crttn2313.o::: \
-atmega168:crtm168.o::: \
-atmega48:crtm48.o::: \
-atmega88:crtm88.o::: \
+attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega168:crtm168.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega48:crtm48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega88:crtm88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90can128:crtcan128.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 "
 
 DEV_INFO="\
-${NEW_DEVS} \
-at90s1200:crts1200.o::: \
-at90s2313:crts2313.o::: \
-at90s2323:crts2323.o::: \
-at90s2333:crts2333.o::: \
-at90s2343:crts2343.o::: \
-at90s4433:crts4433.o::: \
-at90s4414:crts4414.o::: \
-at90s4434:crts4434.o::: \
-at90s8515:crts8515.o::: \
-at90s8535:crts8535.o::: \
-at90c8534:crtc8534.o::: \
-attiny11:crttn11.o::: \
-attiny12:crttn12.o::: \
-attiny15:crttn15.o::: \
-attiny22:crttn22.o::: \
-attiny26:crttn26.o::: \
-attiny28:crttn28.o::: \
-atmega103:crtm103.o::: \
-atmega128:crtm128.o::: \
-atmega16:crtm16.o::: \
-atmega161:crtm161.o::: \
-atmega162:crtm162.o::: \
-atmega163:crtm163.o::: \
-atmega169:crtm169.o::: \
-atmega8:crtm8.o::: \
-atmega8515:crtm8515.o::: \
-atmega8535:crtm8535.o::: \
-atmega32:crtm32.o::: \
-atmega323:crtm323.o::: \
-atmega64:crtm64.o::: \
-at86rf401:crt86401.o::: \
-at43usb320:crt43320.o::: \
-at43usb355:crt43355.o::: \
-at76c711:crt76711.o::: \
-at94k:crtat94k.o::: \
+${NEW_DEVS}\
+at90s1200:crts1200.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2333:crts2333.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2343:crts2343.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s4433:crts4433.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s4414:crts4414.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s4434:crts4434.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s8515:crts8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s8535:crts8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny11:crttn11.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny12:crttn12.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny15:crttn15.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny28:crttn28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega103:crtm103.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega128:crtm128.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega16:crtm16.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega161:crtm161.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega162:crtm162.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega163:crtm163.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega169:crtm169.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega8:crtm8.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega8515:crtm8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega8535:crtm8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega32:crtm32.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega323:crtm323.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega64:crtm64.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+at86rf401:crt86401.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at43usb320:crt43320.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+at43usb355:crt43355.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+at76c711:crt76711.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+at94k:crtat94k.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 "
 
 cat ${TMP_COPY_RIGHT_HDR} > Makefile.am
@@ -161,12 +168,9 @@ cat >> Makefile.am << EOF
 SUBDIRS = \\
 EOF
 
-#CONF_FRAG="conf.frag"
-CONF_FRAG="/dev/null"
-
 echo "Generating source directories:"
 
-> ${CONF_FRAG}
+IFS=';'
 
 for dev_crt in $DEV_INFO
 do
@@ -191,9 +195,8 @@ do
 			;;
 		*)
 			INCLUDE_C_LIB="include \$(top_srcdir)/AvrCommonLibC.am"
+			;;
 	esac
-
-	echo "	lib/$dev/Makefile" >> ${CONF_FRAG}
 
 	echo "	$dev $CONT_CHR" >> Makefile.am
 
