@@ -13,6 +13,14 @@ port x. Both names are now available for all devices. Mega162 users should
 note that this redefines PE0 and PE1 to be pins 0 and 1 of Port E (see fix for
 bug #5799 below).
 
+* Extend stdio API.
+
+New functions:
+  vsprintf
+  vsprintf_P
+  vsnprintf
+  vsnprintf_P
+
 *** Changes in avr-libc-1.0.1:
 
 * Fix bug #5799.

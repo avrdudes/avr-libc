@@ -1,3 +1,12 @@
+2003-11-26  Theodore A. Roth  <troth@openavr.org>
+
+	Released avr-libc-1.0.2.
+
+2003-11-26  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.2.
+	* NEWS: Add note about now stdio functions.
+
 2003-11-24  Joerg Wunsch  <j.gnu@uriah.heep.sax.de>
 
 	* include/stdio.h: Implement missing stdio members: vsprintf(),
