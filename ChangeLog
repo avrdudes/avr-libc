@@ -1,3 +1,7 @@
+2002-11-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/setjmp.h: make -mint8 proof.
+
 2002-11-05  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

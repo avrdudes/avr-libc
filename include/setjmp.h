@@ -23,6 +23,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #ifndef __SETJMP_H_
 #define __SETJMP_H_ 1
 
@@ -41,31 +43,8 @@ extern "C" {
 	24 = total size
  */
 
-typedef struct {
-	/* call-saved registers */
-	unsigned char __j_r2;
-	unsigned char __j_r3;
-	unsigned char __j_r4;
-	unsigned char __j_r5;
-	unsigned char __j_r6;
-	unsigned char __j_r7;
-	unsigned char __j_r8;
-	unsigned char __j_r9;
-	unsigned char __j_r10;
-	unsigned char __j_r11;
-	unsigned char __j_r12;
-	unsigned char __j_r13;
-	unsigned char __j_r14;
-	unsigned char __j_r15;
-	unsigned char __j_r16;
-	unsigned char __j_r17;
-	/* frame pointer, stack pointer, status register, program counter */
-	unsigned int __j_fp;  /* Y */
-	unsigned int __j_sp;
-	unsigned char __j_sreg;
-	unsigned int __j_pc;
-	unsigned char __j_pch;  /* only devices with >128K bytes of flash */
-} jmp_buf[1];
+#define _JBLEN 24
+typedef struct _jmp_buf { unsigned char _jb[_JBLEN + 1]; } jmp_buf[1];
 
 /** \defgroup setjmp Setjmp and Longjmp
 
