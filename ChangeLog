@@ -1,3 +1,12 @@
+2005-01-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Implement savannah patch #3516: %S format for printf().
+	* AUTHORS: Mention Helmut Wallner for his contribution.
+	* include/stdio.h: Document the new %S format.
+	* include/avr/pgmspace.h: Prototype for new strnlen_P() function.
+	* libc/pmstring/Makefile.am: Include strnlen_P.S.
+	* libc/stdio/vfprintf.c: Add implementation for %S.
+
 2005-01-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/setjmp.h: Document that longjmp() might destroy global
