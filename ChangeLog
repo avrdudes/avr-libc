@@ -1,3 +1,12 @@
+2004-10-15  Eric B. Weddington <ericw@evcohs.com>
+
+    * include/avr/iom165.h: New file. [Patch #3375]
+    * include/avr/iom325.h: New file. [Patch #3381]
+    * include/avr/iom3250.h: New file. [Patch #3379]
+    * include/avr/iom645.h: New file. [Patch #3380]
+    * include/avr/iom6450.h: New file. [Patch #3377]
+    Add IO header files for new devices.
+
 2004-09-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdio/vfscanf.c: fix parsing of multiple
