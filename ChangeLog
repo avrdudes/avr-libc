@@ -1,3 +1,9 @@
+2004-12-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/delay.h: Document the inline functions; implement
+	the macros mentioned in TODO.
+	* doc/TODO: Delete the respective TODO item.
+
 2004-12-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/fp_split.S: Clear r1 (__zero_reg__) upon NaN.
