@@ -1,5 +1,6 @@
 /* Copyright (c) 2002, Alexander Popov (sasho@vip.bg)
    Copyright (c) 2002,2004 Joerg Wunsch
+   Copyright (c) 2005, Helmut Wallner
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -349,6 +350,18 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					base = strlen(a.pc);
 #endif
 					goto nextitem;
+				case 'S':
+					a.pc = va_arg(ap, char *);
+#if PRINTF_LEVEL > PRINTF_MIN
+					if (flags & FLPREC)
+						base = strnlen_P(a.pc, prec);
+					else
+						base = strlen_P(a.pc);
+					width -= base;
+#else
+					base = strlen_P(a.pc);
+#endif
+					goto nextitem;
 				case 'd':
 				case 'i':
 					a.l = flags & FLLONG ?
@@ -470,6 +483,11 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					else if (c == 's')
 						while (base--)
 							putc(*a.pc++, stream);
+					else if (c == 'S')
+						while (base--) {
+							putc(pgm_read_byte(a.pc), stream);
+							a.pc++;
+						}
 #if PRINTF_LEVEL >= PRINTF_FLT
 					else if (flags & FLFLOAT) {
 						if (flags & FLFCVT) {

@@ -495,6 +495,7 @@ extern int strcasecmp_P(const char *, PGM_P) __ATTR_PURE__;
 extern size_t strlcat_P (char *, PGM_P, size_t );
 extern size_t strlcpy_P (char *, PGM_P, size_t );
 extern size_t strlen_P(PGM_P) __ATTR_CONST__; /* program memory can't change */
+extern size_t strnlen_P(PGM_P, size_t) __ATTR_CONST__; /* program memory can't change */
 extern int strncmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern char *strncat_P(char *, PGM_P, size_t);
