@@ -25,6 +25,7 @@
           so they have been changed and the incorrect names (OCRA1 and OCRB1)
           are undefined.
   [#8649] sfr_defs.h: missed _SFR_BYTE() in bit_is_set/clear
+  [#9345] Zero-Padding on vfprintf
   [#11275] fdevopen() should document its use of malloc()
 
 * Remove deprecated items:

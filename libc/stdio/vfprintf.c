@@ -149,7 +149,8 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 		if (flags & FLHASPERCENT) {
 			if (c >= '0' && c <= '9') {
 #if PRINTF_LEVEL > PRINTF_MIN
-				if (c == '0' && prec == 0 && width == 0) {
+				if (c == '0' && prec == 0 &&
+				    (flags & FLPREC) == 0) {
 					flags |= FLZFILL;
 				} else {
 					/* digit */
@@ -312,7 +313,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 				case '.':
 #if PRINTF_LEVEL > PRINTF_MIN
 					flags |= FLPREC;
-					flags &= ~FLZFILL;
 					prec = 0;
 #endif /* PRINTF_LEVEL > PRINTF_MIN */
 					break;

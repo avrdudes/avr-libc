@@ -1,3 +1,12 @@
+2004-12-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: Fix zero-padding when precision
+	is given (savannah bug #9345)
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in: Mark the branch as being pre-release.
+
 2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdio/fdevopen.c: document the use of calloc()
