@@ -6,3 +6,26 @@
   $ mkdir obj-rel && cd obj-rel
   $ ../configure --prefix=$PWD/_install <other-opts>
   $ make && make install
+
+From there, have a look at what got installed to be sure that everything
+you expect is there and in the right place.
+
+Verify that './prog --help' is in sync with new/removed options.
+
+Check the man pages if installed.
+
+Check that any other docs got installed and are usable.
+
+I also checked building the rpms from the tarball.
+
+If everything looks ok, try rolling the tarball:
+
+  $ make distcheck
+
+If that passes, commit the final changes to cvs. Tag the release. Do the
+"bootstrap, configure, make distcheck" dance once more. Sign the release
+and upload it to the server.
+
+It sometimes takes a few iterations to be sure that all the new files
+end up in the tarball and get installed.
+
