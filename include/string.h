@@ -72,15 +72,15 @@ extern size_t strlcpy(char *, const char *, size_t);
 extern size_t strlen(const char *) __ATTR_PURE__;
 extern char *strlwr(char *);
 extern char *strncat(char *, const char *, size_t);
-extern int strncmp(const char *, const char *, size_t);
+extern int strncmp(const char *, const char *, size_t) __ATTR_PURE__;
 extern char *strncpy(char *, const char *, size_t);
 extern int strncasecmp(const char *, const char *, size_t) __ATTR_PURE__;
 extern size_t strnlen(const char *, size_t) __ATTR_PURE__;
 extern char *strrchr(const char *, int) __ATTR_PURE__;
 extern char *strrev(char *);
-extern char *strsep(char **, const char *) __ATTR_PURE__;
+extern char *strsep(char **, const char *);
 extern char *strstr(const char *, const char *) __ATTR_PURE__;
-extern char *strtok_r(char *, const char *, char **) __ATTR_PURE__;
+extern char *strtok_r(char *, const char *, char **);
 extern char *strupr(char *);
 
 #ifdef __cplusplus
