@@ -573,9 +573,9 @@
 #define    COM01        5
 #define    COM00        4
 #define    WGM01        3
-#define    CS12         2
-#define    CS11         1
-#define    CS10         0
+#define    CS02         2
+#define    CS01         1
+#define    CS00         0
 
 /* Timer/Counter 2 Control Register - TCCR2 */
 #define    FOC2         7
