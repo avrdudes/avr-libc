@@ -46,7 +46,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
 
 SUFFIXES             = .pdf
 
-DOC_INST_DIR         = $(DESTDIR)$(datadir)/doc/avr-libc-$(VERSION)
+DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
