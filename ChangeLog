@@ -1,6 +1,8 @@
 2004-02-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/malloc.c: Fix bug #2143 (malloc wrap around top of RAM)
+	* include/avr/timer.h: The mailing list agreed to remove this file.
+	* include/timer.h: Remove this wrapper as well.
 
 2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
