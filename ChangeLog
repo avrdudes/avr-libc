@@ -1,3 +1,10 @@
+2002-08-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am
+	* doc/api/sfr.dox
+	* include/avr/io.h
+	* include/avr/sfr_defs.h: document <avr/sfr_defs.h>.
+
 2002-08-21  Theodore A. Roth  <troth@verinet.com>
 
 	* doc/api/inline_asm.dox: Move old history into non-doxy comment.

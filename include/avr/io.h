@@ -30,6 +30,10 @@
     device that has been specified by the <tt>-mmcu=</tt> compiler
     command-line switch.
 
+    Note that each of these files always includes
+    \code #include <avr/sfr_defs.h> \endcode
+    See \ref avr_sfr for the details.
+
     Included are definitions of the IO register set and their
     respective bit values as specified in the Atmel documentation.
     Note that Atmel is not very consistent in its naming conventions,

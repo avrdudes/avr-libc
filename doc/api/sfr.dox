@@ -1,0 +1,96 @@
+/* Copyright (c) 2002, Joerg Wunsch
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \defgroup avr_sfr Special function registers
+
+When working with microcontrollers, a lot of the task usually consists
+of controlling the peripherals that are connected to the device,
+respectively programming the subsystems that are contained in the
+controller (which by itself communicate with the circuitry connected
+to the controller).
+
+The AVR series of microcontrollers offers two different paradigms to
+perform this task.  There's a separate IO address space available (as
+it's e. g. known from some high-level CISC CPUs) that can be addressed
+with specific IO instructions that are applicable to some or all of
+the IO address space (\c in, \c out, \c sbi etc.).  The entire IO
+address space is also made available as <em>memory-mapped IO</em>,
+i. e. it can be accessed using all the MCU instructions that are
+applicable to normal data memory.  The IO register space is mapped
+into the data memory address space with an offset of 0x20 since the
+bottom of this space is reserved for direct access to the MCU
+registers.  (Actual SRAM is available only behind the IO register
+area, starting at either address 0x60, or 0x100 depending on the
+device.)
+
+AVR Libc supports both these paradigms.  While by default, the
+implementation uses memory-mapped IO access, this is hidden from the
+programmer.  So the programmer can access IO registers either with a
+special function like \c outb():
+
+\code
+	#include <avr/io.h>
+
+	outb(PORTA, 0x33);
+\endcode
+
+or they can assign a value directly to the symbolic address:
+
+\code
+	PORTA = 0x33;
+\endcode
+
+The compiler's choice of which method to use when actually accessing
+the IO port is completely independent of the programmer's way to write
+the code.  So even if the programmer uses the memory-mapped paradigm
+and writes
+
+\code
+	PORTA |= 0x40;
+\endcode
+
+the compiler can optimize this into the use of an \c sbi instruction
+(of course, provided the target address is within the allowable range
+for this instruction, and the right-hand side of the expression is a
+constant value known at compile-time).
+
+The advantage of using the memory-mapped paradigm in C programs is
+that it makes the programs more portable to other C compilers for the
+AVR platform.  Some people might also feel this to be better readable.
+For example, the following two statements would be equivalent:
+
+\code
+	outb(DDRD, inb(DDRD) & ~LCDBITS);
+	DDRD &= ~LCDBITS;
+\endcode
+
+The generated code is identical for both.  Whitout optimization, the
+compiler strictly generates code following the memory-mapped paradigm,
+while with optimization turned on, code is generated using the (faster
+and smaller) \c in/out MCU instructions.
+
+*/
