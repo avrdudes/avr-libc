@@ -1,0 +1,1004 @@
+2004-12-30  Theodore A. Roth  <troth@openavr.org>
+
+	* libc/stdlib/Makefile.am (lib_a_c_sources): Add stdlib_private.h.
+
+2004-12-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Last-minute cleanup for release 1.2.0:
+	* include/compat: New directory.
+	* include/compat/ina90.h: Moved from avr/ina90.h.
+	* include/compat/twi.h: Moved from avr/twi.h.
+	* include/avr/ina90.h: Removed from old location.
+	* include/avr/twi.h: Ditto.
+	* include/avr/parity.h: Document.
+	* doc/avr-libc-reference.html: Remove obsolete file.
+	* doc/Makefile.am: Note removal of avr-libc-reference.html.
+	* doc/examples/twitest/twitest.c: twi.h is in compat/ now.
+	* doc/examples/twitest/twitest.dox: Ditto.
+	* doc/TODO: Delete items done.
+	* AUTHORS: Mention Ted Roth as alumni admin.
+	* README: Upgrade info on tool versions.
+	* NEWS: Mention forgotten items: realloc(), Copyright
+	unification, extended delay API, man page generation,
+	moved header files.
+
+2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
+
+    Apply patch #2155:
+
+    2004-04-07  Theodore A. Roth  <troth@openavr.org>
+    [Contriubuted by Luca Matteini]
+
+	* libc/stdlib/strtol.c: Make a couple of optimizations.
+	* libc/stdlib/strtoul.c: Ditto.
+
+2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
+
+    * include/avr/iom169.h: Add PRR register and bit definitions.
+    [Fix for bug #11418]
+    * NEWS: Update bugs fixed list.
+
+2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
+
+    * include/avr/iom128.h: Add USART* signal names to match datasheet.
+    [Fix for bug #11405]
+    * NEWS: Update bugs fixed list.
+
+2004-12-29  Eric B. Weddington  <ericw@evcohs.com>
+
+    * include/avr/sleep.h: Fix bugs #6352, #10489, #11425.
+    * NEWS: Update bugs fixed list.
+
+2004-12-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: Fix zero-padding when precision
+	is given (savannah bug #9345)
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in: Mark the branch as being pre-release.
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fdevopen.c: document the use of calloc()
+	[fix for savannah bug #11275]
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* NEWS: Update, merge all fixes from 1.0 branch.
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/main_page.dox: Mention all newly supported devices.
+	* doc/api/using-tools.dox: Mention all newly supported devices.
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+[Contributed by Frederik Rouleau <frouleau .at. naotek .dot. com>]
+
+	* configure.in: move ATtiny2313 and ATtiny13 from avr5 to
+	avr2 (by now, until a more appropriate solution can be found).
+
+2004-12-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/delay.h: Document the requirement of F_CPU.
+
+2004-12-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/delay.h: Move _delay_ms and _delay_us to double.
+
+2004-12-21  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iomx8.h: Add the EEARH register definition for the 
+	mega48.
+	[Fix for bug #11242.]
+
+2004-12-21  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iom16.h: Add USART* signal names to match datasheet.
+	[Fix for bug #11315, mentioned in comment.]
+
+2004-12-21  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iom32.h: Add USART* signal names to match datasheet.
+	[Fix for bug #11315]
+
+2004-12-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/Makefile: Default to an ATmega8 now.
+
+2004-12-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in: Enable man page building.
+	* doc/api/Makefile.am: (ditto)
+	* doc/api/doxygen.config.in: (ditto)
+	* scripts: new directory 
+	* scripts/avr-man.in: Wrapper script for man(1).
+	* scripts/Makefile.am: Link avr-man.in into the build.
+	* Makefile.am: Include the scripts subdir.
+
+2004-12-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/delay.h: Document the inline functions; implement
+	the macros mentioned in TODO.
+	* doc/TODO: Delete the respective TODO item.
+
+2004-12-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/fp_split.S: Clear r1 (__zero_reg__) upon NaN.
+	Fix for (serious) savannah bug #7667.
+
+2004-12-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: Cosmetical doc change (for atof()).
+
+2004-11-24  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* configure.in:
+	* include/avr/io.h:
+	Add support for mega165, mega325, mega3250, mega645 and mega6450.
+
+2004-11-18  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iotn26.h: Replace file.
+	This file is replaced to conform to the license since the original
+	author could not be contacted. The new file matches the latest
+	data sheet from Atmel.
+	* AUTHORS: Updated.
+
+2004-11-18  Eric B. Weddington  <ericw@evcohs.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/iom16.h: Replace file.
+	This file is replaced to conform to the license since the original
+	author could not be contacted. The new file matches the latest
+	data sheet from Atmel.
+	* AUTHORS: Updated.
+
+2004-11-12  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/LICENSE-Changes/PERM-Bob-Paddock:
+	* doc/LICENSE-Changes/PERM-Colin-OFlynn:
+	* doc/LICENSE-Changes/PERM-Joerg-Wunsch:
+	* doc/LICENSE-Changes/PERM-Juergen-Schilling:
+	* doc/LICENSE-Changes/PERM-Keith-Gudger:
+	* doc/LICENSE-Changes/PERM-Marek-Michalkiewicz:
+	* doc/LICENSE-Changes/PERM-Micheal-Stumpf:
+	* doc/LICENSE-Changes/PERM-Nils-Kristian-Strom:
+	* doc/LICENSE-Changes/PERM-Peter-Jansen:
+	* doc/LICENSE-Changes/PERM-Reinhard-Jessich:
+	* doc/LICENSE-Changes/PERM-Steinar-Haugen:
+	* doc/LICENSE-Changes/PERM-Theodore-A-Roth:
+	New files. These are for documenting the granting of permission for
+	copyright and licensing changes from various contributors. The files
+	are the email messages we received from each individual.
+
+2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
+
+	* libm/fplib/readme.dtostre: Change Michael Stumpf's email address.
+	* libm/fplib/readme.strtod: Ditto.
+	* libm/fplib/readme.fplib: Ditto. Remove license as this is a README 
+	file, not software. This matches the other readme files.
+	* libm/fplib/acos.S: Change license with permission of Michael Stumpf.
+	Change Michael Stumpf's email address.
+	* libm/fplib/addsf3.S: Ditto.
+	* libm/fplib/addsf3x.S: Ditto.
+	* libm/fplib/ceil.S: Ditto.
+	* libm/fplib/cos.S: Ditto.
+	* libm/fplib/cosh.S: Ditto.
+	* libm/fplib/divsf3.S: Ditto.
+	* libm/fplib/divsf3x.S: Ditto.
+	* libm/fplib/dtostre.S: Ditto.
+	* libm/fplib/exp.S: Ditto.
+	* libm/fplib/fixsfsi.S: Ditto.
+	* libm/fplib/floatsisf.S: Ditto.
+	* libm/fplib/floor.S: Ditto.
+	* libm/fplib/fmod.S: Ditto.
+	* libm/fplib/fp_cmp.S: Ditto.
+	* libm/fplib/fp_cosinus.S: Ditto.
+	* libm/fplib/fp_flashconst.S: Ditto.
+	* libm/fplib/fp_merge.S: Ditto.
+	* libm/fplib/fp_nan.S: Ditto.
+	* libm/fplib/fp_powerseries.S: Ditto.
+	* libm/fplib/fp_split.S: Ditto.
+	* libm/fplib/fp_zero.S: Ditto.
+	* libm/fplib/fplib.inc: Ditto.
+	* libm/fplib/frexp.S: Ditto.
+	* libm/fplib/ldexp.S: Ditto.
+	* libm/fplib/log10.S: Ditto.
+	* libm/fplib/log.S: Ditto.
+	* libm/fplib/modf.S: Ditto.
+	* libm/fplib/mulsf3.S: Ditto.
+	* libm/fplib/mulsf3x.S: Ditto.
+	* libm/fplib/negsf2.S: Ditto.
+	* libm/fplib/pow.S: Ditto.
+	* libm/fplib/sin.S: Ditto.
+	* libm/fplib/sinh.S: Ditto.
+	* libm/fplib/sqrt.S: Ditto.
+	* libm/fplib/strtod.S: Ditto.
+	* libm/fplib/tan.S: Ditto.
+	* libm/fplib/tanh.S: Ditto.
+	* LICENSE: Update.
+	* GPL: Remove. No longer needed.
+
+2004-11-10  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iom128.h: Correct license with permission from Peter 
+	Jansen.
+	* configure.in: Correct license with permission from Reinhard Jessich.
+	* include/math.h: Correct license with permission from Michael Stumpf.
+	* include/ctype.h: Ditto.
+
+2004-11-10  Theodore A. Roth  <troth@openavr.org>
+
+	* Makefile.am (install-data-local): Don't try to install version.h. My
+	implementation of that broke the build. :-(
+
+2004-11-09  Eric B. Weddington  <ericw@evcohs.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	
+	* include/avr/ina90.h (_NOP): Add semicolon to statement in block to
+	avoid parse error. [Bug #10946]
+	(_CLI): Ditto.
+	(_SEI): Ditto.
+	(_WDR): Ditto.
+	(_SLEEP): Ditto.
+	(_OPC): Ditto.
+	(_LPM): Ditto.
+	(_ELPM): Ditto.
+	(output(port, val)): Ditto. Also correct parentheses around parameters.
+
+2004-11-08  Eric B. Weddington  <ericw@evcohs.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/iomx8.h (WDEE): Correct bit name WDEE to WDE to match the 
+	data sheet.
+	* include/avr/wdt.h (_wdt_write): Add ability to switch the watchdog 
+	control register being used if device is tiny2313, mega48, mega88,
+	mega168. Add new watchdog timeout constants. [Bug #10811, Bug #10872] 
+	Select correct macro to use for at90can128. [Bug #10905]
+	* include/avr/wdt.h: Add include of <stdint.h>. Typecast value in
+	_wdt_write to uint8_t to make macro -mint8 compatible.
+
+2004-11-03  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iom162.h: Correct license with permission from Nils 
+	Kristian Strom.
+	* include/avr/iom169.h: Correct license with permission from Juergen 
+	Schilling.
+	* doconf: Add copyright notice.
+	* dodist: Ditto.
+	* domake: Ditto.
+	* reconf: Ditto.
+
+2004-11-02  Eric B. Weddington  <ericw@evcohs.com>
+
+	* AUTHORS: Forgot to add Alexander Popov.
+
+2004-11-02  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iom32.h: Correct license with permission from
+	Steinar Haugen.
+	* include/avr/iom64.h: Ditto.
+	* include/avr/iom8515.h: Ditto.
+	* include/avr/iom8535.h: Ditto.
+
+2004-11-02  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iotn2313.h: Correct license with permission from
+	Bob Paddock.
+	* include/avr/wdt.h: Correct license with permission from Marek
+	Michalkiewicz.
+	* acconfig.h: Correct license with permission from Theodore A. Roth.
+	* include/avr/iom168.h: Ditto.
+	* include/avr/iom48.h: Ditto.
+	* include/avr/iom88.h: Ditto.
+	* include/avr/iomx8.h: Ditto.
+	* include/avr/iotn13.h: Ditto.
+	* include/avr/portpins.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* xml/Atmel2libc.py: Ditto.
+	* xml/Desc-parser.py: Ditto.
+	* xml/Device.dtd: Ditto.
+
+2004-11-02  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* acconfig.h: Add modified BSD license header.
+	* avr-libc.spec.in: Ditto.
+	* devtools/cr_check.py: Ditto.
+	* xml/Validate.py: Ditto.
+
+2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
+
+	* doc/INSTALL: Update release versions compatible with avr-libc and
+	instructions.
+	[Bug #10150]
+
+2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/io8515.h: Correct license with permission from Marek 
+	Michalkiewicz.
+	* include/avr/io8534.h: Ditto.
+	* include/avr/io8535.h: Ditto.
+	* include/avr/ioat94k.h: Ditto.
+	* include/avr/iom103.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom8.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+	* include/avr/parity.h: Ditto.
+
+2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
+
+	* crt1/gcrt1.S: Correct license with permission from Marek 
+	Michalkiewicz.
+	* common/macros.inc: Ditto.
+	* include/errno.h: Ditto.
+	* include/setjmp.h: Ditto.
+	* include/stdint.h: Ditto.
+	* include/string.h: Ditto.
+	* include/avr/crc16.h: Ditto.
+	* include/avr/delay.h: Ditto.
+	* include/avr/eeprom.h: Ditto.
+	* include/avr/interrupt.h: Ditto.
+	* include/avr/io1200.h: Ditto.
+	* include/avr/io2313.h: Ditto.
+	* include/avr/io2323.h: Ditto.
+	* include/avr/io2333.h: Ditto.
+	* include/avr/io2343.h: Ditto.
+	* include/avr/io4414.h: Ditto.
+	* include/avr/io4433.h: Ditto.
+	* include/avr/io4434.h: Ditto.
+	* include/avr/io76c711.h: Ditto.
+	* include/avr/sfr_defs.h: Ditto.
+	* include/avr/signal.h: Ditto.
+	* include/avr/twi.h: Ditto.
+
+2004-11-01  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* libm/fplib/asin.S: Put lookup table into .progmem.gcc_fplib section.
+	[Bug #9348]
+	* libm/fplib/atan.S: Ditto.
+
+2004-10-30  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/iocan128.h: Remove duplicate definitions of PINAn.
+	[Bug #10837]
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/stdlib.h: Correct license with permission from Marek
+	Michalkiewicz and Joerg Wunsch.
+	* include/avr/io.h: Ditto.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/io43u32x.h: Correct license with permission from Keith
+	Gudger.
+	* include/avr/io43u35x.h: Ditto.
+	* include/avr/io86r401.h: Correct license with permission from Colin 
+	O'Flynn.
+	* include/avr/iocan128.h: Ditto.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/avr/iom165.h: Correct license on my files.
+	* include/avr/iom325.h: Ditto.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom645.h: Ditto.
+	* include/avr/iom6450.h: Ditto.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
+	* LICENSE: Show correct license statements, with full list of authors.
+	* AUTHORS: Update list of authors.
+	* GPL: New file. Contains the GNU Public License referenced in the
+	fplib license.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
+	* include/inttypes.h: Correct license with permission from Joerg Wunsch.
+	* include/stdio.h: Ditto.
+	* libc/stdio/vfscanf.c: Ditto.
+	* libc/stdlib/calloc.c: Ditto.
+	* libc/stdlib/malloc.c: Ditto.
+	* libc/stdlib/realloc.c: Ditto.
+
+2004-10-28  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/iotn2313.h: Remove duplicate defines for PORTxn (they
+	are defined in portpins.h). [Bug #10812]
+	* include/avr/iocan128.h: Rename PORTxn defines to Pxn (let portpins.h
+	define PORTxn).
+
+2004-10-21  Eric B. Weddington <ericw@evcohs.com>
+
+	* include/avr/iom64.h: Fix bit identifer ADFR to ADATE.
+	[Bug #10733]
+
+2004-10-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/assembler.dox: Add section about gas
+	pseudo-ops and AVR-specific operators
+	* doc/api/faq.dox: add xref to that section here.
+
+2004-10-15  Eric B. Weddington <ericw@evcohs.com>
+
+	* include/avr/iom165.h: New file. [Patch #3375]
+	* include/avr/iom325.h: New file. [Patch #3381]
+	* include/avr/iom3250.h: New file. [Patch #3379]
+	* include/avr/iom645.h: New file. [Patch #3380]
+	* include/avr/iom6450.h: New file. [Patch #3377]
+	Add IO header files for new devices.
+
+2004-09-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfscanf.c: fix parsing of multiple
+	float values; fix for bug #10068.
+
+2004-09-20  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/crc16.h: Update copyright year.
+	(_crc16_update): Add __volatile__ to inline asm. [Bug #10450]
+	(_crc_xmodem_update): Ditto.
+	(_crc_ccitt_update): Ditto.
+
+2004-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: enable and document atof().
+	Delete realloc() from the #if 0 part, it's already
+	declared and documented anyway.
+
+2004-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfscanf.c: Fix a logical flaw that caused
+	characters > 'Z' && < 'a' to be misdetected as valid
+	hex digits.  Fix for bug #10420.
+
+2004-09-19  Theodore A. Roth  <troth@openavr.org>
+
+	* include/stdint.h (__HAS_INT32_T__): Define if gcc can supply us with
+	a 32 bit integer.
+	(__HAS_INT64_T__): Define if gcc can supply us with a 64 bit integer.
+	* include/avr/pgmspace.h (prog_int32_t): Use __HAS_INT32_T__ when
+	typedef'ing.
+	(prog_uint32_t): Ditto.
+	(prog_int64_t): Use __HAS_INT64_T__ when typedef'ing.
+	(prog_uint64_t): Ditto.
+
+2004-09-19  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* configure.in: Don't generate version.h.
+	* reconf: Don't run autoheader.
+
+2004-09-10  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iomx8.h (OCIE0B): Fix value. [Bug #10001]
+	(OCIE0A): Ditto.
+	(OCIE1B): Ditto.
+	(OCIE1A): Ditto.
+	(OCIE2B): Ditto.
+	(OCIE2A): Ditto.
+
+2004-09-10  Theodore A. Roth  <troth@openavr.org>
+[Contributed by Rene Liebscher <R.Liebscher@gmx.de>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/pgmspace.h (PSTR): Fix to allow PSTR to work with C++.
+
+2004-09-09  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	(CHECK_AVR_DEVICE): Don't supply main() in function block of
+	AC_TRY_COMPILE since it is already provided.
+
+2004-08-22  Marek Michalkiewicz  <marekm@amelek.gda.pl>
+
+	* include/string.h (strsep): Remove __ATTR_PURE__, bug #10078.
+	(strtok_r): Remove __ATTR_PURE__ too.
+	(strncmp): Add __ATTR_PURE__.
+
+2004-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/twitest/twitest.c: Make it work on 1 MHz clock.
+	* doc/examples/twitest/twitest.dox: Renumber annotations.
+
+2004-07-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: rearrange demos into their own group.
+	* doc/examples/demo/demo.dox: (Ditto)
+	* doc/examples/twitest/twitest.dox: (Ditto)
+	* doc/api/doxygen.config.in: include doc/examples in INPUT.
+	* doc/examples/all-demos.dox: [new] Summary page for the demos.
+
+2004-07-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/malloc.dox: Document realloc() internals.
+	* include/stdlib.h: include realloc().
+	* libc/stdlib/Makefile.am: include realloc.c.
+	* libc/stdlib/malloc.c: move out shared parts to stdlib_private.h.
+	* libc/stdlib/stdlib_private.h: [new] shared file for
+	malloc()/realloc().
+	* libc/stdlib/realloc.c: [new] implementation of realloc().
+
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/sleep.h: protect function-like macros, fix savannah
+	bug #9013.
+	* include/avr/ina90.h: Ditto.
+
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdint.h: created from old inttypes.h.
+	* include/inttypes.h: reduced to #include <stdint.h>.
+
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: Doc update: binary vs. raw streams explained,
+	fix for savannah bug #9704.
+
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fputs_p.c: pgm_read_byte(p++) -> pgm_read_byte(p) ... p++;
+	* libc/stdio/puts_p.c: Ditto.
+	* libc/stdio/vfprintf.c: Ditto.
+	* libc/stdio/vfscanf.c: Ditto.
+
+2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Fix the use of progmem tables, closes
+	savannah bug #9669.
+
+2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo.c: Update for ATmega32
+
+2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fputs_p.c: replace PRG_RDB by pgm_read_byte
+	* libc/stdio/puts_p.c: Ditto.
+	* libc/stdio/vfprintf.c: Ditto.
+	* libc/stdio/vfscanf.c: Ditto.
+
+2004-07-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/strtod.S: fix parsing of a partial
+	exponent, fix *endp return value (savanna bug #2924)
+
+2004-07-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/pow.S: localize labels, fix pow(N, 0).
+
+2004-07-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/inttypes.h: avr-gcc >= 3.5 will be able to
+	provide [u]int32_t when -mint8 is in effect.
+
+2004-07-02  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: Add copyright/license.
+	Tweaks to handle inconsistencies in Atmel's files.
+	* xml/Desc-parser.py: New file.
+	* xml/Device.dtd: Make rww_start and rww_end optional since some
+	devices don't have rww.
+	* xml/Validate.py: Allow shell gobbing to work so you can validate more
+	than one file at a time.
+
+2004-06-30  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: Work around bugs in Atmel's xml files.
+	* xml/Device.dtd: Change order of nrww and rww bootloader attributes.
+
+2004-06-30  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: Add code to handle the boot loader information.
+	* xml/Device.dtd: Add bootloader element.
+
+2004-06-23  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py (gather_io_info): New function.
+	(dump_ioregs): Implement dumping ioregisters.
+	* xml/Device.dtd: Move ioreg elements into ioregisters element.
+	Add access and init attributes to bit_field element.
+
+2004-06-22  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: Fixes to allow validation of generated file.
+	* xml/Device.dtd: Ditto.
+	* xml/Validate.py: New file.
+
+2004-06-22  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Device.dtd: Fix some syntax errors.
+
+2004-06-22  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: Now dumps header, memory size info and interrupts
+	data as well-formed XML.
+	* xml/Device.dtd: Change memory info to memory sizes.
+
+2004-06-21  Theodore A. Roth  <troth@openavr.org>
+
+	* xml/Atmel2libc.py: New file.
+	* xml/Device.dtd: Don't force copyright/license in doc (just use a
+	comment).
+	Make device name an attribute of device.
+	Add memory_info element of device.
+	Massage the interrupt and vector elements.
+
+2004-06-20  Theodore A. Roth  <troth@openavr.org>
+
+	* xml: New directory.
+	* xml/Device.dtd: New file.
+
+2004-06-04  Theodore A. Roth  <troth@openavr.org>
+
+	* Makefile.am (install-data-local): Install version.h file.
+	* acconfig.h: New file.
+	* config-ml.in: When adding the Multi.tem fragment to the Makefile,
+	don't use a variable or the fragment will be added to the version.h
+	file instead of the Makefile.
+	* configure.in: Generate the version.h config header file.
+	* reconf: Run autoheader.
+
+2004-05-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo.c: Update for ATmega8
+
+2004-05-21  Theodore A. Roth  <troth@openavr.org>
+[Contributed by Bruce Graham <bgraham@huronnet.com>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iotn13.h: Add comments for register defs.
+	Fix SPMEN bit def.
+
+2004-05-14  Theodore A. Roth  <troth@openavr.org>
+[Thanks to Bruce Graham <bgraham@huronnet.com> for reporting these.]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iocan128.h (SRW00, SRW01, SRW10, SRW11): Fix bit name.
+	(FOC2A, COM2A1, COM2A0): Ditto.
+
+2004-05-13  Theodore A. Roth  <troth@openavr.org>
+[Thanks to Bruce Graham <bgraham@huronnet.com> for reporting these.]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iocan128.h (OCR1A, OCR1AL, OCR1AH): Fix register name.
+	(OCR1B, OCR1BL, OCR1BH, OCR1CL, OCR1CH): Ditto.
+	(OCR3A, OCR3AL, OCR13H, OCR3B, OCR3BL, OCR3BH): Ditto.
+	(OCR3CL, OCR3CH): Ditto.
+	(OCR1C, OCR3C): Fix register name and address.
+	(CANMSG): Define.
+
+2004-04-29  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in: Set AVR_LIBC_USER_MANUAL with version number appended
+	only if versioned docs are requested (that's the default).
+
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/eeprom.h (eeprom_rb): Remove deprecated interface.
+	(eeprom_rw): Ditto.
+	(eeprom_wb): Ditto.
+	(_EEPUT): Use eeprom_write_byte() directly instead of eeprom_wb().
+	(_EEGET): Use eeprom_read_byte() directly instead of eeprom_rb().
+	* include/avr/pgmspace.h (PRG_RDB): Remove deprecated interface.
+	* include/avr/sfr_defs.h (cbi): Ditto.
+	(sbi): Ditto.
+	(inb): Ditto.
+	(outb): Ditto.
+	(inw): Ditto.
+	(outw): Ditto.
+	(outp): Ditto.
+	(inp): Ditto.
+	(BV): Ditto.
+
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/eeprom.h: Remove deprecated file.
+	* include/ina90.h: Ditto.
+	* include/interrupt.h: Ditto.
+	* include/io.h: Ditto.
+	* include/pgmspace.h: Ditto.
+	* include/progmem.h: Ditto.
+	* include/sig-avr.h: Ditto.
+	* include/twi.h: Ditto.
+	* include/wdt.h: Ditto.
+
+2004-04-27  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in: Fix typo when adding crtm168.o to AVR_CRT_MEGA.
+
+2004-04-27  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iocan128.h (RAMPZ): Define.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in:
+	* crt1/Makefile.am:
+	* include/avr/io.h:
+	Add support infrastructure for mega48, mega88, mega168, tiny13,
+	tiny2313 and at90can128.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AVR_LIBC_USER_MANUAL): Append version number.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iomx8.h: Undefine EECR, EEDR, EEAR, EEARL, and EEARH
+	before defining them to avoid conflict with predfined values in
+	io.h.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iocan128.h (UDR0): Define.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iocan128.h: Deleted commented out #defines.
+	Formatting cleanups.
+
+2004-04-23  Theodore A. Roth  <troth@openavr.org>
+[Contributed by Colin O'Flynn <coflynn@newae.com>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iocan128.h: New file.
+
+2004-04-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo.c: Update for ATmega{64,128}
+
+2004-04-22  Theodore A. Roth  <troth@openavr.org>
+
+	[This fixes bug #8649.]
+	* include/avr/sfr_defs.h (bit_is_set): Wrap sfr arg with _SFR_BYTE().
+	(bit_is_clear): Ditto.
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/sfr_defs.h: Move _SFR_BYTE() and _SFR_WORD() #defines to
+	be before first usage.
+
+2004-04-20  Theodore A. Roth  <troth@openavr.org>
+[Contributed by LAL@pro.onet.pl]
+
+	[This closes patch #2651]
+	* include/avr/iom169.h: Change SIG_UART0_RECV to SIG_USART_RECV.
+	Change SIG_UART0_DATA to SIG_USART_DATA.
+	Change SIG_UART0_TRANS to SIG_USART_TRANS.
+
+2004-04-20  Theodore A. Roth  <troth@openavr.org>
+
+	[This change should fix bug #8391]
+	* include/avr/boot.h (__BOOT_LOCK_BITS_MASK): Remove.
+	(__boot_lock_bits_set): Use the compliment of lock_bits arg so the user
+	specifies only which bits are to be set. NOTE that this changes the
+	usage but the previous usage was confusing and not well documented.
+	(__boot_lock_bits_set_alternate): Ditto.
+	(boot_lock_bits_set): Improve documentation.
+
+2004-04-16  Theodore A. Roth  <troth@openavr.org>
+[Contributed by Wolfgang Haidinger <wh@vmars.tuwien.ac.at>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Add note about new pgmspaces macros.
+	* include/avr/pgmspace.h: Extend API to allow access of 32 bit
+	unsigned double words.
+
+2004-04-14  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iotn13.h: New file.
+
+2004-04-13  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iotn2313.h: Don't define the EERIE, EEMPE, EEPE and EERE
+	bits since they're defined in <avr/io.h>.
+
+2004-04-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+[Contributed by <adebeun@enatel.net>]
+
+	* include/avr/wdt.h: Fix _wdt_write() for the ATmega169,
+	closes bug #8119.
+
+2004-04-13  Theodore A. Roth  <troth@openavr.org>
+[Contributed by Bob Paddock <bpaddock@csonline.net>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iotn2313.h: New file.
+
+2004-04-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Cosmetics: update (C) year, remove some
+	vestiges of trailing whitespace.
+
+2004-04-06  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iom169.h: Update copyright year.
+	Fixes for bug #8452.
+	(OCR1A): Fix register name.
+	(OCR1B): Ditto.
+	(UCSRA): Ditto.
+	(UCSRB): Ditto.
+	(UCSRC): Ditto.
+	(UBRR): Ditto.
+	(UDR): Ditto.
+	(PG5): Remove define.
+	(ADHSM): Ditto.
+	(WDCE): Fix bit name.
+	(ISC01, ISC00): Define for EICRA register.
+
+2004-04-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Add items for "clock skew detected", why
+	are interrupt bits cleared by a `1', and why are programmed
+	fuse bits at logical 0.
+
+2004-04-06  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/iomx8.h (ADC): Fix to make it 16 bit.
+	(ADCW): Ditto.
+
+2004-04-06  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom168.h: New file.
+	* include/avr/iom48.h: New file.
+	* include/avr/iom88.h: New file.
+	* include/avr/iomx8.h: New file.
+
+2004-04-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/main_page.dox, faq.dox: Add reference to Bruce Lightner's
+	trickery page for programming small AVRs in C.
+
+2004-04-05  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* libc/stdio/vfscanf.c: Rename set_bit and bit_is_set to avoid name
+	space clash.
+	Add parentheses when checking flags to quell a compiler warning.
+
+2004-03-22  Theodore A. Roth  <troth@openavr.org>
+[Thanks to Tim Lapawa <lapawa@insynergie.de>]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/io43u32x.h (TICIE1): Fix value.
+	* include/avr/io43u35x.h (TICIE1): Fix value.
+
+2004-03-08  Theodore A. Roth  <troth@openavr.org>
+
+	* ChangeLog: Move 2003 entries to ChangeLog-2003.
+	* ChangeLog-2003: New file.
+	* Makefile.am (EXTRA_DIST): Add ChangeLog-2003 and ChangeLog-2002.
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+2004-03-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/dtostrf.S: fix bug # 7989 (preserve r16/r17); use
+	movw when possible.
+	* include/stdlib.h: document the return values of dtostre() and
+	dtostrf().
+
+2004-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/dtostrf.S: make labels local.
+
+2004-03-04  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/boot.h: Define BLBnx bit positions. [Bug #7469]
+
+2004-03-04  Theodore A. Roth  <troth@openavr.org>
+
+	* NEWS: Add note about boot API changes.
+	* include/avr/boot.h: Change example to show a more efficient usage
+	of the API.
+	(__boot_page_fill_normal): Remove checks for spm and eeprom busy. These
+	are redundant checks in normal usage and just bloat the bootloader.
+	(__boot_page_fill_alternate): Ditto.
+	(__boot_page_fill_extended): Ditto.
+	(__boot_page_erase_normal): Ditto.
+	(__boot_page_erase_alternate): Ditto.
+	(__boot_page_erase_extended): Ditto.
+	(__boot_page_write_normal): Ditto.
+	(__boot_page_write_alternate): Ditto.
+	(__boot_page_write_extended): Ditto.
+	(__boot_rww_enable): Ditto.
+	(__boot_rww_enable_alternate): Ditto.
+	(__boot_lock_bits_set): Ditto.
+	(__boot_lock_bits_set_alternate): Ditto.
+	(boot_page_fill_safe): New macro.
+	(boot_page_erase_safe): New macro.
+	(boot_page_write_safe): New macro.
+	(boot_rww_enable_safe): New macro.
+	(boot_lock_bits_set_safe): New macro.
+
+2004-02-25  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Add note about new eeprom macro.
+	* include/avr/boot.h: Update copyright year.
+	(__boot_page_fill_normal): Replace while loop with eeprom_busy_wait.
+	(__boot_page_fill_alternate): Ditto.
+	(__boot_page_fill_extended): Ditto.
+	(__boot_page_erase_normal): Ditto.
+	(__boot_page_erase_alternate): Ditto.
+	(__boot_page_erase_extended): Ditto.
+	(__boot_page_write_normal): Ditto.
+	(__boot_page_write_alternate): Ditto.
+	(__boot_page_write_extended): Ditto.
+	(__boot_rww_enable): Ditto.
+	(__boot_rww_enable_alternate): Ditto.
+	(__boot_lock_bits_set): Ditto.
+	(__boot_lock_bits_set_alternate): Ditto.
+	* include/avr/eeprom.h: Update copyright year.
+	(eeprom_busy_wait): New macro interface.
+
+2004-02-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/twitest/twitest.dox: Fix more formatting bugs.
+
+2004-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/twitest/twitest.dox: Fix formatting bugs.
+
+2004-02-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/inline_asm.dox: Fix use of _SFR_IO_ADDR() in inline asm.
+	* doc/api/faq.dox: Ditto.
+
+2004-02-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/malloc.c: Fix bug #2143 (malloc wrap around top of RAM)
+	* include/avr/timer.h: The mailing list agreed to remove this file.
+	* include/timer.h: Remove this wrapper as well.
+
+2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/interrupt.h: make timer_enable_int() static inline;
+	fixes bug #5454.
+
+2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/crc16.h: use __inline__ instead of inline.
+	* include/avr/delay.h: Ditto.
+	* include/avr/interrupt.h: Ditto:
+	* include/avr/timer.h: Ditto.
+
+2004-02-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfscanf.c: Apply patch #2554: fix %ul format.
+
+2004-02-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: Fix bug #7556 (%s format with precision issue)
+
+For older changes see ChangeLog-2003
