@@ -26,14 +26,17 @@
 #ifndef _AVR_SIGNAL_H_
 #define _AVR_SIGNAL_H_
 
-/** \defgroup avr_signals Signals and Interrupts
-    \code #include <sig-avr.h> \endcode
+/** \name Macros for writing interrupt handler functions */
 
-    FIXME: discuss the SIGNAL() and INTERRUPT() macros. Rich Neswold's
-    document has a good discussion of this. */
+/*@{*/
 
 /** \def SIGNAL(signame)
-    \ingroup avr_signals */
+    \ingroup avr_interrupts
+
+    \code#include <avr/signal.h>\endcode
+
+    Introduces an interrupt handler function that runs with global interrupts
+    initially disabled.  */
 
 #ifdef __cplusplus
 #define SIGNAL(signame)					\
@@ -47,7 +50,12 @@ void signame (void)
 #endif
 
 /** \def INTERRUPT(signame) 
-    \ingroup avr_signals */
+    \ingroup avr_interrupts
+
+    \code#include <avr/signal.h>\endcode
+
+    Introduces an interrupt handler function that runs with global interrupts
+    initially enabled. This allows interrupt handlers to be interrupted. */
 
 #ifdef __cplusplus
 #define INTERRUPT(signame)				\
@@ -59,5 +67,7 @@ void signame (void)
 void signame (void) __attribute__ ((interrupt));	\
 void signame (void)
 #endif
+
+/*@}*/
 
 #endif /* _AVR_SIGNAL_H_ */

@@ -37,6 +37,8 @@ CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        main_page.dox \
                        inline_asm.dox \
+                       interrupts.dox \
+                       acknowledge.dox \
                        faq.dox
 
 SUFFIXES             = .pdf
