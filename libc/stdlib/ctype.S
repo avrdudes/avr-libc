@@ -98,13 +98,13 @@ GLOBAL(toascii)
 
 GLOBAL(isalnum)
           TST   rHigh
-          BRNE  _U(cty_isfalse)    ;
+          BRNE  _U(cty_isfalse)
           PUSH  rLow               ; save, destroyed by isdigit returning 0
-          RCALL _U(isdigit)        ;
-          TST   rLow               ;
+          RCALL _U(isdigit)
+          TST   rLow
           POP   rLow
-          BRNE  _U(cty_istrue)     ;
-          RJMP  _U(isalpha)        ;
+          BRNE  _U(cty_istrue)
+          RJMP  _U(isalpha)
 
           ENDFUNC
 #endif
@@ -140,7 +140,7 @@ GLOBAL(islower)
           BRNE  _U(cty_isfalse)
           CPI   rLow,'a'
           BRLT  _U(cty_isfalse)
-          CPI   rLow,'z'+1         ;
+          CPI   rLow,'z'+1
           BRGE  _U(cty_isfalse)
           RET                      ; 'a' <= rLow <= 'z' (!= 0!!, Z=0)
 
@@ -156,10 +156,10 @@ GLOBAL(islower)
 GLOBAL(isdigit)
           TST   rHigh
           BRNE  _U(cty_isfalse)
-          CPI   rLow,'0'           ;
-          BRLT  _U(cty_isfalse)    ;
-          CPI   rLow,'9'+1         ;
-          BRGE  _U(cty_isfalse)    ;
+          CPI   rLow,'0'
+          BRLT  _U(cty_isfalse)
+          CPI   rLow,'9'+1
+          BRGE  _U(cty_isfalse)
           RET                      ; '0' <= rLow <= '9' (!= 0!!)
 
           ENDFUNC
@@ -174,10 +174,10 @@ GLOBAL(isdigit)
 GLOBAL(isxdigit)
           MOV   __tmp_reg__,rLow
           ORI   rLow,0x20
-          CPI   rLow,'a'           ;
-          BRLT  _isxdigit00        ;
-          CPI   rLow,'f'+1         ;
-          BRGE  _U(cty_isfalse)    ;
+          CPI   rLow,'a'
+          BRLT  _isxdigit00
+          CPI   rLow,'f'+1
+          BRGE  _U(cty_isfalse)
           RET                      ; 'a' <= rLow <= 'f' (!= 0!!)
 _isxdigit00:
           MOV   rLow,__tmp_reg__
@@ -195,12 +195,12 @@ _isxdigit00:
 GLOBAL(iscntrl)
           TST   rHigh
           BRNE  _U(cty_isfalse)
-          CPI   rLow,0x7F          ;
-          BREQ  _U(cty_istrue)     ;
-          CPI   rLow,0x1F+1        ;
+          CPI   rLow,0x7F
+          BREQ  _U(cty_istrue)
+          CPI   rLow,0x1F+1
           BRGE  _U(cty_isfalse)
           SER   rLow               ; 0 is cntrl, too! -> return true
-          RET                      ;
+          RET
 
           ENDFUNC
 #endif
@@ -217,11 +217,11 @@ GLOBAL(isgraph)
 GLOBAL(isprint)
           TST   rHigh
           BRNE  _U(cty_isfalse)
-          CPI   rLow,' '           ;
+          CPI   rLow,' '
           BRLT  _U(cty_isfalse)
-          CPI   rLow,0x7E+1        ;
+          CPI   rLow,0x7E+1
           BRGE  _U(cty_isfalse)    ;  ' ' <= rLow <= 0x7E (!= 0!!)
-          RET                      ;
+          RET
 
           ENDFUNC
 #endif
@@ -236,18 +236,18 @@ GLOBAL(isspace)
           TST   rHigh
           BRNE  _U(cty_isfalse)
           CPI   rLow,' '           ; blank
-          BREQ  _U(cty_istrue)     ;
+          BREQ  _U(cty_istrue)
           CPI   rLow,0x0A    ;'\n' ; line feed
-          BREQ  _U(cty_istrue)     ;
+          BREQ  _U(cty_istrue)
           CPI   rLow,0x0C    ;'\f' ; form feed
-          BREQ  _U(cty_istrue)     ;
+          BREQ  _U(cty_istrue)
           CPI   rLow,0x0D    ;'\r' ; carriage return
-          BREQ  _U(cty_istrue)     ;
+          BREQ  _U(cty_istrue)
           CPI   rLow,0x09    ;'\t' ; tab
-          BREQ  _U(cty_istrue)     ;
+          BREQ  _U(cty_istrue)
           CPI   rLow,0x0B    ;'\v' ; vertical tab
-          BRNE  _U(cty_isfalse)    ;
-          RET                      ;
+          BRNE  _U(cty_isfalse)
+          RET
 
           ENDFUNC
 #endif
@@ -265,11 +265,11 @@ GLOBAL(ispunct)
 
           RCALL _isspace
           TST   rLow
-          BRNE  _U(cty_isfalse)      ;
+          BRNE  _U(cty_isfalse)
           mov   rLow, __tmp_reg__    ; **changed**
-          RCALL _isalnum             ;
+          RCALL _isalnum
           TST   rLow
-          BRNE  _U(cty_isfalse)      ;
+          BRNE  _U(cty_isfalse)
           SER   rLow
 _ispunct00:
           RET
@@ -287,12 +287,12 @@ GLOBAL(isblank)
           TST   rHigh
           BRNE  _U(cty_isfalse)
           CPI   rLow,' '           ; blank
-          BREQ  _U(cty_istrue)     ;
+          BREQ  _U(cty_istrue)
           CPI   rLow,0x09    ;'\t' ; tab
-          BREQ  _U(cty_istrue)     ;
+          BREQ  _U(cty_istrue)
           CPI   rLow,0x0B    ;'\v' ; vertical tab
-          BRNE  _U(cty_isfalse)    ;
-          RET                      ;
+          BRNE  _U(cty_isfalse)
+          RET
 
           ENDFUNC
 #endif
