@@ -71,17 +71,51 @@ clean-local:
 # Rules for generating documentation with doxygen
 #
 
+#
+# The sed magic below does the following:
+#
+# It bumps the subsection level that is to be displayed in the TOC.
+# For Postscript output, only \page and \section headings will be
+# displayed, while the PDF document will also show \subsection so the
+# browsable index in the PDF file will provide a good help to the
+# user.
+#
+# The magic around TabularC replaces doxygen's own tabular environment
+# (named TabularC) by an explicit call to longtable in the document
+# that describes the signal names, so the rather long table can be
+# split across multiple pages.  Note that there are some nasty things
+# going on here: the string "Signal Name" in the table heading is used
+# as a magic string in order to replace the \\ at the end of the table
+# heading by \endhead so longtable will know what heading to repeat in
+# table continuations.
+
 latex_src/refman.tex: doxygen.config
 	doxygen doxygen.config
 	cd latex_src && \
-		sed -e '/tocdepth/s/1/2/' refman.tex > tmp.$$ && \
+		sed -e '/tocdepth/s/1/2/' \
+		-e '/usepackage{times}/s/$$/\\usepackage{longtable}/' \
+		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
+	cd latex_src && \
+		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|l|l|}/' \
+		-e '/TabularC/s/TabularC/longtable/' \
+		-e '/Signal Name/s/\\\\\\hline/\\endhead\\hline/' \
+		group__avr__interrupts.tex > tmp.$$ && \
+		mv -f tmp.$$ group__avr__interrupts.tex
 
 latex_pdf_src/refman.tex: doxygen-pdf.config
 	doxygen doxygen-pdf.config
 	cd latex_pdf_src && \
-		sed -e '/tocdepth/s/1/3/' refman.tex > tmp.$$ && \
+		sed -e '/tocdepth/s/1/3/' \
+		-e '/usepackage{times}/s/$$/\\usepackage{longtable}/' \
+		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
+	cd latex_pdf_src && \
+		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|l|l|}/' \
+		-e '/TabularC/s/TabularC/longtable/' \
+		-e '/Signal Name/s/\\\\\\hline/\\endhead\\hline/' \
+		group__avr__interrupts.tex > tmp.$$ && \
+		mv -f tmp.$$ group__avr__interrupts.tex
 
 doxygen-pdf.config: doxygen.config
 	sed \

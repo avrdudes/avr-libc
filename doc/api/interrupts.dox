@@ -83,7 +83,14 @@ signals might not be available. Check the data sheet for the device you are
 using.
 
 <b>[FIXME: Fill in the blanks! Gotta read those durn data sheets ;-)]</b>
+\note The SIGNAL() and INTERRUPT() macros currently cannot spell-check
+the argument passed to them.  Thus, by misspelling one of the names
+below in a call to SIGNAL() or INTERRUPT(), a function will be created
+that, while possibly being usable as an interrupt function, is not
+actually wired into the interrupt vector table.  No warning will be
+given about this situation.
 
+\anchor avr_signames
 <small>
 <table>
   <tr>
@@ -92,7 +99,7 @@ using.
   </tr>
   <tr>
     <td>SIG_2WIRE_SERIAL</td>
-    <td></td>
+    <td>2-wire serial interface (aka. I²C [tm])</td>
   </tr>
   <tr>
     <td>SIG_ADC</td>
@@ -112,30 +119,6 @@ using.
   </tr>
   <tr>
     <td>SIG_FPGA_INTERRUPT1</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT10</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT11</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT12</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT13</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT14</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT15</td>
     <td></td>
   </tr>
   <tr>
@@ -168,6 +151,30 @@ using.
   </tr>
   <tr>
     <td>SIG_FPGA_INTERRUPT9</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>SIG_FPGA_INTERRUPT10</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>SIG_FPGA_INTERRUPT11</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>SIG_FPGA_INTERRUPT12</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>SIG_FPGA_INTERRUPT13</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>SIG_FPGA_INTERRUPT14</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>SIG_FPGA_INTERRUPT15</td>
     <td></td>
   </tr>
   <tr>
@@ -280,7 +287,7 @@ using.
   </tr>
   <tr>
     <td>SIG_SPM_READY</td>
-    <td></td>
+    <td>Store program memory ready</td>
   </tr>
   <tr>
     <td>SIG_SUSPEND_RESUME</td>
@@ -306,13 +313,6 @@ using.
     <td>SIG_UART0_TRANS</td>
     <td>UART(0) Transmit Complete Interrupt</td>
   </tr>
-</table>
-
-<table>
-  <tr>
-    <td><b>Signal Name (continued)</b></td>
-    <td><b>Description</b></td>
-  </tr>
   <tr>
     <td>SIG_UART1</td>
     <td></td>
@@ -331,15 +331,15 @@ using.
   </tr>
   <tr>
     <td>SIG_UART_DATA</td>
-    <td></td>
+    <td>UART Data Register Empty Interrupt</td>
   </tr>
   <tr>
     <td>SIG_UART_RECV</td>
-    <td></td>
+    <td>UART Receive Complete Interrupt</td>
   </tr>
   <tr>
     <td>SIG_UART_TRANS</td>
-    <td></td>
+    <td>UART Transmit Complete Interrupt</td>
   </tr>
   <tr>
     <td>SIG_USART0_DATA</td>
