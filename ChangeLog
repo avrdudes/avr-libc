@@ -1,3 +1,41 @@
+2005-01-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/addsf3.S: Make labels local, add Id line.
+	* libm/fplib/addsf3x.S: (Ditto.)
+	* libm/fplib/asin.S: (Ditto.)
+	* libm/fplib/ceil.S: (Ditto.)
+	* libm/fplib/cos.S: (Ditto.)
+	* libm/fplib/cosh.S: (Ditto.)
+	* libm/fplib/divsf3.S: (Ditto.)
+	* libm/fplib/divsf3x.S: (Ditto.)
+	* libm/fplib/exp.S: (Ditto.)
+	* libm/fplib/fixsfsi.S: (Ditto.)
+	* libm/fplib/floatsisf.S: (Ditto.)
+	* libm/fplib/floor.S: (Ditto.)
+	* libm/fplib/fp_cmp.S: (Ditto.)
+	* libm/fplib/fp_cosinus.S: (Ditto.)
+	* libm/fplib/fp_flashconst.S: (Ditto.)
+	* libm/fplib/fp_merge.S: (Ditto.)
+	* libm/fplib/fp_nan.S: (Ditto.)
+	* libm/fplib/fp_powerseries.S: (Ditto.)
+	* libm/fplib/fp_split.S: (Ditto.)
+	* libm/fplib/fp_zero.S: (Ditto.)
+	* libm/fplib/frexp.S: (Ditto.)
+	* libm/fplib/ldexp.S: (Ditto.)
+	* libm/fplib/log.S: (Ditto.)
+	* libm/fplib/log10.S: (Ditto.)
+	* libm/fplib/modf.S: (Ditto.)
+	* libm/fplib/mulsf3.S: (Ditto.)
+	* libm/fplib/mulsf3x.S: (Ditto.)
+	* libm/fplib/negsf2.S: (Ditto.)
+	* libm/fplib/pow.S: (Ditto.)
+	* libm/fplib/sin.S: (Ditto.)
+	* libm/fplib/sinh.S: (Ditto.)
+	* libm/fplib/sqrt.S: (Ditto.)
+	* libm/fplib/strtod.S: (Ditto.)
+	* libm/fplib/tan.S: (Ditto.)
+	* libm/fplib/tanh.S: (Ditto.)
+
 2005-01-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/asin.S: prefix internal global symbols
