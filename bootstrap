@@ -56,12 +56,20 @@ then
 	exit 1
 fi
 
+AUTOMAKE="${AUTOMAKE} --foreign --add-missing --copy"
+
+export AUTOMAKE AUTOCONF ACLOCAL AUTOHEADER
+
 # to see what is executed
 set -x
+
+# TRoth: This is temporary until I commit the tree to cvs. I'm holding off on
+# that until I'm sure it's the right thing to do.
+test -d avr/lib || ./devtools/gen-avr-lib-tree.sh
 
 rm -rf autom4te.cache
 
 ${ACLOCAL}
 ${AUTOHEADER}
 ${AUTOCONF}
-${AUTOMAKE} --foreign --add-missing --copy
+${AUTOMAKE} 

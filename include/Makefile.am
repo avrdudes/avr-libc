@@ -35,3 +35,5 @@ EXTRA_DIST = \
     stdio.h \
     stdlib.h \
     string.h
+
+SUBDIRS = avr

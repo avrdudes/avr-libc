@@ -1,3 +1,13 @@
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
+	* Makefile.am: Scrap old version and rewrite.
+	* bootstrap: Add temp hook to run gen-avr-lib-tree.sh.
+	* configure.ac: Bump version.
+	Check for avr cross-compiler.
+	Add AC_CONFIG_FILES section for target device dirs in avr/lib/.
+	* devtools/gen-avr-lib-tree.sh: New file.
+	* include/Makefile.am: Add SUBDIRS.
+
 2004-04-26  Theodore A. Roth  <troth@openavr.org>
 
 	* bootstrap: Remove left-over autom4te.cache directory.
