@@ -4,6 +4,7 @@
 
   [no-id]  Prefix all internal global symbols in libm with __fp_ so
            they do not collide with the application namespace.
+  [#4101]  setjmp/longjmp destroy changes in global registers.
   [#11479] Add missing pin definitions for iotn16.h.
   [#11486] Put the port bit defintions back in for mega16.
   [#11505] Remove doxygen comment about the deprecated inp/outp items.
