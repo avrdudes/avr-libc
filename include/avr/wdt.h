@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2004 Marek Michalkiewicz
+   Copyright (c) 2005 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -29,10 +30,6 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
-
-/* 
-Contributers: Eric B. Weddington
-*/
 
 /*
    avr/wdt.h - macros for AVR watchdog timer
@@ -103,6 +100,20 @@ Contributers: Eric B. Weddington
             _BV(WDE) | (value & 0x07)) ) \
         : "r0"  \
     )
+
+#define wdt_disable() \
+__asm__ __volatile__ (  \
+    "in __tmp_reg__, __SREG__" "\n\t" \
+    "sts %0, %1" "\n\t" \
+    "sts %0, __zero_reg__" "\n\t" \
+    "out __SREG__,__tmp_reg__" "\n\t" \
+    : /* no outputs */ \
+    : "M" (_SFR_MEM_ADDR(_WD_CONTROL_REG)), \
+    "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))) \
+    : "r0" \
+)
+
+
     
 #else
 
@@ -121,6 +132,24 @@ Contributers: Eric B. Weddington
             _BV(WDE) | (value & 0x07)) ) \
         : "r0"  \
     )
+
+/**
+   \ingroup avr_watchdog
+   Disable the watchdog timer, if possible.  This attempts to turn off the 
+   Enable bit in the watchdog control register. See the datasheet for 
+   details.
+*/
+#define wdt_disable() \
+__asm__ __volatile__ (  \
+    "in __tmp_reg__, __SREG__" "\n\t" \
+    "out %0, %1" "\n\t" \
+    "out %0, __zero_reg__" "\n\t" \
+    "out __SREG__,__tmp_reg__" "\n\t" \
+    : /* no outputs */ \
+    : "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)), \
+    "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))) \
+    : "r0" \
+)
     
 #endif
 
@@ -136,11 +165,7 @@ Contributers: Eric B. Weddington
 */
 #define wdt_enable(timeout) _wdt_write(timeout)
 
-/**
-   \ingroup avr_watchdog
-   Disable the watchdog timer, if possible.  This attempts to
-   turn off the \c WDE bit in the \c WDTCR register. */
-#define wdt_disable() _wdt_write(0)
+
 
 /**
    \ingroup avr_watchdog
