@@ -1,3 +1,9 @@
+2004-04-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* NEWS: note the bug fix.
+	* include/avr/wdt.h: fix _wdt_write() for the ATmega169,
+	closes bug # 8119); contributed by adebeun@enatel.net
+
 2004-04-16  Theodore A. Roth  <troth@openavr.org>
 [Contributed by Wolfgang Haidinger <wh@vmars.tuwien.ac.at>]
 

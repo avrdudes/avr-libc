@@ -58,6 +58,22 @@
 
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 
+#if defined (__AVR_ATmega169__)
+#define _wdt_write(value)				\
+	__asm__ __volatile__ (				\
+		"in __tmp_reg__,__SREG__" "\n\t"	\
+		"cli" "\n\t"				\
+		"wdr" "\n\t"				\
+		"sts %0,%1" "\n\t"			\
+		"out __SREG__,__tmp_reg__" "\n\t"	\
+		"sts %0,%2"				\
+		: /* no outputs */			\
+		: "M" (_SFR_MEM_ADDR(WDTCR)),		\
+		  "r" (0x18),/* _BV(WDCE) | _BV(WDE) */	\
+		  "r" ((unsigned char)(value))		\
+		: "r0"					\
+	)
+#else
 #define _wdt_write(value)				\
 	__asm__ __volatile__ (				\
 		"in __tmp_reg__,__SREG__" "\n\t"	\
@@ -72,6 +88,7 @@
 		  "r" ((unsigned char)(value))		\
 		: "r0"					\
 	)
+#endif
 
 /**
    \ingroup avr_watchdog

@@ -22,6 +22,7 @@ See ChangeLog for details.
           existing code, but the OCR1A and OCR1B names where just plain wrong
           so they have been changed and the incorrect names (OCRA1 and OCRB1) 
           are undefined.
+  [#8119] _wdt_write macro in wdt.h doesn't work with ATmega169
 
 *** Changes in avr-libc-1.0.3:
 
