@@ -12,23 +12,26 @@ Name: avr-libc
 Version: %{libc_version}
 Release: 1
 Copyright: BSD
-Group: Development/Tools
+Group: Avr/Development/Tools
 URL: http://savannah.gnu.org/projects/avr-libc
 Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.gz
 Buildroot: /var/tmp/avr-libc-%{version}-root
-BuildRequires: avr-gcc >= 3.3
-Requires: avr-gcc >= 3.3
+BuildRequires: gzip doxygen tetex avr-gcc >= 3.2.75
+Requires: avr-gcc >= 3.2.75
 
 %description
-Avr-libc is a C library for developing applications for Atmel AVR microcontrollers.
+Avr-libc is a C library for developing applications for Atmel AVR
+microcontrollers.
+
+## The avr-libc-docs subpackage
+%package docs
+Summary: Documentation for avr-libc.
+Group: Avr/Documentation
+%description docs
+Documentation for avr-libc in html, postscript and pdf formats.
 
 %prep
 %setup -q
-
-# Touching these files stops the make step from running aclocal, autoconf and
-# automake. This is needed since we patched the build system.
-touch aclocal.m4
-touch configure
 
 %build
 rm -fr obj-%{_target_platform}
@@ -46,19 +49,27 @@ cd obj-%{_target_platform}
 make prefix=$RPM_BUILD_ROOT%{_prefix} mandir=$RPM_BUILD_ROOT%{_mandir} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} install
 
+gzip -9 doc/api/*.ps
+gzip -9 doc/api/*.pdf
+
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
 %files
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog INSTALL LICENSE NEWS README
-%doc doc
+%doc doc/CHANGES.old doc/ChangeLog doc/INSTALL doc/TODO
+%doc doc/avr-libc-reference.html
+#%doc doc/examples/*.c doc/examples/*.h doc/examples/*.s doc/examples/prg
+%doc doc/examples/demo/Makefile doc/examples/demo/demo.c
+%doc doc/examples/demo/demo.fig
 %dir %{_prefix}/avr
 %dir %{_prefix}/avr/lib
 %dir %{_prefix}/avr/lib/avr3
 %dir %{_prefix}/avr/lib/avr4
 %dir %{_prefix}/avr/lib/avr5
 %dir %{_prefix}/avr/include
+%dir %{_prefix}/avr/include/avr
 %{_prefix}/avr/lib/lib*
 %{_prefix}/avr/lib/crt*
 %{_prefix}/avr/lib/avr3/lib*
@@ -67,9 +78,29 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_prefix}/avr/lib/avr4/crt*
 %{_prefix}/avr/lib/avr5/lib*
 %{_prefix}/avr/lib/avr5/crt*
-%{_prefix}/avr/include/*
+%{_prefix}/avr/include/*.h
+%{_prefix}/avr/include/avr/*.h
+
+## TRoth/20021013: Argh! Why does the fscking %doc directive remove the doc
+## dir? That's absolutely stupid. We install things there _assuming_ they
+## will stay there. Rpm should _not_ removing things we've installed, but alas
+## it does. Be sure to watch the output when you are building the packages.
+
+%files docs
+%defattr(-,root,root)
+%doc obj-%{_target_platform}/doc/api/avr-libc-user-manual
+%doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.ps.gz
+%doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.pdf.gz
 
 %changelog
+* Sun Oct 13 2002 Theodore Roth <troth@openavr.org>
+
+- Drop avr-gcc requirement to >= 3.2.75 to allow building snapshot packages.
+- Add docs sub-package for user manual.
+
+* Mon Aug 12 2002 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+- Require avr-gcc >= 3.3.
+
 * Mon Jul 08 2002 Theodore Roth <troth@verinet.com>
 - Integrate spec file into build system.
 

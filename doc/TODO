@@ -16,7 +16,9 @@ TODO for avr-libc:
    * interfaces in:
      + include/math.h
      + include/avr/crc16.h  ???
+     + include/avr/delay.h  ???
      + include/avr/ina90.h  ???
+     + include/avr/timer.h  ???
      + include/avr/twi.h (move to examples?)
      + include/avr/wdt.h (move to examples?)
      + include/avr/parity.h (move to examples?)

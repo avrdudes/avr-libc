@@ -1,3 +1,11 @@
+2002-10-13  Theodore A. Roth  <troth@openavr.org>
+
+	* avr-libc.spec.in: Added docs subpackage for user manual.
+		Dropped avr-gcc version to 3.2.75 to allow snapshots.
+	* configure.in: Bumped version and made it rpm compatible.
+	* doc/Makefile.am (EXTRA_DIST): Removed register-usage.txt.
+	* doc/TODO: Updated.
+
 2002-10-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/calloc.c: new file.

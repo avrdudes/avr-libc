@@ -37,4 +37,4 @@ SUBDIRS              = examples api
 DIST_SUBDIRS         = examples api
 
 EXTRA_DIST           = CHANGES.old ChangeLog INSTALL TODO \
-                       avr-libc-reference.html register-usage.txt
+                       avr-libc-reference.html
