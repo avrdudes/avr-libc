@@ -7,7 +7,6 @@ Before 1.0:
         * include/avr/twi.h
     - Verify that include/avr/*.h do not reference anything in include/avr/ina90.h
     - Genericize include/avr/sleep.h
-    - Complete and document include/avr/wdt.h
     - Move the following to examples and document
         * include/avr/parity.h
     - In include/avr/delay.h, add macros to allow specifying delays directly 

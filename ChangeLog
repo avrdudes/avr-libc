@@ -1,5 +1,10 @@
 2002-12-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/wdt.h: Document, invent symbolic timeout constants.
+	* doc/TODO: delete wdt.h.
+
+2002-12-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/TODO: update per mailing list discussion.
 
 2002-12-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

@@ -34,6 +34,28 @@
 
 #include <avr/io.h>
 
+/** \defgroup avr_watchdog Watchdog timer handling
+    \code #include <avr/wdt.h> \endcode
+
+    This header file declares the interface to some inline macros
+    handling the watchdog timer present in many AVR devices.  In order
+    to prevent the watchdog timer configuration from being
+    accidentally altered by a crashing application, a special timed
+    sequence is required in order to change it.  The macros within
+    this header file handle the required sequence automatically
+    before changing any value.  Interrupts will be disabled during
+    the manipulation.
+
+    \note Depending on the fuse configuration of the particular
+    device, further restrictions might apply, in particular it might
+    be disallowed to turn off the watchdog timer. */
+
+/**
+   \ingroup avr_watchdog
+   Reset the watchdog timer.  When the watchdog timer is enabled,
+   a call to this instruction is required before the timer expires,
+   otherwise a watchdog-initiated device reset will occur. */
+
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 
 #define _wdt_write(value)				\
@@ -51,8 +73,70 @@
 		: "r0"					\
 	)
 
+/**
+   \ingroup avr_watchdog
+   Enable the watchdog timer, configuring it for expiry after
+   \c timeout (which is a combination of the \c WDP0 through
+   \c WDP2 to write into the \c WDTCR register).
+
+   See also the symbolic constants \c WDTO_15MS et al.
+*/
 #define wdt_enable(timeout) _wdt_write((timeout) | _BV(WDE))
 
+/**
+   \ingroup avr_watchdog
+   Disable the watchdog timer, if possible.  This attempts to
+   turn off the \c WDE bit in the \c WDTCR register. */
 #define wdt_disable() _wdt_write(0)
+
+/**
+   \ingroup avr_watchdog
+   Symbolic constants for the watchdog timeout.  Since the watchdog
+   timer is based on a free-running RC oscillator, the times are
+   approximate only and apply to a supply voltage of 5 V.  At lower
+   supply voltages, the times will increase.  For older devices, the
+   times will be as large as three times when operating at Vcc = 3 V,
+   while the newer devices (e. g. ATmega128, ATmega8) only experience
+   a neglicible change.
+
+   Possible timeout values are: 15 ms, 30 ms, 60 ms, 120 ms, 250 ms,
+   500 ms, 1 s, 2 s.  Symbolic constants are formed by the prefix
+   \c WDTO_, followed by the time.
+
+   Example that would select a watchdog timer expiry of approximately
+   500 ms:
+   \code
+   wdt_enable(WDTO_500MS);
+   \endcode
+*/
+#define WDTO_15MS	0
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS */
+#define WDTO_30MS	1
+
+/** \ingroup avr_watchdog See
+    \c WDT0_15MS */
+#define WDTO_60MS	2
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS */
+#define WDTO_120MS	3
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS */
+#define WDTO_250MS	4
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS */
+#define WDTO_500MS	5
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS */
+#define WDTO_1S		6
+
+/** \ingroup avr_watchdog
+    See \c WDT0_15MS */
+#define WDTO_2S		7
 
 #endif /* _AVR_WDT_H_ */
