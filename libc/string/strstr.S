@@ -48,8 +48,9 @@
     \fn char *strstr(const char *s1, const char *s2)
     \brief Locate a substring.
 
-    The strstr() function finds the first occurrence of the substring needle
-    in the string haystack.  The terminating `\0' characters are not compared.
+    The strstr() function finds the first occurrence of the substring \c s2
+    in the string <tt>s1</tt>.  The terminating `\0' characters are not
+    compared.
 
     \returns The strstr() function returns a pointer to the beginning of the
     substring, or NULL if the substring is not found.  */
