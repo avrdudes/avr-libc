@@ -39,7 +39,7 @@
 #define str_lo		r24
 #define num_hi_hi	r25
 #define num_hi_lo	r24
-#define	num_lo_hi	r23
+#define num_lo_hi	r23
 #define num_lo_lo	r22
 #define tmp		r17
 
@@ -57,21 +57,21 @@
 
 _U(atol):
 	PUSH	r17
-	LOAD_Z	(str_lo, str_hi)      	; set pointer to string
+	LOAD_Z	(str_lo, str_hi)	; set pointer to string
 	CLR	num_hi_hi
 	CLR	num_hi_lo
 	CLR	num_lo_hi
 	CLR	num_lo_lo		; clear number
 	CLT				; clear sign
 .atol_loop:
-	LD	tmp, Z+             	; get (next) character
-	TST	tmp                 	; is it end of string
+	LD	tmp, Z+			; get (next) character
+	TST	tmp			; is it end of string
 	BREQ	.atol_sig
-	CPI	tmp, ' '            	; if space, skip
+	CPI	tmp, ' '		; if space, skip
 	BREQ	.atol_loop
-	CPI	tmp, '\t'	       	; if tab, skip
+	CPI	tmp, '\t'		; if tab, skip
 	BREQ	.atol_loop
-	CPI	tmp, '\n'           	; skip other whitespace
+	CPI	tmp, '\n'		; skip other whitespace
 	BREQ	.atol_loop
 	CPI	tmp, '\f'
 	BREQ	.atol_loop
@@ -79,36 +79,36 @@ _U(atol):
 	BREQ	.atol_loop
 	CPI	tmp, '\v'
 	BREQ	.atol_loop
-	CPI	tmp, '+'	       	; if '+' go on
+	CPI	tmp, '+'		; if '+' go on
 	BREQ	.atol_loop2
-	CPI	tmp, '-'             	; if '-' remember sign
+	CPI	tmp, '-'		; if '-' remember sign
 	BRNE	.atol_digit
 .atol_neg:
-	SET		             	; remember number is negative
+	SET				; remember number is negative
 .atol_loop2:
 	LD	tmp, Z+
 	TST	tmp
 	BREQ	.atol_sig
 .atol_digit:
-	CPI	tmp, '0'             	; test on [0 .. 9]
+	CPI	tmp, '0'		; test on [0 .. 9]
 	BRLT	.atol_sig
 	CPI	tmp, '9'+1
 	BRGE	.atol_sig
-	SUBI	tmp, '0'             	; make figure a number
-	XCALL	__mulsi_const_10     	; r25:r24:r23:r22 *= 10
+	SUBI	tmp, '0'		; make figure a number
+	XCALL	__mulsi_const_10	; r25:r24:r23:r22 *= 10
 	ADD	num_lo_lo, tmp          ; num = (num * 10) + (tmp - '0')
 	ADC	num_lo_hi, __zero_reg__
 	ADC	num_hi_lo, __zero_reg__
 	ADC	num_hi_hi, __zero_reg__
-	RJMP	.atol_loop2          	; next figure
+	RJMP	.atol_loop2		; next figure
 .atol_sig:
 	CP	num_lo_lo, __zero_reg__
 	CPC	num_lo_hi, __zero_reg__
 	CPC	num_hi_lo, __zero_reg__
 	CPC	num_hi_hi, __zero_reg__	; did we get a number?
-	BREQ	.atol_done           	; no, drop sign and return
+	BREQ	.atol_done		; no, drop sign and return
 	BLD	tmp, 0			; get sign again
-	TST	tmp                 	; positive number?
+	TST	tmp			; positive number?
 	BREQ	.atol_done
 	COM	num_hi_hi
 	COM	num_hi_lo
