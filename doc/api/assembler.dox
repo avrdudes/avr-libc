@@ -301,7 +301,7 @@ of some object in ROM or RAM.
 
 Along with the architecture-independent standard operators, there are
 some AVR-specific operators available which are unfortunately not yet
-descriebed in the official documentation.  The most notable operators
+described in the official documentation.  The most notable operators
 are:
 
 - \c lo8 Takes the least significant 8 bits of a 16-bit integer
