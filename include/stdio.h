@@ -782,6 +782,15 @@ extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
 
 /*@}*/
 
+/*
+ * The following constants are currently not used by avr-libc's
+ * stdio subsystem.  They are defined here since the gcc build
+ * environment expects them to be here.
+ */
+#define SEEK_SET 0
+#define SEEK_CUR 1
+#define SEEK_END 2
+
 #endif /* __ASSEMBLER */
 
 #endif /* _STDLIB_H_ */

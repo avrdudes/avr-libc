@@ -1,3 +1,7 @@
+2003-01-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: add SEEK_*.
+
 2003-01-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/unjs.pl: new file.
