@@ -1,5 +1,10 @@
 2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/faq.dox: Fix the use of progmem tables, closes
+	savannah bug #9669.
+
+2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/examples/demo.c: Update for ATmega32
 
 2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

@@ -731,7 +731,11 @@ PGM_P array[2] PROGMEM = {
 int main (void)
 {
     char buf[32];
-    strcpy_P (buf, array[1]);
+    PGM_P p;
+    int i;
+
+    memcpy_P(&p, &array[i], sizeof(PGM_P));
+    strcpy_P(buf, p);
     return 0;
 }
 \endcode
@@ -740,37 +744,65 @@ Looking at the disassembly of the resulting object file we see that array is
 in flash as such:
 
 \code
-0000008c <foo>:
-  8c:   46 6f           ori r20, 0xF6   ; 246
-  8e:   6f 00           .word   0x006f  ; ????
+00000026 <array>:
+  26:   2e 00           .word   0x002e  ; ????
+  28:   2a 00           .word   0x002a  ; ????
 
-00000090 <bar>:
-  90:   42 61           ori r20, 0x12   ; 18
-  92:   72 00           .word   0x0072  ; ????
+0000002a <bar>:
+  2a:   42 61 72 00                                         Bar.
 
-00000094 <array>:
-  94:   8c 00           .word   0x008c  ; ????
-  96:   90 00           .word   0x0090  ; ????
+0000002e <foo>:
+  2e:   46 6f 6f 00                                         Foo.
 \endcode
 
-\c foo is at addr 0x008c.<br>
-\c bar is at addr 0x0090.<br>
-\c array is at addr 0x0094.<br>
+\c foo is at addr 0x002e.<br>
+\c bar is at addr 0x002a.<br>
+\c array is at addr 0x0026.<br>
 
 Then in main we see this:
 
 \code
-    strcpy_P (buf, array[1]);   /* copy bar into buf */
-  de:   60 e9           ldi r22, 0x90   ; 144
-  e0:   70 e0           ldi r23, 0x00   ; 0
-  e2:   ce 01           movw    r24, r28
-  e4:   01 96           adiw    r24, 0x01   ; 1
-  e6:   0e 94 79 00     call    0xf2
+    memcpy_P(&p, &array[i], sizeof(PGM_P));
+  70:   66 0f           add     r22, r22
+  72:   77 1f           adc     r23, r23
+  74:   6a 5d           subi    r22, 0xDA       ; 218
+  76:   7f 4f           sbci    r23, 0xFF       ; 255
+  78:   42 e0           ldi     r20, 0x02       ; 2
+  7a:   50 e0           ldi     r21, 0x00       ; 0
+  7c:   ce 01           movw    r24, r28
+  7e:   81 96           adiw    r24, 0x21       ; 33
+  80:   08 d0           rcall   .+16            ; 0x92
 \endcode
 
-The addr of bar (0x0090) is loaded into the r23:r22 pair which is the second
-parameter passed to strcpy_P. The r25:r24 pair is the addr of buf.
+This code reads the pointer to the desired string from the ROM table
+\c array into a register pair.
 
+The value of \c i (in r22:r23) is doubled to accomodate for the word
+offset required to access array[], then the address of array (0x26) is
+added, by subtracting the negated address (0xffda).  The address of
+variable \c p is computed by adding its offset within the stack frame
+(33) to the Y pointer register, and <tt><b>memcpy_P</b></tt> is
+called.
+
+\code
+    strcpy_P(buf, p);
+  82:   69 a1           ldd     r22, Y+33       ; 0x21
+  84:   7a a1           ldd     r23, Y+34       ; 0x22
+  86:   ce 01           movw    r24, r28
+  88:   01 96           adiw    r24, 0x01       ; 1
+  8a:   0c d0           rcall   .+24            ; 0xa4
+\endcode
+
+This will finally copy the ROM string into the local buffer \c buf.
+
+Variable \c p (located at Y+33) is read, and passed together with the
+address of buf (Y+1) to <tt><b>strcpy_P</b></tt>.  This will copy the
+string from ROM to \c buf.
+
+Note that when using a compile-time constant index, omitting the first
+step (reading the pointer from ROM via <tt><b>memcpy_P</b></tt>)
+usually remains unnoticed, since the compiler would then optimize the
+code for accessing \c array at compile-time.
 
 <small>Back to \ref faq_index.</small>
 
