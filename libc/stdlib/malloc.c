@@ -67,7 +67,7 @@ char mymem[256];
 extern char __heap_start;
 extern char __heap_end;
 
-#define STACK_POINTER() (*(volatile unsigned int *)0x3d)
+#define STACK_POINTER() ((char *)(*(volatile unsigned int *)0x3d))
 
 #endif /* MALLOC_TEST */
 
