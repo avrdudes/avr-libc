@@ -19,10 +19,9 @@ implementations, so nothing was lost by their removal.
 * Requires latest binutils and gcc
 
 Marek did some fairly major work with binutils and gcc to make adding support
-for new devices easier. His changes in those tools required changes to avr-libc
-which make it incompatible with older versions of binutils and gcc. Gcc version
-3.3 (still in cvs) and binutils version 2.14 (still in cvs) are required.
-Binutils 2.13 is also acceptable.
+for new devices easier. His changes in those tools required changes to
+avr-libc which make it incompatible with older versions of binutils and gcc.
+Gcc versions >= 3.3 and binutils versions >= 2.13 are required.
 
 * New malloc implementation.
 
@@ -46,7 +45,9 @@ The latest documentation is available online at
 You can now do this in your code:
   PORTA |= 0x02;
 
-See the "Special Function Registers" documentation for details.
+See the "Special Function Registers" documentation for details. This method is
+preferred over the use of the deprecated inp(), inb(), inw(), outp(), outb()
+and outw() functions.
 
 * New devices supported
 

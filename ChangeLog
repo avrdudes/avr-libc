@@ -1,3 +1,9 @@
+2003-05-19  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* NEWS: Update gcc and binutils version requirements.
+	Add note about direct sfr access being preferred over in/out macros.
+
 2003-05-14  Eric B. Weddington <eric@ecentral.com>
 
 	* include/avr/pgmspace.h: New API.
