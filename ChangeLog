@@ -1,3 +1,7 @@
+2002-12-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/isinfnan.S: micro-optimize.
+
 2002-12-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/sqrt.S: move the detection of 0 earlier [Bug #1837].

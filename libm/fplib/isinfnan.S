@@ -47,24 +47,21 @@ GLOBAL(isnan)
 	CLR	r25
 	RET
 
-.Lfalse:
-	CLR	r24
-	CLR	r25
-	RET
-
 	ENDFUNC
 
 	TEXT_SEG(fplib, isinf)
 	FUNCTION(isinf)
 
 GLOBAL(isinf)
-	ANDI	r25, 0x7F	; drop sign
-	CPI	r25, 0x7F	; Inf is 0x7fffffff | signbit
-	BRNE	.Lfalse
+	ORI	r25, 0x80	; add sign
+	AND	r24, r25	; Inf is 0x7fffffff | signbit
 	AND	r24, r23
 	AND	r24, r22
 	INC	r24
 	BREQ	.Ltrue
-	RJMP	.Lfalse
+.Lfalse:
+	CLR	r24
+	CLR	r25
+	RET
 
 	ENDFUNC
