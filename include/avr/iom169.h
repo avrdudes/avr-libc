@@ -170,7 +170,7 @@
 /* External Interrupt Control Register A */
 #define EICRA  _SFR_MEM8(0x69)
 
-/* Pin Chandge Mask Register */
+/* Pin Change Mask Register */
 #define PCMSK  _SFR_MEM16(0x6B)
 #define PCMSK0 _SFR_MEM8(0x6B)
 #define PCMSK1 _SFR_MEM8(0x6C)
@@ -199,6 +199,10 @@
 
 /* ADC Multiplex Selection Register */
 #define ADMUX  _SFR_MEM8(0x7C)
+
+/* NOTE: DIDR0 and DIDR1 are swapped in the register summary of the data sheet
+   (2514D-AVR-01/03), but seem to be correct in the discussions of the
+   registers. */
 
 /* Digital Input Disable Register 0 */
 #define DIDR0  _SFR_MEM8(0x7E)

@@ -1,5 +1,9 @@
 2003-02-25  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/iom169.h: Update some comments only.
+
+2003-02-25  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/faq.dox: Minor clarification.
 
