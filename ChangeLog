@@ -1,5 +1,12 @@
 2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/assembler.dox: New file.
+	* doc/api/Makefile.am: use assembler.dox.
+	* doc/api/inline_asm.dox: refer to assembler.dox.
+	* doc/api/interrupts.dox: Ditto.
+
+2002-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/stdlib.h: fix typos.
 
 2002-11-25  Theodore A. Roth  <troth@openavr.org>

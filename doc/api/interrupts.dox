@@ -60,7 +60,8 @@ INTERRUPT(SIG_ADC)
 }
 \endcode
 
-[FIXME: should there be a discussion of writing an interrupt handler in asm?]
+Refer to the chapter explaining \ref ass_isr "assembler programming" for an
+explanation about interrupt routines written solely in assembler language.
 
 If an unexpected interrupt occurs (interrupt is enabled and no handler is
 installed, which usually indicates a bug), then the default action is to reset

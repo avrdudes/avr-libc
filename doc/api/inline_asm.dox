@@ -61,6 +61,9 @@ It's assumed, that you are familiar with writing AVR assembler programs,
 because this is not an AVR assembler programming tutorial. It's not a C
 language tutorial either.
 
+Note that this document does not cover file written completely in assembler
+language, refer to \ref assembler for this.
+
 Copyright (C) 2001-2002 by egnite Software GmbH
 
 Permission is granted to copy and distribute verbatim copies of this manual
