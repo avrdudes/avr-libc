@@ -31,15 +31,25 @@ The latest version of this document is always available from
 http://www.freesoftware.fsf.org/avr-libc/.
 
 The AVR Libc package provides a subset of the standard C library for Atmel AVR
-8-bit RISC microcontrollers..........
+8-bit RISC microcontrollers. In addition, the library provides the basic
+startup code needed by most applications.
 
-<b>There's a lot of work to be done on this. This file will produce the
-index.html (for html output) or the first chapter (in \f$\mbox{\LaTeX}\f$
-output).</b>
+There is a wealth of information in this document which goes beyond simply
+describing the interfaces and routines provided by the library. We hope that
+this document provides enough information to get a new AVR developer up to
+speed quickly using the freely available development tools: binutils, gcc
+avr-libc and many others.
+
+\note This document is a work in progress. As such, it may contain incorrect
+information. If you find a mistake, please send an email to the
+avr-libc-dev@mail.freesoftware.fsf.org describing the mistake. Also, send us an
+email if you find that a specific topic is missing from the document.
 
 \section supp_devices Supported Devices
 
 \addindex supported devices
+
+The following is a list of AVR devices currently supported by the library.
 
 \par AT90S Type Devices:
 

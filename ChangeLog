@@ -1,5 +1,9 @@
 2002-10-11  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/main_page.dox: Updated.
+
+2002-10-11  Theodore A. Roth  <troth@openavr.org>
+
 	* include/string.h: Add note about flash based strings.
 	* include/avr/pgmspace.h: Add note about ram based strings.
 
