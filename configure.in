@@ -114,7 +114,7 @@ AC_CANONICAL_SYSTEM
 dnl maybe the release number sould be changed to major.minor.bugfix
 dnl (e.g.: 1.0.0) to be able to tell the users of the avr-libc if
 dnl it is compatible to their current version or not.
-AM_INIT_AUTOMAKE(avr-libc, 20020803-cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20020812-cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)
