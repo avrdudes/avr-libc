@@ -1,9 +1,6 @@
-2004-12-30  Theodore A. Roth  <troth@openavr.org>
-
-	* libc/stdlib/Makefile.am (lib_a_c_sources): Add stdlib_private.h.
-
 2004-12-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	[Merge from HEAD:]
 	Last-minute cleanup for release 1.2.0:
 	* include/compat: New directory.
 	* include/compat/ina90.h: Moved from avr/ina90.h.
@@ -22,10 +19,14 @@
 	unification, extended delay API, man page generation,
 	moved header files.
 
+2004-12-30  Theodore A. Roth  <troth@openavr.org>
+
+	* libc/stdlib/Makefile.am (lib_a_c_sources): Add stdlib_private.h.
+
 2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
 
     Apply patch #2155:
-
+    
     2004-04-07  Theodore A. Roth  <troth@openavr.org>
     [Contriubuted by Luca Matteini]
 
