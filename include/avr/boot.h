@@ -98,6 +98,7 @@
 
 #include <avr/eeprom.h>
 #include <avr/io.h>
+#include <inttypes.h>
 #include <limits.h>
 
 /* Check for SPM Control Register in processor. */
@@ -136,31 +137,31 @@
     \def boot_spm_interrupt_enable()
     Enable the SPM interrupt. */
 
-#define boot_spm_interrupt_enable()   (__SPM_REG |= (unsigned char)_BV(SPMIE))
+#define boot_spm_interrupt_enable()   (__SPM_REG |= (uint8_t)_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_spm_interrupt_disable()
     Disable the SPM interrupt. */
 
-#define boot_spm_interrupt_disable()  (__SPM_REG &= (unsigned char)~_BV(SPMIE))
+#define boot_spm_interrupt_disable()  (__SPM_REG &= (uint8_t)~_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_is_spm_interrupt()
     Check if the SPM interrupt is enabled. */
 
-#define boot_is_spm_interrupt()       (__SPM_REG & (unsigned char)_BV(SPMIE))
+#define boot_is_spm_interrupt()       (__SPM_REG & (uint8_t)_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_rww_busy()
     Check if the RWW section is busy. */
 
-#define boot_rww_busy()          (__SPM_REG & (unsigned char)_BV(__COMMON_ASB))
+#define boot_rww_busy()          (__SPM_REG & (uint8_t)_BV(__COMMON_ASB))
 
 /** \ingroup avr_boot
     \def boot_spm_busy()
     Check if the SPM instruction is busy. */
 
-#define boot_spm_busy()               (__SPM_REG & (unsigned char)_BV(SPMEN))
+#define boot_spm_busy()               (__SPM_REG & (uint8_t)_BV(SPMEN))
 
 /** \ingroup avr_boot
     \def boot_spm_busy_wait()
@@ -189,9 +190,9 @@
         "spm\n\t"                                \
         "clr  r1\n\t"                            \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_PAGE_FILL), \
-          "r" ((unsigned short)address),         \
-          "r" ((unsigned short)data)             \
+        : "r" ((uint8_t)__BOOT_PAGE_FILL),       \
+          "r" ((uint16_t)address),               \
+          "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
     );                                           \
 })
@@ -210,9 +211,9 @@
         "nop\n\t"                                \
         "clr  r1\n\t"                            \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_PAGE_FILL), \
-          "r" ((unsigned short)address),         \
-          "r" ((unsigned short)data)             \
+        : "r" ((uint8_t)__BOOT_PAGE_FILL),       \
+          "r" ((uint16_t)address),               \
+          "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
     );                                           \
 })
@@ -231,9 +232,9 @@
         "clr  r1\n\t"                            \
         : "=m" (__SPM_REG),                      \
           "=m" (RAMPZ)                           \
-        : "r" ((unsigned char)__BOOT_PAGE_FILL), \
-          "r" ((unsigned long)address),          \
-          "r" ((unsigned short)data)             \
+        : "r" ((uint8_t)__BOOT_PAGE_FILL),       \
+          "r" ((uint32_t)address),               \
+          "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
     );                                           \
 })
@@ -248,8 +249,8 @@
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_PAGE_ERASE),\
-          "r" ((unsigned short)address)          \
+        : "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
+          "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
 })
@@ -266,8 +267,8 @@
         ".word 0xffff\n\t"                       \
         "nop\n\t"                                \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_PAGE_ERASE),\
-          "r" ((unsigned short)address)          \
+        : "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
+          "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
 })
@@ -284,8 +285,8 @@
         "spm\n\t"                                \
         : "=m" (__SPM_REG),                      \
           "=m" (RAMPZ)                           \
-        : "r" ((unsigned char)__BOOT_PAGE_ERASE),\
-          "r" ((unsigned long)address)           \
+        : "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
+          "r" ((uint32_t)address)                \
         : "r30", "r31"                           \
     );                                           \
 })
@@ -300,8 +301,8 @@
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_PAGE_WRITE),\
-          "r" ((unsigned short)address)          \
+        : "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
+          "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
 })
@@ -318,8 +319,8 @@
         ".word 0xffff\n\t"                       \
         "nop\n\t"                                \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_PAGE_WRITE),\
-          "r" ((unsigned short)address)          \
+        : "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
+          "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
 })
@@ -336,8 +337,8 @@
         "spm\n\t"                                \
         : "=m" (__SPM_REG),                      \
           "=m" (RAMPZ)                           \
-        : "r" ((unsigned char)__BOOT_PAGE_WRITE),\
-          "r" ((unsigned long)address)           \
+        : "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
+          "r" ((uint32_t)address)                \
         : "r30", "r31"                           \
     );                                           \
 })
@@ -351,7 +352,7 @@
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_RWW_ENABLE) \
+        : "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
     );                                           \
 })
 
@@ -366,13 +367,13 @@
         ".word 0xffff\n\t"                       \
         "nop\n\t"                                \
         : "=m" (__SPM_REG)                       \
-        : "r" ((unsigned char)__BOOT_RWW_ENABLE) \
+        : "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
     );                                           \
 })
 
 #define __boot_lock_bits_set(lock_bits)                    \
 ({                                                         \
-    unsigned char value = (unsigned char)(lock_bits | __BOOT_LOCK_BITS_MASK); \
+    uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
     boot_spm_busy_wait();                                  \
     while(!eeprom_is_ready());                             \
     __asm__ __volatile__                                   \
@@ -383,7 +384,7 @@
         "sts %0, %1\n\t"                                   \
         "spm\n\t"                                          \
         : "=m" (__SPM_REG)                                 \
-        : "r" ((unsigned char)__BOOT_LOCK_BITS_SET),       \
+        : "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
           "r" (value)                                      \
         : "r0", "r30", "r31"                               \
     );                                                     \
@@ -391,7 +392,7 @@
 
 #define __boot_lock_bits_set_alternate(lock_bits)          \
 ({                                                         \
-    unsigned char value = (unsigned char)(lock_bits | __BOOT_LOCK_BITS_MASK); \
+    uint8_t value = (uint8_t)(lock_bits | __BOOT_LOCK_BITS_MASK); \
     boot_spm_busy_wait();                                  \
     while(!eeprom_is_ready());                             \
     __asm__ __volatile__                                   \
@@ -404,7 +405,7 @@
         ".word 0xffff\n\t"                                 \
         "nop\n\t"                                          \
         : "=m" (__SPM_REG)                                 \
-        : "r" ((unsigned char)__BOOT_LOCK_BITS_SET),       \
+        : "r" ((uint8_t)__BOOT_LOCK_BITS_SET),       \
           "r" (value)                                      \
         : "r0", "r30", "r31"                               \
     );                                                     \
@@ -465,7 +466,7 @@
 #define boot_rww_enable()             __boot_rww_enable_alternate()
 #define boot_lock_bits_set(lock_bits) __boot_lock_bits_set_alternate(lock_bits)
 
-#elif (FLASHEND > USHRT_MAX)
+#elif (FLASHEND > USHRT_MAX) && !defined(__USING_MINT8)
 
 /* Extended: >16 bit address */
 #define boot_page_fill(address, data) __boot_page_fill_extended(address, data)
