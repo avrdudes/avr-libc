@@ -1,3 +1,7 @@
+2002-12-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/wdt.h: fix typo.
+
 2002-12-17  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

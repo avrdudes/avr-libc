@@ -97,7 +97,7 @@
    supply voltages, the times will increase.  For older devices, the
    times will be as large as three times when operating at Vcc = 3 V,
    while the newer devices (e. g. ATmega128, ATmega8) only experience
-   a neglicible change.
+   a negligible change.
 
    Possible timeout values are: 15 ms, 30 ms, 60 ms, 120 ms, 250 ms,
    500 ms, 1 s, 2 s.  Symbolic constants are formed by the prefix
