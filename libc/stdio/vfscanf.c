@@ -266,7 +266,6 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 				if (i == EOF)
 					goto leave;
 
-				
 #if SCANF_LEVEL > SCANF_MIN
 				while (width-- > 0)
 #else
@@ -424,7 +423,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 					*(va_arg(ap, int *)) = stream->len;
 				break;
 #endif /* SCANF_LEVEL > SCANF_MIN */
-				
+
 #if SCANF_LEVEL >= SCANF_FLT
 			case 'e':
 			case 'f':
