@@ -114,6 +114,12 @@ _delay_loop_2(uint16_t __count)
 	);
 }
 
+#ifndef F_CPU
+/* prevent compiler error by supplying a default */
+# warning "F_CPU not defined for <avr/delay.h>"
+# define F_CPU 1000000UL
+#endif
+
 /**
    \ingroup avr_delay
 
