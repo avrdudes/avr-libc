@@ -285,7 +285,7 @@
 
     Test whether bit \c bit in IO register \c sfr is clear. */
 
-#define bit_is_clear(sfr, bit) (~inb(sfr) & _BV(bit))
+#define bit_is_clear(sfr, bit) (!(inb(sfr) & _BV(bit)))
 
 /** \def loop_until_bit_is_set
     \ingroup avr_sfr
