@@ -1,3 +1,7 @@
+2003-06-18  Eric B. Weddington  <eric@ecentral.com>
+
+	* libc/stdlib/atoi.S: Fix for Bug #3575, by Reiner Patommel.
+
 2003-06-17  Eric B. Weddington  <eric@ecentral.com>
 
 	* include/avr/interrupt.h: Fix for bug #3508.

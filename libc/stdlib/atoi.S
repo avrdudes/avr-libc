@@ -24,7 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE. */
+  POSSIBILITY OF SUCH DAMAGE. */  avr_stdlib
 
 /*
    $Id$
@@ -33,6 +33,7 @@
      Created by Reiner Patommel
      Changes: Jochen Pernsteiner, Marek Michalkiewicz
      Changes: Reiner Patommel, 8 Feb 2003
+     Changes: Reiner Patommel, 13 May 2003 (DOXYGEN)
  */
 
 #include "macros.inc"
@@ -43,7 +44,19 @@
 #define num_lo	r24
 #define tmp	r18
 
-; int atoi(const char *string)
+
+/** \ingroup avr_stdlib
+    \fn int atoi(const char *string)
+    \brief Convert a string to an integer.
+        
+    The atoi() function converts the initial portion of the string
+    pointed to by \c nptr to integer representation.
+
+    It is equivalent to:
+
+           \code (int)strtol(nptr, (char **)NULL, 10); \endcode
+           except that atoi() does not detect errors.	   
+*/
 
 	.text
 	.global _U(atoi)
@@ -116,4 +129,5 @@ _U(atoi):
 
 .atoi_end:
 	.size _U(atoi), .atoi_end - _U(atoi)
+
 
