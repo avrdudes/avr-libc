@@ -1,3 +1,9 @@
+2005-01-25  Eric B. Weddington  <ericw@evcohs.com>
+
+    * doc/examples/progmem.c: Update to use the latest API.
+    [Fixes bug #11732]
+    * NEWS: Update bugs fixed list.
+
 2005-01-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/strtol.c: Dmitry Xmelkov's fixes and speedups

@@ -13,6 +13,7 @@
   [#11522] Rewrite wdt_disable() to match datasheet algorithm.
   [#11684] realloc overwrites first to bytes of memory block when shrinking
   [patch #3618] Optimization strtol(), a little (related to bug #11494).
+  [#11732] Update doc/examples/progmem.c to use the latest API.
 
 * Extend stdio and pmstring APIs:
 
