@@ -91,6 +91,14 @@ pgm_read_byte_far
 pgm_read_word_far
 
 
+* New bootloader support API.
+
+#include <avr/boot.h>
+
+This provides bootloader support functions to those processors that have 
+builtin bootloader support.
+
+
 *** Changes up to avr-libc-20020203:
 
 See the ChangeLog file up to 2002-02-03 for details.
