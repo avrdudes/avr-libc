@@ -30,6 +30,7 @@
 
    Contributors:
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
+     eeprom_write_word and eeprom_write_block added by Artur Lipowski <LAL@pro.onet.pl>
  */
 
 #ifndef _EEPROM_H_
@@ -79,12 +80,18 @@ extern "C" {
 /** \ingroup avr_eeprom
     Read one byte from EEPROM address \c addr. */
 
-extern uint8_t eeprom_read_byte (uint8_t *addr);
+extern uint8_t eeprom_read_byte (const uint8_t *addr);
 
 /** \ingroup avr_eeprom
     Read one 16-bit word (little endian) from EEPROM address \c addr. */
 
-extern uint16_t eeprom_read_word (uint16_t *addr);
+extern uint16_t eeprom_read_word (const uint16_t *addr);
+
+/** \ingroup avr_eeprom
+    Read a block of \c n bytes from EEPROM address \c addr to
+    \c buf. */
+
+extern void eeprom_read_block (void *buf, const void *addr, size_t n);
 
 /** \ingroup avr_eeprom
     Write a byte \c val to EEPROM address \c addr. */
@@ -92,10 +99,15 @@ extern uint16_t eeprom_read_word (uint16_t *addr);
 extern void eeprom_write_byte (uint8_t *addr, uint8_t val);
 
 /** \ingroup avr_eeprom
-    Read a block of \c n bytes from EEPROM address \c addr to
+    Write a word \c val to EEPROM address \c addr. */
+
+extern void eeprom_write_word (uint16_t *addr, uint16_t val);
+
+/** \ingroup avr_eeprom
+    Write a block of \c n bytes to EEPROM address \c addr from
     \c buf. */
 
-extern void eeprom_read_block (void *buf, void *addr, size_t n);
+extern void eeprom_write_block (const void *buf, void *addr, size_t n);
 
 #ifdef __cplusplus
 }

@@ -35,6 +35,8 @@ lib_a_asm_sources = \
 	ee_rblk.S \
 	ee_rw.S   \
 	ee_wb.S   \
+	ee_ww.S   \
+	ee_wblk.S \
 	itoa.S    \
 	ltoa.S    \
 	mulsi10.S \

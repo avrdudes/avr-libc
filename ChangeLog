@@ -1,3 +1,15 @@
+2003-07-17  Eric B. Weddington  <eric@ecentral.com>
+
+	New functions eeprom_write_word and eeprom_write_block from
+	Artur Lipowski <LAL@pro.onet.pl>
+	* libc/misc/eeprom.S: New functions, add const to parameters of read
+	functions.
+	* libc/misc/eeprom_ww.S: New file.
+	* libc/misc/eeprom_wblk.S: New file.
+	* include/avr/eeprom.h: New functions.
+	* libc/misc/Makefile.am: Add new modules.
+	NEWS: Note about new functions.
+	
 2003-07-10  Eric B. Weddington  <eric@ecentral.com>
 
 	* include/avr/boot.h: Fix doxygen.

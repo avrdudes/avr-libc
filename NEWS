@@ -113,6 +113,11 @@ strncat_P (new)
 Contributed by Reiner Patommel with some work on strlcpy, strlcat by
 Eric Weddington.
 
+* New eeprom functions by Artur Lipowski <LAL@pro.onet.pl>
+
+eeprom_write_word
+eeprom_write_block
+
 
 *** Changes up to avr-libc-20020203:
 

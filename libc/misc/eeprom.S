@@ -31,6 +31,7 @@
 
    Contributors:
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
+     eeprom_write_word and eeprom_write_block added by Artur Lipowski <LAL@pro.onet.pl>
  */
 
 #include "macros.inc"
@@ -49,7 +50,7 @@
 
 #ifdef L_eeprom_read_byte
 /* read one byte from EEPROM */
-/* uint8_t eeprom_read_byte(uint8_t *addr); */
+/* uint8_t eeprom_read_byte(const uint8_t *addr); */
 /* addr = r25:r24, result = r25(=0):r24 */
 
 	.section .text
@@ -70,7 +71,7 @@ _U(eeprom_read_byte):
 
 #ifdef L_eeprom_read_word
 /* read a little endian 16-bit word from EEPROM */
-/* uint16_t eeprom_read_word(uint16_t *addr); */
+/* uint16_t eeprom_read_word(const uint16_t *addr); */
 /* addr = r25:r24, result = r25:r24 */
 
 	.global _U(eeprom_read_word)
@@ -94,6 +95,9 @@ _U(eeprom_read_word):
 	in	res_hi, _SFR_IO_ADDR(EEDR)
 	ret
 #endif /* L_eeprom_read_word */
+
+#undef res_hi
+#undef res_lo
 
 #ifdef L_eeprom_write_byte
 /* write a byte to EEPROM */
@@ -120,10 +124,46 @@ _U(eeprom_write_byte):
 #undef val
 #endif /* L_eeprom_write_byte */
 
+#ifdef L_eeprom_write_word
+/* write a word to EEPROM */
+/* void eeprom_write_word (uint16_t *addr, uint16_t val); */
+/* addr = r25:r24, val = r23:r22 */
+#define val_hi rP2
+#define val_lo rP3
+
+	.global _U(eeprom_write_word)
+
+_U(eeprom_write_word):
+	ser	rTI0				; set flag to indicate that
+						; the first (LSB) byte will be written
+	in	__tmp_reg__, _SFR_IO_ADDR(SREG)
+eeprom_write_word_start:
+	sbic	_SFR_IO_ADDR(EECR), EEWE
+	rjmp	eeprom_write_word_start		; make sure EEPROM is ready
+#ifdef EEARH
+	out	_SFR_IO_ADDR(EEARH), addr_hi
+#endif
+	out	_SFR_IO_ADDR(EEARL), addr_lo
+	out	_SFR_IO_ADDR(EEDR), val_lo
+	cli					; no ints between setting EEMWE and EEWE
+	sbi	_SFR_IO_ADDR(EECR), EEMWE
+	sbi	_SFR_IO_ADDR(EECR), EEWE
+	out	_SFR_IO_ADDR(SREG), __tmp_reg__
+	sbrs	rTI0, 0				; if flag is cleared it means that
+	ret					; we write both bytes
+			
+	subi	addr_lo, lo8(-1)		; prepare to writie MSB
+	sbci	addr_hi, hi8(-1)
+	mov	val_lo, val_hi
+	clr	rTI0				; clear flag to indicate that
+	rjmp	eeprom_write_word_start		; the second (MSB) byte will be written
+	
+#undef val_hi
+#undef val_lo
+#endif /* L_eeprom_write_word */
+
 #undef addr_hi
 #undef addr_lo
-#undef res_hi
-#undef res_lo
 
 #define buf_hi rP0
 #define buf_lo rP1
@@ -134,7 +174,7 @@ _U(eeprom_write_byte):
 
 #ifdef L_eeprom_read_block
 /* read a block of bytes from EEPROM */
-/* void eeprom_read_block(void *buf, void *addr, size_t n); */
+/* void eeprom_read_block(void *buf, const void *addr, size_t n); */
 /* buf = r25:r24, addr = r23:r22, n = r21:r20 */
 
 	.global _U(eeprom_read_block)
@@ -164,3 +204,39 @@ eeprom_read_block_done:
 	ret
 #endif /* L_eeprom_read_block */
 
+#ifdef L_eeprom_write_block
+/* write a block of bytes to EEPROM */
+/* void eeprom_write_block (const void *buf, void *addr, size_t n); */
+/* buf = r25:r24, addr = r23:r22, n = r21:r20 */
+
+	.global _U(eeprom_write_block)
+
+_U(eeprom_write_block):
+	cp	n_lo, __zero_reg__		; check if really there is something to write
+	cpc	n_hi, __zero_reg__
+	breq	eeprom_write_block_done
+	LOAD_X(buf_lo, buf_hi)
+	in	buf_lo, _SFR_IO_ADDR(SREG)	; reuse buf_lo as the SREG temporary storage
+eeprom_write_block_busy:
+	sbic	_SFR_IO_ADDR(EECR), EEWE
+	rjmp	eeprom_write_block_busy		; make sure EEPROM is ready
+#ifdef EEARH
+	out	_SFR_IO_ADDR(EEARH), addr_hi
+#endif
+	out	_SFR_IO_ADDR(EEARL), addr_lo
+	ld	__tmp_reg__, X+
+	out	_SFR_IO_ADDR(EEDR), __tmp_reg__  
+	cli					; no ints between setting EEMWE and EEWE
+	sbi	_SFR_IO_ADDR(EECR), EEMWE
+	sbi	_SFR_IO_ADDR(EECR), EEWE
+	out	_SFR_IO_ADDR(SREG), buf_lo
+	subi	addr_lo, lo8(-1)
+	sbci	addr_hi, hi8(-1)
+	subi	n_lo, lo8(1)
+	sbci	n_hi, hi8(1)
+	brne	eeprom_write_block_busy
+eeprom_write_block_done:
+	ret
+#endif /* L_eeprom_write_block */
+
+.end
