@@ -39,6 +39,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        inline_asm.dox \
                        interrupts.dox \
                        acknowledge.dox \
+                       tools-install.dox \
                        faq.dox
 
 SUFFIXES             = .pdf

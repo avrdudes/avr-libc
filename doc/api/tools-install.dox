@@ -1,0 +1,363 @@
+/* Copyright (c) 2002, Theodore Roth
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \page install_tools Installing the GNU Tool Chain
+
+\addindex installation
+
+\note This discussion was taken directly from Rich Neswold's document. (See
+\ref acks).
+
+\note This discussion is Unix specific. [FIXME: troth/2002-08-13: we need a
+volunteer to add windows specific notes to these instructions.]
+
+This chapter shows how to build and install a complete development environment
+for the AVR processors using the GNU toolset.
+
+The default behaviour for most of these tools is to install every thing under
+the \c /usr/local directory.  In order to keep the AVR tools separate from the
+base system, it is usually better to install everything into
+<tt>/usr/local/avr</tt>.  If the \c /usr/local/avr directory does not exist,
+you should create it before trying to install anything.  You will need
+<tt>root</tt> access to install there.  If you don't have root access to the
+system, you can alternatively install in your home directory, for example, in
+<tt>$HOME/local/avr</tt>.  Where you install is a completely arbitrary
+decision, but should be consistent for all the tools.
+
+You specify the installation directory by using the <tt>--prefix=dir</tt>
+option with the \c configure script.  It is important to install all the AVR
+tools in the same directory or some of the tools will not work correctly.  To
+ensure consistency and simplify the discussion, we will use \c $PREFIX to
+refer to whatever directory you wish to install in.  You can set this as an
+environment variable if you wish as such (using a Bourne-like shell):
+
+\addindex $PREFIX
+\addindex --prefix
+\verbatim
+$ PREFIX=$HOME/local/avr
+$ export PREFIX
+\endverbatim
+
+\addindex $PATH
+\anchor path \note Be sure that you have your \c PATH environment variable set
+to search the directory you install everything in \e before you start
+installing anything.  For example, if you use <tt>--prefix=$PREFIX</tt>, you
+must have \c $PREFIX/bin in your exported <tt>PATH</tt>. As such:
+
+\verbatim
+$ PATH=$PATH:$PREFIX/bin
+$ export PATH
+\endverbatim
+
+\note The versions for the packages listed below are known to work together.
+If you mix and match different versions, you may have problems.
+
+\subsection required_tools Required Tools
+\addindex tools, required
+
+- <b>GNU Binutils</b> (2.14) <br>
+  http://sources.redhat.com/binutils/ <br>
+  \ref install_avr_binutils "Installation"
+
+- <b>GCC</b> (3.3) <br>
+  http://gcc.gnu.org/ <br>
+  \ref install_avr_gcc "Installation"
+
+- <b>AVR Libc</b> (20020816-cvs) <br>
+  http://savannah.gnu.org/projects/avr-libc/ <br>
+  \ref install_avr_libc "Installation"
+
+\note As of 2002-08-15, the versions mentioned above are still considered
+experimental and must be obtained from cvs.  Instructions for obtaining the
+latest cvs versions are available at the URLs noted above.  Significant changes
+have been made which are not compatible with previous stable releases.  These
+incompatilities should be noted in the documentation.
+
+\subsection optional_tools Optional Tools
+\addindex tools, optional
+
+You can develop programs for AVR devices without the following tools.  They may
+or may not be of use for you.
+
+- <b>uisp</b> (20020626)<br>
+  http://savannah.gnu.org/projects/uisp/<br>
+  \ref install_uisp "Installation"
+
+- <b>avrprog</b> (2.1.0) <br>
+  http://www.bsdhome.com/avrprog/ <br>
+  \ref install_avrprog "Installation"
+
+- <b>GDB</b> (5.2.1) <br>
+  http://sources.redhat.com/gdb/ <br>
+  \ref install_gdb "Installation"
+
+- <b>Simulavr</b> (0.1.0) <br>
+  http://savannah.gnu.org/projects/simulavr/ <br>
+  \ref install_simulavr "Installation"
+
+- <b>AVaRice</b> (1.5) <br>
+  http://avarice.sourceforge.net/ <br>
+  \ref install_avarice "Installation"
+
+\subsection install_avr_binutils GNU Binutils for the AVR target
+\addindex installation, binutils
+
+The <tt><b>binutils</b></tt> package provides all the low-level utilities
+needed in building and manipulating object files.  Once installed, your
+environment will have an AVR assembler (<tt>avr-as</tt>), linker
+(<tt>avr-ld</tt>), and librarian (<tt>avr-ar</tt> and <tt>avr-ranlib</tt>).
+In addition, you get tools which extract data from object files
+(<tt>avr-objcopy</tt>), dissassemble object file information
+(<tt>avr-objdump</tt>), and strip information from object files
+(<tt>avr-strip</tt>).  Before we can build the C compiler, these tools need to
+be in place.
+
+Download and unpack the source files:
+
+\verbatim
+$ bunzip2 -c binutils-<version>.tar.bz2 | tar xf -
+$ cd binutils-<version>
+\endverbatim
+
+\note Replace \c <version> with the version of the package you downloaded.
+
+\note If you obtained a gzip compressed file (.gz), use <tt>gunzip</tt>
+instead of <tt>bunzip2</tt>.
+
+It is usually a good idea to configure and build <tt><b>binutils</b></tt> in a
+subdirectory so as not to pollute the source with the compiled files.  This is
+recommended by the <tt><b>binutils</b></tt> developers.
+
+\verbatim
+$ mkdir obj-avr
+$ cd obj-avr
+\endverbatim
+
+The next step is to configure and build the tools. This is done by supplying
+arguments to the <tt>configure</tt> script that enable the AVR-specific
+options.
+
+\verbatim
+$ ../configure --prefix=$PREFIX --target=avr --disable-nls
+\endverbatim
+
+If you don't specify the <tt>--prefix</tt> option, the tools will get
+installed in the \c /usr/local hierarchy (i.e. the binaries will get installed
+in <tt>/usr/local/bin</tt>, the info pages get installed in
+<tt>/usr/local/info</tt>, etc.) Since these tools are changing frequently, It
+is preferrable to put them in a location that is easily removed.
+
+When <tt>configure</tt> is run, it generates a lot of messages while it
+determines what is available on your operating system. When it finishes, it
+will have created several <tt>Makefile</tt>s that are custom tailored to your
+platform. At this point, you can build the project.
+
+\verbatim
+$ make
+\endverbatim
+
+\note BSD users should note that the project's <tt>Makefile</tt> uses GNU
+<tt>make</tt> syntax. This means FreeBSD users may need to build the tools by
+using <tt>gmake</tt>.
+
+If the tools compiled cleanly, you're ready to install them. If you specified
+a destination that isn't owned by your account, you'll need <tt>root</tt>
+access to install them. To install:
+
+\verbatim
+$ make install
+\endverbatim
+
+You should now have the programs from binutils installed into
+<tt>$PREFIX/bin</tt>.  Don't forget to \ref path "set your PATH" environment
+variable before going to build avr-gcc.
+
+\subsection install_avr_gcc GCC for the AVR target
+\addindex installation, gcc
+
+\warning You <em><b>must</b></em> install 
+\ref install_avr_binutils "avr-binutils" and make sure your 
+\ref path "path is set" properly before installing avr-gcc.
+
+The steps to build \c avr-gcc are essentially same as for 
+\ref install_avr_binutils "binutils":
+
+\verbatim
+$ bunzip2 -c gcc-<version>.tar.bz2 | tar xf -
+$ cd gcc-<version>
+$ mkdir obj-avr
+$ cd obj-avr
+$ ../configure --prefix=$PREFIX --target=avr --enable-languages=c,c++ \
+    --disable-nls
+$ make
+$ make install
+\endverbatim
+
+To save your self some download time, you can alternatively download only the
+<tt>gcc-core-<version>.tar.bz2</tt> and <tt>gcc-c++-<version>.tar.bz2</tt>
+parts of the gcc.  Also, if you don't need C++ support, you only need the core
+part and should only enable the C language support.
+
+\note Early versions of these tools did not support C++.
+
+\note The stdc++ libs are not included with C++ for AVR due to the size
+limitations of the devices.
+
+\subsection install_avr_libc AVR Libc
+\addindex installation, avr-libc
+
+\warning You <em><b>must</b></em> install 
+\ref install_avr_binutils "avr-binutils",
+\ref install_avr_gcc "avr-gcc" and make sure your
+\ref path "path is set" properly before installing avr-libc.
+
+To build and install avr-libc:
+
+\verbatim
+$ gunzip -c avr-libc-<version>.tar.gz
+$ cd avr-libc-<version>
+$ ./doconf
+$ ./domake
+$ cd build
+$ make install
+\endverbatim
+
+\note The \c doconf script will automatically use the \c $PREFIX environment
+variable if you have set and exported it.
+
+Alternatively, you could do this (shown for consistency with \c binutils and
+\c gcc):
+
+\verbatim
+$ gunzip -c avr-libc-<version>.tar.gz | tar xf -
+$ cd avr-libc-<version>
+$ mkdir obj-avr
+$ cd obj-avr
+$ ../configure --prefix=$PREFIX
+$ make
+$ make install
+\endverbatim
+
+\note If you have obtained the latest avr-libc from cvs, you will have to run
+the \c reconf script before using either of the above build methods.
+
+\subsection install_uisp UISP
+\addindex installation, uisp
+
+Uisp also uses the \c configure system, so to build and install:
+
+\verbatim
+$ gunzip -c uisp-<version>.tar.gz | tar xf -
+$ cd uisp-<version>
+$ mkdir obj-avr
+$ cd obj-avr
+$ ../configure --prefix=$PREFIX
+$ make
+$ make install
+\endverbatim
+
+\subsection install_avrprog Avrprog
+\addindex installation, avrprog
+
+\note This is a FreeBSD only program. [FIXME: troth/2002-08-15: Is this
+correct?]
+
+<tt><b>avrprog</b></tt> is part of the FreeBsd ports system. To install it,
+simply do the following:
+
+\verbatim
+# cd /usr/ports/devel/avrprog
+# make install
+\endverbatim
+
+\note [FIXME: do you have to be root to do the install?]
+
+\subsection install_gdb GDB for the AVR target
+\addindex Installation, gdb
+
+Gdb also uses the \c configure system, so to build and install:
+
+\verbatim
+$ bunzip2 -c gdb-<version>.tar.bz2 | tar xf -
+$ cd gdb-<version>
+$ mkdir obj-avr
+$ cd obj-avr
+$ ../configure --prefix=$PREFIX --target=avr
+$ make
+$ make install
+\endverbatim
+
+\note If you are planning on using <tt>avr-gdb</tt>, you will probably want to
+install either \ref install_simulavr "simulavr" or
+\ref install_avarice "avarice" since avr-gdb needs one of these to run as a
+a remote target.
+
+\subsection install_simulavr Simulavr
+\addindex installation, simulavr
+
+Simulavr also uses the \c configure system, so to build and install:
+
+\verbatim
+$ gunzip -c simulavr-<version>.tar.gz | tar xf -
+$ cd simulavr-<version>
+$ mkdir obj-avr
+$ cd obj-avr
+$ ../configure --prefix=$PREFIX
+$ make
+$ make install
+\endverbatim
+
+\note You might want to have already installed
+\ref install_avr_binutils "avr-binutils",
+\ref install_avr_gcc "avr-gcc" and 
+\ref install_avr_libc "avr-libc"
+if you want to have the test programs built in the simulavr source.
+
+\subsection install_avarice AVaRice
+\addindex installation, avarice
+
+\note These install notes are specific to avarice-1.5.
+
+You will have to edit <tt>prog/avarice/Makefile</tt> for avarice in order to
+install into a directory other than <tt>/usr/local/avr/bin</tt>. Edit the
+line which looks like this:
+
+\verbatim
+INSTALL_DIR = /usr/local/avr/bin
+\endverbatim
+
+such that <tt>INSTALL_DIR</tt> is now set to whatever you decided on
+<tt>$PREFIX/bin</tt> to be.
+
+\verbatim
+$ gunzip -c avarice-1.5.tar.gz | tar xf -
+$ cd avarice-1.5/prog/avarice
+$ make
+$ make install
+\endverbatim
+
+*/
