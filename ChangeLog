@@ -1,3 +1,15 @@
+2003-10-18  Theodore A. Roth  <troth@openavr.org>
+[Fix for Bug #5976]
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/faq.dox: Use pgm_read_byte() instead of __lpm_inline() in the
+	debug_P() example.
+	* include/stdlib.h (itoa): Add note and warning about minimal buffer
+	size to dox.
+	(ltoa): Ditto.
+	(utoa): Ditto.
+	(ultoa): Ditto.
+
 2003-10-17  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

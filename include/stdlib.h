@@ -402,6 +402,14 @@ extern int rand_r(unsigned long *ctx);
    ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
+   \note The minimal size of the buffer \c s depends on the choice of
+   radix. For example, if the radix is 2 (binary), you need to supply a buffer
+   with a minimal length of 8 * sizeof (int) + 1 characters, i.e. one
+   character for each bit plus one for the string terminator. Using a larger
+   radix will require a smaller minimal buffer size.
+
+   \warning If the buffer is too small, you risk a buffer overflow.
+
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
    is greater than 10, the next digit after \c '9' will be the letter
@@ -421,6 +429,14 @@ extern char *itoa(int __val, char *__s, int __radix);
    The function ltoa() converts the long integer value from \c val into an
    ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
+
+   \note The minimal size of the buffer \c s depends on the choice of
+   radix. For example, if the radix is 2 (binary), you need to supply a buffer
+   with a minimal length of 8 * sizeof (long int) + 1 characters, i.e. one
+   character for each bit plus one for the string terminator. Using a larger
+   radix will require a smaller minimal buffer size.
+
+   \warning If the buffer is too small, you risk a buffer overflow.
 
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
@@ -442,6 +458,14 @@ extern char *ltoa(long int __val, char *__s, int __radix);
    ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
+   \note The minimal size of the buffer \c s depends on the choice of
+   radix. For example, if the radix is 2 (binary), you need to supply a buffer
+   with a minimal length of 8 * sizeof (unsigned int) + 1 characters, i.e. one
+   character for each bit plus one for the string terminator. Using a larger
+   radix will require a smaller minimal buffer size.
+
+   \warning If the buffer is too small, you risk a buffer overflow.
+
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
    is greater than 10, the next digit after \c '9' will be the letter
@@ -459,6 +483,14 @@ extern char *utoa(unsigned int __val, char *__s, int __radix);
    \c val into an
    ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
+
+   \note The minimal size of the buffer \c s depends on the choice of
+   radix. For example, if the radix is 2 (binary), you need to supply a buffer
+   with a minimal length of 8 * sizeof (unsigned long int) + 1 characters,
+   i.e. one character for each bit plus one for the string terminator. Using a
+   larger radix will require a smaller minimal buffer size.
+
+   \warning If the buffer is too small, you risk a buffer overflow.
 
    Conversion is done using the \c radix as base, which may be a
    number between 2 (binary conversion) and up to 36.  If \c radix
