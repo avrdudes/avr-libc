@@ -1,0 +1,88 @@
+## -*- mode: rpm-spec; -*-
+##
+## $Id$
+##
+## @configure_input@
+##
+
+%define libc_version @VERSION@
+
+Summary: AVR libc.
+Name: avr-libc
+Version: %{libc_version}
+Release: 1
+Copyright: GPL, LGPL, BSD, Public Domain
+Group: Avr/Development/Tools
+URL: http://www.amelek.gda.pl/avr/libc
+Source0: http://www.amelek.gda.pl/avr/libc/avr-libc-%{version}.tar.gz
+Buildroot: /var/tmp/avr-libc-%{version}-root
+BuildRequires: avr-gcc >= 3.2-1
+Requires: avr-gcc >= 3.2-1
+
+%description
+Avr-libc is a C library for developing applications for Atmel AVR microcontrollers.
+
+%prep
+%setup -q
+
+# Touching these files stops the make step from running aclocal, autoconf and
+# automake. This is needed since we patched the build system.
+touch aclocal.m4
+touch configure
+
+%build
+rm -fr obj-%{_target_platform}
+mkdir obj-%{_target_platform}
+cd obj-%{_target_platform}
+
+../configure --prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir}
+
+make
+
+%install
+rm -rf ${RPM_BUILD_ROOT}
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}
+cd obj-%{_target_platform}
+make prefix=$RPM_BUILD_ROOT%{_prefix} mandir=$RPM_BUILD_ROOT%{_mandir} \
+	infodir=$RPM_BUILD_ROOT%{_infodir} install
+
+%clean
+rm -rf ${RPM_BUILD_ROOT}
+
+%files
+%defattr(-,root,root)
+%doc AUTHORS ChangeLog INSTALL LICENSE NEWS README
+%doc doc
+%dir %{_prefix}/avr
+%dir %{_prefix}/avr/lib
+%dir %{_prefix}/avr/lib/avr3
+%dir %{_prefix}/avr/lib/avr4
+%dir %{_prefix}/avr/lib/avr5
+%dir %{_prefix}/avr/include
+%{_prefix}/avr/lib/lib*
+%{_prefix}/avr/lib/crt*
+%{_prefix}/avr/lib/avr3/lib*
+%{_prefix}/avr/lib/avr3/crt*
+%{_prefix}/avr/lib/avr4/lib*
+%{_prefix}/avr/lib/avr4/crt*
+%{_prefix}/avr/lib/avr5/lib*
+%{_prefix}/avr/lib/avr5/crt*
+%{_prefix}/avr/include/*
+
+%changelog
+* Mon Jul 08 2002 Theodore Roth <troth@verinet.com>
+- Integrate spec file into build system.
+
+* Fri May 03 2002 Theodore Roth <troth@verinet.com>
+- Added patch to fix timer.h for mega128.
+
+* Mon Apr 29 2002 Theodore Roth <troth@verinet.com>
+- Added patch to fix headers.
+- Fix strncasecmp_P macro in pgmspace.h.
+
+* Wed Mar 27 2002 Theodore Roth <troth@verinet.com>
+- Updated avr-gcc dependency to 3.0.4-2.
+- Fixed up %files section to work with rh-7.1.
+
+* Mon Mar 17 2002 Theodore Roth <troth@verinet.com>
+- Initial spec file.

@@ -140,4 +140,13 @@ distclean-multi:
 maintainer-clean-multi:
 	$(MULTICLEAN) $(AM_MAKEFLAGS) DO=maintainer-clean multi-clean
 
+dist-hook:
+	cp avr-libc.spec $(distdir)/avr-libc.spec
+	rm -rf $(distdir)/common/CVS
+	rm -rf $(distdir)/include/CVS
+	rm -rf $(distdir)/include/avr/CVS
+	rm -rf $(distdir)/doc/CVS
+	rm -rf $(distdir)/doc/examples/CVS
+
+
 MAKEOVERRIDES=
