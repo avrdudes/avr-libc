@@ -1,4 +1,4 @@
-/* Copyright (c) 2002 Joerg Wunsch
+/* Copyright (c) 2002, 2005, Joerg Wunsch
    All rights reserved.
 
    Portions of documentation Copyright (c) 1990, 1991, 1993
@@ -337,6 +337,8 @@ extern int	fclose(FILE *__stream);
            than or equal to the precision.  Trailing zeros are removed
            from the fractional part of the result; a decimal point
            appears only if it is followed by at least one digit.
+   - \c S  Similar to the \c s format, except the pointer is expected to
+           point to a program-memory (ROM) string instead of a RAM string.
 
    In no case does a non-existent or small field width cause truncation of a
    numeric field; if the result of a conversion is wider than the field

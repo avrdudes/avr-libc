@@ -42,7 +42,8 @@ lib_a_asm_sources = \
 	strncasecmp_P.S \
 	strncat_P.S     \
 	strncmp_P.S     \
-	strncpy_P.S
+	strncpy_P.S     \
+	strnlen_P.S
 
 lib_a_SOURCES = $(lib_a_asm_sources)
 

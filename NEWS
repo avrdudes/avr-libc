@@ -11,6 +11,18 @@
   [#11510] Abstract the change enable bit in wdt.h for mega32.
   [#11522] Rewrite wdt_disable() to match datasheet algorithm.
 
+* Extend stdio and pmstring APIs:
+
+Implement patch #3516: printf: Handling of argument strings from
+program memory
+
+The %S format can now be used to print strings that are located in
+program-space memory (aka. ROM).
+
+As a prerequisite for this, the function strnlen_P() has been added
+which is similar to strnlen() except that it takes a pointer to a
+program-space string.
+
 *** Changes in avr-libc-1.2:
 
 * Bugs fixed:
