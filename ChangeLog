@@ -1,5 +1,23 @@
 2004-04-28  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/eeprom.h (eeprom_rb): Remove deprecated interface.
+	(eeprom_rw): Ditto.
+	(eeprom_wb): Ditto.
+	(_EEPUT): Use eeprom_write_byte() directly instead of eeprom_wb().
+	(_EEGET): Use eeprom_read_byte() directly instead of eeprom_rb().
+	* include/avr/pgmspace.h (PRG_RDB): Remove deprecated interface.
+	* include/avr/sfr_defs.h (cbi): Ditto.
+	(sbi): Ditto.
+	(inb): Ditto.
+	(outb): Ditto.
+	(inw): Ditto.
+	(outw): Ditto.
+	(outp): Ditto.
+	(inp): Ditto.
+	(BV): Ditto.
+
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* include/eeprom.h: Remove deprecated file.
 	* include/ina90.h: Ditto.

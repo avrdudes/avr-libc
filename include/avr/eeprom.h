@@ -124,33 +124,6 @@ extern void eeprom_write_block (const void *buf, void *addr, size_t n);
 
 /*@}*/
 
-/** \name Backwards compatibility defines */
-
-/*@{*/
-
-/** \def eeprom_rb
-    \ingroup avr_eeprom
-    \deprecated
-    Use eeprom_read_byte() in new programs. */
-
-#define eeprom_rb(addr) eeprom_read_byte ((uint8_t *)(addr))
-
-/** \def eeprom_rw
-    \ingroup avr_eeprom
-    \deprecated
-    Use eeprom_read_word() in new programs. */
-
-#define eeprom_rw(addr) eeprom_read_word ((uint16_t *)(addr))
-
-/** \def eeprom_wb
-    \ingroup avr_eeprom
-    \deprecated
-    Use eeprom_write_byte() in new programs. */
-
-#define eeprom_wb(addr,val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
-
-/*@}*/
-
 /** \name IAR C compatibility defines */
 
 /*@{*/
@@ -159,13 +132,13 @@ extern void eeprom_write_block (const void *buf, void *addr, size_t n);
     \ingroup avr_eeprom
     Write a byte to EEPROM. */
 
-#define _EEPUT(addr, val) eeprom_wb(addr, val)
+#define _EEPUT(addr, val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
 
 /** \def _EEGET
     \ingroup avr_eeprom
     Read a byte from EEPROM. */
 
-#define _EEGET(var, addr) (var) = eeprom_rb(addr)
+#define _EEGET(var, addr) (var) = eeprom_read_byte ((uint8_t *)(addr))
 
 /*@}*/
 

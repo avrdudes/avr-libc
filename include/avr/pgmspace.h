@@ -501,17 +501,4 @@ extern PGM_P strerror_P(int);
 }
 #endif
 
-/** \name Backwards compatibility macros */
-
-/*@{*/
-
-/** \ingroup avr_pgmspace
-    \def PRG_RDB
-    \deprecated
-    Use pgm_read_byte() in new programs. */
-
-#define PRG_RDB(addr)       pgm_read_byte(addr)
-
-/*@}*/
-
 #endif /* __PGMSPACE_H_ */
