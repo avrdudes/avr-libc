@@ -228,12 +228,12 @@
 
 /* TWAR */
 #define TWA6    7
-#define TWA6    6
-#define TWA6    5
-#define TWA6    4
-#define TWA6    3
-#define TWA6    2
-#define TWA6    1
+#define TWA5    6
+#define TWA4    5
+#define TWA3    4
+#define TWA2    3
+#define TWA1    2
+#define TWA0    1
 #define TWGCE	0
 
 /* TWSR */

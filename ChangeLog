@@ -1,3 +1,10 @@
+2002-11-10  Theodore A. Roth  <troth@openavr.org>
+
+	* doc/api/Makefile.am (fix_png): Gracefully handle missing USER_MANUAL
+	directory.
+	Fix spelling mistake.
+	* include/avr/iom8.h: Fix copy/paste error in TWAR reg bit defs.
+
 2002-11-09  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
