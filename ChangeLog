@@ -1,5 +1,13 @@
 2002-11-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* Makefile.am: enable libprintf_flt.a.
+	* include/stdio.h: explain floating point printf().
+	* libc/stdio/Makefile.am: enable libprintf_flt.a.
+	* libc/stdio/stdio_private.h: define values for PRINTF_LEVEL.
+	* libc/stdio/vfprintf.c: implement optional floating point support.
+
+2002-11-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdlib/ctype.S: cleanup empty comments.
 	* libc/stdlib/ctype.S: add CVS Id.
 	* libc/stdlib/ctype.S: rename cty_is* into __ctype_is*.

@@ -28,7 +28,7 @@
 
 ## Process this file with automake to generate Makefile.in
 
-noinst_LIBRARIES = lib.a libprintf_min.a # libprintf_flt.a
+noinst_LIBRARIES = lib.a libprintf_min.a libprintf_flt.a
 
 lib_a_c_sources =	\
 	fclose.c	\
@@ -53,9 +53,9 @@ libprintf_min_a_SOURCES=
 
 libprintf_min_a_LIBADD = vfprintf_min.o
 
-#libprintf_flt_a_SOURCES=
+libprintf_flt_a_SOURCES=
 
-#libprintf_flt_a_LIBADD = vfprintf_flt.o
+libprintf_flt_a_LIBADD = vfprintf_flt.o
 
 # must be added to the package, but automake doesn't know them as source
 # files until now
@@ -72,14 +72,14 @@ $(lib_a_c_objs): %.o: %.c
 PRINTF_CFLAGS = $(AVRLIB_CFLAGS) -O1 -mno-tablejump
 
 vfprintf_min.o: vfprintf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=1 \
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_MIN \
 	-c $(srcdir)/vfprintf.c -o $@
 
 vfprintf_std.o: vfprintf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=2 \
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_STD \
 	-c $(srcdir)/vfprintf.c -o $@
 
 vfprintf_flt.o: vfprintf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=3 \
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_FLT \
 	-c $(srcdir)/vfprintf.c -o $@
 

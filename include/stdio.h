@@ -67,9 +67,14 @@
     one which causes quite some amount of code space to be taken,
     and it's not fast either due to the nature of interpreting the
     format string at run-time.  Whenever possible, resorting to the
-    (non-standard) predetermined conversion facilities that are
+    (sometimes non-standard) predetermined conversion facilities that are
     offered by avr-libc will usually cost much less in terms of speed
     and code size.
+
+    In order to allow programmers a code size vs. functionality tradeoff,
+    the function vfprintf() which is the heart of the printf family can be
+    selected in different flavours using linker options.  See the
+    documentation of vfprintf() for a detailed description.
 
     The standard streams \c stdin, \c stdout, and \c stderr are
     provided, but contrary to the C standard, since avr-libc has no
@@ -322,20 +327,62 @@ extern int	fclose(FILE *__stream);
            character.
    - \c %  A \c % is written.  No argument is converted.  The complete
            conversion specification is "%%".
+   - \c eE The double argument is rounded and converted in the format
+           \c "[-]d.ddde±dd" where there is one digit before the
+           decimal-point character and the number of digits after it
+           is equal to the precision; if the precision is missing, it
+           is taken as 6; if the precision is zero, no decimal-point
+           character appears.  An \e E conversion uses the letter \c 'E'
+           (rather than \c 'e') to introduce the exponent.  The exponent
+           always contains two digits; if the value is zero,
+           the exponent is 00.
+   - \c fF The double argument is rounded and converted to decimal notation
+           in the format \c "[-]ddd.ddd", where the number of digits after the
+           decimal-point character is equal to the precision specification.
+           If the precision is missing, it is taken as 6; if the precision
+           is explicitly zero, no decimal-point character appears.  If a
+           decimal point appears, at least one digit appears before it.
+
+   - \c gG The double argument is converted in style \c f or \c e (or
+           \c F or \c E for \c G conversions).  The precision
+           specifies the number of significant digits.  If the
+           precision is missing, 6 digits are given; if the precision
+           is zero, it is treated as 1.  Style \c e is used if the
+           exponent from its conversion is less than -4 or greater
+           than or equal to the precision.  Trailing zeros are removed
+           from the fractional part of the result; a decimal point
+           appears only if it is followed by at least one digit.
 
    In no case does a non-existent or small field width cause truncation of a
    numeric field; if the result of a conversion is wider than the field
    width, the field is expanded to contain the conversion result.
 
+   Since the full implementation of all the mentioned features becomes
+   fairly large, three different flavours of vfprintf() can be
+   selected using linker options.  The default vfprintf() implements
+   all the mentioned functionality except floating point conversions.
+   A minimized version of vfprintf() is available that only implements
+   the very basic integer and string conversion facilities, but none
+   of the additional options that can be specified using conversion
+   flags (these flags are parsed correctly from the format
+   specification, but then simply ignored).  This version can be
+   requested using the following \ref gcc_minusW "compiler options":
+
+   \code
+   -Wl,-u,vfprintf -lprintf_min
+   \endcode
+
+   If the full functionality including the floating point conversions
+   is required, the following options should be used:
+
+   \code
+   -Wl,-u,vfprintf -lprintf_flt -lm
+   \endcode
+
    \par Limitations:
-   - Currently, no floating point conversions are supported.  Refer to
-     \c dtostre() and \c dtostrf() for alternate functions that can be
-     used to convert floating point numbers.
-   - The specified width can be at most 127.
-   - The specified precision will be limited to 8 in order to limit
-     the internal buffer space required.  This also applies to the
-     the maximal fill range in a zero-fill conversion (since this is
-     actually implemented by using a precision value internally).
+   - The specified width and precision can be at most 127.
+   - For floating-point conversions, trailing digits will be lost if
+     a number close to DBL_MAX is converted with a precision > 0.
 
  */
 
@@ -354,6 +401,11 @@ extern int	fputc(int __c, FILE *__stream);
    \c avr-libc, it is just an alias for \c fputc.
 */
 #define putc(__c, __stream) fputc(__c, __stream)
+
+/**
+   The macro \c putchar sends character \c c to \c stdout.
+*/
+#define putchar(__c) fputc(__c, stdout)
 
 /**
    The function \c printf performs formatted output to stream

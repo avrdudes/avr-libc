@@ -55,3 +55,7 @@ struct __file {
 	int	(*get)(void);	/* function to read one char from device */
 };
 
+/* values for PRINTF_LEVEL */
+#define PRINTF_MIN 1
+#define PRINTF_STD 2
+#define PRINTF_FLT 3
