@@ -51,14 +51,8 @@ strtoul(nptr, endptr, base)
 	register const char *s = nptr;
 	register unsigned long acc;
 	register unsigned char c;
-#if 0
 	register unsigned long cutoff;
 	register int cutlim;
-#else
-	ldiv_t cut;
-#define cutoff (cut.quot)
-#define cutlim ((int) cut.rem)
-#endif
 	register int neg = 0, any;
 
 	/*
@@ -80,12 +74,8 @@ strtoul(nptr, endptr, base)
 	}
 	if (base == 0)
 		base = c == '0' ? 8 : 10;
-#if 0
 	cutoff = (unsigned long)ULONG_MAX / (unsigned long)base;
 	cutlim = (unsigned long)ULONG_MAX % (unsigned long)base;
-#else
-	cut = ldiv((unsigned long)ULONG_MAX, (unsigned long)base);
-#endif
 	for (acc = 0, any = 0;; c = *s++) {
 		if (!isascii(c))
 			break;
