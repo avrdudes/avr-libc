@@ -59,7 +59,8 @@
 /*@{*/
 /** \def eeprom_is_ready
     \ingroup avr_eeprom
-    return 1 if EEPROM is ready for a new read/write operation, 0 if not */
+    \returns 1 if EEPROM is ready for a new read/write operation, 0 if not. */
+
 #define eeprom_is_ready() bit_is_clear(EECR, EEWE)
 
 #ifdef __cplusplus
@@ -67,20 +68,24 @@ extern "C" {
 #endif
 
 /** \ingroup avr_eeprom
-    read one byte from EEPROM address \c addr */
+    Read one byte from EEPROM address \c addr. */
+
 extern unsigned char eeprom_rb(unsigned int addr);
 
 /** \ingroup avr_eeprom
-    read one 16-bit word (little endian) from EEPROM address \c addr */
+    Read one 16-bit word (little endian) from EEPROM address \c addr. */
+
 extern unsigned int eeprom_rw(unsigned int addr);
 
 /** \ingroup avr_eeprom
-    write a byte \c val to EEPROM address \c addr */
+    Write a byte \c val to EEPROM address \c addr. */
+
 extern void eeprom_wb(unsigned int addr, unsigned char val);
 
 /** \ingroup avr_eeprom
-    read a block of \c n bytes from EEPROM address \c addr to
-    \c buf */
+    Read a block of \c n bytes from EEPROM address \c addr to
+    \c buf. */
+
 extern void eeprom_read_block(void *buf, unsigned int addr, size_t n);
 
 #ifdef __cplusplus
@@ -96,11 +101,13 @@ extern void eeprom_read_block(void *buf, unsigned int addr, size_t n);
 /** \def _EEPUT
     \ingroup avr_eeprom
     write a byte to EEPROM */
+
 #define _EEPUT(addr, val) eeprom_wb(addr, val)
 
 /** \def _EEGET
     \ingroup avr_eeprom
     read a byte from EEPROM */
+
 #define _EEGET(var, addr) (var) = eeprom_rb(addr)
 
 /*@}*/
