@@ -1,3 +1,10 @@
+2004-04-05  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* libc/stdio/vfscanf.c: Rename set_bit and bit_is_set to avoid name
+	space clash.
+	Add parentheses when checking flags to quell a compiler warning.
+
 2004-03-22  Theodore A. Roth  <troth@openavr.org>
 [Thanks to Tim Lapawa <lapawa@insynergie.de>]
 
