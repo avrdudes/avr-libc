@@ -1,6 +1,16 @@
+2003-08-14  Theodore A. Roth  <troth@openavr.org>
+
+	* README: Discuss required versions of gcc and binutils.
+	* doc/api/Makefile.am (EXTRA_DIST): Add rel-method.dox.
+	(IMAGE_SRC): Add releases.fig.
+	* doc/api/main_page.dox: Grammar fix.
+	* doc/api/rel-method.dox: New file.
+	* doc/api/releases.fig: New file.
+
 2003-08-11  Eric B. Weddington  <eric@ecentral.com>
 
-	* include/avr/boot.h: Fix bug with not using generic SPM Control Register.
+	* include/avr/boot.h: Fix bug with not using generic SPM Control
+	Register.
 
 2003-08-11  Theodore A. Roth  <troth@openavr.org>
 

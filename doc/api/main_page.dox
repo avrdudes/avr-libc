@@ -49,7 +49,7 @@ http://www.avr1.org/mailman/listinfo/avr-gcc-list/. Before posting to the
 list, you might want to try reading the \ref FAQ chapter of this document.
 
 \note This document is a work in progress. As such, it may contain incorrect
-information. If you find a mistake, please send an email to the
+information. If you find a mistake, please send an email to
 avr-libc-dev@nongnu.org describing the mistake. Also, send us an
 email if you find that a specific topic is missing from the document.
 

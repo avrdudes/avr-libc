@@ -49,6 +49,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        using-avrprog.dox \
                        using-tools.dox \
                        faq.dox \
+                       rel-method.dox \
                        unjs.pl
 
 SUFFIXES             = .pdf
@@ -83,7 +84,7 @@ FIG2DEV= fig2dev
 .fig.png:
 	$(FIG2DEV) -L png $< $@
 
-IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig
+IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig releases.fig
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 

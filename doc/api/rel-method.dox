@@ -1,0 +1,138 @@
+/* Copyright (c) 2003, Theodore Roth
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \page release_method Release Numbering and Methodology
+
+\section version_info Release Version Numbering Scheme
+
+\subsection version_stable Stable Versions
+
+A stable release will always have a minor number that is an even number. This
+implies that you should be able to upgrade to a new version of the library
+with the same major and minor numbers without fear that any of the APIs have
+changed. The only changes that should be made to a stable branch are bug fixes
+and under some circumstances, additional functionality (e.g. adding support
+for a new device).
+
+If major version number has changed, this implies that the required versions
+of gcc and binutils have changed. Consult the README file in the toplevel
+directory of the AVR Libc source for which versions are required.
+
+\subsection version_dev Development Versions
+
+The major version number of a development series is always the same as the
+last stable release.
+
+The minor version number of a development series is always an odd number and
+is 1 more than the last stable release.
+
+The patch version number of a development series is always 0 until a new
+branch is cut at which point the patch number is changed to 90 to denote the
+branch is approaching a release and the date appended to the version to denote
+that it is still in development.
+
+All versions in development in cvs will also always have the date appended as
+a fourth version number. The format of the date will be YYYYMMDD.
+
+So, the development version number will look like this:
+
+\verbatim
+1.1.0.20030825
+\endverbatim
+
+While a pre-release version number on a branch (destined to become either 1.2
+or 2.0) will look like this:
+
+\verbatim
+1.1.90.20030828
+\endverbatim
+
+\section release_info Releasing AVR Libc
+
+The information in this section is only relevant to AVR Libc developers and
+can be ignored by end users.
+
+\note In what follows, I assume you know how to use cvs and how to checkout
+multiple source trees in a single directory without having them clobber each
+other. If you don't know how to do this, you probably shouldn't be making
+releases or cutting branches.
+
+\subsection release_branch Creating a cvs branch
+
+The following steps should be taken to cut a branch in cvs:
+
+-# Check out a fresh source tree from cvs HEAD.
+
+-# Set the branch-point tag (setting <major> and <minor> accordingly):<br>
+   'cvs tag avr-libc-<major>_<minor>-branchpoint'
+
+-# Create the branch:<br>
+   'cvs tab -b avr-lib-<major>_<minor>-branch'
+
+-# Update the package version in configure.in (change minor number to next odd
+   value) and commit configure.in to cvs. Note that you should still be
+   working from cvs HEAD.
+
+-# Check out a new tree for the branch:<br>
+   'cvs co -r avr-lib-<major>_<minor>-branch'
+
+-# Update the package version in configure.in (change the patch number to 90
+   to denote that this now a branch leading up to a release and commit
+   configure.in to cvs. Note that we are now working on the branch.
+
+-# Announce the branch and the branch tag to the avr-libc-dev list so other
+   developers can checkout the branch.
+
+\note CVS tags do not allow the use of periods ('.').
+
+\subsection release_rolling Making a release
+
+A stable release will only be done on a branch, not from the cvs HEAD.
+
+The following steps should be taken way making a release:
+
+-# Make sure the tree you are working from is on the correct brach:<br>
+   'cvs update -r avr-lib-<major>_<minor>-branch'
+-# Update the package version in configure.in and commit it to cvs.
+-# Update the gnu tool chain version requirements in the README and commit
+   to cvs.
+-# Bring the build system up to date by running reconf and configure.
+-# Perform a 'make distcheck' and make sure it succeeds. 
+-# Tag the release (_<patch> is not given if this is the first release on this
+   branch):<br>
+   'cvs tab -b avr-lib-<major>_<minor>_<patch>-release'
+-# Upload the tarball to savannah.
+-# Upload the latest documentation to savannah.
+-# Announce the release.
+
+The following hypothetical diagram should help clarify version and branch
+relationships.
+
+\image html releases.png "Release tree"
+\image latex releases.eps "Release tree" width=5in
+
+*/
