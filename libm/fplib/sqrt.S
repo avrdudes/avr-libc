@@ -54,9 +54,9 @@ GLOBAL(sqrt)
     */
 
     MOV     rB2,rA2		; needed later on
-    RCALL   _U(__fp_split1)	; does not return on NaN
     TST     rA3
-    BREQ    _sqrt_100		; sqrt(0) = 0
+    BREQ    _sqrt_ZERO		; sqrt(0) = 0
+    RCALL   _U(__fp_split1)	; does not return on NaN
  _sqrt_00:
     MOV     rTI0,rA3
     SUBI    rTI0,0x7F
@@ -136,6 +136,8 @@ GLOBAL(sqrt)
  _sqrt_100:
     CLR     rT0			; no rounding beyond rAE
     RJMP    _U(__fp_merge)
+ _sqrt_ZERO:
+    RET
 
           ENDFUNC
 
