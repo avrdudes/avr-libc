@@ -126,7 +126,7 @@ extern "C" {
 	This function modifies the \c timsk register.
 	The value you pass via \c ints is device specific. */
 
-extern inline void timer_enable_int (unsigned char ints)
+extern __inline__ void timer_enable_int (unsigned char ints)
 {
 #ifdef TIMSK
     TIMSK = ints;
