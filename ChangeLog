@@ -1,3 +1,11 @@
+2004-11-01  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* libm/fplib/asin.S: Put lookup table into .progmem.gcc_fplib section.
+	[Bug #9348]
+	* libm/fplib/atan.S: Ditto.
+
 2004-10-30  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
@@ -157,12 +165,14 @@
 	* include/stdlib.h: include realloc().
 	* libc/stdlib/Makefile.am: include realloc.c.
 	* libc/stdlib/malloc.c: move out shared parts to stdlib_private.h.
-	* libc/stdlib/stdlib_private.h: [new] shared file for malloc()/realloc().
+	* libc/stdlib/stdlib_private.h: [new] shared file for
+	malloc()/realloc().
 	* libc/stdlib/realloc.c: [new] implementation of realloc().
 
 2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
-	* include/avr/sleep.h: protect function-like macros, fix savannah bug #9013.
+	* include/avr/sleep.h: protect function-like macros, fix savannah
+	bug #9013.
 	* include/avr/ina90.h: Ditto.
 
 2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

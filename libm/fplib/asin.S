@@ -127,6 +127,8 @@ GLOBAL(asin)
  * P7 : -0.00126 24911    [BAA57A2C]
  */
 
+	PGM_SECTION
+
  table_asin: DCB 7
 	DCB 0x75, 0xA5, 0x7A, 0x2C  ; P7
 	DCB 0x77, 0x5A, 0x90, 0xC5  ; P6

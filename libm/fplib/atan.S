@@ -116,6 +116,9 @@ GLOBAL(atan)
  *		2nd byte	: msb of mantissa with sign as bit 7
  *		3rd & 4th byte	: mantissa
  */
+
+	PGM_SECTION
+
 .Ltable_atan:
 	DCB 8 ; no of table entries - 1 (preload value)
 	DCB 0x76, 0x3B, 0xD7, 0x4A	; a16
