@@ -15,6 +15,12 @@
 
 2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
 
+	* include/stdlib.h: Correct license with permission from Marek Michalkiewicz
+	and Joerg Wunsch.
+	* include/avr/io.h: Ditto.
+
+2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
+
 	* include/avr/io43u32x.h: Correct license with permission from Keith
 	Gudger.
 	* include/avr/io43u35x.h: Ditto.
