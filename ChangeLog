@@ -1,3 +1,10 @@
+2003-09-17  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/pgmspace.h (pgm_read_byte_near): Use uint16_t instead of
+	unsigned short to allow use with -mint8.
+	(pgm_read_word_near): Ditto.
+	[Submitted by Tomas Vanek <vanekt@fbl.cz>]
+
 2003-09-11  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
