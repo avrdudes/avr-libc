@@ -89,15 +89,25 @@ The following is a list of AVR devices currently supported by the library.
 
 \par Misc Devices:
 
-- at94K
-- at76c711
-
-[FIXME: troth/2002-09-02: How do the at94 and at76 devices fit into the grand
-scheme of all things AVR?]
+- at94K \ref supp_dev_footnote_two "[2]"
+- at76c711 \ref supp_dev_footnote_three "[3]"
 
 \anchor supp_dev_footnote_one
 
 \note <b>[1]</b> Assembly only. There is no support for these devices to be
 programmed in C since they do not have a ram based stack.
+
+\anchor supp_dev_footnote_two
+
+\note <b>[2]</b> The at94K devices are a combination of FPGA and AVR
+microcontroller. [TRoth-2002/11/12: Not sure of the level of support for
+these. More information would be welcomed.]
+
+\anchor supp_dev_footnote_three
+
+\note <b>[3]</b> The at76c711 is a USB to fast serial interface bridge chip
+using an AVR core. It seems to be supported by binutils and gcc, but is only
+partially supported by avr-libc. The missing piece seems to be
+<tt>crt76711.o</tt>.
 
 */

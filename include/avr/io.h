@@ -69,6 +69,8 @@
 
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
+#elif defined (__AVR_AT76C711__)
+#  include <avr/io76c711.h>
 #elif defined (__AVR_ATmega128__)
 #  include <avr/iom128.h>
 #elif defined (__AVR_ATmega64__)

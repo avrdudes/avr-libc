@@ -1,5 +1,19 @@
 2002-11-12  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/TODO: Add note about missing io*.h files.
+	* doc/api/main_page.dox: Update notes for at94K and at76c711.
+	* include/avr/io.h: Include existing io76c711.h file.
+
+2002-11-12  Theodore A. Roth  <troth@openavr.org>
+	[thanks to Juergen Schilling <juergen.schilling@honeywell.com>]
+
+	* include/avr/iom169.h: Fix interrupt vector defs.
+	Remove duplicate PINE defs.
+	Add PING defs.
+
+2002-11-12  Theodore A. Roth  <troth@openavr.org>
+
 	* avr-libc.spec.in: Add --enable-doc to configure command.
 
 2002-11-11  Theodore A. Roth  <troth@openavr.org>
