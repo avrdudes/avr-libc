@@ -1,3 +1,9 @@
+2002-12-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/math.h: add isinf()/isnan().
+	* libc/fplib/Makefile.am: ditto.
+	* libc/fplib/isinfnan.S: new file.
+
 2002-12-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iom128.h: fix defs for CS0[012].

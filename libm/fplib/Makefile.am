@@ -58,6 +58,7 @@ lib_a_asm_sources = \
 	fp_split.S	 \
 	fp_zero.S	 \
 	frexp.S	         \
+	isinfnan.S       \
 	ldexp.S	         \
 	log.S	         \
 	log10.S	         \
