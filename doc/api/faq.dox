@@ -521,7 +521,7 @@ int main (void)
 
 The first function will generate object code which is not even close to what
 is intended. The major problem arises when the function is called. When the
-compiler sees this call, it will actually pass the value in the the \c PORTB
+compiler sees this call, it will actually pass the value of the \c PORTB
 register (using an \c IN instruction), instead of passing the address of \c
 PORTB (e.g. memory mapped io addr of \c 0x38, io port \c 0x18 for the
 mega128). This is seen clearly when looking at the disassembly of the call:
@@ -536,7 +536,7 @@ mega128). This is seen clearly when looking at the disassembly of the call:
 So, the function, once called, only sees the value of the port register and
 knows nothing about which port it came from. At this point, whatever object
 code is generated for the function by the compiler is irrelevant. The
-interested reader can examine the full disassembly to see the the function's
+interested reader can examine the full disassembly to see that the function's
 body is completely fubar.
 
 The second function shows how to pass (by reference) the memory mapped address
