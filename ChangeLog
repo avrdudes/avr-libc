@@ -1,3 +1,7 @@
+2003-05-12  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
 2003-05-09  Eric B. Weddington  <eric@umginc.net>
 
 	* crt1/gcrt1.S: Change .data initialization under BIG_CODE to properly 
