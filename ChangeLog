@@ -1,3 +1,19 @@
+2002-11-11  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/eeprom.h (eeprom_read_byte): New function, replaces
+	eeprom_rb.
+	(eeprom_read_word): New function, replaces eeprom_rw.
+	(eeprom_write_byte): New function, replaces eeprom_wb.
+	(eeprom_read_block): Change interface to take pointer to eeprom addr.
+	(eeprom_rb): Deprecate and make macro to eeprom_read_byte.
+	(eeprom_rw): Deprecate and make macro to eeprom_read_word.
+	(eeprom_rw): Deprecate and make macro to eeprom_write_byte.
+	* libc/misc/ee_rb.S: L_eeprom_rb -> L_eeprom_read_byte.
+	* libc/misc/ee_rw.S: L_eeprom_rw -> L_eeprom_read_word.
+	* libc/misc/ee_wb.S: L_eeprom_wb -> L_eeprom_write_byte.
+	* libc/misc/eeprom.S: Convert to use new interfaces.
+
 2002-11-10  Theodore A. Roth  <troth@openavr.org>
 
 	* doc/api/Makefile.am (fix_png): Gracefully handle missing USER_MANUAL

@@ -35,6 +35,7 @@
 
 #define __need_size_t
 #include <stddef.h>
+#include <inttypes.h>
 
 #include <avr/io.h>
 
@@ -57,6 +58,7 @@
 /** \name avr-libc declarations */
 
 /*@{*/
+
 /** \def eeprom_is_ready
     \ingroup avr_eeprom
     \returns 1 if EEPROM is ready for a new read/write operation, 0 if not. */
@@ -70,27 +72,54 @@ extern "C" {
 /** \ingroup avr_eeprom
     Read one byte from EEPROM address \c addr. */
 
-extern unsigned char eeprom_rb(unsigned int addr);
+extern uint8_t eeprom_read_byte (uint8_t *addr);
 
 /** \ingroup avr_eeprom
     Read one 16-bit word (little endian) from EEPROM address \c addr. */
 
-extern unsigned int eeprom_rw(unsigned int addr);
+extern uint16_t eeprom_read_word (uint16_t *addr);
 
 /** \ingroup avr_eeprom
     Write a byte \c val to EEPROM address \c addr. */
 
-extern void eeprom_wb(unsigned int addr, unsigned char val);
+extern void eeprom_write_byte (uint8_t *addr, uint8_t val);
 
 /** \ingroup avr_eeprom
     Read a block of \c n bytes from EEPROM address \c addr to
     \c buf. */
 
-extern void eeprom_read_block(void *buf, unsigned int addr, size_t n);
+extern void eeprom_read_block (void *buf, void *addr, size_t n);
 
 #ifdef __cplusplus
 }
 #endif
+
+/*@}*/
+
+/** \name Backwards compatibility defines */
+
+/*@{*/
+
+/** \def eeprom_rb
+    \ingroup avr_eeprom
+    \deprecated
+    Use eeprom_read_byte() in new programs. */
+
+#define eeprom_rb(addr) eeprom_read_byte ((uint8_t *)(addr))
+
+/** \def eeprom_rw
+    \ingroup avr_eeprom
+    \deprecated
+    Use eeprom_read_word() in new programs. */
+
+#define eeprom_rw(addr) eeprom_read_word ((uint16_t *)(addr))
+
+/** \def eeprom_wb
+    \ingroup avr_eeprom
+    \deprecated
+    Use eeprom_write_byte() in new programs. */
+
+#define eeprom_wb(addr,val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
 
 /*@}*/
 
@@ -100,13 +129,13 @@ extern void eeprom_read_block(void *buf, unsigned int addr, size_t n);
 
 /** \def _EEPUT
     \ingroup avr_eeprom
-    write a byte to EEPROM */
+    Write a byte to EEPROM. */
 
 #define _EEPUT(addr, val) eeprom_wb(addr, val)
 
 /** \def _EEGET
     \ingroup avr_eeprom
-    read a byte from EEPROM */
+    Read a byte from EEPROM. */
 
 #define _EEGET(var, addr) (var) = eeprom_rb(addr)
 

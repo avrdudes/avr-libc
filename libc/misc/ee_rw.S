@@ -26,5 +26,5 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#define L_eeprom_rw 1
+#define L_eeprom_read_word 1
 #include "eeprom.S"

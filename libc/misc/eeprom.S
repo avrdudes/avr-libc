@@ -47,17 +47,17 @@
 #define res_hi rP0
 #define res_lo rP1
 
-#ifdef L_eeprom_rb
+#ifdef L_eeprom_read_byte
 /* read one byte from EEPROM */
-/* unsigned char eeprom_rb(unsigned int addr); */
+/* uint8_t eeprom_read_byte(uint8_t *addr); */
 /* addr = r25:r24, result = r25(=0):r24 */
 
 	.section .text
-	.global _U(eeprom_rb)
+	.global _U(eeprom_read_byte)
 
-_U(eeprom_rb):
+_U(eeprom_read_byte):
 	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	_U(eeprom_rb)	/* make sure EEPROM is ready */
+	rjmp	_U(eeprom_read_byte)	/* make sure EEPROM is ready */
 #ifdef EEARH
 	out	_SFR_IO_ADDR(EEARH), addr_hi
 #endif
@@ -66,18 +66,18 @@ _U(eeprom_rb):
 	clr	res_hi		/* gcc wants result extended to "int"? */
 	in	res_lo, _SFR_IO_ADDR(EEDR)
 	ret
-#endif /* L_eeprom_rb */
+#endif /* L_eeprom_read_byte */
 
-#ifdef L_eeprom_rw
+#ifdef L_eeprom_read_word
 /* read a little endian 16-bit word from EEPROM */
-/* unsigned int eeprom_rw(unsigned int addr); */
+/* uint16_t eeprom_read_word(uint16_t *addr); */
 /* addr = r25:r24, result = r25:r24 */
 
-	.global _U(eeprom_rw)
+	.global _U(eeprom_read_word)
 
-_U(eeprom_rw):
+_U(eeprom_read_word):
 	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	_U(eeprom_rw)	/* make sure EEPROM is ready */
+	rjmp	_U(eeprom_read_word)	/* make sure EEPROM is ready */
 #ifdef EEARH
 	out	_SFR_IO_ADDR(EEARH), addr_hi
 #endif
@@ -93,19 +93,19 @@ _U(eeprom_rw):
 	mov	res_lo, __tmp_reg__
 	in	res_hi, _SFR_IO_ADDR(EEDR)
 	ret
-#endif /* L_eeprom_rw */
+#endif /* L_eeprom_read_word */
 
-#ifdef L_eeprom_wb
+#ifdef L_eeprom_write_byte
 /* write a byte to EEPROM */
-/* void eeprom_wb(unsigned int addr, unsigned char val); */
+/* void eeprom_write_byte(uint8_t *addr, uint8_t val); */
 /* addr = r25:r24, val = r22 */
 #define val rP3
 
-	.global _U(eeprom_wb)
+	.global _U(eeprom_write_byte)
 
-_U(eeprom_wb):
+_U(eeprom_write_byte):
 	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	_U(eeprom_wb)	/* make sure EEPROM is ready */
+	rjmp	_U(eeprom_write_byte)	/* make sure EEPROM is ready */
 #ifdef EEARH
 	out	_SFR_IO_ADDR(EEARH), addr_hi
 #endif
@@ -118,7 +118,7 @@ _U(eeprom_wb):
 	out	_SFR_IO_ADDR(SREG), __tmp_reg__
 	ret
 #undef val
-#endif /* L_eeprom_wb */
+#endif /* L_eeprom_write_byte */
 
 #undef addr_hi
 #undef addr_lo
@@ -134,7 +134,7 @@ _U(eeprom_wb):
 
 #ifdef L_eeprom_read_block
 /* read a block of bytes from EEPROM */
-/* void eeprom_read_block(void *buf, unsigned int addr, size_t n); */
+/* void eeprom_read_block(void *buf, void *addr, size_t n); */
 /* buf = r25:r24, addr = r23:r22, n = r21:r20 */
 
 	.global _U(eeprom_read_block)
