@@ -980,7 +980,7 @@ debug_P(const char *addr)
 {
   char c;
 
-  while ((c = __lpm_inline((unsigned short)addr++)))
+  while ((c = pgm_read_byte(addr++)))
     uart_putchar(c);
 }
 

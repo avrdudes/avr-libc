@@ -1,5 +1,12 @@
 *** Changes in avr-libc-1.0.1:
 
+* Fix bug #5799.
+
+If you are using the mega162, note that the PE0 and PE1 bit names have changed
+to UP0 and UP1 for the UCSR0A and UCSR1A registers respectively. This is a
+namespace clash with other devices which define PE0 and PE1 as bits 0 and 1 of
+port E.
+
 * Extend stdio API.
 
 New functions:
