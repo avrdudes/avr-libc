@@ -1,5 +1,9 @@
 2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/ctype.h: remove a wrong comment.
+
+2002-11-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/inttypes.h: make -mint8 aware.
 
 2002-11-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

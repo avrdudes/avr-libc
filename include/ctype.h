@@ -46,9 +46,7 @@ extern "C" {
 
     \code #include <ctype.h>\endcode 
 
-	\note If any one of these functions is used, they all get pulled in to
-	your object file (they're in the same source file). The comments in the
-	source indicate that 182 bytes will get consumed. */
+*/
 
 /** \name Character classification routines
 
