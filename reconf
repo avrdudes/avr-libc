@@ -9,10 +9,34 @@
 # never execute this script.
 #
 # ATTENTION:
-#  You need automake 1.4-p5, otherwise make dist will not work.
+#  You need automake-1.4-p5 and autoconf-2.13, otherwise strange things could
+#  happen during the build process.
 #
 
-# to what is executed
+AUTOMAKE_VER=`automake --version | head -n 1 | cut -d ' ' -f 4 | cut -c -3`
+if [ "$AUTOMAKE_VER" != "1.4" ]
+then
+	echo "You need to use automake version 1.4 (preferrable 1.4-p5)."
+	echo "You are using `automake --version | head -n 1`."
+	echo
+	status="fail"
+fi
+
+AUTOCONF_VER=`autoconf --version | head -n 1 | cut -d ' ' -f 3 | cut -c -4`
+if [ "$AUTOCONF_VER" != "2.13" ]
+then
+	echo "You need to use autoconf version 2.13."
+	echo "You are using `autoconf --version | head -n 1`."
+	echo
+	status="fail"
+fi
+
+if [ -n "$status" ]
+then
+	exit 1
+fi
+
+# to see what is executed
 set -x
 
 aclocal
