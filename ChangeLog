@@ -1,3 +1,8 @@
+2004-07-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/strtod.S: fix parsing of a partial
+	exponent, fix *endp return value (savanna bug #2924)
+
 2004-07-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/pow.S: localize labels, fix pow(N, 0).

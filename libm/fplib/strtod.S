@@ -111,7 +111,7 @@ GLOBAL(strtod)
 	RCALL	.L_scanDigits
 
 	; if T set now there must be a fraction failure : rA still 0!
-	BRTS	1f
+	BRTS	99f
 
 	RCALL	_U(__floatunssisf)
 	BST	rFlags,bitNegative
@@ -132,10 +132,6 @@ GLOBAL(strtod)
 	RCALL	.L_scanSign
 	RCALL	.L_scanExponent
 
-	BRTC	2f		; found something invalid exponent
-1:
-	RJMP	99f
-2:
 	TST	rA3
 	BREQ	3f
 	SBRC	rFlags,bitNegative  ; set sign
@@ -226,8 +222,8 @@ GLOBAL(strtod)
 	CPI	ZL,0
 	CPC	ZL,ZH
 	BREQ	1f
-	ST	Z+,rEndptrH
-	ST	Z,rEndptrL
+	ST	Z+,rEndptrL
+	ST	Z,rEndptrH
 1:
 	LDI	ZL,18-6 ; number of all 'pushed' registers - not pushed ones
 	IN	YL,_SFR_IO_ADDR(SPL)
@@ -248,7 +244,7 @@ GLOBAL(strtod)
 .L_underflow:
 	RCALL	_U(__fp_zero)
 #ifdef __ERRNO__
-1f:
+1:
 	extern errno
 	LDI	rB3,ERANGE
 	STS	errno,rB3
@@ -270,13 +266,12 @@ GLOBAL(strtod)
 
 
 .L_scanExponent:
-	SET
-	RCALL	_U(__fp_zero)	; initialize rA3::rA0 with 0
-1:	; scan until (possibly) decimal point found 
+	CLR	rA2	; initialize rA3::rA2 with 0
+	CLR	rA3
+1:
 	CPI	rCh,'0'
 	BRLT	10f
 	BRNE	2f		; look for leading zeros
-	CLT
 	SBRS	rFlags,bitDigit
 	RJMP	4f		; no valid digits yet -> skip zero
 2:
@@ -286,14 +281,13 @@ GLOBAL(strtod)
 	TST	rA3
 	BRNE	3f		; overflow allready
 				; mul rA3::rA2 by 10 and add rCh
-	CLT			; digit validates fraction
 	XCALL	__mulhi_const_10 ; r25:r24 *= 10
 	ANDI	rCh,0x0F
 	ADD	rA2,rCh
 	adc	rA3,__zero_reg__
 3:
 	MOV	rEndptrH,YH
-	MOV	rEndptrL,YL	; valid float up to now
+	MOV	rEndptrL,YL	; valid exponent up to now
 4:
 	LD	rCh,Y+
 	RJMP	1b
