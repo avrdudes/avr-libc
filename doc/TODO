@@ -27,7 +27,9 @@ TODO for avr-libc:
      update for newer tools. (Joerg, update your example???)
    * gcrt1.S
    * introduction
+ - testsuite [4]
 
 [1] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000084.html
 [2] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000033.html
 [3] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000147.html
+[4] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-September/000246.html
