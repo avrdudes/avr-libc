@@ -360,14 +360,14 @@
 #define PINE0         0
 
 /* PORTD */
-#define PORTD7        7
-#define PORTD6        6
-#define PORTD5        5
-#define PORTD4        4
-#define PORTD3        3
-#define PORTD2        2
-#define PORTD1        1
-#define PORTD0        0
+#define PD7        7
+#define PD6        6
+#define PD5        5
+#define PD4        4
+#define PD3        3
+#define PD2        2
+#define PD1        1
+#define PD0        0
 
 /* PORTE */
 /*
@@ -380,14 +380,14 @@
    PE1 = OC0  / RX0  (alternate)
    PE0 = ET0  / TX0  (alternate)
  */
-#define PORTE7        7
-#define PORTE6        6
-#define PORTE5        5
-#define PORTE4        4
-#define PORTE3        3
-#define PORTE2        2
-#define PORTE1        1
-#define PORTE0        0
+#define PE7        7
+#define PE6        6
+#define PE5        5
+#define PE4        4
+#define PE3        3
+#define PE2        2
+#define PE1        1
+#define PE0        0
 
 /* SFIOR */
 #define PSR2          1

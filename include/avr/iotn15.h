@@ -204,11 +204,11 @@
  */
 
 /* PORTB */
-#define PORTB4	4
-#define PORTB3	3
-#define PORTB2	2
-#define PORTB1	1
-#define PORTB0	0
+#define PB4	4
+#define PB3	3
+#define PB2	2
+#define PB1	1
+#define PB0	0
 
 /* DDRB */
 #define DDB4	4
