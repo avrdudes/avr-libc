@@ -1,3 +1,7 @@
+2003-04-07  Theodore A. Roth  <troth@openavr.org>
+
+	* include/avr/sleep.h: Add adc mode to sleep type 2 [Bug #3088].
+
 2003-04-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: add entry about RAM/variable overlap detection.
@@ -5,7 +9,7 @@
 2003-04-03  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
-	* include/avr/iotn26.h: Add missing port and bit definitions.
+	* include/avr/iotn26.h: Add missing port and bit definitions [Bug #3081]
 	[Contributed by Artur Lipowski <LAL@pro.onet.pl>]
 
 2003-03-30  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

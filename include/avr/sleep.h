@@ -81,6 +81,7 @@
 
 #elif _SLEEP_TYPE == 2
 
+#  define SLEEP_MODE_ADC        _BV(SM0)
 #  define SLEEP_MODE_PWR_DOWN   _BV(SM1)
 #  define SLEEP_MODE_PWR_SAVE   (_BV(SM0) | _BV(SM1))
 
