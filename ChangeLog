@@ -1,7 +1,7 @@
 2004-10-18  Eric B. Weddington <ericw@evcohs.com>
 
-    * include/avr/iom169.h: Add compatibility defines to previous releases for
-    OCR1A[L/H] and OCR1B[L/H]. [Bug #9708]
+	* include/avr/iom169.h: Add compatibility defines to previous releases for
+	OCR1A[L/H] and OCR1B[L/H]. [Bug #9708]
 
 2004-09-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
