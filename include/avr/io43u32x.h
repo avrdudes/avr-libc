@@ -185,7 +185,7 @@
 */
 
 /* Timer/Counter Interrupt MaSK register */
-#define    TICIE1       5
+#define    TICIE1       3
 #define    OCIE1A       6
 #define    OCIE1B       5
 #define    TOIE1        7

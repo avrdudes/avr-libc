@@ -1,3 +1,9 @@
+*** Changes in avr-libc-1.0.4:
+
+* Bugs fixed:
+
+  [no-id] Fix TICIE1 value in usb header files.
+
 *** Changes in avr-libc-1.0.3:
 
 * Extend eeprom API.
