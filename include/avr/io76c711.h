@@ -42,8 +42,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* 0x00-0x0C reserved */
@@ -119,10 +117,9 @@
 
 /* 0x3A-0x3C reserved */
 
-#define SPL	_SFR_IO8(0x3D)
-#define SPH	_SFR_IO8(0x3E)
-#define SREG	_SFR_IO8(0x3F)
+/* 0x3D..0x3E SP */
 
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -467,14 +464,6 @@
 #define USB_DMA_EAD	0x108
 #define USB_DMA_PLT	0x109
 #define USB_DMA_EN	0x10A
-
-/* Pointer registers (same for all AVR devices so far) */
-#define XL r26
-#define XH r27
-#define YL r28
-#define YH r29
-#define ZL r30
-#define ZH r31
 
 /* Last memory addresses */
 #define RAMEND		0x07FF

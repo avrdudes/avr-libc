@@ -292,13 +292,14 @@ AVR_CRT_AT90=''
 AVR_CRT_TINY=''
 AVR_CRT_MEGA=''
 AVR_CRT_OTHER=''
+avrlib_defines='-D__COMPILING_AVR_LIBC__'
 avrlib_cflags=''
 avrlib_asflags=''
 DOCSDIR=''
 if test -z "${with_multisubdir}"; then
   dnl default build directory -> avr1 and avr2
   avrlib_cflags="-mmcu=avr2 ${avrlib_opt_space}"
-  avrlib_asflags='-mmcu=at90s8515'
+  avrlib_asflags='-mmcu=avr2'
   AVR_CRT_AT90='crts1200.o crts2313.o crts2323.o crts2333.o crts2343.o \\\
                 crts4414.o crts4433.o crts4434.o crts8515.o crts8535.o \\\
                 crtc8534.o'
@@ -312,15 +313,15 @@ if test -z "${with_multisubdir}"; then
 else
   case $with_multisubdir in
   avr3) avrlib_cflags=${avrlib_opt_speed}
-        avrlib_asflags='-mmcu=atmega103'
+        avrlib_asflags='-mmcu=avr3'
         AVR_CRT_MEGA='crtm103.o'
   ;;
   avr4) avrlib_cflags=${avrlib_opt_space}
-        avrlib_asflags='-mmcu=atmega8'
+        avrlib_asflags='-mmcu=avr4'
         AVR_CRT_MEGA='crtm8.o crtm8515.o crtm8535.o # crtm83.o crtm85.o'
   ;;
   avr5) avrlib_cflags=${avrlib_opt_speed}
-        avrlib_asflags='-mmcu=atmega161'
+        avrlib_asflags='-mmcu=avr5'
         AVR_CRT_MEGA='crtm161.o crtm162.o crtm163.o crtm169.o crtm323.o crtm128.o crtm16.o crtm32.o crtm64.o'
         AVR_CRT_OTHER='crtat94k.o'
   ;;
@@ -329,9 +330,9 @@ else
   esac
 fi
 
-AVRLIB_CFLAGS="-g -Wall -W -Wstrict-prototypes ${avrlib_cflags}"
+AVRLIB_CFLAGS="-g -Wall -W -Wstrict-prototypes ${avrlib_defines} ${avrlib_cflags}"
 AC_SUBST(AVRLIB_CFLAGS)
-AVRLIB_ASFLAGS="-x assembler-with-cpp -Wa,-gstabs ${avrlib_asflags}"
+AVRLIB_ASFLAGS="-x assembler-with-cpp -Wa,-gstabs ${avrlib_defines} ${avrlib_asflags}"
 AC_SUBST(AVRLIB_ASFLAGS)
 AVR_CRT_ASFLAGS='-x assembler-with-cpp -Wa,-gstabs'
 AC_SUBST(AVR_CRT_ASFLAGS)

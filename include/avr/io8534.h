@@ -42,8 +42,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* 0x00..0x03 reserved */
@@ -72,16 +70,7 @@
 /* Data Register, Port A */
 #define PORTA	_SFR_IO8(0x1B)
 
-/* EEPROM Control Register */
-#define EECR	_SFR_IO8(0x1C)
-
-/* EEPROM Data Register */
-#define EEDR	_SFR_IO8(0x1D)
-
-/* EEPROM Address Register */
-#define EEAR	_SFR_IO16(0x1E)
-#define EEARL	_SFR_IO8(0x1E)
-#define EEARH	_SFR_IO8(0x1F)
+/* 0x1C..0x1F EEPROM */
 
 /* 0x20..0x2B reserved */
 
@@ -122,13 +111,9 @@
 
 /* 0x3C reserved */
 
-/* Stack Pointer */
-#define SP	_SFR_IO16(0x3D)
-#define SPL	_SFR_IO8(0x3D)
-#define SPH	_SFR_IO8(0x3E)
+/* 0x3D..0x3E SP */
 
-/* Status REGister */
-#define SREG	_SFR_IO8(0x3F)
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -179,12 +164,6 @@
 #define CS11	1
 #define CS10	0
 
-/* EECR */
-#define EERIE	3
-#define EEMWE	2
-#define EEWE	1
-#define EERE	0
-
 /* PORTA */
 #define PA7	7
 #define PA6	6
@@ -204,14 +183,6 @@
 #define DDA2	2
 #define DDA1	1
 #define DDA0	0
-
-/* Pointer registers (same for all AVR devices so far) */
-#define XL r26
-#define XH r27
-#define YL r28
-#define YH r29
-#define ZL r30
-#define ZH r31
 
 /* Last memory addresses */
 #define RAMEND		0x15F

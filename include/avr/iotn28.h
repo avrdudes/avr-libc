@@ -46,8 +46,6 @@
 #  warning "MCU not supported by the C compiler"
 #endif
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 #define OSCCAL	_SFR_IO8(0x00)
@@ -84,8 +82,7 @@
 
 /* 0x1C..0x3E reserved */
 
-#define SREG	_SFR_IO8(0x3F)
-
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -230,9 +227,6 @@
 #define ACIE	3
 #define ACIS1	1
 #define ACIS0	0
-
-#define ZL r30
-#define ZH r31
 
 /* Last memory addresses */
 #define RAMEND		0x1F

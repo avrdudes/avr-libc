@@ -46,8 +46,6 @@
 #  warning "MCU not supported by the C compiler"
 #endif
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* 0x00..0x07 reserved */
@@ -69,9 +67,7 @@
 
 /* 0x19..0x1B reserved */
 
-#define EECR	_SFR_IO8(0x1C)
-#define EEDR	_SFR_IO8(0x1D)
-#define EEARL	_SFR_IO8(0x1E)
+/* 0x1C..0x1E EEPROM */
 
 /* 0x1F..0x20 reserved */
 
@@ -101,7 +97,7 @@
 
 /* 0x3C..0x3E reserved */
 
-#define SREG	_SFR_IO8(0x3F)
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -140,8 +136,7 @@
 #define WDP0	0
 
 /* EECR */
-#define EEWE	1
-#define EERE	0
+#undef EEMWE
 
 /*
    PB7 = SCK
@@ -216,7 +211,7 @@
 #define ACIS1	1
 #define ACIS0	0
 
-#define ZL r30
+#undef ZH
 
 /* Last memory addresses */
 #define RAMEND		0x1F

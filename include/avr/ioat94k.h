@@ -42,8 +42,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* UART1 Baud Rate Register */
@@ -199,13 +197,9 @@
 
 /* 0x3C reserved */
 
-/* Stack Pointer */
-#define SPL	_SFR_IO8(0x3D)
-#define SPH	_SFR_IO8(0x3E)
+/* 0x3D..0x3E SP */
 
-/* Status REGister */
-#define SREG	_SFR_IO8(0x3F)
-
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -249,14 +243,6 @@
 
 /* Bit numbers - XXX not here yet */
 
-/* Pointer registers (same for all AVR devices so far) */
-#define XL r26
-#define XH r27
-#define YL r28
-#define YH r29
-#define ZL r30
-#define ZH r31
-
 /*
    Last memory addresses - depending on configuration, it is possible
    to have 20K-32K of program memory and 4K-16K of data memory
@@ -265,6 +251,10 @@
 
 #ifndef RAMEND
 #define RAMEND 0x0FFF
+#endif
+
+#ifndef XRAMEND
+#define XRAMEND RAMEND
 #endif
 
 #define E2END 0

@@ -42,8 +42,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* Memory mapped I/O registers */
 
 /* Timer/Counter3 Control Register A */
@@ -90,9 +88,8 @@
 
 /* Standard I/O registers */
 
-#define SREG	_SFR_IO8(0x3F)	/* Status Register */
-#define SPH	_SFR_IO8(0x3E)	/* Stack Pointer High Byte */
-#define	SPL	_SFR_IO8(0x3D)	/* Stack Pointer High Byte */
+/* 0x3F SREG */
+/* 0x3D..0x3E SP */
 #define	UBRR1H  _SFR_IO8(0x3C)  /* USART 1 Baud Rate Register High Byte, Shared with UCSR1C */
 #define UCSR1C  _SFR_IO8(0x3C)  /* USART 1 Control and Status Register, Shared with UBRR1H */
 #define GICR    _SFR_IO8(0x3B)	/* General Interrupt Control Register */
@@ -128,11 +125,7 @@
 #define WDTCR	_SFR_IO8(0x21)	/* Watchdow Timer Control Register */
 #define UBRR0H	_SFR_IO8(0x20)	/* USART 0 Baud-Rate Register High Byte, Shared with UCSR0C */
 #define UCSR0C	_SFR_IO8(0x20)	/* USART 0 Control and Status Register C, Shared with UBRR0H */
-#define EEARH	_SFR_IO8(0x1F)	/* EEPROM Address Register High Byte */
-#define EEARL	_SFR_IO8(0x1E)	/* EEPROM Address Register Low Byte */
-#define EEAR	_SFR_IO16(0x1E)	/* EEPROM Address Register */
-#define EEDR	_SFR_IO8(0x1D)	/* EEPROM Data Register */
-#define EECR	_SFR_IO8(0x1C)	/* EEPROM Control REgister */
+/* 0x1C..0x1F EEPROM */
 #define PORTA	_SFR_IO8(0x1B)	/* Port A */
 #define DDRA	_SFR_IO8(0x1A)	/* Port A Data Direction Register */
 #define PINA	_SFR_IO8(0x19)	/* Port A Pin Register */
@@ -276,10 +269,6 @@
 #define CLKPS1	1
 #define CLKPS0	0
 
-
-
-/* SREG bit definitions */
-/* Not written, set using other mechanisms. */
 
 
 /* SPH bit definitions */
@@ -813,16 +802,6 @@
 #define UCSZ12	2
 #define RXB81	1
 #define TXB81	0
-
-
-/* Pointer registers (same for all AVR devices so far) */
-
-#define XL r26
-#define XH r27
-#define YL r28
-#define YH r29
-#define ZL r30
-#define ZH r31
 
 
 /* Last memory addresses */

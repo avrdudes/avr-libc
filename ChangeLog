@@ -1,3 +1,44 @@
+2003-01-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.in: add __COMPILING_AVR_LIBC__, drop use of fake
+		-mmcu devices when assembling, use avr[2..5] instead.
+	* include/avr/eeprom.h: mention this to be n/a for ATmega169.
+	* include/avr/io.h: move the common register declarations here;
+		explain the details about the inclusion of <avr/ioXXX.h>.
+	* include/avr/io1200.h: remove common register declarations.
+	* include/avr/io2313.h: ditto.
+	* include/avr/io2323.h: ditto.
+	* include/avr/io2333.h: ditto.
+	* include/avr/io2343.h: ditto.
+	* include/avr/io4414.h: ditto.
+	* include/avr/io4433.h: ditto.
+	* include/avr/io4434.h: ditto.
+	* include/avr/io76c711.h: ditto.
+	* include/avr/io8515.h: ditto.
+	* include/avr/io8534.h: ditto.
+	* include/avr/io8535.h: ditto.
+	* include/avr/ioat94k.h: ditto.
+	* include/avr/iom103.h: ditto.
+	* include/avr/iom128.h: ditto.
+	* include/avr/iom16.h: ditto.
+	* include/avr/iom161.h: ditto.
+	* include/avr/iom162.h: ditto.
+	* include/avr/iom163.h: ditto.
+	* include/avr/iom169.h: ditto.
+	* include/avr/iom32.h: ditto.
+	* include/avr/iom323.h: ditto.
+	* include/avr/iom64.h: ditto.
+	* include/avr/iom8.h: ditto.
+	* include/avr/iom8515.h: ditto.
+	* include/avr/iom8535.h: ditto.
+	* include/avr/iotn11.h: ditto.
+	* include/avr/iotn12.h: ditto.
+	* include/avr/iotn15.h: ditto.
+	* include/avr/iotn22.h: ditto.
+	* include/avr/iotn26.h: ditto.
+	* include/avr/iotn28.h: ditto.
+	* libc/stdlib/malloc.c: drop private declaration of the SP register.
+
 2003-01-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* Makefile.am: include the scanf family.

@@ -42,8 +42,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* TWI stands for "Two Wire Interface" or "TWI Was I2C(tm)" */
@@ -94,12 +92,7 @@
 #define DDRA	_SFR_IO8(0x1A)
 #define PORTA	_SFR_IO8(0x1B)
 
-/* EEPROM */
-#define EECR	_SFR_IO8(0x1C)
-#define EEDR	_SFR_IO8(0x1D)
-#define EEAR	_SFR_IO16(0x1E)
-#define EEARL	_SFR_IO8(0x1E)
-#define EEARH	_SFR_IO8(0x1F)
+/* 0x1C..0x1F EEPROM */
 
 #define UBRRH	_SFR_IO8(0x20)
 #define UCSRC	UBRRH
@@ -154,11 +147,9 @@
 
 #define OCR0	_SFR_IO8(0x3C)
 
-#define SP	_SFR_IO16(0x3D)
-#define SPL	_SFR_IO8(0x3D)
-#define SPH	_SFR_IO8(0x3E)
-#define SREG	_SFR_IO8(0x3F)
+/* 0x3D..0x3E SP */
 
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -335,13 +326,6 @@
 #define WDP2	2
 #define WDP1	1
 #define WDP0	0
-
-/* EECR */
-/* bits 7-4 reserved */
-#define EERIE	3
-#define EEMWE	2
-#define EEWE	1
-#define EERE	0
 
 /* PA7-PA0 = ADC7-ADC0 */
 /* PORTA */
@@ -573,14 +557,6 @@
 #define MUX2	2
 #define MUX1	1
 #define MUX0	0
-
-/* Pointer registers (same for all AVR devices so far) */
-#define XL r26
-#define XH r27
-#define YL r28
-#define YH r29
-#define ZL r30
-#define ZH r31
 
 /* Last memory addresses */
 #define RAMEND		0x85F

@@ -42,8 +42,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* Analog Comparator Control and Status Register */
@@ -79,15 +77,7 @@
 /* Data Register, Port B */
 #define PORTB	_SFR_IO8(0x18)
 
-/* EEPROM Control Register */
-#define EECR	_SFR_IO8(0x1C)
-
-/* EEPROM Data Register */
-#define EEDR	_SFR_IO8(0x1D)
-
-/* EEPROM Address Register */
-#define EEAR	_SFR_IO8(0x1E)
-#define EEARL	_SFR_IO8(0x1E)
+/* 0x1C..0x1E EEPROM */
 
 /* Watchdog Timer Control Register */
 #define WDTCR	_SFR_IO8(0x21)
@@ -134,12 +124,9 @@
 /* General Interrupt MaSK register */
 #define GIMSK	_SFR_IO8(0x3B)
 
-/* Stack Pointer */
-#define SP	_SFR_IO8(0x3D)
-#define SPL	_SFR_IO8(0x3D)
+/* 0x3C..0x3D SP */
 
-/* Status REGister */
-#define SREG	_SFR_IO8(0x3F)
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -301,14 +288,6 @@
 #define    ACIC    2
 #define    ACIS1   1
 #define    ACIS0   0
-       
-/* Pointer definition   */ 
-#define    XL     r26
-#define    XH     r27
-#define    YL     r28
-#define    YH     r29
-#define    ZL     r30
-#define    ZH     r31
        
 /* Constants */ 
 #define    RAMEND    0xDF

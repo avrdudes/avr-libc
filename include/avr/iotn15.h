@@ -72,15 +72,7 @@
 
 /* 0x19..0x1B reserved */
 
-/* EEPROM Control Register */
-#define EECR	_SFR_IO8(0x1C)
-
-/* EEPROM Data Register */
-#define EEDR	_SFR_IO8(0x1D)
-
-/* EEPROM Address Register */
-#define EEAR	_SFR_IO8(0x1E)
-#define EEARL	_SFR_IO8(0x1E)
+/* 0x1C..0x1E EEPROM */
 
 /* 0x1F..0x20 reserved */
 
@@ -126,8 +118,7 @@
 
 /* 0x3C..0x3E reserved */
 
-/* Status REGister */
-#define SREG	_SFR_IO8(0x3F)
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -203,12 +194,6 @@
 #define WDP1	1
 #define WDP0	0
 
-/* EECR */
-#define EERIE	3
-#define EEMWE	2
-#define EEWE	1
-#define EERE	0
-
 /*
    PB5 = RESET# / ADC0
    PB4 = ADC3
@@ -266,9 +251,6 @@
 #define ADPS2	2
 #define ADPS1	1
 #define ADPS0	0
-
-#define ZL r30
-#define ZH r31
 
 /* Last memory addresses */
 #define RAMEND		0x1F

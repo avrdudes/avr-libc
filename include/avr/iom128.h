@@ -45,8 +45,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* Input Pins, Port F */
@@ -134,16 +132,7 @@
 /* Data Register, Port A */
 #define PORTA     _SFR_IO8(0x1B)
 
-/* EEPROM Control Register */
-#define EECR      _SFR_IO8(0x1C)
-
-/* EEPROM Data Register */
-#define EEDR      _SFR_IO8(0x1D)
-
-/* EEPROM Address Register */
-#define EEAR      _SFR_IO16(0x1E)
-#define EEARL     _SFR_IO8(0x1E)
-#define EEARH     _SFR_IO8(0x1F)
+/* 0x1C..0x1F EEPROM */
 
 /* Special Function I/O Register */
 #define SFIOR     _SFR_IO8(0x20)
@@ -229,13 +218,9 @@
 /* XDIV Divide control register */
 #define XDIV      _SFR_IO8(0x3C)
 
-/* Stack Pointer */
-#define SP        _SFR_IO16(0x3D)
-#define SPL       _SFR_IO8(0x3D)
-#define SPH       _SFR_IO8(0x3E)
+/* 0x3D..0x3E SP */
 
-/* Status REGister */
-#define SREG      _SFR_IO8(0x3F)
+/* 0x3F SREG */
 
 /* Extended I/O registers */
 
@@ -693,12 +678,6 @@
 #define    PSR0         1
 #define    PSR321       0
 
-/* EEPROM Control Register - EECR */
-#define    EERIE        3
-#define    EEMWE        2
-#define    EEWE         1
-#define    EERE         0
-
 /* Port Data Register (generic) */
 #define    PORT7        7
 #define    PORT6        6
@@ -728,16 +707,6 @@
 #define    PIN2         2
 #define    PIN1         1
 #define    PIN0         0
-
-/* Status Register - SREG */
-#define    SREG_I       7
-#define    SREG_T       6
-#define    SREG_H       5
-#define    SREG_S       4
-#define    SREG_V       3
-#define    SREG_N       2
-#define    SREG_Z       1
-#define    SREG_C       0
 
 /* SPI Status Register - SPSR */
 #define    SPIF         7
@@ -1072,14 +1041,6 @@
 #define    PING2        2 
 #define    PING1        1
 #define    PING0        0
-
-/* Pointer definition */
-#define    XL           r26
-#define    XH           r27
-#define    YL           r28
-#define    YH           r29
-#define    ZL           r30
-#define    ZH           r31
 
 /* Constants */
 #define    RAMEND   0x10FF     /* Last On-Chip SRAM Location */

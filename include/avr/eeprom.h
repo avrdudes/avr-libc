@@ -55,7 +55,12 @@
      is ready to be accessed.  Since this may cause long delays if a
      write operation is still pending, time-critical applications
      should first poll the EEPROM e. g. using eeprom_is_ready() before
-     attempting any actual I/O. */
+     attempting any actual I/O.
+
+    \note This library will \e not work with the ATmega169 since this
+    device has the EEPROM IO ports at different locations!
+
+*/
 
 /** \name avr-libc declarations */
 

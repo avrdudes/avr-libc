@@ -30,9 +30,13 @@
 
     This header file includes the apropriate IO definitions for the
     device that has been specified by the <tt>-mmcu=</tt> compiler
-    command-line switch.
+    command-line switch.  This is done by diverting to the appropriate
+    file <tt>&lt;avr/io</tt><em>XXXX</em><tt>.h&gt;</tt> which should
+    never be included directly.  Some register names common to all
+    AVR devices are defined directly within <tt>&lt;avr/io.h&gt;</tt>,
+    but most of the details come from the respective include file.
 
-    Note that each of these files always includes
+    Note that this file always includes
     \code #include <avr/sfr_defs.h> \endcode
     See \ref avr_sfr for the details.
 
@@ -68,6 +72,77 @@
 
 #ifndef _AVR_IO_H_
 #define _AVR_IO_H_
+
+#include <avr/sfr_defs.h>
+
+/*
+ * Registers common to all AVR devices.
+ */
+
+#if __AVR_ARCH__ != 1
+/*
+ * AVR architecture 1 has no RAM, thus no stack pointer.
+ *
+ * All other archs do have a stack pointer.  Some devices have only
+ * less than 256 bytes of possible RAM locations (128 Bytes of SRAM
+ * and no option for external RAM), thus SPH is officially "reserved"
+ * for them.  We catch this case below after including the
+ * device-specific ioXXXX.h file, by examining XRAMEND, and
+ * #undef-ining SP and SPH in that case.
+ */
+/* Stack Pointer */
+#define SP        _SFR_IO16(0x3D)
+#define SPL       _SFR_IO8(0x3D)
+#define SPH       _SFR_IO8(0x3E)
+#endif /* #if __AVR_ARCH__ != 1 */
+
+/* Status REGister */
+#define SREG      _SFR_IO8(0x3F)
+
+/* Status Register - SREG */
+#define    SREG_I       7
+#define    SREG_T       6
+#define    SREG_H       5
+#define    SREG_S       4
+#define    SREG_V       3
+#define    SREG_N       2
+#define    SREG_Z       1
+#define    SREG_C       0
+
+/* Pointer definition */
+#if __AVR_ARCH__ != 1
+/* avr1 has only the Z pointer */
+#define    XL           r26
+#define    XH           r27
+#define    YL           r28
+#define    YH           r29
+#endif /* #if __AVR_ARCH__ != 1 */
+#define    ZL           r30
+#define    ZH           r31
+
+/*
+ * Only few devices come without EEPROM.  In order to assemble the
+ * EEPROM library components without defining a specific device, we
+ * keep the EEPROM-related definitions here, and catch the devices
+ * without EEPROM (E2END == 0) below.  Obviously, the EEPROM library
+ * functions will not work for them. ;-)
+ */
+/* EEPROM Control Register */
+#define EECR	_SFR_IO8(0x1C)
+
+/* EEPROM Data Register */
+#define EEDR	_SFR_IO8(0x1D)
+
+/* EEPROM Address Register */
+#define EEAR	_SFR_IO16(0x1E)
+#define EEARL	_SFR_IO8(0x1E)
+#define EEARH	_SFR_IO8(0x1F)
+
+/* EEPROM Control Register */
+#define    EERIE        3
+#define    EEMWE        2
+#define    EEWE         1
+#define    EERE         0
 
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
@@ -123,7 +198,7 @@
 #  include <avr/io2323.h>
 #elif defined (__AVR_AT90S2313__)
 #  include <avr/io2313.h>
- /* the following only supported for assembler programs */
+/* avr1: the following only supported for assembler programs */
 #elif defined (__AVR_ATtiny28__)
 #  include <avr/iotn28.h>
 #elif defined (__AVR_AT90S1200__)
@@ -135,8 +210,36 @@
 #elif defined (__AVR_ATtiny11__)
 #  include <avr/iotn11.h>
 #else
-#  warning "device type not defined"
-/* #  include <avr/io8515.h> */
+#  if !defined(__COMPILING_AVR_LIBC__)
+#    warning "device type not defined"
+#  endif
+#endif
+
+#if __AVR_ARCH__ != 1
+#  if XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__)
+#    undef SP
+#    define SP     _SFR_IO8(0x3D)
+#    undef SPH
+#  endif
+#endif
+
+#if E2END == 0 && !defined(__COMPILING_AVR_LIBC__)
+# undef EECR
+# undef EEDR
+# undef EEARL
+# undef EEMWE
+# undef EEWE
+# undef EERE
+#endif
+#if E2END < 0x100 && !defined(__COMPILING_AVR_LIBC__)
+# undef EEAR
+# if E2END > 0
+#   define EEAR	_SFR_IO8(0x1E)
+# endif
+# undef EEARH
+#endif
+#if !defined(SIG_EEPROM_READY)
+# undef EERIE
 #endif
 
 #endif /* _AVR_IO_H_ */

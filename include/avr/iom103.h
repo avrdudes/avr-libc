@@ -42,8 +42,6 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
-#include <avr/sfr_defs.h>
-
 /* I/O registers */
 
 /* Input Pins, Port F */
@@ -123,16 +121,7 @@
 /* Data Register, Port A */
 #define PORTA	_SFR_IO8(0x1B)
 
-/* EEPROM Control Register */
-#define EECR	_SFR_IO8(0x1C)
-
-/* EEPROM Data Register */
-#define EEDR	_SFR_IO8(0x1D)
-
-/* EEPROM Address Register */
-#define EEAR	_SFR_IO16(0x1E)
-#define EEARL	_SFR_IO8(0x1E)
-#define EEARH	_SFR_IO8(0x1F)
+/* 0x1C..0x1F EEPROM */
 
 /* Watchdog Timer Control Register */
 #define WDTCR	_SFR_IO8(0x21)
@@ -211,14 +200,9 @@
 /* XDIV Divide control register */
 #define XDIV	_SFR_IO8(0x3C)
 
-/* Stack Pointer */
-#define SP	_SFR_IO16(0x3D)
-#define SPL	_SFR_IO8(0x3D)
-#define SPH	_SFR_IO8(0x3E)
+/* 0x3D..0x3E SP */
 
-/* Status REGister */
-#define SREG	_SFR_IO8(0x3F)
-
+/* 0x3F SREG */
 
 /* Interrupt vectors */
 
@@ -368,12 +352,6 @@
 #define    WDP2         2
 #define    WDP1         1
 #define    WDP0         0
-
-/* EEPROM Control Register */
-#define    EERIE        3
-#define    EEMWE        2
-#define    EEWE         1
-#define    EERE         0
 
 /* Data Register, Port A */
 #define    PA7          7
@@ -569,14 +547,6 @@
 #define    MUX2         2
 #define    MUX1         1
 #define    MUX0         0
-
-/* Pointer definition */
-#define    XL       r26
-#define    XH       r27
-#define    YL       r28
-#define    YH       r29
-#define    ZL       r30
-#define    ZH       r31
 
 /* Constants */
 #define    RAMEND   0x0FFF     /*Last On-Chip SRAM Location*/
