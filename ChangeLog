@@ -1,3 +1,8 @@
+2002-09-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/fplib.inc: introduce FPMOV and FPLOAD.
+	* libm/fplib/dtostre.S: use FPMOV, FPLOAD, and XCALL.
+
 2002-09-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/dtostre.S: fix numerous bugs and nits.

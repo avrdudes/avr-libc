@@ -79,5 +79,29 @@
 
 #define PGM_SECTION .section .progmem.gcc_fplib,"a",@progbits
 
+/* Unfortunately, we need both an assembler and a C preprocessor macro for
+   these.  Assembler macros cannot do string concatenation for macro
+   parameters, and cpp macros cannot generate multiple lines.  We need both. */
+.macro	fpload	reg0, reg1, reg2, reg3, val
+	ldi	\reg0, lo8(\val)
+	ldi	\reg1, hi8(\val)
+	ldi	\reg2, hlo8(\val)
+	ldi	\reg3, hhi8(\val)
+.endm
+
+#define FPLOAD(reg, val) \
+	fpload reg##0, reg##1, reg##2, reg##3, val
+
+.macro	fpmov	dst0, dst1, dst2, dst3, src0, src1, src2, src3
+	mov	\dst0, \src0
+	mov	\dst1, \src1
+	mov	\dst2, \src2
+	mov	\dst3, \src3
+.endm
+
+#define FPMOV(dst, src) \
+	fpmov	dst##0, dst##1, dst##2, dst##3, \
+		src##0, src##1, src##2, src##3
+
 #endif
 

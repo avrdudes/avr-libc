@@ -26,10 +26,10 @@
     dtostre.S is an addition to     FPlib V 0.3.0       ported to avr-as
     for details see readme.dtostre
 
-  const char * dtostre( double f[rP0::rP3], char * s[rP4:rP5], byte ndig[rP6], byte flags[rP7] )
+  const char * dtostre( double f[r22::r25], char * s[r20:r21], byte prec[r18],
+	byte flags[r16] )
 
- *----------------------------------------------------------------------------------------------
- */
+ *------------------------------------------------------------------------------*/
 
 #include "gasava.inc"
 #include "fplib.inc"
@@ -37,6 +37,11 @@
 #define bitAlignSign 0x01        /* put '+' or ' ' for positives */
 #define bitSign      0x02        /* put '+' rather than ' ' */
 #define bitUppercase 0x04        /* put 'E' rather 'e' */
+
+#define FP_0_1     0x3dcccccd
+#define	FP_0_30103 0x3e9a209b
+#define FP_0_5     0x3f000000
+#define FP_10      0x41200000
 
           TEXT_SEG(fplib, dtostre)
           FUNCTION(dtostre)
@@ -124,7 +129,7 @@ GLOBAL(dtostre)
 ; frexp(dblno, (int*) dest);
 	mov	rB2, YL
 	mov	rB3, YH
-	rcall	_U(frexp)	; destroys argument_1
+	XCALL	_U(frexp)	; destroys argument_1
 
 ; iexp = *(int*) dest * log2;
 	ldd	rA0, Y+0
@@ -133,13 +138,10 @@ GLOBAL(dtostre)
 	sbrc	rA1, 7
 	com	rA2
 	mov	rA3, rA2
-	rcall	_U(__floatsisf)	; to float
-	ldi	rB0, 0x9B	; lg(2) is 2nd argument
-	ldi	rB1, 0x20	; lg(2) = 0.30103 = 0x3e9a209b
-	ldi	rB2, 0x9A
-	ldi	rB3, 0x3E
-	rcall	_U(__mulsf3)	; multiply
-	rcall	_U(__fixsfsi)	; to integer
+	XCALL	_U(__floatsisf)	; to float
+	FPLOAD(rB, FP_0_30103)
+	XCALL	_U(__mulsf3)	; multiply
+	XCALL	_U(__fixsfsi)	; to integer
 	mov	rS4, rA0	; save exponent, 1 byte only
 
 ; if ( iexp  != 0 )
@@ -147,26 +149,14 @@ GLOBAL(dtostre)
 	breq	1f
 
 ; dblno *= pow(10.0, -(double) iexp)
-	rcall	_U(__floatsisf)	; to float
-	rcall	_U(__negsf2)	; negative
-	mov	rB0, rA0
-	mov	rB1, rA1
-	mov	rB2, rA2
-	mov	rB3, rA3
-	ldi	rA0, 0x00	; argument_1 = 10
-	ldi	rA1, 0x00
-	ldi	rA2, 0x20
-	ldi	rA3, 0x41
-	rcall	_U(pow)
-	mov	rB0, rS0	; argument_2 = dblno
-	mov	rB1, rS1
-	mov	rB2, rS2
-	mov	rB3, rS3
-	rcall	_U(__mulsf3)
-	mov	rS0, rA0	; new dblno
-	mov	rS1, rA1
-	mov	rS2, rA2
-	mov	rS3, rA3
+	XCALL	_U(__floatsisf)	; to float
+	XCALL	_U(__negsf2)	; negative
+	FPMOV(rB, rA)
+	FPLOAD(rA, FP_10)
+	XCALL	_U(pow)
+	FPMOV(rB, rS)		; argument_2 = dblno
+	XCALL	_U(__mulsf3)
+	FPMOV(rS, rA)		; new dblno
 1:
 ; The algorithm to determine the decimal exponent above has the
 ; potential to erroneously return an exponent that might be too
@@ -174,58 +164,37 @@ GLOBAL(dtostre)
 ; below.  If we find the first digit to become 0, we decrease the
 ; exponent, and multiply our number again by 10.
 
-	mov	rA0, rS0
-	mov	rA1, rS1
-	mov	rA2, rS2
-	mov	rA3, rS3
+	FPMOV(rA, rS)
 	mov	rB2, YL
 	mov	rB3, YH
-	rcall	_U(modf)
+	XCALL	_U(modf)
 	ldd	rSI1, Y+3	; no need to convert from float to int,
 	tst	rSI1		; float 0.0 always has 0 in the MSB
 	brne	1f
 
 	dec	rS4		; exp--
-	ldi	rB0, 0x00	; argument_2 = 10
-	ldi	rB1, 0x00
-	ldi	rB2, 0x20
-	ldi	rB3, 0x41
-	rcall	_U(__mulsf3)
-	mov	rS0, rA0	; dblno
-	mov	rS1, rA1
-	mov	rS2, rA2
-	mov	rS3, rA3
+	FPLOAD(rB, FP_10)
+	XCALL	_U(__mulsf3)
+	FPMOV(rS, rA)		; dblno
 
 1:
 ; determine rounding:
-; if (ndig < ACCURACY) { t = .5; t *= 0.1**ndig; dblno += t; }
+; if (prec < ACCURACY) { t = .5; t *= 0.1**prec; dblno += t; }
 	cpi	rSI0, ACCURACY
 	brcc	1f
-	ldi	rA0, 0x00	; t = 0.5
-	ldi	rA1, 0x00
-	ldi	rA2, 0x00
-	ldi	rA3, 0x3F
-	eor	rSI1, rSI1	; for (rSI1 = 0; rSI1 < ndig; rSI1++)
+	FPLOAD(rA, FP_0_5)
+	eor	rSI1, rSI1	; for (rSI1 = 0; rSI1 < prec; rSI1++)
 	rjmp	3f
-2:	ldi	rB0, 0xCD	; 0.1 => 0x3dcccccd
-	ldi	rB1, 0xCC
-	ldi	rB2, 0xCC
-	ldi	rB3, 0x3D
-	rcall	_U(__mulsf3)	; t *= 0.1
+2:	FPLOAD(rB, FP_0_1)
+	XCALL	_U(__mulsf3)	; t *= 0.1
 	inc	rSI1
 3:	cp	rSI1, rSI0
 	brlo	2b
-	mov	rB0, rS0
-	mov	rB1, rS1
-	mov	rB2, rS2
-	mov	rB3, rS3
-	rcall	_U(__addsf3)	; dblno += t
-	mov	rS0, rA0	; new dblno
-	mov	rS1, rA1
-	mov	rS2, rA2
-	mov	rS3, rA3
+	FPMOV(rB, rS)
+	XCALL	_U(__addsf3)	; dblno += t
+	FPMOV(rS, rA)		; new dblno
 1:
-				; for (rSI1 = 0; rSI1 <= ndig; rSI1++)
+				; for (rSI1 = 0; rSI1 <= prec; rSI1++)
 	eor	rSI1, rSI1
 	rjmp	8f
 2:
@@ -233,29 +202,20 @@ GLOBAL(dtostre)
 	brcc	5f		; more digits than accuracy => pad 0s
 
 ; dblno = modf(dblno, (double *) dest) * 10.0;
-	mov	rA0, rS0	; next digit
-	mov	rA1, rS1
-	mov	rA2, rS2
-	mov	rA3, rS3
+	FPMOV(rA, rS)		; next digit
 	mov	rB2, YL
 	mov	rB3, YH
-	rcall	_U(modf)
-	ldi	rB0, 0x00	; argument_2 = 10
-	ldi	rB1, 0x00
-	ldi	rB2, 0x20
-	ldi	rB3, 0x41
-	rcall	_U(__mulsf3)
-	mov	rS0, rA0	; dblno
-	mov	rS1, rA1
-	mov	rS2, rA2
-	mov	rS3, rA3
+	XCALL	_U(modf)
+	FPLOAD(rB, FP_10)
+	XCALL	_U(__mulsf3)
+	FPMOV(rS, rA)		; dblno
 
 ; *dest++ = '0' + (char)(*(double *) dest);
 	ldd	rA0, Y+0
 	ldd	rA1, Y+1
 	ldd	rA2, Y+2
 	ldd     rA3, Y+3
-	rcall   _U(__fixsfsi)	; to long int
+	XCALL   _U(__fixsfsi)	; to long int
 	mov	rA2, rA0
 	subi	rA2, -'0'
 	st	Y+, rA2
@@ -270,7 +230,7 @@ GLOBAL(dtostre)
 6:	st	Y+, rA2
 7:	inc	rSI1		; rSI1++
 8:				; loop test rSI1 <= rSI0
-	cp	rSI0, rSI1	; compare count - ndig
+	cp	rSI0, rSI1	; compare count - prec
 	brcc	2b
 
 	pop	rA2		; and flags
