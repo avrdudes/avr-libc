@@ -1,5 +1,10 @@
 2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/sleep.h: protect function-like macros, fix savannah bug #9013.
+	* include/avr/ina90.h: Ditto.
+
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/stdint.h: created from old inttypes.h.
 	* include/inttypes.h: reduced to #include <stdint.h>.
 
