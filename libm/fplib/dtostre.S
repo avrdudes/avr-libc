@@ -20,6 +20,8 @@
    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
    more details. */
 
+/* $Id$ */
+
 /*
     dtostre.S is an addition to     FPlib V 0.3.0       ported to avr-as
     for details see readme.dtostre
