@@ -62,17 +62,6 @@
 #define DDRA   _SFR_IO8(0x01)
 #define PORTA  _SFR_IO8(0x02)
 
-/* RegBits: PINA */
-#define PINA0                0
-#define PINA1                1
-#define PINA2                2
-#define PINA3                3
-#define PINA4                4
-#define PINA5                5
-#define PINA6                6
-#define PINA7                7
-/* EndRegBits */
-
 /* RegDef:  Port B */
 #define PINB   _SFR_IO8(0x03)
 #define DDRB   _SFR_IO8(0x04)

@@ -1,6 +1,14 @@
+2004-10-30  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* include/avr/iocan128.h: Remove duplicate definitions of PINAn.
+	[Bug #10837]
+
 2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
 
-	* include/avr/io43u32x.h: Correct license with permission from Keith Gudger.
+	* include/avr/io43u32x.h: Correct license with permission from Keith
+	Gudger.
 	* include/avr/io43u35x.h: Ditto.
 	* include/avr/io86r401.h: Correct license with permission from Colin 
 	O'Flynn.
