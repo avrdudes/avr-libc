@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002,2004 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -120,7 +120,14 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 	if ((stream->flags & __SRD) == 0)
 		return EOF;
 
-	while ((c = ((stream->flags & __SPGM)? pgm_read_byte(fmt++): *fmt++))) {
+	/*
+	 * Do not use fmt++ in the next line.  pgm_read_byte() is a
+	 * macro, so it could evaluate its argument more than once.
+	 */
+	while ((c = ((stream->flags & __SPGM)? pgm_read_byte(fmt): *fmt))) {
+
+		fmt++;
+
 #if SCANF_LEVEL >= SCANF_FLT
 		if (flags & FLBRACKET) {
 			if (c == '^' && i == 0 && !(flags & FLNEGATE)) {

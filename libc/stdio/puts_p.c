@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002,2004 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -43,9 +43,15 @@ puts_P(const char *str)
 	if ((stdout->flags & __SWR) == 0)
 		return EOF;
 
-	while ((c = pgm_read_byte(str++)) != '\0')
+	/*
+	 * Do not use str++ in the next line.  pgm_read_byte() is a
+	 * macro, so it could evaluate its argument more than once.
+	 */
+	while ((c = pgm_read_byte(str)) != '\0') {
 		if (stdout->put(c) != 0)
 			rv = EOF;
+		str++;
+	}
 	if (stdout->put('\n') != 0)
 		rv = EOF;
 

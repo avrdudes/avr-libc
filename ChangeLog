@@ -1,3 +1,10 @@
+2004-07-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fputs_p.c: pgm_read_byte(p++) -> pgm_read_byte(p) ... p++;
+	* libc/stdio/puts_p.c: Ditto.
+	* libc/stdio/vfprintf.c: Ditto.
+	* libc/stdio/vfscanf.c: Ditto.
+
 2004-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: Fix the use of progmem tables, closes

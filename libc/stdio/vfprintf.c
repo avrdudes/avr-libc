@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Alexander Popov (sasho@vip.bg)
-   Copyright (c) 2002, Joerg Wunsch
+   Copyright (c) 2002,2004 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -138,7 +138,14 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 	if ((stream->flags & __SWR) == 0)
 		return EOF;
 
-	while ((c = ((stream->flags & __SPGM)? pgm_read_byte(fmt++): *fmt++))) {
+	/*
+	 * Do not use fmt++ in the next line.  pgm_read_byte() is a
+	 * macro, so it could evaluate its argument more than once.
+	 */
+	while ((c = ((stream->flags & __SPGM)? pgm_read_byte(fmt): *fmt))) {
+
+		fmt++;
+
 		if (flags & FLHASPERCENT) {
 			if (c >= '0' && c <= '9') {
 #if PRINTF_LEVEL > PRINTF_MIN
