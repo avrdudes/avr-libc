@@ -1,3 +1,8 @@
+2004-02-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/inline_asm.dox: Fix use of IO macros (bug # 2233)
+	* doc/examples/twidemo/twidemo.dox: Fix doxygen formatting bugs.
+
 2004-02-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/timer.h: Warn about deprecation, warn for ATmega{64,128}
