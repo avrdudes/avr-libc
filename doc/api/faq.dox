@@ -732,12 +732,14 @@ in flash as such:
 
 Then in main we see this:
 
+\code
     strcpy_P (buf, array[1]);   /* copy bar into buf */
   de:   60 e9           ldi r22, 0x90   ; 144
   e0:   70 e0           ldi r23, 0x00   ; 0
   e2:   ce 01           movw    r24, r28
   e4:   01 96           adiw    r24, 0x01   ; 1
   e6:   0e 94 79 00     call    0xf2
+\endcode
 
 The addr of bar (0x0090) is loaded into the r23:r22 pair which is the second
 parameter passed to strcpy_P. The r25:r24 pair is the addr of buf.

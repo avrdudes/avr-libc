@@ -34,8 +34,10 @@
  */
 
 /** \defgroup avr_pgmspace Program Space String Utilities
-    \code #include <avr/io.h> \endcode
-    \code #include <avr/pgmspace.h> \endcode
+    \code
+    #include <avr/io.h>
+    #include <avr/pgmspace.h>
+    \endcode
 
     The functions in this module provide interfaces for a program to access
     data stored in program space (flash memory) of the device.  In order to

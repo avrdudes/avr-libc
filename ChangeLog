@@ -1,5 +1,11 @@
 2002-11-16  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/faq.dox: Add \code and \endcode around example. D'oh!
+	* doc/api/using-tools.dox: Use \verbatim instead of <code>.
+	* include/avr/pgmspace.h: Put both #includes in a single \code statement.
+
+2002-11-16  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/faq.dox: Fix broken subject headers (doxygen-1.2.18 doesn't
 		like them being bold when generating ps or pdf).

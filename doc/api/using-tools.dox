@@ -341,13 +341,17 @@ include the C source code into the assembler listing in file
 \c foo.lst, when compiling \c foo.c, the following compiler command-line
 can be used:
 
-<code>avr-gcc -c -O foo.c -o foo.o -Wa,-ahls=foo.lst</code>
+\verbatim
+	$ avr-gcc -c -O foo.c -o foo.o -Wa,-ahls=foo.lst
+\endverbatim
 
 In order to pass an assembler file through the C preprocessor first,
 and have the assembler generate line number debugging information for
 it, the following command can be used:
 
-<code>avr-gcc -c -x assembler-with-cpp -o foo.o foo.S -Wa,--gstabs</code>
+\verbatim
+	$ avr-gcc -c -x assembler-with-cpp -o foo.o foo.S -Wa,--gstabs
+\endverbatim
 
 Note that on Unix systems that have case-distinguishing file systems,
 specifying a file name with the suffix \c .S (upper-case letter S)
@@ -461,14 +465,18 @@ command-line can be used to compile \c foo.c into an executable, and
 also produce a link map that contains a cross-reference list in the
 file \c foo.map:
 
-<code>avr-gcc -O -o foo.out -Wl,-Map=foo.map -Wl,--cref foo.c</code>
+\verbatim
+	$ avr-gcc -O -o foo.out -Wl,-Map=foo.map -Wl,--cref foo.c
+\endverbatim
 
 Alternatively, a comma as a placeholder will be replaced by a space
 before passing the option to the linker.  So for a device with
 external SRAM, the following command-line would cause the linker to
 place the data segment at address 0x2000 in the SRAM:
 
-<code>avr-gcc -mmcu=atmega128 -o foo.out -Wl,-Tdata,0x802000</code>
+\verbatim
+	$ avr-gcc -mmcu=atmega128 -o foo.out -Wl,-Tdata,0x802000
+\endverbatim
 
 See the explanation of the \ref sec_dot_data "data section" for why
 0x800000 needs to be added to the actual value.  Note that unless
