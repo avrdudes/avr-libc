@@ -24,6 +24,9 @@
   + doc/examples/demo/demo.c can now handle the ATmega8 and ATmega32
     MCU types.
 
+  + doc/examples/twitest/twitest.c can now run off the default 1 MHz
+    RC oscillator (albeit at reduced TWI speed only).
+
   + According to C99, <stdint.h> is now used to declare exact-width
     integer types.  <inttypes.h> includes that header, but is meant to
     extend it.  For just the exact-width integer types only, use <stdint.h>.
