@@ -332,12 +332,14 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					goto nextitem;
 				case 's':
 					a.pc = va_arg(ap, char *);
-					for (base = 0; a.pc[base]; base++)
-						; /* calc length of string */
 #if PRINTF_LEVEL > PRINTF_MIN
-					if ((flags & FLPREC) && prec < base)
-						base = prec;
+					if (flags & FLPREC)
+						base = strnlen(a.pc, prec);
+					else
+						base = strlen(a.pc);
 					width -= base;
+#else
+					base = strlen(a.pc);
 #endif
 					goto nextitem;
 				case 'd':

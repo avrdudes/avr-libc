@@ -1,3 +1,7 @@
+2004-02-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfprintf.c: Fix bug #7556 (%s format with precision issue)
+
 2003-11-18  Theodore A. Roth  <troth@openavr.org>
 
 	* NEWS: Add note about new crc update functions.
