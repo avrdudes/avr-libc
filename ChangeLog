@@ -6,6 +6,7 @@
 	* include/compat/twi.h: Moved from avr/twi.h.
 	* include/avr/ina90.h: Removed from old location.
 	* include/avr/twi.h: Ditto.
+	* include/avr/parity.h: Document.
 	* doc/avr-libc-reference.html: Remove obsolete file.
 	* doc/examples/twitest/twitest.c: twi.h is in compat/ now.
 	* doc/examples/twitest/twitest.dox: Ditto.
@@ -13,7 +14,7 @@
 2004-12-30  Eric B. Weddington  <ericw@evcohs.com>
 
     Apply patch #2155:
-    
+
     2004-04-07  Theodore A. Roth  <troth@openavr.org>
     [Contriubuted by Luca Matteini]
 
