@@ -1,3 +1,7 @@
+2004-12-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/delay.h: Document the requirement of F_CPU.
+
 2004-12-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/delay.h: Move _delay_ms and _delay_us to double.
