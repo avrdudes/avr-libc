@@ -1,14 +1,9 @@
 TODO for avr-libc:
 
-Before 1.2:
-    - Move the following to include/compat and document
-        * include/avr/ina90.h
-        * include/avr/twi.h
-    - Move the following to examples and document
+Before 1.4:
+    - Move the following to examples
         * include/avr/parity.h
     - Document:
-        * include/avr/crc16.h
-        * include/avr/parity.h
         * merge chapter 3 from Rich Neswold's doc. Needs some rewriting to
           update for newer tools. (explanation of start code)
         * gcrt1.S

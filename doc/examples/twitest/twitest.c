@@ -19,7 +19,7 @@
 #include <stdlib.h>
 
 #include <avr/io.h>
-#include <avr/twi.h>		/* Note [1] */
+#include <compat/twi.h>		/* Note [1] */
 
 #define DEBUG 1
 

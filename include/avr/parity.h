@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
+   Copyright (c) 2004, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -35,6 +36,15 @@
 #ifndef _AVR_PARITY_H_
 #define _AVR_PARITY_H_
 
+/** \defgroup avr_parity Parity bit generation
+    \code #include <avr/parity.h> \endcode
+
+    This header file contains optimized assembler code to calculate
+    the parity bit for a byte.
+*/
+/** \def parity_even_bit
+    \ingroup avr_parity
+    \returns 1 if \c val has an odd number of bits set. */
 #define parity_even_bit(val) ({				\
 	unsigned char __t;				\
 	__asm__ (					\
