@@ -143,7 +143,7 @@ AC_CANONICAL_SYSTEM
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20041118)
+AM_INIT_AUTOMAKE(avr-libc, 1.1.0.20041124)
 dnl AM_CONFIG_HEADER(version.h:version-h.in)
 
 AC_DEFINE(__AVRLIBC__,1)
@@ -378,13 +378,33 @@ else
         fi
   ;;
   avr5)
+        CHECK_AVR_DEVICE(atmega165)
         CHECK_AVR_DEVICE(atmega168)
+        CHECK_AVR_DEVICE(atmega325)
+        CHECK_AVR_DEVICE(atmega3250)
+        CHECK_AVR_DEVICE(atmega645)
+        CHECK_AVR_DEVICE(atmega6450)
         CHECK_AVR_DEVICE(at90can128)
         avrlib_cflags=${avrlib_opt_speed}
         avrlib_asflags='-mmcu=avr5'
         AVR_CRT_MEGA='crtm161.o crtm162.o crtm163.o crtm169.o crtm323.o crtm128.o crtm16.o crtm32.o crtm64.o'
+        if test "x$HAS_atmega165" = "xyes"; then
+          AVR_CRT_MEGA="$AVR_CRT_MEGA crtm165.o"
+        fi
         if test "x$HAS_atmega168" = "xyes"; then
           AVR_CRT_MEGA="$AVR_CRT_MEGA crtm168.o"
+        fi
+        if test "x$HAS_atmega325" = "xyes"; then
+          AVR_CRT_MEGA="$AVR_CRT_MEGA crtm325.o"
+        fi
+        if test "x$HAS_atmega3250" = "xyes"; then
+          AVR_CRT_MEGA="$AVR_CRT_MEGA crtm3250.o"
+        fi
+        if test "x$HAS_atmega645" = "xyes"; then
+          AVR_CRT_MEGA="$AVR_CRT_MEGA crtm645.o"
+        fi
+        if test "x$HAS_atmega6450" = "xyes"; then
+          AVR_CRT_MEGA="$AVR_CRT_MEGA crtm6450.o"
         fi
         AVR_CRT_OTHER='crtat94k.o'
         if test "x$HAS_at90can128" = "xyes"; then
