@@ -69,14 +69,13 @@ GLOBAL(dtostre)
 	mov	rSI1, rA2	; and ..
 	add	rSI1, rSI1
 	adc	rSI0, rSI0
-	brne	2f		; not zero
+	brne	3f		; not zero
 
 	ldi	rSI1, ' '
 	sbrc	rP7, 1
 	ldi	rSI1, '+'	; rSI1 = (flags&bitSign?'+':' ')
 	sbrc	rP7, 0
 	st	Y+, rSI1
-	dec	rP6
 	ldi	rA3, '0'
 	ldi	rA2, '.'
 	ldi	rA1, 'E'
@@ -84,19 +83,22 @@ GLOBAL(dtostre)
 	ori	rA1, 'E' ^ 'e'
 	ldi	rA0, '+'
 	st	Y+,rA3
+	tst	rP6		; if (prec == 0) don't print ".0"
+	breq	2f
+	dec	rP6
 	st	Y+,rA2
 1:	st	Y+, rA3
 	dec	rP6
 	brpl	1b
-	st	Y+, rA1		/* 'E' */
+2:	st	Y+, rA1		/* 'E' */
 	st	Y+, rA0		/* '+' */
 	st	Y+, rA3		/* '0' */
 	st	Y+, rA3		/* '0' */
 	rjmp	99f		; exit
 
-2:
+3:
 	cpi	rSI0, 0xff
-	brne	3f		; check for zero and NaN
+	brne	4f		; check for zero and NaN
 
 	ldi	rA3, 'N'
 	ldi	rA2, 'a'
@@ -105,20 +107,20 @@ GLOBAL(dtostre)
 	st	Y+, rA3		/* 'N' */
 	rjmp	99f		; exit
 
-3:				; not NaN
+4:				; not NaN
 	tst	rA3
-	brpl	4f
+	brpl	5f
 	ldi	rSI1, '-'
 	andi	rA3, 0x7F	; now f is positive
-	rjmp	5f
-4:	ldi	rSI1, ' '
+	rjmp	6f
+5:	ldi	rSI1, ' '
 	sbrc	rP7, 1
 	ldi	rSI1, '+'	; rSI1 = (flags&bitSign?'+':' ')
 	sbrc	rP7, 0
-5:
+6:
 	st	Y+, rSI1
 
-	mov	rSI0, rP6	; store ndig
+	mov	rSI0, rP6	; store prec
 	push	rP7		; and flags
 
 	mov	rS0, rA0	; store dblno
@@ -223,6 +225,8 @@ GLOBAL(dtostre)
 ; if (i == 0)
 	tst	rSI1
 	brne	7f
+	tst	rSI0		; if (prec == 0) don't print "."
+	breq	7f
 	ldi	rA2, '.'
 	rjmp	6f
 5:				; pad with zeros
