@@ -70,7 +70,7 @@ in the SRAM memory space. Thus, if you want the .data section to start at
 
 Uninitialized global or static variables end up in the .bss section.
 
-\subsection sec_dot_text The .eeprom Section
+\subsection sec_dot_eeprom The .eeprom Section
 
 This is where eeprom variables are stored.
 
