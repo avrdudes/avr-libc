@@ -33,7 +33,7 @@
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
 CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config \
-                       *.png *.eps fix_png fix_anchors
+                       *.png *.eps fix_png fix_anchors fix_javascript
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        main_page.dox \
@@ -92,7 +92,7 @@ IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 ps: demo $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: demo $(TARGET_DOX_HTML) fix_png fix_anchors
+html: demo $(TARGET_DOX_HTML) fix_png fix_anchors fix_javascript
 
 # Make the background color of the png's transparent.
 fix_png: $(wildcard $(USER_MANUAL)/*.png)
@@ -119,6 +119,12 @@ fix_anchors: $(FIX_ANCHORS)
 		assembler.html > fix.html; \
 	mv fix.html assembler.html
 	echo timestamp > fix_anchors
+
+fix_javascript: $(USER_MANUAL)/tree.js $(USER_MANUAL)/tree.html
+	perl $(top_srcdir)/doc/api/unjs.pl \
+		$(USER_MANUAL)/tree.js \
+		$(USER_MANUAL)/tree.html 
+	echo timestamp > fix_javascript
 
 # Rule for generating PDF output
 pdf: demo $(TARGET_DOX_PDF)

@@ -1,5 +1,10 @@
 2003-01-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/unjs.pl: new file.
+	* doc/api/Makefile.am: include fix_javascript.
+
+2003-01-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/faq.dox: updated indirect IO port access section.
 
 2003-01-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
