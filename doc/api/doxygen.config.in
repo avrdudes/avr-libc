@@ -371,6 +371,7 @@ INPUT                  = @top_srcdir@/include \
                          @top_srcdir@/libc \
                          @top_srcdir@/libm \
                          @top_srcdir@/doc/api \
+                         @top_srcdir@/doc/examples \
                          @top_srcdir@/doc/examples/demo \
                          @top_srcdir@/doc/examples/twitest
 

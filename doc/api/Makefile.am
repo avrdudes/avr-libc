@@ -180,8 +180,8 @@ latex_pdf_src/refman.tex: doxygen-pdf.config $(IMAGE_EPS)
 		mv -f tmp.$$ using_tools.tex
 	cd latex_pdf_src && \
 		sed -e '/{demo.eps}/s/demo.eps/demo.pdf/' \
-		demo_project.tex > tmp.$$ && \
-		mv -f tmp.$$ demo_project.tex
+		group__demo__project.tex > tmp.$$ && \
+		mv -f tmp.$$ group__demo__project.tex
 
 doxygen-pdf.config: doxygen.config
 	sed \

@@ -1,5 +1,13 @@
 2004-07-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/Makefile.am: rearrange demos into their own group.
+	* doc/examples/demo/demo.dox: (Ditto)
+	* doc/examples/twitest/twitest.dox: (Ditto)
+	* doc/api/doxygen.config.in: include doc/examples in INPUT.
+	* doc/examples/all-demos.dox: [new] Summary page for the demos.
+
+2004-07-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/malloc.dox: Document realloc() internals.
 	* include/stdlib.h: include realloc().
 	* libc/stdlib/Makefile.am: include realloc.c.

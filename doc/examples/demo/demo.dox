@@ -25,7 +25,8 @@
 
 /* $Id$ */
 
-/** \page demo_project A simple project
+/** \defgroup demo_project A simple project
+    \ingroup demos
 
 At this point, you should have the GNU tools configured, built, and installed
 on your system. In this chapter, we present a simple example of using the GNU
