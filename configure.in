@@ -265,6 +265,32 @@ fi
 
 AC_SUBST(DOC_INST_DIR)
 
+dnl Some devices are only handled by newer version of gcc. This macro lets us
+dnl probe to see if the installed avr-gcc supports a questionable device.
+AC_DEFUN(
+  CHECK_AVR_DEVICE,
+  [
+    old_CC=${CC}
+    old_CFLAGS=${CFLAGS}
+    CFLAGS="-mmcu=$1"
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(if ${CC} has support for $1)
+    AC_TRY_COMPILE(
+      [],
+      [int main (void) {}],
+      [has_dev_support=yes],
+      [has_dev_support=no]
+    )
+    if test "x$has_dev_support" = "xyes"
+    then
+      HAS_$1=yes
+    fi
+    AC_MSG_RESULT($has_dev_support)
+    CC=${old_CC}
+    CFLAGS=${old_CFLAGS}
+  ]
+)
+
 dnl we need to set some compiler switches according to the current
 dnl avr library configuration
 
@@ -315,14 +341,40 @@ else
         AVR_CRT_MEGA='crtm103.o'
         AVR_CRT_OTHER='crt43320.o crt43355.o crt76711.o'
   ;;
-  avr4) avrlib_cflags=${avrlib_opt_space}
+  avr4)
+        CHECK_AVR_DEVICE(attiny13)
+        CHECK_AVR_DEVICE(attiny2313)
+        CHECK_AVR_DEVICE(atmega48)
+        CHECK_AVR_DEVICE(atmega88)
+        avrlib_cflags=${avrlib_opt_space}
         avrlib_asflags='-mmcu=avr4'
-        AVR_CRT_MEGA='crtm8.o crtm8515.o crtm8535.o # crtm83.o crtm85.o'
+        AVR_CRT_MEGA='crtm8.o crtm8515.o crtm8535.o'
+        if test "x$HAS_atmega48" = "xyes"; then
+          AVR_CRT_MEGA="$AVR_CRT_MEGA crtm48.o"
+        fi
+        if test "x$HAS_atmega88" = "xyes"; then
+          AVR_CRT_MEGA="$AVR_CRT_MEGA crtm88.o"
+        fi
+        if test "x$HAS_attiny13" = "xyes"; then
+          AVR_CRT_TINY="$AVR_CRT_TINY crttn13.o"
+        fi
+        if test "x$HAS_attiny2313" = "xyes"; then
+          AVR_CRT_TINY="$AVR_CRT_TINY crttn2313.o"
+        fi
   ;;
-  avr5) avrlib_cflags=${avrlib_opt_speed}
+  avr5)
+        CHECK_AVR_DEVICE(atmega168)
+        CHECK_AVR_DEVICE(at90can128)
+        avrlib_cflags=${avrlib_opt_speed}
         avrlib_asflags='-mmcu=avr5'
         AVR_CRT_MEGA='crtm161.o crtm162.o crtm163.o crtm169.o crtm323.o crtm128.o crtm16.o crtm32.o crtm64.o'
+        if test "x$HAS_atmega168" = "xyes"; then
+          AVR_CRT_MRGA="$AVR_CRT_MEGA crtm168.o"
+        fi
         AVR_CRT_OTHER='crtat94k.o'
+        if test "x$HAS_at90can128" = "xyes"; then
+          AVR_CRT_OTHER="$AVR_CRT_OTHER crtcan128.o"
+        fi
   ;;
   *)    AC_MSG_ERROR(unexpected value '${with_multisubdir}' for with_multisubdir)
   ;;

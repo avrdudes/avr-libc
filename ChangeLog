@@ -1,3 +1,11 @@
+2004-04-15  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in:
+	* crt1/Makefile.am:
+	* include/avr/io.h:
+	Add support infrastructure for mega48, mega88, mega168, tiny13,
+	tiny2313 and at90can128.
+
 2004-04-23  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AVR_LIBC_USER_MANUAL): Append version number.

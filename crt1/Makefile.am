@@ -1,4 +1,7 @@
-# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+#
+# $Id$
+#
+# Copyright (c) 2002, 2004  Reinhard Jessich  <reinhard.jessich@telering.at>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -54,6 +57,9 @@ $(AVR_CRT_TINY): crttn%.o: gcrt1.S
 # $(AVR_CRT_OTHER) - devices that don't follow a common naming convention.
 crtat94k.o: gcrt1.S
 	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at94k -c $< -o $@
+
+crtcan128.o: gcrt1.S
+	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at90can128 -c $< -o $@
 
 crt43320.o: gcrt1.S
 	$(COMPILE) $(AVR_CRT_ASFLAGS) -mmcu=at43usb320 -c $< -o $@
