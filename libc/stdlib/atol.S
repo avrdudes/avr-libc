@@ -31,6 +31,7 @@
 
    Contributors:
      Created by Reiner Patommel
+     Modified by Reiner Patommel 8 Feb 2003, Bug #2481
  */
 
 #include "macros.inc"
@@ -66,13 +67,13 @@ _U(atol):
 
 .atol_loop:
 	LD	tmp, Z+			; get (next) character
-	TST	tmp			; is it end of string
+	TST	tmp			; is it end of string?
 	BREQ	.atol_sig
-	CPI	tmp, ' '		; if space, skip
+	CPI	tmp, ' '		; skip whitespace
 	BREQ	.atol_loop
-	CPI	tmp, '\t'		; if tab, skip
+	CPI	tmp, '\t'
 	BREQ	.atol_loop
-	CPI	tmp, '\n'		; skip other whitespace
+	CPI	tmp, '\n'
 	BREQ	.atol_loop
 	CPI	tmp, '\f'
 	BREQ	.atol_loop
@@ -112,9 +113,7 @@ _U(atol):
 	CPC	num_hi_lo, __zero_reg__
 	CPC	num_hi_hi, __zero_reg__	; did we get a number?
 	BREQ	.atol_done		; no, drop sign and return
-	BLD	tmp, 0			; get sign again
-	TST	tmp			; positive number?
-	BREQ	.atol_done
+	BRTC	.atol_done		; positive number? -> return
 	COM	num_hi_hi
 	COM	num_hi_lo
 	COM	num_lo_hi
