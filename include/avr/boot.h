@@ -130,6 +130,13 @@
 #define __COMMON_ASRE   RWWSRE
 #endif
 
+/* Define the bit positions of the Boot Lock Bits. */
+
+#define BLB12           5
+#define BLB11           4
+#define BLB02           3
+#define BLB01           2
+
 /** \ingroup avr_boot
     \def boot_spm_interrupt_enable()
     Enable the SPM interrupt. */
