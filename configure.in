@@ -295,6 +295,7 @@ fi
 dnl the top Makefile must be the last of the list
 AC_OUTPUT(crt1/Makefile libc/Makefile libc/stdlib/Makefile
           libc/pmstring/Makefile libc/string/Makefile libc/misc/Makefile
+          libc/stdio/Makefile
           libm/Makefile libm/fplib/Makefile avr-libc.spec
           doc/Makefile doc/examples/Makefile
           doc/api/Makefile doc/api/doxygen.config
