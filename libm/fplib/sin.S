@@ -68,7 +68,7 @@ GLOBAL(sin)
        LDI    rB1,0x0F
        LDI    rB0,0xDB		; load -PI/2
        RCALL  _U(__addsf3)	; A - PI/2
-       RCALL  _U(fp_cosinus)
+       RCALL  _U(__fp_cosinus)
 1:
        POP    rB3
        ANDI   rB3,0x80

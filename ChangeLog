@@ -1,3 +1,8 @@
+2005-02-01  Eric B. Weddington  <ericw@evcohs.com>
+
+    * libm/fplib/sin.S: Fix call to __fp_cosinus.
+    [Fixes bug #11805]
+
 2005-01-27  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/Makefile.am (EXTRA_DIST): add all-demos.dox.

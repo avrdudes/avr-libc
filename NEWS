@@ -1,4 +1,10 @@
-*** Changes since avr-libc-1.2:
+*** Changes since avr-libc-1.2.1:
+
+* Bugs fixed:
+
+  [#11805] Fix call to __fp_cosinus in sin().
+
+*** Changes since avr-libc-1.2.0:
 
 * Bugs fixed:
 
