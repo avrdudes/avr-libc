@@ -52,6 +52,7 @@
 -# \ref faq_flashstrings
 -# \ref faq_intpromote
 -# \ref faq_ramoverlap
+-# \ref faq_tinyavr_c
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1051,6 +1052,21 @@ size for each generated function. That's the amount
 of stack required for this function, you have to add
 up that for all functions where you know that the
 calls could be nested.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_tinyavr_c Is it really impossible to program the ATtinyXX in C?
+
+While some small AVRs are not directly supported by the C compiler
+since they do not have a RAM-based stack (and some do not even have
+RAM at all), it is possible anyway to use the general-purpose
+registers as a RAM replacement since they are mapped into the data
+memory region.
+
+Bruce D. Lightner wrote an excellent description of how to do this,
+and offers this together with a toolkit on his web page:
+
+http://lightner.net/avr/ATtinyAvrGcc.html
 
 <small>Back to \ref faq_index.</small>
 
