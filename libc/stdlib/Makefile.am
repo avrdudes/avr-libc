@@ -42,7 +42,8 @@ lib_a_c_sources = \
 	random.c	\
 	realloc.c	\
 	strtol.c	\
-	strtoul.c
+	strtoul.c       \
+	stdlib_private.h
 
 lib_a_asm_sources = \
 	abort.S  \

@@ -1,3 +1,7 @@
+2004-12-30  Theodore A. Roth  <troth@openavr.org>
+
+	* libc/stdlib/Makefile.am (lib_a_c_sources): Add stdlib_private.h.
+
 2004-12-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Last-minute cleanup for release 1.2.0:
