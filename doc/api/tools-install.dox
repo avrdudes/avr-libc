@@ -83,19 +83,14 @@ If you mix and match different versions, you may have problems.
   http://sources.redhat.com/binutils/ <br>
   \ref install_avr_binutils "Installation"
 
-- <b>GCC</b> (3.3) <br>
+- <b>GCC</b> (3.3.1) <br>
   http://gcc.gnu.org/ <br>
   \ref install_avr_gcc "Installation"
 
-- <b>AVR Libc</b> (20020816-cvs) <br>
+- <b>AVR Libc</b> (1.0) <br>
   http://savannah.gnu.org/projects/avr-libc/ <br>
-  \ref install_avr_libc "Installation"
-
-\note As of 2002-08-15, the versions mentioned above are still considered
-experimental and must be obtained from cvs.  Instructions for obtaining the
-latest cvs versions are available at the URLs noted above.  Significant changes
-have been made which are not compatible with previous stable releases.  These
-incompatilities should be noted in the documentation.
+  \ref install_avr_libc "Installation"<br>
+  Note 2003-08-15: The 1.0 branch was created today.
 
 \section optional_tools Optional Tools
 \addindex tools, optional
@@ -103,26 +98,33 @@ incompatilities should be noted in the documentation.
 You can develop programs for AVR devices without the following tools.  They may
 or may not be of use for you.
 
-- <b>uisp</b> (20020626)<br>
+\note The following programs are in constant development and the stated
+versions may be less than current when you read this. Check the given websites
+for the latest versions.
+
+- <b>uisp</b> (20030618)<br>
   http://savannah.gnu.org/projects/uisp/<br>
   \ref install_uisp "Installation"
 
-- <b>avrdude</b> (3.1.0) <br>
+- <b>avrdude</b> (4.1.0) <br>
   http://savannah.nongnu.org/projects/avrdude/ <br>
   \ref install_avrprog "Installation" <br>
   \ref using_avrprog "Usage Notes"
 
-- <b>GDB</b> (5.2.1) <br>
+- <b>GDB</b> (6.0) <br>
   http://sources.redhat.com/gdb/ <br>
-  \ref install_gdb "Installation"
+  \ref install_gdb "Installation"<br>
+  Note 2003-08-15: gdb-6.0 should be released soon.
 
-- <b>Simulavr</b> (0.1.0) <br>
+- <b>Simulavr</b> (0.1.1) <br>
   http://savannah.gnu.org/projects/simulavr/ <br>
   \ref install_simulavr "Installation"
 
-- <b>AVaRice</b> (1.5) <br>
+- <b>AVaRice</b> (2.0) <br>
   http://avarice.sourceforge.net/ <br>
-  \ref install_avarice "Installation"
+  \ref install_avarice "Installation"<br>
+  Note 2003-08-15: avarice-2.0 only exists in cvs, there should be 2.1 release
+  soon.
 
 \section install_avr_binutils GNU Binutils for the AVR target
 \addindex installation, binutils
@@ -285,9 +287,6 @@ $ make install
 \addindex installation, avrprog
 \addindex installation, avrdude
 
-\note This is currently a FreeBSD only program, although adaptation to
-other systems should not be hard.
-
 \note It has been ported to windows (via cygwin) and linux. Other unix systems
 should be trivial to port to.
 
@@ -334,7 +333,7 @@ $ make install
 \note If you are planning on using <tt>avr-gdb</tt>, you will probably want to
 install either \ref install_simulavr "simulavr" or
 \ref install_avarice "avarice" since avr-gdb needs one of these to run as a
-a remote target.
+a remote target backend.
 
 \section install_simulavr Simulavr
 \addindex installation, simulavr
@@ -360,24 +359,34 @@ if you want to have the test programs built in the simulavr source.
 \section install_avarice AVaRice
 \addindex installation, avarice
 
-\note These install notes are specific to avarice-1.5.
+\note These install notes are not applicable to avarice-1.5 or older. You
+probably don't want to use anything that old anyways since there have been
+many improvements and bug fixes since the 1.5 release.
 
-You will have to edit <tt>prog/avarice/Makefile</tt> for avarice in order to
-install into a directory other than <tt>/usr/local/avr/bin</tt>. Edit the
-line which looks like this:
-
-\verbatim
-INSTALL_DIR = /usr/local/avr/bin
-\endverbatim
-
-such that <tt>INSTALL_DIR</tt> is now set to whatever you decided on
-<tt>$PREFIX/bin</tt> to be.
+AVaRice also uses the \c configure system, so to build and install:
 
 \verbatim
-$ gunzip -c avarice-1.5.tar.gz | tar xf -
-$ cd avarice-1.5/prog/avarice
+$ gunzip -c avarice-<version>.tar.gz | tar xf -
+$ cd avarice-<version>
+$ mkdir obj-avr
+$ cd obj-avr
+$ ../configure --prefix=$PREFIX
 $ make
 $ make install
 \endverbatim
+
+\note AVaRice uses the bfd library for accessing various binary file formats.
+You may need to tell the configure script where to find the lib and headers
+for the link to work. This is usually done by invoking the configure script
+like this (Replace <tt><hdr_path></tt> with the path to the \c bfd.h file on
+your system. Replace <tt><lib_path></tt> with the path to \c libbfd.a on your
+system.):
+
+\verbatim
+$ CPPFLAGS=-I<hdr_path> LDFLAGS=-L<lib_path> ../configure --prefix=$PREFIX
+\endverbatim
+
+\note As of 2003-08-15, no offical AVaRice release works like this. Use a
+2.0 snapshot until the 2.1 release is made, or use obtain the source from cvs.
 
 */

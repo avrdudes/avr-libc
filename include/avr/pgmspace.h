@@ -47,13 +47,18 @@
     use these functions, the target device must support either the \c LPM or
     \c ELPM instructions.
 
-    \note These function are an attempt to provide some compatibility with
+    \note These functions are an attempt to provide some compatibility with
     header files that come with IAR C, to make porting applications between
     different compilers easier.  This is not 100% compatibility though (GCC
     does not have full support for multiple address spaces yet).
 
     \note If you are working with strings which are completely based in ram,
-    use the standard string functions described in \ref avr_string. */
+    use the standard string functions described in \ref avr_string.
+
+    \note If possible, put your constant tables in the lower 64K and use
+    pgm_read_byte_near() or pgm_read_word_near() instead of
+    pgm_read_byte_far() or pgm_read_word_far() since it is more efficient that
+    way, and you can still use the upper 64K for executable code. */
 
 #ifndef __PGMSPACE_H_
 #define __PGMSPACE_H_ 1
@@ -275,12 +280,16 @@ typedef long long prog_long_long PROGMEM;
 
 #endif
 
+#ifdef RAMPZ
+
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_far(address_long)
     Read a byte from the program space with a 32-bit (far) address. 
 
     \note The address is a byte address. 
     The address is in the program space. */
+
+#define pgm_read_byte_far(address_long)     __ELPM((unsigned long)(address_long))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_far(address_long)
@@ -289,16 +298,6 @@ typedef long long prog_long_long PROGMEM;
     \note The address is a byte address.
     The address is in the program space. */
 
-/** \ingroup avr_pgmspace
-
-    \note If possible, put your constant tables in the lower 64K and use 
-    pgm_read_byte_near() or pgm_read_word_near() since it is more 
-    efficient that way, and you can still use the upper 64K for 
-    executable code. */
-
-#ifdef RAMPZ
-
-#define pgm_read_byte_far(address_long)     __ELPM((unsigned long)(address_long))
 #define pgm_read_word_far(address_long)     __ELPM_word((unsigned long)(address_long))
 
 #else
@@ -373,11 +372,15 @@ extern PGM_P strerror_P(int);
 
 /** \name Backwards compatibility macros */
 
+/*@{*/
+
 /** \ingroup avr_pgmspace
     \def PRG_RDB
     \deprecated
     Use pgm_read_byte() in new programs. */
 
 #define PRG_RDB(addr)       pgm_read_byte(addr)
+
+/*@}*/
 
 #endif /* __PGMSPACE_H_ */

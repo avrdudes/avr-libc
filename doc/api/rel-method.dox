@@ -86,24 +86,19 @@ releases or cutting branches.
 The following steps should be taken to cut a branch in cvs:
 
 -# Check out a fresh source tree from cvs HEAD.
-
 -# Set the branch-point tag (setting <major> and <minor> accordingly):<br>
    'cvs tag avr-libc-<major>_<minor>-branchpoint'
-
 -# Create the branch:<br>
    'cvs tag -b avr-lib-<major>_<minor>-branch'
-
 -# Update the package version in configure.in (change minor number to next odd
    value) and commit configure.in to cvs. Note that you should still be
    working from cvs HEAD.
-
+-# Update the NEWS file with pending release number and commit to cvs.
 -# Check out a new tree for the branch:<br>
    'cvs co -r avr-lib-<major>_<minor>-branch'
-
 -# Update the package version in configure.in (change the patch number to 90
    to denote that this now a branch leading up to a release and commit
    configure.in to cvs. Note that we are now working on the branch.
-
 -# Announce the branch and the branch tag to the avr-libc-dev list so other
    developers can checkout the branch.
 
@@ -118,6 +113,7 @@ The following steps should be taken way making a release:
 -# Make sure the tree you are working from is on the correct brach:<br>
    'cvs update -r avr-lib-<major>_<minor>-branch'
 -# Update the package version in configure.in and commit it to cvs.
+-# Update the NEWS file if needed and commit to cvs.
 -# Update the gnu tool chain version requirements in the README and commit
    to cvs.
 -# Bring the build system up to date by running reconf and configure.

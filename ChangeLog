@@ -1,5 +1,16 @@
 2003-08-15  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/rel-method.dox: Add note about updating NEWS file.
+	* doc/api/tools-install.dox: Update program versions.
+	Update avarice install notes.
+	* include/avr/pgmspace.h: Add @{ @} around PRG_RDB to quell doxygen
+	warning.
+	Move note about constant tables in lower 64k were doxygen will see it.
+	Move pgm_read_byte_far() and pgm_read_word_far() comments to be
+	directly before macro definitions.
+
+2003-08-15  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/pgmspace.h: Remove extraneous empty lines.
 
 2003-08-14  Theodore A. Roth  <troth@openavr.org>
