@@ -1,5 +1,37 @@
 2004-04-29  Theodore A. Roth  <troth@openavr.org>
 
+	* AvrCommon.am (AVRLIB_CFLAGS): Add -mmcu option.
+	* AvrCommonLibC.am (avr_LIBRARIES): Don't build the intermediate
+	libraries, just build libc.a directly.
+	* configure.ac (CFLAGS): Set to nothing to override any that the env
+	sets and to suppress the default "-g -O2".
+	Don't set the AVR_CRT_* variables since they are no longer used.
+	* include/avr/io.h: Generate an error if the device type is not
+	defined.
+	* libc/misc/Rules.am: Remove unneeded rules and variables.
+	* libc/pmstring/Rules.am: Ditto.
+	* libc/stdio/Rules.am: Ditto.
+	* libc/stdlib/Rules.am: Ditto.
+	* libc/string/Rules.am: Ditto.
+	* libm/fplib/Rules.am: Ditto.
+	* libc/stdlib/Files.am: Add ctype source files.
+	* libc/stdlib/cty_isfalse.S: New file.
+	* libc/stdlib/isalnum.S: New file.
+	* libc/stdlib/isalpha.S: New file.
+	* libc/stdlib/isascii.S: New file.
+	* libc/stdlib/isblank.S: New file.
+	* libc/stdlib/iscntrl.S: New file.
+	* libc/stdlib/isdigit.S: New file.
+	* libc/stdlib/isprint.S: New file.
+	* libc/stdlib/ispunct.S: New file.
+	* libc/stdlib/isspace.S: New file.
+	* libc/stdlib/isxdigit.S: New file.
+	* libc/stdlib/toascii.S: New file.
+	* libc/stdlib/tolower.S: New file.
+	* libc/stdlib/toupper.S: New file.
+
+2004-04-29  Theodore A. Roth  <troth@openavr.org>
+
 	* AvrCommon.am (VPATH): Add fplib to search path.
 	* AvrCommonLibC.am: Enable building of libm.
 	* configure.ac: Set DOCSDIR so it gets substituted in Makefile.am

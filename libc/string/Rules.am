@@ -26,21 +26,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-## Process this file with automake to generate Makefile.in
-
 include $(top_srcdir)/libc/string/Files.am
 
-nodist_lib_string_a_SOURCES = $(string_a_asm_sources)
-
-#string_a_c_objs = $(string_a_c_sources:%.c=%.o)
-
-string_a_asm_objs = $(string_a_asm_sources:%.S=%.o)
-
-# content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
-# according to the multilib subdir (see acinclude.m4 in top directory)
-
-#$(string_a_c_objs): %.o: %.c
-#	$(COMPILE) $(AVRLIB_CFLAGS) -c $< -o $@
-
-$(string_a_asm_objs): %.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
+# vim: set ft=make:

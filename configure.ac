@@ -75,6 +75,10 @@ esac
 
 AM_INIT_AUTOMAKE
 
+# We don't want touse the cflags from the environment since we need control
+# of this when we're building the libs.
+CFLAGS=""
+
 # Checks for programs.
 
 AC_PROG_CC
@@ -105,11 +109,6 @@ esac
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-
-AC_SUBST(AVR_CRT_AT90)
-AC_SUBST(AVR_CRT_TINY)
-AC_SUBST(AVR_CRT_MEGA)
-AC_SUBST(AVR_CRT_OTHER)
 
 # Define this here so all files agree on the name of the manual.
 # This also centralizes the name so it's easier to change.

@@ -30,7 +30,7 @@
 
 AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include
 
-AVRLIB_CFLAGS = -g -Wall -W -Wstrict-prototypes $(AVR_TARGET_DEFS) $(AVR_TARGET_CFLAGS)
+AVRLIB_CFLAGS = -g -Wall -W -Wstrict-prototypes -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_CFLAGS)
 
 AVRLIB_ASFLAGS = -x assembler-with-cpp -Wa,-gstabs -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_ASFLAGS)
 

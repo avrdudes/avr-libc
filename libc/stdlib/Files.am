@@ -46,7 +46,22 @@ stdlib_a_asm_sources = \
 	div.S \
 	exit.S \
 	ldiv.S \
-	setjmp.S
+	setjmp.S \
+	isascii.S \
+	toascii.S \
+	isalnum.S \
+	cty_isfalse.S \
+	isalpha.S \
+	isdigit.S \
+	isxdigit.S \
+	iscntrl.S \
+	isprint.S \
+	isspace.S \
+	isblank.S \
+	ispunct.S \
+	tolower.S \
+	toupper.S
+
 
 stdlib_a_extra_dist = \
 	ctype.S \

@@ -28,13 +28,4 @@
 
 include $(top_srcdir)/libm/fplib/Files.am
 
-nodist_libm_a_SOURCES = $(libm_a_asm_sources)
-
-libm_a_asm_objs = $(libm_a_asm_sources:%.S=%.o)
-
-# content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
-# according to the multilib subdir (see acinclude.m4 in top directory)
-
-$(libm_a_asm_objs): %.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c -o $@ $<
-
+# vim: set ft=make:

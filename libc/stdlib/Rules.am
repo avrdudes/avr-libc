@@ -26,32 +26,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-## Process this file with automake to generate Makefile.in
-
 include $(top_srcdir)/libc/stdlib/Files.am
-
-# these objects are all generated from ctype.S
-stdlib_ctype_asm_objs = \
-	isascii.o toascii.o isalnum.o cty_isfalse.o \
-	isalpha.o isdigit.o isxdigit.o iscntrl.o    \
-	isprint.o isspace.o isblank.o ispunct.o     \
-	tolower.o toupper.o
-
-nodist_lib_stdlib_a_SOURCES = $(stdlib_a_c_sources) $(stdlib_a_asm_sources)
-
-stdlib_a_c_objs = $(stdlib_a_c_sources:%.c=%.o)
-
-stdlib_a_asm_objs = $(stdlib_a_asm_sources:%.S=%.o)
-
-lib_stdlib_a_LIBADD = $(stdlib_ctype_asm_objs)
-
-$(stdlib_ctype_asm_objs): %.o: ctype.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c -DL$(basename $@) $< -o $@
-
-$(stdlib_a_c_objs): %.o: %.c
-	$(COMPILE) $(AVRLIB_CFLAGS) -c $< -o $@
-
-$(stdlib_a_asm_objs): %.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
 
 # vim: set ft=make:

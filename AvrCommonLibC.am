@@ -31,18 +31,12 @@
 # The Makefile.am fragment is only used by targets that support C programming.
 
 avr_LIBRARIES = \
-	lib_stdlib.a \
-	lib_pmstring.a \
-	lib_string.a \
-	lib_misc.a \
-	lib_stdio.a \
+	libc.a \
 	libprintf_min.a \
 	libprintf_flt.a \
 	libscanf_min.a \
 	libscanf_flt.a \
 	libm.a
-
-#libc_a_SOURCES =
 
 include $(top_srcdir)/libc/stdlib/Rules.am
 include $(top_srcdir)/libc/pmstring/Rules.am
@@ -50,5 +44,20 @@ include $(top_srcdir)/libc/string/Rules.am
 include $(top_srcdir)/libc/misc/Rules.am
 include $(top_srcdir)/libc/stdio/Rules.am
 include $(top_srcdir)/libm/fplib/Rules.am
+
+nodist_libc_a_SOURCES = \
+	$(stdlib_a_c_sources) \
+	$(stdlib_a_asm_sources) \
+	$(pmstring_a_asm_sources) \
+	$(string_a_asm_sources) \
+	$(misc_a_asm_sources) \
+	$(stdio_a_c_sources) \
+	$(stdio_a_asm_sources)
+
+nodist_libm_a_SOURCES = \
+	$(libm_a_asm_sources)
+
+libc_a_LIBADD = \
+	$(stdio_a_libadd)
 
 # vim: set ft=make ts=4 sw=4:
