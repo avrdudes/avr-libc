@@ -80,11 +80,11 @@ errors in the text. As a programmer the author knows, that a wrong
 documentation sometimes might be worse than none. Anyway, he decided to offer
 his little knowledge to the public, in the hope to get enough response to
 improve this document. Feel free to contact the author via e-mail. For the
-latest release check http://www.ethernut.de.
+latest release check http://www.ethernut.de/.
 
 Herne, 17th of May 2002
 Harald Kipp
-harald.kipp@egnite.de
+harald.kipp-at-egnite.de
 
 \note As of 26th of July 2002, this document has been merged into the
 documentation for avr-libc. The latest version is now available at 

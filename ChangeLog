@@ -1,3 +1,8 @@
+2003-08-06  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/inline_asm.dox: Fix broken link to ethernut site.
+
 2003-07-21  Eric B. Weddington  <eric@ecentral.com>
 
 	* include/avr/boot.h: Make common bit definitions to handle the mega323.
@@ -12,7 +17,7 @@
 	* libc/misc/eeprom_wblk.S: New file.
 	* include/avr/eeprom.h: New functions.
 	* libc/misc/Makefile.am: Add new modules.
-	NEWS: Note about new functions.
+	* NEWS: Note about new functions.
 	
 2003-07-10  Eric B. Weddington  <eric@ecentral.com>
 
@@ -96,8 +101,8 @@
 
 2003-06-05  Eric B. Weddington  <eric@ecentral.com>
 
-	* include/avr/pgmspace.h: Add __volatile__ to asm macros to fix optimizer
-	blunders; use inttypes.h; formatting.
+	* include/avr/pgmspace.h: Add __volatile__ to asm macros to fix
+	optimizer blunders; use inttypes.h; formatting.
 
 2003-06-03  Theodore A. Roth  <troth@openavr.org>
 
