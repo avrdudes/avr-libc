@@ -2,7 +2,7 @@
 
 # @configure_input@
 
-# Doxygen configuration file for the osavr project.
+# Doxygen configuration file for the avr-libc project.
 
 # Doxyfile 1.2.16
 
