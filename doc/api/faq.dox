@@ -1,0 +1,104 @@
+/* Copyright (c) 2002, Joerg Wunsch
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \page faq Frequently Asked Questions
+
+<b>\subsection faq_index FAQ Index
+</b>
+
+-# \ref faq_index
+-# \ref faq_volatile
+-# \ref faq_libm
+-# \ref faq_regbind
+
+<b>\subsection faq_volatile My program doesn't recognize a variable updated within an interrupt routine
+</b>
+
+When using the optimizer, in a loop like the following one:
+
+\code
+uint8_t flag;
+...
+
+	while (flag == 0) {
+		...
+	}
+\endcode
+
+the compiler will typically optimize the access to \c flag completely
+away, since its code path analysis shows that nothing inside the loop
+could change the value of \c flag anyway.  To tell the compiler that
+this variable could be changed outside the scope of its code path
+analysis (e. g. from within an interrupt routine), the variable needs
+to be declared like:
+
+\code
+volatile uint8_t flag;
+\endcode
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_libm I get "undefined reference to..." for functions like "sin()"
+</b>
+
+In order to access the mathematical functions that are declared in
+<tt>\<math.h\></tt>, the linker needs to be told to also link the
+mathematical library, <tt>libm.a</tt>.
+
+Typically, system libraries like <tt>libm.a</tt> are given to the
+final C compiler command line that performs the linking step by adding
+a flag <tt>-lm</tt> at the end.  (That is, the initial \a lib and the
+filename suffix from the library are written immediately after a \a -l
+flag.  So for a <tt>libfoo.a</tt> library, <tt>-lfoo</tt> needs to be
+provided.)  This will make the linker search the library in a path
+known to the system.
+
+An alternative would be to specify the full path to the
+<tt>libm.a</tt> file at the same place on the command line, i. e. \a
+after all the object files (<tt>*.o</tt>).  However, since this
+requires knowledge of where the build system will exactly find those
+library files, this is deprecated for system libraries.
+
+<small>Back to \ref faq_index.
+</small>
+
+<b>\subsection faq_regbind How to permanently bind a variable to a register?
+</b>
+
+This can be done with
+
+\code
+register unsigned char counter asm("r3");
+\endcode
+
+See \ref inline_asm for more details.
+
+<small>Back to \ref faq_index.
+</small>
+
+*/
