@@ -30,6 +30,17 @@
 
 #include <avr/io.h>
 
+/* Figure out which type of sleep mode the selected device uses (1, 2 or 3
+   bits) */
+
+#if defined(SM) && ! defined(SM0) && ! defined(SM1) && ! defined(SM2)
+#  define _SLEEP_TYPE 1
+#elif ! defined(SM) && defined(SM0) && defined(SM1) && ! defined(SM2)
+#  define _SLEEP_TYPE 2
+#elif ! defined(SM) && defined(SM0) && defined(SM1) && defined(SM2)
+#  define _SLEEP_TYPE 3
+#endif
+
 /** \defgroup avr_sleep Power Management and Sleep Modes
 
     \code #include <avr/sleep.h>\endcode
@@ -42,12 +53,20 @@
 
 /* Mask of all the sleep mode bits. */
 
-#define SLEEP_MODE_MASK (_BV(SM0) | _BV(SM1) | _BV(SM2))
+#if _SLEEP_TYPE == 1
+#  define _SLEEP_MODE_MASK _BV(SM)
+#elif _SLEEP_TYPE == 2
+#  define _SLEEP_MODE_MASK (_BV(SM0) | _BV(SM1))
+#elif _SLEEP_TYPE == 3
+#  define _SLEEP_MODE_MASK (_BV(SM0) | _BV(SM1) | _BV(SM2))
+#else
+#  error "No SLEEP mode defined for device."
+#endif
 
 /** \name Sleep Modes
 
-    \note FIXME: TRoth/2002-11-01: These modes were taken from the mega128
-    datasheet and might not be applicable or correct for all devices. */
+    \note Some of these modes are not available on all devices. See the
+    datasheet for target device for the available sleep modes. */
 
 /* @{ */
 
@@ -55,6 +74,17 @@
     \def SLEEP_MODE_IDLE
     Idle mode. */
 #define SLEEP_MODE_IDLE         0
+
+#if _SLEEP_TYPE == 1
+
+#  define SLEEP_MODE_PWR_DOWN   _BV(SM)
+
+#elif _SLEEP_TYPE == 2
+
+#  define SLEEP_MODE_PWR_DOWN   _BV(SM1)
+#  define SLEEP_MODE_PWR_SAVE   (_BV(SM0) | _BV(SM1))
+
+#else /* _SLEEP_TYPE == 3 */
 
 /** \ingroup avr_sleep
     \def SLEEP_MODE_ADC
@@ -81,6 +111,8 @@
     Extended Standby Mode. */
 #define SLEEP_MODE_EXT_STANDBY  (_BV(SM0) | _BV(SM1) | _BV(SM2))
 
+#endif /* _SLEEP_TYPE == 3 */
+
 /* @} */
 
 /** \name Sleep Functions */
@@ -94,7 +126,11 @@
 #if defined(DOXYGEN)
 extern void set_sleep_mode (uint8_t mode);
 #else
-#define set_sleep_mode(mode)   (MCUCR = ((MCUCR & ~SLEEP_MODE_MASK) | (mode))
+# if defined (SMCR)
+#  define set_sleep_mode(mode) (SMCR = ((SMCR & ~_SLEEP_MODE_MASK) | (mode)))
+# else
+#  define set_sleep_mode(mode) (MCUCR = ((MCUCR & ~_SLEEP_MODE_MASK) | (mode)))
+# endif
 #endif
 
 /** \ingroup avr_sleep 
