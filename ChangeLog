@@ -1,5 +1,9 @@
 2005-01-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libm/fplib/ldexp.S: remove jump to itself.
+
+2005-01-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libm/fplib/addsf3.S: Make labels local, add Id line.
 	* libm/fplib/addsf3x.S: (Ditto.)
 	* libm/fplib/asin.S: (Ditto.)

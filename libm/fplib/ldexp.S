@@ -72,9 +72,6 @@ GLOBAL(ldexp)
 10:
         ADD     rA3,rPL
         adc     rT1c,rPH		;
-				; check for overflow
-        BRNE    1f
-1:
         RJMP    _U(__fp_merge)		; rT0 must not be cleared : rAE=0 no rounding anyway
 
           ENDFUNC
