@@ -82,7 +82,6 @@ lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
 # file until now
 EXTRA_DIST = \
 	fplib.inc      \
-	irexp.S        \
 	readme.dtostre \
 	readme.fplib   \
 	readme.strtod

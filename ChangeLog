@@ -1,3 +1,8 @@
+2003-01-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libm/fplib/Makefile.am: remove irexp.S.
+	* libm/fplib/irexp.S: remove.
+
 2003-01-14  Theodore A. Roth  <troth@openavr.org>
 
 	* doc/TODO: Sync http refs up with new archive.
