@@ -1,5 +1,9 @@
 2003-01-14  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/TODO: Sync http refs up with new archive.
+
+2003-01-14  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/iom169.h: Fix typo (TCNT9 -> TCNT0).
 	* include/avr/iom64.h: Fix typo (For TCCR0, CS1n -> CS0n).
 

@@ -23,24 +23,25 @@ Before 1.0:
         * how to roll your own crt*.o ???
         * the mechanism behind include/avr/io*.h [Joerg has patch [5].]
     - Move out the common register definitions into <avr/io.h>
-      [Joerg has patch [5].]
+      [Joerg has done a major part of it, but there might be more to move
+      around.]
 
 After 1.0:
     - Figure out how to remove __ prefix from function args in dox.
-      [Ted has workaround [6].]
+      [Ted has workaround [5].]
     - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
       [Joerg has patch [1] for this that just needs some love before it's
       committed.]
     - optimize strlcpy and strlcat
-      [Eric Weddington has submitted a patch [2] with optimized versions.
+      [Eric Weddington has submitted a patch [2a] [2b] with optimized versions.
 	  Needs review/testing before commit.]
     - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
       sys/systemcfg.h?
     - testsuite [4]
 
-[1] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000084.html
-[2] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000033.html
-[3] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-August/000147.html
-[4] http://mail.freesoftware.fsf.org/pipermail/avr-libc-dev/2002-September/000246.html
-[5] http://mail.gnu.org/pipermail/avr-libc-dev/2002-December/000655.html
-[6] [Mail has yet to be archived. See: Re: [avr-libc-dev] Ordered todo on Wed, 11 Dec 2002]
+[1] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-08/msg00054.html
+[2a] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-08/msg00002.html
+[2b] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-08/msg00003.html
+[3] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-08/msg00117.html
+[4] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-09/msg00038.html
+[5] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-12/msg00034.html
