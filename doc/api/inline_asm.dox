@@ -909,7 +909,7 @@ extern long Calc(void) asm ("CALCULATE");
 Calling the function \c Calc() will create assembler instructions to call the
 function \c CALCULATE.
 
-\section faq Frequently Answered Questions
+\section inlasm_faq Frequently Answered Questions
 
 \subsection constants Using Constants
 
@@ -949,7 +949,6 @@ can be used in C programs.
 <b><em>A GNU Development Environment for the AVR Microcontroller</em></b>
 covers the details of the GNU Tools that are specific to the AVR family of
 processors.  By Rich Neswold.
-<a href="http://www.enteract.com/~rneswold/avr/">
-http://www.enteract.com/~rneswold/avr/</a>
+http://www.enteract.com/~rneswold/avr/
 
 */
