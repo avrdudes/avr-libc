@@ -1,5 +1,10 @@
 2003-06-10  Eric B. Weddington  <eric@ecentral.com>
 
+	* include/avr/sfr_defs.h: Add more comments on the return value of
+	the bit_is_set and bit_is_clear macros. [Bug #3839]
+
+2003-06-10  Eric B. Weddington  <eric@ecentral.com>
+
 	* include/avr/sfr_defs.h: Deprecate inb,outb,inw,outw,cbi,sbi macros.
 	Remove usage of above macros.
 	* include/avr/ina90.h: Remove usage of inb / outb macros.

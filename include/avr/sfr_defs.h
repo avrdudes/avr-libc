@@ -201,7 +201,9 @@
 
     \code #include <avr/io.h>\endcode
 
-    Test whether bit \c bit in IO register \c sfr is set. */
+    Test whether bit \c bit in IO register \c sfr is set. 
+    This will return a 0 if the bit is clear, and non-zero
+    if the bit is set. */
 
 #define bit_is_set(sfr, bit) (sfr & _BV(bit))
 
@@ -210,7 +212,9 @@
 
     \code #include <avr/io.h>\endcode
 
-    Test whether bit \c bit in IO register \c sfr is clear. */
+    Test whether bit \c bit in IO register \c sfr is clear. 
+    This will return non-zero if the bit is clear, and a 0
+    if the bit is set. */
 
 #define bit_is_clear(sfr, bit) (!(sfr & _BV(bit)))
 
