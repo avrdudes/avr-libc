@@ -32,7 +32,8 @@
 #
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
-CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config
+CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config \
+                       *.png *.eps
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        main_page.dox \
@@ -75,6 +76,8 @@ FIG2DEV= fig2dev
 
 .fig.png:
 	$(FIG2DEV) -L png $< $@
+	$(PNGTOPNM) $@ > tmp.pnm
+	$(PNMTOPNG) -transparent white tmp.pnm >$@ && rm tmp.pnm
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig
 

@@ -1,5 +1,15 @@
 2002-10-28  Theodore A. Roth  <troth@openavr.org>
 
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* configure.in: Fix typo.
+	Update my email address.
+	Add CHECK_PNG_UTILS.
+	* doc/api/Makefile.am: Add png and eps files to clean list.
+	Add transparency to png images.
+	* doc/examples/demo/Makefile: Add transparency to png images.
+
+2002-10-28  Theodore A. Roth  <troth@openavr.org>
+
 	* doc/api/Makefile.am: Use png instead of gif images.
 	* doc/api/malloc.dox: Ditto.
 

@@ -126,7 +126,7 @@ dnl
 dnl NOTE: Don't put a '-' in the version number or rpm will puke 
 dnl when building the package.
 dnl
-AM_INIT_AUTOMAKE(avr-libc, 20021022cvs)
+AM_INIT_AUTOMAKE(avr-libc, 20021028cvs)
 
 dnl Use the AC_CHECK_TOOL macro to find also cross tools
 AC_CHECK_TOOL(AS, as, as)
@@ -153,9 +153,8 @@ esac
 
 AC_PROG_INSTALL
 
-
 dnl troth/2002-07-12: The CHECK_DOXYGEN macro should be moved to a config
-dnl dir. I put it here until I figure out who to integrate the config dir.
+dnl dir. I put it here until I figure out how to integrate the config dir.
 
 dnl
 dnl @synopsis CHECK_DOXYGEN
@@ -163,7 +162,7 @@ dnl
 dnl This macro checks if doxygen is installed on the build system
 dnl
 dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
-dnl @author Theodore A. Roth <troth@verinet.com>
+dnl @author Theodore A. Roth <troth@openavr.org>
 dnl
 AC_DEFUN(CHECK_DOXYGEN,[dnl
 dnl
@@ -197,6 +196,54 @@ AC_SUBST(INSTALL_DOX_HTML)
 ])dnl
 
 CHECK_DOXYGEN
+
+dnl
+dnl @synopsis CHECK_PNG_UTILS
+dnl
+dnl This macro checks if pngtopnm and pnmtopng are installed. If they are not
+dnl installed we just fake it with "cat".
+dnl
+dnl We use these in the dox to insert transparency into the png images as such:
+dnl
+dnl   $ pngtopnm foo.png > tmp.pnm
+dnl   $ pnmtopng -transparent white tmp.pnm > foo.png
+dnl
+dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
+dnl @author Theodore A. Roth <troth@openavr.org>
+dnl
+AC_DEFUN(CHECK_PNG_UTILS,[dnl
+dnl
+AC_MSG_CHECKING(for pngtopnm)
+has_pngtopnm=`pngtopnm --version 2>&1 | grep -c Version`
+if test "$has_pngtopnm" = "1"; then
+	AC_MSG_RESULT(yes)
+	PNGTOPNM="pngtopnm"
+else
+	AC_MSG_RESULT(no)
+	PNGTOPNM="cat"
+fi
+dnl
+AC_MSG_CHECKING(for pngtopnm)
+has_pnmtopng=`pnmtopng --version 2>&1 | grep -c Version`
+if test "$has_pnmtopng" = "1"; then
+	AC_MSG_RESULT(yes)
+	PNMTOPNG="pnmtopng"
+else
+	AC_MSG_RESULT(no)
+	PNMTOPNG="cat"
+fi
+dnl
+dnl pnmtopng will fail if the input file is a png instead of a pnm.
+dnl
+if test "$PNMTOPNG" = "cat"; then
+	PNGTOPNM="cat"
+fi
+dnl
+AC_SUBST(PNGTOPNM)
+AC_SUBST(PNMTOPNG)
+])dnl
+
+CHECK_PNG_UTILS
 
 if test "$versioned_doc" = "yes"; then
 	DOC_INST_DIR='$(DESTDIR)$(datadir)/doc/avr-libc-$(VERSION)'

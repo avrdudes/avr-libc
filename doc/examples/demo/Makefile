@@ -70,6 +70,8 @@ esrec: $(PRG)_eeprom.srec
 # by the casual user.
 
 FIG2DEV                 = fig2dev
+PNGTOPNM                = pngtopnm
+PNMTOPNG                = pnmtopng
 EXTRA_CLEAN_FILES       = *.hex *.bin *.srec
 
 dox: eps png pdf
@@ -86,3 +88,6 @@ pdf: $(PRG).pdf
 
 %.png: %.fig
 	$(FIG2DEV) -L png $< $@
+	$(PNGTOPNM) $@ > tmp.pnm
+	$(PNMTOPNG) -transparent white tmp.pnm >$@ && rm tmp.pnm
+
