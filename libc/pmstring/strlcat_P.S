@@ -33,7 +33,7 @@
 */
 
 
-/** \ingroup avr_pmstring
+/** \ingroup avr_pgmspace
     \fn size_t strlcat_P (char *dst, PGM_P, size_t siz)
     \brief Concatenate two strings.
 
