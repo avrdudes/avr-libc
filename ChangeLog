@@ -1,5 +1,9 @@
 2003-11-18  Theodore A. Roth  <troth@openavr.org>
 
+	* NEWS: Add note about new _crc_ccitt_update function.
+
+2003-11-18  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Set version to 1.0.1.20031118.
 	* include/avr/crc16.h (_crc16_update): Add line break to dox.
 	(_crc_xmodem_update): Ditto.

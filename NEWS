@@ -4,6 +4,7 @@
 
 New functions:
   _crc_xmodem_update
+  _crc_ccitt_update
 
 * Pin names for ports are now consistent for all devices.
 
