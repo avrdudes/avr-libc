@@ -1,5 +1,9 @@
 2002-11-18  Theodore A. Roth  <troth@openavr.org>
 
+	* libc/string/memcmp.S: Add note about unsigned nature of compare.
+
+2002-11-18  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* doc/api/inline_asm.dox: Update URL for project.
 	Remove link to Rich Neswold's document since it is now (mostly) merged
