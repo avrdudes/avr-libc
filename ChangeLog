@@ -1,5 +1,10 @@
 2003-09-08  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/inline_asm.dox: Add 'movw' to the mnemonic constraints
+	table. [Pointed out by Bruce D. Lightner]
+
+2003-09-08  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/boot.h: Set __SPM_REG using simpler logic.
 
 2003-09-08  Theodore A. Roth  <troth@openavr.org>
