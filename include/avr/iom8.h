@@ -52,9 +52,11 @@
 
 /* ADC */
 #define ADCW	_SFR_IO16(0x04)
+#define ADC	_SFR_IO16(0x04)
 #define ADCL	_SFR_IO8(0x04)
 #define ADCH	_SFR_IO8(0x05)
 #define ADCSR	_SFR_IO8(0x06)
+#define ADCSRA	_SFR_IO8(0x06)  /* Changed in 2486H-AVR-09/02 */
 #define ADMUX	_SFR_IO8(0x07)
 
 /* analog comparator */
@@ -140,6 +142,7 @@
 
 #define GIFR	_SFR_IO8(0x3A)
 #define GIMSK	_SFR_IO8(0x3B)
+#define GICR	_SFR_IO8(0x3B)   /* Changed in 2486H-AVR-09/02 */
 
 /* 0x3C reserved (OCR0?) */
 
@@ -173,7 +176,7 @@
 
 /* Bit numbers */
 
-/* GIMSK */
+/* GIMSK / GICR */
 #define INT1	7
 #define INT0	6
 #define IVSEL	1
@@ -224,6 +227,13 @@
 #define TWIE	0
 
 /* TWAR */
+#define TWA6    7
+#define TWA6    6
+#define TWA6    5
+#define TWA6    4
+#define TWA6    3
+#define TWA6    2
+#define TWA6    1
 #define TWGCE	0
 
 /* TWSR */
@@ -363,7 +373,6 @@
 #define PINB0	0
 
 /* PORTC */
-#define PC7	 7
 #define PC6	 6
 #define PC5	 5
 #define PC4	 4
@@ -373,7 +382,6 @@
 #define PC0	 0
 
 /* DDRC */
-#define DDC7	7
 #define DDC6	6
 #define DDC5	5
 #define DDC4	4
@@ -383,7 +391,6 @@
 #define DDC0	0
 
 /* PINC */
-#define PINC7	7
 #define PINC6	6
 #define PINC5	5
 #define PINC4	4
@@ -467,7 +474,7 @@
 #define ACIS1	1
 #define ACIS0	0
 
-/* ADCSR */
+/* ADCSR / ADCSRA */
 #define ADEN	7
 #define ADSC	6
 #define ADFR	5
