@@ -1,3 +1,8 @@
+2003-08-26  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom162.h (TCCR1A): Add missing bit values.
+
 2003-08-15  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Set version to 0.99.90.20030815.
