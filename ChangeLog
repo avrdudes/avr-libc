@@ -1,3 +1,16 @@
+2004-04-28  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/eeprom.h: Remove deprecated file.
+	* include/ina90.h: Ditto.
+	* include/interrupt.h: Ditto.
+	* include/io.h: Ditto.
+	* include/pgmspace.h: Ditto.
+	* include/progmem.h: Ditto.
+	* include/sig-avr.h: Ditto.
+	* include/twi.h: Ditto.
+	* include/wdt.h: Ditto.
+
 2004-04-27  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in: Fix typo when adding crtm168.o to AVR_CRT_MEGA.
