@@ -1,3 +1,7 @@
+2002-10-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdlib.h: make doxygen work.
+
 2002-10-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdio/vfprintf.c: implement %p.
