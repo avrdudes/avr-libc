@@ -210,13 +210,7 @@ You may also make use of some special registers.
     <td><tt>__zero_reg__</tt></td>
     <td>Register r1, always zero</td>
   </tr>
-  <tr>
-    <td><tt>__PC__</tt></td>
-    <td>Program counter</td>
-  </tr>
 </table>
-
-FIXME: troth: is it __PC__ or _PC_?
 
 Register \c r0 may be freely used by your assembler code and need not be
 restored at the end of your code. It's a good idea to use \c __tmp_reg__ and
