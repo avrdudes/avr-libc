@@ -1,3 +1,10 @@
+2003-03-17  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/stdio.h, libc/stdio/fdevopen.c:
+	Move dox comment for fdevopen() from stdio.h to fdevopen.c to work
+	around a broken html link due to a bug in doxygen.
+
 2003-03-03  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

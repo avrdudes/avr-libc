@@ -203,38 +203,6 @@ extern "C" {
 
 extern struct __file *__iob[];
 
-/**
-   This function is a replacement for \c fopen().
-
-   It opens a stream for a device where the actual device
-   implementation needs to be provided by the application.  If
-   successful, a pointer to the structure for the opened stream is
-   returned.  Reasons for a possible failure currently include that
-   neither the \c put nor the \c get argument have been provided, thus
-   attempting to open a stream with no IO intent at all, or that
-   insufficient dynamic memory is available to establish a new stream.
-
-   If the \c put function pointer is provided, the stream is opened
-   with write intent.  The function passed as \c put shall take one
-   character to write to the device as argument , and shall return 0
-   if the output was successful, and a nonzero value if the character
-   could not be sent to the device.
-
-   If the \c get function pointer is provided, the stream is opened
-   with read intent.  The function passed as \c get shall take no
-   arguments, and return one character from the device, passed as an
-   \c int type.  If an error occurs when trying to read from the
-   device, it shall return \c -1.
-
-   If both functions are provided, the stream is opened with read
-   and write intent.
-
-   The first stream opened with read intent is assigned to \c stdin,
-   and the first one opened with write intent is assigned to both,
-   \c stdout and \c stderr.
-
-   The third parameter \c opts is currently unused, but reserved for
-   future extensions.  */
 extern FILE	*fdevopen(int (*__put)(char), int (*__get)(void), int __opts);
 
 /**
