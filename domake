@@ -22,6 +22,8 @@
 
 # where does it go? (allow to overwrite it at the command line)
 : ${PREFIX:=/usr/local}
+# which make utility to use?  Some installations might call that gmake.
+: ${MAKE:=make}
 
 if test ! -f ./build/Makefile; then
    echo "You must run doconf first!"
@@ -30,5 +32,5 @@ fi
 
 cd build
 PATH=$PREFIX/bin:$PATH
-make $*
+${MAKE} $*
 cd ..

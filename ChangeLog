@@ -1,5 +1,9 @@
 2002-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* domake: Allow for environmental override of ${MAKE}.
+
+2002-08-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* reconf: Extend the automake/autoconf checks to allow for
 		customized executable names for the versions required.
 
