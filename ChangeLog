@@ -1,3 +1,9 @@
+2002-12-17  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom169.h: Revert premature patch (from Joerg's work in
+	progress).
+
 2002-12-16  Theodore A. Roth  <troth@openavr.org>
 
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.

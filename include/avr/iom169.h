@@ -42,6 +42,8 @@
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
+#include <avr/sfr_defs.h>
+
 /* I/O registers */
 
 /* Port A */
@@ -97,17 +99,12 @@
 /* General Purpose I/O Register 0 */
 #define GPIOR0 _SFR_IO8(0x1E)
 
-#undef EECR
 /* EEPROM Control Register */
 #define EECR   _SFR_IO8(0x1F)
 
-#undef EEDR
 /* EEPROM Data Register */
 #define EEDR   _SFR_IO8(0x20)
 
-#undef EEAR
-#undef EEARL
-#undef EEARH
 /* EEPROM Address Register */
 #define EEAR   _SFR_IO16(0x21)
 #define EEARL  _SFR_IO8(0x21)
@@ -157,6 +154,14 @@
 
 /* Store Program Memory Control and Status Register */
 #define SPMCSR _SFR_IO8(0x37)
+
+/* Stack Pointer */
+#define SP     _SFR_IO16(0x3D)
+#define SPL    _SFR_IO8(0x3D)
+#define SPH    _SFR_IO8(0x3E)
+
+/* Status Register */
+#define SREG   _SFR_IO8(0x3F)
 
 /* Watchdog Timer Control Register */
 #define WDTCR  _SFR_MEM8(0x60)
@@ -632,6 +637,12 @@
 #define PCIE0  6
 #define INT0   0
 
+/* EECR */
+#define EERIE	3
+#define EEMWE	2
+#define EEWE	1
+#define EERE	0
+
 /* GTCCR */
 #define TSM    7
 #define PSR2   1
@@ -946,6 +957,14 @@
 #define SEG2   2
 #define SEG1   1
 #define SEG0   0
+
+/* Pointer registers (same for all AVR devices so far) */
+#define XL r26
+#define XH r27
+#define YL r28
+#define YH r29
+#define ZL r30
+#define ZH r31
 
 /* Last memory addresses */
 #define RAMEND		0x4FF
