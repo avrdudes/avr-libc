@@ -1,3 +1,9 @@
+2004-04-30  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.ac (AC_INIT): Bump version.
+	* devtools/gen-avr-lib-tree.sh: Use /bin/sh instead of /bin/bash in the
+	she-bang.
+
 2004-04-29  Theodore A. Roth  <troth@openavr.org>
 
 	* AvrCommon.am (AVRLIB_CFLAGS): Add -mmcu option.
