@@ -4,6 +4,7 @@
 	email address.
 	* doc/api/tools-install.dox: Remove all explicit version
 	numbers, recommend the latest released version instead.
+	* doc/api/faq.dox: minor cleanup to the ROM string example.
 
 2005-01-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
