@@ -1,5 +1,9 @@
 2003-01-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/faq.dox: updated indirect IO port access section.
+
+2003-01-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libm/fplib/Makefile.am: remove irexp.S.
 	* libm/fplib/irexp.S: remove.
 

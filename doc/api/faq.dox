@@ -590,6 +590,22 @@ function which uses a passed by reference io port address and thus the use of
 a function over a macro could save you some code space, but still at a cost of
 execution speed.
 
+Care should be taken when such an indirect port access is going to one
+of the 16-bit IO registers where the order of write access is critical
+(like some timer registers).  All versions of avr-gcc up to 3.3 will
+generate instructions that use the wrong access order in this
+situation (since with normal memory operands where the order doesn't
+matter, this sometimes yields shorter code).
+
+See
+http://mail.nongnu.org/archive/html/avr-libc-dev/2003-01/msg00044.html
+for a possible workaround.
+
+avr-gcc versions after 3.3 have been fixed in a way where this
+optimization will be disabled if the respective pointer variable is
+declared to be \c volatile, so the correct behaviour for 16-bit IO
+ports can be forced that way.
+
 <small>Back to \ref faq_index.</small>
 
 \section faq_reg_usage What registers are used by the C compiler?
