@@ -1,5 +1,9 @@
 2003-09-08  Theodore A. Roth  <troth@openavr.org>
 
+	* include/avr/boot.h: Set __SPM_REG using simpler logic.
+
+2003-09-08  Theodore A. Roth  <troth@openavr.org>
+
 	* include/avr/boot.h: Move header protector before dox.
 	Expose boot loader example code to doxygen.
 	Expose todo note to doxygen.
