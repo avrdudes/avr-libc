@@ -1,3 +1,12 @@
+2004-11-02  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+
+	* acconfig.h: Add modified BSD license header.
+	* avr-libc.spec.in: Ditto.
+	* devtools/cr_check.py: Ditto.
+	* xml/Validate.py: Ditto.
+
 2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
 
 	* doc/INSTALL: Update release versions compatible with avr-libc and
@@ -66,8 +75,8 @@
 
 2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
 
-	* include/stdlib.h: Correct license with permission from Marek Michalkiewicz
-	and Joerg Wunsch.
+	* include/stdlib.h: Correct license with permission from Marek
+	Michalkiewicz and Joerg Wunsch.
 	* include/avr/io.h: Ditto.
 
 2004-10-29  Eric B. Weddington  <ericw@evcohs.com>
