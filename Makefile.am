@@ -1,4 +1,4 @@
-# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2002, 2005 Reinhard Jessich  <reinhard.jessich@telering.at>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -94,6 +94,7 @@ libscanf_min_a_SOURCES =
 libscanf_flt_a_SOURCES =
 
 EXTRA_DIST = config-ml.in doconf dodist domake reconf LICENSE common include \
+             ChangeLog-2004 \
              ChangeLog-2003 \
              ChangeLog-2002
 
