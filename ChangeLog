@@ -1,3 +1,11 @@
+2004-04-06  Theodore A. Roth  <troth@openavr.org>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* include/avr/iom168.h: New file.
+	* include/avr/iom48.h: New file.
+	* include/avr/iom88.h: New file.
+	* include/avr/iomx8.h: New file.
+
 2004-04-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/main_page.dox, faq.dox: Add reference to Bruce Lightner's
