@@ -46,7 +46,7 @@ data in those file.
 <!ELEMENT device (
     version,
     description?,
-    memory_info,
+    memory_sizes,
     interrupts,
     ioreg+
 )>
@@ -68,7 +68,7 @@ data in those file.
         <!ELEMENT int_sram_size (#PCDATA)>
             <!ATTLIST int_sram_size start_addr CDATA #REQUIRED>
         <!ELEMENT ext_sram_size (#PCDATA)>
-            <!ATTLIST int_sram_size start_addr CDATA #REQUIRED>
+            <!ATTLIST ext_sram_size start_addr CDATA #REQUIRED>
 
     <!ELEMENT interrupts (vector+)>
         <!-- insn_size in bytes -->

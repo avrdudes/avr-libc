@@ -1,5 +1,11 @@
 2004-06-22  Theodore A. Roth  <troth@openavr.org>
 
+	* xml/Atmel2libc.py: Fixes to allow validation of generated file.
+	* xml/Device.dtd: Ditto.
+	* xml/Validate.py: New file.
+
+2004-06-22  Theodore A. Roth  <troth@openavr.org>
+
 	* xml/Device.dtd: Fix some syntax errors.
 
 2004-06-22  Theodore A. Roth  <troth@openavr.org>

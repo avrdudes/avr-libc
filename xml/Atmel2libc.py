@@ -185,7 +185,7 @@ def dump_header (root, depth=0):
 def dump_footer (root):
     print '</device>'
 
-def dump_memory_info (root):
+def dump_memory_sizes (root):
     path = ['AVRPART', 'MEMORY']
     mem = root.getSubTree (path)
 
@@ -200,14 +200,14 @@ def dump_memory_info (root):
     xsram_size = int (xsram.getElements ('SIZE')[0].getData ())
     xsram_start = xsram.getElements ('START_ADDR')[0].getData ()[1:]
 
-    print '  <memory_info>'
+    print '  <memory_sizes>'
     print '    <flash_size>0x%x</flash_size>' % (flash_size)
     print '    <eeprom_size>0x%x</eeprom_size>' % (eep_size)
     print '    <int_sram_size start_addr="0x%s">0x%x</int_sram_size>' % (
         isram_start, isram_size)
     print '    <ext_sram_size start_addr="0x%s">0x%x</ext_sram_size>' % (
         xsram_start, xsram_size)
-    print '  </memory_info>'
+    print '  </memory_sizes>'
 
 def dump_vectors (root):
     """Get the interupt vectors.
@@ -233,8 +233,8 @@ def dump_vectors (root):
     # Determine the size of the vector insn from the address of the 2nd vector.
     insn_size = vectors[1][0]
 
-    print '  <interrupts vector_size="%d" num_vects="%d">' % (insn_size,
-                                                              nvects)
+    print '  <interrupts insn_size="%d" num_vects="%d">' % (insn_size,
+                                                            nvects)
     n = 0
     for v in vectors:
         print '    <vector addr="0x%04x" num="%d" name="%s">' % (v[0], n, v[1])
@@ -244,6 +244,10 @@ def dump_vectors (root):
         n += 1
     print '  </interrupts>'
 
+def dump_ioregs (root):
+    print '  <ioreg name="" addr="">'
+    print '  </ioreg>'
+
 if __name__ == '__main__':
     import sys
 
@@ -251,6 +255,7 @@ if __name__ == '__main__':
     root = parser.Parse(sys.argv[1])
 
     dump_header (root)
-    dump_memory_info (root)
+    dump_memory_sizes (root)
     dump_vectors (root)
+    dump_ioregs (root)
     dump_footer (root)
