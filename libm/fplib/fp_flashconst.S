@@ -45,10 +45,10 @@
 #include "gasava.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, fp_flashconst)
-          FUNCTION(fp_flashconst)
+          TEXT_SEG(fplib, __fp_flashconst)
+          FUNCTION(__fp_flashconst)
 
-GLOBAL(fp_flashconst)
+GLOBAL(__fp_flashconst)
     LPMRdZpp(rB3)
     LPMRdZpp(rB2)
     LPMRdZpp(rB1)

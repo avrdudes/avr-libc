@@ -50,8 +50,8 @@
 #include "gasava.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, fp_powerseries)
-          FUNCTION(fp_powerseries)
+          TEXT_SEG(fplib, __fp_powerseries)
+          FUNCTION(__fp_powerseries)
 
  #define rGrade rS5
  #define rFlags rS4
@@ -60,7 +60,7 @@
  #define rArg1  rS1
  #define rArg0  rS0
 
-GLOBAL(fp_powerseries)
+GLOBAL(__fp_powerseries)
     MOV    rT0,rA3
     RCALL  _U(__fp_split1)	; call fp_split before pushing
 
@@ -117,7 +117,7 @@ GLOBAL(fp_powerseries)
 
  fp_powerloop:
                                ; AX preset with argument, rFlags.7 sign of AX
-    RCALL  _U(fp_flashconst)  ; BX = *array[n]
+    RCALL  _U(__fp_flashconst)  ; BX = *array[n]
 
     BST    rB2,7               ; store sign(B) to T
     ORI    rB2,0x80            ; set implicit one
@@ -137,7 +137,7 @@ GLOBAL(fp_powerseries)
     RCALL  _U(__mulsf3x)	; AX *= BX, sign T and rFlags stays untouched
     POP    ZH
     POP    ZL
-    RCALL  _U(fp_flashconst)	; BX = *array[n]
+    RCALL  _U(__fp_flashconst)	; BX = *array[n]
     CLR    rBE
 
 	/* now set sign right :

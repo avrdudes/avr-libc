@@ -91,7 +91,7 @@ GLOBAL(log)
 
    LDI     ZL,LOW(table_log)
    LDI     ZH,HIGH(table_log)
-   RCALL   _U(fp_powerseries)
+   RCALL   _U(__fp_powerseries)
 
    MOV    rT0,rS3
    MOV    rS3,rA3

@@ -54,7 +54,7 @@ GLOBAL(sinh)
    PUSH  rA1
    PUSH  rA2
    PUSH  rA3
-   RCALL _U(inverse)
+   RCALL _U(__fp_inverse)
    ORI   rA3,0x80		; exp(-x) = -exp(-x)
    POP   rB3
    POP   rB2

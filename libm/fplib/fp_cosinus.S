@@ -59,10 +59,10 @@
 #include "gasava.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, fp_cosinus)
-          FUNCTION(fp_cosinus)
+          TEXT_SEG(fplib, __fp_cosinus)
+          FUNCTION(__fp_cosinus)
 
-GLOBAL(fp_cosinus)		; input A = [-2PI...2PI[
+GLOBAL(__fp_cosinus)		; input A = [-2PI...2PI[
        PUSH    rSI0
        ANDI    rA3,0x7F		; input A = [0...2PI[
 
@@ -93,7 +93,7 @@ GLOBAL(fp_cosinus)		; input A = [-2PI...2PI[
 					;
        LDI     ZL,LOW(table_cos)	;
        LDI     ZH,HIGH(table_cos)	;
-       RCALL   _U(fp_powerseries)	;
+       RCALL   _U(__fp_powerseries)	;
 
        EOR     rA3,rSI0		; complement sign
        POP     rSI0
