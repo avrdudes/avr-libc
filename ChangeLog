@@ -1,5 +1,12 @@
 2002-10-28  Theodore A. Roth  <troth@openavr.org>
 
+	* doc/api/malloc-std.fig: Make figs more consistent.
+	* doc/api/malloc-x1.fig: Make figs more consistent.
+	* doc/api/malloc-x2.fig: Make figs more consistent.
+	* doc/api/malloc.dox: Grammar and spelling fixups.
+
+2002-10-28  Theodore A. Roth  <troth@openavr.org>
+
 	* configure.in (AM_INIT_AUTOMAKE): Bump version.
 	* configure.in: Fix typo.
 	Update my email address.

@@ -32,14 +32,14 @@
 On a simple device like a microcontroller, implementing dynamic memory
 allocation is quite a challenge.
 
-Many of the devices that are possible targets of avr-libc only have
-little RAM.  The smallest parts supported by the C environment come
+Many of the devices that are possible targets of avr-libc have a minimal
+amount of RAM.  The smallest parts supported by the C environment come
 with 128 bytes of RAM.  This needs to be shared between initialized
-and unitialized variables (\ref mem_sections "sections" \c .data and
+and uninitialized variables (\ref mem_sections "sections" \c .data and
 \c .bss), the dynamic memory allocator, and the stack that is used for
 calling subroutines and storing local (automatic) variables.
 
-Also, unlike on larger architectures, there's no hardware-supported
+Also, unlike larger architectures, there is no hardware-supported
 memory management which could help in separating the mentioned RAM
 regions from being overwritten by each other.
 
@@ -49,31 +49,30 @@ started from the top of internal RAM, growing downwards.  The
 so-called "heap" available for the dynamic memory allocator will be
 placed beyond the end of \c .bss.  Thus, there's no risk that dynamic
 memory will ever collide with the RAM variables (unless there were
-bugs in the implementation of the allocator), but there's a risk that
-the heap and stack could collide if either, there are large
-requirements for dynamic memory, or for stack space.  The former can
-even happen if the allocations itself aren't all that large but
-dynamic memory allocations get fragmented over time so new requests
+bugs in the implementation of the allocator). There is still a risk that
+the heap and stack could collide if there are large requirements for 
+either dynamic memory or stack space.  The former can
+even happen if the allocations aren't all that large but
+dynamic memory allocations get fragmented over time such that new requests
 don't quite fit into the "holes" of previously freed regions.  Large
-stack space requirements can happen if there are many or large local
-variables in a C function, of for example when recursively calling
-functions.
+stack space requirements can arise in a C function containing large and/or
+numerous local variables or when recursively calling function.
 
 \note
-The pictures shown in this document represent possible typical
-situations, where the RAM locations refer to an ATmega128.
+The pictures shown in this document represent typical situations where the
+RAM locations refer to an ATmega128.
 
 \image html malloc-std.png "RAM map of a device with internal RAM"
 \image latex malloc-std.eps "RAM map of a device with internal RAM" width=7.5cm
 
-Finally, there's a challenge to make the memory allocator not too
-complicated (so the code size requirements will remain low), yet
+Finally, there's a challenge to make the memory allocator simple enough
+so the code size requirements will remain low, yet
 powerful enough to avoid unnecessary memory fragmentation and to get
 it all done with reasonably few CPU cycles since microcontrollers
 aren't only often low on space, but also run at much lower speeds than
 the typical PC these days.
 
-The memory allocator implemented in avr-libc tries to cope with all
+The memory allocator implemented in avr-libc tries to cope with all of
 these constraints, and offers some tuning options that can be used if
 there are more resources available than in the default configuration.
 
@@ -81,28 +80,29 @@ there are more resources available than in the default configuration.
 
 Obviously, the constraints are much harder to satisfy in the default
 configuration where only internal RAM is available.  Extreme care must
-be taken to avoid a stack-heap collission, both by making sure
+be taken to avoid a stack-heap collision, both by making sure
 functions aren't nesting too deeply, and don't require too much stack
 space for local variables, as well as by being cautious with
 allocating too much dynamic memory.
 
 If external RAM is available, it is strongly recommended to move the
-heap into the external RAM, regardless of whether the variables from
-the \c .data and \c .bss sections are also going to be located there
-or not.  Stack should always be kept in internal RAM.  Some devices
+heap into the external RAM, regardless of whether or not the variables from
+the \c .data and \c .bss sections are also going to be located there.
+The stack should always be kept in internal RAM.  Some devices
 even require this, and in general, internal RAM can be accessed
-faster.  When using dynamic memory allocation, and stack and heap are
-separated in distinct memory areas, this is the safest way to avoid a
+faster since no extra wait states are required.  When using dynamic memory
+allocation and stack and heap are separated in distinct memory areas, this is the safest way to avoid a
 stack-heap collision.
 
 \subsection malloc_tunables Tunables for malloc()
 
-There are a number of variables that can be tuned to adopt the
-behaviour of \c malloc() to the expected requirements and constraints
+There are a number of variables that can be tuned to adapt the
+behavior of malloc() to the expected requirements and constraints
 of the application.  Any changes to these tunables should be made
-before the very first call to \c malloc().  Note that some library
+before the very first call to malloc().  Note that some library
 functions might also use dynamic memory (notably those from the
-\ref avr_stdio), so make sure the changes will be done early enough.
+\ref avr_stdio), so make sure the changes will be done early enough in the
+startup sequence.
 
 The variables \c __malloc_heap_start and \c __malloc_heap_end can be
 used to restrict the malloc() function to a certain memory region.
@@ -113,12 +113,12 @@ which makes malloc() assume the heap is below the stack.
 
 If the heap is going to be moved to external RAM, \c __malloc_heap_end
 \e must be adjusted accordingly.  This can either be done at run-time,
-by writing directly to this variable, or it can already be done at
+by writing directly to this variable, or it can be done automatically at
 link-time, by adjusting the value of the symbol \c __heap_end.
 
 \anchor malloc_extram
-Example for a linker command to relocate the entire \c .data and \c
-.bss segments, and the heap to location 0x2000 in external RAM.  The
+The following example shows a linker command to relocate the entire \c .data 
+and \c .bss segments, and the heap to location 0x2000 in external RAM.  The
 heap will extend up to address 0x3fff.
 
 \code
@@ -133,8 +133,8 @@ options.
 \image html malloc-x1.png "Internal RAM: stack only, external RAM: variables and heap"
 \image latex malloc-x1.eps "Internal RAM: stack only, external RAM: variables and heap" width=12cm
 
-If only dynamic memory should be placed in external RAM, while keeping
-the variables in internal RAM, the following could be used.
+If dynamic memory should be placed in external RAM, while keeping
+the variables in internal RAM, the following could be used:
 
 \code
 avr-gcc ... -Wl,--defsym=__heap_start=0x802000,--defsym=__heap_end=0x803fff ...
@@ -150,7 +150,7 @@ memory.  It will not try to go beyond the current stack limit,
 decreased by \c __malloc_margin bytes.  Thus, all possible stack
 frames of interrupt routines that could interrupt the current
 function, plus all further nested function calls must not require more
-stack space, or they'll risk to collide with the data segment.
+stack space, or they will risk colliding with the data segment.
 
 The default value of \c __malloc_heap_end is set to 32.
 
@@ -158,21 +158,21 @@ The default value of \c __malloc_heap_end is set to 32.
 
 Dynamic memory allocation requests will be returned with a two-byte
 header prepended that records the size of the allocation.  This is
-later used in \c free().  The returned address points just beyond that
+later used by free().  The returned address points just beyond that
 header.  Thus, if the application accidentally writes before the
 returned memory region, the internal consistency of the memory
-allocator is at risk.
+allocator is compromised.
 
 The implementation maintains a simple freelist that accounts for
-memory blocks that have been returned in previous calls to \c free().
-Note that all this memory is considered to be successfully added to
+memory blocks that have been returned in previous calls to free().
+Note that all of this memory is considered to be successfully added to
 the heap already, so no further checks against stack-heap collisions
 are done when recycling memory from the freelist.
 
 The freelist itself is not maintained as a separate data structure,
 but rather by modifying the contents of the freed memory to contain
 pointers chaining the pieces together.  That way, no additional memory
-is reqired to maintain this list except of a variable that keeps track
+is reqired to maintain this list except for a variable that keeps track
 of the lowest memory segment available for reallocation.  Since both,
 a chain pointer and the size of the chunk need to be recorded in each
 chunk, the minimum chunk size on the freelist is four bytes.
@@ -185,7 +185,7 @@ exact match could be found, the closest match that would just satisfy
 the request will be used.  The chunk will normally be split up into
 one to be returned to the caller, and another (smaller) one that will
 remain on the freelist.  In case this chunk was only up to two bytes
-larger than the request, the request will simply internally be altered
+larger than the request, the request will simply be altered internally
 to also account for these additional bytes since no separate freelist
 entry could be split off in that case.
 
@@ -197,9 +197,10 @@ be verified otherwise.
 If the remaining memory is insufficient to satisfy the request,
 \c NULL will eventually be returned to the caller.
 
-When calling \c free(), a new freelist entry will be prepared.  An
+When calling free(), a new freelist entry will be prepared.  An
 attempt is then made to aggregate the new entry with possible adjacent
-entries, yielding a single larger one available for further
-allocations.  That way, heap fragmentation is fighted against.
+entries, yielding a single larger entry available for further
+allocations.  That way, the potential for heap fragmentation is hopefully
+reduced.
 
 */
