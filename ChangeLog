@@ -1,5 +1,24 @@
 2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
 
+	* include/avr/io8515.h: Correct license with permission from Marek 
+	Michalkiewicz.
+	* include/avr/io8534.h: Ditto.
+	* include/avr/io8535.h: Ditto.
+	* include/avr/ioat94k.h: Ditto.
+	* include/avr/iom103.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom8.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+	* include/avr/parity.h: Ditto.
+
+2004-11-01  Eric B. Weddington  <ericw@evcohs.com>
+
 	* crt1/gcrt1.S: Correct license with permission from Marek 
 	Michalkiewicz.
 	* common/macros.inc: Ditto.
