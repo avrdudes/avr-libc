@@ -221,7 +221,7 @@ compiled.  Among them are:
   to use them will cause the linker to complain about undefined
   external references.  (This could perhaps be fixed.)
 
-- None of the supplied include files are C++ safe, i. e. they need
+- Some of the supplied include files are not C++ safe, i. e. they need
   to be wrapped into \code extern "C" { . . . } \endcode
   (This could certainly be fixed, too.)
 
