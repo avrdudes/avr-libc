@@ -268,7 +268,13 @@ users.
   with a \c void return type which makes some sense in a
   microcontroller environment where the application cannot
   meaningfully provide a return value to its environment (in most
-  cases, \c main() won't even return anyway).
+  cases, \c main() won't even return anyway).  However, this also
+  turns off all optimizations normally done by the compiler which
+  assume that functions known by a certain name behave as described
+  by the standard.  E. g., applying the function strlen() to a
+  literal string will normally cause the compiler to immediately
+  replace that call by the actual length of the string, while with
+  \c -ffreestanding, it will always call strlen() at run-time.
   </p>
 
 \section using_avr_as Options for the assembler avr-as
