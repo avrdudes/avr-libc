@@ -1,3 +1,9 @@
+2004-02-13  Joerg Wunsch  <j.gnu@uriah.heep.sax.de>
+
+	Merge from HEAD:
+	* libc/stdio/vfprintf.c: fix for bug #7556 (%.Xs searched for '\0')
+	* libc/stdio/vfscanf.c: apply patch #2554 (%ul not working)
+
 2003-11-26  Theodore A. Roth  <troth@openavr.org>
 
 	Released avr-libc-1.0.2.
