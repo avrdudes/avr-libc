@@ -1,5 +1,4 @@
-/* 
-   Copyright (c) 2002-2003, Eric B. Weddington
+/* Copyright (c) 2002-2003, Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -25,9 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE. 
-*/
-
+  POSSIBILITY OF SUCH DAMAGE. */
 
 /** \defgroup avr_boot Bootloader Support Utilities
     \code
@@ -51,27 +48,22 @@ since the boot loader has a limited size, this could be an
 important optimization.
 */
 
-
-
 #ifndef _AVR_BOOT_H_
 #define _AVR_BOOT_H_    1
-
 
 #include <avr/eeprom.h>
 #include <avr/io.h>
 #include <limits.h>
 
-
-
 /* Check for SPM Control Register in processor. */
 #ifdef SPMCSR
-#define __SPM_REG    SPMCSR
+#  define __SPM_REG    SPMCSR
 #else
-#ifdef SPMCR
-#define __SPM_REG    SPMCR
-#else
-#error AVR processor does not provide bootloader support!
-#endif
+#  ifdef SPMCR
+#    define __SPM_REG  SPMCR
+#  else
+#    error AVR processor does not provide bootloader support!
+#  endif
 #endif
 
 /** \ingroup avr_boot
@@ -83,7 +75,6 @@ important optimization.
     NRWW area) at link-time. */
 
 #define BOOTLOADER_SECTION    __attribute__ ((section (".bootloader")))
-
 
 /* Create common bit definitions. */
 #ifdef ASB
@@ -98,45 +89,41 @@ important optimization.
 #define __COMMON_ASRE   RWWSRE
 #endif
 
-
-
 /** \ingroup avr_boot
     \def boot_spm_interrupt_enable()
     Enable the SPM interrupt. */
 
-#define boot_spm_interrupt_enable()     (__SPM_REG |= (unsigned char)_BV(SPMIE))
+#define boot_spm_interrupt_enable()   (__SPM_REG |= (unsigned char)_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_spm_interrupt_disable()
     Disable the SPM interrupt. */
 
-#define boot_spm_interrupt_disable()    (__SPM_REG &= (unsigned char)~_BV(SPMIE))
+#define boot_spm_interrupt_disable()  (__SPM_REG &= (unsigned char)~_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_is_spm_interrupt()
     Check if the SPM interrupt is enabled. */
 
-#define boot_is_spm_interrupt()         (__SPM_REG & (unsigned char)_BV(SPMIE))
+#define boot_is_spm_interrupt()       (__SPM_REG & (unsigned char)_BV(SPMIE))
 
 /** \ingroup avr_boot
     \def boot_rww_busy()
     Check if the RWW section is busy. */
 
-#define boot_rww_busy()                 (__SPM_REG & (unsigned char)_BV(__COMMON_ASB))
+#define boot_rww_busy()          (__SPM_REG & (unsigned char)_BV(__COMMON_ASB))
 
 /** \ingroup avr_boot
     \def boot_spm_busy()
     Check if the SPM instruction is busy. */
 
-#define boot_spm_busy()                 (__SPM_REG & (unsigned char)_BV(SPMEN))
+#define boot_spm_busy()               (__SPM_REG & (unsigned char)_BV(SPMEN))
 
 /** \ingroup avr_boot
     \def boot_spm_busy_wait()
     Wait while the SPM instruction is busy. */
 
-#define boot_spm_busy_wait()            do{}while(boot_spm_busy())
-
-
+#define boot_spm_busy_wait()          do{}while(boot_spm_busy())
 
 #define __BOOT_PAGE_ERASE         (_BV(SPMEN) | _BV(PGERS))
 #define __BOOT_PAGE_WRITE         (_BV(SPMEN) | _BV(PGWRT))
@@ -144,9 +131,8 @@ important optimization.
 #define __BOOT_RWW_ENABLE         (_BV(SPMEN) | _BV(__COMMON_ASRE))
 #define __BOOT_LOCK_BITS_SET      (_BV(SPMEN) | _BV(BLBSET))
 
-#define __BOOT_LOCK_BITS_MASK   (_BV(BLB01) | _BV(BLB02) | _BV(BLB11) | _BV(BLB12))
-
-
+#define __BOOT_LOCK_BITS_MASK     (_BV(BLB01) | _BV(BLB02) \
+                                   | _BV(BLB11) | _BV(BLB12))
 
 #define __boot_page_fill_normal(address, data)   \
 ({                                               \
@@ -167,8 +153,7 @@ important optimization.
     );                                           \
 })
 
-
-#define __boot_page_fill_alternate(address, data)    \
+#define __boot_page_fill_alternate(address, data)\
 ({                                               \
     boot_spm_busy_wait();                        \
     while(!eeprom_is_ready());                   \
@@ -226,7 +211,6 @@ important optimization.
     );                                           \
 })
 
-
 #define __boot_page_erase_alternate(address)     \
 ({                                               \
     boot_spm_busy_wait();                        \
@@ -244,8 +228,6 @@ important optimization.
         : "r30", "r31"                           \
     );                                           \
 })
-
-
 
 #define __boot_page_erase_extended(address)      \
 ({                                               \
@@ -265,7 +247,6 @@ important optimization.
     );                                           \
 })
 
-
 #define __boot_page_write_normal(address)        \
 ({                                               \
     boot_spm_busy_wait();                        \
@@ -281,7 +262,6 @@ important optimization.
         : "r30", "r31"                           \
     );                                           \
 })
-
 
 #define __boot_page_write_alternate(address)     \
 ({                                               \
@@ -301,8 +281,6 @@ important optimization.
     );                                           \
 })
 
-
-
 #define __boot_page_write_extended(address)      \
 ({                                               \
     boot_spm_busy_wait();                        \
@@ -321,7 +299,6 @@ important optimization.
     );                                           \
 })
 
-
 #define __boot_rww_enable()                      \
 ({                                               \
     boot_spm_busy_wait();                        \
@@ -334,7 +311,6 @@ important optimization.
         : "r" ((unsigned char)__BOOT_RWW_ENABLE) \
     );                                           \
 })
-
 
 #define __boot_rww_enable_alternate()            \
 ({                                               \
@@ -350,7 +326,6 @@ important optimization.
         : "r" ((unsigned char)__BOOT_RWW_ENABLE) \
     );                                           \
 })
-
 
 #define __boot_lock_bits_set(lock_bits)                    \
 ({                                                         \
@@ -370,7 +345,6 @@ important optimization.
         : "r0", "r30", "r31"                               \
     );                                                     \
 })
-
 
 #define __boot_lock_bits_set_alternate(lock_bits)          \
 ({                                                         \
@@ -393,7 +367,6 @@ important optimization.
     );                                                     \
 })
 
-
 /** \ingroup avr_boot
     \def boot_page_fill(address, data)
 
@@ -413,7 +386,6 @@ important optimization.
 
     \note address is a byte address in flash, not a word address. */
 
-
 /** \ingroup avr_boot
     \def boot_page_write(address)
 
@@ -422,62 +394,53 @@ important optimization.
     
     \note address is a byte address in flash, not a word address. */
 
-
 /** \ingroup avr_boot
     \def boot_rww_enable()
 
-    Enable the Read-While-Write memory section.
-    
-    */
-
+    Enable the Read-While-Write memory section. */
 
 /** \ingroup avr_boot
     \def boot_lock_bits_set(lock_bits)
 
-    Set the bootloader lock bits.
-    
-    */
+    Set the bootloader lock bits. */
 
+/* Normal versions of the macros use 16-bit addresses.
+   Extended versions of the macros use 32-bit addresses.
+   Alternate versions of the macros use 16-bit addresses and require special
+   instruction sequences after LPM.
 
-/*
-Normal versions of the macros use 16-bit addresses.
-Extended versions of the macros use 32-bit addresses.
-Alternate versions of the macros use 16-bit addresses and require special instruction
-   sequences after LPM.
+   FLASHEND is defined in the ioXXXX.h file.
+   USHRT_MAX is defined in <limits.h>. */ 
 
-FLASHEND is defined in the ioXXXX.h file.
-USHRT_MAX is defined in <limits.h>.
-*/ 
-
-#if defined(__AVR_ATmega161__) || defined(__AVR_ATmega163__) || defined(__AVR_ATmega323__)
+#if defined(__AVR_ATmega161__) || defined(__AVR_ATmega163__) \
+    || defined(__AVR_ATmega323__)
 
 /* Alternate: ATmega161/163/323 and 16 bit address */
-#define boot_page_fill(address, data)   __boot_page_fill_alternate(address, data)
-#define boot_page_erase(address)        __boot_page_erase_alternate(address)
-#define boot_page_write(address)        __boot_page_write_alternate(address)
-#define boot_rww_enable()               __boot_rww_enable_alternate()
-#define boot_lock_bits_set(lock_bits)   __boot_lock_bits_set_alternate(lock_bits)
+#define boot_page_fill(address, data) __boot_page_fill_alternate(address, data)
+#define boot_page_erase(address)      __boot_page_erase_alternate(address)
+#define boot_page_write(address)      __boot_page_write_alternate(address)
+#define boot_rww_enable()             __boot_rww_enable_alternate()
+#define boot_lock_bits_set(lock_bits) __boot_lock_bits_set_alternate(lock_bits)
 
 #elif (FLASHEND > USHRT_MAX)
 
 /* Extended: >16 bit address */
-#define boot_page_fill(address, data)   __boot_page_fill_extended(address, data)
-#define boot_page_erase(address)        __boot_page_erase_extended(address)
-#define boot_page_write(address)        __boot_page_write_extended(address)
-#define boot_rww_enable()               __boot_rww_enable()
-#define boot_lock_bits_set(lock_bits)   __boot_lock_bits_set(lock_bits)
+#define boot_page_fill(address, data) __boot_page_fill_extended(address, data)
+#define boot_page_erase(address)      __boot_page_erase_extended(address)
+#define boot_page_write(address)      __boot_page_write_extended(address)
+#define boot_rww_enable()             __boot_rww_enable()
+#define boot_lock_bits_set(lock_bits) __boot_lock_bits_set(lock_bits)
 
 #else
 
 /* Normal: 16 bit address */
-#define boot_page_fill(address, data)   __boot_page_fill_normal(address, data)
-#define boot_page_erase(address)        __boot_page_erase_normal(address)
-#define boot_page_write(address)        __boot_page_write_normal(address)
-#define boot_rww_enable()               __boot_rww_enable()
-#define boot_lock_bits_set(lock_bits)   __boot_lock_bits_set(lock_bits)
+#define boot_page_fill(address, data) __boot_page_fill_normal(address, data)
+#define boot_page_erase(address)      __boot_page_erase_normal(address)
+#define boot_page_write(address)      __boot_page_write_normal(address)
+#define boot_rww_enable()             __boot_rww_enable()
+#define boot_lock_bits_set(lock_bits) __boot_lock_bits_set(lock_bits)
 
 #endif
-
 
 /** \ingroup avr_boot
 
@@ -486,7 +449,9 @@ USHRT_MAX is defined in <limits.h>.
 \code
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
+
 #define ADDRESS     0x1C000UL
+
 void boot_test(void)
 {
     unsigned char buffer[8];
@@ -500,14 +465,12 @@ void boot_test(void)
         boot_rww_enable();
     }
 
-
     // Write data to buffer a word at a time. Note incrementing address by 2.
     // SPM_PAGESIZE is defined in the microprocessor IO header file.
     for(unsigned long i = ADDRESS; i < ADDRESS + SPM_PAGESIZE; i += 2)
     {
         boot_page_fill(i, (i-ADDRESS) + ((i-ADDRESS+1) << 8));
     }
-
 
     // Write page.
     boot_page_write((unsigned long)ADDRESS);
@@ -518,7 +481,6 @@ void boot_test(void)
 
     sei();
 
-
     // Read back the values and display.
     // (The show() function is undefined and is used here as an example only.)
     for(unsigned long i = ADDRESS; i < ADDRESS + 256; i++)
@@ -528,10 +490,6 @@ void boot_test(void)
 
     return;
 }
-\endcode     */
+\endcode */
 
-
-
-#endif
-
-
+#endif /* _AVR_BOOT_H_ */
