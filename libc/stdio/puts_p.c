@@ -32,16 +32,21 @@
 #include <stdio.h>
 #include <avr/pgmspace.h>
 
+#include "stdio_private.h"
+
 int
 puts_P(const char *str)
 {
 	char c;
 	int rv = 0;
 
+	if ((stdout->flags & __SWR) == 0)
+		return EOF;
+
 	while ((c = PRG_RDB(str++)) != '\0')
-		if (fputc(c, stdout) == EOF)
+		if (stdout->put(c) != 0)
 			rv = EOF;
-	if (fputc('\n', stdout) == EOF)
+	if (stdout->put('\n') != 0)
 		rv = EOF;
 
 	return rv;

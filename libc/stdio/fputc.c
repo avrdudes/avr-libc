@@ -37,6 +37,9 @@ int
 fputc(int c, FILE *stream)
 {
 
+	if ((stream->flags & __SWR) == 0)
+		return EOF;
+
 	if (stream->flags & __SSTR) {
 		if (stream->len < stream->size)
 			*stream->buf++ = c;

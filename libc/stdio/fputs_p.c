@@ -32,14 +32,19 @@
 #include <stdio.h>
 #include <avr/pgmspace.h>
 
+#include "stdio_private.h"
+
 int
 fputs_P(const char *str, FILE *stream)
 {
 	char c;
 	int rv = 0;
 
+	if ((stream->flags & __SWR) == 0)
+		return EOF;
+
 	while ((c = PRG_RDB(str++)) != '\0')
-		if (fputc(c, stream) == EOF)
+		if (stream->put(c) != 0)
 			rv = EOF;
 
 	return rv;

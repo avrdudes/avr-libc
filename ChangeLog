@@ -1,3 +1,14 @@
+2002-12-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/fdevopen.c: don't clobber flags when
+		opening a stream for reading and writing.
+	* libc/stdio/fputc.c: check __SWR before writing.
+	* libc/stdio/fputs.c: check __SWR before writing,
+		call stream->put() directly.
+	* libc/stdio/fputs_p.c: Ditto.
+	* libc/stdio/puts.c: Ditto.
+	* libc/stdio/puts_p.c: Ditto.
+
 2002-12-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libm/fplib/readme.atan2: remove now unrelated file.
