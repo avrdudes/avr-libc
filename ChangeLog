@@ -1,3 +1,8 @@
+2002-10-10  Theodore A. Roth  <troth@verinet.com>
+
+	* configure.in (AM_INIT_AUTOMAKE): Bump version.
+	* doc/api/acknowledge.dox: Add cross references.
+
 2002-10-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/using-tools.dox: New file.

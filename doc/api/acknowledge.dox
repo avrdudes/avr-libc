@@ -27,7 +27,8 @@
 
     This document tries to tie together the labors of a large group of
     people. Without these individuals' efforts, we wouldn't have a terrific,
-    <i><b>free</b></i> set of tools to develop AVR projects. We all owe thanks to:
+    <i><b>free</b></i> set of tools to develop AVR projects. We all owe thanks
+    to:
 
 	- The GCC Team, which produced a very capable set of development tools for
 	an amazing number of platforms and processors.
@@ -46,14 +47,14 @@
 	- Uros Platise for developing the AVR programmer tool, \b uisp.
 
 	- Joerg Wunsch [ joerg@FreeBSD.ORG ] for adding all the AVR development
-	tools to the FreeBSD [ http://www.freebsd.org ] ports tree and for providing
-	the demo project in [FIXME: hasn't been merged yet, put ref here].
+	tools to the FreeBSD [ http://www.freebsd.org ] ports tree and for
+	providing the \ref demo_project "demo project".
 
 	- Brian Dean [ bsd@bsdhome.com ] for developing \b avrprog (an alternate
-	to <b>uisp</b>) and for contributing [FIXME: need to merge section on
-	<b>avrprog</b>] which describes how to use it.
+	to <b>uisp</b>) and for contributing \ref using_avrprog "documentation"
+	which describes how to use it.
 
-	- All the people you have submitted suggestions, patches and bug reports.
+	- All the people who have submitted suggestions, patches and bug reports.
     (See the AUTHORS files of the various tools.)
 
 	- And lastly, all the users who use the software. If nobody used the
