@@ -1,3 +1,7 @@
+2005-04-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/demo.c: update for ATmega16.
+
 2005-02-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: sbi() has been removed, document standard
