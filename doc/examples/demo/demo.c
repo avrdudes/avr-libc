@@ -39,7 +39,7 @@
 #  define OCR OCR1A
 #  define PWM10 WGM10
 #  define PWM11 WGM11
-#elif defined(__AVR_ATmega32__)
+#elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega16__)
 #  define OC1 PD5
 #  define DDROC DDRD
 #  define OCR OCR1A

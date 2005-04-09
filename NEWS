@@ -4,6 +4,7 @@
 
   [#12040] overview: sbi in FAQ
 
+* demo.c extended for ATmega16
 
 *** Changes in avr-libc-1.2.3:
 
