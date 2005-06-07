@@ -1,5 +1,6 @@
-/* Copyright (c) 2002, 2003, 2004 
+/* Copyright (c) 2002, 2003, 2004, 2005 
    Juergen Schilling <juergen.schilling@honeywell.com>
+   Eric B. Weddington <ericw@evcohs.com>
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -941,6 +942,10 @@
 #define LCDCD0 0
 
 /* LCDCCR */
+#define LCDDC2 7
+#define LCDDC1 6
+#define LCDDC0 5
+#define LCDMDT 4
 #define LCDCC3 3
 #define LCDCC2 2
 #define LCDCC1 1
