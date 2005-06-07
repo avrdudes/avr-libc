@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#12040] overview: sbi in FAQ
+  [#12422] Add new bit definitions for LCDCCR register.
 
 * demo.c extended for ATmega16
 
