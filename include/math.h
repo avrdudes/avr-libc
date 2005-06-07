@@ -280,7 +280,7 @@ extern double log(double __x) __ATTR_CONST__;
   /**
      \ingroup avr_math
 
-     The log() function returns the logarithm of argument \c x to base 10.
+     The log10() function returns the logarithm of argument \c x to base 10.
 
      If the argument is less than or equal 0, a domain error will occur.
    */

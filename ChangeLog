@@ -1,5 +1,11 @@
 2005-06-07  Eric B. Weddington  <ericw@evcohs.com>
 
+    * include/math.h: Fix documenation for log10() function in math.h.
+    [Fixed bug #12785]
+    * NEWS: Update bugs fixed list.
+
+2005-06-07  Eric B. Weddington  <ericw@evcohs.com>
+
     * include/avr/iocan128.h: Fix bit definition for SJW0.
     [Fixes bug #12448]
     * NEWS: Update bugs fixed list.
