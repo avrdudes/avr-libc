@@ -3,7 +3,8 @@
 * Bugs fixed:
 
   [#12040] overview: sbi in FAQ
-  [#12422] Add new bit definitions for LCDCCR register.
+  [#12422] Add new bit definitions for LCDCCR register in iom169.h.
+  [#12448] Fix bit definition for SJW0 in iocan128.h
 
 * demo.c extended for ATmega16
 

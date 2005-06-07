@@ -1467,7 +1467,7 @@
 /* Register Bits [CANBT2]  */
 /* Bit Timing Register 2 */
 #define    SJW1       6
-#define    SJW0       4
+#define    SJW0       5
 #define    PRS2       3
 #define    PRS1       2
 #define    PRS0       1
