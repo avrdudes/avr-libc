@@ -5,6 +5,7 @@
   [#12040] overview: sbi in FAQ
   [#12422] Add new bit definitions for LCDCCR register in iom169.h.
   [#12448] Fix bit definition for SJW0 in iocan128.h
+  [#12785] Fix documenation for log10() function in math.h.
 
 * demo.c extended for ATmega16
 
