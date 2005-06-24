@@ -1,3 +1,12 @@
+2005-06-24 Anatoly Sokolov <aesok@pautinka.net>
+
+    * include/avr/iom325.h: Fix bit definition for UCSZ02.
+    * include/avr/iom3250.h: ( Ditto. )
+    * include/avr/iom645.h: ( Ditto. )
+    * include/avr/iom6450.h: ( Ditto. )
+    [Fixes bug #13327]
+    * NEWS: Update bugs fixed list.
+
 2005-06-07  Eric B. Weddington  <ericw@evcohs.com>
 
     * include/math.h: Fix documenation for log10() function in math.h.

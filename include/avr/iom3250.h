@@ -496,7 +496,7 @@ The bit numbers are defined in <avr/io.h>
 #define UCSR0B  _SFR_MEM8(0XC1)
 #define TXB80   0
 #define RXB80   1
-#define UCSZ20  2
+#define UCSZ02  2
 #define TXEN0   3
 #define RXEN0   4
 #define UDRIE0  5
