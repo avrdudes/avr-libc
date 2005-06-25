@@ -8,6 +8,8 @@
   [#12785] Fix documenation for log10() function in math.h.
   [#13327] Fix bit definition for UCSZ02 in iom325.h, iom3250.h, 
            iom645.h, iom6450.h
+  [#13327] Signal name misprints: SIG_COMPERATOR in iom169.h, 
+           SIG_EPROM_READY in iotn26.h          
 
 * demo.c extended for ATmega16
 

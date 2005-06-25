@@ -342,7 +342,7 @@
 #define SIG_USART_TRANS         _VECTOR(15)
 #define SIG_USI_START           _VECTOR(16)
 #define SIG_USI_OVERFLOW        _VECTOR(17)
-#define SIG_COMPERATOR          _VECTOR(18)
+#define SIG_COMPARATOR          _VECTOR(18)
 #define SIG_ADC                 _VECTOR(19)
 #define SIG_EEPROM_READY        _VECTOR(20)
 #define SIG_SPM_READY           _VECTOR(21)

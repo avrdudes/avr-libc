@@ -1,3 +1,11 @@
+2005-06-25 Anatoly Sokolov <aesok@pautinka.net>
+
+    * include/avr/iom169.h: Change SIG_COMPERATOR to SIG_COMPARATOR.
+    * include/avr/iotn26.h: Change SIG_EPROM_READY to SIG_EEPROM_READY.
+    [Fixes bug #12955]
+    * NEWS: Update bugs fixed list.
+    * include/avr/io.h: No undef EERIE if defined SIG_EE_READY
+
 2005-06-24 Anatoly Sokolov <aesok@pautinka.net>
 
     * include/avr/iom325.h: Fix bit definition for UCSZ02.
