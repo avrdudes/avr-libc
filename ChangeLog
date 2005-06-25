@@ -1,3 +1,10 @@
+2005-06-26 Anatoly Sokolov <aesok@pautinka.net>
+
+    * include/avr/interrupt.h: Exclude redefinition __EICR.
+    [Fixes bug #12993]
+    * NEWS: Update bugs fixed list.
+    Fix wrong bug number.
+
 2005-06-25 Anatoly Sokolov <aesok@pautinka.net>
 
     * include/avr/iom169.h: Change SIG_COMPERATOR to SIG_COMPARATOR.

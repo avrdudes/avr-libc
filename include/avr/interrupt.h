@@ -108,13 +108,11 @@ extern "C" {
 
 /* Define common register definition if available. */
 #if defined(EIMSK)
-#define __EICR  EIMSK
-#endif
-#if defined(GIMSK)
-#define __EICR  GIMSK
-#endif
-#if defined(GICR)
-#define __EICR  GICR
+#  define __EICR  EIMSK
+#elif defined(GIMSK)
+#  define __EICR  GIMSK
+#elif defined(GICR)
+#  define __EICR  GICR
 #endif
 
 /* If common register defined, define macro. */
