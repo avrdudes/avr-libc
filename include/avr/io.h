@@ -278,7 +278,7 @@
 # endif
 # undef EEARH
 #endif
-#if !defined(SIG_EEPROM_READY)
+#if !defined(SIG_EEPROM_READY) && !defined(SIG_EE_READY)
 # undef EERIE
 #endif
 

@@ -288,7 +288,7 @@
 #define SIG_OVERFLOW0           _VECTOR(6)
 #define SIG_USI_START           _VECTOR(7)
 #define SIG_USI_OVERFLOW        _VECTOR(8)
-#define SIG_EPROM_READY         _VECTOR(9)
+#define SIG_EEPROM_READY        _VECTOR(9)
 #define SIG_ANA_COMP            _VECTOR(10)
 #define SIG_ADC                 _VECTOR(11)
 
