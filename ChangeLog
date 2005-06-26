@@ -1,3 +1,9 @@
+2005-06-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* crt1/gcrt1.S: Defer the initialization of __stack so the
+	linker could actually update this weak symbol (works around
+	a bug in gas).
+
 2005-06-26 Anatoly Sokolov <aesok@pautinka.net>
 
     * include/avr/interrupt.h: Exclude redefinition __EICR.
