@@ -111,7 +111,6 @@ __init:
 
 #ifndef __AVR_ASM_ONLY__
 	.weak	__stack
-	.set	__stack, RAMEND
 
 	/* By default, malloc() uses the current value of the stack pointer
 	   minus __malloc_margin as the highest available address.
@@ -174,6 +173,7 @@ __do_copy_data:
 	brne	.__do_copy_data_loop
 #endif /* BIG_CODE */
 
+	.set	__stack, RAMEND
 #endif /* !__AVR_ASM_ONLY__ */
 
 	.section .init9,"ax",@progbits

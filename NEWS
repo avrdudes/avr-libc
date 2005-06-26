@@ -2,14 +2,17 @@
 
 * Bugs fixed:
 
+  [no-id]  Work around a bug in gas that made the weak symbol __stack
+           fixed inside gcrt1.S (since the assembler already inserted
+           its value).
   [#12040] overview: sbi in FAQ
   [#12422] Add new bit definitions for LCDCCR register in iom169.h.
   [#12448] Fix bit definition for SJW0 in iocan128.h
   [#12785] Fix documenation for log10() function in math.h.
-  [#13327] Fix bit definition for UCSZ02 in iom325.h, iom3250.h, 
+  [#13327] Fix bit definition for UCSZ02 in iom325.h, iom3250.h,
            iom645.h, iom6450.h
-  [#12955] Signal name misprints: SIG_COMPERATOR in iom169.h, 
-           SIG_EPROM_READY in iotn26.h          
+  [#12955] Signal name misprints: SIG_COMPERATOR in iom169.h,
+           SIG_EPROM_READY in iotn26.h
   [#12993] Signal "__EICR" redefined warning ATmega8
 
 * demo.c extended for ATmega16
