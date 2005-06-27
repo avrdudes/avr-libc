@@ -1,3 +1,8 @@
+2005-06-27 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/iom16.h: Remove Windows line endings.
+	* include/avr/iotn26.h: Remove Windows line endings.
+	
 2005-06-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* crt1/gcrt1.S: Defer the initialization of __stack so the
