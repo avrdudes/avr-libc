@@ -204,6 +204,7 @@
 #ifndef __ASSEMBLER__
 #define ADC    _SFR_MEM16(0x78)
 #endif
+#define ADCW   _SFR_MEM16(0x78)
 #define ADCL   _SFR_MEM8(0x78)
 #define ADCH   _SFR_MEM8(0x79)
 

@@ -1,3 +1,31 @@
+2005-06-28 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/io2333.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/io43u35x.h (ADCW): Define.
+	* include/avr/io4433.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/io4434.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/io8534.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/io8535.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/iocan128.h (ADCW): Define.
+	* include/avr/iom103.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/iom16.h [!__ASSEMBLER__] (ADC): Define.
+	(ADCW): Define.
+	* include/avr/iom163.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/iom165.h [!__ASSEMBLER__] (ADC): Define.
+	(ADCW): Define.
+	* include/avr/iom169.h (ADCW): Define.
+	* include/avr/iom323.h [!__ASSEMBLER__] (ADC): Define.
+	* include/avr/iom325.h [!__ASSEMBLER__] (ADC): Define.
+	(ADCW): Define.
+	* include/avr/iom3250.h [!__ASSEMBLER__] (ADC): Define.
+	(ADCW): Define.
+	* include/avr/iom645.h [!__ASSEMBLER__] (ADC): Define.
+	(ADCW): Define.
+	* include/avr/iom6450.h [!__ASSEMBLER__] (ADC): Define.
+	(ADCW): Define.
+	* include/avr/iotn15.h [!__ASSEMBLER__] (ADC): Define.
+	[Fixes bug #12134]
+
 2005-06-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* crt1/gcrt1.S: Defer the initialization of __stack so the
