@@ -62,6 +62,9 @@
 #define PORTE	_SFR_IO8(0x03)
 
 /* ADC Data Register */
+#ifndef __ASSEMBLER__
+#define ADC 	_SFR_IO16(0x04)
+#endif
 #define ADCW	_SFR_IO16(0x04)
 #define ADCL	_SFR_IO8(0x04)
 #define ADCH	_SFR_IO8(0x05)
