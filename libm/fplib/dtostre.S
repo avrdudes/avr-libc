@@ -46,6 +46,7 @@
 #if !defined(DOXYGEN)
 
 #include "gasava.inc"
+#include "macros.inc"
 #include "fplib.inc"
 
 #include <stdlib.h>
@@ -183,6 +184,22 @@ GLOBAL(dtostre)
 	XCALL	_U(__mulsf3)
 	FPMOV(rS, rA)		; new dblno
 1:
+; determine rounding:
+; if (prec < ACCURACY) { t = .5; t *= 0.1**prec; dblno += t; }
+	cpi	rSI0, ACCURACY
+	brcc	1f
+	FPLOAD(rA, FP_0_5)
+	eor	rSI1, rSI1	; for (rSI1 = 0; rSI1 < prec; rSI1++)
+	rjmp	3f
+2:	FPLOAD(rB, FP_0_1)
+	XCALL	_U(__mulsf3)	; t *= 0.1
+	inc	rSI1
+3:	cp	rSI1, rSI0
+	brlo	2b
+	FPMOV(rB, rS)
+	XCALL	_U(__addsf3)	; dblno += t
+	FPMOV(rS, rA)		; new dblno
+1:
 ; The algorithm to determine the decimal exponent above has the
 ; potential to erroneously return an exponent that might be too
 ; large.  So we need to give it a try before applying the rounding
@@ -203,22 +220,6 @@ GLOBAL(dtostre)
 	FPMOV(rS, rA)		; dblno
 	rjmp	1b
 
-1:
-; determine rounding:
-; if (prec < ACCURACY) { t = .5; t *= 0.1**prec; dblno += t; }
-	cpi	rSI0, ACCURACY
-	brcc	1f
-	FPLOAD(rA, FP_0_5)
-	eor	rSI1, rSI1	; for (rSI1 = 0; rSI1 < prec; rSI1++)
-	rjmp	3f
-2:	FPLOAD(rB, FP_0_1)
-	XCALL	_U(__mulsf3)	; t *= 0.1
-	inc	rSI1
-3:	cp	rSI1, rSI0
-	brlo	2b
-	FPMOV(rB, rS)
-	XCALL	_U(__addsf3)	; dblno += t
-	FPMOV(rS, rA)		; new dblno
 1:
 				; for (rSI1 = 0; rSI1 <= prec; rSI1++)
 	eor	rSI1, rSI1

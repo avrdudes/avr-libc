@@ -32,7 +32,7 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id $*/
+/* $Id$ */
 
 /*
     divsf3x.S is part of     FPlib V 0.3.0       ported to avr-as
@@ -49,6 +49,7 @@
  */
 
 #include "gasava.inc"
+#include "macros.inc"
 #include "fplib.inc"
 
           TEXT_SEG(fplib, __divsf3x)

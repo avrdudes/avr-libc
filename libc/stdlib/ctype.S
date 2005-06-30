@@ -31,6 +31,7 @@
 #if !defined(DOXYGEN)
 
 #include "gasava.inc"
+#include "macros.inc"
 ;================================================================================
 ; ctype.s
 ;

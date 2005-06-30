@@ -42,6 +42,7 @@
  */
 
 #include "gasava.inc"
+#include "macros.inc"
 #include "fplib.inc"
 
 /* GCC expects all these functions to return -1/0/1 as for __cmpsf2 -

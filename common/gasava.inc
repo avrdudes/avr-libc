@@ -29,7 +29,6 @@
 #ifndef _GAS_AVA_INC
 #define _GAS_AVA_INC
 
-#  include "macros.inc"
 #  include "ctoasm.inc"
 #  define TEXT_SEG(subs, func) .section .text.##subs, "ax", @progbits ; func
 #  define GLOBAL(x) _U(x): .global _U(x)
