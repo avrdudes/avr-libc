@@ -5,6 +5,7 @@
   [no-id]  Work around a bug in gas that made the weak symbol __stack
            fixed inside gcrt1.S (since the assembler already inserted
            its value).
+  [#12033] macros.inc need to be protected from multiple inclusion.
   [#12040] overview: sbi in FAQ
   [#12134] ADC register name definitions
   [#12422] Add new bit definitions for LCDCCR register in iom169.h.

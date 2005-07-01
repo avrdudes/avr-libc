@@ -50,6 +50,7 @@
 /* $Id$ */
 
 #include "gasava.inc"
+#include "macros.inc"
 #include "fplib.inc"
 #define sign	r17
 #define magn	r16

@@ -42,6 +42,7 @@
  */
 
 #include "gasava.inc"
+#include "macros.inc"
 #include "fplib.inc"
 
           TEXT_SEG(fplib, __addsf3)

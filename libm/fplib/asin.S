@@ -47,6 +47,7 @@
 #if !defined(DOXYGEN)
 
 #include "gasava.inc"
+#include "macros.inc"
 #include "fplib.inc"
 
 #define sign	r26

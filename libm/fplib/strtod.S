@@ -44,6 +44,7 @@
 #if !defined(DOXYGEN)
 
 #include "gasava.inc"
+#include "macros.inc"
 #include "fplib.inc"
 
 #define rFlags   rSI0  /*  */
