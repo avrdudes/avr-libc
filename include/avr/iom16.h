@@ -271,7 +271,20 @@
 #define PA6     6
 #define PA7     7
 
-/* EEPROM [0x1C..0X1F] The bit numbers are defined in <avr/io.h> */
+/* EEPROM Control Register */
+#define EECR	_SFR_IO8(0x1C)
+#define EERE    0
+#define EEWE    1
+#define EEMWE   2
+#define EERIE   3
+
+/* EEPROM Data Register */
+#define EEDR	_SFR_IO8(0x1D)
+
+/* EEPROM Address Register */
+#define EEAR	_SFR_IO16(0x1E)
+#define EEARL	_SFR_IO8(0x1E)
+#define EEARH	_SFR_IO8(0x1F)
 
 #define UCSRC   _SFR_IO8(0x20)
 #define UCPOL   0

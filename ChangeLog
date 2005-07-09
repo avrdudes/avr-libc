@@ -1,3 +1,82 @@
+2005-07-09 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/io.h [__COMPILING_AVR_LIBC__] (EECR, EEDR, 
+	EEAR, EEARL, EEARH, EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io43u32x.h : Mark SFR [0x1C..0x1F] as reserved.
+	* include/avr/io43u35x.h : (Ditto.)
+	* include/avr/io1200.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io2313.h (EECR, EEDR, EEAR, EEARL,
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io2323.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io2333.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io2343.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io4414.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io4433.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io4434.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io8515.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io8534.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/io8535.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iocan128.h (EECR, EEDR, EEAR, EEARL, EEARH) : Define.
+	* include/avr/iom8.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom16.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom32.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom64.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom103.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom128.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom161.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom162.h (EECR, EEDR, EEAR, EEARL, EEARH) : Define.
+	* include/avr/iom163.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom165.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom169.h (EECR, EEDR, EEAR, EEARL, EEARH) : Define.
+	* include/avr/iom323.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom325.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom645.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom3250.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom6450.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom8515.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iom8535.h (EECR, EEDR, EEAR, EEARL, EEARH, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iomx8.h (EECR, EEDR, EEAR, EEARL, EEARH) : Define.
+	* include/avr/iotn12.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iotn13.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMPE, EEPE, EERE) : Define.
+	* include/avr/iotn15.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iotn22.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iotn26.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMWE, EEWE, EERE) : Define.
+	* include/avr/iotn28.h (EERIE, EEMWE, EEWE, EERE) : Delete.
+	* include/avr/iotn2313.h (EECR, EEDR, EEAR, EEARL, 
+	EERIE, EEMPE, EEPE, EERE) : Define.
+	[Fixed bug #13290]
+
 2005-06-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* common/gasava.inc: Fix include ordering (bug #12033).

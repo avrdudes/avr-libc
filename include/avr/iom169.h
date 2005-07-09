@@ -106,21 +106,14 @@
 /* General Purpose I/O Register 0 */
 #define GPIOR0 _SFR_IO8(0x1E)
 
-#undef EECR
-/* EEPROM Control Register */
 #define EECR   _SFR_IO8(0x1F)
 
-#undef EEDR
-/* EEPROM Data Register */
-#define EEDR   _SFR_IO8(0x20)
+#define EEDR   _SFR_IO8(0X20)
 
-#undef EEAR
-#undef EEARL
-#undef EEARH
-/* EEPROM Address Register */
+/* Combine EEARL and EEARH */
 #define EEAR   _SFR_IO16(0x21)
 #define EEARL  _SFR_IO8(0x21)
-#define EEARH  _SFR_IO8(0x22)
+#define EEARH  _SFR_IO8(0X22)
 
 /* General Timer/Counter Control Register */
 #define GTCCR  _SFR_IO8(0x23)

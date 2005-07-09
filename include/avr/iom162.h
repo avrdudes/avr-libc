@@ -130,7 +130,11 @@
 #define WDTCR	_SFR_IO8(0x21)	/* Watchdow Timer Control Register */
 #define UBRR0H	_SFR_IO8(0x20)	/* USART 0 Baud-Rate Register High Byte, Shared with UCSR0C */
 #define UCSR0C	_SFR_IO8(0x20)	/* USART 0 Control and Status Register C, Shared with UBRR0H */
-/* 0x1C..0x1F EEPROM */
+#define EEARH	_SFR_IO8(0x1F)  /* EEPROM Address Register High Byte */
+#define EEARL	_SFR_IO8(0x1E)  /* EEPROM Address Register Low Byte */
+#define EEAR	_SFR_IO16(0x1E) /* EEPROM Address Register */
+#define EEDR	_SFR_IO8(0x1D)  /* EEPROM Data Register */
+#define EECR	_SFR_IO8(0x1C)  /* EEPROM Control Register */
 #define PORTA	_SFR_IO8(0x1B)	/* Port A */
 #define DDRA	_SFR_IO8(0x1A)	/* Port A Data Direction Register */
 #define PINA	_SFR_IO8(0x19)	/* Port A Pin Register */

@@ -133,10 +133,10 @@
 /*
  * Only few devices come without EEPROM.  In order to assemble the
  * EEPROM library components without defining a specific device, we
- * keep the EEPROM-related definitions here, and catch the devices
- * without EEPROM (E2END == 0) below.  Obviously, the EEPROM library
- * functions will not work for them. ;-)
+ * keep the EEPROM-related definitions here.
  */
+#if defined(__COMPILING_AVR_LIBC__)
+
 /* EEPROM Control Register */
 #define EECR	_SFR_IO8(0x1C)
 
@@ -153,6 +153,8 @@
 #define    EEMWE        2
 #define    EEWE         1
 #define    EERE         0
+
+#endif /* __COMPILING_AVR_LIBC__ */
 
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
@@ -261,25 +263,6 @@
 #    define SP     _SFR_IO8(0x3D)
 #    undef SPH
 #  endif
-#endif
-
-#if E2END == 0 && !defined(__COMPILING_AVR_LIBC__)
-# undef EECR
-# undef EEDR
-# undef EEARL
-# undef EEMWE
-# undef EEWE
-# undef EERE
-#endif
-#if E2END < 0x100 && !defined(__COMPILING_AVR_LIBC__)
-# undef EEAR
-# if E2END > 0
-#   define EEAR	_SFR_IO8(0x1E)
-# endif
-# undef EEARH
-#endif
-#if !defined(SIG_EEPROM_READY) && !defined(SIG_EE_READY)
-# undef EERIE
 #endif
 
 #endif /* _AVR_IO_H_ */

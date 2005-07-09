@@ -150,12 +150,6 @@
 #define WDP1	1
 #define WDP0	0
 
-/* EECR */
-#define EERIE	3
-#define EEMWE	2
-#define EEWE	1
-#define EERE	0
-
 /*
    PA2 = IR
  */
