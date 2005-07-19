@@ -116,7 +116,7 @@
 /* Data Register, Port A */
 #define PORTA	_SFR_IO8(0x1B)
 
-/* 0x1C..0x1F EEPROM */
+/* 0x1C..0x1F reserved */
 
 /* Watchdog Timer Control Register */
 #define WDTCR	_SFR_IO8(0x21)

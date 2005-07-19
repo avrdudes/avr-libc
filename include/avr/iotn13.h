@@ -147,9 +147,21 @@
 #  define PB1                  1
 #  define PB0                  0
 
-/* These are not defined in <avr/io.h> like the rest of the eeprom names. */
-#  define EEPM1                5
-#  define EEPM0                4
+/* ATtiny EEPROM Control Register EECR */
+#define EECR	             _SFR_IO8(0x1C)
+#define EEPM1                  5
+#define EEPM0                  4
+#define EERIE                  3
+#define EEMPE                  2
+#define EEPE                   1
+#define EERE                   0
+
+/* EEPROM Data Register */
+#define EEDR	             _SFR_IO8(0x1D)
+
+/* The EEPROM Address Register EEAR[6:0] */
+#define EEAR	             _SFR_IO8(0x1E)
+#define EEARL	             _SFR_IO8(0x1E)
 
 /* Watchdog Timer Control Register */
 #define WDTCR                _SFR_IO8(0x21)

@@ -188,10 +188,7 @@
 
 #define GPIOR0  _SFR_IO8 (0x1E)
 
-/* The eeprom API won't work with this header. :-( */
-
-#undef EECR
-#define EECR    _SFR_IO8 (0x1F)
+#define EECR    _SFR_IO8(0x1F)
 /* EECT - EEPROM Control Register */
 #define EEPM1   5
 #define EEPM0   4
@@ -200,15 +197,12 @@
 #define EEPE    1
 #define EERE    0
 
-#undef EEDR
-#undef EEAR
-#undef EEARL
-#undef EEARH
+#define EEDR    _SFR_IO8(0X20)
 
-#define EEDR    _SFR_IO8 (0x20)
-#define EEAR    _SFR_IO16 (0x21)
-#define EEARL   _SFR_IO8 (0x21)
-#define EEARH   _SFR_IO8 (0x22)
+/* Combine EEARL and EEARH */
+#define EEAR    _SFR_IO16(0x21)
+#define EEARL   _SFR_IO8(0x21)
+#define EEARH   _SFR_IO8(0X22)
 /* 
 Even though EEARH is not used by the mega48, the EEAR8 bit in the register
 must be written to 0, according to the datasheet, hence the EEARH register

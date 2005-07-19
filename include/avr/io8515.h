@@ -109,7 +109,16 @@
 /* Data Register, Port A */
 #define PORTA	_SFR_IO8(0x1B)
 
-/* 0x1C..0x1F EEPROM */
+/* EEPROM Control Register */
+#define EECR	_SFR_IO8(0x1C)
+
+/* EEPROM Data Register */
+#define EEDR	_SFR_IO8(0x1D)
+
+/* EEPROM Address Register */
+#define EEAR	_SFR_IO16(0x1E)
+#define EEARL	_SFR_IO8(0x1E)
+#define EEARH	_SFR_IO8(0x1F)
 
 /* Watchdog Timer Control Register */
 #define WDTCR	_SFR_IO8(0x21)
@@ -405,6 +414,12 @@
 #define    ACIC         2
 #define    ACIS1        1
 #define    ACIS0        0
+
+/* EEPROM Control Register */
+#define    EERIE        3
+#define    EEMWE        2
+#define    EEWE         1
+#define    EERE         0
 
 /* Constants        */
 #define    RAMEND       0x25F    /* Last On-Chip SRAM Location */

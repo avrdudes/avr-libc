@@ -113,17 +113,12 @@
 /* RegDef:  General Purpose I/O Register 0 */
 #define GPIOR0 _SFR_IO8(0x1E)
 
-#undef EECR
 /* RegDef:  EEPROM Control Register */
 #define EECR   _SFR_IO8(0x1F)
 
-#undef EEDR
 /* RegDef:  EEPROM Data Register */
 #define EEDR   _SFR_IO8(0x20)
 
-#undef EEAR
-#undef EEARL
-#undef EEARH
 /* RegDef:  EEPROM Address Register */
 #define EEAR   _SFR_IO16(0x21)
 #define EEARL  _SFR_IO8(0x21)

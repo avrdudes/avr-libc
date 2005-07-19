@@ -58,7 +58,15 @@
 /* Data Register, Port B */
 #define PORTB	_SFR_IO8(0x18)
 
-/* 0x1C..0x1E EEPROM */
+/* EEPROM Control Register */
+#define EECR	_SFR_IO8(0x1C)
+
+/* EEPROM Data Register */
+#define EEDR	_SFR_IO8(0x1D)
+
+/* EEPROM Address Register */
+#define EEAR	_SFR_IO8(0x1E)
+#define EEARL	_SFR_IO8(0x1E)
 
 /* Watchdog Timer Control Register */
 #define WDTCR	_SFR_IO8(0x21)
@@ -155,6 +163,12 @@
 #define    PINB2   2
 #define    PINB1   1
 #define    PINB0   0
+
+/* EEPROM Control Register */
+#define    EERIE   3
+#define    EEMWE   2
+#define    EEWE    1
+#define    EERE    0
 
 /* Constants */
 #define    RAMEND    0xDF

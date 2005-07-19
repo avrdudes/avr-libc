@@ -107,34 +107,17 @@
 
 #define GPIOR0  _SFR_IO8(0x1E)
 
-/* 
-EEPROM [0x1F..0X22] These locations are different than defined in <avr/io.h>.
-The bit numbers are defined in <avr/io.h>
-*/
-#ifdef EECR
-#undef EECR
-#endif
 #define EECR    _SFR_IO8(0x1F)
+#define EERE    0
+#define EEWE    1
+#define EEMWE   2
+#define EERIE   3
 
-#ifdef EEDR
-#undef EEDR
-#endif
 #define EEDR    _SFR_IO8(0X20)
 
-#ifdef EEAR
-#undef EEAR
-#endif
 /* Combine EEARL and EEARH */
 #define EEAR    _SFR_IO16(0x21)
-
-#ifdef EEARL
-#undef EEARL
-#endif
 #define EEARL   _SFR_IO8(0x21)
-
-#ifdef EEARH
-#undef EEARH
-#endif
 #define EEARH   _SFR_IO8(0X22)
 
 #define GTCCR   _SFR_IO8(0x23)
