@@ -83,7 +83,9 @@
 
 #if defined (__AVR_ATmega169__) || defined(__AVR_AT90CAN128__) \
 || defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
-|| defined(__AVR_ATmega168__)
+|| defined(__AVR_ATmega165__) || defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
+|| defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__)
  
 #define _wdt_write(value)   \
     __asm__ __volatile__ (  \
