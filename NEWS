@@ -17,6 +17,9 @@
   [#13290] avr/io.h EEAR def is flawed for the Mega48
   [#13327] Fix bit definition for UCSZ02 in iom325.h, iom3250.h,
            iom645.h, iom6450.h
+  [#13678] The _wdt_write(value) macro in wdt.h doesn't work with
+           the ATmega325.(also with ATmega3250, ATmega645, ATmega6450,
+           ATmega165).
 
 * demo.c extended for ATmega16
 
