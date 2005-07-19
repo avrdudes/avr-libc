@@ -1,5 +1,9 @@
 2005-07-19 Anatoly Sokolov <aesok@pautinka.net>
 
+	* Add Anatoly Sokolov to the license file. 
+
+2005-07-19 Anatoly Sokolov <aesok@pautinka.net>
+
 	* include/avr/wdt.h : Add support for ATmega165, ATmega325, 
 	ATmega3250, ATmega645, ATmega6450.
 	[Fixed bug #13678]
