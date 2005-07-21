@@ -144,7 +144,7 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' \
-		-e '/usepackage{times}/s/$$/\\usepackage{longtable}/' \
+		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \
 		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
 	cd latex_src && \
@@ -164,7 +164,7 @@ latex_pdf_src/refman.tex: doxygen-pdf.config $(IMAGE_EPS)
 	doxygen doxygen-pdf.config
 	cd latex_pdf_src && \
 		sed -e '/tocdepth/s/1/3/' \
-		-e '/usepackage{times}/s/$$/\\usepackage{longtable}/' \
+		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \
 		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
 	cd latex_pdf_src && \
@@ -186,6 +186,7 @@ latex_pdf_src/refman.tex: doxygen-pdf.config $(IMAGE_EPS)
 
 doxygen-pdf.config: doxygen.config
 	sed \
+		-e '/PDF_HYPERLINKS/s/NO/YES/' \
 		-e '/USE_PDFLATEX/s/NO/YES/' \
 		-e '/LATEX_OUTPUT/s/latex_src/latex_pdf_src/' \
 		-e '/GENERATE_HTML/s/YES/NO/' \

@@ -1,3 +1,12 @@
+2005-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/doxygen.config.in: Turn PDF hyperlinks off by default;
+	the presence of this option causes the new (pdfelatex-based)
+	LaTeX to turn from DVI to PDF generation.
+	* doc/api/Makefile.am: Enable PDF hyperlinks for the PDF version.
+	Modify the patchomania to properly include longtable (so it works
+	with recent doxygen versions).
+
 2005-07-19 Anatoly Sokolov <aesok@pautinka.net>
 
 	* Add Anatoly Sokolov to the license file. 

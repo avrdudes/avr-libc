@@ -5,6 +5,8 @@
   [no-id]  Work around a bug in gas that made the weak symbol __stack
            fixed inside gcrt1.S (since the assembler already inserted
            its value).
+  [no-id]  Modify the doxygen build system to cope with artefacts from
+           recent versions of doxygen and (pdfelatex-based) LaTeX.
   [#12033] macros.inc need to be protected from multiple inclusion.
   [#12040] overview: sbi in FAQ
   [#12134] ADC register name definitions
