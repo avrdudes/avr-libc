@@ -143,52 +143,60 @@ AC_CONFIG_FILES([
 	libm/fplib/Makefile
 ])
 
+#avr1 and avr2
 AC_CONFIG_FILES([
-	avr/lib/at90s1200/Makefile
-	avr/lib/at90s2313/Makefile
-	avr/lib/at90s2323/Makefile
-	avr/lib/at90s2333/Makefile
-	avr/lib/at90s2343/Makefile
-	avr/lib/at90s4433/Makefile
-	avr/lib/at90s4414/Makefile
-	avr/lib/at90s4434/Makefile
-	avr/lib/at90s8515/Makefile
-	avr/lib/at90s8535/Makefile
-	avr/lib/at90c8534/Makefile
-	avr/lib/attiny11/Makefile
-	avr/lib/attiny12/Makefile
-	avr/lib/attiny15/Makefile
-	avr/lib/attiny22/Makefile
-	avr/lib/attiny26/Makefile
-	avr/lib/attiny28/Makefile
-	avr/lib/atmega103/Makefile
-	avr/lib/atmega128/Makefile
-	avr/lib/atmega16/Makefile
-	avr/lib/atmega161/Makefile
-	avr/lib/atmega162/Makefile
-	avr/lib/atmega163/Makefile
-	avr/lib/atmega169/Makefile
-	avr/lib/atmega8/Makefile
-	avr/lib/atmega8515/Makefile
-	avr/lib/atmega8535/Makefile
-	avr/lib/atmega32/Makefile
-	avr/lib/atmega323/Makefile
-	avr/lib/atmega64/Makefile
-	avr/lib/at86rf401/Makefile
-	avr/lib/at43usb320/Makefile
-	avr/lib/at43usb355/Makefile
-	avr/lib/at76c711/Makefile
-	avr/lib/at94k/Makefile
+	avr/lib/avr2/Makefile
+	avr/lib/avr2/at90s1200/Makefile
+	avr/lib/avr2/at90s2313/Makefile
+	avr/lib/avr2/at90s2323/Makefile
+	avr/lib/avr2/at90s2333/Makefile
+	avr/lib/avr2/at90s2343/Makefile
+	avr/lib/avr2/at90s4433/Makefile
+	avr/lib/avr2/at90s4414/Makefile
+	avr/lib/avr2/at90s4434/Makefile
+	avr/lib/avr2/at90s8515/Makefile
+	avr/lib/avr2/at90s8535/Makefile
+	avr/lib/avr2/at90c8534/Makefile
+	avr/lib/avr2/attiny11/Makefile
+	avr/lib/avr2/attiny12/Makefile
+	avr/lib/avr2/attiny15/Makefile
+	avr/lib/avr2/attiny22/Makefile
+	avr/lib/avr2/attiny26/Makefile
+	avr/lib/avr2/attiny28/Makefile
+	avr/lib/avr2/at86rf401/Makefile
 ])
 
-## Skip the new deivces for now.
-#AC_CONFIG_FILES([
-#	avr/lib/attiny13/Makefile
-#	avr/lib/attiny2313/Makefile
-#	avr/lib/atmega168/Makefile
-#	avr/lib/atmega48/Makefile
-#	avr/lib/atmega88/Makefile
-#])
+#avr3
+AC_CONFIG_FILES([
+	avr/lib/avr3/Makefile
+	avr/lib/avr3/atmega103/Makefile
+	avr/lib/avr3/at43usb320/Makefile
+	avr/lib/avr3/at43usb355/Makefile
+	avr/lib/avr3/at76c711/Makefile
+])
+
+#avr4
+AC_CONFIG_FILES([
+	avr/lib/avr4/Makefile
+	avr/lib/avr4/atmega8/Makefile
+	avr/lib/avr4/atmega8515/Makefile
+	avr/lib/avr4/atmega8535/Makefile
+])
+
+#avr5
+AC_CONFIG_FILES([
+	avr/lib/avr5/Makefile
+	avr/lib/avr5/atmega16/Makefile
+	avr/lib/avr5/atmega161/Makefile
+	avr/lib/avr5/atmega162/Makefile
+	avr/lib/avr5/atmega163/Makefile
+	avr/lib/avr5/atmega169/Makefile
+	avr/lib/avr5/atmega32/Makefile
+	avr/lib/avr5/atmega323/Makefile
+	avr/lib/avr5/atmega64/Makefile
+	avr/lib/avr5/atmega128/Makefile
+	avr/lib/avr5/at94k/Makefile
+])
 
 AC_OUTPUT
 

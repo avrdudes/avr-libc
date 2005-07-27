@@ -15,7 +15,8 @@ do
 	then
 		continue
 	fi
-	if [ "$AUTOMAKE_VER" = "1.7" ]
+	automake_ver=$(echo "$AUTOMAKE_VER >= 1.7" | bc)  # Check if version is >= 1.7
+	if [ $automake_ver!=1 ]
 	then
 		status=""
 		ACLOCAL=aclocal`expr "$AUTOMAKE" : 'automake\(.*\)'`
@@ -40,7 +41,8 @@ do
 	then
 		continue
 	fi
-	if [ "$AUTOCONF_VER" = "2.57" ]
+	autoconf_ver=$(echo "$AUTOCONF_VER >= 2.57" | bc)  # Check if version is >= 2.57
+	if [ $autoconf_ver!=1 ]
 	then
 		status=""
 		AUTOHEADER=autoheader`expr "$AUTOCONF" : 'autoconf\(.*\)'`
@@ -63,9 +65,8 @@ export AUTOMAKE AUTOCONF ACLOCAL AUTOHEADER
 # to see what is executed
 set -x
 
-# TRoth: This is temporary until I commit the tree to cvs. I'm holding off on
-# that until I'm sure it's the right thing to do.
-test -d avr/lib || ./devtools/gen-avr-lib-tree.sh
+rm -rf avr/lib
+./devtools/gen-avr-lib-tree.sh
 
 rm -rf autom4te.cache
 

@@ -1,3 +1,14 @@
+2005-07-27 Anatoly Sokolov <aesok@pautinka.net>
+
+	* AvrCommon.am: change to compile per-architecture libs
+	* AvrCommonLibC.am: (Ditto.)
+	* configure.ac: (Ditto.)
+	* devtools/gen-avr-lib-tree.sh: (Ditto.)
+	* bootstrap: Update to work with automake 1.9 and autoconf 2.59
+	* include/avr/io.h: Do not generate an error if the device type is not
+	defined and if defined __COMPILING_AVR_LIBC__.
+	* common/macros.inc: multiple-include protect.
+
 2004-05-07  Theodore A. Roth  <troth@openavr.org>
 
 	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Add libm.a sources to

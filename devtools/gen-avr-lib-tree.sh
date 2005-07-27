@@ -115,18 +115,12 @@ cd lib || exit 1
 CFLAGS_SPACE="-mcall-prologues -Os"
 CFLAGS_SPEED="-O3"
 
-SKIP_NEW_DEVS="\
-attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega168:crtm168.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
-atmega48:crtm48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega88:crtm88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90can128:crtcan128.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
-"
-
-DEV_INFO="\
-${NEW_DEVS}\
+AVR12_DEV_INFO="\
 at90s1200:crts1200.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny11:crttn11.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny12:crttn12.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny15:crttn15.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny28:crttn28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s2333:crts2333.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -137,87 +131,158 @@ at90s4434:crts4434.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s8515:crts8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s8535:crts8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny11:crttn11.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny12:crttn12.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny15:crttn15.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny28:crttn28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at86rf401:crt86401.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+"
+
+AVR3_DEV_INFO="\
 atmega103:crtm103.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
-atmega128:crtm128.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+at43usb320:crt43320.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+at43usb355:crt43355.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+at76c711:crt76711.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+"
+
+AVR4_DEV_INFO="\
+atmega8:crtm8.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega8515:crtm8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega8535:crtm8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+"
+
+AVR5_DEV_INFO="\
 atmega16:crtm16.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega161:crtm161.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega162:crtm162.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega163:crtm163.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega169:crtm169.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
-atmega8:crtm8.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega8515:crtm8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega8535:crtm8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega32:crtm32.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega323:crtm323.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega64:crtm64.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
-at86rf401:crt86401.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at43usb320:crt43320.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
-at43usb355:crt43355.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
-at76c711:crt76711.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega128:crtm128.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 at94k:crtat94k.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 "
 
-cat ${TMP_COPY_RIGHT_HDR} > Makefile.am
-cat >> Makefile.am << EOF
-SUBDIRS = \\
-EOF
+#SKIP_NEW_DEVS="\
+#attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+#attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+#atmega168:crtm168.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+#atmega48:crtm48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+#atmega88:crtm88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+#at90can128:crtcan128.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+#"
+
+
+LIB_DEFS="-D__COMPILING_AVR_LIBC__"
+
+AVR_ARH_INFO="\
+avr2:AVR12_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+avr3:AVR3_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+avr4:AVR4_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+avr5:AVR5_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+"
+
+
+#DEV_INFO="\
+#${AVR_ARH_INFO}\
+#${AVR1_DEV_INFO}\
+#${AVR2_DEV_INFO}\
+#${AVR3_DEV_INFO}\
+#${AVR4_DEV_INFO}\
+#${AVR5_DEV_INFO}\
+#"
+
 
 echo "Generating source directories:"
 
 IFS=';'
+ARH_SUBDIRS="SUBDIRS ="
 
-for dev_crt in $DEV_INFO
+for ath_lib in $AVR_ARH_INFO
 do
-	dev=$(echo $dev_crt | awk -F: '{print $1}')
-	crt=$(echo $dev_crt | awk -F: '{print $2}')
-	defs=$(echo $dev_crt | awk -F: '{print $3}')
-	cflags=$(echo $dev_crt | awk -F: '{print $4}')
-	asflags=$(echo $dev_crt | awk -F: '{print $5}')
-
-	echo "  avr/lib/$dev/"
-
-	CONT_CHR="\\"
-	if [ $dev = at94k ]
+	arh=$(echo $ath_lib | awk -F: '{print $1}')
+	dev_info=$(echo $ath_lib | awk -F: '{print $2}')
+	lib_defs=$(echo $ath_lib | awk -F: '{print $3}')
+	lib_cflags=$(echo $ath_lib | awk -F: '{print $4}')
+	lib_asflags=$(echo $ath_lib | awk -F: '{print $5}')
+	
+	install_dir=$arh
+	if [ $arh = avr2 ]
 	then
-		CONT_CHR=""
+		install_dir=""
 	fi
 
-	case $dev in
-		at90s1200|attiny11|attiny12|attiny15|attiny22|attiny28)
-			# These devices don't support C programming.
-			INCLUDE_C_LIB=
-			;;
-		*)
-			INCLUDE_C_LIB="include \$(top_srcdir)/AvrCommonLibC.am"
-			;;
-	esac
+	echo "  avr/lib/$arh/"
 
-	echo "	$dev $CONT_CHR" >> Makefile.am
+	test -d $arh || mkdir $arh
 
-	test -d $dev || mkdir $dev
+	ARH_SUBDIRS="$ARH_SUBDIRS \\\\\n   $arh"
 
-	cat ${TMP_COPY_RIGHT_HDR} > $dev/Makefile.am
-	cat >> $dev/Makefile.am <<EOF
+
+	DEV_SUBDIRS="SUBDIRS ="
+
+	eval DEV_INFO=\"\$\{$dev_info\}\"
+
+	for dev_crt in $DEV_INFO
+	do
+		dev=$(echo $dev_crt | awk -F: '{print $1}')
+		crt=$(echo $dev_crt | awk -F: '{print $2}')
+		crt_defs=$(echo $dev_crt | awk -F: '{print $3}')
+		crt_cflags=$(echo $dev_crt | awk -F: '{print $4}')
+		crt_asflags=$(echo $dev_crt | awk -F: '{print $5}')
+		
+		echo "  avr/lib/$arh/$dev"
+		
+		test -d $arh/$dev || mkdir $arh/$dev
+
+		DEV_SUBDIRS="$DEV_SUBDIRS \\\\\n   $dev"
+
+		cat ${TMP_COPY_RIGHT_HDR} > $arh/$dev/Makefile.am
+		cat >> $arh/$dev/Makefile.am <<EOF
+
 AVR_TARGET          = $dev
 AVR_TARGET_CRT      = $crt
-AVR_TARGET_DEFS     = $defs
-AVR_TARGET_CFLAGS   = $cflags
-AVR_TARGET_ASFLAGS  = $asflags
+AVR_TARGET_DEFS     = $crt_defs
+AVR_TARGET_CFLAGS   = $crt_cflags
+AVR_TARGET_ASFLAGS  = $crt_asflags
+AVR_INSTALL_DIR     = $install_dir
 
 # NOTE: Automake will be performing the following include, not GNU Make.
 # Automake will also be scanning the included file.
 
 include \$(top_srcdir)/AvrCommon.am
-${INCLUDE_C_LIB}
 
 EOF
 
+	done
+	
+
+	cat ${TMP_COPY_RIGHT_HDR} > $arh/Makefile.am
+	echo -n -e "$DEV_SUBDIRS" >> $arh/Makefile.am
+	echo >> $arh/Makefile.am
+	cat >> $arh/Makefile.am <<EOF
+
+AVR_TARGET          = $arh
+AVR_TARGET_CRT      = $crt
+AVR_TARGET_DEFS     = $lib_defs
+AVR_TARGET_CFLAGS   = $lib_cflags
+AVR_TARGET_ASFLAGS  = $lib_asflags
+AVR_INSTALL_DIR     = $install_dir
+
+# NOTE: Automake will be performing the following include, not GNU Make.
+# Automake will also be scanning the included file.
+
+include \$(top_srcdir)/AvrCommonLibC.am
+
+EOF
+
+	#echo -n -e  $DEV_SUBDIRS
+	#echo 
+
 done
 
+cat ${TMP_COPY_RIGHT_HDR} > Makefile.am
+echo -n -e "$ARH_SUBDIRS" >> Makefile.am
+echo >> Makefile.am
+
 rm -f ${TMP_COPY_RIGHT_HDR}
+

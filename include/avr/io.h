@@ -233,7 +233,9 @@
 #elif defined (__AVR_ATtiny11__)
 #  include <avr/iotn11.h>
 #else
-#  error "device type not defined"
+#  if !defined(__COMPILING_AVR_LIBC__)
+#    warning "device type not defined"
+#  endif
 #endif
 
 #include <avr/portpins.h>

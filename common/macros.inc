@@ -30,6 +30,9 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
+#ifndef _MACROS_INC_ 
+#define _MACROS_INC_ 
+
 #include <avr/io.h>
 
 /* if not defined, assume old version with underscores */
@@ -214,3 +217,4 @@
 #endif
 	.endm
 
+#endif
