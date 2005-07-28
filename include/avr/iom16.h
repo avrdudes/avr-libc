@@ -369,6 +369,12 @@
 #define COM1A0  6
 #define COM1A1  7
 
+/* 
+   The ADHSM bit has been removed from all documentation, 
+   as being not needed at all since the comparator has proven 
+   to be fast enough even without feeding it more power.
+*/
+
 #define SFIOR   _SFR_IO8(0x30)
 #define PSR10   0
 #define PSR2    1

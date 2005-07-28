@@ -692,9 +692,14 @@
 #define    WDP1         1
 #define    WDP0         0
 
+/* 
+   The ADHSM bit has been removed from all documentation, 
+   as being not needed at all since the comparator has proven 
+   to be fast enough even without feeding it more power.
+*/
+
 /* Special Function I/O Register - SFIOR */
 #define    TSM          7
-#define    ADHSM        4
 #define    ACME         3
 #define    PUD          2
 #define    PSR0         1
