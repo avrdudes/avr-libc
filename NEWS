@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.2.4:
 
+* Bugs fixed:
+
+  [#13341] Remove ADHSM bit from header files.
+
 *** Changes since avr-libc-1.2.3:
 
 * Bugs fixed:

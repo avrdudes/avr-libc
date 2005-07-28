@@ -1,3 +1,14 @@
+2005-07-28 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/iom16.h: Add comment about ADHSM bit.
+	* include/avr/iocan128.h (ADHSM): Deleted. 
+	Add comment about ADHSM bit.
+	* include/avr/iom128.h (ADHSM): (Ditto.)
+	* include/avr/iom64.h (ADHSM): (Ditto.)
+	* include/avr/iom8.h (ADHSM): (Ditto.)
+	* include/avr/iom8535.h (ADHSM): (Ditto.)
+	[Fixed bug #13341]
+
 2005-07-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/doxygen.config.in: Turn PDF hyperlinks off by default;

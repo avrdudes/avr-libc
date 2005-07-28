@@ -335,11 +335,16 @@
 #define    CS01         1
 #define    CS00         0
 
+/* 
+   The ADHSM bit has been removed from all documentation, 
+   as being not needed at all since the comparator has proven 
+   to be fast enough even without feeding it more power.
+*/
+
 /* Special Function IO Register */
 #define    ADTS2        7
 #define    ADTS1        6
 #define    ADTS0        5
-#define    ADHSM        4
 #define    ACME         3
 #define    PUD          2
 #define    PSR2         1

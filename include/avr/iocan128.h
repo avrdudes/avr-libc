@@ -824,9 +824,14 @@
 #define    ADPS0        0
 /* End Register Bits */
 
+/* 
+   The ADHSM bit has been removed from all documentation, 
+   as being not needed at all since the comparator has proven 
+   to be fast enough even without feeding it more power.
+*/
+
 /* Register Bits [ADCSRB]  */
 /* ADC Control and status register - ADCSRB */
-#define    ADHSM        7
 #define    ACME         6
 #define    ADTS2        2
 #define    ADTS1        1
