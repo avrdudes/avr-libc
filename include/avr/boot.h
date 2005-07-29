@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2003, 2004  Eric B. Weddington
+/* Copyright (c) 2002, 2003, 2004, 2005  Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
