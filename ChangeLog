@@ -1,3 +1,8 @@
+2005-07-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/boot.h: Implement boot_lock_fuse_bits_get()
+	plus some macros for the respective address values.
+
 2005-07-28 Anatoly Sokolov <aesok@pautinka.net>
 
 	* include/avr/iom16.h: Add comment about ADHSM bit.

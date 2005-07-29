@@ -403,6 +403,60 @@
     );                                                     \
 })
 
+/*
+   Reading lock and fuse bits:
+
+     Similarly to writing the lock bits above, set BLBSET and SPMEN bits
+     in __SPMREG, and then (within four clock cycles) issue an LPM
+     instruction.
+
+     Z address:       contents:
+     0x0000           low fuse bits
+     0x0001           lock bits
+     0x0002           extended fuse bits
+     0x0003           high fuse bits
+
+     Sounds confusing, doesn't it?
+
+     Unlike the macros in pgmspace.h, no need to care for non-enhanced
+     cores here as these old cores do not provide SPM support anyway.
+ */
+
+#define GET_LOW_FUSE_BITS           (0x0000) /**< address to read the low fuse bits */
+#define GET_LOCK_BITS               (0x0001) /**< address to read the lock bits */
+#define GET_EXTENDED_FUSE_BITS      (0x0002) /**< address to read the extended fuse bits */
+#define GET_HIGH_FUSE_BITS          (0x0003) /**< address to read the high fuse bits */
+
+/** \ingroup avr_boot
+    \def boot_lock_fuse_bits_get(address)
+
+    Read the lock or fuse bits at \c address.
+
+    Parameter \c address can be any of GET_LOW_FUSE_BITS,
+    GET_LOCK_BITS, GET_EXTENDED_FUSE_BITS, or GET_HIGH_FUSE_BITS.
+
+    \note The lock and fuse bits returned are the physical values,
+    i.e. a bit returned as 0 means the corresponding fuse or lock bit
+    is programmed.
+ */
+#define boot_lock_fuse_bits_get(address)                   \
+({                                                         \
+    uint8_t __result;                                      \
+    __asm__ __volatile__                                   \
+    (                                                      \
+        "ldi r30, %3\n\t"                                  \
+        "ldi r31, 0\n\t"                                   \
+        "sts %0, %2\n\t"                                   \
+        "lpm %1, Z\n\t"                                    \
+        : "=m" (__SPM_REG),                                \
+          "=r" (__result)                                  \
+        : "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
+          "M" (address)                                    \
+        : "r0", "r30", "r31"                               \
+    );                                                     \
+    __result;                                              \
+})
+
 /** \ingroup avr_boot
     \def boot_page_fill(address, data)
 
