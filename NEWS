@@ -4,6 +4,9 @@
 
   [#13341] Remove ADHSM bit from header files.
 
+* boot.h: implement boot_lock_fuse_bits_get() plus macros for the
+          respective addresses (low/high/ext fuse, lock bits)
+
 *** Changes since avr-libc-1.2.3:
 
 * Bugs fixed:
