@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2003, 2004  Eric B. Weddington
+/* Copyright (c) 2002, 2003, 2004, 2005  Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -25,6 +25,7 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
+/* $Id$ */
 
 #ifndef _AVR_BOOT_H_
 #define _AVR_BOOT_H_    1
