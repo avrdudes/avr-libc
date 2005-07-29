@@ -422,10 +422,26 @@
      cores here as these old cores do not provide SPM support anyway.
  */
 
-#define GET_LOW_FUSE_BITS           (0x0000) /**< address to read the low fuse bits */
-#define GET_LOCK_BITS               (0x0001) /**< address to read the lock bits */
-#define GET_EXTENDED_FUSE_BITS      (0x0002) /**< address to read the extended fuse bits */
-#define GET_HIGH_FUSE_BITS          (0x0003) /**< address to read the high fuse bits */
+/** \ingroup avr_boot
+    \def GET_LOW_FUSE_BITS
+    address to read the low fuse bits, using boot_lock_fuse_bits_get
+ */
+#define GET_LOW_FUSE_BITS           (0x0000)
+/** \ingroup avr_boot
+    \def GET_LOCK_BITS
+    address to read the lock bits, using boot_lock_fuse_bits_get
+ */
+#define GET_LOCK_BITS               (0x0001)
+/** \ingroup avr_boot
+    \def GET_EXTENDED_FUSE_BITS
+    address to read the extended fuse bits, using boot_lock_fuse_bits_get
+ */
+#define GET_EXTENDED_FUSE_BITS      (0x0002)
+/** \ingroup avr_boot
+    \def GET_HIGH_FUSE_BITS
+    address to read the high fuse bits, using boot_lock_fuse_bits_get
+ */
+#define GET_HIGH_FUSE_BITS          (0x0003)
 
 /** \ingroup avr_boot
     \def boot_lock_fuse_bits_get(address)
@@ -497,6 +513,7 @@
     \param lock_bits A mask of which Boot Loader Lock Bits to set.
 
     \note In this context, a 'set bit' will be written to a zero value.
+    Note also that only BLBxx bits can be programmed by this command.
 
     For example, to disallow the SPM instruction from writing to the Boot
     Loader memory section of flash, you would use this macro as such:
@@ -505,11 +522,9 @@
     boot_lock_bits_set (_BV (BLB12));
     \endcode
 
-    And to remove any SPM restrictions, you would do this:
-
-    \code
-    boot_lock_bits_set (0);
-    \endcode */
+    \note Like any lock bits, the Boot Loader Lock Bits, once set,
+    cannot be cleared again except by a chip erase which will in turn
+    also erase the boot loader itself. */
 
 /* Normal versions of the macros use 16-bit addresses.
    Extended versions of the macros use 32-bit addresses.
