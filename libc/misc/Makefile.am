@@ -58,7 +58,7 @@ lib_a_DEPENDENCIES = $(eeprom_asm_sources:%.S=%.1F2021.o) \
 
 # must be added to the package, but automake doesn't know it as source
 # file until now
-EXTRA_DIST = eeprom.S
+EXTRA_DIST = eeprom.S $(eeprom_asm_sources)
 
 # content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
 # according to the multilib subdir (see acinclude.m4 in top directory)
