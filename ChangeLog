@@ -1,3 +1,8 @@
+2005-07-31 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	(Contributed by Chris Candreva <chris at westnet dot com>)
+	* doc/api/sfr.dox: document replacements for sbi/cbi.
+
 2005-07-31 Bjoern Haase <bjoern.m.haase@web.de>
 
 	* include/avr/eeprom.h: re-write of all functions

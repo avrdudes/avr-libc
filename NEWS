@@ -7,8 +7,13 @@
 	   ATmega6450
   [#13341] Remove ADHSM bit from header files.
 
+* Other improvements:
+
+  [patch#4189] Document replacement for sbi/cbi instructions
+
 * boot.h: implement boot_lock_fuse_bits_get() plus macros for the
           respective addresses (low/high/ext fuse, lock bits)
+
 
 *** Changes since avr-libc-1.2.3:
 
