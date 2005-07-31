@@ -1,6 +1,6 @@
 /*  -*- Mode: Asm -*-  */
 
-/* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+/* Copyright (c) 2002-2005  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
    All rights reserved.
 
 
@@ -288,7 +288,7 @@ GLOBAL(strtod)
 	BRLT	10f
 	BRNE	2f		; look for leading zeros
 	SBRS	rFlags,bitDigit
-	RJMP	4f		; no valid digits yet -> skip zero
+	RJMP	3f		; no valid digits yet -> skip zero
 2:
 	CPI	rCh,'9'+1
 	BRGE	10f		; no digit, no integer part
@@ -303,7 +303,6 @@ GLOBAL(strtod)
 3:
 	MOV	rEndptrH,YH
 	MOV	rEndptrL,YL	; valid exponent up to now
-4:
 	LD	rCh,Y+
 	RJMP	1b
 10:
@@ -322,6 +321,7 @@ GLOBAL(strtod)
 	SBRC	rFlags,bitPoint
 	RJMP	10f		; just found the second point
 	ORI	rFlags,_BV(bitPoint)
+	BRTS    7f              ; no digits yet, then '.' is not valid in it self
 	RJMP	6f
 2:
 	CPI	rCh,'0'
@@ -351,18 +351,19 @@ GLOBAL(strtod)
 	adc	rA1,__zero_reg__
 	adc	rA2,__zero_reg__
 	adc	rA3,__zero_reg__
-	MOV	rEndptrH,YH
-	MOV	rEndptrL,YL	; valid float up to now
 4:
 	SBRC	rFlags,bitPoint
-	; scan left of decimal point : decrement exponent
+	; scan after decimal point : decrement exponent
 	DEC	rDPshift
 	RJMP	6f
 5:
-	; scan vor dem Komma, aber keine Digits mehr auswerten : inkrementiere
+	; scan before decimal point, but do not use the digits: increment
 	SBRS	rFlags,bitPoint
 	INC	rDPshift
 6:
+	MOV	rEndptrH,YH
+	MOV	rEndptrL,YL	; valid float up to now
+7:
 	LD	rCh,Y+
 	RJMP	1b
 10:

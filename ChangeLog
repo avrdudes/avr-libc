@@ -3,6 +3,9 @@
 	(Contributed by Chris Candreva <chris at westnet dot com>)
 	* doc/api/sfr.dox: document replacements for sbi/cbi.
 
+	(Contributed by Bjarne Laursen <bl at rosetechnology dot dk>)
+	* libm/fplib/strtod.S: fix endptr bug (bug#12646, patch#4137).
+
 2005-07-31 Bjoern Haase <bjoern.m.haase@web.de>
 
 	* include/avr/eeprom.h: re-write of all functions
