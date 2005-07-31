@@ -1,4 +1,4 @@
-# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2002,2005, Reinhard Jessich  <reinhard.jessich@telering.at>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -30,13 +30,15 @@
 
 noinst_LIBRARIES = lib.a
 
-lib_a_asm_sources = \
+eeprom_asm_sources = \
 	ee_rb.S   \
 	ee_rblk.S \
 	ee_rw.S   \
 	ee_wb.S   \
 	ee_ww.S   \
-	ee_wblk.S \
+	ee_wblk.S 
+
+lib_a_asm_sources = \
 	itoa.S    \
 	ltoa.S    \
 	mulsi10.S \
@@ -48,6 +50,12 @@ lib_a_SOURCES = $(lib_a_asm_sources)
 
 lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
 
+lib_a_LIBADD = $(eeprom_asm_sources:%.S=%.1F2021.o) \
+               $(eeprom_asm_sources:%.S=%.1C1D1E.o)
+
+lib_a_DEPENDENCIES = $(eeprom_asm_sources:%.S=%.1F2021.o) \
+                     $(eeprom_asm_sources:%.S=%.1C1D1E.o)
+
 # must be added to the package, but automake doesn't know it as source
 # file until now
 EXTRA_DIST = eeprom.S
@@ -58,3 +66,8 @@ EXTRA_DIST = eeprom.S
 $(lib_a_asm_objs): %.o: %.S
 	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
 
+%.1C1D1E.o: %.S
+	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@ -DEEPROM_REG_LOCATIONS_OVERRIDE=1C1D1E
+
+%.1F2021.o: %.S
+	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@ -DEEPROM_REG_LOCATIONS_OVERRIDE=1F2021

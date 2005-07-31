@@ -1,4 +1,4 @@
-/* Copyright (c) 2004, Colin O'Flynn <coflynn@newae.com>
+/* Copyright (c) 2004,2005, Colin O'Flynn <coflynn@newae.com>
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -123,6 +123,14 @@
 #define EEAR   _SFR_IO16(0x21)
 #define EEARL  _SFR_IO8(0x21)
 #define EEARH  _SFR_IO8(0x22)
+
+/* 6-char sequence denoting where to find the EEPROM registers in memory space.
+   Adresses denoted in hex syntax with uppercase letters. Used by the EEPROM
+   subroutines.
+   First two letters:  EECR address.
+   Second two letters: EEDR address.
+   Last two letters:   EEAR address.  */
+#define __EEPROM_REG_LOCATIONS__ 1F2021
 
 /* RegDef:  General Timer/Counter Control Register */
 #define GTCCR  _SFR_IO8(0x23)
