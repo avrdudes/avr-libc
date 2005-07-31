@@ -5,7 +5,12 @@
   [no-id]  EEPROM handling not working for AT90CAN128 ATmega48 ATmega88
 	   ATmega165 ATmega168 ATmega169 ATmega325 ATmega3250 ATmega645
 	   ATmega6450
+  [#12646] strtod returns error for valid input (patch#4137)
   [#13341] Remove ADHSM bit from header files.
+
+* Other improvements:
+
+  [patch#4189] Document replacement for sbi/cbi instructions
 
 * boot.h: implement boot_lock_fuse_bits_get() plus macros for the
           respective addresses (low/high/ext fuse, lock bits)

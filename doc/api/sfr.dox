@@ -87,7 +87,7 @@ For example, the following two statements would be equivalent:
 	DDRD &= ~LCDBITS;
 \endcode
 
-The generated code is identical for both.  Whitout optimization, the
+The generated code is identical for both.  Without optimization, the
 compiler strictly generates code following the memory-mapped paradigm,
 while with optimization turned on, code is generated using the (faster
 and smaller) \c in/out MCU instructions.
@@ -95,5 +95,22 @@ and smaller) \c in/out MCU instructions.
 Note that special care must be taken when accessing some of the 16-bit
 timer IO registers where access from both the main program and within
 an interrupt context can happen.  See \ref faq_16bitio.
+
+\par Porting programs that use sbi/cbi
+
+As described above, access to the AVR single bit set and clear instructions
+are provided via the standard C bit manipulation commands. The sbi and cbi
+commands are no longer directly supported. 
+sbi (sfr,bit) can be replaced by  sfr |= _BV(bit) .
+
+ie: sbi(PORTB, PB1);  is now PORTB |= _BV(PB1);
+
+This actually is more flexible than having sbi directly, as the optimizer 
+will use a hardware sbi if appropriate, or a read/or/write if not. You do
+not need to keep track of which registers sbi/cbi will operate on.
+
+Likewise, cbi (sfr,bit) is now   sfr &= ~(_BV(bit));
+
+
 
 */
