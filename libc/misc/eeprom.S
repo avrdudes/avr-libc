@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
+   Copyright (c) 2005, Bjoern Haase
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -31,11 +32,61 @@
 
    Contributors:
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
-     eeprom_write_word and eeprom_write_block added by Artur Lipowski <LAL@pro.onet.pl>
+     eeprom_write_word and eeprom_write_block added by Artur Lipowski
+     <LAL@pro.onet.pl>
+     Complete rewrite using the original interface by Bjoern Haase
+     <bjoern.haase@de.bosch.com>.
  */
 
 #include "macros.inc"
 #include "ctoasm.inc"
+#include "avr/io.h"
+#ifndef __EEPROM_REG_LOCATIONS__
+/* 6-byte string denoting where to find the EEPROM registers in memory space.
+   Adresses denoted in hex syntax with uppercase letters. Used by the EEPROM
+   subroutines.
+   First two letters:  EECR address.
+   Second two letters: EEDR address.
+   Last two letters:   EEAR address.  */
+#define __EEPROM_REG_LOCATIONS__ 1C1D1E
+#endif
+
+/* As long as we don't have a proper multilib environment: Let's make it
+   possible to override the locations defined in the io headers.  */
+#ifdef EEPROM_REG_LOCATIONS_OVERRIDE
+
+#undef  __EEPROM_REG_LOCATIONS__
+#define __EEPROM_REG_LOCATIONS__ EEPROM_REG_LOCATIONS_OVERRIDE
+
+#define HEXNR CONCAT1(0x , EEPROM_REG_LOCATIONS_OVERRIDE)
+
+#ifdef EECR
+#undef EECR
+#define EECR _SFR_IO8((HEXNR >> 16) & 0xFF)
+#endif
+
+#ifdef EEDR
+#undef EEDR
+#define EEDR _SFR_IO8((HEXNR >> 8) & 0xFF )
+#endif
+
+#ifdef EEAR
+#undef EEAR
+#define EEAR _SFR_IO8(HEXNR & 0xFF)
+#endif
+
+#ifdef EEARH
+#undef EEARH
+#endif
+
+#ifdef EEARL
+#undef EEARL
+#define EEARL EEAR
+#endif
+
+#endif
+
+#define _EELABEL(x) CONCAT1(__,CONCAT1(x, CONCAT1 (_,__EEPROM_REG_LOCATIONS__)))
 
 /* the same library is used for 2313 and 8515 for now -
    I hope writing 0 to non-existent EEARH doesn't hurt... */
@@ -43,78 +94,61 @@
 #define EEARH (EEARL+1)
 #endif
 
-#define addr_hi rP0
-#define addr_lo rP1
-#define res_hi rP0
-#define res_lo rP1
 
 #ifdef L_eeprom_read_byte
-/* read one byte from EEPROM */
-/* uint8_t eeprom_read_byte(const uint8_t *addr); */
-/* addr = r25:r24, result = r25(=0):r24 */
+/* read one byte from EEPROM.
+   addr = r26:r27, result = __tmp_reg__ 
+   Post increment r26:r27.  */
 
-	.section .text
-	.global _U(eeprom_read_byte)
+	.section .text.eeprom, "ax", @progbits
+	.global _EELABEL(eeprom_read_byte)
 
-_U(eeprom_read_byte):
+_EELABEL(eeprom_read_byte):
 	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	_U(eeprom_read_byte)	/* make sure EEPROM is ready */
+	rjmp	_EELABEL(eeprom_read_byte)	/* make sure EEPROM is ready */
 #ifdef EEARH
-	out	_SFR_IO_ADDR(EEARH), addr_hi
+	out	_SFR_IO_ADDR(EEARH),r27
 #endif
-	out	_SFR_IO_ADDR(EEARL), addr_lo
+	out	_SFR_IO_ADDR(EEARL),r26
 	sbi	_SFR_IO_ADDR(EECR), EERE
-	clr	res_hi		/* gcc wants result extended to "int"? */
-	in	res_lo, _SFR_IO_ADDR(EEDR)
+	adiw	r26,1 /* Increment x register */
+	in	__tmp_reg__, _SFR_IO_ADDR(EEDR)
 	ret
 #endif /* L_eeprom_read_byte */
 
 #ifdef L_eeprom_read_word
-/* read a little endian 16-bit word from EEPROM */
-/* uint16_t eeprom_read_word(const uint16_t *addr); */
-/* addr = r25:r24, result = r25:r24 */
+/* read one word from EEPROM.
+   addr = r26:r27, result = r30:r31
+   Post increment r26:r27.  */
 
-	.global _U(eeprom_read_word)
+	.section .text.eeprom, "ax", @progbits
+	.global _EELABEL(eeprom_read_word)
 
-_U(eeprom_read_word):
-	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	_U(eeprom_read_word)	/* make sure EEPROM is ready */
-#ifdef EEARH
-	out	_SFR_IO_ADDR(EEARH), addr_hi
-#endif
-	out	_SFR_IO_ADDR(EEARL), addr_lo
-	sbi	_SFR_IO_ADDR(EECR), EERE
-	adiw	addr_lo, 1
-	in	__tmp_reg__, _SFR_IO_ADDR(EEDR)
-#ifdef EEARH
-	out	_SFR_IO_ADDR(EEARH), addr_hi
-#endif
-	out	_SFR_IO_ADDR(EEARL), addr_lo
-	sbi	_SFR_IO_ADDR(EECR), EERE
-	mov	res_lo, __tmp_reg__
-	in	res_hi, _SFR_IO_ADDR(EEDR)
+_EELABEL(eeprom_read_word):
+	rcall _EELABEL(eeprom_read_byte)
+	mov r30,__tmp_reg__
+	rcall _EELABEL(eeprom_read_byte)
+	mov r31,__tmp_reg__
 	ret
-#endif /* L_eeprom_read_word */
-
-#undef res_hi
-#undef res_lo
+#endif
 
 #ifdef L_eeprom_write_byte
-/* write a byte to EEPROM */
-/* void eeprom_write_byte(uint8_t *addr, uint8_t val); */
-/* addr = r25:r24, val = r22 */
-#define val rP3
+/* write a byte to EEPROM
+   Address in r26:r27, value in __tmp_reg__
+   Post increment r26:r27.  */
 
-	.global _U(eeprom_write_byte)
+	.section .text.eeprom, "ax", @progbits
+	.global _EELABEL(eeprom_write_byte)
 
-_U(eeprom_write_byte):
+_EELABEL(eeprom_write_byte):
 	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	_U(eeprom_write_byte)	/* make sure EEPROM is ready */
+	rjmp	_EELABEL(eeprom_write_byte)	/* make sure EEPROM is ready */
 #ifdef EEARH
-	out	_SFR_IO_ADDR(EEARH), addr_hi
+	out	_SFR_IO_ADDR(EEARH), r27
 #endif
-	out	_SFR_IO_ADDR(EEARL), addr_lo
-	out	_SFR_IO_ADDR(EEDR), val
+	out	_SFR_IO_ADDR(EEARL), r26
+	out	_SFR_IO_ADDR(EEDR),__tmp_reg__
+	adiw	r26,1 /* Increment x register */
 	in	__tmp_reg__, _SFR_IO_ADDR(SREG)
 	cli			; /* no ints between setting EEMWE and EEWE */
 	sbi	_SFR_IO_ADDR(EECR), EEMWE
@@ -125,117 +159,52 @@ _U(eeprom_write_byte):
 #endif /* L_eeprom_write_byte */
 
 #ifdef L_eeprom_write_word
-/* write a word to EEPROM */
-/* void eeprom_write_word (uint16_t *addr, uint16_t val); */
-/* addr = r25:r24, val = r23:r22 */
-#define val_hi rP2
-#define val_lo rP3
+/* write a word to EEPROM
+   Address in r26:r27, value in __tmp_reg__ (LSB) and __zero_reg__ (MSB)
+   Post increment r26:r27.  */
 
-	.global _U(eeprom_write_word)
+	.section .text.eeprom, "ax", @progbits
+	.global _EELABEL(eeprom_write_word)
 
-_U(eeprom_write_word):
-	ser	rTI0				; set flag to indicate that
-						; the first (LSB) byte will be written
-	in	__tmp_reg__, _SFR_IO_ADDR(SREG)
-eeprom_write_word_start:
-	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	eeprom_write_word_start		; make sure EEPROM is ready
-#ifdef EEARH
-	out	_SFR_IO_ADDR(EEARH), addr_hi
+_EELABEL(eeprom_write_word):
+	rcall _EELABEL(eeprom_write_byte)
+	mov __tmp_reg__,__zero_reg__
+	rcall _EELABEL(eeprom_write_byte)
+	clr __zero_reg__
+	ret
 #endif
-	out	_SFR_IO_ADDR(EEARL), addr_lo
-	out	_SFR_IO_ADDR(EEDR), val_lo
-	cli					; no ints between setting EEMWE and EEWE
-	sbi	_SFR_IO_ADDR(EECR), EEMWE
-	sbi	_SFR_IO_ADDR(EECR), EEWE
-	out	_SFR_IO_ADDR(SREG), __tmp_reg__
-	sbrs	rTI0, 0				; if flag is cleared it means that
-	ret					; we write both bytes
-			
-	subi	addr_lo, lo8(-1)		; prepare to writie MSB
-	sbci	addr_hi, hi8(-1)
-	mov	val_lo, val_hi
-	clr	rTI0				; clear flag to indicate that
-	rjmp	eeprom_write_word_start		; the second (MSB) byte will be written
-	
-#undef val_hi
-#undef val_lo
-#endif /* L_eeprom_write_word */
-
-#undef addr_hi
-#undef addr_lo
-
-#define buf_hi rP0
-#define buf_lo rP1
-#define addr_hi rP2
-#define addr_lo rP3
-#define n_hi rP4
-#define n_lo rP5
 
 #ifdef L_eeprom_read_block
-/* read a block of bytes from EEPROM */
-/* void eeprom_read_block(void *buf, const void *addr, size_t n); */
-/* buf = r25:r24, addr = r23:r22, n = r21:r20 */
+/* read a block of n (maximum 256) bytes from EEPROM 
+   ram_buffer = r30:r31, eeprom_addr = r26:r27, n = __zero_reg__
+   an initial value of 0 in __zero_reg__ corresponds to a value of n == 256. */
 
-	.global _U(eeprom_read_block)
+	.section .text.eeprom, "ax", @progbits
+	.global _EELABEL(eeprom_read_block)
+	.global _EELABEL(eeprom_read_byte)
 
-_U(eeprom_read_block):
-	cp	n_lo, __zero_reg__
-	cpc	n_hi, __zero_reg__
-	breq	eeprom_read_block_done
-	LOAD_X(buf_lo, buf_hi)
-eeprom_read_block_busy:
-	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	eeprom_read_block_busy	/* make sure EEPROM is ready */
-eeprom_read_block_loop:
-#ifdef EEARH
-	out	_SFR_IO_ADDR(EEARH), addr_hi
-#endif
-	out	_SFR_IO_ADDR(EEARL), addr_lo
-	sbi	_SFR_IO_ADDR(EECR), EERE
-	subi	addr_lo, lo8(-1)
-	sbci	addr_hi, hi8(-1)
-	in	__tmp_reg__, _SFR_IO_ADDR(EEDR)
-	st	X+, __tmp_reg__
-	subi	n_lo, lo8(1)
-	sbci	n_hi, hi8(1)
-	brne	eeprom_read_block_loop
-eeprom_read_block_done:
+_EELABEL(eeprom_read_block):
+	rcall _EELABEL(eeprom_read_byte)
+	st z+,__tmp_reg__
+	dec __zero_reg__
+	brne _EELABEL(eeprom_read_block)
 	ret
 #endif /* L_eeprom_read_block */
 
 #ifdef L_eeprom_write_block
-/* write a block of bytes to EEPROM */
-/* void eeprom_write_block (const void *buf, void *addr, size_t n); */
-/* buf = r25:r24, addr = r23:r22, n = r21:r20 */
+/* Write a block of n (maximum 256) bytes to EEPROM 
+   ram_pointer = r30:r31, eeprom_addr = r26:r27, n = __zero_reg__
+   an initial value of 0 in __zero_reg__ correspond to a value of n == 256. */
 
-	.global _U(eeprom_write_block)
+	.section .text.eeprom, "ax", @progbits
+	.global _EELABEL(eeprom_write_block)
+	.global _EELABEL(eeprom_write_byte)
 
-_U(eeprom_write_block):
-	cp	n_lo, __zero_reg__		; check if really there is something to write
-	cpc	n_hi, __zero_reg__
-	breq	eeprom_write_block_done
-	LOAD_X(buf_lo, buf_hi)
-	in	buf_lo, _SFR_IO_ADDR(SREG)	; reuse buf_lo as the SREG temporary storage
-eeprom_write_block_busy:
-	sbic	_SFR_IO_ADDR(EECR), EEWE
-	rjmp	eeprom_write_block_busy		; make sure EEPROM is ready
-#ifdef EEARH
-	out	_SFR_IO_ADDR(EEARH), addr_hi
-#endif
-	out	_SFR_IO_ADDR(EEARL), addr_lo
-	ld	__tmp_reg__, X+
-	out	_SFR_IO_ADDR(EEDR), __tmp_reg__  
-	cli					; no ints between setting EEMWE and EEWE
-	sbi	_SFR_IO_ADDR(EECR), EEMWE
-	sbi	_SFR_IO_ADDR(EECR), EEWE
-	out	_SFR_IO_ADDR(SREG), buf_lo
-	subi	addr_lo, lo8(-1)
-	sbci	addr_hi, hi8(-1)
-	subi	n_lo, lo8(1)
-	sbci	n_hi, hi8(1)
-	brne	eeprom_write_block_busy
-eeprom_write_block_done:
+_EELABEL(eeprom_write_block):
+	ld __tmp_reg__,z+
+	rcall _EELABEL(eeprom_write_byte)
+	dec __zero_reg__
+	brne _EELABEL(eeprom_write_block)
 	ret
 #endif /* L_eeprom_write_block */
 

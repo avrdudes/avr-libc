@@ -115,6 +115,14 @@
 #define EEARL  _SFR_IO8(0x21)
 #define EEARH  _SFR_IO8(0X22)
 
+/* 6-char sequence denoting where to find the EEPROM registers in memory space.
+   Adresses denoted in hex syntax with uppercase letters. Used by the EEPROM
+   subroutines.
+   First two letters:  EECR address.
+   Second two letters: EEDR address.
+   Last two letters:   EEAR address.  */
+#define __EEPROM_REG_LOCATIONS__ 1F2021
+
 /* General Timer/Counter Control Register */
 #define GTCCR  _SFR_IO8(0x23)
 

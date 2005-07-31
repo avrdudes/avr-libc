@@ -1,4 +1,4 @@
-/* Copyright (c) 2004, Theodore A. Roth
+/* Copyright (c) 2004,2005, Theodore A. Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -208,6 +208,14 @@ Even though EEARH is not used by the mega48, the EEAR8 bit in the register
 must be written to 0, according to the datasheet, hence the EEARH register
 must be defined for the mega48.
 */
+/* 6-char sequence denoting where to find the EEPROM registers in memory space.
+   Adresses denoted in hex syntax with uppercase letters. Used by the EEPROM
+   subroutines.
+   First two letters:  EECR address.
+   Second two letters: EEDR address.
+   Last two letters:   EEAR address.  */
+#define __EEPROM_REG_LOCATIONS__ 1F2021
+
 
 #define GTCCR   _SFR_IO8 (0x23)
 /* GTCCR */

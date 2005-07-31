@@ -1,3 +1,20 @@
+2005-07-31 Bjoern Haase <bjoern.m.haase@web.de>
+
+	* include/avr/eeprom.h: re-write of all functions
+	and documentation update. EEMEM, add.
+	* include/avr/iocan128.h: __EEPROM_REG_LOCATIONS__ define
+	* include/avr/iom165.h, include/avr/iom169.h: Ditto.
+	* include/avr/iom325.h, include/avr/iom3250.h: Ditto.
+	* include/avr/iom645.h, include/avr/iom6450.h: Ditto.
+	* include/avr/iomx8.h: Ditto.
+	* libc/misc/Makefile.am:
+	lib_a_asm_sources modify, eeprom_asm_sources add,
+	lib_a_LIBADD add, lib_a_DEPENDENCIES add
+	rule "%.1C1D1E.o: %.S" add, rule "%.1F2021.o: %.S" add
+	* libc/misc/eeprom.S: complete re-write
+	* AUTHORS: add Bjoern Haase
+	* LICENSE: (Ditto.)
+
 2005-07-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/boot.h: Implement boot_lock_fuse_bits_get()
