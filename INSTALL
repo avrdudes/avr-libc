@@ -1,3 +1,4 @@
+README README README README README README
 
  The easiest way to configure this package is to use the
 
@@ -7,6 +8,11 @@
 
  Please have also a look to doc/INSTALL.
 
+/README /README /README /README /README /README
+
+If you decide to not use doconf, be sure you know what you're
+doing.  In particular, *NEVER* try to run ./configure from the
+top-level directory itself.  *NEVER*
 
 
 Basic Installation

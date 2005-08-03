@@ -1,3 +1,7 @@
+2005-08-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* INSTALL: emphasize that users ought to use ./doconf.
+
 2005-07-31 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	(Contributed by Chris Candreva <chris at westnet dot com>)
