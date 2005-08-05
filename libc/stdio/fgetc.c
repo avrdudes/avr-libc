@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002, 2005, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -48,10 +48,12 @@ fgetc(FILE *stream)
 	}
 
 	if (stream->flags & __SSTR) {
-		rv = *stream->buf++;
+		rv = *stream->buf;
 		if (rv == '\0') {
 			stream->flags |= __SEOF;
 			return EOF;
+		} else {
+			stream->buf++;
 		}
 	} else {
 		rv = stream->get();
