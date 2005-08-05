@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.2.5:
 
+* Bugs fixed:
+
+  [#12775] Possible Bug in sscanf on string end
+
 *** Changes since avr-libc-1.2.4:
 
 * Bugs fixed:

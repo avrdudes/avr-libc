@@ -1,3 +1,9 @@
+2005-08-05 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/stdio/fgetc.c (fgetc) : Prevent movement of the pointer 
+	over the end of a string.
+	[Fixed bug #12775]
+	
 2005-08-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* INSTALL: emphasize that users ought to use ./doconf.
