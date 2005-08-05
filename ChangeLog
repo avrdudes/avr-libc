@@ -1,3 +1,9 @@
+2005-08-05 Anatoly Sokolov <aesok@pautinka.net>
+
+	* devtools/gen-avr-lib-tree.sh (AVR12_DEV_INFO, AVR3_DEV_INFO, 
+	AVR4_DEV_INFO, AVR5_DEV_INFO, AVR_ARH_INFO) : Remove semicolon
+	after last record.
+
 2005-07-27 Anatoly Sokolov <aesok@pautinka.net>
 
 	* AvrCommon.am: change to compile per-architecture libs
