@@ -1,3 +1,7 @@
+2005-08-08 Anatoly Sokolov <aesok@pautinka.net>
+
+	* bootstrap: logic in bootstrap to detect auto* versions is changed.
+
 2005-08-05 Anatoly Sokolov <aesok@pautinka.net>
 
 	* devtools/gen-avr-lib-tree.sh (AVR12_DEV_INFO, AVR3_DEV_INFO, 

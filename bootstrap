@@ -5,56 +5,35 @@
 # bootstrap script to build all the *.in files and configure script.
 #
 
-export AUTOMAKE AUTOCONF ACLOCAL AUTOHEADER
+# autoconf-2.59 is required
 
-status="fail"
-for AUTOMAKE in automake automake17 automake-1.7 automake1.7
-do
-	AUTOMAKE_VER=`(${AUTOMAKE} --version | head -n 1 | cut -d ' ' -f 4 | cut -c -3) 2>/dev/null`
-	if [ $? != 0 ]
-	then
-		continue
-	fi
-	automake_ver=$(echo "$AUTOMAKE_VER >= 1.7" | bc)  # Check if version is >= 1.7
-	if [ $automake_ver!=1 ]
-	then
-		status=""
-		ACLOCAL=aclocal`expr "$AUTOMAKE" : 'automake\(.*\)'`
-		break
-	fi
-done
+: ${AUTOHEADER="autoheader${AC_VER}"}
+: ${AUTOCONF="autoconf${AC_VER}"}
 
-if [ -n "$status" ]
+# automake-1.9.x is required
+
+: ${ACLOCAL="aclocal${AM_VER}"}
+: ${AUTOMAKE="automake${AM_VER}"}
+
+# Verify autoconf version
+
+AUTOCONF_VER=`(${AUTOCONF} --version 2>/dev/null | head -n 1 | \
+              cut -d ' ' -f 4) 2>/dev/null`
+if [ "$AUTOCONF_VER" != "2.59" ]
 then
-	echo "You need to use automake version 1.7.x (preferrably 1.7.6)."
-	echo "You are using `automake --version | head -n 1`."
-	echo
+	echo "You need to use autoconf version 2.59."
+	echo "You are using `${AUTOCONF} --version | head -n 1`."
 	exit 1
 fi
 
-status="fail"
+# Verify automake version
 
-for AUTOCONF in autoconf autoconf257 autoconf-2.57 autoconf2.57
-do
-	AUTOCONF_VER=`(${AUTOCONF} --version 2>/dev/null | head -n 1 | cut -d ' ' -f 4) 2>/dev/null`
-	if [ $? != 0 ]
-	then
-		continue
-	fi
-	autoconf_ver=$(echo "$AUTOCONF_VER >= 2.57" | bc)  # Check if version is >= 2.57
-	if [ $autoconf_ver!=1 ]
-	then
-		status=""
-		AUTOHEADER=autoheader`expr "$AUTOCONF" : 'autoconf\(.*\)'`
-		break
-	fi
-done
-
-if [ -n "$status" ]
+AUTOMAKE_VER=`(${AUTOMAKE} --version | head -n 1 | \
+              cut -d ' ' -f 4 | cut -d '.' -f -2) 2>/dev/null`
+if [ "$AUTOMAKE_VER" != "1.9" ]
 then
-	echo "You need to use autoconf version 2.57."
-	echo "You are using `autoconf --version | head -n 1`."
-	echo
+	echo "You need to use automake version 1.9."
+	echo "You are using `${AUTOMAKE} --version | head -n 1`."
 	exit 1
 fi
 
