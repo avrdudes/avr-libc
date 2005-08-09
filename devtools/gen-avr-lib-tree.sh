@@ -246,7 +246,7 @@ EOF
 	
 
 	cat ${TMP_COPY_RIGHT_HDR} > $arh/Makefile.am
-	echo -n -e "$DEV_SUBDIRS" >> $arh/Makefile.am
+	printf "$DEV_SUBDIRS" >> $arh/Makefile.am
 	echo >> $arh/Makefile.am
 	cat >> $arh/Makefile.am <<EOF
 
@@ -264,13 +264,13 @@ include \$(top_srcdir)/AvrCommonLibC.am
 
 EOF
 
-	#echo -n -e  $DEV_SUBDIRS
+	#printf  $DEV_SUBDIRS
 	#echo 
 
 done
 
 cat ${TMP_COPY_RIGHT_HDR} > Makefile.am
-echo -n -e "$ARH_SUBDIRS" >> Makefile.am
+printf "$ARH_SUBDIRS" >> Makefile.am
 echo >> Makefile.am
 
 rm -f ${TMP_COPY_RIGHT_HDR}
