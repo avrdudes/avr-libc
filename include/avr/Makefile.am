@@ -29,8 +29,66 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/misc/Files.am
+avrdir = $(prefix)/avr/include/avr
+avr_HEADERS = \
+    boot.h \
+    crc16.h \
+    delay.h \
+    eeprom.h \
+    interrupt.h \
+    io.h \
+    io1200.h \
+    io2313.h \
+    io2323.h \
+    io2333.h \
+    io2343.h \
+    io43u32x.h \
+    io43u35x.h \
+    io4414.h \
+    io4433.h \
+    io4434.h \
+    io76c711.h \
+    io8515.h \
+    io8534.h \
+    io8535.h \
+    io86r401.h \
+    ioat94k.h \
+    iocan128.h \
+    iom103.h \
+    iom128.h \
+    iom16.h \
+    iom161.h \
+    iom162.h \
+    iom163.h \
+    iom165.h \
+    iom168.h \
+    iom169.h \
+    iom32.h \
+    iom323.h \
+    iom325.h \
+    iom3250.h \
+    iom48.h \
+    iom64.h \
+    iom645.h \
+    iom6450.h \
+    iom8.h \
+    iom8515.h \
+    iom8535.h \
+    iom88.h \
+    iomx8.h \
+    iotn11.h \
+    iotn12.h \
+    iotn13.h \
+    iotn15.h \
+    iotn22.h \
+    iotn2313.h \
+    iotn26.h \
+    iotn28.h \
+    parity.h \
+    pgmspace.h \
+    portpins.h \
+    sfr_defs.h \
+    signal.h \
+    sleep.h \
+    wdt.h
 
-EXTRA_DIST = \
-	$(misc_a_asm_sources) \
-	$(misc_a_extra_dist)

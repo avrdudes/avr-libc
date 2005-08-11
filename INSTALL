@@ -1,18 +1,7 @@
-README README README README README README
+NB: avr-libc requires a cross-compiler.  The recommended way to run
+configure is
 
- The easiest way to configure this package is to use the
-
-   doconf
-
- script. It executes configure with the needed options.
-
- Please have also a look to doc/INSTALL.
-
-/README /README /README /README /README /README
-
-If you decide to not use doconf, be sure you know what you're
-doing.  In particular, *NEVER* try to run ./configure from the
-top-level directory itself.  *NEVER*
+./configure --build=`./config.guess` --host=avr [other options]
 
 
 Basic Installation

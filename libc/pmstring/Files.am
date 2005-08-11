@@ -29,8 +29,21 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/misc/Files.am
+pmstring_a_c_sources =
 
-EXTRA_DIST = \
-	$(misc_a_asm_sources) \
-	$(misc_a_extra_dist)
+pmstring_a_asm_sources = \
+	memcpy_P.S \
+	strcasecmp_P.S \
+	strcat_P.S \
+	strcmp_P.S \
+	strcpy_P.S \
+	strlcat_P.S \
+	strlcpy_P.S \
+	strlen_P.S \
+	strncasecmp_P.S \
+	strncat_P.S \
+	strncmp_P.S \
+	strncpy_P.S \
+	strnlen_P.S
+
+# vim: set ft=make:

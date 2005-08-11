@@ -29,8 +29,24 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/misc/Files.am
+misc_a_c_sources =
 
-EXTRA_DIST = \
-	$(misc_a_asm_sources) \
-	$(misc_a_extra_dist)
+eeprom_asm_sources = \
+	ee_rb.S \
+	ee_rblk.S \
+	ee_rw.S \
+	ee_wb.S \
+	ee_ww.S \
+	ee_wblk.S
+
+misc_a_asm_sources = \
+	itoa.S \
+	ltoa.S \
+	mulsi10.S \
+	mul10.S \
+	ultoa.S \
+	utoa.S
+
+misc_a_extra_dist = eeprom.S $(eeprom_asm_sources)
+
+# vim: set ft=make:

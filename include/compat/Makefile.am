@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2005,  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,8 +29,7 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/misc/Files.am
-
-EXTRA_DIST = \
-	$(misc_a_asm_sources) \
-	$(misc_a_extra_dist)
+avrdir = $(prefix)/avr/include/compat
+avr_HEADERS = \
+    ina90.h \
+    twi.h

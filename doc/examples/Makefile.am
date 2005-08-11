@@ -34,13 +34,6 @@
 MAINTAINERCLEANFILES = Makefile.in
 
 EXTRA_DIST           = all-demos.dox \
-                       avr-recv.c \
-                       io.c \
-                       prg \
-                       printf.h \
-                       progmem.c \
-                       send_byte.s \
-                       signal.c \
                        demo/Makefile \
                        demo/demo.c \
                        demo/demo.fig \

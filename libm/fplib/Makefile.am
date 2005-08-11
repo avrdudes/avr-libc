@@ -1,4 +1,4 @@
-# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,70 +25,12 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id$
+#
 
-## Process this file with automake to generate Makefile.in
+include $(top_srcdir)/libm/fplib/Files.am
 
-noinst_LIBRARIES = lib.a
-
-lib_a_asm_sources = \
-	acos.S           \
-	addsf3.S         \
-	addsf3x.S	 \
-	asin.S	         \
-	atan.S	         \
-	atan2.S	         \
-	ceil.S	         \
-	cos.S	         \
-	cosh.S	         \
-	divsf3.S         \
-	divsf3x.S	 \
-	dtostre.S	 \
-	dtostrf.S	 \
-	exp.S	         \
-	fixsfsi.S	 \
-	floatsisf.S	 \
-	floor.S	         \
-	fmod.S	         \
-	fp_cmp.S         \
-	fp_cosinus.S	 \
-	fp_flashconst.S	 \
-	fp_merge.S	 \
-	fp_nan.S         \
-	fp_powerseries.S \
-	fp_split.S	 \
-	fp_zero.S	 \
-	frexp.S	         \
-	isinfnan.S       \
-	ldexp.S	         \
-	log.S	         \
-	log10.S	         \
-	modf.S	         \
-	mulsf3.S         \
-	mulsf3x.S	 \
-	negsf2.S         \
-	pow.S	         \
-	sin.S	         \
-	sinh.S	         \
-	sqrt.S	         \
-	strtod.S         \
-	tan.S	         \
-	tanh.S
-
-lib_a_SOURCES = $(lib_a_asm_sources)
-
-lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
-
-# must be added to the package, but automake doesn't know it as source
-# file until now
 EXTRA_DIST = \
-	fplib.inc      \
-	readme.dtostre \
-	readme.fplib   \
-	readme.strtod
-
-# content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
-# according to the multilib subdir (see acinclude.m4 in top directory)
-
-$(lib_a_asm_objs): %.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
-
+	$(libm_a_asm_sources) \
+	$(libm_a_extra_dist)

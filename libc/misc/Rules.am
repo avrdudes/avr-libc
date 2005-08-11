@@ -1,7 +1,4 @@
-#!/bin/sh
-#
-# Copyright (c) 2002
-# Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -9,12 +6,10 @@
 #
 # * Redistributions of source code must retain the above copyright
 #   notice, this list of conditions and the following disclaimer.
-#
 # * Redistributions in binary form must reproduce the above copyright
 #   notice, this list of conditions and the following disclaimer in
 #   the documentation and/or other materials provided with the
 #   distribution.
-#
 # * Neither the name of the copyright holders nor the names of
 #   contributors may be used to endorse or promote products derived
 #   from this software without specific prior written permission.
@@ -30,18 +25,19 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-#
-# Make the distribution package.
-#
-# usage: dodist
-#
-# This script reconfigures the project and makes the distribution package.
-# It is for the developer only. If you don't know anything about
-# automake/autoconf, do never execute this script.
 
-set -e
-./reconf
-./doconf
-./domake        # to be sure the distribution can be compiled
-./domake distcheck
+# $Id$
+
+include $(top_srcdir)/libc/misc/Files.am
+
+misc_a_libadd = \
+	$(eeprom_asm_sources:%.S=%.1F2021.o) \
+	$(eeprom_asm_sources:%.S=%.1C1D1E.o)
+
+%.1C1D1E.o: %.S
+	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@ -DEEPROM_REG_LOCATIONS_OVERRIDE=1C1D1E
+
+%.1F2021.o: %.S
+	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@ -DEEPROM_REG_LOCATIONS_OVERRIDE=1F2021
+
+# vim: set ft=make:

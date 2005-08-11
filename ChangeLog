@@ -1,9 +1,205 @@
+2005-08-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Merge the "autoconf" branch back to HEAD, so we can use
+	current versions of autoconf and automake.
+
+	Thanks to Ted Roth and Anatoly Sokolov for their nice work
+	on that branch.
+
+	All copyright notices from the branch files have been brought
+	into the standard form.
+
+	Changes compared to the "autoconf" branch:
+	* configure.ac (AC_INIT): bump version to 1.3.0.20050810
+	* configure.ac (AC_CONFIG_SRCDIR): use doc/examples/demo/demo.c
+	as reference file
+	* configure.ac: use $host_alias and $build_alias instead of the
+	deprecated $host and $build, hint about using config.guess for
+	--build, add checks and conditional rules for attiny13,
+	attiny2313, atmega48, atmega88, atmega165, atmega168, atmega325,
+	atmega3250, atmega645, atmega6450, at90can128; remove warning
+	about being work in progress.
+	* AvrCommonLibC.am (libc_a_LIBADD libc_a_DEPENDENCIES): add
+	misc_a_libadd (for the EEPROM libraries)
+	* include/compat/.cvsignore: New file
+	* scripts/.cvsignore: (Ditto.)
+	* include/compat/Makefile.am: (Ditto.)
+	* scripts/Makefile.am: (Ditto.)
+	* Makefile.am (EXTRA_DIST): add ChangeLog-2004
+	* Makefile.am (SUBDIRS DIST_SUBDIRS): add "scripts"
+	* doc/Makefile.am (EXTRA_DIST): remove avr-libc-reference.html
+	* doc/api/Makefile.am (install-data-local): add INSTALL_DOX_MAN
+	* doc/examples/Makefile.am (EXTRA_DIST): add all-demos.dox,
+	remove the obsolete demos doc/examples/*.[cs]
+	* include/avr/Makefile.am (avr_HEADERS): remove ina90.h and twi.h,
+	add iom165.h, iom325.h, iom3250.h, iom645.h, iom6450.h
+	* include/Makefile.am (avr_HEADERS): add stdint.h
+	* include/Makefile.am (SUBDIRS): add compat
+	* libc/misc/Files.am (misc_a_asm_sources): remove EEPROM files
+	* libc/misc/Files.am (eeprom_asm_sources): add EEPROM files
+	* libc/misc/Rules.am: add logic to build two different sets of
+	EEPROM functions (suffix 1C1D1E and suffix 1F2021)
+	* libc/pmstring/Files.am (pmstring_a_asm_sources): add strnlen_P.S
+	* libc/stdio/Rules.am (PRINTF_CFLAGS): change from -O1 to -Os
+	* libc/stdlib/Files.am (stdlib_a_c_sources): add realloc.c,
+	stdlib_private.h
+	* INSTALL, doc/INSTALL, doc/api/tools-install.dox: remove all
+	references to the old scripts (reconf, doconf, domake), update
+	build instructions.
+
+	Here are the original ChangeLog entries from the branch (in
+	reverse chronological order):
+
+	* devtools/gen-avr-lib-tree.sh: use the Posix-portable printf
+	instead of the GNU-only echo -n -e command.
+	* bootstrap: logic in bootstrap to detect auto* versions is changed.
+	* devtools/gen-avr-lib-tree.sh (AVR12_DEV_INFO, AVR3_DEV_INFO,
+	AVR4_DEV_INFO, AVR5_DEV_INFO, AVR_ARH_INFO) : Remove semicolon
+	after last record.
+	* AvrCommon.am: change to compile per-architecture libs
+	* AvrCommonLibC.am: (Ditto.)
+	* configure.ac: (Ditto.)
+	* devtools/gen-avr-lib-tree.sh: (Ditto.)
+	* bootstrap: Update to work with automake 1.9 and autoconf 2.59
+	* include/avr/io.h: Do not generate an error if the device type is not
+	defined and if defined __COMPILING_AVR_LIBC__.
+	* common/macros.inc: multiple-include protect.
+	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Add libm.a sources to
+	libc.a so that float point libs are available even if the end user
+	forgets to use the -lm to link to the math lib.
+	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Revert addition of libm.a
+	C and asm sources. I forget this change was in my tree when I made the
+	previous change to this file. Will reapply it separately.
+	* .cvsignore: Update to reflect current reality.
+	* common/.cvsignore: New file.
+	* doc/examples/.cvsignore: New file.
+	* include/.cvsignore: New file.
+	* include/avr/.cvsignore: New file.
+	* libc/stdio/.cvsignore: New file.
+	* configure.ac (AC_INIT): Bump version.
+	* AvrCommonLibC.am (nodist_libc_a_SOURCES): Add stubs to trivialize
+	adding C source files to currently asm only lib source dirs.
+	* libc/misc/Files.am (misc_a_c_sources): Define.
+	* libc/pmstring/Files.am (pmstring_a_c_sources): Define.
+	* libc/string/Files.am (string_a_c_sources): Define.
+	* libm/fplib/Files.am (libm_a_c_sources): Define.
+	* devtools/gen-avr-lib-tree.sh: Set CFLAGS for all devices.
+	Stub out DEV_DEFS and DEV_ASFLAGS.
+	Remove un-needed CONF_FRAG.
+	* configure.ac (AC_INIT): Bump version.
+	* devtools/gen-avr-lib-tree.sh: Improve portability by eliminating the
+	use of '<<-EOF' and 'mkdir -p'.
+	Move all the generated copyright headers into a tmp file so only one
+	copy will need to be maintained.
+	* configure.ac (AC_INIT): Bump version.
+	* devtools/gen-avr-lib-tree.sh: Use /bin/sh instead of /bin/bash in the
+	she-bang.
+	* AvrCommon.am (AVRLIB_CFLAGS): Add -mmcu option.
+	* AvrCommonLibC.am (avr_LIBRARIES): Don't build the intermediate
+	libraries, just build libc.a directly.
+	* configure.ac (CFLAGS): Set to nothing to override any that the env
+	sets and to suppress the default "-g -O2".
+	Don't set the AVR_CRT_* variables since they are no longer used.
+	* include/avr/io.h: Generate an error if the device type is not
+	defined.
+	* libc/misc/Rules.am: Remove unneeded rules and variables.
+	* libc/pmstring/Rules.am: Ditto.
+	* libc/stdio/Rules.am: Ditto.
+	* libc/stdlib/Rules.am: Ditto.
+	* libc/string/Rules.am: Ditto.
+	* libm/fplib/Rules.am: Ditto.
+	* libc/stdlib/Files.am: Add ctype source files.
+	* libc/stdlib/cty_isfalse.S: New file.
+	* libc/stdlib/isalnum.S: New file.
+	* libc/stdlib/isalpha.S: New file.
+	* libc/stdlib/isascii.S: New file.
+	* libc/stdlib/isblank.S: New file.
+	* libc/stdlib/iscntrl.S: New file.
+	* libc/stdlib/isdigit.S: New file.
+	* libc/stdlib/isprint.S: New file.
+	* libc/stdlib/ispunct.S: New file.
+	* libc/stdlib/isspace.S: New file.
+	* libc/stdlib/isxdigit.S: New file.
+	* libc/stdlib/toascii.S: New file.
+	* libc/stdlib/tolower.S: New file.
+	* libc/stdlib/toupper.S: New file.
+	* AvrCommon.am (VPATH): Add fplib to search path.
+	* AvrCommonLibC.am: Enable building of libm.
+	* configure.ac: Set DOCSDIR so it gets substituted in Makefile.am
+	files.
+	* libm/Makefile.am: Rewrite.
+	* libm/fplib/Files.am: New file.
+	* libm/fplib/Makefile.am: Rewrite.
+	* libm/fplib/Rules.am: New file.
+	* libm/fplib/fplib.inc: Don't redefine __OPTIMIZE__. Gcc-3.4 seems to
+	define it.
+	* libm/fplib/strtod.S: Don't read in SPH if it's not defined for the
+	target device.
+	* configure.ac (AC_INIT): Bump version.
+	* AvrCommonLibC.am: Enable building of libc/ files.
+	* common/Makefile.am: New file.
+	* libc/misc/Files.am: New file.
+	* libc/misc/Makefile.am: Rewrite.
+	* libc/misc/Rules.am: New file.
+	* libc/misc/eeprom.S: Conditional compile only if E2END > 0.
+	* libc/pmstring/Rules.am: New file.
+	* libc/stdio/Files.am: New file.
+	* libc/stdio/Makefile.am: Rewrite.
+	* libc/stdio/Rules.am: New file.
+	* libc/string/Files.am: New file.
+	* libc/string/Makefile.am: Rewrite.
+	* libc/string/Rules.am: New file.
+	* AvrCommon.am: Split C library macros off into AvrCommonLibC.am.
+	* AvrCommonLibC.am: New file.
+	* devtools/gen-avr-lib-tree.sh: Don't include AvrCommonLibC.am for
+	targets that don't support C programming.
+	* libc/Makefile.am: Rewrite.
+	* libc/pmstring/Files.am: New file.
+	* libc/pmstring/Makefile.am: Rewrite.
+	* libc/pmstring/Rules.am: New file.
+	* libc/stdlib/Files.am: New file.
+	* libc/stdlib/Makefile.am: Rewrite.
+	* libc/stdlib/Rules.am: New file.
+	* AvrCommon.am (__install_dir): Use prefix instead of exec_prefix.
+	* crt1/Makefile.am: Complete rewrite. Not much is needed anymore.
+	* include/Makefile.am: Replace EXTRA_DIST with avr_HEADERS so that
+	the headers are installed.
+	* include/avr/Makefile.am: Ditto.
+	* AvrCommon.am: New file.
+	* configure.ac: Add tool check for AS.
+	Move new devices to separate AC_CONFIG_FILES section.
+	* devtools/gen-avr-lib-tree.sh: Look for AvrCommon.am at top level only
+	instead of in avr/lib/.
+	Split out new devices to avoid compile failures with older tool chain.
+	* Makefile.am: Scrap old version and rewrite.
+	* bootstrap: Add temp hook to run gen-avr-lib-tree.sh.
+	* configure.ac: Bump version.
+	Check for avr cross-compiler.
+	Add AC_CONFIG_FILES section for target device dirs in avr/lib/.
+	* devtools/gen-avr-lib-tree.sh: New file.
+	* include/Makefile.am: Add SUBDIRS.
+	* bootstrap: Remove left-over autom4te.cache directory.
+	* configure.ac: New file.
+	* libc/stdlib/Makefile.am (libc_ctype_asm_objs): Fix a comment typo.
+	* Makefile.am (EXTRA_DIST): Remove references to deleted files.
+	Add bootstrap.
+	* bootstrap: New file.
+	* include/Makefile.am: New file.
+	* include/avr/Makefile.am: New file.
+	* config-ml.in: Remove file for autoconf/automake rewrite.
+	* config.sub: Ditto.
+	* configure.in: Ditto.
+	* doconf: Ditto.
+	* dodist: Ditto.
+	* domake: Ditto.
+	* reconf: Ditto.
+
 2005-08-05 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/stdio/fgetc.c (fgetc) : Prevent movement of the pointer 
 	over the end of a string.
 	[Fixed bug #12775]
-	
+
 2005-08-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* INSTALL: emphasize that users ought to use ./doconf.

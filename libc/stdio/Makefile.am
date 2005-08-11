@@ -1,4 +1,4 @@
-# Copyright (c) 2002, Joerg Wunsch
+# Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,118 +25,13 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id$
+#
 
-## Process this file with automake to generate Makefile.in
+include $(top_srcdir)/libc/stdio/Files.am
 
-noinst_LIBRARIES = lib.a \
-	libprintf_min.a libprintf_flt.a \
-	libscanf_min.a libscanf_flt.a
-
-lib_a_c_sources =	\
-	clearerr.c	\
-	fclose.c	\
-	fdevopen.c	\
-	feof.c		\
-	ferror.c	\
-	fgetc.c		\
-	fgets.c		\
-	fprintf.c	\
-	fprintf_p.c	\
-	fputc.c		\
-	fputs.c		\
-	fputs_p.c	\
-	fread.c		\
-	fscanf.c	\
-	fscanf_p.c	\
-	fwrite.c	\
-	getchar.c	\
-	gets.c		\
-	printf.c	\
-	printf_p.c	\
-	putchar.c	\
-	puts.c		\
-	puts_p.c	\
-	scanf.c		\
-	scanf_p.c	\
-	snprintf.c	\
-	snprintf_p.c	\
-	sprintf.c	\
-	sprintf_p.c	\
-	sscanf.c	\
-	sscanf_p.c	\
-	vfprintf_p.c	\
-	vfscanf_p.c	\
-	vsnprintf.c	\
-	vsnprintf_p.c	\
-	vsprintf.c	\
-	vsprintf_p.c	\
-	ungetc.c
-
-lib_a_asm_sources =	\
-	getc.S		\
-	putc.S
-
-lib_a_SOURCES = $(lib_a_c_sources) $(lib_a_asm_sources)
-
-lib_a_c_objs = $(lib_a_c_sources:%.c=%.o)
-
-lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
-
-lib_a_LIBADD = vfprintf_std.o vfscanf_std.o
-
-libprintf_min_a_SOURCES=
-
-libprintf_min_a_LIBADD = vfprintf_min.o
-
-libprintf_flt_a_SOURCES=
-
-libprintf_flt_a_LIBADD = vfprintf_flt.o
-
-libscanf_min_a_SOURCES=
-
-libscanf_min_a_LIBADD = vfscanf_min.o
-
-libscanf_flt_a_SOURCES=
-
-libscanf_flt_a_LIBADD = vfscanf_flt.o
-
-# must be added to the package, but automake doesn't know them as source
-# files until now
-EXTRA_DIST = vfprintf.c vfscanf.c stdio_private.h
-
-# content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
-# according to the multilib subdir (see acinclude.m4 in top directory)
-
-$(lib_a_c_objs): %.o: %.c
-	$(COMPILE) $(AVRLIB_CFLAGS) -c $< -o $@
-
-$(lib_a_asm_objs): %.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
-
-# vfprintf is compiled best with -Os -mno-tablejump, this gives the
-# smallest code.
-PRINTF_CFLAGS = $(AVRLIB_CFLAGS) -Os -mno-tablejump
-
-vfprintf_min.o: vfprintf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_MIN \
-	-c $(srcdir)/vfprintf.c -o $@
-
-vfprintf_std.o: vfprintf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_STD \
-	-c $(srcdir)/vfprintf.c -o $@
-
-vfprintf_flt.o: vfprintf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_FLT \
-	-c $(srcdir)/vfprintf.c -o $@
-
-vfscanf_min.o: vfscanf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_MIN \
-	-c $(srcdir)/vfscanf.c -o $@
-
-vfscanf_std.o: vfscanf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_STD \
-	-c $(srcdir)/vfscanf.c -o $@
-
-vfscanf_flt.o: vfscanf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_FLT \
-	-c $(srcdir)/vfscanf.c -o $@
+EXTRA_DIST = \
+	$(stdio_a_c_sources) \
+	$(stdio_a_asm_sources) \
+	$(stdio_a_extra_dist)

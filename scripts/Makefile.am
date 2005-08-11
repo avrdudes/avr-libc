@@ -1,4 +1,4 @@
-# Copyright (c) 2004, Joerg Wunsch
+# Copyright (c) 2005,  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,7 +25,22 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id$
+#
 
-## Process this file with automake to generate Makefile.in
+avrdir = $(prefix)/bin
 
-bin_SCRIPTS = avr-man
+avr_SCRIPTS = \
+	avr-man
+
+CLEANFILES = $(avr_SCRIPTS)
+
+do_subst = sed \
+	-e 's,[@]prefix[@],$(prefix),g' \
+	-e 's,[@]datadir[@],$(datadir),g' \
+	-e 's,[@]DOC_INST_DIR[@],$(DOC_INST_DIR),g'
+
+avr-man: avr-man.in
+	$(do_subst) < $(srcdir)/avr-man.in > avr-man
+	chmod +x avr-man

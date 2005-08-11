@@ -1,4 +1,4 @@
-# Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,33 +25,10 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id$
+#
 
-## Process this file with automake to generate Makefile.in
+include $(top_srcdir)/libc/pmstring/Files.am
 
-noinst_LIBRARIES = lib.a
-
-lib_a_asm_sources = \
-	memcpy_P.S      \
-	strcasecmp_P.S  \
-	strcat_P.S      \
-	strcmp_P.S      \
-	strcpy_P.S      \
-	strlcat_P.S     \
-	strlcpy_P.S     \
-	strlen_P.S      \
-	strncasecmp_P.S \
-	strncat_P.S     \
-	strncmp_P.S     \
-	strncpy_P.S     \
-	strnlen_P.S
-
-lib_a_SOURCES = $(lib_a_asm_sources)
-
-lib_a_asm_objs = $(lib_a_asm_sources:%.S=%.o)
-
-# content of AVRLIB_CFLAGS and AVRLIB_ASFLAGS is determined by configure
-# according to the multilib subdir (see acinclude.m4 in top directory)
-
-$(lib_a_asm_objs): %.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@
-
+EXTRA_DIST = $(pmstring_a_asm_sources)

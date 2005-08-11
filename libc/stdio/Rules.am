@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2002, 2003, 2004, Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,8 +29,46 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/misc/Files.am
+include $(top_srcdir)/libc/stdio/Files.am
 
-EXTRA_DIST = \
-	$(misc_a_asm_sources) \
-	$(misc_a_extra_dist)
+stdio_a_libadd = vfprintf_std.o vfscanf_std.o
+
+nodist_libprintf_min_a_SOURCES=
+
+libprintf_min_a_LIBADD = vfprintf_min.o
+
+nodist_libprintf_flt_a_SOURCES=
+
+libprintf_flt_a_LIBADD = vfprintf_flt.o
+
+nodist_libscanf_min_a_SOURCES=
+
+libscanf_min_a_LIBADD = vfscanf_min.o
+
+nodist_libscanf_flt_a_SOURCES=
+
+libscanf_flt_a_LIBADD = vfscanf_flt.o
+
+# vfprintf is compiled best with -Os -mno-tablejump, this gives the
+# smallest code.
+PRINTF_CFLAGS = -Os -mno-tablejump
+
+vfprintf_min.o: vfprintf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_MIN -c -o $@ $<
+
+vfprintf_std.o: vfprintf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_STD -c -o $@ $<
+
+vfprintf_flt.o: vfprintf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_FLT -c -o $@ $<
+
+vfscanf_min.o: vfscanf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_MIN -c -o $@ $<
+
+vfscanf_std.o: vfscanf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_STD -c -o $@ $<
+
+vfscanf_flt.o: vfscanf.c
+	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_FLT -c -o $@ $<
+
+# vim: set ft=make:

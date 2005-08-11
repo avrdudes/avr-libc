@@ -29,8 +29,53 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/misc/Files.am
+stdio_a_c_sources =	\
+	clearerr.c \
+	fclose.c \
+	fdevopen.c \
+	feof.c \
+	ferror.c \
+	fgetc.c \
+	fgets.c \
+	fprintf.c \
+	fprintf_p.c \
+	fputc.c \
+	fputs.c \
+	fputs_p.c \
+	fread.c \
+	fscanf.c \
+	fscanf_p.c \
+	fwrite.c \
+	getchar.c \
+	gets.c \
+	printf.c \
+	printf_p.c \
+	putchar.c \
+	puts.c \
+	puts_p.c \
+	scanf.c \
+	scanf_p.c \
+	snprintf.c \
+	snprintf_p.c \
+	sprintf.c \
+	sprintf_p.c \
+	sscanf.c \
+	sscanf_p.c \
+	vfprintf_p.c \
+	vfscanf_p.c \
+	vsnprintf.c \
+	vsnprintf_p.c \
+	vsprintf.c \
+	vsprintf_p.c \
+	ungetc.c
 
-EXTRA_DIST = \
-	$(misc_a_asm_sources) \
-	$(misc_a_extra_dist)
+stdio_a_asm_sources = \
+	getc.S \
+	putc.S
+
+stdio_a_extra_dist = \
+	vfprintf.c \
+	vfscanf.c \
+	stdio_private.h
+
+# vim: set ft=make:

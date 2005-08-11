@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Theodore Roth
+/* Copyright (c) 2002,2005, Theodore Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -235,34 +235,21 @@ limitations of the devices.
 \ref path "path is set" properly before installing avr-libc.
 
 \note If you have obtained the latest avr-libc from cvs, you will have to run
-the \c reconf script before using either of the build methods described below.
+the \c bootstrap script before using either of the build methods described below.
 
 To build and install avr-libc:
 
 \verbatim
 $ gunzip -c avr-libc-<version>.tar.gz
 $ cd avr-libc-<version>
-$ ./doconf
-$ ./domake
-$ cd build
-$ make install
-\endverbatim
-
-\note The \c doconf script will automatically use the \c $PREFIX environment
-variable if you have set and exported it.
-
-Alternatively, you could do this (shown for consistency with \c binutils and
-\c gcc):
-
-\verbatim
-$ gunzip -c avr-libc-<version>.tar.gz | tar xf -
-$ cd avr-libc-<version>
-$ mkdir obj-avr
-$ cd obj-avr
-$ ../configure --prefix=$PREFIX
+$ ./configure --build=`./config.guess` --host=avr
 $ make
 $ make install
 \endverbatim
+
+\note Other configure options might follow, notably --prefix in order
+to change the directory prefix for the installed files from its default
+\c /usr/local.
 
 \section install_uisp UISP
 \addindex installation, uisp

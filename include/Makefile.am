@@ -29,8 +29,16 @@
 # $Id$
 #
 
-include $(top_srcdir)/libc/misc/Files.am
+avrdir = $(prefix)/avr/include
+avr_HEADERS = \
+    ctype.h \
+    errno.h \
+    inttypes.h \
+    math.h \
+    setjmp.h \
+    stdint.h \
+    stdio.h \
+    stdlib.h \
+    string.h
 
-EXTRA_DIST = \
-	$(misc_a_asm_sources) \
-	$(misc_a_extra_dist)
+SUBDIRS = avr compat

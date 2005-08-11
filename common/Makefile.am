@@ -1,7 +1,4 @@
-#!/bin/sh
-#
-# Copyright (c) 2002
-# Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -9,12 +6,10 @@
 #
 # * Redistributions of source code must retain the above copyright
 #   notice, this list of conditions and the following disclaimer.
-#
 # * Redistributions in binary form must reproduce the above copyright
 #   notice, this list of conditions and the following disclaimer in
 #   the documentation and/or other materials provided with the
 #   distribution.
-#
 # * Neither the name of the copyright holders nor the names of
 #   contributors may be used to endorse or promote products derived
 #   from this software without specific prior written permission.
@@ -31,47 +26,10 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-#
-# Do configure for the avr libc.
-#
-# usage: doconf
-#        or
-#        doconf any_other_configure_option
-#
-# This script will execute configure in the build directory. It will
-# erase the build directories if they exist already.
-# The main build directory is created. The multilib build directories
-# are created by the main configure.
-# It will first set the path to the path, where the cross compiler
-# can be found. If your cross compiler is in an other directory,
-# please change the "PREFIX:" line below or specify it at the command line
-# ("PREFIX=what_you_want doconf").
-# If you have the path to the cross compiler in you default path, erase
-# the "PATH=" line below.
-#
-# It is very important that you check the installation path. It has to
-# be the same as for the avr gcc.
+# $Id$
 #
 
-# where does it go? (allow to overwrite it at the command line)
-: ${PREFIX:=/usr/local}
-
-# remove all build directories
-rm -rf avr3 avr4 avr5 build
-mkdir -p build
-cd build
-
-local_CC=${CC}
-
-if [ "x$local_CC" = xgcc ]
-then
-	# Configuring avr-libc will fail is CC=gcc, so force it to avr-gcc.
-	local_CC=avr-gcc
-fi
-
-PATH=$PREFIX/bin:$PATH
-export PATH
-
-CC=${local_CC} ../configure --prefix=$PREFIX $*
-
-cd ..
+EXTRA_DIST = \
+    ctoasm.inc \
+    gasava.inc \
+    macros.inc

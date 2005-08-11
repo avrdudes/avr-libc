@@ -1,7 +1,4 @@
-#!/bin/sh
-#
-# Copyright (c) 2002
-# Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2004,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -9,12 +6,10 @@
 #
 # * Redistributions of source code must retain the above copyright
 #   notice, this list of conditions and the following disclaimer.
-#
 # * Redistributions in binary form must reproduce the above copyright
 #   notice, this list of conditions and the following disclaimer in
 #   the documentation and/or other materials provided with the
 #   distribution.
-#
 # * Neither the name of the copyright holders nor the names of
 #   contributors may be used to endorse or promote products derived
 #   from this software without specific prior written permission.
@@ -31,38 +26,52 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-#
-# Do make for the avr libc.
-#
-# usage: domake
-#        or
-#        domake install
-#        or
-#        domake any_other_make_target
-#
-# This script will execute make in the build directory.
-# It will first set the path to the path, where the cross compiler
-# can be found. If your cross compiler is in an other directory,
-# please change the "PREFIX:" line below or specify it at the command line
-# ("PREFIX=what_you_want domake").
-# If you have the path to the cross compiler in your default path, you will
-# not need this script.
-# Go to the build directory and execute make.
-#
-# This script needs, that the "doconf" script was executed befor.
+# $Id$
 #
 
-# where does it go? (allow to overwrite it at the command line)
-: ${PREFIX:=/usr/local}
-# which make utility to use?  Some installations might call that gmake.
-: ${MAKE:=make}
+stdlib_a_c_sources = \
+	abs.c \
+	bsearch.c \
+	calloc.c \
+	errno.c \
+	labs.c \
+	malloc.c \
+	qsort.c \
+	rand.c \
+	random.c \
+	realloc.c \
+	strtol.c \
+	strtoul.c \
+	stdlib_private.h
 
-if test ! -f ./build/Makefile; then
-   echo "You must run doconf first!"
-   exit 1
-fi
+stdlib_a_asm_sources = \
+	abort.S \
+	atoi.S \
+	atol.S \
+	div.S \
+	exit.S \
+	ldiv.S \
+	setjmp.S \
+	isascii.S \
+	toascii.S \
+	isalnum.S \
+	cty_isfalse.S \
+	isalpha.S \
+	isdigit.S \
+	isxdigit.S \
+	iscntrl.S \
+	isprint.S \
+	isspace.S \
+	isblank.S \
+	ispunct.S \
+	tolower.S \
+	toupper.S
 
-cd build
-PATH=$PREFIX/bin:$PATH
-${MAKE} $*
-cd ..
+
+stdlib_a_extra_dist = \
+	ctype.S \
+	abort.c \
+	atoi.c \
+	atol.c
+
+# vim: set ft=make:
