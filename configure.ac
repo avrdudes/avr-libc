@@ -193,7 +193,7 @@ dox_ver=`doxygen --version 2>/dev/null`
 if test "x$dox_ver" = "x"; then
 	AC_MSG_RESULT(no)
 else
-	# FIXME: should also check for dox_ver >= 1.2.16
+	# FIXME: should also check for dox_ver >= 1.4.1
 	AC_MSG_RESULT(yes)
 	if test "$ps_doc" = "yes"; then
 		AC_MSG_NOTICE([Enabling PS docs])

@@ -4,6 +4,9 @@
 	$(top_srcdir)/stamp-h1 so they will get reevaluated after
 	re-running configure.
 	* doc/api/Makefile.am: (Ditto)
+	* doc/api/doxygen.config.in: Upgrade for doxygen 1.4.1.
+	* README: Upgrade required version of tools (GCC, doxygen)
+	* configure.ac: (Ditto.)
 
 2005-08-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
