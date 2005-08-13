@@ -286,10 +286,6 @@ else
 	AVR_LIBC_USER_MANUAL="avr-libc-user-manual"
 fi
 
-dnl Define this here so all files agree on the name of the manual.
-dnl This also centralizes the name so it's easier to change.
-AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
-
 dnl We only want to build the docs if the user has passed
 dnl "--enable-doc" to configure.
 if test "$enable_doc" = "yes"; then
