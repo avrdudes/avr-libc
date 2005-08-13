@@ -41,6 +41,6 @@ do_subst = sed \
 	-e 's,[@]datadir[@],$(datadir),g' \
 	-e 's,[@]DOC_INST_DIR[@],$(DOC_INST_DIR),g'
 
-avr-man: avr-man.in
+avr-man: avr-man.in $(top_srcdir)/stamp-h1
 	$(do_subst) < $(srcdir)/avr-man.in > avr-man
 	chmod +x avr-man

@@ -1,5 +1,12 @@
 2005-08-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* scripts/Makefile.am: Depend our manually derived targets from
+	$(top_srcdir)/stamp-h1 so they will get reevaluated after
+	re-running configure.
+	* doc/api/Makefile.am: (Ditto)
+
+2005-08-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: Re-enable building of docs.
 	* doc/api/Makefile.am: manually derive doxygen.config from
 	doxygen.config.in as this is no longer automagic; do no longer

@@ -183,7 +183,7 @@ doxygen-pdf.config: doxygen.config
 		doxygen.config > doxygen-pdf.config ||\
 		{ rm -f doxygen-pdf.config; exit 1; }
 
-doxygen.config: doxygen.config.in
+doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 	sed \
 	-e 's,[@]VERSION[@],$(VERSION),g' \
 	-e 's,[@]top_srcdir[@],$(top_srcdir),g' \
