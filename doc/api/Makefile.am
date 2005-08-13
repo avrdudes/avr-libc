@@ -58,7 +58,20 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
+DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` -name crtm8.o | head -n 1)
+
 all-local: ps html pdf
+
+# Before we can build the dox, we need to build the demo project so that some
+# included files get generated. This could fail if crts2313.o is neither built
+# nor installed, but there's not much we can do about that.
+demo:
+	if test -n "$(DEMO_LIBS)" ; then \
+		NODEFLIBS="-nostartfiles -nodefaultlibs" ; \
+	fi; \
+	cd $(top_srcdir)/doc/examples/demo && \
+		${MAKE} DEFS="-I$(top_srcdir)/include"  \
+			LIBS="$$NODEFLIBS $(DEMO_LIBS)" dox all
 
 # images for inclusion in HTML and LaTeX documents
 
@@ -78,10 +91,10 @@ IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating postscript output.
-ps: $(TARGET_DOX_PS)
+ps: demo $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: $(TARGET_DOX_HTML) fix_png
+html: demo $(TARGET_DOX_HTML) fix_png
 
 # Make the background color of the png's transparent.
 fix_png: $(wildcard $(USER_MANUAL)/*.png)
@@ -94,7 +107,7 @@ fix_png: $(wildcard $(USER_MANUAL)/*.png)
 	echo timestamp > fix_png
 
 # Rule for generating PDF output
-pdf: $(TARGET_DOX_PDF)
+pdf: demo $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
 install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF) \

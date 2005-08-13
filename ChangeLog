@@ -1,5 +1,10 @@
 2005-08-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/Makefile.am: add the generation of the demo project
+	back; its output is used as part of the documentation.
+
+2005-08-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* scripts/Makefile.am: Depend our manually derived targets from
 	$(top_srcdir)/stamp-h1 so they will get reevaluated after
 	re-running configure.
