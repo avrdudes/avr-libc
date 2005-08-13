@@ -1,3 +1,10 @@
+2005-08-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Re-enable building of docs.
+	* doc/api/Makefile.am: manually derive doxygen.config from
+	doxygen.config.in as this is no longer automagic; do no longer
+	try to build the demos as port of the documentation.
+
 2005-08-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Merge the "autoconf" branch back to HEAD, so we can use
