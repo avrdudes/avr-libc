@@ -115,14 +115,192 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 
-# Define this here so all files agree on the name of the manual.
-# This also centralizes the name so it's easier to change.
-AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
-AC_SUBST(AVR_LIBC_USER_MANUAL)
+dnl TODO: Check for various tools used to build the documentation. If anything
+dnl is missing, don't build the docs by default.
 
-# Temp hack to ignore DOCSDIR.
-DOCSDIR=""
+dnl Disable building of dox by default since it they may not build properly on
+dnl all systems. This isn't optimal, but how do we work around the user not
+dnl having fig2dev and still build all the formats?
+
+AC_ARG_ENABLE(doc,
+[  --enable-doc            build all doc formats (disabled is default)],
+[case "${enableval}" in
+  yes) enable_doc=yes ;;
+  no)  enable_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for global doc option) ;;
+ esac], [enable_doc=no])dnl
+
+dnl Various documentation options.  By default, we enable all of them,
+dnl i. e. HTML, Postscript, PDF, and Unix-style man pages.
+AC_ARG_ENABLE(html-doc,
+[  --enable-html-doc       build HTML documentation (default)],
+[case "${enableval}" in
+  yes) html_doc=yes ;;
+  no)  html_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for html-doc option) ;;
+ esac], [html_doc=yes])dnl
+
+AC_ARG_ENABLE(ps-doc,
+[  --enable-ps-doc         build Postscript documentation (default)],
+[case "${enableval}" in
+  yes) ps_doc=yes ;;
+  no)  ps_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for ps-doc option) ;;
+ esac], [ps_doc=yes])dnl
+
+AC_ARG_ENABLE(pdf-doc,
+[  --enable-pdf-doc        build PDF documentation (default)],
+[case "${enableval}" in
+  yes) pdf_doc=yes ;;
+  no)  pdf_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for pdf-doc option) ;;
+ esac], [pdf_doc=yes])dnl
+
+dnl Man pages are currently not tunable; they'll be built whenever
+dnl the HTML documentation is built.  However, it can be configured
+dnl whether the result is about to be installed or not.
+AC_ARG_ENABLE(man-doc,
+[  --enable-man-doc        build Unix-style manual pages (default)],
+[case "${enableval}" in
+  yes) man_doc=yes ;;
+  no)  man_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for man-doc option) ;;
+ esac], [man_doc=yes])dnl
+
+AC_ARG_ENABLE(versioned-doc,
+[  --enable-versioned-doc  install docs in directory with version name (default)],
+[case "${enableval}" in
+  yes) versioned_doc=yes ;;
+  no)  versioned_doc=no ;;
+  *)   AC_MSG_ERROR(bad value ${enableval} for versioned-doc option) ;;
+ esac], [versioned_doc=yes])dnl
+
+dnl troth/2002-07-12: The CHECK_DOXYGEN macro should be moved to a config
+dnl dir. I put it here until I figure out how to integrate the config dir.
+
+dnl
+dnl @synopsis CHECK_DOXYGEN
+dnl
+dnl This macro checks if doxygen is installed on the build system
+dnl
+dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
+dnl @author Theodore A. Roth <troth@openavr.org>
+dnl
+AC_DEFUN(CHECK_DOXYGEN,[dnl
+dnl
+AC_MSG_CHECKING(for doxygen)
+dox_ver=`doxygen --version 2>/dev/null`
+if test "x$dox_ver" = "x"; then
+	AC_MSG_RESULT(no)
+else
+	# FIXME: should also check for dox_ver >= 1.2.16
+	AC_MSG_RESULT(yes)
+	if test "$ps_doc" = "yes"; then
+		AC_MSG_NOTICE([Enabling PS docs])
+		TARGET_DOX_PS=dox-ps
+		INSTALL_DOX_PS=install-dox-ps
+	fi
+	if test "$pdf_doc" = "yes"; then
+		AC_MSG_NOTICE([Enabling PDF docs])
+		TARGET_DOX_PDF=dox-pdf
+		INSTALL_DOX_PDF=install-dox-pdf
+	fi
+	if test "$html_doc" = "yes"; then
+		AC_MSG_NOTICE([Enabling HTML docs])
+		TARGET_DOX_HTML=dox-html
+		INSTALL_DOX_HTML=install-dox-html
+	fi
+dnl The creation of man pages is a side-effect of the HTML
+dnl generation, so a different target is only needed for installation.
+	if test "$man_doc" = "yes"; then
+		AC_MSG_NOTICE([Enabling man pages])
+		TARGET_DOX_HTML=dox-html
+		INSTALL_DOX_MAN=install-dox-man
+	fi
+fi
+dnl
+AC_SUBST(TARGET_DOX_PS)
+AC_SUBST(TARGET_DOX_PDF)
+AC_SUBST(TARGET_DOX_HTML)
+AC_SUBST(INSTALL_DOX_PS)
+AC_SUBST(INSTALL_DOX_PDF)
+AC_SUBST(INSTALL_DOX_HTML)
+AC_SUBST(INSTALL_DOX_MAN)
+])dnl
+
+CHECK_DOXYGEN
+
+dnl
+dnl @synopsis CHECK_PNG_UTILS
+dnl
+dnl This macro checks if pngtopnm and pnmtopng are installed. If they are not
+dnl installed we just fake it with "cat".
+dnl
+dnl We use these in the dox to insert transparency into the png images as such:
+dnl
+dnl   $ pngtopnm foo.png > tmp.pnm
+dnl   $ pnmtopng -transparent white tmp.pnm > foo.png
+dnl
+dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
+dnl @author Theodore A. Roth <troth@openavr.org>
+dnl
+AC_DEFUN(CHECK_PNG_UTILS,[dnl
+dnl
+AC_MSG_CHECKING(for pngtopnm)
+has_pngtopnm=`pngtopnm --version 2>&1 | grep -c Version`
+if test "$has_pngtopnm" = "1"; then
+	AC_MSG_RESULT(yes)
+	PNGTOPNM="pngtopnm"
+else
+	AC_MSG_RESULT(no)
+	PNGTOPNM="cat"
+fi
+dnl
+AC_MSG_CHECKING(for pngtopnm)
+has_pnmtopng=`pnmtopng --version 2>&1 | grep -c Version`
+if test "$has_pnmtopng" = "1"; then
+	AC_MSG_RESULT(yes)
+	PNMTOPNG="pnmtopng"
+else
+	AC_MSG_RESULT(no)
+	PNMTOPNG="cat"
+fi
+dnl
+dnl pnmtopng will fail if the input file is a png instead of a pnm.
+dnl
+if test "$PNMTOPNG" = "cat"; then
+	PNGTOPNM="cat"
+fi
+dnl
+AC_SUBST(PNGTOPNM)
+AC_SUBST(PNMTOPNG)
+])dnl
+
+CHECK_PNG_UTILS
+
+if test "$versioned_doc" = "yes"; then
+	DOC_INST_DIR='${DESTDIR}${datadir}/doc/avr-libc-$(VERSION)'
+	AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
+else
+	DOC_INST_DIR='${DESTDIR}${datadir}/doc/avr-libc'
+	AVR_LIBC_USER_MANUAL="avr-libc-user-manual"
+fi
+
+dnl Define this here so all files agree on the name of the manual.
+dnl This also centralizes the name so it's easier to change.
+AVR_LIBC_USER_MANUAL="avr-libc-user-manual-${VERSION}"
+
+dnl We only want to build the docs if the user has passed
+dnl "--enable-doc" to configure.
+if test "$enable_doc" = "yes"; then
+	DOCSDIR='doc'
+else
+	DOCSDIR=''
+fi
+
 AC_SUBST(DOCSDIR)
+AC_SUBST(AVR_LIBC_USER_MANUAL)
+AC_SUBST(DOC_INST_DIR)
 
 dnl Some devices are only handled by newer version of gcc. This macro lets us
 dnl probe to see if the installed avr-gcc supports a questionable device.

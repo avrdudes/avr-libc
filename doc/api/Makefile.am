@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2002, 2003  Theodore A. Roth
+# Copyright (c) 2002, 2003, 2005,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -32,8 +32,9 @@
 #
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
-CLEANFILES           = *.html *.pdf *.ma *.mas *.ps doxygen-pdf.config \
-                       *.png *.eps fix_png
+CLEANFILES           = *.html *.pdf *.ma *.mas *.ps \
+                       *.png *.eps fix_png \
+                       doxygen.config doxygen-pdf.config
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        main_page.dox \
@@ -57,20 +58,7 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-DEMO_LIBS            = $(shell find $(top_srcdir) -name crts2313.o | head -n 1)
-
 all-local: ps html pdf
-
-# Before we can build the dox, we need to build the demo project so that some
-# included files get generated. This could fail if crts2313.o is neither built
-# nor installed, but there's not much we can do about that.
-demo:
-	if test -n "$(DEMO_LIBS)" ; then \
-		NODEFLIBS="-nostartfiles -nodefaultlibs" ; \
-	fi; \
-	cd $(top_srcdir)/doc/examples/demo && \
-		${MAKE} DEFS="-I$(top_srcdir)/include"  \
-			LIBS="$$NODEFLIBS $(DEMO_LIBS)" dox all
 
 # images for inclusion in HTML and LaTeX documents
 
@@ -82,17 +70,18 @@ FIG2DEV= fig2dev
 .fig.png:
 	$(FIG2DEV) -L png $< $@
 
-IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig releases.fig
+IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig releases.fig \
+		$(top_srcdir)/doc/examples/demo/demo.fig
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating postscript output.
-ps: demo $(TARGET_DOX_PS)
+ps: $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: demo $(TARGET_DOX_HTML) fix_png
+html: $(TARGET_DOX_HTML) fix_png
 
 # Make the background color of the png's transparent.
 fix_png: $(wildcard $(USER_MANUAL)/*.png)
@@ -105,7 +94,7 @@ fix_png: $(wildcard $(USER_MANUAL)/*.png)
 	echo timestamp > fix_png
 
 # Rule for generating PDF output
-pdf: demo $(TARGET_DOX_PDF)
+pdf: $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
 install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF) \
@@ -191,7 +180,17 @@ doxygen-pdf.config: doxygen.config
 		-e '/LATEX_OUTPUT/s/latex_src/latex_pdf_src/' \
 		-e '/GENERATE_HTML/s/YES/NO/' \
 		-e '/GENERATE_MAN/s/YES/NO/' \
-		doxygen.config > doxygen-pdf.config
+		doxygen.config > doxygen-pdf.config ||\
+		{ rm -f doxygen-pdf.config; exit 1; }
+
+doxygen.config: doxygen.config.in
+	sed \
+	-e 's,[@]VERSION[@],$(VERSION),g' \
+	-e 's,[@]top_srcdir[@],$(top_srcdir),g' \
+	-e 's,[@]AVR_LIBC_USER_MANUAL[@],$(AVR_LIBC_USER_MANUAL),g' \
+	-e 's,[@]srcdir[@],$(srcdir),g' \
+	< $(srcdir)/doxygen.config.in > doxygen.config ||\
+	{ rm -f doxygen.config; exit 1; }
 
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only
