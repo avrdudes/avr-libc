@@ -33,7 +33,7 @@
 #ifndef __ERRNO_H_
 #define __ERRNO_H_ 1
 
-/** \defgroup avr_errno System Errors (errno)
+/** \defgroup avr_errno <errno.h>: System Errors
 
     \code #include <errno.h>\endcode
 

@@ -54,7 +54,7 @@
 extern "C" {
 #endif
 
-/** \defgroup avr_stdlib General utilities
+/** \defgroup avr_stdlib <stdlib.h>: General utilities
     \code #include <stdlib.h> \endcode
 
     This file declares some basic C macros and functions as

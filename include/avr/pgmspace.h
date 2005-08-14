@@ -37,7 +37,7 @@
      Wolfgang Haidinger <wh@vmars.tuwien.ac.at> (pgm_read_dword())
  */
 
-/** \defgroup avr_pgmspace Program Space String Utilities
+/** \defgroup avr_pgmspace <avr/pgmspace.h>: Program Space String Utilities
     \code
     #include <avr/io.h>
     #include <avr/pgmspace.h>

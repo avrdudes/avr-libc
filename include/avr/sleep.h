@@ -84,7 +84,7 @@
 
 
 
-/** \defgroup avr_sleep Power Management and Sleep Modes
+/** \defgroup avr_sleep <avr/sleep.h>: Power Management and Sleep Modes
 
     \code #include <avr/sleep.h>\endcode
 

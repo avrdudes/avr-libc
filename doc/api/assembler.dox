@@ -254,7 +254,7 @@ interrupt sevice needs to be saved, usually on the stack.
 
 \par Note [10]
 
-As explained in \ref avr_interrupts, a global "catch-all" interrupt
+As explained in \ref avr_interrupts "Interrupts and Signals", a global "catch-all" interrupt
 handler that gets all unassigned interrupt vectors can be installed
 using the name \c __vector_default.  This must be \c .global, and
 obviously, should end in a \c reti instruction.  (By default, a jump

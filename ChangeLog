@@ -1,3 +1,39 @@
+2005-08-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* avr-libc.spec.in: bump required tool versions.
+	* doc/api/Makefile.am: Fix finding demo.fig, add avrs.png.
+	* doc/api/avrs.png-save: New file.
+	* doc/api/doxygen.config.in: Revamp the layout of the HTML pages.
+	* doc/api/dox.css: (Ditto.)
+	* doc/api/dox_html_header: (Ditto.)
+	* doc/api/main_page.dox: Add explanations about the intented
+	standard conformance, as well as about the (non-)reentrancy of
+	our library functions.  Other minor corrections.
+	* doc/examples/demo/demo.dox: Reality-check: the AT90S2313 is
+	obsolete, explain usage of ATtiny2313/ATmega8/48/88/168.
+	* doc/api/interrupts.dox: Add name of header file in titles.
+	* doc/api/sfr.dox: (Ditto.)
+	* include/ctype.h: (Ditto.)
+	* include/errno.h: (Ditto.)
+	* include/inttypes.h: (Ditto.)
+	* include/math.h: (Ditto.)
+	* include/setjmp.h: (Ditto.)
+	* include/stdint.h: (Ditto.)
+	* include/stdio.h: (Ditto.)
+	* include/stdlib.h: (Ditto.)
+	* include/string.h: (Ditto.)
+	* include/avr/boot.h: (Ditto.)
+	* include/avr/crc16.h: (Ditto.)
+	* include/avr/delay.h: (Ditto.)
+	* include/avr/eeprom.h: (Ditto.)
+	* include/avr/io.h: (Ditto.)
+	* include/avr/parity.h: (Ditto.)
+	* include/avr/pgmspace.h: (Ditto.)
+	* include/avr/sleep.h: (Ditto.)
+	* include/avr/wdt.h: (Ditto.)
+	* doc/api/assembler.dox: Fix \ref to omit header file names.
+	* doc/api/faq.dox: (Ditto.)
+
 2005-08-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/Makefile.am: add the generation of the demo project

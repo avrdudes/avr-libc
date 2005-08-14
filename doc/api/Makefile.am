@@ -84,7 +84,7 @@ FIG2DEV= fig2dev
 	$(FIG2DEV) -L png $< $@
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig releases.fig \
-		$(top_srcdir)/doc/examples/demo/demo.fig
+		demo.fig avrs.png-save
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
@@ -95,6 +95,9 @@ ps: demo $(TARGET_DOX_PS)
 
 # Rule for generating html output.
 html: demo $(TARGET_DOX_HTML) fix_png
+
+demo.fig: $(top_srcdir)/doc/examples/demo/demo.fig
+	cp $(top_srcdir)/doc/examples/demo/demo.fig .
 
 # Make the background color of the png's transparent.
 fix_png: $(wildcard $(USER_MANUAL)/*.png)
@@ -117,7 +120,7 @@ uninstall-local:
 	rm -rf $(DOC_INST_DIR)
 
 clean-local:
-	rm -rf $(USER_MANUAL) latex_src latex_pdf_src man
+	rm -rf $(USER_MANUAL) latex_src latex_pdf_src man demo.fig
 	cd $(top_srcdir)/doc/examples/demo && ${MAKE} clean
 
 #
@@ -144,6 +147,7 @@ clean-local:
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
+	cp avrs.png-save $(AVR_LIBC_USER_MANUAL)/avrs.png
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' \
 		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \

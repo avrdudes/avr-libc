@@ -48,7 +48,7 @@
 #ifndef __MATH_H
 #define __MATH_H
 
-/** \defgroup avr_math Mathematics
+/** \defgroup avr_math <math.h>: Mathematics
     \code #include <math.h> \endcode
 
     This header file declares basic mathematics constants and

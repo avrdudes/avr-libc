@@ -30,7 +30,7 @@
 
 /* $Id$ */
 
-/** \defgroup avr_io AVR device-specific IO definitions
+/** \defgroup avr_io <avr/io.h>: AVR device-specific IO definitions
     \code #include <avr/io.h> \endcode
 
     This header file includes the apropriate IO definitions for the

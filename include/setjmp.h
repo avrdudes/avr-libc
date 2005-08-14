@@ -55,7 +55,7 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN + 1]; } jmp_buf[1];
 
 #endif /* not DOXYGEN */
 
-/** \defgroup setjmp Setjmp and Longjmp
+/** \defgroup setjmp <setjmp.h>: Non-local goto
 
     While the C language has the dreaded \c goto statement, it can only be
     used to jump to a label in the same (local) function.  In order to jump

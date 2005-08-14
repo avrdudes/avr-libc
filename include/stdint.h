@@ -40,7 +40,7 @@
 #ifndef __STDINT_H_
 #define __STDINT_H_
 
-/** \defgroup avr_stdint Standard Integer Types
+/** \defgroup avr_stdint <stdint.h>: Standard Integer Types
     \code #include <stdint.h> \endcode
 
     Use [u]intN_t if you need exactly N bits.

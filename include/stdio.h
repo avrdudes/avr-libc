@@ -48,7 +48,7 @@
 #define __need_size_t
 #include <stddef.h>
 
-/** \defgroup avr_stdio Standard IO facilities
+/** \defgroup avr_stdio <stdio.h>: Standard IO facilities
     \code #include <stdio.h> \endcode
 
     \warning

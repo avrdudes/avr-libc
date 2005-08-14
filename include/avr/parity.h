@@ -36,7 +36,7 @@
 #ifndef _AVR_PARITY_H_
 #define _AVR_PARITY_H_
 
-/** \defgroup avr_parity Parity bit generation
+/** \defgroup avr_parity <avr/parity.h>: Parity bit generation
     \code #include <avr/parity.h> \endcode
 
     This header file contains optimized assembler code to calculate

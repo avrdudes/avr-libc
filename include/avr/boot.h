@@ -31,7 +31,7 @@
 #ifndef _AVR_BOOT_H_
 #define _AVR_BOOT_H_    1
 
-/** \defgroup avr_boot Bootloader Support Utilities
+/** \defgroup avr_boot <avr/boot.h>: Bootloader Support Utilities
     \code
     #include <avr/io.h>
     #include <avr/boot.h>

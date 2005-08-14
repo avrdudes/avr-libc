@@ -35,7 +35,7 @@
 
 #include <stdint.h>
 
-/** \defgroup avr_inttypes Integer Type conversions
+/** \defgroup avr_inttypes <inttypes.h>: Integer Type conversions
     \code #include <inttypes.h> \endcode
 
     This header file includes the exact-width integer definitions from

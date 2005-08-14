@@ -52,7 +52,7 @@
 extern "C" {
 #endif
 
-/** \defgroup avr_string Strings
+/** \defgroup avr_string <string.h>: Strings
     \code #include <string.h> \endcode
 
     The string functions perform string operations on NULL terminated

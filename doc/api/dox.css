@@ -1,5 +1,5 @@
 BODY {
-    background-color: #dddddd
+    background-color: #feffe2
 }
 H1 {
     text-align: center;
@@ -24,7 +24,8 @@ A.codeRef {
 }
 A:hover {
     text-decoration: none;
-    background-color: #bbbbbb
+    color: #600000;
+    background-color: #ffffff
 }
 DL.el {
     margin-left: -1cm
@@ -33,7 +34,8 @@ DIV.fragment {
     border-style: solid;
     border-color: black;
     border-width: thin;
-    background-color: #d0d0d0;
+    color: #5000a0;
+    background-color: #fffff0;
     padding-left: 5px;
     margin-right: 5px;
 }
@@ -45,19 +47,20 @@ DIV.ah {
     margin-top: 3px
 }
 TD.mdRow {
-    background-color: #ccccbb;
+    background-color: #feffe2;
     font-weight: bold;
 }
 TD.md {
-    background-color: #ccccbb;
+    background-color: #feffe2;
+    color: #0050a0;
     font-weight: bold;
 }
 TD.mdname1 {
-    background-color: #ccccbb;
+    background-color: #feffe2;
     font-weight: bold; color: #702020;
 }
 TD.mdname {
-    background-color: #ccccbb;
+    background-color: #feffe2;
     font-weight: bold;
     color: #702020;
     width: 600px;

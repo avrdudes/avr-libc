@@ -48,7 +48,7 @@
 extern "C" {
 #endif
 
-/** \defgroup ctype Character Operations
+/** \defgroup ctype <ctype.h>: Character Operations
     These functions perform various operations on characters.
 
     \code #include <ctype.h>\endcode 

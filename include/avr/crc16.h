@@ -35,7 +35,7 @@
 
 #include <inttypes.h>
 
-/** \defgroup avr_crc CRC Computations
+/** \defgroup avr_crc <avr/crc16.h>: CRC Computations
     \code#include <avr/crc16.h>\endcode
 
     This header file provides a optimized inline functions for calculating 16

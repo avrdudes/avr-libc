@@ -173,7 +173,7 @@ When performing low-level output work, which is a very central point
 in microcontroller programming, it is quite common that a particular
 bit needs to be set or cleared in some IO register.  While the device
 documentation provides mnemonic names for the various bits in the IO
-registers, and the \ref avr_io reflect these names in definitions for
+registers, and the \ref avr_io "AVR device-specific IO definitions" reflect these names in definitions for
 numerical constants, a way is needed to convert a bit number (usually
 within a byte register) into a byte value that can be assigned
 directly to the register.  However, sometimes the direct bit numbers
@@ -990,7 +990,7 @@ That way, any string literal will be a valid argument to any C
 function that expects a <tt>const char *</tt> argument.
 
 Of course, this is going to waste a lot of SRAM.  In
-\ref avr_pgmspace, a method is described how such
+\ref avr_pgmspace "Program Space String Utilities", a method is described how such
 constant data can be moved out to flash ROM.  However, a constant
 string located in flash ROM is no longer a valid argument to pass to a
 function that expects a <tt>const char *</tt>-type string, since the

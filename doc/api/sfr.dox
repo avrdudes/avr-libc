@@ -25,7 +25,7 @@
 
 /* $Id$ */
 
-/** \defgroup avr_sfr Special function registers
+/** \defgroup avr_sfr <avr/sfr_defs.h>: Special function registers
 
 When working with microcontrollers, many of the tasks usually consist
 of controlling the peripherals that are connected to the device,

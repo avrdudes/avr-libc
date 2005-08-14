@@ -40,7 +40,7 @@
 
 #include <inttypes.h>
 
-/** \defgroup avr_delay Busy-wait delay loops
+/** \defgroup avr_delay <avr/delay.h>: Busy-wait delay loops
     \code
     #define F_CPU 1000000UL  // 1 MHz
     //#define F_CPU 14.7456E6
