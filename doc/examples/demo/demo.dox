@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Theodore Roth
+/* Copyright (c) 2002,2005, Theodore Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -35,12 +35,24 @@ feel as to how the tools are used and how a \c Makefile can be configured.
 
 \section demo_project_desc The Project
 
-This project will use the pulse-width modulator ( \c PWM ) to ramp an LED on
+This project will use the pulse-width modulator (\c PWM) to ramp an LED on
 and off every two seconds.  An AT90S2313 processor will be used as the
 controller.  The circuit for this demonstration is shown in the
 \ref demo_project_schematic "schematic diagram". If you have a development
 kit, you should be able to use it, rather than build the circuit, for this
 project.
+
+\note Meanwhile, the AT90S2313 became obsolete.  Either use its
+successor, the (pin-compatible) ATtiny2313 for the project, or perhaps
+the ATmega8 or one of its successors (ATmega48/88/168) which have
+become quite popular since the original demo project had been
+established.  For all these more modern devices, it is no longer
+necessary to use an external crystal for clocking as they ship with
+the internal 1 MHz oscillator enabled, so C1, C2, and Q1 can be
+omitted.  Normally, for this experiment, the external circuitry on
+/RESET (R1, C3) can be omitted as well, leaving only the AVR, the LED,
+the bypass capacitor C4, and perhaps R2.  For the ATmega8/48/88/168,
+use PB1 (pin 15 at the DIP-28 package) to connect the LED to.
 
 \anchor demo_project_schematic
 \image html demo.png "Schematic of circuit for demo project"

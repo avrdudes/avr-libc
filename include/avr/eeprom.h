@@ -112,6 +112,12 @@
      set: 0x1F,0x20,0x21 and 0x1C,0x1D,0x1E 
      (see ::__EEPROM_REG_LOCATIONS__).
 
+    \note As these functions modify IO registers, they are known to be
+     non-reentrant.  If any of these functions are used from both,
+     standard and interrupt context, the applications must ensure
+     proper protection (e.g. by disabling interrupts before accessing
+     them).
+
 */
 
 

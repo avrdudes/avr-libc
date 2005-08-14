@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Theodore Roth
-   Copyright (c) 2004, Joerg Wunsch
+   Copyright (c) 2004,2005, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -28,11 +28,14 @@
 
 /** \mainpage AVR Libc
 
+\section avr_libc_intro Introduction
+
 The latest version of this document is always available from
 http://savannah.nongnu.org/projects/avr-libc/
 
-The AVR Libc package provides a subset of the standard C library for Atmel AVR
-8-bit RISC microcontrollers. In addition, the library provides the basic
+The AVR Libc package provides a subset of the standard C library for
+<a href="http://www.atmel.com/products/AVR/">Atmel AVR
+8-bit RISC microcontrollers</a>. In addition, the library provides the basic
 startup code needed by most applications.
 
 There is a wealth of information in this document which goes beyond simply
@@ -46,13 +49,33 @@ address, you may wish to post a message to the avr-gcc mailing list. Most of
 the developers of the AVR binutils and gcc ports in addition to the devleopers
 of avr-libc subscribe to the list, so you will usually be able to get your
 problem resolved. You can subscribe to the list at
-http://www.avr1.org/mailman/listinfo/avr-gcc-list/ . Before posting to the
+http://lists.nongnu.org/mailman/listinfo/avr-gcc-list . Before posting to the
 list, you might want to try reading the \ref FAQ chapter of this document.
 
-\note This document is a work in progress. As such, it may contain incorrect
-information. If you find a mistake, please send an email to
-avr-libc-dev@nongnu.org describing the mistake. Also, send us an
-email if you find that a specific topic is missing from the document.
+\note If you think you've found a bug, or have a suggestion for an
+improvement, either in this documentation or in the library itself,
+please use the bug tracker at
+https://savannah.nongnu.org/bugs/?group=avr-libc to ensure the issue
+won't be forgotten.
+
+\section avr_libc_general General information about this library
+
+In general, it has been the goal to stick as best as possible to
+established standards while implementing this library.  Commonly, this
+refers to the C library as described by the ANSI X3.159-1989 and
+ISO/IEC 9899:1990 ("ANSI-C") standard, as well as parts of their
+successor ISO/IEC 9899:1999 ("C99").  Some additions have been
+inspired by other standards like IEEE Std 1003.1-1988 ("POSIX.1"),
+while other extensions are purely AVR-specific (like the entire
+program-space string interface).
+
+Unless otherwise noted, functions of this library are <em>not</em>
+guarenteed to be reentrant.  In particular, any functions that store
+local state are known to be non-reentrant, as well as functions that
+manipulate IO registers like the EEPROM access routines.  If these
+functions are used within both, standard and interrupt context,
+undefined behaviour will result.
+
 
 \section supp_devices Supported Devices
 
