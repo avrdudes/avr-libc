@@ -240,7 +240,7 @@ the \c bootstrap script before using either of the build methods described below
 To build and install avr-libc:
 
 \verbatim
-$ gunzip -c avr-libc-<version>.tar.gz
+$ gunzip -c avr-libc-<version>.tar.gz | tar xf -
 $ cd avr-libc-<version>
 $ ./configure --build=`./config.guess` --host=avr
 $ make

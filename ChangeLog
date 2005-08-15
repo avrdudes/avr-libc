@@ -1,3 +1,7 @@
+2005-08-15 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/tools-install.dox (avr-libc): fix a missing "tar" command.
+
 2005-08-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* avr-libc.spec.in: bump required tool versions.
