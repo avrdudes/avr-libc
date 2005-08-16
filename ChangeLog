@@ -1,5 +1,21 @@
 2005-08-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Add support for ATmega329/3290/649/6490, contributed by Anatoly
+	Sokolov.
+	* configure.ac: add new devices.
+	* devtools/gen-avr-lib-tree.sh: (Ditto.)
+	* include/avr/Makefile.am: add iom329.h/iom3290.h/iom649.h/iom6490.h.
+	* include/avr/io.h: add new devices
+	* include/avr/iom329.h: new file.
+	* include/avr/iom3290.h: new file.
+	* include/avr/iom649.h: new file.
+	* include/avr/iom6490.h: new file.
+	* include/avr/wdt.h: (Ditto.)
+	* doc/api/main_page.dox: document new devices.
+	* doc/api/using-tools.dox: (Ditto.)
+
+2005-08-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Add support for AT90PWM2/3, contribute by Andrey Pashchenko.
 	* AUTHORS: add Andrey Pashchenko.
 	* configure.ac: add AC_NO_EXECUTABLES to avoid chicken-and-egg

@@ -118,9 +118,13 @@ compiler frontend.
   <tr><td>avr5</td><td>atmega323</td><td>__AVR_ATmega323__</td></tr>
   <tr><td>avr5</td><td>atmega325</td><td>__AVR_ATmega325__</td></tr>
   <tr><td>avr5</td><td>atmega3250</td><td>__AVR_ATmega3250__</td></tr>
+  <tr><td>avr5</td><td>atmega329</td><td>__AVR_ATmega329__</td></tr>
+  <tr><td>avr5</td><td>atmega3290</td><td>__AVR_ATmega3290__</td></tr>
   <tr><td>avr5</td><td>atmega64</td><td>__AVR_ATmega64__</td></tr>
   <tr><td>avr5</td><td>atmega645</td><td>__AVR_ATmega645__</td></tr>
   <tr><td>avr5</td><td>atmega6450</td><td>__AVR_ATmega6450__</td></tr>
+  <tr><td>avr5</td><td>atmega649</td><td>__AVR_ATmega649__</td></tr>
+  <tr><td>avr5</td><td>atmega6490</td><td>__AVR_ATmega6490__</td></tr>
   <tr><td>avr5</td><td>at94k</td><td>__AVR_AT94K__</td></tr>
 
   </table>

@@ -114,10 +114,14 @@ The following is a list of AVR devices currently supported by the library.
 - atmega323
 - atmega325
 - atmega3250
+- atmega329
+- atmega3290
 - atmega48
 - atmega64
 - atmega645
 - atmega6450
+- atmega649
+- atmega6490
 - atmega8515
 - atmega8535
 - atmega88

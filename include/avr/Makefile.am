@@ -67,10 +67,14 @@ avr_HEADERS = \
     iom323.h \
     iom325.h \
     iom3250.h \
+    iom329.h \
+    iom3290.h \
     iom48.h \
     iom64.h \
     iom645.h \
     iom6450.h \
+    iom649.h \
+    iom6490.h \
     iom8.h \
     iom8515.h \
     iom8535.h \
