@@ -1,3 +1,18 @@
+2005-08-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add support for AT90PWM2/3, contribute by Andrey Pashchenko.
+	* AUTHORS: add Andrey Pashchenko.
+	* configure.ac: add AC_NO_EXECUTABLES to avoid chicken-and-egg
+	situation when configuring without any existing avr-libc; add
+	more quotes (but it still complains), add tests for AT90PWM2/3.
+	* devtools/gen-avr-lib-tree.sh: add AT90PWM2/3.
+	* include/avr/Makefile.am: include io90pwmx.h.
+	* include/avr/io90pwmx.h: new file.
+	* include/avr/io.h: add AT90PWM2/3.
+	* include/avr/wdt.h: (Ditto.)
+	* doc/api/main_page.dox: document the addition of AT90PWM2/3.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2005-08-15 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/tools-install.dox (avr-libc): fix a missing "tar" command.

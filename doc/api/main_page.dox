@@ -140,6 +140,7 @@ The following is a list of AVR devices currently supported by the library.
 - at43usb320
 - at43usb355
 - at86rf401
+- at90pwm2/at90pwm3
 
 \anchor supp_dev_footnote_one
 

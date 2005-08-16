@@ -78,6 +78,9 @@ esac
 
 ## TODO: Write a check for GNU Make
 
+dnl The default check whether the C compiler can create an executable
+dnl is inappropriate for us as it requires an existing library.
+AC_NO_EXECUTABLES
 AM_INIT_AUTOMAKE
 
 # We don't want touse the cflags from the environment since we need control
@@ -188,7 +191,7 @@ dnl @author Theodore A. Roth <troth@openavr.org>
 dnl
 AC_DEFUN(CHECK_DOXYGEN,[dnl
 dnl
-AC_MSG_CHECKING(for doxygen)
+AC_MSG_CHECKING([for doxygen])
 dox_ver=`doxygen --version 2>/dev/null`
 if test "x$dox_ver" = "x"; then
 	AC_MSG_RESULT(no)
@@ -246,7 +249,7 @@ dnl @author Theodore A. Roth <troth@openavr.org>
 dnl
 AC_DEFUN(CHECK_PNG_UTILS,[dnl
 dnl
-AC_MSG_CHECKING(for pngtopnm)
+AC_MSG_CHECKING([for pngtopnm])
 has_pngtopnm=`pngtopnm --version 2>&1 | grep -c Version`
 if test "$has_pngtopnm" = "1"; then
 	AC_MSG_RESULT(yes)
@@ -256,7 +259,7 @@ else
 	PNGTOPNM="cat"
 fi
 dnl
-AC_MSG_CHECKING(for pngtopnm)
+AC_MSG_CHECKING([for pngtopnm])
 has_pnmtopng=`pnmtopng --version 2>&1 | grep -c Version`
 if test "$has_pnmtopng" = "1"; then
 	AC_MSG_RESULT(yes)
@@ -418,6 +421,16 @@ CHECK_AVR_DEVICE(atmega88)
 AS_IF([test "x$HAS_atmega88" = "xyes"],
       [AC_CONFIG_FILES([avr/lib/avr4/atmega88/Makefile])],
       [DUMMY_MAKEFILE([avr/lib/avr4/atmega88/Makefile])])
+
+CHECK_AVR_DEVICE(at90pwm2)
+AS_IF([test "x$HAS_at90pwm2" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr4/at90pwm2/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr4/at90pwm2/Makefile])])
+
+CHECK_AVR_DEVICE(at90pwm3)
+AS_IF([test "x$HAS_at90pwm3" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr4/at90pwm3/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr4/at90pwm3/Makefile])])
 
 #avr5
 AC_CONFIG_FILES([

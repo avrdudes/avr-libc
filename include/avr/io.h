@@ -166,6 +166,10 @@
 #  include <avr/io76c711.h>
 #elif defined (__AVR_AT86RF401__)
 #  include <avr/io86r401.h>
+#elif defined (__AVR_AT90PWM2__)
+#  include <avr/io90pwmx.h>
+#elif defined (__AVR_AT90PWM3__)
+#  include <avr/io90pwmx.h>
 #elif defined (__AVR_ATmega128__)
 #  include <avr/iom128.h>
 #elif defined (__AVR_AT90CAN128__)

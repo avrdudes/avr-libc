@@ -66,7 +66,8 @@
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 
 #if defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) \
-|| defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
+|| defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) \
+|| defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
 #define _WD_CONTROL_REG     WDTCSR
 #define _WD_PS3_MASK        _BV(WDP3)
 #else
@@ -85,7 +86,8 @@
 || defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
 || defined(__AVR_ATmega165__) || defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
-|| defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__)
+|| defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__) \
+|| defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
  
 #define _wdt_write(value)   \
     __asm__ __volatile__ (  \
@@ -180,7 +182,8 @@ __asm__ __volatile__ (  \
    a negligible change.
 
    Possible timeout values are: 15 ms, 30 ms, 60 ms, 120 ms, 250 ms,
-   500 ms, 1 s, 2 s.  Symbolic constants are formed by the prefix
+   500 ms, 1 s, 2 s.  (Some devices also allow for 4 s and 8 s.)
+   Symbolic constants are formed by the prefix
    \c WDTO_, followed by the time.
 
    Example that would select a watchdog timer expiry of approximately
@@ -219,20 +222,22 @@ __asm__ __volatile__ (  \
     See \c WDT0_15MS */
 #define WDTO_2S     7
 
-#if defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) || \
-defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
+#if defined(DOXYGEN) || \
+defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) || \
+defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) || \
+defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS
     Note: This is only available on the ATtiny2313, ATmega48, ATmega88,
-    and the ATmega168.
+    the ATmega168, the AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_4S     8
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS 
+    See \c WDT0_15MS
     Note: This is only available on the ATtiny2313, ATmega48, ATmega88,
-    and the ATmega168.
+    the ATmega168, the AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_8S     9
 

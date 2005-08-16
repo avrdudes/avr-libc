@@ -76,6 +76,7 @@ avr_HEADERS = \
     iom8535.h \
     iom88.h \
     iomx8.h \
+    io90pwmx.h \
     iotn11.h \
     iotn12.h \
     iotn13.h \
