@@ -1,3 +1,8 @@
+2005-08-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io90pwmx.h: remove PORTxy definitions that are
+	duplicated from avr/portpins.h.
+
 2005-08-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Add support for ATmega329/3290/649/6490, contributed by Anatoly

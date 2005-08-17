@@ -76,15 +76,6 @@
 /* Port B Data Register */
 #define PORTB   _SFR_IO8(0x05)
 /* PORTB */
-#define PORTB7  7
-#define PORTB6  6
-#define PORTB5  5
-#define PORTB4  4
-#define PORTB3  3
-#define PORTB2  2
-#define PORTB1  1
-#define PORTB0  0
-/* PORTB (for compatibility) */
 #define PB7     7
 #define PB6     6
 #define PB5     5
@@ -121,15 +112,6 @@
 /* Port C Data Register */
 #define PORTC   _SFR_IO8(0x08)
 /* PORTC */
-#define PORTC7  7
-#define PORTC6  6
-#define PORTC5  5
-#define PORTC4  4
-#define PORTC3  3
-#define PORTC2  2
-#define PORTC1  1
-#define PORTC0  0
-/* PORTC (for compatibility) */
 #define PC7     7
 #define PC6     6
 #define PC5     5
@@ -166,15 +148,6 @@
 /* Port D Data Register */
 #define PORTD   _SFR_IO8(0x0B)
 /* PORTD */
-#define PORTD7  7
-#define PORTD6  6
-#define PORTD5  5
-#define PORTD4  4
-#define PORTD3  3
-#define PORTD2  2
-#define PORTD1  1
-#define PORTD0  0
-/* PORTD (for compatibility) */
 #define PD7     7
 #define PD6     6
 #define PD5     5
@@ -201,10 +174,6 @@
 /* Port E Data Register */
 #define PORTE   _SFR_IO8(0x0E)
 /* PORTE */
-#define PORTE2  2
-#define PORTE1  1
-#define PORTE0  0
-/* PORTE (for compatibility) */
 #define PE2     2
 #define PE1     1
 #define PE0     0
