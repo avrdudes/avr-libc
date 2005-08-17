@@ -43,7 +43,15 @@ sscanf_P(const char *s, const char *fmt, ...)
 	int i;
 
 	f.flags = __SRD | __SSTR | __SPGM;
-	f.buf = s;
+	/*
+	 * It is OK to discard the "const" qualifier here.  f.buf is
+	 * non-const as in the generic case, this buffer is obtained
+	 * by malloc().  In the scanf case however, the buffer is
+	 * really only be read (by getc()), and as this our FILE f we
+	 * be discarded upon exiting sscanf_P(), nobody will ever get
+	 * a chance to get write access to it again.
+	 */
+	f.buf = (char *)s;
 	va_start(ap, fmt);
 	i = vfscanf(&f, fmt, ap);
 	va_end(ap);

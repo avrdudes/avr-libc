@@ -2,6 +2,9 @@
 
 	* include/avr/io90pwmx.h: remove PORTxy definitions that are
 	duplicated from avr/portpins.h.
+	* libc/stdio/sscanf.c: fix warnings.
+	* libc/stdio/sscanf_p.c: (Ditto.)
+	* libc/stdlib/malloc.c: (Ditto.)
 
 2005-08-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

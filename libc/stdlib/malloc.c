@@ -174,7 +174,7 @@ malloc(size_t len)
 	 * Both tests below are needed to catch the case len >= 0xfffe.
 	 */
 	if (avail >= len && avail >= len + sizeof(size_t)) {
-		fp1 = (struct freelist *)__brkval;
+		fp1 = (struct __freelist *)__brkval;
 		__brkval += len + sizeof(size_t);
 		fp1->sz = len;
 		return &(fp1->nx);
