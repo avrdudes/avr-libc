@@ -59,6 +59,7 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
 DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` -name crtm8.o | head -n 1)
+DEMO_INC             = $(shell cd $(top_srcdir) && echo "-I`pwd`/include")
 
 all-local: ps html pdf
 
@@ -70,7 +71,7 @@ demo:
 		NODEFLIBS="-nostartfiles -nodefaultlibs" ; \
 	fi; \
 	cd $(top_srcdir)/doc/examples/demo && \
-		${MAKE} DEFS="-I$(top_srcdir)/include"  \
+		${MAKE} DEFS="$(DEMO_INC)"  \
 			LIBS="$$NODEFLIBS $(DEMO_LIBS)" dox all
 
 # images for inclusion in HTML and LaTeX documents

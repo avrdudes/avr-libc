@@ -5,6 +5,7 @@
 	* libc/stdio/sscanf.c: fix warnings.
 	* libc/stdio/sscanf_p.c: (Ditto.)
 	* libc/stdlib/malloc.c: (Ditto.)
+	* doc/api/Makefile.am: fix standalone build of demo app.
 
 2005-08-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
