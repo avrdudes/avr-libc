@@ -211,7 +211,7 @@ $ cd gcc-<version>
 $ mkdir obj-avr
 $ cd obj-avr
 $ ../configure --prefix=$PREFIX --target=avr --enable-languages=c,c++ \
-    --disable-nls
+    --disable-nls --with-dwarf2
 $ make
 $ make install
 \endverbatim
