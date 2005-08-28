@@ -87,8 +87,12 @@ avr_HEADERS = \
     iotn15.h \
     iotn22.h \
     iotn2313.h \
+    iotn25.h \
     iotn26.h \
     iotn28.h \
+    iotn45.h \
+    iotn85.h \
+    iotnx5.h \
     parity.h \
     pgmspace.h \
     portpins.h \

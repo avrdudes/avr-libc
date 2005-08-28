@@ -395,6 +395,21 @@ AS_IF([test "x$HAS_attiny2313" = "xyes"],
       [AC_CONFIG_FILES([avr/lib/avr2/attiny2313/Makefile])],
       [DUMMY_MAKEFILE([avr/lib/avr2/attiny2313/Makefile])])
 
+CHECK_AVR_DEVICE(attiny25)
+AS_IF([test "x$HAS_attiny25" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr2/attiny25/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr2/attiny25/Makefile])])
+
+CHECK_AVR_DEVICE(attiny45)
+AS_IF([test "x$HAS_attiny45" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr2/attiny45/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr2/attiny45/Makefile])])
+
+CHECK_AVR_DEVICE(attiny85)
+AS_IF([test "x$HAS_attiny85" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr2/attiny85/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr2/attiny85/Makefile])])
+
 #avr3
 AC_CONFIG_FILES([
 	avr/lib/avr3/Makefile

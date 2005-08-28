@@ -133,9 +133,12 @@ The following is a list of AVR devices currently supported by the library.
 - attiny13
 - attiny15 \ref supp_dev_footnote_one "[1]"
 - attiny22
+- attiny25
 - attiny26
 - attiny28 \ref supp_dev_footnote_one "[1]"
 - attiny2313
+- attiny45
+- attiny85
 
 \par Misc Devices:
 

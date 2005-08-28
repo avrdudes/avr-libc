@@ -83,7 +83,10 @@ compiler frontend.
   <tr><td>avr2</td><td>at90s2333</td><td>__AVR_AT90S2333__</td></tr>
   <tr><td>avr2</td><td>at90s2343</td><td>__AVR_AT90S2343__</td></tr>
   <tr><td>avr2</td><td>attiny22</td><td>__AVR_ATtiny22__</td></tr>
+  <tr><td>avr2</td><td>attiny25</td><td>__AVR_ATtiny25__</td></tr>
   <tr><td>avr2</td><td>attiny26</td><td>__AVR_ATtiny26__</td></tr>
+  <tr><td>avr2</td><td>attiny45</td><td>__AVR_ATtiny45__</td></tr>
+  <tr><td>avr2</td><td>attiny85</td><td>__AVR_ATtiny85__</td></tr>
   <tr><td>avr2</td><td>at90s4414</td><td>__AVR_AT90S4414__</td></tr>
   <tr><td>avr2</td><td>at90s4433</td><td>__AVR_AT90S4433__</td></tr>
   <tr><td>avr2</td><td>at90s4434</td><td>__AVR_AT90S4434__</td></tr>

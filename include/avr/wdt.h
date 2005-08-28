@@ -65,14 +65,18 @@
 
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 
+#if defined(WDP3)
+# define _WD_PS3_MASK       _BV(WDP3)
+#else
+# define _WD_PS3_MASK       0x00
+#endif /* WDP3 */
+
 #if defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) \
 || defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) \
 || defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
 #define _WD_CONTROL_REG     WDTCSR
-#define _WD_PS3_MASK        _BV(WDP3)
 #else
 #define _WD_CONTROL_REG     WDTCR
-#define _WD_PS3_MASK        0x00
 #endif
 
 #if defined(WDTOE)
@@ -224,22 +228,21 @@ __asm__ __volatile__ (  \
     See \c WDT0_15MS */
 #define WDTO_2S     7
 
-#if defined(DOXYGEN) || \
-defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) || \
-defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) || \
-defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
+#if defined(DOXYGEN) || defined(WDP3)
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS
-    Note: This is only available on the ATtiny2313, ATmega48, ATmega88,
-    the ATmega168, the AT90PWM2, and the AT90PWM3.
+    Note: This is only available on the ATtiny2313, ATtiny25,
+    ATtiny45, ATtiny85, ATmega48, ATmega88,
+    ATmega168, AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_4S     8
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS
-    Note: This is only available on the ATtiny2313, ATmega48, ATmega88,
-    the ATmega168, the AT90PWM2, and the AT90PWM3.
+    Note: This is only available on the ATtiny2313, ATtiny25,
+    ATtiny45, ATtiny85, ATmega48, ATmega88,
+    ATmega168, AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_8S     9
 

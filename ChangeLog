@@ -1,3 +1,18 @@
+2005-08-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: add tests for the ATtiny25/45/85 support.
+	* devtools/gen-avr-lib-tree.sh: add support for ATtiny25/45/85.
+	* include/avr/io.h: (Ditto.)
+	* include/avr/wdt.h: (Ditto.)
+	* include/avr/io.h: (Ditto.)
+	* include/avr/iotn25.h: new file.
+	* include/avr/iotn45.h: new file.
+	* include/avr/iotn85.h: new file.
+	* include/avr/iotnx5.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for ATtiny25/45/85.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2005-08-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Kai Klenovsek:
