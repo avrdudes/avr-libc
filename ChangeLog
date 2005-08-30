@@ -1,5 +1,21 @@
+2005-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add support for ATmega164/324/644, contributed by Anatoly Sokolov.
+	* configure.ac: add tests for the ATmega164/324/644 support.
+	* devtools/gen-avr-lib-tree.sh: add support for ATmega164/324/644.
+	* include/avr/io.h: (Ditto.)
+	* include/avr/wdt.h: (Ditto.)
+	* include/avr/iom164.h: new file.
+	* include/avr/iom324.h: new file.
+	* include/avr/iom644.h: new file.
+	* include/avr/iomxx4.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for ATmega164/324/644.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2005-08-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Add support for ATtiny25/45/85, contributed by Anatoly Sokolov.
 	* configure.ac: add tests for the ATtiny25/45/85 support.
 	* devtools/gen-avr-lib-tree.sh: add support for ATtiny25/45/85.
 	* include/avr/io.h: (Ditto.)

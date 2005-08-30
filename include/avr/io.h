@@ -176,6 +176,8 @@
 #  include <avr/iocan128.h>
 #elif defined (__AVR_ATmega64__)
 #  include <avr/iom64.h>
+#elif defined (__AVR_ATmega644__)
+#  include <avr/iom644.h>
 #elif defined (__AVR_ATmega645__)
 #  include <avr/iom645.h>
 #elif defined (__AVR_ATmega6450__)
@@ -190,6 +192,8 @@
 #  include <avr/iom32.h>
 #elif defined (__AVR_ATmega323__)
 #  include <avr/iom323.h>
+#elif defined (__AVR_ATmega324__)
+#  include <avr/iom324.h>
 #elif defined (__AVR_ATmega325__)
 #  include <avr/iom325.h>
 #elif defined (__AVR_ATmega3250__)
@@ -206,6 +210,8 @@
 #  include <avr/iom162.h>
 #elif defined (__AVR_ATmega163__)
 #  include <avr/iom163.h>
+#elif defined (__AVR_ATmega164__)
+#  include <avr/iom164.h>
 #elif defined (__AVR_ATmega165__)
 #  include <avr/iom165.h>
 #elif defined (__AVR_ATmega168__)

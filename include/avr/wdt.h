@@ -73,7 +73,9 @@
 
 #if defined(__AVR_ATtiny2313__) || defined(__AVR_ATmega48__) \
 || defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) \
-|| defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
+|| defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__) \
+|| defined(__AVR_ATmega164__) || defined(__AVR_ATmega324__) \
+|| defined(__AVR_ATmega644__)
 #define _WD_CONTROL_REG     WDTCSR
 #else
 #define _WD_CONTROL_REG     WDTCR
@@ -88,9 +90,12 @@
 
 #if defined (__AVR_ATmega169__) || defined(__AVR_AT90CAN128__) \
 || defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega164__) \
 || defined(__AVR_ATmega165__) || defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmeg324__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) \
+|| defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__) \
 || defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
@@ -234,7 +239,11 @@ __asm__ __volatile__ (  \
     See \c WDT0_15MS
     Note: This is only available on the ATtiny2313, ATtiny25,
     ATtiny45, ATtiny85, ATmega48, ATmega88,
-    ATmega168, AT90PWM2, and the AT90PWM3.
+    ATmega164,
+    ATmega168,
+    ATmega324,
+    ATmega644
+    AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_4S     8
 
@@ -242,7 +251,11 @@ __asm__ __volatile__ (  \
     See \c WDT0_15MS
     Note: This is only available on the ATtiny2313, ATtiny25,
     ATtiny45, ATtiny85, ATmega48, ATmega88,
-    ATmega168, AT90PWM2, and the AT90PWM3.
+    ATmega164,
+    ATmega168,
+    ATmega324,
+    ATmega644,
+    AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_8S     9
 

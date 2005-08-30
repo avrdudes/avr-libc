@@ -462,6 +462,11 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/at94k/Makefile
 ])
 
+CHECK_AVR_DEVICE(atmega164)
+AS_IF([test "x$HAS_atmega164" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr5/atmega164/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr5/atmega164/Makefile])])
+
 CHECK_AVR_DEVICE(atmega165)
 AS_IF([test "x$HAS_atmega165" = "xyes"],
       [AC_CONFIG_FILES([avr/lib/avr5/atmega165/Makefile])],
@@ -471,6 +476,11 @@ CHECK_AVR_DEVICE(atmega168)
 AS_IF([test "x$HAS_atmega168" = "xyes"],
       [AC_CONFIG_FILES([avr/lib/avr5/atmega168/Makefile])],
       [DUMMY_MAKEFILE([avr/lib/avr5/atmega168/Makefile])])
+
+CHECK_AVR_DEVICE(atmega324)
+AS_IF([test "x$HAS_atmega324" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr5/atmega324/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr5/atmega324/Makefile])])
 
 CHECK_AVR_DEVICE(atmega325)
 AS_IF([test "x$HAS_atmega325" = "xyes"],
@@ -491,6 +501,11 @@ CHECK_AVR_DEVICE(atmega3290)
 AS_IF([test "x$HAS_atmega3290" = "xyes"],
       [AC_CONFIG_FILES([avr/lib/avr5/atmega3290/Makefile])],
       [DUMMY_MAKEFILE([avr/lib/avr5/atmega3290/Makefile])])
+
+CHECK_AVR_DEVICE(atmega644)
+AS_IF([test "x$HAS_atmega644" = "xyes"],
+      [AC_CONFIG_FILES([avr/lib/avr5/atmega644/Makefile])],
+      [DUMMY_MAKEFILE([avr/lib/avr5/atmega644/Makefile])])
 
 CHECK_AVR_DEVICE(atmega645)
 AS_IF([test "x$HAS_atmega645" = "xyes"],
