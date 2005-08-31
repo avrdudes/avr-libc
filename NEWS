@@ -4,6 +4,22 @@
 
   [#12775] Possible Bug in sscanf on string end
 
+* Other improvements:
+
+  - Update the build system to recent versions of autoconf/automake;
+    the old "doconf" and "domake" scripts are gone now, "reconf" has
+    been renamed to "bootstrap".
+  - Update the documentation system to doxygen >= 1.4.1.
+  - Major overhaul of the documentation, new layout of the HTML pages,
+    several clarifications and additions.
+  - Add support for the following new devices (depending on the ability
+    of the compiler/binutils to handle them):
+    . AT90PWM2/3
+    . ATmega329/3290/649/6490
+    . ATtiny25/45/85
+    . ATmega164/324/644
+
+
 *** Changes since avr-libc-1.2.4:
 
 * Bugs fixed:
