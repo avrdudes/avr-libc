@@ -147,13 +147,11 @@ Unused. User definable.
 
 \par .init4:
 
-Copies the .data section from flash to SRAM.  Also sets up and zeros out the
-.bss section.  In Unix-like targets, .data is normally initialized by the OS
-directly from the executable file.  Since this is impossible in an MCU
-environment, \c avr-gcc instead takes care of appending the .data variables
-after .text in the flash ROM image.  .init4 then defines the code (weakly
-bound) which takes care of copying the contents of .data from the flash to
+For devices with > 64 KB of ROM, .init4 defines the code
+which takes care of copying the contents of .data from the flash to
 SRAM.
+For all other devices, this code as well as the code to zero out the .bss
+section is loaded from libgcc.a.
 
 \par .init5:
 Unused. User definable.
