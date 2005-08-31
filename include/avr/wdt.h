@@ -55,7 +55,38 @@
 
     \note Depending on the fuse configuration of the particular
     device, further restrictions might apply, in particular it might
-    be disallowed to turn off the watchdog timer. */
+    be disallowed to turn off the watchdog timer.
+
+    Note that for newer devices (ATmega88 and newer, effectively any
+    AVR that has the option to also generate interrupts), the watchdog
+    timer remains active even after a system reset (except a power-on
+    condition), using the fastest prescaler value (approximately 15
+    ms).  It is therefore required to turn off the watchdog early
+    during program startup, the datasheet recommends a sequence like
+    the following:
+
+    \code
+    #include <stdint.h>
+    #include <avr/wdt.h>
+
+    uint8_t mcusr_mirror;
+
+    void get_mcusr(void) \
+      __attribute__((naked)) \
+      __attribute__((section(".init3")));
+    void get_mcusr(void)
+    {
+      mcusr_mirror = MCUSR;
+      MCUSR = 0;
+      wdt_disable();
+    }
+    \endcode
+
+    Saving the value of MCUSR in \c mcusr_mirror is only needed if the
+    application later wants to examine the reset source, but clearing
+    in particular the watchdog reset flag before disabling the
+    watchdog is required, according to the datasheet.
+*/
 
 /**
    \ingroup avr_watchdog

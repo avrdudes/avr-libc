@@ -1,5 +1,10 @@
 2005-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/wdt.h: Document the watchdog remaining active after
+	a watchdog reset, and how to turn it off.
+
+2005-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Add support for ATmega164/324/644, contributed by Anatoly Sokolov.
 	* configure.ac: add tests for the ATmega164/324/644 support.
 	* devtools/gen-avr-lib-tree.sh: add support for ATmega164/324/644.
