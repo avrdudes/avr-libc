@@ -3,6 +3,8 @@
 	* doc/api/sections.dox: catch up with .init4 reality (fix for
 	bug #14262)
 	* include/avr/iomxx4.h: define the EECR bits.
+	* include/avr/eeprom.h: use either EEWE or EEPE in
+	eeprom_is_ready(); fix for bug #14241
 
 2005-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

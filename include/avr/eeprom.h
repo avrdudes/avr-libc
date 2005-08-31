@@ -160,7 +160,15 @@ eeprom_write_block (const void *pointer_ram,
     \ingroup avr_eeprom
     \returns 1 if EEPROM is ready for a new read/write operation, 0 if not. */
 
-#define eeprom_is_ready() bit_is_clear(EECR, EEWE)
+#if defined(DOXYGEN)
+# define eeprom_is_ready()
+#elif defined(EEWE)
+# define eeprom_is_ready() bit_is_clear(EECR, EEWE)
+#elif defined(EEPE)
+# define eeprom_is_ready() bit_is_clear(EECR, EEPE)
+#else
+# error "No write enable bit known for this device's EEPROM."
+#endif
 
 /** \def eeprom_busy_wait
     \ingroup avr_eeprom
