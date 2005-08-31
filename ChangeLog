@@ -1,3 +1,8 @@
+2005-08-31 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/sections.dox: catch up with .init4 reality (fix for
+	bug #14262)
+
 2005-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/wdt.h: Document the watchdog remaining active after
