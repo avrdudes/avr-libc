@@ -1,3 +1,8 @@
+2005-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/wdt.h: Document the watchdog remaining active after
+	a watchdog reset, and how to turn it off.
+
 2005-08-15 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/tools-install.dox (avr-libc): fix a missing "tar" command.
