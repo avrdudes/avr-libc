@@ -10,6 +10,7 @@
 
   [patch #3912] Fix ctype.S linker error due to asm branches out
                 of range
+  [patch #3782] modernize <stdint.h>
 
 *** Changes in avr-libc-1.2.5:
 
