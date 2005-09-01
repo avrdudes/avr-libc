@@ -8,6 +8,8 @@
 
 * Other improvements:
 
+  [patch #3780]	<assert.h> header
+
   - Update the build system to recent versions of autoconf/automake;
     the old "doconf" and "domake" scripts are gone now, "reconf" has
     been renamed to "bootstrap".

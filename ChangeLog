@@ -1,5 +1,13 @@
 2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Implement <assert.h>, closes patch #3780.
+	* include/assert.h: new file.
+	* libc/stdlib/assert.c: new file.
+	* include/Makefile.am: include new file(s).
+	* libc/stdlib/Files.am: (Ditto.)
+
+2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/iom329.h: add bits for EECR.
 	* include/avr/iom3290.h: (Ditto.)
 	* include/avr/iom649.h: (Ditto.)
