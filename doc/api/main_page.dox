@@ -82,6 +82,9 @@ undefined behaviour will result.
 \addindex supported devices
 
 The following is a list of AVR devices currently supported by the library.
+Note that actual support for some newer devices depends on the ability
+of the compiler/assembler to support these devices at library
+compile-time.
 
 \par AT90S Type Devices:
 

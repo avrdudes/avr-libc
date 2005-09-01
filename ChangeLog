@@ -1,5 +1,10 @@
 2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/main_page.dox: mention that recent devices' support
+	requires respective support of the toolchain at compile-time.
+
+2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Contributed by Markus F.X.J. Oberhumer:
 	* include/stdint.h: use GCC attributes for exact integral
 	types. Avoid -Wlong-long warnings by adding __extension__. Remove
