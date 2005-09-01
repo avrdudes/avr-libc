@@ -110,6 +110,10 @@
 #define GPIOR0  _SFR_IO8(0x1E)
 
 #define EECR   _SFR_IO8(0x1F)
+#define EERIE   3
+#define EEMWE   2
+#define EEWE    1
+#define EERE    0
 
 #define EEDR   _SFR_IO8(0X20)
 
