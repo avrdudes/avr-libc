@@ -1,4 +1,4 @@
-;; Copyright (c) 1999, 2000, 2001, 2002, Michael Stumpf
+;; Copyright (c) 1999, 2000, 2001, 2002, 2005 Michael Stumpf
 ;; All rights reserved.
 ;;
 ;; Redistribution and use in source and binary forms, with or without
@@ -76,8 +76,8 @@
           FUNCTION(isascii)
 
 GLOBAL(isascii)
-          TST     rHigh
-          BRNE    __ctype_isfalse
+          CPSE    rHigh,__zero_reg__
+          RJMP    _U(__ctype_isfalse)
           COM     rLow
           ANDI    rLow, 0x80
           RET
@@ -102,13 +102,15 @@ GLOBAL(toascii)
           FUNCTION(isalnum)
 
 GLOBAL(isalnum)
-          TST   rHigh
-          BRNE  __ctype_isfalse
+          CPSE  rHigh,__zero_reg__
+          RJMP  _U(__ctype_isfalse)
           PUSH  rLow               ; save, destroyed by isdigit returning 0
           RCALL _U(isdigit)
           TST   rLow
           POP   rLow
-          BRNE  __ctype_istrue
+          BREQ  1f
+          RET                      ; true
+1:
           RJMP  _U(isalpha)
 
           ENDFUNC
@@ -134,19 +136,20 @@ GLOBAL(__ctype_istrue)
           FUNCTION(isupper)
 
 GLOBAL(isupper)
-          ;TST   rHigh
-          ;BRNE  __ctype_isfalse    ; checked by _islower later on
+          ;CPSE  rHigh,__zero_reg__
+          ;RJMP  _U(__ctype_isfalse)    ; checked by _islower later on
           SBRC  rLow,5       ; if bit 5 is set it is no upper
-          RJMP  __ctype_isfalse     ; bit 5 is clear, so if isalpha is true it is an upper
+          RJMP  _U(__ctype_isfalse)     ; bit 5 is clear, so if isalpha is true it is an upper
 GLOBAL(isalpha)
           ORI     rLow,0x20        ; make a lower out of an upper (all others are changed but do not get alpha)
 GLOBAL(islower)
-          TST   rHigh
-          BRNE  __ctype_isfalse
+          CPSE  rHigh,__zero_reg__
+1:
+          RJMP  _U(__ctype_isfalse)
           CPI   rLow,'a'
-          BRLT  __ctype_isfalse
+          BRLT  1b
           CPI   rLow,'z'+1
-          BRGE  __ctype_isfalse
+          BRGE  1b
           RET                      ; 'a' <= rLow <= 'z' (!= 0!!, Z=0)
 
           ENDFUNC
@@ -159,13 +162,13 @@ GLOBAL(islower)
           FUNCTION(isdigit)
 
 GLOBAL(isdigit)
-          TST   rHigh
-          BRNE  __ctype_isfalse
-          CPI   rLow,'0'
-          BRLT  __ctype_isfalse
-          CPI   rLow,'9'+1
-          BRGE  __ctype_isfalse
-          RET                      ; '0' <= rLow <= '9' (!= 0!!)
+          CPSE  rHigh,__zero_reg__
+1:        
+          RJMP  _U(__ctype_isfalse)
+          SUBI  rLow,'0'
+          SUBI  rLow,10
+          BRSH  1b
+          RET                      ; rLow: -10..-1
 
           ENDFUNC
 #endif
@@ -182,8 +185,10 @@ GLOBAL(isxdigit)
           CPI   rLow,'a'
           BRLT  _isxdigit00
           CPI   rLow,'f'+1
-          BRGE  __ctype_isfalse
+          BRGE  1f
           RET                      ; 'a' <= rLow <= 'f' (!= 0!!)
+1:
+          RJMP  _U(__ctype_isfalse)
 _isxdigit00:
           MOV   rLow,__tmp_reg__
           RJMP  _U(isdigit)
@@ -198,13 +203,15 @@ _isxdigit00:
           FUNCTION(iscntrl)
 
 GLOBAL(iscntrl)
-          TST   rHigh
-          BRNE  __ctype_isfalse
+          CPSE  rHigh,__zero_reg__
+1:
+          RJMP  _U(__ctype_isfalse)
           CPI   rLow,0x7F
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x1F+1
-          BRGE  __ctype_isfalse
+          BRGE  1b
           SER   rLow               ; 0 is cntrl, too! -> return true
+2:
           RET
 
           ENDFUNC
@@ -218,15 +225,17 @@ GLOBAL(iscntrl)
 
 GLOBAL(isgraph)
           CPI   rLow,' '
-          BREQ  __ctype_isfalse
+          BREQ  1f
 GLOBAL(isprint)
           TST   rHigh
-          BRNE  __ctype_isfalse
+          BRNE  1f
           CPI   rLow,' '
-          BRLT  __ctype_isfalse
+          BRLT  1f
           CPI   rLow,0x7E+1
-          BRGE  __ctype_isfalse    ;  ' ' <= rLow <= 0x7E (!= 0!!)
+          BRGE  1f                 ;  ' ' <= rLow <= 0x7E (!= 0!!)
           RET
+1:
+          RJMP  _U(__ctype_isfalse)
 
           ENDFUNC
 #endif
@@ -238,20 +247,22 @@ GLOBAL(isprint)
           FUNCTION(isspace)
 
 GLOBAL(isspace)
-          TST   rHigh
-          BRNE  __ctype_isfalse
+          CPSE  rHigh,__zero_reg__
+1:
+          RJMP  _U(__ctype_isfalse)
           CPI   rLow,' '           ; blank
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x0A    ;'\n' ; line feed
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x0C    ;'\f' ; form feed
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x0D    ;'\r' ; carriage return
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x09    ;'\t' ; tab
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x0B    ;'\v' ; vertical tab
-          BRNE  __ctype_isfalse
+          BRNE  1b
+2:
           RET
 
           ENDFUNC
@@ -269,12 +280,13 @@ GLOBAL(ispunct)
           BREQ  _ispunct00           ; true : CPI rLow,0x7E+1 -> NE, rLow unchanged
 
           RCALL _U(isspace)
-          TST   rLow
-          BRNE  __ctype_isfalse
+          CPSE  rLow,__zero_reg__
+1:
+          RJMP  _U(__ctype_isfalse)
           mov   rLow, __tmp_reg__    ; **changed**
           RCALL _U(isalnum)
           TST   rLow
-          BRNE  __ctype_isfalse
+          BRNE  1b
           SER   rLow
 _ispunct00:
           RET
@@ -289,14 +301,16 @@ _ispunct00:
           FUNCTION(isblank)
 
 GLOBAL(isblank)
-          TST   rHigh
-          BRNE  __ctype_isfalse
+          CPSE  rHigh,__zero_reg__
+1:
+          RJMP  _U(__ctype_isfalse)
           CPI   rLow,' '           ; blank
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x09    ;'\t' ; tab
-          BREQ  __ctype_istrue
+          BREQ  2f
           CPI   rLow,0x0B    ;'\v' ; vertical tab
-          BRNE  __ctype_isfalse
+          BRNE  1b
+2:
           RET
 
           ENDFUNC

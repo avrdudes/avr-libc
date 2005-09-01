@@ -1,5 +1,11 @@
 2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/stdlib/ctype.S: Change all branches into RJMPs
+	to guarantee their reachability, closes patch #3912.
+	Contributed by Stefano Rodrigo.
+
+2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Implement <assert.h>, closes patch #3780.
 	* include/assert.h: new file.
 	* libc/stdlib/assert.c: new file.
