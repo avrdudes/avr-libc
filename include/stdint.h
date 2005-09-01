@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2004 Marek Michalkiewicz
+/* Copyright (c) 2002,2004,2005 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -46,10 +46,7 @@
     Use [u]intN_t if you need exactly N bits.
 
     Since these typedefs are mandated by the C99 standard, they are preferred
-    over rolling your own typedefs.
-
-    \note If avr-gcc's \c -mint8 option is used, no 32-bit types will be
-    available for all versions of GCC below 3.5.  */
+    over rolling your own typedefs.  */
 
 #if __INT_MAX__ == 127
 # define __USING_MINT8 1
@@ -69,28 +66,8 @@ typedef signed char int8_t;
 
 typedef unsigned char uint8_t;
 
-/* When you use the -mint8 gcc option, you get either int32_t or int64_t, but
-   not both. */
-
 #define __HAS_INT32_T__ 1
 #define __HAS_INT64_T__ 1
-
-#if __USING_MINT8
-
-typedef long int16_t;
-typedef unsigned long uint16_t;
-
-#if (__GNUC__ > 3) || (__GNUC__ == 3 && __GNUC_MINOR__ >= 5)
-#  undef __HAS_INT64_T__
-typedef long long int32_t;
-typedef unsigned long long uint32_t;
-#else
-#  undef __HAS_INT32_T__
-typedef long long int64_t;
-typedef unsigned long long uint64_t;
-#endif
-
-#else /* no -mint8 */
 
 /*@}*/
 
@@ -101,12 +78,12 @@ typedef unsigned long long uint64_t;
 /** \ingroup avr_stdint
     16-bit signed type. */
 
-typedef int int16_t;
+typedef int int16_t __attribute__ ((__mode__ (__HI__)));
 
 /** \ingroup avr_stdint
     16-bit unsigned type. */
 
-typedef unsigned int uint16_t;
+typedef unsigned int uint16_t __attribute__ ((__mode__ (__HI__)));
 
 /*@}*/
 
@@ -117,12 +94,12 @@ typedef unsigned int uint16_t;
 /** \ingroup avr_stdint
     32-bit signed type. */
 
-typedef long int32_t;
+typedef int int32_t __attribute__ ((__mode__ (__SI__)));
 
 /** \ingroup avr_stdint
     32-bit unsigned type. */
 
-typedef unsigned long uint32_t;
+typedef unsigned int uint32_t __attribute__ ((__mode__ (__SI__)));
 
 /*@}*/
 
@@ -133,14 +110,12 @@ typedef unsigned long uint32_t;
 /** \ingroup avr_stdint
     64-bit signed type. */
 
-typedef long long int64_t;
+__extension__ typedef long long int64_t;
 
 /** \ingroup avr_stdint
     64-bit unsigned type. */
 
-typedef unsigned long long uint64_t;
-
-#endif
+__extension__ typedef unsigned long long uint64_t;
 
 /*@}*/
 

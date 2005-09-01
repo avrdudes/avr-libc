@@ -1,5 +1,13 @@
 2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Contributed by Markus F.X.J. Oberhumer:
+	* include/stdint.h: use GCC attributes for exact integral
+	types. Avoid -Wlong-long warnings by adding __extension__. Remove
+	obsolete comments.  Closes patch #3782 overview: modernize
+	<stdint.h>
+
+2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdlib/ctype.S: Change all branches into RJMPs
 	to guarantee their reachability, closes patch #3912.
 	Contributed by Stefano Rodrigo.
