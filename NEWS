@@ -12,6 +12,7 @@
   [patch #3912] Fix ctype.S linker error due to asm branches out
                 of range
   [patch #3782] modernize <stdint.h>
+  [patch #4087] C99 conformal headers stdint.h and inttypes.h
 
   - Update the build system to recent versions of autoconf/automake;
     the old "doconf" and "domake" scripts are gone now, "reconf" has

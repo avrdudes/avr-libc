@@ -1,3 +1,8 @@
+2005-09-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdint.h: C99ify, contributed by Carlos Lamas, part of
+	patch #4087: C99 conformal headers stdint.h and inttypes.h
+
 2005-09-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/main_page.dox: mention that recent devices' support
