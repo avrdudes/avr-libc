@@ -1,3 +1,8 @@
+2005-09-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/signal.h: deprecate INTERRUPT().
+	* doc/api/interrupts.dox: remove all vestiges of INTERRUPT().
+
 2005-09-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/stdint.h: C99ify, contributed by Carlos Lamas, part of

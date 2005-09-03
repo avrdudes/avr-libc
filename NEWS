@@ -6,7 +6,11 @@
   [#14262] avr-libc documentation error about .init sections
   [#14241] 'eeprom_is_ready' is not compiled with ATmega48
 
-* Other improvements:
+* Other changes:
+
+  - The INTERRUPT() macro has been deprecated, and it will be
+    removed in a future version.  Use __attribute__((interrupt))
+    explicitly if this functionality is really needed.
 
   [patch #3780]	<assert.h> header
   [patch #3912] Fix ctype.S linker error due to asm branches out

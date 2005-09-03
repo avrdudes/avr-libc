@@ -56,13 +56,32 @@ void signame (void) __attribute__ ((signal));		\
 void signame (void)
 #endif
 
-/** \def INTERRUPT(signame) 
+/** \def INTERRUPT(signame)
     \ingroup avr_interrupts
 
     \code#include <avr/signal.h>\endcode
 
+    \deprecated
+
     Introduces an interrupt handler function that runs with global interrupts
-    initially enabled. This allows interrupt handlers to be interrupted. */
+    initially enabled. This allows interrupt handlers to be interrupted.
+
+    As this macro has been used by too many unsuspecting people in the
+    past, it has been deprecated, and will be removed in a future
+    version of the library.  Users who want to legitimately re-enable
+    interrupts in their interrupt handlers as quickly as possible are
+    encouraged to explicitly declare their handlers like:
+
+    \code
+    void SIG_XXX(void) __attribute__((interrupt));
+    void SIG_XXX(void) {
+      ...
+    }
+    \endcode
+
+    where SIG_XXX is the name of a valid interrupt vector for the MCU
+    type in question.
+*/
 
 #ifdef __cplusplus
 #define INTERRUPT(signame)				\

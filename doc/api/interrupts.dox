@@ -1,4 +1,4 @@
-/* Copyright (c) 1999, 2000, 2001, 2002, Rich Neswold
+/* Copyright (c) 1999, 2000, 2001, 2002, 2005 Rich Neswold
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -43,18 +43,18 @@ uses, by convention, a set of registers when it's normally executing
 compiler-generated code. It's important that these registers, as well as the
 status register, get saved and restored. The extra code needed to do this is
 enabled by tagging the interrupt function with
-<tt>__attribute__((interrupt))</tt>.
+<tt>__attribute__((signal))</tt>.
 
 These details seem to make interrupt routines a little messy, but all these
 details are handled by the Interrupt API. An interrupt routine is defined with
-one of two macros, INTERRUPT() and SIGNAL(). These macros register and mark
+SIGNAL(). This macro register and mark
 the routine as an interrupt handler for the specified peripheral. The
 following is an example definition of a handler for the ADC interrupt.
 
 \code
 #include <avr/signal.h>
 
-INTERRUPT(SIG_ADC)
+SIGNAL(SIG_ADC)
 {
     // user code here
 }
@@ -66,8 +66,8 @@ explanation about interrupt routines written solely in assembler language.
 If an unexpected interrupt occurs (interrupt is enabled and no handler is
 installed, which usually indicates a bug), then the default action is to reset
 the device by jumping to the reset vector. You can override this by supplying
-a function named \c __vector_default which should be defined with either
-SIGNAL() or INTERRUPT() as such.
+a function named \c __vector_default which should be defined with
+SIGNAL() as such.
 
 \code
 #include <avr/signal.h>
@@ -83,13 +83,14 @@ Note that every AVR device has a different interrupt vector table so some
 signals might not be available. Check the data sheet for the device you are
 using.
 
-<b>[FIXME: Fill in the blanks! Gotta read those durn data sheets ;-)]</b>
-\note The SIGNAL() and INTERRUPT() macros currently cannot spell-check
+\note The SIGNAL() macro cannot really spell-check
 the argument passed to them.  Thus, by misspelling one of the names
-below in a call to SIGNAL() or INTERRUPT(), a function will be created
+below in a call to SIGNAL(), a function will be created
 that, while possibly being usable as an interrupt function, is not
-actually wired into the interrupt vector table.  No warning will be
-given about this situation.
+actually wired into the interrupt vector table.  The compiler will
+generate a warning if it detects a suspiciously looking name of a
+SIGNAL() function (i.e. one that after macro replacement does not
+start with "__vector_").
 
 \anchor avr_signames
 <small>
