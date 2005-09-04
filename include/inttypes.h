@@ -42,6 +42,30 @@
     This header file includes the exact-width integer definitions from
     <tt><stdint.h></tt>, and extends them with additional facilities
     provided by the implementation.
+
+    Currently, the extensions include two additional integer types
+    that could hold a "far" pointer (i.e. a code pointer that can
+    address more than 64 KB), as well as standard names for all printf
+    and scanf formatting options that are supported by the \ref avr_stdio.
+    As the library does not support the full range of conversion
+    specifiers from ISO 9899:1999, only those conversions that are
+    actually implemented will be listed here.
+
+    The idea behind these conversion macros is that, for each of the
+    types defined by <stdint.h>, a macro will be supplied that portably
+    allows formatting an object of that type in printf() or scanf()
+    operations.  Example:
+
+    \code
+    #include <inttypes.h>
+
+    uint8_t smallval;
+    int32_t longval;
+    ...
+    printf("The hexadecimal value of smallval is " PRIx8
+           ", the decimal value of longval is " PRId32 ".\n",
+	   smallval, longval);
+    \endcode
 */
 
 /** \name Far pointers for memory access >64K */
@@ -146,10 +170,10 @@ typedef uint32_t uint_farptr_t;
 #endif
 
 /** \ingroup avr_inttypes
-    decimal printf format for int */
+    decimal printf format for intptr_t */
 #define		PRIdPTR			PRId16
 /** \ingroup avr_inttypes
-    integer printf format for int */
+    integer printf format for intptr_t */
 #define		PRIiPTR			PRIi16
 
 /** \ingroup avr_inttypes
@@ -194,42 +218,84 @@ typedef uint32_t uint_farptr_t;
 
 
 /** \ingroup avr_inttypes
-    octal printf format for uint8_t */
+    octal printf format for uint16_t */
 #define		PRIo16			"o"
 /** \ingroup avr_inttypes
-    octal printf format for uint_least8_t */
+    octal printf format for uint_least16_t */
 #define		PRIoLEAST16		"o"
 /** \ingroup avr_inttypes
-    octal printf format for uint_fast8_t */
+    octal printf format for uint_fast16_t */
 #define		PRIoFAST16		"o"
 
+/** \ingroup avr_inttypes
+    decimal printf format for uint16_t */
 #define		PRIu16			"u"
+/** \ingroup avr_inttypes
+    decimal printf format for uint_least16_t */
 #define		PRIuLEAST16		"u"
+/** \ingroup avr_inttypes
+    decimal printf format for uint_fast16_t */
 #define		PRIuFAST16		"u"
 
+/** \ingroup avr_inttypes
+    hexadecimal printf format for uint16_t */
 #define		PRIx16			"x"
+/** \ingroup avr_inttypes
+    hexadecimal printf format for uint_least16_t */
 #define		PRIxLEAST16		"x"
+/** \ingroup avr_inttypes
+    hexadecimal printf format for uint_fast16_t */
 #define		PRIxFAST16		"x"
 
+/** \ingroup avr_inttypes
+    uppercase hexadecimal printf format for uint16_t */
 #define		PRIX16			"X"
+/** \ingroup avr_inttypes
+    uppercase hexadecimal printf format for uint_least16_t */
 #define		PRIXLEAST16		"X"
+/** \ingroup avr_inttypes
+    uppercase hexadecimal printf format for uint_fast16_t */
 #define		PRIXFAST16		"X"
 
 
+/** \ingroup avr_inttypes
+    octal printf format for uint32_t */
 #define		PRIo32			"lo"
+/** \ingroup avr_inttypes
+    octal printf format for uint_least32_t */
 #define		PRIoLEAST32		"lo"
+/** \ingroup avr_inttypes
+    octal printf format for uint_fast32_t */
 #define		PRIoFAST32		"lo"
 
+/** \ingroup avr_inttypes
+    decimal printf format for uint32_t */
 #define		PRIu32			"lu"
+/** \ingroup avr_inttypes
+    decimal printf format for uint_least32_t */
 #define		PRIuLEAST32		"lu"
+/** \ingroup avr_inttypes
+    decimal printf format for uint_fast32_t */
 #define		PRIuFAST32		"lu"
 
+/** \ingroup avr_inttypes
+    hexadecimal printf format for uint32_t */
 #define		PRIx32			"lx"
+/** \ingroup avr_inttypes
+    hexadecimal printf format for uint_least32_t */
 #define		PRIxLEAST32		"lx"
+/** \ingroup avr_inttypes
+    hexadecimal printf format for uint_fast32_t */
 #define		PRIxFAST32		"lx"
 
+/** \ingroup avr_inttypes
+    uppercase hexadecimal printf format for uint32_t */
 #define		PRIX32			"lX"
+/** \ingroup avr_inttypes
+    uppercase hexadecimal printf format for uint_least32_t */
 #define		PRIXLEAST32		"lX"
+/** \ingroup avr_inttypes
+    uppercase hexadecimal printf format for uint_fast32_t */
 #define		PRIXFAST32		"lX"
 
 
@@ -258,15 +324,21 @@ typedef uint32_t uint_farptr_t;
 
 #endif
 
+/** \ingroup avr_inttypes
+    octal printf format for uintptr_t */
 #define		PRIoPTR			PRIo16
+/** \ingroup avr_inttypes
+    decimal printf format for uintptr_t */
 #define		PRIuPTR			PRIu16
+/** \ingroup avr_inttypes
+    hexadecimal printf format for uintptr_t */
 #define		PRIxPTR			PRIx16
+/** \ingroup avr_inttypes
+    uppercase hexadecimal printf format for uintptr_t */
 #define		PRIXPTR			PRIX16
 
 
-
-/* The fscanf macros for signed integers */
-
+#if __avr_libc_does_not_implement_hh_in_scanf
 
 #define		SCNd8			"hhd"
 #define		SCNdLEAST8		"hhd"
@@ -276,22 +348,48 @@ typedef uint32_t uint_farptr_t;
 #define		SCNiLEAST8		"hhi"
 #define		SCNiFAST8		"hhi"
 
+#endif
 
+
+/** \ingroup avr_inttypes
+    decimal scanf format for int16_t */
 #define		SCNd16			"d"
+/** \ingroup avr_inttypes
+    decimal scanf format for int_least16_t */
 #define		SCNdLEAST16		"d"
+/** \ingroup avr_inttypes
+    decimal scanf format for int_fast16_t */
 #define		SCNdFAST16		"d"
 
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int16_t */
 #define		SCNi16			"i"
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int_least16_t */
 #define		SCNiLEAST16		"i"
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int_fast16_t */
 #define		SCNiFAST16		"i"
 
 
+/** \ingroup avr_inttypes
+    decimal scanf format for int32_t */
 #define		SCNd32			"ld"
+/** \ingroup avr_inttypes
+    decimal scanf format for int_least32_t */
 #define		SCNdLEAST32		"ld"
+/** \ingroup avr_inttypes
+    decimal scanf format for int_fast32_t */
 #define		SCNdFAST32		"ld"
 
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int32_t */
 #define		SCNi32			"li"
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int_least32_t */
 #define		SCNiLEAST32		"li"
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int_fast32_t */
 #define		SCNiFAST32		"li"
 
 
@@ -310,12 +408,14 @@ typedef uint32_t uint_farptr_t;
 
 #endif
 
+/** \ingroup avr_inttypes
+    decimal scanf format for intptr_t */
 #define		SCNdPTR			SCNd16
+/** \ingroup avr_inttypes
+    generic-integer scanf format for intptr_t */
 #define		SCNiPTR			SCNi16
 
-
-/* The fscanf macros for unsigned integers */
-
+#if __avr_libc_does_not_implement_hh_in_scanf
 
 #define		SCNo8			"hho"
 #define		SCNoLEAST8		"hho"
@@ -329,30 +429,67 @@ typedef uint32_t uint_farptr_t;
 #define		SCNxLEAST8		"hhx"
 #define		SCNxFAST8		"hhx"
 
+#endif
 
+/** \ingroup avr_inttypes
+    octal scanf format for uint16_t */
 #define		SCNo16			"o"
+/** \ingroup avr_inttypes
+    octal scanf format for uint_least16_t */
 #define		SCNoLEAST16		"o"
+/** \ingroup avr_inttypes
+    octal scanf format for uint_fast16_t */
 #define		SCNoFAST16		"o"
 
+/** \ingroup avr_inttypes
+    decimal scanf format for uint16_t */
 #define		SCNu16			"u"
+/** \ingroup avr_inttypes
+    decimal scanf format for uint_least16_t */
 #define		SCNuLEAST16		"u"
+/** \ingroup avr_inttypes
+    decimal scanf format for uint_fast16_t */
 #define		SCNuFAST16		"u"
 
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint16_t */
 #define		SCNx16			"x"
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint_least16_t */
 #define		SCNxLEAST16		"x"
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint_fast16_t */
 #define		SCNxFAST16		"x"
 
 
+/** \ingroup avr_inttypes
+    octal scanf format for uint32_t */
 #define		SCNo32			"lo"
+/** \ingroup avr_inttypes
+    octal scanf format for uint_least32_t */
 #define		SCNoLEAST32		"lo"
+/** \ingroup avr_inttypes
+    octal scanf format for uint_fast32_t */
 #define		SCNoFAST32		"lo"
 
+/** \ingroup avr_inttypes
+    decimal scanf format for uint32_t */
 #define		SCNu32			"lu"
+/** \ingroup avr_inttypes
+    decimal scanf format for uint_least32_t */
 #define		SCNuLEAST32		"lu"
+/** \ingroup avr_inttypes
+    decimal scanf format for uint_fast32_t */
 #define		SCNuFAST32		"lu"
 
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint32_t */
 #define		SCNx32			"lx"
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint_least32_t */
 #define		SCNxLEAST32		"lx"
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint_fast32_t */
 #define		SCNxFAST32		"lx"
 
 
@@ -374,12 +511,18 @@ typedef uint32_t uint_farptr_t;
 #define		SCNuMAX			"llu"
 #define		SCNxMAX			"llx"
 
+#endif
 
+/** \ingroup avr_inttypes
+    octal scanf format for uintptr_t */
 #define		SCNoPTR			SCNo16
+/** \ingroup avr_inttypes
+    decimal scanf format for uintptr_t */
 #define		SCNuPTR			SCNu16
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uintptr_t */
 #define		SCNxPTR			SCNx16
 
-#endif
 /*@{*/
 
 
