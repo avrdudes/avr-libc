@@ -70,17 +70,8 @@ void signame (void)
     past, it has been deprecated, and will be removed in a future
     version of the library.  Users who want to legitimately re-enable
     interrupts in their interrupt handlers as quickly as possible are
-    encouraged to explicitly declare their handlers like:
-
-    \code
-    void SIG_XXX(void) __attribute__((interrupt));
-    void SIG_XXX(void) {
-      ...
-    }
-    \endcode
-
-    where SIG_XXX is the name of a valid interrupt vector for the MCU
-    type in question.
+    encouraged to explicitly declare their handlers as described
+    \ref attr_interrupt "above".
 */
 
 #ifdef __cplusplus

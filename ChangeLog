@@ -1,5 +1,13 @@
 2005-09-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/interrupts.dox: clarify the interrupt behaviour, more
+	explanations, add sub-headlines.
+	* include/avr/signal.h: for the deprecated INTERRUPT() macro,
+	refer to the general description for the recommended way to get
+	the desired behaviour.
+
+2005-09-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/signal.h: deprecate INTERRUPT().
 	* doc/api/interrupts.dox: remove all vestiges of INTERRUPT().
 

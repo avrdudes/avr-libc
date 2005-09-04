@@ -23,10 +23,14 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /** \defgroup avr_interrupts <avr/interrupt.h> <avr/signal.h>: Interrupts and Signals
 
 \note This discussion of interrupts and signals was taken from Rich Neswold's
 document. See \ref acks.
+
+<h3>Introduction to avr-libc's interrupt handling</h3>
 
 It's nearly impossible to find compilers that agree on how to handle interrupt
 code. Since the C language tries to stay away from machine dependent details,
@@ -63,6 +67,8 @@ SIGNAL(SIG_ADC)
 Refer to the chapter explaining \ref ass_isr "assembler programming" for an
 explanation about interrupt routines written solely in assembler language.
 
+<h3>Catch-all interrupt vector</h3>
+
 If an unexpected interrupt occurs (interrupt is enabled and no handler is
 installed, which usually indicates a bug), then the default action is to reset
 the device by jumping to the reset vector. You can override this by supplying
@@ -77,6 +83,40 @@ SIGNAL(__vector_default)
     // user code here
 }
 \endcode
+
+<h3>Nested interrupts</h3>
+
+The AVR hardware clears the global interrupt flag in SREG before
+entering an interrupt vector.  Thus, normally interrupts will remain
+disabled inside the handler until the handler exits, where the RETI
+instruction (that is emitted by the compiler as part of the normal
+function epilogue for an interrupt handler) will eventually re-enable
+further interrupts.  For that reason, interrupt handlers normally do
+not nest.  For most interrupt handlers, this is the desired behaviour,
+for some it is even required in order to prevent infinitely recursive
+interrupts (like UART interrupts, or level-triggered external
+interrupts).  In rare circumstances though it might be desired to
+re-enable the global interrupt flag as early as possible in the
+interrupt handler, in order to not defer any other interrupt more than
+absolutely needed.  This could be done using an sei() instruction
+right at the beginning of the interrupt handler, but this still leaves
+few instructions inside the compiler-generated function prologue to
+run with global interrupts disabled.  The compiler can be instructed
+to insert an SEI instruction right at the beginning of an interrupt
+handler by declaring the handler the following way:
+
+\anchor attr_interrupt
+\code
+void SIG_XXX(void) __attribute__((interrupt));
+void SIG_XXX(void) {
+  ...
+}
+\endcode
+
+where \c SIG_XXX is the name of a valid interrupt vector for the MCU
+type in question, as explained below.
+
+<h3>Chosing the vector: Signal names</h3>
 
 The interrupt is chosen by supplying one of the symbols in following table.
 Note that every AVR device has a different interrupt vector table so some
