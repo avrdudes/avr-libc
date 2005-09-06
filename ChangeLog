@@ -1,5 +1,9 @@
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/iomxx4.h: use avr-libc common vector names.
+
+2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Fix for bug #12333: Standard requires libstdc to define vprintf
 	and vscanf
 	* include/stdio.h: add prototypes for vscanf() and vprintf().
