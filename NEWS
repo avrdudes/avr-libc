@@ -2,15 +2,19 @@
 
 * Bugs fixed:
 
+  [#12495] about Busy-wait delay loops(document)
   [#12775] Possible Bug in sscanf on string end
-  [#14262] avr-libc documentation error about .init sections
+  [#14224] _delay_ms() not inlining if called more than once in a unit
   [#14241] 'eeprom_is_ready' is not compiled with ATmega48
+  [#14262] avr-libc documentation error about .init sections
+  [#14433] Improve documentation of <avr/delay.h>
 
 * Other changes:
 
   [patch #3912] Fix ctype.S linker error due to asm branches out
                 of range
   [patch #3782] modernize <stdint.h>
+  [no-id]       Minor documentation updates (faq.dox, sections.dox)
 
 *** Changes in avr-libc-1.2.5:
 
