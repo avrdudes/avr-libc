@@ -1,3 +1,14 @@
+2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Minor clarifications: make the volatile
+	description a bit more detailed, explain that r2 through r15 are
+	available for global register assignment, explain .initN sections
+	better, mention that GCC no longer puts zero-init'ed .data
+	variables into .data.
+	* doc/api/sections.dox: move the C example from .init1 to .init3,
+	and explain that this ensures __zero_reg__ is properly set up
+	already.
+
 2005-09-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/inttypes.h: C99ify, contributed by Carlos Lamas, part of

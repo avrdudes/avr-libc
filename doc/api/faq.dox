@@ -65,13 +65,17 @@ When using the optimizer, in a loop like the following one:
 \code
 uint8_t flag;
 ...
+SIGNAL(SIG_SOMETHING) {
+  flag = 1;
+}
+...
 
 	while (flag == 0) {
 		...
 	}
 \endcode
 
-the compiler will typically optimize the access to \c flag completely
+the compiler will typically access \c flag only once, and optimize further accesses completely
 away, since its code path analysis shows that nothing inside the loop
 could change the value of \c flag anyway.  To tell the compiler that
 this variable could be changed outside the scope of its code path
@@ -116,6 +120,8 @@ This can be done with
 register unsigned char counter asm("r3");
 \endcode
 
+Typically, it should be possible to use r2 through r15 that way.
+
 See \ref c_names_in_asm for more details.
 
 <small>Back to \ref faq_index.
@@ -159,8 +165,10 @@ devices like ATmega161 because of errata), and add
 <tt>-Wl,-Tdata,0x801100</tt> to start the data section above the
 stack.
 
-For more information on using sections, including how to use them from C code,
-see \ref mem_sections.  Note that in C code, any such function would
+For more information on using sections,
+see \ref mem_sections.
+There is also an example for \ref c_sections.
+Note that in C code, any such function would
 preferrably be placed into section \c .init3 as the code in \c .init2
 ensures the internal register <tt>__zero_reg__</tt> is already cleared.
 
@@ -287,6 +295,12 @@ microcontroller like the AVR.
 
 So in general, variables should only be explicitly initialized if the initial
 value is non-zero.
+
+\note Recent versions of GCC are now smart enough to detect this
+situation, and revert variables that are explicitly initialized to 0
+to the .bss section.  Still, other compilers might not do that
+optimization, and as the C standard guarantees the initialization, it
+is safe to rely on it.
 
 <small>Back to \ref faq_index.
 </small>
