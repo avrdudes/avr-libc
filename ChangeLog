@@ -1,5 +1,9 @@
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: bump version.
+
+2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Major API changes of the standard IO facilities.
 
 	Part of these changes (passing user data to get and put)

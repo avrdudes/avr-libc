@@ -34,7 +34,7 @@
 
 AC_PREREQ(2.57)
 AC_REVISION($Revision$)
-AC_INIT(avr-libc, 1.3.0.20050810, avr-libc-dev@nongnu.org)
+AC_INIT(avr-libc, 1.3.0.20050906, avr-libc-dev@nongnu.org)
 AC_CONFIG_SRCDIR([doc/examples/demo/demo.c])
 AC_CONFIG_HEADER([config.h])
 
