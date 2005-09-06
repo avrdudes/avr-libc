@@ -1,5 +1,11 @@
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Contributed by Markus F.X.J. Oberhumer:
+	* include/stdio.h: provide a dummy fflush(); patch #3781: add
+        dummy fflush() to <stdio.h>
+
+2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: bump version.
 
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>

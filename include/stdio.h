@@ -1013,6 +1013,22 @@ extern int	sscanf(const char *__buf, const char *__fmt, ...);
  */
 extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
 
+#if defined(DOXYGEN)
+/**
+   Flush \c stream.
+
+   This is a null operation provided for source-code compatibility
+   only, as the standard IO implementation currently does not perform
+   any buffering.
+ */
+extern int	fflush(FILE *stream);
+#else
+static __inline__ int fflush(FILE *stream __attribute__((unused)))
+{
+	return 0;
+}
+#endif
+
 #ifdef __cplusplus
 }
 #endif

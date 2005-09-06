@@ -45,6 +45,7 @@
                 put methods.  (This is part of the API changes
                 mentioned above.)
   [patch #3780]	<assert.h> header
+  [patch #3781] add dummy fflush() to <stdio.h>
   [patch #3782] modernize <stdint.h>
   [patch #3912] Fix ctype.S linker error due to asm branches out
                 of range
