@@ -1,5 +1,14 @@
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/delay.h: improve documentation, make sure the
+	functions will always be inlined.
+	Fix for bugs:
+	#12495: about Busy-wait delay loops(document)
+	#14224: _delay_ms() not inlining if called more than once in a unit
+	#14433: Improve documentation of <avr/delay.h>
+
+2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/iomxx4.h: use avr-libc common vector names.
 
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>

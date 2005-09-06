@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
-   Copyright (c) 2004, Joerg Wunsch
+   Copyright (c) 2004,2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -47,6 +47,11 @@
     #include <avr/delay.h>
     \endcode
 
+    \note As an alternative method, it is possible to pass the
+    F_CPU macro down to the compiler from the Makefile.
+    Obviously, in that case, no \c #define statement should be
+    used.
+
     The functions in this header file implement simple delay loops
     that perform a busy-waiting.  They are typically used to
     facilitate short delays in the program execution.  They are
@@ -70,7 +75,21 @@
     operate on double typed arguments, however when optimization is
     turned on, the entire floating-point calculation will be done at
     compile-time.
+
+    \note When using _delay_us() and _delay_ms(), the expressions
+    passed as arguments to these functions shall be compile-time
+    constants, otherwise the floating-point calculations to setup the
+    loops will be done at run-time, thereby drastically increasing
+    both the resulting code size, as well as the time required to
+    setup the loops.
 */
+
+#if !defined(DOXYGEN)
+static void _delay_loop_1(uint8_t __count) __attribute__((always_inline));
+static void _delay_loop_2(uint16_t __count) __attribute__((always_inline));
+static void _delay_us(double __us) __attribute__((always_inline));
+static void _delay_ms(double __ms) __attribute__((always_inline));
+#endif
 
 /** \ingroup avr_delay
 
@@ -83,7 +102,7 @@
     Thus, at a CPU speed of 1 MHz, delays of up to 768 microseconds
     can be achieved.
 */
-static __inline__ void
+void
 _delay_loop_1(uint8_t __count)
 {
 	__asm__ volatile (
@@ -105,7 +124,7 @@ _delay_loop_1(uint8_t __count)
     Thus, at a CPU speed of 1 MHz, delays of up to about 262.1
     milliseconds can be achieved.
  */
-static __inline__ void
+void
 _delay_loop_2(uint16_t __count)
 {
 	__asm__ volatile (
@@ -132,7 +151,7 @@ _delay_loop_2(uint16_t __count)
 
    The maximal possible delay is 768 us / F_CPU in MHz.
  */
-static __inline__ void
+void
 _delay_us(double __us)
 {
 	uint8_t __ticks;
@@ -157,7 +176,7 @@ _delay_us(double __us)
 
    The maximal possible delay is 262.14 ms / F_CPU in MHz.
  */
-static __inline__ void
+void
 _delay_ms(double __ms)
 {
 	uint16_t __ticks;
