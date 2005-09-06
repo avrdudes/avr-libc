@@ -1,5 +1,14 @@
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Fix for bug #12333: Standard requires libstdc to define vprintf
+	and vscanf
+	* include/stdio.h: add prototypes for vscanf() and vprintf().
+	* libc/stdio/vscanf.c: new file.
+	* libc/stdio/vprintf.c: new file.
+	* libc/stdio/Files.am: add vscanf.c and vprintf.c.
+
+2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Contributed by Markus F.X.J. Oberhumer:
 	* include/stdio.h: provide a dummy fflush(); patch #3781: add
         dummy fflush() to <stdio.h>

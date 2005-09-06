@@ -616,6 +616,14 @@ extern int	printf(const char *__fmt, ...);
 extern int	printf_P(const char *__fmt, ...);
 
 /**
+   The function \c vprintf performs formatted output to stream
+   \c stdout, taking a variable argument list as in vfprintf().
+
+   See vfprintf() for details.
+*/
+extern int	vprintf(const char *__fmt, va_list __ap);
+
+/**
    Variant of \c printf() that sends the formatted characters
    to string \c s.
 */
@@ -999,6 +1007,14 @@ extern int	scanf(const char *__fmt, ...);
    Variant of scanf() where \c fmt resides in program memory.
  */
 extern int	scanf_P(const char *__fmt, ...);
+
+/**
+   The function \c vscanf performs formatted input from stream
+   \c stdin, taking a variable argument list as in vfscanf().
+
+   See vfscanf() for details.
+*/
+extern int	vscanf(const char *__fmt, va_list __ap);
 
 /**
    The function \c sscanf performs formatted input, reading the

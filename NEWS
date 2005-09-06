@@ -35,6 +35,7 @@
 
 * Bugs fixed:
 
+  [#12333] Standard requires libstdc to define vprintf and vscanf
   [#12775] Possible Bug in sscanf on string end
   [#14262] avr-libc documentation error about .init sections
   [#14241] 'eeprom_is_ready' is not compiled with ATmega48
