@@ -48,7 +48,7 @@ fputs_P(const char *str, FILE *stream)
 	 * macro, so it could evaluate its argument more than once.
 	 */
 	while ((c = pgm_read_byte(str)) != '\0') {
-		if (stream->put(c) != 0)
+		if (stream->put(c, stream) != 0)
 			rv = EOF;
 		str++;
 	}

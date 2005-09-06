@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002,2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -29,13 +29,11 @@
 
 /* $Id$ */
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "stdio_private.h"
-
-FILE *__iob[3];			/* stdin, stdout, stderr */
 
 /** \ingroup avr_stdio
    This function is a replacement for \c fopen().
@@ -49,16 +47,20 @@ FILE *__iob[3];			/* stdin, stdout, stderr */
    insufficient dynamic memory is available to establish a new stream.
 
    If the \c put function pointer is provided, the stream is opened
-   with write intent.  The function passed as \c put shall take one
-   character to write to the device as argument , and shall return 0
+   with write intent.  The function passed as \c put shall take two
+   arguments, the first a character to write to the device,
+   and the second a pointer to FILE, and shall return 0
    if the output was successful, and a nonzero value if the character
    could not be sent to the device.
 
    If the \c get function pointer is provided, the stream is opened
-   with read intent.  The function passed as \c get shall take no
-   arguments, and return one character from the device, passed as an
+   with read intent.  The function passed as \c get shall take
+   a pointer to FILE as its single argument,
+   and return one character from the device, passed as an
    \c int type.  If an error occurs when trying to read from the
-   device, it shall return \c -1.
+   device, it shall return \c _FDEV_ERR.
+   If an end-of-file condition was reached while reading from the
+   device, \c _FDEV_EOF shall be returned.
 
    If both functions are provided, the stream is opened with read
    and write intent.
@@ -67,15 +69,19 @@ FILE *__iob[3];			/* stdin, stdout, stderr */
    and the first one opened with write intent is assigned to both,
    \c stdout and \c stderr.
 
-   The third parameter \c opts is currently unused, but reserved for
-   future extensions.
-
    fdevopen() uses calloc() (und thus malloc()) in order to allocate
    the storage for the new stream.
+
+   \note If the macro __STDIO_FDEVOPEN_COMPAT_12 is declared before
+   including <stdio.h>, a function prototype for fdevopen() will be
+   chosen that is backwards compatible with avr-libc version 1.2 and
+   before.  This is solely intented for providing a simple migration
+   path without the need to immediately change all source code.  Do
+   not use for new code.
 */
 
 FILE *
-fdevopen(int (*put)(char), int (*get)(void), int opts __attribute__((unused)))
+fdevopen(int (*put)(char, FILE *), int (*get)(FILE *))
 {
 	FILE *s;
 

@@ -129,11 +129,11 @@ ioinit(void)
  * is empty.
  */
 int
-uart_putchar(char c)
+uart_putchar(char c, FILE *unused)
 {
 
   if (c == '\n')
-    uart_putchar('\r');
+    uart_putchar('\r', 0);
   loop_until_bit_is_set(UCSRA, UDRE);
   UDR = c;
   return 0;
@@ -463,6 +463,8 @@ error(void)
   exit(0);
 }
 
+FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+
 void
 main(void)
 {
@@ -473,7 +475,7 @@ main(void)
 
   ioinit();
 
-  fdevopen(uart_putchar, NULL, 0);
+  stdout = &mystdout;
 
   for (a = 0; a < 256;)
     {

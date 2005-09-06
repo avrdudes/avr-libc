@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002,2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -32,6 +32,8 @@
 #include <stdio.h>
 
 #include "stdio_private.h"
+
+#undef ferror
 
 int
 ferror(FILE *stream)

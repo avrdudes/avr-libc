@@ -1,5 +1,38 @@
 *** Changes since avr-libc-1.2.5:
 
+* Major API changes:
+
+  - The INTERRUPT() macro has been deprecated, and it will be
+    removed in a future version.  Use __attribute__((interrupt))
+    explicitly if this functionality is really needed.
+
+  - The standard IO facilities API has been enhanced
+
+    . The backend functions put and get that are passed to fdevopen()
+      during the setup of a stream now take the stream itself as an
+      additional argument.
+      By defining the macro __STDIO_FDEVOPEN_COMPAT_12 before
+      including <stdio.h>, an fdevopen() function prototype will be
+      declared that is backwards-compatible with avr-libc version
+      1.2 and before.
+    . It is possible to tie user data to a stream using
+      fdev_set_udata(), and to retrieve them using fdev_get_udata().
+      Together with the additional argument to the backend functions,
+      these functions can now e.g. keep track of internal user state,
+      or distinguish two different devices using the same backend
+      function.
+    . The get backend function can now return _FDEV_EOF to indicate an
+      end-of-file condition, in addition to _FDEV_ERR for an error
+      condition.  This will affect the internal state that can be
+      queried using the standard feof() and ferror() functions.
+    . A new macro fdev_setup_stream() is provided to setup a
+      user-supplied stream without the need to call fdevopen(), and thus
+      without requiring malloc().  A similar macro FDEV_SETUP_STREAM()
+      exists that can be used to initialized a FILE object.  The
+      floating-point implementations of vfscanf() and vfprintf() now
+      allocate their conversion buffer on the stack, so they do not need
+      malloc() anymore either.
+
 * Bugs fixed:
 
   [#12775] Possible Bug in sscanf on string end
@@ -8,14 +41,13 @@
 
 * Other changes:
 
-  - The INTERRUPT() macro has been deprecated, and it will be
-    removed in a future version.  Use __attribute__((interrupt))
-    explicitly if this functionality is really needed.
-
+  [patch #3750] Allow passing user data to stdio fdevopen() get and
+                put methods.  (This is part of the API changes
+                mentioned above.)
   [patch #3780]	<assert.h> header
+  [patch #3782] modernize <stdint.h>
   [patch #3912] Fix ctype.S linker error due to asm branches out
                 of range
-  [patch #3782] modernize <stdint.h>
   [patch #4087] C99 conformal headers stdint.h and inttypes.h
 
   - Update the build system to recent versions of autoconf/automake;

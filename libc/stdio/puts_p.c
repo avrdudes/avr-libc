@@ -48,11 +48,11 @@ puts_P(const char *str)
 	 * macro, so it could evaluate its argument more than once.
 	 */
 	while ((c = pgm_read_byte(str)) != '\0') {
-		if (stdout->put(c) != 0)
+		if (stdout->put(c, stdout) != 0)
 			rv = EOF;
 		str++;
 	}
-	if (stdout->put('\n') != 0)
+	if (stdout->put('\n', stdout) != 0)
 		rv = EOF;
 
 	return rv;

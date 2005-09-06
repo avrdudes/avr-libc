@@ -1,5 +1,60 @@
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Major API changes of the standard IO facilities.
+
+	Part of these changes (passing user data to get and put)
+	have been contributed by Ted Roth as patch #3750.
+
+	* include/stdio.h: implement the new prototype for fdevopen()
+	that allows passing user data to the backend put and get
+	functions; retain a backwards-compatible prototype iff
+	__STDIO_FDEVOPEN_COMPAT_12 is defined before including stdio.h;
+	move definition of struct __file from stdio_internal.h here, so
+	user code will be able to directly declare objects of type FILE;
+	include the udata field in struct __file; add macros
+	fdev_set_udata() and fdev_get_udata() to access the user data
+	field; implement a macro-based, malloc()-free alternative API
+	to fdevopen() consisting of the macros fdev_setup_stream() and
+	FDEV_SETUP_STREAM() together with _FDEV_SETUP_READ,
+	_FDEV_SETUP_WRITE, and _FDEV_SETUP_RW that can be passed to
+	declare the open intent; add _FDEV_ERR and _FDEV_EOF to be
+	returned by the internal get function; add inline macros
+	shadowing the functions clearerr(), feof(), and ferror() (now
+	that struct __file is user-visible); add documentation for all
+	the API changes in the introduction; sub-structure the
+	introductional doxygen comment; remove the "this is likely to
+	be changed in future" warning.
+	* libc/stdio/fdevopen.c (fdevopen): Update dox for new get and put
+	argument types.
+	Change the get() and put() function pointers so that they take the
+	stream as an argument.
+	Remove the definition of __iob[] to avoid the need for dragging
+	in fdevopen() to access the standard streams.
+	* libc/stdio/fgetc.c (fgetc): Pass stream to get() method;
+	set __SERR or __SEOF dependent of the backend's return code.
+	* libc/stdio/fputc.c (fputc): Pass stream to put() method.
+	* libc/stdio/fputs.c (fputs): Ditto.
+	* libc/stdio/fputs_p.c (fputs_P): Ditto.
+	* libc/stdio/fwrite.c (fwrite): Ditto.
+	* libc/stdio/puts.c (puts): Ditto.
+	* libc/stdio/puts_p.c (puts_P): Ditto.
+	* libc/stdio/stdio_private.h: remove struct __file from here.
+	* libc/stdio/iob.c: New file (split off of fdevopen.c).
+	* libc/stdio/Files.am: add iob.c.
+	* doc/examples/twitest/twitest.c: convert to the new stdio API.
+	* libc/stdio/clearerr.c: undef the shadow macro first.
+	* libc/stdio/ferror.c: (Ditto.)
+	* libc/stdio/feof.c: (Ditto.)
+	* libc/stdio/fclose.c: change inttypes.h into stdint.h.
+	* libc/stdio/fgets.c: don't forcibly set __SERR, getc() already
+	handled that.
+	* libc/stdio/gets.c: (Ditto.)
+	* libc/stdio/vfprintf.c: Allocate the fp conversion buffer on
+	the stack as opposed to using malloc().
+	* libc/stdio/vfscanf.c: (Ditto.)
+
+2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/faq.dox: Minor clarifications: make the volatile
 	description a bit more detailed, explain that r2 through r15 are
 	available for global register assignment, explain .initN sections

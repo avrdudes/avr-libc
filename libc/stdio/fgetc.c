@@ -56,9 +56,10 @@ fgetc(FILE *stream)
 			stream->buf++;
 		}
 	} else {
-		rv = stream->get();
-		if (rv == -1) {
-			stream->flags |= __SERR;
+		rv = stream->get(stream);
+		if (rv < 0) {
+			/* if != _FDEV_ERR, assume it's _FDEV_EOF */
+			stream->flags |= (rv == _FDEV_ERR)? __SERR: __SEOF;
 			return EOF;
 		}
 	}

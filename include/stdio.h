@@ -51,10 +51,7 @@
 /** \defgroup avr_stdio <stdio.h>: Standard IO facilities
     \code #include <stdio.h> \endcode
 
-    \warning
-    This implementation of the standard IO facilities is new to
-    avr-libc.  It is not yet expected to remain stable, so some
-    aspects of the API might change in a future release.
+    <h3>Introduction to the Standard IO facilities</h3>
 
     This file declares the standard IO facilities that are implemented
     in \c avr-libc.  Due to the nature of the underlying hardware,
@@ -77,11 +74,15 @@
     offered by avr-libc will usually cost much less in terms of speed
     and code size.
 
+    <h3>Tunable options for code size vs. feature set</h3>
+
     In order to allow programmers a code size vs. functionality tradeoff,
     the function vfprintf() which is the heart of the printf family can be
     selected in different flavours using linker options.  See the
     documentation of vfprintf() for a detailed description.  The same
     applies to vfscanf() and the \c scanf family of functions.
+
+    <h3>Outline of the chosen API</h3>
 
     The standard streams \c stdin, \c stdout, and \c stderr are
     provided, but contrary to the C standard, since avr-libc has no
@@ -99,6 +100,10 @@
     the linefeed, its \c put() routine must implement this (see
     \ref stdio_note2 "note 2").
 
+    As an alternative method to fdevopen(), the macro
+    fdev_setup_stream() might be used to setup a user-supplied FILE
+    structure.
+
     It should be noted that the automatic conversion of a newline
     character into a carriage return - newline sequence breaks binary
     transfers.  If binary transfers are desired, no automatic
@@ -115,12 +120,73 @@
     each other, thus calling \c fclose() on such a stream will also
     effectively close all of its aliases (\ref stdio_note3 "note 3").
 
+    It is possible to tie additional user data to a stream, using
+    fdev_set_udata().  The backend put and get functions can then
+    extract this user data using fdev_get_udata(), and act
+    appropriately.  For example, a single put function could be used
+    to talk to two different UARTs that way, or the put and get
+    functions could keep internal state between calls there.
+
+    <h3>Format strings in flash ROM</h3>
+
     All the \c printf and \c scanf family functions come in two flavours: the
     standard name, where the format string is expected to be in
     SRAM, as well as a version with the suffix "_P" where the format
     string is expected to reside in the flash ROM.  The macro
     \c PSTR (explained in \ref avr_pgmspace) becomes very handy
     for declaring these format strings.
+
+    \anchor stdio_without_malloc
+    <h3>Running stdio without malloc()</h3>
+
+    By default, fdevopen() as well as the floating-point versions of
+    the printf and scanf family require malloc().  As this is often
+    not desired in the limited environment of a microcontroller, an
+    alternative option is provided to run completely without malloc().
+
+    The macro fdev_setup_stream() is provided to prepare a
+    user-supplied FILE buffer for operation with stdio.  If
+    floating-point operation is desired, a user-supplied buffer can as
+    well be passed for the internal buffering for the floating-point
+    numbers (and processing of \%[ scanf data).
+
+    <h4>Example</h4>
+
+    \code
+    #include <stdio.h>
+
+    static int uart_putchar(char c, FILE *stream);
+
+    static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,
+                                             _FDEV_SETUP_WRITE);
+
+    static int
+    uart_putchar(char c, FILE *stream)
+    {
+
+      if (c == '\n')
+        uart_putchar('\r');
+      loop_until_bit_is_set(UCSRA, UDRE);
+      UDR = c;
+      return 0;
+    }
+
+    int
+    main(void)
+    {
+      init_uart();
+      stdout = &mystdout;
+      printf("Hello, world!\n");
+
+      return 0;
+    }
+    \endcode
+
+    This example uses the initializer form FDEV_SETUP_STREAM() rather
+    than the function-like fdev_setup_stream(), so all data
+    initialization happens during C start-up.
+
+    <h3>Notes</h3>
 
     \anchor stdio_note1 \par Note 1:
     It might have been possible to implement a device abstraction that
@@ -138,7 +204,7 @@
 
     \code
     int
-    uart_putchar(char c)
+    uart_putchar(char c, FILE *stream)
     {
 
       if (c == '\n')
@@ -160,10 +226,41 @@
     them in registers for functions that take a fixed number of
     parameters), the ability to pass one parameter less by implying
     \c stdin will also save some execution time.
-    
 */
 
-struct __file;
+#if !defined(DOXYGEN)
+
+/*
+ * This is an internal structure of the library that is subject to be
+ * changed without warnings at any time.  Please do *never* reference
+ * elements of it beyond by using the official interfaces provided.
+ */
+struct __file {
+	char	*buf;		/* buffer pointer */
+	unsigned char unget;	/* ungetc() buffer */
+	uint8_t	flags;		/* flags, see below */
+#define __SRD	0x0001		/* OK to read */
+#define __SWR	0x0002		/* OK to write */
+#define __SSTR	0x0004		/* this is an sprintf/snprintf string */
+#define __SPGM	0x0008		/* fmt string is in progmem */
+#define __SERR	0x0010		/* found error */
+#define __SEOF	0x0020		/* found EOF */
+#define __SUNGET 0x040		/* ungetc() happened */
+#if 0
+/* possible future extensions, will require uint16_t flags */
+#define __SRW	0x0080		/* open for reading & writing */
+#define __SLBF	0x0100		/* line buffered */
+#define __SNBF	0x0200		/* unbuffered */
+#define __SMBF	0x0400		/* buf is from malloc */
+#endif
+	int	size;		/* size of buffer */
+	int	len;		/* characters read or written so far */
+	int	(*put)(char, struct __file *);	/* function to write one char to device */
+	int	(*get)(struct __file *);	/* function to read one char from device */
+	void	*udata;		/* User defined and accessible data. */
+};
+
+#endif /* not DOXYGEN */
 
 /*@{*/
 /**
@@ -209,15 +306,111 @@ struct __file;
 */
 #define EOF	(-1)
 
+/** This macro inserts a pointer to user defined data into a FILE
+    stream object.
+
+    The user data can be useful for tracking state in the put and get
+    functions supplied to the fdevopen() function. */
+#define fdev_set_udata(stream, u) do { (stream)->udata = u; } while(0)
+
+/** This macro retrieves a pointer to user defined data from a FILE
+    stream object. */
+#define fdev_get_udata(stream) ((stream)->udata)
+
+#if defined(DOXYGEN)
+/**
+   \brief Setup a user-supplied buffer as an stdio stream
+
+   This macro takes a user-supplied buffer \c stream, and sets it up
+   as a stream that is valid for stdio operations, similar to one that
+   has been obtained dynamically from fdevopen(). The buffer to setup
+   must be of type FILE.
+
+   The arguments \c put and \c get are identical to those that need to
+   be passed to fdevopen().
+
+   The \c rwflag argument can take one of the values _FDEV_SETUP_READ,
+   _FDEV_SETUP_WRITE, or _FDEV_SETUP_RW, for read, write, or read/write
+   intent, respectively.
+
+   \note No assignments to the standard streams will be performed by
+   fdev_setup_stream().  If standard streams are to be used, these
+   need to be assigned by the user.  See also under
+   \ref stdio_without_malloc "Running stdio without malloc()".
+ */
+#define fdev_setup_stream(stream, put, get, rwflag)
+#else  /* !DOXYGEN */
+#define fdev_setup_stream(stream, p, g, f) \
+	do { \
+		(stream)->put = p; \
+		(stream)->get = g; \
+		(stream)->flags = f; \
+		(stream)->udata = 0; \
+	} while(0)
+#endif /* DOXYGEN */
+
+#define _FDEV_SETUP_READ  __SRD	/**< fdev_setup_stream() with read intent */
+#define _FDEV_SETUP_WRITE __SWR	/**< fdev_setup_stream() with write intent */
+#define _FDEV_SETUP_RW    (__SRD|__SWR)	/**< fdev_setup_stream() with read/write intent */
+
+/**
+ * Return code for an error condition during device read.
+ *
+ * To be used in the get function of fdevopen().
+ */
+#define _FDEV_ERR (-1)
+
+/**
+ * Return code for an end-of-file condition during device read.
+ *
+ * To be used in the get function of fdevopen().
+ */
+#define _FDEV_EOF (-2)
+
+#if defined(DOXYGEN)
+/**
+   \brief Initializer for a user-supplied stdio stream
+
+   This macro acts similar to fdev_setup_stream(), but it is to be
+   used as the initializer of a variable of type FILE.
+
+   The remaining arguments are to be used as explained in
+   fdev_setup_stream().
+ */
+#define FDEV_SETUP_STREAM(put, get, rwflag)
+#else  /* !DOXYGEN */
+#define FDEV_SETUP_STREAM(p, g, f) \
+	{ \
+		.put = p, \
+		.get = g, \
+		.flags = f, \
+		.udata = 0, \
+	}
+#endif /* DOXYGEN */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #if !defined(DOXYGEN)
+/*
+ * Doxygen documentation can be found in fdevopen.c.
+ */
 
 extern struct __file *__iob[];
 
-extern FILE	*fdevopen(int (*__put)(char), int (*__get)(void), int __opts);
+#if defined(__STDIO_FDEVOPEN_COMPAT_12)
+/*
+ * Declare prototype for the discontinued version of fdevopen() that
+ * has been in use up to avr-libc 1.2.x.  The new implementation has
+ * some backwards compatibility with the old version.
+ */
+extern FILE *fdevopen(int (*__put)(char), int (*__get)(void),
+                      int __opts __attribute__((unused)));
+#else  /* !defined(__STDIO_FDEVOPEN_COMPAT_12) */
+/* New prototype for avr-libc 1.4 and above. */
+extern FILE *fdevopen(int (*__put)(char, FILE*), int (*__get)(FILE*));
+#endif /* defined(__STDIO_FDEVOPEN_COMPAT_12) */
 
 #endif /* not DOXYGEN */
 
@@ -605,21 +798,32 @@ extern size_t	fread(void *__ptr, size_t __size, size_t __nmemb,
  */
 extern void	clearerr(FILE *__stream);
 
+#if !defined(DOXYGEN)
+/* fast inlined version of clearerr() */
+#define clearerror(s) do { (s)->flags &= ~(__SERR | __SEOF); } while(0)
+#endif /* !defined(DOXYGEN) */
+
 /**
    Test the end-of-file flag of \c stream.  This flag can only be cleared
    by a call to clearerr().
-
-   \note
-   Since there is currently no notion for end-of-file on a device, this
-   function will always return a false value.
  */
 extern int	feof(FILE *__stream);
+
+#if !defined(DOXYGEN)
+/* fast inlined version of feof() */
+#define feof(s) ((s)->flags & __SEOF)
+#endif /* !defined(DOXYGEN) */
 
 /**
    Test the error flag of \c stream.  This flag can only be cleared
    by a call to clearerr().
  */
 extern int	ferror(FILE *__stream);
+
+#if !defined(DOXYGEN)
+/* fast inlined version of ferror() */
+#define ferror(s) ((s)->flags & __SERR)
+#endif /* !defined(DOXYGEN) */
 
 /**
    Formatted input.  This function is the heart of the \c scanf
@@ -732,7 +936,7 @@ extern int	ferror(FILE *__stream);
      completed is returned.
 
      By default, all the conversions described above are available
-     except the floating-point conversions, and the <tt>%[</tt> conversion.
+     except the floating-point conversions, and the <tt>\%[</tt> conversion.
      These conversions will be available in the extended version
      provided by the library \c libscanf_flt.a.  Note that either of
      these conversions requires the availability of a buffer that

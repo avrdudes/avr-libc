@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Alexander Popov (sasho@vip.bg)
-   Copyright (c) 2002,2004 Joerg Wunsch
+   Copyright (c) 2002,2004,2005 Joerg Wunsch
    Copyright (c) 2005, Helmut Wallner
    All rights reserved.
 
@@ -33,7 +33,7 @@
 /* $Id$ */
 
 #include <avr/pgmspace.h>
-#include <inttypes.h>
+#include <stdint.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -121,7 +121,7 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 #endif
 #if PRINTF_LEVEL >= PRINTF_FLT
 	int8_t	decpt;
-	char	*fb;	/* floating point buffer, malloc'ed */
+	char	fb[FLTBUFLEN];	/* floating point buffer */
 #endif
 
 #if PRINTF_LEVEL < PRINTF_STD
@@ -132,9 +132,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 
 	flags = 0;
 	stream->len = 0;
-#if PRINTF_LEVEL >= PRINTF_FLT
-	fb = 0;
-#endif
 
 	if ((stream->flags & __SWR) == 0)
 		return EOF;
@@ -167,14 +164,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 			} else if ((c >= 'e' && c <= 'g') ||
 				   (c >= 'E' && c <= 'G')) {
 				a.d = va_arg(ap, double);
-				if (fb == 0) {
-					if ((fb = malloc(FLTBUFLEN)) == 0)
-						/*
-						 * No buffer for floating point
-						 * conversion, punt.
-						 */
-						goto clearflags;
-				}
 				if (!(flags & FLPREC))
 					prec = 6;
 				/* FLPREC is used for integer formats only */
@@ -559,9 +548,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 				putc(c, stream);
 	}
 
-#if PRINTF_LEVEL >= PRINTF_FLT
-	free(fb);
-#endif
 	return stream->len;
 }
 

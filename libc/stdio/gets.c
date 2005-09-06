@@ -43,10 +43,8 @@ gets(char *str)
 		return NULL;
 
 	for (c = 0, cp = str; c != '\n'; cp++) {
-		if ((c = getchar()) == EOF) {
-			stdin->flags |= __SERR;
+		if ((c = getchar()) == EOF)
 			return NULL;
-		}
 		*cp = (char)c;
 	}
 	*--cp = '\0';

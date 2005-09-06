@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2004 Joerg Wunsch
+/* Copyright (c) 2002,2004,2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -33,11 +33,10 @@
 
 #include <avr/pgmspace.h>
 #include <ctype.h>
-#include <inttypes.h>
+#include <stdint.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "stdio_private.h"
@@ -89,7 +88,7 @@
  * bit vector for %[ formats, so it must be at least 256/8 = 32 bytes
  * long.
  */
-#define FLTBUF	40
+#define FLTBUF 40
 #endif
 
 int
@@ -110,17 +109,15 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 #endif
 	uint8_t flags;
 #if SCANF_LEVEL >= SCANF_FLT
-	char	*buf, *bp;
+	char	*bp;
 	char	fltchars[] = "0123456789Ee.";
+        char    buf[FLTBUF];
 #endif
 
 	flags = 0;
 	nconvs = 0;
 	i = 0;
 	olen = stream->len = 0;
-#if SCANF_LEVEL >= SCANF_FLT
-	buf = 0;
-#endif
 
 	if ((stream->flags & __SRD) == 0)
 		return EOF;
@@ -213,13 +210,6 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 #endif /* SCANF_LEVEL > SCANF_MIN */
 
 			c = tolower(c);
-#if SCANF_LEVEL >= SCANF_FLT
-			if ((c == '[' || c == 'e' || c == 'f' || c == 'g') &&
-			    buf == 0) {
-				if ((buf = malloc(FLTBUF)) == 0)
-					return EOF;
-			}
-#endif /* SCANF_LEVEL >= SCANF_FLT */
 
 			switch (c) {
 #if SCANF_LEVEL > SCANF_MIN
@@ -595,8 +585,5 @@ leave:
 	if (nconvs == 0 && i == EOF)
 		nconvs = EOF;
 
-#if SCANF_LEVEL >= SCANF_FLT
-	free(buf);
-#endif
 	return nconvs;
 }

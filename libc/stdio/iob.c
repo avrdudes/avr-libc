@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2005, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -29,22 +29,9 @@
 
 /* $Id$ */
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "stdio_private.h"
 
-int
-fputs(const char *str, FILE *stream)
-{
-	char c;
-	int rv = 0;
-
-	if ((stream->flags & __SWR) == 0)
-		return EOF;
-
-	while ((c = *str++) != '\0')
-		if (stream->put(c, stream) != 0)
-			rv = EOF;
-
-	return rv;
-}
+FILE *__iob[3];			/* stdin, stdout, stderr */
