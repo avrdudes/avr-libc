@@ -1,3 +1,9 @@
+2005-09-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/interrupt.h: Fix description of sei() [bug #13557
+	overview: small typo in avr-libc-user-manual-1.2.3], emit
+	faked function prototypes for sei() and sli() within doxygen.
+
 2005-09-07 Anatoly Sokolov <aesok@pautinka.net>
 
 	* configure.ac: add tests for the ATmega640/1280/1281 support
