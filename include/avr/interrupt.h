@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002,2005 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -42,17 +42,21 @@
 
 /*@{*/
 
+#if defined(DOXYGEN)
 /** \def sei()
     \ingroup avr_interrupts
 
     \code#include <avr/interrupt.h>\endcode
 
-    Enables interrupts by clearing the global interrupt mask. This function
+    Enables interrupts by setting the global interrupt mask. This function
     actually compiles into a single line of assembly, so there is no function
     call overhead. */
+extern void sei(void);
+#else  /* !DOXYGEN */
+# define sei()  __asm__ __volatile__ ("sei" ::)
+#endif /* DOXYGEN */
 
-#define sei()  __asm__ __volatile__ ("sei" ::)
-
+#if defined(DOXYGEN)
 /** \def cli()
     \ingroup avr_interrupts
 
@@ -61,8 +65,10 @@
     Disables all interrupts by clearing the global interrupt mask. This function
     actually compiles into a single line of assembly, so there is no function
     call overhead. */
-
-#define cli()  __asm__ __volatile__ ("cli" ::)
+extern void cli(void);
+#else  /* !DOXYGEN */
+# define cli()  __asm__ __volatile__ ("cli" ::)
+#endif /* DOXYGEN */
 
 /*@}*/
 
