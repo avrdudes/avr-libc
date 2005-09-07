@@ -34,6 +34,9 @@ avrdir = $(prefix)/bin
 avr_SCRIPTS = \
 	avr-man
 
+EXTRA_DIST = \
+	avr-man.in
+
 CLEANFILES = $(avr_SCRIPTS)
 
 do_subst = sed \
@@ -41,6 +44,6 @@ do_subst = sed \
 	-e 's,[@]datadir[@],$(datadir),g' \
 	-e 's,[@]DOC_INST_DIR[@],$(DOC_INST_DIR),g'
 
-avr-man: avr-man.in $(top_srcdir)/stamp-h1
+avr-man: avr-man.in $(top_builddir)/stamp-h1
 	$(do_subst) < $(srcdir)/avr-man.in > avr-man
 	chmod +x avr-man

@@ -1,5 +1,14 @@
 2005-09-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Make "make distcheck" finally work again:
+
+	* Makefile.am: set DISTCHECK_CONFIGURE_FLAGS.
+	* configure.ac (AM_INIT_AUTOMAKE): move from gzip to bzip2 distfile.
+	* scripts/Makefile.am: add avr-man.in to EXTRA_DIST, fix location
+	of stamp-h1 dependecny.
+
+2005-09-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/interrupt.h: Fix description of sei() [bug #13557
 	overview: small typo in avr-libc-user-manual-1.2.3], emit
 	faked function prototypes for sei() and sli() within doxygen.

@@ -81,7 +81,9 @@ esac
 dnl The default check whether the C compiler can create an executable
 dnl is inappropriate for us as it requires an existing library.
 AC_NO_EXECUTABLES
-AM_INIT_AUTOMAKE
+
+dnl We don't want the gzip distribution tarball anymore.
+AM_INIT_AUTOMAKE([dist-bzip2 no-dist-gzip])
 
 # We don't want touse the cflags from the environment since we need control
 # of this when we're building the libs.

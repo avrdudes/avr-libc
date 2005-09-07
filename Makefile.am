@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2004,2005  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -35,6 +35,8 @@ EXTRA_DIST = \
 	ChangeLog-2004 \
 	ChangeLog-2003 \
 	ChangeLog-2002
+
+DISTCHECK_CONFIGURE_FLAGS=--host=avr
 
 SUBDIRS = common include crt1 libc libm avr scripts @DOCSDIR@
 DIST_SUBDIRS = common include crt1 libc libm avr doc scripts
