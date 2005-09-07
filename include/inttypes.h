@@ -523,7 +523,7 @@ typedef uint32_t uint_farptr_t;
     hexadecimal scanf format for uintptr_t */
 #define		SCNxPTR			SCNx16
 
-/*@{*/
+/*@}*/
 
 
 #endif	/* !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS) */
