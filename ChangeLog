@@ -1,5 +1,12 @@
 2005-09-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/sleep.h: sleep type 2 has a few extensions
+	(tiny2313, tiny13, tiny26), fix these; make the doxygen docs work
+	again [bug #12496: about set_sleep_mode() and
+	tiny26/tiny2313]
+
+2005-09-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Make "make distcheck" finally work again:
 
 	* Makefile.am: set DISTCHECK_CONFIGURE_FLAGS.
