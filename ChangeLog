@@ -1,3 +1,18 @@
+2005-09-07 Anatoly Sokolov <aesok@pautinka.net>
+
+	* configure.ac: add tests for the ATmega640/1280/1281 support
+	* devtools/gen-avr-lib-tree.sh: add support for ATmega640/1280/1281.
+	* include/avr/io.h: (Ditto.) 
+	* include/avr/wdt.h: (Ditto.)
+	* include/avr/iom640.h: new file.
+	* include/avr/iom1280.h: new file.
+	* include/avr/iom1281.h: new file.
+	* include/avr/iomxx0_1.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* crt1/gcrt1.S: add more interrupt vector names.
+	* doc/api/main_page.dox: Document support for ATmega640/1280/1281.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2005-09-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/delay.h: improve documentation, make sure the

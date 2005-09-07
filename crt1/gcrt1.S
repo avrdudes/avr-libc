@@ -86,6 +86,23 @@ __vectors:
 	vector	__vector_37
 	vector	__vector_38
 	vector	__vector_39
+	vector	__vector_40
+	vector	__vector_41
+	vector	__vector_42
+	vector	__vector_43
+	vector	__vector_44
+	vector	__vector_45
+	vector	__vector_46
+	vector	__vector_47
+	vector	__vector_48
+	vector	__vector_49
+	vector	__vector_50
+	vector	__vector_51
+	vector	__vector_52
+	vector	__vector_53
+	vector	__vector_54
+	vector	__vector_55
+	vector	__vector_56
 	.endfunc
 
 	/* Handle unexpected interrupts (enabled and no handler), which

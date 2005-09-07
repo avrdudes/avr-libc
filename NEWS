@@ -67,6 +67,7 @@
     . ATmega329/3290/649/6490
     . ATtiny25/45/85
     . ATmega164/324/644
+    . ATmega640/1280/1281
 
 
 *** Changes since avr-libc-1.2.4:

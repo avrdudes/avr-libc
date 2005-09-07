@@ -106,6 +106,8 @@ compile-time.
 - atmega8
 - atmega103
 - atmega128
+- atmega1280
+- atmega1281
 - atmega16
 - atmega161
 - atmega162
@@ -123,6 +125,7 @@ compile-time.
 - atmega3290
 - atmega48
 - atmega64
+- atmega640
 - atmega644
 - atmega645
 - atmega6450

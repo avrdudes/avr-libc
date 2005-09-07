@@ -106,7 +106,8 @@
 || defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) \
 || defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__) \
 || defined(__AVR_ATmega164__) || defined(__AVR_ATmega324__) \
-|| defined(__AVR_ATmega644__)
+|| defined(__AVR_ATmega640__) || defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__)
 #define _WD_CONTROL_REG     WDTCSR
 #else
 #define _WD_CONTROL_REG     WDTCR
@@ -126,9 +127,10 @@
 || defined(__AVR_ATmeg324__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) \
-|| defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega640__) || defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) \
 || defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
  
 #define _wdt_write(value)   \
@@ -273,7 +275,8 @@ __asm__ __volatile__ (  \
     ATmega164,
     ATmega168,
     ATmega324,
-    ATmega644
+    ATmega644,
+    ATmega640, ATmega1280, ATmega1281,
     AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_4S     8
@@ -286,6 +289,7 @@ __asm__ __volatile__ (  \
     ATmega168,
     ATmega324,
     ATmega644,
+    ATmega640, ATmega1280, ATmega1281,
     AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_8S     9

@@ -56,6 +56,8 @@ avr_HEADERS = \
     iocan128.h \
     iom103.h \
     iom128.h \
+    iom1280.h \
+    iom1281.h \
     iom16.h \
     iom161.h \
     iom162.h \
@@ -73,6 +75,7 @@ avr_HEADERS = \
     iom3290.h \
     iom48.h \
     iom64.h \
+    iom640.h \
     iom644.h \
     iom645.h \
     iom6450.h \
@@ -83,6 +86,7 @@ avr_HEADERS = \
     iom8535.h \
     iom88.h \
     iomx8.h \
+    iomxx0_1.h \
     iomxx4.h \
     io90pwmx.h \
     iotn11.h \

@@ -172,10 +172,16 @@
 #  include <avr/io90pwmx.h>
 #elif defined (__AVR_ATmega128__)
 #  include <avr/iom128.h>
+#elif defined (__AVR_ATmega1280__)
+#  include <avr/iom1280.h>
+#elif defined (__AVR_ATmega1281__)
+#  include <avr/iom1281.h>
 #elif defined (__AVR_AT90CAN128__)
 #  include <avr/iocan128.h>
 #elif defined (__AVR_ATmega64__)
 #  include <avr/iom64.h>
+#elif defined (__AVR_ATmega640__)
+#  include <avr/iom640.h>
 #elif defined (__AVR_ATmega644__)
 #  include <avr/iom644.h>
 #elif defined (__AVR_ATmega645__)
