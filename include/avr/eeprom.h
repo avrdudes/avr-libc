@@ -166,6 +166,8 @@ eeprom_write_block (const void *pointer_ram,
 # define eeprom_is_ready() bit_is_clear(EECR, EEWE)
 #elif defined(EEPE)
 # define eeprom_is_ready() bit_is_clear(EECR, EEPE)
+#elif defined(DEECR) && defined(EEL)
+# define eeprom_is_ready() bit_is_clear(DEECR, EEL)
 #else
 # error "No write enable bit known for this device's EEPROM."
 #endif

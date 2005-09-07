@@ -43,6 +43,7 @@
   [#14224] _delay_ms() not inlining if called more than once in a unit
   [#14241] 'eeprom_is_ready' is not compiled with ATmega48
   [#14262] avr-libc documentation error about .init sections
+  [#14378] EEPROM library d'not support at86rf401 device
   [#14433] Improve documentation of <avr/delay.h>
 
 * Other changes:

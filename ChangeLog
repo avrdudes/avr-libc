@@ -1,3 +1,8 @@
+2005-09-07 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/eeprom.h (eeprom_is_ready): Add new version for AT86RF401
+	[Fixed bug #14378]
+
 2005-09-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/inttypes.h: fix a doxygen markup comment.
