@@ -45,7 +45,8 @@
 /** \def parity_even_bit
     \ingroup avr_parity
     \returns 1 if \c val has an odd number of bits set. */
-#define parity_even_bit(val) ({				\
+#define parity_even_bit(val)				\
+(__extension__({					\
 	unsigned char __t;				\
 	__asm__ (					\
 		"mov __tmp_reg__,%0" "\n\t"		\
@@ -60,6 +61,6 @@
 		: "r0"					\
 	);						\
 	(((__t + 1) >> 1) & 1);				\
- })
+ }))
 
 #endif /* _AVR_PARITY_H_ */
