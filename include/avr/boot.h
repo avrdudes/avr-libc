@@ -458,7 +458,7 @@
     is programmed.
  */
 #define boot_lock_fuse_bits_get(address)                   \
-({                                                         \
+(__extension__({                                           \
     uint8_t __result;                                      \
     __asm__ __volatile__                                   \
     (                                                      \
@@ -473,7 +473,7 @@
         : "r0", "r30", "r31"                               \
     );                                                     \
     __result;                                              \
-})
+}))
 
 /** \ingroup avr_boot
     \def boot_page_fill(address, data)

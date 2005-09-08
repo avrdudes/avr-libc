@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2003, 2004  Marek Michalkiewicz
+/* Copyright (c) 2002, 2003, 2004,2005  Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -81,12 +81,115 @@
 #define __ATTR_PURE__ __attribute__((__pure__))
 #endif
 
+/**
+   \ingroup avr_pgmspace
+   \def PROGMEM
+
+   Attribute to use in order to declare an object being located in
+   flash ROM.
+ */
 #define PROGMEM __ATTR_PROGMEM__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#if defined(DOXYGEN)
+/*
+ * Doxygen doesn't grok the appended attribute syntax of
+ * GCC, and confuses the typedefs with function decls, so
+ * supply a doxygen-friendly view.
+ */
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_void
+
+   Type of a "void" object located in flash ROM.  Does not make much
+   sense by itself, but can be used to declare a "void *" object in
+   flash ROM.
+*/
+typedef void PROGMEM prog_void;
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_char
+
+   Type of a "char" object located in flash ROM.
+*/
+typedef char PROGMEM prog_char;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_uchar
+
+   Type of an "unsigned char" object located in flash ROM.
+*/
+typedef unsigned char PROGMEM prog_uchar;
+
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_int8_t
+
+   Type of an "int8_t" object located in flash ROM.
+*/
+typedef int8_t PROGMEM prog_int8_t;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_uint8_t
+
+   Type of an "uint8_t" object located in flash ROM.
+*/
+typedef uint8_t PROGMEM prog_uint8_t;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_int16_t
+
+   Type of an "int16_t" object located in flash ROM.
+*/
+typedef int16_t PROGMEM prog_int16_t;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_uint16_t
+
+   Type of an "uint16_t" object located in flash ROM.
+*/
+typedef uint16_t PROGMEM prog_uint16_t;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_int32_t
+
+   Type of an "int32_t" object located in flash ROM.
+*/
+typedef int32_t PROGMEM prog_int32_t;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_uint32_t
+
+   Type of an "uint32_t" object located in flash ROM.
+*/
+typedef uint32_t PROGMEM prog_uint32_t;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_int64_t
+
+   Type of an "int64_t" object located in flash ROM.
+*/
+typedef int64_t PROGMEM prog_int64_t;
+
+/**
+   \ingroup avr_pgmspace
+   \typedef prog_uint64_t
+
+   Type of an "uint64_t" object located in flash ROM.
+*/
+typedef uint64_t PROGMEM prog_uint64_t;
+#else  /* !DOXYGEN */
 typedef void prog_void PROGMEM;
 typedef char prog_char PROGMEM;
 typedef unsigned char prog_uchar PROGMEM;
@@ -95,14 +198,11 @@ typedef int8_t    prog_int8_t   PROGMEM;
 typedef uint8_t   prog_uint8_t  PROGMEM;
 typedef int16_t   prog_int16_t  PROGMEM;
 typedef uint16_t  prog_uint16_t PROGMEM;
-#if defined(__HAS_INT32_T__)
 typedef int32_t   prog_int32_t  PROGMEM;
 typedef uint32_t  prog_uint32_t PROGMEM;
-#endif
-#if defined(__HAS_INT64_T__)
 typedef int64_t   prog_int64_t  PROGMEM;
 typedef uint64_t  prog_uint64_t PROGMEM;
-#endif
+#endif /* defined(DOXYGEN) */
 
 /* Although in C, we can get away with just using __c, it does not work in
    C++. We need to use &__c[0] to avoid the compiler puking. Dave Hylands
@@ -114,15 +214,23 @@ typedef uint64_t  prog_uint64_t PROGMEM;
      returned by &__c[0] is a prog_char *, which explains why it works
      fine. */
 
+#if defined(DOXYGEN)
+/*
+ * The #define below is just a dummy that serves documentation
+ * purposes only.
+ */
 /** \ingroup avr_pgmspace
     \def PSTR(s)
 
     Used to declare a static pointer to a string in program space. */
-
-#define PSTR(s) ({static char __c[] PROGMEM = (s); &__c[0];})
+# define PSTR(s) ((const PROGMEM char *)(s))
+#else  /* !DOXYGEN */
+/* The real thing. */
+# define PSTR(s) (__extension__({static char __c[] PROGMEM = (s); &__c[0];}))
+#endif /* DOXYGEN */
 
 #define __LPM_classic__(addr)   \
-({                              \
+(__extension__({                \
     uint16_t __addr16 = (uint16_t)(addr); \
     uint8_t __result;           \
     __asm__                     \
@@ -134,10 +242,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r0"                  \
     );                          \
     __result;                   \
-})
+}))
 
 #define __LPM_enhanced__(addr)  \
-({                              \
+(__extension__({                \
     uint16_t __addr16 = (uint16_t)(addr); \
     uint8_t __result;           \
     __asm__                     \
@@ -147,10 +255,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "z" (__addr16)        \
     );                          \
     __result;                   \
-})
+}))
 
 #define __LPM_word_classic__(addr)          \
-({                                          \
+(__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint16_t __result;                      \
     __asm__                                 \
@@ -165,10 +273,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r0"                              \
     );                                      \
     __result;                               \
-})
+}))
 
 #define __LPM_word_enhanced__(addr)         \
-({                                          \
+(__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint16_t __result;                      \
     __asm__                                 \
@@ -179,10 +287,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "1" (__addr16)                    \
     );                                      \
     __result;                               \
-})
+}))
 
 #define __LPM_dword_classic__(addr)         \
-({                                          \
+(__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint32_t __result;                      \
     __asm__                                 \
@@ -203,10 +311,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r0"                              \
     );                                      \
     __result;                               \
-})
+}))
 
 #define __LPM_dword_enhanced__(addr)        \
-({                                          \
+(__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint32_t __result;                      \
     __asm__                                 \
@@ -219,7 +327,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "1" (__addr16)                    \
     );                                      \
     __result;                               \
-})
+}))
 
 #if defined (__AVR_ENHANCED__)
 #define __LPM(addr)         __LPM_enhanced__(addr)
@@ -267,7 +375,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 /* The classic functions are needed for ATmega103. */
 
 #define __ELPM_classic__(addr)      \
-({                                  \
+(__extension__({                    \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint8_t __result;               \
     __asm__                         \
@@ -283,10 +391,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r0", "r30", "r31"        \
     );                              \
     __result;                       \
-})
+}))
 
 #define __ELPM_enhanced__(addr)     \
-({                                  \
+(__extension__({                    \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint8_t __result;               \
     __asm__                         \
@@ -300,10 +408,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r30", "r31"              \
     );                              \
     __result;                       \
-})
+}))
 
 #define __ELPM_word_classic__(addr)     \
-({                                      \
+(__extension__({                        \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint16_t __result;                  \
     __asm__                             \
@@ -325,10 +433,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r0", "r30", "r31"            \
     );                                  \
     __result;                           \
-})
+}))
 
 #define __ELPM_word_enhanced__(addr)    \
-({                                      \
+(__extension__({                        \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint16_t __result;                  \
     __asm__                             \
@@ -343,10 +451,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r30", "r31"                  \
     );                                  \
     __result;                           \
-})
+}))
 
 #define __ELPM_dword_classic__(addr)      \
-({                                        \
+(__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint32_t __result;                    \
     __asm__                               \
@@ -380,10 +488,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r0", "r30", "r31"              \
     );                                    \
     __result;                             \
-})
+}))
 
 #define __ELPM_dword_enhanced__(addr)     \
-({                                        \
+(__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint32_t __result;                    \
     __asm__                               \
@@ -400,7 +508,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         : "r30", "r31"                    \
     );                                    \
     __result;                             \
-})
+}))
 
 #if defined (__AVR_ENHANCED__)
 #define __ELPM(addr)        __ELPM_enhanced__(addr)
