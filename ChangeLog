@@ -1,5 +1,11 @@
 2005-09-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/sleep.h: Fix sleep mode definitions for the AT94K
+	devices.  [Fixes bug #12735: No support for AT94K devices in
+	sleep.h]
+
+2005-09-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/stdio.h: Escape # to fix doxygen warning.
 	* include/avr/delay.h: (Ditto.)
 	* include/avr/sfr_defs.h: (Ditto.)
