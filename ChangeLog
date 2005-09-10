@@ -1,3 +1,9 @@
+2005-09-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: Escape # to fix doxygen warning.
+	* include/avr/delay.h: (Ditto.)
+	* include/avr/sfr_defs.h: (Ditto.)
+
 2005-09-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	[bug #14266: use __extension__ in avr-libc header files]
