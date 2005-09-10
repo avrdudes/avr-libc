@@ -124,7 +124,11 @@ to our generated xml files before we can use them to generate our headers.
     <!-- The pagesize value is in bytes. Atmel's datasheets give it in
          words. -->
 
-    <!ELEMENT bootloader (mode+)>
+    <!-- Some recent ATtiny devices have boot loader support, but only
+         have non-read while write (NRWW) behaviour throughout the
+         entire flash, and no separate bootloader area.  So do not
+         insist on getting mode elements. -->
+    <!ELEMENT bootloader (mode*)>
         <!ATTLIST bootloader
             pagesize CDATA #REQUIRED
             rww_start CDATA #IMPLIED
