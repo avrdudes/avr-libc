@@ -101,7 +101,7 @@
    If you do not define \c __SFR_OFFSET (so it will be 0x20 by default), all
    special register addresses are defined as memory addresses (so \c SREG is
    0x5f), and (if code size and speed are not important, and you don't like
-   the ugly #if above) you can always use lds/sts to access them.  But, this
+   the ugly \#if above) you can always use lds/sts to access them.  But, this
    will not work if <tt>__SFR_OFFSET</tt> != 0x20, so use a different macro
    (defined only if <tt>__SFR_OFFSET</tt> == 0x20) for safety:
 

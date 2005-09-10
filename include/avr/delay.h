@@ -49,7 +49,7 @@
 
     \note As an alternative method, it is possible to pass the
     F_CPU macro down to the compiler from the Makefile.
-    Obviously, in that case, no \c #define statement should be
+    Obviously, in that case, no \c \#define statement should be
     used.
 
     The functions in this header file implement simple delay loops
