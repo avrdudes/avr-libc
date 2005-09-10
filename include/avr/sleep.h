@@ -77,6 +77,10 @@
 
 #define _SLEEP_CONTROL_REG SMCR
 
+#elif defined(__AVR_AT94K__)
+
+#define _SLEEP_CONTROL_REG MCUR
+
 #else
 
 #define _SLEEP_CONTROL_REG MCUCR
@@ -121,10 +125,11 @@
  */
 #define SLEEP_MODE_IDLE         0
 
-#if !defined(__AVR_ATtiny2313__)
+#if !defined(__AVR_ATtiny2313__) && !defined(__AVR_AT94K__)
 /* no ADC in ATtiny2313, SM0 is alternative powerdown mode */
+/* no ADC in AT94K, setting SM0 only is reserved */
 # define SLEEP_MODE_ADC          _BV(SM0)
-#endif /* !defined(__AVR_ATtiny2313__) */
+#endif /* !defined(__AVR_ATtiny2313__) && !defined(__AVR_AT94K__) */
 
 #define SLEEP_MODE_PWR_DOWN     _BV(SM1)
 

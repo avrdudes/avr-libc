@@ -38,6 +38,7 @@
   [#12333] Standard requires libstdc to define vprintf and vscanf
   [#12495] about Busy-wait delay loops(document)
   [#12496] about set_sleep_mode() and tiny26/tiny2313
+  [#12735] No support for AT94K devices in sleep.h
   [#12775] Possible Bug in sscanf on string end
   [#13557] small typo in avr-libc-user-manual-1.2.3
   [#14224] _delay_ms() not inlining if called more than once in a unit
