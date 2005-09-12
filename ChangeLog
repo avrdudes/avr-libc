@@ -1,5 +1,10 @@
 2005-09-12 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/iomxx0_1.h: change vector names to current
+	avr-libc style.
+
+2005-09-12 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Add a library version API, task #4597: add <avr/version.h>
 	* configure.ac: Add all the hooks to assemble the library
 	version number from its pieces, and substitute the result
