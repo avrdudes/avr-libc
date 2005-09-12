@@ -171,7 +171,6 @@ AC_ARG_ENABLE(doc,
   no)  enable_doc=no ;;
   *)   AC_MSG_ERROR(bad value ${enableval} for global doc option) ;;
  esac], [enable_doc=no])dnl
-/design/user/jwunsch/share/autoconf/Autom4te/XFile.pm
 dnl Various documentation options.  By default, we enable all of them,
 dnl i. e. HTML, Postscript, PDF, and Unix-style man pages.
 AC_ARG_ENABLE(html-doc,
