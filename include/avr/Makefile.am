@@ -121,7 +121,7 @@ do_subst = sed \
 	-e 's,[@]AVR_LIBC_VERSION[@],$(AVR_LIBC_VERSION),g' \
 	-e 's,[@]AVR_LIBC_VERSION_NUMERIC[@],$(AVR_LIBC_VERSION_NUMERIC),g'
 
-version.h: version.h.in $(top_builddir)/stamp-h1
+version.h: version.h.in $(top_builddir)/config.h
 	$(do_subst) < $(srcdir)/version.h.in > version.h
 
 CLEANFILES = version.h
