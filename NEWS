@@ -33,6 +33,9 @@
       allocate their conversion buffer on the stack, so they do not need
       malloc() anymore either.
 
+  - An API has been added to track the library version number.  See the
+    documentation of the new header file <avr/version.h>.
+
 * Bugs fixed:
 
   [#12333] Standard requires libstdc to define vprintf and vscanf

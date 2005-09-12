@@ -34,9 +34,46 @@
 
 AC_PREREQ(2.57)
 AC_REVISION($Revision$)
-AC_INIT(avr-libc, 1.3.0.20050906, avr-libc-dev@nongnu.org)
+
+dnl library versioning -- modify these on releases
+dnl        macro name           value            description
+m4_define([avr_libc_major],    [1])dnl           major version
+m4_define([avr_libc_minor],    [3])dnl           minor version
+m4_define([avr_libc_revision], [0])dnl           revision (dot-dot version)
+m4_define([avr_libc_reldate],  [20050912])dnl    release date
+dnl end of library versioning data
+
+dnl odd minor number marks a development branch, append date to version there
+m4_if(m4_eval(avr_libc_minor % 2 == 1), [0], [dnl
+  m4_define([avr_libc_version],
+            avr_libc_major.avr_libc_minor.avr_libc_revision)dnl
+  ],[dnl
+  m4_define([avr_libc_version],
+            avr_libc_major.avr_libc_minor.avr_libc_revision.avr_libc_reldate)dnl
+  ])dnl
+m4_define([avr_libc_version_numeric],
+          m4_eval(10000 * avr_libc_major + dnl
+                    100 * avr_libc_minor + dnl
+                          avr_libc_revision))dnl
+
+AC_INIT(avr-libc, avr_libc_version, avr-libc-dev@nongnu.org)
 AC_CONFIG_SRCDIR([doc/examples/demo/demo.c])
 AC_CONFIG_HEADER([config.h])
+
+dnl substitute M4 macros into shell variables
+AVR_LIBC_MAJOR=avr_libc_major
+AVR_LIBC_MINOR=avr_libc_minor
+AVR_LIBC_REVISION=avr_libc_revision
+AVR_LIBC_RELDATE=avr_libc_reldate
+AVR_LIBC_VERSION=avr_libc_version
+AVR_LIBC_VERSION_NUMERIC=avr_libc_version_numeric
+dnl ...and trigger Makefile.in substitutions
+AC_SUBST(AVR_LIBC_MAJOR)
+AC_SUBST(AVR_LIBC_MINOR)
+AC_SUBST(AVR_LIBC_REVISION)
+AC_SUBST(AVR_LIBC_RELDATE)
+AC_SUBST(AVR_LIBC_VERSION)
+AC_SUBST(AVR_LIBC_VERSION_NUMERIC)
 
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
@@ -53,7 +90,7 @@ if test "x${build_alias}" = "x${host_alias}"; then
 	AC_MSG_WARN()
 	AC_MSG_WARN(AVR-LIBC must be built using an avr cross-compiler.)
 	AC_MSG_WARN(Try configuring with:)
-	AC_MSG_WARN(\"$0 --build=$build_alias --host=avr\")
+	AC_MSG_WARN("$0 --build=$build_alias --host=avr")
 	AC_MSG_WARN()
 	AC_MSG_ERROR(aborting configure)
 else
@@ -70,7 +107,7 @@ case "$host" in
 		AC_MSG_WARN()
 		AC_MSG_WARN(Avr-libc must be built using an avr cross-compiler.)
 		AC_MSG_WARN(Try configuring with:)
-		AC_MSG_WARN(\"$0 --build=$build --host=avr\")
+		AC_MSG_WARN("$0 --build=$build --host=avr")
 		AC_MSG_WARN()
 		AC_MSG_ERROR(aborting configure)
 		;;
@@ -134,7 +171,7 @@ AC_ARG_ENABLE(doc,
   no)  enable_doc=no ;;
   *)   AC_MSG_ERROR(bad value ${enableval} for global doc option) ;;
  esac], [enable_doc=no])dnl
-
+/design/user/jwunsch/share/autoconf/Autom4te/XFile.pm
 dnl Various documentation options.  By default, we enable all of them,
 dnl i. e. HTML, Postscript, PDF, and Unix-style man pages.
 AC_ARG_ENABLE(html-doc,
@@ -191,7 +228,7 @@ dnl
 dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
 dnl @author Theodore A. Roth <troth@openavr.org>
 dnl
-AC_DEFUN(CHECK_DOXYGEN,[dnl
+AC_DEFUN([CHECK_DOXYGEN],[dnl
 dnl
 AC_MSG_CHECKING([for doxygen])
 dox_ver=`doxygen --version 2>/dev/null`
@@ -249,7 +286,7 @@ dnl
 dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
 dnl @author Theodore A. Roth <troth@openavr.org>
 dnl
-AC_DEFUN(CHECK_PNG_UTILS,[dnl
+AC_DEFUN([CHECK_PNG_UTILS],[dnl
 dnl
 AC_MSG_CHECKING([for pngtopnm])
 has_pngtopnm=`pngtopnm --version 2>&1 | grep -c Version`
@@ -313,9 +350,8 @@ AC_DEFUN(
     CFLAGS="-mmcu=$1"
     CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
     AC_MSG_CHECKING(if ${CC} has support for $1)
-    AC_TRY_COMPILE(
-      [],
-      [],
+    AC_COMPILE_IFELSE(
+      [AC_LANG_SOURCE([],[])],
       [has_dev_support=yes],
       [has_dev_support=no]
     )

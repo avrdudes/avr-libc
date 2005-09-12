@@ -1,3 +1,15 @@
+2005-09-12 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add a library version API, task #4597: add <avr/version.h>
+	* configure.ac: Add all the hooks to assemble the library
+	version number from its pieces, and substitute the result
+	wherever it's needed.
+	* include/avr/version.h.in: New file.
+	* include/avr/Makefile.am: add version.h.in and the logic
+	to create version.h out of it.
+	* include/avr/io.h: include <avr/version.h> for backwards-
+	compatible tests.
+
 2005-09-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/sleep.h: Fix sleep mode definitions for the AT94K

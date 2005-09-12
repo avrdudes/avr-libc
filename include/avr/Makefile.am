@@ -107,5 +107,21 @@ avr_HEADERS = \
     sfr_defs.h \
     signal.h \
     sleep.h \
+    version.h \
     wdt.h
 
+EXTRA_DIST = \
+    version.h.in
+
+do_subst = sed \
+	-e 's,[@]AVR_LIBC_MAJOR[@],$(AVR_LIBC_MAJOR),g' \
+	-e 's,[@]AVR_LIBC_MINOR[@],$(AVR_LIBC_MINOR),g' \
+	-e 's,[@]AVR_LIBC_REVISION[@],$(AVR_LIBC_REVISION),g' \
+	-e 's,[@]AVR_LIBC_RELDATE[@],$(AVR_LIBC_RELDATE),g' \
+	-e 's,[@]AVR_LIBC_VERSION[@],$(AVR_LIBC_VERSION),g' \
+	-e 's,[@]AVR_LIBC_VERSION_NUMERIC[@],$(AVR_LIBC_VERSION_NUMERIC),g'
+
+version.h: version.h.in $(top_builddir)/stamp-h1
+	$(do_subst) < $(srcdir)/version.h.in > version.h
+
+CLEANFILES = version.h

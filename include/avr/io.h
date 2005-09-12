@@ -295,4 +295,6 @@
 #  endif
 #endif
 
+#include <avr/version.h>
+
 #endif /* _AVR_IO_H_ */
