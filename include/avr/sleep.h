@@ -144,7 +144,7 @@
 #endif
 
 
-#if _SLEEP_TYPE == 3 || defined(DOXYGEN)
+#if _SLEEP_TYPE == 3 || defined(__DOXYGEN__)
 /** \ingroup avr_sleep
     \def SLEEP_MODE_IDLE
     Idle mode. */
@@ -202,7 +202,7 @@
 
     Select a sleep mode. */
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 
 extern void set_sleep_mode (uint8_t mode);
 
@@ -240,7 +240,7 @@ do { \
     Put the device in sleep mode. How the device is brought out of sleep mode
     depends on the specific mode selected with the set_sleep_mode() function.
     See the data sheet for your device for more details. */
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 
 extern void sleep_mode (void);
 

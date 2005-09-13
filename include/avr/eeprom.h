@@ -160,7 +160,7 @@ eeprom_write_block (const void *pointer_ram,
     \ingroup avr_eeprom
     \returns 1 if EEPROM is ready for a new read/write operation, 0 if not. */
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 # define eeprom_is_ready()
 #elif defined(EEWE)
 # define eeprom_is_ready() bit_is_clear(EECR, EEWE)

@@ -53,7 +53,7 @@
 
 /* Integer types */
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 
 /* doxygen gets confused by the __attribute__ stuff */
 
@@ -104,7 +104,7 @@ typedef unsigned long long int uint64_t;
 
 /*@}*/
 
-#else /* !defined(DOXYGEN) */
+#else /* !defined(__DOXYGEN__) */
 
 /* actual implementation goes here */
 
@@ -117,7 +117,7 @@ typedef unsigned int uint32_t __attribute__ ((__mode__ (__SI__)));
 typedef int int64_t __attribute__((__mode__(__DI__)));
 typedef unsigned int uint64_t __attribute__((__mode__(__DI__)));
 
-#endif /* defined(DOXYGEN) */
+#endif /* defined(__DOXYGEN__) */
 
 /** \name Integer types capable of holding object pointers
     These allow you to declare variables of the same size as a pointer. */

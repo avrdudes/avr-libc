@@ -43,7 +43,7 @@
 
     \returns The memcpy_P() function returns a pointer to dest.  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(memcpy_P)
@@ -81,4 +81,4 @@ _U(memcpy_P):
 .memcpy_P_end:
 	.size	_U(memcpy_P), .memcpy_P_end - _U(memcpy_P)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

@@ -49,7 +49,7 @@
     \returns The strcat() function returns a pointer to the resulting string
     \e dest. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(strcat_P)
@@ -72,4 +72,4 @@ _U(strcat_P):
 .strcat_P_end:
 	.size	_U(strcat_P), .strcat_P_end - _U(strcat_P)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

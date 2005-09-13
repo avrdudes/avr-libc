@@ -46,7 +46,7 @@
      value of *string.  If *stringp is initially NULL, strsep() returns NULL.
  */
      
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -109,4 +109,4 @@ _U(strsep):				; Check on NULL pointers
 .strsep_end:
 	.size	_U(strsep), .strsep_end - _U(strsep)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

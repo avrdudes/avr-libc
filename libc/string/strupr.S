@@ -52,7 +52,7 @@
     string.  The pointer is the same as that passed in since the operation is
     perform in place. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
     .text
     .global _U(strupr)
@@ -78,4 +78,4 @@ _U(strupr):
 .strupr_end:
 	.size _U(strupr), .strupr_end - _U(strupr)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

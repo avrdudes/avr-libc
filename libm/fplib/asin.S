@@ -44,7 +44,7 @@
 
 /* $Id$ */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -143,4 +143,4 @@ table_asin: DCB 7
 
  /*--------------------------------------------------------------------------*/
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

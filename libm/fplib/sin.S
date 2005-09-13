@@ -43,7 +43,7 @@
  *	A = sin(A) = cos(A-PI/2)
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -78,4 +78,4 @@ GLOBAL(sin)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

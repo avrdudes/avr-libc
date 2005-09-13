@@ -94,7 +94,7 @@
 extern "C" {
 #endif
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /*
  * Doxygen doesn't grok the appended attribute syntax of
  * GCC, and confuses the typedefs with function decls, so
@@ -202,7 +202,7 @@ typedef int32_t   prog_int32_t  PROGMEM;
 typedef uint32_t  prog_uint32_t PROGMEM;
 typedef int64_t   prog_int64_t  PROGMEM;
 typedef uint64_t  prog_uint64_t PROGMEM;
-#endif /* defined(DOXYGEN) */
+#endif /* defined(__DOXYGEN__) */
 
 /* Although in C, we can get away with just using __c, it does not work in
    C++. We need to use &__c[0] to avoid the compiler puking. Dave Hylands
@@ -214,7 +214,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
      returned by &__c[0] is a prog_char *, which explains why it works
      fine. */
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /*
  * The #define below is just a dummy that serves documentation
  * purposes only.
@@ -364,13 +364,11 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 #define pgm_read_dword_near(address_short) \
     __LPM_dword((uint16_t)(address_short))
 
-#if defined(RAMPZ) && !defined(__USING_MINT8)
+#if defined(RAMPZ) || defined(__DOXYGEN__)
 
 /* Only for devices with more than 64K of program memory.
    RAMPZ must be defined (see iom103.h, iom128.h).
-
-   These can not be defined if the user is compiling with the -mint8 option
-   since (u)int32_t is not defined in that case. */
+*/
 
 /* The classic functions are needed for ATmega103. */
 
@@ -547,7 +545,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 
 #define pgm_read_dword_far(address_long) __ELPM_dword((uint32_t)(address_long))
 
-#endif /* RAMPZ and ! __USING_MINT8 */
+#endif /* RAMPZ or __DOXYGEN__ */
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte(address_short)
@@ -608,15 +606,6 @@ extern int strncmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern char *strncat_P(char *, PGM_P, size_t);
 extern char *strncpy_P(char *, PGM_P, size_t);
-
-#if 0  /* not implemented yet */
-extern int printf_P(PGM_P, ...);
-extern int puts_P(PGM_P);
-extern int scanf_P(PGM_P, ...);
-extern int sprintf_P(char *, PGM_P, ...);
-extern int sscanf_P(const char *, PGM_P, ...);
-extern PGM_P strerror_P(int);
-#endif
 
 #ifdef __cplusplus
 }

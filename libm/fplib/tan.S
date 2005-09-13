@@ -48,7 +48,7 @@
  * the formula tan(x) = 1/tan(PI/2 - x) is used for values > PI/4
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -167,4 +167,4 @@ table_tan:  DCB 3 ; no of table entries - 1 (preload value)
              DCB 0x7C, 0x06, 0x0C, 0x3E
              DCB 0x7F, 0x00, 0x00, 0x00
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

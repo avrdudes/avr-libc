@@ -49,7 +49,7 @@
     \returns The strrev() function returns a pointer to the beginning of the
     reversed string.  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
     .text
     .global _U(strrev)
@@ -78,4 +78,4 @@ _U(strrev):
 .strrev_end:
 	.size _U(strrev), .strrev_end - _U(strrev)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

@@ -44,7 +44,7 @@
  * A = (float)(unsigned long)A
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -78,4 +78,4 @@ GLOBAL(__floatsisf)              ; - convert signed long to float
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

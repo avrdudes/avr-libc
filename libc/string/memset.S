@@ -44,7 +44,7 @@
 
     \returns The memset() function returns a pointer to the memory area dest. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(memset)
@@ -78,4 +78,4 @@ _U(memset):
 .memset_end:
 	.size	_U(memset), .memset_end - _U(memset)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

@@ -50,7 +50,7 @@
     \returns The strlwr() function returns a pointer to the converted
     string. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
     .text
     .global _U(strlwr)
@@ -76,4 +76,4 @@ _U(strlwr):
 .strlwr_end:
 	.size _U(strlwr), .strlwr_end - _U(strlwr)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

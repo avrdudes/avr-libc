@@ -77,7 +77,7 @@ typedef struct {
 /** Comparision function type for qsort(), just for convenience. */
 typedef int (*__compar_fn_t)(const void *, const void *);
 
-#ifndef DOXYGEN
+#ifndef __DOXYGEN__
 
 #ifndef __ATTR_CONST__
 #define __ATTR_CONST__ __attribute__((__const__))
@@ -112,7 +112,7 @@ abort(void)
    \note The abs() and labs() functions are builtins of gcc.
 */
 extern int abs(int __i) __ATTR_CONST__;
-#ifndef DOXYGEN
+#ifndef __DOXYGEN__
 #define	abs(__i) __builtin_abs(__i)
 #endif
 
@@ -121,7 +121,7 @@ extern int abs(int __i) __ATTR_CONST__;
    \note The abs() and labs() functions are builtins of gcc.
 */
 extern long labs(long __i) __ATTR_CONST__;
-#ifndef DOXYGEN
+#ifndef __DOXYGEN__
 #define labs(__i) __builtin_labs(__i)
 #endif
 
@@ -267,7 +267,7 @@ atol(const char *__nptr)
 
            \code (int)strtol(nptr, (char **)NULL, 10); \endcode
 */
-#ifdef DOXYGEN
+#ifdef __DOXYGEN__
 extern __inline__ int atoi(const char *__nptr) __ATTR_PURE__;
 extern __inline__ int
 atoi(const char *__nptr)

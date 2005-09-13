@@ -48,7 +48,7 @@
  * RX  rA3 : rA2:rA1:rA0:rAE
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -177,4 +177,4 @@ GLOBAL(__mulsf3x)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

@@ -32,7 +32,7 @@
 #include <inttypes.h>
 #include <stdlib.h>
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 struct __freelist {
 	size_t sz;

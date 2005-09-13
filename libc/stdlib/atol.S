@@ -59,7 +59,7 @@
            except that atol() does not detect errors.
 */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global _U(atol)
@@ -144,4 +144,4 @@ _U(atol):
 .atol_end:
 	.size _U(atol), .atol_end - _U(atol)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

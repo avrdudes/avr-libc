@@ -46,7 +46,7 @@
     greater than zero if s1 is found, respectively, to be less than, to match,
     or be greater than s2.  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(strcmp)
@@ -68,4 +68,4 @@ _U(strcmp):
 .strcmp_end:
 	.size	_U(strcmp), .strcmp_end - _U(strcmp)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

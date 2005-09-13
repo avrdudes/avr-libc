@@ -61,7 +61,7 @@
 
 #undef assert
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /**
  * \def assert
  * \param expression Expression to test for.
@@ -96,12 +96,12 @@
 extern "C" {
 #endif
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 extern void __assert(const char *__func, const char *__file,
 		     int __lineno, const char *__sexp);
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */
 
 #ifdef __cplusplus
 }

@@ -84,7 +84,7 @@
     setup the loops.
 */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 static void _delay_loop_1(uint8_t __count) __attribute__((always_inline));
 static void _delay_loop_2(uint16_t __count) __attribute__((always_inline));
 static void _delay_us(double __us) __attribute__((always_inline));

@@ -47,7 +47,7 @@
  * RX  rA3 : rA2:rA1:rA0:rAE resulting sign stored in rT1c.7 (rT1c.7 complemented, if B > A)
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -137,4 +137,4 @@ GLOBAL(__addsf3x)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

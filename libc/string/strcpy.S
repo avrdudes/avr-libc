@@ -50,7 +50,7 @@
     copying) then anything might happen.  Overflowing fixed length strings is
     a favourite cracker technique. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 ; 9 words, (14 + strlen(src) * 7) cycles
 
@@ -70,4 +70,4 @@ _U(strcpy):
 .strcpy_end:
 	.size	_U(strcpy), .strcpy_end - _U(strcpy)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

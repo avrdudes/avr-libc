@@ -58,7 +58,7 @@
            except that atoi() does not detect errors.	   
 */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global _U(atoi)
@@ -132,4 +132,4 @@ _U(atoi):
 .atoi_end:
 	.size _U(atoi), .atoi_end - _U(atoi)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

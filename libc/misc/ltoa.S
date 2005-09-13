@@ -39,7 +39,7 @@
   ----------------------------------------------------------------------
 */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "macros.inc"
 #include "ctoasm.inc"
@@ -121,4 +121,4 @@ conv_finished:
 	XJMP	_U(strrev)	; reverse string
 	.endfunc
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

@@ -28,7 +28,7 @@
 
 ;; $Id$
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -352,4 +352,4 @@ _toupper00:
           ENDFUNC
 #endif
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

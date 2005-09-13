@@ -72,7 +72,7 @@
    The square root of 2. */
 #define M_SQRT2 1.4142135623730950488016887
 
-#ifndef DOXYGEN
+#ifndef __DOXYGEN__
 
 #ifndef __ATTR_CONST__
 #define __ATTR_CONST__ __attribute__((__const__))

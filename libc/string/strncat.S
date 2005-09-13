@@ -45,7 +45,7 @@
     \returns The strncat() function returns a pointer to the resulting string
     dest.  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(strncat)
@@ -75,4 +75,4 @@ _U(strncat):
 .strncat_end:
 	.size	_U(strncat), .strncat_end - _U(strncat)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

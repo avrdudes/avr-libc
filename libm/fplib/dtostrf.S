@@ -45,7 +45,7 @@
 * The number will be rounded based on precision.
 *----------------------------------------------------------------------------------*/
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "fplib.inc"
@@ -260,4 +260,4 @@ GLOBAL(dtostrf)
 	ENDFUNC
 ;-----------------------------------------------------------------------------------
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

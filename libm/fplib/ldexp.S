@@ -45,7 +45,7 @@
  * double y = ldexp( 3.45, 2 ) = 2^2 * 3.45 = 13.8
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -77,4 +77,4 @@ GLOBAL(ldexp)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

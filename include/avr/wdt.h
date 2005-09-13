@@ -266,7 +266,7 @@ __asm__ __volatile__ (  \
     See \c WDT0_15MS */
 #define WDTO_2S     7
 
-#if defined(DOXYGEN) || defined(WDP3)
+#if defined(__DOXYGEN__) || defined(WDP3)
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS

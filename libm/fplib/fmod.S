@@ -40,7 +40,7 @@
  * A = remainder( A/B )
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -79,4 +79,4 @@ GLOBAL(fmod)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

@@ -50,7 +50,7 @@
  * if exp(x) +- exp(-x) == exp(x) => exp(2x) +- 1 == exp(2x) => exp(2x) >= 2^24 -> x = ln(2^24)/2
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -116,4 +116,4 @@ GLOBAL(tanh)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

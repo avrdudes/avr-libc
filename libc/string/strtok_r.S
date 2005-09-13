@@ -44,7 +44,7 @@
     \returns The strtok_r() function returns a pointer to the next token or
     NULL when no more tokens are found. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -131,4 +131,4 @@ _U(strtok_r):				; Check on NULL pointers
 .strtok_r_end:
 	.size	_U(strtok_r), .strtok_r_end - _U(strtok_r)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

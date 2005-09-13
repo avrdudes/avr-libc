@@ -48,12 +48,12 @@ extern "C" {
 	24 = total size
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #define _JBLEN 24
 typedef struct _jmp_buf { unsigned char _jb[_JBLEN + 1]; } jmp_buf[1];
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */
 
 /** \defgroup setjmp <setjmp.h>: Non-local goto
 

@@ -60,7 +60,7 @@
     to, or greater than zero if s1 is found, respectively, to be less than, to
     match, or be greater than s2.  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
     .text
     .global _U(strcasecmp_P)
@@ -92,4 +92,4 @@ _U(strcasecmp_P):
 .strcasecmp_P_end:
     .size   _U(strcasecmp_P), .strcasecmp_P_end - _U(strcasecmp_P)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

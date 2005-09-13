@@ -33,7 +33,7 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "macros.inc"
 
@@ -75,4 +75,4 @@ _U(__mulhi_const_10):
 #endif
 	ret
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

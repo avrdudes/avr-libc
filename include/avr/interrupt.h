@@ -42,7 +42,7 @@
 
 /*@{*/
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /** \def sei()
     \ingroup avr_interrupts
 
@@ -56,7 +56,7 @@ extern void sei(void);
 # define sei()  __asm__ __volatile__ ("sei" ::)
 #endif /* DOXYGEN */
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /** \def cli()
     \ingroup avr_interrupts
 
@@ -122,7 +122,7 @@ extern "C" {
 #endif
 
 /* If common register defined, define macro. */
-#if defined(__EICR) || defined(DOXYGEN)
+#if defined(__EICR) || defined(__DOXYGEN__)
 #define enable_external_int(mask)               (__EICR = mask)
 #endif
 

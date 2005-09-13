@@ -51,7 +51,7 @@
  * split 2 incoming operands , x and y, y first
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -98,4 +98,4 @@ GLOBAL(__fp_split1)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

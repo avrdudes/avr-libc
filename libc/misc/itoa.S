@@ -39,7 +39,7 @@
   ----------------------------------------------------------------------
 */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "macros.inc"
 #include "ctoasm.inc"
@@ -103,4 +103,4 @@ terminate:			; restore &string as return value
 
 	.endfunc
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

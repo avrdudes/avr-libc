@@ -43,7 +43,7 @@
 #define s2_hi r23
 #define s2_lo r22
 
-#ifndef DOXYGEN
+#ifndef __DOXYGEN__
 ; first char of str1 (updated in loop)
 #define chr1 r18
 ; first char of str2 (updated in loop)
@@ -65,7 +65,7 @@
     substring, or NULL if the substring is not found.
     If s2 points to a string of zero length, the function returns s1. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 .text
 .global _U(strstr)
@@ -119,4 +119,4 @@ _U(strstr):
 .strstr_end:
 .size _U(strstr), .strstr_end - _U(strstr)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

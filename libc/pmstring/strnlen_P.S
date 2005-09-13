@@ -50,7 +50,7 @@
     \c len, or \c len if there is no '\\0' character among the first \c len
     characters pointed to by \c src. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(strnlen_P)
@@ -73,4 +73,4 @@ _U(strnlen_P):
 .Lstrnlen_P_end:
 	.size	_U(strnlen_P), .Lstrnlen_P_end - _U(strnlen_P)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

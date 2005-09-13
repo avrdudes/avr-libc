@@ -44,7 +44,7 @@
 
     \returns The memmove() function returns a pointer to dest.  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.extern _U(memcpy)
 	.text
@@ -77,4 +77,4 @@ _U(memmove):
 .memmove_end:
 	.size	_U(memmove), .memmove_end - _U(memmove)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

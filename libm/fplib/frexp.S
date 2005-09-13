@@ -49,7 +49,7 @@
  * fract(0) -> 0/0
  */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
@@ -84,4 +84,4 @@ GLOBAL(frexp)
 
           ENDFUNC
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

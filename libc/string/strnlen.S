@@ -46,7 +46,7 @@
     len, or len if there is no '\\0' character among the first len
     characters pointed to by src. */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(strnlen)
@@ -69,4 +69,4 @@ _U(strnlen):
 .strnlen_end:
 	.size	_U(strnlen), .strnlen_end - _U(strnlen)
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */

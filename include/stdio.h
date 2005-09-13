@@ -228,7 +228,7 @@
     \c stdin will also save some execution time.
 */
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 /*
  * This is an internal structure of the library that is subject to be
@@ -260,7 +260,7 @@ struct __file {
 	void	*udata;		/* User defined and accessible data. */
 };
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */
 
 /*@{*/
 /**
@@ -317,7 +317,7 @@ struct __file {
     stream object. */
 #define fdev_get_udata(stream) ((stream)->udata)
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /**
    \brief Setup a user-supplied buffer as an stdio stream
 
@@ -367,7 +367,7 @@ struct __file {
  */
 #define _FDEV_EOF (-2)
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /**
    \brief Initializer for a user-supplied stdio stream
 
@@ -392,7 +392,7 @@ struct __file {
 extern "C" {
 #endif
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 /*
  * Doxygen documentation can be found in fdevopen.c.
  */
@@ -412,7 +412,7 @@ extern FILE *fdevopen(int (*__put)(char), int (*__get)(void),
 extern FILE *fdevopen(int (*__put)(char, FILE*), int (*__get)(FILE*));
 #endif /* defined(__STDIO_FDEVOPEN_COMPAT_12) */
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */
 
 /**
    This function closes \c stream, and disallows and further
@@ -581,7 +581,7 @@ extern int	vfprintf_P(FILE *__stream, const char *__fmt, va_list __ap);
 */
 extern int	fputc(int __c, FILE *__stream);
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 /* putc() function implementation, required by standard */
 extern int	putc(int __c, FILE *__stream);
@@ -589,7 +589,7 @@ extern int	putc(int __c, FILE *__stream);
 /* putchar() function implementation, required by standard */
 extern int	putchar(int __c);
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */
 
 /**
    The macro \c putc used to be a "fast" macro implementation with a
@@ -731,7 +731,7 @@ extern size_t	fwrite(const void *__ptr, size_t __size, size_t __nmemb,
 */
 extern int	fgetc(FILE *__stream);
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 
 /* getc() function implementation, required by standard */
 extern int	getc(FILE *__stream);
@@ -739,7 +739,7 @@ extern int	getc(FILE *__stream);
 /* getchar() function implementation, required by standard */
 extern int	getchar(void);
 
-#endif /* not DOXYGEN */
+#endif /* not __DOXYGEN__ */
 
 /**
    The macro \c getc used to be a "fast" macro implementation with a
@@ -806,10 +806,10 @@ extern size_t	fread(void *__ptr, size_t __size, size_t __nmemb,
  */
 extern void	clearerr(FILE *__stream);
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 /* fast inlined version of clearerr() */
 #define clearerror(s) do { (s)->flags &= ~(__SERR | __SEOF); } while(0)
-#endif /* !defined(DOXYGEN) */
+#endif /* !defined(__DOXYGEN__) */
 
 /**
    Test the end-of-file flag of \c stream.  This flag can only be cleared
@@ -817,10 +817,10 @@ extern void	clearerr(FILE *__stream);
  */
 extern int	feof(FILE *__stream);
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 /* fast inlined version of feof() */
 #define feof(s) ((s)->flags & __SEOF)
-#endif /* !defined(DOXYGEN) */
+#endif /* !defined(__DOXYGEN__) */
 
 /**
    Test the error flag of \c stream.  This flag can only be cleared
@@ -828,10 +828,10 @@ extern int	feof(FILE *__stream);
  */
 extern int	ferror(FILE *__stream);
 
-#if !defined(DOXYGEN)
+#if !defined(__DOXYGEN__)
 /* fast inlined version of ferror() */
 #define ferror(s) ((s)->flags & __SERR)
-#endif /* !defined(DOXYGEN) */
+#endif /* !defined(__DOXYGEN__) */
 
 /**
    Formatted input.  This function is the heart of the \c scanf
@@ -1029,7 +1029,7 @@ extern int	sscanf(const char *__buf, const char *__fmt, ...);
  */
 extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
 
-#if defined(DOXYGEN)
+#if defined(__DOXYGEN__)
 /**
    Flush \c stream.
 
