@@ -40,6 +40,13 @@ fclose(FILE *stream)
 {
 	uint8_t i;
 
+	if (!(stream->flags & __SMALLOC))
+		/*
+		 * If the stream had not been malloc()ed, this is
+		 * not our business.
+		 */
+		return 0;
+
 	/*
 	 * The standard streams are only aliases.  So if the stream to
 	 * be closed is also refered to by a standard stream name,

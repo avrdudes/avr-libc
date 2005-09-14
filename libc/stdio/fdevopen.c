@@ -91,9 +91,11 @@ fdevopen(int (*put)(char, FILE *), int (*get)(FILE *))
 	if ((s = calloc(1, sizeof(FILE))) == 0)
 		return 0;
 
+	s->flags = __SMALLOC;
+
 	if (get != 0) {
 		s->get = get;
-		s->flags = __SRD;
+		s->flags |= __SRD;
 		if (stdin == 0)
 			stdin = s;
 	}

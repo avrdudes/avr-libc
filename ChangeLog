@@ -1,3 +1,14 @@
+2005-09-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h (struct __file): Add the __SMALLOC flag bit.
+	(fdev_close): add this macro as a hook to destroy library resources
+	when deleting fdev_setup_stream()-initialized streams.
+	* libc/fdevopen.c: Keep track of malloc()ed streams by setting the
+	__SMALLOC flag.
+	* libc/fclose.c: Bail out unless __SMALLOC is set, so we don't
+	accidentally try to free streams that have been set up by
+	fdev_setup_stream().
+
 2005-09-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/doxygen.config.in: use __DOXYGEN__ instead of DOXYGEN to

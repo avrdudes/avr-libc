@@ -186,6 +186,13 @@
     than the function-like fdev_setup_stream(), so all data
     initialization happens during C start-up.
 
+    If streams initialized that way are no longer needed, they can be
+    destroyed by first calling the macro fdev_close(), and then
+    destroying the object itself.  No call to fclose() should be
+    issued for these streams.  While calling fclose() itself is
+    harmless, it will cause an undefined reference to free() and thus
+    cause the linker to link the malloc module into the application.
+
     <h3>Notes</h3>
 
     \anchor stdio_note1 \par Note 1:
@@ -246,12 +253,13 @@ struct __file {
 #define __SERR	0x0010		/* found error */
 #define __SEOF	0x0020		/* found EOF */
 #define __SUNGET 0x040		/* ungetc() happened */
+#define __SMALLOC 0x80		/* handle is malloc()ed */
 #if 0
 /* possible future extensions, will require uint16_t flags */
-#define __SRW	0x0080		/* open for reading & writing */
-#define __SLBF	0x0100		/* line buffered */
-#define __SNBF	0x0200		/* unbuffered */
-#define __SMBF	0x0400		/* buf is from malloc */
+#define __SRW	0x0100		/* open for reading & writing */
+#define __SLBF	0x0200		/* line buffered */
+#define __SNBF	0x0400		/* unbuffered */
+#define __SMBF	0x0800		/* buf is from malloc */
 #endif
 	int	size;		/* size of buffer */
 	int	len;		/* characters read or written so far */
@@ -418,9 +426,30 @@ extern FILE *fdevopen(int (*__put)(char, FILE*), int (*__get)(FILE*));
    This function closes \c stream, and disallows and further
    IO to and from it.
 
+   When using fdevopen() to setup the stream, a call to fclose() is
+   needed in order to free the internal resources allocated.
+
+   If the stream has been set up using fdev_setup_stream() or
+   FDEV_SETUP_STREAM(), use fdev_close() instead.
+
    It currently always returns 0 (for success).
 */
 extern int	fclose(FILE *__stream);
+
+/**
+   This macro frees up any library resources that might be associated
+   with \c stream.  It should be called if \c stream is no longer
+   needed, right before the application is going to destroy the
+   \c stream object itself.
+
+   (Currently, this macro evaluates to nothing, but this might change
+   in future versions of the library.)
+*/
+#if defined(__DOXYGEN__)
+# define fdev_close()
+#else
+# define fdev_close() ((void)0)
+#endif
 
 /**
    \c vfprintf is the central facility of the \c printf family of
