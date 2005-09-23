@@ -1,3 +1,7 @@
+2005-09-23 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/iomxx0_1.h (PCIFR): Change address from 0x1C to 0x1B
+
 2005-09-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/stdio.h (struct __file): Add the __SMALLOC flag bit.

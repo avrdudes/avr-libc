@@ -298,7 +298,7 @@
 #define OCF5A   1
 #define TOV5    0
 
-#define PCIFR   _SFR_IO8(0x1C)
+#define PCIFR   _SFR_IO8(0x1B)
 #if defined(__ATmegaxx0__) 
 # define PCIF2  2
 #endif /* __ATmegaxx0__ */
