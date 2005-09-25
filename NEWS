@@ -49,6 +49,7 @@
   [#14262] avr-libc documentation error about .init sections
   [#14266] use __extension__ in avr-libc header files
   [#14378] EEPROM library d'not support at86rf401 device
+  [#14380] configure/make work only in source directory
   [#14433] Improve documentation of <avr/delay.h>
 
 * Other changes:

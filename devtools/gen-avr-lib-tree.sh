@@ -259,10 +259,20 @@ AVR_TARGET_CFLAGS   = $crt_cflags
 AVR_TARGET_ASFLAGS  = $crt_asflags
 AVR_INSTALL_DIR     = $install_dir
 
+VPATH = \$(top_srcdir)/crt1:\$(top_srcdir)/libc/stdlib:\$(top_srcdir)/libc/pmstring:\$(top_srcdir)/libc/string:\$(top_srcdir)/libc/misc:\$(top_srcdir)/libc/stdio:\$(top_srcdir)/libm/fplib
+
+if HAS_$dev
+
 # NOTE: Automake will be performing the following include, not GNU Make.
 # Automake will also be scanning the included file.
 
 include \$(top_srcdir)/AvrCommon.am
+
+else
+
+echo all distdir install installdirs clean distclean uninstall check:
+
+endif
 
 EOF
 
@@ -281,10 +291,20 @@ AVR_TARGET_CFLAGS   = $lib_cflags
 AVR_TARGET_ASFLAGS  = $lib_asflags
 AVR_INSTALL_DIR     = $install_dir
 
+VPATH = \$(top_srcdir)/crt1:\$(top_srcdir)/libc/stdlib:\$(top_srcdir)/libc/pmstring:\$(top_srcdir)/libc/string:\$(top_srcdir)/libc/misc:\$(top_srcdir)/libc/stdio:\$(top_srcdir)/libm/fplib
+
+if HAS_$arh
+
 # NOTE: Automake will be performing the following include, not GNU Make.
 # Automake will also be scanning the included file.
 
 include \$(top_srcdir)/AvrCommonLibC.am
+
+else
+
+echo all distdir install installdirs clean distclean uninstall check:
+
+endif
 
 EOF
 

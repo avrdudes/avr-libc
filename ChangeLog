@@ -1,3 +1,12 @@
+2005-09-25 Anatoly Sokolov <aesok@pautinka.net>
+
+	* configure.ac: Use automake conditionals for enabling/disabling
+	device support.
+	* devtools/gen-avr-lib-tree.sh: (Ditto.)
+	* AvrCommon.am : Delete VPATH.
+	* AvrCommonLibC.am: (Ditto.)
+	[ Fixed bug #14380 ]
+
 2005-09-23 Anatoly Sokolov <aesok@pautinka.net>
 
 	* include/avr/iomxx0_1.h (PCIFR): Change address from 0x1C to 0x1B
