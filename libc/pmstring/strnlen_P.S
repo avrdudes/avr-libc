@@ -58,9 +58,9 @@
 _U(strnlen_P):
 	LOAD_Z(src_lo, src_hi)
 1:
+	LPM_R0_ZP
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	LPM_R0_ZP
 	cpse	r0, __zero_reg__
 	brcc	1b
 ; Z points one character past the terminating NUL

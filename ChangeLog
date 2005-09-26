@@ -1,3 +1,9 @@
+2005-09-26 Anatoly Sokolov <aesok@pautinka.net>
+
+	(Contributed by Dmitry K. <dmixm at marine dot febras dot ru>)
+	libc/pmstring/strnlen_P.S (strnlen_P): Move LPM_R0_ZP instruction.
+	[Fixed bug #14503]
+
 2005-09-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/sleep.h: Fix sleep mode definitions for the AT94K
