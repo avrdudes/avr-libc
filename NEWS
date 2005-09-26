@@ -51,6 +51,7 @@
   [#14378] EEPROM library d'not support at86rf401 device
   [#14380] configure/make work only in source directory
   [#14433] Improve documentation of <avr/delay.h>
+  [#14503] strnlen_P is wrong with classic AVRs
 
 * Other changes:
 

@@ -1,3 +1,9 @@
+2005-09-26 Anatoly Sokolov <aesok@pautinka.net>
+
+	(Contributed by Dmitry K. <dmixm at marine dot febras dot ru>)
+	libc/pmstring/strnlen_P.S (strnlen_P): Move LPM_R0_ZP instruction.
+	[Fixed bug #14503]
+
 2005-09-25 Anatoly Sokolov <aesok@pautinka.net>
 
 	* configure.ac: Use automake conditionals for enabling/disabling
