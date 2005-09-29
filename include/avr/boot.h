@@ -566,51 +566,64 @@
 
 #endif
 
-#define __boot_eeprom_spm_safe(func, address, data) \
-do { \
-    boot_spm_busy_wait();                       \
-    eeprom_busy_wait();                         \
-    func (address, data);                       \
-} while (0)
-
 /** \ingroup avr_boot
 
     Same as boot_page_fill() except it waits for eeprom and spm operations to
     complete before filling the page. */
 
 #define boot_page_fill_safe(address, data) \
-    __boot_eeprom_spm_safe (boot_page_fill, address, data)
+do { \
+    boot_spm_busy_wait();                       \
+    eeprom_busy_wait();                         \
+    boot_page_fill(address, data);              \
+} while (0)
 
 /** \ingroup avr_boot
 
     Same as boot_page_erase() except it waits for eeprom and spm operations to
     complete before erasing the page. */
 
-#define boot_page_erase_safe(address, data) \
-    __boot_eeprom_spm_safe (boot_page_erase, address, data)
+#define boot_page_erase_safe(address) \
+do { \
+    boot_spm_busy_wait();                       \
+    eeprom_busy_wait();                         \
+    boot_page_erase (address);                  \
+} while (0)
 
 /** \ingroup avr_boot
 
     Same as boot_page_write() except it waits for eeprom and spm operations to
     complete before writing the page. */
 
-#define boot_page_write_safe(address, data) \
-    __boot_eeprom_spm_safe (boot_page_wrte, address, data)
+#define boot_page_write_safe(address) \
+do { \
+    boot_spm_busy_wait();                       \
+    eeprom_busy_wait();                         \
+    boot_page_write (address);                  \
+} while (0)
 
 /** \ingroup avr_boot
 
     Same as boot_rww_enable() except waits for eeprom and spm operations to
     complete before enabling the RWW mameory. */
 
-#define boot_rww_enable_safe(address, data) \
-    __boot_eeprom_spm_safe (boot_rww_enable, address, data)
+#define boot_rww_enable_safe() \
+do { \
+    boot_spm_busy_wait();                       \
+    eeprom_busy_wait();                         \
+    boot_rww_enable();                          \
+} while (0)
 
 /** \ingroup avr_boot
 
     Same as boot_lock_bits_set() except waits for eeprom and spm operations to
     complete before setting the lock bits. */
 
-#define boot_lock_bits_set_safe(address, data) \
-    __boot_eeprom_spm_safe (boot_lock_bits_set, address, data)
+#define boot_lock_bits_set_safe(lock_bits) \
+do { \
+    boot_spm_busy_wait();                       \
+    eeprom_busy_wait();                         \
+    boot_lock_bits_set (lock_bits);             \
+} while (0)
 
 #endif /* _AVR_BOOT_H_ */

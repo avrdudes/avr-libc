@@ -1,3 +1,11 @@
+2005-09-29 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/boot.h (__boot_eeprom_spm_safe): Deleted.
+	( boot_page_fill_safe, boot_page_erase_safe, boot_page_write_safe,
+	boot_rww_enable_safe, boot_lock_bits_set_safe): Changed,
+	do not use __boot_eeprom_spm_safe macro.
+	[Fixed bug #12324]
+
 2005-09-26 Anatoly Sokolov <aesok@pautinka.net>
 
 	(Contributed by Dmitry K. <dmixm at marine dot febras dot ru>)
