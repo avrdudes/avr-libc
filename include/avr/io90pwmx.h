@@ -30,7 +30,7 @@
 
 /* $Id$ */
 
-/* avr/io90pwmx.h - definitions for AT90PWM2 and AT90PWM3 */
+/* avr/io90pwmx.h - definitions for AT90PWM2(B) and AT90PWM3(B) */
 
 #ifndef _AVR_IO90PWMX_H_
 #define _AVR_IO90PWMX_H_ 1
@@ -982,8 +982,12 @@
 
 /* PSC 0 Input Capture Registers */
 #define PICR0   _SFR_MEM16(0xDE)
+
 #define PICR0L  _SFR_MEM8(0xDE)
+
 #define PICR0H  _SFR_MEM8(0xDF)
+#define PCST0   7   /* PSC Capture Software Trig bit */
+                    /* not implemented on AT90PWM2/AT90PWM3 */
 
 /* PSC 1 Synchro and Output Configuration */
 #define PSOC1   _SFR_MEM8(0xE0)
@@ -1062,8 +1066,12 @@
 
 /* PSC 1 Input Capture Registers */
 #define PICR1   _SFR_MEM16(0xEE)
+
 #define PICR1L  _SFR_MEM8(0xEE)
+
 #define PICR1H  _SFR_MEM8(0xEF)
+#define PCST1   7   /* PSC Capture Software Trig bit */
+                    /* not implemented on AT90PWM2/AT90PWM3 */
 
 /* PSC 2 Synchro and Output Configuration */
 #define PSOC2   _SFR_MEM8(0xF0)
@@ -1159,8 +1167,12 @@
 
 /* PSC 2 Input Capture Registers */
 #define PICR2   _SFR_MEM16(0xFE)
+
 #define PICR2L  _SFR_MEM8(0xFE)
+
 #define PICR2H  _SFR_MEM8(0xFF)
+#define PCST2   7   /* PSC Capture Software Trig bit */
+                    /* not implemented on AT90PWM2/AT90PWM3 */
 
 
 /* Interrupt vectors */

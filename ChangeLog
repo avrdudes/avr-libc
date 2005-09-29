@@ -1,4 +1,9 @@
 2005-09-29 Anatoly Sokolov <aesok@pautinka.net>
+	
+	Add support for AT90PWM2B/AT90PWM3B.
+	* include/avr/io90pwmx.h (PCST0, PCST1, PCST2) : Add.
+
+2005-09-29 Anatoly Sokolov <aesok@pautinka.net>
 
 	* include/avr/boot.h (__boot_eeprom_spm_safe): Deleted.
 	( boot_page_fill_safe, boot_page_erase_safe, boot_page_write_safe,
