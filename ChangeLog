@@ -1,3 +1,17 @@
+2005-10-06 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/boot.h (__boot_page_fill_normal, 
+	__boot_page_fill_alternate, __boot_page_erase_normal, 
+	__boot_page_erase_alternate,  __boot_page_write_normal,
+	__boot_page_write_alternate, __boot_rww_enable, 
+	__boot_rww_enable_alternate, __boot_lock_bits_set,
+	__boot_lock_bits_set_alternate, boot_lock_fuse_bits_get): Change type
+	of __SPM_REG operand on input, immediate.	
+	(__boot_page_fill_extended, __boot_page_erase_extended, 
+	__boot_page_write_extended) : Change type of __SPM_REG and RAMPZ 
+	operands on input, immediate.
+	[Fixed bug #14486]
+	
 2005-09-29 Anatoly Sokolov <aesok@pautinka.net>
 	
 	Add support for AT90PWM2B/AT90PWM3B.
