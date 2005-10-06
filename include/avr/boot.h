@@ -189,8 +189,9 @@
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         "clr  r1\n\t"                            \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_PAGE_FILL),       \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_PAGE_FILL),       \
           "r" ((uint16_t)address),               \
           "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
@@ -208,8 +209,9 @@
         ".word 0xffff\n\t"                       \
         "nop\n\t"                                \
         "clr  r1\n\t"                            \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_PAGE_FILL),       \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_PAGE_FILL),       \
           "r" ((uint16_t)address),               \
           "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
@@ -226,9 +228,10 @@
         "sts %0, %2\n\t"                         \
         "spm\n\t"                                \
         "clr  r1\n\t"                            \
-        : "=m" (__SPM_REG),                      \
-          "=m" (RAMPZ)                           \
-        : "r" ((uint8_t)__BOOT_PAGE_FILL),       \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "i" (_SFR_MEM_ADDR(RAMPZ)),            \
+          "r" ((uint8_t)__BOOT_PAGE_FILL),       \
           "r" ((uint32_t)address),               \
           "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
@@ -242,8 +245,9 @@
         "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
@@ -258,8 +262,9 @@
         "spm\n\t"                                \
         ".word 0xffff\n\t"                       \
         "nop\n\t"                                \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
@@ -273,9 +278,10 @@
         "sts  %1, %C3\n\t"                       \
         "sts %0, %2\n\t"                         \
         "spm\n\t"                                \
-        : "=m" (__SPM_REG),                      \
-          "=m" (RAMPZ)                           \
-        : "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "i" (_SFR_MEM_ADDR(RAMPZ)),            \
+          "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
           "r" ((uint32_t)address)                \
         : "r30", "r31"                           \
     );                                           \
@@ -288,8 +294,9 @@
         "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
@@ -304,8 +311,9 @@
         "spm\n\t"                                \
         ".word 0xffff\n\t"                       \
         "nop\n\t"                                \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
@@ -319,9 +327,10 @@
         "sts %1, %C3\n\t"                        \
         "sts %0, %2\n\t"                         \
         "spm\n\t"                                \
-        : "=m" (__SPM_REG),                      \
-          "=m" (RAMPZ)                           \
-        : "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "i" (_SFR_MEM_ADDR(RAMPZ)),            \
+          "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
           "r" ((uint32_t)address)                \
         : "r30", "r31"                           \
     );                                           \
@@ -333,8 +342,9 @@
     (                                            \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
     );                                           \
 })
 
@@ -346,8 +356,9 @@
         "spm\n\t"                                \
         ".word 0xffff\n\t"                       \
         "nop\n\t"                                \
-        : "=m" (__SPM_REG)                       \
-        : "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
+        :                                        \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
+          "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
     );                                           \
 })
 
@@ -378,8 +389,9 @@
         "mov r0, %2\n\t"                                   \
         "sts %0, %1\n\t"                                   \
         "spm\n\t"                                          \
-        : "=m" (__SPM_REG)                                 \
-        : "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
+        :                                                  \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
+          "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
           "r" (value)                                      \
         : "r0", "r30", "r31"                               \
     );                                                     \
@@ -397,8 +409,9 @@
         "spm\n\t"                                          \
         ".word 0xffff\n\t"                                 \
         "nop\n\t"                                          \
-        : "=m" (__SPM_REG)                                 \
-        : "r" ((uint8_t)__BOOT_LOCK_BITS_SET),       \
+        :                                                  \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
+          "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
           "r" (value)                                      \
         : "r0", "r30", "r31"                               \
     );                                                     \
@@ -463,11 +476,11 @@
     (                                                      \
         "ldi r30, %3\n\t"                                  \
         "ldi r31, 0\n\t"                                   \
-        "sts %0, %2\n\t"                                   \
-        "lpm %1, Z\n\t"                                    \
-        : "=m" (__SPM_REG),                                \
-          "=r" (__result)                                  \
-        : "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
+        "sts %1, %2\n\t"                                   \
+        "lpm %0, Z\n\t"                                    \
+        : "=r" (__result)                                  \
+        : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
+          "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
           "M" (address)                                    \
         : "r0", "r30", "r31"                               \
     );                                                     \
