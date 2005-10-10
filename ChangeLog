@@ -1,3 +1,9 @@
+2005-10-10 Anatoly Sokolov <aesok@pautinka.net>
+
+	(Idea by Dmitry K. <dmixm at marine dot febras dot ru>)
+	* common/macros.inc (X_movw) : New version. Can use register names 
+	as arguments.
+
 2005-10-06 Anatoly Sokolov <aesok@pautinka.net>
 
 	* include/avr/boot.h (__boot_page_fill_normal, 
