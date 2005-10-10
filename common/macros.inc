@@ -119,31 +119,68 @@
 #endif
 
 /*
-   Smart version of movw (use register numbers as arguments):
+   Smart version of movw:
     - uses "movw" if possible (supported by MCU, and both registers even)
     - handles overlapping register pairs correctly
     - no instruction generated if source and destination are the same
    (may expand to 0, 1 or 2 instructions).
  */
 
-	.macro	X_movw dest src
-		.if ((\src) - (\dest))  /* different registers */
-			.if (((\src) | (\dest)) & 0x01)
-				.if (((\src)-(\dest)) & 0x80) /* src < dest */
-					mov	(\dest)+1, (\src)+1
-					mov	(\dest), (\src)
-				.else  /* src > dest */
-					mov	(\dest), (\src)
-					mov	(\dest)+1, (\src)+1
-				.endif
-			.else  /* both even -> overlap not possible */
-#if __AVR_ENHANCED__
-				movw	(\dest), (\src)
-#else
-				mov	(\dest), (\src)
-				mov	(\dest)+1, (\src)+1
-#endif
+	.macro	X_movw dst src
+		.L_movw_dst = -1
+		.L_movw_src = -1
+		.L_movw_n = 0
+		.irp  reg,   r0, r1, r2, r3, r4, r5, r6, r7, \
+			r8, r9, r10, r11, r12, r13, r14, r15, \
+			r16, r17, r18, r19, r20, r21, r22, r23, \
+			r24, r25, r26, r27, r28, r29, r30, r31
+			.ifc  \reg,\dst
+				.L_movw_dst = .L_movw_n
 			.endif
+			.ifc  \reg,\src
+				.L_movw_src = .L_movw_n
+			.endif
+			.L_movw_n = .L_movw_n + 1
+		.endr
+		.if   .L_movw_dst < 0
+			.L_movw_n = 0
+			.rept   32
+				.if \dst == .L_movw_n
+				.L_movw_dst = .L_movw_n
+				.endif
+				.L_movw_n = .L_movw_n + 1
+			.endr
+		.endif
+		.if   .L_movw_src < 0
+			.L_movw_n = 0
+			.rept   32
+				.if \src == .L_movw_n
+				.L_movw_src = .L_movw_n
+				.endif
+				.L_movw_n = .L_movw_n + 1
+			.endr
+		.endif
+		.if   (.L_movw_dst < 0) || (.L_movw_src < 0)
+		.err    ; Invalid arg.
+		.endif
+		
+		.if ((.L_movw_src) - (.L_movw_dst))  /* different registers */
+				.if (((.L_movw_src) | (.L_movw_dst)) & 0x01)
+					.if (((.L_movw_src)-(.L_movw_dst)) & 0x80) 			/* src < dest */
+						mov	(.L_movw_dst)+1, (.L_movw_src)+1
+						mov	(.L_movw_dst), (.L_movw_src)
+					.else  			/* src > dest */
+						mov	(.L_movw_dst), (.L_movw_src)
+						mov	(.L_movw_dst)+1, (.L_movw_src)+1
+					.endif
+				.else  /* both even -> overlap not possible */
+	#if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+					movw	\dst, \src
+	#else
+					mov	(.L_movw_dst), (.L_movw_src)
+					mov	(.L_movw_dst)+1, (.L_movw_src)+1
+	#endif
+				.endif
 		.endif
 	.endm
 
