@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id $*/
+
 /*
    ltoa.S
 
@@ -69,15 +71,15 @@ _U(ltoa):
 	push	ZH		; keep &string
 	push	ZL
 	cpi	a_radix, 2	; no radix < 2
-	brlt	conv_finished	; return with \0
+	brlt	99f		; return with \0
 	cpi	a_radix, 37	; no radix > 36
-	brge	conv_finished	; return with \0
+	brge	99f		; return with \0
 	mov	r_radix, a_radix; save radix
 	clt			; make sure T flag is clear
 	cpi	r_radix, 10	; decimal number?
-	brne	divide_loop
+	brne	1f
 	bst	a_val_hhi, 7	; remember sign of decimal number
-	brtc	divide_loop	; number positive? -> convert
+	brtc	1f		; number positive? -> convert
 	com	a_val_hhi	; make decimal number positive
 	com	a_val_hlo
 	com	a_val_hi
@@ -85,7 +87,7 @@ _U(ltoa):
 	sbci	a_val_hi,  lo8(-1)
 	sbci	a_val_hlo, lo8(-1)
 	sbci	a_val_hhi, lo8(-1)
-divide_loop:
+1:
 	mov	r18, r_radix	; radix is divisor
 	clr	r19		; remainder of number is dividend
 	clr	r20
@@ -97,9 +99,9 @@ divide_loop:
 	pop	ZH
 	subi	r22, 0xd0	; + '0'
 	cpi	r22, 0x3a	; > '9' ?
-	brlt	L_10
+	brlt	10f
 	subi	r22, 0xd9	; + 'a' - 10 - '0'
-L_10:
+10:
 	st	Z+, r22		; write character to string in reverse order!
 	mov	a_val_lo, r18	; quotient -> dividend
 	mov	a_val_hi, r19
@@ -109,11 +111,11 @@ L_10:
 	sbci	a_val_hi, 0
 	sbci	a_val_hlo, 0
 	sbci 	a_val_hhi,0 	; value == 0 ?
-	brne	divide_loop
-	brtc	conv_finished	; decimal number positive -> finish
+	brne	1b
+	brtc	99f		; decimal number positive -> finish
 	ldi	r28, '-'
 	st	Z+, r28		; write minus sign to string
-conv_finished:
+99:
 	st	Z, __zero_reg__	; terminate string
 	pop	a_val_hlo	; restore &string as return value
 	pop	a_val_hhi

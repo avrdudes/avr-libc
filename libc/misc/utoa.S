@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id $*/
+
 /*
    utoa.S
 
@@ -66,10 +68,10 @@ _U(utoa):
 	mov	r_lstr_lo, ZL	; save &string
 	mov	r_lstr_hi, ZH
 	cpi	r_radix, 2	; no radix < 2
-	brlt	terminate
+	brlt	99f
 	cpi	r_radix, 37	; no radix > 36
-	brge	terminate	
-divide_loop:
+	brge	99f	
+1:
 	mov	r22, r_radix	; radix
 	clr	r23		;  dividend in r25:r24,   divisor in r23:r22
 	XCALL	_U(__udivmodhi4);  quotient in r23:r22, remainder in r25:r24
@@ -77,15 +79,15 @@ divide_loop:
 				;  call-used but preserved: r18,r19,r20,r30,r31
 	subi	r24, 0xd0	; + '0'
 	cpi	r24, 0x3a	; > '9' ?
-	brlt	L_10
+	brlt	10f
 	subi	r24, 0xd9	; + 'a' - 10 - '0'
-L_10:
+10:
 	st	Z+, r24		; write char to string in reverse order!
 	mov	r_val_lo,r22	; quotient -> dividend
 	mov	r_val_hi,r23
 	sbiw	r_val_lo,0	; value == 0 ?
-	brne	divide_loop
-terminate:
+	brne	1b
+99:
 	mov	r_val_hi, r_lstr_hi	; restore &string as return value
 	mov	r_val_lo, r_lstr_lo
 	st	Z, __zero_reg__	; terminate string

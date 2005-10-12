@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id $*/
+
 /*
    itoa.S
 
@@ -66,17 +68,17 @@ _U(itoa):
 	mov	r_lstr_hi, ZH
 	clt			; make sure T flag is clear
 	cpi	r_radix, 2	; no radix < 2
-	brlt	terminate	; return with \0
+	brlt	99f		; return with \0
 	cpi	r_radix, 37	; no radix > 36
-	brge	terminate	; return with \0
+	brge	99f		; return with \0
 	cpi	r_radix, 10	; decimal number ?
-	brne	divide_loop	; no -> convert
+	brne	1f		; no -> convert
 	bst	r_val_hi, 7	; for decimal numbers remember sign of value
-	brtc	divide_loop	; positive number -> convert
+	brtc	1f		; positive number -> convert
 	com	r_val_hi	; negative number -> make positive
 	neg	r_val_lo
 	sbci	r_val_hi, 0xff
-divide_loop:
+1:
 	mov	r22, r_radix	; radix
 	clr	r23		;  dividend in r25:r24, divisor in r23:r22
 	XCALL	_U(__udivmodhi4);  quotient in r23:r22, remainder in r25:r24
@@ -84,19 +86,19 @@ divide_loop:
 				;  call-used but preserved: r18, r19, r20, r30, r31
 	subi	r24, 0xd0	; + '0'
 	cpi	r24, 0x3a	; > '9' ?
-	brlt	L_10
+	brlt	10f
 	subi	r24, 0xd9	; + 'a' - 10 - '0'
-L_10:
+10:
 	st	Z+, r24		; write char to string in reverse order
 	mov	r_val_lo, r22	; quotient -> dividend
 	mov	r_val_hi, r23
 	sbiw	r_val_lo, 0	; value == 0 ?
-	brne	divide_loop
-	brtc	terminate	; T flag clear? -> positive number		
+	brne	1b
+	brtc	99f		; T flag clear? -> positive number		
 	ldi	r21, '-'
 	st	Z+, r21		; write minus sign to string
-terminate:			; restore &string as return value
-	mov	r_val_hi, r_lstr_hi
+99:	
+	mov	r_val_hi, r_lstr_hi	; restore &string as return value
 	mov	r_val_lo, r_lstr_lo
 	st	Z, __zero_reg__	; terminate string
 	XJMP	_U(strrev)	; reverse string
