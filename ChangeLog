@@ -1,3 +1,10 @@
+2005-10-12 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/misc/itoa.S: Make labels local, add Id line.
+	* libc/misc/ltoa.S: (Ditto.)
+	* libc/misc/ultoa.S: (Ditto.)
+	* libc/misc/utoa.S: (Ditto.)
+
 2005-10-10 Anatoly Sokolov <aesok@pautinka.net>
 
 	(Idea by Dmitry K. <dmixm at marine dot febras dot ru>)
