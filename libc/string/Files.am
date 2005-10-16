@@ -32,6 +32,9 @@
 string_a_c_sources =
 
 string_a_asm_sources = \
+	ffs.S \
+	ffsl.S \
+	ffsll.S \
 	memccpy.S \
 	memchr.S \
 	memcmp.S \

@@ -61,6 +61,49 @@ extern "C" {
     \note If the strings you are working on resident in program space (flash),
     you will need to use the string functions described in \ref avr_pgmspace. */
 
+/** \ingroup avr_string
+
+    This function find the first (least significant) bit set in the input value.
+    
+    \returns The ffs() function returns the position of the first
+    (least significant) bit set in the word val, or 0 if no bits are set.
+    The least significant bit is position 1.
+    
+    \note The ffs() (and only ffs()) is implemented as macro, that evaluates
+    a constant argument at compile time.	*/
+extern int ffs (int val) __attribute__((const));
+
+/* FIXME: expression, like 'ffs(ffs(ffs(...(CONSTANT)))', take very
+   large amount of memory at compile time.	*/
+#define	ffs(x) ( \
+    __builtin_constant_p (x) ?	\
+	( (x) & 1 ? 1		\
+	: (x) & 2 ? 2		\
+	: (x) & 4 ? 3		\
+	: (x) & 010 ? 4		\
+	: (x) & 020 ? 5		\
+	: (x) & 040 ? 6		\
+	: (x) & 0100 ? 7	\
+	: (x) & 0200 ? 8	\
+	: (x) & 0400 ? 9	\
+	: (x) & 01000 ? 10	\
+	: (x) & 02000 ? 11	\
+	: (x) & 04000 ? 12	\
+	: (x) & 010000 ? 13	\
+	: (x) & 020000 ? 14	\
+	: (x) & 040000 ? 15	\
+	: (x) & 0100000 ? 16	\
+	: 0 )			\
+    : ffs(x) )
+
+/** \ingroup avr_string
+    Same as ffs(), for an argument of type long.	*/
+extern int ffsl (long val) __attribute__((const));
+
+/** \ingroup avr_string
+    Same as ffs(), for an argument of type long long.	*/
+extern int ffsll (long long val) __attribute__((const));
+
 extern void *memccpy(void *, const void *, int, size_t);
 extern void *memchr(const void *, int, size_t) __ATTR_PURE__;
 extern int memcmp(const void *, const void *, size_t) __ATTR_PURE__;

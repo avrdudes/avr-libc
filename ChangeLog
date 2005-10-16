@@ -1,5 +1,16 @@
 2005-10-16 Anatoly Sokolov <aesok@pautinka.net>
 
+	(Contributed by Dmitry Xmelkov. <dmixm at marine dot febras dot ru>)
+
+	* include/string.h (ffs, ffsl, ffsll): Add declarations.
+	* libc/string/ffs.S: New file.
+	* libc/string/ffsl.S: New file.
+	* libc/string/ffcll.S: New file.
+	* libc/string/Files.am: Include new files.
+	[Fixed bug #12739]
+
+2005-10-16 Anatoly Sokolov <aesok@pautinka.net>
+
 	* include/avr/iom165.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
 	OCDR) : Change "SFR_I08()" on "_SFR_I08()".
 	* include/avr/iom325.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
