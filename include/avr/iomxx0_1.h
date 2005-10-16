@@ -380,11 +380,11 @@
 
 /* Reserved [0x29] */
 
-#define GPIOR1  SFR_IO8(0x2A)
+#define GPIOR1  _SFR_IO8(0x2A)
 
-#define GPIOR2  SFR_IO8(0x2B)
+#define GPIOR2  _SFR_IO8(0x2B)
 
-#define SPCR    SFR_IO8(0x2C)
+#define SPCR    _SFR_IO8(0x2C)
 #define SPIE    7
 #define SPE     6
 #define DORD    5
@@ -394,16 +394,16 @@
 #define SPR1    1
 #define SPR0    0
 
-#define SPSR    SFR_IO8(0x2D)
+#define SPSR    _SFR_IO8(0x2D)
 #define SPIF    7
 #define WCOL    6
 #define SPI2X   0
 
-#define SPDR    SFR_IO8(0X2E)
+#define SPDR    _SFR_IO8(0X2E)
 
 /* Reserved [0x2F] */
 
-#define ACSR    SFR_IO8(0x30)
+#define ACSR    _SFR_IO8(0x30)
 #define ACD     7
 #define ACBG    6
 #define ACO     5
@@ -413,8 +413,8 @@
 #define ACIS1   1
 #define ACIS0   0
 
-#define MONDR   SFR_IO8(0x31)
-#define OCDR    SFR_IO8(0x31)
+#define MONDR   _SFR_IO8(0x31)
+#define OCDR    _SFR_IO8(0x31)
 #define IDRD    7
 #define OCDR7   7
 #define OCDR6   6

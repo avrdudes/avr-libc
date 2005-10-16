@@ -54,6 +54,7 @@
   [#14433] Improve documentation of <avr/delay.h>
   [#14486] some macros from boot.h doesn't compile correctly
   [#14503] strnlen_P is wrong with classic AVRs
+  [#14798] several IO registers definition issue in header files
 
 * Other changes:
 

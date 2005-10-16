@@ -1,3 +1,29 @@
+2005-10-16 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/avr/iom165.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : Change "SFR_I08()" on "_SFR_I08()".
+	* include/avr/iom325.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iom329.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iom645.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iom649.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iom3250.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iom3290.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iom6450.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iom6490.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	OCDR) : (Ditto.).
+	* include/avr/iomxx4.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	MONDR, OCDR) : (Ditto.).
+	* include/avr/iomxx0_1.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
+	MONDR, OCDR) : (Ditto.).
+	[Fixed bug #14798]
+
 2005-10-12 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/misc/itoa.S: Make labels local, add Id line.
