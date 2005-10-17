@@ -116,11 +116,11 @@ you may want to remove the leading D.
 
 /* Interrupt vectors */
 
-#define SIG_TXDONE      _VECTOR(2)
-#define SIG_TXBE        _VECTOR(4)  /* transmit buffer empty */
+#define SIG_TXDONE      _VECTOR(1)
+#define SIG_TXBE        _VECTOR(2)  /* transmit buffer empty */
 
 
-#define _VECTORS_SIZE 10
+#define _VECTORS_SIZE 12
 
 /*
  *  The Register Bit names are represented by their bit number (0-7).

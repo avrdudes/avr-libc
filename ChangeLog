@@ -1,3 +1,12 @@
+2005-10-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io86r401.h: fix interrupt vector table.
+	* include/avr/iomxx4.h: fix a typo and an inconsistency in
+	in the interrupt vector definitions.
+	* include/avr/iotn2313.h: supply traditional avr-libc-style
+	interrupt vector names in addition to the names present in
+	this file in avr-libc-1.2.x.
+
 2005-10-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* devtools/make-binary-dist.sh: New file.

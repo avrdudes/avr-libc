@@ -748,7 +748,7 @@
 #define SIG_USART_TRANS		_VECTOR(22)
 #define SIG_COMPARATOR		_VECTOR(23)
 #define SIG_ADC			_VECTOR(24)
-#define SIG_EEPROM_READY	_VECTOR(35)
+#define SIG_EEPROM_READY	_VECTOR(25)
 #define SIG_TWI			_VECTOR(26)
 #define SIG_SPM_READY		_VECTOR(27)
 
@@ -757,9 +757,9 @@
 # define _VECTORS_SIZE 112
 
 #else /* !defined(__AVR_ATmega644__) */
-# define SIG_USART1_RX		_VECTOR(28)
-# define SIG_USART1_UDRE	_VECTOR(29)
-# define SIG_USART1_TX		_VECTOR(30)
+# define SIG_USART1_RECV	_VECTOR(28)
+# define SIG_USART1_DATA	_VECTOR(29)
+# define SIG_USART1_TRANS	_VECTOR(30)
 
 # define _VECTORS_SIZE 124
 
