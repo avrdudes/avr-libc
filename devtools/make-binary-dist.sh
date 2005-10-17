@@ -108,4 +108,4 @@ rm -rf ${builddir}/out || {\
 
 ${MAKE} clean
 
-echo "All done.  Check out ${topdir}/avr-libc-bin-${VERSION}.zip"
+echo "All done.  Check out ${topdir}/avr-libc-bin-${version}.zip"
