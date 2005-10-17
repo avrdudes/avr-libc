@@ -28,9 +28,10 @@
 
 /* $Id$ */
 
-/* ffsll.S
-   int ffsll (long long val)
- */
+/** \ingroup avr_string
+    \fn int ffsll (long long val);
+
+    \brief Same as ffs(), for an argument of type long long.	*/
 
 #ifndef	__DOXYGEN__
 

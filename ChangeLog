@@ -1,3 +1,11 @@
+2005-10-18 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/string.h (ffs): Rename 'ffs' macro to '_FFS'. 
+	Move DOXYGEN comments for 'ffs', 'ffsl' and 'ffsll' from here .
+	* libc/string/ffs.S: .. to here, ..
+	* libc/string/ffsl.S: .. to here and ..
+	* libc/string/ffsll.S: .. to here.
+
 2005-10-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/io86r401.h: fix interrupt vector table.

@@ -88,6 +88,7 @@
   ffs
   ffsl
   ffsll
+  _FFS (macro)
 
 *** Changes since avr-libc-1.2.4:
 
