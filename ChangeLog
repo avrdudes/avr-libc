@@ -1,3 +1,7 @@
+2005-10-16 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/make-binary-dist.sh: New file.
+
 2005-10-16 Anatoly Sokolov <aesok@pautinka.net>
 
 	(Contributed by Dmitry Xmelkov. <dmixm at marine dot febras dot ru>)
