@@ -52,6 +52,8 @@ if [ "x" = "x${MAKE}" ] ; then
     fi
 fi
 
+export MAKE
+
 # 'out/' is where we are going to temporarily install our stuff
 # into.
 mkdir ${builddir}/out || {\
@@ -59,24 +61,22 @@ mkdir ${builddir}/out || {\
     exit 1;\
 }
 
-${topdir}/configure \
+${topdir}/doconf \
     --disable-doc \
-    --prefix=${builddir}/out \
-    --build=$(${topdir}/config.guess) \
-    --host=avr || {\
+    --prefix=${builddir}/out || {\
     echo "configure failed"; \
     exit 1; \
 }
 
 # Examine our version ID, and record it (for the final archive name).
-set -- $(grep '^#define VERSION' ${builddir}/config.h | tr -d '"') || {\
-    echo "Cannot find VERSION in config.h"; \
+set -- $(grep '^AM_INIT_AUTOMAKE' ${builddir}/configure.in | tr -d ')') || {\
+    echo "Cannot find VERSION in configure.in"; \
     exit 1; \
 }
-version=$3
+version=$2
 
 # Now, build and install everything.
-${MAKE} -C ${builddir} all install || {\
+${topdir}/domake all install || {\
     echo "make failed"; \
     exit 1; \
 }
@@ -106,6 +106,6 @@ rm -rf ${builddir}/out || {\
     exit 1; \
 }
 
-${MAKE} clean
+${topdir}/domake clean
 
-echo "All done.  Check out ${topdir}/avr-libc-bin-${VERSION}.zip"
+echo "All done.  Check out ${topdir}/avr-libc-bin-${version}.zip"
