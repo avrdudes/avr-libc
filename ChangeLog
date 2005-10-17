@@ -1,3 +1,7 @@
+2005-10-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/make-binary-dist.sh: New file (merged from HEAD).
+
 2005-10-16 Anatoly Sokolov <aesok@pautinka.net>
 
 	* include/avr/iom165.h (GPIOR1, GPIOR2, SPSR, SPSR, SPDR, ACSR, 
