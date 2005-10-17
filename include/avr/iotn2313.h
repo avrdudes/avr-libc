@@ -496,27 +496,59 @@
 
 /* Interrupt vectors: */
 
-#define SIG_INT0          _VECTOR(1)  /* External Interrupt Request 0 */
-#define SIG_INT1          _VECTOR(2)  /* External Interrupt Request 1 */
-#define SIG_TIMER1_CAPT   _VECTOR(3)  /* TIMER1 CAPT Timer/Counter1 Capture
-                                         Event */
-#define SIG_TIMER1_COMPA  _VECTOR(4)  /* TIMER1 COMPA Timer/Counter1 Compare
-                                         Match A */
-#define SIG_TIMER1_OVF    _VECTOR(5)  /* TIMER1 OVF Timer/Counter1 Overflow */
-#define SIG_TIMER0_OVF    _VECTOR(6)  /* TIMER0 OVF Timer/Counter0 Overflow */
-#define SIG_USART0_RX     _VECTOR(7)  /* USART0 RX USART0, Rx Complete */
-#define SIG_USART0_UDRE   _VECTOR(8)  /* USART0 UDRE USART0 Data Register
-                                         Empty */
-#define SIG_USART0_TX     _VECTOR(9)  /* USART0 TX USART0, Tx Complete */
-#define SIG_ANALOG_COMP   _VECTOR(10) /* ANALOG COMP Analog Comparator */
-#define SIG_PCINT         _VECTOR(11) /* Pin Change Interrupt on PORTB */
-#define SIG_TIMER1_COMPB  _VECTOR(12) /* Timer/Counter1 Compare Match B */
-#define SIG_TIMER0_COMPA  _VECTOR(13) /* Timer/Counter0 Compare Match A */
-#define SIG_TIMER0_COMPB  _VECTOR(14) /* Timer/Counter0 Compare Match B */
-#define SIG_USI_START     _VECTOR(15) /* USI Start Condition */
-#define SIG_USI_OVERFLOW  _VECTOR(16) /* USI Overflow */
-#define SIG_EE_READY      _VECTOR(17) /* EEPROM Ready */
-#define SIG_WDT_OVERFLOW  _VECTOR(18) /* Watchdog Timer Overflow */
+#define SIG_INTERRUPT0        _VECTOR(1)  /* External Interrupt Request 0 */
+#define SIG_INT0              _VECTOR(1)  /* External Interrupt Request 0 */
+
+#define SIG_INTERRUPT1        _VECTOR(2)  /* External Interrupt Request 1 */
+#define SIG_INT1              _VECTOR(2)  /* External Interrupt Request 1 */
+
+#define SIG_INPUT_CAPTURE1    _VECTOR(3)  /* TIMER1 CAPT Timer/Counter1 Capture Event */
+#define SIG_TIMER1_CAPT       _VECTOR(3)  /* TIMER1 CAPT Timer/Counter1 Capture Event */
+
+#define SIG_OUTPUT_COMPARE1A  _VECTOR(4)  /* TIMER1 COMPA Timer/Counter1 Compare Match A */
+#define SIG_TIMER1_COMPA      _VECTOR(4)  /* TIMER1 COMPA Timer/Counter1 Compare Match A */
+
+#define SIG_OVERFLOW1         _VECTOR(5)  /* TIMER1 OVF Timer/Counter1 Overflow */
+#define SIG_TIMER1_OVF        _VECTOR(5)  /* TIMER1 OVF Timer/Counter1 Overflow */
+
+#define SIG_OVERFLOW0         _VECTOR(6)  /* TIMER0 OVF Timer/Counter0 Overflow */
+#define SIG_TIMER0_OVF        _VECTOR(6)  /* TIMER0 OVF Timer/Counter0 Overflow */
+
+#define SIG_USART0_RECV       _VECTOR(7)  /* USART0 RX USART0, Rx Complete */
+#define SIG_USART0_RX         _VECTOR(7)  /* USART0 RX USART0, Rx Complete */
+
+#define SIG_USART0_DATA       _VECTOR(8)  /* USART0 UDRE USART0 Data Register Empty */
+#define SIG_USART0_UDRE       _VECTOR(8)  /* USART0 UDRE USART0 Data Register Empty */
+
+#define SIG_USART0_TRANS      _VECTOR(9)  /* USART0 TX USART0, Tx Complete */
+#define SIG_USART0_TX         _VECTOR(9)  /* USART0 TX USART0, Tx Complete */
+
+#define SIG_COMPARATOR        _VECTOR(10) /* ANALOG COMP Analog Comparator */
+#define SIG_ANALOG_COMP       _VECTOR(10) /* ANALOG COMP Analog Comparator */
+
+#define SIG_PIN_CHANGE        _VECTOR(11) /* Pin Change Interrupt on PORTB */
+#define SIG_PCINT             _VECTOR(11) /* Pin Change Interrupt on PORTB */
+
+#define SIG_OUTPUT_COMPARE1B  _VECTOR(12) /* Timer/Counter1 Compare Match B */
+#define SIG_TIMER1_COMPB      _VECTOR(12) /* Timer/Counter1 Compare Match B */
+
+#define SIG_OUTPUT_COPMARE0A  _VECTOR(13) /* Timer/Counter0 Compare Match A */
+#define SIG_TIMER0_COMPA      _VECTOR(13) /* Timer/Counter0 Compare Match A */
+
+#define SIG_OUTPUT_COMPARE0B  _VECTOR(14) /* Timer/Counter0 Compare Match B */
+#define SIG_TIMER0_COMPB      _VECTOR(14) /* Timer/Counter0 Compare Match B */
+
+#define SIG_USI_START         _VECTOR(15) /* USI Start Condition */
+#define SIG_USI_START         _VECTOR(15) /* USI Start Condition */
+
+#define SIG_USI_OVERFLOW      _VECTOR(16) /* USI Overflow */
+#define SIG_USI_OVERFLOW      _VECTOR(16) /* USI Overflow */
+
+#define SIG_EEPROM_READY      _VECTOR(17) /* EEPROM Ready */
+#define SIG_EE_READY          _VECTOR(17) /* EEPROM Ready */
+
+#define SIG_WATCHDOG_TIMEOUT  _VECTOR(18) /* Watchdog Timer Overflow */
+#define SIG_WDT_OVERFLOW      _VECTOR(18) /* Watchdog Timer Overflow */
 
 /* 38 = (18*2)+2: Number of vectors times two, plus the reset vector */
 #define _VECTORS_SIZE     38

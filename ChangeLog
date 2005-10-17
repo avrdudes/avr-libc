@@ -1,6 +1,9 @@
 2005-10-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* devtools/make-binary-dist.sh: New file (merged from HEAD).
+	* include/avr/iotn2313.h: supply traditional avr-libc-style
+	interrupt vector names in addition to the names present in
+	this file in avr-libc-1.2.x.
 
 2005-10-16 Anatoly Sokolov <aesok@pautinka.net>
 
