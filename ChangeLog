@@ -1,5 +1,12 @@
 2005-10-18 Anatoly Sokolov <aesok@pautinka.net>
 
+	* doc/api/doxygen.config.in: Use 'top_builddir' instead 'top_srcdir'
+	in the IMAGE_PATH parameter.
+	* doc/api/Makefile.am: Add full path for 'avrs.png-save' file.
+	New 'sed' command for transformations 'doxygen.config.in'.
+
+2005-10-18 Anatoly Sokolov <aesok@pautinka.net>
+
 	* include/string.h (ffs): Rename 'ffs' macro to '_FFS'. 
 	Move DOXYGEN comments for 'ffs', 'ffsl' and 'ffsll' from here .
 	* libc/string/ffs.S: .. to here, ..

@@ -148,7 +148,7 @@ clean-local:
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
-	cp avrs.png-save $(AVR_LIBC_USER_MANUAL)/avrs.png
+	cp $(top_srcdir)/doc/api/avrs.png-save $(AVR_LIBC_USER_MANUAL)/avrs.png
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' \
 		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \
@@ -205,6 +205,7 @@ doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 	sed \
 	-e 's,[@]VERSION[@],$(VERSION),g' \
 	-e 's,[@]top_srcdir[@],$(top_srcdir),g' \
+	-e 's,[@]top_builddir[@],$(top_builddir),g' \
 	-e 's,[@]AVR_LIBC_USER_MANUAL[@],$(AVR_LIBC_USER_MANUAL),g' \
 	-e 's,[@]srcdir[@],$(srcdir),g' \
 	< $(srcdir)/doxygen.config.in > doxygen.config ||\
