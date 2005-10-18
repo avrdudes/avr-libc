@@ -61,6 +61,49 @@ extern "C" {
     \note If the strings you are working on resident in program space (flash),
     you will need to use the string functions described in \ref avr_pgmspace. */
 
+/** \ingroup avr_string
+
+    This macro finds the first (least significant) bit set in the
+    input value.
+
+    This macro is very similar to the function ffs() except that
+    it evaluates its argument at compile-time, so it should only
+    be applied to compile-time constant expressions where it will
+    reduce to a constant itself.
+    Application of this macro to expressions that are not constant
+    at compile-time is not recommended, and might result in a huge
+    amount of code generated.
+
+    \returns The _FFS() macro returns the position of the first
+    (least significant) bit set in the word val, or 0 if no bits are set.
+    The least significant bit is position 1.
+*/
+#if defined(DOXYGEN)
+#define _FFS(x)
+#else  /* !DOXYGEN */
+#define	_FFS(x) \
+	( (x) & 1 ? 1		\
+	: (x) & 2 ? 2		\
+	: (x) & 4 ? 3		\
+	: (x) & 010 ? 4		\
+	: (x) & 020 ? 5		\
+	: (x) & 040 ? 6		\
+	: (x) & 0100 ? 7	\
+	: (x) & 0200 ? 8	\
+	: (x) & 0400 ? 9	\
+	: (x) & 01000 ? 10	\
+	: (x) & 02000 ? 11	\
+	: (x) & 04000 ? 12	\
+	: (x) & 010000 ? 13	\
+	: (x) & 020000 ? 14	\
+	: (x) & 040000 ? 15	\
+	: (x) & 0100000 ? 16	\
+	: 0 )
+#endif /* DOXYGEN */
+
+extern int ffs (int) __attribute__((const));
+extern int ffsl (long) __attribute__((const));
+extern int ffsll (long long) __attribute__((const));
 extern void *memccpy(void *, const void *, int, size_t);
 extern void *memchr(const void *, int, size_t) __ATTR_PURE__;
 extern int memcmp(const void *, const void *, size_t) __ATTR_PURE__;

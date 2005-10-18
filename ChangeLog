@@ -1,3 +1,14 @@
+2005-10-19 Anatoly Sokolov <aesok@pautinka.net>
+
+	(Contributed by Dmitry Xmelkov. <dmixm at marine dot febras dot ru>)
+
+	* include/string.h (_FFS, ffs, ffsl, ffsll): Add declarations.
+	* libc/string/ffs.S: New file.
+	* libc/string/ffsl.S: New file.
+	* libc/string/ffcll.S: New file.
+	* libc/string/Makefile.am: Include new files.
+	[Fixed bug #12739]
+
 2005-10-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* devtools/make-binary-dist.sh: New file (merged from HEAD).

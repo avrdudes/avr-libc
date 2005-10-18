@@ -33,6 +33,9 @@ noinst_LIBRARIES = lib.a
 lib_a_c_sources = 
 
 lib_a_asm_sources = \
+	ffs.S         \
+	ffsl.S        \
+	ffsll.S       \
 	memccpy.S     \
 	memchr.S      \
 	memcmp.S      \
