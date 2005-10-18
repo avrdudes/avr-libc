@@ -64,19 +64,25 @@ extern "C" {
 
 /** \ingroup avr_string
 
-    This macro find the first (least significant) bit set in the input value.
-    
+    This macro finds the first (least significant) bit set in the
+    input value.
+
+    This macro is very similar to the function ffs() except that
+    it evaluates its argument at compile-time, so it should only
+    be applied to compile-time constant expressions where it will
+    reduce to a constant itself.
+    Application of this macro to expressions that are not constant
+    at compile-time is not recommended, and might result in a huge
+    amount of code generated.
+
     \returns The _FFS() macro returns the position of the first
     (least significant) bit set in the word val, or 0 if no bits are set.
-    The least significant bit is position 1.	
-    
-    \note The _FFS() macro, that evaluates a constant argument 
-    at compile time.
-    
-    \note Expression, like '_FFS(_FFS(_FFS(...(CONSTANT)))', take very
-    large amount of memory at compile time.	*/
-#define	_FFS(x) ( \
-    __builtin_constant_p (x) ?	\
+    The least significant bit is position 1.
+*/
+#if defined(__DOXYGEN__)
+#define _FFS(x)
+#else  /* !DOXYGEN */
+#define	_FFS(x) \
 	( (x) & 1 ? 1		\
 	: (x) & 2 ? 2		\
 	: (x) & 4 ? 3		\
@@ -93,10 +99,10 @@ extern "C" {
 	: (x) & 020000 ? 14	\
 	: (x) & 040000 ? 15	\
 	: (x) & 0100000 ? 16	\
-	: 0 )			\
-	: ffs(x) )
+	: 0 )
+#endif /* DOXYGEN */
 
-extern int ffs (int val) __attribute__((const));
+extern int ffs (int) __attribute__((const));
 extern int ffsl (long) __attribute__((const));
 extern int ffsll (long long) __attribute__((const));
 extern void *memccpy(void *, const void *, int, size_t);

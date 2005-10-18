@@ -1,3 +1,10 @@
+2005-10-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/string.h: make _FFS a plain macro that never calls
+	ffs(); minor doc changes for _FFS
+	* libc/string/ffs.S: refer to _FFS for compile-time constant
+	expressions.
+
 2005-10-18 Anatoly Sokolov <aesok@pautinka.net>
 
 	* doc/api/doxygen.config.in: Use 'top_builddir' instead 'top_srcdir'
