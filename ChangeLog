@@ -1,3 +1,10 @@
+2005-10-19 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/misc/itoa.S (itoa) : Use movw when possible.
+	* libc/misc/ltoa.S (ltoa) : (Ditto.).
+	* libc/misc/utoa.S (utoa) : (Ditto.).
+	* libc/misc/ultoa.S (ultoa) : (Ditto.).
+
 2005-10-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/string.h: make _FFS a plain macro that never calls

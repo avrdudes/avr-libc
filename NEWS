@@ -90,6 +90,13 @@
   ffsll
   _FFS (macro)
 
+* Optimized functions.
+
+  misc/itoa
+  misc/ltoa
+  misc/utoa
+  misc/ultoa
+
 *** Changes since avr-libc-1.2.4:
 
 * Bugs fixed:
