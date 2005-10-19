@@ -62,10 +62,8 @@
 
 
 _U(itoa):
-	mov	ZL, r_str_lo	; &string
-	mov	ZH, r_str_hi
-	mov	r_lstr_lo, ZL	; save &string
-	mov	r_lstr_hi, ZH
+	X_movw	ZL, r_str_lo	; &string
+	X_movw	r_lstr_lo, ZL	; save &string
 	clt			; make sure T flag is clear
 	cpi	r_radix, 2	; no radix < 2
 	brlt	99f		; return with \0
@@ -90,17 +88,15 @@ _U(itoa):
 	subi	r24, 0xd9	; + 'a' - 10 - '0'
 10:
 	st	Z+, r24		; write char to string in reverse order
-	mov	r_val_lo, r22	; quotient -> dividend
-	mov	r_val_hi, r23
+	X_movw	r_val_lo, r22	; quotient -> dividend
 	sbiw	r_val_lo, 0	; value == 0 ?
 	brne	1b
 	brtc	99f		; T flag clear? -> positive number		
 	ldi	r21, '-'
 	st	Z+, r21		; write minus sign to string
 99:	
-	mov	r_val_hi, r_lstr_hi	; restore &string as return value
-	mov	r_val_lo, r_lstr_lo
 	st	Z, __zero_reg__	; terminate string
+	X_movw	r_val_lo, r_lstr_lo	; restore &string as return value
 	XJMP	_U(strrev)	; reverse string
 
 	.endfunc

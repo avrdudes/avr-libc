@@ -65,8 +65,7 @@
 
 
 _U(ltoa):
-	mov	ZH, a_str_hi	; Z = &string
-	mov	ZL, a_str_lo
+	X_movw	ZL, a_str_lo	; Z = &string
 	push	r28		; save r28
 	push	ZH		; keep &string
 	push	ZL
@@ -103,10 +102,8 @@ _U(ltoa):
 	subi	r22, 0xd9	; + 'a' - 10 - '0'
 10:
 	st	Z+, r22		; write character to string in reverse order!
-	mov	a_val_lo, r18	; quotient -> dividend
-	mov	a_val_hi, r19
-	mov 	a_val_hlo, r20
-	mov 	a_val_hhi, r21
+	X_movw	a_val_lo, r18	; quotient -> dividend
+	X_movw 	a_val_hlo, r20
 	subi 	a_val_lo, 0
 	sbci	a_val_hi, 0
 	sbci	a_val_hlo, 0

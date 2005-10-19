@@ -32,6 +32,13 @@
   ffsl
   ffsll
   _FFS (macro)
+
+* Optimized functions.
+
+  misc/itoa
+  misc/ltoa
+  misc/utoa
+  misc/ultoa
   
 *** Changes in avr-libc-1.2.5:
 
