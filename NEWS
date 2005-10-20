@@ -39,7 +39,9 @@
   misc/ltoa
   misc/utoa
   misc/ultoa
-  
+  string/memchr
+  string/memccpy
+
 *** Changes in avr-libc-1.2.5:
 
 * Bugs fixed:
