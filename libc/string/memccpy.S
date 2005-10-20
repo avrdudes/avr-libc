@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -57,24 +59,23 @@
 	.global	_U(memccpy)
 	.type	_U(memccpy), @function
 _U(memccpy):
-	LOAD_Z(src_lo, src_hi)
-	LOAD_X(dest_lo, dest_hi)
-.memccpy_loop:
+	X_movw	ZL, src_lo
+	X_movw	XL, dest_lo
+.Lmemccpy_loop:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcs	.memccpy_notfound
+	brcs	.Lmemccpy_notfound
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
 	cp	__tmp_reg__, val_lo
-	brne	.memccpy_loop
-	mov	ret_lo, XL	; XXX use movw if available
-	mov	ret_hi, XH
+	brne	.Lmemccpy_loop
+	X_movw	ret_lo, XL
 	ret
-.memccpy_notfound:
+.Lmemccpy_notfound:
 	clr	ret_lo
 	clr	ret_hi
 	ret
-.memccpy_end:
-	.size	_U(memccpy), .memccpy_end - _U(memccpy)
+.Lmemccpy_end:
+	.size	_U(memccpy), .Lmemccpy_end - _U(memccpy)
 
 #endif /* not __DOXYGEN__ */

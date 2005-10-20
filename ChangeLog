@@ -1,3 +1,9 @@
+2005-10-20 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/string/memccpy.S: Make labels local, add Id line, 
+	use movw when possible, use X_movw instead LOAD_X/LOAD_Z.
+	* libc/string/memchr.S: (Ditto.)
+	
 2005-10-19 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/misc/itoa.S (itoa) : Use movw when possible.
