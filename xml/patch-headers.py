@@ -176,7 +176,8 @@ for header in table.keys():
 
     print "done."
 
-r = re.compile(r'#\s*define\s+(SIG_[A-Z0-9_]+)\s+_VECTOR[(](\d+)[)]')
+r = re.compile(r'#\s*define\s+((SIG_)?[A-Z0-9_]+(_vect)?)\s+_VECTOR[(](\d+)[)]')
+
 print "Patching headers:"
 docs = {}
 nlist = table.keys()
@@ -197,46 +198,87 @@ for header in nlist:
     #parser = Xml2Obj()
     parser.parse (open (xmlfile))
 
-    lastline = ''
     h = open(hfile)
-    newh = open(header, "w")
-    for line in h:
+    lines = h.readlines()
+    h.close()
+
+    firstidx = 0
+    lastidx = -1
+    parseddev = parser.getContentHandler().dev
+
+    # first, clean out any existing interrupt vectors
+    for idx, line in enumerate(lines):
         m = r.match(line)
         if m != None:
-            key = m.group(2)
-            ele = parser.getContentHandler().dev.interrupts[key]
-#            if lastline.find(ele.description.data) >= 0:
-            if 1:
-                if len(ele.description.data) > 0:
-                    newh.write("/* " + ele.description.data + " */\n")
-                newh.write("#define " + ele.sig_name.data +
-                           create_tabs(ele.sig_name.data) +
-                           "_VECTOR(" + key + ")\n")
-                for x in ele.alt_name.data:
-                    newh.write("#define " + x +
-                               create_tabs(x) + "_VECTOR(" + key + ")\n\n")
-                try:
-                    if type(devname) is TupleType:
-                        for d in devname:
-                            docs[ele.sig_name.data][2].append(d)
-                    else:
-                        docs[ele.sig_name.data][2].append(devname)
-                except KeyError:
-                    if type(devname) is TupleType:
-                        docs[ele.sig_name.data] = (ele.alt_name.data,
-                                                   ele.description.data,
-                                                   [])
-                        for d in devname:
-                            docs[ele.sig_name.data][2].append(d)
-                    else:
-                        docs[ele.sig_name.data] = (ele.alt_name.data,
-                                                   ele.description.data,
-                                                   [devname])
+            if firstidx == 0:
+                firstidx = idx
+            key = m.group(4)            # this is the vector number
+            ele = parseddev.interrupts[key]
+
+            lastidx = idx
+
+            if idx > 0 and lines[idx - 1].find(ele.description.data) >= 0:
+                # there is a /* description */ comment in the previous line,
+                # drop it
+                if idx - 1 < firstidx:
+                    firstidx = idx - 1
+
+            if re.match('^$', lines[idx + 1]):
+                # there is a blank line after the current one, drop it
+                lastidx = idx + 1
+
+    del lines[firstidx:lastidx]
+
+    # now, build a new vector table
+    keys = parseddev.interrupts.keys()
+    keys.sort(lambda x,y: cmp(int(x), int(y)))
+
+    vecttext = []
+    for key in keys:
+        ele = parseddev.interrupts[key]
+        if ele.name == 'NOT_USED':
+            # ATmega3250/6450 plug a `hole' that way
+            continue
+
+        if len(ele.description.data) > 0:
+            vecttext.append("/* " + ele.description.data + " */\n")
+        vecttext.append("#define " + ele.sig_name.data +
+                        create_tabs(ele.sig_name.data) +
+                        "_VECTOR(" + key + ")\n")
+        try:
+            for x in ele.alt_name.data:
+                vecttext.append("#define " + x +
+                                create_tabs(x) + "_VECTOR(" + key + ")\n")
+        except AttributeError:
+            # no alt_name present
+            pass
+        vecttext.append('\n')
+
+        # collect documentation for this vector
+        try:
+            if type(devname) is TupleType:
+                for d in devname:
+                    docs[ele.sig_name.data][2].append(d)
             else:
-                newh.write(line)
-        else:
-            newh.write(line)
-        lastline = line
+                docs[ele.sig_name.data][2].append(devname)
+        except KeyError:
+            if type(devname) is TupleType:
+                docs[ele.sig_name.data] = (ele.alt_name.data,
+                                           ele.description.data,
+                                           [])
+                for d in devname:
+                    docs[ele.sig_name.data][2].append(d)
+            else:
+                docs[ele.sig_name.data] = (ele.alt_name.data,
+                                           ele.description.data,
+                                           [devname])
+
+    # insert new vector table
+    lines.insert(firstidx, vecttext)
+
+    newh = open(header, "w")
+    for line in lines:
+        newh.writelines(line)
     newh.close()
     print "done."
 
