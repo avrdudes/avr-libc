@@ -34,6 +34,7 @@
 #
 
 import string
+import re
 from xml.parsers import expat
 
 class Element:
@@ -142,6 +143,7 @@ class Xml2Obj:
     def CharacterData(self,data):
         'SAX character data event handler'
         if string.strip(data):
+            data = data.replace('&', '&amp;')
             data = data.encode(Xml2Obj.encoding)
             element = self.nodeStack[-1]
             element.cdata += data
@@ -239,9 +241,10 @@ def dump_memory_sizes (root):
         xsram_start, xsram_size)
     print '  </memory_sizes>'
 
-def dump_vectors (root):
+def dump_vectors (root, tradnames):
     """Get the interupt vectors.
     """
+
     path = [ 'AVRPART', 'INTERRUPT_VECTOR' ]
 
     irqs = root.getSubTree (path)
@@ -250,7 +253,12 @@ def dump_vectors (root):
 
     vectors = []
     for i in range (1, nvects+1):
-        vect = irqs.getElements ('VECTOR%d' % (i))[0]
+        try:
+            vect = irqs.getElements ('VECTOR%d' % (i))[0]
+        except IndexError:
+            # some devices have holes in the vector table =:-)
+            vectors.append(())
+            continue
 
         name = vect.getElements ('SOURCE')[0].getData ()
         saddr = vect.getElements ('PROGRAM_ADDRESS')[0].getData ()
@@ -267,10 +275,27 @@ def dump_vectors (root):
                                                             nvects)
     n = 0
     for v in vectors:
-        print '    <vector addr="0x%04x" num="%d" name="%s">' % (v[0], n, v[1])
-        print_wrapped ('      ', '<description>%s</description>' % (v[2]))
-        print '      <sig_name></sig_name>'
-        print '    </vector>'
+        # we are not really interested in the reset vector
+        if n == 0:
+            n += 1
+            continue
+        try:
+            name = re.sub('[/,-]', '', v[1].upper())
+            name = re.sub(r'\s+', '_', name)
+            if re.match('^[A-Z0-9_]+$', name):
+                pass
+            else:
+                raise 'Invalid characters in vector name even after substitution', name
+
+            print '    <vector addr="0x%04x" num="%d" name="%s">' % (v[0], n, v[1])
+            print_wrapped ('      ', '<description>%s</description>' % (v[2]))
+            print '      <sig_name>%s_vect</sig_name>' % name
+            for altname in tradnames.Vecname(n):
+                print '      <alt_name>%s</alt_name>' % altname
+            print '    </vector>'
+        except IndexError:
+            # this catches holes in the vector table
+            pass
         n += 1
     print '  </interrupts>'
 
@@ -340,6 +365,7 @@ def dump_ioregs (root):
                 reg_desc = ''
         except KeyError:
             reg_info = None
+            reg_desc = ''
 
         addr = ioreg.getElements ('IO_ADDR')[0].getData ()
         if addr[0] == '$':
@@ -389,41 +415,52 @@ def dump_boot_info (root):
     info = root.getSubTree (path)
     if info:
         # The device has bootloader support.
-        
-        data = info.getElements ('NRWW_START_ADDR')[0].getData ()
-        if data[0] == '$':
-            data = '0x' + data[1:]
-        if data == 'x':
+        try:
+            data = info.getElements ('NRWW_START_ADDR')[0].getData ()
+            if data[0] == '$':
+                data = '0x' + data[1:]
+            if data == 'x':
+                nrww_start = ''
+            else:
+                nrww_start = ' nrww_start="0x%x"' % (int (data, 16))
+        except IndexError:
             nrww_start = ''
-        else:
-            nrww_start = ' nrww_start="0x%x"' % (int (data, 16))
-        
-        data = info.getElements ('NRWW_STOP_ADDR')[0].getData ()
-        if data[0] == '$':
-            data = '0x' + data[1:]
-        if data == 'x':
-            nrww_end = ''
-        else:
-            nrww_end = ' nrww_end="0x%x"' % (int (data, 16))
-        
-        data = info.getElements ('RWW_START_ADDR')[0].getData ()
-        if data[0] == '$':
-            data = '0x' + data[1:]
-        if data == 'x':
-            rww_start = ''
-        else:
-            rww_start = ' rww_start="0x%x"' % (int (data, 16))
 
-        data = info.getElements ('RWW_STOP_ADDR')[0].getData ()
-        if data[0] == '$':
-            data = '0x' + data[1:]
-        if data == 'x':
+        try:
+            data = info.getElements ('NRWW_STOP_ADDR')[0].getData ()
+            if data[0] == '$':
+                data = '0x' + data[1:]
+            if data == 'x':
+                nrww_end = ''
+            else:
+                nrww_end = ' nrww_end="0x%x"' % (int (data, 16))
+        except IndexError:
+            nrww_end = ''
+
+        try:
+            data = info.getElements ('RWW_START_ADDR')[0].getData ()
+            if data[0] == '$':
+                data = '0x' + data[1:]
+            try:
+                rww_start = ' rww_start="0x%x"' % (int (data, 16))
+            except ValueError:
+                rww_start = ''
+        except IndexError:
+            rww_start = ''
+
+        try:
+            data = info.getElements ('RWW_STOP_ADDR')[0].getData ()
+            if data[0] == '$':
+                data = '0x' + data[1:]
+            try:
+                rww_end = ' rww_end="0x%x"' % (int (data, 16))
+            except ValueError:
+                rww_end = ''
+        except IndexError:
             rww_end = ''
-        else:
-            rww_end = ' rww_end="0x%x"' % (int (data, 16))
 
         # The Atmel files give the pagesize in words, we need it in bytes.
-        
+
         pagesize = 'pagesize="%d"' % ( \
             2 * int (info.getElements ('PAGESIZE')[0].getData ()))
 
@@ -454,15 +491,47 @@ def dump_boot_info (root):
 
         print '  </bootloader>'
 
+class HeaderToVec:
+    'Parse header file for traditional vector names'
+
+    def __init__(self):
+        self.vects = {}
+
+    def Read(self, fname):
+        'Read header file'
+        f = open(fname)
+        r = re.compile(r'#\s*define\s+(SIG_[A-Z0-9_]+)\s+_VECTOR[(](\d+)[)]')
+        for line in f:
+            m = r.match(line)
+            if m != None:
+                intno = int(m.group(2))
+                try:
+                    x = self.vects[intno]
+                except KeyError:
+                    x = []
+                x.append(m.group(1))
+                self.vects[intno] = x
+        f.close()
+
+    def Vecname(self, idx):
+        try:
+            return self.vects[idx]
+        except KeyError:
+            return ''
+
+
 if __name__ == '__main__':
     import sys
 
     parser = Xml2Obj()
     root = parser.Parse(sys.argv[1])
 
+    tradheader = HeaderToVec()
+    tradheader.Read(sys.argv[2])
+
     dump_header (root)
     dump_memory_sizes (root)
-    dump_vectors (root)
+    dump_vectors (root, tradheader)
     dump_ioregs (root)
     dump_boot_info (root)
     dump_footer (root)

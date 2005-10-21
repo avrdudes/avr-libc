@@ -80,8 +80,24 @@ class MemorySizes (XML_Mixin):
 class Vector (XML_Mixin):
     children = {
         'description': PCData,
-        'sig_name': PCData
+        'sig_name': PCData,
+        'alt_name': PCData
         }
+    def add_child (self, name, obj):
+        if name == "alt_name":
+            try:
+                x = getattr (self, name)
+                x.data.append(obj.data)
+                setattr (self, name, x)
+            except AttributeError:
+                x = obj.data
+                obj.data = [x]
+                self.xml_members.append (name)
+                setattr (self, name, obj)
+        else:
+            self.xml_members.append (name)
+            setattr (self, name, obj)
+
 
 class Interrupts (dict, XML_Mixin):
     children = {
@@ -130,10 +146,10 @@ class IORegisterDict (dict, XML_Mixin):
         XML_Mixin.__init__ (self, attrs)
 
     def add_child (self, name, obj):
-        # Use the IORegister 'addr' attr as the key for the child object.
-        if self.has_key (obj.addr):
+        # Use the IORegister 'name' attr as the key for the child object.
+        if self.has_key (obj.name):
             raise 'Duplicate io register entry', obj
-        self[obj.addr] = obj
+        self[obj.name] = obj
 
 class BootMode (XML_Mixin):
     pass
@@ -214,7 +230,8 @@ class DescHandler (ContentHandler):
         self.get_curr_obj().characters (ch)
 
     def endDocument (self):
-        print self.dev
+        #print self.dev
+        pass
 
 if __name__ == '__main__':
     parser = make_parser ()
@@ -222,4 +239,17 @@ if __name__ == '__main__':
     handler = DescHandler ()
     parser.setContentHandler (handler)
 
-    parser.parse (open ('desc-90s1200.xml'))
+    if len(sys.argv) > 1:
+        parser.parse (open (sys.argv[1]))
+    else:
+        parser.parse (open ('desc-90s1200.xml'))
+
+    l = parser.getContentHandler().dev.interrupts.keys()
+    l.sort(lambda x, y: cmp(int(x), int(y)))
+    for key in l:
+        ele = parser.getContentHandler().dev.interrupts[key]
+        print "/* " + ele.description.data + " */"
+        print "#define " + ele.sig_name.data + "\t_VECTOR(" + key + ")"
+        for x in ele.alt_name.data:
+            print "#define " + x + "\t_VECTOR(" + key + ")"
+        print ""

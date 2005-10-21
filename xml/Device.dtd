@@ -85,7 +85,8 @@ to our generated xml files before we can use them to generate our headers.
         >
         <!ELEMENT vector (
             description?,
-            sig_name
+            sig_name,
+	    alt_name*
         )>
             <!ATTLIST vector
                 addr CDATA #REQUIRED
