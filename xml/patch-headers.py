@@ -227,6 +227,9 @@ for header in nlist:
                 # there is a blank line after the current one, drop it
                 lastidx = idx + 1
 
+    while re.match('^$', lines[lastidx]):
+        lastidx += 1
+
     del lines[firstidx:lastidx]
 
     # now, build a new vector table
