@@ -333,6 +333,9 @@ print """/* Note: this file has been automatically generated. */
    POSSIBILITY OF SUCH DAMAGE. */
 """ % (time.localtime()[0], user)
 
+# avoid CVS munging with this here in the script
+print '/* $Id' + '$ */\n'
+
 print '''
 /** \\addtogroup avr_interrupts
 
