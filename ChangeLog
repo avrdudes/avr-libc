@@ -1,5 +1,12 @@
 2005-10-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* xml/Desc-parser.py: rename to Descparser.py, as Python
+	doesn't like dashes in file names that are to be used as
+	a module name.
+	* xml/Descparser.py: new (cloned) file.
+
+2005-10-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* xml/Atmel2libc.py: correctly escape & in output, don't
 	bail out if the device has holes in the vector table,
 	map out illegal characters when constructing a vector's
