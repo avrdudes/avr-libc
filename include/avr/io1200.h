@@ -114,9 +114,18 @@
 
 /* Interrupt vectors */
 
-#define SIG_INTERRUPT0		_VECTOR(1)
-#define SIG_OVERFLOW0		_VECTOR(2)
-#define SIG_COMPARATOR		_VECTOR(3)
+/* External Interrupt 0 */
+#define INT0_vect			_VECTOR(1)
+#define SIG_INTERRUPT0			_VECTOR(1)
+
+/* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect			_VECTOR(2)
+#define SIG_OVERFLOW0			_VECTOR(2)
+
+/* Analog Comparator */
+#define ANA_COMP_vect			_VECTOR(3)
+#define SIG_COMPARATOR			_VECTOR(3)
+
 
 #define _VECTORS_SIZE 8
 

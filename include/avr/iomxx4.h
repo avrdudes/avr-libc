@@ -724,42 +724,126 @@
 
 /* Interrupt vectors */
 /* Vector 0 is the reset vector */
-#define SIG_INTERRUPT0		_VECTOR(1)
-#define SIG_INTERRUPT1		_VECTOR(2)
-#define SIG_INTERRUPT2		_VECTOR(3)
-#define SIG_PIN_CHANGE0		_VECTOR(4)
-#define SIG_PIN_CHANGE1		_VECTOR(5)
-#define SIG_PIN_CHANGE2		_VECTOR(6)
-#define SIG_PIN_CHANGE3		_VECTOR(7)
-#define SIG_WATCHDOG_TIMEOUT	_VECTOR(8)
-#define SIG_OUTPUT_COMPARE2A	_VECTOR(9)
-#define SIG_OUTPUT_COMPARE2B	_VECTOR(10)
-#define SIG_OVERFLOW2		_VECTOR(11)
-#define SIG_INPUT_CAPTURE1	_VECTOR(12)
-#define SIG_OUTPUT_COMPARE1A	_VECTOR(13)
-#define SIG_OUTPUT_COMPARE1B	_VECTOR(14)
-#define SIG_OVERFLOW1		_VECTOR(15)
-#define SIG_OUTPUT_COMPARE0A	_VECTOR(16)
-#define SIG_OUTPUT_COMPARE0B	_VECTOR(17)
-#define SIG_OVERFLOW0		_VECTOR(18)
-#define SIG_SPI			_VECTOR(19)
-#define SIG_USART_RECV		_VECTOR(20)
-#define SIG_USART_DATA		_VECTOR(21)
-#define SIG_USART_TRANS		_VECTOR(22)
-#define SIG_COMPARATOR		_VECTOR(23)
-#define SIG_ADC			_VECTOR(24)
-#define SIG_EEPROM_READY	_VECTOR(25)
-#define SIG_TWI			_VECTOR(26)
-#define SIG_SPM_READY		_VECTOR(27)
+/* External Interrupt Request 0 */
+#define INT0_vect			_VECTOR(1)
+#define SIG_INTERRUPT0			_VECTOR(1)
 
-#if defined(__AVR_ATmega644__)
+/* External Interrupt Request 1 */
+#define INT1_vect			_VECTOR(2)
+#define SIG_INTERRUPT1			_VECTOR(2)
 
-# define _VECTORS_SIZE 112
+/* External Interrupt Request 2 */
+#define INT2_vect			_VECTOR(3)
+#define SIG_INTERRUPT2			_VECTOR(3)
 
-#else /* !defined(__AVR_ATmega644__) */
-# define SIG_USART1_RECV	_VECTOR(28)
-# define SIG_USART1_DATA	_VECTOR(29)
-# define SIG_USART1_TRANS	_VECTOR(30)
+/* Pin Change Interrupt Request 0 */
+#define PCINT0_vect			_VECTOR(4)
+#define SIG_PIN_CHANGE0			_VECTOR(4)
+
+/* Pin Change Interrupt Request 1 */
+#define PCINT1_vect			_VECTOR(5)
+#define SIG_PIN_CHANGE1			_VECTOR(5)
+
+/* Pin Change Interrupt Request 2 */
+#define PCINT2_vect			_VECTOR(6)
+#define SIG_PIN_CHANGE2			_VECTOR(6)
+
+/* Pin Change Interrupt Request 3 */
+#define PCINT3_vect			_VECTOR(7)
+#define SIG_PIN_CHANGE3			_VECTOR(7)
+
+/* Watchdog Time-out Interrupt */
+#define WDT_vect			_VECTOR(8)
+#define SIG_WATCHDOG_TIMEOUT		_VECTOR(8)
+
+/* Timer/Counter2 Compare Match A */
+#define TIMER2_COMPA_vect		_VECTOR(9)
+#define SIG_OUTPUT_COMPARE2A		_VECTOR(9)
+
+/* Timer/Counter2 Compare Match B */
+#define TIMER2_COMPB_vect		_VECTOR(10)
+#define SIG_OUTPUT_COMPARE2B		_VECTOR(10)
+
+/* Timer/Counter2 Overflow */
+#define TIMER2_OVF_vect			_VECTOR(11)
+#define SIG_OVERFLOW2			_VECTOR(11)
+
+/* Timer/Counter1 Capture Event */
+#define TIMER1_CAPT_vect		_VECTOR(12)
+#define SIG_INPUT_CAPTURE1		_VECTOR(12)
+
+/* Timer/Counter1 Compare Match A */
+#define TIMER1_COMPA_vect		_VECTOR(13)
+#define SIG_OUTPUT_COMPARE1A		_VECTOR(13)
+
+/* Timer/Counter1 Compare Match B */
+#define TIMER1_COMPB_vect		_VECTOR(14)
+#define SIG_OUTPUT_COMPARE1B		_VECTOR(14)
+
+/* Timer/Counter1 Overflow */
+#define TIMER1_OVF_vect			_VECTOR(15)
+#define SIG_OVERFLOW1			_VECTOR(15)
+
+/* Timer/Counter0 Compare Match A */
+#define TIMER0_COMPA_vect		_VECTOR(16)
+#define SIG_OUTPUT_COMPARE0A		_VECTOR(16)
+
+/* Timer/Counter0 Compare Match B */
+#define TIMER0_COMPB_vect		_VECTOR(17)
+#define SIG_OUTPUT_COMPARE0B		_VECTOR(17)
+
+/* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect			_VECTOR(18)
+#define SIG_OVERFLOW0			_VECTOR(18)
+
+/* SPI Serial Transfer Complete */
+#define SPI_STC_vect			_VECTOR(19)
+#define SIG_SPI				_VECTOR(19)
+
+/* USART0, Rx Complete */
+#define USART0_RX_vect			_VECTOR(20)
+#define SIG_USART_RECV			_VECTOR(20)
+
+/* USART0 Data register Empty */
+#define USART0_UDRE_vect		_VECTOR(21)
+#define SIG_USART_DATA			_VECTOR(21)
+
+/* USART0, Tx Complete */
+#define USART0_TX_vect			_VECTOR(22)
+#define SIG_USART_TRANS			_VECTOR(22)
+
+/* Analog Comparator */
+#define ANALOG_COMP_vect		_VECTOR(23)
+#define SIG_COMPARATOR			_VECTOR(23)
+
+/* ADC Conversion Complete */
+#define ADC_vect			_VECTOR(24)
+#define SIG_ADC				_VECTOR(24)
+
+/* EEPROM Ready */
+#define EE_READY_vect			_VECTOR(25)
+#define SIG_EEPROM_READY		_VECTOR(25)
+
+/* 2-wire Serial Interface */
+#define TWI_vect			_VECTOR(26)
+#define SIG_TWI				_VECTOR(26)
+
+/* Store Program Memory Read */
+#define SPM_READY_vect			_VECTOR(27)
+#define SIG_SPM_READY			_VECTOR(27)
+
+/* USART1, Rx Complete */
+#define USART1_RX_vect			_VECTOR(28)
+#define SIG_USART1_RECV			_VECTOR(28)
+
+/* USART1 Data register Empty */
+#define USART1_UDRE_vect		_VECTOR(29)
+#define SIG_USART1_DATA			_VECTOR(29)
+
+/* USART1, Tx Complete */
+#define USART1_TX_vect			_VECTOR(30)
+#define SIG_USART1_TRANS		_VECTOR(30)
+
 
 # define _VECTORS_SIZE 124
 

@@ -208,22 +208,70 @@
 
 /* Interrupt vectors */
 
-#define SIG_INTERRUPT0          _VECTOR(1)
-#define SIG_INTERRUPT1          _VECTOR(2)
-#define SIG_INPUT_CAPTURE1      _VECTOR(3)
-#define SIG_OUTPUT_COMPARE1A    _VECTOR(4)
-#define SIG_OUTPUT_COMPARE1B    _VECTOR(5)
-#define SIG_OVERFLOW1           _VECTOR(6)
-#define SIG_OVERFLOW0           _VECTOR(7)
-#define SIG_SPI                 _VECTOR(8)
-#define SIG_UART_RECV           _VECTOR(9)
-#define SIG_UART_DATA           _VECTOR(10)
-#define SIG_UART_TRANS          _VECTOR(11)
-#define SIG_COMPARATOR          _VECTOR(12)
-#define SIG_INTERRUPT2          _VECTOR(13)
-#define SIG_OUTPUT_COMPARE0     _VECTOR(14)
-#define SIG_EEPROM_READY        _VECTOR(15)
-#define SIG_SPM_READY           _VECTOR(16)
+/* External Interrupt Request 0 */
+#define INT0_vect			_VECTOR(1)
+#define SIG_INTERRUPT0			_VECTOR(1)
+
+/* External Interrupt Request 1 */
+#define INT1_vect			_VECTOR(2)
+#define SIG_INTERRUPT1			_VECTOR(2)
+
+/* Timer/Counter1 Capture Event */
+#define TIMER1_CAPT_vect		_VECTOR(3)
+#define SIG_INPUT_CAPTURE1		_VECTOR(3)
+
+/* Timer/Counter1 Compare Match A */
+#define TIMER1_COMPA_vect		_VECTOR(4)
+#define SIG_OUTPUT_COMPARE1A		_VECTOR(4)
+
+/* Timer/Counter1 Compare MatchB */
+#define TIMER1_COMPB_vect		_VECTOR(5)
+#define SIG_OUTPUT_COMPARE1B		_VECTOR(5)
+
+/* Timer/Counter1 Overflow */
+#define TIMER1_OVF_vect			_VECTOR(6)
+#define SIG_OVERFLOW1			_VECTOR(6)
+
+/* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect			_VECTOR(7)
+#define SIG_OVERFLOW0			_VECTOR(7)
+
+/* Serial Transfer Complete */
+#define SPISTC_vect			_VECTOR(8)
+#define SIG_SPI				_VECTOR(8)
+
+/* UART, Rx Complete */
+#define UARTRX_vect			_VECTOR(9)
+#define SIG_UART_RECV			_VECTOR(9)
+
+/* UART Data Register Empty */
+#define UARTUDRE_vect			_VECTOR(10)
+#define SIG_UART_DATA			_VECTOR(10)
+
+/* UART, Tx Complete */
+#define UART_TX_vect			_VECTOR(11)
+#define SIG_UART_TRANS			_VECTOR(11)
+
+/* Analog Comparator */
+#define ANA_COMP_vect			_VECTOR(12)
+#define SIG_COMPARATOR			_VECTOR(12)
+
+/* External Interrupt Request 2 */
+#define INT2_vect			_VECTOR(13)
+#define SIG_INTERRUPT2			_VECTOR(13)
+
+/* Timer 0 Compare Match */
+#define TIMER0_COMP_vect		_VECTOR(14)
+#define SIG_OUTPUT_COMPARE0		_VECTOR(14)
+
+/* EEPROM Ready */
+#define EE_RDY_vect			_VECTOR(15)
+#define SIG_EEPROM_READY		_VECTOR(15)
+
+/* Store Program Memory Ready */
+#define SPM_RDY_vect			_VECTOR(16)
+#define SIG_SPM_READY			_VECTOR(16)
+
 
 #define _VECTORS_SIZE 34
 

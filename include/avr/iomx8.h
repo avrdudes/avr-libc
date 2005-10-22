@@ -619,31 +619,106 @@ must be defined for the mega48.
 
 /* Interrupt vectors */
 
-#define SIG_INTERRUPT0          _VECTOR(1)
-#define SIG_INTERRUPT1          _VECTOR(2)
-#define SIG_PIN_CHANGE0         _VECTOR(3)
-#define SIG_PIN_CHANGE1         _VECTOR(4)
-#define SIG_PIN_CHANGE2         _VECTOR(5)
-#define SIG_WATCHDOG_TIMEOUT    _VECTOR(6)
-#define SIG_OUTPUT_COMPARE2A    _VECTOR(7)
-#define SIG_OUTPUT_COMPARE2B    _VECTOR(8)
-#define SIG_OVERFLOW2           _VECTOR(9)
-#define SIG_INPUT_CAPTURE1      _VECTOR(10)
-#define SIG_OUTPUT_COMPARE1A    _VECTOR(11)
-#define SIG_OUTPUT_COMPARE1B    _VECTOR(12)
-#define SIG_OVERFLOW1           _VECTOR(13)
-#define SIG_OUTPUT_COMPARE0A    _VECTOR(14)
-#define SIG_OUTPUT_COMPARE0B    _VECTOR(15)
-#define SIG_OVERFLOW0           _VECTOR(16)
-#define SIG_SPI                 _VECTOR(17)
-#define SIG_USART_RECV          _VECTOR(18)
-#define SIG_USART_DATA          _VECTOR(19)
-#define SIG_USART_TRANS         _VECTOR(20)
-#define SIG_ADC                 _VECTOR(21)
-#define SIG_EEPROM_READY        _VECTOR(22)
-#define SIG_COMPARATOR          _VECTOR(23)
-#define SIG_TWI                 _VECTOR(24)
-#define SIG_SPM_READY           _VECTOR(25)
+/* External Interrupt Request 0 */
+#define INT0_vect			_VECTOR(1)
+#define SIG_INTERRUPT0			_VECTOR(1)
+
+/* External Interrupt Request 1 */
+#define INT1_vect			_VECTOR(2)
+#define SIG_INTERRUPT1			_VECTOR(2)
+
+/* Pin Change Interrupt Request 0 */
+#define PCINT0_vect			_VECTOR(3)
+#define SIG_PIN_CHANGE0			_VECTOR(3)
+
+/* Pin Change Interrupt Request 0 */
+#define PCINT1_vect			_VECTOR(4)
+#define SIG_PIN_CHANGE1			_VECTOR(4)
+
+/* Pin Change Interrupt Request 1 */
+#define PCINT2_vect			_VECTOR(5)
+#define SIG_PIN_CHANGE2			_VECTOR(5)
+
+/* Watchdog Time-out Interrupt */
+#define WDT_vect			_VECTOR(6)
+#define SIG_WATCHDOG_TIMEOUT		_VECTOR(6)
+
+/* Timer/Counter2 Compare Match A */
+#define TIMER2_COMPA_vect		_VECTOR(7)
+#define SIG_OUTPUT_COMPARE2A		_VECTOR(7)
+
+/* Timer/Counter2 Compare Match A */
+#define TIMER2_COMPB_vect		_VECTOR(8)
+#define SIG_OUTPUT_COMPARE2B		_VECTOR(8)
+
+/* Timer/Counter2 Overflow */
+#define TIMER2_OVF_vect			_VECTOR(9)
+#define SIG_OVERFLOW2			_VECTOR(9)
+
+/* Timer/Counter1 Capture Event */
+#define TIMER1_CAPT_vect		_VECTOR(10)
+#define SIG_INPUT_CAPTURE1		_VECTOR(10)
+
+/* Timer/Counter1 Compare Match A */
+#define TIMER1_COMPA_vect		_VECTOR(11)
+#define SIG_OUTPUT_COMPARE1A		_VECTOR(11)
+
+/* Timer/Counter1 Compare Match B */
+#define TIMER1_COMPB_vect		_VECTOR(12)
+#define SIG_OUTPUT_COMPARE1B		_VECTOR(12)
+
+/* Timer/Counter1 Overflow */
+#define TIMER1_OVF_vect			_VECTOR(13)
+#define SIG_OVERFLOW1			_VECTOR(13)
+
+/* TimerCounter0 Compare Match A */
+#define TIMER0_COMPA_vect		_VECTOR(14)
+#define SIG_OUTPUT_COMPARE0A		_VECTOR(14)
+
+/* TimerCounter0 Compare Match B */
+#define TIMER0_COMPB_vect		_VECTOR(15)
+#define SIG_OUTPUT_COMPARE0B		_VECTOR(15)
+
+/* Timer/Couner0 Overflow */
+#define TIMER0_OVF_vect			_VECTOR(16)
+#define SIG_OVERFLOW0			_VECTOR(16)
+
+/* SPI Serial Transfer Complete */
+#define SPI_STC_vect			_VECTOR(17)
+#define SIG_SPI				_VECTOR(17)
+
+/* USART Rx Complete */
+#define USART_RX_vect			_VECTOR(18)
+#define SIG_USART_RECV			_VECTOR(18)
+
+/* USART, Data Register Empty */
+#define USART_UDRE_vect			_VECTOR(19)
+#define SIG_USART_DATA			_VECTOR(19)
+
+/* USART Tx Complete */
+#define USART_TX_vect			_VECTOR(20)
+#define SIG_USART_TRANS			_VECTOR(20)
+
+/* ADC Conversion Complete */
+#define ADC_vect			_VECTOR(21)
+#define SIG_ADC				_VECTOR(21)
+
+/* EEPROM Ready */
+#define EE_READY_vect			_VECTOR(22)
+#define SIG_EEPROM_READY		_VECTOR(22)
+
+/* Analog Comparator */
+#define ANALOG_COMP_vect		_VECTOR(23)
+#define SIG_COMPARATOR			_VECTOR(23)
+
+/* Two-wire Serial Interface */
+#define TWI_vect			_VECTOR(24)
+#define SIG_TWI				_VECTOR(24)
+
+/* Store Program Memory Read */
+#define SPM_READY_vect			_VECTOR(25)
+#define SIG_SPM_READY			_VECTOR(25)
+
 
 /* The mega48 and mega88 vector tables are single instruction entries (16 bits
    per entry for an RJMP) while the mega168 table has double instruction
