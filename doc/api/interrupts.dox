@@ -27,7 +27,7 @@
 
 /** \defgroup avr_interrupts <avr/interrupt.h> <avr/signal.h>: Interrupts and Signals
 
-\note This discussion of interrupts and signals was taken from Rich Neswold's
+\note This discussion of interrupts and signals was originally taken from Rich Neswold's
 document. See \ref acks.
 
 <h3>Introduction to avr-libc's interrupt handling</h3>
@@ -58,7 +58,7 @@ following is an example definition of a handler for the ADC interrupt.
 \code
 #include <avr/signal.h>
 
-SIGNAL(SIG_ADC)
+SIGNAL(ADC_vect)
 {
     // user code here
 }
@@ -116,12 +116,27 @@ void SIG_XXX(void) {
 where \c SIG_XXX is the name of a valid interrupt vector for the MCU
 type in question, as explained below.
 
-<h3>Chosing the vector: Signal names</h3>
+<h3>Chosing the vector: Interrupt vector names</h3>
 
 The interrupt is chosen by supplying one of the symbols in following table.
-Note that every AVR device has a different interrupt vector table so some
-signals might not be available. Check the data sheet for the device you are
-using.
+
+There are currently two different styles present for naming the
+vectors.  One form uses names starting with \c SIG_, followed by
+a relatively verbose but arbitrarily chosen name describing the
+interrupt vector.  This has been the only available style in
+avr-libc up to version 1.2.x.
+
+Starting with avr-libc version 1.4.0, a second style of interrupt
+vector names has been added, where a short phrase for the vector
+description is followed by \c _vect.  The short phrase matches the
+vector name as described in the datasheet of the respective device
+(and in Atmel's XML files), with spaces replaced by an underscore
+and other non-alphanumeric characters dropped.  Using the suffix
+\c _vect is intented to improve portability to other C compilers
+available for the AVR that use a similar naming convention.
+
+The historical naming style might become deprecated in a future
+release, so it is not recommended for new projects.
 
 \note The SIGNAL() macro cannot really spell-check
 the argument passed to them.  Thus, by misspelling one of the names
@@ -131,288 +146,5 @@ actually wired into the interrupt vector table.  The compiler will
 generate a warning if it detects a suspiciously looking name of a
 SIGNAL() function (i.e. one that after macro replacement does not
 start with "__vector_").
-
-\anchor avr_signames
-<small>
-<table>
-  <tr>
-    <td><b>Signal Name</b></td>
-    <td><b>Description</b></td>
-  </tr>
-  <tr>
-    <td>SIG_2WIRE_SERIAL</td>
-    <td>2-wire serial interface (aka. I²C [tm])</td>
-  </tr>
-  <tr>
-    <td>SIG_ADC</td>
-    <td>ADC Conversion complete</td>
-  </tr>
-  <tr>
-    <td>SIG_COMPARATOR</td>
-    <td>Analog Comparator Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_EEPROM_READY</td>
-    <td>Eeprom ready</td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT0</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT1</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT2</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT3</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT4</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT5</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT6</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT7</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT8</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT9</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT10</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT11</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT12</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT13</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT14</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_FPGA_INTERRUPT15</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_INPUT_CAPTURE1</td>
-    <td>Input Capture1 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_INPUT_CAPTURE3</td>
-    <td>Input Capture3 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT0</td>
-    <td>External Interrupt0</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT1</td>
-    <td>External Interrupt1</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT2</td>
-    <td>External Interrupt2</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT3</td>
-    <td>External Interrupt3</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT4</td>
-    <td>External Interrupt4</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT5</td>
-    <td>External Interrupt5</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT6</td>
-    <td>External Interrupt6</td>
-  </tr>
-  <tr>
-    <td>SIG_INTERRUPT7</td>
-    <td>External Interrupt7</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE0</td>
-    <td>Output Compare0 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE1A</td>
-    <td>Output Compare1(A) Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE1B</td>
-    <td>Output Compare1(B) Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE1C</td>
-    <td>Output Compare1(C) Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE2</td>
-    <td>Output Compare2 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE3A</td>
-    <td>Output Compare3(A) Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE3B</td>
-    <td>Output Compare3(B) Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OUTPUT_COMPARE3C</td>
-    <td>Output Compare3(C) Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OVERFLOW0</td>
-    <td>Overflow0 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OVERFLOW1</td>
-    <td>Overflow1 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OVERFLOW2</td>
-    <td>Overflow2 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_OVERFLOW3</td>
-    <td>Overflow3 Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_PIN</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_PIN_CHANGE0</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_PIN_CHANGE1</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_RDMAC</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_SPI</td>
-    <td>SPI Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_SPM_READY</td>
-    <td>Store program memory ready</td>
-  </tr>
-  <tr>
-    <td>SIG_SUSPEND_RESUME</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_TDMAC</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_UART0</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_UART0_DATA</td>
-    <td>UART(0) Data Register Empty Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART0_RECV</td>
-    <td>UART(0) Receive Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART0_TRANS</td>
-    <td>UART(0) Transmit Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART1</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>SIG_UART1_DATA</td>
-    <td>UART(1) Data Register Empty Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART1_RECV</td>
-    <td>UART(1) Receive Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART1_TRANS</td>
-    <td>UART(1) Transmit Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART_DATA</td>
-    <td>UART Data Register Empty Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART_RECV</td>
-    <td>UART Receive Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_UART_TRANS</td>
-    <td>UART Transmit Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_USART0_DATA</td>
-    <td>USART(0) Data Register Empty Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_USART0_RECV</td>
-    <td>USART(0) Receive Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_USART0_TRANS</td>
-    <td>USART(0) Transmit Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_USART1_DATA</td>
-    <td>USART(1) Data Register Empty Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_USART1_RECV</td>
-    <td>USART(1) Receive Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_USART1_TRANS</td>
-    <td>USART(1) Transmit Complete Interrupt</td>
-  </tr>
-  <tr>
-    <td>SIG_USB_HW</td>
-    <td></td>
-  </tr>
-</table>
-
-</small>
 
 */

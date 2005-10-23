@@ -155,9 +155,9 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
 	cd latex_src && \
-		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|l|l|}/' \
+		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|p{1.7cm}|p{1.7cm}|p{2cm}|p{5cm}|}/' \
 		-e '/TabularC/s/TabularC/longtable/' \
-		-e '/Signal Name/s/\\\\\\hline/\\endhead\\hline/' \
+		-e '/Vector name/,/^[^ ]/s/\\\\\\hline/\\endhead\\hline/' \
 		group__avr__interrupts.tex > tmp.$$ && \
 		mv -f tmp.$$ group__avr__interrupts.tex
 	cd latex_src && \
@@ -175,9 +175,9 @@ latex_pdf_src/refman.tex: doxygen-pdf.config $(IMAGE_EPS)
 		refman.tex > tmp.$$ && \
 		mv -f tmp.$$ refman.tex
 	cd latex_pdf_src && \
-		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|l|l|}/' \
+		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|p{1.7cm}|p{1.7cm}|p{2cm}|p{5cm}|}/' \
 		-e '/TabularC/s/TabularC/longtable/' \
-		-e '/Signal Name/s/\\\\\\hline/\\endhead\\hline/' \
+		-e '/Vector name/,/^[^ ]/s/\\\\\\hline/\\endhead\\hline/' \
 		group__avr__interrupts.tex > tmp.$$ && \
 		mv -f tmp.$$ group__avr__interrupts.tex
 	cd latex_pdf_src && \

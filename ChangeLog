@@ -1,5 +1,17 @@
 2005-10-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: bump version.
+	* include/avr/iomxx0_1.h: Fix some lost #ifdefs.
+	* include/avr/iomxx4.h: Fix some lost #ifdefs.
+	* doc/api/interrupts.dox: Document we now have two styles
+	of interrupt vector names; omit the hardcoded table of
+	vector names.
+	* doc/api/vectortable.dox: New file, automatically generated
+	by xml/patch-headers.py.
+	* doc/api/Makefile.am: tweak for new vector table.
+
+2005-10-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/io1200.h: add new (XXX_vect) vector names.
 	* include/avr/io2313.h: (Ditto.)
 	* include/avr/io2323.h: (Ditto.)

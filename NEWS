@@ -6,6 +6,13 @@
     removed in a future version.  Use __attribute__((interrupt))
     explicitly if this functionality is really needed.
 
+  - A new set of interrupt vector names has been added, closely
+    matching the names given in the datasheet, and more compatible to
+    other compilers available for the AVR platform.  The table of
+    interrupt vector names in the documentation is now automatically
+    generated, and explicitly mentions the MCU type for each vector
+    name.
+
   - The standard IO facilities API has been enhanced
 
     . The backend functions put and get that are passed to fdevopen()
