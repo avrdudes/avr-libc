@@ -1339,9 +1339,11 @@
 #define PCINT1_vect			_VECTOR(10)
 #define SIG_PIN_CHANGE1			_VECTOR(10)
 
+#if defined(__ATmegaxx0__)
 /* Pin Change Interrupt Request 2 */
 #define PCINT2_vect			_VECTOR(11)
 #define SIG_PIN_CHANGE2			_VECTOR(11)
+#endif /* __ATmegaxx0__ */
 
 /* Watchdog Time-out Interrupt */
 #define WDT_vect			_VECTOR(12)
@@ -1459,9 +1461,11 @@
 #define SPM_READY_vect			_VECTOR(40)
 #define SIG_SPM_READY			_VECTOR(40)
 
+#if defined(__ATmegaxx0__)
 /* Timer/Counter4 Capture Event */
 #define TIMER4_CAPT_vect		_VECTOR(41)
 #define SIG_INPUT_CAPTURE4		_VECTOR(41)
+#endif /* __ATmegaxx0__ */
 
 /* Timer/Counter4 Compare Match A */
 #define TIMER4_COMPA_vect		_VECTOR(42)
@@ -1479,9 +1483,11 @@
 #define TIMER4_OVF_vect			_VECTOR(45)
 #define SIG_OVERFLOW4			_VECTOR(45)
 
+#if defined(__ATmegaxx0__)
 /* Timer/Counter5 Capture Event */
 #define TIMER5_CAPT_vect		_VECTOR(46)
 #define SIG_INPUT_CAPTURE5		_VECTOR(46)
+#endif /* __ATmegaxx0__ */
 
 /* Timer/Counter5 Compare Match A */
 #define TIMER5_COMPA_vect		_VECTOR(47)
@@ -1498,6 +1504,12 @@
 /* Timer/Counter5 Overflow */
 #define TIMER5_OVF_vect			_VECTOR(50)
 #define SIG_OVERFLOW5			_VECTOR(50)
+
+#if defined(__ATmegaxx1__)
+
+# define _VECTORS_SIZE 204
+
+#else
 
 /* USART2, Rx Complete */
 #define USART2_RX_vect			_VECTOR(51)

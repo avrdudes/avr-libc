@@ -832,6 +832,12 @@
 #define SPM_READY_vect			_VECTOR(27)
 #define SIG_SPM_READY			_VECTOR(27)
 
+#if defined(__AVR_ATmega644__)
+
+# define _VECTORS_SIZE 112
+
+#else /* !defined(__AVR_ATmega644__) */
+
 /* USART1, Rx Complete */
 #define USART1_RX_vect			_VECTOR(28)
 #define SIG_USART1_RECV			_VECTOR(28)
