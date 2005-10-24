@@ -1,3 +1,9 @@
+2005-10-24 Anatoly Sokolov <aesok@pautinka.net>
+
+	* devtools/gen-avr-lib-tree.sh: Change optimisation level for
+	building libraries for 'avr2' and 'avr4' architectures 
+	to 'CFLAGS_SPACE'.
+
 2005-10-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: bump version.
