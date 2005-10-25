@@ -1,3 +1,18 @@
+2005-10-25 Anatoly Sokolov <aesok@pautinka.net>
+
+	* configure.ac: add tests for the AT90CAN32/64 support
+	* devtools/gen-avr-lib-tree.sh: add support for AT90CAN32/64.
+	* include/avr/io.h: (Ditto.) 
+	* include/avr/wdt.h: (Ditto.)
+	* include/avr/iocan32.h: new file.
+	* include/avr/iocan64.h: new file.
+	* include/avr/iocan128.h: move SFR, bits and interupts definitions
+	from here ..
+	* include/avr/iocanxx.h: .. to here. new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for AT90CAN32/64.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2005-10-24 Anatoly Sokolov <aesok@pautinka.net>
 
 	* devtools/gen-avr-lib-tree.sh: Change optimisation level for

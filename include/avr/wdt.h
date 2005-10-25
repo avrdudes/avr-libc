@@ -121,6 +121,7 @@
 
 
 #if defined (__AVR_ATmega169__) || defined(__AVR_AT90CAN128__) \
+|| defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) \
 || defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
 || defined(__AVR_ATmega164__) \
 || defined(__AVR_ATmega165__) || defined(__AVR_ATmega168__) \

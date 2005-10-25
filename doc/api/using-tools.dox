@@ -108,6 +108,8 @@ compiler frontend.
   <tr><td>avr4</td><td>atmega88</td><td>__AVR_ATmega88__</td></tr>
   <tr><td>avr4</td><td>at90pwm2</td><td>__AVR_AT90PWM2__</td></tr>
   <tr><td>avr4</td><td>at90pwm3</td><td>__AVR_AT90PWM3__</td></tr>
+  <tr><td>avr5</td><td>at90can32</td><td>__AVR_AT90CAN32__</td></tr>
+  <tr><td>avr5</td><td>at90can64</td><td>__AVR_AT90CAN64__</td></tr>
   <tr><td>avr5</td><td>at90can128</td><td>__AVR_AT90CAN128__</td></tr>
   <tr><td>avr5</td><td>atmega128</td><td>__AVR_ATmega128__</td></tr>
   <tr><td>avr5</td><td>atmega1280</td><td>__AVR_ATmega1280__</td></tr>

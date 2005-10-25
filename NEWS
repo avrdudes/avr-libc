@@ -84,6 +84,7 @@
     several clarifications and additions.
   - Add support for the following new devices (depending on the ability
     of the compiler/binutils to handle them):
+    . AT90CAN32/64
     . AT90PWM2(B)/3(B)
     . ATmega329/3290/649/6490
     . ATtiny25/45/85

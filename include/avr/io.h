@@ -176,6 +176,10 @@
 #  include <avr/iom1280.h>
 #elif defined (__AVR_ATmega1281__)
 #  include <avr/iom1281.h>
+#elif defined (__AVR_AT90CAN32__)
+#  include <avr/iocan32.h>
+#elif defined (__AVR_AT90CAN64__)
+#  include <avr/iocan64.h>
 #elif defined (__AVR_AT90CAN128__)
 #  include <avr/iocan128.h>
 #elif defined (__AVR_ATmega64__)

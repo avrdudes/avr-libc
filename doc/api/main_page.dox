@@ -99,6 +99,8 @@ compile-time.
 - at90s8515
 - at90c8534
 - at90s8535
+- at90can32
+- at90can64
 - at90can128
 
 \par ATmega Type Devices:

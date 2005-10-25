@@ -1,4 +1,4 @@
-/* Copyright (c) 2004,2005, Colin O'Flynn <coflynn@newae.com>
+/* Copyright (c) 2004,2005, Anatoly Sokolov <aesok@pautinka.net>
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -30,10 +30,10 @@
 
 /* $Id$ */
 
-/* iocan128.h - definitions for CAN128 */
+/* iocan64.h - definitions for CAN64 */
 
-#ifndef _AVR_IOCAN128_H_
-#define _AVR_IOCAN128_H_ 1
+#ifndef _AVR_IOCAN64_H_
+#define _AVR_IOCAN64_H_ 1
 
 #include <avr/iocanxx.h>
 
@@ -41,7 +41,7 @@
 #define    SPM_PAGESIZE 256
 #define    RAMEND   0x10FF     /* Last On-Chip SRAM Location */
 #define    XRAMEND  0xFFFF
-#define    E2END    0x0FFF
-#define    FLASHEND 0x1FFFF
+#define    E2END    0x07FF
+#define    FLASHEND 0xFFFF
 
-#endif  /* _AVR_IOCAN128_H_ */
+#endif  /* _AVR_IOCAN64_H_ */
