@@ -1,3 +1,11 @@
+2005-10-26 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/string/strchr.S: Make labels local, add Id line, 
+	use movw when possible, use X_movw instead LOAD_Z.
+	* libc/string/strrchr.S: (Ditto.)
+	* libc/string/strstr.S: use movw when possible, 
+	use X_movw instead LOAD_X/LOAD_Z.
+
 2005-10-25 Anatoly Sokolov <aesok@pautinka.net>
 
 	* configure.ac: add tests for the AT90CAN32/64 support

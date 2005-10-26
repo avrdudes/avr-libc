@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define src_hi r25
@@ -55,23 +57,22 @@
 	.global	_U(strchr)
 	.type	_U(strchr), @function
 _U(strchr):
-	LOAD_Z(src_lo, src_hi)
-.strchr_loop:
+	X_movw	ZL, src_lo
+.L_strchr_loop:
 	ld	__tmp_reg__, Z+
 	cp	__tmp_reg__, val_lo
-	breq	.strchr_found
+	breq	.L_strchr_found
 	tst	__tmp_reg__
-	brne	.strchr_loop
+	brne	.L_strchr_loop
 ; not found, return NULL pointer
 	clr	ret_lo
 	clr	ret_hi
 	ret
-.strchr_found:
+.L_strchr_found:
 	sbiw	ZL, 1		; undo post-increment
-	mov	ret_lo, ZL	; XXX use movw if available
-	mov	ret_hi, ZH
+	X_movw	ret_lo, ZL
 	ret
-.strchr_end:
-	.size	_U(strchr), .strchr_end - _U(strchr)
+.L_strchr_end:
+	.size	_U(strchr), .L_strchr_end - _U(strchr)
 
 #endif /* not __DOXYGEN__ */

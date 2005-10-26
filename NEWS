@@ -106,6 +106,9 @@
   misc/ultoa
   string/memchr
   string/memccpy
+  string/strchr
+  string/strrchr
+  string/strstr
 
 *** Changes since avr-libc-1.2.4:
 

@@ -72,15 +72,15 @@
 .type _U(strstr), @function
 _U(strstr):
 
-	LOAD_X(s1_lo, s1_hi)
-	LOAD_Z(s2_lo, s2_hi)
+	X_movw	XL, s1_lo
+	X_movw	ZL, s2_lo
 	ld	chr2, Z+
 	tst	chr2		; is str2 empty?
 	brne	.L_findstart
 	ret			; return original string (req'd by standard)
 
 .L_findstart:
-	LOAD_Z(s2_lo, s2_hi)	; reset Z pointer
+	X_movw	ZL, s2_lo	; reset Z pointer
 	ld	chr2, Z+	; fetch first char
 
 .L_findstart_loop:		; Find first char
@@ -88,10 +88,7 @@ _U(strstr):
 	tst	chr1		; Is str1 @ end?
 	breq	.L_no_match	; then return
 	cp	chr1, chr2	; Is chr1 == chr2?
-
-	mov	ret_lo, XL	; store return value
-	mov	ret_hi, XH
-
+	X_movw	ret_lo, XL	; store return value
 	brne	.L_findstart_loop ; If, then start checking string
 
 .L_stringloop:
