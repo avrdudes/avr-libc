@@ -1,3 +1,9 @@
+2005-10-27 Anatoly Sokolov <aesok@pautinka.net>
+
+	* devtools/gen-avr-lib-tree.sh: Set optimisation for building
+	assembler sources files for 'avr3' and 'avr5' architectures 
+	to speed.
+
 2005-10-26 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/string/strchr.S: Make labels local, add Id line, 
