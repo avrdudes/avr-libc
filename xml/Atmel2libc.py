@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #
-# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2004,2005  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -280,7 +280,8 @@ def dump_vectors (root, tradnames):
             n += 1
             continue
         try:
-            name = re.sub('[/,-]', '', v[1].upper())
+            name = re.sub('[/-]', '', v[1].upper())
+            name = re.sub(',', ' ', name)
             name = re.sub(r'\s+', '_', name)
             if re.match('^[A-Z0-9_]+$', name):
                 pass
