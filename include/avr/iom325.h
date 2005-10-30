@@ -582,7 +582,6 @@
 #define SPM_READY_vect			_VECTOR(21)
 #define SIG_SPM_READY			_VECTOR(21)
 
-#define SIG_SPM_READY           _VECTOR(21)
 /* Vector 22 is Reserved */
 
 #define _VECTORS_SIZE 92

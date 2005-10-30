@@ -272,31 +272,31 @@
 #define SIG_OVERFLOW0			_VECTOR(11)
 
 /* Serial Transfer Complete */
-#define SPISTC_vect			_VECTOR(12)
+#define SPI_STC_vect			_VECTOR(12)
 #define SIG_SPI				_VECTOR(12)
 
 /* UART0, Rx Complete */
-#define UART0RX_vect			_VECTOR(13)
+#define UART0_RX_vect			_VECTOR(13)
 #define SIG_UART0_RECV			_VECTOR(13)
 
 /* UART1, Rx Complete */
-#define UART1RX_vect			_VECTOR(14)
+#define UART1_RX_vect			_VECTOR(14)
 #define SIG_UART1_RECV			_VECTOR(14)
 
 /* UART0 Data Register Empty */
-#define UART0UDRE_vect			_VECTOR(15)
+#define UART0_UDRE_vect			_VECTOR(15)
 #define SIG_UART0_DATA			_VECTOR(15)
 
 /* UART1 Data Register Empty */
-#define UART1UDRE_vect			_VECTOR(16)
+#define UART1_UDRE_vect			_VECTOR(16)
 #define SIG_UART1_DATA			_VECTOR(16)
 
 /* UART0, Tx Complete */
-#define UART0TX_vect			_VECTOR(17)
+#define UART0_TX_vect			_VECTOR(17)
 #define SIG_UART0_TRANS			_VECTOR(17)
 
 /* UART1, Tx Complete */
-#define UART1TX_vect			_VECTOR(18)
+#define UART1_TX_vect			_VECTOR(18)
 #define SIG_UART1_TRANS			_VECTOR(18)
 
 /* EEPROM Ready */
@@ -306,7 +306,6 @@
 /* Analog Comparator */
 #define ANA_COMP_vect			_VECTOR(20)
 #define SIG_COMPARATOR			_VECTOR(20)
-
 
 #define _VECTORS_SIZE 84
 

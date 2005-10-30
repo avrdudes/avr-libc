@@ -502,7 +502,6 @@
 #define SPM_READY_vect			_VECTOR(34)
 #define SIG_SPM_READY			_VECTOR(34)
 
-
 #define _VECTORS_SIZE 140
 
 /*

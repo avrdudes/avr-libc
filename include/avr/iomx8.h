@@ -719,7 +719,6 @@ must be defined for the mega48.
 #define SPM_READY_vect			_VECTOR(25)
 #define SIG_SPM_READY			_VECTOR(25)
 
-
 /* The mega48 and mega88 vector tables are single instruction entries (16 bits
    per entry for an RJMP) while the mega168 table has double instruction
    entries (32 bits per entry for a JMP). */

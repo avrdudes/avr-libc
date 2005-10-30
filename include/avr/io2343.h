@@ -109,7 +109,6 @@
 #define TIMER0_OVF0_vect		_VECTOR(2)
 #define SIG_OVERFLOW0			_VECTOR(2)
 
-
 #define _VECTORS_SIZE 6
 
 /*

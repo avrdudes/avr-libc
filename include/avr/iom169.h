@@ -415,7 +415,6 @@
 #define LCD_vect			_VECTOR(22)
 #define SIG_LCD				_VECTOR(22)
 
-
 #define _VECTORS_SIZE 92
 
 /* Bit numbers */

@@ -170,7 +170,6 @@
 #define ADC_vect			_VECTOR(8)
 #define SIG_ADC				_VECTOR(8)
 
-
 #define _VECTORS_SIZE 18
 
 /* Bit numbers */

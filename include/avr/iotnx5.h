@@ -404,7 +404,6 @@
 #define USI_OVF_vect			_VECTOR(14)
 #define SIG_USI_OVERFLOW		_VECTOR(14)
 
-
 #define _VECTORS_SIZE 30
 
 #endif /* _AVR_IOTNX5_H_ */

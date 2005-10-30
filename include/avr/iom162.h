@@ -276,7 +276,6 @@
 #define SPM_RDY_vect			_VECTOR(27)
 #define SIG_SPM_READY			_VECTOR(27)
 
-
 #define _VECTORS_SIZE 112 /* = (num vec+1) * 4 */
 
 

@@ -622,7 +622,6 @@
 #define PCINT3_vect			_VECTOR(24)
 #define SIG_PIN_CHANGE3			_VECTOR(24)
 
-
 #define _VECTORS_SIZE 100
 
 

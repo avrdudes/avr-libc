@@ -249,7 +249,6 @@
 /* Store Program Memory Ready */
 #define SPM_RDY_vect			_VECTOR(20)
 
-
 #define _VECTORS_SIZE 80
 
 

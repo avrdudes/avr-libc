@@ -186,7 +186,6 @@
 #define ANA_COMP_vect			_VECTOR(10)
 #define SIG_COMPARATOR			_VECTOR(10)
 
-
 #define _VECTORS_SIZE 22
 
 /*

@@ -317,7 +317,6 @@
 #define ADC_vect			_VECTOR(9)
 #define SIG_ADC				_VECTOR(9)
 
-
 #define _VECTORS_SIZE 20
 
 #define SPM_PAGESIZE 32

@@ -111,7 +111,6 @@
 #define ANA_COMP_vect			_VECTOR(5)
 #define SIG_COMPARATOR			_VECTOR(5)
 
-
 #define _VECTORS_SIZE 12
 
 

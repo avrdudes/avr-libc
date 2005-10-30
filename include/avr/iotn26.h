@@ -301,19 +301,19 @@
 #define SIG_PIN_CHANGE			_VECTOR(2)
 
 /* Timer/Counter1 Compare Match 1A */
-#define TIMER1CMPA_vect			_VECTOR(3)
+#define TIMER1_CMPA_vect		_VECTOR(3)
 #define SIG_OUTPUT_COMPARE1A		_VECTOR(3)
 
 /* Timer/Counter1 Compare Match 1B */
-#define TIMER1CMPB_vect			_VECTOR(4)
+#define TIMER1_CMPB_vect		_VECTOR(4)
 #define SIG_OUTPUT_COMPARE1B		_VECTOR(4)
 
 /* Timer/Counter1 Overflow */
-#define TIMER1OVF1_vect			_VECTOR(5)
+#define TIMER1_OVF1_vect		_VECTOR(5)
 #define SIG_OVERFLOW1			_VECTOR(5)
 
 /* Timer/Counter0 Overflow */
-#define TIMER0OVF0_vect			_VECTOR(6)
+#define TIMER0_OVF0_vect		_VECTOR(6)
 #define SIG_OVERFLOW0			_VECTOR(6)
 
 /* USI Start */
@@ -335,7 +335,6 @@
 /* ADC Conversion Complete */
 #define ADC_vect			_VECTOR(11)
 #define SIG_ADC				_VECTOR(11)
-
 
 #define _VECTORS_SIZE 24
 

@@ -204,15 +204,15 @@
 #define SIG_OVERFLOW0			_VECTOR(7)
 
 /* Serial Transfer Complete */
-#define SPISTC_vect			_VECTOR(8)
+#define SPI_STC_vect			_VECTOR(8)
 #define SIG_SPI				_VECTOR(8)
 
 /* UART, Rx Complete */
-#define UARTRX_vect			_VECTOR(9)
+#define UART_RX_vect			_VECTOR(9)
 #define SIG_UART_RECV			_VECTOR(9)
 
 /* UART Data Register Empty */
-#define UARTUDRE_vect			_VECTOR(10)
+#define UART_UDRE_vect			_VECTOR(10)
 #define SIG_UART_DATA			_VECTOR(10)
 
 /* UART, Tx Complete */
@@ -222,7 +222,6 @@
 /* Analog Comparator */
 #define ANA_COMP_vect			_VECTOR(12)
 #define SIG_COMPARATOR			_VECTOR(12)
-
 
 #define _VECTORS_SIZE 26
 

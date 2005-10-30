@@ -850,7 +850,6 @@
 #define USART1_TX_vect			_VECTOR(30)
 #define SIG_USART1_TRANS		_VECTOR(30)
 
-
 # define _VECTORS_SIZE 124
 
 #endif /* defined(__AVR_ATmega644__) */

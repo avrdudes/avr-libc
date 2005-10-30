@@ -124,7 +124,6 @@
 #define ANA_COMP_vect			_VECTOR(4)
 #define SIG_COMPARATOR			_VECTOR(4)
 
-
 #define _VECTORS_SIZE 10
 
 /* Bit numbers */

@@ -268,19 +268,19 @@
 #define SIG_OVERFLOW0			_VECTOR(9)
 
 /* SPI Serial Transfer Complete */
-#define SPISTC_vect			_VECTOR(10)
+#define SPI_STC_vect			_VECTOR(10)
 #define SIG_SPI				_VECTOR(10)
 
 /* USART, RX Complete */
-#define USARTRX_vect			_VECTOR(11)
+#define USART_RX_vect			_VECTOR(11)
 #define SIG_UART_RECV			_VECTOR(11)
 
 /* USART Data Register Empty */
-#define USARTUDRE_vect			_VECTOR(12)
+#define USART_UDRE_vect			_VECTOR(12)
 #define SIG_UART_DATA			_VECTOR(12)
 
 /* USART, TX Complete */
-#define USARTTX_vect			_VECTOR(13)
+#define USART_TX_vect			_VECTOR(13)
 #define SIG_UART_TRANS			_VECTOR(13)
 
 /* ADC Conversion Complete */
@@ -310,7 +310,6 @@
 /* Store Program Memory Read */
 #define SPM_RDY_vect			_VECTOR(20)
 #define SIG_SPM_READY			_VECTOR(20)
-
 
 #define _VECTORS_SIZE 42
 

@@ -545,19 +545,15 @@
 #define ANA_COMP_vect			_VECTOR(10)
 #define SIG_COMPARATOR			_VECTOR(10)
 #define SIG_ANALOG_COMP			_VECTOR(10)
-
 #define PCINT_vect			_VECTOR(11)
 #define SIG_PIN_CHANGE			_VECTOR(11)
 #define SIG_PCINT			_VECTOR(11)
-
 #define TIMER1_COMPB_vect		_VECTOR(12)
 #define SIG_OUTPUT_COMPARE1B		_VECTOR(12)
 #define SIG_TIMER1_COMPB		_VECTOR(12)
-
 #define TIMER0_COMPA_vect		_VECTOR(13)
 #define SIG_OUTPUT_COPMARE0A		_VECTOR(13)
 #define SIG_TIMER0_COMPA		_VECTOR(13)
-
 #define TIMER0_COMPB_vect		_VECTOR(14)
 #define SIG_OUTPUT_COMPARE0B		_VECTOR(14)
 #define SIG_TIMER0_COMPB		_VECTOR(14)
@@ -571,7 +567,6 @@
 #define USI_OVERFLOW_vect		_VECTOR(16)
 #define SIG_USI_OVERFLOW		_VECTOR(16)
 #define SIG_USI_OVERFLOW		_VECTOR(16)
-
 #define EEPROM_READY_vect		_VECTOR(17)
 #define SIG_EEPROM_READY		_VECTOR(17)
 #define SIG_EE_READY			_VECTOR(17)
@@ -580,7 +575,6 @@
 #define WDT_OVERFLOW_vect		_VECTOR(18)
 #define SIG_WATCHDOG_TIMEOUT		_VECTOR(18)
 #define SIG_WDT_OVERFLOW		_VECTOR(18)
-
 
 /* 38 = (18*2)+2: Number of vectors times two, plus the reset vector */
 #define _VECTORS_SIZE     38

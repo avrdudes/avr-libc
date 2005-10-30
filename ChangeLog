@@ -1,3 +1,55 @@
+2005-10-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io1200.h: Rework headers, replace comma by underscore if needed.
+	* include/avr/io2313.h: (Ditto.)
+	* include/avr/io2323.h: (Ditto.)
+	* include/avr/io2333.h: (Ditto.)
+	* include/avr/io2343.h: (Ditto.)
+	* include/avr/io4414.h: (Ditto.)
+	* include/avr/io4433.h: (Ditto.)
+	* include/avr/io4434.h: (Ditto.)
+	* include/avr/io8515.h: (Ditto.)
+	* include/avr/io8535.h: (Ditto.)
+	* include/avr/io86r401.h: (Ditto.)
+	* include/avr/io90pwmx.h: (Ditto.)
+	* include/avr/iom103.h: (Ditto.)
+	* include/avr/iom128.h: (Ditto.)
+	* include/avr/iom16.h: (Ditto.)
+	* include/avr/iom161.h: (Ditto.)
+	* include/avr/iom162.h: (Ditto.)
+	* include/avr/iom163.h: (Ditto.)
+	* include/avr/iom165.h: (Ditto.)
+	* include/avr/iom169.h: (Ditto.)
+	* include/avr/iom32.h: (Ditto.)
+	* include/avr/iom323.h: (Ditto.)
+	* include/avr/iom325.h: (Ditto.)
+	* include/avr/iom3250.h: (Ditto.)
+	* include/avr/iom329.h: (Ditto.)
+	* include/avr/iom3290.h: (Ditto.)
+	* include/avr/iom64.h: (Ditto.)
+	* include/avr/iom645.h: (Ditto.)
+	* include/avr/iom6450.h: (Ditto.)
+	* include/avr/iom649.h: (Ditto.)
+	* include/avr/iom6490.h: (Ditto.)
+	* include/avr/iom8.h: (Ditto.)
+	* include/avr/iom8515.h: (Ditto.)
+	* include/avr/iom8535.h: (Ditto.)
+	* include/avr/iomx8.h: (Ditto.)
+	* include/avr/iomxx0_1.h: (Ditto.)
+	* include/avr/iomxx4.h: (Ditto.)
+	* include/avr/iotn11.h: (Ditto.)
+	* include/avr/iotn12.h: (Ditto.)
+	* include/avr/iotn13.h: (Ditto.)
+	* include/avr/iotn15.h: (Ditto.)
+	* include/avr/iotn22.h: (Ditto.)
+	* include/avr/iotn2313.h: (Ditto.)
+	* include/avr/iotn26.h: (Ditto.)
+	* include/avr/iotn28.h: (Ditto.)
+	* include/avr/iotnx5.h: (Ditto.)
+	* xml/Atmel2libc.py: Replace comma by underscore in vector names.
+	* xml/patch-headers.py: Refine the vector rewrite algorithm, so it now
+	properly preserves anything between the vectors (like #ifdefs).
+
 2005-10-30 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/string/memcmp.S: Make labels local, add Id line, 

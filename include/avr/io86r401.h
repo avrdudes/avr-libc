@@ -124,8 +124,6 @@ you may want to remove the leading D.
 #define TXEMPTY_vect			_VECTOR(2)
 #define SIG_TXBE			_VECTOR(2)
 
-
-
 #define _VECTORS_SIZE 12
 
 /*

@@ -202,19 +202,19 @@
 #define SIG_OVERFLOW0			_VECTOR(9)
 
 /* SPI Serial Transfer Complete */
-#define SPISTC_vect			_VECTOR(10)
+#define SPI_STC_vect			_VECTOR(10)
 #define SIG_SPI				_VECTOR(10)
 
 /* UART, RX Complete */
-#define UARTRX_vect			_VECTOR(11)
+#define UART_RX_vect			_VECTOR(11)
 #define SIG_UART_RECV			_VECTOR(11)
 
 /* UART Data Register Empty */
-#define UARTUDRE_vect			_VECTOR(12)
+#define UART_UDRE_vect			_VECTOR(12)
 #define SIG_UART_DATA			_VECTOR(12)
 
 /* UART, TX Complete */
-#define UARTTX_vect			_VECTOR(13)
+#define UART_TX_vect			_VECTOR(13)
 #define SIG_UART_TRANS			_VECTOR(13)
 
 /* ADC Conversion Complete */
@@ -232,7 +232,6 @@
 /* 2-Wire Serial Interface */
 #define TWI_vect			_VECTOR(17)
 #define SIG_2WIRE_SERIAL		_VECTOR(17)
-
 
 #define _VECTORS_SIZE 72
 

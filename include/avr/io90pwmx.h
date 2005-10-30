@@ -1291,7 +1291,6 @@
 #define SPM_READY_vect			_VECTOR(31)
 #define SIG_SPM_READY			_VECTOR(31)
 
-
 #define _VECTORS_SIZE   64
 
 /* Constants */

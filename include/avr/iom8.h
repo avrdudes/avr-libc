@@ -235,7 +235,6 @@
 #define SPM_RDY_vect			_VECTOR(18)
 #define SIG_SPM_READY			_VECTOR(18)
 
-
 #define _VECTORS_SIZE 38
 
 /* Bit numbers */

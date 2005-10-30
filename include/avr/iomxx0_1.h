@@ -1343,6 +1343,7 @@
 /* Pin Change Interrupt Request 2 */
 #define PCINT2_vect			_VECTOR(11)
 #define SIG_PIN_CHANGE2			_VECTOR(11)
+
 #endif /* __ATmegaxx0__ */
 
 /* Watchdog Time-out Interrupt */
@@ -1465,6 +1466,7 @@
 /* Timer/Counter4 Capture Event */
 #define TIMER4_CAPT_vect		_VECTOR(41)
 #define SIG_INPUT_CAPTURE4		_VECTOR(41)
+
 #endif /* __ATmegaxx0__ */
 
 /* Timer/Counter4 Compare Match A */
@@ -1487,6 +1489,7 @@
 /* Timer/Counter5 Capture Event */
 #define TIMER5_CAPT_vect		_VECTOR(46)
 #define SIG_INPUT_CAPTURE5		_VECTOR(46)
+
 #endif /* __ATmegaxx0__ */
 
 /* Timer/Counter5 Compare Match A */
@@ -1534,7 +1537,6 @@
 /* USART3, Tx Complete */
 #define USART3_TX_vect			_VECTOR(56)
 #define SIG_USART3_TRANS		_VECTOR(56)
-
 
 # define _VECTORS_SIZE 228
 
