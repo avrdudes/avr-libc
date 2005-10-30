@@ -49,6 +49,7 @@
 	* xml/Atmel2libc.py: Replace comma by underscore in vector names.
 	* xml/patch-headers.py: Refine the vector rewrite algorithm, so it now
 	properly preserves anything between the vectors (like #ifdefs).
+	* doc/api/vectortable.dox: Reflect header changes in documentation.
 
 2005-10-30 Anatoly Sokolov <aesok@pautinka.net>
 
