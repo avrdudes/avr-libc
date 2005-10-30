@@ -76,7 +76,7 @@ table = {
     "io90pwmx.h": ("AT90PWM3", "AT90PWM2"),
     # no XML file
     #"ioat94k.h": "AT94k",
-    "iocan128.h": "AT90CAN128",
+    "iocanxx.h": ("AT90CAN128", "AT90CAN32", "AT90CAN64"),
     "iom103.h": "ATmega103",
     "iom128.h": "ATmega128",
     #"iom1280.h" => "iomxx0_1.h"
@@ -202,82 +202,94 @@ for header in nlist:
     lines = h.readlines()
     h.close()
 
-    firstidx = 0
-    lastidx = -1
     parseddev = parser.getContentHandler().dev
 
-    # first, clean out any existing interrupt vectors
-    for idx, line in enumerate(lines):
-        m = r.match(line)
+    # Find any interrupt vector definitions, and rewrite them.
+    endcount = len(lines)
+    idx = 0
+    while idx < endcount:
+        line = lines[idx]
+        try:
+            m = r.match(line)
+        except TypeError:
+            print line
+            exit(0)
         if m != None:
-            if firstidx == 0:
-                firstidx = idx
+            firstidx = idx
             key = m.group(4)            # this is the vector number
             ele = parseddev.interrupts[key]
 
-            lastidx = idx
-
-            if idx > 0 and lines[idx - 1].find(ele.description.data) >= 0:
+            if lines[idx - 1].find(ele.description.data) >= 0:
                 # there is a /* description */ comment in the previous line,
                 # drop it
                 if idx - 1 < firstidx:
                     firstidx = idx - 1
 
-            if re.match('^$', lines[idx + 1]):
-                # there is a blank line after the current one, drop it
-                lastidx = idx + 1
+            lastidx = idx + 1
+            while r.match(lines[lastidx]) and r.match(lines[lastidx]).group(4) == key:
+                # more vector definitions follow, skip them
+                lastidx += 1
 
-    while re.match('^$', lines[lastidx]):
-        lastidx += 1
+            while re.match('^$', lines[lastidx]):
+                # blank lines follow, skip them, too
+                lastidx += 1
 
-    del lines[firstidx:lastidx]
+            # Now, lastidx points to the first line not belonging
+            # to our current vector definition.  lastidx - firtidx
+            # is the number of lines affected.
 
-    # now, build a new vector table
-    keys = parseddev.interrupts.keys()
-    keys.sort(lambda x,y: cmp(int(x), int(y)))
+            count = lastidx - firstidx
+            del lines[firstidx:lastidx]
 
-    vecttext = []
-    for key in keys:
-        ele = parseddev.interrupts[key]
-        if ele.name == 'NOT_USED':
-            # ATmega3250/6450 plug a `hole' that way
-            continue
+            # now, build a new vector entry
+            vecttext = []
+            newcount = 0
+            if len(ele.description.data) > 0:
+                vecttext.append("/* " + ele.description.data + " */\n")
+                newcount += 1
+            vecttext.append("#define " + ele.sig_name.data +
+                            create_tabs(ele.sig_name.data) +
+                            "_VECTOR(" + key + ")\n")
+            newcount += 1
+            try:
+                for x in ele.alt_name.data:
+                    vecttext.append("#define " + x +
+                                    create_tabs(x) + "_VECTOR(" + key + ")\n")
+                    newcount += 1
+            except AttributeError:
+                # no alt_name present
+                pass
+            vecttext.append('\n')
+            newcount += 1
 
-        if len(ele.description.data) > 0:
-            vecttext.append("/* " + ele.description.data + " */\n")
-        vecttext.append("#define " + ele.sig_name.data +
-                        create_tabs(ele.sig_name.data) +
-                        "_VECTOR(" + key + ")\n")
-        try:
-            for x in ele.alt_name.data:
-                vecttext.append("#define " + x +
-                                create_tabs(x) + "_VECTOR(" + key + ")\n")
-        except AttributeError:
-            # no alt_name present
-            pass
-        vecttext.append('\n')
+            # insert new vector entry
+            lines[firstidx:firstidx] = vecttext
 
-        # collect documentation for this vector
-        try:
-            if type(devname) is TupleType:
-                for d in devname:
-                    docs[ele.sig_name.data][2].append(d)
-            else:
-                docs[ele.sig_name.data][2].append(devname)
-        except KeyError:
-            if type(devname) is TupleType:
-                docs[ele.sig_name.data] = (ele.alt_name.data,
-                                           ele.description.data,
-                                           [])
-                for d in devname:
-                    docs[ele.sig_name.data][2].append(d)
-            else:
-                docs[ele.sig_name.data] = (ele.alt_name.data,
-                                           ele.description.data,
-                                           [devname])
+            endcount += newcount - count
+            # back off beyond what we've just been working on
+            idx = firstidx + newcount
 
-    # insert new vector table
-    lines.insert(firstidx, vecttext)
+            # collect documentation for this vector
+            try:
+                if type(devname) is TupleType:
+                    for d in devname:
+                        docs[ele.sig_name.data][2].append(d)
+                else:
+                    docs[ele.sig_name.data][2].append(devname)
+            except KeyError:
+                if type(devname) is TupleType:
+                    docs[ele.sig_name.data] = (ele.alt_name.data,
+                                               ele.description.data,
+                                               [])
+                    for d in devname:
+                        docs[ele.sig_name.data][2].append(d)
+                else:
+                    docs[ele.sig_name.data] = (ele.alt_name.data,
+                                               ele.description.data,
+                                               [devname])
+        else:
+            # no match, increment index
+            idx += 1
 
     newh = open(header, "w")
     for line in lines:
