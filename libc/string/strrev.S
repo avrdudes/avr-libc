@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /*
    strrev.S
    Reverse a string
@@ -56,26 +58,26 @@
     .type   _U(strrev), @function
 
 _U(strrev):
-    LOAD_X(str_lo, str_hi)	; X is start of string
-	LOAD_Z(str_lo, str_hi)	; Z becomes end of string
-.strrev_eos:
+	X_movw	XL, str_lo	; X is start of string
+	X_movw	ZL, str_lo	; Z becomes end of string
+.L_strrev_eos:
 	LD    __tmp_reg__, Z+
 	TST   __tmp_reg__
-	BRNE  .strrev_eos
+	BRNE  .L_strrev_eos
 	SBIW  ZL, 2				; now Z points at end of string
-.strrev_loop:
+.L_strrev_loop:
 	CP    XL, ZL
 	CPC   XH, ZH			; if X >= Z we are done
-	BRSH  .strrev_done
+	BRSH  .L_strrev_done
 	LD    ltemp, X          ; get left character
 	LD    rtemp, Z			; get right character
 	ST    Z, ltemp
 	SBIW  ZL, 1
 	ST    X+, rtemp			; swap chars
-	RJMP  .strrev_loop		; next pair
-.strrev_done:
+	RJMP  .L_strrev_loop		; next pair
+.L_strrev_done:
     RET
-.strrev_end:
-	.size _U(strrev), .strrev_end - _U(strrev)
+.L_strrev_end:
+	.size _U(strrev), .L_strrev_end - _U(strrev)
 
 #endif /* not __DOXYGEN__ */

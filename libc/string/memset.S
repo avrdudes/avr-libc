@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -50,32 +52,32 @@
 	.global	_U(memset)
 	.type	_U(memset), @function
 _U(memset):
-	LOAD_X(dest_lo, dest_hi)
+	X_movw	XL, dest_lo
 #if OPTIMIZE_SPEED
 ; 11 words, (12 + len * 4 - (len & 1)) cycles
 	sbrs	len_lo, 0
-	rjmp	.memset_start
-	rjmp	.memset_odd
-.memset_loop:
+	rjmp	.L_memset_start
+	rjmp	.L_memset_odd
+.L_memset_loop:
 	st	X+, val_lo
-.memset_odd:
+.L_memset_odd:
 	st	X+, val_lo
-.memset_start:
+.L_memset_start:
 	subi	len_lo, lo8(2)
 	sbci	len_hi, hi8(2)
 #else
 ; 8 words, (11 + len * 6) cycles
-	rjmp	.memset_start
-.memset_loop:
+	rjmp	.L_memset_start
+.L_memset_loop:
 	st	X+, val_lo
-.memset_start:
+.L_memset_start:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
 #endif
-	brcc	.memset_loop
+	brcc	.L_memset_loop
 ; return dest (unchanged)
 	ret
-.memset_end:
-	.size	_U(memset), .memset_end - _U(memset)
+.L_memset_end:
+	.size	_U(memset), .L_memset_end - _U(memset)
 
 #endif /* not __DOXYGEN__ */

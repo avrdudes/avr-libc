@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -55,26 +57,26 @@ _U(memmove):
 ; otherwise memcpy will do the right thing
 	cp	src_lo, dest_lo
 	cpc	src_hi, dest_hi
-	brcc	.memmove_fwd
-	LOAD_Z(src_lo, src_hi)
-	LOAD_X(dest_lo, dest_hi)
+	brcc	.L_memmove_fwd
+	X_movw	ZL, src_lo
+	X_movw	XL, dest_lo
 	add	ZL, len_lo
 	adc	ZH, len_hi
 	add	XL, len_lo
 	adc	XH, len_hi
-	rjmp	.memmove_start
-.memmove_loop:
+	rjmp	.L_memmove_start
+.L_memmove_loop:
 	ld	__tmp_reg__, -Z
 	st	-X, __tmp_reg__
-.memmove_start:
+.L_memmove_start:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcc	.memmove_loop
+	brcc	.L_memmove_loop
 ; return dest (unchanged)
 	ret
-.memmove_fwd:
+.L_memmove_fwd:
 	XJMP	_U(memcpy)
-.memmove_end:
-	.size	_U(memmove), .memmove_end - _U(memmove)
+.L_memmove_end:
+	.size	_U(memmove), .L_memmove_end - _U(memmove)
 
 #endif /* not __DOXYGEN__ */

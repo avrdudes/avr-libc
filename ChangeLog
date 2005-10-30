@@ -1,3 +1,20 @@
+2005-10-30 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/string/memcmp.S: Make labels local, add Id line, 
+	use X_movw instead LOAD_X/LOAD_Z.
+	* libc/string/memcpy.S: (Ditto.)
+	* libc/string/memmove.S: (Ditto.)
+	* libc/string/memset.S: (Ditto.)
+	* libc/string/strcat.S: (Ditto.)
+	* libc/string/strcmp.S: (Ditto.)
+	* libc/string/strcpy.S: (Ditto.)
+	* libc/string/strlen.S: (Ditto.)
+	* libc/string/strncat.S: (Ditto.)
+	* libc/string/strncmp.S: (Ditto.)
+	* libc/string/strncpy.S: (Ditto.)
+	* libc/string/strnlen.S: (Ditto.)
+	* libc/string/strrev.S: (Ditto.)
+
 2005-10-27 Anatoly Sokolov <aesok@pautinka.net>
 
 	* devtools/gen-avr-lib-tree.sh: Set optimisation for building

@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define src_hi r25
@@ -49,11 +51,11 @@
 	.global	_U(strlen)
 	.type	_U(strlen), @function
 _U(strlen):
-	LOAD_Z(src_lo, src_hi)
-.strlen_loop:
+	X_movw	ZL, src_lo
+.L_strlen_loop:
 	ld	__tmp_reg__, Z+
 	tst	__tmp_reg__
-	brne	.strlen_loop
+	brne	.L_strlen_loop
 ; Z points one character past the terminating NUL
 ; return Z - 1 - src = (-1 - src) + Z = ~src + Z
 	com	src_lo
@@ -61,7 +63,7 @@ _U(strlen):
 	add	src_lo, ZL
 	adc	src_hi, ZH
 	ret
-.strlen_end:
-	.size	_U(strlen), .strlen_end - _U(strlen)
+.L_strlen_end:
+	.size	_U(strlen), .L_strlen_end - _U(strlen)
 
 #endif /* not __DOXYGEN__ */

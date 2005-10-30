@@ -25,6 +25,8 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
+  
+/* $Id$ */
 
 #include "macros.inc"
 
@@ -61,25 +63,25 @@
 	.global	_U(memcmp)
 	.type	_U(memcmp), @function
 _U(memcmp):
-	LOAD_Z(s2_lo, s2_hi)
-	LOAD_X(s1_lo, s1_hi)
-	rjmp	.memcmp_start
-.memcmp_loop:
+	X_movw	ZL, s2_lo
+	X_movw  XL, s1_lo
+	rjmp	.L_memcmp_start
+.L_memcmp_loop:
 	ld	ret_lo, X+
 	ld	__tmp_reg__, Z+
 	sub	ret_lo, __tmp_reg__
-	brne	.memcmp_done
-.memcmp_start:
+	brne	.L_memcmp_done
+.L_memcmp_start:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcc	.memcmp_loop
+	brcc	.L_memcmp_loop
 ; strings are equal, so clear both ret_lo and carry
 	sub	ret_lo, ret_lo
-.memcmp_done:
+.L_memcmp_done:
 ; ret_hi = SREG.C ? 0xFF : 0
 	sbc	ret_hi, ret_hi
 	ret
-.memcmp_end:
-	.size	_U(memcmp), .memcmp_end - _U(memcmp)
+.L_memcmp_end:
+	.size	_U(memcmp), .L_memcmp_end - _U(memcmp)
 
 #endif /* not __DOXYGEN__ */

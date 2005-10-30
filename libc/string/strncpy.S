@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -55,30 +57,30 @@
 	.global	_U(strncpy)
 	.type	_U(strncpy), @function
 _U(strncpy):
-	LOAD_Z(src_lo, src_hi)
-	LOAD_X(dest_lo, dest_hi)
-.strncpy_loop:
+	X_movw	ZL, src_lo
+	X_movw	XL, dest_lo
+.L_strncpy_loop:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcs	.strncpy_done
+	brcs	.L_strncpy_done
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
 	tst	__tmp_reg__
-	brne	.strncpy_loop
+	brne	.L_strncpy_loop
 ; store null characters up to the end of dest
 ; as the glibc manual says:
 ; This behavior is rarely useful, but it is specified by the ISO C standard.
-	rjmp	.strncpy_clr_start
-.strncpy_clr_loop:
+	rjmp	.L_strncpy_clr_start
+.L_strncpy_clr_loop:
 	st	X+, __zero_reg__
-.strncpy_clr_start:
+.L_strncpy_clr_start:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcc	.strncpy_clr_loop
-.strncpy_done:
+	brcc	.L_strncpy_clr_loop
+.L_strncpy_done:
 ; return dest (unchanged)
 	ret
-.strncpy_end:
-	.size	_U(strncpy), .strncpy_end - _U(strncpy)
+.L_strncpy_end:
+	.size	_U(strncpy), .L_strncpy_end - _U(strncpy)
 
 #endif /* not __DOXYGEN__ */

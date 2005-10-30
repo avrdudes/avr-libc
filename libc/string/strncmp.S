@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define s1_hi r25
@@ -55,25 +57,25 @@
 	.global	_U(strncmp)
 	.type	_U(strncmp), @function
 _U(strncmp):
-	LOAD_Z(s2_lo, s2_hi)
-	LOAD_X(s1_lo, s1_hi)
-.strncmp_loop:
+	X_movw	ZL, s2_lo
+	X_movw	XL, s1_lo
+.L_strncmp_loop:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcs	.strncmp_equal
+	brcs	.L_strncmp_equal
 	ld	ret_lo, X+
 	ld	__tmp_reg__, Z+
 	sub	ret_lo, __tmp_reg__
-	brne	.strncmp_done
+	brne	.L_strncmp_done
 	tst	__tmp_reg__
-	brne	.strncmp_loop
-.strncmp_equal:
+	brne	.L_strncmp_loop
+.L_strncmp_equal:
 	sub	ret_lo, ret_lo	; clear ret_lo and C flag
-.strncmp_done:
+.L_strncmp_done:
 ; ret_hi = SREG.C ? 0xFF : 0
 	sbc	ret_hi, ret_hi
 	ret
-.strncmp_end:
-	.size	_U(strncmp), .strncmp_end - _U(strncmp)
+.L_strncmp_end:
+	.size	_U(strncmp), .L_strncmp_end - _U(strncmp)
 
 #endif /* not __DOXYGEN__ */

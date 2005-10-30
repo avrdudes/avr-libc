@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -51,36 +53,36 @@
 	.global	_U(memcpy)
 	.type	_U(memcpy), @function
 _U(memcpy):
-	LOAD_Z(src_lo, src_hi)
-	LOAD_X(dest_lo, dest_hi)
+	X_movw	ZL, src_lo
+	X_movw	XL, dest_lo
 #if OPTIMIZE_SPEED
 ; 15 words, (14 + len * 6 - (len & 1)) cycles
 	sbrs	len_lo, 0
-	rjmp	.memcpy_start
-	rjmp	.memcpy_odd
-.memcpy_loop:
+	rjmp	.L_memcpy_start
+	rjmp	.L_memcpy_odd
+.L_memcpy_loop:
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
-.memcpy_odd:
+.L_memcpy_odd:
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
-.memcpy_start:
+.L_memcpy_start:
 	subi	len_lo, lo8(2)
 	sbci	len_hi, hi8(2)
 #else
 ; 11 words, (13 + len * 8) cycles
-	rjmp	.memcpy_start
-.memcpy_loop:
+	rjmp	.L_memcpy_start
+.L_memcpy_loop:
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
-.memcpy_start:
+.L_memcpy_start:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
 #endif
-	brcc	.memcpy_loop
+	brcc	.L_memcpy_loop
 ; return dest (unchanged)
 	ret
-.memcpy_end:
-	.size	_U(memcpy), .memcpy_end - _U(memcpy)
+.L_memcpy_end:
+	.size	_U(memcpy), .L_memcpy_end - _U(memcpy)
 
 #endif /* not __DOXYGEN__ */

@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -51,21 +53,21 @@
 	.global	_U(strcat)
 	.type	_U(strcat), @function
 _U(strcat):
-	LOAD_Z(src_lo, src_hi)
-	LOAD_X(dest_lo, dest_hi)
-.strcat_skip:
+	X_movw	ZL, src_lo
+	X_movw	XL, dest_lo
+.L_strcat_skip:
 	ld	__tmp_reg__, X+
 	tst	__tmp_reg__
-	brne	.strcat_skip
+	brne	.L_strcat_skip
 	sbiw	XL, 1		; undo post-increment
-.strcat_loop:
+.L_strcat_loop:
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
 	tst	__tmp_reg__
-	brne	.strcat_loop
+	brne	.L_strcat_loop
 ; return dest (unchanged)
 	ret
-.strcat_end:
-	.size	_U(strcat), .strcat_end - _U(strcat)
+.L_strcat_end:
+	.size	_U(strcat), .L_strcat_end - _U(strcat)
 
 #endif /* not __DOXYGEN__ */
