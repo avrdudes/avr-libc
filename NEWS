@@ -43,6 +43,7 @@
   string/memccpy
   string/strchr
   string/strrchr
+  string/strsep
   string/strstr
 
 *** Changes in avr-libc-1.2.5:
