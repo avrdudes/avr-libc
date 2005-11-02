@@ -28,6 +28,8 @@
 
 */
 
+/* $Id$ */
+
 /** \ingroup avr_string
     \fn char *strtok_r(char *string, const char *delim, char **last)
     \brief Parses the string s into tokens.
@@ -46,11 +48,8 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "gasava.inc"
 #include "macros.inc"
 
-#define X_hi		r27
-#define X_lo		r26
 #define str_hi		r25
 #define str_lo		r24
 #define del_hi		r23
@@ -62,51 +61,51 @@
 
 	.text
 	.global _U(strtok_r)
-	.type	 _U(strtok_r), @function
+	.type	_U(strtok_r), @function
 
 _U(strtok_r):				; Check on NULL pointers
 	SBIW	str_lo, 0		; str == NULL ?
-	BRNE	.del_lead_init		; here 1st call to strtok_r
-	LOAD_X	(last_lo, last_hi)
+	BRNE	.L_del_lead_init	; here 1st call to strtok_r
+	X_movw	XL, last_lo
 	LD	str_lo, X+
 	LD	str_hi, X		;
 	SBIW	str_lo, 0		; last == NULL ?
-	BRNE	.del_lead_init		; here nth call to strtok_r
+	BRNE	.L_del_lead_init	; here nth call to strtok_r
 	RJMP	2f			; no more to do
 
-.del_lead_init:				; Remove leading delimiters
-	LOAD_X	(str_lo, str_hi)
+.L_del_lead_init:			; Remove leading delimiters
+	X_movw	XL, str_lo
 
-.del_str_loop:
-	LOAD_Z	(del_lo, del_hi)	; Z = *delim
+.L_del_str_loop:
+	X_movw	ZL, del_lo		; Z = *delim
 	LD	str_c, X+		; str_c = *string++
 
-.del_loop:
+.L_del_loop:
 	LD	del_c, Z+		; del_c = *Z
 	TST	del_c			; end of del string ?
 	BREQ	1f			; yes: -> done with leading delimiters
 	CP	str_c, del_c
-	BREQ	.del_str_loop		; match:  -> next str_char, 1st del_char
-	RJMP	.del_loop		; next del_char, same str_char
+	BREQ	.L_del_str_loop		; match:  -> next str_char, 1st del_char
+	RJMP	.L_del_loop		; next del_char, same str_char
 1:	TST	str_c			; end of str ?
-	BRNE	.str_scan_init		; no: -> scan
-	LOAD_X	(last_lo, last_hi)
+	BRNE	.L_str_scan_init	; no: -> scan
+	X_movw	XL, last_lo
 	ST	X+, __zero_reg__
 	ST	X, __zero_reg__		; last = NULL
 2:	CLR	str_lo
 	CLR	str_hi
 	RET				; return(NULL)
 
-.str_scan_init:				; scan string
-	SBIW	X_lo, 1			; X points to token
-	PUSH	X_lo
-	PUSH	X_hi			; save pointer to token
+.L_str_scan_init:			; scan string
+	SBIW	XL, 1			; X points to token
+	PUSH	XL
+	PUSH	XH			; save pointer to token
 
-.scan_str_loop:				; next str char, 1st del char
-	LOAD_Z	(del_lo, del_hi)	; Z points to del str
+.L_scan_str_loop:			; next str char, 1st del char
+	X_movw	ZL, del_lo		; Z points to del str
 	LD	str_c, X+		; str_c = *string++
 
-.scan_del_loop:
+.L_scan_del_loop:
 	LD	del_c, Z+		; del_c = *Z
 	CP	str_c, del_c
 	BRNE	3f
@@ -114,21 +113,21 @@ _U(strtok_r):				; Check on NULL pointers
 	BRNE	1f
 	CLR	str_lo
 	CLR	str_hi			; str = NULL
-	SBIW	X_lo, 1			; undo auto increment
+	SBIW	XL, 1			; undo auto increment
 	RJMP	2f
 1:	ST	-X, __zero_reg__	; str[-1] = \0
-	ADIW	X_lo, 1			; undo auto decrement
-2:	LOAD_Z	(last_lo, last_hi)
-	ST	Z+, X_lo
-	ST	Z, X_hi			; *last = str
+	ADIW	XL, 1			; undo auto decrement
+2:	X_movw	ZL, last_lo
+	ST	Z+, XL
+	ST	Z, XH			; *last = str
 	POP	str_hi
 	POP	str_lo			; get pointer to token again
 	RET				; return(token)
 3:	TST	del_c			; end of del string ?
-	BRNE	.scan_del_loop		; next del char, same str_char
-	RJMP	.scan_str_loop		; next str char, 1st del char
+	BRNE	.L_scan_del_loop	; next del char, same str_char
+	RJMP	.L_scan_str_loop	; next str char, 1st del char
 
-.strtok_r_end:
-	.size	_U(strtok_r), .strtok_r_end - _U(strtok_r)
+.L_strtok_r_end:
+	.size	_U(strtok_r), .L_strtok_r_end - _U(strtok_r)
 
 #endif /* not __DOXYGEN__ */

@@ -32,6 +32,7 @@
 
 */
 
+/* $Id$ */
 
 /** \ingroup avr_string
     \fn size_t strlcat (char *dst, const char *src, size_t siz)
@@ -59,20 +60,16 @@
 #define dlen_lo		r18
 #define rWord_hi	r25
 #define rWord_lo	r24
-#define Z_hi		r31
-#define Z_lo		r30
-#define X_hi		r27
-#define X_lo		r26
 
 	.text
 	.global _U(strlcat)
-	.type	 _U(strlcat),@function
+	.type	_U(strlcat),@function
 
 _U(strlcat):
-	LOAD_X	(dst_lo, dst_hi)	; X = dst
-	LOAD_Z	(src_lo, src_hi)	; Z = src
+	X_movw	XL, dst_lo		; X = dst
+	X_movw	ZL, src_lo		; Z = src
 
-.strlcat_dlen:				; Find end of dst string
+.L_strlcat_dlen:			; Find end of dst string
 	ld	__tmp_reg__, X+		; get next char from dst
 	cp	siz_lo, __zero_reg__	;  and calc dlen = len of dst
 	cpc	siz_hi, __zero_reg__	; size == 0 ?
@@ -81,23 +78,18 @@ _U(strlcat):
 	breq	 1f			; --> done
 	subi	siz_lo, lo8(-(-1))
 	sbci	siz_hi, hi8(-(-1))	; siz--
-	rjmp	.strlcat_dlen		; --> next char
-1:	sbiw	X_lo, 1			; undo post increment
-#if __AVR_ENHANCED__
-	movw	dlen_lo, X_lo
-#else
-	mov	dlen_lo, X_lo
-	mov	dlen_hi, X_hi
-#endif
+	rjmp	.L_strlcat_dlen		; --> next char
+1:	sbiw	XL, 1			; undo post increment
+	X_movw	dlen_lo, XL
 	sub	dlen_lo, dst_lo
 	sbc	dlen_hi, dst_hi		; dlen = X - dst
 	cp	siz_lo, __zero_reg__
 	cpc	siz_hi, __zero_reg__	; size == 0 ?
-	breq	.strlcat_slen		; --> done
+	breq	.L_strlcat_slen		; --> done
 	subi	siz_lo, lo8(-(-1))
 	sbci	siz_hi, hi8(-(-1))	; siz--
 
-.strlcat_concat:			; Concatenate
+.L_strlcat_concat:			; Concatenate
 	ld	__tmp_reg__, Z+		; get next char from src
 	cp	siz_lo, __zero_reg__
 	cpc	siz_hi, __zero_reg__	; size == 0 ?
@@ -107,28 +99,23 @@ _U(strlcat):
 	st	X+, __tmp_reg__		; store in dest
 	subi	siz_lo, lo8(-(-1))
 	sbci	siz_hi, hi8(-(-1))	; siz--
-	rjmp	.strlcat_concat		; --> next char
+	rjmp	.L_strlcat_concat		; --> next char
 1:	st	X, __zero_reg__		; *X = '\0'
-	sbiw	Z_lo, 1			; undo post increment
+	sbiw	ZL, 1			; undo post increment
 
-.strlcat_slen:
+.L_strlcat_slen:
 	ld	__tmp_reg__, Z+		; get next char from src
 	tst	__tmp_reg__		; end of src ?
-	brne	.strlcat_slen		; --> next char
-	sbiw	Z_lo, 1			; undo post increment
-#if __AVR_ENHANCED__
-	movw	rWord_lo, dlen_lo
-#else
-	mov	rWord_lo, dlen_lo
-	mov	rWord_hi, dlen_hi
-#endif
-	add	rWord_lo, Z_lo
-	adc	rWord_hi, Z_hi
+	brne	.L_strlcat_slen		; --> next char
+	sbiw	ZL, 1			; undo post increment
+	X_movw	rWord_lo, dlen_lo
+	add	rWord_lo, ZL
+	adc	rWord_hi, ZH
 	sub	rWord_lo, src_lo
 	sbc	rWord_hi, src_hi	; return(dlen + (Z - src))
 	ret
 
-.strlcat_end:
-.size	_U(strlcat), .strlcat_end - _U(strlcat)
+.L_strlcat_end:
+.size	_U(strlcat), .L_strlcat_end - _U(strlcat)
 
 #endif /* not __DOXYGEN__ */

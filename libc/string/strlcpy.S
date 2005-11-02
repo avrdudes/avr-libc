@@ -32,6 +32,7 @@
 
 */
 
+/* $Id$ */
 
 /** \ingroup avr_string
     \fn size_t strlcpy (char *dst, const char *src, size_t siz)
@@ -57,49 +58,42 @@
 #define rWord		r24
 #define rWord_hi	r25
 #define rWord_lo	r24
-#define Z_hi		r31
-#define Z_lo		r30
 
 	.text
 	.global	_U(strlcpy)
 	.type	_U(strlcpy), @function
 
 _U(strlcpy):
-	LOAD_X	(dst_lo, dst_hi)	; X = dst
-	LOAD_Z	(src_lo, src_hi)	; Z = src
+	X_movw	XL, dst_lo		; X = dst
+	X_movw	ZL, src_lo		; Z = src
 	cp	siz_lo, __zero_reg__
 	cpc	siz_hi, __zero_reg__	; size == 0 ?
-	breq	.strlcpy_truncated
+	breq	.L_strlcpy_truncated
 
-.strlcpy_copy_loop:			; copy src to dst
+.L_strlcpy_copy_loop:			; copy src to dst
 	subi	siz_lo, lo8(-(-1))
 	sbci	siz_hi, hi8(-(-1))	; decrement siz
 	breq	1f 			; --> siz chars copied
 	ld	__tmp_reg__, Z+		; get next src char
 	st	X+, __tmp_reg__		; copy char
 	tst	__tmp_reg__		; end of src string ?
-	breq	.strlcpy_len		; --> all src chars copied
-	rjmp	.strlcpy_copy_loop	; next char
+	breq	.L_strlcpy_len		; --> all src chars copied
+	rjmp	.L_strlcpy_copy_loop	; next char
 1:	st	X, __zero_reg__		; truncate dst string
 
-.strlcpy_truncated:			; find Z = end of src string
+.L_strlcpy_truncated:			; find Z = end of src string
 	ld	__tmp_reg__, Z+		; get next char from src
 	tst	__tmp_reg__		; end of src string ?
-	brne	.strlcpy_truncated	; next char
+	brne	.L_strlcpy_truncated	; next char
 
-.strlcpy_len:				; calculate strlen(src)
-	sub	Z_lo, src_lo
-	sbc	Z_hi, src_hi		; Z points past \0
-	sbiw	Z_lo, 1
-	#if __AVR_ENHANCED__
-	movw	rWord, Z_lo
-	#else
-	mov	rWord_lo, Z_lo
-	mov	rWord_hi, Z_hi
-	#endif
+.L_strlcpy_len:				; calculate strlen(src)
+	sub	ZL, src_lo
+	sbc	ZH, src_hi		; Z points past \0
+	sbiw	ZL, 1
+	X_movw	rWord, ZL
 	ret
 
-.strlcpy_end:
-	.size	_U(strlcpy), .strlcpy_end - _U(strlcpy)
+.L_strlcpy_end:
+	.size	_U(strlcpy), .L_strlcpy_end - _U(strlcpy)
 
 #endif /* not __DOXYGEN__ */

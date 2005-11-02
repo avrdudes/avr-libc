@@ -1,3 +1,12 @@
+2005-11-03 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/string/strsep.S: Make labels local, add Id line, 
+	use movw when possible, use X_movw instead LOAD_X/LOAD_Z, optimize.
+	* libc/string/strlcat.S: Make labels local, add Id line, 
+	use movw when possible, use X_movw instead LOAD_X/LOAD_Z.
+	* libc/string/strlcpy.S: (Ditto.)
+	* libc/string/strtok_r.S: (Ditto.)
+
 2005-10-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/io1200.h: Rework headers, replace comma by underscore if needed.

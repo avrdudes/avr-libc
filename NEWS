@@ -108,6 +108,7 @@
   string/memccpy
   string/strchr
   string/strrchr
+  string/strsep
   string/strstr
 
 *** Changes since avr-libc-1.2.4:
