@@ -1,3 +1,13 @@
+2005-11-04 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/avr-recv.c: Drop long since obsolete examples.
+	* doc/examples/io.c: (Ditto.)
+	* doc/examples/prg: (Ditto.)
+	* doc/examples/printf.h: (Ditto.)
+	* doc/examples/progmem.c: (Ditto.)
+	* doc/examples/send_byte.s: (Ditto.)
+	* doc/examples/signal.c: (Ditto.)
+
 2005-11-03 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/string/strsep.S: Make labels local, add Id line, 
