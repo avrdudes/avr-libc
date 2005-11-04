@@ -10,6 +10,7 @@
 	here (by now).
 	* include/avr/signal.h: Move SIGNAL() and EMPTY_INTERRUPT() to
 	interrupt.h, issue a #warning.
+	* include/compat/Makefile.am: add deprecated.h.
 	* include/compat/deprecated.h: New file.  Collect deprecated
 	items from avr/signal.h.
 

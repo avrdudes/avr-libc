@@ -31,5 +31,6 @@
 
 avrdir = $(prefix)/avr/include/compat
 avr_HEADERS = \
+    deprecated.h \
     ina90.h \
     twi.h
