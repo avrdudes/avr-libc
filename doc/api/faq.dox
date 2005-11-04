@@ -65,7 +65,7 @@ When using the optimizer, in a loop like the following one:
 \code
 uint8_t flag;
 ...
-SIGNAL(SIG_SOMETHING) {
+ISR(SOME_vect) {
   flag = 1;
 }
 ...
@@ -324,7 +324,7 @@ context could clobber the TEMP register data of an in-progress
 transaction that has just started elsewhere.
 
 To protect interrupt routines against other interrupt routines, it's
-usually best to use the SIGNAL() macro when declaring the interrupt
+usually best to use the ISR() macro when declaring the interrupt
 function, and to ensure that interrupts are still disabled when
 accessing those 16-bit timer registers.
 

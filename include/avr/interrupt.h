@@ -72,77 +72,86 @@ extern void cli(void);
 
 /*@}*/
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/** \name Allowing specific system-wide interrupts
-
-    In addition to globally enabling interrupts, each device's particular
-    interrupt needs to be enabled separately if interrupts for this device are
-    desired.  While some devices maintain their interrupt enable bit inside
-    the device's register set, external and timer interrupts have system-wide
-    configuration registers. 
-
-    Example:
-
-    \code
-    // Enable timer 1 overflow interrupts.
-    timer_enable_int(_BV(TOIE1));
-
-    // Do some work...
-
-    // Disable all timer interrupts.
-    timer_enable_int(0);
-    \endcode
-
-    \note Be careful when you use these functions. If you already have a
-    different interrupt enabled, you could inadvertantly disable it by
-    enabling another intterupt. */
+/** \name Macros for writing interrupt handler functions */
 
 /*@{*/
 
-/** \ingroup avr_interrupts
-    \def enable_external_int(mask)
-    \code#include <avr/interrupt.h>\endcode
-
-    This macro gives access to the \c GIMSK register (or \c EIMSK register
-    if using an AVR Mega device or \c GICR register for others). Although this
-    macro is essentially the same as assigning to the register, it does
-    adapt slightly to the type of device being used. This macro is 
-    unavailable if none of the registers listed above are defined. */
-
-/* Define common register definition if available. */
-#if defined(EIMSK)
-#  define __EICR  EIMSK
-#elif defined(GIMSK)
-#  define __EICR  GIMSK
-#elif defined(GICR)
-#  define __EICR  GICR
-#endif
-
-/* If common register defined, define macro. */
-#if defined(__EICR) || defined(__DOXYGEN__)
-#define enable_external_int(mask)               (__EICR = mask)
-#endif
-
-
-
-/** \ingroup avr_interrupts
+/** \def ISR(vector)
+    \ingroup avr_interrupts
 
     \code#include <avr/interrupt.h>\endcode
 
-	This function modifies the \c timsk register.
-	The value you pass via \c ints is device specific. */
+    Introduces an interrupt handler function (interrupt service
+    routine) that runs with global interrupts initially disabled.
 
-static __inline__ void timer_enable_int (unsigned char ints)
-{
-#ifdef TIMSK
-    TIMSK = ints;
+    \c vector must be one of the interrupt vector names that are
+    valid for the particular MCU type.
+*/
+
+#ifdef __cplusplus
+#define ISR(vector)					\
+extern "C" void vector(void);				\
+void vector (void) __attribute__ ((signal));		\
+void vector (void)
+#else
+#define ISR(vector)					\
+void vector (void) __attribute__ ((signal));		\
+void vector (void)
 #endif
-}
+
+/** \def SIGNAL(signame)
+    \ingroup avr_interrupts
+
+    \code#include <avr/interrupt.h>\endcode
+
+    Introduces an interrupt handler function that runs with global interrupts
+    initially disabled.
+
+    This is the same as the ISR macro.
+    \note Do not use anymore in new code, it will be deprecated
+    in a future release.
+*/
+
+#ifdef __cplusplus
+#define SIGNAL(signame)					\
+extern "C" void signame(void);				\
+void signame (void) __attribute__ ((signal));		\
+void signame (void)
+#else
+#define SIGNAL(signame)					\
+void signame (void) __attribute__ ((signal));		\
+void signame (void)
+#endif
+
+/** \def EMPTY_INTERRUPT(signame)
+    \ingroup avr_interrupts
+
+    \code#include <avr/interrupt.h>\endcode
+
+    Defines an empty interrupt handler function. This will not generate
+    any prolog or epilog code and will only return from the ISR. Do not
+    define a function body as this will define it for you.
+    Example:
+    \code EMPTY_INTERRUPT(ADC_vect);\endcode */
+
+#ifdef __cplusplus
+#define EMPTY_INTERRUPT(vector)                \
+extern "C" void vector(void);                  \
+void vector (void) __attribute__ ((naked));    \
+void vector (void) {  __asm__ __volatile__ ("reti" ::); }
+#else
+#define EMPTY_INTERRUPT(vector)                \
+void vector (void) __attribute__ ((naked));    \
+void vector (void) { __asm__ __volatile__ ("reti" ::); }
+#endif
+
+
 
 /*@}*/
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifdef __cplusplus
 }

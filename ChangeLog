@@ -1,5 +1,20 @@
 2005-11-04 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/assembler.dox: replace SIGNAL() by ISR().
+	* doc/api/faq.dox: (Ditto.)
+	* doc/api/interrupts.dox: (Ditto.)
+	* doc/examples/demo/demo.c: (Ditto.)
+	* doc/examples/demo/demo.dox: (Ditto.)
+	* include/avr/interrupt.h: Add ISR(), move enable_external_int()
+	and timer_enable_int() to compat/deprecated.h, move SIGNAL()
+	here (by now).
+	* include/avr/signal.h: Move SIGNAL() and EMPTY_INTERRUPT() to
+	interrupt.h, issue a #warning.
+	* include/compat/deprecated.h: New file.  Collect deprecated
+	items from avr/signal.h.
+
+2005-11-04 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/examples/avr-recv.c: Drop long since obsolete examples.
 	* doc/examples/io.c: (Ditto.)
 	* doc/examples/prg: (Ditto.)

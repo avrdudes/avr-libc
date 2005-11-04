@@ -17,7 +17,6 @@
 #include <inttypes.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <avr/signal.h>
 
 #if defined(__AVR_AT90S2313__)
 #  define OC1 PB3
@@ -68,7 +67,7 @@ enum { UP, DOWN };
 volatile uint16_t pwm; /* Note [1] */
 volatile uint8_t direction;
 
-SIGNAL (SIG_OVERFLOW1) /* Note [2] */
+ISR (TIMER1_OVF_vect) /* Note [2] */
 {
     switch (direction) /* Note [3] */
     {
@@ -101,9 +100,8 @@ ioinit (void) /* Note [5] */
     /* enable OC1 and PB2 as output */
     DDROC = _BV (OC1);
 
-    timer_enable_int (_BV (TOIE1));
-
     /* enable interrupts */
+    TIMSK = _BV (TOIE1);
     sei ();
 }
 

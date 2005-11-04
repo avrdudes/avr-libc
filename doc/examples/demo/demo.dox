@@ -67,7 +67,7 @@ The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
 remember the current value.
 
 \par Note [2]:
-SIGNAL() is a macro that marks the function as an interrupt routine. In this
+ISR() is a macro that marks the function as an interrupt routine. In this
 case, the function will get called when the timer overflows. Setting up
 interrupts is explained in greater detail in \ref avr_interrupts.
 

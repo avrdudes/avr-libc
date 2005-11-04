@@ -25,9 +25,9 @@
 
 /* $Id$ */
 
-/** \defgroup avr_interrupts <avr/interrupt.h> <avr/signal.h>: Interrupts and Signals
+/** \defgroup avr_interrupts <avr/interrupt.h>: Interrupts
 
-\note This discussion of interrupts and signals was originally taken from Rich Neswold's
+\note This discussion of interrupts was originally taken from Rich Neswold's
 document. See \ref acks.
 
 <h3>Introduction to avr-libc's interrupt handling</h3>
@@ -51,14 +51,14 @@ enabled by tagging the interrupt function with
 
 These details seem to make interrupt routines a little messy, but all these
 details are handled by the Interrupt API. An interrupt routine is defined with
-SIGNAL(). This macro register and mark
+ISR(). This macro register and mark
 the routine as an interrupt handler for the specified peripheral. The
 following is an example definition of a handler for the ADC interrupt.
 
 \code
-#include <avr/signal.h>
+#include <avr/interrupt.h>
 
-SIGNAL(ADC_vect)
+ISR(ADC_vect)
 {
     // user code here
 }
@@ -73,12 +73,12 @@ If an unexpected interrupt occurs (interrupt is enabled and no handler is
 installed, which usually indicates a bug), then the default action is to reset
 the device by jumping to the reset vector. You can override this by supplying
 a function named \c __vector_default which should be defined with
-SIGNAL() as such.
+ISR() as such.
 
 \code
-#include <avr/signal.h>
+#include <avr/interrupt.h>
 
-SIGNAL(__vector_default)
+ISR(__vector_default)
 {
     // user code here
 }
@@ -107,13 +107,13 @@ handler by declaring the handler the following way:
 
 \anchor attr_interrupt
 \code
-void SIG_XXX(void) __attribute__((interrupt));
-void SIG_XXX(void) {
+void XXX_vect(void) __attribute__((interrupt));
+void XXX_vect(void) {
   ...
 }
 \endcode
 
-where \c SIG_XXX is the name of a valid interrupt vector for the MCU
+where \c XXX_vect is the name of a valid interrupt vector for the MCU
 type in question, as explained below.
 
 <h3>Chosing the vector: Interrupt vector names</h3>
@@ -138,13 +138,13 @@ available for the AVR that use a similar naming convention.
 The historical naming style might become deprecated in a future
 release, so it is not recommended for new projects.
 
-\note The SIGNAL() macro cannot really spell-check
+\note The ISR() macro cannot really spell-check
 the argument passed to them.  Thus, by misspelling one of the names
-below in a call to SIGNAL(), a function will be created
+below in a call to ISR(), a function will be created
 that, while possibly being usable as an interrupt function, is not
 actually wired into the interrupt vector table.  The compiler will
 generate a warning if it detects a suspiciously looking name of a
-SIGNAL() function (i.e. one that after macro replacement does not
+ISR() function (i.e. one that after macro replacement does not
 start with "__vector_").
 
 */

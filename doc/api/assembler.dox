@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2004, Joerg Wunsch
+/* Copyright (c) 2002,2004,2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -113,8 +113,8 @@ main:
 1:
 	rjmp	1b				; Note [6]
 
-	.global	SIG_OVERFLOW0			; Note [7]
-SIG_OVERFLOW0:
+	.global	TIMER0_OVF_vect			; Note [7]
+TIMER0_OVF_vect:
 	ldi	inttmp, 256 - tmconst + fuzz
 	out	_SFR_IO_ADDR(TCNT0), inttmp	; Note [8]
 
@@ -254,7 +254,7 @@ interrupt sevice needs to be saved, usually on the stack.
 
 \par Note [10]
 
-As explained in \ref avr_interrupts "Interrupts and Signals", a global "catch-all" interrupt
+As explained in \ref avr_interrupts "Interrupts", a global "catch-all" interrupt
 handler that gets all unassigned interrupt vectors can be installed
 using the name \c __vector_default.  This must be \c .global, and
 obviously, should end in a \c reti instruction.  (By default, a jump
