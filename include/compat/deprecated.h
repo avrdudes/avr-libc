@@ -40,11 +40,13 @@
     deprecated over time.
 
     \code #include <compat/deprected.h> \endcode
-  */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+    These items are supplied within that header file for backward
+    compatibility reasons only, so old source code that has been
+    written for previous library versions could easily be maintained
+    until its end-of-life.  Use of any of these items in new code is
+    strongly discouraged.
+  */
 
 /** \name Allowing specific system-wide interrupts
 
@@ -137,8 +139,64 @@ void signame (void)
 
 /*@}*/
 
-#ifdef __cplusplus
-}
-#endif
+/**
+   \name Obsolete IO macros
+
+   Back in a time when AVR-GCC and avr-libc could not handle IO port
+   access in the direct assignment form as they are handled now, all
+   IO port access had to be done through specific macros that
+   eventually resulted in inline assembly instructions performing the
+   desired action.
+
+   These macros became obsolete, as reading and writing IO ports can
+   be done by simply using the IO port name in an expression, and all
+   bit manipulation (including those on IO ports) can be done using
+   generic C bit manipulation operators.
+
+   The macros in this group simulate the historical behaviour.  While
+   they are supposed to be applied to IO ports, the emulation actually
+   uses standard C methods, so they could be applied to arbitrary
+   memory locations as well.
+*/
+
+/*@{*/
+
+/**
+   \ingroup deprecated_items
+   \def inp(port)
+   \deprecated
+
+   Read a value from an IO port \c port.
+*/
+#define inp(port) (port)
+
+/**
+   \ingroup deprecated_items
+   \def outp(port, val)
+   \deprecated
+
+   Write \c val to IO port \c port.
+*/
+#define outp(port, val) (port) = (val)
+
+/**
+   \ingroup deprecated_items
+   \def sbi(port, bit)
+   \deprecated
+
+   Set \c bit in IO port \c port.
+*/
+#define sbi(port, bit) (port) |= (1 << (bit))
+
+/**
+   \ingroup deprecated_items
+   \def cbi(port, bit)
+   \deprecated
+
+   Clear \c bit in IO port \c port.
+*/
+#define cbi(port, bit) (port) &= ~(1 << (bit))
+
+/*@}*/
 
 #endif /* _COMPAT_DEPRECATED_H_ */

@@ -38,10 +38,16 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
-/*
-   compat/ina90.h - this is an attempt to provide some compatibility with
+/**
+   \defgroup compat_ina90 <compat/ina90.h>: Compatibility with IAR EWB 3.x
+
+   \code #include <compat/ina90.h> \endcode
+
+   This is an attempt to provide some compatibility with
    header files that come with IAR C, to make porting applications
    between different compilers easier.  No 100% compatibility though.
+
+   \note For actual documentation, please see the IAR manual.
  */
 
 #ifndef _INA90_H_
