@@ -61,21 +61,21 @@
 _U(memccpy):
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
-.Lmemccpy_loop:
+.L_memccpy_loop:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcs	.Lmemccpy_notfound
+	brcs	.L_memccpy_notfound
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
 	cp	__tmp_reg__, val_lo
-	brne	.Lmemccpy_loop
+	brne	.L_memccpy_loop
 	X_movw	ret_lo, XL
 	ret
-.Lmemccpy_notfound:
+.L_memccpy_notfound:
 	clr	ret_lo
 	clr	ret_hi
 	ret
-.Lmemccpy_end:
-	.size	_U(memccpy), .Lmemccpy_end - _U(memccpy)
+.L_memccpy_end:
+	.size	_U(memccpy), .L_memccpy_end - _U(memccpy)
 
 #endif /* not __DOXYGEN__ */

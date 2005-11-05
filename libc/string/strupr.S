@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /*
    strupr.S
    Convert a string to upper case
@@ -54,28 +56,28 @@
 
 #if !defined(__DOXYGEN__)
 
-    .text
-    .global _U(strupr)
-    .type   _U(strupr), @function
+	.text
+	.global	_U(strupr)
+	.type	_U(strupr), @function
 
 _U(strupr):
-    LOAD_X(str_lo, str_hi)
-.strupr_loop:
-    LD    temp, X           ; get 1st character
-    TST   temp              ; is it end of string
-    BREQ  .strupr_done
-    ANDI  temp, 0xDF        ; make upper case
-    CPI   temp, 'A'         ; test on [a .. z]
-    BRLT  .strupr_next
-    CPI   temp, 'Z'+1
-    BRGE  .strupr_next
-    ST    X, temp           ; ok, it is a char --> store it
-.strupr_next:
-    ADIW  XL, 1				; point to next character
-	RJMP  .strupr_loop
-.strupr_done:
-    RET
-.strupr_end:
-	.size _U(strupr), .strupr_end - _U(strupr)
+	X_movw	XL, str_lo
+.L_strupr_loop:
+	LD	temp, X		; get 1st character
+	TST	temp		; is it end of string
+	BREQ	.L_strupr_done
+	ANDI	temp, 0xDF	; make upper case
+	CPI	temp, 'A'	; test on [a .. z]
+	BRLT	.L_strupr_next
+	CPI	temp, 'Z'+1
+	BRGE	.L_strupr_next
+	ST	X, temp		; ok, it is a char --> store it
+.L_strupr_next:
+	ADIW	XL, 1		; point to next character
+	RJMP	.L_strupr_loop
+.L_strupr_done:
+	RET
+.L_strupr_end:
+	.size	_U(strupr), .L_strupr_end - _U(strupr)
 
 #endif /* not __DOXYGEN__ */

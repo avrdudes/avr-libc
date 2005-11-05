@@ -58,21 +58,21 @@
 	.type	_U(memchr), @function
 _U(memchr):
 	X_movw	ZL, src_lo
-.Lmemchr_loop:
+.L_memchr_loop:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
-	brcs	.Lmemchr_notfound
+	brcs	.L_memchr_notfound
 	ld	__tmp_reg__, Z+
 	cp	__tmp_reg__, val_lo
-	brne	.Lmemchr_loop
+	brne	.L_memchr_loop
 	sbiw	ZL, 1		; undo post-increment
 	X_movw	ret_lo, ZL
 	ret
-.Lmemchr_notfound:
+.L_memchr_notfound:
 	clr	ret_lo
 	clr	ret_hi
 	ret
-.Lmemchr_end:
-	.size	_U(memchr), .Lmemchr_end - _U(memchr)
+.L_memchr_end:
+	.size	_U(memchr), .L_memchr_end - _U(memchr)
 
 #endif /* not __DOXYGEN__ */

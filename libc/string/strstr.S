@@ -113,7 +113,7 @@ _U(strstr):
 	ret
 
 
-.strstr_end:
-.size _U(strstr), .strstr_end - _U(strstr)
+.L_strstr_end:
+.size _U(strstr), .L_strstr_end - _U(strstr)
 
 #endif /* not __DOXYGEN__ */

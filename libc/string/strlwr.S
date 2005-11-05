@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /*
    strlwr.S
    convert a string to lower case
@@ -33,6 +35,7 @@
    Contributors:
      Created by Reiner Patommel
 */
+
 #include "macros.inc"
 
 #define str_hi r25
@@ -52,28 +55,28 @@
 
 #if !defined(__DOXYGEN__)
 
-    .text
-    .global _U(strlwr)
-    .type   _U(strlwr), @function
+	.text
+	.global	_U(strlwr)
+	.type	_U(strlwr), @function
 
 _U(strlwr):
-    LOAD_X(str_lo, str_hi)
-.strlwr_loop:
-    LD    temp, X           ; get 1st character
-    TST   temp              ; is it end of string
-    BREQ  .strlwr_done
-    ORI   temp, 0x20        ; make lower case
-    CPI   temp, 'a'         ; test on [a .. z]
-    BRLT  .strlwr_next
-    CPI   temp, 'z'+1
-    BRGE  .strlwr_next
-    ST    X, temp           ; ok, it is a char --> store it
-.strlwr_next:
-    ADIW  XL, 1				; point to next character
-	RJMP  .strlwr_loop
-.strlwr_done:
-    RET
-.strlwr_end:
-	.size _U(strlwr), .strlwr_end - _U(strlwr)
+	X_movw	XL, str_lo
+.L_strlwr_loop:
+	LD	temp, X		; get 1st character
+	TST	temp		; is it end of string
+	BREQ	.L_strlwr_done
+	ORI	temp, 0x20	; make lower case
+	CPI	temp, 'a'	; test on [a .. z]
+	BRLT	.L_strlwr_next
+	CPI	temp, 'z'+1
+	BRGE	.L_strlwr_next
+	ST	X, temp		; ok, it is a char --> store it
+.L_strlwr_next:
+	ADIW	XL, 1		; point to next character
+	RJMP	.L_strlwr_loop
+.L_strlwr_done:
+	RET
+.L_strlwr_end:
+	.size	_U(strlwr), .L_strlwr_end - _U(strlwr)
 
 #endif /* not __DOXYGEN__ */

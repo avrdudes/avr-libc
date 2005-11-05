@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /*
    strncasecmp.S
    Case insensitive compare
@@ -60,38 +62,39 @@
 
 #if !defined(__DOXYGEN__)
 
-    .text
-    .global _U(strncasecmp)
-    .type   _U(strncasecmp), @function
+	.text
+	.global	_U(strncasecmp)
+	.type	_U(strncasecmp), @function
+	
 _U(strncasecmp):
-    LOAD_Z(s2_lo, s2_hi)
-    LOAD_X(s1_lo, s1_hi)
-.strncasecmp_loop:
-    SUBI    len_lo, lo8(1)
-    SBCI    len_hi, hi8(1)
-    BRCS    .strncasecmp_equal
-    LD      ret_lo, X+          ; load *s1
-    LD      tmp, Z+             ; load *s2
-    MOV     cht, tmp            ; copy of *s2 to cht
-    ORI     cht, 0x20           ; make it lower case
-    CPI     cht, 'a'            ; test on [a .. z]
-    BRLT    .strncasecmp_tst
-    CPI     cht, 'z'+1
-    BRGE    .strncasecmp_tst
-    ORI     tmp, 0x20           ; we got an alpha in s2
-    ORI     ret_lo, 0x20        ; make *s1, *s2 lower case
-.strncasecmp_tst:
-    SUB     ret_lo, tmp         ; compare chars
-    BRNE    .strncasecmp_done
-    TST     tmp                 ; end of s2?
-    BRNE    .strncasecmp_loop
-.strncasecmp_equal:
-    SUB     ret_lo, ret_lo      ; clear ret_lo and C flag
-.strncasecmp_done:
+	X_movw	ZL, s2_lo
+	X_movw	XL, s1_lo
+.L_strncasecmp_loop:
+	SUBI    len_lo, lo8(1)
+	SBCI    len_hi, hi8(1)
+	BRCS	.L_strncasecmp_equal
+	LD      ret_lo, X+		; load *s1
+	LD      tmp, Z+			; load *s2
+	MOV     cht, tmp		; copy of *s2 to cht
+	ORI     cht, 0x20		; make it lower case
+	CPI     cht, 'a'		; test on [a .. z]
+	BRLT	.L_strncasecmp_tst
+	CPI     cht, 'z'+1
+	BRGE    .L_strncasecmp_tst
+	ORI     tmp, 0x20		; we got an alpha in s2
+	ORI     ret_lo, 0x20		; make *s1, *s2 lower case
+.L_strncasecmp_tst:
+	SUB     ret_lo, tmp		; compare chars
+	BRNE	.L_strncasecmp_done
+	TST     tmp			; end of s2?
+	BRNE	.L_strncasecmp_loop
+.L_strncasecmp_equal:
+	SUB     ret_lo, ret_lo		; clear ret_lo and C flag
+.L_strncasecmp_done:
 ; ret_hi = SREG.C ? 0xFF : 0
-    SBC     ret_hi, ret_hi
-    RET
-.strncasecmp_end:
-    .size   _U(strncasecmp), .strncasecmp_end - _U(strncasecmp)
+	SBC     ret_hi, ret_hi
+	RET
+.L_strncasecmp_end:
+	.size	_U(strncasecmp), .L_strncasecmp_end - _U(strncasecmp)
 
 #endif /* not __DOXYGEN__ */

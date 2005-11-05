@@ -1,3 +1,14 @@
+2005-11-05 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/string/strcasecmp.S: Make labels local, add Id line, 
+	use X_movw instead LOAD_X/LOAD_Z.
+	* libc/string/strlwr.S: (Ditto.)
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/string/strupr.S: (Ditto.)
+	* libc/string/memccpy.S: Rename labels.
+	* libc/string/memchr.S: (Ditto.)
+	* libc/string/strstr.S: Make labels local.
+
 2005-11-04 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/assembler.dox: replace SIGNAL() by ISR().
