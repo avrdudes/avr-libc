@@ -15,6 +15,7 @@
 	* include/util/parity.h: moved from avr/parity.h.
 	* include/util/twi.h: moved from compat/twi.h, doxygenified.
 	* doc/examples/twitest/twitest.c: <compat/twi.h> -> <util/twi.h>
+	* doc/examples/twitest/twitest.dox: (Ditto.)
 
 2005-11-05 Anatoly Sokolov <aesok@pautinka.net>
 

@@ -97,7 +97,7 @@ EEPROM that carries the RAM configuration information.
 
 \par Note [1]
 
-The header file <tt>&lt;compat/twi.h&gt;</tt> contains some macro
+The header file <tt>&lt;util/twi.h&gt;</tt> contains some macro
 definitions for symbolic constants used in the TWI status register.
 These definitions match the names used in the Atmel datasheet except
 that all names have been prefixed with \c TW_.
