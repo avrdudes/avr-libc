@@ -1,4 +1,5 @@
-/* Copyright (c) 2005 Joerg Wunsch
+/* Copyright (c) 2002, Marek Michalkiewicz
+   Copyright (c) 2004,2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -30,9 +31,34 @@
 
 /* $Id$ */
 
-#ifndef _COMPAT_TWI_H_
-#define _COMPAT_TWI_H_
+#ifndef _UTIL_PARITY_H_
+#define _UTIL_PARITY_H_
 
-#include <util/twi.h>
+/** \defgroup util_parity <util/parity.h>: Parity bit generation
+    \code #include <util/parity.h> \endcode
 
-#endif /* _COMPAT_TWI_H_ */
+    This header file contains optimized assembler code to calculate
+    the parity bit for a byte.
+*/
+/** \def parity_even_bit
+    \ingroup util_parity
+    \returns 1 if \c val has an odd number of bits set. */
+#define parity_even_bit(val)				\
+(__extension__({					\
+	unsigned char __t;				\
+	__asm__ (					\
+		"mov __tmp_reg__,%0" "\n\t"		\
+		"swap %0" "\n\t"			\
+		"eor %0,__tmp_reg__" "\n\t"		\
+		"mov __tmp_reg__,%0" "\n\t"		\
+		"lsr %0" "\n\t"				\
+		"lsr %0" "\n\t"				\
+		"eor %0,__tmp_reg__" 			\
+		: "=r" (__t)				\
+		: "0" ((unsigned char)(val))		\
+		: "r0"					\
+	);						\
+	(((__t + 1) >> 1) & 1);				\
+ }))
+
+#endif /* _UTIL_PARITY_H_ */

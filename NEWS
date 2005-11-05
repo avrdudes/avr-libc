@@ -12,9 +12,14 @@
     deprecated in a future version.
 
   - A new header file, <compat/deprecated.h> has been established.
-    Its purpose is to collect deprecated items from older versions
-    of the library, starting out with the enable_external_int(),
-    timer_enable_int(), and INTERRUPT() macros/functions.
+    Its purpose is to collect deprecated items from older versions of
+    the library, starting out with the enable_external_int(),
+    timer_enable_int(), and INTERRUPT() macros/functions, as well as
+    the old obsoleted inp/outp/sbi/cbi macros.
+
+  - A new include file subdirectory named "util/" has been created.
+    The files <compat/twi.h>, <avr/crc16.h>, <avr/delay.h>, and
+    <avr/parity.h> have been moved into the new util/ subdirectory.
 
   - A new set of interrupt vector names has been added, closely
     matching the names given in the datasheet, and more compatible to

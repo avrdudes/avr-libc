@@ -2,6 +2,14 @@
 
 	* include/compat/deprecated.h: add inp/outp/sbi/cbi.
 	* include/compat/ina90.h: add minimal doxygen documentation.
+	* include/compat/twi.h: move to util/twi.h, leave stub.
+	* include/avr/crc16.h: move to util/crc16.h, leave stub.
+	* include/avr/delay.h: move to util/delay.h, leave stub.
+	* include/avr/parity.h: move to util/parity.h, leave stub.
+	* include/util/crc16.h: moved from avr/crc16.h.
+	* include/util/delay.h: moved from avr/delay.h.
+	* include/util/parity.h: moved from avr/parity.h.
+	* include/util/twi.h: moved from compat/twi.h, doxygenified.
 
 2005-11-05 Anatoly Sokolov <aesok@pautinka.net>
 
