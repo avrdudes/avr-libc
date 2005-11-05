@@ -1,5 +1,9 @@
 2005-11-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: bump version date
+
+2005-11-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/compat/deprecated.h: add inp/outp/sbi/cbi.
 	* include/compat/ina90.h: add minimal doxygen documentation.
 	* include/compat/twi.h: move to util/twi.h, leave stub.
