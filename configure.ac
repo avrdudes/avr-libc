@@ -513,6 +513,7 @@ AC_CONFIG_FILES([
 	include/Makefile
 	include/avr/Makefile
 	include/compat/Makefile
+	include/util/Makefile
 	libc/Makefile
 	libc/misc/Makefile
 	libc/pmstring/Makefile

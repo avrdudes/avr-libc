@@ -42,4 +42,4 @@ avr_HEADERS = \
     stdlib.h \
     string.h
 
-SUBDIRS = avr compat
+SUBDIRS = avr compat util
