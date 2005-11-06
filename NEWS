@@ -13,6 +13,7 @@
   [#14241] 'eeprom_is_ready' is not compiled with ATmega48
   [#14262] avr-libc documentation error about .init sections
   [#14266] use __extension__ in avr-libc header files
+  [#14327] wdt_disable() missing a cli
   [#14378] EEPROM library d'not support at86rf401 device
   [#14433] Improve documentation of <avr/delay.h>
   [#14486] some macros from boot.h doesn't compile correctly

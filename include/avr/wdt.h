@@ -137,6 +137,7 @@
 #define wdt_disable() \
 __asm__ __volatile__ (  \
     "in __tmp_reg__, __SREG__" "\n\t" \
+    "cli" "\n\t" \
     "sts %0, %1" "\n\t" \
     "sts %0, __zero_reg__" "\n\t" \
     "out __SREG__,__tmp_reg__" "\n\t" \
@@ -175,6 +176,7 @@ __asm__ __volatile__ (  \
 #define wdt_disable() \
 __asm__ __volatile__ (  \
     "in __tmp_reg__, __SREG__" "\n\t" \
+     "cli" "\n\t" \
     "out %0, %1" "\n\t" \
     "out %0, __zero_reg__" "\n\t" \
     "out __SREG__,__tmp_reg__" "\n\t" \
