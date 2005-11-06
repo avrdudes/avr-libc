@@ -1,3 +1,9 @@
+2005-11-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	(Patch submitted by Colin O'Flynn.)
+	* include/avr/wdt.h: protect wdt_disable against interrupts,
+	resolves bug #14327 overview: wdt_disable() missing a cli
+
 2005-11-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: bump version date
