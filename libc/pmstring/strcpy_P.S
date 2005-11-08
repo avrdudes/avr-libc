@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -50,16 +52,16 @@
 	.global	_U(strcpy_P)
 	.type	_U(strcpy_P), @function
 _U(strcpy_P):
-	LOAD_Z(src_lo, src_hi)
-	LOAD_X(dest_lo, dest_hi)
-.strcpy_P_loop:
+	X_movw	ZL, src_lo
+	X_movw	XL, dest_lo
+.L_strcpy_P_loop:
 	LPM_R0_ZP
 	st	X+, r0
 	tst	r0
-	brne	.strcpy_P_loop
+	brne	.L_strcpy_P_loop
 ; return dest (unchanged)
 	ret
-.strcpy_P_end:
-	.size	_U(strcpy_P), .strcpy_P_end - _U(strcpy_P)
+.L_strcpy_P_end:
+	.size	_U(strcpy_P), .L_strcpy_P_end - _U(strcpy_P)
 
 #endif /* not __DOXYGEN__ */

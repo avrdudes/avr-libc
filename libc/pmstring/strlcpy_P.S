@@ -32,6 +32,7 @@
 
 */
 
+/* $Id$ */
 
 /** \ingroup avr_pgmspace
     \fn size_t strlcpy_P (char *dst, PGM_P, size_t siz)
@@ -45,7 +46,6 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "gasava.inc"
 #include "macros.inc"
 
 #define dst_hi		r25
@@ -65,41 +65,36 @@
 	.type	_U(strlcpy_P), @function
 
 _U(strlcpy_P):
-	LOAD_X	(dst_lo, dst_hi)	; X = dst
-	LOAD_Z	(src_lo, src_hi)	; Z = src
+	X_movw	XL, dst_lo		; X = dst
+	X_movw	ZL, src_lo		; Z = src
 	cp	siz_lo, __zero_reg__
 	cpc	siz_hi, __zero_reg__	; size == 0 ?
-	breq	.strlcpy_P_truncated
+	breq	.L_strlcpy_P_truncated
 
-.strlcpy_P_copy_loop:			; copy src to dst
+.L_strlcpy_P_copy_loop:			; copy src to dst
 	subi	siz_lo, lo8(-(-1))
 	sbci	siz_hi, hi8(-(-1))	; decrement siz
 	breq	1f 			; --> siz chars copied
 	LPM_R0_ZP			; get next src char
 	st	X+, __tmp_reg__		; copy char
 	tst	__tmp_reg__		; end of src string ?
-	breq	.strlcpy_P_len		; --> all src chars copied
-	rjmp	.strlcpy_P_copy_loop	; next char
+	breq	.L_strlcpy_P_len		; --> all src chars copied
+	rjmp	.L_strlcpy_P_copy_loop	; next char
 1:	st	X, __zero_reg__		; truncate dst string
 
-.strlcpy_P_truncated:			; find Z = end of src string
+.L_strlcpy_P_truncated:			; find Z = end of src string
 	LPM_R0_ZP			; get next char from src
 	tst	__tmp_reg__		; end of src string ?
-	brne	.strlcpy_P_truncated	; next char
+	brne	.L_strlcpy_P_truncated	; next char
 
-.strlcpy_P_len:				; calculate strlen(src)
+.L_strlcpy_P_len:			; calculate strlen(src)
 	sub	Z_lo, src_lo
 	sbc	Z_hi, src_hi		; Z points past \0
 	sbiw	Z_lo, 1
-	#if __AVR_ENHANCED__
-	movw	rWord, Z_lo
-	#else
-	mov	rWord_lo, Z_lo
-	mov	rWord_hi, Z_hi
-	#endif
+	X_movw	rWord, Z_lo
 	ret
 
-.strlcpy_P_end:
-	.size	_U(strlcpy_P), .strlcpy_P_end - _U(strlcpy_P)
+.L_strlcpy_P_end:
+	.size	_U(strlcpy_P), .L_strlcpy_P_end - _U(strlcpy_P)
 
 #endif /* not __DOXYGEN__ */

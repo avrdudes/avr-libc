@@ -56,13 +56,13 @@
 	.global	_U(strnlen_P)
 	.type	_U(strnlen_P), @function
 _U(strnlen_P):
-	LOAD_Z(src_lo, src_hi)
-1:
+	X_movw	ZL, src_lo
+.L_strnlen_P_loop:
 	LPM_R0_ZP
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
 	cpse	r0, __zero_reg__
-	brcc	1b
+	brcc	.L_strnlen_P_loop
 ; Z points one character past the terminating NUL
 ; return Z - 1 - src = (-1 - src) + Z = ~src + Z
 	com	src_lo
@@ -70,7 +70,7 @@ _U(strnlen_P):
 	add	src_lo, ZL
 	adc	src_hi, ZH
 	ret
-.Lstrnlen_P_end:
-	.size	_U(strnlen_P), .Lstrnlen_P_end - _U(strnlen_P)
+.L_strnlen_P_end:
+	.size	_U(strnlen_P), .L_strnlen_P_end - _U(strnlen_P)
 
 #endif /* not __DOXYGEN__ */

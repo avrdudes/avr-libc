@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /*
    strcasecmp_P.S
    Case insensitive compare
@@ -62,34 +64,34 @@
 
 #if !defined(__DOXYGEN__)
 
-    .text
-    .global _U(strcasecmp_P)
-    .type   _U(strcasecmp_P), @function
+	.text
+	.global	_U(strcasecmp_P)
+	.type	_U(strcasecmp_P), @function
 _U(strcasecmp_P):
-    LOAD_Z(s2_lo, s2_hi)
-    LOAD_X(s1_lo, s1_hi)
-.strcasecmp_P_loop:
-    LD    ret_lo, X+          ; load *s1
-    LPM_R0_ZP                 ; load *s2
-    MOV   tmp,r0              ; copy of *s2 to tmp
-    MOV   cht, r0             ; copy of *s2 to cht
-    ORI   cht, 0x20           ; make tmp lower case
-    CPI   cht, 'a'            ; test on [a .. z]
-    BRLT  .strcasecmp_P_tst
-    CPI   cht, 'z'+1
-    BRGE  .strcasecmp_P_tst
-    ORI   tmp, 0x20           ; we got an aplpha in s2
-    ORI   ret_lo, 0x20
-.strcasecmp_P_tst:               ; compare
-    SUB   ret_lo, tmp
-    BRNE  .strcasecmp_P_done
-    TST   r0                  ; end of s2?
-    BRNE  .strcasecmp_P_loop
-.strcasecmp_P_done:
+	X_movw	ZL, s2_lo
+	X_movw	XL, s1_lo
+.L_strcasecmp_P_loop:
+	LD	ret_lo, X+		; load *s1
+	LPM_R0_ZP			; load *s2
+	MOV	tmp,r0			; copy of *s2 to tmp
+	MOV	cht, r0			; copy of *s2 to cht
+	ORI	cht, 0x20		; make tmp lower case
+	CPI	cht, 'a'		; test on [a .. z]
+	BRLT	.L_strcasecmp_P_tst
+	CPI	cht, 'z'+1
+	BRGE	.L_strcasecmp_P_tst
+	ORI	tmp, 0x20		; we got an aplpha in s2
+	ORI	ret_lo, 0x20
+.L_strcasecmp_P_tst:			; compare
+	SUB	ret_lo, tmp
+	BRNE	.L_strcasecmp_P_done
+	TST	r0			; end of s2?
+	BRNE	.L_strcasecmp_P_loop
+.L_strcasecmp_P_done:
 ; ret_hi = SREG.C ? 0xFF : 0
-    SBC   ret_hi, ret_hi
-    RET
-.strcasecmp_P_end:
-    .size   _U(strcasecmp_P), .strcasecmp_P_end - _U(strcasecmp_P)
+	SBC	ret_hi, ret_hi
+	RET
+.L_strcasecmp_P_end:
+	.size   _U(strcasecmp_P), .L_strcasecmp_P_end - _U(strcasecmp_P)
 
 #endif /* not __DOXYGEN__ */

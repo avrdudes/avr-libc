@@ -1,3 +1,21 @@
+2005-11-08 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/pmstring/strncat_P.S:  Make labels local, add Id line, 
+	use X_movw when possible, use X_movw instead LOAD_X/LOAD_Z.
+	* libc/pmstring/strncpy_P.S: (Ditto.)
+	* libc/pmstring/memcpy_P.S:  Make labels local, add Id line, 
+	use X_movw instead LOAD_X/LOAD_Z.
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strcat_P.S: (Ditto.)
+	* libc/pmstring/strcmp_P.S: (Ditto.)
+	* libc/pmstring/strcpy_P.S: (Ditto.)
+	* libc/pmstring/strlcat_P.S: (Ditto.)
+	* libc/pmstring/strlcpy_P.S: (Ditto.)
+	* libc/pmstring/strlen_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+	* libc/pmstring/strncmp_P.S: (Ditto.)
+	* libc/pmstring/strnlen_P.S: (Ditto.)
+
 2005-11-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	(Patch submitted by Colin O'Flynn.)

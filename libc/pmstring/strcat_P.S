@@ -33,6 +33,8 @@
      Created by Reiner Patommel
 */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 #define dest_hi r25
@@ -55,21 +57,21 @@
 	.global	_U(strcat_P)
 	.type	_U(strcat_P), @function
 _U(strcat_P):
-	LOAD_Z(src_lo, src_hi)
-	LOAD_X(dest_lo, dest_hi)
-.strcat_P_skip:
+	X_movw	ZL, src_lo
+	X_movw	XL, dest_lo
+.L_strcat_P_skip:
 	ld	__tmp_reg__, X+
 	tst	__tmp_reg__
-	brne	.strcat_P_skip
+	brne	.L_strcat_P_skip
 	sbiw	XL, 1		; undo post-increment
-.strcat_P_loop:
+.L_strcat_P_loop:
 	LPM_R0_ZP
 	st	X+, r0
 	tst	r0
-	brne	.strcat_P_loop
+	brne	.L_strcat_P_loop
 ; return dest (unchanged)
 	ret
-.strcat_P_end:
-	.size	_U(strcat_P), .strcat_P_end - _U(strcat_P)
+.L_strcat_P_end:
+	.size	_U(strcat_P), .L_strcat_P_end - _U(strcat_P)
 
 #endif /* not __DOXYGEN__ */
