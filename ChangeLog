@@ -1,3 +1,8 @@
+2005-11-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am(EXTRA_DIST): add doxygen.config.in
+	(reported by Galen Seitz).
+
 2005-11-08 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/pmstring/strncat_P.S:  Make labels local, add Id line, 
