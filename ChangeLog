@@ -1,3 +1,11 @@
+2005-11-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdio/vfscanf.c: fix the return value for starred format
+	specifiers, and return the number of assignments rather than the
+	number of conversions.
+	Fixes bug #14104: sscanf returns number of matches instead of
+	number of assignments
+
 2005-11-08 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/pmstring/strncat_P.S:  Make labels local, add Id line, 
