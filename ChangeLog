@@ -1,5 +1,13 @@
 2005-11-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* libc/stdio/vfscanf.c: fix the return value for starred format
+	specifiers, and return the number of assignments rather than the
+	number of conversions.
+	Fixes bug #14104: sscanf returns number of matches instead of
+	number of assignments
+
+2005-11-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/Makefile.am(EXTRA_DIST): add doxygen.config.in
 	(reported by Galen Seitz).
 	* libc/stdio/vfscanf.c: include <stdlib.h> so strtod()

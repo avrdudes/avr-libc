@@ -104,7 +104,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 	} a;
 	char	c;	/* holds a char from the format string */
 	uint8_t	base;
-	int	nconvs, i, j, olen;
+	int	nconvs, rv, i, j, olen;
 #if SCANF_LEVEL > SCANF_MIN
 	int8_t	width;
 #endif
@@ -118,6 +118,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 	flags = 0;
 	nconvs = 0;
 	i = 0;
+	rv = EOF;
 	olen = stream->len = 0;
 
 	if ((stream->flags & __SRD) == 0)
@@ -536,15 +537,19 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 #if SCANF_LEVEL >= SCANF_FLT
 		  nextconv:
 #endif
-			flags = 0;
-			if (stream->len > olen)
-				nconvs++;
-			else if (c != 'n' || i == EOF)
+			if (stream->len > olen) {
+#if SCANF_LEVEL >= SCANF_STD
+				if (!(flags & FLSTAR))
+#endif
+					nconvs++;
+				rv = 0;
+			} else if (c != 'n' || i == EOF)
 				/*
 				 * If one conversion failed completely,
 				 * punt.
 				 */
 				goto leave;
+			flags = 0;
 		} else if (c == '%') {
 			flags = FLHASPERCENT;
 			base = 10;
@@ -575,16 +580,21 @@ leave:
 	 * or end-of-file), adjust the total number of conversions
 	 * done if at least one char could be read from the stream.
 	 */
-	if ((flags & FLHASPERCENT) && stream->len > olen)
-		nconvs++;
+	if ((flags & FLHASPERCENT) && stream->len > olen) {
+#if SCANF_LEVEL >= SCANF_STD
+		if (!(flags & FLSTAR))
+#endif
+			nconvs++;
+		rv = 0;
+	}
 	/*
 	 * If an error occurs before the first successful conversion,
 	 * we ought to return EOF.  Before getting here, all
 	 * conversions maintain the last character read from the
 	 * stream (or EOF) within variable `i'.
 	 */
-	if (nconvs == 0 && i == EOF)
-		nconvs = EOF;
+	if (i == EOF && nconvs == 0)
+		return rv;
 
 	return nconvs;
 }
