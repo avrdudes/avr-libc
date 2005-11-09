@@ -26,9 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */  
 
-/*
-   $Id$
+/* $Id$ */
 
+ /*
    Contributors:
      Created by Reiner Patommel
      Changes: Jochen Pernsteiner, Marek Michalkiewicz
@@ -72,64 +72,64 @@
  */
 
 _U(atoi):
-	LOAD_Z	(str_lo, str_hi)	; set pointer to string
+	X_movw	ZL, str_lo		; set pointer to string
 	CLR	num_lo
 	CLR	num_hi			; clear number
 	CLT				; clear sign flag
 
-.atoi_loop:
+.L_atoi_loop:
 	LD	tmp, Z+			; get (next) character
 	TST	tmp			; is it end of string?
-	BREQ	.atoi_sig
+	BREQ	.L_atoi_sig
 	CPI	tmp, ' '		; skip whitespace
-	BREQ	.atoi_loop
+	BREQ	.L_atoi_loop
 	CPI	tmp, '\t'
-	BREQ	.atoi_loop
+	BREQ	.L_atoi_loop
 	CPI	tmp, '\n'
-	BREQ	.atoi_loop
+	BREQ	.L_atoi_loop
 	CPI	tmp, '\f'
-	BREQ	.atoi_loop
+	BREQ	.L_atoi_loop
 	CPI	tmp, '\r'
-	BREQ	.atoi_loop
+	BREQ	.L_atoi_loop
 	CPI	tmp, '\v'
-	BREQ	.atoi_loop
+	BREQ	.L_atoi_loop
 	CPI	tmp, '+'		; if '+' convert
-	BREQ	.atoi_loop2
+	BREQ	.L_atoi_loop2
 	CPI	tmp, '-'		; if '-' remember sign
-	BRNE	.atoi_digit
+	BRNE	.L_atoi_digit
 
-.atoi_neg:
+.L_atoi_neg:
 	SET				; remember number is negative
 
-.atoi_loop2:
+.L_atoi_loop2:
 	LD	tmp, Z+
 	TST	tmp
-	BREQ	.atoi_sig
+	BREQ	.L_atoi_sig
 
-.atoi_digit:
+.L_atoi_digit:
 	CPI	tmp, '0'		; test on [0 .. 9]
-	BRLT	.atoi_sig
+	BRLT	.L_atoi_sig
 	CPI	tmp, '9'+1
-	BRGE	.atoi_sig
+	BRGE	.L_atoi_sig
 	SUBI	tmp, '0'		; make figure a number
 	XCALL	__mulhi_const_10	; r25:r24 *= 10
 	ADD	num_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_hi, __zero_reg__
-	RJMP	.atoi_loop2		; next figure
+	RJMP	.L_atoi_loop2		; next figure
 
-.atoi_sig:
+.L_atoi_sig:
 	CP	num_lo, __zero_reg__
 	CPC	num_hi, __zero_reg__	; did we get a number?
-	BREQ	.atoi_done		; no, drop sign and return
-	BRTC	.atoi_done		; positive number? -> return
+	BREQ	.L_atoi_done		; no, drop sign and return
+	BRTC	.L_atoi_done		; positive number? -> return
 	COM	num_lo
 	COM	num_hi
 	ADIW	num_lo, 1		; make number negative
 
-.atoi_done:
+.L_atoi_done:
 	RET
 
-.atoi_end:
-	.size _U(atoi), .atoi_end - _U(atoi)
+.L_atoi_end:
+	.size _U(atoi), .L_atoi_end - _U(atoi)
 
 #endif /* not __DOXYGEN__ */

@@ -1,3 +1,10 @@
+2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
+
+	* libc/stdlib/atoi.S: Make labels local, 
+	use X_movw instead LOAD_Z.
+	* libc/stdlib/atol.S: Make labels local, add Id line, 
+	use X_movw instead LOAD_Z.
+
 2005-11-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdio/vfscanf.c: fix the return value for starred format
