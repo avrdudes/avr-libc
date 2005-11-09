@@ -2,6 +2,8 @@
 
 	* doc/api/Makefile.am(EXTRA_DIST): add doxygen.config.in
 	(reported by Galen Seitz).
+	* libc/stdio/vfscanf.c: include <stdlib.h> so strtod()
+	is declared before using it.
 
 2005-11-08 Anatoly Sokolov <aesok@pautinka.net>
 

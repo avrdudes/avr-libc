@@ -37,6 +37,7 @@
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "stdio_private.h"
@@ -111,7 +112,7 @@ vfscanf(FILE *stream, const char *fmt, va_list ap) {
 #if SCANF_LEVEL >= SCANF_FLT
 	char	*bp;
 	char	fltchars[] = "0123456789Ee.";
-        char    buf[FLTBUF];
+	char	buf[FLTBUF];
 #endif
 
 	flags = 0;
