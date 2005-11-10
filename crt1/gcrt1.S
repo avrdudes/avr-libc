@@ -28,6 +28,8 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #if (__GNUC__ < 3) || (__GNUC__ == 3 && __GNUC_MINOR__ < 3)
 #error "GCC version >= 3.3 required"
 #endif
@@ -168,12 +170,12 @@ __do_copy_data:
 	ldi	r16, hh8(__data_load_start)
 #else
 	ldi	r16, hh8(__data_load_start - 0x10000)
-.__do_copy_data_carry:
+.L__do_copy_data_carry:
 	inc	r16
 #endif
 	out	_SFR_IO_ADDR(RAMPZ), r16
-	rjmp	.__do_copy_data_start
-.__do_copy_data_loop:
+	rjmp	.L__do_copy_data_start
+.L__do_copy_data_loop:
 #ifdef __AVR_ENHANCED__
 	elpm	r0, Z+
 #else
@@ -182,12 +184,12 @@ __do_copy_data:
 	st	X+, r0
 #ifndef __AVR_ENHANCED__
 	adiw	r30, 1
-	brcs	.__do_copy_data_carry
+	brcs	.L__do_copy_data_carry
 #endif
-.__do_copy_data_start:
+.L__do_copy_data_start:
 	cpi	r26, lo8(__data_end)
 	cpc	r27, r17
-	brne	.__do_copy_data_loop
+	brne	.L__do_copy_data_loop
 #endif /* BIG_CODE */
 
 	.set	__stack, RAMEND
