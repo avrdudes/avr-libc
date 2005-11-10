@@ -120,6 +120,7 @@
   misc/ltoa
   misc/utoa
   misc/ultoa
+  stdlib/longjmp
   string/memchr
   string/memccpy
   string/strchr
