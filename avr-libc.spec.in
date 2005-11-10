@@ -51,16 +51,18 @@ Summary: AVR libc.
 Name: avr-libc
 Version: %{libc_version}
 Release: 1
-Copyright: BSD
+License: BSD
 Group: Avr/Development/Tools
 URL: http://savannah.gnu.org/projects/avr-libc
-Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.gz
+Source0: http://savannah.gnu.org/download/avr-libc/avr-libc-%{version}.tar.bz2
 Buildroot: /var/tmp/avr-libc-%{version}-root
 BuildRequires: gzip avr-gcc >= 3.4.3
 %if %{_with_docs}
-BuildRequires: doxygen >= 1.4.1 tetex
+BuildRequires: doxygen >= 1.4.1 tetex transfig
 %endif
 Requires: avr-gcc >= 3.4.3
+
+%define docdir %{_defaultdocdir}/%{name}
 
 %description
 Avr-libc is a C library for developing applications for Atmel AVR
@@ -79,28 +81,25 @@ Documentation for avr-libc in html, postscript and pdf formats.
 %setup -q
 
 %build
-rm -fr obj-%{_target_platform}
-mkdir obj-%{_target_platform}
-cd obj-%{_target_platform}
-
-../configure \
+./configure \
 %if %{_with_docs}
-	--enable-doc \
+	--enable-doc --disable-versioned-doc \
 %endif
+	--host=avr --build=$(./config.guess) \
 	--prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir}
-
 make
 
 %install
 rm -rf ${RPM_BUILD_ROOT}
 mkdir -p ${RPM_BUILD_ROOT}%{_prefix}
-cd obj-%{_target_platform}
 make prefix=$RPM_BUILD_ROOT%{_prefix} mandir=$RPM_BUILD_ROOT%{_mandir} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} install
 
 %if %{_with_docs}
-gzip -9 doc/api/*.ps
-gzip -9 doc/api/*.pdf
+gzip -9 ${RPM_BUILD_ROOT}%{docdir}/man/man3/*.3
+%else
+## Don't need man script if we aren't installing man pages.
+rm ${RPM_BUILD_ROOT}%{_bindir}/avr-man
 %endif
 
 %clean
@@ -110,8 +109,6 @@ rm -rf ${RPM_BUILD_ROOT}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog INSTALL LICENSE NEWS README
 %doc doc/CHANGES.old doc/ChangeLog doc/INSTALL doc/TODO
-%doc doc/avr-libc-reference.html
-#%doc doc/examples/*.c doc/examples/*.h doc/examples/*.s doc/examples/prg
 %doc doc/examples/demo/Makefile doc/examples/demo/demo.c
 %doc doc/examples/demo/demo.fig
 %dir %{_prefix}/avr
@@ -121,6 +118,8 @@ rm -rf ${RPM_BUILD_ROOT}
 %dir %{_prefix}/avr/lib/avr5
 %dir %{_prefix}/avr/include
 %dir %{_prefix}/avr/include/avr
+%dir %{_prefix}/avr/include/compat
+%dir %{_prefix}/avr/include/util
 %{_prefix}/avr/lib/lib*
 %{_prefix}/avr/lib/crt*
 %{_prefix}/avr/lib/avr3/lib*
@@ -131,6 +130,8 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_prefix}/avr/lib/avr5/crt*
 %{_prefix}/avr/include/*.h
 %{_prefix}/avr/include/avr/*.h
+%{_prefix}/avr/include/compat/*.h
+%{_prefix}/avr/include/util/*.h
 
 ## TRoth/20021013: Argh! Why does the fscking %doc directive remove the doc
 ## dir? That's absolutely stupid. We install things there _assuming_ they
@@ -140,12 +141,17 @@ rm -rf ${RPM_BUILD_ROOT}
 %if %{_with_docs}
 %files docs
 %defattr(-,root,root)
-%doc obj-%{_target_platform}/doc/api/avr-libc-user-manual
-%doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.ps.gz
-%doc obj-%{_target_platform}/doc/api/avr-libc-user-manual.pdf.gz
+%{_bindir}/avr-man
+%doc %{docdir}/avr-libc-user-manual
+%doc %{docdir}/avr-libc-user-manual.ps
+%doc %{docdir}/avr-libc-user-manual.pdf
+%doc %{docdir}/man
 %endif
 
 %changelog
+* Tue Nov 10 2005 Galen Seitz <galens@seitzassoc.com>
+- Updated to work with latest tools and build procedure.
+
 * Tue Oct 21 2003 Theodore Roth <troth@openavr.org>
 - Allow disabling build of docs sub-package with "--without docs".
 

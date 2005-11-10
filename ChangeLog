@@ -1,3 +1,9 @@
+2005-11-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Galen Seitz:
+	* avr-libc.spec.in: upgrade to current build system.
+	[patch #4608] rpm spec file update
+
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
 
 	* crt1/gcrt1.S: Make labels local, add Id line.
