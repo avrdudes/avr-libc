@@ -1,5 +1,10 @@
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
 
+	* fplib/fmod.S: Make labels local, add Id line.
+	[Fixed bug #3573]
+
+2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
+
 	* crt1/gcrt1.S: Make labels local, add Id line.
 
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>

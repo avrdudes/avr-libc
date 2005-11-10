@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [#3573] Make local symbols in .S files truely local
   [#12324] overview: boot_page_write_safe, etc.
   [#12495] about Busy-wait delay loops(document)
   [#12496] about set_sleep_mode() and tiny26/tiny2313
