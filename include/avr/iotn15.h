@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002,2005 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -145,6 +145,7 @@
 /* External Interrupt Request 0 */
 #define IO_PINS_vect			_VECTOR(2)
 #define SIG_PIN				_VECTOR(2)
+#define SIG_PIN_CHANGE			_VECTOR(2)
 
 /* Timer/Counter1 Compare Match */
 #define TIMER1_COMP_vect		_VECTOR(3)

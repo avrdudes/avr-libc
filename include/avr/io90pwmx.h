@@ -1222,10 +1222,12 @@
 
 /* Timer/Counter1 Compare Match A */
 #define TIMER1_COMPA_vect		_VECTOR(12)
+#define SIG_OUTPUT_COMPARE1A		_VECTOR(12)
 #define SIG_OUTPUT_COMPARE1_A		_VECTOR(12)
 
 /* Timer/Counter Compare Match B */
 #define TIMER1_COMPB_vect		_VECTOR(13)
+#define SIG_OUTPUT_COMPARE1B		_VECTOR(13)
 #define SIG_OUTPUT_COMPARE1_B		_VECTOR(13)
 
 /* Timer/Counter1 Overflow */
@@ -1234,6 +1236,7 @@
 
 /* Timer/Counter0 Compare Match A */
 #define TIMER0_COMP_A_vect		_VECTOR(16)
+#define SIG_OUTPUT_COMPARE0A		_VECTOR(16)
 #define SIG_OUTPUT_COMPARE0_A		_VECTOR(16)
 
 /* Timer/Counter0 Overflow */
@@ -1274,6 +1277,7 @@
 /* Watchdog Timeout Interrupt */
 #define WDT_vect			_VECTOR(25)
 #define SIG_WDT				_VECTOR(25)
+#define SIG_WATCHDOG_TIMEOUT		_VECTOR(25)
 
 /* EEPROM Ready */
 #define EE_READY_vect			_VECTOR(26)
@@ -1281,6 +1285,7 @@
 
 /* Timer Counter 0 Compare Match B */
 #define TIMER0_COMPB_vect		_VECTOR(27)
+#define SIG_OUTPUT_COMPARE0B		_VECTOR(27)
 #define SIG_OUTPUT_COMPARE0_B		_VECTOR(27)
 
 /* External Interrupt Request 3 */

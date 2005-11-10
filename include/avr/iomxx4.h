@@ -826,7 +826,7 @@
 
 /* 2-wire Serial Interface */
 #define TWI_vect			_VECTOR(26)
-#define SIG_TWI				_VECTOR(26)
+#define SIG_2WIRE_SERIAL		_VECTOR(26)
 
 /* Store Program Memory Read */
 #define SPM_READY_vect			_VECTOR(27)

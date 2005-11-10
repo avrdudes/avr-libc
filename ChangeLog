@@ -1,3 +1,22 @@
+2005-11-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Risto Eerola:
+	* include/avr/io43u32x.h: Unify (old-style SIG_xxx)
+	interrupt vector names.
+	* include/avr/io43u35x.h: (Ditto.)
+	* include/avr/io90pwmx.h: (Ditto.)
+	* include/avr/iomx8.h: (Ditto.)
+	* include/avr/iomxx4.h: (Ditto.)
+	* include/avr/iotn11.h: (Ditto.)
+	* include/avr/iotn12.h: (Ditto.)
+	* include/avr/iotn15.h: (Ditto.)
+	* include/avr/iotn2313.h: (Ditto.)
+	* include/avr/iotn26.h: (Ditto.)
+	* include/avr/iotnx5.h: (Ditto.)
+	* doc/api/vectortable.dox: Regenerate, document the
+	changes.
+	patch #4505: Unified interrupt vector names in header files.
+
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
 
 	* fplib/fmod.S: Make labels local, add Id line.

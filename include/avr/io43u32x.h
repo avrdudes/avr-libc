@@ -1,4 +1,4 @@
-/* Copyright (c) 2003, Keith Gudger
+/* Copyright (c) 2003,2005 Keith Gudger
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -27,6 +27,8 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
 
 /* avr/io43u32x.h - definitions for AT43USB32x */
 
@@ -173,6 +175,7 @@
 #define SIG_INTERRUPT0		_VECTOR(1)
 #define SIG_INTERRUPT1		_VECTOR(2)
 #define SIG_TIMER1_CAPT1	_VECTOR(3)
+#define SIG_INPUT_CAPTURE1	_VECTOR(3)
 #define SIG_OUTPUT_COMPARE1A		_VECTOR(4)
 #define SIG_OUTPUT_COMPARE1B		_VECTOR(5)
 #define SIG_OVERFLOW1		_VECTOR(6)

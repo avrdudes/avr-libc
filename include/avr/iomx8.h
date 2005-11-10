@@ -714,6 +714,7 @@ must be defined for the mega48.
 /* Two-wire Serial Interface */
 #define TWI_vect			_VECTOR(24)
 #define SIG_TWI				_VECTOR(24)
+#define SIG_2WIRE_SERIAL		_VECTOR(24)
 
 /* Store Program Memory Read */
 #define SPM_READY_vect			_VECTOR(25)

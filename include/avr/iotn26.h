@@ -1,4 +1,4 @@
-/* Copyright (c) 2004 Eric B. Weddington
+/* Copyright (c) 2004,2005 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -331,6 +331,7 @@
 /* Analog Comparator */
 #define ANA_COMP_vect			_VECTOR(10)
 #define SIG_ANA_COMP			_VECTOR(10)
+#define SIG_COMPARATOR			_VECTOR(10)
 
 /* ADC Conversion Complete */
 #define ADC_vect			_VECTOR(11)

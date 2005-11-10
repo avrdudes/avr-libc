@@ -92,6 +92,7 @@
   [patch #3912] Fix ctype.S linker error due to asm branches out
                 of range
   [patch #4087] C99 conformal headers stdint.h and inttypes.h
+  [patch #4505] Unified interrupt vector names in header files
   [patch #4608] rpm spec file update
 
   - Update the build system to recent versions of autoconf/automake;

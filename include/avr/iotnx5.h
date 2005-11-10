@@ -394,7 +394,7 @@
 
 /* Watchdog Time-out */
 #define WDT_vect			_VECTOR(12)
-#define SIG_WDT_OVERFLOW		_VECTOR(12)
+#define SIG_WATCHDOG_TIMEOUT		_VECTOR(12)
 
 /* USI START */
 #define USI_START_vect			_VECTOR(13)

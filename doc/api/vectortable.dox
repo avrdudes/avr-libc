@@ -158,7 +158,7 @@
   </tr>
   <tr>
     <td>IO_PINS_vect</td>
-    <td>SIG_PIN</td>
+    <td>SIG_PIN, SIG_PIN_CHANGE</td>
     <td>External Interrupt Request 0</td>
     <td>ATtiny11, ATtiny12, ATtiny15, ATtiny26</td>
   </tr>
@@ -308,13 +308,13 @@
   </tr>
   <tr>
     <td>TIMER0_COMPB_vect</td>
-    <td>SIG_OUTPUT_COMPARE0_B</td>
+    <td>SIG_OUTPUT_COMPARE0B, SIG_OUTPUT_COMPARE0_B</td>
     <td>Timer Counter 0 Compare Match B</td>
     <td>AT90PWM3, AT90PWM2, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313</td>
   </tr>
   <tr>
     <td>TIMER0_COMP_A_vect</td>
-    <td>SIG_OUTPUT_COMPARE0_A</td>
+    <td>SIG_OUTPUT_COMPARE0A, SIG_OUTPUT_COMPARE0_A</td>
     <td>Timer/Counter0 Compare Match A</td>
     <td>AT90PWM3, AT90PWM2</td>
   </tr>
@@ -746,7 +746,7 @@
   </tr>
   <tr>
     <td>WDT_vect</td>
-    <td>SIG_WDT</td>
+    <td>SIG_WDT, SIG_WATCHDOG_TIMEOUT</td>
     <td>Watchdog Timeout Interrupt</td>
     <td>AT90PWM3, AT90PWM2, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny45</td>
   </tr>
