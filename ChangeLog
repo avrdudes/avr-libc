@@ -1,3 +1,8 @@
+2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
+
+	* fplib/fmod.S: Make labels local, add Id line.
+	[Fixed bug #3573]
+
 2005-11-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Galen Seitz:

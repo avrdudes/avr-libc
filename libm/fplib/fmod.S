@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     fmod.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -58,11 +60,11 @@ GLOBAL(fmod)
 	 */
     ANDI    rB3,0x7F	; fmod(x,y) = sgn(x) * fmod(|x|,|y|)
     TST     rB3		; -0 ?
-    BRNE    _fmod_01
+    BRNE    .L_fmod_01
     TST     rB2
-    BRMI    _fmod_01
+    BRMI    .L_fmod_01
     RJMP    _U(__fp_nanERANGE)
- _fmod_01:
+.L_fmod_01:
     PUSH    rB0
     PUSH    rB1
     PUSH    rB2

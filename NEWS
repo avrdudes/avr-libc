@@ -60,6 +60,7 @@
 
 * Bugs fixed:
 
+  [#3573] Make local symbols in .S files truely local
   [#12324] overview: boot_page_write_safe, etc.
   [#12333] Standard requires libstdc to define vprintf and vscanf
   [#12495] about Busy-wait delay loops(document)
