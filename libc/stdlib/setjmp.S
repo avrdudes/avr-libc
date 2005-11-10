@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 /*
    setjmp.S
 
@@ -70,7 +72,7 @@ void longjmp(jmp_buf __jmpb, int __val) __attribute__((noreturn));
 	.global _U(longjmp)
 
 _U(setjmp):
-	LOAD_Z(jmpb_lo, jmpb_hi)
+	X_movw	ZL, jmpb_lo
 	in	r26, _SFR_IO_ADDR(SPL)
 	in	r27, _SFR_IO_ADDR(SPH)
 	/* save program counter (return address) */
@@ -117,10 +119,9 @@ _U(setjmp):
 	ret
 
 _U(longjmp):
-	LOAD_X(jmpb_lo, jmpb_hi)
+	X_movw	XL, jmpb_lo
 	/* return value */
-	mov	ret_lo, val_lo
-	mov	ret_hi, val_hi
+	X_movw	ret_lo, val_lo
 	/* if zero, change to 1 */
 	cpi	ret_lo, 1
 	cpc	ret_hi, __zero_reg__

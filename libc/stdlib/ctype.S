@@ -183,13 +183,13 @@ GLOBAL(isxdigit)
           MOV   __tmp_reg__,rLow
           ORI   rLow,0x20
           CPI   rLow,'a'
-          BRLT  _isxdigit00
+          BRLT  0f
           CPI   rLow,'f'+1
           BRGE  1f
           RET                      ; 'a' <= rLow <= 'f' (!= 0!!)
 1:
           RJMP  _U(__ctype_isfalse)
-_isxdigit00:
+0:
           MOV   rLow,__tmp_reg__
           RJMP  _U(isdigit)
 
@@ -277,7 +277,7 @@ GLOBAL(isspace)
 GLOBAL(ispunct)
           mov   __tmp_reg__, rLow    ; **changed** they do not use it
           RCALL _U(isprint)          ; false: CLR rLow -> EQ, rLow changed
-          BREQ  _ispunct00           ; true : CPI rLow,0x7E+1 -> NE, rLow unchanged
+          BREQ  0f		; true : CPI rLow,0x7E+1 -> NE, rLow unchanged
 
           RCALL _U(isspace)
           CPSE  rLow,__zero_reg__
@@ -288,7 +288,7 @@ GLOBAL(ispunct)
           TST   rLow
           BRNE  1b
           SER   rLow
-_ispunct00:
+0:
           RET
 
           ENDFUNC
@@ -326,9 +326,9 @@ GLOBAL(tolower)
           PUSH  rLow
           RCALL _U(isalpha)
           POP   rLow         ; does not change Z
-          BREQ  _tolower00
+          BREQ  0f
           ORI   rLow,0x20
-_tolower00:
+0:
           RET
 
           ENDFUNC
@@ -344,9 +344,9 @@ GLOBAL(toupper)
           PUSH  rLow
           RCALL _U(isalpha)
           POP   rLow         ; does not change Z
-          BREQ  _toupper00
+          BREQ  0f
           ANDI  rLow,0xDF
-_toupper00:
+0:
           RET
 
           ENDFUNC

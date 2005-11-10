@@ -1,5 +1,13 @@
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
 
+	* libc/stdlib/ctype.S (isxdigit, ispunct, tolower, 
+	toupper): Make labels local.
+	* libc/stdlib/setjmp.S: add Id line.
+	(setjmp): use X_movw instead LOAD_Z.
+	(longjmp): use X_movw instead LOAD_X, use X_movw when possible.
+
+2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
+
 	* libc/stdlib/atoi.S: Make labels local, 
 	use X_movw instead LOAD_Z.
 	* libc/stdlib/atol.S: Make labels local, add Id line, 
