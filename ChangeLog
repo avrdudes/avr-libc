@@ -1,3 +1,9 @@
+2005-11-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/doxygen.config.in: set SHOW_DIRECTORIES to NO, as we
+	don't really use that feature, and enabling it yields junk
+	"man pages" for the directory entries.
+
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
 
 	* libc/stdlib/ctype.S (isxdigit, ispunct, tolower, 
