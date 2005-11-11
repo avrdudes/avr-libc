@@ -425,7 +425,7 @@ AM_CONDITIONAL(HAS_atmega88, test "x$HAS_atmega88" = "xyes")
 CHECK_AVR_DEVICE(at90pwm2)
 AM_CONDITIONAL(HAS_at90pwm2, test "x$HAS_at90pwm2" = "xyes")
 
-CHECK_AVR_DEVICE(at90pwm2)
+CHECK_AVR_DEVICE(at90pwm3)
 AM_CONDITIONAL(HAS_at90pwm3, test "x$HAS_at90pwm3" = "xyes")
 
 # avr5
