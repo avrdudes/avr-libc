@@ -110,6 +110,8 @@
     . ATtiny25/45/85
     . ATmega164/324/644
     . ATmega640/1280/1281
+  - The library is now compiled with -Os for avr3 and avr5 MCUs (i.e.
+    for those with > 8 KB of ROM); used to be -O3 before.
 
 * New string functions. Contributed by Dmitry Xmelkov.
 
