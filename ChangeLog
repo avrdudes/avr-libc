@@ -1,3 +1,11 @@
+2005-11-11 Anatoly Sokolov <aesok@post.ru>
+
+	* common/macros.inc(X_movw): Adds the possibility to use 
+	upper case latters in register names: R0..R31.
+	(Patch submitted by Dmitry Xmelkov.)
+	(LOAD_X): Deleted.
+	(LOAD_Z): Deleted.
+
 2005-11-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* devtools/gen-avr-lib-tree.sh (CFLAGS_SPEED): change

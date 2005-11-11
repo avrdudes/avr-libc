@@ -126,76 +126,76 @@
    (may expand to 0, 1 or 2 instructions).
  */
 
-	.macro	X_movw dst src
-		.L_movw_dst = -1
-		.L_movw_src = -1
+.macro  X_movw dst src
+	.L_movw_dst = -1
+	.L_movw_src = -1
+	.L_movw_n = 0
+	.irp  reg,	r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, \
+			r10,r11,r12,r13,r14,r15,r16,r17,r18,r19, \
+			r20,r21,r22,r23,r24,r25,r26,r27,r28,r29, \
+			r30,r31
+		.ifc  \reg,\dst
+			.L_movw_dst = .L_movw_n
+		.endif
+		.ifc  \reg,\src
+			.L_movw_src = .L_movw_n
+		.endif
+		.L_movw_n = .L_movw_n + 1
+	.endr
+	.L_movw_n = 0
+	.irp  reg,	R0, R1, R2, R3, R4, R5, R6, R7, R8, R9, \
+			R10,R11,R12,R13,R14,R15,R16,R17,R18,R19, \
+			R20,R21,R22,R23,R24,R25,R26,R27,R28,R29, \
+			R30,R31
+		.ifc  \reg,\dst
+			.L_movw_dst = .L_movw_n
+		.endif
+		.ifc  \reg,\src
+			.L_movw_src = .L_movw_n
+		.endif
+		.L_movw_n = .L_movw_n + 1
+	.endr
+	.if   .L_movw_dst < 0
 		.L_movw_n = 0
-		.irp  reg,   r0, r1, r2, r3, r4, r5, r6, r7, \
-			r8, r9, r10, r11, r12, r13, r14, r15, \
-			r16, r17, r18, r19, r20, r21, r22, r23, \
-			r24, r25, r26, r27, r28, r29, r30, r31
-			.ifc  \reg,\dst
+		.rept   32
+			.if \dst == .L_movw_n
 				.L_movw_dst = .L_movw_n
 			.endif
-			.ifc  \reg,\src
+			.L_movw_n = .L_movw_n + 1
+		.endr
+	.endif
+	.if   .L_movw_src < 0
+		.L_movw_n = 0
+		.rept   32
+			.if \src == .L_movw_n
 				.L_movw_src = .L_movw_n
 			.endif
 			.L_movw_n = .L_movw_n + 1
 		.endr
-		.if   .L_movw_dst < 0
-			.L_movw_n = 0
-			.rept   32
-				.if \dst == .L_movw_n
-				.L_movw_dst = .L_movw_n
-				.endif
-				.L_movw_n = .L_movw_n + 1
-			.endr
-		.endif
-		.if   .L_movw_src < 0
-			.L_movw_n = 0
-			.rept   32
-				.if \src == .L_movw_n
-				.L_movw_src = .L_movw_n
-				.endif
-				.L_movw_n = .L_movw_n + 1
-			.endr
-		.endif
-		.if   (.L_movw_dst < 0) || (.L_movw_src < 0)
-		.err    ; Invalid arg.
-		.endif
-		
-		.if ((.L_movw_src) - (.L_movw_dst))  /* different registers */
-				.if (((.L_movw_src) | (.L_movw_dst)) & 0x01)
-					.if (((.L_movw_src)-(.L_movw_dst)) & 0x80) 			/* src < dest */
-						mov	(.L_movw_dst)+1, (.L_movw_src)+1
-						mov	(.L_movw_dst), (.L_movw_src)
-					.else  			/* src > dest */
-						mov	(.L_movw_dst), (.L_movw_src)
-						mov	(.L_movw_dst)+1, (.L_movw_src)+1
-					.endif
-				.else  /* both even -> overlap not possible */
-	#if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
-					movw	\dst, \src
-	#else
-					mov	(.L_movw_dst), (.L_movw_src)
-					mov	(.L_movw_dst)+1, (.L_movw_src)+1
-	#endif
-				.endif
-		.endif
-	.endm
-
-#if __AVR_ENHANCED__
-  #define LOAD_X(lo, hi) movw r26, lo
-  #define LOAD_Z(lo, hi) movw r30, lo
+	.endif
+	.if   (.L_movw_dst < 0) || (.L_movw_src < 0)
+		.err    ; Invalid 'X_movw' arg.
+	.endif
+                
+	.if ((.L_movw_src) - (.L_movw_dst))  /* different registers */
+		.if (((.L_movw_src) | (.L_movw_dst)) & 0x01)
+			.if (((.L_movw_src)-(.L_movw_dst)) & 0x80) /* src < dest */
+				mov     (.L_movw_dst)+1, (.L_movw_src)+1
+				mov     (.L_movw_dst), (.L_movw_src)
+			.else                                      /* src > dest */
+				mov     (.L_movw_dst), (.L_movw_src)
+				mov     (.L_movw_dst)+1, (.L_movw_src)+1
+			.endif
+		.else  /* both even -> overlap not possible */
+#if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+			movw    \dst, \src
 #else
-  #define LOAD_X(lo, hi)		\
-	mov	r26, lo			_L\
-	mov	r27, hi
-
-  #define LOAD_Z(lo, hi)		\
-	mov	r30, lo			_L\
-	mov	r31, hi
+			mov     (.L_movw_dst), (.L_movw_src)
+			mov     (.L_movw_dst)+1, (.L_movw_src)+1
 #endif
+		.endif
+	.endif
+.endm
 
 /* LOAD_X_CONST(p) loads constant P into pointer register X.  */
 #define LOAD_X_CONST(p)		\
