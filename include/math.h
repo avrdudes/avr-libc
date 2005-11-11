@@ -201,7 +201,7 @@ extern double ldexp(double __x, int __exp) __ATTR_CONST__;
 
      The exp() function returns the exponential value of \c x.
   */
-extern double exp(double _x) __ATTR_CONST__;
+extern double exp(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
@@ -318,15 +318,6 @@ extern int isinf(double __x) __ATTR_CONST__;
      This function does not belong to the C standard definition.
   */
 extern double square(double __x) __ATTR_CONST__;
-  /**
-     \ingroup avr_math
-
-     The function inverse() returns <tt>1 / x</tt>.
-
-     \note
-     This function does not belong to the C standard definition.
-  */
-extern double inverse(double) __ATTR_CONST__;
 
 #ifdef __cplusplus
 }

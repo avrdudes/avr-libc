@@ -68,6 +68,7 @@
   [#12735] No support for AT94K devices in sleep.h
   [#12739] Gcc assumes that target libc provides ffs function
   [#12775] Possible Bug in sscanf on string end
+  [#13340] Math lib documentation/lib mismatch
   [#13557] small typo in avr-libc-user-manual-1.2.3
   [#14224] _delay_ms() not inlining if called more than once in a unit
   [#14241] 'eeprom_is_ready' is not compiled with ATmega48

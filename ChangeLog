@@ -1,3 +1,9 @@
+2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
+
+	* include/math.h (exp): Rename argument.
+	(inverse): Deleted.
+	[Fixed bug #13340]
+
 2005-11-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/rel-method.dox: Update for new configuration
