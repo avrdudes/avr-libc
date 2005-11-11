@@ -1,5 +1,8 @@
 *** Changes since avr-libc-1.2.6:
 
+* Bugs fixed:
+  [#13340] Math lib documentation/lib mismatch
+
 *** Changes in avr-libc-1.2.6:
 
 * Bugs fixed:
