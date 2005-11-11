@@ -1,3 +1,9 @@
+2005-11-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/gen-avr-lib-tree.sh (CFLAGS_SPEED): change
+	from -O3 to -Os.  Mostly, this even yields the fastest
+	code anyway.
+
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
 
 	* include/math.h (exp): Rename argument.

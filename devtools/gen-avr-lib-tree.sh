@@ -118,10 +118,9 @@ EOF
 cd lib || exit 1
 
 # Define the special flags for special sub-targets.
-#   FIXME: Do we really want to use -O3 for speed???
 
 CFLAGS_SPACE="-mcall-prologues -Os"
-CFLAGS_SPEED="-O3"
+CFLAGS_SPEED="-Os"
 
 ASFLAGS_SPEED="-DOPTIMIZE_SPEED"
 
