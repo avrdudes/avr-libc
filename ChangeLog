@@ -1,3 +1,7 @@
+2005-11-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Released avr-libc-1.2.6.
+
 2005-11-10 Anatoly Sokolov <aesok@pautinka.net>
 
 	* fplib/fmod.S: Make labels local, add Id line.
