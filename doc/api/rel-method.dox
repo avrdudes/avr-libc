@@ -128,6 +128,9 @@ The following steps should be taken when making a release:
 -# Update the ChangeLog file to note the release and commit to cvs on the
    branch:<br>
    Add &quot;Released avr-libc-\<this_release\>.&quot;
+-# Update the NEWS file with pending release number and commit to cvs:<br>
+   Change &quot;Changes since avr-libc-\<last_release\>:&quot; to
+   &quot;Changes in avr-libc-\<this_relelase\>:&quot;.
 -# Bring the build system up to date by running bootstrap and configure.
 -# Perform a 'make distcheck' and make sure it succeeds. This will create the
    source tarball.
