@@ -1,3 +1,10 @@
+2005-11-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/rel-method.dox: Update for new configuration
+	method, fix some typos.
+	* doc/api/Makefile.am: replace "signal" in the comment
+	by "vector" to reflect our changed naming convention.
+
 2005-11-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Risto Eerola:

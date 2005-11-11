@@ -140,9 +140,9 @@ clean-local:
 #
 # The magic around TabularC replaces doxygen's own tabular environment
 # (named TabularC) by an explicit call to longtable in the document
-# that describes the signal names, so the rather long table can be
+# that describes the vector names, so the rather long table can be
 # split across multiple pages.  Note that there are some nasty things
-# going on here: the string "Signal Name" in the table heading is used
+# going on here: the string "Vector Name" in the table heading is used
 # as a magic string in order to replace the \\ at the end of the table
 # heading by \endhead so longtable will know what heading to repeat in
 # table continuations.

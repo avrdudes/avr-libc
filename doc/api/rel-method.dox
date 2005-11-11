@@ -1,4 +1,4 @@
-/* Copyright (c) 2003, Theodore Roth
+/* Copyright (c) 2003,2005 Theodore Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -92,19 +92,19 @@ The following steps should be taken to cut a branch in cvs:
 -# Set the branch-point tag (setting \<major\> and \<minor\> accordingly):<br>
    'cvs tag avr-libc-\<major\>_\<minor\>-branchpoint'
 -# Create the branch:<br>
-   'cvs tag -b avr-lib-\<major\>_\<minor\>-branch'
--# Update the package version in configure.in and commit configure.in to cvs
+   'cvs tag -b avr-libc-\<major\>_\<minor\>-branch'
+-# Update the package version in configure.ac and commit configure.ac to cvs
    HEAD:<br>
    Change minor number to next odd value.
 -# Update the NEWS file and commit to cvs HEAD:<br>
    Add &quot;Changes since avr-libc-\<this_release\>:&quot;
 -# Check out a new tree for the branch:<br>
-   'cvs co -r avr-lib-\<major\>_\<minor\>-branch'
--# Update the package version in configure.in and commit configure.in to cvs
+   'cvs co -r avr-libc-\<major\>_\<minor\>-branch'
+-# Update the package version in configure.ac and commit configure.ac to cvs
    branch:<br>
    Change the patch number to 90 to denote that this now a branch leading up
    to a release. Be sure to leave the \<date\> part of the version.
--# Bring the build system up to date by running reconf and doconf.
+-# Bring the build system up to date by running bootstrap and configure.
 -# Perform a 'make distcheck' and make sure it succeeds. This will create the
    snapshot source tarball. This should be considered the first release
    candidate.
@@ -121,20 +121,21 @@ A stable release will only be done on a branch, not from the cvs HEAD.
 The following steps should be taken when making a release:
 
 -# Make sure the source tree you are working from is on the correct branch:<br>
-   'cvs update -r avr-lib-\<major\>_\<minor\>-branch'
+   'cvs update -r avr-libc-\<major\>_\<minor\>-branch'
 -# Update the package version in configure.in and commit it to cvs.
 -# Update the gnu tool chain version requirements in the README and commit
    to cvs.
 -# Update the ChangeLog file to note the release and commit to cvs on the
    branch:<br>
    Add &quot;Released avr-libc-\<this_release\>.&quot;
--# Bring the build system up to date by running reconf and doconf.
+-# Bring the build system up to date by running bootstrap and configure.
 -# Perform a 'make distcheck' and make sure it succeeds. This will create the
    source tarball.
--# Tag the release (_\<patch\> is not given if this is the first release on
-   this branch):<br>
-   'cvs tag avr-lib-\<major\>_\<minor\>_\<patch\>-release'
+-# Tag the release:<br>
+   'cvs tag avr-libc-\<major\>_\<minor\>_\<patch\>-release'
 -# Upload the tarball to savannah.
+-# Update the NEWS file, and commit to cvs:<br>
+   Add &quot;Changes since avr-libc-\<major\>_\<minor\>_\<patch\>:&quot;
 -# Generate the latest documentation and upload to savannah.
 -# Announce the release.
 
