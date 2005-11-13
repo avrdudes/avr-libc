@@ -84,6 +84,7 @@
 
 * Other changes:
 
+  [patch #3592] speedup tanh function in libm
   [patch #3750] Allow passing user data to stdio fdevopen() get and
                 put methods.  (This is part of the API changes
                 mentioned above.)

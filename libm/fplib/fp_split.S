@@ -68,7 +68,7 @@ GLOBAL(__fp_split2)
     ADD     rB2,rB2           ; MSB of exponent to carry
     adc     rB3,rB3           ; whole exponent in rB3, sign in C
     CPI     rB3,0xFF          ; check for NAN
-    BREQ    fp_split_nan      ; if no jump then C as hidden one is set
+    BREQ    .L_fp_split_nan   ; if no jump then C as hidden one is set
     CLR     rBE            ; clear fraction extension
     cp      rBE,rB3        ; set C if nonzero exponent.  -MM 2000-11-25
     brcs    1f
@@ -79,7 +79,7 @@ GLOBAL(__fp_split1)
     ADD     rA2,rA2        ; MSB of exponent to carry
     adc     rA3,rA3        ; whole exponent in rA3, sign in C
     CPI     rA3,0xFF       ; if no jump then C as hidden one is set
-    BREQ    fp_split_nan
+    BREQ    .L_fp_split_nan
     CLR     rAE            ; clear fraction extension
     cp      rAE,rA3        ; set C if nonzero exponent.  -MM 2000-11-25
     brcs    1f
@@ -87,7 +87,7 @@ GLOBAL(__fp_split1)
 1:
     ROR     rA2            ; sets hidden bit
     RET
- fp_split_nan:
+.L_fp_split_nan:
     POP     rA3
     POP     rA3            ; pop return adress
  #ifdef __ERRNO__

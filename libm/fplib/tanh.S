@@ -56,8 +56,8 @@
 #include "macros.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, tanh)
-          FUNCTION(tanh)
+	TEXT_SEG(fplib, tanh) 
+	FUNCTION(tanh)
 
 GLOBAL(tanh)
 	/* check for x > 8.3177661895751953 [41051592]
@@ -82,37 +82,38 @@ GLOBAL(tanh)
 1:
    BLD   rA3,7
 
-   PUSH  rA0			/* LDI    rB3,1                 */
-   PUSH  rA1			/* RCALL  _ldexp    ; x -> 2x   */
-   PUSH  rA2			/*                              */
-   PUSH  rA3			/* RCALL  _exp                  */
-   RCALL _U(cosh)		/* PUSH   rA0                   */
-   POP   rB3			/* PUSH   rA1                   */
-   POP   rB2			/* PUSH   rA2                   */
-   POP   rB1			/* PUSH   rA3                   */
-   POP   rB0			/* CLR    rB0                   */
-   PUSH  rA3			/* CLR    rB1                   */
-   PUSH  rA2			/* LDI    rB2,0x80              */
-   PUSH  rA1			/* LDI    rB3,0x3F ; B = 1.0    */
-   PUSH  rA0			/* RCALL  ___addsf3              */
-   MOV   rA3,rB3		/* POP    rB3                   */
-   MOV   rA2,rB2		/* POP    rB2                   */
-   MOV   rA1,rB1		/* POP    rB1                   */
-   MOV   rA0,rB0		/* POP    rB0  ; B = exp(2x)    */
-   RCALL _U(sinh)		/* PUSH   rA0                   */
-   POP   rB0			/* PUSH   rA1                   */
-   POP   rB1			/* PUSH   rA2                   */
-   POP   rB2			/* PUSH   rA3                   */
-   POP   rB3			/* CLR    rA0                   */
-   RJMP  _U(__divsf3)		/* CLR    rA1                   */
-				/* LDI    rA2,0x80              */
-				/* LDI    rA3,0xBF ; A = -1.0   */
-				/* RCALL  ___addsf3              */
-				/* POP    rB3                   */
-				/* POP    rB2                   */
-				/* POP    rB1                   */
-				/* POP    rB0  ; B = exp(2x)+1  */
-				/* RJMP  ___divsf3               */
+/*   PUSH  rA0			*/ LDI    rB3,0                 
+/*				*/ LDI 	  rB2,1                 
+/*   PUSH  rA1			*/ RCALL  _U(ldexp)    ; x -> 2x   
+/*   PUSH  rA2			*/                              
+/*   PUSH  rA3			*/ RCALL  _U(exp)                  
+/*   RCALL _U(cosh)		*/ PUSH   rA0                   
+/*   POP   rB3			*/ PUSH   rA1                   
+/*   POP   rB2			*/ PUSH   rA2                   
+/*   POP   rB1			*/ PUSH   rA3                   
+/*   POP   rB0			*/ CLR    rB0                   
+/*   PUSH  rA3			*/ CLR    rB1                   
+/*   PUSH  rA2			*/ LDI    rB2,0x80              
+/*   PUSH  rA1			*/ LDI    rB3,0x3F ; B = 1.0    
+/*   PUSH  rA0			*/ RCALL  _U(__addsf3)             
+/*   MOV   rA3,rB3		*/ POP    rB3                   
+/*   MOV   rA2,rB2		*/ POP    rB2                   
+/*   MOV   rA1,rB1		*/ POP    rB1                   
+/*   MOV   rA0,rB0		*/ POP    rB0  ; B = exp(2x)    
+/*   RCALL _U(sinh)		*/ PUSH   rA0                   
+/*   POP   rB0			*/ PUSH   rA1                   
+/*   POP   rB1			*/ PUSH   rA2                   
+/*   POP   rB2			*/ PUSH   rA3                   
+/*   POP   rB3			*/ CLR    rA0                   
+/*   RJMP  _U(__divsf3)		*/ CLR    rA1                   
+/*				*/ LDI    rA2,0x80              
+/*				*/ LDI    rA3,0xBF ; A = -1.0   
+/*				*/ RCALL  _U(__addsf3)             
+/*				*/ POP    rB3                   
+/*				*/ POP    rB2                   
+/*				*/ POP    rB1                   
+/*				*/ POP    rB0  ; B = exp(2x)+1  
+/*				*/ RJMP  _U(__divsf3)               
 
           ENDFUNC
 
