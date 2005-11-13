@@ -1,3 +1,9 @@
+2005-11-13 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/fp_split.S: Make labels local.
+	* libm/fplib/tanh.S: speedup tanh function.
+	patch #3592: speedup tanh function in libm
+
 2005-11-11 Anatoly Sokolov <aesok@post.ru>
 
 	* common/macros.inc(X_movw): Adds the possibility to use 

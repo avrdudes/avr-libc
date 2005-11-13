@@ -1,7 +1,12 @@
 *** Changes since avr-libc-1.2.6:
 
 * Bugs fixed:
+
   [#13340] Math lib documentation/lib mismatch
+
+* Other changes:
+
+  [patch #3592] speedup tanh function in libm
 
 *** Changes in avr-libc-1.2.6:
 
