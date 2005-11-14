@@ -62,7 +62,7 @@ BuildRequires: doxygen >= 1.4.1 tetex transfig
 %endif
 Requires: avr-gcc >= 3.4.3
 
-%define docdir %{_defaultdocdir}/%{name}
+%define ourdocdir %{_defaultdocdir}/%{name}
 
 %description
 Avr-libc is a C library for developing applications for Atmel AVR
@@ -95,8 +95,19 @@ mkdir -p ${RPM_BUILD_ROOT}%{_prefix}
 make prefix=$RPM_BUILD_ROOT%{_prefix} mandir=$RPM_BUILD_ROOT%{_mandir} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} install
 
+# Move/copy files to appropriate directory to workaround the fact that the doc
+# directive will delete files that are already installed.
+%if ! %{_with_docs}
+mkdir -p $RPM_BUILD_ROOT%{ourdocdir}
+%endif
+cp AUTHORS ChangeLog* INSTALL LICENSE NEWS README $RPM_BUILD_ROOT%{ourdocdir}
+cp --parents doc/INSTALL doc/TODO $RPM_BUILD_ROOT%{ourdocdir}
+cp --parents doc/examples/demo/Makefile $RPM_BUILD_ROOT%{ourdocdir}
+cp --parents doc/examples/demo/demo.c $RPM_BUILD_ROOT%{ourdocdir}
+cp --parents doc/examples/demo/demo.fig $RPM_BUILD_ROOT%{ourdocdir}
+
 %if %{_with_docs}
-gzip -9 ${RPM_BUILD_ROOT}%{docdir}/man/man3/*.3
+gzip -9 ${RPM_BUILD_ROOT}%{ourdocdir}/man/man3/*.3
 %else
 ## Don't need man script if we aren't installing man pages.
 rm ${RPM_BUILD_ROOT}%{_bindir}/avr-man
@@ -107,10 +118,14 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS ChangeLog INSTALL LICENSE NEWS README
-%doc doc/CHANGES.old doc/ChangeLog doc/INSTALL doc/TODO
-%doc doc/examples/demo/Makefile doc/examples/demo/demo.c
-%doc doc/examples/demo/demo.fig
+%docdir %{ourdocdir}
+%{ourdocdir}/AUTHORS
+%{ourdocdir}/ChangeLog*
+%{ourdocdir}/INSTALL
+%{ourdocdir}/LICENSE
+%{ourdocdir}/NEWS
+%{ourdocdir}/README
+%{ourdocdir}/doc
 %dir %{_prefix}/avr
 %dir %{_prefix}/avr/lib
 %dir %{_prefix}/avr/lib/avr3
@@ -142,10 +157,10 @@ rm -rf ${RPM_BUILD_ROOT}
 %files docs
 %defattr(-,root,root)
 %{_bindir}/avr-man
-%doc %{docdir}/avr-libc-user-manual
-%doc %{docdir}/avr-libc-user-manual.ps
-%doc %{docdir}/avr-libc-user-manual.pdf
-%doc %{docdir}/man
+%doc %{ourdocdir}/avr-libc-user-manual
+%doc %{ourdocdir}/avr-libc-user-manual.ps
+%doc %{ourdocdir}/avr-libc-user-manual.pdf
+%doc %{ourdocdir}/man
 %endif
 
 %changelog

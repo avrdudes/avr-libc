@@ -96,6 +96,7 @@
   [patch #4087] C99 conformal headers stdint.h and inttypes.h
   [patch #4505] Unified interrupt vector names in header files
   [patch #4608] rpm spec file update
+  [patch #4622] unify doc file location in rpms
 
   - Update the build system to recent versions of autoconf/automake;
     the old "doconf" and "domake" scripts are gone now, "reconf" has

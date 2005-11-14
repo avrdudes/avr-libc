@@ -1,3 +1,9 @@
+2005-11-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Galen Seitz:
+	* avr-libc.spec.in: unify location of doc files.
+	[patch #4622] unify doc file location in rpms
+
 2005-11-13 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/fp_split.S: Make labels local.
