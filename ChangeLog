@@ -1,5 +1,10 @@
 2005-11-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/crc16.h (_crc_ibutton_update): new function.
+	[patch #3925]: Dallas iButton 8-bit CRC
+
+2005-11-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Galen Seitz:
 	* avr-libc.spec.in: unify location of doc files.
 	[patch #4622] unify doc file location in rpms

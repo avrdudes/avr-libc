@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2003, 2004  Marek Michalkiewicz
+   Copyright (c) 2005, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -33,13 +34,13 @@
 #ifndef _UTIL_CRC16_H_
 #define _UTIL_CRC16_H_
 
-#include <inttypes.h>
+#include <stdint.h>
 
 /** \defgroup util_crc <util/crc16.h>: CRC Computations
     \code#include <util/crc16.h>\endcode
 
-    This header file provides a optimized inline functions for calculating 16
-    bit cyclic redundancy checks (CRC) using common polynomials.
+    This header file provides a optimized inline functions for calculating
+    cyclic redundancy checks (CRC) using common polynomials.
 
     \par References:
 
@@ -54,10 +55,29 @@
     Jack Crenshaw's "Implementing CRCs" article in the January 1992 isue of \e
     Embedded \e Systems \e Programming. This may be difficult to find, but it
     explains CRC's in very clear and concise terms. Well worth the effort to
-    obtain a copy. */
+    obtain a copy.
+
+    A typical application would look like:
+
+    \code
+    // Dallas iButton test vector.
+    uint8_t serno[] = { 0x02, 0x1c, 0xb8, 0x01, 0, 0, 0, 0xa2 };
+
+    int
+    checkcrc(void)
+    {
+	uint8_t crc = 0, i;
+
+	for (i = 0; i < sizeof serno / sizeof serno[0]; i++)
+	    crc = _crc_ibutton_update(crc, serno[i]);
+
+	return crc; // must be 0
+    }
+    \endcode
+*/
 
 /** \ingroup util_crc
-    Optimized CRC-16 calcutation.
+    Optimized CRC-16 calculation.
 
     Polynomial: x^16 + x^15 + x^2 + 1 (0xa001)<br>
     Initial value: 0xffff
@@ -239,6 +259,55 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
         : "r0"
     );
     return __ret;
+}
+
+/** \ingroup util_crc
+    Optimized Dallas (now Maxim) iButton 8-bit CRC calculation.
+
+    Polynomial: x^8 + x^5 + x^4 + 1 (0x8C)<br>
+    Initial value: 0x0
+
+    See http://www.maxim-ic.com/appnotes.cfm/appnote_number/27
+
+    The following is the equivalent functionality written in C.
+
+    \code
+    uint8_t
+    _crc_ibutton_update(uint8_t crc, uint8_t data)
+    {
+	uint8_t i;
+
+	crc = crc ^ data;
+	for (i = 0; i < 8; i++)
+	{
+	    if (crc & 0x01)
+	        crc = (crc >> 1) ^ 0x8C;
+	    else
+	        crc >>= 1;
+	}
+
+	return crc;
+    }
+    \endcode
+*/
+
+static __inline__ uint8_t
+_crc_ibutton_update(uint8_t __crc, uint8_t __data)
+{
+	uint8_t __i, __pattern;
+	__asm__ __volatile__ (
+		"	eor	%0, %4" "\n\t"
+		"	ldi	%1, 8" "\n\t"
+		"	ldi	%2, 0x8C" "\n\t"
+		"1:	bst	%0, 0" "\n\t"
+		"	lsr	%0" "\n\t"
+		"	brtc	2f" "\n\t"
+		"	eor	%0, %2" "\n\t"
+		"2:	dec	%1" "\n\t"
+		"	brne	1b" "\n\t"
+		: "=r" (__crc), "=d" (__i), "=d" (__pattern)
+		: "0" (__crc), "r" (__data));
+	return __crc;
 }
 
 #endif /* _UTIL_CRC16_H_ */
