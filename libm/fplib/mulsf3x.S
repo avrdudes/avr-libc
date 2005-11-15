@@ -32,6 +32,8 @@
    POSSIBILITY OF SUCH DAMAGE. 
 */
 
+/* $Id$ */
+
 /*
     mulsf3x.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
@@ -57,25 +59,111 @@
 
 GLOBAL(__mulsf3x)
     TST     rA3
-    BREQ    ___mulsf3x_ZERO
- ___mulsf3_10:
-    TST     rB3
-    BREQ    ___mulsf3x_ZERO
+    BREQ    2f
 
- ___mulsf3x_00:
+    TST     rB3
+    BREQ    2f
+
      SUBI    rA3,0x7F          ; exp(A) now signed char
      SUBI    rB3,0x7F          ; exp(B) now signed char
 
      ADD     rA3,rB3           ; add two signed registers
-     BRVC    ___mulsf3x_20     ; no signed overflow
-     BRMI    ___mulsf3x_INF    ; signed overflow : if now negative -> positive overflow
- ___mulsf3x_ZERO:
+     BRVC    1f                ; no signed overflow
+     BRMI    100f              ; signed overflow : if now negative -> positive overflow
+2:
      RJMP    _U(__fp_zerox)
 
- ___mulsf3x_20:
+1:
      SUBI    rA3,0x81          ; = ADI,0x7F
      CPI     rA3,0xFF
-     BREQ    ___mulsf3x_ZERO   ; no (unsigned overflow) -> signed underflow
+     BREQ    2b                ; no (unsigned overflow) -> signed underflow
+
+#ifdef __AVR_ENHANCED__
+
+	; this section of code is used by processors which have MUL instruction
+
+    ; now multiply mantissa A[rA2:rA1:rA0] * B[rB2:rB1:rB0]
+    ; result : [rr5:rr4:rr3:rr2:rr1:rr0]
+    
+    ; definitions used by calculation
+    #define rr2 rAE
+    #define rr3 rTI1
+    #define rr4 rBE
+    #define rr5 rB3
+    #define rmh r1	; the multiply result high register
+    #define rml r0	; the multiply result low register
+    
+    MUL     rA0, rB0	; 0+0 = 0,1
+    MOV     rr4, rmh    ; rr1 == rr4
+    PUSH    rml		; rr0 finished
+    
+    CLR     rr2
+    MUL     rA0, rB1	; 0+1 = 1,2
+    ADD     rr4, rml
+    ADC     rr2, rmh
+    CLR     rr3
+    MUL     rA1, rB0	; 1+0 = 1,2,3
+    ADD     rr4, rml
+    ADC     rr2, rmh
+    ADC     rr3, rr3
+    PUSH    rr4         ; rr1 finished
+    
+    CLR     rr4
+    MUL     rA0, rB2	; 0+2 = 2,3
+    ADD     rr2, rml
+    ADC     rr3, rmh
+    MUL     rA1, rB1	; 1+1 = 2,3,4
+    ADD     rr2, rml
+    ADC     rr3, rmh
+    ADC     rr4, rr4
+    CLR     rA0
+    MUL     rA2, rB0    ; 2+0 = 2,3,4
+    ADD     rr2, rml
+    ADC     rr3, rmh
+    ADC     rr4, rA0
+    
+    CLR     rr5
+    MUL     rA1, rB2    ; 1+2 = 3,4,5
+    ADD     rr3, rml
+    ADC     rr4, rmh
+    ADC     rr5, rr5
+    MUL     rA2, rB1    ; 2+1 = 3,4,5
+    ADD     rr3, rml
+    ADC     rr4, rmh
+    ADC     rr5, rA0
+    
+    MUL     rA2, rB2    ; 2+2 = 4,5
+    ADD     rr4, rml
+    ADC     rr5, rmh   
+
+    ; converting result to original format
+    MOV     rA2, rr5
+    MOV     rA1, rr4
+    MOV     rA0, rr3
+    ; rr2 is the right one, no need to move
+
+    #undef rr5
+    #undef rr4
+    #undef rr3
+    ; definitions used by result
+    #define rr5 rA2
+    #define rr4 rA1
+    #define rr3 rA0
+   // #define rr2 rAE
+    #define rr1 rT1c
+    #define rr0 rT0
+    #define rb5 rTI1
+    #define rb4 rBE
+    #define rb3 rB3
+
+    ; take out the lowest bytes from stack
+    POP     rr1
+    POP     rr0
+; +++ 44 instructions +++
+
+#else // __AVR_ENHANCED__
+
+	; this section of code is used by processors which have not MUL instruction
 
     ; now multiply mantissa A[rA2:rA1:rA0] * B[rb5:rb4:rb3:rB2:rB1:rB0]
     ; result : [rr5:rr4:rr3:rr2:rr1:rr0]
@@ -98,71 +186,75 @@ GLOBAL(__mulsf3x)
     CLR     rb3
 
     LDI     loop,8           ; loop counter
- ___mulsf3x_100:
+1:
     LSR     rb4
-    BRCC    ___mulsf3x_101
+    BRCC    2f
     ADD     rr0,rB0
     adc     rr1,rB1
     adc     rr2,rB2
     adc     rr3,rb3
- ___mulsf3x_101:
+2:
     ADD     rB0,rB0
     adc     rB1,rB1
     adc     rB2,rB2
     adc     rb3,rb3
     DEC     loop
-    BRNE    ___mulsf3x_100    ;
+    BRNE    1b
     LDI     loop,8           ; loop counter
 
     MOV     rb5,rA1          ; rb5 not yet needed
     CLR     rr4              ; rb4 is allready clear
     LDI     loop,8           ; loop counter
- ___mulsf3x_200:
+1:
     LSR     rb5
-    BRCC    ___mulsf3x_201
+    BRCC    2f
     ADD     rr1,rB1
     adc     rr2,rB2
     adc     rr3,rb3
     adc     rr4,rb4
- ___mulsf3x_201:
+2:
     ADD     rB1,rB1
     adc     rB2,rB2
     adc     rb3,rb3
     adc     rb4,rb4
     DEC     loop
-    BRNE    ___mulsf3x_200    ;
+    BRNE    1b
 
     MOV     loop,rA2          ; loop no longer needed, check
     CLR     rr5               ; rb5 is allready clear
- ___mulsf3x_300:
+1:
     LSR     loop
-    BRCC    ___mulsf3x_301
+    BRCC    2f
     ADD     rr2,rB2
     adc     rr3,rb3
     adc     rr4,rb4
     adc     rr5,rb5
- ___mulsf3x_301:
+2:
     ADD     rB2,rB2
     adc     rb3,rb3
     adc     rb4,rb4
     adc     rb5,rb5
     TST     loop
-    BRNE    ___mulsf3x_300    ;
+    BRNE    1b
+; +++ 49 instructions +++
+
+#endif // __AVR_ENHANCED__
+
 
     ; multiplication done : result in rr5:rr4:rr3:rr2:rr1:rr0
     ;                              =  rA2:rA1:rA0:rAE:rr1:rr0
- ___mulsf3x_400: ;  normalize  1.0 * 1.0      = 1.0
-               ;                          0x800000 * 0x800000 = 0x40 00 00 00 00 00
-               ;                          1.999999 * 1.999999 = 3.99999 ~ 4.0
-               ;                          0xFFFFFF * 0xFFFFFF = 0xFF FF FE 00 00 01
+    ;  normalize  1.0 * 1.0      = 1.0
+    ;                          0x800000 * 0x800000 = 0x40 00 00 00 00 00
+    ;                          1.999999 * 1.999999 = 3.99999 ~ 4.0
+    ;                          0xFFFFFF * 0xFFFFFF = 0xFF FF FE 00 00 01
 
     TST     rA2
-    BRPL    ___mulsf3x_405    ; if MSB erg is clr
+    BRPL    1f                ; if MSB erg is clr
     INC     rA3               ;
-    BRNE    ___mulsf3x_420
- ___mulsf3x_INF:
+    BRNE    2f
+100:
     RJMP    _U(__fp_nanx)     ; returns to ___mulsf3 or a high level function : rT1c ok
- ___mulsf3x_405:
+1:
     ADD     rr0,rr0
     adc     rr1,rr1
     adc     rAE,rAE
@@ -170,7 +262,7 @@ GLOBAL(__mulsf3x)
     adc     rA1,rA1
     adc     rA2,rA2
 
- ___mulsf3x_420:
+2:
     OR    rr0,rr1             ; rr0 = rT0 which holds the mantissae extension beyond rAE
     RET
 

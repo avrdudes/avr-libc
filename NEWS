@@ -7,6 +7,8 @@
 * Other changes:
 
   [patch #3592] speedup tanh function in libm
+  [patch #4557] Adds to the fplib usage of MUL instruction 
+                in group avr4; avr5 devices
 
 *** Changes in avr-libc-1.2.6:
 

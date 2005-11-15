@@ -1,3 +1,11 @@
+2005-11-15 Anatoly Sokolov <aesok@post.ru>
+
+	Submitted by Peeter Vois:
+	* libm/fplib/mulsf3x.S: use MUL instruction in group avr4, 
+	avr5 devices; make labels local, add Id line.
+	[patch #4557] Adds to the fplib usage of MUL instruction 
+                      in group avr4; avr5 devices
+
 2005-11-13 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/fp_split.S: Make labels local.
