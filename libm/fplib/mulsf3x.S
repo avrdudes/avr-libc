@@ -78,6 +78,93 @@ GLOBAL(__mulsf3x)
      CPI     rA3,0xFF
      BREQ    2b                ; no (unsigned overflow) -> signed underflow
 
+#ifdef __AVR_ENHANCED__
+
+	; this section of code is used by processors which have MUL instruction
+
+    ; now multiply mantissa A[rA2:rA1:rA0] * B[rB2:rB1:rB0]
+    ; result : [rr5:rr4:rr3:rr2:rr1:rr0]
+    
+    ; definitions used by calculation
+    #define rr2 rAE
+    #define rr3 rTI1
+    #define rr4 rBE
+    #define rr5 rB3
+    #define rmh r1	; the multiply result high register
+    #define rml r0	; the multiply result low register
+    
+    MUL     rA0, rB0	; 0+0 = 0,1
+    MOV     rr4, rmh    ; rr1 == rr4
+    PUSH    rml		; rr0 finished
+    
+    CLR     rr2
+    MUL     rA0, rB1	; 0+1 = 1,2
+    ADD     rr4, rml
+    ADC     rr2, rmh
+    CLR     rr3
+    MUL     rA1, rB0	; 1+0 = 1,2,3
+    ADD     rr4, rml
+    ADC     rr2, rmh
+    ADC     rr3, rr3
+    PUSH    rr4         ; rr1 finished
+    
+    CLR     rr4
+    MUL     rA0, rB2	; 0+2 = 2,3
+    ADD     rr2, rml
+    ADC     rr3, rmh
+    MUL     rA1, rB1	; 1+1 = 2,3,4
+    ADD     rr2, rml
+    ADC     rr3, rmh
+    ADC     rr4, rr4
+    CLR     rA0
+    MUL     rA2, rB0    ; 2+0 = 2,3,4
+    ADD     rr2, rml
+    ADC     rr3, rmh
+    ADC     rr4, rA0
+    
+    CLR     rr5
+    MUL     rA1, rB2    ; 1+2 = 3,4,5
+    ADD     rr3, rml
+    ADC     rr4, rmh
+    ADC     rr5, rr5
+    MUL     rA2, rB1    ; 2+1 = 3,4,5
+    ADD     rr3, rml
+    ADC     rr4, rmh
+    ADC     rr5, rA0
+    
+    MUL     rA2, rB2    ; 2+2 = 4,5
+    ADD     rr4, rml
+    ADC     rr5, rmh   
+
+    ; converting result to original format
+    MOV     rA2, rr5
+    MOV     rA1, rr4
+    MOV     rA0, rr3
+    ; rr2 is the right one, no need to move
+
+    #undef rr5
+    #undef rr4
+    #undef rr3
+    ; definitions used by result
+    #define rr5 rA2
+    #define rr4 rA1
+    #define rr3 rA0
+   // #define rr2 rAE
+    #define rr1 rT1c
+    #define rr0 rT0
+    #define rb5 rTI1
+    #define rb4 rBE
+    #define rb3 rB3
+
+    ; take out the lowest bytes from stack
+    POP     rr1
+    POP     rr0
+; +++ 44 instructions +++
+
+#else // __AVR_ENHANCED__
+
+	; this section of code is used by processors which have not MUL instruction
+
     ; now multiply mantissa A[rA2:rA1:rA0] * B[rb5:rb4:rb3:rB2:rB1:rB0]
     ; result : [rr5:rr4:rr3:rr2:rr1:rr0]
     #define loop rTI0
@@ -149,6 +236,10 @@ GLOBAL(__mulsf3x)
     adc     rb5,rb5
     TST     loop
     BRNE    1b
+; +++ 49 instructions +++
+
+#endif // __AVR_ENHANCED__
+
 
     ; multiplication done : result in rr5:rr4:rr3:rr2:rr1:rr0
     ;                              =  rA2:rA1:rA0:rAE:rr1:rr0
