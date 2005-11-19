@@ -1,5 +1,11 @@
 2005-11-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Galen Seitz:
+	* avr-libc-spec.in: Update to match reality.
+	patch #4627: spec file fixup for 1.2 branch
+
+2005-11-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Dmitry Xmelkov:
 	* libm/fplib/pow.S: reimplement.
 	Fixes bug #14852: fp pow function broken for negative x
