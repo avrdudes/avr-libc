@@ -83,6 +83,7 @@
   [#14486] some macros from boot.h doesn't compile correctly
   [#14503] strnlen_P is wrong with classic AVRs
   [#14798] several IO registers definition issue in header files
+  [#14852] fp pow function broken for negative x
 
 * Other changes:
 
