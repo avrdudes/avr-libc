@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#13340] Math lib documentation/lib mismatch
+  [#14852] fp pow function broken for negative x
 
 * Other changes:
 

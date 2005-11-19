@@ -1,3 +1,9 @@
+2005-11-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Dmitry Xmelkov:
+	* libm/fplib/pow.S: reimplement.
+	Fixes bug #14852: fp pow function broken for negative x
+
 2005-11-15 Anatoly Sokolov <aesok@post.ru>
 
 	Submitted by Peeter Vois:
