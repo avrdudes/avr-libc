@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2002  Theodore A. Roth
+# Copyright (c) 2002,2005  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -38,6 +38,7 @@ EXTRA_DIST           = all-demos.dox \
                        demo/demo.c \
                        demo/demo.fig \
                        demo/demo.dox \
+                       demo/iocompat.h \
                        twitest/Makefile \
                        twitest/twitest.c \
                        twitest/twitest.dox

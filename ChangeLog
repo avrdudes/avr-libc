@@ -1,3 +1,12 @@
+2005-12-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/demo.c: Modernize the demo a bit, keep the #ifdef
+	spaghetti out in its own include file.
+	* doc/examples/demo/demo.dox: (Ditto.)
+	* doc/examples/demo/demo.fig: (Ditto.)
+	* doc/examples/demo/iocompat.h: New file.
+	* doc/examples/Makefile.am (EXTRA_DIST): include demo/iocompat.h.
+
 2005-11-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Released avr-libc-1.4.0.
