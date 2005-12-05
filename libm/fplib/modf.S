@@ -52,8 +52,7 @@
           FUNCTION(modf)
 
 GLOBAL(modf)
-        BST     rA3,7
-        RCALL   _U(__fp_split1)	; clears rAE
+	RCALL	_U(__fp_split_a)	; clears rAE
 
         PUSH    YL
         PUSH    YH

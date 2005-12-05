@@ -59,11 +59,9 @@
           FUNCTION(frexp)
 
 GLOBAL(frexp)
-        MOV     ZH,rPH
-        MOV     ZL,rPL
-        BST     rA3,7
-
-        RCALL   _U(__fp_split1)	;
+	X_movw	ZL, rPL
+        
+	RCALL	_U(__fp_split_a)
         TST     rA3
         BREQ    1f
         SUBI    rA3,0x7E	; 0.5 -> 0.5 * 2^0
@@ -79,7 +77,7 @@ GLOBAL(frexp)
 
 1:
         ST      Z,rA3
-        STD     Z+1,rT1c
+	STD	Z + 1, __zero_reg__
         RJMP    _U(__fp_zero)	; frexp(0) returns 0 not A = 0x00800000 of fp_split1
 
           ENDFUNC

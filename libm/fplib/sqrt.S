@@ -71,7 +71,7 @@ GLOBAL(sqrt)
     MOV     rB2,rA2		; needed later on
     TST     rA3
     BREQ    100f		; sqrt(0) = 0
-    RCALL   _U(__fp_split1)	; does not return on NaN
+    RCALL   _U(__fp_split_a)	; does not return on NaN
 
     MOV     rTI0,rA3
     SUBI    rTI0,0x7F

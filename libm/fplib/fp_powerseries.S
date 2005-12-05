@@ -65,7 +65,7 @@
 
 GLOBAL(__fp_powerseries)
     MOV    rT0,rA3
-    RCALL  _U(__fp_split1)	; call fp_split before pushing
+    RCALL  _U(__fp_split_a)	; call fp_split before pushing
 
     PUSH   rS0
     PUSH   rS1

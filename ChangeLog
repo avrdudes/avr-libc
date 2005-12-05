@@ -1,3 +1,15 @@
+2005-12-06 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/fp_split.S (__fp_split_a): Add new function.
+	* libm/fplib/ceil.S: Use __fp_split_a.
+	* libm/fplib/floor.S: (Ditto.)
+	* libm/fplib/fp_powerseries.S: (Ditto.)
+	* libm/fplib/frexp.S: (Ditto.)
+	* libm/fplib/ldexp.S: (Ditto.)
+	* libm/fplib/log.S: (Ditto.)
+	* libm/fplib/modf.S: (Ditto.)
+	* libm/fplib/sqrt.S: (Ditto.)
+
 2005-12-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/demo/demo.c: Modernize the demo a bit, keep the #ifdef

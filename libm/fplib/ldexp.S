@@ -55,8 +55,7 @@
           FUNCTION(ldexp)
 
 GLOBAL(ldexp)
-        BST     rA3,7
-        RCALL   _U(__fp_split1)		; clears rAE
+	RCALL	_U(__fp_split_a)	; clears rAE
         TST     rA3			;
         BREQ    1f			; 2^x*0 = 0
         CPI     rPH,0xFF

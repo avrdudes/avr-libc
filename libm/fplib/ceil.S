@@ -66,9 +66,8 @@
           FUNCTION(ceil)
 
 GLOBAL(ceil)
-    BST     rA3,7
-    RCALL   _U(__fp_split1)   ; split up in sign : exp : fraction   : fraction extention
-                              ;          x  T      R19   R18:rSI0:R16: R1
+    RCALL   _U(__fp_split_a)	; split up in sign : exp : fraction   : fraction extention
+				;          x  T    : rA3 : rA2:rA1:rA0: rAE
     CPI     rA3,0x7F          ; Exp >= 0x7F -> arg >= 1.0
     BRCC    100f
     BRTS    1f                ; |arg| < 1.0 -> ceil  = / 1.0  for X >  0.0
@@ -85,7 +84,7 @@ GLOBAL(ceil)
     LSR     rA2        ;
     ROR     rA1        ; shift out fractional bits to the right
     ROR     rA0        ; until mantissa is a normalized unsigned
-    adc     rAE,rT1c   ; rAE cleard by fp_split1, rT1c = __zero_reg__
+    adc     rAE, __zero_reg__	; rAE cleard by fp_split1
     INC     rA3        ;
     ; |arg| >= 1.0
 100:                   ; |arg| >= 1.0
