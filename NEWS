@@ -6,6 +6,10 @@
     generally refers to the ATmega8 rather than the AT90S2313, and
     the #ifdef spaghetti has been moved out into iocompat.h.
 
+  - A new demo project ("largedemo") has been added.  It extends
+    the simple demo by adding some controls, and thereby touches
+    a good number of avr-libc concepts.
+
 *** Changes in avr-libc-1.4.0:
 
 * Major API changes:

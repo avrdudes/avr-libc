@@ -1,4 +1,4 @@
-/* Copyright (c) 2004, Joerg Wunsch
+/* Copyright (c) 2004,2005 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,10 @@
   project that can be done.  It is explained in good detail, to allow
   the reader to understand the basic concepts behind using the tools
   on an AVR microcontroller.
+
+  The \ref largedemo "more sophisticated demo project" builds on top
+  of that simple project, and adds some controls to it.  It touches
+  a number of avr-libc's basic concepts on its way.
 
   The \ref twi_demo project explains the use of the two-wire hardware
   interface (also known as "I2C") that is present on many AVR

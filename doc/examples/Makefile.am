@@ -39,6 +39,9 @@ EXTRA_DIST           = all-demos.dox \
                        demo/demo.fig \
                        demo/demo.dox \
                        demo/iocompat.h \
+                       largedemo/Makefile \
+                       largedemo/demo.c \
+                       largedemo/demo.dox \
                        twitest/Makefile \
                        twitest/twitest.c \
                        twitest/twitest.dox

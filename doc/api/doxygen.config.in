@@ -456,6 +456,7 @@ INPUT                  = @top_srcdir@/include \
                          @top_srcdir@/doc/api \
                          @top_srcdir@/doc/examples \
                          @top_srcdir@/doc/examples/demo \
+                         @top_srcdir@/doc/examples/largedemo \
                          @top_srcdir@/doc/examples/twitest
 
 # If the value of the INPUT tag contains directories, you can use the 
@@ -499,6 +500,7 @@ EXCLUDE_PATTERNS       = *CVS*
 # the \include command).
 
 EXAMPLE_PATH           = @top_srcdir@/doc/examples/demo \
+                         @top_srcdir@/doc/examples/largedemo \
                          @top_srcdir@/doc/examples/twitest
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the 

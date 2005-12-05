@@ -1,3 +1,13 @@
+2005-12-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add a new demo project ("largedemo").
+	* doc/examples/largedemo/Makefile: New file.
+	* doc/examples/largedemo/largedemo.c: New file.
+	* doc/examples/largedemo/largedemo.dox: New file.
+	* doc/api/doxygen.config.in: Wire the largedemo into the build.
+	* doc/examples/Makefile.am: (Ditto.)
+	* doc/examples/all-demos.dox: Add some blurb for largedemo.
+
 2005-12-06 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/fp_split.S (__fp_split_a): Add new function.
