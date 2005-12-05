@@ -1,6 +1,7 @@
 /*  -*- Mode: Asm -*-  */
 
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2005  Anatoly Sokolov <aesok@post.ru>
    All rights reserved.
 
 
@@ -97,5 +98,45 @@ GLOBAL(__fp_split1)
     RJMP    _U(__fp_nan)
 
           ENDFUNC
+
+/*
+ *----------------------------------------------------------------------------------------------
+ * split up in sign : exp : fraction   : fraction extention
+ *          x  T    : rA3 : rA2:rA1:rA0: rAE
+ *
+ * if defined FPLIB_CHECK_FOR_NAN
+ * does not return to calling function in case of NaN !
+ * -> call fp_split before pushing locals to stack!!!
+ *
+ */
+
+	FUNCTION(__fp_split_a)
+
+GLOBAL(__fp_split_a)
+	BST     rA3, 7		; T = sign
+	
+	ADD	rA2, rA2	; MSB of exponent to carry
+	adc	rA3, rA3	; whole exponent in rA3, sign in C
+	CPI	rA3, 0xFF	; if no jump then C as hidden one is set
+	BREQ	.L_fp_split_a_nan
+	CLR	rAE		; clear fraction extension
+	CP	rAE, rA3	; set C if nonzero exponent.  
+	BRCS	1f
+	LDI	rA3, 1		; zero exponent really means 1 with hidden bit = 0
+1:
+	ROR	rA2		; sets hidden bit
+	RET
+	
+.L_fp_split_a_nan:
+	POP	rA3
+	POP	rA3		; pop return adress
+ #ifdef __ERRNO__
+	LDI	rA3, EDOM	; NaN is argument domain error !
+ #endif
+	CLR	r1
+	RJMP	_U(__fp_nan)
+
+	ENDFUNC
+
 
 #endif /* not __DOXYGEN__ */

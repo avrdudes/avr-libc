@@ -78,7 +78,7 @@ GLOBAL(log)
    SBRC  rA3,7
    RJMP  _U(__fp_nanEDOM)	; A < 0 argument range error
 1:
-   RCALL _U(__fp_split1)
+   RCALL _U(__fp_split_a)
    TST   rA3
    BRNE  2f
    RJMP  _U(__fp_nanEDOM)	; A == 0 argument range error
