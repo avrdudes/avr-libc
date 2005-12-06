@@ -1,6 +1,4 @@
-/*  -*- Mode: Asm -*-  */
-
-/* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+/* Copyright (c) 2005  Anatoly Sokolov  <aesok@post.ru>
    All rights reserved.
 
 
@@ -35,30 +33,28 @@
 /* $Id$ */
 
 /*
-    divsf3.S is part of     FPlib V 0.3.0       ported to avr-as
+    square.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
 
  *----------------------------------------------------------------------------------------
  *
- * divides two numbers R = A / B
- * stored in T by ___divsf3
- * A  rA3 : rA2:rA1:rA0
- * B  rB3 : rB2:rB1:rB0
- * R  rA3 : rA2:rA1:rA0
+ *  res(A) = A * A
+ *
  */
 
 #include "gasava.inc"
 #include "macros.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, __divsf3)
-          FUNCTION(__divsf3)
+	TEXT_SEG(fplib, square)
+	FUNCTION(square)
 
-GLOBAL(__divsf3)
-     RCALL   _U(__fp_split3)
-     RCALL   _U(__divsf3x)
-     RJMP    _U(__fp_merge)
+GLOBAL(square)
+	X_movw	rB0, rA0
+	X_movw	rB2, rA2	; B = A
 
-          ENDFUNC
+	XJMP	__mulsf3	; A * B
+
+	ENDFUNC
 
 

@@ -1,6 +1,4 @@
-/*  -*- Mode: Asm -*-  */
-
-/* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+/* Copyright (c) 2005  Anatoly Sokolov  <aesok@post.ru>
    All rights reserved.
 
 
@@ -35,30 +33,33 @@
 /* $Id$ */
 
 /*
-    divsf3.S is part of     FPlib V 0.3.0       ported to avr-as
+    fp_inverse.S is part of     FPlib V 0.3.0       ported to avr-as
     for details see readme.fplib
 
  *----------------------------------------------------------------------------------------
  *
- * divides two numbers R = A / B
- * stored in T by ___divsf3
- * A  rA3 : rA2:rA1:rA0
- * B  rB3 : rB2:rB1:rB0
- * R  rA3 : rA2:rA1:rA0
+ * res(A) = 1 / A
+ *
  */
 
 #include "gasava.inc"
 #include "macros.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, __divsf3)
-          FUNCTION(__divsf3)
+	TEXT_SEG(fplib, __fp_inverse)
+	FUNCTION(__fp_inverse)
 
-GLOBAL(__divsf3)
-     RCALL   _U(__fp_split3)
-     RCALL   _U(__divsf3x)
-     RJMP    _U(__fp_merge)
+GLOBAL(__fp_inverse)
+	X_movw	rB0, rA0
+	X_movw	rB2, rA2	; B = A
+	
+	LDI     rA3, 0x3F
+	LDI     rA2, 0x80
+	CLR     rA1
+	CLR     rA0		; A = 1.0
 
-          ENDFUNC
+	XJMP	__divsf3	; A / B
+
+	ENDFUNC
 
 
