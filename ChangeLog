@@ -1,5 +1,13 @@
 2005-12-06 Anatoly Sokolov <aesok@post.ru>
 
+	* /libm/fplib/Files.am: Include new files.
+	* /libm/fplib/divsf3.S (__fp_inverse): Move to ...
+	* /libm/fplib/fp_inverse.S: ... new file.
+	* /libm/fplib/mulsf3.S (square): Move to ...
+	* /libm/fplib/square.S: ... new file.
+
+2005-12-06 Anatoly Sokolov <aesok@post.ru>
+
 	* libm/fplib/fp_split.S (__fp_split_a): Add new function.
 	* libm/fplib/ceil.S: Use __fp_split_a.
 	* libm/fplib/floor.S: (Ditto.)
