@@ -52,17 +52,8 @@
 #include "fplib.inc"
 
           TEXT_SEG(fplib, __divsf3)
-          FUNCTION(__fp_inverse)
+          FUNCTION(__divsf3)
 
-GLOBAL(__fp_inverse)
-     MOV     rB3,rA3
-     MOV     rB2,rA2
-     MOV     rB1,rA1
-     MOV     rB0,rA0
-     LDI     rA3,0x3F
-     LDI     rA2,0x80
-     CLR     rA1
-     CLR     rA0           ; 1.0 / x
 GLOBAL(__divsf3)
      RCALL   _U(__fp_split3)
      RCALL   _U(__divsf3x)

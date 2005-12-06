@@ -47,13 +47,8 @@
 #include "fplib.inc"
 
           TEXT_SEG(fplib, __mulsf3)
-          FUNCTION(square)
+          FUNCTION(__mulsf3)
 
-GLOBAL(square)
-     MOV     rB3,rA3
-     MOV     rB2,rA2
-     MOV     rB1,rA1
-     MOV     rB0,rA0
 GLOBAL(__mulsf3)
      RCALL   _U(__fp_split3)    ; split up in sign:exponent:fraction:fraction extention
      RCALL   _U(__mulsf3x)

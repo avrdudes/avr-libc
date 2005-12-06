@@ -53,6 +53,7 @@ libm_a_asm_sources = \
 	fp_cmp.S \
 	fp_cosinus.S \
 	fp_flashconst.S \
+	fp_inverse.S \
 	fp_merge.S \
 	fp_nan.S \
 	fp_powerseries.S \
@@ -71,6 +72,7 @@ libm_a_asm_sources = \
 	sin.S \
 	sinh.S \
 	sqrt.S \
+	square.S \
 	strtod.S \
 	tan.S \
 	tanh.S
