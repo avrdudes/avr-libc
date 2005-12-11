@@ -1,3 +1,14 @@
+2005-12-11 Anatoly Sokolov <aesok@post.ru>
+
+	* /libm/fplib/fp_powerseries.S: Use __addsf3/__mulsf3/__divsf3 
+	instead __addsf3x/__mulsf3x/__divsf3x.
+	* /libm/fplib/asin.S (table_asin): Change constants to ieee format.
+	* /libm/fplib/atan.S (.Ltable_atan): (Ditto.).
+	* /libm/fplib/exp.S (table_exp): (Ditto.).
+	* /libm/fplib/fp_cosinus.S (table_cos): (Ditto.).
+	* /libm/fplib/log.S (table_log): (Ditto.).
+	* /libm/fplib/tan.S (table_tan): (Ditto.).
+
 2005-12-06 Anatoly Sokolov <aesok@post.ru>
 
 	* /libm/fplib/Files.am: Include new files.

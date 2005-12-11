@@ -141,20 +141,14 @@ GLOBAL(exp)
 
 	PGM_SECTION
 
-	/* these constants are *no* IEEE float values:	exponent unpacked allready
-	 *						first byte : exponent
-	 *						2nd byte   : msb of mantissa with sign as bit 7
-	 *						3rd & 4th byte : mantissa
-	 */
-
  table_exp:  DCB 6 ; no of table entries - 1 (preload value)
-             DCB 0x72, 0x65, 0x2C, 0x03     ; 0.000218555        E5 2C 02 FD 74 E4 30
-             DCB 0x75, 0x22, 0x3B, 0x59     ; 0.00123773         A2 3B 59 0A 98 98 48
-             DCB 0x78, 0x1E, 0xBA, 0xE0     ; 0.00968811         9E BA E0 18 C7 63 00
-             DCB 0x7A, 0x63, 0x3B, 0xF4     ; 0.0554771          E3 3B F3 D9 EE 36 C8
-             DCB 0x7C, 0x75, 0xFF, 0x4E     ; 0.240232           F5 FF 4D AD AC 35 08
-             DCB 0x7E, 0x31, 0x72, 0x11     ; 0.693147           B1 72 11 69 BD 3D 90
-             DCB 0x7F, 0x00, 0x00, 0x00     ; 1.0
+             DCB 0x39, 0x65, 0x2C, 0x03     ; 0.000218555        E5 2C 02 FD 74 E4 30
+             DCB 0x3A, 0xA2, 0x3B, 0x59     ; 0.00123773         A2 3B 59 0A 98 98 48
+             DCB 0x3C, 0x1E, 0xBA, 0xE0     ; 0.00968811         9E BA E0 18 C7 63 00
+             DCB 0x3D, 0x63, 0x3B, 0xF4     ; 0.0554771          E3 3B F3 D9 EE 36 C8
+             DCB 0x3E, 0x75, 0xFF, 0x4E     ; 0.240232           F5 FF 4D AD AC 35 08
+             DCB 0x3F, 0x31, 0x72, 0x11     ; 0.693147           B1 72 11 69 BD 3D 90
+             DCB 0x3F, 0x80, 0x00, 0x00     ; 1.0
              DCB 0x00
 
 #endif /* not __DOXYGEN__ */

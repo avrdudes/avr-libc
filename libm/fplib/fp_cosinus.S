@@ -107,26 +107,21 @@ GLOBAL(__fp_cosinus)		; input A = [-2PI...2PI[
 	PGM_SECTION
 
   /* cos(x) =    ( 1 - xý(1/2! - xý(1/4! - xý(1/6! - xý(1/8! - xý(1/10! - xý(1/12!  - xý(1/14!))
-
-	 * these constants are *no* IEEE float values: exponet unpacked allready
-	 *                                             first byte : exponent
-	 *                                             2nd byte   : msb of mantissa with sign as bit 7
-	 *                                             3rd & 4th byte : mantissa
    */
 table_cos:
              DCB 8  ; no of table entries - 1 (preload value)
              ; looks like 6 steps are sufficient
              ;            7 steps for sin(pi) == 0
              ;;DCB 0x4A, 0x34, 0x13, 0xC3 ;, 0x1E     ; 1/18!
-             DCB 0x52, 0x57, 0x3F, 0x9F ;, 0x3A     ; 1/16!
-             DCB 0x5A, 0x49, 0xCB, 0xA5 ;, 0x46     ; 1/14!
-             DCB 0x62, 0x0F, 0x76, 0xC7 ;, 0x80 ;C6 ; 1/12!
-             DCB 0x69, 0x13, 0xF2, 0x7E ;, 0xBC     ; 1/10!
-             DCB 0x6F, 0x50, 0x0D, 0x01 ;, 0xD0     ; 1/8!
-             DCB 0x75, 0x36, 0x0B, 0x61 ;, 0xB6     ; 1/6!
-             DCB 0x7A, 0x2A, 0xAA, 0xAB ;, 0xAB     ; 1/4! = 1/24
-             DCB 0x7E, 0x00, 0x00, 0x00 ;, 0x00     ; 1/2!
-             DCB 0x7F, 0x00, 0x00, 0x00 ;, 0x00     ; 1.0
+             DCB 0x29, 0x57, 0x3F, 0x9F     ; 1/16!
+             DCB 0x2D, 0x49, 0xCB, 0xA5     ; 1/14!
+             DCB 0x31, 0x0F, 0x76, 0xC7     ; 1/12!
+             DCB 0x34, 0x93, 0xF2, 0x7E     ; 1/10!
+             DCB 0x37, 0xD0, 0x0D, 0x01     ; 1/8!
+             DCB 0x3A, 0xB6, 0x0B, 0x61     ; 1/6!
+             DCB 0x3D, 0x2A, 0xAA, 0xAB     ; 1/4! = 1/24
+             DCB 0x3F, 0x00, 0x00, 0x00     ; 1/2!
+             DCB 0x3F, 0x80, 0x00, 0x00     ; 1.0
              DCB 0x00
 
 #endif /* not __DOXYGEN__ */

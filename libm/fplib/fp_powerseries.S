@@ -1,6 +1,7 @@
 /*  -*- Mode: Asm -*-  */
 
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2005  Anatoly Sokolov <aesok@post.ru>
    All rights reserved.
 
 
@@ -53,131 +54,88 @@
 #include "macros.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, __fp_powerseries)
-          FUNCTION(__fp_powerseries)
+#define rArg3  rS0
+#define rArg2  rS1
+#define rArg1  rS2
+#define rArg0  rS3
+#define rGrade rS4
 
- #define rGrade rS5
- #define rFlags rS4
- #define rArg3  rS3
- #define rArg2  rS2
- #define rArg1  rS1
- #define rArg0  rS0
+	TEXT_SEG(fplib, __fp_powerseries)
+	FUNCTION(__fp_powerseries)
 
 GLOBAL(__fp_powerseries)
-    MOV    rT0,rA3
-    RCALL  _U(__fp_split_a)	; call fp_split before pushing
+; TODO: exit if argument is NAN
 
-    PUSH   rS0
-    PUSH   rS1
-    PUSH   rS2
-    PUSH   rS3
-    PUSH   rS4
-    PUSH   rS5
-    MOV    rFlags,rT0		;
+	PUSH	rS0
+	PUSH	rS1
+	PUSH	rS2
+	PUSH	rS3
+	PUSH	rS4
 
-    MOV    rArg3,rA3
-    MOV    rArg2,rA2
-    MOV    rArg1,rA1
-    MOV    rArg0,rA0
-    LPMRdZpp(rGrade)		; first entry of fp table is byte with entry count
-    RCALL  100f
+	x_movw	rArg0, rA0
+	X_movw	rArg2, rA2
+	
+	LPMRdZpp(rGrade)	; first entry of fp table is byte with entry count
+	RCALL  100f
 
-    LPMRdZpp(rGrade)		; increment first (last access or loop counter)
-    TST    rGrade
-    BREQ   1f			; no dividing
+	LPMRdZpp(rGrade)	; increment first (last access or loop counter)
+	TST	rGrade
+	BREQ	1f		; no dividing
 
-    PUSH   rA3
-    PUSH   rA2
-    PUSH   rA1
-    PUSH   rA0
+	PUSH	rA3
+	PUSH	rA2
+	PUSH	rA1
+	PUSH	rA0
 
-    MOV    rA0,rArg0
-    MOV    rA1,rArg1
-    MOV    rA2,rArg2
-    MOV    rA3,rArg3		; get power series argument again
-    RCALL  100f
+	X_movw	rA0, rArg0
+	X_movw	rA2, rArg2	; get power series argument again
+	
+	RCALL  100f
 
-    POP    rB0
-    POP    rB1
-    POP    rB2
-    POP    rB3
-    RCALL  _U(__divsf3x)	; this clears rT0
+	POP	rB0
+	POP	rB1
+	POP	rB2
+	POP	rB3
+	XCALL	__divsf3
 
 1:
-    POP    rS5
-    POP    rS4
-    POP    rS3
-    POP    rS2
-    POP    rS1
-    POP    rS0
+	POP	rS4
+	POP	rS3
+	POP	rS2
+	POP	rS1
+	POP	rS0
 
-	/* rT0 must be cleared : no extended rounding precision
-	 * divsf3 clears rT0
-	 * if execution path branches directely the LPM did load zero to T0 = rT0
-	 * * if ATmega161 (or other enhanced cores used) LPM RX does not clear rT0
-	 */
-    RJMP   _U(__fp_merge)
+	RET
+
 
 100:
-                               ; AX preset with argument, rFlags.7 sign of AX
-    RCALL  _U(__fp_flashconst)  ; BX = *array[n]
-
-    BST    rB2,7               ; store sign(B) to T
-    ORI    rB2,0x80            ; set implicit one
-    RJMP   2f
+	RCALL	_U(__fp_flashconst)	; BX = *array[n]
+	RJMP	2f
 
 1:
-    MOV    rB0,rArg0
-    MOV    rB1,rArg1
-    MOV    rB2,rArg2
-    MOV    rB3,rArg3            ; get power series argument
+	X_movw	rB0, rArg0
+	X_movw	rB2, rArg2		; get power series argument
 
 2:
+	PUSH	ZL
+	PUSH	ZH
+	XCALL	__mulsf3		; AX *= BX
+	POP	ZH
+	POP	ZL
+    
+	RCALL	_U(__fp_flashconst)	; BX = *array[n]
 
-    PUSH   ZL
-    PUSH   ZH
-    ; CLR    rBE		; __mulsf3x does not use rBE cleared
-    RCALL  _U(__mulsf3x)	; AX *= BX, sign T and rFlags stays untouched
-    POP    ZH
-    POP    ZL
-    RCALL  _U(__fp_flashconst)	; BX = *array[n]
-    CLR    rBE
-
-	/* now set sign right :
-	 * rB2.7 is sign(B)
-	 * rFlags.7 is sign of Argument
-	 * T is sign of previous addition
-	 * -> sign of mul res = rFlags.7 ^ T => rT1c.7
-	 * T = (rFlags.7 ^ T) ^ rB2.7
-	 */
-    BLD    rT0,7		;
-    EOR    rT0,rFlags		;
-    MOV    rT1c,rT0
-    EOR    rT0,rB2
-    BST    rT0,7		; T = sign(AX)^sign(BX)
-    ORI    rB2,0x80		; set implicit one
-
-    PUSH   ZH
-    RCALL  _U(__addsf3x)	; AX += BX
-    POP    ZH
-				; now normalize and round
-    TST    rA3			; exponent == 0
-    BREQ   4f			; underflow
-3:
-    TST    rA2
-    BRMI   4f			; shift left until MSB set
-    DEC    rA3
-    ADD    rAE,rAE
-    adc    rA0,rA0
-    adc    rA1,rA1
-    adc    rA2,rA2
-    RJMP   3b
+	PUSH	ZL
+	PUSH	ZH
+	XCALL	__addsf3		; AX += BX
+	POP	ZH
+	POP	ZL
 
 4:
-    DEC    rGrade
-    BRNE   1b
-    RET
+	DEC	rGrade
+	BRNE	1b
+	RET
 
-          ENDFUNC
+	ENDFUNC
 
 #endif /* not __DOXYGEN__ */
