@@ -1,3 +1,9 @@
+2005-12-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Frank Behrens:
+	* include/avr/delay.h: fix inlining of the delay functions.
+	Fix from bug #15161: util/delay.h misses inline keyword (regression).
+
 2005-11-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Galen Seitz:
