@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#15161] util/delay.h misses inline keyword (regression)
+  [#15193] incorrect definition of IVSEL bit in MCUCR register
 
 *** Changes in avr-libc-1.4.0:
 
