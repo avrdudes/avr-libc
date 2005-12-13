@@ -1400,7 +1400,7 @@
 /* MCU Control Register */
 #define    JTD     7
 #define    PUD     4
-#define    IVSE    1
+#define    IVSEL   1
 #define    IVCE    0
 /* End Register Bits */
 

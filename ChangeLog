@@ -1,3 +1,8 @@
+2005-12-14 Anatoly Sokolov <aesok@post.ru>
+
+	* /include/avr/iocanxx.h (IVSE): Rename in IVSEL.
+	[Fixed bug #15161]
+
 2005-12-11 Anatoly Sokolov <aesok@post.ru>
 
 	* /libm/fplib/fp_powerseries.S: Use __addsf3/__mulsf3/__divsf3 
