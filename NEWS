@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.4.0:
 
+* Bugs fixed:
+
+  [#15161] util/delay.h misses inline keyword (regression)
+
 * Other changes:
 
   - The simple demo has been modernized a bit.  Documentation now

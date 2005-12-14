@@ -3,6 +3,12 @@
 	* /include/avr/iocanxx.h (IVSE): Rename in IVSEL.
 	[Fixed bug #15161]
 
+2005-12-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Frank Behrens:
+	* include/util/delay.h: fix inlining of the delay functions.
+	Fix from bug #15161: util/delay.h misses inline keyword (regression).
+
 2005-12-11 Anatoly Sokolov <aesok@post.ru>
 
 	* /libm/fplib/fp_powerseries.S: Use __addsf3/__mulsf3/__divsf3 
