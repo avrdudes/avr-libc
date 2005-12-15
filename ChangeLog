@@ -1,3 +1,17 @@
+2005-12-15 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: add tests for the ATtiny24/44/84 support.
+	* devtools/gen-avr-lib-tree.sh: add support for ATtiny24/44/84.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iotn24.h: new file.
+	* include/avr/iotn44.h: new file.
+	* include/avr/iotn84.h: new file.
+	* include/avr/iotnx4.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for ATtiny24/44/84.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2005-12-14 Anatoly Sokolov <aesok@post.ru>
 
 	* /include/avr/iocanxx.h (IVSE): Rename in IVSEL.

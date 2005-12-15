@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#15161] util/delay.h misses inline keyword (regression)
+  [#15193] incorrect definition of IVSEL bit in MCUCR register
 
 * Other changes:
 
@@ -14,9 +15,12 @@
     the simple demo by adding some controls, and thereby touches
     a good number of avr-libc concepts.
 
-* Bugs fixed:
-  [#15193] incorrect definition of IVSEL bit in MCUCR register
-  
+* New devices supported:
+
+  + ATtiny24
+  + ATtiny44
+  + ATtiny84
+
 *** Changes in avr-libc-1.4.0:
 
 * Major API changes:
