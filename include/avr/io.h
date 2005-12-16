@@ -272,6 +272,12 @@
 #  include <avr/iotn45.h>
 #elif defined (__AVR_ATtiny85__)
 #  include <avr/iotn85.h>
+#elif defined (__AVR_ATtiny24__)
+#  include <avr/iotn24.h>
+#elif defined (__AVR_ATtiny44__)
+#  include <avr/iotn44.h>
+#elif defined (__AVR_ATtiny84__)
+#  include <avr/iotn84.h>
 /* avr1: the following only supported for assembler programs */
 #elif defined (__AVR_ATtiny28__)
 #  include <avr/iotn28.h>
