@@ -1,3 +1,9 @@
+2005-12-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* xml/patch-headers.py: add the ATtinyX4 family, fix the
+	list of ATtinyX5.
+	* doc/api/vectortable.dox: Regenerate using patch-headers.py.
+
 2005-12-15 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: add tests for the ATtiny24/44/84 support.

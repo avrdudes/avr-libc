@@ -116,12 +116,16 @@ table = {
     "iotn15.h": "ATtiny15",
     "iotn22.h": "ATtiny22",
     "iotn2313.h": "ATtiny2313",
+    #"iotn24.h" => "iotnx4.h"
     #"iotn25.h" => "iotnx5.h"
     "iotn26.h": "ATtiny26",
     "iotn28.h": "ATtiny28",
+    #"iotn44.h" => "iotnx4.h"
     #"iotn45.h" => "iotnx5.h"
+    #"iotn84.h" => "iotnx4.h"
     #"iotn85.h" => "iotnx5.h"
-    "iotnx5.h": "ATtiny45",
+    "iotnx4.h": ("ATtiny24", "ATtiny44", "ATtiny84"),
+    "iotnx5.h": ("ATtiny45", "ATtiny25", "ATtiny85"),
 }
 
 def create_tabs (string):
