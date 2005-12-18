@@ -606,6 +606,7 @@ extern int strncmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern char *strncat_P(char *, PGM_P, size_t);
 extern char *strncpy_P(char *, PGM_P, size_t);
+extern char *strstr_P(const char *, PGM_P) __ATTR_PURE__;
 
 #ifdef __cplusplus
 }

@@ -1,3 +1,11 @@
+2005-12-18 Anatoly Sokolov <aesok@post.ru>
+
+	Submitted by Werner Boellmann:
+	* include/avr/pgmspace.h (strstr_P): Declare.
+	* libc/pmstring/Files.am: Include new file.
+	* libc/pmstring/strstr_P.S: New file.
+	Add patch #4668: progmem aware verson of strstr().
+
 2005-12-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* xml/patch-headers.py: add the ATtinyX4 family, fix the

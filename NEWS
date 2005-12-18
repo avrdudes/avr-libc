@@ -20,6 +20,10 @@
   + ATtiny24
   + ATtiny44
   + ATtiny84
+  
+* New functions: 
+
+   strstr_P (Contributed by Werner Boellmann)
 
 *** Changes in avr-libc-1.4.0:
 
