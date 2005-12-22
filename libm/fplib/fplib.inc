@@ -100,7 +100,6 @@
 #define DCB	.byte
 
 #define ACCURACY	7	/* decimal digits */
-#define retByte	rByte		/* FIXME: why has this been renamed ?  */
 
 /* Put constant tables at low addresses in program memory, so they are
    reachable for "lpm" without using RAMPZ on >64K devices.  */

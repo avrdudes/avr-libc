@@ -1,3 +1,8 @@
+2005-12-23 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/fp_cmp.S: Use 'rByte' instead 'retByte'.
+	* libm/fplib/fplib.inc (retByte): Deleted.
+
 2005-12-18 Anatoly Sokolov <aesok@post.ru>
 
 	Submitted by Werner Boellmann:
