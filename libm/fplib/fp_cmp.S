@@ -82,13 +82,13 @@ GLOBAL(__cmpsf2)  ; returns 1 for A > B ; 0 for A == B ; -1 for A < B ; NaN ?
     breq    .Lfp_cmp_eq
     brcc    .Lfp_cmp_gt
 .Lfp_cmp_lt:
-    ldi     retByte,0xFF
+    ldi     rByte,0xFF
     ret
 .Lfp_cmp_eq:
-    ldi     retByte,0x00
+    ldi     rByte,0x00
     ret
 .Lfp_cmp_gt:
-    ldi     retByte,0x01
+    ldi     rByte,0x01
     ret
 
           ENDFUNC
