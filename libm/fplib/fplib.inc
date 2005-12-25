@@ -64,6 +64,12 @@
 #define rT1c     __zero_reg__   /* 2nd temporary, clear after use */
 
 /*--------------------------------------------------------------------------
+ * Library constant :
+ */
+#define EMAX	255
+#define EMIN	0
+
+/*--------------------------------------------------------------------------
  * Library shapening :
  */
 

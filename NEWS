@@ -4,6 +4,7 @@
 
   [#15161] util/delay.h misses inline keyword (regression)
   [#15193] incorrect definition of IVSEL bit in MCUCR register
+  [#15266] Function ldexp incorrectly processes overflow and underflow cases.
 
 * Other changes:
 

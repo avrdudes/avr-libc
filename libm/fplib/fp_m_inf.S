@@ -1,7 +1,4 @@
-/*  -*- Mode: Asm -*-  */
-
-/* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
-   Copyright (c) 2005  Anatoly Sokolov <aesok@post.ru>
+/* Copyright (c) 2005  Anatoly Sokolov <aesok@post.ru>
    All rights reserved.
 
 
@@ -35,61 +32,21 @@
 
 /* $Id$ */
 
-/*
-    ldexp.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
-
- *----------------------------------------------------------------------------------------
- *
- * A = 2^exp * x
- * e.g.
- * double y = ldexp( 3.45, 2 ) = 2^2 * 3.45 = 13.8
- */
-
-#if !defined(__DOXYGEN__)
 
 #include "gasava.inc"
 #include "macros.inc"
 #include "fplib.inc"
 
-#define rExpH	rBE
+	TEXT_SEG(fplib, __fp_m_inf)
+	FUNCTION(__fp_m_inf)
 
-	TEXT_SEG(fplib, ldexp)
-	FUNCTION(ldexp)
-
-GLOBAL(ldexp)
-	RCALL	_U(__fp_split_a)	; Non return if NaN; clears rAE
-
-        TST     rA3			;
-        BREQ    .L_zero			; 2^x*0 = 0
-	
-	CLR	rExpH
-	ADD	rA3, rPL		; rExpH.rA3 := sum of exponent and arg
-	ADC	rExpH, rPH
-
-	LDI	rPL, lo8(EMAX)
-	LDI	rPH, hi8(EMAX)
-	CP	rA3, rPL
-	CPC	rExpH, rPH
-	BRGE	.L_Inf			; if overflow return +/-Inf
-
-	LDI	rPL, lo8(EMIN)
-	LDI	rPH, hi8(EMIN)
-	CP	rA3, rPL
-	CPC	rExpH, rPH
-	BRLT	.L_zero			; if underflow return 0
-	
-        RJMP    _U(__fp_merge)		; rT0 must not be cleared : rAE=0 no rounding anyway
-
-.L_zero:
-        RJMP    _U(__fp_zero)
-
-.L_Inf:
-	BRTS	.L_mInf			; branch if arg negative
-        RJMP    _U(__fp_p_inf)
-.L_mInf:
-        RJMP    _U(__fp_m_inf)
+GLOBAL(__fp_m_inf)		; -> -Inf
+	LDI	rA3, 0xFF
+	LDI	rA2, 0x80
+	LDI	rA1, 0x00
+	LDI	rA0, 0x00
+	RET
 
 	ENDFUNC
 
-#endif /* not __DOXYGEN__ */
+

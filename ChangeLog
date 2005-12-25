@@ -1,3 +1,12 @@
+2005-12-25 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/Files.am: include new files.
+	* libm/fplib/fp_m_inf.S: new file.
+	* libm/fplib/fp_p_inf.S: new file.
+	* libm/fplib/fplib.inc (EMAX, EMIN): Add.
+	* libm/fplib/ldexp.S: Check underflow and overflow cases.
+	[Fixed bug #15226]
+
 2005-12-23 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/fp_cmp.S: Use 'rByte' instead 'retByte'.
