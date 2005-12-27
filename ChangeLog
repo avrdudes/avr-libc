@@ -1,3 +1,14 @@
+2005-12-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version date.
+
+2005-12-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Risto Eerola:
+	* include/avr/sleep.h: add sleep_enable(),
+	sleep_disable(), and sleep_cpu().
+	patch #4611: sleep.h sleep_mode() not interrupt safe
+
 2005-12-25 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/Files.am: include new files.

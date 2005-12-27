@@ -8,6 +8,8 @@
 
 * Other changes:
 
+  [patch #4611] sleep.h sleep_mode() not interrupt safe
+
   - The simple demo has been modernized a bit.  Documentation now
     generally refers to the ATmega8 rather than the AT90S2313, and
     the #ifdef spaghetti has been moved out into iocompat.h.

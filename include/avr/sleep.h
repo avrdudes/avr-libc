@@ -93,10 +93,52 @@
 
     \code #include <avr/sleep.h>\endcode
 
-    Use of the \c SLEEP instruction can allow your application to reduce it's
+    Use of the \c SLEEP instruction can allow an application to reduce its
     power comsumption considerably. AVR devices can be put into different
     sleep modes. Refer to the datasheet for the details relating to the device
-    you are using. */
+    you are using.
+
+    There are several macros provided in this header file to actually
+    put the device into sleep mode.  The simplest way is to optionally
+    set the desired sleep mode using \c set_sleep_mode() (it usually
+    defaults to idle mode where the CPU is put on sleep but all
+    peripheral clocks are still running), and then call
+    \c sleep_mode().  Unless it is the purpose to lock the CPU hard
+    (until a hardware reset), interrupts need to be enabled at this
+    point.  This macro automatically takes care to enable the sleep mode
+    in the CPU before going to sleep, and disable it again afterwards.
+
+    As this combined macro might cause race conditions in some
+    situations, the individual steps of manipulating the sleep enable
+    (SE) bit, and actually issuing the \c SLEEP instruction are provided
+    in the macros \c sleep_enable(), \c sleep_disable(), and
+    \c sleep_cpu().  This also allows for test-and-sleep scenarios that
+    take care of not missing the interrupt that will awake the device
+    from sleep.
+
+    Example:
+    \code
+    #include <avr/interrupt.h>
+    #include <avr/sleep.h>
+
+    ...
+      cli();
+      if (some_condition) {
+        sleep_enable();
+        sei();
+	sleep_cpu();
+	sleep_disable();
+      }
+      sei();
+    \endcode
+
+    This sequence ensures an atomic test of \c some_condition with
+    interrupts being disabled.  If the condition is met, sleep mode
+    will be prepared, and the \c SLEEP instruction will be scheduled
+    immediately after an \c SEI instruction.  As the intruction right
+    after the \c SEI is guaranteed to be executed before an interrupt
+    could trigger, it is sure the device will really be put on sleep.
+*/
 
 
 /** \name Sleep Modes
@@ -198,7 +240,7 @@
 
 /* @{ */
 
-/** \ingroup avr_sleep 
+/** \ingroup avr_sleep
 
     Select a sleep mode. */
 
@@ -235,7 +277,7 @@ do { \
 
 
 
-/** \ingroup avr_sleep 
+/** \ingroup avr_sleep
 
     Put the device in sleep mode. How the device is brought out of sleep mode
     depends on the specific mode selected with the set_sleep_mode() function.
@@ -248,12 +290,69 @@ extern void sleep_mode (void);
 
 #define sleep_mode()                           \
 do {                                           \
-    _SLEEP_CONTROL_REG |= _BV(SE);            \
+    _SLEEP_CONTROL_REG |= _BV(SE);             \
     __asm__ __volatile__ ("sleep" "\n\t" :: ); \
-    _SLEEP_CONTROL_REG &= ~_BV(SE);           \
+    _SLEEP_CONTROL_REG &= ~_BV(SE);            \
 } while (0)
 
 #endif
+
+
+
+#if defined(__DOXYGEN__)
+
+/** \ingroup avr_sleep
+
+    Set the SE (sleep enable) bit.
+*/
+extern void sleep_enable (void);
+
+#else
+
+#define sleep_enable()             \
+do {                               \
+  _SLEEP_CONTROL_REG |= _BV(SE);   \
+} while(0)
+
+#endif
+
+
+#if defined(__DOXYGEN__)
+
+/** \ingroup avr_sleep
+
+    Clear the SE (sleep enable) bit.
+*/
+extern void sleep_disable (void);
+
+#else
+
+#define sleep_disable()            \
+do {                               \
+  _SLEEP_CONTROL_REG &= ~_BV(SE);  \
+} while(0)
+
+#endif
+
+
+/** \ingroup avr_sleep
+
+    Put the device into sleep mode.  The SE bit must be set
+    beforehand, and it is recommended to clear it afterwards.
+*/
+#if defined(__DOXYGEN__)
+
+extern void sleep_cpu (void);
+
+#else
+
+#define sleep_cpu()                              \
+do {                                             \
+  __asm__ __volatile__ ( "sleep" "\n\t" :: );    \
+} while(0)
+
+#endif
+
 
 /*@}*/
 
