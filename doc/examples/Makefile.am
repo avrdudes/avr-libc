@@ -40,8 +40,10 @@ EXTRA_DIST           = all-demos.dox \
                        demo/demo.dox \
                        demo/iocompat.h \
                        largedemo/Makefile \
-                       largedemo/demo.c \
-                       largedemo/demo.dox \
+                       largedemo/largedemo-setup.jpg \
+                       largedemo/largedemo-wiring.jpg \
+                       largedemo/largedemo.c \
+                       largedemo/largedemo.dox \
                        stdiodemo/Makefile \
                        stdiodemo/defines.h \
                        stdiodemo/hd44780.c \
