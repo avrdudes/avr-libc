@@ -42,6 +42,17 @@ EXTRA_DIST           = all-demos.dox \
                        largedemo/Makefile \
                        largedemo/demo.c \
                        largedemo/demo.dox \
+                       stdiodemo/Makefile \
+                       stdiodemo/defines.h \
+                       stdiodemo/hd44780.c \
+                       stdiodemo/hd44780.h \
+                       stdiodemo/lcd.c \
+                       stdiodemo/lcd.h \
+                       stdiodemo/stdiodemo-setup.jpg \
+                       stdiodemo/stdiodemo.c \
+                       stdiodemo/stdiodemo.dox \
+                       stdiodemo/uart.c \
+                       stdiodemo/uart.h \
                        twitest/Makefile \
                        twitest/twitest.c \
                        twitest/twitest.dox

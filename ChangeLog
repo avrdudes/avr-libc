@@ -9,6 +9,7 @@
 	"make clean" there as well.
 	* doc/api/doxygen.config.in: Add more example and image
 	directories (for stdiodemo).
+	* doc/examples/Makefile.am: Add stdiodemo files.
 	* doc/examples/all-demos.dox: Wire the stdiodemo into
 	the general comment about the demos.
 	* doc/examples/largedemo/Makefile: add code to convert
