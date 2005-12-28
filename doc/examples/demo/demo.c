@@ -17,59 +17,18 @@
 #include <inttypes.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/sleep.h>
 
-#if defined(__AVR_AT90S2313__)
-#  define OC1 PB3
-#  define OCR OCR1
-#  define DDROC DDRB
-#elif defined(__AVR_AT90S2333__) || defined(__AVR_AT90S4433__)
-#  define OC1 PB1
-#  define DDROC DDRB
-#  define OCR OCR1
-#elif defined(__AVR_AT90S4414__) || defined(__AVR_AT90S8515__) || \
-      defined(__AVR_AT90S4434__) || defined(__AVR_AT90S8535__) || \
-      defined(__AVR_ATmega163__)
-#  define OC1 PD5
-#  define DDROC DDRD
-#  define OCR OCR1A
-#elif defined(__AVR_ATmega8__)
-#  define OC1 PB1
-#  define DDROC DDRB
-#  define OCR OCR1A
-#  define PWM10 WGM10
-#  define PWM11 WGM11
-#elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega16__)
-#  define OC1 PD5
-#  define DDROC DDRD
-#  define OCR OCR1A
-#  define PWM10 WGM10
-#  define PWM11 WGM11
-#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
-#  define OC1 PB5
-#  define DDROC DDRB
-#  define OCR OCR1A
-#  define PWM10 WGM10
-#  define PWM11 WGM11
-#else
-#  error "Don't know what kind of MCU you are compiling for"
-#endif
-
-#if defined(COM11)
-#  define XCOM11 COM11
-#elif defined(COM1A1)
-#  define XCOM11 COM1A1
-#else
-#  error "need either COM1A1 or COM11"
-#endif
+#include "iocompat.h"		/* Note [1] */
 
 enum { UP, DOWN };
 
-volatile uint16_t pwm; /* Note [1] */
+volatile uint16_t pwm;		/* Note [2] */
 volatile uint8_t direction;
 
-ISR (TIMER1_OVF_vect) /* Note [2] */
+ISR (TIMER1_OVF_vect)		/* Note [3] */
 {
-    switch (direction) /* Note [3] */
+    switch (direction)		/* Note [4] */
     {
         case UP:
             if (++pwm == 1023)
@@ -82,14 +41,14 @@ ISR (TIMER1_OVF_vect) /* Note [2] */
             break;
     }
 
-    OCR = pwm; /* Note [4] */
+    OCR = pwm;			/* Note [5] */
 }
 
 void
-ioinit (void) /* Note [5] */
+ioinit (void)			/* Note [6] */
 {
     /* tmr1 is 10-bit PWM */
-    TCCR1A = _BV (PWM10) | _BV (PWM11) | _BV (XCOM11);
+    TCCR1A = _BV (WGM10) | _BV (WGM11) | _BV (COM1A1);
 
     /* tmr1 running on full MCU clock */
     TCCR1B = _BV (CS10);
@@ -97,10 +56,10 @@ ioinit (void) /* Note [5] */
     /* set PWM value to 0 */
     OCR = 0;
 
-    /* enable OC1 and PB2 as output */
+    /* enable OC1 as output */
     DDROC = _BV (OC1);
 
-    /* enable interrupts */
+    /* enable timer 1 overflow interrupt */
     TIMSK = _BV (TOIE1);
     sei ();
 }
@@ -108,12 +67,13 @@ ioinit (void) /* Note [5] */
 int
 main (void)
 {
+
     ioinit ();
 
     /* loop forever, the interrupts are doing the rest */
 
-    for (;;) /* Note [6] */
-        ;
+    for (;;)			/* Note [7] */
+        sleep_mode();
 
     return (0);
 }

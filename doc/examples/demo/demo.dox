@@ -63,18 +63,31 @@ this example, create a file called \c demo.c containing this source code.
 Some of the more important parts of the code are:
 
 \par Note [1]:
+As the AVR microcontroller series has been developed during the past
+years, new features have been added over time.  Even though the basic
+concepts of the timer/counter1 are still the same as they used to be
+back in early 2001 when this simple demo was written initially, the
+names of registers and bits have been changed slightly to reflect the
+new features.  Also, the port and pin mapping of the output compare
+match 1A (or 1 for older devices) pin which is used to control the LED
+varies between different AVRs.  The file <tt>iocompat.h</tt> tries to
+abstract between all this differences using some preprocessor \c #ifdef
+statements, so the actual program itself can operate on a common set of
+symbolic names.
+
+\par Note [2]:
 The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
 remember the current value.
 
-\par Note [2]:
+\par Note [3]:
 ISR() is a macro that marks the function as an interrupt routine. In this
-case, the function will get called when the timer overflows. Setting up
+case, the function will get called when timer 1 overflows. Setting up
 interrupts is explained in greater detail in \ref avr_interrupts.
 
-\par Note [3]:
+\par Note [4]:
 This section determines the new value of the \c PWM.
 
-\par Note [4]:
+\par Note [5]:
 Here's where the newly computed value is loaded into the \c PWM register.
 Since we are in an interrupt routine, it is safe to use a 16-bit assignment
 to the register.  Outside of an interrupt, the assignment should only be
@@ -82,16 +95,18 @@ performed with interrupts disabled if there's a chance that an interrupt
 routine could also access this register (or another register that uses
 \c TEMP), see the appropriate \ref faq_16bitio "FAQ entry".
 
-\par Note [5]:
+\par Note [6]:
 This routine gets called after a reset. It initializes the \c PWM and enables
 interrupts.
 
-\par Note [6]:
-The main loop of the program does nothing -- all the work is done by the
-interrupt routine! If this was a real product, we'd probably put a \c SLEEP
-instruction in this loop to conserve power.
-
 \par Note [7]:
+The main loop of the program does nothing -- all the work is done by the
+interrupt routine! The <tt>sleep_mode()</tt> puts the processor on sleep
+until the next interrupt, to conserve power.  Of course, that probably
+won't be noticable as we are still driving a LED, it is merely mentioned
+here to demonstrate the basic principle.
+
+\par Note [8]:
 Early AVR devices saturate their outputs at rather low currents when
 sourcing current, so the LED can be connected directly, the resulting
 current through the LED will be about 15 mA.  For modern parts (at
@@ -118,14 +133,14 @@ projects will have several modules and will typically need to break up the
 building of the project into several compiles and one link.
 
 \verbatim
-    $ avr-gcc -g -Os -mmcu=at90s2333 -c demo.c
+    $ avr-gcc -g -Os -mmcu=atmega8 -c demo.c
 \endverbatim
 
 The compilation will create a \c demo.o file. Next we link it into a binary
 called \c demo.elf.
 
 \verbatim
-    $ avr-gcc -g -mmcu=at90s2333 -o demo.elf demo.o
+    $ avr-gcc -g -mmcu=atmega8 -o demo.elf demo.o
 \endverbatim
 
 It is important to specify the MCU type when linking. The compiler uses the \c
@@ -176,7 +191,7 @@ application using the following command to generate \c demo.map (a portion of
 which is shown below).
 
 \verbatim
-    $ avr-gcc -g -mmcu=at90s2313 -Wl,-Map,demo.map -o demo.elf demo.o
+    $ avr-gcc -g -mmcu=atmega8 -Wl,-Map,demo.map -o demo.elf demo.o
 \endverbatim
 
 \dontinclude demo.map
@@ -192,12 +207,12 @@ location 0x0.
 \skipline *(.fini2) 
 \until __eeprom_end
 
-The last address in the \c .text segment is location \c 0xf2 ( denoted by \c
-_etext ), so the instructions use up 242 bytes of FLASH.
+The last address in the \c .text segment is location \c 0x114 ( denoted by \c
+_etext ), so the instructions use up 276 bytes of FLASH.
 
 The \c .data segment (where initialized static variables are stored) starts
-at location \c 0x60, which is the first address after the register bank on a
-2313 processor.
+at location \c 0x60, which is the first address after the register bank on an
+ATmega8 processor.
 
 The next available address in the \c .data segment is also location \c 0x60,
 so the application has no initialized data.

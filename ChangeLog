@@ -1,3 +1,39 @@
+2005-12-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Rework the demo projects.  Modernize the simple demo, add a more
+	sophisticated "large demo", add a "stdio demo" project.
+
+	* doc/api/Makefile.am: Generalize the demo handling;
+	run "make dox" in all demos that need it as a
+	prerequisite to build the documentation, and run
+	"make clean" there as well.
+	* doc/api/doxygen.config.in: Add more example and image
+	directories (for stdiodemo and largedemo).
+	* doc/examples/Makefile.am: Add stdiodemo and largedemo files.
+	* doc/examples/all-demos.dox: Wire the new demos into
+	the general comment about the demos.
+	* doc/examples/demo/demo.c: Modernize the demo a bit, keep the #ifdef
+	spaghetti out in its own include file.
+	* doc/examples/demo/demo.dox: (Ditto.)
+	* doc/examples/demo/demo.fig: (Ditto.)
+	* doc/examples/demo/iocompat.h: New file.
+	* doc/examples/largedemo/Makefile: New file.
+	* doc/examples/largedemo/largedemo-setup.jpg: New file.
+	* doc/examples/largedemo/largedemo-wiring.jpg: New file.
+	* doc/examples/largedemo/largedemo.c: New file.
+	* doc/examples/largedemo/largedemo.dox: New file.
+	* doc/examples/stdiodemo/Makefile: New file.
+	* doc/examples/stdiodemo/defines.h: New file.
+	* doc/examples/stdiodemo/hd44780.c: New file.
+	* doc/examples/stdiodemo/hd44780.h: New file.
+	* doc/examples/stdiodemo/lcd.c: New file.
+	* doc/examples/stdiodemo/lcd.h: New file.
+	* doc/examples/stdiodemo/stdiodemo-setup.jpg: New file.
+	* doc/examples/stdiodemo/stdiodemo.c: New file.
+	* doc/examples/stdiodemo/stdiodemo.dox: New file.
+	* doc/examples/stdiodemo/uart.c: New file.
+	* doc/examples/stdiodemo/uart.h: New file.
+
 2005-12-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Risto Eerola:

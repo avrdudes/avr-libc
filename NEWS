@@ -9,6 +9,18 @@
 
   [patch #4611] sleep.h sleep_mode() not interrupt safe
 
+  - The simple demo has been modernized a bit.  Documentation now
+    generally refers to the ATmega8 rather than the AT90S2313, and
+    the #ifdef spaghetti has been moved out into iocompat.h.
+
+  - A new demo project ("largedemo") has been added.  It extends
+    the simple demo by adding some controls, and thereby touches
+    a good number of avr-libc concepts.
+
+  - Another demo project ("stdiodemo") has been added.  It
+    demonstrates the setup of the standard IO facilities using
+    a practical small application.
+
 * New devices supported:
 
   + ATtiny24

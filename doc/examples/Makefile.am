@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2002  Theodore A. Roth
+# Copyright (c) 2002,2005  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -38,6 +38,21 @@ EXTRA_DIST           = all-demos.dox \
                        demo/demo.c \
                        demo/demo.fig \
                        demo/demo.dox \
+                       demo/iocompat.h \
+                       largedemo/Makefile \
+                       largedemo/demo.c \
+                       largedemo/demo.dox \
+                       stdiodemo/Makefile \
+                       stdiodemo/defines.h \
+                       stdiodemo/hd44780.c \
+                       stdiodemo/hd44780.h \
+                       stdiodemo/lcd.c \
+                       stdiodemo/lcd.h \
+                       stdiodemo/stdiodemo-setup.jpg \
+                       stdiodemo/stdiodemo.c \
+                       stdiodemo/stdiodemo.dox \
+                       stdiodemo/uart.c \
+                       stdiodemo/uart.h \
                        twitest/Makefile \
                        twitest/twitest.c \
                        twitest/twitest.dox
