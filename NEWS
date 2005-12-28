@@ -5,6 +5,10 @@
   [#15161] util/delay.h misses inline keyword (regression)
   [#15193] incorrect definition of IVSEL bit in MCUCR register
 
+* Other changes:
+
+  [patch #4611] sleep.h sleep_mode() not interrupt safe
+
 * New devices supported:
 
   + ATtiny24
