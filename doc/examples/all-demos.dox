@@ -44,6 +44,12 @@
   of that simple project, and adds some controls to it.  It touches
   a number of avr-libc's basic concepts on its way.
 
+  A \ref stdiodemo "comprehensive example on using the standard IO facilities"
+  intends to explain that complex topic, using a
+  practical microcontroller peripheral setup with one RS-232
+  connection, and an HD44780-compatible industry-standard LCD
+  display.
+
   The \ref twi_demo project explains the use of the two-wire hardware
   interface (also known as "I2C") that is present on many AVR
   controllers.

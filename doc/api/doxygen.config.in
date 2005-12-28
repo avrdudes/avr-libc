@@ -457,6 +457,7 @@ INPUT                  = @top_srcdir@/include \
                          @top_srcdir@/doc/examples \
                          @top_srcdir@/doc/examples/demo \
                          @top_srcdir@/doc/examples/largedemo \
+                         @top_srcdir@/doc/examples/stdiodemo \
                          @top_srcdir@/doc/examples/twitest
 
 # If the value of the INPUT tag contains directories, you can use the 
@@ -499,9 +500,11 @@ EXCLUDE_PATTERNS       = *CVS*
 # directories that contain example code fragments that are included (see 
 # the \include command).
 
-EXAMPLE_PATH           = @top_srcdir@/doc/examples/demo \
+EXAMPLE_PATH           = \
                          @top_srcdir@/doc/examples/largedemo \
-                         @top_srcdir@/doc/examples/twitest
+                         @top_srcdir@/doc/examples/stdiodemo \
+                         @top_srcdir@/doc/examples/twitest \
+                         @top_srcdir@/doc/examples/demo
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the 
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -522,6 +525,8 @@ EXAMPLE_RECURSIVE      = NO
 # the \image command).
 
 IMAGE_PATH             = @top_builddir@/doc/examples/demo \
+                         @top_builddir@/doc/examples/largedemo \
+                         @top_builddir@/doc/examples/stdiodemo \
                          @top_builddir@/doc/api
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should 

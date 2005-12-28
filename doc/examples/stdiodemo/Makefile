@@ -1,10 +1,6 @@
-PRG            = largedemo
-OBJ            = largedemo.o
+PRG            = stdiodemo
+OBJ            = stdiodemo.o hd44780.o lcd.o uart.o
 MCU_TARGET     = atmega16
-#MCU_TARGET     = atmega8
-#MCU_TARGET     = atmega48
-#MCU_TARGET     = atmega88
-#MCU_TARGET     = atmega168
 OPTIMIZE       = -Os
 
 DEFS           =
@@ -14,10 +10,8 @@ LIBS           =
 
 CC             = avr-gcc
 
-# Override is only needed by avr-lib build system.
-
-override CFLAGS        = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
-override LDFLAGS       = -Wl,-Map,$(PRG).map
+CFLAGS        = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
+LDFLAGS       = -Wl,-Map,$(PRG).map
 
 OBJCOPY        = avr-objcopy
 OBJDUMP        = avr-objdump
@@ -73,7 +67,7 @@ esrec: $(PRG)_eeprom.srec
 # Every thing below here is used by avr-libc's build system and can be ignored
 # by the casual user.
 
-JPEGFILES               = largedemo-setup.jpg largedemo-wiring.jpg
+JPEGFILES               = stdiodemo-setup.jpg
 
 JPEG2PNM                = jpegtopnm
 PNM2EPS                 = pnmtops

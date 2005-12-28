@@ -46,10 +46,14 @@ hardware concepts of an AVR microcontroller.
 \section largedemo_hw Hardware setup
 
 The demo is set up in a way so it can be run on the ATmega16 that
-ships with an STK500 development kit.  The only external part needed
-is a potentiometer attached to the ADC.  It is connectec to a 10-pin
+ships with the STK500 development kit.  The only external part needed
+is a potentiometer attached to the ADC.  It is connected to a 10-pin
 ribbon cable for port A, both ends of the potentiometer to pins 9
 (GND) and 10 (VCC), and the wiper to pin 1 (port A0).
+A bypass capacitor from pin 1 to pin 9 (like 47 nF) is recommendable.
+
+\image html largedemo-setup.jpg "Setup of the STK500"
+\image latex largedemo-setup.eps "Setup of the STK500" width=12cm
 
 Another 10-pin ribbon cable with the "squid" fanout cable is attached
 to port D, and provides various interconnections as follows:
@@ -68,6 +72,9 @@ to port D, and provides various interconnections as follows:
  <tr><td>VCC</td><td>10</td><td>brown</td> <td>unused</td></tr>
 </table>
 
+\image html largedemo-wiring.jpg "Wiring of the STK500"
+\image latex largedemo-wiring.eps "Wiring of the STK500" width=12cm
+
 As an alternative, this demo can also be run on the popular ATmega8
 controller, or its successor ATmega88 as well as the ATmega48 and
 ATmega168 variants of the latter.  These controllers do not have a
@@ -82,7 +89,7 @@ should be connected the same way as described for the ATmega16 above.
 When not using an STK500 starter kit, attach the LEDs through some
 resistor to Vcc (low-active LEDs), and attach pushbuttons from the
 respective input pins to GND.  The internal pull-up resistors are
-enabled for the pushbutton pins.
+enabled for the pushbutton pins, so no external resistors are needed.
 
 The \c MCU_TARGET macro in the Makefile needs to be adjusted
 appropriately.
@@ -97,7 +104,7 @@ to the ATmega16 setup.
 
 \section largedemo_overview Functional overview
 
-PD6 will be toggled with each internal clock tick (approx. ~ 10
+PD6 will be toggled with each internal clock tick (approx. 10
 ms).  PD7 will flash once per second.
 
 PD0 and PD1 are configured as UART IO, and can be used to connect the
@@ -237,7 +244,7 @@ but rather concatenated together, the compiler needs to be instructed
 to omit the entire function prologue and epilogue.  This is performed
 by the \e naked attribute.  So while syntactically, \c handle_mcucsr()
 is a function to the compiler, the compiler will just emit the
-instructions without any stack frame, and not even a RET instruction
+instructions for it without setting up any stack frame, and not even a RET instruction
 at the end.
 
 Function \c ioinit() centralizes all hardware setup.  The very last
@@ -249,8 +256,8 @@ The following functions handle UART character and string output.
 (UART input is handled by an ISR.)  There are two string output
 functions, \c printstr() and \c printstr_p().  The latter function
 fetches the string from \ref avr_pgmspace "program memory".  Both
-functions translate a newline character into a carriage return/
-newline sequence, so a simple \c \\n can be used in the source
+functions translate a newline character into a carriage return/newline
+sequence, so a simple \c \\n can be used in the source
 code.
 
 The function \c set_pwm() propagates the new PWM value to the PWM,
@@ -258,7 +265,7 @@ performing range checking.  When the value has been changed, the new
 percentage will be announced on the serial link.  The current value is
 mirrored in the variable \c pwm so others can use it in calculations.
 In order to allow for a simple calculation of a percentage value
-without needing floating-point mathematics, the maximal value of the
+without requiring floating-point mathematics, the maximal value of the
 PWM is restricted to 1000 rather than 1023, so a simple division by 10
 can be used.  Due to the nature of the human eye, the difference in
 LED brightness between 1000 and 1023 is not noticable anyway.

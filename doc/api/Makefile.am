@@ -62,6 +62,9 @@ USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` -name crtm8.o | head -n 1)
 DEMO_INC             = $(shell cd $(top_srcdir) && echo "-I`pwd`/include")
 
+# All demo projects where we need to run "make dox" beforehand.
+DEMOS                = demo largedemo stdiodemo
+
 all-local: ps html pdf
 
 # Before we can build the dox, we need to build the demo project so that some
@@ -73,7 +76,14 @@ demo:
 	fi; \
 	cd $(top_srcdir)/doc/examples/demo && \
 		${MAKE} DEFS="$(DEMO_INC)"  \
-			LIBS="$$NODEFLIBS $(DEMO_LIBS)" dox all
+			LIBS="$$NODEFLIBS $(DEMO_LIBS)" all
+
+# Generate EPS files from JPG for demos.
+demodox:
+	for demo in $(DEMOS); do \
+	  ( cd $(top_srcdir)/doc/examples/$$demo && \
+	  ${MAKE} dox ); \
+	done
 
 # images for inclusion in HTML and LaTeX documents
 
@@ -86,20 +96,17 @@ FIG2DEV= fig2dev
 	$(FIG2DEV) -L png $< $@
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig releases.fig \
-		demo.fig avrs.png-save
+		avrs.png-save
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating postscript output.
-ps: demo $(TARGET_DOX_PS)
+ps: demo demodox $(TARGET_DOX_PS)
 
 # Rule for generating html output.
-html: demo $(TARGET_DOX_HTML) fix_png
-
-demo.fig: $(top_srcdir)/doc/examples/demo/demo.fig
-	cp $(top_srcdir)/doc/examples/demo/demo.fig .
+html: demo demodox fix_png $(TARGET_DOX_HTML)
 
 # Make the background color of the png's transparent.
 fix_png: $(wildcard $(USER_MANUAL)/*.png)
@@ -112,7 +119,7 @@ fix_png: $(wildcard $(USER_MANUAL)/*.png)
 	echo timestamp > fix_png
 
 # Rule for generating PDF output
-pdf: demo $(TARGET_DOX_PDF)
+pdf: demo demodox $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
 install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF) \
@@ -122,8 +129,11 @@ uninstall-local:
 	rm -rf $(DOC_INST_DIR)
 
 clean-local:
-	rm -rf $(USER_MANUAL) latex_src latex_pdf_src man demo.fig
-	cd $(top_srcdir)/doc/examples/demo && ${MAKE} clean
+	rm -rf $(USER_MANUAL) latex_src latex_pdf_src man
+	for demo in $(DEMOS); do \
+	  ( cd $(top_srcdir)/doc/examples/$$demo && \
+	  ${MAKE} clean ) ; \
+	done
 
 #
 # Rules for generating documentation with doxygen
@@ -215,7 +225,7 @@ doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only
 # a prerequisite for ps.
-dox-html: $(USER_MANUAL)/index.html
+dox-html: demo demodox fix_png $(USER_MANUAL)/index.html
 
 $(USER_MANUAL)/index.html: latex_src/refman.tex
 
@@ -260,6 +270,7 @@ install-dox-man: dox-html
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
 	done
 
-.PHONY: html latex ps pdf dox dox-pdf install-pdf install-html install-ps \
+.PHONY: html latex ps pdf demo demodox \
+	dox-html dox-ps dox-pdf install-pdf install-html install-ps \
 	install-dox-html install-dox-ps install-dox-pdf \
 	install-dox-man

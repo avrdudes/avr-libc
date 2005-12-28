@@ -1,3 +1,34 @@
+2005-12-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add an "stdio" demo, and minor review of the "large"
+	demo.
+
+	* doc/api/Makefile.am: Generalize the demo handling;
+	run "make dox" in all demos that need it as a
+	prerequisite to build the documentation, and run
+	"make clean" there as well.
+	* doc/api/doxygen.config.in: Add more example and image
+	directories (for stdiodemo).
+	* doc/examples/all-demos.dox: Wire the stdiodemo into
+	the general comment about the demos.
+	* doc/examples/largedemo/Makefile: add code to convert
+	a JPEG image into an EPS file.
+	* doc/examples/largedemo/largedemo.dox: Fix some minor
+	mistakes, and add photo images of the setup.
+	* doc/examples/largedemo/largedemo-setup.jpg: New file.
+	* doc/examples/largedemo/largedemo-wiring.jpg: New file.
+	* doc/examples/stdiodemo/Makefile: New file.
+	* doc/examples/stdiodemo/defines.h: New file.
+	* doc/examples/stdiodemo/hd44780.c: New file.
+	* doc/examples/stdiodemo/hd44780.h: New file.
+	* doc/examples/stdiodemo/lcd.c: New file.
+	* doc/examples/stdiodemo/lcd.h: New file.
+	* doc/examples/stdiodemo/stdiodemo-setup.jpg: New file.
+	* doc/examples/stdiodemo/stdiodemo.c: New file.
+	* doc/examples/stdiodemo/stdiodemo.dox: New file.
+	* doc/examples/stdiodemo/uart.c: New file.
+	* doc/examples/stdiodemo/uart.h: New file.
+
 2005-12-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version date.
