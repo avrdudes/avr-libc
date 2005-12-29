@@ -1,3 +1,15 @@
+2005-12-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: Install JPEG files in docs.
+	* doc/examples/Makefile.am: Install the demo source
+	code as part of the documentation.
+	* doc/examples/largedemo/largedemo.dox: Omit the
+	verbatim source code from the docs, instead place
+	references to the installed code.
+	* doc/examples/stdiodemo/stdiodemo.dox: (Ditto.)
+	* doc/examples/twitest/twitest.dox: (Ditto.)
+
+
 2005-12-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Add an "stdio" demo, and minor review of the "large"

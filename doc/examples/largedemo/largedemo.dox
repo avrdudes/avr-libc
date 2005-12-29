@@ -317,6 +317,18 @@ and passing the string to \c printstr_p().
 
 \section largedemo_src The source code
 
-\include largedemo.c
+\htmlonly
+Source file: <a href="../examples/largedemo/largedemo.c">largedemo.c</a>
+\endhtmlonly
+
+\latexonly
+The source code is installed under
+
+\texttt{\$prefix/share/doc/avr-libc/examples/largedemo/largedemo.c},
+
+where \texttt{\$prefix} is a configuration option.  For Unix
+systems, it is usually set to either \texttt{/usr} or
+\texttt{/usr/local}.
+\endlatexonly
 
 */

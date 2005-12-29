@@ -22,6 +22,9 @@
     demonstrates the setup of the standard IO facilities using
     a practical small application.
 
+  - The demo projects now install their source code as part of
+    the documentation tree.
+
 * New devices supported:
 
   + ATtiny24

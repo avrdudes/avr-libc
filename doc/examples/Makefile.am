@@ -33,28 +33,49 @@
 
 MAINTAINERCLEANFILES = Makefile.in
 
-EXTRA_DIST           = all-demos.dox \
+DEMO_SRCS            = \
                        demo/Makefile \
                        demo/demo.c \
-                       demo/demo.fig \
-                       demo/demo.dox \
                        demo/iocompat.h \
                        largedemo/Makefile \
-                       largedemo/largedemo-setup.jpg \
-                       largedemo/largedemo-wiring.jpg \
                        largedemo/largedemo.c \
-                       largedemo/largedemo.dox \
                        stdiodemo/Makefile \
                        stdiodemo/defines.h \
                        stdiodemo/hd44780.c \
                        stdiodemo/hd44780.h \
                        stdiodemo/lcd.c \
                        stdiodemo/lcd.h \
-                       stdiodemo/stdiodemo-setup.jpg \
                        stdiodemo/stdiodemo.c \
-                       stdiodemo/stdiodemo.dox \
                        stdiodemo/uart.c \
                        stdiodemo/uart.h \
                        twitest/Makefile \
-                       twitest/twitest.c \
+                       twitest/twitest.c
+
+DEMO_DIRS            = demo \
+                       largedemo \
+                       stdiodemo \
+                       twitest
+
+EXTRA_DIST           = ${DEMO_SRCS} \
+                       all-demos.dox \
+                       demo/demo.fig \
+                       demo/demo.dox \
+                       largedemo/largedemo-setup.jpg \
+                       largedemo/largedemo-wiring.jpg \
+                       largedemo/largedemo.dox \
+                       stdiodemo/stdiodemo-setup.jpg \
+                       stdiodemo/stdiodemo.dox \
                        twitest/twitest.dox
+
+# Install demo source files.
+# Note: uninstallation is done as part of the doc/api uninstallation,
+# by removing $(DOC_INST_DIR) completely.
+install-data-local:
+	$(mkinstalldirs) $(DOC_INST_DIR)/examples
+	for dir in $(DEMO_DIRS) ; do \
+	  $(mkinstalldirs) $(DOC_INST_DIR)/examples/$$dir; \
+	done
+	for file in $(DEMO_SRCS) ; do \
+	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/examples/$$file"; \
+	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/examples/$$file; \
+	done
