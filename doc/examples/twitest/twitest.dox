@@ -93,7 +93,19 @@ EEPROM that carries the RAM configuration information.
 
 \section twi_demo_src The Source Code
 
-\include twitest.c
+\htmlonly
+Source file: <a href="../examples/twitest/twitest.c">twitest.c</a>
+\endhtmlonly
+
+\latexonly
+The source code is installed under
+
+\texttt{\$prefix/share/doc/avr-libc/examples/twitest/twitest.c},
+
+where \texttt{\$prefix} is a configuration option.  For Unix
+systems, it is usually set to either \texttt{/usr} or
+\texttt{/usr/local}.
+\endlatexonly
 
 \par Note [1]
 

@@ -413,27 +413,27 @@ again.)
 
 \section stdiodemo_src The source code
 
-\subsection stdiodemo_src_stdiodemo_c Main file: stdiodemo.c
+\htmlonly
+<ul>
+  <li><a href="../examples/stdiodemo/stdiodemo.c">stdiodemo.c</a></li>
+  <li><a href="../examples/stdiodemo/defines.h">defines.h</a></li>
+  <li><a href="../examples/stdiodemo/hd44780.h">hd44780.h</a></li>
+  <li><a href="../examples/stdiodemo/hd44780.c">hd44780.c</a></li>
+  <li><a href="../examples/stdiodemo/lcd.h">lcd.h</a></li>
+  <li><a href="../examples/stdiodemo/lcd.c">lcd.c</a></li>
+  <li><a href="../examples/stdiodemo/uart.h">uart.h</a></li>
+  <li><a href="../examples/stdiodemo/uart.c">uart.c</a></li>
+</li>
+\endhtmlonly
 
-\include stdiodemo.c
+\latexonly
+The source code is installed under
 
-\subsection stdiodemo_src_defines_h Project definitions: defines.h
+\texttt{\$prefix/share/doc/avr-libc/examples/stdiodemo/},
 
-\include defines.h
-
-\subsection stdiodemo_src_hd44780 HD44780 LCD controller driver: hd44780.c and hd44780.h
-
-\include hd44780.c
-\include hd44780.h
-
-\subsection stdiodemo_src_lcd LCD character-mode display driver: lcd.c and lcd.h
-
-\include lcd.c
-\include lcd.h
-
-\subsection stdiodemo_src_uart RS-232 character-mode driver: uart.c and uart.h
-
-\include uart.c
-\include uart.h
+where \texttt{\$prefix} is a configuration option.  For Unix
+systems, it is usually set to either \texttt{/usr} or
+\texttt{/usr/local}.
+\endlatexonly
 
 */

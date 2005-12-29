@@ -248,7 +248,7 @@ $(USER_MANUAL).pdf: latex_pdf_src/refman.tex
 install-dox-html: dox-html
 	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)
 	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css \
-	                  $(USER_MANUAL)/*.js $(USER_MANUAL)/*.png)'; \
+	                  $(USER_MANUAL)/*.jpg $(USER_MANUAL)/*.png)'; \
 	for file in $$list ; do \
 	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file"; \
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
