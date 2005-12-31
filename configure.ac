@@ -333,7 +333,7 @@ fi
 dnl We only want to build the docs if the user has passed
 dnl "--enable-doc" to configure.
 if test "$enable_doc" = "yes"; then
-	DOCSDIR='doc'
+	DOCSDIR='api'
 else
 	DOCSDIR=''
 fi

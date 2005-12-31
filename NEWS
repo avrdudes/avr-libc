@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.4.1:
 
+* Bugs fixed:
+
+  [no-id]  Fix the examples installation for non-doc builds.
+
 *** Changes in avr-libc-1.4.1:
 
 * Bugs fixed:
