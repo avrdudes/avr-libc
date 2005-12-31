@@ -68,8 +68,6 @@ EXTRA_DIST           = ${DEMO_SRCS} \
                        twitest/twitest.dox
 
 # Install demo source files.
-# Note: uninstallation is done as part of the doc/api uninstallation,
-# by removing $(DOC_INST_DIR) completely.
 install-data-local:
 	$(mkinstalldirs) $(DOC_INST_DIR)/examples
 	for dir in $(DEMO_DIRS) ; do \
@@ -79,3 +77,15 @@ install-data-local:
 	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/examples/$$file"; \
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/examples/$$file; \
 	done
+
+uninstall-local:
+	for file in $(DEMO_SRCS) ; do \
+	  echo " rm -f $(DOC_INST_DIR)/examples/$$file"; \
+	  rm -f $(DOC_INST_DIR)/examples/$$file; \
+	done
+	for dir in $(DEMO_DIRS) ; do \
+	  rmdir $(DOC_INST_DIR)/examples/$$dir || \
+	  echo "rmdir $(DOC_INST_DIR)/examples/$$dir failed."; \
+	done
+	rmdir $(DOC_INST_DIR)/examples ||\
+	  echo "rmdir $(DOC_INST_DIR)/examples failed."

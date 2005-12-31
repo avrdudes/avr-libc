@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [no-id]  Fix the examples installation for non-doc builds.
   [#15161] util/delay.h misses inline keyword (regression)
   [#15193] incorrect definition of IVSEL bit in MCUCR register
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.
