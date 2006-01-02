@@ -1,6 +1,7 @@
 /*  -*- Mode: Asm -*-  */
 
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2005  Anatoly Sokolov <aesok@post.ru>
    All rights reserved.
 
 
@@ -51,29 +52,44 @@
 #include "macros.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, ldexp)
-          FUNCTION(ldexp)
+#define rExpH	rBE
+
+	TEXT_SEG(fplib, ldexp)
+	FUNCTION(ldexp)
 
 GLOBAL(ldexp)
-	RCALL	_U(__fp_split_a)	; clears rAE
-        TST     rA3			;
-        BREQ    1f			; 2^x*0 = 0
-        CPI     rPH,0xFF
-        BREQ    10f			; negative
-        TST     rPH
-        BREQ    10f
-				; overflow or underflow
-        BRPL    2f		; overflow
-1:
-        RJMP    _U(__fp_zero)
-2:
-        RJMP    _U(__fp_nanERANGE)	; overflow
+	RCALL	_U(__fp_split_a)	; Non return if NaN; clears rAE
 
-10:
-        ADD     rA3,rPL
-        adc     rT1c,rPH		;
+        TST     rA3			;
+        BREQ    .L_zero			; 2^x*0 = 0
+	
+	CLR	rExpH
+	ADD	rA3, rPL		; rExpH.rA3 := sum of exponent and arg
+	ADC	rExpH, rPH
+
+	LDI	rPL, lo8(EMAX)
+	LDI	rPH, hi8(EMAX)
+	CP	rA3, rPL
+	CPC	rExpH, rPH
+	BRGE	.L_Inf			; if overflow return +/-Inf
+
+	LDI	rPL, lo8(EMIN)
+	LDI	rPH, hi8(EMIN)
+	CP	rA3, rPL
+	CPC	rExpH, rPH
+	BRLT	.L_zero			; if underflow return 0
+	
         RJMP    _U(__fp_merge)		; rT0 must not be cleared : rAE=0 no rounding anyway
 
-          ENDFUNC
+.L_zero:
+        RJMP    _U(__fp_zero)
+
+.L_Inf:
+	BRTS	.L_mInf			; branch if arg negative
+        RJMP    _U(__fp_p_inf)
+.L_mInf:
+        RJMP    _U(__fp_m_inf)
+
+	ENDFUNC
 
 #endif /* not __DOXYGEN__ */

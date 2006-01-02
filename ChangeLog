@@ -1,2 +1,10 @@
+2005-01-02 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/Files.am: include new files.
+	* libm/fplib/fp_m_inf.S: new file.
+	* libm/fplib/fp_p_inf.S: new file.
+	* libm/fplib/fplib.inc (EMAX, EMIN): Add.
+	* libm/fplib/ldexp.S: Check underflow and overflow cases.
+	[Fixed bug #15226]
 
 For older changes see ChangeLog-2005
