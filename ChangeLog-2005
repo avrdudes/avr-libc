@@ -9,6 +9,10 @@
 
 2005-12-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Released avr-libc-1.4.1.
+
+2005-12-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/Makefile.am: Install JPEG files in docs.
 	* doc/examples/Makefile.am: Install the demo source
 	code as part of the documentation.
@@ -18,27 +22,30 @@
 	* doc/examples/stdiodemo/stdiodemo.dox: (Ditto.)
 	* doc/examples/twitest/twitest.dox: (Ditto.)
 
-
 2005-12-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
-	Add an "stdio" demo, and minor review of the "large"
-	demo.
+	Rework the demo projects.  Modernize the simple demo, add a more
+	sophisticated "large demo", add a "stdio demo" project.
 
 	* doc/api/Makefile.am: Generalize the demo handling;
 	run "make dox" in all demos that need it as a
 	prerequisite to build the documentation, and run
 	"make clean" there as well.
 	* doc/api/doxygen.config.in: Add more example and image
-	directories (for stdiodemo).
-	* doc/examples/Makefile.am: Add stdiodemo files.
-	* doc/examples/all-demos.dox: Wire the stdiodemo into
+	directories (for stdiodemo and largedemo).
+	* doc/examples/Makefile.am: Add stdiodemo and largedemo files.
+	* doc/examples/all-demos.dox: Wire the new demos into
 	the general comment about the demos.
-	* doc/examples/largedemo/Makefile: add code to convert
-	a JPEG image into an EPS file.
-	* doc/examples/largedemo/largedemo.dox: Fix some minor
-	mistakes, and add photo images of the setup.
+	* doc/examples/demo/demo.c: Modernize the demo a bit, keep the #ifdef
+	spaghetti out in its own include file.
+	* doc/examples/demo/demo.dox: (Ditto.)
+	* doc/examples/demo/demo.fig: (Ditto.)
+	* doc/examples/demo/iocompat.h: New file.
+	* doc/examples/largedemo/Makefile: New file.
 	* doc/examples/largedemo/largedemo-setup.jpg: New file.
 	* doc/examples/largedemo/largedemo-wiring.jpg: New file.
+	* doc/examples/largedemo/largedemo.c: New file.
+	* doc/examples/largedemo/largedemo.dox: New file.
 	* doc/examples/stdiodemo/Makefile: New file.
 	* doc/examples/stdiodemo/defines.h: New file.
 	* doc/examples/stdiodemo/hd44780.c: New file.
@@ -53,23 +60,10 @@
 
 2005-12-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
-	* configure.ac: Bump version date.
-
-2005-12-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
-
 	Submitted by Risto Eerola:
 	* include/avr/sleep.h: add sleep_enable(),
 	sleep_disable(), and sleep_cpu().
 	patch #4611: sleep.h sleep_mode() not interrupt safe
-
-2005-12-25 Anatoly Sokolov <aesok@post.ru>
-
-	* libm/fplib/Files.am: include new files.
-	* libm/fplib/fp_m_inf.S: new file.
-	* libm/fplib/fp_p_inf.S: new file.
-	* libm/fplib/fplib.inc (EMAX, EMIN): Add.
-	* libm/fplib/ldexp.S: Check underflow and overflow cases.
-	[Fixed bug #15226]
 
 2005-12-23 Anatoly Sokolov <aesok@post.ru>
 
@@ -90,7 +84,7 @@
 	list of ATtinyX5.
 	* doc/api/vectortable.dox: Regenerate using patch-headers.py.
 
-2005-12-15 Anatoly Sokolov <aesok@post.ru>
+2005-12-16 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: add tests for the ATtiny24/44/84 support.
 	* devtools/gen-avr-lib-tree.sh: add support for ATtiny24/44/84.
@@ -102,7 +96,7 @@
 	* include/avr/iotnx4.h: new file.
 	* include/avr/Makefile.am: include new files.
 	* doc/api/main_page.dox: Document support for ATtiny24/44/84.
-	* doc/api/using-tools.dox: (Ditto.)
+	* doc/api/using-tools.dox: (Ditto.).
 
 2005-12-14 Anatoly Sokolov <aesok@post.ru>
 
@@ -134,16 +128,6 @@
 	* /libm/fplib/mulsf3.S (square): Move to ...
 	* /libm/fplib/square.S: ... new file.
 
-2005-12-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
-
-	Add a new demo project ("largedemo").
-	* doc/examples/largedemo/Makefile: New file.
-	* doc/examples/largedemo/largedemo.c: New file.
-	* doc/examples/largedemo/largedemo.dox: New file.
-	* doc/api/doxygen.config.in: Wire the largedemo into the build.
-	* doc/examples/Makefile.am: (Ditto.)
-	* doc/examples/all-demos.dox: Add some blurb for largedemo.
-
 2005-12-06 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/fp_split.S (__fp_split_a): Add new function.
@@ -155,15 +139,6 @@
 	* libm/fplib/log.S: (Ditto.)
 	* libm/fplib/modf.S: (Ditto.)
 	* libm/fplib/sqrt.S: (Ditto.)
-
-2005-12-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
-
-	* doc/examples/demo/demo.c: Modernize the demo a bit, keep the #ifdef
-	spaghetti out in its own include file.
-	* doc/examples/demo/demo.dox: (Ditto.)
-	* doc/examples/demo/demo.fig: (Ditto.)
-	* doc/examples/demo/iocompat.h: New file.
-	* doc/examples/Makefile.am (EXTRA_DIST): include demo/iocompat.h.
 
 2005-11-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
