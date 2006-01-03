@@ -62,6 +62,7 @@ EXTRA_DIST           = ${DEMO_SRCS} \
                        demo/demo.dox \
                        largedemo/largedemo-setup.jpg \
                        largedemo/largedemo-wiring.jpg \
+                       largedemo/largedemo-wiring2.jpg \
                        largedemo/largedemo.dox \
                        stdiodemo/stdiodemo-setup.jpg \
                        stdiodemo/stdiodemo.dox \

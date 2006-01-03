@@ -55,25 +55,35 @@ A bypass capacitor from pin 1 to pin 9 (like 47 nF) is recommendable.
 \image html largedemo-setup.jpg "Setup of the STK500"
 \image latex largedemo-setup.eps "Setup of the STK500" width=12cm
 
-Another 10-pin ribbon cable with the "squid" fanout cable is attached
-to port D, and provides various interconnections as follows:
+The coloured patch cables are used to provide various
+interconnections.  As there are only four of them in the STK500, there
+are two options to connect them for this demo.  The second option for
+the yellow-green cable is shown in parenthesis in the table.
+Alternatively, the "squid" cable from the JTAG ICE kit can be used if
+available.
 
 <table>
  <tr><td><b>Port</b></td><td><b>Header</b></td><td><b>Color</b></td><td><b>Function</b></td><td><b>Connect to</b></td></tr>
- <tr><td>D0</td> <td>1</td> <td>black</td> <td>RxD</td>           <td>RXD of the RS-232 header</td></tr>
- <tr><td>D1</td> <td>2</td> <td>white</td> <td>TxD</td>           <td>TXD of the RS-232 header</td></tr>
- <tr><td>D2</td> <td>3</td> <td>gray</td>  <td>button "down"</td> <td>SW0 (pin 1 switches header)</td></tr>
- <tr><td>D3</td> <td>4</td> <td>violet</td><td>button "up"</td>   <td>SW1 (pin 2 switches header)</td></tr>
- <tr><td>D4</td> <td>5</td> <td>blue</td>  <td>button "ADC"</td>  <td>SW2 (pin 3 switches header)</td></tr>
- <tr><td>D5</td> <td>6</td> <td>green</td> <td>LED</td>           <td>LED0 (pin 1 LEDs header)</td></tr>
- <tr><td>D6</td> <td>7</td> <td>yellow</td><td>clock out</td>     <td>LED1 (pin 2 LEDs header)</td></tr>
- <tr><td>D7</td> <td>8</td> <td>orange</td><td>1-second flash</td><td>LED2 (pin 3 LEDs header)</td></tr>
- <tr><td>GND</td><td>9</td> <td>red</td>   <td>unused</td></tr>
- <tr><td>VCC</td><td>10</td><td>brown</td> <td>unused</td></tr>
+ <tr><td>D0</td> <td>1</td> <td>brown</td>  <td>RxD</td>           <td>RXD of the RS-232 header</td></tr>
+ <tr><td>D1</td> <td>2</td> <td>grey</td>   <td>TxD</td>           <td>TXD of the RS-232 header</td></tr>
+ <tr><td>D2</td> <td>3</td> <td>black</td>  <td>button "down"</td> <td>SW0 (pin 1 switches header)</td></tr>
+ <tr><td>D3</td> <td>4</td> <td>red</td>    <td>button "up"</td>   <td>SW1 (pin 2 switches header)</td></tr>
+ <tr><td>D4</td> <td>5</td> <td>green</td>  <td>button "ADC"</td>  <td>SW2 (pin 3 switches header)</td></tr>
+ <tr><td>D5</td> <td>6</td> <td>blue</td>   <td>LED</td>           <td>LED0 (pin 1 LEDs header)</td></tr>
+ <tr><td>D6</td> <td>7</td> <td>(green)</td><td>clock out</td>     <td>LED1 (pin 2 LEDs header)</td></tr>
+ <tr><td>D7</td> <td>8</td> <td>white</td>  <td>1-second flash</td><td>LED2 (pin 3 LEDs header)</td></tr>
+ <tr><td>GND</td><td>9</td> <td></td>   <td>unused</td></tr>
+ <tr><td>VCC</td><td>10</td><td></td> <td>unused</td></tr>
 </table>
 
 \image html largedemo-wiring.jpg "Wiring of the STK500"
 \image latex largedemo-wiring.eps "Wiring of the STK500" width=12cm
+
+The following picture shows the alternate wiring where LED1 is
+connected but SW2 is not:
+
+\image html largedemo-wiring2.jpg "Wiring option #2 of the STK500"
+\image latex largedemo-wiring2.eps "Wiring option #2 of the STK500" width=12cm
 
 As an alternative, this demo can also be run on the popular ATmega8
 controller, or its successor ATmega88 as well as the ATmega48 and

@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2005, Theodore Roth
+/* Copyright (c) 2002,2005,2006 Theodore Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -53,6 +53,9 @@ omitted.  Normally, for this experiment, the external circuitry on
 /RESET (R1, C3) can be omitted as well, leaving only the AVR, the LED,
 the bypass capacitor C4, and perhaps R2.  For the ATmega8/48/88/168,
 use PB1 (pin 15 at the DIP-28 package) to connect the LED to.
+Additionally, this demo has been ported to many different other AVRs.
+The location of the respective OC pin varies between different AVRs,
+and it is mandated by the AVR hardware.
 
 \anchor demo_project_schematic
 \image html demo.png "Schematic of circuit for demo project"
@@ -73,7 +76,20 @@ match 1A (or 1 for older devices) pin which is used to control the LED
 varies between different AVRs.  The file <tt>iocompat.h</tt> tries to
 abstract between all this differences using some preprocessor \c #ifdef
 statements, so the actual program itself can operate on a common set of
-symbolic names.
+symbolic names.  The macros defined by that file are:
+
+- \c OCR the name of the OCR register used to control the PWM (usually
+either OCR1 or OCR1A)
+- \c DDROC the name of the DDR (data direction register) for the OC
+output
+- \c OC1 the pin number of the OC1[A] output within its port
+- \c TIMER1_TOP the TOP value of the timer used for the PWM (1023
+for 10-bit PWMs, 255 for devices that can only handle an 8-bit
+PWM)
+- \c TIMER1_CLOCKSOURCE the clock bits to set in the respective
+control register to start the PWM timer; usually the timer runs at
+full CPU clock for 10-bit PWMs, while it runs on a prescaled clock
+for 8-bit PWMs
 
 \par Note [2]:
 The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
@@ -229,7 +245,7 @@ location 0x0.
 The next available address in the \c .eeprom segment is also location 0x0,
 so there aren't any EEPROM variables.
 
-\section Generating Intel Hex Files
+\section demo_ihex Generating Intel Hex Files
 
 We have a binary of the application, but how do we get it into the processor?
 Most (if not all) programmers will not accept a GNU executable as an input
@@ -263,7 +279,7 @@ The resulting \c demo_eeprom.hex file contains:
 which is an empty \c .hex file (which is expected, since we didn't define any
 EEPROM variables).
 
-\section Letting Make Build the Project
+\section demo_make Letting Make Build the Project
 
 Rather than type these commands over and over, they can all be placed in a
 make file. To build the demo project using \c make,
@@ -273,5 +289,25 @@ save the following in a file called \c Makefile.
 make.
 
 \include demo/Makefile
+
+\section demo_sourceref Reference to the source code
+
+\htmlonly
+<ul>
+  <li><a href="../examples/demo/demo.c">demo.c</a></li>
+  <li><a href="../examples/demo/iocompat.h">iocompat.h</a></li>
+  <li><a href="../examples/demo/Makefile">Makefile</a></li>
+</ul>
+\endhtmlonly
+
+\latexonly
+The source code is installed under
+
+\texttt{\$prefix/share/doc/avr-libc/examples/demo/},
+
+where \texttt{\$prefix} is a configuration option.  For Unix
+systems, it is usually set to either \texttt{/usr} or
+\texttt{/usr/local}.
+\endlatexonly
 
 */

@@ -219,9 +219,11 @@ ioinit(void)
 
   /*
    * As the location of OC1A differs between supported MCU types, we
-   * enable that output separately here.
+   * enable that output separately here.  Note that the DDRx register
+   * *might* be the same as CONTROL_DDR above, so make sure to not
+   * clobber it.
    */
-  PWMDDR = _BV(PWMOUT);
+  PWMDDR |= _BV(PWMOUT);
 
   UCSRA = _BV(U2X);		/* improves baud rate error @ F_CPU = 1 MHz */
   UCSRB = _BV(TXEN)|_BV(RXEN)|_BV(RXCIE); /* tx/rx enable, rx complete intr */
