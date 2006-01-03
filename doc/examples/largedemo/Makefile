@@ -73,7 +73,8 @@ esrec: $(PRG)_eeprom.srec
 # Every thing below here is used by avr-libc's build system and can be ignored
 # by the casual user.
 
-JPEGFILES               = largedemo-setup.jpg largedemo-wiring.jpg
+JPEGFILES               = largedemo-setup.jpg largedemo-wiring.jpg \
+                          largedemo-wiring2.jpg
 
 JPEG2PNM                = jpegtopnm
 PNM2EPS                 = pnmtops

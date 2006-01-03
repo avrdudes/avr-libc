@@ -78,7 +78,9 @@ The LCD controller is used in 4-bit mode, including polling the
 "busy" flag so the R/~W line from the LCD controller needs
 to be connected.  Note that the LCD controller has yet another supply
 pin that is used to adjust the LCD's contrast (V5).  Typically, that
-pin connects to a potentiometer between Vcc and GND.
+pin connects to a potentiometer between Vcc and GND.  Often, it might
+work to just connect that pin to GND, while leaving it unconnected
+usually yields an unreadable display.
 
 Port A has been chosen as 7 pins on a single port are needed to
 connect the LCD, yet all other ports are already partially in use:

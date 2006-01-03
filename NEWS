@@ -4,7 +4,16 @@
 
   [no-id]  Fix the examples installation for non-doc builds.
   [no-id]  Fix the spelling of the OCR1A/B registers in ATtinyX4 devices.
+  [no-id]  LED1/2 don't work in the largedemo on an ATmega16.
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.
+
+* Other changes:
+
+  - The simple demo has been ported to ATmega8515, ATmega8535,
+    ATtiny2313, ATtinyX4, ATtinyX5, and ATtiny26
+
+  - More overhaul of the demo documentation, don't use the "squid"
+    cable for the largedemo as it is not part of the STK500.
 
 *** Changes in avr-libc-1.4.1:
 

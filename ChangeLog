@@ -1,5 +1,32 @@
 2006-01-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Changes to the demo projects and their documentation.
+	Partially based on ideas submitted by Mark J Elkins.
+	* doc/examples/Makefile.am: Include largedemo-wiring2.jpg.
+	* doc/examples/all-demos.dox: Document the prerequisites for
+	the demos.
+	* doc/examples/demo/Makefile: Add dependency from iocompat.h.
+	* doc/examples/demo/demo.c: Port the simple demo to ATmega8515,
+	ATmega8535, ATtiny2313, ATtinyX4, ATtinyX5, and ATtiny26.
+	* doc/examples/demo/iocompat.h: (Ditto.)
+	* doc/examples/demo/demo.dox: Describe iocompat.h in greater
+	detail, fix some \section statements, add section with
+	reference to source code.
+	* doc/examples/largedemo/Makefile: Include largedemo-wiring2.jpg.
+	* doc/examples/largedemo/largedemo-setup.jpg: Don't use the
+	"squid" cable as it is not part of the STK500 (but of the JTAG
+	ICE), use jumper cables instead.
+	* doc/examples/largedemo/largedemo-wiring.jpg: (Ditto.)
+	* doc/examples/largedemo/largedemo.dox: (Ditto.)
+	* doc/examples/largedemo/largedemo.c: Fix a bug that caused the
+	PWMDDR to be clobbered for ATmega16 MCUs so LED1 and 2 did not
+	work.
+	* doc/examples/stdiodemo/stdiodemo.dox: Add comment about the
+	V5 pin on the LCD.
+	* doc/examples/largedemo/largedemo-wiring2.jpg: New file.
+
+2006-01-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/iotnx4.h: Fix the spelling of the OCR1A/B
 	registers.
 

@@ -31,7 +31,7 @@ ISR (TIMER1_OVF_vect)		/* Note [3] */
     switch (direction)		/* Note [4] */
     {
         case UP:
-            if (++pwm == 1023)
+            if (++pwm == TIMER1_TOP)
                 direction = DOWN;
             break;
 
@@ -47,19 +47,29 @@ ISR (TIMER1_OVF_vect)		/* Note [3] */
 void
 ioinit (void)			/* Note [6] */
 {
-    /* tmr1 is 10-bit PWM */
+    /* Timer 1 is 10-bit PWM (8-bit PWM on some ATtinys). */
     TCCR1A = _BV (WGM10) | _BV (WGM11) | _BV (COM1A1);
+    /*
+     * Start timer 1.
+     *
+     * NB: TCCR1A and TCCR1B could actually be the same register, so
+     * take care to not clobber it.
+     */
+    TCCR1B |= TIMER1_CLOCKSOURCE;
+    /*
+     * Run any device-dependent timer 1 setup hook if present.
+     */
+#if defined(TIMER1_SETUP_HOOK)
+    TIMER1_SETUP_HOOK();
+#endif
 
-    /* tmr1 running on full MCU clock */
-    TCCR1B = _BV (CS10);
-
-    /* set PWM value to 0 */
+    /* Set PWM value to 0. */
     OCR = 0;
 
-    /* enable OC1 as output */
+    /* Enable OC1 as output. */
     DDROC = _BV (OC1);
 
-    /* enable timer 1 overflow interrupt */
+    /* Enable timer 1 overflow interrupt. */
     TIMSK = _BV (TOIE1);
     sei ();
 }
