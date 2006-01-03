@@ -1,4 +1,9 @@
-2005-01-02 Anatoly Sokolov <aesok@post.ru>
+2006-01-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iotnx4.h: Fix the spelling of the OCR1A/B
+	registers.
+
+2006-01-02 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/Files.am: include new files.
 	* libm/fplib/fp_m_inf.S: new file.

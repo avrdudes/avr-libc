@@ -270,6 +270,15 @@
 
 #define DWDR    _SFR_IO8(0x27)
 
+#define OCR1B   _SFR_IO16(0x28)
+#define OCR1BL  _SFR_IO8(0x28)
+#define OCR1BH  _SFR_IO8(0x29)
+
+#define OCR1A   _SFR_IO16(0x2A)
+#define OCR1AL  _SFR_IO8(0x2A)
+#define OCR1AH  _SFR_IO8(0x2B)
+
+/* keep misspelled names from avr-libc 1.4.[0..1] for compatibility */
 #define OCRB1   _SFR_IO16(0x28)
 #define OCRB1L  _SFR_IO8(0x28)
 #define OCRB1H  _SFR_IO8(0x29)
