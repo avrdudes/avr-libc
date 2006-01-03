@@ -1,2 +1,6 @@
+2006-01-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iotnx4.h: Fix the spelling of the OCR1A/B
+	registers.
 
 For older changes see ChangeLog-2005
