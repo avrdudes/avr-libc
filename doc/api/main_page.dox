@@ -147,12 +147,15 @@ compile-time.
 - attiny24
 - attiny25
 - attiny26
+- attiny261
 - attiny28 \ref supp_dev_footnote_one "[1]"
 - attiny2313
 - attiny44
 - attiny45
+- attiny461
 - attiny84
 - attiny85
+- attiny861
 
 \par Misc Devices:
 

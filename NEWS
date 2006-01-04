@@ -37,8 +37,11 @@
 * New devices supported:
 
   + ATtiny24
+  + ATtiny261
   + ATtiny44
+  + ATtiny461
   + ATtiny84
+  + ATtiny861
   
 * New functions: 
 
