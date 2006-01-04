@@ -1,3 +1,17 @@
+2005-01-04 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: add tests for the ATtiny261/461/861 support.
+	* devtools/gen-avr-lib-tree.sh: add support for ATtiny261/461/861.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iotn24.h: new file.
+	* include/avr/iotn44.h: new file.
+	* include/avr/iotn84.h: new file.
+	* include/avr/iotnx4.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for ATtiny261/461/861.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2006-01-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Changes to the demo projects and their documentation.

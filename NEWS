@@ -15,6 +15,12 @@
   - More overhaul of the demo documentation, don't use the "squid"
     cable for the largedemo as it is not part of the STK500.
 
+* New devices supported:
+
+  + ATtiny261
+  + ATtiny461
+  + ATtiny861
+  
 *** Changes in avr-libc-1.4.1:
 
 * Bugs fixed:

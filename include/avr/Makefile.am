@@ -101,13 +101,17 @@ avr_HEADERS = \
     iotn24.h \
     iotn25.h \
     iotn26.h \
+    iotn261.h \
     iotn28.h \
     iotn44.h \
     iotn45.h \
+    iotn461.h \
     iotn84.h \
     iotn85.h \
+    iotn861.h \
     iotnx4.h \
     iotnx5.h \
+    iotnx61.h \
     parity.h \
     pgmspace.h \
     portpins.h \
