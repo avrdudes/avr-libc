@@ -119,13 +119,17 @@ table = {
     #"iotn24.h" => "iotnx4.h"
     #"iotn25.h" => "iotnx5.h"
     "iotn26.h": "ATtiny26",
+    #"iotn261.h" => "iotnx61.h"
     "iotn28.h": "ATtiny28",
     #"iotn44.h" => "iotnx4.h"
     #"iotn45.h" => "iotnx5.h"
+    #"iotn461.h" => "iotnx61.h"
     #"iotn84.h" => "iotnx4.h"
     #"iotn85.h" => "iotnx5.h"
+    #"iotn861.h" => "iotnx61.h"
     "iotnx4.h": ("ATtiny24", "ATtiny44", "ATtiny84"),
     "iotnx5.h": ("ATtiny45", "ATtiny25", "ATtiny85"),
+    "iotnx61.h": ("ATtiny261", "ATtiny461", "ATtiny861"),
 }
 
 def create_tabs (string):
@@ -281,16 +285,20 @@ for header in nlist:
                 else:
                     docs[ele.sig_name.data][2].append(devname)
             except KeyError:
-                if type(devname) is TupleType:
-                    docs[ele.sig_name.data] = (ele.alt_name.data,
-                                               ele.description.data,
-                                               [])
-                    for d in devname:
-                        docs[ele.sig_name.data][2].append(d)
-                else:
-                    docs[ele.sig_name.data] = (ele.alt_name.data,
-                                               ele.description.data,
-                                               [devname])
+                try:
+                    if type(devname) is TupleType:
+                        docs[ele.sig_name.data] = (ele.alt_name.data,
+                                                   ele.description.data,
+                                                   [])
+                        for d in devname:
+                            docs[ele.sig_name.data][2].append(d)
+                    else:
+                        docs[ele.sig_name.data] = (ele.alt_name.data,
+                                                   ele.description.data,
+                                                   [devname])
+                except AttributeError:
+                    # no alt name
+                    pass
         else:
             # no match, increment index
             idx += 1
