@@ -86,19 +86,22 @@ output
 - \c TIMER1_TOP the TOP value of the timer used for the PWM (1023
 for 10-bit PWMs, 255 for devices that can only handle an 8-bit
 PWM)
+- \c TIMER1_PWM_INIT the initialization bits to be set into control
+register 1A in order to setup 10-bit (or 8-bit) phase and frequency
+correct PWM mode
 - \c TIMER1_CLOCKSOURCE the clock bits to set in the respective
 control register to start the PWM timer; usually the timer runs at
 full CPU clock for 10-bit PWMs, while it runs on a prescaled clock
 for 8-bit PWMs
 
 \par Note [2]:
-The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
-remember the current value.
-
-\par Note [3]:
 ISR() is a macro that marks the function as an interrupt routine. In this
 case, the function will get called when timer 1 overflows. Setting up
 interrupts is explained in greater detail in \ref avr_interrupts.
+
+\par Note [3]:
+The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
+remember the current value.
 
 \par Note [4]:
 This section determines the new value of the \c PWM.

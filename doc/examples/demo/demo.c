@@ -23,11 +23,11 @@
 
 enum { UP, DOWN };
 
-volatile uint16_t pwm;		/* Note [2] */
-volatile uint8_t direction;
-
-ISR (TIMER1_OVF_vect)		/* Note [3] */
+ISR (TIMER1_OVF_vect)		/* Note [2] */
 {
+    static uint16_t pwm;	/* Note [3] */
+    static uint8_t direction;
+
     switch (direction)		/* Note [4] */
     {
         case UP:
@@ -48,7 +48,7 @@ void
 ioinit (void)			/* Note [6] */
 {
     /* Timer 1 is 10-bit PWM (8-bit PWM on some ATtinys). */
-    TCCR1A = _BV (WGM10) | _BV (WGM11) | _BV (COM1A1);
+    TCCR1A = TIMER1_PWM_INIT;
     /*
      * Start timer 1.
      *

@@ -34,10 +34,15 @@
 #elif defined(__AVR_AT90S4414__) || defined(__AVR_AT90S8515__) || \
       defined(__AVR_AT90S4434__) || defined(__AVR_AT90S8535__) || \
       defined(__AVR_ATmega163__) || defined(__AVR_ATmega8515__) || \
-      defined(__AVR_ATmega8535__)
+      defined(__AVR_ATmega8535__) || \
+      defined(__AVR_ATmega164__) || defined(__AVR_ATmega324__) || \
+      defined(__AVR_ATmega644__)
 #  define OC1 PD5
 #  define DDROC DDRD
 #  define OCR OCR1A
+#  if !defined(TIMSK)		/* new ATmegas */
+#    define TIMSK TIMSK1
+#  endif
 #elif defined(__AVR_ATmega8__) || defined(__AVR_ATmega48__) || \
       defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
 #  define OC1 PB1
@@ -70,34 +75,58 @@
 #  define OCR OCR1A
 #  define TCCR1A TCCR1
 #  define TCCR1B TCCR1
-#  define WGM10 PWM1A
-#  define WGM11 PWM1A		/* only one of those exists */
 #  define TIMER1_OVF_vect TIM1_OVF_vect
 #  define TIMER1_TOP 255	/* only 8-bit PWM possible */
+#  define TIMER1_PWM_INIT _BV(PWM1A) | _BV(COM1A1)
 #  define TIMER1_CLOCKSOURCE _BV(CS12) /* use 1/8 prescaler */
 #elif defined(__AVR_ATtiny26__)
 /* Rather close to ATtinyX5 but different enough for its own section. */
 #  define OC1 PB1
 #  define DDROC DDRB
 #  define OCR OCR1A
-#  define WGM10 PWM1A
-#  define WGM11 PWM1A		/* only one of those exists */
 #  define TIMER1_OVF_vect TIMER1_OVF1_vect
 #  define TIMER1_TOP 255	/* only 8-bit PWM possible */
+#  define TIMER1_PWM_INIT _BV(PWM1A) | _BV(COM1A1)
 #  define TIMER1_CLOCKSOURCE _BV(CS12) /* use 1/8 prescaler */
 /*
  * Without setting OCR1C to TOP, the ATtiny26 does not trigger an
  * overflow interrupt in PWM mode.
  */
 #  define TIMER1_SETUP_HOOK() OCR1C = 255
+#elif defined(__AVR_ATtiny261__) || defined(__AVR_ATtiny461__) || \
+      defined(__AVR_ATtiny861__)
+#  define OC1 PB1
+#  define DDROC DDRB
+#  define OCR OCR1A
+#  define TIMER1_PWM_INIT _BV(WGM10) | _BV(PWM1A) | _BV(COM1A1)
+/*
+ * While timer 1 could be operated in 10-bit mode on these devices,
+ * the handling of the 10-bit IO registers is more complicated than
+ * that of the 16-bit registers of other AVR devices (no combined
+ * 16-bit IO operations possible), so we restrict this demo to 8-bit
+ * mode which is pretty standard.
+ */
+#  define TIMER1_TOP 255
+#  define TIMER1_CLOCKSOURCE _BV(CS12) /* use 1/8 prescaler */
 #elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega16__)
 #  define OC1 PD6
 #  define DDROC DDRA
 #  define OCR OCR1A
-#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
+#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) || \
+      defined(__AVR_ATmega165__) || defined(__AVR_ATmega169__) || \
+      defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) || \
+      defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__) || \
+      defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) || \
+      defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__)
 #  define OC1 PB5
 #  define DDROC DDRB
 #  define OCR OCR1A
+#  if !defined(PB5) 		/* work around missing bit definition */
+#    define PB5 5
+#  endif
+#  if !defined(TIMSK)		/* new ATmegas */
+#    define TIMSK TIMSK1
+#  endif
 #else
 #  error "Don't know what kind of MCU you are compiling for"
 #endif
@@ -120,6 +149,10 @@
  */
 #if !defined(TIMER1_TOP)
 #  define TIMER1_TOP 1023	/* 10-bit PWM */
+#endif
+
+#if !defined(TIMER1_PWM_INIT)
+#  define TIMER1_PWM_INIT _BV(WGM10) | _BV(WGM11) | _BV(COM1A1)
 #endif
 
 #if !defined(TIMER1_CLOCKSOURCE)
