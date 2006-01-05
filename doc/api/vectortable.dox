@@ -1,7 +1,7 @@
 /* Note: this file has been automatically generated. */
 /* DO NOT EDIT, or your changes WILL BE LOST! */
 
-/* Copyright (c) 2005 Joerg Wunsch
+/* Copyright (c) 2006 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -52,7 +52,7 @@
     <td>ADC_vect</td>
     <td>SIG_ADC</td>
     <td>ADC Conversion Complete</td>
-    <td>AT90S2333, AT90S4433, AT90S4434, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny15, ATtiny26, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>AT90S2333, AT90S4433, AT90S4434, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny15, ATtiny26, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>ANALOG_COMP_0_vect</td>
@@ -82,7 +82,7 @@
     <td>ANA_COMP_vect</td>
     <td>SIG_COMPARATOR</td>
     <td>Analog Comparator</td>
-    <td>AT90S1200, AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega8, ATmega8515, ATmega8535, ATtiny11, ATtiny12, ATtiny13, ATtiny15, ATtiny2313, ATtiny26, ATtiny28, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>AT90S1200, AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega8, ATmega8515, ATmega8535, ATtiny11, ATtiny12, ATtiny13, ATtiny15, ATtiny2313, ATtiny26, ATtiny28, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>CANIT_vect</td>
@@ -100,7 +100,7 @@
     <td>EE_RDY_vect</td>
     <td>SIG_EEPROM_READY</td>
     <td>EEPROM Ready</td>
-    <td>AT90S2333, AT90S4433, AT90S4434, AT90S8535, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega8, ATmega8515, ATmega8535, ATtiny12, ATtiny13, ATtiny15, ATtiny26, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>AT90S2333, AT90S4433, AT90S4434, AT90S8535, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega8, ATmega8515, ATmega8535, ATtiny12, ATtiny13, ATtiny15, ATtiny26, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>EE_READY_vect</td>
@@ -112,13 +112,13 @@
     <td>INT0_vect</td>
     <td>SIG_INTERRUPT0</td>
     <td>External Interrupt 0</td>
-    <td>AT90S1200, AT90S2313, AT90S2323, AT90S2333, AT90S2343, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny11, ATtiny12, ATtiny13, ATtiny15, ATtiny22, ATtiny2313, ATtiny26, ATtiny28, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>AT90S1200, AT90S2313, AT90S2323, AT90S2333, AT90S2343, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny11, ATtiny12, ATtiny13, ATtiny15, ATtiny22, ATtiny2313, ATtiny26, ATtiny28, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>INT1_vect</td>
     <td>SIG_INTERRUPT1</td>
     <td>External Interrupt Request 1</td>
-    <td>AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega64, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny28</td>
+    <td>AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega64, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny28, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>INT2_vect</td>
@@ -208,7 +208,7 @@
     <td>PCINT_vect</td>
     <td>SIG_PIN_CHANGE, SIG_PCINT</td>
     <td></td>
-    <td>ATtiny2313</td>
+    <td>ATtiny2313, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>PSC0_CAPT_vect</td>
@@ -301,16 +301,22 @@
     <td>ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
   </tr>
   <tr>
+    <td>TIMER0_CAPT_vect</td>
+    <td>SIG_INPUT_CAPTURE0</td>
+    <td>ADC Conversion Complete</td>
+    <td>ATtiny261, ATtiny461, ATtiny861</td>
+  </tr>
+  <tr>
     <td>TIMER0_COMPA_vect</td>
     <td>SIG_OUTPUT_COMPARE0A</td>
     <td>TimerCounter0 Compare Match A</td>
-    <td>ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313</td>
+    <td>ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>TIMER0_COMPB_vect</td>
     <td>SIG_OUTPUT_COMPARE0B, SIG_OUTPUT_COMPARE0_B</td>
     <td>Timer Counter 0 Compare Match B</td>
-    <td>AT90PWM3, AT90PWM2, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313</td>
+    <td>AT90PWM3, AT90PWM2, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>TIMER0_COMP_A_vect</td>
@@ -334,7 +340,7 @@
     <td>TIMER0_OVF_vect</td>
     <td>SIG_OVERFLOW0</td>
     <td>Timer/Counter0 Overflow</td>
-    <td>AT90S1200, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny11, ATtiny12, ATtiny15, ATtiny2313, ATtiny28</td>
+    <td>AT90S1200, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny11, ATtiny12, ATtiny15, ATtiny2313, ATtiny28, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>TIMER1_CAPT1_vect</td>
@@ -370,19 +376,25 @@
     <td>TIMER1_COMPA_vect</td>
     <td>SIG_OUTPUT_COMPARE1A</td>
     <td>Timer/Counter1 Compare Match A</td>
-    <td>AT90S4414, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313</td>
+    <td>AT90S4414, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>TIMER1_COMPB_vect</td>
     <td>SIG_OUTPUT_COMPARE1B</td>
     <td>Timer/Counter1 Compare MatchB</td>
-    <td>AT90S4414, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313</td>
+    <td>AT90S4414, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>TIMER1_COMPC_vect</td>
     <td>SIG_OUTPUT_COMPARE1C</td>
     <td>Timer/Counter1 Compare Match C</td>
     <td>AT90CAN128, AT90CAN32, AT90CAN64, ATmega128, ATmega64, ATmega640, ATmega1280, ATmega1281</td>
+  </tr>
+  <tr>
+    <td>TIMER1_COMPD_vect</td>
+    <td>SIG_OUTPUT_COMPARE0D</td>
+    <td>Timer/Counter1 Compare Match D</td>
+    <td>ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>TIMER1_COMP_vect</td>
@@ -400,7 +412,7 @@
     <td>TIMER1_OVF_vect</td>
     <td>SIG_OVERFLOW1</td>
     <td>Timer/Counter1 Overflow</td>
-    <td>AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny15, ATtiny2313</td>
+    <td>AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny15, ATtiny2313, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>TIMER2_COMPA_vect</td>
@@ -724,13 +736,13 @@
     <td>USI_OVF_vect</td>
     <td>SIG_USI_OVERFLOW</td>
     <td>USI Overflow</td>
-    <td>ATtiny26, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>ATtiny26, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>USI_START_vect</td>
     <td>SIG_USI_START</td>
     <td>USI Start Condition</td>
-    <td>ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega645, ATmega6450, ATmega649, ATmega6490, ATtiny2313, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega645, ATmega6450, ATmega649, ATmega6490, ATtiny2313, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>USI_STRT_vect</td>
@@ -748,7 +760,7 @@
     <td>WDT_vect</td>
     <td>SIG_WDT, SIG_WATCHDOG_TIMEOUT</td>
     <td>Watchdog Timeout Interrupt</td>
-    <td>AT90PWM3, AT90PWM2, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>AT90PWM3, AT90PWM2, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
 </table>
 </small>

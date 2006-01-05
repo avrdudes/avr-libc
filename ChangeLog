@@ -1,5 +1,11 @@
 2006-01-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* xml/patch-headers.py: add ATtinyX61, catch errors for
+	non-existent ALT_NAME sections in interrupt vector table
+	* doc/api/vectortable.dox: regenerate using patch-headers.py.
+
+2006-01-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Extend the simple demo project to a boatload full of
 	different AVRs: ATmega164/324/644, ATtiny261/461/861,
 	ATmega165, ATmega169, ATmega325x/645x, ATmega329x/649x
