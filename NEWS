@@ -29,7 +29,11 @@
     the documentation tree.
 
   - The simple demo has been ported to ATmega8515, ATmega8535,
-    ATtiny2313, ATtinyX4, ATtinyX5, and ATtiny26
+    ATmega164, ATmega165, ATmega169, ATmega324, ATmega325, ATmega3250,
+    ATmega329, ATmega3290, ATmega644, ATmega645, ATmega6450,
+    ATmega649, ATmega6490, ATtiny2313, ATtiny24, ATtiny25, ATtiny26,
+    ATtiny261, ATtiny44, ATtiny45, ATtiny461, ATtiny84, ATtiny85,
+    ATtiny861.
 
   - More overhaul of the demo documentation, don't use the "squid"
     cable for the largedemo as it is not part of the STK500.

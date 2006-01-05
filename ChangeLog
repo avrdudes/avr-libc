@@ -1,3 +1,16 @@
+2006-01-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Extend the simple demo project to a boatload full of
+	different AVRs: ATmega164/324/644, ATtiny261/461/861,
+	ATmega165, ATmega169, ATmega325x/645x, ATmega329x/649x
+	* doc/examples/demo/Makefile: Document all supported devices.
+	* doc/examples/demo/demo.c: make variables local to ISR, use
+	TIMER1_PWM_INIT to setup TCCR1A.
+	* doc/examples/demo/demo.dox: Document TIMER1_PWM_INIT,
+	swap notes 2 and 3.
+	* doc/examples/demo/iocompat.h: Add support for all mentioned
+	devices.
+
 2005-01-04 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: add tests for the ATtiny261/461/861 support.
