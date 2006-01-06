@@ -101,10 +101,6 @@ make prefix=$RPM_BUILD_ROOT%{_prefix} mandir=$RPM_BUILD_ROOT%{_mandir} \
 mkdir -p $RPM_BUILD_ROOT%{ourdocdir}
 %endif
 cp AUTHORS ChangeLog* INSTALL LICENSE NEWS README $RPM_BUILD_ROOT%{ourdocdir}
-cp --parents doc/INSTALL doc/TODO $RPM_BUILD_ROOT%{ourdocdir}
-cp --parents doc/examples/demo/Makefile $RPM_BUILD_ROOT%{ourdocdir}
-cp --parents doc/examples/demo/demo.c $RPM_BUILD_ROOT%{ourdocdir}
-cp --parents doc/examples/demo/demo.fig $RPM_BUILD_ROOT%{ourdocdir}
 
 %if %{_with_docs}
 gzip -9 ${RPM_BUILD_ROOT}%{ourdocdir}/man/man3/*.3
@@ -125,7 +121,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{ourdocdir}/LICENSE
 %{ourdocdir}/NEWS
 %{ourdocdir}/README
-%{ourdocdir}/doc
+%{ourdocdir}/examples
 %dir %{_prefix}/avr
 %dir %{_prefix}/avr/lib
 %dir %{_prefix}/avr/lib/avr3
@@ -164,6 +160,9 @@ rm -rf ${RPM_BUILD_ROOT}
 %endif
 
 %changelog
+* Fri Jan 6 2006 Galen Seitz <galens@seitzassoc.com>
+- Dealt with moved examples directory.
+
 * Tue Nov 10 2005 Galen Seitz <galens@seitzassoc.com>
 - Updated to work with latest tools and build procedure.
 
