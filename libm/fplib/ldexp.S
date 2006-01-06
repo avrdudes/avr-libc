@@ -67,17 +67,14 @@ GLOBAL(ldexp)
 	ADD	rA3, rPL		; rExpH.rA3 := sum of exponent and arg
 	ADC	rExpH, rPH
 
+	BRVS	.L_Inf			; overflow is possible for positive only
+	BRMI	.L_zero			; if underflow return 0
+
 	LDI	rPL, lo8(EMAX)
 	LDI	rPH, hi8(EMAX)
 	CP	rA3, rPL
 	CPC	rExpH, rPH
 	BRGE	.L_Inf			; if overflow return +/-Inf
-
-	LDI	rPL, lo8(EMIN)
-	LDI	rPH, hi8(EMIN)
-	CP	rA3, rPL
-	CPC	rExpH, rPH
-	BRLT	.L_zero			; if underflow return 0
 	
         RJMP    _U(__fp_merge)		; rT0 must not be cleared : rAE=0 no rounding anyway
 
