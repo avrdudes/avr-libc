@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2003, 2004,2005  Marek Michalkiewicz
+/* Copyright (c) 2002 - 2006  Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -56,10 +56,20 @@
     \note If you are working with strings which are completely based in ram,
     use the standard string functions described in \ref avr_string.
 
-    \note If possible, put your constant tables in the lower 64K and use
+    \note If possible, put your constant tables in the lower 64 KB and use
     pgm_read_byte_near() or pgm_read_word_near() instead of
     pgm_read_byte_far() or pgm_read_word_far() since it is more efficient that
-    way, and you can still use the upper 64K for executable code. */
+    way, and you can still use the upper 64K for executable code.
+    All functions that are suffixed with a \c _P \e require their
+    arguments to be in the lower 64 KB of the flash ROM, as they do
+    not use ELPM instructions.  This is normally not a big concern as
+    the linker setup arranges any program space constants declared
+    using the macros from this header file so they are placed right after
+    the interrupt vectors, and in front of any executable code.  However,
+    it can become a problem if there are too many of these constants, or
+    for bootloaders on devices with more than 64 KB of ROM.
+    <em>All these functions will not work in that situation.</em>
+*/
 
 #ifndef __PGMSPACE_H_
 #define __PGMSPACE_H_ 1

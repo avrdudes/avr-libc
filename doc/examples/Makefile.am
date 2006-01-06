@@ -75,13 +75,14 @@ install-data-local:
 	  $(mkinstalldirs) $(DOC_INST_DIR)/examples/$$dir; \
 	done
 	for file in $(DEMO_SRCS) ; do \
-	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/examples/$$file"; \
-	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/examples/$$file; \
+	  echo "Installing $$file into $(DOC_INST_DIR)/examples/$$file"; \
+	  $(INSTALL_DATA) $(top_srcdir)/doc/examples/$$file \
+	    $(DOC_INST_DIR)/examples/$$file; \
 	done
 
 uninstall-local:
 	for file in $(DEMO_SRCS) ; do \
-	  echo " rm -f $(DOC_INST_DIR)/examples/$$file"; \
+	  echo "Removing $(DOC_INST_DIR)/examples/$$file"; \
 	  rm -f $(DOC_INST_DIR)/examples/$$file; \
 	done
 	for dir in $(DEMO_DIRS) ; do \
