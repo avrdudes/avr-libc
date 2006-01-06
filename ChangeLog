@@ -1,5 +1,10 @@
 2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Galen Seitz:
+	* avr-libc.spec.in: Fixed examples installation.
+ 
+2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/examples/Makefile.am: Fix the source directory for
 	example installation so it will work when starting from
 	outside $(top_srcdir).  This fixes "make distcheck".
