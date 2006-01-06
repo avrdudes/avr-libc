@@ -1,5 +1,10 @@
 2005-01-06 Anatoly Sokolov <aesok@post.ru>
 
+	* /libm/fplib/sqrt.S: Use __addsf3/__divsf3 instead 
+	__addsf3x/__divsf3x.
+
+2005-01-06 Anatoly Sokolov <aesok@post.ru>
+
 	(Contributed by Dmitry Xmelkov.)
 	* libm/fplib/ldexp.S: Fix error if 'exp' argument > 32640.
 
