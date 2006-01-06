@@ -1,3 +1,8 @@
+2005-01-06 Anatoly Sokolov <aesok@post.ru>
+
+	(Contributed by Dmitry Xmelkov.)
+	* libm/fplib/ldexp.S: Fix error if 'exp' argument > 32640.
+
 2006-01-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* xml/patch-headers.py: add ATtinyX61, catch errors for
