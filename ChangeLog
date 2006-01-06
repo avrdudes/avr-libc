@@ -1,5 +1,13 @@
 2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Released avr-libc 1.4.2.
+
+2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version.
+
+2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Galen Seitz:
 	* avr-libc.spec.in: Fixed examples installation.
 

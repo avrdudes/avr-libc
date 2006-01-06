@@ -1,4 +1,4 @@
-*** Changes since avr-libc-1.4.1:
+*** Changes in avr-libc-1.4.2:
 
 * Bugs fixed:
 
@@ -24,7 +24,7 @@
   + ATtiny261
   + ATtiny461
   + ATtiny861
-  
+
 *** Changes in avr-libc-1.4.1:
 
 * Bugs fixed:
@@ -56,8 +56,8 @@
   + ATtiny24
   + ATtiny44
   + ATtiny84
-  
-* New functions: 
+
+* New functions:
 
    strstr_P (Contributed by Werner Boellmann)
 
