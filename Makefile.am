@@ -32,6 +32,7 @@
 EXTRA_DIST = \
 	LICENSE \
 	bootstrap \
+	ChangeLog-2005 \
 	ChangeLog-2004 \
 	ChangeLog-2003 \
 	ChangeLog-2002
