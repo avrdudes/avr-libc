@@ -1,3 +1,7 @@
+2006-01-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Makefile.am (EXTRA_DIST): add ChangeLog-2005.
+
 2005-01-09 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/acos.S : Use XCALL/XJMP instead RCALL/RJMP 
