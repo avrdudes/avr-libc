@@ -83,7 +83,7 @@ GLOBAL(atan2)
 	RET			; return 0
 
 .L_ERANGE:			; here x ==0 and y == 0
-	XJMP	_U(__fp_nanERANGE) ; return argument range error
+	RJMP	_U(__fp_nanERANGE) ; return argument range error
 
 .L_calc:			; here x != 0 and y != 0
 	PUSH	flags
@@ -92,14 +92,14 @@ GLOBAL(atan2)
 	ORI	flags, 0x01	; keep sign of y
 	SBRC	x3, 7
 	ORI	flags, 0x02	; keep sign of x
-	XCALL	_U(__divsf3)	; A = y/x
-	XCALL	_U(atan)	; A = atan(y/x)
+	XCALL	__divsf3	; A = y/x
+	RCALL	_U(atan)	; A = atan(y/x)
 	SBRS	flags, 1	; if x > 0
 	RJMP	1f		; return atan(y/x)
 	FPLOAD	(rB, FP_PI);	; here x < 0 --> load PI
 	SBRC	flags, 0	; if y < 0 return atan(y/x) - PI
 	ORI	rB3, 0x80	; if y > 0 return atan(y/x) + PI
-	XCALL	_U(__addsf3)
+	XCALL	__addsf3
 1:	POP	flags		; clean-up
 	RET
 

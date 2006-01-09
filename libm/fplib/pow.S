@@ -97,7 +97,7 @@ GLOBAL(pow)
 	pop	rB1
 	pop	rB2
 	pop	rB3
-	rcall	__mulsf3
+	XCALL	__mulsf3
 	rjmp	exp
 
 .L_negx:

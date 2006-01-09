@@ -213,7 +213,7 @@ GLOBAL(strtod)
 
 	PUSH   R30
 	PUSH   R31
-	RCALL  _U(__mulsf3)	; AX *= BX, sign stays untouched
+	XCALL  __mulsf3		; AX *= BX, sign stays untouched
 	POP    R31
 	POP    R30
 #ifdef __ERRNO__

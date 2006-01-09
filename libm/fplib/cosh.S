@@ -61,7 +61,7 @@ GLOBAL(cosh)
    POP   rB2
    POP   rB1
    POP   rB0
-   RCALL _U(__addsf3)
+   XCALL __addsf3
    LDI   rB2,0xFF	;
    LDI   rB3,0xFF	; decrement exponent by 1 = * 0.5
    RJMP  _U(ldexp)

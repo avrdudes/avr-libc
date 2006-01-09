@@ -77,8 +77,8 @@ GLOBAL(modf)
 
         CPI     rTI0,0x96	; rA3 >= 0x96 -> no fractional part
         BRCC    2f
-        RCALL   _U(__fixsfsi)	;
-        RCALL   _U(__floatsisf)	;
+        XCALL   __fixsfsi	;
+        XCALL   __floatsisf	;
         CPI     YL,0
         CPC     YL,YH
         BREQ    1f
@@ -90,7 +90,7 @@ GLOBAL(modf)
         SUBI    rA3,0x80	; A = -int(x)
         POP     YH
         POP     YL
-        RJMP    _U(__addsf3)
+        XJMP    __addsf3
 2:
         CLR     rA3
         CLR     rA2

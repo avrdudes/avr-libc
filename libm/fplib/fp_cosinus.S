@@ -73,7 +73,7 @@ GLOBAL(__fp_cosinus)		; input A = [-2PI...2PI[
        LDI     rB2,0x49
        LDI     rB1,0x0F
        LDI     rB0,0xDB		; load -PI
-       RCALL   _U(__addsf3)	; now   A = [-PI..+PI[
+       XCALL   __addsf3		; now   A = [-PI..+PI[
        LDI     rSI0,0x80	; assume sign complement (b,c)
        ANDI    rA3,0x7F		; positive     cos(x-PI) = cos(-(x-PI)) = -cos(x)
        LDI     rB3,0x3F
@@ -88,7 +88,7 @@ GLOBAL(__fp_cosinus)		; input A = [-2PI...2PI[
 			; now (A = x) > PI/2, B = PI/2
        LDI     rB3,0xC0
        LDI     rB2,0x49		; B = -PI
-       RCALL   _U(__addsf3)	; PI-A = -(A+-PI)
+       XCALL   __addsf3		; PI-A = -(A+-PI)
        CLR     rSI0		; no sign complement (a,d)
 1:
        RCALL   _U(square)		; xý

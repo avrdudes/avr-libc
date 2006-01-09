@@ -85,7 +85,7 @@ GLOBAL(tan)
        LDI     rB3,0x40
        LDI     rB2,0x49		; load PI
        ORI     rA3,0x80		; A = -A
-       RCALL   _U(__addsf3)	; A = A+B = B + (-A)
+       XCALL   __addsf3		; A = A+B = B + (-A)
        LDI     rB3,0x80
        EOR     rSI0,rB3
 1:
@@ -101,7 +101,7 @@ GLOBAL(tan)
        INC     rSI0
        ORI     rA3,0x80		; negate A
        LDI     rB2,0xC9		; P/4 -> PI/2
-       RCALL   _U(__addsf3)	; PI/2 - A
+       XCALL   __addsf3		; PI/2 - A
 1:
        PUSH    rA3
        PUSH    rA2
@@ -116,7 +116,7 @@ GLOBAL(tan)
        POP     rB1
        POP     rB2
        POP     rB3
-       RCALL   _U(__mulsf3)
+       XCALL   __mulsf3
        SBRS    rSI0,0
        RJMP    100f
        RCALL   _U(__fp_inverse)

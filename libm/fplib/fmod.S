@@ -69,7 +69,7 @@ GLOBAL(fmod)
     PUSH    rB1
     PUSH    rB2
     PUSH    rB3
-    RCALL   _U(__divsf3)	; A = x/y
+    XCALL   __divsf3		; A = x/y
     CLR     rP4
     CLR     rP5			; point to NUL
     RCALL   _U(modf)		; A = fraction( x/y )
@@ -77,7 +77,7 @@ GLOBAL(fmod)
     POP     rB2
     POP     rB1
     POP     rB0			; B = y
-    RJMP    _U(__mulsf3)	; A = y * fraction( x/y )
+    XJMP    __mulsf3		; A = y * fraction( x/y )
 
           ENDFUNC
 

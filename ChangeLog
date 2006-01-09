@@ -1,3 +1,28 @@
+2005-01-09 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/acos.S : Use XCALL/XJMP instead RCALL/RJMP 
+	for calling __addsf3/__subsf3/__mulsf3/__divsf3 functions.
+	* libm/fplib/cosh.S : (Ditto.).
+	* libm/fplib/exp.S : (Ditto.).
+	* libm/fplib/fmod.S : (Ditto.).
+	* libm/fplib/fp_cosinus.S : (Ditto.).
+	* libm/fplib/log.S : (Ditto.).
+	* libm/fplib/log10.S : (Ditto.).
+	* libm/fplib/pow.S : (Ditto.).
+	* libm/fplib/sin.S : (Ditto.).
+	* libm/fplib/sinh.S : (Ditto.).
+	* libm/fplib/strtod.S : (Ditto.).
+	* libm/fplib/tan.S : (Ditto.).
+	* libm/fplib/tanh.S : (Ditto.).
+	* libm/fplib/modf.S : Use XCALL/XJMP instead RCALL/RJMP 
+	__addsf3/__fixsfsi/__floatsisf functions.
+	* libm/fplib/asin.S : Use RCALL/RJMP instead XCALL/XJMP 
+	for calling __fp_nanEDOM/__fp_powerseries functions.
+	* libm/fplib/atan.S : Use RCALL/RJMP instead XCALL/XJMP 
+	for calling __fp_inverse/square functions.
+	* libm/fplib/atan2.S : Use RCALL/RJMP instead XCALL/XJMP 
+	for calling __fp_nanERANGE/atan functions.
+
 2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Galen Seitz:

@@ -68,7 +68,7 @@ GLOBAL(asin)
 	CPC	rA2, rB2
 	CPC	rA3, rB3	; A - 1.0000001192092896
 	BRCS	1f		; A <= 1.0
-	XCALL	(__fp_nanEDOM)	; A > 1.0 -> argument range error
+	RCALL	_U(__fp_nanEDOM)	; A > 1.0 -> argument range error
 	POP	sign		; clean-up
 	RET			; return with NAN
 1:				; here x <= 1.0
@@ -78,7 +78,7 @@ GLOBAL(asin)
 	PUSH	rA0		; save x
 	LDI	ZL,LOW(table_asin)
 	LDI	ZH,HIGH(table_asin)	; point to table
-	XCALL	_U(__fp_powerseries)	; A = P0 + x(P1 + x(P2 + x(P3 + x(P4 +
+	RCALL	_U(__fp_powerseries)	; A = P0 + x(P1 + x(P2 + x(P3 + x(P4 +
 					;  x(P5 + x(P6 + x(P7)))))))
 	POP	rB0
 	POP	rB1
@@ -93,20 +93,20 @@ GLOBAL(asin)
 	CLR	rA1
 	CLR	rA0		; A = 1.0
 	ORI	rB3, 0x80	; B = -x
-	XCALL	_U(__addsf3)	; A = 1 + (-x)
-	XCALL	_U(sqrt)	; A = sqrt(1-x)
+	XCALL	__addsf3	; A = 1 + (-x)
+	RCALL	_U(sqrt)	; A = sqrt(1-x)
 	POP	rB0
 	POP	rB1
 	POP	rB2
 	POP	rB3		; get A again
-	XCALL	_U(__mulsf3)	; A = (1 - x)^2 (P0 + x(P1 + x(P2 + x(P3 +
+	XCALL	__mulsf3	; A = (1 - x)^2 (P0 + x(P1 + x(P2 + x(P3 +
 				;  x(P4 + x(P5 + x(P6 + x(P7))))))))
 	LDI	rB3, 0x3F
 	LDI	rB2, 0xC9
 	LDI	rB1, 0x0F
 	LDI	rB0, 0xDB	; B = PI/2
 	ORI	rA3, 0x80	; A = -A
-	XCALL	_U(__addsf3)	; A = pi/2 - (1 - x)^2 (P0 + x(P1 + x(P2 +
+	XCALL	__addsf3	; A = pi/2 - (1 - x)^2 (P0 + x(P1 + x(P2 +
 				; x(P3 + x(P4 + x(P5 + x(P6 + x(P7))))))))
 	POP	sign		; get sign of x again
 	SBRC	sign, 0

@@ -56,7 +56,7 @@ GLOBAL(log10)
    LDI   rB2,0x13
    LDI   rB1,0x5D
    LDI   rB0,0x8E		; log(10)
-   RJMP  _U(__divsf3)
+   XJMP  __divsf3
 
           ENDFUNC
 

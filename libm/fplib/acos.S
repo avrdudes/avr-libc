@@ -58,7 +58,7 @@ GLOBAL(acos)
        LDI    rB2,0xC9
        LDI    rB1,0x0F
        LDI    rB0,0xDB  ; B = PI/2
-       RJMP   _U(__addsf3)
+       XJMP   __addsf3
 
           ENDFUNC
 

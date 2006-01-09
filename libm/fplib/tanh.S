@@ -95,7 +95,7 @@ GLOBAL(tanh)
 /*   PUSH  rA3			*/ CLR    rB1                   
 /*   PUSH  rA2			*/ LDI    rB2,0x80              
 /*   PUSH  rA1			*/ LDI    rB3,0x3F ; B = 1.0    
-/*   PUSH  rA0			*/ RCALL  _U(__addsf3)             
+/*   PUSH  rA0			*/ XCALL  __addsf3
 /*   MOV   rA3,rB3		*/ POP    rB3                   
 /*   MOV   rA2,rB2		*/ POP    rB2                   
 /*   MOV   rA1,rB1		*/ POP    rB1                   
@@ -105,15 +105,15 @@ GLOBAL(tanh)
 /*   POP   rB1			*/ PUSH   rA2                   
 /*   POP   rB2			*/ PUSH   rA3                   
 /*   POP   rB3			*/ CLR    rA0                   
-/*   RJMP  _U(__divsf3)		*/ CLR    rA1                   
+/*   XJMP  __divsf3		*/ CLR    rA1                   
 /*				*/ LDI    rA2,0x80              
 /*				*/ LDI    rA3,0xBF ; A = -1.0   
-/*				*/ RCALL  _U(__addsf3)             
+/*				*/ XCALL  __addsf3             
 /*				*/ POP    rB3                   
 /*				*/ POP    rB2                   
 /*				*/ POP    rB1                   
 /*				*/ POP    rB0  ; B = exp(2x)+1  
-/*				*/ RJMP  _U(__divsf3)               
+/*				*/ XJMP   __divsf3               
 
           ENDFUNC
 

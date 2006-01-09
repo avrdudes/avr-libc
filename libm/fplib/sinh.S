@@ -63,7 +63,7 @@ GLOBAL(sinh)
    POP   rB2
    POP   rB1
    POP   rB0
-   RCALL _U(__addsf3)		; -exp(-x) + exp(x)
+   XCALL __addsf3		; -exp(-x) + exp(x)
 			; check for NaN
    LDI   rB2,0xFF		;
    LDI   rB3,0xFF		; decrement exponent by 1 = * 0.5

@@ -106,12 +106,12 @@ GLOBAL(log)
    SBC    rA1,rA1
    MOV    rA2,rA1
    MOV    rA3,rA1
-   RCALL  _U(__floatsisf)
+   XCALL  __floatsisf
    LDI    rB3,0x3F
    LDI    rB2,0x31
    LDI    rB1,0x72
    LDI    rB0,0x18		; ln(2)
-   RCALL  _U(__mulsf3)
+   XCALL  __mulsf3
    MOV    rB3,rS3
    MOV    rB2,rS2
    MOV    rB1,rS1
@@ -120,7 +120,7 @@ GLOBAL(log)
    POP    rS2
    POP    rS1
    POP    rS0
-   RJMP   _U(__addsf3)
+   XJMP   __addsf3
 
           ENDFUNC
 

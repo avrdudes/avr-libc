@@ -87,7 +87,7 @@ GLOBAL(exp)
    LDI   rB2,0xB8
    LDI   rB1,0xAA
    LDI   rB0,0x3B ; 1/ln(2)
-   RCALL _U(__mulsf3)
+   XCALL __mulsf3
    PUSH  rS0
    PUSH  rS1
    PUSH  rS2
