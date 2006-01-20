@@ -1,3 +1,8 @@
+2005-01-20 Anatoly Sokolov <aesok@post.ru>
+
+	* /libm/fplib/sqrt.S: Use __addsf3/__divsf3 instead 
+	__addsf3x/__divsf3x.
+
 2006-01-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* Makefile.am (EXTRA_DIST): add ChangeLog-2005.

@@ -1,6 +1,7 @@
 /*  -*- Mode: Asm -*-  */
 
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Anatoly Sokolov <aesok@post.ru>
    All rights reserved.
 
 
@@ -47,13 +48,26 @@
 #include "macros.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, sqrt)
-          FUNCTION(sqrt)
+; Abak
+#define rAbak3	rS0
+#define rAbak2	rS1
+#define rAbak1	rS2
+#define rAbak0	rS3
+
+; Bbak
+#define rBbak3	rS4
+#define rBbak2	rS5
+#define rBbak1	rS6
+#define rBbak0	rS7
+
+
+	TEXT_SEG(fplib, sqrt)
+	FUNCTION(sqrt)
 
 GLOBAL(sqrt)
 
-    SBRC    rA3,7
-    RJMP    _U(__fp_nanEDOM)	; sign bit is set -> argument range error
+	SBRC	rA3, 7
+	RJMP	_U(__fp_nanEDOM)	; sign bit is set -> argument range error
 
    /* A = sign(=0):(exp+7F):[1].mant = 2^(exp)*1.mant
     *   =          (LSB(exp)+7F) + (exp>>1) + (exp>>1):[1].mant = (2^(exp>>1))^2 * 2^(LSB(exp))*1.mant
@@ -68,92 +82,87 @@ GLOBAL(sqrt)
     *  plus the implicit one                            1.000000
     */
 
-    MOV     rB2,rA2		; needed later on
-    TST     rA3
-    BREQ    100f		; sqrt(0) = 0
-    RCALL   _U(__fp_split_a)	; does not return on NaN
+	TST	rA3
+	BRNE	2f		; sqrt(0) = 0
+	RET
+2:
+	MOV	rB2, rA2	; needed later on
 
-    MOV     rTI0,rA3
-    SUBI    rTI0,0x7F
-    ASR     rTI0		; this is dExp!
-    SUB     rA3,rTI0
-    SUB     rA3,rTI0
-    PUSH    rTI0		; exponent offset
-    SUBI    rB2,0x80		; == EOR 0x80
-    ROR     rB2
-    CLR     rB1			; a slightly smaller X(0) than the calculated is better
-    CLR     rB0			; and saves 2 right shifts
-    ORI     rB2,0x80		; implicit one
-    LDI     rB3,0x7F		; load exponent 7F
+	RCALL	_U(__fp_split_a)	; does not return on NaN
 
-    CLT				; clears T
+	MOV	rTI0, rA3
+	SUBI	rTI0, 0x7F
+	ASR	rTI0		; this is dExp!
+	SUB	rA3, rTI0
+	SUB	rA3, rTI0
 
-    PUSH    rS0
-    PUSH    rS1
-    PUSH    rS2
-    PUSH    rS3			; rS3::rS0 = Abak
+	PUSH	rTI0		; exponent offset
 
-    PUSH    rS4
-    PUSH    rS5
-    PUSH    rS6
-    PUSH    rS7			; rS7::rS4 = Bbak
+	RCALL	_U(__fp_merge)
 
-    MOV     rS3,rA3
-    MOV     rS2,rA2
-    MOV     rS1,rA1
-    MOV     rS0,rA0 		; Abak = A
+	PUSH	rS0
+	PUSH	rS1
+	PUSH	rS2
+	PUSH	rS3
+	PUSH	rS4
+	PUSH	rS5
+	PUSH	rS6
+	PUSH	rS7
+
+	X_movw	rAbak0, rA0
+	X_movw	rAbak2, rA2	; Abak = A
+
+	SUBI    rB2, 0x80	; == EOR 0x80
+	ROR	rB2
+	CLR	rB1		; a slightly smaller X(0) than the calculated is better
+	CLR	rB0		; and saves 2 right shifts
+	ORI	rB2, 0x80	; 
+	LDI	rB3, 0x3F	; load exponent 7F
+
 1:
-    MOV     rA0,rS0		;
-    MOV     rA1,rS1		;
-    MOV     rA2,rS2		;
-    MOV     rA3,rS3		; A = Abak
+	X_movw	rA0, rAbak0
+	X_movw	rA2, rAbak2 	; A = Abak
 
-    MOV     rS7,rB3
-    MOV     rS6,rB2
-    MOV     rS5,rB1
-    MOV     rS4,rB0		; Bbak = B
+	X_movw	rBbak0, rB0
+	X_movw	rBbak2, rB2 	; Bbak = B
 
-		; divsf3x does not need preset rAE,rBE
-    RCALL   _U(__divsf3x)   ; FP1X = arg/xn
-		; now rAE = rBE = 0 or 80 or 0xFF ,ok for addsf3x
+	XCALL	__divsf3	; FP1X = arg/xn
 
-    MOV     rB3,rS7
-    MOV     rB2,rS6
-    MOV     rB1,rS5
-    MOV     rB0,rS4		; B = Bbak
+    	X_movw	rB0, rBbak0
+	X_movw	rB2, rBbak2 	; B = Bbak
 
-    CLR     rT1c		; addx uses R1.7 as sign
-    RCALL   _U(__addsf3x)	; FP1X = arg/xn + xn
-    DEC     rA3			; div by 2 := Xn+1
+	XCALL	__addsf3	; FP1X = arg/xn + xn
 
-    MOV     rB3,rA3
-    MOV     rB2,rA2
-    MOV     rB1,rA1
-    MOV     rB0,rA0		;
+	LDI	rPL, lo8(-1)
+	LDI	rPH, hi8(-1)
+	RCALL	_U(ldexp)	; div by 2 := Xn+1
 
-    CP      rS4,rB0		;
-    CPC     rS5,rB1		;
-    CPC     rS6,rB2
-    CPC     rS7,rB3		; cmp B to Bbak
-    BRNE    1b
+	X_movw	rB0, rA0
+	X_movw	rB2, rA2	; B = A
 
-    POP     rS7
-    POP     rS6
-    POP     rS5
-    POP     rS4
-    POP     rS3
-    POP     rS2
-    POP     rS1
-    POP     rS0
+	CP	rBbak0, rB0
+	CPC	rBbak1, rB1
+	CPC	rBbak2, rB2
+	CPC	rBbak3, rB3	; cmp B to Bbak
+	BRNE	1b
 
-    POP     rT0
-    ADD     rA3,rT0		;
+	POP	rS7
+	POP	rS6
+	POP	rS5
+	POP	rS4
+	POP	rS3
+	POP	rS2
+	POP	rS1
+	POP	rS0
 
-    CLR     rT0			; no rounding beyond rAE
-    RJMP    _U(__fp_merge)
-100:
-    RET
+	POP	rB3
+	
+	RCALL	_U(__fp_split_a)	; does not return on NaN
 
-          ENDFUNC
+	ADD	rA3, rB3
+
+	RJMP	_U(__fp_merge)
+
+	ENDFUNC
 
 
