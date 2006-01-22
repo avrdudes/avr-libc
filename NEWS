@@ -1,5 +1,8 @@
 *** Changes since avr-libc-1.4.2:
 
+* Bugs fixed:
+  [no-id]  Not defined SPM_PAGESIZE for ATtinyX4/X5/X61 and ATtiny2313 devices.
+
 *** Changes in avr-libc-1.4.2:
 
 * Bugs fixed:
