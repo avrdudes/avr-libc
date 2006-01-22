@@ -47,8 +47,13 @@
     Since these typedefs are mandated by the C99 standard, they are preferred
     over rolling your own typedefs.  */
 
+/*
+ * __USING_MINT8 is defined to 1 if the -mint8 option is in effect.
+ */
 #if __INT_MAX__ == 127
 # define __USING_MINT8 1
+#else
+# define __USING_MINT8 0
 #endif
 
 /* Integer types */

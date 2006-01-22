@@ -559,7 +559,7 @@
 #define boot_rww_enable()             __boot_rww_enable_alternate()
 #define boot_lock_bits_set(lock_bits) __boot_lock_bits_set_alternate(lock_bits)
 
-#elif (FLASHEND > USHRT_MAX) && !defined(__USING_MINT8)
+#elif (FLASHEND > USHRT_MAX) && (__USING_MINT8)
 
 /* Extended: >16 bit address */
 #define boot_page_fill(address, data) __boot_page_fill_extended(address, data)

@@ -1,3 +1,11 @@
+2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #15494: Compile warning and errors if compiler flag
+	-Wundef flag specified
+	* include/inttypes.h: turn #if on undefined macros into #ifdef.
+	* include/stdint.h: always define __USING_MINT8 (to 0 or 1).
+	* include/avr/boot.h: use __USING_MINT8 the new way.
+
 2005-01-22 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iotn2313.h (SPM_PAGESIZE): Add. 
