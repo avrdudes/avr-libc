@@ -6,7 +6,7 @@
 	* include/stdint.h: always define __USING_MINT8 (to 0 or 1).
 	* include/avr/boot.h: use __USING_MINT8 the new way.
 
-2005-01-22 Anatoly Sokolov <aesok@post.ru>
+2006-01-22 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iotn2313.h (SPM_PAGESIZE): Add. 
 	* include/avr/iotn24.h (SPM_PAGESIZE): (Ditto.).
@@ -23,7 +23,7 @@
 
 	* Makefile.am (EXTRA_DIST): add ChangeLog-2005.
 
-2005-01-09 Anatoly Sokolov <aesok@post.ru>
+2006-01-09 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/acos.S : Use XCALL/XJMP instead RCALL/RJMP 
 	for calling __addsf3/__subsf3/__mulsf3/__divsf3 functions.
@@ -61,12 +61,12 @@
 	* include/avr/pgmspace.h: Add a warning about the _P()
 	functions not working above 64 KB.
 
-2005-01-06 Anatoly Sokolov <aesok@post.ru>
+2006-01-06 Anatoly Sokolov <aesok@post.ru>
 
 	* /libm/fplib/sqrt.S: Use __addsf3/__divsf3 instead 
 	__addsf3x/__divsf3x.
 
-2005-01-06 Anatoly Sokolov <aesok@post.ru>
+2006-01-06 Anatoly Sokolov <aesok@post.ru>
 
 	(Contributed by Dmitry Xmelkov.)
 	* libm/fplib/ldexp.S: Fix error if 'exp' argument > 32640.
@@ -90,7 +90,7 @@
 	* doc/examples/demo/iocompat.h: Add support for all mentioned
 	devices.
 
-2005-01-04 Anatoly Sokolov <aesok@post.ru>
+2006-01-04 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: add tests for the ATtiny261/461/861 support.
 	* devtools/gen-avr-lib-tree.sh: add support for ATtiny261/461/861.
