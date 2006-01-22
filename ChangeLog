@@ -1,3 +1,16 @@
+2005-01-22 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotn2313.h (SPM_PAGESIZE): Add. 
+	* include/avr/iotn24.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn25.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn261.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn44.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn45.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn461.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn84.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn85.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn861.h (SPM_PAGESIZE): (Ditto.).
+
 2006-01-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* Makefile.am (EXTRA_DIST): add ChangeLog-2005.

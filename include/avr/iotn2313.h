@@ -584,5 +584,6 @@
 #define XRAMEND   0xDF
 #define E2END     0x7F
 #define FLASHEND  0x07FF
+#define SPM_PAGESIZE    32
 
 #endif  /* _AVR_IOTN2313_H_ */

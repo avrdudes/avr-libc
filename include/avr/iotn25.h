@@ -41,5 +41,6 @@
 #define XRAMEND               0xDF
 #define E2END                 0x7F
 #define FLASHEND              0x7FF
+#define SPM_PAGESIZE          32
 
 #endif /* _AVR_IOTN25_H_ */
