@@ -299,7 +299,7 @@ typedef uint32_t uint_farptr_t;
 #define		PRIXFAST32		"lX"
 
 
-#if __avr_libc_does_not_implement_long_long_in_printf_or_scanf
+#ifdef __avr_libc_does_not_implement_long_long_in_printf_or_scanf
 
 #define		PRIo64			"llo"
 #define		PRIoLEAST64		"llo"
@@ -338,7 +338,7 @@ typedef uint32_t uint_farptr_t;
 #define		PRIXPTR			PRIX16
 
 
-#if __avr_libc_does_not_implement_hh_in_scanf
+#ifdef __avr_libc_does_not_implement_hh_in_scanf
 
 #define		SCNd8			"hhd"
 #define		SCNdLEAST8		"hhd"
@@ -393,7 +393,7 @@ typedef uint32_t uint_farptr_t;
 #define		SCNiFAST32		"li"
 
 
-#if __avr_libc_does_not_implement_long_long_in_printf_or_scanf
+#ifdef __avr_libc_does_not_implement_long_long_in_printf_or_scanf
 
 #define		SCNd64			"lld"
 #define		SCNdLEAST64		"lld"
@@ -415,7 +415,7 @@ typedef uint32_t uint_farptr_t;
     generic-integer scanf format for intptr_t */
 #define		SCNiPTR			SCNi16
 
-#if __avr_libc_does_not_implement_hh_in_scanf
+#ifdef __avr_libc_does_not_implement_hh_in_scanf
 
 #define		SCNo8			"hho"
 #define		SCNoLEAST8		"hho"
@@ -493,7 +493,7 @@ typedef uint32_t uint_farptr_t;
 #define		SCNxFAST32		"lx"
 
 
-#if __avr_libc_does_not_implement_long_long_in_printf_or_scanf
+#ifdef __avr_libc_does_not_implement_long_long_in_printf_or_scanf
 
 #define		SCNo64			"llo"
 #define		SCNoLEAST64		"llo"
