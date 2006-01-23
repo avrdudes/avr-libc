@@ -1,5 +1,13 @@
 2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* Released avr-libc 1.4.3.
+
+2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: bump version.
+
+2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Fix bug #15494: Compile warning and errors if compiler flag
 	-Wundef flag specified
 	* include/inttypes.h: turn #if on undefined macros into #ifdef.
