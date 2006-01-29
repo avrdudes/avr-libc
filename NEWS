@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.4.3:
 
+* Bugs fixed:
+  [#15519] AT90CAN* processors incorrectly identified as "AT90S family"
+  [#15522] Typo in iotn2313.h vector table
+
 *** Changes in avr-libc-1.4.3:
 
 * Bugs fixed:
