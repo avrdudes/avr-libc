@@ -1,3 +1,11 @@
+2006-01-29 Anatoly Sokolov <aesok@post.ru>
+
+	* doc/api/main_page.dox: Move AT90CANxxx devices to Misc group.
+	[Fixed bug #15519] 
+	* include/avr/iotn2313.h (SIG_OUTPUT_COMPARE0A): Rename from 
+	SIG_OUTPUT_COPMARE0A.
+	[Fixed bug #15522]
+
 2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fix bug #15494: Compile warning and errors if compiler flag

@@ -10,6 +10,8 @@
   [#15193] incorrect definition of IVSEL bit in MCUCR register
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.
   [#15494] Compile warning and errors if compiler flag -Wundef flag specified
+  [#15519] AT90CAN* processors incorrectly identified as "AT90S family"
+  [#15522] Typo in iotn2313.h vector table
 
 * Other changes:
 

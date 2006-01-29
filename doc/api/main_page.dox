@@ -99,9 +99,6 @@ compile-time.
 - at90s8515
 - at90c8534
 - at90s8535
-- at90can32
-- at90can64
-- at90can128
 
 \par ATmega Type Devices:
 
@@ -164,7 +161,11 @@ compile-time.
 - at43usb320
 - at43usb355
 - at86rf401
-- at90pwm2/at90pwm3
+- at90can32
+- at90can64
+- at90can128
+- at90pwm2
+- at90pwm3
 
 \anchor supp_dev_footnote_one
 
