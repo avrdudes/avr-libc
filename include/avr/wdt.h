@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, 2004 Marek Michalkiewicz
-   Copyright (c) 2005 Eric B. Weddington
+   Copyright (c) 2005, 2006 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -123,6 +123,7 @@
 || defined(__AVR_ATmeg324__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) \
+|| defined(__AVR_ATmega406__) \
 || defined(__AVR_ATmega640__) || defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__) \
@@ -268,32 +269,30 @@ __asm__ __volatile__ (  \
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS
-    Note: This is only available on the ATtiny2313, 
+    Note: This is only available on the 
+    ATtiny2313, 
     ATtiny24, ATtiny44, ATtiny84, 
     ATtiny25, ATtiny45, ATtiny85, 
     ATtiny261, ATtiny461, ATtiny861, 
-    ATmega48, ATmega88,
-    ATmega164,
-    ATmega168,
-    ATmega324,
-    ATmega644,
+    ATmega48, ATmega88, ATmega168,
+    ATmega164, ATmega324, ATmega644,
     ATmega640, ATmega1280, ATmega1281,
+    ATmega406,
     AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_4S     8
 
 /** \ingroup avr_watchdog
     See \c WDT0_15MS
-    Note: This is only available on the ATtiny2313, 
+    Note: This is only available on the 
+    ATtiny2313, 
     ATtiny24, ATtiny44, ATtiny84, 
     ATtiny25, ATtiny45, ATtiny85, 
     ATtiny261, ATtiny461, ATtiny861, 
-    ATmega48, ATmega88,
-    ATmega164,
-    ATmega168,
-    ATmega324,
-    ATmega644,
+    ATmega48, ATmega88, ATmega168,
+    ATmega164, ATmega324, ATmega644,
     ATmega640, ATmega1280, ATmega1281,
+    ATmega406,
     AT90PWM2, and the AT90PWM3.
     */
 #define WDTO_8S     9

@@ -1,3 +1,16 @@
+2006-01-30 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: add tests for the ATmega406 support.
+	* devtools/gen-avr-lib-tree.sh: add support for ATmega406.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iotm406.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for ATmega406.
+	* doc/api/using-tools.dox: (Ditto.)
+ 	* xml/patch-headers.py: add ATmega406.
+	* doc/api/vectortable.dox: regenerate using patch-headers.py.
+
 2006-01-29 Anatoly Sokolov <aesok@post.ru>
 
 	* doc/api/main_page.dox: Move AT90CANxxx devices to Misc group.

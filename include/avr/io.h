@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2003 Marek Michalkiewicz, Joerg Wunsch
+/* Copyright (c) 2002,2003,2005,2006, Marek Michalkiewicz, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -212,6 +212,8 @@
 #  include <avr/iom329.h>
 #elif defined (__AVR_ATmega3290__)
 #  include <avr/iom3290.h>
+#elif defined (__AVR_ATmega406__)
+#  include <avr/iom406.h>
 #elif defined (__AVR_ATmega16__)
 #  include <avr/iom16.h>
 #elif defined (__AVR_ATmega161__)

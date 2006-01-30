@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2004 Joerg Wunsch
+/* Copyright (c) 2002,2004,2005,2006, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -135,6 +135,7 @@ compiler frontend.
   <tr><td>avr5</td><td>atmega3250</td><td>__AVR_ATmega3250__</td></tr>
   <tr><td>avr5</td><td>atmega329</td><td>__AVR_ATmega329__</td></tr>
   <tr><td>avr5</td><td>atmega3290</td><td>__AVR_ATmega3290__</td></tr>
+  <tr><td>avr5</td><td>atmega406</td><td>__AVR_ATmega406__</td></tr>
   <tr><td>avr5</td><td>atmega64</td><td>__AVR_ATmega64__</td></tr>
   <tr><td>avr5</td><td>atmega640</td><td>__AVR_ATmega640__</td></tr>
   <tr><td>avr5</td><td>atmega644</td><td>__AVR_ATmega644__</td></tr>

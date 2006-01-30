@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,  Anatoly Sokolov
+# Copyright (c) 2005,2006,  Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -189,6 +189,7 @@ atmega325:crtm325.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega3250:crtm3250.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega329:crtm329.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega3290:crtm3290.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega406:crtm406.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega64:crtm64.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega640:crtm640.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega644:crtm644.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\

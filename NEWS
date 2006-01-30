@@ -1,12 +1,18 @@
 *** Changes since avr-libc-1.4.3:
 
 * Bugs fixed:
+
   [#15519] AT90CAN* processors incorrectly identified as "AT90S family"
   [#15522] Typo in iotn2313.h vector table
+  
+* New devices supported:
+
+  + ATmega406
 
 *** Changes in avr-libc-1.4.3:
 
 * Bugs fixed:
+
   [no-id]  Not defined SPM_PAGESIZE for ATtinyX4/X5/X61 and ATtiny2313 devices.
   [#15494] Compile warning and errors if compiler flag -Wundef flag specified
 

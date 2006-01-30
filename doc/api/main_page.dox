@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Theodore Roth
-   Copyright (c) 2004,2005, Joerg Wunsch
+   Copyright (c) 2004,2005,2006, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -123,6 +123,7 @@ compile-time.
 - atmega329
 - atmega3290
 - atmega48
+- atmega406
 - atmega64
 - atmega640
 - atmega644
