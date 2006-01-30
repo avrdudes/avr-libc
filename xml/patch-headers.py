@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #
-# Copyright (c) 2005  Joerg Wunsch
+# Copyright (c) 2005,2006  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -96,6 +96,7 @@ table = {
     "iom329.h": "ATmega329",
     "iom3290.h": "ATmega3290",
     #"iom48.h" => "iomx8.h"
+    "iom406.h": "ATmega406",
     "iom64.h": "ATmega64",
     #"iom640.h" => "iomxx0_1.h"
     #"iom644.h" => "iomxx4.h"

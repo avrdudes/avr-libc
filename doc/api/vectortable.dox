@@ -1,7 +1,7 @@
 /* Note: this file has been automatically generated. */
 /* DO NOT EDIT, or your changes WILL BE LOST! */
 
-/* Copyright (c) 2006 Joerg Wunsch
+/* Copyright (c) 2006 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -106,31 +106,31 @@
     <td>EE_READY_vect</td>
     <td>SIG_EEPROM_READY</td>
     <td>EEPROM Ready</td>
-    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
+    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega406, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
   </tr>
   <tr>
     <td>INT0_vect</td>
     <td>SIG_INTERRUPT0</td>
     <td>External Interrupt 0</td>
-    <td>AT90S1200, AT90S2313, AT90S2323, AT90S2333, AT90S2343, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny11, ATtiny12, ATtiny13, ATtiny15, ATtiny22, ATtiny2313, ATtiny26, ATtiny28, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
+    <td>AT90S1200, AT90S2313, AT90S2323, AT90S2333, AT90S2343, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega165, ATmega169, ATmega32, ATmega323, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega406, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny11, ATtiny12, ATtiny13, ATtiny15, ATtiny22, ATtiny2313, ATtiny26, ATtiny28, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>INT1_vect</td>
     <td>SIG_INTERRUPT1</td>
     <td>External Interrupt Request 1</td>
-    <td>AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega64, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny28, ATtiny261, ATtiny461, ATtiny861</td>
+    <td>AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega163, ATmega32, ATmega323, ATmega406, ATmega64, ATmega8, ATmega8515, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny2313, ATtiny28, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
   <tr>
     <td>INT2_vect</td>
     <td>SIG_INTERRUPT2</td>
     <td>External Interrupt Request 2</td>
-    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega32, ATmega323, ATmega64, ATmega8515, ATmega8535, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
+    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega16, ATmega161, ATmega162, ATmega32, ATmega323, ATmega406, ATmega64, ATmega8515, ATmega8535, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
   </tr>
   <tr>
     <td>INT3_vect</td>
     <td>SIG_INTERRUPT3</td>
     <td>External Interrupt Request 3</td>
-    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega64, ATmega640, ATmega1280, ATmega1281</td>
+    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega103, ATmega128, ATmega406, ATmega64, ATmega640, ATmega1280, ATmega1281</td>
   </tr>
   <tr>
     <td>INT4_vect</td>
@@ -184,13 +184,13 @@
     <td>PCINT0_vect</td>
     <td>SIG_PIN_CHANGE0</td>
     <td>Pin Change Interrupt Request 0</td>
-    <td>ATmega162, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
+    <td>ATmega162, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega406, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85</td>
   </tr>
   <tr>
     <td>PCINT1_vect</td>
     <td>SIG_PIN_CHANGE1</td>
     <td>Pin Change Interrupt Request 1</td>
-    <td>ATmega162, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny24, ATtiny44, ATtiny84</td>
+    <td>ATmega162, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega406, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny24, ATtiny44, ATtiny84</td>
   </tr>
   <tr>
     <td>PCINT2_vect</td>
@@ -262,7 +262,7 @@
     <td>SPM_READY_vect</td>
     <td>SIG_SPM_READY</td>
     <td>Store Program Memory Read</td>
-    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega128, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
+    <td>AT90PWM3, AT90PWM2, AT90CAN128, AT90CAN32, AT90CAN64, ATmega128, ATmega165, ATmega169, ATmega325, ATmega3250, ATmega329, ATmega3290, ATmega406, ATmega64, ATmega645, ATmega6450, ATmega649, ATmega6490, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
   </tr>
   <tr>
     <td>TIM0_COMPA_vect</td>
@@ -532,7 +532,7 @@
     <td>TWI_vect</td>
     <td>SIG_2WIRE_SERIAL</td>
     <td>2-wire Serial Interface</td>
-    <td>AT90CAN128, AT90CAN32, AT90CAN64, ATmega128, ATmega16, ATmega163, ATmega32, ATmega323, ATmega64, ATmega8, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
+    <td>AT90CAN128, AT90CAN32, AT90CAN64, ATmega128, ATmega16, ATmega163, ATmega32, ATmega323, ATmega406, ATmega64, ATmega8, ATmega8535, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644</td>
   </tr>
   <tr>
     <td>TXDONE_vect</td>
@@ -760,7 +760,7 @@
     <td>WDT_vect</td>
     <td>SIG_WDT, SIG_WATCHDOG_TIMEOUT</td>
     <td>Watchdog Timeout Interrupt</td>
-    <td>AT90PWM3, AT90PWM2, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
+    <td>AT90PWM3, AT90PWM2, ATmega406, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega324, ATmega164, ATmega644, ATtiny13, ATtiny24, ATtiny44, ATtiny84, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
 </table>
 </small>

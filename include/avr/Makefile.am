@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2004,2005,2006,  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -77,6 +77,7 @@ avr_HEADERS = \
     iom329.h \
     iom3290.h \
     iom48.h \
+    iom406.h \
     iom64.h \
     iom640.h \
     iom644.h \

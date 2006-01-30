@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,  Anatoly Sokolov
+# Copyright (c) 2005,2006,  Anatoly Sokolov
 # Copyright (c) 2005,  Joerg Wunsch
 # All rights reserved.
 #
@@ -483,6 +483,9 @@ AM_CONDITIONAL(HAS_atmega329, test "x$HAS_atmega329" = "xyes")
 CHECK_AVR_DEVICE(atmega3290)
 AM_CONDITIONAL(HAS_atmega3290, test "x$HAS_atmega3290" = "xyes")
 
+CHECK_AVR_DEVICE(atmega406)
+AM_CONDITIONAL(HAS_atmega406, test "x$HAS_atmega406" = "xyes")
+
 CHECK_AVR_DEVICE(atmega640)
 AM_CONDITIONAL(HAS_atmega640, test "x$HAS_atmega640" = "xyes")
 
@@ -616,6 +619,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega3250/Makefile
 	avr/lib/avr5/atmega329/Makefile
 	avr/lib/avr5/atmega3290/Makefile
+	avr/lib/avr5/atmega406/Makefile
 	avr/lib/avr5/atmega64/Makefile
 	avr/lib/avr5/atmega640/Makefile
 	avr/lib/avr5/atmega644/Makefile
