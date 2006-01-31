@@ -162,7 +162,7 @@
 #define PCINT1  1
 #define PCINT0  0
 
-#define GPI0R0  _SFR_IO8(0x13)
+#define GPIOR0  _SFR_IO8(0x13)
 
 #define GPIOR1  _SFR_IO8(0x14)
 
