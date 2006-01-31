@@ -120,7 +120,7 @@
 #define USIDR   _SFR_IO8(0x0F)
 #define USIBR   _SFR_IO8(0x10)
 
-#define GPI0R0  _SFR_IO8(0x11)
+#define GPIOR0  _SFR_IO8(0x11)
 #define GPIOR1  _SFR_IO8(0x12)
 #define GPIOR2  _SFR_IO8(0x13)
 

@@ -12,6 +12,7 @@
   [#15494] Compile warning and errors if compiler flag -Wundef flag specified
   [#15519] AT90CAN* processors incorrectly identified as "AT90S family"
   [#15522] Typo in iotn2313.h vector table
+  [#15595] GPIOR0 misspelled for ATtiny25/45/85
 
 * Other changes:
 

@@ -128,7 +128,7 @@
 #define HLEV    6
 #define HSEL    7
 
-#define GPI0R0  _SFR_IO8(0x0A)
+#define GPIOR0  _SFR_IO8(0x0A)
 
 #define GPIOR1  _SFR_IO8(0x0B)
 

@@ -1,3 +1,10 @@
+2006-01-31 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotnx4.h (GPIOR0): Rename from GPI0R0.
+	* include/avr/iotnx5.h (GPIOR0): (Ditto.).
+	* include/avr/iotnx61.h (GPIOR0): (Ditto.).
+	[Fixed bug #15595]
+
 2006-01-30 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: add tests for the ATmega406 support.
