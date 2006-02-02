@@ -1,3 +1,8 @@
+2006-02-02 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/boot.h: Corrected a choice __boot_xxx macros.
+	[Fixed bug #15559]
+
 2006-01-31 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iotnx4.h (GPIOR0): Rename from GPI0R0.
