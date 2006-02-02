@@ -13,6 +13,7 @@
   [#15519] AT90CAN* processors incorrectly identified as "AT90S family"
   [#15522] Typo in iotn2313.h vector table
   [#15559] Wrong macro for boot_page_write(address) and ATmega128
+  [#15574] unneeded compatibility break
   [#15595] GPIOR0 misspelled for ATtiny25/45/85
 
 * Other changes:

@@ -1,5 +1,10 @@
 2006-02-02 Anatoly Sokolov <aesok@post.ru>
 
+	*include/avr/signal.h: Include <avr/interrupt.h> file.
+	[Fixed bug #15574]
+
+2006-02-02 Anatoly Sokolov <aesok@post.ru>
+
 	* include/avr/boot.h: Corrected a choice __boot_xxx macros.
 	[Fixed bug #15559]
 

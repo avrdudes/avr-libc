@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2005 Marek Michalkiewicz
+/* Copyright (c) 2002,2005,2006 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -34,5 +34,6 @@
 #define _AVR_SIGNAL_H_
 
 #warning "This header file is obsolete.  Use <avr/interrupt.h>."
+#include <avr/interrupt.h>
 
 #endif /* _AVR_SIGNAL_H_ */
