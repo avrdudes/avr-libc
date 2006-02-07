@@ -1,5 +1,5 @@
 /* -*- Mode: Asm -*-
-   Copyright (c) 2002, Reiner Patommel
+   Copyright (c) 2002, 2006 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -81,15 +81,8 @@ GLOBAL(dtostrf)
 	push	YL		; save frame pointer
 	push	p_str_hi
 	push	p_str_lo	; save &string
-#if __AVR_ENHANCED__
-	movw	YL, p_str_lo	; Y points to string
-	movw	r16, p_num_hi_lo
-#else
-	mov	YH, p_str_hi
-	mov	YL, p_str_lo	; Y points to string
-	mov	r17, p_num_hi_hi
-	mov	r16, p_num_hi_lo
-#endif
+	X_movw	YL, p_str_lo	; Y points to string
+	X_movw	r16, p_num_hi_lo
 	add	r16, r16
 	adc	r17, r17
 	cpi	r17, 0xff	; NAN ?
@@ -118,30 +111,23 @@ GLOBAL(dtostrf)
 	clr	rA1
 	clr	rA2
 	clr	rA3		; A = precision
-	XCALL   _U(__floatsisf) ; now A = (float)precision
+	XCALL   __floatsisf ; now A = (float)precision
 	ori	rA3, 0x80	; now A = (float) -precision
-#if __AVR_ENHANCED__
-	movw	rB2, rA2
-	movw	rB0, rA0
-#else
-	mov	rB3, rA3
-	mov	rB2, rA2
-	mov	rB1, rA1
-	mov	rB0, rA0	; now B = (float) -precision
-#endif
+	X_movw	rB2, rA2
+	X_movw	rB0, rA0
 	ldi	rA3, 0x41
 	ldi	rA2, 0x20
 	clr	rA1
 	clr	rA0		; A = 10.0
-	XCALL	_U(pow)		; now A = 10^ -precision
+	RCALL	_U(pow)		; now A = 10^ -precision
 	ldi	rB3, 0xff
 	ldi	rB2, 0xff	; rB3:rB2 = -1
-	XCALL	_U(ldexp)	; now A = (0.5 * 10^-precision)
+	RCALL	_U(ldexp)	; now A = (0.5 * 10^-precision)
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3		; B = num
-	XCALL	_U(__addsf3)	; now A = num + (0.5 * 10^-precision)
+	XCALL	__addsf3	; now A = num + (0.5 * 10^-precision)
 	mov	r_count, r_dp	; count becomes power10 + dp.
 	cpi	r_dp, 1		; force dp to 0 if dp = 1 i.e. precision = 0
 	brne	1f
@@ -156,7 +142,7 @@ GLOBAL(dtostrf)
 	cpc	rA2, rB2
 	cpc	rA3, rB3	; num >= 10.0?
 	brlt	2f
-	XCALL	_U(__divsf3)	; num /= 10.0
+	XCALL	__divsf3	; num /= 10.0
 	inc	r_count		; count++
 	rjmp	1b
 2:				; for (i = count; i > 0; count--;)
@@ -164,22 +150,22 @@ GLOBAL(dtostrf)
 	push	rA2		;   num *= 10; if (i == dp) *string = '.';}
 	push	rA1
 	push	rA0
-	XCALL   _U(__fixsfsi)   ; convert num to long ( =n)
+	XCALL   __fixsfsi   ; convert num to long ( =n)
 	mov	r21, rA0 	; n = num
 	subi	r21, -'0'	; n += '0'
 	st	Y+, r21		; *string++ = n
-	XCALL	_U(__floatsisf)	; convert n to float
+	XCALL	__floatsisf	; convert n to float
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3		; B = num
-	XCALL	_U(__subsf3)	; A = (A - B)
+	XCALL	__subsf3	; A = (A - B)
 	subi	rA3, 0x80	; A = -(A - B) = B - A  -> num -= n
 	ldi	rB3, 0x41
 	ldi	rB2, 0x20
 	clr	rB1
 	clr	rB0		; B = 10.0
-	XCALL	_U(__mulsf3)	; num *= 10
+	XCALL	__mulsf3	; num *= 10
 	cp	r_count, r_dp	; decimal point here?
 	brne	3f
 	ldi	r21 , '.'
@@ -204,15 +190,8 @@ GLOBAL(dtostrf)
 				; Need // in next line to stop doxygen
 				; from thinking strlen is a variable.
 1:				; // strlen = Y - Z
-#if __AVR_ENHANCED__
-	movw	rA2, YL
-	movw	rA0, ZL
-#else
-	mov	rA3, YH
-	mov	rA2, YL
-	mov	rA1, ZH
-	mov	rA0, ZL
-#endif
+	X_movw	rA2, YL
+	X_movw	rA0, ZL
 	sub	rA2, rA0
 	sbc	rA3, rA1	; rA2 = strlen
 	mov	r_count, p_width
@@ -247,12 +226,7 @@ GLOBAL(dtostrf)
 11:
 	pop	ret_lo
 	pop	ret_hi		; restore &string as return address
-#if __AVR_ENHANCED__
-	movw	p_str_lo, ret_lo
-#else
-	mov	p_str_lo, ret_lo
-	mov	p_str_hi, ret_hi
-#endif
+	X_movw	p_str_lo, ret_lo
 	pop	YL
 	pop	YH		; restore frame pointer
 	ret
