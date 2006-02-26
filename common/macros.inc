@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -118,6 +118,12 @@
   #define BIG_CODE 0
 #endif
 
+#ifndef __AVR_HAVE_MOVW__
+#  ifdef __AVR_ENHANCED__
+#   define __AVR_HAVE_MOVW__ 1
+#  endif
+#endif
+
 /*
    Smart version of movw:
     - uses "movw" if possible (supported by MCU, and both registers even)
@@ -187,7 +193,7 @@
 				mov     (.L_movw_dst)+1, (.L_movw_src)+1
 			.endif
 		.else  /* both even -> overlap not possible */
-#if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+#if  defined(__AVR_HAVE_MOVW__) && __AVR_HAVE_MOVW__
 			movw    \dst, \src
 #else
 			mov     (.L_movw_dst), (.L_movw_src)

@@ -85,6 +85,12 @@
 
 #include <avr/sfr_defs.h>
 
+#ifndef __AVR_HAVE_MOVW__
+#  ifdef __AVR_ENHANCED__
+#   define __AVR_HAVE_MOVW__ 1
+#  endif
+#endif
+
 /*
  * Registers common to all AVR devices.
  */
