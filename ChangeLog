@@ -1,3 +1,10 @@
+2006-02-26 Anatoly Sokolov <aesok@post.ru>
+
+	* /include/avr/io.h: Define __AVR_HAVE_MOVW__. 
+	* /common/macros.inc: Define __AVR_HAVE_MOVW__.
+	(X_movw):  Use __AVR_HAVE_MOVW__.
+	* /include/avr/eeprom.h (eeprom_write_word): Use __AVR_HAVE_MOVW__.
+
 2006-02-07 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/dtostrf.S: Use X_movw when possible. 

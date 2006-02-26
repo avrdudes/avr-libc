@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, 2003, 2004 Marek Michalkiewicz
-   Copyright (c) 2005, Bjoern Haase
+   Copyright (c) 2005, 2006 Bjoern Haase
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -299,7 +299,7 @@ void
 eeprom_write_word (uint16_t *addr,uint16_t value)
 {
   asm volatile (
-#if __AVR_ENHANCED__
+#if __AVR_HAVE_MOVW__
          "movw __tmp_reg__,%A1" CR_TAB
 #else
          "mov __tmp_reg__,%A1"      CR_TAB
