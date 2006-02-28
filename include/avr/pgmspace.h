@@ -339,7 +339,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     __result;                               \
 }))
 
-#if defined (__AVR_ENHANCED__)
+#if defined (__AVR_HAVE_LPMX__)
 #define __LPM(addr)         __LPM_enhanced__(addr)
 #define __LPM_word(addr)    __LPM_word_enhanced__(addr)
 #define __LPM_dword(addr)   __LPM_dword_enhanced__(addr)
@@ -518,7 +518,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     __result;                             \
 }))
 
-#if defined (__AVR_ENHANCED__)
+#if defined (__AVR_HAVE_LPMX__)
 #define __ELPM(addr)        __ELPM_enhanced__(addr)
 #define __ELPM_word(addr)   __ELPM_word_enhanced__(addr)
 #define __ELPM_dword(addr)  __ELPM_dword_enhanced__(addr)

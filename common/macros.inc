@@ -119,9 +119,15 @@
 #endif
 
 #ifndef __AVR_HAVE_MOVW__
-#  ifdef __AVR_ENHANCED__
+#  if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
 #   define __AVR_HAVE_MOVW__ 1
 #  endif
+#endif
+
+#ifndef __AVR_HAVE_LPMX__
+# if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+#  define __AVR_HAVE_LPMX__ 1
+# endif
 #endif
 
 /*
@@ -254,7 +260,7 @@
 	.endm
 
 	.macro  LPM_R0_ZP
-#if __AVR_ENHANCED__
+#if __AVR_HAVE_LPMX__
 	lpm	r0, Z+
 #else
 	lpm
