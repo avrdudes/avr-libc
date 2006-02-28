@@ -86,7 +86,7 @@
  */
 
 	.macro	mLPMRdZpp rr
-#ifdef __AVR_ENHANCED__
+#ifdef __AVR_HAVE_LPMX__
 	lpm	\rr, Z+
 #else
 	lpm

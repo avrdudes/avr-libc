@@ -1,9 +1,17 @@
+2006-02-28 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/io.h: Define __AVR_HAVE_LPMX__.
+	* common/macros.inc: Define __AVR_HAVE_LPMX__.
+	(LPM_R0_ZP): Use __AVR_HAVE_LPMX__.
+	* include/avr/pgmspace.h: Use __AVR_HAVE_LPMX__.
+	* libm/fplib/fplib.inc(mLPMRdZpp): Use __AVR_HAVE_LPMX__.
+
 2006-02-26 Anatoly Sokolov <aesok@post.ru>
 
-	* /include/avr/io.h: Define __AVR_HAVE_MOVW__. 
-	* /common/macros.inc: Define __AVR_HAVE_MOVW__.
+	* include/avr/io.h: Define __AVR_HAVE_MOVW__.
+	* common/macros.inc: Define __AVR_HAVE_MOVW__.
 	(X_movw):  Use __AVR_HAVE_MOVW__.
-	* /include/avr/eeprom.h (eeprom_write_word): Use __AVR_HAVE_MOVW__.
+	* include/avr/eeprom.h (eeprom_write_word): Use __AVR_HAVE_MOVW__.
 
 2006-02-07 Anatoly Sokolov <aesok@post.ru>
 
@@ -12,7 +20,7 @@
 
 2006-02-02 Anatoly Sokolov <aesok@post.ru>
 
-	*include/avr/signal.h: Include <avr/interrupt.h> file.
+	* include/avr/signal.h: Include <avr/interrupt.h> file.
 	[Fixed bug #15574]
 
 2006-02-02 Anatoly Sokolov <aesok@post.ru>
