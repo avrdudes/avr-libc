@@ -1,3 +1,7 @@
+2006-03-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: Fix example source code.
+
 2006-02-28 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/io.h: Define __AVR_HAVE_LPMX__.
