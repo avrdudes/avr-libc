@@ -1,8 +1,8 @@
 2006-03-04 Anatoly Sokolov <aesok@post.ru>
 
-	libm/fplib/fplib.inc (mLPMRdZpp, LPMRdZpp): Delete.
-	libm/fplib/fp_flashconst.S: Use X_lpm.
-	libm/fplib/fp_powerseries.S: (Ditto.).
+	* libm/fplib/fplib.inc (mLPMRdZpp, LPMRdZpp): Delete.
+	* libm/fplib/fp_flashconst.S: Use X_lpm.
+	* libm/fplib/fp_powerseries.S: (Ditto.).
 
 2006-03-04 Anatoly Sokolov <aesok@post.ru>
 
