@@ -1,3 +1,22 @@
+2006-03-04 Anatoly Sokolov <aesok@post.ru>
+
+	* common/macros.inc (X_lpm): Add. (Contributed by Dmitry Xmelkov.)
+	(LOAD_X_CONST, LPM_R0_ZP): Delete.
+	* libc/pmstring/memcpy_P.S: Use X_lpm.
+	* libc/pmstring/strcasecmp_P.S: (Ditto.).
+	* libc/pmstring/strcat_P.S: (Ditto.).
+	* libc/pmstring/strcmp_P.S: (Ditto.).
+	* libc/pmstring/strcpy_P.S: (Ditto.).
+	* libc/pmstring/strlcat_P.S: (Ditto.).
+	* libc/pmstring/strlcpy_P.S: (Ditto.).
+	* libc/pmstring/strlen_P.S: (Ditto.).
+	* libc/pmstring/strncasecmp_P.S: (Ditto.).
+	* libc/pmstring/strncat_P.S: (Ditto.).
+	* libc/pmstring/strncmp_P.S: (Ditto.).
+	* libc/pmstring/strncpy_P.S: (Ditto.).
+	* libc/pmstring/strnlen_P.S: (Ditto.).
+	* libc/pmstring/strstr_P.S: (Ditto.).
+
 2006-03-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/stdio.h: Fix example source code.

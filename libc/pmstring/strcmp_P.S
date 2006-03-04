@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -58,7 +58,7 @@ _U(strcmp_P):
 	X_movw	XL, s1_lo
 .L_strcmp_P_loop:
 	ld	ret_lo, X+
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	sub	ret_lo, r0
 	brne	.L_strcmp_P_done
 	tst	r0

@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Reiner Patommel
+/* Copyright (c) 2002, 2005, 2006 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -77,7 +77,7 @@ _U(strncasecmp_P):
 	SBCI	len_hi, hi8(1)
 	BRCS	.L_strncasecmp_P_equal
 	LD	ret_lo, X+		; load *s1
-	LPM_R0_ZP			; load *s2
+	X_lpm	r0, Z+			; load *s2
 	MOV	tmp, r0			; copy of *s2 to tmp
 	MOV	cht, r0			; copy of *s2 to cht
 	ORI	cht, 0x20		; make it lower case

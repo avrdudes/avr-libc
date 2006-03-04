@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Philip Soeberg
-   Copyright (c) 2005, Werner Boellmann
+   Copyright (c) 2005, 2006 Werner Boellmann
    All rights reserved.
    
    Redistribution and use in source and binary forms, with or without
@@ -76,14 +76,14 @@ _U(strstr_P):
 
 	X_movw	XL, s1_lo
 	X_movw	ZL, s2_lo
-	LPM_R0_ZP               
+	X_lpm	r0, Z
 	tst	r0		; is str2 empty?
 	brne	.L_findstart_P
 	ret			; return original string (req'd by standard)
 
 .L_findstart_P:
 	X_movw	ZL, s2_lo	; reset Z pointer
-	LPM_R0_ZP               ; fetch first char
+	X_lpm	r0, Z+		; fetch first char
 
 .L_findstart_loop_P:		; Find first char
 	ld	chr1, X+
@@ -94,7 +94,7 @@ _U(strstr_P):
 	brne	.L_findstart_loop_P	; If, then start checking string
 
 .L_stringloop_P:
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	tst	r0
 	breq	.L_match_P
 	ld	chr1, X
