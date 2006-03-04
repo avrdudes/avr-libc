@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -59,10 +59,10 @@ _U(memcpy_P):
 	rjmp	.L_memcpy_P_start
 	rjmp	.L_memcpy_P_odd
 .L_memcpy_P_loop:
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	st	X+, r0
 .L_memcpy_P_odd:
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	st	X+, r0
 .L_memcpy_P_start:
 	subi	len_lo, lo8(2)
@@ -71,7 +71,7 @@ _U(memcpy_P):
 ; 12 words, (13 + len * 11) cycles
 	rjmp	.L_memcpy_P_start
 .L_memcpy_P_loop:
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	st	X+, r0
 .L_memcpy_P_start:
 	subi	len_lo, lo8(1)

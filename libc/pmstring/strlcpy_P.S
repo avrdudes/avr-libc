@@ -2,7 +2,7 @@
    AVR LIBC
    strlcpy_P()
 
-   Copyright (c) 2003, Eric B. Weddington
+   Copyright (c) 2003, 2005, 2006 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -75,16 +75,16 @@ _U(strlcpy_P):
 	subi	siz_lo, lo8(-(-1))
 	sbci	siz_hi, hi8(-(-1))	; decrement siz
 	breq	1f 			; --> siz chars copied
-	LPM_R0_ZP			; get next src char
-	st	X+, __tmp_reg__		; copy char
-	tst	__tmp_reg__		; end of src string ?
-	breq	.L_strlcpy_P_len		; --> all src chars copied
+	X_lpm	r0, Z+			; get next src char
+	st	X+, r0			; copy char
+	tst	r0			; end of src string ?
+	breq	.L_strlcpy_P_len	; --> all src chars copied
 	rjmp	.L_strlcpy_P_copy_loop	; next char
 1:	st	X, __zero_reg__		; truncate dst string
 
 .L_strlcpy_P_truncated:			; find Z = end of src string
-	LPM_R0_ZP			; get next char from src
-	tst	__tmp_reg__		; end of src string ?
+	X_lpm	r0, Z+			; get next char from src
+	tst	r0			; end of src string ?
 	brne	.L_strlcpy_P_truncated	; next char
 
 .L_strlcpy_P_len:			; calculate strlen(src)

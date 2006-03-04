@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, Helmut Wallner
+/* Copyright (c) 2005, 2006 Helmut Wallner
 
    based on libc/string/strnlen.S which is
    Copyright (c) 2002, Marek Michalkiewicz
@@ -58,7 +58,7 @@
 _U(strnlen_P):
 	X_movw	ZL, src_lo
 .L_strnlen_P_loop:
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
 	cpse	r0, __zero_reg__

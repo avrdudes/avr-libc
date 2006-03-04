@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Reiner Patommel
+/* Copyright (c) 2002, 2005, 2006 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -72,8 +72,8 @@ _U(strcasecmp_P):
 	X_movw	XL, s1_lo
 .L_strcasecmp_P_loop:
 	LD	ret_lo, X+		; load *s1
-	LPM_R0_ZP			; load *s2
-	MOV	tmp,r0			; copy of *s2 to tmp
+	X_lpm	r0, Z+			; load *s2
+	MOV	tmp, r0			; copy of *s2 to tmp
 	MOV	cht, r0			; copy of *s2 to cht
 	ORI	cht, 0x20		; make tmp lower case
 	CPI	cht, 'a'		; test on [a .. z]

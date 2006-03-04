@@ -2,7 +2,7 @@
    AVR LIBC
    strlcat()
 
-   Copyright (c) 2003, Eric B. Weddington, R. Patommel
+   Copyright (c) 2003, 2005, 2006 Eric B. Weddington, R. Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -96,13 +96,13 @@ _U(strlcat_P):
 	sbci	siz_hi, hi8(-(-1))	; siz--
 
 .L_strlcat_P_concat:			; Concatenate
-	LPM_R0_ZP			; get next char from src
+	X_lpm	r0, Z+			; get next char from src
 	cp	siz_lo, __zero_reg__
 	cpc	siz_hi, __zero_reg__	; size == 0 ?
 	breq	1f			; --> done
-	tst	__tmp_reg__		; end of src ?
+	tst	r0			; end of src ?
 	breq	1f			; --> done
-	st	X+, __tmp_reg__		; store in dest
+	st	X+, r0			; store in dest
 	subi	siz_lo, lo8(-(-1))
 	sbci	siz_hi, hi8(-(-1))	; siz--
 	rjmp	.L_strlcat_P_concat		; --> next char
@@ -110,9 +110,9 @@ _U(strlcat_P):
 	sbiw	Z_lo, 1			; undo post increment
 
 .L_strlcat_P_slen:
-	LPM_R0_ZP			; get next char from src
-	tst	__tmp_reg__		; end of src ?
-	brne	.L_strlcat_P_slen		; --> next char
+	X_lpm	r0, Z+			; get next char from src
+	tst	r0			; end of src ?
+	brne	.L_strlcat_P_slen	; --> next char
 	sbiw	Z_lo, 1			; undo post increment
 	X_movw	rWord_lo, dlen_lo
 	add	rWord_lo, Z_lo

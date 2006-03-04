@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Reiner Patommel
+/* Copyright (c) 2002, 2005, 2006 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -65,7 +65,7 @@ _U(strcat_P):
 	brne	.L_strcat_P_skip
 	sbiw	XL, 1		; undo post-increment
 .L_strcat_P_loop:
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	st	X+, r0
 	tst	r0
 	brne	.L_strcat_P_loop

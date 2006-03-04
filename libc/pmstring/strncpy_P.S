@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -63,7 +63,7 @@ _U(strncpy_P):
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
 	brcs	.L_strncpy_P_done
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	st	X+, r0
 	tst	r0
 	brne	.L_strncpy_P_loop

@@ -1,4 +1,4 @@
-/* Copyright (c) 2003, Reiner Patommel
+/* Copyright (c) 2003, 2005, 2006 Reiner Patommel
    based on strncat by Marek Michalkiewicz
    All rights reserved.
 
@@ -66,9 +66,9 @@ _U(strncat_P):
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
 	brcs	.L_strncat_P_done
-	LPM_R0_ZP
-	tst	__tmp_reg__
-	st	X+, __tmp_reg__
+	X_lpm	r0, Z+
+	tst	r0
+	st	X+, r0
 	brne	.L_strncat_P_loop
 ; return dest (unchanged)
 	ret

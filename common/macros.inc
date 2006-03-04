@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
+   Copyright (c) 2006 Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -209,10 +210,107 @@
 	.endif
 .endm
 
-/* LOAD_X_CONST(p) loads constant P into pointer register X.  */
-#define LOAD_X_CONST(p)		\
-	ldi	r26, lo8(p)		_L\
-	ldi	r27, hi8(p)
+/* Macro 'X_lpm' extends enhanced lpm instruction for classic chips.
+   Usage:
+	X_lpm	reg, dst
+   where
+	reg	is 0..31, r0..r31 or R0..R31
+	dst	is z, Z, z+ or Z+
+   It is possible to omit both arguments.
+
+   Possible results for classic chips:
+	lpm
+	lpm / mov Rd,r0
+	lpm / adiw ZL,1
+	lpm / mov Rd,r0 / adiw ZL,1
+	
+   For enhanced chips it is one instruction always.
+
+   ATTENTION:  unlike enhanced chips SREG (S,V,N,Z,C) flags are
+   changed in case of 'Z+' dst.  R0 is scratch.
+ */
+.macro	X_lpm	dst=r0, src=Z
+
+  /* dst evaluation	*/
+  .L_lpm_dst = -1
+
+  .L_lpm_n = 0
+  .irp  reg,  r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, \
+	     r10,r11,r12,r13,r14,r15,r16,r17,r18,r19, \
+	     r20,r21,r22,r23,r24,r25,r26,r27,r28,r29, \
+	     r30,r31
+    .ifc  \reg,\dst
+      .L_lpm_dst = .L_lpm_n
+    .endif
+    .L_lpm_n = .L_lpm_n + 1
+  .endr
+
+  .L_lpm_n = 0
+  .irp  reg,  R0, R1, R2, R3, R4, R5, R6, R7, R8, R9, \
+	     R10,R11,R12,R13,R14,R15,R16,R17,R18,R19, \
+	     R20,R21,R22,R23,R24,R25,R26,R27,R28,R29, \
+	     R30,R31
+    .ifc  \reg,\dst
+      .L_lpm_dst = .L_lpm_n
+    .endif
+    .L_lpm_n = .L_lpm_n + 1
+  .endr
+
+  .if  .L_lpm_dst < 0
+    .L_lpm_n = 0
+    .rept 32
+      .if  \dst == .L_lpm_n
+	.L_lpm_dst = .L_lpm_n
+      .endif
+      .L_lpm_n = .L_lpm_n + 1
+    .endr
+  .endif
+
+  .if  (.L_lpm_dst < 0)
+    .err	; Invalid dst arg of 'X_lpm' macro.
+  .endif
+
+  /* src evaluation	*/    
+  .L_lpm_src = -1
+  .L_lpm_n = 0
+  .irp  reg,  z,Z,z+,Z+
+    .ifc  \reg,\src
+      .L_lpm_src = .L_lpm_n
+    .endif
+    .L_lpm_n = .L_lpm_n + 1
+  .endr
+
+  .if  (.L_lpm_src < 0)
+    .err	; Invalid src arg of 'X_lpm' macro.
+  .endif
+
+  /* instruction(s)	*/    
+  .if  .L_lpm_src < 2
+    .if  .L_lpm_dst == 0
+	lpm
+    .else
+#if  defined(__AVR_HAVE_LPMX__) && __AVR_HAVE_LPMX__
+	lpm	.L_lpm_dst, Z
+#else
+	lpm
+	mov	.L_lpm_dst, r0
+#endif
+    .endif
+  .else
+    .if  (.L_lpm_dst >= 30)
+      .err	; Registers 30 and 31 are inhibited as 'X_lpm *,Z+' dst.
+    .endif
+#if  defined(__AVR_HAVE_LPMX__) && __AVR_HAVE_LPMX__
+	lpm	.L_lpm_dst, Z+
+#else
+	lpm
+    .if  .L_lpm_dst
+	mov	.L_lpm_dst, r0
+    .endif
+	adiw	r30, 1
+#endif
+  .endif
+.endm
 
 /*
    LPM_R0_ZPLUS_INIT is used before the loop to initialize RAMPZ
@@ -258,13 +356,3 @@
   #endif
 #endif
 	.endm
-
-	.macro  LPM_R0_ZP
-#if __AVR_HAVE_LPMX__
-	lpm	r0, Z+
-#else
-	lpm
-	adiw	r30,1
-#endif
-	.endm
-

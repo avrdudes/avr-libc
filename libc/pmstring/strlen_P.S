@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -51,7 +51,7 @@
 _U(strlen_P):
 	X_movw	ZL, src_lo
 .L_strlen_P_loop:
-	LPM_R0_ZP
+	X_lpm	r0, Z+
 	tst	r0
 	brne	.L_strlen_P_loop
 ; return Z - 1 - src = (-1 - src) + Z = ~src + Z
