@@ -1,5 +1,11 @@
 2006-03-04 Anatoly Sokolov <aesok@post.ru>
 
+	libm/fplib/fplib.inc (mLPMRdZpp, LPMRdZpp): Delete.
+	libm/fplib/fp_flashconst.S: Use X_lpm.
+	libm/fplib/fp_powerseries.S: (Ditto.).
+
+2006-03-04 Anatoly Sokolov <aesok@post.ru>
+
 	* common/macros.inc (X_lpm): Add. (Contributed by Dmitry Xmelkov.)
 	(LOAD_X_CONST, LPM_R0_ZP): Delete.
 	* libc/pmstring/memcpy_P.S: Use X_lpm.
