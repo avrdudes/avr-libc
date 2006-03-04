@@ -3,7 +3,7 @@
 
    This file is part of     FPlib V 0.3.0       Floating point library for Atmel AVR uC
 
-   Copyright (c) Michael Stumpf   <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006 Michael Stumpf   <mistumpf@de.pepperl-fuchs.com>
    All rights reserved.
 
 
@@ -84,18 +84,6 @@
 /*--------------------------------------------------------------------------
  * math function macro
  */
-
-	.macro	mLPMRdZpp rr
-#ifdef __AVR_HAVE_LPMX__
-	lpm	\rr, Z+
-#else
-	lpm
-	mov	\rr, r0
-	adiw	ZL, 1
-#endif
-	.endm
-
-#define LPMRdZpp(Rd) mLPMRdZpp Rd
 
 /*--------------------------------------------------------------------------
  * avr-as specific definitions for segments, functions and labels.

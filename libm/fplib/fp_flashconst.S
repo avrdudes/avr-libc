@@ -1,6 +1,6 @@
 /*  -*- Mode: Asm -*-  */
 
-/* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+/* Copyright (c) 2002, 2006  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
    All rights reserved.
 
 
@@ -48,16 +48,14 @@
 #include "macros.inc"
 #include "fplib.inc"
 
-          TEXT_SEG(fplib, __fp_flashconst)
-          FUNCTION(__fp_flashconst)
+	TEXT_SEG(fplib, __fp_flashconst)
+	FUNCTION(__fp_flashconst)
 
 GLOBAL(__fp_flashconst)
-    LPMRdZpp(rB3)
-    LPMRdZpp(rB2)
-    LPMRdZpp(rB1)
-    LPMRdZpp(rB0)
-    RET
+	X_lpm	rB3, Z+
+	X_lpm	rB2, Z+
+	X_lpm	rB1, Z+
+	X_lpm	rB0, Z+
+	RET
 
-          ENDFUNC
-
-
+	ENDFUNC

@@ -1,7 +1,7 @@
 /*  -*- Mode: Asm -*-  */
 
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
-   Copyright (c) 2005  Anatoly Sokolov <aesok@post.ru>
+   Copyright (c) 2005, 2006  Anatoly Sokolov <aesok@post.ru>
    All rights reserved.
 
 
@@ -75,10 +75,10 @@ GLOBAL(__fp_powerseries)
 	x_movw	rArg0, rA0
 	X_movw	rArg2, rA2
 	
-	LPMRdZpp(rGrade)	; first entry of fp table is byte with entry count
+	X_lpm	rGrade, Z+	; first entry of fp table is byte with entry count
 	RCALL  100f
 
-	LPMRdZpp(rGrade)	; increment first (last access or loop counter)
+	X_lpm	rGrade, Z+	; increment first (last access or loop counter)
 	TST	rGrade
 	BREQ	1f		; no dividing
 
