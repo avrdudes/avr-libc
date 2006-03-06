@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2006 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -39,8 +39,9 @@
 
 #define r_hi r25
 #define r_lo r24
-#define r_tmp1 __tmp_reg__
 #define r_tmp2 r23
+#define r_tmp_lo r22
+#define r_tmp_hi r23
 
 /* 
    r_hi:r_lo *= 10
@@ -62,14 +63,13 @@ _U(__mulhi_const_10):
 	add r_hi,r1
 	clr r1	; __zero_reg__
 #else
-	mov r_tmp2,r_lo
-	mov r_tmp1,r_hi
+	X_movw	r_tmp_lo, r_lo 
 	add r_lo,r_lo
 	adc r_hi,r_hi
 	add r_lo,r_lo
 	adc r_hi,r_hi
-	add r_lo,r_tmp2
-	adc r_hi,r_tmp1
+	add	r_lo, r_tmp_lo
+	adc	r_hi, r_tmp_hi
 	add r_lo,r_lo
 	adc r_hi,r_hi
 #endif

@@ -1,3 +1,7 @@
+2006-03-06 Anatoly Sokolov <aesok@post.ru>
+
+	* libc/misc/mul10.S: Use X_movw.
+
 2006-03-04 Anatoly Sokolov <aesok@post.ru>
 
 	* libm/fplib/fplib.inc (mLPMRdZpp, LPMRdZpp): Delete.
