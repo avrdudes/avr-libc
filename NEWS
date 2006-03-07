@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [no-id]  Fix location of OCR1 in simple demo for ATmega16/32
   [#15519] AT90CAN* processors incorrectly identified as "AT90S family"
   [#15522] Typo in iotn2313.h vector table
   [#15559] Wrong macro for boot_page_write(address) and ATmega128

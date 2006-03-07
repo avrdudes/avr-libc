@@ -109,8 +109,8 @@
 #  define TIMER1_TOP 255
 #  define TIMER1_CLOCKSOURCE _BV(CS12) /* use 1/8 prescaler */
 #elif defined(__AVR_ATmega32__) || defined(__AVR_ATmega16__)
-#  define OC1 PD6
-#  define DDROC DDRA
+#  define OC1 PD5
+#  define DDROC DDRD
 #  define OCR OCR1A
 #elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) || \
       defined(__AVR_ATmega165__) || defined(__AVR_ATmega169__) || \
