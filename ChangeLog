@@ -1,3 +1,9 @@
+2006-03-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Notified by Peter Schrepfer:
+	* doc/examples/demo/iocompat.h: Fix OCR1A location
+	for ATmega16/32 (broken in rev 1.2).
+
 2006-03-06 Anatoly Sokolov <aesok@post.ru>
 
 	* libc/misc/mul10.S: Use X_movw.
