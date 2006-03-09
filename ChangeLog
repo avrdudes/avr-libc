@@ -1,3 +1,7 @@
+2006-03-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/boot.h: Do not depend on __USING_MINT8 anymore.
+
 2006-03-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Notified by Peter Schrepfer:
