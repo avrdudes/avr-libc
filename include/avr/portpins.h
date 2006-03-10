@@ -262,4 +262,112 @@
 #  define PORTG7 PG7
 #endif
 
+/* PORT H */
+
+#if defined(PH0)
+#  define PORTH0 PH0
+#endif
+#if defined(PH1)
+#  define PORTH1 PH1
+#endif
+#if defined(PH2)
+#  define PORTH2 PH2
+#endif
+#if defined(PH3)
+#  define PORTH3 PH3
+#endif
+#if defined(PH4)
+#  define PORTH4 PH4
+#endif
+#if defined(PH5)
+#  define PORTH5 PH5
+#endif
+#if defined(PH6)
+#  define PORTH6 PH6
+#endif
+#if defined(PH7)
+#  define PORTH7 PH7
+#endif
+
+/* PORT J */
+
+#if defined(PJ0)
+#  define PORTJ0 PJ0
+#endif
+#if defined(PJ1)
+#  define PORTJ1 PJ1
+#endif
+#if defined(PJ2)
+#  define PORTJ2 PJ2
+#endif
+#if defined(PJ3)
+#  define PORTJ3 PJ3
+#endif
+#if defined(PJ4)
+#  define PORTJ4 PJ4
+#endif
+#if defined(PJ5)
+#  define PORTJ5 PJ5
+#endif
+#if defined(PJ6)
+#  define PORTJ6 PJ6
+#endif
+#if defined(PJ7)
+#  define PORTJ7 PJ7
+#endif
+
+/* PORT K */
+
+#if defined(PK0)
+#  define PORTK0 PK0
+#endif
+#if defined(PK1)
+#  define PORTK1 PK1
+#endif
+#if defined(PK2)
+#  define PORTK2 PK2
+#endif
+#if defined(PK3)
+#  define PORTK3 PK3
+#endif
+#if defined(PK4)
+#  define PORTK4 PK4
+#endif
+#if defined(PK5)
+#  define PORTK5 PK5
+#endif
+#if defined(PK6)
+#  define PORTK6 PK6
+#endif
+#if defined(PK7)
+#  define PORTK7 PK7
+#endif
+
+/* PORT L */
+
+#if defined(PL0)
+#  define PORTL0 PL0
+#endif
+#if defined(PL1)
+#  define PORTL1 PL1
+#endif
+#if defined(PL2)
+#  define PORTL2 PL2
+#endif
+#if defined(PL3)
+#  define PORTL3 PL3
+#endif
+#if defined(PL4)
+#  define PORTL4 PL4
+#endif
+#if defined(PL5)
+#  define PORTL5 PL5
+#endif
+#if defined(PL6)
+#  define PORTL6 PL6
+#endif
+#if defined(PL7)
+#  define PORTL7 PL7
+#endif
+
 #endif /* _AVR_PORTPINS_H_ */

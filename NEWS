@@ -15,6 +15,8 @@
   [#15559] Wrong macro for boot_page_write(address) and ATmega128
   [#15574] unneeded compatibility break
   [#15595] GPIOR0 misspelled for ATtiny25/45/85
+  [#16039] Names in Pxy (i.e. PA0) style of ports pins for some devices are 
+  not defined.
 
 * Other changes:
 
