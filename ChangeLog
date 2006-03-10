@@ -1,3 +1,9 @@
+2006-03-10 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iomxx0_1.h: Rename port pins from PORTxy to Pxy.
+	* include/avr/portpins.h: Add PORTHy, PORTJy, PORTKy and PORTHLy.
+	[Fixed bug #16039]
+
 2006-03-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/boot.h: Do not depend on __USING_MINT8 anymore.

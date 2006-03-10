@@ -77,14 +77,14 @@
 #define DDA0    0
 
 #define PORTA   _SFR_IO8(0X02)
-#define PORTA7  7
-#define PORTA6  6
-#define PORTA5  5
-#define PORTA4  4
-#define PORTA3  3
-#define PORTA2  2
-#define PORTA1  1
-#define PORTA0  0
+#define PA7     7
+#define PA6     6
+#define PA5     5
+#define PA4     4
+#define PA3     3
+#define PA2     2
+#define PA1     1
+#define PA0     0
 
 #define PINB    _SFR_IO8(0X03)
 #define PINB7   7
@@ -107,14 +107,14 @@
 #define DDB0    0
 
 #define PORTB   _SFR_IO8(0x05)
-#define PORTB7  7
-#define PORTB6  6
-#define PORTB5  5
-#define PORTB4  4
-#define PORTB3  3
-#define PORTB2  2
-#define PORTB1  1
-#define PORTB0  0
+#define PB7     7
+#define PB6     6
+#define PB5     5
+#define PB4     4
+#define PB3     3
+#define PB2     2
+#define PB1     1
+#define PB0     0
 
 #define PINC    _SFR_IO8(0x06)
 #define PINC7   7
@@ -137,14 +137,14 @@
 #define DDC0    0
 
 #define PORTC   _SFR_IO8(0x08)
-#define PORTC7  7
-#define PORTC6  6
-#define PORTC5  5
-#define PORTC4  4
-#define PORTC3  3
-#define PORTC2  2
-#define PORTC1  1
-#define PORTC0  0
+#define PC7     7
+#define PC6     6
+#define PC5     5
+#define PC4     4
+#define PC3     3
+#define PC2     2
+#define PC1     1
+#define PC0     0
 
 #define PIND    _SFR_IO8(0x09)
 #define PIND7   7
@@ -167,14 +167,14 @@
 #define DDD0    0
 
 #define PORTD   _SFR_IO8(0x0B)
-#define PORTD7  7
-#define PORTD6  6
-#define PORTD5  5
-#define PORTD4  4
-#define PORTD3  3
-#define PORTD2  2
-#define PORTD1  1
-#define PORTD0  0
+#define PD7     7
+#define PD6     6
+#define PD5     5
+#define PD4     4
+#define PD3     3
+#define PD2     2
+#define PD1     1
+#define PD0     0
 
 #define PINE    _SFR_IO8(0x0C)
 #define PINE7   7
@@ -197,14 +197,14 @@
 #define DDE0    0
 
 #define PORTE   _SFR_IO8(0x0E)
-#define PORTE7  7
-#define PORTE6  6
-#define PORTE5  5
-#define PORTE4  4
-#define PORTE3  3
-#define PORTE2  2
-#define PORTE1  1
-#define PORTE0  0
+#define PE7     7
+#define PE6     6
+#define PE5     5
+#define PE4     4
+#define PE3     3
+#define PE2     2
+#define PE1     1
+#define PE0     0
 
 #define PINF    _SFR_IO8(0x0F)
 #define PINF7   7
@@ -227,14 +227,14 @@
 #define DDF0    0
 
 #define PORTF   _SFR_IO8(0x11)
-#define PORTF7  7
-#define PORTF6  6
-#define PORTF5  5
-#define PORTF4  4
-#define PORTF3  3
-#define PORTF2  2
-#define PORTF1  1
-#define PORTF0  0
+#define PF7     7
+#define PF6     6
+#define PF5     5
+#define PF4     4
+#define PF3     3
+#define PF2     2
+#define PF1     1
+#define PF0     0
 
 #define PING    _SFR_IO8(0x12)
 #define PING5   5
@@ -253,12 +253,12 @@
 #define DDG0    0
 
 #define PORTG   _SFR_IO8(0x14)
-#define PORTG5  5
-#define PORTG4  4
-#define PORTG3  3
-#define PORTG2  2
-#define PORTG1  1
-#define PORTG0  0
+#define PG5     5
+#define PG4     4
+#define PG3     3
+#define PG2     2
+#define PG1     1
+#define PG0     0
 
 #define TIFR0   _SFR_IO8(0x15)
 #define OCF0B   2
@@ -1090,14 +1090,14 @@
 # define DDH0   0
 
 # define PORTH  _SFR_MEM8(0x102)
-# define PORTH7 7
-# define PORTH6 6
-# define PORTH5 5
-# define PORTH4 4
-# define PORTH3 3
-# define PORTH2 2
-# define PORTH1 1
-# define PORTH0 0
+# define PH7    7
+# define PH6    6
+# define PH5    5
+# define PH4    4
+# define PH3    3
+# define PH2    2
+# define PH1    1
+# define PH0    0
 
 # define PINJ   _SFR_MEM8(0x103)
 # define PINJ7  7
@@ -1120,14 +1120,14 @@
 # define DDJ0   0
 
 # define PORTJ  _SFR_MEM8(0x105)
-# define PORTJ7 7
-# define PORTJ6 6
-# define PORTJ5 5
-# define PORTJ4 4
-# define PORTJ3 3
-# define PORTJ2 2
-# define PORTJ1 1
-# define PORTJ0 0
+# define PJ7 7
+# define PJ6 6
+# define PJ5 5
+# define PJ4 4
+# define PJ3 3
+# define PJ2 2
+# define PJ1 1
+# define PJ0 0
 
 # define PINK   _SFR_MEM8(0x106)
 # define PINK7  7
@@ -1150,14 +1150,14 @@
 # define DDK0   0
 
 # define PORTK  _SFR_MEM8(0x108)
-# define PORTK7 7
-# define PORTK6 6
-# define PORTK5 5
-# define PORTK4 4
-# define PORTK3 3
-# define PORTK2 2
-# define PORTK1 1
-# define PORTK0 0
+# define PK7 7
+# define PK6 6
+# define PK5 5
+# define PK4 4
+# define PK3 3
+# define PK2 2
+# define PK1 1
+# define PK0 0
 
 # define PINL   _SFR_MEM8(0x109)
 # define PINL7  7
@@ -1180,14 +1180,14 @@
 # define DDL0   0
 
 # define PORTL  _SFR_MEM8(0x10B)
-# define PORTL7 7
-# define PORTL6 6
-# define PORTL5 5
-# define PORTL4 4
-# define PORTL3 3
-# define PORTL2 2
-# define PORTL1 1
-# define PORTL0 0
+# define PL7 7
+# define PL6 6
+# define PL5 5
+# define PL4 4
+# define PL3 3
+# define PL2 2
+# define PL1 1
+# define PL0 0
 
 #endif /* __ATmegaxx0__ */
 
