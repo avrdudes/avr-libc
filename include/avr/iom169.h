@@ -989,6 +989,8 @@
 #define LCDAB  6
 #define LCDIF  4
 #define LCDIE  3
+#define LCDBD  2 /* Only in Rev. F */
+#define LCDCCD 1 /* Only in Rev. F */
 #define LCDBL  0
 
 /* LCDCRB */
@@ -1012,7 +1014,7 @@
 #define LCDDC2 7
 #define LCDDC1 6
 #define LCDDC0 5
-#define LCDMDT 4
+#define LCDMDT 4 /* Only in Rev. F */
 #define LCDCC3 3
 #define LCDCC2 2
 #define LCDCC1 1

@@ -1,5 +1,10 @@
 2006-03-14 Anatoly Sokolov <aesok@post.ru>
 
+	* include/avr/iom169.h(LCDBD, LCDCCD): Add.
+	[Add support ATmega169 Rev. F device]
+
+2006-03-14 Anatoly Sokolov <aesok@post.ru>
+
 	* include/avr/iom165.h: Add 'PINxy', 'DDxy' and 'Pxy' bits.
 	* include/avr/iom325.h: (Ditto.).
 	* include/avr/iom3250.h: (Ditto.).
