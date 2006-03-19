@@ -501,7 +501,7 @@
 #define PRTIM5      5
 #define PRTIM4      4
 #define PRTIM3      3
-#define PRUSATR3    2
+#define PRUSART3    2
 #define PRUSART2    1
 #define PRUSART1    0
 
