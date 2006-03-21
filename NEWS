@@ -58,6 +58,10 @@
   + ATtiny861
   + ATmega406
   + ATmega169 Rev. F
+  + AT90USB646
+  + AT90USB647
+  + AT90USB1286
+  + AT90USB1287 
   
 * New functions: 
 

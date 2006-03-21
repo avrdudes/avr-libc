@@ -519,6 +519,18 @@ AM_CONDITIONAL(HAS_at90can64, test "x$HAS_at90can64" = "xyes")
 CHECK_AVR_DEVICE(at90can128)
 AM_CONDITIONAL(HAS_at90can128, test "x$HAS_at90can128" = "xyes")
 
+CHECK_AVR_DEVICE(at90usb646)
+AM_CONDITIONAL(HAS_at90usb646, test "x$HAS_at90usb646" = "xyes")
+
+CHECK_AVR_DEVICE(at90usb647)
+AM_CONDITIONAL(HAS_at90usb647, test "x$HAS_at90usb647" = "xyes")
+
+CHECK_AVR_DEVICE(at90usb1286)
+AM_CONDITIONAL(HAS_at90usb1286, test "x$HAS_at90usb1286" = "xyes")
+
+CHECK_AVR_DEVICE(at90usb1287)
+AM_CONDITIONAL(HAS_at90usb1287, test "x$HAS_at90usb1287" = "xyes")
+
 # Generate all files from *.in sources.
 
 AC_CONFIG_FILES([
@@ -633,6 +645,10 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/at90can32/Makefile
 	avr/lib/avr5/at90can64/Makefile
 	avr/lib/avr5/at90can128/Makefile
+	avr/lib/avr5/at90usb646/Makefile
+	avr/lib/avr5/at90usb647/Makefile
+	avr/lib/avr5/at90usb1286/Makefile
+	avr/lib/avr5/at90usb1287/Makefile
 	avr/lib/avr5/at94k/Makefile
 ])
 

@@ -1,3 +1,18 @@
+2006-03-21 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: add tests for the AT90USB646/647/1286/1287 support.
+	* devtools/gen-avr-lib-tree.sh: add support for AT90USB646/647/1286/1287.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iousb646.h: new file.
+	* include/avr/iousb647.h: new file.
+	* include/avr/iousb1286.h: new file.
+	* include/avr/iousb1287.h: new file.
+	* include/avr/iousbxx6_7.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for AT90USB646/647/1286/1287.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2006-03-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Jeff Dombach:
