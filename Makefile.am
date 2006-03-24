@@ -40,7 +40,7 @@ EXTRA_DIST = \
 DISTCHECK_CONFIGURE_FLAGS=--host=avr
 
 SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts
+DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools
 
 dist-hook:
 	cp avr-libc.spec $(distdir)/avr-libc.spec
