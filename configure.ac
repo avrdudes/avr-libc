@@ -556,6 +556,7 @@ AC_CONFIG_FILES([
 	libm/Makefile
 	libm/fplib/Makefile
 	scripts/Makefile
+	devtools/Makefile
 ])
 
 #avr1 and avr2

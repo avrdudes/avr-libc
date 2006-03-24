@@ -1,3 +1,11 @@
+2006-03-24 Anatoly Sokolov <aesok@post.ru>
+
+	* Makefile.am (DIST_SUBDIRS): Add 'devtools'.
+	* configure.ac (AC_CONFIG_FILES): Add 'devtools/Makefile'.
+	* devtools/.cvsignore: New file.
+	* devtools/Makefile.am; New file.
+	[Fixed bug #16039]
+
 2006-03-21 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: add tests for the AT90USB646/647/1286/1287 support.

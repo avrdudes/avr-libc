@@ -1,4 +1,4 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2006, Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -30,17 +30,6 @@
 #
 
 EXTRA_DIST = \
-	LICENSE \
-	bootstrap \
-	ChangeLog-2005 \
-	ChangeLog-2004 \
-	ChangeLog-2003 \
-	ChangeLog-2002
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+    cr_check.py \
+    gen-avr-lib-tree.sh \
+    make-binary-dist.sh
