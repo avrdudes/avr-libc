@@ -1,4 +1,4 @@
-/* Copyright (c) 2005 Anatoly Sokolov
+/* Copyright (c) 2005, 2006 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* avr/iomXX4.h - definitions for ATmega164, ATmega324, and ATmega644 */
+/* avr/iomXX4.h - definitions for ATmega164P/324P/644P and ATmega644 */
 
 /* $Id$ */
 

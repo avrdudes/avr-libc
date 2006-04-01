@@ -111,13 +111,13 @@ compile-time.
 - atmega161
 - atmega162
 - atmega163
-- atmega164
+- atmega164p
 - atmega165
 - atmega168
 - atmega169
 - atmega32
 - atmega323
-- atmega324
+- atmega324p
 - atmega325
 - atmega3250
 - atmega329
@@ -127,6 +127,7 @@ compile-time.
 - atmega64
 - atmega640
 - atmega644
+- atmega644p
 - atmega645
 - atmega6450
 - atmega649

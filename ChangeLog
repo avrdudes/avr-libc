@@ -1,3 +1,15 @@
+2006-04-01 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the ATmega644P support. Rename 
+	ATmega164/ATmega324 to ATmega164P/ATmega324P.
+	* devtools/gen-avr-lib-tree.sh: Add support for ATmega644P. Rename 
+	ATmega164/ATmega324 to ATmega164P/ATmega324P.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* doc/api/main_page.dox: Document support for ATmega644P. Rename 
+	ATmega164/ATmega324 to ATmega164P/ATmega324P.
+	* doc/api/using-tools.dox: (Ditto.)
+	
 2006-03-24 Anatoly Sokolov <aesok@post.ru>
 
 	* Makefile.am (DIST_SUBDIRS): Add 'devtools'.
