@@ -1,3 +1,7 @@
+2006-04-13 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotn2313.h(SPMEN, SELFPRGEN): Add.
+
 2006-04-01 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the ATmega644P support. Rename 
