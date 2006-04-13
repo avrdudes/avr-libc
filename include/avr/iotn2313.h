@@ -1,4 +1,4 @@
-/* Copyright (c) 2004,2005 Bob Paddock
+/* Copyright (c) 2004, 2005, 2006 Bob Paddock
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -453,7 +453,9 @@
 #define RFLB    3
 #define PGWRT   2
 #define PGERS   1
-#define SELFPRGE 0
+#define SPMEN   0   /* The name is used in ATtiny2313.xml file. */
+#define SELFPRGEN 0 /* The name is used in datasheet. */
+#define SELFPRGE  0 /* The name is left for compatibility. */
 
 /* ATtiny Timer/Counter Interrupt Flag register TIFR */
 #define TIFR    _SFR_IO8(0x38)
