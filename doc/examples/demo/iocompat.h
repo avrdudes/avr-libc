@@ -117,7 +117,9 @@
       defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) || \
       defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__) || \
       defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) || \
-      defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__)
+      defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__) || \
+      defined(__AVR_ATmega640__) || \
+      defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__)
 #  define OC1 PB5
 #  define DDROC DDRB
 #  define OCR OCR1A

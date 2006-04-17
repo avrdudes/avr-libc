@@ -1,3 +1,8 @@
+2006-04-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/iocompat.h: Add support for ATmega640/1280/1281.
+	* doc/examples/demo/Makefile: (Ditto.)
+
 2006-04-13 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iotn2313.h(SPMEN, SELFPRGEN): Add.
