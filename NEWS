@@ -12,7 +12,12 @@
   [#15890] missing /devtools/gen-avr-lib-tree.sh
   [#16039] Names in Pxy (i.e. PA0) style of ports pins for some devices are 
   not defined.
-  
+
+* Other changes:
+
+  - The simple demo has been ported to ATmega640, ATmega1280,
+    ATmega1281.
+
 * New devices supported:
 
   + ATmega406
