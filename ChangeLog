@@ -1,5 +1,12 @@
 2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by lx_b@gmx.at:
+	* include/avr/interrupt.h: improve C++ robustness of
+	ISR declarations.
+	Closes savannah bug #15732.
+
+2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Glenn Maynard <glenn@zewt.org>:
 	* include/util/crc16.h (_crc16_update): add equivalent C
 	implementation as documentation.
