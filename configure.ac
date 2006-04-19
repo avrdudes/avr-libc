@@ -459,8 +459,8 @@ AM_CONDITIONAL(HAS_atmega64, true)
 AM_CONDITIONAL(HAS_atmega128, true)
 AM_CONDITIONAL(HAS_at94k, true)
 
-CHECK_AVR_DEVICE(atmega164)
-AM_CONDITIONAL(HAS_atmega164, test "x$HAS_atmega164" = "xyes")
+CHECK_AVR_DEVICE(atmega164p)
+AM_CONDITIONAL(HAS_atmega164p, test "x$HAS_atmega164p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega165)
 AM_CONDITIONAL(HAS_atmega165, test "x$HAS_atmega165" = "xyes")
@@ -468,8 +468,8 @@ AM_CONDITIONAL(HAS_atmega165, test "x$HAS_atmega165" = "xyes")
 CHECK_AVR_DEVICE(atmega168)
 AM_CONDITIONAL(HAS_atmega168, test "x$HAS_atmega168" = "xyes")
 
-CHECK_AVR_DEVICE(atmega324)
-AM_CONDITIONAL(HAS_atmega324, test "x$HAS_atmega324" = "xyes")
+CHECK_AVR_DEVICE(atmega324p)
+AM_CONDITIONAL(HAS_atmega324p, test "x$HAS_atmega324p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega325)
 AM_CONDITIONAL(HAS_atmega325, test "x$HAS_atmega325" = "xyes")
@@ -491,6 +491,9 @@ AM_CONDITIONAL(HAS_atmega640, test "x$HAS_atmega640" = "xyes")
 
 CHECK_AVR_DEVICE(atmega644)
 AM_CONDITIONAL(HAS_atmega644, test "x$HAS_atmega644" = "xyes")
+
+CHECK_AVR_DEVICE(atmega644p)
+AM_CONDITIONAL(HAS_atmega644p, test "x$HAS_atmega644p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega645)
 AM_CONDITIONAL(HAS_atmega645, test "x$HAS_atmega645" = "xyes")
@@ -621,13 +624,13 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega161/Makefile
 	avr/lib/avr5/atmega162/Makefile
 	avr/lib/avr5/atmega163/Makefile
-	avr/lib/avr5/atmega164/Makefile
+	avr/lib/avr5/atmega164p/Makefile
 	avr/lib/avr5/atmega165/Makefile
 	avr/lib/avr5/atmega168/Makefile
 	avr/lib/avr5/atmega169/Makefile
 	avr/lib/avr5/atmega32/Makefile
 	avr/lib/avr5/atmega323/Makefile
-	avr/lib/avr5/atmega324/Makefile
+	avr/lib/avr5/atmega324p/Makefile
 	avr/lib/avr5/atmega325/Makefile
 	avr/lib/avr5/atmega3250/Makefile
 	avr/lib/avr5/atmega329/Makefile
@@ -636,6 +639,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega64/Makefile
 	avr/lib/avr5/atmega640/Makefile
 	avr/lib/avr5/atmega644/Makefile
+	avr/lib/avr5/atmega644p/Makefile
 	avr/lib/avr5/atmega645/Makefile
 	avr/lib/avr5/atmega6450/Makefile
 	avr/lib/avr5/atmega649/Makefile
