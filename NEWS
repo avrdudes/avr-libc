@@ -15,8 +15,8 @@
 
 * Other changes:
 
-  - The simple demo has been ported to ATmega640, ATmega1280,
-    ATmega1281.
+  - The simple demo has been ported to ATmega640, ATmega644P,
+    ATmega1280, ATmega1281.
 
 * New devices supported:
 
