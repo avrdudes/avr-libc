@@ -35,8 +35,8 @@
       defined(__AVR_AT90S4434__) || defined(__AVR_AT90S8535__) || \
       defined(__AVR_ATmega163__) || defined(__AVR_ATmega8515__) || \
       defined(__AVR_ATmega8535__) || \
-      defined(__AVR_ATmega164__) || defined(__AVR_ATmega324__) || \
-      defined(__AVR_ATmega644__)
+      defined(__AVR_ATmega164P__) || defined(__AVR_ATmega324P__) || \
+      defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__)
 #  define OC1 PD5
 #  define DDROC DDRD
 #  define OCR OCR1A

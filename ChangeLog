@@ -1,3 +1,9 @@
+2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/iocompat.h: Rename ATmega164/324 to
+	ATmega164P/324P, add support for ATmega644P.
+	* doc/examples/demo/Makefile: (Ditto.)
+
 2006-04-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/demo/iocompat.h: Add support for ATmega640/1280/1281.
