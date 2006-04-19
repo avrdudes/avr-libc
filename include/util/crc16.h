@@ -82,7 +82,29 @@
     Polynomial: x^16 + x^15 + x^2 + 1 (0xa001)<br>
     Initial value: 0xffff
 
-    This CRC is normally used in disk-drive controllers. */
+    This CRC is normally used in disk-drive controllers.
+
+    The following is the equivalent functionality written in C.
+
+    \code
+    uint16_t
+    crc16_update(uint16_t crc, uint8_t a)
+    {
+	int i;
+
+	crc ^= a;
+	for (i = 0; i < 8; ++i)
+	{
+	    if (crc & 1)
+		crc = (crc >> 1) ^ 0xA001;
+	    else
+		crc = (crc >> 1);
+	}
+
+	return crc;
+    }
+
+    \endcode */
 
 static __inline__ uint16_t
 _crc16_update(uint16_t __crc, uint8_t __data)
