@@ -1,13 +1,15 @@
 Installation instructions:
 
-1. Build and install the current released version of binutils, version 2.16
+1. Build and install the current released version of binutils, version 2.16.1
    (releases older than 2.13 are not supported), for AVR target
    (configure --target=avr).  See http://sources.redhat.com/binutils/ .
 
-2. Build and install the current released version of GCC, version 3.4.4
+2. Build and install the current released version of GCC, version 3.4.6
    (older releases older than 3.3 are not supported), for AVR target
    (configure --target=avr --enable-languages=c,c++).  C++ support is
    still experimental and incomplete (no libstdc++), and needs testing.
+
+   GCC 4.1.0 (or above) is supported as well.
 
 3. Now you can build and install avr-libc - type
 
