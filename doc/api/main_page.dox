@@ -113,8 +113,10 @@ compile-time.
 - atmega163
 - atmega164p
 - atmega165
+- atmega165p
 - atmega168
 - atmega169
+- atmega169p
 - atmega32
 - atmega323
 - atmega324p

@@ -69,6 +69,8 @@
   + ATmega164P (renamed from ATmega164)
   + ATmega324P (renamed from ATmega324)
   + ATmega644P
+  + ATmega165P
+  + ATmega169P
 
 * New functions: 
 

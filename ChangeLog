@@ -1,3 +1,15 @@
+2006-04-22 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the ATmega165P/169P support.
+	* devtools/gen-avr-lib-tree.sh: Add support for ATmega165P/169P.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iom165p.h: New file.
+	* include/avr/iom169p.h: New file.
+	* include/avr/Makefile.am: Include new files.
+	* doc/api/main_page.dox: Document support for ATmega165P/169P.
+	* doc/api/using-tools.dox: (Ditto.)
+	
 2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by lx_b@gmx.at:
