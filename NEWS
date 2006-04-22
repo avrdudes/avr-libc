@@ -1,5 +1,10 @@
 *** Changes since avr-libc-1.4.4:
 
+* New devices supported:
+
+  + ATmega165P
+  + ATmega169P
+  
 *** Changes in avr-libc-1.4.4:
 
 * Bugs fixed:

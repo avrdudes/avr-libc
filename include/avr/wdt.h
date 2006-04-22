@@ -115,13 +115,15 @@
 #endif
 
 
-#if defined (__AVR_ATmega169__) || defined(__AVR_AT90CAN128__) \
+#if defined(__AVR_AT90CAN128__) \
 || defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) \
 || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__) \
 || defined(__AVR_AT90USB1286__) || defined(__AVR_AT90USB1287__) \
 || defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
 || defined(__AVR_ATmega164P__) \
-|| defined(__AVR_ATmega165__) || defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega165__) || defined(__AVR_ATmega165P__) \
+|| defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega169__) || defined(__AVR_ATmega169P__) \
 || defined(__AVR_ATmeg324P__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) \

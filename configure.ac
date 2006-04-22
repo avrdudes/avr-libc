@@ -465,8 +465,14 @@ AM_CONDITIONAL(HAS_atmega164p, test "x$HAS_atmega164p" = "xyes")
 CHECK_AVR_DEVICE(atmega165)
 AM_CONDITIONAL(HAS_atmega165, test "x$HAS_atmega165" = "xyes")
 
+CHECK_AVR_DEVICE(atmega165p)
+AM_CONDITIONAL(HAS_atmega165p, test "x$HAS_atmega165p" = "xyes")
+
 CHECK_AVR_DEVICE(atmega168)
 AM_CONDITIONAL(HAS_atmega168, test "x$HAS_atmega168" = "xyes")
+
+CHECK_AVR_DEVICE(atmega169p)
+AM_CONDITIONAL(HAS_atmega169p, test "x$HAS_atmega169p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega324p)
 AM_CONDITIONAL(HAS_atmega324p, test "x$HAS_atmega324p" = "xyes")
@@ -626,8 +632,10 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega163/Makefile
 	avr/lib/avr5/atmega164p/Makefile
 	avr/lib/avr5/atmega165/Makefile
+	avr/lib/avr5/atmega165p/Makefile
 	avr/lib/avr5/atmega168/Makefile
 	avr/lib/avr5/atmega169/Makefile
+	avr/lib/avr5/atmega169p/Makefile
 	avr/lib/avr5/atmega32/Makefile
 	avr/lib/avr5/atmega323/Makefile
 	avr/lib/avr5/atmega324p/Makefile
