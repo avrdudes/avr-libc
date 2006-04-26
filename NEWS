@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.4.4:
 
+* Bugs fixed:
+
+  [#16441] eeprom.h should use __asm__
+
 * New devices supported:
 
   + ATmega165P

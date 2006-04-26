@@ -189,7 +189,7 @@ uint8_t
 eeprom_read_byte (const uint8_t *addr) 
 {
   uint8_t result;
-  asm volatile
+  __asm__ __volatile__
       ( XCALL " __eeprom_read_byte_" _REG_LOCATION_SUFFIX CR_TAB
         "mov %1,__tmp_reg__"
        : "+x" (addr),
@@ -205,7 +205,7 @@ eeprom_read_word (const uint16_t *addr)
 {
   uint16_t result;
 
-  asm ( 
+  __asm__ __volatile__ (
         XCALL " __eeprom_read_word_" _REG_LOCATION_SUFFIX CR_TAB
        : "+x" (addr),
          "=z" (result)
@@ -230,7 +230,7 @@ eeprom_read_block (void *pointer_ram,
       /* make sure size is a 16 bit variable.  */
       uint16_t size = n; 
 
-      asm volatile ( 
+      __asm__ __volatile__ ( 
             ".%=_start:" CR_TAB
             "sbiw %2,1" CR_TAB
             "brlt .%=_finished" CR_TAB
@@ -251,7 +251,7 @@ eeprom_read_block (void *pointer_ram,
         {
           if (n == 256)
             {
-              asm volatile (
+              __asm__ __volatile__ (
                   XCALL " __eeprom_read_block_" _REG_LOCATION_SUFFIX 
                 : "+x" (pointer_eeprom),
                   "=z" (pointer_ram)
@@ -264,7 +264,7 @@ eeprom_read_block (void *pointer_ram,
               uint8_t len;
               len = (uint8_t) n; 
 
-              asm volatile (
+              __asm__ __volatile__ (
                   "mov __zero_reg__,%2"      CR_TAB
                    XCALL " __eeprom_read_block_" _REG_LOCATION_SUFFIX 
                 : "+x" (pointer_eeprom),
@@ -283,7 +283,7 @@ eeprom_read_block (void *pointer_ram,
 void 
 eeprom_write_byte (uint8_t *addr,uint8_t value)
 {
-  asm volatile (
+  __asm__ __volatile__ (
          "mov __tmp_reg__,%1"      CR_TAB
          XCALL " __eeprom_write_byte_" _REG_LOCATION_SUFFIX
        : "+x" (addr)
@@ -298,7 +298,7 @@ eeprom_write_byte (uint8_t *addr,uint8_t value)
 void 
 eeprom_write_word (uint16_t *addr,uint16_t value)
 {
-  asm volatile (
+  __asm__ __volatile__ (
 #if __AVR_HAVE_MOVW__
          "movw __tmp_reg__,%A1" CR_TAB
 #else
@@ -327,7 +327,7 @@ eeprom_write_block (const void *pointer_ram,
       /* make sure size is a 16 bit variable.  */
       uint16_t size = n; 
 
-      asm volatile ( 
+      __asm__ __volatile__ ( 
             ".%=_start:" CR_TAB
             "sbiw %2,1" CR_TAB
             "brlt .%=_finished" CR_TAB
@@ -349,7 +349,7 @@ eeprom_write_block (const void *pointer_ram,
         {
           if (n == 256)
             {
-              asm volatile (
+              __asm__ __volatile__ (
                  XCALL " __eeprom_write_block_" _REG_LOCATION_SUFFIX
                : "+x" (pointer_eeprom),
                  "=z" (pointer_ram)
@@ -361,7 +361,7 @@ eeprom_write_block (const void *pointer_ram,
               uint8_t len;
               len = (uint8_t) n;
 
-              asm volatile (
+              __asm__ __volatile__ (
                  "mov __zero_reg__,%2" CR_TAB
                  XCALL " __eeprom_write_block_" _REG_LOCATION_SUFFIX
                : "+x" (pointer_eeprom),
