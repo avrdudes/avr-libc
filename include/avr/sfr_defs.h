@@ -41,14 +41,15 @@
    The \c <avr/sfr_defs.h> file is included by all of the \c <avr/ioXXXX.h>
    files, which use macros defined here to make the special function register
    definitions look like C variables or simple constants, depending on the
-   <tt>_SFR_ASM_COMPAT</tt> define.  Some examples from \c <avr/iom128.h> to
+   <tt>_SFR_ASM_COMPAT</tt> define.  Some examples from \c <avr/iocanxx.h> to
    show how to define such macros:
 
 \code
-#define PORTA _SFR_IO8(0x1b)
-#define TCNT1 _SFR_IO16(0x2c)
-#define PORTF _SFR_MEM8(0x61)
-#define TCNT3 _SFR_MEM16(0x88)
+#define PORTA   _SFR_IO8(0x02)
+#define EEAR    _SFR_IO16(0x21)
+#define UDR0    _SFR_MEM8(0xC6)
+#define TCNT3   _SFR_MEM16(0x94)
+#define CANIDT  _SFR_MEM32(0xF0)
 \endcode
 
    If \c _SFR_ASM_COMPAT is not defined, C programs can use names like
@@ -124,6 +125,7 @@
 
 #define _MMIO_BYTE(mem_addr) (*(volatile uint8_t *)(mem_addr))
 #define _MMIO_WORD(mem_addr) (*(volatile uint16_t *)(mem_addr))
+#define _MMIO_DWORD(mem_addr) (*(volatile uint32_t *)(mem_addr))
 #endif
 
 #if _SFR_ASM_COMPAT
@@ -140,6 +142,7 @@
 
 #define _SFR_MEM8(mem_addr) (mem_addr)
 #define _SFR_MEM16(mem_addr) (mem_addr)
+#define _SFR_MEM32(mem_addr) (mem_addr)
 #define _SFR_IO8(io_addr) ((io_addr) + __SFR_OFFSET)
 #define _SFR_IO16(io_addr) ((io_addr) + __SFR_OFFSET)
 
@@ -158,6 +161,7 @@
 
 #define _SFR_MEM8(mem_addr) _MMIO_BYTE(mem_addr)
 #define _SFR_MEM16(mem_addr) _MMIO_WORD(mem_addr)
+#define _SFR_MEM32(mem_addr) _MMIO_DWORD(mem_addr)
 #define _SFR_IO8(io_addr) _MMIO_BYTE((io_addr) + 0x20)
 #define _SFR_IO16(io_addr) _MMIO_WORD((io_addr) + 0x20)
 
@@ -171,6 +175,7 @@
 
 #define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
 #define _SFR_WORD(sfr) _MMIO_WORD(_SFR_ADDR(sfr))
+#define _SFR_DWORD(sfr) _MMIO_DWORD(_SFR_ADDR(sfr))
 
 /** \name Bit manipulation */
 

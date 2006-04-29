@@ -436,12 +436,16 @@
 #define CANCDMOB _SFR_MEM8(0xEF)
 
 /* RegDef:  CAN Identifier Tag Registers*/
+#define CANIDT  _SFR_MEM32(0xF0)
+
 #define CANIDT4 _SFR_MEM8(0xF0)
 #define CANIDT3 _SFR_MEM8(0xF1)
 #define CANIDT2 _SFR_MEM8(0xF2)
 #define CANIDT1 _SFR_MEM8(0xF3)
 
 /* RegDef:  CAN Identifier Mask Registers */
+#define CANIDM  _SFR_MEM32(0xF4)
+
 #define CANIDM4 _SFR_MEM8(0xF4)
 #define CANIDM3 _SFR_MEM8(0xF5)
 #define CANIDM2 _SFR_MEM8(0xF6)
