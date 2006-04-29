@@ -1,3 +1,8 @@
+2006-04-29 Anatoly Sokolov <aesok@post.ru>
+
+	* /include/avr/sfr_defs.h (_MMIO_DWORD, _SFR_MEM32, _SFR_DWORD): Add.
+	* /include/avr/iocanxx.h (CANIDT, CANIDM): Add.
+
 2006-04-26 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/eeprom.h: Use __asm__ in place of asm.
