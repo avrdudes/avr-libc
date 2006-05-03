@@ -1,4 +1,4 @@
-/* Copyright (c) 2004,2005, Colin O'Flynn <coflynn@newae.com>
+/* Copyright (c) 2004,2005,2006 Colin O'Flynn <coflynn@newae.com>
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -390,9 +390,12 @@
 #define CANIE1 _SFR_MEM8(0xDF)
 
 /* RegDef:  CAN Status Interrupt MOb Register*/
+/*
+ * WARNING: Do not apply the SIT8...SIT14 constants to bits in the CANSIT
+ * register.
+ */
+#define CANSIT  _SFR_MEM16(0xE0)
 #define CANSIT2 _SFR_MEM8(0xE0)
-
-/* RegDef:  CAN Status Interrupt MOb Register*/
 #define CANSIT1 _SFR_MEM8(0xE1)
 
 /* RegDef:  CAN Bit Timing Register 1*/
