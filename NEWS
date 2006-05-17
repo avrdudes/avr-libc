@@ -7,6 +7,7 @@
   [no-id]  LED1/2 don't work in the largedemo on an ATmega16.
   [no-id]  Not defined SPM_PAGESIZE for ATtinyX4/X5/X61 and ATtiny2313 devices.
   [no-id]  Typo in iomxx0_1.h: PRUSART3.
+  [no-id]  Make include/avr/sfr_defs.h -Wundef safe.
   [#15161] util/delay.h misses inline keyword (regression)
   [#15193] incorrect definition of IVSEL bit in MCUCR register
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.

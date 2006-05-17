@@ -1,3 +1,8 @@
+2006-05-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/sfr_defs.h: Ensure _SFR_ASM_COMPAT is defined before
+	it is used.  This makes it -Wundef safe.
+
 2006-05-03 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iocanxx.h (CANSIT): Add.
