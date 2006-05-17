@@ -117,6 +117,8 @@
 
 #ifdef __ASSEMBLER__
 #define _SFR_ASM_COMPAT 1
+#elif !defined(_SFR_ASM_COMPAT)
+#define _SFR_ASM_COMPAT 0
 #endif
 
 #ifndef __ASSEMBLER__
