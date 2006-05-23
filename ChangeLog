@@ -1,5 +1,9 @@
 2006-05-23 Anatoly Sokolov <aesok@post.ru>
 
+	* include/avr/iotnx5.h (LSM): Remove comment.
+
+2006-05-23 Anatoly Sokolov <aesok@post.ru>
+
 	* include/avr/eeprom.h: Turn #if on __AVR_HAVE_MOVW__ macro 
 	into #if defined(). This makes it -Wundef safe.
 
