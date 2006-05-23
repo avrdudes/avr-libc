@@ -299,7 +299,7 @@ void
 eeprom_write_word (uint16_t *addr,uint16_t value)
 {
   __asm__ __volatile__ (
-#if __AVR_HAVE_MOVW__
+#if defined(__AVR_HAVE_MOVW__)
          "movw __tmp_reg__,%A1" CR_TAB
 #else
          "mov __tmp_reg__,%A1"      CR_TAB
