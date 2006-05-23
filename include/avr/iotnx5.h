@@ -233,8 +233,6 @@
 #define CLKPS0  0
 
 #define PLLCSR  _SFR_IO8(0x27)
-/* The register summary calls this bit SM, but the register
- * description and the XML files call it LSM for low-speed mode.*/
 #define LSM     7
 #define PCKE    2
 #define PLLE    1
