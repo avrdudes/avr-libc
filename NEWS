@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [no-id]  Make include/avr/sfr_defs.h -Wundef safe.
+  [no-id]  Make include/avr/eeprom.h -Wundef safe.
   [#16441] eeprom.h should use __asm__
 
 * New devices supported:
