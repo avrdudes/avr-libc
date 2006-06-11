@@ -1,3 +1,8 @@
+2006-06-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by David Bourgeois <david.bourgeois@c2me.be>:
+	* doc/api/faq.dox (faq_rom_array): Fix a typo.
+
 2006-05-23 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iotnx5.h (LSM): Remove comment.

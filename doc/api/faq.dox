@@ -730,7 +730,7 @@ int main (void)
 }
 \endcode
 
-The result is not want you want though. What you end up with is the array
+The result is not what you want though. What you end up with is the array
 stored in ROM, while the individual strings end up in RAM (in the \c .data
 section).
 
