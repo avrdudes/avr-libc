@@ -1,3 +1,7 @@
+2006-06-24 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iousbxx6_7.h (PRST1, SOFEN): Define.
+	
 2006-06-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by David Bourgeois <david.bourgeois@c2me.be>:
