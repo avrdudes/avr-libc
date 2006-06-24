@@ -716,7 +716,7 @@
 #define UHCON   _SFR_MEM8(0x9E)
 #define RESUME  2
 #define RESET   1
-#define SOFE    0
+#define SOFEN   0
 
 #define UHINT   _SFR_MEM8(0x9F)
 #define HWUPI   6
@@ -766,7 +766,7 @@
 #define PRST4   4
 #define PRST3   3
 #define PRST2   2
-#define PRST2   1
+#define PRST1   1
 #define PRST0   0
 
 #define UPCONX  _SFR_MEM8(0xA9)
