@@ -134,11 +134,11 @@ void signame (void)
 
 #ifdef __cplusplus
 #define EMPTY_INTERRUPT(vector)                \
-extern "C" void vector(void) __attribute__ ((naked));    \
+extern "C" void vector(void) __attribute__ ((signal,naked));    \
 void vector (void) {  __asm__ __volatile__ ("reti" ::); }
 #else
 #define EMPTY_INTERRUPT(vector)                \
-void vector (void) __attribute__ ((naked));    \
+void vector (void) __attribute__ ((signal,naked));    \
 void vector (void) { __asm__ __volatile__ ("reti" ::); }
 #endif
 
