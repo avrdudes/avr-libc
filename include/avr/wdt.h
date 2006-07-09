@@ -124,7 +124,7 @@
 || defined(__AVR_ATmega165__) || defined(__AVR_ATmega165P__) \
 || defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega169__) || defined(__AVR_ATmega169P__) \
-|| defined(__AVR_ATmeg324P__) \
+|| defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega406__) \
