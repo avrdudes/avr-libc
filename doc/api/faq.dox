@@ -1,4 +1,4 @@
-/* Copyright (c) 2002-2005 Joerg Wunsch
+/* Copyright (c) 2002-2006 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -57,6 +57,7 @@
 -# \ref faq_intbits
 -# \ref faq_fuselow
 -# \ref faq_asmops
+-# \ref faq_spman
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1221,6 +1222,43 @@ programmed fuse cells read out as bit value 0.
 \section faq_asmops Which AVR-specific assembler operators are available?
 
 See \ref ass_pseudoops.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_spman Why are interrupts re-enabled in the middle of writing the stack pointer?
+
+When setting up space for local variables on the stack, the compiler
+generates code like this:
+
+\code
+/* prologue: frame size=20 */
+	push r28
+	push r29
+	in r28,__SP_L__
+	in r29,__SP_H__
+	sbiw r28,20
+	in __tmp_reg__,__SREG__
+	cli
+	out __SP_H__,r29
+	out __SREG__,__tmp_reg__
+	out __SP_L__,r28
+/* prologue end (size=10) */
+\endcode
+
+It reads the current stack pointer value, decrements it by the
+required amount of bytes, then disables interrupts, writes back the
+high part of the stack pointer, writes back the saved \c SREG (which
+will eventually re-enable interrupts if they have been enabled
+before), and finally writes the low part of the stack pointer.
+
+At the first glance, there's a race between restoring \c SREG, and
+writing \c SPL.  However, after enabling interrupts (either explicitly
+by setting the \c I flag, or by restoring it as part of the entire
+\c SREG), the AVR hardware executes (at least) the next instruction
+still with interrupts disabled, so the write to \c SPL is guaranteed
+to be executed with interrupts disabled still.  Thus, the emitted
+sequence ensures interrupts will be disabled only for the minimum
+time required to guarantee the integrity of this operation.
 
 <small>Back to \ref faq_index.</small>
 
