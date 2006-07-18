@@ -1,3 +1,8 @@
+2006-07-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_spman): New entry about the SP manipulation
+	in function prologues/epilogues.
+
 2006-07-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Guohui Wang <info@Atmanecl.net>:
