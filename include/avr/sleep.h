@@ -137,7 +137,7 @@
     will be prepared, and the \c SLEEP instruction will be scheduled
     immediately after an \c SEI instruction.  As the intruction right
     after the \c SEI is guaranteed to be executed before an interrupt
-    could trigger, it is sure the device will really be put on sleep.
+    could trigger, it is sure the device will really be put to sleep.
 */
 
 

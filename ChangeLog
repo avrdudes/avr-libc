@@ -1,3 +1,9 @@
+2006-07-25 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/power.h: New file. Provides a Power Management API.
+	* include/avr/sleep.h: Fix grammar error in doxygen comment.
+	* NEWS: New Power Management API.
+
 2006-07-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox (faq_spman): New entry about the SP manipulation

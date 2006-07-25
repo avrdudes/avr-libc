@@ -29,6 +29,10 @@
 
 * Other changes:
 
+  - New Power Management API in <avr/power.h>. This provides C language
+    macros to manipulate the Power Reduction Register(s) across multiple
+    processors.
+
   [patch #4611] sleep.h sleep_mode() not interrupt safe
 
   - The simple demo has been modernized a bit.  Documentation now

@@ -123,6 +123,7 @@ avr_HEADERS = \
     parity.h \
     pgmspace.h \
     portpins.h \
+    power.h \
     sfr_defs.h \
     signal.h \
     sleep.h \
