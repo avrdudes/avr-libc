@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, Joerg Wunsch
+/* Copyright (c) 2005,2006 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -248,6 +248,12 @@ attached to, based on the application's definitions made in
 
 The \c hd44780_pulse_e() function asserts a short pulse to the
 controller's E (enable) pin.
+Since reading back the data asserted by the LCD controller needs
+to be performed while E is active, this function reads and returns
+the input data if the parameter \c readback is true.
+When called with a compile-time constant parameter that is false,
+the compiler will completely eliminate the unused readback operation,
+as well as the return value as part of its optimizations.
 
 As the controller is used in 4-bit interface mode, all byte IO to/from
 the controller needs to be handled as two nibble IOs.  The functions

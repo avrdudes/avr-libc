@@ -1,3 +1,13 @@
+2006-08-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fixes to the HD44780 driver; thanks to Knut Schwichtenberg
+	for pointing this out, and helping in testing it.
+	* doc/examples/stdiodemo/hd44780.c: Fix timing issues.  The
+	values read back from the HD44780 need to be sampled while
+	E is asserted.
+	* doc/examples/stdiodemo/stdiodemo.dox: Document the new
+	approach of the E pulse generation.
+
 2006-07-25 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* include/avr/power.h: New file. Provides a Power Management API.
