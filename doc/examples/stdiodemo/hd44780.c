@@ -16,6 +16,7 @@
 
 #include "defines.h"
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #include <avr/io.h>
@@ -39,19 +40,50 @@
 
 /*
  * Send one pulse to the E signal (enable).  Mind the timing
- * constraints.
+ * constraints.  If readback is set to true, read the HD44780 data
+ * pins right before the falling edge of E, and return that value.
  */
-static inline void
-hd44780_pulse_e(void)
+static inline uint8_t
+hd44780_pulse_e(bool readback) __attribute__((always_inline));
+
+static inline uint8_t
+hd44780_pulse_e(bool readback)
 {
+  uint8_t x;
 
   HD44780_PORTOUT |= _BV(HD44780_E);
+  /*
+   * Guarantee at least 500 ns of pulse width.  For high CPU
+   * frequencies, a delay loop is used.  For lower frequencies, NOPs
+   * are used, and at or below 1 MHz, the native pulse width will
+   * already be 1 us or more so no additional delays are needed.
+   */
 #if F_CPU > 4000000UL
-  _delay_us(0.5);		/* guarantee 500 ns high */
-#elif F_CPU > 2000000UL
+  _delay_us(0.5);
+#else
+  /*
+   * When reading back, we need one additional NOP, as the value read
+   * back from the input pin is sampled close to the beginning of a
+   * CPU clock cycle, while the previous edge on the output pin is
+   * generated towards the end of a CPU clock cycle.
+   */
+  if (readback)
+    __asm__ volatile("nop");
+#  if F_CPU > 1000000UL
   __asm__ volatile("nop");
+#    if F_CPU > 2000000UL
+  __asm__ volatile("nop");
+  __asm__ volatile("nop");
+#    endif /* F_CPU > 2000000UL */
+#  endif /* F_CPU > 1000000UL */
 #endif
+  if (readback)
+    x = HD44780_PORTIN & HD44780_DATABITS;
+  else
+    x = 0;
   HD44780_PORTOUT &= ~_BV(HD44780_E);
+
+  return x;
 }
 
 /*
@@ -69,7 +101,7 @@ hd44780_outnibble(uint8_t n, uint8_t rs)
     HD44780_PORTOUT &= ~_BV(HD44780_RS);
   x = (HD44780_PORTOUT & ~HD44780_DATABITS) | (n & HD44780_DATABITS);
   HD44780_PORTOUT = x;
-  hd44780_pulse_e();
+  (void)hd44780_pulse_e(false);
 }
 
 /*
@@ -97,8 +129,7 @@ hd44780_innibble(uint8_t rs)
     HD44780_PORTOUT |= _BV(HD44780_RS);
   else
     HD44780_PORTOUT &= ~_BV(HD44780_RS);
-  hd44780_pulse_e();
-  x = HD44780_PORTIN & HD44780_DATABITS;
+  x = hd44780_pulse_e(true);
   HD44780_DDR |= HD44780_DATABITS;
   HD44780_PORTOUT &= ~_BV(HD44780_RW);
 
