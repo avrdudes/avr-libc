@@ -1,3 +1,9 @@
+2006-08-18 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/power.h: New file. Provides a Power Management API.
+	* include/avr/sleep.h: Fix grammar errors in doxygen comment.
+	* NEWS: New Power Management API.
+
 2006-08-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fixes to the HD44780 driver; thanks to Knut Schwichtenberg

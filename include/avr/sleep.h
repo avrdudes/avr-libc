@@ -101,7 +101,7 @@
     There are several macros provided in this header file to actually
     put the device into sleep mode.  The simplest way is to optionally
     set the desired sleep mode using \c set_sleep_mode() (it usually
-    defaults to idle mode where the CPU is put on sleep but all
+    defaults to idle mode where the CPU is put to sleep but all
     peripheral clocks are still running), and then call
     \c sleep_mode().  Unless it is the purpose to lock the CPU hard
     (until a hardware reset), interrupts need to be enabled at this
@@ -137,7 +137,7 @@
     will be prepared, and the \c SLEEP instruction will be scheduled
     immediately after an \c SEI instruction.  As the intruction right
     after the \c SEI is guaranteed to be executed before an interrupt
-    could trigger, it is sure the device will really be put on sleep.
+    could trigger, it is sure the device will really be put to sleep.
 */
 
 
