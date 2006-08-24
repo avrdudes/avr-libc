@@ -90,11 +90,11 @@ extern void cli(void);
 
 #ifdef __cplusplus
 #define ISR(vector)					\
-extern "C" void vector(void) __attribute__ ((signal));	\
+extern "C" void vector(void) __attribute__ ((signal,used));	\
 void vector (void)
 #else
 #define ISR(vector)					\
-void vector (void) __attribute__ ((signal));		\
+void vector (void) __attribute__ ((signal,used));		\
 void vector (void)
 #endif
 
@@ -113,11 +113,11 @@ void vector (void)
 
 #ifdef __cplusplus
 #define SIGNAL(signame)					\
-extern "C" void signame(void) __attribute__ ((signal));	\
+extern "C" void signame(void) __attribute__ ((signal,used));	\
 void signame (void)
 #else
 #define SIGNAL(signame)					\
-void signame (void) __attribute__ ((signal));		\
+void signame (void) __attribute__ ((signal,used));		\
 void signame (void)
 #endif
 
@@ -134,11 +134,11 @@ void signame (void)
 
 #ifdef __cplusplus
 #define EMPTY_INTERRUPT(vector)                \
-extern "C" void vector(void) __attribute__ ((signal,naked));    \
+extern "C" void vector(void) __attribute__ ((signal,naked,used));    \
 void vector (void) {  __asm__ __volatile__ ("reti" ::); }
 #else
 #define EMPTY_INTERRUPT(vector)                \
-void vector (void) __attribute__ ((signal,naked));    \
+void vector (void) __attribute__ ((signal,naked,used));    \
 void vector (void) { __asm__ __volatile__ ("reti" ::); }
 #endif
 

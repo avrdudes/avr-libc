@@ -24,6 +24,7 @@
   [#16039] Names in Pxy (i.e. PA0) style of ports pins for some devices are
            not defined.
   [#16260] _crc16_update lacks C equivalent
+  [#16411] Add the 'used' attribute to all interrupt service routine macros.
   [#16434] EMPTY_INTERRUPT has no misspelled vector checking
   [#16441] eeprom.h should use __asm__
   [#17068] wdt.h file: __AVR_ATmeg324P__ spelling mistake
