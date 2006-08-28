@@ -1,3 +1,11 @@
+2006-08-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/Makefile: Catch binutils 2.17 flagging
+	an error for the empty .eeprom section.
+	* doc/examples/demo/demo.dox: Explain binutils 2.17's
+	changed behaviour in avr-objcopy when trying to copy an
+	empty .eeprom section.
+
 2006-08-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fixes to the HD44780 driver; thanks to Knut Schwichtenberg

@@ -281,6 +281,12 @@ The resulting \c demo_eeprom.hex file contains:
 
 which is an empty \c .hex file (which is expected, since we didn't define any
 EEPROM variables).
+Starting with version 2.17 of the GNU binutils, the \c avr-objcopy
+command that used to generate the empty EEPROM files now aborts
+because of the empty input section \c .eeprom, so these empty files
+are not generated.  It also signals an error to the Makefile which
+will be caught there, and makes it print a message about the empty
+file not being generated.
 
 \section demo_make Letting Make Build the Project
 
