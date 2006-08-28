@@ -1,3 +1,11 @@
+2006-08-28 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Additional fix for bug #16411.
+	* include/avr/interrupt.h: Add the 'externally_visible' attribute on all
+	interrupt service routine macros.
+	* include/compat/deprecated.h: Add the 'externally_visible' attribute on the
+	INTERRUPT macro.
+
 2006-08-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/demo/Makefile: Catch binutils 2.17 flagging
@@ -5,6 +13,15 @@
 	* doc/examples/demo/demo.dox: Explain binutils 2.17's
 	changed behaviour in avr-objcopy when trying to copy an
 	empty .eeprom section.
+
+2006-08-24 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix for bug #16411.
+	* include/avr/interrupt.h: Add the 'used' attribute on all interrupt
+	service routine macros.
+	* include/compat/deprecated.h: Add the 'used' attribute on the INTERRUPT
+	macro.
+	* NEWS: Add to fixed bug list.
 
 2006-08-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

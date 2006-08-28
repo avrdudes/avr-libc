@@ -129,11 +129,11 @@ static __inline__ void timer_enable_int (unsigned char ints)
 #ifdef __cplusplus
 #define INTERRUPT(signame)				\
 extern "C" void signame(void);				\
-void signame (void) __attribute__ ((interrupt,used));	\
+void signame (void) __attribute__ ((interrupt,used,externally_visible));	\
 void signame (void)
 #else
 #define INTERRUPT(signame)				\
-void signame (void) __attribute__ ((interrupt,used));	\
+void signame (void) __attribute__ ((interrupt,used,externally_visible));	\
 void signame (void)
 #endif
 
