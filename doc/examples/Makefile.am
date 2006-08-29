@@ -34,6 +34,10 @@
 MAINTAINERCLEANFILES = Makefile.in
 
 DEMO_SRCS            = \
+                       asmdemo/Makefile \
+                       asmdemo/asmdemo.c \
+                       asmdemo/isrs.S \
+                       asmdemo/project.h \
                        demo/Makefile \
                        demo/demo.c \
                        demo/iocompat.h \
@@ -51,13 +55,15 @@ DEMO_SRCS            = \
                        twitest/Makefile \
                        twitest/twitest.c
 
-DEMO_DIRS            = demo \
+DEMO_DIRS            = asmdemo \
+                       demo \
                        largedemo \
                        stdiodemo \
                        twitest
 
 EXTRA_DIST           = ${DEMO_SRCS} \
                        all-demos.dox \
+                       asmdemo/asmdemo.dox \
                        demo/demo.fig \
                        demo/demo.dox \
                        largedemo/largedemo-setup.jpg \
