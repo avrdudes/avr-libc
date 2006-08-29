@@ -1,4 +1,4 @@
-/* Copyright (c) 2004,2005 Joerg Wunsch
+/* Copyright (c) 2004-2006 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -53,6 +53,19 @@
   The \ref twi_demo project explains the use of the two-wire hardware
   interface (also known as "I2C") that is present on many AVR
   controllers.
+
+  Finally, the \ref asmdemo demo shows how C and assembly language
+  source files can collaborate within one project.  While the overall
+  project is managed by a C program part for easy maintenance,
+  time-critical parts are written directly in manually optimized
+  assembly language for shortest execution times possible.  Naturally,
+  this kind of project is very closely tied to the hardware design,
+  thus it is custom-tailored to a particular controller type and
+  peripheral setup.  As an alternative to the assembly-language
+  solution, this project also offers a C-only implementation
+  (deploying the exact same peripheral setup) based on a more
+  sophisticated (and thus more expensive) but pin-compatible
+  controller.
 
   While the simple demo is meant to run on about any AVR setup
   possible where a LED could be connected to the OCR1[A] output,

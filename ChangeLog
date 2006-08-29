@@ -1,3 +1,18 @@
+2006-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add the new "asmdemo" example.  It demonstrates how C and assembly
+	source files could be used within one project.
+	* doc/examples/asmdemo: (New directory.)
+	* doc/examples/asmdemo/asmdemo.c: (New file.) asmdemo implementation.
+	* doc/examples/asmdemo/isrs.S: (Ditto.)
+	* doc/examples/asmdemo/project.h: (Ditto.)
+	* doc/examples/asmdemo/Makefile: (Ditto.)
+	* doc/examples/asmdemo/asmdemo.dox: (New file.) Document the asmdemo.
+	* doc/examples/Makefile.am: Wire the asmdemo into the build and
+	distribution process.
+	* doc/examples/all-demos.dox: Add a paragraph about the purpose of
+	this new demo, including a reference to it.
+
 2006-08-28 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	Additional fix for bug #16411.

@@ -1,0 +1,236 @@
+/* Copyright (c) 2006, Joerg Wunsch
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+   * Neither the name of the copyright holders nor the names of
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \defgroup asmdemo Combining C and assembly source files
+    \ingroup demos
+
+For time- or space-critical applications, it can often be desirable to
+combine C code (for easy maintenance) and assembly code (for maximal
+speed or minimal code size) together.  This demo provides an example
+of how to do that.
+
+The objective of the demo is to decode radio-controlled model PWM
+signals, and control an output PWM based on the current input signal's
+value.  The incoming PWM pulses follow a standard encoding scheme
+where a pulse width of 920 microseconds denotes one end of the scale
+(represented as 0 % pulse width on output), and 2120 microseconds mark
+the other end (100 % output PWM).  Normally, multiple channels would
+be encoded that way in subsequent pulses, followed by a larger gap, so
+the entire frame will repeat each 14 through 20 ms, but this is
+ignored for the purpose of the demo, so only a single input PWM
+channel is assumed.
+
+The basic challenge is to use the cheapest controller available for
+the task, an ATtiny13 that has only a single timer channel.  As this
+timer channel is required to run the outgoing PWM signal generation,
+the incoming PWM decoding had to be adjusted to the constraints set by
+the outgoing PWM.
+
+As PWM generation toggles the counting direction of timer 0 between up
+and down after each 256 timer cycles, the current time cannot be
+deduced by reading TCNT0 only, but the current counting direction of
+the timer needs to be considered as well.  This requires servicing
+interrupts whenever the timer hits \e TOP (255) and \e BOTTOM (0) to
+learn about each change of the counting direction.  For PWM
+generation, it is usually desired to run it at the highest possible
+speed so filtering the PWM frequency from the modulated output signal
+is made easy.  Thus, the PWM timer runs at full CPU speed.  This
+causes the overflow and compare match interrupts to be triggered each
+256 CPU clocks, so they must run with the minimal number of processor
+cycles possible in order to not impose a too high CPU load by these
+interrupt service routines.  This is the main reason to implement the
+entire interrupt handling in fine-tuned assembly code rather than in
+C.
+
+In order to verify parts of the algorithm, and the underlying
+hardware, the demo has been set up in a way so the pin-compatible but
+more expensive ATtiny45 (or its siblings ATtiny25 and ATtiny85) could
+be used as well.  In that case, no separate assembly code is required,
+as two timer channels are avaible.
+
+\section asmdemo_hw Hardware setup
+
+The incoming PWM pulse train is fed into PB4.  It will generate a pin
+change interrupt there on eache edge of the incoming signal.
+
+The outgoing PWM is generated through OC0B of timer channel 0 (PB1).
+For demonstration purposes, a LED should be connected to that pin
+(like, one of the LEDs of an STK500).
+
+The controllers run on their internal calibrated RC oscillators, 1.2
+MHz on the ATtiny13, and 1.0 MHz on the ATtiny45.
+
+\section asmdemo_code A code walkthrough
+
+\subsection asmdemo_main asmdemo.c
+
+After the usual include files, two variables are defined.  The first
+one, \c pwm_incoming is used to communicate the most recent
+pulse width detected by the incoming PWM decoder up to the main loop.
+
+The second variable actually only constitutes of a single bit,
+<tt>intbits.pwm_received</tt>.  This bit will be set whenever the
+incoming PWM decoder has updated <tt>pwm_incoming</tt>.
+
+Both variables are marked \e volatile to ensure their readers will
+always pick up an updated value, as both variables will be set by
+interrupt service routines.
+
+The function \c ioinit() initializes the microcontroller peripheral
+devices.  In particular, it starts timer 0 to generate the outgoing
+PWM signal on OC0B.  Setting OCR0A to 255 (which is the \e TOP value
+of timer 0) is used to generate a timer 0 overflow A interrupt on the
+ATtiny13.  This interrupt is used to inform the incoming PWM decoder
+that the counting direction of channel 0 is just changing from up to
+down.  Likewise, an overflow interrupt will be generated whenever the
+countdown reached \e BOTTOM (value 0), where the counter will again
+alter its counting direction to upwards.  This information is needed
+in order to know whether the current counter value of \c TCNT0 is to
+be evaluated from bottom or top.
+
+Further, \c ioinit() activates the pin-change interrupt \c PCINT0 on
+any edge of PB4.  Finally, PB1 (OC0B) will be activated as an output
+pin, and global interrupts are being enabled.
+
+In the ATtiny45 setup, the C code contains an ISR for \c PCINT0.  At
+each pin-change interrupt, it will first be analyzed whether the
+interrupt was caused by a rising or a falling edge.  In case of the
+rising edge, timer 1 will be started with a prescaler of 16 after
+clearing the current timer value.  Then, at the falling edge, the
+current timer value will be recorded (and timer 1 stopped), the
+pin-change interrupt will be suspended, and the upper layer will be
+notified that the incoming PWM measurement data is available.
+
+Function \c main() first initializes the hardware by calling
+\c ioinit(), and then waits until some incoming PWM value is
+available.  If it is, the output PWM will be adjusted by computing
+the relative value of the incoming PWM.  Finally, the pin-change
+interrupt is re-enabled, and the CPU is put to sleep.
+
+
+\subsection asmdemo_project project.h
+
+In order for the interrupt service routines to be as fast as possible,
+some of the CPU registers are set aside completely for use by these
+routines, so the compiler would not use them for C code.  This is
+arranged for in <tt>project.h</tt>.
+
+The file is divided into one section that will be used by the assembly
+source code, and another one to be used by C code.  The assembly part
+is distinguished by the preprocessing macro \t __ASSEMBLER__ (which
+will be automatically set by the compiler front-end when preprocessing
+an assembly-language file), and it contains just macros that give
+symbolic names to a number of CPU registers.  The preprocessor will
+then replace the symbolic names by their right-hand side definitions
+before calling the assembler.
+
+In C code, the compiler needs to see variable declarations for these
+objects.  This is done by using declarations that bind a variable
+permanently to a CPU register (see \ref faq_regbind).  Even in case
+the C code never has a need to access these variables, declaring the
+register binding that way causes the compiler to not use these
+registers in C code at all.
+
+The \c flags variable needs to be in the range of r16 through r31 as
+it is the target of a <em>load immediate</em> (or \c SER) instruction
+that is not applicable to the entire register file.
+
+
+\subsection asmdemo_isrs isrs.S
+
+This file is a preprocessed assembly source file.  The C preprocessor
+will be run by the compiler front-end first, resolving all \c #include,
+\c #define etc. directives.  The resulting program text will then be
+passed on to the assembler.
+
+As the C preprocessor strips all C-style comments, preprocessed
+assembly source files can have both, C-style (<tt>/* ... */</tt>,
+<tt>// ...</tt>) as well as assembly-style (<tt>; ...</tt>) comments.
+
+At the top, the IO register definition file <tt>avr/io.h</tt> and the
+project declaration file <tt>project.h</tt> are included.  The
+remainder of the file is conditionally assembled only if the target
+MCU type is an ATtiny13, so it will be completely ignored for the
+ATtiny45 option.
+
+Next are the two interrupt service routines for timer 0 compare A
+match (timer 0 hits \e TOP, as OCR0A is set to 255) and timer 0
+overflow (timer 0 hits \e BOTTOM).  As discussed above, these are kept
+as short as possible.  They only save \c SREG (as the flags will be
+modified by the \c INC instruction), increment the \c counter_hi
+variable which forms the high part of the current time counter (the
+low part is formed by querying \c TCNT0 directly), and clear or set
+the variable \c flags, respectively, in order to note the current
+counting direction.  The \c RETI instruction terminates these
+interrupt service routines.  Total cycle count is 8 CPU cycles, so
+together with the 4 CPU cycles needed for interrupt setup, and the 2
+cycles for the RJMP from the interrupt vector to the handler, these
+routines will require 14 out of each 256 CPU cycles, or about 5 % of
+the overall CPU time.
+
+The pin-change interrupt \c PCINT0 will be handled in the final part
+of this file.  The basic algorithm is to quickly evaluate the current
+system time by fetching the current timer value of \c TCNT0, and
+combining it with the overflow part in \c counter_hi.  If the counter
+is currently counting down rather than up, the value fetched from
+\c TCNT0 must be negated.  Finally, if this pin-change interrupt was
+triggered by a rising edge, the time computed will be recorded as the
+start time only.  Then, at the falling edge, this start time will be
+subracted from the current time to compute the actual pulse width seen
+(left in \c pwm_incoming), and the upper layers are informed of the
+new value by setting bit 0 in the \c intbits flags.  At the same time,
+this pin-change interrupt will be disabled so no new measurement can
+be performed until the upper layer had a chance to process the current
+value.
+
+
+\section asmdemo_src The source code
+
+\htmlonly
+<ul>
+  <li><a href="../examples/asmdemo/asmdemo.c">asmdemo.c</a></li>
+  <li><a href="../examples/asmdemo/project.h">project.h</a></li>
+  <li><a href="../examples/asmdemo/isrs.S">isrs.S</a></li>
+</li>
+\endhtmlonly
+
+\latexonly
+The source code is installed under
+
+\texttt{\$prefix/share/doc/avr-libc/examples/asmdemo/},
+
+where \texttt{\$prefix} is a configuration option.  For Unix
+systems, it is usually set to either \texttt{/usr} or
+\texttt{/usr/local}.
+\endlatexonly
+
+*/
