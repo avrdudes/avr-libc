@@ -1,6 +1,6 @@
 /* Copyright (c) 2002, 2004 Theodore A. Roth
    Copyright (c) 2004 Eric B. Weddington
-   Copyright (c) 2005 Joerg Wunsch
+   Copyright (c) 2005, 2006 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -161,9 +161,6 @@
 /*
  * Type 2 devices are not completely identical, so we need a few
  * #ifdefs here.
- *
- * Note that it appears the datasheet of the tiny2313 has the bottom
- * two lines of table 13 with the wrong SM0/SM1 values.
  */
 #define SLEEP_MODE_IDLE         0
 
@@ -173,10 +170,16 @@
 # define SLEEP_MODE_ADC          _BV(SM0)
 #endif /* !defined(__AVR_ATtiny2313__) && !defined(__AVR_AT94K__) */
 
-#define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+#if defined(__AVR_ATtiny2313__)
+# define SLEEP_MODE_PWR_DOWN     (_BV(SM0) | _BV(SM1))
+#else  /* not an ATtiny2313 */
+# define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+#endif /* defined(__AVR_ATtiny2313__) */
 
-#if defined(__AVR_ATtiny2313__) || defined(__AVR_ATtiny26__)
 /* tiny2313 and tiny26 have standby rather than powersave */
+#if defined(__AVR_ATtiny2313__)
+# define SLEEP_MODE_STANDBY      _BV(SM1)
+#elif defined(__AVR_ATtiny26__)
 # define SLEEP_MODE_STANDBY      (_BV(SM0) | _BV(SM1))
 #elif !defined(__AVR_ATtiny13__)
 /* SM0|SM1 is reserved on the tiny13 */
