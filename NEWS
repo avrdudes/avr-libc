@@ -5,6 +5,7 @@
   [no-id]  Make include/avr/sfr_defs.h -Wundef safe.
   [no-id]  Make include/avr/eeprom.h -Wundef safe.
   [no-id]  Fix the timing of the HD44780 driver in the stdiodemo.
+  [#15512] Bootloader macros not interrupt safe.
   [#16434] EMPTY_INTERRUPT has no misspelled vector checking
   [#16411] Add 'used' and 'externally_visible' attributes to all ISR macros.
   [#16441] eeprom.h should use __asm__

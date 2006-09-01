@@ -41,6 +41,11 @@
     bootloader support functionality of certain AVR processors. These
     macros are designed to work with all sizes of flash memory.
 
+    Global interrupts are not automatically disabled for these macros. It
+    is left up to the programmer to do this. See the code example below. 
+    Also see the processor datasheet for caveats on having global interrupts 
+    enabled during writing of the Flash.
+
     \note Not all AVR processors provide bootloader support. See your
     processor datasheet to see if it provides bootloader support.
 
