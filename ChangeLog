@@ -1,3 +1,12 @@
+2006-09-01 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix for bug #16411.
+	* include/avr/interrupt.h: Conditionally compile 'used' and 
+	'externally_visible' attributes on interrupt macros based on compiler
+	version.
+	* include/compat/deprecated: Ditto.
+	* NEWS: Update fixed bug list.
+
 2006-08-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/sleep.h: Fix the entry for the ATtiny2313, the revision
