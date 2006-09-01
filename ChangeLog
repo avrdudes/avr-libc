@@ -1,5 +1,12 @@
 2006-09-01 Eric B. Weddington <eweddington@cso.atmel.com>
 
+	Fix for bug #15512.
+	* include/avr/boot.h: Add more documentation describing that global
+	interrupts are not disabled for these macros.
+	* NEWS: Update fixed bug list.
+
+2006-09-01 Eric B. Weddington <eweddington@cso.atmel.com>
+
 	Additional fix for bug #16411.
 	* include/avr/interrupt.h: Conditionally compile 'used' and 
 	'externally_visible' attributes on interrupt macros based on compiler

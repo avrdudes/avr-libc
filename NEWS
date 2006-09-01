@@ -15,6 +15,7 @@
   [#15193] incorrect definition of IVSEL bit in MCUCR register
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.
   [#15494] Compile warning and errors if compiler flag -Wundef flag specified
+  [#15512] Bootloader macros not interrupt safe.
   [#15519] AT90CAN* processors incorrectly identified as "AT90S family"
   [#15522] Typo in iotn2313.h vector table
   [#15559] Wrong macro for boot_page_write(address) and ATmega128
