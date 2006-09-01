@@ -126,14 +126,20 @@ static __inline__ void timer_enable_int (unsigned char ints)
     \ref attr_interrupt "above".
 */
 
+#if __GNUC__ >= 4 && __GNUC_MINOR__ >= 1
+#  define __INTR_ATTRS used, externally_visible
+#else /* GCC < 4.1 */
+#  define __INTR_ATTRS used
+#endif
+
 #ifdef __cplusplus
 #define INTERRUPT(signame)				\
 extern "C" void signame(void);				\
-void signame (void) __attribute__ ((interrupt,used,externally_visible));	\
+void signame (void) __attribute__ ((interrupt,__INTR_ATTRS));	\
 void signame (void)
 #else
 #define INTERRUPT(signame)				\
-void signame (void) __attribute__ ((interrupt,used,externally_visible));	\
+void signame (void) __attribute__ ((interrupt,__INTR_ATTRS));	\
 void signame (void)
 #endif
 

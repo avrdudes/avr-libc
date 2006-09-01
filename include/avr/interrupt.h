@@ -88,13 +88,19 @@ extern void cli(void);
     valid for the particular MCU type.
 */
 
+#if __GNUC__ >= 4 && __GNUC_MINOR__ >= 1
+#  define __INTR_ATTRS used, externally_visible
+#else /* GCC < 4.1 */
+#  define __INTR_ATTRS used
+#endif
+
 #ifdef __cplusplus
 #define ISR(vector)					\
-extern "C" void vector(void) __attribute__ ((signal,used,externally_visible));	\
+extern "C" void vector(void) __attribute__ ((signal,__INTR_ATTRS));	\
 void vector (void)
 #else
 #define ISR(vector)					\
-void vector (void) __attribute__ ((signal,used,externally_visible));		\
+void vector (void) __attribute__ ((signal,__INTR_ATTRS));		\
 void vector (void)
 #endif
 
@@ -113,11 +119,11 @@ void vector (void)
 
 #ifdef __cplusplus
 #define SIGNAL(signame)					\
-extern "C" void signame(void) __attribute__ ((signal,used,externally_visible));	\
+extern "C" void signame(void) __attribute__ ((signal,__INTR_ATTRS));	\
 void signame (void)
 #else
 #define SIGNAL(signame)					\
-void signame (void) __attribute__ ((signal,used,externally_visible));		\
+void signame (void) __attribute__ ((signal,__INTR_ATTRS));		\
 void signame (void)
 #endif
 
@@ -134,11 +140,11 @@ void signame (void)
 
 #ifdef __cplusplus
 #define EMPTY_INTERRUPT(vector)                \
-extern "C" void vector(void) __attribute__ ((signal,naked,used,externally_visible));    \
+extern "C" void vector(void) __attribute__ ((signal,naked,__INTR_ATTRS));    \
 void vector (void) {  __asm__ __volatile__ ("reti" ::); }
 #else
 #define EMPTY_INTERRUPT(vector)                \
-void vector (void) __attribute__ ((signal,naked,used,externally_visible));    \
+void vector (void) __attribute__ ((signal,naked,__INTR_ATTRS));    \
 void vector (void) { __asm__ __volatile__ ("reti" ::); }
 #endif
 
