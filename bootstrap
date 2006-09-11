@@ -10,7 +10,7 @@
 : ${AUTOHEADER="autoheader${AC_VER}"}
 : ${AUTOCONF="autoconf${AC_VER}"}
 
-# automake-1.9.x is required
+# automake-1.8.x or 1.9.x is required
 
 : ${ACLOCAL="aclocal${AM_VER}"}
 : ${AUTOMAKE="automake${AM_VER}"}
@@ -30,9 +30,9 @@ fi
 
 AUTOMAKE_VER=`(${AUTOMAKE} --version | head -n 1 | \
               cut -d ' ' -f 4 | cut -d '.' -f -2) 2>/dev/null`
-if [ "$AUTOMAKE_VER" != "1.9" ]
+if [ "$AUTOMAKE_VER" != "1.8" -a "$AUTOMAKE_VER" != "1.9" ]
 then
-	echo "You need to use automake version 1.9."
+	echo "You need to use automake version 1.8 or 1.9."
 	echo "You are using `${AUTOMAKE} --version | head -n 1`."
 	exit 1
 fi
