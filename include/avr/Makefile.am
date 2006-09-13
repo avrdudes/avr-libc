@@ -66,6 +66,8 @@ avr_HEADERS = \
     iom128.h \
     iom1280.h \
     iom1281.h \
+    iom2560.h \
+    iom2561.h \
     iom16.h \
     iom161.h \
     iom162.h \
