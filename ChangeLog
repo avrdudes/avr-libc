@@ -1,3 +1,16 @@
+2006-09-13 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Patch #4461 by Anatoly Sokolov <aesok@post.ru>
+	* configure.ac: Add support for new devices: ATmega2560, ATmega2561.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom2560.h (New File): Ditto.
+	* include/avr/iom2561.h (New File): Ditto.
+
 2006-09-11 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* bootstrap: Allow automake version 1.8.x in addition to 1.9.x. automake

@@ -21,6 +21,8 @@
 
   + ATmega165P
   + ATmega169P
+  + ATmega2560 [patch #4461]
+  + ATmega2561 [patch #4461]
   
 *** Changes in avr-libc-1.4.4:
 

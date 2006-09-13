@@ -540,6 +540,16 @@ AM_CONDITIONAL(HAS_at90usb1286, test "x$HAS_at90usb1286" = "xyes")
 CHECK_AVR_DEVICE(at90usb1287)
 AM_CONDITIONAL(HAS_at90usb1287, test "x$HAS_at90usb1287" = "xyes")
 
+# avr6
+CHECK_AVR_DEVICE(avr6)
+AM_CONDITIONAL(HAS_avr6, test "x$HAS_avr6" = "xyes")
+
+CHECK_AVR_DEVICE(atmega2560)
+AM_CONDITIONAL(HAS_atmega2560, test "x$HAS_atmega2560" = "xyes")
+
+CHECK_AVR_DEVICE(atmega2561)
+AM_CONDITIONAL(HAS_atmega2561, test "x$HAS_atmega2561" = "xyes")
+
 # Generate all files from *.in sources.
 
 AC_CONFIG_FILES([
@@ -663,6 +673,13 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/at90usb1286/Makefile
 	avr/lib/avr5/at90usb1287/Makefile
 	avr/lib/avr5/at94k/Makefile
+])
+
+#avr6
+AC_CONFIG_FILES([
+	avr/lib/avr6/Makefile
+	avr/lib/avr6/atmega2560/Makefile
+	avr/lib/avr6/atmega2561/Makefile
 ])
 
 AC_OUTPUT
