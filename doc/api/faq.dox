@@ -58,6 +58,7 @@
 -# \ref faq_fuselow
 -# \ref faq_asmops
 -# \ref faq_spman
+-# \ref faq_linkerscripts
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1262,5 +1263,19 @@ time required to guarantee the integrity of this operation.
 
 <small>Back to \ref faq_index.</small>
 
-*/
+\section faq_linkerscripts Why are there five different linker scripts?
 
+From a comment in the source code:
+
+Which one of the five linker script files is actually used depends on command 
+line options given to ld.
+
+A .x script file is the default script
+A .xr script is for linking without relocation (-r flag)
+A .xu script is like .xr but *do* create constructors (-Ur flag)
+A .xn script is for linking with -n flag (mix text and data on same page).
+A .xbn script is for linking with -N flag (mix text and data on same page).
+
+<small>Back to \ref faq_index.</small>
+
+*/

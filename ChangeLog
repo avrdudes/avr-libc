@@ -1,3 +1,8 @@
+2006-09-14 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/faq.dox: Add question about why there are five different 
+	linker scripts.
+
 2006-09-13 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	Patch #4461 by Anatoly Sokolov <aesok@post.ru>
