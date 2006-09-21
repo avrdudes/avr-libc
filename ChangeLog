@@ -1,3 +1,18 @@
+2006-09-20 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* configure.ac (CHECK_PNG_UTILS): Fix string echo for checking pnmtopng. 
+	Fix check for pngtopnm and pnmtopng programs. Add self to authors.
+	* doc/api/doxygen.config.in (IMAGE_PATH): Add correct directories.
+	* doc/api/doxygen.config.in (LATEX_BATCHMODE): Change to yes so latex will
+	run in a batch mode and not query the user if something is amiss.
+	* doc/api/tools-install.dox: Remove doxygen warning.
+	* doc/examples/asmdemo/asmdemo.dox: Ditto.
+	* doc/api/Makefile.am (fix_png): Use the actual RGB numbers instead of
+	the color name in case the rgb.txt file cannot be found.
+	* doc/api/Makefile.am (doxygen.confg): Remove the dependency on 
+	$(top_srcdir)/stamp-h1 as there is no rule in this Makefile to build it, 
+	which causes an error. The rule is located in the top level Makefile.
+
 2006-09-14 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* doc/api/faq.dox: Add question about why there are five different 

@@ -146,7 +146,7 @@ arranged for in <tt>project.h</tt>.
 
 The file is divided into one section that will be used by the assembly
 source code, and another one to be used by C code.  The assembly part
-is distinguished by the preprocessing macro \t __ASSEMBLER__ (which
+is distinguished by the preprocessing macro \c __ASSEMBLER__ (which
 will be automatically set by the compiler front-end when preprocessing
 an assembly-language file), and it contains just macros that give
 symbolic names to a number of CPU registers.  The preprocessor will

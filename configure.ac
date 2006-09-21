@@ -285,13 +285,13 @@ dnl
 dnl   $ pngtopnm foo.png > tmp.pnm
 dnl   $ pnmtopng -transparent white tmp.pnm > foo.png
 dnl
-dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
-dnl @author Theodore A. Roth <troth@openavr.org>
+dnl @version 
+dnl @author Theodore A. Roth <troth@openavr.org> and Eric B. Weddington <eweddington@cso.atmel.com>
 dnl
 AC_DEFUN([CHECK_PNG_UTILS],[dnl
 dnl
 AC_MSG_CHECKING([for pngtopnm])
-has_pngtopnm=`pngtopnm --version 2>&1 | grep -c Version`
+has_pngtopnm=`pngtopnm --version 2>&1 | grep -c -i Version`
 if test "$has_pngtopnm" = "1"; then
 	AC_MSG_RESULT(yes)
 	PNGTOPNM="pngtopnm"
@@ -300,22 +300,16 @@ else
 	PNGTOPNM="cat"
 fi
 dnl
-AC_MSG_CHECKING([for pngtopnm])
-has_pnmtopng=`pnmtopng --version 2>&1 | grep -c Version`
+AC_MSG_CHECKING([for pnmtopng])
+has_pnmtopng=`pnmtopng --version 2>&1 | grep -c -i Version`
 if test "$has_pnmtopng" = "1"; then
 	AC_MSG_RESULT(yes)
 	PNMTOPNG="pnmtopng"
 else
 	AC_MSG_RESULT(no)
 	PNMTOPNG="cat"
+    PNGTOPNM="cat"
 fi
-dnl
-dnl pnmtopng will fail if the input file is a png instead of a pnm.
-dnl
-if test "$PNMTOPNG" = "cat"; then
-	PNGTOPNM="cat"
-fi
-dnl
 AC_SUBST(PNGTOPNM)
 AC_SUBST(PNMTOPNG)
 ])dnl
