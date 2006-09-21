@@ -114,7 +114,7 @@ fix_png: $(wildcard $(USER_MANUAL)/*.png)
 	for png in *.png; do \
 		echo "Fixing transparency for $$png"; \
 		$(PNGTOPNM) $$png > tmp.pnm; \
-		$(PNMTOPNG) -transparent white tmp.pnm > $$png && rm tmp.pnm; \
+		$(PNMTOPNG) -transparent rgb:ff/ff/ff tmp.pnm > $$png && rm tmp.pnm; \
 	done
 	echo timestamp > fix_png
 
@@ -212,7 +212,8 @@ doxygen-pdf.config: doxygen.config
 		doxygen.config > doxygen-pdf.config ||\
 		{ rm -f doxygen-pdf.config; exit 1; }
 
-doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
+#doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
+doxygen.config: doxygen.config.in
 	sed \
 	-e 's,[@]VERSION[@],$(VERSION),g' \
 	-e 's,[@]top_srcdir[@],$(top_srcdir),g' \

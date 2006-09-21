@@ -142,7 +142,7 @@ $ bunzip2 -c binutils-<version>.tar.bz2 | tar xf -
 $ cd binutils-<version>
 \endverbatim
 
-\note Replace \c <version> with the version of the package you downloaded.
+\note Replace \c &lt;version&gt; with the version of the package you downloaded.
 
 \note If you obtained a gzip compressed file (.gz), use <tt>gunzip</tt>
 instead of <tt>bunzip2</tt>.
