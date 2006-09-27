@@ -1,3 +1,9 @@
+2006-09-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/interrupt.h (ISR_ALIAS): Add ISR_ALIAS() macro.
+	Fix doxygen style for the other ISR macros.
+	Closes bug #17608: Add ISR_ALIAS() to avr/interrupt.h
+
 2006-09-20 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* configure.ac (CHECK_PNG_UTILS): Fix string echo for checking pnmtopng. 

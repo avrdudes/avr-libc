@@ -76,6 +76,7 @@ extern void cli(void);
 
 /*@{*/
 
+#if defined(__DOXYGEN__)
 /** \def ISR(vector)
     \ingroup avr_interrupts
 
@@ -87,6 +88,8 @@ extern void cli(void);
     \c vector must be one of the interrupt vector names that are
     valid for the particular MCU type.
 */
+#  define ISR(vector)
+#else  /* real code */
 
 #if __GNUC__ >= 4 && __GNUC_MINOR__ >= 1
 #  define __INTR_ATTRS used, externally_visible
@@ -104,7 +107,10 @@ void vector (void) __attribute__ ((signal,__INTR_ATTRS));		\
 void vector (void)
 #endif
 
-/** \def SIGNAL(signame)
+#endif /* DOXYGEN */
+
+#if defined(__DOXYGEN__)
+/** \def SIGNAL(vector)
     \ingroup avr_interrupts
 
     \code#include <avr/interrupt.h>\endcode
@@ -113,21 +119,25 @@ void vector (void)
     initially disabled.
 
     This is the same as the ISR macro.
-    \note Do not use anymore in new code, it will be deprecated
-    in a future release.
+    \deprecated Do not use anymore in new code.
 */
+#  define SIGNAL(vector)
+#else  /* real code */
 
 #ifdef __cplusplus
-#define SIGNAL(signame)					\
-extern "C" void signame(void) __attribute__ ((signal,__INTR_ATTRS));	\
-void signame (void)
+#define SIGNAL(vector)					\
+extern "C" void vector(void) __attribute__ ((signal,__INTR_ATTRS));	\
+void vector (void)
 #else
-#define SIGNAL(signame)					\
-void signame (void) __attribute__ ((signal,__INTR_ATTRS));		\
-void signame (void)
+#define SIGNAL(vector)					\
+void vector (void) __attribute__ ((signal,__INTR_ATTRS));		\
+void vector (void)
 #endif
 
-/** \def EMPTY_INTERRUPT(signame)
+#endif /* DOXYGEN */
+
+#if defined(__DOXYGEN__)
+/** \def EMPTY_INTERRUPT(vector)
     \ingroup avr_interrupts
 
     \code#include <avr/interrupt.h>\endcode
@@ -137,6 +147,8 @@ void signame (void)
     define a function body as this will define it for you.
     Example:
     \code EMPTY_INTERRUPT(ADC_vect);\endcode */
+#define EMPTY_INTERRUPT(vector)
+#else  /* real code */
 
 #ifdef __cplusplus
 #define EMPTY_INTERRUPT(vector)                \
@@ -148,6 +160,47 @@ void vector (void) __attribute__ ((signal,naked,__INTR_ATTRS));    \
 void vector (void) { __asm__ __volatile__ ("reti" ::); }
 #endif
 
+#endif /* DOXYGEN */
+
+#if !defined(__DOXYGEN__)
+/* Auxiliary macro for ISR_ALIAS(). */
+#define __ALIAS(tgt) __attribute__((alias(#tgt)))
+#endif /* !defined(__DOXYGEN__) */
+
+#if defined(__DOXYGEN__)
+/** \def ISR_ALIAS(vector, target_vector)
+    \ingroup avr_interrupts
+
+    \code#include <avr/interrupt.h>\endcode
+
+    Defines \c vector to point to the same interrupt vector as
+    \c target_vector.  That way, a single interrupt vector
+    implementation can be used to serve several interrupt sources.
+
+    Do not define a function body.
+
+    \note This requires a recent version of AVR-GCC to work
+    (GCC 4.2 or patched GCC 4.1.x).
+
+    Example:
+    \code
+    ISR(INT0_vect)
+    {
+        PORTB = 42;
+    }
+
+    ISR_ALIAS(INT1_vect, INT0_vect);
+    \endcode */
+#define ISR_ALIAS(vector, target_vector)
+#else /* real code */
+
+#ifdef __cplusplus
+#define ISR_ALIAS(vector, tgt) extern "C" void vector(void) __ALIAS(tgt)
+#else
+#define ISR_ALIAS(vector, tgt) void vector(void) __ALIAS(tgt)
+#endif
+
+#endif /* DOXYGEN */
 
 
 /*@}*/
