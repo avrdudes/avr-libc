@@ -89,6 +89,9 @@ GLOBAL(__fp_split1)
     ROR     rA2            ; sets hidden bit
     RET
 .L_fp_split_nan:
+#ifdef __AVR_3_BYTE_PC__
+    POP     rA3
+#endif    
     POP     rA3
     POP     rA3            ; pop return adress
  #ifdef __ERRNO__
@@ -128,6 +131,9 @@ GLOBAL(__fp_split_a)
 	RET
 	
 .L_fp_split_a_nan:
+#ifdef __AVR_3_BYTE_PC__
+        POP     rA3
+#endif    
 	POP	rA3
 	POP	rA3		; pop return adress
  #ifdef __ERRNO__

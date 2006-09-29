@@ -1,5 +1,13 @@
 2006-09-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Bjoern Haase:
+	* libm/fplib/fp_split.S: Pop 3 bytes from stack on error returns
+	rather than 2 for avr6 architectures.
+	Closes bug #17591: /avr-libc/libm/fplib/fp_split.S error return
+	will fail for 3-Byte PC devices
+
+2006-09-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* AvrCommon.am (AVRLIB_CFLAGS): Use -gstabs rather than -g here as
 	well, as it's already been in AVRLIB_ASFLAGS.  Without that, using
 	a compiler that defaults to DWARF-2 yielded an interesting mix of
