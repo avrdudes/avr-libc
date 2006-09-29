@@ -1,3 +1,10 @@
+2006-09-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* AvrCommon.am (AVRLIB_CFLAGS): Use -gstabs rather than -g here as
+	well, as it's already been in AVRLIB_ASFLAGS.  Without that, using
+	a compiler that defaults to DWARF-2 yielded an interesting mix of
+	both, DWARF-2 and stabs debugging information in the library.
+
 2006-09-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/interrupt.h (ISR_ALIAS): Add ISR_ALIAS() macro.
