@@ -30,6 +30,7 @@
   [#16434] EMPTY_INTERRUPT has no misspelled vector checking
   [#16441] eeprom.h should use __asm__
   [#17068] wdt.h file: __AVR_ATmeg324P__ spelling mistake
+  [#17551] Update documentation to point to issues with gcc4.1
   [#17591] /avr-libc/libm/fplib/fp_split.S error return will fail for
            3-Byte PC devices
   [#17608] Add ISR_ALIAS() to avr/interrupt.h

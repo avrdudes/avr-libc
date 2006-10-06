@@ -1,3 +1,11 @@
+2006-10-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/tools-install.dox: Update documentation for GCC 4.x,
+	add hint for binutils and GCC "new device" patches, add
+	--prefix to avr-libc configure command, remove UISP, minor
+	addition to avrdude section.
+	Closes bug #17551: Update documentation to point to issues with gcc4.1
+
 2006-09-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Bjoern Haase:
