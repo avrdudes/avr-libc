@@ -1,5 +1,14 @@
 2006-10-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by koshchi@shaw.ca:
+	* doc/examples/stdiodemo/defines.h: Explain databits need to be
+	in ascending order.
+	* doc/examples/stdiodemo/hd44780.c: Take care for databits not
+	starting at bit 0.
+	Closes bug #16125: HD44780 data bit assignment restrictive
+
+2006-10-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/compat/deprecated.h: Fix argument order for outp(), add
 	inb() and outb().
 	Closes bug #16868: depricated.h: outp() arguments order misprint

@@ -22,6 +22,7 @@
 #define HD44780_RS PORT6
 #define HD44780_RW PORT4
 #define HD44780_E  PORT5
+/* The data bits have to be in ascending order. */
 #define HD44780_D4 PORT0
 #define HD44780_D5 PORT1
 #define HD44780_D6 PORT2
