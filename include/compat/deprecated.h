@@ -1,4 +1,4 @@
-/* Copyright (c) 2005 Joerg Wunsch
+/* Copyright (c) 2005,2006 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -178,12 +178,30 @@ void signame (void)
 
 /**
    \ingroup deprecated_items
-   \def outp(port, val)
+   \def outp(val, port)
    \deprecated
 
    Write \c val to IO port \c port.
 */
-#define outp(port, val) (port) = (val)
+#define outp(val, port) (port) = (val)
+
+/**
+   \ingroup deprecated_items
+   \def inb(port)
+   \deprecated
+
+   Read a value from an IO port \c port.
+*/
+#define inb(port) (port)
+
+/**
+   \ingroup deprecated_items
+   \def outb(port, val)
+   \deprecated
+
+   Write \c val to IO port \c port.
+*/
+#define outb(port, val) (port) = (val)
 
 /**
    \ingroup deprecated_items
