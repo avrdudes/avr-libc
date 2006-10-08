@@ -25,6 +25,7 @@
   [#15890] missing /devtools/gen-avr-lib-tree.sh
   [#16039] Names in Pxy (i.e. PA0) style of ports pins for some devices are
            not defined.
+  [#16125] HD44780 data bit assignment restrictive
   [#16260] _crc16_update lacks C equivalent
   [#16411] Add the 'used' attribute to all interrupt service routine macros.
   [#16434] EMPTY_INTERRUPT has no misspelled vector checking
