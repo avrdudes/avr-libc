@@ -29,6 +29,7 @@
   [#16411] Add the 'used' attribute to all interrupt service routine macros.
   [#16434] EMPTY_INTERRUPT has no misspelled vector checking
   [#16441] eeprom.h should use __asm__
+  [#16868] depricated.h: outp() arguments order misprint
   [#17068] wdt.h file: __AVR_ATmeg324P__ spelling mistake
   [#17551] Update documentation to point to issues with gcc4.1
   [#17591] /avr-libc/libm/fplib/fp_split.S error return will fail for
