@@ -99,7 +99,7 @@ hd44780_outnibble(uint8_t n, uint8_t rs)
     HD44780_PORTOUT |= _BV(HD44780_RS);
   else
     HD44780_PORTOUT &= ~_BV(HD44780_RS);
-  x = (HD44780_PORTOUT & ~HD44780_DATABITS) | (n & HD44780_DATABITS);
+  x = (HD44780_PORTOUT & ~HD44780_DATABITS) | ((n << HD44780_D4) & HD44780_DATABITS);
   HD44780_PORTOUT = x;
   (void)hd44780_pulse_e(false);
 }
@@ -133,7 +133,7 @@ hd44780_innibble(uint8_t rs)
   HD44780_DDR |= HD44780_DATABITS;
   HD44780_PORTOUT &= ~_BV(HD44780_RW);
 
-  return x & HD44780_DATABITS;
+  return (x & HD44780_DATABITS) >> HD44780_D4;
 }
 
 /*
