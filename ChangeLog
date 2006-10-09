@@ -1,3 +1,8 @@
+2006-10-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version.
+	* README: Update preferred tool versions.
+
 2006-10-09 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	Fix for bug #17470.
