@@ -1,3 +1,8 @@
+2006-10-09 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix for bug #17470.
+	* include/avr/power.h: Add API for CLKPR register.
+
 2006-10-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by koshchi@shaw.ca:

@@ -32,6 +32,7 @@
   [#16441] eeprom.h should use __asm__
   [#16868] depricated.h: outp() arguments order misprint
   [#17068] wdt.h file: __AVR_ATmeg324P__ spelling mistake
+  [#17470] Add API for CLKPR register.
   [#17551] Update documentation to point to issues with gcc4.1
   [#17591] /avr-libc/libm/fplib/fp_split.S error return will fail for
            3-Byte PC devices
@@ -40,8 +41,8 @@
 * Other changes:
 
   - New Power Management API in <avr/power.h>. This provides C language
-    macros to manipulate the Power Reduction Register(s) across multiple
-    processors.
+    macros to manipulate the Power Reduction Register(s) and the System Clock
+    Prescaler register across multiple processors.
 
   [patch #4611] sleep.h sleep_mode() not interrupt safe
 
