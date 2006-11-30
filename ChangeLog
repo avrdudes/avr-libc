@@ -1,3 +1,9 @@
+2006-11-30 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iom164.h (SPM_PAGESIZE): Set to 128.
+	* include/avr/iom324.h (SPM_PAGESIZE): Set to 128.
+	Closes savannah bug #18385.
+
 2006-10-09 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	Fix for bug #17470.

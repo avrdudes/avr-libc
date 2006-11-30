@@ -1,4 +1,4 @@
-/* Copyright (c) 2005 Anatoly Sokolov
+/* Copyright (c) 2005, 2006 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@
 #include <avr/iomxx4.h>
 
 /* Constants */
-#define SPM_PAGESIZE    256
+#define SPM_PAGESIZE    128
 #define RAMEND          0x04FF
 #define XRAMEND         0x04FF
 #define E2END           0x1FF
