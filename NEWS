@@ -1,5 +1,8 @@
 *** Changes since avr-libc-1.4.5:
 
+* Bugs fixed:
+
+  [#18385] SPM_PAGESIZE wrong value for ATmega164p and ATmega324p
 
 *** Changes in avr-libc-1.4.5:
 

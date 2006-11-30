@@ -1,3 +1,9 @@
+2006-11-30 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iom164.h (SPM_PAGESIZE): Set to 128.
+	* include/avr/iom324.h (SPM_PAGESIZE): Set to 128.
+	Closes savannah bug #18385.
+
 2006-10-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* Released avr-libc 1.4.5.
