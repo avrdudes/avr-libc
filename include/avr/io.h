@@ -238,6 +238,8 @@
 #  include <avr/iom329.h>
 #elif defined (__AVR_ATmega3290__)
 #  include <avr/iom3290.h>
+#elif defined (__AVR_ATmega3290P__)
+#  include <avr/iom3290p.h>
 #elif defined (__AVR_ATmega406__)
 #  include <avr/iom406.h>
 #elif defined (__AVR_ATmega16__)
