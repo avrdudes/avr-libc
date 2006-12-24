@@ -94,6 +94,7 @@
   + ATmega169P
   + ATmega2560 [patch #4461]
   + ATmega2561 [patch #4461]
+  + ATmega3290P
 
 * New functions: 
 

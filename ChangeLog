@@ -1,3 +1,14 @@
+2006-12-23 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* configure.ac: Add support for ATmega3290P
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom3290p.h (New File): Ditto.
+
 2006-11-30 Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iom164.h (SPM_PAGESIZE): Set to 128.
