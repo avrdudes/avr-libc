@@ -1,0 +1,592 @@
+2006-12-31 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix breakage for strtod() on avr6 architectures caused
+	by calling __prologue_saves__.
+	Fixes bug #18509: strtod.S crashes due to stack problem with atmega
+	2560
+	* libm/fplib/strtod.S: pop and restore EIND from the stack before
+	calling __prologue_saves__ on 3-byte PC AVR architectures.
+	* include/avr/io.h: Provide a value for EIND when compiling the
+	library for an avr6 architecture.
+	* include/avr/iomxx0_1.h: Protect the EIND definition from appearing
+	twice in while compiling the library for an avr6 architecture.
+
+2006-12-23 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* configure.ac: Add support for ATmega3290P
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom3290p.h (New File): Ditto.
+
+2006-11-30 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iom164.h (SPM_PAGESIZE): Set to 128.
+	* include/avr/iom324.h (SPM_PAGESIZE): Set to 128.
+	Closes savannah bug #18385.
+
+2006-10-09 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix for bug #17470.
+	* include/avr/power.h: Add API for CLKPR register.
+
+2006-10-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by koshchi@shaw.ca:
+	* doc/examples/stdiodemo/defines.h: Explain databits need to be
+	in ascending order.
+	* doc/examples/stdiodemo/hd44780.c: Take care for databits not
+	starting at bit 0.
+	Closes bug #16125: HD44780 data bit assignment restrictive
+
+2006-10-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/compat/deprecated.h: Fix argument order for outp(), add
+	inb() and outb().
+	Closes bug #16868: depricated.h: outp() arguments order misprint
+
+2006-10-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/tools-install.dox: Update documentation for GCC 4.x,
+	add hint for binutils and GCC "new device" patches, add
+	--prefix to avr-libc configure command, remove UISP, minor
+	addition to avrdude section.
+	Closes bug #17551: Update documentation to point to issues with gcc4.1
+
+2006-09-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Bjoern Haase:
+	* libm/fplib/fp_split.S: Pop 3 bytes from stack on error returns
+	rather than 2 for avr6 architectures.
+	Closes bug #17591: /avr-libc/libm/fplib/fp_split.S error return
+	will fail for 3-Byte PC devices
+
+2006-09-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* AvrCommon.am (AVRLIB_CFLAGS): Use -gstabs rather than -g here as
+	well, as it's already been in AVRLIB_ASFLAGS.  Without that, using
+	a compiler that defaults to DWARF-2 yielded an interesting mix of
+	both, DWARF-2 and stabs debugging information in the library.
+
+2006-09-27 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/interrupt.h (ISR_ALIAS): Add ISR_ALIAS() macro.
+	Fix doxygen style for the other ISR macros.
+	Closes bug #17608: Add ISR_ALIAS() to avr/interrupt.h
+
+2006-09-20 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* configure.ac (CHECK_PNG_UTILS): Fix string echo for checking pnmtopng. 
+	Fix check for pngtopnm and pnmtopng programs. Add self to authors.
+	* doc/api/doxygen.config.in (IMAGE_PATH): Add correct directories.
+	* doc/api/doxygen.config.in (LATEX_BATCHMODE): Change to yes so latex will
+	run in a batch mode and not query the user if something is amiss.
+	* doc/api/tools-install.dox: Remove doxygen warning.
+	* doc/examples/asmdemo/asmdemo.dox: Ditto.
+	* doc/api/Makefile.am (fix_png): Use the actual RGB numbers instead of
+	the color name in case the rgb.txt file cannot be found.
+	* doc/api/Makefile.am (doxygen.confg): Remove the dependency on 
+	$(top_srcdir)/stamp-h1 as there is no rule in this Makefile to build it, 
+	which causes an error. The rule is located in the top level Makefile.
+
+2006-09-14 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/faq.dox: Add question about why there are five different 
+	linker scripts.
+
+2006-09-13 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Patch #4461 by Anatoly Sokolov <aesok@post.ru>
+	* configure.ac: Add support for new devices: ATmega2560, ATmega2561.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom2560.h (New File): Ditto.
+	* include/avr/iom2561.h (New File): Ditto.
+
+2006-09-11 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* bootstrap: Allow automake version 1.8.x in addition to 1.9.x. automake
+	1.8.2 is available on MinGW/MSYS and with autoconf 2.59 successfully
+	builds avr-libc 1.4 branch.
+
+2006-09-01 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix for bug #15512.
+	* include/avr/boot.h: Add more documentation describing that global
+	interrupts are not disabled for these macros.
+	* NEWS: Update fixed bug list.
+
+2006-09-01 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Additional fix for bug #16411.
+	* include/avr/interrupt.h: Conditionally compile 'used' and 
+	'externally_visible' attributes on interrupt macros based on compiler
+	version.
+	* include/compat/deprecated: Ditto.
+
+2006-08-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/sleep.h: Fix the entry for the ATtiny2313, the revision
+	I datasheet was indeed correct.
+
+2006-08-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add the new "asmdemo" example.  It demonstrates how C and assembly
+	source files could be used within one project.
+	* doc/examples/asmdemo: (New directory.)
+	* doc/examples/asmdemo/asmdemo.c: (New file.) asmdemo implementation.
+	* doc/examples/asmdemo/isrs.S: (Ditto.)
+	* doc/examples/asmdemo/project.h: (Ditto.)
+	* doc/examples/asmdemo/Makefile: (Ditto.)
+	* doc/examples/asmdemo/asmdemo.dox: (New file.) Document the asmdemo.
+	* doc/examples/Makefile.am: Wire the asmdemo into the build and
+	distribution process.
+	* doc/examples/all-demos.dox: Add a paragraph about the purpose of
+	this new demo, including a reference to it.
+
+2006-08-28 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Additional fix for bug #16411.
+	* include/avr/interrupt.h: Add the 'externally_visible' attribute on all
+	interrupt service routine macros.
+	* include/compat/deprecated.h: Add the 'externally_visible' attribute on the
+	INTERRUPT macro.
+
+2006-08-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/Makefile: Catch binutils 2.17 flagging
+	an error for the empty .eeprom section.
+	* doc/examples/demo/demo.dox: Explain binutils 2.17's
+	changed behaviour in avr-objcopy when trying to copy an
+	empty .eeprom section.
+
+2006-08-24 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix for bug #16411.
+	* include/avr/interrupt.h: Add the 'used' attribute on all interrupt
+	service routine macros.
+	* include/compat/deprecated.h: Add the 'used' attribute on the INTERRUPT
+	macro.
+	* NEWS: Add to fixed bug list.
+
+2006-08-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fixes to the HD44780 driver; thanks to Knut Schwichtenberg
+	for pointing this out, and helping in testing it.
+	* doc/examples/stdiodemo/hd44780.c: Fix timing issues.  The
+	values read back from the HD44780 need to be sampled while
+	E is asserted.
+	* doc/examples/stdiodemo/stdiodemo.dox: Document the new
+	approach of the E pulse generation.
+
+2006-07-25 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/power.h: New file. Provides a Power Management API.
+	* include/avr/sleep.h: Fix grammar error in doxygen comment.
+	* NEWS: New Power Management API.
+
+2006-07-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_spman): New entry about the SP manipulation
+	in function prologues/epilogues.
+
+2006-07-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Guohui Wang <info@Atmanecl.net>:
+	* include/avr/wdt.h: Fix spelling error for ATmega324P.
+	Closes bug #17068.
+
+2006-06-24 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/interrupt.h (EMPTY_INTERRUPT): Add 'signal' attribute
+	to function prototype.
+	Closes savannah bug #16434.
+
+2006-06-24 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iousbxx6_7.h (PRST1, SOFEN): Define.
+
+2006-06-11 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by David Bourgeois <david.bourgeois@c2me.be>:
+	* doc/api/faq.dox (faq_rom_array): Fix a typo.
+
+2006-05-23 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotnx5.h (LSM): Remove comment.
+
+2006-05-23 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/eeprom.h: Turn #if on __AVR_HAVE_MOVW__ macro 
+	into #if defined(). This makes it -Wundef safe.
+
+2006-05-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/sfr_defs.h: Ensure _SFR_ASM_COMPAT is defined before
+	it is used.  This makes it -Wundef safe.
+
+2006-05-03 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iocanxx.h (CANSIT): Add.
+
+2006-04-29 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/sfr_defs.h (_MMIO_DWORD, _SFR_MEM32, _SFR_DWORD): Add.
+	* include/avr/iocanxx.h (CANIDT, CANIDM): Add.
+
+2006-04-26 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/eeprom.h: Use __asm__ in place of asm.
+	Closes bug #16441: eeprom.h should use __asm__.
+
+2006-04-22 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the ATmega165P/169P support.
+	* devtools/gen-avr-lib-tree.sh: Add support for ATmega165P/169P.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iom165p.h: New file.
+	* include/avr/iom169p.h: New file.
+	* include/avr/Makefile.am: Include new files.
+	* doc/api/main_page.dox: Document support for ATmega165P/169P.
+	* doc/api/using-tools.dox: (Ditto.)
+	
+2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by lx_b@gmx.at:
+	* include/avr/interrupt.h: improve C++ robustness of
+	ISR declarations.
+	Closes savannah bug #15732.
+
+2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Glenn Maynard <glenn@zewt.org>:
+	* include/util/crc16.h (_crc16_update): add equivalent C
+	implementation as documentation.
+	Closes savannah bug #16260.
+
+2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/iocompat.h: Rename ATmega164/324 to
+	ATmega164P/324P, add support for ATmega644P.
+	* doc/examples/demo/Makefile: (Ditto.)
+
+2006-04-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/iocompat.h: Add support for ATmega640/1280/1281.
+	* doc/examples/demo/Makefile: (Ditto.)
+
+2006-04-13 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotn2313.h(SPMEN, SELFPRGEN): Add.
+
+2006-04-01 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the ATmega644P support. Rename 
+	ATmega164/ATmega324 to ATmega164P/ATmega324P.
+	* devtools/gen-avr-lib-tree.sh: Add support for ATmega644P. Rename 
+	ATmega164/ATmega324 to ATmega164P/ATmega324P.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* doc/api/main_page.dox: Document support for ATmega644P. Rename 
+	ATmega164/ATmega324 to ATmega164P/ATmega324P.
+	* doc/api/using-tools.dox: (Ditto.)
+	
+2006-03-24 Anatoly Sokolov <aesok@post.ru>
+
+	* Makefile.am (DIST_SUBDIRS): Add 'devtools'.
+	* configure.ac (AC_CONFIG_FILES): Add 'devtools/Makefile'.
+	* devtools/.cvsignore: New file.
+	* devtools/Makefile.am; New file.
+	[Fixed bug #16039]
+
+2006-03-21 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: add tests for the AT90USB646/647/1286/1287 support.
+	* devtools/gen-avr-lib-tree.sh: add support for AT90USB646/647/1286/1287.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iousb646.h: new file.
+	* include/avr/iousb647.h: new file.
+	* include/avr/iousb1286.h: new file.
+	* include/avr/iousb1287.h: new file.
+	* include/avr/iousbxx6_7.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for AT90USB646/647/1286/1287.
+	* doc/api/using-tools.dox: (Ditto.)
+
+2006-03-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Jeff Dombach:
+	* include/avr/iomxx0_1.h: Fix bit name PRUSART3.
+
+2006-03-14 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iom169.h(LCDBD, LCDCCD): Add.
+	[Add support ATmega169 Rev. F device]
+
+2006-03-14 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iom165.h: Add 'PINxy', 'DDxy' and 'Pxy' bits.
+	* include/avr/iom325.h: (Ditto.).
+	* include/avr/iom3250.h: (Ditto.).
+	* include/avr/iom329.h: (Ditto.).
+	* include/avr/iom3290.h: (Ditto.).
+	* include/avr/iom645.h: (Ditto.).
+	* include/avr/iom6450.h: (Ditto.).
+	* include/avr/iom649.h: (Ditto.).
+	* include/avr/iom6490.h: (Ditto.).
+
+2006-03-10 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iomxx0_1.h: Rename port pins from PORTxy to Pxy.
+	* include/avr/portpins.h: Add PORTHy, PORTJy, PORTKy and PORTHLy.
+	[Fixed bug #16039]
+
+2006-03-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/boot.h: Do not depend on __USING_MINT8 anymore.
+
+2006-03-07 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Notified by Peter Schrepfer:
+	* doc/examples/demo/iocompat.h: Fix OCR1A location
+	for ATmega16/32 (broken in rev 1.2).
+
+2006-03-06 Anatoly Sokolov <aesok@post.ru>
+
+	* libc/misc/mul10.S: Use X_movw.
+
+2006-03-04 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/fplib.inc (mLPMRdZpp, LPMRdZpp): Delete.
+	* libm/fplib/fp_flashconst.S: Use X_lpm.
+	* libm/fplib/fp_powerseries.S: (Ditto.).
+
+2006-03-04 Anatoly Sokolov <aesok@post.ru>
+
+	* common/macros.inc (X_lpm): Add. (Contributed by Dmitry Xmelkov.)
+	(LOAD_X_CONST, LPM_R0_ZP): Delete.
+	* libc/pmstring/memcpy_P.S: Use X_lpm.
+	* libc/pmstring/strcasecmp_P.S: (Ditto.).
+	* libc/pmstring/strcat_P.S: (Ditto.).
+	* libc/pmstring/strcmp_P.S: (Ditto.).
+	* libc/pmstring/strcpy_P.S: (Ditto.).
+	* libc/pmstring/strlcat_P.S: (Ditto.).
+	* libc/pmstring/strlcpy_P.S: (Ditto.).
+	* libc/pmstring/strlen_P.S: (Ditto.).
+	* libc/pmstring/strncasecmp_P.S: (Ditto.).
+	* libc/pmstring/strncat_P.S: (Ditto.).
+	* libc/pmstring/strncmp_P.S: (Ditto.).
+	* libc/pmstring/strncpy_P.S: (Ditto.).
+	* libc/pmstring/strnlen_P.S: (Ditto.).
+	* libc/pmstring/strstr_P.S: (Ditto.).
+
+2006-03-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: Fix example source code.
+
+2006-02-28 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/io.h: Define __AVR_HAVE_LPMX__.
+	* common/macros.inc: Define __AVR_HAVE_LPMX__.
+	(LPM_R0_ZP): Use __AVR_HAVE_LPMX__.
+	* include/avr/pgmspace.h: Use __AVR_HAVE_LPMX__.
+	* libm/fplib/fplib.inc(mLPMRdZpp): Use __AVR_HAVE_LPMX__.
+
+2006-02-26 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/io.h: Define __AVR_HAVE_MOVW__.
+	* common/macros.inc: Define __AVR_HAVE_MOVW__.
+	(X_movw):  Use __AVR_HAVE_MOVW__.
+	* include/avr/eeprom.h (eeprom_write_word): Use __AVR_HAVE_MOVW__.
+
+2006-02-07 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/dtostrf.S: Use X_movw when possible. 
+	Use RCALL instead XCALL for calling 'pow' and 'ldexp' functions.
+
+2006-02-02 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/signal.h: Include <avr/interrupt.h> file.
+	[Fixed bug #15574]
+
+2006-02-02 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/boot.h: Corrected a choice __boot_xxx macros.
+	[Fixed bug #15559]
+
+2006-01-31 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotnx4.h (GPIOR0): Rename from GPI0R0.
+	* include/avr/iotnx5.h (GPIOR0): (Ditto.).
+	* include/avr/iotnx61.h (GPIOR0): (Ditto.).
+	[Fixed bug #15595]
+
+2006-01-30 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: add tests for the ATmega406 support.
+	* devtools/gen-avr-lib-tree.sh: add support for ATmega406.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iotm406.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for ATmega406.
+	* doc/api/using-tools.dox: (Ditto.)
+ 	* xml/patch-headers.py: add ATmega406.
+	* doc/api/vectortable.dox: regenerate using patch-headers.py.
+
+2006-01-29 Anatoly Sokolov <aesok@post.ru>
+
+	* doc/api/main_page.dox: Move AT90CANxxx devices to Misc group.
+	[Fixed bug #15519] 
+	* include/avr/iotn2313.h (SIG_OUTPUT_COMPARE0A): Rename from 
+	SIG_OUTPUT_COPMARE0A.
+	[Fixed bug #15522]
+
+2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #15494: Compile warning and errors if compiler flag
+	-Wundef flag specified
+	* include/inttypes.h: turn #if on undefined macros into #ifdef.
+	* include/stdint.h: always define __USING_MINT8 (to 0 or 1).
+	* include/avr/boot.h: use __USING_MINT8 the new way.
+
+2006-01-22 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotn2313.h (SPM_PAGESIZE): Add. 
+	* include/avr/iotn24.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn25.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn261.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn44.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn45.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn461.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn84.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn85.h (SPM_PAGESIZE): (Ditto.).
+	* include/avr/iotn861.h (SPM_PAGESIZE): (Ditto.).
+
+2006-01-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Makefile.am (EXTRA_DIST): add ChangeLog-2005.
+
+2006-01-09 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/acos.S : Use XCALL/XJMP instead RCALL/RJMP 
+	for calling __addsf3/__subsf3/__mulsf3/__divsf3 functions.
+	* libm/fplib/cosh.S : (Ditto.).
+	* libm/fplib/exp.S : (Ditto.).
+	* libm/fplib/fmod.S : (Ditto.).
+	* libm/fplib/fp_cosinus.S : (Ditto.).
+	* libm/fplib/log.S : (Ditto.).
+	* libm/fplib/log10.S : (Ditto.).
+	* libm/fplib/pow.S : (Ditto.).
+	* libm/fplib/sin.S : (Ditto.).
+	* libm/fplib/sinh.S : (Ditto.).
+	* libm/fplib/strtod.S : (Ditto.).
+	* libm/fplib/tan.S : (Ditto.).
+	* libm/fplib/tanh.S : (Ditto.).
+	* libm/fplib/modf.S : Use XCALL/XJMP instead RCALL/RJMP 
+	__addsf3/__fixsfsi/__floatsisf functions.
+	* libm/fplib/asin.S : Use RCALL/RJMP instead XCALL/XJMP 
+	for calling __fp_nanEDOM/__fp_powerseries functions.
+	* libm/fplib/atan.S : Use RCALL/RJMP instead XCALL/XJMP 
+	for calling __fp_inverse/square functions.
+	* libm/fplib/atan2.S : Use RCALL/RJMP instead XCALL/XJMP 
+	for calling __fp_nanERANGE/atan functions.
+
+2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Galen Seitz:
+	* avr-libc.spec.in: Fixed examples installation.
+ 
+2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/Makefile.am: Fix the source directory for
+	example installation so it will work when starting from
+	outside $(top_srcdir).  This fixes "make distcheck".
+	* include/avr/pgmspace.h: Add a warning about the _P()
+	functions not working above 64 KB.
+
+2006-01-06 Anatoly Sokolov <aesok@post.ru>
+
+	* /libm/fplib/sqrt.S: Use __addsf3/__divsf3 instead 
+	__addsf3x/__divsf3x.
+
+2006-01-06 Anatoly Sokolov <aesok@post.ru>
+
+	(Contributed by Dmitry Xmelkov.)
+	* libm/fplib/ldexp.S: Fix error if 'exp' argument > 32640.
+
+2006-01-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* xml/patch-headers.py: add ATtinyX61, catch errors for
+	non-existent ALT_NAME sections in interrupt vector table
+	* doc/api/vectortable.dox: regenerate using patch-headers.py.
+
+2006-01-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Extend the simple demo project to a boatload full of
+	different AVRs: ATmega164/324/644, ATtiny261/461/861,
+	ATmega165, ATmega169, ATmega325x/645x, ATmega329x/649x
+	* doc/examples/demo/Makefile: Document all supported devices.
+	* doc/examples/demo/demo.c: make variables local to ISR, use
+	TIMER1_PWM_INIT to setup TCCR1A.
+	* doc/examples/demo/demo.dox: Document TIMER1_PWM_INIT,
+	swap notes 2 and 3.
+	* doc/examples/demo/iocompat.h: Add support for all mentioned
+	devices.
+
+2006-01-04 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: add tests for the ATtiny261/461/861 support.
+	* devtools/gen-avr-lib-tree.sh: add support for ATtiny261/461/861.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iotn24.h: new file.
+	* include/avr/iotn44.h: new file.
+	* include/avr/iotn84.h: new file.
+	* include/avr/iotnx4.h: new file.
+	* include/avr/Makefile.am: include new files.
+	* doc/api/main_page.dox: Document support for ATtiny261/461/861.
+	* doc/api/using-tools.dox: (Ditto.)
+
+2006-01-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Changes to the demo projects and their documentation.
+	Partially based on ideas submitted by Mark J Elkins.
+	* doc/examples/Makefile.am: Include largedemo-wiring2.jpg.
+	* doc/examples/all-demos.dox: Document the prerequisites for
+	the demos.
+	* doc/examples/demo/Makefile: Add dependency from iocompat.h.
+	* doc/examples/demo/demo.c: Port the simple demo to ATmega8515,
+	ATmega8535, ATtiny2313, ATtinyX4, ATtinyX5, and ATtiny26.
+	* doc/examples/demo/iocompat.h: (Ditto.)
+	* doc/examples/demo/demo.dox: Describe iocompat.h in greater
+	detail, fix some \section statements, add section with
+	reference to source code.
+	* doc/examples/largedemo/Makefile: Include largedemo-wiring2.jpg.
+	* doc/examples/largedemo/largedemo-setup.jpg: Don't use the
+	"squid" cable as it is not part of the STK500 (but of the JTAG
+	ICE), use jumper cables instead.
+	* doc/examples/largedemo/largedemo-wiring.jpg: (Ditto.)
+	* doc/examples/largedemo/largedemo.dox: (Ditto.)
+	* doc/examples/largedemo/largedemo.c: Fix a bug that caused the
+	PWMDDR to be clobbered for ATmega16 MCUs so LED1 and 2 did not
+	work.
+	* doc/examples/stdiodemo/stdiodemo.dox: Add comment about the
+	V5 pin on the LCD.
+	* doc/examples/largedemo/largedemo-wiring2.jpg: New file.
+
+2006-01-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iotnx4.h: Fix the spelling of the OCR1A/B
+	registers.
+
+For older changes see ChangeLog-2005
