@@ -1,16 +1,3 @@
-2006-12-31 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
-
-	Fix breakage for strtod() on avr6 architectures caused
-	by calling __prologue_saves__.
-	Fixes bug #18509: strtod.S crashes due to stack problem with atmega
-	2560
-	* libm/fplib/strtod.S: pop and restore EIND from the stack before
-	calling __prologue_saves__ on 3-byte PC AVR architectures.
-	* include/avr/io.h: Provide a value for EIND when compiling the
-	library for an avr6 architecture.
-	* include/avr/iomxx0_1.h: Protect the EIND definition from appearing
-	twice in while compiling the library for an avr6 architecture.
-
 2006-12-23 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* configure.ac: Add support for ATmega3290P
@@ -27,6 +14,15 @@
 	* include/avr/iom164.h (SPM_PAGESIZE): Set to 128.
 	* include/avr/iom324.h (SPM_PAGESIZE): Set to 128.
 	Closes savannah bug #18385.
+
+2006-10-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Released avr-libc 1.4.5.
+
+2006-10-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version.
+	* README: Update preferred tool versions.
 
 2006-10-09 Eric B. Weddington <eweddington@cso.atmel.com>
 
@@ -55,6 +51,11 @@
 	--prefix to avr-libc configure command, remove UISP, minor
 	addition to avrdude section.
 	Closes bug #17551: Update documentation to point to issues with gcc4.1
+
+2006-10-05 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/TODO: Fix links to mailing list messages. Removed item for checking
+	for broken links in documentation: ran linklint and no broken links.
 
 2006-09-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -125,11 +126,12 @@
 
 2006-09-01 Eric B. Weddington <eweddington@cso.atmel.com>
 
-	Additional fix for bug #16411.
+	Fix for bug #16411.
 	* include/avr/interrupt.h: Conditionally compile 'used' and 
 	'externally_visible' attributes on interrupt macros based on compiler
 	version.
 	* include/compat/deprecated: Ditto.
+	* NEWS: Update fixed bug list.
 
 2006-08-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -149,15 +151,6 @@
 	* doc/examples/Makefile.am: Wire the asmdemo into the build and
 	distribution process.
 	* doc/examples/all-demos.dox: Add a paragraph about the purpose of
-	this new demo, including a reference to it.
-
-2006-08-28 Eric B. Weddington <eweddington@cso.atmel.com>
-
-	Additional fix for bug #16411.
-	* include/avr/interrupt.h: Add the 'externally_visible' attribute on all
-	interrupt service routine macros.
-	* include/compat/deprecated.h: Add the 'externally_visible' attribute on the
-	INTERRUPT macro.
 
 2006-08-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -167,14 +160,11 @@
 	changed behaviour in avr-objcopy when trying to copy an
 	empty .eeprom section.
 
-2006-08-24 Eric B. Weddington <eweddington@cso.atmel.com>
+2006-08-18 Eric B. Weddington <eweddington@cso.atmel.com>
 
-	Fix for bug #16411.
-	* include/avr/interrupt.h: Add the 'used' attribute on all interrupt
-	service routine macros.
-	* include/compat/deprecated.h: Add the 'used' attribute on the INTERRUPT
-	macro.
-	* NEWS: Add to fixed bug list.
+	* include/avr/power.h: New file. Provides a Power Management API.
+	* include/avr/sleep.h: Fix grammar errors in doxygen comment.
+	* NEWS: New Power Management API.
 
 2006-08-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -185,12 +175,6 @@
 	E is asserted.
 	* doc/examples/stdiodemo/stdiodemo.dox: Document the new
 	approach of the E pulse generation.
-
-2006-07-25 Eric B. Weddington <eweddington@cso.atmel.com>
-
-	* include/avr/power.h: New file. Provides a Power Management API.
-	* include/avr/sleep.h: Fix grammar error in doxygen comment.
-	* NEWS: New Power Management API.
 
 2006-07-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -257,7 +241,11 @@
 	* include/avr/Makefile.am: Include new files.
 	* doc/api/main_page.dox: Document support for ATmega165P/169P.
 	* doc/api/using-tools.dox: (Ditto.)
-	
+
+2006-04-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Released avr-libc 1.4.4.
+
 2006-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by lx_b@gmx.at:
@@ -278,15 +266,6 @@
 	ATmega164P/324P, add support for ATmega644P.
 	* doc/examples/demo/Makefile: (Ditto.)
 
-2006-04-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
-
-	* doc/examples/demo/iocompat.h: Add support for ATmega640/1280/1281.
-	* doc/examples/demo/Makefile: (Ditto.)
-
-2006-04-13 Anatoly Sokolov <aesok@post.ru>
-
-	* include/avr/iotn2313.h(SPMEN, SELFPRGEN): Add.
-
 2006-04-01 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the ATmega644P support. Rename 
@@ -298,16 +277,17 @@
 	* doc/api/main_page.dox: Document support for ATmega644P. Rename 
 	ATmega164/ATmega324 to ATmega164P/ATmega324P.
 	* doc/api/using-tools.dox: (Ditto.)
-	
-2006-03-24 Anatoly Sokolov <aesok@post.ru>
 
-	* Makefile.am (DIST_SUBDIRS): Add 'devtools'.
-	* configure.ac (AC_CONFIG_FILES): Add 'devtools/Makefile'.
-	* devtools/.cvsignore: New file.
-	* devtools/Makefile.am; New file.
-	[Fixed bug #16039]
+2006-04-17 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
-2006-03-21 Anatoly Sokolov <aesok@post.ru>
+	* doc/examples/demo/iocompat.h: Add support for ATmega640/1280/1281.
+	* doc/examples/demo/Makefile: (Ditto.)
+
+2006-04-13 Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotn2313.h(SPMEN, SELFPRGEN): Add.
+
+2006-03-31 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: add tests for the AT90USB646/647/1286/1287 support.
 	* devtools/gen-avr-lib-tree.sh: add support for AT90USB646/647/1286/1287.
@@ -321,6 +301,14 @@
 	* include/avr/Makefile.am: include new files.
 	* doc/api/main_page.dox: Document support for AT90USB646/647/1286/1287.
 	* doc/api/using-tools.dox: (Ditto.)
+	
+2006-03-24 Anatoly Sokolov <aesok@post.ru>
+ 
+	* Makefile.am (DIST_SUBDIRS): Add 'devtools'.
+	* configure.ac (AC_CONFIG_FILES): Add 'devtools/Makefile'.
+	* devtools/.cvsignore: New file.
+	* devtools/Makefile.am; New file.
+	[Fixed bug #16039]
 
 2006-03-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -358,7 +346,7 @@
 
 	Notified by Peter Schrepfer:
 	* doc/examples/demo/iocompat.h: Fix OCR1A location
-	for ATmega16/32 (broken in rev 1.2).
+	for ATmega16/32 (broken in rev 1.1.2.2).
 
 2006-03-06 Anatoly Sokolov <aesok@post.ru>
 
@@ -450,6 +438,14 @@
 	* include/avr/iotn2313.h (SIG_OUTPUT_COMPARE0A): Rename from 
 	SIG_OUTPUT_COPMARE0A.
 	[Fixed bug #15522]
+	
+2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* Released avr-libc 1.4.3.
+
+2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: bump version.
 
 2006-01-22 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -472,40 +468,28 @@
 	* include/avr/iotn85.h (SPM_PAGESIZE): (Ditto.).
 	* include/avr/iotn861.h (SPM_PAGESIZE): (Ditto.).
 
+2006-01-20 Anatoly Sokolov <aesok@post.ru>
+
+	* /libm/fplib/sqrt.S: Use __addsf3/__divsf3 instead 
+	__addsf3x/__divsf3x.
+
 2006-01-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* Makefile.am (EXTRA_DIST): add ChangeLog-2005.
 
-2006-01-09 Anatoly Sokolov <aesok@post.ru>
+2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
-	* libm/fplib/acos.S : Use XCALL/XJMP instead RCALL/RJMP 
-	for calling __addsf3/__subsf3/__mulsf3/__divsf3 functions.
-	* libm/fplib/cosh.S : (Ditto.).
-	* libm/fplib/exp.S : (Ditto.).
-	* libm/fplib/fmod.S : (Ditto.).
-	* libm/fplib/fp_cosinus.S : (Ditto.).
-	* libm/fplib/log.S : (Ditto.).
-	* libm/fplib/log10.S : (Ditto.).
-	* libm/fplib/pow.S : (Ditto.).
-	* libm/fplib/sin.S : (Ditto.).
-	* libm/fplib/sinh.S : (Ditto.).
-	* libm/fplib/strtod.S : (Ditto.).
-	* libm/fplib/tan.S : (Ditto.).
-	* libm/fplib/tanh.S : (Ditto.).
-	* libm/fplib/modf.S : Use XCALL/XJMP instead RCALL/RJMP 
-	__addsf3/__fixsfsi/__floatsisf functions.
-	* libm/fplib/asin.S : Use RCALL/RJMP instead XCALL/XJMP 
-	for calling __fp_nanEDOM/__fp_powerseries functions.
-	* libm/fplib/atan.S : Use RCALL/RJMP instead XCALL/XJMP 
-	for calling __fp_inverse/square functions.
-	* libm/fplib/atan2.S : Use RCALL/RJMP instead XCALL/XJMP 
-	for calling __fp_nanERANGE/atan functions.
+	Released avr-libc 1.4.2.
+
+2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version.
 
 2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Galen Seitz:
 	* avr-libc.spec.in: Fixed examples installation.
- 
+
 2006-01-06 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/Makefile.am: Fix the source directory for
@@ -513,11 +497,6 @@
 	outside $(top_srcdir).  This fixes "make distcheck".
 	* include/avr/pgmspace.h: Add a warning about the _P()
 	functions not working above 64 KB.
-
-2006-01-06 Anatoly Sokolov <aesok@post.ru>
-
-	* /libm/fplib/sqrt.S: Use __addsf3/__divsf3 instead 
-	__addsf3x/__divsf3x.
 
 2006-01-06 Anatoly Sokolov <aesok@post.ru>
 
@@ -588,5 +567,14 @@
 
 	* include/avr/iotnx4.h: Fix the spelling of the OCR1A/B
 	registers.
+
+2006-01-02 Anatoly Sokolov <aesok@post.ru>
+
+	* libm/fplib/Files.am: include new files.
+	* libm/fplib/fp_m_inf.S: new file.
+	* libm/fplib/fp_p_inf.S: new file.
+	* libm/fplib/fplib.inc (EMAX, EMIN): Add.
+	* libm/fplib/ldexp.S: Check underflow and overflow cases.
+	[Fixed bug #15226]
 
 For older changes see ChangeLog-2005
