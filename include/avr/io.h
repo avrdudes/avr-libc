@@ -166,6 +166,11 @@
 #define    EEWE         1
 #define    EERE         0
 
+/* Extended indirect addressing of ATmega256x devices */
+#if __AVR_ARCH__ == 6
+#  define EIND     _SFR_IO8(0X3C)
+#endif
+
 #endif /* __COMPILING_AVR_LIBC__ */
 
 #if defined (__AVR_AT94K__)

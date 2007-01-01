@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#18385] SPM_PAGESIZE wrong value for ATmega164p and ATmega324p
+  [#18509] strtod.S crashes due to stack problem with atmega 2560
 
 * New devices supported:
 

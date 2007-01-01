@@ -463,7 +463,9 @@
 #define RAMPZ   _SFR_IO8(0X3B)
 #define RAMPZ0  0
 
-#define EIND    _SFR_IO8(0X3C)
+#if !(__AVR_ARCH__ == 6 && defined(__COMPILING_AVR_LIBC__))
+#  define EIND    _SFR_IO8(0X3C)
+#endif
 #define EIND0   0
 
 /* SP [0x3D..0x3E] */

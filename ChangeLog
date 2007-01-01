@@ -1,1 +1,14 @@
+2007-01-01 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix breakage for strtod() on avr6 architectures caused
+	by calling __prologue_saves__.
+	Fixes bug #18509: strtod.S crashes due to stack problem with atmega
+	2560
+	* libm/fplib/strtod.S: pop and restore EIND from the stack before
+	calling __prologue_saves__ on 3-byte PC AVR architectures.
+	* include/avr/io.h: Provide a value for EIND when compiling the
+	library for an avr6 architecture.
+	* include/avr/iomxx0_1.h: Protect the EIND definition from appearing
+	twice in while compiling the library for an avr6 architecture.
+
 For older changes see ChangeLog-2006

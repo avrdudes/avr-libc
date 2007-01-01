@@ -45,6 +45,8 @@
 
 #if !defined(__DOXYGEN__)
 
+#include "avr/io.h"
+
 #include "gasava.inc"
 #include "macros.inc"
 #include "fplib.inc"
@@ -372,6 +374,10 @@ GLOBAL(strtod)
 .L_strtod_prologue:
 	clr	XL		; no locals
 	clr	XH
+#if __AVR_3_BYTE_PC__
+	pop	ZH
+	out	_SFR_IO_ADDR(EIND), ZH
+#endif /* __AVR_3_BYTE_PC__ */
 	pop	ZH
 	pop	ZL
 	PROLOGUE_SAVES(6)
