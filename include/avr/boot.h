@@ -539,7 +539,7 @@
     Loader memory section of flash, you would use this macro as such:
 
     \code
-    boot_lock_bits_set (_BV (BLB12));
+    boot_lock_bits_set (_BV (BLB11));
     \endcode
 
     \note Like any lock bits, the Boot Loader Lock Bits, once set,

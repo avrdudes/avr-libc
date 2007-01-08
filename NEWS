@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [#18115] online documentation typo/bug avr/boot.h
   [#18385] SPM_PAGESIZE wrong value for ATmega164p and ATmega324p
   [#18509] strtod.S crashes due to stack problem with atmega 2560
   [#18662] rand() keeps returning the same value if seeded with 0

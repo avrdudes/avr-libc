@@ -1,5 +1,12 @@
 2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/boot.h (boot_lock_bits_set): Fix a typo: BLB11 needs
+	to be programmed (rather than BLB12) in order to prevent the
+	application from overwriting the boot loader section.
+	Closes bug #18115: online documentation typo/bug avr/boot.h
+
+2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/stdio.h: Document that malloc() is no longer needed for
 	floating-point conversions as it once used to be.
 	Closes bug #18688: vfscanf and vfprintf don't use malloc
