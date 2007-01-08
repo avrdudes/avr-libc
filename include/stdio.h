@@ -139,16 +139,12 @@
     \anchor stdio_without_malloc
     <h3>Running stdio without malloc()</h3>
 
-    By default, fdevopen() as well as the floating-point versions of
-    the printf and scanf family require malloc().  As this is often
+    By default, fdevopen() requires malloc().  As this is often
     not desired in the limited environment of a microcontroller, an
     alternative option is provided to run completely without malloc().
 
     The macro fdev_setup_stream() is provided to prepare a
-    user-supplied FILE buffer for operation with stdio.  If
-    floating-point operation is desired, a user-supplied buffer can as
-    well be passed for the internal buffering for the floating-point
-    numbers (and processing of \%[ scanf data).
+    user-supplied FILE buffer for operation with stdio.
 
     <h4>Example</h4>
 
@@ -975,11 +971,12 @@ extern int	ferror(FILE *__stream);
      By default, all the conversions described above are available
      except the floating-point conversions, and the <tt>\%[</tt> conversion.
      These conversions will be available in the extended version
-     provided by the library \c libscanf_flt.a.  Note that either of
-     these conversions requires the availability of a buffer that
-     needs to be obtained at run-time using malloc().  If this buffer
-     cannot be obtained, the operation is aborted, returning the
-     value \c EOF.  To link a program against the extended version,
+     provided by the library \c libscanf_flt.a.  Note that these
+     conversions require a 40-byte conversion buffer, so the
+     extended version requires more stack space than the basic
+     version irrespective of whether the actual call in progress
+     actually uses this buffer or not.
+     To link a program against the extended version,
      use the following compiler flags in the link stage:
 
      \code

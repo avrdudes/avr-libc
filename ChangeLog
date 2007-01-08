@@ -1,5 +1,11 @@
 2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/stdio.h: Document that malloc() is no longer needed for
+	floating-point conversions as it once used to be.
+	Closes bug #18688: vfscanf and vfprintf don't use malloc
+
+2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Fix broken seeding of the PRNGs when seeding with 0.
 	This fix is courtesy Andrew Chernov from the FreeBSD
 	project (rev. 1.21 of their random.c).
