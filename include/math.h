@@ -240,7 +240,7 @@ extern double acos(double __x) __ATTR_CONST__;
 
      The asin() function computes the principal value of the
      arc sine of \c x.  The returned value is in the range
-     [0, pi] radians.
+     [-pi/2, pi/2] radians.
      A domain error occurs for arguments not in the range
      [-1, +1].
   */
