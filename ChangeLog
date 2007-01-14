@@ -1,4 +1,4 @@
-2006-01-14 Anatoly Sokolov <aesok@post.ru>
+2007-01-14 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the AT90PWM1 support.
 	* devtools/gen-avr-lib-tree.sh: Add support for AT90PWM1 device.

@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, 2004 Marek Michalkiewicz
-   Copyright (c) 2005, 2006 Eric B. Weddington
+   Copyright (c) 2005, 2006, 2007 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without

@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,2006,  Anatoly Sokolov
+# Copyright (c) 2005,2006,2007  Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without

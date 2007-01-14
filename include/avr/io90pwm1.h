@@ -1,5 +1,5 @@
 /* Copyright (c) 2005, Andrey Pashchenko
-   Copyright (c) 2006, Anatoly Sokolov
+   Copyright (c) 2007, Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without

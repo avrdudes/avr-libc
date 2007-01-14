@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2003,2005,2006, Marek Michalkiewicz, Joerg Wunsch
+/* Copyright (c) 2002,2003,2005,2006,2007 Marek Michalkiewicz, Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without

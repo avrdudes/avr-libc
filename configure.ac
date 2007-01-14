@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,2006,  Anatoly Sokolov
+# Copyright (c) 2005,2006,2007  Anatoly Sokolov
 # Copyright (c) 2005,  Joerg Wunsch
 # All rights reserved.
 #
