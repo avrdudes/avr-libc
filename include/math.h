@@ -72,6 +72,18 @@
    The square root of 2. */
 #define M_SQRT2 1.4142135623730950488016887
 
+/**
+   \ingroup avr_math
+
+   NAN constant. */
+#define NAN	__builtin_nan("")
+
+/**
+   \ingroup avr_math
+
+   INFINITY constant. */
+#define INFINITY	__builtin_inf()
+
 #ifndef __DOXYGEN__
 
 #ifndef __ATTR_CONST__
@@ -126,6 +138,9 @@ extern double fmod(double __x, double __y) __ATTR_CONST__;
      pointed to by \c iptr.
 
      The modf() function returns the signed fractional part of \c value.
+     
+     \note
+     This implementation skips writing by zero pointer.
   */
 extern double modf(double __value, double *__iptr);
 
@@ -190,9 +205,6 @@ extern double frexp(double __value, int *__exp);
 
      The ldexp() function returns the value of \c x times 2 raised to the power
      \c exp.
-
-     If the resultant value would cause an overflow, the global variable errno
-     is set to ERANGE, and the value NaN is returned.
   */
 extern double ldexp(double __x, int __exp) __ATTR_CONST__;
 
@@ -263,8 +275,6 @@ extern double atan(double __x) __ATTR_CONST__;
      arc tangent of <tt>y / x</tt>, using the signs of both arguments
      to determine the quadrant of the return value.  The returned
      value is in the range [-pi, +pi] radians.
-     If both \c x and \c y are zero, the global variable \c errno
-     is set to \c EDOM.
   */
 extern double atan2(double __y, double __x) __ATTR_CONST__;
 
@@ -318,6 +328,111 @@ extern int isinf(double __x) __ATTR_CONST__;
      This function does not belong to the C standard definition.
   */
 extern double square(double __x) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The copysign() function returns \c x but with the sign of \c y.
+     They work even if \c x or \c y are NaN or zero.
+ */
+__ATTR_CONST__ extern inline double copysign (double x, double y)
+{
+    asm (
+	"bst	%D2, 7	\n\t"
+	"bld	%D0, 7	"
+	: "=r" (x)
+	: "0" (x), "r" (y) );
+    return x;
+}
+
+  /**
+     \ingroup avr_math
+
+     The fdim() function returns <tt>max(x-y,0)</tt>. If \c x or \c y
+     or both are NaN, NaN is returned.
+  */
+extern double fdim (double x, double y) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The fma() function performs floating-point multiply-add. This is
+     the operation (x * y) + z, but the intermediate result is not
+     rounded to the destination type.  This can sometimes improve the
+     precision of a calculation.
+  */
+extern double fma (double x, double y, double z) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The fmax() function returns the greater of the two values \c x
+     and \c y. If an argument is NaN, the other argument is returned.
+     If both arguments are NaN, NaN is returned.
+  */
+extern double fmax (double x, double y) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The fmin() function returns the lesser of the two values \c x
+     and \c y. If an argument is NaN, the other argument is returned.
+     If both arguments are NaN, NaN is returned.
+  */
+extern double fmin (double x, double y) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The signbit() function returns a nonzero value if the value of \c x
+     has its sign bit set.  This is not the same as `\c x < 0.0',
+     because IEEE 754 floating point allows zero to be signed. The
+     comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return
+     a nonzero value.
+     
+     \note
+     This implementation returns -1 if sign bit is set.
+  */
+extern int signbit (double x) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The trunc() function rounds \c x to the nearest integer not larger in
+     absolute value.
+  */
+extern double trunc (double x) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The isfinite() function returns a nonzero value if \c x is finite:
+     not plus or minus infinity, and not NaN.
+  */
+__ATTR_CONST__ extern inline int isfinite (double x)
+{
+    unsigned char exp;
+    asm (
+	"mov	%0, %C1		\n\t"
+	"lsl	%0		\n\t"
+	"mov	%0, %D1		\n\t"
+	"rol	%0		"
+	: "=r" (exp)
+	: "r" (x)	);
+    return exp != 0xff;
+}
+
+  /**
+     \ingroup avr_math
+
+     The hypot() function returns 'sqrt (x*x + y*y)'. This is the length of     
+     the hypotenuse of a right triangle with sides of length x and y, or
+     the  distance of the point (x, y) from the origin. Using this
+     function  instead of the direct formula is wise, since the error is
+     much smaller. No underflow with small x and y. No overflow if
+     result is in range.
+  */
+double hypot (double x, double y);
 
 #ifdef __cplusplus
 }
