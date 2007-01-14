@@ -11,6 +11,7 @@
   [no-id]  Make include/avr/eeprom.h -Wundef safe.
   [no-id]  Fix the timing of the HD44780 driver in the stdiodemo.
   [no-id]  Fix the sleep mode definitions for the ATtiny2313.
+  [no-id]  Exclude 64-bit types for -mint8.
   [#15161] util/delay.h misses inline keyword (regression)
   [#15193] incorrect definition of IVSEL bit in MCUCR register
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.

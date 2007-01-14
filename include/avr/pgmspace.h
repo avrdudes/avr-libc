@@ -189,6 +189,9 @@ typedef uint32_t PROGMEM prog_uint32_t;
    \typedef prog_int64_t
 
    Type of an "int64_t" object located in flash ROM.
+
+   \note This type is not available when the compiler
+   option -mint8 is in effect.
 */
 typedef int64_t PROGMEM prog_int64_t;
 
@@ -197,6 +200,9 @@ typedef int64_t PROGMEM prog_int64_t;
    \typedef prog_uint64_t
 
    Type of an "uint64_t" object located in flash ROM.
+
+   \note This type is not available when the compiler
+   option -mint8 is in effect.
 */
 typedef uint64_t PROGMEM prog_uint64_t;
 #else  /* !DOXYGEN */
@@ -210,8 +216,10 @@ typedef int16_t   prog_int16_t  PROGMEM;
 typedef uint16_t  prog_uint16_t PROGMEM;
 typedef int32_t   prog_int32_t  PROGMEM;
 typedef uint32_t  prog_uint32_t PROGMEM;
+#if !__USING_MINT8
 typedef int64_t   prog_int64_t  PROGMEM;
 typedef uint64_t  prog_uint64_t PROGMEM;
+#endif
 #endif /* defined(__DOXYGEN__) */
 
 /* Although in C, we can get away with just using __c, it does not work in
