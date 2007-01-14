@@ -1,3 +1,29 @@
+2007-01-14  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* bootstrap: Version 2.60 for autoconf is added.
+
+	New version of math library:
+	* libm/fplib/{dtostre.S,dtostrf.S,fp_cosinus.S,fp_flashconst.S,
+	fp_inverse.S,fp_m_inf.S,fp_merge.S,fp_p_inf.S,fp_powerseries.S,
+	fp_split.S,fplib.inc,isinfnan.S,readme.dtostre,readme.fplib,
+	readme.strtod,strtod.S}: Removed.
+	* libm/fplib/{asmdef.h,copysign.S,fdim.S,fixsfdi.S,floatdisf.S,
+	floatunsdisf.S,fma.S,fmax.S,fmin.S,fp32def.h,fp_arccos.S,fp_inf.S,
+	fp_mintl.S,fp_mpack.S,fp_negdi.S,fp_norm2.S,fp_powser.S, fp_powsodd.S,
+	fp_pscA.S,fp_pscB.S,fp_rempio2.S,fp_round.S,fp_sinus.S,fp_split3.S,
+	fp_trunc.S,hypot.S,inverse.S,isfinite.S,isinf.S,isnan.S,ntz.h,
+	signbit.S,trunc.S}: New files.
+	* libm/fplib/{Files.am,acos.S,addsf3.S,addsf3x.S,asin.S,atan.S,
+	atan2.S,ceil.S,cos.S,cosh.S,divsf3.S,divsf3x.S,exp.S,fixsfsi.S,
+	floatsisf.S,floor.S,fmod.S,fp_cmp.S,fp_nan.S,fp_zero.S,frexp.S,
+	ldexp.S,log.S,log10.S,modf.S,mulsf3.S,mulsf3x.S,negsf2.S,pow.S,
+	sin.S,sinh.S,sqrt.S,square.S,tan.S,tanh.S}: Replaced.
+	* libc/stdlib/{atof.S,dtoa_conv.h,dtoa_prf.c,dtostre.c,dtostrf.c,
+	ftoa_engine.S,ftoa_engine.h,strtod.c}: New files.
+	* libc/stdlib/Files.am: A set of new files added.
+	* include/math.h: A set of new functions added.
+	* include/stdlib.h (dtostrf): doc is corrected
+
 2007-01-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Robert Schiele:
