@@ -98,12 +98,16 @@ typedef signed long int int32_t;
 typedef unsigned long int uint32_t;
 
 /** \ingroup avr_stdint
-    64-bit signed type. */
+    64-bit signed type.
+    \note This type is not available when the compiler
+    option -mint8 is in effect. */
 
 typedef signed long long int int64_t;
 
 /** \ingroup avr_stdint
-    64-bit unsigned type. */
+    64-bit unsigned type.
+    \note This type is not available when the compiler
+    option -mint8 is in effect. */
 
 typedef unsigned long long int uint64_t;
 
@@ -119,8 +123,10 @@ typedef int int16_t __attribute__ ((__mode__ (__HI__)));
 typedef unsigned int uint16_t __attribute__ ((__mode__ (__HI__)));
 typedef int int32_t __attribute__ ((__mode__ (__SI__)));
 typedef unsigned int uint32_t __attribute__ ((__mode__ (__SI__)));
+#if !__USING_MINT8
 typedef int int64_t __attribute__((__mode__(__DI__)));
 typedef unsigned int uint64_t __attribute__((__mode__(__DI__)));
+#endif
 
 #endif /* defined(__DOXYGEN__) */
 
@@ -176,15 +182,21 @@ typedef int32_t  int_least32_t;
 
 typedef uint32_t uint_least32_t;
 
+#if !__USING_MINT8 || defined(__DOXYGEN__)
 /** \ingroup avr_stdint
-    signed int with at least 64 bits. */
+    signed int with at least 64 bits.
+    \note This type is not available when the compiler
+    option -mint8 is in effect. */
 
 typedef int64_t  int_least64_t;
 
 /** \ingroup avr_stdint
-    unsigned int with at least 64 bits. */
+    unsigned int with at least 64 bits.
+    \note This type is not available when the compiler
+    option -mint8 is in effect. */
 
 typedef uint64_t uint_least64_t;
+#endif
 
 /*@}*/
 
@@ -224,15 +236,21 @@ typedef int32_t int_fast32_t;
 
 typedef uint32_t uint_fast32_t;
 
+#if !__USING_MINT8 || defined(__DOXYGEN__)
 /** \ingroup avr_stdint
-    fastest signed int with at least 64 bits. */
+    fastest signed int with at least 64 bits.
+    \note This type is not available when the compiler
+    option -mint8 is in effect. */
 
 typedef int64_t int_fast64_t;
 
 /** \ingroup avr_stdint
-    fastest unsigned int with at least 64 bits. */
+    fastest unsigned int with at least 64 bits.
+    \note This type is not available when the compiler
+    option -mint8 is in effect. */
 
 typedef uint64_t uint_fast64_t;
+#endif
 
 /*@}*/
 
@@ -243,6 +261,11 @@ typedef uint64_t uint_fast64_t;
 
 /*@{*/
 
+#if __USING_MINT8
+typedef int32_t intmax_t;
+
+typedef uint32_t uintmax_t;
+#else  /* !__USING_MINT8 */
 /** \ingroup avr_stdint
     largest signed int available. */
 
@@ -252,6 +275,7 @@ typedef int64_t intmax_t;
     largest unsigned int available. */
 
 typedef uint64_t uintmax_t;
+#endif /* __USING_MINT8 */
 
 /*@}*/
 

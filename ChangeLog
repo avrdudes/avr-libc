@@ -1,3 +1,9 @@
+2007-01-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Robert Schiele:
+	* include/stdint.h: Exclude 64-bit types when -mint8 is in effect.
+	* include/avr/pgmspace.h: (Ditto.)
+
 2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/boot.h (boot_lock_bits_set): Fix a typo: BLB11 needs
