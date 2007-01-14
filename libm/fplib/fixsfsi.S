@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,67 +25,86 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    fixsfsi.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *------------------------------------------------------------------------------------------
- * data conversion section
- *------------------------------------------------------------------------------------------
- *
- * A = (long)A
+/* Return:
+     rA3.rA2.rA1.rA0  - value, negate is done, if needed
+     C                - set, if Infinity or overflow
+     T                - sign of input value, cleared for -0.0
+   Notes:
+     * Infinity or overflow:  return 0xffffffff with C = 1
  */
+ENTRY   __fixsfsi
+ENTRY   __fixunssfsi
+	rcall	_U(__fp_splitA)
+	brcc	1f		; isfinite(A)
+	breq	.L_ovfl		; Inf
+.L_zero:
+	rjmp	_U(__fp_zero)
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+1:	subi	rA3, 127	; 1.0 exponent field
+	brlo	.L_zero		; too small
 
-          TEXT_SEG(fplib, __fixsfsi)
-          FUNCTION(__fixsfsi)
-
-GLOBAL(__fixsfsi)
-GLOBAL(__fixunssfsi)
-   BST     rA3,7
-   RCALL   _U(__fp_split1)
-   cpi     rA3,0x7F
-   brcs    1f		; fabs(x) < 1.0, shift count >= 32
-   LDI     rTI0,0x7F+31
-   SUB     rTI0,rA3
-   MOV     rA3,rA2
-   MOV     rA2,rA1
-   MOV     rA1,rA0
-   MOV     rA0,rAE
-   RJMP    5f
-
-1:
-   rjmp    _U(__fp_zero)
-
-2:
-   LSR    rA3
-   ROR    rA2
-   ROR    rA1
-   ROR    rA0
-5:
-   SUBI   rTI0,1
-   BRCC   2b
-   BRTC   1f
-   /* TEXT_SEG(fp_lneg) */
-GLOBAL(__fp_lneg)
-   COM     rA3
-   COM     rA2
-   COM     rA1
-   NEG     rA0
-   SBCI    rA1,0xFF
-   SBCI    rA2,0xFF
-   SBCI    rA3,0xFF
-1:
-   RET
-
-          ENDFUNC
-
-
+	ldi	rAE, 31
+	sub	rAE, rA3
+	brlo	.L_ovfl		; fabs(A) >= 1.0 * 2**32
+	/* Now rAE:
+	     31 - exponent was 127+0, shift >>23 is needed,
+	      0 - exponent was 127+31, shift <<8 is needed.	*/
+	clr	rA3
+	subi	rAE, 8		; rAE= -8..+23
+	brpl	3f
+  ; fabs(A) >= 1.0 * 2**24  Shift to left is needed.
+	/* Shift to 8 is not optimized specialy as an exotic.	*/
+2:	lsl	rA0
+	rol	rA1
+	rol	rA2
+	rol	rA3
+	inc	rAE
+	brmi	2b
+	rjmp	.L_sign
+  ; Shift to right is needed
+3:	/* Now rAE:
+	     23 - exponent was 127+0, shift >>23 is needed,
+	      1 - exponent was 127+22, shift >>1 is needed,
+	      0 - exponent was 127+23, no shift is needed.	*/
+	subi	rAE, 8
+	brmi	5f
+  ; quick shift by 8
+4:	mov	rA0, rA1
+	mov	rA1, rA2
+	clr	rA2
+	subi	rAE, 8
+	brpl	4b
+	
+5:	subi	rAE, -8		; rAE = 0..7
+	breq	.L_sign
+  ; shift to 1..7 positions
+6:	lsr	rA2
+	ror	rA1
+	ror	rA0
+	dec	rAE
+	brne	6b
+.L_sign:
+	brtc	7f
+	com	rA3
+	com	rA2
+	com	rA1
+	neg	rA0
+	sbci	rA1, -1
+	sbci	rA2, -1
+	sbci	rA3, -1
+7:	clc
+	ret
+  ; overflow, C is set already
+.L_ovfl:
+	ldi	rA0, 0xff
+	ldi	rA1, 0xff
+	X_movw	rA2, rA0
+	ret
+ENDFUNC

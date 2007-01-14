@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Reiner Patommel
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -24,123 +25,58 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-
- * ----------------------------------------------------------------------------
- *  asin.S
- *-----------------------------------------------------------------------------
-
-   Contributors:
-     Created by Reiner Patommel, 01 Dec 2002
-
- -*- Mode: Asm -*-
-
- * Accuracy:  0.00000  <= |x| <= 0.99999:  better than +/-3*10^-7
- *            0.99999  <= |x| <  1.00000:  better than +/-5*10^-5
-
- * ----------------------------------------------------------------------------
- *  A = asin(A)
- *--------------------------------------------------------------------------*/
+  POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-#if !defined(__DOXYGEN__)
-
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
-
-#define sign	r26
-
-	TEXT_SEG(fplib, asin)
-	FUNCTION(asin)
-
-GLOBAL(asin)
-	CLR	sign
-	SBRC	rA3, 7
-	ORI	sign, 1
-	PUSH	sign		; remember sign of x (bit 0 set: x < 0)
-	ANDI	rA3, 0x7F	; x = |x|
-	LDI	rB3, 0x3F
-	LDI	rB2, 0x80
-	CPI	rA0, 0x01
-	CPC	rA1, __zero_reg__
-	CPC	rA2, rB2
-	CPC	rA3, rB3	; A - 1.0000001192092896
-	BRCS	1f		; A <= 1.0
-	RCALL	_U(__fp_nanEDOM)	; A > 1.0 -> argument range error
-	POP	sign		; clean-up
-	RET			; return with NAN
-1:				; here x <= 1.0
-	PUSH	rA3
-	PUSH	rA2
-	PUSH	rA1
-	PUSH	rA0		; save x
-	LDI	ZL,LOW(table_asin)
-	LDI	ZH,HIGH(table_asin)	; point to table
-	RCALL	_U(__fp_powerseries)	; A = P0 + x(P1 + x(P2 + x(P3 + x(P4 +
-					;  x(P5 + x(P6 + x(P7)))))))
-	POP	rB0
-	POP	rB1
-	POP	rB2
-	POP	rB3		; get x again
-	PUSH	rA3
-	PUSH	rA2
-	PUSH	rA1
-	PUSH	rA0		; save A
-	LDI	rA3, 0x3F
-	LDI	rA2, 0x80
-	CLR	rA1
-	CLR	rA0		; A = 1.0
-	ORI	rB3, 0x80	; B = -x
-	XCALL	__addsf3	; A = 1 + (-x)
-	RCALL	_U(sqrt)	; A = sqrt(1-x)
-	POP	rB0
-	POP	rB1
-	POP	rB2
-	POP	rB3		; get A again
-	XCALL	__mulsf3	; A = (1 - x)^2 (P0 + x(P1 + x(P2 + x(P3 +
-				;  x(P4 + x(P5 + x(P6 + x(P7))))))))
-	LDI	rB3, 0x3F
-	LDI	rB2, 0xC9
-	LDI	rB1, 0x0F
-	LDI	rB0, 0xDB	; B = PI/2
-	ORI	rA3, 0x80	; A = -A
-	XCALL	__addsf3	; A = pi/2 - (1 - x)^2 (P0 + x(P1 + x(P2 +
-				; x(P3 + x(P4 + x(P5 + x(P6 + x(P7))))))))
-	POP	sign		; get sign of x again
-	SBRC	sign, 0
-	ORI	rA3, 0x80	; asin(x) = -asin(-x)
-	RET
-	ENDFUNC
-/*----------------------------------------------------------------------------
-
- asin(x) = pi/2 - (1 - x)^2 (P0 + x(P1 + x(P2 + x(P3 + x(P4 + x(P5 +
-                                                       x(P6 + x(P7))))))))
- *
- * P0 :  1.57079 63050    [3FC90FDA]
- * P1 : -0,21459 88016    [BE5BBFCA]
- * P2 :  0.08897 89874    [3DB63A9E]
- * P3 : -0.05017 43046    [BD4D8392]
- * P4 :  0.03089 18810    [3CFD10F8]
- * P5 : -0.01708 81256    [BC8BFC66]
- * P6 :  0.00667 00901    [3BDA90C5]
- * P7 : -0.00126 24911    [BAA57A2C]
+/* float asin (float A);
+     The asin() function returns the arc sine in radians and the value is
+     mathematically defined to be between -PI/2 and PI/2 (inclusive).
  */
+#include "fp32def.h"
+#include "asmdef.h"
+
+#define	X2SMALL     0x3e78ffff
+#define HI40_PI_2   0x3fc90fda		/* high 4 bytes of Pi/2	*/
+#define	LO40_PI_2   0xa2		/* lowest byte of Pi/2	*/
+
+ENTRY asin
+  ; save A sign
+	push	rA3
+  ; A = fabs(A)
+	andi	rA3, 0x7f
+  ; is A too small ?
+	ldi	ZL,  hhi8(X2SMALL + 1)
+	cpi	rA2, hlo8(X2SMALL + 1)
+	cpc	rA3, ZL
+	brsh	1f
+  ; for small x
+	ldi	ZL, lo8 (.L_table)
+	ldi	ZH, hi8 (.L_table)
+	rcall	_U(__fp_powsodd)
+	rjmp	2f
+  ; arcsin(x) = Pi/2 - arccos(x)
+1:	rcall	_U(__fp_arccos)
+	subi	rA3, 0x80
+	ldi	rBE, LO40_PI_2
+	ldi	rB0,  lo8(HI40_PI_2)
+	ldi	rB1,  hi8(HI40_PI_2)
+	ldi	rB2, hlo8(HI40_PI_2)
+	ldi	rB3, hhi8(HI40_PI_2)
+	rcall	_U(__addsf3x)
+	rcall	_U(__fp_round)
+  ; restore sign
+2:	pop	r0
+	sbrc	r0, 7
+	subi	rA3, 0x80
+	ret
+ENDFUNC
 
 	PGM_SECTION
-
-table_asin: DCB 7
-	DCB 0xBA, 0xA5, 0x7A, 0x2C  ; P7
-	DCB 0x3B, 0xDA, 0x90, 0xC5  ; P6
-	DCB 0xBC, 0x8B, 0xFC, 0x66  ; P5
-	DCB 0x3C, 0xFD, 0x10, 0xF8  ; P4
-	DCB 0xBD, 0x4D, 0x83, 0x92  ; P3
-	DCB 0x3D, 0xB6, 0x3A, 0x9E  ; P2
-	DCB 0xBE, 0x5B, 0xBF, 0xCA  ; P1
-	DCB 0x3F, 0xC9, 0x0F, 0xDA  ; P0
-	DCB 0x00                    ; 0.0
-
- /*--------------------------------------------------------------------------*/
-
-#endif /* not __DOXYGEN__ */
+.L_table:
+	.byte	3
+	.byte	     0x6e,0xdb,0x36,0x3d	; 15/336
+	.byte	0x9a,0x99,0x99,0x99,0x3d	; 3/40
+	.byte	0xab,0xaa,0xaa,0x2a,0x3e	; 1/6
+	.byte	0x00,0x00,0x00,0x80,0x3f	; 1
+	.end

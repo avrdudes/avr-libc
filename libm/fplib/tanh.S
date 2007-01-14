@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,92 +25,92 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    tanh.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- *
- * A = tanh(A)
- *
- * tanh( x ) = sinh(x)/cosh(x)
- *             (exp(x) - exp(-x))     1 - exp(-2x)   (exp(2x) - 1
- *           = ------------------- = ------------- = -------------
- *             (exp(x) + exp(-x)) =   1 + exp(-2x)   (exp(2x) + 1
- *
- * if exp(x) +- exp(-x) == exp(x) => exp(2x) +- 1 == exp(2x) => exp(2x) >= 2^24 -> x = ln(2^24)/2
+/* float tanh (float x);
+     The tanh() function returns the hyperbolic tangent of x, which is
+     defined mathematically as sinh(x) / cosh(x).
+
+   Algorithm:
+	if (fabs(x) <= X2SMALL)
+	    return Polinom(x)
+	else
+	    return sign(x) * (1 - exp(-2*fabs(x))) / (1 + exp(-2*fabs(x)))
  */
 
-#if !defined(__DOXYGEN__)
+#define	X2SMALL	0x3e0fffff	/* < 0.140625	*/
+#define	FL_P1	0x3f800000	/* +1.0	*/
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+#define	exp_lo	r20		/* float ldexp (float, int exp);	*/
+#define	exp_hi	r21
 
-	TEXT_SEG(fplib, tanh) 
-	FUNCTION(tanh)
+ENTRY tanh
+  ; save sign
+	push	rA3
+  ; is arg too small ?
+	andi	rA3, 0x7f
+	ldi	ZH,  hhi8 (X2SMALL + 1)
+	cpi	rA2, hlo8 (X2SMALL + 1)
+	cpc	rA3, ZH
+	brsh	1f
+  ; for small x
+	ldi	ZL, lo8(.L_table)
+	ldi	ZH, hi8(.L_table)
+	rcall	_U(__fp_powsodd)
+	rjmp	2f
+  ; exp(-2*fabs(x))
+1:	ori	rA3, 0x80
+	ldi	exp_lo, lo8(1)
+	ldi	exp_hi, hi8(1)
+	rcall	_U(ldexp)	; possible overflow -- no matter
+	rcall	_U(exp)
+  ; save result and calculate 1 + exp(-2*fabs(x))
+	push	rA3
+	push	rA2
+	push	rA1
+	push	rA0
+	ldi	rB0,  lo8(FL_P1)
+	ldi	rB1,  hi8(FL_P1)
+	ldi	rB2, hlo8(FL_P1)
+	ldi	rB3, hhi8(FL_P1)
+	rcall	_U(__addsf3)
+  ; save/restore and calculate 1 - exp(-2*fabs(x))
+	pop	rB0
+	pop	rB1
+	pop	rB2
+	pop	rB3
+	push	rA3
+	push	rA2
+	push	rA1
+	push	rA0
+	ldi	rA0,  lo8(FL_P1)
+	ldi	rA1,  hi8(FL_P1)
+	ldi	rA2, hlo8(FL_P1)
+	ldi	rA3, hhi8(FL_P1)
+	rcall	_U(__subsf3)
+  ; restore
+	pop	rB0
+	pop	rB1
+	pop	rB2
+	pop	rB3
+  ; divide
+	rcall	_U(__divsf3)
+  ; sign
+2:	pop	r0
+	sbrc	r0, 7
+	subi	rA3, 0x80
+	ret
+ENDFUNC
 
-GLOBAL(tanh)
-	/* check for x > 8.3177661895751953 [41051592]
-	 */
-   BST   rA3,7
-   ANDI  rA3,0x7F
-   LDI   rB3,0x41
-   LDI   rB2,0x05
-   LDI   rB1,0x15
-   CPI   rA0,0x92+1
-   CPC   rA1,rB1
-   CPC   rA2,rB2
-   CPC   rA3,rB3	; compare with 8.3177661895751953 = | ln(2^24)/2 |
-   BRCS  1f
-   LDI   rA3,0x3F
-   LDI   rA2,0x80
-   LDI   rA1,0x00
-   LDI   rA0,0x00 	; load 1
-   BLD   rA3,7		; if x positivive _tanh(x) = 1
-   RET
-
-1:
-   BLD   rA3,7
-
-/*   PUSH  rA0			*/ LDI    rB3,0                 
-/*				*/ LDI 	  rB2,1                 
-/*   PUSH  rA1			*/ RCALL  _U(ldexp)    ; x -> 2x   
-/*   PUSH  rA2			*/                              
-/*   PUSH  rA3			*/ RCALL  _U(exp)                  
-/*   RCALL _U(cosh)		*/ PUSH   rA0                   
-/*   POP   rB3			*/ PUSH   rA1                   
-/*   POP   rB2			*/ PUSH   rA2                   
-/*   POP   rB1			*/ PUSH   rA3                   
-/*   POP   rB0			*/ CLR    rB0                   
-/*   PUSH  rA3			*/ CLR    rB1                   
-/*   PUSH  rA2			*/ LDI    rB2,0x80              
-/*   PUSH  rA1			*/ LDI    rB3,0x3F ; B = 1.0    
-/*   PUSH  rA0			*/ XCALL  __addsf3
-/*   MOV   rA3,rB3		*/ POP    rB3                   
-/*   MOV   rA2,rB2		*/ POP    rB2                   
-/*   MOV   rA1,rB1		*/ POP    rB1                   
-/*   MOV   rA0,rB0		*/ POP    rB0  ; B = exp(2x)    
-/*   RCALL _U(sinh)		*/ PUSH   rA0                   
-/*   POP   rB0			*/ PUSH   rA1                   
-/*   POP   rB1			*/ PUSH   rA2                   
-/*   POP   rB2			*/ PUSH   rA3                   
-/*   POP   rB3			*/ CLR    rA0                   
-/*   XJMP  __divsf3		*/ CLR    rA1                   
-/*				*/ LDI    rA2,0x80              
-/*				*/ LDI    rA3,0xBF ; A = -1.0   
-/*				*/ XCALL  __addsf3             
-/*				*/ POP    rB3                   
-/*				*/ POP    rB2                   
-/*				*/ POP    rB1                   
-/*				*/ POP    rB0  ; B = exp(2x)+1  
-/*				*/ XJMP   __divsf3               
-
-          ENDFUNC
-
-#endif /* not __DOXYGEN__ */
+	PGM_SECTION
+.L_table:
+	.byte	2
+	.byte	     0x89,0x88,0x08,0x3e	; 2/15
+	.byte	0xab,0xaa,0xaa,0xaa,0xbe	; -1/3
+	.byte	0x00,0x00,0x00,0x80,0x3f	; 1
+	.end

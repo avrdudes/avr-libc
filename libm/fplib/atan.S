@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Reiner Patommel
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -24,109 +25,90 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-
- * ----------------------------------------------------------------------------
- *  atan.S
- *-----------------------------------------------------------------------------
-
-	Contributors:
-	Created by Reiner Patommel, 07 Dec 2002
-
- -*- Mode: Asm -*-
-
- *
- * Accuracy:  better than +/-1.5*10^-7 over full range
- *
- * ----------------------------------------------------------------------------
- *	A = atan(A)
- * ----------------------------------------------------------------------------
- *
- * Since the approximation used is defined only for -1 < x < 1
- *	the formula atan(x) = PI/2 - atan(1/x) is used for values > 1
- *	the formula atan(x) = -atan(1/x) - PI/2 is used for values < -1
- */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
-#define sign	r17
-#define magn	r16
-#define FP_PI_2	0x3FC90FDB		/* PI/2		*/
+/* float atan (float A);
+     The atan() function calculates the arc tangent of A; that is
+     the value whose tangent is A.
 
-	TEXT_SEG(fplib, atan)
-	FUNCTION(atan)
-
-GLOBAL(atan)
-	PUSH	sign
-	PUSH	magn
-	CLR	magn			; clear magnitude flag
-	MOV	sign, rA3		; keep sign of x
-	ANDI	sign, 0x80		; clear sign and set sign.b7 if x < 0
-	ANDI	rA3, 0x7F		; make |x|
-	LDI	rB3, 0x3F
-	LDI	rB2, 0x80
-	CPI	rA0, 0x01
-	CPC	rA1, __zero_reg__
-	CPC	rA2, rB2
-	CPC	rA3, rB3		; A - 1.0000001192092896
-	BRCS	1f			; |x| <= 1.0 --> calculate atan(x)
-	ORI	magn, 0x80		; set magn.b7 as |x| > 1
-	RCALL	_U(__fp_inverse)		; A = 1.0 / x
-1:
-	OR	rA3, sign		; restore sign of x
-	FPPUSH	(rA)			; save x
-	RCALL	_U(square)		; A = x^2
-	LDI	ZL,LOW(.Ltable_atan)
-	LDI	ZH,HIGH(.Ltable_atan)	; point to table
-	RCALL	_U(__fp_powerseries)
-	FPPOP	(rB)			; get x again
-	XCALL	__mulsf3		; now A = atan(x) for -1 <= x <= 1
-	TST	magn			; |x| > 1 ?
-	BREQ	2f
-	FPLOAD	(rB, FP_PI_2	)	; B = PI/2
-	LDI	magn, 0x80
-	EOR	rA3, magn		; A = -A
-	SBRC	sign, 7			; x > +1 ?
-	ORI	rB3, 0x80		; B = -B
-	XCALL	__addsf3
-2:					; clean-up
-	POP	magn
-	POP	sign
-	RET
-
-	ENDFUNC
-/*
-
- * atan(x) = x (1 + x^2(a2 + x^2(a4 + x^2(a6 + x^2(a8 + x^2(a10 +
- *		    x^2(a12 + x^2(a14 + x^2(a16)))))))))
- *
- *        1.0				;[3F800000]
- * a2  = -3.3333147e-1			;[BEAAAA6C]
- * a4  =  1.9993551e-1			;[3E4CBBE5]
- * a6  = -1.4208899e-1			;[BE117FC7]
- * a8  =  1.0656264e-1			;[3DDA3D83]
- * a10 = -7.5289637e-2			;[BD9A3174]
- * a12 =  4.2909615e-2			;[3D2FC1FE]
- * a14 = -1.6165737e-2			;[BC846E02]
- * a16 =  2.8662258e-3			;[3B3BD74A]
- *
+   Algorithm:
+	if (x > 1)
+	    return Pi/2 - atan(1/x)
+	elif (x < -1)
+	    return -Pi/2 - atan(1/x)
+	else
+	    return x * (1 - C1 * x**2 + ... + C8 * x**16)
  */
 
+#include "fp32def.h"
+#include "asmdef.h"
+
+#define FL_1	    0x3f800000		/* +1.0	*/
+#define HI40_PI_2   0x3fc90fda		/* high 4 bytes of Pi/2	*/
+#define LO40_PI_2   0xa2		/* lowest byte of Pi/2	*/
+
+#define	corr	YH
+
+ENTRY atan
+	push	corr
+	clr	corr
+  ; inverse A, if needed
+	mov	rAE, rA3
+	andi	rAE, 0x7f		; rAE.rA2.rA1.rA0 == fabs(A)
+	ldi	rB2, hlo8(FL_1)
+	ldi	rB3, hhi8(FL_1)
+	cp	r1, rA0
+	cpc	r1, rA1
+	cpc	rB2, rA2
+	cpc	rB3, rAE
+	brsh	1f
+	mov	corr, rA3		; rA3 != 0
+	rcall	_U(inverse)
+  ; calculate atan(A) for -1.0 <= A <= +1.0
+1:	push	rA3
+	push	rA2
+	push	rA1
+	push	rA0
+	rcall	_U(square)
+	ldi	ZL, lo8(.L_table)
+	ldi	ZH, hi8(.L_table)
+	rcall	_U(__fp_powser)
+	rcall	_U(__fp_round)
+	pop	rB0
+	pop	rB1
+	pop	rB2
+	pop	rB3
+	rcall	_U(__mulsf3x)
+  ; is correction needed ?
+	tst	corr
+	breq	2f
+  ; add/sub Pi/2
+	subi	rA3, 0x80
+	ldi	rBE, LO40_PI_2
+	ldi	rB0,  lo8(HI40_PI_2)
+	ldi	rB1,  hi8(HI40_PI_2)
+	ldi	rB2, hlo8(HI40_PI_2)
+	ldi	rB3, hhi8(HI40_PI_2)
+	andi	corr, 0x80
+	eor	rB3, corr
+	rcall	_U(__addsf3x)
+  ; restore and round
+2:	pop	corr
+	rjmp	_U(__fp_round)
+ENDFUNC
+
 	PGM_SECTION
-
-.Ltable_atan:
-	DCB 8 ; no of table entries - 1 (preload value)
-	DCB 0x3B, 0x3B, 0xD7, 0x4A	; a16
-	DCB 0xBC, 0x84, 0x6E, 0x02	; a14
-	DCB 0x3D, 0x2F, 0xC1, 0xFE	; a12
-	DCB 0xBD, 0x9A, 0x31, 0x74	; a10
-	DCB 0x3D, 0xDA, 0x3D, 0x83	; a8
-	DCB 0xBE, 0x11, 0x7F, 0xC7	; a6
-	DCB 0x3E, 0x4C, 0xBB, 0xE5	; a4
-	DCB 0xBE, 0xAA, 0xAA, 0x6C	; a2
-	DCB 0x3F, 0x80, 0x00, 0x00	; 1.0
-	DCB 0x00
-
+.L_table:
+	.byte	8
+	.byte	     0x4a,0xd7,0x3b,0x3b	;  0.0028662257
+	.byte	0xce,0x01,0x6e,0x84,0xbc	; -0.0161657367
+	.byte	0xbf,0xfd,0xc1,0x2f,0x3d	;  0.0429096138
+	.byte	0x6c,0x74,0x31,0x9a,0xbd	; -0.0752896400
+	.byte	0x56,0x83,0x3d,0xda,0x3d	;  0.1065626393
+	.byte	0x00,0xc7,0x7f,0x11,0xbe	; -0.1420889944
+	.byte	0xd9,0xe4,0xbb,0x4c,0x3e	;  0.1999355085
+	.byte	0x91,0x6b,0xaa,0xaa,0xbe	; -0.3333314528
+	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
+	.end

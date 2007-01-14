@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,133 +25,150 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    divsf3x.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
-
- *----------------------------------------------------------------------------------------
- *
- *--- division kernel : used by other high level functions (?)
- * divides two extended numbers RX = AX / BX
- * sign not considered, resulting stored in T by ___divsf3
- * AX  rA3 : rA2:rA1:rA0:rAE
- * BX  rB3 : rB2:rB1:rB0:rBE
- * RX  rA3 : rA2:rA1:rA0:rAE
+/* <non_standart> __divsf3x (float A, float B);
+   Output:
+     T
+     rA3
+     rA2.rA1.rA0.rAE.ZH
  */
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+#include "fp32def.h"
+#include "asmdef.h"
 
-          TEXT_SEG(fplib, __divsf3x)
-          FUNCTION(__divsf3x)
+FUNCTION __divsf3x
 
-GLOBAL(__divsf3x)
-    TST     rB3
-    BREQ    10f               ; even 0/0
-    TST     rA3
-    BREQ    20f               ; 0/x = 0
-
-    ;calculate new exponent & check for overflow underflow
-    ; rA3 = rA3-rB3+0x7F
-
-    SUBI    rA3,0x7F          ; both exponents signed char now
-    SUBI    rB3,0x7F          ; both exponents signed char now
-    SUB     rA3,rB3           ; calcualte new exponent
-    BRVC    1f                ; no signed overflow?
-    BRPL    20f               ; underflow
-    CPI     rA3,0x80          ; if exp(A) - exp(B) = exp(R) ==  0x80
-    BRNE    10f               ; and mant(A) < mant(B) exp(R) will be dec
-
-    SUBI    rA3,0x81          ;
-    RJMP    2f
-10:
-    RJMP    _U(__fp_nanx)     ; returns to ___mulsf3 or a high level function : rT1c ok
-
+0:	rcall	_U(__fp_pscB)
+	brcs	.L_nan
+	rcall	_U(__fp_pscA)
+	brcs	.L_nan
+	brne	.L_zr		; finite / Inf --> 0
+.L_infA:
+	cpi	rB3, 255
+	breq	.L_nan		; Inf / Inf --> NaN
+.L_inf:
+	rjmp	_U(__fp_inf)
 1:
-    SUBI    rA3,0x81          ; add 0x7F
-    CPI     rA3,0xFF          ;
-    BRNE    2f                ; underflow?
-20:
-    RJMP    _U(__fp_zerox)
+	cpse	rB3, r1		; 0/finite --> 0,  0/0 --> NaN
+.L_zr:	rjmp	_U(__fp_szero)
+.L_nan:	rjmp	_U(__fp_nan)
 
-2:
-    CLR     rAE            ; high extention
-    CLR     rT1c           ; for comparison
-                           ; (some functions call ___divsf3x directely
-                           ;  with maybe nonzero rT1c)
+ENTRY	__divsf3x
+	rcall	_U(__fp_split3)
+	brcs	0b
 
-    ; now divide mantissa A[rAE:rA2:rA1:rA0] / B[rBE:rB2:rB1:rB0]
-    ; result : [push:push:rT0:rBE]
+ENTRY	__divsf3_pse		; post split entry
+	tst	rA3
+	breq	1b
+	tst	rB3
+	breq	.L_inf		; finite / 0.0 --> Inf
+	
+	sub	rA3, rB3
+	sbc	rB3, rB3
+	
+/* Prepare to division:
+     A:  rAE.rA2.rA1.rA0	0x00000001..0x00FFFFFF
+     B:  rBE.rB2.rB1.rB0	0x00000002..0x01FFFFFE
+     A < B
+ */
+	clr	rAE
+	clr	rBE
+2:	cp	rA0, rB0
+	cpc	rA1, rB1
+	cpc	rA2, rB2
+	brlo	3f
+	subi	rA3, lo8(-1)
+	sbci	rB3, hi8(-1)
+	lsl	rB0
+	rol	rB1
+	rol	rB2
+	rol	rBE
+	breq	2b
+3:
+	rcall	.L_div
+	mov	r0, ZL
+	brmi	5f		; N is result of 'com ZL' from .L_div
 
-    CP      rA0,rB0
-    CPC     rA1,rB1
-    CPC     rA2,rB2
-    ; CPC     rAE,rBE      ; upper extention, both cleared (?)
-    BRCC    1f
-                           ; if A < B the result would be < 1.0 ->
-                           ; assure we have 25 bits of precision in the end
-    ADD     rA0,rA0
-    adc     rA1,rA1
-    adc     rA2,rA2
-    adc     rAE,rAE
-    SUBI    rA3,1
-    BRCS    20b
-1:
-    ; AM >= BM
-    RCALL    200f
-    PUSH     rT0
-    RCALL    200f
-    PUSH     rT0
-    RCALL    200f
+4:	ldi	ZL, 0x80
+	rcall	.L_div1
+	subi	rA3, lo8(1)
+	sbci	rB3, hi8(1)
+	lsr	ZL
+	rol	r0
+	brpl	4b
 
- ; division done : if AM(rest) >  BM the next digit would be set and more -> round up
- ;                 if AM(rest) == BM exactely the next digit would be set -> round to LSB zero
- ;                 else do not round up
-    LDI     rBE,0x80 ; preload : round to to LSB zero (even)
-    CP      rB0,rA0
-    CPC     rB1,rA1
-    CPC     rB2,rA2
-    CPC     rT1c,rAE      ;
-    BREQ    1f           ; AM == BM round to LSB zero
-    SBCI    rBE,0x80     ; if AM > BM c is set
+5:	rcall	.L_div
+	mov	ZH, ZL
+	rcall	.L_div
 
-1:
-    MOV     rAE,rBE
-    MOV     rA0,rT0
-    POP     rA1
-    POP     rA2
-    CLR     rT0          ;
-    RET
+	lsl	rA0
+	rol	rA1
+	rol	rA2
+	rol	rAE
+	cp	rB0, rA0
+	cpc	rB1, rA1
+	cpc	rB2, rA2
+	cpc	rBE, rAE
+	ldi	rAE, 0x80
+	breq	4f
+	sbc	rAE, rAE
 
-200:
-    LDI     rBE,0x80
-    CLR     rT0             ; result holder
-1:
-    CP      rA0,rB0
-    CPC     rA1,rB1
-    CPC     rA2,rB2
-    CPC     rAE,rT1c
-    BRCS    2f
-    SUB     rA0,rB0
-    SBC     rA1,rB1
-    SBC     rA2,rB2
-    SBC     rAE,rT1c
-    OR      rT0,rBE
-2:
-    ADD     rA0,rA0   ;
-    adc     rA1,rA1   ;
-    adc     rA2,rA2   ;
-    adc     rAE,rAE   ;
-    LSR     rBE
-    BRNE    1b
-    RET
+4:	mov	rA2, r0
+	X_movw	rA0, ZL	
+	clr	ZH
+	
+  ; exponent += 125
+	subi	rA3, lo8(-125)
+	sbci	rB3, hi8(-125)
+	brmi	13f		; denormalization is needed
+  ; check to overflow
+11:	cpi	rA3, 254
+	cpc	rB3, r1
+	brlo	15f
+	rjmp	_U(__fp_inf)
+  ; check lowest value of exponent to avoid long operation
+12:	rjmp	_U(__fp_szero)
+13:	cpi	rB3, hi8(-24)		; here rB3 < 0
+	brlt	12b
+	cpi	rA3, lo8(-24)
+	brlt	12b
+  ; mantissa >>= -rA3
+14:	lsr	rA2
+	ror	rA1
+	ror	rA0
+	ror	rAE
+	ror	ZH
+	subi	rA3, -1
+	brne	14b
+  ; pack
+15:	lsl	rA2
+	adc	rA3, r1		; restore exponent for normal values
+	lsr	rA3
+	ror	rA2
+	bld	rA3, 7
+	ret
 
-          ENDFUNC
-
-
+.L_div:
+	ldi	ZL, 1
+.L_div1:
+	lsl	rA0
+	rol	rA1
+	rol	rA2
+	rol	rAE
+	cp	rA0, rB0
+	cpc	rA1, rB1
+	cpc	rA2, rB2
+	cpc	rAE, rBE
+	brcs	2f
+	sub	rA0, rB0
+	sbc	rA1, rB1
+	sbc	rA2, rB2
+	sbc	rAE, rBE
+2:	rol	ZL
+	brcc	.L_div1
+	com	ZL
+	ret
+ENDFUNC

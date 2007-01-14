@@ -1,21 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
-   Copyright (c) 2006  Anatoly Sokolov <aesok@post.ru>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -30,139 +25,129 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    sqrt.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- *
- *	A = sqrt(A)
+/*  double sqrt (double);
+    Square root function.
  */
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+FUNCTION sqrt
 
-; Abak
-#define rAbak3	rS0
-#define rAbak2	rS1
-#define rAbak1	rS2
-#define rAbak0	rS3
+.L_nf:	brne	.L_pk		; NaN, return as is
+	brtc	.L_pk		; sqrt(+Inf) --> +Inf
+.L_nan:	rjmp	_U(__fp_nan)
+.L_pk:	rjmp	_U(__fp_mpack)
 
-; Bbak
-#define rBbak3	rS4
-#define rBbak2	rS5
-#define rBbak1	rS6
-#define rBbak0	rS7
-
-
-	TEXT_SEG(fplib, sqrt)
-	FUNCTION(sqrt)
-
-GLOBAL(sqrt)
-
-	SBRC	rA3, 7
-	RJMP	_U(__fp_nanEDOM)	; sign bit is set -> argument range error
-
-   /* A = sign(=0):(exp+7F):[1].mant = 2^(exp)*1.mant
-    *   =          (LSB(exp)+7F) + (exp>>1) + (exp>>1):[1].mant = (2^(exp>>1))^2 * 2^(LSB(exp))*1.mant
-    *                                                           = 2^(exp>>1)^2 * A'
-    * A' = [2^0*1.0... 2^1*1.1111111] = [1.0...4.0[
-    *
-    * sqrt(A) = 2^(exp>>1) * sqrt( A' )
-    * sqrt(A') = [1.0...2.0[  -> result of srqt(A') has definetely exponent 7F! -> exp(X0) = 7F
-    *
-    * the matissa of X0 is taken as ( 0.mant >> 1 )     0.0mant
-    *  plus if LSB(exp)==1 [LSB(exp-7F)==0]             0.100000
-    *  plus the implicit one                            1.000000
-    */
-
-	TST	rA3
-	BRNE	2f		; sqrt(0) = 0
-	RET
-2:
-	MOV	rB2, rA2	; needed later on
-
-	RCALL	_U(__fp_split_a)	; does not return on NaN
-
-	MOV	rTI0, rA3
-	SUBI	rTI0, 0x7F
-	ASR	rTI0		; this is dExp!
-	SUB	rA3, rTI0
-	SUB	rA3, rTI0
-
-	PUSH	rTI0		; exponent offset
-
-	RCALL	_U(__fp_merge)
-
-	PUSH	rS0
-	PUSH	rS1
-	PUSH	rS2
-	PUSH	rS3
-	PUSH	rS4
-	PUSH	rS5
-	PUSH	rS6
-	PUSH	rS7
-
-	X_movw	rAbak0, rA0
-	X_movw	rAbak2, rA2	; Abak = A
-
-	SUBI    rB2, 0x80	; == EOR 0x80
-	ROR	rB2
-	CLR	rB1		; a slightly smaller X(0) than the calculated is better
-	CLR	rB0		; and saves 2 right shifts
-	ORI	rB2, 0x80	; 
-	LDI	rB3, 0x3F	; load exponent 7F
-
+ENTRY sqrt
+  ; split and check arg.
+	rcall	_U(__fp_splitA)
+	brcs	.L_nf		; !isfinite(A)
+	tst	rA3
+	breq	.L_pk		; return 0 with original sign
+	brts	.L_nan		; sqrt(negative) --> NaN
+  ; exponent bias
+	subi	rA3, 127
+	sbc	rB3, rB3	; exponent high byte
+  ; normalize, if A is subnormal
+	sbrs	rA2, 7
+	rcall	_U(__fp_norm2)
+  ; calculate result exponent
+	lsr	rB3
+	ror	rA3
+  ; expand A mantissa to rAE.rA2.rA1.rA0
+	ldi	rAE, 0
+	brcc	1f		; after 'ror rA3'
+	lsl	rA0
+	rol	rA1
+	rol	rA2
+	rol	rAE
 1:
-	X_movw	rA0, rAbak0
-	X_movw	rA2, rAbak2 	; A = Abak
 
-	X_movw	rBbak0, rB0
-	X_movw	rBbak2, rB2 	; Bbak = B
-
-	XCALL	__divsf3	; FP1X = arg/xn
-
-    	X_movw	rB0, rBbak0
-	X_movw	rB2, rBbak2 	; B = Bbak
-
-	XCALL	__addsf3	; FP1X = arg/xn + xn
-
-	LDI	rPL, lo8(-1)
-	LDI	rPH, hi8(-1)
-	RCALL	_U(ldexp)	; div by 2 := Xn+1
-
-	X_movw	rB0, rA0
-	X_movw	rB2, rA2	; B = A
-
-	CP	rBbak0, rB0
-	CPC	rBbak1, rB1
-	CPC	rBbak2, rB2
-	CPC	rBbak3, rB3	; cmp B to Bbak
-	BRNE	1b
-
-	POP	rS7
-	POP	rS6
-	POP	rS5
-	POP	rS4
-	POP	rS3
-	POP	rS2
-	POP	rS1
-	POP	rS0
-
-	POP	rB3
-	
-	RCALL	_U(__fp_split_a)	; does not return on NaN
-
-	ADD	rA3, rB3
-
-	RJMP	_U(__fp_merge)
-
-	ENDFUNC
-
-
+#define	mvb0	ZL
+#define mvb1	ZH
+#define mvb2	rBE
+#define	rem0	r16
+#define	rem1	r17
+#define	rem2	r0
+#define	rem3	rB3
+  ; save temporary regs.
+	push	rem1
+	push	rem0
+  ; init variables
+	/* arg's mantissa:	rAE.rA2.rA1.rA0
+	   result:		rB2.rB2.rB0
+	   moving bit:		mvb2.mvb1.mvb0
+	   remain value:	rem3.rem2.rem1.rem0	*/
+	clr	r0
+	X_movw	rB0, r0
+	X_movw	rB2, r0
+	X_movw	rem0, r0
+	X_movw	mvb0, r0
+	ldi	mvb2, 0x80
+.Loop:
+  ; rem += mvb
+	add	rem0, mvb0
+	adc	rem1, mvb1
+	adc	rem2, mvb2
+	adc	rem3, r1
+  ; A -= rem
+	sub	rA0, rem0
+	sbc	rA1, rem1
+	sbc	rA2, rem2
+	sbc	rAE, rem3
+	brsh	1f
+  ; restore A
+	add	rA0, rem0
+	adc	rA1, rem1
+	adc	rA2, rem2
+	adc	rAE, rem3
+  ; restore rem
+	sub	rem0, mvb0
+	sbc	rem1, mvb1
+	sbc	rem2, mvb2
+	sbc	rem3, r1
+	rjmp	2f
+  ; B += mvb
+1:	add	rB0, mvb0
+	adc	rB1, mvb1
+	adc	rB2, mvb2
+  ; rem += mvb
+	add	rem0, mvb0
+	adc	rem1, mvb1
+	adc	rem2, mvb2
+	adc	rem3, r1
+  ; A <<= 1
+2:	lsl	rA0
+	rol	rA1
+	rol	rA2
+	rol	rAE
+  ; while (mvb >>= 1)
+	lsr	mvb2
+	ror	mvb1
+	ror	mvb0
+	brcc	.Loop
+  ; round
+	cp	rem0, rA0
+	cpc	rem1, rA1
+	cpc	rem2, rA2
+	cpc	rem3, rAE	; C is set if rem < A
+	adc	rB0, r1
+	adc	rB1, r1
+	adc	rB2, r1
+  ; pop temporary regs.
+	pop	rem0
+	pop	rem1
+  ; merge result and return
+	X_movw	rA0, rB0
+	mov	rA2, rB2
+	subi	rA3, lo8(-127)		; exponent bias
+	lsl	rA2
+	lsr	rA3
+	ror	rA2
+	ret
+ENDFUNC

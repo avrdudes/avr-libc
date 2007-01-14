@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,32 +25,24 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    fp_zero.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------*/
+/* __fp_zero() return 0.0
+   __fp_szero() return 0.0 with sign bit.
+ */
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
-
-          TEXT_SEG(fplib, __fp_zero)
-          FUNCTION(__fp_zero)
-
-GLOBAL(__fp_zero)
-    CLR     rA0     ; 0.0 = 0x00 00 00 00
-    CLR     rA1
-    CLR     rA2
-GLOBAL(__fp_zerox)
-    CLR     rA3     ; rA3 == 0 -> merge sets everything to 0
-    RET
-
-          ENDFUNC
-
-
+ENTRY	__fp_zero
+	clt
+ENTRY   __fp_szero
+	clr	rAE
+	clr	rA0
+	clr	rA1
+	X_movw	rA2, rA0
+	bld	rA3, 7
+	ret
+ENDFUNC

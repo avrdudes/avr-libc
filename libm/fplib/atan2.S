@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Reiner Patommel
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,83 +27,113 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* ---------------------------------------------------------------------------
-	atan2.S
-
-	Contributors:
-	Created by Reiner Patommel 08 December 2002
-
--*- Mode: Asm -*-
-*
-* Accuracy:	better than +/-2.5*10^-7 over full range
-*
-* ----------------------------------------------------------------------------
-* A = atan2(float A, float B) = atan2(float y, float x)
-* --------------------------------------------------------------------------*/
-
 /* $Id$ */
 
-#if !defined(__DOXYGEN__)
+/* float atan2 (float A, float B);	// A is y coord, B is x coord.
+     The atan2() function calculates the arc tangent of the two variables
+     A and B. It is similar to calculating the arc tangent of A/B, except
+     that the signs of both arguments are used to determine the quadrant
+     of the result. The atan2() function returns the result in radians,
+     which is between -PI and PI (inclusive).
+     
+   Note:
+     This implementation returns +0.0 in all four cases: +0/+0, +0/-0,
+     -0/+0 and -0/-0.  Unlike x86 (GCC/Glibc).
 
-#include "gasava.inc"
-#include "fplib.inc"
-#include "macros.inc"
-#define y3	r25		/* rA3	*/
-#define x3	r21		/* rB3	*/
-#define flags	r17
-#define FP_PI	0x40490FDB	/* PI	*/
-#define FP_PI_2 0x3FC90FDB	/* PI/2	*/
+   Algorithm:
+	if (x == 0 && y == 0)		// A is y, B is x
+	    return 0
+	if (x >= 0 && fabs(y) <= x)
+	    return atan(y/x)		// -Pi/4 .. +Pi/4
+	if (y >= 0 && fabs(x) <= y)
+	    return Pi/2 - atan(x/y)	// +Pi/4 .. +3*Pi/4
+	if (y <= 0 && fabs(x) <= fabs(y))
+	    return -Pi/2 - atan(x/y)	// -Pi/4 .. -3*Pi/4
+	if (y >= 0)
+	    return Pi + atan(y/x)	// +3*Pi/4 .. Pi
+	else
+	    return -Pi + atan(y/x)	// -3*Pi/4 .. -Pi
+ */
+#include "fp32def.h"
+#include "asmdef.h"
 
-	TEXT_SEG(fplib, atan2)
-	FUNCTION(atan2)
+#define PI	0x40490fdb	/* Pi	*/
+#define PI_2	0x3fc90fdb	/* Pi/2	*/
 
-GLOBAL(atan2)
-	TST	x3		; x == 0?
-	BREQ	.L_NS		; --> north/south: return ERANGE or +/-PI/2
-	TST	y3		; y == 0?
-	BREQ	.L_EW		; --> east/west: return ERANGE or 0 or PI
-	RJMP	.L_calc		; --> calculate atan2
+#define	disp	ZL		/* displacement high byte	*/
 
-.L_NS:				; here x == 0
-	TST	y3		; y == 0?
-	BREQ	.L_ERANGE	; return argument range error
-	BST	y3, 7		; keep sign of y
-	FPLOAD	(rA, FP_PI_2)	; A = PI/2
-	BLD	rA3, 7		; get sign again
-	RET			; return +/-PI/2 depending on sign
+FUNCTION atan2
 
-.L_EW:				; here y == 0
-	TST	x3		; x == 0?
-	BREQ	.L_ERANGE	; return argument range error
-	BRPL	.L_EW_ZERO	; --> return 0
-	FPLOAD	(rA, FP_PI)	; A = PI
-	RET			; return PI
+.L_nf:	rcall	_U(__fp_pscA)
+	brcs	.L_nan
+	ldi	rA2, 0x80
+	ldi	rA3, 0x01	; replace finite to very small value
+	brne	1f
+	ldi	rA3, 0xfe	; replace Inf to very big value
+1:	rcall	_U(__fp_pscB)
+	brcs	.L_nan
+	ldi	rB2, 0x80
+	ldi	rB3, 0x01	; replace finite to very small value
+	brne	.L_cmp
+	ldi	rB3, 0xfe	; replace Inf to very big value
+	rjmp	.L_cmp
 
-.L_EW_ZERO:
-	FPCLR	(rA)		; A = 0
-	RET			; return 0
+.L_nan:	rjmp	_U(__fp_nan)
+.L_zr:	rjmp	_U(__fp_zero)
 
-.L_ERANGE:			; here x ==0 and y == 0
-	RJMP	_U(__fp_nanERANGE) ; return argument range error
+ENTRY   atan2
+  ; save 'y' sign
+	mov	disp, rA3
+	andi	disp, 0x80
+  ; split
+	rcall	_U(__fp_split3)
+	brcs	.L_nf
+  ; check the (0,0) case
+	mov	r0, rA3
+	or	r0, rB3
+	breq	.L_zr
+  ; compare absolute values
+.L_cmp:
+	cp	rB0, rA0
+	cpc	rB1, rA1
+	cpc	rB2, rA2
+	cpc	rB3, rA3
+	brlo	1f
+  ; fabs(A) <= fabs(B), no swapping
+	mov	r0, disp	; sign(A)
+	bld	r0, 7		; sign(A) ^ sign(B)
+	eor	disp, r0	; sign(B)
+	breq	2f		; displacement is not needed
+	eor	disp, r0	; restore sign(A)
+	ori	disp, hhi8(PI)
+	rjmp	2f
+  ; fabs(A) > fabs(B), swap values and change the atan sign
+1:	ori	disp, hhi8(PI_2)
+	bld	r0, 7		; inverse division sign
+	com	r0
+	bst	r0, 7
+	X_movw	XL, rA0
+	X_movw	rA0, rB0
+	X_movw	rB0, XL
+	X_movw	XL, rA2
+	X_movw	rA2, rB2
+	X_movw	rB2, XL
+  ; save displacement and calculate atan
+2:	push	disp
+	rcall	_U(__divsf3_pse)
+	rcall	_U(__fp_round)
+	rcall	_U(atan)
+  ; restore disp and analize
+	pop	rB3		; hhi8()
+	tst	rB3
+	breq	9f
+  ; add displacement
+	ldi	rB0,  lo8(PI)	; lo8(PI) == lo8(PI_2)
+	ldi	rB1,  hi8(PI)	; hi8(PI) == hi8(PI_2)
+	ldi	rB2, hlo8(PI)
+	sbrc	rB3, 0		; hhi8(PI) == 0x40,  hhi8(PI_2) == 0x3f
+	ldi	rB2, hlo8(PI_2)
+	rjmp	_U(__addsf3)
 
-.L_calc:			; here x != 0 and y != 0
-	PUSH	flags
-	CLR	flags
-	SBRC	y3, 7
-	ORI	flags, 0x01	; keep sign of y
-	SBRC	x3, 7
-	ORI	flags, 0x02	; keep sign of x
-	XCALL	__divsf3	; A = y/x
-	RCALL	_U(atan)	; A = atan(y/x)
-	SBRS	flags, 1	; if x > 0
-	RJMP	1f		; return atan(y/x)
-	FPLOAD	(rB, FP_PI);	; here x < 0 --> load PI
-	SBRC	flags, 0	; if y < 0 return atan(y/x) - PI
-	ORI	rB3, 0x80	; if y > 0 return atan(y/x) + PI
-	XCALL	__addsf3
-1:	POP	flags		; clean-up
-	RET
-
-	ENDFUNC
-
-#endif /* not __DOXYGEN__ */
+9:	ret
+ENDFUNC

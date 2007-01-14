@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,117 +25,137 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    log.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- *
- *	A = log(A)
- *
- * log( x ) = exponent(x)*ln(2) + log(matissae(x))
- *
- *
- * x = [0.5,1.0[
- * z = (x*sqrt(2)-1)/(x*sqrt(2)+1) = (x - 1/sqrt(2)/(x+1/sqrt(2))
- * log( x ) =  ((F2 * z*z + F1)*z*z + F0)*z - ln(sqrt(2))
- *             P0 + x (P1 + x * (P2 + x * (P3 + x * (P4 + x * P5))))
- *          =  -----------------------------------------------------
- *             Q0 + x (Q1 + x * (Q2 + x * (Q3 + x * (Q4 + x * Q5))))
- * P0 = -3.42819 [C0 5B 67 82]
- * P1 = -7.05769 [C0 E1 D8 A1]
- * P2 = -20.5693 [C1 A4 8D D9]
- * P3 = 9.48417  [41 17 BF 24]
- * P4 = 6.09923  [40 C3 2C E2]
- * P5 = 15.4718  [41 77 8C 4F]
- * Q0 = 1        [3F 80 00 00]
- * Q1 = 7.07107  [40 E2 46 30]
- * Q2 = 20       [41 A0 00 00]
- * Q3 = 28.2843  [41 E2 46 32]
- * Q4 = 20       [41 A0 00 01]
- * Q5 = 5.65685  [40 B5 04 F4]
+/* double log (double A)
+   The log() function returns the natural logarithm of A.
  */
 
-#if !defined(__DOXYGEN__)
+#define	FL_M1	0xbf800000	/* -1.0	*/
+#define	LN_2	0x3f317218	/* ln(2.0) = 0.69314718	*/
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+#define	rC3	YH
+#define	rC2	YL		/* adiw,sbiw are used	*/
+#define	rC1	r17
+#define	rC0	r16
+#define	rCE	r15
 
-          TEXT_SEG(fplib, log)
-          FUNCTION(log)
+FUNCTION log
 
-GLOBAL(log)
-   SBRC  rA3,7
-   RJMP  _U(__fp_nanEDOM)	; A < 0 argument range error
-1:
-   RCALL _U(__fp_split_a)
-   TST   rA3
-   BRNE  2f
-   RJMP  _U(__fp_nanEDOM)	; A == 0 argument range error
+.L_nf:	brts	.L_nan		; branch, if -Inf
+	rjmp	_U(__fp_mpack)	; pass as is: NaN --> NaN, +Inf --> +Inf
+.L_nan:	rjmp	_U(__fp_nan)
+.L_min:	set
+	rjmp	_U(__fp_inf)
 
+ENTRY log
+	rcall	_U(__fp_splitA)
+	brcs	.L_nf		; !isfinite(A)
+	tst	rA3
+	breq	.L_min		; -Inf
+	brts	.L_nan		; log(negative)
+	
+	push	rC3
+	push	rC2
+	push	rC1
+	push	rC0
+	push	rCE
+  ; normalize (if Subnormal)
+	mov	rC2, rA3	; place exponent to pair rC3.rC2
+	clr	rC3
+	tst	rA2
+	brmi	2f
+1:	sbiw	rC2, 1
+	lsl	rA0
+	rol	rA1
+	rol	rA2
+	brpl	1b
 2:
-   PUSH  rS0
-   PUSH  rS1
-   PUSH  rS2
-   PUSH  rS3
-   MOV   rS3,rA3
-   LDI   rA3,0x3F		; load 0x7E as exponent =>
-   ANDI  rA2,0x7F		; 2^-1 * 1.m = [0.5..1.0[
+  ; calculate log(1+x) for x:  -0x0.20p+0 <= x < 0.E0p+0
+	/* Different tables are used:
+	     .L_tlow  - for small values: -0x0.20p+0 <= x < + 0x0.18p+0
+	     .L_thigh - for others	*/
+	ldi	rB0,  lo8(FL_M1)
+	ldi	rB1,  hi8(FL_M1)
+	ldi	rB2, hlo8(FL_M1)
+	ldi	rB3, hhi8(FL_M1)
+	ldi	rA3, 0x3f
+	cpi	rA2, 0x98
+	brlo	3f
+	cpi	rA2, 0xE0
+	brlo	4f
+	adiw	rC2, 1
+	andi	rA2, ~0x80
+3:	rcall	_U(__addsf3)
+	ldi	ZL, lo8(.L_tlow)
+	ldi	ZH, hi8(.L_tlow)
+	rjmp	5f
+4:	rcall	_U(__addsf3)
+	ldi	ZL, lo8(.L_thigh)
+	ldi	ZH, hi8(.L_thigh)
+5:	rcall	_U(__fp_powser)
 
-   LDI     ZL,LOW(table_log)
-   LDI     ZH,HIGH(table_log)
-   RCALL   _U(__fp_powerseries)
+	X_movw	rC0, rA0
+	X_movw	rA0, rC2	; rA1.rA0 = exponent (possible negative)
+	X_movw	rC2, rA2
+	mov	rCE, rAE
+  ; calculate log() of exponent
+	subi	rA0, 127	; 127 is exponent field of 1.0
+	sbc	rA1, r1
+	asr	rA1
+	rol	rA1		; C = rA1 sign bit
+	sbc	rA2, rA2
+	sbc	rA3, rA3
+	rcall	_U(__floatsisf)
+	ldi	rB0,  lo8(LN_2)
+	ldi	rB1,  hi8(LN_2)
+	ldi	rB2, hlo8(LN_2)
+	ldi	rB3, hhi8(LN_2)
+	rcall	_U(__mulsf3x)
+	
+	mov	rBE, rCE
+	X_movw	rB0, rC0
+	X_movw	rB2, rC2
 
-   MOV    rT0,rS3
-   MOV    rS3,rA3
-   MOV    rS2,rA2
-   MOV    rS1,rA1
-   MOV    rS0,rA0
-   MOV    rA0,rT0
-   SUBI   rA0,0x7E
-   SBC    rA1,rA1
-   MOV    rA2,rA1
-   MOV    rA3,rA1
-   XCALL  __floatsisf
-   LDI    rB3,0x3F
-   LDI    rB2,0x31
-   LDI    rB1,0x72
-   LDI    rB0,0x18		; ln(2)
-   XCALL  __mulsf3
-   MOV    rB3,rS3
-   MOV    rB2,rS2
-   MOV    rB1,rS1
-   MOV    rB0,rS0
-   POP    rS3
-   POP    rS2
-   POP    rS1
-   POP    rS0
-   XJMP   __addsf3
-
-          ENDFUNC
-
+	pop	rCE
+	pop	rC0
+	pop	rC1
+	pop	rC2
+	pop	rC3
+	
+	rcall	_U(__addsf3x)
+	rjmp	_U(__fp_round)
+ENDFUNC
+	
 	PGM_SECTION
 
-table_log:
-   DCB 5		; no of table entries - 1 (preload value)
-   DCB 0x40,0xB5,0x04,0xF4 /* Q5 = 5.65685   */
-   DCB 0x41,0xA0,0x00,0x01 /* Q4 = 20        */
-   DCB 0x41,0xE2,0x46,0x32 /* Q3 = 28.2843   */
-   DCB 0x41,0xA0,0x00,0x00 /* Q2 = 20        */
-   DCB 0x40,0xE2,0x46,0x30 /* Q1 = 7.07107   */
-   DCB 0x3F,0x80,0x00,0x00 /* Q0 = 1         */
-   DCB 5
-   DCB 0x41,0x77,0x8C,0x4F /* P5 = 15.4718   */
-   DCB 0x40,0xC3,0x2C,0xE2 /* P4 = 6.09923   */
-   DCB 0x41,0x17,0xBF,0x24 /* P3 = 9.48417   */
-   DCB 0xC1,0xA4,0x8D,0xD9 /* P2 = -20.5693  */
-   DCB 0xC0,0xE1,0xD8,0xA1 /* P1 = -7.05769  */
-   DCB 0xC0,0x5B,0x67,0x82 /* P0 = -3.42819  */
+.L_tlow:		; __fp_powser() table for small values
+	.byte	8
+	.byte        0x00,0x00,0x00,0xbe        ; -0.1250000000
+	.byte   0x92,0x24,0x49,0x12,0x3e        ;  0.1428571429
+	.byte   0xab,0xaa,0xaa,0x2a,0xbe        ; -0.1666666667
+	.byte   0xcd,0xcc,0xcc,0x4c,0x3e        ;  0.2000000000
+	.byte   0x00,0x00,0x00,0x80,0xbe        ; -0.2500000000
+	.byte   0xab,0xaa,0xaa,0xaa,0x3e        ;  0.3333333333
+	.byte   0x00,0x00,0x00,0x00,0xbf        ; -0.5000000000
+	.byte   0x00,0x00,0x00,0x80,0x3f        ;  1.0000000000
+	.byte   0x00,0x00,0x00,0x00,0x00        ;  0.0000000000
 
-#endif /* not __DOXYGEN__ */
+.L_thigh:		; __fp_powser() table for other values
+	.byte	8
+	.byte        0x41,0x78,0xd3,0xbb        ; -0.0064535442
+	.byte   0x43,0x87,0xd1,0x13,0x3d        ;  0.0360884937
+	.byte   0x19,0x0e,0x3c,0xc3,0xbd        ; -0.0953293897
+	.byte   0x42,0x82,0xad,0x2b,0x3e        ;  0.1676540711
+	.byte   0x68,0xec,0x82,0x76,0xbe        ; -0.2407338084
+	.byte   0xd9,0x8f,0xe1,0xa9,0x3e        ;  0.3317990258
+	.byte   0x4c,0x80,0xef,0xff,0xbe        ; -0.4998741238
+	.byte   0x01,0xc4,0xff,0x7f,0x3f        ;  0.9999964239
+	.byte   0x00,0x00,0x00,0x00,0x00        ;  0.0000000000
+											
+	.end

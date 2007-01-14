@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,138 +25,87 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    tan.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- * A = tan(A)
- *
- * tan( x ) = tan( fmod(x,PI) )
- * tan(-x ) = - tan(x)
- *
- * since the power series of tangens converts quite slow for bigger values
- * the formula tan(x) = 1/tan(PI/2 - x) is used for values > PI/4
+/* float tan (float A);
+     The tan() function returns the tangent of A, where A is given
+     in radians.
  */
 
-#if !defined(__DOXYGEN__)
-
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
-
-          TEXT_SEG(fplib, tan)
-          FUNCTION(tan)
-
-GLOBAL(tan)
-       PUSH    rSI0
-
-       MOV     rSI0,rA3		; keep sign tan(x) = -tan(-x)
-       ANDI    rSI0,0x80	; assume inversion flag zero
-       ANDI    rA3,0x7F
-       CPI     rA3,0x39
-       BRCS    100f		; (tan(A < 0x39000000)=A)
-
-       LDI     rB3,0x40
-       LDI     rB2,0x49
-       LDI     rB1,0x0F
-       LDI     rB0,0xDB		; load PI
-       RCALL   _U(fmod)		; X = x [0..PI[
-
-       LDI     rB3,0x3F
-       LDI     rB2,0xC9
-       LDI     rB1,0x0F
-       LDI     rB0,0xDB		; load PI/2
-       CP      rB0,rA0
-       CPC     rB1,rA1
-       CPC     rB2,rA2
-       CPC     rB3,rA3		; B(=PI/2) - A
-       BREQ    101f
-       BRCC    1f
-       LDI     rB3,0x40
-       LDI     rB2,0x49		; load PI
-       ORI     rA3,0x80		; A = -A
-       XCALL   __addsf3		; A = A+B = B + (-A)
-       LDI     rB3,0x80
-       EOR     rSI0,rB3
-1:
-       LDI     rB3,0x3F
-       LDI     rB2,0x49
-       LDI     rB1,0x0F
-       LDI     rB0,0xDB		; load PI/4
-       CP      rB0,rA0
-       CPC     rB1,rA1
-       CPC     rB2,rA2
-       CPC     rB3,rA3		; B(=PI/4) - A
-       BRCC    1f
-       INC     rSI0
-       ORI     rA3,0x80		; negate A
-       LDI     rB2,0xC9		; P/4 -> PI/2
-       XCALL   __addsf3		; PI/2 - A
-1:
-       PUSH    rA3
-       PUSH    rA2
-       PUSH    rA1
-       PUSH    rA0
-       RCALL   _U(square)		; xý
-       ORI     rA3,0x80 		; -xý
-       LDI     ZL,LOW(table_tan)
-       LDI     ZH,HIGH(table_tan)
-       RCALL   _U(__fp_powerseries)
-       POP     rB0
-       POP     rB1
-       POP     rB2
-       POP     rB3
-       XCALL   __mulsf3
-       SBRS    rSI0,0
-       RJMP    100f
-       RCALL   _U(__fp_inverse)
-100:
-       SBRC    rSI0,7
-       ORI     rA3,0x80
-       POP     rSI0
-       RET
-101:
-       POP     rSI0
-       RJMP    _U(__fp_nan)
-
-          ENDFUNC
-
-/*
- *
- * see cephes22: tan.c
- * and FPlib doc
- *                 1 - xý(f1 - xý(f2 - xýf3))
- * tan(x) =    x * --------------------------
- *                 1 - xý(h1 - xý(h2 - xýh3))
- *
- * f3  : 1.09079E-5
- * f2  : 0.00310705
- * f1  : 0.130906
- * 1.0 :
- *
- * h3  : 0.000253971
- * h2  : 0.0245202
- * h1  : 0.464239
- * 1.0
+/* Calculation:
+     0 <= x <= Pi/4	 --> tan(x)		fmod
+     Pi/4 < x < Pi/2	 --> 1/tan(Pi/2-x)	fmod, Pi/2-x, 1/x
+     Pi/2 <= x <= 3*Pi/4 --> -1/tan(x-Pi/2)	fmod, 1/x, -x
+     3*Pi/4 < x < Pi	 --> -tan(Pi-x)		fmod, Pi/2-x, -x
  */
+#define	HI40_PIO4	0x3F490FDA	/* (flt40_t) Pi/4	*/
+#define	LO40_PIO4	0xA2		/* --"--		*/
+#define	HI40_PIO2	0x3FC90FDA	/* (flt40_t) Pi/2	*/
+#define	LO40_PIO2	0xA2		/* --"--		*/
 
+#define	rsign	YH
+
+ENTRY tan
+  ; save sign
+	push	rsign
+	mov	rsign, rA3
+  ; fmod by Pi/2
+	rcall	_U(__fp_rempio2)
+  ; save perion number
+	lsr	ZL
+	ror	rsign
+  ; is A <= Pi/4 ?
+#if  LO40_PIO4 == 0xFF		/* HI40_PIO4: increment is not needed	*/
+# error
+#endif
+	ldi	rB0,  lo8(HI40_PIO4)
+	ldi	rB1,  hi8(HI40_PIO4)
+	ldi	rB2, hlo8(HI40_PIO4)
+	ldi	rB3, hhi8(HI40_PIO4)
+	cpi	rAE,  LO40_PIO4 + 1
+	cpc	rA0, rB0
+	cpc	rA1, rB1
+	cpc	rA2, rB2
+	cpc	rA3, rB3
+	ror	rsign		; save comparison result
+	brmi	1f		; N == C flag after comparison
+  ; for A > Pi/4:  tan(A) == 1/tan(Pi/2 - A)
+#if (HI40_PIO4 ^ HI40_PIO2) & 0xFF00FFFF	/* 'ldi' optimization	*/
+# error
+#endif
+	ldi	rBE, LO40_PIO2
+	ldi	rB2, hlo8(HI40_PIO2)
+	ori	rA3, 0x80
+	rcall	_U(__addsf3x)
+	rcall	_U(__fp_round)
+  ; calculate tan(A) for  0 <= A <= Pi/4
+1:	ldi	ZL, lo8(.L_table)
+	ldi	ZH, hi8(.L_table)
+	rcall	_U(__fp_powsodd)
+  ; correct result
+	lsl	rsign
+	brvs	2f
+	rcall	_U(inverse)
+2:	lsl	rsign
+	brvc	3f
+	subi	rA3, 0x80
+3:	pop	rsign
+	ret
+ENDFUNC
+	
 	PGM_SECTION
-
-table_tan:  DCB 3 ; no of table entries - 1 (preload value)
-             DCB 0x39, 0x85, 0x27, 0x60     ; h - first calculate denominator
-             DCB 0x3C, 0xC8, 0xDE, 0x92
-             DCB 0x3E, 0xED, 0xB0, 0xCA
-             DCB 0x3F, 0x80, 0x00, 0x00
-             DCB 3 ; no of table entries - 1 (preload value)
-             DCB 0x37, 0x37, 0x00, 0xF3     ; f
-             DCB 0x3B, 0x4B, 0x9F, 0xB8
-             DCB 0x3E, 0x06, 0x0C, 0x3E
-             DCB 0x3F, 0x80, 0x00, 0x00
-
-#endif /* not __DOXYGEN__ */
+.L_table:
+	.byte	6
+	.byte	     0x64,0xec,0x1b,0x3c	;  0.0095168091
+	.byte	0x04,0xbc,0x16,0x3e,0x3b	;  0.0029005250
+	.byte	0xe5,0xb9,0x3c,0xc9,0x3c	;  0.0245650893
+	.byte	0x37,0xc2,0x9e,0x5a,0x3d	;  0.0533740603
+	.byte	0x66,0x04,0x98,0x08,0x3e	;  0.1333923995
+	.byte	0xea,0x69,0xaa,0xaa,0x3e	;  0.3333314036
+	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
+	.end

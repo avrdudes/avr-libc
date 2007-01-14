@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,57 +25,44 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    frexp.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- *
- *	A = mantissa(A)  *integ = exponent(A)
- * e.g.
- * int integ
- * double fract = frexp( 3.45, &integ ) = frexp ( 2^2 * 0.8625 )
- * -> fract = 0.8625; *integ = 2
- *
- * fract(0) -> 0/0
+/* float frexp (float x, int *pexp);
+     The frexp() function is used to split the number x into a normalized
+     fraction and an exponent which is stored in pexp.
  */
 
-#if !defined(__DOXYGEN__)
+#define	pexp_lo	r20
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+ENTRY frexp
 
-          TEXT_SEG(fplib, frexp)
-          FUNCTION(frexp)
+	X_movw	ZL, pexp_lo
 
-GLOBAL(frexp)
-	X_movw	ZL, rPL
-        
-	RCALL	_U(__fp_split_a)
-        TST     rA3
-        BREQ    1f
-        SUBI    rA3,0x7E	; 0.5 -> 0.5 * 2^0
-				; 1.0 -> 0.5 * 2^1
-        SBC     rB0,rB0		; sign expand rA3
-        ST      Z,rA3
-        STD     Z+1,rB0
+	rcall	_U(__fp_splitA)
+	brcs	.L_nf
+	tst	rA3
+	breq	.L_zr
+	subi	rA3, 126
+	sbc	rB3, rB3
 
-        ANDI    rA2,0x7F	; mantissa is normalized
-        LDI     rA3,0x3F	; exponent for 0.5
-        BLD     rA3,7
-        RET
+	sbrs	rA2, 7
+	rcall	_U(__fp_norm2)
 
-1:
-        ST      Z,rA3
-	STD	Z + 1, __zero_reg__
-        RJMP    _U(__fp_zero)	; frexp(0) returns 0 not A = 0x00800000 of fp_split1
-
-          ENDFUNC
-
-#endif /* not __DOXYGEN__ */
+	st	Z, rA3
+	std	Z+1, rB3
+	andi	rA2, 0x7f
+	ldi	rA3, 0x3f
+3:	bld	rA3, 7
+	ret
+.L_nf:
+	rjmp	_U(__fp_mpack)
+.L_zr:
+	st	Z, r1
+	std	Z+1, r1
+	rjmp	3b
+ENDFUNC

@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,106 +25,109 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    fp_cmp.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
-
- *----------------------------------------------------------------------------------------
- */
-
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+#include "fp32def.h"
+#include "asmdef.h"
 
 /* GCC expects all these functions to return -1/0/1 as for __cmpsf2 -
    compare with gcc/config/fp-bit.c (the only difference is with NaNs
    where we should always return nonzero for EQ/NE, -1 for GT/GE,
    1 for LT/LE).  -MM 2000-11-18 */
 
-          TEXT_SEG(fplib, __fp_cmp)
+#define	ret_lo	r24	/* return value (signed byte)	*/
+.ifnc	ret_lo, rA2	; This is used in .L_cmp() function.
+  .err
+.endif
 
-          FUNCTION(__eqsf2)
-
-GLOBAL(__eqsf2)                  ; equal : true, if Z set (and T clear)
-GLOBAL(__nesf2)
-GLOBAL(__ltsf2)
-GLOBAL(__lesf2)
-    rcall   .fp_cmp
-    brts    .Lfp_cmp_gt  ; return 1 (not equal / false) if we got a NaN
-    rjmp    .Lfp_cmp_ret
-
-          ENDFUNC
-
-          FUNCTION(__gtsf2)
-
-GLOBAL(__gtsf2)                  ; greater than : true, if Z clear and C clear
-GLOBAL(__gesf2)
-    rcall   .fp_cmp
-    brts    .Lfp_cmp_lt
-    rjmp    .Lfp_cmp_ret
-
-          ENDFUNC
-
-          FUNCTION(__cmpsf2)
-
-GLOBAL(__cmpsf2)  ; returns 1 for A > B ; 0 for A == B ; -1 for A < B ; NaN ?
-    rcall   .fp_cmp
-.Lfp_cmp_ret:
-    breq    .Lfp_cmp_eq
-    brcc    .Lfp_cmp_gt
-.Lfp_cmp_lt:
-    ldi     rByte,0xFF
-    ret
-.Lfp_cmp_eq:
-    ldi     rByte,0x00
-    ret
-.Lfp_cmp_gt:
-    ldi     rByte,0x01
-    ret
-
-          ENDFUNC
-
-/*------------------------------------------------------------------------
- * compare  A == B
- *                                   { C = 1 Z = 0 T = 0 A < B
- * compares x to y and sets flags :  { C = 0 Z = 1 T = 0 A == B
- *                                   { C = 0 Z = 0 T = 0 A > B,
- *                                   {             T = 1 NAN
+/* Return value:
+     if (A < B)
+	-1
+     elif (A == B)
+	0
+     else // A > B || isnan(A) || isnan(B)
+	1
  */
+ENTRY   __cmpsf2
+ENTRY   __eqsf2
+ENTRY   __nesf2
+ENTRY   __ltsf2
+ENTRY   __lesf2
+	rcall	.L_cmp
+	brcc	1f
+	ldi	ret_lo, 1
+1:	ret
 
-          .func .fp_cmp
+/* Return value (ret_lo):
+     if (A > B)
+        1
+     elif (A == B)
+        0
+     else // A < B || isnan(A) || isnan(B)
+        -1
+ */
+ENTRY   __gtsf2
+ENTRY   __gesf2
+	rcall	.L_cmp
+	brcc	1f
+	ldi	ret_lo, -1
+1:	ret
 
-.fp_cmp:
-    BST    rA3,7
-    MOV    rT0,rA3
-    EOR    rT0,rB3
-    BLD    rT0,0		; rT0.7 = sign(A) EOR sign(B), rT0.0 = sign(A)
-    SET
-    RCALL  _U(__fp_split2)	; does not return on NaN (T set then)
-    CLT
-    SBRC   rT0,7
-    RJMP   1f			; different signs
-
-    ; same signs : compare
-    CP     rA0,rB0
-    CPC    rA1,rB1
-    CPC    rA2,rB2
-    CPC    rA3,rB3		; A - B ; set Z if equal, sets C if A < B (unsigned)
-    BREQ   2f
-    BRCC   1f		; A > B (unsigned)
-    COM    rT0		; A < B (unsigned)
-1:			; different signs (-0 < +0!)
-		;  sign(A) == 0 (positive) -> A > B, C = 0 , Z = 0
-		;  sign(A) == 1 (negative) -> A < B, C = 1 , Z = 0
-    ROR    rT0		; C = sign(A)
-    CLZ			; Z = 0
-2:
-    ret
-
-          ENDFUNC
-
+/* The base compare function.
+   Return:
+     if (A < B)
+        rA2 = -1, C = 0
+     elif (A == B)
+        rA2 = 0, C = 0
+     elif (A > B)
+        rA2 = 1, C = 0
+     else // isnan(A) || isnan(B)
+        C = 1
+ */
+.L_cmp:
+	lsl	rA3
+	sbc	r0, r0		; r0 = (A < 0) ? -1 : 0
+	lsl	rB3
+	sbc	rBE, rBE	; rBE = (B < 0) ? -1 : 0
+  ; isnan(A) ?
+	ldi	ZL, 0x80	; NaN: 0x{f/7}f800001..0x{f/7}fffffff
+	ldi	ZH, 0xfe
+	cp	r1, rA0
+	cpc	r1, rA1
+	cpc	ZL, rA2
+	cpc	ZH, rA3
+	brlo	9f		; branch, if C == 1
+  ; isnan(B) ?
+	cp	r1, rB0
+	cpc	r1, rB1
+	cpc	ZL, rB2
+	cpc	ZH, rB3
+	brlo	9f		; branch, if C == 1
+  ; compare
+	sub	rA0, rB0
+	sbc	rA1, rB1
+	sbc	rA2, rB2
+	sbc	rA3, rB3	; C is set, if A < B
+	brne	1f
+  ; absolute values are equal, check signs
+	eor	r0, rBE
+	breq	9f		; if branch, rA2 = 0, C = 0
+  ; force -0.0 == +0.0
+	or	rB0, rB1
+	or	rB0, rB2
+	or	rB0, rB3
+	brne	2f		; evaluate sign(B)
+	ret
+  ; view argument signes
+1:	eor	r0, rBE		; C is not changed
+	brne	2f		; signs are different
+	sbci	rBE, 1		; rBE[0] = (A < B && A > 0) ? 0 : 1
+2:	lsr	rBE		; C = above result OR sign(B)
+  ; build return value, C is set, if A > B
+	ldi	rA2, -1
+	adc	rA2, r1
+	adc	rA2, r1		; C = 0 at any case
+9:	ret
+ENDFUNC

@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,243 +25,230 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
 /*
-    mulsf3x.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
-
- *----------------------------------------------------------------------------------------
- *
- *--- multiplication kernel : used by other high level functions
- * multiply two extended numbers RX = AX * BX
- * sign not considered, resulting stored in T by ___mulsf3
- * AX  rA3 : rA2:rA1:rA0:rAE
- * BX  rB3 : rB2:rB1:rB0:rBE
- * RX  rA3 : rA2:rA1:rA0:rAE
  */
 
-#if !defined(__DOXYGEN__)
+#include "fp32def.h"
+#include "asmdef.h"
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+FUNCTION __mulsf3x
 
-          TEXT_SEG(fplib, __mulsf3x)
-          FUNCTION(__mulsf3x)
+#if	defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
 
-GLOBAL(__mulsf3x)
-    TST     rA3
-    BREQ    2f
+0:	rcall	_U(__fp_pscA)
+	brcs	1f
+	rcall	_U(__fp_pscB)
+	brcs	1f
+	and	rA3, rB3		; one of args is 0xff
+	breq	1f
+	rjmp	_U(__fp_inf)		; nonzero * Inf --> Inf
+1:	rjmp	_U(__fp_nan)		; 0 * Inf --> NaN
+2:	clr	r1			; after 'mul rA3,rB3'
+	rjmp	_U(__fp_szero)
 
-    TST     rB3
-    BREQ    2f
+ENTRY   __mulsf3x
+	rcall	_U(__fp_split3)
+	brcs	0b
 
-     SUBI    rA3,0x7F          ; exp(A) now signed char
-     SUBI    rB3,0x7F          ; exp(B) now signed char
+ENTRY   __mulsf3_pse			; post split entry
+  ; check zero
+	mul	rA3, rB3		; r1 would be clean
+	breq	2b
+  ; rB3.rA3 := rA3 + rB3
+	add	rA3, rB3
+	ldi	rB3, 0
+	adc	rB3, rB3
 
-     ADD     rA3,rB3           ; add two signed registers
-     BRVC    1f                ; no signed overflow
-     BRMI    100f              ; signed overflow : if now negative -> positive overflow
-2:
-     RJMP    _U(__fp_zerox)
+  ; multiplication:  rA2.rA1.rA0 * rB2.rB1.rB0  -->  rA2.rA1.rA0.rAE.ZH.ZL
 
-1:
-     SUBI    rA3,0x81          ; = ADI,0x7F
-     CPI     rA3,0xFF
-     BREQ    2b                ; no (unsigned overflow) -> signed underflow
+  ; ZH.ZL = rA0 * rB0
+	mul	rA0, rB0
+	movw	ZL, r0
+  ; rAE.ZH += rA1 * rB0
+	mul	rA1, rB0
+	clr	rAE
+	add	ZH, r0
+	adc	rAE, r1
+  ; rBE.rAE.ZH = rAE.ZH + rA0 * rB1
+	mul	rA0, rB1
+	clr	rBE
+	add	ZH, r0
+	adc	rAE, r1
+	adc	rBE, rBE
+  ; rA0.rBE.rAE = rBE.rAE + rA0 * rB2
+	mul	rA0, rB2
+	clr	rA0
+	add	rAE, r0
+	adc	rBE, r1
+	adc	rA0, rA0
+  ; rA0.rBE.rAE += rA2 * rB0
+	mul	rA2, rB0
+	clr	rB0
+	add	rAE, r0
+	adc	rBE, r1
+	adc	rA0, rB0
+  ; rA0.rBE.rAE += rA1 * rB1
+	mul	rA1, rB1
+	add	rAE, r0
+	adc	rBE, r1
+	adc	rA0, rB0	; rB0 == 0
+  ; rB0.rA0.rBE = rA0.rBE + rA2 * rB1
+	mul	rA2, rB1
+	add	rBE, r0
+	adc	rA0, r1
+	adc	rB0, rB0	; rB0 was 0
+  ; rB0.rA0.rBE += rA1 * rB2
+	mul	rA1, rB2
+	clr	rB1
+	add	rBE, r0
+	adc	rA0, r1
+	adc	rB0, rB1
+  ; rB0.rA0 += rA2 * rB2
+	mul	rA2, rB2
+	add	rA0, r0
+	adc	rB0, r1
+  ; move result:  rA2.rA1.rA0.rAE.ZH.ZL = rB0.rA0.rBE.rAE.ZH.ZL
+	mov	rA2, rB0
+	mov	rA1, rA0
+	mov	rA0, rBE
+  ; __zero_reg__
+	clr	r1
 
-#ifdef __AVR_ENHANCED__
+#else	/* to __AVR_ENHANCED__	*/
 
-	; this section of code is used by processors which have MUL instruction
+0:	rcall	_U(__fp_pscA)
+	brcs	1f
+	rcall	_U(__fp_pscB)
+	brcs	1f
+	and	rA3, rB3		; one of args is 0xff
+	breq	1f
+	rjmp	_U(__fp_inf)		; nonzero * Inf --> Inf
+1:	rjmp	_U(__fp_nan)		; 0 * Inf --> NaN
+2:	rjmp	_U(__fp_szero)
 
-    ; now multiply mantissa A[rA2:rA1:rA0] * B[rB2:rB1:rB0]
-    ; result : [rr5:rr4:rr3:rr2:rr1:rr0]
-    
-    ; definitions used by calculation
-    #define rr2 rAE
-    #define rr3 rTI1
-    #define rr4 rBE
-    #define rr5 rB3
-    #define rmh r1	; the multiply result high register
-    #define rml r0	; the multiply result low register
-    
-    MUL     rA0, rB0	; 0+0 = 0,1
-    MOV     rr4, rmh    ; rr1 == rr4
-    PUSH    rml		; rr0 finished
-    
-    CLR     rr2
-    MUL     rA0, rB1	; 0+1 = 1,2
-    ADD     rr4, rml
-    ADC     rr2, rmh
-    CLR     rr3
-    MUL     rA1, rB0	; 1+0 = 1,2,3
-    ADD     rr4, rml
-    ADC     rr2, rmh
-    ADC     rr3, rr3
-    PUSH    rr4         ; rr1 finished
-    
-    CLR     rr4
-    MUL     rA0, rB2	; 0+2 = 2,3
-    ADD     rr2, rml
-    ADC     rr3, rmh
-    MUL     rA1, rB1	; 1+1 = 2,3,4
-    ADD     rr2, rml
-    ADC     rr3, rmh
-    ADC     rr4, rr4
-    CLR     rA0
-    MUL     rA2, rB0    ; 2+0 = 2,3,4
-    ADD     rr2, rml
-    ADC     rr3, rmh
-    ADC     rr4, rA0
-    
-    CLR     rr5
-    MUL     rA1, rB2    ; 1+2 = 3,4,5
-    ADD     rr3, rml
-    ADC     rr4, rmh
-    ADC     rr5, rr5
-    MUL     rA2, rB1    ; 2+1 = 3,4,5
-    ADD     rr3, rml
-    ADC     rr4, rmh
-    ADC     rr5, rA0
-    
-    MUL     rA2, rB2    ; 2+2 = 4,5
-    ADD     rr4, rml
-    ADC     rr5, rmh   
+ENTRY   __mulsf3x
+	rcall	_U(__fp_split3)
+	brcs	0b
 
-    ; converting result to original format
-    MOV     rA2, rr5
-    MOV     rA1, rr4
-    MOV     rA0, rr3
-    ; rr2 is the right one, no need to move
+ENTRY   __mulsf3_pse			; post split entry
+  ; check zero
+	tst	rA3
+	breq	2b
+	tst	rB3
+	breq	2b
+  ; rB3.rA3 := rA3 + rB3
+	add	rA3, rB3
+	ldi	rB3, 0
+	adc	rB3, rB3
 
-    #undef rr5
-    #undef rr4
-    #undef rr3
-    ; definitions used by result
-    #define rr5 rA2
-    #define rr4 rA1
-    #define rr3 rA0
-   // #define rr2 rAE
-    #define rr1 rT1c
-    #define rr0 rT0
-    #define rb5 rTI1
-    #define rb4 rBE
-    #define rb3 rB3
+  ; multiplication:  rA2.rA1.rA0 * rB2.rB1.rB0  -->  rA2.rA1.rA0.rAE.ZH.ZL
 
-    ; take out the lowest bytes from stack
-    POP     rr1
-    POP     rr0
-; +++ 44 instructions +++
+	clr	rBE		; 4-d byte of rB*
+	clr	ZL
+	clr	ZH
+	clr	rAE
+  ; r0.rAE.ZH.ZL += rA0 * rB2.rB1.rB0
+	clr	r0
+	sec			; to count loops
+	ror	rA0
+1:	brcc	2f
+	add	ZL,  rB0
+	adc	ZH,  rB1
+	adc	rAE, rB2
+	adc	r0,  rBE
+2:	lsl	rB0
+	rol	rB1
+	rol	rB2
+	rol	rBE
+	lsr	rA0
+	brne	1b
+  ; rA0.r1.r0.rAE.ZH += rA1 * rBE.rB2.rB1
+	ror	rA1		; C was 1
+3:	brcc	4f
+	add	ZH,  rB1
+	adc	rAE, rB2
+	adc	r0,  rBE
+	adc	r1,  rB0
+	brcc	4f
+	inc	rA0
+4:	lsl	rB1
+	rol	rB2
+	rol	rBE
+	rol	rB0
+	lsr	rA1
+	brne	3b
+  ; rA0.r1.r0.rAE += rA2 * rB0.rBE.rB2
+	ror	rA2		; C was 1
+5:	brcc	6f
+	add	rAE, rB2
+	adc	r0,  rBE
+	adc	r1,  rB0
+	adc	rA0, rB1
+6:	lsl	rB2
+	rol	rBE
+	rol	rB0
+	rol	rB1
+	lsr	rA2
+	brne	5b
+  ; move result:  rA2.rA1.rA0.rAE.ZH.ZL := rA0.r1.r0.rAE.ZH.ZL
+	mov	rA2, rA0
+	mov	rA1, r1
+	mov	rA0, r0
+  ; __zero_reg__
+	clr	r1
 
-#else // __AVR_ENHANCED__
+#endif	/* not __AVR_ENHANCED__	*/
 
-	; this section of code is used by processors which have not MUL instruction
-
-    ; now multiply mantissa A[rA2:rA1:rA0] * B[rb5:rb4:rb3:rB2:rB1:rB0]
-    ; result : [rr5:rr4:rr3:rr2:rr1:rr0]
-    #define loop rTI0
-    #define rr5 rA2  /* push rA2 before */
-    #define rr4 rA1  /* push rA1 before */
-    #define rr3 rA0  /* push rA0 before */
-    #define rr2 rAE  /* not used, but right position later on */
-    #define rr1 rT1c /* free to use, needed after pop */
-    #define rr0 rT0  /* scratch register, needed after pop */
-    #define rb5 rTI1 /*  */
-    #define rb4 rBE /* not used */
-    #define rb3 rB3 /* no longer used */
-
-    MOV     rb4,rA0          ; rB4 not yet needed
-    CLR     rr0
-    CLR     rr1              ; not conclusive zero for high level function
-    CLR     rr2
-    CLR     rr3
-    CLR     rb3
-
-    LDI     loop,8           ; loop counter
-1:
-    LSR     rb4
-    BRCC    2f
-    ADD     rr0,rB0
-    adc     rr1,rB1
-    adc     rr2,rB2
-    adc     rr3,rb3
-2:
-    ADD     rB0,rB0
-    adc     rB1,rB1
-    adc     rB2,rB2
-    adc     rb3,rb3
-    DEC     loop
-    BRNE    1b
-    LDI     loop,8           ; loop counter
-
-    MOV     rb5,rA1          ; rb5 not yet needed
-    CLR     rr4              ; rb4 is allready clear
-    LDI     loop,8           ; loop counter
-1:
-    LSR     rb5
-    BRCC    2f
-    ADD     rr1,rB1
-    adc     rr2,rB2
-    adc     rr3,rb3
-    adc     rr4,rb4
-2:
-    ADD     rB1,rB1
-    adc     rB2,rB2
-    adc     rb3,rb3
-    adc     rb4,rb4
-    DEC     loop
-    BRNE    1b
-
-    MOV     loop,rA2          ; loop no longer needed, check
-    CLR     rr5               ; rb5 is allready clear
-1:
-    LSR     loop
-    BRCC    2f
-    ADD     rr2,rB2
-    adc     rr3,rb3
-    adc     rr4,rb4
-    adc     rr5,rb5
-2:
-    ADD     rB2,rB2
-    adc     rb3,rb3
-    adc     rb4,rb4
-    adc     rb5,rb5
-    TST     loop
-    BRNE    1b
-; +++ 49 instructions +++
-
-#endif // __AVR_ENHANCED__
-
-
-    ; multiplication done : result in rr5:rr4:rr3:rr2:rr1:rr0
-    ;                              =  rA2:rA1:rA0:rAE:rr1:rr0
-    ;  normalize  1.0 * 1.0      = 1.0
-    ;                          0x800000 * 0x800000 = 0x40 00 00 00 00 00
-    ;                          1.999999 * 1.999999 = 3.99999 ~ 4.0
-    ;                          0xFFFFFF * 0xFFFFFF = 0xFF FF FE 00 00 01
-
-    TST     rA2
-    BRPL    1f                ; if MSB erg is clr
-    INC     rA3               ;
-    BRNE    2f
-100:
-    RJMP    _U(__fp_nanx)     ; returns to ___mulsf3 or a high level function : rT1c ok
-1:
-    ADD     rr0,rr0
-    adc     rr1,rr1
-    adc     rAE,rAE
-    adc     rA0,rA0
-    adc     rA1,rA1
-    adc     rA2,rA2
-
-2:
-    OR    rr0,rr1             ; rr0 = rT0 which holds the mantissae extension beyond rAE
-    RET
-
-          ENDFUNC
-
-#endif /* not __DOXYGEN__ */
+  ; exponent -= 127	(Why not 126?  For compare conviniency.)
+	subi	rA3, lo8(127)
+	sbci	rB3, hi8(127)
+	brmi	13f		; denormalization is needed
+	breq	15f		; normalization is impossible
+  ; result exponent > min ==> normalization is possible
+10:	tst	rA2
+	brmi	11f		; mantissa is normal
+  ; mantissa <<= 1
+	lsl	ZL
+	rol	ZH
+	rol	rAE
+	rol	rA0
+	rol	rA1
+	rol	rA2
+  ; exponent -= 1
+	subi	rA3, lo8(1)
+	sbci	rB3, hi8(1)
+	brne	10b
+  ; check to overflow
+11:	cpi	rA3, 254
+	cpc	rB3, r1
+	brlo	15f
+	rjmp	_U(__fp_inf)
+  ; check lowest value of exponent to avoid long operation
+12:	rjmp	_U(__fp_szero)
+13:	cpi	rB3, hi8(-24)		; here rB3 < 0
+	brlt	12b
+	cpi	rA3, lo8(-24)
+	brlt	12b
+  ; mantissa >>= -rA3
+14:	lsr	rA2
+	ror	rA1
+	ror	rA0
+	ror	rAE
+	ror	ZH
+	ror	ZL
+	subi	rA3, -1
+	brne	14b
+  ; for rounding
+15:	or	ZH, ZL
+  ; pack
+	lsl	rA2
+	adc	rA3, r1		; restore exponent for normal values
+	lsr	rA3
+	ror	rA2
+	bld	rA3, 7		; sign
+	ret
+ENDFUNC

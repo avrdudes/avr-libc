@@ -1,21 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
-   Copyright (c) 2005  Anatoly Sokolov <aesok@post.ru>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -30,63 +25,88 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    ldexp.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- *
- * A = 2^exp * x
- * e.g.
- * double y = ldexp( 3.45, 2 ) = 2^2 * 3.45 = 13.8
+/* double ldexp (double x, int exp)
+   The ldexp() function returns the result of multiplying the
+   floating-point number x by 2 raised to the power exp.
  */
+#define	exp_lo	r20
+#define	exp_hi	r21
 
-#if !defined(__DOXYGEN__)
+FUNCTION ldexp
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+.L_inf:	rjmp	_U(__fp_inf)
+.L_pk:	rjmp	_U(__fp_mpack)
 
-#define rExpH	rBE
+ENTRY ldexp
+	rcall	_U(__fp_splitA)
+	brcs	.L_pk			; as is
+	tst	rA3
+	breq	.L_pk			; ldexp(0,*) is always 0
 
-	TEXT_SEG(fplib, ldexp)
-	FUNCTION(ldexp)
+.ifnc  rB3, exp_hi
+  .err	; rB3 and exp_hi are different
+.endif
+	add	rA3, exp_lo		; rB3.rA3 := new exponent
+	adc	rB3, r1
+	brvs	.L_inf		    ; overflow is possible for exp > 0 only
 
-GLOBAL(ldexp)
-	RCALL	_U(__fp_split_a)	; Non return if NaN; clears rAE
-
-        TST     rA3			;
-        BREQ    .L_zero			; 2^x*0 = 0
-	
-	CLR	rExpH
-	ADD	rA3, rPL		; rExpH.rA3 := sum of exponent and arg
-	ADC	rExpH, rPH
-
-	BRVS	.L_Inf			; overflow is possible for positive only
-	BRMI	.L_zero			; if underflow return 0
-
-	LDI	rPL, lo8(EMAX)
-	LDI	rPH, hi8(EMAX)
-	CP	rA3, rPL
-	CPC	rExpH, rPH
-	BRGE	.L_Inf			; if overflow return +/-Inf
-	
-        RJMP    _U(__fp_merge)		; rT0 must not be cleared : rAE=0 no rounding anyway
-
+  ; check exponent for minus and zero
+	subi	rA3, lo8(1)
+	sbci	rB3, hi8(1)
+	brlt	5f		; denormalization is needed
+	breq	.L_pack		; normalization is impossible
+1:	tst	rA2
+	brmi	2f
+	lsl	rA0
+	rol	rA1
+	rol	rA2
+	subi	rA3, lo8(1)
+	sbci	rB3, hi8(1)
+	brne	1b		; C == 0, Z == 0
+  ; check to overflow
+2:	cpi	rA3, 254
+	cpc	rB3, r1
+	brge	.L_inf
+.L_pack:
+	lsl	rA2
+	adc	rA3, r1		; restore exponent for normal numbers
+	lsr	rA3
+	ror	rA2
+	bld	rA3, 7		; sign
+	ret
+  ; exponent <= 0
+5:	cpi	rB3, hi8(-24)
+	brlt	.L_zero
+	cpi	rA3, lo8(-24)
+	brlt	.L_zero
+  ; denormalize A
+	clr	rAE
+6:	lsr	rA2
+	ror	rA1
+	ror	rA0
+	ror	rAE
+	brcc	7f
+	ori	rAE, 1
+7:	inc	rA3
+	brne	6b
+.L_round:
+	lsl	rAE
+	brcc	.L_pack
+	brne	4f
+	sbrs	rA0, 0
+	rjmp	.L_pack
+4:	subi	rA0, -1
+	sbci	rA1, -1
+	sbci	rA2, -1
+	sbci	rA3, -1
+	rjmp	.L_pack
 .L_zero:
-        RJMP    _U(__fp_zero)
-
-.L_Inf:
-	BRTS	.L_mInf			; branch if arg negative
-        RJMP    _U(__fp_p_inf)
-.L_mInf:
-        RJMP    _U(__fp_m_inf)
-
-	ENDFUNC
-
-#endif /* not __DOXYGEN__ */
+	rjmp	_U(__fp_szero)
+ENDFUNC

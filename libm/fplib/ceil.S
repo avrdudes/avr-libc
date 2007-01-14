@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,79 +25,46 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    ceil.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+/* double ceil (double x);
+     The ceil() function rounds x up to the nearest integer.
 
- *----------------------------------------------------------------------------------------
- *
- *	A = ceil(A)
- *
- * largest integer value not smaller than arg
- * for X > 4B 7F FF FF : X = X (numbers miss the fractional part then)
- *     X >= 0
- *      X == (float)(long)X   X = X (no fractional part)
- *      X != (float)(long)X   X = (float)(long)X+1 (fractional part present)
- *     X <  0 then
- *      X =  (float)(long)X
- *
- * comments on ceil & floor
- * 1.0       =  7F:80 00 00 00 ->
- * denormalize to LSB of mantissa == 1.0
- *              96:00 00 01
- * 2.0       =  80:80 00 00 00 ->
- *              96:00 00 02
+   Examples:
+     ceil(1.9) --> 2.0
+     ceil(-1.9) --> -1.0
  */
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+#include "fp32def.h"
+#include "asmdef.h"
 
-          TEXT_SEG(fplib, ceil)
-          FUNCTION(ceil)
+#define FL_P1	0x3f800000	/* +1.0	*/
 
-GLOBAL(ceil)
-    RCALL   _U(__fp_split_a)	; split up in sign : exp : fraction   : fraction extention
-				;          x  T    : rA3 : rA2:rA1:rA0: rAE
-    CPI     rA3,0x7F          ; Exp >= 0x7F -> arg >= 1.0
-    BRCC    100f
-    BRTS    1f                ; |arg| < 1.0 -> ceil  = / 1.0  for X >  0.0
-    TST     rA3               ;                        \ 0.0  for X <= 0.0
-    BREQ    1f
-    LDI     rA3,0x3F
-    LDI     rA2,0x80
-    CLR     rA1
-    CLR     rA0
-    RET
-1:
-    RJMP    _U(__fp_zero)
-1:
-    LSR     rA2        ;
-    ROR     rA1        ; shift out fractional bits to the right
-    ROR     rA0        ; until mantissa is a normalized unsigned
-    adc     rAE, __zero_reg__	; rAE cleard by fp_split1
-    INC     rA3        ;
-    ; |arg| >= 1.0
-100:                   ; |arg| >= 1.0
-    CPI     rA3,0x96   ;
-    BRCS    1b
+ENTRY   ceil
+	rcall	_U(__fp_trunc)
+	brcs	.L_nf
+  ; A is finite
+	cpi	rA3, 127
+	brsh	2f
+  ; fabs(A) < 1.0
+	cpse	rA3, r1
+	brtc	1f
+	rjmp	_U(__fp_szero)		; ceil(-0.0) is -0.0
+  ; 0.0 < A < 1.0 --> +1.0
+1:	ldi	rA0,  lo8(FL_P1)
+	ldi	rA1,  hi8(FL_P1)
+	ldi	rA2, hlo8(FL_P1)
+	ldi	rA3, hhi8(FL_P1)
+	ret
+  ; positive values are rounded into +Inf direction
+2:	brts	3f		; if negative
+	cp	r1, rAE		; C = 1 if fraction != 0
+	adc	rA0, r1
+	adc	rA1, r1
+	adc	rA2, r1		; rA2 was < 0x80, overflow is impossible
+3:	rjmp	_U(__fp_mintl)
 
-2:
-    BRTS    3f         ; LSB now is exactely 1 or greater
-    TST     rAE        ; any bit shiftet out? if LSB > 1 then rAE is zero
-    BREQ    3f         ; no!
-    SUBI    rA0,0xFF   ; else next bigger value
-    SBCI    rA1,0xFF
-    SBCI    rA2,0xFF
-3:
-    CLR     rAE        ; rT0 must not be cleared : rAE=0 no rounding anyway
-    RJMP    _U(__fp_merge)
-
-          ENDFUNC
-
-
+.L_nf:	rjmp	_U(__fp_mpack)	; pass nonfinite arg as is
+ENDFUNC

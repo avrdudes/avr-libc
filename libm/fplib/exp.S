@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,126 +25,98 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    exp.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- *
- *	A = exp(A)
+/* float exp (float x);
+     The exp() function returns the value of e (the base of natural
+     logarithms) raised to the power of x.
  */
 
-#if !defined(__DOXYGEN__)
+#define	X2BIG	 0x43000000	/* exp(-X2BIG) < 0x00000001	*/
+#define	FL_1_LN2 0x3fb8aa3b	/* 1 / ln(2)			*/
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+/* second arg for modf(), ldexp() functions.	*/
+#define	exp_lo	r20
+#define	exp_hi	r21
 
-          TEXT_SEG(fplib, exp)
-          FUNCTION(exp)
+FUNCTION exp
 
-/* exp( x ) = 2^fract(x/ln2) * 2^(int(x/ln2))
- */
+.L_nf:	brne	.L_nan
+.L_tb:	brts	.L_zr
+	rjmp	_U(__fp_inf)
+.L_zr:	rjmp	_U(__fp_zero)
+.L_nan:	rjmp	_U(__fp_nan)
 
-GLOBAL(exp)
-   MOV   rT0,rA3
-   TST   rA3
-   BRMI  1f
-   LDI   rB3,0x42
-   LDI   rB2,0xB1
-   LDI   rB1,0x72
-   CPI   rA0,0x18
-   CPC   rA1,rB1
-   CPC   rA2,rB2
-   CPC   rA3,rB3		; compare with 88.72283935546875 = | ln(FLT_MAX) |
-   BRCS  2f			; no overflow
-   RJMP  _U(__fp_nanERANGE)
-
-1: ; A < 0, check for underflow
-   ANDI  rA3,0x7F
-   LDI   rB3,0x42
-   LDI   rB2,0xAE
-   LDI   rB1,0xAC
-   CPI   rA0,0x50
-   CPC   rA1,rB1
-   CPC   rA2,rB2
-   CPC   rA3,rB3		; compare with 87.3365478515625 = | ln(FLT_MIN) |
-   BRCS  2f			; no underflow
-   RJMP  _U(__fp_zero)
-
-2:
-   PUSH  rT0			; push sign only
-   LDI   rB3,0x3F
-   LDI   rB2,0xB8
-   LDI   rB1,0xAA
-   LDI   rB0,0x3B ; 1/ln(2)
-   XCALL __mulsf3
-   PUSH  rS0
-   PUSH  rS1
-   PUSH  rS2
-   PUSH  rS3
-   LDI   rB3,HIGH( 12 )		; memory mapped registers : _modf stores integer part to there
-   LDI   rB2,LOW( 12 )		;
-   RCALL _U(modf)		; split A into S0::S3 = int(A) and A = fract(A)
-
-   LDI     ZL,LOW(table_exp)
-   LDI     ZH,HIGH(table_exp)
-   RCALL   _U(__fp_powerseries)
-
-   MOV   rB3,rS0
-   MOV   rB2,rS1		;
-   MOV   rB1,rS2
-   MOV   rB0,rS3		;
-   POP   rS3
-   POP   rS2
-   POP   rS1
-   POP   rS0			; load sign
-
-			; transform B into an integer
-   LDI     rTI0,0x7F+31
-   ASR     rB2
-   adc     rB2,rB2
-   adc     rB3,rB3
-   SUB     rTI0,rB3	;
-   CLR     rB3
-   ORI     rB2,0x80
-   RJMP   2f
-1:
-   LSR    rB2
-   ROR    rB1
-   ROR    rB0
-   ROR    rB3
-2:
-   DEC    rTI0
-   BRPL   1b
-			; now rB2::rB0:rB3 = long integer (only rB3 should be set)
-   MOV    rB2,rB3
-   ADD    rB3,rB3
-   SBC    rB3,rB3		; sign expand exponent
-   RCALL  _U(ldexp)
-
-   POP   rT0
-   SBRC  rT0,7
-   RJMP  _U(__fp_inverse)
-   RET
-
-          ENDFUNC
-
+ENTRY exp
+  ; split and analize A
+	rcall	_U(__fp_splitA)
+	brcs	.L_nf		; A is not a finite number
+	cpi	rA3, hhi8(X2BIG << 1)
+	brsh	.L_tb		; A is too big (in absolute value)
+  ; save sign and jump to positive
+	bld	r0, 7
+	push	r0
+	clt
+  ; A = A / ln(2)
+	ldi	rB0,  lo8(FL_1_LN2)
+	ldi	rB1,  hi8(FL_1_LN2)
+	ldi	rB2, hlo8(FL_1_LN2 | 0x800000)		; hidden '1'
+	ldi	rB3, hhi8(FL_1_LN2 << 1)		; exponent
+	rcall	_U(__mulsf3_pse)
+  ; split A into fraction and integral parts
+	push	r0
+	push	r0
+	push	r0
+	in	exp_lo, SPL_IO_ADDR
+	in	exp_hi, SPH_IO_ADDR
+	push	r0
+	rcall	_U(modf)
+  ; calculate 2**(-x) for 0 <= x < 1
+	ldi	ZL, lo8(.L_table)
+	ldi	ZH, hi8(.L_table)
+	rcall	_U(__fp_powser)
+  ; get integral part
+	pop	exp_lo
+	pop	exp_hi
+	pop	ZL
+	pop	ZH
+  ; cast to integer
+	asr	ZL
+	rol	ZL
+	rol	ZH
+	breq	2f
+	subi	ZH, 0x7e
+	ori	ZL, 0x80
+	clr	exp_lo
+1:	lsl	ZL
+	rol	exp_lo
+	dec	ZH
+	brne	1b
+  ; negate and scale
+	neg	exp_lo
+	sbc	exp_hi, exp_hi
+2:	rcall	_U(ldexp)
+  ; inverse for positive arg.
+	pop	r0
+	sbrs	r0, 7
+	rjmp	_U(inverse)
+	ret
+ENDFUNC
+	
 	PGM_SECTION
-
- table_exp:  DCB 6 ; no of table entries - 1 (preload value)
-             DCB 0x39, 0x65, 0x2C, 0x03     ; 0.000218555        E5 2C 02 FD 74 E4 30
-             DCB 0x3A, 0xA2, 0x3B, 0x59     ; 0.00123773         A2 3B 59 0A 98 98 48
-             DCB 0x3C, 0x1E, 0xBA, 0xE0     ; 0.00968811         9E BA E0 18 C7 63 00
-             DCB 0x3D, 0x63, 0x3B, 0xF4     ; 0.0554771          E3 3B F3 D9 EE 36 C8
-             DCB 0x3E, 0x75, 0xFF, 0x4E     ; 0.240232           F5 FF 4D AD AC 35 08
-             DCB 0x3F, 0x31, 0x72, 0x11     ; 0.693147           B1 72 11 69 BD 3D 90
-             DCB 0x3F, 0x80, 0x00, 0x00     ; 1.0
-             DCB 0x00
-
-#endif /* not __DOXYGEN__ */
+.L_table:
+	.byte	7
+	.byte	     0x63,0x42,0x36,0xb7	; -0.0000108635
+	.byte	0x9b,0xd8,0xa7,0x1a,0x39	;  0.0001474911
+	.byte	0x68,0x56,0x18,0xae,0xba	; -0.0013282400
+	.byte	0xab,0x55,0x8c,0x1d,0x3c	;  0.0096159779
+	.byte	0xb7,0xcc,0x57,0x63,0xbd	; -0.0555036542
+	.byte	0x6d,0xed,0xfd,0x75,0x3e	;  0.2402264688
+	.byte	0xf6,0x17,0x72,0x31,0xbf	; -0.6931471802
+	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
+	.end

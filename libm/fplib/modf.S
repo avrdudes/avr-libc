@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,86 +25,88 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    modf.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+#include "fp32def.h"
+#include "asmdef.h"
 
- *----------------------------------------------------------------------------------------
- *
- * A = modf(A,&B) *B = integral part of A
- *                 A = fractional part of A
+/*  double modf (double x, double *iptr);
+
+    The modf() function breaks the argument x into an integral part and a
+    fractional part, each of which has the same sign as x. The integral part
+    is stored in iptr.
+	This implementation skips writing by zero pointer.
  */
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+#define	iptr_lo	r20
 
-          TEXT_SEG(fplib, modf)
-          FUNCTION(modf)
-
-GLOBAL(modf)
-	RCALL	_U(__fp_split_a)	; clears rAE
-
-        PUSH    YL
-        PUSH    YH
-        MOV     YH,rPH
-        MOV     YL,rPL		; pointer to double
-        CLR     rB3
-        CLR     rB2
-        CLR     rB1
-        CLR     rB0		; preset zero integral part
-
-        TST     rA3		; if zero return zero for *int and mantissa
-        BREQ    10f
-        CPI     rA3,0x7F	; Exp < 0x7F -> arg < 1.0 -> no integer part
-        BRCS    10f
-
-        MOV     rTI0,rA3	; keep temporarily
-        RCALL   _U(__fp_merge)	; rT0 must not be cleared : rAE=0 no rounding anyway
-        MOV     rB3,rA3
-        MOV     rB2,rA2
-        MOV     rB1,rA1
-        MOV     rB0,rA0
-
-        CPI     rTI0,0x96	; rA3 >= 0x96 -> no fractional part
-        BRCC    2f
-        XCALL   __fixsfsi	;
-        XCALL   __floatsisf	;
-        CPI     YL,0
-        CPC     YL,YH
-        BREQ    1f
-        ST      Y+,rA0
-        ST      Y+,rA1
-        ST      Y+,rA2
-        ST      Y+,rA3		; A = integer part
-1:
-        SUBI    rA3,0x80	; A = -int(x)
-        POP     YH
-        POP     YL
-        XJMP    __addsf3
-2:
-        CLR     rA3
-        CLR     rA2
-        CLR     rA1
-        CLR     rA0
-10:
-        CPI     YL,0
-        CPC     YL,YH
-        BREQ    1f
-        ST      Y+,rB0
-        ST      Y+,rB1
-        ST      Y+,rB2
-        ST      Y+,rB3		; no fractional part
-1:
-        POP     YH
-        POP     YL
-        RJMP    _U(__fp_merge)	; rT0 must not be cleared : rAE=0 no rounding anyway
-
-          ENDFUNC
-
-
+ENTRY modf
+  ; save iptr
+	X_movw	ZL, iptr_lo
+  ; XH = exponent field
+	X_movw	XL, rA2
+	lsl	XL
+	rol	XH
+  ; B = A
+	X_movw	rB0, rA0
+	X_movw	rB2, rA2
+  ; Is there an integral part?
+	subi	XH, 127		; exp of 1.0
+	brsh	1f
+  ; fabs(x) < 1.0:	*iptr = copysign(0, x),  return x
+	clr	rB0
+	clr	rB1
+	clr	rB2
+	andi	rB3, 0x80
+	rjmp	.L_write
+  ; Is there a fraction part?
+1:	subi	XH, 23
+	brsh	4f		; no fraction part
+  ; check fraction:  B >>= 23 - (exp-127)
+	mov	XL, XH		; Now XH is -23..-1
+	clr	r0		; to control, is the fraction zero?
+2:	lsr	rB2
+	ror	rB1
+	ror	rB0
+	adc	r0, r1
+	inc	XL
+	brmi	2b
+	tst	r0
+	breq	.L_nfrc		; fraction == 0
+  ; restore and clear fraction:  B <<= 23 - (exp-127)
+3:	lsl	rB0
+	rol	rB1
+	rol	rB2
+	inc	XH
+	brmi	3b
+  ; write B
+	rcall	.L_write
+  ; return nonzero fraction:  A - B
+	rjmp	_U(__subsf3)
+  ; exponent too big:  compare with smallest NaN (0x7f800001)
+4:	cpi	rA0, 1
+	cpc	rA1, r1
+	ldi	XL, 0x80
+	cpc	rA2, XL
+	sbci	XH, 128 - 23
+	brsh	.L_write	; NaN: write and return as is
+  ; fraction == 0
+.L_nfrc:
+	X_movw	rB0, rA0
+	X_movw	rB2, rA2
+  ; A = 0.0 with sign
+	clr	rA0
+	clr	rA1
+	clr	rA2
+	andi	rA3, 0x80
+.L_write:
+	adiw	ZL, 0		; skip writing with NULL pointer
+	breq	1f
+	st	Z,   rB0
+	std	Z+1, rB1
+	std	Z+2, rB2
+	std	Z+3, rB3
+1:	ret
+ENDFUNC

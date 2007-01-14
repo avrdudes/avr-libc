@@ -1,20 +1,16 @@
-/*  -*- Mode: Asm -*-  */
-
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+   Copyright (c) 2006  Dmitry Xmelkov
    All rights reserved.
-
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-     
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -29,112 +25,150 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. 
-*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
-/*
-    addsf3x.S is part of     FPlib V 0.3.0       ported to avr-as
-    for details see readme.fplib
+/* <non_standart> __addsf3x (float_40 A, float_40 B);
+     Internal function to add float point numbers.
 
- *----------------------------------------------------------------------------------------
- *
- *--- addition kernel : used by other high level functions
- * add two extended numbers RX = AX + BX
- * AX  rA3 : rA2:rA1:rA0:rAE sign stored in rT1c.7, rAE cleared by fp_split1
- * BX  rB3 : rB2:rB1:rB0:rBE sign(A) ^ sign(B) stored in T
- * RX  rA3 : rA2:rA1:rA0:rAE resulting sign stored in rT1c.7 (rT1c.7 complemented, if B > A)
+   Input:
+     rA3.rA2.rA1.rA0.rAE  - arg. A
+     rB3.rB2.rB1.rB0.rBE  - arg. B
+   Output:
+     T
+     rA3
+     rA2.rA1.rA0.rAE.ZH
  */
 
-#if !defined(__DOXYGEN__)
+#include "fp32def.h"
+#include "asmdef.h"
 
-#include "gasava.inc"
-#include "macros.inc"
-#include "fplib.inc"
+FUNCTION __addsf3x
 
-          TEXT_SEG(fplib, __addsf3x)
-          FUNCTION(__addsf3x)
+0:	rcall	_U(__fp_pscA)
+	brcs	.L_nan
+	rcall	_U(__fp_pscB)
+	brcs	.L_nan
+	brne	.L_inf		; B is finite --> return A
+	cpi	rA3, 255
+	brne	.L_infB		; A is finite --> return B
+	brtc	.L_inf		; Inf + Inf with the same sign
+.L_nan:
+	rjmp	_U(__fp_nan)
+.L_infB:
+	brtc	.L_inf
+	com	ZL
+.L_inf:
+	bst	ZL, 7
+	rjmp	_U(__fp_inf)
 
-GLOBAL(__addsf3x)
-    CP      rAE,rBE         ; some high level functions use ___addsf3x
-    CPC     rA0,rB0         ; directely with preset rAE,rBE
-    CPC     rA1,rB1         ;
-    CPC     rA2,rB2         ;
-    CPC     rA3,rB3         ; A - B
-    BREQ    300f
-    BRCC    100f            ; A >= B
+ENTRY	__addsf3x
+	mov	ZL, rA3		; save sign of A
+	rcall	_U(__fp_split3)
+	brcs	0b
+  ; compare A and B
+	cp	rAE, rBE
+	cpc	rA0, rB0
+	cpc	rA1, rB1
+	cpc	rA2, rB2
+	cpc	rA3, rB3
+	brlo	2f		; fabs(A) < fabs(B)
+	brne	4f		; fabs(A) > fabs(B)
+	brtc	.L_add
+	rjmp	_U(__fp_zero)	; A + (-A) = +0.0
+  ; swap A and B
+2:	brtc	3f
+	com	ZL		; update sign
+3:	mov	r0, rAE
+	mov	rAE, rBE
+	mov	rBE, r0
+#if  defined(__AVR_HAVE_MOVW__) && __AVR_HAVE_MOVW__
+	movw	r0, rA0
+	movw	rA0, rB0
+	movw	rB0, r0
+	movw	r0, rA2
+	movw	rA2, rB2
+	movw	rB2, r0
+	clr	r1
+#else
+	mov	r0, rA0
+	mov	rA0, rB0
+	mov	rB0, r0
+	mov	r0, rA1
+	mov	rA1, rB1
+	mov	rB1, r0
+	mov	r0, rA2
+	mov	rA2, rB2
+	mov	rB2, r0
+	mov	r0, rA3
+	mov	rA3, rB3
+	mov	rB3, r0
+#endif
+  ;
+4:	clr	ZH
+	sub	rB3, rA3
+5:	breq	7f		; shift is not needed
+	cpi	rB3, -7
+	brsh	6f
+	cpi	rB3, -32
+	brlo	.L_ret
+	cp	r1, rBE
+	sbci	ZH, 0
+	mov	rBE, rB0
+	mov	rB0, rB1
+	mov	rB1, rB2
+	clr	rB2
+	subi	rB3, -8
+	rjmp	5b
+6:	lsr	rB2
+	ror	rB1
+	ror	rB0
+	ror	rBE
+	sbci	ZH, 0
+	inc	rB3
+	brne	6b
+7:
+  ; direction ?
+	brtc	.L_add
+  ; A -= B
+	cp	r1, ZH
+	sbc	rAE, rBE
+	sbc	rA0, rB0
+	sbc	rA1, rB1
+	sbc	rA2, rB2
+	brmi	.L_ret
+8:	subi	rA3, 1
+	breq	9f
+	lsl	ZH
+	rol	rAE
+	rol	rA0
+	rol	rA1
+	rol	rA2
+	brpl	8b
+	rjmp	.L_ret
 
-    BRTC    1f              ; if T clear the A & B of same sign
-    COM     rT1c            ; else complement sign
-1:
-    MOV     rT0,rAE
-    MOV     rAE,rBE
-    MOV     rBE,rT0
-    MOV     rT0,rA0
-    MOV     rA0,rB0
-    MOV     rB0,rT0
-    MOV     rT0,rA1
-    MOV     rA1,rB1
-    MOV     rB1,rT0
-    MOV     rT0,rA2
-    MOV     rA2,rB2
-    MOV     rB2,rT0
-    MOV     rT0,rA3
-    MOV     rA3,rB3
-    MOV     rB3,rT0
-
- ; now A > B
-100:                           ; denormalize lower mantissa until exponents are the same
-    CLR     rTI0               ; holds mantissa extension beyond rBE
-    TST     rB3                ;
-    BREQ    50f                ; A + 0
-
-    SUB     rB3,rA3            ; get difference, rB3 negative
-    BREQ    2f                 ; same : no shift
-    CPI     rB3,LOW(-25)       ; no significant digits left after shift
-    BRCS    50f                ;
-1:                                                     ;
-    LSR     rB2                                                      ;
-    ROR     rB1                                                      ;
-    ROR     rB0                                                      ;
-    ROR     rBE                ; fraction >> 1                       ;
-    SBCI    rTI0,0             ; mark if any overflow beyond rBE     ;
-    INC     rB3                ; exponent ++
-    BRNE    1b
-
-2:
-    BRTS    200f               ; branch if different sign
-    ADD     rAE,rBE            ; maybe rAE and rBE are preset
-    adc     rA0,rB0            ;
-    adc     rA1,rB1            ;
-    adc     rA2,rB2            ; add both mantissae
-    BRCC    50f                ; no fraction overflow if C = 0
-    ROR     rA2                ; correct overflow
-    ROR     rA1
-    ROR     rA0
-    ROR     rAE               ; fraction >> 1
-    SBCI    rTI0,0            ; mark if any overflow beyond rBE
-    INC     rA3               ; exponent++
-50:
-    BST     rT1c,7
-    MOV     rT0,rTI0
-    RET
-
-200:
-    SUB     rAE,rTI0          ; extended mantissa : 0 - lost bits
-    CLR     rAE
-    SBC     rAE,rBE           ; subtract the lower from the larger
-    SBC     rA0,rB0           ; extended mantissa : if rBE == 0x80 -> rAE = 0x80
-    SBC     rA1,rB1           ;
-    SBC     rA2,rB2           ;
-    RJMP    50b               ;
-
- ; A == B
-300:
-    BRTC    100b              ; same sign, test for zero & add
-    RJMP    _U(__fp_zerox)     ; different signs
-
-          ENDFUNC
-
-#endif /* not __DOXYGEN__ */
+.L_add:
+	add	rAE, rBE
+	adc	rA0, rB0
+	adc	rA1, rB1
+	adc	rA2, rB2
+	brcc	.L_ret
+	ror	rA2
+	ror	rA1
+	ror	rA0
+	ror	rAE
+	ror	ZH
+	cpi	rA3, 254
+	brlo	9f
+	rjmp	.L_inf
+9:	inc	rA3
+.L_ret:
+	lsl	rA2
+	brcs	1f
+	clr	rA3
+1:	lsl	ZL		; sign
+	ror	rA3
+	ror	rA2
+	ret
+ENDFUNC
