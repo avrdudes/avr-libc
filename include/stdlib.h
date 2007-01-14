@@ -619,11 +619,13 @@ extern char *dtostre(double __val, char *__s, unsigned char __prec,
    Conversion is done in the format \c "[-]d.ddd".  The minimum field
    width of the output string (including the \c '.' and the possible
    sign for negative values) is given in \c width, and \c prec determines
-   the number of digits after the decimal sign.
+   the number of digits after the decimal sign. \c width is signed value,
+   negative for left adjustment.
 
    The dtostrf() function returns the pointer to the converted string \c s.
 */
-extern char *dtostrf(double __val, char __width, char __prec, char *__s);
+extern char *dtostrf(double __val, signed char __width,
+                     unsigned char __prec, char *__s);
 
 /*@}*/
 
