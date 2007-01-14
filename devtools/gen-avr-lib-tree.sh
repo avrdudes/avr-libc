@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,2006,  Anatoly Sokolov
+# Copyright (c) 2005,2006,2007  Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -169,6 +169,7 @@ atmega8:crtm8.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega88:crtm88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega8515:crtm8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega8535:crtm8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90pwm1:crt90pwm1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm2:crt90pwm2.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm3:crt90pwm3.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "

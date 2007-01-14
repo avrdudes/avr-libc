@@ -1,4 +1,4 @@
-# Copyright (c) 2004,2005,2006,  Theodore A. Roth
+# Copyright (c) 2004,2005,2006,2007 Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -102,6 +102,7 @@ avr_HEADERS = \
     iomx8.h \
     iomxx0_1.h \
     iomxx4.h \
+    io90pwm1.h \
     io90pwmx.h \
     iotn11.h \
     iotn12.h \
