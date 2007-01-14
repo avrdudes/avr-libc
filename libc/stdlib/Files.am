@@ -35,22 +35,30 @@ stdlib_a_c_sources = \
 	bsearch.c \
 	calloc.c \
 	errno.c \
+	dtoa_prf.c \
+	dtostre.c \
+	dtostrf.c \
 	labs.c \
 	malloc.c \
 	qsort.c \
 	rand.c \
 	random.c \
 	realloc.c \
+	strtod.c \
 	strtol.c \
 	strtoul.c \
+	dtoa_conv.h \
+	ftoa_engine.h \
 	stdlib_private.h
 
 stdlib_a_asm_sources = \
 	abort.S \
+	atof.S \
 	atoi.S \
 	atol.S \
 	div.S \
 	exit.S \
+	ftoa_engine.S \
 	ldiv.S \
 	setjmp.S \
 	isascii.S \
