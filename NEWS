@@ -100,6 +100,7 @@
   + ATmega2560 [patch #4461]
   + ATmega2561 [patch #4461]
   + ATmega3290P
+  + AT90PWM1
 
 * New functions: 
 

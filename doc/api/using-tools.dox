@@ -113,6 +113,7 @@ compiler frontend.
   <tr><td>avr4</td><td>atmega8515</td><td>__AVR_ATmega8515__</td></tr>
   <tr><td>avr4</td><td>atmega8535</td><td>__AVR_ATmega8535__</td></tr>
   <tr><td>avr4</td><td>atmega88</td><td>__AVR_ATmega88__</td></tr>
+  <tr><td>avr4</td><td>at90pwm1</td><td>__AVR_AT90PWM1__</td></tr>
   <tr><td>avr4</td><td>at90pwm2</td><td>__AVR_AT90PWM2__</td></tr>
   <tr><td>avr4</td><td>at90pwm3</td><td>__AVR_AT90PWM3__</td></tr>
   <tr><td>avr5</td><td>at90can32</td><td>__AVR_AT90CAN32__</td></tr>

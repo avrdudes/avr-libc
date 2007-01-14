@@ -171,6 +171,7 @@ compile-time.
 - at90can32
 - at90can64
 - at90can128
+- at90pwm1
 - at90pwm2
 - at90pwm3
 - at90usb646

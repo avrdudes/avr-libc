@@ -1,3 +1,14 @@
+2006-01-14 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the AT90PWM1 support.
+	* devtools/gen-avr-lib-tree.sh: Add support for AT90PWM1 device.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/io90pwm1.h: new file.
+	* include/avr/Makefile.am: include new file.
+	* doc/api/main_page.dox: Document support for AT90PWM1 device.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2007-01-14  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* bootstrap: Version 2.60 for autoconf is added.

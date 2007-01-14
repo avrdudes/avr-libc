@@ -434,6 +434,9 @@ AM_CONDITIONAL(HAS_atmega48, test "x$HAS_atmega48" = "xyes")
 CHECK_AVR_DEVICE(atmega88)
 AM_CONDITIONAL(HAS_atmega88, test "x$HAS_atmega88" = "xyes")
 
+CHECK_AVR_DEVICE(at90pwm1)
+AM_CONDITIONAL(HAS_at90pwm1, test "x$HAS_at90pwm1" = "xyes")
+
 CHECK_AVR_DEVICE(at90pwm2)
 AM_CONDITIONAL(HAS_at90pwm2, test "x$HAS_at90pwm2" = "xyes")
 
@@ -626,6 +629,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr4/atmega88/Makefile
 	avr/lib/avr4/atmega8515/Makefile
 	avr/lib/avr4/atmega8535/Makefile
+	avr/lib/avr4/at90pwm1/Makefile
 	avr/lib/avr4/at90pwm2/Makefile
 	avr/lib/avr4/at90pwm3/Makefile
 ])
