@@ -1,3 +1,10 @@
+2007-01-15  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* devtools/table.tar.bz2: New file. This is a test tarball of
+	float point functions, table mode test. This is a temporary
+	variant, so it is a tarball. See 'table/tst-all.sh' for run
+	instruction.
+
 2007-01-14 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the AT90PWM1 support.
