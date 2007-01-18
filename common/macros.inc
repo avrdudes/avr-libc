@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
+/* Copyright (c) 2002, 2005, 2006, 2007 Marek Michalkiewicz
    Copyright (c) 2006 Dmitry Xmelkov
    All rights reserved.
 
@@ -128,6 +128,12 @@
 #ifndef __AVR_HAVE_LPMX__
 # if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
 #  define __AVR_HAVE_LPMX__ 1
+# endif
+#endif
+
+#ifndef __AVR_HAVE_MUL__
+# if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+#  define __AVR_HAVE_MUL__ 1
 # endif
 #endif
 
