@@ -1,3 +1,9 @@
+2007-01-18 Anatoly Sokolov <aesok@post.ru>
+
+	* common/macros.inc (__AVR_HAVE_MUL__): Define.
+	* libc/misc/mul10.S (__mulhi_const_10): Use __AVR_HAVE_MUL__ instead
+	of __AVR_ENHANCED__.
+
 2007-01-15  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* devtools/table.tar.bz2: New file. This is a test tarball of

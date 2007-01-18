@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2006 Marek Michalkiewicz
+/* Copyright (c) 2002, 2006, 2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -54,7 +54,7 @@
 	.global _U(__mulhi_const_10)
 
 _U(__mulhi_const_10):
-#if __AVR_ENHANCED__
+#if defined(__AVR_HAVE_MUL__)
 	ldi r_tmp2,10
 	mul r_hi,r_tmp2
 	mov r_hi,r0
