@@ -5,6 +5,7 @@ MCU_TARGET     = atmega16
 #MCU_TARGET     = atmega48
 #MCU_TARGET     = atmega88
 #MCU_TARGET     = atmega168
+#MCU_TARGET     = attiny2313
 OPTIMIZE       = -Os
 
 DEFS           =

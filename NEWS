@@ -12,7 +12,11 @@
 * New devices supported:
 
   + ATmega3290P
-  + AT90PWM1  
+  + AT90PWM1
+
+* Other changes:
+
+  - The "largedemo" has been ported to the ATtiny2313.
 
 *** Changes in avr-libc-1.4.5:
 

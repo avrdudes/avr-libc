@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, Joerg Wunsch
+/* Copyright (c) 2005,2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -101,13 +101,26 @@ resistor to Vcc (low-active LEDs), and attach pushbuttons from the
 respective input pins to GND.  The internal pull-up resistors are
 enabled for the pushbutton pins, so no external resistors are needed.
 
+Finally, the demo has been ported to the ATtiny2313 as well.  As this
+AVR does not offer an ADC, everything related to handling the ADC is
+disabled in the code for that MCU type.  Also, port D of this
+controller type only features 6 pins, so the 1-second flash LED had to
+be moved from PD6 to PD4.  (PD4 is used as the ADC control button on
+the other MCU types, but that is not needed here.)  OC1A is located at
+PB3 on this device.
+
 The \c MCU_TARGET macro in the Makefile needs to be adjusted
-appropriately.
+appropriately for the alternative controller types.
 
 The flash ROM and RAM consumption of this demo are way below the
-resources of even an ATmega48.  The major advantage of experimenting
+resources of even an ATmega48, and still well within the capabilities
+of an ATtiny2313.
+The major advantage of experimenting
 with the ATmega16 (in addition that it ships together with an STK500
 anyway) is that it can be debugged online via JTAG.
+Likewise, the ATmega48/88/168 and ATtiny2313 devices can be debugged
+through debugWire, using the Atmel JTAG ICE mkII or the low-cost
+AVR Dragon.
 
 Note that in the explanation below, all port/pin names are applicable
 to the ATmega16 setup.
