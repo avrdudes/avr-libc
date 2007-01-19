@@ -58,7 +58,9 @@
 
   - A new demo project ("largedemo") has been added.  It extends
     the simple demo by adding some controls, and thereby touches
-    a good number of avr-libc concepts.
+    a good number of avr-libc concepts.  It has originally been
+    written for the ATmega16, but can also be run on an ATmega8
+    or a member of the ATmegaX8 family, as well as on an ATtiny2313.
 
   - Another demo project ("stdiodemo") has been added.  It
     demonstrates the setup of the standard IO facilities using

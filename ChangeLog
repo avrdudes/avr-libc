@@ -1,3 +1,12 @@
+2007-01-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/largedemo/largedemo.c: Port the "largedemo" to
+	the ATtiny2313.
+	* doc/examples/largedemo/largedemo.dox: Describe the ATtiny2313
+	port.
+	* doc/examples/largedemo/Makefile: Add a MCU_TARGET hint for
+	the ATtiny2313.
+
 2007-01-18 Anatoly Sokolov <aesok@post.ru>
 
 	* common/macros.inc (__AVR_HAVE_MUL__): Define.

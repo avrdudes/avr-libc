@@ -28,11 +28,19 @@
 #define CONTROL_PORT PORTD
 #define CONTROL_DDR  DDRD
 
-#define TRIGGER_DOWN PD2
-#define TRIGGER_UP   PD3
-#define TRIGGER_ADC  PD4
-#define CLOCKOUT     PD6
-#define FLASH	     PD7
+#if defined(__AVR_ATtiny2313__)
+/* no PD7 and no ADC available on ATtiny2313 */
+#  define TRIGGER_DOWN PD2
+#  define TRIGGER_UP   PD3
+#  define FLASH	       PD4
+#  define CLOCKOUT     PD6
+#else
+#  define TRIGGER_DOWN PD2
+#  define TRIGGER_UP   PD3
+#  define TRIGGER_ADC  PD4
+#  define CLOCKOUT     PD6
+#  define FLASH	       PD7
+#endif
 
 #if defined(__AVR_ATmega16__)
 #  define PWMDDR     DDRD
@@ -41,6 +49,12 @@
       defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
 #  define PWMDDR     DDRB
 #  define PWMOUT     PB1
+#elif defined(__AVR_ATtiny2313__)
+#  define PWMDDR     DDRB
+#  define PWMOUT     PB3
+#  define HAVE_ADC   0
+#  define USART_RXC_vect USART_RX_vect
+#  define MCUCSR     MCUSR
 #else
 #  error "Unsupported MCU type"
 #endif
@@ -62,6 +76,10 @@
 
 #  define TIMSK   TIMSK1
 #  define MCUCSR  MCUSR
+#endif
+
+#if !defined(HAVE_ADC)
+#  define HAVE_ADC 1
 #endif
 
 #define F_CPU 1000000UL	/* CPU clock in Hertz */
@@ -142,6 +160,7 @@ ISR(TIMER1_OVF_vect)
     }
 }
 
+#if HAVE_ADC
 /*
  * ADC conversion complete.  Fetch the 10-bit value, and feed the
  * PWM with it.
@@ -152,6 +171,7 @@ ISR(ADC_vect)
   ADCSRA &= ~_BV(ADIE);		/* disable ADC interrupt */
   intflags.adc_int = 1;
 }
+#endif /* HAVE_ADC */
 
 /*
  * UART receive interrupt.  Fetch the character received and buffer
@@ -207,7 +227,11 @@ ioinit(void)
   OCR1A = 0;			/* set PWM value to 0 */
 
   /* enable pull-ups for pushbuttons */
+#if HAVE_ADC
   CONTROL_PORT = _BV(TRIGGER_DOWN) | _BV(TRIGGER_UP) | _BV(TRIGGER_ADC);
+#else
+  CONTROL_PORT = _BV(TRIGGER_DOWN) | _BV(TRIGGER_UP);
+#endif
 
   /*
    * Enable Port D outputs: PD6 for the clock output, PD7 for the LED
@@ -229,10 +253,12 @@ ioinit(void)
   UCSRB = _BV(TXEN)|_BV(RXEN)|_BV(RXCIE); /* tx/rx enable, rx complete intr */
   UBRRL = (F_CPU / (8 * 9600UL)) - 1;  /* 9600 Bd */
 
+#if HAVE_ADC
   /*
    * enable ADC, select ADC clock = F_CPU / 8 (i.e. 125 kHz)
    */
   ADCSRA = _BV(ADEN) | _BV(ADPS1) | _BV(ADPS0);
+#endif
 
   TIMSK = _BV(TOIE1);
   sei();			/* enable interrupts */
@@ -370,6 +396,8 @@ main(void)
 		  "ATmega88"
 #elif defined(__AVR_ATmega168__)
 		  "ATmega168"
+#elif defined(__AVR_ATtiny2313__)
+		  "ATtiny2313"
 #else
 		  "unknown AVR"
 #endif
@@ -424,11 +452,14 @@ main(void)
 		set_pwm(pwm - 10);
 	      else if (bit_is_clear(PIND, TRIGGER_UP))
 		set_pwm(pwm + 10);
+#if HAVE_ADC
 	      else if (bit_is_clear(PIND, TRIGGER_ADC))
 		mode = MODE_ADC;
+#endif
 	      break;
 
 	    case MODE_ADC:
+#if HAVE_ADC
 	      if (bit_is_set(PIND, TRIGGER_ADC))
 		mode = MODE_UPDOWN;
 	      else
@@ -439,6 +470,7 @@ main(void)
 		  ADCSRA |= _BV(ADIE);
 		  ADCSRA |= _BV(ADSC);
 		}
+#endif /* HAVE_ADC */
 	      break;
 	    }
 
@@ -455,11 +487,13 @@ main(void)
 	    }
 	}
 
+#if HAVE_ADC
       if (intflags.adc_int)
 	{
 	  intflags.adc_int = 0;
 	  set_pwm(adcval);
 	}
+#endif /* HAVE_ADC */
 
       if (intflags.rx_int)
 	{
