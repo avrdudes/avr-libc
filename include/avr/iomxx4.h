@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, 2006 Anatoly Sokolov
+/* Copyright (c) 2005, 2006, 2007 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -675,7 +675,7 @@
 
 #if !defined(__AVR_ATmega644__)
 /*
- * Only ATmega164/324 have a second USART.
+ * Only ATmega164P/324P/644P have a second USART.
  */
 /* Reserved [0xC7] */
 

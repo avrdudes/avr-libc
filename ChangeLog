@@ -1,3 +1,8 @@
+2007-01-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iomxx4.h: Clarify a confusing comment that all the
+	picopower devices covered by this file feature a second USART.
+
 2007-01-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/examples/largedemo/largedemo.c: Port the "largedemo" to
