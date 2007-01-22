@@ -354,7 +354,7 @@ read_timer1(void)
 <small>Back to \ref faq_index.
 </small>
 
-\section faq_asmconst How do I use a #define'd constant in an asm statement?
+\section faq_asmconst How do I use a \#define'd constant in an asm statement?
 
 So you tried this:
 
@@ -884,8 +884,8 @@ part of the code generation.
 A test case was run on an ATmega128 to judge the effect of compiling
 the library itself using different optimization levels.  The following
 table lists the results.  The test case consisted of around 2 KB of
-strings to sort.  Test #1 used qsort() using the standard library
-strcmp(), test #2 used a function that sorted the strings by their
+strings to sort.  Test \#1 used qsort() using the standard library
+strcmp(), test \#2 used a function that sorted the strings by their
 size (thus had two calls to strlen() per invocation).
 
 When comparing the resulting code size, it should be noted that a
@@ -897,8 +897,8 @@ the different optimization levels, and added about 2.5 KB to the code.
  <tr>
   <td><strong>Optimization flags</strong></td>
   <td><strong>Size of .text</strong></td>
-  <td><strong>Time for test #1</strong></td>
-  <td><strong>Time for test #2</strong></td>
+  <td><strong>Time for test \#1</strong></td>
+  <td><strong>Time for test \#2</strong></td>
  </tr>
  <tr>
   <td>-O3</td>

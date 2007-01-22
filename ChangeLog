@@ -1,5 +1,20 @@
 2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Various documentation fixes.
+	* xml/patch-headers.py: Update for new devices.
+	* doc/api/vectortable.dox: Regenerate from patch-headers.py.
+	Closes bug #18686: AT90USB**** devices are absent in
+	interrupt-verctor-names table
+	* include/stdlib.h: Fix doxygen generation for dtostr*()
+	functions.
+	Closes bug #18726: the dtostrf function description is missing
+	in AVR-Libc's webpage
+	* doc/api/faq.dox: Resolve some doxygen warnings.
+	* doc/examples/asmdemo/asmdemo.dox: (Ditto.)
+	* doc/examples/demo/demo.dox: (Ditto.)
+
+2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Cosmetic/white space change only:
 	* include/avr/iocanxx.h: Regenerate vector table from script.
 	* include/avr/iom406.h: (Ditto.)

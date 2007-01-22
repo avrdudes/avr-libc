@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #
-# Copyright (c) 2005,2006  Joerg Wunsch
+# Copyright (c) 2005,2006,2007  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -73,7 +73,7 @@ table = {
     #"io8534.h": "AT90C8534",
     "io8535.h": "AT90S8535",
     "io86r401.h": "AT86RF401",
-    "io90pwmx.h": ("AT90PWM3", "AT90PWM2"),
+    "io90pwmx.h": ("AT90PWM3", "AT90PWM2", "AT90PWM1"),
     # no XML file
     #"ioat94k.h": "AT94k",
     "iocanxx.h": ("AT90CAN128", "AT90CAN32", "AT90CAN64"),
@@ -87,14 +87,19 @@ table = {
     "iom163.h": "ATmega163",
     #"iom164.h" => "iomxx4.h"
     "iom165.h": "ATmega165",
+    "iom165p.h": "ATmega165P",
     #"iom168.h" => "iomx8.h"
     "iom169.h": "ATmega169",
+    "iom169p.h": "ATmega169P",
+    #"iom2560.h" => "iomxx0_1.h"
+    #"iom2561.h" => "iomxx0_1.h"
     "iom32.h": "ATmega32",
     "iom323.h": "ATmega323",
     "iom325.h": "ATmega325",
     "iom3250.h": "ATmega3250",
     "iom329.h": "ATmega329",
     "iom3290.h": "ATmega3290",
+    "iom3290p.h": "ATmega3290P",
     #"iom48.h" => "iomx8.h"
     "iom406.h": "ATmega406",
     "iom64.h": "ATmega64",
@@ -109,8 +114,8 @@ table = {
     "iom8535.h": "ATmega8535",
     #"iom88.h" => "iomx8.h"
     "iomx8.h": ("ATmega168", "ATmega48", "ATmega88"),
-    "iomxx0_1.h": ("ATmega640", "ATmega1280", "ATmega1281"),
-    "iomxx4.h": ("ATmega324", "ATmega164", "ATmega644"),
+    "iomxx0_1.h": ("ATmega640", "ATmega1280", "ATmega1281", "ATmega2560", "ATmega2561"),
+    "iomxx4.h": ("ATmega324P", "ATmega164P", "ATmega644P", "ATmega644"),
     "iotn11.h": "ATtiny11",
     "iotn12.h": "ATtiny12",
     "iotn13.h": "ATtiny13",
@@ -131,6 +136,11 @@ table = {
     "iotnx4.h": ("ATtiny24", "ATtiny44", "ATtiny84"),
     "iotnx5.h": ("ATtiny45", "ATtiny25", "ATtiny85"),
     "iotnx61.h": ("ATtiny261", "ATtiny461", "ATtiny861"),
+    #"iousb1286.h" => "iousbxx6_7.h"
+    #"iousb1287.h" => "iousbxx6_7.h"
+    #"iousb646.h" => "iousbxx6_7.h"
+    #"iousb647.h" => "iousbxx6_7.h"
+    "iousbxx6_7.h": ("AT90USB1287", "AT90USB1286", "AT90USB647", "AT90USB646"),
 }
 
 def create_tabs (string):
