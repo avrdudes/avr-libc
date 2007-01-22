@@ -839,14 +839,17 @@
 #else /* !defined(__AVR_ATmega644__) */
 
 /* USART1, Rx Complete */
+/* USART1 RX complete */
 #define USART1_RX_vect			_VECTOR(28)
 #define SIG_USART1_RECV			_VECTOR(28)
 
 /* USART1 Data register Empty */
+/* USART1 Data Register Empty */
 #define USART1_UDRE_vect		_VECTOR(29)
 #define SIG_USART1_DATA			_VECTOR(29)
 
 /* USART1, Tx Complete */
+/* USART1 TX complete */
 #define USART1_TX_vect			_VECTOR(30)
 #define SIG_USART1_TRANS		_VECTOR(30)
 

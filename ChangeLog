@@ -1,5 +1,14 @@
 2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Cosmetic/white space change only:
+	* include/avr/iocanxx.h: Regenerate vector table from script.
+	* include/avr/iom406.h: (Ditto.)
+	* include/avr/iomxx4.h: (Ditto.)
+	* include/avr/iotn2313.h: (Ditto.)
+	* include/avr/iousbxx6_7.h: (Ditto.)
+
+2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* LICENSE: Update copyright year.
 	* doc/api/main_page.dox: Include copyright notice into
 	documentation.
