@@ -608,7 +608,6 @@
 #define SPM_READY_vect			_VECTOR(36)
 #define SIG_SPM_READY			_VECTOR(36)
 
-
 #define _VECTORS_SIZE 148
 
 /* The Register Bit names are represented by their bit number (0-7). */

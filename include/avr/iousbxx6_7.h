@@ -1264,7 +1264,7 @@
 /* Timer/Counter3 Overflow */
 #define TIMER3_OVF_vect			_VECTOR(35)
 
-/* 2-wire Serial Interface         */
+/* 2-wire Serial Interface */
 #define TWI_vect			_VECTOR(36)
 
 /* Store Program Memory Read */
