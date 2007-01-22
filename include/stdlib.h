@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
-   Copyright (c) 2004, Joerg Wunsch
+   Copyright (c) 2004,2007 Joerg Wunsch
 
    Portions of documentation Copyright (c) 1990, 1991, 1993, 1994
    The Regents of the University of California.
@@ -578,16 +578,20 @@ extern long random_r(unsigned long *ctx);
  So when linking the application, the \c -lm option needs to be
  specified.
 */
-/** Bit value that can be passed in \c flags to dtostre(). */
+/** \ingroup avr_stdlib
+    Bit value that can be passed in \c flags to dtostre(). */
 #define DTOSTR_ALWAYS_SIGN 0x01        /* put '+' or ' ' for positives */
-/** Bit value that can be passed in \c flags to dtostre(). */
+/** \ingroup avr_stdlib
+    Bit value that can be passed in \c flags to dtostre(). */
 #define DTOSTR_PLUS_SIGN   0x02        /* put '+' rather than ' ' */
-/** Bit value that can be passed in \c flags to dtostre(). */
+/** \ingroup avr_stdlib
+    Bit value that can be passed in \c flags to dtostre(). */
 #define DTOSTR_UPPERCASE   0x04        /* put 'E' rather 'e' */
 
 #ifndef __ASSEMBLER__
 
 /**
+   \ingroup avr_stdlib
    The dtostre() function converts the double value passed in \c val into
    an ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
@@ -612,6 +616,7 @@ extern char *dtostre(double __val, char *__s, unsigned char __prec,
 		     unsigned char __flags);
 
 /**
+   \ingroup avr_stdlib
    The dtostrf() function converts the double value passed in \c val into
    an ASCII representationthat will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.

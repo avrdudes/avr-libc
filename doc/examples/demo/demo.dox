@@ -74,7 +74,7 @@ names of registers and bits have been changed slightly to reflect the
 new features.  Also, the port and pin mapping of the output compare
 match 1A (or 1 for older devices) pin which is used to control the LED
 varies between different AVRs.  The file <tt>iocompat.h</tt> tries to
-abstract between all this differences using some preprocessor \c #ifdef
+abstract between all this differences using some preprocessor \c \#ifdef
 statements, so the actual program itself can operate on a common set of
 symbolic names.  The macros defined by that file are:
 
@@ -275,12 +275,9 @@ file that can be used to program the EEPROM:
     $ avr-objcopy -j .eeprom --change-section-lma .eeprom=0 -O ihex demo.elf demo_eeprom.hex
 \endverbatim
 
-The resulting \c demo_eeprom.hex file contains:
+There is no \c demo_eeprom.hex file written, as that file would be
+empty.
 
-\verbinclude demo_eeprom.hex
-
-which is an empty \c .hex file (which is expected, since we didn't define any
-EEPROM variables).
 Starting with version 2.17 of the GNU binutils, the \c avr-objcopy
 command that used to generate the empty EEPROM files now aborts
 because of the empty input section \c .eeprom, so these empty files

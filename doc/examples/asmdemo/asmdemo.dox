@@ -168,12 +168,12 @@ that is not applicable to the entire register file.
 \subsection asmdemo_isrs isrs.S
 
 This file is a preprocessed assembly source file.  The C preprocessor
-will be run by the compiler front-end first, resolving all \c #include,
-\c #define etc. directives.  The resulting program text will then be
+will be run by the compiler front-end first, resolving all \c \#include,
+\c \#define etc. directives.  The resulting program text will then be
 passed on to the assembler.
 
 As the C preprocessor strips all C-style comments, preprocessed
-assembly source files can have both, C-style (<tt>/* ... */</tt>,
+assembly source files can have both, C-style (<tt>/* ... *</tt><tt>/</tt>,
 <tt>// ...</tt>) as well as assembly-style (<tt>; ...</tt>) comments.
 
 At the top, the IO register definition file <tt>avr/io.h</tt> and the

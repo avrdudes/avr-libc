@@ -42,7 +42,9 @@
   [#18385] SPM_PAGESIZE wrong value for ATmega164p and ATmega324p
   [#18509] strtod.S crashes due to stack problem with atmega 2560
   [#18662] rand() keeps returning the same value if seeded with 0
+  [#18686] AT90USB**** devices are absent in interrupt-verctor-names table
   [#18688] vfscanf and vfprintf don't use malloc
+  [#18726] the dtostrf function description is missing in AVR-Libc's webpage
 
 * Other changes:
 
