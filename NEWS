@@ -80,6 +80,8 @@
   - More overhaul of the demo documentation, don't use the "squid"
     cable for the largedemo as it is not part of the STK500.
 
+  - Integrate a copy of the license file into the documentation.
+
 * New devices supported:
 
   + ATtiny24
