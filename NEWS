@@ -18,6 +18,8 @@
 
   - The "largedemo" has been ported to the ATtiny2313.
 
+  - Integrate a copy of the license file into the documentation.
+
 *** Changes in avr-libc-1.4.5:
 
 * Bugs fixed:

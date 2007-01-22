@@ -1,3 +1,9 @@
+2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* LICENSE: Update copyright year.
+	* doc/api/main_page.dox: Include copyright notice into
+	documentation.
+
 2007-01-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iomxx4.h: Clarify a confusing comment that all the
