@@ -1,6 +1,6 @@
 /* Copyright (c) 2002,2004,2005 Marek Michalkiewicz
    Copyright (c) 2005, Carlos Lamas
-   Copyright (c) 2005, Joerg Wunsch
+   Copyright (c) 2005,2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,7 @@
 #ifndef __STDINT_H_
 #define __STDINT_H_
 
+/** \file */
 /** \defgroup avr_stdint <stdint.h>: Standard Integer Types
     \code #include <stdint.h> \endcode
 

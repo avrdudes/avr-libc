@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -36,6 +36,8 @@
 #define src_lo r22
 #define len_hi r21
 #define len_lo r20
+
+/** \file */
 
 /** \ingroup avr_string
     \fn void *memcpy(void *dest, const void *src, size_t len)

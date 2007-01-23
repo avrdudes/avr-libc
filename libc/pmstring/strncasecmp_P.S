@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2005, 2006 Reiner Patommel
+/* Copyright (c) 2002, 2005, 2006, 2007 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -48,6 +48,8 @@
 
 #define ret_hi r25
 #define ret_lo r24
+
+/** \file */
 
 /** \ingroup avr_pgmspace
     \fn int strncasecmp_P(const char *s1, PGM_P s2, size_t n)

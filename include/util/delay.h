@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
-   Copyright (c) 2004,2005 Joerg Wunsch
+   Copyright (c) 2004,2005,2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -36,6 +36,7 @@
 
 #include <inttypes.h>
 
+/** \file */
 /** \defgroup util_delay <util/delay.h>: Busy-wait delay loops
     \code
     #define F_CPU 1000000UL  // 1 MHz

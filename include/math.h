@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Michael Stumpf
+/* Copyright (c) 2002,2007 Michael Stumpf
 
    Portions of documentation Copyright (c) 1990 - 1994
    The Regents of the University of California.
@@ -48,6 +48,7 @@
 #ifndef __MATH_H
 #define __MATH_H
 
+/** \file */
 /** \defgroup avr_math <math.h>: Mathematics
     \code #include <math.h> \endcode
 

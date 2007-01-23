@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
-   Copyright (c) 2004,2005 Joerg Wunsch
+   Copyright (c) 2004,2005,2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -34,6 +34,7 @@
 #ifndef _UTIL_PARITY_H_
 #define _UTIL_PARITY_H_
 
+/** \file */
 /** \defgroup util_parity <util/parity.h>: Parity bit generation
     \code #include <util/parity.h> \endcode
 

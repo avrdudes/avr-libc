@@ -1,6 +1,6 @@
 /* Copyright (c) 2002, 2004 Theodore A. Roth
    Copyright (c) 2004 Eric B. Weddington
-   Copyright (c) 2005, 2006 Joerg Wunsch
+   Copyright (c) 2005, 2006, 2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -88,6 +88,7 @@
 #endif
 
 
+/** \file */
 
 /** \defgroup avr_sleep <avr/sleep.h>: Power Management and Sleep Modes
 

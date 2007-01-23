@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Reiner Patommel
+/* Copyright (c) 2002, 2007 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -44,6 +44,8 @@
 #define num_lo	r24
 #define tmp	r18
 
+
+/** \file */
 
 /** \ingroup avr_stdlib
     \fn int atoi(const char *string)

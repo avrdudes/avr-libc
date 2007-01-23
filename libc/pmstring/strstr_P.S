@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Philip Soeberg
-   Copyright (c) 2005, 2006 Werner Boellmann
+   Copyright (c) 2005, 2006, 2007 Werner Boellmann
    All rights reserved.
    
    Redistribution and use in source and binary forms, with or without
@@ -41,6 +41,8 @@
 */
 
 #include "macros.inc"
+
+/** \file */
 
 /** \ingroup avr_pgmspace
     \fn char *strstr_P(const char *s1, PGM_P s2)

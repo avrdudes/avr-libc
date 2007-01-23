@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002,2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -55,6 +55,7 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN + 1]; } jmp_buf[1];
 
 #endif /* not __DOXYGEN__ */
 
+/** \file */
 /** \defgroup setjmp <setjmp.h>: Non-local goto
 
     While the C language has the dreaded \c goto statement, it can only be

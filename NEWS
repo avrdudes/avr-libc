@@ -22,6 +22,10 @@
 
   - Integrate a copy of the license file into the documentation.
 
+  - Include an alphabetical index of all globals (functions,
+    macros, types, variables) into the documentation.
+
+
 *** Changes in avr-libc-1.4.5:
 
 * Bugs fixed:

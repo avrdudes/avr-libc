@@ -54,6 +54,8 @@
 extern "C" {
 #endif
 
+/** \file */
+
 /** \defgroup avr_stdlib <stdlib.h>: General utilities
     \code #include <stdlib.h> \endcode
 

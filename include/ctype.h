@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Michael Stumpf
+/* Copyright (c) 2002,2007 Michael Stumpf
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -48,6 +48,7 @@
 extern "C" {
 #endif
 
+/** \file */
 /** \defgroup ctype <ctype.h>: Character Operations
     These functions perform various operations on characters.
 

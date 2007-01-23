@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2005, Joerg Wunsch
+/* Copyright (c) 2002, 2005, 2007 Joerg Wunsch
    All rights reserved.
 
    Portions of documentation Copyright (c) 1990, 1991, 1993
@@ -48,6 +48,7 @@
 #define __need_size_t
 #include <stddef.h>
 
+/** \file */
 /** \defgroup avr_stdio <stdio.h>: Standard IO facilities
     \code #include <stdio.h> \endcode
 

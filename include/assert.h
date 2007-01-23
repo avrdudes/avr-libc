@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, Joerg Wunsch
+/* Copyright (c) 2005,2007 Joerg Wunsch
    All rights reserved.
 
    Portions of documentation Copyright (c) 1991, 1993
@@ -36,6 +36,7 @@
   $Id$
 */
 
+/** \file */
 /** \defgroup avr_assert <assert.h>: Diagnostics
     \code #include <assert.h> \endcode
 

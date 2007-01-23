@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2003, 2004 Marek Michalkiewicz
+/* Copyright (c) 2002, 2003, 2004, 2007 Marek Michalkiewicz
    Copyright (c) 2005, 2006 Bjoern Haase
    All rights reserved.
 
@@ -49,6 +49,7 @@
 #include <stddef.h>
 #include <inttypes.h>
 
+/** \file */
 
 #ifdef __AVR_MEGA__
 #define XCALL "call"

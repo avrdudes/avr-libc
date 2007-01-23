@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2003, 2004, 2005, 2006  Eric B. Weddington
+/* Copyright (c) 2002, 2003, 2004, 2005, 2006, 2007  Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -31,6 +31,7 @@
 #ifndef _AVR_BOOT_H_
 #define _AVR_BOOT_H_    1
 
+/** \file */
 /** \defgroup avr_boot <avr/boot.h>: Bootloader Support Utilities
     \code
     #include <avr/io.h>
