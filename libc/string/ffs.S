@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, Dmitry Xmelkov
+/* Copyright (c) 2005, 2007 Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -27,6 +27,8 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
+
+/** \file */
 
 /** \ingroup avr_string
     \fn int ffs (int val);

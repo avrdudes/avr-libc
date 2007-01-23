@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, 2003, 2004  Marek Michalkiewicz
-   Copyright (c) 2005, Joerg Wunsch
+   Copyright (c) 2005, 2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -36,6 +36,7 @@
 
 #include <stdint.h>
 
+/** \file */
 /** \defgroup util_crc <util/crc16.h>: CRC Computations
     \code#include <util/crc16.h>\endcode
 

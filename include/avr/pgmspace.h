@@ -1,4 +1,4 @@
-/* Copyright (c) 2002 - 2006  Marek Michalkiewicz
+/* Copyright (c) 2002 - 2007  Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -37,6 +37,7 @@
      Wolfgang Haidinger <wh@vmars.tuwien.ac.at> (pgm_read_dword())
  */
 
+/** \file */
 /** \defgroup avr_pgmspace <avr/pgmspace.h>: Program Space String Utilities
     \code
     #include <avr/io.h>

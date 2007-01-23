@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -34,6 +34,8 @@
 #define src_lo r24
 #define len_hi r23
 #define len_lo r22
+
+/** \file */
 
 /** \ingroup avr_string
     \fn size_t strnlen(const char *src, size_t len)

@@ -1,4 +1,4 @@
-/* Copyright (c) 2004,2005 Joerg Wunsch
+/* Copyright (c) 2004,2005,2007 Joerg Wunsch
    Copyright (c) 2005, Carlos Lamas
    All rights reserved.
 
@@ -36,6 +36,7 @@
 
 #include <stdint.h>
 
+/** \file */
 /** \defgroup avr_inttypes <inttypes.h>: Integer Type conversions
     \code #include <inttypes.h> \endcode
 

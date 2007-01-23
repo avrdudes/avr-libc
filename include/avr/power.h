@@ -1,4 +1,4 @@
-/* Copyright (c) 2006  Eric B. Weddington
+/* Copyright (c) 2006, 2007  Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -35,6 +35,7 @@
 #include <stdint.h>
 
 
+/** \file */
 /** \defgroup avr_power <avr/power.h>: Power Reduction Management
 
 \code #include <avr/power.h>\endcode

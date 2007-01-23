@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2005 Marek Michalkiewicz
+/* Copyright (c) 2002,2005,2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -35,6 +35,7 @@
 
 #include <avr/io.h>
 
+/** \file */
 /** \name Global manipulation of the interrupt flag
 
     The global interrupt flag is maintained in the I bit of the status

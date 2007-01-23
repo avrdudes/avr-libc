@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Reiner Patommel
+/* Copyright (c) 2002, 2007 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -47,6 +47,8 @@
 
 #define tmp r22
 #define cht r21
+
+/** \file */
 
 /** \ingroup avr_string
     \fn int strcasecmp(const char *s1, const char *s2)

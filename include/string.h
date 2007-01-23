@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002,2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -52,6 +52,7 @@
 extern "C" {
 #endif
 
+/** \file */
 /** \defgroup avr_string <string.h>: Strings
     \code #include <string.h> \endcode
 

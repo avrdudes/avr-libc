@@ -1,4 +1,4 @@
-/* Copyright (c) 2003, 2005, 2006 Reiner Patommel
+/* Copyright (c) 2003, 2005, 2006, 2007 Reiner Patommel
    based on strncat by Marek Michalkiewicz
    All rights reserved.
 
@@ -37,6 +37,8 @@
 #define src_lo r22
 #define len_hi r21
 #define len_lo r20
+
+/** \file */
 
 /** \ingroup avr_pgmspace
     \fn char *strncat_P(char *dest, PGM_P src, size_t len)

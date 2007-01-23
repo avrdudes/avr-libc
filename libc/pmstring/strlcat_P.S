@@ -2,7 +2,7 @@
    AVR LIBC
    strlcat()
 
-   Copyright (c) 2003, 2005, 2006 Eric B. Weddington, R. Patommel
+   Copyright (c) 2003, 2005, 2006, 2007 Eric B. Weddington, R. Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -33,6 +33,8 @@
 */
 
 /* $Id$ */
+
+/** \file */
 
 /** \ingroup avr_pgmspace
     \fn size_t strlcat_P (char *dst, PGM_P, size_t siz)

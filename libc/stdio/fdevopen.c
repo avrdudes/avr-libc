@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2005 Joerg Wunsch
+/* Copyright (c) 2002,2005, 2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -34,6 +34,8 @@
 #include <stdlib.h>
 
 #include "stdio_private.h"
+
+/** \file */
 
 /** \ingroup avr_stdio
    This function is a replacement for \c fopen().

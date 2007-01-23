@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, 2006 Helmut Wallner
+/* Copyright (c) 2005, 2006, 2007 Helmut Wallner
 
    based on libc/string/strnlen.S which is
    Copyright (c) 2002, Marek Michalkiewicz
@@ -38,6 +38,8 @@
 #define src_lo r24
 #define len_hi r23
 #define len_lo r22
+
+/** \file */
 
 /** \ingroup avr_pgmspace
     \fn size_t strnlen_P(PGM_P src, size_t len)

@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
-   Copyright (c) 2005, Joerg Wunsch
+   Copyright (c) 2005, 2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -37,6 +37,7 @@
 
 #include <avr/io.h>
 
+/** \file */
 /** \defgroup util_twi <util/twi.h>: TWI bit mask definitions
     \code #include <util/twi.h> \endcode
 

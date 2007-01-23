@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Reiner Patommel
+/* Copyright (c) 2002, 2007 Reiner Patommel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -41,6 +41,8 @@
 #define str_lo r24
 #define ltemp  r23
 #define rtemp  r22
+
+/** \file */
 
 /** \ingroup avr_string
     \fn char *strrev(char *string)

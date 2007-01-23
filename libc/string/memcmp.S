@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002, 2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,8 @@
 
 #define ret_hi r25
 #define ret_lo r24
+
+/** \file */
 
 /** \ingroup avr_string
     \fn int memcmp(const void *s1, const void *s2, size_t len)

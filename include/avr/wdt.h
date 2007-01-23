@@ -41,6 +41,7 @@
 #include <avr/io.h>
 #include <stdint.h>
 
+/** \file */
 /** \defgroup avr_watchdog <avr/wdt.h>: Watchdog timer handling
     \code #include <avr/wdt.h> \endcode
 

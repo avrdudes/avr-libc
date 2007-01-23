@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002,2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -33,6 +33,7 @@
 #ifndef __ERRNO_H_
 #define __ERRNO_H_ 1
 
+/** \file */
 /** \defgroup avr_errno <errno.h>: System Errors
 
     \code #include <errno.h>\endcode

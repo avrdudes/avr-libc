@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2005, 2006 Marek Michalkiewicz
+/* Copyright (c) 2002, 2005, 2006, 2007 Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -37,6 +37,8 @@
 #define len_hi r21
 #define len_lo r20
 
+
+/** \file */
 
 /** \ingroup avr_pgmspace
     \fn char *strncpy_P(char *dest, PGM_P src, size_t n)
