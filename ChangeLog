@@ -1,3 +1,11 @@
+2007-01-27  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iom3290.h (BODSE, BODS, LCDCCD, LCDBD, LCDMDT): Define
+	for ATMega3290P.
+	* include/avr/iom3290p.h: Delete.
+	* include/avr/Makefile.am (avr_HEADERS): Delete iom3290p.h.
+	* include/avr/io.h: Include iom3290.h instead iom3290p.h.
+
 2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/assert.h: Add \file doxygen directive.
