@@ -46,13 +46,90 @@ compiler frontend.
   </p>
   <p>
   <table>
-  <tr><td>avr1</td><td>Simple CPU core, only assembler support</td></tr>
-  <tr><td>avr2</td><td>"Classic" CPU core, up to 8 KB of ROM</td></tr>
-  <tr><td>avr3</td><td>"Classic" CPU core, more than 8 KB of ROM</td></tr>
-  <tr><td>avr4</td><td>"Enhanced" CPU core, up to 8 KB of ROM</td></tr>
-  <tr><td>avr5</td><td>"Enhanced" CPU core, more than 8 KB of ROM</td></tr>
-  <tr><td>avr6</td><td>"Enhanced" CPU core, Program Counter of 3 bytes</td></tr>
+  <tr>
+    <td>Architecture</td>
+    <td>Macros</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td>avr1</td>
+    <td>
+    __AVR_ARCH__=1<BR>
+    __AVR_ASM_ONLY__<BR>
+    __AVR_2_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>Simple CPU core, only assembler support</td>
+  </tr>
+  <tr>
+    <td>avr2</td>
+    <td>
+    __AVR_ARCH__=2<BR>
+    __AVR_2_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>"Classic" CPU core, up to 8 KB of ROM</td>
+  </tr>
+  <tr>
+    <td>avr25&nbsp;[1]</td>
+    <td>
+    __AVR_ARCH__=25<BR>
+    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
+    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
+    __AVR_2_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>"Classic" CPU core with 'MOVW' and 'LPM Rx, Z[+]' instruction, up to 8 KB of ROM</td>
+  </tr>
+  <tr>
+    <td>avr3</td>
+    <td>
+    __AVR_ARCH__=3<BR>
+    __AVR_MEGA__<BR>
+    __AVR_2_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>"Classic" CPU core, 16 KB to 128 KB of ROM</td>
+  </tr>
+  <tr>
+    <td>avr4</td>
+    <td>
+    __AVR_ARCH__=4<BR>
+    __AVR_ENHANCED__<BR>
+    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
+    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
+    __AVR_HAVE_MUL__&nbsp;[1]<BR>
+    __AVR_2_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>"Enhanced" CPU core, up to 8 KB of ROM</td>
+  </tr>
+  <tr>
+    <td>avr5</td>
+    <td>
+    __AVR_ARCH__=5<BR>
+    __AVR_MEGA__<BR>
+    __AVR_ENHANCED__<BR>
+    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
+    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
+    __AVR_HAVE_MUL__&nbsp;[1]<BR>
+    __AVR_2_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>"Enhanced" CPU core, 16 KB to 128 KB of ROM</td>
+  </tr>
+  <tr>
+    <td>avr6&nbsp;[2]</td>
+    <td>
+    __AVR_ARCH__=6<BR>
+    __AVR_MEGA__<BR>
+    __AVR_ENHANCED__<BR>
+    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
+    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
+    __AVR_HAVE_MUL__&nbsp;[1]<BR>
+    __AVR_3_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>"Enhanced" CPU core, 256 KB of ROM</td>
+  </tr>
   </table>
+  <p>
+  [1] New in GCC 4.2<BR>
+  [2] Unofficial patch for GCC 4.1 
+  </p>
   </p>
   <p>
   By default, code is generated for the avr2 architecture.

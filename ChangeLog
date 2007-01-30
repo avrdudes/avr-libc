@@ -1,3 +1,7 @@
+2007-01-30  Anatoly Sokolov <aesok@post.ru>
+
+	* /doc/api/using-tools.dox: Document 
+
 2007-01-27  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iom3290.h (BODSE, BODS, LCDCCD, LCDBD, LCDMDT): Define
