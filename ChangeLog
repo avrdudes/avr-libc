@@ -1,6 +1,6 @@
 2007-01-30  Anatoly Sokolov <aesok@post.ru>
 
-	* /doc/api/using-tools.dox: Document 
+	* /doc/api/using-tools.dox: Document GCC macros.
 
 2007-01-27  Anatoly Sokolov <aesok@post.ru>
 
