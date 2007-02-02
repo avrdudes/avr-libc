@@ -168,6 +168,7 @@
 #define TCNT0H  _SFR_IO8(0x14)
 
 #define TCCR0A  _SFR_IO8(0x15)
+#define WGM00   0
 #define ACIC0   3
 #define ICES0   4
 #define ICNC0   5
@@ -348,6 +349,7 @@
 #define DTPS10  4
 #define DTPS11  5
 #define PSR1    6
+#define PWM1X   7
 
 #define TCCR1A  _SFR_IO8(0x30)
 #define PWM1B   0
