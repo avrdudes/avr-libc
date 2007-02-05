@@ -5,6 +5,8 @@
 	* libc/stdlib/atol.S: (Ditto.)
 	
 	* devtools/table.tar.bz2: Remove as a test directory will expanded.
+	
+	* tests/: New directory.
 
 2007-02-03  Anatoly Sokolov <aesok@post.ru>
 
