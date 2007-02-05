@@ -1,4 +1,4 @@
-/* Copyright (c) 2002-2006 Joerg Wunsch
+/* Copyright (c) 2002-2007 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -59,6 +59,7 @@
 -# \ref faq_asmops
 -# \ref faq_spman
 -# \ref faq_linkerscripts
+-# \ref faq_binarydata
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1275,6 +1276,41 @@ A .xr script is for linking without relocation (-r flag)
 A .xu script is like .xr but *do* create constructors (-Ur flag)
 A .xn script is for linking with -n flag (mix text and data on same page).
 A .xbn script is for linking with -N flag (mix text and data on same page).
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_binarydata How to add a raw binary image to linker output?
+
+The GNU linker <tt>avr-ld</tt> cannot handle binary data
+directly. However, there's a companion tool called
+<tt>avr-objcopy</tt>. This is already known from the output side: it's
+used to extract the contents of the linked ELF file into an Intel Hex
+load file.
+
+<tt>avr-objcopy</tt> can create a relocatable object file from
+arbitrary binary input, like
+
+\code
+avr-objcopy -I binary -O elf32-avr foo.bin foo.o
+\endcode
+
+This will create a file named <tt>foo.o</tt>, with the contents of
+<tt>foo.bin</tt>.  The contents will default to section .data, and two
+symbols will be created named \c _binary_foo_bin_start_ and \c
+_binary_foo_bin_end_. These symbols can be referred to inside a C
+source to access these data.
+
+If the goal is to have those data go to flash ROM (similar to having
+used the PROGMEM attribute in C source code), the sections have to be
+renamed while copying, and it's also useful to set the section flags:
+
+\code
+avr-objcopy --rename-section .data=.progmem.data,contents,alloc,load,readonly,data -I binary -O elf32-avr foo.bin foo.o
+\endcode
+
+Note that all this could be conveniently wired into a Makefile, so
+whenever <tt>foo.bin</tt> changes, it will trigger the recreation of
+<tt>foo.o</tt>, and a subsequent relink of the final ELF file.
 
 <small>Back to \ref faq_index.</small>
 
