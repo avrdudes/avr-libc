@@ -1,0 +1,77 @@
+/* Test of strtod() function. big/small values.
+   $Id$
+ */
+#include <errno.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "progmem.h"
+
+union lofl_u {
+    long lo;
+    float fl;
+};
+
+volatile union lofl_u v = { .lo = 1 };
+
+PROGMEM const struct {		/* Table of test cases.	*/
+    char s[20];
+    unsigned char len;
+    union lofl_u val;
+    int eno;
+} t[] = {
+
+    { "1.4012985e-45", 13,	{ 0x00000001 }, 0 },
+    { "1.401298e-45", 12,	{ 0x00000001 }, 0 },
+    { "1.40130e-45", 11,	{ 0x00000001 }, 0 },
+    { "1.4013e-45", 10,		{ 0x00000001 }, 0 },
+    { "1.401e-45", 9,		{ 0x00000001 }, 0 },
+    { "1.40e-45", 8,		{ 0x00000001 }, 0 },
+    { "1.4e-45", 7,		{ 0x00000001 }, 0 },
+    { "1e-45", 5,		{ 0x00000001 }, 0 },
+
+    { "3e-45", 5,		{ 0x00000002 }, 0 },
+
+#ifndef	__AVR__    	/* strtod() is't absolutely accurate today	*/
+    { "3.4028235e+38", 13,	{ 0x7f7fffff }, 0 },
+#endif
+    { "3.4028229e+38", 13,	{ 0x7f7ffffc }, 0 },
+};
+
+void x_exit (int index)
+{
+#ifndef	__AVR__
+    fprintf (stderr, "t[%d]:  %#lx\n", index - 1, v.lo);
+#endif
+    exit (index ? index : -1);
+}
+
+int main ()
+{
+    char s [sizeof(t[0].s)];
+    char *p;
+    union lofl_u mst;
+    unsigned char len;
+    int eno;
+    int i;
+    
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+	strcpy_P (s, t[i].s);
+	len = pgm_read_byte (& t[i].len);
+	mst.lo = pgm_read_dword (& t[i].val);
+	eno = pgm_read_word (& t[i].eno);
+	
+	errno = 0;
+	p = 0;
+	v.fl = strtod (s, &p);
+	
+	if (!p || (p - s) != len || errno != eno)
+	    x_exit (i+1);
+	if (isnan(mst.fl) && isnan(v.fl))
+	    continue;
+	if (v.lo != mst.lo)
+	    x_exit (i+1);
+    }
+    return 0;
+}

@@ -1,0 +1,212 @@
+#! /bin/bash
+
+# Copyright (c) 2007, Dmitry Xmelkov
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright
+#   notice, this list of conditions and the following disclaimer in
+#   the documentation and/or other materials provided with the
+#   distribution.
+# * Neither the name of the copyright holders nor the names of
+#   contributors may be used to endorse or promote products derived
+#   from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# $Id$
+
+# Script for testing Avr-libc fuctions, mainly, by simulating. An installed
+# simulavr is needed. The simulavr-0.1.2.1 is suitable, only the correction
+# of divide_by_zero error is needed. The script is tuned to run after 'make'
+# without any options, at this place.
+
+set -e
+
+myname="$0"
+
+: ${AVR_GCC:=avr-gcc}
+: ${AVR_NM:=avr-nm}
+: ${AVR_OBJCOPY:=avr-objcopy}
+: ${SIMULAVR:=simulavr}
+
+: ${AVRDIR=../..}
+: ${MCU_LIST="at90s8515 atmega8"}
+
+HOST_PASS=			# Add pass at host computer
+HOST_ONLY=			# Pass at host only, skip AVR mode
+MAKE_ONLY=			# Compile/link only
+
+Errx ()
+{
+    echo "$myname: $*"
+    exit 1
+}
+
+Usage ()
+{
+    cat <<EOF
+Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTh] [FILE]...
+Options:
+  -a AVRDIR   Specify avr-libc root (default is $AVRDIR)
+  -i          Test an installed avr-libc
+  -c          Compile/link only
+  -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
+  -t          Add pass at host computer (skipped by default)
+  -T          Pass at host only
+  -h          Print this help
+If FILE is not specified, the full test list is used.
+EOF
+}
+
+while getopts "a:icg:tTh" opt ; do
+    case $opt in
+	a)	AVRDIR="$OPTARG" ;;
+	i)	AVRDIR= ;;
+	c)	MAKE_ONLY=1 ;;
+	g)	AVR_GCC="$OPTARG" ;;
+	t)	HOST_PASS=1 ;;
+	T)	HOST_ONLY=1 ; HOST_PASS=1 ;;
+	h)	Usage `basename $myname` ; exit 0 ;;
+	*)	Errx "Invalid option(s). Try '-h' for more info."
+    esac
+done
+shift $((OPTIND - 1))
+test_list=${*:-"regression/*.c stdlib/*.c fplib/*.c math/*.c"}
+    
+CPPFLAGS="-Wundef -I."
+CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
+CORE=core_avr_dump.core
+HOST_CC=gcc
+HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
+
+# Usage: Host_exe EXEFILE
+Host_exe ()
+{
+    $1
+    RETVAL=$?
+    return $RETVAL
+}
+
+# Usage: Simulate ELFILE MCU
+Simulate ()
+{
+    local bin_file=`basename $1 .elf`.bin
+    local exit_addr=0x`$AVR_NM $1 | grep __stop_program | cut -f1 -d' '`
+    $AVR_OBJCOPY -O binary $1 $bin_file
+    $SIMULAVR -d $2 -B $exit_addr -C $bin_file >/dev/null 2>&1
+    rm $bin_file
+    local i
+    RETVAL=0
+    for i in 25 24 ; do
+	RETVAL=$(( ( RETVAL << 8 )
+		   | 0x`grep r$i $CORE | tr -s [:space:] '\n' |
+		        grep r$i | cut -d= -f2` ))
+    done
+    return $RETVAL
+}
+
+# Usage: Compile SRCFILE MCU ELFILE
+Compile ()
+{
+    local crt=
+    local libs=
+    local flags=
+
+    if [ -z "$AVRDIR" ] ; then
+	flags="-lm"
+    else
+	local avrno
+        case $2 in
+	    at90s8515)  avrno=2 ; crt=crts8515.o ;;
+	    atmega8)    avrno=4 ; crt=crtm8.o ;;
+	    *)
+		Errx "Compile(): invalid MCU: $2"
+	esac
+	flags="-isystem $AVRDIR/include -nostdlib"
+	crt=`find $AVRDIR/avr/lib -name $crt -print`
+	libs="$AVRDIR/avr/lib/avr$avrno/libc.a	\
+	      $AVRDIR/avr/lib/avr$avrno/libm.a -lgcc"
+    fi
+	    
+    $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 -o $3 $crt $1 $libs
+}
+
+n_files=0	# number of operated files
+n_emake=0	# number of compile/link errors
+n_ehost=0	# number of 'run-at-host' errors
+n_esimul=0	# number of simulation errors
+
+for test_file in $test_list ; do
+    case `basename $test_file` in
+
+	*.c)
+	    : $((n_files += 1))
+
+	    if [ $HOST_PASS ] ; then
+		exe_file=./`basename $test_file .c`.exe
+		echo -n "At_host:  $test_file ... "
+		if ! ${HOST_CC} ${HOST_CFLAGS} -o $exe_file $test_file -lm
+		then
+		    echo "*** compile failed"
+		    : $((n_emake += 1))
+		elif [ -z $MAKE_ONLY ] && ! Host_exe $exe_file ; then
+		    echo "*** execute failed: $RETVAL"
+		    : $((n_ehost += 1))
+		else
+		    echo "OK"
+		fi
+		rm -f $exe_file
+	    fi
+
+	    if [ -z $HOST_ONLY ] ; then
+	        elf_file=`basename $test_file .c`.elf
+		for mcu in $MCU_LIST ; do
+		    echo -n "Simulate: $test_file $mcu ... "
+		    if ! Compile $test_file $mcu $elf_file ; then
+			echo "*** compile failed"
+			: $((n_emake += 1))
+			break
+		    elif [ -z $MAKE_ONLY ] && ! Simulate $elf_file $mcu ; then
+			echo "*** simulate failed: $RETVAL"
+			: $((n_esimul += 1))
+		    else
+			echo "OK"
+		    fi
+	        done
+		rm -f $elf_file $CORE
+	    fi
+	    ;;
+
+	*)
+	    Errx "Unknown file type: $test_file"
+    esac
+done
+
+echo "-------"
+echo "Done.  Number of operated files: $n_files"
+
+if (( n_emake + n_ehost + n_esimul )) ; then
+    (( n_emake ))   && echo "*** Compile/link errors: $n_emake"
+    (( n_ehost ))   && echo "*** At host errors:      $n_ehost"
+    (( n_esimul ))  && echo "*** Simulate errors:     $n_esimul"
+    exit 1
+else
+    echo "Success."
+fi
+
+# eof
