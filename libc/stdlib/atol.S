@@ -35,6 +35,12 @@
      Created by Reiner Patommel
      Modified by Reiner Patommel 8 Feb 2003, Bug #2481
      Modified by Reiner Patommel 13 May 2003, (DOXYGEN)
+
+   TODO: this implementation uses an inline isspace(). If Avr-libc will
+   use locales other than C/POSIX it is needed to call an external isspace().
+   
+   ATTENTION: an external __mulsi_const_10() function is used: nonstandart
+   call conventions: some registers and bit T must be nochanged.
  */
 
 #include "macros.inc"
@@ -75,63 +81,47 @@
    no numeric characters.
  */
 
+/* This fact is used below.	*/
+.if	'\t' != 9 || '\n' != 10 || '\f' != 12 || '\r' != 13	; '\v' is 11
+  .err
+.endif
+
 _U(atol):
-	PUSH	r17
+	PUSH	tmp
 	X_movw	ZL, str_lo		; set pointer to string
 	CLR	num_hi_hi
 	CLR	num_hi_lo
-	CLR	num_lo_hi
-	CLR	num_lo_lo		; clear number
+	X_movw	num_lo_lo, num_hi_lo	; clear number
 	CLT				; clear sign
 
 .L_atol_loop:
 	LD	tmp, Z+			; get (next) character
-	TST	tmp			; is it end of string?
-	BREQ	.L_atol_sig
 	CPI	tmp, ' '		; skip whitespace
 	BREQ	.L_atol_loop
 	CPI	tmp, '\t'
-	BREQ	.L_atol_loop
-	CPI	tmp, '\n'
-	BREQ	.L_atol_loop
-	CPI	tmp, '\f'
-	BREQ	.L_atol_loop
-	CPI	tmp, '\r'
-	BREQ	.L_atol_loop
-	CPI	tmp, '\v'
-	BREQ	.L_atol_loop
+	BRLO	1f
+	CPI	tmp, '\r'+1
+	BRLO	.L_atol_loop
+1:
 	CPI	tmp, '+'		; if '+' go on
 	BREQ	.L_atol_loop2
 	CPI	tmp, '-'		; if '-' remember sign
 	BRNE	.L_atol_digit
-
-.L_atol_neg:
 	SET				; remember number is negative
+	RJMP	.L_atol_loop2
 
-.L_atol_loop2:
-	LD	tmp, Z+
-	TST	tmp
-	BREQ	.L_atol_sig
-
-.L_atol_digit:
-	CPI	tmp, '0'		; test on [0 .. 9]
-	BRLT	.L_atol_sig
-	CPI	tmp, '9'+1
-	BRGE	.L_atol_sig
-	SUBI	tmp, '0'		; make figure a number
-	XCALL	__mulsi_const_10	; r25:r24:r23:r22 *= 10
+2:	XCALL	__mulsi_const_10	; r25:r24:r23:r22 *= 10
 	ADD	num_lo_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_lo_hi, __zero_reg__
 	ADC	num_hi_lo, __zero_reg__
 	ADC	num_hi_hi, __zero_reg__
-	RJMP	.L_atol_loop2		; next figure
+.L_atol_loop2:
+	LD	tmp, Z+
+.L_atol_digit:
+	SUBI	tmp, '0'		; make figure a number
+	CPI	tmp, 10
+	BRLO	2b
 
-.L_atol_sig:
-	CP	num_lo_lo, __zero_reg__
-	CPC	num_lo_hi, __zero_reg__
-	CPC	num_hi_lo, __zero_reg__
-	CPC	num_hi_hi, __zero_reg__	; did we get a number?
-	BREQ	.L_atol_done		; no, drop sign and return
 	BRTC	.L_atol_done		; positive number? -> return
 	COM	num_hi_hi
 	COM	num_hi_lo
@@ -142,7 +132,7 @@ _U(atol):
 	SBCI	num_hi_hi, 0xff		; make number negative
 
 .L_atol_done:
-	POP	r17
+	POP	tmp
 	RET
 
 .L_atol_end:

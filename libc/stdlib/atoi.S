@@ -34,6 +34,12 @@
      Changes: Jochen Pernsteiner, Marek Michalkiewicz
      Changes: Reiner Patommel, 8 Feb 2003
      Changes: Reiner Patommel, 13 May 2003 (DOXYGEN)
+
+   TODO: this implementation uses an inline isspace(). If Avr-libc will
+   use locales other than C/POSIX it is needed to call an external isspace().
+   
+   ATTENTION: an external __mulhi_const_10() function is used: nonstandart
+   call conventions: some registers and bit T must be nochanged.
  */
 
 #include "macros.inc"
@@ -73,6 +79,11 @@
    the range of an 'int' i.e. 32768 becomes -32768.
  */
 
+/* This fact is used below.	*/
+.if	'\t' != 9 || '\n' != 10 || '\f' != 12 || '\r' != 13	; '\v' is 11
+  .err
+.endif
+
 _U(atoi):
 	X_movw	ZL, str_lo		; set pointer to string
 	CLR	num_lo
@@ -81,53 +92,34 @@ _U(atoi):
 
 .L_atoi_loop:
 	LD	tmp, Z+			; get (next) character
-	TST	tmp			; is it end of string?
-	BREQ	.L_atoi_sig
 	CPI	tmp, ' '		; skip whitespace
 	BREQ	.L_atoi_loop
-	CPI	tmp, '\t'
-	BREQ	.L_atoi_loop
-	CPI	tmp, '\n'
-	BREQ	.L_atoi_loop
-	CPI	tmp, '\f'
-	BREQ	.L_atoi_loop
-	CPI	tmp, '\r'
-	BREQ	.L_atoi_loop
-	CPI	tmp, '\v'
-	BREQ	.L_atoi_loop
+	CPI	tmp, '\t'		; ASCII sequence is: \t,\n,\v,\f,\r
+	BRLO	1f
+	CPI	tmp, '\r'+1
+	BRLO	.L_atoi_loop
+1:
 	CPI	tmp, '+'		; if '+' convert
 	BREQ	.L_atoi_loop2
 	CPI	tmp, '-'		; if '-' remember sign
 	BRNE	.L_atoi_digit
-
-.L_atoi_neg:
 	SET				; remember number is negative
-
-.L_atoi_loop2:
-	LD	tmp, Z+
-	TST	tmp
-	BREQ	.L_atoi_sig
-
-.L_atoi_digit:
-	CPI	tmp, '0'		; test on [0 .. 9]
-	BRLT	.L_atoi_sig
-	CPI	tmp, '9'+1
-	BRGE	.L_atoi_sig
-	SUBI	tmp, '0'		; make figure a number
-	XCALL	__mulhi_const_10	; r25:r24 *= 10
+	RJMP	.L_atoi_loop2
+	
+2:	XCALL	__mulhi_const_10	; r25:r24 *= 10
 	ADD	num_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_hi, __zero_reg__
-	RJMP	.L_atoi_loop2		; next figure
+.L_atoi_loop2:
+	LD	tmp, Z+
+.L_atoi_digit:
+	SUBI	tmp, '0'
+	CPI	tmp, 10
+	BRLO	2b
 
-.L_atoi_sig:
-	CP	num_lo, __zero_reg__
-	CPC	num_hi, __zero_reg__	; did we get a number?
-	BREQ	.L_atoi_done		; no, drop sign and return
 	BRTC	.L_atoi_done		; positive number? -> return
-	COM	num_lo
 	COM	num_hi
-	ADIW	num_lo, 1		; make number negative
-
+	NEG	num_lo
+	SBCI	num_hi, -1		; make number negative
 .L_atoi_done:
 	RET
 
