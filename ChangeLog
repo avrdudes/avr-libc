@@ -1,3 +1,8 @@
+2007-02-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Add some explanation how to convert raw binary
+	data so they can be linked into the image.
+
 2007-02-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/atoi.S: Fix bug #18899: atoi and atol do not handle
