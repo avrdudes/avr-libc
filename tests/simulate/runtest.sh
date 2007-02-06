@@ -50,6 +50,7 @@ myname="$0"
 HOST_PASS=			# Add pass at host computer
 HOST_ONLY=			# Pass at host only, skip AVR mode
 MAKE_ONLY=			# Compile/link only
+FLAG_STOP=			# Stop at any error
 
 Errx ()
 {
@@ -60,20 +61,21 @@ Errx ()
 Usage ()
 {
     cat <<EOF
-Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTh] [FILE]...
+Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTsh] [FILE]...
 Options:
   -a AVRDIR   Specify avr-libc root (default is $AVRDIR)
   -i          Test an installed avr-libc
   -c          Compile/link only
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
-  -t          Add pass at host computer (skipped by default)
+  -t          Add pass at host computer
   -T          Pass at host only
+  -s          Stop at any error, temparary files will save
   -h          Print this help
 If FILE is not specified, the full test list is used.
 EOF
 }
 
-while getopts "a:icg:tTh" opt ; do
+while getopts "a:icg:tTsh" opt ; do
     case $opt in
 	a)	AVRDIR="$OPTARG" ;;
 	i)	AVRDIR= ;;
@@ -81,18 +83,27 @@ while getopts "a:icg:tTh" opt ; do
 	g)	AVR_GCC="$OPTARG" ;;
 	t)	HOST_PASS=1 ;;
 	T)	HOST_ONLY=1 ; HOST_PASS=1 ;;
+	s)	FLAG_STOP=1 ;;
 	h)	Usage `basename $myname` ; exit 0 ;;
 	*)	Errx "Invalid option(s). Try '-h' for more info."
     esac
 done
 shift $((OPTIND - 1))
-test_list=${*:-"regression/*.c stdlib/*.c fplib/*.c math/*.c"}
+test_list=${*:-"regression/*.c stdlib/*.c string/*.c fplib/*.c math/*.c"}
     
 CPPFLAGS="-Wundef -I."
 CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
 CORE=core_avr_dump.core
 HOST_CC=gcc
 HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
+
+Err_echo ()
+{
+    echo "*** $*"
+    if [ $FLAG_STOP ] ; then
+	Errx "Stop"
+    fi
+}
 
 # Usage: Host_exe EXEFILE
 Host_exe ()
@@ -128,7 +139,7 @@ Compile ()
     local flags=
 
     if [ -z "$AVRDIR" ] ; then
-	flags="-lm"
+	libs="-lm"
     else
 	local avrno
         case $2 in
@@ -155,17 +166,17 @@ for test_file in $test_list ; do
     case `basename $test_file` in
 
 	*.c)
-	    : $((n_files += 1))
+	    : $((n_files += 1)) 
 
 	    if [ $HOST_PASS ] ; then
 		exe_file=./`basename $test_file .c`.exe
 		echo -n "At_host:  $test_file ... "
 		if ! ${HOST_CC} ${HOST_CFLAGS} -o $exe_file $test_file -lm
 		then
-		    echo "*** compile failed"
+		    Err_echo "compile failed"
 		    : $((n_emake += 1))
 		elif [ -z $MAKE_ONLY ] && ! Host_exe $exe_file ; then
-		    echo "*** execute failed: $RETVAL"
+		    Err_echo "execute failed: $RETVAL"
 		    : $((n_ehost += 1))
 		else
 		    echo "OK"
@@ -178,11 +189,11 @@ for test_file in $test_list ; do
 		for mcu in $MCU_LIST ; do
 		    echo -n "Simulate: $test_file $mcu ... "
 		    if ! Compile $test_file $mcu $elf_file ; then
-			echo "*** compile failed"
+			Err_echo "compile failed"
 			: $((n_emake += 1))
 			break
 		    elif [ -z $MAKE_ONLY ] && ! Simulate $elf_file $mcu ; then
-			echo "*** simulate failed: $RETVAL"
+			Err_echo "simulate failed: $RETVAL"
 			: $((n_esimul += 1))
 		    else
 			echo "OK"
