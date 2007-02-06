@@ -1,3 +1,17 @@
+2007-02-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/runtest.sh: Add option to stop after error. Add
+	string/*.c to the list. Compile(): small correction.
+	* tests/simulate/progmem.h: Add memcpy_P emulation.
+	* tests/simulate/stdlib/{atol-2,bsearch-1,bsearch-2,bsearch-3,
+	dtostre-01,dtostre-02,dtostre-03,dtostre-04,dtostre-05,dtostre-06,
+	dtostre-expm00,dtostre-minmax,dtostre-nans,dtostre-subnrm,
+	dtostre-zero,dtostrf-01,dtostrf-big,dtostrf-minmax,dtostrf-nans,
+	dtostrf-round,dtostrf-width,strtol-1,strtol-2,strtol-3,
+	strtol-4}.c: New files.
+	* tests/simulate/string: New directory.
+	* tests/simulate/string/{ffs-1,ffsl-1,ffsll-1}.c: New files.
+
 2007-02-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: Add some explanation how to convert raw binary
