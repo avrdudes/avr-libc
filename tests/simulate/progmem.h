@@ -1,3 +1,5 @@
+/* $Id$	*/
+
 #ifdef	__AVR__
 
 # include <avr/pgmspace.h>
@@ -13,5 +15,6 @@
 # define pgm_read_dword(addr)	(*(unsigned long *)(addr))
 # define pgm_read_qword(addr)	(*(unsigned long long *)(addr))
 # define strcpy_P(dst,src)	strcpy(dst,src)
+# define memcpy_P(dst,src,len)	memcpy(dst,src,len)
 
 #endif
