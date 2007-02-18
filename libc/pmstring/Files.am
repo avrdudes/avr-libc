@@ -35,6 +35,7 @@ pmstring_a_asm_sources = \
 	memcpy_P.S \
 	strcasecmp_P.S \
 	strcat_P.S \
+	strchr_P.S \
 	strcmp_P.S \
 	strcpy_P.S \
 	strlcat_P.S \
