@@ -1,3 +1,22 @@
+2007-02-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	STD and FLT vfprintf parts are fully rewriten to reduce size
+	and increase speed. So a set of changes are maiden:
+	* common/ntz.h: New file.
+	* common/ftoa_engine.h: Move from libc/stdlib/.
+	* libc/stdlib/ftoa_engine.h: Move to common/.
+	* libc/pmstring/strchr_P.S: New file.
+	* libc/pmstring/Files.am: Add new source file strchr_P.S
+	* include/avr/pgmspace.h: Add new function strchr_P().
+	* libc/stdio/xtoa_fast.h: New file.
+	* libc/stdio/ultoa_invert.S: New file.
+	* libc/stdio/Files.am: Add new source file ultoa_invert.S
+	* libc/stdio/vfprintf.c: Parts STD and FLT are fully rewriten.
+	* tests/simulate/printf: New directory.
+	* tests/simulate/printf/{sprintf-1,sprintf-2,sprintf-3,sprintf-4,
+	sprintf-5,sprintf_flt-big,sprintf_flt-e01,sprintf_flt-f01,
+	sprintf_flt-g01,sprintf_flt-g02,sprintf_flt-nan}.c: New files.
+
 2007-02-07  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/stdlib/{strtoul-1.c,strtoul-2.c,strtoul-3.c,
