@@ -1,4 +1,4 @@
-/* Copyright (c) 2006, Anatoly Sokolov
+/* Copyright (c) 2006, 2007 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -264,17 +264,7 @@
 #define WDIE    6
 #define WDIF    7
 
-#define PCMSK0  _SFR_IO8(0x22)
-#define PCINT0  0
-#define PCINT1  1
-#define PCINT2  2
-#define PCINT3  3
-#define PCINT4  4
-#define PCINT5  5
-#define PCINT6  6
-#define PCINT7  7
-
-#define PCMSK1  _SFR_IO8(0x23)
+#define PCMSK1  _SFR_IO8(0x22)
 #define PCINT8  0
 #define PCINT9  1
 #define PCINT10 2
@@ -283,6 +273,16 @@
 #define PCINT13 5
 #define PCINT14 6
 #define PCINT15 7
+
+#define PCMSK0  _SFR_IO8(0x23)
+#define PCINT0  0
+#define PCINT1  1
+#define PCINT2  2
+#define PCINT3  3
+#define PCINT4  4
+#define PCINT5  5
+#define PCINT6  6
+#define PCINT7  7
 
 #define DT1     _SFR_IO8(0x24)
 #define DT1L0   0
