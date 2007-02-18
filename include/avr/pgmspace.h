@@ -614,6 +614,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 
 extern void *memcpy_P(void *, PGM_VOID_P, size_t);
 extern char *strcat_P(char *, PGM_P);
+extern PGM_P strchr_P(PGM_P s, int val) __ATTR_CONST__;
 extern int strcmp_P(const char *, PGM_P) __ATTR_PURE__;
 extern char *strcpy_P(char *, PGM_P);
 extern int strcasecmp_P(const char *, PGM_P) __ATTR_PURE__;
