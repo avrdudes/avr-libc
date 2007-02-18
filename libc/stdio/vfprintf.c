@@ -1,6 +1,7 @@
 /* Copyright (c) 2002, Alexander Popov (sasho@vip.bg)
    Copyright (c) 2002,2004,2005 Joerg Wunsch
    Copyright (c) 2005, Helmut Wallner
+   Copyright (c) 2007, Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -33,14 +34,15 @@
 /* $Id$ */
 
 #include <avr/pgmspace.h>
-#include <stdint.h>
-#include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "stdio_private.h"
+#include "ftoa_engine.h"
+#include "ntz.h"
+#include "xtoa_fast.h"
 
 /*
  * This file can be compiled into more than one flavour.  The default
@@ -61,35 +63,15 @@
 #  error "Not a known printf level."
 #endif
 
-#if PRINTF_LEVEL >= PRINTF_FLT
-#include <math.h>
-#endif
+/* --------------------------------------------------------------------	*/
+#if  PRINTF_LEVEL == PRINTF_MIN
+/* Today this variant is a copy from Avr-libc 1.4.5 without any changes. */
 
-#if PRINTF_LEVEL >= PRINTF_MIN
+#include <stdint.h>
+
 #define FLHASPERCENT	0x01	/* first % found */
 #define FLNEGATIVE	0x02	/* arg is negative int */
 #define FLLONG		0x04	/* arg is long int */
-#endif
-
-#if PRINTF_LEVEL >= PRINTF_STD
-#define FLPREC		0x08	/* .prec given */
-#define FLSIGNPLUS	0x10	/* always print '+' sign */
-#define FLSIGN		0x20	/* always print sign */
-#define FLALT		0x40	/* # alternate specification given */
-#define FLLPAD		0x80	/* left-align result */
-#define FLZFILL		0x100	/* zero-fill up to width */
-#endif
-
-#if PRINTF_LEVEL >= PRINTF_FLT
-#define FLFLOAT		0x200	/* floating-point conversion */
-#define FLFCVT		0x400	/* do style `f' if set, style `e' if clear */
-#define FLGCVT		0x800	/* %g format, decide about %e or %f */
-
-/* With 4-byte floats, we can get up to 39 digits. */
-#define FLTBUFLEN 40
-
-static int8_t	flcvt(char *buf, double arg, int8_t ndigits, uint16_t *flags);
-#endif /* PRINTF_LEVEL >= PRINTF_FLT */
 
 /* Integer conversion buffer length. */
 #define BUFLEN 12
@@ -103,10 +85,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 		long l;
 		unsigned long ul;
 		char *pc;
-#if PRINTF_LEVEL >= PRINTF_FLT
-		double d;
-		div_t dv;
-#endif
 	} a;
 	char	c;	/* holds a char from the format string */
 	uint8_t	base;
@@ -116,19 +94,8 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 			    * to front.
 			    */
 	char	*pb;	/* used as pointer to an element in b */
-#if PRINTF_LEVEL > PRINTF_MIN
-	int8_t	width, prec;
-#endif
-#if PRINTF_LEVEL >= PRINTF_FLT
-	int8_t	decpt;
-	char	fb[FLTBUFLEN];	/* floating point buffer */
-#endif
 
-#if PRINTF_LEVEL < PRINTF_STD
 	uint8_t flags;
-#else
-	uint16_t flags;
-#endif
 
 	flags = 0;
 	stream->len = 0;
@@ -146,210 +113,37 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 
 		if (flags & FLHASPERCENT) {
 			if (c >= '0' && c <= '9') {
-#if PRINTF_LEVEL > PRINTF_MIN
-				if (c == '0' && prec == 0 &&
-				    (flags & FLPREC) == 0) {
-					flags |= FLZFILL;
-				} else {
-					/* digit */
-					prec *= 10;
-					prec += c - '0';
-					if (prec < 0)
-						prec = SCHAR_MAX;
-					if (!(flags & FLPREC))
-						width = prec;
-				}
-#endif
-#if PRINTF_LEVEL >= PRINTF_FLT
-			} else if ((c >= 'e' && c <= 'g') ||
-				   (c >= 'E' && c <= 'G')) {
-				a.d = va_arg(ap, double);
-				if (!(flags & FLPREC))
-					prec = 6;
-				/* FLPREC is used for integer formats only */
-				flags &= ~(FLALT | FLPREC);
-				if (isnan(a.d)) {
-					b[0] = b[2] = 'N';
-					b[1] = 'A';
-					pb = b + 3;
-				  dofltexcpt:
-					/*
-					 * XXX: this makes assumptions about
-					 * ASCII being used.  Should probably
-					 * use ctype, but would cause more
-					 * bloat.
-					 */
-					if (c >= 'e' && c <= 'g') {
-						b[0] += 'a' - 'A';
-						b[1] += 'a' - 'A';
-						b[2] += 'a' - 'A';
-					}
-					goto nextitem;
-				} else if (isinf(a.d)) {
-					b[2] = 'I';
-					b[1] = 'N';
-					b[0] = 'F';
-					pb = b + 3;
-					if (a.d < 0.0)
-						*pb++ = '-';
-					goto dofltexcpt;
-				}
-				flags |= FLFLOAT;
-				switch (c) {
-				case 'e':
-				case 'E':
-					decpt = flcvt(fb, a.d, prec, &flags);
-				  dostyle_e:
-					width -= 4; /* E+00 */
-					if (prec > 0)
-						width--; /* decimal sign */
-					a.i8 = strlen(pb = fb);
-					goto dofloat;
-
-				case 'f':
-				case 'F':
-					flags |= FLFCVT;
-					decpt = flcvt(fb, a.d, prec, &flags);
-				  dostyle_f:
-					if (prec > 0)
-						width--; /* decimal sign */
-					pb = fb;
-					if (decpt > 0)
-						a.i8 = strlen(pb);
-					else
-						a.i8 = prec + 1;
-					goto dofloat;
-				case 'g':
-				case 'G':
-					flags |= FLGCVT;
-					decpt = flcvt(fb, a.d,
-						      prec == 0? 1: prec,
-						      &flags);
-					/*
-					 * Remove trailing zeros from
-					 * fractional result.
-					 */
-					if (flags & FLFCVT) {
-						for (a.i8 = decpt + prec - 1;
-						     a.i8 >= 0 && a.i8 >= decpt;
-						     a.i8--)
-							if (fb[a.i8] != '0')
-								break;
-						if (a.i8 < 0 || a.i8 < decpt)
-							/*
-							 * No fractional
-							 * digits left,
-							 * don't display
-							 * `.' either.
-							 */
-							prec = 0;
-						else
-							prec = a.i8 - decpt + 1;
-					} else {
-						/* `e' style */
-						for (a.i8 = prec;
-						     a.i8 > 0;
-						     a.i8--)
-							if (fb[a.i8] != '0')
-								break;
-						if (a.i8 == 0)
-							/*
-							 * No fractional
-							 * digits left,
-							 * don't display
-							 * `.' either.
-							 */
-							prec = 0;
-						else
-							prec = a.i8;
-					}
-					fb[a.i8 + 1] = '\0';
-					/*
-					 * Continue depending on the %e/%f
-					 * decision flcvt() has done.
-					 */
-					if (flags & FLFCVT)
-						goto dostyle_f;
-					c -= 'G' - 'E';
-					goto dostyle_e;
-				}
-#endif /* PRINTF_LEVEL >= PRINTF_FLT */
 			} else {
-#if PRINTF_LEVEL > PRINTF_MIN
-				if ((flags & FLPREC) && prec == 0)
-					prec = 1;
-#endif /* PRINTF_LEVEL > PRINTF_MIN */
 				switch (c) {
 				case '+':
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags |= FLSIGNPLUS;
-					/* FALLTHROUGH */
-#endif /* PRINTF_LEVEL > PRINTF_MIN */
 				case ' ':
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags |= FLSIGN;
-#endif /* PRINTF_LEVEL > PRINTF_MIN */
 					break;
 				case '-':
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags |= FLLPAD;
-#endif /* PRINTF_LEVEL > PRINTF_MIN */
 					break;
 				case '#':
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags |= FLALT;
-#endif /* PRINTF_LEVEL > PRINTF_MIN */
 					break;
 				case '.':
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags |= FLPREC;
-					prec = 0;
-#endif /* PRINTF_LEVEL > PRINTF_MIN */
 					break;
 				case 'l':
 					flags |= FLLONG;
 					break;
-#if PRINTF_LEVEL < PRINTF_FLT
 				case 'e':
 				case 'f':
 				case 'g':
 					a.c = '?';
-#endif /* PRINTF_LEVEL < PRINTF_FLT */
-#if PRINTF_LEVEL > PRINTF_MIN
-					width--;
-#endif /* PRINTF_LEVEL > PRINTF_MIN */
 					c = 'c';
 					goto nextitem;
 				case 'c':
 					/* char is promoted to int via va_arg */
 					a.c = (char)va_arg(ap, int);
-#if PRINTF_LEVEL > PRINTF_MIN
-					width--;
-#endif
 					goto nextitem;
 				case 's':
 					a.pc = va_arg(ap, char *);
-#if PRINTF_LEVEL > PRINTF_MIN
-					if (flags & FLPREC)
-						base = strnlen(a.pc, prec);
-					else
-						base = strlen(a.pc);
-					width -= base;
-#else
 					base = strlen(a.pc);
-#endif
 					goto nextitem;
 				case 'S':
 					a.pc = va_arg(ap, char *);
-#if PRINTF_LEVEL > PRINTF_MIN
-					if (flags & FLPREC)
-						base = strnlen_P(a.pc, prec);
-					else
-						base = strlen_P(a.pc);
-					width -= base;
-#else
 					base = strlen_P(a.pc);
-#endif
 					goto nextitem;
 				case 'd':
 				case 'i':
@@ -360,17 +154,11 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 						flags |= FLNEGATIVE;
 						a.l = -a.l;
 					}
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags &= ~FLALT;
-#endif
 					goto processnum;
 				case 'o': /* octal number */
 					base = 8;
 					goto getulong;
 				case 'p':
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags |= FLALT;
-#endif
 					c = 'x';
 					/* FALLTHROUGH */
 				case 'x':
@@ -382,9 +170,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 					a.ul = flags & FLLONG?
 						va_arg(ap, unsigned long):
 						va_arg(ap, unsigned int);
-#if PRINTF_LEVEL > PRINTF_MIN
-					flags &= ~(FLSIGNPLUS | FLSIGN);
-#endif
 				  processnum:
 					pb = b;
 					do {
@@ -395,78 +180,9 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 						*pb++;
 						a.ul /= base;
 					} while (a.ul);
-#if PRINTF_LEVEL > PRINTF_MIN
-					/* length of converted string */
-					a.i8 = pb - b;
-#endif
-#if PRINTF_LEVEL >= PRINTF_FLT
-				  dofloat:
-#endif
-#if PRINTF_LEVEL > PRINTF_MIN
-					/* compute length of padding */
-					if (flags & (FLNEGATIVE | FLSIGN |
-						     FLSIGNPLUS))
-						width--;
-					if (flags & FLALT)
-						width -= base == 16? 2: 1;
-					if (flags & FLPREC) {
-						if (prec <= (uint8_t)a.i8)
-							/*
-							 * No space left for
-							 * 0-padding
-							 */
-							flags &= ~FLPREC;
-						else
-							prec -= (uint8_t)a.i8;
-					}
-					if (flags & FLPREC)
-						width -= prec;
-					else
-						width -= a.i8;
-
-					/* do left-side padding if necessary */
-					if (!(flags & (FLLPAD | FLZFILL)))
-						while (width-- > 0)
-							putc(' ', stream);
-#endif
 					if (flags & FLNEGATIVE)
 						putc('-', stream);
-#if PRINTF_LEVEL > PRINTF_MIN
-					else if (flags & FLSIGNPLUS)
-						putc('+', stream);
-					else if (flags & FLSIGN)
-						putc(' ', stream);
-					if (flags & FLALT) {
-						putc('0', stream);
-						if (base == 16)
-							putc(c, stream);
-					}
-					if ((flags & FLZFILL))
-						while (width-- > 0)
-							putc('0', stream);
-					/*
-					 * If there was no space left for
-					 * precision-caused 0-padding, the
-					 * flag has already been cleared
-					 * above.
-					 */
-					if (flags & FLPREC)
-						while (prec-- > 0)
-							putc('0', stream);
-#endif
 				  nextitem:
-#if PRINTF_LEVEL > PRINTF_MIN
-					/*
-					 * This is for %s and %c only.
-					 * For numeric arguments,
-					 * we've already done the
-					 * padding above, and width
-					 * will be negative here.
-					 */
-					if (!(flags & FLLPAD))
-						while (width-- > 0)
-							putc(' ', stream);
-#endif
 					if (c == 'c')
 						putc(a.c, stream);
 					else if (c == 's')
@@ -477,57 +193,9 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 							putc(pgm_read_byte(a.pc), stream);
 							a.pc++;
 						}
-#if PRINTF_LEVEL >= PRINTF_FLT
-					else if (flags & FLFLOAT) {
-						if (flags & FLFCVT) {
-							if (decpt > 0) {
-								while (decpt--)
-									putc(*pb++,
-									     stream);
-								decpt = 0;
-							} else
-								putc('0',
-								     stream);
-						} else
-							/* 'e' format */
-							putc(*pb++, stream);
-						if (prec > 0)
-							putc('.', stream);
-						if (flags & FLFCVT)
-							while (decpt++ < 0 &&
-							       prec-- > 0)
-								putc('0',
-								     stream);
-						while ((a.c = *pb++) &&
-						       prec-- > 0)
-							putc(a.c, stream);
-						if (!(flags & FLFCVT)) {
-							/* 'e' format */
-							putc(c, stream);
-							decpt--;
-							if (decpt < 0) {
-								putc('-',
-								     stream);
-								decpt = -decpt;
-							} else
-								putc('+',
-								     stream);
-							a.dv = div(decpt, 10);
-							putc(a.dv.quot + '0',
-							     stream);
-							putc(a.dv.rem + '0',
-							     stream);
-						}
-					}
-#endif /* PRINTF_LEVEL >= PRINTF_FLT */
 					else
 						while (pb != b)
 							putc(*--pb, stream);
-#if PRINTF_LEVEL > PRINTF_MIN
-					if (flags & FLLPAD)
-						while (width-- > 0)
-							putc(' ', stream);
-#endif
 					goto clearflags;
 
 				default:
@@ -540,9 +208,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 		} else
 			if (c == '%') {
 				flags = FLHASPERCENT;
-#if PRINTF_LEVEL > PRINTF_MIN
-				prec = width = 0;
-#endif
 				base = 10;
 			} else
 				putc(c, stream);
@@ -551,174 +216,506 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 	return stream->len;
 }
 
-#if PRINTF_LEVEL >= PRINTF_FLT
+/* --------------------------------------------------------------------	*/
+#else
 
-/*
- * Floating point to string conversion.
- *
- * Featured after the Unix fcvt()/ecvt() functions.  The argument is
- * converted into a digit string.
- *
- * For style `f' conversion (*flags & FLFCVT is set), the position of
- * the decimal point is returned, where a negative position means the
- * decimal point is outside our buffer to the left.  The buffer will
- * then start with the first non-zero digit.  For numbers greater then
- * 1, trailing zeros will be added into the buffer though.  prec
- * determines the number of digits after the decimal point.  (Note
- * that the decimal point itself will not be added into the buffer.)
- *
- * For style `e' conversion (*flags & FLFCVT is clear), decpt is
- * effectively the exponent of our conversion minus 1, and the
- * conversion is always done so that the first digit in the conversion
- * buffer is considered to be the digit before the decimal point, with
- * prec digits following.
- *
- * For style `g' conversion (*flags & FLGCVT is set), after
- * determining the exponent of the conversion, it will be decided
- * whether an `e' style or an `f' style conversion needs to be done.
- * In the former case, *flags will have FLFCVT set upon return.
- *
- * For negative numbers, *flags will get FLNEGATIVE set upon return,
- * while the conversion itself will be handled as if a positive number
- * was given.
- */
+extern PGM_P strchr_P (PGM_P, int);
 
-#include <math.h>
+#define FL_ZFILL	0x01
+#define FL_PLUS		0x02
+#define FL_SPACE	0x04
+#define FL_LPAD		0x08
+#define FL_ALT		0x10
+#define FL_WIDTH	0x20
+#define FL_PREC		0x40
+#define FL_LONG		0x80
 
-static int8_t
-flcvt(char *buf, double arg, int8_t prec, uint16_t *flags)
+#define FL_PGMSTRING	FL_LONG
+#define FL_NEGATIVE	FL_LONG
+
+#define FL_ALTUPP	FL_PLUS
+#define FL_ALTHEX	FL_SPACE
+
+#define	FL_FLTUPP	FL_ALT
+#define FL_FLTEXP	FL_PREC
+#define	FL_FLTFIX	FL_LONG
+
+#ifndef	__AVR_HAVE_LPMX__
+# if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+#  define __AVR_HAVE_LPMX__
+# endif
+#endif
+
+#if  defined(__AVR_HAVE_LPMX__) && __AVR_HAVE_LPMX__
+# define GETBYTE(flag, mask, pnt)	({	\
+    unsigned char __c;				\
+    asm (					\
+	"sbrc	%2,%3	\n\t"			\
+	"lpm	%0,Z+	\n\t"			\
+	"sbrs	%2,%3	\n\t"			\
+	"ld	%0,Z+	"			\
+	: "=r" (__c),				\
+	  "+z" (pnt)				\
+	: "r" (flag),				\
+	  "I" (ntz(mask))			\
+    );						\
+    __c;					\
+})
+#elif	1
+# define GETBYTE(flag, mask, pnt)	({	\
+    unsigned char __c;				\
+    asm (					\
+	"sbrc	%2,%3	\n\t"			\
+	"lpm		\n\t"			\
+	"sbrs	%2,%3	\n\t"			\
+	"ld	r0,Z	\n\t"			\
+	"adiw	r30,1	\n\t"			\
+	"mov	%0,r0	"			\
+	: "=r" (__c),				\
+	  "+z" (pnt)				\
+	: "r" (flag),				\
+	  "I" (ntz(mask))			\
+	: "r0"					\
+    );						\
+    __c;					\
+})
+#else
+# define GETBYTE(flag, mask, pnt)	({		\
+    unsigned char __c;					\
+    __c = (flag & mask) ? pgm_read_byte(pnt) : *pnt;	\
+    pnt++;						\
+    __c;						\
+})
+#endif
+
+int vfprintf (FILE * stream, const char *fmt, va_list ap)
 {
-	int8_t decpt;
-	double dnum, dnum2;
-	char *p, *p1, *pend;
+    unsigned char c;		/* holds a char from the format string */
+    unsigned char flags;
+    unsigned char width;
+    unsigned char prec;
+    char buf[sizeof("37777777777") - 1];	/* without '\0'	*/
 
-	/*
-	 * Limit prec to what we can handle.  The -3 below is since
-	 * style `e' will further increase prec by 1, and there needs
-	 * to be space for one insignificant digit used for rounding,
-	 * as well as for the trailing '\0'.
-	 */
-	if (prec < 0)
-		prec = 0;
-	if (prec > FLTBUFLEN - 3)
-		prec = FLTBUFLEN - 3;
-	decpt = 0;
-	p = buf;
-	pend = buf + FLTBUFLEN;
-	/*
-	 * First, make number positive, and split into integer and
-	 * fractional part.
-	 */
-	if (arg < 0) {
-		*flags |= FLNEGATIVE;
-		arg = -arg;
+    stream->len = 0;
+
+    if ((stream->flags & __SWR) == 0)
+	return EOF;
+
+    for (;;) {
+
+	for (;;) {
+	    c = GETBYTE (stream->flags, __SPGM, fmt);
+	    if (!c) goto ret;
+	    if (c == '%') {
+		c = GETBYTE (stream->flags, __SPGM, fmt);
+		if (!c) goto ret;
+		if (c != '%') break;
+	    }
+	    putc (c, stream);
 	}
-	arg = modf(arg, &dnum);
-	/*
-	 * Handle integer part.  Digits are written in the conversion
-	 * buffer back to front, until the integer part becomes 0.
-	 * Then, the conversion result is copied to the beginning of
-	 * our buffer.
-	 */
-	if (dnum != 0) {
-		for (p1 = pend; dnum != 0 && p1 > p; decpt++) {
-			dnum2 = modf(dnum * 0.1, &dnum);
-			*--p1 = (int)(dnum2 * 10.1) + '0';
+
+	flags = 0;
+	width = 0;
+	prec = 0;
+	
+	do {
+	    if (flags < FL_WIDTH) {
+		switch (c) {
+		  case '0':
+		    flags |= FL_ZFILL;
+		    continue;
+		  case '+':
+		    flags |= FL_PLUS;
+		    /* FALLTHROUGH */
+		  case ' ':
+		    flags |= FL_SPACE;
+		    continue;
+		  case '-':
+		    flags |= FL_LPAD;
+		    continue;
+		  case '#':
+		    flags |= FL_ALT;
+		    continue;
 		}
-		while (p1 < pend)
-			*p++ = *p1++;
-	}
-	/*
-	 * If the number was less than 0, just shift it up into the
-	 * range of [0.1 .. 1.0), and remember the number of digits
-	 * we needed to shift.
-	 */
-	else if (arg > 0) {
-		while ((dnum = arg * 10) < 1) {
-			arg = dnum;
-			decpt--;
+	    }
+
+	    if (flags < FL_LONG) {
+		if (c >= '0' && c <= '9') {
+		    c -= '0';
+		    if (flags & FL_PREC) {
+			prec = 10*prec + c;
+			continue;
+		    }
+		    width = 10*width + c;
+		    flags |= FL_WIDTH;
+		    continue;
 		}
-	}
-	if (*flags & FLGCVT) {
-		/*
-		 * Now decide whether we're going to use style `e' or
-		 * style `f' for the conversion.  "Style `e' is used
-		 * if the exponent is less than -4 or greater than or
-		 * equal to the precision."  Note that we can only
-		 * estimate the exponent here since the rounding below
-		 * could cause the exponent to further increase; in
-		 * order to keep the code small, we simply accept this
-		 * possible error which could lead to an `e' conversion
-		 * being done where an `f' conversion would still had
-		 * sufficed.
-		 *
-		 * The exponent is equal to decpt - 1 at this point.
-		 */
-		if (decpt >= -3 && decpt < prec + 1)
-			*flags |= FLFCVT;
-	}
-	/*
-	 * For an `e' style conversion, we increase prec so to account
-	 * for the digit before the decimal point internally as well.
-	 */
-	if (!(*flags & FLFCVT))
-		prec++;
-	p1 = buf + prec;
-	if (*flags & FLFCVT)
-		p1 += decpt;
-	/*
-	 * For an `f' style conversion, if prec is too small to hold
-	 * any significant digit, the conversion result will consist
-	 * solely of 0 digits (which need to be printed by the caller
-	 * based on the decpt we return).
-	 */
-	if (p1 < buf) {
-		buf[0] = '\0';
-		return decpt;
-	}
-	/*
-	 * Now convert trailing digits from the fractional part, until
-	 * we either got the desired precision (p1 points to the last
-	 * desired character) or the end of our buffer.
-	 */
-	while (p <= p1 && p < pend) {
-		arg *= 10;
-		arg = modf(arg, &dnum);
-		*p++ = (int)dnum + '0';
-	}
-	/*
-	 * If we hit the end of the buffer, just terminate the string
-	 * and return.  We might have lost precision in that case.
-	 */
-	if (p1 >= pend) {
-		buf[FLTBUFLEN-1] = '\0';
-		return decpt;
-	}
-	/*
-	 * If we got here, round the conversion result, beginning from
-	 * the last (insignificant) digit, possibly carrying the
-	 * overflow to the previous digit(s).  Note that the
-	 * insignificant digit will be blanked out below, so we can
-	 * just gratitously add a `5' here.
-	 */
-	p = p1;
-	*p1 += 5;
-	while (*p1 > '9') {
-		*p1 = '0';
-		if (p1 > buf)
-			++*--p1;
-		else {
-			*p1 = '1';
-			decpt++;
-			if (*flags & FLFCVT) {
-				if (p > buf)
-					*p = '0';
-				p++;
-			}
+		if (c == '.') {
+		    if (flags & FL_PREC)
+			goto invalid;
+		    flags |= FL_PREC;
+		    continue;
 		}
+		if (c == 'l') {
+		    flags |= FL_LONG;
+		    continue;
+		}
+		if (c == 'h')
+		    continue;
+	    }
+	    
+	    break;
+	} while ( (c = GETBYTE (stream->flags, __SPGM, fmt)) != 0);
+
+	/* Only a format character is valid.	*/
+
+#if PRINTF_LEVEL >= PRINTF_FLT
+# if	'F' != 'E'+1  ||  'G' != 'F'+1  ||  'f' != 'e'+1  ||  'g' != 'f'+1
+#  error
+# endif
+	if (c >= 'E' && c <= 'G') {
+	    flags |= FL_FLTUPP;
+	    c += 'e' - 'E';
+	    goto flt_oper;
+
+	} else if (c >= 'e' && c <= 'g') {
+
+	    int exp;		/* exponent of master decimal digit	*/
+	    int n;
+	    unsigned char vtype;	/* result of float value parse	*/
+	    unsigned char sign;		/* sign character (or 0)	*/
+# define ndigs	c
+
+	    flags &= ~FL_FLTUPP;
+
+	  flt_oper:
+	    if (!(flags & FL_PREC))
+		prec = 6;
+	    flags &= ~(FL_FLTEXP | FL_FLTFIX);
+	    if (c == 'e')
+		flags |= FL_FLTEXP;
+	    else if (c == 'f')
+		flags |= FL_FLTFIX;
+	    else if (prec > 0)
+		prec -= 1;
+
+	    if (flags & FL_FLTFIX) {
+		vtype = 7;		/* 'prec' arg for 'ftoa_engine'	*/
+		ndigs = prec < 60 ? prec + 1 : 60;
+	    } else {
+		if (prec > 7) prec = 7;
+		vtype = prec;
+		ndigs = 0;
+	    }
+	    exp = __ftoa_engine (va_arg(ap,double), (char *)buf, vtype, ndigs);
+	    vtype = buf[0];
+    
+	    sign = 0;
+	    if ((vtype & FTOA_MINUS) && !(vtype & FTOA_NAN))
+		sign = '-';
+	    else if (flags & FL_PLUS)
+		sign = '+';
+	    else if (flags & FL_SPACE)
+		sign = ' ';
+
+	    if (vtype & (FTOA_NAN | FTOA_INF)) {
+		const char *p;
+		ndigs = sign ? 4 : 3;
+		if (width > ndigs) {
+		    width -= ndigs;
+		    if (!(flags & FL_LPAD)) {
+			do {
+			    putc (' ', stream);
+			} while (--width);
+		    }
+		} else {
+		    width = 0;
+		}
+		if (sign)
+		    putc (sign, stream);
+		p = PSTR("inf");
+		if (vtype & FTOA_NAN)
+		    p = PSTR("nan");
+# if ('I'-'i' != 'N'-'n') || ('I'-'i' != 'F'-'f') || ('I'-'i' != 'A'-'a')
+#  error
+# endif
+		while ( (c = pgm_read_byte(p)) != 0) {
+		    if (flags & FL_FLTUPP)
+			c += 'I' - 'i';
+		    putc (c, stream);
+		    p++;
+		}
+		goto tail;
+	    }
+
+	    /* Output format adjustment, number of decimal digits in buf[] */
+	    if (flags & FL_FLTFIX) {
+		ndigs += exp;
+		if ((vtype & FTOA_CARRY) && buf[1] == '1')
+		    ndigs -= 1;
+		if ((signed char)ndigs < 1)
+		    ndigs = 1;
+		else if (ndigs > 8)
+		    ndigs = 8;
+	    } else if (!(flags & FL_FLTEXP)) {		/* 'g(G)' format */
+		if (exp <= prec && exp >= -4)
+		    flags |= FL_FLTFIX;
+		while (prec && buf[1+prec] == '0')
+		    prec--;
+		if (flags & FL_FLTFIX) {
+		    ndigs = prec + 1;		/* number of digits in buf */
+		    prec = prec > exp
+			   ? prec - exp : 0;	/* fractional part length  */
+		}
+	    }
+    
+	    /* Conversion result length, width := free space length	*/
+	    if (flags & FL_FLTFIX)
+		n = (exp>0 ? exp+1 : 1);
+	    else
+		n = 5;		/* 1e+00 */
+	    if (sign) n += 1;
+	    if (prec) n += prec + 1;
+	    width = width > n ? width - n : 0;
+    
+	    /* Output before first digit	*/
+	    if (!(flags & FL_LPAD) && !(flags & FL_ZFILL)) {
+		while (width) {
+		    putc (' ', stream);
+		    width--;
+		}
+	    }
+	    if (sign) putc (sign, stream);
+	    if (!(flags & FL_LPAD)) {
+		while (width) {
+		    putc ('0', stream);
+		    width--;
+		}
+	    }
+    
+	    if (flags & FL_FLTFIX) {		/* 'f' format		*/
+
+		n = exp > 0 ? exp : 0;		/* exponent of left digit */
+		do {
+		    if (n == -1)
+		putc ('.', stream);
+		    flags = (n <= exp && n > exp - ndigs)
+			    ? buf[exp - n + 1] : '0';
+		    if (--n < -prec)
+			break;
+		    putc (flags, stream);
+		} while (1);
+		if (n == exp
+		    && (buf[1] > '5'
+		        || (buf[1] == '5' && !(vtype & FTOA_CARRY))) )
+		{
+		    flags = '1';
+		}
+		putc (flags, stream);
+	
+	    } else {				/* 'e(E)' format	*/
+
+		/* mantissa	*/
+		if (buf[1] != '1')
+		    vtype &= ~FTOA_CARRY;
+		putc (buf[1], stream);
+		if (prec) {
+		    putc ('.', stream);
+		    sign = 2;
+		    do {
+			putc (buf[sign++], stream);
+		    } while (--prec);
+		}
+
+		/* exponent	*/
+		putc (flags & FL_FLTUPP ? 'E' : 'e', stream);
+		if (exp < 0 || (exp == 0 && (vtype & FTOA_CARRY) != 0)) {
+		    putc ('-', stream);
+		    exp = -exp;
+		} else {
+		    putc ('+', stream);
+		}
+		for (prec = '0'; exp >= 10; exp -= 10)
+		    prec += 1;
+		putc (prec, stream);
+		putc ('0' + exp, stream);
+	    }
+
+	    goto tail;
 	}
-	*p = '\0';
-	return decpt;
+
+#else		/* to: PRINTF_LEVEL >= PRINTF_FLT */
+	if (strchr_P (PSTR("EFGefg"), c)) {
+	    (void) va_arg (ap, double);
+	    buf[0] = '?';
+	    goto buf_addr;
+	}
+
+#endif
+
+	{
+	    const char * pnt;
+	    size_t size;
+
+	    switch (c) {
+
+	      case 'c':
+		buf[0] = va_arg (ap, int);
+#if  PRINTF_LEVEL < PRINTF_FLT
+	      buf_addr:
+#endif
+		pnt = buf;
+		size = 1;
+		goto no_pgmstring;
+
+	      case 's':
+		pnt = va_arg (ap, char *);
+		size = strnlen (pnt, (flags & FL_PREC) ? prec : ~0);
+	      no_pgmstring:
+		flags &= ~FL_PGMSTRING;
+		goto str_lpad;
+
+	      case 'S':
+	        pnt = va_arg (ap, char *);
+		size = strnlen_P (pnt, (flags & FL_PREC) ? prec : ~0);
+		flags |= FL_PGMSTRING;
+
+	      str_lpad:
+		if (!(flags & FL_LPAD)) {
+		    while (size < width) {
+			putc (' ', stream);
+			width--;
+		    }
+		}
+		while (size) {
+		    putc (GETBYTE (flags, FL_PGMSTRING, pnt), stream);
+		    if (width) width -= 1;
+		    size -= 1;
+		}
+		goto tail;
+	    }
+	}
+
+	if (c == 'd' || c == 'i') {
+	    long x = (flags & FL_LONG) ? va_arg(ap,long) : va_arg(ap,int);
+	    flags &= ~(FL_NEGATIVE | FL_ALT);
+	    if (x < 0) {
+		x = -x;
+		flags |= FL_NEGATIVE;
+	    }
+	    c = __ultoa_invert (x, buf, 10) - buf;
+
+	} else {
+	    int base;
+
+	    switch (c) {
+	      case 'u':
+		flags &= ~FL_ALT;
+	        base = 10;
+		goto ultoa;
+	      case 'o':
+		flags &= ~(FL_PLUS | FL_SPACE);
+	        base = 8;
+		goto ultoa;
+	      case 'p':
+	        flags |= FL_ALT;
+		/* no break */
+	      case 'x':
+		flags &= ~(FL_PLUS | FL_SPACE);
+		if (flags & FL_ALT)
+		    flags |= FL_ALTHEX;
+	        base = 16;
+		goto ultoa;
+	      case 'X':
+		flags &= ~(FL_PLUS | FL_SPACE);
+		if (flags & FL_ALT)
+		    flags |= (FL_ALTHEX | FL_ALTUPP);
+	        base = 16 | XTOA_UPPER;
+	      ultoa:
+		c = __ultoa_invert ((flags & FL_LONG)
+				    ? va_arg(ap, unsigned long)
+				    : va_arg(ap, unsigned int),
+				    buf, base)  - buf;
+		flags &= ~FL_NEGATIVE;
+		break;
+
+	      default:
+	        goto invalid;
+	    }
+	}
+
+	{
+	    unsigned char len;
+
+	    len = c;
+	    if (flags & FL_PREC) {
+		flags &= ~FL_ZFILL;
+		if (len < prec) {
+		    len = prec;
+		    if ((flags & FL_ALT) && !(flags & FL_ALTHEX))
+			flags &= ~FL_ALT;
+		}
+	    }
+	    if (flags & FL_ALT) {
+		if (buf[c-1] == '0') {
+		    flags &= ~(FL_ALT | FL_ALTHEX | FL_ALTUPP);
+		} else {
+		    len += 1;
+		    if (flags & FL_ALTHEX)
+		    	len += 1;
+		}
+	    } else if (flags & (FL_NEGATIVE | FL_PLUS | FL_SPACE)) {
+		len += 1;
+	    }
+
+	    if (!(flags & FL_LPAD)) {
+		if (flags & FL_ZFILL) {
+		    prec = c;
+		    if (len < width) {
+			prec += width - len;
+			len = width;
+		    }
+		}
+		while (len < width) {
+		    putc (' ', stream);
+		    len++;
+		}
+	    }
+	
+	    width =  (len < width) ? width - len : 0;
+
+	    if (flags & FL_ALT) {
+		putc ('0', stream);
+		if (flags & FL_ALTHEX)
+		    putc (flags & FL_ALTUPP ? 'X' : 'x', stream);
+	    } else if (flags & (FL_NEGATIVE | FL_PLUS | FL_SPACE)) {
+		unsigned char z = ' ';
+		if (flags & FL_PLUS) z = '+';
+		if (flags & FL_NEGATIVE) z = '-';
+		putc (z, stream);
+	    }
+		
+	    while (prec > c) {
+		putc ('0', stream);
+		prec--;
+	    }
+	
+	    do {
+		putc (buf[--c], stream);
+	    } while (c);
+	}
+	
+      tail:
+	/* Tail is possible.	*/
+	while (width) {
+	    putc (' ', stream);
+	    width--;
+	}
+    } /* for (;;) */
+
+  invalid:
+    putc ('?', stream);
+  ret:
+    return stream->len;
 }
-
-#endif /* PRINTF_LEVEL >= PRINTF_FLT */
+#endif	/* PRINTF_LEVEL > PRINTF_MIN */
