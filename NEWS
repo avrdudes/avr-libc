@@ -46,6 +46,7 @@
   [#18688] vfscanf and vfprintf don't use malloc
   [#18726] the dtostrf function description is missing in AVR-Libc's webpage
   [#18915] PWM1X Bit missing for ATtiny261/461/861
+  [#19060] PCMSKx registers transposed in header for attinyX61
 
 * Other changes:
 
