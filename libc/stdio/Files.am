@@ -74,7 +74,8 @@ stdio_a_c_sources =	\
 
 stdio_a_asm_sources = \
 	getc.S \
-	putc.S
+	putc.S \
+	ultoa_invert.S
 
 stdio_a_extra_dist = \
 	vfprintf.c \
