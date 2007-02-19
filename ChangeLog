@@ -1,3 +1,8 @@
+2007-02-19  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdio/vfprintf.c: Fix error in __AVR_HAVE_LPMX__ definition.
+	A bit of small space improvements.
+
 2007-02-18  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iotnx61.h (PCMSK0): Set address to 0x23.
