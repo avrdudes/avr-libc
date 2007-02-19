@@ -219,8 +219,6 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 /* --------------------------------------------------------------------	*/
 #else
 
-extern PGM_P strchr_P (PGM_P, int);
-
 #define FL_ZFILL	0x01
 #define FL_PLUS		0x02
 #define FL_SPACE	0x04
@@ -242,7 +240,7 @@ extern PGM_P strchr_P (PGM_P, int);
 
 #ifndef	__AVR_HAVE_LPMX__
 # if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
-#  define __AVR_HAVE_LPMX__
+#  define __AVR_HAVE_LPMX__	1
 # endif
 #endif
 
@@ -280,11 +278,12 @@ extern PGM_P strchr_P (PGM_P, int);
     __c;					\
 })
 #else
-# define GETBYTE(flag, mask, pnt)	({		\
-    unsigned char __c;					\
-    __c = (flag & mask) ? pgm_read_byte(pnt) : *pnt;	\
-    pnt++;						\
-    __c;						\
+# define GETBYTE(flag, mask, pnt)	({	\
+    unsigned char __c;				\
+    __c = ((flag) & (mask))			\
+	  ? pgm_read_byte(pnt) : *pnt;		\
+    pnt++;					\
+    __c;					\
 })
 #endif
 
@@ -294,7 +293,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
     unsigned char flags;
     unsigned char width;
     unsigned char prec;
-    char buf[sizeof("37777777777") - 1];	/* without '\0'	*/
+    unsigned char buf[11];	/* size for -1 in octal, without '\0'	*/
 
     stream->len = 0;
 
@@ -384,7 +383,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	    int n;
 	    unsigned char vtype;	/* result of float value parse	*/
 	    unsigned char sign;		/* sign character (or 0)	*/
-# define ndigs	c
+# define ndigs	c		/* only for this block, undef is below	*/
 
 	    flags &= ~FL_FLTUPP;
 
@@ -439,10 +438,10 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 # if ('I'-'i' != 'N'-'n') || ('I'-'i' != 'F'-'f') || ('I'-'i' != 'A'-'a')
 #  error
 # endif
-		while ( (c = pgm_read_byte(p)) != 0) {
+		while ( (ndigs = pgm_read_byte(p)) != 0) {
 		    if (flags & FL_FLTUPP)
-			c += 'I' - 'i';
-		    putc (c, stream);
+			ndigs += 'I' - 'i';
+		    putc (ndigs, stream);
 		    p++;
 		}
 		goto tail;
@@ -479,7 +478,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	    width = width > n ? width - n : 0;
     
 	    /* Output before first digit	*/
-	    if (!(flags & FL_LPAD) && !(flags & FL_ZFILL)) {
+	    if (!(flags & (FL_LPAD | FL_ZFILL))) {
 		while (width) {
 		    putc (' ', stream);
 		    width--;
@@ -498,7 +497,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		n = exp > 0 ? exp : 0;		/* exponent of left digit */
 		do {
 		    if (n == -1)
-		putc ('.', stream);
+			putc ('.', stream);
 		    flags = (n <= exp && n > exp - ndigs)
 			    ? buf[exp - n + 1] : '0';
 		    if (--n < -prec)
@@ -529,19 +528,20 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 
 		/* exponent	*/
 		putc (flags & FL_FLTUPP ? 'E' : 'e', stream);
+		ndigs = '+';
 		if (exp < 0 || (exp == 0 && (vtype & FTOA_CARRY) != 0)) {
-		    putc ('-', stream);
 		    exp = -exp;
-		} else {
-		    putc ('+', stream);
+		    ndigs = '-';
 		}
-		for (prec = '0'; exp >= 10; exp -= 10)
-		    prec += 1;
-		putc (prec, stream);
+		putc (ndigs, stream);
+		for (ndigs = '0'; exp >= 10; exp -= 10)
+		    ndigs += 1;
+		putc (ndigs, stream);
 		putc ('0' + exp, stream);
 	    }
 
 	    goto tail;
+# undef ndigs
 	}
 
 #else		/* to: PRINTF_LEVEL >= PRINTF_FLT */
@@ -564,7 +564,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 #if  PRINTF_LEVEL < PRINTF_FLT
 	      buf_addr:
 #endif
-		pnt = buf;
+		pnt = (char *)buf;
 		size = 1;
 		goto no_pgmstring;
 
@@ -603,7 +603,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		x = -x;
 		flags |= FL_NEGATIVE;
 	    }
-	    c = __ultoa_invert (x, buf, 10) - buf;
+	    c = __ultoa_invert (x, (char *)buf, 10) - (char *)buf;
 
 	} else {
 	    int base;
@@ -635,7 +635,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		c = __ultoa_invert ((flags & FL_LONG)
 				    ? va_arg(ap, unsigned long)
 				    : va_arg(ap, unsigned int),
-				    buf, base)  - buf;
+				    (char *)buf, base)  -  (char *)buf;
 		flags &= ~FL_NEGATIVE;
 		break;
 
