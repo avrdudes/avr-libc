@@ -3,6 +3,13 @@
 	* libc/stdio/vfprintf.c: Specify behaviour in case of mistakes
 	in a line of a format.
 	* tests/simulate/printf/sprintf-inv.c: New file.
+	* tests/simulate/string/strchr.c: New file.
+	* tests/simulate/pmstring: New directory.
+	* tests/simulate/pmstring/strchr_P.c: New file.
+	* tests/simulate/progmem.h: Add PSTR() emulation.
+	* tests/simulate/runtest.sh: Add pmstring directory into test
+	suite. Correct the return value for internal functions.
+	* libc/string/strchr.S: Reduce program size by 1 word.
 
 2007-02-19  Dmitry Xmelkov  <dmix@gmail.ru>
 
