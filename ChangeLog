@@ -1,3 +1,9 @@
+2007-02-22  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdio/vfprintf.c: Specify behaviour in case of mistakes
+	in a line of a format.
+	* tests/simulate/printf/sprintf-inv.c: New file.
+
 2007-02-19  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdio/vfprintf.c: Fix error in __AVR_HAVE_LPMX__ definition.
