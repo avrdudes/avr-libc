@@ -89,7 +89,8 @@ while getopts "a:icg:tTsh" opt ; do
     esac
 done
 shift $((OPTIND - 1))
-test_list=${*:-"regression/*.c stdlib/*.c string/*.c fplib/*.c math/*.c"}
+test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
+		fplib/*.c math/*.c"}
     
 CPPFLAGS="-Wundef -I."
 CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
@@ -110,7 +111,7 @@ Host_exe ()
 {
     $1
     RETVAL=$?
-    return $RETVAL
+    [ $RETVAL -eq 0 ]
 }
 
 # Usage: Simulate ELFILE MCU
@@ -128,7 +129,7 @@ Simulate ()
 		   | 0x`grep r$i $CORE | tr -s [:space:] '\n' |
 		        grep r$i | cut -d= -f2` ))
     done
-    return $RETVAL
+    [ $RETVAL -eq 0 ]
 }
 
 # Usage: Compile SRCFILE MCU ELFILE
