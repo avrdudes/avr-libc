@@ -61,13 +61,12 @@
 _U(strchr):
 	X_movw	ZL, src_lo
 .L_strchr_loop:
-	ld	__tmp_reg__, Z+
-	cp	__tmp_reg__, val_lo
+	ld	ret_lo, Z+
+	cp	ret_lo, val_lo
 	breq	.L_strchr_found
-	tst	__tmp_reg__
+	tst	ret_lo
 	brne	.L_strchr_loop
 ; not found, return NULL pointer
-	clr	ret_lo
 	clr	ret_hi
 	ret
 .L_strchr_found:
