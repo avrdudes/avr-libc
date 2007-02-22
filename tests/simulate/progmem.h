@@ -10,6 +10,7 @@
 #else
 
 # define PROGMEM
+# define PSTR(s)		(s)
 # define pgm_read_byte(addr)	(*(unsigned char *)(addr))
 # define pgm_read_word(addr)	(*(unsigned int *)(addr))
 # define pgm_read_dword(addr)	(*(unsigned long *)(addr))
