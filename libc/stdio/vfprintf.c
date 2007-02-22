@@ -307,7 +307,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	    if (!c) goto ret;
 	    if (c == '%') {
 		c = GETBYTE (stream->flags, __SPGM, fmt);
-		if (!c) goto ret;
+		if (!c) goto invalid;
 		if (c != '%') break;
 	    }
 	    putc (c, stream);
@@ -368,10 +368,11 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 
 	/* Only a format character is valid.	*/
 
+#if	'F' != 'E'+1  ||  'G' != 'F'+1  ||  'f' != 'e'+1  ||  'g' != 'f'+1
+# error
+#endif
+
 #if PRINTF_LEVEL >= PRINTF_FLT
-# if	'F' != 'E'+1  ||  'G' != 'F'+1  ||  'f' != 'e'+1  ||  'g' != 'f'+1
-#  error
-# endif
 	if (c >= 'E' && c <= 'G') {
 	    flags |= FL_FLTUPP;
 	    c += 'e' - 'E';
@@ -545,7 +546,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	}
 
 #else		/* to: PRINTF_LEVEL >= PRINTF_FLT */
-	if (strchr_P (PSTR("EFGefg"), c)) {
+	if ((c >= 'E' && c <= 'G') || (c >= 'e' && c <= 'g')) {
 	    (void) va_arg (ap, double);
 	    buf[0] = '?';
 	    goto buf_addr;
@@ -714,7 +715,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
     } /* for (;;) */
 
   invalid:
-    putc ('?', stream);
+    return -1;
   ret:
     return stream->len;
 }
