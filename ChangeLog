@@ -1,3 +1,28 @@
+2007-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strcasecmp.S: Fix bug #19134: strcasecmp(): result
+	sign is not changed by swaping args.
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+
+	* libc/string/strstr.S: Fix bug #19135: strstr(): `needle' is not
+	always founded. Optimize code.
+	* libc/pmstring/strstr_P.S: (Ditto.)
+
+	* libc/pmstring/memcmp_P.S: New file.
+	* include/pgmspace.h: Add new function memcmp_P().
+	* libc/pmstring/Files.am: Add new source file memcmp_P.S
+
+	* libc/string/strcmp.S: Optimize by 1 word.
+	* libc/pmstring/strcmp_P.S: Optimize by 1 word.
+
+	* tests/simulate/progmem.h: Add strlen_P() and strcmp_P() emulation.
+	* tests/simulate/pmstring/{memcmp_P.c,strcasecmp_P.c,strcmp_P.c,
+	strncasecmp_P.c}:  New files.
+	* tests/simulate/string/{memcmp.c,strcasecmp.c,strcmp.c,
+	strncasecmp.c}: New files.
+
 2007-02-24  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iomxx4.h (SPCR0, SPSR0, SPDR0, SPIE0, SPE0, DORD0, 
