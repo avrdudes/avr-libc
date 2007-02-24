@@ -1,3 +1,7 @@
+2007-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/{bug-19134.c,bug-19135.c}: New files.
+
 2007-02-22  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdio/vfprintf.c: Specify behaviour in case of mistakes
