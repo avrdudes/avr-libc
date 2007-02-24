@@ -15,6 +15,8 @@
 # define pgm_read_word(addr)	(*(unsigned int *)(addr))
 # define pgm_read_dword(addr)	(*(unsigned long *)(addr))
 # define pgm_read_qword(addr)	(*(unsigned long long *)(addr))
+# define strlen_P(s)		strlen(s)
+# define strcmp_P(s1,s2)	strcmp(s1,s2)
 # define strcpy_P(dst,src)	strcpy(dst,src)
 # define memcpy_P(dst,src,len)	memcpy(dst,src,len)
 
