@@ -264,22 +264,22 @@
 
 #define GPIOR2	_SFR_IO8(0x2B)
 
-#define SPCR0	_SFR_IO8(0x2C)
-#define SPIE0	7
-#define SPE0	6
-#define DORD0	5
-#define MSTR0	4
-#define CPOL0	3
-#define CPHA0	2
-#define SPR01	1
-#define SPR00	0
+#define SPCR	_SFR_IO8(0x2C)
+#define SPIE	7
+#define SPE	6
+#define DORD	5
+#define MSTR	4
+#define CPOL	3
+#define CPHA	2
+#define SPR1	1
+#define SPR0	0
 
-#define SPSR0	_SFR_IO8(0x2D)
-#define SPIF0	7
-#define WCOL0	6
-#define SPI2X0	0
+#define SPSR	_SFR_IO8(0x2D)
+#define SPIF	7
+#define WCOL	6
+#define SPI2X	0
 
-#define SPDR0	_SFR_IO8(0X2E)
+#define SPDR	_SFR_IO8(0x2E)
 
 /* Reserved [0x2F] */
 
@@ -362,7 +362,9 @@
 
 /* Reserved [0x62..0x63] */
 
-#define PRR0	_SFR_MEM8(0x64)
+#define PRR	_SFR_MEM8(0x64)  /* Datasheets: ATmega164P/324P/644P 8011D–AVR–02/07
+                                   and ATmega644 2593L–AVR–02/07.  */
+#define PRR0	_SFR_MEM8(0x64)  /* AVR Studio 4.13, build 524.  */
 #define PRTWI		7
 #define PRTIM2		6
 #define PRTIM0		5

@@ -45,6 +45,8 @@
   [#18686] AT90USB**** devices are absent in interrupt-verctor-names table
   [#18688] vfscanf and vfprintf don't use malloc
   [#18726] the dtostrf function description is missing in AVR-Libc's webpage
+  [#18903] ATmega644 register definitions for SPI and PRR (datasheet vs. 
+           iom*.h)
   [#18915] PWM1X Bit missing for ATtiny261/461/861
   [#19060] PCMSKx registers transposed in header for attinyX61
 

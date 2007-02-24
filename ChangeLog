@@ -1,3 +1,13 @@
+2007-02-24  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iomxx4.h (SPCR0, SPSR0, SPDR0, SPIE0, SPE0, DORD0, 
+	MSTR0, CPOL0, CPHA0, SPR01, SPR00, SPIF0, WCOL0, SPI2X0): Rename 
+	to SPCR, SPSR, SPDR, SPIE, SPE, DORD, MSTR, CPOL, CPHA, SPR1, SPR0,
+	SPIF, WCOL, SPI2X.
+	(PRR): Define.
+	Closes bug #18903: ATmega644 register definitions for SPI and 
+	PRR (datasheet vs. iom*.h)
+
 2007-02-24 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the ATmega325P, ATmega3250P and 
