@@ -1,4 +1,4 @@
-/* Copyright (c) 2004,2005,2006 Eric B. Weddington
+/* Copyright (c) 2004, 2005, 2006, 2007 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,7 @@
 
 /* $Id$ */
 
-/* avr/iom3250.h - definitions for ATmega3250 */
+/* avr/iom3250.h - definitions for ATmega3250 and ATmega3250P.  */
 
 #ifndef _AVR_IOM3250_H_
 #define _AVR_IOM3250_H_ 1
@@ -390,6 +390,10 @@
 #define IVCE    0
 #define IVSEL   1
 #define PUD     4
+#if defined(__AVR_ATmega3250P__)
+#define BODSE   5
+#define BODS    6
+#endif
 #define JTD     7
 
 /* Reserved [0x36] */
