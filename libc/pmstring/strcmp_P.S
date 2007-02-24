@@ -48,7 +48,9 @@
 
     \returns The strcmp_P() function returns an integer less than, equal to,
     or greater than zero if s1 is found, respectively, to be less than, to
-    match, or be greater than s2.  */
+    match, or be greater than s2. A consequence of the ordering used by
+    strcmp_P() is that if s1 is an initial substring of s2, then s1 is
+    considered to be "less than" s2. */
 
 #if !defined(__DOXYGEN__)
 
@@ -62,10 +64,8 @@ _U(strcmp_P):
 	ld	ret_lo, X+
 	X_lpm	r0, Z+
 	sub	ret_lo, r0
-	brne	.L_strcmp_P_done
-	tst	r0
-	brne	.L_strcmp_P_loop
-.L_strcmp_P_done:
+	cpse	r0, __zero_reg__
+	breq	.L_strcmp_P_loop
 ; ret_hi = SREG.C ? 0xFF : 0
 	sbc	ret_hi, ret_hi
 	ret
