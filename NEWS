@@ -15,6 +15,9 @@
 
 * New devices supported:
 
+  + ATmega325P
+  + ATmega3250P
+  + ATmega329P
   + ATmega3290P
   + AT90PWM1
 

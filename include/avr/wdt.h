@@ -128,7 +128,8 @@
 || defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) \
-|| defined(__AVR_ATmega3290P__) \
+|| defined(__AVR_ATmega325P__) || defined(__AVR_ATmega3250P__) \
+|| defined(__AVR_ATmega329P__) || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega406__) \
 || defined(__AVR_ATmega640__) \
 || defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) \

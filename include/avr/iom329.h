@@ -1,5 +1,5 @@
 /* Copyright (c) 2004 Eric B. Weddington
-   Copyright (c) 2005,2006 Anatoly Sokolov 
+   Copyright (c) 2005, 2006, 2007 Anatoly Sokolov 
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* avr/iom329.h - definitions for ATmega329 */
+/* avr/iom329.h - definitions for ATmega329 and ATmega329P.  */
 
 #ifndef _AVR_IOM329_H_
 #define _AVR_IOM329_H_ 1
@@ -385,6 +385,10 @@
 #define IVCE    0
 #define IVSEL   1
 #define PUD     4
+#if defined(__AVR_ATmega329P__)
+#define BODSE   5
+#define BODS    6
+#endif
 #define JTD     7
 
 /* Reserved [0x36] */
@@ -669,6 +673,10 @@
 
 #define LCDCRA  _SFR_MEM8(0XE4)
 #define LCDBL   0
+#if defined(__AVR_ATmega329P__)
+#define LCDCCD  1
+#define LCDBD   2
+#endif
 #define LCDIE   3
 #define LCDIF   4
 #define LCDAB   6
@@ -696,6 +704,9 @@
 #define LCDCC1  1
 #define LCDCC2  2
 #define LCDCC3  3
+#if defined(__AVR_ATmega329P__)
+#define LCDMDT  4
+#endif
 #define LCDDC0  5
 #define LCDDC1  6
 #define LCDDC2  7

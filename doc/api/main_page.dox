@@ -123,8 +123,11 @@ compile-time.
 - atmega323
 - atmega324p
 - atmega325
+- atmega325p
 - atmega3250
+- atmega3250p
 - atmega329
+- atmega329p
 - atmega3290
 - atmega3290p
 - atmega48
