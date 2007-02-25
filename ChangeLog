@@ -1,3 +1,27 @@
+2007-02-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* bootstrap: Version 2.60 for autoconf is added.
+
+	* libc/pmstring/memcmp_P.S: New file.
+	* libc/pmstring/strchr_P.S: New file.
+	* include/avr/pgmspace.h: Add new functions: memcmp_P(), strchr_P().
+	* libc/pmstring/Files.am: Add new source files memcmp_P.S, strchr_P.S
+
+	* libc/string/strcasecmp.S: Fix bug #19134: strcasecmp(): result
+	sign is not changed by swaping args.
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+
+	* libc/string/strstr.S: Fix bug #19135: strstr(): `needle' is not
+	always founded. Optimize code.
+	* libc/pmstring/strstr_P.S: (Ditto.)
+
+	* libc/string/strcmp.S: Optimize by 1 word.
+	* libc/pmstring/strcmp_P.S: Optimize by 1 word.
+
+	* libc/string/strchr.S: Reduce program size by 1 word.
+
 2007-02-24  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iomxx4.h (SPCR0, SPSR0, SPDR0, SPIE0, SPE0, DORD0, 
