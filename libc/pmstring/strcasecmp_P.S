@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2005, 2006, 2007 Reiner Patommel
+   Copyright (c) 2007  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -46,7 +47,6 @@
 #define ret_lo r24
 
 #define tmp r22
-#define cht r21
 
 /** \file */
 
@@ -62,7 +62,9 @@
 
     \returns The strcasecmp_P() function returns an integer less than, equal
     to, or greater than zero if s1 is found, respectively, to be less than, to
-    match, or be greater than s2.  */
+    match, or be greater than s2. A consequence of the ordering used by
+    strcasecmp_P() is that if s1 is an initial substring of s2, then s1 is
+    considered to be "less than" s2.	*/
 
 #if !defined(__DOXYGEN__)
 
@@ -72,28 +74,28 @@
 _U(strcasecmp_P):
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
-.L_strcasecmp_P_loop:
-	LD	ret_lo, X+		; load *s1
-	X_lpm	r0, Z+			; load *s2
-	MOV	tmp, r0			; copy of *s2 to tmp
-	MOV	cht, r0			; copy of *s2 to cht
-	ORI	cht, 0x20		; make tmp lower case
-	CPI	cht, 'a'		; test on [a .. z]
-	BRLT	.L_strcasecmp_P_tst
-	CPI	cht, 'z'+1
-	BRGE	.L_strcasecmp_P_tst
-	ORI	tmp, 0x20		; we got an aplpha in s2
-	ORI	ret_lo, 0x20
-.L_strcasecmp_P_tst:			; compare
-	SUB	ret_lo, tmp
-	BRNE	.L_strcasecmp_P_done
-	TST	r0			; end of s2?
-	BRNE	.L_strcasecmp_P_loop
-.L_strcasecmp_P_done:
-; ret_hi = SREG.C ? 0xFF : 0
-	SBC	ret_hi, ret_hi
-	RET
-.L_strcasecmp_P_end:
-	.size   _U(strcasecmp_P), .L_strcasecmp_P_end - _U(strcasecmp_P)
+
+1:	ld	ret_lo, X+		; *s1++
+	cpi	ret_lo, 'A'		; if in [A-Z] then tolower()
+	brlt	2f
+	cpi	ret_lo, 'Z'+1
+	brge	2f
+	subi	ret_lo, 'A'-'a'
+
+2:	X_lpm	tmp, Z+			; *s2++
+	cpi	tmp, 'A'		; if in [A-Z] then tolower()
+	brlt	3f
+	cpi	tmp, 'Z'+1
+	brge	3f
+	subi	tmp, 'A'-'a'
+
+3:	sub	ret_lo, tmp		; compare
+	cpse	tmp, __zero_reg__	; break, if end of string
+	breq	1b
+
+	sbc	ret_hi, ret_hi		; sign extension
+	ret
+
+	.size   _U(strcasecmp_P), . - _U(strcasecmp_P)
 
 #endif /* not __DOXYGEN__ */

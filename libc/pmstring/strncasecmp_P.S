@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2005, 2006, 2007 Reiner Patommel
+   Copyright (c) 2007  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -43,9 +44,8 @@
 #define s2_lo r22
 #define len_hi r21
 #define len_lo r20
-#define cht r19
-#define tmp r18
 
+#define tmp    r22
 #define ret_hi r25
 #define ret_lo r24
 
@@ -62,9 +62,11 @@
     \param s2 A pointer to a string in the devices Flash.
     \param n The maximum number of bytes to compare.
 
-    \returns The strcasecmp_P() function returns an integer less than, equal
+    \returns The strncasecmp_P() function returns an integer less than, equal
     to, or greater than zero if s1 (or the first n bytes thereof) is found,
-    respectively, to be less than, to match, or be greater than s2.  */
+    respectively, to be less than, to match, or be greater than s2. A
+    consequence of the ordering used by strncasecmp_P() is that if s1 is an
+    initial substring of s2, then s1 is considered to be "less than" s2.  */
 
 #if !defined(__DOXYGEN__)
 
@@ -74,33 +76,34 @@
 _U(strncasecmp_P):
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
-.L_strncasecmp_P_loop:
-	SUBI	len_lo, lo8(1)
-	SBCI	len_hi, hi8(1)
-	BRCS	.L_strncasecmp_P_equal
-	LD	ret_lo, X+		; load *s1
-	X_lpm	r0, Z+			; load *s2
-	MOV	tmp, r0			; copy of *s2 to tmp
-	MOV	cht, r0			; copy of *s2 to cht
-	ORI	cht, 0x20		; make it lower case
-	CPI	cht, 'a'		; test on [a .. z]
-	BRLT	.L_strncasecmp_P_tst
-	CPI	cht, 'z'+1
-	BRGE	.L_strncasecmp_P_tst
-	ORI	tmp, 0x20		; we got an alpha in s2
-	ORI	ret_lo, 0x20		; make *s1, *s2 lower case
-.L_strncasecmp_P_tst:
-	SUB	ret_lo, tmp
-	BRNE	.L_strncasecmp_P_done
-	TST	r0
-	BRNE	.L_strncasecmp_P_loop
-.L_strncasecmp_P_equal:
-	SUB	ret_lo, ret_lo
-.L_strncasecmp_P_done:
-; ret_hi = SREG.C ? 0xFF : 0
-	SBC	ret_hi, ret_hi
-	RET
-.L_strncasecmp_P_end:
-	.size	_U(strncasecmp_P), .L_strncasecmp_P_end - _U(strncasecmp_P)
+
+1:	subi	len_lo, lo8(1)		; if (--len == -1) return 0
+	sbci	len_hi, hi8(1)
+	brlo	5f
+
+	ld	ret_lo, X+		; *s1++
+	cpi	ret_lo, 'A'		; if in [A-Z] then tolower()
+	brlt	2f
+	cpi	ret_lo, 'Z'+1
+	brge	2f
+	subi	ret_lo, 'A'-'a'
+
+2:	X_lpm	tmp, Z+			; *s2++
+	cpi	tmp, 'A'		; if in [A-Z] then tolower()
+	brlt	3f
+	cpi	tmp, 'Z'+1
+	brge	3f
+	subi	tmp, 'A'-'a'
+
+3:	sub	ret_lo, tmp		; compare
+	cpse	tmp, __zero_reg__	; break, if end of string
+	breq	1b
+4:	sbc	ret_hi, ret_hi		; sign extension
+	ret
+
+5:	sub	ret_lo, ret_lo		; length limit, return 0
+	rjmp	4b
+
+	.size	_U(strncasecmp_P), . - _U(strncasecmp_P)
 
 #endif /* not __DOXYGEN__ */
