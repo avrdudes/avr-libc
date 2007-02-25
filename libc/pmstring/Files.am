@@ -32,9 +32,11 @@
 pmstring_a_c_sources =
 
 pmstring_a_asm_sources = \
+	memcmp_P.S \
 	memcpy_P.S \
 	strcasecmp_P.S \
 	strcat_P.S \
+	strchr_P.S \
 	strcmp_P.S \
 	strcpy_P.S \
 	strlcat_P.S \
