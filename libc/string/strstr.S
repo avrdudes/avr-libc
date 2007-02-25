@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2007 Philip Soeberg
+   Copyright (c) 2007  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -36,23 +37,6 @@
      Philip Soeberg <philip@soeberg.net>
 */
 
-#include "macros.inc"
-
-#define s1_hi r25
-#define s1_lo r24
-#define s2_hi r23
-#define s2_lo r22
-
-#ifndef __DOXYGEN__
-; first char of str1 (updated in loop)
-#define chr1 r18
-; first char of str2 (updated in loop)
-#define chr2 r20
-#endif
-
-#define ret_hi r25
-#define ret_lo r24
-
 /** \file */
 
 /** \ingroup avr_string
@@ -69,53 +53,62 @@
 
 #if !defined(__DOXYGEN__)
 
+#include "macros.inc"
+
+#define s1_hi r25
+#define s1_lo r24
+#define s2_hi r23
+#define s2_lo r22
+
+#define chr1   r20
+#define	beg2   r21	/* begin of s2: s2[0]	*/
+#define chr2   r0
+
+#define ret_hi r25
+#define ret_lo r24
+
 .text
 .global _U(strstr)
 .type _U(strstr), @function
 _U(strstr):
 
-	X_movw	XL, s1_lo
 	X_movw	ZL, s2_lo
-	ld	chr2, Z+
-	tst	chr2		; is str2 empty?
-	brne	.L_findstart
-	ret			; return original string (req'd by standard)
+	ld	beg2, Z+
+	tst	beg2		; is str2 empty?
+	breq	.L_ret		; return original string (req'd by standard)
+	X_movw	s2_lo, ZL	; save: address of second s2 byte
 
-.L_findstart:
-	X_movw	ZL, s2_lo	; reset Z pointer
-	ld	chr2, Z+	; fetch first char
+	X_movw	XL, s1_lo
 
-.L_findstart_loop:		; Find first char
-	ld	chr1, X+
-	tst	chr1		; Is str1 @ end?
-	breq	.L_no_match	; then return
-	cp	chr1, chr2	; Is chr1 == chr2?
+1:	ld	chr1, X+	; Find first char
+	cp	chr1, beg2
+	cpse	chr1, __zero_reg__
+	brne	1b
+
+	brne	.L_no_match	; end of s1
 	X_movw	ret_lo, XL	; store return value
-	brne	.L_findstart_loop ; If, then start checking string
 
-.L_stringloop:
-	ld	chr2, Z+
+2:	ld	chr2, Z+	; compare strings
 	tst	chr2
-	breq	.L_match
-	ld	chr1, X
-	tst	chr1
-	breq	.L_no_match
+	breq	.L_match	; end of s2
+	ld	chr1, X+
 	cp	chr1, chr2
-	brne	.L_findstart
-	adiw	XL, 1		; Increment X with one
-	rjmp	.L_stringloop
+	cpse	chr1, __zero_reg__	; break, if end of s1
+	breq	2b
+
+	X_movw	XL, ret_lo	; go back
+	X_movw	ZL, s2_lo	; restore s2+1
+	cpse	chr1, __zero_reg__
+	rjmp	1b
 
 .L_no_match:
-	clr	ret_lo
-	clr	ret_hi
-	ret
-
+	ldi	ret_lo, lo8(1)
+	ldi	ret_hi, hi8(1)
 .L_match:
-	sbiw	ret_lo, 1
+	sbiw	ret_lo, 1	; restore after post-increment
+.L_ret:
 	ret
 
-
-.L_strstr_end:
-.size _U(strstr), .L_strstr_end - _U(strstr)
+.size _U(strstr), . - _U(strstr)
 
 #endif /* not __DOXYGEN__ */
