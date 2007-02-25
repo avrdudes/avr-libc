@@ -612,8 +612,10 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 #define PGM_VOID_P const prog_void *
 #endif
 
+extern int memcmp_P(const void *, PGM_VOID_P, size_t) __ATTR_PURE__;
 extern void *memcpy_P(void *, PGM_VOID_P, size_t);
 extern char *strcat_P(char *, PGM_P);
+extern PGM_P strchr_P(PGM_P s, int val) __ATTR_CONST__;
 extern int strcmp_P(const char *, PGM_P) __ATTR_PURE__;
 extern char *strcpy_P(char *, PGM_P);
 extern int strcasecmp_P(const char *, PGM_P) __ATTR_PURE__;
