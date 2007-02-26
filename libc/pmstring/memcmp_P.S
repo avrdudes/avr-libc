@@ -43,7 +43,7 @@
 
 /** \file */
 
-/** \ingroup avr_string
+/** \ingroup avr_pgmspace
     \fn int memcmp_P(const void *s1, PGM_VOID_P s2, size_t len)
     \brief Compare memory areas
     
@@ -54,10 +54,7 @@
     \returns The memcmp_P() function returns an integer less than, equal
     to, or greater than zero if the first len bytes of s1 is found,
     respectively, to be less than, to match, or be greater than the first
-    len bytes of s2.
-
-    \note Be sure to store the result in a 16 bit variable since you may get
-    incorrect results if you use an unsigned char or char due to truncation. */
+    len bytes of s2.	*/
 
 #if !defined(__DOXYGEN__)
 
