@@ -29,8 +29,9 @@
 
 /* $Id$ */
 
-/** \file
-    \ingroup avr_string
+/** \file */
+
+/** \ingroup avr_pgmspace
     \fn PGM_P strchr_P(PGM_P s, int val)
     \brief Locate character in program space string.
 
