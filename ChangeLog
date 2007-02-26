@@ -1,3 +1,8 @@
+2007-02-26  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/pmstring/memcmp_P.S: Fix DOXYGEN comment.
+	* libc/pmstring/strchr_P.S: (Ditto.)
+
 2007-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/string/strcasecmp.S: Fix bug #19134: strcasecmp(): result
