@@ -1,3 +1,24 @@
+2007-02-27  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add a new (standart) function strpbrk() and a progmem variant.
+	* libc/pmstring/strpbrk_P.S: New file.
+	* libc/string/strpbrk.S: New file.
+	* libc/pmstring/Files.am: Add new source file strpbrk_P.S
+	* libc/string/Files.am: Add new source file strpbrk.S
+	* include/string.h (strpbrk): Add new function definition.
+	* include/avr/pgmspace.h (strpbrk_P): Add new function definition.
+	* tests/simulate/pmstring/strpbrk_P.c: New file.
+	* tests/simulate/string/strpbrk.c: New file.
+
+	Enable use an asm variant of atol(). Correct docs.
+	* include/stdlib.h (atol): Change the definition of function:
+	instead to define inline code which use strtol(), now it is a
+	normal definition of external function. Correct the DOXYGEN comment.
+	* include/stdlib.h (atoi): Correct the DOXYGEN comment, delete
+	a conditional define for DOXYGEN specially.
+	* libc/stdlib/atoi.S: Correct the DOXYGEN comment.
+	* libc/stdlib/atol.S: Correct the DOXYGEN comment.
+
 2007-02-26  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/pmstring/memcmp_P.S: Fix DOXYGEN comment.
