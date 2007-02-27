@@ -248,38 +248,27 @@ extern unsigned long strtoul(const char *__nptr, char **__endptr, int __base);
 
 /**
     The atol() function converts the initial portion of the string
-    pointed to by \c nptr to long integer representation.
+    pointed to by \p s to long integer representation. In contrast to
 
-    It is equivalent to:
+        \code strtol(s, (char **)NULL, 10); \endcode
 
-           \code strtol(nptr, (char **)NULL, 10); \endcode
+    this function does not detect overflow (\c errno is not changed and
+    the result value is not predictable), uses smaller memory (flash and
+    stack) and works more quickly.
 */
-extern __inline__ long atol(const char *__nptr) __ATTR_PURE__;
-extern __inline__ long
-atol(const char *__nptr)
-{
-	return strtol(__nptr, (char **) 0, 10);
-}
+extern long atol(const char *s) __ATTR_PURE__;
 
 /**
     The atoi() function converts the initial portion of the string
-    pointed to by \c nptr to integer representation.
+    pointed to by \p s to integer representation. In contrast to
 
-    It is equivalent to:
+        \code (int)strtol(s, (char **)NULL, 10); \endcode
 
-           \code (int)strtol(nptr, (char **)NULL, 10); \endcode
+    this function does not detect overflow (\c errno is not changed and
+    the result value is not predictable), uses smaller memory (flash and
+    stack) and works more quickly.
 */
-#ifdef __DOXYGEN__
-extern __inline__ int atoi(const char *__nptr) __ATTR_PURE__;
-extern __inline__ int
-atoi(const char *__nptr)
-{
-	return (int) atol(__nptr);
-}
-#else
-/* optimized asm version, much smaller if strtol() not used elsewhere */
-extern int atoi(const char *) __ATTR_PURE__;
-#endif
+extern int atoi(const char *s) __ATTR_PURE__;
 
 /**
    The exit() function terminates the application.  Since there is no
