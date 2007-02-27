@@ -47,6 +47,7 @@ pmstring_a_asm_sources = \
 	strncmp_P.S \
 	strncpy_P.S \
 	strnlen_P.S \
+	strpbrk_P.S \
 	strstr_P.S
 
 # vim: set ft=make:
