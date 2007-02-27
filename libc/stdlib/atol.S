@@ -57,16 +57,17 @@
 /** \file */
 
 /** \ingroup avr_stdlib
-    \fn long int atol(const char *string)
+    \fn long atol(const char *s)
     \brief Convert a string to a long integer.
 
     The atol() function converts the initial portion of the string
-    pointed to by \c stringp to integer representation.
+    pointed to by \p s to long integer representation. In contrast to
 
-    It is equivalent to:
+        \code strtol(s, (char **)NULL, 10); \endcode
 
-           \code strtol(nptr, (char **)NULL, 10); \endcode
-           except that atol() does not detect errors.
+    this function does not detect overflow (\c errno is not changed and
+    the result value is not predictable), uses smaller memory (flash and
+    stack) and works more quickly.
 */
 
 #if !defined(__DOXYGEN__)

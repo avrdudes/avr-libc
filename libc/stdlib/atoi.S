@@ -54,16 +54,17 @@
 /** \file */
 
 /** \ingroup avr_stdlib
-    \fn int atoi(const char *string)
+    \fn int atoi(const char *s)
     \brief Convert a string to an integer.
         
     The atoi() function converts the initial portion of the string
-    pointed to by \c nptr to integer representation.
+    pointed to by \p s to integer representation. In contrast to
 
-    It is equivalent to:
+        \code (int)strtol(s, (char **)NULL, 10); \endcode
 
-           \code (int)strtol(nptr, (char **)NULL, 10); \endcode
-           except that atoi() does not detect errors.	   
+    this function does not detect overflow (\c errno is not changed and
+    the result value is not predictable), uses smaller memory (flash and
+    stack) and works more quickly.
 */
 
 #if !defined(__DOXYGEN__)
