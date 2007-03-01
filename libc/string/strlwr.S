@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2007 Reiner Patommel
+   Copyright (c) 2007  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -36,16 +37,10 @@
      Created by Reiner Patommel
 */
 
-#include "macros.inc"
-
-#define str_hi r25
-#define str_lo r24
-#define temp   r21
-
 /** \file */
 
 /** \ingroup avr_string
-    \fn char *strlwr(char *string)
+    \fn char *strlwr(char *s)
     \brief Convert a string to lower case.
 
     The strlwr() function will convert a string to lower case. Only the upper
@@ -57,28 +52,29 @@
 
 #if !defined(__DOXYGEN__)
 
+#include "macros.inc"
+
+#define str_hi r25
+#define str_lo r24
+#define temp   r22
+
 	.text
 	.global	_U(strlwr)
 	.type	_U(strlwr), @function
 
 _U(strlwr):
 	X_movw	XL, str_lo
-.L_strlwr_loop:
-	LD	temp, X		; get 1st character
-	TST	temp		; is it end of string
-	BREQ	.L_strlwr_done
-	ORI	temp, 0x20	; make lower case
-	CPI	temp, 'a'	; test on [a .. z]
-	BRLT	.L_strlwr_next
-	CPI	temp, 'z'+1
-	BRGE	.L_strlwr_next
-	ST	X, temp		; ok, it is a char --> store it
-.L_strlwr_next:
-	ADIW	XL, 1		; point to next character
-	RJMP	.L_strlwr_loop
-.L_strlwr_done:
-	RET
-.L_strlwr_end:
-	.size	_U(strlwr), .L_strlwr_end - _U(strlwr)
+
+1:	ld	temp, X
+	subi	temp, 'A'
+	cpi	temp, 'Z'-'A'+1
+	brlo	2f		; if tepm is A..Z, then temp += 'a'-'A'
+	subi	temp, 'a'-'A'	; else restore temp
+2:	subi	temp, -'a'
+	st	X+, temp
+	brne	1b		; Z for temp
+	ret
+
+	.size	_U(strlwr), . - _U(strlwr)
 
 #endif /* not __DOXYGEN__ */
