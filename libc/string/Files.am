@@ -46,6 +46,7 @@ string_a_asm_sources = \
 	strchr.S \
 	strcmp.S \
 	strcpy.S \
+	strcspn.S \
 	strlcat.S \
 	strlcpy.S \
 	strlen.S \
@@ -59,6 +60,7 @@ string_a_asm_sources = \
 	strrchr.S \
 	strrev.S \
 	strsep.S \
+	strspn.S \
 	strstr.S \
 	strtok_r.S \
 	strupr.S
