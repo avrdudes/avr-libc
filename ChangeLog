@@ -1,3 +1,41 @@
+2007-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add a few new functions and progmem mirrors:
+	* libc/pmstring/memchr_P.S: New file.
+	* libc/pmstring/strcspn_P.S: New file.
+	* libc/pmstring/strrchr_P.S: New file.
+	* libc/pmstring/strspn_P.S: New file.
+	* libc/string/strcspn.S: New file.
+	* libc/string/strspn.S: New file.
+	* libc/pmstring/Files.am: Add new sources: memchr_P.S, strcspn_P.S,
+	strrchr_P.S, strspn_P.S
+	* libc/string/Files.am: Add new sources: strcspn.S, strspn.S
+	* include/string.h: Add new function definitions: strcspn(),
+	strspn().
+	* include/avr/pgmspace.h: Add new function definitions: memchr_P(),
+	strcspn_P(), strrchr_P(), strspn_P().
+	* tests/simulate/pmstring/memchr_P.c: New file.
+	* tests/simulate/pmstring/strcspn_P.c: New file.
+	* tests/simulate/pmstring/strrchr_P.c: New file.
+	* tests/simulate/pmstring/strspn_P.c: New file.
+	* tests/simulate/string/strcspn.c: New file.
+	* tests/simulate/string/strspn.c: New file.
+
+	Optimize a few of string functions:
+	* libc/string/strlwr.S: Optimize size and speed.
+	* libc/string/strrev.S: Optimize speed for strings 4 bytes long
+	and more. Size is the same.
+	* libc/string/strupr.S: Optimize size and speed.
+	* tests/simulate/string/strlwr.c: New file.
+	* tests/simulate/string/strrev.c: New file.
+	* tests/simulate/string/strupr.c: New file.
+
+	Add a few of tests:
+	* tests/simulate/pmstring/strstr_P.c: New file.
+	* tests/simulate/string/memchr.c: New file.
+	* tests/simulate/string/strrchr.c: New file.
+	* tests/simulate/string/strstr.c: New file.
+
 2007-02-27  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add a new (standart) function strpbrk() and a progmem variant.
