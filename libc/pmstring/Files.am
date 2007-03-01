@@ -32,6 +32,7 @@
 pmstring_a_c_sources =
 
 pmstring_a_asm_sources = \
+	memchr_P.S \
 	memcmp_P.S \
 	memcpy_P.S \
 	strcasecmp_P.S \
@@ -39,6 +40,7 @@ pmstring_a_asm_sources = \
 	strchr_P.S \
 	strcmp_P.S \
 	strcpy_P.S \
+	strcspn_P.S \
 	strlcat_P.S \
 	strlcpy_P.S \
 	strlen_P.S \
@@ -48,6 +50,8 @@ pmstring_a_asm_sources = \
 	strncpy_P.S \
 	strnlen_P.S \
 	strpbrk_P.S \
+	strrchr_P.S \
+	strspn_P.S \
 	strstr_P.S
 
 # vim: set ft=make:
