@@ -51,6 +51,7 @@ pmstring_a_asm_sources = \
 	strnlen_P.S \
 	strpbrk_P.S \
 	strrchr_P.S \
+	strsep_P.S \
 	strspn_P.S \
 	strstr_P.S
 
