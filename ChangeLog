@@ -1,3 +1,26 @@
+2007-03-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/pmstring/strsep_P.S: New file.
+	* include/avr/pgmspace.h: Add new function definition: strsep_P().
+	* libc/pmstring/Files.am: Add new source: strsep_P.S
+	* tests/simulate/pmstring/strsep_P.c: New file.
+
+	* libc/string/strsep.S: Optimize size and speed.
+	* tests/simulate/string/strsep.c: New file.
+
+	* libc/pmstring/memcmp_P.S: Emphasize args names in DOXYGEN comment.
+	Move all CPP operators outside from the DOXYGEN scope.
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strchr_P.S: (Ditto.)
+	* libc/pmstring/strcmp_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+	* libc/pmstring/strstr_P.S: (Ditto.)
+	* libc/string/strcasecmp.S: (Ditto.)
+	* libc/string/strchr.S: (Ditto.)
+	* libc/string/strcmp.S: (Ditto.)
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/string/strstr.S: (Ditto.)
+	
 2007-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add a few new functions and progmem mirrors:
