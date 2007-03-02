@@ -36,6 +36,24 @@
    Contributors:
      Created by Reiner Patommel
 */
+/** \file */
+
+/** \ingroup avr_string
+    \fn int strcasecmp(const char *s1, const char *s2)
+    \brief Compare two strings ignoring case.
+
+    The strcasecmp() function compares the two strings \p s1 and \p s2,
+    ignoring the case of the characters.
+
+    \returns The strcasecmp() function returns an integer less than,
+    equal to, or greater than zero if \p s1 is found, respectively, to
+    be less than, to match, or be greater than \p s2. A consequence of
+    the ordering used by strcasecmp() is that if \p s1 is an initial
+    substring of \p s2, then \p s1 is considered to be "less than"
+    \p s2.	*/
+
+#if !defined(__DOXYGEN__)
+
 #include "macros.inc"
 
 #define s1_hi r25
@@ -47,23 +65,6 @@
 #define ret_lo r24
 
 #define tmp r22
-
-/** \file */
-
-/** \ingroup avr_string
-    \fn int strcasecmp(const char *s1, const char *s2)
-    \brief Compare two strings ignoring case.
-
-    The strcasecmp() function compares the two strings s1 and s2, ignoring the
-    case of the characters.
-
-    \returns The strcasecmp() function returns an integer less than, equal to,
-    or greater than zero if s1 is found, respectively, to be less than, to
-    match, or be greater than s2. A consequence of the ordering used by
-    strcasecmp() is that if s1 is an initial substring of s2, then s1 is
-    considered to be "less than" s2.	*/
-
-#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(strcasecmp)

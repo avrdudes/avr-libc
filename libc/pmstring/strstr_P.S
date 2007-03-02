@@ -41,25 +41,24 @@
      Werner Boellmann <wb@muekno.de>
 */
 
-#include "macros.inc"
-
 /** \file */
 
 /** \ingroup avr_pgmspace
     \fn char *strstr_P(const char *s1, PGM_P s2)
     \brief Locate a substring.
 
-    The strstr_P() function finds the first occurrence of the substring \c s2
-    in the string \c s1.  The terminating '\\0' characters are not
-    compared.
-    The strstr_P() function is similar to strstr() except that \c s2 is pointer
-    to a string in program space.
+    The strstr_P() function finds the first occurrence of the substring
+    \p s2 in the string \p s1.  The terminating '\\0' characters are not
+    compared. The strstr_P() function is similar to strstr() except that
+    \p s2 is pointer to a string in program space.
 
-    \returns The strstr_P() function returns a pointer to the beginning of the
-    substring, or NULL if the substring is not found.
-    If \c s2 points to a string of zero length, the function returns \c s1. */
+    \returns The strstr_P() function returns a pointer to the beginning
+    of the substring, or NULL if the substring is not found. If \p s2
+    points to a string of zero length, the function returns \p s1. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
 
 #define s1_hi r25
 #define s1_lo r24

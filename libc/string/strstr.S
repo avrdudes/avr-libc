@@ -43,13 +43,13 @@
     \fn char *strstr(const char *s1, const char *s2)
     \brief Locate a substring.
 
-    The strstr() function finds the first occurrence of the substring \c s2
-    in the string \c s1.  The terminating '\\0' characters are not
+    The strstr() function finds the first occurrence of the substring \p
+    s2 in the string \p s1.  The terminating '\\0' characters are not
     compared.
 
-    \returns The strstr() function returns a pointer to the beginning of the
-    substring, or NULL if the substring is not found.
-    If s2 points to a string of zero length, the function returns s1. */
+    \returns The strstr() function returns a pointer to the beginning of
+    the substring, or \c NULL if the substring is not found. If \p s2
+    points to a string of zero length, the function returns \p s1. */
 
 #if !defined(__DOXYGEN__)
 
