@@ -631,6 +631,7 @@ extern char *strncat_P(char *, PGM_P, size_t);
 extern char *strncpy_P(char *, PGM_P, size_t);
 extern char *strpbrk_P(const char *s, PGM_P accept) __ATTR_PURE__;
 extern PGM_P strrchr_P(PGM_P s, int val) __ATTR_CONST__;
+extern char *strsep_P(char **sp, PGM_P delim);
 extern size_t strspn_P(const char *s, PGM_P accept) __ATTR_PURE__;
 extern char *strstr_P(const char *, PGM_P) __ATTR_PURE__;
 
