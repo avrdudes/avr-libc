@@ -40,10 +40,12 @@ string_a_asm_sources = \
 	memcmp.S \
 	memcpy.S \
 	memmove.S \
+	memrchr.S \
 	memset.S \
 	strcasecmp.S \
 	strcat.S \
 	strchr.S \
+	strchrnul.S \
 	strcmp.S \
 	strcpy.S \
 	strcspn.S \
