@@ -1,3 +1,27 @@
+2007-03-03  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* common/asmdef.h: New file. This file is intended for use in asm
+	sources instead of 'macros.inc'. Last clings a huge chain of
+	dependences, that very much complicates writing/debugging new
+	functions outside of an infrastructure of library. I think, some
+	time both of these files will exist independently.
+
+	* libc/pmstring/memrchr_P.S: New file.
+	* libc/pmstring/strchrnul_P.S: New file.
+	* include/avr/pgmspace.h: Add new function definitions: memrchr_P(),
+	strchrnul_P().
+	* libc/pmstring/Files.am: Add new sources: memrchr_P.S, strchrnul_P.S
+	* tests/simulate/pmstring/memrchr_P.c: New file.
+	* tests/simulate/pmstring/strchrnul_P.c: New file.
+
+	* libc/string/memrchr.S: New file.
+	* libc/string/strchrnul.S: New file.
+	* include/string.h: Add new function definitions: memrchr(),
+	strchrnul().
+	* libc/string/Files.am: Add new sources: memrchr.S, strchrnul.S
+	* tests/simulate/string/memrchr.c: New file.
+	* tests/simulate/string/strchrnul.c: New file.
+
 2007-03-02  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/pmstring/strsep_P.S: New file.
@@ -20,7 +44,7 @@
 	* libc/string/strcmp.S: (Ditto.)
 	* libc/string/strncasecmp.S: (Ditto.)
 	* libc/string/strstr.S: (Ditto.)
-	
+
 2007-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add a few new functions and progmem mirrors:
