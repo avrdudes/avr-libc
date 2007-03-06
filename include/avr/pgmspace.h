@@ -622,6 +622,7 @@ extern PGM_P strchrnul_P(PGM_P s, int val) __ATTR_CONST__;
 extern int strcmp_P(const char *, PGM_P) __ATTR_PURE__;
 extern char *strcpy_P(char *, PGM_P);
 extern int strcasecmp_P(const char *, PGM_P) __ATTR_PURE__;
+extern char *strcasestr_P(const char *, PGM_P) __ATTR_PURE__;
 extern size_t strcspn_P(const char *s, PGM_P reject) __ATTR_PURE__;
 extern size_t strlcat_P (char *, PGM_P, size_t );
 extern size_t strlcpy_P (char *, PGM_P, size_t );
