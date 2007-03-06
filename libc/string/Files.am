@@ -43,6 +43,8 @@ string_a_asm_sources = \
 	memrchr.S \
 	memset.S \
 	strcasecmp.S \
+	strcasestr.S \
+	strcasestr_P.S \
 	strcat.S \
 	strchr.S \
 	strchrnul.S \
