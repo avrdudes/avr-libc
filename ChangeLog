@@ -1,3 +1,16 @@
+2007-03-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function (and progmem variant) strcasestr().
+	* libc/string/strcasestr.S: New file.
+	* libc/string/strcasestr_P.S: New file. As it includes the
+	strcasestr.S, this source is placed into `string' directory to avoid
+	a cross-directory link. Doxygen result is normal.
+	* include/string.h: Add new function definition: strcasestr().
+	* include/avr/pgmspace.h: Add new function definition: strcasestr_P().
+	* libc/string/Files.am: Add new sources: strcasestr.S, strcasestr_P.S
+	* tests/simulate/pmstring/strcasestr_P.c: New file.
+	* tests/simulate/string/strcasestr.c: New file.
+
 2007-03-03  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* common/asmdef.h: New file. This file is intended for use in asm
