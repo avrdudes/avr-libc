@@ -119,6 +119,7 @@ extern char *strchrnul(const char *, int) __ATTR_PURE__;
 extern int strcmp(const char *, const char *) __ATTR_PURE__;
 extern char *strcpy(char *, const char *);
 extern int strcasecmp(const char *, const char *) __ATTR_PURE__;
+extern char *strcasestr(const char *, const char *) __ATTR_PURE__;
 extern size_t strcspn(const char *s, const char *reject) __ATTR_PURE__;
 extern size_t strlcat(char *, const char *, size_t);
 extern size_t strlcpy(char *, const char *, size_t);
