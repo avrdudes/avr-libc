@@ -615,6 +615,7 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 extern PGM_VOID_P memchr_P(PGM_VOID_P s, int val, size_t len) __ATTR_CONST__;
 extern int memcmp_P(const void *, PGM_VOID_P, size_t) __ATTR_PURE__;
 extern void *memcpy_P(void *, PGM_VOID_P, size_t);
+extern void *memmem_P(const void *, size_t, PGM_VOID_P, size_t) __ATTR_PURE__;
 extern PGM_VOID_P memrchr_P(PGM_VOID_P s, int val, size_t len) __ATTR_CONST__;
 extern char *strcat_P(char *, PGM_P);
 extern PGM_P strchr_P(PGM_P s, int val) __ATTR_CONST__;
