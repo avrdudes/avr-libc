@@ -110,6 +110,7 @@ extern void *memccpy(void *, const void *, int, size_t);
 extern void *memchr(const void *, int, size_t) __ATTR_PURE__;
 extern int memcmp(const void *, const void *, size_t) __ATTR_PURE__;
 extern void *memcpy(void *, const void *, size_t);
+extern void *memmem(const void *, size_t, const void *, size_t) __ATTR_PURE__;
 extern void *memmove(void *, const void *, size_t);
 extern void *memrchr(const void *, int, size_t) __ATTR_PURE__;
 extern void *memset(void *, int, size_t);
