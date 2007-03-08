@@ -69,9 +69,6 @@
 #define	beg2   r21	/* begin of s2: s2[0]	*/
 #define chr2   r0
 
-#define ret_hi r25
-#define ret_lo r24
-
 .text
 .global _U(strstr_P)
 .type _U(strstr_P), @function
@@ -83,7 +80,7 @@ _U(strstr_P):
 	breq	.L_ret		; return original string (req'd by standard)
 	X_movw	s2_lo, ZL	; save: address of second s2 byte
 
-	X_movw	XL, s1_lo
+0:	X_movw	XL, s1_lo
 
 1:	ld	chr1, X+	; Find first char
 	cp	chr1, beg2
@@ -91,7 +88,7 @@ _U(strstr_P):
 	brne	1b
 
 	brne	.L_no_match	; end of s1
-	X_movw	ret_lo, XL	; store return value
+	X_movw	s1_lo, XL	; store return value
 
 2:	X_lpm	chr2, Z+	; compare strings
 	tst	chr2
@@ -101,16 +98,15 @@ _U(strstr_P):
 	cpse	chr1, __zero_reg__	; break, if end of s1
 	breq	2b
 
-	X_movw	XL, ret_lo	; go back
 	X_movw	ZL, s2_lo	; restore s2+1
 	cpse	chr1, __zero_reg__
-	rjmp	1b
+	rjmp	0b
 
 .L_no_match:
-	ldi	ret_lo, lo8(1)
-	ldi	ret_hi, hi8(1)
+	ldi	s1_lo, lo8(1)
+	ldi	s1_hi, hi8(1)
 .L_match:
-	sbiw	ret_lo, 1	; restore after post-increment
+	sbiw	s1_lo, 1	; restore after post-increment
 .L_ret:
 	ret
 
