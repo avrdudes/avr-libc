@@ -39,6 +39,8 @@ string_a_asm_sources = \
 	memchr.S \
 	memcmp.S \
 	memcpy.S \
+	memmem.S \
+	memmem_P.S \
 	memmove.S \
 	memrchr.S \
 	memset.S \
