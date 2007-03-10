@@ -5,6 +5,8 @@
 	begin of Feb 2006.
 	* libc/stdio/vfprintf.c: Rewrite the PRINTF_MIN part. Make a few of
 	small size improvements in second (PRINTF_LEVEL > PRINTF_MIN) part.
+	
+	* include/stdio.h: Update the DOXYGEN description of vfprintf().
 
 	* tests/simulate/printf/{sprintf_min-1.c,sprintf_min-2.c,
 	sprintf_min-3.c,sprintf_min-4.c,sprintf_min-5.c,sprintf_min-int.c,
