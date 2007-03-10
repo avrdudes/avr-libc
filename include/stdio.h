@@ -456,7 +456,8 @@ extern int	fclose(FILE *__stream);
 
    \c vfprintf returns the number of characters written to \c stream,
    or \c EOF in case of an error.  Currently, this will only happen
-   if \c stream has not been opened with write intent.
+   if \c stream has not been opened with write intent or the serious
+   mistake was in \c fmt string.
 
    The format string is composed of zero or more directives: ordinary
    characters (not \c %), which are copied unchanged to the output
@@ -494,17 +495,18 @@ extern int	fclose(FILE *__stream);
       
    -   An optional decimal digit string specifying a minimum field width.
        If the converted value has fewer characters than the field width, it
-       will be padded with spaces on the left (or right, if the left-adjust­
-       ment flag has been given) to fill out the field width.
+       will be padded with spaces on the left (or right, if the left-adjustment
+       flag has been given) to fill out the field width.
    -   An optional precision, in the form of a period . followed by an
        optional digit string.  If the digit string is omitted, the
        precision is taken as zero.  This gives the minimum number of
        digits to appear for d, i, o, u, x, and X conversions, or the
        maximum number of characters to be printed from a string for \c s
        conversions.
-   -   An optional \c l length modifier, that specifies that the
+   -   An optional \c l or \c h length modifier, that specifies that the
        argument for the d, i, o, u, x, or X conversion is a \c "long int"
-       rather than \c int.
+       rather than \c int. The \c h is ignored, as \c "short int" is
+       equivalent to \c int.
    -   A character that specifies the type of conversion to be applied.
 
    The conversion specifiers and their meanings are:
@@ -568,8 +570,8 @@ extern int	fclose(FILE *__stream);
    selected using linker options.  The default vfprintf() implements
    all the mentioned functionality except floating point conversions.
    A minimized version of vfprintf() is available that only implements
-   the very basic integer and string conversion facilities, but none
-   of the additional options that can be specified using conversion
+   the very basic integer and string conversion facilities, but only
+   the \c # additional option can be specified using conversion
    flags (these flags are parsed correctly from the format
    specification, but then simply ignored).  This version can be
    requested using the following \ref gcc_minusW "compiler options":
@@ -586,9 +588,21 @@ extern int	fclose(FILE *__stream);
    \endcode
 
    \par Limitations:
-   - The specified width and precision can be at most 127.
-   - For floating-point conversions, trailing digits will be lost if
-     a number close to DBL_MAX is converted with a precision > 0.
+   - The specified width and precision can be at most 255.
+
+   \par Notes:
+   - For floating-point conversions, if you link default or minimized
+     version of vfprintf(), the symbol \c ? will be output and double
+     argument will be skiped. So you output below will not be crashed.
+     For default version the width field and the "pad to left" ( symbol
+     minus ) option will work in this case.
+   - The \c hh length modifier is ignored (\c char argument is
+     promouted to \c int). More exactly, this realization does not check
+     the number of \c h symbols.
+   - But the \c ll length modifier will to abort the output, as this
+     realization does not operate \c long \c long arguments.
+   - The variable width or precision field (an asterisk \c * symbol)
+     is not realized and will to abort the output.
 
  */
 
