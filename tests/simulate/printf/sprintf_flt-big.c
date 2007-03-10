@@ -121,10 +121,6 @@ PROGMEM static const struct sprf_s {
 
 };
 
-#ifndef	__AVR__
-# define strlen_P	strlen
-#endif
-
 void run_sprf (const struct sprf_s *pt, int testno)
 {
     static char s[300];
