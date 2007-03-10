@@ -1,3 +1,21 @@
+2007-03-10  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Rewrite the PRINTF_MIN part of vfprintf() function to reduce size
+	and increase speed. Other parts (STD and FLT) was rewriten at
+	begin of Feb 2006.
+	* libc/stdio/vfprintf.c: Rewrite the PRINTF_MIN part. Make a few of
+	small size improvements in second (PRINTF_LEVEL > PRINTF_MIN) part.
+
+	* tests/simulate/printf/{sprintf_min-1.c,sprintf_min-2.c,
+	sprintf_min-3.c,sprintf_min-4.c,sprintf_min-5.c,sprintf_min-int.c,
+	sprintf_min-inv.c,sprintf_std-int.c,sprintf_std-inv.c}: New files.
+	* tests/simulate/printf/sprintf_flt-big.c: Remove 'strlen_P'
+	definition, as it is defined in progmem.h .
+	* tests/simulate/progmem.h: Simplify the emulated function defines.
+	* tests/simulate/runtest.sh: Add a possibility to operate a variety
+	of printf variants: min, std, flt. Add the 'printf' directory to
+	the default source list.
+
 2007-03-08  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add new function (and progmem variant) memmem().
