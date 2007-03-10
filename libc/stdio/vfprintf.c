@@ -53,190 +53,15 @@
  */
 
 #ifndef PRINTF_LEVEL
-#  define PRINTF_LEVEL PRINTF_STD
+# define PRINTF_LEVEL PRINTF_STD
 #endif
 
 #if PRINTF_LEVEL == PRINTF_MIN || PRINTF_LEVEL == PRINTF_STD \
-|| PRINTF_LEVEL == PRINTF_FLT
+    || PRINTF_LEVEL == PRINTF_FLT
 /* OK */
 #else
-#  error "Not a known printf level."
+# error "Not a known printf level."
 #endif
-
-/* --------------------------------------------------------------------	*/
-#if  PRINTF_LEVEL == PRINTF_MIN
-/* Today this variant is a copy from Avr-libc 1.4.5 without any changes. */
-
-#include <stdint.h>
-
-#define FLHASPERCENT	0x01	/* first % found */
-#define FLNEGATIVE	0x02	/* arg is negative int */
-#define FLLONG		0x04	/* arg is long int */
-
-/* Integer conversion buffer length. */
-#define BUFLEN 12
-
-int
-vfprintf(FILE *stream, const char *fmt, va_list ap) {
-	union {
-		char c;
-		uint8_t u8;
-		int8_t i8;
-		long l;
-		unsigned long ul;
-		char *pc;
-	} a;
-	char	c;	/* holds a char from the format string */
-	uint8_t	base;
-	char	b[BUFLEN]; /*
-			    * Contains character representation of the
-			    * number and its prefix, written from back
-			    * to front.
-			    */
-	char	*pb;	/* used as pointer to an element in b */
-
-	uint8_t flags;
-
-	flags = 0;
-	stream->len = 0;
-
-	if ((stream->flags & __SWR) == 0)
-		return EOF;
-
-	/*
-	 * Do not use fmt++ in the next line.  pgm_read_byte() is a
-	 * macro, so it could evaluate its argument more than once.
-	 */
-	while ((c = ((stream->flags & __SPGM)? pgm_read_byte(fmt): *fmt))) {
-
-		fmt++;
-
-		if (flags & FLHASPERCENT) {
-			if (c >= '0' && c <= '9') {
-			} else {
-				switch (c) {
-				case '+':
-				case ' ':
-					break;
-				case '-':
-					break;
-				case '#':
-					break;
-				case '.':
-					break;
-				case 'l':
-					flags |= FLLONG;
-					break;
-				case 'e':
-				case 'f':
-				case 'g':
-					a.c = '?';
-					c = 'c';
-					goto nextitem;
-				case 'c':
-					/* char is promoted to int via va_arg */
-					a.c = (char)va_arg(ap, int);
-					goto nextitem;
-				case 's':
-					a.pc = va_arg(ap, char *);
-					base = strlen(a.pc);
-					goto nextitem;
-				case 'S':
-					a.pc = va_arg(ap, char *);
-					base = strlen_P(a.pc);
-					goto nextitem;
-				case 'd':
-				case 'i':
-					a.l = flags & FLLONG ?
-						va_arg(ap, long):
-						va_arg(ap, int);
-					if (a.l < 0) {
-						flags |= FLNEGATIVE;
-						a.l = -a.l;
-					}
-					goto processnum;
-				case 'o': /* octal number */
-					base = 8;
-					goto getulong;
-				case 'p':
-					c = 'x';
-					/* FALLTHROUGH */
-				case 'x':
-				case 'X':
-					base = 16;
-					/* FALLTHROUGH */
-				case 'u':
-				  getulong:
-					a.ul = flags & FLLONG?
-						va_arg(ap, unsigned long):
-						va_arg(ap, unsigned int);
-				  processnum:
-					pb = b;
-					do {
-						*pb = a.ul % base;
-						*pb = *pb > 9?
-							*pb + c - 'X' + 'A' - 10:
-							*pb + '0';
-						*pb++;
-						a.ul /= base;
-					} while (a.ul);
-					if (flags & FLNEGATIVE)
-						putc('-', stream);
-				  nextitem:
-					if (c == 'c')
-						putc(a.c, stream);
-					else if (c == 's')
-						while (base--)
-							putc(*a.pc++, stream);
-					else if (c == 'S')
-						while (base--) {
-							putc(pgm_read_byte(a.pc), stream);
-							a.pc++;
-						}
-					else
-						while (pb != b)
-							putc(*--pb, stream);
-					goto clearflags;
-
-				default:
-					putc(c, stream);
-				  clearflags:
-					flags = 0;
-					break;
-				}
-			}
-		} else
-			if (c == '%') {
-				flags = FLHASPERCENT;
-				base = 10;
-			} else
-				putc(c, stream);
-	}
-
-	return stream->len;
-}
-
-/* --------------------------------------------------------------------	*/
-#else
-
-#define FL_ZFILL	0x01
-#define FL_PLUS		0x02
-#define FL_SPACE	0x04
-#define FL_LPAD		0x08
-#define FL_ALT		0x10
-#define FL_WIDTH	0x20
-#define FL_PREC		0x40
-#define FL_LONG		0x80
-
-#define FL_PGMSTRING	FL_LONG
-#define FL_NEGATIVE	FL_LONG
-
-#define FL_ALTUPP	FL_PLUS
-#define FL_ALTHEX	FL_SPACE
-
-#define	FL_FLTUPP	FL_ALT
-#define FL_FLTEXP	FL_PREC
-#define	FL_FLTFIX	FL_LONG
 
 #ifndef	__AVR_HAVE_LPMX__
 # if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
@@ -287,6 +112,173 @@ vfprintf(FILE *stream, const char *fmt, va_list ap) {
 })
 #endif
 
+/* --------------------------------------------------------------------	*/
+#if  PRINTF_LEVEL <= PRINTF_MIN
+
+#define FL_PGMSTRING	0x01
+#define FL_ALTHEX	0x04
+#define FL_ALT		0x10
+#define FL_ALTLWR	0x20
+#define FL_NEGATIVE	0x40
+#define FL_LONG 	0x80
+
+int vfprintf (FILE * stream, const char *fmt, va_list ap)
+{
+    unsigned char c;		/* holds a char from the format string */
+    unsigned char flags;
+    unsigned char buf[11];	/* size for -1 in octal, without '\0'	*/
+
+    stream->len = 0;
+
+    if ((stream->flags & __SWR) == 0)
+	goto invalid;
+
+    for (;;) {
+
+	for (;;) {
+	    c = GETBYTE (stream->flags, __SPGM, fmt);
+	    if (!c)
+		return stream->len;
+	    if (c == '%') {
+		c = GETBYTE (stream->flags, __SPGM, fmt);
+		if (c != '%') break;
+	    }
+	    putc (c, stream);
+	}
+
+	for (flags = 0;
+	     !(flags & FL_LONG);	/* 'll' will detect as error	*/
+	     c = GETBYTE (stream->flags, __SPGM, fmt))
+	{
+	    if (c && strchr_P (PSTR(" +-.0123456789h"), c))
+		continue;
+	    if (c == '#') {
+		flags |= FL_ALT;
+		continue;
+	    }
+	    if (c == 'l') {
+		flags |= FL_LONG;
+		continue;
+	    }
+	    break;
+	}
+
+	/* Only a format character is valid.	*/
+
+	if (c && strchr_P (PSTR("EFGefg"), c)) {
+	    (void) va_arg (ap, double);
+	    putc ('?', stream);
+	    continue;
+	}
+
+	{
+	    const char * pnt;
+
+	    switch (c) {
+
+	      case 'c':
+		putc (va_arg (ap, int), stream);
+		continue;
+
+	      case 'S':
+		flags |= FL_PGMSTRING;
+		/* FALLTHROUGH */
+
+	      case 's':
+		pnt = va_arg (ap, char *);
+	        while ( (c = GETBYTE (flags, FL_PGMSTRING, pnt)) != 0)
+		    putc (c, stream);
+		continue;
+	    }
+	}
+
+	if (c == 'd' || c == 'i') {
+	    long x = (flags & FL_LONG) ? va_arg(ap,long) : va_arg(ap,int);
+	    flags &= ~FL_ALT;
+	    if (x < 0) {
+		x = -x;
+		/* `putc ('-', stream)' will considarably inlarge stack size.
+		   So flag is used.	*/
+		flags |= FL_NEGATIVE;
+	    }
+	    c = __ultoa_invert (x, (char *)buf, 10) - (char *)buf;
+
+	} else {
+	    int base;
+
+	    switch (c) {
+	      case 'u':
+		flags &= ~FL_ALT;
+	        base = 10;
+		goto ultoa;
+	      case 'o':
+	        base = 8;
+		goto ultoa;
+	      case 'p':
+	        flags |= FL_ALT;
+		/* no break */
+	      case 'x':
+		flags |= (FL_ALTHEX | FL_ALTLWR);
+	        base = 16;
+		goto ultoa;
+	      case 'X':
+		flags |= FL_ALTHEX;
+	        base = 16 | XTOA_UPPER;
+	      ultoa:
+		c = __ultoa_invert ((flags & FL_LONG)
+				    ? va_arg(ap, unsigned long)
+				    : va_arg(ap, unsigned int),
+				    (char *)buf, base)  -  (char *)buf;
+		break;
+
+	      default:
+	        goto invalid;
+	    }
+	}
+
+	/* Integer number output.	*/
+	if (flags & FL_NEGATIVE)
+	    putc ('-', stream);
+	if ((flags & FL_ALT) && (buf[c-1] != '0')) {
+	    putc ('0', stream);
+	    if (flags & FL_ALTHEX)
+#if  FL_ALTLWR != 'x' - 'X'
+# error
+#endif
+		putc ('X' + (flags & FL_ALTLWR), stream);
+	}
+	do {
+	    putc (buf[--c], stream);
+	} while (c);
+
+    } /* for (;;) */
+
+  invalid:
+    return EOF;
+}
+
+/* --------------------------------------------------------------------	*/
+#else	/* i.e. PRINTF_LEVEL > PRINTF_MIN */
+
+#define FL_ZFILL	0x01
+#define FL_PLUS		0x02
+#define FL_SPACE	0x04
+#define FL_LPAD		0x08
+#define FL_ALT		0x10
+#define FL_WIDTH	0x20
+#define FL_PREC		0x40
+#define FL_LONG		0x80
+
+#define FL_PGMSTRING	FL_LONG
+#define FL_NEGATIVE	FL_LONG
+
+#define FL_ALTUPP	FL_PLUS
+#define FL_ALTHEX	FL_SPACE
+
+#define	FL_FLTUPP	FL_ALT
+#define FL_FLTEXP	FL_PREC
+#define	FL_FLTFIX	FL_LONG
+
 int vfprintf (FILE * stream, const char *fmt, va_list ap)
 {
     unsigned char c;		/* holds a char from the format string */
@@ -298,16 +290,16 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
     stream->len = 0;
 
     if ((stream->flags & __SWR) == 0)
-	return EOF;
+	goto invalid;
 
     for (;;) {
 
 	for (;;) {
 	    c = GETBYTE (stream->flags, __SPGM, fmt);
-	    if (!c) goto ret;
+	    if (!c)
+		return stream->len;
 	    if (c == '%') {
 		c = GETBYTE (stream->flags, __SPGM, fmt);
-		if (!c) goto invalid;
 		if (c != '%') break;
 	    }
 	    putc (c, stream);
@@ -609,26 +601,27 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	} else {
 	    int base;
 
-	    switch (c) {
-	      case 'u':
+	    if (c == 'u') {
 		flags &= ~FL_ALT;
-	        base = 10;
+		base = 10;
 		goto ultoa;
+	    }
+
+	    flags &= ~(FL_PLUS | FL_SPACE);
+
+	    switch (c) {
 	      case 'o':
-		flags &= ~(FL_PLUS | FL_SPACE);
 	        base = 8;
 		goto ultoa;
 	      case 'p':
 	        flags |= FL_ALT;
 		/* no break */
 	      case 'x':
-		flags &= ~(FL_PLUS | FL_SPACE);
 		if (flags & FL_ALT)
 		    flags |= FL_ALTHEX;
 	        base = 16;
 		goto ultoa;
 	      case 'X':
-		flags &= ~(FL_PLUS | FL_SPACE);
 		if (flags & FL_ALT)
 		    flags |= (FL_ALTHEX | FL_ALTUPP);
 	        base = 16 | XTOA_UPPER;
@@ -715,8 +708,6 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
     } /* for (;;) */
 
   invalid:
-    return -1;
-  ret:
-    return stream->len;
+    return EOF;
 }
 #endif	/* PRINTF_LEVEL > PRINTF_MIN */
