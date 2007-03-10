@@ -90,7 +90,7 @@ while getopts "a:icg:tTsh" opt ; do
 done
 shift $((OPTIND - 1))
 test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
-		fplib/*.c math/*.c"}
+		printf/*.c fplib/*.c math/*.c"}
     
 CPPFLAGS="-Wundef -I."
 CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
@@ -132,7 +132,7 @@ Simulate ()
     [ $RETVAL -eq 0 ]
 }
 
-# Usage: Compile SRCFILE MCU ELFILE
+# Usage: Compile SRCFILE MCU ELFILE PRVERS
 Compile ()
 {
     local crt=
@@ -154,7 +154,26 @@ Compile ()
 	libs="$AVRDIR/avr/lib/avr$avrno/libc.a	\
 	      $AVRDIR/avr/lib/avr$avrno/libm.a -lgcc"
     fi
-	    
+
+    case $4 in
+      PR_MIN)
+	flags="$flags -Wl,-u,vfprintf"
+	if [ -z "$AVRDIR" ] ; then
+	    libs="-lprintf_min $libs"
+	else
+	    libs="$AVRDIR/avr/lib/avr$avrno/libprintf_min.a $libs"
+	fi
+	;;
+      PR_FLT)
+	flags="$flags -Wl,-u,vfprintf"
+	if [ -z "$AVRDIR" ] ; then
+	    libs="-lprintf_flt $libs"
+	else
+	    libs="$AVRDIR/avr/lib/avr$avrno/libprintf_flt.a $libs"
+	fi
+	;;
+    esac
+
     $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 -o $3 $crt $1 $libs
 }
 
@@ -167,10 +186,12 @@ for test_file in $test_list ; do
     case `basename $test_file` in
 
 	*.c)
-	    : $((n_files += 1)) 
+	    : $((n_files += 1))
+	    
+	    rootname=`basename $test_file .c`
 
 	    if [ $HOST_PASS ] ; then
-		exe_file=./`basename $test_file .c`.exe
+		exe_file=./$rootname.exe
 		echo -n "At_host:  $test_file ... "
 		if ! ${HOST_CC} ${HOST_CFLAGS} -o $exe_file $test_file -lm
 		then
@@ -186,19 +207,37 @@ for test_file in $test_list ; do
 	    fi
 
 	    if [ -z $HOST_ONLY ] ; then
-	        elf_file=`basename $test_file .c`.elf
-		for mcu in $MCU_LIST ; do
-		    echo -n "Simulate: $test_file $mcu ... "
-		    if ! Compile $test_file $mcu $elf_file ; then
-			Err_echo "compile failed"
-			: $((n_emake += 1))
-			break
-		    elif [ -z $MAKE_ONLY ] && ! Simulate $elf_file $mcu ; then
-			Err_echo "simulate failed: $RETVAL"
-			: $((n_esimul += 1))
-		    else
-			echo "OK"
-		    fi
+		case $rootname in
+		    *printf_min*)	prlist="PR_MIN" ;;
+		    *printf_std*)	prlist="PR_STD" ;;
+		    *printf_flt*)	prlist="PR_FLT" ;;
+		    *printf_all*)	prlist="PR_STD PR_FLT PR_MIN" ;;
+		    *printf*)		prlist="PR_STD PR_FLT" ;;
+		    *)			prlist="PR_STD" ;;
+		esac
+		
+	        elf_file=$rootname.elf
+		for prvers in $prlist ; do
+		    for mcu in $MCU_LIST ; do
+			echo -n "Simulate: $test_file "
+			case $prvers in
+			    PR_MIN)	echo -n "printf_min " ;;
+			    PR_FLT)	echo -n "printf_flt " ;;
+			esac
+			echo -n "$mcu ... "
+		        if ! Compile $test_file $mcu $elf_file $prvers
+			then
+			    Err_echo "compile failed"
+			    : $((n_emake += 1))
+			    break
+			elif [ -z $MAKE_ONLY ] && ! Simulate $elf_file $mcu
+			then
+			    Err_echo "simulate failed: $RETVAL"
+			    : $((n_esimul += 1))
+			else
+			    echo "OK"
+			fi
+		    done
 	        done
 		rm -f $elf_file $CORE
 	    fi
