@@ -456,8 +456,7 @@ extern int	fclose(FILE *__stream);
 
    \c vfprintf returns the number of characters written to \c stream,
    or \c EOF in case of an error.  Currently, this will only happen
-   if \c stream has not been opened with write intent or the serious
-   mistake was in \c fmt string.
+   if \c stream has not been opened with write intent.
 
    The format string is composed of zero or more directives: ordinary
    characters (not \c %), which are copied unchanged to the output
