@@ -49,9 +49,12 @@ void Check (int line,
 int main ()
 {
     /* Format last symbol is absent	*/
-    CHECK (-1, "", "%");
-    CHECK (-1, ".", ".%0");
-    CHECK (-1, "12345 ", "%d %+l", 12345);
+#ifdef	__AVR__		/* Glibc return -1, if '%' has not a format spec. */
+    CHECK (0, "", "%");
+    CHECK (1, ".", ".%");
+    CHECK (1, ".", ".%0");
+    CHECK (6, "12345 ", "%d %+l", 12345);
+#endif
 
     /* 'hh' length modifier is possible, but it is ignored in avr-libc	*/
     CHECK (3, "123", "%hhd", 123);
@@ -68,22 +71,22 @@ int main ()
     
 #ifdef	__AVR__
     /* Unknown format: glibc output is "%b", return value 2.	*/
-    CHECK (-1, "", "%b");
+    CHECK (0, "", "%b");
 
     /* Two precision dots.	*/
-    CHECK (-1, "", "%8..4d", 1);
+    CHECK (0, "", "%8..4d", 1);
     
     /* Long long arg	*/
-    CHECK (-1, "", "%lld", 1LL);
+    CHECK (0, "", "%lld", 1LL);
 
     /* wint_t, wchar_t: ignore	*/
     CHECK (1, "c", "%lc", 'c');
     CHECK (3, "foo", "%ls", "foo");
     
     /* The asterisk `*' in width or precision.	*/
-    CHECK (-1, "", "%*d", 10, 12345);
-    CHECK (-1, "", "%10.*d", 6, 12345);
-    CHECK (-1, "", "%*.*d", 10, 6, 12345);
+    CHECK (0, "", "%*d", 10, 12345);
+    CHECK (0, "", "%10.*d", 6, 12345);
+    CHECK (0, "", "%*.*d", 10, 6, 12345);
 #endif
 
     return 0;
