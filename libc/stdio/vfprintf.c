@@ -131,14 +131,13 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
     stream->len = 0;
 
     if ((stream->flags & __SWR) == 0)
-	goto invalid;
+	return EOF;
 
     for (;;) {
 
 	for (;;) {
 	    c = GETBYTE (stream->flags, __SPGM, fmt);
-	    if (!c)
-		return stream->len;
+	    if (!c) goto ret;
 	    if (c == '%') {
 		c = GETBYTE (stream->flags, __SPGM, fmt);
 		if (c != '%') break;
@@ -232,7 +231,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		break;
 
 	      default:
-	        goto invalid;
+	        goto ret;
 	    }
 	}
 
@@ -253,8 +252,8 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 
     } /* for (;;) */
 
-  invalid:
-    return EOF;
+  ret:
+    return stream->len;
 }
 
 /* --------------------------------------------------------------------	*/
@@ -290,14 +289,13 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
     stream->len = 0;
 
     if ((stream->flags & __SWR) == 0)
-	goto invalid;
+	return EOF;
 
     for (;;) {
 
 	for (;;) {
 	    c = GETBYTE (stream->flags, __SPGM, fmt);
-	    if (!c)
-		return stream->len;
+	    if (!c) goto ret;
 	    if (c == '%') {
 		c = GETBYTE (stream->flags, __SPGM, fmt);
 		if (c != '%') break;
@@ -343,7 +341,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		}
 		if (c == '.') {
 		    if (flags & FL_PREC)
-			goto invalid;
+			goto ret;
 		    flags |= FL_PREC;
 		    continue;
 		}
@@ -634,7 +632,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		break;
 
 	      default:
-	        goto invalid;
+	        goto ret;
 	    }
 	}
 
@@ -707,7 +705,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	}
     } /* for (;;) */
 
-  invalid:
-    return EOF;
+  ret:
+    return stream->len;
 }
 #endif	/* PRINTF_LEVEL > PRINTF_MIN */
