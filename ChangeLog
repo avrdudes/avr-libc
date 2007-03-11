@@ -1,3 +1,18 @@
+2007-03-11  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Has partially restored former (avr-libc 1.4 and early) behaviour
+	at mistakes in a format string. Processing will be stopped (as in
+	last versions),	but return value will be 'len', not EOF. This is
+	more clean behavior. (In comparison, Glibc's printf() return -1 if
+	there is nothing specificator and continue work for other mistakes.)
+	Note, snprintf() function (all 4 variants) has an error, which
+	activates if vfprintf() returns EOF.
+	* libc/stdio/vfprintf.c: Return EOF only if file is not open for
+	writing, return 'len' for all other cases.
+	* include/stdio.h: Update doc about return value.
+	* tests/simulate/printf/sprintf-inv.c: Update.
+	* tests/simulate/printf/sprintf_min-inv.c: Update.
+
 2007-03-10  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Rewrite the PRINTF_MIN part of vfprintf() function to reduce size
