@@ -1,3 +1,20 @@
+2007-03-17  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix bug #19280: snprintf(s,0,fmt,...) write to foreign memory: s[-1]
+	* libc/stdio/snprintf.c: Add check of 'f.size >= 0' before writing
+	of terminating zero. Use f.len as number of output symbols. Remove
+	include of "stdio_private.h" as noused (after moving FILE decl.).
+	* libc/stdio/snprintf_p.c: (Ditto.)
+	* libc/stdio/vsnprintf.c: (Ditto.)
+	* libc/stdio/vsnprintf_p.c: (Ditto.)
+	* tests/simulate/printf/snprintf_all-P.c: New file.
+	* tests/simulate/printf/snprintf_all.c: New file.
+	* tests/simulate/printf/vsnprintf_all-P.c: New file.
+	* tests/simulate/printf/vsnprintf_all.c: New file.
+	* tests/simulate/regression/bug-19280.c: New file.
+
+	* tests/simulate/regression/bug-19281.c: New file.
+
 2007-03-11  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Has partially restored former (avr-libc 1.4 and early) behaviour
