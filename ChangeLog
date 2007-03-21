@@ -34,7 +34,7 @@
 
 	Rewrite the PRINTF_MIN part of vfprintf() function to reduce size
 	and increase speed. Other parts (STD and FLT) was rewriten at
-	begin of Feb 2006.
+	begin of Feb 2007.
 	* libc/stdio/vfprintf.c: Rewrite the PRINTF_MIN part. Make a few of
 	small size improvements in second (PRINTF_LEVEL > PRINTF_MIN) part.
 	
@@ -201,7 +201,7 @@
 	* libc/pmstring/strstr_P.S: (Ditto.)
 
 	* libc/pmstring/memcmp_P.S: New file.
-	* include/pgmspace.h: Add new function memcmp_P().
+	* include/avr/pgmspace.h: Add new function memcmp_P().
 	* libc/pmstring/Files.am: Add new source file memcmp_P.S
 
 	* libc/string/strcmp.S: Optimize by 1 word.
