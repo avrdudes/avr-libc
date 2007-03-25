@@ -117,7 +117,7 @@ ENTRY strcasestr
    Return:	if (bytes are equal) Z==1, else (Z==0 && ctmp != 0)
    Scratch:	ctmp only.
  */
-.if  ('a' - 'A' != 0x20) || ('Z' - 'A' != 25) || ('z' - 'a' != 25)
+.if  ('a'-'A' - 0x20) | ('Z'-'A' - 25) | ('z'-'a' - 25)
     .err
 .endif
 .Lcmp:	eor	ctmp, csvd
