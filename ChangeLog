@@ -1,3 +1,10 @@
+2007-03-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/atoi.S: Exclude the '!=' operator from GAS expression
+	to comport with the old GAS versions (less than 2.17).
+	* libc/stdlib/atol.S: (Ditto.)
+	* libc/string/strcasestr.S: (Ditto.)
+
 2007-03-17  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix bug #19280: snprintf(s,0,fmt,...) write to foreign memory: s[-1]
