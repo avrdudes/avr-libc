@@ -15,10 +15,10 @@
   </tr>
   <tr>
     <td align="center" width="13%"><a href="index.html">Main Page</a></td>
-    <td align="center" width="13%"><a href="FAQ.html">FAQ</a></td>
+    <td align="center" width="13%"><a href="pages.html">User Manual</a></td>
     <td align="center" width="13%"><a href="modules.html">Library Reference</a></td>
+    <td align="center" width="13%"><a href="FAQ.html">FAQ</a></td>
     <td align="center" width="13%"><a href="globals.html">Alphabetical Index</a></td>
-    <td align="center" width="13%"><a href="pages.html">Additional Documentation</a></td>
     <td align="center" width="13%"><a href="group__demos.html">Example Projects</a></td>
   </tr>
 </table>
