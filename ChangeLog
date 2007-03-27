@@ -1,3 +1,10 @@
+2007-03-26  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/doxygen.config.in: Change order of documentation pages.
+	* doc/api/dox_html_header: Change order of header links. Change
+	Additional Documentation to User Manual.
+	* doc/api/porting.dox: New chapter. Porting from IAR to AVR GCC.
+
 2007-03-25  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/atoi.S: Exclude the '!=' operator from GAS expression
