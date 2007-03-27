@@ -3,7 +3,7 @@
 	* doc/api/doxygen.config.in: Change order of documentation pages.
 	* doc/api/dox_html_header: Change order of header links. Change
 	Additional Documentation to User Manual.
-	* doc/api/porting.html: New chapter. Porting from IAR to AVR GCC.
+	* doc/api/porting.dox: New chapter. Porting from IAR to AVR GCC.
 
 2007-03-25  Dmitry Xmelkov  <dmix@gmail.ru>
 
