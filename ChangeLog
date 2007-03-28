@@ -1,3 +1,9 @@
+2007-03-28  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/doxygen.config.in (INPUT): Add new file to list. Reorder.
+	* doc/api/overview.dox (new file): New chapter. Overview of toolchain.
+    * doc/api/Makefile.am (EXTRA_DIST): Add the two new .dox files.
+
 2007-04-28 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the AT90USB82/162 support.
@@ -13,10 +19,11 @@
 
 2007-03-26  Eric B. Weddington <eweddington@cso.atmel.com>
 
-	* doc/api/doxygen.config.in: Change order of documentation pages.
+	* doc/api/doxygen.config.in (INPUT): Change order of documentation pages.
 	* doc/api/dox_html_header: Change order of header links. Change
 	Additional Documentation to User Manual.
-	* doc/api/porting.dox: New chapter. Porting from IAR to AVR GCC.
+	* doc/api/porting.dox (new file): New chapter. Porting from IAR to AVR GCC.
+	Adapted, with permission, from a document written by Eivind Sivertsen.
 
 2007-03-25  Dmitry Xmelkov  <dmix@gmail.ru>
 

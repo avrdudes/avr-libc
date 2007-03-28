@@ -453,12 +453,13 @@ WARN_LOGFILE           =
 INPUT                  = @top_srcdir@/include \
                          @top_srcdir@/libc \
                          @top_srcdir@/libm \
-                         @top_srcdir@/doc/api/faq.dox \
+                         @top_srcdir@/doc/api/overview.dox \
                          @top_srcdir@/doc/api/malloc.dox \
                          @top_srcdir@/doc/api/sections.dox \
                          @top_srcdir@/doc/api/assembler.dox \
                          @top_srcdir@/doc/api/inline_asm.dox \
                          @top_srcdir@/doc/api/porting.dox \
+                         @top_srcdir@/doc/api/faq.dox \
                          @top_srcdir@/doc/api/tools-install.dox \
                          @top_srcdir@/doc/api/using-tools.dox \
                          @top_srcdir@/doc/api/using-avrprog.dox \

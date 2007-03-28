@@ -51,7 +51,9 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        using-avrprog.dox \
                        using-tools.dox \
                        faq.dox \
-                       rel-method.dox
+                       rel-method.dox \
+                       porting.dox \
+                       overview.dox
 
 SUFFIXES             = .pdf .fig .png .eps
 
