@@ -206,6 +206,10 @@
 #  include <avr/iocan64.h>
 #elif defined (__AVR_AT90CAN128__)
 #  include <avr/iocan128.h>
+#elif defined (__AVR_AT90USB82__)
+#  include <avr/iousb82.h>
+#elif defined (__AVR_AT90USB162__)
+#  include <avr/iousb162.h>
 #elif defined (__AVR_AT90USB646__)
 #  include <avr/iousb646.h>
 #elif defined (__AVR_AT90USB647__)

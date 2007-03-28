@@ -177,6 +177,8 @@ compile-time.
 - at90pwm1
 - at90pwm2
 - at90pwm3
+- at90usb82
+- at90usb162
 - at90usb646
 - at90usb647
 - at90usb1286

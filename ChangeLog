@@ -1,3 +1,16 @@
+2007-04-28 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the AT90USB82/162 support.
+	* devtools/gen-avr-lib-tree.sh: Add support for AT90USB82/162.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iousb82.h: New file.
+	* include/avr/iousb162.h: New file.
+	* include/avr/iousbxx2.h: New file.
+	* include/avr/Makefile.am: Include new files.
+	* doc/api/main_page.dox: Document support for AT90USB82/162.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2007-03-26  Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* doc/api/doxygen.config.in: Change order of documentation pages.

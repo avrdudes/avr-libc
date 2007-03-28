@@ -21,6 +21,8 @@
 
 * New devices supported:
 
+  + AT90USB82
+  + AT90USB162
   + ATmega325P
   + ATmega3250P
   + ATmega329P

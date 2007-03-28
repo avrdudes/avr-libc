@@ -57,6 +57,9 @@ avr_HEADERS = \
     iocan64.h \
     iocan128.h \
     iocanxx.h \
+    iousb82.h \
+    iousb162.h \
+    iousbxx2.h \
     iousb646.h \
     iousb647.h \
     iousb1286.h \
