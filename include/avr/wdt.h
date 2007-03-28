@@ -118,6 +118,7 @@
 
 #if defined(__AVR_AT90CAN128__) \
 || defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) \
+|| defined(__AVR_AT90USB82__) || defined(__AVR_AT90USB162__) \
 || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__) \
 || defined(__AVR_AT90USB1286__) || defined(__AVR_AT90USB1287__) \
 || defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
@@ -289,6 +290,7 @@ __asm__ __volatile__ (  \
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega406,
     AT90PWM1, AT90PWM2, AT90PWM3,
+    AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287.
     */
 #define WDTO_4S     8
@@ -305,6 +307,7 @@ __asm__ __volatile__ (  \
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega406,
     AT90PWM1, AT90PWM2, AT90PWM3,
+    AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287.
     */
 #define WDTO_8S     9

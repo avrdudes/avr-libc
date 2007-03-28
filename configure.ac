@@ -443,6 +443,9 @@ AM_CONDITIONAL(HAS_at90pwm2, test "x$HAS_at90pwm2" = "xyes")
 CHECK_AVR_DEVICE(at90pwm3)
 AM_CONDITIONAL(HAS_at90pwm3, test "x$HAS_at90pwm3" = "xyes")
 
+CHECK_AVR_DEVICE(at90usb82)
+AM_CONDITIONAL(HAS_at90usb82, test "x$HAS_at90usb82" = "xyes")
+
 # avr5
 AM_CONDITIONAL(HAS_avr5, true)
 AM_CONDITIONAL(HAS_atmega16, true)
@@ -536,6 +539,9 @@ AM_CONDITIONAL(HAS_at90can64, test "x$HAS_at90can64" = "xyes")
 
 CHECK_AVR_DEVICE(at90can128)
 AM_CONDITIONAL(HAS_at90can128, test "x$HAS_at90can128" = "xyes")
+
+CHECK_AVR_DEVICE(at90usb162)
+AM_CONDITIONAL(HAS_at90usb162, test "x$HAS_at90usb162" = "xyes")
 
 CHECK_AVR_DEVICE(at90usb646)
 AM_CONDITIONAL(HAS_at90usb646, test "x$HAS_at90usb646" = "xyes")
@@ -641,6 +647,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr4/at90pwm1/Makefile
 	avr/lib/avr4/at90pwm2/Makefile
 	avr/lib/avr4/at90pwm3/Makefile
+	avr/lib/avr4/at90usb82/Makefile
 ])
 
 #avr5
@@ -682,6 +689,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/at90can32/Makefile
 	avr/lib/avr5/at90can64/Makefile
 	avr/lib/avr5/at90can128/Makefile
+	avr/lib/avr5/at90usb162/Makefile
 	avr/lib/avr5/at90usb646/Makefile
 	avr/lib/avr5/at90usb647/Makefile
 	avr/lib/avr5/at90usb1286/Makefile

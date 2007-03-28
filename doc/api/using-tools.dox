@@ -193,9 +193,11 @@ compiler frontend.
   <tr><td>avr4</td><td>at90pwm1</td><td>__AVR_AT90PWM1__</td></tr>
   <tr><td>avr4</td><td>at90pwm2</td><td>__AVR_AT90PWM2__</td></tr>
   <tr><td>avr4</td><td>at90pwm3</td><td>__AVR_AT90PWM3__</td></tr>
+  <tr><td>avr4</td><td>at90usb82</td><td>__AVR_AT90USB82__</td></tr>
   <tr><td>avr5</td><td>at90can32</td><td>__AVR_AT90CAN32__</td></tr>
   <tr><td>avr5</td><td>at90can64</td><td>__AVR_AT90CAN64__</td></tr>
   <tr><td>avr5</td><td>at90can128</td><td>__AVR_AT90CAN128__</td></tr>
+  <tr><td>avr5</td><td>at90usb162</td><td>__AVR_AT90USB162__</td></tr>
   <tr><td>avr5</td><td>at90usb646</td><td>__AVR_AT90USB646__</td></tr>
   <tr><td>avr5</td><td>at90usb647</td><td>__AVR_AT90USB647__</td></tr>
   <tr><td>avr5</td><td>at90usb1286</td><td>__AVR_AT90USB1286__</td></tr>
