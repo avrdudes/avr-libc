@@ -4,7 +4,7 @@
 	* doc/api/overview.dox (new file): New chapter. Overview of toolchain.
     * doc/api/Makefile.am (EXTRA_DIST): Add the two new .dox files.
 
-2007-04-28 Anatoly Sokolov <aesok@post.ru>
+2007-03-28 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the AT90USB82/162 support.
 	* devtools/gen-avr-lib-tree.sh: Add support for AT90USB82/162.
