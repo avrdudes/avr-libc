@@ -18,6 +18,7 @@
   [#19134] strcasecmp(): result	sign is not changed by swaping args
   [#19135] strstr(): `needle' is not always founded
   [#19280] snprintf(s,0,fmt,...) write to foreign memory: s[-1]
+  [#19281] isblank('\v') return TRUE: mismatch to C99
 
 * New devices supported:
 
