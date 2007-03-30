@@ -1,3 +1,8 @@
+2007-03-30  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/io2343.h: Add missing bit definitions for MCUSR.
+	Fixes WinAVR feature request #1657218.
+
 2007-03-30  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/ctype.S: Fix bug #19281: isblank('\v') return TRUE:

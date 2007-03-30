@@ -129,6 +129,10 @@
 #define    ISC01   1
 #define    ISC00   0
 
+/* MCU Status Register */
+#define PORF    0
+#define EXTRF   1
+
 /* Timer/Counter 0 Control Register */
 #define    CS02    2
 #define    CS01    1
