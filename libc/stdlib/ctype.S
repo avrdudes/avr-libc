@@ -307,8 +307,6 @@ GLOBAL(isblank)
           CPI   rLow,' '           ; blank
           BREQ  2f
           CPI   rLow,0x09    ;'\t' ; tab
-          BREQ  2f
-          CPI   rLow,0x0B    ;'\v' ; vertical tab
           BRNE  1b
 2:
           RET
