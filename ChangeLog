@@ -1,3 +1,13 @@
+2007-03-29  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/doxygen.config.in (INPUT): Add new file to list. Reorder list.
+	* doc/api/pgmspace.dox (new file): New chapter. Data in Program Space.
+	* doc/api/library.dox (new file): New chapter. How to Create a Library.
+	* doc/api/porting.dox: Rewrote the introduction for better flow.
+	* doc/api/Makefile.am (EXTRA_DIST): Add new .dox file.
+	* include/avr/pgmspace.h: Change title of documentation.
+	* doc/api/interrupts.dox: Fix typo. Add missing 3rd clause to license.
+
 2007-03-28  Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* doc/api/doxygen.config.in (INPUT): Add new file to list. Reorder.

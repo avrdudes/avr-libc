@@ -53,7 +53,9 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        faq.dox \
                        rel-method.dox \
                        porting.dox \
-                       overview.dox
+                       overview.dox \
+                       pgmspace.dox \
+                       library.dox 
 
 SUFFIXES             = .pdf .fig .png .eps
 

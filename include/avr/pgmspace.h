@@ -38,7 +38,7 @@
  */
 
 /** \file */
-/** \defgroup avr_pgmspace <avr/pgmspace.h>: Program Space String Utilities
+/** \defgroup avr_pgmspace <avr/pgmspace.h>: Program Space Utilities
     \code
     #include <avr/io.h>
     #include <avr/pgmspace.h>
