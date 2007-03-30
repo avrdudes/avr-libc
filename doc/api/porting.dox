@@ -35,13 +35,14 @@
 
 \section iar_porting_intro Introduction
 
-C language was designed to be a portable language. However there two main types 
-of porting activities, porting an application to a different platform 
-(OS and/or processor), and porting to a different compiler. This process can
-also be exacerbated when porting on an embedded system. For example, the C 
-language Standard, strangely, does not specify a standard for declaring and 
-defining Interrupt Service Routines (ISRs). Different compilers have different
-ways of defining registers, some of which use non-standard language constructs.
+C language was designed to be a portable language. There two main types 
+of porting activities: porting an application to a different platform 
+(OS and/or processor), and porting to a different compiler. Porting to a 
+different compiler can be exacerbated when the application is an embedded 
+system. For example, the C language Standard, strangely, does not specify a 
+standard for declaring and defining Interrupt Service Routines (ISRs). 
+Different compilers have different ways of defining registers, some of which 
+use non-standard language constructs.
 
 This chapter describes some methods and pointers on porting an AVR application
 built with the IAR compiler to the GNU toolchain (AVR GCC). Note that this may 

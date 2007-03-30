@@ -450,14 +450,47 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = @top_srcdir@/include \
+# Individual files are listed here to force a particular order in the 
+# resulting documentation.
+# For the Reference the order is: system headers, avr/ headers, util/ headers,
+# compat/ headers, then demo projects.
+# For the User Manual, it is whatever chapter order seems sensible.
+
+INPUT                  = @top_srcdir@/include/assert.h \
+                         @top_srcdir@/include/ctype.h \
+                         @top_srcdir@/include/errno.h \
+                         @top_srcdir@/include/inttypes.h \
+                         @top_srcdir@/include/math.h \
+                         @top_srcdir@/include/setjmp.h \
+                         @top_srcdir@/include/stdint.h \
+                         @top_srcdir@/include/stdio.h \
+                         @top_srcdir@/include/stdlib.h \
+                         @top_srcdir@/include/string.h \
                          @top_srcdir@/libc \
                          @top_srcdir@/libm \
+                         @top_srcdir@/include/avr/boot.h \
+                         @top_srcdir@/include/avr/eeprom.h \
+                         @top_srcdir@/include/avr/interrupt.h \
+                         @top_srcdir@/doc/api/interrupts.dox \
+                         @top_srcdir@/doc/api/vectortable.dox \
+                         @top_srcdir@/include/avr/pgmspace.h \
+                         @top_srcdir@/include/avr/portpins.h \
+                         @top_srcdir@/include/avr/power.h \
+                         @top_srcdir@/include/avr/sfr_defs.h \
+                         @top_srcdir@/doc/api/sfr.dox \
+                         @top_srcdir@/include/avr/signal.h \
+                         @top_srcdir@/include/avr/sleep.h \
+                         @top_srcdir@/include/avr/version.h.in \
+                         @top_srcdir@/include/avr/wdt.h \
+                         @top_srcdir@/include/util \
+                         @top_srcdir@/include/compat \
                          @top_srcdir@/doc/api/overview.dox \
                          @top_srcdir@/doc/api/malloc.dox \
                          @top_srcdir@/doc/api/sections.dox \
+                         @top_srcdir@/doc/api/pgmspace.dox \
                          @top_srcdir@/doc/api/assembler.dox \
                          @top_srcdir@/doc/api/inline_asm.dox \
+                         @top_srcdir@/doc/api/library.dox \
                          @top_srcdir@/doc/api/porting.dox \
                          @top_srcdir@/doc/api/faq.dox \
                          @top_srcdir@/doc/api/tools-install.dox \
@@ -465,10 +498,7 @@ INPUT                  = @top_srcdir@/include \
                          @top_srcdir@/doc/api/using-avrprog.dox \
                          @top_srcdir@/doc/api/rel-method.dox \
                          @top_srcdir@/doc/api/acknowledge.dox \
-                         @top_srcdir@/doc/api/interrupts.dox \
                          @top_srcdir@/doc/api/main_page.dox \
-                         @top_srcdir@/doc/api/sfr.dox \
-                         @top_srcdir@/doc/api/vectortable.dox \
                          @top_srcdir@/doc/examples \
                          @top_srcdir@/doc/examples/demo \
                          @top_srcdir@/doc/examples/largedemo \
