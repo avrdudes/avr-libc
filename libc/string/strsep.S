@@ -1,4 +1,5 @@
 /* Copyright (c) 2003, 2007 Reiner Patommel
+   Copyright (c) 2007  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -24,87 +25,74 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-
- */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
 /** \file */
 
- /** \ingroup avr_string
-     \fn char *strsep(char **string, const char *delim)
-     \brief Parse a string into tokens.
- 
-     The strsep() function locates, in the string referenced by *string,
-     the first occurrence of any character in the string delim (or the
-     terminating '\\0' character) and replaces it with a '\\0'.  The location
-     of the next character after the delimiter character (or NULL, if the
-     end of the string was reached) is stored in *string. An ``empty''
-     field, i.e. one caused by two adjacent delimiter characters, can be
-     detected by comparing the location referenced by the pointer returned
-     in *string to '\\0'.
-   
-     \returns The strtok_r() function returns a pointer to the original
-     value of *string.  If *stringp is initially NULL, strsep() returns NULL.
- */
+/** \ingroup avr_string
+    \fn char *strsep(char **sp, const char *delim)
+    \brief Parse a string into tokens.
+
+    The strsep() function locates, in the string referenced by \p *sp,
+    the first occurrence of any character in the string \p delim (or the
+    terminating '\\0' character) and replaces it with a '\\0'.  The
+    location of the next character after the delimiter character (or \c
+    NULL, if the end of the string was reached) is stored in \p *sp. An
+    ``empty'' field, i.e. one caused by two adjacent delimiter
+    characters, can be detected by comparing the location referenced by
+    the pointer returned in \p *sp to '\\0'.
+
+    \return The strsep() function returns a pointer to the original
+    value of \p *sp. If \p *sp is initially \c NULL, strsep() returns
+    \c NULL.	*/
      
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
 
-#define p_str_hi	r25
-#define p_str_lo	r24
-#define del_hi		r23
-#define del_lo		r22
-#define str_hi		r21
-#define str_lo		r20
-#define str_c		r19
-#define del_c		r18
+#define strp_lo	r24
+#define dlm_lo	r22
+#define str_lo	r20
+#define chr	r19
+
+#define ret_lo	r24
 
 	.text
 	.global _U(strsep)
 	.type	_U(strsep),@function
+_U(strsep):
+  ; check a NULL pointer
+	X_movw	ZL, strp_lo
+	ld	XL, Z			; str address
+	ldd	XH, Z+1
+	X_movw	str_lo, XL		; save for return
+	adiw	XL, 0
+	breq	5f			; return NULL
+  ; get a symbol from str
+1:	ld	chr, X+
+  ; scan delim[]
+	X_movw	ZL, dlm_lo
+2:	ld	r0, Z+
+	cp	r0, chr
+	cpse	r0, __zero_reg__
+	brne	2b	; if symbol is't match && no delim end
+	brne	1b	; if symbol is absent in delim[] && not a zero
+  ; chr is founded in delim[] (possible, it is a terminating zero of str)
+	tst	r0			; the same, as chr
+	brne	3f
+	X_movw	XL, r0			; __zero_reg__ is r1
+	rjmp	4f
+  ; OK, delimeter symbol is founded
+3:	st	-X, __zero_reg__	; replace by '\0'
+	adiw	XL, 1			; address of next token
+  ; save result to *sp and return
+4:	X_movw	ZL, strp_lo
+	st	Z, XL
+	std	Z+1, XH
+5:	X_movw	ret_lo, str_lo		; return original address
+	ret
 
-_U(strsep):				; Check on NULL pointers
-	X_movw	XL, p_str_lo
-	LD	str_lo, X+
-	LD	str_hi, X		; str = *p_str
-	CP	str_lo, __zero_reg__
-	CPC	str_hi, __zero_reg__	; str == NULL ?
-	BRNE	.L_str_scan_init
-	CLR	p_str_lo
-	CLR	p_str_hi
-	RET				; return(NULL)
-
-.L_str_scan_init:			; scan string
-	X_movw	XL, str_lo		; X = str
-
-.L_scan_str_loop:			; next str char, 1st del char
-	LD	str_c, X+		; str_c = *str++
-	X_movw	ZL, del_lo		; Z = del
-
-.L_scan_del_loop:
-	LD	del_c, Z+		; del_c = *Z
-	CP	del_c, str_c		; if (del_c == str_c)
-	BRNE	3f
-	TST	str_c			; end of str ?
-	BRNE	1f
-	CLR	XL
-	CLR	XH			; str = NULL
-	RJMP	2f
-1:	ST	-X, __zero_reg__	; str[-1] = \0
-	ADIW	XL, 1			; undo auto decrement
-2:	X_movw	ZL, p_str_lo
-	ST	Z+, XL
-	ST	Z, XH			; *string = str
-	X_movw	p_str_lo, str_lo 
-	RET				; return(token)
-3:	TST	del_c			; end of del string ?
-	BRNE	.L_scan_del_loop	; next del char, same str_char
-	RJMP	.L_scan_str_loop	; next str char, 1st del char
-
-.L_strsep_end:
-	.size	_U(strsep), .L_strsep_end - _U(strsep)
-
+	.size	_U(strsep), . - _U(strsep)
 #endif /* not __DOXYGEN__ */
