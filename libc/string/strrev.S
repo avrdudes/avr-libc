@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2007 Reiner Patommel
+   Copyright (c) 2007  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -35,17 +36,10 @@
    Contributors:
      Created by Reiner Patommel
 */
-#include "macros.inc"
-
-#define str_hi r25
-#define str_lo r24
-#define ltemp  r23
-#define rtemp  r22
-
 /** \file */
 
 /** \ingroup avr_string
-    \fn char *strrev(char *string)
+    \fn char *strrev(char *s)
     \brief Reverse a string.
 
     The strrev() function reverses the order of the string.
@@ -55,6 +49,13 @@
 
 #if !defined(__DOXYGEN__)
 
+#include "macros.inc"
+
+#define str_hi r25
+#define str_lo r24
+#define ltemp  r23
+#define rtemp  r22
+
     .text
     .global _U(strrev)
     .type   _U(strrev), @function
@@ -62,24 +63,24 @@
 _U(strrev):
 	X_movw	XL, str_lo	; X is start of string
 	X_movw	ZL, str_lo	; Z becomes end of string
-.L_strrev_eos:
-	LD    __tmp_reg__, Z+
-	TST   __tmp_reg__
-	BRNE  .L_strrev_eos
-	SBIW  ZL, 2				; now Z points at end of string
-.L_strrev_loop:
-	CP    XL, ZL
-	CPC   XH, ZH			; if X >= Z we are done
-	BRSH  .L_strrev_done
-	LD    ltemp, X          ; get left character
-	LD    rtemp, Z			; get right character
-	ST    Z, ltemp
-	SBIW  ZL, 1
-	ST    X+, rtemp			; swap chars
-	RJMP  .L_strrev_loop		; next pair
-.L_strrev_done:
-    RET
-.L_strrev_end:
-	.size _U(strrev), .L_strrev_end - _U(strrev)
+  ; find end of string
+1:	mov	rtemp, ltemp	; to obtain right nonzero character
+	ld	ltemp, Z+
+	tst	ltemp
+	brne	1b
+	sbiw	ZL, 2		; to last nonzero byte
+	rjmp	3f
+  ; swap bytes
+2:	ld	ltemp, X
+	st	X+, rtemp
+	st	Z, ltemp
+	ld	rtemp, -Z
+3:	cp	XL, ZL
+	cpc	XH, ZH
+	brlo	2b
+	
+	ret
+
+    .size _U(strrev), . - _U(strrev)
 
 #endif /* not __DOXYGEN__ */
