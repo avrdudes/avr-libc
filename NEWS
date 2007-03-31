@@ -42,7 +42,14 @@
 * New functions:
 
   memcmp_P
+  memmem
+  memrchr
+  strcasestr
+  strchrnul
   strchr_P
+  strcspn
+  strpbrk
+  strspn
 
 * Optimized functions:
 
@@ -50,7 +57,11 @@
   atol
   strchr
   strcmp, strcmp_P
+  strlwr
+  strrev
+  strsep
   strstr, strstr_P
+  strupr
 
 *** Changes in avr-libc-1.4.5:
 
