@@ -1,3 +1,36 @@
+2007-03-31  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Sync string functions with MAIN branch.
+
+	* common/asmdef.h: New file.
+	* libc/string/memmem.S: New file.
+	* libc/string/memmem_P.S: New file.
+	* libc/string/memrchr.S: New file.
+	* libc/string/strcasestr.S: New file.
+	* libc/string/strcasestr_P.S: New file.
+	* libc/string/strchrnul.S: New file.
+	* libc/string/strcspn.S: New file.
+	* libc/string/strpbrk.S: New file.
+	* libc/string/strspn.S: New file.
+
+	* include/string.h: Add new functions: memmem(), memrchr(),
+	strchrnul(), strcasestr(), strcspn(), strpbrk(), strspn().
+	* libc/string/Files.am: Add new sources: memmem.S, memmem_P.S,
+	memrchr.S, strcasestr.S, strcasestr_P.S, strchrnul.S, strcspn.S,
+	strpbrk.S, strspn.S .
+
+	* libc/string/strlwr.S: Optimize size and speed.
+	* libc/string/strrev.S: Optimize speed for strings 4 bytes long
+	and more. Size is the same.
+	* libc/string/strsep.S: Optimize size and speed. Correct DOXYGEN.
+	* libc/string/strstr.S: Optimize: reduce size by 1..2 words.
+	* libc/string/strupr.S: Optimize size and speed.
+
+	* libc/string/strcasecmp.S: Cosmetic improvement of DOXYGEN comment.
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/string/strchr.S: (Ditto.)
+	* libc/string/strcmp.S: (Ditto.)
+
 2007-03-30  Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* include/avr/io2343.h: Add missing bit definitions for MCUSR.
