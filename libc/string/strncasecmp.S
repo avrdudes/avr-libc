@@ -36,6 +36,24 @@
    Contributors:
      Created by Reiner Patommel
 */
+/** \file */
+
+/** \ingroup avr_string
+    \fn int strncasecmp(const char *s1, const char *s2, size_t len)
+    \brief Compare two strings ignoring case.
+
+    The strncasecmp() function is similar to strcasecmp(), except it
+    only compares the first \p len characters of \p s1.
+
+    \returns The strncasecmp() function returns an integer less than,
+    equal to, or greater than zero if \p s1 (or the first \p len bytes
+    thereof) is found, respectively, to be less than, to match, or be
+    greater than \p s2. A consequence of the ordering used by
+    strncasecmp() is that if \p s1 is an initial substring of \p s2,
+    then \p s1 is considered to be "less than" \p s2.  */
+
+#if !defined(__DOXYGEN__)
+
 #include "macros.inc"
 
 #define s1_hi	r25
@@ -48,23 +66,6 @@
 #define tmp	r22
 #define ret_hi	r25
 #define ret_lo	r24
-
-/** \file */
-
-/** \ingroup avr_string
-    \fn int strncasecmp(const char *s1, const char *s2, size_t len)
-    \brief Compare two strings ignoring case.
-
-    The strncasecmp() function is similar to strcasecmp(), except it only
-    compares the first n characters of s1.
-
-    \returns The strncasecmp() function returns an integer less than, equal to,
-    or greater than zero if s1 (or the first n bytes thereof) is found,
-    respectively, to be less than, to match, or be greater than s2. A
-    consequence of the ordering used by strncasecmp() is that if s1 is an
-    initial substring of s2, then s1 is considered to be "less than" s2.  */
-
-#if !defined(__DOXYGEN__)
 
 	.text
 	.global	_U(strncasecmp)
