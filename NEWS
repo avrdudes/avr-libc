@@ -41,15 +41,18 @@
 
 * New functions:
 
+  memchr_P
   memcmp_P
-  memmem
-  memrchr
-  strcasestr
-  strchrnul
+  memmem, memmem_P
+  memrchr, memrchr_P
+  strcasestr, strcasestr_P
+  strchrnul, strchrnul_P
   strchr_P
-  strcspn
-  strpbrk
-  strspn
+  strcspn, strcspn_P
+  strpbrk, strpbrk_P
+  strrchr_P
+  strsep_P
+  strspn, strspn_P
 
 * Optimized functions:
 
