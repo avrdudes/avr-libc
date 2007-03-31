@@ -1,5 +1,33 @@
 2007-03-31  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Sync pmstring functions with MAIN branch.
+
+	* libc/pmstring/memchr_P.S: New file.
+	* libc/pmstring/memrchr_P.S: New file.
+	* libc/pmstring/strchrnul_P.S: New file.
+	* libc/pmstring/strcspn_P.S: New file.
+	* libc/pmstring/strpbrk_P.S: New file.
+	* libc/pmstring/strrchr_P.S: New file.
+	* libc/pmstring/strsep_P.S: New file.
+	* libc/pmstring/strspn_P.S: New file.
+
+	* include/avr/pgmspace.h: Add new functions: memchr_P(), memmem_P(),
+	memrchr_P(), strchrnul_P(), strcasestr_P(), strcspn_P(), strpbrk_P(),
+	strrchr_P(), strsep_P(), strspn_P().
+	* libc/pmstring/Files.am: Add new sources: memchr_P.S, memrchr_P.S,
+	strchrnul_P.S, strcspn_P.S, strpbrk_P.S, strrchr_P.S, strsep_P.S,
+	strspn_P.S
+
+	* libc/pmstring/strstr_P.S: Optimize: reduce size by 1..2 words.
+
+	* libc/pmstring/memcmp_P.S: Cosmetic improvement of DOXYGEN comment.
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strchr_P.S: (Ditto.)
+	* libc/pmstring/strcmp_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+
+2007-03-31  Dmitry Xmelkov  <dmix@gmail.ru>
+
 	Sync string functions with MAIN branch.
 
 	* common/asmdef.h: New file.
