@@ -43,13 +43,13 @@
     \fn char *strstr(const char *s1, const char *s2)
     \brief Locate a substring.
 
-    The strstr() function finds the first occurrence of the substring \c s2
-    in the string \c s1.  The terminating '\\0' characters are not
+    The strstr() function finds the first occurrence of the substring \p
+    s2 in the string \p s1.  The terminating '\\0' characters are not
     compared.
 
-    \returns The strstr() function returns a pointer to the beginning of the
-    substring, or NULL if the substring is not found.
-    If s2 points to a string of zero length, the function returns s1. */
+    \returns The strstr() function returns a pointer to the beginning of
+    the substring, or \c NULL if the substring is not found. If \p s2
+    points to a string of zero length, the function returns \p s1. */
 
 #if !defined(__DOXYGEN__)
 
@@ -64,9 +64,6 @@
 #define	beg2   r21	/* begin of s2: s2[0]	*/
 #define chr2   r0
 
-#define ret_hi r25
-#define ret_lo r24
-
 .text
 .global _U(strstr)
 .type _U(strstr), @function
@@ -78,7 +75,7 @@ _U(strstr):
 	breq	.L_ret		; return original string (req'd by standard)
 	X_movw	s2_lo, ZL	; save: address of second s2 byte
 
-	X_movw	XL, s1_lo
+0:	X_movw	XL, s1_lo
 
 1:	ld	chr1, X+	; Find first char
 	cp	chr1, beg2
@@ -86,7 +83,7 @@ _U(strstr):
 	brne	1b
 
 	brne	.L_no_match	; end of s1
-	X_movw	ret_lo, XL	; store return value
+	X_movw	s1_lo, XL	; store return value
 
 2:	ld	chr2, Z+	; compare strings
 	tst	chr2
@@ -96,16 +93,15 @@ _U(strstr):
 	cpse	chr1, __zero_reg__	; break, if end of s1
 	breq	2b
 
-	X_movw	XL, ret_lo	; go back
 	X_movw	ZL, s2_lo	; restore s2+1
 	cpse	chr1, __zero_reg__
-	rjmp	1b
+	rjmp	0b
 
 .L_no_match:
-	ldi	ret_lo, lo8(1)
-	ldi	ret_hi, hi8(1)
+	ldi	s1_lo, lo8(1)
+	ldi	s1_hi, hi8(1)
 .L_match:
-	sbiw	ret_lo, 1	; restore after post-increment
+	sbiw	s1_lo, 1	; restore after post-increment
 .L_ret:
 	ret
 
