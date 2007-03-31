@@ -39,13 +39,20 @@ string_a_asm_sources = \
 	memchr.S \
 	memcmp.S \
 	memcpy.S \
+	memmem.S \
+	memmem_P.S \
 	memmove.S \
+	memrchr.S \
 	memset.S \
 	strcasecmp.S \
+	strcasestr.S \
+	strcasestr_P.S \
 	strcat.S \
 	strchr.S \
+	strchrnul.S \
 	strcmp.S \
 	strcpy.S \
+	strcspn.S \
 	strlcat.S \
 	strlcpy.S \
 	strlen.S \
@@ -55,9 +62,11 @@ string_a_asm_sources = \
 	strncmp.S \
 	strncpy.S \
 	strnlen.S \
+	strpbrk.S \
 	strrchr.S \
 	strrev.S \
 	strsep.S \
+	strspn.S \
 	strstr.S \
 	strtok_r.S \
 	strupr.S
