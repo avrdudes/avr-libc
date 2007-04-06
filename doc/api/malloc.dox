@@ -25,12 +25,9 @@
 
 /* $Id$ */
 
-/** \page malloc Using malloc()
+/** \page malloc Memory Areas and Using malloc()
 
 \section malloc_intro Introduction
-
-On a simple device like a microcontroller, implementing dynamic memory
-allocation is quite a challenge.
 
 Many of the devices that are possible targets of avr-libc have a minimal
 amount of RAM.  The smallest parts supported by the C environment come
@@ -66,12 +63,12 @@ The memory addresses used are not displayed in a linear scale.
 \image html malloc-std.png "RAM map of a device with internal RAM"
 \image latex malloc-std.eps "RAM map of a device with internal RAM" width=7.5cm
 
-Finally, there's a challenge to make the memory allocator simple enough
-so the code size requirements will remain low, yet
-powerful enough to avoid unnecessary memory fragmentation and to get
-it all done with reasonably few CPU cycles since microcontrollers
-aren't only often low on space, but also run at much lower speeds than
-the typical PC these days.
+On a simple device like a microcontroller it is a challenge to implement a
+dynamic memory allocator that is simple enough so the code size requirements 
+will remain low, yet powerful enough to avoid unnecessary memory fragmentation 
+and to get it all done with reasonably few CPU cycles. Microcontrollers
+are often low on space and also run at much lower speeds than the typical PC 
+these days.
 
 The memory allocator implemented in avr-libc tries to cope with all of
 these constraints, and offers some tuning options that can be used if

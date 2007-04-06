@@ -1,3 +1,7 @@
+2007-04-05  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/malloc.dox: Change title and reorder sentences in Introduction.
+
 2007-03-31  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Sync pmstring functions with MAIN branch.
