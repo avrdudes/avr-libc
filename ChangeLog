@@ -1,3 +1,7 @@
+2007-04-05  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/malloc.dox: Change title and reorder sentences in Introduction.
+
 2007-03-30  Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* include/avr/io2343.h: Add missing bit definitions for MCUSR.
