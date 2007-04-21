@@ -19,6 +19,7 @@
   [#19135] strstr(): `needle' is not always founded
   [#19280] snprintf(s,0,fmt,...) write to foreign memory: s[-1]
   [#19281] isblank('\v') return TRUE: mismatch to C99
+  [#19650] avr-libc: wrong named bit in SFR of AT90PWMx
 
 * New devices supported:
 

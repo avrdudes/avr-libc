@@ -371,6 +371,8 @@
 #define PLLCSR  _SFR_IO8(0x29)
 /* PLLCSR */
 #define PCKE    2   /* PCK Enable */
+/* Bit 2 has been renamed in later versions of the datasheet. */
+#define PLLF    2   /* PLL Factor */
 #define PLLE    1   /* PLL Enable */
 #define PLOCK   0   /* PLL Lock Detector */
 

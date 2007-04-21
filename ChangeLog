@@ -1,3 +1,9 @@
+2007-04-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io90pwm3.h: Change bit 2 of PLLCSR from
+	PCKE to PLLF.
+	Fixes savannah bug #19650: avr-libc: wrong named bit in SFR of AT90PWMx
+
 2007-04-05  Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* doc/api/malloc.dox: Change title and reorder sentences in Introduction.
