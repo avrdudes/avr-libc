@@ -49,6 +49,7 @@
            iom*.h)
   [#18915] PWM1X Bit missing for ATtiny261/461/861
   [#19060] PCMSKx registers transposed in header for attinyX61
+  [#19650] avr-libc: wrong named bit in SFR of AT90PWMx
 
 * Other changes:
 
