@@ -1,3 +1,10 @@
+2007-04-27  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Move AT90USB82 device to 'avr5' architecture.
+	* devtools/gen-avr-lib-tree.sh: (Ditto.).
+	* doc/api/using-tools.dox: (Ditto.).
+	* include/avr/iousbxx2.h (_VECTORS_SIZE): Redefine for AT90USB82.
+
 2007-04-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/io90pwm3.h: Change bit 2 of PLLCSR from
@@ -32,7 +39,7 @@
 
 	* doc/api/doxygen.config.in (INPUT): Add new file to list. Reorder.
 	* doc/api/overview.dox (new file): New chapter. Overview of toolchain.
-    * doc/api/Makefile.am (EXTRA_DIST): Add the two new .dox files.
+	* doc/api/Makefile.am (EXTRA_DIST): Add the two new .dox files.
 
 2007-03-28 Anatoly Sokolov <aesok@post.ru>
 
