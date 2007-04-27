@@ -647,7 +647,6 @@ AC_CONFIG_FILES([
 	avr/lib/avr4/at90pwm1/Makefile
 	avr/lib/avr4/at90pwm2/Makefile
 	avr/lib/avr4/at90pwm3/Makefile
-	avr/lib/avr4/at90usb82/Makefile
 ])
 
 #avr5
@@ -689,6 +688,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/at90can32/Makefile
 	avr/lib/avr5/at90can64/Makefile
 	avr/lib/avr5/at90can128/Makefile
+	avr/lib/avr5/at90usb82/Makefile
 	avr/lib/avr5/at90usb162/Makefile
 	avr/lib/avr5/at90usb646/Makefile
 	avr/lib/avr5/at90usb647/Makefile

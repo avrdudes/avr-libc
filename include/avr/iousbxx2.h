@@ -761,10 +761,6 @@
 /* Store Program Memory Read */
 #define SPM_READY_vect			_VECTOR(28)
 
-#if defined (__AVR_AT90USB162__)
-#  define _VECTORS_SIZE 116
-#else
-#  define _VECTORS_SIZE 58
-#endif
+#define _VECTORS_SIZE 116
 
 #endif  /* _AVR_IOUSBXX2_H_ */
