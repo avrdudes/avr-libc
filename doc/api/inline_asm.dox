@@ -39,7 +39,7 @@
 
 */
 
-/** \page inline_asm Inline Asm
+/** \page inline_asm Inline Assembler Cookbook
 
 AVR-GCC<br>
 Inline Assembler Cookbook

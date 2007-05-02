@@ -36,7 +36,7 @@
 
 Welcome to the open source software development toolset for the Atmel AVR!
 
-There is not a single tool that provides everything neede to develop software
+There is not a single tool that provides everything needed to develop software
 for the AVR. It takes many tools working together. Collectively, the group of
 tools are called a toolset, or commonly a toolchain, as the tools are chained
 together to produce the final executable application for the AVR 
@@ -74,7 +74,8 @@ projects were designed to originally run on Unix-like systems.
 GCC stands for GNU Compiler Collection. GCC is highly flexible compiler system. 
 It has different compiler front-ends for different languages. It has many
 back-ends that generate assembly code for many different processors and host
-operating systems.
+operating systems. All share a common "middle-end", containing the generic 
+parts of the compiler, including a lot of optimizations.
 
 In GCC, a \c host system is the system (processor/OS) that the compiler
 runs on. A \c target system is the system that the compiler compiles code for.
@@ -93,8 +94,8 @@ used to refer to something generic about GCC, or about GCC as a whole.
 
 GCC is different from most other compilers. GCC focuses on translating a
 high-level language to the target assembly only. AVR GCC has three available
-compilers for the AVR: C language, C++, and Ada. GCC does not assemble or
-link the final code.
+compilers for the AVR: C language, C++, and Ada. The compiler itself does not 
+assemble or link the final code.
 
 GCC is also known as a "driver" program, in that it knows about, and drives
 other programs seamlessly to create the final output. The assembler, and the
@@ -178,7 +179,7 @@ for some other embedded system (newlib), or for some versions of Linux (uCLibc).
 The open source AVR toolchain has its own Standard C Library project: avr-libc.
 
 AVR-Libc provides many of the same functions found in a regular Standard C
-Library and many additional library functions that are specific to an AVR. Some
+Library and many additional library functions that is specific to an AVR. Some
 of the Standard C Library functions that are commonly used on a PC environment
 have limitations or additional issues that a user needs to be aware of when 
 used on an embedded system.
@@ -203,34 +204,35 @@ that you can copy and modify for your application.
 See the GNU Make User Manual for more information.
 
 
-\section overview_avrdude avrdude
+\section overview_avrdude AVRDUDE
 
 After creating your software, you'll want to program your device. You can do
-this by using the program avrdude which can interface with various hardware 
+this by using the program AVRDUDE which can interface with various hardware 
 devices to program your processor.
 
-avrdude is a very flexible package. All the information about AVR processors
+AVRDUDE is a very flexible package. All the information about AVR processors
 and various hardware programmers is stored in a text database. This database
 can be modified by any user to add new hardware or to add an AVR processor
 if it is not already listed.
 
 
-\section overview_gdb_insight GDB / Insight
+\section overview_gdb_insight_ddd GDB / Insight / DDD
 
 The GNU Debugger (GDB) is a command-line debugger that can be used with
 the rest of the AVR toolchain. Insight is GDB plus a GUI written in Tcl/Tk. 
 Both GDB and Insight are configured for the AVR and the main executables are 
 prefixed with the target name: avr-gdb, and avr-insight. 
-There is also a "text mode" GUI for GDB: avr-gdbtui.
+There is also a "text mode" GUI for GDB: avr-gdbtui. DDD (Data Display Debugger) 
+is another popular GUI front end to GDB, available on Unix and Linux systems.
 
 
-\section overview_avarice avarice
+\section overview_avarice AVaRICE
 
 AVaRICE is a back-end program to AVR GDB and interfaces to the Atmel JTAG
 In-Circuit Emulator (ICE), to provide emulation capabilities.
 
 
-\section overview_simulavr simulavr
+\section overview_simulavr SimulAVR
 
 SimulAVR is an AVR simulator used as a back-end with AVR GDB. Unfortunately,
 this project is currently unmaintained and could use some help.
