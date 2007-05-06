@@ -35,24 +35,28 @@
 
 #include <avr/io.h>
 
-/** \file */
+/** 
+\file 
+\@{ 
+*/
+
+
 /** \name Global manipulation of the interrupt flag
 
     The global interrupt flag is maintained in the I bit of the status
-    register (SREG). */
-
-/*@{*/
+    register (SREG). 
+*/
 
 #if defined(__DOXYGEN__)
 /** \def sei()
     \ingroup avr_interrupts
 
-    \code#include <avr/interrupt.h>\endcode
+    \code #include <avr/interrupt.h> \endcode
 
     Enables interrupts by setting the global interrupt mask. This function
     actually compiles into a single line of assembly, so there is no function
     call overhead. */
-extern void sei(void);
+#define sei()
 #else  /* !DOXYGEN */
 # define sei()  __asm__ __volatile__ ("sei" ::)
 #endif /* DOXYGEN */
@@ -61,27 +65,25 @@ extern void sei(void);
 /** \def cli()
     \ingroup avr_interrupts
 
-    \code#include <avr/interrupt.h>\endcode
+    \code #include <avr/interrupt.h> \endcode
 
     Disables all interrupts by clearing the global interrupt mask. This function
     actually compiles into a single line of assembly, so there is no function
     call overhead. */
-extern void cli(void);
+#define cli()
 #else  /* !DOXYGEN */
 # define cli()  __asm__ __volatile__ ("cli" ::)
 #endif /* DOXYGEN */
 
-/*@}*/
 
 /** \name Macros for writing interrupt handler functions */
 
-/*@{*/
 
 #if defined(__DOXYGEN__)
 /** \def ISR(vector)
     \ingroup avr_interrupts
 
-    \code#include <avr/interrupt.h>\endcode
+    \code #include <avr/interrupt.h> \endcode
 
     Introduces an interrupt handler function (interrupt service
     routine) that runs with global interrupts initially disabled.
@@ -114,13 +116,13 @@ void vector (void)
 /** \def SIGNAL(vector)
     \ingroup avr_interrupts
 
-    \code#include <avr/interrupt.h>\endcode
+    \code #include <avr/interrupt.h> \endcode
 
     Introduces an interrupt handler function that runs with global interrupts
     initially disabled.
 
     This is the same as the ISR macro.
-    \deprecated Do not use anymore in new code.
+    \deprecated Do not use SIGNAL() in new code. Use ISR() instead.
 */
 #  define SIGNAL(vector)
 #else  /* real code */
@@ -141,7 +143,7 @@ void vector (void)
 /** \def EMPTY_INTERRUPT(vector)
     \ingroup avr_interrupts
 
-    \code#include <avr/interrupt.h>\endcode
+    \code #include <avr/interrupt.h> \endcode
 
     Defines an empty interrupt handler function. This will not generate
     any prolog or epilog code and will only return from the ISR. Do not
@@ -172,7 +174,7 @@ void vector (void) { __asm__ __volatile__ ("reti" ::); }
 /** \def ISR_ALIAS(vector, target_vector)
     \ingroup avr_interrupts
 
-    \code#include <avr/interrupt.h>\endcode
+    \code #include <avr/interrupt.h> \endcode
 
     Defines \c vector to point to the same interrupt vector as
     \c target_vector.  That way, a single interrupt vector
@@ -191,7 +193,8 @@ void vector (void) { __asm__ __volatile__ ("reti" ::); }
     }
 
     ISR_ALIAS(INT1_vect, INT0_vect);
-    \endcode */
+    \endcode 
+*/
 #define ISR_ALIAS(vector, target_vector)
 #else /* real code */
 
@@ -204,14 +207,6 @@ void vector (void) { __asm__ __volatile__ ("reti" ::); }
 #endif /* DOXYGEN */
 
 
-/*@}*/
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-}
-#endif
+/* \@} */
 
 #endif
