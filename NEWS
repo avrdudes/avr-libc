@@ -51,6 +51,7 @@
   [#19060] PCMSKx registers transposed in header for attinyX61
   [#19495] <avr/interrupts.h> documentation: fix inclusion of cli and sei macros
   [#19650] avr-libc: wrong named bit in SFR of AT90PWMx
+  [#19666] AT90PWMx: Another patch for the include file (missing SFR)
 
 * Other changes:
 
