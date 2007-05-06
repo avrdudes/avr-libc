@@ -1,5 +1,9 @@
 2007-05-05  Eric B. Weddington <eweddington@cso.atmel.com>
 
+	* doc/examples/asmdemo/asmdemo.dox: Fix HTML code in source code links.
+
+2007-05-05  Eric B. Weddington <eweddington@cso.atmel.com>
+
 	Fix bug #19495.
 	* include/avr/interrupt.h: Fix doxygen stuff, whitespace, remove unused
 	C++ stuff at the end.
