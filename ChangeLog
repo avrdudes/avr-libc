@@ -1,3 +1,8 @@
+2007-05-06  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix bug #19666:
+	* include/avr/io90pwmx.h: Add ADHSM, ADTS3 bits to the ADCSRB register.
+
 2007-05-05  Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* doc/examples/asmdemo/asmdemo.dox: Fix HTML code in source code links.

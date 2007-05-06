@@ -562,6 +562,8 @@
 /* ADC Control and Status Register B */
 #define ADCSRB  _SFR_MEM8(0x7B)
 /* ADCSRB */
+#define ADHSM   7   /* ADC High Speed Mode */
+#define ADTS3   3   /* ADC Auto Trigger Source 3 */
 #define ADTS2   2   /* ADC Auto Trigger Source 2 */
 #define ADTS1   1   /* ADC Auto Trigger Source 1 */
 #define ADTS0   0   /* ADC Auto Trigger Source 0 */
