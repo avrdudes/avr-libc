@@ -220,7 +220,7 @@ value.
   <li><a href="../examples/asmdemo/asmdemo.c">asmdemo.c</a></li>
   <li><a href="../examples/asmdemo/project.h">project.h</a></li>
   <li><a href="../examples/asmdemo/isrs.S">isrs.S</a></li>
-</li>
+</ul>
 \endhtmlonly
 
 \latexonly
