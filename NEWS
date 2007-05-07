@@ -93,6 +93,11 @@
 
   - Include an alphabetical index of all globals (functions,
     macros, types, variables) into the documentation.
+    
+  - Added 'avr25' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
+    supported for AT86RF401, ATtiny13, ATtiny2313, ATtiny24, ATtiny25, 
+    ATtiny261, ATtiny44, ATtiny45, ATtiny461, ATtiny84, ATtiny85 and 
+    ATtiny861 devices. GCC 4.2 or above is necessary to use this. 
 
 * New devices supported:
 

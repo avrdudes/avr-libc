@@ -1,3 +1,10 @@
+2007-05-07  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add 'avr25' architecture.
+	* devtools/gen-avr-lib-tree.sh (AVR_ARH_INFO): Ditto.
+	(AVR25_DEV_INFO): New.
+	* doc/api/using-tools.dox: Document 'avr25'.
+
 2007-05-06  Eric B. Weddington <eweddington@cso.atmel.com>
 
 	Fix bug #19666:
