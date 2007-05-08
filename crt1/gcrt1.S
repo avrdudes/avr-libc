@@ -196,6 +196,7 @@ __do_copy_data:
 #endif /* !__AVR_ASM_ONLY__ */
 
 	.section .init9,"ax",@progbits
-	XJMP	main
+	XCALL	main
+	XJMP	exit
 ;	.endfunc
 
