@@ -48,6 +48,7 @@
   [#18903] ATmega644 register definitions for SPI and PRR (datasheet vs. 
            iom*.h)
   [#18915] PWM1X Bit missing for ATtiny261/461/861
+  [#19050] gcrt1.S should call main rather than jumping to it
   [#19060] PCMSKx registers transposed in header for attinyX61
   [#19495] <avr/interrupts.h> documentation: fix inclusion of cli and sei macros
   [#19650] avr-libc: wrong named bit in SFR of AT90PWMx

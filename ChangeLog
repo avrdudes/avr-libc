@@ -1,3 +1,9 @@
+2007-05-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #19050: gcrt1.S should call main rather than jumping to it
+	* crt1/gcrt1.S: call main() rather than jumping to it, and then
+	jump to exit().
+
 2007-05-07  Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add 'avr25' architecture.
