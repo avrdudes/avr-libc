@@ -1,5 +1,13 @@
 2007-05-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Fix bug #19445: _malloc_heap_end does not follow _heap_end on m2561
+	* doc/api/malloc-std.fig: Clearly distinguish library-internal
+	variables from absolute symbols added by the linker.
+	* doc/api/malloc-x1.fig: (Ditto.)
+	* doc/api/malloc-x2.fig: (Ditto.)
+
+2007-05-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Fix bug #19841: Error building 1.4 HEAD: undefined reference to 'exit'
 	* doc/api/Makefile.am (DEMO_LIBS): add exit.o to the list of files to
 	link the demo against.
