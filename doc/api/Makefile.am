@@ -63,7 +63,7 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` -name crtm8.o | head -n 1)
+DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` \( -name crtm8.o -o -name exit.o \) -print | grep avr4)
 DEMO_INC             = $(shell cd $(top_srcdir) && echo "-I`pwd`/include")
 
 # All demo projects where we need to run "make dox" beforehand.
