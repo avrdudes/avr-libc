@@ -1,3 +1,9 @@
+2007-05-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #19841: Error building 1.4 HEAD: undefined reference to 'exit'
+	* doc/api/Makefile.am (DEMO_LIBS): add exit.o to the list of files to
+	link the demo against.
+
 2007-05-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fix bug #19050: gcrt1.S should call main rather than jumping to it
