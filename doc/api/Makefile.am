@@ -64,6 +64,9 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
 DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` \( -name crtm8.o -o -name exit.o \) -print | grep avr4)
+# As avr-gcc must have been installed already, we can reference its
+# library by a -l option.
+DEMO_LIBS            += -lgcc
 DEMO_INC             = $(shell cd $(top_srcdir) && echo "-I`pwd`/include")
 
 # All demo projects where we need to run "make dox" beforehand.
@@ -72,8 +75,7 @@ DEMOS                = demo largedemo stdiodemo
 all-local: ps html pdf
 
 # Before we can build the dox, we need to build the demo project so that some
-# included files get generated. This could fail if crts2313.o is neither built
-# nor installed, but there's not much we can do about that.
+# included files get generated.
 demo:
 	if test -n "$(DEMO_LIBS)" ; then \
 		NODEFLIBS="-nostartfiles -nodefaultlibs" ; \
