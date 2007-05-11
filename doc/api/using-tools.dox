@@ -161,25 +161,25 @@ compiler frontend.
   <tr><td>avr2</td><td>at90s2333</td><td>__AVR_AT90S2333__</td></tr>
   <tr><td>avr2</td><td>at90s2343</td><td>__AVR_AT90S2343__</td></tr>
   <tr><td>avr2</td><td>attiny22</td><td>__AVR_ATtiny22__</td></tr>
-  <tr><td>avr2</td><td>attiny24</td><td>__AVR_ATtiny24__</td></tr>
-  <tr><td>avr2</td><td>attiny25</td><td>__AVR_ATtiny25__</td></tr>
   <tr><td>avr2</td><td>attiny26</td><td>__AVR_ATtiny26__</td></tr>
-  <tr><td>avr2</td><td>attiny261</td><td>__AVR_ATtiny261__</td></tr>
-  <tr><td>avr2</td><td>attiny44</td><td>__AVR_ATtiny44__</td></tr>
-  <tr><td>avr2</td><td>attiny45</td><td>__AVR_ATtiny45__</td></tr>
-  <tr><td>avr2</td><td>attiny461</td><td>__AVR_ATtiny461__</td></tr>
-  <tr><td>avr2</td><td>attiny84</td><td>__AVR_ATtiny84__</td></tr>
-  <tr><td>avr2</td><td>attiny85</td><td>__AVR_ATtiny85__</td></tr>
-  <tr><td>avr2</td><td>attiny861</td><td>__AVR_ATtiny861__</td></tr>
   <tr><td>avr2</td><td>at90s4414</td><td>__AVR_AT90S4414__</td></tr>
   <tr><td>avr2</td><td>at90s4433</td><td>__AVR_AT90S4433__</td></tr>
   <tr><td>avr2</td><td>at90s4434</td><td>__AVR_AT90S4434__</td></tr>
   <tr><td>avr2</td><td>at90s8515</td><td>__AVR_AT90S8515__</td></tr>
   <tr><td>avr2</td><td>at90c8534</td><td>__AVR_AT90C8534__</td></tr>
   <tr><td>avr2</td><td>at90s8535</td><td>__AVR_AT90S8535__</td></tr>
-  <tr><td>avr2</td><td>at86rf401</td><td>__AVR_AT86RF401__</td></tr>
-  <tr><td>avr2</td><td>attiny13</td><td>__AVR_ATtiny13__</td></tr>
-  <tr><td>avr2</td><td>attiny2313</td><td>__AVR_ATtiny2313__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>at86rf401</td><td>__AVR_AT86RF401__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13</td><td>__AVR_ATtiny13__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny2313</td><td>__AVR_ATtiny2313__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny24</td><td>__AVR_ATtiny24__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny25</td><td>__AVR_ATtiny25__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny261</td><td>__AVR_ATtiny261__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny44</td><td>__AVR_ATtiny44__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny45</td><td>__AVR_ATtiny45__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny461</td><td>__AVR_ATtiny461__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84</td><td>__AVR_ATtiny84__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny85</td><td>__AVR_ATtiny85__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861</td><td>__AVR_ATtiny861__</td></tr>
   <tr><td>avr3</td><td>atmega103</td><td>__AVR_ATmega103__</td></tr>
   <tr><td>avr3</td><td>atmega603</td><td>__AVR_ATmega603__</td></tr>
   <tr><td>avr3</td><td>at43usb320</td><td>__AVR_AT43USB320__</td></tr>
@@ -240,6 +240,9 @@ compiler frontend.
   <tr><td>avr6</td><td>atmega2561</td><td>__AVR_ATmega2561__</td></tr>
 
   </table>
+  </p>
+  <p>
+  [1] 'avr25' architecture is new in GCC 4.2
   </p>
 
 - \c -morder1
