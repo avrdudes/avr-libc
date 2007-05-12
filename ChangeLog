@@ -1,3 +1,7 @@
+2007-05-12  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iousbxx2.h: Change PORTxy to Pxy.
+
 2007-05-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fix bug #19445: _malloc_heap_end does not follow _heap_end on m2561

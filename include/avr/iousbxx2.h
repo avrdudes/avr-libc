@@ -72,14 +72,14 @@
 #define DDB0    0
 
 #define PORTB   _SFR_IO8(0x05)
-#define PORTB7  7
-#define PORTB6  6
-#define PORTB5  5
-#define PORTB4  4
-#define PORTB3  3
-#define PORTB2  2
-#define PORTB1  1
-#define PORTB0  0
+#define PB7     7
+#define PB6     6
+#define PB5     5
+#define PB4     4
+#define PB3     3
+#define PB2     2
+#define PB1     1
+#define PB0     0
 
 #define PINC    _SFR_IO8(0x06)
 #define PINC7   7
@@ -100,13 +100,13 @@
 #define DDC0    0
 
 #define PORTC   _SFR_IO8(0x08)
-#define PORTC7  7
-#define PORTC6  6
-#define PORTC5  5
-#define PORTC4  4
-#define PORTC2  2
-#define PORTC1  1
-#define PORTC0  0
+#define PC7     7
+#define PC6     6
+#define PC5     5
+#define PC4     4
+#define PC2     2
+#define PC1     1
+#define PC0     0
 
 #define PIND    _SFR_IO8(0x09)
 #define PIND7   7
@@ -129,14 +129,14 @@
 #define DDD0    0
 
 #define PORTD   _SFR_IO8(0x0B)
-#define PORTD7  7
-#define PORTD6  6
-#define PORTD5  5
-#define PORTD4  4
-#define PORTD3  3
-#define PORTD2  2
-#define PORTD1  1
-#define PORTD0  0
+#define PD7     7
+#define PD6     6
+#define PD5     5
+#define PD4     4
+#define PD3     3
+#define PD2     2
+#define PD1     1
+#define PD0     0
 
 /* Reserved [0xC..0x14] */
 
