@@ -1,4 +1,4 @@
-# Copyright (c) 2005,  Joerg Wunsch
+# Copyright (c) 2005,2007  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -33,5 +33,6 @@ avrdir = $(prefix)/avr/include/util
 avr_HEADERS = \
     crc16.h \
     delay.h \
+    delay_basic.h \
     parity.h \
     twi.h

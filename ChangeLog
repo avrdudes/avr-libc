@@ -1,3 +1,13 @@
+2007-05-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #19009: Make <util/delay.h> issue a warning when optimizations
+	are turned off
+	* include/util/delay.h: Split the basic delay functions off into
+	<util/delay_basic.h>; issue a warning when this file is compiled
+	without optimization.
+	* include/util/delay_basic.h: (New file.)
+	* include/util/Makefile.am: add delay_basic.h
+
 2007-05-13  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iousbxx6_7.h: Change PORTxy to Pxy.
