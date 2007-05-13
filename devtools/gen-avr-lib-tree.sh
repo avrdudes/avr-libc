@@ -184,6 +184,7 @@ atmega8:crtm8.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega88:crtm88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega8515:crtm8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega8535:crtm8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega8hva:crtm8hva.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm1:crt90pwm1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm2:crt90pwm2.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm3:crt90pwm3.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
@@ -200,6 +201,7 @@ atmega165p:crtm165p.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega168:crtm168.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega169:crtm169.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega169p:crtm169p.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
+atmega16hva:crtm16hva.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega32:crtm32.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega323:crtm323.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\
 atmega324p:crtm324p.o:${DEV_DEFS}:${CFLAGS_SPEED}:${DEV_ASFLAGS};\

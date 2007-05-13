@@ -130,6 +130,8 @@
   + ATmega329P
   + ATmega3290P
   + AT90PWM1
+  + ATmega8HVA
+  + ATmega16HVA
 
 * New functions: 
 
