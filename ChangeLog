@@ -1,3 +1,7 @@
+2007-05-13  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iousbxx6_7.h: Change PORTxy to Pxy.
+
 2007-05-13 Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add tests for the ATmega8HVA/16HVA support.
