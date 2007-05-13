@@ -280,6 +280,10 @@
 #  include <avr/iom169.h>
 #elif defined (__AVR_ATmega169P__)
 #  include <avr/iom169p.h>
+#elif defined (__AVR_ATmega8HVA__)
+#  include <avr/iom8hva.h>
+#elif defined (__AVR_ATmega16HVA__)
+#  include <avr/iom16hva.h>
 #elif defined (__AVR_ATmega8__)
 #  include <avr/iom8.h>
 #elif defined (__AVR_ATmega48__)

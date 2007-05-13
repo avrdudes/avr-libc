@@ -1,3 +1,16 @@
+2007-05-13 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the ATmega8HVA/16HVA support.
+	* devtools/gen-avr-lib-tree.sh: Add support for ATmega8HVA/16HVA.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iom8hva.h: New file.
+	* include/avr/iom16hva.h: New file.
+	* include/avr/iomxxhva.h: New file.
+	* include/avr/Makefile.am: Include new files.
+	* doc/api/main_page.dox: Document support for ATmega8HVA/16HVA.
+	* doc/api/using-tools.dox: (Ditto.)
+
 2007-05-12  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iousbxx2.h: Change PORTxy to Pxy.

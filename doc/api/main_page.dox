@@ -131,7 +131,6 @@ compile-time.
 - atmega3290
 - atmega3290p
 - atmega48
-- atmega406
 - atmega64
 - atmega640
 - atmega644
@@ -183,6 +182,9 @@ compile-time.
 - at90usb647
 - at90usb1286
 - at90usb1287
+- atmega8hva
+- atmega16hva
+- atmega406
 
 \anchor supp_dev_footnote_one
 

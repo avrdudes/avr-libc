@@ -138,6 +138,7 @@
 || defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__) \
 || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) \
 || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__) \
+|| defined(__AVR_ATmega8HVA__) || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_AT90PWM1__) \
 || defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
  
@@ -288,6 +289,7 @@ __asm__ __volatile__ (  \
     ATmega48, ATmega88, ATmega168,
     ATmega164P, ATmega324P, ATmega644P, ATmega644,
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
+    ATmega8HVA, ATmega16HVA,
     ATmega406,
     AT90PWM1, AT90PWM2, AT90PWM3,
     AT90USB82, AT90USB162,
@@ -305,6 +307,7 @@ __asm__ __volatile__ (  \
     ATmega48, ATmega88, ATmega168,
     ATmega164P, ATmega324P, ATmega644P, ATmega644,
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
+    ATmega8HVA, ATmega16HVA,
     ATmega406,
     AT90PWM1, AT90PWM2, AT90PWM3,
     AT90USB82, AT90USB162,
