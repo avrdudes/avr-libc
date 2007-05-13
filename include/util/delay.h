@@ -35,9 +35,10 @@
 #define _UTIL_DELAY_H_ 1
 
 #include <inttypes.h>
+#include <util/delay_basic.h>
 
 /** \file */
-/** \defgroup util_delay <util/delay.h>: Busy-wait delay loops
+/** \defgroup util_delay <util/delay.h>: Convenience functions for busy-wait delay loops
     \code
     #define F_CPU 1000000UL  // 1 MHz
     //#define F_CPU 14.7456E6
@@ -49,93 +50,43 @@
     Obviously, in that case, no \c \#define statement should be
     used.
 
-    The functions in this header file implement simple delay loops
-    that perform a busy-waiting.  They are typically used to
-    facilitate short delays in the program execution.  They are
-    implemented as count-down loops with a well-known CPU cycle
-    count per loop iteration.  As such, no other processing can
-    occur simultaneously.  It should be kept in mind that the
-    functions described here do not disable interrupts.
+    The functions in this header file are wrappers around the basic
+    busy-wait functions from <util/delay_basic.h>.  They are meant as
+    convenience functions where actual time values can be specified
+    rather than a number of cycles to wait for.  The idea behind is
+    that compile-time constant expressions will be eliminated by
+    compiler optimization so floating-point expressions can be used
+    to calculate the number of delay cycles needed based on the CPU
+    frequency passed by the macro F_CPU.
 
-    In general, for long delays, the use of hardware timers is
-    much preferrable, as they free the CPU, and allow for
-    concurrent processing of other events while the timer is
-    running.  However, in particular for very short delays, the
-    overhead of setting up a hardware timer is too much compared
-    to the overall delay time.
+    \note In order for these functions to work as intended, compiler
+    optimizations <em>must</em> be enabled, and the delay time
+    <em>must</em> be an expression that is a known constant at
+    compile-time.  If these requirements are not met, the resulting
+    delay will be much longer (and basically unpredictable), and
+    applications that otherwise do not use floating-point calculations
+    will experience severe code bloat by the floating-point library
+    routines linked into the application.
 
-    Two inline functions are provided for the actual delay algorithms.
-
-    Two wrapper functions allow the specification of microsecond, and
+    The functions available allow the specification of microsecond, and
     millisecond delays directly, using the application-supplied macro
-    F_CPU as the CPU clock frequency (in Hertz).  These functions
-    operate on double typed arguments, however when optimization is
-    turned on, the entire floating-point calculation will be done at
-    compile-time.
+    F_CPU as the CPU clock frequency (in Hertz).
 
-    \note When using _delay_us() and _delay_ms(), the expressions
-    passed as arguments to these functions shall be compile-time
-    constants, otherwise the floating-point calculations to setup the
-    loops will be done at run-time, thereby drastically increasing
-    both the resulting code size, as well as the time required to
-    setup the loops.
 */
 
 #if !defined(__DOXYGEN__)
-static inline void _delay_loop_1(uint8_t __count) __attribute__((always_inline));
-static inline void _delay_loop_2(uint16_t __count) __attribute__((always_inline));
 static inline void _delay_us(double __us) __attribute__((always_inline));
 static inline void _delay_ms(double __ms) __attribute__((always_inline));
 #endif
-
-/** \ingroup util_delay
-
-    Delay loop using an 8-bit counter \c __count, so up to 256
-    iterations are possible.  (The value 256 would have to be passed
-    as 0.)  The loop executes three CPU cycles per iteration, not
-    including the overhead the compiler needs to setup the counter
-    register.
-
-    Thus, at a CPU speed of 1 MHz, delays of up to 768 microseconds
-    can be achieved.
-*/
-void
-_delay_loop_1(uint8_t __count)
-{
-	__asm__ volatile (
-		"1: dec %0" "\n\t"
-		"brne 1b"
-		: "=r" (__count)
-		: "0" (__count)
-	);
-}
-
-/** \ingroup util_delay
-
-    Delay loop using a 16-bit counter \c __count, so up to 65536
-    iterations are possible.  (The value 65536 would have to be
-    passed as 0.)  The loop executes four CPU cycles per iteration,
-    not including the overhead the compiler requires to setup the
-    counter register pair.
-
-    Thus, at a CPU speed of 1 MHz, delays of up to about 262.1
-    milliseconds can be achieved.
- */
-void
-_delay_loop_2(uint16_t __count)
-{
-	__asm__ volatile (
-		"1: sbiw %0,1" "\n\t"
-		"brne 1b"
-		: "=w" (__count)
-		: "0" (__count)
-	);
-}
 
 #ifndef F_CPU
 /* prevent compiler error by supplying a default */
 # warning "F_CPU not defined for <util/delay.h>"
 # define F_CPU 1000000UL
+#endif
+
+#ifndef __OPTIMIZE__
+# warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
 #endif
 
 /**
