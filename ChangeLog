@@ -1,3 +1,8 @@
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* common/Makefile.am: add asmdef.h so "make distcheck" will work
+	again
+
 2007-05-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fix bug #19009: Make <util/delay.h> issue a warning when optimizations
