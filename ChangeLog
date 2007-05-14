@@ -1,3 +1,15 @@
+2007-05-15 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* xml/Atmel2libc.py: Catch (and ignore) errors resulting from
+	empty IO register declarations in the Atmel files, as e.g. for
+	MCUCR in AT86RF401.
+	* xml/patch-headers.py: Add all the new devices we do support
+	now.
+	* doc/api/vectortable.dox: Regenerate.
+	* include/avr/iotnx4.h: Sigh.  AVR Studio 4.13 gratuitously
+	renamed a number of interrupt vectors for ATtinyX4 devices.
+	Add these new declarations along with the older ones.
+
 2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: bump version date.

@@ -369,44 +369,47 @@ def dump_ioregs (root):
             reg_desc = ''
 
         addr = ioreg.getElements ('IO_ADDR')[0].getData ()
-        if addr[0] == '$':
-            addr = '0x' + addr[1:]
-        if addr == "NA":
-            addr = ioreg.getElements ('MEM_ADDR')[0].getData ()
-        else:
-            # Add 0x20 so all addresses are memory mapped.
-            addr = '0x%02x' % (int (addr, 16) + 0x20)
-        
-        print '    <ioreg name="%s" addr="%s">' % (name, addr)
-        print_wrapped ('      ','<description>%s</description>' % (reg_desc))
-        print '      <alt_name></alt_name>'
-        for i in range (8):
-            if reg_info is None:
-                continue
-            bit = 'BIT%d' % (i)
-            bit_el = reg_info.getSubTree ([name, bit])
-            if bit_el is None:
-                continue
-            bit_name = bit_el.getElements ('NAME')[0].getData ()
-            try:
-                bit_desc = bit_el.getElements ('DESCRIPTION')[0].getData ()
-            except IndexError:
-                bit_desc = ''
-            try:
-                bit_access = bit_el.getElements ('ACCESS')[0].getData ()
-            except IndexError:
-                bit_access = 'FIXME!'
-            bit_init_val = bit_el.getElements ('INIT_VAL')[0].getData ()
-            print '      <bit_field name="%s"' % (bit_name),
-            print 'bit="%d"' % (i),
-            print 'access="%s"' % (bit_access),
-            print 'init="%s">' % (bit_init_val)
-            if bit_desc:
-                print_wrapped ('        ',
-                               '<description>%s</description>' % (bit_desc))
-            print '        <alt_name></alt_name>'
-            print '      </bit_field>'
-        print '    </ioreg>'
+        try:
+            if addr[0] == '$':
+                addr = '0x' + addr[1:]
+            if addr == "NA":
+                addr = ioreg.getElements ('MEM_ADDR')[0].getData ()
+            else:
+                # Add 0x20 so all addresses are memory mapped.
+                addr = '0x%02x' % (int (addr, 16) + 0x20)
+
+            print '    <ioreg name="%s" addr="%s">' % (name, addr)
+            print_wrapped ('      ','<description>%s</description>' % (reg_desc))
+            print '      <alt_name></alt_name>'
+            for i in range (8):
+                if reg_info is None:
+                    continue
+                bit = 'BIT%d' % (i)
+                bit_el = reg_info.getSubTree ([name, bit])
+                if bit_el is None:
+                    continue
+                bit_name = bit_el.getElements ('NAME')[0].getData ()
+                try:
+                    bit_desc = bit_el.getElements ('DESCRIPTION')[0].getData ()
+                except IndexError:
+                    bit_desc = ''
+                try:
+                    bit_access = bit_el.getElements ('ACCESS')[0].getData ()
+                except IndexError:
+                    bit_access = 'FIXME!'
+                bit_init_val = bit_el.getElements ('INIT_VAL')[0].getData ()
+                print '      <bit_field name="%s"' % (bit_name),
+                print 'bit="%d"' % (i),
+                print 'access="%s"' % (bit_access),
+                print 'init="%s">' % (bit_init_val)
+                if bit_desc:
+                    print_wrapped ('        ',
+                                   '<description>%s</description>' % (bit_desc))
+                print '        <alt_name></alt_name>'
+                print '      </bit_field>'
+            print '    </ioreg>'
+        except IndexError:  # empty register declaration
+            pass
 
     print '  </ioregisters>'
 

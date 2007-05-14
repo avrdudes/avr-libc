@@ -73,6 +73,9 @@ table = {
     #"io8534.h": "AT90C8534",
     "io8535.h": "AT90S8535",
     "io86r401.h": "AT86RF401",
+    # no XML file yet (2007-05-14)
+    #"io90pwm1.h": "AT90PWM1",
+    #"io90pwmx.h": ("AT90PWM3", "AT90PWM2"),
     "io90pwmx.h": ("AT90PWM3", "AT90PWM2", "AT90PWM1"),
     # no XML file
     #"ioat94k.h": "AT94k",
@@ -91,15 +94,15 @@ table = {
     #"iom168.h" => "iomx8.h"
     "iom169.h": "ATmega169",
     "iom169p.h": "ATmega169P",
+    #"iom16hva.h" => "iomxxhva.h"
     #"iom2560.h" => "iomxx0_1.h"
     #"iom2561.h" => "iomxx0_1.h"
     "iom32.h": "ATmega32",
     "iom323.h": "ATmega323",
     "iom325.h": "ATmega325",
     "iom3250.h": "ATmega3250",
-    "iom329.h": "ATmega329",
-    "iom3290.h": "ATmega3290",
-    "iom3290p.h": "ATmega3290P",
+    "iom329.h": ("ATmega329", "ATmega329P"),
+    "iom3290.h": ("ATmega3290", "ATmega3290P"),
     #"iom48.h" => "iomx8.h"
     "iom406.h": "ATmega406",
     "iom64.h": "ATmega64",
@@ -113,9 +116,12 @@ table = {
     "iom8515.h": "ATmega8515",
     "iom8535.h": "ATmega8535",
     #"iom88.h" => "iomx8.h"
+    #"iom8hva.h" => "iomxxhva.h"
     "iomx8.h": ("ATmega168", "ATmega48", "ATmega88"),
     "iomxx0_1.h": ("ATmega640", "ATmega1280", "ATmega1281", "ATmega2560", "ATmega2561"),
     "iomxx4.h": ("ATmega324P", "ATmega164P", "ATmega644P", "ATmega644"),
+    # no XML file yet (2007-05-14)
+    #"iomxxhva.h": ("ATmega8HVA", "ATmega16HVA"),
     "iotn11.h": "ATtiny11",
     "iotn12.h": "ATtiny12",
     "iotn13.h": "ATtiny13",
@@ -138,8 +144,11 @@ table = {
     "iotnx61.h": ("ATtiny261", "ATtiny461", "ATtiny861"),
     #"iousb1286.h" => "iousbxx6_7.h"
     #"iousb1287.h" => "iousbxx6_7.h"
+    #"iousb162.h" => "iousbxx2.h"
     #"iousb646.h" => "iousbxx6_7.h"
     #"iousb647.h" => "iousbxx6_7.h"
+    #"iousb82.h" => "iousbxx2.h"
+    "iousbxx2.h": ("AT90USB162", "AT90USB82"),
     "iousbxx6_7.h": ("AT90USB1287", "AT90USB1286", "AT90USB647", "AT90USB646"),
 }
 

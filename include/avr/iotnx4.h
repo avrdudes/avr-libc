@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, Anatoly Sokolov
+/* Copyright (c) 2005,2007 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -382,6 +382,7 @@
 /* Interrupt vector 0 is the reset vector. */
 /* External Interrupt Request 0 */
 #define INT0_vect			_VECTOR(1)
+#define EXT_INT0_vect			_VECTOR(1)
 #define SIG_INTERRUPT0			_VECTOR(1)
 
 /* Pin Change Interrupt Request 0 */
@@ -394,10 +395,12 @@
 
 /* Watchdog Time-out */
 #define WDT_vect			_VECTOR(4)
+#define WATCHDOG_vect			_VECTOR(4)
 #define SIG_WATCHDOG_TIMEOUT		_VECTOR(4)
 
 /* Timer/Counter1 Capture Event */
 #define TIMER1_CAPT_vect		_VECTOR(5)
+#define TIM1_CAPT_vect			_VECTOR(5)
 #define SIG_INPUT_CAPTURE1		_VECTOR(5)
 
 /* Timer/Counter1 Compare Match A */
@@ -438,6 +441,7 @@
 
 /* USI START */
 #define USI_START_vect			_VECTOR(15)
+#define USI_STR_vect			_VECTOR(15)
 #define SIG_USI_START			_VECTOR(15)
 
 /* USI Overflow */
