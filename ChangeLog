@@ -1,5 +1,13 @@
 2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* Released avr-libc 1.4.6.
+
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: bump version.
+
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/rel-method.dox: configure.in -> configure.ac
 
 2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>

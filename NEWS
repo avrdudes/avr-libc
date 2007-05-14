@@ -1,4 +1,4 @@
-*** Changes since avr-libc-1.4.5:
+*** Changes in avr-libc-1.4.6:
 
 * Bugs fixed:
 
@@ -49,9 +49,9 @@
     macros, types, variables) into the documentation.
 
   - Added 'avr25' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
-    supported for AT86RF401, ATtiny13, ATtiny2313, ATtiny24, ATtiny25, 
-    ATtiny261, ATtiny44, ATtiny45, ATtiny461, ATtiny84, ATtiny85 and 
-    ATtiny861 devices. GCC 4.2 or above is necessary to use this. 
+    supported for AT86RF401, ATtiny13, ATtiny2313, ATtiny24, ATtiny25,
+    ATtiny261, ATtiny44, ATtiny45, ATtiny461, ATtiny84, ATtiny85 and
+    ATtiny861 devices. GCC 4.2 or above is necessary to use this.
 
 * New functions:
 
