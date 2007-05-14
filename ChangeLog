@@ -6,6 +6,7 @@
 	* xml/patch-headers.py: Add all the new devices we do support
 	now.
 	* doc/api/vectortable.dox: Regenerate.
+	* doc/api/Makefile.am: add vectortable.dox.
 	* include/avr/iotnx4.h: Sigh.  AVR Studio 4.13 gratuitously
 	renamed a number of interrupt vectors for ATtinyX4 devices.
 	Add these new declarations along with the older ones.

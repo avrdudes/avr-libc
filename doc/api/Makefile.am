@@ -55,7 +55,8 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        porting.dox \
                        overview.dox \
                        pgmspace.dox \
-                       library.dox 
+                       library.dox \
+                       vectortable.dox
 
 SUFFIXES             = .pdf .fig .png .eps
 
