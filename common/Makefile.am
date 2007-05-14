@@ -32,4 +32,7 @@
 EXTRA_DIST = \
     ctoasm.inc \
     gasava.inc \
-    macros.inc
+    macros.inc \
+    asmdef.h \
+    ftoa_engine.h \
+    ntz.h

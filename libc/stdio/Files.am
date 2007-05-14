@@ -80,6 +80,7 @@ stdio_a_asm_sources = \
 stdio_a_extra_dist = \
 	vfprintf.c \
 	vfscanf.c \
-	stdio_private.h
+	stdio_private.h \
+	xtoa_fast.h
 
 # vim: set ft=make:

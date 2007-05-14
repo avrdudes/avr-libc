@@ -1,5 +1,12 @@
 2007-05-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* common/Makefile.am: Fix file locations for automake so
+	"make distcheck" will compile again.
+	* libc/stdio/Files.am: (Ditto.)
+	* libc/stdlib/Files.am: (Ditto.)
+
+2007-05-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Fix bug #19009: Make <util/delay.h> issue a warning when optimizations
 	are turned off
 	* include/util/delay.h: Split the basic delay functions off into

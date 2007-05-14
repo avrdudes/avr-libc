@@ -48,7 +48,6 @@ stdlib_a_c_sources = \
 	strtol.c \
 	strtoul.c \
 	dtoa_conv.h \
-	ftoa_engine.h \
 	stdlib_private.h
 
 stdlib_a_asm_sources = \
