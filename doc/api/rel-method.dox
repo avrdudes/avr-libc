@@ -1,4 +1,4 @@
-/* Copyright (c) 2003,2005 Theodore Roth
+/* Copyright (c) 2003,2005,2007 Theodore Roth
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -122,7 +122,7 @@ The following steps should be taken when making a release:
 
 -# Make sure the source tree you are working from is on the correct branch:<br>
    'cvs update -r avr-libc-\<major\>_\<minor\>-branch'
--# Update the package version in configure.in and commit it to cvs.
+-# Update the package version in configure.ac and commit it to cvs.
 -# Update the gnu tool chain version requirements in the README and commit
    to cvs.
 -# Update the ChangeLog file to note the release and commit to cvs on the

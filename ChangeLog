@@ -1,4 +1,8 @@
-2007-05-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/rel-method.dox: configure.in -> configure.ac
+
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* common/Makefile.am: Fix file locations for automake so
 	"make distcheck" will compile again.
