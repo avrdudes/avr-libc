@@ -1,5 +1,9 @@
 2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: bump version date.
+
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/rel-method.dox: configure.in -> configure.ac
 
 2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
