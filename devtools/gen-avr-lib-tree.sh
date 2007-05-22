@@ -128,9 +128,7 @@ AVR12_DEV_INFO="\
 at90s1200:crts1200.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny11:crttn11.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny12:crttn12.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny15:crttn15.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny28:crttn28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -144,16 +142,6 @@ at90s8535:crts8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at86rf401:crt86401.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny25:crttn25.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny45:crttn45.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny85:crttn85.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny24:crttn24.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny44:crttn44.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny84:crttn84.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny261:crttn261.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny461:crttn461.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny861:crttn861.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 AVR25_DEV_INFO="\
@@ -260,11 +248,11 @@ ARH_SUBDIRS="SUBDIRS ="
 
 for ath_lib in $AVR_ARH_INFO
 do
-	arh=$(echo $ath_lib | awk -F: '{print $1}')
-	dev_info=$(echo $ath_lib | awk -F: '{print $2}')
-	lib_defs=$(echo $ath_lib | awk -F: '{print $3}')
-	lib_cflags=$(echo $ath_lib | awk -F: '{print $4}')
-	lib_asflags=$(echo $ath_lib | awk -F: '{print $5}')
+	arh=$(echo $ath_lib | cut -d ':' -f 1)
+	dev_info=$(echo $ath_lib | cut -d ':' -f 2)
+	lib_defs=$(echo $ath_lib | cut -d ':' -f 3)
+	lib_cflags=$(echo $ath_lib | cut -d ':' -f 4)
+	lib_asflags=$(echo $ath_lib | cut -d ':' -f 5)
 	
 	install_dir=$arh
 	if [ $arh = avr2 ]
@@ -285,11 +273,11 @@ do
 
 	for dev_crt in $DEV_INFO
 	do
-		dev=$(echo $dev_crt | awk -F: '{print $1}')
-		crt=$(echo $dev_crt | awk -F: '{print $2}')
-		crt_defs=$(echo $dev_crt | awk -F: '{print $3}')
-		crt_cflags=$(echo $dev_crt | awk -F: '{print $4}')
-		crt_asflags=$(echo $dev_crt | awk -F: '{print $5}')
+		dev=$(echo $dev_crt | cut -d ':' -f 1)
+		crt=$(echo $dev_crt | cut -d ':' -f 2)
+		crt_defs=$(echo $dev_crt | cut -d ':' -f 3)
+		crt_cflags=$(echo $dev_crt | cut -d ':' -f 4)
+		crt_asflags=$(echo $dev_crt | cut -d ':' -f 5)
 		
 		echo "  avr/lib/$arh/$dev"
 		

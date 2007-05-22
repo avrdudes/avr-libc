@@ -619,22 +619,10 @@ AC_CONFIG_FILES([
 	avr/lib/avr2/at90s8535/Makefile
 	avr/lib/avr2/attiny11/Makefile
 	avr/lib/avr2/attiny12/Makefile
-	avr/lib/avr2/attiny13/Makefile
 	avr/lib/avr2/attiny15/Makefile
 	avr/lib/avr2/attiny22/Makefile
-	avr/lib/avr2/attiny24/Makefile
-	avr/lib/avr2/attiny25/Makefile
 	avr/lib/avr2/attiny26/Makefile
-	avr/lib/avr2/attiny261/Makefile
 	avr/lib/avr2/attiny28/Makefile
-	avr/lib/avr2/attiny44/Makefile
-	avr/lib/avr2/attiny45/Makefile
-	avr/lib/avr2/attiny461/Makefile
-	avr/lib/avr2/attiny84/Makefile
-	avr/lib/avr2/attiny85/Makefile
-	avr/lib/avr2/attiny861/Makefile
-	avr/lib/avr2/attiny2313/Makefile
-	avr/lib/avr2/at86rf401/Makefile
 ])
 
 #avr25
