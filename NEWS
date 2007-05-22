@@ -53,6 +53,7 @@
   [#19060] PCMSKx registers transposed in header for attinyX61
   [#19445] _malloc_heap_end does not follow _heap_end on m2561
   [#19495] <avr/interrupts.h> documentation: fix inclusion of cli and sei macros
+  [#19496] Add documentation: how to build toolchain for Windows.
   [#19650] avr-libc: wrong named bit in SFR of AT90PWMx
   [#19666] AT90PWMx: Another patch for the include file (missing SFR)
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'

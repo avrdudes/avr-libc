@@ -1,3 +1,10 @@
+2007-05-21 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/tools-install.dox: Add documentation on how to build the 
+	toolchain under Windows. Fix for bug #19496.
+	* doc/api/acknowledge.dox: Typo, email address, and add missing clause.
+	* NEWS: Add to bugs fixed list.
+
 2007-05-15 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* xml/Atmel2libc.py: Catch (and ignore) errors resulting from
