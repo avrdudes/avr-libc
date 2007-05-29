@@ -1,4 +1,8 @@
-2007-05-29 Eric B. Weddington <eweddington@cso.atmel.com.
+2007-05-29 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* Makefile.am: Add ChangeLog-2006 to distribution list.
+
+2007-05-29 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* configure.ac: Revert patch and add devices back into avr2 group.
 	This allows avr-libc to work with previous versions of GCC.
