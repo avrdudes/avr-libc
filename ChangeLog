@@ -1,3 +1,17 @@
+2007-05-29 Eric B. Weddington <eweddington@cso.atmel.com.
+
+	* configure.ac: Revert patch and add devices back into avr2 group.
+	This allows avr-libc to work with previous versions of GCC.
+	* devtools/gen-avr-lib-tree.sh: ditto.
+
+2007-05-22 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Replace awk with cut, which speeds
+	up the script. Remove devices in avr2 group that have been moved
+	to the avr25 group.
+	* configure.ac: Remove devices in avr2 group that have been moved
+	to the avr25 group.
+
 2007-05-21 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* doc/api/tools-install.dox: Add documentation on how to build the 
