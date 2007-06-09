@@ -243,8 +243,12 @@ GLOBAL(strtod)
 	ST	Z,rEndptrH
 1:
 	LDI	ZL,18-6 ; number of all 'pushed' registers - not pushed ones
-	IN	YL,_SFR_IO_ADDR(SPL)
-	IN	YH,_SFR_IO_ADDR(SPH)
+	IN	YL,AVR_STACK_POINTER_LO_ADDR
+#ifdef _HAVE_AVR_STACK_POINTER_HI
+	IN	YH,AVR_STACK_POINTER_HI_ADDR
+#else
+    CLR YH
+#endif
 	EPILOGUE_RESTORES(6)
 
 .L_overflow:
@@ -376,7 +380,7 @@ GLOBAL(strtod)
 	clr	XH
 #if __AVR_3_BYTE_PC__
 	pop	ZH
-	out	_SFR_IO_ADDR(EIND), ZH
+	out	AVR_EXTENDED_INDIRECT_ADDR, ZH
 #endif /* __AVR_3_BYTE_PC__ */
 	pop	ZH
 	pop	ZL

@@ -1,3 +1,17 @@
+2007-06-08 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/common.h: New file.
+	* include/avr/io.h: Move definitions to common.h. Fix documentation.
+	* common/macros.inc: Use new common register definitions.
+	* crt1/gcrt1.S: Use new common register definitions.
+	* include/avr/iomxx0_1.h: Define EIND as normal without conditional
+	  compilation.
+	* libc/stdlib/stdlib_private.h: Use new common register definitions.
+	* libm/fplib/strtod.S: Use new common register definitions. Check if
+	  the stack high register exists and don't use it if it does not exist.
+	* doc/api/doxygen.config.in: Add avr/io.h back into the documentation list.
+	* libc/stdlib/setjmp.S: Use new common register definitions.
+
 2007-05-29 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* Makefile.am: Add ChangeLog-2006 to distribution list.

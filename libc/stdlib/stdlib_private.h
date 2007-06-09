@@ -31,6 +31,7 @@
 
 #include <inttypes.h>
 #include <stdlib.h>
+#include <avr/io.h>
 
 #if !defined(__DOXYGEN__)
 
@@ -83,6 +84,6 @@ extern char mymem[];
 extern char __heap_start;
 extern char __heap_end;
 
-#define STACK_POINTER() ((char *)SP)
+#define STACK_POINTER() ((char *)AVR_STACK_POINTER_REG)
 
 #endif /* MALLOC_TEST */
