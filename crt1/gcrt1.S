@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz <marekm@amelek.gda.pl>
+   Copyright (c) 2007, Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -142,13 +143,13 @@ __init:
 
 	.section .init2,"ax",@progbits
 	clr	__zero_reg__
-	out	_SFR_IO_ADDR(SREG), __zero_reg__
+	out	AVR_STATUS_ADDR, __zero_reg__
 	ldi	r28,lo8(__stack)
-#ifdef SPH
+#ifdef _HAVE_AVR_STACK_POINTER_HI
 	ldi	r29,hi8(__stack)
-	out	_SFR_IO_ADDR(SPH), r29
+	out	AVR_STACK_POINTER_HI_ADDR, r29
 #endif
-	out	_SFR_IO_ADDR(SPL), r28
+	out	AVR_STACK_POINTER_LO_ADDR, r28
 
 #if BIG_CODE
 	/* Only for >64K devices with RAMPZ, replaces the default code
@@ -173,7 +174,7 @@ __do_copy_data:
 .L__do_copy_data_carry:
 	inc	r16
 #endif
-	out	_SFR_IO_ADDR(RAMPZ), r16
+	out	AVR_RAMPZ_ADDR, r16
 	rjmp	.L__do_copy_data_start
 .L__do_copy_data_loop:
 #ifdef __AVR_ENHANCED__

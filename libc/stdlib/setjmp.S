@@ -73,13 +73,17 @@ void longjmp(jmp_buf __jmpb, int __val) __attribute__((noreturn));
 
 _U(setjmp):
 	X_movw	ZL, jmpb_lo
-	in	r26, _SFR_IO_ADDR(SPL)
-	in	r27, _SFR_IO_ADDR(SPH)
+	in	r26, AVR_STACK_POINTER_LO_ADDR
+#ifdef _HAVE_AVR_STACK_POINTER_HI    
+	in	r27, AVR_STACK_POINTER_HI_ADDR
+#else
+    clr r27
+#endif
 	/* save program counter (return address) */
 	/* return address on stack (pushed by "call") is big endian! */
 	/* SP is post-decremented by "call" */
 	adiw	r26, 1
-#ifdef EIND  /* devices with >128K bytes of flash - none yet */
+#ifdef AVR_EXTENDED_INDIRECT_REG  /* devices with >128K bytes of flash */
 	ld	__tmp_reg__, X+
 	std	Z+23, __tmp_reg__
 #endif
@@ -91,7 +95,7 @@ _U(setjmp):
 	std	Z+18,r26
 	std	Z+19,r27
 	/* save status register (I flag) */
-	in	__tmp_reg__, _SFR_IO_ADDR(SREG)
+	in	__tmp_reg__, AVR_STATUS_ADDR
 	std	Z+20, __tmp_reg__
 	/* save call-saved registers */
 	st	Z, r2
@@ -152,18 +156,20 @@ _U(longjmp):
 	ld	__tmp_reg__, X+
 	/* interrupts disabled for shortest possible time (3 cycles) */
 	cli
-	out	_SFR_IO_ADDR(SPH), r31
+#ifdef _HAVE_AVR_STACK_POINTER_HI    
+	out	AVR_STACK_POINTER_HI_ADDR, r31
+#endif
 	/* Restore status register (including the interrupt enable flag).
 	   Interrupts are re-enabled only after the next instruction.  */
-	out	_SFR_IO_ADDR(SREG), __tmp_reg__
-	out	_SFR_IO_ADDR(SPL), r30
+	out	AVR_STATUS_ADDR, __tmp_reg__
+	out	AVR_STACK_POINTER_LO_ADDR, r30
 	/* restore return address */
 	ld	r30,X+
 	ld	r31,X+
-#ifdef EIND
+#ifdef AVR_EXTENDED_INDIRECT_REG
 	ld	__tmp_reg__, X
-	out	_SFR_IO_ADDR(EIND), __tmp_reg__
-	.word	0x9419  /* eijmp */
+	out	AVR_EXTENDED_INDIRECT_ADDR, __tmp_reg__
+	eijmp
 #else
 	ijmp
 #endif

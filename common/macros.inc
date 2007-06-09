@@ -334,7 +334,7 @@
 	.macro	LPM_R0_ZPLUS_INIT hhi
 #if __AVR_ENHANCED__
   #if BIG_CODE
-	out	_SFR_IO_ADDR(RAMPZ), \hhi
+	out	AVR_RAMPZ_ADDR, \hhi
   #endif
 #endif
 	.endm
@@ -351,7 +351,7 @@
 #else
   #if BIG_CODE
     /* ELPM without post-increment, load RAMPZ each time (ATmega103) */
-	out	_SFR_IO_ADDR(RAMPZ), \hhi
+	out	AVR_RAMPZ_ADDR, \hhi
 	elpm
 	adiw	r30,1
 	adc	\hhi, __zero_reg__
