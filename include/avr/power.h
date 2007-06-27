@@ -589,7 +589,8 @@ do{ \
 #define power_all_disable()     (PRR0 |= (uint8_t)((1<<PRADC)|(1<<PRSPI)|(1<<PRUSART0)|(1<<PRUSART1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI)))
 
 
-#elif defined(__AVR_ATmega644__)
+#elif defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega644P__)
 
 #define power_adc_enable()      (PRR0 &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR0 |= (uint8_t)(1 << PRADC))

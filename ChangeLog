@@ -1,3 +1,9 @@
+2007-06-27 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/power.h: Add support for ATmega644P.
+	* NEWS: Add item to fixed bug list.
+	Fixes bug #20276.
+
 2007-06-08 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* include/avr/common.h: New file.

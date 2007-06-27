@@ -57,6 +57,7 @@
   [#19650] avr-libc: wrong named bit in SFR of AT90PWMx
   [#19666] AT90PWMx: Another patch for the include file (missing SFR)
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'
+  [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
 
 * Other changes:
 
