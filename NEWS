@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#19496] Add documentation: how to build toolchain for Windows.
+  [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
 
 *** Changes in avr-libc-1.4.6:
 
