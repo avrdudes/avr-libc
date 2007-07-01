@@ -1,3 +1,14 @@
+2007-07-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function alloca(). Fix savannah bug #19686: alloca
+	declaration missing.
+	* include/alloca.h: New file.
+	* include/Makefile.am: Add alloca.h file.
+	* doc/api/doxygen.config.in: Add alloca.h file.
+	* tests/simulate/other: New directory.
+	* tests/simulate/other/alloc.c: New file.
+	* tests/simulate/runtest.sh: Add other directory to the test list.
+
 2007-06-27 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* include/avr/power.h: Add support for ATmega644P.
@@ -142,16 +153,6 @@
 	* include/avr/interrupt.h: Fix doxygen stuff, whitespace, remove unused
 	C++ stuff at the end.
 	* NEWS: Update bugs fixed.
-
-2007-07-01  Dmitry Xmelkov  <dmix@gmail.ru>
-
-	Add new function alloca(). Fix savannah bug #19686: alloca
-	declaration missing.
-	* include/alloca.h: New file.
-	* doc/api/doxygen.config.in: Add alloca.h file.
-	* tests/simulate/other: New directory.
-	* tests/simulate/other/alloc.c: New file.
-	* tests/simulate/runtest.sh: Add other directory to the test list.
 
 2007-05-02  Eric B. Weddington <eweddington@cso.atmel.com>
 
