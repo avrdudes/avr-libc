@@ -90,7 +90,7 @@ while getopts "a:icg:tTsh" opt ; do
 done
 shift $((OPTIND - 1))
 test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
-		printf/*.c fplib/*.c math/*.c"}
+		printf/*.c fplib/*.c math/*.c other/*.c"}
     
 CPPFLAGS="-Wundef -I."
 CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
