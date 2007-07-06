@@ -1,3 +1,7 @@
+2007-07-06 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/faq.dox: Add FAQ for soft reset.
+
 2007-07-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add new function alloca(). Fix savannah bug #19686: alloca
