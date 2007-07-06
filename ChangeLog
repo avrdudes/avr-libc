@@ -1,3 +1,7 @@
+2007-07-06 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/faq.dox: Add FAQ for soft reset.
+
 2007-06-27 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* include/avr/power.h: Add support for ATmega644P.

@@ -60,6 +60,7 @@
 -# \ref faq_spman
 -# \ref faq_linkerscripts
 -# \ref faq_binarydata
+-# \ref faq_softreset
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1311,6 +1312,70 @@ avr-objcopy --rename-section .data=.progmem.data,contents,alloc,load,readonly,da
 Note that all this could be conveniently wired into a Makefile, so
 whenever <tt>foo.bin</tt> changes, it will trigger the recreation of
 <tt>foo.o</tt>, and a subsequent relink of the final ELF file.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_softreset How do I perform a software reset of the AVR?
+
+The canonical way to perform a software reset of the AVR is to use the
+watchdog timer. Enable the watchdog timer to the shortest timeout setting,
+then go into an infinite, do-nothing loop. The watchdog will then reset the
+processor.
+
+The reason why this is preferrable over jumping to the reset vector, is that
+when the watchdog resets the AVR, the registers will be reset to their known,
+default settings. Whereas jumping to the reset vector will leave the registers
+in their previous state, which is generally not a good idea.
+
+<b>CAUTION!</b> Older AVRs will have the watchdog timer disabled on a reset. For
+these older AVRs, doing a soft reset by enabling the watchdog is easy, as the
+watchdog will then be disabled after the reset. On newer AVRs, once the watchdog
+is enabled, then it <b>stays enabled, even after a reset</b>! For these
+newer AVRs a function needs to be added to the .init3 section (i.e. during the
+startup code, before main()) to disable the watchdog early enough so it does
+not continually reset the AVR.
+
+Here is some example code that creates a macro that can be called to perform 
+a soft reset:
+
+\code
+#include <avr/wdt.h>
+
+...
+
+#define soft_reset()        \
+do                          \
+{                           \
+    wdt_enable(WDTO_15MS);  \
+    for(;;)                 \
+    {                       \
+    }                       \
+} while(0)
+\endcode
+
+For newer AVRs (such as the ATmega1281) also add this function to your code
+to then disable the watchdog after a reset (e.g., after a soft reset):
+
+\code
+#include <avr/wdt.h>
+
+...
+
+// Function Pototype
+void wdt_init(void) __attribute__((naked)) __attribute__((section(".init3")));
+
+...
+
+// Function Implementation
+void wdt_init(void)
+{
+    MCUSR = 0;
+    wdt_disable();
+
+    return;
+}
+
+\endcode
 
 <small>Back to \ref faq_index.</small>
 
