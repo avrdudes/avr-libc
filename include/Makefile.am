@@ -31,6 +31,7 @@
 
 avrdir = $(prefix)/avr/include
 avr_HEADERS = \
+    alloca.h \
     assert.h \
     ctype.h \
     errno.h \

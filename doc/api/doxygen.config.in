@@ -456,7 +456,8 @@ WARN_LOGFILE           =
 # compat/ headers, then demo projects.
 # For the User Manual, it is whatever chapter order seems sensible.
 
-INPUT                  = @top_srcdir@/include/assert.h \
+INPUT                  = @top_srcdir@/include/alloca.h \
+                         @top_srcdir@/include/assert.h \
                          @top_srcdir@/include/ctype.h \
                          @top_srcdir@/include/errno.h \
                          @top_srcdir@/include/inttypes.h \
