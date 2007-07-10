@@ -1,4 +1,5 @@
 /* Copyright (c) 2001, 2002, Harald Kipp
+   Copyright (c) 2007 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -23,21 +24,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* History [From the original document; not needed since we're in cvs now.]
-
-- 2001/05/07 V 1.1: Output and input lists sequence corrected in chapter
-  1. Multibyte operands added. Index added. Some typos corrected.
-- 2001/05/07 V 1.2: subi replaced by inc in clobber samples. Pointer type is
-  mandantory.
-- 2001/05/07 V 1.3: Pointer register modifier added.
-- 2002/05/16 V 1.4: Fixed the funny "risk" typo. New chapters C Names, FAQ and
-  Links added.
-- 2002/07/23: Converted to doxygen and merged into avr-libc project by 
-  Theodore A. Roth.
-- 2002/08/10 V 1.5: Fixed variable name in clobber section. New section C
-  stubs added. (Harald Kipp)
-
-*/
 
 /** \page inline_asm Inline Assembler Cookbook
 
@@ -233,121 +219,33 @@ can be found in the gcc manual.
 the \c z register is <tt>r31:r30</tt>
 
 <table>
-  <tr>
-    <td><b>Constraint</b></td>
-    <td><b>Used for</b></td>
-    <td><b>Range</b></td>
-  </tr>
-  <tr>
-    <td>a</td>
-    <td>Simple upper registers</td>
-    <td>r16 to r23</td>
-  </tr>
-  <tr>
-    <td>b</td>
-    <td>Base pointer registers pairs</td>
-    <td>y, z</td>
-  </tr>
-  <tr>
-    <td>d</td>
-    <td>Upper register</td>
-    <td>r16 to r31</td>
-  </tr>
-  <tr>
-    <td>e</td>
-    <td>Pointer register pairs</td>
-    <td>x, y, z</td>
-  </tr>
-  <tr>
-    <td>G</td>
-    <td>Floating point constant</td>
-    <td>0.0</td>
-  </tr>
-  <tr>
-    <td>I</td>
-    <td>6-bit positive integer constant</td>
-    <td>0 to 63</td>
-  </tr>
-  <tr>
-    <td>J</td>
-    <td>6-bit negative integer constant</td>
-    <td>-63 to 0</td>
-  </tr>
-  <tr>
-    <td>K</td>
-    <td>Integer constant</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>L</td>
-    <td>Integer constant</td>
-    <td>0</td>
-  </tr>
-  <tr>
-    <td>l</td>
-    <td>Lower registers</td>
-    <td>r0 to r15</td>
-   </tr>
- <tr>
-    <td>M</td>
-    <td>8-bit integer constant</td>
-    <td>0 to 255</td>
-  </tr>
-  <tr>
-    <td>N</td>
-    <td>Integer constant</td>
-    <td>-1</td>
-  </tr>
-  <tr>
-    <td>O</td>
-    <td>Integer constant</td>
-    <td>8, 16, 24</td>
-  </tr>
-  <tr>
-    <td>P</td>
-    <td>Integer constant</td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td>q</td>
-    <td>Stack pointer register</td>
-    <td>SPH:SPL</td>
-  </tr>
-  <tr>
-    <td>r</td>
-    <td>Any register</td>
-    <td>r0 to r31</td>
-  </tr>
-  <tr>
-    <td>t</td>
-    <td>Temporary register</td>
-    <td>r0</td>
-  </tr>
-  <tr>
-    <td>w</td>
-    <td>Special upper register pairs</td>
-    <td>r24, r26, r28, r30</td>
-  </tr>
-  <tr>
-    <td>x</td>
-    <td>Pointer register pair X</td>
-    <td>x (r27:r26)</td>
-  </tr>
-  <tr>
-    <td>y</td>
-    <td>Pointer register pair Y</td>
-    <td>y (r29:r28)</td>
-  </tr>
-  <tr>
-    <td>z</td>
-    <td>Pointer register pair Z</td>
-    <td>z (r31:r30)</td>
-  </tr>
+  <tr><td><b>Constraint</b></td><td><b>Used for</b></td><td><b>Range</b></td></tr>
+  <tr><td>a</td><td>Simple upper registers</td><td>r16 to r23</td></tr>
+  <tr><td>b</td><td>Base pointer registers pairs</td><td>y, z</td></tr>
+  <tr><td>d</td><td>Upper register</td><td>r16 to r31</td></tr>
+  <tr><td>e</td><td>Pointer register pairs</td><td>x, y, z</td></tr>
+  <tr><td>q</td><td>Stack pointer register</td><td>SPH:SPL</td></tr>
+  <tr><td>r</td><td>Any register</td><td>r0 to r31</td></tr>
+  <tr><td>t</td><td>Temporary register</td><td>r0</td></tr>
+  <tr><td>w</td><td>Special upper register pairs</td><td>r24, r26, r28, r30</td></tr>
+  <tr><td>x</td><td>Pointer register pair X</td><td>x (r27:r26)</td></tr>
+  <tr><td>y</td><td>Pointer register pair Y</td><td>y (r29:r28)</td></tr>
+  <tr><td>z</td><td>Pointer register pair Z</td><td>z (r31:r30)</td></tr>
+  <tr><td>G</td><td>Floating point constant</td><td>0.0</td></tr>
+  <tr><td>I</td><td>6-bit positive integer constant</td><td>0 to 63</td></tr>
+  <tr><td>J</td><td>6-bit negative integer constant</td><td>-63 to 0</td></tr>
+  <tr><td>K</td><td>Integer constant</td><td>2</td></tr>
+  <tr><td>L</td><td>Integer constant</td><td>0</td></tr>
+  <tr><td>l</td><td>Lower registers</td><td>r0 to r15</td></tr>
+  <tr><td>M</td><td>8-bit integer constant</td><td>0 to 255</td></tr>
+  <tr><td>N</td><td>Integer constant</td><td>-1</td></tr>
+  <tr><td>O</td><td>Integer constant</td><td>8, 16, 24</td></tr>
+  <tr><td>P</td><td>Integer constant</td><td>1</td></tr>
+  <tr><td>Q</td><td>(GCC >= 4.2.x) A memory address based on Y or Z pointer with displacement.</td><td>&nbsp;</td></tr>
+  <tr><td>R</td><td>(GCC >= 4.3.x) Integer constant.</td><td>-6 to 5</td></tr>
 </table>
 
-These definitions seem not to fit properly to the AVR instruction set. The
-author's assumption is, that this part of the compiler has never been really
-finished in this version, but that assumption may be wrong. The selection of
+The selection of
 the proper contraint depends on the range of the constants or registers, which
 must be acceptable to the AVR instruction they are used with. The C compiler
 doesn't check any line of your assembler code. But it is able to check the

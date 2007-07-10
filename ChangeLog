@@ -1,3 +1,7 @@
+2007-07-09  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* doc/api/inline_asm.dox: Document new constraints.
+
 2007-07-06 Eric B. Weddington <eweddington@cso.atmel.com>
 
 	* doc/api/faq.dox: Add FAQ for soft reset.
