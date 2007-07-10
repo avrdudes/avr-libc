@@ -1,3 +1,7 @@
+2007-07-09  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* doc/api/inline_asm.dox: Document new constraints.
+
 2007-07-07  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add new function alloca(). Fix savannah bug #19686: alloca
