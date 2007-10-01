@@ -1,3 +1,17 @@
+2007-10-01  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Add new devices: AT90PWM216, AT90PWM316, with contributions from 
+	Tobias Frost <tobi@coldtobi.de>.
+	* devtools/gen-avr-lib-tree.sh: Add new devices.
+	* configure.ac: ditto.
+	* doc/api/using-tools.dox: ditto.
+	* include/avr/Makefile.am: ditto.
+	* include/avr/power.h: ditto.
+	* include/avr/wdt.h: ditto.
+	* include/avr/io.h: ditto.
+	* include/avr/io90pwm216.h: New file.
+	* include/avr/io90pwm316.h: New file.
+
 2007-07-30  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	*include/avr/Makefile.am: Add missing common.h to install list.
