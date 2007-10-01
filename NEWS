@@ -136,6 +136,8 @@
   + AT90PWM1
   + ATmega8HVA
   + ATmega16HVA
+  + AT90PWM216
+  + AT90PWM316
 
 * New functions: 
 

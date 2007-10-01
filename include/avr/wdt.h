@@ -140,7 +140,11 @@
 || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__) \
 || defined(__AVR_ATmega8HVA__) || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_AT90PWM1__) \
-|| defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__)
+|| defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__) \
+|| defined(__AVR_AT90PWM216__) \
+|| defined(__AVR_AT90PWM316__) 
+
+
  
 #define _wdt_write(value)   \
     __asm__ __volatile__ (  \
@@ -291,7 +295,7 @@ __asm__ __volatile__ (  \
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega8HVA, ATmega16HVA,
     ATmega406,
-    AT90PWM1, AT90PWM2, AT90PWM3,
+    AT90PWM1, AT90PWM2, AT90PWM3, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287.
     */
@@ -309,7 +313,7 @@ __asm__ __volatile__ (  \
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega8HVA, ATmega16HVA,
     ATmega406,
-    AT90PWM1, AT90PWM2, AT90PWM3,
+    AT90PWM1, AT90PWM2, AT90PWM3, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287.
     */
