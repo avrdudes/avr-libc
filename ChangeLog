@@ -1,3 +1,9 @@
+2007-10-02  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* doc/api/pgmspace.dox: Fix example code. Change description to match.
+	* NEWS: Update fixed bugs list.
+	Fixes bug #21183.
+
 2007-10-01  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	Add new devices: AT90PWM216, AT90PWM316, with contributions from 
@@ -11,6 +17,7 @@
 	* include/avr/io.h: ditto.
 	* include/avr/io90pwm216.h: New file.
 	* include/avr/io90pwm316.h: New file.
+	* NEWS: Update new devices list.
 
 2007-07-30  Eric B. Weddington  <eweddington@cso.atmel.com>
 

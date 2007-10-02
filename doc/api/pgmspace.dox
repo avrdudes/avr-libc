@@ -266,13 +266,13 @@ RAM (like an automatic variable inside a function, that is allocated on the
 stack), you can do this:
 
 \code
-void food(void)
+void foo(void)
 {
     char buffer[10];
     
     for (unsigned char i = 0; i < 5; i++)
     {
-        strcpy_P(buffer, pgm_read_word(&(string_table[i])));
+        strcpy_P(buffer, (PGM_P)pgm_read_word(&(string_table[i])));
         
         // Display buffer on LCD.
     }
@@ -285,8 +285,10 @@ we access it normally, as if were stored in Data Space, then take the address
 of the location we want to access, and use the address as a parameter to
 \c pgm_read_word. We use the \c pgm_read_word macro to read the string pointer 
 out of the \c string_table array. Remember that a pointer is 16-bits, or word 
-size. This pointer is an address in Program Space of the string that we want to 
-copy. This pointer is used as a parameter to the function \c strcpy_P. The 
+size. The \c pgm_read_word macro will return a 16-bit unsigned integer. We then
+have to typecast it as a true pointer to program memory, \c PGM_P. This pointer 
+is an address in Program Space pointing to the string that we want to 
+copy. This pointer is then used as a parameter to the function \c strcpy_P. The 
 function \c strcpy_P is just like the regular \c strcpy function, except that 
 it copies a string from Program Space (the second parameter) to a buffer in the 
 Data Space (the first parameter).

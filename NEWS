@@ -59,6 +59,7 @@
   [#19686] alloc declaration missing
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
+  [#21183] Fix Program Space example code.
 
 * Other changes:
 
