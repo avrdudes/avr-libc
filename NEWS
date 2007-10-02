@@ -5,6 +5,7 @@
   [#19496] Add documentation: how to build toolchain for Windows.
   [#19686] alloc declaration missing
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
+  [#21183] Fix Program Space example code.
 
 * New devices supported:
 
