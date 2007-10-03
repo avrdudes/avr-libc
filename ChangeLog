@@ -1,5 +1,9 @@
 2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
 
+	* devtools/gen-avr-lib-tree.sh: Optimize for space for all devices.
+
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
 	The start of a Fuse API.
 	* include/avr/fuse.h: New file.
 	* include/avr/io.h: Add inclusion of fuse.h.
