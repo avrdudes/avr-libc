@@ -70,10 +70,10 @@ while other extensions are purely AVR-specific (like the entire
 program-space string interface).
 
 Unless otherwise noted, functions of this library are <em>not</em>
-guarenteed to be reentrant.  In particular, any functions that store
+guaranteed to be reentrant.  In particular, any functions that store
 local state are known to be non-reentrant, as well as functions that
 manipulate IO registers like the EEPROM access routines.  If these
-functions are used within both, standard and interrupt context,
+functions are used within both standard and interrupt contexts
 undefined behaviour will result.
 
 
@@ -86,23 +86,8 @@ Note that actual support for some newer devices depends on the ability
 of the compiler/assembler to support these devices at library
 compile-time.
 
-\par AT90S Type Devices:
+\par megaAVR Devices:
 
-- at90s1200 \ref supp_dev_footnote_one "[1]"
-- at90s2313
-- at90s2323
-- at90s2333
-- at90s2343
-- at90s4414
-- at90s4433
-- at90s4434
-- at90s8515
-- at90c8534
-- at90s8535
-
-\par ATmega Type Devices:
-
-- atmega8
 - atmega103
 - atmega128
 - atmega1280
@@ -115,8 +100,6 @@ compile-time.
 - atmega165
 - atmega165p
 - atmega168
-- atmega169
-- atmega169p
 - atmega2560
 - atmega2561
 - atmega32
@@ -126,10 +109,6 @@ compile-time.
 - atmega325p
 - atmega3250
 - atmega3250p
-- atmega329
-- atmega329p
-- atmega3290
-- atmega3290p
 - atmega48
 - atmega64
 - atmega640
@@ -137,13 +116,12 @@ compile-time.
 - atmega644p
 - atmega645
 - atmega6450
-- atmega649
-- atmega6490
+- atmega8
+- atmega88
 - atmega8515
 - atmega8535
-- atmega88
 
-\par ATtiny Type Devices:
+\par tinyAVR Devices:
 
 - attiny11 \ref supp_dev_footnote_one "[1]"
 - attiny12 \ref supp_dev_footnote_one "[1]"
@@ -163,28 +141,67 @@ compile-time.
 - attiny85
 - attiny861
 
-\par Misc Devices:
+\par CAN AVR Devices:
 
-- at94K \ref supp_dev_footnote_two "[2]"
-- at76c711 \ref supp_dev_footnote_three "[3]"
-- at43usb320
-- at43usb355
-- at86rf401
 - at90can32
 - at90can64
 - at90can128
+
+\par LCD AVR Devices:
+
+- atmega169
+- atmega169p
+- atmega329
+- atmega329p
+- atmega3290
+- atmega3290p
+- atmega649
+- atmega6490
+
+\par Lighting AVR Devices:
+
 - at90pwm1
 - at90pwm2
+- at90pwm216
 - at90pwm3
+- at90pwm316
+
+\par Smart Battery AVR Devices:
+
+- atmega8hva
+- atmega16hva
+- atmega406
+
+\par USB AVR Devices:
+
 - at90usb82
 - at90usb162
 - at90usb646
 - at90usb647
 - at90usb1286
 - at90usb1287
-- atmega8hva
-- atmega16hva
-- atmega406
+
+\par Miscellaneous Devices:
+
+- at94K \ref supp_dev_footnote_two "[2]"
+- at76c711 \ref supp_dev_footnote_three "[3]"
+- at43usb320
+- at43usb355
+- at86rf401
+
+\par Classic AVR Devices:
+
+- at90s1200 \ref supp_dev_footnote_one "[1]"
+- at90s2313
+- at90s2323
+- at90s2333
+- at90s2343
+- at90s4414
+- at90s4433
+- at90s4434
+- at90s8515
+- at90c8534
+- at90s8535
 
 \anchor supp_dev_footnote_one
 

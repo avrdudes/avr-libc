@@ -1,3 +1,8 @@
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* doc/api/main_page.dox: Reorganize and update device listing.
+	Fix spelling and grammar.
+
 2007-10-02  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	* doc/api/pgmspace.dox: Fix example code. Change description to match.
