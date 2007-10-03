@@ -11,6 +11,7 @@
 
   + AT90PWM216
   + AT90PWM316
+  + ATtiny43U
 
 *** Changes in avr-libc-1.4.6:
 
