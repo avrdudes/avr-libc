@@ -675,7 +675,8 @@ do{ \
 || defined(__AVR_ATtiny85__) \
 || defined(__AVR_ATtiny261__) \
 || defined(__AVR_ATtiny461__) \
-|| defined(__AVR_ATtiny861__)
+|| defined(__AVR_ATtiny861__) \
+|| defined(__AVR_ATtiny43U__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))
@@ -820,6 +821,7 @@ Gets and returns the clock prescaler register setting. The return type is clock_
 || defined(__AVR_ATtiny861__) \
 || defined(__AVR_ATtiny2313__) \
 || defined(__AVR_ATtiny13__) \
+|| defined(__AVR_ATtiny43U__) \
 
 typedef enum
 {

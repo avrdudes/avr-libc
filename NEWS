@@ -139,6 +139,7 @@
   + ATmega16HVA
   + AT90PWM216
   + AT90PWM316
+  + ATtiny43U
 
 * New functions: 
 

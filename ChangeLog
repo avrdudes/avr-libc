@@ -1,5 +1,18 @@
 2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
 
+	Add new device: ATtiny43U.
+	* configure.ac: Add new device.
+	* devtools/gen-avr-lib-tree.sh: ditto.
+	* include/avr/Makefile.am: ditto.
+	* include/avr/io.h: ditto.
+	* include/avr/power.h: ditto.
+	* doc/api/using-tools.dox: ditto.
+	* doc/api/main_page.dox: ditto.
+	* include/avr/iotn43u.h: New file.
+	* NEWS: Update new devices list.
+
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
 	* devtools/gen-avr-lib-tree.sh: Optimize for space for all devices.
 
 2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
