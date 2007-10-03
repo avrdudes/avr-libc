@@ -36,6 +36,7 @@ avr_HEADERS = \
     crc16.h \
     delay.h \
     eeprom.h \
+    fuse.h \
     interrupt.h \
     io.h \
     io1200.h \

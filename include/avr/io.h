@@ -286,4 +286,7 @@
 
 #include <avr/version.h>
 
+/* Include fuse.h after individual IO header files. */
+#include <avr/fuse.h>
+
 #endif /* _AVR_IO_H_ */
