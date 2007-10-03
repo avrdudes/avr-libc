@@ -1,5 +1,13 @@
 2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
 
+	The start of a Fuse API.
+	* include/avr/fuse.h: New file.
+	* include/avr/io.h: Add inclusion of fuse.h.
+	* include/avr/Makefile.am: Add fuse.h to distribution list.
+	* include/avr/iom128.h: Add fuse information to ATmega128 IO header.
+
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
 	* doc/api/main_page.dox: Reorganize and update device listing.
 	Fix spelling and grammar.
 

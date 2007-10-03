@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Peter Jansen
+   Copyright (c) 2007, Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -1152,5 +1153,42 @@
 #define    XRAMEND  0xFFFF
 #define    E2END    0x0FFF
 #define    FLASHEND 0x1FFFF
+
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 3
+
+/* Low Fuse Byte */
+#define CKSEL0      ~_BV(0)
+#define CKSEL1      ~_BV(1)
+#define CKSEL2      ~_BV(2)
+#define CKSEL3      ~_BV(3)
+#define SUT0        ~_BV(4)
+#define SUT1        ~_BV(5)
+#define BODEN       ~_BV(6)
+#define BODLEVEL    ~_BV(7)
+
+#define LFUSE_DEFAULT (SUT0 & CKSEL3 & CKSEL2 & CKSEL1)
+
+
+/* High Fuse Byte */
+#define BOOTRST     ~_BV(0)
+#define BOOTSZ0     ~_BV(1)
+#define BOOTSZ1     ~_BV(2)
+#define EESAVE      ~_BV(3)
+#define CKOPT       ~_BV(4)
+#define SPIEN       ~_BV(5)
+#define JTAGEN      ~_BV(6)
+#define OCDEN       ~_BV(7)
+
+#define HFUSE_DEFAULT (JTAGEN & SPIEN & BOOTSZ1 & BOOTSZ0)
+
+
+/* Extended Fuse Byte */
+#define WDTON       ~_BV(0)
+#define M103C       ~_BV(1)
+
+#define EFUSE_DEFAULT (M103C)
 
 #endif /* _AVR_IOM128_H_ */
