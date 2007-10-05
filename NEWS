@@ -12,6 +12,7 @@
   [no-id]  Fix the timing of the HD44780 driver in the stdiodemo.
   [no-id]  Fix the sleep mode definitions for the ATtiny2313.
   [no-id]  Exclude 64-bit types for -mint8.
+  [no-id]  Make documentation build work with doxygen 1.5.x
   [#15161] util/delay.h misses inline keyword (regression)
   [#15193] incorrect definition of IVSEL bit in MCUCR register
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.
@@ -60,6 +61,7 @@
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
   [#21183] Fix Program Space example code.
+  [#21228] Missing 3rd clause in BSD license in documentation pages
 
 * Other changes:
 
