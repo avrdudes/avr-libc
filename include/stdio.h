@@ -494,8 +494,8 @@ extern int	fclose(FILE *__stream);
       
    -   An optional decimal digit string specifying a minimum field width.
        If the converted value has fewer characters than the field width, it
-       will be padded with spaces on the left (or right, if the left-adjust­
-       ment flag has been given) to fill out the field width.
+       will be padded with spaces on the left (or right, if the
+       left-adjustment flag has been given) to fill out the field width.
    -   An optional precision, in the form of a period . followed by an
        optional digit string.  If the digit string is omitted, the
        precision is taken as zero.  This gives the minimum number of
