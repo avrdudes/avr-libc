@@ -169,7 +169,8 @@ attiny461:crttn461.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny84:crttn84.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny85:crttn85.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny861:crttn861.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny43u:crttn43u.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+attiny43u:crttn43u.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny48:crttn48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 AVR3_DEV_INFO="\

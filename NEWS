@@ -142,6 +142,7 @@
   + AT90PWM216
   + AT90PWM316
   + ATtiny43U
+  + ATtiny48
 
 * New functions: 
 

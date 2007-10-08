@@ -1,3 +1,17 @@
+2007-10-08  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Add new device: ATtiny48.
+	* configure.ac: Add new devices.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iotn48.h: New file.
+	* NEWS: Update new devices list.
+
 2007-10-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Resolve bug #21228: Missing 3rd clause in BSD license in
