@@ -1,5 +1,11 @@
 2007-10-08  Eric B. Weddington  <eweddington@cso.atmel.com>
 
+	* include/avr/io90pwm216.h: Add fuse information.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/iotn43u.h: Ditto.
+
+2007-10-08  Eric B. Weddington  <eweddington@cso.atmel.com>
+
 	Add new device: ATtiny48.
 	* configure.ac: Add new devices.
 	* devtools/gen-avr-lib-tree.sh: Ditto.

@@ -532,6 +532,9 @@
 
 
 /* Fuse Information */
+
+#define FUSE_MEMORY_SIZE 3
+
 /* Low Fuse Byte */
 #define CKSEL0  ~_BV(0)
 #define CKSEL1  ~_BV(1)
