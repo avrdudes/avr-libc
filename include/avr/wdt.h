@@ -142,7 +142,8 @@
 || defined(__AVR_AT90PWM1__) \
 || defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__) \
 || defined(__AVR_AT90PWM216__) \
-|| defined(__AVR_AT90PWM316__) 
+|| defined(__AVR_AT90PWM316__) \
+|| defined(__AVR_ATtiny48__)
 
 
  
@@ -297,7 +298,8 @@ __asm__ __volatile__ (  \
     ATmega406,
     AT90PWM1, AT90PWM2, AT90PWM3, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
-    AT90USB646, AT90USB647, AT90USB1286, AT90USB1287.
+    AT90USB646, AT90USB647, AT90USB1286, AT90USB1287,
+    ATtiny48.
     */
 #define WDTO_4S     8
 
@@ -315,7 +317,8 @@ __asm__ __volatile__ (  \
     ATmega406,
     AT90PWM1, AT90PWM2, AT90PWM3, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
-    AT90USB646, AT90USB647, AT90USB1286, AT90USB1287.
+    AT90USB646, AT90USB647, AT90USB1286, AT90USB1287,
+    ATtiny48.
     */
 #define WDTO_8S     9
 

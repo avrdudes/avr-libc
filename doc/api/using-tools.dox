@@ -181,6 +181,7 @@ compiler frontend.
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny44</td><td>__AVR_ATtiny44__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny45</td><td>__AVR_ATtiny45__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny461</td><td>__AVR_ATtiny461__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny48</td><td>__AVR_ATtiny48__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84</td><td>__AVR_ATtiny84__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny85</td><td>__AVR_ATtiny85__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861</td><td>__AVR_ATtiny861__</td></tr>

@@ -640,7 +640,8 @@ do{ \
 
 #elif defined(__AVR_ATmega48__) \
 || defined(__AVR_ATmega88__) \
-|| defined(__AVR_ATmega168__)
+|| defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATtiny48__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))
@@ -734,6 +735,7 @@ do{ \
 || defined (__AVR_ATmega324P__) \
 || defined (__AVR_ATmega644__) \
 || defined (__AVR_ATmega644P__) \
+|| defined (__AVR_ATtiny48__) \
 || defined (__DOXYGEN__)
 
 
