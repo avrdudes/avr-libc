@@ -62,6 +62,7 @@
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
   [#21183] Fix Program Space example code.
   [#21228] Missing 3rd clause in BSD license in documentation pages
+  [#21299] Duplicate register address in iotn48.h.
 
 * Other changes:
 

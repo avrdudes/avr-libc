@@ -379,7 +379,7 @@
 #define CLKPS3 3
 #define CLKPCE 7
 
-#define PRR _SFR_MEM8(0x61)
+#define PRR _SFR_MEM8(0x64)
 #define PRADC 0 
 #define PRUSART0 1
 #define PRSPI 2

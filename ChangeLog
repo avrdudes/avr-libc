@@ -1,3 +1,9 @@
+2007-10-10  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Resolve bug #21299: Duplicate register address in iotn48.h.
+	* include/avr/iotn48.h: Fix PRR address.
+	* NEWS: Update fixed bug list.
+
 2007-10-08  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	* include/avr/io90pwm216.h: Add fuse information.
