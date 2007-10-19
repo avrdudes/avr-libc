@@ -1,3 +1,9 @@
+2007-10-19  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Fix for Atmel bug #6346.
+	* include/avr/iom8515.h: Add USART* interrupt vector names to
+	correctly reflect the device XML file.
+
 2007-10-10  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	Resolve bug #21299: Duplicate register address in iotn48.h.
