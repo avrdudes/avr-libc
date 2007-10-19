@@ -241,16 +241,19 @@
 #define SIG_SPI				_VECTOR(8)
 
 /* UART, Rx Complete */
-#define UART_RX_vect			_VECTOR(9)
-#define SIG_UART_RECV			_VECTOR(9)
+#define USART_RX_vect                   _VECTOR(9)
+#define UART_RX_vect                    _VECTOR(9) /* For compatability only */
+#define SIG_UART_RECV                   _VECTOR(9) /* For compatability only */
 
 /* UART Data Register Empty */
-#define UART_UDRE_vect			_VECTOR(10)
-#define SIG_UART_DATA			_VECTOR(10)
+#define USART_UDRE_vect                 _VECTOR(10)
+#define UART_UDRE_vect                  _VECTOR(10) /* For compatability only */
+#define SIG_UART_DATA                   _VECTOR(10) /* For compatability only */
 
 /* UART, Tx Complete */
-#define UART_TX_vect			_VECTOR(11)
-#define SIG_UART_TRANS			_VECTOR(11)
+#define USART_TX_vect                   _VECTOR(11)
+#define UART_TX_vect                    _VECTOR(11) /* For compatability only */
+#define SIG_UART_TRANS                  _VECTOR(11) /* For compatability only */
 
 /* Analog Comparator */
 #define ANA_COMP_vect			_VECTOR(12)
