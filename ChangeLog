@@ -1,3 +1,8 @@
+2007-10-19  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Remove duplicate entries for
+	at90pwm216 and at90pwm316.
+
 2007-10-10  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	Resolve bug #21299: Duplicate register address in iotn48.h.
