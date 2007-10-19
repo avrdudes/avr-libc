@@ -111,6 +111,8 @@ avr_HEADERS = \
     iomxxhva.h \
     io90pwm1.h \
     io90pwmx.h \
+    io90pwm2b.h \
+    io90pwm3b.h \
     io90pwm216.h \
     io90pwm316.h \
     iotn11.h \
