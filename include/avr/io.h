@@ -107,8 +107,12 @@
 #  include <avr/io90pwm1.h>
 #elif defined (__AVR_AT90PWM2__)
 #  include <avr/io90pwmx.h>
+#elif defined (__AVR_AT90PWM2B__)
+#  include <avr/io90pwm2b.h>
 #elif defined (__AVR_AT90PWM3__)
 #  include <avr/io90pwmx.h>
+#elif defined (__AVR_AT90PWM3B__)
+#  include <avr/io90pwm3b.h>
 #elif defined (__AVR_AT90PWM216__)
 #  include <avr/io90pwm216.h>
 #elif defined (__AVR_AT90PWM316__)

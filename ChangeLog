@@ -1,5 +1,19 @@
 2007-10-19  Eric B. Weddington  <eweddington@cso.atmel.com>
 
+	* configure.ac: Add new devices: AT90PWM2B, AT90PWM3B.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/io90pwm2b.h: New file.
+	* include/avr/io90pwm3b.h: New file.
+	* NEWS: Add devices to list.
+
+2007-10-19  Eric B. Weddington  <eweddington@cso.atmel.com>
+
 	Fix for Atmel bug #6346.
 	* include/avr/iom8515.h: Add USART* interrupt vector names to
 	correctly reflect the device XML file.

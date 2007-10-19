@@ -140,7 +140,10 @@
 || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__) \
 || defined(__AVR_ATmega8HVA__) || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_AT90PWM1__) \
-|| defined(__AVR_AT90PWM2__) || defined(__AVR_AT90PWM3__) \
+|| defined(__AVR_AT90PWM2__) \
+|| defined(__AVR_AT90PWM2B__) \
+|| defined(__AVR_AT90PWM3__) \
+|| defined(__AVR_AT90PWM3B__) \
 || defined(__AVR_AT90PWM216__) \
 || defined(__AVR_AT90PWM316__) \
 || defined(__AVR_ATtiny48__)
@@ -296,7 +299,7 @@ __asm__ __volatile__ (  \
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega8HVA, ATmega16HVA,
     ATmega406,
-    AT90PWM1, AT90PWM2, AT90PWM3, AT90PWM216, AT90PWM316
+    AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287,
     ATtiny48.
@@ -315,7 +318,7 @@ __asm__ __volatile__ (  \
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega8HVA, ATmega16HVA,
     ATmega406,
-    AT90PWM1, AT90PWM2, AT90PWM3, AT90PWM216, AT90PWM316
+    AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287,
     ATtiny48.
