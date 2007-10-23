@@ -547,14 +547,17 @@
 /* USART0, Rx Complete */
 #define USART0_RX_vect			_VECTOR(21)
 #define SIG_UART0_RECV			_VECTOR(21)
+#define SIG_USART0_RECV			_VECTOR(21)
 
 /* USART0 Data Register Empty */
 #define USART0_UDRE_vect		_VECTOR(22)
 #define SIG_UART0_DATA			_VECTOR(22)
+#define SIG_USART0_DATA			_VECTOR(22)
 
 /* USART0, Tx Complete */
 #define USART0_TX_vect			_VECTOR(23)
 #define SIG_UART0_TRANS			_VECTOR(23)
+#define SIG_USART0_TRANS		_VECTOR(23)
 
 /* Analog Comparator */
 #define ANALOG_COMP_vect		_VECTOR(24)
@@ -591,14 +594,17 @@
 /* USART1, Rx Complete */
 #define USART1_RX_vect			_VECTOR(32)
 #define SIG_UART1_RECV			_VECTOR(32)
+#define SIG_USART1_RECV			_VECTOR(32)
 
 /* USART1, Data Register Empty */
 #define USART1_UDRE_vect		_VECTOR(33)
 #define SIG_UART1_DATA			_VECTOR(33)
+#define SIG_USART1_DATA			_VECTOR(33)
 
 /* USART1, Tx Complete */
 #define USART1_TX_vect			_VECTOR(34)
 #define SIG_UART1_TRANS			_VECTOR(34)
+#define SIG_USART1_TRANS		_VECTOR(34)
 
 /* 2-wire Serial Interface */
 #define TWI_vect			_VECTOR(35)
