@@ -148,8 +148,13 @@ __init:
 #ifdef _HAVE_AVR_STACK_POINTER_HI
 	ldi	r29,hi8(__stack)
 	out	AVR_STACK_POINTER_HI_ADDR, r29
-#endif
+#endif	/* _HAVE_AVR_STACK_POINTER_HI */
 	out	AVR_STACK_POINTER_LO_ADDR, r28
+
+#ifdef __AVR_3_BYTE_PC__
+	ldi	r16, hh8(pm(__vectors))
+	out	_SFR_IO_ADDR(EIND), r16
+#endif	/* __AVR_3_BYTE_PC__ */
 
 #if BIG_CODE
 	/* Only for >64K devices with RAMPZ, replaces the default code

@@ -60,6 +60,7 @@
   [#19686] alloc declaration missing
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
+  [#20843] Mega 2561 library
   [#21183] Fix Program Space example code.
   [#21228] Missing 3rd clause in BSD license in documentation pages
   [#21299] Duplicate register address in iotn48.h.
