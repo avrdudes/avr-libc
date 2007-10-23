@@ -1,5 +1,13 @@
 2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Fix bug #21174: assembly error with targets at90s1200, attiny11,
+	attiny12, and attiny28
+	* crt1/gcrt1.S: for assembly-only architectures, revert to the
+	old behaviour of jumping to main() rather than calling it, and
+	jumping to exit() afterwards.
+
+2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Fix for bug #18964: USART definitions *wrong* in iocanxx.h
 	* include/avr/iocanxx.h: Add missing SIG_USART* vector names.
 
