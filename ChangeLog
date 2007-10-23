@@ -1,5 +1,10 @@
 2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Fix for bug #18964: USART definitions *wrong* in iocanxx.h
+	* include/avr/iocanxx.h: Add missing SIG_USART* vector names.
+
+2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Guohui Wang <info@Atmanecl.net>:
 	Fix for bug #20843: Mega 2561 library
 	* crt0/gcrt0.S: initialize EIND for avr6 architectures to
