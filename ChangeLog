@@ -1,3 +1,19 @@
+2007-10-23 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add new devices: ATmega48P/88P/168P/328P.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom168p.h: New file.
+	* include/avr/iom328p.h: New file.
+	* include/avr/iom48p.h: New file.
+	* include/avr/iom88p.h: New file.
+	* include/avr/iomx8p.h: New file.
+	* NEWS: Add devices to list.
+
 2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fix bug #21174: assembly error with targets at90s1200, attiny11,
