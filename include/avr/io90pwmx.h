@@ -535,9 +535,21 @@
 
 /* Amplifier 0 Control and Status register */
 #define AMP0CSR _SFR_MEM8(0x76)
+#define AMP0EN  7
+#define AMP0IS  6
+#define AMP0G1  5
+#define AMP0G0  4
+#define AMP0TS1 1
+#define AMP0TS0 0
 
 /* Amplifier 1 Control and Status register */
 #define AMP1CSR _SFR_MEM8(0x77)
+#define AMP1EN  7
+#define AMP1IS  6
+#define AMP1G1  5
+#define AMP1G0  4
+#define AMP1TS1 1
+#define AMP1TS0 0
 
 /* ADC Result Data Register */
 #ifndef __ASSEMBLER__
@@ -563,6 +575,7 @@
 #define ADCSRB  _SFR_MEM8(0x7B)
 /* ADCSRB */
 #define ADHSM   7   /* ADC High Speed Mode */
+#define ADASCR  4
 #define ADTS3   3   /* ADC Auto Trigger Source 3 */
 #define ADTS2   2   /* ADC Auto Trigger Source 2 */
 #define ADTS1   1   /* ADC Auto Trigger Source 1 */

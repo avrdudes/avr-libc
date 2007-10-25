@@ -6,6 +6,7 @@
   [#19496] Add documentation: how to build toolchain for Windows.
   [#19686] alloc declaration missing
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
+  [#20435] Bit name definitions for AT90PWM3
   [#20682] Bad bit name in avr/io2313.h - Sugestion
   [#20843] Mega 2561 library
   [#21174] assembly error with targets at90s1200, attiny11, attiny12,
