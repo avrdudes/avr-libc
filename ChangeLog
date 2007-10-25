@@ -1,3 +1,8 @@
+2007-10-25  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotn13.h (EIN1D): Rename to AIN1D.
+	Closes bug #21411.
+
 2007-10-24  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	Add Lockbits API. Set the lockbits from within the application.

@@ -100,7 +100,7 @@
 #  define ADC2D                4
 #  define ADC3D                3
 #  define ADC1D                2
-#  define EIN1D                1
+#  define AIN1D                1
 #  define AIN0D                0
 
 /* PIN Change Mask Register */
