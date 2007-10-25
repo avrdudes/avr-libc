@@ -203,7 +203,8 @@
 /* Timer/Counter Interrupt MaSK register */                 
 #define    TOIE1   7
 #define    OCIE1A  6
-#define    TICIE   3
+#define    TICIE   3 /* old name */ 
+#define    TICIE1  3
 #define    TOIE0   1
  
 /* Timer/Counter Interrupt Flag register */                   
