@@ -305,4 +305,7 @@
 /* Include fuse.h after individual IO header files. */
 #include <avr/fuse.h>
 
+/* Include lock.h after individual IO header files. */
+#include <avr/lock.h>
+
 #endif /* _AVR_IO_H_ */

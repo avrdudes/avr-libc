@@ -1,4 +1,4 @@
-/* Copyright (c) 2004, Theodore A. Roth
+/* Copyright (c) 2007, Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -30,21 +30,42 @@
 
 /* $Id$ */
 
-#ifndef _AVR_IOM48_H_
-#define _AVR_IOM48_H_ 1
+/* avr/lock.h - Lock Bits API */
 
-#include <avr/iomx8.h>
-
-/* Constants */
-#define SPM_PAGESIZE 64
-#define RAMEND      0x2FF
-#define XRAMEND     0x2FF
-#define E2END       0xFF
-#define FLASHEND    0xFFF
+#ifndef _AVR_LOCK_H_
+#define _AVR_LOCK_H_  1
 
 
-/* Lock Bits */
-#define __LOCK_BITS_EXIST
+#ifndef __ASSEMBLER__
+
+#define LOCKMEM  __attribute__((section (".lock")))
+
+#define LOCKBITS unsigned char __lock LOCKMEM
+
+#endif  /* !__ASSEMBLER */
 
 
-#endif /* _AVR_IOM48_H_ */
+/* Lock Bit Modes */
+#if defined(__LOCK_BITS_EXIST)
+#define LB_MODE_1  (0xFF)
+#define LB_MODE_2  (0xFE)
+#define LB_MODE_3  (0xFC)
+#endif
+
+#if defined(__BOOT_LOCK_BITS_0_EXIST)
+#define BLB0_MODE_1  (0xFF)
+#define BLB0_MODE_2  (0xFB)
+#define BLB0_MODE_3  (0xF3)
+#define BLB0_MODE_4  (0xF7)
+#endif
+
+#if defined(__BOOT_LOCK_BITS_1_EXIST)
+#define BLB1_MODE_1  (0xFF)
+#define BLB1_MODE_2  (0xEF)
+#define BLB1_MODE_3  (0xCF)
+#define BLB1_MODE_4  (0xDF)
+#endif
+
+#define LOCKBITS_DEFAULT (0xFF)
+
+#endif /* _AVR_LOCK_H_ */
