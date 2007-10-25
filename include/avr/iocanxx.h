@@ -1482,6 +1482,7 @@
 
 /* Register Bits [CANGSTA]  */
 /* CAN General Status Register */
+#define    OVFG       6
 #define    OVRG       6
 #define    TXBSY      4
 #define    RXBSY      3

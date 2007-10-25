@@ -1,5 +1,10 @@
 2007-10-25  Anatoly Sokolov <aesok@post.ru>
 
+	* include/avr/iocanxx.h (OVFG): Define.
+	Closes bug #21434.
+
+2007-10-25  Anatoly Sokolov <aesok@post.ru>
+
 	* include/avr/io90pwmx.h (AMP0EN, AMP0IS, AMP0G1, AMP0G0, AMP0TS1, 
 	AMP0TS0, AMP1EN, AMP1IS, AMP1G1, AMP1G0, AMP1TS1, AMP1TS0, 
 	ADASCR): Define.
