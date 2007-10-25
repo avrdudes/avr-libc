@@ -177,6 +177,8 @@
 #  include <avr/iom3250.h>
 #elif defined (__AVR_ATmega3250P__)
 #  include <avr/iom3250.h>
+#elif defined (__AVR_ATmega328P__)
+#  include <avr/iom328p.h>
 #elif defined (__AVR_ATmega329__)
 #  include <avr/iom329.h>
 #elif defined (__AVR_ATmega329P__)
@@ -203,6 +205,8 @@
 #  include <avr/iom165p.h>
 #elif defined (__AVR_ATmega168__)
 #  include <avr/iom168.h>
+#elif defined (__AVR_ATmega168P__)
+#  include <avr/iom168p.h>
 #elif defined (__AVR_ATmega169__)
 #  include <avr/iom169.h>
 #elif defined (__AVR_ATmega169P__)
@@ -215,8 +219,12 @@
 #  include <avr/iom8.h>
 #elif defined (__AVR_ATmega48__)
 #  include <avr/iom48.h>
+#elif defined (__AVR_ATmega48P__)
+#  include <avr/iom48p.h>
 #elif defined (__AVR_ATmega88__)
 #  include <avr/iom88.h>
+#elif defined (__AVR_ATmega88P__)
+#  include <avr/iom88p.h>
 #elif defined (__AVR_ATmega8515__)
 #  include <avr/iom8515.h>
 #elif defined (__AVR_ATmega8535__)

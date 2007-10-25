@@ -441,8 +441,14 @@ AM_CONDITIONAL(HAS_atmega8535, true)
 CHECK_AVR_DEVICE(atmega48)
 AM_CONDITIONAL(HAS_atmega48, test "x$HAS_atmega48" = "xyes")
 
+CHECK_AVR_DEVICE(atmega48p)
+AM_CONDITIONAL(HAS_atmega48p, test "x$HAS_atmega48p" = "xyes")
+
 CHECK_AVR_DEVICE(atmega88)
 AM_CONDITIONAL(HAS_atmega88, test "x$HAS_atmega88" = "xyes")
+
+CHECK_AVR_DEVICE(atmega88p)
+AM_CONDITIONAL(HAS_atmega88p, test "x$HAS_atmega88p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega8hva)
 AM_CONDITIONAL(HAS_atmega8hva, test "x$HAS_atmega8hva" = "xyes")
@@ -490,6 +496,9 @@ AM_CONDITIONAL(HAS_atmega165p, test "x$HAS_atmega165p" = "xyes")
 CHECK_AVR_DEVICE(atmega168)
 AM_CONDITIONAL(HAS_atmega168, test "x$HAS_atmega168" = "xyes")
 
+CHECK_AVR_DEVICE(atmega168p)
+AM_CONDITIONAL(HAS_atmega168p, test "x$HAS_atmega168p" = "xyes")
+
 CHECK_AVR_DEVICE(atmega169p)
 AM_CONDITIONAL(HAS_atmega169p, test "x$HAS_atmega169p" = "xyes")
 
@@ -510,6 +519,9 @@ AM_CONDITIONAL(HAS_atmega3250, test "x$HAS_atmega3250" = "xyes")
 
 CHECK_AVR_DEVICE(atmega3250p)
 AM_CONDITIONAL(HAS_atmega3250p, test "x$HAS_atmega3250p" = "xyes")
+
+CHECK_AVR_DEVICE(atmega328p)
+AM_CONDITIONAL(HAS_atmega328p, test "x$HAS_atmega328p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega329)
 AM_CONDITIONAL(HAS_atmega329, test "x$HAS_atmega329" = "xyes")
@@ -687,8 +699,10 @@ AC_CONFIG_FILES([
 AC_CONFIG_FILES([
 	avr/lib/avr4/Makefile
 	avr/lib/avr4/atmega48/Makefile
+	avr/lib/avr4/atmega48p/Makefile
 	avr/lib/avr4/atmega8/Makefile
 	avr/lib/avr4/atmega88/Makefile
+	avr/lib/avr4/atmega88p/Makefile
 	avr/lib/avr4/atmega8515/Makefile
 	avr/lib/avr4/atmega8535/Makefile
 	avr/lib/avr4/atmega8hva/Makefile
@@ -710,6 +724,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega165/Makefile
 	avr/lib/avr5/atmega165p/Makefile
 	avr/lib/avr5/atmega168/Makefile
+	avr/lib/avr5/atmega168p/Makefile
 	avr/lib/avr5/atmega169/Makefile
 	avr/lib/avr5/atmega169p/Makefile
 	avr/lib/avr5/atmega16hva/Makefile
@@ -720,6 +735,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega325p/Makefile
 	avr/lib/avr5/atmega3250/Makefile
 	avr/lib/avr5/atmega3250p/Makefile
+	avr/lib/avr5/atmega328p/Makefile
 	avr/lib/avr5/atmega329/Makefile
 	avr/lib/avr5/atmega329p/Makefile
 	avr/lib/avr5/atmega3290/Makefile

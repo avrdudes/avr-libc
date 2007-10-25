@@ -21,6 +21,10 @@
   + ATtiny48
   + AT90PWM2B
   + AT90PWM3B
+  + ATmega48P
+  + ATmega88P
+  + ATmega168P
+  + ATmega328P
 
 *** Changes in avr-libc-1.4.6:
 

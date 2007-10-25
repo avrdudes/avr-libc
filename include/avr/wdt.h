@@ -121,10 +121,12 @@
 || defined(__AVR_AT90USB82__) || defined(__AVR_AT90USB162__) \
 || defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__) \
 || defined(__AVR_AT90USB1286__) || defined(__AVR_AT90USB1287__) \
-|| defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega48__) || defined(__AVR_ATmega48P__) \
+|| defined(__AVR_ATmega88__) || defined(__AVR_ATmega88P__) \
 || defined(__AVR_ATmega164P__) \
 || defined(__AVR_ATmega165__) || defined(__AVR_ATmega165P__) \
-|| defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega168__) || defined(__AVR_ATmega168P__) \
+|| defined(__AVR_ATmega328P__) \
 || defined(__AVR_ATmega169__) || defined(__AVR_ATmega169P__) \
 || defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
@@ -295,6 +297,7 @@ __asm__ __volatile__ (  \
     ATtiny25, ATtiny45, ATtiny85, 
     ATtiny261, ATtiny461, ATtiny861, 
     ATmega48, ATmega88, ATmega168,
+    ATmega48P, ATmega88P, ATmega168P, ATmega328P,
     ATmega164P, ATmega324P, ATmega644P, ATmega644,
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega8HVA, ATmega16HVA,
@@ -314,6 +317,7 @@ __asm__ __volatile__ (  \
     ATtiny25, ATtiny45, ATtiny85, 
     ATtiny261, ATtiny461, ATtiny861, 
     ATmega48, ATmega88, ATmega168,
+    ATmega48P, ATmega88P, ATmega168P, ATmega328P,
     ATmega164P, ATmega324P, ATmega644P, ATmega644,
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega8HVA, ATmega16HVA,

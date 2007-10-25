@@ -103,6 +103,7 @@ compile-time.
 - atmega165
 - atmega165p
 - atmega168
+- atmega168p
 - atmega2560
 - atmega2561
 - atmega32
@@ -112,7 +113,9 @@ compile-time.
 - atmega325p
 - atmega3250
 - atmega3250p
+- atmega328p
 - atmega48
+- atmega48p
 - atmega64
 - atmega640
 - atmega644
@@ -121,6 +124,7 @@ compile-time.
 - atmega6450
 - atmega8
 - atmega88
+- atmega88p
 - atmega8515
 - atmega8535
 
