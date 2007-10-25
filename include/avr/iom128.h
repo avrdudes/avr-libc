@@ -1191,4 +1191,11 @@
 
 #define EFUSE_DEFAULT (M103C)
 
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_BITS_0_EXIST
+#define __BOOT_LOCK_BITS_1_EXIST 
+
+
 #endif /* _AVR_IOM128_H_ */

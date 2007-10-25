@@ -42,4 +42,11 @@
 #define E2END       0x1FF
 #define FLASHEND    0x3FFF
 
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_BITS_0_EXIST
+#define __BOOT_LOCK_BITS_1_EXIST 
+
+
 #endif /* _AVR_IOM168_H_ */

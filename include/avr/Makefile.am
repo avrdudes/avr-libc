@@ -137,6 +137,7 @@ avr_HEADERS = \
     iotnx4.h \
     iotnx5.h \
     iotnx61.h \
+    lock.h \
     parity.h \
     pgmspace.h \
     portpins.h \
