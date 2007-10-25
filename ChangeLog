@@ -1,5 +1,10 @@
 2007-10-25  Anatoly Sokolov <aesok@post.ru>
 
+	* include/avr/io2313.h (TICIE1): Define.
+	Closes bug #20682.
+
+2007-10-25  Anatoly Sokolov <aesok@post.ru>
+
 	* include/avr/iotn13.h (EIN1D): Rename to AIN1D.
 	Closes bug #21411.
 

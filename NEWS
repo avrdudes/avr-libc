@@ -61,6 +61,7 @@
   [#19686] alloc declaration missing
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
+  [#20682] Bad bit name in avr/io2313.h - Sugestion
   [#20843] Mega 2561 library
   [#21174] assembly error with targets at90s1200, attiny11, attiny12,
            and attiny28
