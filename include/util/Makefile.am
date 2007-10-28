@@ -35,5 +35,6 @@ avr_HEADERS = \
     crc16.h \
     delay.h \
     delay_basic.h \
+    setbaud.h \
     parity.h \
     twi.h

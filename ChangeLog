@@ -1,5 +1,12 @@
 2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Cliff Lawson and Carlos Lamas:
+	Patch #5343: Add a util/setbaud.h "helper" file
+	* include/util/setbaud.h: New file.
+	* include/util/Makefile.am: Include setbaud.h.
+
+2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Dean Camera:
 	Patch #5756: New atomic.h header file
 	* include/util/atomic.h: New file.

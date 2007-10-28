@@ -120,6 +120,8 @@
 
   [patch #5756] New atomic.h header file (added as <util/atomic.h>)
 
+  [patch #5343] Add a util/setbaud.h "helper" file
+
 * New devices supported:
 
   + ATtiny24
