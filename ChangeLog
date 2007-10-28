@@ -1,3 +1,10 @@
+2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Dean Camera:
+	Patch #5756: New atomic.h header file
+	* include/util/atomic.h: New file.
+	* include/util/Makefile.am: Include atomic.h.
+
 2007-10-25  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iocanxx.h (OVFG): Define.

@@ -31,6 +31,7 @@
 
 avrdir = $(prefix)/avr/include/util
 avr_HEADERS = \
+    atomic.h \
     crc16.h \
     delay.h \
     delay_basic.h \
