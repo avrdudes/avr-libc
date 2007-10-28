@@ -122,6 +122,8 @@
 
   [patch #5343] Add a util/setbaud.h "helper" file
 
+  [patch #6236] Improving _delay_us and _delay_ms
+
 * New devices supported:
 
   + ATtiny24

@@ -1,5 +1,13 @@
 2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Florin-Viorel Petrov
+	Patch #6236: Improving _delay_us and _delay_ms
+	* include/util/delay.h: Provide fallback functionality
+	to extend the possible argument range to _delay_us(),
+	and _delay_ms(), respectively.
+
+2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Cliff Lawson and Carlos Lamas:
 	Patch #5343: Add a util/setbaud.h "helper" file
 	* include/util/setbaud.h: New file.
