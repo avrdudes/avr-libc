@@ -1,3 +1,11 @@
+2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Florin-Viorel Petrov
+	Patch #6236: Improving _delay_us and _delay_ms
+	* include/util/delay.h: Provide fallback functionality
+	to extend the possible argument range to _delay_us(),
+	and _delay_ms(), respectively.
+
 2007-10-25  Anatoly Sokolov <aesok@post.ru>
 
 	* include/avr/iocanxx.h (OVFG): Define.

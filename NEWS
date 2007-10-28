@@ -30,6 +30,10 @@
   + ATmega168P
   + ATmega328P
 
+* Other changes:
+
+  [patch #6236] Improving _delay_us and _delay_ms
+
 *** Changes in avr-libc-1.4.6:
 
 * Bugs fixed:

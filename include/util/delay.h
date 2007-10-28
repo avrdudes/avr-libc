@@ -1,5 +1,6 @@
 /* Copyright (c) 2002, Marek Michalkiewicz
    Copyright (c) 2004,2005,2007 Joerg Wunsch
+   Copyright (c) 2007  Florin-Viorel Petrov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -98,6 +99,10 @@ static inline void _delay_ms(double __ms) __attribute__((always_inline));
    constant defining the CPU clock frequency (in Hertz).
 
    The maximal possible delay is 768 us / F_CPU in MHz.
+
+   If the user requests a delay greater than the maximal possible one,
+   _delay_us() will automatically call _delay_ms() instead.  The user
+   will not be informed about this case.
  */
 void
 _delay_us(double __us)
@@ -107,7 +112,10 @@ _delay_us(double __us)
 	if (__tmp < 1.0)
 		__ticks = 1;
 	else if (__tmp > 255)
-		__ticks = 0;	/* i.e. 256 */
+	{
+		_delay_ms(__us / 1000.0);
+		return;
+	}
 	else
 		__ticks = (uint8_t)__tmp;
 	_delay_loop_1(__ticks);
@@ -123,6 +131,12 @@ _delay_us(double __us)
    constant defining the CPU clock frequency (in Hertz).
 
    The maximal possible delay is 262.14 ms / F_CPU in MHz.
+
+   When the user request delay which exceed the maximum possible one,
+   _delay_ms() provides a decreased resolution functionality. In this
+   mode _delay_ms() will work with a resolution of 1/10 ms, providing
+   delays up to 6.5535 seconds (independent from CPU frequency).  The
+   user will not be informed about decreased resolution.
  */
 void
 _delay_ms(double __ms)
@@ -132,7 +146,17 @@ _delay_ms(double __ms)
 	if (__tmp < 1.0)
 		__ticks = 1;
 	else if (__tmp > 65535)
-		__ticks = 0;	/* i.e. 65536 */
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+		}
+		return;
+	}
 	else
 		__ticks = (uint16_t)__tmp;
 	_delay_loop_2(__ticks);
