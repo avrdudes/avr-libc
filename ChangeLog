@@ -1,7 +1,7 @@
 2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
-	* configure.ac: Bump revision to 1.5.1 in order to prepare for a new
-	(unstable) release.
+	* configure.ac: Bump revision to 1.5.1-20011029 in order to
+	prepare for a new (unstable) release.
 
 2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
