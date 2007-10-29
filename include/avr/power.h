@@ -641,8 +641,12 @@ do{ \
 
 
 #elif defined(__AVR_ATmega48__) \
+|| defined(__AVR_ATmega48P__) \
 || defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega88P__) \
 || defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega168P__) \
+|| defined(__AVR_ATmega328P__) \
 || defined(__AVR_ATtiny48__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
@@ -732,15 +736,19 @@ do{ \
 || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega649__) \
 || defined(__AVR_ATmega6490__) \
-|| defined (__AVR_ATmega48__) \
-|| defined (__AVR_ATmega88__) \
-|| defined (__AVR_ATmega168__) \
-|| defined (__AVR_ATmega164P__) \
-|| defined (__AVR_ATmega324P__) \
-|| defined (__AVR_ATmega644__) \
-|| defined (__AVR_ATmega644P__) \
-|| defined (__AVR_ATtiny48__) \
-|| defined (__DOXYGEN__)
+|| defined(__AVR_ATmega48__) \
+|| defined(__AVR_ATmega48P__) \
+|| defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega168P__) \
+|| defined(__AVR_ATmega328P__) \
+|| defined(__AVR_ATmega164P__) \
+|| defined(__AVR_ATmega324P__) \
+|| defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATtiny48__) \
+|| defined(__DOXYGEN__)
 
 
 /** \addtogroup avr_power

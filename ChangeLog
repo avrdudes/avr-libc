@@ -1,3 +1,7 @@
+2007-10-29  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* include/avr/power.h: Add support for ATmega48P-88P-168P-328P devices.
+
 2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/util/atomic.h: Fix a documentation spelling error.
