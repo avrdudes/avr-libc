@@ -73,7 +73,7 @@ static __inline__ void __iRestore(const  uint8_t *__s)
 #endif	/* !__DOXYGEN__ */
 
 /** \file */
-/** \defgroup util_atomic <util/atomic.h> Atomicly and Non-Atomically Executed Code Blocks
+/** \defgroup util_atomic <util/atomic.h> Atomically and Non-Atomically Executed Code Blocks
 
     \code
     #include <util/atomic.h>

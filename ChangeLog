@@ -1,5 +1,9 @@
 2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/util/atomic.h: Fix a documentation spelling error.
+
+2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: Bump revision to 1.5.1-20071030 in order to
 	indicate post-release 1.5.1-20071029 state.
 
