@@ -75,13 +75,15 @@ explanation about interrupt routines written solely in assembler language.
 If an unexpected interrupt occurs (interrupt is enabled and no handler is
 installed, which usually indicates a bug), then the default action is to reset
 the device by jumping to the reset vector. You can override this by supplying
-a function named \c __vector_default which should be defined with
-ISR() as such.
+a function named \c BADISR_vect which should be defined with
+ISR() as such.  (The name BADISR_vect is actually an alias for __vector_default.
+The latter must be used inside assembly code in case <avr/interrupt.h> is
+not included.)
 
 \code
 #include <avr/interrupt.h>
 
-ISR(__vector_default)
+ISR(BADISR_vect)
 {
     // user code here
 }
@@ -110,14 +112,88 @@ handler by declaring the handler the following way:
 
 \anchor attr_interrupt
 \code
-void XXX_vect(void) __attribute__((interrupt));
-void XXX_vect(void) {
+ISR(XXX_vect, ISR_NOBLOCK)
+{
   ...
 }
 \endcode
 
 where \c XXX_vect is the name of a valid interrupt vector for the MCU
 type in question, as explained below.
+
+<h3>Two vectors sharing the same code</h3>
+
+In some circumstances, the actions to be taken upon two different
+interrupts might be completely identical so a single implementation
+for the ISR would suffice.  For example, pin-change interrupts
+arriving from two different ports could logically signal an event that
+is independent from the actual port (and thus interrupt vector) where
+it happened.  Sharing interrupt vector code can be accomplished using
+the ISR_ALIASOF() attribute to the ISR macro:
+
+\code
+ISR(PCINT0_vect)
+{
+  ...
+  // Code to handle the event.
+}
+
+ISR(PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
+\endcode
+
+\note There is no body to the aliased ISR.
+
+Note that the ISR_ALIASOF() feature requires GCC 4.2 or above (or a
+patched version of GCC 4.1.x).  See the documentation of the
+ISR_ALIAS() macro for an implementation which is less elegant but
+could be applied to all compiler versions.
+
+<h3>Empty interrupt service routines</h3>
+
+In rare circumstances, in interrupt vector does not need any code to
+be implemented at all.  The vector must be declared anyway, so when
+the interrupt triggers it won't execute the BADISR_vect code (which by
+default restarts the application).
+
+This could for example be the case for interrupts that are solely
+enabled for the purpose of getting the controller out of sleep_mode().
+
+A handler for such an interrupt vector can be declared using the
+EMPTY_INTERRUPT() macro:
+
+\code
+EMPTY_INTERRUPT(ADC_vect);
+\endcode
+
+\note There is no body to this macro.
+
+<h3>Manually defined ISRs</h3>
+
+In some circumstances, the compiler-generated prologue and epilogue of
+the ISR might not be optimal for the job, and a manually defined ISR
+could be considered particularly to speedup the interrupt handling.
+
+One solution to this could be to implement the entire ISR as manual
+assembly code in a separate (assembly) file.  See \ref asmdemo for
+an example of how to implement it that way.
+
+Another solution is to still implement the ISR in C language but take
+over the compiler's job of generating the prologue and epilogue.  This
+can be done using the ISR_NAKED attribute to the ISR() macro.  Note
+that the compiler does not generate \e anything as prologue or
+epilogue, so the final reti() must be provided by the actual
+implementation.  SREG must be manually saved if the ISR code modifies
+it, and the compiler-implied assumption of \c __zero_reg__ always
+being 0 could be wrong (e. g. when interrupting right after of a MUL
+instruction).
+
+\code
+ISR(TIMER1_OVF_vect, ISR_NAKED)
+{
+  PORTB |= _BV(0);  // results in SBI which does not affect SREG
+  reti();
+}
+\endcode
 
 <h3>Choosing the vector: Interrupt vector names</h3>
 

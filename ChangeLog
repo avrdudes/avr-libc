@@ -1,3 +1,13 @@
+2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Dean Camera:
+	Patch #5644: New interrupt.h header file
+	* include/avr/interrupt.h: Complete overhaul of the ISR() and related
+	macros.
+	By Joerg Wunsch:
+	* doc/api/interrupts.dox: Update the interrupt documentation to all
+	the new features.
+
 2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Florin-Viorel Petrov

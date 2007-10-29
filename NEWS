@@ -124,6 +124,8 @@
 
   [patch #6236] Improving _delay_us and _delay_ms
 
+  [patch #5644] New interrupt.h header file
+
 * New devices supported:
 
   + ATtiny24
