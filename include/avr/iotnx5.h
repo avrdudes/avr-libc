@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, Anatoly Sokolov
+/* Copyright (c) 2005,2007 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -356,14 +356,17 @@
 
 /* Timer/Counter1 Compare Match 1A */
 #define TIM1_COMPA_vect			_VECTOR(3)
+#define TIMER1_COMPA_vect		_VECTOR(3)
 #define SIG_OUTPUT_COMPARE1A		_VECTOR(3)
 
 /* Timer/Counter1 Overflow */
 #define TIM1_OVF_vect			_VECTOR(4)
+#define TIMER1_OVF_vect			_VECTOR(4)
 #define SIG_OVERFLOW1			_VECTOR(4)
 
 /* Timer/Counter0 Overflow */
 #define TIM0_OVF_vect			_VECTOR(5)
+#define TIMER0_OVF_vect			_VECTOR(5)
 #define SIG_OVERFLOW0			_VECTOR(5)
 
 /* EEPROM Ready */
@@ -380,14 +383,17 @@
 
 /* Timer/Counter1 Compare Match B */
 #define TIM1_COMPB_vect			_VECTOR(9)
+#define TIMER1_COMPB_vect		_VECTOR(9)
 #define SIG_OUTPUT_COMPARE1B		_VECTOR(9)
 
 /* Timer/Counter0 Compare Match A */
 #define TIM0_COMPA_vect			_VECTOR(10)
+#define TIMER0_COMPA_vect		_VECTOR(10)
 #define SIG_OUTPUT_COMPARE0A		_VECTOR(10)
 
 /* Timer/Counter0 Compare Match B */
 #define TIM0_COMPB_vect			_VECTOR(11)
+#define TIMER0_COMPB_vect		_VECTOR(11)
 #define SIG_OUTPUT_COMPARE0B		_VECTOR(11)
 
 /* Watchdog Time-out */
