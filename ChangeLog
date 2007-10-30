@@ -1,3 +1,11 @@
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #18373: Bugs in Inline ASM documentacion
+	* doc/api/inline_asm.dox: Inline asm documentation improvements:
+	  . mention named operands
+	  . document that read-write constraints to work
+	  . explain read-write constraints
+
 2007-10-29  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	* include/avr/power.h: Add support for ATmega48P-88P-168P-328P devices.

@@ -139,6 +139,17 @@ avoid this, you can add the volatile attribute to the \c asm statement:
 asm volatile("in %0, %1" : "=r" (value) : "I" (_SFR_IO_ADDR(PORTD)));
 \endcode
 
+Alternatively, operands can be given names.  The name is prepended in
+brackets to the constraints in the operand list, and references to the
+named operand use the bracketed name instead of a number after the %
+sign.  Thus, the above example could also be written as
+
+\code
+asm("in %[retval], %[port]" :
+    [retval] "=r" (value) :
+    [port] "I" (_SFR_IO_ADDR(PORTD)) );
+\endcode
+
 The last part of the \c asm instruction, the clobber list, is mainly used to
 tell the compiler about modifications done by the assembler code. This part
 may be omitted, all other parts are required, but may be left empty. If your
@@ -495,7 +506,7 @@ Contraints without a modifier specify read-only operands. Modifiers are:
   </tr>
   <tr>
     <td>+</td>
-    <td>Read-write operand (not supported by inline assembler)</td>
+    <td>Read-write operand</td>
   </tr>
   <tr>
     <td>&</td>
@@ -573,6 +584,21 @@ asm volatile("mov __tmp_reg__, %A0" "\n\t"
              : "=r" (value)
              : "0" (value)
             );
+\endcode
+
+Instead of listing the same operand as both, input and output operand,
+it can also be declared as a read-write operand.  This must be applied
+to an output operand, and the respective input operand list remains
+empty:
+
+\code
+asm volatile("mov __tmp_reg__, %A0" "\n\t"
+             "mov %A0, %D0"         "\n\t"
+             "mov %D0, __tmp_reg__" "\n\t"
+             "mov __tmp_reg__, %B0" "\n\t"
+             "mov %B0, %C0"         "\n\t"
+             "mov %C0, __tmp_reg__" "\n\t"
+             : "+r" (value));
 \endcode
 
 If operands do not fit into a single register, the compiler will automatically
