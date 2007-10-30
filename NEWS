@@ -64,6 +64,7 @@
   [#20248] FAQ#3: clarify which registers are safe to be used
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
   [#20435] Bit name definitions for AT90PWM3
+  [#20530] Bug in sample code for early wdt disable
   [#20650] Missing description of AVR specific C-preprocessor macros
   [#20682] Bad bit name in avr/io2313.h - Sugestion
   [#20843] Mega 2561 library

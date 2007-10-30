@@ -1,5 +1,11 @@
 2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #20530: Bug in sample code for early wdt disable
+	* include/avr/wdt.h: move variable mcusr_mirror into
+	the .noinit section in example code.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #20248: FAQ#3: clarify which registers are safe to be used
 	* doc/api/faq.dox: Describe that r8...r15 can only be used
 	for register variables if they are not used for argument
