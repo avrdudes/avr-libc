@@ -1,5 +1,11 @@
 2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #21204: iotnx61.h PRR bits incorrect
+	* include/avr/iotnx61.h: Use correct bit numbers for
+	PRTIM0/PRTIM1.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #21444: Undocument -minit-stack
 	* doc/api/using-tools.dox: Remove references to -minit-stack,
 	add an explanation for how to set __stack in order to relocate

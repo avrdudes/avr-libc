@@ -71,6 +71,7 @@
   [#21174] assembly error with targets at90s1200, attiny11, attiny12,
            and attiny28
   [#21183] Fix Program Space example code.
+  [#21204] iotnx61.h PRR bits incorrect
   [#21228] Missing 3rd clause in BSD license in documentation pages
   [#21299] Duplicate register address in iotn48.h.
   [#21411] Typographical error in 'iotn13.h'
