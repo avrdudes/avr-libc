@@ -1,5 +1,12 @@
 2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #20650: Missing description of AVR specific C-preprocessor
+	macros
+	* doc/api/using-tools.dox: Document the target-specific macros
+	__AVR, __AVR__, AVR, and __NO_INTERRUPTS__.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #18373: Bugs in Inline ASM documentacion
 	* doc/api/inline_asm.dox: Inline asm documentation improvements:
 	  . mention named operands

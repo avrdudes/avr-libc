@@ -41,6 +41,11 @@ explained in detail in the manual page.
 
 The following machine-specific options are recognized by the C
 compiler frontend.
+In addition to the preprocessor macros indicated in the tables
+below, the preprocessor will define the macros __AVR and __AVR__
+(to the value 1) when compiling for an AVR target.  The macro
+AVR will be defined as well when using the standard levels gnu89
+(default) and gnu99 but not with c89 and c99.
 
 - <tt>-mmcu=</tt><em>architecture</em>
   <p>
@@ -300,6 +305,10 @@ compiler frontend.
   interrupts.  Normally, the state of the status register \c SREG
   is saved in a temporary register, interrupts are disabled while
   changing the stack pointer, and \c SREG is restored.
+  </p>
+  <p>
+  Specifying this option will define the preprocessor macro
+  \c __NO_INTERRUPTS__ to the value 1.
   </p>
 
 - \c -mcall-prologues
