@@ -389,8 +389,8 @@
 #define PRR     _SFR_IO8(0x36)
 #define PRADC   0
 #define PRUSI   1
-#define PRTIM0  3
-#define PRTIM1  4
+#define PRTIM0  2
+#define PRTIM1  3
 
 #define SPMCSR  _SFR_IO8(0x37)
 #define SPMEN   0
