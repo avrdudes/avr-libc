@@ -40,6 +40,7 @@
            3-Byte PC devices
   [#17608] Add ISR_ALIAS() to avr/interrupt.h
   [#18115] online documentation typo/bug avr/boot.h
+  [#18373] Bugs in Inline ASM documentacion
   [#18385] SPM_PAGESIZE wrong value for ATmega164p and ATmega324p
   [#18509] strtod.S crashes due to stack problem with atmega 2560
   [#18662] rand() keeps returning the same value if seeded with 0
@@ -60,8 +61,10 @@
   [#19666] AT90PWMx: Another patch for the include file (missing SFR)
   [#19686] alloc declaration missing
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'
+  [#20248] FAQ#3: clarify which registers are safe to be used
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
   [#20435] Bit name definitions for AT90PWM3
+  [#20650] Missing description of AVR specific C-preprocessor macros
   [#20682] Bad bit name in avr/io2313.h - Sugestion
   [#20843] Mega 2561 library
   [#21174] assembly error with targets at90s1200, attiny11, attiny12,
