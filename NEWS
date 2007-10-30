@@ -75,6 +75,7 @@
   [#21228] Missing 3rd clause in BSD license in documentation pages
   [#21299] Duplicate register address in iotn48.h.
   [#21411] Typographical error in 'iotn13.h'
+  [#21432] Incorrect timer interrupt handler names for ATtiny45
   [#21434] Bit name definitions for AT90CANxxx
   [#21444] Undocument -minit-stack
 
