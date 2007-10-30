@@ -1,5 +1,12 @@
 2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #21444: Undocument -minit-stack
+	* doc/api/using-tools.dox: Remove references to -minit-stack,
+	add an explanation for how to set __stack in order to relocate
+	the stack.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #20530: Bug in sample code for early wdt disable
 	* include/avr/wdt.h: move variable mcusr_mirror into
 	the .noinit section in example code.

@@ -75,6 +75,7 @@
   [#21299] Duplicate register address in iotn48.h.
   [#21411] Typographical error in 'iotn13.h'
   [#21434] Bit name definitions for AT90CANxxx
+  [#21444] Undocument -minit-stack
 
 * Other changes:
 

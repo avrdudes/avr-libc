@@ -319,13 +319,6 @@ AVR will be defined as well when using the standard levels gnu89
   slightly increased execution time.
   </p>
 
-- <tt>-minit-stack=</tt><em>nnnn</em>
-  <p>
-  Set the initial stack pointer to \e nnnn.  By default, the stack
-  pointer is initialized to the symbol \c __stack, which is set to
-  \c RAMEND by the run-time initialization code.
-  </p>
-
 - \c -mtiny-stack
   <p>
   Change only the low 8 bits of the stack pointer.
@@ -667,9 +660,8 @@ place the data segment at address 0x2000 in the SRAM:
 \endverbatim
 
 See the explanation of the \ref sec_dot_data "data section" for why
-0x800000 needs to be added to the actual value.  Note that unless
-a \c -minit-stack option has been given when compiling the C source
-file that contains the function \c main(), the stack will still
+0x800000 needs to be added to the actual value.  Note that
+the stack will still
 remain in internal RAM, through the symbol \c __stack that is provided
 by the run-time startup code.  This is probably a good idea anyway
 (since internal RAM access is faster), and even required for some
@@ -677,5 +669,23 @@ early devices that had hardware bugs preventing them from using a
 stack in external RAM.  Note also that the heap for \c malloc()
 will still be placed after all the variables in the data section,
 so in this situation, no stack/heap collision can occur.
+
+In order to relocate the stack from its default location at the top
+of interns RAM, the value of the symbol \c __stack can be changed
+on the linker command-line.  As the linker is typically called from
+the compiler frontend, this can be achieved using a compiler option
+like
+
+\code
+-Wl,--defsym=__stack=0x8003ff
+\endcode
+
+The above will make the code use stack space from RAM address 0x3ff
+downwards.  The amount of stack space available then depends on the
+bottom address of internal RAM for a particular device.  It is the
+responsibility of the application to ensure the stack does not grow
+out of bounds, as well as to arrange for the stack to not collide
+with variable allocations made by the compiler (sections .data
+and .bss).
 
 */
