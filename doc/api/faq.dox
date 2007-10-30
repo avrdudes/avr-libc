@@ -124,7 +124,16 @@ This can be done with
 register unsigned char counter asm("r3");
 \endcode
 
-Typically, it should be possible to use r2 through r15 that way.
+Typically, it should be save to use r2 through r7 that way.
+
+Registers r8 through r15 can be used for argument passing by the
+compiler in case many or long arguments are being passed to callees.
+If this is not the case throughout the entire application, these
+registers could be used for register variables as well.
+
+Extreme care should be taken that the entire application is
+compiled with a consistent set of register-allocated variables,
+including possibly used library functions.
 
 See \ref c_names_in_asm for more details.
 
@@ -664,6 +673,10 @@ Assembler subroutines are responsible for saving
 and restoring these registers, if changed.
 r29:r28 (Y pointer) is used as a frame pointer
 (points to local data on stack) if necessary.
+The requirement for the callee to save/preserve
+the contents of these registers even applies in
+situations where the compiler assigns them for
+argument passing.
 
 - <strong>Fixed registers (r0, r1):</strong><br>
 Never allocated by gcc for local data, but often

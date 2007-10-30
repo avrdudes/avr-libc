@@ -5,8 +5,11 @@
   [no-id]  Make documentation build work with doxygen 1.5.x
   [#19496] Add documentation: how to build toolchain for Windows.
   [#19686] alloc declaration missing
+  [#20248] FAQ#3: clarify which registers are safe to be used
   [#20276] power.h missing ATmega644Ppower_XXX_[en/dis]able() macros
   [#20435] Bit name definitions for AT90PWM3
+  [#20530] Bug in sample code for early wdt disable
+  [#20650] Missing description of AVR specific C-preprocessor macros
   [#20682] Bad bit name in avr/io2313.h - Sugestion
   [#20843] Mega 2561 library
   [#21174] assembly error with targets at90s1200, attiny11, attiny12,
@@ -16,6 +19,7 @@
   [#21299] Duplicate register address in iotn48.h.
   [#21411] Typographical error in 'iotn13.h'
   [#21434] Bit name definitions for AT90CANxxx
+  [#21444] Undocument -minit-stack
 
 * New devices supported:
 
@@ -40,6 +44,7 @@
 
   [no-id]  Exclude 64-bit types for -mint8.
   [#18115] online documentation typo/bug avr/boot.h
+  [#18373] Bugs in Inline ASM documentacion
   [#18385] SPM_PAGESIZE wrong value for ATmega164p and ATmega324p
   [#18509] strtod.S crashes due to stack problem with atmega 2560
   [#18662] rand() keeps returning the same value if seeded with 0
