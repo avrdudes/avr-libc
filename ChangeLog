@@ -1,5 +1,9 @@
 2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: bump version.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #21432: Incorrect timer interrupt handler names for ATtiny45
 	* include/avr/iotnx5.h: Add TIMER0..._vect and TIMER1..._vect
 	names in addition to the TIM0... and TIM1... names to match
