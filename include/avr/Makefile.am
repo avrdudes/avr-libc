@@ -108,7 +108,6 @@ avr_HEADERS = \
     iom88.h \
     iom88p.h \
     iomx8.h \
-    iomx8p.h \
     iom8hva.h \
     iom16hva.h \
     iomxx0_1.h \
