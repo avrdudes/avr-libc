@@ -29,11 +29,16 @@
 /* $Id$ */
 
 #include <stdlib.h>
+#include <avr/pgmspace.h>
 #include "ftoa_engine.h"
 
 char *
 dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
 {
+    __attribute__((progmem)) static char str_nan[2][4] =
+	{"nan", "NAN"};
+    __attribute__((progmem)) static char str_inf[2][sizeof(str_nan[0])] =
+	{"inf", "INF"};
     char *d;		/* dst	*/
     char *s;		/* src	*/
     signed char exp;
@@ -53,20 +58,16 @@ dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
 	*d++ = ' ';
 
     if (vtype & FTOA_NAN) {
-	if (flags & DTOSTR_UPPERCASE) {
-	    *d++ = 'N';  *d++ = 'A';  *d++ = 'N';
-	} else {
-	    *d++ = 'n';  *d++ = 'a';  *d++ = 'n';
-	}
-	goto ret;
+	s = str_nan[0];
+	goto copy;
     }
     
     if (vtype & FTOA_INF) {
-	if (flags & DTOSTR_UPPERCASE) {
-	    *d++ = 'I';  *d++ = 'N';  *d++ = 'F';
-	} else {
-	    *d++ = 'i';  *d++ = 'n';  *d++ = 'f';
-	}
+	s = str_inf[0];
+      copy:
+	if (flags & DTOSTR_UPPERCASE)
+	    s += sizeof(str_nan[0]);
+	strcpy_P (d, s);
 	goto ret;
     }
     
@@ -98,9 +99,9 @@ dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
 	prec += 1;
     *d++ = prec;
     *d++ = '0' + exp;
+    *d = 0;
     
   ret:
-    *d = 0;
     return sbeg;
 }
 			/*** end of file ***/
