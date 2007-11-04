@@ -1,3 +1,8 @@
+2007-11-04  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/dtostre.c: Optimize in space: 16..22 bytes, consided
+	the extra function strcpy_P().
+
 2007-11-02  Eric B. Weddington  <eweddington@cso.atmel.com>
 
 	* include/avr/iom48p.h: New implementation. No common file included. 
