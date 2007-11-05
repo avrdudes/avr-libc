@@ -1,3 +1,14 @@
+2007-11-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function round().
+	* libm/fplib/round.S: New file.
+	* libm/fplib/Files.am: Add new source round.S
+	* include/math.h: Add round() function definition.
+	* tests/simulate/math/round-01.c: New file.
+	* tests/simulate/math/xxx-nan.c: Add round() function to list.
+	
+	* include/math.h: Add the 'const' attribute to hypot() function.
+
 2007-11-04  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/dtostre.c: Optimize in space: 16..22 bytes, consided

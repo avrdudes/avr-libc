@@ -1,3 +1,14 @@
+*** Changes since avr-libc-1.5.1:
+
+* New functions:
+
+  round
+
+* Optimized functions:
+
+  dtostre
+
+
 *** Changes since avr-libc-1.4.0:
 
 * Bugs fixed:
