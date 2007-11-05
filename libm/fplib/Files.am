@@ -88,6 +88,7 @@ libm_a_asm_sources = \
 	mulsf3x.S \
 	negsf2.S \
 	pow.S \
+	round.S \
 	signbit.S \
 	sinh.S \
 	sin.S \
