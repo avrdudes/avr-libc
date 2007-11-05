@@ -24,6 +24,7 @@ double (*tfun[]) (double) = {
     tan,
     tanh,
     trunc,
+    round
 };
 
 union lofl_u {
