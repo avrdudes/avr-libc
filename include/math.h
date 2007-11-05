@@ -433,7 +433,18 @@ __ATTR_CONST__ extern inline int isfinite (double x)
      much smaller. No underflow with small x and y. No overflow if
      result is in range.
   */
-double hypot (double x, double y);
+double hypot (double x, double y) __ATTR_CONST__;
+
+/** \ingroup avr_math
+
+    The round() function rounds \p x to the nearest integer, but rounds
+    halfway cases away from zero (instead of to the nearest even integer).
+    Overflow is impossible.
+
+    \return The rounded value. If \p x is an integral or infinite, \p x
+    itself is returned. If \p x is \c NaN, then \c NaN is returned.
+ */
+double round (double x) __ATTR_CONST__;
 
 #ifdef __cplusplus
 }
