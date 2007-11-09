@@ -135,6 +135,7 @@ avr_HEADERS = \
     iotn45.h \
     iotn461.h \
     iotn48.h \
+    iotn88.h \
     iotn84.h \
     iotn85.h \
     iotn861.h \

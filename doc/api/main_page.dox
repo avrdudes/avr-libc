@@ -149,6 +149,7 @@ compile-time.
 - attiny84
 - attiny85
 - attiny861
+- attiny88
 
 \par CAN AVR Devices:
 

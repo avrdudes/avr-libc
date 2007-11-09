@@ -39,6 +39,7 @@
   + ATmega88P
   + ATmega168P
   + ATmega328P
+  + ATtiny88
 
 * Other changes:
 
