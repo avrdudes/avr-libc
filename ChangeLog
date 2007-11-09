@@ -1,3 +1,18 @@
+2007-11-08  Eric B. Weddingotn  <eweddington@cso.atmel.com>
+
+	Add new device: ATtiny88.
+	* configure.ac: Add new device.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iotn88.h: New file.
+	* NEWS: Update new devices list.
+	* include/avr/iotn48.h: Add lockbit information.
+
 2007-11-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add new function round().

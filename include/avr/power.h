@@ -647,7 +647,8 @@ do{ \
 || defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega168P__) \
 || defined(__AVR_ATmega328P__) \
-|| defined(__AVR_ATtiny48__)
+|| defined(__AVR_ATtiny48__) \
+|| defined(__AVR_ATtiny88__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))

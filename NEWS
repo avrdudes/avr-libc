@@ -8,6 +8,9 @@
 
   dtostre
 
+* New devices supported:
+
+  + ATtiny88
 
 *** Changes since avr-libc-1.4.0:
 

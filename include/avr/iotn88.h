@@ -31,7 +31,7 @@
 
 /* $Id$ */
 
-/* avr/iotn48.h - definitions for ATtiny43U */
+/* avr/iotn88.h - definitions for ATtiny88 */
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -40,14 +40,14 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iotn48.h"
+#  define _AVR_IOXXX_H_ "iotn88.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
 
-#ifndef _AVR_IOTN48_H_
-#define _AVR_IOTN48_H_ 1
+#ifndef _AVR_IOTN88_H_
+#define _AVR_IOTN88_H_ 1
 
 /* Registers and associated bit numbers */
 
@@ -236,21 +236,11 @@
 #define PSRSYNC 0
 #define TSM 7
 
-#define TCCR0A _SFR_IO8(0x24)
-#define WGM00 0
-#define WGM01 1
-#define COM0B0 4
-#define COM0B1 5
-#define COM0A0 6
-#define COM0A1 7
-
-#define TCCR0B _SFR_IO8(0x25)
+#define TCCR0A _SFR_IO8(0x25)
 #define CS00 0
 #define CS01 1
 #define CS02 2
-#define WGM02 3
-#define FOC0B 6
-#define FOC0A 7
+#define CTC0 7
 
 #define TCNT0 _SFR_IO8(0x26)
 #define TCNT0_0 0
@@ -263,14 +253,14 @@
 #define TCNT0_7 7
 
 #define OCR0A _SFR_IO8(0x27)
-#define OCROA_0 0
-#define OCROA_1 1
-#define OCROA_2 2
-#define OCROA_3 3
-#define OCROA_4 4
-#define OCROA_5 5
-#define OCROA_6 6
-#define OCROA_7 7
+#define OCR0A_0 0
+#define OCR0A_1 1
+#define OCR0A_2 2
+#define OCR0A_3 3
+#define OCR0A_4 4
+#define OCR0A_5 5
+#define OCR0A_6 6
+#define OCR0A_7 7
 
 #define OCR0B _SFR_IO8(0x28)
 #define OCR0B_0 0
@@ -314,8 +304,8 @@
 
 #define SPSR _SFR_IO8(0x2D)
 #define SPI2X 0
-#define WCOL 2
-#define SPIF 3
+#define WCOL 6
+#define SPIF 7
 
 #define SPDR _SFR_IO8(0x2E)
 #define SPDR0 0
@@ -350,17 +340,17 @@
 #define WDRF 3
 
 #define MCUCR _SFR_IO8(0x35)
-#define IVCE 0
 #define PUD 4
+#define BODSE 5
+#define BODS 6
 
 #define SPMCSR _SFR_IO8(0x37)
 #define SELFPRGEN 0
 #define PGERS 1
 #define PGWRT 2
-#define BLBSET 3
-#define RWWSRE 4
+#define RFLB 3
+#define CTPB 4
 #define RWWSB 6
-#define SPMIE 7
 
 #define WDTCSR _SFR_MEM8(0x60)
 #define WDP0 0
@@ -380,12 +370,10 @@
 #define CLKPCE 7
 
 #define PRR _SFR_MEM8(0x64)
-#define PRADC 0 
-#define PRUSART0 1
+#define PRADC 0
 #define PRSPI 2
 #define PRTIM1 3
 #define PRTIM0 5
-#define PRTIM2 6
 #define PRTWI 7
 
 #define OSCCAL _SFR_MEM8(0x66)
@@ -415,9 +403,6 @@
 #define PCINT25 1
 #define PCINT26 2
 #define PCINT27 3
-#define PCINT28 4
-#define PCINT29 5
-#define PCINT30 6
 
 #define PCMSK0 _SFR_MEM8(0x6B)
 #define PCINT0 0
@@ -437,6 +422,7 @@
 #define PCINT12 4
 #define PCINT13 5
 #define PCINT14 6
+#define PCINT15 7
 
 #define PCMSK2 _SFR_MEM8(0x6D)
 #define PCINT16 0
@@ -459,7 +445,7 @@
 #define OCIE1B 2
 #define ICIE1 5
 
-#define ADC _SFR_MEM8(0x78)
+#define ADC _SFR_MEM16(0x78)
 
 #define ADCL _SFR_MEM8(0x78)
 #define ADCL0 0
@@ -643,11 +629,11 @@
 #define TWSR _SFR_MEM8(0xB9)
 #define TWPS0 0
 #define TWPS1 1
-#define TWS3 2
-#define TWS4 3
-#define TWS5 4
-#define TWS6 5
-#define TWS7 6
+#define TWS3 3
+#define TWS4 4
+#define TWS5 5
+#define TWS6 6
+#define TWS7 7
 
 #define TWAR _SFR_MEM8(0xBA)
 #define TWGCE 0
@@ -687,8 +673,9 @@
 #define TWAM5 6
 #define TWAM6 7
 
-#define TWIHSR _SFR_MEM8(0xBE)
+#define TWHSR _SFR_MEM8(0xBE)
 #define TWIHS 0
+
 
 
 /* Interrupt Vectors */
@@ -721,7 +708,7 @@
 #define RAMEND                0xFF
 #define XRAMEND               0x00
 #define E2END                 0x3F
-#define FLASHEND              0xFFF
+#define FLASHEND              0x1FFF
 #define SPM_PAGESIZE          32
 
 
@@ -730,15 +717,16 @@
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
-#define CKDIV8 ~_BV(7) /* Divide clock by 8 */
-#define CKOUT  ~_BV(6) /* Clock output */
-#define SUT1   ~_BV(5) /* Select start-up time */
-#define SUT0   ~_BV(4) /* Select start-up time */
-#define CKSEL3 ~_BV(3) /* Select Clock Source */
-#define CKSEL2 ~_BV(2) /* Select Clock Source */
-#define CKSEL1 ~_BV(1) /* Select Clock Source */
 #define CKSEL0 ~_BV(0) /* Select Clock Source */
+#define CKSEL1 ~_BV(1) /* Select Clock Source */
+#define CKSEL2 ~_BV(2) /* Select Clock Source */
+#define CKSEL3 ~_BV(3) /* Select Clock Source */
+#define SUT0   ~_BV(4) /* Select start-up time */
+#define SUT1   ~_BV(5) /* Select start-up time */
+#define CKOUT  ~_BV(6) /* Clock output */
+#define CKDIV8 ~_BV(7) /* Divide clock by 8 */
 #define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
+
 
 /* High Fuse Byte */
 #define BODLEVEL0   ~_BV(0) /* Brown-out Detector trigger level */
@@ -756,8 +744,9 @@
 #define EFUSE_DEFAULT (0xFF)
 
 
+
 /* Lock Bits */
 #define __LOCK_BITS_EXIST
 
 
-#endif /* _AVR_IOTN48_H_ */
+#endif /* _AVR_IOTN88_H_ */
