@@ -3,6 +3,7 @@
 * New functions:
 
   round
+  lround
 
 * Optimized functions:
 

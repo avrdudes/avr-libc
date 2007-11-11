@@ -1,3 +1,12 @@
+2007-11-11  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function lround().
+	* libm/fplib/lround.S: New file.
+	* libm/fplib/Files.am: Add new source lround.S
+	* include/math.h: Add lround() function definition.
+	* tests/simulate/math/lround-01.c: New file.
+	* NEWS: Update new functions list.
+
 2007-11-08  Eric B. Weddingotn  <eweddington@cso.atmel.com>
 
 	Add new device: ATtiny88.
