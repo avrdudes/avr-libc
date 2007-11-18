@@ -1,5 +1,9 @@
 *** Changes since avr-libc-1.5.1:
 
+* Documentation changes:
+
+  + Add the benchmark page.
+
 * New functions:
 
   round

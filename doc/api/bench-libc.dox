@@ -1,0 +1,112 @@
+/* Note: this file has been automatically generated.
+   DO NOT EDIT, or your changes WILL BE LOST!	*/
+
+/* $Id$ */
+
+/** \page benchmarks
+
+\section bench_libc A few of C-writen functions.
+
+Avr-gcc version is 4.2.2
+
+<table>
+  <tr>
+    <td width="50%"><strong>Function</strong></td>
+    <td width="20%"><strong>Units</strong></td>
+    <td width="10%"><strong>Avr2</strong></td>
+    <td width="10%"><strong>Avr25</strong></td>
+    <td width="10%"><strong>Avr4</strong></td>
+  </tr>
+  <tr>
+    <td> dtostre (1.2345, s, 6, 0)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1184<br>17<br>1313</td>
+    <td>1088<br><br></td>
+    <td>1088<br>17<br>1152</td>
+  </tr>
+  <tr>
+    <td> dtostrf (1.2345, 15, 6, s)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1676<br>36<br>1608</td>
+    <td>1548<br><br></td>
+    <td>1548<br>36<br>1443</td>
+  </tr>
+  <tr>
+    <td> malloc (1)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>556<br>4<br>197</td>
+    <td>508<br><br></td>
+    <td>508<br>4<br>179</td>
+  </tr>
+  <tr>
+    <td> realloc ((void *)0, 1)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1156<br>20<br>304</td>
+    <td>1046<br><br></td>
+    <td>1046<br>20<br>281</td>
+  </tr>
+  <tr>
+    <td> qsort (s, sizeof(s), 1, cmp)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1242<br>38<br>20914</td>
+    <td>990<br><br></td>
+    <td>1008<br>38<br>16678</td>
+  </tr>
+  <tr>
+    <td> sprintf_min (s, "%d", 12345)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1216<br>59<br>1846</td>
+    <td>1090<br><br></td>
+    <td>1086<br>59<br>1711</td>
+  </tr>
+  <tr>
+    <td> sprintf (s, "%d", 12345)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1674<br>58<br>1610</td>
+    <td>1542<br><br></td>
+    <td>1498<br>58<br>1528</td>
+  </tr>
+  <tr>
+    <td> sprintf_flt (s, "%e", 1.2345)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>3334<br>66<br>2513</td>
+    <td>3084<br><br></td>
+    <td>3040<br>66<br>2297</td>
+  </tr>
+  <tr>
+    <td> sscanf_min ("12345", "%d", &i)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1528<br>60<br>1743</td>
+    <td>1378<br><br></td>
+    <td>1390<br>60<br>1456</td>
+  </tr>
+  <tr>
+    <td> sscanf ("12345", "%d", &i)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1880<br>62<br>1849</td>
+    <td>1724<br><br></td>
+    <td>1694<br>62<br>1561</td>
+  </tr>
+  <tr>
+    <td> sscanf_flt ("1.2345", "%e", &x)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>4250<br>140<br>3131</td>
+    <td>3916<br><br></td>
+    <td>3886<br>140<br>2756</td>
+  </tr>
+  <tr>
+    <td> strtod ("1.2345", &p)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>1638<br>22<br>1273</td>
+    <td>1550<br><br></td>
+    <td>1514<br>22<br>1012</td>
+  </tr>
+  <tr>
+    <td> strtol ("12345", &p, 0)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>956<br>29<br>1081</td>
+    <td>888<br><br></td>
+    <td>822<br>21<br>729</td>
+  </tr>
+</table>
+*/

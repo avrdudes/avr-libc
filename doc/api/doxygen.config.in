@@ -511,6 +511,8 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/assembler.dox \
                          @top_srcdir@/doc/api/inline_asm.dox \
                          @top_srcdir@/doc/api/library.dox \
+                         @top_srcdir@/doc/api/bench.dox \
+                         @top_srcdir@/doc/api/bench-libc.dox \
                          @top_srcdir@/doc/api/porting.dox \
                          @top_srcdir@/doc/api/faq.dox \
                          @top_srcdir@/doc/api/tools-install.dox \

@@ -1,3 +1,12 @@
+2007-11-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add the benchmark page. Now this is only a start of work.
+	* doc/api/bench.dox: New file.
+	* doc/api/bench-libc.dox: New file.
+	* doc/api/Makefile.am: Add new doxygen sources.
+	* dod/api/doxygen.config.in: Ditto.
+	* NEWS: Note about new doc page.
+
 2007-11-11  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add new function lround().
