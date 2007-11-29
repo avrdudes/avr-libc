@@ -123,6 +123,8 @@
 #  include <avr/iom1280.h>
 #elif defined (__AVR_ATmega1281__)
 #  include <avr/iom1281.h>
+#elif defined (__AVR_ATmega1284P__)
+#  include <avr/iom1284p.h>
 #elif defined (__AVR_ATmega2560__)
 #  include <avr/iom2560.h>
 #elif defined (__AVR_ATmega2561__)
@@ -187,6 +189,8 @@
 #  include <avr/iom3290.h>
 #elif defined (__AVR_ATmega3290P__)
 #  include <avr/iom3290.h>
+#elif defined (__AVR_ATmega32HVB__)
+#  include <avr/iom32hvb.h>
 #elif defined (__AVR_ATmega406__)
 #  include <avr/iom406.h>
 #elif defined (__AVR_ATmega16__)

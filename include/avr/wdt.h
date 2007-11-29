@@ -117,30 +117,51 @@
 
 
 #if defined(__AVR_AT90CAN128__) \
-|| defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) \
-|| defined(__AVR_AT90USB82__) || defined(__AVR_AT90USB162__) \
-|| defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__) \
-|| defined(__AVR_AT90USB1286__) || defined(__AVR_AT90USB1287__) \
-|| defined(__AVR_ATmega48__) || defined(__AVR_ATmega48P__) \
-|| defined(__AVR_ATmega88__) || defined(__AVR_ATmega88P__) \
+|| defined(__AVR_AT90CAN32__) \
+|| defined(__AVR_AT90CAN64__) \
+|| defined(__AVR_AT90USB82__) \
+|| defined(__AVR_AT90USB162__) \
+|| defined(__AVR_AT90USB646__) \
+|| defined(__AVR_AT90USB647__) \
+|| defined(__AVR_AT90USB1286__) \
+|| defined(__AVR_AT90USB1287__) \
+|| defined(__AVR_ATmega48__) \
+|| defined(__AVR_ATmega48P__) \
+|| defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega1284P__) \
 || defined(__AVR_ATmega164P__) \
-|| defined(__AVR_ATmega165__) || defined(__AVR_ATmega165P__) \
-|| defined(__AVR_ATmega168__) || defined(__AVR_ATmega168P__) \
+|| defined(__AVR_ATmega165__) \
+|| defined(__AVR_ATmega165P__) \
+|| defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega168P__) \
 || defined(__AVR_ATmega328P__) \
-|| defined(__AVR_ATmega169__) || defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega169__) \
+|| defined(__AVR_ATmega169P__) \
 || defined(__AVR_ATmega324P__) \
-|| defined(__AVR_ATmega325__) || defined(__AVR_ATmega3250__) \
-|| defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) \
-|| defined(__AVR_ATmega325P__) || defined(__AVR_ATmega3250P__) \
-|| defined(__AVR_ATmega329P__) || defined(__AVR_ATmega3290P__) \
+|| defined(__AVR_ATmega325__) \
+|| defined(__AVR_ATmega3250__) \
+|| defined(__AVR_ATmega329__) \
+|| defined(__AVR_ATmega3290__) \
+|| defined(__AVR_ATmega325P__) \
+|| defined(__AVR_ATmega3250P__) \
+|| defined(__AVR_ATmega329P__) \
+|| defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega406__) \
 || defined(__AVR_ATmega640__) \
-|| defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) \
-|| defined(__AVR_ATmega645__) || defined(__AVR_ATmega6450__) \
-|| defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__) \
-|| defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) \
-|| defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__) \
-|| defined(__AVR_ATmega8HVA__) || defined(__AVR_ATmega16HVA__) \
+|| defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega645__) \
+|| defined(__AVR_ATmega6450__) \
+|| defined(__AVR_ATmega649__) \
+|| defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega1280__) \
+|| defined(__AVR_ATmega1281__) \
+|| defined(__AVR_ATmega2560__) \
+|| defined(__AVR_ATmega2561__) \
+|| defined(__AVR_ATmega8HVA__) \
+|| defined(__AVR_ATmega16HVA__) \
+|| defined(__AVR_ATmega32HVB__) \
 || defined(__AVR_AT90PWM1__) \
 || defined(__AVR_AT90PWM2__) \
 || defined(__AVR_AT90PWM2B__) \
@@ -301,8 +322,8 @@ __asm__ __volatile__ (  \
     ATmega48P, ATmega88P, ATmega168P, ATmega328P,
     ATmega164P, ATmega324P, ATmega644P, ATmega644,
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
-    ATmega8HVA, ATmega16HVA,
-    ATmega406,
+    ATmega8HVA, ATmega16HVA, ATmega32HVB,
+    ATmega406, ATmega1284P,
     AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287,
@@ -321,8 +342,8 @@ __asm__ __volatile__ (  \
     ATmega48P, ATmega88P, ATmega168P, ATmega328P,
     ATmega164P, ATmega324P, ATmega644P, ATmega644,
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
-    ATmega8HVA, ATmega16HVA,
-    ATmega406,
+    ATmega8HVA, ATmega16HVA, ATmega32HVB,
+    ATmega406, ATmega1284P,
     AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316
     AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287,

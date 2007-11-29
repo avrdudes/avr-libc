@@ -95,6 +95,7 @@ compile-time.
 - atmega128
 - atmega1280
 - atmega1281
+- atmega1284p
 - atmega16
 - atmega161
 - atmega162
@@ -182,6 +183,7 @@ compile-time.
 
 - atmega8hva
 - atmega16hva
+- atmega32hvb
 - atmega406
 
 \par USB AVR Devices:
