@@ -16,6 +16,8 @@
 * New devices supported:
 
   + ATtiny88
+  + ATmega1284P
+  + ATmega32HVB
 
 *** Changes since avr-libc-1.4.0:
 

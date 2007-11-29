@@ -1,3 +1,18 @@
+2007-11-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add new devices: ATmega1284P, ATmega32HVB.
+	* configure.ac: Add new devices.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* NEWS: Update new devices list.
+	* include/avr/iom1284p.h: New file.
+	* include/avr/iom32hvb.h: New file.
+
 2007-11-18  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add the benchmark page. Now this is only a start of work.

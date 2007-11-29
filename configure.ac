@@ -538,6 +538,9 @@ AM_CONDITIONAL(HAS_atmega3290, test "x$HAS_atmega3290" = "xyes")
 CHECK_AVR_DEVICE(atmega3290p)
 AM_CONDITIONAL(HAS_atmega3290p, test "x$HAS_atmega3290p" = "xyes")
 
+CHECK_AVR_DEVICE(atmega32hvb)
+AM_CONDITIONAL(HAS_atmega32hvb, test "x$HAS_atmega32hvb" = "xyes")
+
 CHECK_AVR_DEVICE(atmega406)
 AM_CONDITIONAL(HAS_atmega406, test "x$HAS_atmega406" = "xyes")
 
@@ -567,6 +570,9 @@ AM_CONDITIONAL(HAS_atmega1280, test "x$HAS_atmega1280" = "xyes")
 
 CHECK_AVR_DEVICE(atmega1281)
 AM_CONDITIONAL(HAS_atmega1281, test "x$HAS_atmega1281" = "xyes")
+
+CHECK_AVR_DEVICE(atmega1284p)
+AM_CONDITIONAL(HAS_atmega1284p, test "x$HAS_atmega1284p" = "xyes")
 
 CHECK_AVR_DEVICE(at90can32)
 AM_CONDITIONAL(HAS_at90can32, test "x$HAS_at90can32" = "xyes")
@@ -744,6 +750,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega329p/Makefile
 	avr/lib/avr5/atmega3290/Makefile
 	avr/lib/avr5/atmega3290p/Makefile
+	avr/lib/avr5/atmega32hvb/Makefile
 	avr/lib/avr5/atmega406/Makefile
 	avr/lib/avr5/atmega64/Makefile
 	avr/lib/avr5/atmega640/Makefile
@@ -756,6 +763,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega128/Makefile
 	avr/lib/avr5/atmega1280/Makefile
 	avr/lib/avr5/atmega1281/Makefile
+	avr/lib/avr5/atmega1284p/Makefile
 	avr/lib/avr5/at90can32/Makefile
 	avr/lib/avr5/at90can64/Makefile
 	avr/lib/avr5/at90can128/Makefile
