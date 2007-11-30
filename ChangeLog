@@ -1,3 +1,7 @@
+2007-11-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/fuse.h: Add documentation for Fuse API.
+
 2007-11-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Add new devices: ATmega1284P, ATmega32HVB.
