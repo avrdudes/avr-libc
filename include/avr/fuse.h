@@ -35,6 +35,135 @@
 #ifndef _AVR_FUSE_H_
 #define _AVR_FUSE_H_ 1
 
+
+/** \file */
+/** \defgroup avr_fuse <avr/fuse.h>: Fuse Support
+
+    \par Introduction
+
+    The Fuse API allows a user to specify the fuse settings for the specific
+    AVR device they are compiling for. These fuse settings will be placed
+    in a special section in the ELF output file, after linking.
+
+    Programming tools can take advantage of the fuse information embedded in
+    the ELF file, by extracting this information and determining if the fuses
+    need to be programmed before programming the Flash and EEPROM memories.
+    This also allows a single ELF file to contain all the
+    information needed to program an AVR. 
+
+    To use the Fuse API, include the <avr/io.h> header file, which in turn
+    automatically includes the individual I/O header file and the <avr/fuse.h>
+    file. These other two files provides everything necessary to set the AVR
+    fuses.
+    
+    \par Fuse API
+    
+    Each I/O header file must define the FUSE_MEMORY_SIZE macro which is
+    defined to the number of fuse bytes that exist in the AVR device.
+    
+    A new type, __fuse_t, is defined as a structure. The number of fields in 
+    this structure are determined by the number of fuse bytes in the 
+    FUSE_MEMORY_SIZE macro.
+    
+    If FUSE_MEMORY_SIZE == 1, there is only a single field: byte, of type
+    unsigned char.
+    
+    If FUSE_MEMORY_SIZE == 2, there are two fields: low, and high, of type
+    unsigned char.
+    
+    If FUSE_MEMORY_SIZE == 3, there are three fields: low, high, and extended,
+    of type unsigned char.
+    
+    If FUSE_MEMORY_SIZE > 3, there is a single field: byte, which is an array
+    of unsigned char with the size of the array being FUSE_MEMORY_SIZE.
+    
+    A macro, FUSEMEM, is defined as a GCC attribute for a custom-named
+    section of ".fuse".
+    
+    Finally, a macro, FUSES, is defined that declares a variable, __fuse, of
+    type __fuse_t with the attribute defined by FUSEMEM. This variable
+    allows the end user to easily set the fuse data.
+
+    Each AVR device I/O header file has a set of defined macros which specify the
+    actual fuse bits available on that device. The AVR fuses have inverted
+    values, logical 1 for an unprogrammed (disabled) bit and logical 0 for a
+    programmed (enabled) bit. The defined macros for each individual fuse
+    bit represent this in their definition by a bit-wise inversion of a mask.
+    For example, the EESAVE fuse in the ATmega128 is defined as:
+    \code
+    #define EESAVE      ~_BV(3)
+`   \endcode
+    \Note The _BV macro creates a bit mask from a bit number. It is then 
+    inverted to represent logical values for a fuse memory byte.
+    
+    To combine the fuse bits macros together to represent a whole fuse byte,
+    use the bitwise AND operator, like so:
+    \code
+    (BOOTSZ0 & BOOTSZ1 & EESAVE & SPIEN & JTAGEN)
+    \endcode
+    
+    Each device I/O header file also defines macros that provide default values
+    for each fuse byte that is available. LFUSE_DEFAULT is defined for a Low
+    Fuse byte. HFUSE_DEFAULT is defined for a High Fuse byte. EFUSE_DEFAULT
+    is defined for an Extended Fuse byte.
+    
+    \par API Usage Example
+    
+    Putting all of this together is easy:
+    
+    \code
+    #include <avr/io.h>
+
+    FUSES = 
+    {
+        .low = LFUSE_DEFAULT,
+        .high = (BOOTSZ0 & BOOTSZ1 & EESAVE & SPIEN & JTAGEN),
+        .extended = EFUSE_DEFAULT,
+    };
+
+    int main(void)
+    {
+        return 0;
+    }
+    \endcode
+    
+    However there are a number of caveats that you need to be aware of to
+    use this API properly.
+    
+    Be sure to include <avr/io.h> to get all of the definitions for the API.
+    The FUSES macro defines a global variable to store the fuse data. This 
+    variable is assigned to its own linker section. Assign the desired fuse 
+    values immediately in the variable initialization.
+    
+    The .fuse section in the ELF file will get its values from the initial 
+    variable assignment ONLY. This means that you can NOT assign values to 
+    this variable in functions and the new values will not be put into the
+    ELF .fuse section.
+    
+    The global variable is declared in the FUSES macro has two leading 
+    underscores, which means that it is reserved for the "implementation",
+    meaning the library, so it will not conflict with a user-named variable.
+    
+    You must initialize ALL fields in the __fuse_t structure. This is because
+    the fuse bits in all bytes default to a logical 1, meaning unprogrammed. 
+    Normal uninitialized data defaults to all locgial zeros. So it is vital that
+    all fuse bytes are initialized, even with default data. If they are not,
+    then the fuse bits may not programmed to the desired settings.
+    
+    Be sure to have the -mmcu=<device> flag in your compile command line and
+    your linker command line to have the correct device selected and to have 
+    the correct I/O header file included when you include <avr/io.h>.
+
+    You can print out the contents of the .fuse section in the ELF file by
+    using this command line:
+    \code
+    avr-objdump -s -j .fuse <ELF file>
+    \endcode
+    The section contents shows the address on the left, then the data going from
+    lower address to a higher address, left to right.
+
+*/
+
 #ifndef __ASSEMBLER__
 
 #define FUSEMEM  __attribute__((section (".fuse")))
