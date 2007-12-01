@@ -43,19 +43,7 @@
    call conventions: some registers and bit T must be nochanged.
  */
 
-#include "macros.inc"
-
-#define str_hi		r25
-#define str_lo		r24
-#define num_hi_hi	r25
-#define num_hi_lo	r24
-#define num_lo_hi	r23
-#define num_lo_lo	r22
-#define tmp		r17
-
-
 /** \file */
-
 /** \ingroup avr_stdlib
     \fn long atol(const char *s)
     \brief Convert a string to a long integer.
@@ -71,6 +59,16 @@
 */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define str_hi		r25
+#define str_lo		r24
+#define num_hi_hi	r25
+#define num_hi_lo	r24
+#define num_lo_hi	r23
+#define num_lo_lo	r22
+#define tmp		r17
 
 	.text
 	.global _U(atol)

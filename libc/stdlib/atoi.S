@@ -42,17 +42,7 @@
    call conventions: some registers and bit T must be nochanged.
  */
 
-#include "macros.inc"
-
-#define str_hi	r25
-#define str_lo	r24
-#define num_hi	r25
-#define num_lo	r24
-#define tmp	r18
-
-
 /** \file */
-
 /** \ingroup avr_stdlib
     \fn int atoi(const char *s)
     \brief Convert a string to an integer.
@@ -68,6 +58,14 @@
 */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define str_hi	r25
+#define str_lo	r24
+#define num_hi	r25
+#define num_lo	r24
+#define tmp	r18
 
 	.text
 	.global _U(atoi)

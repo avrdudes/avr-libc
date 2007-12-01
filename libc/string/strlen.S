@@ -28,13 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define src_hi r25
-#define src_lo r24
-
 /** \file */
-
 /** \ingroup avr_string
     \fn size_t strlen(const char *src)
     \brief Calculate the length of a string.
@@ -46,6 +40,11 @@
     src.  */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define src_hi r25
+#define src_lo r24
 
 ; 10 words, (14 + strlen(src) * 5) cycles
 

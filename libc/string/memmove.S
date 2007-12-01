@@ -28,17 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-#define len_hi r21
-#define len_lo r20
-
 /** \file */
-
 /** \ingroup avr_string
     \fn void *memmove(void *dest, const void *src, size_t len)
     \brief Copy memory area.
@@ -49,6 +39,15 @@
     \returns The memmove() function returns a pointer to dest.  */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+#define src_hi r23
+#define src_lo r22
+#define len_hi r21
+#define len_lo r20
 
 	.extern _U(memcpy)
 	.text

@@ -28,15 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-
 /** \file */
-
 /** \ingroup avr_pgmspace
     \fn char *strcpy_P(char *dest, PGM_P src)
 
@@ -47,6 +39,13 @@
     string dest. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+#define src_hi r23
+#define src_lo r22
 
 ; 10 words, (17 + strlen_P(src) * 10) cycles
 

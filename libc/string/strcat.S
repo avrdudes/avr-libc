@@ -28,15 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-
 /** \file */
-
 /** \ingroup avr_string
     \fn char *strcat(char *dest, const char *src)
     \brief Concatenate two strings.
@@ -50,6 +42,13 @@
     dest.  */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+#define src_hi r23
+#define src_lo r22
 
 	.text
 	.global	_U(strcat)

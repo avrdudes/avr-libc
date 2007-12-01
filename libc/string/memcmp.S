@@ -28,20 +28,7 @@
   
 /* $Id$ */
 
-#include "macros.inc"
-
-#define s1_hi r25
-#define s1_lo r24
-#define s2_hi r23
-#define s2_lo r22
-#define len_hi r21
-#define len_lo r20
-
-#define ret_hi r25
-#define ret_lo r24
-
 /** \file */
-
 /** \ingroup avr_string
     \fn int memcmp(const void *s1, const void *s2, size_t len)
     \brief Compare memory areas
@@ -60,6 +47,18 @@
     about testing for equality, this function should be safe to use. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define s1_hi r25
+#define s1_lo r24
+#define s2_hi r23
+#define s2_lo r22
+#define len_hi r21
+#define len_lo r20
+
+#define ret_hi r25
+#define ret_lo r24
 
 	.text
 	.global	_U(memcmp)

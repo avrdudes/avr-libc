@@ -28,15 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-
 /** \file */
-
 /** \ingroup avr_string
     \fn char *strcpy(char *dest, const char *src)
     \brief Copy a string.
@@ -55,6 +47,13 @@
     a favourite cracker technique. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+#define src_hi r23
+#define src_lo r22
 
 ; 9 words, (14 + strlen(src) * 7) cycles
 

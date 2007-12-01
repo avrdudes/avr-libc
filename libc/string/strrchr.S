@@ -28,18 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define src_hi r25
-#define src_lo r24
-; #define val_hi r23
-#define val_lo r22
-
-#define ret_hi r25
-#define ret_lo r24
-
 /** \file */
-
 /** \ingroup avr_string
     \fn char *strrchr(const char *src, int val)
     \brief Locate character in string.
@@ -54,6 +43,16 @@
     or NULL if the character is not found. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define src_hi r25
+#define src_lo r24
+; #define val_hi r23
+#define val_lo r22
+
+#define ret_hi r25
+#define ret_lo r24
 
 	.text
 	.global	_U(strrchr)

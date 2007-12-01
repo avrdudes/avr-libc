@@ -1,5 +1,34 @@
 2007-12-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Move all CPP statements to '#ifndef __DOXYGEN__' scope to reduce
+	the volume of garbage in documentation. IMHO, the \file doxygen
+	directive is redundant here, as it forces an opening a new
+	chapter with inclusion all CPP definitions.
+	* libc/pmstring/memcpy_P.S: (Ditto.)
+	* libc/pmstring/strcat_P.S: (Ditto.)
+	* libc/pmstring/strcpy_P.S: (Ditto.)
+	* libc/pmstring/strlen_P.S: (Ditto.)
+	* libc/pmstring/strncat_P.S: (Ditto.)
+	* libc/pmstring/strncmp_P.S: (Ditto.)
+	* libc/pmstring/strncpy_P.S: (Ditto.)
+	* libc/pmstring/strnlen_P.S: (Ditto.)
+	* libc/stdlib/atoi.S: (Ditto.)
+	* libc/stdlib/atol.S: (Ditto.)
+	* libc/string/memccpy.S: (Ditto.)
+	* libc/string/memchr.S: (Ditto.)
+	* libc/string/memcmp.S: (Ditto.)
+	* libc/string/memcpy.S: (Ditto.)
+	* libc/string/memmove.S: (Ditto.)
+	* libc/string/memset.S: (Ditto.)
+	* libc/string/strcat.S: (Ditto.)
+	* libc/string/strcpy.S: (Ditto.)
+	* libc/string/strlen.S: (Ditto.)
+	* libc/string/strncat.S: (Ditto.)
+	* libc/string/strncmp.S: (Ditto.)
+	* libc/string/strncpy.S: (Ditto.)
+	* libc/string/strnlen.S: (Ditto.)
+	* libc/string/strrchr.S: (Ditto.)
+
 	Add new function lrint().
 	* libm/fplib/lrint.S: New file.
 	* libm/fplib/Files.am: Add new source lrint.S

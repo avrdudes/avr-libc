@@ -35,15 +35,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-
 /** \file */
-
 /** \ingroup avr_pgmspace
     \fn char *strcat_P(char *dest, PGM_P src)
 
@@ -54,6 +46,13 @@
     \e dest. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+#define src_hi r23
+#define src_lo r22
 
 	.text
 	.global	_U(strcat_P)

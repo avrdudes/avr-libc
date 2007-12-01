@@ -28,15 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define src_hi r25
-#define src_lo r24
-#define len_hi r23
-#define len_lo r22
-
 /** \file */
-
 /** \ingroup avr_string
     \fn size_t strnlen(const char *src, size_t len)
     \brief Determine the length of a fixed-size string.
@@ -51,6 +43,13 @@
     characters pointed to by src. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define src_hi r25
+#define src_lo r24
+#define len_hi r23
+#define len_lo r22
 
 	.text
 	.global	_U(strnlen)

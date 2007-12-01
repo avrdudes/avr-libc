@@ -29,17 +29,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-#define len_hi r21
-#define len_lo r20
-
 /** \file */
-
 /** \ingroup avr_pgmspace
     \fn char *strncat_P(char *dest, PGM_P src, size_t len)
     \brief Concatenate two strings.
@@ -51,6 +41,15 @@
     dest.  */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+#define src_hi r23
+#define src_lo r22
+#define len_hi r21
+#define len_lo r20
 
 	.text
 	.global	_U(strncat_P)

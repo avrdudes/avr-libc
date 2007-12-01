@@ -28,20 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define src_hi r25
-#define src_lo r24
-; #define val_hi r23
-#define val_lo r22
-#define len_hi r21
-#define len_lo r20
-
-#define ret_hi r25
-#define ret_lo r24
-
 /** \file */
-
 /** \ingroup avr_string
 	\fn void *memchr(const void *src, int val, size_t len)
     \brief Scan memory for a character.
@@ -54,6 +41,18 @@
     NULL if the character does not occur in the given memory area.  */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define src_hi r25
+#define src_lo r24
+; #define val_hi r23
+#define val_lo r22
+#define len_hi r21
+#define len_lo r20
+
+#define ret_hi r25
+#define ret_lo r24
 
 	.text
 	.global	_U(memchr)

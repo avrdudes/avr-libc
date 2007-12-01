@@ -28,17 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-#define len_hi r21
-#define len_lo r20
-
 /** \file */
-
 /** \ingroup avr_pgmspace
     \fn void *memcpy_P(void *dest, PGM_VOID_P src, size_t n)
 
@@ -48,6 +38,15 @@
     \returns The memcpy_P() function returns a pointer to dest.  */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+#define src_hi r23
+#define src_lo r22
+#define len_hi r21
+#define len_lo r20
 
 	.text
 	.global	_U(memcpy_P)

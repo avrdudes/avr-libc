@@ -28,13 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define src_hi r25
-#define src_lo r24
-
 /** \file */
-
 /** \ingroup avr_pgmspace
     \fn size_t strlen_P(PGM_P src)
 
@@ -44,6 +38,11 @@
     \returns The strlen() function returns the number of characters in src. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define src_hi r25
+#define src_lo r24
 
 ; 11 words, (14 + strlen_P(src) * 8) cycles
 

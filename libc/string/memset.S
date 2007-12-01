@@ -28,17 +28,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
-
-#define dest_hi r25
-#define dest_lo r24
-; #define val_hi r23
-#define val_lo r22
-#define len_hi r21
-#define len_lo r20
-
 /** \file */
-
 /** \ingroup avr_string
     \fn void *memset(void *dest, int val, size_t len)
     \brief Fill memory with a constant byte.
@@ -49,6 +39,15 @@
     \returns The memset() function returns a pointer to the memory area dest. */
 
 #if !defined(__DOXYGEN__)
+
+#include "macros.inc"
+
+#define dest_hi r25
+#define dest_lo r24
+; #define val_hi r23
+#define val_lo r22
+#define len_hi r21
+#define len_lo r20
 
 	.text
 	.global	_U(memset)
