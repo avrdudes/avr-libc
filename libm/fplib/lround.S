@@ -33,25 +33,25 @@
 
 /* long lround (double A);
      The lround() function rounds A to the nearest integer, but rounds
-     halfway cases away from zero (instead of to the nearest even integer.
+     halfway cases away from zero (instead of to the nearest even integer).
      This function is similar to round() function, but it differs in
      type of return value and in that an overflow is possible.
    Return:
-     The rounded long integer value. If A is infinite or an overflow
-     was, this realization returns the LONG_MAX or LONG_MIN value
-     (according to A sign). If A is NaN, then LONG_MIN (0x80000000)
-     is returned.
+     The rounded long integer value. If A is infinite, NaN or an overflow
+     was, this realization returns the LONG_MIN value (0x80000000).
 
    Algorithm roughly:
      - split
      - shift mantissa according to exponent
      - add 0.5 to round
      - restore the sign
+
+   Objections to saturation are listen in __fixunssfsi.S file.
  */
 
 ENTRY lround
 	rcall	_U(__fp_splitA)
-	brcs	.L_nf
+	brcs	.L_err
   ; A is finite
 	subi	rA3, 126	; exponent field of 0.5
 	brlo	.L_zr		; A is too small
@@ -61,12 +61,12 @@ ENTRY lround
 	breq	.L_sign		; no shift
   ; fabs(A) >= 0x0.800000p+25
 	cpi	rA3, 8
-	brsh	.L_ovfl		; A is too big
+	brsh	.L_err		; A is too big
 
   ; 0x0.800000p+25 <= fabs(A) <= 0x0.ffffffp+31  --> shift to left by 1..7
 	mov	r0, rA3		; shift counter
 	clr	rA3		; MSB
-  ; rA3.2.1.0 <<= (-r1)
+  ; rA3.2.1.0 <<= r0
 1:	lsl	rA0
 	rol	rA1
 	rol	rA2
@@ -75,20 +75,20 @@ ENTRY lround
 	brne	1b
 	rjmp	.L_sign
 
-  ; 0x0.800000p+00 <= fabs(A) <= 0x0.ffffffp+23
-  ; Shift A to right by 1 (rA3 == -1) .. 24 (rA3 == -24) positions and
-  ; round.
-2:	cpi	rA3, -7
-	brge	3f
   ; quick shift to right by 8
-	mov	r0, rA0		; save for possible round
+5:	mov	r0, rA0		; save for possible round
 	mov	rA0, rA1
 	mov	rA1, rA2
 	clr	rA2
 	subi	rA3, -8
-	brne	2b
+	brne	2f
 	lsl	r0		; restore C
 	rjmp	4f		; and round
+  ; 0x0.800000p+00 <= fabs(A) <= 0x0.ffffffp+23
+  ; Shift A to right by 1 (rA3 == -1) .. 24 (rA3 == -24) positions and
+  ; round.
+2:	cpi	rA3, -7
+	brlt	5b
   ; shift to right by 1..7 (slow)
 3:	lsr	rA2
 	ror	rA1
@@ -107,21 +107,13 @@ ENTRY lround
 	com	rA2
 	com	rA1
 	neg	rA0
-5:	sbci	rA1, -1
+	sbci	rA1, -1
 	sbci	rA2, -1
 	sbci	rA3, -1
 6:	ret
 
-.L_nf:	breq	.L_ovfl
-	set			; A is NaN: force return 0x80000000
-.L_ovfl:
-	ldi	rA0, lo8(0x7fffffff)
-	ldi	rA1, hi8(0x7fffffff)
-	ldi	rA2,hlo8(0x7fffffff)
-	ldi	rA3,hhi8(0x7fffffff)
-	brtc	6b
-	sub	rA0, rA0	; clear rA0 and C flag
-	rjmp	5b		; to return 0x80000000
+.L_err:	set			; force return 0x80000000
+	rjmp	_U(__fp_szero)
 
 .L_zr:	rjmp	_U(__fp_zero)	; return 0x00000000
 

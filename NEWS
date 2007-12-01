@@ -19,6 +19,14 @@
   + ATmega1284P
   + ATmega32HVB
 
+* Incompatibilities:
+
+  + Conversion from float to long (make similar to GCC/x86):  in case if
+  overflow was or if input is NaN return 0x80000000 for signed result and
+  return 0 for unsigned result. Negative input (not too big in absolute
+  value) is permissible for cast to unsigned long, for example: (unsigned
+  long)(-1.0) returns ULONG_MAX.
+
 *** Changes since avr-libc-1.4.0:
 
 * Bugs fixed:

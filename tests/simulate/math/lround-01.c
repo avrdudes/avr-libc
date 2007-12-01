@@ -130,21 +130,18 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { .fl= -0x0.ffffffp+30 }, -0x3fffffc0L },
     { { .fl= -0x0.ffffffp+31 }, -0x7fffff80L },
 
-#ifdef	__AVR__
-    /* Positive saturation.
-       GCC+Glibc/i386 returns 0x80000000.	*/
-    { { .fl= 0x0.800000p+32 }, 0x7fffffff },
-    { { .fl= 0x0.800001p+32 }, 0x7fffffff },
-    { { .fl= 0x0.ffffffp+32 }, 0x7fffffff },
-    { { .fl= 0x0.800000p+33 }, 0x7fffffff },
-    { { .fl= 0x0.ffffffp+33 }, 0x7fffffff },
-    { { .lo= 0x7f000000 },     0x7fffffff },
-    { { .lo= 0x7f7fffff },     0x7fffffff },
-    { { .lo= 0x7f800000 },     0x7fffffff },	/* +Inf	*/
-#endif
+    /* Positive overflow	*/
+    { { .fl= 0x0.800000p+32 }, 0x80000000 },
+    { { .fl= 0x0.800001p+32 }, 0x80000000 },
+    { { .fl= 0x0.ffffffp+32 }, 0x80000000 },
+    { { .fl= 0x0.800000p+33 }, 0x80000000 },
+    { { .fl= 0x0.ffffffp+33 }, 0x80000000 },
+    { { .lo= 0x7f000000 },     0x80000000 },
+    { { .lo= 0x7f7fffff },     0x80000000 },
+    { { .lo= 0x7f800000 },     0x80000000 },	/* +Inf	*/
 
-    /* Negative saturation	*/
-    { { .fl= -0x0.800000p+32 }, 0x80000000 },
+    /* Negative overflow	*/
+    { { .fl= -0x0.800000p+32 }, 0x80000000 },	/* no overflow	*/
     { { .fl= -0x0.800001p+32 }, 0x80000000 },
     { { .fl= -0x0.ffffffp+32 }, 0x80000000 },
     { { .fl= -0x0.800000p+33 }, 0x80000000 },

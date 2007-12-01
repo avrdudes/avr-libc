@@ -1,3 +1,17 @@
+2007-12-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Make conversion from float to (u)long in error cases to be
+	more similar with GCC/x86.
+	* libm/fplib/fixunssfsi.S: New file.
+	* libm/fplib/Files.am: Add new source fixunssfsi.S
+	* libm/fplib/fixsfsi.S: Rewrite to use __fixunssfsi() function.
+	* libm/fplib/lround.S: Unify result in error cases.
+	* include/math.h: lround(): fix comment about return value.
+	* tests/simulate/fplib/flt2long-01.c: Update overflow test cases.
+	* tests/simulate/fplib/flt2ulng-01.c: Ditto.
+	* tests/simulate/math/lround-01.c: Ditto.
+	* NEWS: Note about this change.
+
 2007-11-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/fuse.h: Add documentation for Fuse API.

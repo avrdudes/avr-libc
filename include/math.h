@@ -453,10 +453,9 @@ double round (double x) __ATTR_CONST__;
     This function is similar to round() function, but it differs in type of
     return value and in that an overflow is possible.
 
-    \return The rounded long integer value. If \p x is infinite or an
-    overflow was, this realization returns the \c LONG_MAX or \c LONG_MIN
-    value (according to \p x sign). If \p x is \c NaN, then \c LONG_MIN
-    (0x80000000) is returned.
+    \return The rounded long integer value. If \p x is not a finite number
+    or an overflow was, this realization returns the \c LONG_MIN value
+    (0x80000000).
  */
 long lround (double x) __ATTR_CONST__;
 

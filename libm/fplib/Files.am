@@ -47,6 +47,7 @@ libm_a_asm_sources = \
 	exp.S \
 	fixsfdi.S \
 	fixsfsi.S \
+	fixunssfsi.S \
 	floatdisf.S \
 	floatsisf.S \
 	floatunsdisf.S \

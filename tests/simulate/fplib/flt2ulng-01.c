@@ -79,14 +79,34 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { .fl = 0x1.000000p+22 }, 0x00400000 },
     { { .fl = 0x1.000002p+22 }, 0x00400000 },
 
-#ifdef	__AVR__
-    /* too big	*/
-    { { .fl = 0x1.000000p+32 }, 0xffffffff },
-    { { 0x7f7fffff },           0xffffffff },
+    /* This realization permits negative input, like GCC/x86.	*/
+    { { .fl = -0.5 },	0 },
+    { { .fl = -1 },     0xffffffff },
+    { { .fl = -2 },     0xfffffffe },
+    { { .fl = -0x0.7fffffp+32 }, 0x80000100 },
+    { { .fl = -0x0.800000p+32 }, 0x80000000 },
+    { { .fl = -0x0.800001p+32 }, 0x7fffff00 },
+    { { .fl = -0x0.fffffep+32 }, 0x00000200 },
+    { { .fl = -0x0.ffffffp+32 }, 0x00000100 },
+    { { .fl = -0x0.800000p+33 }, 0 },		/* overflow	*/
+
+    /* Very big numbers (positive and negative).	*/
+    { { .fl = 0x0.800000p+56 }, 0 },
+    { { .fl = 0x0.ffffffp+56 }, 0 },
+    { { .fl = 0x0.800000p+57 }, 0 },
+    { { .fl = 0x0.ffffffp+57 }, 0 },
+    { { 0x7f000000 },           0 },
+    { { 0x7f7fffff },           0 },
+    { { .fl = -0x0.800000p+56 }, 0 },
+    { { .fl = -0x0.ffffffp+56 }, 0 },
+    { { .fl = -0x0.800000p+57 }, 0 },
+    { { .fl = -0x0.ffffffp+57 }, 0 },
+    { { 0xff000000 },            0 },
+    { { 0xff7fffff },            0 },
 
     /* Inf	*/
-    { { 0x7f800000 }, 0xffffffff },
-    { { 0xff800000 }, 0xffffffff },
+    { { 0x7f800000 }, 0 },
+    { { 0xff800000 }, 0 },
     
     /* NaN	*/
     { { 0x7f800001 }, 0 },
@@ -95,6 +115,29 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0xff800001 }, 0 },
     { { 0xffc00000 }, 0 },
     { { 0xffffffff }, 0 },
+    
+#ifdef	__AVR__
+    /* Unlike to GCC/x86 this realization does not shifts value
+       in overflow case. So with not too big numbers the results
+       are different.	*/
+
+    /* Positive overflow	*/
+    { { .fl= 0x0.800000p+33 }, 0 },
+    { { .fl= 0x0.800001p+33 }, 0 },
+    { { .fl= 0x0.ffffffp+33 }, 0 },
+    { { .fl= 0x0.800000p+34 }, 0 },
+    { { .fl= 0x0.ffffffp+34 }, 0 },
+    { { .fl= 0x0.800000p+55 }, 0 },
+    { { .fl= 0x0.ffffffp+55 }, 0 },
+
+    /* Negative overflow	*/
+    { { .fl= -0x0.800000p+33 }, 0 },	/* no overflow	*/
+    { { .fl= -0x0.800001p+33 }, 0 },
+    { { .fl= -0x0.ffffffp+33 }, 0 },
+    { { .fl= -0x0.800000p+34 }, 0 },
+    { { .fl= -0x0.ffffffp+34 }, 0 },
+    { { .fl= -0x0.800000p+55 }, 0 },
+    { { .fl= -0x0.ffffffp+55 }, 0 },
 #endif
 };
 

@@ -91,23 +91,40 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { .fl = 0x1.000000p+22 }, 0x00400000 },
     { { .fl = 0x1.000002p+22 }, 0x00400000 },
 
-#ifdef	__AVR__
-    /* too big	*/
-    { { .fl = 0x1.000000p+32 }, 0xffffffff },
-    { { 0x7f7fffff },           0xffffffff },
+    /* This realization returns 0x80000000 with all possible errors:
+       overflow and NaN.  This is like GCC/x86.	*/
+
+    /* Positive overflow	*/
+    { { .fl= 0x0.800000p+32 }, 0x80000000 },
+    { { .fl= 0x0.800001p+32 }, 0x80000000 },
+    { { .fl= 0x0.ffffffp+32 }, 0x80000000 },
+    { { .fl= 0x0.800000p+33 }, 0x80000000 },
+    { { .fl= 0x0.ffffffp+33 }, 0x80000000 },
+    { { .lo= 0x7f000000 },     0x80000000 },
+    { { .lo= 0x7f7fffff },     0x80000000 },
+    { { .lo= 0x7f800000 },     0x80000000 },	/* +Inf	*/
+
+    /* Negative overflow	*/
+    { { .fl= -0x0.800000p+32 }, 0x80000000 },	/* no overflow	*/
+    { { .fl= -0x0.800001p+32 }, 0x80000000 },
+    { { .fl= -0x0.ffffffp+32 }, 0x80000000 },
+    { { .fl= -0x0.800000p+33 }, 0x80000000 },
+    { { .fl= -0x0.ffffffp+33 }, 0x80000000 },
+    { { .lo= 0xff000000 },      0x80000000 },
+    { { .lo= 0xff7fffff },      0x80000000 },
+    { { .lo= 0xff800000 },      0x80000000 },	/* -Inf	*/
 
     /* Inf	*/
-    { { 0x7f800000 }, 0xffffffff },
-    { { 0xff800000 }, 0xffffffff },
+    { { 0x7f800000 }, 0x80000000 },
+    { { 0xff800000 }, 0x80000000 },
     
     /* NaN	*/
-    { { 0x7f800001 }, 0 },
-    { { 0x7fc00000 }, 0 },
-    { { 0x7fffffff }, 0 },
-    { { 0xff800001 }, 0 },
-    { { 0xffc00000 }, 0 },
-    { { 0xffffffff }, 0 },
-#endif
+    { { 0x7f800001 }, 0x80000000 },
+    { { 0x7fc00000 }, 0x80000000 },
+    { { 0x7fffffff }, 0x80000000 },
+    { { 0xff800001 }, 0x80000000 },
+    { { 0xffc00000 }, 0x80000000 },
+    { { 0xffffffff }, 0x80000000 },
 };
 
 void x_exit (int index)
