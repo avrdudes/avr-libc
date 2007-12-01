@@ -14,6 +14,10 @@
 
 2007-11-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* doc/api/doxygen.config.in: Add avr/fuse.h to the doc list.
+
+2007-11-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/fuse.h: Add documentation for Fuse API.
 
 2007-11-28  Eric B. Weddington  <eric.weddington@atmel.com>

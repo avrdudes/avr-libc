@@ -489,6 +489,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/libm \
                          @top_srcdir@/include/avr/boot.h \
                          @top_srcdir@/include/avr/eeprom.h \
+                         @top_srcdir@/include/avr/fuse.h \
                          @top_srcdir@/include/avr/interrupt.h \
                          @top_srcdir@/doc/api/interrupts.dox \
                          @top_srcdir@/doc/api/vectortable.dox \
