@@ -459,6 +459,20 @@ double round (double x) __ATTR_CONST__;
  */
 long lround (double x) __ATTR_CONST__;
 
+/** \ingroup avr_math
+
+    The lrint() function rounds \p x to the nearest integer, rounding the
+    halfway cases to the even integer direction. (That is both 1.5 and 2.5
+    values are rounded to 2). This function is similar to rint() function,
+    but it differs in type of return value and in that an overflow is
+    possible.
+
+    \return The rounded long integer value. If \p x is not a finite number
+    or an overflow was, this realization returns the \c LONG_MIN value
+    (0x80000000).
+ */
+long lrint (double x) __ATTR_CONST__;
+
 #ifdef __cplusplus
 }
 #endif

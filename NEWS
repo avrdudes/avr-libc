@@ -8,6 +8,7 @@
 
   round
   lround
+  lrint
 
 * Optimized functions:
 

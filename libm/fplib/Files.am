@@ -84,6 +84,7 @@ libm_a_asm_sources = \
 	ldexp.S \
 	log10.S \
 	log.S \
+	lrint.S \
 	lround.S \
 	modf.S \
 	mulsf3.S \

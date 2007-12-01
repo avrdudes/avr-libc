@@ -1,5 +1,12 @@
 2007-12-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Add new function lrint().
+	* libm/fplib/lrint.S: New file.
+	* libm/fplib/Files.am: Add new source lrint.S
+	* include/math.h: Add lrint() function definition.
+	* tests/simulate/math/lrint-01.c: New file.
+	* NEWS: Update new functions list.
+
 	Make conversion from float to (u)long in error cases to be
 	more similar with GCC/x86.
 	* libm/fplib/fixunssfsi.S: New file.
