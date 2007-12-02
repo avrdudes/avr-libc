@@ -1,5 +1,10 @@
 2007-12-02  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Extend the benchmark chapter.
+	* doc/api/bench-libc.dox: Add a bit functions.
+	* doc/api/bench-libm.dox: New file.
+	* doc/api/doxygen.config.in: Add new file bench-libm.dox
+
 	Make signbit() similar to GCC's builtin: return 1 as nonzero value.
 	* libm/fplib/signbit.S: Ditto.
 	* include/math.h: signbit(): fix comment about return value.

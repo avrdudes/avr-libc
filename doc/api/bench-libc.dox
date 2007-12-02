@@ -5,10 +5,11 @@
 
 /** \page benchmarks
 
-\section bench_libc A few of C-writen functions.
+\section bench_libc A few of libc functions.
 
 Avr-gcc version is 4.2.2
 
+<small>
 <table>
   <tr>
     <td width="50%"><strong>Function</strong></td>
@@ -16,6 +17,20 @@ Avr-gcc version is 4.2.2
     <td width="10%"><strong>Avr2</strong></td>
     <td width="10%"><strong>Avr25</strong></td>
     <td width="10%"><strong>Avr4</strong></td>
+  </tr>
+  <tr>
+    <td> atoi ("12345")</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>82<br>2<br>155</td>
+    <td>78<br><br></td>
+    <td>74<br>2<br>149</td>
+  </tr>
+  <tr>
+    <td> atol ("12345")</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>122<br>2<br>221</td>
+    <td>118<br><br></td>
+    <td>118<br>2<br>219</td>
   </tr>
   <tr>
     <td> dtostre (1.2345, s, 6, 0)</td>
@@ -30,6 +45,20 @@ Avr-gcc version is 4.2.2
     <td>1676<br>36<br>1608</td>
     <td>1548<br><br></td>
     <td>1548<br>36<br>1443</td>
+  </tr>
+  <tr>
+    <td> itoa (12345, s, 10)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>150<br>4<br>1172</td>
+    <td>134<br><br></td>
+    <td>134<br>4<br>1152</td>
+  </tr>
+  <tr>
+    <td> ltoa (12345L, s, 10)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>220<br>9<br>3174</td>
+    <td>200<br><br></td>
+    <td>200<br>9<br>3136</td>
   </tr>
   <tr>
     <td> malloc (1)</td>
@@ -109,4 +138,5 @@ Avr-gcc version is 4.2.2
     <td>822<br>21<br>729</td>
   </tr>
 </table>
+</small>
 */

@@ -1,0 +1,171 @@
+/* Note: this file has been automatically generated.
+   DO NOT EDIT, or your changes WILL BE LOST!	*/
+
+/* $Id$ */
+
+/** \page benchmarks
+
+\section bench_libm Math functions.
+
+The table contains the number of MCU clocks to calculate a function
+with a given argument(s). The main reason of a big difference between Avr2
+and Avr4 is a hardware multiplication.
+
+<table>
+  <tr>
+    <td width="50%"><strong>Function</strong></td>
+    <td width="25%"><strong>Avr2</strong></td>
+    <td width="25%"><strong>Avr4</strong></td>
+  </tr>
+  <tr>
+    <td>__addsf3 (1.234, 5.678)</td>
+    <td>113</td>
+    <td>108</td>
+  </tr>
+  <tr>
+    <td>__mulsf3 (1.234, 5.678)</td>
+    <td>375</td>
+    <td>138</td>
+  </tr>
+  <tr>
+    <td>__divsf3 (1.234, 5.678)</td>
+    <td>466</td>
+    <td>465</td>
+  </tr>
+  <tr>
+    <td>acos (0.54321)</td>
+    <td>4648</td>
+    <td>2689</td>
+  </tr>
+  <tr>
+    <td>asin (0.54321)</td>
+    <td>4754</td>
+    <td>2790</td>
+  </tr>
+  <tr>
+    <td>atan (0.54321)</td>
+    <td>4710</td>
+    <td>2271</td>
+  </tr>
+  <tr>
+    <td>atan2 (1.234, 5.678)</td>
+    <td>5270</td>
+    <td>2857</td>
+  </tr>
+  <tr>
+    <td>ceil (1.2345)</td>
+    <td>177</td>
+    <td>177</td>
+  </tr>
+  <tr>
+    <td>cos (1.2345)</td>
+    <td>3381</td>
+    <td>1665</td>
+  </tr>
+  <tr>
+    <td>cosh (1.2345)</td>
+    <td>4922</td>
+    <td>2979</td>
+  </tr>
+  <tr>
+    <td>exp (1.2345)</td>
+    <td>4708</td>
+    <td>2765</td>
+  </tr>
+  <tr>
+    <td>fdim (5.678, 1.234)</td>
+    <td>111</td>
+    <td>111</td>
+  </tr>
+  <tr>
+    <td>floor (1.2345)</td>
+    <td>180</td>
+    <td>180</td>
+  </tr>
+  <tr>
+    <td>fmax (1.234, 5.678)</td>
+    <td>39</td>
+    <td>37</td>
+  </tr>
+  <tr>
+    <td>fmin (1.234, 5.678)</td>
+    <td>35</td>
+    <td>35</td>
+  </tr>
+  <tr>
+    <td>fmod (5.678, 1.234)</td>
+    <td>132</td>
+    <td>132</td>
+  </tr>
+  <tr>
+    <td>frexp (1.2345, 0)</td>
+    <td>37</td>
+    <td>36</td>
+  </tr>
+  <tr>
+    <td>hypot (1.234, 5.678)</td>
+    <td>1556</td>
+    <td>1078</td>
+  </tr>
+  <tr>
+    <td>ldexp (1.2345, 6)</td>
+    <td>42</td>
+    <td>42</td>
+  </tr>
+  <tr>
+    <td>log (1.2345)</td>
+    <td>4142</td>
+    <td>2134</td>
+  </tr>
+  <tr>
+    <td>log10 (1.2345)</td>
+    <td>4498</td>
+    <td>2260</td>
+  </tr>
+  <tr>
+    <td>modf (1.2345, 0)</td>
+    <td>433</td>
+    <td>429</td>
+  </tr>
+  <tr>
+    <td>pow (1.234, 5.678)</td>
+    <td>9293</td>
+    <td>5047</td>
+  </tr>
+  <tr>
+    <td>round (1.2345)</td>
+    <td>150</td>
+    <td>150</td>
+  </tr>
+  <tr>
+    <td>sin (1.2345)</td>
+    <td>3347</td>
+    <td>1647</td>
+  </tr>
+  <tr>
+    <td>sinh (1.2345)</td>
+    <td>4946</td>
+    <td>3003</td>
+  </tr>
+  <tr>
+    <td>sqrt (1.2345)</td>
+    <td>709</td>
+    <td>704</td>
+  </tr>
+  <tr>
+    <td>tan (1.2345)</td>
+    <td>4375</td>
+    <td>2420</td>
+  </tr>
+  <tr>
+    <td>tanh (1.2345)</td>
+    <td>5126</td>
+    <td>3173</td>
+  </tr>
+  <tr>
+    <td>trunc (1.2345)</td>
+    <td>178</td>
+    <td>178</td>
+  </tr>
+</table>
+*/
