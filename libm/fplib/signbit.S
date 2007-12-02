@@ -38,12 +38,15 @@
     its sign bit set. This is not the same as `x < 0.0', because IEEE 754
     floating point allows zero to be signed. The comparison `-0.0 < 0.0'
     is false, but `signbit (-0.0)' will return a nonzero value.
-	This implementation returns -1 if sign bit is set.
+
+    This implementation returns 1 if sign bit is set. This corresponds
+    to builtin GCC realization.
  */
 
 ENTRY signbit
 	lsl	rA3
 	sbc	rA2, rA2
-	sbc	rA3, rA3
+	neg	rA2
+	clr	rA3
 	ret
 ENDFUNC

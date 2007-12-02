@@ -1,3 +1,11 @@
+2007-12-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Make signbit() similar to GCC's builtin: return 1 as nonzero value.
+	* libm/fplib/signbit.S: Ditto.
+	* include/math.h: signbit(): fix comment about return value.
+	* tests/simulate/math/signbit-01.c: New file.
+	* NEWS: Note about this change.
+
 2007-12-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Move all CPP statements to '#ifndef __DOXYGEN__' scope to reduce

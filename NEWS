@@ -27,6 +27,8 @@
   return 0 for unsigned result. Negative input (not too big in absolute
   value) is permissible for cast to unsigned long, for example: (unsigned
   long)(-1.0) returns ULONG_MAX.
+  + The signbit() function: return 1 as nonzero value (make similar to
+  builtin GCC).
 
 *** Changes since avr-libc-1.4.0:
 

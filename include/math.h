@@ -392,7 +392,7 @@ extern double fmin (double x, double y) __ATTR_CONST__;
      a nonzero value.
      
      \note
-     This implementation returns -1 if sign bit is set.
+     This implementation returns 1 if sign bit is set.
   */
 extern int signbit (double x) __ATTR_CONST__;
 
