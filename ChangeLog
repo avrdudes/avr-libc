@@ -1,3 +1,9 @@
+2007-12-08  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* doc/api/doxygen.config.in: Remove 'libm' directory from the INPUT
+	list, as there is no any doxygen comments. To reduce the number of
+	doxygen warnings.
+
 2007-12-02  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Extend the benchmark chapter.

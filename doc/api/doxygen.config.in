@@ -486,7 +486,6 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/stdlib.h \
                          @top_srcdir@/include/string.h \
                          @top_srcdir@/libc \
-                         @top_srcdir@/libm \
                          @top_srcdir@/include/avr/boot.h \
                          @top_srcdir@/include/avr/eeprom.h \
                          @top_srcdir@/include/avr/fuse.h \
