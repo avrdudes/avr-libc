@@ -1,5 +1,11 @@
 2007-12-08  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* doc/api/doxygen.config.in: Change MACRO_EXPANSION and
+	EXPAND_ONLY_PREDEF variables to YES. Add __ATTR_CONST__ to
+	PREDEFINED list. To clean documentation: remove last label
+	from function lists.
+	* include/math.h: Add a note about the const attribute.
+
 	* doc/api/doxygen.config.in: Remove 'libm' directory from the INPUT
 	list, as there is no any doxygen comments. To reduce the number of
 	doxygen warnings.
