@@ -55,11 +55,13 @@
     This header file declares basic mathematics constants and
     functions.
 
-    \note
-    In order to access the functions delcared herein, it is usually
-    also required to additionally link against the library \c libm.a.
-    See also the related \ref faq_libm "FAQ entry".
-*/
+    \par Notes:
+    - In order to access the functions delcared herein, it is usually
+      also required to additionally link against the library \c libm.a.
+      See also the related \ref faq_libm "FAQ entry".
+    - Math functions do not raise exceptions and do not change the
+      \c errno variable. Therefore the majority of them are declared
+      with const attribute, for better optimization by GCC.	*/
 
 /**
    \ingroup avr_math
@@ -85,13 +87,9 @@
    INFINITY constant. */
 #define INFINITY	__builtin_inf()
 
-#ifndef __DOXYGEN__
-
 #ifndef __ATTR_CONST__
-#define __ATTR_CONST__ __attribute__((__const__))
+# define __ATTR_CONST__ __attribute__((__const__))
 #endif
-
-#endif /* !DOXYGEN */
 
 #ifdef __cplusplus
 extern "C" {
