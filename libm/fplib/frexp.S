@@ -32,9 +32,20 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float frexp (float x, int *pexp);
-     The frexp() function is used to split the number x into a normalized
-     fraction and an exponent which is stored in pexp.
+/* float frexp (float A, int *pexp);
+     The frexp() function is used to split the number A into a normalized
+     fraction and an exponent which is stored by pexp.
+
+   Return:
+     If A is a normal float point number, the frexp() function returns the
+     value v, such that v has a magnitude in the interval [1/2, 1) or zero,
+     and A equals v times 2 raised to the power *pexp. If A is zero, both
+     parts of the result are zero. If A is not a finite number, the frexp()
+     returns A as is and stores 0 by pexp.
+
+   Note:
+     This implementation permits a zero pointer as a directive to skip
+     a storing the exponent.
  */
 
 #define	pexp_lo	r20
@@ -43,26 +54,31 @@ ENTRY frexp
 
 	X_movw	ZL, pexp_lo
 
+  ; Write 0 for next cases: Zero, Inf or NaN.
+	st	Z, r1
+	std	Z+1, r1
+
 	rcall	_U(__fp_splitA)
-	brcs	.L_nf
+	brcs	.L_nf			; return the same value
 	tst	rA3
-	breq	.L_zr
+	breq	3f
 	subi	rA3, 126
 	sbc	rB3, rB3
 
 	sbrs	rA2, 7
 	rcall	_U(__fp_norm2)
 
+  ; NULL is a legal address. Instead to check Z==0, will simply
+  ; write and restore r1.
 	st	Z, rA3
 	std	Z+1, rB3
+	clr	r1		; protection to Z == 0
+
 	andi	rA2, 0x7f
 	ldi	rA3, 0x3f
-3:	bld	rA3, 7
+
+3:	bld	rA3, 7		; restore sign
 	ret
 .L_nf:
 	rjmp	_U(__fp_mpack)
-.L_zr:
-	st	Z, r1
-	std	Z+1, r1
-	rjmp	3b
 ENDFUNC

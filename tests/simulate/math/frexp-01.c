@@ -6,6 +6,15 @@
 #include <stdlib.h>
 #include "progmem.h"
 
+#ifndef	__AVR__
+# define PRINTFLN(fmt, ...)	\
+    printf ("\nLine %d: " fmt "\n", __LINE__, ##__VA_ARGS__)
+# define EXIT(code)	exit ((code) < 255 ? (code) : 100 + (code) % 100)
+#else
+# define PRINTFLN(args...)
+# define EXIT	exit
+#endif
+
 union lofl_u {
     long lo;
     float fl;
@@ -23,120 +32,36 @@ PROGMEM const struct {		/* Table of test cases.	*/
     /* zero	*/
     { { 0x00000000 }, { 0x00000000 }, 0 },
     { { 0x80000000 }, { 0x80000000 }, 0 },
-#if 0
-    /* subnormal	*/
-    { { 0x00000001 }, { 0x00000001 }, { .fl = 0 } },
-    { { 0x00000100 }, { 0x00000100 }, { .fl = 0 } },
-    { { 0x00010000 }, { 0x00010000 }, { .fl = 0 } },
-    { { 0x007fffff }, { 0x007fffff }, { .fl = 0 } },
 
-    { { 0x80000001 }, { 0x80000001 }, { .fl = -0.0 } },
-    { { 0x80000100 }, { 0x80000100 }, { .fl = -0.0 } },
-    { { 0x80010000 }, { 0x80010000 }, { .fl = -0.0 } },
-    { { 0x807fffff }, { 0x807fffff }, { .fl = -0.0 } },
+    /* subnormal	*/
+    { { 0x00000001 }, { .fl = 0.5 },	-148 },
+    { { 0x00000003 }, { .fl = 0.75 },	-147 },
+    { { 0x00000100 }, { .fl = 0.5 },    -140 },
+    { { 0x00010000 }, { .fl = 0.5 },    -132 },
+    { { 0x007fffff }, { .fl = 0x0.fffffep+00 }, -126 },
+
+    { { 0x80000001 }, { .fl = -0.5 },	-148 },
+    { { 0x80000003 }, { .fl = -0.75 },	-147 },
+    { { 0x80000100 }, { .fl = -0.5 },   -140 },
+    { { 0x80010000 }, { .fl = -0.5 },   -132 },
+    { { 0x807fffff }, { .fl = -0x0.fffffep+00 }, -126 },
     
     /* integral normal	*/
-    { { .fl = 0x000001 }, { .fl = 0 }, { .fl = 0x000001 } },
-    { { .fl = 0x000002 }, { .fl = 0 }, { .fl = 0x000002 } },
-    { { .fl = 0x000004 }, { .fl = 0 }, { .fl = 0x000004 } },
-    { { .fl = 0x000008 }, { .fl = 0 }, { .fl = 0x000008 } },
-    { { .fl = 0x000010 }, { .fl = 0 }, { .fl = 0x000010 } },
-    { { .fl = 0x000020 }, { .fl = 0 }, { .fl = 0x000020 } },
-    { { .fl = 0x000040 }, { .fl = 0 }, { .fl = 0x000040 } },
-    { { .fl = 0x000080 }, { .fl = 0 }, { .fl = 0x000080 } },
-    { { .fl = 0x000100 }, { .fl = 0 }, { .fl = 0x000100 } },
-    { { .fl = 0x000200 }, { .fl = 0 }, { .fl = 0x000200 } },
-    { { .fl = 0x000400 }, { .fl = 0 }, { .fl = 0x000400 } },
-    { { .fl = 0x000800 }, { .fl = 0 }, { .fl = 0x000800 } },
-    { { .fl = 0x001000 }, { .fl = 0 }, { .fl = 0x001000 } },
-    { { .fl = 0x002000 }, { .fl = 0 }, { .fl = 0x002000 } },
-    { { .fl = 0x004000 }, { .fl = 0 }, { .fl = 0x004000 } },
-    { { .fl = 0x008000 }, { .fl = 0 }, { .fl = 0x008000 } },
-    { { .fl = 0x010000 }, { .fl = 0 }, { .fl = 0x010000 } },
-    { { .fl = 0x020000 }, { .fl = 0 }, { .fl = 0x020000 } },
-    { { .fl = 0x040000 }, { .fl = 0 }, { .fl = 0x040000 } },
-    { { .fl = 0x080000 }, { .fl = 0 }, { .fl = 0x080000 } },
-    { { .fl = 0x100000 }, { .fl = 0 }, { .fl = 0x100000 } },
-    { { .fl = 0x200000 }, { .fl = 0 }, { .fl = 0x200000 } },
-    { { .fl = 0x400000 }, { .fl = 0 }, { .fl = 0x400000 } },
-    { { .fl = 0x7fffff }, { .fl = 0 }, { .fl = 0x7fffff } },
+    { { .fl = 0x000001 }, { .fl = 0.5 }, 1 },
+    { { .fl = 0x400000 }, { .fl = 0.5 }, 23 },
+    { { .fl = 0x7fffff }, { .fl = 0x0.fffffep+00 }, 23 },
 
-    { { .fl = -0x000001L }, { .fl = -0.0 }, { .fl = -0x000001L } },
-    { { .fl = -0x000002L }, { .fl = -0.0 }, { .fl = -0x000002L } },
-    { { .fl = -0x000080L }, { .fl = -0.0 }, { .fl = -0x000080L } },
-    { { .fl = -0x000100L }, { .fl = -0.0 }, { .fl = -0x000100L } },
-    { { .fl = -0x008000L }, { .fl = -0.0 }, { .fl = -0x008000L } },
-    { { .fl = -0x010000L }, { .fl = -0.0 }, { .fl = -0x010000L } },
-    { { .fl = -0x400000L }, { .fl = -0.0 }, { .fl = -0x400000L } },
-    { { .fl = -0x7fffffL }, { .fl = -0.0 }, { .fl = -0x7fffffL } },
+    { { .fl = -0x000001 }, { .fl = -0.5 }, 1 },
+    { { .fl = -0x400000 }, { .fl = -0.5 }, 23 },
+    { { .fl = -0x7fffff }, { .fl = -0x0.fffffep+00 }, 23 },
     
-    /* normal too big	*/
-    { { .fl = 0x800000 }, { .fl = 0 }, { .fl = 0x800000 } },
-    { { .fl = 0x800001 }, { .fl = 0 }, { .fl = 0x800001 } },
-    { { 0x7e000000 }, { .fl = 0 }, { 0x7e000000 } },
-    { { 0x7f000000 }, { .fl = 0 }, { 0x7f000000 } },
-    { { 0x7f7fffff }, { .fl = 0 }, { 0x7f7fffff } },
+    /* very big	*/
+    { { 0x7f000000 }, { .fl = 0.5 }, 128 },
+    { { 0x7f7fffff }, { .fl = 0x0.ffffffp+00 }, 128 },
 
-    { { .fl = -0x800000L }, { .fl = -0.0 }, { .fl = -0x800000L } },
-    { { .fl = -0x800001L }, { .fl = -0.0 }, { .fl = -0x800001L } },
-    { { 0xfe000000 }, { .fl = -0.0 }, { 0xfe000000 } },
-    { { 0xff000000 }, { .fl = -0.0 }, { 0xff000000 } },
-    { { 0xff7fffff }, { .fl = -0.0 }, { 0xff7fffff } },
-    
-    /* Inf	*/
-    { { 0x7f800000 },	{ .fl = 0 },	{ 0x7f800000 } },
-    { { 0xff800000 },	{ .fl = -0.0 },	{ 0xff800000 } },
-    
-    /* integral and fraction	*/
-    { { .fl= 0x1.000002p+0 }, { .fl= 0x0.000002p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000004p+0 }, { .fl= 0x0.000004p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000008p+0 }, { .fl= 0x0.000008p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000010p+0 }, { .fl= 0x0.000010p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000020p+0 }, { .fl= 0x0.000020p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000040p+0 }, { .fl= 0x0.000040p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000080p+0 }, { .fl= 0x0.000080p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000100p+0 }, { .fl= 0x0.000100p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000200p+0 }, { .fl= 0x0.000200p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000400p+0 }, { .fl= 0x0.000400p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.000800p+0 }, { .fl= 0x0.000800p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.001000p+0 }, { .fl= 0x0.001000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.002000p+0 }, { .fl= 0x0.002000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.004000p+0 }, { .fl= 0x0.004000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.008000p+0 }, { .fl= 0x0.008000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.010000p+0 }, { .fl= 0x0.010000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.020000p+0 }, { .fl= 0x0.020000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.040000p+0 }, { .fl= 0x0.040000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.080000p+0 }, { .fl= 0x0.080000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.100000p+0 }, { .fl= 0x0.100000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.200000p+0 }, { .fl= 0x0.200000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.400000p+0 }, { .fl= 0x0.400000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.800000p+0 }, { .fl= 0x0.800000p+0 }, { .fl= 1 } },
-    { { .fl= 0x1.fffffep+0 }, { .fl= 0x0.fffffep+0 }, { .fl= 1 } },
-
-    { { .fl= 0x2.000004p+0 }, { .fl= 0x0.000004p+0 }, { .fl= 2 } },
-    { { .fl= 0x2.000400p+0 }, { .fl= 0x0.000400p+0 }, { .fl= 2 } },
-    { { .fl= 0x2.800000p+0 }, { .fl= 0x0.800000p+0 }, { .fl= 2 } },
-    { { .fl= 0x2.fffffcp+0 }, { .fl= 0x0.fffffcp+0 }, { .fl= 2 } },
-    { { .fl= 0x7fffff.8p+0 }, { .fl= 0x0.8p+0 }, { .fl= 0x7fffffp+0 } },
-
-    { { .fl= -0x1.000002p+0 }, { .fl= -0x0.000002p+0 }, { .fl= -1 } },
-    { { .fl= -0x1.800000p+0 }, { .fl= -0x0.800000p+0 }, { .fl= -1 } },
-    { { .fl= -0x1.fffffep+0 }, { .fl= -0x0.fffffep+0 }, { .fl= -1 } },
-    { { .fl= -0x2.000004p+0 }, { .fl= -0x0.000004p+0 }, { .fl= -2 } },
-    { { .fl= -0x2.000400p+0 }, { .fl= -0x0.000400p+0 }, { .fl= -2 } },
-    { { .fl= -0x2.800000p+0 }, { .fl= -0x0.800000p+0 }, { .fl= -2 } },
-    { { .fl= -0x2.fffffcp+0 }, { .fl= -0x0.fffffcp+0 }, { .fl= -2 } },
-    { { .fl= -0x7fffff.8p+0 }, { .fl= -0x0.8p+0 }, { .fl= -0x7fffffp+0 } },
-#endif
+    { { 0xff000000 }, { .fl = -0.5 }, 128 },
+    { { 0xff7fffff }, { .fl = -0x0.ffffffp+00 }, 128 },
 };
-
-void x_exit (int index)
-{
-#ifndef	__AVR__
-    fprintf (stderr, "t[%d]:  %#lx\n", index - 1, vf.lo);
-#endif
-    exit (index ? index : -1);
-}
 
 int main ()
 {
@@ -149,8 +74,83 @@ int main ()
 	zf.lo = pgm_read_dword (& t[i].f);
 	ze =    pgm_read_word (& t[i].e);
 	vf.fl = frexp (x.fl, & ve);
-	if (vf.lo != zf.lo || ve != ze)
-	    x_exit (i+1);
+	if (vf.lo != zf.lo || ve != ze) {
+	    PRINTFLN ("t[%d]: %#lx %d", i, vf.lo, ve);
+	    EXIT (i + 1);
+	}
     }
+
+    /* Check all normal values with fractional 0.5	*/
+    for (i = 1; i < 255; i++) {
+	/* Positive.	*/
+	x.lo = (long)i << 23;
+	vf.fl = frexp (x.fl, & ve);
+	if (vf.lo != 0x3f000000 || ve != i - 126) {
+	    PRINTFLN ("t[%d]: %#lx %d", i, vf.lo, ve);
+	    EXIT (i + 100);
+	}
+
+	/* Negative.	*/
+	x.lo |= 0x80000000;
+	vf.fl = frexp (x.fl, & ve);
+	if ((unsigned long)vf.lo != 0xbf000000 || ve != i - 126) {
+	    PRINTFLN ("t[%d]: %#lx %d", i, vf.lo, ve);
+	    EXIT (i + 100);
+	}
+    }
+    
+    /* X is not a finite value.	*/
+    {
+	static PROGMEM const long tnf[] = {
+	    0x7f800000,		/* +Inf	*/
+	    0xff800000,		/* -Inf	*/
+	    0x7f800001,		/* NaN	*/
+	    0x7f800100,
+	    0x7f810000,
+	    0x7fc00000,
+	    0x7fffffff,
+	    0xff800001,
+	    0xff800100,
+	    0xff810000,
+	    0xffc00000,
+	    0xffffffff,
+	};
+	for (i = 0; i < (int) (sizeof(tnf) / sizeof(tnf[0])); i++) {
+	    x.lo = pgm_read_dword (& tnf[i]);
+	    ve = 1;
+	    vf.fl = frexp (x.fl, & ve);
+#ifdef	__AVR__
+	    if (vf.lo != x.lo || ve) {
+		PRINTFLN ("tnf[%d]: %#lx %d", i, vf.lo, ve);
+		EXIT (i + 200);
+	    }
+#else
+	    if (isinf (x.fl)) {
+		if (vf.lo != x.lo || ve) {
+		    PRINTFLN ("tnf[%d]: %#lx %d", i, vf.lo, ve);
+		    EXIT (i + 200);
+		}
+	    } else {
+		if (!isnan (vf.fl) || ve) {
+		    PRINTFLN ("tnf[%d]: %#lx %d", i, vf.lo, ve);
+		    EXIT (i + 200);
+		}
+	    }
+#endif
+	}
+    }
+
+#ifdef	__AVR__
+    /* NULL is a legal address for Avr-libc realization: skip writing.	*/
+    {
+	unsigned char r1 = 1;
+        vf.fl = frexp (48, (int *)0);
+	/* Check __zero_reg__, as it is allocated by 0x0001 address. */
+	asm ("mov %0,r1 \n\t clr r1" : "=r"(r1));
+	if (r1) EXIT (300);
+	if (vf.fl != 0.75) EXIT (301);
+    }
+#endif
+
     return 0;
 }

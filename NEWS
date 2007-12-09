@@ -29,6 +29,9 @@
   long)(-1.0) returns ULONG_MAX.
   + The signbit() function: return 1 as nonzero value (make similar to
   builtin GCC).
+  + Make frexp() similar to GCC/x86 in case of nonfinite arg: write 0 by
+  exponent pointer. Early Avr-libc's frexp() skips exponent storing in this
+  case. Make the NULL a legal address to skip a storing.
 
 *** Changes since avr-libc-1.4.0:
 

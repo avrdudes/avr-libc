@@ -1,3 +1,13 @@
+2007-12-09  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libm/fplib/frexp.S: Make frexp() similar to GCC/x86 in case of
+	nonfinite arg: write 0 by exponent pointer. Early Avr-libc's frexp()
+	skips exponent storing in this case. Make the NULL a legal address
+	to skip a storing.
+	* include/math.h: Specify this in doc.
+	* tests/simulate/math/frexp-01.c: Add new test cases.
+	* NEWS: Note about this.
+
 2007-12-08  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* doc/api/doxygen.config.in: Change MACRO_EXPANSION and

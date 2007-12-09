@@ -186,15 +186,19 @@ extern double ceil(double __x) __ATTR_CONST__;
      \ingroup avr_math
 
      The frexp() function breaks a floating-point number into a normalized
-     fraction and an integral power of 2.  It stores the integer in the \c int
-     object pointed to by \c exp.
+     fraction and an integral power of 2.  It stores the integer in the \c
+     int object pointed to by \c pexp.
 
-     The frexp() function returns the value \c x, such that \c x is a double with
-     magnitude in the interval [1/2, 1) or zero, and \c value equals \c x times 2
-     raised to the power \c *exp.  If value is zero, both parts of the result are
-     zero.
+     If \p x is a normal float point number, the frexp() function returns
+     the value \c v, such that \c v has a magnitude in the interval [1/2, 1)
+     or zero, and \p x equals \c v times 2 raised to the power \p pexp. If
+     \p x is zero, both parts of the result are zero. If \p x is not a
+     finite number, the frexp() returns \p x as is and stores 0 by \p pexp.
+
+     \note  This implementation permits a zero pointer as a directive to
+     skip a storing the exponent.
   */
-extern double frexp(double __value, int *__exp);
+extern double frexp(double x, int *pexp);
 
   /**
      \ingroup avr_math
