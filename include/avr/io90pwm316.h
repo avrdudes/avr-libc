@@ -1169,6 +1169,7 @@
 #define FLASHEND       0x3FFF
 #define SPM_PAGESIZE   128
 
+
 /* Fuse Information */
 
 #define FUSE_MEMORY_SIZE 3
@@ -1185,21 +1186,25 @@
 #define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
 
 /* High Fuse Byte */
+#define BODLEVEL0 ~_BV(0)
+#define BODLEVEL1 ~_BV(1)
+#define BODLEVEL2 ~_BV(2)
+#define EESAVE    ~_BV(3)  /* EEPROM memory is preserved through chip erase */
+#define WDTON     ~_BV(4)  /* Watchdog timer always on */
+#define SPIEN     ~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define DWEN      ~_BV(6)  /* debugWIRE Enable */
+#define RSTDISBL  ~_BV(7)  /* External Reset Diasble */
+#define HFUSE_DEFAULT (SPIEN)
+
+/* Extended Fuse Byte */
 #define BOOTRST  ~_BV(0)  /* Select Reset Vector */
 #define BOOTSZ0  ~_BV(1)  /* Select Boot Size */
 #define BOOTSZ1  ~_BV(2)  /* Select Boot Size */
-#define EESAVE   ~_BV(3)  /* EEPROM memory is preserved through chip erase */
-#define WDTON    ~_BV(4)  /* Watchdog timer always on */
-#define SPIEN    ~_BV(5)  /* Enable Serial programming and Data Downloading */
-#define DWEN     ~_BV(6)  /* debugWIRE Enable */
-#define RSTDISBL ~_BV(7)  /* External Reset Diasble */
-#define HFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1 & SPIEN)
-
-/* Extended Fuse Byte */
-#define BODLEVEL0 ~_BV(1)
-#define BODLEVEL1 ~_BV(2)
-#define BODLEVEL2 ~_BV(3)
-#define EFUSE_DEFAULT (0xFF)
+#define PSCRV    ~_BV(4)
+#define PSC0RB   ~_BV(5)
+#define PSC1RB   ~_BV(6)
+#define PSC2RB   ~_BV(7)
+#define EFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1)
 
 
 /* Lock Bits */

@@ -1,5 +1,10 @@
 2007-12-12  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/io90pwm216.h: Fix fuse data.
+	* include/avr/io90pwm316.h: Ditto.
+
+2007-12-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom32hvb.h: Remove unused register.
 	* include/avr/io90pwm216.h: Fix IVT size. Fix for bug #21749.
 	* include/avr/io90pwm316.h: Ditto.
