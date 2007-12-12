@@ -346,4 +346,33 @@
 #define E2END       0x7F
 #define FLASHEND    0x07FF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 2
+
+/* Low Fuse Byte */
+#define CKSEL0      ~_BV(0)
+#define CKSEL1      ~_BV(1)
+#define CKSEL2      ~_BV(2)
+#define CKSEL3      ~_BV(3)
+#define SUT0        ~_BV(4)
+#define SUT1        ~_BV(5)
+#define CKOPT       ~_BV(6)
+#define PLLCK    ~_BV(7)
+#define LFUSE_DEFAULT (CKSEL1 & CKSEL2)
+
+/* High Fuse Byte */
+#define BODEN       ~_BV(0)
+#define BODLEVEL    ~_BV(1)
+#define EESAVE      ~_BV(2)
+#define SPIEN       ~_BV(3)
+#define RSTDISBL    ~_BV(4)
+#define HFUSE_DEFAULT (SPIEN)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
 #endif  /* _AVR_IOTN26_H_ */

@@ -247,4 +247,22 @@
 #define E2END		0x0
 #define FLASHEND	0x7FF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 1
+
+/* Fuse Byte */
+#define CKSEL0      ~_BV(0)
+#define CKSEL1      ~_BV(1)
+#define CKSEL2      ~_BV(2)
+#define CKSEL3      ~_BV(3)
+#define INTCAP      ~_BV(4)
+#define FUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
 #endif /* _AVR_IOTN28_H_ */

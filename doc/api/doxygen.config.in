@@ -493,6 +493,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/interrupts.dox \
                          @top_srcdir@/doc/api/vectortable.dox \
                          @top_srcdir@/include/avr/io.h \
+                         @top_srcdir@/include/avr/lock.h \
                          @top_srcdir@/include/avr/pgmspace.h \
                          @top_srcdir@/include/avr/portpins.h \
                          @top_srcdir@/include/avr/power.h \

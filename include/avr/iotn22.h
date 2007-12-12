@@ -180,4 +180,19 @@
 #define    E2END     0x7F
 #define    FLASHEND  0x07FF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 1
+
+/* Fuse Byte */
+#define CKSEL       ~_BV(0)
+#define SPIEN       ~_BV(5)
+#define FUSE_DEFAULT (SPIEN)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
 #endif /* _AVR_IOTN22_H_ */

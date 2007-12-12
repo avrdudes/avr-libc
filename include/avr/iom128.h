@@ -1168,9 +1168,7 @@
 #define SUT1        ~_BV(5)
 #define BODEN       ~_BV(6)
 #define BODLEVEL    ~_BV(7)
-
-#define LFUSE_DEFAULT (SUT0 & CKSEL3 & CKSEL2 & CKSEL1)
-
+#define LFUSE_DEFAULT (CKSEL1 & CKSEL2 & CKSEL3 & SUT0)
 
 /* High Fuse Byte */
 #define BOOTRST     ~_BV(0)
@@ -1181,14 +1179,11 @@
 #define SPIEN       ~_BV(5)
 #define JTAGEN      ~_BV(6)
 #define OCDEN       ~_BV(7)
-
-#define HFUSE_DEFAULT (JTAGEN & SPIEN & BOOTSZ1 & BOOTSZ0)
-
+#define HFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1 & SPIEN & JTAGEN)
 
 /* Extended Fuse Byte */
 #define WDTON       ~_BV(0)
 #define M103C       ~_BV(1)
-
 #define EFUSE_DEFAULT (M103C)
 
 

@@ -1,3 +1,77 @@
+2007-12-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/lock.h: Add documentation for the Lockbit API.
+	* doc/api/doxygen.config.in: Add avr/lock.h to the doc list.
+	* include/avr/iom8.h: Add Fuse and Lockbit data.
+	* include/avr/iotn43u.h: Add Lockbit data.
+	* include/avr/io90pwm216.h: Add Lockbit data. Fix fuse data.
+	* include/avr/io90pwm316.h: Add Lockbit data. Fix fuse data.
+	* include/avr/io90pwm2b.h: Add Lockbit data. Fix fuse data.
+	* include/avr/io90pwm3b.h: Add Lockbit data. Fix fuse data.
+	* include/avr/iom88.h: Add Fuse data.
+	* include/avr/iom168.h: Add Fuse data.
+	* include/avr/iom128.h: Formatting.
+	* include/avr/iom16.h: Add Fuse and Lockbit data.
+	* include/avr/iom32.h: Ditto.
+	* include/avr/iom64.h: Ditto.
+	* include/avr/iom325.h: Ditto.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom645.h: Ditto.
+	* include/avr/iom6450.h: Ditto.
+	* include/avr/iom329.h: Ditto.
+	* include/avr/iom3290.h: Ditto.
+	* include/avr/iom649.h: Ditto.
+	* include/avr/iom6490.h: Ditto.
+	* include/avr/iom640.h: Ditto.
+	* include/avr/iom1280.h: Ditto.
+	* include/avr/iom1281.h: Ditto.
+	* include/avr/iom2560.h: Ditto.
+	* include/avr/iom2561.h: Ditto.
+	* include/avr/iousb646.h: Ditto.
+	* include/avr/iousb647.h: Ditto.
+	* include/avr/iousb1286.h: Ditto.
+	* include/avr/iousb1287.h: Ditto.
+	* include/avr/iom8515.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom162.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iousb82.h: Ditto.
+	* include/avr/iousb162.h: Ditto.
+	* include/avr/iom165.h: Ditto.
+	* include/avr/iom165p.h: Ditto.
+	* include/avr/iocan32.h: Ditto.
+	* include/avr/iocan64.h: Ditto.
+	* include/avr/iocan128.h: Ditto.
+	* include/avr/io90pwmx.h: Ditto.
+	* include/avr/io90pwm1.h: Ditto.
+	* include/avr/iom169.h: Ditto.
+	* include/avr/iom169p.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom406.h: Ditto.
+	* include/avr/iotn261.h: Ditto.
+	* include/avr/iotn461.h: Ditto.
+	* include/avr/iotn861.h: Ditto.
+	* include/avr/iotn25.h: Ditto.
+	* include/avr/iotn45.h: Ditto.
+	* include/avr/iotn85.h: Ditto.
+	* include/avr/iotn24.h: Ditto.
+	* include/avr/iotn44.h: Ditto.
+	* include/avr/iotn84.h: Ditto.
+	* include/avr/iotn2313.h: Ditto.
+	* include/avr/iotn13.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iom8hva.h: Ditto.
+	* include/avr/iom16hva.h: Ditto.
+	* include/avr/iom8535.h: Ditto.
+	* include/avr/iom164.h: Ditto.
+	* include/avr/iom324.h: Ditto.
+	* include/avr/iom644.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+	* include/avr/iotn26.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+
 2007-12-09  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libm/fplib/frexp.S: Make frexp() similar to GCC/x86 in case of

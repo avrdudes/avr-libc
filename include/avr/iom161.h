@@ -642,4 +642,25 @@
 #define E2END		0x1FF
 #define FLASHEND	0x3FFF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 1
+
+/* Fuse Byte */
+#define CKSEL0      ~_BV(0)
+#define CKSEL1      ~_BV(1)
+#define CKSEL2      ~_BV(2)
+#define SUT         ~_BV(4)
+#define SPIEN       ~_BV(5)
+#define BOOTRST     ~_BV(6)
+#define FUSE_DEFAULT (CKSEL0 & CKSEL2 & SPIEN)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_BITS_0_EXIST
+#define __BOOT_LOCK_BITS_1_EXIST 
+
+
 #endif /* _AVR_IOM161_H_ */

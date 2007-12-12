@@ -44,5 +44,26 @@
 #define E2END       0xFF
 #define FLASHEND    0x1FFF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 1
+
+/* Low Fuse Byte */
+#define SUT0        ~_BV(0)
+#define SUT1        ~_BV(1)
+#define SUT2        ~_BV(2)
+#define SELFPRGEN   ~_BV(3)
+#define DWEN        ~_BV(4)
+#define SPIEN       ~_BV(5)
+#define EESAVE      ~_BV(6)
+#define WDTON       ~_BV(7)
+#define FUSE_DEFAULT (SPIEN)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
 #endif /* _AVR_IOM8HVA_H_ */
 

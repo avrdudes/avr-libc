@@ -304,4 +304,23 @@
 #define E2END		0x3F
 #define FLASHEND	0x3FF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 1
+
+/* Fuse Byte */
+#define CKSEL0      ~_BV(0)
+#define CKSEL1      ~_BV(1)
+#define RSTDISBL    ~_BV(4)
+#define SPIEN       ~_BV(5)
+#define BODEN       ~_BV(6)
+#define BODLEVEL    ~_BV(7)
+#define FUSE_DEFAULT (CKSEL0 & CKSEL1 & SPIEN)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
 #endif /* _AVR_IOTN15_H_ */

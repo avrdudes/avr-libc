@@ -730,4 +730,32 @@
 #define E2END        0x1FF
 #define FLASHEND     0x9FFF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 2
+
+/* Low Fuse Byte */
+#define CKSEL   ~_BV(0)
+#define SUT0    ~_BV(1)
+#define SUT1    ~_BV(2)
+#define BOOTRST ~_BV(3)
+#define BOOTSZ0 ~_BV(4)
+#define BOOTSZ1 ~_BV(5)
+#define EESAVE  ~_BV(6)
+#define WDTON   ~_BV(7)
+#define LFUSE_DEFAULT (SUT0 & BOOTSZ0 & BOOTSZ1)
+
+/* High Fuse Byte */
+#define JTAGEN      ~_BV(0)
+#define OCDEN       ~_BV(1)
+#define HFUSE_DEFAULT (JTAGEN)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_BITS_0_EXIST
+#define __BOOT_LOCK_BITS_1_EXIST 
+
+
 #endif /* _AVR_IOM406_H_ */
