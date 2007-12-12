@@ -1116,7 +1116,7 @@
 /* Store Program Memory Read */
 #define SPM_READY_vect     _VECTOR(31)
 
-#define _VECTORS_SIZE   64
+#define _VECTORS_SIZE   (4 * 32)
 
 /* Constants */
 

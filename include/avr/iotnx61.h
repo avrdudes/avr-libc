@@ -395,9 +395,9 @@
 #define SPMCSR  _SFR_IO8(0x37)
 #define SPMEN   0
 #define PGERS   1
-#define RGWRT   3
-#define RFLB    4
-#define CTPB    5
+#define PGWRT 2
+#define RFLB 3
+#define CTPB 4
 
 #define TIFR    _SFR_IO8(0x38)
 #define ICF0    0

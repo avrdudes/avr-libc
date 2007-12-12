@@ -662,8 +662,8 @@
 #define MUX0    0
 
 #define DIDR2   _SFR_MEM8(0x7D)
-#define ADC15D  6
-#define ADC14D  7
+#define ADC15D  7
+#define ADC14D  6
 #define ADC13D  5
 #define ADC12D  4
 #define ADC11D  3
