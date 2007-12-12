@@ -297,8 +297,10 @@ must be defined for the mega48.
 #define MCUCR   _SFR_IO8 (0x35)
 /* MCUCR */
 #define PUD     4
+#if defined (__AVR_ATmega88__) || defined (__AVR_ATmega168__) 
 #define IVSEL   1
 #define IVCE    0
+#endif
 
 #define SPMCSR  _SFR_IO8 (0x37)
 /* SPMCSR */

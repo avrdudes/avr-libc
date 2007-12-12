@@ -295,8 +295,6 @@
 #define SPDR6 6
 #define SPDR7 7
 
-#define DWDR _SFR_IO8(0x31)
-
 #define SMCR _SFR_IO8(0x33)
 #define SE 0
 #define SM0 1

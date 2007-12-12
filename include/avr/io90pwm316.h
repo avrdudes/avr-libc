@@ -906,6 +906,10 @@
 
 /* PSC 1 Synchro and Output Configuration */
 #define PSOC1   _SFR_MEM8(0xE0)
+#define POEN1A 0
+#define POEN1B 2
+#define PSYNC1 4
+#define PSYNC1 5
 
 /* Output Compare SA Registers */
 #define OCR1SA  _SFR_MEM16(0xE2)
@@ -1155,7 +1159,7 @@
 /* Store Program Memory Read */
 #define SPM_READY_vect     _VECTOR(31)
 
-#define _VECTORS_SIZE   64
+#define _VECTORS_SIZE   (4 * 32)
 
 /* Constants */
 
