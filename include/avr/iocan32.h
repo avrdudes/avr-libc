@@ -44,4 +44,44 @@
 #define    E2END    0x03FF
 #define    FLASHEND 0x7FFF
 
+
+/* Fuses */
+
+#define FUSE_MEMORY_SIZE 3
+
+/* Low Fuse Byte */
+#define CKSEL0      ~_BV(0)
+#define CKSEL1      ~_BV(1)
+#define CKSEL2      ~_BV(2)
+#define CKSEL3      ~_BV(3)
+#define SUT0        ~_BV(4)
+#define SUT1        ~_BV(5)
+#define CKOUT       ~_BV(6)
+#define CKDIV8      ~_BV(7)
+#define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
+
+/* High Fuse Byte */
+#define BOOTRST     ~_BV(0)
+#define BOOTSZ0     ~_BV(1)
+#define BOOTSZ1     ~_BV(2)
+#define EESAVE      ~_BV(3)
+#define WDTON       ~_BV(4)
+#define SPIEN       ~_BV(5)
+#define JTAGEN      ~_BV(6)
+#define OCDEN       ~_BV(7)
+#define HFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1 & SPIEN & JTAGEN)
+
+/* Extended Fuse Byte */
+#define BODLEVEL0   ~_BV(1)
+#define BODLEVEL1   ~_BV(2)
+#define BODLEVEL2   ~_BV(3)
+#define EFUSE_DEFAULT (0xFF)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_BITS_0_EXIST
+#define __BOOT_LOCK_BITS_1_EXIST 
+
+
 #endif  /* _AVR_IOCAN32_H_ */

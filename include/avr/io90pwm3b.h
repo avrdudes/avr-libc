@@ -1332,7 +1332,7 @@
 #define SUT1    ~_BV(5)  /* Select start-up time */
 #define CKOUT   ~_BV(6) /* Oscillator output option */
 #define CLKDIV8 ~_BV(7)  /* Divide clock by 8 */
-#define LFUSE_DEFAULT (CKSEL1 & CKSEL2 & CKSEL3 & SUT0 & SUT1 & CKDIV8)
+#define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
 
 
 /* High Fuse Byte */
@@ -1356,6 +1356,12 @@
 #define PSC1RB  ~_BV(6)  /* PSC1 Reset Behaviour */
 #define PSC2RB  ~_BV(7)  /* PSC2 Reset Behaviour */
 #define EFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_BITS_0_EXIST
+#define __BOOT_LOCK_BITS_1_EXIST 
 
 
 #endif /* _AVR_IO90PWM3B_H_ */

@@ -562,4 +562,8 @@
 #define EFUSE_DEFAULT (0xFF)
 
 
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
 #endif /* _AVR_IOTN43U_H_ */

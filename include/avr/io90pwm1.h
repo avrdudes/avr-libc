@@ -1075,4 +1075,47 @@
 #define E2END       0x01FF
 #define FLASHEND    0x0FFF
 
+
+/* Fuse Information */
+
+#define FUSE_MEMORY_SIZE 3
+
+/* Low Fuse Byte */
+#define CKSEL0  ~_BV(0)  /* Select Clock Source */
+#define CKSEL1  ~_BV(1)  /* Select Clock Source */
+#define CKSEL2  ~_BV(2)  /* Select Clock Source */
+#define CKSEL3  ~_BV(3)  /* Select Clock Source */
+#define SUT0    ~_BV(4)  /* Select start-up time */
+#define SUT1    ~_BV(5)  /* Select start-up time */
+#define CKOUT   ~_BV(6)  /* Oscillator output option */
+#define CKDIV8  ~_BV(7)  /* Divide clock by 8 */
+#define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
+
+/* High Fuse Byte */
+#define BODLEVEL0  ~_BV(0)
+#define BODLEVEL1  ~_BV(1)
+#define BODLEVEL2  ~_BV(2)
+#define EESAVE     ~_BV(3)  /* EEPROM memory is preserved through chip erase */
+#define WDTON      ~_BV(4)  /* Watchdog timer always on */
+#define SPIEN      ~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define DWEN       ~_BV(6)  /* debugWIRE Enable */
+#define RSTDISBL   ~_BV(7)  /* External Reset Diasble */
+#define HFUSE_DEFAULT (SPIEN)
+
+/* Extended Fuse Byte */
+#define BOOTRST     ~_BV(0)
+#define BOOTSZ0     ~_BV(1)
+#define BOOTSZ1     ~_BV(2)
+#define PSCRV       ~_BV(4)
+#define PSC0RB      ~_BV(5)
+#define PSC2RB      ~_BV(7)
+#define EFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_BITS_0_EXIST
+#define __BOOT_LOCK_BITS_1_EXIST 
+
+
 #endif /* _AVR_IOPWM1_H_ */
