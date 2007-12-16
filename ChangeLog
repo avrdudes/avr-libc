@@ -1,5 +1,13 @@
 2007-12-16  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Fix bug #18994: minor optimization possible to stdlib functions
+	isspace(), isprint(), and islower()
+	* libc/stdlib/ctype.S: Optimize isspace(), isprint() and islower().
+	* tests/simulate/stdlib/islower-1.c: New file.
+	* tests/simulate/stdlib/isprint-1.c: New file.
+	* tests/simulate/stdlib/isspace-1.c: New file.
+	* NEWS: Note about this.
+
 	* NEWS: Add the chapter 'Main changes from 1.4 to 1.5'.
 
 2007-12-12  Eric B. Weddington  <eric.weddington@atmel.com>

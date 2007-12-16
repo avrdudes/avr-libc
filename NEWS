@@ -21,6 +21,8 @@
   [#21743] AT90PWM316 missing PSOC1 bit definitions
   [#21626] Incorrect Bit Definition for ADC14 and ADC15 Digital Input Disable
   [#21521] incorrect bit definitions in iotnx61.h
+  [#18994] minor optimization possible to stdlib functions isspace(),
+           isprint(), and islower()
 
 * New devices supported:
 

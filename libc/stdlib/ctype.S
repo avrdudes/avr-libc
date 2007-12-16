@@ -146,11 +146,10 @@ GLOBAL(islower)
           CPSE  rHigh,__zero_reg__
 1:
           RJMP  _U(__ctype_isfalse)
-          CPI   rLow,'a'
-          BRLT  1b
-          CPI   rLow,'z'+1
-          BRGE  1b
-          RET                      ; 'a' <= rLow <= 'z' (!= 0!!, Z=0)
+          SUBI	rLow, 'a'
+          SUBI	rLow, 'z'-'a'+1
+          BRSH	1b
+          RET			; TRUE: rLow is in -26..-1
 
           ENDFUNC
 #endif
@@ -227,15 +226,12 @@ GLOBAL(isgraph)
           CPI   rLow,' '
           BREQ  1f
 GLOBAL(isprint)
-          TST   rHigh
-          BRNE  1f
-          CPI   rLow,' '
-          BRLT  1f
-          CPI   rLow,0x7E+1
-          BRGE  1f                 ;  ' ' <= rLow <= 0x7E (!= 0!!)
-          RET
-1:
-          RJMP  _U(__ctype_isfalse)
+	  CPSE	rHigh, __zero_reg__
+1:	  RJMP	_U(__ctype_isfalse)
+	  SUBI	rLow, ' '
+	  SUBI	rLow, 0x7E - ' ' + 1
+	  BRSH	1b
+	  RET			; TRUE: rlow is negative value
 
           ENDFUNC
 #endif
@@ -246,24 +242,21 @@ GLOBAL(isprint)
           TEXT_SEG(ctype, isspace)
           FUNCTION(isspace)
 
+/* This fact is used below.	*/
+.if	('\t'-9) | ('\n'-10) | ('\f'-12) | ('\r'-13)	; '\v' is 11
+  .err
+.endif
+
 GLOBAL(isspace)
           CPSE  rHigh,__zero_reg__
 1:
           RJMP  _U(__ctype_isfalse)
           CPI   rLow,' '           ; blank
           BREQ  2f
-          CPI   rLow,0x0A    ;'\n' ; line feed
-          BREQ  2f
-          CPI   rLow,0x0C    ;'\f' ; form feed
-          BREQ  2f
-          CPI   rLow,0x0D    ;'\r' ; carriage return
-          BREQ  2f
-          CPI   rLow,0x09    ;'\t' ; tab
-          BREQ  2f
-          CPI   rLow,0x0B    ;'\v' ; vertical tab
-          BRNE  1b
-2:
-          RET
+	  SUBI	rLow, '\t'
+	  SUBI	rLow, '\r'-'\t'+1
+	  BRSH	1b
+2:	  RET			; TRUE result: rLow is -5..-1 or ' '
 
           ENDFUNC
 #endif
