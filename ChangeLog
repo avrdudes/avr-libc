@@ -1,3 +1,10 @@
+2007-12-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix bug #18994: minor optimization possible to stdlib functions
+	isspace(), isprint(), and islower()
+	* libc/stdlib/ctype.S: Optimize isspace(), isprint() and islower().
+	* NEWS: Note about this.
+
 2007-12-12  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/io90pwm216.h: Fix fuse data.
