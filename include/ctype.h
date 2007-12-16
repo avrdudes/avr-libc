@@ -61,7 +61,8 @@ extern "C" {
     These functions perform character classification. They return true or
     false status depending whether the character passed to the function falls
     into the function's classification (i.e. isdigit() returns true if its
-    argument is any value '0' though '9', inclusive.) */
+    argument is any value '0' though '9', inclusive). If the input is not
+    an unsigned char value, all of this function return false.	*/
 
  /* @{ */
 
@@ -154,8 +155,10 @@ extern int isxdigit(int __c) __ATTR_CONST__;
 
 /** \name Character convertion routines 
 
-    If \c c is not an unsigned char value, or \c EOF, the behaviour of these
-    functions is undefined. */
+    This realization permits all possible values of integer argument.
+    The toascii() function clears all highest bits. The tolower() and
+    toupper() functions return an input argument as is, if it is not an
+    unsigned char value.	*/
 
 /* @{ */
 

@@ -1,5 +1,20 @@
 2007-12-16  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* libc/stdlib/ctype.S:
+	  . isalnum(): Optimize.
+	  . isxdigit(): Correct a behaviour with nonzero high byte.
+	  . iscntrl(): Fix bug [no-id]: iscntrl() return true for some
+	  values from 0x80 to 0xff. Optimize a little.
+	  . ispunct(): Optimize.
+	  . tolower(): Return as is, if the input is not an unsigned char
+	  value. Optimize.
+	  . toupper(): Ditto.
+	* include/ctype.h: Specify (and change) doc about the behaviour
+	in case then the input is not an unsigned char value.
+	* NEWS: Note about fixed bug of iscntrl().
+
+2007-12-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
 	Fix bug #18994: minor optimization possible to stdlib functions
 	isspace(), isprint(), and islower()
 	* libc/stdlib/ctype.S: Optimize isspace(), isprint() and islower().
