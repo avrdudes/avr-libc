@@ -102,16 +102,14 @@ GLOBAL(toascii)
           FUNCTION(isalnum)
 
 GLOBAL(isalnum)
-          CPSE  rHigh,__zero_reg__
-          RJMP  _U(__ctype_isfalse)
-          PUSH  rLow               ; save, destroyed by isdigit returning 0
-          RCALL _U(isdigit)
-          TST   rLow
-          POP   rLow
-          BREQ  1f
-          RET                      ; true
-1:
-          RJMP  _U(isalpha)
+	cpse	rHigh, __zero_reg__
+	rjmp	_U(__ctype_isfalse)
+	subi	rLow, '0'
+	subi	rLow, '9'-'0'+1
+	brlo	2f			; rLow is digit, return negative val.
+	subi	rLow, lo8(-'9'-1)	; restore rLow
+	rjmp	_U(isalpha)
+2:	ret
 
           ENDFUNC
 #endif
@@ -178,19 +176,23 @@ GLOBAL(isdigit)
           TEXT_SEG(ctype, isxdigit)
           FUNCTION(isxdigit)
 
+; This fact is used below.
+.if	'a' - 'A' - 0x20
+  .err
+.endif
+
 GLOBAL(isxdigit)
-          MOV   __tmp_reg__,rLow
-          ORI   rLow,0x20
-          CPI   rLow,'a'
-          BRLT  0f
-          CPI   rLow,'f'+1
-          BRGE  1f
-          RET                      ; 'a' <= rLow <= 'f' (!= 0!!)
-1:
-          RJMP  _U(__ctype_isfalse)
-0:
-          MOV   rLow,__tmp_reg__
-          RJMP  _U(isdigit)
+	cpse	rHigh, __zero_reg__
+1:	rjmp	_U(__ctype_isfalse)
+	subi	rLow, '0'
+	subi	rLow, '9'-'0'+1
+	brlo	2f			; decimal digit
+	subi	rLow, lo8(-'9'-1)	; restore rLow
+	ori	rLow, 'a' - 'A'		; rLow := tolower(rLow)
+	subi	rLow, 'a'
+	subi	rLow, 'f'-'a'+1
+	brsh	1b
+2:	ret				; OK: return a negative value
 
           ENDFUNC
 #endif
@@ -207,11 +209,10 @@ GLOBAL(iscntrl)
           RJMP  _U(__ctype_isfalse)
           CPI   rLow,0x7F
           BREQ  2f
-          CPI   rLow,0x1F+1
-          BRGE  1b
-          SER   rLow               ; 0 is cntrl, too! -> return true
+          SUBI  rLow, ' '
+          BRSH  1b		; iscntrl('\0') --> true
 2:
-          RET
+          RET			; TRUE: rLow is 0x7F or negative value
 
           ENDFUNC
 #endif
@@ -268,21 +269,17 @@ GLOBAL(isspace)
           FUNCTION(ispunct)
 
 GLOBAL(ispunct)
-          mov   __tmp_reg__, rLow    ; **changed** they do not use it
-          RCALL _U(isprint)          ; false: CLR rLow -> EQ, rLow changed
-          BREQ  0f		; true : CPI rLow,0x7E+1 -> NE, rLow unchanged
-
-          RCALL _U(isspace)
-          CPSE  rLow,__zero_reg__
-1:
-          RJMP  _U(__ctype_isfalse)
-          mov   rLow, __tmp_reg__    ; **changed**
-          RCALL _U(isalnum)
-          TST   rLow
-          BRNE  1b
-          SER   rLow
-0:
-          RET
+	cpse	rHigh, __zero_reg__
+1:	rjmp	_U(__ctype_isfalse)
+	subi	rLow, ' ' + 1
+	subi	rLow, 0x7e - ' '
+	brsh	1b			; if (!isgraph(c)) return 0
+	subi	rLow, lo8(-0x7e - 1)	; restore rLow
+	rcall	_U(isalnum)
+	tst	rLow
+	brne	1b			; if (isalnum(c)) return 0
+	ldi	rLow, 1
+	ret
 
           ENDFUNC
 #endif
@@ -314,13 +311,14 @@ GLOBAL(isblank)
           FUNCTION(tolower)
 
 GLOBAL(tolower)
-          PUSH  rLow
-          RCALL _U(isalpha)
-          POP   rLow         ; does not change Z
-          BREQ  0f
-          ORI   rLow,0x20
-0:
-          RET
+	cpse	rHigh, __zero_reg__
+	ret				; return as is
+	subi	rLow, 'A'
+	subi	rLow, 'Z'-'A'+1
+	brsh	1f			; return as is
+	subi	rLow, lo8('A'-'a')	; conversion
+1:	subi	rLow, lo8(-'Z'-1)	; restore
+	ret
 
           ENDFUNC
 #endif
@@ -332,13 +330,14 @@ GLOBAL(tolower)
           FUNCTION(toupper)
 
 GLOBAL(toupper)
-          PUSH  rLow
-          RCALL _U(isalpha)
-          POP   rLow         ; does not change Z
-          BREQ  0f
-          ANDI  rLow,0xDF
-0:
-          RET
+	cpse	rHigh, __zero_reg__
+	ret				; return as is
+	subi	rLow, 'a'
+	subi	rLow, 'z'-'a'+1
+	brsh	1f			; return as is
+	subi	rLow, lo8('a'-'A')	; conversion
+1:	subi	rLow, lo8(-'z'-1)	; restore
+	ret
 
           ENDFUNC
 #endif
