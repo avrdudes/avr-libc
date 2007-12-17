@@ -1,3 +1,10 @@
+2007-12-17  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Make abort() as a normal extern function (instead to inline loop).
+	* libc/stdlib/abort.S: Rewrite.
+	* include/stdlib.h: Declare abort() as a normal, add doc.
+	* tests/simulate/stdlib/abort-1.c: New file.
+
 2007-12-16  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/ctype.S:

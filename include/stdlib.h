@@ -99,16 +99,11 @@ typedef int (*__compar_fn_t)(const void *, const void *);
 
 #endif
 
-extern __inline__ void abort(void) __ATTR_NORETURN__;
-
 /** The abort() function causes abnormal program termination to occur.
+    This realization jumps to _exit() function with argument equal to 1.
     In the limited AVR environment, execution is effectively halted
     by entering an infinite loop. */
-extern __inline__ void
-abort(void)
-{
-	for (;;);
-}
+extern void abort(void) __ATTR_NORETURN__;
 
 /** The abs() function computes the absolute value of the integer \c i.
    \note The abs() and labs() functions are builtins of gcc.
