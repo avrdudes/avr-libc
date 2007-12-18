@@ -31,5 +31,6 @@
 	.section .text
 	.global exit
 exit:
-	XJMP	_exit
+	cli
+1:	rjmp	1b
 

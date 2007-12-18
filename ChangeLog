@@ -1,5 +1,11 @@
 2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #21841: Add CLI to exit() and abort() loops
+	* libc/stdlib/exit.S: add a CLI before entering the loop
+	* include/stdlib.h (exit): document the CLI.
+
+2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Bill Johnson
 	bug #19669: Need function to read signature row
 	* include/avr/boot.h (boot_signature_byte_get): Add new macro.

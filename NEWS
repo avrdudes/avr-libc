@@ -30,6 +30,7 @@
   [#21626] Incorrect Bit Definition for ADC14 and ADC15 Digital Input Disable
   [#21521] incorrect bit definitions in iotnx61.h
   [#21840] RAMEND wrong for ATmega48P/88P/168P
+  [#21841] Add CLI to exit() and abort() loops
 
 * New devices supported:
 
@@ -49,6 +50,7 @@
   + Make frexp() similar to GCC/x86 in case of nonfinite arg: write 0 by
   exponent pointer. Early Avr-libc's frexp() skips exponent storing in this
   case. Make the NULL a legal address to skip a storing.
+  + exit() disables interrupts before entering the infinite loop.
 
 *** Main changes from avr-libc 1.4 to 1.5:
 
