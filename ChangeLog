@@ -1,3 +1,9 @@
+2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/runtest.sh: replace /bin/bash by /bin/sh as the
+	really generic name of the shell to invoke.  Not every system has
+	bash in /bin.
+
 2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #21840.
