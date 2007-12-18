@@ -36,7 +36,7 @@
 /** \defgroup alloca <alloca.h>: Allocate space in the stack	*/
 
 /** \ingroup alloca
-    \brief Allocate \p size bytes of space in the stack frame of the caller.
+    \brief Allocate \a __size bytes of space in the stack frame of the caller.
 
     This temporary space is automatically freed when the function that
     called alloca() returns to its caller. Avr-libc defines the alloca() as
@@ -52,7 +52,7 @@
     \warning Avoid use alloca() inside the list of arguments of a function
     call.
  */
-extern void *alloca (size_t size);
+extern void *alloca (size_t __size);
 
 #define alloca(size)	__builtin_alloca (size)
 
