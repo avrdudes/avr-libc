@@ -1,3 +1,9 @@
+2007-12-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/alloca.h: Add '__' prefix with function args. To avoid
+	a possible conflict with user's CPP definitions.
+	* include/math.h: Ditto.
+
 2007-12-17  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Make abort() as a normal extern function (instead to inline loop).

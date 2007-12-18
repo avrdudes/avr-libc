@@ -187,18 +187,19 @@ extern double ceil(double __x) __ATTR_CONST__;
 
      The frexp() function breaks a floating-point number into a normalized
      fraction and an integral power of 2.  It stores the integer in the \c
-     int object pointed to by \c pexp.
+     int object pointed to by \a __pexp.
 
-     If \p x is a normal float point number, the frexp() function returns
-     the value \c v, such that \c v has a magnitude in the interval [1/2, 1)
-     or zero, and \p x equals \c v times 2 raised to the power \p pexp. If
-     \p x is zero, both parts of the result are zero. If \p x is not a
-     finite number, the frexp() returns \p x as is and stores 0 by \p pexp.
+     If \a __x is a normal float point number, the frexp() function
+     returns the value \c v, such that \c v has a magnitude in the
+     interval [1/2, 1) or zero, and \a __x equals \c v times 2 raised to
+     the power \a __pexp. If \a __x is zero, both parts of the result are
+     zero. If \a __x is not a finite number, the frexp() returns \a __x as
+     is and stores 0 by \a __pexp.
 
      \note  This implementation permits a zero pointer as a directive to
      skip a storing the exponent.
   */
-extern double frexp(double x, int *pexp);
+extern double frexp(double __x, int *__pexp);
 
   /**
      \ingroup avr_math
@@ -335,145 +336,145 @@ extern double square(double __x) __ATTR_CONST__;
   /**
      \ingroup avr_math
 
-     The copysign() function returns \c x but with the sign of \c y.
-     They work even if \c x or \c y are NaN or zero.
+     The copysign() function returns \a __x but with the sign of \a __y.
+     They work even if \a __x or \a __y are NaN or zero.
  */
-__ATTR_CONST__ extern inline double copysign (double x, double y)
+__ATTR_CONST__ extern inline double copysign (double __x, double __y)
 {
     asm (
 	"bst	%D2, 7	\n\t"
 	"bld	%D0, 7	"
-	: "=r" (x)
-	: "0" (x), "r" (y) );
-    return x;
+	: "=r" (__x)
+	: "0" (__x), "r" (__y) );
+    return __x;
 }
 
   /**
      \ingroup avr_math
 
-     The fdim() function returns <tt>max(x-y,0)</tt>. If \c x or \c y
-     or both are NaN, NaN is returned.
+     The fdim() function returns <em>max(__x - __y, 0)</em>. If \a __x or
+     \a __y or both are NaN, NaN is returned.
   */
-extern double fdim (double x, double y) __ATTR_CONST__;
+extern double fdim (double __x, double __y) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The fma() function performs floating-point multiply-add. This is
-     the operation (x * y) + z, but the intermediate result is not
-     rounded to the destination type.  This can sometimes improve the
+     The fma() function performs floating-point multiply-add. This is the
+     operation <em>(__x * __y) + __z</em>, but the intermediate result is
+     not rounded to the destination type.  This can sometimes improve the
      precision of a calculation.
   */
-extern double fma (double x, double y, double z) __ATTR_CONST__;
+extern double fma (double __x, double __y, double __z) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The fmax() function returns the greater of the two values \c x
-     and \c y. If an argument is NaN, the other argument is returned.
-     If both arguments are NaN, NaN is returned.
+     The fmax() function returns the greater of the two values \a __x and
+     \a __y. If an argument is NaN, the other argument is returned. If
+     both arguments are NaN, NaN is returned.
   */
-extern double fmax (double x, double y) __ATTR_CONST__;
+extern double fmax (double __x, double __y) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The fmin() function returns the lesser of the two values \c x
-     and \c y. If an argument is NaN, the other argument is returned.
-     If both arguments are NaN, NaN is returned.
+     The fmin() function returns the lesser of the two values \a __x and
+     \a __y. If an argument is NaN, the other argument is returned. If
+     both arguments are NaN, NaN is returned.
   */
-extern double fmin (double x, double y) __ATTR_CONST__;
+extern double fmin (double __x, double __y) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The signbit() function returns a nonzero value if the value of \c x
-     has its sign bit set.  This is not the same as `\c x < 0.0',
+     The signbit() function returns a nonzero value if the value of \a __x
+     has its sign bit set.  This is not the same as `\a __x < 0.0',
      because IEEE 754 floating point allows zero to be signed. The
-     comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return
-     a nonzero value.
+     comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return a
+     nonzero value.
      
      \note
      This implementation returns 1 if sign bit is set.
   */
-extern int signbit (double x) __ATTR_CONST__;
+extern int signbit (double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The trunc() function rounds \c x to the nearest integer not larger in
-     absolute value.
+     The trunc() function rounds \a __x to the nearest integer not larger
+     in absolute value.
   */
-extern double trunc (double x) __ATTR_CONST__;
+extern double trunc (double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The isfinite() function returns a nonzero value if \c x is finite:
+     The isfinite() function returns a nonzero value if \a __x is finite:
      not plus or minus infinity, and not NaN.
   */
-__ATTR_CONST__ extern inline int isfinite (double x)
+__ATTR_CONST__ extern inline int isfinite (double __x)
 {
-    unsigned char exp;
+    unsigned char __exp;
     asm (
 	"mov	%0, %C1		\n\t"
 	"lsl	%0		\n\t"
 	"mov	%0, %D1		\n\t"
 	"rol	%0		"
-	: "=r" (exp)
-	: "r" (x)	);
-    return exp != 0xff;
+	: "=r" (__exp)
+	: "r" (__x)	);
+    return __exp != 0xff;
 }
 
   /**
      \ingroup avr_math
 
-     The hypot() function returns 'sqrt (x*x + y*y)'. This is the length of     
-     the hypotenuse of a right triangle with sides of length x and y, or
-     the  distance of the point (x, y) from the origin. Using this
-     function  instead of the direct formula is wise, since the error is
-     much smaller. No underflow with small x and y. No overflow if
-     result is in range.
+     The hypot() function returns <em>sqrt(__x*__x + __y*__y)</em>. This
+     is the length of the hypotenuse of a right triangle with sides of
+     length \a __x and \a __y, or the  distance of the point (\a __x, \a
+     __y) from the origin. Using this function  instead of the direct
+     formula is wise, since the error is much smaller. No underflow with
+     small \a __x and \a __y. No overflow if result is in range.
   */
-double hypot (double x, double y) __ATTR_CONST__;
+double hypot (double __x, double __y) __ATTR_CONST__;
 
 /** \ingroup avr_math
 
-    The round() function rounds \p x to the nearest integer, but rounds
+    The round() function rounds \a __x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
     Overflow is impossible.
 
-    \return The rounded value. If \p x is an integral or infinite, \p x
-    itself is returned. If \p x is \c NaN, then \c NaN is returned.
+    \return The rounded value. If \a __x is an integral or infinite, \a
+    __x itself is returned. If \a __x is \c NaN, then \c NaN is returned.
  */
-double round (double x) __ATTR_CONST__;
+double round (double __x) __ATTR_CONST__;
 
 /** \ingroup avr_math
 
-    The lround() function rounds \p x to the nearest integer, but rounds
+    The lround() function rounds \a __x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
     This function is similar to round() function, but it differs in type of
     return value and in that an overflow is possible.
 
-    \return The rounded long integer value. If \p x is not a finite number
+    \return The rounded long integer value. If \a __x is not a finite number
     or an overflow was, this realization returns the \c LONG_MIN value
     (0x80000000).
  */
-long lround (double x) __ATTR_CONST__;
+long lround (double __x) __ATTR_CONST__;
 
 /** \ingroup avr_math
 
-    The lrint() function rounds \p x to the nearest integer, rounding the
+    The lrint() function rounds \a __x to the nearest integer, rounding the
     halfway cases to the even integer direction. (That is both 1.5 and 2.5
     values are rounded to 2). This function is similar to rint() function,
     but it differs in type of return value and in that an overflow is
     possible.
 
-    \return The rounded long integer value. If \p x is not a finite number
-    or an overflow was, this realization returns the \c LONG_MIN value
-    (0x80000000).
+    \return The rounded long integer value. If \a __x is not a finite
+    number or an overflow was, this realization returns the \c LONG_MIN
+    value (0x80000000).
  */
-long lrint (double x) __ATTR_CONST__;
+long lrint (double __x) __ATTR_CONST__;
 
 #ifdef __cplusplus
 }
