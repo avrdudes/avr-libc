@@ -24,6 +24,7 @@
   [#21521] incorrect bit definitions in iotnx61.h
   [#18994] minor optimization possible to stdlib functions isspace(),
            isprint(), and islower()
+  [#21840] RAMEND wrong for ATmega48P/88P/168P
 
 * New devices supported:
 

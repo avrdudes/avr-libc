@@ -1,3 +1,11 @@
+2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21840.
+	* include/avr/iom48p.h: Fix RAMEND.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+
 2007-12-18  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/alloca.h: Add '__' prefix with function args. To avoid
