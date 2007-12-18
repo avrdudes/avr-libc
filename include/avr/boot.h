@@ -495,6 +495,35 @@
 }))
 
 /** \ingroup avr_boot
+    \def boot_signature_byte_get(address)
+
+    Read the Signature Row byte at \c address.  For some MCU types,
+    this function can also retrieve the factory-stored oscillator
+    calibration bytes.
+
+    Parameter \c address can be 0-0x1f as documented by the datasheet.
+    \note The values are MCU type dependent.
+*/
+
+#define __BOOT_SIGROW_READ (_BV(SPMEN) | _BV(SIGRD))
+
+#define boot_signature_byte_get(addr) \
+  (__extension__({		      \
+      uint16_t __addr16 = (uint16_t)(addr);	\
+      uint8_t __result;				\
+      __asm__ __volatile__			\
+      (						\
+	"sts %1, %2\n\t"			\
+	"lpm %0, Z" "\n\t"			\
+	: "=r" (__result)			\
+	: "i" (_SFR_MEM_ADDR(__SPM_REG)),	\
+	  "r" ((uint8_t) __BOOT_SIGROW_READ),	\
+	  "z" (__addr16)			\
+      );					\
+      __result;					\
+}))
+
+/** \ingroup avr_boot
     \def boot_page_fill(address, data)
 
     Fill the bootloader temporary page buffer for flash 
