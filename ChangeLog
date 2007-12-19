@@ -1,3 +1,11 @@
+2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Undo the CLI change.  This rather belongs into _exit which is
+	supplied by libgcc.a.
+	Reopens bug #21841: Add CLI to exit() and abort() loops
+        * libc/stdlib/exit.S: undo rev 1.2.
+        * include/stdlib.h (exit): undo rev 1.30.
+	
 2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn43u.h: Fix RAMEND.

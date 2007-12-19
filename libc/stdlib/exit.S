@@ -26,11 +26,12 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$ */
+
 #include "macros.inc"
 
 	.section .text
 	.global exit
 exit:
-	cli
-1:	rjmp	1b
+	XJMP	_exit
 

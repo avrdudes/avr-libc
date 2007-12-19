@@ -100,7 +100,7 @@ typedef int (*__compar_fn_t)(const void *, const void *);
 #endif
 
 /** The abort() function causes abnormal program termination to occur.
-    This realization jumps to exit() function with argument equal to 1.
+    This realization jumps to _exit() function with argument equal to 1.
     In the limited AVR environment, execution is effectively halted
     by entering an infinite loop. */
 extern void abort(void) __ATTR_NORETURN__;
@@ -270,7 +270,6 @@ extern int atoi(const char *s) __ATTR_PURE__;
    environment to return to, \c status is ignored, and code execution
    will eventually reach an infinite loop, thereby effectively halting
    all code processing.
-   Before entering the infinite loop, interrupts are globally disabled.
 
    In a C++ context, global destructors will be called before halting
    execution.
