@@ -705,7 +705,7 @@
 
 
 /* Memory Sizes */
-#define RAMEND                0xFF
+#define RAMEND                0x1FF
 #define XRAMEND               0x00
 #define E2END                 0x3F
 #define FLASHEND              0x1FFF
