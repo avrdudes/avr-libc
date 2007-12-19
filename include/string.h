@@ -48,6 +48,10 @@
 #define __ATTR_PURE__ __attribute__((__pure__))
 #endif
 
+#ifndef __ATTR_CONST__
+# define __ATTR_CONST__	__attribute__((__const__))
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -103,9 +107,9 @@ extern "C" {
 	: 0 )
 #endif /* DOXYGEN */
 
-extern int ffs (int) __attribute__((const));
-extern int ffsl (long) __attribute__((const));
-extern int ffsll (long long) __attribute__((const));
+extern int ffs (int __val) __ATTR_CONST__;
+extern int ffsl (long __val) __ATTR_CONST__;
+extern int ffsll (long long __val) __ATTR_CONST__;
 extern void *memccpy(void *, const void *, int, size_t);
 extern void *memchr(const void *, int, size_t) __ATTR_PURE__;
 extern int memcmp(const void *, const void *, size_t) __ATTR_PURE__;
@@ -121,7 +125,7 @@ extern int strcmp(const char *, const char *) __ATTR_PURE__;
 extern char *strcpy(char *, const char *);
 extern int strcasecmp(const char *, const char *) __ATTR_PURE__;
 extern char *strcasestr(const char *, const char *) __ATTR_PURE__;
-extern size_t strcspn(const char *s, const char *reject) __ATTR_PURE__;
+extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
 extern size_t strlcat(char *, const char *, size_t);
 extern size_t strlcpy(char *, const char *, size_t);
 extern size_t strlen(const char *) __ATTR_PURE__;
@@ -131,11 +135,11 @@ extern int strncmp(const char *, const char *, size_t) __ATTR_PURE__;
 extern char *strncpy(char *, const char *, size_t);
 extern int strncasecmp(const char *, const char *, size_t) __ATTR_PURE__;
 extern size_t strnlen(const char *, size_t) __ATTR_PURE__;
-extern char *strpbrk(const char *s, const char *accept) __ATTR_PURE__;
+extern char *strpbrk(const char *__s, const char *__accept) __ATTR_PURE__;
 extern char *strrchr(const char *, int) __ATTR_PURE__;
 extern char *strrev(char *);
 extern char *strsep(char **, const char *);
-extern size_t strspn(const char *s, const char *accept) __ATTR_PURE__;
+extern size_t strspn(const char *__s, const char *__accept) __ATTR_PURE__;
 extern char *strstr(const char *, const char *) __ATTR_PURE__;
 extern char *strtok_r(char *, const char *, char **);
 extern char *strupr(char *);

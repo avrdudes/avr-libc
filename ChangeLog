@@ -1,5 +1,8 @@
 2007-12-19  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* include/string.h: Add '__' prefix with function args. The ffs(),
+	ffsl(), ffsll(): cosmetic changes to improve Doxygen output.
+
 	* tests/simulate/math/isinf-01.c: New file.
 
 	* include/math.h: Fix a few documentation errors (inherited from
