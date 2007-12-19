@@ -1,3 +1,11 @@
+2007-12-19  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add CLI to abort() and exit() functions, since GCC's _exit()
+	does not disable interrupts today.
+	* libc/stdlib/abort.S: Add CLI before jump to _exit.
+	* libc/stdlib/exit.S: Ditto.
+	* include/stdlib.h: Document the CLI.
+
 2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn43u.h: Fix RAMEND.
