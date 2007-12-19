@@ -1163,7 +1163,7 @@
 
 /* Constants */
 
-#define RAMEND         0x3FF
+#define RAMEND         0x4FF
 #define XRAMEND        0
 #define E2END          0x1FF
 #define FLASHEND       0x3FFF

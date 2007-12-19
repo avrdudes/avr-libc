@@ -1,3 +1,14 @@
+2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom1284p.h: Fix RAMEND.
+	* include/avr/iom32hvb.h: Ditto.
+	* include/avr/iotn48.h: Ditto.
+	* include/avr/iotn88.h: Ditto.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/io90pwm216.h: Ditto.
+	* include/avr/io90pwm316.h: Ditto.
+
 2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #21841: Add CLI to exit() and abort() loops
