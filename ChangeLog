@@ -1,5 +1,7 @@
 2007-12-19  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* tests/simulate/math/isinf-01.c: New file.
+
 	* include/math.h: Fix a few documentation errors (inherited from
 	1.4). Make args names in doc adequate ones in function declaration.
 	Use the '\a' Doxygen's command instead to '\c' anywhere.
