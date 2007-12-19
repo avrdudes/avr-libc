@@ -1,5 +1,9 @@
 2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iotn43u.h: Fix RAMEND.
+
+2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom1284p.h: Fix RAMEND.
 	* include/avr/iom32hvb.h: Ditto.
 	* include/avr/iotn48.h: Ditto.
