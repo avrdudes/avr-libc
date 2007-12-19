@@ -1,5 +1,9 @@
 2007-12-19  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* include/math.h: Fix a few documentation errors (inherited from
+	1.4). Make args names in doc adequate ones in function declaration.
+	Use the '\a' Doxygen's command instead to '\c' anywhere.
+
 	Add CLI to abort() and exit() functions, since GCC's _exit()
 	does not disable interrupts today.
 	* libc/stdlib/abort.S: Add CLI before jump to _exit.

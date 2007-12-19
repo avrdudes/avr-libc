@@ -98,16 +98,15 @@ extern "C" {
   /**
      \ingroup avr_math
 
-     The cos() function returns the cosine of \c x, measured in
-     radians.
+     The cos() function returns the cosine of \a __x, measured in radians.
   */
 extern double cos(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The fabs() function computes the absolute value of a
-     floating-point number \c x.
+     The fabs() function computes the absolute value of a floating-point
+     number \a __x.
   */
 extern double fabs(double __x) __ATTR_CONST__;
 #if 0
@@ -123,45 +122,44 @@ extern inline double fabs( double __x )
   /**
      \ingroup avr_math
 
-     The function fmod() returns the floating-point
-     remainder of <tt>x / y</tt>.
+     The function fmod() returns the floating-point remainder of <em>__x /
+     __y</em>.
   */
 extern double fmod(double __x, double __y) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The modf() function breaks the argument \c value into integral and
-     fractional parts, each of which has the same sign as the
-     argument.  It stores the integral part as a double in the object
-     pointed to by \c iptr.
+     The modf() function breaks the argument \a __x into integral and
+     fractional parts, each of which has the same sign as the argument. 
+     It stores the integral part as a double in the object pointed to by
+     \a __iptr.
 
-     The modf() function returns the signed fractional part of \c value.
+     The modf() function returns the signed fractional part of \a __x.
      
      \note
      This implementation skips writing by zero pointer.
   */
-extern double modf(double __value, double *__iptr);
+extern double modf(double __x, double *__iptr);
 
   /**
      \ingroup avr_math
 
-     The sin() function returns the sine of \c x, measured in
-     radians.
+     The sin() function returns the sine of \a __x, measured in radians.
   */
 extern double sin(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The sqrt() function returns the non-negative square root of \c x.
+     The sqrt() function returns the non-negative square root of \a __x.
   */
 extern double sqrt(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The tan() function returns the tangent of \c x, measured in
+     The tan() function returns the tangent of \a __x, measured in
      radians.
   */
 extern double tan(double __x) __ATTR_CONST__;
@@ -169,16 +167,16 @@ extern double tan(double __x) __ATTR_CONST__;
   /**
      \ingroup avr_math
 
-     The floor() function returns the largest integral value
-     less than or equal to \c x, expressed as a floating-point number.
+     The floor() function returns the largest integral value less than or
+     equal to \a __x, expressed as a floating-point number.
   */
 extern double floor(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The ceil() function returns the smallest integral value
-     greater than or equal to \c x, expressed as a floating-point number.
+     The ceil() function returns the smallest integral value greater than
+     or equal to \a __x, expressed as a floating-point number.
   */
 extern double ceil(double __x) __ATTR_CONST__;
 
@@ -207,110 +205,101 @@ extern double frexp(double __x, int *__pexp);
      The ldexp() function multiplies a floating-point number by an integral
      power of 2.
 
-     The ldexp() function returns the value of \c x times 2 raised to the power
-     \c exp.
+     The ldexp() function returns the value of \a __x times 2 raised to
+     the power \a __exp.
   */
 extern double ldexp(double __x, int __exp) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The exp() function returns the exponential value of \c x.
+     The exp() function returns the exponential value of \a __x.
   */
 extern double exp(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The cosh() function returns the hyperbolic cosine of \c x.
+     The cosh() function returns the hyperbolic cosine of \a __x.
   */
 extern double cosh(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The sinh() function returns the hyperbolic sine of \c x.
+     The sinh() function returns the hyperbolic sine of \a __x.
   */
 extern double sinh(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The tanh() function returns the hyperbolic tangent of \c x.
+     The tanh() function returns the hyperbolic tangent of \a __x.
   */
 extern double tanh(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The acos() function computes the principal value of the
-     arc cosine of \c x.  The returned value is in the range
-     [0, pi] radians.
-     A domain error occurs for arguments not in the range
-     [-1, +1].
+     The acos() function computes the principal value of the arc cosine of
+     \a __x.  The returned value is in the range [0, pi] radians. A domain
+     error occurs for arguments not in the range [-1, +1].
   */
 extern double acos(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The asin() function computes the principal value of the
-     arc sine of \c x.  The returned value is in the range
-     [-pi/2, pi/2] radians.
-     A domain error occurs for arguments not in the range
-     [-1, +1].
+     The asin() function computes the principal value of the arc sine of
+     \a __x.  The returned value is in the range [-pi/2, pi/2] radians. A
+     domain error occurs for arguments not in the range [-1, +1].
   */
 extern double asin(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The atan() function computes the principal value of the
-     arc tangent of \c x.  The returned value is in the range
-     [0, pi] radians.
-     A domain error occurs for arguments not in the range
-     [-1, +1].
+     The atan() function computes the principal value of the arc tangent
+     of \a __x.  The returned value is in the range [-pi/2, pi/2] radians.
   */
 extern double atan(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
-     The atan2() function computes the principal value of the
-     arc tangent of <tt>y / x</tt>, using the signs of both arguments
-     to determine the quadrant of the return value.  The returned
-     value is in the range [-pi, +pi] radians.
+     
+     The atan2() function computes the principal value of the arc tangent
+     of <em>__y / __x</em>, using the signs of both arguments to determine
+     the quadrant of the return value.  The returned value is in the range
+     [-pi, +pi] radians.
   */
 extern double atan2(double __y, double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The log() function returns the natural logarithm of argument \c x.
-
-     If the argument is less than or equal 0, a domain error will occur.
+     The log() function returns the natural logarithm of argument \a __x.
    */
 extern double log(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The log10() function returns the logarithm of argument \c x to base 10.
-
-     If the argument is less than or equal 0, a domain error will occur.
+     The log10() function returns the logarithm of argument \a __x to base
+     10.
    */
 extern double log10(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The function pow() returns the value of \c x to the exponent \c y.
+     The function pow() returns the value of \a __x to the exponent \a __y.
   */
 extern double pow(double __x, double __y) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The function isnan() returns 1 if the argument \c x represents a
+     The function isnan() returns 1 if the argument \a __x represents a
      "not-a-number" (NaN) object, otherwise 0.
   */
 extern int isnan(double __x) __ATTR_CONST__;
@@ -318,15 +307,15 @@ extern int isnan(double __x) __ATTR_CONST__;
   /**
      \ingroup avr_math
 
-     The function isinf() returns 1 if the argument \c x is either
-     positive or negative infinity, otherwise 0.
+     The function isinf() returns 1 if the argument \a __x is positive
+     infinity, -1 if \a __x is negative infinity, and 0 otherwise.
   */
 extern int isinf(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math
 
-     The function square() returns <tt>x * x</tt>.
+     The function square() returns <em>__x * __x</em>.
 
      \note
      This function does not belong to the C standard definition.
