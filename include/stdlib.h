@@ -251,7 +251,7 @@ extern unsigned long strtoul(const char *__nptr, char **__endptr, int __base);
     the result value is not predictable), uses smaller memory (flash and
     stack) and works more quickly.
 */
-extern long atol(const char *s) __ATTR_PURE__;
+extern long atol(const char *__s) __ATTR_PURE__;
 
 /**
     The atoi() function converts the initial portion of the string
@@ -263,7 +263,7 @@ extern long atol(const char *s) __ATTR_PURE__;
     the result value is not predictable), uses smaller memory (flash and
     stack) and works more quickly.
 */
-extern int atoi(const char *s) __ATTR_PURE__;
+extern int atoi(const char *__s) __ATTR_PURE__;
 
 /**
    The exit() function terminates the application.  Since there is no
@@ -411,7 +411,7 @@ extern void srand(unsigned int __seed);
    variable located at \c ctx instead of a static library variable
    so the function becomes re-entrant.
 */
-extern int rand_r(unsigned long *ctx);
+extern int rand_r(unsigned long *__ctx);
 /*@}*/
 
 /*@{*/
@@ -553,7 +553,7 @@ extern void srandom(unsigned long __seed);
    variable located at \c ctx instead of a static library variable
    so the function becomes re-entrant.
 */
-extern long random_r(unsigned long *ctx);
+extern long random_r(unsigned long *__ctx);
 #endif /* __ASSEMBLER */
 /*@}*/
 
