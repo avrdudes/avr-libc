@@ -28,10 +28,18 @@
 
 /* $Id$ */
 
+#ifndef	__DOXYGEN__
+
 #include "macros.inc"
 
 	.section .text
-	.global exit
-exit:
-	XJMP	_exit
+	.global _U(exit)
+	.type	_U(exit), "function"
 
+_U(exit):
+	cli
+	XJMP	_U(_exit)
+
+	.size	_U(exit), . - _U(exit)
+
+#endif	/* !__DOXYGEN__	*/

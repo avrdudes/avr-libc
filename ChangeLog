@@ -1,3 +1,12 @@
+2007-12-19  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add CLI to abort() and exit() functions, since GCC's _exit()
+	does not disable interrupts today.
+	* libc/stdlib/abort.S: Add CLI before jump to _exit.
+	* libc/stdlib/exit.S: Ditto.
+	* include/stdlib.h: Document the CLI.
+	* tests/simulate/stdlib/abort-1.c: New file.
+
 2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Undo the CLI change.  This rather belongs into _exit which is
@@ -5,7 +14,7 @@
 	Reopens bug #21841: Add CLI to exit() and abort() loops
         * libc/stdlib/exit.S: undo rev 1.2.
         * include/stdlib.h (exit): undo rev 1.30.
-	
+
 2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn43u.h: Fix RAMEND.

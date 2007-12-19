@@ -39,6 +39,7 @@
 _U(abort):
 	ldi	r24, lo8(1)
 	ldi	r25, hi8(1)
+	cli
 	XJMP	_U(_exit)
 
 	.size	_U(abort), . - _U(abort)
