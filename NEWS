@@ -24,6 +24,8 @@
   [#18994] minor optimization possible to stdlib functions isspace(),
            isprint(), and islower()
   [#19669] Need function to read signature row
+  [#21484] Documentation build for avr/version.h does not susbstitute autoconf
+           macros
   [#21749] AT90PWM316: _VECTORS_SIZE should be 128
   [#21691] iomx8.h-> IVSEL and IVCE should not be available for ATmega48
   [#21743] AT90PWM316 missing PSOC1 bit definitions

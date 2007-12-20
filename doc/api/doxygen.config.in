@@ -501,7 +501,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/sfr.dox \
                          @top_srcdir@/include/avr/signal.h \
                          @top_srcdir@/include/avr/sleep.h \
-                         @top_srcdir@/include/avr/version.h.in \
+                         @top_srcdir@/include/avr/version.h \
                          @top_srcdir@/include/avr/wdt.h \
                          @top_srcdir@/include/util \
                          @top_srcdir@/include/compat \

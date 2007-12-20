@@ -1,3 +1,10 @@
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21484: Documentation build for avr/version.h does not
+	susbstitute autoconf macros
+	* doc/api/doxygen.config.in (INPUT): replace version.h.in by
+	version.h so the doxygen build uses the processed file.
+
 2007-12-19  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/stdlib.h: Add '__' prefix with function args.
