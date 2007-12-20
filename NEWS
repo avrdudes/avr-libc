@@ -1,58 +1,6 @@
-*** Changes since avr-libc-1.5.1:
+*** Changes since avr-libc-1.4.0:
 
-* Documentation changes:
-
-  + Add the benchmark page.
-
-* New functions:
-
-  round
-  lround
-  lrint
-
-* Optimized functions:
-
-  dtostre
-
-* Bugs fixed:
-
-  [no-id]  iscntrl() return true for some values from 0x80 to 0xff.
-  [#1929]  -Inf not detected
-  [#11511] NaN not generated correctly by division library
-  [#11820] dtostre: wrong output with percision =3
-  [#13330] NaN is recognized not always
-  [#18994] minor optimization possible to stdlib functions isspace(),
-           isprint(), and islower()
-  [#19669] Need function to read signature row
-  [#21484] Documentation build for avr/version.h does not susbstitute autoconf
-           macros
-  [#21749] AT90PWM316: _VECTORS_SIZE should be 128
-  [#21691] iomx8.h-> IVSEL and IVCE should not be available for ATmega48
-  [#21743] AT90PWM316 missing PSOC1 bit definitions
-  [#21626] Incorrect Bit Definition for ADC14 and ADC15 Digital Input Disable
-  [#21521] incorrect bit definitions in iotnx61.h
-  [#21840] RAMEND wrong for ATmega48P/88P/168P
-
-* New devices supported:
-
-  + ATtiny88
-  + ATmega1284P
-  + ATmega32HVB
-
-* Incompatibilities:
-
-  + Conversion from float to long (make similar to GCC/x86):  in case if
-  overflow was or if input is NaN return 0x80000000 for signed result and
-  return 0 for unsigned result. Negative input (not too big in absolute
-  value) is permissible for cast to unsigned long, for example: (unsigned
-  long)(-1.0) returns ULONG_MAX.
-  + The signbit() function: return 1 as nonzero value (make similar to
-  builtin GCC).
-  + Make frexp() similar to GCC/x86 in case of nonfinite arg: write 0 by
-  exponent pointer. Early Avr-libc's frexp() skips exponent storing in this
-  case. Make the NULL a legal address to skip a storing.
-
-*** Main changes from avr-libc 1.4 to 1.5:
+* Main changes from avr-libc 1.4 to 1.6:
 
   + The fplib/math library is completely rewritten. Now features of the IEEE
   754 standard are supported all: negative zero, subnormals, Infs and NaNs.
@@ -63,19 +11,33 @@
   added. It is necessary to note, that the new library concedes old under
   the charge of flash memory a little.
 
+    Incompatibilities:
+
+    - Conversion from float to long (make similar to GCC/x86):  in case if
+    overflow was or if input is NaN return 0x80000000 for signed result and
+    return 0 for unsigned result. Negative input (not too big in absolute
+    value) is permissible for cast to unsigned long, for example: (unsigned
+    long)(-1.0) returns ULONG_MAX.
+
+    - The signbit() function: return 1 as nonzero value (make similar to
+    builtin GCC).
+
+    - Make frexp() similar to GCC/x86 in case of nonfinite arg: write 0 by
+    exponent pointer. Early Avr-libc's frexp() skips exponent storing in this
+    case. Make the NULL a legal address to skip a storing.
+
   + Functions of numbers to ascii conversion are completely rewritten:
   dtostre(), dtostrf() and printf() family. They more do not use float point
   operations. Speed of int/float to ascii has increased in some times. For
   printf() the stack usage is reduced.
 
   + Test suite is added to the Avr-libc project.
-  
-  + A few new util's headers: util/atomic.h, util/setbaud.h .
 
-*** Changes since avr-libc-1.4.0:
+  + A few new util's headers: util/atomic.h, util/setbaud.h .
 
 * Bugs fixed:
 
+  [no-id]  iscntrl() return true for some values from 0x80 to 0xff.
   [no-id]  Fix the examples installation for non-doc builds.
   [no-id]  Fix the spelling of the OCR1A/B registers in ATtinyX4 devices.
   [no-id]  LED1/2 don't work in the largedemo on an ATmega16.
@@ -87,6 +49,10 @@
   [no-id]  Fix the sleep mode definitions for the ATtiny2313.
   [no-id]  Exclude 64-bit types for -mint8.
   [no-id]  Make documentation build work with doxygen 1.5.x
+  [#1929]  -Inf not detected
+  [#11511] NaN not generated correctly by division library
+  [#11820] dtostre: wrong output with percision =3
+  [#13330] NaN is recognized not always
   [#15161] util/delay.h misses inline keyword (regression)
   [#15193] incorrect definition of IVSEL bit in MCUCR register
   [#15266] Function ldexp incorrectly processes overflow and underflow cases.
@@ -125,6 +91,8 @@
            iom*.h)
   [#18915] PWM1X Bit missing for ATtiny261/461/861
   [#18964] USART definitions *wrong* in iocanxx.h
+  [#18994] minor optimization possible to stdlib functions isspace(),
+           isprint(), and islower()
   [#19009] Make <util/delay.h> issue a warning when optimizations are turned off
   [#19050] gcrt1.S should call main rather than jumping to it
   [#19060] PCMSKx registers transposed in header for attinyX61
@@ -133,6 +101,7 @@
   [#19496] Add documentation: how to build toolchain for Windows.
   [#19650] avr-libc: wrong named bit in SFR of AT90PWMx
   [#19666] AT90PWMx: Another patch for the include file (missing SFR)
+  [#19669] Need function to read signature row
   [#19686] alloc declaration missing
   [#19841] Error building 1.4 HEAD: undefined reference to 'exit'
   [#20248] FAQ#3: clarify which registers are safe to be used
@@ -152,6 +121,14 @@
   [#21432] Incorrect timer interrupt handler names for ATtiny45
   [#21434] Bit name definitions for AT90CANxxx
   [#21444] Undocument -minit-stack
+  [#21484] Documentation build for avr/version.h does not susbstitute autoconf
+           macros
+  [#21749] AT90PWM316: _VECTORS_SIZE should be 128
+  [#21691] iomx8.h-> IVSEL and IVCE should not be available for ATmega48
+  [#21743] AT90PWM316 missing PSOC1 bit definitions
+  [#21626] Incorrect Bit Definition for ADC14 and ADC15 Digital Input Disable
+  [#21521] incorrect bit definitions in iotnx61.h
+  [#21840] RAMEND wrong for ATmega48P/88P/168P
 
 * Other changes:
 
@@ -199,6 +176,8 @@
     ATtiny261, ATtiny44, ATtiny45, ATtiny461, ATtiny84, ATtiny85 and 
     ATtiny861 devices. GCC 4.2 or above is necessary to use this. 
 
+  - Add the benchmark page.
+
   [patch #5756] New atomic.h header file (added as <util/atomic.h>)
 
   [patch #5343] Add a util/setbaud.h "helper" file
@@ -230,6 +209,7 @@
   + ATmega324P (renamed from ATmega324)
   + ATmega328P
   + ATmega644P
+  + ATmega1284P
   + ATmega165P
   + ATmega169P
   + ATmega2560 [patch #4461]
@@ -241,16 +221,25 @@
   + AT90PWM1
   + ATmega8HVA
   + ATmega16HVA
+  + ATmega32HVB
   + AT90PWM216
   + AT90PWM316
   + ATtiny43U
   + ATtiny48
+  + ATtiny88
   + AT90PWM2B
   + AT90PWM3B
 
 * New functions: 
 
    strstr_P (Contributed by Werner Boellmann)
+   round
+   lround
+   lrint
+
+* Optimized functions:
+
+   dtostre
 
 *** Changes in avr-libc-1.4.0:
 
