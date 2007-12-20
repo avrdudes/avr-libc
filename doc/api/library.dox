@@ -113,9 +113,9 @@ therefore be named \c avr-ar.
 The job of the librarian program is simple: aggregate a list of object modules
 into a single library (archive) and create an index for the linker to use. The
 name that you create for the library filename must follow a specific pattern:
-lib<name>.a. The <name> part is the unique part of the filename that you create.
-It makes it easier if the <name> part relates to what the library is about. This
-<name> part must be prefixed by "lib", and it must have a file extension of .a,
+lib<em>name</em>.a. The <em>name</em> part is the unique part of the filename that you create.
+It makes it easier if the <em>name</em> part relates to what the library is about. This
+<em>name</em> part must be prefixed by "lib", and it must have a file extension of .a,
 for "archive". The reason for the special form of the filename is for how the 
 library gets used by the toolchain, as we will see later on.
 

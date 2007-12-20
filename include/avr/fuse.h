@@ -92,8 +92,8 @@
     For example, the EESAVE fuse in the ATmega128 is defined as:
     \code
     #define EESAVE      ~_BV(3)
-`   \endcode
-    \Note The _BV macro creates a bit mask from a bit number. It is then 
+    \endcode
+    \note The _BV macro creates a bit mask from a bit number. It is then 
     inverted to represent logical values for a fuse memory byte.
     
     To combine the fuse bits macros together to represent a whole fuse byte,
@@ -150,7 +150,7 @@
     all fuse bytes are initialized, even with default data. If they are not,
     then the fuse bits may not programmed to the desired settings.
     
-    Be sure to have the -mmcu=<device> flag in your compile command line and
+    Be sure to have the -mmcu=<em>device</em> flag in your compile command line and
     your linker command line to have the correct device selected and to have 
     the correct I/O header file included when you include <avr/io.h>.
 

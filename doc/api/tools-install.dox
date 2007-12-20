@@ -411,7 +411,7 @@ as improvements are made.
 
 - <b>MinGW/MSYS</b><br>
     <http://downloads.sourceforge.net/mingw/MinGW-5.1.3.exe?use_mirror=superb-east>
-    - Put MinGW-5.1.3.exe in it's own directory (for example: C:\MinGWSetup)
+    - Put MinGW-5.1.3.exe in it's own directory (for example: C:\\MinGWSetup)
     - Run MinGW-5.1.3.exe
     - Select "Download and install"
     - Select "Current" package.
