@@ -1,5 +1,10 @@
 2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* NEWS: avr-libc 1.6 branched
+	* configure.ac: bump to 1.7.0-20071220
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* xml/patch-headers.py: Update for new devices and header files.
 	* xml/Atmel2libc.py: More tweaks for strange Atmel XML files.
 	* doc/api/vectortable.dox: Regenerate from XML.
