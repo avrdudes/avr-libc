@@ -138,7 +138,7 @@
     desired settings and can possibly put your device into an unrecoverable 
     state.
     
-    Be sure to have the -mmcu=<device> flag in your compile command line and
+    Be sure to have the -mmcu=<em>device</em> flag in your compile command line and
     your linker command line to have the correct device selected and to have 
     the correct I/O header file included when you include <avr/io.h>.
 

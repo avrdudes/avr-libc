@@ -39,7 +39,7 @@
 -# \ref faq_cplusplus
 -# \ref faq_varinit
 -# \ref faq_16bitio
--# \ref faq_asmconst
+-# \ref faq_asmconst "How do I use a \#define'd constant in an asm statement?"<!-- The explicit text is necessary since doxygen stumbles on the #define otherwise. -->
 -# \ref faq_gdboptimize
 -# \ref faq_asmstabs
 -# \ref faq_port_pass

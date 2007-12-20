@@ -77,16 +77,16 @@ back-ends that generate assembly code for many different processors and host
 operating systems. All share a common "middle-end", containing the generic 
 parts of the compiler, including a lot of optimizations.
 
-In GCC, a \c host system is the system (processor/OS) that the compiler
-runs on. A \c target system is the system that the compiler compiles code for.
-And, a \build system is the system that the compiler is built (from source code) 
-on. If a compiler has the same system for \c host and for \c target, it is
-known as a \c native compiler. If a compiler has different systems for \c host
-and \c target, it is known as a cross-compiler. (And if all three, \c build,
-\c host, and \c target systems are different, it is known as a Canadian cross
+In GCC, a \e host system is the system (processor/OS) that the compiler
+runs on. A \e target system is the system that the compiler compiles code for.
+And, a \e build system is the system that the compiler is built (from source code) 
+on. If a compiler has the same system for \e host and for \e target, it is
+known as a \e native compiler. If a compiler has different systems for \e host
+and \e target, it is known as a cross-compiler. (And if all three, \e build,
+\e host, and \e target systems are different, it is known as a Canadian cross
 compiler, but we won't discuss that here.) When GCC is built to execute on a 
-\c host system such as FreeBSD, Linux, or Windows, and it is built to generate
-code for the AVR microcontroller \c target, then it is a cross compiler, and
+\e host system such as FreeBSD, Linux, or Windows, and it is built to generate
+code for the AVR microcontroller \e target, then it is a cross compiler, and
 this version of GCC is commonly known as "AVR GCC". In documentation, or
 discussion, AVR GCC is used when referring to GCC targeting specifically the
 AVR, or something that is AVR specific about GCC. The term "GCC" is usually

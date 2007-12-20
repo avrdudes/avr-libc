@@ -1,5 +1,18 @@
 2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/faq.dox: Resolve all doxygen warnings except the "is
+	not documented" ones.
+	* doc/api/library.dox: (Ditto.)
+	* doc/api/overview.dox: (Ditto.)
+	* doc/api/porting.dox: (Ditto.)
+	* doc/api/tools-install.dox: (Ditto.)
+	* doc/examples/stdiodemo/stdiodemo.dox: (Ditto.)
+	* include/avr/fuse.h: (Ditto.)
+	* include/avr/lock.h: (Ditto.)
+	* include/util/atomic.h: (Ditto.)
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #21484: Documentation build for avr/version.h does not
 	susbstitute autoconf macros
 	* doc/api/doxygen.config.in (INPUT): replace version.h.in by

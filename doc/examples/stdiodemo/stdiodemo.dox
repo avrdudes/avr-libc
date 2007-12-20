@@ -381,7 +381,7 @@ buffer (refresh)
 The function \c uart_init() takes care of all hardware initialization
 that is required to put the UART into a mode with 8 data bits, no
 parity, one stop bit (commonly referred to as 8N1) at the baud rate
-configured in \ref stdiodemo_defines_h "defines.h".  At low CPU clock
+configured in \ref stdiodemo_defines "defines.h".  At low CPU clock
 frequencies, the \c U2X bit in the UART is set, reducing the
 oversampling from 16x to 8x, which allows for a 9600 Bd rate to be
 achieved with tolerable error using the default 1 MHz RC oscillator.

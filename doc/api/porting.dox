@@ -63,7 +63,7 @@ used in the AVR datasheet.
 
 AVR GCC also has individual IO header files for each processor. However, the
 actual processor type is specified as a command line flag to the compiler.
-(Using the \c -mmcu=<processor> flag.) This is usually done in the Makefile. 
+(Using the \c -mmcu=<em>processor</em> flag.) This is usually done in the Makefile. 
 This allows you to specify only a single header file for any processor type:
 
 \code #include <avr/io.h> \endcode

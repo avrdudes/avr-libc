@@ -83,7 +83,7 @@ static __inline__ void __iRestore(const  uint8_t *__s)
     ("ISO C99") feature of for loop variables that are declared inside
     the for loop itself.  For that reason, this header file can only
     be used if the standard level of the compiler (option --std=) is
-    set to either \i c99 or \i gnu99.
+    set to either \c c99 or \c gnu99.
 
     The macros in this header file deal with code blocks that are
     guaranteed to be excuted Atomically or Non-Atmomically.  The term
