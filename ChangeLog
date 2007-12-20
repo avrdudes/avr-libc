@@ -1,5 +1,10 @@
 2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/bench.dox: Some minor spelling and grammar fixes to
+	Dmitry's fine benchmark page.
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/faq.dox: Resolve all doxygen warnings except the "is
 	not documented" ones.
 	* doc/api/library.dox: (Ditto.)

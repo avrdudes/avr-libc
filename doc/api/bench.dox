@@ -30,25 +30,25 @@
 
 /** \page benchmarks Benchmarks
 
-Resulted below figure can give only a rough estimate of the resources 
-necessary at inclusion of this or that library function. There is a number 
-of factors which can both to increase, and to reduce actual charges:
+The results below can only give a rough estimate of the resources 
+necessary for using certain library functions. There is a number 
+of factors which can both increase or reduce the effort required:
 
 \li Expenses for preparation of operands and their stack are not 
 considered.
 
-\li In the table the size in view of all additional functions (for
-example, function of multiplication of two integers) which are connected
-from library only once is resulted.
+\li In the table, the size includes all additional functions (for
+example, function to multiply two integers) but they are only linked
+from the library.
     
 \li Expenses of time of performance of some functions essentially depend
 on parameters of a call, for example, qsort() is recursive, and sprintf() 
 receives parameters in a stack.
 
 \li Different versions of the compiler can give a significant difference
-in a code. For example, the float version of sscanf() function, compiled 
-with avr-gcc 3.4.6, borrows 3792 bytes and uses 124 bytes a stack. At
-transition  on avr-gcc 4.2.2 size becomes 3886 bytes, and a stack - 140
-bytes.
+in code size and execution time. For example, the float version of sscanf() function, compiled 
+with avr-gcc 3.4.6, requires 3792 bytes and uses 124 bytes of stack. After
+transition to avr-gcc 4.2.2, the size become 3886 bytes, using 140
+bytes of stack.
 
 */
