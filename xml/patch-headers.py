@@ -73,9 +73,12 @@ table = {
     #"io8534.h": "AT90C8534",
     "io8535.h": "AT90S8535",
     "io86r401.h": "AT86RF401",
-    # no XML file yet (2007-05-14)
+    # still no XML file
     #"io90pwm1.h": "AT90PWM1",
-    #"io90pwmx.h": ("AT90PWM3", "AT90PWM2"),
+    "io90pwm216.h": "AT90PWM216",
+    "io90pwm2b.h": "AT90PWM2B",
+    "io90pwm316.h": "AT90PWM316",
+    "io90pwm3b.h": "AT90PWM3B",
     "io90pwmx.h": ("AT90PWM3", "AT90PWM2", "AT90PWM1"),
     # no XML file
     #"ioat94k.h": "AT94k",
@@ -84,6 +87,7 @@ table = {
     "iom128.h": "ATmega128",
     #"iom1280.h" => "iomxx0_1.h"
     #"iom1281.h" => "iomxx0_1.h"
+    "iom1284p.h": "ATmega1284P",
     "iom16.h": "ATmega16",
     "iom161.h": "ATmega161",
     "iom162.h": "ATmega162",
@@ -92,6 +96,7 @@ table = {
     "iom165.h": "ATmega165",
     "iom165p.h": "ATmega165P",
     #"iom168.h" => "iomx8.h"
+    "iom168p.h": "ATmega168P",
     "iom169.h": "ATmega169",
     "iom169p.h": "ATmega169P",
     #"iom16hva.h" => "iomxxhva.h"
@@ -100,11 +105,14 @@ table = {
     "iom32.h": "ATmega32",
     "iom323.h": "ATmega323",
     "iom325.h": "ATmega325",
-    "iom3250.h": "ATmega3250",
-    "iom329.h": ("ATmega329", "ATmega329P"),
+    "iom3250.h": ("ATmega3250", "ATmega3250P"),
+    "iom328p.h": "ATmega328P",
+    "iom329.h": "ATmega329",
     "iom3290.h": ("ATmega3290", "ATmega3290P"),
-    #"iom48.h" => "iomx8.h"
+    "iom32hvb.h": "ATmega32HVB",
     "iom406.h": "ATmega406",
+    #"iom48.h" => "iomx8.h"
+    "iom48p.h": "ATmega48P",
     "iom64.h": "ATmega64",
     #"iom640.h" => "iomxx0_1.h"
     #"iom644.h" => "iomxx4.h"
@@ -116,12 +124,14 @@ table = {
     "iom8515.h": "ATmega8515",
     "iom8535.h": "ATmega8535",
     #"iom88.h" => "iomx8.h"
+    "iom88p.h": "ATmega88P",
     #"iom8hva.h" => "iomxxhva.h"
     "iomx8.h": ("ATmega168", "ATmega48", "ATmega88"),
     "iomxx0_1.h": ("ATmega640", "ATmega1280", "ATmega1281", "ATmega2560", "ATmega2561"),
     "iomxx4.h": ("ATmega324P", "ATmega164P", "ATmega644P", "ATmega644"),
-    # no XML file yet (2007-05-14)
+    # ATmega8HVA XML still missing
     #"iomxxhva.h": ("ATmega8HVA", "ATmega16HVA"),
+    "iomxxhva.h": ("ATmega16HVA"),
     "iotn11.h": "ATtiny11",
     "iotn12.h": "ATtiny12",
     "iotn13.h": "ATtiny13",
@@ -133,12 +143,16 @@ table = {
     "iotn26.h": "ATtiny26",
     #"iotn261.h" => "iotnx61.h"
     "iotn28.h": "ATtiny28",
+    "iotn43u.h": "ATtiny43U",
     #"iotn44.h" => "iotnx4.h"
     #"iotn45.h" => "iotnx5.h"
     #"iotn461.h" => "iotnx61.h"
+    "iotn48.h": "ATtiny48",
     #"iotn84.h" => "iotnx4.h"
     #"iotn85.h" => "iotnx5.h"
     #"iotn861.h" => "iotnx61.h"
+    # No XML file (yet)
+    #"iotn88.h": "ATtiny88",
     "iotnx4.h": ("ATtiny24", "ATtiny44", "ATtiny84"),
     "iotnx5.h": ("ATtiny45", "ATtiny25", "ATtiny85"),
     "iotnx61.h": ("ATtiny261", "ATtiny461", "ATtiny861"),

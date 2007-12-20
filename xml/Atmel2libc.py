@@ -229,7 +229,11 @@ def dump_memory_sizes (root):
     isram_start = isram.getElements ('START_ADDR')[0].getData ()[1:]
 
     xsram = mem.getSubTree (['MEMORY', 'EXT_SRAM'])
-    xsram_size = int (xsram.getElements ('SIZE')[0].getData ())
+    try:
+        xsram_size = int (xsram.getElements ('SIZE')[0].getData ())
+    except ValueError:
+        # Some XSRAM entries come with just "NA" as the value
+        xsram_size = 0
     xsram_start = xsram.getElements ('START_ADDR')[0].getData ()[1:]
 
     print '  <memory_sizes>'
@@ -282,6 +286,8 @@ def dump_vectors (root, tradnames):
         try:
             name = re.sub('[/-]', '', v[1].upper())
             name = re.sub(',', ' ', name)
+            # The ATmega16HVA file has a silly SPI;STC vector name
+            name = re.sub(';', '_', name)
             name = re.sub(r'\s+', '_', name)
             if re.match('^[A-Z0-9_]+$', name):
                 pass

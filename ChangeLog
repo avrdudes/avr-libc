@@ -1,5 +1,11 @@
 2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* xml/patch-headers.py: Update for new devices and header files.
+	* xml/Atmel2libc.py: More tweaks for strange Atmel XML files.
+	* doc/api/vectortable.dox: Regenerate from XML.
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/bench.dox: Some minor spelling and grammar fixes to
 	Dmitry's fine benchmark page.
 
