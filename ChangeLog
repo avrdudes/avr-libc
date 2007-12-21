@@ -1,3 +1,13 @@
+2007-12-21  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add 'avr35' architecture. Move AT90USB82 and 
+	ATt90USB162 devices to 'avr35' architecture.
+	* devtools/gen-avr-lib-tree.sh (AVR_ARH_INFO): Ditto.
+	(AVR3_DEV_INFO): Add AT90USB82 and ATt90USB162 devices.
+	(AVR35_DEV_INFO): New.
+	(AVR5_DEV_INFO): Remove AT90USB82 and ATt90USB162 devices.
+	* doc/api/using-tools.dox: Document 'avr35'.
+
 2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox: Resolve all doxygen warnings except the "is

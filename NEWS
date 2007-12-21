@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [no-id]  iscntrl() return true for some values from 0x80 to 0xff.
+  [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [#18994] minor optimization possible to stdlib functions isspace(),
            isprint(), and islower()
   [#21484] Documentation build for avr/version.h does not susbstitute autoconf
@@ -13,6 +14,12 @@
   [#21743] AT90PWM316 missing PSOC1 bit definitions
   [#21749] AT90PWM316: _VECTORS_SIZE should be 128
   [#21840] RAMEND wrong for ATmega48P/88P/168P
+
+  * Other changes:
+
+  - Added 'avr35' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
+    supported for AT90USB82 and ATt90USB162 devices. GCC 4.3 or above is 
+    necessary to use this. 
 
 * New devices supported:
 
