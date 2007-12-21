@@ -1,3 +1,8 @@
+2007-12-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21862: File 'bench-libm.dox' does not exist in distribution
+	* doc/api/Makefile.am (EXTRA_DIST): add bench-libm.dox
+
 2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version to 1.6.0-20071220 in preparation of

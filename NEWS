@@ -1,3 +1,9 @@
+*** Changes since avr-libc-1.6.0:
+
+* Bugs fixed:
+
+  [#21862] File 'bench-libm.dox' does not exist in distribution
+
 *** Changes in avr-libc-1.6.0:
 
 * Main changes from avr-libc 1.4 to 1.6:
