@@ -1,3 +1,8 @@
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21862: File 'bench-libm.dox' does not exist in distribution
+	* doc/api/Makefile.am (EXTRA_DIST): add doc/api/bench-libm.dox.
+
 2007-12-20  Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add 'avr35' architecture. Move AT90USB82 and 
