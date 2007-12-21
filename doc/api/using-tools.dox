@@ -96,6 +96,17 @@ AVR will be defined as well when using the standard levels gnu89
     <td>"Classic" CPU core, 16 KB to 128 KB of ROM</td>
   </tr>
   <tr>
+    <td>avr35&nbsp;[3]</td>
+    <td>
+    __AVR_ARCH__=35<BR>
+    __AVR_MEGA__<BR>
+    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
+    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
+    __AVR_2_BYTE_PC__&nbsp;[2]
+    </td>
+    <td>"Classic" CPU core with 'MOVW' and 'LPM Rx, Z[+]' instruction, 16 KB to 128 KB of ROM</td>
+  </tr>
+  <tr>
     <td>avr4</td>
     <td>
     __AVR_ARCH__=4<BR>
@@ -136,7 +147,8 @@ AVR will be defined as well when using the standard levels gnu89
   </table>
   <p>
   [1] New in GCC 4.2<BR>
-  [2] Unofficial patch for GCC 4.1 
+  [2] Unofficial patch for GCC 4.1<BR>
+  [3] New in GCC 4.3 
   </p>
   </p>
   <p>
@@ -195,6 +207,8 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr3</td><td>atmega603</td><td>__AVR_ATmega603__</td></tr>
   <tr><td>avr3</td><td>at43usb320</td><td>__AVR_AT43USB320__</td></tr>
   <tr><td>avr3</td><td>at43usb355</td><td>__AVR_AT43USB355__</td></tr>
+  <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb82</td><td>__AVR_AT90USB82__</td></tr>
+  <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb162</td><td>__AVR_AT90USB162__</td></tr>
   <tr><td>avr3</td><td>at76c711</td><td>__AVR_AT76C711__</td></tr>
   <tr><td>avr4</td><td>atmega48</td><td>__AVR_ATmega48__</td></tr>
   <tr><td>avr4</td><td>atmega48p</td><td>__AVR_ATmega48P__</td></tr>
@@ -214,8 +228,6 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>at90can32</td><td>__AVR_AT90CAN32__</td></tr>
   <tr><td>avr5</td><td>at90can64</td><td>__AVR_AT90CAN64__</td></tr>
   <tr><td>avr5</td><td>at90can128</td><td>__AVR_AT90CAN128__</td></tr>
-  <tr><td>avr5</td><td>at90usb82</td><td>__AVR_AT90USB82__</td></tr>
-  <tr><td>avr5</td><td>at90usb162</td><td>__AVR_AT90USB162__</td></tr>
   <tr><td>avr5</td><td>at90usb646</td><td>__AVR_AT90USB646__</td></tr>
   <tr><td>avr5</td><td>at90usb647</td><td>__AVR_AT90USB647__</td></tr>
   <tr><td>avr5</td><td>at90usb1286</td><td>__AVR_AT90USB1286__</td></tr>
@@ -265,7 +277,8 @@ AVR will be defined as well when using the standard levels gnu89
   </table>
   </p>
   <p>
-  [1] 'avr25' architecture is new in GCC 4.2
+  [1] 'avr25' architecture is new in GCC 4.2<BR>
+  [1] 'avr35' architecture is new in GCC 4.3
   </p>
 
 - \c -morder1
