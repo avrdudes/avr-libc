@@ -1,5 +1,15 @@
 *** Changes since avr-libc-1.6.1:
 
+* Bugs fixed:
+
+  [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
+
+* Other changes:
+
+  - Added 'avr35' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
+    supported for AT90USB82 and AT90USB162 devices. GCC 4.3 or above is 
+    necessary to use this. 
+
 *** Changes in avr-libc-1.6.1:
 
 * Bugs fixed:
@@ -408,6 +418,15 @@
 * boot.h: implement boot_lock_fuse_bits_get() plus macros for the
           respective addresses (low/high/ext fuse, lock bits)
 
+* Bugs fixed:
+
+  [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
+
+* Other changes:
+
+  - Added 'avr35' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
+    supported for AT90USB82 and ATt90USB162 devices. GCC 4.3 or above is 
+    necessary to use this. 
 
 *** Changes since avr-libc-1.2.3:
 
