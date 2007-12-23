@@ -148,9 +148,10 @@ int main ()
 	x    = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
 #ifdef	__AVR__
-	/* FIXME: avr-gcc does not use __floatunssisf(). Force it.	*/
-	extern double __floatunssisf (unsigned long);
-	v.fl = __floatunssisf (x);
+	/* Force library's convertion function usage. This is needed for
+	   GCC before 4.2	*/
+	extern double __floatunsisf (unsigned long);
+	v.fl = __floatunsisf (x);
 #else
 	v.fl = x;
 #endif

@@ -50,7 +50,7 @@ libm_a_asm_sources = \
 	fixunssfsi.S \
 	floatdisf.S \
 	floatsisf.S \
-	floatunsdisf.S \
+	floatundisf.S \
 	fdim.S \
 	floor.S \
 	fma.S \

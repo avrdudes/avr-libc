@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
+  [#21872] __floatunsisf/undisf incorrectly named
 
 * Other changes:
 

@@ -30,13 +30,13 @@
 /* $Id$ */
 
 /* float __floatsisf (long)
-   float __floatunssisf (unsigned long)
+   float __floatunsisf (unsigned long)
  */
 
 #include "fp32def.h"
 #include "asmdef.h"
 
-ENTRY   __floatunssisf
+ENTRY   __floatunsisf
 	clt
 	rjmp	1f
 	

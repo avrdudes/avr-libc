@@ -38,8 +38,15 @@
 
 /* double strtod (const char * nptr, char ** endptr);
  */
- 
-extern double __floatunssisf (unsigned long);
+
+/* GCC before 4.2 does not use a library function to convert an unsigned
+   long to float.  Instead it uses a signed long to float conversion
+   function along with a large inline code to correct the result.	*/
+#if	__GNUC__ <= 4  &&  __GNUC_MINOR__ < 2 
+extern double __floatunsisf (unsigned long);	/* force library call	*/
+#else
+# define __floatunsisf(v)	(v)		/* is not needed	*/
+#endif
 
 PROGMEM static const float pwr_p10 [6] = {
     1e+1, 1e+2, 1e+4, 1e+8, 1e+16, 1e+32
@@ -201,7 +208,7 @@ double strtod (const char * nptr, char ** endptr)
     if ((flag & FL_ANY) && endptr)
 	*endptr = (char *)nptr - 1;
     
-    x = __floatunssisf (acc);	/* ???: GCC do't know about this func.	*/
+    x = __floatunsisf (acc);
     if ((flag & FL_MINUS) && (flag & FL_ANY))
 	x = -x;
 	

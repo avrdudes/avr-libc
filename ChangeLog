@@ -1,5 +1,18 @@
 2007-12-23  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Fix bug #21872: __floatunsisf/undisf incorrectly named
+	* libm/fplib/floatsisf.S: Rename __floatunssisf --> __floatunsisf
+	* libc/stdlib/strtod.c: Ditto. Add the preprocessing to exclude
+	manual conversion with GCC >= 4.2
+	* libm/fplib/floatunsdisf.S: Move to floatundisf.S .
+	* libm/fplib/floatundisf.S: New file: __floatunsdisf --> __floatundisf
+	* libm/fplib/Files.am: Change source file name.
+	* tests/simulate/fplib/ulng2flt-01.c: __floatunssisf --> __floatunsisf
+	* tests/simulate/fplib/unll2flt-01.c: __floatunsdisf --> __floatundisf
+	* tests/simulate/regression/bug-21872-1.c: New file.
+	* tests/simulate/regression/bug-21872-2.c: New file.
+	* NEWS: Note about this bug.
+
 	* tests/simulate/progmem.h: Simplify pgm_read_qword() evaluation.
 
 2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>

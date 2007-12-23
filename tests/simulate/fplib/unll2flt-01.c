@@ -274,9 +274,10 @@ int main ()
 	x = pgm_read_qword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
 #ifdef __AVR__
-	/* FIXME: avr-gcc does not use __floatunsdisf() function.	*/
-	extern float __floatunsdisf (unsigned long long);
-	v.fl = __floatunsdisf (x);
+	/* Force library's convertion function usage. This is needed for
+	   GCC before 4.2	*/
+	extern float __floatundisf (unsigned long long);
+	v.fl = __floatundisf (x);
 #else
 	v.fl = x;
 #endif

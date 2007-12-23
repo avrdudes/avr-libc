@@ -29,7 +29,7 @@
 
 /* $Id$ */
 
-/* float __floatunsdisf (unsigned long long x)
+/* float __floatundisf (unsigned long long x)
 
    Input:
      rA3.rA2.rA1.rA0.rB3.rB2.rB1.rB0	- an 'x' arg
@@ -40,7 +40,7 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-ENTRY   __floatunsdisf
+ENTRY   __floatundisf
 	clt			; result sign
 	
 ENTRY   __fp_di2sf
