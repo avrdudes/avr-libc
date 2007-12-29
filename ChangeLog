@@ -1,3 +1,7 @@
+2007-12-29  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/pgmspace.h: Add '__' prefix with function args.
+
 2007-12-23  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix bug #21872: __floatunsisf/undisf incorrectly named
