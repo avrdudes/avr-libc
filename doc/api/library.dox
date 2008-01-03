@@ -127,7 +127,7 @@ lowercase ".a" as the file extension.
 The command line is fairly simple:
 
 \code
-avr-as rcs <library name> <list of object modules>
+avr-ar rcs <library name> <list of object modules>
 \endcode
 
 The \c r command switch tells the program to insert the object modules into

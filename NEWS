@@ -4,6 +4,7 @@
 
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [#21872] __floatunsisf/undisf incorrectly named
+  [#21935] Typo in avr-ar example avr-as should be avr-ar
 
 * Other changes:
 
