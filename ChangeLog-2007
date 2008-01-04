@@ -1,0 +1,1517 @@
+2007-12-29  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/pgmspace.h: Add '__' prefix with function args.
+
+2007-12-23  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix bug #21872: __floatunsisf/undisf incorrectly named
+	* libm/fplib/floatsisf.S: Rename __floatunssisf --> __floatunsisf
+	* libc/stdlib/strtod.c: Ditto. Add the preprocessing to exclude
+	manual conversion with GCC >= 4.2
+	* libm/fplib/floatunsdisf.S: Move to floatundisf.S .
+	* libm/fplib/floatundisf.S: New file: __floatunsdisf --> __floatundisf
+	* libm/fplib/Files.am: Change source file name.
+	* tests/simulate/fplib/ulng2flt-01.c: __floatunssisf --> __floatunsisf
+	* tests/simulate/fplib/unll2flt-01.c: __floatunsdisf --> __floatundisf
+	* tests/simulate/regression/bug-21872-1.c: New file.
+	* tests/simulate/regression/bug-21872-2.c: New file.
+	* NEWS: Note about this bug.
+
+	* tests/simulate/progmem.h: Simplify pgm_read_qword() evaluation.
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21862: File 'bench-libm.dox' does not exist in distribution
+	* doc/api/Makefile.am (EXTRA_DIST): add doc/api/bench-libm.dox.
+
+2007-12-20  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add 'avr35' architecture. Move AT90USB82 and 
+	AT90USB162 devices to 'avr35' architecture.
+	* devtools/gen-avr-lib-tree.sh (AVR_ARH_INFO): Add 'avr35' 
+	architecture.
+	(AVR3_DEV_INFO): Add AT90USB82 and AT90USB162 devices.
+	(AVR35_DEV_INFO): New.
+	(AVR5_DEV_INFO): Remove AT90USB82 and AT90USB162 devices.
+	* doc/api/using-tools.dox: Document 'avr35'.
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* NEWS: avr-libc 1.6 branched
+	* configure.ac: bump to 1.7.0-20071220
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* xml/patch-headers.py: Update for new devices and header files.
+	* xml/Atmel2libc.py: More tweaks for strange Atmel XML files.
+	* doc/api/vectortable.dox: Regenerate from XML.
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/bench.dox: Some minor spelling and grammar fixes to
+	Dmitry's fine benchmark page.
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Resolve all doxygen warnings except the "is
+	not documented" ones.
+	* doc/api/library.dox: (Ditto.)
+	* doc/api/overview.dox: (Ditto.)
+	* doc/api/porting.dox: (Ditto.)
+	* doc/api/tools-install.dox: (Ditto.)
+	* doc/examples/stdiodemo/stdiodemo.dox: (Ditto.)
+	* include/avr/fuse.h: (Ditto.)
+	* include/avr/lock.h: (Ditto.)
+	* include/util/atomic.h: (Ditto.)
+
+2007-12-20 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21484: Documentation build for avr/version.h does not
+	susbstitute autoconf macros
+	* doc/api/doxygen.config.in (INPUT): replace version.h.in by
+	version.h so the doxygen build uses the processed file.
+
+2007-12-19  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/stdlib.h: Add '__' prefix with function args.
+
+	* include/string.h: Add '__' prefix with function args. The ffs(),
+	ffsl(), ffsll(): cosmetic changes to improve Doxygen output.
+
+	* tests/simulate/math/isinf-01.c: New file.
+
+	* include/math.h: Fix a few documentation errors (inherited from
+	1.4). Make args names in doc adequate ones in function declaration.
+	Use the '\a' Doxygen's command instead to '\c' anywhere.
+
+	Add CLI to abort() and exit() functions, since GCC's _exit()
+	does not disable interrupts today.
+	* libc/stdlib/abort.S: Add CLI before jump to _exit.
+	* libc/stdlib/exit.S: Ditto.
+	* include/stdlib.h: Document the CLI.
+	* tests/simulate/stdlib/abort-1.c: New file.
+
+2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Undo the CLI change.  This rather belongs into _exit which is
+	supplied by libgcc.a.
+	Reopens bug #21841: Add CLI to exit() and abort() loops
+        * libc/stdlib/exit.S: undo rev 1.2.
+        * include/stdlib.h (exit): undo rev 1.30.
+
+2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn43u.h: Fix RAMEND.
+
+2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom1284p.h: Fix RAMEND.
+	* include/avr/iom32hvb.h: Ditto.
+	* include/avr/iotn48.h: Ditto.
+	* include/avr/iotn88.h: Ditto.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/io90pwm216.h: Ditto.
+	* include/avr/io90pwm316.h: Ditto.
+
+2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21841: Add CLI to exit() and abort() loops
+	* libc/stdlib/exit.S: add a CLI before entering the loop
+	* include/stdlib.h (exit): document the CLI.
+
+2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Bill Johnson
+	bug #19669: Need function to read signature row
+	* include/avr/boot.h (boot_signature_byte_get): Add new macro.
+
+2007-12-18 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/runtest.sh: replace /bin/bash by /bin/sh as the
+	really generic name of the shell to invoke.  Not every system has
+	bash in /bin.
+
+2007-12-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21840.
+	* include/avr/iom48p.h: Fix RAMEND.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+
+2007-12-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/alloca.h: Add '__' prefix with function args. To avoid
+	a possible conflict with user's CPP definitions.
+	* include/math.h: Ditto.
+
+2007-12-17  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Make abort() as a normal extern function (instead to inline loop).
+	* libc/stdlib/abort.S: Rewrite.
+	* include/stdlib.h: Declare abort() as a normal, add doc.
+	* tests/simulate/stdlib/abort-1.c: New file.
+
+2007-12-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/ctype.S:
+	  . isalnum(): Optimize.
+	  . isxdigit(): Correct a behaviour with nonzero high byte.
+	  . iscntrl(): Fix bug [no-id]: iscntrl() return true for some
+	  values from 0x80 to 0xff. Optimize a little.
+	  . ispunct(): Optimize.
+	  . tolower(): Return as is, if the input is not an unsigned char
+	  value. Optimize.
+	  . toupper(): Ditto.
+	* include/ctype.h: Specify (and change) doc about the behaviour
+	in case then the input is not an unsigned char value.
+	* NEWS: Note about fixed bug of iscntrl().
+	* tests/simulate/stdlib/isalnum-1.c: New file.
+	* tests/simulate/stdlib/isalpha-1.c: New file.
+	* tests/simulate/stdlib/isascii-1.c: New file.
+	* tests/simulate/stdlib/isblank-1.c: New file.
+	* tests/simulate/stdlib/iscntrl-1.c: New file.
+	* tests/simulate/stdlib/isdigit-1.c: New file.
+	* tests/simulate/stdlib/isgraph-1.c: New file.
+	* tests/simulate/stdlib/ispunct-1.c: New file.
+	* tests/simulate/stdlib/isupper-1.c: New file.
+	* tests/simulate/stdlib/isxdigit-1.c: New file.
+	* tests/simulate/stdlib/tolower-1.c: New file.
+	* tests/simulate/stdlib/toupper-1.c: New file.
+
+2007-12-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix bug #18994: minor optimization possible to stdlib functions
+	isspace(), isprint(), and islower()
+	* libc/stdlib/ctype.S: Optimize isspace(), isprint() and islower().
+	* tests/simulate/stdlib/islower-1.c: New file.
+	* tests/simulate/stdlib/isprint-1.c: New file.
+	* tests/simulate/stdlib/isspace-1.c: New file.
+	* NEWS: Note about this.
+
+	* NEWS: Add the chapter 'Main changes from 1.4 to 1.5'.
+
+2007-12-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm216.h: Fix fuse data.
+	* include/avr/io90pwm316.h: Ditto.
+
+2007-12-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32hvb.h: Remove unused register.
+	* include/avr/io90pwm216.h: Fix IVT size. Fix for bug #21749.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/iomx8.h: Remove bits for mega48. Fix for bug #21691.
+	* include/avr/io90pwm316.h: Add bit defs. Fix for bug #21743.
+	* include/avr/iomxx0_1.h: Fix bit defs. Fix for bug #21626.
+	* include/avr/iotnx61.h: Fix bit defs. Fix for bug #21521.
+
+2007-12-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/lock.h: Add documentation for the Lockbit API.
+	* doc/api/doxygen.config.in: Add avr/lock.h to the doc list.
+	* include/avr/iom8.h: Add Fuse and Lockbit data.
+	* include/avr/iotn43u.h: Add Lockbit data.
+	* include/avr/io90pwm216.h: Add Lockbit data. Fix fuse data.
+	* include/avr/io90pwm316.h: Add Lockbit data. Fix fuse data.
+	* include/avr/io90pwm2b.h: Add Lockbit data. Fix fuse data.
+	* include/avr/io90pwm3b.h: Add Lockbit data. Fix fuse data.
+	* include/avr/iom88.h: Add Fuse data.
+	* include/avr/iom168.h: Add Fuse data.
+	* include/avr/iom128.h: Formatting.
+	* include/avr/iom16.h: Add Fuse and Lockbit data.
+	* include/avr/iom32.h: Ditto.
+	* include/avr/iom64.h: Ditto.
+	* include/avr/iom325.h: Ditto.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom645.h: Ditto.
+	* include/avr/iom6450.h: Ditto.
+	* include/avr/iom329.h: Ditto.
+	* include/avr/iom3290.h: Ditto.
+	* include/avr/iom649.h: Ditto.
+	* include/avr/iom6490.h: Ditto.
+	* include/avr/iom640.h: Ditto.
+	* include/avr/iom1280.h: Ditto.
+	* include/avr/iom1281.h: Ditto.
+	* include/avr/iom2560.h: Ditto.
+	* include/avr/iom2561.h: Ditto.
+	* include/avr/iousb646.h: Ditto.
+	* include/avr/iousb647.h: Ditto.
+	* include/avr/iousb1286.h: Ditto.
+	* include/avr/iousb1287.h: Ditto.
+	* include/avr/iom8515.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom162.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iousb82.h: Ditto.
+	* include/avr/iousb162.h: Ditto.
+	* include/avr/iom165.h: Ditto.
+	* include/avr/iom165p.h: Ditto.
+	* include/avr/iocan32.h: Ditto.
+	* include/avr/iocan64.h: Ditto.
+	* include/avr/iocan128.h: Ditto.
+	* include/avr/io90pwmx.h: Ditto.
+	* include/avr/io90pwm1.h: Ditto.
+	* include/avr/iom169.h: Ditto.
+	* include/avr/iom169p.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom406.h: Ditto.
+	* include/avr/iotn261.h: Ditto.
+	* include/avr/iotn461.h: Ditto.
+	* include/avr/iotn861.h: Ditto.
+	* include/avr/iotn25.h: Ditto.
+	* include/avr/iotn45.h: Ditto.
+	* include/avr/iotn85.h: Ditto.
+	* include/avr/iotn24.h: Ditto.
+	* include/avr/iotn44.h: Ditto.
+	* include/avr/iotn84.h: Ditto.
+	* include/avr/iotn2313.h: Ditto.
+	* include/avr/iotn13.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iom8hva.h: Ditto.
+	* include/avr/iom16hva.h: Ditto.
+	* include/avr/iom8535.h: Ditto.
+	* include/avr/iom164.h: Ditto.
+	* include/avr/iom324.h: Ditto.
+	* include/avr/iom644.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+	* include/avr/iotn26.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+
+2007-12-09  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libm/fplib/frexp.S: Make frexp() similar to GCC/x86 in case of
+	nonfinite arg: write 0 by exponent pointer. Early Avr-libc's frexp()
+	skips exponent storing in this case. Make the NULL a legal address
+	to skip a storing.
+	* include/math.h: Specify this in doc.
+	* tests/simulate/math/frexp-01.c: Add new test cases.
+	* NEWS: Note about this.
+
+2007-12-08  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* doc/api/doxygen.config.in: Change MACRO_EXPANSION and
+	EXPAND_ONLY_PREDEF variables to YES. Add __ATTR_CONST__ to
+	PREDEFINED list. To clean documentation: remove last label
+	from function lists.
+	* include/math.h: Add a note about the const attribute.
+
+	* doc/api/doxygen.config.in: Remove 'libm' directory from the INPUT
+	list, as there is no any doxygen comments. To reduce the number of
+	doxygen warnings.
+
+2007-12-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Extend the benchmark chapter.
+	* doc/api/bench-libc.dox: Add a bit functions.
+	* doc/api/bench-libm.dox: New file.
+	* doc/api/doxygen.config.in: Add new file bench-libm.dox
+
+	Make signbit() similar to GCC's builtin: return 1 as nonzero value.
+	* libm/fplib/signbit.S: Ditto.
+	* include/math.h: signbit(): fix comment about return value.
+	* tests/simulate/math/signbit-01.c: New file.
+	* NEWS: Note about this change.
+
+2007-12-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Move all CPP statements to '#ifndef __DOXYGEN__' scope to reduce
+	the volume of garbage in documentation. IMHO, the \file doxygen
+	directive is redundant here, as it forces an opening a new
+	chapter with inclusion all CPP definitions.
+	* libc/pmstring/memcpy_P.S: (Ditto.)
+	* libc/pmstring/strcat_P.S: (Ditto.)
+	* libc/pmstring/strcpy_P.S: (Ditto.)
+	* libc/pmstring/strlen_P.S: (Ditto.)
+	* libc/pmstring/strncat_P.S: (Ditto.)
+	* libc/pmstring/strncmp_P.S: (Ditto.)
+	* libc/pmstring/strncpy_P.S: (Ditto.)
+	* libc/pmstring/strnlen_P.S: (Ditto.)
+	* libc/stdlib/atoi.S: (Ditto.)
+	* libc/stdlib/atol.S: (Ditto.)
+	* libc/string/memccpy.S: (Ditto.)
+	* libc/string/memchr.S: (Ditto.)
+	* libc/string/memcmp.S: (Ditto.)
+	* libc/string/memcpy.S: (Ditto.)
+	* libc/string/memmove.S: (Ditto.)
+	* libc/string/memset.S: (Ditto.)
+	* libc/string/strcat.S: (Ditto.)
+	* libc/string/strcpy.S: (Ditto.)
+	* libc/string/strlen.S: (Ditto.)
+	* libc/string/strncat.S: (Ditto.)
+	* libc/string/strncmp.S: (Ditto.)
+	* libc/string/strncpy.S: (Ditto.)
+	* libc/string/strnlen.S: (Ditto.)
+	* libc/string/strrchr.S: (Ditto.)
+
+	Add new function lrint().
+	* libm/fplib/lrint.S: New file.
+	* libm/fplib/Files.am: Add new source lrint.S
+	* include/math.h: Add lrint() function definition.
+	* tests/simulate/math/lrint-01.c: New file.
+	* NEWS: Update new functions list.
+
+	Make conversion from float to (u)long in error cases to be
+	more similar with GCC/x86.
+	* libm/fplib/fixunssfsi.S: New file.
+	* libm/fplib/Files.am: Add new source fixunssfsi.S
+	* libm/fplib/fixsfsi.S: Rewrite to use __fixunssfsi() function.
+	* libm/fplib/lround.S: Unify result in error cases.
+	* include/math.h: lround(): fix comment about return value.
+	* tests/simulate/fplib/flt2long-01.c: Update overflow test cases.
+	* tests/simulate/fplib/flt2ulng-01.c: Ditto.
+	* tests/simulate/math/lround-01.c: Ditto.
+	* NEWS: Note about this change.
+
+2007-11-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* doc/api/doxygen.config.in: Add avr/fuse.h to the doc list.
+
+2007-11-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/fuse.h: Add documentation for Fuse API.
+
+2007-11-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add new devices: ATmega1284P, ATmega32HVB.
+	* configure.ac: Add new devices.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* NEWS: Update new devices list.
+	* include/avr/iom1284p.h: New file.
+	* include/avr/iom32hvb.h: New file.
+
+2007-11-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add the benchmark page. Now this is only a start of work.
+	* doc/api/bench.dox: New file.
+	* doc/api/bench-libc.dox: New file.
+	* doc/api/Makefile.am: Add new doxygen sources.
+	* dod/api/doxygen.config.in: Ditto.
+	* NEWS: Note about new doc page.
+
+2007-11-11  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function lround().
+	* libm/fplib/lround.S: New file.
+	* libm/fplib/Files.am: Add new source lround.S
+	* include/math.h: Add lround() function definition.
+	* tests/simulate/math/lround-01.c: New file.
+	* NEWS: Update new functions list.
+
+2007-11-08  Eric B. Weddingotn  <eweddington@cso.atmel.com>
+
+	Add new device: ATtiny88.
+	* configure.ac: Add new device.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iotn88.h: New file.
+	* NEWS: Update new devices list.
+	* include/avr/iotn48.h: Add lockbit information.
+
+2007-11-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function round().
+	* libm/fplib/round.S: New file.
+	* libm/fplib/Files.am: Add new source round.S
+	* include/math.h: Add round() function definition.
+	* tests/simulate/math/round-01.c: New file.
+	* tests/simulate/math/xxx-nan.c: Add round() function to list.
+	
+	* include/math.h: Add the 'const' attribute to hypot() function.
+
+2007-11-04  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/dtostre.c: Optimize in space: 16..22 bytes, consided
+	the extra function strcpy_P().
+
+2007-11-02  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* include/avr/iom48p.h: New implementation. No common file included. 
+	Add Fuse and lockbit definitions. Fix bugs.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iomx8p.h: Remove file.
+	* include/avr/Makefile (avr_HEADERS): Remove iomx8p.h from list.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21432: Incorrect timer interrupt handler names for ATtiny45
+	* include/avr/iotnx5.h: Add TIMER0..._vect and TIMER1..._vect
+	names in addition to the TIM0... and TIM1... names to match
+	the recently changed datasheet.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21204: iotnx61.h PRR bits incorrect
+	* include/avr/iotnx61.h: Use correct bit numbers for
+	PRTIM0/PRTIM1.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #21444: Undocument -minit-stack
+	* doc/api/using-tools.dox: Remove references to -minit-stack,
+	add an explanation for how to set __stack in order to relocate
+	the stack.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #20530: Bug in sample code for early wdt disable
+	* include/avr/wdt.h: move variable mcusr_mirror into
+	the .noinit section in example code.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #20248: FAQ#3: clarify which registers are safe to be used
+	* doc/api/faq.dox: Describe that r8...r15 can only be used
+	for register variables if they are not used for argument
+	passing.  Clarify that call-saved registers must be
+	preserved even in case they are used for argument passing by
+	the compiler.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #20650: Missing description of AVR specific C-preprocessor
+	macros
+	* doc/api/using-tools.dox: Document the target-specific macros
+	__AVR, __AVR__, AVR, and __NO_INTERRUPTS__.
+
+2007-10-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #18373: Bugs in Inline ASM documentacion
+	* doc/api/inline_asm.dox: Inline asm documentation improvements:
+	  . mention named operands
+	  . document that read-write constraints to work
+	  . explain read-write constraints
+
+2007-10-29  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* include/avr/power.h: Add support for ATmega48P-88P-168P-328P devices.
+
+2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/util/atomic.h: Fix a documentation spelling error.
+
+2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump revision to 1.5.1-20071030 in order to
+	indicate post-release 1.5.1-20071029 state.
+
+2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump revision to 1.5.1-20071029 in order to
+	prepare for a new (unstable) release.
+
+2007-10-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Dean Camera:
+	Patch #5644: New interrupt.h header file
+	* include/avr/interrupt.h: Complete overhaul of the ISR() and related
+	macros.
+	By Joerg Wunsch:
+	* doc/api/interrupts.dox: Update the interrupt documentation to all
+	the new features.
+
+2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Florin-Viorel Petrov
+	Patch #6236: Improving _delay_us and _delay_ms
+	* include/util/delay.h: Provide fallback functionality
+	to extend the possible argument range to _delay_us(),
+	and _delay_ms(), respectively.
+
+2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Cliff Lawson and Carlos Lamas:
+	Patch #5343: Add a util/setbaud.h "helper" file
+	* include/util/setbaud.h: New file.
+	* include/util/Makefile.am: Include setbaud.h.
+
+2007-10-28 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Dean Camera:
+	Patch #5756: New atomic.h header file
+	* include/util/atomic.h: New file.
+	* include/util/Makefile.am: Include atomic.h.
+
+2007-10-25  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iocanxx.h (OVFG): Define.
+	Closes bug #21434.
+
+2007-10-25  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/io90pwmx.h (AMP0EN, AMP0IS, AMP0G1, AMP0G0, AMP0TS1, 
+	AMP0TS0, AMP1EN, AMP1IS, AMP1G1, AMP1G0, AMP1TS1, AMP1TS0, 
+	ADASCR): Define.
+	Closes bug #20435.
+
+2007-10-25  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/io2313.h (TICIE1): Define.
+	Closes bug #20682.
+
+2007-10-25  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotn13.h (EIN1D): Rename to AIN1D.
+	Closes bug #21411.
+
+2007-10-24  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Add Lockbits API. Set the lockbits from within the application.
+	* include/avr/Makefile.am: Add new file to distribution.
+	* include/avr/io.h: Include new lock.h file.
+	* include/avr/iom128.h: Add definitions for API.
+	* include/avr/iom48.h: Ditto.
+	* include/avr/iom88.h: Ditto.
+	* include/avr/iom168.h: Ditto.
+	* include/avr/lock.h: New file.
+
+2007-10-23 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add new devices: ATmega48P/88P/168P/328P.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom168p.h: New file.
+	* include/avr/iom328p.h: New file.
+	* include/avr/iom48p.h: New file.
+	* include/avr/iom88p.h: New file.
+	* include/avr/iomx8p.h: New file.
+	* NEWS: Add devices to list.
+
+2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #21174: assembly error with targets at90s1200, attiny11,
+	attiny12, and attiny28
+	* crt1/gcrt1.S: for assembly-only architectures, revert to the
+	old behaviour of jumping to main() rather than calling it, and
+	jumping to exit() afterwards.
+
+2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix for bug #18964: USART definitions *wrong* in iocanxx.h
+	* include/avr/iocanxx.h: Add missing SIG_USART* vector names.
+
+2007-10-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Guohui Wang <info@Atmanecl.net>:
+	Fix for bug #20843: Mega 2561 library
+	* crt0/gcrt0.S: initialize EIND for avr6 architectures to
+	the same segment __vectors belongs to.
+
+2007-10-19  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* configure.ac: Add new devices: AT90PWM2B, AT90PWM3B.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/io90pwm2b.h: New file.
+	* include/avr/io90pwm3b.h: New file.
+	* NEWS: Add devices to list.
+
+2007-10-19  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Fix for Atmel bug #6346.
+	* include/avr/iom8515.h: Add USART* interrupt vector names to
+	correctly reflect the device XML file.
+
+2007-10-10  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Resolve bug #21299: Duplicate register address in iotn48.h.
+	* include/avr/iotn48.h: Fix PRR address.
+	* NEWS: Update fixed bug list.
+
+2007-10-08  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* include/avr/io90pwm216.h: Add fuse information.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/iotn43u.h: Ditto.
+
+2007-10-08  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Add new device: ATtiny48.
+	* configure.ac: Add new devices.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iotn48.h: New file.
+	* NEWS: Update new devices list.
+
+2007-10-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Resolve bug #21228: Missing 3rd clause in BSD license in
+	documentation pages
+	* doc/api/main_page.dox: Add clause #3.
+	* doc/api/using-tools.dox: Add clause #3.
+
+2007-10-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Unbreak the documentation build for recent versions of doxygen.
+	NB: the latex package "urc" must be installed in order to
+	successfully build the documentation.
+
+	* doc/api/doxygen.config.in: Update for doxygen 1.5.x.  Most of
+	the changes have been generated by running doxygen -u.  In
+	addition, the input encoding has been changed to iso-8859-1
+	because this matches our current documentation.
+	* doc/api/overview.dox: Fix two illegal special characters that
+	were not part of ISO8859-1.
+
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Add new device: ATtiny43U.
+	* configure.ac: Add new device.
+	* devtools/gen-avr-lib-tree.sh: ditto.
+	* include/avr/Makefile.am: ditto.
+	* include/avr/io.h: ditto.
+	* include/avr/power.h: ditto.
+	* doc/api/using-tools.dox: ditto.
+	* doc/api/main_page.dox: ditto.
+	* include/avr/iotn43u.h: New file.
+	* NEWS: Update new devices list.
+
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Optimize for space for all devices.
+
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	The start of a Fuse API.
+	* include/avr/fuse.h: New file.
+	* include/avr/io.h: Add inclusion of fuse.h.
+	* include/avr/Makefile.am: Add fuse.h to distribution list.
+	* include/avr/iom128.h: Add fuse information to ATmega128 IO header.
+
+2007-10-03  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* doc/api/main_page.dox: Reorganize and update device listing.
+	Fix spelling and grammar.
+
+2007-10-02  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* doc/api/pgmspace.dox: Fix example code. Change description to match.
+	* NEWS: Update fixed bugs list.
+	Fixes bug #21183.
+
+2007-10-01  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	Add new devices: AT90PWM216, AT90PWM316, with contributions from 
+	Tobias Frost <tobi@coldtobi.de>.
+	* devtools/gen-avr-lib-tree.sh: Add new devices.
+	* configure.ac: ditto.
+	* doc/api/using-tools.dox: ditto.
+	* include/avr/Makefile.am: ditto.
+	* include/avr/power.h: ditto.
+	* include/avr/wdt.h: ditto.
+	* include/avr/io.h: ditto.
+	* include/avr/io90pwm216.h: New file.
+	* include/avr/io90pwm316.h: New file.
+	* NEWS: Update new devices list.
+
+2007-07-30  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	*include/avr/Makefile.am: Add missing common.h to install list.
+
+2007-07-09  Eric B. Weddington  <eweddington@cso.atmel.com>
+
+	* doc/api/inline_asm.dox: Document new constraints.
+
+2007-07-06 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/faq.dox: Add FAQ for soft reset.
+
+2007-07-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function alloca(). Fix savannah bug #19686: alloca
+	declaration missing.
+	* include/alloca.h: New file.
+	* include/Makefile.am: Add alloca.h file.
+	* doc/api/doxygen.config.in: Add alloca.h file.
+	* tests/simulate/other: New directory.
+	* tests/simulate/other/alloc.c: New file.
+	* tests/simulate/runtest.sh: Add other directory to the test list.
+
+2007-06-27 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/power.h: Add support for ATmega644P.
+	* NEWS: Add item to fixed bug list.
+	Fixes bug #20276.
+
+2007-06-08 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/common.h: New file.
+	* include/avr/io.h: Move definitions to common.h. Fix documentation.
+	* common/macros.inc: Use new common register definitions.
+	* crt1/gcrt1.S: Use new common register definitions.
+	* include/avr/iomxx0_1.h: Define EIND as normal without conditional
+	  compilation.
+	* libc/stdlib/stdlib_private.h: Use new common register definitions.
+	* doc/api/doxygen.config.in: Add avr/io.h back into the documentation list.
+	* libc/stdlib/setjmp.S: Use new common register definitions.
+
+2007-05-29 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* Makefile.am: Add ChangeLog-2006 to distribution list.
+
+2007-05-29 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* configure.ac: Revert patch and add devices back into avr2 group.
+	This allows avr-libc to work with previous versions of GCC.
+	* devtools/gen-avr-lib-tree.sh: ditto.
+
+2007-05-22 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Replace awk with cut, which speeds
+	up the script. Remove devices in avr2 group that have been moved
+	to the avr25 group.
+	* configure.ac: Remove devices in avr2 group that have been moved
+	to the avr25 group.
+
+2007-05-21 Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/tools-install.dox: Add documentation on how to build the 
+	toolchain under Windows. Fix for bug #19496.
+	* doc/api/acknowledge.dox: Typo, email address, and add missing clause.
+	* NEWS: Add to bugs fixed list.
+
+2007-05-15 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* xml/Atmel2libc.py: Catch (and ignore) errors resulting from
+	empty IO register declarations in the Atmel files, as e.g. for
+	MCUCR in AT86RF401.
+	* xml/patch-headers.py: Add all the new devices we do support
+	now.
+	* doc/api/vectortable.dox: Regenerate.
+	* doc/api/Makefile.am: add vectortable.dox.
+	* include/avr/iotnx4.h: Sigh.  AVR Studio 4.13 gratuitously
+	renamed a number of interrupt vectors for ATtinyX4 devices.
+	Add these new declarations along with the older ones.
+
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: bump version date.
+
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/rel-method.dox: configure.in -> configure.ac
+
+2007-05-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* common/Makefile.am: Fix file locations for automake so
+	"make distcheck" will compile again.
+	* libc/stdio/Files.am: (Ditto.)
+	* libc/stdlib/Files.am: (Ditto.)
+
+2007-05-13 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #19009: Make <util/delay.h> issue a warning when optimizations
+	are turned off
+	* include/util/delay.h: Split the basic delay functions off into
+	<util/delay_basic.h>; issue a warning when this file is compiled
+	without optimization.
+	* include/util/delay_basic.h: (New file.)
+	* include/util/Makefile.am: add delay_basic.h
+
+2007-05-13  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iousbxx6_7.h: Change PORTxy to Pxy.
+
+2007-05-13 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the ATmega8HVA/16HVA support.
+	* devtools/gen-avr-lib-tree.sh: Add support for ATmega8HVA/16HVA.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iom8hva.h: New file.
+	* include/avr/iom16hva.h: New file.
+	* include/avr/iomxxhva.h: New file.
+	* include/avr/Makefile.am: Include new files.
+	* doc/api/main_page.dox: Document support for ATmega8HVA/16HVA.
+	* doc/api/using-tools.dox: (Ditto.)
+
+2007-05-12  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iousbxx2.h: Change PORTxy to Pxy.
+
+2007-05-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #19445: _malloc_heap_end does not follow _heap_end on m2561
+	* doc/api/malloc-std.fig: Clearly distinguish library-internal
+	variables from absolute symbols added by the linker.
+	* doc/api/malloc-x1.fig: (Ditto.)
+	* doc/api/malloc-x2.fig: (Ditto.)
+
+2007-05-09 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #19841: Error building 1.4 HEAD: undefined reference to 'exit'
+	* doc/api/Makefile.am (DEMO_LIBS): add exit.o to the list of files to
+	link the demo against.
+
+2007-05-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix bug #19050: gcrt1.S should call main rather than jumping to it
+	* crt1/gcrt1.S: call main() rather than jumping to it, and then
+	jump to exit().
+
+2007-05-07  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add 'avr25' architecture.
+	* devtools/gen-avr-lib-tree.sh (AVR_ARH_INFO): Ditto.
+	(AVR25_DEV_INFO): New.
+	* doc/api/using-tools.dox: Document 'avr25'.
+
+2007-05-06  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix bug #19666:
+	* include/avr/io90pwmx.h: Add ADHSM, ADTS3 bits to the ADCSRB register.
+
+2007-05-05  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/examples/asmdemo/asmdemo.dox: Fix HTML code in source code links.
+
+2007-05-05  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	Fix bug #19495.
+	* include/avr/interrupt.h: Fix doxygen stuff, whitespace, remove unused
+	C++ stuff at the end.
+	* NEWS: Update bugs fixed.
+
+2007-05-02  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/overview.dox: Fix typos, grammar, names.
+	* doc/api/inline_asm.dox: Expand title name back to the original title.
+
+2007-04-27  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Move AT90USB82 device to 'avr5' architecture.
+	* devtools/gen-avr-lib-tree.sh: (Ditto.).
+	* doc/api/using-tools.dox: (Ditto.).
+	* include/avr/iousbxx2.h (_VECTORS_SIZE): Redefine for AT90USB82.
+
+2007-04-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/io90pwm3.h: Change bit 2 of PLLCSR from
+	PCKE to PLLF.
+	Fixes savannah bug #19650: avr-libc: wrong named bit in SFR of AT90PWMx
+
+2007-04-05  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/malloc.dox: Change title and reorder sentences in Introduction.
+
+2007-03-30  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* include/avr/io2343.h: Add missing bit definitions for MCUSR.
+	Fixes WinAVR feature request #1657218.
+
+2007-03-30  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/ctype.S: Fix bug #19281: isblank('\v') return TRUE:
+	mismatch to C99
+
+2007-03-29  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/doxygen.config.in (INPUT): Add new file to list. Reorder list.
+	* doc/api/pgmspace.dox (new file): New chapter. Data in Program Space.
+	* doc/api/library.dox (new file): New chapter. How to Create a Library.
+	* doc/api/porting.dox: Rewrote the introduction for better flow.
+	* doc/api/Makefile.am (EXTRA_DIST): Add new .dox file.
+	* include/avr/pgmspace.h: Change title of documentation.
+	* doc/api/interrupts.dox: Fix typo. Add missing 3rd clause to license.
+
+2007-03-28  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/doxygen.config.in (INPUT): Add new file to list. Reorder.
+	* doc/api/overview.dox (new file): New chapter. Overview of toolchain.
+	* doc/api/Makefile.am (EXTRA_DIST): Add the two new .dox files.
+
+2007-03-28 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the AT90USB82/162 support.
+	* devtools/gen-avr-lib-tree.sh: Add support for AT90USB82/162.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iousb82.h: New file.
+	* include/avr/iousb162.h: New file.
+	* include/avr/iousbxx2.h: New file.
+	* include/avr/Makefile.am: Include new files.
+	* doc/api/main_page.dox: Document support for AT90USB82/162.
+	* doc/api/using-tools.dox: (Ditto.)
+
+2007-03-26  Eric B. Weddington <eweddington@cso.atmel.com>
+
+	* doc/api/doxygen.config.in (INPUT): Change order of documentation pages.
+	* doc/api/dox_html_header: Change order of header links. Change
+	Additional Documentation to User Manual.
+	* doc/api/porting.dox (new file): New chapter. Porting from IAR to AVR GCC.
+	Adapted, with permission, from a document written by Eivind Sivertsen.
+
+2007-03-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/atoi.S: Exclude the '!=' operator from GAS expression
+	to comport with the old GAS versions (less than 2.17).
+	* libc/stdlib/atol.S: (Ditto.)
+	* libc/string/strcasestr.S: (Ditto.)
+
+2007-03-17  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix bug #19280: snprintf(s,0,fmt,...) write to foreign memory: s[-1]
+	* libc/stdio/snprintf.c: Add check of 'f.size >= 0' before writing
+	of terminating zero. Use f.len as number of output symbols. Remove
+	include of "stdio_private.h" as noused (after moving FILE decl.).
+	* libc/stdio/snprintf_p.c: (Ditto.)
+	* libc/stdio/vsnprintf.c: (Ditto.)
+	* libc/stdio/vsnprintf_p.c: (Ditto.)
+	* tests/simulate/printf/snprintf_all-P.c: New file.
+	* tests/simulate/printf/snprintf_all.c: New file.
+	* tests/simulate/printf/vsnprintf_all-P.c: New file.
+	* tests/simulate/printf/vsnprintf_all.c: New file.
+	* tests/simulate/regression/bug-19280.c: New file.
+
+	* tests/simulate/regression/bug-19281.c: New file.
+
+2007-03-11  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Has partially restored former (avr-libc 1.4 and early) behaviour
+	at mistakes in a format string. Processing will be stopped (as in
+	last versions),	but return value will be 'len', not EOF. This is
+	more clean behavior. (In comparison, Glibc's printf() return -1 if
+	there is nothing specificator and continue work for other mistakes.)
+	Note, snprintf() function (all 4 variants) has an error, which
+	activates if vfprintf() returns EOF.
+	* libc/stdio/vfprintf.c: Return EOF only if file is not open for
+	writing, return 'len' for all other cases.
+	* include/stdio.h: Update doc about return value.
+	* tests/simulate/printf/sprintf-inv.c: Update.
+	* tests/simulate/printf/sprintf_min-inv.c: Update.
+
+2007-03-10  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Rewrite the PRINTF_MIN part of vfprintf() function to reduce size
+	and increase speed. Other parts (STD and FLT) was rewriten at
+	begin of Feb 2007.
+	* libc/stdio/vfprintf.c: Rewrite the PRINTF_MIN part. Make a few of
+	small size improvements in second (PRINTF_LEVEL > PRINTF_MIN) part.
+	
+	* include/stdio.h: Update the DOXYGEN description of vfprintf().
+
+	* tests/simulate/printf/{sprintf_min-1.c,sprintf_min-2.c,
+	sprintf_min-3.c,sprintf_min-4.c,sprintf_min-5.c,sprintf_min-int.c,
+	sprintf_min-inv.c,sprintf_std-int.c,sprintf_std-inv.c}: New files.
+	* tests/simulate/printf/sprintf_flt-big.c: Remove 'strlen_P'
+	definition, as it is defined in progmem.h .
+	* tests/simulate/progmem.h: Simplify the emulated function defines.
+	* tests/simulate/runtest.sh: Add a possibility to operate a variety
+	of printf variants: min, std, flt. Add the 'printf' directory to
+	the default source list.
+
+2007-03-08  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function (and progmem variant) memmem().
+	* libc/string/memmem.S: New file.
+	* libc/string/memmem_P.S: New file.
+	* include/string.h: Add new function definition: memmem().
+	* include/avr/pgmspace.h: Add new function definition: memmem_P().
+	* libc/string/Files.am: Add new sources: memmem.S, memmem_P.S
+	* tests/simulate/pmstring/memmem_P.c: New file.
+	* tests/simulate/string/memmem.c: New file.
+	
+	* libc/pmstring/strstr_P.S: Optimize: reduce size by 1..2 words.
+	* libc/string/strstr.S: (Ditto.)
+
+2007-03-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function (and progmem variant) strcasestr().
+	* libc/string/strcasestr.S: New file.
+	* libc/string/strcasestr_P.S: New file. As it includes the
+	strcasestr.S, this source is placed into `string' directory to avoid
+	a cross-directory link. Doxygen result is normal.
+	* include/string.h: Add new function definition: strcasestr().
+	* include/avr/pgmspace.h: Add new function definition: strcasestr_P().
+	* libc/string/Files.am: Add new sources: strcasestr.S, strcasestr_P.S
+	* tests/simulate/pmstring/strcasestr_P.c: New file.
+	* tests/simulate/string/strcasestr.c: New file.
+
+2007-03-03  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* common/asmdef.h: New file. This file is intended for use in asm
+	sources instead of 'macros.inc'. Last clings a huge chain of
+	dependences, that very much complicates writing/debugging new
+	functions outside of an infrastructure of library. I think, some
+	time both of these files will exist independently.
+
+	* libc/pmstring/memrchr_P.S: New file.
+	* libc/pmstring/strchrnul_P.S: New file.
+	* include/avr/pgmspace.h: Add new function definitions: memrchr_P(),
+	strchrnul_P().
+	* libc/pmstring/Files.am: Add new sources: memrchr_P.S, strchrnul_P.S
+	* tests/simulate/pmstring/memrchr_P.c: New file.
+	* tests/simulate/pmstring/strchrnul_P.c: New file.
+
+	* libc/string/memrchr.S: New file.
+	* libc/string/strchrnul.S: New file.
+	* include/string.h: Add new function definitions: memrchr(),
+	strchrnul().
+	* libc/string/Files.am: Add new sources: memrchr.S, strchrnul.S
+	* tests/simulate/string/memrchr.c: New file.
+	* tests/simulate/string/strchrnul.c: New file.
+
+2007-03-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/pmstring/strsep_P.S: New file.
+	* include/avr/pgmspace.h: Add new function definition: strsep_P().
+	* libc/pmstring/Files.am: Add new source: strsep_P.S
+	* tests/simulate/pmstring/strsep_P.c: New file.
+
+	* libc/string/strsep.S: Optimize size and speed.
+	* tests/simulate/string/strsep.c: New file.
+
+	* libc/pmstring/memcmp_P.S: Emphasize args names in DOXYGEN comment.
+	Move all CPP operators outside from the DOXYGEN scope.
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strchr_P.S: (Ditto.)
+	* libc/pmstring/strcmp_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+	* libc/pmstring/strstr_P.S: (Ditto.)
+	* libc/string/strcasecmp.S: (Ditto.)
+	* libc/string/strchr.S: (Ditto.)
+	* libc/string/strcmp.S: (Ditto.)
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/string/strstr.S: (Ditto.)
+
+2007-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add a few new functions and progmem mirrors:
+	* libc/pmstring/memchr_P.S: New file.
+	* libc/pmstring/strcspn_P.S: New file.
+	* libc/pmstring/strrchr_P.S: New file.
+	* libc/pmstring/strspn_P.S: New file.
+	* libc/string/strcspn.S: New file.
+	* libc/string/strspn.S: New file.
+	* libc/pmstring/Files.am: Add new sources: memchr_P.S, strcspn_P.S,
+	strrchr_P.S, strspn_P.S
+	* libc/string/Files.am: Add new sources: strcspn.S, strspn.S
+	* include/string.h: Add new function definitions: strcspn(),
+	strspn().
+	* include/avr/pgmspace.h: Add new function definitions: memchr_P(),
+	strcspn_P(), strrchr_P(), strspn_P().
+	* tests/simulate/pmstring/memchr_P.c: New file.
+	* tests/simulate/pmstring/strcspn_P.c: New file.
+	* tests/simulate/pmstring/strrchr_P.c: New file.
+	* tests/simulate/pmstring/strspn_P.c: New file.
+	* tests/simulate/string/strcspn.c: New file.
+	* tests/simulate/string/strspn.c: New file.
+
+	Optimize a few of string functions:
+	* libc/string/strlwr.S: Optimize size and speed.
+	* libc/string/strrev.S: Optimize speed for strings 4 bytes long
+	and more. Size is the same.
+	* libc/string/strupr.S: Optimize size and speed.
+	* tests/simulate/string/strlwr.c: New file.
+	* tests/simulate/string/strrev.c: New file.
+	* tests/simulate/string/strupr.c: New file.
+
+	Add a few of tests:
+	* tests/simulate/pmstring/strstr_P.c: New file.
+	* tests/simulate/string/memchr.c: New file.
+	* tests/simulate/string/strrchr.c: New file.
+	* tests/simulate/string/strstr.c: New file.
+
+2007-02-27  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add a new (standart) function strpbrk() and a progmem variant.
+	* libc/pmstring/strpbrk_P.S: New file.
+	* libc/string/strpbrk.S: New file.
+	* libc/pmstring/Files.am: Add new source file strpbrk_P.S
+	* libc/string/Files.am: Add new source file strpbrk.S
+	* include/string.h (strpbrk): Add new function definition.
+	* include/avr/pgmspace.h (strpbrk_P): Add new function definition.
+	* tests/simulate/pmstring/strpbrk_P.c: New file.
+	* tests/simulate/string/strpbrk.c: New file.
+
+	Enable use an asm variant of atol(). Correct docs.
+	* include/stdlib.h (atol): Change the definition of function:
+	instead to define inline code which use strtol(), now it is a
+	normal definition of external function. Correct the DOXYGEN comment.
+	* include/stdlib.h (atoi): Correct the DOXYGEN comment, delete
+	a conditional define for DOXYGEN specially.
+	* libc/stdlib/atoi.S: Correct the DOXYGEN comment.
+	* libc/stdlib/atol.S: Correct the DOXYGEN comment.
+
+2007-02-26  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/pmstring/memcmp_P.S: Fix DOXYGEN comment.
+	* libc/pmstring/strchr_P.S: (Ditto.)
+
+2007-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strcasecmp.S: Fix bug #19134: strcasecmp(): result
+	sign is not changed by swaping args.
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+
+	* libc/string/strstr.S: Fix bug #19135: strstr(): `needle' is not
+	always founded. Optimize code.
+	* libc/pmstring/strstr_P.S: (Ditto.)
+
+	* libc/pmstring/memcmp_P.S: New file.
+	* include/avr/pgmspace.h: Add new function memcmp_P().
+	* libc/pmstring/Files.am: Add new source file memcmp_P.S
+
+	* libc/string/strcmp.S: Optimize by 1 word.
+	* libc/pmstring/strcmp_P.S: Optimize by 1 word.
+
+	* tests/simulate/progmem.h: Add strlen_P() and strcmp_P() emulation.
+	* tests/simulate/pmstring/{memcmp_P.c,strcasecmp_P.c,strcmp_P.c,
+	strncasecmp_P.c}:  New files.
+	* tests/simulate/string/{memcmp.c,strcasecmp.c,strcmp.c,
+	strncasecmp.c}: New files.
+
+2007-02-24  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iomxx4.h (SPCR0, SPSR0, SPDR0, SPIE0, SPE0, DORD0, 
+	MSTR0, CPOL0, CPHA0, SPR01, SPR00, SPIF0, WCOL0, SPI2X0): Rename 
+	to SPCR, SPSR, SPDR, SPIE, SPE, DORD, MSTR, CPOL, CPHA, SPR1, SPR0,
+	SPIF, WCOL, SPI2X.
+	(PRR): Define.
+	Closes bug #18903: ATmega644 register definitions for SPI and 
+	PRR (datasheet vs. iom*.h)
+
+2007-02-24 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the ATmega325P, ATmega3250P and 
+	ATmega329P support.
+	* devtools/gen-avr-lib-tree.sh: Add support for ATmega325P, 
+	ATmega3250P and ATmega329P devices.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/iom325.h (BODSE, BODS): Define for ATMega325P.
+	* include/avr/iom3250.h (BODSE, BODS): Define for ATMega3250P.
+	* include/avr/iom329.h (BODSE, BODS, LCDCCD, LCDBD, LCDMDT): Define
+	for ATMega3290P.
+	* doc/api/main_page.dox: Document support for ATmega325P, ATmega3250P
+	and ATmega329P devices.
+	* doc/api/using-tools.dox: (Ditto.)
+
+2007-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/{bug-19134.c,bug-19135.c}: New files.
+
+2007-02-22  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdio/vfprintf.c: Specify behaviour in case of mistakes
+	in a line of a format.
+	* tests/simulate/printf/sprintf-inv.c: New file.
+	* tests/simulate/string/strchr.c: New file.
+	* tests/simulate/pmstring: New directory.
+	* tests/simulate/pmstring/strchr_P.c: New file.
+	* tests/simulate/progmem.h: Add PSTR() emulation.
+	* tests/simulate/runtest.sh: Add pmstring directory into test
+	suite. Correct the return value for internal functions.
+	* libc/string/strchr.S: Reduce program size by 1 word.
+
+2007-02-19  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdio/vfprintf.c: Fix error in __AVR_HAVE_LPMX__ definition.
+	A bit of small space improvements.
+
+2007-02-18  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotnx61.h (PCMSK0): Set address to 0x23.
+	(PCMSK1): Set address to 0x22.
+	Fix bug #19060: PCMSKx registers transposed in header for attinyX61
+
+2007-02-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	STD and FLT vfprintf parts are fully rewriten to reduce size
+	and increase speed. So a set of changes are maiden:
+	* common/ntz.h: New file.
+	* common/ftoa_engine.h: Move from libc/stdlib/.
+	* libc/stdlib/ftoa_engine.h: Move to common/.
+	* libc/pmstring/strchr_P.S: New file.
+	* libc/pmstring/Files.am: Add new source file strchr_P.S
+	* include/avr/pgmspace.h: Add new function strchr_P().
+	* libc/stdio/xtoa_fast.h: New file.
+	* libc/stdio/ultoa_invert.S: New file.
+	* libc/stdio/Files.am: Add new source file ultoa_invert.S
+	* libc/stdio/vfprintf.c: Parts STD and FLT are fully rewriten.
+	* tests/simulate/printf: New directory.
+	* tests/simulate/printf/{sprintf-1,sprintf-2,sprintf-3,sprintf-4,
+	sprintf-5,sprintf_flt-big,sprintf_flt-e01,sprintf_flt-f01,
+	sprintf_flt-g01,sprintf_flt-g02,sprintf_flt-nan}.c: New files.
+
+2007-02-07  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/stdlib/{strtoul-1.c,strtoul-2.c,strtoul-3.c,
+	strtoul.h}: New files.
+
+2007-02-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/runtest.sh: Add option to stop after error. Add
+	string/*.c to the list. Compile(): small correction.
+	* tests/simulate/progmem.h: Add memcpy_P emulation.
+	* tests/simulate/stdlib/{atol-2,bsearch-1,bsearch-2,bsearch-3,
+	dtostre-01,dtostre-02,dtostre-03,dtostre-04,dtostre-05,dtostre-06,
+	dtostre-expm00,dtostre-minmax,dtostre-nans,dtostre-subnrm,
+	dtostre-zero,dtostrf-01,dtostrf-big,dtostrf-minmax,dtostrf-nans,
+	dtostrf-round,dtostrf-width,strtol-1,strtol-2,strtol-3,
+	strtol-4}.c: New files.
+	* tests/simulate/string: New directory.
+	* tests/simulate/string/{ffs-1,ffsl-1,ffsll-1}.c: New files.
+
+2007-02-05 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox: Add some explanation how to convert raw binary
+	data so they can be linked into the image.
+
+2007-02-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/atoi.S: Fix bug #18899: atoi and atol do not handle
+	vertical tab properly. Reduce program size considarably.
+	* libc/stdlib/atol.S: (Ditto.)
+	
+	* devtools/table.tar.bz2: Remove as a test directory will expanded.
+	
+	* tests/: New directory.
+
+2007-02-03  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iotnx61.h (WGM00, PWM1X) Define.
+	Closes bug #18915: PWM1X Bit missing for ATtiny261/461/861
+
+2007-01-30  Anatoly Sokolov <aesok@post.ru>
+
+	* /doc/api/using-tools.dox: Document GCC macros.
+
+2007-01-27  Anatoly Sokolov <aesok@post.ru>
+
+	* include/avr/iom3290.h (BODSE, BODS, LCDCCD, LCDBD, LCDMDT): Define
+	for ATMega3290P.
+	* include/avr/iom3290p.h: Delete.
+	* include/avr/Makefile.am (avr_HEADERS): Delete iom3290p.h.
+	* include/avr/io.h: Include iom3290.h instead iom3290p.h.
+
+2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/assert.h: Add \file doxygen directive.
+	* include/ctype.h: (Ditto.)
+	* include/errno.h: (Ditto.)
+	* include/inttypes.h: (Ditto.)
+	* include/math.h: (Ditto.)
+	* include/setjmp.h: (Ditto.)
+	* include/stdint.h: (Ditto.)
+	* include/stdio.h: (Ditto.)
+	* include/stdlib.h: (Ditto.)
+	* include/string.h: (Ditto.)
+	* include/avr/boot.h: (Ditto.)
+	* include/avr/eeprom.h: (Ditto.)
+	* include/avr/interrupt.h: (Ditto.)
+	* include/avr/io.h: (Ditto.)
+	* include/avr/pgmspace.h: (Ditto.)
+	* include/avr/power.h: (Ditto.)
+	* include/avr/sleep.h: (Ditto.)
+	* include/avr/wdt.h: (Ditto.)
+	* include/util/crc16.h: (Ditto.)
+	* include/util/delay.h: (Ditto.)
+	* include/util/parity.h: (Ditto.)
+	* include/util/twi.h: (Ditto.)
+	* libc/pmstring/memcpy_P.S: (Ditto.)
+	* libc/pmstring/strcasecmp_P.S: (Ditto.)
+	* libc/pmstring/strcat_P.S: (Ditto.)
+	* libc/pmstring/strcmp_P.S: (Ditto.)
+	* libc/pmstring/strcpy_P.S: (Ditto.)
+	* libc/pmstring/strlcat_P.S: (Ditto.)
+	* libc/pmstring/strlcpy_P.S: (Ditto.)
+	* libc/pmstring/strlen_P.S: (Ditto.)
+	* libc/pmstring/strncasecmp_P.S: (Ditto.)
+	* libc/pmstring/strncat_P.S: (Ditto.)
+	* libc/pmstring/strncmp_P.S: (Ditto.)
+	* libc/pmstring/strncpy_P.S: (Ditto.)
+	* libc/pmstring/strnlen_P.S: (Ditto.)
+	* libc/pmstring/strstr_P.S: (Ditto.)
+	* libc/stdio/fdevopen.c: (Ditto.)
+	* libc/stdlib/atoi.S: (Ditto.)
+	* libc/stdlib/atol.S: (Ditto.)
+	* libc/string/ffs.S: (Ditto.)
+	* libc/string/ffsl.S: (Ditto.)
+	* libc/string/ffsll.S: (Ditto.)
+	* libc/string/memccpy.S: (Ditto.)
+	* libc/string/memchr.S: (Ditto.)
+	* libc/string/memcmp.S: (Ditto.)
+	* libc/string/memcpy.S: (Ditto.)
+	* libc/string/memmove.S: (Ditto.)
+	* libc/string/memset.S: (Ditto.)
+	* libc/string/strcasecmp.S: (Ditto.)
+	* libc/string/strcat.S: (Ditto.)
+	* libc/string/strchr.S: (Ditto.)
+	* libc/string/strcmp.S: (Ditto.)
+	* libc/string/strcpy.S: (Ditto.)
+	* libc/string/strlcat.S: (Ditto.)
+	* libc/string/strlcpy.S: (Ditto.)
+	* libc/string/strlen.S: (Ditto.)
+	* libc/string/strlwr.S: (Ditto.)
+	* libc/string/strncasecmp.S: (Ditto.)
+	* libc/string/strncat.S: (Ditto.)
+	* libc/string/strncmp.S: (Ditto.)
+	* libc/string/strncpy.S: (Ditto.)
+	* libc/string/strnlen.S: (Ditto.)
+	* libc/string/strrchr.S: (Ditto.)
+	* libc/string/strrev.S: (Ditto.)
+	* libc/string/strsep.S: (Ditto.)
+	* libc/string/strstr.S: (Ditto.)
+	* libc/string/strtok_r.S: (Ditto.)
+	* libc/string/strupr.S: (Ditto.)
+	* doc/api/dox_html_header: Include reference to alphabetical
+	globals list, collected from all files that have \file.
+	* doc/api/dox.css: Update for doxygen version 1.4.7.
+
+2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Various documentation fixes.
+	* xml/patch-headers.py: Update for new devices.
+	* doc/api/vectortable.dox: Regenerate from patch-headers.py.
+	Closes bug #18686: AT90USB**** devices are absent in
+	interrupt-verctor-names table
+	* include/stdlib.h: Fix doxygen generation for dtostr*()
+	functions.
+	Closes bug #18726: the dtostrf function description is missing
+	in AVR-Libc's webpage
+	* doc/api/faq.dox: Resolve some doxygen warnings.
+	* doc/examples/asmdemo/asmdemo.dox: (Ditto.)
+	* doc/examples/demo/demo.dox: (Ditto.)
+
+2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Cosmetic/white space change only:
+	* include/avr/iocanxx.h: Regenerate vector table from script.
+	* include/avr/iom406.h: (Ditto.)
+	* include/avr/iomxx4.h: (Ditto.)
+	* include/avr/iotn2313.h: (Ditto.)
+	* include/avr/iousbxx6_7.h: (Ditto.)
+
+2007-01-23 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* LICENSE: Update copyright year.
+	* doc/api/main_page.dox: Include copyright notice into
+	documentation.
+
+2007-01-21 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iomxx4.h: Clarify a confusing comment that all the
+	picopower devices covered by this file feature a second USART.
+
+2007-01-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/largedemo/largedemo.c: Port the "largedemo" to
+	the ATtiny2313.
+	* doc/examples/largedemo/largedemo.dox: Describe the ATtiny2313
+	port.
+	* doc/examples/largedemo/Makefile: Add a MCU_TARGET hint for
+	the ATtiny2313.
+
+2007-01-18 Anatoly Sokolov <aesok@post.ru>
+
+	* common/macros.inc (__AVR_HAVE_MUL__): Define.
+	* libc/misc/mul10.S (__mulhi_const_10): Use __AVR_HAVE_MUL__ instead
+	of __AVR_ENHANCED__.
+
+2007-01-15  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* devtools/table.tar.bz2: New file. This is a test tarball of
+	float point functions, table mode test. This is a temporary
+	variant, so it is a tarball. See 'table/tst-all.sh' for run
+	instruction.
+
+2007-01-14 Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add tests for the AT90PWM1 support.
+	* devtools/gen-avr-lib-tree.sh: Add support for AT90PWM1 device.
+	* include/avr/io.h: (Ditto.).
+	* include/avr/wdt.h: (Ditto.).
+	* include/avr/io90pwm1.h: new file.
+	* include/avr/Makefile.am: include new file.
+	* doc/api/main_page.dox: Document support for AT90PWM1 device.
+	* doc/api/using-tools.dox: (Ditto.)
+
+2007-01-14  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* bootstrap: Version 2.60 for autoconf is added.
+
+	New version of math library:
+	* libm/fplib/{dtostre.S,dtostrf.S,fp_cosinus.S,fp_flashconst.S,
+	fp_inverse.S,fp_m_inf.S,fp_merge.S,fp_p_inf.S,fp_powerseries.S,
+	fp_split.S,fplib.inc,isinfnan.S,readme.dtostre,readme.fplib,
+	readme.strtod,strtod.S}: Removed.
+	* libm/fplib/{asmdef.h,copysign.S,fdim.S,fixsfdi.S,floatdisf.S,
+	floatunsdisf.S,fma.S,fmax.S,fmin.S,fp32def.h,fp_arccos.S,fp_inf.S,
+	fp_mintl.S,fp_mpack.S,fp_negdi.S,fp_norm2.S,fp_powser.S, fp_powsodd.S,
+	fp_pscA.S,fp_pscB.S,fp_rempio2.S,fp_round.S,fp_sinus.S,fp_split3.S,
+	fp_trunc.S,hypot.S,inverse.S,isfinite.S,isinf.S,isnan.S,ntz.h,
+	signbit.S,trunc.S}: New files.
+	* libm/fplib/{Files.am,acos.S,addsf3.S,addsf3x.S,asin.S,atan.S,
+	atan2.S,ceil.S,cos.S,cosh.S,divsf3.S,divsf3x.S,exp.S,fixsfsi.S,
+	floatsisf.S,floor.S,fmod.S,fp_cmp.S,fp_nan.S,fp_zero.S,frexp.S,
+	ldexp.S,log.S,log10.S,modf.S,mulsf3.S,mulsf3x.S,negsf2.S,pow.S,
+	sin.S,sinh.S,sqrt.S,square.S,tan.S,tanh.S}: Replaced.
+	* libc/stdlib/{atof.S,dtoa_conv.h,dtoa_prf.c,dtostre.c,dtostrf.c,
+	ftoa_engine.S,ftoa_engine.h,strtod.c}: New files.
+	* libc/stdlib/Files.am: A set of new files added.
+	* include/math.h: A set of new functions added.
+	* include/stdlib.h (dtostrf): doc is corrected
+
+2007-01-14 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Robert Schiele:
+	* include/stdint.h: Exclude 64-bit types when -mint8 is in effect.
+	* include/avr/pgmspace.h: (Ditto.)
+
+2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/boot.h (boot_lock_bits_set): Fix a typo: BLB11 needs
+	to be programmed (rather than BLB12) in order to prevent the
+	application from overwriting the boot loader section.
+	Closes bug #18115: online documentation typo/bug avr/boot.h
+
+2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/stdio.h: Document that malloc() is no longer needed for
+	floating-point conversions as it once used to be.
+	Closes bug #18688: vfscanf and vfprintf don't use malloc
+
+2007-01-08 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix broken seeding of the PRNGs when seeding with 0.
+	This fix is courtesy Andrew Chernov from the FreeBSD
+	project (rev. 1.21 of their random.c).
+	* libc/stdlib/random.c (do_random): seed with another (arbitrary) value
+	when attempting to seed with 0.
+	* libc/stdlib/rand.c (do_rand): (Ditto.)
+	Closes bug #18662: rand() keeps returning the same value if seeded with 0
+
+For older changes see ChangeLog-2006
