@@ -212,11 +212,11 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Low Fuse Byte */
-#define CKSEL0      ~_BV(0)
-#define CKSEL1      ~_BV(1)
-#define CKSEL2      ~_BV(2)
-#define RSTDISBL    ~_BV(3)
-#define FSTRT       ~_BV(4)
+#define FUSE_CKSEL0      ~_BV(0)
+#define FUSE_CKSEL1      ~_BV(1)
+#define FUSE_CKSEL2      ~_BV(2)
+#define FUSE_RSTDISBL    ~_BV(3)
+#define FUSE_FSTRT       ~_BV(4)
 #define FUSE_DEFAULT (CKSEL0 & CKSEL1)
 
 

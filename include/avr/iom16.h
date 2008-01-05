@@ -576,25 +576,25 @@
 #define FUSE_MEMORY_SIZE 2
 
 /* Low Fuse Byte */
-#define CKSEL0      ~_BV(0)
-#define CKSEL1      ~_BV(1)
-#define CKSEL2      ~_BV(2)
-#define CKSEL3      ~_BV(3)
-#define SUT0        ~_BV(4)
-#define SUT1        ~_BV(5)
-#define BODEN       ~_BV(6)
-#define BODLEVEL    ~_BV(7)
+#define FUSE_CKSEL0      ~_BV(0)
+#define FUSE_CKSEL1      ~_BV(1)
+#define FUSE_CKSEL2      ~_BV(2)
+#define FUSE_CKSEL3      ~_BV(3)
+#define FUSE_SUT0        ~_BV(4)
+#define FUSE_SUT1        ~_BV(5)
+#define FUSE_BODEN       ~_BV(6)
+#define FUSE_BODLEVEL    ~_BV(7)
 #define LFUSE_DEFAULT (CKSEL1 & CKSEL2 & CKSEL3 & SUT0)
 
 /* High Fuse Byte */
-#define BOOTRST     ~_BV(0)
-#define BOOTSZ0     ~_BV(1)
-#define BOOTSZ1     ~_BV(2)
-#define EESAVE      ~_BV(3)
-#define CKOPT       ~_BV(4)
-#define SPIEN       ~_BV(5)
-#define JTAGEN      ~_BV(6)
-#define OCDEN       ~_BV(7)
+#define FUSE_BOOTRST     ~_BV(0)
+#define FUSE_BOOTSZ0     ~_BV(1)
+#define FUSE_BOOTSZ1     ~_BV(2)
+#define FUSE_EESAVE      ~_BV(3)
+#define FUSE_CKOPT       ~_BV(4)
+#define FUSE_SPIEN       ~_BV(5)
+#define FUSE_JTAGEN      ~_BV(6)
+#define FUSE_OCDEN       ~_BV(7)
 #define HFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1 & SPIEN & JTAGEN)
 
 

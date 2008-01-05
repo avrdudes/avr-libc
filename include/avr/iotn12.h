@@ -240,14 +240,14 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Low Fuse Byte */
-#define CKSEL0      ~_BV(0)
-#define CKSEL1      ~_BV(1)
-#define CKSEL2      ~_BV(2)
-#define CKSEL3      ~_BV(3)
-#define RSTDISBL    ~_BV(4)
-#define SPIEN       ~_BV(5)
-#define BODEN       ~_BV(6)
-#define BODLEVEL    ~_BV(7)
+#define FUSE_CKSEL0      ~_BV(0)
+#define FUSE_CKSEL1      ~_BV(1)
+#define FUSE_CKSEL2      ~_BV(2)
+#define FUSE_CKSEL3      ~_BV(3)
+#define FUSE_RSTDISBL    ~_BV(4)
+#define FUSE_SPIEN       ~_BV(5)
+#define FUSE_BODEN       ~_BV(6)
+#define FUSE_BODLEVEL    ~_BV(7)
 #define FUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SPIEN & BODLEVEL)
 
 
