@@ -126,7 +126,7 @@ static __inline__ void timer_enable_int (unsigned char ints)
     \ref attr_interrupt "above".
 */
 
-#if __GNUC__ >= 4 && __GNUC_MINOR__ >= 1
+#if (__GNUC__ == 4 && __GNUC_MINOR__ >= 1) || (__GNUC__ > 4)
 #  define __INTR_ATTRS used, externally_visible
 #else /* GCC < 4.1 */
 #  define __INTR_ATTRS used

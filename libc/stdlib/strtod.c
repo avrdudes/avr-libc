@@ -42,7 +42,7 @@
 /* GCC before 4.2 does not use a library function to convert an unsigned
    long to float.  Instead it uses a signed long to float conversion
    function along with a large inline code to correct the result.	*/
-#if	__GNUC__ <= 4  &&  __GNUC_MINOR__ < 2 
+#if   (__GNUC__ < 4) || (__GNUC__ == 4  &&  __GNUC_MINOR__ < 2)
 extern double __floatunsisf (unsigned long);	/* force library call	*/
 #else
 # define __floatunsisf(v)	(v)		/* is not needed	*/
