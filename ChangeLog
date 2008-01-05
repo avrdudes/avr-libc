@@ -1,3 +1,12 @@
+2008-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix GCC version comparison in preprocessing:
+	* include/compat/deprecated.h: Ditto.
+	* include/avr/interrupt.h: Ditto.
+	* libc/stdlib/strtod.c: Ditto.
+	* tests/simulate/regression/bug-21872-1.c: Ditto.
+	* tests/simulate/regression/bug-21872-2.c: Ditto.
+
 2008-01-04  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/fuse.h: Fix documentation with new fuse definitions.

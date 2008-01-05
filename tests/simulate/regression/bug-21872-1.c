@@ -17,7 +17,7 @@
    avr-gcc 4.1.2 + Avr-libc 1.6.1, after correction:
       MIN_SIZE == 650 --> Fault
       MIN_SIZE == 660 --> OK	*/
-#if	__GNUC__ >= 4 && __GNUC_MINOR__ >= 2
+#if	(__GNUC__ == 4 && __GNUC_MINOR__ >= 2) || (__GNUC__ > 4)
 # define MIN_SIZE 400
 #else
 # define MIN_SIZE 850
