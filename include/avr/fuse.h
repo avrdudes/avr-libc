@@ -89,9 +89,9 @@
     values, logical 1 for an unprogrammed (disabled) bit and logical 0 for a
     programmed (enabled) bit. The defined macros for each individual fuse
     bit represent this in their definition by a bit-wise inversion of a mask.
-    For example, the EESAVE fuse in the ATmega128 is defined as:
+    For example, the FUSE_EESAVE fuse in the ATmega128 is defined as:
     \code
-    #define EESAVE      ~_BV(3)
+    #define FUSE_EESAVE      ~_BV(3)
     \endcode
     \note The _BV macro creates a bit mask from a bit number. It is then 
     inverted to represent logical values for a fuse memory byte.
@@ -99,7 +99,7 @@
     To combine the fuse bits macros together to represent a whole fuse byte,
     use the bitwise AND operator, like so:
     \code
-    (BOOTSZ0 & BOOTSZ1 & EESAVE & SPIEN & JTAGEN)
+    (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN)
     \endcode
     
     Each device I/O header file also defines macros that provide default values
@@ -117,7 +117,7 @@
     FUSES = 
     {
         .low = LFUSE_DEFAULT,
-        .high = (BOOTSZ0 & BOOTSZ1 & EESAVE & SPIEN & JTAGEN),
+        .high = (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN),
         .extended = EFUSE_DEFAULT,
     };
 

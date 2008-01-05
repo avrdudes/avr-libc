@@ -47,29 +47,29 @@
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
-#define CKSEL0 ~_BV(0)  /* Select Clock Source */
-#define CKSEL1 ~_BV(1)  /* Select Clock Source */
-#define CKSEL2 ~_BV(2)  /* Select Clock Source */
-#define CKSEL3 ~_BV(3)  /* Select Clock Source */
-#define SUT0   ~_BV(4)  /* Select start-up time */
-#define SUT1   ~_BV(5)  /* Select start-up time */
-#define CKOUT  ~_BV(6)  /* Clock output */
-#define CKDIV8 ~_BV(7) /* Divide clock by 8 */
+#define FUSE_CKSEL0 ~_BV(0)  /* Select Clock Source */
+#define FUSE_CKSEL1 ~_BV(1)  /* Select Clock Source */
+#define FUSE_CKSEL2 ~_BV(2)  /* Select Clock Source */
+#define FUSE_CKSEL3 ~_BV(3)  /* Select Clock Source */
+#define FUSE_SUT0   ~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1   ~_BV(5)  /* Select start-up time */
+#define FUSE_CKOUT  ~_BV(6)  /* Clock output */
+#define FUSE_CKDIV8 ~_BV(7) /* Divide clock by 8 */
 #define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
 
 /* High Fuse Byte */
-#define BODLEVEL0 ~_BV(0)  /* Brown-out Detector trigger level */
-#define BODLEVEL1 ~_BV(1)  /* Brown-out Detector trigger level */
-#define BODLEVEL2 ~_BV(2)  /* Brown-out Detector trigger level */
-#define EESAVE    ~_BV(3)  /* EEPROM memory is preserved through chip erase */
-#define WDTON     ~_BV(4)  /* Watchdog Timer Always On */
-#define SPIEN     ~_BV(5)  /* Enable Serial programming and Data Downloading */
-#define DWEN      ~_BV(6)  /* debugWIRE Enable */
-#define RSTDISBL  ~_BV(7)  /* External reset disable */
+#define FUSE_BODLEVEL0 ~_BV(0)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL1 ~_BV(1)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL2 ~_BV(2)  /* Brown-out Detector trigger level */
+#define FUSE_EESAVE    ~_BV(3)  /* EEPROM memory is preserved through chip erase */
+#define FUSE_WDTON     ~_BV(4)  /* Watchdog Timer Always On */
+#define FUSE_SPIEN     ~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define FUSE_DWEN      ~_BV(6)  /* debugWIRE Enable */
+#define FUSE_RSTDISBL  ~_BV(7)  /* External reset disable */
 #define HFUSE_DEFAULT (SPIEN)
 
 /* Extended Fuse Byte */
-#define SELFPRGEN ~_BV(0)  /* Self Programming Enable */
+#define FUSE_SELFPRGEN ~_BV(0)  /* Self Programming Enable */
 #define EFUSE_DEFAULT (0xFF)
 
 
