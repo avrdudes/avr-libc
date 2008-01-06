@@ -947,20 +947,20 @@
 #define UBRR0 _SFR_MEM16(0xC4)
 
 #define UBRR0L _SFR_MEM8(0xC4)
-#define UBRR0 0
-#define UBRR1 1
-#define UBRR2 2
-#define UBRR3 3
-#define UBRR4 4
-#define UBRR5 5
-#define UBRR6 6
-#define UBRR7 7
+#define UBRR0_0 0
+#define UBRR0_1 1
+#define UBRR0_2 2
+#define UBRR0_3 3
+#define UBRR0_4 4
+#define UBRR0_5 5
+#define UBRR0_6 6
+#define UBRR0_7 7
 
 #define UBRR0H _SFR_MEM8(0xC5)
-#define UBRR8 0
-#define UBRR9 1
-#define UBRR10 2
-#define UBRR11 3
+#define UBRR0_8 0
+#define UBRR0_9 1
+#define UBRR0_10 2
+#define UBRR0_11 3
 
 #define UDR0 _SFR_MEM8(0xC6)
 #define UDR0_0 0
@@ -1005,20 +1005,20 @@
 #define UBRR1 _SFR_MEM16(0xCC)
 
 #define UBRR1L _SFR_MEM8(0xCC)
-#define UBRR0 0
-#define UBRR1 1
-#define UBRR2 2
-#define UBRR3 3
-#define UBRR4 4
-#define UBRR5 5
-#define UBRR6 6
-#define UBRR7 7
+#define UBRR1_0 0
+#define UBRR1_1 1
+#define UBRR1_2 2
+#define UBRR1_3 3
+#define UBRR1_4 4
+#define UBRR1_5 5
+#define UBRR1_6 6
+#define UBRR1_7 7
 
 #define UBRR1H _SFR_MEM8(0xCD)
-#define UBRR8 0
-#define UBRR9 1
-#define UBRR10 2
-#define UBRR11 3
+#define UBRR1_8 0
+#define UBRR1_9 1
+#define UBRR1_10 2
+#define UBRR1_11 3
 
 #define UDR1 _SFR_MEM8(0xCE)
 #define UDR1_0 0
