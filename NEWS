@@ -7,6 +7,7 @@
   [#21872] __floatunsisf/undisf incorrectly named
   [#21935] Typo in avr-ar example avr-as should be avr-ar
   [#21958] UBRR0/UBRR1 SFR is redefined for ATmegaXX8p and atmega1284p devices
+  [#21962] PSYNC1_0 a PSYNC1_1 bits not defined for AT90PWM3B and AT90PWM316 devices
 
 * Other changes:
 
