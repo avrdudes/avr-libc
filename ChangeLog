@@ -1,8 +1,19 @@
 2008-01-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #21931.
+	* include/avr/iom88.h: Fix fuse definitions.
+	* include/avr/iom168.h: Ditto.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* NEWS: Add to fixed bug list.
+
+2008-01-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #21962.
 	* include/avr/io90pwm3b.h: Fix bit definitions.
 	* include/avr/io90pwm316.h: Ditto.
+    * NEWS: Add to fixed bug list.
 
 2008-01-05  Eric B. Weddington  <eric.weddington@atmel.com>
 
