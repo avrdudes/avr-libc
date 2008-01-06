@@ -217,7 +217,7 @@
 #define FUSE_CKSEL2      ~_BV(2)
 #define FUSE_RSTDISBL    ~_BV(3)
 #define FUSE_FSTRT       ~_BV(4)
-#define FUSE_DEFAULT (CKSEL0 & CKSEL1)
+#define FUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL1)
 
 
 /* Lock Bits */

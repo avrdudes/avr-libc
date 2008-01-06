@@ -1093,7 +1093,7 @@
 #define FUSE_SUT1   ~_BV(5)  /* Select start-up time */
 #define FUSE_CKOUT  ~_BV(6)  /* Clock output */
 #define FUSE_CKDIV8 ~_BV(7)  /* Divide clock by 8 */
-#define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & SUT1 & CKDIV8)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_SUT1 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
 #define FUSE_BOOTRST ~_BV(0)  /* Select Reset Vector */
@@ -1104,7 +1104,7 @@
 #define FUSE_SPIEN   ~_BV(5)  /* Enable Serial programming and Data Downloading */
 #define FUSE_JTAGEN  ~_BV(6)  /* Enable JTAG */
 #define FUSE_OCDEN   ~_BV(7)  /* Enable OCD */
-#define HFUSE_DEFAULT (BOOTSZ0 & SPIEN & JTAGEN)
+#define HFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_SPIEN & FUSE_JTAGEN)
 
 /* Extended Fuse Byte */
 #define FUSE_BODLEVEL0 ~_BV(0)  /* Brown-out Detector trigger level */

@@ -872,7 +872,7 @@
 #define FUSE_SUT1        ~_BV(5)
 #define FUSE_CKOUT       ~_BV(6)
 #define FUSE_CKDIV8      ~_BV(7)
-#define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
 #define FUSE_BOOTRST     ~_BV(0)
@@ -883,7 +883,7 @@
 #define FUSE_SPIEN       ~_BV(5)
 #define FUSE_JTAGEN      ~_BV(6)
 #define FUSE_OCDEN       ~_BV(7)
-#define HFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1 & SPIEN & JTAGEN)
+#define HFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN & FUSE_JTAGEN)
 
 /* Extended Fuse Byte */
 #define FUSE_RSTDISBL    ~_BV(0)

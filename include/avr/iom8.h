@@ -582,7 +582,7 @@
 #define FUSE_SUT1        ~_BV(5)
 #define FUSE_BODEN       ~_BV(6)
 #define FUSE_BODLEVEL    ~_BV(7)
-#define LFUSE_DEFAULT (SUT0 & CKSEL3 & CKSEL2 & CKSEL1)
+#define LFUSE_DEFAULT (FUSE_SUT0 & FUSE_CKSEL3 & FUSE_CKSEL2 & FUSE_CKSEL1)
 
 /* High Fuse Byte */
 #define FUSE_BOOTRST     ~_BV(0)
@@ -593,7 +593,7 @@
 #define FUSE_SPIEN       ~_BV(5)
 #define FUSE_WDTON       ~_BV(6)
 #define FUSE_RSTDISBL    ~_BV(7)
-#define HFUSE_DEFAULT (SPIEN & BOOTSZ1 & BOOTSZ0)
+#define HFUSE_DEFAULT (FUSE_SPIEN & FUSE_BOOTSZ1 & FUSE_BOOTSZ0)
 
 
 /* Lock Bits */

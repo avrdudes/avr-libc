@@ -188,7 +188,7 @@
 /* Fuse Byte */
 #define FUSE_CKSEL       ~_BV(0)
 #define FUSE_SPIEN       ~_BV(5)
-#define FUSE_DEFAULT (SPIEN)
+#define FUSE_DEFAULT (FUSE_SPIEN)
 
 
 /* Lock Bits */
