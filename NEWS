@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
+  [#21869] Multiple defines in iotn2313.h
   [#21872] __floatunsisf/undisf incorrectly named
   [#21935] Typo in avr-ar example avr-as should be avr-ar
   [#21958] UBRR0/UBRR1 SFR is redefined for ATmegaXX8p and atmega1284p devices

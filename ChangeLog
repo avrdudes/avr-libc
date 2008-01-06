@@ -1,5 +1,10 @@
 2008-01-05  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* NEWS: Add bug #21869 to fixed list. This was fixed yesterday
+	with the huge change to the fuse definitions.
+
+2008-01-05  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #21958.
 	* include/avr/iom48p.h: Fix duplicate definitions.
 	* include/avr/iom88p.h: Ditto.
