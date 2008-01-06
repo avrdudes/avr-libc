@@ -744,12 +744,12 @@
 #define FUSE_BOOTSZ1 ~_BV(5)
 #define FUSE_EESAVE  ~_BV(6)
 #define FUSE_WDTON   ~_BV(7)
-#define LFUSE_DEFAULT (SUT0 & BOOTSZ0 & BOOTSZ1)
+#define LFUSE_DEFAULT (FUSE_SUT0 & FUSE_BOOTSZ0 & FUSE_BOOTSZ1)
 
 /* High Fuse Byte */
 #define FUSE_JTAGEN      ~_BV(0)
 #define FUSE_OCDEN       ~_BV(1)
-#define HFUSE_DEFAULT (JTAGEN)
+#define HFUSE_DEFAULT (FUSE_JTAGEN)
 
 
 /* Lock Bits */

@@ -58,7 +58,7 @@
 #define FUSE_SPIEN       ~_BV(5)
 #define FUSE_EESAVE      ~_BV(6)
 #define FUSE_WDTON       ~_BV(7)
-#define FUSE_DEFAULT (SPIEN)
+#define FUSE_DEFAULT (FUSE_SPIEN)
 
 
 /* Lock Bits */

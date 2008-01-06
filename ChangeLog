@@ -1,5 +1,76 @@
 2008-01-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/io90pwm1.h: Fix default fuse definitions.
+	* include/avr/io90pwm216.h: Ditto.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/io90pwmx.h: Ditto.
+	* include/avr/iocan128.h: Ditto.
+	* include/avr/iocan32.h: Ditto.
+	* include/avr/iocan64.h: Ditto.
+	* include/avr/iom128.h: Ditto.
+	* include/avr/iom1280.h: Ditto.
+	* include/avr/iom1281.h: Ditto.
+	* include/avr/iom1284p.h: Ditto.
+	* include/avr/iom16.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom162.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iom164.h: Ditto.
+	* include/avr/iom165.h: Ditto.
+	* include/avr/iom165p.h: Ditto.
+	* include/avr/iom169.h: Ditto.
+	* include/avr/iom169p.h: Ditto.
+	* include/avr/iom16hva.h: Ditto.
+	* include/avr/iom2560.h: Ditto.
+	* include/avr/iom2561.h: Ditto.
+	* include/avr/iom32.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom324.h: Ditto.
+	* include/avr/iom325.h: Ditto.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom329.h: Ditto.
+	* include/avr/iom3290.h: Ditto.
+	* include/avr/iom32hvb.h: Ditto.
+	* include/avr/iom406.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+	* include/avr/iom64.h: Ditto.
+	* include/avr/iom640.h: Ditto.
+	* include/avr/iom644.h: Ditto.
+	* include/avr/iom645.h: Ditto.
+	* include/avr/iom6450.h: Ditto.
+	* include/avr/iom649.h: Ditto.
+	* include/avr/iom6490.h: Ditto.
+	* include/avr/iom8.h: Ditto.
+	* include/avr/iom8515.h: Ditto.
+	* include/avr/iom8535.h: Ditto.
+	* include/avr/iom8hva.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iotn13.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn2313.h: Ditto.
+	* include/avr/iotn24.h: Ditto.
+	* include/avr/iotn25.h: Ditto.
+	* include/avr/iotn26.h: Ditto.
+	* include/avr/iotn261.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+	* include/avr/iotn43u.h: Ditto.
+	* include/avr/iotn44.h: Ditto.
+	* include/avr/iotn45.h: Ditto.
+	* include/avr/iotn461.h: Ditto.
+	* include/avr/iotn48.h: Ditto.
+	* include/avr/iotn84.h: Ditto.
+	* include/avr/iotn85.h: Ditto.
+	* include/avr/iotn861.h: Ditto.
+	* include/avr/iotn88.h: Ditto.
+	* include/avr/iousb1286.h: Ditto.
+	* include/avr/iousb1287.h: Ditto.
+
+2008-01-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #21931.
 	* include/avr/iom88.h: Fix fuse definitions.
 	* include/avr/iom168.h: Ditto.

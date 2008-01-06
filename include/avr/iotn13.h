@@ -339,7 +339,7 @@
 #define FUSE_WDTON       ~_BV(5)
 #define FUSE_EESAVE      ~_BV(6)
 #define FUSE_SPIEN       ~_BV(7)
-#define LFUSE_DEFAULT (CKSEL0 & SUT0 & CKDIV8 & SPIEN)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_SUT0 & FUSE_CKDIV8 & FUSE_SPIEN)
 
 /* High Fuse Byte */
 #define FUSE_RSTDISBL    ~_BV(0)

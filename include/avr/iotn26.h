@@ -359,8 +359,8 @@
 #define FUSE_SUT0        ~_BV(4)
 #define FUSE_SUT1        ~_BV(5)
 #define FUSE_CKOPT       ~_BV(6)
-#define FUSE_PLLCK    ~_BV(7)
-#define LFUSE_DEFAULT (CKSEL1 & CKSEL2)
+#define FUSE_PLLCK       ~_BV(7)
+#define LFUSE_DEFAULT (FUSE_CKSEL1 & FUSE_CKSEL2)
 
 /* High Fuse Byte */
 #define FUSE_BODEN       ~_BV(0)
@@ -368,7 +368,7 @@
 #define FUSE_EESAVE      ~_BV(2)
 #define FUSE_SPIEN       ~_BV(3)
 #define FUSE_RSTDISBL    ~_BV(4)
-#define HFUSE_DEFAULT (SPIEN)
+#define HFUSE_DEFAULT (FUSE_SPIEN)
 
 
 /* Lock Bits */

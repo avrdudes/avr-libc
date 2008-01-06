@@ -316,7 +316,7 @@
 #define FUSE_SPIEN       ~_BV(5)
 #define FUSE_BODEN       ~_BV(6)
 #define FUSE_BODLEVEL    ~_BV(7)
-#define FUSE_DEFAULT (CKSEL0 & CKSEL1 & SPIEN)
+#define FUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL1 & FUSE_SPIEN)
 
 
 /* Lock Bits */

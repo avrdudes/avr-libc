@@ -1170,7 +1170,7 @@
 #define FUSE_SUT1    ~_BV(5)  /* Select start-up time */
 #define FUSE_CKOUT   ~_BV(6) /* Oscillator output option */
 #define FUSE_CLKDIV8 ~_BV(7)  /* Divide clock by 8 */
-#define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 
 /* High Fuse Byte */
@@ -1182,7 +1182,7 @@
 #define FUSE_SPIEN     ~_BV(5)  /* Enable Serial programming and Data Downloading */
 #define FUSE_DWEN      ~_BV(6)  /* debugWIRE Enable */
 #define FUSE_RSTDISBL  ~_BV(7)  /* External Reset Disable */
-#define HFUSE_DEFAULT (SPIEN)    
+#define HFUSE_DEFAULT (FUSE_SPIEN)    
 
 
 /* Extended Fuse Byte */
@@ -1193,7 +1193,7 @@
 #define FUSE_PSC0RB  ~_BV(5)  /* PSC0 Reset Behaviour */
 #define FUSE_PSC1RB  ~_BV(6)  /* PSC1 Reset Behaviour */
 #define FUSE_PSC2RB  ~_BV(7)  /* PSC2 Reset Behaviour */
-#define EFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1)
+#define EFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_BOOTSZ1)
 
 
 /* Lock Bits */

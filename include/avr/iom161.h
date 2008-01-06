@@ -654,7 +654,7 @@
 #define FUSE_SUT         ~_BV(4)
 #define FUSE_SPIEN       ~_BV(5)
 #define FUSE_BOOTRST     ~_BV(6)
-#define FUSE_DEFAULT (CKSEL0 & CKSEL2 & SPIEN)
+#define FUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_SPIEN)
 
 
 /* Lock Bits */

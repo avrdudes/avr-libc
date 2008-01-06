@@ -258,7 +258,7 @@
 #define FUSE_CKSEL2      ~_BV(2)
 #define FUSE_CKSEL3      ~_BV(3)
 #define FUSE_INTCAP      ~_BV(4)
-#define FUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3)
+#define FUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3)
 
 
 /* Lock Bits */

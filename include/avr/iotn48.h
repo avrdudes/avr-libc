@@ -738,7 +738,7 @@
 #define FUSE_CKSEL2 ~_BV(2) /* Select Clock Source */
 #define FUSE_CKSEL1 ~_BV(1) /* Select Clock Source */
 #define FUSE_CKSEL0 ~_BV(0) /* Select Clock Source */
-#define LFUSE_DEFAULT (CKSEL0 & CKSEL2 & CKSEL3 & SUT0 & CKDIV8)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
 #define FUSE_BODLEVEL0   ~_BV(0) /* Brown-out Detector trigger level */
@@ -749,7 +749,7 @@
 #define FUSE_SPIEN       ~_BV(5) /* Enable Serial programming and Data Downloading */
 #define FUSE_DWEN        ~_BV(6) /* debugWIRE Enable */
 #define FUSE_RSTDISBL    ~_BV(7) /* External reset disable */
-#define HFUSE_DEFAULT (SPIEN)    
+#define HFUSE_DEFAULT (FUSE_SPIEN)    
 
 /* Extended Fuse Byte */
 #define FUSE_SELFPRGEN   ~_BV(0) /* Self Programming Enable */
