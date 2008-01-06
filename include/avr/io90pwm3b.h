@@ -978,8 +978,8 @@
 #define PSOC1 _SFR_MEM8(0xE0)
 #define POEN1A 0
 #define POEN1B 2
-#define PSYNC1 4
-#define PSYNC1 5
+#define PSYNC1_0 4
+#define PSYNC1_1 5
 
 #define OCR1SA _SFR_MEM16(0xE2)
 
