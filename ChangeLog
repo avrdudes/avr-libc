@@ -1,3 +1,12 @@
+2008-01-05  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21958.
+	* include/avr/iom48p.h: Fix duplicate definitions.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom1284p.h: Ditto.
+
 2008-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix GCC version comparison in preprocessing:
