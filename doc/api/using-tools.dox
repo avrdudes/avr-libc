@@ -148,7 +148,7 @@ AVR will be defined as well when using the standard levels gnu89
   <p>
   [1] New in GCC 4.2<BR>
   [2] Unofficial patch for GCC 4.1<BR>
-  [3] New in GCC 4.3 
+  [3] New in GCC 4.2.3 
   </p>
   </p>
   <p>
@@ -278,7 +278,7 @@ AVR will be defined as well when using the standard levels gnu89
   </p>
   <p>
   [1] 'avr25' architecture is new in GCC 4.2<BR>
-  [1] 'avr35' architecture is new in GCC 4.3
+  [2] 'avr35' architecture is new in GCC 4.2.3
   </p>
 
 - \c -morder1
