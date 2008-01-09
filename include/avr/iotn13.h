@@ -259,7 +259,7 @@
 
 /* General Interrupt Flag Register */
 #define GIFR                 _SFR_IO8(0x3a)
-#  define INF0                 6
+#  define INTF0                6
 #  define PCIF                 5
 
 /* General Interrupt MaSK register */

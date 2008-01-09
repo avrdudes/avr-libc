@@ -1,3 +1,8 @@
+2007-01-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21986.
+	* include/avr/iotn13.h: Fix bit definition.
+
 2007-01-07  Anatoly Sokolov <aesok@post.ru>
 
 	* doc/api/using-tools.dox: Fix GCC version for 'avr35' architecture.
