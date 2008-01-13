@@ -1,3 +1,13 @@
+2008-01-13  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #21995: pgm_read_xxxx() does not use enhanced LPM
+	instruction.
+	* include/avr/common.h: Restore the __AVR_HAVE_LPMX__ (also
+	__AVR_HAVE_MOVW__, __AVR_HAVE_MUL__) definitions (in case that
+	they are not defined by the compiler).
+	* tests/simulate/regression/bug-21995.c: New file.
+	* NEWS: Add to fixed bug list.
+
 2007-01-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #21986.
