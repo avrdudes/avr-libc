@@ -231,5 +231,24 @@ and families.
 #  define AVR_EXTENDED_INDIRECT_ADDR  _SFR_IO_ADDR(EIND)
 #endif
 
+/*------------ Workaround to old compilers (4.1.2 and earlier)  ------------*/
+
+#ifndef __AVR_HAVE_MOVW__
+# if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+#  define __AVR_HAVE_MOVW__ 1
+# endif
+#endif
+
+#ifndef __AVR_HAVE_LPMX__
+# if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+#  define __AVR_HAVE_LPMX__ 1
+# endif
+#endif
+
+#ifndef __AVR_HAVE_MUL__
+# if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
+#  define __AVR_HAVE_MUL__ 1
+# endif
+#endif
 
 #endif /* _AVR_COMMON_H */
