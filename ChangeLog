@@ -1,3 +1,8 @@
+2008-01-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm2b.h: Add missing EEAR word register.
+	* include/avr/io90pwm3b.h: Ditto.
+
 2008-01-13  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #21995: pgm_read_xxxx() does not use enhanced LPM
