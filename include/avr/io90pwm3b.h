@@ -235,6 +235,8 @@
 #define EEDR6 6
 #define EEDR7 7
 
+#define EEAR _SFR_IO16(0x21)
+
 #define EEARL _SFR_IO8(0x21)
 #define EEARL0 0
 #define EEARL1 1
