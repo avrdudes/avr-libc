@@ -1,3 +1,8 @@
+2008-01-24  Anatoly Sokolov <aesok@post.ru>
+
+	* doc/api/using-tools.dox: Document '__AVR_HAVE_JMP_CALL__' macro.
+	Mark '__AVR_MEGA__' and '__AVR_ENHANCED__' as obsolete. 
+
 2008-01-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/io90pwm2b.h: Add missing EEAR word register.
