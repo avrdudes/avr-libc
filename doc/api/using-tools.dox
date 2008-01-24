@@ -90,7 +90,8 @@ AVR will be defined as well when using the standard levels gnu89
     <td>avr3</td>
     <td>
     __AVR_ARCH__=3<BR>
-    __AVR_MEGA__<BR>
+    __AVR_MEGA__&nbsp;[5]<BR>
+    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
     __AVR_2_BYTE_PC__&nbsp;[2]
     </td>
     <td>"Classic" CPU core, 16 KB to 64 KB of ROM</td>
@@ -99,9 +100,10 @@ AVR will be defined as well when using the standard levels gnu89
     <td>avr31</td>
     <td>
     __AVR_ARCH__=31<BR>
-    __AVR_MEGA__<BR>
-    __AVR_HAVE_RAMPZ__[4]<BR>
-    __AVR_HAVE_ELPM__[4]<BR>
+    __AVR_MEGA__&nbsp;[5]<BR>
+    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
+    __AVR_HAVE_RAMPZ__&nbsp;[4]<BR>
+    __AVR_HAVE_ELPM__&nbsp;[4]<BR>
     __AVR_2_BYTE_PC__&nbsp;[2]
     </td>
     <td>"Classic" CPU core, 128 KB of ROM</td>
@@ -110,7 +112,8 @@ AVR will be defined as well when using the standard levels gnu89
     <td>avr35&nbsp;[3]</td>
     <td>
     __AVR_ARCH__=35<BR>
-    __AVR_MEGA__<BR>
+    __AVR_MEGA__&nbsp;[5]<BR>
+    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
     __AVR_HAVE_MOVW__&nbsp;[1]<BR>
     __AVR_HAVE_LPMX__&nbsp;[1]<BR>
     __AVR_2_BYTE_PC__&nbsp;[2]
@@ -121,7 +124,7 @@ AVR will be defined as well when using the standard levels gnu89
     <td>avr4</td>
     <td>
     __AVR_ARCH__=4<BR>
-    __AVR_ENHANCED__<BR>
+    __AVR_ENHANCED__&nbsp;[5]<BR>
     __AVR_HAVE_MOVW__&nbsp;[1]<BR>
     __AVR_HAVE_LPMX__&nbsp;[1]<BR>
     __AVR_HAVE_MUL__&nbsp;[1]<BR>
@@ -133,14 +136,12 @@ AVR will be defined as well when using the standard levels gnu89
     <td>avr5</td>
     <td>
     __AVR_ARCH__=5<BR>
-    __AVR_MEGA__<BR>
-    __AVR_ENHANCED__<BR>
+    __AVR_MEGA__&nbsp;[5]<BR>
+    __AVR_ENHANCED__&nbsp;[5]<BR>
+    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
     __AVR_HAVE_MOVW__&nbsp;[1]<BR>
     __AVR_HAVE_LPMX__&nbsp;[1]<BR>
     __AVR_HAVE_MUL__&nbsp;[1]<BR>
-    __AVR_HAVE_RAMPZ__[4]<BR>
-    __AVR_HAVE_ELPM__[4]<BR>
-    __AVR_HAVE_ELPMX__[4]<BR>
     __AVR_2_BYTE_PC__&nbsp;[2]
     </td>
     <td>"Enhanced" CPU core, 16 KB to 64 KB of ROM</td>
@@ -149,11 +150,15 @@ AVR will be defined as well when using the standard levels gnu89
     <td>avr51</td>
     <td>
     __AVR_ARCH__=51<BR>
-    __AVR_MEGA__<BR>
-    __AVR_ENHANCED__<BR>
+    __AVR_MEGA__&nbsp;[5]<BR>
+    __AVR_ENHANCED__&nbsp;[5]<BR>
+    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
     __AVR_HAVE_MOVW__&nbsp;[1]<BR>
     __AVR_HAVE_LPMX__&nbsp;[1]<BR>
     __AVR_HAVE_MUL__&nbsp;[1]<BR>
+    __AVR_HAVE_RAMPZ__&nbsp;[4]<BR>
+    __AVR_HAVE_ELPM__&nbsp;[4]<BR>
+    __AVR_HAVE_ELPMX__&nbsp;[4]<BR>
     __AVR_2_BYTE_PC__&nbsp;[2]
     </td>
     <td>"Enhanced" CPU core, 128 KB of ROM</td>
@@ -162,14 +167,15 @@ AVR will be defined as well when using the standard levels gnu89
     <td>avr6&nbsp;[2]</td>
     <td>
     __AVR_ARCH__=6<BR>
-    __AVR_MEGA__<BR>
-    __AVR_ENHANCED__<BR>
+    __AVR_MEGA__&nbsp;[5]<BR>
+    __AVR_ENHANCED__&nbsp;[5]<BR>
+    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
     __AVR_HAVE_MOVW__&nbsp;[1]<BR>
     __AVR_HAVE_LPMX__&nbsp;[1]<BR>
     __AVR_HAVE_MUL__&nbsp;[1]<BR>
-    __AVR_HAVE_RAMPZ__[4]<BR>
-    __AVR_HAVE_ELPM__[4]<BR>
-    __AVR_HAVE_ELPMX__[4]<BR>
+    __AVR_HAVE_RAMPZ__&nbsp;[4]<BR>
+    __AVR_HAVE_ELPM__&nbsp;[4]<BR>
+    __AVR_HAVE_ELPMX__&nbsp;[4]<BR>
     __AVR_3_BYTE_PC__&nbsp;[2]
     </td>
     <td>"Enhanced" CPU core, 256 KB of ROM</td>
@@ -179,7 +185,8 @@ AVR will be defined as well when using the standard levels gnu89
   [1] New in GCC 4.2<BR>
   [2] Unofficial patch for GCC 4.1<BR>
   [3] New in GCC 4.2.3<BR>
-  [4] New in GCC 4.3 
+  [4] New in GCC 4.3<BR>
+  [5] Obsolete.
   </p>
   </p>
   <p>

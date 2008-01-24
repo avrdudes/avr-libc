@@ -1,3 +1,10 @@
+008-01-24  Anatoly Sokolov <aesok@post.ru>
+
+	* doc/api/using-tools.dox: Document '__AVR_HAVE_JMP_CALL__' macro.
+	Mark '__AVR_MEGA__' and '__AVR_ENHANCED__' as obsolete. Remove 
+	'__AVR_HAVE_RAMPZ__', '__AVR_HAVE_ELPM__' and '__AVR_HAVE_ELPMX__' 
+	macros from 'avr5' architecture and add to 'avr51'.
+
 2008-01-23  Anatoly Sokolov <aesok@post.ru>
 
 	* configure.ac: Add 'avr31' and 'avr51' architectures.
