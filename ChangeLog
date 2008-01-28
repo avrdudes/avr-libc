@@ -1,4 +1,11 @@
-008-01-24  Anatoly Sokolov <aesok@post.ru>
+2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/gen-avr-lib-tree.sh (AVR31_DEV_INFO): remove trailing
+	semicolon in last entry.  It caused a blank line following a
+	backslash in lib/avr/avr31/Makefile.am, which made automake issue
+	a warning.
+
+2008-01-24  Anatoly Sokolov <aesok@post.ru>
 
 	* doc/api/using-tools.dox: Document '__AVR_HAVE_JMP_CALL__' macro.
 	Mark '__AVR_MEGA__' and '__AVR_ENHANCED__' as obsolete. Remove 
