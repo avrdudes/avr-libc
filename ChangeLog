@@ -1,5 +1,15 @@
 2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #22153: setjmp.o is wrong in libc.a (1.6.1) for avr's with SPH
+	* include/avr/common.h: Enable default SPL/SPH definitions not
+	when __COMPILING_AVR_LIBC__ is active; interestingly, the comment
+	on the #endif had already been correct but the condition hadn't.
+	While being here, protect default definition for EIND on avr6
+	architectures to just avr-libc compilations (otherwise, it's
+	supposed to come from the real device header).
+
+2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* devtools/gen-avr-lib-tree.sh (AVR31_DEV_INFO): remove trailing
 	semicolon in last entry.  It caused a blank line following a
 	backslash in lib/avr/avr31/Makefile.am, which made automake issue
