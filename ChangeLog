@@ -1,5 +1,9 @@
 2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: bump version.
+
+2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: bump version to release avr-libc 1.4.8.
 
 2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
