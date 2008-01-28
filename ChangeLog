@@ -1,5 +1,9 @@
 2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: bump version to release avr-libc 1.4.8.
+
+2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #22153: setjmp.o is wrong in libc.a (1.6.1) for avr's with SPH
 	* include/avr/common.h: Enable default SPL/SPH definitions not
 	when __COMPILING_AVR_LIBC__ is active; interestingly, the comment
