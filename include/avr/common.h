@@ -72,7 +72,7 @@ for them.
 #  ifndef SPL
 #    define SPL _SFR_IO8(0x3D)
 #  endif
-#  if XRAMEND < 0x100
+#  if XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__)
 #    ifndef SP
 #      define SP  _SFR_IO8(0x3D)
 #    endif
@@ -120,16 +120,14 @@ for them.
 #endif
 
 
+#if defined(__COMPILING_AVR_LIBC__)
+
 /* AVR 6 Architecture */
 #if __AVR_ARCH__ == 6
 #  ifndef EIND
 #    define EIND  _SFR_IO8(0X3C)
 #  endif
 #endif /* __AVR_ARCH__ == 6 */
-
-
-
-#if defined(__COMPILING_AVR_LIBC__)
 
 /*
 Only few devices come without EEPROM.  In order to assemble the
