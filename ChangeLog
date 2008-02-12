@@ -1,3 +1,8 @@
+2008-02-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for Atmel bug #7159.
+	* include/avr/iotn48.h: Fix address of TCCR0A and associated bit names.
+
 2008-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #22016: Typo in iotn2313.h: SIG_OUTPUT_COPMARE0A
