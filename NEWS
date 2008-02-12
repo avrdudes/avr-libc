@@ -11,6 +11,7 @@
   [#21958] UBRR0/UBRR1 SFR is redefined for ATmegaXX8p and atmega1284p devices
   [#21962] PSYNC1_0 a PSYNC1_1 bits not defined for AT90PWM3B and AT90PWM316 devices
   [#21986] Typo in iotn13.h
+  [#22016] Typo in iotn2313.h: SIG_OUTPUT_COPMARE0A
   [#22153] setjmp.o is wrong in libc.a (1.6.1) for avr's with SPH
 
 * Other changes:
