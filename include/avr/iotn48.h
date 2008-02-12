@@ -236,21 +236,11 @@
 #define PSRSYNC 0
 #define TSM 7
 
-#define TCCR0A _SFR_IO8(0x24)
-#define WGM00 0
-#define WGM01 1
-#define COM0B0 4
-#define COM0B1 5
-#define COM0A0 6
-#define COM0A1 7
-
-#define TCCR0B _SFR_IO8(0x25)
+#define TCCR0A _SFR_IO8(0x25)
 #define CS00 0
 #define CS01 1
 #define CS02 2
-#define WGM02 3
-#define FOC0B 6
-#define FOC0A 7
+#define CTC0 3
 
 #define TCNT0 _SFR_IO8(0x26)
 #define TCNT0_0 0

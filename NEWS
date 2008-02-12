@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [#21869] Multiple defines in iotn2313.h
   [#21872] __floatunsisf/undisf incorrectly named
