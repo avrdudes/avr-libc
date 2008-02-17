@@ -1,3 +1,10 @@
+2008-02-17  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add 'avr31' and 'avr51' architectures.
+	* devtools/gen-avr-lib-tree.sh (AVR_ARH_INFO): (Ditto.).
+	(AVR31_DEV_INFO, AVR51_DEV_INFO): New.
+	* doc/api/using-tools.dox: Document 'avr31' and 'avr51'.
+
 2008-02-12  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for Atmel bug #7159.
