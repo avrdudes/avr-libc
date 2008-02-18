@@ -90,7 +90,7 @@ while getopts "a:icg:tTsh" opt ; do
 done
 shift $((OPTIND - 1))
 test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
-		printf/*.c fplib/*.c math/*.c other/*.c"}
+		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c"}
     
 CPPFLAGS="-Wundef -I."
 CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
@@ -172,6 +172,22 @@ Compile ()
 	    libs="$AVRDIR/avr/lib/avr$avrno/libprintf_flt.a $libs"
 	fi
 	;;
+      SC_MIN)
+	flags="$flags -Wl,-u,vfscanf"
+	if [ -z "$AVRDIR" ] ; then
+	    libs="-lscanf_min $libs"
+	else
+	    libs="$AVRDIR/avr/lib/avr$avrno/libscanf_min.a $libs"
+	fi
+	;;
+      SC_FLT)
+	flags="$flags -Wl,-u,vfscanf"
+	if [ -z "$AVRDIR" ] ; then
+	    libs="-lscanf_flt $libs"
+	else
+	    libs="$AVRDIR/avr/lib/avr$avrno/libscanf_flt.a $libs"
+	fi
+	;;
     esac
 
     $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 -o $3 $crt $1 $libs
@@ -213,6 +229,11 @@ for test_file in $test_list ; do
 		    *printf_flt*)	prlist="PR_FLT" ;;
 		    *printf_all*)	prlist="PR_STD PR_FLT PR_MIN" ;;
 		    *printf*)		prlist="PR_STD PR_FLT" ;;
+		    *scanf_min*)	prlist="SC_MIN" ;;
+		    *scanf_std*)	prlist="SC_STD" ;;
+		    *scanf_flt*)	prlist="SC_FLT" ;;
+		    *scanf_brk*)	prlist="SC_STD SC_FLT" ;;
+		    *scanf*)		prlist="SC_STD SC_FLT SC_MIN" ;;
 		    *)			prlist="PR_STD" ;;
 		esac
 		
@@ -221,8 +242,10 @@ for test_file in $test_list ; do
 		    for mcu in $MCU_LIST ; do
 			echo -n "Simulate: $test_file "
 			case $prvers in
-			    PR_MIN)	echo -n "printf_min " ;;
-			    PR_FLT)	echo -n "printf_flt " ;;
+			    PR_MIN)	echo -n "/printf_min " ;;
+			    PR_FLT)	echo -n "/printf_flt " ;;
+			    SC_MIN)	echo -n "/scanf_min " ;;
+			    SC_FLT)	echo -n "/scanf_flt " ;;
 			esac
 			echo -n "$mcu ... "
 		        if ! Compile $test_file $mcu $elf_file $prvers
