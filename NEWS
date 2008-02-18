@@ -4,8 +4,11 @@
 
   [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
+  [#19079] sscanf %s eats 1 char too much
   [#21869] Multiple defines in iotn2313.h
   [#21872] __floatunsisf/undisf incorrectly named
+  [#21905] scanf: float conversion ignores the suppression symbol
+  [#21906] scanf: float conversion, wrong width count in case of sign or exponent
   [#21931] Wrong fuses defined for the ATMEGA88/168
   [#21935] Typo in avr-ar example avr-as should be avr-ar
   [#21995] pgm_read_xxxx() does not use enhanced LPM instruction
@@ -20,6 +23,25 @@
   - Added 'avr35' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
     supported for AT90USB82 and AT90USB162 devices. GCC 4.3 or above is 
     necessary to use this. 
+
+  - Function vfscanf() is rewriten. The float point version is optimized
+    considerably: the expense of a stack was cut by half, and the size of
+    function has decreased approximately on 1KB. Opportunities of standard
+    and minimal versions are expanded, and their size has remained at a
+    former level.
+
+    Briefly:
+      . Restrictions of a float point format are eliminated.
+      . Conversion '%[' is present in standart version now.
+      . The minimal version differs from standard only absence of '%[' conv.
+      . The 'hh' type qualifier is added ('char *', C99).
+      . The maximal field width is increased up to 255 (65535 in float version).
+      . All known bugs are fixed.
+
+    New vfscanf() concedes old in:
+      . The size of the minimal and standard versions has increased for old
+      branches of compiler (less 4.1) and ancient chips (without MOVW).
+      . The maximum quantity of conversions now is limited (255).
 
 *** Changes in avr-libc-1.6.0:
 
