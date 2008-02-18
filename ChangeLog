@@ -1,3 +1,41 @@
+2008-02-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Function vfscanf() is rewriten (see NEWS for details).
+	* libc/stdio/vfscanf.c: Rewriten.
+	* include/stdio.h: Remove DOXYGEN for vfscanf(): it is in source now.
+	* NEWS: Notes about vfscanf() changes and fixed bugs.
+	* tests/simulate/runtest.sh: Add 'scanf' file name interpretation.
+	* tests/simulate/regression/bug-19079.c: New file.
+	* tests/simulate/regression/bug-21905-scanf_flt.c: New file.
+	* tests/simulate/regression/bug-21906-scanf_flt.c: New file.
+	* tests/simulate/scanf: New directory.
+	* tests/simulate/scanf/scanf-nul.c: New file.
+	* tests/simulate/scanf/scanf_brk-nul.c: New file.
+	* tests/simulate/scanf/scanf_flt-nul.c: New file.
+	* tests/simulate/scanf/sscanf-1.c: New file.
+	* tests/simulate/scanf/sscanf_brk-1.c: New file.
+	* tests/simulate/scanf/sscanf_brk-2.c: New file.
+	* tests/simulate/scanf/sscanf-c.c: New file.
+	* tests/simulate/scanf/sscanf-d1.c: New file.
+	* tests/simulate/scanf/sscanf-d2.c: New file.
+	* tests/simulate/scanf/sscanf-eof.c: New file.
+	* tests/simulate/scanf/sscanf-eon.c: New file.
+	* tests/simulate/scanf/sscanf_flt-f1.c: New file.
+	* tests/simulate/scanf/sscanf_flt-f2.c: New file.
+	* tests/simulate/scanf/sscanf_flt-f3.c: New file.
+	* tests/simulate/scanf/sscanf_flt-fnn.c: New file.
+	* tests/simulate/scanf/sscanf_flt-fw.c: New file.
+	* tests/simulate/scanf/sscanf-h.c: New file.
+	* tests/simulate/scanf/sscanf-hh.c: New file.
+	* tests/simulate/scanf/sscanf-i.c: New file.
+	* tests/simulate/scanf/sscanf-l.c: New file.
+	* tests/simulate/scanf/sscanf-o1.c: New file.
+	* tests/simulate/scanf/sscanf-o2.c: New file.
+	* tests/simulate/scanf/sscanf-s1.c: New file.
+	* tests/simulate/scanf/sscanf-s2.c: New file.
+	* tests/simulate/scanf/sscanf-x1.c: New file.
+	* tests/simulate/scanf/sscanf-x2.c: New file.
+
 2008-02-12  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for Atmel bug #7159.
