@@ -706,7 +706,8 @@
 
 /* Memory Sizes */
 #define RAMEND                0x1FF
-#define XRAMEND               0x00
+#define XRAMSIZE              0
+#define XRAMEND               (RAMEND + XRAMSIZE)
 #define E2END                 0x3F
 #define FLASHEND              0x1FFF
 #define SPM_PAGESIZE          32
