@@ -1,5 +1,5 @@
 /* Copyright (c) 2002-2005  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
-   Copyright (c) 2006 Dmitry Xmelkov
+   Copyright (c) 2006,2008  Dmitry Xmelkov
 
    All rights reserved.
 
@@ -33,20 +33,14 @@
 #include <avr/pgmspace.h>
 #include <ctype.h>
 #include <errno.h>
+#include <limits.h>
 #include <math.h>		/* INFINITY, NAN		*/
 #include <stdlib.h>
 
-/* double strtod (const char * nptr, char ** endptr);
- */
-
-/* GCC before 4.2 does not use a library function to convert an unsigned
-   long to float.  Instead it uses a signed long to float conversion
-   function along with a large inline code to correct the result.	*/
-#if   (__GNUC__ < 4) || (__GNUC__ == 4  &&  __GNUC_MINOR__ < 2)
-extern double __floatunsisf (unsigned long);	/* force library call	*/
-#else
-# define __floatunsisf(v)	(v)		/* is not needed	*/
-#endif
+/* Only GCC 4.2 calls the library function to convert an unsigned long
+   to float.  Other GCC-es (including 4.3) use a signed long to float
+   conversion along with a large inline code to correct the result.	*/
+extern double __floatunsisf (unsigned long);
 
 PROGMEM static const float pwr_p10 [6] = {
     1e+1, 1e+2, 1e+4, 1e+8, 1e+16, 1e+32
@@ -60,12 +54,39 @@ PROGMEM static const char pstr_inf[] = {'I','N','F'};
 PROGMEM static const char pstr_inity[] = {'I','N','I','T','Y'};
 PROGMEM static const char pstr_nan[] = {'N','A','N'};
 
+/**  The strtod() function converts the initial portion of the string pointed
+     to by \a nptr to double representation.
+
+     The expected form of the string is an optional plus ( \c '+' ) or minus
+     sign ( \c '-' ) followed by a sequence of digits optionally containing
+     a decimal-point character, optionally followed by an exponent.  An
+     exponent consists of an \c 'E' or \c 'e', followed by an optional plus
+     or minus sign, followed by a sequence of digits.
+
+     Leading white-space characters in the string are skipped.
+
+     The strtod() function returns the converted value, if any.
+
+     If \a endptr is not \c NULL, a pointer to the character after the last
+     character used in the conversion is stored in the location referenced by
+     \a endptr.
+
+     If no conversion is performed, zero is returned and the value of
+     \a nptr is stored in the location referenced by \a endptr.
+
+     If the correct value would cause overflow, plus or minus \c INFINITY is
+     returned (according to the sign of the value), and \c ERANGE is stored
+     in \c errno.  If the correct value would cause underflow, zero is
+     returned and \c ERANGE is stored in \c errno.
+ */
 double strtod (const char * nptr, char ** endptr)
 {
-    unsigned long acc;
+    union {
+	unsigned long u32;
+	float flt;
+    } x;
     unsigned char c;
     int exp;
-    double x;
 
     unsigned char flag;
 #define FL_MINUS    0x01	/* number is negative	*/
@@ -81,7 +102,7 @@ double strtod (const char * nptr, char ** endptr)
 	c = *nptr++;
     } while (isspace (c));
 
-    flag = 0;    
+    flag = 0;
     if (c == '-') {
 	flag = FL_MINUS;
 	c = *nptr++;
@@ -106,7 +127,7 @@ double strtod (const char * nptr, char ** endptr)
 	return NAN;
     }
 
-    acc = 0;
+    x.u32 = 0;
     exp = 0;
     while (1) {
     
@@ -114,57 +135,16 @@ double strtod (const char * nptr, char ** endptr)
     
 	if (c <= 9) {
 	    flag |= FL_ANY;
-	    if (!(flag & FL_OVFL)) {
-		long tac;	/* temporary place for acc	*/
-
-		/* 'acc = 10*acc + c'  with overflow control.
-		   Multiplication: 10*x == ((x<<2) + x) << 1	*/
-		tac = acc;
-		asm (
-		    /* tac <<= 2	*/
-		    "clr     r0		\n"
-	    "1:      lsl     %A2	\n\t"
-		    "rol     %B2	\n\t"
-		    "rol     %C2	\n\t"
-		    "rol     %D2	\n\t"
-		    "brcs    2f		\n\t"
-		    "com     r0		\n\t"
-		    "brmi    1b		\n\t"
-		    /* tac += acc	*/
-		    "add     %A2, %A0	\n\t"
-		    "adc     %B2, %B0	\n\t"
-		    "adc     %C2, %C0	\n\t"
-		    "adc     %D2, %D0	\n\t"
-		    "brcs    2f		\n\t"
-		    /* tac <<= 1	*/
-		    "lsl     %A2	\n\t"
-		    "rol     %B2	\n\t"
-		    "rol     %C2	\n\t"
-		    "rol     %D2	\n\t"
-		    "brcs    2f		\n\t"
-		    /* tac += c		*/
-		    "add     %A2, %1		\n\t"
-		    "adc     %B2, __zero_reg__	\n\t"
-		    "adc     %C2, __zero_reg__	\n\t"
-		    "adc     %D2, __zero_reg__	\n\t"
-		    "brcs    2f		\n\t"
-		    /* acc = tac	*/
-		    "mov     %A0, %A2	\n\t"
-		    "mov     %B0, %B2	\n\t"
-		    "mov     %C0, %C2	\n\t"
-		    "mov     %D0, %D2	\n"
-		    /* overflow flag	*/
-	    "2:      sbc     %1, %1	"
-		    : "=r" (acc), "=r" (c), "=r" (tac)
-		    : "0" (acc), "1" (c), "2" (tac)
-		    : "r0"
-		);
-		if (c) flag |= FL_OVFL;
-	    }
-	    if (flag & FL_DOT) {
-		if (!(flag & FL_OVFL)) exp -= 1;
+	    if (flag & FL_OVFL) {
+		if (!(flag & FL_DOT))
+		    exp += 1;
 	    } else {
-		if (flag & FL_OVFL) exp += 1;
+		if (flag & FL_DOT)
+		    exp -= 1;
+		/* x.u32 = x.u32 * 10 + c	*/
+		x.u32 = (((x.u32 << 2) + x.u32) << 1) + c;
+		if (x.u32 >= (ULONG_MAX - 9) / 10)
+		    flag |= FL_OVFL;
 	    }
 
 	} else if (c == (('.'-'0') & 0xff)  &&  !(flag & FL_DOT)) {
@@ -175,8 +155,7 @@ double strtod (const char * nptr, char ** endptr)
 	c = *nptr++;
     }
     
-    if (   c == (('e'-'0') & 0xff)
-	|| c == (('E'-'0') & 0xff) )
+    if (c == (('e'-'0') & 0xff) || c == (('E'-'0') & 0xff))
     {
 	int i;
 	c = *nptr++;
@@ -196,7 +175,7 @@ double strtod (const char * nptr, char ** endptr)
 	    i = 0;
 	    do {
 		if (i < 3200)
-		    i = 10*i + c;
+		    i = (((i << 2) + i) << 1) + c;	/* i = 10*i + c	*/
 		c = *nptr++ - '0';
 	    } while (c <= 9);
 	    if (flag & FL_MEXP)
@@ -208,11 +187,11 @@ double strtod (const char * nptr, char ** endptr)
     if ((flag & FL_ANY) && endptr)
 	*endptr = (char *)nptr - 1;
     
-    x = __floatunsisf (acc);
+    x.flt = __floatunsisf (x.u32);		/* manually	*/
     if ((flag & FL_MINUS) && (flag & FL_ANY))
-	x = -x;
+	x.flt = -x.flt;
 	
-    if (x != 0) {
+    if (x.flt != 0) {
 	int pwr;
 	if (exp < 0) {
 	    nptr = (void *)(pwr_m10 + 5);
@@ -223,17 +202,17 @@ double strtod (const char * nptr, char ** endptr)
 	for (pwr = 32; pwr; pwr >>= 1) {
 	    for (; exp >= pwr; exp -= pwr) {
 		union {
-		    long lo;
-		    float fl;
+		    unsigned long u32;
+		    float flt;
 		} y;
-		y.lo = pgm_read_dword ((float *)nptr);
-		x *= y.fl;
+		y.u32 = pgm_read_dword ((float *)nptr);
+		x.flt *= y.flt;
 	    }
 	    nptr -= sizeof(float);
 	}
-	if (!isfinite(x) || x == 0)
+	if (!isfinite(x.flt) || x.flt == 0)
 	    errno = ERANGE;
     }
 
-    return x;
+    return x.flt;
 }
