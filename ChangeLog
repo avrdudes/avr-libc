@@ -1,3 +1,19 @@
+2008-02-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22377. Wrong XRAMEND for some recent ioXXX.h header files.
+	* include/avr/io90pwm216.h: Fix XRAMEND definition.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/iom1284p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom32hvb.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iotn48.h: Ditto.
+	* include/avr/iotn88.h: Ditto.
+
 2008-02-21  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/strtod.c: Optimize, tune for new GCC (4.1 - 4.3).
