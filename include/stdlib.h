@@ -337,36 +337,6 @@ extern void *calloc(size_t __nele, size_t __size) __ATTR_MALLOC__;
 */
 extern void *realloc(void *__ptr, size_t __size) __ATTR_MALLOC__;
 
-/**
-     The strtod() function converts the initial portion of the string pointed
-     to by \c nptr to double representation.
-
-     The expected form of the string is an optional plus ( \c '+' ) or minus sign
-     ( \c '-' ) followed by a sequence of digits optionally containing a
-     decimal-point character, optionally followed by an exponent.  An exponent
-     consists of an \c 'E' or \c 'e', followed by an optional plus or minus
-     sign, followed by a sequence of digits.
-
-     Leading white-space characters in the string are skipped.
-
-     The strtod() function returns the converted value, if any.
-
-     If \c endptr is not \c NULL, a pointer to the character after the last
-     character used in the conversion is stored in the location referenced by
-     \c endptr.
-
-     If no conversion is performed, zero is returned and the value of \c nptr is
-     stored in the location referenced by \c endptr.
-
-     If the correct value would cause overflow, plus or minus \c HUGE_VAL is
-     returned (according to the sign of the value), and \c ERANGE is stored in
-     \c errno.  If the correct value would cause underflow, zero is returned and
-     \c ERANGE is stored in \c errno.
-
-     FIXME: HUGE_VAL needs to be defined somewhere.  The bit pattern is
-     0x7fffffff, but what number would this be?
- */
-
 extern double strtod(const char *__nptr, char **__endptr);
 
 /**
