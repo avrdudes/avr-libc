@@ -1,3 +1,11 @@
+2008-02-21  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/strtod.c: Optimize, tune for new GCC (4.1 - 4.3).
+	Add DOXYGEN comment for strtod().
+	* include/stdlib.h: Remove DOXYGEN for strtod().
+	* NEWS: Add to optimized function list.
+	* test/simulate/stdlib/strtod-3.c: Add a few test cases.
+
 2008-02-18  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Function vfscanf() is rewriten (see NEWS for details).
