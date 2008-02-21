@@ -43,6 +43,10 @@
       branches of compiler (less 4.1) and ancient chips (without MOVW).
       . The maximum quantity of conversions now is limited (255).
 
+* Optimized functions:
+
+   strtod
+
 *** Changes in avr-libc-1.6.0:
 
 * Main changes from avr-libc 1.4 to 1.6:
