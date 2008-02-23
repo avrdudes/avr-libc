@@ -1,3 +1,25 @@
+2008-02-23  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Optimize tests in space to satisfy the space-worse 4.2.2(3) GCC.
+	Split in cases where optimization is not possible.
+	* tests/simulate/scanf/sscanf-d1.c: Optimize in space.
+	* tests/simulate/scanf/sscanf-hh.c: Ditto.
+	* tests/simulate/scanf/sscanf-o1.c: Ditto.
+	* tests/simulate/scanf/sscanf-s1.c: Ditto.
+	* tests/simulate/scanf/sscanf-x1.c: Ditto.
+	* tests/simulate/scanf/sscanf-x2.c: Ditto.
+	* tests/simulate/scanf/sscanf_brk-1.c: Ditto.
+	* tests/simulate/scanf/sscanf_brk-2.c: Ditto.
+	* tests/simulate/scanf/sscanf_flt-fnn.c: Ditto.
+	* tests/simulate/scanf/sscanf-c.c: Split to 2 tests and remove.
+	* tests/simulate/scanf/sscanf-c1.c: New file: part of above sscanf-c.c
+	* tests/simulate/scanf/sscanf-c2.c: New file: part of above sscanf-c.c
+	* tests/simulate/scanf/sscanf-1.c: Move a part to new sscanf-2.c
+	* tests/simulate/scanf/sscanf-2.c: New file.
+	* tests/simulate/scanf/sscanf-x3.c: New file.
+	* tests/simulate/scanf/sscanf_brk-3.c: New file.
+	* tests/simulate/scanf/sscanf_brk-4.c: New file.
+
 2008-02-21  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #22377. Wrong XRAMEND for some recent ioXXX.h header files.

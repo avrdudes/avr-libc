@@ -65,9 +65,9 @@ void Check (int line, int expval, int rslt)
 int main ()
 {
     /* Empty input.	*/
-//    CHECK (-1, 1, "", "%s", v.c);
-//    CHECK (-1, 1, " ", " %s", v.c);
-//    CHECK (-1, 1, "\t\n\v\f\r", " %s", v.c);
+    CHECK (-1, 1, "", "%[a]", v.c);
+    CHECK (-1, 1, " ", " %[a]", v.c);
+    CHECK (-1, 1, "\t\n\v\f\r", " %[a]", v.c);
     
     /* Normal conversion.	*/
     CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%[A]", v.c);
@@ -95,58 +95,6 @@ int main ()
     /* Spaces in string.	*/
     CHECK (1, !strcmp_P(v.c, PSTR(" A")), " A", "%[A ]", v.c);
     CHECK (1, !strcmp_P(v.c, PSTR("Z A")), "Z A", "%[A Z]", v.c);
-
-    /* A few conversions.	*/
-    CHECK (2, !memcmp_P(v.c, PSTR("AB\000CD\000"), 6),
-	   "ABCD", "%[AB]%[CD]", v.c, v.c + 3);
-
-    /* Suppress a writing.	*/
-    CHECK (0, (v.c[0] == FILL), "A", "%*[A]", v.c);
-    CHECK (2, !memcmp_P(v.c, PSTR("A\000C\000"), 4),
-	   "ABC", "%[A]%*[B]%[C]", v.c, v.c + 2);
-
-#if 0
-#if 0
-    /* Width field.	*/
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%1s", v.c);
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "ABCD", "%1s", v.c);
-    CHECK (1, !strcmp_P(v.c, PSTR("AB")), "ABCD", "%2s", v.c);
-//    CHECK (2, !memcmp_P(v.c, PSTR("CD\000AB\000"), 6),
-//	   "ABCD", "%2s%2s", v.c + 3, v.c);
-    CHECK (1, !strcmp_P(v.c, PSTR("The_quick_b")),
-	   "The_quick_brown_fox", "%11s", v.c);
-
-    /* Suppress and width.	*/
-    CHECK (0, (v.c[0] == FILL), "A", "%*1s", v.c);
-    CHECK (0, (v.c[0] == FILL), "AA", "%*2s", v.c);
-
-    /* Zero width.	*/
-#ifdef	__AVR__
-    CHECK (1, (v.c[0] == 0 && v.c[1] == FILL), "A", "%0s", v.c);
-#else
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%0s", v.c);	/* ??? */
-#endif
-
-    /* Left width digit is 0.	*/
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "ABCD", "%01s", v.c);
-    CHECK (1, !strcmp_P(v.c, PSTR("AB")), "ABCD", "%02s", v.c);
-
-    /* Invalid symbol after '%'.	*/
-    CHECK (0, (v.c[0] == FILL), "A", "% s", v.c);
-    CHECK (0, (v.c[0] == FILL), "A", "%-s", v.c);
-    CHECK (0, (v.c[0] == FILL), "A", "%+s", v.c);
-    CHECK (0, (v.c[0] == FILL), "A", "%.s", v.c);
-    CHECK (0, (v.c[0] == FILL), "A", "%#s", v.c);
-#endif
-
-    /* The length modifier.	*/
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%hs", v.c);
-#ifdef	__AVR__
-//    CHECK (1, (v.c[0] == 'A' && v.c[1] == FILL), "A", "%lc", v.c);
-#else
-//    CHECK (1, (v.c[0] == 'A' && v.c[1] == 0), "A", "%lc", v.c);
-#endif
-#endif
 
     return 0;
 }

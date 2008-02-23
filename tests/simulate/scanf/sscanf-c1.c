@@ -1,4 +1,4 @@
-/* Test of scanf(): 'x' conversion directive.
+/* Test of scanf(): 'c' conversion directive.
    $Id$	*/
 
 #include <stdio.h>
@@ -25,9 +25,8 @@
 /* Next variables are useful to debug the AVR.	*/
 int vrslt = 1;
 struct {
-    unsigned int i[8];
-    char s[8];
-} v = { {1}, {1} };
+    char s[12];
+} v = { {1} };
 
 void Check (int line, int expval, int rslt)
 {
@@ -63,48 +62,42 @@ void Check (int line, int expval, int rslt)
 	}								\
     } while (0)
 
-#define	PVEC(args...)	({ static int __x[] PROGMEM = {args}; __x; })
-
 int main ()
 {
-    /* End of number.	*/
-    CHECK (
-	3, !memcmp_P (v.i, PVEC(0x12, -0x34, 0x56), 3 * sizeof(int)),
-	"12-34+56",
-	"%x%x%x", v.i, v.i + 1, v.i + 2);
-    CHECK (
-	10,
-	!memcmp_P (v.i, PVEC(1,2,3,4,5), 5 * sizeof(int))
-	&& !memcmp_P (v.s, PSTR(" \n.\001\377"), 5),
-	"1 2\n3.4\0015\3776",
-	"%x%c%x%c%x%c%x%c%x%c",
-	v.i + 0, v.s + 0,
-	v.i + 1, v.s + 1,
-	v.i + 2, v.s + 2,
-	v.i + 3, v.s + 3,
-	v.i + 4, v.s + 4);
-    CHECK (
-	12,
-	!memcmp_P (v.i, PVEC(1,2,3,4,5,6), 6 * sizeof(int))
-	&& !memcmp_P (v.s, PSTR("/:@G`g"), 6),
-	"1/2:3@4G5`6g7",
-	"%x%c%x%c%x%c%x%c%x%c%x%c",
-	v.i + 0, v.s + 0,
-	v.i + 1, v.s + 1,
-	v.i + 2, v.s + 2,
-	v.i + 3, v.s + 3,
-	v.i + 4, v.s + 4,
-	v.i + 5, v.s + 5);
+    /* Empty input.	*/
+    CHECK (-1, 1, "", "%c", v.s);
+    CHECK (-1, 1, "", " %c", v.s);
+    CHECK (-1, 1, " ", " %c", v.s);
+    CHECK (-1, 1, " ", "  %c", v.s);
+    CHECK (-1, 1, "\t\n\v\f\r", " %c", v.s);
+    
+    /* Normal conversion.	*/
+    CHECK (1, (v.s[0] == 'a'), "a", "%c", v.s);
+    CHECK (3, !memcmp_P (v.s, PSTR(" \001\377"), 3),
+	   " \001\377", "%c%c%c", v.s, v.s + 1, v.s + 2);
+    CHECK (4, !memcmp_P (v.s, PSTR("DCBA"), 4),
+	   "ABCD", "%c%c%c%c", v.s + 3, v.s + 2, v.s + 1, v.s);
 
-    /* Non-hexdecimal input.	*/
-    CHECK (1, (v.i[0] == 0x10), "010", "%x", v.i);
-    CHECK (1, (v.i[0] == 0x10E2), "10e2", "%x", v.i);
-    CHECK (1, (v.i[0] == 0x10E), "10e+2", "%x", v.i);
+    /* Input match.	*/
+    CHECK (1, (v.s[0] == 'q'), "%The        %q", "%%The %%%c", v.s);
 
     /* Suppress a writing.	*/
-    CHECK (0, (*(char *)v.i == FILL), "123", "%*x", v.i);
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == 3),
-	   "1 2 3", "%x%*x%x", v.i, v.i + 1);
+    CHECK (0, (v.s[0] == FILL), "a", "%*c", v.s);
+    CHECK (3, !memcmp_P(v.s, PSTR("ACD"), 3),
+	   "ABCD", "%c%*c%c%c", v.s, v.s + 1, v.s + 2);
+
+    /* Width field.	*/
+    CHECK (1, (v.s[0] == 'A'), "A", "%1c", v.s);
+    CHECK (1, !memcmp_P(v.s, PSTR("AB"), 2), "AB", "%2c", v.s);
+    CHECK (1, !memcmp_P(v.s, PSTR("The_quick_br"), 12),
+	   "The_quick_brown_fox", "%12c", v.s);
+    CHECK (1, !memcmp_P(v.s, PSTR("A\t D"), 4), "A\t D", "%4c", v.s);
+    CHECK (2, !memcmp_P(v.s, PSTR("3412"), 4),
+	   "1234", "%2c%2c", v.s + 2, v.s);
+
+    /* Suppress and width.	*/
+    CHECK (0, (v.s[0] == FILL), "A", "%*1c", v.s);
+    CHECK (0, (v.s[0] == FILL), "AA", "%*2c", v.s);
 
     return 0;
 }

@@ -101,15 +101,5 @@ int main ()
     
     CHECK (0, 1, ".", "aaaaaaaa");
 
-    /* Mix of two types of directives: ordinary char. and white space.	*/
-    CHECK (0, 1, "a", " a");
-    CHECK (0, 1, " a", " a");
-    CHECK (0, 1, "\t\n\v\v\ra", " a");
-
-    /* "%%"	*/
-    CHECK (-1, 1, "", "%%");
-    CHECK (0, 1, ".", "%%");
-    CHECK (0, 1, "%", "%%");
-
     return 0;
 }

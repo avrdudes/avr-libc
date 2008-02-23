@@ -25,8 +25,8 @@
 /* Next variables are useful to debug the AVR.	*/
 int vrslt = 1;
 struct {
-    int i[5];
-    char s[5];
+    int i[8];
+    char s[8];
 } v = { {1}, {1} };
 
 void Check (int line, int expval, int rslt)
@@ -63,6 +63,8 @@ void Check (int line, int expval, int rslt)
 	}								\
     } while (0)
 
+#define	PVEC(args...)	({ static int __x[] PROGMEM = {args}; __x; })
+
 int main ()
 {
     /* Empty input.	*/
@@ -74,29 +76,30 @@ int main ()
 
     /* Normal conversion.	*/
     CHECK (1, (v.i[0] == 0), "0", "%d", v.i);
-    CHECK (1, (v.i[0] == 0), "+0", "%d", v.i);
-    CHECK (1, (v.i[0] == 0), "-0", "%d", v.i);
-    CHECK (1, (v.i[0] == 1), "1", "%d", v.i);
-    CHECK (1, (v.i[0] == 32767), "32767", "%d", v.i);
-    CHECK (1, (v.i[0] == -1), "-1", "%d", v.i);
-    CHECK (1, (v.i[0] == -32768), "-32768", "%d", v.i);
-    CHECK (1, (v.i[0] == 12345), "+12345", "%d", v.i);
-    CHECK (1, (v.i[0] == -6789), "-6789", "%d", v.i);
+    CHECK (
+	8,
+	!memcmp_P (
+	    v.i,
+	    PVEC (0, 0, 1, 32767, -1, -32768, 12345, -6789),
+	    8 * sizeof(int)),
+	"+0 -0 1 32767 -1 -32768 +12345 -6789",
+	"%d %d %d %d %d %d %d %d",
+	v.i + 0, v.i + 1,
+	v.i + 2, v.i + 3,
+	v.i + 4, v.i + 5,
+	v.i + 6, v.i + 7);
 
     /* '%u' conversion.	*/
     CHECK (
 	3,
-	!memcmp_P (
-	    v.i,
-	    ({ static int __x[3] PROGMEM = { 123, -456, 65535 }; __x; }),
-	    3 * sizeof(int)),
+	!memcmp_P (v.i, PVEC (123, -456, 65535), 3 * sizeof(int)),
 	"123 -456 65535",
 	"%u%u%u", v.i, v.i + 1, v.i + 2);
 
     /* Leading spaces.	*/
     CHECK (
 	2,
-	(v.i[0] == 12) && (v.i[1] == 123),
+	!memcmp_P (v.i, PVEC (12, 123), 2 * sizeof(int)),
 	" 12\t\n\v\f\r123",
 	"%d%d", v.i, v.i + 1);
 
@@ -104,10 +107,7 @@ int main ()
     CHECK (2, v.i[0] == 0 && v.s[0] == 'x', "0x1", "%d%c", v.i, v.s);
     CHECK (
 	10,
-	!memcmp_P (
-	    v.i,
-	    ({ static int __x[5] PROGMEM = { 1, 2, 3, 4, 5 }; __x; }),
-	    5 * sizeof(int))
+	!memcmp_P (v.i, PVEC (1, 2, 3, 4, 5), 5 * sizeof(int))
 	&& !memcmp_P (v.s, PSTR(" \n.\001\377"), 5),
 	"1 2\n3.4\0015\3776",
 	"%d%c%d%c%d%c%d%c%d%c",
@@ -118,7 +118,7 @@ int main ()
 	v.i + 4, v.s + 4);
     CHECK (
 	3,
-	v.i[0] == 6 && v.i[1] == -7 && v.i[2] == 8,
+	!memcmp_P (v.i, PVEC (6, -7, 8), 3 * sizeof(int)),
 	"6-7+8",
 	"%d%d%d",
 	v.i, v.i + 1, v.i + 2);
@@ -130,8 +130,10 @@ int main ()
 
     /* Suppress a writing.	*/
     CHECK (0, (*(char *)v.i == FILL), "123", "%*d", v.i);
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == 3),
-	   "1 2 3", "%d%*d%d", v.i, v.i + 1);
+    CHECK (
+	2,
+	!memcmp_P (v.i, PVEC (1, 3), 2 * sizeof(int)),
+	"1 2 3", "%d%*d%d", v.i, v.i + 1);
 
     return 0;
 }

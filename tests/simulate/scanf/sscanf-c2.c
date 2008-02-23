@@ -64,41 +64,6 @@ void Check (int line, int expval, int rslt)
 
 int main ()
 {
-    /* Empty input.	*/
-    CHECK (-1, 1, "", "%c", v.s);
-    CHECK (-1, 1, "", " %c", v.s);
-    CHECK (-1, 1, " ", " %c", v.s);
-    CHECK (-1, 1, " ", "  %c", v.s);
-    CHECK (-1, 1, "\t\n\v\f\r", " %c", v.s);
-    
-    /* Normal conversion.	*/
-    CHECK (1, (v.s[0] == 'a'), "a", "%c", v.s);
-    CHECK (3, !memcmp_P (v.s, PSTR(" \001\377"), 3),
-	   " \001\377", "%c%c%c", v.s, v.s + 1, v.s + 2);
-    CHECK (4, !memcmp_P (v.s, PSTR("DCBA"), 4),
-	   "ABCD", "%c%c%c%c", v.s + 3, v.s + 2, v.s + 1, v.s);
-
-    /* Input match.	*/
-    CHECK (1, (v.s[0] == 'q'), "%The        %q", "%%The %%%c", v.s);
-
-    /* Suppress a writing.	*/
-    CHECK (0, (v.s[0] == FILL), "a", "%*c", v.s);
-    CHECK (3, !memcmp_P(v.s, PSTR("ACD"), 3),
-	   "ABCD", "%c%*c%c%c", v.s, v.s + 1, v.s + 2);
-
-    /* Width field.	*/
-    CHECK (1, (v.s[0] == 'A'), "A", "%1c", v.s);
-    CHECK (1, !memcmp_P(v.s, PSTR("AB"), 2), "AB", "%2c", v.s);
-    CHECK (1, !memcmp_P(v.s, PSTR("The_quick_br"), 12),
-	   "The_quick_brown_fox", "%12c", v.s);
-    CHECK (1, !memcmp_P(v.s, PSTR("A\t D"), 4), "A\t D", "%4c", v.s);
-    CHECK (2, !memcmp_P(v.s, PSTR("3412"), 4),
-	   "1234", "%2c%2c", v.s + 2, v.s);
-
-    /* Suppress and width.	*/
-    CHECK (0, (v.s[0] == FILL), "A", "%*1c", v.s);
-    CHECK (0, (v.s[0] == FILL), "AA", "%*2c", v.s);
-
     /* Zero width.	*/
 #ifdef	__AVR__
     CHECK (0, (v.s[0] == FILL), "A", "%0c", v.s);
@@ -112,12 +77,10 @@ int main ()
 
     /* Invalid symbol after '%'.	*/
     CHECK (0, (v.s[0] == FILL), "A", "% c", v.s);
-#if 0
     CHECK (0, (v.s[0] == FILL), "A", "%-c", v.s);
     CHECK (0, (v.s[0] == FILL), "A", "%+c", v.s);
     CHECK (0, (v.s[0] == FILL), "A", "%.c", v.s);
     CHECK (0, (v.s[0] == FILL), "A", "%#c", v.s);
-#endif
 
     /* The length modifier.	*/
     CHECK (1, (v.s[0] == 'A' && v.s[1] == FILL), "A", "%hc", v.s);

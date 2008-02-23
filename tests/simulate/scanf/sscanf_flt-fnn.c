@@ -44,8 +44,8 @@ void Check (int line, int expval, int rslt)
 #define CHECK(expval, ass_expr, str, fmt, ...)				\
     do {								\
 	PROGMEM static char fmt_p[] = fmt;				\
-	char str_s[sizeof(str)];					\
-	char fmt_s[sizeof(fmt_p)];					\
+	char str_s[220];						\
+	char fmt_s[40];							\
 	char FILL;							\
 	int i;								\
 	int (* volatile vp)(const char *, const char *, ...);		\
@@ -61,6 +61,16 @@ void Check (int line, int expval, int rslt)
     	    ASSERT (ass_expr);						\
 	}								\
     } while (0)
+
+int all_nans (const float v[], int n)
+{
+    int i;
+    for (i = 0; i < n; i++) {
+	if (!isnan (v[i]))
+	    return 0;
+    }
+    return 1;
+}
 
 int main ()
 {
@@ -82,8 +92,7 @@ int main ()
     /* NaN	*/
     CHECK (
 	6,
-	isnan(v.x[0]) && isnan(v.x[1]) && isnan(v.x[2])
-	&& isnan(v.x[3]) && isnan(v.x[4]) && isnan(v.x[5]),
+	all_nans (v.x, 6),
 	"nan NAN NaN -nan +NAN -nAn",
 	"%E %e %F %f %G %g",
 	& v.x[0], & v.x[1], & v.x[2], & v.x[3], & v.x[4], & v.x[5]);
@@ -91,12 +100,7 @@ int main ()
     /* Character after NaN.	*/
     CHECK (
 	10,
-	isnan(v.x[0]) && v.c[0] == '.'
-	&& isnan(v.x[1]) && v.c[1] == '+'
-	&& isnan(v.x[2]) && v.c[2] == 'e'
-	&& isnan(v.x[3]) && v.c[3] == 'Q'
-	&& isnan(v.x[4])
-	&& isnan(v.x[5]),
+	all_nans (v.x, 6) && !memcmp_P (v.c, PSTR (".+eQ"), 4),
 	"nan. nan+ nane NANQ nannan",
 	"%e%c %e%c %e%c %e%c %e %e",
 	& v.x[0], & v.c[0], & v.x[1], & v.c[1],	& v.x[2], & v.c[2],
@@ -105,9 +109,15 @@ int main ()
     /* Inf	*/
     CHECK (
 	6,
-	v.x[0] == INFINITY && v.x[1] == INFINITY
-	&& v.x[2] == INFINITY && v.x[3] == INFINITY
-	&& v.x[4] == -INFINITY && v.x[5] == -INFINITY,
+	!memcmp_P (
+	    v.x,
+	    ({	static float __x[] PROGMEM = {
+		    INFINITY, INFINITY, INFINITY,
+		    INFINITY, -INFINITY, -INFINITY
+		};
+		__x;
+	    }),
+	    6 * sizeof(float)),
 	"INF inf +Inf INFINITY -infinity -InFiNiTy",
 	"%e %E %f %F %g %G",
 	& v.x[0], & v.x[1], & v.x[2], & v.x[3], & v.x[4], & v.x[5]);
@@ -115,18 +125,24 @@ int main ()
     /* Character after Inf.	*/
     CHECK (
 	9,
-	v.x[0] == INFINITY && v.c[0] == ' '
-	&& v.x[1] == INFINITY
-	&& v.x[2] == INFINITY && v.c[2] == 's'
-	&& v.x[3] == INFINITY && v.c[3] == '\b'
-	&& v.x[4] == INFINITY && v.x[5] == -INFINITY,
+	!memcmp_P (
+	    v.x,
+	    ({	static float __x[] PROGMEM = {
+		    INFINITY, INFINITY, INFINITY,
+		    INFINITY, INFINITY, -INFINITY
+		};
+		__x;
+	    }),
+	    6 * sizeof(float))
+	&& !memcmp_P (v.c, PSTR (" s\b"), 3),
 	"inf infinityinfinitys INF\b inf-inf",
 	"%e%c %e%e%c %e%c %e%e",
 	& v.x[0], & v.c[0],
 	& v.x[1],
-	& v.x[2], & v.c[2],
-	& v.x[3], & v.c[3],
-	& v.x[4], & v.x[5]);
+	& v.x[2], & v.c[1],
+	& v.x[3], & v.c[2],
+	& v.x[4],
+	& v.x[5]);
 
     return 0;
 }

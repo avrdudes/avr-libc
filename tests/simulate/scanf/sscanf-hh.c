@@ -62,6 +62,8 @@ void Check (int line, int expval, int rslt)
 	}								\
     } while (0)
 
+#define	PVEC(args...)	({ static char __x[] PROGMEM = {args}; __x; })
+
 int main ()
 {
     /* Empty input.	*/
@@ -73,19 +75,18 @@ int main ()
 
     /* Normal conversion.	*/
     CHECK (1, (v.i[0] == 0 && v.i[1] == FILL), "0", "%hhd", v.i);
-    CHECK (1, (v.i[0] == 1 && v.i[1] == FILL), "1", "%hhd", v.i);
-    CHECK (1, (v.i[0] == 127 && v.i[1] == FILL), "127", "%hhd", v.i);
-    CHECK (1, (v.i[0] == -128 && v.i[1] == FILL), "128", "%hhd", v.i);
-    CHECK (1, (v.i[0] == -1 && v.i[1] == FILL), "255", "%hhd", v.i);
-    CHECK (1, (v.i[0] == -1 && v.i[1] == FILL), "32767", "%hhd", v.i);
-    CHECK (1, (v.i[0] == -2 && v.i[1] == FILL), "-2", "%hhd", v.i);
+    CHECK (
+	6,
+	!memcmp_P (v.i, PVEC (1, 127, -128, -2, -1, -1), 6),
+	"1 127 128 255 32767 -2",
+	"%hhd %hhd %hhd %hhd %hhd %hhd",
+	v.i + 0, v.i + 1, v.i + 2,
+	v.i + 5, v.i + 4, v.i + 3);
 
     /* All possible conversion types.	*/
     CHECK (
 	8,
-	v.i[0] == 1 && v.i[1] == 2 && v.i[2] == 3 && v.i[3] == 4
-	&& v.i[4] == 5 && v.i[5] == 6 && v.i[6] == 7 && v.i[7] == 14
-	&& v.i[8] == 8,
+	!memcmp_P (v.i, PVEC (1, 2, 3, 4, 5, 6, 7, 14, 8), 9),
 	"1 2 3 4 5 6 7 8",
 	"%hhd %hhu %hhi %hho %hhx %hhX %hhp %hhn %hhd",
 	v.i + 0, v.i + 1, v.i + 2, v.i + 3,
@@ -97,16 +98,16 @@ int main ()
     CHECK (1, v.i[0] == 98 && v.i[1] == FILL, "00000000009876", "%12hhd", v.i);
 
     /* A few conversions.	*/
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == 2) && (v.i[2] == FILL),
+    CHECK (2, !memcmp_P (v.i, PVEC (1,2), 2) && (v.i[2] == FILL),
 	   "1 2", "%hhd%hhd", v.i, v.i + 1);
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == 3) && (v.i[2] == FILL),
+    CHECK (2, !memcmp_P (v.i, PVEC (1,3), 2) && (v.i[2] == FILL),
 	   "1+3", "%hhd%hhd", v.i, v.i + 1);
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == -1) && (v.i[2] == FILL),
+    CHECK (2, !memcmp_P (v.i, PVEC (1,-1), 2) && (v.i[2] == FILL),
 	   "1-1", "%hhd%hhd", v.i, v.i + 1);
 
     /* Suppress a writing.	*/
     CHECK (0, (*(char *)v.i == FILL), "123", "%*hhd", v.i);
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == 3) && (v.i[2] == FILL),
+    CHECK (2, !memcmp_P (v.i, PVEC (1,3), 2) && (v.i[2] == FILL),
 	   "1 2 3", "%hhd%*hhd%hhd", v.i, v.i + 1);
 
     return 0;

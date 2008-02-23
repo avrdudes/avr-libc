@@ -105,8 +105,5 @@ int main ()
     CHECK (2, !memcmp_P(v.c, PSTR("A\000C\000"), 4),
 	   "A B C", "%s%*s%s", v.c, v.c + 2);
 
-    /* The length modifier.	*/
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%hs", v.c);
-
     return 0;
 }

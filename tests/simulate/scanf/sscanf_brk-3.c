@@ -64,21 +64,45 @@ void Check (int line, int expval, int rslt)
 
 int main ()
 {
+#if 0
     /* Exclude set.	*/
     CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%[^B]", v.c);
     CHECK (1, !strcmp_P(v.c, PSTR("AC")), "AC", "%[^B]", v.c);
     CHECK (1, !strcmp_P(v.c, PSTR("\002")), "\002", "%[^\001]", v.c);
     CHECK (1, !strcmp_P(v.c, PSTR("\376")), "\376\377", "%[^\377]", v.c);
     CHECK (1, !strcmp_P(v.c, PSTR("abcd")), "abcd", "%[^ABCD]", v.c);
-
-    /* The length modifier.	*/
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%h[A-Z]", v.c);
-    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%hh[A-Z]", v.c);
-#ifdef	__AVR__
-    CHECK (1, !strcmp_P(v.c, PSTR("AB")), "AB", "%l[A-Z]", v.c);
-#else
-//    CHECK (1, (v.c[0] == 'A' && v.c[1] == 0), "A", "%lc", v.c);
 #endif
+
+    /* Range.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("A")), "ABCD", "%[A-A]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("AB")), "ABCD", "%[A-B]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("ABC")), "ABCD", "%[A-C]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("\001\177\200")),
+	   "\001\177\200\377", "%[\001-\376]", v.c);
+
+    /* Reverse order.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("AB")), "ABCD", "%[B-A]", v.c);
+#ifdef	__AVR__
+    CHECK (1, !strcmp_P(v.c, PSTR("ABC")), "ABCD", "%[C-A]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("\002\177\200\377")),
+	   "\002\177\200\377\001", "%[\377-\002]", v.c);
+#endif
+
+    /* Two ranges.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("ABCDEF")), "ABCDEFG", "%[A-CD-F]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("ABCEFG")), "ABCEFGD", "%[A-CE-G]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("ABCDE")), "ABCDEFG", "%[A-C-E]", v.c);
+
+    /* Exclude range.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("019")), "0198", "%[^2-8]", v.c);
+
+    /* Range + hyphen.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("-ABC")), "-ABCD", "%[A-C-]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR(",+-")), ",+-.", "%[+--]", v.c);
+    
+    /* Strange usage of hyphen.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("-")), "-.", "%[--]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("-")), "-.", "%[---]", v.c);
 
     return 0;
 }

@@ -1,4 +1,4 @@
-/* Test of scanf(): 'x' conversion directive.
+/* Test of scanf(): none conversion directives.
    $Id$	*/
 
 #include <stdio.h>
@@ -19,15 +19,13 @@
 # define EXIT(v)	exit ((v) < 256 ? (v) : 255)
 # define PRINTF(f...)	printf (f)
 # define sscanf_P	sscanf
-# define memcmp_P	memcmp
 #endif
 
 /* Next variables are useful to debug the AVR.	*/
 int vrslt = 1;
 struct {
-    unsigned int i[8];
-    char s[8];
-} v = { {1}, {1} };
+    char b;
+} v = { 1 };
 
 void Check (int line, int expval, int rslt)
 {
@@ -63,48 +61,17 @@ void Check (int line, int expval, int rslt)
 	}								\
     } while (0)
 
-#define	PVEC(args...)	({ static int __x[] PROGMEM = {args}; __x; })
-
 int main ()
 {
-    /* End of number.	*/
-    CHECK (
-	3, !memcmp_P (v.i, PVEC(0x12, -0x34, 0x56), 3 * sizeof(int)),
-	"12-34+56",
-	"%x%x%x", v.i, v.i + 1, v.i + 2);
-    CHECK (
-	10,
-	!memcmp_P (v.i, PVEC(1,2,3,4,5), 5 * sizeof(int))
-	&& !memcmp_P (v.s, PSTR(" \n.\001\377"), 5),
-	"1 2\n3.4\0015\3776",
-	"%x%c%x%c%x%c%x%c%x%c",
-	v.i + 0, v.s + 0,
-	v.i + 1, v.s + 1,
-	v.i + 2, v.s + 2,
-	v.i + 3, v.s + 3,
-	v.i + 4, v.s + 4);
-    CHECK (
-	12,
-	!memcmp_P (v.i, PVEC(1,2,3,4,5,6), 6 * sizeof(int))
-	&& !memcmp_P (v.s, PSTR("/:@G`g"), 6),
-	"1/2:3@4G5`6g7",
-	"%x%c%x%c%x%c%x%c%x%c%x%c",
-	v.i + 0, v.s + 0,
-	v.i + 1, v.s + 1,
-	v.i + 2, v.s + 2,
-	v.i + 3, v.s + 3,
-	v.i + 4, v.s + 4,
-	v.i + 5, v.s + 5);
+    /* Mix of two types of directives: ordinary char. and white space.	*/
+    CHECK (0, 1, "a", " a");
+    CHECK (0, 1, " a", " a");
+    CHECK (0, 1, "\t\n\v\v\ra", " a");
 
-    /* Non-hexdecimal input.	*/
-    CHECK (1, (v.i[0] == 0x10), "010", "%x", v.i);
-    CHECK (1, (v.i[0] == 0x10E2), "10e2", "%x", v.i);
-    CHECK (1, (v.i[0] == 0x10E), "10e+2", "%x", v.i);
-
-    /* Suppress a writing.	*/
-    CHECK (0, (*(char *)v.i == FILL), "123", "%*x", v.i);
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == 3),
-	   "1 2 3", "%x%*x%x", v.i, v.i + 1);
+    /* "%%"	*/
+    CHECK (-1, 1, "", "%%");
+    CHECK (0, 1, ".", "%%");
+    CHECK (0, 1, "%", "%%");
 
     return 0;
 }

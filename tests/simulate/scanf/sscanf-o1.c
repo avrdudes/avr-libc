@@ -25,8 +25,8 @@
 /* Next variables are useful to debug the AVR.	*/
 int vrslt = 1;
 struct {
-    unsigned int i[8];
-    char s[8];
+    unsigned int i[10];
+    char s[10];
 } v = { {1}, {1} };
 
 void Check (int line, int expval, int rslt)
@@ -63,6 +63,8 @@ void Check (int line, int expval, int rslt)
 	}								\
     } while (0)
 
+#define	PVEC(args...)	({ static int __x[] PROGMEM = {args}; __x; })
+
 int main ()
 {
     /* Empty input.	*/
@@ -74,16 +76,20 @@ int main ()
 
     /* Normal conversion.	*/
     CHECK (1, (v.i[0] == 0), "0", "%o", v.i);
-    CHECK (1, (v.i[0] == 0), "+0", "%o", v.i);
-    CHECK (1, (v.i[0] == 0), "-0", "%o", v.i);
-    CHECK (1, (v.i[0] == 1), "1", "%o", v.i);
-    CHECK (1, (v.i[0] == 0123456), "123456", "%o", v.i);
-    CHECK (1, (v.i[0] == 077777), "77777", "%o", v.i);
-    CHECK (1, (v.i[0] == 0100000), "100000", "%o", v.i);
-    CHECK (1, (v.i[0] == 0177777), "177777", "%o", v.i);
-    CHECK (1, (v.i[0] == (unsigned)(-1)), "-1", "%o", v.i);
-    CHECK (1, (v.i[0] == 012345), "+12345", "%o", v.i);
-    CHECK (1, (v.i[0] == (unsigned)(-07654)), "-7654", "%o", v.i);
+    CHECK (
+	10,
+	!memcmp_P (
+	    v.i,
+	    PVEC (0, 0, 1, 0123456, 077777, 0100000, 0177777, -1,
+		  012345, -07654),
+	    10 * sizeof(int)),
+	"+0 -0 1 123456 77777 100000 177777 -1 +12345 -7654",
+	"%o %o %o %o %o %o %o %o %o %o",
+	v.i + 0, v.i + 1,
+	v.i + 2, v.i + 3,
+	v.i + 4, v.i + 5,
+	v.i + 6, v.i + 7,
+	v.i + 8, v.i + 9);
 
     /* Leading spaces.	*/
     CHECK (1, (v.i[0] == 012), " 12", "%o", v.i);
@@ -97,10 +103,7 @@ int main ()
     CHECK (2, v.i[0] == 0 && v.s[0] == 'x', "0x1", "%o%c", v.i, v.s);
     CHECK (
 	14,
-	!memcmp_P (
-	    v.i,
-	    ({ static int __x[7] PROGMEM = {1,2,3,4,5,6,7};  __x; }),
-	    7 * sizeof(int))
+	!memcmp_P (v.i, PVEC (1,2,3,4,5,6,7), 7 * sizeof(int))
 	&& !memcmp_P (v.s, PSTR(" \n.89\001\377"), 7),
 	"1 2\n3.48596\0017\3776",
 	"%o%c%o%c%o%c%o%c%o%c%o%c%o%c",
@@ -113,10 +116,7 @@ int main ()
 	v.i + 6, v.s + 6);
     CHECK (
 	3,
-	!memcmp_P (
-	    v.i,
-	    ({ static int __x[3] PROGMEM = {1, -2, 3}; __x; }),
-	    3 * sizeof(int)),
+	!memcmp_P (v.i, PVEC (1, -2, 3), 3 * sizeof(int)),
 	"1-2+3", "%o%o%o", v.i, v.i + 1, v.i + 2);
 
     return 0;

@@ -1,4 +1,4 @@
-/* Test of scanf(): 'x' conversion directive.
+/* Test of scanf(): '[' conversion directive.
    $Id$	*/
 
 #include <stdio.h>
@@ -25,9 +25,8 @@
 /* Next variables are useful to debug the AVR.	*/
 int vrslt = 1;
 struct {
-    unsigned int i[8];
-    char s[8];
-} v = { {1}, {1} };
+    char c[12];
+} v = { {1} };
 
 void Check (int line, int expval, int rslt)
 {
@@ -63,48 +62,47 @@ void Check (int line, int expval, int rslt)
 	}								\
     } while (0)
 
-#define	PVEC(args...)	({ static int __x[] PROGMEM = {args}; __x; })
-
 int main ()
 {
-    /* End of number.	*/
-    CHECK (
-	3, !memcmp_P (v.i, PVEC(0x12, -0x34, 0x56), 3 * sizeof(int)),
-	"12-34+56",
-	"%x%x%x", v.i, v.i + 1, v.i + 2);
-    CHECK (
-	10,
-	!memcmp_P (v.i, PVEC(1,2,3,4,5), 5 * sizeof(int))
-	&& !memcmp_P (v.s, PSTR(" \n.\001\377"), 5),
-	"1 2\n3.4\0015\3776",
-	"%x%c%x%c%x%c%x%c%x%c",
-	v.i + 0, v.s + 0,
-	v.i + 1, v.s + 1,
-	v.i + 2, v.s + 2,
-	v.i + 3, v.s + 3,
-	v.i + 4, v.s + 4);
-    CHECK (
-	12,
-	!memcmp_P (v.i, PVEC(1,2,3,4,5,6), 6 * sizeof(int))
-	&& !memcmp_P (v.s, PSTR("/:@G`g"), 6),
-	"1/2:3@4G5`6g7",
-	"%x%c%x%c%x%c%x%c%x%c%x%c",
-	v.i + 0, v.s + 0,
-	v.i + 1, v.s + 1,
-	v.i + 2, v.s + 2,
-	v.i + 3, v.s + 3,
-	v.i + 4, v.s + 4,
-	v.i + 5, v.s + 5);
-
-    /* Non-hexdecimal input.	*/
-    CHECK (1, (v.i[0] == 0x10), "010", "%x", v.i);
-    CHECK (1, (v.i[0] == 0x10E2), "10e2", "%x", v.i);
-    CHECK (1, (v.i[0] == 0x10E), "10e+2", "%x", v.i);
+    /* A few conversions.	*/
+    CHECK (2, !memcmp_P(v.c, PSTR("AB\000CD\000"), 6),
+	   "ABCD", "%[AB]%[CD]", v.c, v.c + 3);
 
     /* Suppress a writing.	*/
-    CHECK (0, (*(char *)v.i == FILL), "123", "%*x", v.i);
-    CHECK (2, (v.i[0] == 1) && (v.i[1] == 3),
-	   "1 2 3", "%x%*x%x", v.i, v.i + 1);
+    CHECK (0, (v.c[0] == FILL), "A", "%*[A]", v.c);
+    CHECK (2, !memcmp_P(v.c, PSTR("A\000C\000"), 4),
+	   "ABC", "%[A]%*[B]%[C]", v.c, v.c + 2);
+
+    /* Width field.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%1[A]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("A")), "ABCD", "%1[A-Z]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("AB")), "ABCD", "%2[A-Z]", v.c);
+    CHECK (2, !memcmp_P(v.c, PSTR("CD\000AB\000"), 6),
+	   "ABCD", "%2[A-Z]%2[A-Z]", v.c + 3, v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("the_quick_b")),
+	   "the_quick_brown_fox", "%11[a-z_]", v.c);
+
+    /* Suppress and width.	*/
+    CHECK (0, (v.c[0] == FILL), "A", "%*1[A]", v.c);
+    CHECK (0, (v.c[0] == FILL), "AA", "%*2[A]", v.c);
+
+    /* Zero width.	*/
+#ifdef	__AVR__
+    CHECK (0, (v.c[0] == FILL && v.c[1] == FILL), "A", "%0[A]", v.c);
+#else
+    CHECK (1, !strcmp_P(v.c, PSTR("A")), "A", "%0[A]", v.c);	/* ??? */
+#endif
+
+    /* Left width digit is 0.	*/
+    CHECK (1, !strcmp_P(v.c, PSTR("A")), "ABCD", "%01[A-Z]", v.c);
+    CHECK (1, !strcmp_P(v.c, PSTR("AB")), "ABCD", "%02[A-Z]", v.c);
+
+    /* Invalid symbol after '%'.	*/
+    CHECK (0, (v.c[0] == FILL), "A", "% [A]", v.c);
+    CHECK (0, (v.c[0] == FILL), "A", "%-[A]", v.c);
+    CHECK (0, (v.c[0] == FILL), "A", "%+[A]", v.c);
+    CHECK (0, (v.c[0] == FILL), "A", "%.[A]", v.c);
+    CHECK (0, (v.c[0] == FILL), "A", "%#[A]", v.c);
 
     return 0;
 }

@@ -25,8 +25,8 @@
 /* Next variables are useful to debug the AVR.	*/
 int vrslt = 1;
 struct {
-    unsigned int i[8];
-    char s[8];
+    unsigned int i[10];
+    char s[10];
 } v = { {1}, {1} };
 
 void Check (int line, int expval, int rslt)
@@ -76,6 +76,7 @@ int main ()
 
     /* Normal conversion.	*/
     CHECK (1, (v.i[0] == 0), "0", "%x", v.i);
+#if 0
     CHECK (1, (v.i[0] == 0), "+0", "%x", v.i);
     CHECK (1, (v.i[0] == 0), "-0", "%x", v.i);
     CHECK (1, (v.i[0] == 1), "1", "%x", v.i);
@@ -86,6 +87,21 @@ int main ()
     CHECK (1, (v.i[0] == 0xFFFF), "FFFF", "%x", v.i);
     CHECK (1, (v.i[0] == (unsigned)(-1)), "-1", "%x", v.i);
     CHECK (1, (v.i[0] == 1), "-FFFFFFFF", "%x", v.i);
+#else
+    CHECK (
+	10,
+	!memcmp_P (
+	    v.i,
+	    PVEC (0, 0, 1, 0x1234, 0x5678, 0x9ABC, 0xDEF0, 0xFFFF, -1, 1),
+	    10 * sizeof(int)),
+	"+0 -0 1 1234 5678 9ABC DEF0 FFFF -1 -FFFFFFFF",
+	"%x %x %x %x %x %x %x %x %x %x",
+	v.i + 0, v.i + 1,
+	v.i + 2, v.i + 3,
+	v.i + 4, v.i + 5,
+	v.i + 6, v.i + 7,
+	v.i + 8, v.i + 9);
+#endif
 
     /* Low/upper characters.	*/
     CHECK (
