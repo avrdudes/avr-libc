@@ -1,3 +1,11 @@
+2008-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* doc/api/bench.dox: Change remark about GCC versions: replace
+	scanf() example to dtostre().
+	* doc/api/bench-libc.dox: Update the results. Give two sizes:
+	with and without prologue/epilogue modules. Add sscanf() with
+	'%[' conversion.
+
 2008-02-23  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Optimize tests in space to satisfy the space-worse 4.2.2(3) GCC.
