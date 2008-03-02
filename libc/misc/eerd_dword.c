@@ -26,6 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* $Id$	*/
+
 #include <avr/eeprom.h>
 
 uint32_t __eerd_dword (const uint32_t *addr, uint8_t (*getb)(const uint8_t *))
