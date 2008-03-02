@@ -68,6 +68,10 @@ int main ()
 	exit (__LINE__);
 
     /* Write only 1 word.	*/
+    /* Avr-gcc 4.2.2 produces incorrect code: the comparison of address
+       with 5 and 6 values is omited. In result exit with error.
+       Versions 3.3.6, 3.4.6, 4.0.4, 4.1.2, 4.2.3, 4.3.0(pre) give
+       correct code and are simulated OK.	*/
     eeprom_write_word ((unsigned *)5, 0x1234);
     for (p = 0; p <= (void *)E2END; p++) {
 	if ((unsigned)p != 5
