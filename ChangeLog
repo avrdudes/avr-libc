@@ -4,6 +4,7 @@
 	with '-Wsystem-headers' option.
 	* tests/simulate/avr/eeprom-1.c: Add comment about avr-gcc 4.2.2 bug.
 	Note, avr-gcc 4.2.3 is correct.
+	* tests/simulate/regression/bug-31644.c: New file.
 
 2008-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
