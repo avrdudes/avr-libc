@@ -1,3 +1,10 @@
+2008-03-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/eeprom.h: Change cast operation to avoid warning
+	with '-Wsystem-headers' option.
+	* tests/simulate/avr/eeprom-1.c: Add comment about avr-gcc 4.2.2 bug.
+	Note, avr-gcc 4.2.3 is correct.
+
 2008-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	New variant of EEPROM functions: inline byte procedures and library
