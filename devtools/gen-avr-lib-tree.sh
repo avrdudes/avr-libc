@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,2006,2007  Anatoly Sokolov
+# Copyright (c) 2005,2006,2007,2008  Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -310,6 +310,7 @@ do
 	echo "  avr/lib/$arh/"
 
 	test -d $arh || mkdir $arh
+	cd $arh || exit 1
 
 	ARH_SUBDIRS="$ARH_SUBDIRS \\\\\n   $arh"
 
@@ -327,40 +328,33 @@ do
 		crt_asflags=$(echo $dev_crt | cut -d ':' -f 5)
 		
 		echo "  avr/lib/$arh/$dev"
-		
-		test -d $arh/$dev || mkdir $arh/$dev
+
+		test -d $dev || mkdir $dev
+
+		cat $top_dir/devtools/Device.am > $dev/Makefile.am
+
+		sed -e "s/<<dev>>/$dev/g" $dev/Makefile.am \
+		> $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
+
+		sed -e "s/<<crt>>/$crt/g" $dev/Makefile.am \
+		> $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
+
+		sed -e "s/<<crt_defs>>/$crt_defs/g" $dev/Makefile.am \
+		> $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
+
+		sed -e "s/<<crt_cflags>>/$crt_cflags/g" $dev/Makefile.am \
+		> $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
+
+		sed -e "s/<<crt_asflags>>/$crt_asflags/g" $dev/Makefile.am \
+		> $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
+
+		sed -e "s/<<install_dir>>/$install_dir/g" $dev/Makefile.am \
+		> $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
 
 		DEV_SUBDIRS="$DEV_SUBDIRS \\\\\n   $dev"
-
-		cat ${TMP_COPY_RIGHT_HDR} > $arh/$dev/Makefile.am
-		cat >> $arh/$dev/Makefile.am <<EOF
-
-AVR_TARGET          = $dev
-AVR_TARGET_CRT      = $crt
-AVR_TARGET_DEFS     = $crt_defs
-AVR_TARGET_CFLAGS   = $crt_cflags
-AVR_TARGET_ASFLAGS  = $crt_asflags
-AVR_INSTALL_DIR     = $install_dir
-
-VPATH = \$(top_srcdir)/crt1:\$(top_srcdir)/libc/stdlib:\$(top_srcdir)/libc/pmstring:\$(top_srcdir)/libc/string:\$(top_srcdir)/libc/misc:\$(top_srcdir)/libc/stdio:\$(top_srcdir)/libm/fplib
-
-if HAS_$dev
-
-# NOTE: Automake will be performing the following include, not GNU Make.
-# Automake will also be scanning the included file.
-
-include \$(top_srcdir)/AvrCommon.am
-
-else
-
-echo all distdir install installdirs clean distclean uninstall check:
-
-endif
-
-EOF
-
 	done
 	
+	cd ..
 
 	cat ${TMP_COPY_RIGHT_HDR} > $arh/Makefile.am
 	printf "$DEV_SUBDIRS" >> $arh/Makefile.am

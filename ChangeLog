@@ -1,3 +1,9 @@
+2008-03-03  Anatoly Sokolov <aesok@post.ru>
+
+	* devtools/gen-avr-lib-tree.sh: Use devtools/Device.am as template 
+	for dev/Makefile.am.
+	* devtools/Device.am: New file.
+
 2008-03-02  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/avr/eeprom.h: Change cast operation to avoid warning
