@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2008  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,5 +26,18 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#define L_eeprom_read_byte 1
-#include "eeprom.S"
+#include <avr/eeprom.h>
+
+uint16_t __eerd_word (const uint16_t *addr, uint8_t (*getb)(const uint8_t *))
+{
+    union {
+	uint16_t word;
+	struct {
+	    uint8_t lo;
+	    uint8_t hi;
+	} byte;
+    } x;
+    x.byte.lo = getb ((const uint8_t *)addr);
+    x.byte.hi = getb ((const uint8_t *)addr + 1);
+    return x.word;
+}

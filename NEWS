@@ -5,6 +5,7 @@
   [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [#19079] sscanf %s eats 1 char too much
+  [#21410] Incorrect use of 16-bit eeprom addresses in devices with 8-Bit address registers
   [#21869] Multiple defines in iotn2313.h
   [#21872] __floatunsisf/undisf incorrectly named
   [#21905] scanf: float conversion ignores the suppression symbol
@@ -44,9 +45,20 @@
       branches of compiler (less 4.1) and ancient chips (without MOVW).
       . The maximum quantity of conversions now is limited (255).
 
+  - EEPROM functions are rewriten. Now the base procedures (eeprom_read_byte
+    and eeprom_write_byte) are inline: they are evaluated at compile time
+    of user program. This gives a possibility to add support for new AVR
+    arhitectures very simply. Also this fixes Avr-libc bug #21410. New
+    functions for 32-bit words are added.
+
 * Optimized functions:
 
    strtod
+
+* New functions:
+
+   eeprom_read_dword
+   eeprom_write_dword
 
 *** Changes in avr-libc-1.6.0:
 

@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2008  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,5 +26,11 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#define L_eeprom_read_block 1
-#include "eeprom.S"
+#include <avr/eeprom.h>
+
+void
+__eewr_word (uint16_t *dst, uint16_t value, void (*putb)(uint8_t *, uint8_t))
+{
+    putb ((uint8_t *)dst, value);
+    putb ((uint8_t *)dst + 1, value >> 8);
+}

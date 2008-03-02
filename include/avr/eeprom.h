@@ -1,5 +1,7 @@
 /* Copyright (c) 2002, 2003, 2004, 2007 Marek Michalkiewicz
    Copyright (c) 2005, 2006 Bjoern Haase
+   Copyright (c) 2008 Atmel Corporation
+   Copyright (c) 2008 Wouter van Gulik
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -7,12 +9,10 @@
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
-
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -31,59 +31,38 @@
 
 /* $Id$ */
 
-/*
-   eeprom.h
-
-   Contributors:
-     Created by Marek Michalkiewicz <marekm@linux.org.pl>
-     eeprom_write_word and eeprom_write_block added by Artur Lipowski 
-     <LAL@pro.onet.pl>
-     Complete rewrite using the original interface by Bjoern Haase 
-     <bjoern.haase@de.bosch.com>. 
- */
-
-#ifndef _EEPROM_H_
-#define _EEPROM_H_ 1
-
-#define __need_size_t
-#include <stddef.h>
-#include <inttypes.h>
-
-/** \file */
-
-#ifdef __AVR_MEGA__
-#define XCALL "call"
-#else
-#define XCALL "rcall"
-#endif
+#ifndef _AVR_EEPROM_H_
+#define _AVR_EEPROM_H_ 1
 
 #include <avr/io.h>
-#ifndef __EEPROM_REG_LOCATIONS__
-/** \def __EEPROM_REG_LOCATIONS__
-    \ingroup avr_eeprom
-     In order to be able to work without a requiring a multilib 
-     approach for dealing with controllers having the EEPROM registers
-     at different positions in memory space, the eeprom functions evaluate
-     __EEPROM_REG_LOCATIONS__: It is assumed to be defined by
-     the device io header and contains 6 uppercase hex digits encoding the 
-     addresses of EECR,EEDR and EEAR. 
-     First two letters:  EECR address.
-     Second two letters: EEDR address.
-     Last two letters:   EEAR address.
-     The default 1C1D1E corresponds to the
-     register location that is valid for most controllers. The value
-     of this define symbol is used for appending it to the base name of the
-     assembler functions.  */
-#define __EEPROM_REG_LOCATIONS__ 1C1D1E
-#endif
-#define _STR2(EXP) _STR1(EXP)
-#define _STR1(EXP) #EXP
-#define _REG_LOCATION_SUFFIX _STR2(__EEPROM_REG_LOCATIONS__)
+#include <stddef.h>	/* size_t */
+#include <stdint.h>
 
-#ifndef CR_TAB
-#define CR_TAB "\n\t"
+#ifndef	__ATTR_PURE__
+# ifdef	 __DOXYGEN__
+#  define __ATTR_PURE__
+# else
+#  define __ATTR_PURE__  __attribute__((__pure__))
+# endif
 #endif
 
+uint16_t __eerd_word (const uint16_t *, uint8_t (*)(const uint8_t *))
+    __ATTR_PURE__;
+uint32_t __eerd_dword (const uint32_t *, uint8_t (*)(const uint8_t *))
+    __ATTR_PURE__;
+void __eerd_block (void *, const void *, size_t, uint8_t (*)(const uint8_t *));
+
+void __eewr_word (uint16_t *, uint16_t, void (*)(uint8_t *, uint8_t));
+void __eewr_dword (uint32_t *, uint32_t, void (*)(uint8_t *, uint8_t));
+void __eewr_block (void *, const void *, size_t, void (*)(uint8_t *, uint8_t));
+
+#if	!E2END && !defined(__DOXYGEN__)
+# ifndef __COMPILING_AVR_LIBC__
+#  warning "Device does not have EEPROM available."
+# endif
+  /* Omit below for chips without EEPROM.	*/
+
+#else
 
 /** \defgroup avr_eeprom <avr/eeprom.h>: EEPROM handling
     \code #include <avr/eeprom.h> \endcode
@@ -96,304 +75,214 @@
     will have to deploy their own implementation.
 
     \note All of the read/write functions first make sure the EEPROM
-     is ready to be accessed.  Since this may cause long delays if a
-     write operation is still pending, time-critical applications
-     should first poll the EEPROM e. g. using eeprom_is_ready() before
-     attempting any actual I/O.
-
-    \note This header file declares inline functions that call the
-     assembler subroutines directly. This prevents that the compiler
-     generates push/pops for the call-clobbered registers. This way
-     also a specific calling convention could be used for the eeprom
-     routines e.g. by passing values in __tmp_reg__, eeprom addresses in
-     X and memory addresses in Z registers. Method is optimized for code 
-     size.
-
-    \note Presently supported are two locations of the EEPROM register
-     set: 0x1F,0x20,0x21 and 0x1C,0x1D,0x1E 
-     (see ::__EEPROM_REG_LOCATIONS__).
+    is ready to be accessed.  Since this may cause long delays if a
+    write operation is still pending, time-critical applications
+    should first poll the EEPROM e. g. using eeprom_is_ready() before
+    attempting any actual I/O.
 
     \note As these functions modify IO registers, they are known to be
-     non-reentrant.  If any of these functions are used from both,
-     standard and interrupt context, the applications must ensure
-     proper protection (e.g. by disabling interrupts before accessing
-     them).
-
-*/
-
-
-/* forward declarations of the inline functions so that doxygen does
-   not get confused by the attribute expression.  */
-
-static inline uint8_t __attribute__ ((always_inline))
-eeprom_read_byte (const uint8_t *addr);
-
-static inline uint16_t __attribute__ ((always_inline)) 
-eeprom_read_word (const uint16_t *addr);
-
-static inline void __attribute__ ((always_inline))
-eeprom_read_block (void *pointer_ram,
-                   const void *pointer_eeprom,
-                   size_t size);
-
-static inline void __attribute__ ((always_inline))
-eeprom_write_byte (uint8_t *addr,uint8_t value);
-
-static inline void __attribute__ ((always_inline))
-eeprom_write_word (uint16_t *addr,uint16_t value);
-
-static inline void __attribute__ ((always_inline))
-eeprom_write_block (const void *pointer_ram,
-                    void *pointer_eeprom,
-                    size_t size);
-
-/** \name avr-libc declarations */
-
-/*@{*/
+    non-reentrant.  If any of these functions are used from both,
+    standard and interrupt context, the applications must ensure
+    proper protection (e.g. by disabling interrupts before accessing
+    them).
+ */
 
 /** \def EEMEM
     \ingroup avr_eeprom
-    Attribute expression causing a variable to be allocated within the .eeprom
-     section.  */
+    Attribute expression causing a variable to be allocated within the
+    .eeprom section.	*/
 #define EEMEM __attribute__((section(".eeprom")))
+
+
+/* Register definitions */
+
+/* Check for aliases. */
+#if	!defined(EEWE) && defined(EEPE)
+# define EEWE EEPE
+#endif
+
+#if	!defined(EEMWE) && defined(EEMPE)
+# define EEMWE EEMPE
+#endif
+
+#if	!defined(EECR) && defined(DEECR)
+/* AT86RF401 */
+# define EECR  DEECR
+# define EEAR  DEEAR
+# define EEARL DEEAR
+# define EEDR  DEEDR
+# define EERE  EER
+# define EEWE  EEL
+# define EEMWE EEU
+#endif
+
+
+#if	!defined(EECR) || !defined(EEDR) || !defined(EEARL)
+
+# if	 !defined(__EEPROM_REG_LOCATIONS__) \
+      && !defined(EEPROM_REG_LOCATIONS_OVERRIDE)
+   /* 6-byte string denoting where to find the EEPROM registers in memory
+      space.  Adresses denoted in hex syntax with uppercase letters. Used
+      by the EEPROM subroutines.
+	First two letters:  EECR address.
+	Second two letters: EEDR address.
+	Last two letters:   EEAR address.
+    */
+#  error "Unknown EEPROM register(s) location."
+# endif
+
+/* If needed, override the locations defined in the IO headers. */
+# ifdef  EEPROM_REG_LOCATIONS_OVERRIDE
+#  undef  __EEPROM_REG_LOCATIONS__
+#  define __EEPROM_REG_LOCATIONS__ EEPROM_REG_LOCATIONS_OVERRIDE
+# endif
+
+# define CONCAT1(a, b) CONCAT2(a, b)
+# define CONCAT2(a, b) a ## b
+# define HEXNR CONCAT1(0x, __EEPROM_REG_LOCATIONS__)
+
+# undef EECR
+# define EECR _SFR_IO8((HEXNR >> 16) & 0xFF)
+
+# undef EEDR
+# define EEDR _SFR_IO8((HEXNR >> 8) & 0xFF)
+
+# undef EEAR
+# define EEAR _SFR_IO8(HEXNR & 0xFF)
+
+# undef EEARH
+
+# undef EEARL
+# define EEARL EEAR
+
+#endif
+
 
 /** \def eeprom_is_ready
     \ingroup avr_eeprom
-    \returns 1 if EEPROM is ready for a new read/write operation, 0 if not. */
-
-#if defined(__DOXYGEN__)
+    \returns 1 if EEPROM is ready for a new read/write operation, 0 if not.
+ */
+#if	defined(__DOXYGEN__)
 # define eeprom_is_ready()
-#elif defined(EEWE)
+#elif	defined(DEECR)
+# define eeprom_is_ready() bit_is_clear(DEECR, BSY)
+#else
 # define eeprom_is_ready() bit_is_clear(EECR, EEWE)
-#elif defined(EEPE)
-# define eeprom_is_ready() bit_is_clear(EECR, EEPE)
-#elif defined(DEECR) && defined(EEL)
-# define eeprom_is_ready() bit_is_clear(DEECR, EEL)
-#else
-# error "No write enable bit known for this device's EEPROM."
 #endif
 
-/** \def eeprom_busy_wait
-    \ingroup avr_eeprom
-
-    Loops until the eeprom is no longer busy.
-
-    \returns Nothing. */
-
-#define eeprom_busy_wait() do {} while (!eeprom_is_ready())
-
 
 /** \ingroup avr_eeprom
-    Read one byte from EEPROM address \c addr. */
-
-uint8_t 
-eeprom_read_byte (const uint8_t *addr) 
+    Read one byte from EEPROM address \a __p.
+ */
+__ATTR_PURE__ static __inline__ uint8_t eeprom_read_byte (const uint8_t *__p)
 {
-  uint8_t result;
-  __asm__ __volatile__
-      ( XCALL " __eeprom_read_byte_" _REG_LOCATION_SUFFIX CR_TAB
-        "mov %1,__tmp_reg__"
-       : "+x" (addr),
-         "=r" (result)
-       : );
-  return result;
-}
-
-/** \ingroup avr_eeprom
-    Read one 16-bit word (little endian) from EEPROM address \c addr. */
-uint16_t
-eeprom_read_word (const uint16_t *addr)
-{
-  uint16_t result;
-
-  __asm__ __volatile__ (
-        XCALL " __eeprom_read_word_" _REG_LOCATION_SUFFIX CR_TAB
-       : "+x" (addr),
-         "=z" (result)
-       : );
-  return result;
-}
-
-/** \ingroup avr_eeprom
-    Read a block of \c n bytes from EEPROM address \c pointer_eeprom to
-    \c pointer_ram.  For constant n <= 256 bytes a library function is used.
-    For block sizes unknown at compile time or block sizes > 256 an inline
-    loop is expanded. */
-
-void 
-eeprom_read_block (void *pointer_ram,
-                   const void *pointer_eeprom,
-                   size_t n)
-{
-  if (!__builtin_constant_p (n)
-      || n > 256)
-    {
-      /* make sure size is a 16 bit variable.  */
-      uint16_t size = n; 
-
-      __asm__ __volatile__ ( 
-            ".%=_start:" CR_TAB
-            "sbiw %2,1" CR_TAB
-            "brlt .%=_finished" CR_TAB
-             XCALL " __eeprom_read_byte_" _REG_LOCATION_SUFFIX CR_TAB
-            "st z+,__tmp_reg__" CR_TAB
-            "rjmp .%=_start" CR_TAB
-            ".%=_finished:" 
-          : "=x" (pointer_eeprom),
-            "=z" (pointer_ram),
-            "+w" (size)
-           : "x" (pointer_eeprom), 
-             "z" (pointer_ram)
-           : "memory");
-    }
-  else
-    {
-      if (n != 0)
-        {
-          if (n == 256)
-            {
-              __asm__ __volatile__ (
-                  XCALL " __eeprom_read_block_" _REG_LOCATION_SUFFIX 
-                : "+x" (pointer_eeprom),
-                  "=z" (pointer_ram)
-                : "z"  (pointer_ram)
-                : "memory");
-            }
-          else
-            {
-              /* Needed in order to truncate to 8 bit.  */
-              uint8_t len;
-              len = (uint8_t) n; 
-
-              __asm__ __volatile__ (
-                  "mov __zero_reg__,%2"      CR_TAB
-                   XCALL " __eeprom_read_block_" _REG_LOCATION_SUFFIX 
-                : "+x" (pointer_eeprom),
-                  "=z" (pointer_ram)
-                : "r"  (len),
-                  "z"  (pointer_ram)
-                : "memory");
-            }
-        }
-    }
-}
-
-/** \ingroup avr_eeprom
-    Write a byte \c value to EEPROM address \c addr. */
-
-void 
-eeprom_write_byte (uint8_t *addr,uint8_t value)
-{
-  __asm__ __volatile__ (
-         "mov __tmp_reg__,%1"      CR_TAB
-         XCALL " __eeprom_write_byte_" _REG_LOCATION_SUFFIX
-       : "+x" (addr)
-       : "r"  (value)
-       : "memory"
-      );
-}
-
-/** \ingroup avr_eeprom
-    Write a word \c value to EEPROM address \c addr. */
-
-void 
-eeprom_write_word (uint16_t *addr,uint16_t value)
-{
-  __asm__ __volatile__ (
-#if defined(__AVR_HAVE_MOVW__)
-         "movw __tmp_reg__,%A1" CR_TAB
+    do {} while (!eeprom_is_ready ());
+#if	E2END <= 0xFF
+    EEARL = (uint8_t)__p;
 #else
-         "mov __tmp_reg__,%A1"      CR_TAB
-         "mov __zero_reg__,%B1"     CR_TAB
+    EEAR = (uint16_t)__p;
 #endif
-          XCALL " __eeprom_write_word_" _REG_LOCATION_SUFFIX CR_TAB
-       : "+x" (addr)
-       : "r"  (value)
-       : "memory"
-      );
+    EECR |= (1 << EERE);
+    return EEDR;
 }
 
 /** \ingroup avr_eeprom
-    Write a block of \c n bytes to EEPROM address \c pointer_eeprom from
-    \c pointer_ram. */
-
-void 
-eeprom_write_block (const void *pointer_ram,
-                    void *pointer_eeprom,
-                    size_t n)
+    Read one 16-bit word (little endian) from EEPROM address \a __p.
+ */
+__ATTR_PURE__ static __inline__ uint16_t eeprom_read_word (const uint16_t *__p)
 {
-  if (!__builtin_constant_p (n)
-      || n > 256)
-    {
-      /* make sure size is a 16 bit variable.  */
-      uint16_t size = n; 
-
-      __asm__ __volatile__ ( 
-            ".%=_start:" CR_TAB
-            "sbiw %2,1" CR_TAB
-            "brlt .%=_finished" CR_TAB
-            "ld __tmp_reg__,z+" CR_TAB
-             XCALL " __eeprom_write_byte_" _REG_LOCATION_SUFFIX CR_TAB
-            "rjmp .%=_start" CR_TAB
-            ".%=_finished:" 
-          : "=x" (pointer_eeprom),
-            "=z" (pointer_ram),
-            "+w" (size)
-           : "x" (pointer_eeprom), 
-             "z" (pointer_ram)
-           : "memory");
-    }
-  else
-    {
-      /* Do nothing for compile time constant transfer size n == 0.  */
-      if (n != 0)
-        {
-          if (n == 256)
-            {
-              __asm__ __volatile__ (
-                 XCALL " __eeprom_write_block_" _REG_LOCATION_SUFFIX
-               : "+x" (pointer_eeprom),
-                 "=z" (pointer_ram)
-               : "z"  (pointer_ram)
-               : "memory" );
-            }
-          else
-            {
-              uint8_t len;
-              len = (uint8_t) n;
-
-              __asm__ __volatile__ (
-                 "mov __zero_reg__,%2" CR_TAB
-                 XCALL " __eeprom_write_block_" _REG_LOCATION_SUFFIX
-               : "+x" (pointer_eeprom),
-                 "=z" (pointer_ram)
-               : "r"  (len),
-                 "z"  (pointer_ram)
-               : "memory" );
-            }
-
-        }
-    }
+    return __eerd_word (__p, eeprom_read_byte);
 }
 
-/*@}*/
+/** \ingroup avr_eeprom
+    Read one 32-bit double word (little endian) from EEPROM address \a __p.
+ */
+__ATTR_PURE__ static __inline__
+uint32_t eeprom_read_dword (const uint32_t *__p)
+{
+    return __eerd_dword (__p, eeprom_read_byte);
+}
 
-/** \name IAR C compatibility defines */
+/** \ingroup avr_eeprom
+    Read a block of \a __n bytes from EEPROM address \a __src to SRAM
+    \a __dst.
+ */
+static __inline__ void
+eeprom_read_block (void *__dst, const void *__src, size_t __n)
+{
+    __eerd_block (__dst, __src, __n, eeprom_read_byte);
+}
 
+/** \ingroup avr_eeprom
+    Write a byte \a __value to EEPROM address \a __p.
+ */
+static __inline__ void eeprom_write_byte (uint8_t *__p, uint8_t __value)
+{
+    do {} while (!eeprom_is_ready ());
+
+#if	E2END <= 0xFF
+    EEARL = (uint8_t)__p;
+#else
+    EEAR = (uint16_t)__p;
+#endif
+    EEDR = __value;
+
+    __asm__ __volatile__ (
+        "/* START EEPROM WRITE CRITICAL SECTION */\n\t"
+        "in	r0, %[__sreg]		\n\t"
+        "cli				\n\t"
+        "sbi	%[__eecr], %[__eemwe]	\n\t"
+        "sbi	%[__eecr], %[__eewe]	\n\t"
+        "out	%[__sreg], r0		\n\t"
+        "/* END EEPROM WRITE CRITICAL SECTION */"
+        :
+        : [__eecr]  "i" (_SFR_IO_ADDR(EECR)),
+          [__sreg]  "i" (_SFR_IO_ADDR(SREG)),
+          [__eemwe] "i" (EEMWE),
+          [__eewe]  "i" (EEWE)
+        : "r0"
+    );
+}
+
+/** \ingroup avr_eeprom
+    Write a word \a __value to EEPROM address \a __p.
+ */
+static __inline__ void eeprom_write_word (uint16_t *__p, uint16_t __value)
+{
+    __eewr_word (__p, __value, eeprom_write_byte);
+}
+
+/** \ingroup avr_eeprom
+    Write a 32-bit double word \a __value to EEPROM address \a __p.
+ */
+static __inline__ void eeprom_write_dword (uint32_t *__p, uint32_t __value)
+{
+    __eewr_dword (__p, __value, eeprom_write_byte);
+}
+
+/** \ingroup avr_eeprom
+    Write a block of \a __n bytes to EEPROM address \a __dst from \a __src.
+ */
+static __inline__ void
+eeprom_write_block (void *__dst, const void *__src, size_t __n)
+{
+    __eewr_block (__dst, __src, __n, eeprom_write_byte);
+}
+
+/** \name IAR C compatibility defines	*/
 /*@{*/
 
 /** \def _EEPUT
     \ingroup avr_eeprom
-    Write a byte to EEPROM. Compatibility define for IAR C. */
-
+    Write a byte to EEPROM. Compatibility define for IAR C.	*/
 #define _EEPUT(addr, val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
 
 /** \def _EEGET
     \ingroup avr_eeprom
-    Read a byte from EEPROM. Compatibility define for IAR C. */
-
-#define _EEGET(var, addr) (var) = eeprom_read_byte ((uint8_t *)(addr))
+    Read a byte from EEPROM. Compatibility define for IAR C.	*/
+#define _EEGET(var, addr) (var) = eeprom_read_byte ((const uint8_t *)(addr))
 
 /*@}*/
 
-#endif /* _EEPROM_H_ */
+#endif	/* E2END || defined(__DOXYGEN__) */
+#endif	/* !_AVR_EEPROM_H */

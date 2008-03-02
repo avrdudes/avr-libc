@@ -1,4 +1,4 @@
-/* Copyright (c) 2003, Artur Lipowski
+/* Copyright (c) 2008  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,24 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#define L_eeprom_write_block 1
-#include "eeprom.S"
+#include <avr/eeprom.h>
 
+void
+__eewr_dword (uint32_t *dst, uint32_t value, void (*putb)(uint8_t *, uint8_t))
+{
+    union {
+	uint32_t dword;
+	struct {
+	    uint8_t lo;
+	    uint8_t hi;
+	    uint8_t hlo;
+	    uint8_t hhi;
+	} byte;
+    } x;
+
+    x.dword = value;
+    putb ((uint8_t *)dst, x.byte.lo);
+    putb ((uint8_t *)dst + 1, x.byte.hi);
+    putb ((uint8_t *)dst + 2, x.byte.hlo);
+    putb ((uint8_t *)dst + 3, x.byte.hhi);
+}

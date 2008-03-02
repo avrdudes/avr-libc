@@ -1,3 +1,31 @@
+2008-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	New variant of EEPROM functions: inline byte procedures and library
+	multibyte envelopes.
+	* include/avr/eeprom.h: Rewrite on the base of project by Eric B.
+	Weddington.
+	* libc/misc/eeprom.S: Remove file.
+	* libc/misc/ee_rb.S: Remove file.
+	* libc/misc/ee_rblk.S: Remove file.
+	* libc/misc/ee_rw.S: Remove file.
+	* libc/misc/ee_wb.S: Remove file.
+	* libc/misc/ee_wblk.S: Remove file.
+	* libc/misc/ee_ww.S: Remove file.
+	* libc/misc/eerd_block.c: New file.
+	* libc/misc/eerd_dword.c: New file.
+	* libc/misc/eerd_word.c: New file.
+	* libc/misc/eewr_block.c: New file.
+	* libc/misc/eewr_dword.c: New file.
+	* libc/misc/eewr_word.c: New file.
+	* libc/misc/Files.am: Remove old sources, add new.
+	* libc/misc/Makefile.am: Include $(misc_a_c_sources) to EXTRA_DIST.
+	* libc/misc/Rules.am: Remove rules to build chip-specific objects.
+	* tests/simulate/avr: New directory (for AVR-specific functions).
+	* tests/simulate/avr/eeprom-1.c: New file.
+	* tests/simulate/runtest.sh: Add 'avr/*.c' to default test list.
+	Add $MCU_LIST_FULL for AVR-specific testing.
+	* NEWS: Notes about EEPROM changes and fixed bug.
+
 2008-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* doc/api/bench.dox: Change remark about GCC versions: replace
