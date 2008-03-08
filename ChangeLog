@@ -1,3 +1,9 @@
+2008-03-09  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/eeprom.h: eeprom_write_byte(): add EECR clearning
+	to force erase_and_write programming mode. Document this and add
+	note about necessarity SELFPRGEN polling.
+
 2008-03-08  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #22493.

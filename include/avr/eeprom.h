@@ -78,13 +78,17 @@ void __eewr_block (void *, const void *, size_t, void (*)(uint8_t *, uint8_t));
     is ready to be accessed.  Since this may cause long delays if a
     write operation is still pending, time-critical applications
     should first poll the EEPROM e. g. using eeprom_is_ready() before
-    attempting any actual I/O.
+    attempting any actual I/O.  But this functions are not wait until
+    SELFPRGEN in SPMCSR becomes zero.  Do this manually, if your
+    softwate contains the Flash burning.
 
     \note As these functions modify IO registers, they are known to be
     non-reentrant.  If any of these functions are used from both,
     standard and interrupt context, the applications must ensure
     proper protection (e.g. by disabling interrupts before accessing
     them).
+
+    \note All write functions force erase_and_write programming mode.
  */
 
 /** \def EEMEM
@@ -219,6 +223,12 @@ eeprom_read_block (void *__dst, const void *__src, size_t __n)
 static __inline__ void eeprom_write_byte (uint8_t *__p, uint8_t __value)
 {
     do {} while (!eeprom_is_ready ());
+
+#if	defined(EEPM0) && defined(EEPM1)
+    EECR = 0;		/* Set programming mode: erase and write.	*/
+#elif	defined(EEPM0) || defined(EEPM1)
+# warning "Unknown EECR register, eeprom_write_byte() has become outdated."
+#endif
 
 #if	E2END <= 0xFF
     EEARL = (unsigned)__p;
