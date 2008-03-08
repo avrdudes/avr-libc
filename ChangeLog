@@ -1,3 +1,8 @@
+2008-03-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22493.
+	* include/avr/iom1284p.h: Fix typo.
+
 2008-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* doc/api/bench.dox: Change remark about GCC versions: replace
