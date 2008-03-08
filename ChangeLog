@@ -1,3 +1,8 @@
+2008-03-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22493.
+	* include/avr/iom1284p.h: Fix typo.
+
 2008-03-03  Anatoly Sokolov <aesok@post.ru>
 
 	* devtools/gen-avr-lib-tree.sh: Use devtools/Device.am as template 

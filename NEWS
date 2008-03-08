@@ -19,6 +19,7 @@
   [#22016] Typo in iotn2313.h: SIG_OUTPUT_COPMARE0A
   [#22153] setjmp.o is wrong in libc.a (1.6.1) for avr's with SPH
   [#22377] Wrong XRAMEND for some recent ioXXX.h header files.
+  [#22493] Typo in iom1284p.h.
 
 * Other changes:
 

@@ -605,7 +605,7 @@
 #define FOC1B 6
 #define FOC1A 7
 
-#define TCTN1 _SFR_MEM16(0x84)
+#define TCNT1 _SFR_MEM16(0x84)
 
 #define TCNT1L _SFR_MEM8(0x84)
 #define TCNT1L0 0
