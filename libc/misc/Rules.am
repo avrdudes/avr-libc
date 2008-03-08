@@ -30,14 +30,4 @@
 
 include $(top_srcdir)/libc/misc/Files.am
 
-misc_a_libadd = \
-	$(eeprom_asm_sources:%.S=%.1F2021.o) \
-	$(eeprom_asm_sources:%.S=%.1C1D1E.o)
-
-%.1C1D1E.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@ -DEEPROM_REG_LOCATIONS_OVERRIDE=1C1D1E
-
-%.1F2021.o: %.S
-	$(COMPILE) $(AVRLIB_ASFLAGS) -c $< -o $@ -DEEPROM_REG_LOCATIONS_OVERRIDE=1F2021
-
 # vim: set ft=make:

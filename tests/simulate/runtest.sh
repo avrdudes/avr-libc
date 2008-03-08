@@ -46,6 +46,7 @@ myname="$0"
 
 : ${AVRDIR=../..}
 : ${MCU_LIST="at90s8515 atmega8"}
+: ${MCU_LIST_FULL="at90s2313 at90s4414 at90s8515 atmega8 atmega16"}
 
 HOST_PASS=			# Add pass at host computer
 HOST_ONLY=			# Pass at host only, skip AVR mode
@@ -90,7 +91,8 @@ while getopts "a:icg:tTsh" opt ; do
 done
 shift $((OPTIND - 1))
 test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
-		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c"}
+		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c \
+		avr/*.c"}
     
 CPPFLAGS="-Wundef -I."
 CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
@@ -144,8 +146,12 @@ Compile ()
     else
 	local avrno
         case $2 in
+	    at90s2313)  avrno=2 ; crt=crts2313.o ;;
+	    at90s4414)  avrno=2 ; crt=crts4414.o ;;
 	    at90s8515)  avrno=2 ; crt=crts8515.o ;;
 	    atmega8)    avrno=4 ; crt=crtm8.o ;;
+	    atmega16)   avrno=5 ; crt=crtm16.o ;;
+	    atmega128)  avrno=5 ; crt=crtm128.o ;;
 	    *)
 		Errx "Compile(): invalid MCU: $2"
 	esac
@@ -236,10 +242,15 @@ for test_file in $test_list ; do
 		    *scanf*)		prlist="SC_STD SC_FLT SC_MIN" ;;
 		    *)			prlist="PR_STD" ;;
 		esac
+
+		case `dirname $test_file` in
+		    avr)  mcu_list="$MCU_LIST_FULL" ;;
+		    *)    mcu_list="$MCU_LIST" ;;
+		esac
 		
 	        elf_file=$rootname.elf
 		for prvers in $prlist ; do
-		    for mcu in $MCU_LIST ; do
+		    for mcu in $mcu_list ; do
 			echo -n "Simulate: $test_file "
 			case $prvers in
 			    PR_MIN)	echo -n "/printf_min " ;;

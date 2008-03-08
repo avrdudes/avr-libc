@@ -29,15 +29,15 @@
 # $Id$
 #
 
-misc_a_c_sources =
+misc_a_c_sources = \
+	eerd_block.c \
+	eerd_dword.c \
+	eerd_word.c \
+	eewr_block.c \
+	eewr_dword.c \
+	eewr_word.c
 
-eeprom_asm_sources = \
-	ee_rb.S \
-	ee_rblk.S \
-	ee_rw.S \
-	ee_wb.S \
-	ee_ww.S \
-	ee_wblk.S
+eeprom_asm_sources =
 
 misc_a_asm_sources = \
 	itoa.S \
@@ -47,6 +47,6 @@ misc_a_asm_sources = \
 	ultoa.S \
 	utoa.S
 
-misc_a_extra_dist = eeprom.S $(eeprom_asm_sources)
+misc_a_extra_dist = $(eeprom_asm_sources)
 
 # vim: set ft=make:

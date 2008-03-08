@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2008  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,5 +26,13 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#define L_eeprom_read_word 1
-#include "eeprom.S"
+/* $Id$	*/
+
+#include <avr/eeprom.h>
+
+void __eerd_block (void *dst, const void *src, size_t size,
+		   uint8_t (*getb)(const uint8_t *))
+{
+    while (size--)
+	*(char *)dst++ = getb (src++);
+}
