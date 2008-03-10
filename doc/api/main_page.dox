@@ -202,6 +202,7 @@ compile-time.
 - at43usb320
 - at43usb355
 - at86rf401
+- atmega32m1
 
 \par Classic AVR Devices:
 
