@@ -772,6 +772,32 @@ do{ \
 #define power_all_disable()     (PRR0 |= (uint8_t)((1<<PRTWI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRVADC)|(1<<PRSPI)|(1<<PRVRM)))
 
 
+#elif defined(__AVR_ATmega32M1__)
+
+#define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
+#define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))
+
+#define power_lin_enable()      (PRR &= (uint8_t)~(1 << PRLIN))
+#define power_lin_disable()     (PRR |= (uint8_t)(1 << PRLIN))
+
+#define power_spi_enable()      (PRR &= (uint8_t)~(1 << PRSPI))
+#define power_spi_disable()     (PRR |= (uint8_t)(1 << PRSPI))
+
+#define power_timer0_enable()   (PRR &= (uint8_t)~(1 << PRTIM0))
+#define power_timer0_disable()  (PRR |= (uint8_t)(1 << PRTIM0))
+
+#define power_timer1_enable()   (PRR &= (uint8_t)~(1 << PRTIM1))
+#define power_timer2_disable()  (PRR |= (uint8_t)(1 << PRTIM1))
+
+#define power_psc_enable()      (PRR &= (uint8_t)~(1 << PRPSC))
+#define power_psc_disable()     (PRR |= (uint8_t)(1 << PRPSC))
+
+#define power_can_enable()      (PRR &= (uint8_t)~(1 << PRCAN))
+#define power_can_disable()     (PRR |= (uint8_t)(1 << PRCAN))
+
+#define power_all_enable()      (PRR &= (uint8_t)~((1<<PRADC)|(1<<PRLIN)|(1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRPSC)|(1<<PRCAN)))
+#define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRLIN)|(1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRPSC)|(1<<PRCAN)))
+
 #endif
 
 
@@ -794,6 +820,7 @@ do{ \
 || defined(__AVR_AT90PWM3B__) \
 || defined(__AVR_AT90PWM216__) \
 || defined(__AVR_AT90PWM316__) \
+|| defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega1284P__) \
 || defined(__AVR_ATmega162__) \
 || defined(__AVR_ATmega165__) \

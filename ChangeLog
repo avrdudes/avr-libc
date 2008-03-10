@@ -1,3 +1,16 @@
+2008-03-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega32M1 device.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom32m1.h: New file.
+	* NEWS: Add new device to list.
+
 2008-03-09  Anatoly Sokolov <aesok@post.ru>
 
 	* devtools/gen-avr-lib-tree.sh: Use 'Avr.am', 'Lib.am' and 

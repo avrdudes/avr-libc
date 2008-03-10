@@ -52,6 +52,10 @@
     arhitectures very simply. Also this fixes Avr-libc bug #21410. New
     functions for 32-bit words are added.
 
+* New devices supported:
+
+  + ATmega32M1
+
 * Optimized functions:
 
    strtod
