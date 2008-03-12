@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Marek Michalkiewicz <marekm@amelek.gda.pl>
-   Copyright (c) 2007, Eric B. Weddington
+   Copyright (c) 2007, 2008 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -156,6 +156,7 @@ __init:
 	out	_SFR_IO_ADDR(EIND), r16
 #endif	/* __AVR_3_BYTE_PC__ */
 
+#if defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3))
 #if BIG_CODE
 	/* Only for >64K devices with RAMPZ, replaces the default code
 	   provided by libgcc.S which is only linked in if necessary.  */
@@ -197,6 +198,7 @@ __do_copy_data:
 	cpc	r27, r17
 	brne	.L__do_copy_data_loop
 #endif /* BIG_CODE */
+#endif /* defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3)) */
 
 	.set	__stack, RAMEND
 #endif /* !__AVR_ASM_ONLY__ */
