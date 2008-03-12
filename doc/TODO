@@ -1,22 +1,20 @@
 TODO for avr-libc:
 
-Before 1.6:
+Before 1.8:
     - Document:
         * merge chapter 3 from Rich Neswold's doc. Needs some rewriting to
           update for newer tools. (explanation of start code)
         * gcrt1.S
         * how to pre-program the EEPROM.
         * how to roll your own crt*.o
-    - Document Windows Build guide.
 
     - Figure out how to remove __ prefix from function args in dox.
       [Ted has workaround [5].]
-    - fix signed/unsigned gcc warnings (qsort.c, strtol.c, strtoul.c)
+    - fix signed/unsigned gcc warnings (qsort.c).
       [Joerg has patch [1] for this that just needs some love before it's
       committed.]
     - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
       sys/systemcfg.h?
-    - testsuite [4]
     - Add <compat/io.h>: smallest common denominator for IO port
       declarations. [7]
     - Hunt down and fix broken links in html dox. Linklint is a useful tool
@@ -25,6 +23,5 @@ Before 1.6:
 
 [1] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-08/msg00054.html
 [3] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-08/msg00117.html
-[4] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-09/msg00038.html
 [5] http://mail.nongnu.org/archive/html/avr-libc-dev/2002-12/msg00034.html
 [7] http://mail.nongnu.org/archive/html/avr-libc-dev/2003-01/msg00077.html

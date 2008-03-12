@@ -1,5 +1,9 @@
 2008-03-12  Anatoly Sokolov <aesok@post.ru>
 
+	* doc/TODO: Update.
+
+2008-03-12  Anatoly Sokolov <aesok@post.ru>
+
 	* crt1/gcrt1.S (__do_copy_data): Don't use for GCC 4.4 and up.
 
 2008-03-11  Anatoly Sokolov <aesok@post.ru>
