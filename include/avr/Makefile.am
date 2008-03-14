@@ -94,6 +94,7 @@ avr_HEADERS = \
     iom329.h \
     iom3290.h \
     iom32hvb.h \
+    iom32c1.h \
     iom32m1.h \
     iom48.h \
     iom48p.h \

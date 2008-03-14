@@ -169,6 +169,7 @@
 || defined(__AVR_AT90PWM3B__) \
 || defined(__AVR_AT90PWM216__) \
 || defined(__AVR_AT90PWM316__) \
+|| defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny88__)

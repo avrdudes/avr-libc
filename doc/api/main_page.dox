@@ -152,6 +152,10 @@ compile-time.
 - attiny861
 - attiny88
 
+\par Automotive AVR Devices:
+- atmega32c1
+- atmega32m1
+
 \par CAN AVR Devices:
 
 - at90can32
@@ -202,7 +206,6 @@ compile-time.
 - at43usb320
 - at43usb355
 - at86rf401
-- atmega32m1
 
 \par Classic AVR Devices:
 
