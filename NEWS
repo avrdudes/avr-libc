@@ -55,6 +55,7 @@
 * New devices supported:
 
   + ATmega32M1
+  + ATmega32C1
 
 * Optimized functions:
 
