@@ -207,6 +207,8 @@
 #define EEAR8 0
 #define EEAR9 1
 
+#define _EEPROM_REG_LOCATIONS_ 1F2021
+
 #define GTCCR _SFR_IO8(0x23)
 #define PSRSYNC 0
 #define PSRASY 1
@@ -326,6 +328,8 @@
 #define WDRF 3
 
 #define MCUCR _SFR_IO8(0x35)
+#define IVCE 0
+#define IVSEL 1
 #define PUD 4
 #define BODSE 5
 #define BODS 6

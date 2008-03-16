@@ -1,3 +1,9 @@
+2008-03-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bugs #22568, #22548.
+	* include/avr/iom328p.h: Add missing definitions.
+	* NEWS: Update fixed bug list.
+
 2008-03-16  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/ftoa_engine.S: Add CPP scopes to exclude the parsing
