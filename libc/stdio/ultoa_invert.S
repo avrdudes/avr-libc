@@ -28,6 +28,8 @@
 
 /* $Id$	*/
 
+#ifndef	__DOXYGEN__
+
 #include "macros.inc"
 #include "ntz.h"
 #include "xtoa_fast.h"
@@ -210,3 +212,5 @@ __ultoa_invert:
 
 	.size	__ultoa_invert, . - __ultoa_invert
 	.end
+
+#endif	/* !__DOXYGEN__ */
