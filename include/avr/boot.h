@@ -188,7 +188,7 @@
 #define __BOOT_LOCK_BITS_SET      (_BV(SPMEN) | _BV(BLBSET))
 
 #define __boot_page_fill_normal(address, data)   \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
@@ -203,10 +203,10 @@
           "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
     );                                           \
-})
+}))
 
 #define __boot_page_fill_alternate(address, data)\
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
@@ -223,10 +223,10 @@
           "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
     );                                           \
-})
+}))
 
 #define __boot_page_fill_extended(address, data) \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %4\n\t"                       \
@@ -243,10 +243,10 @@
           "r" ((uint16_t)data)                   \
         : "r0", "r30", "r31"                     \
     );                                           \
-})
+}))
 
 #define __boot_page_erase_normal(address)        \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -258,10 +258,10 @@
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
-})
+}))
 
 #define __boot_page_erase_alternate(address)     \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -275,10 +275,10 @@
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
-})
+}))
 
 #define __boot_page_erase_extended(address)      \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
@@ -292,10 +292,10 @@
           "r" ((uint32_t)address)                \
         : "r30", "r31"                           \
     );                                           \
-})
+}))
 
 #define __boot_page_write_normal(address)        \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -307,10 +307,10 @@
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
-})
+}))
 
 #define __boot_page_write_alternate(address)     \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %2\n\t"                       \
@@ -324,10 +324,10 @@
           "r" ((uint16_t)address)                \
         : "r30", "r31"                           \
     );                                           \
-})
+}))
 
 #define __boot_page_write_extended(address)      \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
@@ -341,10 +341,10 @@
           "r" ((uint32_t)address)                \
         : "r30", "r31"                           \
     );                                           \
-})
+}))
 
 #define __boot_rww_enable()                      \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "sts %0, %1\n\t"                         \
@@ -353,10 +353,10 @@
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
     );                                           \
-})
+}))
 
 #define __boot_rww_enable_alternate()            \
-({                                               \
+(__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
         "sts %0, %1\n\t"                         \
@@ -367,7 +367,7 @@
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_RWW_ENABLE)       \
     );                                           \
-})
+}))
 
 /* From the mega16/mega128 data sheets (maybe others):
 
@@ -387,7 +387,7 @@
      bits the entire Flash can be read during the operation. */
 
 #define __boot_lock_bits_set(lock_bits)                    \
-({                                                         \
+(__extension__({                                           \
     uint8_t value = (uint8_t)(~(lock_bits));               \
     __asm__ __volatile__                                   \
     (                                                      \
@@ -402,10 +402,10 @@
           "r" (value)                                      \
         : "r0", "r30", "r31"                               \
     );                                                     \
-})
+}))
 
 #define __boot_lock_bits_set_alternate(lock_bits)          \
-({                                                         \
+(__extension__({                                           \
     uint8_t value = (uint8_t)(~(lock_bits));               \
     __asm__ __volatile__                                   \
     (                                                      \
@@ -422,7 +422,7 @@
           "r" (value)                                      \
         : "r0", "r30", "r31"                               \
     );                                                     \
-})
+}))
 
 /*
    Reading lock and fuse bits:
@@ -508,7 +508,7 @@
 #define __BOOT_SIGROW_READ (_BV(SPMEN) | _BV(SIGRD))
 
 #define boot_signature_byte_get(addr) \
-  (__extension__({		      \
+(__extension__({		      \
       uint16_t __addr16 = (uint16_t)(addr);	\
       uint8_t __result;				\
       __asm__ __volatile__			\

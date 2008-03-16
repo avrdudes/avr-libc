@@ -1,5 +1,10 @@
 2008-03-16  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Patch #6355, by Stas Sergeev
+	* include/avr/boot.h: add __extension__ to boot.h.
+
+2008-03-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bugs #22568, #22548.
 	* include/avr/iom328p.h: Add missing definitions.
 	* NEWS: Update fixed bug list.
