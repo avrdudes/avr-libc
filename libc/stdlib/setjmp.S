@@ -49,6 +49,8 @@ int setjmp(jmp_buf __jmpb);
 void longjmp(jmp_buf __jmpb, int __val) __attribute__((noreturn));
  */
 
+#ifndef	__DOXYGEN__
+
 #include "macros.inc"
 #include "ctoasm.inc"
 
@@ -174,3 +176,4 @@ _U(longjmp):
 	ijmp
 #endif
 
+#endif	/* !__DOXYGEN__ */

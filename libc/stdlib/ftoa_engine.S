@@ -28,6 +28,8 @@
 
 /* $Id$ */
 
+#ifndef	__DOXYGEN__
+
 #include "macros.inc"
 #include "ftoa_engine.h"
 
@@ -527,3 +529,4 @@ __ftoa_engine:
     .size .L_base10, . - .L_base10
 
 	.end
+#endif	/* !__DOXYGEN__ */

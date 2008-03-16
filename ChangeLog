@@ -1,3 +1,13 @@
+2008-03-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/ftoa_engine.S: Add CPP scopes to exclude the parsing
+	of asm by DOXYGEN.
+	* libc/stdlib/setjmp.S: Ditto.
+	* libc/stdlib/ultoa_invert.S: Ditto.
+	* libc/stdlib/atof.S: Add DOXYGEN doc and exclude other asm from
+	DOXYGEN parsing.
+	* include/stdlib.h: Remove DOXYGEN of atof().
+
 2008-03-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATmega32C1.
