@@ -288,7 +288,7 @@ do
 		    -e "s/<<install_dir>>/$install_dir/g" $dev/Makefile.am \
 		    > $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
 
-		DEV_SUBDIRS="$DEV_SUBDIRS \\\\\n   $dev"
+		DEV_SUBDIRS="$DEV_SUBDIRS $dev"
 	done
 
 	cat $top_dir/devtools/Architecture.am > Makefile.am
@@ -301,7 +301,7 @@ do
 	    -e "s/<<install_dir>>/$install_dir/g" Makefile.am \
 	    > tempfile && mv -f tempfile Makefile.am
 
-	ARH_SUBDIRS="$ARH_SUBDIRS \\\\\n   $arh"
+	ARH_SUBDIRS="$ARH_SUBDIRS $arh"
 
 	cd ..
 done

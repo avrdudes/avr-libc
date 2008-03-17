@@ -1,7 +1,13 @@
 2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* devtools/gen-avr-lib-tree.sh: replace \\\\\n by just a
+	space, it's causing way less troubles.
+
+2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/examples/demo/iocompat.h: Add support for ATmega1284P,
 	ATmega2560, and ATmega2561.
+	* doc/examples/demo/Makefile: (Ditto.)
 
 2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
