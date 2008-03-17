@@ -712,7 +712,7 @@ the stack.
 Return values: 8-bit in r24 (not r25!), 16-bit in r25:r24,
 up to 32 bits in r22-r25, up to 64 bits in r18-r25.
 8-bit return values are zero/sign-extended to
-16 bits by the caller (<tt>unsigned char</tt> is more
+16 bits by the called function (<tt>unsigned char</tt> is more
 efficient than <tt>signed char</tt> - just <tt>clr r25</tt>).
 Arguments to functions with variable argument lists
 (printf etc.) are all passed on stack, and \c char
