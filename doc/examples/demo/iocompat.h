@@ -36,7 +36,8 @@
       defined(__AVR_ATmega163__) || defined(__AVR_ATmega8515__) || \
       defined(__AVR_ATmega8535__) || \
       defined(__AVR_ATmega164P__) || defined(__AVR_ATmega324P__) || \
-      defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__)
+      defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) || \
+      defined(__AVR_ATmega1284P__)
 #  define OC1 PD5
 #  define DDROC DDRD
 #  define OCR OCR1A
@@ -119,7 +120,8 @@
       defined(__AVR_ATmega329__) || defined(__AVR_ATmega3290__) || \
       defined(__AVR_ATmega649__) || defined(__AVR_ATmega6490__) || \
       defined(__AVR_ATmega640__) || \
-      defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__)
+      defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) || \
+      defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)
 #  define OC1 PB5
 #  define DDROC DDRB
 #  define OCR OCR1A
