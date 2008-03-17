@@ -163,6 +163,10 @@
 #define INTF0 0
 #define INTF1 1
 
+#define EIMSK _SFR_IO8(0x1D)
+#define INT0 0
+#define INT1 1
+
 #define GPIOR0 _SFR_IO8(0x1E)
 #define GPIOR00 0
 #define GPIOR01 1
@@ -191,7 +195,7 @@
 #define EEDR6 6
 #define EEDR7 7
 
-#define EEAR _SFR_IO8(0x21)
+#define EEAR _SFR_IO16(0x21)
 
 #define EEARL _SFR_IO8(0x21)
 #define EEAR0 0
@@ -205,6 +209,8 @@
 
 #define EEARH _SFR_IO8(0x22)
 #define EEAR8 0
+
+#define EEPROM_REG_LOCATIONS 1F2021
 
 #define GTCCR _SFR_IO8(0x23)
 #define PSRSYNC 0
@@ -325,6 +331,8 @@
 #define WDRF 3
 
 #define MCUCR _SFR_IO8(0x35)
+#define IVCE 0 
+#define IVSEL 1
 #define PUD 4
 #define BODSE 5
 #define BODS 6
@@ -803,7 +811,7 @@
 
 
 /* Constants */
-#define SPM_PAGESIZE 64
+#define SPM_PAGESIZE 128
 #define RAMEND       0x4FF     /* Last On-Chip SRAM Location */
 #define XRAMSIZE     0
 #define XRAMEND      (RAMEND + XRAMSIZE)

@@ -1,5 +1,13 @@
 2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bugs #22447, #22387.
+	* include/avr/iom88p.h: Fix definitions or add definitions.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #22642.
 	* include/avr/power.h: Add support for AT90USB82 and AT90USB162.
 
