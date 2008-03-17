@@ -18,6 +18,7 @@
   [#21986] Typo in iotn13.h
   [#22016] Typo in iotn2313.h: SIG_OUTPUT_COPMARE0A
   [#22153] setjmp.o is wrong in libc.a (1.6.1) for avr's with SPH
+  [#22276] wdt_reset fails with devices with large WDTCSR addresses
   [#22377] Wrong XRAMEND for some recent ioXXX.h header files.
   [#22387] Missing EIMSK and __EEPROM_REG_LOCATIONS__ in iom168p.h
   [#22447] Summary of iom?8p.h header updates needed
