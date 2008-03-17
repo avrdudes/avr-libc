@@ -1,3 +1,8 @@
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22643.
+	* include/math.h: Rename occurrences of 'asm' needs to to '__asm__'.
+
 2008-03-16  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Patch #6355, by Stas Sergeev
