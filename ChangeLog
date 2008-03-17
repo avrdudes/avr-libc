@@ -1,5 +1,10 @@
 2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #19494.
+	* doc/api/sfr.dox: Rewrite to remove deprecated code examples.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #22276.
 	* include/avr/wdt.h: Check location of watchdog register and use
 	that to determine which code sequence to define.
