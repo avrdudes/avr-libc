@@ -1,5 +1,11 @@
 2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #22276.
+	* include/avr/wdt.h: Check location of watchdog register and use
+	that to determine which code sequence to define.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bugs #22447, #22387.
 	* include/avr/iom88p.h: Fix definitions or add definitions.
 	* include/avr/iom168p.h: Ditto.
