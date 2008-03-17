@@ -163,6 +163,10 @@
 #define INTF0 0
 #define INTF1 1
 
+#define EIMSK _SFR_IO8(0x1D)
+#define INT0 0
+#define INT1 1
+
 #define GPIOR0 _SFR_IO8(0x1E)
 #define GPIOR00 0
 #define GPIOR01 1
@@ -203,6 +207,8 @@
 
 /* Only valid for ATmega88P-168P-328P */
 /* EEARH _SFR_IO8(0x22) */
+
+#define EEPROM_REG_LOCATIONS 1F2021
 
 #define GTCCR _SFR_IO8(0x23)
 #define PSRSYNC 0

@@ -163,6 +163,10 @@
 #define INTF0 0
 #define INTF1 1
 
+#define EIMSK _SFR_IO8(0x1D)
+#define INT0 0
+#define INT1 1
+
 #define GPIOR0 _SFR_IO8(0x1E)
 #define GPIOR00 0
 #define GPIOR01 1
@@ -191,7 +195,7 @@
 #define EEDR6 6
 #define EEDR7 7
 
-#define EEAR _SFR_IO8(0x21)
+#define EEAR _SFR_IO16(0x21)
 
 #define EEARL _SFR_IO8(0x21)
 #define EEAR0 0
