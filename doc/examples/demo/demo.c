@@ -22,11 +22,14 @@
 #include "iocompat.h"		/* Note [1] */
 
 enum { UP, DOWN };
+static volatile uint8_t i;
 
 ISR (TIMER1_OVF_vect)		/* Note [2] */
 {
     static uint16_t pwm;	/* Note [3] */
     static uint8_t direction;
+
+	i++;
 
     switch (direction)		/* Note [4] */
     {
@@ -81,9 +84,13 @@ main (void)
     ioinit ();
 
     /* loop forever, the interrupts are doing the rest */
+   DDRB |= _BV(0) | _BV(2);
 
-    for (;;)			/* Note [7] */
+    for (;;) {			/* Note [7] */
+	if ((i & 0x3f) == 0) PORTB ^= _BV(0);
+	if ((i & 0x7f) == 0) PORTB ^= _BV(2);
         sleep_mode();
+   }
 
     return (0);
 }

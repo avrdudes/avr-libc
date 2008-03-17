@@ -208,7 +208,7 @@ for test_file in $test_list ; do
     case `basename $test_file` in
 
 	*.c)
-	    : $((n_files += 1))
+	    n_files=$(($n_files + 1))
 	    
 	    rootname=`basename $test_file .c`
 
@@ -218,10 +218,10 @@ for test_file in $test_list ; do
 		if ! ${HOST_CC} ${HOST_CFLAGS} -o $exe_file $test_file -lm
 		then
 		    Err_echo "compile failed"
-		    : $((n_emake += 1))
+		    n_emake=$(($n_emake + 1))
 		elif [ -z $MAKE_ONLY ] && ! Host_exe $exe_file ; then
 		    Err_echo "execute failed: $RETVAL"
-		    : $((n_ehost += 1))
+		    n_ehost=$(($n_ehost + 1))
 		else
 		    echo "OK"
 		fi
@@ -262,12 +262,12 @@ for test_file in $test_list ; do
 		        if ! Compile $test_file $mcu $elf_file $prvers
 			then
 			    Err_echo "compile failed"
-			    : $((n_emake += 1))
+			    n_emake=$(($n_emake + 1))
 			    break
 			elif [ -z $MAKE_ONLY ] && ! Simulate $elf_file $mcu
 			then
 			    Err_echo "simulate failed: $RETVAL"
-			    : $((n_esimul += 1))
+			    n_esimul=$(($n_esimul + 1))
 			else
 			    echo "OK"
 			fi
@@ -285,10 +285,10 @@ done
 echo "-------"
 echo "Done.  Number of operated files: $n_files"
 
-if (( n_emake + n_ehost + n_esimul )) ; then
-    (( n_emake ))   && echo "*** Compile/link errors: $n_emake"
-    (( n_ehost ))   && echo "*** At host errors:      $n_ehost"
-    (( n_esimul ))  && echo "*** Simulate errors:     $n_esimul"
+if [ $(expr $n_emake + $n_ehost + $n_esimul) -gt 0 ] ; then
+    [ $n_emake -gt 0 ]   && echo "*** Compile/link errors: $n_emake"
+    [ $n_ehost -gt 0 ]   && echo "*** At host errors:      $n_ehost"
+    [ $n_esimul -gt 0 ]  && echo "*** Simulate errors:     $n_esimul"
     exit 1
 else
     echo "Success."

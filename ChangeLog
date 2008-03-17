@@ -1,3 +1,8 @@
+2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/runtest.sh: Turn the bash-like arithmetics into
+	Posix ones, so it runs correctly on FreeBSD's /bin/sh.
+
 2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #22390.

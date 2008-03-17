@@ -10,6 +10,7 @@ OBJ            = demo.o
 #MCU_TARGET     = atmega128
 #MCU_TARGET     = atmega1280
 #MCU_TARGET     = atmega1281
+#MCU_TARGET     = atmega1284p
 #MCU_TARGET     = atmega16
 #MCU_TARGET     = atmega163
 #MCU_TARGET     = atmega164p
