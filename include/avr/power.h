@@ -799,6 +799,27 @@ do{ \
 #define power_all_enable()      (PRR &= (uint8_t)~((1<<PRADC)|(1<<PRLIN)|(1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRPSC)|(1<<PRCAN)))
 #define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRLIN)|(1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRPSC)|(1<<PRCAN)))
 
+
+#elif defined(__AVR_AT90USB82__) \
+|| defined(__AVR_AT90USB162__)
+
+
+#define power_spi_enable()      (PRR0 &= (uint8_t)~(1 << PRSPI))
+#define power_spi_disable()     (PRR0 |= (uint8_t)(1 << PRSPI))
+
+#define power_timer0_enable()   (PRR0 &= (uint8_t)~(1 << PRTIM0))
+#define power_timer0_disable()  (PRR0 |= (uint8_t)(1 << PRTIM0))
+
+#define power_timer1_enable()   (PRR0 &= (uint8_t)~(1 << PRTIM1))
+#define power_timer2_disable()  (PRR0 |= (uint8_t)(1 << PRTIM1))
+
+#define power_usb_enable()      (PRR1 &= (uint8_t)~(1 << PRUSB))
+#define power_usb_disable()     (PRR1 |= (uint8_t)(1 << PRUSB))
+
+#define power_usart1_enable()   (PRR1 &= (uint8_t)~(1 << PRUSART1))
+#define power_usart1_disable()  (PRR1 |= (uint8_t)(1 << PRUSART1))
+
+
 #endif
 
 
@@ -809,8 +830,10 @@ do{ \
 || defined(__AVR_ATmega2561__) \
 || defined(__AVR_AT90USB646__) \
 || defined(__AVR_AT90USB647__) \
+|| defined(__AVR_AT90USB82__) \
 || defined(__AVR_AT90USB1286__) \
 || defined(__AVR_AT90USB1287__) \
+|| defined(__AVR_AT90USB162__) \
 || defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \
 || defined(__AVR_AT90CAN128__) \

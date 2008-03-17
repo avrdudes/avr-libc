@@ -1,5 +1,10 @@
 2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #22642.
+	* include/avr/power.h: Add support for AT90USB82 and AT90USB162.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #22643.
 	* include/math.h: Rename occurrences of 'asm' needs to to '__asm__'.
 

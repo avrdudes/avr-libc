@@ -22,6 +22,7 @@
   [#22493] Typo in iom1284p.h.
   [#22548] Missing IVCE and IVSEL in iom328p.h
   [#22568] Missing EEPROM_REG_LOCATIONS in iom328p.h
+  [#22642] AT90USB162 and AT90USB82 not supported in <avr/power.h>
   [#22643] math.h c99 incompability
 
 * Other changes:
