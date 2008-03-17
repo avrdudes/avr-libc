@@ -330,7 +330,7 @@ extern double square(double __x) __ATTR_CONST__;
  */
 __ATTR_CONST__ extern inline double copysign (double __x, double __y)
 {
-    asm (
+    __asm__ (
 	"bst	%D2, 7	\n\t"
 	"bld	%D0, 7	"
 	: "=r" (__x)
@@ -405,7 +405,7 @@ extern double trunc (double __x) __ATTR_CONST__;
 __ATTR_CONST__ extern inline int isfinite (double __x)
 {
     unsigned char __exp;
-    asm (
+    __asm__ (
 	"mov	%0, %C1		\n\t"
 	"lsl	%0		\n\t"
 	"mov	%0, %D1		\n\t"
