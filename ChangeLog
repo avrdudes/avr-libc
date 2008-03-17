@@ -1,5 +1,10 @@
 2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #22390.
+	* doc/api/faq.dox: Fix statement about function pointers.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #22119.
 	* doc/api/faq.dox: Fix statement about returned values.
 

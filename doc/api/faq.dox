@@ -653,10 +653,9 @@ ports can be forced that way.
 \c char is 8 bits, \c int is 16 bits, \c long is 32 bits, \c long long
 is 64 bits, \c float and \c double are 32 bits (this is the only
 supported floating point format), pointers are 16 bits (function
-pointers are word addresses, to allow addressing the whole 128K
-program memory space on the ATmega devices with &gt; 64 KB of flash
-ROM).  There is a \c -mint8 option (see \ref using_avr_gcc) to make
-\c int 8 bits, but that is not supported by avr-libc and violates C
+pointers are word addresses, to allow addressing up to 128K
+program memory space). There is a \c -mint8 option (see \ref using_avr_gcc) to 
+make \c int 8 bits, but that is not supported by avr-libc and violates C
 standards (\c int \e must be at least 16 bits).  It may be removed in
 a future release.
 
