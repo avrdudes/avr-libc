@@ -312,7 +312,7 @@ do
 
 	test -d $arh || mkdir $arh
 
-	ARH_SUBDIRS="$ARH_SUBDIRS \\\\\n   $arh"
+	ARH_SUBDIRS="$ARH_SUBDIRS $arh"
 
 
 	DEV_SUBDIRS="SUBDIRS ="
@@ -331,7 +331,7 @@ do
 		
 		test -d $arh/$dev || mkdir $arh/$dev
 
-		DEV_SUBDIRS="$DEV_SUBDIRS \\\\\n   $dev"
+		DEV_SUBDIRS="$DEV_SUBDIRS $dev"
 
 		cat ${TMP_COPY_RIGHT_HDR} > $arh/$dev/Makefile.am
 		cat >> $arh/$dev/Makefile.am <<EOF
