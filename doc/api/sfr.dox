@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, Joerg Wunsch
+   Copyright (c) 2008, Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -6,10 +7,15 @@
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
+   
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
+
+   * Neither the name of the copyright holders nor the names of
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -27,90 +33,49 @@
 
 /** \defgroup avr_sfr <avr/sfr_defs.h>: Special function registers
 
-When working with microcontrollers, many of the tasks usually consist
-of controlling the peripherals that are connected to the device,
-respectively programming the subsystems that are contained in the
-controller (which by itself communicate with the circuitry connected
-to the controller).
+When working with microcontrollers, many tasks usually consist
+of controlling internal peripherals, or external peripherals that are connected 
+to the device. The entire IO address space is made available as 
+<em>memory-mapped IO</em>, i.e. it can be accessed using all the MCU 
+instructions that are applicable to normal data memory.  For most AVR devices, 
+the IO register space is mapped into the data memory address space with an 
+offset of 0x20 since the bottom of this space is reserved for direct access to 
+the MCU registers.  (Actual SRAM is available only behind the IO register
+area, starting at some specific address depending on the device.)
 
-The AVR series of microcontrollers offers two different paradigms to
-perform this task.  There's a separate IO address space available (as
-it is known from some high-level CISC CPUs) that can be addressed
-with specific IO instructions that are applicable to some or all of
-the IO address space (\c in, \c out, \c sbi etc.).  The entire IO
-address space is also made available as <em>memory-mapped IO</em>,
-i. e. it can be accessed using all the MCU instructions that are
-applicable to normal data memory.  The IO register space is mapped
-into the data memory address space with an offset of 0x20 since the
-bottom of this space is reserved for direct access to the MCU
-registers.  (Actual SRAM is available only behind the IO register
-area, starting at either address 0x60, or 0x100 depending on the
-device.)
-
-AVR Libc supports both these paradigms.  While by default, the
-implementation uses memory-mapped IO access, this is hidden from the
-programmer.  So the programmer can access IO registers either with a
-special function like \c outb():
-
-\code
-	#include <avr/io.h>
-
-	outb(PORTA, 0x33);
-\endcode
-
-or they can assign a value directly to the symbolic address:
+For example the user can access memory-mapped IO registers as if they were 
+globally defined variables like this:
 
 \code
 	PORTA = 0x33;
+    unsigned char foo = PINA;
 \endcode
 
-The compiler's choice of which method to use when actually accessing the IO
-port is completely independent of the way the programmer chooses to write the
-code.  So even if the programmer uses the memory-mapped paradigm and writes
+The compiler will choose the correct instruction sequence to generate based
+on the address of the register being accessed.
 
-\code
-	PORTA |= 0x40;
-\endcode
-
-the compiler can optimize this into the use of an \c sbi instruction
-(of course, provided the target address is within the allowable range
-for this instruction, and the right-hand side of the expression is a
-constant value known at compile-time).
-
-The advantage of using the memory-mapped paradigm in C programs is
+The advantage of using the memory-mapped registers in C programs is
 that it makes the programs more portable to other C compilers for the
-AVR platform.  Some people might also feel that this is more readable.
-For example, the following two statements would be equivalent:
-
-\code
-	outb(DDRD, inb(DDRD) & ~LCDBITS);
-	DDRD &= ~LCDBITS;
-\endcode
-
-The generated code is identical for both.  Without optimization, the
-compiler strictly generates code following the memory-mapped paradigm,
-while with optimization turned on, code is generated using the (faster
-and smaller) \c in/out MCU instructions.
+AVR platform.
 
 Note that special care must be taken when accessing some of the 16-bit
 timer IO registers where access from both the main program and within
 an interrupt context can happen.  See \ref faq_16bitio.
 
-\par Porting programs that use sbi/cbi
+\par Porting programs that use the deprecated sbi/cbi macros
 
-As described above, access to the AVR single bit set and clear instructions
+Access to the AVR single bit set and clear instructions
 are provided via the standard C bit manipulation commands. The sbi and cbi
-commands are no longer directly supported. 
+macros are no longer directly supported. 
 sbi (sfr,bit) can be replaced by  sfr |= _BV(bit) .
 
-ie: sbi(PORTB, PB1);  is now PORTB |= _BV(PB1);
+i.e.: sbi(PORTB, PB1);  is now PORTB |= _BV(PB1);
 
 This actually is more flexible than having sbi directly, as the optimizer 
-will use a hardware sbi if appropriate, or a read/or/write if not. You do
-not need to keep track of which registers sbi/cbi will operate on.
+will use a hardware sbi if appropriate, or a read/or/write operation if not 
+appropriate. You do not need to keep track of which registers sbi/cbi will 
+operate on.
 
 Likewise, cbi (sfr,bit) is now   sfr &= ~(_BV(bit));
-
-
 
 */
