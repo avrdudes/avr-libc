@@ -1,3 +1,7 @@
+2008-03-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/bug-22593.c: New file.
+
 2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* devtools/gen-avr-lib-tree.sh: replace \\\\\n by just a
