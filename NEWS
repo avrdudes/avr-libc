@@ -4,6 +4,7 @@
 
   [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
+  [sourceforge.net: #1883630] ATmegaXX4 - USART0 and USART1 additional bits aliases
   [sourceforge.net: #1910885] Typo in io90pwm3b.h
   [sourceforge.net: #1913681] Missing INT3 define in io90pwm3b.h
   [#19079] sscanf %s eats 1 char too much
