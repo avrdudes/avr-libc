@@ -61,6 +61,7 @@
 -# \ref faq_linkerscripts
 -# \ref faq_binarydata
 -# \ref faq_softreset
+-# \ref faq_math
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1388,6 +1389,22 @@ void wdt_init(void)
 }
 
 \endcode
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_math I am using floating point math. Why is the compiled code so big? Why does my code not work?
+
+You are not linking in the math library from AVR-LibC. GCC has a library that
+is used for floating point operations, but it is not optimized for the AVR, and
+so it generates big code, or it could be incorrect. This can happen even when 
+you are not using any floating point math functions from the Standard C library, 
+but you are just doing floating point math operations.
+
+When you link in the math library from AVR-LibC, those
+routines get replaced by hand-optimized AVR assembly and it produces much
+smaller code.
+
+See \ref faq_libm for more details on how to link in the math library.
 
 <small>Back to \ref faq_index.</small>
 

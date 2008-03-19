@@ -1,3 +1,9 @@
+2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #3485.
+	* doc/api/faq.dox: Add entry about linking in the math library for
+	floating point math operations.
+
 2008-03-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Make the test suite print messages for an ATmega128 target.
