@@ -82,10 +82,34 @@
 #define PORTB7 7
       
 #define PINC _SFR_IO8(0x06)
+#define PINC0 0
+#define PINC1 1
+#define PINC2 2
+#define PINC3 3
+#define PINC4 4
+#define PINC5 5
+#define PINC6 6
+#define PINC7 7
 
 #define DDRC _SFR_IO8(0x07)
+#define DDC0 0
+#define DDC1 1
+#define DDC2 2
+#define DDC3 3
+#define DDC4 4
+#define DDC5 5
+#define DDC6 6
+#define DDC7 7
 
 #define PORTC _SFR_IO8(0x08)
+#define PORTC0 0
+#define PORTC1 1
+#define PORTC2 2
+#define PORTC3 3
+#define PORTC4 4
+#define PORTC5 5
+#define PORTC6 6
+#define PORTC7 7
 
 #define PIND _SFR_IO8(0x09)
 #define PIND0 0
@@ -177,11 +201,13 @@
 #define INTF0 0
 #define INTF1 1
 #define INTF2 2
+#define INTF3 3
 
 #define EIMSK _SFR_IO8(0x1D)
 #define INT0 0
 #define INT1 1
 #define INT2 2
+#define INT3 3
 
 #define GPIOR0 _SFR_IO8(0x1E)
 #define GPIOR00 0
@@ -390,6 +416,8 @@
 #define ISC11 3
 #define ISC20 4
 #define ISC21 5
+#define ISC30 6
+#define ISC31 7
 
 #define TIMSK0 _SFR_MEM8(0x6E)
 #define TOIE0 0
@@ -403,8 +431,22 @@
 #define ICIE1 5
 
 #define AMP0CSR _SFR_MEM8(0x76)
+#define AMP0TS0 0
+#define AMP0TS1 1
+#define AMP0G0 4
+#define AMP0G1 5
+#define AMP0IS 6
+#define AMP0EN 7
 
 #define AMP1CSR _SFR_MEM8(0x77)
+#define AMP1TS0 0
+#define AMP1TS1 1
+#define AMP1G0 4
+#define AMP1G1 5
+#define AMP1IS 6
+#define AMP1EN 7
+
+#define ADC _SFR_MEM16(0x78)
 
 #define ADCL _SFR_MEM8(0x78)
 #define ADCL0 0
@@ -415,6 +457,16 @@
 #define ADCL5 5
 #define ADCL6 6
 #define ADCL7 7
+
+#define ADCH _SFR_MEM8(0x79)
+#define ADCH0 0
+#define ADCH1 1
+#define ADCH2 2
+#define ADCH3 3
+#define ADCH4 4
+#define ADCH5 5
+#define ADCH6 6
+#define ADCH7 7
 
 #define ADCSRA _SFR_MEM8(0x7A)
 #define ADPS0 0
@@ -504,7 +556,7 @@
 #define TCNT1H6 6
 #define TCNT1H7 7
 
-#define ICR1 _SFR_MEM8(0x86)
+#define ICR1 _SFR_MEM16(0x86)
 
 #define ICR1L _SFR_MEM8(0x86)
 #define ICR1L0 0
@@ -587,8 +639,20 @@
 #define PSEIE0 5
 
 #define PIFR1 _SFR_MEM8(0xA2)
+#define PEOP1 0
+#define PRN10 1
+#define PRN11 2
+#define PEV1A 3
+#define PEV1B 4
+#define PSEI1 5
+#define POAC1A 6
+#define POAC1B 7
 
 #define PIM1 _SFR_MEM8(0xA3)
+#define PEOPE1 0
+#define PEVE1A 3
+#define PEVE1B 4
+#define PSEIE1 5
 
 #define PIFR2 _SFR_MEM8(0xA4)
 #define PEOP2 0
@@ -917,44 +981,144 @@
 #define PCST0 7
 
 #define PSOC1 _SFR_MEM8(0xE0)
+#define POEN1A 0
+#define POEN1B 2
+#define PSYNC1_0 4
+#define PSYNC1_1 5
 
 #define OCR1SA _SFR_MEM16(0xE2)
 
 #define OCR1SAL _SFR_MEM8(0xE2)
+#define OCR1SA_0 0
+#define OCR1SA_1 1
+#define OCR1SA_2 2
+#define OCR1SA_3 3
+#define OCR1SA_4 4
+#define OCR1SA_5 5
+#define OCR1SA_6 6
+#define OCR1SA_7 7
 
 #define OCR1SAH _SFR_MEM8(0xE3)
+#define OCR1SA_8 0
+#define OCR1SA_9 1
+#define OCR1SA_10 2
+#define OCR1SA_11 3
 
 #define OCR1RA _SFR_MEM16(0xE4)
 
 #define OCR1RAL _SFR_MEM8(0xE4)
+#define OCR1RA_0 0
+#define OCR1RA_1 1
+#define OCR1RA_2 2
+#define OCR1RA_3 3
+#define OCR1RA_4 4
+#define OCR1RA_5 5
+#define OCR1RA_6 6
+#define OCR1RA_7 7
 
 #define OCR1RAH _SFR_MEM8(0xE5)
+#define OCR1RA_8 0
+#define OCR1RA_9 1
+#define OCR1RA_10 2
+#define OCR1RA_11 3
 
 #define OCR1SB _SFR_MEM16(0xE6)
 
 #define OCR1SBL _SFR_MEM8(0xE6)
+#define OCR1SB_0 0
+#define OCR1SB_1 1
+#define OCR1SB_2 2
+#define OCR1SB_3 3
+#define OCR1SB_4 4
+#define OCR1SB_5 5
+#define OCR1SB_6 6
+#define OCR1SB_7 7
 
 #define OCR1SBH _SFR_MEM8(0xE7)
+#define OCR1SB_8 0
+#define OCR1SB_9 1
+#define OCR1SB_10 2
+#define OCR1SB_11 3
 
 #define OCR1RB _SFR_MEM16(0xE8)
 
 #define OCR1RBL _SFR_MEM8(0xE8)
+#define OCR1RB_0 0
+#define OCR1RB_1 1
+#define OCR1RB_2 2
+#define OCR1RB_3 3
+#define OCR1RB_4 4
+#define OCR1RB_5 5
+#define OCR1RB_6 6
+#define OCR1RB_7 7
 
 #define OCR1RBH _SFR_MEM8(0xE9)
+#define OCR1RB_8 0
+#define OCR1RB_9 1
+#define OCR1RB_10 2
+#define OCR1RB_11 3
+#define OCR1RB_12 4
+#define OCR1RB_13 5
+#define OCR1RB_14 6
+#define OCR1RB_15 7
 
 #define PCNF1 _SFR_MEM8(0xEA)
+#define PCLKSEL1 1
+#define POP1 2
+#define PMODE10 3
+#define PMODE11 4
+#define PLOCK1 5
+#define PALOCK1 6
+#define PFIFTY1 7
 
 #define PCTL1 _SFR_MEM8(0xEB)
+#define PRUN1 0
+#define PCCYC1 1
+#define PARUN1 2
+#define PAOC1A 3
+#define PAOC1B 4
+#define PBFM1 5
+#define PPRE10 6
+#define PPRE11 7
 
 #define PFRC1A _SFR_MEM8(0xEC)
+#define PRFM1A0 0
+#define PRFM1A1 1
+#define PRFM1A2 2
+#define PRFM1A3 3
+#define PFLTE1A 4
+#define PELEV1A 5
+#define PISEL1A 6
+#define PCAE1A 7
 
 #define PFRC1B _SFR_MEM8(0xED)
+#define PRFM1B0 0
+#define PRFM1B1 1
+#define PRFM1B2 2
+#define PRFM1B3 3
+#define PFLTE1B 4
+#define PELEV1B 5
+#define PISEL1B 6
+#define PCAE1B 7
 
 #define PICR1 _SFR_MEM16(0xEE)
 
 #define PICR1L _SFR_MEM8(0xEE)
+#define PICR1_0 0
+#define PICR1_1 1
+#define PICR1_2 2
+#define PICR1_3 3
+#define PICR1_4 4
+#define PICR1_5 5
+#define PICR1_6 6
+#define PICR1_7 7
 
 #define PICR1H _SFR_MEM8(0xEF)
+#define PICR1_8 0
+#define PICR1_9 1
+#define PICR1_10 2
+#define PICR1_11 3
+#define PCST1 7
 
 #define PSOC2 _SFR_MEM8(0xF0)
 #define POEN2A 0
@@ -1001,7 +1165,8 @@
 #define OCR2RA_1 1
 #define OCR2RA_2 2
 #define OCR2RA_3 3
-#define OCR2RA_4 4#define OCR2RA_5 5
+#define OCR2RA_4 4
+#define OCR2RA_5 5
 #define OCR2RA_6 6
 #define OCR2RA_7 7
 
@@ -1129,7 +1294,7 @@
 #define TIMER1_COMPB_vect   _VECTOR(13)  /* Timer/Counter Compare Match B */
 /* Vector 14, Reserved */
 #define TIMER1_OVF_vect     _VECTOR(15)  /* Timer/Counter1 Overflow */
-#define TIMER0_COMP A_vect  _VECTOR(16)  /* Timer/Counter0 Compare Match A */
+#define TIMER0_COMPA_vect   _VECTOR(16)  /* Timer/Counter0 Compare Match A */
 #define TIMER0_OVF_vect     _VECTOR(17)  /* Timer/Counter0 Overflow */
 #define ADC_vect            _VECTOR(18)  /* ADC Conversion Complete */
 #define INT1_vect           _VECTOR(19)  /* External Interrupt Request 1 */

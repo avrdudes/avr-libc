@@ -201,11 +201,13 @@
 #define INTF0 0
 #define INTF1 1
 #define INTF2 2
+#define INTF3 3
 
 #define EIMSK _SFR_IO8(0x1D)
 #define INT0 0
 #define INT1 1
 #define INT2 2
+#define INT3 3
 
 #define GPIOR0 _SFR_IO8(0x1E)
 #define GPIOR00 0
@@ -398,7 +400,6 @@
 #define PRPSC1 6
 #define PRPSC2 7
 
-
 #define OSCCAL _SFR_MEM8(0x66)
 #define CAL0 0
 #define CAL1 1
@@ -415,6 +416,8 @@
 #define ISC11 3
 #define ISC20 4
 #define ISC21 5
+#define ISC30 6
+#define ISC31 7
 
 #define TIMSK0 _SFR_MEM8(0x6E)
 #define TOIE0 0
@@ -553,7 +556,7 @@
 #define TCNT1H6 6
 #define TCNT1H7 7
 
-#define ICR1 _SFR_MEM8(0x86)
+#define ICR1 _SFR_MEM16(0x86)
 
 #define ICR1L _SFR_MEM8(0x86)
 #define ICR1L0 0
@@ -1117,7 +1120,6 @@
 #define PICR1_11 3
 #define PCST1 7
 
-
 #define PSOC2 _SFR_MEM8(0xF0)
 #define POEN2A 0
 #define POEN2C 1
@@ -1163,7 +1165,8 @@
 #define OCR2RA_1 1
 #define OCR2RA_2 2
 #define OCR2RA_3 3
-#define OCR2RA_4 4#define OCR2RA_5 5
+#define OCR2RA_4 4
+#define OCR2RA_5 5
 #define OCR2RA_6 6
 #define OCR2RA_7 7
 
@@ -1291,7 +1294,7 @@
 #define TIMER1_COMPB_vect   _VECTOR(13)  /* Timer/Counter Compare Match B */
 /* Vector 14, Reserved */
 #define TIMER1_OVF_vect     _VECTOR(15)  /* Timer/Counter1 Overflow */
-#define TIMER0_COMP A_vect  _VECTOR(16)  /* Timer/Counter0 Compare Match A */
+#define TIMER0_COMPA_vect   _VECTOR(16)  /* Timer/Counter0 Compare Match A */
 #define TIMER0_OVF_vect     _VECTOR(17)  /* Timer/Counter0 Overflow */
 #define ADC_vect            _VECTOR(18)  /* ADC Conversion Complete */
 #define INT1_vect           _VECTOR(19)  /* External Interrupt Request 1 */
