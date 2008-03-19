@@ -1,3 +1,9 @@
+2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bugs #22666, SF #1913681, SF #1910885.
+	* include/avr/io90pwm3b.h: Add missing definitions, fix definitions.
+	* include/avr/io90pwm2b.h: Ditto.
+
 2008-03-18  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/regression/bug-22593.c: New file.

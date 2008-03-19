@@ -4,6 +4,8 @@
 
   [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
+  [sourceforge.net: #1910885] Typo in io90pwm3b.h
+  [sourceforge.net: #1913681] Missing INT3 define in io90pwm3b.h
   [#19079] sscanf %s eats 1 char too much
   [#19494] sfr_defs.h documentation: Remove references to deprecated macros.
   [#21410] Incorrect use of 16-bit eeprom addresses in devices with 8-Bit address registers
@@ -30,6 +32,7 @@
   [#22568] Missing EEPROM_REG_LOCATIONS in iom328p.h
   [#22642] AT90USB162 and AT90USB82 not supported in <avr/power.h>
   [#22643] math.h c99 incompability
+  [#22666] io90pwm3b.h errors
 
 * Other changes:
 
