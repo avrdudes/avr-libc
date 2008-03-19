@@ -1,5 +1,13 @@
 2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug SF #1883630.
+	* include/avr/iom48p.h: Add missing bit name alias definitions.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+
+2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bugs #22666, SF #1913681, SF #1910885.
 	* include/avr/io90pwm3b.h: Add missing definitions, fix definitions.
 	* include/avr/io90pwm2b.h: Ditto.

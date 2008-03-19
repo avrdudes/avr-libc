@@ -741,7 +741,9 @@
 #define UCSR0C _SFR_MEM8(0xC2)
 #define UCPOL0 0
 #define UCSZ00 1
+#define UCPHA0 1
 #define UCSZ01 2
+#define UDORD0 2
 #define USBS0 3
 #define UPM00 4
 #define UPM01 5
