@@ -6,8 +6,15 @@
 # define EXIT(code)	exit ((code) < 255 ? (code) : 255)
 # define vsnprintf_P	vsnprintf
 #else
-# define PRINTFLN(args...)
-# define EXIT		exit
+# if defined(__AVR_ATmega128__)
+  /* ATmega128 has enough RAM for sprintf(), print to 0x2000 in XRAM. */
+#  define PRINTFLN(line, fmt, ...)	\
+    sprintf ((char *)0x2000, "\nLine %d: " fmt "\n", line, ##__VA_ARGS__)
+# else
+   /* small AVR */
+#  define PRINTFLN(args...)
+# endif
+# define EXIT	exit
 #endif
 
 #define	L_PRINTFLN(args...)	PRINTFLN (__LINE__, args)

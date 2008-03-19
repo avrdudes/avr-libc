@@ -13,7 +13,13 @@
 	if (!(expr)) exit(__LINE__);	\
     } while (0)
 # define EXIT(v)	exit (v)
-# define PRINTF(f...)
+# if defined(__AVR_ATmega128__)
+  /* ATmega128 has enough RAM for sprintf(), print to 0x2000 in XRAM. */
+#  define PRINTF(f...)	sprintf((char *)0x2000, f)
+# else
+  /* small AVR */
+#  define PRINTF(f...)
+# endif
 #else
 # include <assert.h>
 # define ASSERT(expr)	assert (expr)
