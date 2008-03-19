@@ -1,5 +1,11 @@
 2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #3485.
+	* doc/api/faq.dox: Add entry about linking in the math library for
+	floating point math operations.
+
+2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug SF #1883630.
 	* include/avr/iom48p.h: Add missing bit name alias definitions.
 	* include/avr/iom88p.h: Ditto.

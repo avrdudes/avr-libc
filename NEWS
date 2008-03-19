@@ -7,6 +7,7 @@
   [sourceforge.net: #1883630] ATmegaXX4 - USART0 and USART1 additional bits aliases
   [sourceforge.net: #1910885] Typo in io90pwm3b.h
   [sourceforge.net: #1913681] Missing INT3 define in io90pwm3b.h
+  [#3485]  Using float arithmetic without linking with -lm result in incorrect code
   [#19079] sscanf %s eats 1 char too much
   [#19494] sfr_defs.h documentation: Remove references to deprecated macros.
   [#21410] Incorrect use of 16-bit eeprom addresses in devices with 8-Bit address registers
