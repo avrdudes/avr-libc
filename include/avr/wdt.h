@@ -115,16 +115,62 @@
 #define _WD_CHANGE_BIT      WDCE
 #endif
 
-#if (_WDT_CONTROL_REG > 0x5F)
-#define _WDT_USE_STS 1 /* sts */
-#else
-#define _WDT_USE_STS 0 /* out */
-#endif
 
 
+#if defined(__AVR_AT90PWM1__) \
+|| defined(__AVR_AT90PWM216__) \
+|| defined(__AVR_AT90PWM2B__) \
+|| defined(__AVR_AT90PWM316__) \
+|| defined(__AVR_AT90PWM3B__) \
+|| defined(__AVR_AT90PWM2__) \
+|| defined(__AVR_AT90PWM3__) \
+|| defined(__AVR_AT90CAN32__) \
+|| defined(__AVR_AT90CAN64__) \
+|| defined(__AVR_AT90CAN128__) \
+|| defined(__AVR_ATmega1284P__) \
+|| defined(__AVR_ATmega165__) \
+|| defined(__AVR_ATmega165P__) \
+|| defined(__AVR_ATmega168P__) \
+|| defined(__AVR_ATmega169__) \
+|| defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega325__) \
+|| defined(__AVR_ATmega3250__) \
+|| defined(__AVR_ATmega328P__) \
+|| defined(__AVR_ATmega329__) \
+|| defined(__AVR_ATmega3290__) \
+|| defined(__AVR_ATmega32C1__) \
+|| defined(__AVR_ATmega32HVB__) \
+|| defined(__AVR_ATmega32M1__) \
+|| defined(__AVR_ATmega406__) \
+|| defined(__AVR_ATmega48P__) \
+|| defined(__AVR_ATmega645__) \
+|| defined(__AVR_ATmega6450__) \
+|| defined(__AVR_ATmega649__) \
+|| defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega48__) \
+|| defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega640__) \
+|| defined(__AVR_ATmega1280__) \
+|| defined(__AVR_ATmega1281__) \
+|| defined(__AVR_ATmega2560__) \
+|| defined(__AVR_ATmega2561__) \
+|| defined(__AVR_ATmega164__) \
+|| defined(__AVR_ATmega324__) \
+|| defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega8HVA__) \
+|| defined(__AVR_ATmega16HVA__) \
+|| defined(__AVR_ATtiny48__) \
+|| defined(__AVR_ATtiny88__) \
+|| defined(__AVR_AT90USB82__) \
+|| defined(__AVR_AT90USB162__) \
+|| defined(__AVR_AT90USB646__) \
+|| defined(__AVR_AT90USB647__) \
+|| defined(__AVR_AT90USB1286__) \
+|| defined(__AVR_AT90USB1287__)
 
-#if (_WDT_USE_STS) /* use sts instruction */
-
+/* Use STS instruction. */
  
 #define _wdt_write(value)   \
     __asm__ __volatile__ (  \
@@ -157,7 +203,9 @@ __asm__ __volatile__ (  \
 
 
     
-#else  /* Use OUT instruction. */
+#else  
+
+/* Use OUT instruction. */
 
 #define _wdt_write(value)   \
     __asm__ __volatile__ (  \
