@@ -2,18 +2,25 @@
 
 #ifndef __AVR__
 # define _GNU_SOURCE		/* to include strcasestr()	*/
-# include <stdio.h>
 # define PRINTFLN(line, fmt, ...)	\
     printf("\nLine %d: " fmt "\n", line, ##__VA_ARGS__)
 # define EXIT(code)	exit ((code) < 255 ? (code) : 255)
 #else
-# define PRINTFLN(args...)
+# if defined(__AVR_ATmega128__)
+  /* ATmega128 has enough RAM for sprintf(), print to 0x2000 in XRAM. */
+#  define PRINTFLN(line, fmt, ...)	\
+    sprintf ((char *)0x2000, "\nLine %d: " fmt "\n", line, ##__VA_ARGS__)
+# else
+   /* small AVR */
+#  define PRINTFLN(args...)
+# endif
 # define EXIT	exit
 #endif
 
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "progmem.h"
 
 void Check (int line, const char *s1, const char *s2, int expect)

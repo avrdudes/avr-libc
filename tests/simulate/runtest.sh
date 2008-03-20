@@ -45,13 +45,14 @@ myname="$0"
 : ${SIMULAVR:=simulavr}
 
 : ${AVRDIR=../..}
-: ${MCU_LIST="at90s8515 atmega8"}
-: ${MCU_LIST_FULL="at90s2313 at90s4414 at90s8515 atmega8 atmega16"}
+: ${MCU_LIST="atmega128 at90s8515"}
+: ${MCU_LIST_FULL="atmega128 at90s2313 at90s4414 at90s8515 atmega8 atmega16"}
 
 HOST_PASS=			# Add pass at host computer
 HOST_ONLY=			# Pass at host only, skip AVR mode
 MAKE_ONLY=			# Compile/link only
 FLAG_STOP=			# Stop at any error
+FLAG_KEEPCORE=			# Keep simulator core file upon error
 
 Errx ()
 {
@@ -68,6 +69,7 @@ Options:
   -i          Test an installed avr-libc
   -c          Compile/link only
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
+  -k          Keep simulator core file upon simulation error
   -t          Add pass at host computer
   -T          Pass at host only
   -s          Stop at any error, temparary files will save
@@ -76,12 +78,13 @@ If FILE is not specified, the full test list is used.
 EOF
 }
 
-while getopts "a:icg:tTsh" opt ; do
+while getopts "a:icg:ktTsh" opt ; do
     case $opt in
 	a)	AVRDIR="$OPTARG" ;;
 	i)	AVRDIR= ;;
 	c)	MAKE_ONLY=1 ;;
 	g)	AVR_GCC="$OPTARG" ;;
+	k)	FLAG_KEEPCORE=1 ;;
 	t)	HOST_PASS=1 ;;
 	T)	HOST_ONLY=1 ; HOST_PASS=1 ;;
 	s)	FLAG_STOP=1 ;;
@@ -156,7 +159,7 @@ Compile ()
 		Errx "Compile(): invalid MCU: $2"
 	esac
 	flags="-isystem $AVRDIR/include -nostdlib"
-	crt=`find $AVRDIR/avr/lib -name $crt -print`
+	crt=`find $AVRDIR/avr/lib -name $crt -print | head -1`
 	libs="$AVRDIR/avr/lib/avr$avrno/libc.a	\
 	      $AVRDIR/avr/lib/avr$avrno/libm.a -lgcc"
     fi
@@ -208,7 +211,7 @@ for test_file in $test_list ; do
     case `basename $test_file` in
 
 	*.c)
-	    : $((n_files += 1))
+	    n_files=$(($n_files + 1))
 	    
 	    rootname=`basename $test_file .c`
 
@@ -218,10 +221,10 @@ for test_file in $test_list ; do
 		if ! ${HOST_CC} ${HOST_CFLAGS} -o $exe_file $test_file -lm
 		then
 		    Err_echo "compile failed"
-		    : $((n_emake += 1))
+		    n_emake=$(($n_emake + 1))
 		elif [ -z $MAKE_ONLY ] && ! Host_exe $exe_file ; then
 		    Err_echo "execute failed: $RETVAL"
-		    : $((n_ehost += 1))
+		    n_ehost=$(($n_ehost + 1))
 		else
 		    echo "OK"
 		fi
@@ -262,12 +265,15 @@ for test_file in $test_list ; do
 		        if ! Compile $test_file $mcu $elf_file $prvers
 			then
 			    Err_echo "compile failed"
-			    : $((n_emake += 1))
+			    n_emake=$(($n_emake + 1))
 			    break
 			elif [ -z $MAKE_ONLY ] && ! Simulate $elf_file $mcu
 			then
 			    Err_echo "simulate failed: $RETVAL"
-			    : $((n_esimul += 1))
+			    if [ $FLAG_KEEPCORE ] ; then
+				mv $CORE ${CORE}-$(echo ${test_file} | sed -e 's,/,::,g')-${mcu}-${prvers}
+			    fi
+			    n_esimul=$(($n_esimul + 1))
 			else
 			    echo "OK"
 			fi
@@ -285,10 +291,10 @@ done
 echo "-------"
 echo "Done.  Number of operated files: $n_files"
 
-if (( n_emake + n_ehost + n_esimul )) ; then
-    (( n_emake ))   && echo "*** Compile/link errors: $n_emake"
-    (( n_ehost ))   && echo "*** At host errors:      $n_ehost"
-    (( n_esimul ))  && echo "*** Simulate errors:     $n_esimul"
+if [ $(expr $n_emake + $n_ehost + $n_esimul) -gt 0 ] ; then
+    [ $n_emake -gt 0 ]   && echo "*** Compile/link errors: $n_emake"
+    [ $n_ehost -gt 0 ]   && echo "*** At host errors:      $n_ehost"
+    [ $n_esimul -gt 0 ]  && echo "*** Simulate errors:     $n_esimul"
     exit 1
 else
     echo "Success."
