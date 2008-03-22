@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2004,2008  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,7 @@ libm_a_asm_sources = \
 	atan2.S \
 	atan.S \
 	ceil.S \
+	cmpsf2.S \
 	copysign.S \
 	cosh.S \
 	cos.S \
@@ -76,6 +77,7 @@ libm_a_asm_sources = \
 	fp_trunc.S \
 	fp_zero.S \
 	frexp.S \
+	gesf2.S \
 	hypot.S \
 	inverse.S \
 	isfinite.S \
@@ -99,7 +101,8 @@ libm_a_asm_sources = \
 	square.S \
 	tanh.S \
 	tan.S \
-	trunc.S
+	trunc.S \
+	unordsf2.S
 
 libm_a_extra_dist = \
 	asmdef.h \
