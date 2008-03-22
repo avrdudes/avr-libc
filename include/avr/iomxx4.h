@@ -663,6 +663,7 @@
 #define USBS0	3
 #define UCSZ01	2
 #define UCSZ00	1
+#define UCPHA0  1
 #define UCPOL0	0
 
 /* Reserved [0xC3] */
@@ -709,6 +710,7 @@
 #define USBS1	3
 #define UCSZ11	2
 #define UCSZ10	1
+#define UCPHA1  1
 #define UCPOL1	0
 
 /* Reserved [0xCB] */

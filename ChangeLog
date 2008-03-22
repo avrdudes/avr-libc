@@ -1,3 +1,8 @@
+2008-03-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iomxx4.h: Add missing definitions to finish SF
+	bug #1883630.
+
 2008-03-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* tests/simulate/runtest.sh: Merge all the recent testsuite
