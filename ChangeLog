@@ -1,3 +1,17 @@
+2008-03-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega32U4.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/sleep.h: Reformat doxygen comment.
+	* include/avr/iom32u4.h: New file.
+	* NEWS: Add to new devices list.
+
 2008-03-22  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add __unordsf2() function. GCC 4.3.0 uses it.

@@ -263,8 +263,6 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr4</td><td>at90pwm3b</td><td>__AVR_AT90PWM3B__</td></tr>
   <tr><td>avr5</td><td>at90pwm216</td><td>__AVR_AT90PWM216__</td></tr>
   <tr><td>avr5</td><td>at90pwm316</td><td>__AVR_AT90PWM316__</td></tr>
-  <tr><td>avr5</td><td>atmega32c1</td><td>__AVR_ATMEGA32C1__</td></tr>
-  <tr><td>avr5</td><td>atmega32m1</td><td>__AVR_ATMEGA32M1__</td></tr>
   <tr><td>avr5</td><td>at90can32</td><td>__AVR_AT90CAN32__</td></tr>
   <tr><td>avr5</td><td>at90can64</td><td>__AVR_AT90CAN64__</td></tr>
   <tr><td>avr5</td><td>at90usb646</td><td>__AVR_AT90USB646__</td></tr>
@@ -293,7 +291,10 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega329p</td><td>__AVR_ATmega329P__</td></tr>
   <tr><td>avr5</td><td>atmega3290</td><td>__AVR_ATmega3290__</td></tr>
   <tr><td>avr5</td><td>atmega3290p</td><td>__AVR_ATmega3290P__</td></tr>
+  <tr><td>avr5</td><td>atmega32c1</td><td>__AVR_ATMEGA32C1__</td></tr>
   <tr><td>avr5</td><td>atmega32hvb</td><td>__AVR_ATmega32HVB__</td></tr>
+  <tr><td>avr5</td><td>atmega32m1</td><td>__AVR_ATMEGA32M1__</td></tr>
+  <tr><td>avr5</td><td>atmega32u4</td><td>__AVR_ATMEGA32U4__</td></tr>
   <tr><td>avr5</td><td>atmega406</td><td>__AVR_ATmega406__</td></tr>
   <tr><td>avr5</td><td>atmega64</td><td>__AVR_ATmega64__</td></tr>
   <tr><td>avr5</td><td>atmega640</td><td>__AVR_ATmega640__</td></tr>

@@ -141,6 +141,7 @@
 || defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32HVB__) \
 || defined(__AVR_ATmega32M1__) \
+|| defined(__AVR_ATmega32U4__) \
 || defined(__AVR_ATmega406__) \
 || defined(__AVR_ATmega48P__) \
 || defined(__AVR_ATmega645__) \
