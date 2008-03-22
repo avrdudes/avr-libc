@@ -1,3 +1,8 @@
+2008-03-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iomxx4.h: Add missing definitions to finish SF
+	bug #1883630.
+
 2008-03-20  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/wdt.h: Change back to list of devices to fix bug #22276.
