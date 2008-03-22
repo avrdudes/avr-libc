@@ -1,3 +1,16 @@
+2008-03-22  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add __unordsf2() function. GCC 4.3.0 uses it.
+	* libm/fplib/unordsf2.S: New file.
+	* libm/fplib/fp_cmp.S: Split to 3 separate files.
+	* libm/fplib/cmpsf2.S: New file. It was a part of 'fp_cmp.S'.
+	* libm/fplib/gesf2.S: (Ditto.)
+	* libm/fplib/Files.am: Add new source files.
+	* tests/simulate/fplib/unord-01.c: New file.
+	* tests/simulate/fplib/unord-02.c: New file.
+	* tests/simulate/fplib/unord-03.c: New file.
+	* tests/simulate/regression/20080322-isinf.c: New file.
+
 2008-03-21  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iomxx4.h: Add missing definitions to finish SF

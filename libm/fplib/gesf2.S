@@ -1,5 +1,5 @@
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
-   Copyright (c) 2006,2008  Dmitry Xmelkov
+   Copyright (c) 2008  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -42,59 +42,19 @@
   .err
 .endif
 
-/* The base compare function.
-   Return:
-     if (A < B)
-        rA2 = -1, C = 0
+/* Return value (ret_lo):
+     if (A > B)
+        1
      elif (A == B)
-        rA2 = 0, C = 0
-     elif (A > B)
-        rA2 = 1, C = 0
-     else // isnan(A) || isnan(B)
-        C = 1
+        0
+     else // A < B || isnan(A) || isnan(B)
+        -1
  */
-ENTRY	__fp_cmp
-	lsl	rA3
-	sbc	r0, r0		; r0 = (A < 0) ? -1 : 0
-	lsl	rB3
-	sbc	rBE, rBE	; rBE = (B < 0) ? -1 : 0
-  ; isnan(A) ?
-	ldi	ZL, 0x80	; NaN: 0x{f/7}f800001..0x{f/7}fffffff
-	ldi	ZH, 0xfe
-	cp	r1, rA0
-	cpc	r1, rA1
-	cpc	ZL, rA2
-	cpc	ZH, rA3
-	brlo	9f		; branch, if C == 1
-  ; isnan(B) ?
-	cp	r1, rB0
-	cpc	r1, rB1
-	cpc	ZL, rB2
-	cpc	ZH, rB3
-	brlo	9f		; branch, if C == 1
-  ; compare
-	sub	rA0, rB0
-	sbc	rA1, rB1
-	sbc	rA2, rB2
-	sbc	rA3, rB3	; C is set, if A < B
-	brne	1f
-  ; absolute values are equal, check signs
-	eor	r0, rBE
-	breq	9f		; if branch, rA2 = 0, C = 0
-  ; force -0.0 == +0.0
-	or	rB0, rB1
-	or	rB0, rB2
-	or	rB0, rB3
-	brne	2f		; evaluate sign(B)
-	ret
-  ; view argument signes
-1:	eor	r0, rBE		; C is not changed
-	brne	2f		; signs are different
-	sbci	rBE, 1		; rBE[0] = (A < B && A > 0) ? 0 : 1
-2:	lsr	rBE		; C = above result OR sign(B)
-  ; build return value, C is set, if A > B
-	ldi	rA2, -1
-	adc	rA2, r1
-	adc	rA2, r1		; C = 0 at any case
-9:	ret
+ENTRY   __gesf2
+ENTRY   __gtsf2
+	rcall	_U(__fp_cmp)
+	brcc	1f
+	ldi	ret_lo, -1
+1:	ret
+
 ENDFUNC
