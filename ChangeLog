@@ -1,4 +1,4 @@
-2008-03-18  Dmitry Xmelkov  <dmix@gmail.ru>
+2008-03-22  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add __unordsf2() function. GCC 4.3.0 uses it.
 	* libm/fplib/unordsf2.S: New file.
