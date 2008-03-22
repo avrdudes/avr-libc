@@ -121,6 +121,8 @@
 #  include <avr/iom32c1.h>
 #elif defined (__AVR_ATmega32M1__)
 #  include <avr/iom32m1.h>
+#elif defined (__AVR_ATmega32U4__)
+#  include <avr/iom32u4.h>
 #elif defined (__AVR_ATmega128__)
 #  include <avr/iom128.h>
 #elif defined (__AVR_ATmega1280__)

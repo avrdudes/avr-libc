@@ -71,6 +71,7 @@
 
   + ATmega32M1
   + ATmega32C1
+  + ATmega32U4
 
 * Optimized functions:
 

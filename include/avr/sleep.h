@@ -124,11 +124,12 @@
 
     ...
       cli();
-      if (some_condition) {
+      if (some_condition)
+      {
         sleep_enable();
         sei();
-	sleep_cpu();
-	sleep_disable();
+        sleep_cpu();
+        sleep_disable();
       }
       sei();
     \endcode
