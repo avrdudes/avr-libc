@@ -1,3 +1,19 @@
+2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for XMEGA, ATxmega128A1, ATxmega64A1.
+	* crt1/gcrt1.S: Ditto.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/common.h: Ditto.
+	* include/avr/io.h: Ditto.
+	* libc/stdlib/stdlib_private.h: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iox128a1.h: New file.
+	* include/avr/iox64a1.h: New file.
+	* NEWS: Add news.
+
 2008-03-24  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Optimize setjmp() in space. Use __AVR_3_BYTE_PC__ macro.

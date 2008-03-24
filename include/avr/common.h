@@ -65,10 +65,18 @@ All other architectures do have a stack pointer.  Some devices have only
 less than 256 bytes of possible RAM locations (128 Bytes of SRAM
 and no option for external RAM), thus SPH is officially "reserved"
 for them.
-
 */
-#if __AVR_ARCH__ != 1
-
+#if __AVR_ARCH__ >= 100
+#  ifndef SPL
+#    define SPL _SFR_MEM8(0x3D)
+#  endif
+#  ifndef SPH
+#    define SPH _SFR_MEM8(0x3E)
+#  endif
+#  ifndef SP
+#    define SP _SFR_MEM16(0x3D)
+#  endif
+#elif __AVR_ARCH__ != 1 
 #  ifndef SPL
 #    define SPL _SFR_IO8(0x3D)
 #  endif
@@ -84,14 +92,18 @@ for them.
 #      define SPH _SFR_IO8(0x3E)
 #    endif
 #  endif /* XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__) */
-
 #endif /* __AVR_ARCH__ != 1 */
 
 
 /* Status Register */
 #ifndef SREG
-#  define SREG _SFR_IO8(0x3F)
+#  if __AVR_ARCH__ >= 100
+#    define SREG _SFR_MEM8(0x3F)
+#  else
+#    define SREG _SFR_IO8(0x3F)
+#  endif
 #endif
+
 
 /* SREG bit definitions */
 #ifndef SREG_C
@@ -123,11 +135,16 @@ for them.
 #if defined(__COMPILING_AVR_LIBC__)
 
 /* AVR 6 Architecture */
-#if __AVR_ARCH__ == 6
-#  ifndef EIND
-#    define EIND  _SFR_IO8(0X3C)
+#  if __AVR_ARCH__ == 6
+#    ifndef EIND
+#      define EIND  _SFR_IO8(0X3C)
+#    endif
+/* XMEGA Architectures */
+#  elif __AVR_ARCH__ >= 100
+#    ifndef EIND
+#      define EIND  _SFR_MEM8(0x3C)
+#    endif
 #  endif
-#endif /* __AVR_ARCH__ == 6 */
 
 /*
 Only few devices come without EEPROM.  In order to assemble the
@@ -195,38 +212,62 @@ and families.
 /* Status Register */
 #if defined(SREG)
 #  define AVR_STATUS_REG   SREG
-#  define AVR_STATUS_ADDR  _SFR_IO_ADDR(SREG)
+#  if __AVR_ARCH__ >= 100
+#    define AVR_STATUS_ADDR  _SFR_MEM_ADDR(SREG)
+#  else
+#    define AVR_STATUS_ADDR  _SFR_IO_ADDR(SREG)
+#  endif
 #endif
 
 /* Stack Pointer (combined) Register */
 #if defined(SP)
 #  define AVR_STACK_POINTER_REG   SP
-#  define AVR_STACK_POINTER_ADDR  _SFR_IO_ADDR(SP)
+#  if __AVR_ARCH__ >= 100
+#    define AVR_STACK_POINTER_ADDR  _SFR_MEM_ADDR(SP)
+#  else
+#    define AVR_STACK_POINTER_ADDR  _SFR_IO_ADDR(SP)
+#  endif
 #endif
 
 /* Stack Pointer High Register */
 #if defined(SPH)
 #  define _HAVE_AVR_STACK_POINTER_HI 1
 #  define AVR_STACK_POINTER_HI_REG   SPH
-#  define AVR_STACK_POINTER_HI_ADDR  _SFR_IO_ADDR(SPH)
+#  if __AVR_ARCH__ >= 100
+#    define AVR_STACK_POINTER_HI_ADDR  _SFR_MEM_ADDR(SPH)
+#  else
+#    define AVR_STACK_POINTER_HI_ADDR  _SFR_IO_ADDR(SPH)
+#  endif
 #endif
 
 /* Stack Pointer Low Register */
 #if defined(SPL)
 #  define AVR_STACK_POINTER_LO_REG   SPL
-#  define AVR_STACK_POINTER_LO_ADDR  _SFR_IO_ADDR(SPL)
+#  if __AVR_ARCH__ >= 100
+#    define AVR_STACK_POINTER_LO_ADDR  _SFR_MEM_ADDR(SPL)
+#  else
+#    define AVR_STACK_POINTER_LO_ADDR  _SFR_IO_ADDR(SPL)
+#  endif
 #endif
 
 /* RAMPZ Register */
 #if defined(RAMPZ)
 #  define AVR_RAMPZ_REG   RAMPZ
-#  define AVR_RAMPZ_ADDR  _SFR_IO_ADDR(RAMPZ)
+#  if __AVR_ARCH__ >= 100
+#    define AVR_RAMPZ_ADDR  _SFR_MEM_ADDR(RAMPZ)
+#  else
+#    define AVR_RAMPZ_ADDR  _SFR_IO_ADDR(RAMPZ)
+#  endif
 #endif
 
 /* Extended Indirect Register */
 #if defined(EIND)
 #  define AVR_EXTENDED_INDIRECT_REG   EIND
-#  define AVR_EXTENDED_INDIRECT_ADDR  _SFR_IO_ADDR(EIND)
+#  if __AVR_ARCH__ >= 100
+#    define AVR_EXTENDED_INDIRECT_ADDR  _SFR_MEM_ADDR(EIND)
+#  else
+#    define AVR_EXTENDED_INDIRECT_ADDR  _SFR_IO_ADDR(EIND)
+#  endif
 #endif
 
 /*------------ Workaround to old compilers (4.1.2 and earlier)  ------------*/

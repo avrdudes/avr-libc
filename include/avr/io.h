@@ -302,6 +302,10 @@
 #  include <avr/iotn12.h>
 #elif defined (__AVR_ATtiny11__)
 #  include <avr/iotn11.h>
+#elif defined (__AVR_ATxmega64A1__)
+#  include <avr/iox64a1.h>
+#elif defined (__AVR_ATxmega128A1__)
+#  include <avr/iox128a1.h>
 #else
 #  if !defined(__COMPILING_AVR_LIBC__)
 #    warning "device type not defined"

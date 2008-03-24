@@ -84,8 +84,8 @@
     \endcode
 
     Saving the value of MCUSR in \c mcusr_mirror is only needed if the
-    application later wants to examine the reset source, but clearing
-    in particular the watchdog reset flag before disabling the
+    application later wants to examine the reset source, but in particular, 
+    clearing the watchdog reset flag before disabling the
     watchdog is required, according to the datasheet.
 */
 
@@ -93,15 +93,17 @@
    \ingroup avr_watchdog
    Reset the watchdog timer.  When the watchdog timer is enabled,
    a call to this instruction is required before the timer expires,
-   otherwise a watchdog-initiated device reset will occur. */
+   otherwise a watchdog-initiated device reset will occur. 
+*/
 
 #define wdt_reset() __asm__ __volatile__ ("wdr")
+
 
 #if defined(WDP3)
 # define _WD_PS3_MASK       _BV(WDP3)
 #else
 # define _WD_PS3_MASK       0x00
-#endif /* WDP3 */
+#endif
 
 #if defined(WDTCSR)
 #  define _WD_CONTROL_REG     WDTCSR
@@ -117,7 +119,41 @@
 
 
 
-#if defined(__AVR_AT90PWM1__) \
+#if defined(__AVR_ATxmega128A1__) \
+|| defined(__AVR_ATxmega64A1__)
+
+
+/**
+   \ingroup avr_watchdog
+   Enable the watchdog timer, configuring it for expiry after
+   \c timeout (which is a combination of the \c WDP0 through
+   \c WDP2 bits to write into the \c WDTCR register; For those devices 
+   that have a \c WDTCSR register, it uses the combination of the \c WDP0 
+   through \c WDP3 bits).
+
+   See also the symbolic constants \c WDTO_15MS et al.
+*/
+
+/*
+    wdt_enable(WDT_PER_8KCLK_gc);
+*/
+#define wdt_enable(value) \
+__asm__ __volatile__ ( \
+    "in __tmp_reg__, %0 \n\t" \
+    "out %1, %3 \n\t" \
+    "sts %2, %4 \n\t" \
+    "wdr \n\t" \
+    "out %0, __tmp_reg__ \n\t" \
+    : /* no outputs */ \
+    : "=M" (_SFR_MEM_ADDR(RAMPD)), \
+      "=M" (_SFR_MEM_ADDR(CCP)), \
+      "=M" (_SFR_MEM_ADDR(WDT_CTRL)) \
+      "r" (0xD8), \
+      "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | value)), \
+    : "r0" \
+)
+
+#elif defined(__AVR_AT90PWM1__) \
 || defined(__AVR_AT90PWM216__) \
 || defined(__AVR_AT90PWM2B__) \
 || defined(__AVR_AT90PWM316__) \
@@ -173,7 +209,7 @@
 
 /* Use STS instruction. */
  
-#define _wdt_write(value)   \
+#define wdt_enable(value)   \
     __asm__ __volatile__ (  \
         "in __tmp_reg__,__SREG__" "\n\t"    \
         "cli" "\n\t"    \
@@ -208,7 +244,7 @@ __asm__ __volatile__ (  \
 
 /* Use OUT instruction. */
 
-#define _wdt_write(value)   \
+#define wdt_enable(value)   \
     __asm__ __volatile__ (  \
         "in __tmp_reg__,__SREG__" "\n\t"    \
         "cli" "\n\t"    \
@@ -242,20 +278,8 @@ __asm__ __volatile__ (  \
     "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))) \
     : "r0" \
 )
-    
+
 #endif
-
-/**
-   \ingroup avr_watchdog
-   Enable the watchdog timer, configuring it for expiry after
-   \c timeout (which is a combination of the \c WDP0 through
-   \c WDP2 bits to write into the \c WDTCR register; For those devices 
-   that have a \c WDTCSR register, it uses the combination of the \c WDP0 
-   through \c WDP3 bits).
-
-   See also the symbolic constants \c WDTO_15MS et al.
-*/
-#define wdt_enable(timeout) _wdt_write(timeout)
 
 
 
@@ -352,7 +376,7 @@ __asm__ __volatile__ (  \
     */
 #define WDTO_8S     9
 
-#endif
-
+#endif  /* defined(__DOXYGEN__) || defined(WDP3) */
+   
 
 #endif /* _AVR_WDT_H_ */
