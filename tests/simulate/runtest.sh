@@ -276,7 +276,7 @@ for test_file in $test_list ; do
 			then
 			    Err_echo "simulate failed: $RETVAL"
 			    if [ $FLAG_KEEPCORE ] ; then
-					mv -T $CORE ${CORE}-$(echo ${test_file} | sed -e 's,/,.,g')-${mcu}-${prvers}
+					mv -f $CORE ${CORE}-$(echo ${test_file} | sed -e 's,/,_,g')-${mcu}-${prvers}
 			    fi
 			    n_esimul=$(($n_esimul + 1))
 			else

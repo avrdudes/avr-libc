@@ -1,5 +1,10 @@
 2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* tests/simulate/runtest.sh: Moving failed testcases: Replace -T with -f,
+	replace dot with underscore.
+
+2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* tests/simulate/runtest.sh: Fix moving failed testcases. Add printing
 	of location and version of avr-gcc used for tests.
 
