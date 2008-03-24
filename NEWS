@@ -67,8 +67,12 @@
     arhitectures very simply. Also this fixes Avr-libc bug #21410. New
     functions for 32-bit words are added.
 
+  - Added support for XMEGA architectures.
+
 * New devices supported:
 
+  + ATxmega128A1
+  + ATxmega64A1
   + ATmega32M1
   + ATmega32C1
   + ATmega32U4

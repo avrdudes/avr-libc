@@ -341,8 +341,131 @@ find out which macros are applicable to your device.
 @} */
 
 
+#if defined(__AVR_ATxmega128a1__) \
+|| defined(__AVR_ATxmega64a1)
 
-#if defined(__AVR_ATmega640__) \
+/*
+#define power_aes_enable()  (PM_PR_PR &= (uint8_t)~(PR_AES_bm))
+#define power_aes_disable() (PM_PR_PR |= (uint8_t)PR_AES_bm)
+*/
+
+#define power_ebi_enable()  (PM_PR_PR &= (uint8_t)~(PR_EBI_bm))
+#define power_ebi_disable() (PM_PR_PR |= (uint8_t)PR_EBI_bm)
+
+#define power_rtc_enable()  (PM_PR_PR &= (uint8_t)~(PR_RTC_bm))
+#define power_rtc_disable() (PM_PR_PR |= (uint8_t)PR_RTC_bm)
+
+#define power_evsys_enable()    (PM_PR_PR &= (uint8_t)~(PR_EVSYS_bm))
+#define power_evsys_disable()   (PM_PR_PR |= (uint8_t)PR_EVSYS_bm)
+
+#define power_dma_enable()    (PM_PR_PR &= (uint8_t)~(PR_DMA_bm))
+#define power_dma_disable()   (PM_PR_PR |= (uint8_t)PR_DMA_bm)
+
+#define power_daca_enable()     (PM_PR_PRPA &= (uint8_t)~(PR_DAC_bm))
+#define power_daca_disable()    (PM_PR_PRPA |= (uint8_t)PR_DAC_bm)
+#define power_dacb_enable()     (PM_PR_PRPB &= (uint8_t)~(PR_DAC_bm))
+#define power_dacb_disable()    (PM_PR_PRPB |= (uint8_t)PR_DAC_bm)
+
+#define power_adca_enable()     (PM_PR_PRPA &= (uint8_t)~(PR_ADC_bm))
+#define power_adca_disable()    (PM_PR_PRPA |= (uint8_t)PR_ADC_bm)
+#define power_adcb_enable()     (PM_PR_PRPB &= (uint8_t)~(PR_ADC_bm))
+#define power_adcb_disable()    (PM_PR_PRPB |= (uint8_t)PR_ADC_bm)
+
+#define power_aca_enable()      (PM_PR_PRPA &= (uint8_t)~(PR_AC_bm))
+#define power_aca_disable()     (PM_PR_PRPA |= (uint8_t)PR_AC_bm)
+#define power_acb_enable()      (PM_PR_PRPA &= (uint8_t)~(PR_AC_bm))
+#define power_acb_disable()     (PM_PR_PRPA |= (uint8_t)PR_AC_bm)
+
+#define power_twic_enable()     (PM_PR_PRPC &= (uint8_t)~(PR_TWI_bm))
+#define power_twic_disable()    (PM_PR_PRPC |= (uint8_t)PR_TWI_bm)
+#define power_twid_enable()     (PM_PR_PRPD &= (uint8_t)~(PR_TWI_bm))
+#define power_twid_disable()    (PM_PR_PRPD |= (uint8_t)PR_TWI_bm)
+#define power_twie_enable()     (PM_PR_PRPE &= (uint8_t)~(PR_TWI_bm))
+#define power_twie_disable()    (PM_PR_PRPE |= (uint8_t)PR_TWI_bm)
+#define power_twif_enable()     (PM_PR_PRPF &= (uint8_t)~(PR_TWI_bm))
+#define power_twif_disable()    (PM_PR_PRPF |= (uint8_t)PR_TWI_bm)
+
+#define power_usartc1_enable()  (PM_PR_PRPC &= (uint8_t)~(PR_USART1_bm))
+#define power_usartc1_disable() (PM_PR_PRPC |= (uint8_t)PR_USART1_bm)
+#define power_usartd1_enable()  (PM_PR_PRPD &= (uint8_t)~(PR_USART1_bm))
+#define power_usartd1_disable() (PM_PR_PRPD |= (uint8_t)PR_USART1_bm)
+#define power_usarte1_enable()  (PM_PR_PRPE &= (uint8_t)~(PR_USART1_bm))
+#define power_usarte1_disable() (PM_PR_PRPE |= (uint8_t)PR_USART1_bm)
+#define power_usartf1_enable()  (PM_PR_PRPF &= (uint8_t)~(PR_USART1_bm))
+#define power_usartf1_disable() (PM_PR_PRPF |= (uint8_t)PR_USART1_bm)
+
+#define power_usartc0_enable()  (PM_PR_PRPC &= (uint8_t)~(PR_USART0_bm))
+#define power_usartc0_disable() (PM_PR_PRPC |= (uint8_t)PR_USART0_bm)
+#define power_usartd0_enable()  (PM_PR_PRPD &= (uint8_t)~(PR_USART0_bm))
+#define power_usartd0_disable() (PM_PR_PRPD |= (uint8_t)PR_USART0_bm)
+#define power_usarte0_enable()  (PM_PR_PRPE &= (uint8_t)~(PR_USART0_bm))
+#define power_usarte0_disable() (PM_PR_PRPE |= (uint8_t)PR_USART0_bm)
+#define power_usartf0_enable()  (PM_PR_PRPF &= (uint8_t)~(PR_USART0_bm))
+#define power_usartf0_disable() (PM_PR_PRPF |= (uint8_t)PR_USART0_bm)
+
+#define power_spic_enable()     (PM_PR_PRPC &= (uint8_t)~(PR_SPI_bm))
+#define power_spic_disable()    (PM_PR_PRPC |= (uint8_t)PR_SPI_bm)
+#define power_spid_enable()     (PM_PR_PRPD &= (uint8_t)~(PR_SPI_bm))
+#define power_spid_disable()    (PM_PR_PRPD |= (uint8_t)PR_SPI_bm)
+#define power_spie_enable()     (PM_PR_PRPE &= (uint8_t)~(PR_SPI_bm))
+#define power_spie_disable()    (PM_PR_PRPE |= (uint8_t)PR_SPI_bm)
+#define power_spif_enable()     (PM_PR_PRPF &= (uint8_t)~(PR_SPI_bm))
+#define power_spif_disable()    (PM_PR_PRPF |= (uint8_t)PR_SPI_bm)
+
+#define power_hiresc_enable()   (PM_PR_PRPC &= (uint8_t)~(PR_HIRES_bm))
+#define power_hiresc_disable()  (PM_PR_PRPC |= (uint8_t)PR_HIRES_bm)
+#define power_hiresd_enable()   (PM_PR_PRPD &= (uint8_t)~(PR_HIRES_bm))
+#define power_hiresd_disable()  (PM_PR_PRPD |= (uint8_t)PR_HIRES_bm)
+#define power_hirese_enable()   (PM_PR_PRPE &= (uint8_t)~(PR_HIRES_bm))
+#define power_hirese_disable()  (PM_PR_PRPE |= (uint8_t)PR_HIRES_bm)
+#define power_hiresf_enable()   (PM_PR_PRPF &= (uint8_t)~(PR_HIRES_bm))
+#define power_hiresf_disable()  (PM_PR_PRPF |= (uint8_t)PR_HIRES_bm)
+
+#define power_tc1c_enable()     (PM_PR_PRPC &= (uint8_t)~(PR_TC1_bm))
+#define power_tc1c_disable()    (PM_PR_PRPC |= (uint8_t)PR_TC1_bm)
+#define power_tc1d_enable()     (PM_PR_PRPD &= (uint8_t)~(PR_TC1_bm))
+#define power_tc1d_disable()    (PM_PR_PRPD |= (uint8_t)PR_TC1_bm)
+#define power_tc1e_enable()     (PM_PR_PRPE &= (uint8_t)~(PR_TC1_bm))
+#define power_tc1e_disable()    (PM_PR_PRPE |= (uint8_t)PR_TC1_bm)
+#define power_tc1f_enable()     (PM_PR_PRPF &= (uint8_t)~(PR_TC1_bm))
+#define power_tc1f_disable()    (PM_PR_PRPF |= (uint8_t)PR_TC1_bm)
+
+#define power_tc0c_enable()     (PM_PR_PRPC &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0c_disable()    (PM_PR_PRPC |= (uint8_t)PR_TC0_bm)
+#define power_tc0d_enable()     (PM_PR_PRPD &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0d_disable()    (PM_PR_PRPD |= (uint8_t)PR_TC0_bm)
+#define power_tc0e_enable()     (PM_PR_PRPE &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0e_disable()    (PM_PR_PRPE |= (uint8_t)PR_TC0_bm)
+#define power_tc0f_enable()     (PM_PR_PRPF &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0f_disable()    (PM_PR_PRPF |= (uint8_t)PR_TC0_bm)
+
+#define power_all_enable() \
+do { \
+    /* PM_PR_PR &= (uint8_t)~(PR_AES_bm|PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); */ \
+    PM_PR_PR &= (uint8_t)~(PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); \
+    PM_PR_PRPA &= (uint8_t)~(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PM_PR_PRPB &= (uint8_t)~(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PM_PR_PRPC &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PM_PR_PRPD &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PM_PR_PRPE &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PM_PR_PRPF &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+} while(0)
+
+
+#define power_all_disable() \
+do { \
+    /* PM_PR_PR |= (uint8_t)(PR_AES_bm|PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); */ \
+    PM_PR_PR |= (uint8_t)(PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); \
+    PM_PR_PRPA |= (uint8_t)(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PM_PR_PRPB |= (uint8_t)(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PM_PR_PRPC |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PM_PR_PRPD |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PM_PR_PRPE |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PM_PR_PRPF |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+} while(0)
+
+
+#elif defined(__AVR_ATmega640__) \
 || defined(__AVR_ATmega1280__) \
 || defined(__AVR_ATmega1281__) \
 || defined(__AVR_ATmega2560__) \

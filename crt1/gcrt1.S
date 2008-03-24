@@ -106,6 +106,75 @@ __vectors:
 	vector	__vector_54
 	vector	__vector_55
 	vector	__vector_56
+	vector	__vector_57
+	vector	__vector_58
+	vector	__vector_59
+	vector	__vector_60
+	vector	__vector_61
+	vector	__vector_62
+	vector	__vector_63
+	vector	__vector_64
+	vector	__vector_65
+	vector	__vector_66
+	vector	__vector_67
+	vector	__vector_68
+	vector	__vector_69
+	vector	__vector_70
+	vector	__vector_71
+	vector	__vector_72
+	vector	__vector_73
+	vector	__vector_74
+	vector	__vector_75
+	vector	__vector_76
+	vector	__vector_77
+	vector	__vector_78
+	vector	__vector_79
+	vector	__vector_80
+	vector	__vector_81
+	vector	__vector_82
+	vector	__vector_83
+	vector	__vector_84
+	vector	__vector_85
+	vector	__vector_86
+	vector	__vector_87
+	vector	__vector_88
+	vector	__vector_89
+	vector	__vector_90
+	vector	__vector_91
+	vector	__vector_92
+	vector	__vector_93
+	vector	__vector_94
+	vector	__vector_95
+	vector	__vector_96
+	vector	__vector_97
+	vector	__vector_98
+	vector	__vector_99
+	vector	__vector_100
+	vector	__vector_101
+	vector	__vector_102
+	vector	__vector_103
+	vector	__vector_104
+	vector	__vector_105
+	vector	__vector_106
+	vector	__vector_107
+	vector	__vector_108
+	vector	__vector_109
+	vector	__vector_110
+	vector	__vector_111
+	vector	__vector_112
+	vector	__vector_113
+	vector	__vector_114
+	vector	__vector_115
+	vector	__vector_116
+	vector	__vector_117
+	vector	__vector_118
+	vector	__vector_119
+	vector	__vector_120
+	vector	__vector_121
+	vector	__vector_122
+	vector	__vector_123
+	vector	__vector_124
+	vector	__vector_125
 	.endfunc
 
 	/* Handle unexpected interrupts (enabled and no handler), which

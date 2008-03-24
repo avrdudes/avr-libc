@@ -84,6 +84,9 @@ extern char mymem[];
 extern char __heap_start;
 extern char __heap_end;
 
+/* Needed for definition of AVR_STACK_POINTER_REG. */
+#include <avr/io.h>
+
 #define STACK_POINTER() ((char *)AVR_STACK_POINTER_REG)
 
 #endif /* MALLOC_TEST */
