@@ -76,6 +76,7 @@
 * Optimized functions:
 
    strtod
+   setjmp
 
 * New functions:
 

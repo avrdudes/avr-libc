@@ -1,3 +1,19 @@
+2008-03-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Optimize setjmp() in space. Use __AVR_3_BYTE_PC__ macro.
+	* include/setjmp.h: Reduce size of jmp_buf by 2/1 bytes.
+	* libc/stdlib/setjmp.S: Reduce size of jmp_buf by 2/1 bytes. Rewrite
+	the setjmp() to save flash. Use __AVR_3_BYTE_PC__ to determine the
+	size of return address (vs EIND register presence). Add common
+	assembler pseudos: .type, .size .
+	* tests/simulate/regression/20080323-jmpbuf.c: New file.
+	* tests/simulate/stdlib/setjmp-1.S: New file.
+	* tests/simulate/stdlib/setjmp-2.S: New file.
+	* tests/simulate/stdlib/setjmp-3.S: New file.
+	* tests/simulate/stdlib/setjmp-4.S: New file.
+	* tests/simulate/stdlib/setjmp-5.S: New file.
+	* NEWS: Add setjmp() to optimize list.
+
 2008-03-22  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATmega32U4.
