@@ -1,5 +1,10 @@
 2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* tests/simulate/runtest.sh: Fix moving failed testcases. Add printing
+	of location and version of avr-gcc used for tests.
+
+2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* configure.ac: Add support for XMEGA, ATxmega128A1, ATxmega64A1.
 	* crt1/gcrt1.S: Ditto.
 	* devtools/gen-avr-lib-tree.sh: Ditto.
