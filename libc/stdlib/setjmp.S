@@ -42,138 +42,116 @@
 	16	 2	frame pointer (r29:r28)
 	18	 2	stack pointer (SPH:SPL)
 	20	 1	status register (SREG)
-	21	 3	return address (PC) (2 bytes used for <=128K flash)
-	24 = total size
+	21	 2/3	return address (PC) (2 bytes used for <=128Kw flash)
+	23/24 = total size
+   All multibytes are stored as little-endian.
 
-int setjmp(jmp_buf __jmpb);
-void longjmp(jmp_buf __jmpb, int __val) __attribute__((noreturn));
+   int setjmp(jmp_buf __jmpb);
+   void longjmp(jmp_buf __jmpb, int __val) __attribute__((noreturn));
  */
 
 #ifndef	__DOXYGEN__
 
+#include <avr/io.h>
 #include "macros.inc"
-#include "ctoasm.inc"
 
-/* the same library is used for 2313 and 8515 for now -
-   I hope writing 0 to non-existent SPH doesn't hurt... */
-#ifndef SPH
-#define SPH (SPL+1)
+/* ???: What was a reason to use aliases for common registers?
+   Check the address: is it a port number (value for IN/OUT)?	*/
+#if	AVR_STACK_POINTER_LO_ADDR != 0x3D	\
+     || AVR_STATUS_ADDR != 0x3F
+# error  "Strange address of common registers SPL, SREG"
 #endif
 
-#define jmpb_hi	rP0
-#define jmpb_lo	rP1
-#define val_hi	rP2
-#define val_lo	rP3
+#define jmpb_hi	r25
+#define jmpb_lo	r24
+#define val_hi	r23
+#define val_lo	r22
 
-#define ret_lo rP1  /* r24 */
-#define ret_hi rP0  /* r25 */
+#define ret_lo	r24
+#define ret_hi	r25
 
 	.section .text
 
 	.global _U(setjmp)
-	.global _U(longjmp)
+	.type	_U(setjmp), @function
 
 _U(setjmp):
-	X_movw	ZL, jmpb_lo
-	in	r26, AVR_STACK_POINTER_LO_ADDR
+	X_movw	XL, jmpb_lo
+  ; save call-saved registers and frame pointer
+	.irp	.L_regno, 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,28,29
+	st	X+, r\.L_regno
+	.endr
+  ; get return address
+#if  defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
+	pop	__tmp_reg__		; used below
+#endif
+	pop	ZH
+	pop	ZL
+  ; save stack pointer (after poping)
+	in	ret_lo, AVR_STACK_POINTER_LO_ADDR
+	st	X+, ret_lo
 #ifdef _HAVE_AVR_STACK_POINTER_HI    
-	in	r27, AVR_STACK_POINTER_HI_ADDR
+	in	ret_lo, AVR_STACK_POINTER_HI_ADDR
+	st	X+, ret_lo
 #else
-    clr r27
+	st	X+, __zero_reg__
 #endif
-	/* save program counter (return address) */
-	/* return address on stack (pushed by "call") is big endian! */
-	/* SP is post-decremented by "call" */
-	adiw	r26, 1
-#ifdef AVR_EXTENDED_INDIRECT_REG  /* devices with >128K bytes of flash */
-	ld	__tmp_reg__, X+
-	std	Z+23, __tmp_reg__
-#endif
-	ld	__tmp_reg__, X+
-	std	Z+22, __tmp_reg__
-	ld	__tmp_reg__, X
-	std	Z+21, __tmp_reg__
-	/* save stack pointer (SP value before calling this function) */
-	std	Z+18,r26
-	std	Z+19,r27
-	/* save status register (I flag) */
-	in	__tmp_reg__, AVR_STATUS_ADDR
-	std	Z+20, __tmp_reg__
-	/* save call-saved registers */
-	st	Z, r2
-	std	Z+1, r3
-	std	Z+2, r4
-	std	Z+3, r5
-	std	Z+4, r6
-	std	Z+5, r7
-	std	Z+6, r8
-	std	Z+7, r9
-	std	Z+8, r10
-	std	Z+9, r11
-	std	Z+10, r12
-	std	Z+11, r13
-	std	Z+12, r14
-	std	Z+13, r15
-	std	Z+14, r16
-	std	Z+15, r17
-	/* save frame pointer */
-	std	Z+16,r28
-	std	Z+17,r29
-	/* return zero */
+  ; save status register (I flag)
+	in	ret_lo, AVR_STATUS_ADDR
+	st	X+, ret_lo
+  ; save return address
+	st	X+, ZL
+	st	X+, ZH
+  ; return zero
 	clr	ret_lo
 	clr	ret_hi
-	ret
+#if  defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
+	st	X+, __tmp_reg__
+	rjmp	.L_eijmp
+#else
+	ijmp
+#endif
+	.size	_U(setjmp), . - _U(setjmp)
+
+	.global _U(longjmp)
+	.type	_U(longjmp), @function
 
 _U(longjmp):
 	X_movw	XL, jmpb_lo
-	/* return value */
+  ; return value
 	X_movw	ret_lo, val_lo
-	/* if zero, change to 1 */
+  ; if zero, change to 1
 	cpi	ret_lo, 1
 	cpc	ret_hi, __zero_reg__
 	adc	ret_lo, __zero_reg__
-	/* restore call-saved registers */
-	ld	r2, X+
-	ld	r3, X+
-	ld	r4, X+
-	ld	r5, X+
-	ld	r6, X+
-	ld	r7, X+
-	ld	r8, X+
-	ld	r9, X+
-	ld	r10, X+
-	ld	r11, X+
-	ld	r12, X+
-	ld	r13, X+
-	ld	r14, X+
-	ld	r15, X+
-	ld	r16, X+
-	ld	r17, X+
-	/* restore frame pointer */
-	ld	YL, X+
-	ld	YH, X+
-	/* restore stack pointer (SP value before the setjmp() call) */
-	ld	r30,X+
-	ld	r31,X+
+  ; restore call-saved registers and frame pointer
+	.irp	.L_regno, 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,28,29
+	ld	r\.L_regno, X+
+	.endr
+  ; restore stack pointer (SP value before the setjmp() call) and SREG
+	ld	ZL, X+
+	ld	ZH, X+
 	ld	__tmp_reg__, X+
+#ifdef _HAVE_AVR_STACK_POINTER_HI
 	/* interrupts disabled for shortest possible time (3 cycles) */
 	cli
-#ifdef _HAVE_AVR_STACK_POINTER_HI    
-	out	AVR_STACK_POINTER_HI_ADDR, r31
+	out	AVR_STACK_POINTER_HI_ADDR, ZH
 #endif
 	/* Restore status register (including the interrupt enable flag).
 	   Interrupts are re-enabled only after the next instruction.  */
 	out	AVR_STATUS_ADDR, __tmp_reg__
-	out	AVR_STACK_POINTER_LO_ADDR, r30
-	/* restore return address */
-	ld	r30,X+
-	ld	r31,X+
-#ifdef AVR_EXTENDED_INDIRECT_REG
-	ld	__tmp_reg__, X
+	out	AVR_STACK_POINTER_LO_ADDR, ZL
+  ; get return address and jump
+	ld	ZL, X+
+	ld	ZH, X+
+#if  defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
+	ld	__tmp_reg__, X+
+.L_eijmp:
 	out	AVR_EXTENDED_INDIRECT_ADDR, __tmp_reg__
 	eijmp
 #else
 	ijmp
 #endif
+	.size	_U(longjmp), . - _U(longjmp)
 
 #endif	/* !__DOXYGEN__ */

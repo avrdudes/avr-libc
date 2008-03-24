@@ -44,14 +44,18 @@ extern "C" {
 	16	 2	frame pointer (r29:r28)
 	18	 2	stack pointer (SPH:SPL)
 	20	 1	status register (SREG)
-	21	 3	return address (PC) (2 bytes used for <=128K flash)
-	24 = total size
+	21	 2/3	return address (PC) (2 bytes used for <=128Kw flash)
+	23/24 = total size
  */
 
 #if !defined(__DOXYGEN__)
 
-#define _JBLEN 24
-typedef struct _jmp_buf { unsigned char _jb[_JBLEN + 1]; } jmp_buf[1];
+#if	defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
+# define _JBLEN  24
+#else
+# define _JBLEN  23
+#endif
+typedef struct _jmp_buf { unsigned char _jb[_JBLEN]; } jmp_buf[1];
 
 #endif /* not __DOXYGEN__ */
 
