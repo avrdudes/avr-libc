@@ -202,6 +202,11 @@ Compile ()
     $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 -o $3 $crt $1 $libs
 }
 
+
+# Print avr-gcc location and version before running tests.
+which avr-gcc
+avr-gcc --version
+
 n_files=0	# number of operated files
 n_emake=0	# number of compile/link errors
 n_ehost=0	# number of 'run-at-host' errors
@@ -271,7 +276,7 @@ for test_file in $test_list ; do
 			then
 			    Err_echo "simulate failed: $RETVAL"
 			    if [ $FLAG_KEEPCORE ] ; then
-				mv $CORE ${CORE}-$(echo ${test_file} | sed -e 's,/,::,g')-${mcu}-${prvers}
+					mv -T $CORE ${CORE}-$(echo ${test_file} | sed -e 's,/,.,g')-${mcu}-${prvers}
 			    fi
 			    n_esimul=$(($n_esimul + 1))
 			else
