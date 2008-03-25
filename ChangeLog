@@ -1,3 +1,21 @@
+2008-03-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATtiny167.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* include/avr/iotn167.h: New file.
+	* NEWS: Add new device to list.
+	* doc/api/main_page.dox: Add xmega devices to documentation.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Fix macro for ATmega32M1, ATmega32C1.
+	* include/avr/sleep.h: Reformat some #ifdefs.
+
 2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* tests/simulate/runtest.sh: Moving failed testcases: Replace -T with -f,

@@ -155,6 +155,7 @@ compile-time.
 \par Automotive AVR Devices:
 - atmega32c1
 - atmega32m1
+- attiny167
 
 \par CAN AVR Devices:
 
@@ -199,6 +200,11 @@ compile-time.
 - at90usb1286
 - at90usb1287
 - atmega32u4
+
+\par XMEGA Devices:
+
+- atxmega128a1
+- atxmega64a1
 
 \par Miscellaneous Devices:
 

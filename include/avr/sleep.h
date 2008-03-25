@@ -144,9 +144,8 @@
     } while(0)
 
 
-#elif \
-defined(__AVR_ATmega162__) || \
-defined(__AVR_ATmega8515__)
+#elif defined(__AVR_ATmega162__) \
+|| defined(__AVR_ATmega8515__)
 
     #define SLEEP_MODE_IDLE         0
     #define SLEEP_MODE_PWR_DOWN     1
@@ -162,17 +161,16 @@ defined(__AVR_ATmega8515__)
         EMCUCR = ((EMCUCR & ~_BV(SM0)) | ((mode) == SLEEP_MODE_PWR_SAVE || (mode) == SLEEP_MODE_EXT_STANDBY ? _BV(SM0) : 0)); \
     } while(0)
 
-#elif \
-defined(__AVR_AT90S2313__) || \
-defined(__AVR_AT90S2323__) || \
-defined(__AVR_AT90S2333__) || \
-defined(__AVR_AT90S2343__) || \
-defined(__AVR_AT43USB320__) || \
-defined(__AVR_AT43USB355__) || \
-defined(__AVR_AT90S4414__) || \
-defined(__AVR_AT90S4433__) || \
-defined(__AVR_AT90S8515__) || \
-defined(__AVR_ATtiny22__)
+#elif defined(__AVR_AT90S2313__) \
+|| defined(__AVR_AT90S2323__) \
+|| defined(__AVR_AT90S2333__) \
+|| defined(__AVR_AT90S2343__) \
+|| defined(__AVR_AT43USB320__) \
+|| defined(__AVR_AT43USB355__) \
+|| defined(__AVR_AT90S4414__) \
+|| defined(__AVR_AT90S4433__) \
+|| defined(__AVR_AT90S8515__) \
+|| defined(__AVR_ATtiny22__)
 
     #define SLEEP_MODE_IDLE         0
     #define SLEEP_MODE_PWR_DOWN     _BV(SM)
@@ -182,24 +180,34 @@ defined(__AVR_ATtiny22__)
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~__BV(SM)) | (mode)); \
     } while(0)
 
-#elif \
-defined(__AVR_AT90S4434__) || \
-defined(__AVR_AT76C711__) || \
-defined(__AVR_AT90S8535__) || \
-defined(__AVR_ATmega103__) || \
-defined(__AVR_ATmega161__) || \
-defined(__AVR_ATmega163__) || \
-defined(__AVR_ATtiny13__) || \
-defined(__AVR_ATtiny15__) || \
-defined(__AVR_ATtiny24__) || \
-defined(__AVR_ATtiny44__) || \
-defined(__AVR_ATtiny84__) || \
-defined(__AVR_ATtiny25__) || \
-defined(__AVR_ATtiny45__) || \
-defined(__AVR_ATtiny85__) || \
-defined(__AVR_ATtiny261__) || \
-defined(__AVR_ATtiny461__) || \
-defined(__AVR_ATtiny861__)
+#elif defined(__AVR_ATtiny167__)
+
+    #define SLEEP_MODE_IDLE         0
+    #define SLEEP_MODE_ADC          _BV(SM0)
+    #define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+
+    #define set_sleep_mode(mode) \
+    do { \
+        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1))) | (mode)); \
+    } while(0)
+
+#elif defined(__AVR_AT90S4434__) \
+|| defined(__AVR_AT76C711__) \
+|| defined(__AVR_AT90S8535__) \
+|| defined(__AVR_ATmega103__) \
+|| defined(__AVR_ATmega161__) \
+|| defined(__AVR_ATmega163__) \
+|| defined(__AVR_ATtiny13__) \
+|| defined(__AVR_ATtiny15__) \
+|| defined(__AVR_ATtiny24__) \
+|| defined(__AVR_ATtiny44__) \
+|| defined(__AVR_ATtiny84__) \
+|| defined(__AVR_ATtiny25__) \
+|| defined(__AVR_ATtiny45__) \
+|| defined(__AVR_ATtiny85__) \
+|| defined(__AVR_ATtiny261__) \
+|| defined(__AVR_ATtiny461__) \
+|| defined(__AVR_ATtiny861__)
 
     #define SLEEP_MODE_IDLE         0
     #define SLEEP_MODE_ADC          _BV(SM0)
@@ -310,9 +318,8 @@ defined(__AVR_AT90PWM1__) \
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
     } while(0)
 
-#elif \
-defined(__AVR_ATxmega128A1__) || \
-defined(__AVR_ATxmega64A1__)
+#elif defined(__AVR_ATxmega128A1__) \
+|| defined(__AVR_ATxmega64A1__)
 
     #define SLEEP_MODE_IDLE         (0)
     #define SLEEP_MODE_PWR_DOWN     (SLEEP_SMODE1_bm)

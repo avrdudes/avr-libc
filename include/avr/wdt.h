@@ -200,6 +200,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny88__) \
+|| defined(__AVR_ATtiny167__) \
 || defined(__AVR_AT90USB82__) \
 || defined(__AVR_AT90USB162__) \
 || defined(__AVR_AT90USB646__) \
