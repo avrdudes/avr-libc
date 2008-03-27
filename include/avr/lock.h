@@ -70,6 +70,18 @@
     If __BOOT_LOCK_BITS_1_EXIST is defined, then the two BLB1 lock bits are
     available to the user and 4 mode settings are defined for these two bits.
 
+    If __BOOT_LOCK_APPLICATION_TABLE_BITS_EXIST is defined then two lock bits
+    are available to set the locking mode for the Application Table Section 
+    (which is used in the XMEGA family).
+    
+    If __BOOT_LOCK_APPLICATION_BITS_EXIST is defined then two lock bits are
+    available to set the locking mode for the Application Section (which is used
+    in the XMEGA family).
+    
+    If __BOOT_LOCK_BOOT_BITS_EXIST is defined then two lock bits are available
+    to set the locking mode for the Boot Loader Section (which is used in the
+    XMEGA family).
+
     The AVR lockbit modes have inverted values, logical 1 for an unprogrammed 
     (disabled) bit and logical 0 for a programmed (enabled) bit. The defined 
     macros for each individual lock bit represent this in their definition by a 
@@ -180,6 +192,22 @@
 #define BLB1_MODE_3  (0xCF)
 #define BLB1_MODE_4  (0xDF)
 #endif
+
+#if defined(__BOOT_LOCK_APPLICATION_TABLE_BITS_EXIST)
+#define BLBAT0 ~_BV(2)
+#define BLBAT1 ~_BV(3)
+#endif
+
+#if defined(__BOOT_LOCK_APPLICATION_BITS_EXIST)
+#define BLBA0 ~_BV(4)
+#define BLBA1 ~_BV(5)
+#endif
+
+#if defined(__BOOT_LOCK_BOOT_BITS_EXIST)
+#define BLBB0 ~_BV(6)
+#define BLBB1 ~_BV(7)
+#endif
+
 
 #define LOCKBITS_DEFAULT (0xFF)
 

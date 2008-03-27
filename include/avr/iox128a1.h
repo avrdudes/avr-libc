@@ -7364,27 +7364,78 @@ typedef enum AES_INTLVL_enum
 #define USARTF1_DRE_vect _VECTOR(123) // Data Register Empty Interrupt
 #define USARTF1_TXC_vect _VECTOR(124) // Transmission Complete Interrupt
 
-
-// todo: calculate size from XML data
 #define _VECTORS_SIZE (125 * 4)
 
 
 
-/* todo: calculate from XML file */
 /* Constants */
-#define SPM_PAGESIZE 256
-#define RAMSTART 0x2000
-#define RAMSIZE  0x2000
-#define RAMEND   (RAMSTART + RAMSIZE - 1)  /* Last On-Chip SRAM Location. */
-#define XRAMEND  0xFFFFFF
-#define E2END    0x7FF
-#define FLASHEND 0x1FFFF
+#define SPM_PAGESIZE    (256)
+#define RAMSTART        (0x2000)
+#define RAMSIZE         (0x2000)
+#define RAMEND          (RAMSTART + RAMSIZE - 1)  /* Last On-Chip SRAM Location. */
+#define XRAMEND         (0xFFFFFF)
+#define E2END           (0x7FF)
+#define E2PAGESIZE      (32) 
+#define FLASHEND        (0x23FFF)
 
 
-/* todo: Fuses */
+/* Fuses */
+#define FUSE_MEMORY_SIZE 5
+
+/* Fuse Byte 0 */
+#define FUSE_USERID0 ~_BV(0)
+#define FUSE_USERID1 ~_BV(1)
+#define FUSE_USERID2 ~_BV(2)
+#define FUSE_USERID3 ~_BV(3)
+#define FUSE_USERID4 ~_BV(4)
+#define FUSE_USERID5 ~_BV(5)
+#define FUSE_USERID6 ~_BV(6)
+#define FUSE_USERID7 ~_BV(7)
+#define FUSE0_DEFAULT (0x00)
+
+/* Fuse Byte 1 */
+#define FUSE_WDPER0  ~_BV(0)
+#define FUSE_WDPER1  ~_BV(1)
+#define FUSE_WDPER2  ~_BV(2)
+#define FUSE_WDPER3  ~_BV(3)
+#define FUSE_WDWPER0 ~_BV(4)
+#define FUSE_WDWPER1 ~_BV(5)
+#define FUSE_WDWPER2 ~_BV(6)
+#define FUSE_WDWPER3 ~_BV(7)
+#define FUSE1_DEFAULT (0x00)
+
+/* Fuse Byte 2 */
+#define FUSE_BODPD0  ~_BV(0)
+#define FUSE_BODPD1  ~_BV(1)
+#define FUSE_BODACT0 ~_BV(3)
+#define FUSE_BODACT1 ~_BV(4)
+#define FUSE_BOOTRST ~_BV(6)
+#define FUSE_DVSDON  ~_BV(7)
+#define FUSE2_DEFAULT (0x00)
+
+/* Fuse Byte 3 */
+#define FUSE_JTAGEN   ~_BV(0)
+#define FUSE_WDLOCK   ~_BV(1)
+#define FUSE_SUT0     ~_BV(2)
+#define FUSE_SUT1     ~_BV(3)
+#define FUSE_RSTDISBL ~_BV(4)
+#define FUSE3_DEFAULT (0x00)
+
+/* Fuse Byte 4 */
+#define FUSE_BOD0   ~_BV(0)
+#define FUSE_BOD1   ~_BV(1)
+#define FUSE_BOD2   ~_BV(2)
+#define FUSE_EESAVE ~_BV(3)
+#define FUSE4_DEFAULT (0x00)
 
 
-/* todo: Lockbits */
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+#define __BOOT_LOCK_APPLICATION_TABLE_BITS_EXIST
+#define __BOOT_LOCK_APPLICATION_BITS_EXIST 
+#define __BOOT_LOCK_BOOT_BITS_EXIST
+
 
 
 #endif /* _AVR_ATxmega128A1_H_ */

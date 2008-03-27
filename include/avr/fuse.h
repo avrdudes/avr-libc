@@ -107,6 +107,15 @@
     Fuse byte. HFUSE_DEFAULT is defined for a High Fuse byte. EFUSE_DEFAULT
     is defined for an Extended Fuse byte.
     
+    If FUSE_MEMORY_SIZE > 3, then the I/O header file defines macros that
+    provide default values for each fuse byte like so:
+    FUSE0_DEFAULT
+    FUSE1_DEFAULT
+    FUSE2_DEFAULT
+    FUSE3_DEFAULT
+    FUSE4_DEFAULT
+    ....
+    
     \par API Usage Example
     
     Putting all of this together is easy:
