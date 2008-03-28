@@ -1,3 +1,7 @@
+2008-03-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* eeprom.h: Re-add the eeprom_busy_wait macro that was accidentally removed.
+
 2008-03-26  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox128a1.h: Fix constants, add fuse, lockbit information.

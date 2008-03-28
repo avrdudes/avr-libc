@@ -175,6 +175,16 @@ void __eewr_block (void *, const void *, size_t, void (*)(uint8_t *, uint8_t));
 #endif
 
 
+/** \def eeprom_busy_wait 	 
+	     \ingroup avr_eeprom 	 
+	  	 
+	     Loops until the eeprom is no longer busy. 	 
+	  	 
+	     \returns Nothing. */ 	 
+	  	 
+#define eeprom_busy_wait() do {} while (!eeprom_is_ready())
+
+
 /** \ingroup avr_eeprom
     Read one byte from EEPROM address \a __p.
  */
