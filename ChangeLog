@@ -1,3 +1,10 @@
+2008-03-29  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libm/fplib/frexp.S: Avoid indirect write to R0,R1 with XMEGA.
+	
+	* tests/simulate/runtest.sh: Remove avr-gcc path and version output
+	(With Eric's agree).  Roll too line source line.
+
 2008-03-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* eeprom.h: Re-add the eeprom_busy_wait macro that was accidentally removed.

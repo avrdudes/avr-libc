@@ -55,9 +55,13 @@ ENTRY frexp
 	X_movw	ZL, pexp_lo
 
   ; Write 0 for next cases: Zero, Inf or NaN.
+#if  defined(__AVR_XMEGA__) && __AVR_XMEGA__
+	adiw	ZL, 0
+	breq	1f
+#endif
 	st	Z, r1
 	std	Z+1, r1
-
+1:
 	rcall	_U(__fp_splitA)
 	brcs	.L_nf			; return the same value
 	tst	rA3
@@ -68,11 +72,19 @@ ENTRY frexp
 	sbrs	rA2, 7
 	rcall	_U(__fp_norm2)
 
+#if  defined(__AVR_XMEGA__) && __AVR_XMEGA__
+	adiw	ZL, 0
+	breq	2f
+	st	Z, rA3
+	std	Z+1, rB3
+2:
+#else
   ; NULL is a legal address. Instead to check Z==0, will simply
   ; write and restore r1.
 	st	Z, rA3
 	std	Z+1, rB3
 	clr	r1		; protection to Z == 0
+#endif
 
 	andi	rA2, 0x7f
 	ldi	rA3, 0x3f
