@@ -1,3 +1,11 @@
+2008-03-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22785.
+	* include/avr/sleep.h: Add support for ATmega644P, ATmega1284P, 
+        ATmega32HVB, ATtiny88, ATmega48P, ATmega88P, ATmega168P, ATmega328P,
+        AT90PWM2B, AT90PWM3B, ATtiny48, ATtiny43U, AT90PWM216, AT90PWM316.
+	* NEWS: Add to fixed bug list.
+
 2008-03-29  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libm/fplib/frexp.S: Avoid indirect write to R0,R1 with XMEGA.
