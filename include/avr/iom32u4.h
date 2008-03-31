@@ -1034,7 +1034,8 @@
 #define TC46 6
 #define TC47 7
 
-#define TCNT4H _SFR_MEM8(0xBF)
+#define TCNT4H _SFR_MEM8(0xBF)  /* Alias for naming consistency. */
+#define TC4H _SFR_MEM8(0xBF)    /* Per XML device file. */
 #define TC48 0
 #define TC49 1
 #define TC410 2
