@@ -1,3 +1,7 @@
+2008-03-31  Eric B. Weddington  <eric.weddington@atmel.com>
+
+        * include/avr/iom32u4.h: Add alias register definition TC4H, per Atmel.
+
 2008-03-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #22785.
