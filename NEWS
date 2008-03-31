@@ -35,6 +35,8 @@
   [#22642] AT90USB162 and AT90USB82 not supported in <avr/power.h>
   [#22643] math.h c99 incompability
   [#22666] io90pwm3b.h errors
+  [#22785] ATMega644P Support Missing from avr/include/avr/sleep.h
+
 
 * Other changes:
 
