@@ -1373,6 +1373,8 @@
 #define DAT6 6
 #define DAT7 7
 
+#define UEBCX _SFR_MEM16(0xF2)
+
 #define UEBCLX _SFR_MEM8(0xF2)
 #define BYCT0 0
 #define BYCT1 1

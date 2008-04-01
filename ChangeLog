@@ -1,3 +1,12 @@
+2008-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32u4.h: Add UEBCX 16-bit register. This is not 
+	defined as per the datasheet or XML file. However, in talking with
+	the USB team, the contents of the registers are supposed to be read-only 
+	and static. Because of this it makes sense to add this as a convenience 
+	to the end-user as long the user realizes that the read is not done with
+	a temporary 8-bit register. 
+
 2008-03-31  Eric B. Weddington  <eric.weddington@atmel.com>
 
         * include/avr/iom32u4.h: Add alias register definition TC4H, per Atmel.
