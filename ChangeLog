@@ -1,3 +1,11 @@
+2008-04-02  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Released avr-libc-1.6.2
+
+2008-04-02  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version to 1.6.2.
+
 2008-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom32u4.h: Add UEBCX 16-bit register. This is not 
