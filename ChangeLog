@@ -1,3 +1,7 @@
+2008-04-03  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/bug-22800.c: New file.
+
 2008-04-02  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version to post-1.6.2.
