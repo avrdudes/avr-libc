@@ -1,3 +1,7 @@
+2008-04-03  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/bug-22800.c: New file.
+
 2008-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom32u4.h: Add UEBCX 16-bit register. This is not 
