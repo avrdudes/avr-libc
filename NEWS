@@ -1,5 +1,10 @@
 *** Changes since avr-libc-1.6.2:
 
+* Bugs fixed:
+
+  [#22828] eeprom_write_block(): incompatibility in args order
+
+
 *** Changes in avr-libc-1.6.2:
 
 * Bugs fixed:

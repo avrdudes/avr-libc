@@ -97,7 +97,7 @@ int main ()
 	exit (__LINE__);
 
     /* Write block.	*/
-    eeprom_write_block ((void *)5, "\x90\xAB\xCD\xEF\x01", 5);
+    eeprom_write_block ("\x90\xAB\xCD\xEF\x01", (void *)5, 5);
     for (p = 0; p <= (void *)E2END; p++) {
 	if (((unsigned)p < 5 || (unsigned)p > 9)
 	    && eeprom_read_byte (p) != (~(int)p & 0xFF))
