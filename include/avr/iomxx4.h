@@ -322,6 +322,8 @@
 
 #define MCUCR	_SFR_IO8(0X35)
 #define JTD	7
+#define BODS    6
+#define BODSE   5
 #define PUD	4
 #define IVSEL	1
 #define IVCE	0

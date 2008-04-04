@@ -37,6 +37,7 @@
   [#22666] io90pwm3b.h errors
   [#22785] ATMega644P Support Missing from avr/include/avr/sleep.h
   [#22828] eeprom_write_block(): incompatibility in args order
+  [#22834] ATmega164P/324P/644P/1284P lack BODS/BODSE bits in MCUCR
 
 
 * Other changes:

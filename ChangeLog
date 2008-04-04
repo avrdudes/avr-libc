@@ -1,3 +1,9 @@
+2008-04-04  Eric B. Weddington
+
+	Fix for bug #22834.
+	* include/iomxx4.h: Add BOD and BODSE bit definitions.
+	* NEWS: Add to fixed bug list.
+
 2008-04-04  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #22828.
