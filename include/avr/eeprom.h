@@ -175,13 +175,11 @@ void __eewr_block (void *, const void *, size_t, void (*)(uint8_t *, uint8_t));
 #endif
 
 
-/** \def eeprom_busy_wait 	 
-	     \ingroup avr_eeprom 	 
-	  	 
-	     Loops until the eeprom is no longer busy. 	 
-	  	 
-	     \returns Nothing. */ 	 
-	  	 
+/** \def eeprom_busy_wait
+    \ingroup avr_eeprom
+    Loops until the eeprom is no longer busy.
+    \returns Nothing.
+ */ 	 
 #define eeprom_busy_wait() do {} while (!eeprom_is_ready())
 
 
@@ -282,9 +280,10 @@ static __inline__ void eeprom_write_dword (uint32_t *__p, uint32_t __value)
 
 /** \ingroup avr_eeprom
     Write a block of \a __n bytes to EEPROM address \a __dst from \a __src.
+    \note The argument order is mismatch with common functions like strcpy().
  */
 static __inline__ void
-eeprom_write_block (void *__dst, const void *__src, size_t __n)
+eeprom_write_block (const void *__src, void *__dst, size_t __n)
 {
     __eewr_block (__dst, __src, __n, eeprom_write_byte);
 }

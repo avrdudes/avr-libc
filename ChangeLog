@@ -1,3 +1,13 @@
+2008-04-04  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #22828.
+	* include/avr/eeprom.h: Restore old args order of eeprom_write_block()
+	function: place source address to left. This revertion at Marth 2008
+	was an accidental error.
+	* tests/simulate/avr/eeprom-1.c: Ditto.
+	* tests/simulate/regression/bug-22828.c: New file.
+	* NEWS: Add to fixed bug list.
+
 2008-04-03  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/regression/bug-22800.c: New file.
