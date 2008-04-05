@@ -124,16 +124,28 @@ Simulate ()
 {
     local bin_file=`basename $1 .elf`.bin
     local exit_addr=0x`$AVR_NM $1 | grep __stop_program | cut -f1 -d' '`
-    $AVR_OBJCOPY -O binary $1 $bin_file
-    $SIMULAVR -d $2 -B $exit_addr -C $bin_file >/dev/null 2>&1
+    $AVR_OBJCOPY -O binary -R .eeprom $1 $bin_file
+    rm -f $CORE
+    if	$SIMULAVR -d $2 -B $exit_addr -C $bin_file 2>&1 >/dev/null \
+	| grep "ERROR:"
+    then
+	RETVAL=-1
+    else
+	if [ -e $CORE ]
+	then
+	    RETVAL=0
+	    local i
+	    for i in 25 24 ; do
+		RETVAL=$(( ( RETVAL << 8 )
+			   | 0x`grep r$i $CORE | tr -s [:space:] '\n' |
+				grep r$i | cut -d= -f2` ))
+	    done
+	else
+	    echo "Core dump is not created"
+	    RETVAL=-1
+	fi
+    fi
     rm $bin_file
-    local i
-    RETVAL=0
-    for i in 25 24 ; do
-	RETVAL=$(( ( RETVAL << 8 )
-		   | 0x`grep r$i $CORE | tr -s [:space:] '\n' |
-		        grep r$i | cut -d= -f2` ))
-    done
     [ $RETVAL -eq 0 ]
 }
 

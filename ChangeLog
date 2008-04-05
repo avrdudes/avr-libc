@@ -1,3 +1,9 @@
+2008-04-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/runtest.sh: Add support of .eeprom section. Add
+	check of simulavr's runtime errors.
+	* tests/simulate/regression/20080405-eeprom.c: New file.
+
 2008-04-04  Eric B. Weddington
 
 	Fix for bug #22834.
