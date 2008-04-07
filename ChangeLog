@@ -1,3 +1,10 @@
+2008-04-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22870.
+        * include/avr/wdt.h: Add support for ATmega164P, ATmega324P, ATmega644P.
+	Rearrange condition list to alphabetical order.
+        * NEWS: Add to fixed bug list.
+
 2008-04-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/runtest.sh: Add support of .eeprom section. Add
