@@ -153,22 +153,38 @@ __asm__ __volatile__ ( \
     : "r0" \
 )
 
-#elif defined(__AVR_AT90PWM1__) \
-|| defined(__AVR_AT90PWM216__) \
-|| defined(__AVR_AT90PWM2B__) \
-|| defined(__AVR_AT90PWM316__) \
-|| defined(__AVR_AT90PWM3B__) \
-|| defined(__AVR_AT90PWM2__) \
-|| defined(__AVR_AT90PWM3__) \
-|| defined(__AVR_AT90CAN32__) \
+#elif defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \
 || defined(__AVR_AT90CAN128__) \
+|| defined(__AVR_AT90PWM1__) \
+|| defined(__AVR_AT90PWM2__) \
+|| defined(__AVR_AT90PWM216__) \
+|| defined(__AVR_AT90PWM2B__) \
+|| defined(__AVR_AT90PWM3__) \
+|| defined(__AVR_AT90PWM316__) \
+|| defined(__AVR_AT90PWM3B__) \
+|| defined(__AVR_AT90USB1286__) \
+|| defined(__AVR_AT90USB1287__) \
+|| defined(__AVR_AT90USB162__) \
+|| defined(__AVR_AT90USB646__) \
+|| defined(__AVR_AT90USB647__) \
+|| defined(__AVR_AT90USB82__) \
+|| defined(__AVR_ATmega1280__) \
+|| defined(__AVR_ATmega1281__) \
 || defined(__AVR_ATmega1284P__) \
+|| defined(__AVR_ATmega164__) \
+|| defined(__AVR_ATmega164P__) \
 || defined(__AVR_ATmega165__) \
 || defined(__AVR_ATmega165P__) \
+|| defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega168P__) \
 || defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega16HVA__) \
+|| defined(__AVR_ATmega2560__) \
+|| defined(__AVR_ATmega2561__) \
+|| defined(__AVR_ATmega324__) \
+|| defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega325__) \
 || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega328P__) \
@@ -179,34 +195,21 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega32U4__) \
 || defined(__AVR_ATmega406__) \
+|| defined(__AVR_ATmega48__) \
 || defined(__AVR_ATmega48P__) \
+|| defined(__AVR_ATmega640__) \
+|| defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega644P__) \
 || defined(__AVR_ATmega645__) \
 || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega649__) \
 || defined(__AVR_ATmega6490__) \
-|| defined(__AVR_ATmega88P__) \
-|| defined(__AVR_ATmega48__) \
-|| defined(__AVR_ATmega88__) \
-|| defined(__AVR_ATmega168__) \
-|| defined(__AVR_ATmega640__) \
-|| defined(__AVR_ATmega1280__) \
-|| defined(__AVR_ATmega1281__) \
-|| defined(__AVR_ATmega2560__) \
-|| defined(__AVR_ATmega2561__) \
-|| defined(__AVR_ATmega164__) \
-|| defined(__AVR_ATmega324__) \
-|| defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega8HVA__) \
-|| defined(__AVR_ATmega16HVA__) \
+|| defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega88P__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny88__) \
-|| defined(__AVR_ATtiny167__) \
-|| defined(__AVR_AT90USB82__) \
-|| defined(__AVR_AT90USB162__) \
-|| defined(__AVR_AT90USB646__) \
-|| defined(__AVR_AT90USB647__) \
-|| defined(__AVR_AT90USB1286__) \
-|| defined(__AVR_AT90USB1287__)
+|| defined(__AVR_ATtiny167__)
 
 /* Use STS instruction. */
  
