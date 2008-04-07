@@ -813,7 +813,7 @@
 
 
 /* Constants */
-#define SPM_PAGESIZE 32
+#define SPM_PAGESIZE 64
 #define RAMEND       0x4FF     /* Last On-Chip SRAM Location */
 #define XRAMSIZE     0
 #define XRAMEND      (RAMEND + XRAMSIZE)
