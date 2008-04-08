@@ -1,3 +1,10 @@
+2008-04-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22877:
+	* include/avr/iox128a1.h: Fix fuse information.
+	* include/avr/iox64a1.h: Ditto.
+	* NEWS: Add to fixed bug list.
+
 2008-04-07  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom328p.h: Fix SPM_PAGESIZE.

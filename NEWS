@@ -39,6 +39,7 @@
   [#22828] eeprom_write_block(): incompatibility in args order
   [#22834] ATmega164P/324P/644P/1284P lack BODS/BODSE bits in MCUCR
   [#22870] Error in wdt.h and ATmega164P
+  [#22877] Fuse information wrong for xmega devices.
 
 
 * Other changes:
