@@ -7382,7 +7382,7 @@ typedef enum AES_INTLVL_enum
 
 
 /* Fuses */
-#define FUSE_MEMORY_SIZE 5
+#define FUSE_MEMORY_SIZE 6
 
 /* Fuse Byte 0 */
 #define FUSE_USERID0 ~_BV(0)
@@ -7415,20 +7415,22 @@ typedef enum AES_INTLVL_enum
 #define FUSE_DVSDON  ~_BV(7)
 #define FUSE2_DEFAULT (0x00)
 
-/* Fuse Byte 3 */
+/* Fuse Byte 3 Reserved */
+
+/* Fuse Byte 4 */
 #define FUSE_JTAGEN   ~_BV(0)
 #define FUSE_WDLOCK   ~_BV(1)
 #define FUSE_SUT0     ~_BV(2)
 #define FUSE_SUT1     ~_BV(3)
 #define FUSE_RSTDISBL ~_BV(4)
-#define FUSE3_DEFAULT (0x00)
+#define FUSE4_DEFAULT (0x00)
 
-/* Fuse Byte 4 */
+/* Fuse Byte 5 */
 #define FUSE_BOD0   ~_BV(0)
 #define FUSE_BOD1   ~_BV(1)
 #define FUSE_BOD2   ~_BV(2)
 #define FUSE_EESAVE ~_BV(3)
-#define FUSE4_DEFAULT (0x00)
+#define FUSE5_DEFAULT (0x00)
 
 
 
