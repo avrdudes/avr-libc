@@ -38,6 +38,10 @@
 #include <stddef.h>	/* size_t */
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef	__ATTR_PURE__
 # ifdef	 __DOXYGEN__
 #  define __ATTR_PURE__
@@ -304,4 +308,9 @@ eeprom_write_block (const void *__src, void *__dst, size_t __n)
 /*@}*/
 
 #endif	/* E2END || defined(__DOXYGEN__) */
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif	/* !_AVR_EEPROM_H */
