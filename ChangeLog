@@ -1,7 +1,13 @@
+2008-04-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/math.h: Change functions from 'extern inline' to 'static inline'.
+	This works around a linker problem with including this header and using
+	-std=[gnu99,c99] (it would give 'multiple definition' errors).
+
 2008-04-09  Dmitry Xmelkov  <dmix@gmail.ru>
 
-	* include/avr/eeprom.h: Restore 'extern "C"' envelope. It was losted
-	at 2005, with Avr-libc-1.2.6.
+	* include/avr/eeprom.h: Restore 'extern "C"' envelope. It was lost
+	in 2005, with Avr-libc-1.2.6.
 
 2008-04-08  Eric B. Weddington  <eric.weddington@atmel.com>
 

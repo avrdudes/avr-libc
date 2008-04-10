@@ -111,7 +111,7 @@ extern double cos(double __x) __ATTR_CONST__;
 extern double fabs(double __x) __ATTR_CONST__;
 #if 0
 /* fabs seems to be built in already */
-extern inline double fabs( double __x )
+static inline double fabs( double __x )
   { double __res;
     __asm__ __volatile__ ("andi %D0,0x7F \n\t"
 		: "=d" (__res) : "0" (__x) );
@@ -328,7 +328,7 @@ extern double square(double __x) __ATTR_CONST__;
      The copysign() function returns \a __x but with the sign of \a __y.
      They work even if \a __x or \a __y are NaN or zero.
  */
-__ATTR_CONST__ extern inline double copysign (double __x, double __y)
+__ATTR_CONST__ static inline double copysign (double __x, double __y)
 {
     __asm__ (
 	"bst	%D2, 7	\n\t"
@@ -402,7 +402,7 @@ extern double trunc (double __x) __ATTR_CONST__;
      The isfinite() function returns a nonzero value if \a __x is finite:
      not plus or minus infinity, and not NaN.
   */
-__ATTR_CONST__ extern inline int isfinite (double __x)
+__ATTR_CONST__ static inline int isfinite (double __x)
 {
     unsigned char __exp;
     __asm__ (
