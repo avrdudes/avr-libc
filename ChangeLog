@@ -1,5 +1,11 @@
 2008-04-24  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #23032.
+	* include/avr/iomxx4.h: Add missing PORTxn bit definitions.
+	* NEWS: Add to bug list.
+
+2008-04-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/io90pwm2b.h (FUSE_CKLDIV8): Rename to FUSE_CKDIV8.
 	* include/avr/io90pwm3b.h: Ditto.
 	* include/avr/iotn167.h (BIN): Fix the value of BIN to 7 for the ADCSRB
