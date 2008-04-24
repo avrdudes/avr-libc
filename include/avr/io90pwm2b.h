@@ -1336,8 +1336,8 @@
 #define FUSE_CKSEL3  ~_BV(3)  /* Select Clock Source */
 #define FUSE_SUT0    ~_BV(4)  /* Select start-up time */
 #define FUSE_SUT1    ~_BV(5)  /* Select start-up time */
-#define FUSE_CKOUT   ~_BV(6) /* Oscillator output option */
-#define FUSE_CLKDIV8 ~_BV(7)  /* Divide clock by 8 */
+#define FUSE_CKOUT   ~_BV(6)  /* Oscillator output option */
+#define FUSE_CKDIV8  ~_BV(7)  /* Divide clock by 8 */
 #define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 

@@ -443,10 +443,10 @@
 #define ADTS0 0
 #define ADTS1 1
 #define ADTS2 2
-#define BIN 3
 #define ACIR0 4
 #define ACIR1 5
 #define ACME 6
+#define BIN 7
 
 #define ADMUX _SFR_MEM8(0x7C)
 #define MUX0 0
