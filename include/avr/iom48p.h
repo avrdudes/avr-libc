@@ -434,7 +434,10 @@
 #define OCIE2A 1
 #define OCIE2B 2
 
-#define ADC _SFR_MEM16(0x78)
+#ifndef __ASSEMBLER__
+#define ADC     _SFR_MEM16(0x78)
+#endif
+#define ADCW    _SFR_MEM16(0x78)
 
 #define ADCL _SFR_MEM8(0x78)
 #define ADCL0 0

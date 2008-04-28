@@ -1,5 +1,19 @@
 2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iotn48.h: Fix and protect ADC definition, add ADCW 
+        definition.
+	* include/avr/iom1284p.h: Add ADCW definition. Protect ADC definition.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+	* include/avr/iom32m1.h: Ditto.
+	* include/avr/iom32c1.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+        * include/avr/io90pwm2b.h: Ditto.
+        * include/avr/iotn167.h: Ditto.
+
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom32u4.h: Remove bit definitions for UBRR1L and UBRR1H,
 	per Sylvain Guyon, Atmel.
 
