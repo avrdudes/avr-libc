@@ -1,5 +1,11 @@
 2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/sfr_defs.h: Define __SFR_OFFSET value depending on 
+	whether an XMEGA device is being used. Use __SFR_OFFSET in _SFR_IO8,
+	_SFR_IO16, _SFR_IO_ADDR, _SFR_IO_REG_P macros.
+
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #23004.
 	* include/avr/wdt.h: Fix Doxygen comment.
 	* NEWS: Add to fixed bug list.
@@ -7,7 +13,7 @@
 2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn48.h: Fix and protect ADC definition, add ADCW 
-        definition.
+	definition.
 	* include/avr/iom1284p.h: Add ADCW definition. Protect ADC definition.
 	* include/avr/iom328p.h: Ditto.
 	* include/avr/iom168p.h: Ditto.
@@ -15,8 +21,8 @@
 	* include/avr/iom32m1.h: Ditto.
 	* include/avr/iom32c1.h: Ditto.
 	* include/avr/io90pwm3b.h: Ditto.
-        * include/avr/io90pwm2b.h: Ditto.
-        * include/avr/iotn167.h: Ditto.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/iotn167.h: Ditto.
 
 2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
 

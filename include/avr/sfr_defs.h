@@ -135,7 +135,11 @@
 #ifndef __SFR_OFFSET
 /* Define as 0 before including this file for compatibility with old asm
    sources that don't subtract __SFR_OFFSET from symbolic I/O addresses.  */
-#define __SFR_OFFSET 0x20
+#  if __AVR_ARCH__ >= 100
+#    define __SFR_OFFSET 0x00
+#  else
+#    define __SFR_OFFSET 0x20
+#  endif
 #endif
 
 #if (__SFR_OFFSET != 0) && (__SFR_OFFSET != 0x20)
@@ -161,15 +165,23 @@
 
 #else  /* !_SFR_ASM_COMPAT */
 
+#ifndef __SFR_OFFSET
+#  if __AVR_ARCH__ >= 100
+#    define __SFR_OFFSET 0x00
+#  else
+#    define __SFR_OFFSET 0x20
+#  endif
+#endif
+
 #define _SFR_MEM8(mem_addr) _MMIO_BYTE(mem_addr)
 #define _SFR_MEM16(mem_addr) _MMIO_WORD(mem_addr)
 #define _SFR_MEM32(mem_addr) _MMIO_DWORD(mem_addr)
-#define _SFR_IO8(io_addr) _MMIO_BYTE((io_addr) + 0x20)
-#define _SFR_IO16(io_addr) _MMIO_WORD((io_addr) + 0x20)
+#define _SFR_IO8(io_addr) _MMIO_BYTE((io_addr) + __SFR_OFFSET)
+#define _SFR_IO16(io_addr) _MMIO_WORD((io_addr) + __SFR_OFFSET)
 
 #define _SFR_MEM_ADDR(sfr) ((uint16_t) &(sfr))
-#define _SFR_IO_ADDR(sfr) (_SFR_MEM_ADDR(sfr) - 0x20)
-#define _SFR_IO_REG_P(sfr) (_SFR_MEM_ADDR(sfr) < 0x60)
+#define _SFR_IO_ADDR(sfr) (_SFR_MEM_ADDR(sfr) - __SFR_OFFSET)
+#define _SFR_IO_REG_P(sfr) (_SFR_MEM_ADDR(sfr) < 0x40 + __SFR_OFFSET)
 
 #define _SFR_ADDR(sfr) _SFR_MEM_ADDR(sfr)
 
