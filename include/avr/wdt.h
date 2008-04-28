@@ -118,11 +118,6 @@
 #endif
 
 
-
-#if defined(__AVR_ATxmega128A1__) \
-|| defined(__AVR_ATxmega64A1__)
-
-
 /**
    \ingroup avr_watchdog
    Enable the watchdog timer, configuring it for expiry after
@@ -133,6 +128,10 @@
 
    See also the symbolic constants \c WDTO_15MS et al.
 */
+
+
+#if defined(__AVR_ATxmega128A1__) \
+|| defined(__AVR_ATxmega64A1__)
 
 /*
     wdt_enable(WDT_PER_8KCLK_gc);

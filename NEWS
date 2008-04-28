@@ -40,6 +40,7 @@
   [#22834] ATmega164P/324P/644P/1284P lack BODS/BODSE bits in MCUCR
   [#22870] Error in wdt.h and ATmega164P
   [#22877] Fuse information wrong for xmega devices.
+  [#23004] Watchdog enable docu only generated for Xmega series
   [#23032] Define PORTxn, PINxn, DDxn bit names in iomxx4.h.
 
 

@@ -1,5 +1,11 @@
 2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #23004.
+	* include/avr/wdt.h: Fix Doxygen comment.
+	* NEWS: Add to fixed bug list.
+
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iotn48.h: Fix and protect ADC definition, add ADCW 
         definition.
 	* include/avr/iom1284p.h: Add ADCW definition. Protect ADC definition.
