@@ -1,3 +1,8 @@
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32u4.h: Remove bit definitions for UBRR1L and UBRR1H,
+	per Sylvain Guyon, Atmel.
+
 2008-04-26  Anatoly Sokolov <aesok@post.ru>
 
 	* AvrCommon.am: Remove.
