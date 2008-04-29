@@ -1,4 +1,4 @@
-/* Copyright (c) 2007, 2008 Atmel Corporation
+/* Copyright (c) 2007, Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,7 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iox128a1.h"
+#  define _AVR_IOXXX_H_ "iox64a1.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
@@ -207,11 +207,14 @@ DFLL - DFLL
 /* DFLL */
 typedef struct DFLL_struct
 {
+    register8_t CTRL; /* Control Register */
+    register8_t reserved_0x01;
+    register8_t CALA; /* Calibration Register A */
+    register8_t CALB; /* Calibration Register B */
     register8_t OSCCNT0; /* Oscillator Counter Register 0 */
     register8_t OSCCNT1; /* Oscillator Counter Register 1 */
     register8_t OSCCNT2; /* Oscillator Counter Register 2 */
-    register8_t CALA; /* Calibration Register A */
-    register8_t CALB; /* Calibration Register B */
+    register8_t reserved_0x07;
 } DFLL_t;
 
 /*
@@ -243,11 +246,11 @@ typedef struct WDT_struct
 
 /*
 --------------------------------------------------------------------------
-MCU - MCU
+MCU - MCU Control
 --------------------------------------------------------------------------
 */
 
-/* MCU */
+/* MCU Control */
 typedef struct MCU_struct
 {
     register8_t DEVID0; /* Device ID byte 0 */
@@ -259,7 +262,7 @@ typedef struct MCU_struct
     register8_t MCUCR; /* MCU Control */
     register8_t reserved_0x07;
     register8_t EVSYSLOCK; /* Event System Lock */
-    register8_t AWEXLOCK; /* AWeX Lock */
+    register8_t AWEXLOCK; /* AWEX Lock */
     register8_t reserved_0x0A;
     register8_t reserved_0x0B;
 } MCU_t;
@@ -291,7 +294,6 @@ typedef struct DMA_CH_struct
     register8_t CTRLB; /* Channel Control */
     register8_t ADDRCTRL; /* Address Control */
     register8_t TRIGSRC; /* Channel Trigger Source */
-    register8_t reserved_0x03;
     _WORDREGISTER(TRFCNT); /* Channel Block Transfer Count */
     register8_t REPCNT; /* Channel Repeat Count */
     register8_t reserved_0x07;
@@ -309,11 +311,12 @@ typedef struct DMA_CH_struct
 typedef struct DMA_struct
 {
     register8_t CTRL; /* Control */
+    register8_t reserved_0x01;
+    register8_t reserved_0x02;
     register8_t INTFLAGS; /* Transfer Interrupt Status */
     register8_t STATUS; /* Status */
     register8_t reserved_0x05;
-    register8_t reserved_0x06;
-    register8_t reserved_0x07;
+    _WORDREGISTER(TEMP); /* Temporary Register For 16/24-bit Access */
     register8_t reserved_0x08;
     register8_t reserved_0x09;
     register8_t reserved_0x0A;
@@ -359,11 +362,11 @@ typedef struct EVSYS_struct
 
 /*
 --------------------------------------------------------------------------
-NVM - Non Volatile Memory
+NVM - Non Volatile Memory Controller
 --------------------------------------------------------------------------
 */
 
-/* Non-volatile Memory */
+/* Non-volatile Memory Controller */
 typedef struct NVM_struct
 {
     register8_t ADDR0; /* Address Register 0 */
@@ -481,8 +484,8 @@ typedef struct ADC_struct
     register8_t reserved_0x07;
     register8_t reserved_0x08;
     register8_t reserved_0x09;
-    register8_t reserved_0x10;
-    register8_t reserved_0x11;
+    register8_t reserved_0x0A;
+    register8_t reserved_0x0B;
     register8_t CALIB; /* Calibration Value */
     register8_t reserved_0x0D;
     register8_t reserved_0x0E;
@@ -818,7 +821,7 @@ typedef struct AWEX_struct
     register8_t CTRL; /* Control Register */
     register8_t reserved_0x01;
     register8_t FDEVMASK; /* Fault Detection Event Mask */
-    register8_t DFCTRL; /* Fault Detection Control Register */
+    register8_t FDCTRL; /* Fault Detection Control Register */
     register8_t STATUS; /* Status Register */
     register8_t reserved_0x05;
     register8_t DTBOTH; /* Dead Time Both Sides */
@@ -912,23 +915,23 @@ typedef struct AES_struct
 #define OCD      (*(OCD_t *) 0x002E)      /* On-Chip Debug System */
 #define CLK      (*(CLK_t *) 0x0040)      /* Clock System */
 #define SLEEP      (*(SLEEP_t *) 0x0048)      /* Sleep Controller */
-#define OSC      (*(OSC_t *) 0x0050)      /* Oscillator */
-#define DFLLRC32M      (*(DFLL_t *) 0x0060)      /* DFLL for 32MHz Clock */
-#define DFLLRC2M      (*(DFLL_t *) 0x0068)      /* DFLL for 2MHz Internal RC */
+#define OSC      (*(OSC_t *) 0x0050)      /* Oscillator Control */
+#define DFLLRC32M      (*(DFLL_t *) 0x0060)      /* DFLL for 32MHz RC Oscillator */
+#define DFLLRC2M      (*(DFLL_t *) 0x0068)      /* DFLL for 2MHz RC Oscillator */
 #define PR      (*(PR_t *) 0x0070)      /* Power Reduction */
 #define RST      (*(RST_t *) 0x0078)      /* Reset Controller */
 #define WDT      (*(WDT_t *) 0x0080)      /* Watch-Dog Timer */
-#define MCU      (*(MCU_t *) 0x0090)      /* MCU Revision */
+#define MCU      (*(MCU_t *) 0x0090)      /* MCU Control */
 #define PMIC      (*(PMIC_t *) 0x00A0)      /* Programmable Interrupt Controller */
 #define DMA      (*(DMA_t *) 0x0100)      /* DMA Controller */
 #define EVSYS      (*(EVSYS_t *) 0x0180)      /* Event System */
-#define NVM      (*(NVM_t *) 0x01C0)      /* Non Volatile Memory */
+#define NVM      (*(NVM_t *) 0x01C0)      /* Non Volatile Memory Controller */
 #define ACA      (*(AC_t *) 0x0380)      /* Analog Comparator A */
 #define ACB      (*(AC_t *) 0x0390)      /* Analog Comparator B */
-#define ADCA      (*(ADC_t *) 0x0200)      /* Analog/Digital Converter A */
-#define ADCB      (*(ADC_t *) 0x0240)      /* Analog/Digital Converter B */
-#define DACA      (*(DAC_t *) 0x0300)      /* Digital/Analog Converter A */
-#define DACB      (*(DAC_t *) 0x0320)      /* Digital/Analog Converter B */
+#define ADCA      (*(ADC_t *) 0x0200)      /* Analog to Digital Converter A */
+#define ADCB      (*(ADC_t *) 0x0240)      /* Analog to Digital Converter B */
+#define DACA      (*(DAC_t *) 0x0300)      /* Digital to Analog Converter A */
+#define DACB      (*(DAC_t *) 0x0320)      /* Digital to Analog Converter B */
 #define RTC      (*(RTC_t *) 0x0400)      /* Real-Time Clock */
 #define EBI      (*(EBI_t *) 0x0440)      /* External Bus Interface */
 #define TWIC      (*(TWI_t *) 0x480)      /* Two-Wire Interface C */
@@ -951,29 +954,29 @@ typedef struct AES_struct
 #define PORTK      (*(PORT_t *) 0x0720)      /* Port K */
 #define PORTQ      (*(PORT_t *) 0x07C0)      /* Port Q */
 #define PORTR      (*(PORT_t *) 0x07E0)      /* Port R */
-#define TCC0      (*(TC0_t *) 0x800)      /* 16-bit Timer/Counter With PWM C0 */
-#define TCC1      (*(TC1_t *) 0x840)      /* 16-bit Timer/Counter With PWM C1 */
+#define TCC0      (*(TC0_t *) 0x800)      /* Timer/Counter C0 */
+#define TCC1      (*(TC1_t *) 0x840)      /* Timer/Counter C1 */
 #define AWEXC      (*(AWEX_t *) 0x880)      /* Advanced Waveform Extension C */
-#define HIRESC      (*(HIRES_t *) 0x890)      /* High-Resolution PWM C */
+#define HIRESC      (*(HIRES_t *) 0x890)      /* High-Resolution Extension C */
 #define USARTC0      (*(USART_t *) 0x8A0)      /* Universal Asynchronous Receiver-Transmitter C0 */
 #define USARTC1      (*(USART_t *) 0x8B0)      /* Universal Asynchronous Receiver-Transmitter C1 */
 #define SPIC      (*(SPI_t *) 0x8C0)      /* Serial Peripheral Interface C */
-#define TCD0      (*(TC0_t *) 0x900)      /* 16-bit Timer/Counter With PWM D0 */
-#define TCD1      (*(TC1_t *) 0x940)      /* 16-bit Timer/Counter With PWM D1 */
-#define HIRESD      (*(HIRES_t *) 0x990)      /* High-Resolution PWM D */
+#define TCD0      (*(TC0_t *) 0x900)      /* Timer/Counter D0 */
+#define TCD1      (*(TC1_t *) 0x940)      /* Timer/Counter D1 */
+#define HIRESD      (*(HIRES_t *) 0x990)      /* High-Resolution Extension D */
 #define USARTD0      (*(USART_t *) 0x9A0)      /* Universal Asynchronous Receiver-Transmitter D0 */
 #define USARTD1      (*(USART_t *) 0x9B0)      /* Universal Asynchronous Receiver-Transmitter D1 */
 #define SPID      (*(SPI_t *) 0x9C0)      /* Serial Peripheral Interface D */
-#define TCE0      (*(TC0_t *) 0xA00)      /* 16-bit Timer/Counter With PWM E0 */
-#define TCE1      (*(TC1_t *) 0xA40)      /* 16-bit Timer/Counter With PWM E1 */
+#define TCE0      (*(TC0_t *) 0xA00)      /* Timer/Counter E0 */
+#define TCE1      (*(TC1_t *) 0xA40)      /* Timer/Counter E1 */
 #define AWEXE      (*(AWEX_t *) 0xA80)      /* Advanced Waveform Extension E */
-#define HIRESE      (*(HIRES_t *) 0xA90)      /* High-Resolution PWM E */
+#define HIRESE      (*(HIRES_t *) 0xA90)      /* High-Resolution Extension E */
 #define USARTE0      (*(USART_t *) 0xAA0)      /* Universal Asynchronous Receiver-Transmitter E0 */
 #define USARTE1      (*(USART_t *) 0xAB0)      /* Universal Asynchronous Receiver-Transmitter E1 */
 #define SPIE      (*(SPI_t *) 0xAC0)      /* Serial Peripheral Interface E */
-#define TCF0      (*(TC0_t *) 0xB00)      /* 16-bit Timer/Counter With PWM F0 */
-#define TCF1      (*(TC1_t *) 0xB40)      /* 16-bit Timer/Counter With PWM F1 */
-#define HIRESF      (*(HIRES_t *) 0xB90)      /* High-Resolution PWM F */
+#define TCF0      (*(TC0_t *) 0xB00)      /* Timer/Counter F0 */
+#define TCF1      (*(TC1_t *) 0xB40)      /* Timer/Counter F1 */
+#define HIRESF      (*(HIRES_t *) 0xB90)      /* High-Resolution Extension F */
 #define USARTF0      (*(USART_t *) 0xBA0)      /* Universal Asynchronous Receiver-Transmitter F0 */
 #define USARTF1      (*(USART_t *) 0xBB0)      /* Universal Asynchronous Receiver-Transmitter F1 */
 #define SPIF      (*(SPI_t *) 0xBC0)      /* Serial Peripheral Interface F */
@@ -997,7 +1000,7 @@ typedef struct AES_struct
 // SLEEP - Sleep Controller
 #define SLEEP_CTRL SLEEP.CTRL
 
-// OSC - Oscillator
+// OSC - Oscillator Control
 #define OSC_CTRL OSC.CTRL
 #define OSC_STATUS OSC.STATUS
 #define OSC_XOSCCTRL OSC.XOSCCTRL
@@ -1006,19 +1009,21 @@ typedef struct AES_struct
 #define OSC_PLLCTRL OSC.PLLCTRL
 #define OSC_DFLLCTRL OSC.DFLLCTRL
 
-// DFLLRC32M - DFLL for 32MHz Clock
+// DFLLRC32M - DFLL for 32MHz RC Oscillator
+#define DFLLRC32M_CTRL DFLLRC32M.CTRL
+#define DFLLRC32M_CALA DFLLRC32M.CALA
+#define DFLLRC32M_CALB DFLLRC32M.CALB
 #define DFLLRC32M_OSCCNT0 DFLLRC32M.OSCCNT0
 #define DFLLRC32M_OSCCNT1 DFLLRC32M.OSCCNT1
 #define DFLLRC32M_OSCCNT2 DFLLRC32M.OSCCNT2
-#define DFLLRC32M_CALA DFLLRC32M.CALA
-#define DFLLRC32M_CALB DFLLRC32M.CALB
 
-// DFLLRC2M - DFLL for 2MHz Internal RC
+// DFLLRC2M - DFLL for 2MHz RC Oscillator
+#define DFLLRC2M_CTRL DFLLRC2M.CTRL
+#define DFLLRC2M_CALA DFLLRC2M.CALA
+#define DFLLRC2M_CALB DFLLRC2M.CALB
 #define DFLLRC2M_OSCCNT0 DFLLRC2M.OSCCNT0
 #define DFLLRC2M_OSCCNT1 DFLLRC2M.OSCCNT1
 #define DFLLRC2M_OSCCNT2 DFLLRC2M.OSCCNT2
-#define DFLLRC2M_CALA DFLLRC2M.CALA
-#define DFLLRC2M_CALB DFLLRC2M.CALB
 
 // PR - Power Reduction
 #define PR_PR PR.PR
@@ -1038,7 +1043,7 @@ typedef struct AES_struct
 #define WDT_WINCTRL WDT.WINCTRL
 #define WDT_STATUS WDT.STATUS
 
-// MCU - MCU Revision
+// MCU - MCU Control
 #define MCU_DEVID0 MCU.DEVID0
 #define MCU_DEVID1 MCU.DEVID1
 #define MCU_DEVID2 MCU.DEVID2
@@ -1057,6 +1062,7 @@ typedef struct AES_struct
 #define DMA_CTRL DMA.CTRL
 #define DMA_INTFLAGS DMA.INTFLAGS
 #define DMA_STATUS DMA.STATUS
+#define DMA_TEMP DMA.TEMP
 
 // EVSYS - Event System
 #define EVSYS_CH0MUX EVSYS.CH0MUX
@@ -1078,7 +1084,7 @@ typedef struct AES_struct
 #define EVSYS_STROBE EVSYS.STROBE
 #define EVSYS_DATA EVSYS.DATA
 
-// NVM - Non Volatile Memory
+// NVM - Non Volatile Memory Controller
 #define NVM_ADDR0 NVM.ADDR0
 #define NVM_ADDR1 NVM.ADDR1
 #define NVM_ADDR2 NVM.ADDR2
@@ -1112,7 +1118,7 @@ typedef struct AES_struct
 #define ACB_WINCTRL ACB.WINCTRL
 #define ACB_STATUS ACB.STATUS
 
-// ADCA - Analog/Digital Converter A
+// ADCA - Analog to Digital Converter A
 #define ADCA_CTRLA ADCA.CTRLA
 #define ADCA_CTRLB ADCA.CTRLB
 #define ADCA_REFCTRL ADCA.REFCTRL
@@ -1127,7 +1133,7 @@ typedef struct AES_struct
 #define ADCA_CH3RES ADCA.CH3RES
 #define ADCA_CMP ADCA.CMP
 
-// ADCB - Analog/Digital Converter B
+// ADCB - Analog to Digital Converter B
 #define ADCB_CTRLA ADCB.CTRLA
 #define ADCB_CTRLB ADCB.CTRLB
 #define ADCB_REFCTRL ADCB.REFCTRL
@@ -1142,7 +1148,7 @@ typedef struct AES_struct
 #define ADCB_CH3RES ADCB.CH3RES
 #define ADCB_CMP ADCB.CMP
 
-// DACA - Digital/Analog Converter A
+// DACA - Digital to Analog Converter A
 #define DACA_CTRLA DACA.CTRLA
 #define DACA_CTRLB DACA.CTRLB
 #define DACA_CTRLC DACA.CTRLC
@@ -1154,7 +1160,7 @@ typedef struct AES_struct
 #define DACA_CH0DATA DACA.CH0DATA
 #define DACA_CH1DATA DACA.CH1DATA
 
-// DACB - Digital/Analog Converter B
+// DACB - Digital to Analog Converter B
 #define DACB_CTRLA DACB.CTRLA
 #define DACB_CTRLB DACB.CTRLB
 #define DACB_CTRLC DACB.CTRLC
@@ -1479,7 +1485,7 @@ typedef struct AES_struct
 #define PORTR_PIN6CTRL PORTR.PIN6CTRL
 #define PORTR_PIN7CTRL PORTR.PIN7CTRL
 
-// TCC0 - 16-bit Timer/Counter With PWM C0
+// TCC0 - Timer/Counter C0
 #define TCC0_CTRLA TCC0.CTRLA
 #define TCC0_CTRLB TCC0.CTRLB
 #define TCC0_CTRLC TCC0.CTRLC
@@ -1505,7 +1511,7 @@ typedef struct AES_struct
 #define TCC0_CCCBUF TCC0.CCCBUF
 #define TCC0_CCDBUF TCC0.CCDBUF
 
-// TCC1 - 16-bit Timer/Counter With PWM C1
+// TCC1 - Timer/Counter C1
 #define TCC1_CTRLA TCC1.CTRLA
 #define TCC1_CTRLB TCC1.CTRLB
 #define TCC1_CTRLC TCC1.CTRLC
@@ -1530,7 +1536,7 @@ typedef struct AES_struct
 // AWEXC - Advanced Waveform Extension C
 #define AWEXC_CTRL AWEXC.CTRL
 #define AWEXC_FDEVMASK AWEXC.FDEVMASK
-#define AWEXC_DFCTRL AWEXC.DFCTRL
+#define AWEXC_FDCTRL AWEXC.FDCTRL
 #define AWEXC_STATUS AWEXC.STATUS
 #define AWEXC_DTBOTH AWEXC.DTBOTH
 #define AWEXC_DTBOTHBUF AWEXC.DTBOTHBUF
@@ -1540,7 +1546,7 @@ typedef struct AES_struct
 #define AWEXC_DTHSBUF AWEXC.DTHSBUF
 #define AWEXC_OUTOVEN AWEXC.OUTOVEN
 
-// HIRESC - High-Resolution PWM C
+// HIRESC - High-Resolution Extension C
 #define HIRESC_CTRL HIRESC.CTRL
 
 // USARTC0 - Universal Asynchronous Receiver-Transmitter C0
@@ -1567,7 +1573,7 @@ typedef struct AES_struct
 #define SPIC_STATUS SPIC.STATUS
 #define SPIC_DATA SPIC.DATA
 
-// TCD0 - 16-bit Timer/Counter With PWM D0
+// TCD0 - Timer/Counter D0
 #define TCD0_CTRLA TCD0.CTRLA
 #define TCD0_CTRLB TCD0.CTRLB
 #define TCD0_CTRLC TCD0.CTRLC
@@ -1593,7 +1599,7 @@ typedef struct AES_struct
 #define TCD0_CCCBUF TCD0.CCCBUF
 #define TCD0_CCDBUF TCD0.CCDBUF
 
-// TCD1 - 16-bit Timer/Counter With PWM D1
+// TCD1 - Timer/Counter D1
 #define TCD1_CTRLA TCD1.CTRLA
 #define TCD1_CTRLB TCD1.CTRLB
 #define TCD1_CTRLC TCD1.CTRLC
@@ -1615,7 +1621,7 @@ typedef struct AES_struct
 #define TCD1_CCABUF TCD1.CCABUF
 #define TCD1_CCBBUF TCD1.CCBBUF
 
-// HIRESD - High-Resolution PWM D
+// HIRESD - High-Resolution Extension D
 #define HIRESD_CTRL HIRESD.CTRL
 
 // USARTD0 - Universal Asynchronous Receiver-Transmitter D0
@@ -1642,7 +1648,7 @@ typedef struct AES_struct
 #define SPID_STATUS SPID.STATUS
 #define SPID_DATA SPID.DATA
 
-// TCE0 - 16-bit Timer/Counter With PWM E0
+// TCE0 - Timer/Counter E0
 #define TCE0_CTRLA TCE0.CTRLA
 #define TCE0_CTRLB TCE0.CTRLB
 #define TCE0_CTRLC TCE0.CTRLC
@@ -1668,7 +1674,7 @@ typedef struct AES_struct
 #define TCE0_CCCBUF TCE0.CCCBUF
 #define TCE0_CCDBUF TCE0.CCDBUF
 
-// TCE1 - 16-bit Timer/Counter With PWM E1
+// TCE1 - Timer/Counter E1
 #define TCE1_CTRLA TCE1.CTRLA
 #define TCE1_CTRLB TCE1.CTRLB
 #define TCE1_CTRLC TCE1.CTRLC
@@ -1693,7 +1699,7 @@ typedef struct AES_struct
 // AWEXE - Advanced Waveform Extension E
 #define AWEXE_CTRL AWEXE.CTRL
 #define AWEXE_FDEVMASK AWEXE.FDEVMASK
-#define AWEXE_DFCTRL AWEXE.DFCTRL
+#define AWEXE_FDCTRL AWEXE.FDCTRL
 #define AWEXE_STATUS AWEXE.STATUS
 #define AWEXE_DTBOTH AWEXE.DTBOTH
 #define AWEXE_DTBOTHBUF AWEXE.DTBOTHBUF
@@ -1703,7 +1709,7 @@ typedef struct AES_struct
 #define AWEXE_DTHSBUF AWEXE.DTHSBUF
 #define AWEXE_OUTOVEN AWEXE.OUTOVEN
 
-// HIRESE - High-Resolution PWM E
+// HIRESE - High-Resolution Extension E
 #define HIRESE_CTRL HIRESE.CTRL
 
 // USARTE0 - Universal Asynchronous Receiver-Transmitter E0
@@ -1730,7 +1736,7 @@ typedef struct AES_struct
 #define SPIE_STATUS SPIE.STATUS
 #define SPIE_DATA SPIE.DATA
 
-// TCF0 - 16-bit Timer/Counter With PWM F0
+// TCF0 - Timer/Counter F0
 #define TCF0_CTRLA TCF0.CTRLA
 #define TCF0_CTRLB TCF0.CTRLB
 #define TCF0_CTRLC TCF0.CTRLC
@@ -1756,7 +1762,7 @@ typedef struct AES_struct
 #define TCF0_CCCBUF TCF0.CCCBUF
 #define TCF0_CCDBUF TCF0.CCDBUF
 
-// TCF1 - 16-bit Timer/Counter With PWM F1
+// TCF1 - Timer/Counter F1
 #define TCF1_CTRLA TCF1.CTRLA
 #define TCF1_CTRLB TCF1.CTRLB
 #define TCF1_CTRLC TCF1.CTRLC
@@ -1778,7 +1784,7 @@ typedef struct AES_struct
 #define TCF1_CCABUF TCF1.CCABUF
 #define TCF1_CCBBUF TCF1.CCBBUF
 
-// HIRESF - High-Resolution PWM F
+// HIRESF - High-Resolution Extension F
 #define HIRESF_CTRL HIRESF.CTRL
 
 // USARTF0 - Universal Asynchronous Receiver-Transmitter F0
@@ -1864,7 +1870,7 @@ typedef struct AES_struct
 /* SLEEP - Sleep Controller */
 #define SLEEP_CTRL _SFR_MEM8(72)
 
-/* OSC - Oscillator */
+/* OSC - Oscillator Control */
 #define OSC_CTRL _SFR_MEM8(80)
 #define OSC_STATUS _SFR_MEM8(81)
 #define OSC_XOSCCTRL _SFR_MEM8(82)
@@ -1873,19 +1879,21 @@ typedef struct AES_struct
 #define OSC_PLLCTRL _SFR_MEM8(85)
 #define OSC_DFLLCTRL _SFR_MEM8(86)
 
-/* DFLLRC32M - DFLL for 32MHz Clock */
-#define DFLLRC32M_OSCCNT0 _SFR_MEM8(96)
-#define DFLLRC32M_OSCCNT1 _SFR_MEM8(97)
-#define DFLLRC32M_OSCCNT2 _SFR_MEM8(98)
-#define DFLLRC32M_CALA _SFR_MEM8(99)
-#define DFLLRC32M_CALB _SFR_MEM8(100)
+/* DFLLRC32M - DFLL for 32MHz RC Oscillator */
+#define DFLLRC32M_CTRL _SFR_MEM8(96)
+#define DFLLRC32M_CALA _SFR_MEM8(98)
+#define DFLLRC32M_CALB _SFR_MEM8(99)
+#define DFLLRC32M_OSCCNT0 _SFR_MEM8(100)
+#define DFLLRC32M_OSCCNT1 _SFR_MEM8(101)
+#define DFLLRC32M_OSCCNT2 _SFR_MEM8(102)
 
-/* DFLLRC2M - DFLL for 2MHz Internal RC */
-#define DFLLRC2M_OSCCNT0 _SFR_MEM8(104)
-#define DFLLRC2M_OSCCNT1 _SFR_MEM8(105)
-#define DFLLRC2M_OSCCNT2 _SFR_MEM8(106)
-#define DFLLRC2M_CALA _SFR_MEM8(107)
-#define DFLLRC2M_CALB _SFR_MEM8(108)
+/* DFLLRC2M - DFLL for 2MHz RC Oscillator */
+#define DFLLRC2M_CTRL _SFR_MEM8(104)
+#define DFLLRC2M_CALA _SFR_MEM8(106)
+#define DFLLRC2M_CALB _SFR_MEM8(107)
+#define DFLLRC2M_OSCCNT0 _SFR_MEM8(108)
+#define DFLLRC2M_OSCCNT1 _SFR_MEM8(109)
+#define DFLLRC2M_OSCCNT2 _SFR_MEM8(110)
 
 /* PR - Power Reduction */
 #define PR_PR _SFR_MEM8(112)
@@ -1905,7 +1913,7 @@ typedef struct AES_struct
 #define WDT_WINCTRL _SFR_MEM8(129)
 #define WDT_STATUS _SFR_MEM8(130)
 
-/* MCU - MCU Revision */
+/* MCU - MCU Control */
 #define MCU_DEVID0 _SFR_MEM8(144)
 #define MCU_DEVID1 _SFR_MEM8(145)
 #define MCU_DEVID2 _SFR_MEM8(146)
@@ -1924,6 +1932,7 @@ typedef struct AES_struct
 #define DMA_CTRL _SFR_MEM8(256)
 #define DMA_INTFLAGS _SFR_MEM8(259)
 #define DMA_STATUS _SFR_MEM8(260)
+#define DMA_TEMP _SFR_MEM8(262)
 
 /* EVSYS - Event System */
 #define EVSYS_CH0MUX _SFR_MEM8(384)
@@ -1945,7 +1954,7 @@ typedef struct AES_struct
 #define EVSYS_STROBE _SFR_MEM8(400)
 #define EVSYS_DATA _SFR_MEM8(401)
 
-/* NVM - Non Volatile Memory */
+/* NVM - Non Volatile Memory Controller */
 #define NVM_ADDR0 _SFR_MEM8(448)
 #define NVM_ADDR1 _SFR_MEM8(449)
 #define NVM_ADDR2 _SFR_MEM8(450)
@@ -1979,7 +1988,7 @@ typedef struct AES_struct
 #define ACB_WINCTRL _SFR_MEM8(918)
 #define ACB_STATUS _SFR_MEM8(919)
 
-/* ADCA - Analog/Digital Converter A */
+/* ADCA - Analog to Digital Converter A */
 #define ADCA_CTRLA _SFR_MEM8(512)
 #define ADCA_CTRLB _SFR_MEM8(513)
 #define ADCA_REFCTRL _SFR_MEM8(514)
@@ -1988,13 +1997,13 @@ typedef struct AES_struct
 #define ADCA_CALCTRL _SFR_MEM8(517)
 #define ADCA_INTFLAGS _SFR_MEM8(518)
 #define ADCA_CALIB _SFR_MEM8(524)
-#define ADCA_CH0RES _SFR_MEM16(528)
-#define ADCA_CH1RES _SFR_MEM16(530)
-#define ADCA_CH2RES _SFR_MEM16(532)
-#define ADCA_CH3RES _SFR_MEM16(534)
-#define ADCA_CMP _SFR_MEM16(536)
+#define ADCA_CH0RES _SFR_MEM8(528)
+#define ADCA_CH1RES _SFR_MEM8(530)
+#define ADCA_CH2RES _SFR_MEM8(532)
+#define ADCA_CH3RES _SFR_MEM8(534)
+#define ADCA_CMP _SFR_MEM8(536)
 
-/* ADCB - Analog/Digital Converter B */
+/* ADCB - Analog to Digital Converter B */
 #define ADCB_CTRLA _SFR_MEM8(576)
 #define ADCB_CTRLB _SFR_MEM8(577)
 #define ADCB_REFCTRL _SFR_MEM8(578)
@@ -2003,13 +2012,13 @@ typedef struct AES_struct
 #define ADCB_CALCTRL _SFR_MEM8(581)
 #define ADCB_INTFLAGS _SFR_MEM8(582)
 #define ADCB_CALIB _SFR_MEM8(588)
-#define ADCB_CH0RES _SFR_MEM16(592)
-#define ADCB_CH1RES _SFR_MEM16(594)
-#define ADCB_CH2RES _SFR_MEM16(596)
-#define ADCB_CH3RES _SFR_MEM16(598)
-#define ADCB_CMP _SFR_MEM16(600)
+#define ADCB_CH0RES _SFR_MEM8(592)
+#define ADCB_CH1RES _SFR_MEM8(594)
+#define ADCB_CH2RES _SFR_MEM8(596)
+#define ADCB_CH3RES _SFR_MEM8(598)
+#define ADCB_CMP _SFR_MEM8(600)
 
-/* DACA - Digital/Analog Converter A */
+/* DACA - Digital to Analog Converter A */
 #define DACA_CTRLA _SFR_MEM8(768)
 #define DACA_CTRLB _SFR_MEM8(769)
 #define DACA_CTRLC _SFR_MEM8(770)
@@ -2018,10 +2027,10 @@ typedef struct AES_struct
 #define DACA_STATUS _SFR_MEM8(773)
 #define DACA_GAINCAL _SFR_MEM8(776)
 #define DACA_OFFSETCAL _SFR_MEM8(777)
-#define DACA_CH0DATA _SFR_MEM16(792)
-#define DACA_CH1DATA _SFR_MEM16(794)
+#define DACA_CH0DATA _SFR_MEM8(792)
+#define DACA_CH1DATA _SFR_MEM8(794)
 
-/* DACB - Digital/Analog Converter B */
+/* DACB - Digital to Analog Converter B */
 #define DACB_CTRLA _SFR_MEM8(800)
 #define DACB_CTRLB _SFR_MEM8(801)
 #define DACB_CTRLC _SFR_MEM8(802)
@@ -2030,8 +2039,8 @@ typedef struct AES_struct
 #define DACB_STATUS _SFR_MEM8(805)
 #define DACB_GAINCAL _SFR_MEM8(808)
 #define DACB_OFFSETCAL _SFR_MEM8(809)
-#define DACB_CH0DATA _SFR_MEM16(824)
-#define DACB_CH1DATA _SFR_MEM16(826)
+#define DACB_CH0DATA _SFR_MEM8(824)
+#define DACB_CH1DATA _SFR_MEM8(826)
 
 /* RTC - Real-Time Clock */
 #define RTC_CTRL _SFR_MEM8(1024)
@@ -2039,15 +2048,15 @@ typedef struct AES_struct
 #define RTC_INTCTRL _SFR_MEM8(1026)
 #define RTC_INTFLAGS _SFR_MEM8(1027)
 #define RTC_TEMP _SFR_MEM8(1028)
-#define RTC_CNT _SFR_MEM16(1032)
-#define RTC_PER _SFR_MEM16(1034)
-#define RTC_COMP _SFR_MEM16(1036)
+#define RTC_CNT _SFR_MEM8(1032)
+#define RTC_PER _SFR_MEM8(1034)
+#define RTC_COMP _SFR_MEM8(1036)
 
 /* EBI - External Bus Interface */
 #define EBI_CTRL _SFR_MEM8(1088)
 #define EBI_SDRAMCTRLA _SFR_MEM8(1089)
-#define EBI_REFRESH _SFR_MEM16(1092)
-#define EBI_INITDLY _SFR_MEM16(1094)
+#define EBI_REFRESH _SFR_MEM8(1092)
+#define EBI_INITDLY _SFR_MEM8(1094)
 #define EBI_SDRAMCTRLB _SFR_MEM8(1096)
 #define EBI_SDRAMCTRLC _SFR_MEM8(1097)
 
@@ -2346,7 +2355,7 @@ typedef struct AES_struct
 #define PORTR_PIN6CTRL _SFR_MEM8(2038)
 #define PORTR_PIN7CTRL _SFR_MEM8(2039)
 
-/* TCC0 - 16-bit Timer/Counter With PWM C0 */
+/* TCC0 - Timer/Counter C0 */
 #define TCC0_CTRLA _SFR_MEM8(2048)
 #define TCC0_CTRLB _SFR_MEM8(2049)
 #define TCC0_CTRLC _SFR_MEM8(2050)
@@ -2360,19 +2369,19 @@ typedef struct AES_struct
 #define TCC0_CTRLGSET _SFR_MEM8(2059)
 #define TCC0_INTFLAGS _SFR_MEM8(2060)
 #define TCC0_TEMP _SFR_MEM8(2063)
-#define TCC0_CNT _SFR_MEM16(2080)
-#define TCC0_PER _SFR_MEM16(2086)
-#define TCC0_CCA _SFR_MEM16(2088)
-#define TCC0_CCB _SFR_MEM16(2090)
-#define TCC0_CCC _SFR_MEM16(2092)
-#define TCC0_CCD _SFR_MEM16(2094)
-#define TCC0_PERBUF _SFR_MEM16(2102)
-#define TCC0_CCABUF _SFR_MEM16(2104)
-#define TCC0_CCBBUF _SFR_MEM16(2106)
-#define TCC0_CCCBUF _SFR_MEM16(2108)
-#define TCC0_CCDBUF _SFR_MEM16(2110)
+#define TCC0_CNT _SFR_MEM8(2080)
+#define TCC0_PER _SFR_MEM8(2086)
+#define TCC0_CCA _SFR_MEM8(2088)
+#define TCC0_CCB _SFR_MEM8(2090)
+#define TCC0_CCC _SFR_MEM8(2092)
+#define TCC0_CCD _SFR_MEM8(2094)
+#define TCC0_PERBUF _SFR_MEM8(2102)
+#define TCC0_CCABUF _SFR_MEM8(2104)
+#define TCC0_CCBBUF _SFR_MEM8(2106)
+#define TCC0_CCCBUF _SFR_MEM8(2108)
+#define TCC0_CCDBUF _SFR_MEM8(2110)
 
-/* TCC1 - 16-bit Timer/Counter With PWM C1 */
+/* TCC1 - Timer/Counter C1 */
 #define TCC1_CTRLA _SFR_MEM8(2112)
 #define TCC1_CTRLB _SFR_MEM8(2113)
 #define TCC1_CTRLC _SFR_MEM8(2114)
@@ -2386,18 +2395,18 @@ typedef struct AES_struct
 #define TCC1_CTRLGSET _SFR_MEM8(2123)
 #define TCC1_INTFLAGS _SFR_MEM8(2124)
 #define TCC1_TEMP _SFR_MEM8(2127)
-#define TCC1_CNT _SFR_MEM16(2144)
-#define TCC1_PER _SFR_MEM16(2150)
-#define TCC1_CCA _SFR_MEM16(2152)
-#define TCC1_CCB _SFR_MEM16(2154)
-#define TCC1_PERBUF _SFR_MEM16(2166)
-#define TCC1_CCABUF _SFR_MEM16(2168)
-#define TCC1_CCBBUF _SFR_MEM16(2170)
+#define TCC1_CNT _SFR_MEM8(2144)
+#define TCC1_PER _SFR_MEM8(2150)
+#define TCC1_CCA _SFR_MEM8(2152)
+#define TCC1_CCB _SFR_MEM8(2154)
+#define TCC1_PERBUF _SFR_MEM8(2166)
+#define TCC1_CCABUF _SFR_MEM8(2168)
+#define TCC1_CCBBUF _SFR_MEM8(2170)
 
 /* AWEXC - Advanced Waveform Extension C */
 #define AWEXC_CTRL _SFR_MEM8(2176)
 #define AWEXC_FDEVMASK _SFR_MEM8(2178)
-#define AWEXC_DFCTRL _SFR_MEM8(2179)
+#define AWEXC_FDCTRL _SFR_MEM8(2179)
 #define AWEXC_STATUS _SFR_MEM8(2180)
 #define AWEXC_DTBOTH _SFR_MEM8(2182)
 #define AWEXC_DTBOTHBUF _SFR_MEM8(2183)
@@ -2407,7 +2416,7 @@ typedef struct AES_struct
 #define AWEXC_DTHSBUF _SFR_MEM8(2187)
 #define AWEXC_OUTOVEN _SFR_MEM8(2188)
 
-/* HIRESC - High-Resolution PWM C */
+/* HIRESC - High-Resolution Extension C */
 #define HIRESC_CTRL _SFR_MEM8(2192)
 
 /* USARTC0 - Universal Asynchronous Receiver-Transmitter C0 */
@@ -2434,7 +2443,7 @@ typedef struct AES_struct
 #define SPIC_STATUS _SFR_MEM8(2242)
 #define SPIC_DATA _SFR_MEM8(2243)
 
-/* TCD0 - 16-bit Timer/Counter With PWM D0 */
+/* TCD0 - Timer/Counter D0 */
 #define TCD0_CTRLA _SFR_MEM8(2304)
 #define TCD0_CTRLB _SFR_MEM8(2305)
 #define TCD0_CTRLC _SFR_MEM8(2306)
@@ -2460,7 +2469,7 @@ typedef struct AES_struct
 #define TCD0_CCCBUF _SFR_MEM8(2364)
 #define TCD0_CCDBUF _SFR_MEM8(2366)
 
-/* TCD1 - 16-bit Timer/Counter With PWM D1 */
+/* TCD1 - Timer/Counter D1 */
 #define TCD1_CTRLA _SFR_MEM8(2368)
 #define TCD1_CTRLB _SFR_MEM8(2369)
 #define TCD1_CTRLC _SFR_MEM8(2370)
@@ -2482,7 +2491,7 @@ typedef struct AES_struct
 #define TCD1_CCABUF _SFR_MEM8(2424)
 #define TCD1_CCBBUF _SFR_MEM8(2426)
 
-/* HIRESD - High-Resolution PWM D */
+/* HIRESD - High-Resolution Extension D */
 #define HIRESD_CTRL _SFR_MEM8(2448)
 
 /* USARTD0 - Universal Asynchronous Receiver-Transmitter D0 */
@@ -2509,7 +2518,7 @@ typedef struct AES_struct
 #define SPID_STATUS _SFR_MEM8(2498)
 #define SPID_DATA _SFR_MEM8(2499)
 
-/* TCE0 - 16-bit Timer/Counter With PWM E0 */
+/* TCE0 - Timer/Counter E0 */
 #define TCE0_CTRLA _SFR_MEM8(2560)
 #define TCE0_CTRLB _SFR_MEM8(2561)
 #define TCE0_CTRLC _SFR_MEM8(2562)
@@ -2535,7 +2544,7 @@ typedef struct AES_struct
 #define TCE0_CCCBUF _SFR_MEM8(2620)
 #define TCE0_CCDBUF _SFR_MEM8(2622)
 
-/* TCE1 - 16-bit Timer/Counter With PWM E1 */
+/* TCE1 - Timer/Counter E1 */
 #define TCE1_CTRLA _SFR_MEM8(2624)
 #define TCE1_CTRLB _SFR_MEM8(2625)
 #define TCE1_CTRLC _SFR_MEM8(2626)
@@ -2560,7 +2569,7 @@ typedef struct AES_struct
 /* AWEXE - Advanced Waveform Extension E */
 #define AWEXE_CTRL _SFR_MEM8(2688)
 #define AWEXE_FDEVMASK _SFR_MEM8(2690)
-#define AWEXE_DFCTRL _SFR_MEM8(2691)
+#define AWEXE_FDCTRL _SFR_MEM8(2691)
 #define AWEXE_STATUS _SFR_MEM8(2692)
 #define AWEXE_DTBOTH _SFR_MEM8(2694)
 #define AWEXE_DTBOTHBUF _SFR_MEM8(2695)
@@ -2570,7 +2579,7 @@ typedef struct AES_struct
 #define AWEXE_DTHSBUF _SFR_MEM8(2699)
 #define AWEXE_OUTOVEN _SFR_MEM8(2700)
 
-/* HIRESE - High-Resolution PWM E */
+/* HIRESE - High-Resolution Extension E */
 #define HIRESE_CTRL _SFR_MEM8(2704)
 
 /* USARTE0 - Universal Asynchronous Receiver-Transmitter E0 */
@@ -2597,7 +2606,7 @@ typedef struct AES_struct
 #define SPIE_STATUS _SFR_MEM8(2754)
 #define SPIE_DATA _SFR_MEM8(2755)
 
-/* TCF0 - 16-bit Timer/Counter With PWM F0 */
+/* TCF0 - Timer/Counter F0 */
 #define TCF0_CTRLA _SFR_MEM8(2816)
 #define TCF0_CTRLB _SFR_MEM8(2817)
 #define TCF0_CTRLC _SFR_MEM8(2818)
@@ -2623,7 +2632,7 @@ typedef struct AES_struct
 #define TCF0_CCCBUF _SFR_MEM8(2876)
 #define TCF0_CCDBUF _SFR_MEM8(2878)
 
-/* TCF1 - 16-bit Timer/Counter With PWM F1 */
+/* TCF1 - Timer/Counter F1 */
 #define TCF1_CTRLA _SFR_MEM8(2880)
 #define TCF1_CTRLB _SFR_MEM8(2881)
 #define TCF1_CTRLC _SFR_MEM8(2882)
@@ -2645,7 +2654,7 @@ typedef struct AES_struct
 #define TCF1_CCABUF _SFR_MEM8(2936)
 #define TCF1_CCBBUF _SFR_MEM8(2938)
 
-/* HIRESF - High-Resolution PWM F */
+/* HIRESF - High-Resolution Extension F */
 #define HIRESF_CTRL _SFR_MEM8(2960)
 
 /* USARTF0 - Universal Asynchronous Receiver-Transmitter F0 */
@@ -2683,7 +2692,6 @@ typedef struct AES_struct
 #define AES_STATE _SFR_MEM8(194)
 #define AES_KEY _SFR_MEM8(195)
 #define AES_INTCTRL _SFR_MEM8(196)
-
 
 
 /*================== Bitfield Definitions ================== */
@@ -2773,13 +2781,13 @@ typedef enum CCP_enum
 #define CLK_PSADIV3_bp 5 // Prescaler A Division Factor bit 3 position
 #define CLK_PSADIV4_bm (1<<6) // Prescaler A Division Factor bit 4 mask
 #define CLK_PSADIV4_bp 6 // Prescaler A Division Factor bit 4 position
-#define CLK_PSBCDIV_gm 0x03 // Prescaler B and D Division factor group mask
-#define CLK_PSBCDIV_bp 0 // Prescaler B and D Division factor group position
+#define CLK_PSBCDIV_gm 0x03 // Prescaler B and C Division factor group mask
+#define CLK_PSBCDIV_bp 0 // Prescaler B and C Division factor group position
 
-#define CLK_PSBCDIV0_bm (1<<0) // Prescaler B and D Division factor bit 0 mask
-#define CLK_PSBCDIV0_bp 0 // Prescaler B and D Division factor bit 0 position
-#define CLK_PSBCDIV1_bm (1<<1) // Prescaler B and D Division factor bit 1 mask
-#define CLK_PSBCDIV1_bp 1 // Prescaler B and D Division factor bit 1 position
+#define CLK_PSBCDIV0_bm (1<<0) // Prescaler B and C Division factor bit 0 mask
+#define CLK_PSBCDIV0_bp 0 // Prescaler B and C Division factor bit 0 position
+#define CLK_PSBCDIV1_bm (1<<1) // Prescaler B and C Division factor bit 1 mask
+#define CLK_PSBCDIV1_bp 1 // Prescaler B and C Division factor bit 1 position
 
 /* CLK.LOCK bit masks and bit positions */
 
@@ -3091,7 +3099,7 @@ typedef enum SLEEP_SMODE_enum
 #define OSC_RC2MCREF_bp 0 // 2MHz Calibration Reference bit position
 
 #if !defined (__ASSEMBLER__)
-/* Frequency Range */
+/* Oscillator Frequency Range */
 typedef enum OSC_FRQRANGE_enum
 {
   OSC_FRQRANGE_04TO2_gc = (0x00<<6),   /* 0.4 - 2 MHz */
@@ -3130,45 +3138,51 @@ typedef enum OSC_PLLSRC_enum
 --------------------------------------------------------------------------
 */
 
+/* DFLL.CTRL bit masks and bit positions */
+
+        
+#define DFLL_ENABLE_bm 0x01 // DFLL Enable bit mask
+#define DFLL_ENABLE_bp 0 // DFLL Enable bit position
+
 /* DFLL.CALA bit masks and bit positions */
 
         
-#define DFLL_CALL_gm 0xFE // DFLL Calibration bits [6:0] group mask
-#define DFLL_CALL_bp 1 // DFLL Calibration bits [6:0] group position
+#define DFLL_CALL_gm 0x7F // DFLL Calibration bits [6:0] group mask
+#define DFLL_CALL_bp 0 // DFLL Calibration bits [6:0] group position
 
-#define DFLL_CALL0_bm (1<<1) // DFLL Calibration bits [6:0] bit 0 mask
-#define DFLL_CALL0_bp 1 // DFLL Calibration bits [6:0] bit 0 position
-#define DFLL_CALL1_bm (1<<2) // DFLL Calibration bits [6:0] bit 1 mask
-#define DFLL_CALL1_bp 2 // DFLL Calibration bits [6:0] bit 1 position
-#define DFLL_CALL2_bm (1<<3) // DFLL Calibration bits [6:0] bit 2 mask
-#define DFLL_CALL2_bp 3 // DFLL Calibration bits [6:0] bit 2 position
-#define DFLL_CALL3_bm (1<<4) // DFLL Calibration bits [6:0] bit 3 mask
-#define DFLL_CALL3_bp 4 // DFLL Calibration bits [6:0] bit 3 position
-#define DFLL_CALL4_bm (1<<5) // DFLL Calibration bits [6:0] bit 4 mask
-#define DFLL_CALL4_bp 5 // DFLL Calibration bits [6:0] bit 4 position
-#define DFLL_CALL5_bm (1<<6) // DFLL Calibration bits [6:0] bit 5 mask
-#define DFLL_CALL5_bp 6 // DFLL Calibration bits [6:0] bit 5 position
-#define DFLL_CALL6_bm (1<<7) // DFLL Calibration bits [6:0] bit 6 mask
-#define DFLL_CALL6_bp 7 // DFLL Calibration bits [6:0] bit 6 position
-#define DFLL_ENABLE_bm 0x01 // DFLL Enable bit mask
-#define DFLL_ENABLE_bp 0 // DFLL Enable bit position
+#define DFLL_CALL0_bm (1<<0) // DFLL Calibration bits [6:0] bit 0 mask
+#define DFLL_CALL0_bp 0 // DFLL Calibration bits [6:0] bit 0 position
+#define DFLL_CALL1_bm (1<<1) // DFLL Calibration bits [6:0] bit 1 mask
+#define DFLL_CALL1_bp 1 // DFLL Calibration bits [6:0] bit 1 position
+#define DFLL_CALL2_bm (1<<2) // DFLL Calibration bits [6:0] bit 2 mask
+#define DFLL_CALL2_bp 2 // DFLL Calibration bits [6:0] bit 2 position
+#define DFLL_CALL3_bm (1<<3) // DFLL Calibration bits [6:0] bit 3 mask
+#define DFLL_CALL3_bp 3 // DFLL Calibration bits [6:0] bit 3 position
+#define DFLL_CALL4_bm (1<<4) // DFLL Calibration bits [6:0] bit 4 mask
+#define DFLL_CALL4_bp 4 // DFLL Calibration bits [6:0] bit 4 position
+#define DFLL_CALL5_bm (1<<5) // DFLL Calibration bits [6:0] bit 5 mask
+#define DFLL_CALL5_bp 5 // DFLL Calibration bits [6:0] bit 5 position
+#define DFLL_CALL6_bm (1<<6) // DFLL Calibration bits [6:0] bit 6 mask
+#define DFLL_CALL6_bp 6 // DFLL Calibration bits [6:0] bit 6 position
 
 /* DFLL.CALB bit masks and bit positions */
 
         
-#define DFLL_CALH_gm 0x1F // DFLL Calibration bits [11:7] group mask
-#define DFLL_CALH_bp 0 // DFLL Calibration bits [11:7] group position
+#define DFLL_CALH_gm 0x3F // DFLL Calibration bits [12:7] group mask
+#define DFLL_CALH_bp 0 // DFLL Calibration bits [12:7] group position
 
-#define DFLL_CALH0_bm (1<<0) // DFLL Calibration bits [11:7] bit 0 mask
-#define DFLL_CALH0_bp 0 // DFLL Calibration bits [11:7] bit 0 position
-#define DFLL_CALH1_bm (1<<1) // DFLL Calibration bits [11:7] bit 1 mask
-#define DFLL_CALH1_bp 1 // DFLL Calibration bits [11:7] bit 1 position
-#define DFLL_CALH2_bm (1<<2) // DFLL Calibration bits [11:7] bit 2 mask
-#define DFLL_CALH2_bp 2 // DFLL Calibration bits [11:7] bit 2 position
-#define DFLL_CALH3_bm (1<<3) // DFLL Calibration bits [11:7] bit 3 mask
-#define DFLL_CALH3_bp 3 // DFLL Calibration bits [11:7] bit 3 position
-#define DFLL_CALH4_bm (1<<4) // DFLL Calibration bits [11:7] bit 4 mask
-#define DFLL_CALH4_bp 4 // DFLL Calibration bits [11:7] bit 4 position
+#define DFLL_CALH0_bm (1<<0) // DFLL Calibration bits [12:7] bit 0 mask
+#define DFLL_CALH0_bp 0 // DFLL Calibration bits [12:7] bit 0 position
+#define DFLL_CALH1_bm (1<<1) // DFLL Calibration bits [12:7] bit 1 mask
+#define DFLL_CALH1_bp 1 // DFLL Calibration bits [12:7] bit 1 position
+#define DFLL_CALH2_bm (1<<2) // DFLL Calibration bits [12:7] bit 2 mask
+#define DFLL_CALH2_bp 2 // DFLL Calibration bits [12:7] bit 2 position
+#define DFLL_CALH3_bm (1<<3) // DFLL Calibration bits [12:7] bit 3 mask
+#define DFLL_CALH3_bp 3 // DFLL Calibration bits [12:7] bit 3 position
+#define DFLL_CALH4_bm (1<<4) // DFLL Calibration bits [12:7] bit 4 mask
+#define DFLL_CALH4_bp 4 // DFLL Calibration bits [12:7] bit 4 position
+#define DFLL_CALH5_bm (1<<5) // DFLL Calibration bits [12:7] bit 5 mask
+#define DFLL_CALH5_bp 5 // DFLL Calibration bits [12:7] bit 5 position
 
 
 /*
@@ -3253,7 +3267,7 @@ typedef enum OSC_PLLSRC_enum
 #define WDT_SYNCBUSY_bp 0 // Syncronization busy bit position
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Period setting */
 typedef enum WDT_PER_enum
 {
   WDT_PER_8CLK_gc = (0x00<<2),   /* 8 cycles (8ms @ 3.3V) */
@@ -3271,7 +3285,7 @@ typedef enum WDT_PER_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Closed window period */
 typedef enum WDT_WPER_enum
 {
   WDT_WPER_8CLK_gc = (0x00<<2),   /* 8 cycles (8ms @ 3.3V) */
@@ -3291,7 +3305,7 @@ typedef enum WDT_WPER_enum
 
 /*
 --------------------------------------------------------------------------
- MCU - MCU
+ MCU - MCU Control
 --------------------------------------------------------------------------
 */
 
@@ -3436,6 +3450,29 @@ typedef enum WDT_WPER_enum
 #define DMA_CH_DESTDIR1_bm (1<<1) // Channel Destination Address Mode bit 1 mask
 #define DMA_CH_DESTDIR1_bp 1 // Channel Destination Address Mode bit 1 position
 
+/* DMA_CH.TRIGSRC bit masks and bit positions */
+
+        
+#define DMA_CH_TRIGSRC_gm 0xFF // Channel Trigger Source group mask
+#define DMA_CH_TRIGSRC_bp 0 // Channel Trigger Source group position
+
+#define DMA_CH_TRIGSRC0_bm (1<<0) // Channel Trigger Source bit 0 mask
+#define DMA_CH_TRIGSRC0_bp 0 // Channel Trigger Source bit 0 position
+#define DMA_CH_TRIGSRC1_bm (1<<1) // Channel Trigger Source bit 1 mask
+#define DMA_CH_TRIGSRC1_bp 1 // Channel Trigger Source bit 1 position
+#define DMA_CH_TRIGSRC2_bm (1<<2) // Channel Trigger Source bit 2 mask
+#define DMA_CH_TRIGSRC2_bp 2 // Channel Trigger Source bit 2 position
+#define DMA_CH_TRIGSRC3_bm (1<<3) // Channel Trigger Source bit 3 mask
+#define DMA_CH_TRIGSRC3_bp 3 // Channel Trigger Source bit 3 position
+#define DMA_CH_TRIGSRC4_bm (1<<4) // Channel Trigger Source bit 4 mask
+#define DMA_CH_TRIGSRC4_bp 4 // Channel Trigger Source bit 4 position
+#define DMA_CH_TRIGSRC5_bm (1<<5) // Channel Trigger Source bit 5 mask
+#define DMA_CH_TRIGSRC5_bp 5 // Channel Trigger Source bit 5 position
+#define DMA_CH_TRIGSRC6_bm (1<<6) // Channel Trigger Source bit 6 mask
+#define DMA_CH_TRIGSRC6_bp 6 // Channel Trigger Source bit 6 position
+#define DMA_CH_TRIGSRC7_bm (1<<7) // Channel Trigger Source bit 7 mask
+#define DMA_CH_TRIGSRC7_bp 7 // Channel Trigger Source bit 7 position
+
 /* DMA.CTRL bit masks and bit positions */
 
         
@@ -3499,7 +3536,7 @@ typedef enum WDT_WPER_enum
 #define DMA_CH0PEND_bp 0 // Channel 0 Block Transfer Pending bit position
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Burst mode */
 typedef enum DMA_CH_BURSTLEN_enum
 {
   DMA_CH_BURSTLEN_1BYTE_gc = (0x00<<0),   /* 1-byte burst mode */
@@ -3510,7 +3547,7 @@ typedef enum DMA_CH_BURSTLEN_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Source address reload mode */
 typedef enum DMA_CH_SRCRELOAD_enum
 {
   DMA_CH_SRCRELOAD_NONE_gc = (0x00<<6),   /* No reload */
@@ -3521,7 +3558,7 @@ typedef enum DMA_CH_SRCRELOAD_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Source addressing mode */
 typedef enum DMA_CH_SRCDIR_enum
 {
   DMA_CH_SRCDIR_FIXED_gc = (0x00<<4),   /* Fixed */
@@ -3531,7 +3568,7 @@ typedef enum DMA_CH_SRCDIR_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Destination adress reload mode */
 typedef enum DMA_CH_DESTRELOAD_enum
 {
   DMA_CH_DESTRELOAD_NONE_gc = (0x00<<2),   /* No reload */
@@ -3542,7 +3579,7 @@ typedef enum DMA_CH_DESTRELOAD_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Destination adressing mode */
 typedef enum DMA_CH_DESTDIR_enum
 {
   DMA_CH_DESTDIR_FIXED_gc = (0x00<<0),   /* Fixed */
@@ -3552,7 +3589,7 @@ typedef enum DMA_CH_DESTDIR_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Transfer trigger source */
 typedef enum DMA_CH_TRIGSRC_enum
 {
   DMA_CH_TRIGSRC_OFF_gc = (0x00<<0),   /* Off software triggers only */
@@ -3570,7 +3607,7 @@ typedef enum DMA_CH_TRIGSRC_enum
   DMA_CH_TRIGSRC_ADCB_CH1_gc = (0x21<<0),   /* ADCB Channel 1 */
   DMA_CH_TRIGSRC_ADCB_CH2_gc = (0x22<<0),   /* ADCB Channel 2 */
   DMA_CH_TRIGSRC_ADCB_CH3_gc = (0x23<<0),   /* ADCB Channel 3 */
-  DMA_CH_TRIGSRC_ADCB_CH4_gc = (0x24<<0),   /* ADCB Channel 4 */
+  DMA_CH_TRIGSRC_ADCB_CH4_gc = (0x24<<0),   /* ADCB Channel 0,1,2,3 combined */
   DMA_CH_TRIGSRC_DACB_CH0_gc = (0x25<<0),   /* DACB Channel 0 */
   DMA_CH_TRIGSRC_DACB_CH1_gc = (0x26<<0),   /* DACB Channel 1 */
   DMA_CH_TRIGSRC_TCC0_OVF_gc = (0x40<<0),   /* Timer/Counter C0 Overflow */
@@ -3637,7 +3674,7 @@ typedef enum DMA_CH_TRIGSRC_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Double buffering mode */
 typedef enum DMA_DBUFMODE_enum
 {
   DMA_DBUFMODE_DISABLED_gc = (0x00<<2),   /* Double buffering disabled */
@@ -3648,7 +3685,7 @@ typedef enum DMA_DBUFMODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Priority mode */
 typedef enum DMA_PRIMODE_enum
 {
   DMA_PRIMODE_RR0123_gc = (0x00<<0),   /* Round Robin */
@@ -3659,14 +3696,25 @@ typedef enum DMA_PRIMODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
-typedef enum DMA_CH_INTLVL_enum
+/* Interrupt level */
+typedef enum DMA_CH_ERRINTLVL_enum
 {
-  DMA_CH_INTLVL_OFF_gc = (0x00<<2),   /* Interrupt disabled */
-  DMA_CH_INTLVL_LO_gc = (0x01<<2),   /* Low level */
-  DMA_CH_INTLVL_MED_gc = (0x02<<2),   /* Medium level */
-  DMA_CH_INTLVL_HI_gc = (0x03<<2),   /* High level */
-} DMA_CH_INTLVL_t;
+  DMA_CH_ERRINTLVL_OFF_gc = (0x00<<2),   /* Interrupt disabled */
+  DMA_CH_ERRINTLVL_LO_gc = (0x01<<2),   /* Low level */
+  DMA_CH_ERRINTLVL_MED_gc = (0x02<<2),   /* Medium level */
+  DMA_CH_ERRINTLVL_HI_gc = (0x03<<2),   /* High level */
+} DMA_CH_ERRINTLVL_t;
+#endif /* !defined (__ASSEMBLER__) */
+
+#if !defined (__ASSEMBLER__)
+/* Interrupt level */
+typedef enum DMA_CH_TRNINTLVL_enum
+{
+  DMA_CH_TRNINTLVL_OFF_gc = (0x00<<0),   /* Interrupt disabled */
+  DMA_CH_TRNINTLVL_LO_gc = (0x01<<0),   /* Low level */
+  DMA_CH_TRNINTLVL_MED_gc = (0x02<<0),   /* Medium level */
+  DMA_CH_TRNINTLVL_HI_gc = (0x03<<0),   /* High level */
+} DMA_CH_TRNINTLVL_t;
 #endif /* !defined (__ASSEMBLER__) */
 
 
@@ -3820,7 +3868,7 @@ typedef enum DMA_CH_INTLVL_enum
             
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Quadrature Decoder Index Recognition Mode */
 typedef enum EVSYS_QDIRM_enum
 {
   EVSYS_QDIRM_00_gc = (0x00<<5),   /* QDPH0 = 0, QDPH90 = 0 */
@@ -3831,7 +3879,7 @@ typedef enum EVSYS_QDIRM_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Digital filter coefficient */
 typedef enum EVSYS_DIGFILT_enum
 {
   EVSYS_DIGFILT_1SAMPLE_gc = (0x00<<0),   /* 1 SAMPLE */
@@ -3846,7 +3894,7 @@ typedef enum EVSYS_DIGFILT_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Event Channel multiplexer input selection */
 typedef enum EVSYS_CHMUX_enum
 {
   EVSYS_CHMUX_OFF_gc = (0x00<<0),   /* Off */
@@ -3976,7 +4024,7 @@ typedef enum EVSYS_CHMUX_enum
 
 /*
 --------------------------------------------------------------------------
- NVM - Non Volatile Memory
+ NVM - Non Volatile Memory Controller
 --------------------------------------------------------------------------
 */
 
@@ -4217,7 +4265,7 @@ typedef enum EVSYS_CHMUX_enum
 #define NVM_FUSES_BODLVL2_bp 2 // Brown Out Detection Voltage Level bit 2 position
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* NVM Command */
 typedef enum NVM_CMD_enum
 {
   NVM_CMD_NO_OPERATION_gc = (0x00<<0),   /* Noop/Ordinary LPM */
@@ -4245,11 +4293,12 @@ typedef enum NVM_CMD_enum
   NVM_CMD_ERASE_EEPROM_BUFFER_gc = (0x36<<0),   /* Erase/flush EEPROM page buffer */
   NVM_CMD_APP_CRC_gc = (0x38<<0),   /* Generate Application section CRC */
   NVM_CMD_BOOT_CRC_gc = (0x39<<0),   /* Generate Boot Section CRC */
+  NVM_CMD_FLASH_RANGE_CRC_gc = (0x3A<<0),   /* Generate Flash Range CRC */
 } NVM_CMD_t;
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* SPM ready interrupt level */
 typedef enum NVM_SPMLVL_enum
 {
   NVM_SPMLVL_OFF_gc = (0x00<<2),   /* Interrupt disabled */
@@ -4260,7 +4309,7 @@ typedef enum NVM_SPMLVL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* EEPROM ready interrupt level */
 typedef enum NVM_EELVL_enum
 {
   NVM_EELVL_OFF_gc = (0x00<<0),   /* Interrupt disabled */
@@ -4271,7 +4320,7 @@ typedef enum NVM_EELVL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Boot lock bits - boot setcion */
 typedef enum NVM_BLBB_enum
 {
   NVM_BLBB_NOLOCK_gc = (0x03<<6),   /* No locks */
@@ -4282,7 +4331,7 @@ typedef enum NVM_BLBB_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Boot lock bits - application section */
 typedef enum NVM_BLBA_enum
 {
   NVM_BLBA_NOLOCK_gc = (0x03<<4),   /* No locks */
@@ -4293,7 +4342,7 @@ typedef enum NVM_BLBA_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Boot lock bits - application table section */
 typedef enum NVM_BLBAT_enum
 {
   NVM_BLBAT_NOLOCK_gc = (0x03<<2),   /* No locks */
@@ -4304,7 +4353,7 @@ typedef enum NVM_BLBAT_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Lock bits */
 typedef enum NVM_LB_enum
 {
   NVM_LB_NOLOCK_gc = (0x03<<0),   /* No locks */
@@ -4522,7 +4571,7 @@ typedef enum BODLVL_enum
 #define AC_AC0IF_bp 0 // Comparator 0 Interrupt Flag bit position
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Interrupt mode */
 typedef enum AC_INTMODE_enum
 {
   AC_INTMODE_BOTHEDGES_gc = (0x00<<6),   /* Interrupt on both edges */
@@ -4532,7 +4581,7 @@ typedef enum AC_INTMODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Interrupt level */
 typedef enum AC_INTLVL_enum
 {
   AC_INTLVL_OFF_gc = (0x00<<4),   /* Interrupt disabled */
@@ -4543,7 +4592,7 @@ typedef enum AC_INTLVL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Hysteresis mode selection */
 typedef enum AC_HYSMODE_enum
 {
   AC_HYSMODE_NO_gc = (0x00<<1),   /* No hysteresis */
@@ -4553,7 +4602,7 @@ typedef enum AC_HYSMODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Positive input multiplexer selection */
 typedef enum AC_MUXPOS_enum
 {
   AC_MUXPOS_PIN0_gc = (0x00<<3),   /* Pin 0 */
@@ -4568,7 +4617,7 @@ typedef enum AC_MUXPOS_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Negative input multiplexer selection */
 typedef enum AC_MUXNEG_enum
 {
   AC_MUXNEG_PIN0_gc = (0x00<<0),   /* Pin 0 */
@@ -4583,7 +4632,7 @@ typedef enum AC_MUXNEG_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Windows interrupt mode */
 typedef enum AC_WINTMODE_enum
 {
   AC_WINTMODE_ABOVE_gc = (0x00<<2),   /* Interrupt on above window */
@@ -4594,7 +4643,7 @@ typedef enum AC_WINTMODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Window interrupt level */
 typedef enum AC_WINTLVL_enum
 {
   AC_WINTLVL_OFF_gc = (0x00<<0),   /* Interrupt disabled */
@@ -4605,7 +4654,7 @@ typedef enum AC_WINTLVL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Window mode state */
 typedef enum AC_WSTATE_enum
 {
   AC_WSTATE_ABOVE_gc = (0x00<<6),   /* Signal above window */
@@ -4635,39 +4684,39 @@ typedef enum AC_WSTATE_enum
 #define ADC_CH_GAINFAC1_bp 3 // Gain Factor bit 1 position
 #define ADC_CH_GAINFAC2_bm (1<<4) // Gain Factor bit 2 mask
 #define ADC_CH_GAINFAC2_bp 4 // Gain Factor bit 2 position
-#define ADC_CH_INPUTMODE_gm 0x03 // Negative Input Select group mask
-#define ADC_CH_INPUTMODE_bp 0 // Negative Input Select group position
+#define ADC_CH_INPUTMODE_gm 0x03 // Input Mode Select group mask
+#define ADC_CH_INPUTMODE_bp 0 // Input Mode Select group position
 
-#define ADC_CH_INPUTMODE0_bm (1<<0) // Negative Input Select bit 0 mask
-#define ADC_CH_INPUTMODE0_bp 0 // Negative Input Select bit 0 position
-#define ADC_CH_INPUTMODE1_bm (1<<1) // Negative Input Select bit 1 mask
-#define ADC_CH_INPUTMODE1_bp 1 // Negative Input Select bit 1 position
+#define ADC_CH_INPUTMODE0_bm (1<<0) // Input Mode Select bit 0 mask
+#define ADC_CH_INPUTMODE0_bp 0 // Input Mode Select bit 0 position
+#define ADC_CH_INPUTMODE1_bm (1<<1) // Input Mode Select bit 1 mask
+#define ADC_CH_INPUTMODE1_bp 1 // Input Mode Select bit 1 position
 
 /* ADC_CH.MUXCTRL bit masks and bit positions */
 
         
-#define ADC_CH_MUXPOS_gm 0xF0 // Positive Input Select group mask
-#define ADC_CH_MUXPOS_bp 4 // Positive Input Select group position
+#define ADC_CH_MUXPOS_gm 0x78 // Positive Input Select group mask
+#define ADC_CH_MUXPOS_bp 3 // Positive Input Select group position
 
-#define ADC_CH_MUXPOS0_bm (1<<4) // Positive Input Select bit 0 mask
-#define ADC_CH_MUXPOS0_bp 4 // Positive Input Select bit 0 position
-#define ADC_CH_MUXPOS1_bm (1<<5) // Positive Input Select bit 1 mask
-#define ADC_CH_MUXPOS1_bp 5 // Positive Input Select bit 1 position
-#define ADC_CH_MUXPOS2_bm (1<<6) // Positive Input Select bit 2 mask
-#define ADC_CH_MUXPOS2_bp 6 // Positive Input Select bit 2 position
-#define ADC_CH_MUXPOS3_bm (1<<7) // Positive Input Select bit 3 mask
-#define ADC_CH_MUXPOS3_bp 7 // Positive Input Select bit 3 position
-#define ADC_CH_MUXINT_gm 0xF0 // Internal Input Select group mask
-#define ADC_CH_MUXINT_bp 4 // Internal Input Select group position
+#define ADC_CH_MUXPOS0_bm (1<<3) // Positive Input Select bit 0 mask
+#define ADC_CH_MUXPOS0_bp 3 // Positive Input Select bit 0 position
+#define ADC_CH_MUXPOS1_bm (1<<4) // Positive Input Select bit 1 mask
+#define ADC_CH_MUXPOS1_bp 4 // Positive Input Select bit 1 position
+#define ADC_CH_MUXPOS2_bm (1<<5) // Positive Input Select bit 2 mask
+#define ADC_CH_MUXPOS2_bp 5 // Positive Input Select bit 2 position
+#define ADC_CH_MUXPOS3_bm (1<<6) // Positive Input Select bit 3 mask
+#define ADC_CH_MUXPOS3_bp 6 // Positive Input Select bit 3 position
+#define ADC_CH_MUXINT_gm 0x78 // Internal Input Select group mask
+#define ADC_CH_MUXINT_bp 3 // Internal Input Select group position
 
-#define ADC_CH_MUXINT0_bm (1<<4) // Internal Input Select bit 0 mask
-#define ADC_CH_MUXINT0_bp 4 // Internal Input Select bit 0 position
-#define ADC_CH_MUXINT1_bm (1<<5) // Internal Input Select bit 1 mask
-#define ADC_CH_MUXINT1_bp 5 // Internal Input Select bit 1 position
-#define ADC_CH_MUXINT2_bm (1<<6) // Internal Input Select bit 2 mask
-#define ADC_CH_MUXINT2_bp 6 // Internal Input Select bit 2 position
-#define ADC_CH_MUXINT3_bm (1<<7) // Internal Input Select bit 3 mask
-#define ADC_CH_MUXINT3_bp 7 // Internal Input Select bit 3 position
+#define ADC_CH_MUXINT0_bm (1<<3) // Internal Input Select bit 0 mask
+#define ADC_CH_MUXINT0_bp 3 // Internal Input Select bit 0 position
+#define ADC_CH_MUXINT1_bm (1<<4) // Internal Input Select bit 1 mask
+#define ADC_CH_MUXINT1_bp 4 // Internal Input Select bit 1 position
+#define ADC_CH_MUXINT2_bm (1<<5) // Internal Input Select bit 2 mask
+#define ADC_CH_MUXINT2_bp 5 // Internal Input Select bit 2 position
+#define ADC_CH_MUXINT3_bm (1<<6) // Internal Input Select bit 3 mask
+#define ADC_CH_MUXINT3_bp 6 // Internal Input Select bit 3 position
 #define ADC_CH_MUXNEG_gm 0x03 // Negative Input Select group mask
 #define ADC_CH_MUXNEG_bp 0 // Negative Input Select group position
 
@@ -4816,33 +4865,33 @@ typedef enum AC_WSTATE_enum
 #define ADC_CH0IF_bp 0 // Channel 0 Interrupt Flag bit position
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Positive input multiplexer selection */
 typedef enum ADC_CH_MUXPOS_enum
 {
-  ADC_CH_MUXPOS_PIN0_gc = (0x00<<4),   /* Input pin 0 */
-  ADC_CH_MUXPOS_PIN1_gc = (0x01<<4),   /* Input pin 1 */
-  ADC_CH_MUXPOS_PIN2_gc = (0x02<<4),   /* Input pin 2 */
-  ADC_CH_MUXPOS_PIN3_gc = (0x03<<4),   /* Input pin 3 */
-  ADC_CH_MUXPOS_PIN4_gc = (0x04<<4),   /* Input pin 4 */
-  ADC_CH_MUXPOS_PIN5_gc = (0x05<<4),   /* Input pin 5 */
-  ADC_CH_MUXPOS_PIN6_gc = (0x06<<4),   /* Input pin 6 */
-  ADC_CH_MUXPOS_PIN7_gc = (0x07<<4),   /* Input pin 7 */
+  ADC_CH_MUXPOS_PIN0_gc = (0x00<<3),   /* Input pin 0 */
+  ADC_CH_MUXPOS_PIN1_gc = (0x01<<3),   /* Input pin 1 */
+  ADC_CH_MUXPOS_PIN2_gc = (0x02<<3),   /* Input pin 2 */
+  ADC_CH_MUXPOS_PIN3_gc = (0x03<<3),   /* Input pin 3 */
+  ADC_CH_MUXPOS_PIN4_gc = (0x04<<3),   /* Input pin 4 */
+  ADC_CH_MUXPOS_PIN5_gc = (0x05<<3),   /* Input pin 5 */
+  ADC_CH_MUXPOS_PIN6_gc = (0x06<<3),   /* Input pin 6 */
+  ADC_CH_MUXPOS_PIN7_gc = (0x07<<3),   /* Input pin 7 */
 } ADC_CH_MUXPOS_t;
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Internal input multiplexer selections */
 typedef enum ADC_CH_MUXINT_enum
 {
-  ADC_CH_MUXINT_TEMP_gc = (0x00<<0),   /* Temperature Reference */
-  ADC_CH_MUXINT_BANDGAP_gc = (0x01<<0),   /* Bandgap Reference */
-  ADC_CH_MUXINT_SCALEDVCC_gc = (0x02<<0),   /* 1/10 scaled VCC */
-  ADC_CH_MUXINT_DAC_gc = (0x03<<0),   /* DAC output */
+  ADC_CH_MUXINT_TEMP_gc = (0x00<<3),   /* Temperature Reference */
+  ADC_CH_MUXINT_BANDGAP_gc = (0x01<<3),   /* Bandgap Reference */
+  ADC_CH_MUXINT_SCALEDVCC_gc = (0x02<<3),   /* 1/10 scaled VCC */
+  ADC_CH_MUXINT_DAC_gc = (0x03<<3),   /* DAC output */
 } ADC_CH_MUXINT_t;
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Negative input multiplexer selection */
 typedef enum ADC_CH_MUXNEG_enum
 {
   ADC_CH_MUXNEG_PIN0_gc = (0x00<<0),   /* Input pin 0 */
@@ -4857,7 +4906,7 @@ typedef enum ADC_CH_MUXNEG_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Input mode */
 typedef enum ADC_CH_INPUTMODE_enum
 {
   ADC_CH_INPUTMODE_INTERNAL_gc = (0x00<<0),   /* Internal inputs, no gain */
@@ -4868,21 +4917,21 @@ typedef enum ADC_CH_INPUTMODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
-typedef enum ADC_CH_GAINFAC_enum
+/* Gain factor */
+typedef enum ADC_CH_GAIN_enum
 {
-  ADC_CH_GAINFAC_1X_gc = (0x00<<0),   /* 1x gain */
-  ADC_CH_GAINFAC_2X_gc = (0x01<<0),   /* 2x gain */
-  ADC_CH_GAINFAC_4X_gc = (0x02<<0),   /* 4x gain */
-  ADC_CH_GAINFAC_8X_gc = (0x03<<0),   /* 8x gain */
-  ADC_CH_GAINFAC_16X_gc = (0x04<<0),   /* 16x gain */
-  ADC_CH_GAINFAC_32X_gc = (0x05<<0),   /* 32x gain */
-  ADC_CH_GAINFAC_64X_gc = (0x06<<0),   /* 64x gain */
-} ADC_CH_GAINFAC_t;
+  ADC_CH_GAIN_1X_gc = (0x00<<2),   /* 1x gain */
+  ADC_CH_GAIN_2X_gc = (0x01<<2),   /* 2x gain */
+  ADC_CH_GAIN_4X_gc = (0x02<<2),   /* 4x gain */
+  ADC_CH_GAIN_8X_gc = (0x03<<2),   /* 8x gain */
+  ADC_CH_GAIN_16X_gc = (0x04<<2),   /* 16x gain */
+  ADC_CH_GAIN_32X_gc = (0x05<<2),   /* 32x gain */
+  ADC_CH_GAIN_64X_gc = (0x06<<2),   /* 64x gain */
+} ADC_CH_GAIN_t;
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Conversion result resolution */
 typedef enum ADC_RESOLUTION_enum
 {
   ADC_RESOLUTION_12BIT_gc = (0x00<<1),   /* 12-bit right-adjusted result */
@@ -4892,7 +4941,7 @@ typedef enum ADC_RESOLUTION_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Voltage reference selection */
 typedef enum ADC_REFSEL_enum
 {
   ADC_REFSEL_INT1V_gc = (0x00<<4),   /* Internal 1V */
@@ -4903,7 +4952,7 @@ typedef enum ADC_REFSEL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Channel sweep selection */
 typedef enum ADC_SWEEP_enum
 {
   ADC_SWEEP_0_gc = (0x00<<6),   /* ADC Channel 0 */
@@ -4914,7 +4963,7 @@ typedef enum ADC_SWEEP_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Event channel input selection */
 typedef enum ADC_EVSEL_enum
 {
   ADC_EVSEL_0123_gc = (0x00<<3),   /* Event Channel 0,1,2,3 */
@@ -4929,7 +4978,7 @@ typedef enum ADC_EVSEL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Event action selection */
 typedef enum ADC_EVACT_enum
 {
   ADC_EVACT_NONE_gc = (0x00<<0),   /* No event action */
@@ -4943,7 +4992,7 @@ typedef enum ADC_EVACT_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Interupt mode */
 typedef enum ADC_CH_INTMODE_enum
 {
   ADC_CH_INTMODE_COMPLETE_gc = (0x00<<2),   /* Interrupt on conversion complete */
@@ -4953,7 +5002,7 @@ typedef enum ADC_CH_INTMODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Interrupt level */
 typedef enum ADC_CH_INTLVL_enum
 {
   ADC_CH_INTLVL_OFF_gc = (0x00<<0),   /* Interrupt disabled */
@@ -4964,7 +5013,7 @@ typedef enum ADC_CH_INTLVL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* DMA request selection */
 typedef enum ADC_DMASEL_enum
 {
   ADC_DMASEL_OFF_gc = (0x00<<5),   /* Combined DMA request OFF */
@@ -4975,7 +5024,7 @@ typedef enum ADC_DMASEL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Clock prescaler */
 typedef enum ADC_PRESCALER_enum
 {
   ADC_PRESCALER_DIV4_gc = (0x00<<0),   /* Divide clock by 4 */
@@ -5084,7 +5133,7 @@ typedef enum ADC_PRESCALER_enum
 #define DAC_CH0DRE_bp 0 // Channel 0 Data Register Empty bit position
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Output channel selection */
 typedef enum DAC_CHSEL_enum
 {
   DAC_CHSEL_SINGLE_gc = (0x00<<5),   /* Single channel operation (Channel A only) */
@@ -5093,7 +5142,7 @@ typedef enum DAC_CHSEL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Reference voltage selection */
 typedef enum DAC_REFSEL_enum
 {
   DAC_REFSEL_INT1V_gc = (0x00<<3),   /* Internal 1V  */
@@ -5104,22 +5153,22 @@ typedef enum DAC_REFSEL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Event channel selection */
 typedef enum DAC_EVSEL_enum
 {
-  DAC_EVSEL_EV0_gc = (0x00<<0),   /* Event Channel 0 */
-  DAC_EVSEL_EV1_gc = (0x01<<0),   /* Event Channel 1 */
-  DAC_EVSEL_EV2_gc = (0x02<<0),   /* Event Channel 2 */
-  DAC_EVSEL_EV3_gc = (0x03<<0),   /* Event Channele 3 */
-  DAC_EVSEL_EV4_gc = (0x04<<0),   /* Event Channel 4 */
-  DAC_EVSEL_EV5_gc = (0x05<<0),   /* Event Channel 5 */
-  DAC_EVSEL_EV6_gc = (0x06<<0),   /* Event Channel 6 */
-  DAC_EVSEL_EV7_gc = (0x07<<0),   /* Event Channel 7 */
+  DAC_EVSEL_0_gc = (0x00<<0),   /* Event Channel 0 */
+  DAC_EVSEL_1_gc = (0x01<<0),   /* Event Channel 1 */
+  DAC_EVSEL_2_gc = (0x02<<0),   /* Event Channel 2 */
+  DAC_EVSEL_3_gc = (0x03<<0),   /* Event Channel 3 */
+  DAC_EVSEL_4_gc = (0x04<<0),   /* Event Channel 4 */
+  DAC_EVSEL_5_gc = (0x05<<0),   /* Event Channel 5 */
+  DAC_EVSEL_6_gc = (0x06<<0),   /* Event Channel 6 */
+  DAC_EVSEL_7_gc = (0x07<<0),   /* Event Channel 7 */
 } DAC_EVSEL_t;
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Conversion interval */
 typedef enum DAC_CONINTVAL_enum
 {
   DAC_CONINTVAL_1CLK_gc = (0x00<<4),   /* 1 CLK / 2 CLK in S/H mode */
@@ -5134,7 +5183,7 @@ typedef enum DAC_CONINTVAL_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Refresh rate */
 typedef enum DAC_REFRESH_enum
 {
   DAC_REFRESH_16CLK_gc = (0x00<<0),   /* 16 CLK */
@@ -5404,7 +5453,7 @@ typedef enum RTC_OVFINTLVL_enum
 #define EBI_ROWCOLDLY2_bp 2 // SDRAM Row-to-Column Delay bit 2 position
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Chip Select adress space */
 typedef enum EBI_CS_ASPACE_enum
 {
   EBI_CS_ASPACE_256B_gc = (0x00<<2),   /* 256 bytes */
@@ -5428,7 +5477,7 @@ typedef enum EBI_CS_ASPACE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Chip Select address mode */
 typedef enum EBI_CS_MODE_enum
 {
   EBI_CS_MODE_DISABLED_gc = (0x00<<0),   /* Chip Select Disabled */
@@ -5439,7 +5488,7 @@ typedef enum EBI_CS_MODE_enum
 #endif /* !defined (__ASSEMBLER__) */
 
 #if !defined (__ASSEMBLER__)
-/*  */
+/* Chip Select SDRAM mode */
 typedef enum EBI_CS_SDMODE_enum
 {
   EBI_CS_SDMODE_NORMAL_gc = (0x00<<0),   /* Normal mode */
@@ -6559,7 +6608,7 @@ typedef enum PORT_ISC_enum
 #define AWEX_DTICCAEN_bm 0x01 // Dead Time Insertion Compare Channel A Enable bit mask
 #define AWEX_DTICCAEN_bp 0 // Dead Time Insertion Compare Channel A Enable bit position
 
-/* AWEX.DFCTRL bit masks and bit positions */
+/* AWEX.FDCTRL bit masks and bit positions */
 
         
 #define AWEX_FDDBD_bm 0x10 // Fault Detect on Disable Break Disable bit mask
@@ -6952,9 +7001,9 @@ typedef enum USART_CMODE_enum
 /* Parity Mode */
 typedef enum USART_PMODE_enum
 {
-  USART_PMODE_DISABLED_gc = (0x00<<0),   /* No Parity */
-  USART_PMODE_EVEN_gc = (0x02<<0),   /* Even Parity */
-  USART_PMODE_ODD_gc = (0x03<<0),   /* Odd Parity */
+  USART_PMODE_DISABLED_gc = (0x00<<4),   /* No Parity */
+  USART_PMODE_EVEN_gc = (0x02<<4),   /* Even Parity */
+  USART_PMODE_ODD_gc = (0x03<<4),   /* Odd Parity */
 } USART_PMODE_t;
 #endif /* !defined (__ASSEMBLER__) */
 
@@ -6968,8 +7017,8 @@ typedef enum USART_PMODE_enum
 /* SPI.CTRL bit masks and bit positions */
 
         
-#define SPI_CLK2X_bm 0x80 // TODO: Find documentation on this bit bit mask
-#define SPI_CLK2X_bp 7 // TODO: Find documentation on this bit bit position
+#define SPI_CLK2X_bm 0x80 // Enable Double Speed bit mask
+#define SPI_CLK2X_bp 7 // Enable Double Speed bit position
 #define SPI_ENABLE_bm 0x40 // Enable Module bit mask
 #define SPI_ENABLE_bp 6 // Enable Module bit position
 #define SPI_DORD_bm 0x20 // Data Order Setting bit mask
@@ -7066,7 +7115,7 @@ typedef enum SPI_INTLVL_enum
 #define IRCOM_EVSEL3_bp 3 // Event Channel Select bit 3 position
 
 #if !defined (__ASSEMBLER__)
-/* Event Selection */
+/* Event channel selection */
 typedef enum IRDA_EVSEL_enum
 {
   IRDA_EVSEL_OFF_gc = (0x00<<0),   /* No Event Source */
@@ -7368,7 +7417,6 @@ typedef enum AES_INTLVL_enum
 #define _VECTORS_SIZE (125 * 4)
 
 
-
 /* Constants */
 #define SPM_PAGESIZE    (256)
 #define RAMSTART        (0x2000)
@@ -7378,7 +7426,6 @@ typedef enum AES_INTLVL_enum
 #define E2END           (0x7FF)
 #define E2PAGESIZE      (32) 
 #define FLASHEND        (0x11FFF)
-
 
 
 /* Fuses */
@@ -7439,7 +7486,6 @@ typedef enum AES_INTLVL_enum
 #define __BOOT_LOCK_APPLICATION_TABLE_BITS_EXIST
 #define __BOOT_LOCK_APPLICATION_BITS_EXIST 
 #define __BOOT_LOCK_BOOT_BITS_EXIST
-
 
 
 #endif /* _AVR_ATxmega64A1_H_ */
