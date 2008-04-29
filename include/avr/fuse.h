@@ -77,12 +77,16 @@
     If FUSE_MEMORY_SIZE > 3, there is a single field: byte, which is an array
     of unsigned char with the size of the array being FUSE_MEMORY_SIZE.
     
-    A macro, FUSEMEM, is defined as a GCC attribute for a custom-named
-    section of ".fuse".
+    A convenience macro, FUSEMEM, is defined as a GCC attribute for a 
+    custom-named section of ".fuse".
     
-    Finally, a macro, FUSES, is defined that declares a variable, __fuse, of
+    A convenience macro, FUSES, is defined that declares a variable, __fuse, of
     type __fuse_t with the attribute defined by FUSEMEM. This variable
     allows the end user to easily set the fuse data.
+
+    \note If a device-specific I/O header file has previously defined FUSEMEM,
+    then FUSEMEM is not redefined. If a device-specific I/O header file has
+    previously defined FUSES, then FUSES is not redefined.
 
     Each AVR device I/O header file has a set of defined macros which specify the
     actual fuse bits available on that device. The AVR fuses have inverted
@@ -136,6 +140,24 @@
     }
     \endcode
     
+    Or,
+    
+    \code
+    #include <avr/io.h>
+
+    __fuse_t __fuse __attribute__((section (".fuse"))) = 
+    {
+        .low = LFUSE_DEFAULT,
+        .high = (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN),
+        .extended = EFUSE_DEFAULT,
+    };
+
+    int main(void)
+    {
+        return 0;
+    }
+    \endcode
+    
     However there are a number of caveats that you need to be aware of to
     use this API properly.
     
@@ -175,7 +197,9 @@
 
 #ifndef __ASSEMBLER__
 
+#ifndef
 #define FUSEMEM  __attribute__((section (".fuse")))
+#endif
 
 #if FUSE_MEMORY_SIZE > 3
 
@@ -211,7 +235,9 @@ typedef struct
 
 #endif
 
+#ifndef
 #define FUSES __fuse_t __fuse FUSEMEM
+#endif
 
 #endif /* !__ASSEMBLER__ */
 
