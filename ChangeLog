@@ -1,3 +1,10 @@
+2008-04-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/lock.h: Protect the LOCKMEM and LOCKBITS macros from being
+	redefined. Change the documentation accordingly.
+	* include/avr/fuse.h: Protect the FUSEMEM and FUSES macros from being
+	redefined. Change the documentation accordingly.
+
 2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/sfr_defs.h: Define __SFR_OFFSET value depending on 

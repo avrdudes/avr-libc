@@ -103,12 +103,17 @@
     See the AVR device specific datasheet for more details about these
     lock bits and the available mode settings.
     
-    A macro, LOCKMEM, is defined as a GCC attribute for a custom-named
-    section of ".lock".
+    A convenience macro, LOCKMEM, is defined as a GCC attribute for a 
+    custom-named section of ".lock".
     
-    Finally, a macro, LOCKBITS, is defined that declares a variable, __lock, of
-    type unsigned char with the attribute defined by LOCKMEM. This variable
+    A convenience macro, LOCKBITS, is defined that declares a variable, __lock, 
+    of type unsigned char with the attribute defined by LOCKMEM. This variable
     allows the end user to easily set the lockbit data.
+
+    \note If a device-specific I/O header file has previously defined LOCKMEM,
+    then LOCKMEM is not redefined. If a device-specific I/O header file has
+    previously defined LOCKBITS, then LOCKBITS is not redefined. LOCKBITS is
+    currently known to be defined in the I/O header files for the XMEGA devices.
 
     \par API Usage Example
     
@@ -124,6 +129,22 @@
         return 0;
     }
     \endcode
+    
+    Or:
+    
+    \code
+    #include <avr/io.h>
+
+    unsigned char __lock __attribute__((section (".lock"))) = 
+        (LB_MODE_1 & BLB0_MODE_3 & BLB1_MODE_4);
+
+    int main(void)
+    {
+        return 0;
+    }
+    \endcode
+    
+    
     
     However there are a number of caveats that you need to be aware of to
     use this API properly.
@@ -165,9 +186,13 @@
 
 #ifndef __ASSEMBLER__
 
+#ifndef LOCKMEM
 #define LOCKMEM  __attribute__((section (".lock")))
+#endif
 
+#ifndef LOCKBITS
 #define LOCKBITS unsigned char __lock LOCKMEM
+#endif
 
 #endif  /* !__ASSEMBLER */
 
