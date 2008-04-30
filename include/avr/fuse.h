@@ -197,7 +197,7 @@
 
 #ifndef __ASSEMBLER__
 
-#ifndef
+#ifndef FUSEMEM
 #define FUSEMEM  __attribute__((section (".fuse")))
 #endif
 
@@ -235,7 +235,7 @@ typedef struct
 
 #endif
 
-#ifndef
+#ifndef FUSES
 #define FUSES __fuse_t __fuse FUSEMEM
 #endif
 
