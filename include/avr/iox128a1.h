@@ -1823,8 +1823,8 @@ typedef struct AES_struct
 #define AES_KEY AES.KEY
 #define AES_INTCTRL AES.INTCTRL
 
-#endif /* !defined (__ASSEMBLER__) */
-
+#else
+/* defined (__ASSEMBLER__) */
 
 /* ========== Flattened fully qualified IO register names ========== */
 
@@ -2692,6 +2692,8 @@ typedef struct AES_struct
 #define AES_STATE _SFR_MEM8(194)
 #define AES_KEY _SFR_MEM8(195)
 #define AES_INTCTRL _SFR_MEM8(196)
+
+#endif /* !defined (__ASSEMBLER__) */
 
 
 /*================== Bitfield Definitions ================== */

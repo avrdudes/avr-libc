@@ -1,3 +1,9 @@
+2008-05-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Conditionally compile flattened register names 
+	for use in assembler only.
+	* include/avr/iox64a1.h: Ditto.
+
 2008-04-29  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/fuse.h: Fix bug with #ifndef lines.
