@@ -1,3 +1,13 @@
+2008-05-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/runtest.sh: Add ASM files to operate.
+	* tests/simulate/avr/sfr-1.c: New file.
+	* tests/simulate/avr/sfr-2.c: New file.
+	* tests/simulate/avr/sfr-3.c: New file.
+	* tests/simulate/avr/sfrasm-1.S: New file.
+	* tests/simulate/avr/sfrasm-2.S: New file.
+	* tests/simulate/avr/sfrasm-3.S: New file.
+
 2008-05-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox128a1.h: Conditionally compile flattened register names 

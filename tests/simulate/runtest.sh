@@ -95,7 +95,7 @@ done
 shift $((OPTIND - 1))
 test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
 		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c \
-		avr/*.c"}
+		avr/*.[cS]"}
     
 CPPFLAGS="-Wundef -I."
 CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
@@ -293,6 +293,42 @@ for test_file in $test_list ; do
 			fi
 		    done
 	        done
+		rm -f $elf_file $CORE
+	    fi
+	    ;;
+
+	*.S)
+	    n_files=$(($n_files + 1))
+	    
+	    rootname=`basename $test_file .S`
+
+	    if [ -z $HOST_ONLY ] ; then
+		case `dirname $test_file` in
+		    avr)  mcu_list="$MCU_LIST_FULL" ;;
+		    *)    mcu_list="$MCU_LIST" ;;
+		esac
+		
+	        elf_file=$rootname.elf
+		for mcu in $mcu_list ; do
+		    echo -n "Simulate: $test_file "
+		    echo -n "$mcu ... "
+		    if ! Compile $test_file $mcu $elf_file
+		    then
+			Err_echo "compile failed"
+			n_emake=$(($n_emake + 1))
+			break
+		    elif [ -z $MAKE_ONLY ] && ! Simulate $elf_file $mcu
+		    then
+			Err_echo "simulate failed: $RETVAL"
+			if [ $FLAG_KEEPCORE ] ; then
+			    mv -f $CORE ${CORE}-$(echo ${test_file} \
+					| sed -e 's,/,_,g')-${mcu}
+			fi
+			n_esimul=$(($n_esimul + 1))
+		    else
+			echo "OK"
+		    fi
+		done
 		rm -f $elf_file $CORE
 	    fi
 	    ;;
