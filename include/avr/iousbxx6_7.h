@@ -425,7 +425,9 @@
 
 /* Reserved [0x38..0x3A] */
 
+#if defined(__AVR_AT90USB1286__) || defined(__AVR_AT90USB1287__)
 #define RAMPZ   _SFR_IO8(0x3B)
+#endif
 
 /* Reserved [0x3C] */
 
