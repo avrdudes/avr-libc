@@ -1,3 +1,8 @@
+2008-05-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iousbxx6_7.h: Conditionally define RAMPZ only if device is
+	AT90USB1286 or AT90USB1287 (> 64K Flash).
+
 2008-05-02  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/runtest.sh: Add ASM files to operate.
