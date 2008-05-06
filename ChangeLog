@@ -1,3 +1,10 @@
+2008-05-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23166.
+	* include/avr/boot.h: Define __SPM_ENABLE as SPMEN or SELFPRGEN, depending
+	on whether device has that bit definition. Use __SPM_ENABLE in all macros.
+	* NEWS: Add to fixed bug list.
+
 2008-05-04  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iousbxx6_7.h: Conditionally define RAMPZ only if device is

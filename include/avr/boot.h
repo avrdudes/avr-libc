@@ -115,6 +115,16 @@
 #  error AVR processor does not provide bootloader support!
 #endif
 
+
+/* Check for SPM Enable bit. */
+#if defined(SPMEN)
+#  define __SPM_ENABLE  SPMEN
+#elif defined(SELFPRGEN)
+#  define __SPM_ENABLE  SELFPRGEN
+#else
+#  error Cannot find SPM Enable bit definition!
+#endif
+
 /** \ingroup avr_boot
     \def BOOTLOADER_SECTION
 
@@ -173,7 +183,7 @@
     \def boot_spm_busy()
     Check if the SPM instruction is busy. */
 
-#define boot_spm_busy()               (__SPM_REG & (uint8_t)_BV(SPMEN))
+#define boot_spm_busy()               (__SPM_REG & (uint8_t)_BV(__SPM_ENABLE))
 
 /** \ingroup avr_boot
     \def boot_spm_busy_wait()
@@ -181,11 +191,11 @@
 
 #define boot_spm_busy_wait()          do{}while(boot_spm_busy())
 
-#define __BOOT_PAGE_ERASE         (_BV(SPMEN) | _BV(PGERS))
-#define __BOOT_PAGE_WRITE         (_BV(SPMEN) | _BV(PGWRT))
-#define __BOOT_PAGE_FILL          _BV(SPMEN)
-#define __BOOT_RWW_ENABLE         (_BV(SPMEN) | _BV(__COMMON_ASRE))
-#define __BOOT_LOCK_BITS_SET      (_BV(SPMEN) | _BV(BLBSET))
+#define __BOOT_PAGE_ERASE         (_BV(__SPM_ENABLE) | _BV(PGERS))
+#define __BOOT_PAGE_WRITE         (_BV(__SPM_ENABLE) | _BV(PGWRT))
+#define __BOOT_PAGE_FILL          _BV(__SPM_ENABLE)
+#define __BOOT_RWW_ENABLE         (_BV(__SPM_ENABLE) | _BV(__COMMON_ASRE))
+#define __BOOT_LOCK_BITS_SET      (_BV(__SPM_ENABLE) | _BV(BLBSET))
 
 #define __boot_page_fill_normal(address, data)   \
 (__extension__({                                 \
@@ -379,12 +389,12 @@
 
      If bits 5..2 in R0 are cleared (zero), the corresponding Boot Lock bit
      will be programmed if an SPM instruction is executed within four cycles
-     after BLBSET and SPMEN are set in SPMCR. The Z-pointer is don t care
-     during this operation, but for future compatibility it is recommended to
-     load the Z-pointer with $0001 (same as used for reading the Lock
-     bits). For future compatibility It is also recommended to set bits 7, 6,
-     1, and 0 in R0 to 1 when writing the Lock bits. When programming the Lock
-     bits the entire Flash can be read during the operation. */
+     after BLBSET and SPMEN (or SELFPRGEN) are set in SPMCR. The Z-pointer is 
+     don't care during this operation, but for future compatibility it is 
+     recommended to load the Z-pointer with $0001 (same as used for reading the 
+     Lock bits). For future compatibility It is also recommended to set bits 7, 
+     6, 1, and 0 in R0 to 1 when writing the Lock bits. When programming the 
+     Lock bits the entire Flash can be read during the operation. */
 
 #define __boot_lock_bits_set(lock_bits)                    \
 (__extension__({                                           \
@@ -427,9 +437,9 @@
 /*
    Reading lock and fuse bits:
 
-     Similarly to writing the lock bits above, set BLBSET and SPMEN bits
-     in __SPMREG, and then (within four clock cycles) issue an LPM
-     instruction.
+     Similarly to writing the lock bits above, set BLBSET and SPMEN (or 
+     SELFPRGEN) bits in __SPMREG, and then (within four clock cycles) issue an 
+     LPM instruction.
 
      Z address:       contents:
      0x0000           low fuse bits
@@ -505,7 +515,7 @@
     \note The values are MCU type dependent.
 */
 
-#define __BOOT_SIGROW_READ (_BV(SPMEN) | _BV(SIGRD))
+#define __BOOT_SIGROW_READ (_BV(__SPM_ENABLE) | _BV(SIGRD))
 
 #define boot_signature_byte_get(addr) \
 (__extension__({		      \

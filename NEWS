@@ -42,6 +42,7 @@
   [#22877] Fuse information wrong for xmega devices.
   [#23004] Watchdog enable docu only generated for Xmega series
   [#23032] Define PORTxn, PINxn, DDxn bit names in iomxx4.h.
+  [#23166] atmega328p does not have SPMEN
 
 
 * Other changes:
