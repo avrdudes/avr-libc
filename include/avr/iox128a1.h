@@ -7421,7 +7421,7 @@ typedef enum AES_INTLVL_enum
 
 
 /* Constants */
-#define SPM_PAGESIZE    (256)
+#define SPM_PAGESIZE    (512)
 #define RAMSTART        (0x2000)
 #define RAMSIZE         (0x2000)
 #define RAMEND          (RAMSTART + RAMSIZE - 1)  /* Last On-Chip SRAM Location. */
