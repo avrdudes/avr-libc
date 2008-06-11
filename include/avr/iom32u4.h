@@ -591,7 +591,7 @@
 #define REFS0 6
 #define REFS1 7
 
-#define DDIR2 _SFR_MEM8(0x7D)
+#define DIDR2 _SFR_MEM8(0x7D)
 #define ADC8D 0
 #define ADC9D 1
 #define ADC10D 2
