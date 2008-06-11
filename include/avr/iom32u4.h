@@ -293,14 +293,14 @@
 #define TCNT0_7 7
 
 #define OCR0A _SFR_IO8(0x27)
-#define OCROA_0 0
-#define OCROA_1 1
-#define OCROA_2 2
-#define OCROA_3 3
-#define OCROA_4 4
-#define OCROA_5 5
-#define OCROA_6 6
-#define OCROA_7 7
+#define OCR0A_0 0
+#define OCR0A_1 1
+#define OCR0A_2 2
+#define OCR0A_3 3
+#define OCR0A_4 4
+#define OCR0A_5 5
+#define OCR0A_6 6
+#define OCR0A_7 7
 
 #define OCR0B _SFR_IO8(0x28)
 #define OCR0B_0 0
@@ -442,7 +442,7 @@
 #define CLKPS1 1
 #define CLKPS2 2
 #define CLKPS3 3
-#define CLKPCE 4
+#define CLKPCE 7
 
 #define PRR0 _SFR_MEM8(0x64)
 #define PRADC 0

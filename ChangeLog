@@ -1,5 +1,9 @@
 2008-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iom32u4.h: Fix bit names for registers OCR0A and CLKPR.
+
+2008-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom32u4.h: Fix register misnaming from DDIR2 to DIDR2.
 
 2008-05-12  Eric B. Weddington  <eric.weddington@atmel.com>
