@@ -43,6 +43,7 @@
   [#23004] Watchdog enable docu only generated for Xmega series
   [#23032] Define PORTxn, PINxn, DDxn bit names in iomxx4.h.
   [#23166] atmega328p does not have SPMEN
+  [#23261] AT90USB162 and AT90USB82 missing power_all_[enable,disable]() in power.h
 
 
 * Other changes:
