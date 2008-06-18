@@ -1013,6 +1013,18 @@ do{ \
 #define power_usart1_enable()   (PRR1 &= (uint8_t)~(1 << PRUSART1))
 #define power_usart1_disable()  (PRR1 |= (uint8_t)(1 << PRUSART1))
 
+#define power_all_enable() \
+do{ \
+    PRR0 &= (uint8_t)~((1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)); \
+    PRR1 &= (uint8_t)~((1<<PRUSB)|(1<<PRUSART1)); \
+}while(0)
+
+#define power_all_disable() \
+do{ \
+    PRR0 |= (uint8_t)((1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)); \
+    PRR1 |= (uint8_t)((1<<PRUSB)|(1<<PRUSART1)); \
+}while(0)
+
 
 #endif
 
