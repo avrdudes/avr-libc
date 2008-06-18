@@ -1,5 +1,10 @@
 2008-06-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #23554.
+	* include/avr/iom32u4.h: Fix bit name definitions.
+
+2008-06-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #23261.
 	* include/avr/power.h: Add power_all_enable() and power_all_disable for
 	AT90USB82 and AT90USB162.

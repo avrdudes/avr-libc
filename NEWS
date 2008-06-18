@@ -44,6 +44,7 @@
   [#23032] Define PORTxn, PINxn, DDxn bit names in iomxx4.h.
   [#23166] atmega328p does not have SPMEN
   [#23261] AT90USB162 and AT90USB82 missing power_all_[enable,disable]() in power.h
+  [#23554] Wrong bit values in iom32u4.h
 
 
 * Other changes:
