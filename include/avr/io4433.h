@@ -445,4 +445,28 @@
 #define    E2END    0xFF
 #define    FLASHEND 0xFFF
 
+
+/* Fuses */
+#define FUSE_MEMORY_SIZE 1
+
+/* Low Fuse Byte */
+#define FUSE_CKSEL0 ~_BV(0)
+#define FUSE_CKSEL1 ~_BV(1)
+#define FUSE_CKSEL2 ~_BV(2)
+#define FUSE_BODEN ~_BV(3)
+#define FUSE_BODLEVEL ~_BV(4)
+#define FUSE_SPIEN ~_BV(5)
+#define LFUSE_DEFAULT (0xFF)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x92
+#define SIGNATURE_2 0x03
+
+
 #endif /* _AVR_IO4433_H_ */

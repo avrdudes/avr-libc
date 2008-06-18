@@ -1,3 +1,18 @@
+2008-06-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom48.h: Add fuse, and signature information.
+	* include/avr/io1200.h: Add fuse, lockbit, and signature information.
+	* include/avr/iom103.h: Ditto.
+	* include/avr/io8535.h: Ditto.
+	* include/avr/io8515.h: Ditto.
+	* include/avr/io4434.h: Ditto.
+	* include/avr/io4433.h: Ditto.
+	* include/avr/io4414.h: Ditto.
+	* include/avr/io2343.h: Ditto.
+	* include/avr/io2323.h: Ditto.
+	* include/avr/io2313.h: Ditto.
+	* include/avr/io86r401.h: Ditto.
+
 2008-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom32u4.h: Fix bit names for registers OCR0A and CLKPR.

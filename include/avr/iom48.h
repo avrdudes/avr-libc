@@ -43,8 +43,44 @@
 #define FLASHEND    0xFFF
 
 
+/* Fuses */
+#define FUSE_MEMORY_SIZE 3
+
+/* Low Fuse Byte */
+#define FUSE_CKSEL0 ~_BV(0)  /* Select Clock Source */
+#define FUSE_CKSEL1 ~_BV(1)  /* Select Clock Source */
+#define FUSE_CKSEL2 ~_BV(2)  /* Select Clock Source */
+#define FUSE_CKSEL3 ~_BV(3)  /* Select Clock Source */
+#define FUSE_SUT0 ~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1 ~_BV(5)  /* Select start-up time */
+#define FUSE_CKOUT ~_BV(6)  /* Clock output */
+#define FUSE_CKDIV8 ~_BV(7)  /* Divide clock by 8 */
+#define LFUSE_DEFAULT (FUSE_CKDIV8 & FUSE_SUT0 & FUSE_CKSEL3 & FUSE_CKSEL2 & FUSE_CKSEL0)
+
+/* High Fuse Byte */
+#define FUSE_BODLEVEL0 ~_BV(0)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL1 ~_BV(1)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL2 ~_BV(2)  /* Brown-out Detector trigger level */
+#define FUSE_EESAVE ~_BV(3)  /* EEPROM memory is preserved through chip erase */
+#define FUSE_WDTON ~_BV(4)  /* Watchdog Timer Always On */
+#define FUSE_SPIEN ~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define FUSE_DWEN ~_BV(6)  /* debugWIRE Enable */
+#define FUSE_RSTDISBL ~_BV(7)  /* External reset disable */
+#define HFUSE_DEFAULT (FUSE_SPIEN)
+
+/* Extended Fuse Byte */
+#define FUSE_SELFPRGEN ~_BV(0)  /* Self Programming Enable */
+#define EFUSE_DEFAULT (0xFF)
+
+
 /* Lock Bits */
 #define __LOCK_BITS_EXIST
+
+
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x92
+#define SIGNATURE_2 0x05
 
 
 #endif /* _AVR_IOM48_H_ */
