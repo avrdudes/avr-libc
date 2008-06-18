@@ -578,8 +578,8 @@
 #define ADTS2 2
 #define ADTS3 4
 #define MUX5 5
-#define ADHSM 6
-#define ACME 7
+#define ACME 6
+#define ADHSM 7
 
 #define ADMUX _SFR_MEM8(0x7C)
 #define MUX0 0
@@ -633,7 +633,7 @@
 #define ICNC1 7
 
 #define TCCR1C _SFR_MEM8(0x82)
-#define FOC1C 1 
+#define FOC1C 5 
 #define FOC1B 6 
 #define FOC1A 7 
 

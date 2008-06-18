@@ -50,7 +50,7 @@
   [#22643] math.h c99 incompability
   [#22666] io90pwm3b.h errors
   [#22785] ATMega644P Support Missing from avr/include/avr/sleep.h
-
+  [#23554] Wrong bit values in iom32u4.h
 
 * Other changes:
 
