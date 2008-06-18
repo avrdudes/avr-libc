@@ -461,4 +461,24 @@
 #define    E2END        0xFF
 #define    FLASHEND     0xFFF
 
+
+/* Fuses */
+#define FUSE_MEMORY_SIZE 1
+
+/* Low Fuse Byte */
+#define FUSE_SPIEN ~_BV(1)  /* Serial Program Downloading Enabled */
+#define FUSE_FSTRT ~_BV(2)  /* Short Start-up time selected */
+#define LFUSE_DEFAULT (0xFF)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x92
+#define SIGNATURE_2 0x01
+
+
 #endif /* _AVR_IO4414_H_ */

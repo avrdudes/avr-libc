@@ -347,4 +347,24 @@
 #define    E2END     0x7F
 #define    FLASHEND  0x07FF
 
+
+/* Fuses */
+#define FUSE_MEMORY_SIZE 1
+
+/* Low Fuse Byte */
+#define FUSE_FSTRT ~_BV(0)
+#define FUSE_SPIEN ~_BV(5)
+#define LFUSE_DEFAULT (0xFF)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x91
+#define SIGNATURE_2 0x01
+
+
 #endif  /* _AVR_IO2313_H_ */

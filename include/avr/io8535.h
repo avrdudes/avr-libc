@@ -544,4 +544,24 @@
 #define    E2END    0x1FF
 #define    FLASHEND 0x1FFF
 
+
+/* Fuses */
+#define FUSE_MEMORY_SIZE 1
+
+/* Low Fuse Byte */
+#define FUSE_SPIEN ~_BV(1)  /* Serial Program Downloading Enabled */
+#define FUSE_FSTRT ~_BV(2)  /* Short Start-up time selected */
+#define LFUSE_DEFAULT (0xFF)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x03
+
+
 #endif /* _AVR_IO8535_H_ */

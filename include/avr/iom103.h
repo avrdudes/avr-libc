@@ -645,4 +645,30 @@
 #define    E2END    0x0FFF
 #define    FLASHEND 0x1FFFF
 
+
+/* Fuses */
+#define FUSE_MEMORY_SIZE 1
+
+/* Low Fuse Byte */
+#define FUSE_CKSEL0 ~_BV(0)  /* Select Clock Source */
+#define FUSE_CKSEL1 ~_BV(1)  /* Select Clock Source */
+#define FUSE_CKSEL2 ~_BV(2)  /* Select Clock Source */
+#define FUSE_CKSEL3 ~_BV(3)  /* Select Clock Source */
+#define FUSE_SUT0 ~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1 ~_BV(5)  /* Select start-up time */
+#define FUSE_BODEN ~_BV(6)  /* Brown out detector enable */
+#define FUSE_BODLEVEL ~_BV(7)  /* Brown out detector trigger level */
+#define LFUSE_DEFAULT (FUSE_SUT1 & FUSE_SUT0 & FUSE_CKSEL3 & FUSE_CKSEL2 & FUSE_CKSEL1)
+
+
+/* Lock Bits */
+#define __LOCK_BITS_EXIST
+
+
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x97
+#define SIGNATURE_2 0x01
+
+
 #endif /* _AVR_IOM103_H_ */
