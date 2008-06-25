@@ -45,8 +45,8 @@
 #endif 
 
 
-#ifndef _AVR_ATtiny13_H_
-#define _AVR_ATtiny13_H_ 1
+#ifndef _AVR_ATTINY13A_H_
+#define _AVR_ATTINY13A_H_ 1
 
 
 /* Registers and associated bit numbers. */
@@ -383,5 +383,5 @@
 #define SIGNATURE_2 0x07
 
 
-#endif /* _AVR_ATtiny13_H_ */
+#endif /* _AVR_ATTINY13A_H_ */
 
