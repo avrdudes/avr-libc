@@ -267,6 +267,8 @@
 #  include <avr/iotn2313.h>
 #elif defined (__AVR_ATtiny13__)
 #  include <avr/iotn13.h>
+#elif defined (__AVR_ATtiny13A__)
+#  include <avr/iotn13a.h>
 #elif defined (__AVR_ATtiny25__)
 #  include <avr/iotn25.h>
 #elif defined (__AVR_ATtiny45__)

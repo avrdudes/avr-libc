@@ -228,6 +228,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr2</td><td>at90s8535</td><td>__AVR_AT90S8535__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>at86rf401</td><td>__AVR_AT86RF401__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13</td><td>__AVR_ATtiny13__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13a</td><td>__AVR_ATtiny13A__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny2313</td><td>__AVR_ATtiny2313__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny24</td><td>__AVR_ATtiny24__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny25</td><td>__AVR_ATtiny25__</td></tr>

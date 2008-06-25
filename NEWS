@@ -88,6 +88,7 @@
   + ATmega32C1
   + ATmega32U4
   + ATtiny167
+  + ATtiny13A
 
 * Optimized functions:
 
