@@ -1,3 +1,16 @@
+2008-06-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATtiny13A.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* include/avr/iotn13a.h: Add new file.
+	* NEWS: Add news item.
+
 2008-06-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #23554.

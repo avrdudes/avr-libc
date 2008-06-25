@@ -198,6 +198,7 @@
 || defined(__AVR_ATmega161__) \
 || defined(__AVR_ATmega163__) \
 || defined(__AVR_ATtiny13__) \
+|| defined(__AVR_ATtiny13A__) \
 || defined(__AVR_ATtiny15__) \
 || defined(__AVR_ATtiny24__) \
 || defined(__AVR_ATtiny44__) \

@@ -1166,6 +1166,7 @@ Gets and returns the clock prescaler register setting. The return type is clock_
 || defined(__AVR_ATtiny861__) \
 || defined(__AVR_ATtiny2313__) \
 || defined(__AVR_ATtiny13__) \
+|| defined(__AVR_ATtiny13A__) \
 || defined(__AVR_ATtiny43U__) \
 
 typedef enum

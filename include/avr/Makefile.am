@@ -127,6 +127,7 @@ avr_HEADERS = \
     iotn11.h \
     iotn12.h \
     iotn13.h \
+    iotn13a.h \
     iotn15.h \
     iotn22.h \
     iotn2313.h \
