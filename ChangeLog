@@ -1,3 +1,7 @@
+2008-07-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_regbind): Fix a typo.
+
 2008-06-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn13a.h: Fix idempotent guard.

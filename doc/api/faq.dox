@@ -125,7 +125,7 @@ This can be done with
 register unsigned char counter asm("r3");
 \endcode
 
-Typically, it should be save to use r2 through r7 that way.
+Typically, it should be safe to use r2 through r7 that way.
 
 Registers r8 through r15 can be used for argument passing by the
 compiler in case many or long arguments are being passed to callees.
