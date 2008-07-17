@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [sourceforge.net: #2018957] Wrong SPM_PAGESIZE for mega1284P
   [#22828] eeprom_write_block(): incompatibility in args order
   [#22834] ATmega164P/324P/644P/1284P lack BODS/BODSE bits in MCUCR
   [#22870] Error in wdt.h and ATmega164P
@@ -11,7 +12,6 @@
   [#23166] atmega328p does not have SPMEN
   [#23261] AT90USB162 and AT90USB82 missing power_all_[enable,disable]() in power.h
   [#23871] clock_prescale_set() not available for ATmega32U4
-
 
 *** Changes in avr-libc-1.6.2:
 

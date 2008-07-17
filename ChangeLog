@@ -1,5 +1,10 @@
 2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for sourceforge.net bug #2018957.
+	* include/avr/iom1284p.h (SPM_PAGESIZE): Fix value to 256.
+
+2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #23871.
 	* include/avr/power.h: Enable clock_prescale_set() macro for ATmega32U4
 	and ATmega32C1.
