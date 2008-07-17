@@ -1,3 +1,10 @@
+2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23871.
+	* include/avr/power.h: Enable clock_prescale_set() macro for ATmega32U4
+	and ATmega32C1.
+	* NEWS: Add to fixed bug list.
+
 2008-07-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox (faq_regbind): Fix a typo.
