@@ -252,18 +252,31 @@ avr-libc can be freely used and redistributed, provided the following
 license conditions are met.
 
 \verbatim
-Portions of avr-libc are Copyright (c) 1999-2007
+Portions of avr-libc are Copyright (c) 1999-2008
+Werner Boellmann,
+Dean Camera,
+Pieter Conradie,
+Brian Dean,
 Keith Gudger,
+Wouter van Gulik,
 Bjoern Haase,
 Steinar Haugen,
 Peter Jansen,
 Reinhard Jessich,
 Magnus Johansson,
+Harald Kipp,
+Carlos Lamas,
+Cliff Lawson,
 Artur Lipowski,
 Marek Michalkiewicz,
+Todd C. Miller,
+Rich Neswold,
 Colin O'Flynn,
 Bob Paddock,
+Andrey Pashchenko,
 Reiner Patommel,
+Florin-Viorel Petrov,
+Alexander Popov,
 Michael Rickman,
 Theodore A. Roth,
 Juergen Schilling,
@@ -272,10 +285,13 @@ Anatoly Sokolov,
 Nils Kristian Strom,
 Michael Stumpf,
 Stefan Swanepoel,
+Helmut Wallner,
 Eric B. Weddington,
 Joerg Wunsch,
 Dmitry Xmelkov,
-The Regents of the University of California.
+Atmel Corporation,
+egnite Software GmbH,
+The Regents of the University of California. 
 All rights reserved.
 
    Redistribution and use in source and binary forms, with or without

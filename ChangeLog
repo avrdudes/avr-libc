@@ -1,5 +1,9 @@
 2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* doc/api/main_page.dox: Update copyright list.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for sourceforge.net bug #1957780.
 	* include/avr/fuse.h: Add more documentation on how to set the fuses
 	if compiling in C++.
