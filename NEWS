@@ -46,6 +46,7 @@
   [#23166] atmega328p does not have SPMEN
   [#23261] AT90USB162 and AT90USB82 missing power_all_[enable,disable]() in power.h
   [#23554] Wrong bit values in iom32u4.h
+  [#23850] ATMega8 does not have MCUSR defined
   [#23871] clock_prescale_set() not available for ATmega32U4
 
 * Other changes:

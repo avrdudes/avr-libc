@@ -1,5 +1,10 @@
 2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #23850.
+	* include/avr/iom8.h (MCUSR): Defined as an alias for MCUCSR.
+
+2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for sourceforge.net bug #2018957.
 	* include/avr/iom1284p.h (SPM_PAGESIZE): Fix value to 256.
 
