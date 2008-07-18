@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [sourceforge.net: #1957780] New 'FUSES-support' gives error in c++ files
   [sourceforge.net: #1969436] Wrong flash size for ATmega32U4
   [sourceforge.net: #2010688] ATtiny48 SPSR register bits
   [sourceforge.net: #2012448] ATmega6450 USART Interrupts
