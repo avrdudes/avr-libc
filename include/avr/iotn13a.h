@@ -183,6 +183,11 @@
 #define WDTIE 6
 #define WDTIF 7
 
+#define PRR _SFR_IO8(0x25)
+#define PRADC 0
+#define PRSPI 1
+#define PRTIM0 2
+
 #define CLKPR _SFR_IO8(0x26)
 #define CLKPS0 0
 #define CLKPS1 1
@@ -301,11 +306,6 @@
 #define GIMSK _SFR_IO8(0x3B)
 #define PCIE 5
 #define INT0 6
-
-#define PRR _SFR_IO8(0x3C)
-#define PRADC 0
-#define PRSPI 1
-#define PRTIM0 2
 
 
 /* Interrupt vectors */

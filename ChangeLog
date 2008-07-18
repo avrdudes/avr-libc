@@ -1,3 +1,7 @@
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn13a.h (PRR): Change address of PRR register to 0x25.
+
 2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #23850.
