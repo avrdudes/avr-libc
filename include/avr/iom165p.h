@@ -701,11 +701,11 @@
 
 /* Timer/Counter1 Compare Match A */
 #define TIMER1_COMPA_vect		_VECTOR(7)
-#define SIG_OUTPUT_COMPARE1A		_VECTOR(7)
+#define SIG_OUTPUT_COMPARE1A	_VECTOR(7)
 
 /* Timer/Counter Compare Match B */
 #define TIMER1_COMPB_vect		_VECTOR(8)
-#define SIG_OUTPUT_COMPARE1B		_VECTOR(8)
+#define SIG_OUTPUT_COMPARE1B	_VECTOR(8)
 
 /* Timer/Counter1 Overflow */
 #define TIMER1_OVF_vect			_VECTOR(9)
@@ -721,18 +721,21 @@
 
 /* SPI Serial Transfer Complete */
 #define SPI_STC_vect			_VECTOR(12)
-#define SIG_SPI				_VECTOR(12)
+#define SIG_SPI				    _VECTOR(12)
 
 /* USART0, Rx Complete */
 #define USART0_RX_vect			_VECTOR(13)
+#define USART_RX_vect			_VECTOR(13)  /* Alias */
 #define SIG_UART_RECV			_VECTOR(13)
 
 /* USART0 Data register Empty */
 #define USART0_UDRE_vect		_VECTOR(14)
+#define USART_UDRE_vect		    _VECTOR(14)  /* Alias */
 #define SIG_UART_DATA			_VECTOR(14)
 
 /* USART0, Tx Complete */
 #define USART0_TX_vect			_VECTOR(15)
+#define USART_TX_vect			_VECTOR(15)  /* Alias */
 #define SIG_UART_TRANS			_VECTOR(15)
 
 /* USI Start Condition */
