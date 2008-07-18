@@ -1,5 +1,15 @@
 2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for sourceforge.net bug #2012448.
+	* include/avr/iom6450.h (USART0_RX_vect, USART0_UDRE_vect, 
+	USART_TX_vect): Add interrupt names as aliases.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom165.h (USART_RX_vect, USART_UDRE_vect, USART_TX_vect):
+	Add interrupt names as aliases.
+	* include/avr/iom165p.h: Ditto.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for sourceforge.net bug #2010688.
 	* include/avr/iotn48.h (WCOL, SPIF): Fix values of bit definitions 
 	for SPSR.

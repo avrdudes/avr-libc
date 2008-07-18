@@ -8,6 +8,7 @@
   [sourceforge.net: #1910885] Typo in io90pwm3b.h
   [sourceforge.net: #1913681] Missing INT3 define in io90pwm3b.h
   [sourceforge.net: #2010688] ATtiny48 SPSR register bits
+  [sourceforge.net: #2012448] ATmega6450 USART Interrupts
   [sourceforge.net: #2016128] Incorrect ATMega32[c1|m1] Header Entries
   [sourceforge.net: #2018957] Wrong SPM_PAGESIZE for mega1284P
   [#3485]  Using float arithmetic without linking with -lm result in incorrect code
