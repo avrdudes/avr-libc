@@ -1316,7 +1316,7 @@
 #define TIMER0_COMPB_vect   _VECTOR(16)  /* Timer/Counter0 Compare Match B */
 #define TIMER0_OVF_vect     _VECTOR(17)  /* Timer/Counter0 Overflow */
 #define CAN_INT_vect        _VECTOR(18)  /* CAN MOB, Burst, General Errors */
-#define CAN TOVF_vect       _VECTOR(19)  /* CAN Timer Overflow */
+#define CAN_TOVF_vect       _VECTOR(19)  /* CAN Timer Overflow */
 #define LIN_TC_vect         _VECTOR(20)  /* LIN Transfer Complete */
 #define LIN_ERR_vect        _VECTOR(21)  /* LIN Error */
 #define PCINT0_vect         _VECTOR(22)  /* Pin Change Interrupt Request 0 */
