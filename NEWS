@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [sourceforge.net: #2010688] ATtiny48 SPSR register bits
   [sourceforge.net: #2016128] Incorrect ATMega32[c1|m1] Header Entries
   [sourceforge.net: #2018957] Wrong SPM_PAGESIZE for mega1284P
   [#22828] eeprom_write_block(): incompatibility in args order
