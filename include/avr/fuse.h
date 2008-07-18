@@ -122,7 +122,7 @@
     
     \par API Usage Example
     
-    Putting all of this together is easy:
+    Putting all of this together is easy. Using C99's designated initializers:
     
     \code
     #include <avr/io.h>
@@ -140,7 +140,7 @@
     }
     \endcode
     
-    Or,
+    Or, using the variable directly instead of the FUSES macro,
     
     \code
     #include <avr/io.h>
@@ -157,6 +157,26 @@
         return 0;
     }
     \endcode
+    
+    If you are compiling in C++, you cannot use the designated intializers so
+    you must do:
+
+    \code
+    #include <avr/io.h>
+
+    FUSES = 
+    {
+        LFUSE_DEFAULT, // .low
+        (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN), // .high
+        EFUSE_DEFAULT, // .extended
+    };
+
+    int main(void)
+    {
+        return 0;
+    }
+    \endcode
+    
     
     However there are a number of caveats that you need to be aware of to
     use this API properly.
