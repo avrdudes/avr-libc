@@ -304,8 +304,8 @@
 
 #define SPSR _SFR_IO8(0x2D)
 #define SPI2X 0
-#define WCOL 2
-#define SPIF 3
+#define WCOL 6
+#define SPIF 7
 
 #define SPDR _SFR_IO8(0x2E)
 #define SPDR0 0
@@ -340,17 +340,17 @@
 #define WDRF 3
 
 #define MCUCR _SFR_IO8(0x35)
-#define IVCE 0
 #define PUD 4
+#define BODSE 5
+#define BODS 6
 
 #define SPMCSR _SFR_IO8(0x37)
 #define SELFPRGEN 0
 #define PGERS 1
 #define PGWRT 2
-#define BLBSET 3
-#define RWWSRE 4
+#define RFLB 3
+#define CTPB 4
 #define RWWSB 6
-#define SPMIE 7
 
 #define WDTCSR _SFR_MEM8(0x60)
 #define WDP0 0
@@ -370,12 +370,10 @@
 #define CLKPCE 7
 
 #define PRR _SFR_MEM8(0x64)
-#define PRADC 0 
-#define PRUSART0 1
+#define PRADC 0
 #define PRSPI 2
 #define PRTIM1 3
 #define PRTIM0 5
-#define PRTIM2 6
 #define PRTWI 7
 
 #define OSCCAL _SFR_MEM8(0x66)
@@ -405,9 +403,6 @@
 #define PCINT25 1
 #define PCINT26 2
 #define PCINT27 3
-#define PCINT28 4
-#define PCINT29 5
-#define PCINT30 6
 
 #define PCMSK0 _SFR_MEM8(0x6B)
 #define PCINT0 0
@@ -427,6 +422,7 @@
 #define PCINT12 4
 #define PCINT13 5
 #define PCINT14 6
+#define PCINT15 7
 
 #define PCMSK2 _SFR_MEM8(0x6D)
 #define PCINT16 0

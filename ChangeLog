@@ -1,5 +1,14 @@
 2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for sourceforge.net bug #2010688.
+	* include/avr/iotn48.h (WCOL, SPIF): Fix values of bit definitions 
+	for SPSR.
+	Fix bit definitions for MCUCR, SPMCSR, PRR, PCMSK3, PCMSK1.
+	* include/avr/iotn88.h: Add assembler guard for ADC definition. Define
+	ADCW.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for sourceforge.net bug #2016128.
 	* include/avr/iom32m1.h (CAN_TOVF_vect): Add missing underscore in 
 	definition.
