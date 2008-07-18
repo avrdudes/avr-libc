@@ -1,5 +1,10 @@
 2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for sourceforge.net bug #1969436.
+	* include/avr/iom32u4.h (SPM_PAGESIZE): Fix size to be 128.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for sourceforge.net bug #2012448.
 	* include/avr/iom6450.h (USART0_RX_vect, USART0_UDRE_vect, 
 	USART_TX_vect): Add interrupt names as aliases.
