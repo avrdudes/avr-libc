@@ -142,6 +142,8 @@
 #define TCCR0	_SFR_IO8(0x33)
 
 #define MCUCSR	_SFR_IO8(0x34)
+#define MCUSR   _SFR_IO8(0x34)  /* Defined as an alias for MCUCSR. */
+
 #define MCUCR	_SFR_IO8(0x35)
 
 #define TWCR	_SFR_IO8(0x36)
