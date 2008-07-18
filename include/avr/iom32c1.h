@@ -597,7 +597,7 @@
 #define ICR1H6 6
 #define ICR1H7 7
 
-#define OCR1A _SFR_MEM16(0x89)
+#define OCR1A _SFR_MEM16(0x88)
 
 #define OCR1AL _SFR_MEM8(0x88)
 #define OCR1AL0 0

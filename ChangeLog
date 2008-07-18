@@ -1,5 +1,12 @@
 2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for sourceforge.net bug #2016128.
+	* include/avr/iom32m1.h (CAN_TOVF_vect): Add missing underscore in 
+	definition.
+	* include/avr/iom32c1.h (OCR1A): Fix address to be 0x88.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iotn13a.h (PRR): Change address of PRR register to 0x25.
 
 2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
