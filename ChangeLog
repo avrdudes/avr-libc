@@ -1,3 +1,7 @@
+2008-07-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom1284p.h (CLKPCE): Fix bit value to be 7.
+
 2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* doc/api/main_page.dox: Update copyright list.

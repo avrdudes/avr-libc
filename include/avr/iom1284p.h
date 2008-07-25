@@ -421,7 +421,7 @@
 #define CLKPS1 1
 #define CLKPS2 2
 #define CLKPS3 3
-#define CLKPCE 4
+#define CLKPCE 7
 
 #define PRR0 _SFR_MEM8(0x64)
 #define PRADC 0
