@@ -39,7 +39,7 @@
     in previous versions of this library, but have eventually been
     deprecated over time.
 
-    \code #include <compat/deprected.h> \endcode
+    \code #include <compat/deprecated.h> \endcode
 
     These items are supplied within that header file for backward
     compatibility reasons only, so old source code that has been
