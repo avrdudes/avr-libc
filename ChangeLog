@@ -1,5 +1,10 @@
 2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #23959.
+	* include/compat/deprecated.h: Fix typo in documentation.
+
+2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #21621.
 	* bootstrap: Add ability to use autoconf 2.61 and automake 1.10.x.
 
