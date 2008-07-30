@@ -1,3 +1,8 @@
+2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21621.
+	* bootstrap: Add ability to use autoconf 2.61 and automake 1.10.x.
+
 2008-07-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom1284p.h (CLKPCE): Fix bit value to be 7.

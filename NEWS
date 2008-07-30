@@ -9,6 +9,7 @@
   [sourceforge.net: #2012448] ATmega6450 USART Interrupts
   [sourceforge.net: #2016128] Incorrect ATMega32[c1|m1] Header Entries
   [sourceforge.net: #2018957] Wrong SPM_PAGESIZE for mega1284P
+  [#21621] Allow autoconf 2.61
   [#22828] eeprom_write_block(): incompatibility in args order
   [#22834] ATmega164P/324P/644P/1284P lack BODS/BODSE bits in MCUCR
   [#22870] Error in wdt.h and ATmega164P

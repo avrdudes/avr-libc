@@ -5,13 +5,12 @@
 # bootstrap script to build all the *.in files and configure script.
 #
 
-# autoconf-2.59 or 2.60 is required
-# FIXME: 2.60 is quickly added. Why was 2.59 exactly needed? What about 2.61?
+# autoconf-2.59, 2.60, or 2.61 is required
 
 : ${AUTOHEADER="autoheader${AC_VER}"}
 : ${AUTOCONF="autoconf${AC_VER}"}
 
-# automake-1.8.x or 1.9.x is required
+# automake-1.8.x, 1.9.x, or 1.10.x is required
 
 : ${ACLOCAL="aclocal${AM_VER}"}
 : ${AUTOMAKE="automake${AM_VER}"}
@@ -20,9 +19,9 @@
 
 AUTOCONF_VER=`(${AUTOCONF} --version 2>/dev/null | head -n 1 | \
               cut -d ' ' -f 4) 2>/dev/null`
-if [ "$AUTOCONF_VER" != "2.59" -a "$AUTOCONF_VER" != "2.60" ]
+if [ "$AUTOCONF_VER" != "2.59" -a "$AUTOCONF_VER" != "2.60" -a "$AUTOCONF_VER" != "2.61"]
 then
-	echo "You need to use autoconf version 2.59 or 2.60."
+	echo "You need to use autoconf version 2.59, 2.60, or 2.61."
 	echo "You are using `${AUTOCONF} --version | head -n 1`."
 	exit 1
 fi
@@ -31,9 +30,9 @@ fi
 
 AUTOMAKE_VER=`(${AUTOMAKE} --version | head -n 1 | \
               cut -d ' ' -f 4 | cut -d '.' -f -2) 2>/dev/null`
-if [ "$AUTOMAKE_VER" != "1.8" -a "$AUTOMAKE_VER" != "1.9" ]
+if [ "$AUTOMAKE_VER" != "1.8" -a "$AUTOMAKE_VER" != "1.9" -a "$AUTOMAKE_VER" != "1.10" ]
 then
-	echo "You need to use automake version 1.8 or 1.9."
+	echo "You need to use automake version 1.8, 1.9, or 1.10."
 	echo "You are using `${AUTOMAKE} --version | head -n 1`."
 	exit 1
 fi
