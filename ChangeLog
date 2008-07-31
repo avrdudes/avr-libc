@@ -1,5 +1,9 @@
 2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* bootstrap: Fix ending ']'.
+
+2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #23959.
 	* include/compat/deprecated.h: Fix typo in documentation.
 
