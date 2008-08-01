@@ -3,6 +3,7 @@
 	Add the strdup() function. Partial fix for bug #23677.
 	* libc/string/strdup.c: New file.
 	* libc/string/Files.am: Add new file to build list.
+	* libc/string/Makefile (EXTRA_DIST): Add C sources.
 
 2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
