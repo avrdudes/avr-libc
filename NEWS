@@ -22,6 +22,10 @@
   [#23871] clock_prescale_set() not available for ATmega32U4
   [#23959] Small typo in deprecated documentation
 
+* New functions:
+
+   strdup
+
 *** Changes in avr-libc-1.6.2:
 
 * Bugs fixed:

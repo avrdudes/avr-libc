@@ -1,3 +1,9 @@
+2008-08-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add the strdup() function. Partial fix for bug #23677.
+	* libc/string/strdup.c: New file.
+	* libc/string/Files.am: Add new file to build list.
+
 2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* bootstrap: Fix ending ']'.

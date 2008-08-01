@@ -32,5 +32,6 @@
 include $(top_srcdir)/libc/string/Files.am
 
 EXTRA_DIST = \
-	$(string_a_asm_sources) \
+	$(string_a_c_sources) \
+    $(string_a_asm_sources) \
 	$(string_a_extra_dist)
