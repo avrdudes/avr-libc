@@ -109,6 +109,7 @@
 
    eeprom_read_dword
    eeprom_write_dword
+   strdup
 
 *** Changes in avr-libc-1.6.0:
 

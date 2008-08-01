@@ -126,6 +126,7 @@ extern char *strcpy(char *, const char *);
 extern int strcasecmp(const char *, const char *) __ATTR_PURE__;
 extern char *strcasestr(const char *, const char *) __ATTR_PURE__;
 extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
+extern char *strdup(const char *s1);
 extern size_t strlcat(char *, const char *, size_t);
 extern size_t strlcpy(char *, const char *, size_t);
 extern size_t strlen(const char *) __ATTR_PURE__;

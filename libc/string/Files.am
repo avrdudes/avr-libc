@@ -29,7 +29,8 @@
 # $Id$
 #
 
-string_a_c_sources =
+string_a_c_sources = \
+	strdup.c
 
 string_a_asm_sources = \
 	ffs.S \
