@@ -1,3 +1,8 @@
+2008-08-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23546.
+	* doc/api/faq.dox: Fix typos.
+
 2008-08-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Add the strdup() function. Partial fix for bug #23677.
