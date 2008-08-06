@@ -1310,8 +1310,8 @@ avr-objcopy -I binary -O elf32-avr foo.bin foo.o
 
 This will create a file named <tt>foo.o</tt>, with the contents of
 <tt>foo.bin</tt>.  The contents will default to section .data, and two
-symbols will be created named \c _binary_foo_bin_start_ and \c
-_binary_foo_bin_end_. These symbols can be referred to inside a C
+symbols will be created named \c _binary_foo_bin_start and \c
+_binary_foo_bin_end. These symbols can be referred to inside a C
 source to access these data.
 
 If the goal is to have those data go to flash ROM (similar to having
