@@ -50,32 +50,32 @@
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
-#define FUSE_CKSEL0      ~_BV(0)
-#define FUSE_CKSEL1      ~_BV(1)
-#define FUSE_CKSEL2      ~_BV(2)
-#define FUSE_CKSEL3      ~_BV(3)
-#define FUSE_SUT0        ~_BV(4)
-#define FUSE_SUT1        ~_BV(5)
-#define FUSE_CKOUT       ~_BV(6)
-#define FUSE_CKDIV8      ~_BV(7)
+#define FUSE_CKSEL0      (unsigned char)~_BV(0)
+#define FUSE_CKSEL1      (unsigned char)~_BV(1)
+#define FUSE_CKSEL2      (unsigned char)~_BV(2)
+#define FUSE_CKSEL3      (unsigned char)~_BV(3)
+#define FUSE_SUT0        (unsigned char)~_BV(4)
+#define FUSE_SUT1        (unsigned char)~_BV(5)
+#define FUSE_CKOUT       (unsigned char)~_BV(6)
+#define FUSE_CKDIV8      (unsigned char)~_BV(7)
 #define LFUSE_DEFAULT (CKSEL0 & SUT1 & CKDIV8)
 
 /* High Fuse Byte */
-#define FUSE_BOOTRST     ~_BV(0)
-#define FUSE_BOOTSZ0     ~_BV(1)
-#define FUSE_BOOTSZ1     ~_BV(2)
-#define FUSE_EESAVE      ~_BV(3)
-#define FUSE_WDTON       ~_BV(4)
-#define FUSE_SPIEN       ~_BV(5)
-#define FUSE_RSTDSBL     ~_BV(6)
-#define FUSE_DWEN        ~_BV(7)
+#define FUSE_BOOTRST     (unsigned char)~_BV(0)
+#define FUSE_BOOTSZ0     (unsigned char)~_BV(1)
+#define FUSE_BOOTSZ1     (unsigned char)~_BV(2)
+#define FUSE_EESAVE      (unsigned char)~_BV(3)
+#define FUSE_WDTON       (unsigned char)~_BV(4)
+#define FUSE_SPIEN       (unsigned char)~_BV(5)
+#define FUSE_RSTDSBL     (unsigned char)~_BV(6)
+#define FUSE_DWEN        (unsigned char)~_BV(7)
 #define HFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1 & SPIEN)
 
 /* Extended Fuse Byte */
-#define FUSE_BODLEVEL0   ~_BV(0)
-#define FUSE_BODLEVEL1   ~_BV(1)
-#define FUSE_BODLEVEL2   ~_BV(2)
-#define FUSE_HWBE        ~_BV(3)
+#define FUSE_BODLEVEL0   (unsigned char)~_BV(0)
+#define FUSE_BODLEVEL1   (unsigned char)~_BV(1)
+#define FUSE_BODLEVEL2   (unsigned char)~_BV(2)
+#define FUSE_HWBE        (unsigned char)~_BV(3)
 #define EFUSE_DEFAULT (BODLEVEL0 & BODLEVEL1 & HWBE)
 
 

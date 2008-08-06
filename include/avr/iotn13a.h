@@ -354,22 +354,22 @@
 #define FUSE_MEMORY_SIZE 2
 
 /* Low Fuse Byte */
-#define FUSE_CKSEL0 ~_BV(0)  /* Select Clock Source */
-#define FUSE_CKSEL1 ~_BV(1)  /* Select Clock Source */
-#define FUSE_SUT0 ~_BV(2)  /* Select start-up time */
-#define FUSE_SUT1 ~_BV(3)  /* Select start-up time */
-#define FUSE_CKDIV8 ~_BV(4)  /* Start up with system clock divided by 8 */
-#define FUSE_WDTON ~_BV(5)  /* Watch dog timer always on */
-#define FUSE_EESAVE ~_BV(6)  /* Keep EEprom contents during chip erase */
-#define FUSE_SPIEN ~_BV(7)  /* SPI programming enable */
+#define FUSE_CKSEL0 (unsigned char)~_BV(0)  /* Select Clock Source */
+#define FUSE_CKSEL1 (unsigned char)~_BV(1)  /* Select Clock Source */
+#define FUSE_SUT0 (unsigned char)~_BV(2)  /* Select start-up time */
+#define FUSE_SUT1 (unsigned char)~_BV(3)  /* Select start-up time */
+#define FUSE_CKDIV8 (unsigned char)~_BV(4)  /* Start up with system clock divided by 8 */
+#define FUSE_WDTON (unsigned char)~_BV(5)  /* Watch dog timer always on */
+#define FUSE_EESAVE (unsigned char)~_BV(6)  /* Keep EEprom contents during chip erase */
+#define FUSE_SPIEN (unsigned char)~_BV(7)  /* SPI programming enable */
 #define LFUSE_DEFAULT (FUSE_SPIEN & FUSE_CKDIV8 & FUSE_SUT0 & FUSE_CKSEL0)
 
 /* High Fuse Byte */
-#define FUSE_RSTDISBL ~_BV(0)  /* Disable external reset */
-#define FUSE_BODLEVEL0 ~_BV(1)  /* Enable BOD and select level */
-#define FUSE_BODLEVEL1 ~_BV(2)  /* Enable BOD and select level */
-#define FUSE_DWEN ~_BV(3)  /* DebugWire Enable */
-#define FUSE_SELFPRGEN ~_BV(4)  /* Self Programming Enable */
+#define FUSE_RSTDISBL (unsigned char)~_BV(0)  /* Disable external reset */
+#define FUSE_BODLEVEL0 (unsigned char)~_BV(1)  /* Enable BOD and select level */
+#define FUSE_BODLEVEL1 (unsigned char)~_BV(2)  /* Enable BOD and select level */
+#define FUSE_DWEN (unsigned char)~_BV(3)  /* DebugWire Enable */
+#define FUSE_SELFPRGEN (unsigned char)~_BV(4)  /* Self Programming Enable */
 #define HFUSE_DEFAULT (0xFF)
 
 

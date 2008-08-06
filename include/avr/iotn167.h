@@ -790,29 +790,29 @@
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
-#define FUSE_CKSEL0 ~_BV(0)  /* Select Clock source */
-#define FUSE_CKSEL1 ~_BV(1)  /* Select Clock source */
-#define FUSE_CKSEL2 ~_BV(2)  /* Select Clock source */
-#define FUSE_CKSEL3 ~_BV(3)  /* Select Clock source */
-#define FUSE_SUT0   ~_BV(4)  /* Select start-up time */
-#define FUSE_SUT1   ~_BV(5)  /* Select start-up time */
-#define FUSE_CKOUT  ~_BV(6)  /* Clock Output Enable */
-#define FUSE_CKDIV8 ~_BV(7)  /* Divide clock by 8 */
+#define FUSE_CKSEL0 (unsigned char)~_BV(0)  /* Select Clock source */
+#define FUSE_CKSEL1 (unsigned char)~_BV(1)  /* Select Clock source */
+#define FUSE_CKSEL2 (unsigned char)~_BV(2)  /* Select Clock source */
+#define FUSE_CKSEL3 (unsigned char)~_BV(3)  /* Select Clock source */
+#define FUSE_SUT0   (unsigned char)~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1   (unsigned char)~_BV(5)  /* Select start-up time */
+#define FUSE_CKOUT  (unsigned char)~_BV(6)  /* Clock Output Enable */
+#define FUSE_CKDIV8 (unsigned char)~_BV(7)  /* Divide clock by 8 */
 #define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
-#define FUSE_BODLEVEL0 ~_BV(0)  /* Brown-out Detector trigger level */
-#define FUSE_BODLEVEL1 ~_BV(1)  /* Brown-out Detector trigger level */
-#define FUSE_BODLEVEL2 ~_BV(2)  /* Brown-out Detector trigger level */
-#define FUSE_EESAVE    ~_BV(3)  /* EEPROM memory is preserved through the Chip Erase */
-#define FUSE_WDTON     ~_BV(4)  /* Watchdog Timer always ON */
-#define FUSE_SPIEN     ~_BV(5)  /* Enable Serial Program and Data Downloading */
-#define FUSE_DWEN      ~_BV(6)  /* DebugWIRE Enable */
-#define FUSE_RSTDISBL  ~_BV(7)  /* External Reset disable */
+#define FUSE_BODLEVEL0 (unsigned char)~_BV(0)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL1 (unsigned char)~_BV(1)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL2 (unsigned char)~_BV(2)  /* Brown-out Detector trigger level */
+#define FUSE_EESAVE    (unsigned char)~_BV(3)  /* EEPROM memory is preserved through the Chip Erase */
+#define FUSE_WDTON     (unsigned char)~_BV(4)  /* Watchdog Timer always ON */
+#define FUSE_SPIEN     (unsigned char)~_BV(5)  /* Enable Serial Program and Data Downloading */
+#define FUSE_DWEN      (unsigned char)~_BV(6)  /* DebugWIRE Enable */
+#define FUSE_RSTDISBL  (unsigned char)~_BV(7)  /* External Reset disable */
 #define HFUSE_DEFAULT (FUSE_SPIEN)
 
 /* Extended Fuse Byte */
-#define FUSE_SELFPRGEN ~_BV(0)  /* Self-Programming Enable */
+#define FUSE_SELFPRGEN (unsigned char)~_BV(0)  /* Self-Programming Enable */
 #define EFUSE_DEFAULT (0xFF)
 
 

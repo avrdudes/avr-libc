@@ -186,8 +186,8 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Fuse Byte */
-#define FUSE_CKSEL       ~_BV(0)
-#define FUSE_SPIEN       ~_BV(5)
+#define FUSE_CKSEL       (unsigned char)~_BV(0)
+#define FUSE_SPIEN       (unsigned char)~_BV(5)
 #define FUSE_DEFAULT (FUSE_SPIEN)
 
 

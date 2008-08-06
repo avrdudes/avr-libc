@@ -466,8 +466,8 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Low Fuse Byte */
-#define FUSE_SPIEN ~_BV(1)  /* Serial Program Downloading Enabled */
-#define FUSE_FSTRT ~_BV(2)  /* Short Start-up time selected */
+#define FUSE_SPIEN (unsigned char)~_BV(1)  /* Serial Program Downloading Enabled */
+#define FUSE_FSTRT (unsigned char)~_BV(2)  /* Short Start-up time selected */
 #define LFUSE_DEFAULT (0xFF)
 
 

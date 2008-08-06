@@ -190,8 +190,8 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Low Fuse Byte */
-#define FUSE_RCEN ~_BV(0)
-#define FUSE_SPIEN ~_BV(5)
+#define FUSE_RCEN (unsigned char)~_BV(0)
+#define FUSE_SPIEN (unsigned char)~_BV(5)
 #define LFUSE_DEFAULT (0xFF)
 
 

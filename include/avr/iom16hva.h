@@ -50,14 +50,14 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Low Fuse Byte */
-#define FUSE_SUT0        ~_BV(0)
-#define FUSE_SUT1        ~_BV(1)
-#define FUSE_SUT2        ~_BV(2)
-#define FUSE_SELFPRGEN   ~_BV(3)
-#define FUSE_DWEN        ~_BV(4)
-#define FUSE_SPIEN       ~_BV(5)
-#define FUSE_EESAVE      ~_BV(6)
-#define FUSE_WDTON       ~_BV(7)
+#define FUSE_SUT0        (unsigned char)~_BV(0)
+#define FUSE_SUT1        (unsigned char)~_BV(1)
+#define FUSE_SUT2        (unsigned char)~_BV(2)
+#define FUSE_SELFPRGEN   (unsigned char)~_BV(3)
+#define FUSE_DWEN        (unsigned char)~_BV(4)
+#define FUSE_SPIEN       (unsigned char)~_BV(5)
+#define FUSE_EESAVE      (unsigned char)~_BV(6)
+#define FUSE_WDTON       (unsigned char)~_BV(7)
 #define FUSE_DEFAULT (FUSE_SPIEN)
 
 

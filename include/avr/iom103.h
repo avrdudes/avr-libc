@@ -650,14 +650,14 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Low Fuse Byte */
-#define FUSE_CKSEL0 ~_BV(0)  /* Select Clock Source */
-#define FUSE_CKSEL1 ~_BV(1)  /* Select Clock Source */
-#define FUSE_CKSEL2 ~_BV(2)  /* Select Clock Source */
-#define FUSE_CKSEL3 ~_BV(3)  /* Select Clock Source */
-#define FUSE_SUT0 ~_BV(4)  /* Select start-up time */
-#define FUSE_SUT1 ~_BV(5)  /* Select start-up time */
-#define FUSE_BODEN ~_BV(6)  /* Brown out detector enable */
-#define FUSE_BODLEVEL ~_BV(7)  /* Brown out detector trigger level */
+#define FUSE_CKSEL0 (unsigned char)~_BV(0)  /* Select Clock Source */
+#define FUSE_CKSEL1 (unsigned char)~_BV(1)  /* Select Clock Source */
+#define FUSE_CKSEL2 (unsigned char)~_BV(2)  /* Select Clock Source */
+#define FUSE_CKSEL3 (unsigned char)~_BV(3)  /* Select Clock Source */
+#define FUSE_SUT0 (unsigned char)~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1 (unsigned char)~_BV(5)  /* Select start-up time */
+#define FUSE_BODEN (unsigned char)~_BV(6)  /* Brown out detector enable */
+#define FUSE_BODLEVEL (unsigned char)~_BV(7)  /* Brown out detector trigger level */
 #define LFUSE_DEFAULT (FUSE_SUT1 & FUSE_SUT0 & FUSE_CKSEL3 & FUSE_CKSEL2 & FUSE_CKSEL1)
 
 
