@@ -648,12 +648,12 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Fuse Byte */
-#define FUSE_CKSEL0      ~_BV(0)
-#define FUSE_CKSEL1      ~_BV(1)
-#define FUSE_CKSEL2      ~_BV(2)
-#define FUSE_SUT         ~_BV(4)
-#define FUSE_SPIEN       ~_BV(5)
-#define FUSE_BOOTRST     ~_BV(6)
+#define FUSE_CKSEL0      (unsigned char)~_BV(0)
+#define FUSE_CKSEL1      (unsigned char)~_BV(1)
+#define FUSE_CKSEL2      (unsigned char)~_BV(2)
+#define FUSE_SUT         (unsigned char)~_BV(4)
+#define FUSE_SPIEN       (unsigned char)~_BV(5)
+#define FUSE_BOOTRST     (unsigned char)~_BV(6)
 #define FUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_SPIEN)
 
 

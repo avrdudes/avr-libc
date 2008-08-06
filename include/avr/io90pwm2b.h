@@ -1333,37 +1333,37 @@
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
-#define FUSE_CKSEL0  ~_BV(0)  /* Select Clock Source */
-#define FUSE_CKSEL1  ~_BV(1)  /* Select Clock Source */
-#define FUSE_CKSEL2  ~_BV(2)  /* Select Clock Source */
-#define FUSE_CKSEL3  ~_BV(3)  /* Select Clock Source */
-#define FUSE_SUT0    ~_BV(4)  /* Select start-up time */
-#define FUSE_SUT1    ~_BV(5)  /* Select start-up time */
-#define FUSE_CKOUT   ~_BV(6)  /* Oscillator output option */
-#define FUSE_CKDIV8  ~_BV(7)  /* Divide clock by 8 */
+#define FUSE_CKSEL0  (unsigned char)~_BV(0)  /* Select Clock Source */
+#define FUSE_CKSEL1  (unsigned char)~_BV(1)  /* Select Clock Source */
+#define FUSE_CKSEL2  (unsigned char)~_BV(2)  /* Select Clock Source */
+#define FUSE_CKSEL3  (unsigned char)~_BV(3)  /* Select Clock Source */
+#define FUSE_SUT0    (unsigned char)~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1    (unsigned char)~_BV(5)  /* Select start-up time */
+#define FUSE_CKOUT   (unsigned char)~_BV(6)  /* Oscillator output option */
+#define FUSE_CKDIV8  (unsigned char)~_BV(7)  /* Divide clock by 8 */
 #define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 
 /* High Fuse Byte */
-#define FUSE_BODLEVEL0 ~_BV(0)  /* Brown-out Detector trigger level */
-#define FUSE_BODLEVEL1 ~_BV(1)  /* Brown-out Detector trigger level */
-#define FUSE_BODLEVEL2 ~_BV(2)  /* Brown out detector trigger level */
-#define FUSE_EESAVE    ~_BV(3)  /* EEPROM memory is preserved through chip erase */
-#define FUSE_WDTON     ~_BV(4)  /* Watchdog timer always on */
-#define FUSE_SPIEN     ~_BV(5)  /* Enable Serial programming and Data Downloading */
-#define FUSE_DWEN      ~_BV(6)  /* debugWIRE Enable */
-#define FUSE_RSTDISBL  ~_BV(7)  /* External Reset Disable */
+#define FUSE_BODLEVEL0 (unsigned char)~_BV(0)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL1 (unsigned char)~_BV(1)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL2 (unsigned char)~_BV(2)  /* Brown out detector trigger level */
+#define FUSE_EESAVE    (unsigned char)~_BV(3)  /* EEPROM memory is preserved through chip erase */
+#define FUSE_WDTON     (unsigned char)~_BV(4)  /* Watchdog timer always on */
+#define FUSE_SPIEN     (unsigned char)~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define FUSE_DWEN      (unsigned char)~_BV(6)  /* debugWIRE Enable */
+#define FUSE_RSTDISBL  (unsigned char)~_BV(7)  /* External Reset Disable */
 #define HFUSE_DEFAULT (FUSE_SPIEN)    
 
 
 /* Extended Fuse Byte */
-#define FUSE_BOOTRST ~_BV(0)  /* Select Reset Vector */
-#define FUSE_BOOTSZ0 ~_BV(1)  /* Select Boot Size */
-#define FUSE_BOOTSZ1 ~_BV(2)  /* Select Boot Size */
-#define FUSE_PSCRV   ~_BV(4)  /* PSCOUT Reset Value */
-#define FUSE_PSC0RB  ~_BV(5)  /* PSC0 Reset Behaviour */
-#define FUSE_PSC1RB  ~_BV(6)  /* PSC1 Reset Behaviour */
-#define FUSE_PSC2RB  ~_BV(7)  /* PSC2 Reset Behaviour */
+#define FUSE_BOOTRST (unsigned char)~_BV(0)  /* Select Reset Vector */
+#define FUSE_BOOTSZ0 (unsigned char)~_BV(1)  /* Select Boot Size */
+#define FUSE_BOOTSZ1 (unsigned char)~_BV(2)  /* Select Boot Size */
+#define FUSE_PSCRV   (unsigned char)~_BV(4)  /* PSCOUT Reset Value */
+#define FUSE_PSC0RB  (unsigned char)~_BV(5)  /* PSC0 Reset Behaviour */
+#define FUSE_PSC1RB  (unsigned char)~_BV(6)  /* PSC1 Reset Behaviour */
+#define FUSE_PSC2RB  (unsigned char)~_BV(7)  /* PSC2 Reset Behaviour */
 #define EFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_BOOTSZ1)
 
 

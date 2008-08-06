@@ -858,22 +858,22 @@
 #define FUSE_MEMORY_SIZE 2
 
 /* Low Fuse Byte */
-#define FUSE_WDTON   ~_BV(7)  /* Watchdog Timer Always On */
-#define FUSE_EESAVE  ~_BV(6)  /* EEPROM memory is preserved through chip erase */
-#define FUSE_SPIEN   ~_BV(5)  /* Enable Serial programming and Data Downloading */
-#define FUSE_SUT2    ~_BV(4)  /* Select start-up time */
-#define FUSE_SUT1    ~_BV(3)  /* Select start-up time */
-#define FUSE_SUT0    ~_BV(2)  /* Select start-up time */
-#define FUSE_OSCSEL1 ~_BV(1)  /* Oscillator Select */
-#define FUSE_OSCSEL0 ~_BV(0)  /* Oscillator Select */
+#define FUSE_WDTON   (unsigned char)~_BV(7)  /* Watchdog Timer Always On */
+#define FUSE_EESAVE  (unsigned char)~_BV(6)  /* EEPROM memory is preserved through chip erase */
+#define FUSE_SPIEN   (unsigned char)~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define FUSE_SUT2    (unsigned char)~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1    (unsigned char)~_BV(3)  /* Select start-up time */
+#define FUSE_SUT0    (unsigned char)~_BV(2)  /* Select start-up time */
+#define FUSE_OSCSEL1 (unsigned char)~_BV(1)  /* Oscillator Select */
+#define FUSE_OSCSEL0 (unsigned char)~_BV(0)  /* Oscillator Select */
 #define LFUSE_DEFAULT (FUSE_OSCSEL0 & FUSE_SPIEN)
 
 /* High Fuse Byte */
-#define FUSE_BOOTRST   ~_BV(0)  /* Select Reset Vector */
-#define FUSE_BOOTSZ0   ~_BV(1)  /* Select Boot Size */
-#define FUSE_BOOTSZ1   ~_BV(2)  /* Select Boot Size */
-#define FUSE_DWEN      ~_BV(3)  /* Enable debugWire */
-#define FUSE_DUVRDINIT ~_BV(4)  /* Reset Value of DUVRDRegister */
+#define FUSE_BOOTRST   (unsigned char)~_BV(0)  /* Select Reset Vector */
+#define FUSE_BOOTSZ0   (unsigned char)~_BV(1)  /* Select Boot Size */
+#define FUSE_BOOTSZ1   (unsigned char)~_BV(2)  /* Select Boot Size */
+#define FUSE_DWEN      (unsigned char)~_BV(3)  /* Enable debugWire */
+#define FUSE_DUVRDINIT (unsigned char)~_BV(4)  /* Reset Value of DUVRDRegister */
 #define HFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_DUVRDINIT)
 
 

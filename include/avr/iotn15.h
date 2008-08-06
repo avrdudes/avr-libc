@@ -310,12 +310,12 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Fuse Byte */
-#define FUSE_CKSEL0      ~_BV(0)
-#define FUSE_CKSEL1      ~_BV(1)
-#define FUSE_RSTDISBL    ~_BV(4)
-#define FUSE_SPIEN       ~_BV(5)
-#define FUSE_BODEN       ~_BV(6)
-#define FUSE_BODLEVEL    ~_BV(7)
+#define FUSE_CKSEL0      (unsigned char)~_BV(0)
+#define FUSE_CKSEL1      (unsigned char)~_BV(1)
+#define FUSE_RSTDISBL    (unsigned char)~_BV(4)
+#define FUSE_SPIEN       (unsigned char)~_BV(5)
+#define FUSE_BODEN       (unsigned char)~_BV(6)
+#define FUSE_BODLEVEL    (unsigned char)~_BV(7)
 #define FUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL1 & FUSE_SPIEN)
 
 

@@ -7434,51 +7434,51 @@ typedef enum AES_INTLVL_enum
 #define FUSE_MEMORY_SIZE 6
 
 /* Fuse Byte 0 */
-#define FUSE_USERID0 ~_BV(0)
-#define FUSE_USERID1 ~_BV(1)
-#define FUSE_USERID2 ~_BV(2)
-#define FUSE_USERID3 ~_BV(3)
-#define FUSE_USERID4 ~_BV(4)
-#define FUSE_USERID5 ~_BV(5)
-#define FUSE_USERID6 ~_BV(6)
-#define FUSE_USERID7 ~_BV(7)
+#define FUSE_USERID0 (unsigned char)~_BV(0)
+#define FUSE_USERID1 (unsigned char)~_BV(1)
+#define FUSE_USERID2 (unsigned char)~_BV(2)
+#define FUSE_USERID3 (unsigned char)~_BV(3)
+#define FUSE_USERID4 (unsigned char)~_BV(4)
+#define FUSE_USERID5 (unsigned char)~_BV(5)
+#define FUSE_USERID6 (unsigned char)~_BV(6)
+#define FUSE_USERID7 (unsigned char)~_BV(7)
 #define FUSE0_DEFAULT (0x00)
 
 /* Fuse Byte 1 */
-#define FUSE_WDPER0  ~_BV(0)
-#define FUSE_WDPER1  ~_BV(1)
-#define FUSE_WDPER2  ~_BV(2)
-#define FUSE_WDPER3  ~_BV(3)
-#define FUSE_WDWPER0 ~_BV(4)
-#define FUSE_WDWPER1 ~_BV(5)
-#define FUSE_WDWPER2 ~_BV(6)
-#define FUSE_WDWPER3 ~_BV(7)
+#define FUSE_WDPER0  (unsigned char)~_BV(0)
+#define FUSE_WDPER1  (unsigned char)~_BV(1)
+#define FUSE_WDPER2  (unsigned char)~_BV(2)
+#define FUSE_WDPER3  (unsigned char)~_BV(3)
+#define FUSE_WDWPER0 (unsigned char)~_BV(4)
+#define FUSE_WDWPER1 (unsigned char)~_BV(5)
+#define FUSE_WDWPER2 (unsigned char)~_BV(6)
+#define FUSE_WDWPER3 (unsigned char)~_BV(7)
 #define FUSE1_DEFAULT (0x00)
 
 /* Fuse Byte 2 */
-#define FUSE_BODPD0  ~_BV(0)
-#define FUSE_BODPD1  ~_BV(1)
-#define FUSE_BODACT0 ~_BV(3)
-#define FUSE_BODACT1 ~_BV(4)
-#define FUSE_BOOTRST ~_BV(6)
-#define FUSE_DVSDON  ~_BV(7)
+#define FUSE_BODPD0  (unsigned char)~_BV(0)
+#define FUSE_BODPD1  (unsigned char)~_BV(1)
+#define FUSE_BODACT0 (unsigned char)~_BV(3)
+#define FUSE_BODACT1 (unsigned char)~_BV(4)
+#define FUSE_BOOTRST (unsigned char)~_BV(6)
+#define FUSE_DVSDON  (unsigned char)~_BV(7)
 #define FUSE2_DEFAULT (0x00)
 
 /* Fuse Byte 3 Reserved */
 
 /* Fuse Byte 4 */
-#define FUSE_JTAGEN   ~_BV(0)
-#define FUSE_WDLOCK   ~_BV(1)
-#define FUSE_SUT0     ~_BV(2)
-#define FUSE_SUT1     ~_BV(3)
-#define FUSE_RSTDISBL ~_BV(4)
+#define FUSE_JTAGEN   (unsigned char)~_BV(0)
+#define FUSE_WDLOCK   (unsigned char)~_BV(1)
+#define FUSE_SUT0     (unsigned char)~_BV(2)
+#define FUSE_SUT1     (unsigned char)~_BV(3)
+#define FUSE_RSTDISBL (unsigned char)~_BV(4)
 #define FUSE4_DEFAULT (0x00)
 
 /* Fuse Byte 5 */
-#define FUSE_BOD0   ~_BV(0)
-#define FUSE_BOD1   ~_BV(1)
-#define FUSE_BOD2   ~_BV(2)
-#define FUSE_EESAVE ~_BV(3)
+#define FUSE_BOD0   (unsigned char)~_BV(0)
+#define FUSE_BOD1   (unsigned char)~_BV(1)
+#define FUSE_BOD2   (unsigned char)~_BV(2)
+#define FUSE_EESAVE (unsigned char)~_BV(3)
 #define FUSE5_DEFAULT (0x00)
 
 

@@ -736,19 +736,19 @@
 #define FUSE_MEMORY_SIZE 2
 
 /* Low Fuse Byte */
-#define FUSE_CKSEL   ~_BV(0)
-#define FUSE_SUT0    ~_BV(1)
-#define FUSE_SUT1    ~_BV(2)
-#define FUSE_BOOTRST ~_BV(3)
-#define FUSE_BOOTSZ0 ~_BV(4)
-#define FUSE_BOOTSZ1 ~_BV(5)
-#define FUSE_EESAVE  ~_BV(6)
-#define FUSE_WDTON   ~_BV(7)
+#define FUSE_CKSEL   (unsigned char)~_BV(0)
+#define FUSE_SUT0    (unsigned char)~_BV(1)
+#define FUSE_SUT1    (unsigned char)~_BV(2)
+#define FUSE_BOOTRST (unsigned char)~_BV(3)
+#define FUSE_BOOTSZ0 (unsigned char)~_BV(4)
+#define FUSE_BOOTSZ1 (unsigned char)~_BV(5)
+#define FUSE_EESAVE  (unsigned char)~_BV(6)
+#define FUSE_WDTON   (unsigned char)~_BV(7)
 #define LFUSE_DEFAULT (FUSE_SUT0 & FUSE_BOOTSZ0 & FUSE_BOOTSZ1)
 
 /* High Fuse Byte */
-#define FUSE_JTAGEN      ~_BV(0)
-#define FUSE_OCDEN       ~_BV(1)
+#define FUSE_JTAGEN      (unsigned char)~_BV(0)
+#define FUSE_OCDEN       (unsigned char)~_BV(1)
 #define HFUSE_DEFAULT (FUSE_JTAGEN)
 
 
