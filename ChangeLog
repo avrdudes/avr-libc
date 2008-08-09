@@ -1,3 +1,10 @@
+2008-08-09  Anatoly Sokolov  <aesok@post.ru>
+
+	* devtools/gen-avr-lib-tree.sh (AVR31_DEV_INFO): Add the at43usb320
+	device.
+	* doc/api/using-tools.dox: Move the AT43USB320 device to avr31
+	architecture.
+
 2008-08-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #23774.
