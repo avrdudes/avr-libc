@@ -1,3 +1,8 @@
+2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iomxx4.h: Remove definitions that were causing
+	duplicate definitions in portpins.h.
+
 2008-08-09  Anatoly Sokolov  <aesok@post.ru>
 
 	* devtools/gen-avr-lib-tree.sh (AVR31_DEV_INFO): Add the at43usb320
