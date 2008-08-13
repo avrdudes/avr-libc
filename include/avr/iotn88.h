@@ -707,17 +707,17 @@
 #define _VECTORS_SIZE 40
 
 
-/* Memory Sizes */
-#define RAMEND                0x1FF
-#define XRAMSIZE              0
-#define XRAMEND               (RAMEND + XRAMSIZE)
-#define E2END                 0x3F
-#define FLASHEND              0x1FFF
-#define SPM_PAGESIZE          32
+/* Constants */
+#define RAMEND       0x1FF
+#define XRAMSIZE     0
+#define XRAMEND      (RAMEND + XRAMSIZE)
+#define E2END        0x3F
+#define E2PAGESIZE   4
+#define FLASHEND     0x1FFF
+#define SPM_PAGESIZE 32
 
 
 /* Fuse Information */
-
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
@@ -730,7 +730,6 @@
 #define FUSE_CKOUT  (unsigned char)~_BV(6) /* Clock output */
 #define FUSE_CKDIV8 (unsigned char)~_BV(7) /* Divide clock by 8 */
 #define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
-
 
 /* High Fuse Byte */
 #define FUSE_BODLEVEL0   (unsigned char)~_BV(0) /* Brown-out Detector trigger level */
@@ -746,7 +745,6 @@
 /* Extended Fuse Byte */
 #define FUSE_SELFPRGEN   ~_BV(0) /* Self Programming Enable */
 #define EFUSE_DEFAULT (0xFF)
-
 
 
 /* Lock Bits */

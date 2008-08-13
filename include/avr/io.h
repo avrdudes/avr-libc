@@ -67,26 +67,31 @@
 
     - \b RAMEND
     <br>
-    A constant describing the last on-chip RAM location.
+    The last on-chip RAM address.
     <br>
     - \b XRAMEND
     <br>
-    A constant describing the last possible location in RAM.
-    This is equal to RAMEND for devices that do not allow for
-    external RAM.
+    The last possible RAM location that is addressable. This is equal to 
+    RAMEND for devices that do not allow for external RAM. For devices 
+    that allow external RAM, this will larger than RAMEND.
     <br>
     - \b E2END
     <br>
-    A constant describing the address of the last EEPROM cell.
+    The last EEPROM address.
     <br>
     - \b FLASHEND
     <br>
-    A constant describing the last byte address in flash ROM.
+    The last byte address in the Flash program space.
     <br>
     - \b SPM_PAGESIZE
     <br>
     For devices with bootloader support, the flash pagesize
-    (in bytes) to be used for the \c SPM instruction. */
+    (in bytes) to be used for the \c SPM instruction. 
+    - \b E2PAGESIZE
+    <br>
+    The size of the EEPROM page.
+    
+*/
 
 #ifndef _AVR_IO_H_
 #define _AVR_IO_H_

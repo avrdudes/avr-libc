@@ -898,6 +898,7 @@
 #define RAMEND		0x4FF
 #define XRAMEND		0xFFFF
 #define E2END		0x1FF
+#define E2PAGESIZE  4
 #define FLASHEND	0x3FFF
 
 

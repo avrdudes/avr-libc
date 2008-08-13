@@ -1323,6 +1323,7 @@
 #define XRAMSIZE       0
 #define XRAMEND        (RAMEND + XRAMSIZE)
 #define E2END          0x1FF
+#define E2PAGESIZE     4
 #define FLASHEND       0x1FFF
 #define SPM_PAGESIZE   32
 

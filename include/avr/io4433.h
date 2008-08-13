@@ -440,10 +440,11 @@
 #define    EERE      0
 
 /* Constants */
-#define    RAMEND   0xDF    /*Last On-Chip SRAM location*/
-#define    XRAMEND  0xDF
-#define    E2END    0xFF
-#define    FLASHEND 0xFFF
+#define RAMEND     0xDF    /*Last On-Chip SRAM location*/
+#define XRAMEND    0xDF
+#define E2END      0xFF
+#define E2PAGESIZE 0
+#define FLASHEND   0xFFF
 
 
 /* Fuses */

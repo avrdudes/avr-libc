@@ -38,15 +38,15 @@
 #include <avr/iousbxx6_7.h>
 
 /* Constants */
-#define SPM_PAGESIZE    256
-#define RAMEND          0x10FF
-#define XRAMEND         0xFFFF
-#define E2END           0x7FF
-#define FLASHEND        0xFFFF
+#define SPM_PAGESIZE 256
+#define RAMEND       0x10FF
+#define XRAMEND      0xFFFF
+#define E2END        0x7FF
+#define E2PAGESIZE   8
+#define FLASHEND     0xFFFF
 
 
 /* Fuses */
-
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */

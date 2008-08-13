@@ -665,11 +665,12 @@
 #define    EERE         0
 
 /* Constants */
-#define    SPM_PAGESIZE 64
-#define    RAMEND       0x25F    /* Last On-Chip SRAM Location */
-#define    XRAMEND	0x25F
-#define    E2END        0x1FF
-#define    FLASHEND     0x1FFF
+#define SPM_PAGESIZE 64
+#define RAMEND       0x25F    /* Last On-Chip SRAM Location */
+#define XRAMEND      0x25F
+#define E2END        0x1FF
+#define E2PAGESIZE   4
+#define FLASHEND     0x1FFF
 
 
 /* Fuses */

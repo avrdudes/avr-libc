@@ -42,6 +42,7 @@
 #define RAMEND          0x21FF
 #define XRAMEND         0xFFFF
 #define E2END           0xFFF
+#define E2PAGESIZE      8
 #define FLASHEND        0x3FFFF
 
 

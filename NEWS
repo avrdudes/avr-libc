@@ -32,6 +32,7 @@
   [#22016] Typo in iotn2313.h: SIG_OUTPUT_COPMARE0A
   [#22119] Misleading statement in FAQ
   [#22153] setjmp.o is wrong in libc.a (1.6.1) for avr's with SPH
+  [#22240] Add EEPROM Page Size to header files
   [#22276] wdt_reset fails with devices with large WDTCSR addresses
   [#22377] Wrong XRAMEND for some recent ioXXX.h header files.
   [#22387] Missing EIMSK and __EEPROM_REG_LOCATIONS__ in iom168p.h

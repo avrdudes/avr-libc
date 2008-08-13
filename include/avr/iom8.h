@@ -565,10 +565,11 @@
 
 /* Constants */
 #define SPM_PAGESIZE 64
-#define RAMEND		0x45F
-#define XRAMEND		0x45F
-#define E2END		0x1FF
-#define FLASHEND	0x1FFF
+#define RAMEND		 0x45F
+#define XRAMEND		 0x45F
+#define E2END		 0x1FF
+#define E2PAGESIZE   4
+#define FLASHEND	 0x1FFF
 
 
 /* Fuses */
