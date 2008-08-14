@@ -817,6 +817,7 @@
 #define XRAMSIZE     0
 #define XRAMEND      (RAMEND + XRAMSIZE)
 #define E2END        0xFF
+#define E2PAGESIZE   4
 #define FLASHEND     0xFFF
 
 

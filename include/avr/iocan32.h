@@ -38,11 +38,12 @@
 #include <avr/iocanxx.h>
 
 /* Constants */
-#define    SPM_PAGESIZE 256
-#define    RAMEND   0x08FF     /* Last On-Chip SRAM Location */
-#define    XRAMEND  0xFFFF
-#define    E2END    0x03FF
-#define    FLASHEND 0x7FFF
+#define SPM_PAGESIZE 256
+#define RAMEND       0x08FF     /* Last On-Chip SRAM Location */
+#define XRAMEND      0xFFFF
+#define E2END        0x03FF
+#define E2PAGESIZE   8
+#define FLASHEND     0x7FFF
 
 
 /* Fuses */

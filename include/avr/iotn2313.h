@@ -581,16 +581,16 @@
 /* 38 = (18*2)+2: Number of vectors times two, plus the reset vector */
 #define _VECTORS_SIZE     38
 
-/* Constants: */
-#define RAMEND    0xDF
-#define XRAMEND   0xDF
-#define E2END     0x7F
-#define FLASHEND  0x07FF
-#define SPM_PAGESIZE    32
+/* Constants */
+#define SPM_PAGESIZE 32
+#define RAMEND       0xDF
+#define XRAMEND      0xDF
+#define E2END        0x7F
+#define E2PAGESIZE   4
+#define FLASHEND     0x07FF
 
 
 /* Fuses */
-
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */

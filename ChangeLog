@@ -1,3 +1,98 @@
+2008-09-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22240.
+    * include/avr/io.h: Add E2PAGESIZE constant to documentation. Clean
+	up phrasing in documentation.
+	* include/avr/io1200.h (E2PAGESIZE): Defined.
+	* include/avr/io2313.h: Same.
+	* include/avr/io2323.h: Same.
+    * include/avr/io2343.h: Same.
+    * include/avr/io4414.h: Same.
+    * include/avr/io4433.h: Same.
+    * include/avr/io4434.h: Same.
+    * include/avr/io8515.h: Same.
+    * include/avr/io8535.h: Same.
+    * include/avr/io86r401.h: Same.
+    * include/avr/io90pwm216.h: Same.
+    * include/avr/io90pwm2b.h: Same.
+    * include/avr/io90pwm316.h: Same.
+    * include/avr/io90pwm3b.h: Same.
+    * include/avr/io90pwmx.h: Same.
+    * include/avr/iocan128.h: Same.
+    * include/avr/iocan32.h: Same.
+    * include/avr/iocan64.h: Same.
+    * include/avr/iom103.h: Same.
+    * include/avr/iom128.h: Same.
+    * include/avr/iom1280.h: Same.
+    * include/avr/iom1281.h: Same.
+    * include/avr/iom1284p.h: Same.
+    * include/avr/iom16.h: Same.
+    * include/avr/iom161.h: Same.
+    * include/avr/iom162.h: Same.
+    * include/avr/iom163.h: Same.
+    * include/avr/iom164.h: Same.
+    * include/avr/iom165.h: Same.
+    * include/avr/iom165p.h: Same.
+    * include/avr/iom168.h: Same.
+    * include/avr/iom168p.h: Same.
+    * include/avr/iom169.h: Same.
+    * include/avr/iom169p.h: Same.
+    * include/avr/iom16hva.h: Same.
+    * include/avr/iom2560.h: Same.
+    * include/avr/iom2561.h: Same.
+    * include/avr/iom32.h: Same.
+    * include/avr/iom323.h: Same.
+    * include/avr/iom324.h: Same.
+    * include/avr/iom325.h: Same.
+    * include/avr/iom3250.h: Same.
+    * include/avr/iom328p.h: Same.
+    * include/avr/iom329.h: Same.
+    * include/avr/iom3290.h: Same.
+    * include/avr/iom32c1.h: Same.
+    * include/avr/iom32m1.h: Same.
+    * include/avr/iom406.h: Same.
+    * include/avr/iom48.h: Same.
+    * include/avr/iom48p.h: Same.
+    * include/avr/iom64.h: Same.
+    * include/avr/iom640.h: Same.
+    * include/avr/iom644.h: Same.
+    * include/avr/iom645.h: Same.
+    * include/avr/iom6450.h: Same.
+    * include/avr/iom649.h: Same.
+    * include/avr/iom6490.h: Same.
+    * include/avr/iom8.h: Same.
+    * include/avr/iom8515.h: Same.
+    * include/avr/iom8535.h: Same.
+    * include/avr/iom88.h: Same.
+    * include/avr/iom88p.h: Same.
+    * include/avr/iom8hva.h: Same.
+    * include/avr/iotn11.h: Same.
+    * include/avr/iotn12.h: Same.
+    * include/avr/iotn13.h: Same.
+    * include/avr/iotn15.h: Same.
+    * include/avr/iotn22.h: Same.
+    * include/avr/iotn2313.h: Same.
+    * include/avr/iotn24.h: Same.
+    * include/avr/iotn25.h: Same.
+    * include/avr/iotn26.h: Same.
+    * include/avr/iotn261.h: Same.
+    * include/avr/iotn28.h: Same.
+    * include/avr/iotn43u.h: Same.
+    * include/avr/iotn44.h: Same.
+    * include/avr/iotn45.h: Same.
+    * include/avr/iotn461.h: Same.
+    * include/avr/iotn48.h: Same.
+    * include/avr/iotn84.h: Same.
+    * include/avr/iotn85.h: Same.
+    * include/avr/iotn861.h: Same.
+    * include/avr/iotn88.h: Same.
+    * include/avr/iousb1286.h: Same.
+    * include/avr/iousb1287.h: Same.
+    * include/avr/iousb162.h: Same.
+    * include/avr/iousb646.h: Same.
+    * include/avr/iousb647.h: Same.
+    * include/avr/iousb82.h: Same.
+
 2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iomxx4.h: Remove definitions that were causing

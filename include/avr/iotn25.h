@@ -37,11 +37,12 @@
 
 #include <avr/iotnx5.h>
 
-#define RAMEND                0xDF
-#define XRAMEND               0xDF
-#define E2END                 0x7F
-#define FLASHEND              0x7FF
-#define SPM_PAGESIZE          32
+#define SPM_PAGESIZE 32
+#define RAMEND       0xDF
+#define XRAMEND      0xDF
+#define E2END        0x7F
+#define E2PAGESIZE   4
+#define FLASHEND     0x7FF
 
 
 /* Fuses */

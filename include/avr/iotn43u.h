@@ -523,16 +523,16 @@
 #define _VECTORS_SIZE 32
 
 
-/* Memory Sizes */
+/* Constants */
+#define SPM_PAGESIZE   64
 #define RAMEND         0x15F
 #define XRAMEND        0x00
 #define E2END          0x3F
+#define E2PAGESIZE     4
 #define FLASHEND       0xFFF
-#define SPM_PAGESIZE   64
 
 
 /* Fuse Information */
-
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
