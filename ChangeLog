@@ -1,5 +1,10 @@
 2008-09-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/sleep.h: Add support for ATmega3290P.
+	* include/avr/wdt.h: Same.
+
+2008-09-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #22240.
     * include/avr/io.h: Add E2PAGESIZE constant to documentation. Clean
 	up phrasing in documentation.
