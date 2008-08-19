@@ -1,3 +1,9 @@
+2008-09-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23969.
+	* include/avr/eeprom.h: Change part of the EEPROM read routine
+	to inline assembly to avoid problems with certain AVR parts.
+
 2008-09-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/sleep.h: Add support for ATmega3290P.
