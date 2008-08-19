@@ -109,6 +109,10 @@
    strtod
    setjmp
 
+* Contributed Patches:
+
+  [#6500] Reentrant code faq
+
 * New functions:
 
    eeprom_read_dword

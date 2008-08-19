@@ -62,6 +62,7 @@
 -# \ref faq_binarydata
 -# \ref faq_softreset
 -# \ref faq_math
+-# \ref faq_reentrant
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1405,6 +1406,144 @@ routines get replaced by hand-optimized AVR assembly and it produces much
 smaller code.
 
 See \ref faq_libm for more details on how to link in the math library.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_reentrant What pitfalls exist when writing reentrant code?
+
+Reentrant code means the ability for a piece of code to be
+called simultaneously from two or more threads.  Attention
+to re-enterability is needed when using a multi-tasking
+operating system, or when using interrupts since an
+interrupt is really a temporary thread.
+
+The code generated natively by gcc is reentrant.  But, only
+some of the libraries in avr-libc are explicitly reentrant,
+and some are known not to be reentrant.  In general, any
+library call that reads and writes global variables
+(including I/O registers) is not reentrant.
+This is because more than one thread could read or write the
+same storage at the same time, unaware that other threads
+are doing the same, and create inconsistent and/or erroneous
+results.
+
+A library call that is known not to be reentrant will work
+if it is used only within one thread <em>and</em> no other
+thread makes use of a library call that shares common
+storage with it.
+
+Below is a table of library calls with known issues.
+
+<table>
+ <tr>
+  <td><strong>Library call</strong></td>
+  <td><strong>Reentrant Issue</strong></td>
+  <td><strong>Workaround/Alternative</strong></td>
+ </tr>
+ <tr>
+  <td>rand(), random()</td>
+  <td>Uses global variables to keep state information.</td>
+  <td>Use special reentrant versions: rand_r(), random_r().</td>
+ </tr>
+ <tr>
+  <td>strtod(), strtol(), strtoul()</td>
+  <td>Uses the global variable \c errno to return success/failure.</td>
+  <td>Ignore \c errno, or protect calls with cli()/sei() or ATOMIC_BLOCK()
+      if the application can tolerate it.  Or use sccanf() or sccanf_P()
+      if possible.
+  </td>
+ </tr>
+ <tr>
+  <td>malloc(), realloc(), calloc(), free()</td>
+  <td>Uses the stack pointer and global variables to allocate and
+      free memory.</td>
+  <td>Protect calls with cli()/sei() or ATOMIC_BLOCK() if the application
+      can tolerate it.  If using an OS,
+      use the OS provided memory allocator since the OS is likely modifying
+      the stack pointer anyway.
+  </td>
+ </tr>
+ <tr>
+  <td>fdevopen(), fclose()</td>
+  <td>Uses calloc() and free().</td>
+  <td>Protect calls with cli()/sei() or ATOMIC_BLOCK() if the application
+      can tolerate it.  Or use fdev_setup_stream() or FDEV_SETUP_STREAM().
+      <br>
+      Note: fclose() will only call free() if the stream has been opened with fdevopen().
+  </td>
+ </tr>
+ <tr>
+  <td>eeprom_*(), boot_*()</td>
+  <td>Accesses I/O registers.</td>
+  <td>Protect calls with cli()/sei(), ATOMIC_BLOCK(), or use OS locking.</td>
+ </tr>
+ <tr>
+  <td>pgm_*_far()</td>
+  <td>Accesses I/O register RAMPZ.</td>
+  <td>Starting with GCC 4.3, RAMPZ is automatically saved for ISRs, so
+      nothing further is needed if only using interrupts.
+      <br>Some OSes may automatically preserve RAMPZ during context switching.
+      Check the OS documentation before assuming it does.
+      <br>Otherwise, protect calls with cli()/sei(), ATOMIC_BLOCK(), or use
+          explicit OS locking.
+  </td>
+ </tr>
+ <tr>
+  <td>printf(), printf_P(), vprintf(), vprintf_P(), puts(), puts_P()</td>
+  <td>Alters flags and character count in global FILE \c stdout.</td>
+  <td>Use only in one thread.  Or if returned character count is unimportant,
+      do not use the *_P versions.
+      <br>Note: Formatting to a string output, e.g. sprintf(), sprintf_P(),
+      snprintf(), snprintf_P(), vsprintf(), vsprintf_P(), vsnprintf(), vsnprintf_P(),
+      is thread safe.  The formatted string could then be followed by an fwrite()
+      which simply calls the lower layer to send the string.
+  </td>
+ </tr>
+ <tr>
+  <td>fprintf(), fprintf_P(), vfprintf(), vfprintf_P(), fputs(), fputs_P()</td>
+  <td>Alters flags and character count in the FILE argument.
+      Problems can occur if a global FILE is used from multiple threads.
+  </td>
+  <td>Assign each thread its own FILE for output.  Or if returned character
+      count is unimportant, do not use the *_P versions.
+  </td>
+ </tr>
+ <tr>
+  <td>assert()</td>
+  <td>Contains an embedded fprintf().  See above for fprintf().</td>
+  <td>See above for fprintf().</td>
+ </tr>
+ <tr>
+  <td>clearerr()</td>
+  <td>Alters flags in the FILE argument.
+  </td>
+  <td>Assign each thread its own FILE for output.
+  </td>
+ </tr>
+
+ <tr>
+  <td>getchar(), gets()</td>
+  <td>Alters flags, character count, and unget buffer in global FILE \c stdin.</td>
+  <td>Use only in one thread. ***</td>
+ </tr>
+
+ <tr>
+  <td>fgetc(), ungetc(), fgets(), scanf(), scanf_P(), fscanf(), fscanf_P(),
+      vscanf(), vfscanf(), vfscanf_P(), fread()
+  <td>Alters flags, character count, and unget buffer in the FILE argument.</td>
+  <td>Assign each thread its own FILE for input. ***
+      <br>Note: Scanning from a string, e.g. sscanf() and sscanf_P(),
+      are thread safe.
+  </td>
+ </tr>
+</table>
+
+\q *** It's not clear one would ever want to do character
+input simultaneously from more than one thread anyway, but
+these entries are included for completeness.
+
+An effort will be made to keep this table up to date if any
+new issues are discovered or introduced.
 
 <small>Back to \ref faq_index.</small>
 

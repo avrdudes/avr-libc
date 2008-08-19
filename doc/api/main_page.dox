@@ -78,6 +78,7 @@ local state are known to be non-reentrant, as well as functions that
 manipulate IO registers like the EEPROM access routines.  If these
 functions are used within both standard and interrupt contexts
 undefined behaviour will result.
+See the FAQ for a more detailed discussion.
 
 
 \section supp_devices Supported Devices
