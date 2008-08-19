@@ -1,5 +1,13 @@
 2008-09-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Contributed by Mark Litwack.
+	Patch #6500
+	* doc/api/faq.dox: Add FAQ about reentrant code and functions in 
+	avr-libc.
+	* api/main_page.dox: Add reference to new FAQ.
+
+2008-09-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #23969.
 	* include/avr/eeprom.h: Change part of the EEPROM read routine
 	to inline assembly to avoid problems with certain AVR parts.

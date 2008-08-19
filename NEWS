@@ -26,6 +26,10 @@
   [#23959] Small typo in deprecated documentation
   [#23969] eeprom_read_byte() throws interrupt EE_READY although EERIE is cleared, controller resets
 
+* Contributed Patches:
+
+  [#6500] Reentrant code faq
+
 * New functions:
 
    strdup
