@@ -193,13 +193,28 @@ void __eewr_block (void *, const void *, size_t, void (*)(uint8_t *, uint8_t));
 __ATTR_PURE__ static __inline__ uint8_t eeprom_read_byte (const uint8_t *__p)
 {
     do {} while (!eeprom_is_ready ());
-#if	E2END <= 0xFF
-    EEARL = (unsigned)__p;
+#if E2END <= 0xFF
+    EEARL = (uint8_t)__p;
 #else
-    EEAR = (unsigned)__p;
+    EEAR = (uint16_t)__p;
 #endif
-    EECR |= (1 << EERE);
-    return EEDR;
+    /* Use inline assembly below as some AVRs have problems with accessing
+    EECR with STS instructions. For example, see errata for ATmega64. 
+    The code below also assumes that EECR and EEDR are in the I/O space.
+    */
+    uint8_t __result;
+    __asm__ __volatile__
+    (
+        "/* START EEPROM READ CRITICAL SECTION */ \n\t"
+        "sbi %1, %2 \n\t"
+        "in %0, %3 \n\t"
+        "/* END EEPROM READ CRITICAL SECTION */ \n\t"
+        : "=r" (__result)
+        : "i" (_SFR_IO_ADDR(EECR)),
+          "i" (EERE),
+          "i" (_SFR_IO_ADDR(EEDR))
+    );
+    return __result;
 }
 
 /** \ingroup avr_eeprom
