@@ -50,6 +50,7 @@ extern "C" {
 # endif
 #endif
 
+#if (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) )
 uint16_t __eerd_word (const uint16_t *, uint8_t (*)(const uint8_t *))
     __ATTR_PURE__;
 uint32_t __eerd_dword (const uint32_t *, uint8_t (*)(const uint8_t *))
@@ -59,12 +60,13 @@ void __eerd_block (void *, const void *, size_t, uint8_t (*)(const uint8_t *));
 void __eewr_word (uint16_t *, uint16_t, void (*)(uint8_t *, uint8_t));
 void __eewr_dword (uint32_t *, uint32_t, void (*)(uint8_t *, uint8_t));
 void __eewr_block (void *, const void *, size_t, void (*)(uint8_t *, uint8_t));
+#endif /* (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) ) */
 
-#if	!E2END && !defined(__DOXYGEN__)
+#if !E2END && !defined(__DOXYGEN__)
 # ifndef __COMPILING_AVR_LIBC__
 #  warning "Device does not have EEPROM available."
 # endif
-  /* Omit below for chips without EEPROM.	*/
+  /* Omit below for chips without EEPROM. */
 
 #else
 
@@ -222,7 +224,24 @@ __ATTR_PURE__ static __inline__ uint8_t eeprom_read_byte (const uint8_t *__p)
  */
 __ATTR_PURE__ static __inline__ uint16_t eeprom_read_word (const uint16_t *__p)
 {
+#if (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) )
     return __eerd_word (__p, eeprom_read_byte);
+#else
+    /* If ATmega256x device, do not call function. */
+    union
+    {
+        uint16_t word;
+        struct
+        {
+            uint8_t lo;
+            uint8_t hi;
+        } byte;
+    } x;
+
+    x.byte.lo = eeprom_read_byte ((const uint8_t *)__p);
+    x.byte.hi = eeprom_read_byte ((const uint8_t *)__p + 1);
+    return x.word;
+#endif
 }
 
 /** \ingroup avr_eeprom
@@ -231,7 +250,28 @@ __ATTR_PURE__ static __inline__ uint16_t eeprom_read_word (const uint16_t *__p)
 __ATTR_PURE__ static __inline__
 uint32_t eeprom_read_dword (const uint32_t *__p)
 {
+#if (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) )
     return __eerd_dword (__p, eeprom_read_byte);
+#else
+    /* If ATmega256x device, do not call function. */
+    union
+    {
+        uint32_t dword;
+        struct
+        {
+            uint8_t byte0;
+            uint8_t byte1;
+            uint8_t byte2;
+            uint8_t byte3;
+        } byte;
+    } x;
+
+    x.byte.byte0 = eeprom_read_byte ((const uint8_t *)__p);
+    x.byte.byte1 = eeprom_read_byte ((const uint8_t *)__p + 1);
+    x.byte.byte2 = eeprom_read_byte ((const uint8_t *)__p + 2);
+    x.byte.byte3 = eeprom_read_byte ((const uint8_t *)__p + 3);
+    return x.dword;
+#endif
 }
 
 /** \ingroup avr_eeprom
@@ -241,7 +281,15 @@ uint32_t eeprom_read_dword (const uint32_t *__p)
 static __inline__ void
 eeprom_read_block (void *__dst, const void *__src, size_t __n)
 {
+#if (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) )
     __eerd_block (__dst, __src, __n, eeprom_read_byte);
+#else
+    /* If ATmega256x device, do not call function. */
+    while (__n--)
+    {
+        *(char *)__dst++ = eeprom_read_byte(__src++);
+    }
+#endif
 }
 
 /** \ingroup avr_eeprom
@@ -286,7 +334,24 @@ static __inline__ void eeprom_write_byte (uint8_t *__p, uint8_t __value)
  */
 static __inline__ void eeprom_write_word (uint16_t *__p, uint16_t __value)
 {
+#if (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) )
     __eewr_word (__p, __value, eeprom_write_byte);
+#else
+    /* If ATmega256x device, do not call function. */
+    union
+    {
+        uint16_t word;
+        struct
+        {
+            uint8_t lo;
+            uint8_t hi;
+        } byte;
+    } x;
+
+    x.word = __value;
+    eeprom_write_byte ((uint8_t *)__p, x.byte.lo);
+    eeprom_write_byte ((uint8_t *)__p + 1, x.byte.hi);
+#endif
 }
 
 /** \ingroup avr_eeprom
@@ -294,7 +359,28 @@ static __inline__ void eeprom_write_word (uint16_t *__p, uint16_t __value)
  */
 static __inline__ void eeprom_write_dword (uint32_t *__p, uint32_t __value)
 {
+#if (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) )
     __eewr_dword (__p, __value, eeprom_write_byte);
+#else
+    /* If ATmega256x device, do not call function. */
+    union
+    {
+        uint32_t dword;
+        struct
+        {
+            uint8_t byte0;
+            uint8_t byte1;
+            uint8_t byte2;
+            uint8_t byte3;
+        } byte;
+    } x;
+
+    x.dword = __value;
+    eeprom_write_byte ((uint8_t *)__p, x.byte.byte0);
+    eeprom_write_byte ((uint8_t *)__p + 1, x.byte.byte1);
+    eeprom_write_byte ((uint8_t *)__p + 2, x.byte.byte2);
+    eeprom_write_byte ((uint8_t *)__p + 3, x.byte.byte3);
+#endif
 }
 
 /** \ingroup avr_eeprom
@@ -304,7 +390,13 @@ static __inline__ void eeprom_write_dword (uint32_t *__p, uint32_t __value)
 static __inline__ void
 eeprom_write_block (const void *__src, void *__dst, size_t __n)
 {
+#if (! (defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)) )
     __eewr_block (__dst, __src, __n, eeprom_write_byte);
+#else
+    /* If ATmega256x device, do not call function. */
+    while (__n--)
+        eeprom_write_byte (__dst++, *(uint8_t *)__src++);
+#endif
 }
 
 /** \name IAR C compatibility defines	*/

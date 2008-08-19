@@ -1,5 +1,14 @@
 2008-09-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Contributed by Stu Bell.
+	Fix bug #22878.
+	* include/avr/eeprom.h: For the ATmega256x devices, do not call 
+	any functions to implement the EEPROM routines as they have problems
+	if they are in high memory. So for these devices we inline the
+	functionality.
+
+2008-09-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Contributed by Mark Litwack.
 	Patch #6500
 	* doc/api/faq.dox: Add FAQ about reentrant code and functions in 
