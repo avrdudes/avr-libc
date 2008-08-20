@@ -1,3 +1,10 @@
+2008-09-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Contributed by Lars Jonsson
+	Fix bug #22572.
+	* doc/api/faq.dox: Add Makefile fragments for converting text and binary
+	data to an object file.
+
 2008-09-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Contributed by Stu Bell.
