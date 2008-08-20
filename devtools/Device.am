@@ -39,7 +39,7 @@ VPATH = $(top_srcdir)/crt1
 
 if HAS_<<dev>>
 
-AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include -I$(top_builddir)/include
 
 AVRLIB_CFLAGS = -gstabs -Wall -W -Wstrict-prototypes -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_CFLAGS)
 

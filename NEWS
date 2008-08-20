@@ -19,6 +19,7 @@
   [#19494] sfr_defs.h documentation: Remove references to deprecated macros.
   [#21410] Incorrect use of 16-bit eeprom addresses in devices with 8-Bit address registers
   [#21621] Allow autoconf 2.61
+  [#21622] Support building in a subdirectory
   [#21869] Multiple defines in iotn2313.h
   [#21872] __floatunsisf/undisf incorrectly named
   [#21905] scanf: float conversion ignores the suppression symbol

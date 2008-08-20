@@ -40,7 +40,7 @@ VPATH = $(top_srcdir)/libc/stdlib:$(top_srcdir)/libc/pmstring:$(top_srcdir)/libc
 
 if HAS_<<arh>>
 
-AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include -I$(top_builddir)/include
 
 AVRLIB_CFLAGS = -g -Wall -W -Wstrict-prototypes -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_CFLAGS)
 
