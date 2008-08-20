@@ -1327,6 +1327,40 @@ Note that all this could be conveniently wired into a Makefile, so
 whenever <tt>foo.bin</tt> changes, it will trigger the recreation of
 <tt>foo.o</tt>, and a subsequent relink of the final ELF file.
 
+Below are two Makefile fragments that provide rules to convert a .txt file
+to an object file, and to convert a .bin file to an object file:
+
+\code
+$(OBJDIR)/%.o : %.txt
+	@echo Converting $<
+	@cp $(<) $(*).tmp
+	@echo -n 0 | tr 0 '\000' >> $(*).tmp
+	@$(OBJCOPY) -I binary -O elf32-avr \
+	--rename-section .data=.progmem.data,contents,alloc,load,readonly,data \
+	--redefine-sym _binary_$*_tmp_start=$* \
+	--redefine-sym _binary_$*_tmp_end=$*_end \
+	--redefine-sym _binary_$*_tmp_size=$*_size_sym \
+	$(*).tmp $(@)       
+	@echo "extern const char" $(*)"[] PROGMEM;" > $(*).h 
+	@echo "extern const char" $(*)_end"[] PROGMEM;" >> $(*).h 
+	@echo "extern const char" $(*)_size_sym"[];" >> $(*).h
+	@echo "#define $(*)_size ((int)$(*)_size_sym)" >> $(*).h
+	@rm $(*).tmp 
+
+$(OBJDIR)/%.o : %.bin
+	@echo Converting $<
+	@$(OBJCOPY) -I binary -O elf32-avr \
+	--rename-section .data=.progmem.data,contents,alloc,load,readonly,data \
+	--redefine-sym _binary_$*_bin_start=$* \
+	--redefine-sym _binary_$*_bin_end=$*_end \
+	--redefine-sym _binary_$*_bin_size=$*_size_sym \
+	$(<) $(@)       
+	@echo "extern const char" $(*)"[] PROGMEM;" > $(*).h 
+	@echo "extern const char" $(*)_end"[] PROGMEM;" >> $(*).h 
+	@echo "extern const char" $(*)_size_sym"[];" >> $(*).h
+	@echo "#define $(*)_size ((int)$(*)_size_sym)" >> $(*).h
+\endcode
+
 <small>Back to \ref faq_index.</small>
 
 \section faq_softreset How do I perform a software reset of the AVR?
