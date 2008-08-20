@@ -1,3 +1,9 @@
+2008-08-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* libc/string/strtok.c: Fix cut and paste error with strtok 
+	implementation.
+	* include/string.h: Same.
+
 2008-08-20  Shaun Jackman  <sjackman@gmail.com>
         Eric B. Weddington  <eric.weddington@atmel.com>
 
