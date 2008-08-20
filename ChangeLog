@@ -1,5 +1,13 @@
 2008-09-20  Eric B. Weddington  <eric.weddington@atmel.com>
 
+        Fix for bug #23409.
+        * include/string.h: Add prototype of new strtok function.
+        * libc/string/strtok_r.S: Fix doxygen description of function.
+        * libc/string/strtok.c: New file with strtok function.
+        * libc/string/Files.am: Add new file to list.
+
+2008-09-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Contributed by Lars Jonsson
 	Fix bug #22572.
 	* doc/api/faq.dox: Add Makefile fragments for converting text and binary

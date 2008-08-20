@@ -30,7 +30,8 @@
 #
 
 string_a_c_sources = \
-	strdup.c
+	strdup.c \
+	strtok.c
 
 string_a_asm_sources = \
 	ffs.S \

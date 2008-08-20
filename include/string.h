@@ -142,6 +142,7 @@ extern char *strrev(char *);
 extern char *strsep(char **, const char *);
 extern size_t strspn(const char *__s, const char *__accept) __ATTR_PURE__;
 extern char *strstr(const char *, const char *) __ATTR_PURE__;
+extern char *strtok(char, const char);
 extern char *strtok_r(char *, const char *, char **);
 extern char *strupr(char *);
 
