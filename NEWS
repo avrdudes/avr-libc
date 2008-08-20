@@ -21,6 +21,7 @@
   [#23032] Define PORTxn, PINxn, DDxn bit names in iomxx4.h.
   [#23166] atmega328p does not have SPMEN
   [#23261] AT90USB162 and AT90USB82 missing power_all_[enable,disable]() in power.h
+  [#23409] Provide an implementation for strtok()
   [#23546] FAQ documentation symbol seems wrong
   [#23774] Using some defines from avr/fuse.h produces warning
   [#23850] ATMega8 does not have MCUSR defined
@@ -35,6 +36,7 @@
 * New functions:
 
    strdup
+   strtok
 
 *** Changes in avr-libc-1.6.2:
 

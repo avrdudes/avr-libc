@@ -34,9 +34,9 @@
 
 /** \ingroup avr_string
     \fn char *strtok_r(char *string, const char *delim, char **last)
-    \brief Parses the string s into tokens.
+    \brief Parses string into tokens.
 
-    strtok_r parses the string s into tokens. The first call to strtok_r
+    strtok_r parses string into tokens. The first call to strtok_r
     should have string as its first argument. Subsequent calls should have
     the first argument set to NULL. If a token ends with a delimiter, this
     delimiting character is overwritten with a '\\0' and a pointer to the next
