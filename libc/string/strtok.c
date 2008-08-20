@@ -30,7 +30,7 @@
 
 /** \file */
 /** \ingroup avr_string
-    \fn char *strtok(char s, const char delim)
+    \fn char *strtok(char *s, const char *delim)
     \brief Parses the string s into tokens.
 
     strtok parses the string s into tokens. The first call to strtok
@@ -51,7 +51,7 @@
 
 static char *p;
 
-char *strtok(char s, const char delim)
+char *strtok(char *s, const char *delim)
 {
     return strtok_r(s, delim, &p);
 } 
