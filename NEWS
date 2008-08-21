@@ -9,6 +9,7 @@
   [sourceforge.net: #2012448] ATmega6450 USART Interrupts
   [sourceforge.net: #2016128] Incorrect ATMega32[c1|m1] Header Entries
   [sourceforge.net: #2018957] Wrong SPM_PAGESIZE for mega1284P
+  [sourceforge.net: #2033993] User manual: data symbol spec incorrect
   [#21621] Allow autoconf 2.61
   [#21622] Support building in a subdirectory
   [#22240] Add EEPROM Page Size to header files
