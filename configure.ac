@@ -756,6 +756,7 @@ AC_CONFIG_FILES([
 AC_CONFIG_FILES([
 	avr/lib/avr31/Makefile
 	avr/lib/avr31/atmega103/Makefile
+	avr/lib/avr31/at43usb320/Makefile
 ])
 
 #avr35
