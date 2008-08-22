@@ -1,3 +1,7 @@
+2008-08-22  Anatoly Sokolov  <aesok@post.ru>
+
+	* configure.ac: Add the AT43USB320 device to avr31 architecture.
+
 2008-08-21  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for SourceForge bug #2033993.
