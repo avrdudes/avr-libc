@@ -1,0 +1,1225 @@
+#! /bin/sh
+# Copyright (c) 2008 Atmel Corporation
+#   All rights reserved.
+#
+#   Redistribution and use in source and binary forms, with or without
+#   modification, are permitted provided that the following conditions are met:
+#
+#   * Redistributions of source code must retain the above copyright
+#     notice, this list of conditions and the following disclaimer.
+#
+#   * Redistributions in binary form must reproduce the above copyright
+#     notice, this list of conditions and the following disclaimer in
+#     the documentation and/or other materials provided with the
+#     distribution.
+#
+#   * Neither the name of the copyright holders nor the names of
+#     contributors may be used to endorse or promote products derived
+#     from this software without specific prior written permission.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+#  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+#  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+#  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+#  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+#  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE.
+
+
+# Convert Atmel XML Device file to AVR GCC I/O header file.
+# Needs: xmlstarlet (executable: xml), sed, grep, uniq, mv, rm, echo, sort.
+
+usage() {
+cat << EOF
+usage: $0 -d <xml device file> -h <io header file> [-x]
+    -d <xml device file>    XML Device File (Input)
+    -h <io header file>     I/O Header File (Output). 
+                            If file exists, it will be overwritten.
+    -x                      Optional XMEGA header file output
+EOF
+}
+
+
+abort() {
+    echo $@
+    exec /bin/false
+}
+
+
+# Get options
+devicefile=
+headerfile=
+xmega=
+while test $# -gt 0
+do
+    case "$1" in
+    -d) devicefile="$2"; shift;;
+    -h) headerfile="$2"; shift;;
+    -x) xmega="1";;
+    --)	shift; break;;
+    -*) usage; exit 1;;
+     *) break;;         # terminate while loop
+    esac
+    shift
+done
+# all command line switches are processed,
+
+
+# Test parameters.
+if test "$devicefile" = ""; then
+    usage
+    abort "Error: No device file specified."
+fi
+if test "$headerfile" = ""; then 
+    usage
+    abort "Error: No header file specified."
+fi
+
+
+set -ex
+
+
+if test -e "$headerfile"; then rm "$headerfile"; fi
+
+
+# Header
+#-------------------
+
+# Get device name.
+DEVICE=$(xml sel -T -t -v /AVRPART/ADMIN/PART_NAME $devicefile)
+
+# todo: upper-case function not found. Use this value in idempotent guard.
+#DEVICEUPPER=$(xml sel -T -t -v "upper-case(/AVRPART/ADMIN/PART_NAME)" $devicefile)
+
+# Get the current year to place in copyright statement.
+YEAR=$(date --rfc-3339=date | cut -d '-' -f 1)
+
+cat << eof > $headerfile
+/* Copyright (c) $YEAR Atmel Corporation
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+   * Neither the name of the copyright holders nor the names of
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* \$Id\$ */
+
+/* avr/$headerfile - definitions for ${DEVICE} */
+
+/* This file should only be included from <avr/io.h>, never directly. */
+
+#ifndef _AVR_IO_H_
+#  error "Include <avr/io.h> instead of this file."
+#endif
+
+#ifndef _AVR_IOXXX_H_
+#  define _AVR_IOXXX_H_ "$headerfile"
+#else
+#  error "Attempt to include more than one <avr/ioXXX.h> file."
+#endif 
+
+
+#ifndef _AVR_${DEVICE}_H_
+#define _AVR_${DEVICE}_H_ 1
+
+
+eof
+
+
+
+if test -n "$xmega" ; then
+
+# XMEGA AVR
+#==================
+
+
+# Build IO groups temporary XML file
+#------------------------------------
+if test -e iogroups.xml; then
+    rm -f iogroups.xml
+fi
+
+# Get set of register group names.
+GROUP_NAMES=$(xml sel -T -t -m /AVRPART/V2/modules/module/registers -s "A:T:-" "@offset" -v "concat(@name,' ')" $devicefile)
+
+# Create base iogroups temporary xml file.
+echo "<AVRPART>" | sed "s,>,>\r,g" >> iogroups.xml
+for i in $GROUP_NAMES ; do \
+    xml sel -t -m '/AVRPART/V2/modules/module/registers[@name='\'${i}\'']' -c . $devicefile | sed s,registers,group,g | sed "s,/>,>,g" >> iogroups.xml
+    TYPE=$(xml sel -T -t -m '/AVRPART/V2/modules/module/registers[@name='\'${i}\'']' -v "@implements" $devicefile)
+    xml sel -t -m '/AVRPART/V2/templates/module/registers[@name='\'${TYPE}\'']' -c . $devicefile >> iogroups.xml
+    echo "</group>" | sed "s,>,>\r,g" >> iogroups.xml
+done
+echo "</AVRPART>" | sed "s,>,>\r,g" >> iogroups.xml
+
+# Make all groups have consistent width of offset address.
+for i in $GROUP_NAMES ; do \
+    value=$(printf "0x%04X" $(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@offset" iogroups.xml))
+    xml ed -O -u '/AVRPART/group[@name='\'${i}\'']/@offset' -v "$value" iogroups.xml > temp.xml
+    mv -f temp.xml iogroups.xml
+done
+
+# Re-sort iogroups temporary XML file.
+xml sel -t -e AVRPART -m "/AVRPART/group" -s "A:T:-" "@offset" -c . iogroups.xml > temp.xml
+mv -f temp.xml iogroups.xml
+
+# Re-get set of register group names.
+GROUP_NAMES=$(xml sel -T -t -m /AVRPART/group -s "A:T:-" "@offset" -v "concat(@name,' ')" iogroups.xml)
+
+# Add absolute address to registers.
+for i in $GROUP_NAMES ; do \
+    GROUP_OFFSET=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@offset" iogroups.xml)
+    REG_NAMES=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers/child::*' -v "concat(@name,' ')" iogroups.xml)
+    for j in $REG_NAMES ; do \
+        value=$(printf "0x%04X" $(($GROUP_OFFSET + $(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers/child::*[@name='\'${j}\'']' -v "@offset" iogroups.xml))))
+        xml ed -O -a '/AVRPART/group[@name='\'${i}\'']/registers/child::*[@name='\'${j}\'']' -t attr -n "address" -v "$value" iogroups.xml > temp.xml
+        mv -f temp.xml iogroups.xml
+    done
+done
+
+
+
+# XMEGA Global Registers
+#---------------------------
+echo "/* Ungrouped common registers */" >> $headerfile
+for i in $GROUP_NAMES ; do
+    REGISTERS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\'']' -v "concat(@name,' ')" iogroups.xml)
+    for j in $REGISTERS ; do
+        REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\''][@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" iogroups.xml | sort)
+        for k in $REG_OFFSETS ; do
+            REG_NAME=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\''][@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" iogroups.xml)
+            if test -n "$REG_NAME" ; then
+                REG_SIZE=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@size" iogroups.xml)
+                REG_ADDRESS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@address" iogroups.xml)
+                REG_TEXT=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@text" iogroups.xml)
+                if test -n "$REG_SIZE" ; then
+                    if test "$REG_SIZE" = "1" ; then
+                        echo "#define ${REG_NAME}  _SFR_MEM8(${REG_ADDRESS})  /* ${REG_TEXT} */" >> $headerfile
+                    fi
+                    if test "$REG_SIZE" = "2" ; then
+                        echo "#define ${REG_NAME}  _SFR_MEM16(${REG_ADDRESS})  /* ${REG_TEXT} */" >> $headerfile
+                    fi
+                fi
+            fi
+        done
+        echo "" >> $headerfile
+    done
+done
+echo "" >> $headerfile
+
+
+
+# XMEGA types
+#-----------------
+cat << eof >> $headerfile
+/* C Language Only */
+#if !defined (__ASSEMBLER__)
+
+#include <stdint.h>
+
+typedef volatile uint8_t register8_t;
+typedef volatile uint16_t register16_t;
+typedef volatile uint32_t register32_t;
+
+
+#ifdef _WORDREGISTER
+#undef _WORDREGISTER
+#endif
+#define _WORDREGISTER(regname)   \\
+    union \\
+    { \\
+        register16_t regname; \\
+        struct \\
+        { \\
+            register8_t regname ## L; \\
+            register8_t regname ## H; \\
+        }; \\
+    }
+
+#ifdef _DWORDREGISTER
+#undef _DWORDREGISTER
+#endif
+#define _DWORDREGISTER(regname)  \\
+    union \\
+    { \\
+        register32_t regname; \\
+        struct \\
+        { \\
+            register8_t regname ## 0; \\
+            register8_t regname ## 1; \\
+            register8_t regname ## 2; \\
+            register8_t regname ## 3; \\
+        }; \\
+    }
+
+
+eof
+
+
+# XMEGA Register and Enumerator Structures
+#-----------------------------------------
+
+echo "/*" >> $headerfile
+echo "==========================================================================" >> $headerfile
+echo "IO Module Structures" >> $headerfile
+echo "==========================================================================" >> $headerfile
+echo "*/" >> $headerfile
+echo "" >> $headerfile
+
+MODULES=$(xml sel -T -t -m "/AVRPART/V2/templates/module" -v "concat(@class,' ')" $devicefile)
+for i in $MODULES ; do
+    MODULE_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']' -v "@text" $devicefile)
+    
+    # Generate register structures.
+    REGISTERS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers' -v "concat(@name,' ')" $devicefile)
+    for j in $REGISTERS ; do
+        GLOBALREGS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']' -v "@globalregs" $devicefile)
+        
+        if test "$GLOBALREGS" != "true" ; then
+
+            echo "/*" >> $headerfile
+            echo "--------------------------------------------------------------------------" >> $headerfile
+            echo "$i - $MODULE_TEXT" >> $headerfile
+            echo "--------------------------------------------------------------------------" >> $headerfile
+            echo "*/" >> $headerfile
+            echo "" >> $headerfile
+
+            REGISTERS_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']' -v "@text" $devicefile)
+            echo "/* ${REGISTERS_TEXT} */" >> $headerfile
+            echo "typedef struct ${j}_struct" >> $headerfile
+            echo "{" >> $headerfile
+            
+            REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" $devicefile | sort)
+            for k in $REG_OFFSETS ; do
+                REG_NAME=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" $devicefile)
+                REG_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@text" $devicefile)
+                REG_SIZE=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@size" $devicefile)
+                
+                if test -z "$REG_NAME" ; then
+                    echo "    register8_t reserved_${k};" >> $headerfile
+                else
+                    if test -n "$REG_SIZE" ; then
+                        if test "$REG_SIZE" = "1" ; then
+                            echo "    register8_t ${REG_NAME};  /* ${REG_TEXT} */" >> $headerfile
+                        elif test "$REG_SIZE" = "2" ; then
+                            echo "    _WORDREGISTER(${REG_NAME});  /* ${REG_TEXT} */" >> $headerfile
+                        fi
+                    else
+                        REG_IMPLEMENTS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@implements" $devicefile)
+                        echo "    ${REG_IMPLEMENTS}_t ${REG_NAME};  /* ${REG_TEXT} */" >> $headerfile
+                    fi
+                fi
+            done
+
+            echo "} ${j}_t;" >> $headerfile
+            echo "" >> $headerfile
+
+        fi
+    done
+    
+    # Generate enumerator structures.
+    ENUMERATORS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/enumerator' -v "concat(@name,' ')" $devicefile)
+    for j in $ENUMERATORS ; do
+        ENUMERATOR_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/enumerator[@name='\'${j}\'']' -v "@text" $devicefile)
+        echo "/* ${ENUMERATOR_TEXT} */" >> $headerfile
+        echo "typedef enum ${j}_enum" >> $headerfile
+        echo "{" >> $headerfile
+        
+        # Get enum shift value from bitfield data in a different part of the V2 data.
+        ENUM_SHIFT=
+        for m in $REGISTERS ; do
+            REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${m}\'']/child::*' -v "concat(@offset,' ')" $devicefile | sort)
+            for n in $REG_OFFSETS ; do
+                BITFIELD_NAMES=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${m}\'']/child::*[@offset='\'${n}\'']/bitfield' -v "concat(@name,' ')" $devicefile)
+                for p in $BITFIELD_NAMES ; do
+                    BITFIELD_ENUM=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${m}\'']/child::*[@offset='\'${n}\'']/bitfield[@name='\'${p}\'']' -v "@enum" $devicefile)
+                    if test "$BITFIELD_ENUM" = "$j" ; then
+                        
+                        # The enum shift value is equal to the number of lsb 0 bits 
+                        # in the mask value of the bitfield that has a matching enum name.
+                        ENUM_SHIFT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${m}\'']/child::*[@offset='\'${n}\'']/bitfield[@name='\'${p}\'']' \
+                            -v "@mask" $devicefile | \
+                            sed "s,0x.2,1,g" | \
+                            sed "s,0x.4,2,g" | \
+                            sed "s,0x.6,1,g" | \
+                            sed "s,0x.8,3,g" | \
+                            sed "s,0x.C,2,g" | \
+                            sed "s,0x.E,1,g" | \
+                            sed "s,0x10,4,g" | \
+                            sed "s,0x30,4,g" | \
+                            sed "s,0x70,4,g" | \
+                            sed "s,0xF0,4,g" | \
+                            sed "s,0x20,5,g" | \
+                            sed "s,0x60,5,g" | \
+                            sed "s,0xE0,5,g" | \
+                            sed "s,0x40,6,g" | \
+                            sed "s,0xC0,6,g" | \
+                            sed "s,0x80,7,g" | \
+                            sed "s,0x..,0,g" )
+                        
+                        # Match only the first enum value found so break out.
+                        break 3
+                    fi
+                done
+            done
+        done
+
+        ENUMS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/enumerator[@name='\'${j}\'']/enum' -v "concat(@name,' ')" $devicefile)
+        for k in $ENUMS ; do
+            ENUM_VALUE=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/enumerator[@name='\'${j}\'']/enum[@name='\'${k}\'']' -v "@val" $devicefile)
+            ENUM_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/enumerator[@name='\'${j}\'']/enum[@name='\'${k}\'']' -v "@text" $devicefile)
+            echo "    ${j}_${k}_gc = (${ENUM_VALUE}<<${ENUM_SHIFT}),  /* ${ENUM_TEXT} */" >> $headerfile
+        done
+        
+        echo "} ${j}_t;" >> $headerfile
+        echo "" >> $headerfile
+    done
+    echo "" >> $headerfile
+done
+echo "" >> $headerfile
+
+
+
+
+# XMEGA Register Structure Instances
+#--------------------------------------
+echo "/*" >> $headerfile
+echo "==========================================================================" >> $headerfile
+echo "IO Module Instances. Mapped to memory." >> $headerfile
+echo "==========================================================================" >> $headerfile
+echo "*/" >> $headerfile
+echo "" >> $headerfile
+xml sel -T \
+    -t -m /AVRPART/group \
+        -s "A:T:-" "@offset" \
+        -v "concat('#define ',@name,'    (*(',@implements,'_t *) ',@offset,')  /* ',@text,' */')" -n \
+    -t -n -n iogroups.xml >> $headerfile
+
+
+
+echo "#endif /* !defined (__ASSEMBLER__) */" >> $headerfile
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+# XMEGA Flattened fully qualified IO register names
+#---------------------------------------------------
+
+echo "/* ========== Flattened fully qualified IO register names ========== */" >> $headerfile
+echo "" >> $headerfile
+
+for i in $GROUP_NAMES ; do
+    GROUP_TEXT=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@text" iogroups.xml)
+    echo "/* ${i} - ${GROUP_TEXT} */" >> $headerfile
+    
+    REGISTERS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers' -v "concat(@name,' ')" iogroups.xml)
+    for j in $REGISTERS ; do
+    
+        REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" iogroups.xml | sort)
+        for k in $REG_OFFSETS ; do
+            REG_NAME=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" iogroups.xml)
+            if test -n "$REG_NAME" ; then
+                REG_SIZE=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@size" iogroups.xml)
+                REG_ADDRESS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@address" iogroups.xml)
+                if test -n "$REG_SIZE" ; then
+                    if test "$REG_SIZE" = "1" ; then
+                        echo "#define ${i}_${REG_NAME}  _SFR_MEM8(${REG_ADDRESS})" >> $headerfile
+                    fi
+                    if test "$REG_SIZE" = "2" ; then
+                        echo "#define ${i}_${REG_NAME}  _SFR_MEM16(${REG_ADDRESS})" >> $headerfile
+                    fi
+                else
+                    REG_IMPLEMENTS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@implements" iogroups.xml)
+                  
+
+                    MODULES=$(xml sel -T -t -m "/AVRPART/V2/templates/module" -v "concat(@class,' ')" $devicefile)
+                    for m in $MODULES ; do
+                        REGISTERS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${m}\'']/registers' -v "concat(@name,' ')" $devicefile)
+                        for n in $REGISTERS ; do
+                            if test "$n" = "$REG_IMPLEMENTS" ; then
+                                REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${m}\'']/registers[@name='\'${n}\'']/child::*' -v "concat(@offset,' ')" $devicefile | sort)
+                                for p in $REG_OFFSETS ; do
+                                    SUBREG_NAME=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${m}\'']/registers[@name='\'${n}\'']/child::*[@offset='\'${p}\'']' -v "@name" $devicefile)
+                                    SUBREG_SIZE=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${m}\'']/registers[@name='\'${n}\'']/child::*[@offset='\'${p}\'']' -v "@size" $devicefile)
+                                    SUBREG_OFFSET=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${m}\'']/registers[@name='\'${n}\'']/child::*[@offset='\'${p}\'']' -v "@offset" $devicefile)
+                                    if test -n "$SUBREG_NAME" ; then
+                                        ADDRESS=$(printf "0x%04X" $(($REG_ADDRESS + $SUBREG_OFFSET)))
+                                        if test "$SUBREG_SIZE" = "1" ; then
+                                            echo "#define ${i}_${REG_NAME}_${SUBREG_NAME}  _SFR_MEM8(${ADDRESS})" >> $headerfile
+                                        fi
+                                        if test "$SUBREG_SIZE" = "2" ; then
+                                            echo "#define ${i}_${REG_NAME}_${SUBREG_NAME}  _SFR_MEM16(${ADDRESS})" >> $headerfile
+                                        fi
+                                    fi
+                                done
+                                break 2
+                            fi
+                        done
+                    done    
+                fi
+            fi
+        done
+    done
+    echo "" >> $headerfile
+done
+echo "" >> $headerfile
+
+
+
+#echo "#endif /* !defined (__ASSEMBLER__) */" >> $headerfile
+#echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+# XMEGA Bitfield definitions
+#---------------------------------------------------
+
+echo "/*================== Bitfield Definitions ================== */" >> $headerfile
+echo "" >> $headerfile
+MODULE_NAMES=$(xml sel -T -t -m /AVRPART/V2/templates/module -v "concat(@class,' ')" $devicefile)
+for i in $MODULE_NAMES ; do
+    PREV_MODULE_NAME=
+    MODULE_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']' -v "@text" $devicefile)
+    
+    REGISTER_GROUPS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers' -v "concat(@name,' ')" $devicefile)
+    for j in $REGISTER_GROUPS ; do
+    
+        REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" $devicefile | sort)
+        for k in $REG_OFFSETS ; do
+            REGNAME=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" $devicefile)
+            BITFIELDS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']/bitfield' -v "concat(@name,' ')" $devicefile)
+            
+            if test -n "$BITFIELDS" ; then
+                if test -z $PREV_MODULE_NAME ; then
+                    echo "/* ${i} - ${MODULE_TEXT} */" >> $headerfile
+                    PREV_MODULE_NAME=$i
+                fi
+
+                echo "/* ${j}.${REGNAME}  bit masks and bit positions */" >> $headerfile
+                
+                for m in $BITFIELDS ; do
+                    BITFIELD_GROUP_MASK=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']/bitfield[@name='\'${m}\'']' -v "@mask" $devicefile)
+                    BITFIELD_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']/bitfield[@name='\'${m}\'']' -v "@text" $devicefile)
+                    BITFIELD_GROUP_POSITION=$(echo $BITFIELD_GROUP_MASK | \
+                        sed "s,0x.2,1,g" | \
+                        sed "s,0x.4,2,g" | \
+                        sed "s,0x.6,1,g" | \
+                        sed "s,0x.8,3,g" | \
+                        sed "s,0x.C,2,g" | \
+                        sed "s,0x.E,1,g" | \
+                        sed "s,0x10,4,g" | \
+                        sed "s,0x30,4,g" | \
+                        sed "s,0x70,4,g" | \
+                        sed "s,0xF0,4,g" | \
+                        sed "s,0x20,5,g" | \
+                        sed "s,0x60,5,g" | \
+                        sed "s,0xE0,5,g" | \
+                        sed "s,0x40,6,g" | \
+                        sed "s,0xC0,6,g" | \
+                        sed "s,0x80,7,g" | \
+                        sed "s,0x..,0,g" )
+
+                    BITFIELD_MASK=$(($BITFIELD_GROUP_MASK >> $BITFIELD_GROUP_POSITION))
+                    if test $(( $BITFIELD_MASK )) -gt 1 ; then
+                        DEFINITION=" ${j}_${m}_gm  ${BITFIELD_GROUP_MASK}"
+                        grep "${DEFINITION}" $headerfile && echo "#define${DEFINITION}  /* ${BITFIELD_TEXT} group mask. */" >> $headerfile
+                        #echo "/*${DEFINITION}  Predefined. */" >> $headerfile
+
+                        #echo "#define ${j}_${m}_gm  ${BITFIELD_GROUP_MASK}  /* ${BITFIELD_TEXT} group mask. */" >> $headerfile
+                        echo "#define ${j}_${m}_gp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} group position. */" >> $headerfile
+                        
+                        BITNUM="0"
+                        while test $(($BITFIELD_MASK & 0x01)) -eq 1 ; do
+                            echo "#define ${j}_${m}${BITNUM}_bm  (1<<${BITFIELD_GROUP_POSITION})  /* ${BITFIELD_TEXT} bit ${BITNUM} mask. */" >> $headerfile
+                            echo "#define ${j}_${m}${BITNUM}_bp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} bit ${BITNUM} position. */" >> $headerfile
+                            
+                            BITFIELD_GROUP_POSITION=$(($BITFIELD_GROUP_POSITION + 1))
+                            BITFIELD_MASK=$(($BITFIELD_MASK >> 1))
+                            BITNUM=$(($BITNUM + 1))
+                        done
+                    else
+                        echo "#define ${j}_${m}_bm  ${BITFIELD_GROUP_MASK}  /* ${BITFIELD_TEXT} bit mask. */" >> $headerfile
+                        echo "#define ${j}_${m}_bp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} bit position. */" >> $headerfile
+                    fi
+                    echo "" >> $headerfile
+                    
+                done
+                echo "" >> $headerfile
+            fi
+        done
+    done
+done
+echo "" >> $headerfile
+
+
+
+# XMEGA Generic Port Pin definitions
+#---------------------------------------------------
+cat << eof >> $headerfile
+// Generic Port Pins
+
+#define PIN0_bm 0x01 
+#define PIN0_bp 0
+#define PIN1_bm 0x02
+#define PIN1_bp 1
+#define PIN2_bm 0x04 
+#define PIN2_bp 2
+#define PIN3_bm 0x08 
+#define PIN3_bp 3
+#define PIN4_bm 0x10 
+#define PIN4_bp 4
+#define PIN5_bm 0x20 
+#define PIN5_bp 5
+#define PIN6_bm 0x40 
+#define PIN6_bp 6
+#define PIN7_bm 0x80 
+#define PIN7_bp 7
+
+
+eof
+
+
+
+# XMEGA Interrupt Vector definitions
+#---------------------------------------------------
+echo "/* ========== Interrupt Vector Definitions ========== */" >> $headerfile
+echo "/* Vector 0 is the reset vector */" >> $headerfile
+echo "" >> $headerfile
+INTERRUPT_MODULES=$(xml sel -T -t -m /AVRPART/V2/interrupts/interrupt-group -v "concat(@module,' ')" $devicefile)
+for i in $INTERRUPT_MODULES ; do
+    echo "/* ${i} interrupt vectors */" >> $headerfile
+    MODULE_REF=$(xml sel -T -t -m '/AVRPART/V2/interrupts/interrupt-group[@module='\'${i}\'']' -v "@ref" $devicefile)
+    MODULE_OFFSET=$(xml sel -T -t -m '/AVRPART/V2/interrupts/interrupt-group[@module='\'${i}\'']' -v "@offset" $devicefile)
+    
+    INTERRUPTS=$(xml sel -T -t -m '/AVRPART/V2/templates/module/interrupt-group[@name='\'${MODULE_REF}\'']/int' -s "A:T:-" "@offset" -v "concat(@name,' ')" $devicefile)
+    for j in $INTERRUPTS ; do
+        INT_OFFSET=$(xml sel -T -t -m '/AVRPART/V2/templates/module/interrupt-group[@name='\'${MODULE_REF}\'']/int[@name='\'${j}\'']' -v "@offset" $devicefile)
+        INT_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module/interrupt-group[@name='\'${MODULE_REF}\'']/int[@name='\'${j}\'']' -v "@text" $devicefile)
+        VECTOR_NUM=$(($MODULE_OFFSET + $INT_OFFSET))
+        echo "#define ${i}_${j}_vect  _VECTOR(${VECTOR_NUM})  /* ${INT_TEXT} */" >> $headerfile
+    done
+    echo "" >> $headerfile
+done
+echo "" >> $headerfile
+
+# todo: Remove hard-coded vector size.
+echo "#define _VECTOR_SIZE 4 /* Size of individual vector. */" >> $headerfile
+VECTOR_NUM=$(($VECTOR_NUM + 1))
+echo "#define _VECTORS_SIZE (${VECTOR_NUM} * _VECTOR_SIZE)" >> $headerfile
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+
+# XMEGA Constant definitions
+#---------------------------------------------------
+echo "/* ========== Constants ========== */" >> $headerfile
+echo "" >> $headerfile
+
+MEMSPACE_NAMES=$(xml sel -T -t -m "/AVRPART/V2/memspaces/memspace" -v "concat(@name,' ')" $devicefile)
+for i in $MEMSPACE_NAMES ; do
+    MEMSPACE_START=$(xml sel -T -t -m '/AVRPART/V2/memspaces/memspace[@name='\'${i}\'']' -v "@start" $devicefile)
+    MEMSPACE_SIZE=$(( $(xml sel -T -t -m '/AVRPART/V2/memspaces/memspace[@name='\'${i}\'']' -v "@size" $devicefile) ))
+    MEMSPACE_PAGE_SIZE=$(xml sel -T -t -m '/AVRPART/V2/memspaces/memspace[@name='\'${i}\'']' -v "@pagesize" $devicefile)
+    echo "#define ${i}_START     (${MEMSPACE_START})" >> $headerfile
+    echo "#define ${i}_SIZE      (${MEMSPACE_SIZE})" >> $headerfile
+    if -n "$MEMSPACE_PAGE_SIZE" ; then
+        echo "#define ${i}_PAGE_SIZE (${MEMSPACE_PAGE_SIZE})" >> $headerfile
+    fi
+    echo "#define ${i}_END       (${i}_START + ${i}_SIZE - 1)" >> $headerfile
+    echo "" >> $headerfile
+done
+
+echo "#define FLASHEND     PROGMEM_END" >> $headerfile
+echo "#define SPM_PAGESIZE PROGMEM_PAGE_SIZE" >> $headerfile
+echo "#define RAMSTART     INTERNAL_SRAM_START" >> $headerfile
+echo "#define RAMSIZE      INTERNAL_SRAM_SIZE" >> $headerfile
+echo "#define RAMEND       INTERNAL_SRAM_END" >> $headerfile
+echo "#define XRAMSTART    EXTERNAL_SRAM_START" >> $headerfile
+echo "#define XRAMSIZE     EXTERNAL_SRAM_SIZE" >> $headerfile
+if test $(( $(xml sel -T -t -m "/AVRPART/V2/memspaces/memspace[@name='EXTERNAL_SRAM']" -v "@size" $devicefile) )) -gt 0 ; then
+    echo "#define XRAMEND      EXTERNAL_SRAM_END" >> $headerfile
+else
+    echo "#define XRAMEND      INTERNAL_SRAM_END" >> $headerfile
+fi
+echo "#define E2END        EEPROM_END" >> $headerfile
+echo "#define E2PAGESIZE   EEPROM_PAGE_SIZE" >> $headerfile
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+
+# XMEGA Fuse information
+#---------------------------------------------------
+FUSECOUNT=$(xml sel -T -t -v 'count(/AVRPART/V2/templates/module/registers[@memspace='\'FUSE\'']/reg)' $devicefile)
+echo "/* ========== Fuses ========== */" >> $headerfile
+echo "#define FUSE_MEMORY_SIZE ${FUSECOUNT}" >> $headerfile
+echo "" >> $headerfile
+FUSEBYTES=$(xml sel -T -t -m '/AVRPART/V2/templates/module/registers[@memspace='\'FUSE\'']/reg' -s "A:T:-" "@offset" -v "concat(@offset,' ')" $devicefile)
+FUSEBYTENUM=0
+for i in $FUSEBYTES ; do
+    FUSEBYTENAME=$(xml sel -T -t -m '/AVRPART/V2/templates/module/registers[@memspace='\'FUSE\'']/reg[@offset='\'${i}\'']' -v "@name" $devicefile)
+    if test -z "$FUSEBYTENAME" ; then
+        echo "/* Fuse Byte ${FUSEBYTENUM} Reserved */" >> $headerfile
+    else
+        echo "/* Fuse Byte ${FUSEBYTENUM} */" >> $headerfile
+        FUSEBITFIELDS=$(xml sel -T -t -m '/AVRPART/V2/templates/module/registers[@memspace='\'FUSE\'']/reg[@offset='\'${i}\'']/bitfield' -s "A:T:-" "@mask" -v "concat(@name,' ')" $devicefile)
+        for j in $FUSEBITFIELDS ; do
+            FUSEBITFIELD_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module/registers[@memspace='\'FUSE\'']/reg[@offset='\'${i}\'']/bitfield[@name='\'${j}\'']' \
+                -v "@text" $devicefile)
+            FUSEBITFIELD_MASK=$(xml sel -T -t -m '/AVRPART/V2/templates/module/registers[@memspace='\'FUSE\'']/reg[@offset='\'${i}\'']/bitfield[@name='\'${j}\'']' \
+                -v "@mask" $devicefile)
+            FUSEBITFIELD_SHIFT=$(echo "$FUSEBITFIELD_MASK" | \
+                sed "s,0x.2,1,g" | \
+                sed "s,0x.4,2,g" | \
+                sed "s,0x.6,1,g" | \
+                sed "s,0x.8,3,g" | \
+                sed "s,0x.C,2,g" | \
+                sed "s,0x.E,1,g" | \
+                sed "s,0x10,4,g" | \
+                sed "s,0x30,4,g" | \
+                sed "s,0x70,4,g" | \
+                sed "s,0xF0,4,g" | \
+                sed "s,0x20,5,g" | \
+                sed "s,0x60,5,g" | \
+                sed "s,0xE0,5,g" | \
+                sed "s,0x40,6,g" | \
+                sed "s,0xC0,6,g" | \
+                sed "s,0x80,7,g" | \
+                sed "s,0x..,0,g" )
+            FUSEBITFIELD_MASK=$(( $FUSEBITFIELD_MASK >> $FUSEBITFIELD_SHIFT ))
+            if test $(( $FUSEBITFIELD_MASK )) -gt 1 ; then 
+                BITNUM=0
+                while test $(($FUSEBITFIELD_MASK & 0x01)) -eq 1 ; do
+                    echo "#define FUSE_${j}${BITNUM}  ~_BV(${FUSEBITFIELD_SHIFT})  /* ${FUSEBITFIELD_TEXT} Bit ${BITNUM} */" >> $headerfile
+                    FUSEBITFIELD_MASK=$(($FUSEBITFIELD_MASK >> 1))
+                    BITNUM=$(($BITNUM + 1))
+                    FUSEBITFIELD_SHIFT=$(($FUSEBITFIELD_SHIFT + 1))
+                done
+            else
+                echo "#define FUSE_${j}  ~_BV(${FUSEBITFIELD_SHIFT})  /* ${FUSEBITFIELD_TEXT} */" >> $headerfile
+            fi
+        done
+        echo "#define FUSE${FUSEBYTENUM}_DEFAULT  (0xFF)" >> $headerfile
+    fi
+    echo "" >> $headerfile
+    FUSEBYTENUM=$((FUSEBYTENUM + 1))
+done
+echo "" >> $headerfile
+# todo: Default XMEGA fuse values are currently hardcoded to 0xFF.
+
+
+
+# XMEGA Lockbit information
+#---------------------------------------------------
+echo "/* ========== Lock Bits ========== */" >> $headerfile
+LOCK_BITS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'NVM\'']/registers/reg[@name='\'LOCKBITS\'']/bitfield[@name='\'LB\'']' -v "@name" $devicefile)
+if test -n "$LOCK_BITS" ; then
+    echo "#define __LOCK_BITS_EXIST" >> $headerfile
+fi
+
+BOOT_LOCK_APPLICATION_TABLE_BITS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'NVM\'']/registers/reg[@name='\'LOCKBITS\'']/bitfield[@name='\'BLBAT\'']' -v "@name" $devicefile)
+if test -n "$BOOT_LOCK_APPLICATION_TABLE_BITS" ; then
+    echo "#define __BOOT_LOCK_APPLICATION_TABLE_BITS_EXIST" >> $headerfile
+fi
+
+BOOT_LOCK_APPLICATION_BITS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'NVM\'']/registers/reg[@name='\'LOCKBITS\'']/bitfield[@name='\'BLBA\'']' -v "@name" $devicefile)
+if test -n "$BOOT_LOCK_APPLICATION_BITS" ; then
+    echo "#define __BOOT_LOCK_APPLICATION_BITS_EXIST" >> $headerfile
+fi
+
+BOOT_LOCK_BOOT_BITS=$(xml sel -T -t -m '/AVRPART/V2/templates/module[@class='\'NVM\'']/registers/reg[@name='\'LOCKBITS\'']/bitfield[@name='\'BLBB\'']' -v "@name" $devicefile)
+if test -n "$BOOT_LOCK_BOOT_BITS" ; then
+    echo "#define __BOOT_LOCK_BOOT_BITS_EXIST" >> $headerfile
+fi
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+# XMEGA Signature information
+#----------------------------------------------
+SIGNATURE_0=$(xml sel -T -t -m "/AVRPART/ADMIN/SIGNATURE" -v "ADDR000" $devicefile | sed "s,\\$,0x,g")
+SIGNATURE_1=$(xml sel -T -t -m "/AVRPART/ADMIN/SIGNATURE" -v "ADDR001" $devicefile | sed "s,\\$,0x,g")
+SIGNATURE_2=$(xml sel -T -t -m "/AVRPART/ADMIN/SIGNATURE" -v "ADDR002" $devicefile | sed "s,\\$,0x,g")
+echo "/* ========== Signature ========== */" >> $headerfile
+echo "#define SIGNATURE_0 ${SIGNATURE_0}" >> $headerfile
+echo "#define SIGNATURE_1 ${SIGNATURE_1}" >> $headerfile
+echo "#define SIGNATURE_2 ${SIGNATURE_2}" >> $headerfile
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+else
+
+# Classic AVR
+#==================
+
+# Registers and bit numbers.
+#-----------------------------
+
+# Get register section from input file and remove some unused elements.
+xml sel -t -c /AVRPART/MEMORY/IO_MEMORY $devicefile | \
+    xml ed -O \
+        -d /IO_MEMORY/IO_START_ADDR \
+        -d /IO_MEMORY/IO_STOP_ADDR \
+        -d /IO_MEMORY/EXT_IO_START_ADDR \
+        -d /IO_MEMORY/EXT_IO_STOP_ADDR \
+        -d /IO_MEMORY/MEM_START_ADDR \
+        -d /IO_MEMORY/MEM_STOP_ADDR > iomemory.xml
+
+# Get list of register names.
+REGNAMES=$(xml el iomemory.xml | sed "s,IO_MEMORY$,,g" | cut -d '/' -f 2 | sed "s,\r,,g" | uniq)
+
+# Convert temporary working XML file to PYX.
+xml pyx iomemory.xml > iomemory.pyx
+
+# For each register...
+MAX_ADDRESS_WIDTH=0
+for i in $REGNAMES ; do \
+    
+    # Get IO address.
+    IOADDR=$(xml sel -t -v /IO_MEMORY/$i/IO_ADDR iomemory.xml | sed "s,\r,," | sed "s,NA,," | sed "s,\\$,0x,g")
+    
+    # Get Memory address.
+    MEMADDR=$(xml sel -t -v /IO_MEMORY/$i/MEM_ADDR iomemory.xml | sed "s,\r,," | sed "s,\\$,0x,g")
+    
+    # Check for max width of address
+    WIDTH=$(( $(echo "$IOADDR" | wc -m) ))
+    if test $WIDTH -gt $MAX_ADDRESS_WIDTH ; then
+        MAX_ADDRESS_WIDTH=$WIDTH
+    fi
+    WIDTH=$(( $(echo "$MEMADDR" | wc -m) ))
+    if test $WIDTH -gt $MAX_ADDRESS_WIDTH ; then
+        MAX_ADDRESS_WIDTH=$WIDTH
+    fi
+    
+    # Get initialization value (if exists).
+    INIT=$(xml sel -t -v /IO_MEMORY/$i/INIT iomemory.xml | sed "s,\r,,")
+    
+    # Determine type of address.
+    if test -z "$IOADDR"; then
+        TYPE="mem"
+    else
+        TYPE="io"
+    fi
+    
+    # Convert named register element to REGISTER element with attributes in the PYX file.
+    sed -i "s,(${i}$,(REGISTER\nAname $i\nAtype $TYPE\nAio_addr $IOADDR\nAmem_addr $MEMADDR\nAsize 8\nAinit $INIT," iomemory.pyx
+    sed -i "s,)${i}$,)REGISTER," iomemory.pyx
+done
+# Subtract 3 from max address width: 2 for "0x" and 1 for line feed when echoing to wc.
+MAX_ADDRESS_WIDTH=$(( $MAX_ADDRESS_WIDTH - 3 ))
+
+
+#   - Convert temporary PYX file back to temporary XML file.
+#   - Remove unused (previously converted) elements, and common registers we won't keep.
+#   - Convert named bit mask elements to BIT elements with attributes
+#   - Sort the register names based on the memory address element.
+#   - Save it to the temporary XML file.
+xml depyx iomemory.pyx | \
+    xml ed -O \
+        -d "/IO_MEMORY/REGISTER/IO_ADDR" \
+        -d "/IO_MEMORY/REGISTER/MEM_ADDR" \
+        -d "/IO_MEMORY/REGISTER/INIT" \
+        -d "/IO_MEMORY/REGISTER[@name='SREG']" \
+        -d "/IO_MEMORY/REGISTER[@name='SP']" \
+        -d "/IO_MEMORY/REGISTER[@name='SPL']" \
+        -d "/IO_MEMORY/REGISTER[@name='SPH']" | \
+    sed 's,<.*_MASK>0x01</,<BIT value="0" name=",g' | \
+    sed 's,<.*_MASK>0x02</,<BIT value="1" name=",g' | \
+    sed 's,<.*_MASK>0x04</,<BIT value="2" name=",g' | \
+    sed 's,<.*_MASK>0x08</,<BIT value="3" name=",g' | \
+    sed 's,<.*_MASK>0x10</,<BIT value="4" name=",g' | \
+    sed 's,<.*_MASK>0x20</,<BIT value="5" name=",g' | \
+    sed 's,<.*_MASK>0x40</,<BIT value="6" name=",g' | \
+    sed 's,<.*_MASK>0x80</,<BIT value="7" name=",g' | \
+    sed 's,_MASK>$,"/>,g' | \
+    xml sel -t -e IO_MEMORY -n -m "/IO_MEMORY/REGISTER" -s "A:T:-" "@mem_addr" -c . -n > iomemory.xml
+
+# Remove temporary PYX file.
+rm iomemory.pyx
+
+# Calculate the set of word size register names needed.
+#   - Get list of all register names, each name followed by an EOL.
+#   - Convert to Unix line endings (for sed patterns to work).
+#   - Cut off ending '_L' of register names.
+#   - Cut off ending '_H' of register names.
+#   - Cut off ending 'L' of register names.
+#   - Cut off ending 'H' of register names.
+#   - Get list of only duplicate register names.
+#   - Remove duplicates.
+REGNAMES_WORD=$(xml sel -T -t -m "/IO_MEMORY/REGISTER" -v "@name" -n iomemory.xml | \
+    sed "s,\r\n,\n,g" | \
+    sed "s,_L$,,g" | \
+    sed "s,_H$,,g" | \
+    sed "s,L$,,g" | \
+    sed "s,H$,,g" | \
+    uniq -d | \
+    uniq)
+
+# Add word registers to temporary working XML file.
+#   - For each word register...
+for i in $REGNAMES_WORD ; do \
+    
+    # Get the register type from the Low register, 
+    #   convert to Unix line endings.
+    TYPE=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@type" iomemory.xml | sed "s,\r,,")
+    
+    # Get the io address from the Low register,
+    #   convert to Unix line endings.
+    IOADDR=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@io_addr" iomemory.xml | sed "s,\r,,")
+    
+    # Get the memory address from the Low register,
+    #   convert to Unix line endings.
+    MEMADDR=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@mem_addr" iomemory.xml | sed "s,\r,,")
+    
+    #   - Insert a new element before the Low register, name it as the word register
+    #   - Append a 'name' attribute
+    #   - Append a 'type' attribute
+    #   - Append a 'io_addr' attribute
+    #   - Append a 'mem_addr' attribute
+    #   - Append a 'size' attribute
+    #   - Rename the element to REGISTER
+    #   - Save to a 2nd temporary XML file.
+    xml ed -O -i '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' --type "elem" -n "$i" -v "" \
+        -a '/IO_MEMORY/'${i} --type "attr" -n "name" -v "$i" \
+        -a '/IO_MEMORY/'${i} --type "attr" -n "type" -v "$TYPE" \
+        -a '/IO_MEMORY/'${i} --type "attr" -n "io_addr" -v "$IOADDR" \
+        -a '/IO_MEMORY/'${i} --type "attr" -n "mem_addr" -v "$MEMADDR" \
+        -a '/IO_MEMORY/'${i} --type "attr" -n "size" -v "16" \
+        -r '/IO_MEMORY/'${i} -v "REGISTER" iomemory.xml > iomem2.xml
+    
+    # Move 2nd temporary XML file to first.
+    mv iomem2.xml iomemory.xml
+done
+
+
+# Fix width of all addresses.
+ALLREGS=$(xml sel -T -t -m "/IO_MEMORY/REGISTER" -v "concat(@name,' ')" iomemory.xml)
+for i in $ALLREGS ; do
+    MEM_ADDR=$(xml sel -T -t -m '/IO_MEMORY/REGISTER[@name='\'${i}\'']' -v "@mem_addr" iomemory.xml)
+    if test -n "$MEM_ADDR" ; then
+        NEW_MEM_ADDR=$(printf "0x%0${MAX_ADDRESS_WIDTH}X" $(( $MEM_ADDR )) )
+        xml ed -O -u '/IO_MEMORY/REGISTER[@name='\'${i}\'']/@mem_addr' -v "$NEW_MEM_ADDR" iomemory.xml > tmp.xml
+        mv tmp.xml iomemory.xml
+    fi
+    IO_ADDR=$(xml sel -T -t -m '/IO_MEMORY/REGISTER[@name='\'${i}\'']' -v "@io_addr" iomemory.xml)
+    if test -n "$IO_ADDR" ; then
+        NEW_IO_ADDR=$(printf "0x%0${MAX_ADDRESS_WIDTH}X" $(( $IO_ADDR )) )
+        xml ed -O -u '/IO_MEMORY/REGISTER[@name='\'${i}\'']/@io_addr' -v "$NEW_IO_ADDR" iomemory.xml > tmp.xml
+        mv tmp.xml iomemory.xml
+    fi
+done
+
+
+# Output data from temporary working XML file to avr-libc I/O header file.
+#   Replace hyphens with underscores.
+echo "/* Registers and associated bit numbers. */" >> $headerfile
+echo "" >> $headerfile
+xml sel -T \
+    -t -m "/IO_MEMORY/REGISTER[@type='io']" -s "A:T:-" "@io_addr" -n -v "concat('#define ',@name,' _SFR_IO',@size,'(',@io_addr,')')" -n \
+       -m "BIT[@value]" -s "A:T:-" "@value" -v "concat('#define ',@name,' ',@value)" -n \
+    -t -m "/IO_MEMORY/REGISTER[@type='mem']" -s "A:T:-" "@mem_addr" -n -v "concat('#define ',@name,' _SFR_MEM',@size,'(',@mem_addr,')')" -n \
+       -m "BIT[@value]" -s "A:T:-" "@value" -v "concat('#define ',@name,' ',@value)" -n \
+    -t -n -n iomemory.xml | \
+sed "s,-,_,g" >> $headerfile
+
+
+# Check for ADC 16-bit register and create ADCW with guard for assembly.
+ADC=$(grep "#define ADC " $headerfile | cut -d ' ' -f 3)
+if test -n "$ADC" ; then
+    sed -i "s,#define ADC ,#ifndef __ASSEMBLER__\\n#define ADC $ADC\\n#endif\\n#define ADCW ,g" $headerfile
+fi
+
+# Create list of 8-bit registers that have no associated bit names.
+REGS_NO_BITNAMES=$(xml sel -T -t -m "/IO_MEMORY/REGISTER[@size='8']" \
+    -i "count(BIT)=0" -v "@name" -n iomemory.xml | sed "s,\r\n,\n,g")
+
+# Create list of 8-bit registers in the XML file that have hyphens in the names.
+REGS_WITH_HYPHENS=$(xml sel -T -t -m "/IO_MEMORY/REGISTER[@size='8']" \
+    -i "contains(@name, '-')" -v "@name" -n \
+    -b -m "BIT" \
+    -i "contains(@name, '-')" -v "@name" -n \
+    iomemory.xml | sed "s,\r\n,\n,g")
+
+
+# Interrupt vectors.
+#----------------------
+NMB_VECTORS=$(xml sel -T -t -v /AVRPART/INTERRUPT_VECTOR/NMB_VECTORS $devicefile | sed "s,\r,,g")
+VECTOR_SIZE=$(( $(xml sel -T -t -v /AVRPART/INTERRUPT_VECTOR/VECTOR2/PROGRAM_ADDRESS $devicefile | sed "s,\\$,0x,g" | sed "s,\r,,g") * 2 ))
+echo "/* Interrupt vectors */" >> $headerfile
+echo "/* Vector 0 is the reset vector */" >> $headerfile
+VECTORS=$(xml sel -T -t -m "/AVRPART/INTERRUPT_VECTOR/*[PROGRAM_ADDRESS]" -s "A:T:-" "PROGRAM_ADDRESS" -v "concat(name(),' ')" $devicefile)
+for i in $VECTORS ; do
+    if test "$i" != "VECTOR1" ; then
+        VECTOR_SOURCE=$(xml sel -T -t -m "/AVRPART/INTERRUPT_VECTOR/$i" -v "SOURCE" $devicefile | \
+            sed "s,Reserved.*,Reserved,g" | \
+            sed "s/,//g" | \
+            sed "s, ,_,g")
+        if test "$VECTOR_SOURCE" != "Reserved" ; then
+            VECTOR_NUM=$(( $(echo $i | sed "s,VECTOR,,g") - 1))
+            VECTOR_DESC=$(xml sel -T -t -m "/AVRPART/INTERRUPT_VECTOR/$i" -v "DEFINITION" $devicefile)
+            echo "#define ${VECTOR_SOURCE}_vect_num  ${VECTOR_NUM}" >> $headerfile
+            echo "#define ${VECTOR_SOURCE}_vect      _VECTOR(${VECTOR_NUM})  /* ${VECTOR_DESC} */" >> $headerfile
+        fi
+    fi
+done
+echo "" >> $headerfile
+echo "#define _VECTOR_SIZE ${VECTOR_SIZE} /* Size of individual vector. */" >> $headerfile
+echo "#define _VECTORS_SIZE (${NMB_VECTORS} * _VECTOR_SIZE)" >> $headerfile
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+
+# Constants
+#-------------
+echo "/* Constants */" >> $headerfile
+
+# SPM_PAGESIZE
+SPM_PAGESIZE=$(( $(xml sel -T -t -v "/AVRPART/MEMORY/BOOT_CONFIG/PAGESIZE" $devicefile) * 2))
+echo "#define SPM_PAGESIZE (${SPM_PAGESIZE})" >> $headerfile
+
+# RAMSTART
+RAMSTART=$(xml sel -T -t -v "/AVRPART/MEMORY/INT_SRAM/START_ADDR" $devicefile | sed "s,\\$,0x,g") 
+echo "#define RAMSTART     (${RAMSTART})" >> $headerfile
+
+# RAMSIZE
+RAMSIZE=$(xml sel -T -t -v "/AVRPART/MEMORY/INT_SRAM/SIZE" $devicefile)
+echo "#define RAMSIZE      (${RAMSIZE})" >> $headerfile
+
+# RAMEND
+echo "#define RAMEND       (RAMSTART + RAMSIZE - 1)" >> $headerfile
+
+# XRAMSTART
+XRAMSTART=$(xml sel -T -t -v "/AVRPART/MEMORY/EXT_SRAM/START_ADDR" $devicefile | sed "s,\\$,0x,g")
+echo "#define XRAMSTART    (${XRAMSTART})" >> $headerfile
+
+# XRAMSIZE
+XRAMSIZE=$(xml sel -T -t -v "/AVRPART/MEMORY/EXT_SRAM/SIZE" $devicefile)
+echo "#define XRAMSIZE     (${XRAMSIZE})" >> $headerfile
+
+# XRAMEND
+if test $XRAMSIZE -gt 0 ; then
+    echo "#define XRAMEND      (XRAMSTART + XRAMSIZE - 1)" >> $headerfile
+else
+    echo "#define XRAMEND      (RAMEND)" >> $headerfile
+fi
+
+# E2END
+EEPROM_SIZE=$(( $(xml sel -T -t -v "/AVRPART/MEMORY/EEPROM" $devicefile) ))
+if test $EEPROM_SIZE -gt 0 ; then
+    EEPROM_LAST=$(( $EEPROM_SIZE - 1 ))
+else
+    EEPROM_LAST=0
+fi
+E2END=$(printf "0x%X" $EEPROM_LAST)
+echo "#define E2END        (${E2END})" >> $headerfile
+
+# E2PAGESIZE
+E2PAGESIZE=$(xml sel -T -t -v "/AVRPART/PROGRAMMING/EepromPageSize" $devicefile)
+echo "#define E2PAGESIZE   (${E2PAGESIZE})" >> $headerfile
+
+# FLASHEND
+FLASHEND=$(printf "0x%X" $(( $(xml sel -T -t -v "/AVRPART/MEMORY/PROG_FLASH" $devicefile) - 1)) )
+echo "#define FLASHEND     (${FLASHEND})" >> $headerfile
+
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+
+
+# Fuse information
+#---------------------
+xml sel -T -t -o "/* Fuses */" -n $devicefile >> $headerfile
+
+# Certain XML files have "templates", others do not. Use V1 information.
+NUM_FUSE_BYTES=$(xml sel -T -t -m /AVRPART/FUSE -v "count(LOW) + count(HIGH) + count(EXTENDED)" $devicefile)
+echo "#define FUSE_MEMORY_SIZE ${NUM_FUSE_BYTES}" >> $headerfile
+echo "" >> $headerfile
+
+if test $NUM_FUSE_BYTES -eq 1 ; then
+    # Single Fuse Byte
+    xml sel -t -e AVRPART -m /AVRPART/FUSE/LOW -c . $devicefile | \
+        xml pyx | \
+        sed "s,(FUSE,(FUSE\nAbitnum ,g" | \
+        sed "s,)FUSE.*,)FUSE,g" | \
+        sed "s,-\\$,-,g" | \
+        xml depyx | \
+        xml sel -T \
+        -t -i "count(/AVRPART/LOW)" -o "/* Fuse Byte */" -n \
+        -t -m "/AVRPART/LOW/FUSE[@bitnum]" -s "A:T:-" "@bitnum" -v "concat('#define FUSE_',NAME,'  (unsigned char)~_BV(',@bitnum,')  /* ',TEXT,' */')" -n \
+        -t -i "count(/AVRPART/LOW)" -o "#define FUSE_DEFAULT ("  \
+           -m "/AVRPART/LOW/FUSE" -i "DEFAULT=0" -v "concat('FUSE_',NAME,' &amp; ')" \
+        -t -i "count(/AVRPART/LOW)" -o ")" -n -n | \
+        sed "s, \& ),)," | \
+        sed "s,DEFAULT (),DEFAULT (0xFF)," >> $headerfile
+else
+    # Low Fuse Byte
+    xml sel -t -e AVRPART -m /AVRPART/FUSE/LOW -c . $devicefile | \
+        xml pyx | \
+        sed "s,(FUSE,(FUSE\nAbitnum ,g" | \
+        sed "s,)FUSE.*,)FUSE,g" | \
+        sed "s,-\\$,-,g" | \
+        xml depyx | \
+        xml sel -T \
+        -t -i "count(/AVRPART/LOW)" -o "/* Low Fuse Byte */" -n \
+        -t -m "/AVRPART/LOW/FUSE[@bitnum]" -s "A:T:-" "@bitnum" -v "concat('#define FUSE_',NAME,'  (unsigned char)~_BV(',@bitnum,')  /* ',TEXT,' */')" -n \
+        -t -i "count(/AVRPART/LOW)" -o "#define LFUSE_DEFAULT ("  \
+           -m "/AVRPART/LOW/FUSE" -i "DEFAULT=0" -v "concat('FUSE_',NAME,' &amp; ')" \
+        -t -i "count(/AVRPART/LOW)" -o ")" -n -n | \
+        sed "s, \& ),)," | \
+        sed "s,DEFAULT (),DEFAULT (0xFF)," >> $headerfile
+        
+    # High Fuse Byte    
+    xml sel -t -e AVRPART -m /AVRPART/FUSE/HIGH -c . $devicefile | \
+        xml pyx | \
+        sed "s,(FUSE,(FUSE\nAbitnum ,g" | \
+        sed "s,)FUSE.*,)FUSE,g" | \
+        sed "s,-\\$,-,g" | \
+        xml depyx | \
+        xml sel -T \
+        -t -i "count(/AVRPART/HIGH)" -o "/* High Fuse Byte */" -n \
+        -t -m "/AVRPART/HIGH/FUSE[@bitnum]" -s "A:T:-" "@bitnum" -v "concat('#define FUSE_',NAME,'  (unsigned char)~_BV(',@bitnum,')  /* ',TEXT,' */')" -n \
+        -t -i "count(/AVRPART/HIGH)" -o "#define HFUSE_DEFAULT (" \
+           -m "/AVRPART/HIGH/FUSE" -i "DEFAULT=0" -v "concat('FUSE_',NAME,' &amp; ')" \
+        -t -i "count(/AVRPART/HIGH)" -o ")" -n -n | \
+        sed "s, \& ),)," | \
+        sed "s,DEFAULT (),DEFAULT (0xFF)," >> $headerfile
+
+    # Extended Fuse Byte
+    xml sel -t -e AVRPART -m /AVRPART/FUSE/EXTENDED -c . $devicefile | \
+        xml pyx | \
+        sed "s,(FUSE,(FUSE\nAbitnum ,g" | \
+        sed "s,)FUSE.*,)FUSE,g" | \
+        sed "s,-\\$,-,g" | \
+        xml depyx | \
+        xml sel -T \
+        -t -i "count(/AVRPART/EXTENDED)" -o "/* Extended Fuse Byte */" -n \
+        -t -m "/AVRPART/EXTENDED/FUSE[@bitnum]" -s "A:T:-" "@bitnum" -v "concat('#define FUSE_',NAME,'  (unsigned char)~_BV(',@bitnum,')  /* ',TEXT,' */')" -n \
+        -t -i "count(/AVRPART/EXTENDED)" -o "#define EFUSE_DEFAULT (" \
+           -m "/AVRPART/EXTENDED/FUSE" -i "DEFAULT=0" -v "concat('FUSE_',NAME,' &amp; ')" \
+        -t -i "count(/AVRPART/EXTENDED)" -o ")" -n -n | \
+        sed "s, \& ),)," | \
+        sed "s,DEFAULT (),DEFAULT (0xFF)," >> $headerfile
+fi
+echo "" >> $headerfile
+
+
+
+# Lockbit information
+#-----------------------
+xml sel -T -t -o "/* Lock Bits */" -n $devicefile >> $headerfile
+
+# Normal V2 information location.
+xml sel -T -t -i "count(/AVRPART/V2/templates/module[@class='LOCKBIT']/registers/reg/bitfield[@name='LB'])" -o "#define __LOCK_BITS_EXIST" -n \
+        -i "count(/AVRPART/V2/templates/module[@class='LOCKBIT']/registers/reg/bitfield[@name='BLB0'])" -o "#define __BOOT_LOCK_BITS_0_EXIST" -n \
+        -i "count(/AVRPART/V2/templates/module[@class='LOCKBIT']/registers/reg/bitfield[@name='BLB1'])" -o "#define __BOOT_LOCK_BITS_1_EXIST" -n $devicefile >> $headerfile
+
+# Certain XML files have "templates", others do not. Use alternate XPath.
+xml sel -T -t -i "count(/AVRPART/LOCKBIT/V2/module[@class='LOCKBIT']/registers/reg/bitfield[@name='LB'])" -o "#define __LOCK_BITS_EXIST" -n \
+        -i "count(/AVRPART/LOCKBIT/V2/module[@class='LOCKBIT']/registers/reg/bitfield[@name='BLB0'])" -o "#define __BOOT_LOCK_BITS_0_EXIST" -n \
+        -i "count(/AVRPART/LOCKBIT/V2/module[@class='LOCKBIT']/registers/reg/bitfield[@name='BLB1'])" -o "#define __BOOT_LOCK_BITS_1_EXIST" -n $devicefile >> $headerfile
+
+xml sel -T -t -n -n $devicefile >> $headerfile
+
+
+
+# Signature information
+#--------------------------
+SIGNATURE_0=$(xml sel -T -t -m "/AVRPART/ADMIN/SIGNATURE" -v "ADDR000" $devicefile | sed "s,\\$,0x,g")
+SIGNATURE_1=$(xml sel -T -t -m "/AVRPART/ADMIN/SIGNATURE" -v "ADDR001" $devicefile | sed "s,\\$,0x,g")
+SIGNATURE_2=$(xml sel -T -t -m "/AVRPART/ADMIN/SIGNATURE" -v "ADDR002" $devicefile | sed "s,\\$,0x,g")
+echo "/* Signature */" >> $headerfile
+echo "#define SIGNATURE_0 ${SIGNATURE_0}" >> $headerfile
+echo "#define SIGNATURE_1 ${SIGNATURE_1}" >> $headerfile
+echo "#define SIGNATURE_2 ${SIGNATURE_2}" >> $headerfile
+echo "" >> $headerfile
+echo "" >> $headerfile
+
+    
+# End of XMEGA/Classic
+fi
+
+
+# Ending idempotent guard.
+#--------------------------
+echo "#endif /* _AVR_${DEVICE}_H_ */" >> $headerfile
+echo "" >> $headerfile
+
+# Convert to Unix line endings.
+#-------------------------------
+sed -i "s,\r\n,\n,g" $headerfile
+
+
+# Set permissions on the file
+#------------------------------
+chmod 644 $headerfile
+
+
+# I/O Header File and XML Device File Verification
+#--------------------------------------------------
+LOGFILE=avrgcc-header.log
+# Turn off printing of commands for the verification.
+set +ex
+
+if test -e $LOGFILE ; then
+    rm -f $LOGFILE
+fi
+
+echo Checking for misspelled preprocessor directives in header file... | tee -a $LOGFILE
+grep "#" $headerfile | cut -d '#' -f 2 | cut -d ' ' -f 1 | sort | uniq | tee -a $LOGFILE
+echo | tee -a $LOGFILE
+
+echo Checking for duplicate definitions in header file... | tee -a $LOGFILE
+grep "#define" $headerfile | cut -d '#' -f 2 | cut -d ' ' -f 2 | sort | uniq -d | uniq | tee -a $LOGFILE
+echo | tee -a $LOGFILE
+
+echo Checking for hyphens in defined names in header file... | tee -a $LOGFILE
+grep "#define" $headerfile | cut -d '#' -f 2 | cut -d ' ' -f 2 | grep '-' | tee -a $LOGFILE
+echo | tee -a $LOGFILE
+
+echo Checking for hyphens in register and bit names in XML device file... | tee -a $LOGFILE
+echo "$REGS_WITH_HYPHENS" | tee -a $LOGFILE
+echo | tee -a $LOGFILE
+
+echo Checking for invalid signature... | tee -a $LOGFILE
+if test "$SIGNATURE_0" = "0x0" -a "$SIGNATURE_1" = "0x0" -a "$SIGNATURE_2" = "0x0" ; then
+    echo "  Invalid signature: ${SIGNATURE_0} ${SIGNATURE_1} ${SIGNATURE_2}" | tee -a $LOGFILE
+    echo "" | tee -a $LOGFILE
+fi
+
+echo Checking for registers that have no associated bit names... | tee -a $LOGFILE
+echo "$REGS_NO_BITNAMES" | tee -a $LOGFILE
+echo | tee -a $LOGFILE
+
+# todo:
+# Properly get all preprocessor directives
+# Check directives against a known dictionary.

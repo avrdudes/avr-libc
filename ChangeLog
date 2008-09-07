@@ -1,3 +1,8 @@
+2008-09-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Add script to convert an Atmel XML device file to a
+	header file for inclusion in avr-libc.
+
 2008-08-22  Anatoly Sokolov  <aesok@post.ru>
 
 	* configure.ac: Add the AT43USB320 device to avr31 architecture.
