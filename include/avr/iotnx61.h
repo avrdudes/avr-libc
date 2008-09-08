@@ -370,7 +370,7 @@
 #define CS01    1
 #define CS02    2
 #define PSR0    3
-#define TMS     4
+#define TSM     4
 
 #define MCUSR   _SFR_IO8(0x34)
 #define PORF    0
