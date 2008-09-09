@@ -1,5 +1,11 @@
 2008-09-08  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* xml/avrgcc-header: Fix xmega header file generation to include all
+	group mask and group position definitions. Add interrupt number generation
+	to xmega devices. Remove blank line from classic device generation.
+
+2008-09-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iotnx61.h: Fix misspelled bit name for TCCR0B.
 
 2008-09-07  Eric B. Weddington  <eric.weddington@atmel.com>
