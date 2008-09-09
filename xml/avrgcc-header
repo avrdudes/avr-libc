@@ -80,7 +80,7 @@ if test "$headerfile" = ""; then
 fi
 
 
-set -ex
+set -x
 
 
 if test -e "$headerfile"; then rm "$headerfile"; fi
@@ -548,25 +548,60 @@ for i in $MODULE_NAMES ; do
 
                     BITFIELD_MASK=$(($BITFIELD_GROUP_MASK >> $BITFIELD_GROUP_POSITION))
                     if test $(( $BITFIELD_MASK )) -gt 1 ; then
-                        DEFINITION=" ${j}_${m}_gm  ${BITFIELD_GROUP_MASK}"
-                        grep "${DEFINITION}" $headerfile && echo "#define${DEFINITION}  /* ${BITFIELD_TEXT} group mask. */" >> $headerfile
-                        #echo "/*${DEFINITION}  Predefined. */" >> $headerfile
-
-                        #echo "#define ${j}_${m}_gm  ${BITFIELD_GROUP_MASK}  /* ${BITFIELD_TEXT} group mask. */" >> $headerfile
-                        echo "#define ${j}_${m}_gp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} group position. */" >> $headerfile
+                        DEFINITION=" ${j}_${m}_gm "
+                        grep "${DEFINITION}" $headerfile
+                        if test $? -eq 0 ; then
+                            echo "/*${DEFINITION} Predefined. */" >> $headerfile
+                        else
+                            echo "#define ${j}_${m}_gm  ${BITFIELD_GROUP_MASK}  /* ${BITFIELD_TEXT} group mask. */" >> $headerfile
+                        fi
+                        
+                        DEFINITION=" ${j}_${m}_gp "
+                        grep "${DEFINITION}" $headerfile
+                        if test $? -eq 0 ; then
+                            echo "/*${DEFINITION} Predefined. */" >> $headerfile
+                        else
+                            echo "#define ${j}_${m}_gp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} group position. */" >> $headerfile
+                        fi
                         
                         BITNUM="0"
                         while test $(($BITFIELD_MASK & 0x01)) -eq 1 ; do
-                            echo "#define ${j}_${m}${BITNUM}_bm  (1<<${BITFIELD_GROUP_POSITION})  /* ${BITFIELD_TEXT} bit ${BITNUM} mask. */" >> $headerfile
-                            echo "#define ${j}_${m}${BITNUM}_bp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} bit ${BITNUM} position. */" >> $headerfile
+                            DEFINITION=" ${j}_${m}${BITNUM}_bm "
+                            grep "${DEFINITION}" $headerfile
+                            if test $? -eq 0 ; then
+                                echo "/*${DEFINITION} Predefined. */" >> $headerfile
+                            else
+                                echo "#define ${j}_${m}${BITNUM}_bm  (1<<${BITFIELD_GROUP_POSITION})  /* ${BITFIELD_TEXT} bit ${BITNUM} mask. */" >> $headerfile
+                            fi
+                            
+                            DEFINITION=" ${j}_${m}${BITNUM}_bp "
+                            grep "${DEFINITION}" $headerfile
+                            if test $? -eq 0 ; then
+                                echo "/*${DEFINITION} Predefined. */" >> $headerfile
+                            else
+                                echo "#define ${j}_${m}${BITNUM}_bp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} bit ${BITNUM} position. */" >> $headerfile
+                            fi
                             
                             BITFIELD_GROUP_POSITION=$(($BITFIELD_GROUP_POSITION + 1))
                             BITFIELD_MASK=$(($BITFIELD_MASK >> 1))
                             BITNUM=$(($BITNUM + 1))
                         done
                     else
-                        echo "#define ${j}_${m}_bm  ${BITFIELD_GROUP_MASK}  /* ${BITFIELD_TEXT} bit mask. */" >> $headerfile
-                        echo "#define ${j}_${m}_bp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} bit position. */" >> $headerfile
+                        DEFINITION=" ${j}_${m}_bm "
+                        grep "${DEFINITION}" $headerfile
+                        if test $? -eq 0 ; then
+                            echo "/*${DEFINITION} Predefined. */" >> $headerfile
+                        else
+                            echo "#define ${j}_${m}_bm  ${BITFIELD_GROUP_MASK}  /* ${BITFIELD_TEXT} bit mask. */" >> $headerfile
+                        fi
+                        
+                        DEFINITION=" ${j}_${m}_bp "
+                        grep "${DEFINITION}" $headerfile
+                        if test $? -eq 0 ; then
+                            echo "/*${DEFINITION} Predefined. */" >> $headerfile
+                        else
+                            echo "#define ${j}_${m}_bp  ${BITFIELD_GROUP_POSITION}  /* ${BITFIELD_TEXT} bit position. */" >> $headerfile
+                        fi
                     fi
                     echo "" >> $headerfile
                     
@@ -577,7 +612,6 @@ for i in $MODULE_NAMES ; do
     done
 done
 echo "" >> $headerfile
-
 
 
 # XMEGA Generic Port Pin definitions
@@ -623,7 +657,8 @@ for i in $INTERRUPT_MODULES ; do
         INT_OFFSET=$(xml sel -T -t -m '/AVRPART/V2/templates/module/interrupt-group[@name='\'${MODULE_REF}\'']/int[@name='\'${j}\'']' -v "@offset" $devicefile)
         INT_TEXT=$(xml sel -T -t -m '/AVRPART/V2/templates/module/interrupt-group[@name='\'${MODULE_REF}\'']/int[@name='\'${j}\'']' -v "@text" $devicefile)
         VECTOR_NUM=$(($MODULE_OFFSET + $INT_OFFSET))
-        echo "#define ${i}_${j}_vect  _VECTOR(${VECTOR_NUM})  /* ${INT_TEXT} */" >> $headerfile
+        echo "#define ${i}_${j}_vect_num  ${VECTOR_NUM}" >> $headerfile
+        echo "#define ${i}_${j}_vect      _VECTOR(${VECTOR_NUM})  /* ${INT_TEXT} */" >> $headerfile
     done
     echo "" >> $headerfile
 done
@@ -942,7 +977,6 @@ done
 # Output data from temporary working XML file to avr-libc I/O header file.
 #   Replace hyphens with underscores.
 echo "/* Registers and associated bit numbers. */" >> $headerfile
-echo "" >> $headerfile
 xml sel -T \
     -t -m "/IO_MEMORY/REGISTER[@type='io']" -s "A:T:-" "@io_addr" -n -v "concat('#define ',@name,' _SFR_IO',@size,'(',@io_addr,')')" -n \
        -m "BIT[@value]" -s "A:T:-" "@value" -v "concat('#define ',@name,' ',@value)" -n \
