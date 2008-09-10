@@ -146,7 +146,7 @@ __asm__ __volatile__ ( \
     : /* no outputs */ \
     : "=M" (_SFR_MEM_ADDR(RAMPD)), \
       "=M" (_SFR_MEM_ADDR(CCP)), \
-      "=M" (_SFR_MEM_ADDR(WDT_CTRL)) \
+      "=M" (_SFR_MEM_ADDR(WDT_CTRL)), \
       "r" (0xD8), \
       "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | value)), \
     : "r0" \
