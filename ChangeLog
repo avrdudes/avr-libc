@@ -1,3 +1,8 @@
+2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/wdt.h: Add missing comma in inline assembly for xmega
+	devices.
+
 2008-09-08  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* xml/avrgcc-header: Fix xmega header file generation to include all
