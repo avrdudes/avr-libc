@@ -1,5 +1,10 @@
 2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/wdt.h: Overhaul inline assembly in wdt_enable() for 
+	xmega devices. Remove indentation on another macro.
+
+2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/wdt.h: Add missing comma in inline assembly for xmega
 	devices.
 

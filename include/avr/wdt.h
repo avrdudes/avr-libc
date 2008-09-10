@@ -138,19 +138,20 @@
 */
 #define wdt_enable(value) \
 __asm__ __volatile__ ( \
-    "in __tmp_reg__, %0 \n\t" \
-    "out %1, %3 \n\t" \
-    "sts %2, %4 \n\t" \
-    "wdr \n\t" \
-    "out %0, __tmp_reg__ \n\t" \
-    : /* no outputs */ \
-    : "=M" (_SFR_MEM_ADDR(RAMPD)), \
-      "=M" (_SFR_MEM_ADDR(CCP)), \
-      "=M" (_SFR_MEM_ADDR(WDT_CTRL)), \
-      "r" (0xD8), \
-      "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | value)), \
+    "in __tmp_reg__, %0"  "\n\t" \
+    "out %1, %3"          "\n\t" \
+    "sts %2, %4"          "\n\t" \
+    "wdr"                 "\n\t" \
+    "out %0, __tmp_reg__" "\n\t" \
+    : \
+    : "M" (_SFR_MEM_ADDR(RAMPD)), \
+      "M" (_SFR_MEM_ADDR(CCP)), \
+      "M" (_SFR_MEM_ADDR(WDT_CTRL)), \
+      "r" ((uint8_t)0xD8), \
+      "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | value)) \
     : "r0" \
 )
+
 
 #elif defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \
@@ -214,20 +215,20 @@ __asm__ __volatile__ ( \
 /* Use STS instruction. */
  
 #define wdt_enable(value)   \
-    __asm__ __volatile__ (  \
-        "in __tmp_reg__,__SREG__" "\n\t"    \
-        "cli" "\n\t"    \
-        "wdr" "\n\t"    \
-        "sts %0,%1" "\n\t"  \
-        "out __SREG__,__tmp_reg__" "\n\t"   \
-        "sts %0,%2" \
-        : /* no outputs */  \
-        : "M" (_SFR_MEM_ADDR(_WD_CONTROL_REG)), \
-        "r" (_BV(_WD_CHANGE_BIT) | _BV(WDE)), \
-        "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
-            _BV(WDE) | (value & 0x07)) ) \
-        : "r0"  \
-    )
+__asm__ __volatile__ (  \
+    "in __tmp_reg__,__SREG__" "\n\t"    \
+    "cli" "\n\t"    \
+    "wdr" "\n\t"    \
+    "sts %0,%1" "\n\t"  \
+    "out __SREG__,__tmp_reg__" "\n\t"   \
+    "sts %0,%2" "\n\t" \
+    : /* no outputs */  \
+    : "M" (_SFR_MEM_ADDR(_WD_CONTROL_REG)), \
+    "r" (_BV(_WD_CHANGE_BIT) | _BV(WDE)), \
+    "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
+        _BV(WDE) | (value & 0x07)) ) \
+    : "r0"  \
+)
 
 #define wdt_disable() \
 __asm__ __volatile__ (  \
