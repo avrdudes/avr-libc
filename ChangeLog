@@ -1,3 +1,8 @@
+2008-09-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Re-generate file.
+	* include/avr/iox64a1.h: Same.
+
 2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn26.h: Fix LFUSE_DEFAULT setting.
