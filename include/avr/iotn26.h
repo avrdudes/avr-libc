@@ -361,7 +361,7 @@
 #define FUSE_SUT1        (unsigned char)~_BV(5)
 #define FUSE_CKOPT       (unsigned char)~_BV(6)
 #define FUSE_PLLCK       (unsigned char)~_BV(7)
-#define LFUSE_DEFAULT (FUSE_CKSEL1 & FUSE_CKSEL2)
+#define LFUSE_DEFAULT (FUSE_CKSEL1 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0)
 
 /* High Fuse Byte */
 #define FUSE_BODEN       (unsigned char)~_BV(0)

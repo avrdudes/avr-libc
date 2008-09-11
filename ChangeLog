@@ -1,5 +1,9 @@
 2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iotn26.h: Fix LFUSE_DEFAULT setting.
+
+2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/wdt.h: Overhaul inline assembly in wdt_enable() for 
 	xmega devices. Remove indentation on another macro.
 
