@@ -1,3 +1,7 @@
+2008-09-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* doc/api/tools-install.dox: Update tools for Windows builds.
+
 2008-09-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox128a1.h: Re-generate file.
@@ -587,7 +591,7 @@
 	check of simulavr's runtime errors.
 	* tests/simulate/regression/20080405-eeprom.c: New file.
 
-2008-04-04  Eric B. Weddington
+2008-04-04  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #22834.
 	* include/iomxx4.h: Add BOD and BODSE bit definitions.
