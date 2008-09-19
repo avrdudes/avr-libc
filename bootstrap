@@ -5,7 +5,7 @@
 # bootstrap script to build all the *.in files and configure script.
 #
 
-# autoconf-2.59, 2.60, or 2.61 is required
+# autoconf-2.59, 2.60, 2.61, or 2.62 is required
 
 : ${AUTOHEADER="autoheader${AC_VER}"}
 : ${AUTOCONF="autoconf${AC_VER}"}
@@ -19,9 +19,10 @@
 
 AUTOCONF_VER=`(${AUTOCONF} --version 2>/dev/null | head -n 1 | \
               cut -d ' ' -f 4) 2>/dev/null`
-if [ "$AUTOCONF_VER" != "2.59" -a "$AUTOCONF_VER" != "2.60" -a "$AUTOCONF_VER" != "2.61" ]
+if [ "$AUTOCONF_VER" != "2.59" -a "$AUTOCONF_VER" != "2.60" -a "$AUTOCONF_VER" != "2.61" \
+     -a "$AUTOCONF_VER" != "2.62" ]
 then
-	echo "You need to use autoconf version 2.59, 2.60, or 2.61."
+	echo "You need to use autoconf version 2.59, 2.60, 2.61, or 2.62."
 	echo "You are using `${AUTOCONF} --version | head -n 1`."
 	exit 1
 fi
