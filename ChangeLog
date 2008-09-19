@@ -1,3 +1,7 @@
+2008-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* bootstrap: Allow for autoconf 2.62.
+
 2008-09-16  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* doc/api/tools-install.dox: Update tools for Windows builds.
