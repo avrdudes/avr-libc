@@ -202,16 +202,15 @@
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
-        "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         "clr  r1\n\t"                            \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_PAGE_FILL),       \
-          "r" ((uint16_t)address),               \
+          "z" ((uint16_t)address),               \
           "r" ((uint16_t)data)                   \
-        : "r0", "r30", "r31"                     \
+        : "r0"                                   \
     );                                           \
 }))
 
@@ -220,7 +219,6 @@
     __asm__ __volatile__                         \
     (                                            \
         "movw  r0, %3\n\t"                       \
-        "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         ".word 0xffff\n\t"                       \
@@ -229,9 +227,9 @@
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_PAGE_FILL),       \
-          "r" ((uint16_t)address),               \
+          "z" ((uint16_t)address),               \
           "r" ((uint16_t)data)                   \
-        : "r0", "r30", "r31"                     \
+        : "r0"                                   \
     );                                           \
 }))
 
@@ -259,14 +257,12 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
-          "r" ((uint16_t)address)                \
-        : "r30", "r31"                           \
+          "z" ((uint16_t)address)                \
     );                                           \
 }))
 
@@ -274,7 +270,6 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         ".word 0xffff\n\t"                       \
@@ -282,8 +277,7 @@
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_PAGE_ERASE),      \
-          "r" ((uint16_t)address)                \
-        : "r30", "r31"                           \
+          "z" ((uint16_t)address)                \
     );                                           \
 }))
 
@@ -308,14 +302,12 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
-          "r" ((uint16_t)address)                \
-        : "r30", "r31"                           \
+          "z" ((uint16_t)address)                \
     );                                           \
 }))
 
@@ -323,7 +315,6 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw r30, %2\n\t"                       \
         "sts %0, %1\n\t"                         \
         "spm\n\t"                                \
         ".word 0xffff\n\t"                       \
@@ -331,8 +322,7 @@
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)__BOOT_PAGE_WRITE),      \
-          "r" ((uint16_t)address)                \
-        : "r30", "r31"                           \
+          "z" ((uint16_t)address)                \
     );                                           \
 }))
 

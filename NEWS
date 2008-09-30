@@ -12,6 +12,7 @@
   [sourceforge.net: #2033993] User manual: data symbol spec incorrect
   [#21621] Allow autoconf 2.61
   [#21622] Support building in a subdirectory
+  [#21623] boot.h: Use the "z" register constraint
   [#22240] Add EEPROM Page Size to header files
   [#22572] Documentation FAQ example proposal
   [#22828] eeprom_write_block(): incompatibility in args order
