@@ -1,3 +1,12 @@
+2008-09-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #21623.
+	* include/avr/boot.h (__boot_page_fill_normal, __boot_page_fill_alternate,
+	__boot_page_erase_normal, __boot_page_erase_alternate,
+	__boot_page_write_normal, __boot_page_write_alternate): Use the 'z' 
+	constraint instead of explictly r30,r31.
+	Thanks to Shaun Jackman for initial patch.
+
 2008-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* bootstrap: Allow for autoconf 2.62.
