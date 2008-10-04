@@ -1,3 +1,8 @@
+2008-10-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #24446: _attribute_ should be __attribute__ (with double underscores)
+	* include/avr/wdt.h: Fix spelling mistake.
+
 2008-09-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix bug #21623.
