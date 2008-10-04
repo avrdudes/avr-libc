@@ -66,6 +66,7 @@
   [#23871] clock_prescale_set() not available for ATmega32U4
   [#23959] Small typo in deprecated documentation
   [#23969] eeprom_read_byte() throws interrupt EE_READY although EERIE is cleared, controller resets
+  [#24446] _attribute_ should be __attribute__ (with double underscores)
 
 * Other changes:
 

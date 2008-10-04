@@ -70,7 +70,7 @@
     #include <stdint.h>
     #include <avr/wdt.h>
 
-    uint8_t mcusr_mirror _attribute_ ((section (".noinit")));
+    uint8_t mcusr_mirror __attribute__ ((section (".noinit")));
 
     void get_mcusr(void) \
       __attribute__((naked)) \
