@@ -1,3 +1,8 @@
+2008-10-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* crt1/gcrt1.S: Clear the RAMPZ register after __do_copy_data for 
+	devices	> 64K flash.
+
 2008-10-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #24446: _attribute_ should be __attribute__ (with double underscores)
