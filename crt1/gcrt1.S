@@ -265,6 +265,7 @@ __do_copy_data:
 	cpi	r26, lo8(__data_end)
 	cpc	r27, r17
 	brne	.L__do_copy_data_loop
+    out	AVR_RAMPZ_ADDR, __zero_reg__
 #endif /* BIG_CODE */
 
 	.set	__stack, RAMEND
