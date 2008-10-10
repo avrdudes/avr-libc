@@ -1,3 +1,8 @@
+2008-10-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/sleep.h: Change PM_SLEEP_CTRL to SLEEP_CTRL for xmega
+	devices.
+
 2008-10-07  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* crt1/gcrt1.S: Clear the RAMPZ register after __do_copy_data for 

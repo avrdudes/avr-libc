@@ -106,10 +106,10 @@
 
 
 /* Define an internal sleep control register and an internal sleep enable bit mask. */
-#if defined(PM_SLEEP_CTRL)
+#if defined(SLEEP_CTRL)
 
     /* XMEGA devices */
-    #define _SLEEP_CONTROL_REG  PM_SLEEP_CTRL
+    #define _SLEEP_CONTROL_REG  SLEEP_CTRL
     #define _SLEEP_ENABLE_MASK  SLEEP_SEN_bm
 
 #elif defined(SMCR)
