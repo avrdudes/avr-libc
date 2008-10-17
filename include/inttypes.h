@@ -63,8 +63,8 @@
     uint8_t smallval;
     int32_t longval;
     ...
-    printf("The hexadecimal value of smallval is " PRIx8
-           ", the decimal value of longval is " PRId32 ".\n",
+    printf("The hexadecimal value of smallval is %" PRIx8
+           ", the decimal value of longval is %" PRId32 ".\n",
 	   smallval, longval);
     \endcode
 */
