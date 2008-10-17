@@ -1,3 +1,8 @@
+2008-10-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #24207.
+	* include/inttypes.h: Add missing '%' characters to documentation.
+
 2008-10-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/sleep.h: Change PM_SLEEP_CTRL to SLEEP_CTRL for xmega
