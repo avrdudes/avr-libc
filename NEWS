@@ -42,6 +42,7 @@
   [#22390] Unclear note about function pointers
   [#22447] Summary of iom?8p.h header updates needed
   [#22493] Typo in iom1284p.h.
+  [#22540] Adding signature bytes to header files
   [#22548] Missing IVCE and IVSEL in iom328p.h
   [#22568] Missing EEPROM_REG_LOCATIONS in iom328p.h
   [#22572] Documentation FAQ example proposal

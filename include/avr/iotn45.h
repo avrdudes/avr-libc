@@ -80,4 +80,10 @@
 #define __LOCK_BITS_EXIST
 
 
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x92
+#define SIGNATURE_2 0x06
+
+
 #endif /* _AVR_IOTN45_H_ */

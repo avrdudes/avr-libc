@@ -605,4 +605,10 @@
 #define __BOOT_LOCK_BITS_1_EXIST 
 
 
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x94
+#define SIGNATURE_2 0x03
+
+
 #endif /* _AVR_IOM16_H_ */
