@@ -14,6 +14,7 @@
   [#21622] Support building in a subdirectory
   [#21623] boot.h: Use the "z" register constraint
   [#22240] Add EEPROM Page Size to header files
+  [#22540] Adding signature bytes to header files
   [#22572] Documentation FAQ example proposal
   [#22828] eeprom_write_block(): incompatibility in args order
   [#22834] ATmega164P/324P/644P/1284P lack BODS/BODSE bits in MCUCR

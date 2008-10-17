@@ -1086,7 +1086,6 @@
 
 
 /* Fuses */
-
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
@@ -1117,10 +1116,17 @@
 #define FUSE_BODLEVEL2 (unsigned char)~_BV(2)  /* Brown-out Detector trigger level */
 #define EFUSE_DEFAULT (0xFF)
 
+
 /* Lock Bits */
 #define __LOCK_BITS_EXIST
 #define __BOOT_LOCK_BITS_0_EXIST
 #define __BOOT_LOCK_BITS_1_EXIST 
+
+
+/* Signature */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x97
+#define SIGNATURE_2 0x05
 
 
 #endif  /* _AVR_IOM1284P_H_ */
