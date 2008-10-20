@@ -30,7 +30,7 @@
 
 /* $Id$ */
 
-/* avr/iox128a1.h - definitions for ATxmega128A1 */
+/* avr/iox256a3v.h - definitions for ATxmega256A3V */
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -39,14 +39,14 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iox128a1.h"
+#  define _AVR_IOXXX_H_ "iox256a3v.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
 
-#ifndef _AVR_ATxmega128A1_H_
-#define _AVR_ATxmega128A1_H_ 1
+#ifndef _AVR_ATxmega256A3V_H_
+#define _AVR_ATxmega256A3V_H_ 1
 
 
 /* Ungrouped common registers */
@@ -1485,38 +1485,18 @@ typedef enum DAC_REFRESH_enum
 
 /*
 --------------------------------------------------------------------------
-RTC - Real-Time Clounter
+RTC32 - 32-bit Real-Time Counter
 --------------------------------------------------------------------------
 */
 
-/* Real-Time Counter */
-typedef struct RTC_struct
+/* 32-bit Real-Time Clounter */
+typedef struct RTC32_struct
 {
     register8_t CTRL;  /* Control Register */
     register8_t STATUS;  /* Status Register */
     register8_t INTCTRL;  /* Interrupt Control Register */
     register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t TEMP;  /* Temporary register */
-    register8_t reserved_0x05;
-    register8_t reserved_0x06;
-    register8_t reserved_0x07;
-    _WORDREGISTER(CNT);  /* Count Register */
-    _WORDREGISTER(PER);  /* Period Register */
-    _WORDREGISTER(COMP);  /* Compare Register */
-} RTC_t;
-
-/* Prescaler Factor */
-typedef enum RTC_PRESCALER_enum
-{
-    RTC_PRESCALER_OFF_gc = (0x00<<0),  /* RTC Off */
-    RTC_PRESCALER_DIV1_gc = (0x01<<0),  /* RTC Clock */
-    RTC_PRESCALER_DIV2_gc = (0x02<<0),  /* RTC Clock / 2 */
-    RTC_PRESCALER_DIV8_gc = (0x03<<0),  /* RTC Clock / 8 */
-    RTC_PRESCALER_DIV16_gc = (0x04<<0),  /* RTC Clock / 16 */
-    RTC_PRESCALER_DIV64_gc = (0x05<<0),  /* RTC Clock / 64 */
-    RTC_PRESCALER_DIV256_gc = (0x06<<0),  /* RTC Clock / 256 */
-    RTC_PRESCALER_DIV1024_gc = (0x07<<0),  /* RTC Clock / 1024 */
-} RTC_PRESCALER_t;
+} RTC32_t;
 
 /* Compare Interrupt level */
 typedef enum RTC_COMPINTLVL_enum
@@ -2510,7 +2490,7 @@ AES - AES Module
 --------------------------------------------------------------------------
 */
 
-/* AES Module */
+/* AES MOdule */
 typedef struct AES_struct
 {
     register8_t CTRL;  /* AES Control Register */
@@ -2528,6 +2508,22 @@ typedef enum AES_INTLVL_enum
     AES_INTLVL_MED_gc = (0x02<<0),  /* Medium Level */
     AES_INTLVL_HI_gc = (0x03<<0),  /* High Level */
 } AES_INTLVL_t;
+
+
+/*
+--------------------------------------------------------------------------
+VBAT - VBAT Battery Backup Module
+--------------------------------------------------------------------------
+*/
+
+/* VBAT Battery Backup Module */
+typedef struct VBAT_struct
+{
+    register8_t CTRL;  /* Control Register */
+    register8_t STATUS;  /* Status Register */
+    register8_t BACKUP0;  /* Battery Bacup Register 0 */
+    register8_t BACKUP1;  /* Battery Backup Register 1 */
+} VBAT_t;
 
 
 
@@ -2556,31 +2552,24 @@ IO Module Instances. Mapped to memory.
 #define PMIC    (*(PMIC_t *) 0x00A0)  /* Programmable Interrupt Controller */
 #define PORTCFG    (*(PORTCFG_t *) 0x00B0)  /* Port Configuration */
 #define AES    (*(AES_t *) 0x00C0)  /* AES Crypto Module */
+#define VBAT    (*(VBAT_t *) 0x00F0)  /* VBAT Battery Backup Module */
 #define DMA    (*(DMA_t *) 0x0100)  /* DMA Controller */
 #define EVSYS    (*(EVSYS_t *) 0x0180)  /* Event System */
 #define NVM    (*(NVM_t *) 0x01C0)  /* Non Volatile Memory Controller */
 #define ADCA    (*(ADC_t *) 0x0200)  /* Analog to Digital Converter A */
 #define ADCB    (*(ADC_t *) 0x0240)  /* Analog to Digital Converter B */
-#define DACA    (*(DAC_t *) 0x0300)  /* Digital to Analog Converter A */
 #define DACB    (*(DAC_t *) 0x0320)  /* Digital to Analog Converter B */
 #define ACA    (*(AC_t *) 0x0380)  /* Analog Comparator A */
 #define ACB    (*(AC_t *) 0x0390)  /* Analog Comparator B */
-#define RTC    (*(RTC_t *) 0x0400)  /* Real-Time Counter */
-#define EBI    (*(EBI_t *) 0x0440)  /* External Bus Interface */
+#define RTC32    (*(RTC32_t *) 0x0420)  /* 32-bit Real-Time Counter */
 #define TWIC    (*(TWI_t *) 0x0480)  /* Two-Wire Interface C */
-#define TWID    (*(TWI_t *) 0x0490)  /* Two-Wire Interface D */
 #define TWIE    (*(TWI_t *) 0x04A0)  /* Two-Wire Interface E */
-#define TWIF    (*(TWI_t *) 0x04B0)  /* Two-Wire Interface F */
 #define PORTA    (*(PORT_t *) 0x0600)  /* Port A */
 #define PORTB    (*(PORT_t *) 0x0620)  /* Port B */
 #define PORTC    (*(PORT_t *) 0x0640)  /* Port C */
 #define PORTD    (*(PORT_t *) 0x0660)  /* Port D */
 #define PORTE    (*(PORT_t *) 0x0680)  /* Port E */
 #define PORTF    (*(PORT_t *) 0x06A0)  /* Port F */
-#define PORTH    (*(PORT_t *) 0x06E0)  /* Port H */
-#define PORTJ    (*(PORT_t *) 0x0700)  /* Port J */
-#define PORTK    (*(PORT_t *) 0x0720)  /* Port K */
-#define PORTQ    (*(PORT_t *) 0x07C0)  /* Port Q */
 #define PORTR    (*(PORT_t *) 0x07E0)  /* Port R */
 #define TCC0    (*(TC0_t *) 0x0800)  /* Timer/Counter C0 */
 #define TCC1    (*(TC1_t *) 0x0840)  /* Timer/Counter C1 */
@@ -2601,10 +2590,7 @@ IO Module Instances. Mapped to memory.
 #define AWEXE    (*(AWEX_t *) 0x0A80)  /* Advanced Waveform Extension E */
 #define HIRESE    (*(HIRES_t *) 0x0A90)  /* High-Resolution Extension E */
 #define USARTE0    (*(USART_t *) 0x0AA0)  /* Universal Asynchronous Receiver-Transmitter E0 */
-#define USARTE1    (*(USART_t *) 0x0AB0)  /* Universal Asynchronous Receiver-Transmitter E1 */
-#define SPIE    (*(SPI_t *) 0x0AC0)  /* Serial Peripheral Interface E */
 #define TCF0    (*(TC0_t *) 0x0B00)  /* Timer/Counter F0 */
-#define TCF1    (*(TC1_t *) 0x0B40)  /* Timer/Counter F1 */
 #define HIRESF    (*(HIRES_t *) 0x0B90)  /* High-Resolution Extension F */
 #define USARTF0    (*(USART_t *) 0x0BA0)  /* Universal Asynchronous Receiver-Transmitter F0 */
 #define USARTF1    (*(USART_t *) 0x0BB0)  /* Universal Asynchronous Receiver-Transmitter F1 */
@@ -2752,6 +2738,12 @@ IO Module Instances. Mapped to memory.
 #define AES_STATE  _SFR_MEM8(0x00C2)
 #define AES_KEY  _SFR_MEM8(0x00C3)
 #define AES_INTCTRL  _SFR_MEM8(0x00C4)
+
+/* VBAT - VBAT Battery Backup Module */
+#define VBAT_CTRL  _SFR_MEM8(0x00F0)
+#define VBAT_STATUS  _SFR_MEM8(0x00F1)
+#define VBAT_BACKUP0  _SFR_MEM8(0x00F2)
+#define VBAT_BACKUP1  _SFR_MEM8(0x00F3)
 
 /* DMA - DMA Controller */
 #define DMA_CTRL  _SFR_MEM8(0x0100)
@@ -2911,18 +2903,6 @@ IO Module Instances. Mapped to memory.
 #define ADCB_CH3_INTFLAGS  _SFR_MEM8(0x027B)
 #define ADCB_CH3_RES  _SFR_MEM16(0x027C)
 
-/* DACA - Digital to Analog Converter A */
-#define DACA_CTRLA  _SFR_MEM8(0x0300)
-#define DACA_CTRLB  _SFR_MEM8(0x0301)
-#define DACA_CTRLC  _SFR_MEM8(0x0302)
-#define DACA_EVCTRL  _SFR_MEM8(0x0303)
-#define DACA_TIMCTRL  _SFR_MEM8(0x0304)
-#define DACA_STATUS  _SFR_MEM8(0x0305)
-#define DACA_GAINCAL  _SFR_MEM8(0x0308)
-#define DACA_OFFSETCAL  _SFR_MEM8(0x0309)
-#define DACA_CH0DATA  _SFR_MEM16(0x0318)
-#define DACA_CH1DATA  _SFR_MEM16(0x031A)
-
 /* DACB - Digital to Analog Converter B */
 #define DACB_CTRLA  _SFR_MEM8(0x0320)
 #define DACB_CTRLB  _SFR_MEM8(0x0321)
@@ -2955,35 +2935,11 @@ IO Module Instances. Mapped to memory.
 #define ACB_WINCTRL  _SFR_MEM8(0x0396)
 #define ACB_STATUS  _SFR_MEM8(0x0397)
 
-/* RTC - Real-Time Counter */
-#define RTC_CTRL  _SFR_MEM8(0x0400)
-#define RTC_STATUS  _SFR_MEM8(0x0401)
-#define RTC_INTCTRL  _SFR_MEM8(0x0402)
-#define RTC_INTFLAGS  _SFR_MEM8(0x0403)
-#define RTC_TEMP  _SFR_MEM8(0x0404)
-#define RTC_CNT  _SFR_MEM16(0x0408)
-#define RTC_PER  _SFR_MEM16(0x040A)
-#define RTC_COMP  _SFR_MEM16(0x040C)
-
-/* EBI - External Bus Interface */
-#define EBI_CTRL  _SFR_MEM8(0x0440)
-#define EBI_SDRAMCTRLA  _SFR_MEM8(0x0441)
-#define EBI_REFRESH  _SFR_MEM16(0x0444)
-#define EBI_INITDLY  _SFR_MEM16(0x0446)
-#define EBI_SDRAMCTRLB  _SFR_MEM8(0x0448)
-#define EBI_SDRAMCTRLC  _SFR_MEM8(0x0449)
-#define EBI_CS0_CTRLA  _SFR_MEM8(0x0450)
-#define EBI_CS0_CTRLB  _SFR_MEM8(0x0451)
-#define EBI_CS0_BASEADDR  _SFR_MEM16(0x0452)
-#define EBI_CS1_CTRLA  _SFR_MEM8(0x0454)
-#define EBI_CS1_CTRLB  _SFR_MEM8(0x0455)
-#define EBI_CS1_BASEADDR  _SFR_MEM16(0x0456)
-#define EBI_CS2_CTRLA  _SFR_MEM8(0x0458)
-#define EBI_CS2_CTRLB  _SFR_MEM8(0x0459)
-#define EBI_CS2_BASEADDR  _SFR_MEM16(0x045A)
-#define EBI_CS3_CTRLA  _SFR_MEM8(0x045C)
-#define EBI_CS3_CTRLB  _SFR_MEM8(0x045D)
-#define EBI_CS3_BASEADDR  _SFR_MEM16(0x045E)
+/* RTC32 - 32-bit Real-Time Counter */
+#define RTC32_CTRL  _SFR_MEM8(0x0420)
+#define RTC32_STATUS  _SFR_MEM8(0x0421)
+#define RTC32_INTCTRL  _SFR_MEM8(0x0422)
+#define RTC32_INTFLAGS  _SFR_MEM8(0x0423)
 
 /* TWIC - Two-Wire Interface C */
 #define TWIC_CTRL  _SFR_MEM8(0x0480)
@@ -3000,21 +2956,6 @@ IO Module Instances. Mapped to memory.
 #define TWIC_SLAVE_ADDR  _SFR_MEM8(0x048B)
 #define TWIC_SLAVE_DATA  _SFR_MEM8(0x048C)
 
-/* TWID - Two-Wire Interface D */
-#define TWID_CTRL  _SFR_MEM8(0x0490)
-#define TWID_MASTER_CTRLA  _SFR_MEM8(0x0491)
-#define TWID_MASTER_CTRLB  _SFR_MEM8(0x0492)
-#define TWID_MASTER_CTRLC  _SFR_MEM8(0x0493)
-#define TWID_MASTER_STATUS  _SFR_MEM8(0x0494)
-#define TWID_MASTER_BAUD  _SFR_MEM8(0x0495)
-#define TWID_MASTER_ADDR  _SFR_MEM8(0x0496)
-#define TWID_MASTER_DATA  _SFR_MEM8(0x0497)
-#define TWID_SLAVE_CTRLA  _SFR_MEM8(0x0498)
-#define TWID_SLAVE_CTRLB  _SFR_MEM8(0x0499)
-#define TWID_SLAVE_STATUS  _SFR_MEM8(0x049A)
-#define TWID_SLAVE_ADDR  _SFR_MEM8(0x049B)
-#define TWID_SLAVE_DATA  _SFR_MEM8(0x049C)
-
 /* TWIE - Two-Wire Interface E */
 #define TWIE_CTRL  _SFR_MEM8(0x04A0)
 #define TWIE_MASTER_CTRLA  _SFR_MEM8(0x04A1)
@@ -3029,21 +2970,6 @@ IO Module Instances. Mapped to memory.
 #define TWIE_SLAVE_STATUS  _SFR_MEM8(0x04AA)
 #define TWIE_SLAVE_ADDR  _SFR_MEM8(0x04AB)
 #define TWIE_SLAVE_DATA  _SFR_MEM8(0x04AC)
-
-/* TWIF - Two-Wire Interface F */
-#define TWIF_CTRL  _SFR_MEM8(0x04B0)
-#define TWIF_MASTER_CTRLA  _SFR_MEM8(0x04B1)
-#define TWIF_MASTER_CTRLB  _SFR_MEM8(0x04B2)
-#define TWIF_MASTER_CTRLC  _SFR_MEM8(0x04B3)
-#define TWIF_MASTER_STATUS  _SFR_MEM8(0x04B4)
-#define TWIF_MASTER_BAUD  _SFR_MEM8(0x04B5)
-#define TWIF_MASTER_ADDR  _SFR_MEM8(0x04B6)
-#define TWIF_MASTER_DATA  _SFR_MEM8(0x04B7)
-#define TWIF_SLAVE_CTRLA  _SFR_MEM8(0x04B8)
-#define TWIF_SLAVE_CTRLB  _SFR_MEM8(0x04B9)
-#define TWIF_SLAVE_STATUS  _SFR_MEM8(0x04BA)
-#define TWIF_SLAVE_ADDR  _SFR_MEM8(0x04BB)
-#define TWIF_SLAVE_DATA  _SFR_MEM8(0x04BC)
 
 /* PORTA - Port A */
 #define PORTA_DIR  _SFR_MEM8(0x0600)
@@ -3182,98 +3108,6 @@ IO Module Instances. Mapped to memory.
 #define PORTF_PIN5CTRL  _SFR_MEM8(0x06B5)
 #define PORTF_PIN6CTRL  _SFR_MEM8(0x06B6)
 #define PORTF_PIN7CTRL  _SFR_MEM8(0x06B7)
-
-/* PORTH - Port H */
-#define PORTH_DIR  _SFR_MEM8(0x06E0)
-#define PORTH_DIRSET  _SFR_MEM8(0x06E1)
-#define PORTH_DIRCLR  _SFR_MEM8(0x06E2)
-#define PORTH_DIRTGL  _SFR_MEM8(0x06E3)
-#define PORTH_OUT  _SFR_MEM8(0x06E4)
-#define PORTH_OUTSET  _SFR_MEM8(0x06E5)
-#define PORTH_OUTCLR  _SFR_MEM8(0x06E6)
-#define PORTH_OUTTGL  _SFR_MEM8(0x06E7)
-#define PORTH_IN  _SFR_MEM8(0x06E8)
-#define PORTH_INTCTRL  _SFR_MEM8(0x06E9)
-#define PORTH_INT0MASK  _SFR_MEM8(0x06EA)
-#define PORTH_INT1MASK  _SFR_MEM8(0x06EB)
-#define PORTH_INTFLAGS  _SFR_MEM8(0x06EC)
-#define PORTH_PIN0CTRL  _SFR_MEM8(0x06F0)
-#define PORTH_PIN1CTRL  _SFR_MEM8(0x06F1)
-#define PORTH_PIN2CTRL  _SFR_MEM8(0x06F2)
-#define PORTH_PIN3CTRL  _SFR_MEM8(0x06F3)
-#define PORTH_PIN4CTRL  _SFR_MEM8(0x06F4)
-#define PORTH_PIN5CTRL  _SFR_MEM8(0x06F5)
-#define PORTH_PIN6CTRL  _SFR_MEM8(0x06F6)
-#define PORTH_PIN7CTRL  _SFR_MEM8(0x06F7)
-
-/* PORTJ - Port J */
-#define PORTJ_DIR  _SFR_MEM8(0x0700)
-#define PORTJ_DIRSET  _SFR_MEM8(0x0701)
-#define PORTJ_DIRCLR  _SFR_MEM8(0x0702)
-#define PORTJ_DIRTGL  _SFR_MEM8(0x0703)
-#define PORTJ_OUT  _SFR_MEM8(0x0704)
-#define PORTJ_OUTSET  _SFR_MEM8(0x0705)
-#define PORTJ_OUTCLR  _SFR_MEM8(0x0706)
-#define PORTJ_OUTTGL  _SFR_MEM8(0x0707)
-#define PORTJ_IN  _SFR_MEM8(0x0708)
-#define PORTJ_INTCTRL  _SFR_MEM8(0x0709)
-#define PORTJ_INT0MASK  _SFR_MEM8(0x070A)
-#define PORTJ_INT1MASK  _SFR_MEM8(0x070B)
-#define PORTJ_INTFLAGS  _SFR_MEM8(0x070C)
-#define PORTJ_PIN0CTRL  _SFR_MEM8(0x0710)
-#define PORTJ_PIN1CTRL  _SFR_MEM8(0x0711)
-#define PORTJ_PIN2CTRL  _SFR_MEM8(0x0712)
-#define PORTJ_PIN3CTRL  _SFR_MEM8(0x0713)
-#define PORTJ_PIN4CTRL  _SFR_MEM8(0x0714)
-#define PORTJ_PIN5CTRL  _SFR_MEM8(0x0715)
-#define PORTJ_PIN6CTRL  _SFR_MEM8(0x0716)
-#define PORTJ_PIN7CTRL  _SFR_MEM8(0x0717)
-
-/* PORTK - Port K */
-#define PORTK_DIR  _SFR_MEM8(0x0720)
-#define PORTK_DIRSET  _SFR_MEM8(0x0721)
-#define PORTK_DIRCLR  _SFR_MEM8(0x0722)
-#define PORTK_DIRTGL  _SFR_MEM8(0x0723)
-#define PORTK_OUT  _SFR_MEM8(0x0724)
-#define PORTK_OUTSET  _SFR_MEM8(0x0725)
-#define PORTK_OUTCLR  _SFR_MEM8(0x0726)
-#define PORTK_OUTTGL  _SFR_MEM8(0x0727)
-#define PORTK_IN  _SFR_MEM8(0x0728)
-#define PORTK_INTCTRL  _SFR_MEM8(0x0729)
-#define PORTK_INT0MASK  _SFR_MEM8(0x072A)
-#define PORTK_INT1MASK  _SFR_MEM8(0x072B)
-#define PORTK_INTFLAGS  _SFR_MEM8(0x072C)
-#define PORTK_PIN0CTRL  _SFR_MEM8(0x0730)
-#define PORTK_PIN1CTRL  _SFR_MEM8(0x0731)
-#define PORTK_PIN2CTRL  _SFR_MEM8(0x0732)
-#define PORTK_PIN3CTRL  _SFR_MEM8(0x0733)
-#define PORTK_PIN4CTRL  _SFR_MEM8(0x0734)
-#define PORTK_PIN5CTRL  _SFR_MEM8(0x0735)
-#define PORTK_PIN6CTRL  _SFR_MEM8(0x0736)
-#define PORTK_PIN7CTRL  _SFR_MEM8(0x0737)
-
-/* PORTQ - Port Q */
-#define PORTQ_DIR  _SFR_MEM8(0x07C0)
-#define PORTQ_DIRSET  _SFR_MEM8(0x07C1)
-#define PORTQ_DIRCLR  _SFR_MEM8(0x07C2)
-#define PORTQ_DIRTGL  _SFR_MEM8(0x07C3)
-#define PORTQ_OUT  _SFR_MEM8(0x07C4)
-#define PORTQ_OUTSET  _SFR_MEM8(0x07C5)
-#define PORTQ_OUTCLR  _SFR_MEM8(0x07C6)
-#define PORTQ_OUTTGL  _SFR_MEM8(0x07C7)
-#define PORTQ_IN  _SFR_MEM8(0x07C8)
-#define PORTQ_INTCTRL  _SFR_MEM8(0x07C9)
-#define PORTQ_INT0MASK  _SFR_MEM8(0x07CA)
-#define PORTQ_INT1MASK  _SFR_MEM8(0x07CB)
-#define PORTQ_INTFLAGS  _SFR_MEM8(0x07CC)
-#define PORTQ_PIN0CTRL  _SFR_MEM8(0x07D0)
-#define PORTQ_PIN1CTRL  _SFR_MEM8(0x07D1)
-#define PORTQ_PIN2CTRL  _SFR_MEM8(0x07D2)
-#define PORTQ_PIN3CTRL  _SFR_MEM8(0x07D3)
-#define PORTQ_PIN4CTRL  _SFR_MEM8(0x07D4)
-#define PORTQ_PIN5CTRL  _SFR_MEM8(0x07D5)
-#define PORTQ_PIN6CTRL  _SFR_MEM8(0x07D6)
-#define PORTQ_PIN7CTRL  _SFR_MEM8(0x07D7)
 
 /* PORTR - Port R */
 #define PORTR_DIR  _SFR_MEM8(0x07E0)
@@ -3539,21 +3373,6 @@ IO Module Instances. Mapped to memory.
 #define USARTE0_BAUDCTRLA  _SFR_MEM8(0x0AA6)
 #define USARTE0_BAUDCTRLB  _SFR_MEM8(0x0AA7)
 
-/* USARTE1 - Universal Asynchronous Receiver-Transmitter E1 */
-#define USARTE1_DATA  _SFR_MEM8(0x0AB0)
-#define USARTE1_STATUS  _SFR_MEM8(0x0AB1)
-#define USARTE1_CTRLA  _SFR_MEM8(0x0AB3)
-#define USARTE1_CTRLB  _SFR_MEM8(0x0AB4)
-#define USARTE1_CTRLC  _SFR_MEM8(0x0AB5)
-#define USARTE1_BAUDCTRLA  _SFR_MEM8(0x0AB6)
-#define USARTE1_BAUDCTRLB  _SFR_MEM8(0x0AB7)
-
-/* SPIE - Serial Peripheral Interface E */
-#define SPIE_CTRL  _SFR_MEM8(0x0AC0)
-#define SPIE_INTCTRL  _SFR_MEM8(0x0AC1)
-#define SPIE_STATUS  _SFR_MEM8(0x0AC2)
-#define SPIE_DATA  _SFR_MEM8(0x0AC3)
-
 /* TCF0 - Timer/Counter F0 */
 #define TCF0_CTRLA  _SFR_MEM8(0x0B00)
 #define TCF0_CTRLB  _SFR_MEM8(0x0B01)
@@ -3579,28 +3398,6 @@ IO Module Instances. Mapped to memory.
 #define TCF0_CCBBUF  _SFR_MEM16(0x0B3A)
 #define TCF0_CCCBUF  _SFR_MEM16(0x0B3C)
 #define TCF0_CCDBUF  _SFR_MEM16(0x0B3E)
-
-/* TCF1 - Timer/Counter F1 */
-#define TCF1_CTRLA  _SFR_MEM8(0x0B40)
-#define TCF1_CTRLB  _SFR_MEM8(0x0B41)
-#define TCF1_CTRLC  _SFR_MEM8(0x0B42)
-#define TCF1_CTRLD  _SFR_MEM8(0x0B43)
-#define TCF1_CTRLE  _SFR_MEM8(0x0B44)
-#define TCF1_INTCTRLA  _SFR_MEM8(0x0B46)
-#define TCF1_INTCTRLB  _SFR_MEM8(0x0B47)
-#define TCF1_CTRLFCLR  _SFR_MEM8(0x0B48)
-#define TCF1_CTRLFSET  _SFR_MEM8(0x0B49)
-#define TCF1_CTRLGCLR  _SFR_MEM8(0x0B4A)
-#define TCF1_CTRLGSET  _SFR_MEM8(0x0B4B)
-#define TCF1_INTFLAGS  _SFR_MEM8(0x0B4C)
-#define TCF1_TEMP  _SFR_MEM8(0x0B4F)
-#define TCF1_CNT  _SFR_MEM16(0x0B60)
-#define TCF1_PER  _SFR_MEM16(0x0B66)
-#define TCF1_CCA  _SFR_MEM16(0x0B68)
-#define TCF1_CCB  _SFR_MEM16(0x0B6A)
-#define TCF1_PERBUF  _SFR_MEM16(0x0B76)
-#define TCF1_CCABUF  _SFR_MEM16(0x0B78)
-#define TCF1_CCBBUF  _SFR_MEM16(0x0B7A)
 
 /* HIRESF - High-Resolution Extension F */
 #define HIRESF_CTRL  _SFR_MEM8(0x0B90)
@@ -5289,45 +5086,42 @@ IO Module Instances. Mapped to memory.
 #define DAC_CH0DRE_bp  0  /* Channel 0 Data Register Empty bit position. */
 
 
-/* RTC - Real-Time Clounter */
-/* RTC.CTRL  bit masks and bit positions */
-#define RTC_PRESCALER_gm  0x07  /* Prescaling Factor group mask. */
-#define RTC_PRESCALER_gp  0  /* Prescaling Factor group position. */
-#define RTC_PRESCALER0_bm  (1<<0)  /* Prescaling Factor bit 0 mask. */
-#define RTC_PRESCALER0_bp  0  /* Prescaling Factor bit 0 position. */
-#define RTC_PRESCALER1_bm  (1<<1)  /* Prescaling Factor bit 1 mask. */
-#define RTC_PRESCALER1_bp  1  /* Prescaling Factor bit 1 position. */
-#define RTC_PRESCALER2_bm  (1<<2)  /* Prescaling Factor bit 2 mask. */
-#define RTC_PRESCALER2_bp  2  /* Prescaling Factor bit 2 position. */
+/* RTC32 - 32-bit Real-Time Counter */
+/* RTC32.CTRL  bit masks and bit positions */
+#define RTC32_ENABLE_bm  0x01  /* RTC enable bit mask. */
+#define RTC32_ENABLE_bp  0  /* RTC enable bit position. */
 
 
-/* RTC.STATUS  bit masks and bit positions */
-#define RTC_SYNCBUSY_bm  0x01  /* Synchronization Busy Flag bit mask. */
-#define RTC_SYNCBUSY_bp  0  /* Synchronization Busy Flag bit position. */
+/* RTC32.STATUS  bit masks and bit positions */
+#define RTC32_SYNCCNT_bm  0x10  /* Synchronization Busy Flag bit mask. */
+#define RTC32_SYNCCNT_bp  4  /* Synchronization Busy Flag bit position. */
+
+#define RTC32_SYNCBUSY_bm  0x01  /* Synchronization Busy Flag bit mask. */
+#define RTC32_SYNCBUSY_bp  0  /* Synchronization Busy Flag bit position. */
 
 
-/* RTC.INTCTRL  bit masks and bit positions */
-#define RTC_COMPINTLVL_gm  0x0C  /* Compare Match Interrupt Level group mask. */
-#define RTC_COMPINTLVL_gp  2  /* Compare Match Interrupt Level group position. */
-#define RTC_COMPINTLVL0_bm  (1<<2)  /* Compare Match Interrupt Level bit 0 mask. */
-#define RTC_COMPINTLVL0_bp  2  /* Compare Match Interrupt Level bit 0 position. */
-#define RTC_COMPINTLVL1_bm  (1<<3)  /* Compare Match Interrupt Level bit 1 mask. */
-#define RTC_COMPINTLVL1_bp  3  /* Compare Match Interrupt Level bit 1 position. */
+/* RTC32.INTCTRL  bit masks and bit positions */
+#define RTC32_COMPINTLVL_gm  0x0C  /* Compare Match Interrupt Level group mask. */
+#define RTC32_COMPINTLVL_gp  2  /* Compare Match Interrupt Level group position. */
+#define RTC32_COMPINTLVL0_bm  (1<<2)  /* Compare Match Interrupt Level bit 0 mask. */
+#define RTC32_COMPINTLVL0_bp  2  /* Compare Match Interrupt Level bit 0 position. */
+#define RTC32_COMPINTLVL1_bm  (1<<3)  /* Compare Match Interrupt Level bit 1 mask. */
+#define RTC32_COMPINTLVL1_bp  3  /* Compare Match Interrupt Level bit 1 position. */
 
-#define RTC_OVFINTLVL_gm  0x03  /* Overflow Interrupt Level group mask. */
-#define RTC_OVFINTLVL_gp  0  /* Overflow Interrupt Level group position. */
-#define RTC_OVFINTLVL0_bm  (1<<0)  /* Overflow Interrupt Level bit 0 mask. */
-#define RTC_OVFINTLVL0_bp  0  /* Overflow Interrupt Level bit 0 position. */
-#define RTC_OVFINTLVL1_bm  (1<<1)  /* Overflow Interrupt Level bit 1 mask. */
-#define RTC_OVFINTLVL1_bp  1  /* Overflow Interrupt Level bit 1 position. */
+#define RTC32_OVFINTLVL_gm  0x03  /* Overflow Interrupt Level group mask. */
+#define RTC32_OVFINTLVL_gp  0  /* Overflow Interrupt Level group position. */
+#define RTC32_OVFINTLVL0_bm  (1<<0)  /* Overflow Interrupt Level bit 0 mask. */
+#define RTC32_OVFINTLVL0_bp  0  /* Overflow Interrupt Level bit 0 position. */
+#define RTC32_OVFINTLVL1_bm  (1<<1)  /* Overflow Interrupt Level bit 1 mask. */
+#define RTC32_OVFINTLVL1_bp  1  /* Overflow Interrupt Level bit 1 position. */
 
 
-/* RTC.INTFLAGS  bit masks and bit positions */
-#define RTC_COMPIF_bm  0x02  /* Compare Match Interrupt Flag bit mask. */
-#define RTC_COMPIF_bp  1  /* Compare Match Interrupt Flag bit position. */
+/* RTC32.INTFLAGS  bit masks and bit positions */
+#define RTC32_COMPIF_bm  0x02  /* Compare Match Interrupt Flag bit mask. */
+#define RTC32_COMPIF_bp  1  /* Compare Match Interrupt Flag bit position. */
 
-#define RTC_OVFIF_bm  0x01  /* Overflow Interrupt Flag bit mask. */
-#define RTC_OVFIF_bp  0  /* Overflow Interrupt Flag bit position. */
+#define RTC32_OVFIF_bm  0x01  /* Overflow Interrupt Flag bit mask. */
+#define RTC32_OVFIF_bp  0  /* Overflow Interrupt Flag bit position. */
 
 
 /* EBI - External Bus Interface */
@@ -6597,6 +6391,41 @@ IO Module Instances. Mapped to memory.
 #define AES_INTLVL1_bp  1  /* Interrupt level bit 1 position. */
 
 
+/* VBAT - VBAT Battery Backup Module */
+/* VBAT.CTRL  bit masks and bit positions */
+#define VBAT_XOSCSEL_bm  0x10  /* 32-kHz Crystal Oscillator Output Selection bit mask. */
+#define VBAT_XOSCSEL_bp  4  /* 32-kHz Crystal Oscillator Output Selection bit position. */
+
+#define VBAT_XOSCEN_bm  0x08  /* Crystal Oscillator Enable bit mask. */
+#define VBAT_XOSCEN_bp  3  /* Crystal Oscillator Enable bit position. */
+
+#define VBAT_XOSCFDEN_bm  0x04  /* Crystal Oscillator Failure Detection Monitor Enable bit mask. */
+#define VBAT_XOSCFDEN_bp  2  /* Crystal Oscillator Failure Detection Monitor Enable bit position. */
+
+#define VBAT_ACCEN_bm  0x02  /* Battery Backup Access Enable bit mask. */
+#define VBAT_ACCEN_bp  1  /* Battery Backup Access Enable bit position. */
+
+#define VBAT_RESET_bm  0x01  /* Battery Backup Reset bit mask. */
+#define VBAT_RESET_bp  0  /* Battery Backup Reset bit position. */
+
+
+/* VBAT.STATUS  bit masks and bit positions */
+#define VBAT_BBPWR_bm  0x80  /* Battery backup Power bit mask. */
+#define VBAT_BBPWR_bp  7  /* Battery backup Power bit position. */
+
+#define VBAT_XOSCRDY_bm  0x08  /* Crystal Oscillator Ready bit mask. */
+#define VBAT_XOSCRDY_bp  3  /* Crystal Oscillator Ready bit position. */
+
+#define VBAT_XOSCFAIL_bm  0x04  /* Crystal Oscillator Failure bit mask. */
+#define VBAT_XOSCFAIL_bp  2  /* Crystal Oscillator Failure bit position. */
+
+#define VBAT_BBBORF_bm  0x02  /* Battery Backup Brown-Out Reset Flag bit mask. */
+#define VBAT_BBBORF_bp  1  /* Battery Backup Brown-Out Reset Flag bit position. */
+
+#define VBAT_BBPORF_bm  0x01  /* Battery Backup Power-On Reset Flag bit mask. */
+#define VBAT_BBPORF_bp  0  /* Battery Backup Power-On Reset Flag bit position. */
+
+
 
 // Generic Port Pins
 
@@ -6773,10 +6602,6 @@ IO Module Instances. Mapped to memory.
 #define TCE1_CCB_vect_num  56
 #define TCE1_CCB_vect      _VECTOR(56)  /* Compare or Capture B Interrupt */
 
-/* SPIE interrupt vectors */
-#define SPIE_INT_vect_num  57
-#define SPIE_INT_vect      _VECTOR(57)  /* SPI Interrupt */
-
 /* USARTE0 interrupt vectors */
 #define USARTE0_RXC_vect_num  58
 #define USARTE0_RXC_vect      _VECTOR(58)  /* Reception Complete Interrupt */
@@ -6784,14 +6609,6 @@ IO Module Instances. Mapped to memory.
 #define USARTE0_DRE_vect      _VECTOR(59)  /* Data Register Empty Interrupt */
 #define USARTE0_TXC_vect_num  60
 #define USARTE0_TXC_vect      _VECTOR(60)  /* Transmission Complete Interrupt */
-
-/* USARTE1 interrupt vectors */
-#define USARTE1_RXC_vect_num  61
-#define USARTE1_RXC_vect      _VECTOR(61)  /* Reception Complete Interrupt */
-#define USARTE1_DRE_vect_num  62
-#define USARTE1_DRE_vect      _VECTOR(62)  /* Data Register Empty Interrupt */
-#define USARTE1_TXC_vect_num  63
-#define USARTE1_TXC_vect      _VECTOR(63)  /* Transmission Complete Interrupt */
 
 /* PORTD interrupt vectors */
 #define PORTD_INT0_vect_num  64
@@ -6822,12 +6639,6 @@ IO Module Instances. Mapped to memory.
 #define ADCA_CH2_vect      _VECTOR(73)  /* Interrupt 2 */
 #define ADCA_CH3_vect_num  74
 #define ADCA_CH3_vect      _VECTOR(74)  /* Interrupt 3 */
-
-/* TWID interrupt vectors */
-#define TWID_TWIS_vect_num  75
-#define TWID_TWIS_vect      _VECTOR(75)  /* TWI Slave Interrupt */
-#define TWID_TWIM_vect_num  76
-#define TWID_TWIM_vect      _VECTOR(76)  /* TWI Master Interrupt */
 
 /* TCD0 interrupt vectors */
 #define TCD0_OVF_vect_num  77
@@ -6873,41 +6684,11 @@ IO Module Instances. Mapped to memory.
 #define USARTD1_TXC_vect_num  93
 #define USARTD1_TXC_vect      _VECTOR(93)  /* Transmission Complete Interrupt */
 
-/* PORTQ interrupt vectors */
-#define PORTQ_INT0_vect_num  94
-#define PORTQ_INT0_vect      _VECTOR(94)  /* External Interrupt 0 */
-#define PORTQ_INT1_vect_num  95
-#define PORTQ_INT1_vect      _VECTOR(95)  /* External Interrupt 1 */
-
-/* PORTH interrupt vectors */
-#define PORTH_INT0_vect_num  96
-#define PORTH_INT0_vect      _VECTOR(96)  /* External Interrupt 0 */
-#define PORTH_INT1_vect_num  97
-#define PORTH_INT1_vect      _VECTOR(97)  /* External Interrupt 1 */
-
-/* PORTJ interrupt vectors */
-#define PORTJ_INT0_vect_num  98
-#define PORTJ_INT0_vect      _VECTOR(98)  /* External Interrupt 0 */
-#define PORTJ_INT1_vect_num  99
-#define PORTJ_INT1_vect      _VECTOR(99)  /* External Interrupt 1 */
-
-/* PORTK interrupt vectors */
-#define PORTK_INT0_vect_num  100
-#define PORTK_INT0_vect      _VECTOR(100)  /* External Interrupt 0 */
-#define PORTK_INT1_vect_num  101
-#define PORTK_INT1_vect      _VECTOR(101)  /* External Interrupt 1 */
-
 /* PORTF interrupt vectors */
 #define PORTF_INT0_vect_num  104
 #define PORTF_INT0_vect      _VECTOR(104)  /* External Interrupt 0 */
 #define PORTF_INT1_vect_num  105
 #define PORTF_INT1_vect      _VECTOR(105)  /* External Interrupt 1 */
-
-/* TWIF interrupt vectors */
-#define TWIF_TWIS_vect_num  106
-#define TWIF_TWIS_vect      _VECTOR(106)  /* TWI Slave Interrupt */
-#define TWIF_TWIM_vect_num  107
-#define TWIF_TWIM_vect      _VECTOR(107)  /* TWI Master Interrupt */
 
 /* TCF0 interrupt vectors */
 #define TCF0_OVF_vect_num  108
@@ -6923,20 +6704,6 @@ IO Module Instances. Mapped to memory.
 #define TCF0_CCD_vect_num  113
 #define TCF0_CCD_vect      _VECTOR(113)  /* Compare or Capture D Interrupt */
 
-/* TCF1 interrupt vectors */
-#define TCF1_OVF_vect_num  114
-#define TCF1_OVF_vect      _VECTOR(114)  /* Overflow Interrupt */
-#define TCF1_ERR_vect_num  115
-#define TCF1_ERR_vect      _VECTOR(115)  /* Error Interrupt */
-#define TCF1_CCA_vect_num  116
-#define TCF1_CCA_vect      _VECTOR(116)  /* Compare or Capture A Interrupt */
-#define TCF1_CCB_vect_num  117
-#define TCF1_CCB_vect      _VECTOR(117)  /* Compare or Capture B Interrupt */
-
-/* SPIF interrupt vectors */
-#define SPIF_INT_vect_num  118
-#define SPIF_INT_vect      _VECTOR(118)  /* SPI Interrupt */
-
 /* USARTF0 interrupt vectors */
 #define USARTF0_RXC_vect_num  119
 #define USARTF0_RXC_vect      _VECTOR(119)  /* Reception Complete Interrupt */
@@ -6945,34 +6712,26 @@ IO Module Instances. Mapped to memory.
 #define USARTF0_TXC_vect_num  121
 #define USARTF0_TXC_vect      _VECTOR(121)  /* Transmission Complete Interrupt */
 
-/* USARTF1 interrupt vectors */
-#define USARTF1_RXC_vect_num  122
-#define USARTF1_RXC_vect      _VECTOR(122)  /* Reception Complete Interrupt */
-#define USARTF1_DRE_vect_num  123
-#define USARTF1_DRE_vect      _VECTOR(123)  /* Data Register Empty Interrupt */
-#define USARTF1_TXC_vect_num  124
-#define USARTF1_TXC_vect      _VECTOR(124)  /* Transmission Complete Interrupt */
-
 
 #define _VECTOR_SIZE 4 /* Size of individual vector. */
-#define _VECTORS_SIZE (125 * _VECTOR_SIZE)
+#define _VECTORS_SIZE (122 * _VECTOR_SIZE)
 
 
 /* ========== Constants ========== */
 
 #define PROGMEM_START     (0x0000)
-#define PROGMEM_SIZE      (139264)
+#define PROGMEM_SIZE      (270336)
 #define PROGMEM_END       (PROGMEM_START + PROGMEM_SIZE - 1)
 
 #define APP_SECTION_START     (0x0000)
-#define APP_SECTION_SIZE      (131072)
+#define APP_SECTION_SIZE      (262144)
 #define APP_SECTION_END       (APP_SECTION_START + APP_SECTION_SIZE - 1)
 
-#define APPTABLE_SECTION_START     (0x1E000)
+#define APPTABLE_SECTION_START     (0x3E000)
 #define APPTABLE_SECTION_SIZE      (8192)
 #define APPTABLE_SECTION_END       (APPTABLE_SECTION_START + APPTABLE_SECTION_SIZE - 1)
 
-#define BOOT_SECTION_START     (0x20000)
+#define BOOT_SECTION_START     (0x40000)
 #define BOOT_SECTION_SIZE      (8192)
 #define BOOT_SECTION_END       (BOOT_SECTION_START + BOOT_SECTION_SIZE - 1)
 
@@ -6985,19 +6744,19 @@ IO Module Instances. Mapped to memory.
 #define IO_END       (IO_START + IO_SIZE - 1)
 
 #define MAPPED_EEPROM_START     (0x1000)
-#define MAPPED_EEPROM_SIZE      (2048)
+#define MAPPED_EEPROM_SIZE      (4096)
 #define MAPPED_EEPROM_END       (MAPPED_EEPROM_START + MAPPED_EEPROM_SIZE - 1)
 
 #define INTERNAL_SRAM_START     (0x2000)
-#define INTERNAL_SRAM_SIZE      (8192)
+#define INTERNAL_SRAM_SIZE      (16384)
 #define INTERNAL_SRAM_END       (INTERNAL_SRAM_START + INTERNAL_SRAM_SIZE - 1)
 
-#define EXTERNAL_SRAM_START     (0x4000)
-#define EXTERNAL_SRAM_SIZE      (16760832)
+#define EXTERNAL_SRAM_START     (0x6000)
+#define EXTERNAL_SRAM_SIZE      (16752640)
 #define EXTERNAL_SRAM_END       (EXTERNAL_SRAM_START + EXTERNAL_SRAM_SIZE - 1)
 
 #define EEPROM_START     (0x0000)
-#define EEPROM_SIZE      (2048)
+#define EEPROM_SIZE      (4096)
 #define EEPROM_END       (EEPROM_START + EEPROM_SIZE - 1)
 
 #define FUSE_START     (0x0000)
@@ -7013,7 +6772,7 @@ IO Module Instances. Mapped to memory.
 #define SIGNATURES_END       (SIGNATURES_START + SIGNATURES_SIZE - 1)
 
 #define USER_SIGNATURES_START     (0x0000)
-#define USER_SIGNATURES_SIZE      (512)
+#define USER_SIGNATURES_SIZE      (256)
 #define USER_SIGNATURES_END       (USER_SIGNATURES_START + USER_SIGNATURES_SIZE - 1)
 
 #define PROD_SIGNATURES_START     (0x0000)
@@ -7092,9 +6851,9 @@ IO Module Instances. Mapped to memory.
 
 /* ========== Signature ========== */
 #define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x97
-#define SIGNATURE_2 0x4C
+#define SIGNATURE_1 0x98
+#define SIGNATURE_2 0x43
 
 
-#endif /* _AVR_ATxmega128A1_H_ */
+#endif /* _AVR_ATxmega256A3V_H_ */
 

@@ -1305,7 +1305,7 @@ typedef enum ADC_RESOLUTION_enum
 typedef enum ADC_REFSEL_enum
 {
     ADC_REFSEL_INT1V_gc = (0x00<<4),  /* Internal 1V */
-    ADC_REFSEL_VCC_gc = (0x01<<4),  /* Internal VCC-0.6V */
+    ADC_REFSEL_VCC_gc = (0x01<<4),  /* Internal VCC / 1.6V */
     ADC_REFSEL_AREFA_gc = (0x02<<4),  /* External reference on PORT A */
     ADC_REFSEL_AREFB_gc = (0x03<<4),  /* External reference on PORT B */
 } ADC_REFSEL_t;
@@ -1434,7 +1434,7 @@ typedef enum DAC_REFSEL_enum
     DAC_REFSEL_INT1V_gc = (0x00<<3),  /* Internal 1V  */
     DAC_REFSEL_AVCC_gc = (0x01<<3),  /* Analog supply voltage */
     DAC_REFSEL_AREFA_gc = (0x02<<3),  /* External reference on AREF on PORTA */
-    DAC_REFSEL_AREFB_gc = (0x02<<3),  /* External reference on AREF on PORTB */
+    DAC_REFSEL_AREFB_gc = (0x03<<3),  /* External reference on AREF on PORTB */
 } DAC_REFSEL_t;
 
 /* Event channel selection */
@@ -2510,7 +2510,7 @@ AES - AES Module
 --------------------------------------------------------------------------
 */
 
-/* AES MOdule */
+/* AES Module */
 typedef struct AES_struct
 {
     register8_t CTRL;  /* AES Control Register */
