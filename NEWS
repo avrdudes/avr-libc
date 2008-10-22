@@ -38,6 +38,7 @@
 * Contributed Patches:
 
   [#6500] Reentrant code faq
+  [#6517] Pgmspace with float support
 
 * New functions:
 
