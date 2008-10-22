@@ -162,45 +162,45 @@ if test -n "$xmega" ; then
 
 # Build IO groups temporary XML file
 #------------------------------------
-if test -e iogroups.xml; then
-    rm -f iogroups.xml
+if test -e $headerfile-iogroups.xml; then
+    rm -f $headerfile-iogroups.xml
 fi
 
 # Get set of register group names.
 GROUP_NAMES=$(xml sel -T -t -m /AVRPART/V2/modules/module/registers -s "A:T:-" "@offset" -v "concat(@name,' ')" $devicefile)
 
 # Create base iogroups temporary xml file.
-echo "<AVRPART>" | sed "s,>,>\r,g" >> iogroups.xml
+echo "<AVRPART>" | sed "s,>,>\r,g" >> $headerfile-iogroups.xml
 for i in $GROUP_NAMES ; do \
-    xml sel -t -m '/AVRPART/V2/modules/module/registers[@name='\'${i}\'']' -c . $devicefile | sed s,registers,group,g | sed "s,/>,>,g" >> iogroups.xml
+    xml sel -t -m '/AVRPART/V2/modules/module/registers[@name='\'${i}\'']' -c . $devicefile | sed s,registers,group,g | sed "s,/>,>,g" >> $headerfile-iogroups.xml
     TYPE=$(xml sel -T -t -m '/AVRPART/V2/modules/module/registers[@name='\'${i}\'']' -v "@implements" $devicefile)
-    xml sel -t -m '/AVRPART/V2/templates/module/registers[@name='\'${TYPE}\'']' -c . $devicefile >> iogroups.xml
-    echo "</group>" | sed "s,>,>\r,g" >> iogroups.xml
+    xml sel -t -m '/AVRPART/V2/templates/module/registers[@name='\'${TYPE}\'']' -c . $devicefile >> $headerfile-iogroups.xml
+    echo "</group>" | sed "s,>,>\r,g" >> $headerfile-iogroups.xml
 done
-echo "</AVRPART>" | sed "s,>,>\r,g" >> iogroups.xml
+echo "</AVRPART>" | sed "s,>,>\r,g" >> $headerfile-iogroups.xml
 
 # Make all groups have consistent width of offset address.
 for i in $GROUP_NAMES ; do \
-    value=$(printf "0x%04X" $(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@offset" iogroups.xml))
-    xml ed -O -u '/AVRPART/group[@name='\'${i}\'']/@offset' -v "$value" iogroups.xml > temp.xml
-    mv -f temp.xml iogroups.xml
+    value=$(printf "0x%04X" $(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@offset" $headerfile-iogroups.xml))
+    xml ed -O -u '/AVRPART/group[@name='\'${i}\'']/@offset' -v "$value" $headerfile-iogroups.xml > $headerfile-temp.xml
+    mv -f $headerfile-temp.xml $headerfile-iogroups.xml
 done
 
 # Re-sort iogroups temporary XML file.
-xml sel -t -e AVRPART -m "/AVRPART/group" -s "A:T:-" "@offset" -c . iogroups.xml > temp.xml
-mv -f temp.xml iogroups.xml
+xml sel -t -e AVRPART -m "/AVRPART/group" -s "A:T:-" "@offset" -c . $headerfile-iogroups.xml > $headerfile-temp.xml
+mv -f $headerfile-temp.xml $headerfile-iogroups.xml
 
 # Re-get set of register group names.
-GROUP_NAMES=$(xml sel -T -t -m /AVRPART/group -s "A:T:-" "@offset" -v "concat(@name,' ')" iogroups.xml)
+GROUP_NAMES=$(xml sel -T -t -m /AVRPART/group -s "A:T:-" "@offset" -v "concat(@name,' ')" $headerfile-iogroups.xml)
 
 # Add absolute address to registers.
 for i in $GROUP_NAMES ; do \
-    GROUP_OFFSET=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@offset" iogroups.xml)
-    REG_NAMES=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers/child::*' -v "concat(@name,' ')" iogroups.xml)
+    GROUP_OFFSET=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@offset" $headerfile-iogroups.xml)
+    REG_NAMES=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers/child::*' -v "concat(@name,' ')" $headerfile-iogroups.xml)
     for j in $REG_NAMES ; do \
-        value=$(printf "0x%04X" $(($GROUP_OFFSET + $(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers/child::*[@name='\'${j}\'']' -v "@offset" iogroups.xml))))
-        xml ed -O -a '/AVRPART/group[@name='\'${i}\'']/registers/child::*[@name='\'${j}\'']' -t attr -n "address" -v "$value" iogroups.xml > temp.xml
-        mv -f temp.xml iogroups.xml
+        value=$(printf "0x%04X" $(($GROUP_OFFSET + $(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers/child::*[@name='\'${j}\'']' -v "@offset" $headerfile-iogroups.xml))))
+        xml ed -O -a '/AVRPART/group[@name='\'${i}\'']/registers/child::*[@name='\'${j}\'']' -t attr -n "address" -v "$value" $headerfile-iogroups.xml > $headerfile-temp.xml
+        mv -f $headerfile-temp.xml $headerfile-iogroups.xml
     done
 done
 
@@ -210,15 +210,15 @@ done
 #---------------------------
 echo "/* Ungrouped common registers */" >> $headerfile
 for i in $GROUP_NAMES ; do
-    REGISTERS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\'']' -v "concat(@name,' ')" iogroups.xml)
+    REGISTERS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\'']' -v "concat(@name,' ')" $headerfile-iogroups.xml)
     for j in $REGISTERS ; do
-        REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\''][@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" iogroups.xml | sort)
+        REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\''][@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" $headerfile-iogroups.xml | sort)
         for k in $REG_OFFSETS ; do
-            REG_NAME=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\''][@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" iogroups.xml)
+            REG_NAME=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@globalregs='\'true\''][@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" $headerfile-iogroups.xml)
             if test -n "$REG_NAME" ; then
-                REG_SIZE=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@size" iogroups.xml)
-                REG_ADDRESS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@address" iogroups.xml)
-                REG_TEXT=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@text" iogroups.xml)
+                REG_SIZE=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@size" $headerfile-iogroups.xml)
+                REG_ADDRESS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@address" $headerfile-iogroups.xml)
+                REG_TEXT=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@text" $headerfile-iogroups.xml)
                 if test -n "$REG_SIZE" ; then
                     if test "$REG_SIZE" = "1" ; then
                         echo "#define ${REG_NAME}  _SFR_MEM8(${REG_ADDRESS})  /* ${REG_TEXT} */" >> $headerfile
@@ -420,7 +420,7 @@ xml sel -T \
     -t -m /AVRPART/group \
         -s "A:T:-" "@offset" \
         -v "concat('#define ',@name,'    (*(',@implements,'_t *) ',@offset,')  /* ',@text,' */')" -n \
-    -t -n -n iogroups.xml >> $headerfile
+    -t -n -n $headerfile-iogroups.xml >> $headerfile
 
 
 
@@ -436,18 +436,18 @@ echo "/* ========== Flattened fully qualified IO register names ========== */" >
 echo "" >> $headerfile
 
 for i in $GROUP_NAMES ; do
-    GROUP_TEXT=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@text" iogroups.xml)
+    GROUP_TEXT=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v "@text" $headerfile-iogroups.xml)
     echo "/* ${i} - ${GROUP_TEXT} */" >> $headerfile
     
-    REGISTERS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers' -v "concat(@name,' ')" iogroups.xml)
+    REGISTERS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers' -v "concat(@name,' ')" $headerfile-iogroups.xml)
     for j in $REGISTERS ; do
     
-        REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" iogroups.xml | sort)
+        REG_OFFSETS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*' -v "concat(@offset,' ')" $headerfile-iogroups.xml | sort)
         for k in $REG_OFFSETS ; do
-            REG_NAME=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" iogroups.xml)
+            REG_NAME=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@name" $headerfile-iogroups.xml)
             if test -n "$REG_NAME" ; then
-                REG_SIZE=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@size" iogroups.xml)
-                REG_ADDRESS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@address" iogroups.xml)
+                REG_SIZE=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@size" $headerfile-iogroups.xml)
+                REG_ADDRESS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@address" $headerfile-iogroups.xml)
                 if test -n "$REG_SIZE" ; then
                     if test "$REG_SIZE" = "1" ; then
                         echo "#define ${i}_${REG_NAME}  _SFR_MEM8(${REG_ADDRESS})" >> $headerfile
@@ -456,7 +456,7 @@ for i in $GROUP_NAMES ; do
                         echo "#define ${i}_${REG_NAME}  _SFR_MEM16(${REG_ADDRESS})" >> $headerfile
                     fi
                 else
-                    REG_IMPLEMENTS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@implements" iogroups.xml)
+                    REG_IMPLEMENTS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']/registers[@name='\'${j}\'']/child::*[@offset='\'${k}\'']' -v "@implements" $headerfile-iogroups.xml)
                   
 
                     MODULES=$(xml sel -T -t -m "/AVRPART/V2/templates/module" -v "concat(@class,' ')" $devicefile)
@@ -827,23 +827,23 @@ xml sel -t -c /AVRPART/MEMORY/IO_MEMORY $devicefile | \
         -d /IO_MEMORY/EXT_IO_START_ADDR \
         -d /IO_MEMORY/EXT_IO_STOP_ADDR \
         -d /IO_MEMORY/MEM_START_ADDR \
-        -d /IO_MEMORY/MEM_STOP_ADDR > iomemory.xml
+        -d /IO_MEMORY/MEM_STOP_ADDR > $headerfile-iomemory.xml
 
 # Get list of register names.
-REGNAMES=$(xml el iomemory.xml | sed "s,IO_MEMORY$,,g" | cut -d '/' -f 2 | sed "s,\r,,g" | uniq)
+REGNAMES=$(xml el $headerfile-iomemory.xml | sed "s,IO_MEMORY$,,g" | cut -d '/' -f 2 | sed "s,\r,,g" | uniq)
 
 # Convert temporary working XML file to PYX.
-xml pyx iomemory.xml > iomemory.pyx
+xml pyx $headerfile-iomemory.xml > $headerfile-iomemory.pyx
 
 # For each register...
 MAX_ADDRESS_WIDTH=0
 for i in $REGNAMES ; do \
     
     # Get IO address.
-    IOADDR=$(xml sel -t -v /IO_MEMORY/$i/IO_ADDR iomemory.xml | sed "s,\r,," | sed "s,NA,," | sed "s,\\$,0x,g")
+    IOADDR=$(xml sel -t -v /IO_MEMORY/$i/IO_ADDR $headerfile-iomemory.xml | sed "s,\r,," | sed "s,NA,," | sed "s,\\$,0x,g")
     
     # Get Memory address.
-    MEMADDR=$(xml sel -t -v /IO_MEMORY/$i/MEM_ADDR iomemory.xml | sed "s,\r,," | sed "s,\\$,0x,g")
+    MEMADDR=$(xml sel -t -v /IO_MEMORY/$i/MEM_ADDR $headerfile-iomemory.xml | sed "s,\r,," | sed "s,\\$,0x,g")
     
     # Check for max width of address
     WIDTH=$(( $(echo "$IOADDR" | wc -m) ))
@@ -856,7 +856,7 @@ for i in $REGNAMES ; do \
     fi
     
     # Get initialization value (if exists).
-    INIT=$(xml sel -t -v /IO_MEMORY/$i/INIT iomemory.xml | sed "s,\r,,")
+    INIT=$(xml sel -t -v /IO_MEMORY/$i/INIT $headerfile-iomemory.xml | sed "s,\r,,")
     
     # Determine type of address.
     if test -z "$IOADDR"; then
@@ -866,8 +866,8 @@ for i in $REGNAMES ; do \
     fi
     
     # Convert named register element to REGISTER element with attributes in the PYX file.
-    sed -i "s,(${i}$,(REGISTER\nAname $i\nAtype $TYPE\nAio_addr $IOADDR\nAmem_addr $MEMADDR\nAsize 8\nAinit $INIT," iomemory.pyx
-    sed -i "s,)${i}$,)REGISTER," iomemory.pyx
+    sed -i "s,(${i}$,(REGISTER\nAname $i\nAtype $TYPE\nAio_addr $IOADDR\nAmem_addr $MEMADDR\nAsize 8\nAinit $INIT," $headerfile-iomemory.pyx
+    sed -i "s,)${i}$,)REGISTER," $headerfile-iomemory.pyx
 done
 # Subtract 3 from max address width: 2 for "0x" and 1 for line feed when echoing to wc.
 MAX_ADDRESS_WIDTH=$(( $MAX_ADDRESS_WIDTH - 3 ))
@@ -878,7 +878,7 @@ MAX_ADDRESS_WIDTH=$(( $MAX_ADDRESS_WIDTH - 3 ))
 #   - Convert named bit mask elements to BIT elements with attributes
 #   - Sort the register names based on the memory address element.
 #   - Save it to the temporary XML file.
-xml depyx iomemory.pyx | \
+xml depyx $headerfile-iomemory.pyx | \
     xml ed -O \
         -d "/IO_MEMORY/REGISTER/IO_ADDR" \
         -d "/IO_MEMORY/REGISTER/MEM_ADDR" \
@@ -896,10 +896,10 @@ xml depyx iomemory.pyx | \
     sed 's,<.*_MASK>0x40</,<BIT value="6" name=",g' | \
     sed 's,<.*_MASK>0x80</,<BIT value="7" name=",g' | \
     sed 's,_MASK>$,"/>,g' | \
-    xml sel -t -e IO_MEMORY -n -m "/IO_MEMORY/REGISTER" -s "A:T:-" "@mem_addr" -c . -n > iomemory.xml
+    xml sel -t -e IO_MEMORY -n -m "/IO_MEMORY/REGISTER" -s "A:T:-" "@mem_addr" -c . -n > $headerfile-iomemory.xml
 
 # Remove temporary PYX file.
-rm iomemory.pyx
+rm $headerfile-iomemory.pyx
 
 # Calculate the set of word size register names needed.
 #   - Get list of all register names, each name followed by an EOL.
@@ -910,7 +910,7 @@ rm iomemory.pyx
 #   - Cut off ending 'H' of register names.
 #   - Get list of only duplicate register names.
 #   - Remove duplicates.
-REGNAMES_WORD=$(xml sel -T -t -m "/IO_MEMORY/REGISTER" -v "@name" -n iomemory.xml | \
+REGNAMES_WORD=$(xml sel -T -t -m "/IO_MEMORY/REGISTER" -v "@name" -n $headerfile-iomemory.xml | \
     sed "s,\r\n,\n,g" | \
     sed "s,_L$,,g" | \
     sed "s,_H$,,g" | \
@@ -925,15 +925,15 @@ for i in $REGNAMES_WORD ; do \
     
     # Get the register type from the Low register, 
     #   convert to Unix line endings.
-    TYPE=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@type" iomemory.xml | sed "s,\r,,")
+    TYPE=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@type" $headerfile-iomemory.xml | sed "s,\r,,")
     
     # Get the io address from the Low register,
     #   convert to Unix line endings.
-    IOADDR=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@io_addr" iomemory.xml | sed "s,\r,,")
+    IOADDR=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@io_addr" $headerfile-iomemory.xml | sed "s,\r,,")
     
     # Get the memory address from the Low register,
     #   convert to Unix line endings.
-    MEMADDR=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@mem_addr" iomemory.xml | sed "s,\r,,")
+    MEMADDR=$(xml sel -t -m '/IO_MEMORY/REGISTER[@name='\'${i}L\'']' -v "@mem_addr" $headerfile-iomemory.xml | sed "s,\r,,")
     
     #   - Insert a new element before the Low register, name it as the word register
     #   - Append a 'name' attribute
@@ -949,27 +949,27 @@ for i in $REGNAMES_WORD ; do \
         -a '/IO_MEMORY/'${i} --type "attr" -n "io_addr" -v "$IOADDR" \
         -a '/IO_MEMORY/'${i} --type "attr" -n "mem_addr" -v "$MEMADDR" \
         -a '/IO_MEMORY/'${i} --type "attr" -n "size" -v "16" \
-        -r '/IO_MEMORY/'${i} -v "REGISTER" iomemory.xml > iomem2.xml
+        -r '/IO_MEMORY/'${i} -v "REGISTER" $headerfile-iomemory.xml > $headerfile-iomem2.xml
     
     # Move 2nd temporary XML file to first.
-    mv iomem2.xml iomemory.xml
+    mv $headerfile-iomem2.xml $headerfile-iomemory.xml
 done
 
 
 # Fix width of all addresses.
-ALLREGS=$(xml sel -T -t -m "/IO_MEMORY/REGISTER" -v "concat(@name,' ')" iomemory.xml)
+ALLREGS=$(xml sel -T -t -m "/IO_MEMORY/REGISTER" -v "concat(@name,' ')" $headerfile-iomemory.xml)
 for i in $ALLREGS ; do
-    MEM_ADDR=$(xml sel -T -t -m '/IO_MEMORY/REGISTER[@name='\'${i}\'']' -v "@mem_addr" iomemory.xml)
+    MEM_ADDR=$(xml sel -T -t -m '/IO_MEMORY/REGISTER[@name='\'${i}\'']' -v "@mem_addr" $headerfile-iomemory.xml)
     if test -n "$MEM_ADDR" ; then
         NEW_MEM_ADDR=$(printf "0x%0${MAX_ADDRESS_WIDTH}X" $(( $MEM_ADDR )) )
-        xml ed -O -u '/IO_MEMORY/REGISTER[@name='\'${i}\'']/@mem_addr' -v "$NEW_MEM_ADDR" iomemory.xml > tmp.xml
-        mv tmp.xml iomemory.xml
+        xml ed -O -u '/IO_MEMORY/REGISTER[@name='\'${i}\'']/@mem_addr' -v "$NEW_MEM_ADDR" $headerfile-iomemory.xml > $headerfile-tmp.xml
+        mv $headerfile-tmp.xml $headerfile-iomemory.xml
     fi
-    IO_ADDR=$(xml sel -T -t -m '/IO_MEMORY/REGISTER[@name='\'${i}\'']' -v "@io_addr" iomemory.xml)
+    IO_ADDR=$(xml sel -T -t -m '/IO_MEMORY/REGISTER[@name='\'${i}\'']' -v "@io_addr" $headerfile-iomemory.xml)
     if test -n "$IO_ADDR" ; then
         NEW_IO_ADDR=$(printf "0x%0${MAX_ADDRESS_WIDTH}X" $(( $IO_ADDR )) )
-        xml ed -O -u '/IO_MEMORY/REGISTER[@name='\'${i}\'']/@io_addr' -v "$NEW_IO_ADDR" iomemory.xml > tmp.xml
-        mv tmp.xml iomemory.xml
+        xml ed -O -u '/IO_MEMORY/REGISTER[@name='\'${i}\'']/@io_addr' -v "$NEW_IO_ADDR" $headerfile-iomemory.xml > $headerfile-tmp.xml
+        mv $headerfile-tmp.xml $headerfile-iomemory.xml
     fi
 done
 
@@ -982,7 +982,7 @@ xml sel -T \
        -m "BIT[@value]" -s "A:T:-" "@value" -v "concat('#define ',@name,' ',@value)" -n \
     -t -m "/IO_MEMORY/REGISTER[@type='mem']" -s "A:T:-" "@mem_addr" -n -v "concat('#define ',@name,' _SFR_MEM',@size,'(',@mem_addr,')')" -n \
        -m "BIT[@value]" -s "A:T:-" "@value" -v "concat('#define ',@name,' ',@value)" -n \
-    -t -n -n iomemory.xml | \
+    -t -n -n $headerfile-iomemory.xml | \
 sed "s,-,_,g" >> $headerfile
 
 
@@ -994,14 +994,14 @@ fi
 
 # Create list of 8-bit registers that have no associated bit names.
 REGS_NO_BITNAMES=$(xml sel -T -t -m "/IO_MEMORY/REGISTER[@size='8']" \
-    -i "count(BIT)=0" -v "@name" -n iomemory.xml | sed "s,\r\n,\n,g")
+    -i "count(BIT)=0" -v "@name" -n $headerfile-iomemory.xml | sed "s,\r\n,\n,g")
 
 # Create list of 8-bit registers in the XML file that have hyphens in the names.
 REGS_WITH_HYPHENS=$(xml sel -T -t -m "/IO_MEMORY/REGISTER[@size='8']" \
     -i "contains(@name, '-')" -v "@name" -n \
     -b -m "BIT" \
     -i "contains(@name, '-')" -v "@name" -n \
-    iomemory.xml | sed "s,\r\n,\n,g")
+    $headerfile-iomemory.xml | sed "s,\r\n,\n,g")
 
 
 # Interrupt vectors.
@@ -1220,7 +1220,7 @@ chmod 644 $headerfile
 
 # I/O Header File and XML Device File Verification
 #--------------------------------------------------
-LOGFILE=avrgcc-header.log
+LOGFILE=$headerfile.log
 # Turn off printing of commands for the verification.
 set +ex
 
@@ -1247,8 +1247,8 @@ echo | tee -a $LOGFILE
 echo Checking for invalid signature... | tee -a $LOGFILE
 if test "$SIGNATURE_0" = "0x0" -a "$SIGNATURE_1" = "0x0" -a "$SIGNATURE_2" = "0x0" ; then
     echo "  Invalid signature: ${SIGNATURE_0} ${SIGNATURE_1} ${SIGNATURE_2}" | tee -a $LOGFILE
-    echo "" | tee -a $LOGFILE
 fi
+echo | tee -a $LOGFILE
 
 echo Checking for registers that have no associated bit names... | tee -a $LOGFILE
 echo "$REGS_NO_BITNAMES" | tee -a $LOGFILE
