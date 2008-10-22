@@ -1,5 +1,10 @@
 2008-10-21  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Patch #6517 submitted by Anton Ivanov.
+	* include/avr/pgmspace.h: Add float support to pgmspace.h.
+
+2008-10-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* xml/avrgcc-header: Change all temporary filenames to be unique to
 	allow script to be run in parallel. Move output of blank line in log
 	file.
