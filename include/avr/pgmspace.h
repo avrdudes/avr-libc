@@ -35,6 +35,7 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
      Eric B. Weddington <eric@ecentral.com>
      Wolfgang Haidinger <wh@vmars.tuwien.ac.at> (pgm_read_dword())
+     Ivanov Anton <anton@arc.com.ru> (pgm_read_float())
  */
 
 /** \file */
@@ -348,14 +349,56 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     __result;                               \
 }))
 
+#define __LPM_float_classic__(addr)         \
+(__extension__({                            \
+    uint16_t __addr16 = (uint16_t)(addr);   \
+    float __result;                         \
+    __asm__                                 \
+    (                                       \
+        "lpm"           "\n\t"              \
+        "mov %A0, r0"   "\n\t"              \
+        "adiw r30, 1"   "\n\t"              \
+        "lpm"           "\n\t"              \
+        "mov %B0, r0"   "\n\t"              \
+        "adiw r30, 1"   "\n\t"              \
+        "lpm"           "\n\t"              \
+        "mov %C0, r0"   "\n\t"              \
+        "adiw r30, 1"   "\n\t"              \
+        "lpm"           "\n\t"              \
+        "mov %D0, r0"   "\n\t"              \
+        : "=r" (__result), "=z" (__addr16)  \
+        : "1" (__addr16)                    \
+        : "r0"                              \
+    );                                      \
+    __result;                               \
+}))
+
+#define __LPM_float_enhanced__(addr)        \
+(__extension__({                            \
+    uint16_t __addr16 = (uint16_t)(addr);   \
+    float __result;                         \
+    __asm__                                 \
+    (                                       \
+        "lpm %A0, Z+"   "\n\t"              \
+        "lpm %B0, Z+"   "\n\t"              \
+        "lpm %C0, Z+"   "\n\t"              \
+        "lpm %D0, Z"    "\n\t"              \
+        : "=r" (__result), "=z" (__addr16)  \
+        : "1" (__addr16)                    \
+    );                                      \
+    __result;                               \
+}))
+
 #if defined (__AVR_HAVE_LPMX__)
 #define __LPM(addr)         __LPM_enhanced__(addr)
 #define __LPM_word(addr)    __LPM_word_enhanced__(addr)
 #define __LPM_dword(addr)   __LPM_dword_enhanced__(addr)
+#define __LPM_float(addr)   __LPM_float_enhanced__(addr)
 #else
 #define __LPM(addr)         __LPM_classic__(addr)
 #define __LPM_word(addr)    __LPM_word_classic__(addr)
 #define __LPM_dword(addr)   __LPM_dword_classic__(addr)
+#define __LPM_float(addr)   __LPM_float_classic__(addr)
 #endif
 
 /** \ingroup avr_pgmspace
@@ -382,6 +425,15 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 
 #define pgm_read_dword_near(address_short) \
     __LPM_dword((uint16_t)(address_short))
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_float_near(address_short)
+    Read a float from the program space with a 16-bit (near) address. 
+    \note The address is a byte address. 
+    The address is in the program space. */
+
+#define pgm_read_float_near(address_short) \
+    __LPM_float((uint16_t)(address_short))
 
 #if defined(RAMPZ) || defined(__DOXYGEN__)
 
@@ -527,14 +579,73 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     __result;                             \
 }))
 
+#define __ELPM_float_classic__(addr)      \
+(__extension__({                          \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    float __result;                       \
+    __asm__                               \
+    (                                     \
+        "out %2, %C1"          "\n\t"     \
+        "mov r31, %B1"         "\n\t"     \
+        "mov r30, %A1"         "\n\t"     \
+        "elpm"                 "\n\t"     \
+        "mov %A0, r0"          "\n\t"     \
+        "in r0, %2"            "\n\t"     \
+        "adiw r30, 1"          "\n\t"     \
+        "adc r0, __zero_reg__" "\n\t"     \
+        "out %2, r0"           "\n\t"     \
+        "elpm"                 "\n\t"     \
+        "mov %B0, r0"          "\n\t"     \
+        "in r0, %2"            "\n\t"     \
+        "adiw r30, 1"          "\n\t"     \
+        "adc r0, __zero_reg__" "\n\t"     \
+        "out %2, r0"           "\n\t"     \
+        "elpm"                 "\n\t"     \
+        "mov %C0, r0"          "\n\t"     \
+        "in r0, %2"            "\n\t"     \
+        "adiw r30, 1"          "\n\t"     \
+        "adc r0, __zero_reg__" "\n\t"     \
+        "out %2, r0"           "\n\t"     \
+        "elpm"                 "\n\t"     \
+        "mov %D0, r0"          "\n\t"     \
+        : "=r" (__result)                 \
+        : "r" (__addr32),                 \
+          "I" (_SFR_IO_ADDR(RAMPZ))       \
+        : "r0", "r30", "r31"              \
+    );                                    \
+    __result;                             \
+}))
+
+#define __ELPM_float_enhanced__(addr)     \
+(__extension__({                          \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    float __result;                       \
+    __asm__                               \
+    (                                     \
+        "out %2, %C1"   "\n\t"            \
+        "movw r30, %1"  "\n\t"            \
+        "elpm %A0, Z+"  "\n\t"            \
+        "elpm %B0, Z+"  "\n\t"            \
+        "elpm %C0, Z+"  "\n\t"            \
+        "elpm %D0, Z"   "\n\t"            \
+        : "=r" (__result)                 \
+        : "r" (__addr32),                 \
+          "I" (_SFR_IO_ADDR(RAMPZ))       \
+        : "r30", "r31"                    \
+    );                                    \
+    __result;                             \
+}))
+
 #if defined (__AVR_HAVE_LPMX__)
 #define __ELPM(addr)        __ELPM_enhanced__(addr)
 #define __ELPM_word(addr)   __ELPM_word_enhanced__(addr)
 #define __ELPM_dword(addr)  __ELPM_dword_enhanced__(addr)
+#define __ELPM_float(addr)  __ELPM_float_enhanced__(addr)
 #else
 #define __ELPM(addr)        __ELPM_classic__(addr)
 #define __ELPM_word(addr)   __ELPM_word_classic__(addr)
 #define __ELPM_dword(addr)  __ELPM_dword_classic__(addr)
+#define __ELPM_float(addr)  __ELPM_float_classic__(addr)
 #endif
 
 /** \ingroup avr_pgmspace
@@ -564,6 +675,15 @@ typedef uint64_t  prog_uint64_t PROGMEM;
 
 #define pgm_read_dword_far(address_long) __ELPM_dword((uint32_t)(address_long))
 
+/** \ingroup avr_pgmspace
+    \def pgm_read_float_far(address_long)
+    Read a float from the program space with a 32-bit (far) address. 
+
+    \note The address is a byte address.
+    The address is in the program space. */
+
+#define pgm_read_float_far(address_long) __ELPM_float((uint32_t)(address_long))
+
 #endif /* RAMPZ or __DOXYGEN__ */
 
 /** \ingroup avr_pgmspace
@@ -592,6 +712,15 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     The address is in the program space. */
 
 #define pgm_read_dword(address_short)   pgm_read_dword_near(address_short)
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_float(address_short)
+    Read a float from the program space with a 16-bit (near) address. 
+
+    \note The address is a byte address. 
+    The address is in the program space. */
+
+#define pgm_read_float(address_short)   pgm_read_float_near(address_short)
 
 /** \ingroup avr_pgmspace
     \def PGM_P
