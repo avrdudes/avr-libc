@@ -6476,11 +6476,7 @@ IO Module Instances. Mapped to memory.
 #define DMA_CH3_vect_num  9
 #define DMA_CH3_vect      _VECTOR(9)  /* Channel 3 Interrupt */
 
-/* RTC interrupt vectors */
-#define RTC_OVF_vect_num  10
-#define RTC_OVF_vect      _VECTOR(10)  /* Overflow Interrupt */
-#define RTC_COMP_vect_num  11
-#define RTC_COMP_vect      _VECTOR(11)  /* Compare Interrupt */
+/* RTC32 interrupt vectors */
 
 /* TWIC interrupt vectors */
 #define TWIC_TWIS_vect_num  12
@@ -6736,7 +6732,7 @@ IO Module Instances. Mapped to memory.
 #define BOOT_SECTION_END       (BOOT_SECTION_START + BOOT_SECTION_SIZE - 1)
 
 #define DATAMEM_START     (0x0000)
-#define DATAMEM_SIZE      (16777216)
+#define DATAMEM_SIZE      (24576)
 #define DATAMEM_END       (DATAMEM_START + DATAMEM_SIZE - 1)
 
 #define IO_START     (0x0000)
@@ -6750,10 +6746,6 @@ IO Module Instances. Mapped to memory.
 #define INTERNAL_SRAM_START     (0x2000)
 #define INTERNAL_SRAM_SIZE      (16384)
 #define INTERNAL_SRAM_END       (INTERNAL_SRAM_START + INTERNAL_SRAM_SIZE - 1)
-
-#define EXTERNAL_SRAM_START     (0x6000)
-#define EXTERNAL_SRAM_SIZE      (16752640)
-#define EXTERNAL_SRAM_END       (EXTERNAL_SRAM_START + EXTERNAL_SRAM_SIZE - 1)
 
 #define EEPROM_START     (0x0000)
 #define EEPROM_SIZE      (4096)
@@ -6786,7 +6778,7 @@ IO Module Instances. Mapped to memory.
 #define RAMEND       INTERNAL_SRAM_END
 #define XRAMSTART    EXTERNAL_SRAM_START
 #define XRAMSIZE     EXTERNAL_SRAM_SIZE
-#define XRAMEND      EXTERNAL_SRAM_END
+#define XRAMEND      INTERNAL_SRAM_END
 #define E2END        EEPROM_END
 #define E2PAGESIZE   EEPROM_PAGE_SIZE
 
