@@ -45,6 +45,11 @@
    strdup
    strtok
 
+* New devices supported:
+
+  + ATmega32U6
+
+
 *** Changes in avr-libc-1.6.2:
 
 * Bugs fixed:

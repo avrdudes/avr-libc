@@ -195,6 +195,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega32HVB__) \
 || defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega32U4__) \
+|| defined(__AVR_ATmega32U6__) \
 || defined(__AVR_ATmega406__) \
 || defined(__AVR_ATmega48__) \
 || defined(__AVR_ATmega48P__) \

@@ -202,6 +202,7 @@ compile-time.
 - at90usb1286
 - at90usb1287
 - atmega32u4
+- atmega32u6
 
 \par XMEGA Devices:
 
