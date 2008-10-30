@@ -327,6 +327,7 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega32U4__) \
+|| defined(__AVR_ATmega32U6__) \
 || defined(__AVR_ATmega48P__) \
 || defined(__AVR_ATmega88P__) \
 || defined(__AVR_ATmega168P__) \
