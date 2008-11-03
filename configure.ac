@@ -2,7 +2,7 @@
 #
 # Copyright (c) 2004,  Theodore A. Roth
 # Copyright (c) 2005,2006,2007  Anatoly Sokolov
-# Copyright (c) 2005,  Joerg Wunsch
+# Copyright (c) 2005,2008  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -42,8 +42,8 @@ dnl library versioning -- modify these on releases
 dnl        macro name           value            description
 m4_define([avr_libc_major],    [1])dnl           major version
 m4_define([avr_libc_minor],    [6])dnl           minor version
-m4_define([avr_libc_revision], [2])dnl           revision (dot-dot version)
-m4_define([avr_libc_reldate],  [20080403])dnl    release date
+m4_define([avr_libc_revision], [3])dnl           revision (dot-dot version)
+m4_define([avr_libc_reldate],  [20081103])dnl    release date
 dnl end of library versioning data
 
 dnl odd minor number marks a development branch, append date to version there
