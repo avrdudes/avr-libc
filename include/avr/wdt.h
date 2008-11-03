@@ -130,8 +130,12 @@
 */
 
 
-#if defined(__AVR_ATxmega128A1__) \
-|| defined(__AVR_ATxmega64A1__)
+#if || defined(__AVR_ATxmega64A1__) \
+|| defined(__AVR_ATxmega64A3__) \
+|| defined(__AVR_ATxmega128A1__) \
+|| defined(__AVR_ATxmega128A3__) \
+|| defined(__AVR_ATxmega256A3__) \
+|| defined(__AVR_ATxmega256A3B__)
 
 /*
     wdt_enable(WDT_PER_8KCLK_gc);

@@ -1,3 +1,23 @@
+2008-11-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Update header file from XML part description
+	files.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	Add support for ATxmega64A3, ATxmega128A3, ATxmega256A3, ATxmega256A3B.
+	* configure.ac: Add support for new devices.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same. Also fix register names.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+
 2008-10-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Add support for ATmega32U6.
