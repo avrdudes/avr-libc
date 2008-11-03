@@ -206,8 +206,12 @@ compile-time.
 
 \par XMEGA Devices:
 
-- atxmega128a1
 - atxmega64a1
+- atxmega64a3
+- atxmega128a1
+- atxmega128a3
+- atxmega256a3
+- atxmega256a3b
 
 \par Miscellaneous Devices:
 

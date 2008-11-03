@@ -346,8 +346,12 @@ defined(__AVR_AT90PWM1__) \
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
     } while(0)
 
-#elif defined(__AVR_ATxmega128A1__) \
-|| defined(__AVR_ATxmega64A1__)
+#elif || defined(__AVR_ATxmega64A1__) \
+|| defined(__AVR_ATxmega64A3__) \
+|| defined(__AVR_ATxmega128A1__) \
+|| defined(__AVR_ATxmega128A3__) \
+|| defined(__AVR_ATxmega256A3__) \
+|| defined(__AVR_ATxmega256A3B__)
 
     #define SLEEP_MODE_IDLE         (0)
     #define SLEEP_MODE_PWR_DOWN     (SLEEP_SMODE1_bm)

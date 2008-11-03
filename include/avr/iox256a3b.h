@@ -885,20 +885,20 @@ typedef struct NVM_PROD_SIGNATURES_struct
     register8_t reserved_0x05;
     register8_t reserved_0x06;
     register8_t reserved_0x07;
-    register8_t LOTNUM0;  /* Lot Number, Byte 0, ASCII */
-    register8_t LOTNUM1;  /* Lot Number, Byte 1, ASCII */
-    register8_t LOTNUM2;  /* Lot Number, Byte 2, ASCII */
-    register8_t LOTNUM3;  /* Lot Number, Byte 3, ASCII */
-    register8_t LOTNUM4;  /* Lot Number, Byte 4, ASCII */
-    register8_t LOTNUM5;  /* Lot Number, Byte 5, ASCII */
+    register8_t LOTNUM0;  /* Lot Number Byte 0, ASCII */
+    register8_t LOTNUM1;  /* Lot Number Byte 1, ASCII */
+    register8_t LOTNUM2;  /* Lot Number Byte 2, ASCII */
+    register8_t LOTNUM3;  /* Lot Number Byte 3, ASCII */
+    register8_t LOTNUM4;  /* Lot Number Byte 4, ASCII */
+    register8_t LOTNUM5;  /* Lot Number Byte 5, ASCII */
     register8_t reserved_0x0E;
     register8_t reserved_0x0F;
     register8_t WAFNUM;  /* Wafer Number */
     register8_t reserved_0x11;
-    register8_t COORDX;  /* Wafer Coordinate X */
-    register8_t COORDY;  /* Wafer Coordinate Y */
-    register8_t reserved_0x14;
-    register8_t reserved_0x15;
+    register8_t COORDX0;  /* Wafer Coordinate X Byte 0 */
+    register8_t COORDX1;  /* Wafer Coordinate X Byte 1 */
+    register8_t COORDY0;  /* Wafer Coordinate Y Byte 0 */
+    register8_t COORDY1;  /* Wafer Coordinate Y Byte 1 */
     register8_t reserved_0x16;
     register8_t reserved_0x17;
     register8_t reserved_0x18;
@@ -911,24 +911,24 @@ typedef struct NVM_PROD_SIGNATURES_struct
     register8_t reserved_0x1F;
     register8_t ADCACAL0;  /* ADCA Calibration Byte 0 */
     register8_t ADCACAL1;  /* ADCA Calibration Byte 1 */
-    register8_t ADCACAL2;  /* ADCA Calibration Byte 2 */
-    register8_t ADCACAL3;  /* ADCA Calibration Byte 3 */
+    register8_t reserved_0x22;
+    register8_t reserved_0x23;
     register8_t ADCBCAL0;  /* ADCB Calibration Byte 0 */
     register8_t ADCBCAL1;  /* ADCB Calibration Byte 1 */
-    register8_t ADCBCAL2;  /* ADCB Calibration Byte 2 */
-    register8_t ADCBCAL3;  /* ADCB Calibration Byte 3 */
+    register8_t reserved_0x26;
+    register8_t reserved_0x27;
     register8_t reserved_0x28;
     register8_t reserved_0x29;
     register8_t reserved_0x2A;
     register8_t reserved_0x2B;
     register8_t reserved_0x2C;
     register8_t reserved_0x2D;
-    register8_t reserved_0x2E;
-    register8_t reserved_0x2F;
-    register8_t DACACAL0;  /* DACA Calibration Byte 0 */
-    register8_t DACACAL1;  /* DACA Calibration Byte 1 */
-    register8_t DACBCAL0;  /* DACB Calibration Byte 0 */
-    register8_t DACBCAL1;  /* DACB Calibration Byte 1 */
+    register8_t TEMPSENSE0;  /* Temperature Sensor Calibration Byte 0 */
+    register8_t TEMPSENSE1;  /* Temperature Sensor Calibration Byte 0 */
+    register8_t DACAOFFCAL;  /* DACA Calibration Byte 0 */
+    register8_t DACACAINCAL;  /* DACA Calibration Byte 1 */
+    register8_t DACBOFFCAL;  /* DACB Calibration Byte 0 */
+    register8_t DACBGAINCAL;  /* DACB Calibration Byte 1 */
     register8_t reserved_0x34;
     register8_t reserved_0x35;
     register8_t reserved_0x36;
@@ -940,7 +940,6 @@ typedef struct NVM_PROD_SIGNATURES_struct
     register8_t reserved_0x3C;
     register8_t reserved_0x3D;
     register8_t reserved_0x3E;
-    register8_t reserved_0x3F;
 } NVM_PROD_SIGNATURES_t;
 
 /* NVM Command */
@@ -1499,22 +1498,22 @@ typedef struct RTC32_struct
 } RTC32_t;
 
 /* Compare Interrupt level */
-typedef enum RTC_COMPINTLVL_enum
+typedef enum RTC32_COMPINTLVL_enum
 {
-    RTC_COMPINTLVL_OFF_gc = (0x00<<2),  /* Interrupt Disabled */
-    RTC_COMPINTLVL_LO_gc = (0x01<<2),  /* Low Level */
-    RTC_COMPINTLVL_MED_gc = (0x02<<2),  /* Medium Level */
-    RTC_COMPINTLVL_HI_gc = (0x03<<2),  /* High Level */
-} RTC_COMPINTLVL_t;
+    RTC32_COMPINTLVL_OFF_gc = (0x00<<2),  /* Interrupt Disabled */
+    RTC32_COMPINTLVL_LO_gc = (0x01<<2),  /* Low Level */
+    RTC32_COMPINTLVL_MED_gc = (0x02<<2),  /* Medium Level */
+    RTC32_COMPINTLVL_HI_gc = (0x03<<2),  /* High Level */
+} RTC32_COMPINTLVL_t;
 
 /* Overflow Interrupt level */
-typedef enum RTC_OVFINTLVL_enum
+typedef enum RTC32_OVFINTLVL_enum
 {
-    RTC_OVFINTLVL_OFF_gc = (0x00<<0),  /* Interrupt Disabled */
-    RTC_OVFINTLVL_LO_gc = (0x01<<0),  /* Low Level */
-    RTC_OVFINTLVL_MED_gc = (0x02<<0),  /* Medium Level */
-    RTC_OVFINTLVL_HI_gc = (0x03<<0),  /* High Level */
-} RTC_OVFINTLVL_t;
+    RTC32_OVFINTLVL_OFF_gc = (0x00<<0),  /* Interrupt Disabled */
+    RTC32_OVFINTLVL_LO_gc = (0x01<<0),  /* Low Level */
+    RTC32_OVFINTLVL_MED_gc = (0x02<<0),  /* Medium Level */
+    RTC32_OVFINTLVL_HI_gc = (0x03<<0),  /* High Level */
+} RTC32_OVFINTLVL_t;
 
 
 /*
@@ -6477,6 +6476,10 @@ IO Module Instances. Mapped to memory.
 #define DMA_CH3_vect      _VECTOR(9)  /* Channel 3 Interrupt */
 
 /* RTC32 interrupt vectors */
+#define RTC32_OVF_vect_num  10
+#define RTC32_OVF_vect      _VECTOR(10)  /* Overflow Interrupt */
+#define RTC32_COMP_vect_num  11
+#define RTC32_COMP_vect      _VECTOR(11)  /* Compare Interrupt */
 
 /* TWIC interrupt vectors */
 #define TWIC_TWIS_vect_num  12
