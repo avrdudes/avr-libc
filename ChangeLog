@@ -1,3 +1,7 @@
+2008-11-03  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Add missing semicolons for new devices.
+
 2008-11-02  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox128a1.h: Update header file from XML part description
