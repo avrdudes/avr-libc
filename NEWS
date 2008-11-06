@@ -69,6 +69,7 @@
   [#23969] eeprom_read_byte() throws interrupt EE_READY although EERIE is cleared, controller resets
   [#24207] Example in inttypes.h is wrong
   [#24446] _attribute_ should be __attribute__ (with double underscores)
+  [#24762] 1.6.3 wdt.h compile-time bug
 
 * Other changes:
 
