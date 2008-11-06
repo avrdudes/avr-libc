@@ -1,5 +1,10 @@
 2008-11-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* doc/api/tools-install.dox: Add more instructions for installing
+	ghostscript for Windows tools.
+
+2008-11-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #24762.
 	* include/avr/wdt.h: Fix conditional compilation.
 	* include/avr/sleep.h: Same.
