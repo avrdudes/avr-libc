@@ -4,11 +4,13 @@
 
   [#24762] 1.6.3 wdt.h compile-time bug
 
-* Contributed Patches:
+* Other changes:
 
-* New functions:
-
-* New devices supported:
+  The Postscript documentation build has been removed in favour of
+  building only the PDF (and HTML and man page) versions.  PDF offers
+  the same printing quality as postscript at a smaller file size.
+  This also works around a bug in doxygen 1.5.7 where it appears to
+  be no longer possible to set GENERATE_HTML = NO.
 
 
 *** Changes in avr-libc-1.6.3:
