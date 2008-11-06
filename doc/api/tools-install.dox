@@ -513,6 +513,7 @@ as improvements are made.
     - Version 8.63
     - <http://www.cs.wisc.edu/~ghost/>
     - Download and install.
+    - In the \bin subdirectory of the installaion, copy gswin32c.exe to gs.exe.
 
 - Set the TEMP and TMP environment variables to <b>c:\\temp</b> or to the short filename 
     version. This helps to avoid NTVDM errors during building.
