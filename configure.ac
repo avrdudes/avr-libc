@@ -184,14 +184,6 @@ AC_ARG_ENABLE(html-doc,
   *)   AC_MSG_ERROR(bad value ${enableval} for html-doc option) ;;
  esac], [html_doc=yes])dnl
 
-AC_ARG_ENABLE(ps-doc,
-[  --enable-ps-doc         build Postscript documentation (default)],
-[case "${enableval}" in
-  yes) ps_doc=yes ;;
-  no)  ps_doc=no ;;
-  *)   AC_MSG_ERROR(bad value ${enableval} for ps-doc option) ;;
- esac], [ps_doc=yes])dnl
-
 AC_ARG_ENABLE(pdf-doc,
 [  --enable-pdf-doc        build PDF documentation (default)],
 [case "${enableval}" in
@@ -239,11 +231,6 @@ if test "x$dox_ver" = "x"; then
 else
 	# FIXME: should also check for dox_ver >= 1.4.1
 	AC_MSG_RESULT(yes)
-	if test "$ps_doc" = "yes"; then
-		AC_MSG_NOTICE([Enabling PS docs])
-		TARGET_DOX_PS=dox-ps
-		INSTALL_DOX_PS=install-dox-ps
-	fi
 	if test "$pdf_doc" = "yes"; then
 		AC_MSG_NOTICE([Enabling PDF docs])
 		TARGET_DOX_PDF=dox-pdf
@@ -263,10 +250,8 @@ dnl generation, so a different target is only needed for installation.
 	fi
 fi
 dnl
-AC_SUBST(TARGET_DOX_PS)
 AC_SUBST(TARGET_DOX_PDF)
 AC_SUBST(TARGET_DOX_HTML)
-AC_SUBST(INSTALL_DOX_PS)
 AC_SUBST(INSTALL_DOX_PDF)
 AC_SUBST(INSTALL_DOX_HTML)
 AC_SUBST(INSTALL_DOX_MAN)
