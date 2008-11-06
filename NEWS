@@ -104,6 +104,13 @@
 
   - Added support for XMEGA architectures.
 
+  - The Postscript documentation build has been removed in favour of
+    building only the PDF (and HTML and man page) versions.  PDF offers
+    the same printing quality as postscript at a smaller file size.
+    This also works around a bug in doxygen 1.5.7 where it appears to
+    be no longer possible to set GENERATE_HTML = NO.
+
+
 * New devices supported:
 
   + ATxmega128A1
