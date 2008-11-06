@@ -1,3 +1,9 @@
+2008-11-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #24762.
+	* include/avr/wdt.h: Fix conditional compilation.
+	* include/avr/sleep.h: Same.
+
 2008-11-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version to post-1.6.3.

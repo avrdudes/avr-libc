@@ -2,6 +2,8 @@
 
 * Bugs fixed:
 
+  [#24762] 1.6.3 wdt.h compile-time bug
+
 * Contributed Patches:
 
 * New functions:
