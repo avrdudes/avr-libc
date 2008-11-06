@@ -43,7 +43,7 @@ dnl        macro name           value            description
 m4_define([avr_libc_major],    [1])dnl           major version
 m4_define([avr_libc_minor],    [6])dnl           minor version
 m4_define([avr_libc_revision], [4])dnl           revision (dot-dot version)
-m4_define([avr_libc_reldate],  [20081106])dnl    release date
+m4_define([avr_libc_reldate],  [20081107])dnl    release date
 dnl end of library versioning data
 
 dnl odd minor number marks a development branch, append date to version there
