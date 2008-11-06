@@ -1,3 +1,16 @@
+2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: Do not build Postscript documentation
+	anymore.  The printing quality of PDF is the same as for PS, and
+	it saves as a separate doxygen run using ugly Makefile hacks.  A
+	bug in doxygen 1.5.7 where GENERATE_HTML can no longer be turned
+	off was the triggering event for this step which I've long since
+	intended to do.
+	* doc/api/doxygen.config.in: Generate PDF by default, using
+	hyperlinks.
+	* configure.ac: Remove all traces of the Postscript documentation
+	build.
+
 2008-11-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* doc/api/tools-install.dox: Add more instructions for installing

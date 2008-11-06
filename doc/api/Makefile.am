@@ -32,7 +32,7 @@
 #
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
-CLEANFILES           = *.html *.pdf *.ma *.mas *.ps \
+CLEANFILES           = *.html *.pdf *.ma *.mas \
                        *.png *.eps fix_png \
                        doxygen.config doxygen-pdf.config
 
@@ -76,7 +76,7 @@ DEMO_INC             = $(shell cd $(top_srcdir) && echo "-I`pwd`/include")
 # All demo projects where we need to run "make dox" beforehand.
 DEMOS                = demo largedemo stdiodemo
 
-all-local: ps html pdf
+all-local: html pdf
 
 # Before we can build the dox, we need to build the demo project so that some
 # included files get generated.
@@ -112,14 +112,11 @@ IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
-# Rule for generating postscript output.
-ps: demo demodox $(TARGET_DOX_PS)
-
 # Rule for generating html output.
 html: demo demodox fix_png $(TARGET_DOX_HTML)
 
 # Make the background color of the png's transparent.
-fix_png: $(wildcard $(USER_MANUAL)/*.png)
+fix_png: $(wildcard $(USER_MANUAL)/*.png) latex_src/refman.tex
 	cd $(USER_MANUAL) || exit 0; \
 	for png in *.png; do \
 		echo "Fixing transparency for $$png"; \
@@ -132,14 +129,14 @@ fix_png: $(wildcard $(USER_MANUAL)/*.png)
 pdf: demo demodox $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
-install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PS) $(INSTALL_DOX_PDF) \
+install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PDF) \
 	$(INSTALL_DOX_MAN)
 
 uninstall-local:
 	rm -rf $(DOC_INST_DIR)
 
 clean-local:
-	rm -rf $(USER_MANUAL) latex_src latex_pdf_src man
+	rm -rf $(USER_MANUAL) latex_src man
 	for demo in $(DEMOS); do \
 	  ( cd $(top_srcdir)/doc/examples/$$demo && \
 	  ${MAKE} clean ) ; \
@@ -188,40 +185,6 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 		using_tools.tex > tmp.$$ && \
 		mv -f tmp.$$ using_tools.tex
 
-latex_pdf_src/refman.tex: doxygen-pdf.config $(IMAGE_EPS)
-	doxygen doxygen-pdf.config
-	cd latex_pdf_src && \
-		sed -e '/tocdepth/s/1/3/' \
-		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \
-		refman.tex > tmp.$$ && \
-		mv -f tmp.$$ refman.tex
-	cd latex_pdf_src && \
-		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|p{1.7cm}|p{1.7cm}|p{2cm}|p{5cm}|}/' \
-		-e '/TabularC/s/TabularC/longtable/' \
-		-e '/Vector name/,/^[^ ]/s/\\\\\\hline/\\endhead\\hline/' \
-		group__avr__interrupts.tex > tmp.$$ && \
-		mv -f tmp.$$ group__avr__interrupts.tex
-	cd latex_pdf_src && \
-		sed -e '/{TabularC}{3}/s/{TabularC}{3}/{longtable}{|l|l|l|}/' \
-		-e '/{longtable}{|l|l|l|}/,/TabularC/s/TabularC/longtable/' \
-		-e '/Architecture/s/\\\\\\hline/\\endhead\\hline/' \
-		using_tools.tex > tmp.$$ && \
-		mv -f tmp.$$ using_tools.tex
-	cd latex_pdf_src && \
-		sed -e '/{demo.eps}/s/demo.eps/demo.pdf/' \
-		group__demo__project.tex > tmp.$$ && \
-		mv -f tmp.$$ group__demo__project.tex
-
-doxygen-pdf.config: doxygen.config
-	sed \
-		-e '/PDF_HYPERLINKS/s/NO/YES/' \
-		-e '/USE_PDFLATEX/s/NO/YES/' \
-		-e '/LATEX_OUTPUT/s/latex_src/latex_pdf_src/' \
-		-e '/GENERATE_HTML/s/YES/NO/' \
-		-e '/GENERATE_MAN/s/YES/NO/' \
-		doxygen.config > doxygen-pdf.config ||\
-		{ rm -f doxygen-pdf.config; exit 1; }
-
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in
 	sed \
@@ -240,17 +203,11 @@ dox-html: demo demodox fix_png $(USER_MANUAL)/index.html
 
 $(USER_MANUAL)/index.html: latex_src/refman.tex
 
-dox-ps: $(USER_MANUAL).ps
-
-$(USER_MANUAL).ps: latex_src/refman.tex
-	cd latex_src && ${MAKE} ps
-	cp latex_src/refman.ps $(USER_MANUAL).ps
-
 dox-pdf: $(USER_MANUAL).pdf
 
-$(USER_MANUAL).pdf: latex_pdf_src/refman.tex
-	cd latex_pdf_src && ${MAKE} refman.pdf
-	cp latex_pdf_src/refman.pdf $(USER_MANUAL).pdf
+$(USER_MANUAL).pdf: latex_src/refman.tex
+	cd latex_src && ${MAKE} refman.pdf
+	cp latex_src/refman.pdf $(USER_MANUAL).pdf
 
 # Install rules for the various documentation parts.  The actual
 # access to those rules is from the install-data-local target above,
@@ -269,10 +226,6 @@ install-dox-pdf: dox-pdf
 	$(mkinstalldirs) $(DOC_INST_DIR)
 	$(INSTALL_DATA) $(USER_MANUAL).pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
 
-install-dox-ps: dox-ps
-	$(mkinstalldirs) $(DOC_INST_DIR)
-	$(INSTALL_DATA) $(USER_MANUAL).ps $(DOC_INST_DIR)/$(USER_MANUAL).ps
-
 install-dox-man: dox-html
 	$(mkinstalldirs) $(DOC_INST_DIR)/man/man3
 	@list='$(wildcard man/man3/*.3)'; \
@@ -281,7 +234,7 @@ install-dox-man: dox-html
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
 	done
 
-.PHONY: html latex ps pdf demo demodox \
-	dox-html dox-ps dox-pdf install-pdf install-html install-ps \
-	install-dox-html install-dox-ps install-dox-pdf \
+.PHONY: html latex pdf demo demodox \
+	dox-html dox-pdf install-pdf install-html \
+	install-dox-html install-dox-pdf \
 	install-dox-man
