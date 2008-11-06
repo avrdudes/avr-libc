@@ -1,5 +1,9 @@
 2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: Bump version to 1.6.4.
+
+2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/Makefile.am: Do not build Postscript documentation
 	anymore.  The printing quality of PDF is the same as for PS, and
 	it saves as a separate doxygen run using ugly Makefile hacks.  A
