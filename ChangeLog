@@ -1,3 +1,8 @@
+2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/doxygen.config.in: Update to doxygen version 1.5.7, by
+	running doxygen -u on it.
+
 2008-11-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #24762.
