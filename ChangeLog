@@ -1,3 +1,8 @@
+2008-11-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SF bug #2305703.
+	* include/avr/iom162.h: Add TCN2UB definition.
+
 2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version date for the removal of the PS
