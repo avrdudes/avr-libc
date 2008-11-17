@@ -1,6 +1,7 @@
 *** Changes since avr-libc-1.6.4:
 
 * Bugs fixed:
+  [sourceforge.net: #2305703] iom162.h ASSR bitdef, typo?
 
 
 *** Changes in avr-libc-1.6.4:

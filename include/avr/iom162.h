@@ -575,7 +575,8 @@
 /* ASSR bit definitions */
 
 #define AS2	3
-#define TCON2UB	2
+#define TCN2UB  2
+#define TCON2UB	2   /* Kept for backwards compatibility. */
 #define OCR2UB	1
 #define TCR2UB	0
 
