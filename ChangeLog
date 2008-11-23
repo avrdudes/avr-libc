@@ -1,3 +1,11 @@
+2008-11-23  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #24890. Thanks to Ruud v Gessel.
+	* libm/fplib/fp_rempio2.S: Fix misprint in SPLIT_PIO2 value.
+	Note, it was in rare cases influence the performance only.
+	* tests/simulate/math/cos-02.c: New file.
+	* NEWS: Add to fixed bug list.
+
 2008-11-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for SF bug #2305703.

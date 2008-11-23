@@ -44,7 +44,7 @@
 #define	HI40_PIO2	0x3FC90FDA	/* (flt40_t) Pi/2	*/
 #define	LO40_PIO2	0xA2
 #define	MNT32_PIO2	0xC90FDAA2	/* mantissa of Pi/2, 32 bits	*/
-#define SPLIT_PIO2	0x7FC80FDA	/* split(HI40_PIO2)	*/
+#define SPLIT_PIO2	0x7FC90FDA	/* split(HI40_PIO2)	*/
 
 FUNCTION __fp_rempio2
 
