@@ -71,6 +71,7 @@
   [#24207] Example in inttypes.h is wrong
   [#24446] _attribute_ should be __attribute__ (with double underscores)
   [#24762] 1.6.3 wdt.h compile-time bug
+  [#24890] Small error in libm source fp_rempio2.S
 
 * Other changes:
 
