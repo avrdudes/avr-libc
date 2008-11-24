@@ -1,3 +1,9 @@
+2008-11-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Fix grouping of ATtiny13A. Thanks to Anatoliy Sokolov.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/iotn13a.h: Add definition of EEARL.
+
 2008-11-23  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #24890. Thanks to Ruud v Gessel.
