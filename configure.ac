@@ -711,7 +711,6 @@ AC_CONFIG_FILES([
 	avr/lib/avr2/attiny11/Makefile
 	avr/lib/avr2/attiny12/Makefile
 	avr/lib/avr2/attiny13/Makefile
-	avr/lib/avr2/attiny13a/Makefile
 	avr/lib/avr2/attiny15/Makefile
 	avr/lib/avr2/attiny22/Makefile
 	avr/lib/avr2/attiny24/Makefile
@@ -734,6 +733,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr25/Makefile
 	avr/lib/avr25/at86rf401/Makefile
 	avr/lib/avr25/attiny13/Makefile
+	avr/lib/avr25/attiny13a/Makefile
 	avr/lib/avr25/attiny2313/Makefile
 	avr/lib/avr25/attiny24/Makefile
 	avr/lib/avr25/attiny25/Makefile
