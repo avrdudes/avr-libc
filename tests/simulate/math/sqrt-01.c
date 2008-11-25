@@ -69,6 +69,30 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { .fl= 0x0.800007p+1 }, { .fl= 0x0.800003p+1 } },
     { { .fl= 0x0.800008p+1 }, { .fl= 0x0.800004p+1 } },
     { { .fl= 0x0.800009p+1 }, { .fl= 0x0.800004p+1 } },
+    
+    /* slightly less 1.0 	*/
+    { { .fl= 0x0.fffffcp+0 }, { .fl= 0x0.fffffep+0 } },
+    { { .fl= 0x0.fffffdp+0 }, { .fl= 0x0.fffffep+0 } },
+    { { .fl= 0x0.fffffep+0 }, { .fl= 0x0.ffffffp+0 } },
+    { { .fl= 0x0.ffffffp+0 }, { .fl= 0x0.ffffffp+0 } },
+
+    /* approx. 2.0	*/
+    { { .fl= 0x0.fffff8p+1 }, { .fl= 0x0.b504f0p+1 } },
+    { { .fl= 0x0.fffff9p+1 }, { .fl= 0x0.b504f1p+1 } },
+    { { .fl= 0x0.fffffap+1 }, { .fl= 0x0.b504f1p+1 } },
+    { { .fl= 0x0.fffffbp+1 }, { .fl= 0x0.b504f1p+1 } },
+    { { .fl= 0x0.fffffcp+1 }, { .fl= 0x0.b504f2p+1 } },
+    { { .fl= 0x0.fffffdp+1 }, { .fl= 0x0.b504f2p+1 } },
+    { { .fl= 0x0.fffffep+1 }, { .fl= 0x0.b504f2p+1 } },
+    { { .fl= 0x0.ffffffp+1 }, { .fl= 0x0.b504f3p+1 } },
+    { { .fl= 0x0.800000p+2 }, { .fl= 0x0.b504f3p+1 } },
+    { { .fl= 0x0.800001p+2 }, { .fl= 0x0.b504f4p+1 } },
+    { { .fl= 0x0.800002p+2 }, { .fl= 0x0.b504f5p+1 } },
+    { { .fl= 0x0.800003p+2 }, { .fl= 0x0.b504f5p+1 } },
+    { { .fl= 0x0.800004p+2 }, { .fl= 0x0.b504f6p+1 } },
+    { { .fl= 0x0.800005p+2 }, { .fl= 0x0.b504f7p+1 } },
+    { { .fl= 0x0.800006p+2 }, { .fl= 0x0.b504f7p+1 } },
+    { { .fl= 0x0.800007p+2 }, { .fl= 0x0.b504f8p+1 } },
 };
 
 void x_exit (int index)
