@@ -1,3 +1,13 @@
+2008-11-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Optimize the sqrt() function.  Thanks to Ruud v Gessel.
+	* libm/fplib/sqrt.S: Improve to speed up (230 clocks in average)
+	and reduce size (12 words).
+	* tests/simulate/math/sqrt-01.c: Add a few test cases.
+	* NEWS: Add to optimized function list and patches applied.
+	* AUTHORS: Add Ruud v Gessel to list.
+	* doc/api/bench-libm.dox: Update calculation times.
+
 2008-11-24  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Fix grouping of ATtiny13A. Thanks to Anatoliy Sokolov.
