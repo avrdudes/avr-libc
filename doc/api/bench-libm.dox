@@ -34,13 +34,13 @@ and Avr4 is a hardware multiplication.
   </tr>
   <tr>
     <td>acos (0.54321)</td>
-    <td>4648</td>
-    <td>2689</td>
+    <td>4411</td>
+    <td>2455</td>
   </tr>
   <tr>
     <td>asin (0.54321)</td>
-    <td>4754</td>
-    <td>2790</td>
+    <td>4517</td>
+    <td>2556</td>
   </tr>
   <tr>
     <td>atan (0.54321)</td>
@@ -99,13 +99,13 @@ and Avr4 is a hardware multiplication.
   </tr>
   <tr>
     <td>frexp (1.2345, 0)</td>
-    <td>37</td>
-    <td>36</td>
+    <td>42</td>
+    <td>41</td>
   </tr>
   <tr>
     <td>hypot (1.234, 5.678)</td>
-    <td>1556</td>
-    <td>1078</td>
+    <td>1341</td>
+    <td>866</td>
   </tr>
   <tr>
     <td>ldexp (1.2345, 6)</td>
@@ -149,8 +149,8 @@ and Avr4 is a hardware multiplication.
   </tr>
   <tr>
     <td>sqrt (1.2345)</td>
-    <td>709</td>
-    <td>704</td>
+    <td>494</td>
+    <td>492</td>
   </tr>
   <tr>
     <td>tan (1.2345)</td>
