@@ -129,6 +129,7 @@
    strtod
    setjmp
    sqrt   (and callers: acos, asin and hypot)
+   sin, cos, tan:  minor in space
 
 * Contributed Patches:
 

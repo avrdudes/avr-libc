@@ -1,3 +1,17 @@
+2008-12-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Minor optimization of fp_rempio2(), which is used in sin(), cos()
+	and tan() functions. The size of libm is reduced by 11 words. Speed
+	of sin/cos/tan is increased a little in average, besides the interval
+	from 1 to Pi/2 radians, where the performance is worsen by 6 cycles.
+	Thanks to Ruud v Gessel.
+	* libm/fplib/fp_rempio2.S: Rewritten to reduce size.
+	* libm/fplib/fp_mpack.S: Reduce size by 2 words. Add extra entry
+	__fp_mpack_finite().
+	* tests/simulate/math/fp_mpack-01.c: New file.
+	* doc/api/bench-libm.dox: Update calculation times.
+	* NEWS: Note about sin/cos/tan optimization.
+
 2008-11-25  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Optimize the sqrt() function.  Thanks to Ruud v Gessel.

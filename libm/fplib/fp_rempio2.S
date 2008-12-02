@@ -1,5 +1,6 @@
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
    Copyright (c) 2006  Dmitry Xmelkov
+   Copyright (c) 2008  Ruud v Gessel
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -43,8 +44,6 @@
 
 #define	HI40_PIO2	0x3FC90FDA	/* (flt40_t) Pi/2	*/
 #define	LO40_PIO2	0xA2
-#define	MNT32_PIO2	0xC90FDAA2	/* mantissa of Pi/2, 32 bits	*/
-#define SPLIT_PIO2	0x7FC90FDA	/* split(HI40_PIO2)	*/
 
 FUNCTION __fp_rempio2
 
@@ -55,58 +54,88 @@ ENTRY __fp_rempio2
 	rcall	_U(__fp_splitA)
 	brcs	0b		; only finite numbers are valid
 	clt			; ignore a sign
-  ; init division result ('com' at the end)
-	ldi	ZL, -1
-  ; compare A with Pi/2
+  ; init division result
+	ldi	ZL, 0
+  ; extend A
 	clr	rAE
-	ldi	rB1,  hi8(SPLIT_PIO2 + 1)
-	ldi	rB2, hlo8(SPLIT_PIO2 + 1)
-	ldi	rB3, hhi8(SPLIT_PIO2 + 1)
-	cpi	rA0,  lo8(SPLIT_PIO2 + 1)
+  ; check (and modify) exponent
+	subi	rA3, hhi8(HI40_PIO2 << 1)
+	brlo	5f		; fabs(A) < 1.0 radian, C is set
+  ; prepare loop
+	ldi	rB0,  lo8(HI40_PIO2)
+	ldi	rB1,  hi8(HI40_PIO2)
+	ldi	rB2, hlo8(HI40_PIO2 | 0x800000)		; + hidden bit
+	rjmp	1f
+
+.Loop:	lsl	ZL
+	lsl	rAE
+	rol	rA0
+	rol	rA1
+	rol	rA2
+	brcs	2f
+1:	cpi	rAE, lo8(LO40_PIO2)
+	cpc	rA0, rB0
 	cpc	rA1, rB1
 	cpc	rA2, rB2
-	cpc	rA3, rB3
-	brlo	.L_pack			; A < Pi/2 ==> return A
-  ; prepare loop
-	clr	ZH				; highest A byte
-	subi	rA3, hhi8(HI40_PIO2 << 1)	; ilogb(A) - ilogb(B)
-.Loop:
-	subi	rAE,  lo8(MNT32_PIO2)
-	sbci	rA0,  hi8(MNT32_PIO2)
-	sbci	rA1, hlo8(MNT32_PIO2)
-	sbci	rA2, hhi8(MNT32_PIO2)
-	sbci	ZH, 0
-	brpl	5f
-	subi	rAE,  lo8(-MNT32_PIO2)
-	sbci	rA0,  hi8(-MNT32_PIO2)
-	sbci	rA1, hlo8(-MNT32_PIO2)
-	sbci	rA2, hhi8(-MNT32_PIO2)
-	sbci	ZH, -1
-	sec
-5:	rol	ZL
-	subi	rA3, 1
-	brlo	6f
+	brlo	3f
+2:	subi	rAE, lo8(LO40_PIO2)
+	sbc	rA0, rB0
+	sbc	rA1, rB1
+	sbc	rA2, rB2
+	inc	ZL
+3:	dec	rA3
+	brpl	.Loop
+
+  ; Normalize, we know that rA2.1.0.E >= 0x0E. You can check this with
+  ; a test program below.
+	cpi	rA2,0x80
+	brcc	5f
+4:	dec	rA3
 	lsl	rAE
 	rol	rA0
 	rol	rA1
-	rol	rA2
-	rol	ZH
-	rjmp	.Loop
-6:
-  ; normalize
-	/* FIXME: Is it possible to obtain a zero value in rA2.1.0.E ?
-	   I do't known. So, there is a check in exponent decrement.	*/
-	ldi	rA3, hhi8((HI40_PIO2 << 1) - 0x01000000)
-7:	tst	rA2
-	brmi	8f
-	lsl	rAE
-	rol	rA0
-	rol	rA1
-	rol	rA2
-	dec	rA3
-	brne	7b
-8:	inc	rA3
-.L_pack:
-	com	ZL
-	rjmp	_U(__fp_mpack)
+	rol	rA2			; C := 0
+	brpl	4b
+
+5:	sbci	rA3, hhi8((HI40_PIO2<<1) + 0x01000000)	; undo the subi 0x7f
+	rjmp	_U(__fp_mpack_finite)
 ENDFUNC
+
+#if 0
+/* This is a test program to find the smallest value of rA2.1.0.E after
+   division. The nonzero value gives a garanty that normalization loop
+   is finite.	*/
+
+#include <stdio.h>
+#define	MNT32_PIO2	0xC90FDAA2
+
+int main ()
+{
+    unsigned long rA210;
+    unsigned long rA210E;
+    int rA3;
+    unsigned long c;
+    unsigned long amin = 0xffffffff;
+
+    for (rA210 = 0x800000; rA210 <= 0xffffff; rA210 += 1) {
+	rA210E = rA210 << 8;
+	c = 0;
+	rA3 = 127;	/* this is max for finite number	*/
+	goto m;
+	do {
+	    c = rA210E & 0x80000000;
+	    rA210E <<= 1;
+	  m:
+	    if (c || (rA210E >= MNT32_PIO2))
+		rA210E -= MNT32_PIO2;
+	    if (rA210E < amin) {
+		amin = rA210E;
+	        printf ("min of rA210E: 0x%08lx\r", amin);
+		fflush (stdout);
+	    }
+	} while (--rA3 >= 0);
+    }
+    putchar ('\n');
+    return 0;
+}
+#endif

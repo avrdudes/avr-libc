@@ -36,9 +36,9 @@
      Merge parts of float value.
 
   Input:
-     T		- sign
-     rA3	- exponent
-     rA2.rA1.rA0	- mantissa
+     T                  - sign
+     rA3                - exponent
+     rA2.rA1.rA0[.rAE]  - mantissa
   Possible input combinations:
      exp==0	-	zero or subnormal, mantissa shift to right is needed
      exp==1,      rA2 < 0x80	     -	subnormal
@@ -46,23 +46,32 @@
      exp==2..254, rA2 >= 0x80	     -	normal
      exp==255,    rA2.rA1.rA0 == 0   -	Infinity
      exp==255,    rA2.rA1.rA0 != 0   -	NaN
+
+  The __fp_mpack_finite entry point is intended for case where it is
+  known that the A is a finite number.
  */
 
 ENTRY __fp_mpack
 	cpi	rA3, 255
-	breq	3f
+	breq	1f
+
+ENTRY __fp_mpack_finite
 	subi	rA3, 1
-	brcc	1f		; rA3 was > 0
-	lsr	rA2
+	brsh	1f
+	ror	rA2		; rA2.7 := 1 to restore zero rA3
 	ror	rA1
 	ror	rA0
 	ror	rAE
-	subi	rA3, -1		; rA3 := 0
-1:	cpi	rA2, 0x80	; C set, if rA2.7 == 0
-2:	sbci	rA3, -1
-3:	lsl	rA2
+
+1:	lsl	rA2
+	adc	rA3, r1		; switch (A)
+				;  zero:      rA3 is restored to 0
+				;  subnormal: rA3 is stayed (or restored to) 0
+				;  normal:    rA3 is restored to initial
+				;  nonfinite: rA3 is stayed 255
 	lsr	rA3
 	ror	rA2
 	bld	rA3, 7		; sign
 	ret
+
 ENDFUNC
