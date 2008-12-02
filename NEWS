@@ -5,6 +5,7 @@
   [#24890] Small error in libm source fp_rempio2.S
 
 * Optimized functions:
+  cos, sin, tan:  minor in space
   sqrt  (and callers: acos, asin and hypot)
 
 * Contributed Patches:

@@ -59,8 +59,8 @@ and Avr4 is a hardware multiplication.
   </tr>
   <tr>
     <td>cos (1.2345)</td>
-    <td>3381</td>
-    <td>1665</td>
+    <td>3387</td>
+    <td>1671</td>
   </tr>
   <tr>
     <td>cosh (1.2345)</td>
@@ -94,8 +94,8 @@ and Avr4 is a hardware multiplication.
   </tr>
   <tr>
     <td>fmod (5.678, 1.234)</td>
-    <td>132</td>
-    <td>132</td>
+    <td>131</td>
+    <td>131</td>
   </tr>
   <tr>
     <td>frexp (1.2345, 0)</td>
@@ -139,8 +139,8 @@ and Avr4 is a hardware multiplication.
   </tr>
   <tr>
     <td>sin (1.2345)</td>
-    <td>3347</td>
-    <td>1647</td>
+    <td>3353</td>
+    <td>1653</td>
   </tr>
   <tr>
     <td>sinh (1.2345)</td>
@@ -154,8 +154,8 @@ and Avr4 is a hardware multiplication.
   </tr>
   <tr>
     <td>tan (1.2345)</td>
-    <td>4375</td>
-    <td>2420</td>
+    <td>4381</td>
+    <td>2426</td>
   </tr>
   <tr>
     <td>tanh (1.2345)</td>
