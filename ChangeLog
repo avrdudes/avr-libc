@@ -1,3 +1,16 @@
+2008-12-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* common/asmdef.h: Move an explanation string of '.err' pseudo
+	operation from arg to comment, as this pseudo op does not permit
+	any args.
+	* libm/fplib/asmdef.h: Move an explanation string of '.err' pseudo
+	operation from arg to comment, as this pseudo op does not permit
+	any args.  Add the standart banner about license.  Add CVS ident
+	keyword.  Permit the capital 'R' in args of 'X_movw' macro.  Merge
+	the arg parse of 'X_movw' and 'X_lpm' macroses into the one REGNO
+	macro.
+	* libm/fplib/fp_split3.S: Fix typo in comment.
+
 2008-12-02  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Minor optimization of fp_rempio2(), which is used in sin(), cos()
