@@ -65,7 +65,7 @@ ENTRY   __fp_split3
    Return:
      rA3 - exponent:
         0	for +0.0/-0.0
-	1..245	for finite number
+	1..254	for finite number
 	255	for Inf/NaN
      rA2.rA1.rA0 - mantissa:
         0			for +0.0/-0.0
