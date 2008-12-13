@@ -196,9 +196,9 @@ __ATTR_PURE__ static __inline__ uint8_t eeprom_read_byte (const uint8_t *__p)
 {
     do {} while (!eeprom_is_ready ());
 #if E2END <= 0xFF
-    EEARL = (uint8_t)__p;
+    EEARL = (size_t)__p;
 #else
-    EEAR = (uint16_t)__p;
+    EEAR = (size_t)__p;
 #endif
     /* Use inline assembly below as some AVRs have problems with accessing
     EECR with STS instructions. For example, see errata for ATmega64. 
@@ -306,9 +306,9 @@ static __inline__ void eeprom_write_byte (uint8_t *__p, uint8_t __value)
 #endif
 
 #if	E2END <= 0xFF
-    EEARL = (unsigned)__p;
+    EEARL = (size_t)__p;
 #else
-    EEAR = (unsigned)__p;
+    EEAR = (size_t)__p;
 #endif
     EEDR = __value;
 
