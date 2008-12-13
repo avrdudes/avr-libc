@@ -3,6 +3,7 @@
 * Bugs fixed:
   [sourceforge.net: #2305703] iom162.h ASSR bitdef, typo?
   [#24890] Small error in libm source fp_rempio2.S
+  [#25048] eeprom.h will not compile as c++ code.
 
 * Optimized functions:
   cos, sin, tan:  minor in space
