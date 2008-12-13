@@ -1,3 +1,15 @@
+2008-12-13  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #25048: eeprom.h will not compile as c++ code.
+	* include/avr/eeprom.h: Undo (partially) the rev 1.27 (before
+	2008-08-19), eeprom_read_byte(): cast operation of address into
+	16-bit integer regardless of EEPROM size.  Change (this is
+	cosmetic) the (unsigned) cast to (size_t) cast in both byte functions.
+	* test/simulate/regression/bug-25048.cpp: New file. TODO: add to
+	'runtest.sh' the possibility to operate C++ files. Today this file
+	is ignored.
+	* NEWS: Add to fixed bug list.
+
 2008-12-06  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* common/asmdef.h: Move an explanation string of '.err' pseudo
