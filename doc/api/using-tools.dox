@@ -394,12 +394,7 @@ AVR will be defined as well when using the standard levels gnu89
 
 - \c -mno-tablejump
   <p>
-  Do not generate tablejump instructions.  By default, jump tables can
-  be used to optimize \c switch statements.  When turned off,
-  sequences of compare statements are used instead.  Jump tables are
-  usually faster to execute on average, but in particular for \c switch
-  statements where most of the jumps would go to the default label,
-  they might waste a bit of flash memory.
+  Deprecated, use \c -fno-jump-tables instead.
   </p>
 
 - \c -mshort-calls
@@ -517,6 +512,21 @@ users.
 - \c -fpack-struct
   <p>
   Pack all structure members together without holes.
+  </p>
+
+- \c -fno-jump-tables
+  <p>
+  Do not generate tablejump instructions.  By default, jump tables can
+  be used to optimize \c switch statements.  When turned off,
+  sequences of compare statements are used instead.  Jump tables are
+  usually faster to execute on average, but in particular for \c switch
+  statements, where most of the jumps would go to the default label,
+  they might waste a bit of flash memory.
+  </p>
+  <p>  
+  NOTE: The tablejump instructions use the LPM assembler instruction for 
+  access to jump tables. Always use \c -fno-jump-tables switch, if 
+  compiling a bootloader for devices with more than 64 KB of code memory.
   </p>
 
 \section using_avr_as Options for the assembler avr-as
