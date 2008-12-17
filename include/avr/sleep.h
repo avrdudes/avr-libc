@@ -288,6 +288,7 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_ATmega325__) \
 || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega329__) \
+|| defined(__AVR_ATmega329P__) \
 || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega406__) \
