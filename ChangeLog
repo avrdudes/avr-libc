@@ -1,3 +1,8 @@
+2008-12-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SourceForge bug #2420567.
+	* include/avr/sleep.h: Add missing ATmega329P.
+
 2008-12-16  Anatoly Sokolov  <aesok@post.ru>
 
 	* doc/api/using-tools.dox: Document the -mno-tablejump switch as 
