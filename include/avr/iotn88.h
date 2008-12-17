@@ -240,7 +240,7 @@
 #define CS00 0
 #define CS01 1
 #define CS02 2
-#define CTC0 7
+#define CTC0 3
 
 #define TCNT0 _SFR_IO8(0x26)
 #define TCNT0_0 0
