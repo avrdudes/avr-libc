@@ -16,6 +16,7 @@
   [sourceforge.net: #2018957] Wrong SPM_PAGESIZE for mega1284P
   [sourceforge.net: #2033993] User manual: data symbol spec incorrect
   [sourceforge.net: #2305703] iom162.h ASSR bitdef, typo?
+  [sourceforge.net: #2411516] Error/Bug in the iotn88.h file
   [sourceforge.net: #2420567] ATmega329P missing in sleep.h
   [#3485]  Using float arithmetic without linking with -lm result in incorrect code
   [#19079] sscanf %s eats 1 char too much
