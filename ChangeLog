@@ -1,3 +1,8 @@
+2008-12-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/wdt.h: Add support for ATmega329P
+	* include/avr/power.h: Add support for ATmega329P and ATmega3290P.
+
 2008-12-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for SourceForge bug #2411516.

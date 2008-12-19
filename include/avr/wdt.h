@@ -193,6 +193,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega328P__) \
 || defined(__AVR_ATmega329__) \
+|| defined(__AVR_ATmega329P__) \
 || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega32C1__) \
