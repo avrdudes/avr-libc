@@ -1,3 +1,16 @@
+2008-12-21  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Make _FFS() macro usable in CPP conditional expressions.  Seems,
+	the CPP parser is wrong with a few of '?:' operations.  (The CC
+	parser is correct.)
+	* include/string.h: Rewrite _FFS() to workaround the difference
+	between CPP and CC parsers.  Add a note about the 16 bits width
+	of this macro.
+	* tests/simulate/regression/20081221-ffs.c: New file.
+	* tests/simulate/string/FFS-1.c: New file.
+
+	* tests/simulate/regression/bug-25048.cpp: Fix typo in comment.
+
 2008-12-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/wdt.h: Add support for ATmega329P
