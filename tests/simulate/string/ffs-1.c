@@ -1,4 +1,5 @@
-/* $Id$	*/
+/* Test of ffs() function.
+   $Id$	*/
 
 #include <stdlib.h>
 #include <string.h>
