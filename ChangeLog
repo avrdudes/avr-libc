@@ -1,3 +1,8 @@
+2008-12-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/Makefile.am: Remove builtins.h, as it is too soon to 
+	commit.
+
 2008-12-21  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Make _FFS() macro usable in CPP conditional expressions.  Seems,
