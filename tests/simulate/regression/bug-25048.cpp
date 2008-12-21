@@ -1,6 +1,6 @@
 /* Avr-libc bug #25048: eeprom.h will not compile as c++ code.
    This is compile-time bug. It is actual for chips with small amount
-   EEPROM memory, i.e. AT90S2313.
+   EEPROM memory, for example AT90S2313.
    $Id$	*/
 
 #ifndef	__AVR__
