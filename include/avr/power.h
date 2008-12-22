@@ -1075,6 +1075,56 @@ do{ \
 }while(0)
 
 
+#elif defined(__AVR_AT90SCR100__)
+
+#define power_usart0_enable()   (PRR0 &= (uint8_t)~(1 << PRUSART0))
+#define power_usart0_disable()  (PRR0 |= (uint8_t)(1 << PRUSART0))
+
+#define power_spi_enable()      (PRR0 &= (uint8_t)~(1 << PRSPI))
+#define power_spi_disable()     (PRR0 |= (uint8_t)(1 << PRSPI))
+
+#define power_timer1_enable()   (PRR0 &= (uint8_t)~(1 << PRTIM1))
+#define power_timer1_disable()  (PRR0 |= (uint8_t)(1 << PRTIM1))
+
+#define power_timer0_enable()   (PRR0 &= (uint8_t)~(1 << PRTIM0))
+#define power_timer0_disable()  (PRR0 |= (uint8_t)(1 << PRTIM0))
+
+#define power_timer2_enable()   (PRR0 &= (uint8_t)~(1 << PRTIM2))
+#define power_timer2_disable()  (PRR0 |= (uint8_t)(1 << PRTIM2))
+
+#define power_twi_enable()      (PRR0 &= (uint8_t)~(1 << PRTWI))
+#define power_twi_disable()     (PRR0 |= (uint8_t)(1 << PRTWI))
+
+#define power_usbh_enable()     (PRR1 &= (uint8_t)~(1 << PRUSBH))
+#define power_usbh_disable()    (PRR1 |= (uint8_t)(1 << PRUSBH))
+
+#define power_usb_enable()      (PRR1 &= (uint8_t)~(1 << PRUSB))
+#define power_usb_disable()     (PRR1 |= (uint8_t)(1 << PRUSB))
+
+#define power_hsspi_enable()    (PRR1 &= (uint8_t)~(1 << PRHSSPI))
+#define power_hsspi_disable()   (PRR1 |= (uint8_t)(1 << PRHSSPI))
+
+#define power_sci_enable()      (PRR1 &= (uint8_t)~(1 << PRSCI))
+#define power_sci_disable()     (PRR1 |= (uint8_t)(1 << PRSCI))
+
+#define power_aes_enable()      (PRR1 &= (uint8_t)~(1 << PRAES))
+#define power_aes_disable()     (PRR1 |= (uint8_t)(1 << PRAES))
+
+#define power_kb_enable()       (PRR1 &= (uint8_t)~(1 << PRKB))
+#define power_kb_disable()      (PRR1 |= (uint8_t)(1 << PRKB))
+
+#define power_all_enable() \
+do{ \
+    PRR0 &= (uint8_t)~((1<<PRUSART0)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI)); \
+    PRR1 &= (uint8_t)~((1<<PRUSBH)|(1<<PRUSB)|(1<<PRHSSPI)|(1<<PRSCI)|(1<<PRAES)|(1<<PRKB)); \
+}while(0)
+
+#define power_all_disable() \
+do{ \
+    PRR0 |= (uint8_t)((1<<PRUSART0)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI)); \
+    PRR1 |= (uint8_t)((1<<PRUSBH)|(1<<PRUSB)|(1<<PRHSSPI)|(1<<PRSCI)|(1<<PRAES)|(1<<PRKB)); \
+}while(0)
+
 #endif
 
 
@@ -1130,6 +1180,7 @@ do{ \
 || defined(__AVR_ATtiny167__) \
 || defined(__AVR_ATmega32U4__) \
 || defined(__AVR_ATmega32C1__) \
+|| defined(__AVR_AT90SCR100__) \
 || defined(__DOXYGEN__)
 
 

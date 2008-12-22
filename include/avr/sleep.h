@@ -365,6 +365,19 @@ defined(__AVR_AT90PWM1__) \
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(SLEEP_SMODE2_bm | SLEEP_SMODE1_bm | SLEEP_SMODE0_bm)) | (mode)); \
     } while(0)
 
+#elif defined(__AVR_AT90SCR100__)
+
+    #define SLEEP_MODE_IDLE         (0)
+    #define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+    #define SLEEP_MODE_PWR_SAVE     (_BV(SM0) | _BV(SM1))
+    #define SLEEP_MODE_STANDBY      (_BV(SM1) | _BV(SM2))
+    #define SLEEP_MODE_EXT_STANDBY  (_BV(SM0) | _BV(SM1) | _BV(SM2))
+
+    #define set_sleep_mode(mode) \
+    do { \
+        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
+    } while(0)
+
 #else
 
     #error "No SLEEP mode defined for this device."

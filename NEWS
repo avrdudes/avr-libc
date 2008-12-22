@@ -14,6 +14,9 @@
 * Contributed Patches:
   [#6649] sqrt.S in libm changes
 
+* New devices supported:
+
+  + AT90SCR100
 
 *** Changes in avr-libc-1.6.4:
 
