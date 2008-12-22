@@ -1,3 +1,17 @@
+2008-12-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for AT90SCR100.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/io90scr100.h: New file.
+	* NEWS: Add news item.
+
 2008-12-21  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/Makefile.am: Remove builtins.h, as it is too soon to 
