@@ -413,6 +413,9 @@ AM_CONDITIONAL(HAS_attiny43u, test "x$HAS_attiny43u" = "xyes")
 CHECK_AVR_DEVICE(attiny48)
 AM_CONDITIONAL(HAS_attiny48, test "x$HAS_attiny48" = "xyes")
 
+CHECK_AVR_DEVICE(attiny87)
+AM_CONDITIONAL(HAS_attiny87, test "x$HAS_attiny87" = "xyes")
+
 CHECK_AVR_DEVICE(attiny88)
 AM_CONDITIONAL(HAS_attiny88, test "x$HAS_attiny88" = "xyes")
 
@@ -741,14 +744,15 @@ AC_CONFIG_FILES([
 	avr/lib/avr25/attiny24/Makefile
 	avr/lib/avr25/attiny25/Makefile
 	avr/lib/avr25/attiny261/Makefile
+	avr/lib/avr25/attiny43u/Makefile
 	avr/lib/avr25/attiny44/Makefile
 	avr/lib/avr25/attiny45/Makefile
 	avr/lib/avr25/attiny461/Makefile
+	avr/lib/avr25/attiny48/Makefile
 	avr/lib/avr25/attiny84/Makefile
 	avr/lib/avr25/attiny85/Makefile
 	avr/lib/avr25/attiny861/Makefile
-	avr/lib/avr25/attiny43u/Makefile
-	avr/lib/avr25/attiny48/Makefile
+	avr/lib/avr25/attiny87/Makefile
 	avr/lib/avr25/attiny88/Makefile
 ])
 

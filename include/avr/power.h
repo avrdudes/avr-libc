@@ -1018,7 +1018,8 @@ do{ \
 #define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRLIN)|(1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRPSC)|(1<<PRCAN)))
 
 
-#elif defined(__AVR_ATtiny167__)
+#elif defined(__AVR_ATtiny167__) \
+|| defined(__AVR_ATtiny87__)
 
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
