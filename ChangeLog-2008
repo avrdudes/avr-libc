@@ -1,0 +1,1720 @@
+2008-12-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for AT90SCR100.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/io90scr100.h: New file.
+	* NEWS: Add news item.
+
+2008-12-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/Makefile.am: Remove builtins.h, as it is too soon to 
+	commit.
+
+2008-12-21  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Make _FFS() macro usable in CPP conditional expressions.  Seems,
+	the CPP parser is wrong with a few of '?:' operations.  (The CC
+	parser is correct.)
+	* include/string.h: Rewrite _FFS() to workaround the difference
+	between CPP and CC parsers.  Add a note about the 16 bits width
+	of this macro.
+	* tests/simulate/regression/20081221-ffs.c: New file.
+	* tests/simulate/string/ffs_macro.c: New file.
+
+	* tests/simulate/regression/bug-25048.cpp: Fix typo in comment.
+
+2008-12-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/wdt.h: Add support for ATmega329P
+	* include/avr/power.h: Add support for ATmega329P and ATmega3290P.
+
+2008-12-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SourceForge bug #2411516.
+	* include/avr/iotn88.h: Fix definition of CTC0.
+
+2008-12-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SourceForge bug #2420567.
+	* include/avr/sleep.h: Add missing ATmega329P.
+
+2008-12-16  Anatoly Sokolov  <aesok@post.ru>
+
+	* doc/api/using-tools.dox: Document the -mno-tablejump switch as 
+	deprecated. Add description for the -fno-jump-tables switch.
+
+2008-12-13  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #25048: eeprom.h will not compile as c++ code.
+	* include/avr/eeprom.h: Undo (partially) the rev 1.27 (before
+	2008-08-19), eeprom_read_byte(): cast operation of address into
+	16-bit integer regardless of EEPROM size.  Change (this is
+	cosmetic) the (unsigned) cast to (size_t) cast in both byte functions.
+	* test/simulate/regression/bug-25048.cpp: New file. TODO: add to
+	'runtest.sh' the possibility to operate C++ files. Today this file
+	is ignored.
+	* NEWS: Add to fixed bug list.
+
+2008-12-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* common/asmdef.h: Move an explanation string of '.err' pseudo
+	operation from arg to comment, as this pseudo op does not permit
+	any args.
+	* libm/fplib/asmdef.h: Move an explanation string of '.err' pseudo
+	operation from arg to comment, as this pseudo op does not permit
+	any args.  Add the standart banner about license.  Add CVS ident
+	keyword.  Permit the capital 'R' in args of 'X_movw' macro.  Merge
+	the arg parse of 'X_movw' and 'X_lpm' macroses into the one REGNO
+	macro.
+	* libm/fplib/fp_split3.S: Fix typo in comment.
+
+2008-12-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Minor optimization of fp_rempio2(), which is used in sin(), cos()
+	and tan() functions. The size of libm is reduced by 11 words. Speed
+	of sin/cos/tan is increased a little in average, besides the interval
+	from 1 to Pi/2 radians, where the performance is worsen by 6 cycles.
+	Thanks to Ruud v Gessel.
+	* libm/fplib/fp_rempio2.S: Rewritten to reduce size.
+	* libm/fplib/fp_mpack.S: Reduce size by 2 words. Add extra entry
+	__fp_mpack_finite().
+	* tests/simulate/math/fp_mpack-01.c: New file.
+	* doc/api/bench-libm.dox: Update calculation times.
+	* NEWS: Note about sin/cos/tan optimization.
+
+2008-11-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Optimize the sqrt() function.  Thanks to Ruud v Gessel.
+	* libm/fplib/sqrt.S: Improve to speed up (230 clocks in average)
+	and reduce size (12 words).
+	* tests/simulate/math/sqrt-01.c: Add a few test cases.
+	* NEWS: Add to optimized function list and patches applied.
+	* AUTHORS: Add Ruud v Gessel to list.
+	* doc/api/bench-libm.dox: Update calculation times.
+
+2008-11-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Fix grouping of ATtiny13A. Thanks to Anatoliy Sokolov.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/iotn13a.h: Add definition of EEARL.
+
+2008-11-23  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #24890. Thanks to Ruud v Gessel.
+	* libm/fplib/fp_rempio2.S: Fix misprint in SPLIT_PIO2 value.
+	Note, it was in rare cases influence the performance only.
+	* tests/simulate/math/cos-02.c: New file.
+	* NEWS: Add to fixed bug list.
+
+2008-11-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SF bug #2305703.
+	* include/avr/iom162.h: Add TCN2UB definition.
+
+2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version date for the removal of the PS
+	documentation.
+
+2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/Makefile.am: Do not build Postscript documentation
+	anymore.  The printing quality of PDF is the same as for PS, and
+	it saves as a separate doxygen run using ugly Makefile hacks.  A
+	bug in doxygen 1.5.7 where GENERATE_HTML can no longer be turned
+	off was the triggering event for this step which I've long since
+	intended to do.
+	* doc/api/doxygen.config.in: Generate PDF by default, using
+	hyperlinks.
+	* configure.ac: Remove all traces of the Postscript documentation
+	build.
+
+2008-11-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* doc/api/tools-install.dox: Add more instructions for installing
+	ghostscript for Windows tools.
+
+2008-11-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/doxygen.config.in: Update to doxygen version 1.5.7, by
+	running doxygen -u on it.
+
+2008-11-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #24762.
+	* include/avr/wdt.h: Fix conditional compilation.
+	* include/avr/sleep.h: Same.
+
+2008-11-03  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Add missing semicolons for new devices.
+
+2008-11-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Update header file from XML part description
+	files.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	Add support for ATxmega64A3, ATxmega128A3, ATxmega256A3, ATxmega256A3B.
+	* configure.ac: Add support for new devices.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same. Also fix register names.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+
+2008-10-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add support for ATmega32U6.
+	* configure.ac: Add support for ATmega32U6.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/iom32u6.h: New file.
+
+2008-10-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox64a3.h: Update the xmega A3 header files.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox256a3v.h: Remove file. Device does not exist.
+
+2008-10-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Patch #6517 submitted by Anton Ivanov.
+	* include/avr/pgmspace.h: Add float support to pgmspace.h.
+
+2008-10-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Change all temporary filenames to be unique to
+	allow script to be run in parallel. Move output of blank line in log
+	file.
+
+2008-10-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Update header file from XML source.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: New header file for new device.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox256a3v.h: Same.
+
+2008-10-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #22540.
+	* include/avr/io90pwm316.h: Add signature information.
+	* include/avr/io90pwm216.h: Same. 
+	* include/avr/io90pwm3b.h: Same.
+	* include/avr/io90pwm2b.h: Same.
+	* include/avr/iom1281.h: Same.
+	* include/avr/iom32.h: Same.
+	* include/avr/iom32c1.h: Same.
+	* include/avr/iom32m1.h: Same.
+	* include/avr/iom48p.h: Same.
+	* include/avr/iom64.h: Same.
+	* include/avr/iom88.h: Same.
+	* include/avr/iom88p.h: Same.
+	* include/avr/iom128.h: Same.
+	* include/avr/iom161.h: Same.
+	* include/avr/iom162.h: Same.
+	* include/avr/iom163.h: Same.
+	* include/avr/iom165.h: Same.
+	* include/avr/iom165p.h: Same.
+	* include/avr/iom168.h: Same.
+	* include/avr/iom168p.h: Same.
+	* include/avr/iom169.h: Same.
+	* include/avr/iom169p.h: Same.
+	* include/avr/iom323.h: Same.
+	* include/avr/iom325.h: Same.
+	* include/avr/iom328p.h: Same.
+	* include/avr/iom329.h: Same.
+	* include/avr/iom406.h: Same.
+	* include/avr/iom640.h: Same.
+	* include/avr/iom644.h: Same.
+	* include/avr/iom645.h: Same.
+	* include/avr/iom649.h: Same.
+	* include/avr/iom1280.h: Same.
+	* include/avr/iom1284p.h: Same.
+	* include/avr/iom2560.h: Same.
+	* include/avr/iom2561.h: Same.
+	* include/avr/iom3250.h: Same.
+	* include/avr/iom3290.h: Same.
+	* include/avr/iom6450.h: Same.
+	* include/avr/iom6490.h: Same.
+	* include/avr/iom8515.h: Same.
+	* include/avr/iom8535.h: Same.
+	* include/avr/iocan32.h: Same.
+	* include/avr/iocan64.h: Same.
+	* include/avr/iocan128.h: Same.
+	* include/avr/iom8.h: Same.
+	* include/avr/iom16.h: Same.
+	* include/avr/iom16hva.h: Same.
+	* include/avr/iousb647.h: Same.
+	* include/avr/iousb1286.h: Same.
+	* include/avr/iotn11.h: Same.
+	* include/avr/iotn12.h: Same.
+	* include/avr/iotn13.h: Same.
+	* include/avr/iotn15.h: Same.
+	* include/avr/iotn22.h: Same.
+	* include/avr/iotn24.h: Same.
+	* include/avr/iotn25.h: Same.
+	* include/avr/iotn26.h: Same.
+	* include/avr/iotn28.h: Same.
+	* include/avr/iotn43u.h: Same.
+	* include/avr/iotn44.h: Same.
+	* include/avr/iotn45.h: Same.
+	* include/avr/iotn48.h: Same.
+	* include/avr/iotn84.h: Same.
+	* include/avr/iotn85.h: Same.
+	* include/avr/iotn88.h: Same.
+	* include/avr/iotn261.h: Same.
+	* include/avr/iotn461.h: Same.
+	* include/avr/iotn861.h: Same.
+	* include/avr/iotn2313.h: Same.
+	* include/avr/iousb162.h: Same.
+	* include/avr/iousb646.h: Same.
+
+2008-10-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #24207.
+	* include/inttypes.h: Add missing '%' characters to documentation.
+
+2008-10-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/sleep.h: Change PM_SLEEP_CTRL to SLEEP_CTRL for xmega
+	devices.
+
+2008-10-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* crt1/gcrt1.S: Clear the RAMPZ register after __do_copy_data for 
+	devices	> 64K flash.
+
+2008-10-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #24446: _attribute_ should be __attribute__ (with double underscores)
+	* include/avr/wdt.h: Fix spelling mistake.
+
+2008-09-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #21623.
+	* include/avr/boot.h (__boot_page_fill_normal, __boot_page_fill_alternate,
+	__boot_page_erase_normal, __boot_page_erase_alternate,
+	__boot_page_write_normal, __boot_page_write_alternate): Use the 'z' 
+	constraint instead of explictly r30,r31.
+	Thanks to Shaun Jackman for initial patch.
+
+2008-09-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* bootstrap: Allow for autoconf 2.62.
+
+2008-09-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* doc/api/tools-install.dox: Update tools for Windows builds.
+
+2008-09-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Re-generate file.
+	* include/avr/iox64a1.h: Same.
+
+2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn26.h: Fix LFUSE_DEFAULT setting.
+
+2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/wdt.h: Overhaul inline assembly in wdt_enable() for 
+	xmega devices. Remove indentation on another macro.
+
+2008-09-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/wdt.h: Add missing comma in inline assembly for xmega
+	devices.
+
+2008-09-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Fix xmega header file generation to include all
+	group mask and group position definitions. Add interrupt number generation
+	to xmega devices. Remove blank line from classic device generation.
+
+2008-09-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotnx61.h: Fix misspelled bit name for TCCR0B.
+
+2008-09-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Add script to convert an Atmel XML device file to a
+	header file for inclusion in avr-libc.
+
+2008-08-22  Anatoly Sokolov  <aesok@post.ru>
+
+	* configure.ac: Add the AT43USB320 device to avr31 architecture.
+
+2008-08-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SourceForge bug #2033993.
+	* doc/api/malloc.dox: Fix linker flags in description and add a note
+	describing why certain linker flags have to be used.
+
+2008-08-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* libc/string/strtok.c: Fix cut and paste error with strtok 
+	implementation.
+	* include/string.h: Same.
+
+2008-08-20  Shaun Jackman  <sjackman@gmail.com>
+        Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21622.
+	* devtools/Architecture.am (AM_CPPFLAGS): Add -I$(top_builddir)/include
+        to support building in a subdirectory.
+	* devtools/Device.am (AM_CPPFLAGS): Same.
+
+2008-08-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23409.
+	* include/string.h: Add prototype of new strtok function.
+	* libc/string/strtok_r.S: Fix doxygen description of function.
+	* libc/string/strtok.c: New file with strtok function.
+	* libc/string/Files.am: Add new file to list.
+
+2008-08-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Contributed by Lars Jonsson
+	Fix bug #22572.
+	* doc/api/faq.dox: Add Makefile fragments for converting text and binary
+	data to an object file.
+
+2008-08-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Contributed by Stu Bell.
+	Fix bug #22878.
+	* include/avr/eeprom.h: For the ATmega256x devices, do not call 
+	any functions to implement the EEPROM routines as they have problems
+	if they are in high memory. So for these devices we inline the
+	functionality.
+
+2008-08-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Contributed by Mark Litwack.
+	Patch #6500
+	* doc/api/faq.dox: Add FAQ about reentrant code and functions in 
+	avr-libc.
+	* api/main_page.dox: Add reference to new FAQ.
+
+2008-08-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23969.
+	* include/avr/eeprom.h: Change part of the EEPROM read routine
+	to inline assembly to avoid problems with certain AVR parts.
+
+2008-08-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/sleep.h: Add support for ATmega3290P.
+	* include/avr/wdt.h: Same.
+
+2008-08-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22240.
+	* include/avr/io.h: Add E2PAGESIZE constant to documentation. Clean
+	up phrasing in documentation.
+	* include/avr/io1200.h (E2PAGESIZE): Defined.
+	* include/avr/io2313.h: Same.
+	* include/avr/io2323.h: Same.
+	* include/avr/io2343.h: Same.
+	* include/avr/io4414.h: Same.
+	* include/avr/io4433.h: Same.
+	* include/avr/io4434.h: Same.
+	* include/avr/io8515.h: Same.
+	* include/avr/io8535.h: Same.
+	* include/avr/io86r401.h: Same.
+	* include/avr/io90pwm216.h: Same.
+	* include/avr/io90pwm2b.h: Same.
+	* include/avr/io90pwm316.h: Same.
+	* include/avr/io90pwm3b.h: Same.
+	* include/avr/io90pwmx.h: Same.
+	* include/avr/iocan128.h: Same.
+	* include/avr/iocan32.h: Same.
+	* include/avr/iocan64.h: Same.
+	* include/avr/iom103.h: Same.
+	* include/avr/iom128.h: Same.
+	* include/avr/iom1280.h: Same.
+	* include/avr/iom1281.h: Same.
+	* include/avr/iom1284p.h: Same.
+	* include/avr/iom16.h: Same.
+	* include/avr/iom161.h: Same.
+	* include/avr/iom162.h: Same.
+	* include/avr/iom163.h: Same.
+	* include/avr/iom164.h: Same.
+	* include/avr/iom165.h: Same.
+	* include/avr/iom165p.h: Same.
+	* include/avr/iom168.h: Same.
+	* include/avr/iom168p.h: Same.
+	* include/avr/iom169.h: Same.
+	* include/avr/iom169p.h: Same.
+	* include/avr/iom16hva.h: Same.
+	* include/avr/iom2560.h: Same.
+	* include/avr/iom2561.h: Same.
+	* include/avr/iom32.h: Same.
+	* include/avr/iom323.h: Same.
+	* include/avr/iom324.h: Same.
+	* include/avr/iom325.h: Same.
+	* include/avr/iom3250.h: Same.
+	* include/avr/iom328p.h: Same.
+	* include/avr/iom329.h: Same.
+	* include/avr/iom3290.h: Same.
+	* include/avr/iom32c1.h: Same.
+	* include/avr/iom32m1.h: Same.
+	* include/avr/iom406.h: Same.
+	* include/avr/iom48.h: Same.
+	* include/avr/iom48p.h: Same.
+	* include/avr/iom64.h: Same.
+	* include/avr/iom640.h: Same.
+	* include/avr/iom644.h: Same.
+	* include/avr/iom645.h: Same.
+	* include/avr/iom6450.h: Same.
+	* include/avr/iom649.h: Same.
+	* include/avr/iom6490.h: Same.
+	* include/avr/iom8.h: Same.
+	* include/avr/iom8515.h: Same.
+	* include/avr/iom8535.h: Same.
+	* include/avr/iom88.h: Same.
+	* include/avr/iom88p.h: Same.
+	* include/avr/iom8hva.h: Same.
+	* include/avr/iotn11.h: Same.
+	* include/avr/iotn12.h: Same.
+	* include/avr/iotn13.h: Same.
+	* include/avr/iotn15.h: Same.
+	* include/avr/iotn22.h: Same.
+	* include/avr/iotn2313.h: Same.
+	* include/avr/iotn24.h: Same.
+	* include/avr/iotn25.h: Same.
+	* include/avr/iotn26.h: Same.
+	* include/avr/iotn261.h: Same.
+	* include/avr/iotn28.h: Same.
+	* include/avr/iotn43u.h: Same.
+	* include/avr/iotn44.h: Same.
+	* include/avr/iotn45.h: Same.
+	* include/avr/iotn461.h: Same.
+	* include/avr/iotn48.h: Same.
+	* include/avr/iotn84.h: Same.
+	* include/avr/iotn85.h: Same.
+	* include/avr/iotn861.h: Same.
+	* include/avr/iotn88.h: Same.
+	* include/avr/iousb1286.h: Same.
+	* include/avr/iousb1287.h: Same.
+	* include/avr/iousb162.h: Same.
+	* include/avr/iousb646.h: Same.
+	* include/avr/iousb647.h: Same.
+	* include/avr/iousb82.h: Same.
+
+2008-08-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iomxx4.h: Remove definitions that were causing
+	duplicate definitions in portpins.h.
+
+2008-08-09  Anatoly Sokolov  <aesok@post.ru>
+
+	* devtools/gen-avr-lib-tree.sh (AVR31_DEV_INFO): Add the at43usb320
+	device.
+	* doc/api/using-tools.dox: Move the AT43USB320 device to avr31
+	architecture.
+
+2008-08-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23774.
+	* include/avr/io90pwm2b.h: Add typecast to fuse definitions.
+	* include/avr/io90pwm3b.h: Same.
+	* include/avr/io90pwm216.h: Same.
+	* include/avr/io90pwm316.h: Same.
+	* include/avr/io90pwmx.h: Same.
+	* include/avr/io90pwm1.h: Same.
+	* include/avr/io8535.h: Same.
+	* include/avr/io1200.h: Same.
+	* include/avr/io2313.h: Same.
+	* include/avr/io2323.h: Same.
+	* include/avr/io2343.h: Same.
+	* include/avr/io4414.h: Same.
+	* include/avr/io443.h: Same.
+	* include/avr/iom32m1.h: Same.
+	* include/avr/iom32u4.h: Same.
+	* include/avr/iom48.h: Same.
+	* include/avr/iom48p.h: Same.
+	* include/avr/iom64.h: Same.
+	* include/avr/iom88.h: Same.
+	* include/avr/iom88p.h: Same.
+	* include/avr/iocan32.h: Same.
+	* include/avr/iocan64.h: Same.
+	* include/avr/iocan128.h: Same.
+	* include/avr/iom8.h: Same.
+	* include/avr/iom8hva.h: Same.
+	* include/avr/iom16.h: Same.
+	* include/avr/iom16hva.h: Same.
+	* include/avr/iom32.h: Same.
+	* include/avr/iom32c1.h: Same.
+	* include/avr/iom32hvb.h: Same.
+	* include/avr/iom164.h: Same.
+	* include/avr/iom165.h: Same.
+	* include/avr/iom165p.h: Same.
+	* include/avr/iom168.h: Same.
+	* include/avr/iom168p.h: Same.
+	* include/avr/iom169.h: Same.
+	* include/avr/iom169p.h: Same.
+	* include/avr/iom103.h: Same.
+	* include/avr/iom128.h: Same.
+	* include/avr/iom161.h: Same.
+	* include/avr/iom162.h: Same.
+	* include/avr/iom163.h: Same.
+	* include/avr/iom406.h: Same.
+	* include/avr/iom640.h: Same.
+	* include/avr/iom644.h: Same.
+	* include/avr/iom645.h: Same.
+	* include/avr/iom649.h: Same.
+	* include/avr/iom323.h: Same.
+	* include/avr/iom324.h: Same.
+	* include/avr/iom325.h: Same.
+	* include/avr/iom328.h: Same.
+	* include/avr/iom329.h: Same.
+	* include/avr/iom8515.h: Same.
+	* include/avr/iom8535.h: Same.
+	* include/avr/iom1280.h: Same.
+	* include/avr/iom1281.h: Same.
+	* include/avr/iom1284p.h: Same.
+	* include/avr/iom2560.h: Same.
+	* include/avr/iom2561.h: Same.
+	* include/avr/iom3250.h: Same.
+	* include/avr/iom3290.h: Same.
+	* include/avr/iom6450.h: Same.
+	* include/avr/iom6490.h: Same.
+	* include/avr/iotn88.h: Same.
+	* include/avr/iotn167.h: Same.
+	* include/avr/iotn261.h: Same.
+	* include/avr/iotn461.h: Same.
+	* include/avr/iotn861.h: Same.
+	* include/avr/iotn2313.h: Same.
+	* include/avr/iotn11.h: Same.
+	* include/avr/iotn12.h: Same.
+	* include/avr/iotn13.h: Same.
+	* include/avr/iotn13a.h: Same.
+	* include/avr/iotn15.h: Same.
+	* include/avr/iotn22.h: Same.
+	* include/avr/iotn24.h: Same.
+	* include/avr/iotn25.h: Same.
+	* include/avr/iotn26.h: Same.
+	* include/avr/iotn28.h: Same.
+	* include/avr/iotn43u.h: Same.
+	* include/avr/iotn44.h: Same.
+	* include/avr/iotn45.h: Same.
+	* include/avr/iotn48.h: Same.
+	* include/avr/iotn84.h: Same.
+	* include/avr/iotn85.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox128a1.h: Same.
+	* include/avr/iousb82.h: Same.
+	* include/avr/iousb162.h: Same.
+	* include/avr/iousb646.h: Same.
+	* include/avr/iousb647.h: Same.
+	* include/avr/iousb1286.h: Same.
+	* include/avr/iousb1287.h: Same.
+
+2008-08-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23546.
+	* doc/api/faq.dox: Fix typos.
+
+2008-08-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add the strdup() function. Partial fix for bug #23677.
+	* libc/string/strdup.c: New file.
+	* libc/string/Files.am: Add new file to build list.
+	* libc/string/Makefile (EXTRA_DIST): Add C sources.
+
+2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* bootstrap: Fix ending ']'.
+
+2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23959.
+	* include/compat/deprecated.h: Fix typo in documentation.
+
+2008-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21621.
+	* bootstrap: Add ability to use autoconf 2.61 and automake 1.10.x.
+
+2008-07-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom1284p.h (CLKPCE): Fix bit value to be 7.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* doc/api/main_page.dox: Update copyright list.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for sourceforge.net bug #1957780.
+	* include/avr/fuse.h: Add more documentation on how to set the fuses
+	if compiling in C++.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for sourceforge.net bug #1969436.
+	* include/avr/iom32u4.h (SPM_PAGESIZE): Fix size to be 128.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for sourceforge.net bug #2012448.
+	* include/avr/iom6450.h (USART0_RX_vect, USART0_UDRE_vect, 
+	USART_TX_vect): Add interrupt names as aliases.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom165.h (USART_RX_vect, USART_UDRE_vect, USART_TX_vect):
+	Add interrupt names as aliases.
+	* include/avr/iom165p.h: Ditto.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for sourceforge.net bug #2010688.
+	* include/avr/iotn48.h (WCOL, SPIF): Fix values of bit definitions 
+	for SPSR.
+	Fix bit definitions for MCUCR, SPMCSR, PRR, PCMSK3, PCMSK1.
+	* include/avr/iotn88.h: Add assembler guard for ADC definition. Define
+	ADCW.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for sourceforge.net bug #2016128.
+	* include/avr/iom32m1.h (CAN_TOVF_vect): Add missing underscore in 
+	definition.
+	* include/avr/iom32c1.h (OCR1A): Fix address to be 0x88.
+
+2008-07-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn13a.h (PRR): Change address of PRR register to 0x25.
+
+2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23850.
+	* include/avr/iom8.h (MCUSR): Defined as an alias for MCUCSR.
+
+2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for sourceforge.net bug #2018957.
+	* include/avr/iom1284p.h (SPM_PAGESIZE): Fix value to 256.
+
+2008-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23871.
+	* include/avr/power.h: Enable clock_prescale_set() macro for ATmega32U4
+	and ATmega32C1.
+	* NEWS: Add to fixed bug list.
+
+2008-07-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_regbind): Fix a typo.
+
+2008-06-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn13a.h: Fix idempotent guard.
+
+2008-06-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATtiny13A.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* include/avr/iotn13a.h: Add new file.
+	* NEWS: Add news item.
+
+2008-06-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23554.
+	* include/avr/iom32u4.h: Fix bit name definitions.
+
+2008-06-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23261.
+	* include/avr/power.h: Add power_all_enable() and power_all_disable for
+	AT90USB82 and AT90USB162.
+
+2008-06-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom48.h: Add fuse, and signature information.
+	* include/avr/io1200.h: Add fuse, lockbit, and signature information.
+	* include/avr/iom103.h: Ditto.
+	* include/avr/io8535.h: Ditto.
+	* include/avr/io8515.h: Ditto.
+	* include/avr/io4434.h: Ditto.
+	* include/avr/io4433.h: Ditto.
+	* include/avr/io4414.h: Ditto.
+	* include/avr/io2343.h: Ditto.
+	* include/avr/io2323.h: Ditto.
+	* include/avr/io2313.h: Ditto.
+	* include/avr/io86r401.h: Ditto.
+
+2008-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32u4.h: Fix bit names for registers OCR0A and CLKPR.
+
+2008-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32u4.h: Fix register misnaming from DDIR2 to DIDR2.
+
+2008-05-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox64a1.h (SPM_PAGESIZE): Change value to 512.
+	* include/avr/iox128a1.h (SPM_PAGESIZE): Ditto.
+
+2008-05-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23166.
+	* include/avr/boot.h: Define __SPM_ENABLE as SPMEN or SELFPRGEN, depending
+	on whether device has that bit definition. Use __SPM_ENABLE in all macros.
+	* NEWS: Add to fixed bug list.
+
+2008-05-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iousbxx6_7.h: Conditionally define RAMPZ only if device is
+	AT90USB1286 or AT90USB1287 (> 64K Flash).
+
+2008-05-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/runtest.sh: Add ASM files to operate.
+	* tests/simulate/avr/sfr-1.c: New file.
+	* tests/simulate/avr/sfr-2.c: New file.
+	* tests/simulate/avr/sfr-3.c: New file.
+	* tests/simulate/avr/sfrasm-1.S: New file.
+	* tests/simulate/avr/sfrasm-2.S: New file.
+	* tests/simulate/avr/sfrasm-3.S: New file.
+
+2008-05-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Conditionally compile flattened register names 
+	for use in assembler only.
+	* include/avr/iox64a1.h: Ditto.
+
+2008-04-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/fuse.h: Fix bug with #ifndef lines.
+
+2008-04-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: New definitions to match the latest rev of the
+	chip.
+	* include/avr/iox64a1.h: Ditto.
+
+2008-04-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/lock.h: Protect the LOCKMEM and LOCKBITS macros from being
+	redefined. Change the documentation accordingly.
+	* include/avr/fuse.h: Protect the FUSEMEM and FUSES macros from being
+	redefined. Change the documentation accordingly.
+
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/sfr_defs.h: Define __SFR_OFFSET value depending on 
+	whether an XMEGA device is being used. Use __SFR_OFFSET in _SFR_IO8,
+	_SFR_IO16, _SFR_IO_ADDR, _SFR_IO_REG_P macros.
+
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23004.
+	* include/avr/wdt.h: Fix Doxygen comment.
+	* NEWS: Add to fixed bug list.
+
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn48.h: Fix and protect ADC definition, add ADCW 
+	definition.
+	* include/avr/iom1284p.h: Add ADCW definition. Protect ADC definition.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+	* include/avr/iom32m1.h: Ditto.
+	* include/avr/iom32c1.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/iotn167.h: Ditto.
+
+2008-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32u4.h: Remove bit definitions for UBRR1L and UBRR1H,
+	per Sylvain Guyon, Atmel.
+
+2008-04-26  Anatoly Sokolov <aesok@post.ru>
+
+	* AvrCommon.am: Remove.
+	* AvrCommonLibC.am: Remove.	
+
+2008-04-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #23032.
+	* include/avr/iomxx4.h: Add missing PORTxn bit definitions.
+	* NEWS: Add to bug list.
+
+2008-04-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm2b.h (FUSE_CKLDIV8): Rename to FUSE_CKDIV8.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/iotn167.h (BIN): Fix the value of BIN to 7 for the ADCSRB
+	register.
+	* include/avr/iom88p.h: Add ADCW definition and guard ADC for assembler.
+
+2008-04-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/math.h: Change functions from 'extern inline' to 'static inline'.
+	This works around a linker problem with including this header and using
+	-std=[gnu99,c99] (it would give 'multiple definition' errors).
+
+2008-04-09  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/eeprom.h: Restore 'extern "C"' envelope. It was lost
+	in 2005, with Avr-libc-1.2.6.
+
+2008-04-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22877:
+	* include/avr/iox128a1.h: Fix fuse information.
+	* include/avr/iox64a1.h: Ditto.
+	* NEWS: Add to fixed bug list.
+
+2008-04-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom328p.h: Fix SPM_PAGESIZE.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+
+2008-04-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22870.
+	* include/avr/wdt.h: Add support for ATmega164P, ATmega324P, ATmega644P.
+	Rearrange condition list to alphabetical order.
+	* NEWS: Add to fixed bug list.
+
+2008-04-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/runtest.sh: Add support of .eeprom section. Add
+	check of simulavr's runtime errors.
+	* tests/simulate/regression/20080405-eeprom.c: New file.
+
+2008-04-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22834.
+	* include/iomxx4.h: Add BOD and BODSE bit definitions.
+	* NEWS: Add to fixed bug list.
+
+2008-04-04  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #22828.
+	* include/avr/eeprom.h: Restore old args order of eeprom_write_block()
+	function: place source address to left. This revertion at Marth 2008
+	was an accidental error.
+	* tests/simulate/avr/eeprom-1.c: Ditto.
+	* tests/simulate/regression/bug-22828.c: New file.
+	* NEWS: Add to fixed bug list.
+
+2008-04-03  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/bug-22800.c: New file.
+
+2008-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32u4.h: Add UEBCX 16-bit register. This is not 
+	defined as per the datasheet or XML file. However, in talking with
+	the USB team, the contents of the registers are supposed to be read-only 
+	and static. Because of this it makes sense to add this as a convenience 
+	to the end-user as long the user realizes that the read is not done with
+	a temporary 8-bit register. 
+
+2008-03-31  Eric B. Weddington  <eric.weddington@atmel.com>
+
+        * include/avr/iom32u4.h: Add alias register definition TC4H, per Atmel.
+
+2008-03-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22785.
+	* include/avr/sleep.h: Add support for ATmega644P, ATmega1284P, 
+        ATmega32HVB, ATtiny88, ATmega48P, ATmega88P, ATmega168P, ATmega328P,
+        AT90PWM2B, AT90PWM3B, ATtiny48, ATtiny43U, AT90PWM216, AT90PWM316.
+	* NEWS: Add to fixed bug list.
+
+2008-03-29  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libm/fplib/frexp.S: Avoid indirect write to R0,R1 with XMEGA.
+	
+	* tests/simulate/runtest.sh: Remove avr-gcc path and version output
+	(With Eric's agree).  Roll too line source line.
+
+2008-03-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* eeprom.h: Re-add the eeprom_busy_wait macro that was accidentally removed.
+
+2008-03-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Fix constants, add fuse, lockbit information.
+	* include/avr/iox64a1.h: Ditto.
+	* include/avr/fuse.h: Add documentation about fuse default value macros.
+	* include/avr/lock.h: Add new lockbit groups and values for XMEGA.
+
+2008-03-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATtiny167.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* include/avr/iotn167.h: New file.
+	* NEWS: Add new device to list.
+	* doc/api/main_page.dox: Add xmega devices to documentation.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Fix macro for ATmega32M1, ATmega32C1.
+	* include/avr/sleep.h: Reformat some #ifdefs.
+
+2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* tests/simulate/runtest.sh: Moving failed testcases: Replace -T with -f,
+	replace dot with underscore.
+
+2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* tests/simulate/runtest.sh: Fix moving failed testcases. Add printing
+	of location and version of avr-gcc used for tests.
+
+2008-03-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for XMEGA, ATxmega128A1, ATxmega64A1.
+	* crt1/gcrt1.S: Ditto.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/common.h: Ditto.
+	* include/avr/io.h: Ditto.
+	* libc/stdlib/stdlib_private.h: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/sleep.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iox128a1.h: New file.
+	* include/avr/iox64a1.h: New file.
+	* NEWS: Add news.
+
+2008-03-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Optimize setjmp() in space. Use __AVR_3_BYTE_PC__ macro.
+	* include/setjmp.h: Reduce size of jmp_buf by 2/1 bytes.
+	* libc/stdlib/setjmp.S: Reduce size of jmp_buf by 2/1 bytes. Rewrite
+	the setjmp() to save flash. Use __AVR_3_BYTE_PC__ to determine the
+	size of return address (vs EIND register presence). Add common
+	assembler pseudos: .type, .size .
+	* tests/simulate/regression/20080323-jmpbuf.c: New file.
+	* tests/simulate/stdlib/setjmp-1.S: New file.
+	* tests/simulate/stdlib/setjmp-2.S: New file.
+	* tests/simulate/stdlib/setjmp-3.S: New file.
+	* tests/simulate/stdlib/setjmp-4.S: New file.
+	* tests/simulate/stdlib/setjmp-5.S: New file.
+	* NEWS: Add setjmp() to optimize list.
+
+2008-03-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega32U4.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/sleep.h: Reformat doxygen comment.
+	* include/avr/iom32u4.h: New file.
+	* NEWS: Add to new devices list.
+
+2008-03-22  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add __unordsf2() function. GCC 4.3.0 uses it.
+	* libm/fplib/unordsf2.S: New file.
+	* libm/fplib/fp_cmp.S: Split to 3 separate files.
+	* libm/fplib/cmpsf2.S: New file. It was a part of 'fp_cmp.S'.
+	* libm/fplib/gesf2.S: (Ditto.)
+	* libm/fplib/Files.am: Add new source files.
+	* tests/simulate/fplib/unord-01.c: New file.
+	* tests/simulate/fplib/unord-02.c: New file.
+	* tests/simulate/fplib/unord-03.c: New file.
+	* tests/simulate/regression/20080322-isinf.c: New file.
+
+2008-03-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iomxx4.h: Add missing definitions to finish SF
+	bug #1883630.
+
+2008-03-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/wdt.h: Change back to list of devices to fix bug #22276.
+
+2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #3485.
+	* doc/api/faq.dox: Add entry about linking in the math library for
+	floating point math operations.
+
+2008-03-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Make the test suite print messages for an ATmega128 target.
+	* tests/simulate/runtest.sh: Add -k option to keep the simulavr
+	core files upon encountering an error.
+	* tests/simulate/readcore.py: Script to interpret the simulavr
+	coredumps: prints exit code, and message from XRAM address 0x2000
+	if present.
+	* tests/simulate/math/frexp-01.c: Make PRINTFLN print the message into
+	external RAM at address 0x2000 when compiling for an ATmega128 target.
+	* tests/simulate/math/isinf-01.c: (Ditto.)
+	* tests/simulate/math/lrint-01.c: (Ditto.)
+	* tests/simulate/math/lround-01.c: (Ditto.)
+	* tests/simulate/math/signbit-01.c: (Ditto.)
+	* tests/simulate/pmstring/memmem_P.c: (Ditto.)
+	* tests/simulate/pmstring/memrchr_P.c: (Ditto.)
+	* tests/simulate/pmstring/strcasestr_P.c: (Ditto.)
+	* tests/simulate/pmstring/strchrnul_P.c: (Ditto.)
+	* tests/simulate/pmstring/strsep_P.c: (Ditto.)
+	* tests/simulate/printf/snprintf_all.c: (Ditto.)
+	* tests/simulate/printf/sprintf_min-1.c: (Ditto.)
+	* tests/simulate/printf/sprintf_min-2.c: (Ditto.)
+	* tests/simulate/printf/sprintf_min-3.c: (Ditto.)
+	* tests/simulate/printf/sprintf_min-4.c: (Ditto.)
+	* tests/simulate/printf/sprintf_min-5.c: (Ditto.)
+	* tests/simulate/printf/sprintf_min-inv.c: (Ditto.)
+	* tests/simulate/printf/sprintf_std-int.c: (Ditto.)
+	* tests/simulate/printf/sprintf_std-inv.c: (Ditto.)
+	* tests/simulate/printf/vsnprintf_all.c: (Ditto.)
+	* tests/simulate/scanf/scanf-nul.c: (Ditto.)
+	* tests/simulate/scanf/scanf_brk-nul.c: (Ditto.)
+	* tests/simulate/scanf/scanf_flt-nul.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-c1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-c2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-d1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-d2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-eof.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-eon.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-h.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-hh.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-i.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-l.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-o1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-o2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-s1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-s2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-x1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-x2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-x3.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_brk-1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_brk-2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_brk-3.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_brk-4.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_flt-f1.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_flt-f2.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_flt-f3.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_flt-fnn.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_flt-fw.c: (Ditto.)
+	* tests/simulate/stdlib/isalnum-1.c: (Ditto.)
+	* tests/simulate/stdlib/isalpha-1.c: (Ditto.)
+	* tests/simulate/stdlib/isascii-1.c: (Ditto.)
+	* tests/simulate/stdlib/isblank-1.c: (Ditto.)
+	* tests/simulate/stdlib/iscntrl-1.c: (Ditto.)
+	* tests/simulate/stdlib/isdigit-1.c: (Ditto.)
+	* tests/simulate/stdlib/isgraph-1.c: (Ditto.)
+	* tests/simulate/stdlib/islower-1.c: (Ditto.)
+	* tests/simulate/stdlib/isprint-1.c: (Ditto.)
+	* tests/simulate/stdlib/ispunct-1.c: (Ditto.)
+	* tests/simulate/stdlib/isspace-1.c: (Ditto.)
+	* tests/simulate/stdlib/isupper-1.c: (Ditto.)
+	* tests/simulate/stdlib/isxdigit-1.c: (Ditto.)
+	* tests/simulate/stdlib/tolower-1.c: (Ditto.)
+	* tests/simulate/stdlib/toupper-1.c: (Ditto.)
+	* tests/simulate/string/memmem.c: (Ditto.)
+	* tests/simulate/string/memrchr.c: (Ditto.)
+	* tests/simulate/string/strcasestr.c: (Ditto.)
+	* tests/simulate/string/strchrnul.c: (Ditto.)
+	* tests/simulate/string/strsep.c: (Ditto.)
+
+2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug SF #1883630.
+	* include/avr/iom48p.h: Add missing bit name alias definitions.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+
+2008-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bugs #22666, SF #1913681, SF #1910885.
+	* include/avr/io90pwm3b.h: Add missing definitions, fix definitions.
+	* include/avr/io90pwm2b.h: Ditto.
+
+2008-03-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/bug-22593.c: New file.
+
+2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/gen-avr-lib-tree.sh: replace \\\\\n by just a
+	space, it's causing way less troubles.
+
+2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/examples/demo/iocompat.h: Add support for ATmega1284P,
+	ATmega2560, and ATmega2561.
+	* doc/examples/demo/Makefile: (Ditto.)
+
+2008-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/runtest.sh: Turn the bash-like arithmetics into
+	Posix ones, so it runs correctly on FreeBSD's /bin/sh.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22390.
+	* doc/api/faq.dox: Fix statement about function pointers.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22119.
+	* doc/api/faq.dox: Fix statement about returned values.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #19494.
+	* doc/api/sfr.dox: Rewrite to remove deprecated code examples.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22276.
+	* include/avr/wdt.h: Check location of watchdog register and use
+	that to determine which code sequence to define.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bugs #22447, #22387.
+	* include/avr/iom88p.h: Fix definitions or add definitions.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22642.
+	* include/avr/power.h: Add support for AT90USB82 and AT90USB162.
+
+2008-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22643.
+	* include/math.h: Rename occurrences of 'asm' needs to to '__asm__'.
+
+2008-03-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Patch #6355, by Stas Sergeev
+	* include/avr/boot.h: add __extension__ to boot.h.
+
+2008-03-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bugs #22568, #22548.
+	* include/avr/iom328p.h: Add missing definitions.
+	* NEWS: Update fixed bug list.
+
+2008-03-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/ftoa_engine.S: Add CPP scopes to exclude the parsing
+	of asm by DOXYGEN.
+	* libc/stdlib/setjmp.S: Ditto.
+	* libc/stdlib/ultoa_invert.S: Ditto.
+	* libc/stdlib/atof.S: Add DOXYGEN doc and exclude other asm from
+	DOXYGEN parsing.
+	* include/stdlib.h: Remove DOXYGEN of atof().
+
+2008-03-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega32C1.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom32c1.h: New file.
+	* NEWS: Add new device to list.
+
+2008-03-12  Anatoly Sokolov <aesok@post.ru>
+
+	* doc/TODO: Update.
+
+2008-03-12  Anatoly Sokolov <aesok@post.ru>
+
+	* crt1/gcrt1.S (__do_copy_data): Don't use for GCC 4.4 and up.
+
+2008-03-11  Anatoly Sokolov <aesok@post.ru>
+
+	* devtools/Makefile.am (EXTRA_DIST): Add 'Architecture.am', 'Avr.am', 
+	'Device.am' and 'Lib.am'.
+    
+2008-03-10  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega32M1 device.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* doc/api/main_page.dox: Ditto.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am: Ditto.
+	* include/avr/io.h: Ditto.
+	* include/avr/power.h: Ditto.
+	* include/avr/wdt.h: Ditto.
+	* include/avr/iom32m1.h: New file.
+	* NEWS: Add new device to list.
+
+2008-03-09  Anatoly Sokolov <aesok@post.ru>
+
+	* devtools/gen-avr-lib-tree.sh: Use 'Avr.am', 'Lib.am' and 
+	'Architecture.am' as template for 'avr/Makefile.am', 
+	'avr/lib/Makefile.am' and 'avr/lib/Architecture/Makefile.am'.
+	* devtools/Architecture.am: New file.
+	* devtools/Avr.am: New file.
+	* devtools/Lib.am: New file.
+
+2008-03-09  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/eeprom.h: eeprom_write_byte(): add EECR clearning
+	to force erase_and_write programming mode. Document this and add
+	note about necessarity SELFPRGEN polling.
+
+2008-03-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22493.
+	* include/avr/iom1284p.h: Fix typo.
+
+2008-03-03  Anatoly Sokolov <aesok@post.ru>
+
+	* devtools/gen-avr-lib-tree.sh: Use devtools/Device.am as template 
+	for dev/Makefile.am.
+	* devtools/Device.am: New file.
+
+2008-03-02  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/eeprom.h: Change cast operation to avoid warning
+	with '-Wsystem-headers' option.
+	* tests/simulate/avr/eeprom-1.c: Add comment about avr-gcc 4.2.2 bug.
+	Note, avr-gcc 4.2.3 is correct.
+	* tests/simulate/regression/bug-31644.c: New file.
+
+2008-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	New variant of EEPROM functions: inline byte procedures and library
+	multibyte envelopes.
+	* include/avr/eeprom.h: Rewrite on the base of project by Eric B.
+	Weddington.
+	* libc/misc/eeprom.S: Remove file.
+	* libc/misc/ee_rb.S: Remove file.
+	* libc/misc/ee_rblk.S: Remove file.
+	* libc/misc/ee_rw.S: Remove file.
+	* libc/misc/ee_wb.S: Remove file.
+	* libc/misc/ee_wblk.S: Remove file.
+	* libc/misc/ee_ww.S: Remove file.
+	* libc/misc/eerd_block.c: New file.
+	* libc/misc/eerd_dword.c: New file.
+	* libc/misc/eerd_word.c: New file.
+	* libc/misc/eewr_block.c: New file.
+	* libc/misc/eewr_dword.c: New file.
+	* libc/misc/eewr_word.c: New file.
+	* libc/misc/Files.am: Remove old sources, add new.
+	* libc/misc/Makefile.am: Include $(misc_a_c_sources) to EXTRA_DIST.
+	* libc/misc/Rules.am: Remove rules to build chip-specific objects.
+	* tests/simulate/avr: New directory (for AVR-specific functions).
+	* tests/simulate/avr/eeprom-1.c: New file.
+	* tests/simulate/runtest.sh: Add 'avr/*.c' to default test list.
+	Add $MCU_LIST_FULL for AVR-specific testing.
+	* NEWS: Notes about EEPROM changes and fixed bug.
+
+2008-02-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* doc/api/bench.dox: Change remark about GCC versions: replace
+	scanf() example to dtostre().
+	* doc/api/bench-libc.dox: Update the results. Give two sizes:
+	with and without prologue/epilogue modules. Add sscanf() with
+	'%[' conversion.
+
+2008-02-23  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Optimize tests in space to satisfy the space-worse 4.2.2(3) GCC.
+	Split in cases where optimization is not possible.
+	* tests/simulate/scanf/sscanf-d1.c: Optimize in space.
+	* tests/simulate/scanf/sscanf-hh.c: Ditto.
+	* tests/simulate/scanf/sscanf-o1.c: Ditto.
+	* tests/simulate/scanf/sscanf-s1.c: Ditto.
+	* tests/simulate/scanf/sscanf-x1.c: Ditto.
+	* tests/simulate/scanf/sscanf-x2.c: Ditto.
+	* tests/simulate/scanf/sscanf_brk-1.c: Ditto.
+	* tests/simulate/scanf/sscanf_brk-2.c: Ditto.
+	* tests/simulate/scanf/sscanf_flt-fnn.c: Ditto.
+	* tests/simulate/scanf/sscanf-c.c: Split to 2 tests and remove.
+	* tests/simulate/scanf/sscanf-c1.c: New file: part of above sscanf-c.c
+	* tests/simulate/scanf/sscanf-c2.c: New file: part of above sscanf-c.c
+	* tests/simulate/scanf/sscanf-1.c: Move a part to new sscanf-2.c
+	* tests/simulate/scanf/sscanf-2.c: New file.
+	* tests/simulate/scanf/sscanf-x3.c: New file.
+	* tests/simulate/scanf/sscanf_brk-3.c: New file.
+	* tests/simulate/scanf/sscanf_brk-4.c: New file.
+
+2008-02-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22377. Wrong XRAMEND for some recent ioXXX.h header files.
+	* include/avr/io90pwm216.h: Fix XRAMEND definition.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/iom1284p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom32hvb.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iotn48.h: Ditto.
+	* include/avr/iotn88.h: Ditto.
+
+2008-02-21  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/strtod.c: Optimize, tune for new GCC (4.1 - 4.3).
+	Add DOXYGEN comment for strtod().
+	* include/stdlib.h: Remove DOXYGEN for strtod().
+	* NEWS: Add to optimized function list.
+	* test/simulate/stdlib/strtod-3.c: Add a few test cases.
+
+2008-02-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Function vfscanf() is rewriten (see NEWS for details).
+	* libc/stdio/vfscanf.c: Rewriten.
+	* include/stdio.h: Remove DOXYGEN for vfscanf(): it is in source now.
+	* NEWS: Notes about vfscanf() changes and fixed bugs.
+	* tests/simulate/runtest.sh: Add 'scanf' file name interpretation.
+	* tests/simulate/regression/bug-19079.c: New file.
+	* tests/simulate/regression/bug-21905-scanf_flt.c: New file.
+	* tests/simulate/regression/bug-21906-scanf_flt.c: New file.
+	* tests/simulate/scanf: New directory.
+	* tests/simulate/scanf/scanf-nul.c: New file.
+	* tests/simulate/scanf/scanf_brk-nul.c: New file.
+	* tests/simulate/scanf/scanf_flt-nul.c: New file.
+	* tests/simulate/scanf/sscanf-1.c: New file.
+	* tests/simulate/scanf/sscanf_brk-1.c: New file.
+	* tests/simulate/scanf/sscanf_brk-2.c: New file.
+	* tests/simulate/scanf/sscanf-c.c: New file.
+	* tests/simulate/scanf/sscanf-d1.c: New file.
+	* tests/simulate/scanf/sscanf-d2.c: New file.
+	* tests/simulate/scanf/sscanf-eof.c: New file.
+	* tests/simulate/scanf/sscanf-eon.c: New file.
+	* tests/simulate/scanf/sscanf_flt-f1.c: New file.
+	* tests/simulate/scanf/sscanf_flt-f2.c: New file.
+	* tests/simulate/scanf/sscanf_flt-f3.c: New file.
+	* tests/simulate/scanf/sscanf_flt-fnn.c: New file.
+	* tests/simulate/scanf/sscanf_flt-fw.c: New file.
+	* tests/simulate/scanf/sscanf-h.c: New file.
+	* tests/simulate/scanf/sscanf-hh.c: New file.
+	* tests/simulate/scanf/sscanf-i.c: New file.
+	* tests/simulate/scanf/sscanf-l.c: New file.
+	* tests/simulate/scanf/sscanf-o1.c: New file.
+	* tests/simulate/scanf/sscanf-o2.c: New file.
+	* tests/simulate/scanf/sscanf-s1.c: New file.
+	* tests/simulate/scanf/sscanf-s2.c: New file.
+	* tests/simulate/scanf/sscanf-x1.c: New file.
+	* tests/simulate/scanf/sscanf-x2.c: New file.
+
+2008-02-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for Atmel bug #7159.
+	* include/avr/iotn48.h: Fix address of TCCR0A and associated bit names.
+
+2008-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #22016: Typo in iotn2313.h: SIG_OUTPUT_COPMARE0A
+	* include/avr/iotn2313.h: Fix typo in SIG_OUTPUT_COPMARE0A.
+
+2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #22153: setjmp.o is wrong in libc.a (1.6.1) for avr's with SPH
+	* include/avr/common.h: Enable default SPL/SPH definitions not
+	when __COMPILING_AVR_LIBC__ is active; interestingly, the comment
+	on the #endif had already been correct but the condition hadn't.
+	While being here, protect default definition for EIND on avr6
+	architectures to just avr-libc compilations (otherwise, it's
+	supposed to come from the real device header).
+
+2008-01-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/gen-avr-lib-tree.sh (AVR31_DEV_INFO): remove trailing
+	semicolon in last entry.  It caused a blank line following a
+	backslash in lib/avr/avr31/Makefile.am, which made automake issue
+	a warning.
+
+2008-01-24  Anatoly Sokolov <aesok@post.ru>
+
+	* doc/api/using-tools.dox: Document '__AVR_HAVE_JMP_CALL__' macro.
+	Mark '__AVR_MEGA__' and '__AVR_ENHANCED__' as obsolete. Remove 
+	'__AVR_HAVE_RAMPZ__', '__AVR_HAVE_ELPM__' and '__AVR_HAVE_ELPMX__' 
+	macros from 'avr5' architecture and add to 'avr51'.
+
+2008-01-23  Anatoly Sokolov <aesok@post.ru>
+
+	* configure.ac: Add 'avr31' and 'avr51' architectures.
+	* devtools/gen-avr-lib-tree.sh (AVR_ARH_INFO): (Ditto.).
+	(AVR31_DEV_INFO, AVR51_DEV_INFO): New.
+	* doc/api/using-tools.dox: Document 'avr31' and 'avr51'.
+
+2008-01-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm2b.h: Add missing EEAR word register.
+	* include/avr/io90pwm3b.h: Ditto.
+
+2008-01-13  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #21995: pgm_read_xxxx() does not use enhanced LPM
+	instruction.
+	* include/avr/common.h: Restore the __AVR_HAVE_LPMX__ (also
+	__AVR_HAVE_MOVW__, __AVR_HAVE_MUL__) definitions (in case that
+	they are not defined by the compiler).
+	* tests/simulate/regression/bug-21995.c: New file.
+	* NEWS: Add to fixed bug list.
+
+2008-01-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21986.
+	* include/avr/iotn13.h: Fix bit definition.
+
+2008-01-07  Anatoly Sokolov <aesok@post.ru>
+
+	* doc/api/using-tools.dox: Fix GCC version for 'avr35' architecture.
+
+2008-01-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm1.h: Fix default fuse definitions.
+	* include/avr/io90pwm216.h: Ditto.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/io90pwmx.h: Ditto.
+	* include/avr/iocan128.h: Ditto.
+	* include/avr/iocan32.h: Ditto.
+	* include/avr/iocan64.h: Ditto.
+	* include/avr/iom128.h: Ditto.
+	* include/avr/iom1280.h: Ditto.
+	* include/avr/iom1281.h: Ditto.
+	* include/avr/iom1284p.h: Ditto.
+	* include/avr/iom16.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom162.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iom164.h: Ditto.
+	* include/avr/iom165.h: Ditto.
+	* include/avr/iom165p.h: Ditto.
+	* include/avr/iom169.h: Ditto.
+	* include/avr/iom169p.h: Ditto.
+	* include/avr/iom16hva.h: Ditto.
+	* include/avr/iom2560.h: Ditto.
+	* include/avr/iom2561.h: Ditto.
+	* include/avr/iom32.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom324.h: Ditto.
+	* include/avr/iom325.h: Ditto.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom329.h: Ditto.
+	* include/avr/iom3290.h: Ditto.
+	* include/avr/iom32hvb.h: Ditto.
+	* include/avr/iom406.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+	* include/avr/iom64.h: Ditto.
+	* include/avr/iom640.h: Ditto.
+	* include/avr/iom644.h: Ditto.
+	* include/avr/iom645.h: Ditto.
+	* include/avr/iom6450.h: Ditto.
+	* include/avr/iom649.h: Ditto.
+	* include/avr/iom6490.h: Ditto.
+	* include/avr/iom8.h: Ditto.
+	* include/avr/iom8515.h: Ditto.
+	* include/avr/iom8535.h: Ditto.
+	* include/avr/iom8hva.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iotn13.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn2313.h: Ditto.
+	* include/avr/iotn24.h: Ditto.
+	* include/avr/iotn25.h: Ditto.
+	* include/avr/iotn26.h: Ditto.
+	* include/avr/iotn261.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+	* include/avr/iotn43u.h: Ditto.
+	* include/avr/iotn44.h: Ditto.
+	* include/avr/iotn45.h: Ditto.
+	* include/avr/iotn461.h: Ditto.
+	* include/avr/iotn48.h: Ditto.
+	* include/avr/iotn84.h: Ditto.
+	* include/avr/iotn85.h: Ditto.
+	* include/avr/iotn861.h: Ditto.
+	* include/avr/iotn88.h: Ditto.
+	* include/avr/iousb1286.h: Ditto.
+	* include/avr/iousb1287.h: Ditto.
+
+2008-01-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21931.
+	* include/avr/iom88.h: Fix fuse definitions.
+	* include/avr/iom168.h: Ditto.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* NEWS: Add to fixed bug list.
+
+2008-01-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21962.
+	* include/avr/io90pwm3b.h: Fix bit definitions.
+	* include/avr/io90pwm316.h: Ditto.
+    * NEWS: Add to fixed bug list.
+
+2008-01-05  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* NEWS: Add bug #21869 to fixed list. This was fixed yesterday
+	with the huge change to the fuse definitions.
+
+2008-01-05  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #21958.
+	* include/avr/iom48p.h: Fix duplicate definitions.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom1284p.h: Ditto.
+
+2008-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix GCC version comparison in preprocessing:
+	* include/compat/deprecated.h: Ditto.
+	* include/avr/interrupt.h: Ditto.
+	* libc/stdlib/strtod.c: Ditto.
+	* tests/simulate/regression/bug-21872-1.c: Ditto.
+	* tests/simulate/regression/bug-21872-2.c: Ditto.
+
+2008-01-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/fuse.h: Fix documentation with new fuse definitions.
+	* include/avr/io90pwm1.h: Add prefix to fuse definitions.
+	* include/avr/io90pwm216.h: Ditto.
+	* include/avr/io90pwm2b.h: Ditto.
+	* include/avr/io90pwm316.h: Ditto.
+	* include/avr/io90pwm3b.h: Ditto.
+	* include/avr/io90pwmx.h: Ditto.
+	* include/avr/iocan128.h: Ditto.
+	* include/avr/iocan32.h: Ditto.
+	* include/avr/iocan64.h: Ditto.
+	* include/avr/iom128.h: Ditto.
+	* include/avr/iom1280.h: Ditto.
+	* include/avr/iom1281.h: Ditto.
+	* include/avr/iom1284p.h: Ditto.
+	* include/avr/iom16.h: Ditto.
+	* include/avr/iom161.h: Ditto.
+	* include/avr/iom162.h: Ditto.
+	* include/avr/iom163.h: Ditto.
+	* include/avr/iom164.h: Ditto.
+	* include/avr/iom165.h: Ditto.
+	* include/avr/iom165p.h: Ditto.
+	* include/avr/iom168.h: Ditto.
+	* include/avr/iom168p.h: Ditto.
+	* include/avr/iom169.h: Ditto.
+	* include/avr/iom169p.h: Ditto.
+	* include/avr/iom16hva.h: Ditto.
+	* include/avr/iom2560.h: Ditto.
+	* include/avr/iom2561.h: Ditto.
+	* include/avr/iom32.h: Ditto.
+	* include/avr/iom323.h: Ditto.
+	* include/avr/iom324.h: Ditto.
+	* include/avr/iom325.h: Ditto.
+	* include/avr/iom3250.h: Ditto.
+	* include/avr/iom328p.h: Ditto.
+	* include/avr/iom329.h: Ditto.
+	* include/avr/iom3290.h: Ditto.
+	* include/avr/iom32hvb.h: Ditto.
+	* include/avr/iom406.h: Ditto.
+	* include/avr/iom48p.h: Ditto.
+	* include/avr/iom64.h: Ditto.
+	* include/avr/iom640.h: Ditto.
+	* include/avr/iom644.h: Ditto.
+	* include/avr/iom645.h: Ditto.
+	* include/avr/iom6450.h: Ditto.
+	* include/avr/iom649.h: Ditto.
+	* include/avr/iom6490.h: Ditto.
+	* include/avr/iom8.h: Ditto.
+	* include/avr/iom8515.h: Ditto.
+	* include/avr/iom8535.h: Ditto.
+	* include/avr/iom88.h: Ditto.
+	* include/avr/iom88p.h: Ditto.
+	* include/avr/iom8hva.h: Ditto.
+	* include/avr/iotn11.h: Ditto.
+	* include/avr/iotn12.h: Ditto.
+	* include/avr/iotn13.h: Ditto.
+	* include/avr/iotn15.h: Ditto.
+	* include/avr/iotn22.h: Ditto.
+	* include/avr/iotn2313.h: Ditto.
+	* include/avr/iotn24.h: Ditto.
+	* include/avr/iotn25.h: Ditto.
+	* include/avr/iotn26.h: Ditto.
+	* include/avr/iotn261.h: Ditto.
+	* include/avr/iotn28.h: Ditto.
+	* include/avr/iotn43u.h: Ditto.
+	* include/avr/iotn44.h: Ditto.
+	* include/avr/iotn45.h: Ditto.
+	* include/avr/iotn461.h: Ditto.
+	* include/avr/iotn48.h: Ditto.
+	* include/avr/iotn84.h: Ditto.
+	* include/avr/iotn85.h: Ditto.
+	* include/avr/iotn861.h: Ditto.
+	* include/avr/iotn88.h: Ditto.
+	* include/avr/iousb1286.h: Ditto.
+	* include/avr/iousb1287.h: Ditto.
+	* include/avr/iousb162.h: Ditto.
+	* include/avr/iousb646.h: Ditto.
+	* include/avr/iousb647.h: Ditto.
+	* include/avr/iousb82.h: Ditto.
+
+2008-01-03  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* ChangeLog: Rotate ChangeLog.
+	* ChangeLog-2007: New file.
+	* Makefile.am: Add ChangeLog-2007 to distribution list.
+
+2008-01-03  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #21935.
+	* doc/api/library.dox: Fix typo.
+
+For older changes see ChangeLog-2007
