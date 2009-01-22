@@ -180,7 +180,8 @@
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~__BV(SM)) | (mode)); \
     } while(0)
 
-#elif defined(__AVR_ATtiny167__)
+#elif defined(__AVR_ATtiny167__) \
+|| defined(__AVR_ATtiny87__)
 
     #define SLEEP_MODE_IDLE         0
     #define SLEEP_MODE_ADC          _BV(SM0)

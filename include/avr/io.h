@@ -300,6 +300,8 @@
 #  include <avr/iotn48.h>
 #elif defined (__AVR_ATtiny88__)
 #  include <avr/iotn88.h>
+#elif defined (__AVR_ATtiny87__)
+#  include <avr/iotn87.h>
 #elif defined (__AVR_ATtiny167__)
 #  include <avr/iotn167.h>
 #elif defined (__AVR_AT90SCR100__)

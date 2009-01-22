@@ -127,6 +127,7 @@
   + ATtiny13A
   + ATmega32U6
   + AT90SCR100
+  + ATtiny87
 
 * Optimized functions:
 

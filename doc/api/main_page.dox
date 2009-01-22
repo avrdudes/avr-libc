@@ -152,6 +152,7 @@ compile-time.
 - attiny84
 - attiny85
 - attiny861
+- attiny87
 - attiny88
 
 \par Automotive AVR Devices:
