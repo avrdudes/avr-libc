@@ -1,5 +1,9 @@
 2009-01-23  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iox32a4.h: New file.
+
+2009-01-23  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* Makefile.am (EXTRA_DIST): Add ChangeLog-2008.
 
 2009-01-22  Eric B. Weddington  <eric.weddington@atmel.com>
