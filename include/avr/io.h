@@ -306,17 +306,8 @@
 #  include <avr/iotn167.h>
 #elif defined (__AVR_AT90SCR100__)
 #  include <avr/io90scr100.h>
-/* avr1: the following only supported for assembler programs */
-#elif defined (__AVR_ATtiny28__)
-#  include <avr/iotn28.h>
-#elif defined (__AVR_AT90S1200__)
-#  include <avr/io1200.h>
-#elif defined (__AVR_ATtiny15__)
-#  include <avr/iotn15.h>
-#elif defined (__AVR_ATtiny12__)
-#  include <avr/iotn12.h>
-#elif defined (__AVR_ATtiny11__)
-#  include <avr/iotn11.h>
+#elif defined (__AVR_ATxmega32A4__)
+#  include <avr/iox32a4.h>
 #elif defined (__AVR_ATxmega64A1__)
 #  include <avr/iox64a1.h>
 #elif defined (__AVR_ATxmega64A3__)
@@ -329,6 +320,17 @@
 #  include <avr/iox256a3.h>
 #elif defined (__AVR_ATxmega256A3B__)
 #  include <avr/iox256a3b.h>
+/* avr1: the following only supported for assembler programs */
+#elif defined (__AVR_ATtiny28__)
+#  include <avr/iotn28.h>
+#elif defined (__AVR_AT90S1200__)
+#  include <avr/io1200.h>
+#elif defined (__AVR_ATtiny15__)
+#  include <avr/iotn15.h>
+#elif defined (__AVR_ATtiny12__)
+#  include <avr/iotn12.h>
+#elif defined (__AVR_ATtiny11__)
+#  include <avr/iotn11.h>
 #else
 #  if !defined(__COMPILING_AVR_LIBC__)
 #    warning "device type not defined"

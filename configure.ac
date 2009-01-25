@@ -637,6 +637,13 @@ AM_CONDITIONAL(HAS_atmega2560, test "x$HAS_atmega2560" = "xyes")
 CHECK_AVR_DEVICE(atmega2561)
 AM_CONDITIONAL(HAS_atmega2561, test "x$HAS_atmega2561" = "xyes")
 
+# avrxmega3
+CHECK_AVR_DEVICE(avrxmega3)
+AM_CONDITIONAL(HAS_avrxmega3, test "x$HAS_avrxmega3" = "xyes")
+
+CHECK_AVR_DEVICE(atxmega32a4)
+AM_CONDITIONAL(HAS_atxmega32a4, test "x$HAS_atxmega32a4" = "xyes")
+
 # avrxmega4
 CHECK_AVR_DEVICE(avrxmega4)
 AM_CONDITIONAL(HAS_avrxmega4, test "x$HAS_avrxmega4" = "xyes")
@@ -875,6 +882,12 @@ AC_CONFIG_FILES([
 	avr/lib/avr6/Makefile
 	avr/lib/avr6/atmega2560/Makefile
 	avr/lib/avr6/atmega2561/Makefile
+])
+
+# avrxmega3
+AC_CONFIG_FILES([
+	avr/lib/avrxmega3/Makefile
+	avr/lib/avrxmega3/atxmega32a4/Makefile
 ])
 
 # avrxmega4
