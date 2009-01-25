@@ -341,12 +341,13 @@ find out which macros are applicable to your device.
 @} */
 
 
-#if defined(__AVR_ATxmega64a1) \
-|| defined(__AVR_ATxmega64a3) \
-|| defined(__AVR_ATxmega128a1__) \
-|| defined(__AVR_ATxmega128a3__) \
-|| defined(__AVR_ATxmega256a3__) \
-|| defined(__AVR_ATxmega256a3b__)
+#if defined(__AVR_ATxmega32A4__) \
+|| defined(__AVR_ATxmega64A1__) \
+|| defined(__AVR_ATxmega64A3__) \
+|| defined(__AVR_ATxmega128A1__) \
+|| defined(__AVR_ATxmega128A3__) \
+|| defined(__AVR_ATxmega256A3__) \
+|| defined(__AVR_ATxmega256A3b__)
 
 /*
 #define power_aes_enable()  (PR_PR &= (uint8_t)~(PR_AES_bm))

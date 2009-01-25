@@ -18,6 +18,7 @@
 
   + AT90SCR100
   + ATtiny87
+  + ATxmega32A4
 
 *** Changes in avr-libc-1.6.4:
 

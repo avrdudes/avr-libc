@@ -207,6 +207,7 @@ compile-time.
 
 \par XMEGA Devices:
 
+- atxmega32a4
 - atxmega64a1
 - atxmega64a3
 - atxmega128a1

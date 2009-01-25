@@ -152,6 +152,7 @@ avr_HEADERS = \
     iotnx4.h \
     iotnx5.h \
     iotnx61.h \
+    iox32a4.h \
     iox64a1.h \
     iox64a3.h \
     iox128a1.h \
