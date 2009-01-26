@@ -1,5 +1,11 @@
 2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iom64m1.h: New file.
+	* include/avr/iom64c1.h: New file.
+	* include/avr/iom16m1.h: New file.
+
+2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom32m1.h: File has been regenerated from updated XML file.
 		SPM_PAGESIZE fix, new bit definitions, new 16-bit combined registers, 
 		22 renamed definitions, remove DAOE bitfield, fix bit definitions, 
