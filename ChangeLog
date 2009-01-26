@@ -1,3 +1,18 @@
+2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32m1.h: File has been regenerated from updated XML file.
+		SPM_PAGESIZE fix, new bit definitions, new 16-bit combined registers, 
+		22 renamed definitions, remove DAOE bitfield, fix bit definitions, 
+		new register PCICR, renamed EEPROM bit definitions, miscellaneous 
+		whitespace changes.
+	* include/avr/iom32c1.h: File has been regenerated from updated XML file.
+		Fix line endings to be Unix line endings, SPM_PAGESIZE fix, fix bit
+		definitions, remove DAOE bitfield, new register PCICR, renamed
+		EEPROM bit definitions, miscellaneous whitespace changes.
+    * include/avr/iox32a4.h: File has been regenerated from updated XML file.
+        PR.PR register renamed to PR.PRGEN. Fix missing AES definitions for 
+        PRGEN register.
+
 2009-01-24  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATxmega32A4.
