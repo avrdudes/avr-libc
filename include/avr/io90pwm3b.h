@@ -288,24 +288,33 @@
 #define TCNT0_7 7
 
 #define OCR0A _SFR_IO8(0x27)
-#define OCR0_0 0
-#define OCR0_1 1
-#define OCR0_2 2
-#define OCR0_3 3
-#define OCR0_4 4
-#define OCR0_5 5
-#define OCR0_6 6
-#define OCR0_7 7
+#define OCR0A_0 0
+#define OCR0A_1 1
+#define OCR0A_2 2
+#define OCR0A_3 3
+#define OCR0A_4 4
+#define OCR0A_5 5
+#define OCR0A_6 6
+#define OCR0A_7 7
 
 #define OCR0B _SFR_IO8(0x28)
-#define OCR0_0 0
-#define OCR0_1 1
-#define OCR0_2 2
-#define OCR0_3 3
-#define OCR0_4 4
-#define OCR0_5 5
-#define OCR0_6 6
-#define OCR0_7 7
+#define OCR0B_0 0
+#define OCR0B_1 1
+#define OCR0B_2 2
+#define OCR0B_3 3
+#define OCR0B_4 4
+#define OCR0B_5 5
+#define OCR0B_6 6
+#define OCR0B_7 7
+
+#define OCR0_0 0    /* Deprecated */
+#define OCR0_1 1    /* Deprecated */
+#define OCR0_2 2    /* Deprecated */
+#define OCR0_3 3    /* Deprecated */
+#define OCR0_4 4    /* Deprecated */
+#define OCR0_5 5    /* Deprecated */
+#define OCR0_6 6    /* Deprecated */
+#define OCR0_7 7    /* Deprecated */
 
 #define PLLCSR _SFR_IO8(0x29)
 #define PLOCK 0
