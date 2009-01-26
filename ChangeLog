@@ -1,5 +1,18 @@
 2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* configure.ac: Add support for ATmega64M1, ATmega64C1, ATmega16M1.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* NEWS: Add news items.
+
+2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/io90pwm2b.h: Bit definitions OCR0_0..OCR0_7 were
 		duplicated. Change to OCR0A_0..OCR0A_0 and OCR0B_0..OCR0B_7. Add
 		old definitions back in for backwards compatibility.

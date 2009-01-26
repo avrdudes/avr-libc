@@ -129,6 +129,9 @@
   + AT90SCR100
   + ATtiny87
   + ATxmega32A4
+  + ATmega16M1
+  + ATmega64C1
+  + ATmega64M1
 
 * Optimized functions:
 

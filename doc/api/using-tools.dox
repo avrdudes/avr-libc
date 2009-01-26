@@ -282,6 +282,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega169</td><td>__AVR_ATmega169__</td></tr>
   <tr><td>avr5</td><td>atmega169p</td><td>__AVR_ATmega169P__</td></tr>
   <tr><td>avr5</td><td>atmega16hva</td><td>__AVR_ATmega16HVA__</td></tr>
+  <tr><td>avr5</td><td>atmega16m1</td><td>__AVR_ATmega16M1__</td></tr>
   <tr><td>avr5</td><td>atmega32</td><td>__AVR_ATmega32__</td></tr>
   <tr><td>avr5</td><td>atmega323</td><td>__AVR_ATmega323__</td></tr>
   <tr><td>avr5</td><td>atmega324p</td><td>__AVR_ATmega324P__</td></tr>
@@ -294,11 +295,11 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega329p</td><td>__AVR_ATmega329P__</td></tr>
   <tr><td>avr5</td><td>atmega3290</td><td>__AVR_ATmega3290__</td></tr>
   <tr><td>avr5</td><td>atmega3290p</td><td>__AVR_ATmega3290P__</td></tr>
-  <tr><td>avr5</td><td>atmega32c1</td><td>__AVR_ATMEGA32C1__</td></tr>
+  <tr><td>avr5</td><td>atmega32c1</td><td>__AVR_ATmega32C1__</td></tr>
   <tr><td>avr5</td><td>atmega32hvb</td><td>__AVR_ATmega32HVB__</td></tr>
-  <tr><td>avr5</td><td>atmega32m1</td><td>__AVR_ATMEGA32M1__</td></tr>
-  <tr><td>avr5</td><td>atmega32u4</td><td>__AVR_ATMEGA32U4__</td></tr>
-  <tr><td>avr5</td><td>atmega32u6</td><td>__AVR_ATMEGA32U6__</td></tr>
+  <tr><td>avr5</td><td>atmega32m1</td><td>__AVR_ATmega32M1__</td></tr>
+  <tr><td>avr5</td><td>atmega32u4</td><td>__AVR_ATmega32U4__</td></tr>
+  <tr><td>avr5</td><td>atmega32u6</td><td>__AVR_ATmega32U6__</td></tr>
   <tr><td>avr5</td><td>atmega406</td><td>__AVR_ATmega406__</td></tr>
   <tr><td>avr5</td><td>atmega64</td><td>__AVR_ATmega64__</td></tr>
   <tr><td>avr5</td><td>atmega640</td><td>__AVR_ATmega640__</td></tr>
@@ -308,6 +309,8 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega6450</td><td>__AVR_ATmega6450__</td></tr>
   <tr><td>avr5</td><td>atmega649</td><td>__AVR_ATmega649__</td></tr>
   <tr><td>avr5</td><td>atmega6490</td><td>__AVR_ATmega6490__</td></tr>
+  <tr><td>avr5</td><td>atmega64c1</td><td>__AVR_ATmega64C1__</td></tr>
+  <tr><td>avr5</td><td>atmega64m1</td><td>__AVR_ATmega64M1__</td></tr>
   <tr><td>avr5</td><td>at94k</td><td>__AVR_AT94K__</td></tr>
   <tr><td>avr5</td><td>at90scr100</td><td>__AVR_AT90SCR100__</td></tr>
   <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega128</td><td>__AVR_ATmega128__</td></tr>
