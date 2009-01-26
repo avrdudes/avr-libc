@@ -172,7 +172,7 @@ CLK - Clock System
 /* Power Reduction */
 typedef struct PR_struct
 {
-    register8_t PR;  /* General Power Reduction */
+    register8_t PRGEN;  /* General Power Reduction */
     register8_t PRPA;  /* Power Reduction Port A */
     register8_t PRPB;  /* Power Reduction Port B */
     register8_t PRPC;  /* Power Reduction Port C */
@@ -307,9 +307,9 @@ typedef struct DFLL_struct
     register8_t reserved_0x01;
     register8_t CALA;  /* Calibration Register A */
     register8_t CALB;  /* Calibration Register B */
-    register8_t OSCCNT0;  /* Oscillator Counter Register 0 */
-    register8_t OSCCNT1;  /* Oscillator Counter Register 1 */
-    register8_t OSCCNT2;  /* Oscillator Counter Register 2 */
+    register8_t COMP0;  /* Oscillator Compare Register 0 */
+    register8_t COMP1;  /* Oscillator Compare Register 1 */
+    register8_t COMP2;  /* Oscillator Compare Register 2 */
     register8_t reserved_0x07;
 } DFLL_t;
 
@@ -860,7 +860,7 @@ NVM - Non Volatile Memory Controller
 /* Fuses */
 typedef struct NVM_FUSES_struct
 {
-    register8_t FUSEBYTE0;  /* JTAG User ID */
+    register8_t FUSEBYTE0;  /* User ID */
     register8_t FUSEBYTE1;  /* Watchdog Configuration */
     register8_t FUSEBYTE2;  /* Reset Configuration */
     register8_t reserved_0x03;
@@ -885,20 +885,20 @@ typedef struct NVM_PROD_SIGNATURES_struct
     register8_t reserved_0x05;
     register8_t reserved_0x06;
     register8_t reserved_0x07;
-    register8_t LOTNUM0;  /* Lot Number, Byte 0, ASCII */
-    register8_t LOTNUM1;  /* Lot Number, Byte 1, ASCII */
-    register8_t LOTNUM2;  /* Lot Number, Byte 2, ASCII */
-    register8_t LOTNUM3;  /* Lot Number, Byte 3, ASCII */
-    register8_t LOTNUM4;  /* Lot Number, Byte 4, ASCII */
-    register8_t LOTNUM5;  /* Lot Number, Byte 5, ASCII */
+    register8_t LOTNUM0;  /* Lot Number Byte 0, ASCII */
+    register8_t LOTNUM1;  /* Lot Number Byte 1, ASCII */
+    register8_t LOTNUM2;  /* Lot Number Byte 2, ASCII */
+    register8_t LOTNUM3;  /* Lot Number Byte 3, ASCII */
+    register8_t LOTNUM4;  /* Lot Number Byte 4, ASCII */
+    register8_t LOTNUM5;  /* Lot Number Byte 5, ASCII */
     register8_t reserved_0x0E;
     register8_t reserved_0x0F;
     register8_t WAFNUM;  /* Wafer Number */
     register8_t reserved_0x11;
-    register8_t COORDX;  /* Wafer Coordinate X */
-    register8_t COORDY;  /* Wafer Coordinate Y */
-    register8_t reserved_0x14;
-    register8_t reserved_0x15;
+    register8_t COORDX0;  /* Wafer Coordinate X Byte 0 */
+    register8_t COORDX1;  /* Wafer Coordinate X Byte 1 */
+    register8_t COORDY0;  /* Wafer Coordinate Y Byte 0 */
+    register8_t COORDY1;  /* Wafer Coordinate Y Byte 1 */
     register8_t reserved_0x16;
     register8_t reserved_0x17;
     register8_t reserved_0x18;
@@ -911,24 +911,24 @@ typedef struct NVM_PROD_SIGNATURES_struct
     register8_t reserved_0x1F;
     register8_t ADCACAL0;  /* ADCA Calibration Byte 0 */
     register8_t ADCACAL1;  /* ADCA Calibration Byte 1 */
-    register8_t ADCACAL2;  /* ADCA Calibration Byte 2 */
-    register8_t ADCACAL3;  /* ADCA Calibration Byte 3 */
+    register8_t reserved_0x22;
+    register8_t reserved_0x23;
     register8_t ADCBCAL0;  /* ADCB Calibration Byte 0 */
     register8_t ADCBCAL1;  /* ADCB Calibration Byte 1 */
-    register8_t ADCBCAL2;  /* ADCB Calibration Byte 2 */
-    register8_t ADCBCAL3;  /* ADCB Calibration Byte 3 */
+    register8_t reserved_0x26;
+    register8_t reserved_0x27;
     register8_t reserved_0x28;
     register8_t reserved_0x29;
     register8_t reserved_0x2A;
     register8_t reserved_0x2B;
     register8_t reserved_0x2C;
     register8_t reserved_0x2D;
-    register8_t reserved_0x2E;
-    register8_t reserved_0x2F;
-    register8_t DACACAL0;  /* DACA Calibration Byte 0 */
-    register8_t DACACAL1;  /* DACA Calibration Byte 1 */
-    register8_t DACBCAL0;  /* DACB Calibration Byte 0 */
-    register8_t DACBCAL1;  /* DACB Calibration Byte 1 */
+    register8_t TEMPSENSE0;  /* Temperature Sensor Calibration Byte 0 */
+    register8_t TEMPSENSE1;  /* Temperature Sensor Calibration Byte 0 */
+    register8_t DACAOFFCAL;  /* DACA Calibration Byte 0 */
+    register8_t DACACAINCAL;  /* DACA Calibration Byte 1 */
+    register8_t DACBOFFCAL;  /* DACB Calibration Byte 0 */
+    register8_t DACBGAINCAL;  /* DACB Calibration Byte 1 */
     register8_t reserved_0x34;
     register8_t reserved_0x35;
     register8_t reserved_0x36;
@@ -940,7 +940,6 @@ typedef struct NVM_PROD_SIGNATURES_struct
     register8_t reserved_0x3C;
     register8_t reserved_0x3D;
     register8_t reserved_0x3E;
-    register8_t reserved_0x3F;
 } NVM_PROD_SIGNATURES_t;
 
 /* NVM Command */
@@ -1037,9 +1036,9 @@ typedef enum BOOTRST_enum
 /* BOD operation */
 typedef enum BOD_enum
 {
-    BOD_INSAMPLEDMODE_gc = (0x01<<2),  /* BOD enabled in sampled mode */
-    BOD_CONTINOUSLY_gc = (0x02<<2),  /* BOD enabled continuously */
-    BOD_DISABLED_gc = (0x03<<2),  /* BOD Disabled */
+    BOD_INSAMPLEDMODE_gc = (0x01<<0),  /* BOD enabled in sampled mode */
+    BOD_CONTINOUSLY_gc = (0x02<<0),  /* BOD enabled continuously */
+    BOD_DISABLED_gc = (0x03<<0),  /* BOD Disabled */
 } BOD_t;
 
 /* Watchdog (Window) Timeout Period */
@@ -1070,13 +1069,12 @@ typedef enum SUT_enum
 typedef enum BODLVL_enum
 {
     BODLVL_1V6_gc = (0x07<<0),  /* 1.6 V */
-    BODLVL_1V8_gc = (0x06<<0),  /* 1.8 V */
-    BODLVL_2V0_gc = (0x05<<0),  /* 2.0 V */
-    BODLVL_2V2_gc = (0x04<<0),  /* 2.2 V */
-    BODLVL_2V4_gc = (0x03<<0),  /* 2.4 V */
-    BODLVL_2V7_gc = (0x02<<0),  /* 2.7 V */
-    BODLVL_2V9_gc = (0x01<<0),  /* 2.9 V */
-    BODLVL_3V2_gc = (0x00<<0),  /* 3.2 V */
+    BODLVL_1V9_gc = (0x06<<0),  /* 1.8 V */
+    BODLVL_2V1_gc = (0x05<<0),  /* 2.0 V */
+    BODLVL_2V4_gc = (0x04<<0),  /* 2.2 V */
+    BODLVL_2V6_gc = (0x03<<0),  /* 2.4 V */
+    BODLVL_2V9_gc = (0x02<<0),  /* 2.7 V */
+    BODLVL_3V2_gc = (0x01<<0),  /* 2.9 V */
 } BODLVL_t;
 
 
@@ -1216,8 +1214,7 @@ typedef struct ADC_struct
     register8_t reserved_0x09;
     register8_t reserved_0x0A;
     register8_t reserved_0x0B;
-    register8_t CALIB;  /* Calibration Value */
-    register8_t reserved_0x0D;
+    _WORDREGISTER(CAL);  /* Calibration Value */
     register8_t reserved_0x0E;
     register8_t reserved_0x0F;
     _WORDREGISTER(CH0RES);  /* Channel 0 Result */
@@ -1364,10 +1361,10 @@ typedef enum ADC_CH_INTLVL_enum
 /* DMA request selection */
 typedef enum ADC_DMASEL_enum
 {
-    ADC_DMASEL_OFF_gc = (0x00<<5),  /* Combined DMA request OFF */
-    ADC_DMASEL_CH01_gc = (0x01<<5),  /* ADC Channel 0 or 1 */
-    ADC_DMASEL_CH012_gc = (0x02<<5),  /* ADC Channel 0 or 1 or 2 */
-    ADC_DMASEL_CH0123_gc = (0x03<<5),  /* ADC Channel 0 or 1 or 2 or 3 */
+    ADC_DMASEL_OFF_gc = (0x00<<6),  /* Combined DMA request OFF */
+    ADC_DMASEL_CH01_gc = (0x01<<6),  /* ADC Channel 0 or 1 */
+    ADC_DMASEL_CH012_gc = (0x02<<6),  /* ADC Channel 0 or 1 or 2 */
+    ADC_DMASEL_CH0123_gc = (0x03<<6),  /* ADC Channel 0 or 1 or 2 or 3 */
 } ADC_DMASEL_t;
 
 /* Clock prescaler */
@@ -1434,7 +1431,7 @@ typedef enum DAC_REFSEL_enum
     DAC_REFSEL_INT1V_gc = (0x00<<3),  /* Internal 1V  */
     DAC_REFSEL_AVCC_gc = (0x01<<3),  /* Analog supply voltage */
     DAC_REFSEL_AREFA_gc = (0x02<<3),  /* External reference on AREF on PORTA */
-    DAC_REFSEL_AREFB_gc = (0x02<<3),  /* External reference on AREF on PORTB */
+    DAC_REFSEL_AREFB_gc = (0x03<<3),  /* External reference on AREF on PORTB */
 } DAC_REFSEL_t;
 
 /* Event channel selection */
@@ -1775,6 +1772,7 @@ typedef struct TWI_SLAVE_struct
     register8_t STATUS;  /* Status Register */
     register8_t ADDR;  /* Address Register */
     register8_t DATA;  /* Data Register */
+    register8_t ADDRMASK;  /* Address Mask Register */
 } TWI_SLAVE_t;
 
 /*
@@ -2510,7 +2508,7 @@ AES - AES Module
 --------------------------------------------------------------------------
 */
 
-/* AES MOdule */
+/* AES Module */
 typedef struct AES_struct
 {
     register8_t CTRL;  /* AES Control Register */
@@ -2674,20 +2672,20 @@ IO Module Instances. Mapped to memory.
 #define DFLLRC32M_CTRL  _SFR_MEM8(0x0060)
 #define DFLLRC32M_CALA  _SFR_MEM8(0x0062)
 #define DFLLRC32M_CALB  _SFR_MEM8(0x0063)
-#define DFLLRC32M_OSCCNT0  _SFR_MEM8(0x0064)
-#define DFLLRC32M_OSCCNT1  _SFR_MEM8(0x0065)
-#define DFLLRC32M_OSCCNT2  _SFR_MEM8(0x0066)
+#define DFLLRC32M_COMP0  _SFR_MEM8(0x0064)
+#define DFLLRC32M_COMP1  _SFR_MEM8(0x0065)
+#define DFLLRC32M_COMP2  _SFR_MEM8(0x0066)
 
 /* DFLLRC2M - DFLL for 2MHz RC Oscillator */
 #define DFLLRC2M_CTRL  _SFR_MEM8(0x0068)
 #define DFLLRC2M_CALA  _SFR_MEM8(0x006A)
 #define DFLLRC2M_CALB  _SFR_MEM8(0x006B)
-#define DFLLRC2M_OSCCNT0  _SFR_MEM8(0x006C)
-#define DFLLRC2M_OSCCNT1  _SFR_MEM8(0x006D)
-#define DFLLRC2M_OSCCNT2  _SFR_MEM8(0x006E)
+#define DFLLRC2M_COMP0  _SFR_MEM8(0x006C)
+#define DFLLRC2M_COMP1  _SFR_MEM8(0x006D)
+#define DFLLRC2M_COMP2  _SFR_MEM8(0x006E)
 
 /* PR - Power Reduction */
-#define PR_PR  _SFR_MEM8(0x0070)
+#define PR_PRGEN  _SFR_MEM8(0x0070)
 #define PR_PRPA  _SFR_MEM8(0x0071)
 #define PR_PRPB  _SFR_MEM8(0x0072)
 #define PR_PRPC  _SFR_MEM8(0x0073)
@@ -2828,7 +2826,7 @@ IO Module Instances. Mapped to memory.
 #define ADCA_PRESCALER  _SFR_MEM8(0x0204)
 #define ADCA_CALCTRL  _SFR_MEM8(0x0205)
 #define ADCA_INTFLAGS  _SFR_MEM8(0x0206)
-#define ADCA_CALIB  _SFR_MEM8(0x020C)
+#define ADCA_CAL  _SFR_MEM16(0x020C)
 #define ADCA_CH0RES  _SFR_MEM16(0x0210)
 #define ADCA_CH1RES  _SFR_MEM16(0x0212)
 #define ADCA_CH2RES  _SFR_MEM16(0x0214)
@@ -2901,6 +2899,7 @@ IO Module Instances. Mapped to memory.
 #define TWIC_SLAVE_STATUS  _SFR_MEM8(0x048A)
 #define TWIC_SLAVE_ADDR  _SFR_MEM8(0x048B)
 #define TWIC_SLAVE_DATA  _SFR_MEM8(0x048C)
+#define TWIC_SLAVE_ADDRMASK  _SFR_MEM8(0x048D)
 
 /* TWIE - Two-Wire Interface E */
 #define TWIE_CTRL  _SFR_MEM8(0x04A0)
@@ -2916,6 +2915,7 @@ IO Module Instances. Mapped to memory.
 #define TWIE_SLAVE_STATUS  _SFR_MEM8(0x04AA)
 #define TWIE_SLAVE_ADDR  _SFR_MEM8(0x04AB)
 #define TWIE_SLAVE_DATA  _SFR_MEM8(0x04AC)
+#define TWIE_SLAVE_ADDRMASK  _SFR_MEM8(0x04AD)
 
 /* PORTA - Port A */
 #define PORTA_DIR  _SFR_MEM8(0x0600)
@@ -3372,7 +3372,10 @@ IO Module Instances. Mapped to memory.
 #define CLK_RTCEN_bp  0  /* RTC Clock Source Enable bit position. */
 
 
-/* PR.PR  bit masks and bit positions */
+/* PR.PRGEN  bit masks and bit positions */
+#define PR_AES_bm  0x10  /* AES bit mask. */
+#define PR_AES_bp  4  /* AES bit position. */
+
 #define PR_EBI_bm  0x08  /* External Bus Interface bit mask. */
 #define PR_EBI_bp  3  /* External Bus Interface bit position. */
 
@@ -4386,24 +4389,24 @@ IO Module Instances. Mapped to memory.
 
 
 /* NVM_FUSES.FUSEBYTE0  bit masks and bit positions */
-#define NVM_FUSES_JTAGUSERID_gm  0xFF  /* JTAG User ID group mask. */
-#define NVM_FUSES_JTAGUSERID_gp  0  /* JTAG User ID group position. */
-#define NVM_FUSES_JTAGUSERID0_bm  (1<<0)  /* JTAG User ID bit 0 mask. */
-#define NVM_FUSES_JTAGUSERID0_bp  0  /* JTAG User ID bit 0 position. */
-#define NVM_FUSES_JTAGUSERID1_bm  (1<<1)  /* JTAG User ID bit 1 mask. */
-#define NVM_FUSES_JTAGUSERID1_bp  1  /* JTAG User ID bit 1 position. */
-#define NVM_FUSES_JTAGUSERID2_bm  (1<<2)  /* JTAG User ID bit 2 mask. */
-#define NVM_FUSES_JTAGUSERID2_bp  2  /* JTAG User ID bit 2 position. */
-#define NVM_FUSES_JTAGUSERID3_bm  (1<<3)  /* JTAG User ID bit 3 mask. */
-#define NVM_FUSES_JTAGUSERID3_bp  3  /* JTAG User ID bit 3 position. */
-#define NVM_FUSES_JTAGUSERID4_bm  (1<<4)  /* JTAG User ID bit 4 mask. */
-#define NVM_FUSES_JTAGUSERID4_bp  4  /* JTAG User ID bit 4 position. */
-#define NVM_FUSES_JTAGUSERID5_bm  (1<<5)  /* JTAG User ID bit 5 mask. */
-#define NVM_FUSES_JTAGUSERID5_bp  5  /* JTAG User ID bit 5 position. */
-#define NVM_FUSES_JTAGUSERID6_bm  (1<<6)  /* JTAG User ID bit 6 mask. */
-#define NVM_FUSES_JTAGUSERID6_bp  6  /* JTAG User ID bit 6 position. */
-#define NVM_FUSES_JTAGUSERID7_bm  (1<<7)  /* JTAG User ID bit 7 mask. */
-#define NVM_FUSES_JTAGUSERID7_bp  7  /* JTAG User ID bit 7 position. */
+#define NVM_FUSES_USERID_gm  0xFF  /* User ID group mask. */
+#define NVM_FUSES_USERID_gp  0  /* User ID group position. */
+#define NVM_FUSES_USERID0_bm  (1<<0)  /* User ID bit 0 mask. */
+#define NVM_FUSES_USERID0_bp  0  /* User ID bit 0 position. */
+#define NVM_FUSES_USERID1_bm  (1<<1)  /* User ID bit 1 mask. */
+#define NVM_FUSES_USERID1_bp  1  /* User ID bit 1 position. */
+#define NVM_FUSES_USERID2_bm  (1<<2)  /* User ID bit 2 mask. */
+#define NVM_FUSES_USERID2_bp  2  /* User ID bit 2 position. */
+#define NVM_FUSES_USERID3_bm  (1<<3)  /* User ID bit 3 mask. */
+#define NVM_FUSES_USERID3_bp  3  /* User ID bit 3 position. */
+#define NVM_FUSES_USERID4_bm  (1<<4)  /* User ID bit 4 mask. */
+#define NVM_FUSES_USERID4_bp  4  /* User ID bit 4 position. */
+#define NVM_FUSES_USERID5_bm  (1<<5)  /* User ID bit 5 mask. */
+#define NVM_FUSES_USERID5_bp  5  /* User ID bit 5 position. */
+#define NVM_FUSES_USERID6_bm  (1<<6)  /* User ID bit 6 mask. */
+#define NVM_FUSES_USERID6_bp  6  /* User ID bit 6 position. */
+#define NVM_FUSES_USERID7_bm  (1<<7)  /* User ID bit 7 mask. */
+#define NVM_FUSES_USERID7_bp  7  /* User ID bit 7 position. */
 
 
 /* NVM_FUSES.FUSEBYTE1  bit masks and bit positions */
@@ -4437,13 +4440,6 @@ IO Module Instances. Mapped to memory.
 #define NVM_FUSES_BOOTRST_bm  0x40  /* Boot Loader Section Reset Vector bit mask. */
 #define NVM_FUSES_BOOTRST_bp  6  /* Boot Loader Section Reset Vector bit position. */
 
-#define NVM_FUSES_BODACT_gm  0x0C  /* BOD Operation in Active Mode group mask. */
-#define NVM_FUSES_BODACT_gp  2  /* BOD Operation in Active Mode group position. */
-#define NVM_FUSES_BODACT0_bm  (1<<2)  /* BOD Operation in Active Mode bit 0 mask. */
-#define NVM_FUSES_BODACT0_bp  2  /* BOD Operation in Active Mode bit 0 position. */
-#define NVM_FUSES_BODACT1_bm  (1<<3)  /* BOD Operation in Active Mode bit 1 mask. */
-#define NVM_FUSES_BODACT1_bp  3  /* BOD Operation in Active Mode bit 1 position. */
-
 #define NVM_FUSES_BODPD_gm  0x03  /* BOD Operation in Power-Down Mode group mask. */
 #define NVM_FUSES_BODPD_gp  0  /* BOD Operation in Power-Down Mode group position. */
 #define NVM_FUSES_BODPD0_bm  (1<<0)  /* BOD Operation in Power-Down Mode bit 0 mask. */
@@ -4463,11 +4459,15 @@ IO Module Instances. Mapped to memory.
 #define NVM_FUSES_WDLOCK_bm  0x02  /* Watchdog Timer Lock bit mask. */
 #define NVM_FUSES_WDLOCK_bp  1  /* Watchdog Timer Lock bit position. */
 
-#define NVM_FUSES_JTAGEN_bm  0x01  /* JTAG Interface Enable bit mask. */
-#define NVM_FUSES_JTAGEN_bp  0  /* JTAG Interface Enable bit position. */
-
 
 /* NVM_FUSES.FUSEBYTE5  bit masks and bit positions */
+#define NVM_FUSES_BODACT_gm  0x30  /* BOD Operation in Active Mode group mask. */
+#define NVM_FUSES_BODACT_gp  4  /* BOD Operation in Active Mode group position. */
+#define NVM_FUSES_BODACT0_bm  (1<<4)  /* BOD Operation in Active Mode bit 0 mask. */
+#define NVM_FUSES_BODACT0_bp  4  /* BOD Operation in Active Mode bit 0 position. */
+#define NVM_FUSES_BODACT1_bm  (1<<5)  /* BOD Operation in Active Mode bit 1 mask. */
+#define NVM_FUSES_BODACT1_bp  5  /* BOD Operation in Active Mode bit 1 position. */
+
 #define NVM_FUSES_EESAVE_bm  0x08  /* Preserve EEPROM Through Chip Erase bit mask. */
 #define NVM_FUSES_EESAVE_bp  3  /* Preserve EEPROM Through Chip Erase bit position. */
 
@@ -4720,14 +4720,12 @@ IO Module Instances. Mapped to memory.
 
 
 /* ADC.CTRLA  bit masks and bit positions */
-#define ADC_DMASEL_gm  0xE0  /* DMA Selection group mask. */
-#define ADC_DMASEL_gp  5  /* DMA Selection group position. */
-#define ADC_DMASEL0_bm  (1<<5)  /* DMA Selection bit 0 mask. */
-#define ADC_DMASEL0_bp  5  /* DMA Selection bit 0 position. */
-#define ADC_DMASEL1_bm  (1<<6)  /* DMA Selection bit 1 mask. */
-#define ADC_DMASEL1_bp  6  /* DMA Selection bit 1 position. */
-#define ADC_DMASEL2_bm  (1<<7)  /* DMA Selection bit 2 mask. */
-#define ADC_DMASEL2_bp  7  /* DMA Selection bit 2 position. */
+#define ADC_DMASEL_gm  0xC0  /* DMA Selection group mask. */
+#define ADC_DMASEL_gp  6  /* DMA Selection group position. */
+#define ADC_DMASEL0_bm  (1<<6)  /* DMA Selection bit 0 mask. */
+#define ADC_DMASEL0_bp  6  /* DMA Selection bit 0 position. */
+#define ADC_DMASEL1_bm  (1<<7)  /* DMA Selection bit 1 mask. */
+#define ADC_DMASEL1_bp  7  /* DMA Selection bit 1 position. */
 
 #define ADC_CH3START_bm  0x20  /* Channel 3 Start Conversion bit mask. */
 #define ADC_CH3START_bp  5  /* Channel 3 Start Conversion bit position. */
@@ -5244,6 +5242,28 @@ IO Module Instances. Mapped to memory.
 
 #define TWI_SLAVE_AP_bm  0x01  /* Slave Address or Stop bit mask. */
 #define TWI_SLAVE_AP_bp  0  /* Slave Address or Stop bit position. */
+
+
+/* TWI_SLAVE.ADDRMASK  bit masks and bit positions */
+#define TWI_SLAVE_ADDRMASK_gm  0xFE  /* Address Mask group mask. */
+#define TWI_SLAVE_ADDRMASK_gp  1  /* Address Mask group position. */
+#define TWI_SLAVE_ADDRMASK0_bm  (1<<1)  /* Address Mask bit 0 mask. */
+#define TWI_SLAVE_ADDRMASK0_bp  1  /* Address Mask bit 0 position. */
+#define TWI_SLAVE_ADDRMASK1_bm  (1<<2)  /* Address Mask bit 1 mask. */
+#define TWI_SLAVE_ADDRMASK1_bp  2  /* Address Mask bit 1 position. */
+#define TWI_SLAVE_ADDRMASK2_bm  (1<<3)  /* Address Mask bit 2 mask. */
+#define TWI_SLAVE_ADDRMASK2_bp  3  /* Address Mask bit 2 position. */
+#define TWI_SLAVE_ADDRMASK3_bm  (1<<4)  /* Address Mask bit 3 mask. */
+#define TWI_SLAVE_ADDRMASK3_bp  4  /* Address Mask bit 3 position. */
+#define TWI_SLAVE_ADDRMASK4_bm  (1<<5)  /* Address Mask bit 4 mask. */
+#define TWI_SLAVE_ADDRMASK4_bp  5  /* Address Mask bit 4 position. */
+#define TWI_SLAVE_ADDRMASK5_bm  (1<<6)  /* Address Mask bit 5 mask. */
+#define TWI_SLAVE_ADDRMASK5_bp  6  /* Address Mask bit 5 position. */
+#define TWI_SLAVE_ADDRMASK6_bm  (1<<7)  /* Address Mask bit 6 mask. */
+#define TWI_SLAVE_ADDRMASK6_bp  7  /* Address Mask bit 6 position. */
+
+#define TWI_SLAVE_ADDREN_bm  0x01  /* Address Enable bit mask. */
+#define TWI_SLAVE_ADDREN_bp  0  /* Address Enable bit position. */
 
 
 /* TWI.CTRL  bit masks and bit positions */
@@ -6493,7 +6513,7 @@ IO Module Instances. Mapped to memory.
 #define BOOT_SECTION_END       (BOOT_SECTION_START + BOOT_SECTION_SIZE - 1)
 
 #define DATAMEM_START     (0x0000)
-#define DATAMEM_SIZE      (16777216)
+#define DATAMEM_SIZE      (12288)
 #define DATAMEM_END       (DATAMEM_START + DATAMEM_SIZE - 1)
 
 #define IO_START     (0x0000)
@@ -6501,19 +6521,15 @@ IO Module Instances. Mapped to memory.
 #define IO_END       (IO_START + IO_SIZE - 1)
 
 #define MAPPED_EEPROM_START     (0x1000)
-#define MAPPED_EEPROM_SIZE      (4096)
+#define MAPPED_EEPROM_SIZE      (1024)
 #define MAPPED_EEPROM_END       (MAPPED_EEPROM_START + MAPPED_EEPROM_SIZE - 1)
 
 #define INTERNAL_SRAM_START     (0x2000)
 #define INTERNAL_SRAM_SIZE      (4096)
 #define INTERNAL_SRAM_END       (INTERNAL_SRAM_START + INTERNAL_SRAM_SIZE - 1)
 
-#define EXTERNAL_SRAM_START     (0x3000)
-#define EXTERNAL_SRAM_SIZE      (16764928)
-#define EXTERNAL_SRAM_END       (EXTERNAL_SRAM_START + EXTERNAL_SRAM_SIZE - 1)
-
 #define EEPROM_START     (0x0000)
-#define EEPROM_SIZE      (2048)
+#define EEPROM_SIZE      (1024)
 #define EEPROM_END       (EEPROM_START + EEPROM_SIZE - 1)
 
 #define FUSE_START     (0x0000)
@@ -6543,7 +6559,7 @@ IO Module Instances. Mapped to memory.
 #define RAMEND       INTERNAL_SRAM_END
 #define XRAMSTART    EXTERNAL_SRAM_START
 #define XRAMSIZE     EXTERNAL_SRAM_SIZE
-#define XRAMEND      EXTERNAL_SRAM_END
+#define XRAMEND      INTERNAL_SRAM_END
 #define E2END        EEPROM_END
 #define E2PAGESIZE   EEPROM_PAGE_SIZE
 
@@ -6552,14 +6568,14 @@ IO Module Instances. Mapped to memory.
 #define FUSE_MEMORY_SIZE 6
 
 /* Fuse Byte 0 */
-#define FUSE_JTAGUSERID0  ~_BV(0)  /* JTAG User ID Bit 0 */
-#define FUSE_JTAGUSERID1  ~_BV(1)  /* JTAG User ID Bit 1 */
-#define FUSE_JTAGUSERID2  ~_BV(2)  /* JTAG User ID Bit 2 */
-#define FUSE_JTAGUSERID3  ~_BV(3)  /* JTAG User ID Bit 3 */
-#define FUSE_JTAGUSERID4  ~_BV(4)  /* JTAG User ID Bit 4 */
-#define FUSE_JTAGUSERID5  ~_BV(5)  /* JTAG User ID Bit 5 */
-#define FUSE_JTAGUSERID6  ~_BV(6)  /* JTAG User ID Bit 6 */
-#define FUSE_JTAGUSERID7  ~_BV(7)  /* JTAG User ID Bit 7 */
+#define FUSE_USERID0  ~_BV(0)  /* User ID Bit 0 */
+#define FUSE_USERID1  ~_BV(1)  /* User ID Bit 1 */
+#define FUSE_USERID2  ~_BV(2)  /* User ID Bit 2 */
+#define FUSE_USERID3  ~_BV(3)  /* User ID Bit 3 */
+#define FUSE_USERID4  ~_BV(4)  /* User ID Bit 4 */
+#define FUSE_USERID5  ~_BV(5)  /* User ID Bit 5 */
+#define FUSE_USERID6  ~_BV(6)  /* User ID Bit 6 */
+#define FUSE_USERID7  ~_BV(7)  /* User ID Bit 7 */
 #define FUSE0_DEFAULT  (0xFF)
 
 /* Fuse Byte 1 */
@@ -6576,8 +6592,6 @@ IO Module Instances. Mapped to memory.
 /* Fuse Byte 2 */
 #define FUSE_BODPD0  ~_BV(0)  /* BOD Operation in Power-Down Mode Bit 0 */
 #define FUSE_BODPD1  ~_BV(1)  /* BOD Operation in Power-Down Mode Bit 1 */
-#define FUSE_BODACT0  ~_BV(2)  /* BOD Operation in Active Mode Bit 0 */
-#define FUSE_BODACT1  ~_BV(3)  /* BOD Operation in Active Mode Bit 1 */
 #define FUSE_BOOTRST  ~_BV(6)  /* Boot Loader Section Reset Vector */
 #define FUSE_DVSDON  ~_BV(7)  /* Spike Detector Enable */
 #define FUSE2_DEFAULT  (0xFF)
@@ -6585,7 +6599,6 @@ IO Module Instances. Mapped to memory.
 /* Fuse Byte 3 Reserved */
 
 /* Fuse Byte 4 */
-#define FUSE_JTAGEN  ~_BV(0)  /* JTAG Interface Enable */
 #define FUSE_WDLOCK  ~_BV(1)  /* Watchdog Timer Lock */
 #define FUSE_SUT0  ~_BV(2)  /* Start-up Time Bit 0 */
 #define FUSE_SUT1  ~_BV(3)  /* Start-up Time Bit 1 */
@@ -6596,6 +6609,8 @@ IO Module Instances. Mapped to memory.
 #define FUSE_BODLVL1  ~_BV(1)  /* Brown Out Detection Voltage Level Bit 1 */
 #define FUSE_BODLVL2  ~_BV(2)  /* Brown Out Detection Voltage Level Bit 2 */
 #define FUSE_EESAVE  ~_BV(3)  /* Preserve EEPROM Through Chip Erase */
+#define FUSE_BODACT0  ~_BV(4)  /* BOD Operation in Active Mode Bit 0 */
+#define FUSE_BODACT1  ~_BV(5)  /* BOD Operation in Active Mode Bit 1 */
 #define FUSE5_DEFAULT  (0xFF)
 
 
@@ -6608,7 +6623,7 @@ IO Module Instances. Mapped to memory.
 
 /* ========== Signature ========== */
 #define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x85
+#define SIGNATURE_1 0x95
 #define SIGNATURE_2 0x41
 
 
