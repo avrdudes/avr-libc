@@ -186,6 +186,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169P__) \
 || defined(__AVR_ATmega16HVA__) \
+|| defined(__AVR_ATmega16M1__) \
 || defined(__AVR_ATmega2560__) \
 || defined(__AVR_ATmega2561__) \
 || defined(__AVR_ATmega324__) \
@@ -212,6 +213,8 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega649__) \
 || defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega64C1__) \
+|| defined(__AVR_ATmega64M1__) \
 || defined(__AVR_ATmega8HVA__) \
 || defined(__AVR_ATmega88__) \
 || defined(__AVR_ATmega88P__) \
