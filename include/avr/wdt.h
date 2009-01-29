@@ -222,7 +222,8 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATtiny88__) \
 || defined(__AVR_ATtiny87__) \
 || defined(__AVR_ATtiny167__) \
-|| defined(__AVR_AT90SCR100__)
+|| defined(__AVR_AT90SCR100__) \
+|| defined(__AVR_ATA6289__)
 
 /* Use STS instruction. */
  

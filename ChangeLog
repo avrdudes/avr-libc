@@ -1,3 +1,16 @@
+2009-01-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATA6289.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/ioa6289.h: New file.
+	* NEWS: Add news item.
+
 2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATmega64M1, ATmega64C1, ATmega16M1.
