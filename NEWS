@@ -132,6 +132,7 @@
   + ATmega16M1
   + ATmega64C1
   + ATmega64M1
+  + ATA6289
 
 * Optimized functions:
 

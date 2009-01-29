@@ -54,6 +54,7 @@ avr_HEADERS = \
     io8534.h \
     io8535.h \
     io86r401.h \
+    ioa6289.h \
     ioat94k.h \
     iocan32.h \
     iocan64.h \
