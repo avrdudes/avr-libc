@@ -1,5 +1,17 @@
 2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* configure.ac: Add support for AT90PWM81.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* NEWS: Add news items.
+
+2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iox32d4.h: New file.
 	* include/avr/iox16a4.h: New file.
 	* include/avr/iox16d4.h: New file.

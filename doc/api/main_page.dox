@@ -189,6 +189,7 @@ compile-time.
 - at90pwm3
 - at90pwm3b
 - at90pwm316
+- at90pwm81
 
 \par Smart Battery AVR Devices:
 
