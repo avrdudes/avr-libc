@@ -1,3 +1,13 @@
+2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox32d4.h: New file.
+	* include/avr/iox16a4.h: New file.
+	* include/avr/iox16d4.h: New file.
+
+2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm81.h: New file.
+
 2009-01-29  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATA6289.
