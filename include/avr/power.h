@@ -730,6 +730,29 @@ do{ \
 #define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRSPI)|(1<<PRUSART)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRPSC0)|(1<<PRPSC1)|(1<<PRPSC2)))
 
 
+#elif defined(__AVR_AT90PWM81__)
+
+#define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
+#define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))
+
+#define power_spi_enable()      (PRR &= (uint8_t)~(1 << PRSPI))
+#define power_spi_disable()     (PRR |= (uint8_t)(1 << PRSPI))
+
+#define power_timer1_enable()   (PRR &= (uint8_t)~(1 << PRTIM1))
+#define power_timer1_disable()  (PRR |= (uint8_t)(1 << PRTIM1))
+
+/* Power Stage Controller 0 */
+#define power_psc0_enable()     (PRR &= (uint8_t)~(1 << PRPSC0))
+#define power_psc0_disable()    (PRR |= (uint8_t)(1 << PRPSC0))
+
+/* Power Stage Controller 2 */
+#define power_psc2_enable()     (PRR &= (uint8_t)~(1 << PRPSC2))
+#define power_psc2_disable()    (PRR |= (uint8_t)(1 << PRPSC2))
+
+#define power_all_enable()      (PRR &= (uint8_t)~((1<<PRADC)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRPSC0)|(1<<PRPSC2)))
+#define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRPSC0)|(1<<PRPSC2)))
+
+
 #elif defined(__AVR_ATmega165__) \
 || defined(__AVR_ATmega165P__) \
 || defined(__AVR_ATmega325__) \

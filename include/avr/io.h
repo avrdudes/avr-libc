@@ -122,6 +122,8 @@
 #  include <avr/io90pwm216.h>
 #elif defined (__AVR_AT90PWM316__)
 #  include <avr/io90pwm316.h>
+#elif defined (__AVR_AT90PWM81__)
+#  include <avr/io90pwm81.h>
 #elif defined (__AVR_ATmega16M1__)
 #  include <avr/iom16m1.h>
 #elif defined (__AVR_ATmega32C1__)

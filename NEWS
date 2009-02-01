@@ -133,6 +133,7 @@
   + ATmega64C1
   + ATmega64M1
   + ATA6289
+  + AT90PWM81
 
 * Optimized functions:
 
