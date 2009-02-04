@@ -1,3 +1,11 @@
+2009-02-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* bootstrap: Remove autoconf and automake version checks.
+	* configure.ac (AC_INIT): Make this call be first in script according
+	to docs.
+	(AC_PREREQ): Change minimum autoconf version to 2.59.
+	(AM_INIT_AUTOMAKE) Check for minimum automake version of 1.8
+
 2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for AT90PWM81.
