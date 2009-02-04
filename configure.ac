@@ -35,9 +35,6 @@
 # Process this file with autoconf to produce a configure script.
 #
 
-AC_PREREQ(2.57)
-AC_REVISION($Revision$)
-
 dnl library versioning -- modify these on releases
 dnl        macro name           value            description
 m4_define([avr_libc_major],    [1])dnl           major version
@@ -60,6 +57,10 @@ m4_define([avr_libc_version_numeric],
                           avr_libc_revision))dnl
 
 AC_INIT(avr-libc, avr_libc_version, avr-libc-dev@nongnu.org)
+
+AC_PREREQ(2.59)
+AC_REVISION($Revision$)
+
 AC_CONFIG_SRCDIR([doc/examples/demo/demo.c])
 AC_CONFIG_HEADER([config.h])
 
@@ -122,8 +123,9 @@ dnl The default check whether the C compiler can create an executable
 dnl is inappropriate for us as it requires an existing library.
 AC_NO_EXECUTABLES
 
+dnl Minimum version of Automake is 1.8.
 dnl We don't want the gzip distribution tarball anymore.
-AM_INIT_AUTOMAKE([dist-bzip2 no-dist-gzip])
+AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip])
 
 # We don't want touse the cflags from the environment since we need control
 # of this when we're building the libs.
