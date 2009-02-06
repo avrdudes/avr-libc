@@ -1,3 +1,12 @@
+2009-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Add the ATmega128RFA1 device.
+	* devtools/gen-avr-lib-tree.sh: (Ditto.)
+	* include/avr/Makefile.am: (Ditto.)
+	* include/avr/io.h: (Ditto.)
+	* include/avr/wdt.h: (Ditto.)
+	* include/avr/iom128rfa1.h: (Ditto.)
+
 2009-02-04  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* bootstrap: Remove autoconf and automake version checks.

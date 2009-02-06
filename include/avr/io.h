@@ -146,6 +146,8 @@
 #  include <avr/iom1281.h>
 #elif defined (__AVR_ATmega1284P__)
 #  include <avr/iom1284p.h>
+#elif defined (__AVR_ATmega128RFA1__)
+#  include <avr/iom128rfa1.h>
 #elif defined (__AVR_ATmega2560__)
 #  include <avr/iom2560.h>
 #elif defined (__AVR_ATmega2561__)

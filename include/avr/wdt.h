@@ -178,6 +178,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega1280__) \
 || defined(__AVR_ATmega1281__) \
 || defined(__AVR_ATmega1284P__) \
+|| defined(__AVR_ATmega128RFA1__) \
 || defined(__AVR_ATmega164__) \
 || defined(__AVR_ATmega164P__) \
 || defined(__AVR_ATmega165__) \

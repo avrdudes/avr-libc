@@ -24,6 +24,7 @@
   + ATmega64M1
   + ATA6289
   + AT90PWM81
+  + ATmega128RFA1
 
 *** Changes in avr-libc-1.6.4:
 
