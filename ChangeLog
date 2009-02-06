@@ -1,5 +1,9 @@
 2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/sleep.h: Add support for AT90PWM81.
+
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* xml/avrgcc-header: Add Id line. Always add *PAGE_SIZE constant
 	definitions for xmega devices. Fix definition of XRAMEND constant for
 	classic AVR devices.

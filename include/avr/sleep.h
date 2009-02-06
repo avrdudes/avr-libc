@@ -259,7 +259,8 @@
     } while(0)
 
 #elif defined(__AVR_AT90PWM216__) \
-|| defined(__AVR_AT90PWM316__)
+|| defined(__AVR_AT90PWM316__) \
+|| defined(__AVR_AT90PWM81__)
 
     #define SLEEP_MODE_IDLE         0
     #define SLEEP_MODE_ADC          _BV(SM0)
