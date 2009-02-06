@@ -29,6 +29,7 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
 
+# $Id$
 
 # Convert Atmel XML Device file to AVR GCC I/O header file.
 # Needs: xmlstarlet (executable: xml), sed, grep, uniq, mv, rm, echo, sort.
@@ -682,12 +683,10 @@ MEMSPACE_NAMES=$(xml sel -T -t -m "/AVRPART/V2/memspaces/memspace" -v "concat(@n
 for i in $MEMSPACE_NAMES ; do
     MEMSPACE_START=$(xml sel -T -t -m '/AVRPART/V2/memspaces/memspace[@name='\'${i}\'']' -v "@start" $devicefile)
     MEMSPACE_SIZE=$(( $(xml sel -T -t -m '/AVRPART/V2/memspaces/memspace[@name='\'${i}\'']' -v "@size" $devicefile) ))
-    MEMSPACE_PAGE_SIZE=$(xml sel -T -t -m '/AVRPART/V2/memspaces/memspace[@name='\'${i}\'']' -v "@pagesize" $devicefile)
+    MEMSPACE_PAGE_SIZE=$(( $(xml sel -T -t -m '/AVRPART/V2/memspaces/memspace[@name='\'${i}\'']' -v "@pagesize" $devicefile) ))
     echo "#define ${i}_START     (${MEMSPACE_START})" >> $headerfile
     echo "#define ${i}_SIZE      (${MEMSPACE_SIZE})" >> $headerfile
-    if -n "$MEMSPACE_PAGE_SIZE" ; then
-        echo "#define ${i}_PAGE_SIZE (${MEMSPACE_PAGE_SIZE})" >> $headerfile
-    fi
+    echo "#define ${i}_PAGE_SIZE (${MEMSPACE_PAGE_SIZE})" >> $headerfile
     echo "#define ${i}_END       (${i}_START + ${i}_SIZE - 1)" >> $headerfile
     echo "" >> $headerfile
 done
@@ -1062,7 +1061,7 @@ echo "#define XRAMSIZE     (${XRAMSIZE})" >> $headerfile
 
 # XRAMEND
 if test $XRAMSIZE -gt 0 ; then
-    echo "#define XRAMEND      (XRAMSTART + XRAMSIZE - 1)" >> $headerfile
+    echo "#define XRAMEND      (XRAMSIZE - 1)" >> $headerfile
 else
     echo "#define XRAMEND      (RAMEND)" >> $headerfile
 fi
