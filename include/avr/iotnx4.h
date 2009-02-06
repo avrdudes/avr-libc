@@ -335,10 +335,12 @@
 #define PORF    0
 
 #define MCUCR   _SFR_IO8(0x35)
+#define BODS    7
 #define PUD     6
 #define SE      5
 #define SM1     4
 #define SM0     3
+#define BODSE   2
 #define ISC01   1
 #define ISC00   0
 

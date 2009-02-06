@@ -322,8 +322,10 @@
 
 #define MCUCR	_SFR_IO8(0X35)
 #define JTD	7
+#if !defined(__AVR_ATmega644__)
 #define BODS    6
 #define BODSE   5
+#endif
 #define PUD	4
 #define IVSEL	1
 #define IVCE	0

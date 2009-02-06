@@ -1,5 +1,11 @@
 2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iotnx4.h: Add BODS and BODSE bit definitions.
+	* include/avr/iotnx5.h: Same.
+	* include/avr/iomxx4.h: Define BODS and BODSE only if not ATmega644.
+
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom1284p.h: Fix OCROA_0..OCROA_7 to OCR0A_0..OCR0A_7.
 	* include/avr/iom328p.h: Same.
 	* include/avr/iom168p.h: Same.
