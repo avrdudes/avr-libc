@@ -1,3 +1,19 @@
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Add Id line. Always add *PAGE_SIZE constant
+	definitions for xmega devices. Fix definition of XRAMEND constant for
+	classic AVR devices.
+	* include/avr/iox128a1.h: Add *PAGE_SIZE constants.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+
 2009-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version date to 20090205
