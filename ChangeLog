@@ -1,5 +1,9 @@
 2009-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: Bump version date to 20090205
+
+2009-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: Add the ATmega128RFA1 device.
 	* devtools/gen-avr-lib-tree.sh: (Ditto.)
 	* include/avr/Makefile.am: (Ditto.)
