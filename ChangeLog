@@ -1,5 +1,17 @@
 2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iom1284p.h: Fix OCROA_0..OCROA_7 to OCR0A_0..OCR0A_7.
+	* include/avr/iom328p.h: Same.
+	* include/avr/iom168p.h: Same.
+	* include/avr/iom88p.h: Same.
+	* include/avr/iom48p.h: Same.
+	* include/avr/iotn48.h: Same.
+	* include/avr/iom32u6.h: Same.
+	* include/avr/io90scr100.h: Same.
+	* include/avr/iom128rfa1.h: Same.
+
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/sleep.h: Add support for AT90PWM81.
 
 2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
