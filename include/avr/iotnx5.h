@@ -1,4 +1,4 @@
-/* Copyright (c) 2005,2007 Anatoly Sokolov
+/* Copyright (c) 2005, 2007, 2009 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -309,6 +309,7 @@
 /* Reserved [0x36] */
 
 #define SPMCSR  _SFR_IO8(0x37)
+#define RSIG    5
 #define CTPB    4
 #define RFLB    3
 #define PGWRT   2

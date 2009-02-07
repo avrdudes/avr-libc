@@ -1,3 +1,8 @@
+2009-02-07  Anatoly Sokolov  <aesok@post.ru>
+
+	* include/avr/iotnx4.h: Add RSIG bit definition.
+	* include/avr/iotnx5.h: Same.
+
 2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotnx4.h: Add BODS and BODSE bit definitions.
