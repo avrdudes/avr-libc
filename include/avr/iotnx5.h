@@ -309,6 +309,7 @@
 /* Reserved [0x36] */
 
 #define SPMCSR  _SFR_IO8(0x37)
+#define RSIG    5
 #define CTPB    4
 #define RFLB    3
 #define PGWRT   2
