@@ -1,3 +1,9 @@
+2009-02-08  Anatoly Sokolov  <aesok@post.ru>
+
+	* configure.ac: (FNO_JUMP_TABLES, CHECK_MNO_TABLEJUMP, 
+	CHECK_FNO_JUMP_TABLES): Add.
+	* libc\stdio\Rules.am (PRINTF_CFLAGS): Use FNO_JUMP_TABLES.
+
 2009-02-07  Anatoly Sokolov  <aesok@post.ru>
 
 	* include/avr/iotnx4.h: Add RSIG bit definition.

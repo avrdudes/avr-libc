@@ -1,4 +1,4 @@
-# Copyright (c) 2002, 2003, 2004, Joerg Wunsch
+# Copyright (c) 2002, 2003, 2004, 2009 Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -49,9 +49,9 @@ nodist_libscanf_flt_a_SOURCES=
 
 libscanf_flt_a_LIBADD = vfscanf_flt.o
 
-# vfprintf is compiled best with -Os -mno-tablejump, this gives the
-# smallest code.
-PRINTF_CFLAGS = -Os -mno-tablejump
+# vfprintf is compiled best with -Os -fno-jump-tables (-mno-tablejump), 
+# this gives the smallest code.
+PRINTF_CFLAGS = -Os $(FNO_JUMP_TABLES)
 
 vfprintf_min.o: vfprintf.c
 	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_MIN -c -o $@ $<

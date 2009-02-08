@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,2006,2007  Anatoly Sokolov
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
 # Copyright (c) 2005,2008  Joerg Wunsch
 # All rights reserved.
 #
@@ -322,6 +322,58 @@ fi
 AC_SUBST(DOCSDIR)
 AC_SUBST(AVR_LIBC_USER_MANUAL)
 AC_SUBST(DOC_INST_DIR)
+
+FNO_JUMP_TABLES=""
+AC_SUBST(FNO_JUMP_TABLES)
+
+AC_DEFUN(
+  CHECK_MNO_TABLEJUMP,
+  [
+    old_CC=${CC}
+    old_CFLAGS=${CFLAGS}
+    CFLAGS="-mno-tablejump"
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(whether ${CC} supports -mno-tablejump)
+    AC_COMPILE_IFELSE(
+      [AC_LANG_SOURCE([],[])],
+      [has_mno_tablejump=yes],
+      [has_mno_tablejump=no]
+    )
+    if test "x$has_mno_tablejump" = "xyes"
+    then
+      FNO_JUMP_TABLES="-mno-tablejump"
+    fi
+    AC_MSG_RESULT($has_mno_tablejump)
+    CC=${old_CC}
+    CFLAGS=${old_CFLAGS}
+  ]
+)
+
+AC_DEFUN(
+  CHECK_FNO_JUMP_TABLES,
+  [
+    old_CC=${CC}
+    old_CFLAGS=${CFLAGS}
+    CFLAGS="-fno-jump-tables"
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(whether ${CC} supports -fno-jump-tables)
+    AC_COMPILE_IFELSE(
+      [AC_LANG_SOURCE([],[])],
+      [has_fno_jump_tables=yes],
+      [has_fno_jump_tables=no]
+    )
+    if test "x$has_fno_jump_tables" = "xyes"
+    then
+      FNO_JUMP_TABLES="-fno-jump-tables"
+    fi
+    AC_MSG_RESULT($has_fno_jump_tables)
+    CC=${old_CC}
+    CFLAGS=${old_CFLAGS}
+  ]
+)
+
+CHECK_MNO_TABLEJUMP
+CHECK_FNO_JUMP_TABLES
 
 dnl Some devices are only handled by newer version of gcc. This macro lets us
 dnl probe to see if the installed avr-gcc supports a questionable device.
