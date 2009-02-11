@@ -1,3 +1,8 @@
+2009-02-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/assembler.dox: Add missing 3rd copyright clause.
+	* doc/api/malloc.dox: (Ditto.)
+
 2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix bug #25131.
