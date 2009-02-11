@@ -762,7 +762,7 @@
 /* Constants */
 #define SPM_PAGESIZE 256
 #define RAMEND       0x10FF
-#define XRAMEND      0x10FF
+#define XRAMEND      RAMEND
 #define E2END        0x7FF
 #define E2PAGESIZE   8
 #define FLASHEND     0xFFFF

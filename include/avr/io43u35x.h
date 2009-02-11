@@ -421,7 +421,7 @@
 
 /* Constants */
 #define    RAMEND   0x045F     /*Last On-Chip SRAM Location*/
-#define    XRAMEND  0x045F
+#define    XRAMEND  RAMEND
 #define    E2END    0x0000
 #define    FLASHEND 0x5FFF
 

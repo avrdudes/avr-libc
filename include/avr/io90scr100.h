@@ -1642,11 +1642,7 @@
 #define RAMEND       (RAMSTART + RAMSIZE - 1)
 #define XRAMSTART    (0x0)
 #define XRAMSIZE     (0)
-#if XRAMSIZE > 0 && XRAMSTART > 0
-#define XRAMEND      (XRAMSTART + XRAMSIZE - 1)
-#else
-#define XRAMEND      (RAMEND + XRAMSIZE)
-#endif
+#define XRAMEND      RAMEND
 #define E2END        (2048 - 1)
 #define E2PAGESIZE   (4)
 #define FLASHEND     (65536 - 1)

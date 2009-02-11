@@ -5107,7 +5107,7 @@ struct __reg_TST_RX_LENGTH {
 #define RAMEND                          (0x41FF)
 #define XRAMSTART                       (0x0000)
 #define XRAMSIZE                        (0x0000)
-#define XRAMEND                         (0x41FF)
+#define XRAMEND                         RAMEND
 #define E2END                           (0xFFF)
 #define E2PAGESIZE                      (0x08)
 #define FLASHEND                        (0x1ffff)

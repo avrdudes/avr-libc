@@ -40,7 +40,7 @@
 /* Constants */
 #define SPM_PAGESIZE    128
 #define RAMEND          0x04FF
-#define XRAMEND         0x04FF
+#define XRAMEND         RAMEND
 #define E2END           0x1FF
 #define E2PAGESIZE      4
 #define FLASHEND        0x3FFF

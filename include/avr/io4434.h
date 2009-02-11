@@ -539,7 +539,7 @@
 
 /* Constants */
 #define RAMEND     0x15F    /*Last On-Chip SRAM location*/
-#define XRAMEND    0x15F
+#define XRAMEND    RAMEND
 #define E2END      0xFF
 #define E2PAGESIZE 0
 #define FLASHEND   0xFFF
