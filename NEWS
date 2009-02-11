@@ -75,6 +75,7 @@
   [#24762] 1.6.3 wdt.h compile-time bug
   [#24890] Small error in libm source fp_rempio2.S
   [#25048] eeprom.h will not compile as c++ code.
+  [#25131] Incorrect definition of default lfuse bits for ATTiny2313
 
 * Other changes:
 

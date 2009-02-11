@@ -1,5 +1,10 @@
 2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix bug #25131.
+	* include/avr/iotn2313.h: Fix LFUSE_DEFAULT definition.
+
+2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Make definition of XRAMEND more consistent across all I/O header files.
 	* include/avr/io.h: Add missing word in documentation on XRAMEND.
 	* include/avr/iousb82.h: Change XRAMEND definition from a constant to
