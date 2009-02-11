@@ -331,7 +331,6 @@
 #define SE 0
 #define SM0 1
 #define SM1 2
-#define SM2 3
 
 #define MCUSR _SFR_IO8(0x34)
 #define PORF 0

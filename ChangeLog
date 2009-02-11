@@ -1,3 +1,9 @@
+2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Partial fix for bug #25535.
+	* include/avr/iotn88.h: Remove SM2 bit definition.
+	* include/avr/iotn48.h: Same.
+
 2009-02-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/assembler.dox: Add missing 3rd copyright clause.
