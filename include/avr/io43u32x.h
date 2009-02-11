@@ -426,7 +426,7 @@
 
 /* Constants */
 #define    RAMEND   0x025F     /*Last On-Chip SRAM Location*/
-#define    XRAMEND  0x025F
+#define    XRAMEND  RAMEND
 #define    E2END    0x0000
 
 /* FIXME: should be 0x1FFFF for max 128K (64K*16) external program memory,

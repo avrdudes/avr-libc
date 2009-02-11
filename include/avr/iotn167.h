@@ -779,7 +779,7 @@
 #define RAMSIZE      (0x1FF)
 #define RAMEND       (RAMSTART + RAMSIZE - 1)  /* Last On-Chip SRAM Location */
 #define XRAMSIZE     (0)
-#define XRAMEND      (RAMEND + XRAMSIZE)
+#define XRAMEND      RAMEND
 #define E2END        (0x1FF)
 #define E2PAGESIZE   (4) 
 #define FLASHEND     (0x3FFF)

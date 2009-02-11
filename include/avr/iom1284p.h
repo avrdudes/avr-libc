@@ -1079,7 +1079,7 @@
 #define SPM_PAGESIZE 256
 #define RAMEND       0x40FF    /* Last On-Chip SRAM Location */
 #define XRAMSIZE     0
-#define XRAMEND      (RAMEND + XRAMSIZE)
+#define XRAMEND      RAMEND
 #define E2END        0xFFF
 #define E2PAGESIZE   8
 #define FLASHEND     0x1FFFF

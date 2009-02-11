@@ -209,7 +209,7 @@
 
 /* Last memory addresses */
 #define RAMEND		0x15F
-#define XRAMEND		0x15F
+#define XRAMEND		RAMEND
 #define E2END		0x1FF
 #define FLASHEND	0x1FFF
 

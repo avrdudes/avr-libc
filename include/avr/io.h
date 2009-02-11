@@ -73,7 +73,7 @@
     <br>
     The last possible RAM location that is addressable. This is equal to 
     RAMEND for devices that do not allow for external RAM. For devices 
-    that allow external RAM, this will larger than RAMEND.
+    that allow external RAM, this will be larger than RAMEND.
     <br>
     - \b E2END
     <br>
