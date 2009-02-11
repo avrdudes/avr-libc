@@ -6,6 +6,7 @@
   [sourceforge.net: #2420567] ATmega329P missing in sleep.h
   [#24890] Small error in libm source fp_rempio2.S
   [#25048] eeprom.h will not compile as c++ code.
+  [#25131] Incorrect definition of default lfuse bits for ATTiny2313
 
 * Optimized functions:
   cos, sin, tan:  minor in space

@@ -602,7 +602,7 @@
 #define FUSE_SUT1        (unsigned char)~_BV(5)
 #define FUSE_CKOUT       (unsigned char)~_BV(6)
 #define FUSE_CKDIV8      (unsigned char)~_BV(7)
-#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL1 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
 #define FUSE_RSTDISBL    (unsigned char)~_BV(0)
