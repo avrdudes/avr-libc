@@ -2,6 +2,7 @@
 
 	* doc/api/assembler.dox: Add missing 3rd copyright clause.
 	* doc/api/malloc.dox: (Ditto.)
+	* doc/api/faq.dox: (Ditto.)
 
 2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
