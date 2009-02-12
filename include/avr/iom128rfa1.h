@@ -410,7 +410,7 @@
 /* Timer/Counter0 Interrupt Flag Register */
 #define TIFR0                           _SFR_IO8(0x15)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIFR0 {
         unsigned int tov0 : 1;	/* Timer/Counter0 Overflow Flag */
@@ -432,7 +432,7 @@ struct __reg_TIFR0 {
 /* Timer/Counter1 Interrupt Flag Register */
 #define TIFR1                           _SFR_IO8(0x16)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIFR1 {
         unsigned int tov1 : 1;	/* Timer/Counter1 Overflow Flag */
@@ -459,7 +459,7 @@ struct __reg_TIFR1 {
 /* Timer/Counter Interrupt Flag Register */
 #define TIFR2                           _SFR_IO8(0x17)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIFR2 {
         unsigned int tov2 : 1;	/* Timer/Counter2 Overflow Flag */
@@ -481,7 +481,7 @@ struct __reg_TIFR2 {
 /* Timer/Counter3 Interrupt Flag Register */
 #define TIFR3                           _SFR_IO8(0x18)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIFR3 {
         unsigned int tov3 : 1;	/* Timer/Counter3 Overflow Flag */
@@ -508,7 +508,7 @@ struct __reg_TIFR3 {
 /* Timer/Counter4 Interrupt Flag Register */
 #define TIFR4                           _SFR_IO8(0x19)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIFR4 {
         unsigned int tov4 : 1;	/* Timer/Counter4 Overflow Flag */
@@ -535,7 +535,7 @@ struct __reg_TIFR4 {
 /* Timer/Counter5 Interrupt Flag Register */
 #define TIFR5                           _SFR_IO8(0x1A)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIFR5 {
         unsigned int tov5 : 1;	/* Timer/Counter5 Overflow Flag */
@@ -562,7 +562,7 @@ struct __reg_TIFR5 {
 /* Pin Change Interrupt Flag Register */
 #define PCIFR                           _SFR_IO8(0x1B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PCIFR {
         unsigned int pcif : 3;	/* Pin Change Interrupt Flag 2 */
@@ -582,7 +582,7 @@ struct __reg_PCIFR {
 /* External Interrupt Flag Register */
 #define EIFR                            _SFR_IO8(0x1C)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_EIFR {
         unsigned int intf : 8;	/* External Interrupt Flag */
@@ -606,7 +606,7 @@ struct __reg_EIFR {
 /* External Interrupt Mask Register */
 #define EIMSK                           _SFR_IO8(0x1D)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_EIMSK {
         unsigned int int : 8;	/* External Interrupt Request Enable */
@@ -630,7 +630,7 @@ struct __reg_EIMSK {
 /* General Purpose IO Register 0 */
 #define GPIOR0                          _SFR_IO8(0x1E)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_GPIOR0 {
         unsigned int gpior0 : 8;	/* General Purpose I/O Register 0 Value */
@@ -663,7 +663,7 @@ struct __reg_GPIOR0 {
 /* EEPROM Control Register */
 #define EECR                            _SFR_IO8(0x1F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_EECR {
         unsigned int eere : 1;	/* EEPROM Read Enable */
@@ -709,7 +709,7 @@ struct __reg_EECR {
 /* General Timer/Counter Control Register */
 #define GTCCR                           _SFR_IO8(0x23)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_GTCCR {
         unsigned int psrsync : 1;	/* Prescaler Reset for Synchronous Timer/Counters */
@@ -733,7 +733,7 @@ struct __reg_GTCCR {
 /* Timer/Counter0 Control Register A */
 #define TCCR0A                          _SFR_IO8(0x24)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR0A {
         unsigned int wgm0 : 2;	/* Waveform Generation Mode */
@@ -758,7 +758,7 @@ struct __reg_TCCR0A {
 /* Timer/Counter0 Control Register B */
 #define TCCR0B                          _SFR_IO8(0x25)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR0B {
         unsigned int cs0 : 3;	/* Clock Select */
@@ -826,7 +826,7 @@ struct __reg_TCCR0B {
 /* General Purpose IO Register 1 */
 #define GPIOR1                          _SFR_IO8(0x2A)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_GPIOR1 {
         unsigned int gpior1 : 8;	/* General Purpose I/O Register 1 Value */
@@ -850,7 +850,7 @@ struct __reg_GPIOR1 {
 /* General Purpose I/O Register 2 */
 #define GPIOR2                          _SFR_IO8(0x2B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_GPIOR2 {
         unsigned int gpior2 : 8;	/* General Purpose I/O Register 2 Value */
@@ -874,7 +874,7 @@ struct __reg_GPIOR2 {
 /* SPI Control Register */
 #define SPCR                            _SFR_IO8(0x2C)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SPCR {
         unsigned int spr : 2;	/* SPI Clock Rate Select 1 and 0 */
@@ -904,7 +904,7 @@ struct __reg_SPCR {
 /* SPI Status Register */
 #define SPSR                            _SFR_IO8(0x2D)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SPSR {
         unsigned int spi2x : 1;	/* Double SPI Speed Bit */
@@ -940,7 +940,7 @@ struct __reg_SPSR {
 /* Analog Comparator Control And Status Register */
 #define ACSR                            _SFR_IO8(0x30)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ACSR {
         unsigned int acis : 2;	/* Analog Comparator Interrupt Mode Select */
@@ -985,7 +985,7 @@ struct __reg_ACSR {
 /* Sleep Mode Control Register */
 #define SMCR                            _SFR_IO8(0x33)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SMCR {
         unsigned int se : 1;	/* Sleep Enable */
@@ -1007,7 +1007,7 @@ struct __reg_SMCR {
 /* MCU Status Register */
 #define MCUSR                           _SFR_IO8(0x34)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_MCUSR {
         unsigned int porf : 1;	/* Power-on Reset Flag */
@@ -1033,7 +1033,7 @@ struct __reg_MCUSR {
 /* MCU Control Register */
 #define MCUCR                           _SFR_IO8(0x35)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_MCUCR {
         unsigned int ivce : 1;	/* Interrupt Vector Change Enable */
@@ -1058,7 +1058,7 @@ struct __reg_MCUCR {
 /* Store Program Memory Control Register */
 #define SPMCSR                          _SFR_IO8(0x37)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SPMCSR {
         unsigned int spmen : 1;	/* Store Program Memory Enable */
@@ -1102,7 +1102,7 @@ struct __reg_SPMCSR {
 /* Status Register */
 #define SREG                            _SFR_IO8(0x3F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SREG {
         unsigned int c : 1;	/* Carry Flag */
@@ -1133,7 +1133,7 @@ struct __reg_SREG {
 /* Watchdog Timer Control Register */
 #define WDTCSR                          _SFR_MEM8(0x60)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_WDTCSR {
         unsigned int wdp : 3;	/* Watchdog Timer Prescaler bits */
@@ -1162,7 +1162,7 @@ struct __reg_WDTCSR {
 /* Clock Prescale Register */
 #define CLKPR                           _SFR_MEM8(0x61)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_CLKPR {
         unsigned int clkps : 4;	/* Clock Prescaler Select Bits */
@@ -1185,7 +1185,7 @@ struct __reg_CLKPR {
 /* Power Reduction Register 2 */
 #define PRR2                            _SFR_MEM8(0x63)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PRR2 {
         unsigned int prram : 4;	/* Power Reduction SRAM 3 */
@@ -1206,7 +1206,7 @@ struct __reg_PRR2 {
 /* Power Reduction Register0 */
 #define PRR0                            _SFR_MEM8(0x64)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PRR0 {
         unsigned int pradc : 1;	/* Power Reduction ADC */
@@ -1237,7 +1237,7 @@ struct __reg_PRR0 {
 /* Power Reduction Register 1 */
 #define PRR1                            _SFR_MEM8(0x65)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PRR1 {
         unsigned int prusart : 3;	/* Reserved */
@@ -1292,7 +1292,7 @@ struct __reg_PRR1 {
 /* Pin Change Interrupt Control Register */
 #define PCICR                           _SFR_MEM8(0x68)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PCICR {
         unsigned int pcie : 3;	/* Pin Change Interrupt Enable 2 */
@@ -1312,7 +1312,7 @@ struct __reg_PCICR {
 /* External Interrupt Control Register A */
 #define EICRA                           _SFR_MEM8(0x69)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_EICRA {
         unsigned int isc0 : 2;	/* External Interrupt 0 Sense Control Bit */
@@ -1339,7 +1339,7 @@ struct __reg_EICRA {
 /* External Interrupt Control Register B */
 #define EICRB                           _SFR_MEM8(0x6A)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_EICRB {
         unsigned int isc4 : 2;	/* External Interrupt 4 Sense Control Bit */
@@ -1408,7 +1408,7 @@ struct __reg_EICRB {
 /* Timer/Counter0 Interrupt Mask Register */
 #define TIMSK0                          _SFR_MEM8(0x6E)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIMSK0 {
         unsigned int toie0 : 1;	/* Timer/Counter0 Overflow Interrupt Enable */
@@ -1430,7 +1430,7 @@ struct __reg_TIMSK0 {
 /* Timer/Counter1 Interrupt Mask Register */
 #define TIMSK1                          _SFR_MEM8(0x6F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIMSK1 {
         unsigned int toie1 : 1;	/* Timer/Counter1 Overflow Interrupt Enable */
@@ -1457,7 +1457,7 @@ struct __reg_TIMSK1 {
 /* Timer/Counter Interrupt Mask register */
 #define TIMSK2                          _SFR_MEM8(0x70)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIMSK2 {
         unsigned int toie2 : 1;	/* Timer/Counter2 Overflow Interrupt Enable */
@@ -1480,7 +1480,7 @@ struct __reg_TIMSK2 {
 /* Timer/Counter3 Interrupt Mask Register */
 #define TIMSK3                          _SFR_MEM8(0x71)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIMSK3 {
         unsigned int toie3 : 1;	/* Timer/Counter3 Overflow Interrupt Enable */
@@ -1507,7 +1507,7 @@ struct __reg_TIMSK3 {
 /* Timer/Counter4 Interrupt Mask Register */
 #define TIMSK4                          _SFR_MEM8(0x72)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIMSK4 {
         unsigned int toie4 : 1;	/* Timer/Counter4 Overflow Interrupt Enable */
@@ -1534,7 +1534,7 @@ struct __reg_TIMSK4 {
 /* Timer/Counter5 Interrupt Mask Register */
 #define TIMSK5                          _SFR_MEM8(0x73)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TIMSK5 {
         unsigned int toie5 : 1;	/* Timer/Counter5 Overflow Interrupt Enable */
@@ -1561,7 +1561,7 @@ struct __reg_TIMSK5 {
 /* The ADC Control and Status Register C */
 #define ADCSRC                          _SFR_MEM8(0x77)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ADCSRC {
         unsigned int adsut : 6;	/* ADC Start-up Time */
@@ -1596,7 +1596,7 @@ struct __reg_ADCSRC {
 /* The ADC Control and Status Register A */
 #define ADCSRA                          _SFR_MEM8(0x7A)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ADCSRA {
         unsigned int adps : 3;	/* ADC  Prescaler Select Bits */
@@ -1625,7 +1625,7 @@ struct __reg_ADCSRA {
 /* ADC Control and Status Register B */
 #define ADCSRB                          _SFR_MEM8(0x7B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ADCSRB {
         unsigned int adts : 3;	/* ADC Auto Trigger Source */
@@ -1654,7 +1654,7 @@ struct __reg_ADCSRB {
 /* The ADC Multiplexer Selection Register */
 #define ADMUX                           _SFR_MEM8(0x7C)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ADMUX {
         unsigned int mux : 5;	/* Analog Channel and Gain Selection Bits */
@@ -1680,7 +1680,7 @@ struct __reg_ADMUX {
 /* Digital Input Disable Register 2 */
 #define DIDR2                           _SFR_MEM8(0x7D)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DIDR2 {
         unsigned int adc8d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
@@ -1711,7 +1711,7 @@ struct __reg_DIDR2 {
 /* Digital Input Disable Register 0 */
 #define DIDR0                           _SFR_MEM8(0x7E)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DIDR0 {
         unsigned int adc0d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
@@ -1742,7 +1742,7 @@ struct __reg_DIDR0 {
 /* Digital Input Disable Register 1 */
 #define DIDR1                           _SFR_MEM8(0x7F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DIDR1 {
         unsigned int ain0d : 1;	/* AIN0 Digital Input Disable */
@@ -1762,7 +1762,7 @@ struct __reg_DIDR1 {
 /* Timer/Counter1 Control Register A */
 #define TCCR1A                          _SFR_MEM8(0x80)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR1A {
         unsigned int wgm1 : 2;	/* Waveform Generation Mode */
@@ -1789,7 +1789,7 @@ struct __reg_TCCR1A {
 /* Timer/Counter1 Control Register B */
 #define TCCR1B                          _SFR_MEM8(0x81)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR1B {
         unsigned int cs1 : 3;	/* Clock Select */
@@ -1816,7 +1816,7 @@ struct __reg_TCCR1B {
 /* Timer/Counter1 Control Register C */
 #define TCCR1C                          _SFR_MEM8(0x82)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR1C {
         unsigned int : 5;
@@ -1863,7 +1863,7 @@ struct __reg_TCCR1C {
 /* Timer/Counter3 Control Register A */
 #define TCCR3A                          _SFR_MEM8(0x90)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR3A {
         unsigned int wgm3 : 2;	/* Waveform Generation Mode */
@@ -1890,7 +1890,7 @@ struct __reg_TCCR3A {
 /* Timer/Counter3 Control Register B */
 #define TCCR3B                          _SFR_MEM8(0x91)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR3B {
         unsigned int cs3 : 3;	/* Clock Select */
@@ -1917,7 +1917,7 @@ struct __reg_TCCR3B {
 /* Timer/Counter3 Control Register C */
 #define TCCR3C                          _SFR_MEM8(0x92)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR3C {
         unsigned int : 5;
@@ -1964,7 +1964,7 @@ struct __reg_TCCR3C {
 /* Timer/Counter4 Control Register A */
 #define TCCR4A                          _SFR_MEM8(0xA0)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR4A {
         unsigned int wgm4 : 2;	/* Waveform Generation Mode */
@@ -1991,7 +1991,7 @@ struct __reg_TCCR4A {
 /* Timer/Counter4 Control Register B */
 #define TCCR4B                          _SFR_MEM8(0xA1)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR4B {
         unsigned int cs4 : 3;	/* Clock Select */
@@ -2018,7 +2018,7 @@ struct __reg_TCCR4B {
 /* Timer/Counter4 Control Register C */
 #define TCCR4C                          _SFR_MEM8(0xA2)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR4C {
         unsigned int : 5;
@@ -2065,7 +2065,7 @@ struct __reg_TCCR4C {
 /* Timer/Counter2 Control Register A */
 #define TCCR2A                          _SFR_MEM8(0xB0)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR2A {
         unsigned int wgm2 : 2;	/* Waveform Generation Mode */
@@ -2090,7 +2090,7 @@ struct __reg_TCCR2A {
 /* Timer/Counter2 Control Register B */
 #define TCCR2B                          _SFR_MEM8(0xB1)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR2B {
         unsigned int cs2 : 3;	/* Clock Select */
@@ -2158,7 +2158,7 @@ struct __reg_TCCR2B {
 /* Asynchronous Status Register */
 #define ASSR                            _SFR_MEM8(0xB6)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ASSR {
         unsigned int tcr2bub : 1;	/* Timer/Counter2 Control Register B Update Busy */
@@ -2203,7 +2203,7 @@ struct __reg_ASSR {
 /* TWI Status Register */
 #define TWSR                            _SFR_MEM8(0xB9)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TWSR {
         unsigned int twps : 2;	/* TWI Prescaler Bits */
@@ -2228,7 +2228,7 @@ struct __reg_TWSR {
 /* TWI (Slave) Address Register */
 #define TWAR                            _SFR_MEM8(0xBA)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TWAR {
         unsigned int twgce : 1;	/* TWI General Call Recognition Enable Bit */
@@ -2267,7 +2267,7 @@ struct __reg_TWAR {
 /* TWI Control Register */
 #define TWCR                            _SFR_MEM8(0xBC)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TWCR {
         unsigned int twie : 1;	/* TWI Interrupt Enable */
@@ -2297,7 +2297,7 @@ struct __reg_TWCR {
 /* TWI (Slave) Address Mask Register */
 #define TWAMR                           _SFR_MEM8(0xBD)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TWAMR {
         unsigned int : 1;
@@ -2328,7 +2328,7 @@ struct __reg_TWAMR {
 /* USART0 Control and Status Register A */
 #define UCSR0A                          _SFR_MEM8(0xC0)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_UCSR0A {
         unsigned int mpcm0 : 1;	/* Multi-processor Communication Mode */
@@ -2359,7 +2359,7 @@ struct __reg_UCSR0A {
 /* USART0 Control and Status Register B */
 #define UCSR0B                          _SFR_MEM8(0xC1)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_UCSR0B {
         unsigned int txb80 : 1;	/* Transmit Data Bit 8 */
@@ -2390,7 +2390,7 @@ struct __reg_UCSR0B {
 /* USART0 Control and Status Register C */
 #define UCSR0C                          _SFR_MEM8(0xC2)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_UCSR0C {
         unsigned int ucpol0 : 1;	/* Clock Polarity */
@@ -2446,7 +2446,7 @@ struct __reg_UCSR0C {
 /* USART1 Control and Status Register A */
 #define UCSR1A                          _SFR_MEM8(0xC8)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_UCSR1A {
         unsigned int mpcm1 : 1;	/* Multi-processor Communication Mode */
@@ -2477,7 +2477,7 @@ struct __reg_UCSR1A {
 /* USART1 Control and Status Register B */
 #define UCSR1B                          _SFR_MEM8(0xC9)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_UCSR1B {
         unsigned int txb81 : 1;	/* Transmit Data Bit 8 */
@@ -2508,7 +2508,7 @@ struct __reg_UCSR1B {
 /* USART1 Control and Status Register C */
 #define UCSR1C                          _SFR_MEM8(0xCA)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_UCSR1C {
         unsigned int ucpol1 : 1;	/* Clock Polarity */
@@ -2562,7 +2562,7 @@ struct __reg_UCSR1C {
 /* Symbol Counter Cotrol Register 0 */
 #define SCCR0                           _SFR_MEM8(0xDC)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCCR0 {
         unsigned int sccmp : 3;	/* Symbol Counter Compare Unit 3 Mode selct */
@@ -2591,7 +2591,7 @@ struct __reg_SCCR0 {
 /* Symbol Counter Control Register 1 */
 #define SCCR1                           _SFR_MEM8(0xDD)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCCR1 {
         unsigned int scenbo : 1;	/* Backoff Slot Counter enable */
@@ -2609,7 +2609,7 @@ struct __reg_SCCR1 {
 /* Symbol Counter Status Register */
 #define SCSR                            _SFR_MEM8(0xDE)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCSR {
         unsigned int scbsy : 1;	/* Symbol Counter busy */
@@ -2627,7 +2627,7 @@ struct __reg_SCSR {
 /* Symbol Counter Interrupt Mask Register */
 #define SCIRQM                          _SFR_MEM8(0xDF)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCIRQM {
         unsigned int irqmcp : 3;	/* Symbol Counter Compare Match 3 IRQ enable */
@@ -2651,7 +2651,7 @@ struct __reg_SCIRQM {
 /* Symbol Counter Interrupt Status Register */
 #define SCIRQS                          _SFR_MEM8(0xE0)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCIRQS {
         unsigned int irqscp : 3;	/* Compare Unit 3 Compare Match IRQ */
@@ -2675,7 +2675,7 @@ struct __reg_SCIRQS {
 /* Symbol Counter Register LL-Byte */
 #define SCCNTLL                         _SFR_MEM8(0xE1)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCCNTLL {
         unsigned int sccntll : 8;	/* Symbol Counter Register LL-Byte bits */
@@ -2699,7 +2699,7 @@ struct __reg_SCCNTLL {
 /* Symbol Counter Register LH-Byte */
 #define SCCNTLH                         _SFR_MEM8(0xE2)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCCNTLH {
         unsigned int sccntlh : 8;	/* Symbol Counter Register LH-Byte bits */
@@ -2723,7 +2723,7 @@ struct __reg_SCCNTLH {
 /* Symbol Counter Register HL-Byte */
 #define SCCNTHL                         _SFR_MEM8(0xE3)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCCNTHL {
         unsigned int sccnthl : 8;	/* Symbol Counter Register HL-Byte bits */
@@ -2747,7 +2747,7 @@ struct __reg_SCCNTHL {
 /* Symbol Counter Register HH-Byte */
 #define SCCNTHH                         _SFR_MEM8(0xE4)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCCNTHH {
         unsigned int sccnthh : 8;	/* Symbol Counter Register HH-Byte bits */
@@ -2771,7 +2771,7 @@ struct __reg_SCCNTHH {
 /* Symbol Counter Beacon Time Stamp Register LL-Byte */
 #define SCBTSRLL                        _SFR_MEM8(0xE5)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRLL {
         unsigned int scbtsrll : 8;	/* Symbol Counter Beacon Time Stamp Register LL-Byte bits */
@@ -2795,7 +2795,7 @@ struct __reg_SCBTSRLL {
 /* Symbol Counter Beacon Time Stamp Register LH-Byte */
 #define SCBTSRLH                        _SFR_MEM8(0xE6)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRLH {
         unsigned int scbtsrlh : 8;	/* Symbol Counter Beacon Time Stamp Register LH-Byte bits */
@@ -2819,7 +2819,7 @@ struct __reg_SCBTSRLH {
 /* Symbol Counter Beacon Time Stamp Register HL-Byte */
 #define SCBTSRHL                        _SFR_MEM8(0xE7)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRHL {
         unsigned int scbtsrhl : 8;	/* Symbol Counter Beacon Time Stamp Register HL-Byte bits */
@@ -2843,7 +2843,7 @@ struct __reg_SCBTSRHL {
 /* Symbol Counter Beacon Time Stamp Register HH-Byte */
 #define SCBTSRHH                        _SFR_MEM8(0xE8)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRHH {
         unsigned int scbtsrhh : 8;	/* Symbol Counter Beacon Time Stamp Register HH-Byte bits */
@@ -2867,7 +2867,7 @@ struct __reg_SCBTSRHH {
 /* Symbol Counter Frame Time Stamp Register LL-Byte */
 #define SCTSRLL                         _SFR_MEM8(0xE9)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRLL {
         unsigned int sctsrll : 8;	/* Symbol Counter Frame Time Stamp Register LL-Byte bits */
@@ -2891,7 +2891,7 @@ struct __reg_SCTSRLL {
 /* Symbol Counter Frame Time Stamp Register LH-Byte */
 #define SCTSRLH                         _SFR_MEM8(0xEA)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRLH {
         unsigned int sctsrlh : 8;	/* Symbol Counter Frame Time Stamp Register LH-Byte bits */
@@ -2915,7 +2915,7 @@ struct __reg_SCTSRLH {
 /* Symbol Counter Frame Time Stamp Register HL-Byte */
 #define SCTSRHL                         _SFR_MEM8(0xEB)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRHL {
         unsigned int sctsrhl : 8;	/* Symbol Counter Frame Time Stamp Register HL-Byte bits */
@@ -2939,7 +2939,7 @@ struct __reg_SCTSRHL {
 /* Symbol Counter Frame Time Stamp Register HH-Byte */
 #define SCTSRHH                         _SFR_MEM8(0xEC)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRHH {
         unsigned int sctsrhh : 8;	/* Symbol Counter Frame Time Stamp Register HH-Byte bits */
@@ -2963,7 +2963,7 @@ struct __reg_SCTSRHH {
 /* Symbol Counter Output Compare Register 3 LL-Byte */
 #define SCOCR3LL                        _SFR_MEM8(0xED)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR3LL {
         unsigned int scocr3ll : 8;	/* Symbol Counter Output Compare Register 3 LL-Byte bits */
@@ -2987,7 +2987,7 @@ struct __reg_SCOCR3LL {
 /* Symbol Counter Output Compare Register 3 LH-Byte */
 #define SCOCR3LH                        _SFR_MEM8(0xEE)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR3LH {
         unsigned int scocr3lh : 8;	/* Symbol Counter Output Compare Register 3 LH-Byte bits */
@@ -3011,7 +3011,7 @@ struct __reg_SCOCR3LH {
 /* Symbol Counter Output Compare Register 3 HL-Byte */
 #define SCOCR3HL                        _SFR_MEM8(0xEF)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR3HL {
         unsigned int scocr3hl : 8;	/* Symbol Counter Output Compare Register 3 HL-Byte bits */
@@ -3035,7 +3035,7 @@ struct __reg_SCOCR3HL {
 /* Symbol Counter Output Compare Register 3 HH-Byte */
 #define SCOCR3HH                        _SFR_MEM8(0xF0)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR3HH {
         unsigned int scocr3hh : 8;	/* Symbol Counter Output Compare Register 3 HH-Byte bits */
@@ -3059,7 +3059,7 @@ struct __reg_SCOCR3HH {
 /* Symbol Counter Output Compare Register 2 LL-Byte */
 #define SCOCR2LL                        _SFR_MEM8(0xF1)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR2LL {
         unsigned int scocr2ll : 8;	/* Symbol Counter Output Compare Register 2 LL-Byte bits */
@@ -3083,7 +3083,7 @@ struct __reg_SCOCR2LL {
 /* Symbol Counter Output Compare Register 2 LH-Byte */
 #define SCOCR2LH                        _SFR_MEM8(0xF2)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR2LH {
         unsigned int scocr2lh : 8;	/* Symbol Counter Output Compare Register 2 LH-Byte bits */
@@ -3107,7 +3107,7 @@ struct __reg_SCOCR2LH {
 /* Symbol Counter Output Compare Register 2 HL-Byte */
 #define SCOCR2HL                        _SFR_MEM8(0xF3)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR2HL {
         unsigned int scocr2hl : 8;	/* Symbol Counter Output Compare Register 2 HL-Byte bits */
@@ -3131,7 +3131,7 @@ struct __reg_SCOCR2HL {
 /* Symbol Counter Output Compare Register 2 HH-Byte */
 #define SCOCR2HH                        _SFR_MEM8(0xF4)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR2HH {
         unsigned int scocr2hh : 8;	/* Symbol Counter Output Compare Register 2 HH-Byte bits */
@@ -3155,7 +3155,7 @@ struct __reg_SCOCR2HH {
 /* Symbol Counter Output Compare Register 1 LL-Byte */
 #define SCOCR1LL                        _SFR_MEM8(0xF5)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR1LL {
         unsigned int scocr1ll : 8;	/* Symbol Counter Output Compare Register 1 LL-Byte bits */
@@ -3179,7 +3179,7 @@ struct __reg_SCOCR1LL {
 /* Symbol Counter Output Compare Register 1 LH-Byte */
 #define SCOCR1LH                        _SFR_MEM8(0xF6)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR1LH {
         unsigned int scocr1lh : 8;	/* Symbol Counter Output Compare Register 1 LH-Byte bits */
@@ -3203,7 +3203,7 @@ struct __reg_SCOCR1LH {
 /* Symbol Counter Output Compare Register 1 HL-Byte */
 #define SCOCR1HL                        _SFR_MEM8(0xF7)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR1HL {
         unsigned int scocr1hl : 8;	/* Symbol Counter Output Compare Register 1 HL-Byte bits */
@@ -3227,7 +3227,7 @@ struct __reg_SCOCR1HL {
 /* Symbol Counter Output Compare Register 1 HH-Byte */
 #define SCOCR1HH                        _SFR_MEM8(0xF8)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCOCR1HH {
         unsigned int scocr1hh : 8;	/* Symbol Counter Output Compare Register 1 HH-Byte bits */
@@ -3251,7 +3251,7 @@ struct __reg_SCOCR1HH {
 /* Timer/Counter5 Control Register A */
 #define TCCR5A                          _SFR_MEM8(0x120)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR5A {
         unsigned int wgm5 : 2;	/* Waveform Generation Mode */
@@ -3278,7 +3278,7 @@ struct __reg_TCCR5A {
 /* Timer/Counter5 Control Register B */
 #define TCCR5B                          _SFR_MEM8(0x121)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR5B {
         unsigned int cs5 : 3;	/* Clock Select */
@@ -3305,7 +3305,7 @@ struct __reg_TCCR5B {
 /* Timer/Counter5 Control Register C */
 #define TCCR5C                          _SFR_MEM8(0x122)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TCCR5C {
         unsigned int : 5;
@@ -3352,7 +3352,7 @@ struct __reg_TCCR5C {
 /* Data Retention Configuration Register of SRAM 3 */
 #define DRTRAM3                         _SFR_MEM8(0x132)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DRTRAM3 {
         unsigned int : 4;
@@ -3371,7 +3371,7 @@ struct __reg_DRTRAM3 {
 /* Data Retention Configuration Register of SRAM 2 */
 #define DRTRAM2                         _SFR_MEM8(0x133)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DRTRAM2 {
         unsigned int : 4;
@@ -3390,7 +3390,7 @@ struct __reg_DRTRAM2 {
 /* Data Retention Configuration Register of SRAM 1 */
 #define DRTRAM1                         _SFR_MEM8(0x134)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DRTRAM1 {
         unsigned int : 4;
@@ -3409,7 +3409,7 @@ struct __reg_DRTRAM1 {
 /* Data Retention Configuration Register of SRAM 0 */
 #define DRTRAM0                         _SFR_MEM8(0x135)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DRTRAM0 {
         unsigned int : 4;
@@ -3428,7 +3428,7 @@ struct __reg_DRTRAM0 {
 /* Port Driver Strength Register 0 */
 #define DPDS0                           _SFR_MEM8(0x136)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DPDS0 {
         unsigned int pbdrv : 2;	/* Driver Strength Port B */
@@ -3455,7 +3455,7 @@ struct __reg_DPDS0 {
 /* Port Driver Strength Register 1 */
 #define DPDS1                           _SFR_MEM8(0x137)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DPDS1 {
         unsigned int pgdrv : 2;	/* Driver Strength Port G */
@@ -3474,7 +3474,7 @@ struct __reg_DPDS1 {
 /* Transceiver Pin Register */
 #define TRXPR                           _SFR_MEM8(0x139)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TRXPR {
         unsigned int trxrst : 1;	/* Force Transceiver Reset */
@@ -3494,7 +3494,7 @@ struct __reg_TRXPR {
 /* AES Test Control Register */
 #define AES_TEST                        _SFR_MEM8(0x13B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_AES_TEST {
         unsigned int aes_ok : 1;	/* AES BIST OK */
@@ -3516,7 +3516,7 @@ struct __reg_AES_TEST {
 /* AES Control Register */
 #define AES_CON                         _SFR_MEM8(0x13C)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_AES_CON {
         unsigned int : 2;
@@ -3547,7 +3547,7 @@ struct __reg_AES_CON {
 /* AES Status Register */
 #define AES_ST                          _SFR_MEM8(0x13D)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_AES_ST {
         unsigned int aes_ry : 1;	/* AES Operation Finished with Success */
@@ -3567,7 +3567,7 @@ struct __reg_AES_ST {
 /* AES Plain and Cipher Text Buffer Register */
 #define AES_STATE                       _SFR_MEM8(0x13E)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_AES_STATE {
         unsigned int aes_state : 8;	/* AES Plain and Cipher Text Buffer */
@@ -3591,7 +3591,7 @@ struct __reg_AES_STATE {
 /* AES Encryption and Decryption Key Buffer Register */
 #define AES_KEY                         _SFR_MEM8(0x13F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_AES_KEY {
         unsigned int aes_key : 8;	/* AES Encryption/Decryption Key Buffer */
@@ -3615,7 +3615,7 @@ struct __reg_AES_KEY {
 /* Transceiver Status Register */
 #define TRX_STATUS                      _SFR_MEM8(0x141)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TRX_STATUS {
         unsigned int trx_status : 5;	/* Transceiver Main Status */
@@ -3666,7 +3666,7 @@ struct __reg_TRX_STATUS {
 /* Transceiver State Control Register */
 #define TRX_STATE                       _SFR_MEM8(0x142)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TRX_STATE {
         unsigned int trx_cmd : 5;	/* State Control Command */
@@ -3712,7 +3712,7 @@ struct __reg_TRX_STATE {
 /* Transceiver Control Register 1 */
 #define TRX_CTRL_1                      _SFR_MEM8(0x144)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TRX_CTRL_1 {
         unsigned int : 5;
@@ -3734,7 +3734,7 @@ struct __reg_TRX_CTRL_1 {
 /* Transceiver Transmit Power Control Register */
 #define PHY_TX_PWR                      _SFR_MEM8(0x145)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PHY_TX_PWR {
         unsigned int tx_pwr : 4;	/* Transmit Power Setting */
@@ -3771,7 +3771,7 @@ struct __reg_PHY_TX_PWR {
 /* Receiver Signal Strength Indicator Register */
 #define PHY_RSSI                        _SFR_MEM8(0x146)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PHY_RSSI {
         unsigned int rssi : 5;	/* Receiver Signal Strength Indicator */
@@ -3805,7 +3805,7 @@ struct __reg_PHY_RSSI {
 /* Transceiver Energy Detection Level Register */
 #define PHY_ED_LEVEL                    _SFR_MEM8(0x147)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PHY_ED_LEVEL {
         unsigned int ed_level : 8;	/* Energy Detection Level */
@@ -3836,7 +3836,7 @@ struct __reg_PHY_ED_LEVEL {
 /* Transceiver Clear Channel Assessment (CCA) Control Register */
 #define PHY_CC_CCA                      _SFR_MEM8(0x148)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PHY_CC_CCA {
         unsigned int channel : 5;	/* RX/TX Channel Selection */
@@ -3885,7 +3885,7 @@ struct __reg_PHY_CC_CCA {
 /* Transceiver CCA Threshold Setting Register */
 #define CCA_THRES                       _SFR_MEM8(0x149)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_CCA_THRES {
         unsigned int cca_ed_thres : 4;	/* ED Threshold Level for CCA Measurement */
@@ -3931,7 +3931,7 @@ struct __reg_CCA_THRES {
 /* Transceiver Receive Control Register */
 #define RX_CTRL                         _SFR_MEM8(0x14A)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_RX_CTRL {
         unsigned int pdt_thres : 4;	/* Receiver Sensitivity Control */
@@ -3957,7 +3957,7 @@ struct __reg_RX_CTRL {
 /* Start of Frame Delimiter Value Register */
 #define SFD_VALUE                       _SFR_MEM8(0x14B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SFD_VALUE {
         unsigned int sfd_value : 8;	/* Start of Frame Delimiter Value */
@@ -3985,7 +3985,7 @@ struct __reg_SFD_VALUE {
 /* Transceiver Control Register 2 */
 #define TRX_CTRL_2                      _SFR_MEM8(0x14C)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TRX_CTRL_2 {
         unsigned int oqpsk_data_rate : 2;	/* Data Rate Selection */
@@ -4013,7 +4013,7 @@ struct __reg_TRX_CTRL_2 {
 /* Antenna Diversity Control Register */
 #define ANT_DIV                         _SFR_MEM8(0x14D)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ANT_DIV {
         unsigned int ant_ctrl : 2;	/* Static Antenna Diversity Switch Control */
@@ -4051,7 +4051,7 @@ struct __reg_ANT_DIV {
 /* Transceiver Interrupt Enable Register */
 #define IRQ_MASK                        _SFR_MEM8(0x14E)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IRQ_MASK {
         unsigned int pll_lock_en : 1;	/* PLL Lock Interrupt Enable */
@@ -4082,7 +4082,7 @@ struct __reg_IRQ_MASK {
 /* Transceiver Interrupt Status Register */
 #define IRQ_STATUS                      _SFR_MEM8(0x14F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IRQ_STATUS {
         unsigned int pll_lock : 1;	/* PLL Lock Interrupt Status */
@@ -4113,7 +4113,7 @@ struct __reg_IRQ_STATUS {
 /* Voltage Regulator Control and Status Register */
 #define VREG_CTRL                       _SFR_MEM8(0x150)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_VREG_CTRL {
         unsigned int dvreg_trim : 2;	/* Adjust DVDD Supply Voltage */
@@ -4161,7 +4161,7 @@ struct __reg_VREG_CTRL {
 /* Battery Monitor Control and Status Register */
 #define BATMON                          _SFR_MEM8(0x151)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_BATMON {
         unsigned int batmon_vth : 4;	/* Battery Monitor Threshold Voltage */
@@ -4196,7 +4196,7 @@ struct __reg_BATMON {
 /* Crystal Oscillator Control Register */
 #define XOSC_CTRL                       _SFR_MEM8(0x152)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_XOSC_CTRL {
         unsigned int xtal_trim : 4;	/* Crystal Oscillator Load Capacitance Trimming */
@@ -4226,7 +4226,7 @@ struct __reg_XOSC_CTRL {
 /* Transceiver Receiver Sensitivity Control Register */
 #define RX_SYN                          _SFR_MEM8(0x155)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_RX_SYN {
         unsigned int rx_pdt_level : 4;	/* Reduce Receiver Sensitivity */
@@ -4254,7 +4254,7 @@ struct __reg_RX_SYN {
 /* Transceiver Acknowledgment Frame Control Register 1 */
 #define XAH_CTRL_1                      _SFR_MEM8(0x157)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_XAH_CTRL_1 {
         unsigned int : 1;
@@ -4285,7 +4285,7 @@ struct __reg_XAH_CTRL_1 {
 /* Transceiver Filter Tuning Control Register */
 #define FTN_CTRL                        _SFR_MEM8(0x158)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_FTN_CTRL {
         unsigned int : 7;
@@ -4303,7 +4303,7 @@ struct __reg_FTN_CTRL {
 /* Transceiver Center Frequency Calibration Control Register */
 #define PLL_CF                          _SFR_MEM8(0x15A)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PLL_CF {
         unsigned int : 7;
@@ -4321,7 +4321,7 @@ struct __reg_PLL_CF {
 /* Transceiver Delay Cell Calibration Control Register */
 #define PLL_DCU                         _SFR_MEM8(0x15B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PLL_DCU {
         unsigned int : 7;
@@ -4339,7 +4339,7 @@ struct __reg_PLL_DCU {
 /* Device Identification Register (Part Number) */
 #define PART_NUM                        _SFR_MEM8(0x15C)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PART_NUM {
         unsigned int part_num : 8;	/* Part Number */
@@ -4371,7 +4371,7 @@ struct __reg_PART_NUM {
 /* Device Identification Register (Version Number) */
 #define VERSION_NUM                     _SFR_MEM8(0x15D)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_VERSION_NUM {
         unsigned int version_num : 8;	/* Version Number */
@@ -4400,7 +4400,7 @@ struct __reg_VERSION_NUM {
 /* Device Identification Register (Manufacture ID Low Byte) */
 #define MAN_ID_0                        _SFR_MEM8(0x15E)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_MAN_ID_0 {
         unsigned int man_id_0 : 8;	/* Manufacturer ID (Low Byte) */
@@ -4428,7 +4428,7 @@ struct __reg_MAN_ID_0 {
 /* Device Identification Register (Manufacture ID High Byte) */
 #define MAN_ID_1                        _SFR_MEM8(0x15F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_MAN_ID_1 {
         unsigned int man_id_1 : 8;	/* Manufacturer ID (High Byte) */
@@ -4456,7 +4456,7 @@ struct __reg_MAN_ID_1 {
 /* Transceiver MAC Short Address Register (Low Byte) */
 #define SHORT_ADDR_0                    _SFR_MEM8(0x160)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SHORT_ADDR_0 {
         unsigned int short_addr_0 : 8;	/* MAC Short Address */
@@ -4480,7 +4480,7 @@ struct __reg_SHORT_ADDR_0 {
 /* Transceiver MAC Short Address Register (High Byte) */
 #define SHORT_ADDR_1                    _SFR_MEM8(0x161)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SHORT_ADDR_1 {
         unsigned int short_addr_1 : 8;	/* MAC Short Address */
@@ -4504,7 +4504,7 @@ struct __reg_SHORT_ADDR_1 {
 /* Transceiver Personal Area Network ID Register (Low Byte) */
 #define PAN_ID_0                        _SFR_MEM8(0x162)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PAN_ID_0 {
         unsigned int pan_id_0 : 8;	/* MAC Personal Area Network ID */
@@ -4528,7 +4528,7 @@ struct __reg_PAN_ID_0 {
 /* Transceiver Personal Area Network ID Register (High Byte) */
 #define PAN_ID_1                        _SFR_MEM8(0x163)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_PAN_ID_1 {
         unsigned int pan_id_1 : 8;	/* MAC Personal Area Network ID */
@@ -4552,7 +4552,7 @@ struct __reg_PAN_ID_1 {
 /* Transceiver MAC IEEE Address Register 0 */
 #define IEEE_ADDR_0                     _SFR_MEM8(0x164)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_0 {
         unsigned int ieee_addr_0 : 8;	/* MAC IEEE Address */
@@ -4576,7 +4576,7 @@ struct __reg_IEEE_ADDR_0 {
 /* Transceiver MAC IEEE Address Register 1 */
 #define IEEE_ADDR_1                     _SFR_MEM8(0x165)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_1 {
         unsigned int ieee_addr_1 : 8;	/* MAC IEEE Address */
@@ -4600,7 +4600,7 @@ struct __reg_IEEE_ADDR_1 {
 /* Transceiver MAC IEEE Address Register 2 */
 #define IEEE_ADDR_2                     _SFR_MEM8(0x166)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_2 {
         unsigned int ieee_addr_2 : 8;	/* MAC IEEE Address */
@@ -4624,7 +4624,7 @@ struct __reg_IEEE_ADDR_2 {
 /* Transceiver MAC IEEE Address Register 3 */
 #define IEEE_ADDR_3                     _SFR_MEM8(0x167)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_3 {
         unsigned int ieee_addr_3 : 8;	/* MAC IEEE Address */
@@ -4648,7 +4648,7 @@ struct __reg_IEEE_ADDR_3 {
 /* Transceiver MAC IEEE Address Register 4 */
 #define IEEE_ADDR_4                     _SFR_MEM8(0x168)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_4 {
         unsigned int ieee_addr_4 : 8;	/* MAC IEEE Address */
@@ -4672,7 +4672,7 @@ struct __reg_IEEE_ADDR_4 {
 /* Transceiver MAC IEEE Address Register 5 */
 #define IEEE_ADDR_5                     _SFR_MEM8(0x169)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_5 {
         unsigned int ieee_addr_5 : 8;	/* MAC IEEE Address */
@@ -4696,7 +4696,7 @@ struct __reg_IEEE_ADDR_5 {
 /* Transceiver MAC IEEE Address Register 6 */
 #define IEEE_ADDR_6                     _SFR_MEM8(0x16A)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_6 {
         unsigned int ieee_addr_6 : 8;	/* MAC IEEE Address */
@@ -4720,7 +4720,7 @@ struct __reg_IEEE_ADDR_6 {
 /* Transceiver MAC IEEE Address Register 7 */
 #define IEEE_ADDR_7                     _SFR_MEM8(0x16B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_IEEE_ADDR_7 {
         unsigned int ieee_addr_7 : 8;	/* MAC IEEE Address */
@@ -4744,7 +4744,7 @@ struct __reg_IEEE_ADDR_7 {
 /* Transceiver Extended Operating Mode Control Register */
 #define XAH_CTRL_0                      _SFR_MEM8(0x16C)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_XAH_CTRL_0 {
         unsigned int slotted_operation : 1;	/* Set Slotted Acknowledgment */
@@ -4775,7 +4775,7 @@ struct __reg_XAH_CTRL_0 {
 /* Transceiver CSMA-CA Random Number Generator Seed Register */
 #define CSMA_SEED_0                     _SFR_MEM8(0x16D)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_CSMA_SEED_0 {
         unsigned int csma_seed_0 : 8;	/* Seed Value for CSMA Random Number Generator */
@@ -4799,7 +4799,7 @@ struct __reg_CSMA_SEED_0 {
 /* Transceiver Acknowledgment Frame Control Register 2 */
 #define CSMA_SEED_1                     _SFR_MEM8(0x16E)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_CSMA_SEED_1 {
         unsigned int csma_seed_1 : 3;	/* Seed Value for CSMA Random Number Generator */
@@ -4827,7 +4827,7 @@ struct __reg_CSMA_SEED_1 {
 /* Transceiver CSMA-CA Back-off Exponent Control Register */
 #define CSMA_BE                         _SFR_MEM8(0x16F)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_CSMA_BE {
         unsigned int min_be : 4;	/* Minimum Back-off Exponent */
@@ -4852,7 +4852,7 @@ struct __reg_CSMA_BE {
 /* Transceiver Received Frame Length Register */
 #define TST_RX_LENGTH                   _SFR_MEM8(0x17B)
 
-#if !(defined(__ASSEMBLER__) || !defined(__NOSTRUCT__))
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_TST_RX_LENGTH {
         unsigned int rx_length : 8;	/* Received Frame Length */
@@ -4883,220 +4883,291 @@ struct __reg_TST_RX_LENGTH {
 /* Interrupt vectors */
 /* Vector 0 is the reset vector */
 
-#define _VECTORS_SIZE                  292
+#define _VECTORS_SIZE                  288
 
 /* External Interrupt Request 0 */
 #define INT0_vect                       _VECTOR(1)
+#define INT0_vect_num                   1
 
 /* External Interrupt Request 1 */
 #define INT1_vect                       _VECTOR(2)
+#define INT1_vect_num                   2
 
 /* External Interrupt Request 2 */
 #define INT2_vect                       _VECTOR(3)
+#define INT2_vect_num                   3
 
 /* External Interrupt Request 3 */
 #define INT3_vect                       _VECTOR(4)
+#define INT3_vect_num                   4
 
 /* External Interrupt Request 4 */
 #define INT4_vect                       _VECTOR(5)
+#define INT4_vect_num                   5
 
 /* External Interrupt Request 5 */
 #define INT5_vect                       _VECTOR(6)
+#define INT5_vect_num                   6
 
 /* External Interrupt Request 6 */
 #define INT6_vect                       _VECTOR(7)
+#define INT6_vect_num                   7
 
 /* External Interrupt Request 7 */
 #define INT7_vect                       _VECTOR(8)
+#define INT7_vect_num                   8
 
 /* Pin Change Interrupt Request 0 */
 #define PCINT0_vect                     _VECTOR(9)
+#define PCINT0_vect_num                 9
 
 /* Pin Change Interrupt Request 1 */
 #define PCINT1_vect                     _VECTOR(10)
+#define PCINT1_vect_num                 10
 
 /* Pin Change Interrupt Request 2 */
 #define PCINT2_vect                     _VECTOR(11)
+#define PCINT2_vect_num                 11
 
 /* Watchdog Time-out Interrupt */
 #define WDT_vect                        _VECTOR(12)
+#define WDT_vect_num                    12
 
 /* Timer/Counter2 Compare Match A */
 #define TIMER2_COMPA_vect               _VECTOR(13)
+#define TIMER2_COMPA_vect_num           13
 
 /* Timer/Counter2 Compare Match B */
 #define TIMER2_COMPB_vect               _VECTOR(14)
+#define TIMER2_COMPB_vect_num           14
 
 /* Timer/Counter2 Overflow */
 #define TIMER2_OVF_vect                 _VECTOR(15)
+#define TIMER2_OVF_vect_num             15
 
 /* Timer/Counter1 Capture Event */
 #define TIMER1_CAPT_vect                _VECTOR(16)
+#define TIMER1_CAPT_vect_num            16
 
 /* Timer/Counter1 Compare Match A */
 #define TIMER1_COMPA_vect               _VECTOR(17)
+#define TIMER1_COMPA_vect_num           17
 
 /* Timer/Counter1 Compare Match B */
 #define TIMER1_COMPB_vect               _VECTOR(18)
+#define TIMER1_COMPB_vect_num           18
 
 /* Timer/Counter1 Compare Match C */
 #define TIMER1_COMPC_vect               _VECTOR(19)
+#define TIMER1_COMPC_vect_num           19
 
 /* Timer/Counter1 Overflow */
 #define TIMER1_OVF_vect                 _VECTOR(20)
+#define TIMER1_OVF_vect_num             20
 
 /* Timer/Counter0 Compare Match A */
 #define TIMER0_COMPA_vect               _VECTOR(21)
+#define TIMER0_COMPA_vect_num           21
 
 /* Timer/Counter0 Compare Match B */
 #define TIMER0_COMPB_vect               _VECTOR(22)
+#define TIMER0_COMPB_vect_num           22
 
 /* Timer/Counter0 Overflow */
 #define TIMER0_OVF_vect                 _VECTOR(23)
+#define TIMER0_OVF_vect_num             23
 
 /* SPI Serial Transfer Complete */
 #define SPI_STC_vect                    _VECTOR(24)
+#define SPI_STC_vect_num                24
 
 /* USART0, Rx Complete */
 #define USART0_RX_vect                  _VECTOR(25)
+#define USART0_RX_vect_num              25
 
 /* USART0 Data register Empty */
 #define USART0_UDRE_vect                _VECTOR(26)
+#define USART0_UDRE_vect_num            26
 
 /* USART0, Tx Complete */
 #define USART0_TX_vect                  _VECTOR(27)
+#define USART0_TX_vect_num              27
 
 /* Analog Comparator */
 #define ANALOG_COMP_vect                _VECTOR(28)
+#define ANALOG_COMP_vect_num            28
 
 /* ADC Conversion Complete */
 #define ADC_vect                        _VECTOR(29)
+#define ADC_vect_num                    29
 
 /* EEPROM Ready */
 #define EE_READY_vect                   _VECTOR(30)
+#define EE_READY_vect_num               30
 
 /* Timer/Counter3 Capture Event */
 #define TIMER3_CAPT_vect                _VECTOR(31)
+#define TIMER3_CAPT_vect_num            31
 
 /* Timer/Counter3 Compare Match A */
 #define TIMER3_COMPA_vect               _VECTOR(32)
+#define TIMER3_COMPA_vect_num           32
 
 /* Timer/Counter3 Compare Match B */
 #define TIMER3_COMPB_vect               _VECTOR(33)
+#define TIMER3_COMPB_vect_num           33
 
 /* Timer/Counter3 Compare Match C */
 #define TIMER3_COMPC_vect               _VECTOR(34)
+#define TIMER3_COMPC_vect_num           34
 
 /* Timer/Counter3 Overflow */
 #define TIMER3_OVF_vect                 _VECTOR(35)
+#define TIMER3_OVF_vect_num             35
 
 /* USART1, Rx Complete */
 #define USART1_RX_vect                  _VECTOR(36)
+#define USART1_RX_vect_num              36
 
 /* USART1 Data register Empty */
 #define USART1_UDRE_vect                _VECTOR(37)
+#define USART1_UDRE_vect_num            37
 
 /* USART1, Tx Complete */
 #define USART1_TX_vect                  _VECTOR(38)
+#define USART1_TX_vect_num              38
 
 /* 2-wire Serial Interface */
 #define TWI_vect                        _VECTOR(39)
+#define TWI_vect_num                    39
 
 /* Store Program Memory Read */
 #define SPM_READY_vect                  _VECTOR(40)
+#define SPM_READY_vect_num              40
 
 /* Timer/Counter4 Capture Event */
 #define TIMER4_CAPT_vect                _VECTOR(41)
+#define TIMER4_CAPT_vect_num            41
 
 /* Timer/Counter4 Compare Match A */
 #define TIMER4_COMPA_vect               _VECTOR(42)
+#define TIMER4_COMPA_vect_num           42
 
 /* Timer/Counter4 Compare Match B */
 #define TIMER4_COMPB_vect               _VECTOR(43)
+#define TIMER4_COMPB_vect_num           43
 
 /* Timer/Counter4 Compare Match C */
 #define TIMER4_COMPC_vect               _VECTOR(44)
+#define TIMER4_COMPC_vect_num           44
 
 /* Timer/Counter4 Overflow */
 #define TIMER4_OVF_vect                 _VECTOR(45)
+#define TIMER4_OVF_vect_num             45
 
 /* Timer/Counter5 Capture Event */
 #define TIMER5_CAPT_vect                _VECTOR(46)
+#define TIMER5_CAPT_vect_num            46
 
 /* Timer/Counter5 Compare Match A */
 #define TIMER5_COMPA_vect               _VECTOR(47)
+#define TIMER5_COMPA_vect_num           47
 
 /* Timer/Counter5 Compare Match B */
 #define TIMER5_COMPB_vect               _VECTOR(48)
+#define TIMER5_COMPB_vect_num           48
 
 /* Timer/Counter5 Compare Match C */
 #define TIMER5_COMPC_vect               _VECTOR(49)
+#define TIMER5_COMPC_vect_num           49
 
 /* Timer/Counter5 Overflow */
 #define TIMER5_OVF_vect                 _VECTOR(50)
+#define TIMER5_OVF_vect_num             50
 
 /* USART2, Rx Complete */
 #define USART2_RX_vect                  _VECTOR(51)
+#define USART2_RX_vect_num              51
 
 /* USART2 Data register Empty */
 #define USART2_UDRE_vect                _VECTOR(52)
+#define USART2_UDRE_vect_num            52
 
 /* USART2, Tx Complete */
 #define USART2_TX_vect                  _VECTOR(53)
+#define USART2_TX_vect_num              53
 
 /* USART3, Rx Complete */
 #define USART3_RX_vect                  _VECTOR(54)
+#define USART3_RX_vect_num              54
 
 /* USART3 Data register Empty */
 #define USART3_UDRE_vect                _VECTOR(55)
+#define USART3_UDRE_vect_num            55
 
 /* USART3, Tx Complete */
 #define USART3_TX_vect                  _VECTOR(56)
+#define USART3_TX_vect_num              56
 
 /* TRX24 - PLL lock interrupt */
 #define TRX24_PLL_LOCK_vect             _VECTOR(57)
+#define TRX24_PLL_LOCK_vect_num         57
 
 /* TRX24 - PLL unlock interrupt */
 #define TRX24_PLL_UNLOCK_vect           _VECTOR(58)
+#define TRX24_PLL_UNLOCK_vect_num       58
 
 /* TRX24 - Receive start interrupt */
 #define TRX24_RX_START_vect             _VECTOR(59)
+#define TRX24_RX_START_vect_num         59
 
 /* TRX24 - RX_END interrupt */
 #define TRX24_RX_END_vect               _VECTOR(60)
+#define TRX24_RX_END_vect_num           60
 
 /* TRX24 - CCA/ED ready interrupt */
 #define TRX24_CCA_ED_READY_vect         _VECTOR(61)
+#define TRX24_CCA_ED_READY_vect_num     61
 
 /* TRX24 - XAH - AMI */
 #define TRX24_XAH_AMI_vect              _VECTOR(62)
+#define TRX24_XAH_AMI_vect_num          62
 
 /* TRX24 - TX_END interrupt */
 #define TRX24_TX_END_vect               _VECTOR(63)
+#define TRX24_TX_END_vect_num           63
 
 /* TRX24 AWAKE - tranceiver is reaching state TRX_OFF */
 #define TRX24_AWAKE_vect                _VECTOR(64)
+#define TRX24_AWAKE_vect_num            64
 
 /* Symbol counter - compare match 1 interrupt */
 #define SCNT_CMP1_vect                  _VECTOR(65)
+#define SCNT_CMP1_vect_num              65
 
 /* Symbol counter - compare match 2 interrupt */
 #define SCNT_CMP2_vect                  _VECTOR(66)
+#define SCNT_CMP2_vect_num              66
 
 /* Symbol counter - compare match 3 interrupt */
 #define SCNT_CMP3_vect                  _VECTOR(67)
+#define SCNT_CMP3_vect_num              67
 
 /* Symbol counter - overflow interrupt */
 #define SCNT_OVFL_vect                  _VECTOR(68)
+#define SCNT_OVFL_vect_num              68
 
 /* Symbol counter - backoff interrupt */
 #define SCNT_BACKOFF_vect               _VECTOR(69)
+#define SCNT_BACKOFF_vect_num           69
 
 /* TRX AES engine ready interrupt */
 #define TRX24_AES_RDY_vect              _VECTOR(70)
+#define TRX24_AES_RDY_vect_num          70
 
 /* Battery monitor indicates supply voltage below threshold */
 #define BAT_LOW_vect                    _VECTOR(71)
+#define BAT_LOW_vect_num                71
 
 
 /* memory parameters */
