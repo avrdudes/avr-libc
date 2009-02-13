@@ -341,7 +341,10 @@ find out which macros are applicable to your device.
 @} */
 
 
-#if defined(__AVR_ATxmega32A4__) \
+#if defined(__AVR_ATxmega16A4__) \
+|| defined(__AVR_ATxmega16D4__) \
+|| defined(__AVR_ATxmega32A4__) \
+|| defined(__AVR_ATxmega32D4__) \
 || defined(__AVR_ATxmega64A1__) \
 || defined(__AVR_ATxmega64A3__) \
 || defined(__AVR_ATxmega128A1__) \

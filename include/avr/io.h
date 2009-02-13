@@ -316,8 +316,14 @@
 #  include <avr/iotn167.h>
 #elif defined (__AVR_AT90SCR100__)
 #  include <avr/io90scr100.h>
+#elif defined (__AVR_ATxmega16A4__)
+#  include <avr/iox16a4.h>
+#elif defined (__AVR_ATxmega16D4__)
+#  include <avr/iox16d4.h>
 #elif defined (__AVR_ATxmega32A4__)
 #  include <avr/iox32a4.h>
+#elif defined (__AVR_ATxmega32D4__)
+#  include <avr/iox32d4.h>
 #elif defined (__AVR_ATxmega64A1__)
 #  include <avr/iox64a1.h>
 #elif defined (__AVR_ATxmega64A3__)

@@ -1,3 +1,19 @@
+2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega32D4, ATxmega16A4, ATxmega16D4.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/Makefile.am: Same.
+	* include/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* NEWS: Same.
+	* devtools/gen-avr-lib-tree.sh (CFLAGS_SPACE_NO_CALL): Add. Optimize for
+	space but without -mcall-prologues flag.
+	(AVR6_DEV_INFO) Use CFLAGS_SPACE_NO_CALL.
+	(AVRXMEGA6_DEV_INFO) Use CFLAGS_SPACE_NO_CALL on devices with 256K+ flash.
+
 2009-02-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iom128rfa1.h: Fix some buglets noticed
