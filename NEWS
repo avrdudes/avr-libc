@@ -136,6 +136,9 @@
   + ATA6289
   + AT90PWM81
   + ATmega128RFA1
+  + ATxmega32D4
+  + ATxmega16A4
+  + ATxmega16D4
 
 * Optimized functions:
 
