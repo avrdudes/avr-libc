@@ -1,5 +1,10 @@
 2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/sleep.h: Add support for ATxmega32D4, ATxmega16A4,
+	ATxmega16D4.
+
+2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* configure.ac: Add support for ATxmega32D4, ATxmega16A4, ATxmega16D4.
 	* devtools/gen-avr-lib-tree.sh: Same.
 	* include/Makefile.am: Same.
