@@ -673,7 +673,8 @@
 #define TWAM5 6
 #define TWAM6 7
 
-#define TWIHSR _SFR_MEM8(0xBE)
+#define TWIHSR _SFR_MEM8(0xBE)  /* Deprecated */
+#define TWHSR _SFR_MEM8(0xBE)
 #define TWIHS 0
 
 
