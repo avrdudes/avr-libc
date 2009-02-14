@@ -76,6 +76,7 @@
   [#24890] Small error in libm source fp_rempio2.S
   [#25048] eeprom.h will not compile as c++ code.
   [#25131] Incorrect definition of default lfuse bits for ATTiny2313
+  [#25535] Nonexistent bit definitions in iotn88.h/iotn48.h AREFD REFS1 RWWSB SM2
 
 * Other changes:
 
