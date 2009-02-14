@@ -492,7 +492,6 @@
 #define MUX3 3
 #define ADLAR 5
 #define REFS0 6
-#define REFS1 7
 
 #define DIDR0 _SFR_MEM8(0x7E)
 #define ADC0D 0
@@ -507,7 +506,6 @@
 #define DIDR1 _SFR_MEM8(0x7F)
 #define AIN0D 0
 #define AIN1D 1
-#define AREFD 2
 
 #define TCCR1A _SFR_MEM8(0x80)
 #define WGM10 0
