@@ -1,5 +1,11 @@
 2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix bug #25261.
+	* include/avr/iotn48.h: Add register TWHSR. Deprecate register TWIHSR.
+	* NEWS: Add item to fixed bug list.
+
+2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix bug #25535.
 	* include/avr/iotn88.h: Remove AREFD, REFS1 bit definitions.
 	* include/avr/iotn48.h: Same.
