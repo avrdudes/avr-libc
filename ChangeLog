@@ -1,3 +1,9 @@
+2009-02-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix repository breakage. Thanks to Anatoly.
+	* configure.ac: Test for xmega2 architecture. Fix architecture type.
+	* devtools/gen-avr-lib-tree.sh: Add missing semicolons.
+
 2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix bug #25261.
