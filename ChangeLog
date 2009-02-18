@@ -1,3 +1,8 @@
+2009-02-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/power.h: Add ATmega128RFA1.
+	* include/avr/sleep.h: (Ditto.)
+
 2009-02-16  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix repository breakage. Thanks to Anatoly.
