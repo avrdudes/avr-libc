@@ -308,6 +308,7 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_ATmega1280__) \
 || defined(__AVR_ATmega1281__) \
 || defined(__AVR_ATmega1284P__) \
+|| defined(__AVR_ATmega128RFA1__) \
 || defined(__AVR_ATmega2560__) \
 || defined(__AVR_ATmega2561__) \
 || defined(__AVR_ATmega640__) \
