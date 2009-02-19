@@ -172,7 +172,7 @@ CLK - Clock System
 /* Power Reduction */
 typedef struct PR_struct
 {
-    register8_t PR;  /* General Power Reduction */
+    register8_t PRGEN;  /* General Power Reduction */
     register8_t PRPA;  /* Power Reduction Port A */
     register8_t PRPB;  /* Power Reduction Port B */
     register8_t PRPC;  /* Power Reduction Port C */
@@ -2693,7 +2693,7 @@ IO Module Instances. Mapped to memory.
 #define DFLLRC2M_OSCCNT2  _SFR_MEM8(0x006E)
 
 /* PR - Power Reduction */
-#define PR_PR  _SFR_MEM8(0x0070)
+#define PR_PRGEN  _SFR_MEM8(0x0070)
 #define PR_PRPA  _SFR_MEM8(0x0071)
 #define PR_PRPB  _SFR_MEM8(0x0072)
 #define PR_PRPC  _SFR_MEM8(0x0073)
@@ -3536,7 +3536,7 @@ IO Module Instances. Mapped to memory.
 #define CLK_RTCEN_bp  0  /* RTC Clock Source Enable bit position. */
 
 
-/* PR.PR  bit masks and bit positions */
+/* PR.PRGEN  bit masks and bit positions */
 #define PR_EBI_bm  0x08  /* External Bus Interface bit mask. */
 #define PR_EBI_bp  3  /* External Bus Interface bit position. */
 
