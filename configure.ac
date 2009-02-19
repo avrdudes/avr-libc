@@ -654,6 +654,9 @@ AM_CONDITIONAL(HAS_at90pwm216, test "x$HAS_at90pwm216" = "xyes")
 CHECK_AVR_DEVICE(atmega16m1)
 AM_CONDITIONAL(HAS_atmega16m1, test "x$HAS_atmega16m1" = "xyes")
 
+CHECK_AVR_DEVICE(atmega16u4)
+AM_CONDITIONAL(HAS_atmega16u4, test "x$HAS_atmega16u4" = "xyes")
+
 CHECK_AVR_DEVICE(atmega32c1)
 AM_CONDITIONAL(HAS_atmega32c1, test "x$HAS_atmega32c1" = "xyes")
 
@@ -947,6 +950,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/at90pwm216/Makefile
 	avr/lib/avr5/at90pwm316/Makefile
 	avr/lib/avr5/atmega16m1/Makefile
+	avr/lib/avr5/atmega16u4/Makefile
 	avr/lib/avr5/atmega32c1/Makefile
 	avr/lib/avr5/atmega32m1/Makefile
 	avr/lib/avr5/atmega32u4/Makefile

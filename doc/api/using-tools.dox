@@ -285,6 +285,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega169p</td><td>__AVR_ATmega169P__</td></tr>
   <tr><td>avr5</td><td>atmega16hva</td><td>__AVR_ATmega16HVA__</td></tr>
   <tr><td>avr5</td><td>atmega16m1</td><td>__AVR_ATmega16M1__</td></tr>
+  <tr><td>avr5</td><td>atmega16u4</td><td>__AVR_ATmega16U4__</td></tr>
   <tr><td>avr5</td><td>atmega32</td><td>__AVR_ATmega32__</td></tr>
   <tr><td>avr5</td><td>atmega323</td><td>__AVR_ATmega323__</td></tr>
   <tr><td>avr5</td><td>atmega324p</td><td>__AVR_ATmega324P__</td></tr>

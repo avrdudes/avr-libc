@@ -145,6 +145,7 @@
   + ATxmega32D4
   + ATxmega16A4
   + ATxmega16D4
+  + ATmega16U4
 
 * Optimized functions:
 

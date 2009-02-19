@@ -1,5 +1,19 @@
 2009-02-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* configure.ac: Add support for ATmega16U4.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/iom16u4.h: New file.
+	* NEWS: Add item.
+
+2009-02-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/sleep.h: Add sleeping BOD API.
 	* NEWS: Add news item.
 
