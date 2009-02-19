@@ -1,5 +1,10 @@
 2009-02-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/sleep.h: Add sleeping BOD API.
+	* NEWS: Add news item.
+
+2009-02-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix bug #25645.
 	* include/avr/iox256a3b.h: Change PR register to PRGEN because this
 	conflicts with a #defined symbol.

@@ -119,6 +119,9 @@
     This also works around a bug in doxygen 1.5.7 where it appears to
     be no longer possible to set GENERATE_HTML = NO.
 
+  - A sleeping BOD API was added to <avr/sleep.h>. This allows you to disable
+    the Brown Out Detector (BOD) before going to sleep, thereby reducing
+    power even further.
 
 * New devices supported:
 
