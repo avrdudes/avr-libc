@@ -66,6 +66,8 @@
 -# \ref faq_softreset
 -# \ref faq_math
 -# \ref faq_reentrant
+-# \ref faq_eeprom_corruption
+-# \ref faq_wrong_baud_rate
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1581,6 +1583,95 @@ these entries are included for completeness.
 
 An effort will be made to keep this table up to date if any
 new issues are discovered or introduced.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_eeprom_corruption  Why are some addresses of the EEPROM corrupted (usually address zero)?
+
+The two most common reason for EEPROM corruption is either writing to
+the EEPROM beyond the datasheet endurance specification, or resetting
+the AVR while an EEPROM write is in progress.
+
+EEPROM writes can take up to tens of milliseconds to complete.  So
+that the CPU is not tied up for that long of time, an internal
+state-machine handles EEPROM write requests.  The EEPROM state-machine
+expects to have all of the EEPROM registers setup, then an EEPROM write
+request to start the process.  Once the EEPROM state-machine has
+started, changing EEPROM related registers during an EEPROM write is
+guaranteed to corrupt the EEPROM write process.  The datasheet always
+shows the proper way to tell when a write is in progress, so that the
+registers are not changed by the user's program.  The EEPROM
+state-machine will \b always complete the write in progress unless
+power is removed from the device.
+
+As with all EEPROM technology, if power fails during an EEPROM write
+the state of the byte being written is undefined.
+
+In older generation AVRs the EEPROM Address Register (EEAR) is
+initialized to zero on reset, be it from Brown Out Detect, Watchdog or
+the Reset Pin.  If an EEPROM write has just started at the time of the
+reset, the write will be completed, but now at address zero instead of
+the requested address.  If the reset occurs later in the write process
+both the requested address and address zero may be corrupted.
+
+To distinguish which AVRs may exhibit the corrupt of address zero
+while a write is in process during a reset, look at the "initial
+value" section for the EEPROM Address Register.  If EEAR shows the
+initial value as 0x00 or 0x0000, then address zero and possibly the
+one being written will be corrupted.  Newer parts show the initial
+value as "undefined", these will not corrupt address zero during a
+reset (unless it was address zero that was being written).
+
+EEPROMs have limited write endurance.  The datasheet specifies the
+number of EEPROM writes that are guaranteed to function across the
+full temperature specification of the AVR, for a given byte.  A read
+should always be performed before a write, to see if the value in the
+EEPROM actually needs to be written, so not to cause unnecessary EEPROM
+wear.
+
+AVRs use a paging mechanism for doing EEPROM writes.  This is almost
+entirely transparent to the user with one exception: When a byte is
+written to the EEPROM, the entire EEPROM page is also transparently
+erased and (re)written, which will cause wear to bytes that the
+programmer did not explicitly write.  If it is desired to extend
+EEPROM write lifetimes, in an attempt not to exceed the datasheet
+EEPROM write endurance specification for a given byte, then writes
+must be in multiples of the EEPROM page size, and not sequential
+bytes.  The EEPROM write page size varies with the device.  The EEPROM
+page size is found in the datasheet section on Memory Programming,
+generally before the Electrical Specifications near the end of the
+datasheet.
+
+The failure mechanism for an overwritten byte/page is generally one of
+"stuck" bits, i. e. a bit will stay at a one or zero state regardless of
+the byte written.  Also a write followed by a read may return the
+correct data, but the data will change with the passage of time, due
+the EEPROM's inability to hold a charge from the excessive write wear.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_wrong_baud_rate  Why is my baud rate wrong?
+
+Some AVR datasheets give the following formula for calculating baud rates:
+
+\code
+(F_CPU/(UART_BAUD_RATE*16L)-1)
+\endcode
+
+Unfortunately that formula does not work with all combinations of
+clock speeds and baud rates due to integer truncation during the
+division operator.
+
+When doing integer division it is usually better to round to the nearest
+integer, rather than to the lowest.  To do this add 0.5 (i. e. half the
+value of the denominator) to the numerator before the division, resulting
+in the formula:
+
+\code
+((F_CPU + UART_BAUD_RATE * 8L) / (UART_BAUD_RATE * 16L) - 1)
+\endcode
+
+This is also the way it is implemented in \ref util_setbaud.
 
 <small>Back to \ref faq_index.</small>
 

@@ -154,6 +154,7 @@
   [#6500] Reentrant code faq
   [#6517] Pgmspace with float support
   [#6649] sqrt.S in libm changes
+  [#6720] FAQ update. Add EEPROM section, baud rate section. Correct spelling.
   
 * New functions:
 

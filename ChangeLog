@@ -1,3 +1,11 @@
+2009-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Contributed by Bob Paddock:
+	(part of) patch #6720: FAQ update. Add EEPROM section, baud rate section.
+	Correct spelling.
+	* doc/api/faq.dox (faq_eeprom_corruption, faq_wrong_baud_rate): new
+	entries.
+
 2009-02-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/power.h: Add ATmega128RFA1.
