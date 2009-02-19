@@ -189,7 +189,7 @@ For more information on using sections,
 see \ref mem_sections.
 There is also an example for \ref c_sections.
 Note that in C code, any such function would
-preferrably be placed into section \c .init3 as the code in \c .init2
+preferably be placed into section \c .init3 as the code in \c .init2
 ensures the internal register <tt>__zero_reg__</tt> is already cleared.
 
 <small>Back to \ref faq_index.
@@ -424,7 +424,7 @@ directly, the compiler needs to work around it by combining a skip
 instruction together with a relative jump (\c rjmp) instruction, which
 will need one additional word of ROM.
 
-Another side effect of optimzation is that variable usage is
+Another side effect of optimization is that variable usage is
 restricted to the area of code where it is actually used.  So if a
 variable was placed in a register at the beginning of some function,
 this same register can be re-used later on if the compiler notices
@@ -618,7 +618,7 @@ The \c port parameter must be volatile to avoid a compiler warning.
 \note Because of the nature of the \c IN and \c OUT assembly instructions,
 they can not be used inside the function when passing the port in this way.
 Readers interested in the details should consult the <em>Instruction Set</em>
-data sheet.
+datasheet.
 
 Finally we come to the macro version of the operation. In this contrived
 example, the macro is the most efficient method with respect to both execution
@@ -661,7 +661,7 @@ ports can be forced that way.
 is 64 bits, \c float and \c double are 32 bits (this is the only
 supported floating point format), pointers are 16 bits (function
 pointers are word addresses, to allow addressing up to 128K
-program memory space). There is a \c -mint8 option (see \ref using_avr_gcc) to 
+program memory space). There is a \c -mint8 option (see \ref using_avr_gcc) to
 make \c int 8 bits, but that is not supported by avr-libc and violates C
 standards (\c int \e must be at least 16 bits).  It may be removed in
 a future release.
@@ -819,7 +819,7 @@ Then in main we see this:
 This code reads the pointer to the desired string from the ROM table
 \c array into a register pair.
 
-The value of \c i (in r22:r23) is doubled to accomodate for the word
+The value of \c i (in r22:r23) is doubled to accommodate for the word
 offset required to access array[], then the address of array (0x26) is
 added, by subtracting the negated address (0xffda).  The address of
 variable \c p is computed by adding its offset within the stack frame
@@ -898,7 +898,7 @@ working properly at all.
 There's a common misconception that larger numbers behind the \c -O
 option might automatically cause "better" optimization.  First,
 there's no universal definition for "better", with optimization often
-being a speed vs. code size tradeoff.  See the
+being a speed vs. code size trade off.  See the
 \ref gcc_optO "detailed discussion" for which option affects which
 part of the code generation.
 
@@ -1113,7 +1113,7 @@ RAM that is not allocated by a variable. (avr-gcc
 internally adds 0x800000 to all data/bss variable
 addresses, so please ignore this offset.) Then, the
 run-time initialization code initializes the stack
-pointer (by default) to point to the last avaialable
+pointer (by default) to point to the last available
 address in (internal) SRAM. Thus, the region between
 \c _end and the end of SRAM is what is available for stack.
 (If your application uses malloc(), which e. g. also
@@ -1149,7 +1149,7 @@ http://lightner.net/avr/ATtinyAvrGcc.html
 
 <small>Back to \ref faq_index.</small>
 
-\section faq_clockskew What is this "clock skew detected" messsage?
+\section faq_clockskew What is this "clock skew detected" message?
 
 It's a known problem of the MS-DOS FAT file system. Since the FAT file
 system has only a granularity of 2 seconds for maintaining a file's
@@ -1288,7 +1288,7 @@ time required to guarantee the integrity of this operation.
 
 From a comment in the source code:
 
-Which one of the five linker script files is actually used depends on command 
+Which one of the five linker script files is actually used depends on command
 line options given to ld.
 
 A .x script file is the default script
@@ -1345,12 +1345,12 @@ $(OBJDIR)/%.o : %.txt
 	--redefine-sym _binary_$*_tmp_start=$* \
 	--redefine-sym _binary_$*_tmp_end=$*_end \
 	--redefine-sym _binary_$*_tmp_size=$*_size_sym \
-	$(*).tmp $(@)       
-	@echo "extern const char" $(*)"[] PROGMEM;" > $(*).h 
-	@echo "extern const char" $(*)_end"[] PROGMEM;" >> $(*).h 
+	$(*).tmp $(@)
+	@echo "extern const char" $(*)"[] PROGMEM;" > $(*).h
+	@echo "extern const char" $(*)_end"[] PROGMEM;" >> $(*).h
 	@echo "extern const char" $(*)_size_sym"[];" >> $(*).h
 	@echo "#define $(*)_size ((int)$(*)_size_sym)" >> $(*).h
-	@rm $(*).tmp 
+	@rm $(*).tmp
 
 $(OBJDIR)/%.o : %.bin
 	@echo Converting $<
@@ -1359,9 +1359,9 @@ $(OBJDIR)/%.o : %.bin
 	--redefine-sym _binary_$*_bin_start=$* \
 	--redefine-sym _binary_$*_bin_end=$*_end \
 	--redefine-sym _binary_$*_bin_size=$*_size_sym \
-	$(<) $(@)       
-	@echo "extern const char" $(*)"[] PROGMEM;" > $(*).h 
-	@echo "extern const char" $(*)_end"[] PROGMEM;" >> $(*).h 
+	$(<) $(@)
+	@echo "extern const char" $(*)"[] PROGMEM;" > $(*).h
+	@echo "extern const char" $(*)_end"[] PROGMEM;" >> $(*).h
 	@echo "extern const char" $(*)_size_sym"[];" >> $(*).h
 	@echo "#define $(*)_size ((int)$(*)_size_sym)" >> $(*).h
 \endcode
@@ -1375,7 +1375,7 @@ watchdog timer. Enable the watchdog timer to the shortest timeout setting,
 then go into an infinite, do-nothing loop. The watchdog will then reset the
 processor.
 
-The reason why this is preferrable over jumping to the reset vector, is that
+The reason why this is preferable over jumping to the reset vector, is that
 when the watchdog resets the AVR, the registers will be reset to their known,
 default settings. Whereas jumping to the reset vector will leave the registers
 in their previous state, which is generally not a good idea.
@@ -1388,7 +1388,7 @@ newer AVRs a function needs to be added to the .init3 section (i.e. during the
 startup code, before main()) to disable the watchdog early enough so it does
 not continually reset the AVR.
 
-Here is some example code that creates a macro that can be called to perform 
+Here is some example code that creates a macro that can be called to perform
 a soft reset:
 
 \code
@@ -1436,8 +1436,8 @@ void wdt_init(void)
 
 You are not linking in the math library from AVR-LibC. GCC has a library that
 is used for floating point operations, but it is not optimized for the AVR, and
-so it generates big code, or it could be incorrect. This can happen even when 
-you are not using any floating point math functions from the Standard C library, 
+so it generates big code, or it could be incorrect. This can happen even when
+you are not using any floating point math functions from the Standard C library,
 but you are just doing floating point math operations.
 
 When you link in the math library from AVR-LibC, those
