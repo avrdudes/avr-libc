@@ -102,6 +102,35 @@
     immediately after an \c SEI instruction.  As the intruction right
     after the \c SEI is guaranteed to be executed before an interrupt
     could trigger, it is sure the device will really be put to sleep.
+
+    Some devices have the ability to disable the Brown Out Detector (BOD) before 
+    going to sleep. This will also reduce power while sleeping. If the
+    specific AVR device has this ability then an additional macro is defined:
+    \c sleep_bod_disable(). This macro generates inlined assembly code
+    that will correctly implement the timed sequence for disabling the BOD
+    before sleeping. However, there is a limited number of cycles after the
+    BOD has been disabled that the device can be put into sleep mode, otherwise
+    the BOD will not truly be disabled. Recommended practice is to disable
+    the BOD (\c sleep_bod_disable()), set the interrupts (\c sei()), and then
+    put the device to sleep (\c sleep_cpu()), like so:
+
+    \code
+    #include <avr/interrupt.h>
+    #include <avr/sleep.h>
+
+    ...
+      set_sleep_mode(<mode>);
+      cli();
+      if (some_condition)
+      {
+        sleep_enable();
+        sleep_bod_disable();
+        sei();
+        sleep_cpu();
+        sleep_disable();
+      }
+      sei();
+    \endcode
 */
 
 
@@ -484,6 +513,32 @@ do {                 \
 
 #endif
 
+
+#if defined(__DOXYGEN__)
+
+extern void sleep_bod_disable (void);
+
+#else
+
+#if defined(BODS) && defined(BODSE)
+
+#define sleep_bod_disable() \
+{ \
+  uint8_t tempreg; \
+  __asm__ __volatile__("in %[tempreg], %[mcucr]" "\n\t" \
+                       "ori %[tempreg], %[bods_bodse]" "\n\t" \
+                       "out %[mcucr], %[tempreg]" "\n\t" \
+                       "andi %[tempreg], %[not_bodse]" "\n\t" \
+                       "out %[mcucr], %[tempreg]" \
+                       : [tempreg] "=&d" (tempreg) \
+                       : [mcucr] "I" _SFR_IO_ADDR(MCUCR), \
+                         [bods_bodse] "i" (_BV(BODS) | _BV(BODSE)), \
+                         [not_bodse] "i" (~_BV(BODSE))); \
+}
+
+#endif
+
+#endif
 
 
 /*@}*/

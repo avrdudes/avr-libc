@@ -34,6 +34,12 @@
   + ATxmega16A4
   + ATxmega16D4
 
+* Other changes:
+
+  A sleeping BOD API was added to <avr/sleep.h>. This allows you to disable
+  the Brown Out Detector (BOD) before going to sleep, thereby reducing
+  power even further.
+
 *** Changes in avr-libc-1.6.4:
 
 * Bugs fixed:
