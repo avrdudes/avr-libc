@@ -93,38 +93,6 @@ static inline void _delay_ms(double __ms) __attribute__((always_inline));
 /**
    \ingroup util_delay
 
-   Perform a delay of \c __us microseconds, using _delay_loop_1().
-
-   The macro F_CPU is supposed to be defined to a
-   constant defining the CPU clock frequency (in Hertz).
-
-   The maximal possible delay is 768 us / F_CPU in MHz.
-
-   If the user requests a delay greater than the maximal possible one,
-   _delay_us() will automatically call _delay_ms() instead.  The user
-   will not be informed about this case.
- */
-void
-_delay_us(double __us)
-{
-	uint8_t __ticks;
-	double __tmp = ((F_CPU) / 3e6) * __us;
-	if (__tmp < 1.0)
-		__ticks = 1;
-	else if (__tmp > 255)
-	{
-		_delay_ms(__us / 1000.0);
-		return;
-	}
-	else
-		__ticks = (uint8_t)__tmp;
-	_delay_loop_1(__ticks);
-}
-
-
-/**
-   \ingroup util_delay
-
    Perform a delay of \c __ms milliseconds, using _delay_loop_2().
 
    The macro F_CPU is supposed to be defined to a
@@ -161,5 +129,37 @@ _delay_ms(double __ms)
 		__ticks = (uint16_t)__tmp;
 	_delay_loop_2(__ticks);
 }
+
+/**
+   \ingroup util_delay
+
+   Perform a delay of \c __us microseconds, using _delay_loop_1().
+
+   The macro F_CPU is supposed to be defined to a
+   constant defining the CPU clock frequency (in Hertz).
+
+   The maximal possible delay is 768 us / F_CPU in MHz.
+
+   If the user requests a delay greater than the maximal possible one,
+   _delay_us() will automatically call _delay_ms() instead.  The user
+   will not be informed about this case.
+ */
+void
+_delay_us(double __us)
+{
+	uint8_t __ticks;
+	double __tmp = ((F_CPU) / 3e6) * __us;
+	if (__tmp < 1.0)
+		__ticks = 1;
+	else if (__tmp > 255)
+	{
+		_delay_ms(__us / 1000.0);
+		return;
+	}
+	else
+		__ticks = (uint8_t)__tmp;
+	_delay_loop_1(__ticks);
+}
+
 
 #endif /* _UTIL_DELAY_H_ */

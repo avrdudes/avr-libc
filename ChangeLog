@@ -1,3 +1,9 @@
+2009-02-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/util/delay.h (_delay_us): Swap _delay_us() and
+	_delay_ms() so when _delay_us() wants to fall back to _delay_ms(),
+	the function call can actually be inlined by the compiler.
+
 2009-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iom128rfa1.h: Fix some C syntax errors
