@@ -1,4 +1,4 @@
-2008-12-21  Dmitry Xmelkov  <dmix@gmail.ru>
+2009-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/setjmp.S: longjmp(): optimize stack pointer writing
 	in case of XMEGA devices.
