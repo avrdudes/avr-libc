@@ -132,15 +132,23 @@ _U(longjmp):
 	ld	ZL, X+
 	ld	ZH, X+
 	ld	__tmp_reg__, X+
-#ifdef _HAVE_AVR_STACK_POINTER_HI
+#if  defined (__AVR_XMEGA__) && __AVR_XMEGA__
+	/* A write to SPL will automatically disable interrupts for up to 4
+	   instructions or until the next I/O memory write.	*/
+	out	AVR_STATUS_ADDR, __tmp_reg__
+	out	AVR_STACK_POINTER_LO_ADDR, ZL
+	out	AVR_STACK_POINTER_HI_ADDR, ZH
+#else
+# ifdef _HAVE_AVR_STACK_POINTER_HI
 	/* interrupts disabled for shortest possible time (3 cycles) */
 	cli
 	out	AVR_STACK_POINTER_HI_ADDR, ZH
-#endif
+# endif
 	/* Restore status register (including the interrupt enable flag).
 	   Interrupts are re-enabled only after the next instruction.  */
 	out	AVR_STATUS_ADDR, __tmp_reg__
 	out	AVR_STACK_POINTER_LO_ADDR, ZL
+#endif
   ; get return address and jump
 	ld	ZL, X+
 	ld	ZH, X+
