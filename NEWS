@@ -76,6 +76,7 @@
   [#24762] 1.6.3 wdt.h compile-time bug
   [#24890] Small error in libm source fp_rempio2.S
   [#25048] eeprom.h will not compile as c++ code.
+  [#25120] pgm_read_*_far() functions cause incorrect usage of the Z pointer for RAM access in ATxmega series
   [#25131] Incorrect definition of default lfuse bits for ATTiny2313
   [#25261] TWIHSR spelling deviates from XML file in AVR Studio 4.15
   [#25535] Nonexistent bit definitions in iotn88.h/iotn48.h AREFD REFS1 RWWSB SM2
