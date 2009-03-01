@@ -1,3 +1,13 @@
+2009-03-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #25120.
+	* include/avr/pgmspace.h (__ELPM_xmega__, __ELPM_word_xmega__,
+	__ELPM_dword_xmega__, __ELPM_float_xmega__): Add new macros.
+	(__ELPM, __ELPM_word, __ELPM_dword, __ELPM_float): Add new conditional
+	definitions based on __AVR_HAVE_RAMPD__ (i.e. avrxmega3, avrxmega5,
+	and avrxmega7 architectures).
+	* NEWS: Add item to fixed bug list.
+
 2009-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/stdlib/setjmp.S: longjmp(): optimize stack pointer writing

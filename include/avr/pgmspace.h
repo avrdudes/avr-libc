@@ -479,6 +479,25 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     __result;                       \
 }))
 
+#define __ELPM_xmega__(addr)        \
+(__extension__({                    \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    uint8_t __result;               \
+    __asm__                         \
+    (                               \
+        "in __tmp_reg__, %2" "\n\t" \
+        "out %2, %C1" "\n\t"        \
+        "movw r30, %1" "\n\t"       \
+        "elpm %0, Z+" "\n\t"        \
+        "out %2, __tmp_reg__"       \
+        : "=r" (__result)           \
+        : "r" (__addr32),           \
+          "I" (_SFR_IO_ADDR(RAMPZ)) \
+        : "r30", "r31"              \
+    );                              \
+    __result;                       \
+}))
+
 #define __ELPM_word_classic__(addr)     \
 (__extension__({                        \
     uint32_t __addr32 = (uint32_t)(addr); \
@@ -514,6 +533,26 @@ typedef uint64_t  prog_uint64_t PROGMEM;
         "movw r30, %1"  "\n\t"          \
         "elpm %A0, Z+"  "\n\t"          \
         "elpm %B0, Z"   "\n\t"          \
+        : "=r" (__result)               \
+        : "r" (__addr32),               \
+          "I" (_SFR_IO_ADDR(RAMPZ))     \
+        : "r30", "r31"                  \
+    );                                  \
+    __result;                           \
+}))
+
+#define __ELPM_word_xmega__(addr)       \
+(__extension__({                        \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    uint16_t __result;                  \
+    __asm__                             \
+    (                                   \
+        "in __tmp_reg__, %2" "\n\t"     \
+        "out %2, %C1"   "\n\t"          \
+        "movw r30, %1"  "\n\t"          \
+        "elpm %A0, Z+"  "\n\t"          \
+        "elpm %B0, Z"   "\n\t"          \
+        "out %2, __tmp_reg__"           \
         : "=r" (__result)               \
         : "r" (__addr32),               \
           "I" (_SFR_IO_ADDR(RAMPZ))     \
@@ -579,6 +618,28 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     __result;                             \
 }))
 
+#define __ELPM_dword_xmega__(addr)        \
+(__extension__({                          \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    uint32_t __result;                    \
+    __asm__                               \
+    (                                     \
+        "in __tmp_reg__, %2" "\n\t"       \
+        "out %2, %C1"   "\n\t"            \
+        "movw r30, %1"  "\n\t"            \
+        "elpm %A0, Z+"  "\n\t"            \
+        "elpm %B0, Z+"  "\n\t"            \
+        "elpm %C0, Z+"  "\n\t"            \
+        "elpm %D0, Z"   "\n\t"            \
+        "out %2, __tmp_reg__"             \
+        : "=r" (__result)                 \
+        : "r" (__addr32),                 \
+          "I" (_SFR_IO_ADDR(RAMPZ))       \
+        : "r30", "r31"                    \
+    );                                    \
+    __result;                             \
+}))
+
 #define __ELPM_float_classic__(addr)      \
 (__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
@@ -636,17 +697,60 @@ typedef uint64_t  prog_uint64_t PROGMEM;
     __result;                             \
 }))
 
+#define __ELPM_float_xmega__(addr)        \
+(__extension__({                          \
+    uint32_t __addr32 = (uint32_t)(addr); \
+    float __result;                       \
+    __asm__                               \
+    (                                     \
+        "in __tmp_reg__, %2" "\n\t"       \
+        "out %2, %C1"   "\n\t"            \
+        "movw r30, %1"  "\n\t"            \
+        "elpm %A0, Z+"  "\n\t"            \
+        "elpm %B0, Z+"  "\n\t"            \
+        "elpm %C0, Z+"  "\n\t"            \
+        "elpm %D0, Z"   "\n\t"            \
+        "out %2, __tmp_reg__"             \
+        : "=r" (__result)                 \
+        : "r" (__addr32),                 \
+          "I" (_SFR_IO_ADDR(RAMPZ))       \
+        : "r30", "r31"                    \
+    );                                    \
+    __result;                             \
+}))
+
+/* 
+Check for architectures that implement RAMPD (avrxmega3, avrxmega5, 
+avrxmega7) as they need to save/restore RAMPZ for ELPM macros so it does
+not interfere with data accesses. 
+*/
+#if defined (__AVR_HAVE_RAMPD__)
+
+#define __ELPM(addr)        __ELPM_xmega__(addr)
+#define __ELPM_word(addr)   __ELPM_word_xmega__(addr)
+#define __ELPM_dword(addr)  __ELPM_dword_xmega__(addr)
+#define __ELPM_float(addr)  __ELPM_float_xmega__(addr)
+
+#else
+
 #if defined (__AVR_HAVE_LPMX__)
+
 #define __ELPM(addr)        __ELPM_enhanced__(addr)
 #define __ELPM_word(addr)   __ELPM_word_enhanced__(addr)
 #define __ELPM_dword(addr)  __ELPM_dword_enhanced__(addr)
 #define __ELPM_float(addr)  __ELPM_float_enhanced__(addr)
+
 #else
+
 #define __ELPM(addr)        __ELPM_classic__(addr)
 #define __ELPM_word(addr)   __ELPM_word_classic__(addr)
 #define __ELPM_dword(addr)  __ELPM_dword_classic__(addr)
 #define __ELPM_float(addr)  __ELPM_float_classic__(addr)
-#endif
+
+#endif  /* __AVR_HAVE_LPMX__ */
+
+#endif  /* __AVR_HAVE_RAMPD__ */
+
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_far(address_long)
