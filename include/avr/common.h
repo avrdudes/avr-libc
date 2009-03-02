@@ -250,6 +250,36 @@ and families.
 #  endif
 #endif
 
+/* RAMPD Register */
+#if defined(RAMPD)
+#  define AVR_RAMPD_REG   RAMPD
+#  if __AVR_ARCH__ >= 100
+#    define AVR_RAMPD_ADDR  _SFR_MEM_ADDR(RAMPD)
+#  else
+#    define AVR_RAMPD_ADDR  _SFR_IO_ADDR(RAMPD)
+#  endif
+#endif
+
+/* RAMPX Register */
+#if defined(RAMPX)
+#  define AVR_RAMPX_REG   RAMPX
+#  if __AVR_ARCH__ >= 100
+#    define AVR_RAMPX_ADDR  _SFR_MEM_ADDR(RAMPX)
+#  else
+#    define AVR_RAMPX_ADDR  _SFR_IO_ADDR(RAMPX)
+#  endif
+#endif
+
+/* RAMPY Register */
+#if defined(RAMPY)
+#  define AVR_RAMPY_REG   RAMPY
+#  if __AVR_ARCH__ >= 100
+#    define AVR_RAMPY_ADDR  _SFR_MEM_ADDR(RAMPY)
+#  else
+#    define AVR_RAMPY_ADDR  _SFR_IO_ADDR(RAMPY)
+#  endif
+#endif
+
 /* RAMPZ Register */
 #if defined(RAMPZ)
 #  define AVR_RAMPZ_REG   RAMPZ
