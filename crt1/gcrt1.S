@@ -225,6 +225,13 @@ __init:
 	out	_SFR_IO_ADDR(EIND), r16
 #endif	/* __AVR_3_BYTE_PC__ */
 
+#ifdef __AVR_HAVE_RAMPD__
+	out	AVR_RAMPD_ADDR, __zero_reg__
+	out	AVR_RAMPX_ADDR, __zero_reg__
+	out	AVR_RAMPY_ADDR, __zero_reg__
+	out	AVR_RAMPZ_ADDR, __zero_reg__
+#endif
+
 #if defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3))
 #if BIG_CODE
 	/* Only for >64K devices with RAMPZ, replaces the default code
