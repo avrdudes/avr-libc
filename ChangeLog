@@ -1,3 +1,10 @@
+2009-03-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* crt1/gcrt1.S (__do_copy_data): Make clearing of RAMPZ at end
+	conditional on __AVR_HAVE_RAMPD__ (currently avrxmega3, avrxmega5,
+	and avrxmega7 architectures). These architectures can access > 64K RAM,
+	hence RAMPZ is required to be cleared.
+
 2009-03-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #25120.
