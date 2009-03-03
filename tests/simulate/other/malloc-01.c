@@ -309,7 +309,7 @@ main(void)
 	    }
 	}
     }
-  if (stats[0] != stats[1])
+  if (stats[0] != stats[1] || stats[2] != stats[3])
     exit(1);
 #ifdef __AVR__
   if (__flp->nx != NULL)
