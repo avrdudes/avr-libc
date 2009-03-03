@@ -1,3 +1,10 @@
+2009-03-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/other/malloc-01.c: Basic malloc() test script.
+	Currently exhibits a failure when simulating on the AT90S8515, which
+	is actually due to a real bug (possibly same as bug #22567, and
+	maybe #25723).
+
 2009-03-02  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* crt1/gcrt1.S (__init): Clear RAMPD, RAMPX, RAMPY, RAMPZ registers
