@@ -1,5 +1,11 @@
 2009-03-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* tests/simulate/other/realloc-01.c: Basic realloc() test script.
+	Currently exhibits a failure when simulating on the AT90S8515, which
+	is actually due to a real bug (most likely #25723).
+
+2009-03-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* tests/simulate/runtest.sh: Add -g to CFLAGS, to help debugging
 	any ELF files that experience issues in the simulation.
 
