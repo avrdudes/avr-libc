@@ -98,7 +98,7 @@ test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
 		avr/*.[cS]"}
     
 CPPFLAGS="-Wundef -I."
-CFLAGS="-W -Wall -std=gnu99 -pipe -Os"
+CFLAGS="-g -W -Wall -std=gnu99 -pipe -Os"
 CORE=core_avr_dump.core
 HOST_CC=gcc
 HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
