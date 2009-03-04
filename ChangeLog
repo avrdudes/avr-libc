@@ -1,5 +1,11 @@
 2009-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* tests/simulate/other/malloc-01.c: Merge the basic malloc and
+	realloc test cases from HEAD.
+	* tests/simulate/other/realloc-01.c: (Ditto.)
+
+2009-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdlib/malloc.c: Fix a bug found by the testsuite script
 	other/malloc-01.c: when being close to the top of heap, make sure
 	the pointers don't wrap before calculating the available space.
