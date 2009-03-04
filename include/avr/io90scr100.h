@@ -1,4 +1,4 @@
-/* Copyright (c) 2008 Atmel Corporation
+/* Copyright (c) 2009 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -702,6 +702,9 @@
 #define KBLS2 2
 #define KBLS3 3
 #define KBLS4 4
+#define KBLS5 5
+#define KBLS6 6
+#define KBLS7 7
 
 #define KBER _SFR_MEM8(0x8E)
 #define KBE0 0
@@ -709,6 +712,9 @@
 #define KBE2 2
 #define KBE3 3
 #define KBE4 4
+#define KBE5 5
+#define KBE6 6
+#define KBE7 7
 
 #define KBFR _SFR_MEM8(0x8F)
 #define KBF0 0
@@ -716,6 +722,9 @@
 #define KBF2 2
 #define KBF3 3
 #define KBF4 4
+#define KBF5 5
+#define KBF6 6
+#define KBF7 7
 
 #define RDWDR _SFR_MEM8(0x90)
 #define RDD0 0
@@ -809,6 +818,7 @@
 #define SOFEN 0
 #define RESET 1
 #define RESUME 2
+#define FRZCLK 4
 #define PAD0 5
 #define PAD1 6
 #define UHEN 7
@@ -1159,13 +1169,6 @@
 #define EPDIR 2
 #define EPE 7
 
-#define HSSPICCNT _SFR_MEM8(0xD0)
-#define D0 0
-#define D1 1
-#define D2 2
-#define D3 3
-#define D4 4
-
 #define HSSPITO _SFR_MEM16(0xD1)
 
 #define HSSPITOL _SFR_MEM8(0xD1)
@@ -1295,16 +1298,19 @@
 #define USBCR _SFR_MEM8(0xE0)
 #define USBE 1
 #define UPUC 5
+#define URMWU 7
 
 #define USBPI _SFR_MEM8(0xE1)
 #define SUSI 0
 #define RESI 1
+#define RMWUI 2
 #define SOFI 3
 #define FEURI 4
 
 #define USBPIM _SFR_MEM8(0xE2)
 #define SUSIM 0
 #define RESIM 1
+#define RMWUIM 2
 #define SOFIM 3
 
 #define USBEI _SFR_MEM8(0xE3)
@@ -1340,6 +1346,8 @@
 #define USBGS _SFR_MEM8(0xE6)
 #define FAF 0
 #define FCF 1
+#define RMWUPE 2
+#define RSMON 3
 
 #define USBFA _SFR_MEM8(0xE7)
 #define FADD0 0
@@ -1407,6 +1415,7 @@
 #define USBDMAB6 6
 
 #define DCCR _SFR_MEM8(0xEF)
+#define DCBUSY 5
 #define DCRDY 6
 #define DCON 7
 
@@ -1512,16 +1521,15 @@
 #define ESCTI 2
 #define ESCWTI 3
 #define EVCARDER 4
-#define ICARDER 5
+#define CARDINE 6
 #define ESCTBI 7
 
 #define SCIIR _SFR_MEM8(0xFC)
 #define SCPI 0
 #define SCRI 1
 #define SCTI 2
-#define SCTWI 3
+#define SCWTI 3
 #define VCARDERR 4
-#define ICARDERR 5
 #define SCTBI 7
 
 #define SCISR _SFR_MEM8(0xFD)
@@ -1530,7 +1538,6 @@
 #define SCTC 2
 #define SCWTO 3
 #define VCARDOK 4
-#define ICARDOVF 5
 #define CARDIN 6
 #define SCTBE 7
 
@@ -1642,36 +1649,36 @@
 #define RAMEND       (RAMSTART + RAMSIZE - 1)
 #define XRAMSTART    (0x0)
 #define XRAMSIZE     (0)
-#define XRAMEND      RAMEND
-#define E2END        (2048 - 1)
+#define XRAMEND      (RAMEND)
+#define E2END        (0x7FF)
 #define E2PAGESIZE   (4)
-#define FLASHEND     (65536 - 1)
+#define FLASHEND     (0xFFFF)
 
 
 /* Fuses */
 #define FUSE_MEMORY_SIZE 3
 
 /* Low Fuse Byte */
-#define FUSE_CKSEL0 ~_BV(0)  /* Clock Selection */
-#define FUSE_CKSEL3 ~_BV(3)  /* Clock Selection */
-#define FUSE_SUT0 ~_BV(4)  /* Select start-up time */
-#define FUSE_SUT1 ~_BV(5)  /* Select start-up time */
-#define FUSE_CKOUT ~_BV(6)  /* Clock output */
+#define FUSE_CKSEL0  (unsigned char)~_BV(0)  /* Clock Selection */
+#define FUSE_CKSEL3  (unsigned char)~_BV(3)  /* Clock Selection */
+#define FUSE_SUT0  (unsigned char)~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1  (unsigned char)~_BV(5)  /* Select start-up time */
+#define FUSE_CKOUT  (unsigned char)~_BV(6)  /* Clock output */
 #define LFUSE_DEFAULT (FUSE_SUT0)
 
 /* High Fuse Byte */
-#define FUSE_BOOTRST ~_BV(0)  /* Select Reset Vector */
-#define FUSE_BOOTSZ0 ~_BV(1)  /* Select Boot Size */
-#define FUSE_BOOTSZ1 ~_BV(2)  /* Select Boot Size */
-#define FUSE_EESAVE ~_BV(3)  /* EEPROM memory is preserved through chip erase */
-#define FUSE_WDTON ~_BV(4)  /* Watchdog timer always on */
-#define FUSE_SPIEN ~_BV(5)  /* Enable Serial programming and Data Downloading */
-#define FUSE_JTAGEN ~_BV(6)  /* Enable JTAG */
-#define FUSE_OCDEN ~_BV(7)  /* Enable OCD */
+#define FUSE_BOOTRST  (unsigned char)~_BV(0)  /* Select Reset Vector */
+#define FUSE_BOOTSZ0  (unsigned char)~_BV(1)  /* Select Boot Size */
+#define FUSE_BOOTSZ1  (unsigned char)~_BV(2)  /* Select Boot Size */
+#define FUSE_EESAVE  (unsigned char)~_BV(3)  /* EEPROM memory is preserved through chip erase */
+#define FUSE_WDTON  (unsigned char)~_BV(4)  /* Watchdog timer always on */
+#define FUSE_SPIEN  (unsigned char)~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define FUSE_JTAGEN  (unsigned char)~_BV(6)  /* Enable JTAG */
+#define FUSE_OCDEN  (unsigned char)~_BV(7)  /* Enable OCD */
 #define HFUSE_DEFAULT (FUSE_JTAGEN & FUSE_SPIEN & FUSE_BOOTSZ1 & FUSE_BOOTSZ0)
 
 /* Extended Fuse Byte */
-#define FUSE_BODENABLE ~_BV(0)  /* Brown-out Detector Enable Signal */
+#define FUSE_BODENABLE  (unsigned char)~_BV(0)  /* Brown-out Detector Enable Signal */
 #define EFUSE_DEFAULT (0xFF)
 
 
@@ -1684,7 +1691,7 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x96
-#define SIGNATURE_2 0x09
+#define SIGNATURE_2 0xC1
 
 
 #endif /* _AVR_AT90SCR100_H_ */
