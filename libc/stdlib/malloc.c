@@ -169,6 +169,11 @@ malloc(size_t len)
 	cp = __malloc_heap_end;
 	if (cp == 0)
 		cp = STACK_POINTER() - __malloc_margin;
+	if (cp <= __brkval)
+	  /*
+	   * Memory exhausted.
+	   */
+	  return 0;
 	avail = cp - __brkval;
 	/*
 	 * Both tests below are needed to catch the case len >= 0xfffe.
