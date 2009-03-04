@@ -1346,7 +1346,7 @@
 #define USBGS _SFR_MEM8(0xE6)
 #define FAF 0
 #define FCF 1
-#define RMWUPE 2
+#define RMWUE 2
 #define RSMON 3
 
 #define USBFA _SFR_MEM8(0xE7)
