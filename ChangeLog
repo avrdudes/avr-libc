@@ -1,5 +1,9 @@
 2009-03-04  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/io90scr100.h: Yet another update.
+
+2009-03-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/io90scr100.h: Updated header file based on new XML
 	device file.
 
