@@ -81,6 +81,7 @@
   [#25261] TWIHSR spelling deviates from XML file in AVR Studio 4.15
   [#25535] Nonexistent bit definitions in iotn88.h/iotn48.h AREFD REFS1 RWWSB SM2
   [#25645] xmega header files broken #defines
+  [#25723] Realloc corrupts free list when growing into	the next free item
 
 * Other changes:
 

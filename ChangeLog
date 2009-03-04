@@ -1,3 +1,12 @@
+2009-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Lou Amadio:
+	bug #25723: Realloc corrupts free list when growing into
+	the next free item
+	* libc/stdlib/realloc.c: Fix calculation of freelist.
+	* tests/simulate/regression/bug-25723.c: Testscript to demonstrate
+	the bug as well as its fix.
+
 2009-03-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* tests/simulate/other/realloc-01.c: Basic realloc() test script.
