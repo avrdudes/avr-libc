@@ -59,7 +59,7 @@ realloc(void *ptr, size_t len)
 	if (cp < cp1)
 		/* Pointer wrapped across top of RAM, fail. */
 		return 0;
-	fp2 = (struct __freelist *)cp;
+	fp2 = (struct __freelist *)(cp - sizeof(size_t));
 
 	/*
 	 * See whether we are growing or shrinking.  When shrinking,
@@ -84,16 +84,14 @@ realloc(void *ptr, size_t len)
 	 * If we get here, we are growing.  First, see whether there
 	 * is space in the free list on top of our current chunk.
 	 */
-	incr = len - fp1->sz - sizeof(size_t);
+	incr = len - fp1->sz;
 	cp = (char *)ptr + fp1->sz;
-	fp2 = (struct __freelist *)cp;
 	for (s = 0, ofp3 = 0, fp3 = __flp;
 	     fp3;
 	     ofp3 = fp3, fp3 = fp3->nx) {
 		if (fp3 == fp2 && fp3->sz >= incr) {
 			/* found something that fits */
-			if (incr <= fp3->sz &&
-			    incr > fp3->sz - sizeof(struct __freelist)) {
+			if (incr <= fp3->sz + sizeof(size_t)) {
 				/* it just fits, so use it entirely */
 				fp1->sz += fp3->sz + sizeof(size_t);
 				if (ofp3)
@@ -104,7 +102,7 @@ realloc(void *ptr, size_t len)
 			}
 			/* split off a new freelist entry */
 			cp = (char *)ptr + len;
-			fp2 = (struct __freelist *)cp;
+			fp2 = (struct __freelist *)(cp - sizeof(size_t));
 			fp2->nx = fp3->nx;
 			fp2->sz = fp3->sz - incr - sizeof(size_t);
 			if (ofp3)
