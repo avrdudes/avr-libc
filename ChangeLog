@@ -1,3 +1,9 @@
+2009-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/malloc.c: Fix a bug found by the testsuite script
+	other/malloc-01.c: when being close to the top of heap, make sure
+	the pointers don't wrap before calculating the available space.
+
 2009-03-04  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/io90scr100.h: Yet another update.
