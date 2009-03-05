@@ -1,3 +1,7 @@
+2009-03-05  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version, prepare for relase 1.6.5.
+
 2009-03-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/math.h: signbit(): remove note about implementation.
