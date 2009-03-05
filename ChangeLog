@@ -1,3 +1,9 @@
+2009-03-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/math.h: signbit(): remove note about implementation.
+	isinf(), modf(): add precaution about GCC inline realization.
+	* NEWS: add note about signbit() function.
+
 2009-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* libc/stdlib/malloc.c: Fix a bug found by the testsuite script
