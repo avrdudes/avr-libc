@@ -127,6 +127,10 @@
     the Brown Out Detector (BOD) before going to sleep, thereby reducing
     power even further.
 
+  - The note about signbit() implementation is removed from documenatation.
+    The reason is that the GCC can replace it with inline code and the
+    nonzero value is unpredictable in such case.
+
 * New devices supported:
 
   + ATxmega128A1
