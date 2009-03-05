@@ -137,8 +137,9 @@ extern double fmod(double __x, double __y) __ATTR_CONST__;
 
      The modf() function returns the signed fractional part of \a __x.
      
-     \note
-     This implementation skips writing by zero pointer.
+     \note This implementation skips writing by zero pointer.  However,
+     the GCC 4.3 can replace this function with inline code that does not
+     permit to use NULL address for the avoiding of storing.
   */
 extern double modf(double __x, double *__iptr);
 
@@ -309,6 +310,9 @@ extern int isnan(double __x) __ATTR_CONST__;
 
      The function isinf() returns 1 if the argument \a __x is positive
      infinity, -1 if \a __x is negative infinity, and 0 otherwise.
+     
+     \note The GCC 4.3 can replace this function with inline code that
+     returns the 1 value for both infinities (gcc bug #35509).
   */
 extern int isinf(double __x) __ATTR_CONST__;
 
@@ -382,9 +386,6 @@ extern double fmin (double __x, double __y) __ATTR_CONST__;
      because IEEE 754 floating point allows zero to be signed. The
      comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return a
      nonzero value.
-     
-     \note
-     This implementation returns 1 if sign bit is set.
   */
 extern int signbit (double __x) __ATTR_CONST__;
 
