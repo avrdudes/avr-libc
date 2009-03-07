@@ -1,3 +1,100 @@
+2009-03-07  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/progmem.h: Add copyright notice.
+
+	* tests/simulate/avr/{eeprom-1.c, sfr-1.c, sfr-2.c, sfr-3.c,
+	    sfrasm-1.S, sfrasm-2.S, sfrasm-3.S}:
+	Add copyright notice.
+
+	* tests/simulate/fplib/{add-01.c, add-02.c, add-03.c, add-500.c,
+	    add-inf.c, add-nan.c, cmp-01.c, cmp-02.c, cmp-03.c,
+	    div-01.c, div-02.c, div-03.c, div-500.c, div-inf.c, 
+	    div-nan.c, flt2llng-01.c, flt2long-01.c, flt2ulng-01.c, 
+	    flt2unll-01.c, llng2flt-01.c, llng2flt-500.c, mul-01.c,
+	    mul-02.c, mul-03.c, mul-500.c, mul-inf.c, mul-nan.c, 
+	    neg-01.c, ulng2flt-01.c, unll2flt-01.c, unord-01.c, 
+	    unord-02.c, unord-03.c}:
+	Add copyright notice.
+
+	* tests/simulate/math/{acos-01.c, acos-500.c, asin-01.c, asin-500.c,
+	    atan-01.c, atan-500.c, atan2-01.c, atan2-500.c, ceil-01.c, 
+	    copysign-01.c, cos-01.c, cos-02.c, cos-500.c, cosh-01.c,
+	    cosh-02.c, cosh-500.c, exp-01.c, exp-500.c, fdim-01.c,
+	    fdim-500.c, floor-01.c, fma-01.c, fmax-01.c, fmax-500.c,
+	    fmin-01.c, fmin-500.c, fmod-01.c, fmod-500.c, fmod-nan.c,
+	    fp_mpack-01.c, frexp-01.c, hypot-01.c, hypot-500.c,
+	    isfinite-01.c, isinf-01.c, isnan-01.c, ldexp-01.c,
+	    ldexp-nan.c, log-01.c, log-02.c, log-500.c, log-nan.c,
+	    log10-01.c, lrint-01.c, lround-01.c, modf-01.c, modf-nan.c,
+	    modf-np.c, pow-01.c, pow-02.c, pow-500.c, pow-nan.c,
+	    round-01.c, signbit-01.c, sin-01.c, sin-500.c, sinh-01.c,
+	    sinh-02.c, sinh-500.c, sqrt-01.c, sqrt-500.c, tan-01.c,
+	    tan-500.c, tanh-01.c, tanh-02.c, tanh-500.c, trunc-01.c, 
+	    xxx-inf.c, xxx-nan.c}:
+	Add copyright notice.
+
+	* tests/simulate/other/alloca.c: Add copyright notice.
+
+	* tests/simulate/pmstring/{memchr_P.c, memcmp_P.c, memmem_P.c, 
+	    memrchr_P.c, strcasecmp_P.c, strcasestr_P.c, strchr_P.c, 
+	    strchrnul_P.c, strcmp_P.c, strcspn_P.c, strncasecmp_P.c,
+	    strpbrk_P.c, strrchr_P.c, strsep_P.c, strspn_P.c, strstr_P.c}:
+	Add copyright notice.
+
+	* tests/simulate/printf/{snprintf_all-P.c, snprintf_all.c,
+	    sprintf-1.c, sprintf-2.c, sprintf-3.c, sprintf-4.c,
+	    sprintf-5.c, sprintf-inv.c, sprintf_flt-big.c,
+	    sprintf_flt-e01.c, sprintf_flt-f01.c, sprintf_flt-g01.c,
+	    sprintf_flt-g02.c, sprintf_flt-nan.c, sprintf_min-1.c,
+	    sprintf_min-2.c, sprintf_min-3.c, sprintf_min-4.c, 
+	    sprintf_min-5.c, sprintf_min-int.c, sprintf_min-inv.c, 
+	    sprintf_std-int.c, sprintf_std-inv.c, vsnprintf_all-P.c, 
+	    vsnprintf_all.c}:
+	Add copyright notice.
+
+	* tests/simulate/regression/{20080322-isinf.c, 20080323-jmpbuf.c,
+	    20080405-eeprom.c, 20081221-ffs.c, bug-01929.c, bug-11511.c,
+	    bug-11820.c, bug-13330.c, bug-18899.c, bug-19079.c,
+	    bug-19134.c, bug-19135.c, bug-19280.c, bug-19281.c,
+	    bug-21872-1.c, bug-21872-2.c, bug-21905-scanf_flt.c,
+	    bug-21906-scanf_flt.c, bug-21955.c, bug-22593.c, bug-22800.c,
+	    bug-22828.c, bug-25048.cpp, bug-31644.c}:
+	Add copyright notice.
+
+	* tests/simulate/scanf/{scanf-nul.c, scanf_brk-nul.c,
+	    scanf_flt-nul.c, sscanf-1.c, sscanf-2.c, sscanf-c1.c,
+	    sscanf-c2.c, sscanf-d1.c, sscanf-d2.c, sscanf-eof.c,
+	    sscanf-eon.c, sscanf-h.c, sscanf-hh.c, sscanf-i.c, sscanf-l.c,
+	    sscanf-o1.c, sscanf-o2.c, sscanf-s1.c, sscanf-s2.c,
+	    sscanf-x1.c, sscanf-x2.c, sscanf-x3.c, sscanf_brk-1.c,
+	    sscanf_brk-2.c, sscanf_brk-3.c, sscanf_brk-4.c,
+	    sscanf_flt-f1.c, sscanf_flt-f2.c, sscanf_flt-f3.c,
+	    sscanf_flt-fnn.c, sscanf_flt-fw.c}:
+	Add copyright notice.
+
+	* tests/simulate/stdlib/{abort-1.c, atoi-1.c, atol-1.c, atol-2.c,
+	    bsearch-1.c, bsearch-2.c, bsearch-3.c, dtostre-01.c,
+	    dtostre-02.c, dtostre-03.c, dtostre-04.c, dtostre-05.c,
+	    dtostre-06.c, dtostre-expm00.c, dtostre-minmax.c,
+	    dtostre-nans.c, dtostre-subnrm.c, dtostre-zero.c, dtostre.h,
+	    dtostrf-01.c, dtostrf-big.c, dtostrf-minmax.c, dtostrf-nans.c,
+	    dtostrf-round.c, dtostrf-width.c, dtostrf.h, exit-1.c,
+	    isalnum-1.c, isalpha-1.c, isascii-1.c, isblank-1.c,
+	    iscntrl-1.c, isdigit-1.c, isgraph-1.c, islower-1.c,
+	    isprint-1.c, ispunct-1.c, isspace-1.c, isupper-1.c,
+	    isxdigit-1.c, setjmp-1.c, setjmp-2.c, setjmp-3.c, setjmp-4.c,
+	    setjmp-5.c, strtod-1.c, strtod-2.c, strtod-3.c, strtol-1.c,
+	    strtol-2.c, strtol-3.c, strtol-4.c, strtol.h, strtoul-1.c,
+	    strtoul-2.c, strtoul-3.c, strtoul.h, tolower-1.c, toupper-1.c}:
+	Add copyright notice.
+
+	* tests/simulate/string/{ffs-1.c, ffs_macro.c, ffsl-1.c, ffsll-1.c,
+	    memchr.c, memcmp.c, memmem.c, memrchr.c, strcasecmp.c,
+	    strcasestr.c, strchr.c, strchrnul.c, strcmp.c, strcspn.c,
+	    strlwr.c, strncasecmp.c, strpbrk.c, strrchr.c, strrev.c,
+	    strsep.c, strspn.c, strstr.c, strupr.c}:
+	Add copyright notice.
+
 2009-03-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/math.h: signbit(): remove note about implementation.
