@@ -1,5 +1,9 @@
 2009-03-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: Bump version to post-1.6.6.
+
+2009-03-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: Bump version, prepare for relase 1.6.6.
 
 2009-03-08  Eric B. Weddington  <eric.weddington@atmel.com>
