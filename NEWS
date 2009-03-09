@@ -1,6 +1,8 @@
-*** Changes since avr-libc-1.6.5:
+*** Changes in avr-libc-1.6.6:
 
 * Bugs fixed:
+
+  [no-id] Regenerated Xmega header files.
 
 * Contributed Patches:
 
