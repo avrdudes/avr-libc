@@ -6,6 +6,7 @@
   [no-id] Fix CLKPCE bit value to be 7.
   [no-id] inlining failed in call to '_delay_ms': function body not available
   [no-id] malloc() could allocate memory beyond the limits of heap
+  [no-id] xmega header file updates.
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [sourceforge.net: #1883630] ATmegaXX4 - USART0 and USART1 additional bits aliases
   [sourceforge.net: #1910885] Typo in io90pwm3b.h
@@ -83,7 +84,8 @@
   [#25535] Nonexistent bit definitions in iotn88.h/iotn48.h AREFD REFS1 RWWSB SM2
   [#25645] xmega header files broken #defines
   [#25723] Realloc corrupts free list when growing into the next free item
-
+  [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
+  
 * Other changes:
 
   - Added 'avr35' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions

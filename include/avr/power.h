@@ -625,7 +625,7 @@ do{ \
 
 
 #elif defined(__AVR_ATmega32U4__) \
-defined(__AVR_ATmega16U4__)
+|| defined(__AVR_ATmega16U4__)
 
 
 #define power_adc_enable()      (PRR0 &= (uint8_t)~(1 << PRADC))
