@@ -1,7 +1,8 @@
 *** Changes since avr-libc-1.6.6:
 
 * Bugs fixed:
-
+  [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
+  
 * Contributed Patches:
 
 * New devices supported:
