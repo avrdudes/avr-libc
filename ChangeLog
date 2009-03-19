@@ -1,5 +1,11 @@
 2009-03-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for SF bug #2693898.
+	* include/avr/power.h: Add ATmega32U6 for clock_prescale* API.
+	* NEWS: Add item to fixed bugs list.
+
+2009-03-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix bug #25846.
 	* include/avr/power.h: Add missing ||.
 	* NEWS: Update for new version release. Add fixed bug item.

@@ -1,6 +1,7 @@
 *** Changes since avr-libc-1.6.6:
 
 * Bugs fixed:
+  [sourceforge.net: #2693898] ATmega32U6 missing in power.h
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
   
 * Contributed Patches:
