@@ -1,9 +1,14 @@
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #25930. Thanks to Simon Küppers for the patch.
+	* include/avr/portpins.h: Add short pin definitions if missing.
+
 2009-03-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* tests/simulate/runtest.sh: (cosmetics) Replace <<8 by *256 to
 	unconfuse Emacs' syntax highlighting.
 
-2009-03-13  Eric B. Weddington  <eric.weddington@atmel.com>
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for SF bug #2693898.
 	* include/avr/power.h: Add ATmega32U6 for clock_prescale* API.
