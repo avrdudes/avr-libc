@@ -136,7 +136,7 @@ Simulate ()
 	    RETVAL=0
 	    local i
 	    for i in 25 24 ; do
-		RETVAL=$(( ( RETVAL << 8 )
+		RETVAL=$(( ( RETVAL * 256 )
 			   | 0x`grep r$i $CORE | tr -s [:space:] '\n' |
 				grep r$i | cut -d= -f2` ))
 	    done
