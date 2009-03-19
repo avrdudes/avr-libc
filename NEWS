@@ -21,6 +21,7 @@
   [sourceforge.net: #2305703] iom162.h ASSR bitdef, typo?
   [sourceforge.net: #2411516] Error/Bug in the iotn88.h file
   [sourceforge.net: #2420567] ATmega329P missing in sleep.h
+  [sourceforge.net: #2693898] ATmega32U6 missing in power.h
   [#3485]  Using float arithmetic without linking with -lm result in incorrect code
   [#19079] sscanf %s eats 1 char too much
   [#19494] sfr_defs.h documentation: Remove references to deprecated macros.
