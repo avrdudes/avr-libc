@@ -86,6 +86,7 @@
   [#25645] xmega header files broken #defines
   [#25723] Realloc corrupts free list when growing into the next free item
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
+  [#25930] New IO-Headerfiles missing PXn Portpindefinitions
   
 * Other changes:
 
