@@ -1,3 +1,8 @@
+2009-03-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/runtest.sh: (cosmetics) Replace <<8 by *256 to
+	unconfuse Emacs' syntax highlighting.
+
 2009-03-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for SF bug #2693898.
