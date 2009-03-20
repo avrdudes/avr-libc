@@ -174,6 +174,7 @@ avr_HEADERS = \
     pgmspace.h \
     portpins.h \
     power.h \
+    signature.h \
     sfr_defs.h \
     signal.h \
     sleep.h \

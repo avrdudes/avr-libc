@@ -135,6 +135,9 @@
     The reason is that the GCC can replace it with inline code and the
     nonzero value is unpredictable in such case.
 
+  - Signature API added in <avr/signature.h>.
+
+
 * New devices supported:
 
   + ATxmega128A1

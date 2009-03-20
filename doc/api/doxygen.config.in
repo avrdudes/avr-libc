@@ -575,6 +575,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/avr/sfr_defs.h \
                          @top_srcdir@/doc/api/sfr.dox \
                          @top_srcdir@/include/avr/signal.h \
+                         @top_srcdir@/include/avr/signature.h \
                          @top_srcdir@/include/avr/sleep.h \
                          @top_srcdir@/include/avr/version.h \
                          @top_srcdir@/include/avr/wdt.h \

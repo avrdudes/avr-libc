@@ -1,5 +1,12 @@
 2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/signature.h: New file.
+	* include/avr/Makefile.am: Add signature.h.
+	* doc/api/doxygen.config.in: Add signature.h.
+	* NEWS: Add news item.
+
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #25930. Thanks to Simon Küppers for the patch.
 	* include/avr/portpins.h: Add short pin definitions if missing.
 
