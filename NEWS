@@ -8,6 +8,8 @@
 * Contributed Patches:
 
 * New devices supported:
+  
+  + ATxmega192A3
 
 * Other changes:
   Signature API added in <avr/signature.h>.

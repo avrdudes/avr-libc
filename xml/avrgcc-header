@@ -752,13 +752,13 @@ for i in $FUSEBYTES ; do
             if test $(( $FUSEBITFIELD_MASK )) -gt 1 ; then 
                 BITNUM=0
                 while test $(($FUSEBITFIELD_MASK & 0x01)) -eq 1 ; do
-                    echo "#define FUSE_${j}${BITNUM}  ~_BV(${FUSEBITFIELD_SHIFT})  /* ${FUSEBITFIELD_TEXT} Bit ${BITNUM} */" >> $headerfile
+                    echo "#define FUSE_${j}${BITNUM}  (unsigned char)~_BV(${FUSEBITFIELD_SHIFT})  /* ${FUSEBITFIELD_TEXT} Bit ${BITNUM} */" >> $headerfile
                     FUSEBITFIELD_MASK=$(($FUSEBITFIELD_MASK >> 1))
                     BITNUM=$(($BITNUM + 1))
                     FUSEBITFIELD_SHIFT=$(($FUSEBITFIELD_SHIFT + 1))
                 done
             else
-                echo "#define FUSE_${j}  ~_BV(${FUSEBITFIELD_SHIFT})  /* ${FUSEBITFIELD_TEXT} */" >> $headerfile
+                echo "#define FUSE_${j}  (unsigned char)~_BV(${FUSEBITFIELD_SHIFT})  /* ${FUSEBITFIELD_TEXT} */" >> $headerfile
             fi
         done
         echo "#define FUSE${FUSEBYTENUM}_DEFAULT  (0xFF)" >> $headerfile

@@ -1,5 +1,20 @@
 2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* configure.ac: Add support for ATxmega192A3.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* NEWS: Add news item about new device.
+	* include/avr/iox192a3.h: New file.
+	* xml/avrgcc-header: Add typecasts to fuse data information for xmega
+	devices.
+
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/signature.h: New file.
 	* include/avr/Makefile.am: Add signature.h.
 	* doc/api/doxygen.config.in: Add signature.h.
