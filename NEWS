@@ -139,7 +139,8 @@
 
 
 * New devices supported:
-
+  
+  + ATxmega192A3
   + ATxmega128A1
   + ATxmega64A1
   + ATmega32M1

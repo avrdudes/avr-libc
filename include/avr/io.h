@@ -334,6 +334,8 @@
 #  include <avr/iox128a1.h>
 #elif defined (__AVR_ATxmega128A3__)
 #  include <avr/iox128a3.h>
+#elif defined (__AVR_ATxmega192A3__)
+#  include <avr/iox192a3.h>
 #elif defined (__AVR_ATxmega256A3__)
 #  include <avr/iox256a3.h>
 #elif defined (__AVR_ATxmega256A3B__)
