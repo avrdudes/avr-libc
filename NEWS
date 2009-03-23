@@ -7,6 +7,7 @@
   [no-id] inlining failed in call to '_delay_ms': function body not available
   [no-id] malloc() could allocate memory beyond the limits of heap
   [no-id] xmega header file updates.
+  [no-id] Enable ATmega128RFA1 in <avr/power.h>
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [sourceforge.net: #1883630] ATmegaXX4 - USART0 and USART1 additional bits aliases
   [sourceforge.net: #1910885] Typo in io90pwm3b.h
