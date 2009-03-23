@@ -1212,6 +1212,7 @@ do{ \
 #if defined(__AVR_ATmega640__) \
 || defined(__AVR_ATmega1280__) \
 || defined(__AVR_ATmega1281__) \
+|| defined(__AVR_ATmega128RFA1__) \
 || defined(__AVR_ATmega2560__) \
 || defined(__AVR_ATmega2561__) \
 || defined(__AVR_AT90USB646__) \
@@ -1290,7 +1291,8 @@ typedef enum
     clock_div_32 = 5,
     clock_div_64 = 6,
     clock_div_128 = 7,
-    clock_div_256 = 8
+    clock_div_256 = 8,
+    clock_div_1_rc = 15, // ATmega128RFA1 only
 } clock_div_t;
 \endcode
 Clock prescaler setting enumerations.
@@ -1306,7 +1308,10 @@ typedef enum
     clock_div_32 = 5,
     clock_div_64 = 6,
     clock_div_128 = 7,
-    clock_div_256 = 8
+    clock_div_256 = 8,
+#if defined(__AVR_ATmega128RFA1__)
+    clock_div_1_rc = 15,
+#endif
 } clock_div_t;
 
 
