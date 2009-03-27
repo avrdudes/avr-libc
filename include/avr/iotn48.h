@@ -31,7 +31,7 @@
 
 /* $Id$ */
 
-/* avr/iotn48.h - definitions for ATtiny43U */
+/* avr/iotn48.h - definitions for ATtiny48 */
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
