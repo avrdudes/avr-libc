@@ -1,3 +1,9 @@
+2009-04-01  Anatoly Sokolov  <aesok@post.ru>
+
+	* configure.ac: (FNO_JUMP_TABLES, CHECK_MNO_TABLEJUMP,
+	CHECK_FNO_JUMP_TABLES): Add.
+	* libc\stdio\Rules.am (PRINTF_CFLAGS): Use FNO_JUMP_TABLES.
+
 2009-03-27  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn48.h: Fix comment.
