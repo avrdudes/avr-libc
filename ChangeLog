@@ -1,5 +1,10 @@
 2009-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* xml/avrgcc-header: Add generation of hardware pin definitions for
+	non-xmega devices.
+
+2009-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Put all functions in .text.avr-libc section, floating point math
 	routines in .text.avr-libc.fplib section.
 	* common/sectionname.h: New file.
