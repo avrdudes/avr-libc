@@ -37,7 +37,9 @@ static char sccsid[] = "@(#)rand.c	8.1 (Berkeley) 6/14/93";
 */
 
 #include <stdlib.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 static long
 do_random(unsigned long *ctx)
 {
@@ -64,6 +66,7 @@ do_random(unsigned long *ctx)
 }
 
 
+ATTRIBUTE_CLIB_SECTION
 long
 random_r(unsigned long *ctx)
 {
@@ -73,12 +76,14 @@ random_r(unsigned long *ctx)
 
 static unsigned long next = 1;
 
+ATTRIBUTE_CLIB_SECTION
 long
 random(void)
 {
 	return do_random(&next);
 }
 
+ATTRIBUTE_CLIB_SECTION
 void
 srandom(unsigned long seed)
 {

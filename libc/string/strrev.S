@@ -56,7 +56,7 @@
 #define ltemp  r23
 #define rtemp  r22
 
-    .text
+    ASSEMBLY_CLIB_SECTION
     .global _U(strrev)
     .type   _U(strrev), @function
 

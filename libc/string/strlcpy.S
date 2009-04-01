@@ -61,7 +61,7 @@
 #define rWord_hi	r25
 #define rWord_lo	r24
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strlcpy)
 	.type	_U(strlcpy), @function
 

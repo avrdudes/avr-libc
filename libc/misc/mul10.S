@@ -50,7 +50,7 @@
    non-enhanced core, and not present in libgcc.a for enhanced core).
  */
 
-	.section .text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(__mulhi_const_10)
 
 _U(__mulhi_const_10):

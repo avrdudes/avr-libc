@@ -30,9 +30,10 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 vfprintf_P (FILE *stream, const char *fmt, va_list ap)
 {

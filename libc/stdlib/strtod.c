@@ -36,6 +36,7 @@
 #include <limits.h>
 #include <math.h>		/* INFINITY, NAN		*/
 #include <stdlib.h>
+#include "sectionname.h"
 
 /* Only GCC 4.2 calls the library function to convert an unsigned long
    to float.  Other GCC-es (including 4.3) use a signed long to float
@@ -79,7 +80,9 @@ PROGMEM static const char pstr_nan[] = {'N','A','N'};
      in \c errno.  If the correct value would cause underflow, zero is
      returned and \c ERANGE is stored in \c errno.
  */
-double strtod (const char * nptr, char ** endptr)
+ATTRIBUTE_CLIB_SECTION
+double
+strtod (const char * nptr, char ** endptr)
 {
     union {
 	unsigned long u32;

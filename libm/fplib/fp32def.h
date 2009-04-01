@@ -3,6 +3,8 @@
 #ifndef	_FP32DEF_H
 #define	_FP32DEF_H
 
+#include "sectionname.h"
+
 #define	rB0	r18
 #define	rB1	r19
 #define	rB2	r20
@@ -20,7 +22,7 @@
 #ifdef	FUNCTION
 # error	"The FUNCTION macro must be defined after FUNC_SEGNAME"
 #endif
-#define FUNC_SEGNAME	.text.fplib
+#define FUNC_SEGNAME	MLIB_SECTION
 
 /* Put constant tables at low addresses in program memory, so they are
    reachable for "lpm" without using RAMPZ on >64K devices.  */

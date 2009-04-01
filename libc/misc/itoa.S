@@ -46,7 +46,8 @@
 #include "macros.inc"
 #include "ctoasm.inc"
 
-	.global _U(itoa)
+	ASSEMBLY_CLIB_SECTION
+    .global _U(itoa)
 	.func _U(itoa)
 
 /* arguments */

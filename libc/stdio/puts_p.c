@@ -31,9 +31,10 @@
 
 #include <stdio.h>
 #include <avr/pgmspace.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 puts_P(const char *str)
 {

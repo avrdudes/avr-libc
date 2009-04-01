@@ -67,7 +67,7 @@
 #define num_lo	r24
 #define tmp	r18
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(atoi)
 	.type   _U(atoi), @function
 

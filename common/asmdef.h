@@ -31,8 +31,9 @@
 #ifndef	_ASMDEF_H
 #define _ASMDEF_H
 
-/* Macroses in this header use local symbols with `.L__' prefix.
- */
+#include "sectionname.h"
+
+/* Macros in this header use local symbols with `.L__' prefix. */
 
 #ifndef __AVR_HAVE_MOVW__
 # if  defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
@@ -79,7 +80,7 @@
    It is needed where an entry is at the middle of function. After this,
    you can to use an ENTRY macro below, one time or more.
    
-   TODO: make a possibilty to define a few of blocks FUNCTION..ENDFUNC
+   TODO: make a possibility to define a few of blocks FUNCTION..ENDFUNC
    in a one source file.
  */
 .macro	FUNCTION name
@@ -90,7 +91,7 @@
 #ifdef	FUNC_SEGNAME
 	.section  FUNC_SEGNAME, "ax", @progbits
 #else
-	.text
+	ASSEMBLY_CLIB_SECTION
 #endif
 	.type	_U(\name), "function"
   .ifdef   .L__END

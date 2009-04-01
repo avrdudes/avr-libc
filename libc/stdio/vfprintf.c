@@ -38,7 +38,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 #include "ftoa_engine.h"
 #include "ntz.h"
@@ -122,7 +122,9 @@
 #define FL_NEGATIVE	0x40
 #define FL_LONG 	0x80
 
-int vfprintf (FILE * stream, const char *fmt, va_list ap)
+ATTRIBUTE_CLIB_SECTION
+int
+vfprintf (FILE * stream, const char *fmt, va_list ap)
 {
     unsigned char c;		/* holds a char from the format string */
     unsigned char flags;
@@ -278,6 +280,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 #define FL_FLTEXP	FL_PREC
 #define	FL_FLTFIX	FL_LONG
 
+ATTRIBUTE_CLIB_SECTION
 int vfprintf (FILE * stream, const char *fmt, va_list ap)
 {
     unsigned char c;		/* holds a char from the format string */

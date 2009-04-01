@@ -30,11 +30,12 @@
 /* $Id$ */
 
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
 #undef ferror
 
+ATTRIBUTE_CLIB_SECTION
 int
 ferror(FILE *stream)
 {

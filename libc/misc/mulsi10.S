@@ -53,7 +53,7 @@
 
  */
 
-	.section .text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(__mulsi_const_10)
 
 _U(__mulsi_const_10):

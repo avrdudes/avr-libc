@@ -30,9 +30,10 @@
 /* $Id$ */
 
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
+ATTRIBUTE_CLIB_SECTION
 size_t
 fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {

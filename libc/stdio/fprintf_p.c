@@ -31,9 +31,10 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 fprintf_P(FILE *stream, const char *fmt, ...)
 {

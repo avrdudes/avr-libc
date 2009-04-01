@@ -30,11 +30,12 @@
 /* $Id$ */
 
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
 #undef feof
 
+ATTRIBUTE_CLIB_SECTION
 int
 feof(FILE *stream)
 {

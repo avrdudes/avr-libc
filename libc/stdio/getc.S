@@ -35,7 +35,7 @@
 int getc(FILE *stream);
 */
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(getc)
 	.type	_U(getc), @function
 _U(getc):

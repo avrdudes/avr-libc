@@ -31,7 +31,9 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 printf(const char *fmt, ...)
 {

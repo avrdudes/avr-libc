@@ -70,7 +70,7 @@
 #define num_lo_lo	r22
 #define tmp		r17
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(atol)
 	.type   _U(atol), @function
 

@@ -48,7 +48,7 @@
 #define len_hi r21
 #define len_lo r20
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(memcpy_P)
 	.type	_U(memcpy_P), @function
 _U(memcpy_P):

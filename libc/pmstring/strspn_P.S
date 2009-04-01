@@ -55,7 +55,7 @@
 /* This realization is compact, but is not very fast: an accept string
    is not cashed.	*/
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(strspn_P)
 	.type   _U(strspn_P), @function
 

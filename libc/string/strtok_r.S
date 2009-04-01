@@ -61,7 +61,7 @@
 #define str_c		r19
 #define del_c		r18
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(strtok_r)
 	.type	_U(strtok_r), @function
 

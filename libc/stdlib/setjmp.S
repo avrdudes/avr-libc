@@ -70,7 +70,7 @@
 #define ret_lo	r24
 #define ret_hi	r25
 
-	.section .text
+	ASSEMBLY_CLIB_SECTION
 
 	.global _U(setjmp)
 	.type	_U(setjmp), @function

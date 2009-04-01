@@ -69,7 +69,7 @@
 #define X_hi		r27
 #define X_lo		r26
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(strlcat_P)
 	.type	_U(strlcat_P),@function
 

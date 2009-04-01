@@ -49,7 +49,7 @@
 
 ; 10 words, (17 + strlen_P(src) * 10) cycles
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strcpy_P)
 	.type	_U(strcpy_P), @function
 _U(strcpy_P):

@@ -42,7 +42,7 @@
 
 #include "macros.inc"
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	atof
 	.type	atof, "function"
 atof:

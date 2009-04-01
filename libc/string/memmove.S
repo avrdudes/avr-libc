@@ -50,7 +50,7 @@
 #define len_lo r20
 
 	.extern _U(memcpy)
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(memmove)
 	.type	_U(memmove), @function
 _U(memmove):

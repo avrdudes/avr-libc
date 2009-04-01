@@ -51,7 +51,7 @@
 #define	val_hi	r25
 #define	cntr	r30
 
-    .text
+    ASSEMBLY_CLIB_SECTION
     .global	_U(ffs)
     .type	_U(ffs), @function
 _U(ffs):

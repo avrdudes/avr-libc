@@ -30,6 +30,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "sectionname.h"
 
 /** \file */
 /** \ingroup avr_string
@@ -51,7 +52,9 @@
     make sure that the function has succeeded in allocating the memory!
 */
 
-char *strdup(const char *s1)
+ATTRIBUTE_CLIB_SECTION
+char *
+strdup(const char *s1)
 {
     char *s2 = malloc(strlen(s1)+1);
     if (s2 != NULL)

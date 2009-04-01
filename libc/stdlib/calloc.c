@@ -32,7 +32,9 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 void *
 calloc(size_t nele, size_t size)
 {

@@ -138,6 +138,11 @@
 
   - Signature API added in <avr/signature.h>.
 
+  - All functions are now placed in the .text.avr-libc section, and the 
+  floating point functions are placed in the .text.avr-libc.fplib section. This
+  allows the user the ability to relocate all avr-libc routines to a different
+  address using a custom linker script.
+
 
 * New devices supported:
   

@@ -29,7 +29,9 @@
 /* $Id$	*/
 
 #include <avr/eeprom.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 void __eerd_block (void *dst, const void *src, size_t size,
 		   uint8_t (*getb)(const uint8_t *))
 {

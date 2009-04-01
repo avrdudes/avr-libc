@@ -29,7 +29,9 @@
 /* $Id$	*/
 
 #include <avr/eeprom.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 void
 __eewr_dword (uint32_t *dst, uint32_t value, void (*putb)(uint8_t *, uint8_t))
 {

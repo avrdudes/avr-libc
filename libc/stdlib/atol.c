@@ -27,9 +27,11 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdlib.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 long
 atol(const char *p)
 {
-	return strtol(p, (char **) 0, 10);
+	return strtol(p, (char **) NULL, 10);
 }

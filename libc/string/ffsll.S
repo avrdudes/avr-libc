@@ -52,7 +52,7 @@
 #define	wrd_hi	r31
 #define	cntr	r18
 
-    .text
+    ASSEMBLY_CLIB_SECTION
     .global	_U(ffsll)
     .type	_U(ffsll), @function
 _U(ffsll):

@@ -55,7 +55,7 @@
 #define ret_hi r25
 #define ret_lo r24
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strchr)
 	.type	_U(strchr), @function
 _U(strchr):

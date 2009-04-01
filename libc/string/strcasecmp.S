@@ -66,7 +66,7 @@
 
 #define tmp r22
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strcasecmp)
 	.type	_U(strcasecmp), @function
 	

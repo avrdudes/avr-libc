@@ -1,3 +1,165 @@
+2009-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Put all functions in .text.avr-libc section, floating point math
+	routines in .text.avr-libc.fplib section.
+	* common/sectionname.h: New file.
+	* common/asmdef.h: Fix spelling in comments. Change default linker
+	section.
+	* common/gasava.inc: Comment out macro that is no longer being used.
+	* common/macros.inc: Add include file.
+	* devtools/gen-avr-lib-tree.sh: Remove use of -mcall-prologues on 2
+	xmega devices.
+	* libc/misc/eerd_block.c: Change linker section.
+	* libc/misc/eerd_dword.c: Same.
+	* libc/misc/eerd_word.c: Same.
+	* libc/misc/eewr_block.c: Same.
+	* libc/misc/eewr_dword.c: Same.
+	* libc/misc/eewr_word.c: Same.
+	* libc/misc/itoa.S: Same.
+	* libc/misc/ltoa.S: Same.
+	* libc/misc/mul10.S: Same.
+	* libc/misc/mulsi10.S: Same.
+	* libc/misc/ultoa.S: Same.
+	* libc/misc/utoa.S: Same.
+	* libc/pmstring/memchr_P.S: Same.
+	* libc/pmstring/memcmp_P.S: Same.
+	* libc/pmstring/memcpy_P.S: Same.
+	* libc/pmstring/strcasecmp_P.S: Same.
+	* libc/pmstring/strcat_P.S: Same.
+	* libc/pmstring/strchr_P.S: Same.
+	* libc/pmstring/strcmp_P.S: Same.
+	* libc/pmstring/strcpy_P.S: Same.
+	* libc/pmstring/strcspn_P.S: Same.
+	* libc/pmstring/strlcat_P.S: Same.
+	* libc/pmstring/strlcpy_P.S: Same.
+	* libc/pmstring/strlen_P.S: Same.
+	* libc/pmstring/strncasecmp_P.S: Same.
+	* libc/pmstring/strncat_P.S: Same.
+	* libc/pmstring/strncmp_P.S: Same.
+	* libc/pmstring/strncpy_P.S: Same.
+	* libc/pmstring/strnlen_P.S: Same.
+	* libc/pmstring/strpbrk_P.S: Same.
+	* libc/pmstring/strrchr_P.S: Same.
+	* libc/pmstring/strsep_P.S: Same.
+	* libc/pmstring/strspn_P.S: Same.
+	* libc/pmstring/strstr_P.S: Same.
+	* libc/stdio/clearerr.c: Same.
+	* libc/stdio/fclose.c: Same.
+	* libc/stdio/fdevopen.c: Same.
+	* libc/stdio/feof.c: Same.
+	* libc/stdio/ferror.c: Same.
+	* libc/stdio/fgetc.c: Same.
+	* libc/stdio/fgets.c: Same.
+	* libc/stdio/fprintf.c: Same.
+	* libc/stdio/fprintf_p.c: Same.
+	* libc/stdio/fputc.c: Same.
+	* libc/stdio/fputs.c: Same.
+	* libc/stdio/fputs_p.c: Same.
+	* libc/stdio/fread.c: Same.
+	* libc/stdio/fscanf.c: Same.
+	* libc/stdio/fscanf_p.c: Same.
+	* libc/stdio/fwrite.c: Same.
+	* libc/stdio/getc.S: Same.
+	* libc/stdio/getchar.c: Same.
+	* libc/stdio/gets.c: Same.
+	* libc/stdio/printf.c: Same.
+	* libc/stdio/printf_p.c: Same.
+	* libc/stdio/putc.S: Same.
+	* libc/stdio/putchar.c: Same.
+	* libc/stdio/puts.c: Same.
+	* libc/stdio/puts_p.c: Same.
+	* libc/stdio/scanf.c: Same.
+	* libc/stdio/scanf_p.c: Same.
+	* libc/stdio/snprintf.c: Same.
+	* libc/stdio/snprintf_p.c: Same.
+	* libc/stdio/sprintf.c: Same.
+	* libc/stdio/sprintf_p.c: Same.
+	* libc/stdio/sscanf.c: Same.
+	* libc/stdio/sscanf_p.c: Same.
+	* libc/stdio/ultoa_invert.S: Same.
+	* libc/stdio/ungetc.c: Same.
+	* libc/stdio/vfprintf.c: Same.
+	* libc/stdio/vfprintf_p.c: Same.
+	* libc/stdio/vfscanf.c: Same.
+	* libc/stdio/vfscanf_p.c: Same.
+	* libc/stdio/vprintf.c: Same.
+	* libc/stdio/vscanf.c: Same.
+	* libc/stdio/vsnprintf.c: Same.
+	* libc/stdio/vsnprintf_p.c: Same.
+	* libc/stdio/vsprintf.c: Same.
+	* libc/stdio/vsprintf_p.c: Same.
+	* libc/stdlib/abort.S: Same.
+	* libc/stdlib/abort.c: Same.
+	* libc/stdlib/abs.c: Same.
+	* libc/stdlib/assert.c: Same. And use standard function declaration.
+	* libc/stdlib/atof.S: Same.
+	* libc/stdlib/atoi.S: Same.
+	* libc/stdlib/atoi.c: Same.
+	* libc/stdlib/atol.S: Same.
+	* libc/stdlib/atol.c: Same.
+	* libc/stdlib/bsearch.c: Same. And use standard function declaration.
+	* libc/stdlib/calloc.c: Same.
+	* libc/stdlib/ctype.S: Same.
+	* libc/stdlib/div.S: Same.
+	* libc/stdlib/dtoa_prf.c: Same.
+	* libc/stdlib/dtostre.c: Same.
+	* libc/stdlib/dtostrf.c: Same.
+	* libc/stdlib/exit.S: Same.
+	* libc/stdlib/ftoa_engine.S: Same.
+	* libc/stdlib/labs.c: Same.
+	* libc/stdlib/ldiv.S: Same.
+	* libc/stdlib/malloc.c: Same.
+	* libc/stdlib/qsort.c: Same. And use standard function declaration.
+	* libc/stdlib/rand.c: Same.
+	* libc/stdlib/random.c: Same.
+	* libc/stdlib/realloc.c: Same.
+	* libc/stdlib/setjmp.S: Same.
+	* libc/stdlib/strtod.c: Same.
+	* libc/stdlib/strtol.c: Same. And use standard function declaration.
+	* libc/stdlib/strtoul.c: Same. And use standard function declaration.
+	* libc/string/ffs.S: Same.
+	* libc/string/ffsl.S: Same.
+	* libc/string/ffsll.S: Same.
+	* libc/string/memccpy.S: Same.
+	* libc/string/memchr.S: Same.
+	* libc/string/memcmp.S: Same.
+	* libc/string/memcpy.S: Same.
+	* libc/string/memmem_P.S: Same. And add missing copyright and license,
+	with permission from Dmitry Xmelkov.
+	* libc/string/memmove.S: Same.
+	* libc/string/memset.S: Same.
+	* libc/string/strcasecmp.S: Same.
+	* libc/string/strcasestr_P.S: Same. And add missing copyright and
+	license, with permission from Dmitry Xmelkov.
+	* libc/string/strcat.S: Same.
+	* libc/string/strchr.S: Same.
+	* libc/string/strcmp.S: Same.
+	* libc/string/strcpy.S: Same.
+	* libc/string/strcspn.S: Same.
+	* libc/string/strdup.c: Same.
+	* libc/string/strlcat.S: Same.
+	* libc/string/strlcat.c: Same. And remove dead code.
+	* libc/string/strlcpy.S: Same.
+	* libc/string/strlcpy.c: Same. And remove dead code.
+	* libc/string/strlen.S: Same.
+	* libc/string/strlwr.S: Same.
+	* libc/string/strncasecmp.S: Same.
+	* libc/string/strncat.S: Same.
+	* libc/string/strncmp.S: Same.
+	* libc/string/strncpy.S: Same.
+	* libc/string/strnlen.S: Same.
+	* libc/string/strpbrk.S: Same.
+	* libc/string/strrchr.S: Same.
+	* libc/string/strrev.S: Same.
+	* libc/string/strsep.S: Same.
+	* libc/string/strspn.S: Same.
+	* libc/string/strstr.S: Same.
+	* libc/string/strtok.c: Same.
+	* libc/string/strtok_r.S: Same.
+	* libc/string/strupr.S: Same.
+	* libm/fplib/fp32def.h: Same.
+	* NEWS: Add item.
+
 2009-03-27  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn48.h: Fix comment.

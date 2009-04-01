@@ -72,7 +72,7 @@
 #define rLow     rP1
 
 #if defined (Lisascii)
-          TEXT_SEG(ctype, isascii)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isascii)
 
 GLOBAL(isascii)
@@ -86,7 +86,7 @@ GLOBAL(isascii)
 #endif
 
 #if defined (Ltoascii)
-          TEXT_SEG(ctype, toascii)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(toascii)
 
 GLOBAL(toascii)
@@ -98,7 +98,7 @@ GLOBAL(toascii)
 #endif
 
 #if defined (Lisalnum)
-          TEXT_SEG(ctype, isalnum)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isalnum)
 
 GLOBAL(isalnum)
@@ -115,7 +115,7 @@ GLOBAL(isalnum)
 #endif
 
 #if defined (Lcty_isfalse)
-          TEXT_SEG(ctype, __ctype_isfalse)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(__ctype_isfalse)
 
 GLOBAL(__ctype_isfalse)
@@ -130,7 +130,7 @@ GLOBAL(__ctype_istrue)
 ;-------------------------------------------------------------------
 
 #if defined (Lisalpha)
-          TEXT_SEG(ctype, isalpha)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isupper)
 
 GLOBAL(isupper)
@@ -155,7 +155,7 @@ GLOBAL(islower)
 ;-------------------------------------------------------------------
 
 #if defined (Lisdigit)
-          TEXT_SEG(ctype, isdigit)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isdigit)
 
 GLOBAL(isdigit)
@@ -173,7 +173,7 @@ GLOBAL(isdigit)
 ;-------------------------------------------------------------------
 
 #if defined (Lisxdigit)
-          TEXT_SEG(ctype, isxdigit)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isxdigit)
 
 ; This fact is used below.
@@ -200,7 +200,7 @@ GLOBAL(isxdigit)
 ;-------------------------------------------------------------------
 
 #if defined (Liscntrl)
-          TEXT_SEG(ctype, iscntrl)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(iscntrl)
 
 GLOBAL(iscntrl)
@@ -220,7 +220,7 @@ GLOBAL(iscntrl)
 ;-------------------------------------------------------------------
 
 #if defined (Lisprint)
-          TEXT_SEG(ctype, isprint)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isgraph)
 
 GLOBAL(isgraph)
@@ -240,7 +240,7 @@ GLOBAL(isprint)
 ;-------------------------------------------------------------------
 
 #if defined (Lisspace)
-          TEXT_SEG(ctype, isspace)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isspace)
 
 /* This fact is used below.	*/
@@ -265,7 +265,7 @@ GLOBAL(isspace)
 ;-------------------------------------------------------------------
 
 #if defined (Lispunct)
-          TEXT_SEG(ctype, ispunct)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(ispunct)
 
 GLOBAL(ispunct)
@@ -287,7 +287,7 @@ GLOBAL(ispunct)
 ;-------------------------------------------------------------------
 
 #if defined (Lisblank)
-          TEXT_SEG(ctype, isblank)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(isblank)
 
 GLOBAL(isblank)
@@ -307,7 +307,7 @@ GLOBAL(isblank)
 ;-------------------------------------------------------------------
 
 #if defined (Ltolower)
-          TEXT_SEG(ctype, tolower)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(tolower)
 
 GLOBAL(tolower)
@@ -326,7 +326,7 @@ GLOBAL(tolower)
 ;-------------------------------------------------------------------
 
 #if defined (Ltoupper)
-          TEXT_SEG(ctype, toupper)
+          ASSEMBLY_CLIB_SECTION
           FUNCTION(toupper)
 
 GLOBAL(toupper)

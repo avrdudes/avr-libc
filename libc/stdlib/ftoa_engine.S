@@ -100,7 +100,7 @@
     /* Fixed */
 #define	zero	r1
 
-    .text
+    ASSEMBLY_CLIB_SECTION
 	
     .global	__ftoa_engine
     .type	__ftoa_engine, "function"

@@ -35,7 +35,7 @@
 int putc(int c, FILE *stream);
 */
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(putc)
 	.type	_U(putc), @function
 _U(putc):

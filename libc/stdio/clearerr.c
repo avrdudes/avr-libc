@@ -30,12 +30,13 @@
 /* $Id$ */
 
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
 #undef clearerr
 
-void
+ATTRIBUTE_CLIB_SECTION
+void 
 clearerr(FILE *stream)
 {
 

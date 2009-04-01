@@ -31,7 +31,7 @@
 
 #include "macros.inc"
 
-	.section .text
+	ASSEMBLY_CLIB_SECTION
 	.global ldiv
 ldiv:
 	XJMP	__divmodsi4

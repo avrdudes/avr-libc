@@ -30,9 +30,12 @@
 
 #include "ftoa_engine.h"
 #include "dtoa_conv.h"
+#include "sectionname.h"
 
-int dtoa_prf (double val, char *s, unsigned char width, unsigned char prec,
-              unsigned char flags)
+ATTRIBUTE_CLIB_SECTION
+int
+dtoa_prf (double val, char *s, unsigned char width, unsigned char prec,
+          unsigned char flags)
 {
     int exp;
     int n;
