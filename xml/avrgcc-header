@@ -812,6 +812,7 @@ echo "" >> $headerfile
 
 else
 
+
 # Classic AVR
 #==================
 
@@ -1197,7 +1198,90 @@ echo "#define SIGNATURE_2 ${SIGNATURE_2}" >> $headerfile
 echo "" >> $headerfile
 echo "" >> $headerfile
 
-    
+
+
+# Device Pin information
+#---------------------------
+# Only available in AVR Studio 4 XML V1 information. V2 does not have this data.
+echo "/* Device Pin Definitions */" >> $headerfile
+# Get all package types.
+PACKAGE_TYPES=$(xml sel -T -t -v '/AVRPART/PACKAGE/PACKAGES' $devicefile | cut -d '[' -f 2 | cut -d ']' -f 1 | cut -d ':' -f 1- --output-delimiter=' ')
+# Determine which package has the most number of pins.
+PACKAGE_MAX=0
+PACKAGE_SELECTED=
+for i in $PACKAGE_TYPES ; do
+    PACKAGE_SIZE=$(xml sel -T -t -v /AVRPART/PACKAGE/${i}/NMB_PIN $devicefile | sed "s,\r,,g")
+    if test $PACKAGE_SIZE -gt $PACKAGE_MAX ; then
+        PACKAGE_MAX=$PACKAGE_SIZE
+        PACKAGE_SELECTED=$i
+    fi
+done
+# Check to make sure that package information is included in the XML file.
+if test -n $PACKAGE_SELECTED ; then
+    # Get list of pins from selected package, and check each pin.
+    PINS=$(xml sel -T -t -m /AVRPART/PACKAGE/$PACKAGE_SELECTED/* -v "name()" -o ' ' $devicefile | sed "s,\r,,g" | sed "s,NMB_PIN,,g")
+    for i in $PINS ; do
+        TARGET=
+        MAP_LIST=
+        
+        # The XML files are inconsistent in their format. Try several options.
+        
+        # Check for NAME tag.
+        NAME=$(xml sel -T -t -m /AVRPART/PACKAGE/$PACKAGE_SELECTED/${i}/NAME -v . -o ' ' $devicefile | sed "s,\r,,g")
+        if test $NAME ; then
+            # Get list of mappings. Inside brackets, colon delimited. The first one in the list is the target information.
+            TARGET=$(echo $NAME | cut -d '[' -f 2 | cut -d ']' -f 1 | cut -d ':' -f 1 --output-delimiter=' ')
+            MAP_LIST=$(echo $NAME | cut -d '[' -f 2 | cut -d ']' -f 1 | cut -d ':' -f 2- --output-delimiter=' ')
+        else
+            # Check for PIN_NAME and ALT_NAME tags.
+            PIN_NAME=$(xml sel -T -t -m /AVRPART/PACKAGE/$PACKAGE_SELECTED/${i}/PIN_NAME -v . -o ' ' $devicefile | sed "s,\r,,g")
+            ALT_NAME=$(xml sel -T -t -m /AVRPART/PACKAGE/$PACKAGE_SELECTED/${i}/ALT_NAME -v . -o ' ' $devicefile | sed "s,\r,,g")
+
+            if test -n "$PIN_NAME" -a -n "$ALT_NAME"  ; then
+                # Determine which field has the target and which has the mappings.
+                TARGET=$ALT_NAME
+                MAP_LIST=$(echo $PIN_NAME | sed "s,^[*]$,&,")
+                if test -z $MAP_LIST ; then
+                    MAP_LIST=$ALT_NAME
+                    TARGET=$PIN_NAME
+                fi
+                
+                # Get list of mappings. Inside brackets, colon delimited.
+                MAP_LIST=$(echo $MAP_LIST | cut -d '[' -f 2 | cut -d ']' -f 1 | cut -d ':' -f 1- --output-delimiter=' ')
+                
+                # Make sure target isn't just a blank character.
+                TARGET=$(echo $TARGET | sed "s, ,,g")
+            fi
+        fi
+        
+        if test -n "$TARGET" -a -n "$MAP_LIST" ; then
+            # Make transformations on map list.
+            #     Remove active low character signified by single quote
+            #     Replace '+' with "_P"
+            #     Replace '-' with "_N"
+            MAP_LIST=$(echo $MAP_LIST | sed "s,',,g" | sed "s,+,_P,g" | sed "s,-,_N,g")
+
+            #     Remove these pin mappings because they cannot be manipulated by software.
+            for j in TOSC1 TOSC2 PDI PDO TCK TMS TDO TDI AVCC AREF AGND HWB RESET XTAL1 XTAL2 VCC GND NC; do
+                MAP_LIST=$(echo $MAP_LIST | sed "s,${j},,g")
+            done
+
+            TARGET_LETTER=$(echo $TARGET | sed "s,^P,,g" | sed "s,[0-9]$,,g")
+            TARGET_NUMBER=$(echo $TARGET | sed "s,^P[A-Z],,g")
+
+            # Add definitions to map alternate pin names to register definitions.
+            for j in $MAP_LIST ; do
+                echo "#define ${j}_DDR   DDR${TARGET_LETTER}" >> $headerfile
+                echo "#define ${j}_PORT  PORT${TARGET_LETTER}" >> $headerfile
+                echo "#define ${j}_PIN   PIN${TARGET_LETTER}" >> $headerfile
+                echo "#define ${j}_BIT   ${TARGET_NUMBER}" >> $headerfile
+                echo "" >> $headerfile
+            done
+        fi
+    done
+fi
+
+
 # End of XMEGA/Classic
 fi
 
@@ -1226,6 +1310,13 @@ set +ex
 if test -e $LOGFILE ; then
     rm -f $LOGFILE
 fi
+
+echo Checking for package information in XML file... | tee -a $LOGFILE
+PACKAGE_TYPES=$(xml sel -t -v '/AVRPART/PACKAGE/PACKAGES' $devicefile | cut -d ']' -f 1 | cut -d ':' -f 1- --output-delimiter=' ')
+if test -z "$PACKAGE_TYPES" ; then
+    echo "Package types missing from XML file." | tee -a $LOGFILE
+fi
+echo | tee -a $LOGFILE
 
 echo Checking for misspelled preprocessor directives in header file... | tee -a $LOGFILE
 grep "#" $headerfile | cut -d '#' -f 2 | cut -d ' ' -f 1 | sort | uniq | tee -a $LOGFILE
