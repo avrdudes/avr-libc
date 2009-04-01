@@ -40,12 +40,11 @@ __FBSDID("$FreeBSD: src/lib/libc/gen/assert.c,v 1.7 2002/02/01 00:57:29 obrien E
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 void
-__assert(func, file, line, failedexpr)
-	const char *func, *file;
-	int line;
-	const char *failedexpr;
+__assert (const char *func, const char *file, int line, const char *failedexpr)
 {
 	if (func == NULL)
 		(void)fprintf(stderr,

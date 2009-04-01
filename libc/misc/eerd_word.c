@@ -29,7 +29,9 @@
 /* $Id$	*/
 
 #include <avr/eeprom.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 uint16_t __eerd_word (const uint16_t *addr, uint8_t (*getb)(const uint8_t *))
 {
     union {

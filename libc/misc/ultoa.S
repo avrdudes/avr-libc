@@ -46,6 +46,7 @@
 #include "macros.inc"
 #include "ctoasm.inc"
 
+    ASSEMBLY_CLIB_SECTION
 	.global _U(ultoa)
 	.func _U(ultoa)
 

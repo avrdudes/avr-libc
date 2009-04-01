@@ -33,6 +33,7 @@ static char sccsid[] = "@(#)bsearch.c	8.1 (Berkeley) 6/4/93";
 
 #include <stddef.h>
 #include <stdlib.h>
+#include "sectionname.h"
 
 /*
  * Perform a binary search.
@@ -50,13 +51,10 @@ static char sccsid[] = "@(#)bsearch.c	8.1 (Berkeley) 6/4/93";
  * have to make lim 3, then halve, obtaining 1, so that we will only
  * look at item 3.
  */
+ATTRIBUTE_CLIB_SECTION
 void *
-bsearch(key, base0, nmemb, size, compar)
-	register const void *key;
-	const void *base0;
-	size_t nmemb;
-	register size_t size;
-	register int (*compar)(const void *, const void *);
+bsearch(register const void *key, const void *base0, size_t nmemb,
+        register size_t size, register int (*compar)(const void *, const void *))
 {
 	register const char *base = base0;
 	register size_t lim;

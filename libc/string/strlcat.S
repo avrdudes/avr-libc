@@ -63,7 +63,7 @@
 #define rWord_hi	r25
 #define rWord_lo	r24
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(strlcat)
 	.type	_U(strlcat),@function
 

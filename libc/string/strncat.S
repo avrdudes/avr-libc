@@ -50,7 +50,7 @@
 #define len_hi r21
 #define len_lo r20
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strncat)
 	.type	_U(strncat), @function
 _U(strncat):

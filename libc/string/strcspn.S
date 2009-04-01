@@ -50,7 +50,7 @@
 
 #define chs	r21	/* char from s[]	*/
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(strcspn)
 	.type   _U(strcspn), @function
 

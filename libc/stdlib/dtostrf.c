@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include "ftoa_engine.h"
 #include "dtoa_conv.h"
+#include "sectionname.h"
 
 /* ???  Is 'width' a signed value?
    dtostrf.S comment:
@@ -44,6 +45,7 @@
    So, for compatibilty 'width' is signed value to left/right adjust.
  */
 
+ATTRIBUTE_CLIB_SECTION
 char *
 dtostrf (double val, signed char width, unsigned char prec, char *sout)
 {

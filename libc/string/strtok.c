@@ -48,10 +48,13 @@
 */
 
 #include <string.h>
+#include "sectionname.h"
 
 static char *p;
 
-char *strtok(char *s, const char *delim)
+ATTRIBUTE_CLIB_SECTION
+char *
+strtok(char *s, const char *delim)
 {
     return strtok_r(s, delim, &p);
 } 

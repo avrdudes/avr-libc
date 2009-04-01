@@ -53,7 +53,7 @@
 #define len_hi r23
 #define len_lo r22
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strnlen_P)
 	.type	_U(strnlen_P), @function
 _U(strnlen_P):

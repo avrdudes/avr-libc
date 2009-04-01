@@ -63,7 +63,7 @@
 
 #define ret_lo	r24
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(strsep_P)
 	.type	_U(strsep_P),@function
 _U(strsep_P):

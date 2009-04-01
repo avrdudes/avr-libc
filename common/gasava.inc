@@ -30,7 +30,7 @@
 #define _GAS_AVA_INC
 
 #  include "ctoasm.inc"
-#  define TEXT_SEG(subs, func) .section .text.##subs, "ax", @progbits ; func
+/* #  define TEXT_SEG(subs, func) .section .text.##subs, "ax", @progbits ; func */
 #  define GLOBAL(x) _U(x): .global _U(x)
 #  define FUNCTION(x) .func _U(x)
 #  define ENDFUNC .endfunc

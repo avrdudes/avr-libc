@@ -32,7 +32,7 @@
 
 #include "macros.inc"
 
-	.section .text
+	ASSEMBLY_CLIB_SECTION
 	.global _U(exit)
 	.type	_U(exit), "function"
 

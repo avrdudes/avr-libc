@@ -31,7 +31,9 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 vprintf(const char *fmt, va_list ap)
 {

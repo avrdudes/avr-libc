@@ -33,7 +33,7 @@
 /* $Id$ */
 
 #include <stdlib.h>
-
+#include "sectionname.h"
 #include "stdlib_private.h"
 
 #ifdef MALLOC_TEST
@@ -62,6 +62,7 @@ char *__malloc_heap_end = &__heap_end;
 char *__brkval;
 struct __freelist *__flp;
 
+ATTRIBUTE_CLIB_SECTION
 void *
 malloc(size_t len)
 {
@@ -190,6 +191,8 @@ malloc(size_t len)
 	return 0;
 }
 
+
+ATTRIBUTE_CLIB_SECTION
 void
 free(void *p)
 {

@@ -27,7 +27,9 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdlib.h>
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 atoi(const char *p)
 {

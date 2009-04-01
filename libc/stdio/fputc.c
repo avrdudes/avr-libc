@@ -30,9 +30,10 @@
 /* $Id$ */
 
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 fputc(int c, FILE *stream)
 {

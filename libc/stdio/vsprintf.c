@@ -32,9 +32,10 @@
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
+ATTRIBUTE_CLIB_SECTION
 int
 vsprintf(char *s, const char *fmt, va_list ap)
 {

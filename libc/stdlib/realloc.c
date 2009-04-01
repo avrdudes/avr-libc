@@ -32,13 +32,14 @@
 
 #include <stdlib.h>
 #include <string.h>
-
+#include "sectionname.h"
 #include "stdlib_private.h"
 
 #ifndef MALLOC_TEST
 #include <avr/io.h>
 #endif
 
+ATTRIBUTE_CLIB_SECTION
 void *
 realloc(void *ptr, size_t len)
 {

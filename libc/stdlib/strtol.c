@@ -34,6 +34,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <stdlib.h>
+#include "sectionname.h"
 
 /*
  * Convert a string to a long integer.
@@ -41,11 +42,9 @@
  * Ignores `locale' stuff.  Assumes that the upper and lower case
  * alphabets and digits are each contiguous.
  */
+ATTRIBUTE_CLIB_SECTION
 long
-strtol(nptr, endptr, base)
-	const char *nptr;
-	char **endptr;
-	register int base;
+strtol(const char *nptr, char **endptr, register int base)
 {
 	register unsigned long acc;
 	register unsigned char c;

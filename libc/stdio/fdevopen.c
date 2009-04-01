@@ -32,7 +32,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "sectionname.h"
 #include "stdio_private.h"
 
 /** \file */
@@ -82,6 +82,7 @@
    not use for new code.
 */
 
+ATTRIBUTE_CLIB_SECTION
 FILE *
 fdevopen(int (*put)(char, FILE *), int (*get)(FILE *))
 {

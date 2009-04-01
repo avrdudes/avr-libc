@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2009 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -6,10 +6,12 @@
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
+
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
+
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -27,35 +29,21 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-/* $Id$ */
+#ifndef __SECTIONNAME_H__
+#define __SECTIONNAME_H__
 
-#include <limits.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include "sectionname.h"
-#include "stdio_private.h"
+/* Put all avr-libc functions in a common, unique sub-section name under .text. */
 
-ATTRIBUTE_CLIB_SECTION
-int
-sscanf(const char *s, const char *fmt, ...)
-{
-	va_list ap;
-	FILE f;
-	int i;
+#define CLIB_SECTION    .text.avr-libc
+#define MLIB_SECTION    .text.avr-libc.fplib
 
-	f.flags = __SRD | __SSTR;
-	/*
-	 * It is OK to discard the "const" qualifier here.  f.buf is
-	 * non-const as in the generic case, this buffer is obtained
-	 * by malloc().  In the scanf case however, the buffer is
-	 * really only be read (by getc()), and as this our FILE f we
-	 * be discarded upon exiting sscanf(), nobody will ever get
-	 * a chance to get write access to it again.
-	 */
-	f.buf = (char *)s;
-	va_start(ap, fmt);
-	i = vfscanf(&f, fmt, ap);
-	va_end(ap);
+#define STR(x)   _STR(x)
+#define _STR(x)  #x
 
-	return i;
-}
+#define ATTRIBUTE_CLIB_SECTION  __attribute__ ((section (STR(CLIB_SECTION))))
+#define ATTRIBUTE_MLIB_SECTION  __attribute__ ((section (STR(MLIB_SECTION))))
+
+#define ASSEMBLY_CLIB_SECTION   .section CLIB_SECTION, "ax", @progbits
+#define ASSEMBLY_MLIB_SECTION   .section MLIB_SECTION, "ax", @progbits
+
+#endif

@@ -37,6 +37,7 @@
  */
 
 #include <avr/io.h>
+#include "sectionname.h"
 
 /* if not defined, assume old version with underscores */
 #ifndef __USER_LABEL_PREFIX__

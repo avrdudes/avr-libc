@@ -30,12 +30,13 @@
 /* $Id$ */
 
 #include <stdio.h>
+#include "sectionname.h"
 
 #undef putchar
 
+ATTRIBUTE_CLIB_SECTION
 int
 putchar(int c)
 {
-
 	return putc(c, stdout);
 }

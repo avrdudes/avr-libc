@@ -58,7 +58,7 @@
 #define str_lo r24
 #define temp   r22
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strlwr)
 	.type	_U(strlwr), @function
 

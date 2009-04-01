@@ -48,7 +48,7 @@
 
 ; 10 words, (14 + strlen(src) * 5) cycles
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strlen)
 	.type	_U(strlen), @function
 _U(strlen):

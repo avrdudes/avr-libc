@@ -28,10 +28,11 @@
  */
 
 #include <stdlib.h>
+#include "sectionname.h"
 
-typedef int		 cmp_t(const void *, const void *);
-static char	*med3(char *, char *, char *, cmp_t *);
-static void	 swapfunc(char *, char *, int);
+typedef int cmp_t(const void *, const void *);
+static char *med3(char *, char *, char *, cmp_t *);
+static void swapfunc(char *, char *, int);
 
 #define min(a, b)	((a) < (b) ? (a) : (b))
 
@@ -49,10 +50,9 @@ static void	 swapfunc(char *, char *, int);
         } while (--i > 0);				\
 }
 
+ATTRIBUTE_CLIB_SECTION
 static void
-swapfunc(a, b, n)
-	char *a, *b;
-	int n;
+swapfunc(char *a, char *b, int n)
 {
 	swapcode(char, a, b, n)
 }
@@ -61,21 +61,18 @@ swapfunc(a, b, n)
 
 #define vecswap(a, b, n) 	if ((n) > 0) swapfunc(a, b, n)
 
+ATTRIBUTE_CLIB_SECTION
 static char *
-med3(a, b, c, cmp)
-	char *a, *b, *c;
-	cmp_t *cmp;
+med3(char *a, char *b, char *c, cmp_t *cmp)
 {
 	return cmp(a, b) < 0 ?
 	       (cmp(b, c) < 0 ? b : (cmp(a, c) < 0 ? c : a ))
               :(cmp(b, c) > 0 ? b : (cmp(a, c) < 0 ? a : c ));
 }
 
+ATTRIBUTE_CLIB_SECTION
 void
-qsort(a, n, es, cmp)
-	void *a;
-	size_t n, es;
-	cmp_t *cmp;
+qsort(void *a, size_t n, size_t es, cmp_t *cmp)
 {
 	char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
 	int d, r, swap_cnt;

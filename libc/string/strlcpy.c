@@ -31,10 +31,8 @@
 static char *rcsid = "$OpenBSD: strlcpy.c,v 1.5 2001/05/13 15:40:16 deraadt Exp $";
 #endif /* LIBC_SCCS and not lint */
 
-#if 0
-#include <sys/types.h>
-#endif
 #include <string.h>
+#include "sectionname.h"
 
 /** \ingroup avr_string
     \fn size_t strlcpy (char *dst, const char *src, size_t siz)
@@ -46,6 +44,7 @@ static char *rcsid = "$OpenBSD: strlcpy.c,v 1.5 2001/05/13 15:40:16 deraadt Exp 
     \returns The strlcpy() function returns strlen(src). If retval >= siz,
     truncation occurred.  */
 
+ATTRIBUTE_CLIB_SECTION
 size_t
 strlcpy (char *dst, const char *src, size_t siz)
 {

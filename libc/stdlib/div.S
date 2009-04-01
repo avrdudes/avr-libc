@@ -30,7 +30,7 @@
 
 #include "macros.inc"
 
-	.section .text
+	ASSEMBLY_CLIB_SECTION
 	.global div
 div:
 	XJMP	__divmodhi4

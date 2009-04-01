@@ -62,7 +62,7 @@
 #define Z_hi		r31
 #define Z_lo		r30
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strlcpy_P)
 	.type	_U(strlcpy_P), @function
 

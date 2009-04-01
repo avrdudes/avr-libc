@@ -64,7 +64,7 @@
 #define	beg2   r21	/* begin of s2: s2[0]	*/
 #define chr2   r0
 
-.text
+ASSEMBLY_CLIB_SECTION
 .global _U(strstr)
 .type _U(strstr), @function
 _U(strstr):

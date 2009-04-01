@@ -31,7 +31,9 @@
 #include <stdlib.h>
 #include <avr/pgmspace.h>
 #include "ftoa_engine.h"
+#include "sectionname.h"
 
+ATTRIBUTE_CLIB_SECTION
 char *
 dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
 {

@@ -70,7 +70,7 @@
     /* Fixed	*/
 #define	rzero	r1
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	__ultoa_invert
 	.type	__ultoa_invert, "function"
 

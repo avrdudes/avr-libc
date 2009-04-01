@@ -50,7 +50,7 @@
 #define src_hi r23
 #define src_lo r22
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strcat)
 	.type	_U(strcat), @function
 _U(strcat):

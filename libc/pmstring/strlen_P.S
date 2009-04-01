@@ -46,7 +46,7 @@
 
 ; 11 words, (14 + strlen_P(src) * 8) cycles
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strlen_P)
 	.type	_U(strlen_P), @function
 _U(strlen_P):

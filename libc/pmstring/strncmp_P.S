@@ -53,7 +53,7 @@
 #define ret_hi r25
 #define ret_lo r24
 
-	.text
+	ASSEMBLY_CLIB_SECTION
 	.global	_U(strncmp_P)
 	.type	_U(strncmp_P), @function
 _U(strncmp_P):

@@ -31,10 +31,8 @@
 static char *rcsid = "$OpenBSD: strlcat.c,v 1.8 2001/05/13 15:40:15 deraadt Exp $";
 #endif /* LIBC_SCCS and not lint */
 
-#if 0
-#include <sys/types.h>
-#endif
 #include <string.h>
+#include "sectionname.h"
 
 /** \ingroup avr_string
     \fn size_t strlcat (char *dst, const char *src, size_t siz)
@@ -47,6 +45,7 @@ static char *rcsid = "$OpenBSD: strlcat.c,v 1.8 2001/05/13 15:40:15 deraadt Exp 
     \returns The strlcat() function returns strlen(src) + MIN(siz,
     strlen(initial dst)).  If retval >= siz, truncation occurred.  */
 
+ATTRIBUTE_CLIB_SECTION
 size_t
 strlcat (char *dst, const char *src, size_t siz)
 {

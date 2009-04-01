@@ -30,9 +30,11 @@
 /* $Id$ */
 
 #include <stdio.h>
+#include "sectionname.h"
 
 #undef getchar
 
+ATTRIBUTE_CLIB_SECTION
 int
 getchar(void)
 {

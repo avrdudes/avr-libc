@@ -46,7 +46,7 @@
 
 #define	cntr	r30
 
-    .text
+    ASSEMBLY_CLIB_SECTION
     .global	_U(ffsl)
     .type	_U(ffsl), @function
 _U(ffsl):
