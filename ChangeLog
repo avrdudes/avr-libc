@@ -1,3 +1,9 @@
+2009-04-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SF bug #2738926.
+	* include/avr/eeprom.h: Add __EEGET, __EEPUT for IAR compatibility.
+	* NEWS: Add item to fixed bug list.
+
 2009-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* xml/avrgcc-header: Add generation of hardware pin definitions for
