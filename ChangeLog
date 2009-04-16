@@ -1,5 +1,20 @@
 2009-04-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* configure.ac: Add support for ATxmega128D3 and ATxmega256D3.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/iox128d3.h: New file.
+	* include/avr/iox256d3.h: New file.
+	* NEWS: Add news items.
+
+2009-04-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for SF bug #2738926.
 	* include/avr/eeprom.h: Add __EEGET, __EEPUT for IAR compatibility.
 	* NEWS: Add item to fixed bug list.

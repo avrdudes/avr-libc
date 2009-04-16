@@ -391,8 +391,10 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_ATxmega64A3__) \
 || defined(__AVR_ATxmega128A1__) \
 || defined(__AVR_ATxmega128A3__) \
+|| defined(__AVR_ATxmega128D3__) \
 || defined(__AVR_ATxmega192A3__) \
 || defined(__AVR_ATxmega256A3__) \
+|| defined(__AVR_ATxmega256D3__) \
 || defined(__AVR_ATxmega256A3B__)
 
     #define SLEEP_MODE_IDLE         (0)

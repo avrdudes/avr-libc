@@ -334,12 +334,16 @@
 #  include <avr/iox128a1.h>
 #elif defined (__AVR_ATxmega128A3__)
 #  include <avr/iox128a3.h>
+#elif defined (__AVR_ATxmega128D3__)
+#  include <avr/iox128d3.h>
 #elif defined (__AVR_ATxmega192A3__)
 #  include <avr/iox192a3.h>
 #elif defined (__AVR_ATxmega256A3__)
 #  include <avr/iox256a3.h>
 #elif defined (__AVR_ATxmega256A3B__)
 #  include <avr/iox256a3b.h>
+#elif defined (__AVR_ATxmega256D3__)
+#  include <avr/iox256d3.h>
 #elif defined (__AVR_ATA6289__)
 #  include <avr/ioa6289.h>
 /* avr1: the following only supported for assembler programs */
