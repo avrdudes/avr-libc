@@ -167,9 +167,11 @@ avr_HEADERS = \
     iox64a3.h \
     iox128a1.h \
     iox128a3.h \
+    iox128d3.h \
     iox192a3.h \
     iox256a3.h \
     iox256a3b.h \
+    iox256d3.h \
     lock.h \
     parity.h \
     pgmspace.h \
