@@ -1,3 +1,8 @@
+2009-04-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Use -fno-jump-tables to compile
+	libraries for large memory devices.
+
 2009-04-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATxmega128D3 and ATxmega256D3.
