@@ -147,6 +147,7 @@
 
 * New devices supported:
   
+  + ATxmega64D3
   + ATxmega128D3
   + ATxmega256D3
   + ATxmega192A3
