@@ -347,6 +347,7 @@ find out which macros are applicable to your device.
 || defined(__AVR_ATxmega32D4__) \
 || defined(__AVR_ATxmega64A1__) \
 || defined(__AVR_ATxmega64A3__) \
+|| defined(__AVR_ATxmega64D3__) \
 || defined(__AVR_ATxmega128A1__) \
 || defined(__AVR_ATxmega128A3__) \
 || defined(__AVR_ATxmega128D3__) \

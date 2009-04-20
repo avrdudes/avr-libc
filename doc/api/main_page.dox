@@ -218,6 +218,7 @@ compile-time.
 - atxmega32d4
 - atxmega64a1
 - atxmega64a3
+- atxmega64d3
 - atxmega128a1
 - atxmega128a3
 - atxmega128d3
