@@ -1,3 +1,9 @@
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Use generic variable for turning
+	off jump tables optimization. Turn off this optimization for more
+	devices and architectures.
+
 2009-04-20  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATxmega64D3.
