@@ -85,4 +85,10 @@
 #define __BOOT_LOCK_BITS_1_EXIST 
 
 
+/* Signature (ATmega324P) */
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x95
+#define SIGNATURE_2 0x08 
+
+
 #endif /* _AVR_IOM324_H_ */

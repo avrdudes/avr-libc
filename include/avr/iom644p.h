@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, 2006 Anatoly Sokolov
+/* Copyright (c) 2005 Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -28,22 +28,22 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* avr/iom164.h - definitions for ATmega164 */
+/* avr/iom644p.h - definitions for ATmega644P */
 
 /* $Id$ */
 
-#ifndef _AVR_IOM164_H_
-#define _AVR_IOM164_H_ 1
+#ifndef _AVR_IOM644P_H_
+#define _AVR_IOM644P_H_ 1
 
 #include <avr/iomxx4.h>
 
 /* Constants */
-#define SPM_PAGESIZE    128
-#define RAMEND          0x04FF
-#define XRAMEND         RAMEND
-#define E2END           0x1FF
-#define E2PAGESIZE      4
-#define FLASHEND        0x3FFF
+#define SPM_PAGESIZE 256
+#define RAMEND       0x10FF
+#define XRAMEND      RAMEND
+#define E2END        0x7FF
+#define E2PAGESIZE   8
+#define FLASHEND     0xFFFF
 
 
 /* Fuses */
@@ -85,10 +85,10 @@
 #define __BOOT_LOCK_BITS_1_EXIST 
 
 
-/* Signature (ATmega164P) */
+/* Signature */
 #define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x94
-#define SIGNATURE_2 0x0A 
+#define SIGNATURE_1 0x96
+#define SIGNATURE_2 0x0A
 
 
-#endif /* _AVR_IOM164_H_ */
+#endif /* _AVR_IOM644P_H_ */
