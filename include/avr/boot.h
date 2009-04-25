@@ -481,15 +481,12 @@
     uint8_t __result;                                      \
     __asm__ __volatile__                                   \
     (                                                      \
-        "ldi r30, %3\n\t"                                  \
-        "ldi r31, 0\n\t"                                   \
         "sts %1, %2\n\t"                                   \
         "lpm %0, Z\n\t"                                    \
         : "=r" (__result)                                  \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
           "r" ((uint8_t)__BOOT_LOCK_BITS_SET),             \
-          "M" (address)                                    \
-        : "r0", "r30", "r31"                               \
+          "z" ((uint16_t)address)                          \
     );                                                     \
     __result;                                              \
 }))

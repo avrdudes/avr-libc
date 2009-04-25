@@ -1,5 +1,12 @@
 2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #26284. Thanks to Brad Schick for the patch.
+	* include/avr/boot.h (boot_lock_fuse_bits_get): Remove explicit load
+	of Z, use 'z' constraint instead. Remove unneeded clobbers.
+	NEW: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #26188.
 	* include/avr/io.h: Include separate header file for ATmega644P.
 	* include/avr/Makefile.am (avr_HEADERS): Add new file.
