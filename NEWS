@@ -89,6 +89,7 @@
   [#25723] Realloc corrupts free list when growing into the next free item
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
   [#25930] New IO-Headerfiles missing PXn Portpindefinitions
+  [#26188] Wrong or missing definition of SIGNATURE_X in iom644.h and others
   [#26308] WDE defined as WDE3 in io90pwm3b.h and io90pwm2b.h
   
 * Other changes:

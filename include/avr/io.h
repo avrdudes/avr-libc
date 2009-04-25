@@ -179,7 +179,7 @@
 #elif defined (__AVR_ATmega644__)
 #  include <avr/iom644.h>
 #elif defined (__AVR_ATmega644P__)
-#  include <avr/iom644.h>
+#  include <avr/iom644p.h>
 #elif defined (__AVR_ATmega645__)
 #  include <avr/iom645.h>
 #elif defined (__AVR_ATmega6450__)

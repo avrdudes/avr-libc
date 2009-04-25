@@ -1,5 +1,16 @@
 2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #26188.
+	* include/avr/io.h: Include separate header file for ATmega644P.
+	* include/avr/Makefile.am (avr_HEADERS): Add new file.
+	* include/avr/iom644p.h: New file, forked from iom644.h.
+	(SIGNATURE_2): Fix signature byte definition.
+	* include/avr/iom164.h: Add signature bytes for ATmega164P.
+	* include/avr/iom324.h: Add signature bytes for ATmega324P.
+	* NEWS: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #26308.
 	* include/avr/io90pwm2b.h: Replace WDE3 with WDE.
 	* include/avr/io90pwm3b.h: Same.
