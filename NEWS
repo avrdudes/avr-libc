@@ -5,6 +5,7 @@
   [sourceforge.net: #2693898] ATmega32U6 missing in power.h
   [sourceforge.net: #2738926] avr/eeprom.h EEGET and EEPUT
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
+  [#25929] boot.h Fuse read not compatible with Tiny48/88.
   [#25930] New IO-Headerfiles missing PXn Portpindefinitions
   [#26188] Wrong or missing definition of SIGNATURE_X in iom644.h and others
   [#26284] boot_lock_fuse_bits_get does not compile under gcc 4.3.X

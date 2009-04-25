@@ -1,5 +1,12 @@
 2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #25929. Thanks to Bob Paddock for a patch.
+	* include/avr/boot.h (__BOOT_LOCK_BITS_SET): Provide alternate
+	definition if RFLB is defined instead of BLBSET.
+	NEWS: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #26284. Thanks to Brad Schick for the patch.
 	* include/avr/boot.h (boot_lock_fuse_bits_get): Remove explicit load
 	of Z, use 'z' constraint instead. Remove unneeded clobbers.
