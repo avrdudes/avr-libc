@@ -88,6 +88,7 @@
   [#25645] xmega header files broken #defines
   [#25723] Realloc corrupts free list when growing into the next free item
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
+  [#25929] boot.h Fuse read not compatible with Tiny48/88.
   [#25930] New IO-Headerfiles missing PXn Portpindefinitions
   [#26188] Wrong or missing definition of SIGNATURE_X in iom644.h and others
   [#26284] boot_lock_fuse_bits_get does not compile under gcc 4.3.X

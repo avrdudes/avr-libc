@@ -195,7 +195,11 @@
 #define __BOOT_PAGE_WRITE         (_BV(__SPM_ENABLE) | _BV(PGWRT))
 #define __BOOT_PAGE_FILL          _BV(__SPM_ENABLE)
 #define __BOOT_RWW_ENABLE         (_BV(__SPM_ENABLE) | _BV(__COMMON_ASRE))
+#if defined(BLBSET)
 #define __BOOT_LOCK_BITS_SET      (_BV(__SPM_ENABLE) | _BV(BLBSET))
+#elif defined(RFLB)  /* Some devices have RFLB defined instead of BLBSET. */
+#define __BOOT_LOCK_BITS_SET      (_BV(__SPM_ENABLE) | _BV(RFLB))
+#endif
 
 #define __boot_page_fill_normal(address, data)   \
 (__extension__({                                 \
