@@ -1,3 +1,10 @@
+2009-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug AVR Tools #9724.
+	* include/avr/iotn13a.h: Remove PRSPI. Change value of PRTIM0.
+	* include/avr/power.h: Add macros for ATtiny13A.
+	* NEWS: Add item to fixed bug list.
+
 2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #25929. Thanks to Bob Paddock for a patch.
