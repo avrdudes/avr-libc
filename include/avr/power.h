@@ -1209,6 +1209,18 @@ do{ \
     PRR1 |= (uint8_t)((1<<PRUSBH)|(1<<PRUSB)|(1<<PRHSSPI)|(1<<PRSCI)|(1<<PRAES)|(1<<PRKB)); \
 }while(0)
 
+
+#elif defined(__AVR_ATtiny13A__)
+
+#define power_adc_enable()   (PRR &= (uint8_t)~(1 << PRADC))
+#define power_adc_disable()  (PRR |= (uint8_t)(1 << PRADC))
+
+#define power_timer0_enable()   (PRR &= (uint8_t)~(1 << PRTIM0))
+#define power_timer0_disable()  (PRR |= (uint8_t)(1 << PRTIM0))
+
+#define power_all_enable()      (PRR &= (uint8_t)~((1<<PRADC)|(1<<PRTIM0)))
+#define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRTIM0)))
+
 #endif
 
 

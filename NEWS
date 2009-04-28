@@ -2,6 +2,7 @@
 
 * Bugs fixed:
   [no-id] Enable ATmega128RFA1 in <avr/power.h>
+  [AVR Tools: #9724] Error in ATtiny13A include file, PRR register
   [sourceforge.net: #2693898] ATmega32U6 missing in power.h
   [sourceforge.net: #2738926] avr/eeprom.h EEGET and EEPUT
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"

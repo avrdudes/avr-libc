@@ -187,8 +187,7 @@
 
 #define PRR _SFR_IO8(0x25)
 #define PRADC 0
-#define PRSPI 1
-#define PRTIM0 2
+#define PRTIM0 1
 
 #define CLKPR _SFR_IO8(0x26)
 #define CLKPS0 0
