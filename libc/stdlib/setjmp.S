@@ -107,7 +107,7 @@ _U(setjmp):
 	clr	ret_hi
 #if  defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
 	st	X+, __tmp_reg__
-	rjmp	.L_eijmp
+	rjmp	.L_jmp3
 #else
 	ijmp
 #endif
@@ -154,9 +154,11 @@ _U(longjmp):
 	ld	ZH, X+
 #if  defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
 	ld	__tmp_reg__, X+
-.L_eijmp:
-	out	AVR_EXTENDED_INDIRECT_ADDR, __tmp_reg__
-	eijmp
+.L_jmp3:
+	push	ZL
+	push	ZH
+	push	__tmp_reg__
+	ret
 #else
 	ijmp
 #endif
