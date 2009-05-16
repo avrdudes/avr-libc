@@ -1,3 +1,9 @@
+2009-05-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/setjmp.S: Remove the EIJMP instruction usage, as the
+	EIND changing is forbidden by AVR-GCC's API.
+	* NEWS: add item to fixed bug list (no-id).
+
 2009-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug AVR Tools #9724.

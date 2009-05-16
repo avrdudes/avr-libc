@@ -8,6 +8,7 @@
   [no-id] malloc() could allocate memory beyond the limits of heap
   [no-id] xmega header file updates.
   [no-id] Enable ATmega128RFA1 in <avr/power.h>
+  [no-id] longjmp() writes to EIND register, it is forbidden by AVR-GCC's API
   [AVR Tools: #9724] Error in ATtiny13A include file, PRR register
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [sourceforge.net: #1883630] ATmegaXX4 - USART0 and USART1 additional bits aliases
