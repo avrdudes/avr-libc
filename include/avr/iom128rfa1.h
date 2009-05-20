@@ -3686,12 +3686,12 @@ struct __reg_TRX_STATE {
 #define CMD_PLL_ON                      9
 #define CMD_RX_AACK_ON                  22
 #define CMD_TX_ARET_ON                  25
-#define SUCCESS                         0
-#define SUCCESS_DATA_PENDING            1
-#define SUCCESS_WAIT_FOR_ACK            2
-#define CHANNEL_ACCESS_FAILURE          3
-#define NO_ACK                          5
-#define INVALID                         7
+#define TRAC_SUCCESS                         0
+#define TRAC_SUCCESS_DATA_PENDING            1
+#define TRAC_SUCCESS_WAIT_FOR_ACK            2
+#define TRAC_CHANNEL_ACCESS_FAILURE          3
+#define TRAC_NO_ACK                          5
+#define TRAC_INVALID                         7
 
 #endif /* __ASSEMBLER__ */
 
@@ -5196,7 +5196,7 @@ struct __reg_TST_RX_LENGTH {
 /* Lock Bits */
 
 #define __BOOT_LOCK_BITS_0_EXIST
-#define __BOOT_LOCK_BITS_1_EXIST 
+#define __BOOT_LOCK_BITS_1_EXIST
 #define __LOCK_BITS_EXIST
 
 
