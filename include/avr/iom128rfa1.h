@@ -1564,7 +1564,8 @@ struct __reg_TIMSK5 {
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_ADCSRC {
-        unsigned int _adsut : 6;	/* ADC Start-up Time */
+        unsigned int _adsut : 5;	/* ADC Start-up Time */
+        unsigned int _res0 : 1;	/* Reserved */
         unsigned int _adtht : 2;	/* ADC Track-and-Hold Time */
 };
 
@@ -1579,7 +1580,6 @@ struct __reg_ADCSRC {
 #define ADSUT2                          2
 #define ADSUT3                          3
 #define ADSUT4                          4
-#define ADSUT5                          5
 #define ADTHT0                          6
 #define ADTHT1                          7
 
@@ -1683,14 +1683,14 @@ struct __reg_ADMUX {
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DIDR2 {
-        unsigned int _adc8d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
-        unsigned int _adc9d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
-        unsigned int _adc10d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
-        unsigned int _adc11d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
-        unsigned int _adc12d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
-        unsigned int _adc13d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
-        unsigned int _adc14d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
-        unsigned int _adc15d : 1;	/* ADC15D:ADC8D: ADC15:8 Digital Input Disable */
+        unsigned int _adc8d : 1;	/* Reserved Bits */
+        unsigned int _adc9d : 1;	/* Reserved Bits */
+        unsigned int _adc10d : 1;	/* Reserved Bits */
+        unsigned int _adc11d : 1;	/* Reserved Bits */
+        unsigned int _adc12d : 1;	/* Reserved Bits */
+        unsigned int _adc13d : 1;	/* Reserved Bits */
+        unsigned int _adc14d : 1;	/* Reserved Bits */
+        unsigned int _adc15d : 1;	/* Reserved Bits */
 };
 
 #define DIDR2_struct _SFR_IO8_STRUCT(0x7d, struct __reg_DIDR2)
@@ -1714,14 +1714,14 @@ struct __reg_DIDR2 {
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_DIDR0 {
-        unsigned int _adc0d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
-        unsigned int _adc1d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
-        unsigned int _adc2d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
-        unsigned int _adc3d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
-        unsigned int _adc4d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
-        unsigned int _adc5d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
-        unsigned int _adc6d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
-        unsigned int _adc7d : 1;	/* ADC7D:ADC0D: ADC7:0 Digital Input Disable */
+        unsigned int _adc0d : 1;	/* Disable ADC7:0 Digital Input */
+        unsigned int _adc1d : 1;	/* Disable ADC7:0 Digital Input */
+        unsigned int _adc2d : 1;	/* Disable ADC7:0 Digital Input */
+        unsigned int _adc3d : 1;	/* Disable ADC7:0 Digital Input */
+        unsigned int _adc4d : 1;	/* Disable ADC7:0 Digital Input */
+        unsigned int _adc5d : 1;	/* Disable ADC7:0 Digital Input */
+        unsigned int _adc6d : 1;	/* Disable ADC7:0 Digital Input */
+        unsigned int _adc7d : 1;	/* Disable ADC7:0 Digital Input */
 };
 
 #define DIDR0_struct _SFR_IO8_STRUCT(0x7e, struct __reg_DIDR0)
@@ -2557,17 +2557,17 @@ struct __reg_UCSR1C {
 #define UDR16                           6
 #define UDR17                           7
 
-/* Symbol Counter Cotrol Register 0 */
+/* Symbol Counter Control Register 0 */
 #define SCCR0                           _SFR_MEM8(0xDC)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCCR0 {
-        unsigned int _sccmp : 3;	/* Symbol Counter Compare Unit 3 Mode selct */
-        unsigned int _sctse : 1;	/* Symbol Counter Automatic Time Stamping enable */
+        unsigned int _sccmp : 3;	/* Symbol Counter Compare Unit 3 Mode select */
+        unsigned int _sctse : 1;	/* Symbol Counter Automatic Timestamping enable */
         unsigned int _sccksel : 1;	/* Symbol Counter Clock Source select */
         unsigned int _scen : 1;	/* Symbol Counter enable */
-        unsigned int _scmbts : 1;	/* Manuall Beacon Time Stamp */
+        unsigned int _scmbts : 1;	/* Manual Beacon Timestamp */
         unsigned int _scres : 1;	/* Symbol Counter Synchronization */
 };
 
@@ -2630,7 +2630,7 @@ struct __reg_SCSR {
 struct __reg_SCIRQM {
         unsigned int _irqmcp : 3;	/* Symbol Counter Compare Match 3 IRQ enable */
         unsigned int _irqmof : 1;	/* Symbol Counter Overflow IRQ enable */
-        unsigned int _irqmbo : 1;	/* Backoff Slot Conter IRQ enable */
+        unsigned int _irqmbo : 1;	/* Backoff Slot Counter IRQ enable */
         unsigned int : 3;
 };
 
@@ -2766,13 +2766,13 @@ struct __reg_SCCNTHH {
 #define SCCNTHH6                        6
 #define SCCNTHH7                        7
 
-/* Symbol Counter Beacon Time Stamp Register LL-Byte */
+/* Symbol Counter Beacon Timestamp Register LL-Byte */
 #define SCBTSRLL                        _SFR_MEM8(0xE5)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRLL {
-        unsigned int _scbtsrll : 8;	/* Symbol Counter Beacon Time Stamp Register LL-Byte bits */
+        unsigned int _scbtsrll : 8;	/* Symbol Counter Beacon Timestamp Register LL-Byte bits */
 };
 
 #define SCBTSRLL_struct _SFR_IO8_STRUCT(0xe5, struct __reg_SCBTSRLL)
@@ -2790,13 +2790,13 @@ struct __reg_SCBTSRLL {
 #define SCBTSRLL6                       6
 #define SCBTSRLL7                       7
 
-/* Symbol Counter Beacon Time Stamp Register LH-Byte */
+/* Symbol Counter Beacon Timestamp Register LH-Byte */
 #define SCBTSRLH                        _SFR_MEM8(0xE6)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRLH {
-        unsigned int _scbtsrlh : 8;	/* Symbol Counter Beacon Time Stamp Register LH-Byte bits */
+        unsigned int _scbtsrlh : 8;	/* Symbol Counter Beacon Timestamp Register LH-Byte bits */
 };
 
 #define SCBTSRLH_struct _SFR_IO8_STRUCT(0xe6, struct __reg_SCBTSRLH)
@@ -2814,13 +2814,13 @@ struct __reg_SCBTSRLH {
 #define SCBTSRLH6                       6
 #define SCBTSRLH7                       7
 
-/* Symbol Counter Beacon Time Stamp Register HL-Byte */
+/* Symbol Counter Beacon Timestamp Register HL-Byte */
 #define SCBTSRHL                        _SFR_MEM8(0xE7)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRHL {
-        unsigned int _scbtsrhl : 8;	/* Symbol Counter Beacon Time Stamp Register HL-Byte bits */
+        unsigned int _scbtsrhl : 8;	/* Symbol Counter Beacon Timestamp Register HL-Byte bits */
 };
 
 #define SCBTSRHL_struct _SFR_IO8_STRUCT(0xe7, struct __reg_SCBTSRHL)
@@ -2838,13 +2838,13 @@ struct __reg_SCBTSRHL {
 #define SCBTSRHL6                       6
 #define SCBTSRHL7                       7
 
-/* Symbol Counter Beacon Time Stamp Register HH-Byte */
+/* Symbol Counter Beacon Timestamp Register HH-Byte */
 #define SCBTSRHH                        _SFR_MEM8(0xE8)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCBTSRHH {
-        unsigned int _scbtsrhh : 8;	/* Symbol Counter Beacon Time Stamp Register HH-Byte bits */
+        unsigned int _scbtsrhh : 8;	/* Symbol Counter Beacon Timestamp Register HH-Byte bits */
 };
 
 #define SCBTSRHH_struct _SFR_IO8_STRUCT(0xe8, struct __reg_SCBTSRHH)
@@ -2862,13 +2862,13 @@ struct __reg_SCBTSRHH {
 #define SCBTSRHH6                       6
 #define SCBTSRHH7                       7
 
-/* Symbol Counter Frame Time Stamp Register LL-Byte */
+/* Symbol Counter Frame Timestamp Register LL-Byte */
 #define SCTSRLL                         _SFR_MEM8(0xE9)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRLL {
-        unsigned int _sctsrll : 8;	/* Symbol Counter Frame Time Stamp Register LL-Byte bits */
+        unsigned int _sctsrll : 8;	/* Symbol Counter Frame Timestamp Register LL-Byte bits */
 };
 
 #define SCTSRLL_struct _SFR_IO8_STRUCT(0xe9, struct __reg_SCTSRLL)
@@ -2886,13 +2886,13 @@ struct __reg_SCTSRLL {
 #define SCTSRLL6                        6
 #define SCTSRLL7                        7
 
-/* Symbol Counter Frame Time Stamp Register LH-Byte */
+/* Symbol Counter Frame Timestamp Register LH-Byte */
 #define SCTSRLH                         _SFR_MEM8(0xEA)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRLH {
-        unsigned int _sctsrlh : 8;	/* Symbol Counter Frame Time Stamp Register LH-Byte bits */
+        unsigned int _sctsrlh : 8;	/* Symbol Counter Frame Timestamp Register LH-Byte bits */
 };
 
 #define SCTSRLH_struct _SFR_IO8_STRUCT(0xea, struct __reg_SCTSRLH)
@@ -2910,13 +2910,13 @@ struct __reg_SCTSRLH {
 #define SCTSRLH6                        6
 #define SCTSRLH7                        7
 
-/* Symbol Counter Frame Time Stamp Register HL-Byte */
+/* Symbol Counter Frame Timestamp Register HL-Byte */
 #define SCTSRHL                         _SFR_MEM8(0xEB)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRHL {
-        unsigned int _sctsrhl : 8;	/* Symbol Counter Frame Time Stamp Register HL-Byte bits */
+        unsigned int _sctsrhl : 8;	/* Symbol Counter Frame Timestamp Register HL-Byte bits */
 };
 
 #define SCTSRHL_struct _SFR_IO8_STRUCT(0xeb, struct __reg_SCTSRHL)
@@ -2934,13 +2934,13 @@ struct __reg_SCTSRHL {
 #define SCTSRHL6                        6
 #define SCTSRHL7                        7
 
-/* Symbol Counter Frame Time Stamp Register HH-Byte */
+/* Symbol Counter Frame Timestamp Register HH-Byte */
 #define SCTSRHH                         _SFR_MEM8(0xEC)
 
 #if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
 
 struct __reg_SCTSRHH {
-        unsigned int _sctsrhh : 8;	/* Symbol Counter Frame Time Stamp Register HH-Byte bits */
+        unsigned int _sctsrhh : 8;	/* Symbol Counter Frame Timestamp Register HH-Byte bits */
 };
 
 #define SCTSRHH_struct _SFR_IO8_STRUCT(0xec, struct __reg_SCTSRHH)
@@ -3532,6 +3532,8 @@ struct __reg_AES_CON {
 
 #define AES_DIR_DEC                     0
 #define AES_DIR_ENC                     1
+#define AES_MODE_ECB                    0
+#define AES_MODE_CBC                    1
 
 #endif /* __ASSEMBLER__ */
 
@@ -3892,27 +3894,6 @@ struct __reg_CCA_THRES {
 
 #define CCA_THRES_struct _SFR_IO8_STRUCT(0x149, struct __reg_CCA_THRES)
 
-/* symbolic names */
-
-#define RSSI_BASE_VAL_PLUS_0DB          0
-#define RSSI_BASE_VAL_PLUS_2DB          1
-#define RSSI_BASE_VAL_PLUS_4DB          2
-#define RSSI_BASE_VAL_PLUS_6DB          3
-#define RSSI_BASE_VAL_PLUS_8DB          4
-#define RSSI_BASE_VAL_PLUS_10DB         5
-#define RSSI_BASE_VAL_PLUS_12DB         6
-#define RSSI_BASE_VAL_PLUS_14DB         7
-#define RSSI_BASE_VAL_PLUS_16DB         8
-#define RSSI_BASE_VAL_PLUS_18DB         9
-#define RSSI_BASE_VAL_PLUS_20DB         10
-#define RSSI_BASE_VAL_PLUS_22DB         11
-#define RSSI_BASE_VAL_PLUS_24DB         12
-#define RSSI_BASE_VAL_PLUS_26DB         13
-#define RSSI_BASE_VAL_PLUS_28DB         14
-#define RSSI_BASE_VAL_PLUS_30DB         15
-#define CCA_CS_THRES_MIN                9
-#define CCA_CS_THRES_MAX                15
-
 #endif /* __ASSEMBLER__ */
 
   /* CCA_THRES */
@@ -4056,7 +4037,7 @@ struct __reg_IRQ_MASK {
         unsigned int _pll_unlock_en : 1;	/* PLL Unlock Interrupt Enable */
         unsigned int _rx_start_en : 1;	/* RX_START Interrupt Enable */
         unsigned int _rx_end_en : 1;	/* RX_END Interrupt Enable */
-        unsigned int _cca_ed_ready_en : 1;	/* End of ED Measurement Interrupt Enable */
+        unsigned int _cca_ed_done_en : 1;	/* End of ED Measurement Interrupt Enable */
         unsigned int _ami_en : 1;	/* Address Match Interrupt Enable */
         unsigned int _tx_end_en : 1;	/* TX_END Interrupt Enable */
         unsigned int _awake_en : 1;	/* Awake Interrupt Enable */
@@ -4072,7 +4053,7 @@ struct __reg_IRQ_MASK {
 #define PLL_UNLOCK_EN                   1
 #define RX_START_EN                     2
 #define RX_END_EN                       3
-#define CCA_ED_READY_EN                 4
+#define CCA_ED_DONE_EN                  4
 #define AMI_EN                          5
 #define TX_END_EN                       6
 #define AWAKE_EN                        7
@@ -4087,7 +4068,7 @@ struct __reg_IRQ_STATUS {
         unsigned int _pll_unlock : 1;	/* PLL Unlock Interrupt Status */
         unsigned int _rx_start : 1;	/* RX_START Interrupt Status */
         unsigned int _rx_end : 1;	/* RX_END Interrupt Status */
-        unsigned int _cca_ed_ready : 1;	/* End of ED Measurement Interrupt Status */
+        unsigned int _cca_ed_done : 1;	/* End of ED Measurement Interrupt Status */
         unsigned int _ami : 1;	/* Address Match Interrupt Status */
         unsigned int _tx_end : 1;	/* TX_END Interrupt Status */
         unsigned int _awake : 1;	/* Awake Interrupt Status */
@@ -4103,7 +4084,7 @@ struct __reg_IRQ_STATUS {
 #define PLL_UNLOCK                      1
 #define RX_START                        2
 #define RX_END                          3
-#define CCA_ED_READY                    4
+#define CCA_ED_DONE                     4
 #define AMI                             5
 #define TX_END                          6
 #define AWAKE                           7
@@ -4256,7 +4237,7 @@ struct __reg_RX_SYN {
 
 struct __reg_XAH_CTRL_1 {
         unsigned int : 1;
-        unsigned int _aack_prom_mode : 1;	/* Enable Acknowledgment in Promiscuous Mode */
+        unsigned int _aack_prom_mode : 1;	/* Enable Promiscuous Mode */
         unsigned int _aack_ack_time : 1;	/* Reduce Acknowledgment Time */
         unsigned int : 1;
         unsigned int _aack_upld_res_ft : 1;	/* Process Reserved Frames */
@@ -4347,10 +4328,6 @@ struct __reg_PART_NUM {
 
 /* symbolic names */
 
-#define RF210                           0
-#define RF220                           1
-#define RF230                           2
-#define RF231                           3
 #define ATmega128RFA1                   131
 
 #endif /* __ASSEMBLER__ */
@@ -5123,9 +5100,9 @@ struct __reg_TST_RX_LENGTH {
 #define TRX24_RX_END_vect               _VECTOR(60)
 #define TRX24_RX_END_vect_num           60
 
-/* TRX24 - CCA/ED ready interrupt */
-#define TRX24_CCA_ED_READY_vect         _VECTOR(61)
-#define TRX24_CCA_ED_READY_vect_num     61
+/* TRX24 - CCA/ED done interrupt */
+#define TRX24_CCA_ED_DONE_vect          _VECTOR(61)
+#define TRX24_CCA_ED_DONE_vect_num      61
 
 /* TRX24 - XAH - AMI */
 #define TRX24_XAH_AMI_vect              _VECTOR(62)
