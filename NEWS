@@ -73,6 +73,7 @@
   [#23409] Provide an implementation for strtok()
   [#23546] FAQ documentation symbol seems wrong
   [#23554] Wrong bit values in iom32u4.h
+  [#23677] Request for cbrt() and strdup to be added to libc
   [#23774] Using some defines from avr/fuse.h produces warning
   [#23850] ATMega8 does not have MCUSR defined
   [#23871] clock_prescale_set() not available for ATmega32U4
@@ -195,6 +196,7 @@
   
 * New functions:
 
+   cbrt
    eeprom_read_dword
    eeprom_write_dword
    strdup
