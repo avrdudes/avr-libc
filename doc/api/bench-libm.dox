@@ -53,6 +53,11 @@ and Avr4 is a hardware multiplication.
     <td>2857</td>
   </tr>
   <tr>
+    <td>cbrt (1.2345)</td>
+    <td>2684</td>
+    <td>2555</td>
+  </tr>
+  <tr>
     <td>ceil (1.2345)</td>
     <td>177</td>
     <td>177</td>
