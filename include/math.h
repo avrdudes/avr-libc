@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2007 Michael Stumpf
+/* Copyright (c) 2002,2007-2009 Michael Stumpf
 
    Portions of documentation Copyright (c) 1990 - 1994
    The Regents of the University of California.
@@ -156,6 +156,13 @@ extern double sin(double __x) __ATTR_CONST__;
      The sqrt() function returns the non-negative square root of \a __x.
   */
 extern double sqrt(double __x) __ATTR_CONST__;
+
+  /**
+     \ingroup avr_math
+
+     The cbrt() function returns the cube root of \a __x.
+  */
+extern double cbrt(double __x) __ATTR_CONST__;
 
   /**
      \ingroup avr_math

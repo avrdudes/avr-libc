@@ -1,4 +1,4 @@
-/* Copyright (c) 2007  Dmitry Xmelkov
+/* Copyright (c) 2007,2009  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,7 @@ double (*tfun[]) (double) = {
     acos,
     asin,
     atan,
+    cbrt,
     ceil,
     cos,
     cosh,
