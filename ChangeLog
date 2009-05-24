@@ -1,3 +1,17 @@
+2009-05-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #23677: new function cbrt() is added.
+	* libm/fplib/cbrt.S: New file.
+	* libm/fplib/Files.am: Add 'cbrt.S' source.
+	* include/math.h: Add cbrt().
+	* tests/simulate/math/cbrt-01.c: New file.
+	* tests/simulate/math/cbrt-02.c: New file.
+	* tests/simulate/math/cbrt-03.c: New file.
+	* tests/simulate/math/cbrt-500.c: New file.
+	* tests/simulate/math/xxx-nan.c: Add cbrt().
+	* doc/api/bench-libm.dox: Add cbrt().
+	* NEWS: Add item to fixed bug list and new function cbrt().
+
 2009-05-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iom128rfa1.h: Fix some typos, mainly in comments.
