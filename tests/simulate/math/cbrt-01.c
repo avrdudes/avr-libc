@@ -1,4 +1,4 @@
-/* Copyright (c) 2007,2009  Dmitry Xmelkov
+/* Copyright (c) 2009  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -27,78 +27,77 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Test of a set of functions: func(NaN) --> NaN
-   $Id$
- */
+/* Test of cbrt() function.
+   $Id$	*/
+
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "progmem.h"
 
-/* Table of tested functions.	*/
-double (*tfun[]) (double) = {
-    acos,
-    asin,
-    atan,
-    cbrt,
-    ceil,
-    cos,
-    cosh,
-    exp,
-    floor,
-    log,
-    log10,
-    sin,
-    sinh,
-    sqrt,
-    tan,
-    tanh,
-    trunc,
-    round
-};
-
-union lofl_u {
-    long lo;
-    float fl;
-};
-
-volatile union lofl_u v = { 1 };
-
-/* Table of test cases: NaNs	*/
-PROGMEM const union lofl_u tnan[] = {
-    { 0x7f800001 },
-    { 0x7f800100 },
-    { 0x7f810000 },
-    { 0x7fc00000 },
-    { 0x7fffffff },
-    { 0xff800001 },
-    { 0xff800100 },
-    { 0xff810000 },
-    { 0xffc00000 },
-    { 0xffffffff },
-};
-
-void x_exit (int index)
-{
 #ifndef	__AVR__
-    fprintf (stderr, "t[%d]:  %#lx\n", index - 1, v.lo);
+# include <stdio.h>
+# define PRINTFLN(fmt, ...)	\
+    printf ("\nLine %d: " fmt "\n", __LINE__, ##__VA_ARGS__)
+# define EXIT(code)	exit ((code) < 255 ? (code) : 100 + (code) % 100)
+#else
+# define PRINTFLN(args...)
+# define EXIT	exit
 #endif
-    exit (index ? index : -1);
-}
+
+union float_u {
+    float flt;
+    unsigned long u32;
+};
+
+/* Result is placed into SRAM variable, allocated at the start of
+   memory. This is convinient to debug: read a core dump.	*/
+volatile union float_u v = {.u32 = 1};
+
+PROGMEM const struct {
+    union float_u x;
+    union float_u z;
+} t[] = {
+
+    { { 0.0},	{ 0.0} },
+    { {-0.0},	{-0.0} },
+
+    /* Infinity	*/
+    { {.u32 = 0x7f800000 }, {.u32 = 0x7f800000 } },
+    { {.u32 = 0xff800000 }, {.u32 = 0xff800000 } },
+
+    { { 1 },	{ 1 } },
+    { {-1 },	{-1 } },
+    { { 8 },	{ 2 } },
+    { { 27 },	{ 3 } },
+    { { 64 },	{ 4 } },
+    { { 125 },	{ 5 } },
+    { { 216 },	{ 6 } },
+    { { 343 },	{ 7 } },
+    { { 512 },	{ 8 } },
+    { { 729 },	{ 9 } },
+    { { 1000 },	{ 10 } },
+    { {-1000 },	{-10 } },
+    
+    { { 0.125 }, { 0.5 } },
+    { { 0.015625 }, { 0.25 } },
+    { {-0.001953125 }, {-0.125 } },
+};
 
 int main ()
 {
-    union lofl_u x;
-    int f, n;
+    int i;
+    union float_u tx, tz;
     
-    for (f = 0; f < (int) (sizeof(tfun)/sizeof(tfun[0])); f++) {
-	for (n = 0; n < (int) (sizeof(tnan)/sizeof(tnan[0])); n++) {
-	    x.lo = pgm_read_dword (& tnan[n]);
-	    v.fl = (tfun[f]) (x.fl);
-	    if (!isnan (v.fl)) {
-		x_exit (f+1);
-	    }
+    for (i = 0;  (size_t)i < sizeof(t) / sizeof(t[0]); i++) {
+	tx.u32 = pgm_read_dword (& t[i].x);
+	tz.u32 = pgm_read_dword (& t[i].z);
+	v.flt = cbrt (tx.flt);
+	if (v.u32 != tz.u32) {
+	    PRINTFLN ("t1[%d]={0x%08lx,0x%08lx} --> 0x%08lx\n",
+		      i, tx.u32, tz.u32, v.u32);
+	    EXIT (i + 1);
 	}
     }
+    
     return 0;
 }
