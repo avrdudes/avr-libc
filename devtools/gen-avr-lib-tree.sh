@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,2006,2007,2008  Anatoly Sokolov
+# Copyright (c) 2005,2006,2007,2008,2009  Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -198,7 +198,6 @@ at90usb1286:crtusb1286.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90usb1287:crtusb1287.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at94k:crtat94k.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90scr100:crt90scr100.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
-
 "
 
 AVR51_DEV_INFO="\
@@ -355,6 +354,29 @@ do
 	    -e "s/<<lib_asflags>>/$lib_asflags/g" \
 	    -e "s/<<install_dir>>/$install_dir/g" Makefile.am \
 	    > tempfile && mv -f tempfile Makefile.am
+
+	# Find the first and the last lines of <<dev>> block.
+	n1=`grep '^if[[:blank:]]+HAS_<<dev>>' -En Makefile.am	\
+	    | cut -d ':' -f 1`
+	n2=`grep '^endif[[:blank:]]+#[[:blank:]]*<<dev>>' -En Makefile.am \
+	    | cut -d ':' -f 1`
+
+	# Before the <<dev>> block.
+	head --lines=$(($n1 - 1)) Makefile.am > tempfile
+
+	# Duplicate the <<dev>> block and substitute.
+	for dev_crt in $DEV_INFO ; do
+		dev=`echo $dev_crt | cut -d ':' -f 1`
+		tail --lines=+$n1 Makefile.am	\
+		    | head --lines=$(($n2 - $n1 + 1))	\
+		    | sed -e "s/<<dev>>/$dev/g" >> tempfile
+	done
+
+	# After the <<dev>> block.
+	tail --lines=+$(($n2 + 1)) Makefile.am >> tempfile
+	
+	# Result.
+	mv -f tempfile Makefile.am
 
 	ARH_SUBDIRS="$ARH_SUBDIRS $arh"
 
