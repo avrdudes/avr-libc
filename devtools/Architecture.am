@@ -1,5 +1,5 @@
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005, 2008  Anatoly Sokolov
+# Copyright (c) 2005, 2008, 2009  Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,11 @@ AVR_INSTALL_DIR     = <<install_dir>>
 VPATH = $(top_srcdir)/libc/stdlib:$(top_srcdir)/libc/pmstring:$(top_srcdir)/libc/string:$(top_srcdir)/libc/misc:$(top_srcdir)/libc/stdio:$(top_srcdir)/libm/fplib
 
 if HAS_<<arh>>
+
+AVRLIB_DEVLIST =
+if HAS_<<dev>>
+  AVRLIB_DEVLIST += <<dev>>
+endif	# <<dev>>
 
 AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include -I$(top_builddir)/include
 
