@@ -13,6 +13,7 @@
 	* libc/misc/eewr_block.c: Remove.
 	* libc/misc/eewr_dword.c: Remove.
 	* libc/misc/eewr_word.c: Remove.
+	* libc/misc/eedef.h: New file.
 	* libc/misc/eerd_block.S: New file.
 	* libc/misc/eerd_byte.S: New file.
 	* libc/misc/eerd_dword.S: New file.
