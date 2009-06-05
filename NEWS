@@ -122,11 +122,10 @@
       branches of compiler (less 4.1) and ancient chips (without MOVW).
       . The maximum quantity of conversions now is limited (255).
 
-  - EEPROM functions are rewriten. Now the base procedures (eeprom_read_byte
-    and eeprom_write_byte) are inline: they are evaluated at compile time
-    of user program. This gives a possibility to add support for new AVR
-    arhitectures very simply. Also this fixes Avr-libc bug #21410. New
-    functions for 32-bit words are added.
+  - EEPROM functions are rewriten.  Now they are pure asm functions.  The
+    reading of long word or block is speed up.  New functions for 32-bit
+    words and floats are added.  The group of 'update' (burn only different
+    bytes) functions is added.  A set of Avr-libc bugs are fixed.
 
   - Added support for XMEGA architectures.
 
@@ -182,6 +181,12 @@
 
 * Optimized functions:
 
+   eeprom_read_block
+   eeprom_read_dword
+   eeprom_read_word
+   eeprom_write_block
+   eeprom_write_dword
+   eeprom_write_word
    strtod
    setjmp
    sqrt   (and callers: acos, asin and hypot)
@@ -192,13 +197,21 @@
   [#6500] Reentrant code faq
   [#6517] Pgmspace with float support
   [#6649] sqrt.S in libm changes
+  [#6718] Optimize the EEPROM functions
   [#6720] FAQ update. Add EEPROM section, baud rate section. Correct spelling.
   
 * New functions:
 
    cbrt
    eeprom_read_dword
+   eeprom_read_float
+   eeprom_update_block
+   eeprom_update_byte
+   eeprom_update_dword
+   eeprom_update_float
+   eeprom_update_word
    eeprom_write_dword
+   eeprom_write_float
    strdup
    strtok
 
