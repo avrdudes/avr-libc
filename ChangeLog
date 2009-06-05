@@ -1,3 +1,45 @@
+2009-06-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Apply the patch #6718: Optimize the EEPROM functions.
+	* devtools/Architecture.am: Add AVRLIB_DEVLIST.
+	* devtools/gen-avr-lib-tree.sh: Add a code to replace the <<dev>>
+	template into real device names.
+	* include/avr/eeprom.h: Rewrite all function definitions. Add a
+	set of 'update' functions. Add a set of float arg functions.
+	Add a documentation.
+	* libc/misc/eerd_block.c: Remove.
+	* libc/misc/eerd_dword.c: Remove.
+	* libc/misc/eerd_word.c: Remove.
+	* libc/misc/eewr_block.c: Remove.
+	* libc/misc/eewr_dword.c: Remove.
+	* libc/misc/eewr_word.c: Remove.
+	* libc/misc/eerd_block.S: New file.
+	* libc/misc/eerd_byte.S: New file.
+	* libc/misc/eerd_dword.S: New file.
+	* libc/misc/eerd_word.S: New file.
+	* libc/misc/eeupd_block.S: New file.
+	* libc/misc/eeupd_byte.S: New file.
+	* libc/misc/eeupd_dword.S: New file.
+	* libc/misc/eeupd_word.S: New file.
+	* libc/misc/eewr_block.S: New file.
+	* libc/misc/eewr_byte.S: New file.
+	* libc/misc/eewr_dword.S: New file.
+	* libc/misc/eewr_word.S: New file.
+	* libc/misc/readme_eeprom.txt: New file.
+	* libc/misc/Files.am: Remove EEPROM C sources. Add EEPROM asm
+	sources. Add new files to EXTRA list.
+	* libc/misc/Makefile.am: Add 'eeprom_asm_sources'.
+	* libc/misc/Rules.am: Add code to generate rules for all devices
+	from AVRLIB_DEVLIST (EEPROM objects).
+	* tests/simulate/avr/eeprom-1.c: Rewrite a part of code to avoid
+	the Simulavr bug in case of small SRAM chips. Fix a typo in memory
+	checking.
+	* tests/simulate/avr/eeprom-2.c: New file.
+	* tests/simulate/avr/eeprom-3.c: New file.
+	* NEWS: Rewrite a topic about the EEPROM improvement. Add the
+	optimized functions list. Add the new functions list. Add the
+	note of patch applied.
+
 2009-05-24  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #23677: new function cbrt() is added.
