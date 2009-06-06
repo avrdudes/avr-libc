@@ -74,6 +74,7 @@
   [#23546] FAQ documentation symbol seems wrong
   [#23554] Wrong bit values in iom32u4.h
   [#23677] Request for cbrt() and strdup to be added to libc
+  [#23703] eeprom write functions optimisation
   [#23774] Using some defines from avr/fuse.h produces warning
   [#23850] ATMega8 does not have MCUSR defined
   [#23871] clock_prescale_set() not available for ATmega32U4
@@ -91,6 +92,7 @@
   [#25645] xmega header files broken #defines
   [#25723] Realloc corrupts free list when growing into the next free item
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
+  [#25925] <avr/boot.h> cannot be included on Xmega devices
   [#25929] boot.h Fuse read not compatible with Tiny48/88.
   [#25930] New IO-Headerfiles missing PXn Portpindefinitions
   [#26188] Wrong or missing definition of SIGNATURE_X in iom644.h and others
