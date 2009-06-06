@@ -506,10 +506,20 @@ void eeprom_update_block (const void *__src, void *__dst, size_t __n);
     Write a byte to EEPROM. Compatibility define for IAR C.	*/
 #define _EEPUT(addr, val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
 
+/** \def __EEPUT
+    \ingroup avr_eeprom
+    Write a byte to EEPROM. Compatibility define for IAR C.	*/
+#define __EEPUT(addr, val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
+
 /** \def _EEGET
     \ingroup avr_eeprom
     Read a byte from EEPROM. Compatibility define for IAR C.	*/
 #define _EEGET(var, addr) (var) = eeprom_read_byte ((const uint8_t *)(addr))
+
+/** \def __EEGET
+    \ingroup avr_eeprom
+    Read a byte from EEPROM. Compatibility define for IAR C.	*/
+#define __EEGET(var, addr) (var) = eeprom_read_byte ((const uint8_t *)(addr))
 
 /*@}*/
 
