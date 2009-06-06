@@ -1,5 +1,11 @@
 2009-06-06  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* include/avr/eeprom.h: Add __EEPUT() and __EEGET() macroses. (They
+	were losted in patch #6718).
+	* NEWS: Add items about bugs fixed.
+
+2009-06-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
 	Apply the patch #6718: Optimize the EEPROM functions.
 	* devtools/Architecture.am: Add AVRLIB_DEVLIST.
 	* devtools/gen-avr-lib-tree.sh: Add a code to replace the <<dev>>
