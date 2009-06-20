@@ -1,4 +1,5 @@
 # Copyright (c) 2002, Reinhard Jessich  <reinhard.jessich@telering.at>
+# Copyright (c) 2009  Dmitry Xmelkov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,5 +30,43 @@
 # $Id$
 
 include $(top_srcdir)/libc/misc/Files.am
+
+# Example:
+#   eeprom_asm_sources --> eerd_byte.S eerd_word.S
+#   basename           --> eerd_byte eerd_word
+#   addsuffix          --> eerd_byte_ eerd_word_
+#   foreach            --> eerd_byte_atmega48 eerd_byte_atmega8
+#                          eerd_word_atmega48 eerd_word_atmega8
+#   addsuffix          --> eerd_byte_atmega48.o eerd_byte_atmega8.o
+#                          eerd_word_atmega48.o eerd_word_atmega8.o
+#
+eeprom_asm_basenames = $(basename $(eeprom_asm_sources))
+eeprom_asm_basenames2 = $(addsuffix _,$(eeprom_asm_basenames))
+eeprom_asm_baselist = $(foreach dev,$(AVRLIB_DEVLIST),\
+    $(addsuffix $(dev),$(eeprom_asm_basenames2)))
+eeprom_asm_objlist = $(addsuffix .o,$(eeprom_asm_baselist))
+
+misc_a_libadd = \
+	$(eeprom_asm_objlist)
+
+# Example of '-mmcu' arg generation:
+#   $@          --> eerd_byte_atmega48.o
+#   basename    --> eerd_byte_atmega48
+#   subst       --> eerd byte atmega48
+#   lastword    --> atmega48
+#
+# Example of source file generation:
+#   $@          --> eerd_byte_atmega48.o
+#   basename    --> eerd_byte_atmega48
+#   subst       --> eerd.byte.atmega48
+#   basename    --> eerd.byte
+#   subst       --> eerd_byte
+#   addsuffix   --> eerd_byte.S
+#
+$(eeprom_asm_objlist):	$(eeprom_asm_sources)
+	$(filter-out -mmcu=%,$(COMPILE) $(AVRLIB_ASFLAGS)) -c -o $@	\
+	    -mmcu=$(lastword $(subst _, ,$(basename $@)))		\
+	    $(<D)/$(addsuffix .S,\
+	    	    $(subst .,_,$(basename $(subst _,.,$(basename $@)))))
 
 # vim: set ft=make:
