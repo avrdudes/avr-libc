@@ -7,7 +7,9 @@
   [sourceforge.net: #2693898] ATmega32U6 missing in power.h
   [sourceforge.net: #2738926] avr/eeprom.h EEGET and EEPUT
   [#23677] Request for cbrt() and strdup to be added to libc
+  [#23703] eeprom write functions optimisation
   [#25846] include/avr/power.h:628:1: error: missing binary operator before token "defined"
+  [#25925] <avr/boot.h> cannot be included on Xmega devices
   [#25929] boot.h Fuse read not compatible with Tiny48/88.
   [#25930] New IO-Headerfiles missing PXn Portpindefinitions
   [#26188] Wrong or missing definition of SIGNATURE_X in iom644.h and others
@@ -16,9 +18,27 @@
 
 * Contributed Patches:
 
+  [#6718] Optimize the EEPROM functions
+
 * New functions:
 
    cbrt
+   eeprom_read_float
+   eeprom_update_block
+   eeprom_update_byte
+   eeprom_update_dword
+   eeprom_update_float
+   eeprom_update_word
+   eeprom_write_float
+
+* Optimized functions:
+
+   eeprom_read_block
+   eeprom_read_dword
+   eeprom_read_word
+   eeprom_write_block
+   eeprom_write_dword
+   eeprom_write_word
 
 * New devices supported:
   
@@ -35,6 +55,12 @@
   floating point functions are placed in the .text.avr-libc.fplib section. This
   allows the user the ability to relocate all avr-libc routines to a different
   address using a custom linker script.
+
+  - EEPROM functions are rewriten.  Now they are pure asm functions with
+  tuning for each device individually.  The reading of long word or block
+  is speed up.  New functions for floats are added.  The group of 'update'
+  (burn only different bytes) functions is added.  A set of Avr-libc bugs
+  are fixed.
 
 
 *** Changes in avr-libc-1.6.6:
