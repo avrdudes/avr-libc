@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Copyright (c) 2004,  Theodore A. Roth
-# Copyright (c) 2005,2006,2007  Anatoly Sokolov
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -274,8 +274,8 @@ at90usb1286:crtusb1286.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90usb1287:crtusb1287.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at94k:crtat94k.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90scr100:crt90scr100.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
-
 "
+
 AVR51_DEV_INFO="\
 atmega128:crtm128.o:${DEV_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 atmega1280:crtm1280.o:${DEV_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
@@ -433,6 +433,21 @@ AVR_INSTALL_DIR     = $install_dir
 VPATH = \$(top_srcdir)/crt1:\$(top_srcdir)/libc/stdlib:\$(top_srcdir)/libc/pmstring:\$(top_srcdir)/libc/string:\$(top_srcdir)/libc/misc:\$(top_srcdir)/libc/stdio:\$(top_srcdir)/libm/fplib
 
 if HAS_$arh
+
+AVRLIB_DEVLIST =
+EOF
+
+	for dev_crt in $DEV_INFO
+	do
+		dev=$(echo $dev_crt | cut -d ':' -f 1)
+		cat >> $arh/Makefile.am <<EOF
+if HAS_$dev
+  AVRLIB_DEVLIST += $dev
+endif	# $dev
+EOF
+	done
+
+	cat >> $arh/Makefile.am <<EOF
 
 # NOTE: Automake will be performing the following include, not GNU Make.
 # Automake will also be scanning the included file.
