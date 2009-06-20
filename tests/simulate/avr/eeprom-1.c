@@ -1,4 +1,4 @@
-/* Copyright (c) 2008  Dmitry Xmelkov
+/* Copyright (c) 2008,2009  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -60,6 +60,13 @@ int main ()
     }
 
     /* Read double words.	*/
+#if 0
+    /* This variant exits with error for AT90S2313 simulation.  Seems,
+       the reason is in Simulavr bug: it is incorrect when the XH register
+       in 'ST X+,r' operation is not clearned.  The code below uses the
+       XH register for temporary value 0xFF (avr-gcc 4.1.2).  This is
+       actaul for new EEPROM library (2009), which does not set the XH
+       for SRAM operation if it is possible.	*/
     for (p = 0; p <= (void *)E2END - 3; p += 4) {
 	if (eeprom_read_dword (p)
 	    != ((~(unsigned)p & 0xFF)
@@ -70,6 +77,20 @@ int main ()
 	    exit (__LINE__);
 	}
     }
+#else
+    /* With avr-gcc 4.1.2 the code below does not use XH register with
+       AT90S2313 mcu.	*/
+    for (p = 0; p <= (void *)E2END - 3; ) {
+	long dword = eeprom_read_dword (p);
+	if ((dword ^ ~(unsigned)p++) & 0xFF) exit (__LINE__);
+	dword >>= 8;
+	if ((dword ^ ~(unsigned)p++) & 0xFF) exit (__LINE__);
+	dword >>= 8;
+	if ((dword ^ ~(unsigned)p++) & 0xFF) exit (__LINE__);
+	dword >>= 8;
+	if ((dword ^ ~(unsigned)p++) & 0xFF) exit (__LINE__);
+    }
+#endif
 
     /* Read blocks.	*/
     for (p = 0; p <= (void *)E2END; ) {
@@ -135,7 +156,7 @@ int main ()
 	}
     }
     eeprom_read_block (s, (const void *)5, 5);
-    if (memcmp (s, "\x90\xAB\xCD\xEF\x01", 3))
+    if (memcmp (s, "\x90\xAB\xCD\xEF\x01", 5))
 	exit (__LINE__);
 
     return 0;
