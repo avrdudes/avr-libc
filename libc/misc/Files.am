@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2004,2009  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,15 +29,21 @@
 # $Id$
 #
 
-misc_a_c_sources = \
-	eerd_block.c \
-	eerd_dword.c \
-	eerd_word.c \
-	eewr_block.c \
-	eewr_dword.c \
-	eewr_word.c
+misc_a_c_sources =
 
-eeprom_asm_sources =
+eeprom_asm_sources = \
+	eerd_block.S \
+	eerd_byte.S \
+	eerd_dword.S \
+	eerd_word.S \
+	eeupd_block.S \
+	eeupd_byte.S \
+	eeupd_dword.S \
+	eeupd_word.S \
+	eewr_block.S \
+	eewr_byte.S \
+	eewr_dword.S \
+	eewr_word.S
 
 misc_a_asm_sources = \
 	itoa.S \
@@ -47,6 +53,8 @@ misc_a_asm_sources = \
 	ultoa.S \
 	utoa.S
 
-misc_a_extra_dist = $(eeprom_asm_sources)
+misc_a_extra_dist = \
+	eedef.h \
+	readme_eeprom.txt
 
 # vim: set ft=make:
