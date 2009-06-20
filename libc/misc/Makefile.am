@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2004,2009  Theodore A. Roth
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -32,6 +32,7 @@
 include $(top_srcdir)/libc/misc/Files.am
 
 EXTRA_DIST = \
+	$(eeprom_asm_sources) \
 	$(misc_a_asm_sources) \
 	$(misc_a_c_sources) \
 	$(misc_a_extra_dist)
