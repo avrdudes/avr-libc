@@ -82,7 +82,7 @@ pin connects to a potentiometer between Vcc and GND.  Often, it might
 work to just connect that pin to GND, while leaving it unconnected
 usually yields an unreadable display.
 
-Port A has been chosen as 7 pins on a single port are needed to
+Port A has been chosen as 7 pins are needed to
 connect the LCD, yet all other ports are already partially in use:
 port B has the pins for in-system programming (ISP), port C has the
 ports for JTAG (can be used for debugging), and port D is used for the
@@ -218,6 +218,11 @@ supported.
 
 The remaining macros customize the IO port and pins used for the
 HD44780 LCD driver.
+Each definition consists of a letter naming the port this pin is
+attached to, and a respective bit number.  For accessing the data
+lines, only the first data line gets its own macro (line D4 on the
+HD44780, lines D0 through D3 are not used in 4-bit mode), all other
+data lines are expected to be in ascending order next to D4.
 
 \subsection stdiodemo_hd44780_h hd44780.h
 

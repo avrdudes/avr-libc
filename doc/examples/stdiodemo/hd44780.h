@@ -27,12 +27,17 @@ uint8_t	hd44780_inbyte(uint8_t rs);
 /*
  * Wait for the busy flag to clear.
  */
-void	hd44780_wait_ready(void);
+void	hd44780_wait_ready(bool islong);
 
 /*
  * Initialize the LCD controller hardware.
  */
 void	hd44780_init(void);
+
+/*
+ * Prepare the LCD controller pins for powerdown.
+ */
+void	hd44780_powerdown(void);
 
 
 /* Send a command to the LCD controller. */

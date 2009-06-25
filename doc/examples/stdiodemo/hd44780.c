@@ -25,16 +25,24 @@
 #include "hd44780.h"
 
 #define GLUE(a, b)     a##b
-#define PORT(x)        GLUE(PORT, x)
-#define PIN(x)         GLUE(PIN, x)
-#define DDR(x)         GLUE(DDR, x)
 
-#define HD44780_PORTOUT    PORT(HD44780_PORT)
-#define HD44780_PORTIN     PIN(HD44780_PORT)
-#define HD44780_DDR        DDR(HD44780_PORT)
+/* single-bit macros, used for control bits */
+#define SET_(what, p, m) GLUE(what, p) |= (1 << (m))
+#define CLR_(what, p, m) GLUE(what, p) &= ~(1 << (m))
+#define GET_(/* PIN, */ p, m) GLUE(PIN, p) & (1 << (m))
+#define SET(what, x) SET_(what, x)
+#define CLR(what, x) CLR_(what, x)
+#define GET(/* PIN, */ x) GET_(x)
 
-#define HD44780_DATABITS \
-(_BV(HD44780_D4)|_BV(HD44780_D5)|_BV(HD44780_D6)|_BV(HD44780_D7))
+/* nibble macros, used for data path */
+#define ASSIGN_(what, p, m, v) GLUE(what, p) = (GLUE(what, p) & \
+						~((1 << (m)) | (1 << ((m) + 1)) | \
+						  (1 << ((m) + 2)) | (1 << ((m) + 3)))) | \
+					        ((v) << (m))
+#define READ_(what, p, m) (GLUE(what, p) & ((1 << (m)) | (1 << ((m) + 1)) | \
+					    (1 << ((m) + 2)) | (1 << ((m) + 3)))) >> (m)
+#define ASSIGN(what, x, v) ASSIGN_(what, x, v)
+#define READ(what, x) READ_(what, x)
 
 #define HD44780_BUSYFLAG 0x80
 
@@ -51,7 +59,7 @@ hd44780_pulse_e(bool readback)
 {
   uint8_t x;
 
-  HD44780_PORTOUT |= _BV(HD44780_E);
+  SET(PORT, HD44780_E);
   /*
    * Guarantee at least 500 ns of pulse width.  For high CPU
    * frequencies, a delay loop is used.  For lower frequencies, NOPs
@@ -78,10 +86,10 @@ hd44780_pulse_e(bool readback)
 #  endif /* F_CPU > 1000000UL */
 #endif
   if (readback)
-    x = HD44780_PORTIN & HD44780_DATABITS;
+    x = READ(PIN, HD44780_D4);
   else
     x = 0;
-  HD44780_PORTOUT &= ~_BV(HD44780_E);
+  CLR(PORT, HD44780_E);
 
   return x;
 }
@@ -92,15 +100,12 @@ hd44780_pulse_e(bool readback)
 static void
 hd44780_outnibble(uint8_t n, uint8_t rs)
 {
-  uint8_t x;
-
-  HD44780_PORTOUT &= ~_BV(HD44780_RW);
+  CLR(PORT, HD44780_RW);
   if (rs)
-    HD44780_PORTOUT |= _BV(HD44780_RS);
+    SET(PORT, HD44780_RS);
   else
-    HD44780_PORTOUT &= ~_BV(HD44780_RS);
-  x = (HD44780_PORTOUT & ~HD44780_DATABITS) | ((n << HD44780_D4) & HD44780_DATABITS);
-  HD44780_PORTOUT = x;
+    CLR(PORT, HD44780_RS);
+  ASSIGN(PORT, HD44780_D4, n);
   (void)hd44780_pulse_e(false);
 }
 
@@ -123,17 +128,17 @@ hd44780_innibble(uint8_t rs)
 {
   uint8_t x;
 
-  HD44780_PORTOUT |= _BV(HD44780_RW);
-  HD44780_DDR &= ~HD44780_DATABITS;
+  SET(PORT, HD44780_RW);
+  ASSIGN(DDR, HD44780_D4, 0x00);
   if (rs)
-    HD44780_PORTOUT |= _BV(HD44780_RS);
+    SET(PORT, HD44780_RS);
   else
-    HD44780_PORTOUT &= ~_BV(HD44780_RS);
+    CLR(PORT, HD44780_RS);
   x = hd44780_pulse_e(true);
-  HD44780_DDR |= HD44780_DATABITS;
-  HD44780_PORTOUT &= ~_BV(HD44780_RW);
+  ASSIGN(DDR, HD44780_D4, 0x0F);
+  CLR(PORT, HD44780_RW);
 
-  return (x & HD44780_DATABITS) >> HD44780_D4;
+  return x;
 }
 
 /*
@@ -154,9 +159,16 @@ hd44780_inbyte(uint8_t rs)
  * Wait until the busy flag is cleared.
  */
 void
-hd44780_wait_ready(void)
+hd44780_wait_ready(bool longwait)
 {
+#if USE_BUSY_BIT
   while (hd44780_incmd() & HD44780_BUSYFLAG) ;
+#else
+  if (longwait)
+    _delay_ms(1.52);
+  else
+    _delay_us(37);
+#endif
 }
 
 /*
@@ -170,9 +182,10 @@ hd44780_wait_ready(void)
 void
 hd44780_init(void)
 {
-
-  HD44780_DDR = _BV(HD44780_RS) | _BV(HD44780_RW) | _BV(HD44780_E)
-    | HD44780_DATABITS;
+  SET(DDR, HD44780_RS);
+  SET(DDR, HD44780_RW);
+  SET(DDR, HD44780_E);
+  ASSIGN(DDR, HD44780_D4, 0x0F);
 
   _delay_ms(15);		/* 40 ms needed for Vcc = 2.7 V */
   hd44780_outnibble(HD44780_FNSET(1, 0, 0) >> 4, 0);
@@ -180,12 +193,24 @@ hd44780_init(void)
   hd44780_outnibble(HD44780_FNSET(1, 0, 0) >> 4, 0);
   _delay_ms(0.1);
   hd44780_outnibble(HD44780_FNSET(1, 0, 0) >> 4, 0);
+  _delay_us(37);
 
   hd44780_outnibble(HD44780_FNSET(0, 1, 0) >> 4, 0);
-  hd44780_wait_ready();
+  hd44780_wait_ready(false);
   hd44780_outcmd(HD44780_FNSET(0, 1, 0));
-  hd44780_wait_ready();
+  hd44780_wait_ready(false);
   hd44780_outcmd(HD44780_DISPCTL(0, 0, 0));
-  hd44780_wait_ready();
+  hd44780_wait_ready(false);
 }
 
+/*
+ * Prepare the LCD controller pins for powerdown.
+ */
+void
+hd44780_powerdown(void)
+{
+  ASSIGN(PORT, HD44780_D4, 0);
+  CLR(PORT, HD44780_RS);
+  CLR(PORT, HD44780_RW);
+  CLR(PORT, HD44780_E);
+}

@@ -62,6 +62,11 @@
   (burn only different bytes) functions is added.  A set of Avr-libc bugs
   are fixed.
 
+  - The port/pin assignments of the HD44780 LCD controller in the
+    stdiodemo example can now be distributed across more than a single
+    AVR port.  The only remaining requirement is that all data bits
+    are assigned to a single port in ascending order.
+
 
 *** Changes in avr-libc-1.6.6:
 
