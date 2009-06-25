@@ -1,3 +1,8 @@
+2009-06-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/gen-avr-lib-tree.sh: replace Linux options to head(1)
+	and tail(1) by their Posix counterparts for portability.
+
 2009-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iom128rfa1.h: Update.

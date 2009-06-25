@@ -362,18 +362,18 @@ do
 	    | cut -d ':' -f 1`
 
 	# Before the <<dev>> block.
-	head --lines=$(($n1 - 1)) Makefile.am > tempfile
+	head -n $(($n1 - 1)) Makefile.am > tempfile
 
 	# Duplicate the <<dev>> block and substitute.
 	for dev_crt in $DEV_INFO ; do
 		dev=`echo $dev_crt | cut -d ':' -f 1`
-		tail --lines=+$n1 Makefile.am	\
-		    | head --lines=$(($n2 - $n1 + 1))	\
+		tail -n +$n1 Makefile.am	\
+		    | head -n $(($n2 - $n1 + 1))	\
 		    | sed -e "s/<<dev>>/$dev/g" >> tempfile
 	done
 
 	# After the <<dev>> block.
-	tail --lines=+$(($n2 + 1)) Makefile.am >> tempfile
+	tail -n +$(($n2 + 1)) Makefile.am >> tempfile
 	
 	# Result.
 	mv -f tempfile Makefile.am
