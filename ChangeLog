@@ -1,5 +1,19 @@
 2009-06-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Allow the HD44780 connection in stdiodemo to be spread across more
+	than a single port.
+	* doc/examples/stdiodemo/defines.h: Pin assignments now contain
+	both, a port name as well as a pin number.
+	* doc/examples/stdiodemo/hd44780.c: Implement the new macros to
+	access the port pins.
+	* doc/examples/stdiodemo/hd44780.h: Mention the newly added
+	function hd44780_powerdown() that prepares the port pins to
+	safely power down the HD44780 (externally).
+	* doc/examples/stdiodemo/stdiodemo.dox: Adapt to the changes
+	implemented.
+
+2009-06-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* devtools/gen-avr-lib-tree.sh: replace Linux options to head(1)
 	and tail(1) by their Posix counterparts for portability.
 
