@@ -1,3 +1,8 @@
+2009-06-27  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/misc/eerd_block.S: Add 'eepr_hi' definition to fix the XMEGA
+	variant.
+
 2009-06-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Allow the HD44780 connection in stdiodemo to be spread across more
