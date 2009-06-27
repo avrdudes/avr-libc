@@ -56,6 +56,7 @@
 
 #define sram_lo	r24	/* SRAM address arg of eeprom_read_block()	*/
 #define eepr_lo	r22	/* EEPROM address arg of eeprom_read_block()	*/
+#define eepr_hi	r23
 
 ENTRY eeprom_read_block
 
