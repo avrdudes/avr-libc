@@ -63,29 +63,57 @@
       \c errno variable. Therefore the majority of them are declared
       with const attribute, for better optimization by GCC.	*/
 
-/**
-   \ingroup avr_math
 
-   The constant \c pi. */
-#define M_PI 3.141592653589793238462643
+/** \ingroup avr_math	*/
+/*@{*/
 
-/**
-   \ingroup avr_math
+/** The constant \a e.	*/
+#define M_E		2.7182818284590452354
 
-   The square root of 2. */
-#define M_SQRT2 1.4142135623730950488016887
+/** The logarithm of the \a e to base 2. */
+#define M_LOG2E		1.4426950408889634074	/* log_2 e */
 
-/**
-   \ingroup avr_math
+/** The logarithm of the \a e to base 10. */
+#define M_LOG10E	0.43429448190325182765	/* log_10 e */
 
-   NAN constant. */
+/** The natural logarithm of the 2.	*/
+#define M_LN2		0.69314718055994530942	/* log_e 2 */
+
+/** The natural logarithm of the 10.	*/
+#define M_LN10		2.30258509299404568402	/* log_e 10 */
+
+/** The constant \a pi.	*/
+#define M_PI		3.14159265358979323846	/* pi */
+
+/** The constant \a pi/2.	*/
+#define M_PI_2		1.57079632679489661923	/* pi/2 */
+
+/** The constant \a pi/4.	*/
+#define M_PI_4		0.78539816339744830962	/* pi/4 */
+
+/** The constant \a 1/pi.	*/
+#define M_1_PI		0.31830988618379067154	/* 1/pi */
+
+/** The constant \a 2/pi.	*/
+#define M_2_PI		0.63661977236758134308	/* 2/pi */
+
+/** The constant \a 2/sqrt(pi).	*/
+#define M_2_SQRTPI	1.12837916709551257390	/* 2/sqrt(pi) */
+
+/** The square root of 2.	*/
+#define M_SQRT2		1.41421356237309504880	/* sqrt(2) */
+
+/** The constant \a 1/sqrt(2).	*/
+#define M_SQRT1_2	0.70710678118654752440	/* 1/sqrt(2) */
+
+/** NAN constant.	*/
 #define NAN	__builtin_nan("")
 
-/**
-   \ingroup avr_math
-
-   INFINITY constant. */
+/** INFINITY constant.	*/
 #define INFINITY	__builtin_inf()
+
+/*@}*/
+
 
 #ifndef __ATTR_CONST__
 # define __ATTR_CONST__ __attribute__((__const__))
