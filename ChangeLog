@@ -1,3 +1,9 @@
+2009-06-28  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #26809: Some common math constants missing in math.h
+	* include/math.h: Add a set of common math constans.
+	* NEWS: Add item to fixed bug list.
+
 2009-06-27  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/misc/eerd_block.S: Add 'eepr_hi' definition to fix the XMEGA
