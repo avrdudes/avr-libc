@@ -1,4 +1,4 @@
-*** Changes since avr-libc-1.6.6:
+*** Changes in avr-libc-1.6.6:
 
 * Bugs fixed:
   [no-id] Enable ATmega128RFA1 in <avr/power.h>
