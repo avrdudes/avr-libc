@@ -35,4 +35,5 @@ EXTRA_DIST = \
     macros.inc \
     asmdef.h \
     ftoa_engine.h \
-    ntz.h
+    ntz.h \
+    sectionname.h
