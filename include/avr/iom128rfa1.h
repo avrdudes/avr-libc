@@ -52,6 +52,7 @@
 #ifndef __ASSEMBLER__
 #  define _MMIO_BYTE_STRUCT(mem_addr,type) (*(volatile type *)(mem_addr))
 #  define _SFR_IO8_STRUCT(io_addr,type) _MMIO_BYTE_STRUCT((io_addr) + 0x20, type)
+#  define _SFR_MEM8_STRUCT(io_addr,type) _MMIO_BYTE_STRUCT((io_addr), type)
 #endif /* __ASSEMBLER__ */
 
 /*
@@ -1165,7 +1166,7 @@ struct __reg_WDTCSR {
         unsigned int wdif : 1;	/* Watchdog Timeout Interrupt Flag */
 };
 
-#define WDTCSR_struct _SFR_IO8_STRUCT(0x60, struct __reg_WDTCSR)
+#define WDTCSR_struct _SFR_MEM8_STRUCT(0x60, struct __reg_WDTCSR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1191,7 +1192,7 @@ struct __reg_CLKPR {
         unsigned int clkpce : 1;	/* Clock Prescaler Change Enable */
 };
 
-#define CLKPR_struct _SFR_IO8_STRUCT(0x61, struct __reg_CLKPR)
+#define CLKPR_struct _SFR_MEM8_STRUCT(0x61, struct __reg_CLKPR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1213,7 +1214,7 @@ struct __reg_PRR2 {
         unsigned int : 4;
 };
 
-#define PRR2_struct _SFR_IO8_STRUCT(0x63, struct __reg_PRR2)
+#define PRR2_struct _SFR_MEM8_STRUCT(0x63, struct __reg_PRR2)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1240,7 +1241,7 @@ struct __reg_PRR0 {
         unsigned int prtwi : 1;	/* Power Reduction TWI */
 };
 
-#define PRR0_struct _SFR_IO8_STRUCT(0x64, struct __reg_PRR0)
+#define PRR0_struct _SFR_MEM8_STRUCT(0x64, struct __reg_PRR0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1269,7 +1270,7 @@ struct __reg_PRR1 {
         unsigned int : 1;
 };
 
-#define PRR1_struct _SFR_IO8_STRUCT(0x65, struct __reg_PRR1)
+#define PRR1_struct _SFR_MEM8_STRUCT(0x65, struct __reg_PRR1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1292,7 +1293,7 @@ struct __reg_OSCCAL {
         unsigned int cal : 8;	/* Oscillator Calibration Tuning Value */
 };
 
-#define OSCCAL_struct _SFR_IO8_STRUCT(0x66, struct __reg_OSCCAL)
+#define OSCCAL_struct _SFR_MEM8_STRUCT(0x66, struct __reg_OSCCAL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1318,7 +1319,7 @@ struct __reg_BGCR {
         unsigned int : 1;
 };
 
-#define BGCR_struct _SFR_IO8_STRUCT(0x67, struct __reg_BGCR)
+#define BGCR_struct _SFR_MEM8_STRUCT(0x67, struct __reg_BGCR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1342,7 +1343,7 @@ struct __reg_PCICR {
         unsigned int : 5;
 };
 
-#define PCICR_struct _SFR_IO8_STRUCT(0x68, struct __reg_PCICR)
+#define PCICR_struct _SFR_MEM8_STRUCT(0x68, struct __reg_PCICR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1364,7 +1365,7 @@ struct __reg_EICRA {
         unsigned int isc3 : 2;	/* External Interrupt 3 Sense Control Bit */
 };
 
-#define EICRA_struct _SFR_IO8_STRUCT(0x69, struct __reg_EICRA)
+#define EICRA_struct _SFR_MEM8_STRUCT(0x69, struct __reg_EICRA)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1391,7 +1392,7 @@ struct __reg_EICRB {
         unsigned int isc7 : 2;	/* External Interrupt 7 Sense Control Bit */
 };
 
-#define EICRB_struct _SFR_IO8_STRUCT(0x6a, struct __reg_EICRB)
+#define EICRB_struct _SFR_MEM8_STRUCT(0x6a, struct __reg_EICRB)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1430,7 +1431,7 @@ struct __reg_PCMSK1 {
         unsigned int pcint1 : 6;	/* Pin Change Enable Mask */
 };
 
-#define PCMSK1_struct _SFR_IO8_STRUCT(0x6c, struct __reg_PCMSK1)
+#define PCMSK1_struct _SFR_MEM8_STRUCT(0x6c, struct __reg_PCMSK1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1455,7 +1456,7 @@ struct __reg_PCMSK2 {
         unsigned int pcint2 : 4;	/* Pin Change Enable Mask */
 };
 
-#define PCMSK2_struct _SFR_IO8_STRUCT(0x6d, struct __reg_PCMSK2)
+#define PCMSK2_struct _SFR_MEM8_STRUCT(0x6d, struct __reg_PCMSK2)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1482,7 +1483,7 @@ struct __reg_TIMSK0 {
         unsigned int : 5;
 };
 
-#define TIMSK0_struct _SFR_IO8_STRUCT(0x6e, struct __reg_TIMSK0)
+#define TIMSK0_struct _SFR_MEM8_STRUCT(0x6e, struct __reg_TIMSK0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1507,7 +1508,7 @@ struct __reg_TIMSK1 {
         unsigned int : 2;
 };
 
-#define TIMSK1_struct _SFR_IO8_STRUCT(0x6f, struct __reg_TIMSK1)
+#define TIMSK1_struct _SFR_MEM8_STRUCT(0x6f, struct __reg_TIMSK1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1531,7 +1532,7 @@ struct __reg_TIMSK2 {
         unsigned int : 5;
 };
 
-#define TIMSK2_struct _SFR_IO8_STRUCT(0x70, struct __reg_TIMSK2)
+#define TIMSK2_struct _SFR_MEM8_STRUCT(0x70, struct __reg_TIMSK2)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1557,7 +1558,7 @@ struct __reg_TIMSK3 {
         unsigned int : 2;
 };
 
-#define TIMSK3_struct _SFR_IO8_STRUCT(0x71, struct __reg_TIMSK3)
+#define TIMSK3_struct _SFR_MEM8_STRUCT(0x71, struct __reg_TIMSK3)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1584,7 +1585,7 @@ struct __reg_TIMSK4 {
         unsigned int : 2;
 };
 
-#define TIMSK4_struct _SFR_IO8_STRUCT(0x72, struct __reg_TIMSK4)
+#define TIMSK4_struct _SFR_MEM8_STRUCT(0x72, struct __reg_TIMSK4)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1611,7 +1612,7 @@ struct __reg_TIMSK5 {
         unsigned int : 2;
 };
 
-#define TIMSK5_struct _SFR_IO8_STRUCT(0x73, struct __reg_TIMSK5)
+#define TIMSK5_struct _SFR_MEM8_STRUCT(0x73, struct __reg_TIMSK5)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1635,7 +1636,7 @@ struct __reg_NEMCR {
         unsigned int : 1;
 };
 
-#define NEMCR_struct _SFR_IO8_STRUCT(0x75, struct __reg_NEMCR)
+#define NEMCR_struct _SFR_MEM8_STRUCT(0x75, struct __reg_NEMCR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1656,7 +1657,7 @@ struct __reg_ADCSRC {
         unsigned int adtht : 2;	/* ADC Track-and-Hold Time */
 };
 
-#define ADCSRC_struct _SFR_IO8_STRUCT(0x77, struct __reg_ADCSRC)
+#define ADCSRC_struct _SFR_MEM8_STRUCT(0x77, struct __reg_ADCSRC)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1694,7 +1695,7 @@ struct __reg_ADCSRA {
         unsigned int aden : 1;	/* ADC Enable */
 };
 
-#define ADCSRA_struct _SFR_IO8_STRUCT(0x7a, struct __reg_ADCSRA)
+#define ADCSRA_struct _SFR_MEM8_STRUCT(0x7a, struct __reg_ADCSRA)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1723,7 +1724,7 @@ struct __reg_ADCSRB {
         unsigned int avddok : 1;	/* AVDD Supply Voltage OK */
 };
 
-#define ADCSRB_struct _SFR_IO8_STRUCT(0x7b, struct __reg_ADCSRB)
+#define ADCSRB_struct _SFR_MEM8_STRUCT(0x7b, struct __reg_ADCSRB)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1749,7 +1750,7 @@ struct __reg_ADMUX {
         unsigned int refs : 2;	/* Reference Selection Bits */
 };
 
-#define ADMUX_struct _SFR_IO8_STRUCT(0x7c, struct __reg_ADMUX)
+#define ADMUX_struct _SFR_MEM8_STRUCT(0x7c, struct __reg_ADMUX)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1780,7 +1781,7 @@ struct __reg_DIDR2 {
         unsigned int adc15d : 1;	/* Reserved Bits */
 };
 
-#define DIDR2_struct _SFR_IO8_STRUCT(0x7d, struct __reg_DIDR2)
+#define DIDR2_struct _SFR_MEM8_STRUCT(0x7d, struct __reg_DIDR2)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1811,7 +1812,7 @@ struct __reg_DIDR0 {
         unsigned int adc7d : 1;	/* Disable ADC7:0 Digital Input */
 };
 
-#define DIDR0_struct _SFR_IO8_STRUCT(0x7e, struct __reg_DIDR0)
+#define DIDR0_struct _SFR_MEM8_STRUCT(0x7e, struct __reg_DIDR0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1837,7 +1838,7 @@ struct __reg_DIDR1 {
         unsigned int : 6;
 };
 
-#define DIDR1_struct _SFR_IO8_STRUCT(0x7f, struct __reg_DIDR1)
+#define DIDR1_struct _SFR_MEM8_STRUCT(0x7f, struct __reg_DIDR1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1858,7 +1859,7 @@ struct __reg_TCCR1A {
         unsigned int com1a : 2;	/* Compare Output Mode for Channel A */
 };
 
-#define TCCR1A_struct _SFR_IO8_STRUCT(0x80, struct __reg_TCCR1A)
+#define TCCR1A_struct _SFR_MEM8_STRUCT(0x80, struct __reg_TCCR1A)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1886,7 +1887,7 @@ struct __reg_TCCR1B {
         unsigned int icnc1 : 1;	/* Input Capture 1 Noise Canceller */
 };
 
-#define TCCR1B_struct _SFR_IO8_STRUCT(0x81, struct __reg_TCCR1B)
+#define TCCR1B_struct _SFR_MEM8_STRUCT(0x81, struct __reg_TCCR1B)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1912,7 +1913,7 @@ struct __reg_TCCR1C {
         unsigned int foc1a : 1;	/* Force Output Compare for Channel A */
 };
 
-#define TCCR1C_struct _SFR_IO8_STRUCT(0x82, struct __reg_TCCR1C)
+#define TCCR1C_struct _SFR_MEM8_STRUCT(0x82, struct __reg_TCCR1C)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1959,7 +1960,7 @@ struct __reg_TCCR3A {
         unsigned int com3a : 2;	/* Compare Output Mode for Channel A */
 };
 
-#define TCCR3A_struct _SFR_IO8_STRUCT(0x90, struct __reg_TCCR3A)
+#define TCCR3A_struct _SFR_MEM8_STRUCT(0x90, struct __reg_TCCR3A)
 
 #endif /* __ASSEMBLER__ */
 
@@ -1987,7 +1988,7 @@ struct __reg_TCCR3B {
         unsigned int icnc3 : 1;	/* Input Capture 3 Noise Canceller */
 };
 
-#define TCCR3B_struct _SFR_IO8_STRUCT(0x91, struct __reg_TCCR3B)
+#define TCCR3B_struct _SFR_MEM8_STRUCT(0x91, struct __reg_TCCR3B)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2013,7 +2014,7 @@ struct __reg_TCCR3C {
         unsigned int foc3a : 1;	/* Force Output Compare for Channel A */
 };
 
-#define TCCR3C_struct _SFR_IO8_STRUCT(0x92, struct __reg_TCCR3C)
+#define TCCR3C_struct _SFR_MEM8_STRUCT(0x92, struct __reg_TCCR3C)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2060,7 +2061,7 @@ struct __reg_TCCR4A {
         unsigned int com4a : 2;	/* Compare Output Mode for Channel A */
 };
 
-#define TCCR4A_struct _SFR_IO8_STRUCT(0xa0, struct __reg_TCCR4A)
+#define TCCR4A_struct _SFR_MEM8_STRUCT(0xa0, struct __reg_TCCR4A)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2088,7 +2089,7 @@ struct __reg_TCCR4B {
         unsigned int icnc4 : 1;	/* Input Capture 4 Noise Canceller */
 };
 
-#define TCCR4B_struct _SFR_IO8_STRUCT(0xa1, struct __reg_TCCR4B)
+#define TCCR4B_struct _SFR_MEM8_STRUCT(0xa1, struct __reg_TCCR4B)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2114,7 +2115,7 @@ struct __reg_TCCR4C {
         unsigned int foc4a : 1;	/* Force Output Compare for Channel A */
 };
 
-#define TCCR4C_struct _SFR_IO8_STRUCT(0xa2, struct __reg_TCCR4C)
+#define TCCR4C_struct _SFR_MEM8_STRUCT(0xa2, struct __reg_TCCR4C)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2161,7 +2162,7 @@ struct __reg_TCCR2A {
         unsigned int com2a : 2;	/* Compare Match Output A Mode */
 };
 
-#define TCCR2A_struct _SFR_IO8_STRUCT(0xb0, struct __reg_TCCR2A)
+#define TCCR2A_struct _SFR_MEM8_STRUCT(0xb0, struct __reg_TCCR2A)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2187,7 +2188,7 @@ struct __reg_TCCR2B {
         unsigned int foc2a : 1;	/* Force Output Compare A */
 };
 
-#define TCCR2B_struct _SFR_IO8_STRUCT(0xb1, struct __reg_TCCR2B)
+#define TCCR2B_struct _SFR_MEM8_STRUCT(0xb1, struct __reg_TCCR2B)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2258,7 +2259,7 @@ struct __reg_ASSR {
         unsigned int exclkamr : 1;	/* Enable External Clock Input for AMR */
 };
 
-#define ASSR_struct _SFR_IO8_STRUCT(0xb6, struct __reg_ASSR)
+#define ASSR_struct _SFR_MEM8_STRUCT(0xb6, struct __reg_ASSR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2298,7 +2299,7 @@ struct __reg_TWSR {
         unsigned int tws : 5;	/* TWI Status */
 };
 
-#define TWSR_struct _SFR_IO8_STRUCT(0xb9, struct __reg_TWSR)
+#define TWSR_struct _SFR_MEM8_STRUCT(0xb9, struct __reg_TWSR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2322,7 +2323,7 @@ struct __reg_TWAR {
         unsigned int twa : 7;	/* TWI (Slave) Address */
 };
 
-#define TWAR_struct _SFR_IO8_STRUCT(0xba, struct __reg_TWAR)
+#define TWAR_struct _SFR_MEM8_STRUCT(0xba, struct __reg_TWAR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2367,7 +2368,7 @@ struct __reg_TWCR {
         unsigned int twint : 1;	/* TWI Interrupt Flag */
 };
 
-#define TWCR_struct _SFR_IO8_STRUCT(0xbc, struct __reg_TWCR)
+#define TWCR_struct _SFR_MEM8_STRUCT(0xbc, struct __reg_TWCR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2391,7 +2392,7 @@ struct __reg_TWAMR {
         unsigned int twam : 7;	/* TWI Address Mask */
 };
 
-#define TWAMR_struct _SFR_IO8_STRUCT(0xbd, struct __reg_TWAMR)
+#define TWAMR_struct _SFR_MEM8_STRUCT(0xbd, struct __reg_TWAMR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2428,7 +2429,7 @@ struct __reg_UCSR0A {
         unsigned int rxc0 : 1;	/* USART Receive Complete */
 };
 
-#define UCSR0A_struct _SFR_IO8_STRUCT(0xc0, struct __reg_UCSR0A)
+#define UCSR0A_struct _SFR_MEM8_STRUCT(0xc0, struct __reg_UCSR0A)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2459,7 +2460,7 @@ struct __reg_UCSR0B {
         unsigned int rxcie0 : 1;	/* RX Complete Interrupt Enable */
 };
 
-#define UCSR0B_struct _SFR_IO8_STRUCT(0xc1, struct __reg_UCSR0B)
+#define UCSR0B_struct _SFR_MEM8_STRUCT(0xc1, struct __reg_UCSR0B)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2489,7 +2490,7 @@ struct __reg_UCSR0C {
         unsigned int umsel0 : 2;	/* USART Mode Select */
 };
 
-#define UCSR0C_struct _SFR_IO8_STRUCT(0xc2, struct __reg_UCSR0C)
+#define UCSR0C_struct _SFR_MEM8_STRUCT(0xc2, struct __reg_UCSR0C)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2545,7 +2546,7 @@ struct __reg_UCSR1A {
         unsigned int rxc1 : 1;	/* USART Receive Complete */
 };
 
-#define UCSR1A_struct _SFR_IO8_STRUCT(0xc8, struct __reg_UCSR1A)
+#define UCSR1A_struct _SFR_MEM8_STRUCT(0xc8, struct __reg_UCSR1A)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2576,7 +2577,7 @@ struct __reg_UCSR1B {
         unsigned int rxcie1 : 1;	/* RX Complete Interrupt Enable */
 };
 
-#define UCSR1B_struct _SFR_IO8_STRUCT(0xc9, struct __reg_UCSR1B)
+#define UCSR1B_struct _SFR_MEM8_STRUCT(0xc9, struct __reg_UCSR1B)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2606,7 +2607,7 @@ struct __reg_UCSR1C {
         unsigned int umsel1 : 2;	/* USART Mode Select */
 };
 
-#define UCSR1C_struct _SFR_IO8_STRUCT(0xca, struct __reg_UCSR1C)
+#define UCSR1C_struct _SFR_MEM8_STRUCT(0xca, struct __reg_UCSR1C)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2658,7 +2659,7 @@ struct __reg_SCCR0 {
         unsigned int scres : 1;	/* Symbol Counter Synchronization */
 };
 
-#define SCCR0_struct _SFR_IO8_STRUCT(0xdc, struct __reg_SCCR0)
+#define SCCR0_struct _SFR_MEM8_STRUCT(0xdc, struct __reg_SCCR0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2683,7 +2684,7 @@ struct __reg_SCCR1 {
         unsigned int : 7;
 };
 
-#define SCCR1_struct _SFR_IO8_STRUCT(0xdd, struct __reg_SCCR1)
+#define SCCR1_struct _SFR_MEM8_STRUCT(0xdd, struct __reg_SCCR1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2701,7 +2702,7 @@ struct __reg_SCSR {
         unsigned int : 7;
 };
 
-#define SCSR_struct _SFR_IO8_STRUCT(0xde, struct __reg_SCSR)
+#define SCSR_struct _SFR_MEM8_STRUCT(0xde, struct __reg_SCSR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2721,7 +2722,7 @@ struct __reg_SCIRQM {
         unsigned int : 3;
 };
 
-#define SCIRQM_struct _SFR_IO8_STRUCT(0xdf, struct __reg_SCIRQM)
+#define SCIRQM_struct _SFR_MEM8_STRUCT(0xdf, struct __reg_SCIRQM)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2745,7 +2746,7 @@ struct __reg_SCIRQS {
         unsigned int : 3;
 };
 
-#define SCIRQS_struct _SFR_IO8_STRUCT(0xe0, struct __reg_SCIRQS)
+#define SCIRQS_struct _SFR_MEM8_STRUCT(0xe0, struct __reg_SCIRQS)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2766,7 +2767,7 @@ struct __reg_SCCNTLL {
         unsigned int sccntll : 8;	/* Symbol Counter Register LL-Byte */
 };
 
-#define SCCNTLL_struct _SFR_IO8_STRUCT(0xe1, struct __reg_SCCNTLL)
+#define SCCNTLL_struct _SFR_MEM8_STRUCT(0xe1, struct __reg_SCCNTLL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2790,7 +2791,7 @@ struct __reg_SCCNTLH {
         unsigned int sccntlh : 8;	/* Symbol Counter Register LH-Byte */
 };
 
-#define SCCNTLH_struct _SFR_IO8_STRUCT(0xe2, struct __reg_SCCNTLH)
+#define SCCNTLH_struct _SFR_MEM8_STRUCT(0xe2, struct __reg_SCCNTLH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2814,7 +2815,7 @@ struct __reg_SCCNTHL {
         unsigned int sccnthl : 8;	/* Symbol Counter Register HL-Byte */
 };
 
-#define SCCNTHL_struct _SFR_IO8_STRUCT(0xe3, struct __reg_SCCNTHL)
+#define SCCNTHL_struct _SFR_MEM8_STRUCT(0xe3, struct __reg_SCCNTHL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2838,7 +2839,7 @@ struct __reg_SCCNTHH {
         unsigned int sccnthh : 8;	/* Symbol Counter Register HH-Byte */
 };
 
-#define SCCNTHH_struct _SFR_IO8_STRUCT(0xe4, struct __reg_SCCNTHH)
+#define SCCNTHH_struct _SFR_MEM8_STRUCT(0xe4, struct __reg_SCCNTHH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2862,7 +2863,7 @@ struct __reg_SCBTSRLL {
         unsigned int scbtsrll : 8;	/* Symbol Counter Beacon Timestamp Register LL-Byte */
 };
 
-#define SCBTSRLL_struct _SFR_IO8_STRUCT(0xe5, struct __reg_SCBTSRLL)
+#define SCBTSRLL_struct _SFR_MEM8_STRUCT(0xe5, struct __reg_SCBTSRLL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2886,7 +2887,7 @@ struct __reg_SCBTSRLH {
         unsigned int scbtsrlh : 8;	/* Symbol Counter Beacon Timestamp Register LH-Byte */
 };
 
-#define SCBTSRLH_struct _SFR_IO8_STRUCT(0xe6, struct __reg_SCBTSRLH)
+#define SCBTSRLH_struct _SFR_MEM8_STRUCT(0xe6, struct __reg_SCBTSRLH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2910,7 +2911,7 @@ struct __reg_SCBTSRHL {
         unsigned int scbtsrhl : 8;	/* Symbol Counter Beacon Timestamp Register HL-Byte */
 };
 
-#define SCBTSRHL_struct _SFR_IO8_STRUCT(0xe7, struct __reg_SCBTSRHL)
+#define SCBTSRHL_struct _SFR_MEM8_STRUCT(0xe7, struct __reg_SCBTSRHL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2934,7 +2935,7 @@ struct __reg_SCBTSRHH {
         unsigned int scbtsrhh : 8;	/* Symbol Counter Beacon Timestamp Register HH-Byte */
 };
 
-#define SCBTSRHH_struct _SFR_IO8_STRUCT(0xe8, struct __reg_SCBTSRHH)
+#define SCBTSRHH_struct _SFR_MEM8_STRUCT(0xe8, struct __reg_SCBTSRHH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2958,7 +2959,7 @@ struct __reg_SCTSRLL {
         unsigned int sctsrll : 8;	/* Symbol Counter Frame Timestamp Register LL-Byte */
 };
 
-#define SCTSRLL_struct _SFR_IO8_STRUCT(0xe9, struct __reg_SCTSRLL)
+#define SCTSRLL_struct _SFR_MEM8_STRUCT(0xe9, struct __reg_SCTSRLL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -2982,7 +2983,7 @@ struct __reg_SCTSRLH {
         unsigned int sctsrlh : 8;	/* Symbol Counter Frame Timestamp Register LH-Byte */
 };
 
-#define SCTSRLH_struct _SFR_IO8_STRUCT(0xea, struct __reg_SCTSRLH)
+#define SCTSRLH_struct _SFR_MEM8_STRUCT(0xea, struct __reg_SCTSRLH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3006,7 +3007,7 @@ struct __reg_SCTSRHL {
         unsigned int sctsrhl : 8;	/* Symbol Counter Frame Timestamp Register HL-Byte */
 };
 
-#define SCTSRHL_struct _SFR_IO8_STRUCT(0xeb, struct __reg_SCTSRHL)
+#define SCTSRHL_struct _SFR_MEM8_STRUCT(0xeb, struct __reg_SCTSRHL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3030,7 +3031,7 @@ struct __reg_SCTSRHH {
         unsigned int sctsrhh : 8;	/* Symbol Counter Frame Timestamp Register HH-Byte */
 };
 
-#define SCTSRHH_struct _SFR_IO8_STRUCT(0xec, struct __reg_SCTSRHH)
+#define SCTSRHH_struct _SFR_MEM8_STRUCT(0xec, struct __reg_SCTSRHH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3054,7 +3055,7 @@ struct __reg_SCOCR3LL {
         unsigned int scocr3ll : 8;	/* Symbol Counter Output Compare Register 3 LL-Byte */
 };
 
-#define SCOCR3LL_struct _SFR_IO8_STRUCT(0xed, struct __reg_SCOCR3LL)
+#define SCOCR3LL_struct _SFR_MEM8_STRUCT(0xed, struct __reg_SCOCR3LL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3078,7 +3079,7 @@ struct __reg_SCOCR3LH {
         unsigned int scocr3lh : 8;	/* Symbol Counter Output Compare Register 3 LH-Byte */
 };
 
-#define SCOCR3LH_struct _SFR_IO8_STRUCT(0xee, struct __reg_SCOCR3LH)
+#define SCOCR3LH_struct _SFR_MEM8_STRUCT(0xee, struct __reg_SCOCR3LH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3102,7 +3103,7 @@ struct __reg_SCOCR3HL {
         unsigned int scocr3hl : 8;	/* Symbol Counter Output Compare Register 3 HL-Byte */
 };
 
-#define SCOCR3HL_struct _SFR_IO8_STRUCT(0xef, struct __reg_SCOCR3HL)
+#define SCOCR3HL_struct _SFR_MEM8_STRUCT(0xef, struct __reg_SCOCR3HL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3126,7 +3127,7 @@ struct __reg_SCOCR3HH {
         unsigned int scocr3hh : 8;	/* Symbol Counter Output Compare Register 3 HH-Byte */
 };
 
-#define SCOCR3HH_struct _SFR_IO8_STRUCT(0xf0, struct __reg_SCOCR3HH)
+#define SCOCR3HH_struct _SFR_MEM8_STRUCT(0xf0, struct __reg_SCOCR3HH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3150,7 +3151,7 @@ struct __reg_SCOCR2LL {
         unsigned int scocr2ll : 8;	/* Symbol Counter Output Compare Register 2 LL-Byte */
 };
 
-#define SCOCR2LL_struct _SFR_IO8_STRUCT(0xf1, struct __reg_SCOCR2LL)
+#define SCOCR2LL_struct _SFR_MEM8_STRUCT(0xf1, struct __reg_SCOCR2LL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3174,7 +3175,7 @@ struct __reg_SCOCR2LH {
         unsigned int scocr2lh : 8;	/* Symbol Counter Output Compare Register 2 LH-Byte */
 };
 
-#define SCOCR2LH_struct _SFR_IO8_STRUCT(0xf2, struct __reg_SCOCR2LH)
+#define SCOCR2LH_struct _SFR_MEM8_STRUCT(0xf2, struct __reg_SCOCR2LH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3198,7 +3199,7 @@ struct __reg_SCOCR2HL {
         unsigned int scocr2hl : 8;	/* Symbol Counter Output Compare Register 2 HL-Byte */
 };
 
-#define SCOCR2HL_struct _SFR_IO8_STRUCT(0xf3, struct __reg_SCOCR2HL)
+#define SCOCR2HL_struct _SFR_MEM8_STRUCT(0xf3, struct __reg_SCOCR2HL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3222,7 +3223,7 @@ struct __reg_SCOCR2HH {
         unsigned int scocr2hh : 8;	/* Symbol Counter Output Compare Register 2 HH-Byte */
 };
 
-#define SCOCR2HH_struct _SFR_IO8_STRUCT(0xf4, struct __reg_SCOCR2HH)
+#define SCOCR2HH_struct _SFR_MEM8_STRUCT(0xf4, struct __reg_SCOCR2HH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3246,7 +3247,7 @@ struct __reg_SCOCR1LL {
         unsigned int scocr1ll : 8;	/* Symbol Counter Output Compare Register 1 LL-Byte */
 };
 
-#define SCOCR1LL_struct _SFR_IO8_STRUCT(0xf5, struct __reg_SCOCR1LL)
+#define SCOCR1LL_struct _SFR_MEM8_STRUCT(0xf5, struct __reg_SCOCR1LL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3270,7 +3271,7 @@ struct __reg_SCOCR1LH {
         unsigned int scocr1lh : 8;	/* Symbol Counter Output Compare Register 1 LH-Byte */
 };
 
-#define SCOCR1LH_struct _SFR_IO8_STRUCT(0xf6, struct __reg_SCOCR1LH)
+#define SCOCR1LH_struct _SFR_MEM8_STRUCT(0xf6, struct __reg_SCOCR1LH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3294,7 +3295,7 @@ struct __reg_SCOCR1HL {
         unsigned int scocr1hl : 8;	/* Symbol Counter Output Compare Register 1 HL-Byte */
 };
 
-#define SCOCR1HL_struct _SFR_IO8_STRUCT(0xf7, struct __reg_SCOCR1HL)
+#define SCOCR1HL_struct _SFR_MEM8_STRUCT(0xf7, struct __reg_SCOCR1HL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3318,7 +3319,7 @@ struct __reg_SCOCR1HH {
         unsigned int scocr1hh : 8;	/* Symbol Counter Output Compare Register 1 HH-Byte */
 };
 
-#define SCOCR1HH_struct _SFR_IO8_STRUCT(0xf8, struct __reg_SCOCR1HH)
+#define SCOCR1HH_struct _SFR_MEM8_STRUCT(0xf8, struct __reg_SCOCR1HH)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3345,7 +3346,7 @@ struct __reg_TCCR5A {
         unsigned int com5a : 2;	/* Compare Output Mode for Channel A */
 };
 
-#define TCCR5A_struct _SFR_IO8_STRUCT(0x120, struct __reg_TCCR5A)
+#define TCCR5A_struct _SFR_MEM8_STRUCT(0x120, struct __reg_TCCR5A)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3373,7 +3374,7 @@ struct __reg_TCCR5B {
         unsigned int icnc5 : 1;	/* Input Capture 5 Noise Canceller */
 };
 
-#define TCCR5B_struct _SFR_IO8_STRUCT(0x121, struct __reg_TCCR5B)
+#define TCCR5B_struct _SFR_MEM8_STRUCT(0x121, struct __reg_TCCR5B)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3399,7 +3400,7 @@ struct __reg_TCCR5C {
         unsigned int foc5a : 1;	/* Force Output Compare for Channel A */
 };
 
-#define TCCR5C_struct _SFR_IO8_STRUCT(0x122, struct __reg_TCCR5C)
+#define TCCR5C_struct _SFR_MEM8_STRUCT(0x122, struct __reg_TCCR5C)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3434,6 +3435,77 @@ struct __reg_TCCR5C {
 #define OCR5CL                          _SFR_MEM8(0x12C)
 #define OCR5CH                          _SFR_MEM8(0x12D)
 
+/* Low Leakage Voltage Regulator Control Register */
+#define LLCR                            _SFR_MEM8(0x12F)
+
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
+
+struct __reg_LLCR {
+        unsigned int llencal : 1;	/* Enable Automatic Calibration */
+        unsigned int llshort : 1;	/* Short Lower Calibration Circuit */
+        unsigned int lltco : 1;	/* Temperature Coefficient of Current Source */
+        unsigned int llcal : 1;	/* Calibration Active */
+        unsigned int llcomp : 1;	/* Comparator Output */
+        unsigned int lldone : 1;	/* Calibration Done */
+        unsigned int : 2;
+};
+
+#define LLCR_struct _SFR_MEM8_STRUCT(0x12f, struct __reg_LLCR)
+
+#endif /* __ASSEMBLER__ */
+
+  /* LLCR */
+
+#define LLENCAL                         0
+#define LLSHORT                         1
+#define LLTCO                           2
+#define LLCAL                           3
+#define LLCOMP                          4
+#define LLDONE                          5
+
+/* Low Leakage Voltage Regulator Data Register (Low-Byte) */
+#define LLDRL                           _SFR_MEM8(0x130)
+
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
+
+struct __reg_LLDRL {
+        unsigned int lldrl : 4;	/* Low-Byte Data Register Bits */
+        unsigned int : 4;
+};
+
+#define LLDRL_struct _SFR_MEM8_STRUCT(0x130, struct __reg_LLDRL)
+
+#endif /* __ASSEMBLER__ */
+
+  /* LLDRL */
+
+#define LLDRL0                          0
+#define LLDRL1                          1
+#define LLDRL2                          2
+#define LLDRL3                          3
+
+/* Low Leakage Voltage Regulator Data Register (High-Byte) */
+#define LLDRH                           _SFR_MEM8(0x131)
+
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
+
+struct __reg_LLDRH {
+        unsigned int lldrh : 5;	/* High-Byte Data Register Bits */
+        unsigned int : 3;
+};
+
+#define LLDRH_struct _SFR_MEM8_STRUCT(0x131, struct __reg_LLDRH)
+
+#endif /* __ASSEMBLER__ */
+
+  /* LLDRH */
+
+#define LLDRH0                          0
+#define LLDRH1                          1
+#define LLDRH2                          2
+#define LLDRH3                          3
+#define LLDRH4                          4
+
 /* Data Retention Configuration Register of SRAM 3 */
 #define DRTRAM3                         _SFR_MEM8(0x132)
 
@@ -3442,16 +3514,18 @@ struct __reg_TCCR5C {
 struct __reg_DRTRAM3 {
         unsigned int : 4;
         unsigned int endrt : 1;	/* Enable SRAM Data Retention */
-        unsigned int : 3;
+        unsigned int drtswok : 1;	/* DRT Switch OK */
+        unsigned int : 2;
 };
 
-#define DRTRAM3_struct _SFR_IO8_STRUCT(0x132, struct __reg_DRTRAM3)
+#define DRTRAM3_struct _SFR_MEM8_STRUCT(0x132, struct __reg_DRTRAM3)
 
 #endif /* __ASSEMBLER__ */
 
   /* DRTRAM3 */
 
 #define ENDRT                           4
+#define DRTSWOK                         5
 
 /* Data Retention Configuration Register of SRAM 2 */
 #define DRTRAM2                         _SFR_MEM8(0x133)
@@ -3461,16 +3535,18 @@ struct __reg_DRTRAM3 {
 struct __reg_DRTRAM2 {
         unsigned int : 4;
         unsigned int endrt : 1;	/* Enable SRAM Data Retention */
-        unsigned int : 3;
+        unsigned int drtswok : 1;	/* DRT Switch OK */
+        unsigned int : 2;
 };
 
-#define DRTRAM2_struct _SFR_IO8_STRUCT(0x133, struct __reg_DRTRAM2)
+#define DRTRAM2_struct _SFR_MEM8_STRUCT(0x133, struct __reg_DRTRAM2)
 
 #endif /* __ASSEMBLER__ */
 
   /* DRTRAM2 */
 
 #define ENDRT                           4
+#define DRTSWOK                         5
 
 /* Data Retention Configuration Register of SRAM 1 */
 #define DRTRAM1                         _SFR_MEM8(0x134)
@@ -3480,16 +3556,18 @@ struct __reg_DRTRAM2 {
 struct __reg_DRTRAM1 {
         unsigned int : 4;
         unsigned int endrt : 1;	/* Enable SRAM Data Retention */
-        unsigned int : 3;
+        unsigned int drtswok : 1;	/* DRT Switch OK */
+        unsigned int : 2;
 };
 
-#define DRTRAM1_struct _SFR_IO8_STRUCT(0x134, struct __reg_DRTRAM1)
+#define DRTRAM1_struct _SFR_MEM8_STRUCT(0x134, struct __reg_DRTRAM1)
 
 #endif /* __ASSEMBLER__ */
 
   /* DRTRAM1 */
 
 #define ENDRT                           4
+#define DRTSWOK                         5
 
 /* Data Retention Configuration Register of SRAM 0 */
 #define DRTRAM0                         _SFR_MEM8(0x135)
@@ -3499,16 +3577,18 @@ struct __reg_DRTRAM1 {
 struct __reg_DRTRAM0 {
         unsigned int : 4;
         unsigned int endrt : 1;	/* Enable SRAM Data Retention */
-        unsigned int : 3;
+        unsigned int drtswok : 1;	/* DRT Switch OK */
+        unsigned int : 2;
 };
 
-#define DRTRAM0_struct _SFR_IO8_STRUCT(0x135, struct __reg_DRTRAM0)
+#define DRTRAM0_struct _SFR_MEM8_STRUCT(0x135, struct __reg_DRTRAM0)
 
 #endif /* __ASSEMBLER__ */
 
   /* DRTRAM0 */
 
 #define ENDRT                           4
+#define DRTSWOK                         5
 
 /* Port Driver Strength Register 0 */
 #define DPDS0                           _SFR_MEM8(0x136)
@@ -3522,7 +3602,7 @@ struct __reg_DPDS0 {
         unsigned int pfdrv : 2;	/* Driver Strength Port F */
 };
 
-#define DPDS0_struct _SFR_IO8_STRUCT(0x136, struct __reg_DPDS0)
+#define DPDS0_struct _SFR_MEM8_STRUCT(0x136, struct __reg_DPDS0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3547,7 +3627,7 @@ struct __reg_DPDS1 {
         unsigned int : 6;
 };
 
-#define DPDS1_struct _SFR_IO8_STRUCT(0x137, struct __reg_DPDS1)
+#define DPDS1_struct _SFR_MEM8_STRUCT(0x137, struct __reg_DPDS1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3567,7 +3647,7 @@ struct __reg_TRXPR {
         unsigned int : 6;
 };
 
-#define TRXPR_struct _SFR_IO8_STRUCT(0x139, struct __reg_TRXPR)
+#define TRXPR_struct _SFR_MEM8_STRUCT(0x139, struct __reg_TRXPR)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3591,7 +3671,7 @@ struct __reg_AES_CTRL {
         unsigned int aes_request : 1;	/* Request AES Operation. */
 };
 
-#define AES_CTRL_struct _SFR_IO8_STRUCT(0x13c, struct __reg_AES_CTRL)
+#define AES_CTRL_struct _SFR_MEM8_STRUCT(0x13c, struct __reg_AES_CTRL)
 
 /* symbolic names */
 
@@ -3620,7 +3700,7 @@ struct __reg_AES_STATUS {
         unsigned int aes_er : 1;	/* AES Operation Finished with Error */
 };
 
-#define AES_STATUS_struct _SFR_IO8_STRUCT(0x13d, struct __reg_AES_STATUS)
+#define AES_STATUS_struct _SFR_MEM8_STRUCT(0x13d, struct __reg_AES_STATUS)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3638,7 +3718,7 @@ struct __reg_AES_STATE {
         unsigned int aes_state : 8;	/* AES Plain and Cipher Text Buffer */
 };
 
-#define AES_STATE_struct _SFR_IO8_STRUCT(0x13e, struct __reg_AES_STATE)
+#define AES_STATE_struct _SFR_MEM8_STRUCT(0x13e, struct __reg_AES_STATE)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3662,7 +3742,7 @@ struct __reg_AES_KEY {
         unsigned int aes_key : 8;	/* AES Encryption/Decryption Key Buffer */
 };
 
-#define AES_KEY_struct _SFR_IO8_STRUCT(0x13f, struct __reg_AES_KEY)
+#define AES_KEY_struct _SFR_MEM8_STRUCT(0x13f, struct __reg_AES_KEY)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3689,7 +3769,7 @@ struct __reg_TRX_STATUS {
         unsigned int cca_done : 1;	/* CCA Algorithm Status */
 };
 
-#define TRX_STATUS_struct _SFR_IO8_STRUCT(0x141, struct __reg_TRX_STATUS)
+#define TRX_STATUS_struct _SFR_MEM8_STRUCT(0x141, struct __reg_TRX_STATUS)
 
 /* symbolic names */
 
@@ -3704,9 +3784,6 @@ struct __reg_TRX_STATUS {
 #define BUSY_TX_ARET                    18
 #define RX_AACK_ON                      22
 #define TX_ARET_ON                      25
-#define RX_ON_NOCLK                     28
-#define RX_AACK_ON_NOCLK                29
-#define BUSY_RX_AACK_NOCLK              30
 #define STATE_TRANSITION_IN_PROGRESS    31
 #define TST_DISABLED                    0
 #define TST_ENABLED                     1
@@ -3738,7 +3815,7 @@ struct __reg_TRX_STATE {
         unsigned int trac_status : 3;	/* Transaction Status */
 };
 
-#define TRX_STATE_struct _SFR_IO8_STRUCT(0x142, struct __reg_TRX_STATE)
+#define TRX_STATE_struct _SFR_MEM8_STRUCT(0x142, struct __reg_TRX_STATE)
 
 /* symbolic names */
 
@@ -3786,7 +3863,7 @@ struct __reg_TRX_CTRL_1 {
         unsigned int pa_ext_en : 1;	/* External PA support enable */
 };
 
-#define TRX_CTRL_1_struct _SFR_IO8_STRUCT(0x144, struct __reg_TRX_CTRL_1)
+#define TRX_CTRL_1_struct _SFR_MEM8_STRUCT(0x144, struct __reg_TRX_CTRL_1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3807,7 +3884,7 @@ struct __reg_PHY_TX_PWR {
         unsigned int pa_buf_lt : 2;	/* Power Amplifier Buffer Lead Time */
 };
 
-#define PHY_TX_PWR_struct _SFR_IO8_STRUCT(0x145, struct __reg_PHY_TX_PWR)
+#define PHY_TX_PWR_struct _SFR_MEM8_STRUCT(0x145, struct __reg_PHY_TX_PWR)
 
 /* symbolic names */
 
@@ -3844,7 +3921,7 @@ struct __reg_PHY_RSSI {
         unsigned int rx_crc_valid : 1;	/* Received Frame CRC Status */
 };
 
-#define PHY_RSSI_struct _SFR_IO8_STRUCT(0x146, struct __reg_PHY_RSSI)
+#define PHY_RSSI_struct _SFR_MEM8_STRUCT(0x146, struct __reg_PHY_RSSI)
 
 /* symbolic names */
 
@@ -3876,7 +3953,7 @@ struct __reg_PHY_ED_LEVEL {
         unsigned int ed_level : 8;	/* Energy Detection Level */
 };
 
-#define PHY_ED_LEVEL_struct _SFR_IO8_STRUCT(0x147, struct __reg_PHY_ED_LEVEL)
+#define PHY_ED_LEVEL_struct _SFR_MEM8_STRUCT(0x147, struct __reg_PHY_ED_LEVEL)
 
 /* symbolic names */
 
@@ -3909,7 +3986,7 @@ struct __reg_PHY_CC_CCA {
         unsigned int cca_request : 1;	/* Manual CCA Measurement Request */
 };
 
-#define PHY_CC_CCA_struct _SFR_IO8_STRUCT(0x148, struct __reg_PHY_CC_CCA)
+#define PHY_CC_CCA_struct _SFR_MEM8_STRUCT(0x148, struct __reg_PHY_CC_CCA)
 
 /* symbolic names */
 
@@ -3957,7 +4034,7 @@ struct __reg_CCA_THRES {
         unsigned int cca_cs_thres : 4;	/* CS Threshold Level for CCA Measurement */
 };
 
-#define CCA_THRES_struct _SFR_IO8_STRUCT(0x149, struct __reg_CCA_THRES)
+#define CCA_THRES_struct _SFR_MEM8_STRUCT(0x149, struct __reg_CCA_THRES)
 
 #endif /* __ASSEMBLER__ */
 
@@ -3982,7 +4059,7 @@ struct __reg_RX_CTRL {
         unsigned int : 4;
 };
 
-#define RX_CTRL_struct _SFR_IO8_STRUCT(0x14a, struct __reg_RX_CTRL)
+#define RX_CTRL_struct _SFR_MEM8_STRUCT(0x14a, struct __reg_RX_CTRL)
 
 /* symbolic names */
 
@@ -4007,7 +4084,7 @@ struct __reg_SFD_VALUE {
         unsigned int sfd_value : 8;	/* Start of Frame Delimiter Value */
 };
 
-#define SFD_VALUE_struct _SFR_IO8_STRUCT(0x14b, struct __reg_SFD_VALUE)
+#define SFD_VALUE_struct _SFR_MEM8_STRUCT(0x14b, struct __reg_SFD_VALUE)
 
 /* symbolic names */
 
@@ -4037,7 +4114,7 @@ struct __reg_TRX_CTRL_2 {
         unsigned int rx_safe_mode : 1;	/* RX Safe Mode */
 };
 
-#define TRX_CTRL_2_struct _SFR_IO8_STRUCT(0x14c, struct __reg_TRX_CTRL_2)
+#define TRX_CTRL_2_struct _SFR_MEM8_STRUCT(0x14c, struct __reg_TRX_CTRL_2)
 
 /* symbolic names */
 
@@ -4067,7 +4144,7 @@ struct __reg_ANT_DIV {
         unsigned int ant_sel : 1;	/* Antenna Diversity Antenna Status */
 };
 
-#define ANT_DIV_struct _SFR_IO8_STRUCT(0x14d, struct __reg_ANT_DIV)
+#define ANT_DIV_struct _SFR_MEM8_STRUCT(0x14d, struct __reg_ANT_DIV)
 
 /* symbolic names */
 
@@ -4105,7 +4182,7 @@ struct __reg_IRQ_MASK {
         unsigned int awake_en : 1;	/* Awake Interrupt Enable */
 };
 
-#define IRQ_MASK_struct _SFR_IO8_STRUCT(0x14e, struct __reg_IRQ_MASK)
+#define IRQ_MASK_struct _SFR_MEM8_STRUCT(0x14e, struct __reg_IRQ_MASK)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4136,7 +4213,7 @@ struct __reg_IRQ_STATUS {
         unsigned int awake : 1;	/* Awake Interrupt Status */
 };
 
-#define IRQ_STATUS_struct _SFR_IO8_STRUCT(0x14f, struct __reg_IRQ_STATUS)
+#define IRQ_STATUS_struct _SFR_MEM8_STRUCT(0x14f, struct __reg_IRQ_STATUS)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4165,7 +4242,7 @@ struct __reg_VREG_CTRL {
         unsigned int avreg_ext : 1;	/* Use External AVDD Regulator */
 };
 
-#define VREG_CTRL_struct _SFR_IO8_STRUCT(0x150, struct __reg_VREG_CTRL)
+#define VREG_CTRL_struct _SFR_MEM8_STRUCT(0x150, struct __reg_VREG_CTRL)
 
 /* symbolic names */
 
@@ -4196,7 +4273,7 @@ struct __reg_BATMON {
         unsigned int bat_low : 1;	/* Battery Monitor Interrupt Status */
 };
 
-#define BATMON_struct _SFR_IO8_STRUCT(0x151, struct __reg_BATMON)
+#define BATMON_struct _SFR_MEM8_STRUCT(0x151, struct __reg_BATMON)
 
 /* symbolic names */
 
@@ -4226,7 +4303,7 @@ struct __reg_XOSC_CTRL {
         unsigned int xtal_mode : 4;	/* Crystal Oscillator Operating Mode */
 };
 
-#define XOSC_CTRL_struct _SFR_IO8_STRUCT(0x152, struct __reg_XOSC_CTRL)
+#define XOSC_CTRL_struct _SFR_MEM8_STRUCT(0x152, struct __reg_XOSC_CTRL)
 
 /* symbolic names */
 
@@ -4257,7 +4334,7 @@ struct __reg_RX_SYN {
         unsigned int rx_pdt_dis : 1;	/* Prevent Frame Reception */
 };
 
-#define RX_SYN_struct _SFR_IO8_STRUCT(0x155, struct __reg_RX_SYN)
+#define RX_SYN_struct _SFR_MEM8_STRUCT(0x155, struct __reg_RX_SYN)
 
 /* symbolic names */
 
@@ -4289,7 +4366,7 @@ struct __reg_XAH_CTRL_1 {
         unsigned int : 2;
 };
 
-#define XAH_CTRL_1_struct _SFR_IO8_STRUCT(0x157, struct __reg_XAH_CTRL_1)
+#define XAH_CTRL_1_struct _SFR_MEM8_STRUCT(0x157, struct __reg_XAH_CTRL_1)
 
 /* symbolic names */
 
@@ -4315,7 +4392,7 @@ struct __reg_FTN_CTRL {
         unsigned int ftn_start : 1;	/* Start Calibration Loop of Filter Tuning Network */
 };
 
-#define FTN_CTRL_struct _SFR_IO8_STRUCT(0x158, struct __reg_FTN_CTRL)
+#define FTN_CTRL_struct _SFR_MEM8_STRUCT(0x158, struct __reg_FTN_CTRL)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4333,7 +4410,7 @@ struct __reg_PLL_CF {
         unsigned int pll_cf_start : 1;	/* Start Center Frequency Calibration */
 };
 
-#define PLL_CF_struct _SFR_IO8_STRUCT(0x15a, struct __reg_PLL_CF)
+#define PLL_CF_struct _SFR_MEM8_STRUCT(0x15a, struct __reg_PLL_CF)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4351,7 +4428,7 @@ struct __reg_PLL_DCU {
         unsigned int pll_dcu_start : 1;	/* Start Delay Cell Calibration */
 };
 
-#define PLL_DCU_struct _SFR_IO8_STRUCT(0x15b, struct __reg_PLL_DCU)
+#define PLL_DCU_struct _SFR_MEM8_STRUCT(0x15b, struct __reg_PLL_DCU)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4368,7 +4445,7 @@ struct __reg_PART_NUM {
         unsigned int part_num : 8;	/* Part Number */
 };
 
-#define PART_NUM_struct _SFR_IO8_STRUCT(0x15c, struct __reg_PART_NUM)
+#define PART_NUM_struct _SFR_MEM8_STRUCT(0x15c, struct __reg_PART_NUM)
 
 /* symbolic names */
 
@@ -4396,7 +4473,7 @@ struct __reg_VERSION_NUM {
         unsigned int version_num : 8;	/* Version Number */
 };
 
-#define VERSION_NUM_struct _SFR_IO8_STRUCT(0x15d, struct __reg_VERSION_NUM)
+#define VERSION_NUM_struct _SFR_MEM8_STRUCT(0x15d, struct __reg_VERSION_NUM)
 
 /* symbolic names */
 
@@ -4425,7 +4502,7 @@ struct __reg_MAN_ID_0 {
         unsigned int man_id_0 : 8;	/* Manufacturer ID (Low Byte) */
 };
 
-#define MAN_ID_0_struct _SFR_IO8_STRUCT(0x15e, struct __reg_MAN_ID_0)
+#define MAN_ID_0_struct _SFR_MEM8_STRUCT(0x15e, struct __reg_MAN_ID_0)
 
 /* symbolic names */
 
@@ -4453,7 +4530,7 @@ struct __reg_MAN_ID_1 {
         unsigned int man_id_1 : 8;	/* Manufacturer ID (High Byte) */
 };
 
-#define MAN_ID_1_struct _SFR_IO8_STRUCT(0x15f, struct __reg_MAN_ID_1)
+#define MAN_ID_1_struct _SFR_MEM8_STRUCT(0x15f, struct __reg_MAN_ID_1)
 
 /* symbolic names */
 
@@ -4481,7 +4558,7 @@ struct __reg_SHORT_ADDR_0 {
         unsigned int short_addr_0 : 8;	/* MAC Short Address */
 };
 
-#define SHORT_ADDR_0_struct _SFR_IO8_STRUCT(0x160, struct __reg_SHORT_ADDR_0)
+#define SHORT_ADDR_0_struct _SFR_MEM8_STRUCT(0x160, struct __reg_SHORT_ADDR_0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4505,7 +4582,7 @@ struct __reg_SHORT_ADDR_1 {
         unsigned int short_addr_1 : 8;	/* MAC Short Address */
 };
 
-#define SHORT_ADDR_1_struct _SFR_IO8_STRUCT(0x161, struct __reg_SHORT_ADDR_1)
+#define SHORT_ADDR_1_struct _SFR_MEM8_STRUCT(0x161, struct __reg_SHORT_ADDR_1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4529,7 +4606,7 @@ struct __reg_PAN_ID_0 {
         unsigned int pan_id_0 : 8;	/* MAC Personal Area Network ID */
 };
 
-#define PAN_ID_0_struct _SFR_IO8_STRUCT(0x162, struct __reg_PAN_ID_0)
+#define PAN_ID_0_struct _SFR_MEM8_STRUCT(0x162, struct __reg_PAN_ID_0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4553,7 +4630,7 @@ struct __reg_PAN_ID_1 {
         unsigned int pan_id_1 : 8;	/* MAC Personal Area Network ID */
 };
 
-#define PAN_ID_1_struct _SFR_IO8_STRUCT(0x163, struct __reg_PAN_ID_1)
+#define PAN_ID_1_struct _SFR_MEM8_STRUCT(0x163, struct __reg_PAN_ID_1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4577,7 +4654,7 @@ struct __reg_IEEE_ADDR_0 {
         unsigned int ieee_addr_0 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_0_struct _SFR_IO8_STRUCT(0x164, struct __reg_IEEE_ADDR_0)
+#define IEEE_ADDR_0_struct _SFR_MEM8_STRUCT(0x164, struct __reg_IEEE_ADDR_0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4601,7 +4678,7 @@ struct __reg_IEEE_ADDR_1 {
         unsigned int ieee_addr_1 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_1_struct _SFR_IO8_STRUCT(0x165, struct __reg_IEEE_ADDR_1)
+#define IEEE_ADDR_1_struct _SFR_MEM8_STRUCT(0x165, struct __reg_IEEE_ADDR_1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4625,7 +4702,7 @@ struct __reg_IEEE_ADDR_2 {
         unsigned int ieee_addr_2 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_2_struct _SFR_IO8_STRUCT(0x166, struct __reg_IEEE_ADDR_2)
+#define IEEE_ADDR_2_struct _SFR_MEM8_STRUCT(0x166, struct __reg_IEEE_ADDR_2)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4649,7 +4726,7 @@ struct __reg_IEEE_ADDR_3 {
         unsigned int ieee_addr_3 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_3_struct _SFR_IO8_STRUCT(0x167, struct __reg_IEEE_ADDR_3)
+#define IEEE_ADDR_3_struct _SFR_MEM8_STRUCT(0x167, struct __reg_IEEE_ADDR_3)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4673,7 +4750,7 @@ struct __reg_IEEE_ADDR_4 {
         unsigned int ieee_addr_4 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_4_struct _SFR_IO8_STRUCT(0x168, struct __reg_IEEE_ADDR_4)
+#define IEEE_ADDR_4_struct _SFR_MEM8_STRUCT(0x168, struct __reg_IEEE_ADDR_4)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4697,7 +4774,7 @@ struct __reg_IEEE_ADDR_5 {
         unsigned int ieee_addr_5 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_5_struct _SFR_IO8_STRUCT(0x169, struct __reg_IEEE_ADDR_5)
+#define IEEE_ADDR_5_struct _SFR_MEM8_STRUCT(0x169, struct __reg_IEEE_ADDR_5)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4721,7 +4798,7 @@ struct __reg_IEEE_ADDR_6 {
         unsigned int ieee_addr_6 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_6_struct _SFR_IO8_STRUCT(0x16a, struct __reg_IEEE_ADDR_6)
+#define IEEE_ADDR_6_struct _SFR_MEM8_STRUCT(0x16a, struct __reg_IEEE_ADDR_6)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4745,7 +4822,7 @@ struct __reg_IEEE_ADDR_7 {
         unsigned int ieee_addr_7 : 8;	/* MAC IEEE Address */
 };
 
-#define IEEE_ADDR_7_struct _SFR_IO8_STRUCT(0x16b, struct __reg_IEEE_ADDR_7)
+#define IEEE_ADDR_7_struct _SFR_MEM8_STRUCT(0x16b, struct __reg_IEEE_ADDR_7)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4771,7 +4848,7 @@ struct __reg_XAH_CTRL_0 {
         unsigned int max_frame_retries : 4;	/* Maximum Number of Frame Re-transmission Attempts */
 };
 
-#define XAH_CTRL_0_struct _SFR_IO8_STRUCT(0x16c, struct __reg_XAH_CTRL_0)
+#define XAH_CTRL_0_struct _SFR_MEM8_STRUCT(0x16c, struct __reg_XAH_CTRL_0)
 
 /* symbolic names */
 
@@ -4800,7 +4877,7 @@ struct __reg_CSMA_SEED_0 {
         unsigned int csma_seed_0 : 8;	/* Seed Value for CSMA Random Number Generator */
 };
 
-#define CSMA_SEED_0_struct _SFR_IO8_STRUCT(0x16d, struct __reg_CSMA_SEED_0)
+#define CSMA_SEED_0_struct _SFR_MEM8_STRUCT(0x16d, struct __reg_CSMA_SEED_0)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4828,7 +4905,7 @@ struct __reg_CSMA_SEED_1 {
         unsigned int aack_fvn_mode : 2;	/* Acknowledgment Frame Filter Mode */
 };
 
-#define CSMA_SEED_1_struct _SFR_IO8_STRUCT(0x16e, struct __reg_CSMA_SEED_1)
+#define CSMA_SEED_1_struct _SFR_MEM8_STRUCT(0x16e, struct __reg_CSMA_SEED_1)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4853,7 +4930,7 @@ struct __reg_CSMA_BE {
         unsigned int max_be : 4;	/* Maximum Back-off Exponent */
 };
 
-#define CSMA_BE_struct _SFR_IO8_STRUCT(0x16f, struct __reg_CSMA_BE)
+#define CSMA_BE_struct _SFR_MEM8_STRUCT(0x16f, struct __reg_CSMA_BE)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4878,7 +4955,7 @@ struct __reg_TST_CTRL_DIGI {
         unsigned int : 4;
 };
 
-#define TST_CTRL_DIGI_struct _SFR_IO8_STRUCT(0x176, struct __reg_TST_CTRL_DIGI)
+#define TST_CTRL_DIGI_struct _SFR_MEM8_STRUCT(0x176, struct __reg_TST_CTRL_DIGI)
 
 #endif /* __ASSEMBLER__ */
 
@@ -4898,7 +4975,7 @@ struct __reg_TST_RX_LENGTH {
         unsigned int rx_length : 8;	/* Received Frame Length */
 };
 
-#define TST_RX_LENGTH_struct _SFR_IO8_STRUCT(0x17b, struct __reg_TST_RX_LENGTH)
+#define TST_RX_LENGTH_struct _SFR_MEM8_STRUCT(0x17b, struct __reg_TST_RX_LENGTH)
 
 #endif /* __ASSEMBLER__ */
 
