@@ -1,6 +1,7 @@
 *** Changes since avr-libc-1.6.6:
 
 * Bugs fixed:
+  [#26876] include io.h into fuse.h
 
 * New devices supported:
 
