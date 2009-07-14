@@ -35,6 +35,11 @@
 #ifndef _AVR_FUSE_H_
 #define _AVR_FUSE_H_ 1
 
+/* This file must be explicitly included by <avr/io.h>. */
+#if !defined(_AVR_IO_H_)
+#error "You must #include <avr/io.h> and not <avr/fuse.h> by itself."
+#endif
+
 
 /** \file */
 /** \defgroup avr_fuse <avr/fuse.h>: Fuse Support

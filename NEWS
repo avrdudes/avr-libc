@@ -1,7 +1,6 @@
 *** Changes since avr-libc-1.6.0:
 
 * Bugs fixed:
-
   [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
   [no-id] Fix CLKPCE bit value to be 7.
   [no-id] inlining failed in call to '_delay_ms': function body not available
@@ -99,6 +98,7 @@
   [#26284] boot_lock_fuse_bits_get does not compile under gcc 4.3.X
   [#26308] WDE defined as WDE3 in io90pwm3b.h and io90pwm2b.h
   [#26809] Some common math constants missing in math.h
+  [#26876] include io.h into fuse.h
   
 * Other changes:
 
