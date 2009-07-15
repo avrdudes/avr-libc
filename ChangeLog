@@ -1,3 +1,8 @@
+2009-07-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/rel-method.dox: Remember to update the Savannah bug
+	tracker version numbers when releasing.
+
 2009-07-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #26876.
