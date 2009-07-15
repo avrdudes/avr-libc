@@ -109,6 +109,8 @@ The following steps should be taken to cut a branch in cvs:
    snapshot source tarball. This should be considered the first release
    candidate.
 -# Upload the snapshot tarball to savannah.
+-# Update the bug tracker interface on Savannah: Bugs &mdash;&gt; Edit
+   field values &mdash;&gt; Release / Fixed Release
 -# Announce the branch and the branch tag to the avr-libc-dev list so other
    developers can checkout the branch.
 
@@ -139,6 +141,8 @@ The following steps should be taken when making a release:
 -# Upload the tarball to savannah.
 -# Update the NEWS file, and commit to cvs:<br>
    Add &quot;Changes since avr-libc-\<major\>_\<minor\>_\<patch\>:&quot;
+-# Update the bug tracker interface on Savannah: Bugs &mdash;&gt; Edit
+   field values &mdash;&gt; Release / Fixed Release
 -# Generate the latest documentation and upload to savannah.
 -# Announce the release.
 
