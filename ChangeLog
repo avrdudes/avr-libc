@@ -1,3 +1,9 @@
+2009-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom8u2.h: New file.
+	* include/avr/iom16u2.h: New file.
+	* include/avr/iom32u2.h: New file.
+
 2009-07-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/rel-method.dox: Remember to update the Savannah bug
