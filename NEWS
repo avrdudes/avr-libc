@@ -5,6 +5,10 @@
 
 * New devices supported:
 
+  ATmega8U2
+  ATmega16U2
+  ATmega32U2
+
 * Other changes:
 
 

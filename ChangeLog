@@ -1,3 +1,17 @@
+2009-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega8U2, ATmega16U2, and ATmega32U2.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same. Also reorder files in avr_HEADERS.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same. Also fix macro name.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item for new devices.
+
 2009-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom8u2.h: New file.
