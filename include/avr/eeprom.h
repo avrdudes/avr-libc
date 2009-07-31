@@ -71,12 +71,18 @@
 # define _EEPROM_SUFFIX _90pwm81
 #elif defined (__AVR_ATmega16M1__)
 # define _EEPROM_SUFFIX  _m16m1
+#elif defined (__AVR_ATmega8U2__)
+# define _EEPROM_SUFFIX  _m8u2
+#elif defined (__AVR_ATmega16U2__)
+# define _EEPROM_SUFFIX  _m16u2
 #elif defined (__AVR_ATmega16U4__)
 # define _EEPROM_SUFFIX  _m16u4
 #elif defined (__AVR_ATmega32C1__)
 # define _EEPROM_SUFFIX  _m32c1
 #elif defined (__AVR_ATmega32M1__)
 # define _EEPROM_SUFFIX  _m32m1
+#elif defined (__AVR_ATmega32U2__)
+# define _EEPROM_SUFFIX  _m32u2
 #elif defined (__AVR_ATmega32U4__)
 # define _EEPROM_SUFFIX  _m32u4
 #elif defined (__AVR_ATmega32U6__)

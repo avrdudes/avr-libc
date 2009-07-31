@@ -186,6 +186,10 @@
   + ATxmega16A4
   + ATxmega16D4
   + ATmega16U4
+  + ATmega8U2
+  + ATmega16U2
+  + ATmega32U2
+
 
 * Optimized functions:
 

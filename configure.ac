@@ -498,6 +498,15 @@ AM_CONDITIONAL(HAS_at90usb82, test "x$HAS_at90usb82" = "xyes")
 CHECK_AVR_DEVICE(at90usb162)
 AM_CONDITIONAL(HAS_at90usb162, test "x$HAS_at90usb162" = "xyes")
 
+CHECK_AVR_DEVICE(atmega8u2)
+AM_CONDITIONAL(HAS_atmega8u2, test "x$HAS_atmega8u2" = "xyes")
+
+CHECK_AVR_DEVICE(atmega16u2)
+AM_CONDITIONAL(HAS_atmega16u2, test "x$HAS_atmega16u2" = "xyes")
+
+CHECK_AVR_DEVICE(atmega32u2)
+AM_CONDITIONAL(HAS_atmega32u2, test "x$HAS_atmega32u2" = "xyes")
+
 CHECK_AVR_DEVICE(attiny167)
 AM_CONDITIONAL(HAS_attiny167, test "x$HAS_attiny167" = "xyes")
 
@@ -887,6 +896,9 @@ AC_CONFIG_FILES([
 	avr/lib/avr35/Makefile
 	avr/lib/avr35/at90usb82/Makefile
 	avr/lib/avr35/at90usb162/Makefile
+	avr/lib/avr35/atmega8u2/Makefile
+	avr/lib/avr35/atmega16u2/Makefile
+	avr/lib/avr35/atmega32u2/Makefile
 	avr/lib/avr35/attiny167/Makefile
 ])
 

@@ -1128,8 +1128,10 @@ do{ \
 
 
 #elif defined(__AVR_AT90USB82__) \
-|| defined(__AVR_AT90USB162__)
-
+|| defined(__AVR_AT90USB162__) \
+|| defined(__AVR_ATmega8U2__) \
+|| defined(__AVR_ATmega16U2__) \
+|| defined(__AVR_ATmega32U2__)
 
 #define power_spi_enable()      (PRR0 &= (uint8_t)~(1 << PRSPI))
 #define power_spi_disable()     (PRR0 |= (uint8_t)(1 << PRSPI))
@@ -1138,7 +1140,7 @@ do{ \
 #define power_timer0_disable()  (PRR0 |= (uint8_t)(1 << PRTIM0))
 
 #define power_timer1_enable()   (PRR0 &= (uint8_t)~(1 << PRTIM1))
-#define power_timer2_disable()  (PRR0 |= (uint8_t)(1 << PRTIM1))
+#define power_timer1_disable()  (PRR0 |= (uint8_t)(1 << PRTIM1))
 
 #define power_usb_enable()      (PRR1 &= (uint8_t)~(1 << PRUSB))
 #define power_usb_disable()     (PRR1 |= (uint8_t)(1 << PRUSB))

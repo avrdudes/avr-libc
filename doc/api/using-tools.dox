@@ -250,6 +250,9 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr3/avr31&nbsp;[3]</td><td>at43usb320</td><td>__AVR_AT43USB320__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb82</td><td>__AVR_AT90USB82__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb162</td><td>__AVR_AT90USB162__</td></tr>
+  <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega8u2</td><td>__AVR_ATmega8U2__</td></tr>
+  <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega16u2</td><td>__AVR_ATmega16U2__</td></tr>
+  <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega32u2</td><td>__AVR_ATmega32U2__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>attiny167</td><td>__AVR_ATtiny167__</td></tr>
   <tr><td>avr3</td><td>at76c711</td><td>__AVR_AT76C711__</td></tr>
   <tr><td>avr4</td><td>atmega48</td><td>__AVR_ATmega48__</td></tr>
