@@ -1,3 +1,7 @@
+2009-08-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox192d3.h: New file.
+
 2009-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Add support for ATmega8U2, ATmega16U2, and ATmega32U2.
