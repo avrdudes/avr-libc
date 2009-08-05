@@ -170,6 +170,7 @@ avr_HEADERS = \
     iox16a4.h \
     iox16d4.h \
     iox192a3.h \
+    iox192d3.h \
     iox256a3.h \
     iox256a3b.h \
     iox256d3.h \

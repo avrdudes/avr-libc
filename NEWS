@@ -189,6 +189,7 @@
   + ATmega8U2
   + ATmega16U2
   + ATmega32U2
+  + ATxmega192D3
 
 
 * Optimized functions:

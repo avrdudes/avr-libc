@@ -291,6 +291,8 @@
 # define _EEPROM_SUFFIX   _x128d3
 #elif defined (__AVR_ATxmega192A3__)
 # define _EEPROM_SUFFIX   _x192a3
+#elif defined (__AVR_ATxmega192D3__)
+# define _EEPROM_SUFFIX   _x192d3
 #elif defined (__AVR_ATxmega256A3__)
 # define _EEPROM_SUFFIX   _x256a3
 #elif defined (__AVR_ATxmega256A3B__)

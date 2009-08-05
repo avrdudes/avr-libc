@@ -338,6 +338,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avrxmega6</td><td>atxmega128a3</td><td>__AVR_ATxmega128A3__</td></tr>
   <tr><td>avrxmega6</td><td>atxmega128d3</td><td>__AVR_ATxmega128D3__</td></tr>
   <tr><td>avrxmega6</td><td>atxmega192a3</td><td>__AVR_ATxmega192A3__</td></tr>
+  <tr><td>avrxmega6</td><td>atxmega192d3</td><td>__AVR_ATxmega192D3__</td></tr>
   <tr><td>avrxmega6</td><td>atxmega256a3</td><td>__AVR_ATxmega256A3__</td></tr>
   <tr><td>avrxmega6</td><td>atxmega256a3b</td><td>__AVR_ATxmega256A3B__</td></tr>
   <tr><td>avrxmega6</td><td>atxmega256d3</td><td>__AVR_ATxmega256D3__</td></tr>
