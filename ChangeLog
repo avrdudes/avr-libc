@@ -1,3 +1,17 @@
+2009-08-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega192D3.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item for new device.
+
 2009-08-02  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox192d3.h: New file.
