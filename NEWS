@@ -98,6 +98,7 @@
   [#26284] boot_lock_fuse_bits_get does not compile under gcc 4.3.X
   [#26308] WDE defined as WDE3 in io90pwm3b.h and io90pwm2b.h
   [#26809] Some common math constants missing in math.h
+  [#26840] Missing #define in iom32m1.h
   [#26876] include io.h into fuse.h
   
 * Other changes:
