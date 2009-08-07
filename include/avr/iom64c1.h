@@ -683,6 +683,7 @@
 
 #define DACON _SFR_MEM8(0x90)
 #define DAEN 0
+#define DAOE 1
 #define DALA 2
 #define DATS0 4
 #define DATS1 5
