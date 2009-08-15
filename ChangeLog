@@ -1,3 +1,14 @@
+2009-08-15  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	Fix for WinAVR bug #2812125. 
+	* include/avr/power.h: Define clock prescale register for ATmega16U4. 
+
+2009-08-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Add '__extension__' to generation of _WORDREGISTER
+	and _DWORDREGISTER macros in XMEGA header files. This is a partial
+	fix for bug #27201.
+
 2009-08-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #26840. Thanks to Anitha Boyapati for the patch.

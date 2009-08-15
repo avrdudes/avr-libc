@@ -1281,6 +1281,7 @@ do{ \
 || defined(__AVR_ATmega32U4__) \
 || defined(__AVR_ATmega32U6__) \
 || defined(__AVR_ATmega32C1__) \
+|| defined(__AVR_ATmega16U4__) \
 || defined(__AVR_AT90SCR100__) \
 || defined(__DOXYGEN__)
 
