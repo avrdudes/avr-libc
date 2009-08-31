@@ -92,7 +92,7 @@ typedef volatile uint32_t register32_t;
 #undef _WORDREGISTER
 #endif
 #define _WORDREGISTER(regname)   \
-    union \
+    __extension__ union \
     { \
         register16_t regname; \
         struct \
@@ -106,7 +106,7 @@ typedef volatile uint32_t register32_t;
 #undef _DWORDREGISTER
 #endif
 #define _DWORDREGISTER(regname)  \
-    union \
+   __extension__  union \
     { \
         register32_t regname; \
         struct \
