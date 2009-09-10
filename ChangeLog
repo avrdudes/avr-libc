@@ -1,3 +1,9 @@
+2009-09-10  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Apply the patch #6878: eewr_byte.S update for patch #6718
+	Thanks to Bob Paddock and Simone Zamboni for the patch.
+	* libc/misc/eewr_byte.S: Fix the XMEGA part of code.
+	* NEWS: Add item about patch contributed.
 
 2009-08-17  Anitha Boyapati  <anitha.boyapati@atmel.com>
 

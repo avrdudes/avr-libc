@@ -49,7 +49,16 @@ ENTRY	eeprom_write_r18
 #  define CCP_IOREG_gc	0xD8	/* IO Register Protection	*/
 # endif
 # ifndef NVM_CMD_READ_EEPROM_gc
-#  define NVM_CMD_READ_EEPROM_gc	0x06
+#  define NVM_CMD_READ_EEPROM_gc		0x06
+# endif
+# ifndef NVM_CMD_LOAD_EEPROM_BUFFER_gc
+#  define NVM_CMD_LOAD_EEPROM_BUFFER_gc		0x33
+# endif
+# ifndef NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc
+#  define NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc	0x35
+# endif
+# ifndef  NVM_CMD_ERASE_EEPROM_BUFFER_gc
+#  define NVM_CMD_ERASE_EEPROM_BUFFER_gc	0x36
 # endif
 
   ; Prepare base address of NVM.
@@ -61,19 +70,46 @@ ENTRY	eeprom_write_r18
 	sbrc	r19, NVM_NVMBUSY_bp
 	rjmp	1b
 
-  ; Desable EEPROM mapping into data space.
+  ; Disable EEPROM mapping into data space.
 	ldd	r19, Z + NVM_CTRLB - NVM_BASE
 	andi	r19, ~NVM_EEMAPEN_bm
-	std	Z + NVM_CTRLB - NVM_BASE, XL
+	std	Z + NVM_CTRLB - NVM_BASE, r19
 
-  ; Set address and data to write to.
+  ; Check the clearance of EEPROM page buffer.
+	ldd	r19, Z + NVM_STATUS - NVM_BASE
+	sbrs	r19, NVM_EELOAD_bp
+	rjmp	3f			; erase is not required
+
+  ; Note that we have only four clock cycles to write to the CCP
+  ; protected register NVM_CTRLA, after writing to CCP.  The 'ldi'
+  ; instruction always takes one clock to execute and 'std' instruction takes
+  ; two clock cycles.  We fall within the four cycles that the CCP leaves
+  ; us to write the command execution start bit to the NVM_CTRLA
+  ; register.  Note that r18 must be preserved until written to NVM_DATA0
+
+  ; Issue EEPROM Buffer Erase:
+	ldi	r19, NVM_CMD_ERASE_EEPROM_BUFFER_gc
+	std	Z + NVM_CMD - NVM_BASE, r19
+	ldi	r19, CCP_IOREG_gc
+	out	CCP, r19
+	ldi	r19, NVM_CMDEX_bm
+	std	Z + NVM_CTRLA - NVM_BASE, r19
+
+  ; Wait until NVM is not busy.
+2:	ldd	r19, Z + NVM_STATUS - NVM_BASE
+	sbrc	r19, NVM_NVMBUSY_bp
+	rjmp	2b
+
+  ; Issue EEPROM Buffer Load command.
+3:	ldi	r19, NVM_CMD_LOAD_EEPROM_BUFFER_gc
+	std	Z + NVM_CMD - NVM_BASE, r19
 	std	Z + NVM_ADDR0 - NVM_BASE, addr_lo
 	std	Z + NVM_ADDR1 - NVM_BASE, addr_hi
 	std	Z + NVM_ADDR2 - NVM_BASE, __zero_reg__
 	std	Z + NVM_DATA0 - NVM_BASE, r18
 
-  ; Issue EEPROM read command.
-	ldi	r18, NVM_CMD_READ_EEPROM_gc
+  ; Issue EEPROM Erase & Write command.
+	ldi	r18, NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc
 	std	Z + NVM_CMD - NVM_BASE, r18
 	ldi	r18, CCP_IOREG_gc
 	ldi	r19, NVM_CMDEX_bm
