@@ -13,6 +13,10 @@
   ATmega32U2
   ATxmega192D3
 
+* Contributed Patches:
+
+  [#6878] eewr_byte.S update for patch #6718
+
 * Other changes:
 
 
