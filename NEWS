@@ -102,6 +102,7 @@
   [#26840] Missing #define in iom32m1.h
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
+  [#27434] Arguments of macros must be protected in parentheses
   
 * Other changes:
 
