@@ -1,3 +1,11 @@
+2009-09-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #27434.
+	* include/avr/boot.h: Add parentheses around vars in inline assembly
+	macros. 
+	(boot_signature_byte_get) Reformat white space, remove unneeded
+	temporary variable.
+
 2009-09-10  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Apply the patch #6878: eewr_byte.S update for patch #6718
