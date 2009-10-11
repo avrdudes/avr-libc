@@ -1,3 +1,8 @@
+2009-10-11  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/sleep.h: Add 'do ... while (0)' for '{}' block macroses.
+	* include/avr/power.h: Ditto.
+
 2009-09-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #27434.
