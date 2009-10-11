@@ -532,7 +532,7 @@ extern void sleep_bod_disable (void);
 #if defined(BODS) && defined(BODSE)
 
 #define sleep_bod_disable() \
-{ \
+do { \
   uint8_t tempreg; \
   __asm__ __volatile__("in %[tempreg], %[mcucr]" "\n\t" \
                        "ori %[tempreg], %[bods_bodse]" "\n\t" \
@@ -543,7 +543,7 @@ extern void sleep_bod_disable (void);
                        : [mcucr] "I" _SFR_IO_ADDR(MCUCR), \
                          [bods_bodse] "i" (_BV(BODS) | _BV(BODSE)), \
                          [not_bodse] "i" (~_BV(BODSE))); \
-}
+} while (0)
 
 #endif
 

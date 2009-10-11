@@ -1340,7 +1340,7 @@ Set the clock prescaler register select bits, selecting a system clock division 
 
 */
 #define clock_prescale_set(x) \
-{ \
+do { \
         uint8_t tmp = _BV(CLKPCE); \
         __asm__ __volatile__ ( \
                 "in __tmp_reg__,__SREG__" "\n\t" \
@@ -1353,7 +1353,7 @@ Set the clock prescaler register select bits, selecting a system clock division 
                   "M" (_SFR_MEM_ADDR(CLKPR)), \
                   "d" (x) \
                 : "r0"); \
-}
+} while (0)
 
 /** \addtogroup avr_power
 \code clock_prescale_get() \endcode
@@ -1392,7 +1392,7 @@ typedef enum
 
 
 #define clock_prescale_set(x) \
-{ \
+do { \
         uint8_t tmp = _BV(CLKPCE); \
         __asm__ __volatile__ ( \
                 "in __tmp_reg__,__SREG__" "\n\t" \
@@ -1405,7 +1405,7 @@ typedef enum
                   "I" (_SFR_IO_ADDR(CLKPR)), \
                   "d" (x) \
                 : "r0"); \
-}
+} while (0)
 
 
 #define clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
