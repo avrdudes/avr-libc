@@ -208,6 +208,7 @@
    setjmp
    sqrt   (and callers: acos, asin and hypot)
    sin, cos, tan:  minor in space
+   strlcpy, strlcpy_P
 
 * Contributed Patches:
 

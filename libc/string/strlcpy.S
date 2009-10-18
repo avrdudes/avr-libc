@@ -3,6 +3,7 @@
    strlcpy()
 
    Copyright (c) 2003, 2007 Eric B. Weddington, R. Patommel
+   Copyright (c) 2009  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -40,62 +41,53 @@
     \fn size_t strlcpy (char *dst, const char *src, size_t siz)
     \brief Copy a string.
 
-    Copy src to string dst of size siz.  At most siz-1 characters will be
-    copied.  Always NULL terminates (unless siz == 0).
+    Copy \p src to string \p dst of size \p siz.  At most \p siz-1
+    characters will be copied.  Always NULL terminates (unless \p siz == 0).
 
     \returns The strlcpy() function returns strlen(src). If retval >= siz,
     truncation occurred.  */
 
 #if !defined(__DOXYGEN__)
 
-#include "gasava.inc"
-#include "macros.inc"
+#include "asmdef.h"
 
-#define dst_hi		r25
 #define dst_lo		r24
 #define src_hi		r23
 #define src_lo		r22
 #define siz_hi		r21
 #define siz_lo		r20
-#define rWord		r24
-#define rWord_hi	r25
-#define rWord_lo	r24
+#define rslt_lo		r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strlcpy)
-	.type	_U(strlcpy), @function
 
-_U(strlcpy):
+ENTRY strlcpy
 	X_movw	XL, dst_lo		; X = dst
 	X_movw	ZL, src_lo		; Z = src
-	cp	siz_lo, __zero_reg__
-	cpc	siz_hi, __zero_reg__	; size == 0 ?
-	breq	.L_strlcpy_truncated
 
-.L_strlcpy_copy_loop:			; copy src to dst
-	subi	siz_lo, lo8(-(-1))
-	sbci	siz_hi, hi8(-(-1))	; decrement siz
-	breq	1f 			; --> siz chars copied
-	ld	__tmp_reg__, Z+		; get next src char
-	st	X+, __tmp_reg__		; copy char
-	tst	__tmp_reg__		; end of src string ?
-	breq	.L_strlcpy_len		; --> all src chars copied
-	rjmp	.L_strlcpy_copy_loop	; next char
-1:	st	X, __zero_reg__		; truncate dst string
+  ; copy loop
+1:	subi	siz_lo, lo8(1)
+	sbci	siz_hi, hi8(1)
+	brcs	4f			; is possible with siz == 0
+	breq	3f			; --> siz chars copied
+	ld	__tmp_reg__, Z+
+	st	X+, __tmp_reg__
+	tst	__tmp_reg__
+	brne	1b
 
-.L_strlcpy_truncated:			; find Z = end of src string
-	ld	__tmp_reg__, Z+		; get next char from src
-	tst	__tmp_reg__		; end of src string ?
-	brne	.L_strlcpy_truncated	; next char
-
-.L_strlcpy_len:				; calculate strlen(src)
-	sub	ZL, src_lo
-	sbc	ZH, src_hi		; Z points past \0
+  ; calculate result (Z - 1 - src) and return
+2:	sub	ZL, src_lo
+	sbc	ZH, src_hi
 	sbiw	ZL, 1
-	X_movw	rWord, ZL
+	X_movw	rslt_lo, ZL
 	ret
 
-.L_strlcpy_end:
-	.size	_U(strlcpy), .L_strlcpy_end - _U(strlcpy)
+  ; terminate dst
+3:	st	X, __zero_reg__
 
+  ; find src end
+4:	ld	__tmp_reg__, Z+
+	tst	__tmp_reg__
+	brne	4b
+	rjmp	2b
+
+ENDFUNC
 #endif /* not __DOXYGEN__ */
