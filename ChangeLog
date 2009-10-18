@@ -1,3 +1,12 @@
+2009-10-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strlcpy.S: Optimize: remove surplus size testing,
+	reorder code.
+	* libc/pmstring/strlcpy_P.S: Ditto.
+	* tests/simulate/string/strlcpy.c: New file.
+	* tests/simulate/pmstring/strlcpy_P.c: New file.
+	* NEWS: Add to optimized functions list.
+
 2009-10-11  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/avr/sleep.h: Add 'do ... while (0)' for '{}' block macroses.
