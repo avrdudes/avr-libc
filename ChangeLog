@@ -1,3 +1,7 @@
+2009-10-23  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox256d3.h: Update header file.
+
 2009-10-18  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/string/strlcpy.S: Optimize: remove surplus size testing,
