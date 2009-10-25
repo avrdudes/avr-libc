@@ -3,6 +3,7 @@
    strlcat()
 
    Copyright (c) 2003, 2007 Eric B. Weddington, R. Patommel
+   Copyright (c) 2009  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -40,84 +41,88 @@
     \fn size_t strlcat (char *dst, const char *src, size_t siz)
     \brief Concatenate two strings.
 
-    Appends src to string dst of size siz (unlike strncat(), siz is the
-    full size of dst, not space left).  At most siz-1 characters
-    will be copied.  Always NULL terminates (unless siz <= strlen(dst)).
+    Appends \p src to string \p dst of size \p siz (unlike strncat(),
+    \p siz is the full size of \p dst, not space left).  At most \p siz-1
+    characters will be copied.  Always NULL terminates (unless \p siz <=
+    \p strlen(dst)).
 
     \returns The strlcat() function returns strlen(src) + MIN(siz,
     strlen(initial dst)).  If retval >= siz, truncation occurred.  */
 
 #if !defined(__DOXYGEN__)
 
-#include "gasava.inc"
-#include "macros.inc"
+#include "asmdef.h"
 
-#define dst_hi		r25
-#define dst_lo		r24
-#define src_hi		r23
-#define src_lo		r22
-#define siz_hi		r21
-#define siz_lo		r20
-#define dlen_hi		r19
-#define dlen_lo		r18
-#define rWord_hi	r25
-#define rWord_lo	r24
+/*  size_t strlcat (char *dst, const char *src, size_t siz)
+    {
+	char *d = dst;
+	const char *s = src;
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strlcat)
-	.type	_U(strlcat),@function
+	do {
+	    if (--siz == ~0u)
+		goto Len;			// siz <= strlen(dst)
+	} while (*d++);
+	d -= 1;
 
-_U(strlcat):
+	goto m;
+	do {
+	    if (!(*d++ = *s++))
+		return (d - dst - 1);		// normal end
+	  m: ;
+	} while (--siz != ~0u);
+	*d = 0;
+
+      Len:
+        return (d - dst + strlen (s));
+    }
+ */
+
+#define dst_lo	r24
+#define dst_hi	r25
+#define src_lo	r22
+#define src_hi	r23
+#define siz_lo	r20
+#define siz_hi	r21
+#define ret_lo	r24
+
+ENTRY strlcat
 	X_movw	XL, dst_lo		; X = dst
 	X_movw	ZL, src_lo		; Z = src
 
-.L_strlcat_dlen:			; Find end of dst string
-	ld	__tmp_reg__, X+		; get next char from dst
-	cp	siz_lo, __zero_reg__	;  and calc dlen = len of dst
-	cpc	siz_hi, __zero_reg__	; size == 0 ?
-	breq	 1f			; --> done
-	tst	__tmp_reg__		; end of dst ?
-	breq	 1f			; --> done
-	subi	siz_lo, lo8(-(-1))
-	sbci	siz_hi, hi8(-(-1))	; siz--
-	rjmp	.L_strlcat_dlen		; --> next char
-1:	sbiw	XL, 1			; undo post increment
-	X_movw	dlen_lo, XL
-	sub	dlen_lo, dst_lo
-	sbc	dlen_hi, dst_hi		; dlen = X - dst
-	cp	siz_lo, __zero_reg__
-	cpc	siz_hi, __zero_reg__	; size == 0 ?
-	breq	.L_strlcat_slen		; --> done
-	subi	siz_lo, lo8(-(-1))
-	sbci	siz_hi, hi8(-(-1))	; siz--
+  ; find end of dst: X := dst + strlen(dsr)
+1:	subi	siz_lo, lo8(1)
+	sbci	siz_hi, hi8(1)
+	brlo	.Len			; siz <= strlen(dst)
+	ld	__tmp_reg__, X+
+	tst	__tmp_reg__
+	brne	1b
+	subi	XL, 1
+	rjmp	3f
 
-.L_strlcat_concat:			; Concatenate
-	ld	__tmp_reg__, Z+		; get next char from src
-	cp	siz_lo, __zero_reg__
-	cpc	siz_hi, __zero_reg__	; size == 0 ?
-	breq	1f			; --> done
-	tst	__tmp_reg__		; end of src ?
-	breq	1f			; --> done
-	st	X+, __tmp_reg__		; store in dest
-	subi	siz_lo, lo8(-(-1))
-	sbci	siz_hi, hi8(-(-1))	; siz--
-	rjmp	.L_strlcat_concat		; --> next char
-1:	st	X, __zero_reg__		; *X = '\0'
-	sbiw	ZL, 1			; undo post increment
+  ; copy loop
+2:	ld	__tmp_reg__, Z+
+	st	X+, __tmp_reg__
+	tst	__tmp_reg__
+	breq	.Ldd
+3:	subi	siz_lo, lo8(1)
+	sbci	siz_hi, hi8(1)
+	brsh	2b
+	st	X, __zero_reg__
 
-.L_strlcat_slen:
-	ld	__tmp_reg__, Z+		; get next char from src
-	tst	__tmp_reg__		; end of src ?
-	brne	.L_strlcat_slen		; --> next char
-	sbiw	ZL, 1			; undo post increment
-	X_movw	rWord_lo, dlen_lo
-	add	rWord_lo, ZL
-	adc	rWord_hi, ZH
-	sub	rWord_lo, src_lo
-	sbc	rWord_hi, src_hi	; return(dlen + (Z - src))
+  ; return (d - dst + strlen(s))
+	X_movw	src_lo, ZL		; update for strlen(s) calculation
+.Len:	ld	__tmp_reg__, Z+		; find end of src
+	tst	__tmp_reg__
+	brne	.Len
+	sub	ZL, src_lo		; Z := strlen(s) + 1
+	sbc	ZH, src_hi
+	add	XL, ZL			; d += strlen(s) + 1
+	adc	XH, ZH
+.Ldd:	sec				; d -= dst + 1
+	sbc	XL, dst_lo
+	sbc	XH, dst_hi
+	X_movw	ret_lo, XL		; return value
 	ret
 
-.L_strlcat_end:
-.size	_U(strlcat), .L_strlcat_end - _U(strlcat)
-
+ENDFUNC
 #endif /* not __DOXYGEN__ */
