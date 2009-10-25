@@ -1,3 +1,12 @@
+2009-10-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strlcat.S: Rewrite to reduce size (considerably) and
+	speed up.
+	* libc/pmstring/strlcat_P.S: Ditto.
+	* tests/simulate/string/strlcat.c: New file.
+	* tests/simulate/pmstring/strlcat_P.c: New file.
+	* NEWS: Add to optimized functions list.
+
 2009-10-23  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox256d3.h: Update header file.

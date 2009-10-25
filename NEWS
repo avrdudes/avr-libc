@@ -9,6 +9,7 @@
 
 * Optimized functions:
 
+  strlcat, strlcat_P
   strlcpy, strlcpy_P
 
 * New devices supported:
