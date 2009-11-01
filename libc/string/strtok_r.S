@@ -1,4 +1,5 @@
 /* Copyright (c) 2003, 2007 Reiner Patommel
+   Copyright (c) 2009  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -25,7 +26,6 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
-
 */
 
 /* $Id$ */
@@ -41,95 +41,116 @@
     the first argument set to NULL. If a token ends with a delimiter, this
     delimiting character is overwritten with a '\\0' and a pointer to the next
     character is saved for the next call to strtok_r. The delimiter string
-    delim may be different for each call. last is a user allocated char*
+    \p delim may be different for each call. \p last is a user allocated char*
     pointer. It must be the same while parsing the same string. strtok_r is
     a reentrant version of strtok().
-    
+
     \returns The strtok_r() function returns a pointer to the next token or
     NULL when no more tokens are found. */
 
 #if !defined(__DOXYGEN__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
-#define str_hi		r25
-#define str_lo		r24
-#define del_hi		r23
-#define del_lo		r22
-#define last_hi		r21
-#define last_lo		r20
-#define str_c		r19
-#define del_c		r18
+/*  char *strtok_r (char *s, const char *delim, char **last)
+    {
+	char *p = *last;
+	const char *q;
+	char c, d;
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strtok_r)
-	.type	_U(strtok_r), @function
+	if (!s) {
+	    if (!p) return s;		// end of string
+	    s = p;			// continue parsing
+	}
 
-_U(strtok_r):				; Check on NULL pointers
-	SBIW	str_lo, 0		; str == NULL ?
-	BRNE	.L_del_lead_init	; here 1st call to strtok_r
-	X_movw	XL, last_lo
-	LD	str_lo, X+
-	LD	str_hi, X		;
-	SBIW	str_lo, 0		; last == NULL ?
-	BRNE	.L_del_lead_init	; here nth call to strtok_r
-	RJMP	2f			; no more to do
+	p = s;
+	for (;;) {			// skip delimeters
+	    s = p;			// space optimization (vs. s = p-1)
+	    if (!(c = *p++)) {
+		s = 0;
+		p = 0;
+		goto ret;
+	    }
+	    q = delim;
+	    do {
+		if (!(d = *q++))
+		    goto find_end;
+	    } while (d != c);
+	}
 
-.L_del_lead_init:			; Remove leading delimiters
-	X_movw	XL, str_lo
+      find_end:
+	do {
+	    q = delim;
+	    do {
+		d = *q++;
+		if (c == d) {
+		    *--p = 0;
+		    p++;
+		    goto ret;
+		}
+	    } while (d);
+	} while ((c = *p++) != 0);
+	p = 0;				// stop parsing
+      ret:
+	*last = p;
+	return s;
+    }
+ */
 
-.L_del_str_loop:
-	X_movw	ZL, del_lo		; Z = *delim
-	LD	str_c, X+		; str_c = *string++
+#define str_lo	r24
+#define dlm_lo	r22
+#define lst_lo	r20
+#define dch	r18
 
-.L_del_loop:
-	LD	del_c, Z+		; del_c = *Z
-	TST	del_c			; end of del string ?
-	BREQ	1f			; yes: -> done with leading delimiters
-	CP	str_c, del_c
-	BREQ	.L_del_str_loop		; match:  -> next str_char, 1st del_char
-	RJMP	.L_del_loop		; next del_char, same str_char
-1:	TST	str_c			; end of str ?
-	BRNE	.L_str_scan_init	; no: -> scan
-	X_movw	XL, last_lo
-	ST	X+, __zero_reg__
-	ST	X, __zero_reg__		; last = NULL
-2:	CLR	str_lo
-	CLR	str_hi
-	RET				; return(NULL)
+ENTRY strtok_r
+	X_movw	ZL, lst_lo
+	ld	XL, Z+			; X = *last
+	ld	XH, Z
+  ; check str
+	sbiw	str_lo, 0
+	brne	1f
+	sbiw	XL, 0
+	breq	.Lret			; end of string
+	X_movw	str_lo, XL		; continue parsing
 
-.L_str_scan_init:			; scan string
-	SBIW	XL, 1			; X points to token
-	PUSH	XL
-	PUSH	XH			; save pointer to token
+  ; skip delimeters
+1:	X_movw	XL, str_lo		; p = str
+2:	X_movw	str_lo, XL
+	ld	__tmp_reg__, X+
+	tst	__tmp_reg__
+	brne	3f
+	X_movw	str_lo, __tmp_reg__	; <r0,r1>
+	rjmp	.Lclr
+3:	X_movw	ZL, dlm_lo
+4:	ld	dch, Z+
+	tst	dch
+	breq	5f			; goto find
+	cp	dch, __tmp_reg__
+	brne	4b
+	rjmp	2b			; skip 1 byte
 
-.L_scan_str_loop:			; next str char, 1st del char
-	X_movw	ZL, del_lo		; Z points to del str
-	LD	str_c, X+		; str_c = *string++
+  ; find new token end
+5:	X_movw	ZL, dlm_lo
+6:	ld	dch, Z+
+	cp	dch, __tmp_reg__	; __tmp_reg__ != 0
+	brne	7f
+	st	-X, __zero_reg__
+	adiw	XL, 1
+	rjmp	.Lret
+7:	tst	dch
+	brne	6b
+  ; next str byte
+	ld	__tmp_reg__, X+
+	tst	__tmp_reg__
+	brne	5b
 
-.L_scan_del_loop:
-	LD	del_c, Z+		; del_c = *Z
-	CP	str_c, del_c
-	BRNE	3f
-	TST	str_c			; end of str ?
-	BRNE	1f
-	CLR	str_lo
-	CLR	str_hi			; str = NULL
-	SBIW	XL, 1			; undo auto increment
-	RJMP	2f
-1:	ST	-X, __zero_reg__	; str[-1] = \0
-	ADIW	XL, 1			; undo auto decrement
-2:	X_movw	ZL, last_lo
-	ST	Z+, XL
-	ST	Z, XH			; *last = str
-	POP	str_hi
-	POP	str_lo			; get pointer to token again
-	RET				; return(token)
-3:	TST	del_c			; end of del string ?
-	BRNE	.L_scan_del_loop	; next del char, same str_char
-	RJMP	.L_scan_str_loop	; next str char, 1st del char
+  ; stop parsing
+.Lclr:	X_movw	XL, __tmp_reg__		; <r0,r1>
+  ; save last pointer
+.Lret:	X_movw	ZL, lst_lo		; *last = X
+	st	Z+, XL
+	st	Z, XH
+	ret
 
-.L_strtok_r_end:
-	.size	_U(strtok_r), .L_strtok_r_end - _U(strtok_r)
-
+ENDFUNC
 #endif /* not __DOXYGEN__ */

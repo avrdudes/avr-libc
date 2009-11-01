@@ -210,6 +210,7 @@
    sin, cos, tan:  minor in space
    strlcat, strlcat_P
    strlcpy, strlcpy_P
+   strtok, strtok_r
 
 * Contributed Patches:
 
