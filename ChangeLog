@@ -1,3 +1,10 @@
+2009-11-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strtok_r.S: Rewrite to optimize and remove surplus
+	stack usage.
+	* tests/simulate/strtok.c: New file.
+	* NEWS: Add to optimized functions list.
+
 2009-10-25  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/string/strlcat.S: Rewrite to reduce size (considerably) and

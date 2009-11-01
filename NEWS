@@ -11,6 +11,7 @@
 
   strlcat, strlcat_P
   strlcpy, strlcpy_P
+  strtok, strtok_r
 
 * New devices supported:
 
