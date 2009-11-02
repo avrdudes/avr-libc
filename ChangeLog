@@ -1,3 +1,13 @@
+2009-11-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom16a.h: New file.
+	* include/avr/iom88pa.h: Same.
+	* include/avr/iom644pa.h: Same.
+	* include/avr/iotn24a.h: Same.
+	* include/avr/iotn44a.h: Same.
+	* include/avr/iotn2313a.h: Same.
+	* include/avr/iotn4313.h: Same.
+
 2009-11-01  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* libc/string/strtok_r.S: Rewrite to optimize and remove surplus
@@ -29,7 +39,7 @@
 
 2009-10-11  Dmitry Xmelkov  <dmix@gmail.ru>
 
-	* include/avr/sleep.h: Add 'do ... while (0)' for '{}' block macroses.
+	* include/avr/sleep.h: Add 'do ... while (0)' for '{}' block macros.
 	* include/avr/power.h: Ditto.
 
 2009-09-14  Eric B. Weddington  <eric.weddington@atmel.com>
