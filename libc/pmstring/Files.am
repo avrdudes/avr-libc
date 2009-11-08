@@ -29,7 +29,8 @@
 # $Id$
 #
 
-pmstring_a_c_sources =
+pmstring_a_c_sources = \
+	strtok_P.c
 
 pmstring_a_asm_sources = \
 	memchr_P.S \
@@ -55,6 +56,7 @@ pmstring_a_asm_sources = \
 	strrchr_P.S \
 	strsep_P.S \
 	strspn_P.S \
-	strstr_P.S
+	strstr_P.S \
+	strtok_rP.S
 
 # vim: set ft=make:
