@@ -235,6 +235,7 @@
    eeprom_write_float
    strdup
    strtok
+   strtok_P, strtok_rP
 
 *** Changes in avr-libc-1.6.0:
 
