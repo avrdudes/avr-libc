@@ -1266,7 +1266,8 @@ INCLUDE_FILE_PATTERNS  =
 # instead of the = operator.
 
 PREDEFINED             = __DOXYGEN__ \
-                         __ATTR_CONST__=
+                         __ATTR_CONST__= \
+			 ATTRIBUTE_CLIB_SECTION=
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then 
 # this tag can be used to specify a list of macro names that should be expanded. 
