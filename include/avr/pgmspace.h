@@ -871,6 +871,8 @@ extern PGM_P strrchr_P(PGM_P, int __val) __ATTR_CONST__;
 extern char *strsep_P(char **__sp, PGM_P __delim);
 extern size_t strspn_P(const char *__s, PGM_P __accept) __ATTR_PURE__;
 extern char *strstr_P(const char *, PGM_P) __ATTR_PURE__;
+extern char *strtok_P(char *__s, PGM_P __delim);
+extern char *strtok_rP(char *__s, PGM_P __delim, char **__last);
 
 #ifdef __cplusplus
 }
