@@ -1,3 +1,17 @@
+2009-11-08  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new functions: strtok_P() and strtok_rP().
+	* include/avr/pgmspace.h: Add strtok_P(), strtok_rP().
+	* libc/pmstring/strtok_P.c: New file.
+	* libc/pmstring/strtok_rP.S: New file.
+	* libc/pmstring/Files.am: Add new sources.
+	* libc/pmstring/Makefile.am: Extend EXTRA_DIST list.
+	* tests/simulate/pmstring/strtok_P.c: New file.
+	* NEWS: Add strtok_P, strtok_rP to new function list.
+
+	* doc/api/doxygen.config.in: Add ATTRIBUTE_CLIB_SECTION to list
+	of predefined macroses.
+
 2009-11-01  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom16a.h: New file.
