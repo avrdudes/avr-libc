@@ -7,6 +7,10 @@
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
   [#27434] Arguments of macros must be protected in parentheses
 
+* New functions:
+
+   strtok_P, strtok_rP
+
 * Optimized functions:
 
   strlcat, strlcat_P
