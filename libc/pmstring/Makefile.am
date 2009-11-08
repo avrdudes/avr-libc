@@ -31,4 +31,5 @@
 
 include $(top_srcdir)/libc/pmstring/Files.am
 
-EXTRA_DIST = $(pmstring_a_asm_sources)
+EXTRA_DIST = $(pmstring_a_asm_sources) \
+	     $(pmstring_a_c_sources)
