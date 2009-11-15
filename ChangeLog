@@ -1,3 +1,20 @@
+2009-11-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add support for these devices: ATtiny2313A, ATtiny4313, ATtiny24A, ATtiny44A,
+	ATmega644PA, ATmega88PA, ATmega16A, ATtiny261A, ATtiny861A, ATtiny461A,
+	ATmega64HVE, ATmega169PA, ATmega649P, ATmega324PA.
+	* configure.ac: Add support for new devices. Reorganize AM_CONDITIONAL
+	and AC_CONFIG_FILES lists.
+	* devtools/gen-avr-lib-tree.sh: Same. Reorganize AVR5_DEV_INFO list.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same. Reorganize table.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+
 2009-11-08  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add new functions: strtok_P() and strtok_rP().

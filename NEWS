@@ -194,6 +194,20 @@
   + ATmega16U2
   + ATmega32U2
   + ATxmega192D3
+  + ATtiny2313A
+  + ATtiny4313
+  + ATtiny24A
+  + ATtiny44A
+  + ATtiny261A
+  + ATtiny461A
+  + ATtiny861A
+  + ATmega644PA
+  + ATmega88PA
+  + ATmega16A
+  + ATmega64HVE
+  + ATmega169PA
+  + ATmega649P
+  + ATmega324PA
 
 
 * Optimized functions:

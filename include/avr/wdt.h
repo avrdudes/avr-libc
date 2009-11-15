@@ -195,6 +195,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega168P__) \
 || defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega169PA__) \
 || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_ATmega16M1__) \
 || defined(__AVR_ATmega16U2__) \
@@ -203,6 +204,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega2561__) \
 || defined(__AVR_ATmega324__) \
 || defined(__AVR_ATmega324P__) \
+|| defined(__AVR_ATmega324PA__) \
 || defined(__AVR_ATmega325__) \
 || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega328P__) \
@@ -222,14 +224,18 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega640__) \
 || defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega644PA__) \
 || defined(__AVR_ATmega645__) \
 || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega649__) \
 || defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega649P__) \
 || defined(__AVR_ATmega64C1__) \
+|| defined(__AVR_ATmega64HVE__) \
 || defined(__AVR_ATmega64M1__) \
 || defined(__AVR_ATmega88__) \
 || defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega88PA__) \
 || defined(__AVR_ATmega8HVA__) \
 || defined(__AVR_ATmega8U2__) \
 || defined(__AVR_ATtiny48__) \

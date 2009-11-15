@@ -106,11 +106,13 @@ compile-time.
 - atmega165p
 - atmega168
 - atmega168p
+- atmega16a
 - atmega2560
 - atmega2561
 - atmega32
 - atmega323
 - atmega324p
+- atmega324pa
 - atmega325
 - atmega325p
 - atmega3250
@@ -122,11 +124,13 @@ compile-time.
 - atmega640
 - atmega644
 - atmega644p
+- atmega644pa
 - atmega645
 - atmega6450
 - atmega8
 - atmega88
 - atmega88p
+- atmega88pa
 - atmega8515
 - atmega8535
 
@@ -139,19 +143,26 @@ compile-time.
 - attiny15 \ref supp_dev_footnote_one "[1]"
 - attiny22
 - attiny24
+- attiny24a
 - attiny25
 - attiny26
 - attiny261
+- attiny261a
 - attiny28 \ref supp_dev_footnote_one "[1]"
 - attiny2313
+- attiny2313a
+- attiny4313
 - attiny43u
 - attiny44
+- attiny44a
 - attiny45
 - attiny461
+- attiny461a
 - attiny48
 - attiny84
 - attiny85
 - attiny861
+- attiny861a
 - attiny87
 - attiny88
 
@@ -173,12 +184,14 @@ compile-time.
 
 - atmega169
 - atmega169p
+- atmega169pa
 - atmega329
 - atmega329p
 - atmega3290
 - atmega3290p
 - atmega649
 - atmega6490
+- atmega649p
 
 \par Lighting AVR Devices:
 
@@ -196,6 +209,7 @@ compile-time.
 - atmega8hva
 - atmega16hva
 - atmega32hvb
+- atmega64hve
 - atmega406
 
 \par USB AVR Devices:
