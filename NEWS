@@ -247,6 +247,7 @@
    eeprom_update_word
    eeprom_write_dword
    eeprom_write_float
+   memccpy_P
    strdup
    strtok
    strtok_P, strtok_rP
