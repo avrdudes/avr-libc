@@ -835,12 +835,14 @@ do{ \
 
 #elif defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega169PA__) \
 || defined(__AVR_ATmega329__) \
 || defined(__AVR_ATmega329P__) \
 || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega649__) \
-|| defined(__AVR_ATmega6490__)
+|| defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega649P__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))
@@ -862,7 +864,8 @@ do{ \
 
 
 #elif defined(__AVR_ATmega164P__) \
-|| defined(__AVR_ATmega324P__)
+|| defined(__AVR_ATmega324P__) \
+|| defined(__AVR_ATmega324PA__)
 
 #define power_adc_enable()      (PRR0 &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR0 |= (uint8_t)(1 << PRADC))
@@ -943,6 +946,7 @@ do{ \
 || defined(__AVR_ATmega48P__) \
 || defined(__AVR_ATmega88__) \
 || defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega88PA__) \
 || defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega168P__) \
 || defined(__AVR_ATmega328P__) \
@@ -975,14 +979,19 @@ do{ \
 
 
 #elif defined(__AVR_ATtiny24__) \
+|| defined(__AVR_ATtiny24A__) \
 || defined(__AVR_ATtiny44__) \
+|| defined(__AVR_ATtiny44A__) \
 || defined(__AVR_ATtiny84__) \
 || defined(__AVR_ATtiny25__) \
 || defined(__AVR_ATtiny45__) \
 || defined(__AVR_ATtiny85__) \
 || defined(__AVR_ATtiny261__) \
+|| defined(__AVR_ATtiny261A__) \
 || defined(__AVR_ATtiny461__) \
+|| defined(__AVR_ATtiny461A__) \
 || defined(__AVR_ATtiny861__) \
+|| defined(__AVR_ATtiny861A__) \
 || defined(__AVR_ATtiny43U__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
@@ -1261,10 +1270,12 @@ do{ \
 || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega169PA__) \
 || defined(__AVR_ATmega329__) \
 || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega649__) \
 || defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega649P__) \
 || defined(__AVR_ATmega48__) \
 || defined(__AVR_ATmega48P__) \
 || defined(__AVR_ATmega88__) \
@@ -1276,6 +1287,7 @@ do{ \
 || defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega644PA__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny167__) \
 || defined(__AVR_ATmega32U4__) \
@@ -1364,15 +1376,22 @@ Gets and returns the clock prescaler register setting. The return type is clock_
 
 
 #elif defined(__AVR_ATtiny24__) \
+|| defined(__AVR_ATtiny24A__) \
 || defined(__AVR_ATtiny44__) \
+|| defined(__AVR_ATtiny44A__) \
 || defined(__AVR_ATtiny84__) \
 || defined(__AVR_ATtiny25__) \
 || defined(__AVR_ATtiny45__) \
 || defined(__AVR_ATtiny85__) \
+|| defined(__AVR_ATtiny261A__) \
 || defined(__AVR_ATtiny261__) \
 || defined(__AVR_ATtiny461__) \
+|| defined(__AVR_ATtiny461A__) \
 || defined(__AVR_ATtiny861__) \
+|| defined(__AVR_ATtiny861A__) \
 || defined(__AVR_ATtiny2313__) \
+|| defined(__AVR_ATtiny2313A__) \
+|| defined(__AVR_ATtiny4313__) \
 || defined(__AVR_ATtiny13__) \
 || defined(__AVR_ATtiny13A__) \
 || defined(__AVR_ATtiny43U__) \

@@ -231,15 +231,20 @@
 || defined(__AVR_ATtiny13A__) \
 || defined(__AVR_ATtiny15__) \
 || defined(__AVR_ATtiny24__) \
+|| defined(__AVR_ATtiny24A__) \
 || defined(__AVR_ATtiny44__) \
+|| defined(__AVR_ATtiny44A__) \
 || defined(__AVR_ATtiny84__) \
 || defined(__AVR_ATtiny25__) \
 || defined(__AVR_ATtiny45__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny85__) \
 || defined(__AVR_ATtiny261__) \
+|| defined(__AVR_ATtiny261A__) \
 || defined(__AVR_ATtiny461__) \
+|| defined(__AVR_ATtiny461A__) \
 || defined(__AVR_ATtiny861__) \
+|| defined(__AVR_ATtiny861A__) \
 || defined(__AVR_ATtiny88__)
 
     #define SLEEP_MODE_IDLE         0
@@ -252,7 +257,9 @@
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1))) | (mode)); \
     } while(0)
 
-#elif defined(__AVR_ATtiny2313__)
+#elif defined(__AVR_ATtiny2313__) \
+|| defined(__AVR_ATtiny2313A__) \
+|| defined(__AVR_ATtiny4313__)
 
     #define SLEEP_MODE_IDLE         0
     #define SLEEP_MODE_PWR_DOWN     (_BV(SM0) | _BV(SM1))
@@ -309,11 +316,13 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_AT90PWM3B__) \
 || defined(__AVR_ATmega128__) \
 || defined(__AVR_ATmega16__) \
+|| defined(__AVR_ATmega16A__) \
 || defined(__AVR_ATmega162__) \
 || defined(__AVR_ATmega165__) \
 || defined(__AVR_ATmega165P__) \
 || defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega169PA__) \
 || defined(__AVR_ATmega32__) \
 || defined(__AVR_ATmega323__) \
 || defined(__AVR_ATmega325__) \
@@ -328,6 +337,7 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_ATmega6450__) \
 || defined(__AVR_ATmega649__) \
 || defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega649P__) \
 || defined(__AVR_ATmega8__) \
 || defined(__AVR_ATmega8515__) \
 || defined(__AVR_ATmega8535__) \
@@ -343,11 +353,14 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_ATmega640__) \
 || defined(__AVR_ATmega164P__) \
 || defined(__AVR_ATmega324P__) \
+|| defined(__AVR_ATmega324PA__) \
 || defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega644PA__) \
 || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_ATmega8HVA__) \
 || defined(__AVR_ATmega32HVB__) \
+|| defined(__AVR_ATmega64HVE__) \
 || defined(__AVR_AT90USB162__) \
 || defined(__AVR_AT90USB82__) \
 || defined(__AVR_AT90USB1286__) \
@@ -370,6 +383,7 @@ defined(__AVR_AT90PWM1__) \
 || defined(__AVR_ATmega64M1__) \
 || defined(__AVR_ATmega48P__) \
 || defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega88PA__) \
 || defined(__AVR_ATmega168P__) \
 || defined(__AVR_ATmega328P__)
 

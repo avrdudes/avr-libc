@@ -75,6 +75,7 @@ avr_HEADERS = \
     iom1284p.h \
     iom128rfa1.h \
     iom16.h \
+    iom16a.h \
     iom161.h \
     iom162.h \
     iom163.h \
@@ -85,6 +86,7 @@ avr_HEADERS = \
     iom168p.h \
     iom169.h \
     iom169p.h \
+    iom169pa.h \
     iom16hva.h \
     iom16m1.h \
     iom16u2.h \
@@ -94,6 +96,7 @@ avr_HEADERS = \
     iom32.h \
     iom323.h \
     iom324.h \
+    iom324pa.h \
     iom325.h \
     iom3250.h \
     iom328p.h \
@@ -112,17 +115,21 @@ avr_HEADERS = \
     iom640.h \
     iom644.h \
     iom644p.h \
+    iom644pa.h \
     iom645.h \
     iom6450.h \
     iom649.h \
+    iom649p.h \
     iom6490.h \
     iom64c1.h \
+    iom64hve.h \
     iom64m1.h \
     iom8.h \
     iom8515.h \
     iom8535.h \
     iom88.h \
     iom88p.h \
+    iom88pa.h \
     iom8hva.h \
     iom8u2.h \
     iomx8.h \
@@ -137,20 +144,27 @@ avr_HEADERS = \
     iotn167.h \
     iotn22.h \
     iotn2313.h \
+    iotn2313a.h \
     iotn24.h \
+    iotn24a.h \
     iotn25.h \
     iotn26.h \
     iotn261.h \
+    iotn261a.h \
     iotn28.h \
+    iotn4313.h \
     iotn43u.h \
     iotn44.h \
+    iotn44a.h \
     iotn45.h \
     iotn461.h \
+    iotn461a.h \
     iotn48.h \
     iotn88.h \
     iotn84.h \
     iotn85.h \
     iotn861.h \
+    iotn861a.h \
     iotn87.h \
     iotnx4.h \
     iotnx5.h \
