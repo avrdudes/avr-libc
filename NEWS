@@ -9,7 +9,8 @@
 
 * New functions:
 
-   strtok_P, strtok_rP
+  memccpy_P
+  strtok_P, strtok_rP
 
 * Optimized functions:
 
