@@ -1,3 +1,14 @@
+2009-11-15  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function memccpy_P().
+	* libc/string/memccpy.S: Add code for PROGMEM version.
+	* libc/pmstring/memccpy_P.S: New file.
+	* libc/pmstring/Files.am: Add memccpy_P.S to file list.
+	* include/avr/pgmspace.h: Add memccpy_P().
+	* tests/simulate/string/memccpy.c: New file.
+	* tests/simulate/pmstring/memccpy_P.c: New file.
+	* NEWS: Add memccpy_P to new funcions list.
+
 2009-11-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Add support for these devices: ATtiny2313A, ATtiny4313, ATtiny24A, ATtiny44A,
