@@ -29,26 +29,33 @@
 /* $Id$ */
 
 /** \file */
+
 /** \ingroup avr_string
-	\fn void *memccpy(void *dest, const void *src, int val, size_t len)
+    \fn void *memccpy(void *dest, const void *src, int val, size_t len)
     \brief Copy memory area.
 
-	The memccpy() function copies no more than len bytes from memory area src
-	to memory area dest, stopping when the character val is found.
+    The memccpy() function copies no more than \p len bytes from memory
+    area \p src to memory area \p dest, stopping when the character \p val
+    is found.
 
-	\returns The memccpy() function returns a pointer to the next character in
-	dest after val, or NULL if val was not found in the first len characters
-	of src.  */
+    \returns The memccpy() function returns a pointer to the next character
+    in \p dest after \p val, or NULL if \p val was not found in the first
+    \p len characters of \p src.	*/
+
+/** \ingroup avr_pgmspace
+    \fn void *memccpy_P (void *dest, PGM_VOID_P src, int val, size_t len)
+
+    This function is similar to memccpy() except that \p src is pointer
+    to a string in program space.	*/
 
 #if !defined(__DOXYGEN__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dest_hi r25
 #define dest_lo r24
 #define src_hi r23
 #define src_lo r22
-; #define val_hi r21
 #define val_lo r20
 #define len_hi r19
 #define len_lo r18
@@ -56,18 +63,21 @@
 #define ret_hi r25
 #define ret_lo r24
 
-	
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memccpy)
-	.type	_U(memccpy), @function
-_U(memccpy):
+#ifdef	Lprogmem
+# define memccpy    memccpy_P
+# define LOAD	    X_lpm
+#else
+# define LOAD	    ld
+#endif
+
+ENTRY memccpy
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 .L_memccpy_loop:
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
 	brcs	.L_memccpy_notfound
-	ld	__tmp_reg__, Z+
+	LOAD	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
 	cp	__tmp_reg__, val_lo
 	brne	.L_memccpy_loop
@@ -77,7 +87,5 @@ _U(memccpy):
 	clr	ret_lo
 	clr	ret_hi
 	ret
-.L_memccpy_end:
-	.size	_U(memccpy), .L_memccpy_end - _U(memccpy)
-
+ENDFUNC
 #endif /* not __DOXYGEN__ */
