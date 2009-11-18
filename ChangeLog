@@ -1,3 +1,14 @@
+2009-11-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn261a.h: New file.
+	* include/avr/iotn461a.h: Same.
+	* include/avr/iotn861a.h: Same.
+	* include/avr/iom324pa.h: Same.
+	* include/avr/iotn10.h: Same.
+	* include/avr/iotn4.h: Same.
+	* include/avr/iotn5.h: Same.
+	* include/avr/iotn9.h: Same.
+
 2009-11-15  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add new function memccpy_P().
@@ -25,6 +36,7 @@
 	* include/avr/wdt.h: Same.
 	* include/avr/sleep.h: Same.
 	* include/avr/eeprom.h: Same.
+	* NEWS: Add news items for new devices.
 
 2009-11-08  Dmitry Xmelkov  <dmix@gmail.ru>
 
