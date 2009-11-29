@@ -1,5 +1,5 @@
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
-   Copyright (c) 2006  Dmitry Xmelkov
+   Copyright (c) 2006,2009  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -43,6 +43,7 @@
 #define	iptr_lo	r20
 
 ENTRY modf
+ENTRY modff
   ; save iptr
 	X_movw	ZL, iptr_lo
   ; XH = exponent field
