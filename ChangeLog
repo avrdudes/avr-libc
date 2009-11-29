@@ -1,5 +1,17 @@
 2009-11-29  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Fix some tests to run with host computer.
+	* tests/simulate/progmem.h: Add pgm_read_float() definition.
+	* tests/simulate/math/cos-02.c: Use pgm_read_float() for float value.
+	* tests/simulate/stdlib/strtod-1.c: (Ditto.)
+	* tests/simulate/stdlib/strtod-1.c: (Ditto.)
+	* tests/simulate/other/malloc-01.c: Add conditionals for AVR
+	specific constructions.
+	* tests/simulate/other/realloc-01.c: Add conditionals for AVR
+	specific constructions. Fix CVS ident keyword.
+	* tests/simulate/printf/snprintf_all.c: Exclude snprintf_P() usage
+	if __AVR__ is't defined.
+
 	Add float aliases for math functions.
 	* include/math.h: Define a set of float function names. Simplify
 	DOXYGEN comments by expanding {ingroup math} region.
