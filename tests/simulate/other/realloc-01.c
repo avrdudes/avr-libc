@@ -29,16 +29,19 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-/* $Id*/
+/* $Id$ */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <string.h>
 
-#include <avr/pgmspace.h>
-
 #ifdef __AVR__
+#include <avr/pgmspace.h>
 #include "../../libc/stdlib/stdlib_private.h"
+#else
+#include "progmem.h"
+# define prog_char	char
 #endif
 
 /*
@@ -132,7 +135,7 @@ void l1delete(void)
   l1head = p;
 }
 
-
+#ifdef	__AVR__
 void fill_mem(void) __attribute__((section(".init3"),naked));
 void fill_mem(void)
 {
@@ -142,6 +145,9 @@ void fill_mem(void)
     *p++ = 0xa5;
   while (p < (uint8_t *)RAMEND);
 }
+#else
+size_t __malloc_margin;
+#endif
 
 #define S(i,s) static prog_char string##i[] = s
 
