@@ -160,7 +160,7 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	strcpy_P (s, t[i].s);
 	len = pgm_read_byte (& t[i].len);
-	mst.lo = pgm_read_dword (& t[i].val);
+	mst.fl = pgm_read_float (& t[i].val);
 	eno = pgm_read_word (& t[i].eno);
 	
 	errno = 0;

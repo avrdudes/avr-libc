@@ -76,7 +76,7 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	unsigned long delta;
 	tx.u32 = pgm_read_dword (& t[i].x);
-	tz.u32 = pgm_read_dword (& t[i].z);
+	tz.flt = pgm_read_float (& t[i].z);
 	r.flt = cos (tx.flt);
 	delta = r.u32 - tz.u32;
 	if (delta > tz.u32 - r.u32)
