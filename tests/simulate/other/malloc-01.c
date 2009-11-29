@@ -220,6 +220,7 @@ struct list2 *l2find_3rd_last(void)
   return ele;
 }
 
+#ifdef	__AVR__
 void fill_mem(void) __attribute__((section(".init3"),naked));
 void fill_mem(void)
 {
@@ -229,6 +230,9 @@ void fill_mem(void)
     *p++ = 0xa5;
   while (p < (uint8_t *)RAMEND);
 }
+#else
+size_t __malloc_margin;
+#endif
 
 uint16_t stats[4];
 
