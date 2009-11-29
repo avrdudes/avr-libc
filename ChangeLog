@@ -4,7 +4,7 @@
 	* tests/simulate/progmem.h: Add pgm_read_float() definition.
 	* tests/simulate/math/cos-02.c: Use pgm_read_float() for float value.
 	* tests/simulate/stdlib/strtod-1.c: (Ditto.)
-	* tests/simulate/stdlib/strtod-1.c: (Ditto.)
+	* tests/simulate/stdlib/strtod-2.c: (Ditto.)
 	* tests/simulate/other/malloc-01.c: Add conditionals for AVR
 	specific constructions.
 	* tests/simulate/other/realloc-01.c: Add conditionals for AVR
