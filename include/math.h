@@ -112,8 +112,6 @@
 /** INFINITY constant.	*/
 #define INFINITY	__builtin_inf()
 
-/*@}*/
-
 
 #ifndef __ATTR_CONST__
 # define __ATTR_CONST__ __attribute__((__const__))
@@ -123,321 +121,222 @@
 extern "C" {
 #endif
 
-  /**
-     \ingroup avr_math
-
-     The cos() function returns the cosine of \a __x, measured in radians.
-  */
+/**
+    The cos() function returns the cosine of \a __x, measured in radians.
+ */
 extern double cos(double __x) __ATTR_CONST__;
+#define cosf	cos		/**< The alias for cos().	*/
 
-  /**
-     \ingroup avr_math
+/**
+    The sin() function returns the sine of \a __x, measured in radians.
+ */
+extern double sin(double __x) __ATTR_CONST__;
+#define sinf	sin		/**< The alias for sin().	*/
 
-     The fabs() function computes the absolute value of a floating-point
-     number \a __x.
-  */
+/**
+    The tan() function returns the tangent of \a __x, measured in radians.
+ */
+extern double tan(double __x) __ATTR_CONST__;
+#define tanf	tan		/**< The alias for tan().	*/
+
+/**
+    The fabs() function computes the absolute value of a floating-point
+    number \a __x.
+ */
 extern double fabs(double __x) __ATTR_CONST__;
-#if 0
-/* fabs seems to be built in already */
-static inline double fabs( double __x )
-  { double __res;
-    __asm__ __volatile__ ("andi %D0,0x7F \n\t"
-		: "=d" (__res) : "0" (__x) );
-    return __res;
-  }
-#endif
+#define fabsf	fabs		/**< The alias for fabs().	*/
 
-  /**
-     \ingroup avr_math
-
-     The function fmod() returns the floating-point remainder of <em>__x /
-     __y</em>.
-  */
+/**
+    The function fmod() returns the floating-point remainder of <em>__x /
+    __y</em>.
+ */
 extern double fmod(double __x, double __y) __ATTR_CONST__;
+#define fmodf	fmod		/**< The alias for fmod().	*/
 
-  /**
-     \ingroup avr_math
+/**
+    The modf() function breaks the argument \a __x into integral and
+    fractional parts, each of which has the same sign as the argument. 
+    It stores the integral part as a double in the object pointed to by
+    \a __iptr.
 
-     The modf() function breaks the argument \a __x into integral and
-     fractional parts, each of which has the same sign as the argument. 
-     It stores the integral part as a double in the object pointed to by
-     \a __iptr.
+    The modf() function returns the signed fractional part of \a __x.
 
-     The modf() function returns the signed fractional part of \a __x.
-     
-     \note This implementation skips writing by zero pointer.  However,
-     the GCC 4.3 can replace this function with inline code that does not
-     permit to use NULL address for the avoiding of storing.
-  */
+    \note This implementation skips writing by zero pointer.  However,
+    the GCC 4.3 can replace this function with inline code that does not
+    permit to use NULL address for the avoiding of storing.
+ */
 extern double modf(double __x, double *__iptr);
 
-  /**
-     \ingroup avr_math
-
-     The sin() function returns the sine of \a __x, measured in radians.
-  */
-extern double sin(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The sqrt() function returns the non-negative square root of \a __x.
-  */
-extern double sqrt(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The cbrt() function returns the cube root of \a __x.
-  */
-extern double cbrt(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The tan() function returns the tangent of \a __x, measured in
-     radians.
-  */
-extern double tan(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The floor() function returns the largest integral value less than or
-     equal to \a __x, expressed as a floating-point number.
-  */
-extern double floor(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The ceil() function returns the smallest integral value greater than
-     or equal to \a __x, expressed as a floating-point number.
-  */
-extern double ceil(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The frexp() function breaks a floating-point number into a normalized
-     fraction and an integral power of 2.  It stores the integer in the \c
-     int object pointed to by \a __pexp.
-
-     If \a __x is a normal float point number, the frexp() function
-     returns the value \c v, such that \c v has a magnitude in the
-     interval [1/2, 1) or zero, and \a __x equals \c v times 2 raised to
-     the power \a __pexp. If \a __x is zero, both parts of the result are
-     zero. If \a __x is not a finite number, the frexp() returns \a __x as
-     is and stores 0 by \a __pexp.
-
-     \note  This implementation permits a zero pointer as a directive to
-     skip a storing the exponent.
-  */
-extern double frexp(double __x, int *__pexp);
-
-  /**
-     \ingroup avr_math
-
-     The ldexp() function multiplies a floating-point number by an integral
-     power of 2.
-
-     The ldexp() function returns the value of \a __x times 2 raised to
-     the power \a __exp.
-  */
-extern double ldexp(double __x, int __exp) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The exp() function returns the exponential value of \a __x.
-  */
-extern double exp(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The cosh() function returns the hyperbolic cosine of \a __x.
-  */
-extern double cosh(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The sinh() function returns the hyperbolic sine of \a __x.
-  */
-extern double sinh(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The tanh() function returns the hyperbolic tangent of \a __x.
-  */
-extern double tanh(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The acos() function computes the principal value of the arc cosine of
-     \a __x.  The returned value is in the range [0, pi] radians. A domain
-     error occurs for arguments not in the range [-1, +1].
-  */
-extern double acos(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The asin() function computes the principal value of the arc sine of
-     \a __x.  The returned value is in the range [-pi/2, pi/2] radians. A
-     domain error occurs for arguments not in the range [-1, +1].
-  */
-extern double asin(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The atan() function computes the principal value of the arc tangent
-     of \a __x.  The returned value is in the range [-pi/2, pi/2] radians.
-  */
-extern double atan(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-     
-     The atan2() function computes the principal value of the arc tangent
-     of <em>__y / __x</em>, using the signs of both arguments to determine
-     the quadrant of the return value.  The returned value is in the range
-     [-pi, +pi] radians.
-  */
-extern double atan2(double __y, double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The log() function returns the natural logarithm of argument \a __x.
-   */
-extern double log(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The log10() function returns the logarithm of argument \a __x to base
-     10.
-   */
-extern double log10(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The function pow() returns the value of \a __x to the exponent \a __y.
-  */
-extern double pow(double __x, double __y) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The function isnan() returns 1 if the argument \a __x represents a
-     "not-a-number" (NaN) object, otherwise 0.
-  */
-extern int isnan(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The function isinf() returns 1 if the argument \a __x is positive
-     infinity, -1 if \a __x is negative infinity, and 0 otherwise.
-     
-     \note The GCC 4.3 can replace this function with inline code that
-     returns the 1 value for both infinities (gcc bug #35509).
-  */
-extern int isinf(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The function square() returns <em>__x * __x</em>.
-
-     \note
-     This function does not belong to the C standard definition.
-  */
-extern double square(double __x) __ATTR_CONST__;
-
-  /**
-     \ingroup avr_math
-
-     The copysign() function returns \a __x but with the sign of \a __y.
-     They work even if \a __x or \a __y are NaN or zero.
+/** The alias for modf().
  */
-__ATTR_CONST__ static inline double copysign (double __x, double __y)
-{
-    __asm__ (
-	"bst	%D2, 7	\n\t"
-	"bld	%D0, 7	"
-	: "=r" (__x)
-	: "0" (__x), "r" (__y) );
-    return __x;
-}
+extern float modff (float __x, float *__iptr);
 
-  /**
-     \ingroup avr_math
+/**
+    The sqrt() function returns the non-negative square root of \a __x.
+ */
+extern double sqrt(double __x) __ATTR_CONST__;
+#define sqrtf	sqrt		/**< The alias for sqrt().	*/
 
-     The fdim() function returns <em>max(__x - __y, 0)</em>. If \a __x or
-     \a __y or both are NaN, NaN is returned.
-  */
-extern double fdim (double __x, double __y) __ATTR_CONST__;
+/**
+    The cbrt() function returns the cube root of \a __x.
+ */
+extern double cbrt(double __x) __ATTR_CONST__;
+#define cbrtf	cbrt		/**< The alias for cbrt().	*/
 
-  /**
-     \ingroup avr_math
+/**
+    The hypot() function returns <em>sqrt(__x*__x + __y*__y)</em>. This
+    is the length of the hypotenuse of a right triangle with sides of
+    length \a __x and \a __y, or the  distance of the point (\a __x, \a
+    __y) from the origin. Using this function  instead of the direct
+    formula is wise, since the error is much smaller. No underflow with
+    small \a __x and \a __y. No overflow if result is in range.
+ */
+extern double hypot (double __x, double __y) __ATTR_CONST__;
+#define hypotf	hypot		/**< The alias for hypot().	*/
 
-     The fma() function performs floating-point multiply-add. This is the
-     operation <em>(__x * __y) + __z</em>, but the intermediate result is
-     not rounded to the destination type.  This can sometimes improve the
-     precision of a calculation.
-  */
-extern double fma (double __x, double __y, double __z) __ATTR_CONST__;
+/**
+    The function square() returns <em>__x * __x</em>.
 
-  /**
-     \ingroup avr_math
+    \note This function does not belong to the C standard definition.
+ */
+extern double square(double __x) __ATTR_CONST__;
+#define squaref	square		/**< The alias for square().	*/
 
-     The fmax() function returns the greater of the two values \a __x and
-     \a __y. If an argument is NaN, the other argument is returned. If
-     both arguments are NaN, NaN is returned.
-  */
-extern double fmax (double __x, double __y) __ATTR_CONST__;
+/**
+    The floor() function returns the largest integral value less than or
+    equal to \a __x, expressed as a floating-point number.
+ */
+extern double floor(double __x) __ATTR_CONST__;
+#define floorf	floor		/**< The alias for floor().	*/
 
-  /**
-     \ingroup avr_math
+/**
+    The ceil() function returns the smallest integral value greater than
+    or equal to \a __x, expressed as a floating-point number.
+ */
+extern double ceil(double __x) __ATTR_CONST__;
+#define ceilf	ceil		/**< The alias for ceil().	*/
 
-     The fmin() function returns the lesser of the two values \a __x and
-     \a __y. If an argument is NaN, the other argument is returned. If
-     both arguments are NaN, NaN is returned.
-  */
-extern double fmin (double __x, double __y) __ATTR_CONST__;
+/**
+    The frexp() function breaks a floating-point number into a normalized
+    fraction and an integral power of 2.  It stores the integer in the \c
+    int object pointed to by \a __pexp.
 
-  /**
-     \ingroup avr_math
+    If \a __x is a normal float point number, the frexp() function
+    returns the value \c v, such that \c v has a magnitude in the
+    interval [1/2, 1) or zero, and \a __x equals \c v times 2 raised to
+    the power \a __pexp. If \a __x is zero, both parts of the result are
+    zero. If \a __x is not a finite number, the frexp() returns \a __x as
+    is and stores 0 by \a __pexp.
 
-     The signbit() function returns a nonzero value if the value of \a __x
-     has its sign bit set.  This is not the same as `\a __x < 0.0',
-     because IEEE 754 floating point allows zero to be signed. The
-     comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return a
-     nonzero value.
-  */
-extern int signbit (double __x) __ATTR_CONST__;
+    \note  This implementation permits a zero pointer as a directive to
+    skip a storing the exponent.
+ */
+extern double frexp(double __x, int *__pexp);
+#define frexpf	frexp		/**< The alias for frexp().	*/
 
-  /**
-     \ingroup avr_math
+/**
+    The ldexp() function multiplies a floating-point number by an integral
+    power of 2. It returns the value of \a __x times 2 raised to the power
+    \a __exp.
+ */
+extern double ldexp(double __x, int __exp) __ATTR_CONST__;
+#define ldexpf	ldexp		/**< The alias for ldexp().	*/
 
-     The trunc() function rounds \a __x to the nearest integer not larger
-     in absolute value.
-  */
-extern double trunc (double __x) __ATTR_CONST__;
+/**
+    The exp() function returns the exponential value of \a __x.
+ */
+extern double exp(double __x) __ATTR_CONST__;
+#define expf	exp		/**< The alias for exp().	*/
 
-  /**
-     \ingroup avr_math
+/**
+    The cosh() function returns the hyperbolic cosine of \a __x.
+ */
+extern double cosh(double __x) __ATTR_CONST__;
+#define coshf	cosh		/**< The alias for cosh().	*/
 
-     The isfinite() function returns a nonzero value if \a __x is finite:
-     not plus or minus infinity, and not NaN.
-  */
+/**
+    The sinh() function returns the hyperbolic sine of \a __x.
+ */
+extern double sinh(double __x) __ATTR_CONST__;
+#define sinhf	sinh		/**< The alias for sinh().	*/
+
+/**
+    The tanh() function returns the hyperbolic tangent of \a __x.
+ */
+extern double tanh(double __x) __ATTR_CONST__;
+#define tanhf	tanh		/**< The alias for tanh().	*/
+
+/**
+    The acos() function computes the principal value of the arc cosine of
+    \a __x.  The returned value is in the range [0, pi] radians. A domain
+    error occurs for arguments not in the range [-1, +1].
+ */
+extern double acos(double __x) __ATTR_CONST__;
+#define acosf	acos		/**< The alias for acos().	*/
+
+/**
+    The asin() function computes the principal value of the arc sine of
+    \a __x.  The returned value is in the range [-pi/2, pi/2] radians. A
+    domain error occurs for arguments not in the range [-1, +1].
+ */
+extern double asin(double __x) __ATTR_CONST__;
+#define asinf	asin		/**< The alias for asin().	*/
+
+/**
+    The atan() function computes the principal value of the arc tangent
+    of \a __x.  The returned value is in the range [-pi/2, pi/2] radians.
+ */
+extern double atan(double __x) __ATTR_CONST__;
+#define atanf	atan		/**< The alias for atan().	*/
+
+/**
+    The atan2() function computes the principal value of the arc tangent
+    of <em>__y / __x</em>, using the signs of both arguments to determine
+    the quadrant of the return value.  The returned value is in the range
+    [-pi, +pi] radians.
+ */
+extern double atan2(double __y, double __x) __ATTR_CONST__;
+#define atan2f	atan2		/**< The alias for atan2().	*/
+
+/**
+    The log() function returns the natural logarithm of argument \a __x.
+ */
+extern double log(double __x) __ATTR_CONST__;
+#define logf	log		/**< The alias for log().	*/
+
+/**
+    The log10() function returns the logarithm of argument \a __x to base 10.
+ */
+extern double log10(double __x) __ATTR_CONST__;
+#define log10f	log10		/**< The alias for log10().	*/
+
+/**
+    The function pow() returns the value of \a __x to the exponent \a __y.
+ */
+extern double pow(double __x, double __y) __ATTR_CONST__;
+#define powf	pow		/**< The alias for pow().	*/
+
+/**
+    The function isnan() returns 1 if the argument \a __x represents a
+    "not-a-number" (NaN) object, otherwise 0.
+ */
+extern int isnan(double __x) __ATTR_CONST__;
+#define	isnanf	isnan		/**< The alias for isnan().	*/
+
+/**
+    The function isinf() returns 1 if the argument \a __x is positive
+    infinity, -1 if \a __x is negative infinity, and 0 otherwise.
+
+    \note The GCC 4.3 can replace this function with inline code that
+    returns the 1 value for both infinities (gcc bug #35509).
+ */
+extern int isinf(double __x) __ATTR_CONST__;
+#define isinff	isinf		/**< The alias for isinf().	*/
+
+/**
+    The isfinite() function returns a nonzero value if \a __x is finite:
+    not plus or minus infinity, and not NaN.
+ */
 __ATTR_CONST__ static inline int isfinite (double __x)
 {
     unsigned char __exp;
@@ -450,21 +349,73 @@ __ATTR_CONST__ static inline int isfinite (double __x)
 	: "r" (__x)	);
     return __exp != 0xff;
 }
+#define isfinitef isfinite	/**< The alias for isfinite().	*/
 
-  /**
-     \ingroup avr_math
+/**
+    The copysign() function returns \a __x but with the sign of \a __y.
+    They work even if \a __x or \a __y are NaN or zero.
+*/
+__ATTR_CONST__ static inline double copysign (double __x, double __y)
+{
+    __asm__ (
+	"bst	%D2, 7	\n\t"
+	"bld	%D0, 7	"
+	: "=r" (__x)
+	: "0" (__x), "r" (__y) );
+    return __x;
+}
+#define copysignf copysign	/**< The alias for copysign().	*/
 
-     The hypot() function returns <em>sqrt(__x*__x + __y*__y)</em>. This
-     is the length of the hypotenuse of a right triangle with sides of
-     length \a __x and \a __y, or the  distance of the point (\a __x, \a
-     __y) from the origin. Using this function  instead of the direct
-     formula is wise, since the error is much smaller. No underflow with
-     small \a __x and \a __y. No overflow if result is in range.
-  */
-double hypot (double __x, double __y) __ATTR_CONST__;
+/**
+    The signbit() function returns a nonzero value if the value of \a __x
+    has its sign bit set.  This is not the same as `\a __x < 0.0',
+    because IEEE 754 floating point allows zero to be signed. The
+    comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return a
+    nonzero value.
+ */
+extern int signbit (double __x) __ATTR_CONST__;
+#define signbitf signbit	/**< The alias for signbit().	*/
 
-/** \ingroup avr_math
+/**
+    The fdim() function returns <em>max(__x - __y, 0)</em>. If \a __x or
+    \a __y or both are NaN, NaN is returned.
+ */
+extern double fdim (double __x, double __y) __ATTR_CONST__;
+#define fdimf	fdim		/**< The alias for fdim().	*/
 
+/**
+    The fma() function performs floating-point multiply-add. This is the
+    operation <em>(__x * __y) + __z</em>, but the intermediate result is
+    not rounded to the destination type.  This can sometimes improve the
+    precision of a calculation.
+ */
+extern double fma (double __x, double __y, double __z) __ATTR_CONST__;
+#define fmaf	fma		/**< The alias for fma().	*/
+
+/**
+    The fmax() function returns the greater of the two values \a __x and
+    \a __y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned.
+ */
+extern double fmax (double __x, double __y) __ATTR_CONST__;
+#define fmaxf	fmax		/**< The alias for fmax().	*/
+
+/**
+    The fmin() function returns the lesser of the two values \a __x and
+    \a __y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned.
+ */
+extern double fmin (double __x, double __y) __ATTR_CONST__;
+#define fminf	fmin		/**< The alias for fmin().	*/
+
+/**
+    The trunc() function rounds \a __x to the nearest integer not larger
+    in absolute value.
+ */
+extern double trunc (double __x) __ATTR_CONST__;
+#define truncf	trunc		/**< The alias for trunc().	*/
+
+/**
     The round() function rounds \a __x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
     Overflow is impossible.
@@ -472,10 +423,10 @@ double hypot (double __x, double __y) __ATTR_CONST__;
     \return The rounded value. If \a __x is an integral or infinite, \a
     __x itself is returned. If \a __x is \c NaN, then \c NaN is returned.
  */
-double round (double __x) __ATTR_CONST__;
+extern double round (double __x) __ATTR_CONST__;
+#define roundf	round		/**< The alias for round().	*/
 
-/** \ingroup avr_math
-
+/**
     The lround() function rounds \a __x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
     This function is similar to round() function, but it differs in type of
@@ -485,10 +436,10 @@ double round (double __x) __ATTR_CONST__;
     or an overflow was, this realization returns the \c LONG_MIN value
     (0x80000000).
  */
-long lround (double __x) __ATTR_CONST__;
+extern long lround (double __x) __ATTR_CONST__;
+#define lroundf	lround		/**< The alias for lround().	*/
 
-/** \ingroup avr_math
-
+/**
     The lrint() function rounds \a __x to the nearest integer, rounding the
     halfway cases to the even integer direction. (That is both 1.5 and 2.5
     values are rounded to 2). This function is similar to rint() function,
@@ -499,11 +450,12 @@ long lround (double __x) __ATTR_CONST__;
     number or an overflow was, this realization returns the \c LONG_MIN
     value (0x80000000).
  */
-long lrint (double __x) __ATTR_CONST__;
+extern long lrint (double __x) __ATTR_CONST__;
+#define lrintf	lrint		/**< The alias for lrint().	*/
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* _MATH_H */
-
+/*@}*/
+#endif /* !__MATH_H */
