@@ -55,7 +55,9 @@
 #include "progmem.h"
 
 #ifdef	L_progmem
-# define snprintf	snprintf_P
+# ifdef	 __AVR__
+#  define snprintf	snprintf_P
+# endif
 # define PFMT(s)	PSTR(s)
 #else
 # define PFMT(s)	s
