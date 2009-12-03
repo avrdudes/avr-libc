@@ -811,11 +811,16 @@ do{ \
 
 
 #elif defined(__AVR_ATmega165__) \
+|| defined(__AVR_ATmega165A__) \
 || defined(__AVR_ATmega165P__) \
 || defined(__AVR_ATmega325__) \
 || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega645__) \
-|| defined(__AVR_ATmega6450__)
+|| defined(__AVR_ATmega645A__) \
+|| defined(__AVR_ATmega645P__) \
+|| defined(__AVR_ATmega6450__) \
+|| defined(__AVR_ATmega6450A__) \
+|| defined(__AVR_ATmega6450P__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))
@@ -834,15 +839,20 @@ do{ \
 
 
 #elif defined(__AVR_ATmega169__) \
+|| defined(__AVR_ATmega169A__) \
 || defined(__AVR_ATmega169P__) \
 || defined(__AVR_ATmega169PA__) \
 || defined(__AVR_ATmega329__) \
 || defined(__AVR_ATmega329P__) \
+|| defined(__AVR_ATmega329PA__) \
 || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega649__) \
+|| defined(__AVR_ATmega649A__) \
+|| defined(__AVR_ATmega649P__) \
 || defined(__AVR_ATmega6490__) \
-|| defined(__AVR_ATmega649P__)
+|| defined(__AVR_ATmega6490A__) \
+|| defined(__AVR_ATmega6490P__)
 
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR |= (uint8_t)(1 << PRADC))
@@ -863,7 +873,9 @@ do{ \
 #define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRSPI)|(1<<PRUSART0)|(1<<PRTIM1)|(1<<PRLCD)))
 
 
-#elif defined(__AVR_ATmega164P__) \
+#elif defined(__AVR_ATmega164A__) \
+|| defined(__AVR_ATmega164P__) \
+|| defined(__AVR_ATmega324A__) \
 || defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega324PA__)
 
@@ -896,6 +908,7 @@ do{ \
 
 
 #elif defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega644A__) \
 || defined(__AVR_ATmega644P__)
 
 #define power_adc_enable()      (PRR0 &= (uint8_t)~(1 << PRADC))
@@ -943,12 +956,16 @@ do{ \
 
 
 #elif defined(__AVR_ATmega48__) \
+|| defined(__AVR_ATmega48A__) \
 || defined(__AVR_ATmega48P__) \
 || defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega88A__) \
 || defined(__AVR_ATmega88P__) \
 || defined(__AVR_ATmega88PA__) \
 || defined(__AVR_ATmega168__) \
+|| defined(__AVR_ATmega168A__) \
 || defined(__AVR_ATmega168P__) \
+|| defined(__AVR_ATmega328__) \
 || defined(__AVR_ATmega328P__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny88__)
@@ -1236,19 +1253,7 @@ do{ \
 #endif
 
 
-#if defined(__AVR_ATmega640__) \
-|| defined(__AVR_ATmega1280__) \
-|| defined(__AVR_ATmega1281__) \
-|| defined(__AVR_ATmega128RFA1__) \
-|| defined(__AVR_ATmega2560__) \
-|| defined(__AVR_ATmega2561__) \
-|| defined(__AVR_AT90USB646__) \
-|| defined(__AVR_AT90USB647__) \
-|| defined(__AVR_AT90USB82__) \
-|| defined(__AVR_AT90USB1286__) \
-|| defined(__AVR_AT90USB1287__) \
-|| defined(__AVR_AT90USB162__) \
-|| defined(__AVR_AT90CAN32__) \
+#if defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \
 || defined(__AVR_AT90CAN128__) \
 || defined(__AVR_AT90PWM1__) \
@@ -1258,43 +1263,69 @@ do{ \
 || defined(__AVR_AT90PWM3B__) \
 || defined(__AVR_AT90PWM216__) \
 || defined(__AVR_AT90PWM316__) \
-|| defined(__AVR_ATmega32M1__) \
+|| defined(__AVR_AT90SCR100__) \
+|| defined(__AVR_AT90USB646__) \
+|| defined(__AVR_AT90USB647__) \
+|| defined(__AVR_AT90USB82__) \
+|| defined(__AVR_AT90USB1286__) \
+|| defined(__AVR_AT90USB1287__) \
+|| defined(__AVR_AT90USB162__) \
+|| defined(__AVR_ATmega1280__) \
+|| defined(__AVR_ATmega1281__) \
+|| defined(__AVR_ATmega128RFA1__) \
 || defined(__AVR_ATmega1284P__) \
 || defined(__AVR_ATmega162__) \
+|| defined(__AVR_ATmega164A__) \
+|| defined(__AVR_ATmega164P__) \
 || defined(__AVR_ATmega165__) \
+|| defined(__AVR_ATmega165A__) \
 || defined(__AVR_ATmega165P__) \
-|| defined(__AVR_ATmega325__) \
-|| defined(__AVR_ATmega3250__) \
-|| defined(__AVR_ATmega32HVB__) \
-|| defined(__AVR_ATmega645__) \
-|| defined(__AVR_ATmega6450__) \
-|| defined(__AVR_ATmega169__) \
-|| defined(__AVR_ATmega169P__) \
-|| defined(__AVR_ATmega169PA__) \
-|| defined(__AVR_ATmega329__) \
-|| defined(__AVR_ATmega3290__) \
-|| defined(__AVR_ATmega649__) \
-|| defined(__AVR_ATmega6490__) \
-|| defined(__AVR_ATmega649P__) \
-|| defined(__AVR_ATmega48__) \
-|| defined(__AVR_ATmega48P__) \
-|| defined(__AVR_ATmega88__) \
-|| defined(__AVR_ATmega88P__) \
 || defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega168P__) \
-|| defined(__AVR_ATmega328P__) \
-|| defined(__AVR_ATmega164P__) \
+|| defined(__AVR_ATmega169__) \
+|| defined(__AVR_ATmega169A__) \
+|| defined(__AVR_ATmega169P__) \
+|| defined(__AVR_ATmega169PA__) \
+|| defined(__AVR_ATmega16U4__) \
+|| defined(__AVR_ATmega2560__) \
+|| defined(__AVR_ATmega2561__) \
+|| defined(__AVR_ATmega324A__) \
 || defined(__AVR_ATmega324P__) \
-|| defined(__AVR_ATmega644__) \
-|| defined(__AVR_ATmega644P__) \
-|| defined(__AVR_ATmega644PA__) \
-|| defined(__AVR_ATtiny48__) \
-|| defined(__AVR_ATtiny167__) \
+|| defined(__AVR_ATmega325__) \
+|| defined(__AVR_ATmega3250__) \
+|| defined(__AVR_ATmega328P__) \
+|| defined(__AVR_ATmega329__) \
+|| defined(__AVR_ATmega329P__) \
+|| defined(__AVR_ATmega329PA__) \
+|| defined(__AVR_ATmega3290__) \
+|| defined(__AVR_ATmega32C1__) \
+|| defined(__AVR_ATmega32HVB__) \
+|| defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega32U4__) \
 || defined(__AVR_ATmega32U6__) \
-|| defined(__AVR_ATmega32C1__) \
-|| defined(__AVR_ATmega16U4__) \
-|| defined(__AVR_AT90SCR100__) \
+|| defined(__AVR_ATmega48__) \
+|| defined(__AVR_ATmega48P__) \
+|| defined(__AVR_ATmega640__) \
+|| defined(__AVR_ATmega649P__) \
+|| defined(__AVR_ATmega644__) \
+|| defined(__AVR_ATmega644A__) \
+|| defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega644PA__) \
+|| defined(__AVR_ATmega645__) \
+|| defined(__AVR_ATmega645A__) \
+|| defined(__AVR_ATmega645P__) \
+|| defined(__AVR_ATmega6450__) \
+|| defined(__AVR_ATmega6450A__) \
+|| defined(__AVR_ATmega6450P__) \
+|| defined(__AVR_ATmega649__) \
+|| defined(__AVR_ATmega649A__) \
+|| defined(__AVR_ATmega6490__) \
+|| defined(__AVR_ATmega6490A__) \
+|| defined(__AVR_ATmega6490P__) \
+|| defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATtiny48__) \
+|| defined(__AVR_ATtiny167__) \
 || defined(__DOXYGEN__)
 
 
