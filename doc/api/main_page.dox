@@ -101,34 +101,46 @@ compile-time.
 - atmega161
 - atmega162
 - atmega163
+- atmega164a
 - atmega164p
 - atmega165
+- atmega165a
 - atmega165p
 - atmega168
+- atmega168a
 - atmega168p
 - atmega16a
 - atmega2560
 - atmega2561
 - atmega32
 - atmega323
+- atmega324a
 - atmega324p
 - atmega324pa
 - atmega325
 - atmega325p
 - atmega3250
 - atmega3250p
+- atmega328
 - atmega328p
 - atmega48
+- atmega48a
 - atmega48p
 - atmega64
 - atmega640
 - atmega644
+- atmega644a
 - atmega644p
 - atmega644pa
 - atmega645
+- atmega645a
+- atmega645p
 - atmega6450
+- atmega6450a
+- atmega6450p
 - atmega8
 - atmega88
+- atmega88a
 - atmega88p
 - atmega88pa
 - atmega8515
@@ -183,14 +195,19 @@ compile-time.
 \par LCD AVR Devices:
 
 - atmega169
+- atmega169a
 - atmega169p
 - atmega169pa
 - atmega329
 - atmega329p
+- atmega329pa
 - atmega3290
 - atmega3290p
 - atmega649
+- atmega649a
 - atmega6490
+- atmega6490a
+- atmega6490p
 - atmega649p
 
 \par Lighting AVR Devices:
@@ -208,6 +225,8 @@ compile-time.
 
 - atmega8hva
 - atmega16hva
+- atmega16hva2
+- atmega16hvb
 - atmega32hvb
 - atmega64hve
 - atmega406

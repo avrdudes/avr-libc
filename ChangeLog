@@ -1,3 +1,21 @@
+2009-12-03  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add support for new devices: ATmega16HVA2, ATmega16HVB, ATmega48A,
+	ATmega88A, ATmega168A, ATmega328, ATmega164A, ATmega324A, ATmega644A,
+	ATmega165A, ATmega169A, ATmega645A, ATmega6450A, ATmega649A,
+	ATmega6490A, ATmega6490P, ATmega645P, ATmega6450P, ATmega329PA.
+	* configure.ac: Add support for new devices.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item.
+
 2009-11-29  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix some tests to run with host computer.

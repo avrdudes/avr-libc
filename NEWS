@@ -208,6 +208,25 @@
   + ATmega169PA
   + ATmega649P
   + ATmega324PA
+  + ATmega16HVA2
+  + ATmega16HVB
+  + ATmega48A
+  + ATmega88A
+  + ATmega168A
+  + ATmega328
+  + ATmega164A
+  + ATmega324A
+  + ATmega644A
+  + ATmega165A
+  + ATmega169A
+  + ATmega645A
+  + ATmega6450A
+  + ATmega649A
+  + ATmega6490A
+  + ATmega6490P
+  + ATmega645P
+  + ATmega6450P
+  + ATmega329PA
 
 
 * Optimized functions:
