@@ -1,3 +1,11 @@
+2009-12-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom16hva2.h: New file.
+	* include/avr/iom16hvb.h: Same.
+	* include/avr/iom169pa.h: Same.
+	* include/avr/iom649p.h: Same.
+	* include/avr/iom64hve.h: Same.
+
 2009-12-03  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Add support for new devices: ATmega16HVA2, ATmega16HVB, ATmega48A,
