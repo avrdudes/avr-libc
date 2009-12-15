@@ -1097,6 +1097,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega165a/Makefile
 	avr/lib/avr5/atmega165p/Makefile
 	avr/lib/avr5/atmega168/Makefile
+	avr/lib/avr5/atmega168a/Makefile
 	avr/lib/avr5/atmega168p/Makefile
 	avr/lib/avr5/atmega169/Makefile
 	avr/lib/avr5/atmega169a/Makefile
