@@ -308,8 +308,7 @@
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
     } while(0)
 
-#elif \
-|| defined(__AVR_AT90CAN128__) \
+#elif defined(__AVR_AT90CAN128__) \
 || defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \
 || defined(__AVR_AT90PWM1__) \
