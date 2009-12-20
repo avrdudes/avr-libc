@@ -242,7 +242,7 @@
 #  include <avr/iom162.h>
 #elif defined (__AVR_ATmega163__)
 #  include <avr/iom163.h>
-#elif defined (__AVR_ATmega164P__) || defined (__AVR_ATMega164A__)
+#elif defined (__AVR_ATmega164P__) || defined (__AVR_ATmega164A__)
 #  include <avr/iom164.h>
 #elif defined (__AVR_ATmega165__) || defined (__AVR_ATmega165A__)
 #  include <avr/iom165.h>
