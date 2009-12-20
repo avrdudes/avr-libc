@@ -1,3 +1,7 @@
+2009-12-20  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/sleep.h: Fix error in preprocessor expression (||).
+
 2009-12-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* configure.ac: Fix missing line for atmega168a device support.
