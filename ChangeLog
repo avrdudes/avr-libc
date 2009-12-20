@@ -1,3 +1,7 @@
+2009-12-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io.h: Fix check for ATmega164A definition.
+
 2009-12-20  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/avr/sleep.h: Fix error in preprocessor expression (||).
