@@ -689,7 +689,7 @@ typedef struct NVM_PROD_SIGNATURES_struct
     register8_t TEMPSENSE0;  /* Temperature Sensor Calibration Byte 0 */
     register8_t TEMPSENSE1;  /* Temperature Sensor Calibration Byte 0 */
     register8_t DACAOFFCAL;  /* DACA Calibration Byte 0 */
-    register8_t DACACAINCAL;  /* DACA Calibration Byte 1 */
+    register8_t DACAGAINCAL;  /* DACA Calibration Byte 1 */
     register8_t DACBOFFCAL;  /* DACB Calibration Byte 0 */
     register8_t DACBGAINCAL;  /* DACB Calibration Byte 1 */
     register8_t reserved_0x34;
