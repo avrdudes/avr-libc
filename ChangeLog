@@ -1,3 +1,21 @@
+2009-12-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for WinAVR bug #2913419.
+	* include/avr/iox128a1.h: Replace DACACAINCAL with DACAGAINCAL.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox128d3.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox192a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox64d3.h: Same.
+	* NEWS: Add to fixed bug list.
+
 2009-12-20  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/io.h: Fix check for ATmega164A definition.

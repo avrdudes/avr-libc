@@ -2,6 +2,7 @@
 
 * Bugs fixed:
   [sourceforge.net: #2812125] ATmega16U4 missing in power.h 
+  [sourceforge.net: #2913419] Misspelled Structure Element - xmega
   [#26840] Missing #define in iom32m1.h
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
