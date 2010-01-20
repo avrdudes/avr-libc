@@ -1,0 +1,1278 @@
+2009-12-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for WinAVR bug #2913419.
+	* include/avr/iox128a1.h: Replace DACACAINCAL with DACAGAINCAL.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox128d3.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox192a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox64d3.h: Same.
+	* NEWS: Add to fixed bug list.
+
+2009-12-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io.h: Fix check for ATmega164A definition.
+
+2009-12-20  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/sleep.h: Fix error in preprocessor expression (||).
+
+2009-12-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Fix missing line for atmega168a device support.
+
+2009-12-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom16hva2.h: New file.
+	* include/avr/iom16hvb.h: Same.
+	* include/avr/iom169pa.h: Same.
+	* include/avr/iom649p.h: Same.
+	* include/avr/iom64hve.h: Same.
+
+2009-12-03  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add support for new devices: ATmega16HVA2, ATmega16HVB, ATmega48A,
+	ATmega88A, ATmega168A, ATmega328, ATmega164A, ATmega324A, ATmega644A,
+	ATmega165A, ATmega169A, ATmega645A, ATmega6450A, ATmega649A,
+	ATmega6490A, ATmega6490P, ATmega645P, ATmega6450P, ATmega329PA.
+	* configure.ac: Add support for new devices.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item.
+
+2009-11-29  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix some tests to run with host computer.
+	* tests/simulate/progmem.h: Add pgm_read_float() definition.
+	* tests/simulate/math/cos-02.c: Use pgm_read_float() for float value.
+	* tests/simulate/stdlib/strtod-1.c: (Ditto.)
+	* tests/simulate/stdlib/strtod-2.c: (Ditto.)
+	* tests/simulate/other/malloc-01.c: Add conditionals for AVR
+	specific constructions.
+	* tests/simulate/other/realloc-01.c: Add conditionals for AVR
+	specific constructions. Fix CVS ident keyword.
+	* tests/simulate/printf/snprintf_all.c: Exclude snprintf_P() usage
+	if __AVR__ is't defined.
+
+	Add float aliases for math functions.
+	* include/math.h: Define a set of float function names. Simplify
+	DOXYGEN comments by expanding {ingroup math} region.
+	* libm/fplib/modf.S: Add modff() entry.
+	* tests/simulate/math/all-float.c: New file.
+
+2009-11-18  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn261a.h: New file.
+	* include/avr/iotn461a.h: Same.
+	* include/avr/iotn861a.h: Same.
+	* include/avr/iom324pa.h: Same.
+	* include/avr/iotn10.h: Same.
+	* include/avr/iotn4.h: Same.
+	* include/avr/iotn5.h: Same.
+	* include/avr/iotn9.h: Same.
+
+2009-11-15  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new function memccpy_P().
+	* libc/string/memccpy.S: Add code for PROGMEM version.
+	* libc/pmstring/memccpy_P.S: New file.
+	* libc/pmstring/Files.am: Add memccpy_P.S to file list.
+	* include/avr/pgmspace.h: Add memccpy_P().
+	* tests/simulate/string/memccpy.c: New file.
+	* tests/simulate/pmstring/memccpy_P.c: New file.
+	* NEWS: Add memccpy_P to new funcions list.
+
+2009-11-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add support for these devices: ATtiny2313A, ATtiny4313, ATtiny24A, ATtiny44A,
+	ATmega644PA, ATmega88PA, ATmega16A, ATtiny261A, ATtiny861A, ATtiny461A,
+	ATmega64HVE, ATmega169PA, ATmega649P, ATmega324PA.
+	* configure.ac: Add support for new devices. Reorganize AM_CONDITIONAL
+	and AC_CONFIG_FILES lists.
+	* devtools/gen-avr-lib-tree.sh: Same. Reorganize AVR5_DEV_INFO list.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same. Reorganize table.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news items for new devices.
+
+2009-11-08  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add new functions: strtok_P() and strtok_rP().
+	* include/avr/pgmspace.h: Add strtok_P(), strtok_rP().
+	* libc/pmstring/strtok_P.c: New file.
+	* libc/pmstring/strtok_rP.S: New file.
+	* libc/pmstring/Files.am: Add new sources.
+	* libc/pmstring/Makefile.am: Extend EXTRA_DIST list.
+	* tests/simulate/pmstring/strtok_P.c: New file.
+	* NEWS: Add strtok_P, strtok_rP to new function list.
+
+	* doc/api/doxygen.config.in: Add ATTRIBUTE_CLIB_SECTION to list
+	of predefined macroses.
+
+2009-11-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom16a.h: New file.
+	* include/avr/iom88pa.h: Same.
+	* include/avr/iom644pa.h: Same.
+	* include/avr/iotn24a.h: Same.
+	* include/avr/iotn44a.h: Same.
+	* include/avr/iotn2313a.h: Same.
+	* include/avr/iotn4313.h: Same.
+
+2009-11-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strtok_r.S: Rewrite to optimize and remove surplus
+	stack usage.
+	* tests/simulate/strtok.c: New file.
+	* NEWS: Add to optimized functions list.
+
+2009-10-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strlcat.S: Rewrite to reduce size (considerably) and
+	speed up.
+	* libc/pmstring/strlcat_P.S: Ditto.
+	* tests/simulate/string/strlcat.c: New file.
+	* tests/simulate/pmstring/strlcat_P.c: New file.
+	* NEWS: Add to optimized functions list.
+
+2009-10-23  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox256d3.h: Update header file.
+
+2009-10-18  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/string/strlcpy.S: Optimize: remove surplus size testing,
+	reorder code.
+	* libc/pmstring/strlcpy_P.S: Ditto.
+	* tests/simulate/string/strlcpy.c: New file.
+	* tests/simulate/pmstring/strlcpy_P.c: New file.
+	* NEWS: Add to optimized functions list.
+
+2009-10-11  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/sleep.h: Add 'do ... while (0)' for '{}' block macros.
+	* include/avr/power.h: Ditto.
+
+2009-09-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #27434.
+	* include/avr/boot.h: Add parentheses around vars in inline assembly
+	macros. 
+	(boot_signature_byte_get) Reformat white space, remove unneeded
+	temporary variable.
+
+2009-09-10  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Apply the patch #6878: eewr_byte.S update for patch #6718
+	Thanks to Bob Paddock and Simone Zamboni for the patch.
+	* libc/misc/eewr_byte.S: Fix the XMEGA part of code.
+	* NEWS: Add item about patch contributed.
+
+2009-08-17  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	* include/avr/iox128a1.h: Add '__extension__' to generation of 
+	_WORDREGISTER and _DWORDREGISTER macros. Fix for bug #27201
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox128d3.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox192a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+
+2009-08-15  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	Fix for WinAVR bug #2812125. 
+	* include/avr/power.h: Define clock prescale register for ATmega16U4. 
+
+2009-08-07  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Add '__extension__' to generation of _WORDREGISTER
+	and _DWORDREGISTER macros in XMEGA header files. This is a partial
+	fix for bug #27201.
+
+2009-08-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #26840. Thanks to Anitha Boyapati for the patch.
+	* include/avr/iom16m1.h: Add DAOE bit name.
+	* include/avr/iom32c1.h: Same.
+	* include/avr/iom32m1.h: Same.
+	* include/avr/iom64c1.h: Same.
+	* include/avr/iom64m1.h: Same.
+
+2009-08-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega192D3.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item for new device.
+
+2009-08-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox192d3.h: New file.
+
+2009-07-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega8U2, ATmega16U2, and ATmega32U2.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same. Also reorder files in avr_HEADERS.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same. Also fix macro name.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item for new devices.
+
+2009-07-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom8u2.h: New file.
+	* include/avr/iom16u2.h: New file.
+	* include/avr/iom32u2.h: New file.
+
+2009-07-15  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/rel-method.dox: Remember to update the Savannah bug
+	tracker version numbers when releasing.
+
+2009-07-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #26876.
+	* include/avr/fuse.h: Add check for <avr/io.h>, so fuse.h isn't included
+	directly.
+
+2009-07-01  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom128rfa1.h: Fix the structured IO register access.
+
+2009-06-28  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #26809: Some common math constants missing in math.h
+	* include/math.h: Add a set of common math constans.
+	* NEWS: Add item to fixed bug list.
+
+2009-06-27  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/misc/eerd_block.S: Add 'eepr_hi' definition to fix the XMEGA
+	variant.
+
+2009-06-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Allow the HD44780 connection in stdiodemo to be spread across more
+	than a single port.
+	* doc/examples/stdiodemo/defines.h: Pin assignments now contain
+	both, a port name as well as a pin number.
+	* doc/examples/stdiodemo/hd44780.c: Implement the new macros to
+	access the port pins.
+	* doc/examples/stdiodemo/hd44780.h: Mention the newly added
+	function hd44780_powerdown() that prepares the port pins to
+	safely power down the HD44780 (externally).
+	* doc/examples/stdiodemo/stdiodemo.dox: Adapt to the changes
+	implemented.
+
+2009-06-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/gen-avr-lib-tree.sh: replace Linux options to head(1)
+	and tail(1) by their Posix counterparts for portability.
+
+2009-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom128rfa1.h: Update.
+
+2009-06-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/eeprom.h: Add __EEPUT() and __EEGET() macroses. (They
+	were losted in patch #6718).
+	* NEWS: Add items about bugs fixed.
+
+2009-06-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Apply the patch #6718: Optimize the EEPROM functions.
+	* devtools/Architecture.am: Add AVRLIB_DEVLIST.
+	* devtools/gen-avr-lib-tree.sh: Add a code to replace the <<dev>>
+	template into real device names.
+	* include/avr/eeprom.h: Rewrite all function definitions. Add a
+	set of 'update' functions. Add a set of float arg functions.
+	Add a documentation.
+	* libc/misc/eerd_block.c: Remove.
+	* libc/misc/eerd_dword.c: Remove.
+	* libc/misc/eerd_word.c: Remove.
+	* libc/misc/eewr_block.c: Remove.
+	* libc/misc/eewr_dword.c: Remove.
+	* libc/misc/eewr_word.c: Remove.
+	* libc/misc/eedef.h: New file.
+	* libc/misc/eerd_block.S: New file.
+	* libc/misc/eerd_byte.S: New file.
+	* libc/misc/eerd_dword.S: New file.
+	* libc/misc/eerd_word.S: New file.
+	* libc/misc/eeupd_block.S: New file.
+	* libc/misc/eeupd_byte.S: New file.
+	* libc/misc/eeupd_dword.S: New file.
+	* libc/misc/eeupd_word.S: New file.
+	* libc/misc/eewr_block.S: New file.
+	* libc/misc/eewr_byte.S: New file.
+	* libc/misc/eewr_dword.S: New file.
+	* libc/misc/eewr_word.S: New file.
+	* libc/misc/readme_eeprom.txt: New file.
+	* libc/misc/Files.am: Remove EEPROM C sources. Add EEPROM asm
+	sources. Add new files to EXTRA list.
+	* libc/misc/Makefile.am: Add 'eeprom_asm_sources'.
+	* libc/misc/Rules.am: Add code to generate rules for all devices
+	from AVRLIB_DEVLIST (EEPROM objects).
+	* tests/simulate/avr/eeprom-1.c: Rewrite a part of code to avoid
+	the Simulavr bug in case of small SRAM chips. Fix a typo in memory
+	checking.
+	* tests/simulate/avr/eeprom-2.c: New file.
+	* tests/simulate/avr/eeprom-3.c: New file.
+	* NEWS: Rewrite a topic about the EEPROM improvement. Add the
+	optimized functions list. Add the new functions list. Add the
+	note of patch applied.
+
+2009-05-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #23677: new function cbrt() is added.
+	* libm/fplib/cbrt.S: New file.
+	* libm/fplib/Files.am: Add 'cbrt.S' source.
+	* include/math.h: Add cbrt().
+	* tests/simulate/math/cbrt-01.c: New file.
+	* tests/simulate/math/cbrt-02.c: New file.
+	* tests/simulate/math/cbrt-03.c: New file.
+	* tests/simulate/math/cbrt-500.c: New file.
+	* tests/simulate/math/xxx-nan.c: Add cbrt().
+	* doc/api/bench-libm.dox: Add cbrt().
+	* NEWS: Add item to fixed bug list and new function cbrt().
+
+2009-05-20  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom128rfa1.h: Fix some typos, mainly in comments.
+
+2009-05-16  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/setjmp.S: Remove the EIJMP instruction usage, as the
+	EIND changing is forbidden by AVR-GCC's API.
+	* NEWS: add item to fixed bug list (no-id).
+
+2009-04-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug AVR Tools #9724.
+	* include/avr/iotn13a.h: Remove PRSPI. Change value of PRTIM0.
+	* include/avr/power.h: Add macros for ATtiny13A.
+	* NEWS: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #25929. Thanks to Bob Paddock for a patch.
+	* include/avr/boot.h (__BOOT_LOCK_BITS_SET): Provide alternate
+	definition if RFLB is defined instead of BLBSET.
+	NEWS: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #26284. Thanks to Brad Schick for the patch.
+	* include/avr/boot.h (boot_lock_fuse_bits_get): Remove explicit load
+	of Z, use 'z' constraint instead. Remove unneeded clobbers.
+	NEW: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #26188.
+	* include/avr/io.h: Include separate header file for ATmega644P.
+	* include/avr/Makefile.am (avr_HEADERS): Add new file.
+	* include/avr/iom644p.h: New file, forked from iom644.h.
+	(SIGNATURE_2): Fix signature byte definition.
+	* include/avr/iom164.h: Add signature bytes for ATmega164P.
+	* include/avr/iom324.h: Add signature bytes for ATmega324P.
+	* NEWS: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #26308.
+	* include/avr/io90pwm2b.h: Replace WDE3 with WDE.
+	* include/avr/io90pwm3b.h: Same.
+	* NEWS: Add item to fixed bug list.
+
+2009-04-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Use generic variable for turning
+	off jump tables optimization. Turn off this optimization for more
+	devices and architectures.
+
+2009-04-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega64D3.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/iox64d3.h: New file.
+	* NEWS: Add news item.
+
+2009-04-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Use -fno-jump-tables to compile
+	libraries for large memory devices.
+
+2009-04-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega128D3 and ATxmega256D3.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/iox128d3.h: New file.
+	* include/avr/iox256d3.h: New file.
+	* NEWS: Add news items.
+
+2009-04-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SF bug #2738926.
+	* include/avr/eeprom.h: Add __EEGET, __EEPUT for IAR compatibility.
+	* NEWS: Add item to fixed bug list.
+
+2009-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Add generation of hardware pin definitions for
+	non-xmega devices.
+
+2009-04-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Put all functions in .text.avr-libc section, floating point math
+	routines in .text.avr-libc.fplib section.
+	* common/sectionname.h: New file.
+	* common/asmdef.h: Fix spelling in comments. Change default linker
+	section.
+	* common/gasava.inc: Comment out macro that is no longer being used.
+	* common/macros.inc: Add include file.
+	* devtools/gen-avr-lib-tree.sh: Remove use of -mcall-prologues on 2
+	xmega devices.
+	* libc/misc/eerd_block.c: Change linker section.
+	* libc/misc/eerd_dword.c: Same.
+	* libc/misc/eerd_word.c: Same.
+	* libc/misc/eewr_block.c: Same.
+	* libc/misc/eewr_dword.c: Same.
+	* libc/misc/eewr_word.c: Same.
+	* libc/misc/itoa.S: Same.
+	* libc/misc/ltoa.S: Same.
+	* libc/misc/mul10.S: Same.
+	* libc/misc/mulsi10.S: Same.
+	* libc/misc/ultoa.S: Same.
+	* libc/misc/utoa.S: Same.
+	* libc/pmstring/memchr_P.S: Same.
+	* libc/pmstring/memcmp_P.S: Same.
+	* libc/pmstring/memcpy_P.S: Same.
+	* libc/pmstring/strcasecmp_P.S: Same.
+	* libc/pmstring/strcat_P.S: Same.
+	* libc/pmstring/strchr_P.S: Same.
+	* libc/pmstring/strcmp_P.S: Same.
+	* libc/pmstring/strcpy_P.S: Same.
+	* libc/pmstring/strcspn_P.S: Same.
+	* libc/pmstring/strlcat_P.S: Same.
+	* libc/pmstring/strlcpy_P.S: Same.
+	* libc/pmstring/strlen_P.S: Same.
+	* libc/pmstring/strncasecmp_P.S: Same.
+	* libc/pmstring/strncat_P.S: Same.
+	* libc/pmstring/strncmp_P.S: Same.
+	* libc/pmstring/strncpy_P.S: Same.
+	* libc/pmstring/strnlen_P.S: Same.
+	* libc/pmstring/strpbrk_P.S: Same.
+	* libc/pmstring/strrchr_P.S: Same.
+	* libc/pmstring/strsep_P.S: Same.
+	* libc/pmstring/strspn_P.S: Same.
+	* libc/pmstring/strstr_P.S: Same.
+	* libc/stdio/clearerr.c: Same.
+	* libc/stdio/fclose.c: Same.
+	* libc/stdio/fdevopen.c: Same.
+	* libc/stdio/feof.c: Same.
+	* libc/stdio/ferror.c: Same.
+	* libc/stdio/fgetc.c: Same.
+	* libc/stdio/fgets.c: Same.
+	* libc/stdio/fprintf.c: Same.
+	* libc/stdio/fprintf_p.c: Same.
+	* libc/stdio/fputc.c: Same.
+	* libc/stdio/fputs.c: Same.
+	* libc/stdio/fputs_p.c: Same.
+	* libc/stdio/fread.c: Same.
+	* libc/stdio/fscanf.c: Same.
+	* libc/stdio/fscanf_p.c: Same.
+	* libc/stdio/fwrite.c: Same.
+	* libc/stdio/getc.S: Same.
+	* libc/stdio/getchar.c: Same.
+	* libc/stdio/gets.c: Same.
+	* libc/stdio/printf.c: Same.
+	* libc/stdio/printf_p.c: Same.
+	* libc/stdio/putc.S: Same.
+	* libc/stdio/putchar.c: Same.
+	* libc/stdio/puts.c: Same.
+	* libc/stdio/puts_p.c: Same.
+	* libc/stdio/scanf.c: Same.
+	* libc/stdio/scanf_p.c: Same.
+	* libc/stdio/snprintf.c: Same.
+	* libc/stdio/snprintf_p.c: Same.
+	* libc/stdio/sprintf.c: Same.
+	* libc/stdio/sprintf_p.c: Same.
+	* libc/stdio/sscanf.c: Same.
+	* libc/stdio/sscanf_p.c: Same.
+	* libc/stdio/ultoa_invert.S: Same.
+	* libc/stdio/ungetc.c: Same.
+	* libc/stdio/vfprintf.c: Same.
+	* libc/stdio/vfprintf_p.c: Same.
+	* libc/stdio/vfscanf.c: Same.
+	* libc/stdio/vfscanf_p.c: Same.
+	* libc/stdio/vprintf.c: Same.
+	* libc/stdio/vscanf.c: Same.
+	* libc/stdio/vsnprintf.c: Same.
+	* libc/stdio/vsnprintf_p.c: Same.
+	* libc/stdio/vsprintf.c: Same.
+	* libc/stdio/vsprintf_p.c: Same.
+	* libc/stdlib/abort.S: Same.
+	* libc/stdlib/abort.c: Same.
+	* libc/stdlib/abs.c: Same.
+	* libc/stdlib/assert.c: Same. And use standard function declaration.
+	* libc/stdlib/atof.S: Same.
+	* libc/stdlib/atoi.S: Same.
+	* libc/stdlib/atoi.c: Same.
+	* libc/stdlib/atol.S: Same.
+	* libc/stdlib/atol.c: Same.
+	* libc/stdlib/bsearch.c: Same. And use standard function declaration.
+	* libc/stdlib/calloc.c: Same.
+	* libc/stdlib/ctype.S: Same.
+	* libc/stdlib/div.S: Same.
+	* libc/stdlib/dtoa_prf.c: Same.
+	* libc/stdlib/dtostre.c: Same.
+	* libc/stdlib/dtostrf.c: Same.
+	* libc/stdlib/exit.S: Same.
+	* libc/stdlib/ftoa_engine.S: Same.
+	* libc/stdlib/labs.c: Same.
+	* libc/stdlib/ldiv.S: Same.
+	* libc/stdlib/malloc.c: Same.
+	* libc/stdlib/qsort.c: Same. And use standard function declaration.
+	* libc/stdlib/rand.c: Same.
+	* libc/stdlib/random.c: Same.
+	* libc/stdlib/realloc.c: Same.
+	* libc/stdlib/setjmp.S: Same.
+	* libc/stdlib/strtod.c: Same.
+	* libc/stdlib/strtol.c: Same. And use standard function declaration.
+	* libc/stdlib/strtoul.c: Same. And use standard function declaration.
+	* libc/string/ffs.S: Same.
+	* libc/string/ffsl.S: Same.
+	* libc/string/ffsll.S: Same.
+	* libc/string/memccpy.S: Same.
+	* libc/string/memchr.S: Same.
+	* libc/string/memcmp.S: Same.
+	* libc/string/memcpy.S: Same.
+	* libc/string/memmem_P.S: Same. And add missing copyright and license,
+	with permission from Dmitry Xmelkov.
+	* libc/string/memmove.S: Same.
+	* libc/string/memset.S: Same.
+	* libc/string/strcasecmp.S: Same.
+	* libc/string/strcasestr_P.S: Same. And add missing copyright and
+	license, with permission from Dmitry Xmelkov.
+	* libc/string/strcat.S: Same.
+	* libc/string/strchr.S: Same.
+	* libc/string/strcmp.S: Same.
+	* libc/string/strcpy.S: Same.
+	* libc/string/strcspn.S: Same.
+	* libc/string/strdup.c: Same.
+	* libc/string/strlcat.S: Same.
+	* libc/string/strlcat.c: Same. And remove dead code.
+	* libc/string/strlcpy.S: Same.
+	* libc/string/strlcpy.c: Same. And remove dead code.
+	* libc/string/strlen.S: Same.
+	* libc/string/strlwr.S: Same.
+	* libc/string/strncasecmp.S: Same.
+	* libc/string/strncat.S: Same.
+	* libc/string/strncmp.S: Same.
+	* libc/string/strncpy.S: Same.
+	* libc/string/strnlen.S: Same.
+	* libc/string/strpbrk.S: Same.
+	* libc/string/strrchr.S: Same.
+	* libc/string/strrev.S: Same.
+	* libc/string/strsep.S: Same.
+	* libc/string/strspn.S: Same.
+	* libc/string/strstr.S: Same.
+	* libc/string/strtok.c: Same.
+	* libc/string/strtok_r.S: Same.
+	* libc/string/strupr.S: Same.
+	* libm/fplib/fp32def.h: Same.
+	* NEWS: Add item.
+
+2009-03-27  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn48.h: Fix comment.
+
+2009-03-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/power.h: Fully enable the ATmega128RFA1 within this
+	file.
+
+2009-03-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox32d4.h: Add missing typedefs on fuse definitions.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox128a1.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox32a4.h: Same.
+
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega192A3.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* NEWS: Add news item about new device.
+	* include/avr/iox192a3.h: New file.
+	* xml/avrgcc-header: Add typecasts to fuse data information for xmega
+	devices.
+
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/signature.h: New file.
+	* include/avr/Makefile.am: Add signature.h.
+	* doc/api/doxygen.config.in: Add signature.h.
+	* NEWS: Add news item.
+
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #25930. Thanks to Simon Küppers for the patch.
+	* include/avr/portpins.h: Add short pin definitions if missing.
+
+2009-03-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/runtest.sh: (cosmetics) Replace <<8 by *256 to
+	unconfuse Emacs' syntax highlighting.
+
+2009-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for SF bug #2693898.
+	* include/avr/power.h: Add ATmega32U6 for clock_prescale* API.
+	* NEWS: Add item to fixed bugs list.
+
+2009-03-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #25846.
+	* include/avr/power.h: Add missing ||.
+	* NEWS: Update for new version release. Add fixed bug item.
+
+2009-03-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1.h: Regenerate from latest XML device file.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+
+2009-03-07  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/progmem.h: Add copyright notice.
+
+	* tests/simulate/avr/{eeprom-1.c, sfr-1.c, sfr-2.c, sfr-3.c,
+	    sfrasm-1.S, sfrasm-2.S, sfrasm-3.S}:
+	Add copyright notice.
+
+	* tests/simulate/fplib/{add-01.c, add-02.c, add-03.c, add-500.c,
+	    add-inf.c, add-nan.c, cmp-01.c, cmp-02.c, cmp-03.c,
+	    div-01.c, div-02.c, div-03.c, div-500.c, div-inf.c, 
+	    div-nan.c, flt2llng-01.c, flt2long-01.c, flt2ulng-01.c, 
+	    flt2unll-01.c, llng2flt-01.c, llng2flt-500.c, mul-01.c,
+	    mul-02.c, mul-03.c, mul-500.c, mul-inf.c, mul-nan.c, 
+	    neg-01.c, ulng2flt-01.c, unll2flt-01.c, unord-01.c, 
+	    unord-02.c, unord-03.c}:
+	Add copyright notice.
+
+	* tests/simulate/math/{acos-01.c, acos-500.c, asin-01.c, asin-500.c,
+	    atan-01.c, atan-500.c, atan2-01.c, atan2-500.c, ceil-01.c, 
+	    copysign-01.c, cos-01.c, cos-02.c, cos-500.c, cosh-01.c,
+	    cosh-02.c, cosh-500.c, exp-01.c, exp-500.c, fdim-01.c,
+	    fdim-500.c, floor-01.c, fma-01.c, fmax-01.c, fmax-500.c,
+	    fmin-01.c, fmin-500.c, fmod-01.c, fmod-500.c, fmod-nan.c,
+	    fp_mpack-01.c, frexp-01.c, hypot-01.c, hypot-500.c,
+	    isfinite-01.c, isinf-01.c, isnan-01.c, ldexp-01.c,
+	    ldexp-nan.c, log-01.c, log-02.c, log-500.c, log-nan.c,
+	    log10-01.c, lrint-01.c, lround-01.c, modf-01.c, modf-nan.c,
+	    modf-np.c, pow-01.c, pow-02.c, pow-500.c, pow-nan.c,
+	    round-01.c, signbit-01.c, sin-01.c, sin-500.c, sinh-01.c,
+	    sinh-02.c, sinh-500.c, sqrt-01.c, sqrt-500.c, tan-01.c,
+	    tan-500.c, tanh-01.c, tanh-02.c, tanh-500.c, trunc-01.c, 
+	    xxx-inf.c, xxx-nan.c}:
+	Add copyright notice.
+
+	* tests/simulate/other/alloca.c: Add copyright notice.
+
+	* tests/simulate/pmstring/{memchr_P.c, memcmp_P.c, memmem_P.c, 
+	    memrchr_P.c, strcasecmp_P.c, strcasestr_P.c, strchr_P.c, 
+	    strchrnul_P.c, strcmp_P.c, strcspn_P.c, strncasecmp_P.c,
+	    strpbrk_P.c, strrchr_P.c, strsep_P.c, strspn_P.c, strstr_P.c}:
+	Add copyright notice.
+
+	* tests/simulate/printf/{snprintf_all-P.c, snprintf_all.c,
+	    sprintf-1.c, sprintf-2.c, sprintf-3.c, sprintf-4.c,
+	    sprintf-5.c, sprintf-inv.c, sprintf_flt-big.c,
+	    sprintf_flt-e01.c, sprintf_flt-f01.c, sprintf_flt-g01.c,
+	    sprintf_flt-g02.c, sprintf_flt-nan.c, sprintf_min-1.c,
+	    sprintf_min-2.c, sprintf_min-3.c, sprintf_min-4.c, 
+	    sprintf_min-5.c, sprintf_min-int.c, sprintf_min-inv.c, 
+	    sprintf_std-int.c, sprintf_std-inv.c, vsnprintf_all-P.c, 
+	    vsnprintf_all.c}:
+	Add copyright notice.
+
+	* tests/simulate/regression/{20080322-isinf.c, 20080323-jmpbuf.c,
+	    20080405-eeprom.c, 20081221-ffs.c, bug-01929.c, bug-11511.c,
+	    bug-11820.c, bug-13330.c, bug-18899.c, bug-19079.c,
+	    bug-19134.c, bug-19135.c, bug-19280.c, bug-19281.c,
+	    bug-21872-1.c, bug-21872-2.c, bug-21905-scanf_flt.c,
+	    bug-21906-scanf_flt.c, bug-21955.c, bug-22593.c, bug-22800.c,
+	    bug-22828.c, bug-25048.cpp, bug-31644.c}:
+	Add copyright notice.
+
+	* tests/simulate/scanf/{scanf-nul.c, scanf_brk-nul.c,
+	    scanf_flt-nul.c, sscanf-1.c, sscanf-2.c, sscanf-c1.c,
+	    sscanf-c2.c, sscanf-d1.c, sscanf-d2.c, sscanf-eof.c,
+	    sscanf-eon.c, sscanf-h.c, sscanf-hh.c, sscanf-i.c, sscanf-l.c,
+	    sscanf-o1.c, sscanf-o2.c, sscanf-s1.c, sscanf-s2.c,
+	    sscanf-x1.c, sscanf-x2.c, sscanf-x3.c, sscanf_brk-1.c,
+	    sscanf_brk-2.c, sscanf_brk-3.c, sscanf_brk-4.c,
+	    sscanf_flt-f1.c, sscanf_flt-f2.c, sscanf_flt-f3.c,
+	    sscanf_flt-fnn.c, sscanf_flt-fw.c}:
+	Add copyright notice.
+
+	* tests/simulate/stdlib/{abort-1.c, atoi-1.c, atol-1.c, atol-2.c,
+	    bsearch-1.c, bsearch-2.c, bsearch-3.c, dtostre-01.c,
+	    dtostre-02.c, dtostre-03.c, dtostre-04.c, dtostre-05.c,
+	    dtostre-06.c, dtostre-expm00.c, dtostre-minmax.c,
+	    dtostre-nans.c, dtostre-subnrm.c, dtostre-zero.c, dtostre.h,
+	    dtostrf-01.c, dtostrf-big.c, dtostrf-minmax.c, dtostrf-nans.c,
+	    dtostrf-round.c, dtostrf-width.c, dtostrf.h, exit-1.c,
+	    isalnum-1.c, isalpha-1.c, isascii-1.c, isblank-1.c,
+	    iscntrl-1.c, isdigit-1.c, isgraph-1.c, islower-1.c,
+	    isprint-1.c, ispunct-1.c, isspace-1.c, isupper-1.c,
+	    isxdigit-1.c, setjmp-1.c, setjmp-2.c, setjmp-3.c, setjmp-4.c,
+	    setjmp-5.c, strtod-1.c, strtod-2.c, strtod-3.c, strtol-1.c,
+	    strtol-2.c, strtol-3.c, strtol-4.c, strtol.h, strtoul-1.c,
+	    strtoul-2.c, strtoul-3.c, strtoul.h, tolower-1.c, toupper-1.c}:
+	Add copyright notice.
+
+	* tests/simulate/string/{ffs-1.c, ffs_macro.c, ffsl-1.c, ffsll-1.c,
+	    memchr.c, memcmp.c, memmem.c, memrchr.c, strcasecmp.c,
+	    strcasestr.c, strchr.c, strchrnul.c, strcmp.c, strcspn.c,
+	    strlwr.c, strncasecmp.c, strpbrk.c, strrchr.c, strrev.c,
+	    strsep.c, strspn.c, strstr.c, strupr.c}:
+	Add copyright notice.
+
+2009-03-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/math.h: signbit(): remove note about implementation.
+	isinf(), modf(): add precaution about GCC inline realization.
+	* NEWS: add note about signbit() function.
+
+2009-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* libc/stdlib/malloc.c: Fix a bug found by the testsuite script
+	other/malloc-01.c: when being close to the top of heap, make sure
+	the pointers don't wrap before calculating the available space.
+
+2009-03-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90scr100.h: Yet another update.
+
+2009-03-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90scr100.h: Updated header file based on new XML
+	device file.
+
+2009-03-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Lou Amadio:
+	bug #25723: Realloc corrupts free list when growing into
+	the next free item
+	* libc/stdlib/realloc.c: Fix calculation of freelist.
+	* tests/simulate/regression/bug-25723.c: Testscript to demonstrate
+	the bug as well as its fix.
+
+2009-03-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/other/realloc-01.c: Basic realloc() test script.
+	Currently exhibits a failure when simulating on the AT90S8515, which
+	is actually due to a real bug (most likely #25723).
+
+2009-03-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/runtest.sh: Add -g to CFLAGS, to help debugging
+	any ELF files that experience issues in the simulation.
+
+2009-03-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/other/malloc-01.c: Basic malloc() test script.
+	Currently exhibits a failure when simulating on the AT90S8515, which
+	is actually due to a real bug (possibly same as bug #22567, and
+	maybe #25723).
+
+2009-03-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* crt1/gcrt1.S (__init): Clear RAMPD, RAMPX, RAMPY, RAMPZ registers
+	conditional on __AVR_HAVE_RAMPD__.
+	* include/avr/common.h (AVR_RAMPD_REG, AVR_RAMPD_ADDR, AVR_RAMPX_REG,
+	AVR_RAMPX_ADDR, AVR_RAMPY_REG, AVR_RAMPY_ADDR): Add definitions.
+
+2009-03-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* crt1/gcrt1.S (__do_copy_data): Make clearing of RAMPZ at end
+	conditional on __AVR_HAVE_RAMPD__ (currently avrxmega3, avrxmega5,
+	and avrxmega7 architectures). These architectures can access > 64K RAM,
+	hence RAMPZ is required to be cleared.
+
+2009-03-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #25120.
+	* include/avr/pgmspace.h (__ELPM_xmega__, __ELPM_word_xmega__,
+	__ELPM_dword_xmega__, __ELPM_float_xmega__): Add new macros.
+	(__ELPM, __ELPM_word, __ELPM_dword, __ELPM_float): Add new conditional
+	definitions based on __AVR_HAVE_RAMPD__ (i.e. avrxmega3, avrxmega5,
+	and avrxmega7 architectures).
+	* NEWS: Add item to fixed bug list.
+
+2009-03-01  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* libc/stdlib/setjmp.S: longjmp(): optimize stack pointer writing
+	in case of XMEGA devices.
+
+2009-02-25  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/util/delay.h (_delay_us): Swap _delay_us() and
+	_delay_ms() so when _delay_us() wants to fall back to _delay_ms(),
+	the function call can actually be inlined by the compiler.
+
+2009-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom128rfa1.h: Fix some C syntax errors
+	that have sneaked in during the last update.
+
+2009-02-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega16U4.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/iom16u4.h: New file.
+	* NEWS: Add item.
+
+2009-02-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/sleep.h: Add sleeping BOD API.
+	* NEWS: Add news item.
+
+2009-02-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #25645.
+	* include/avr/iox256a3b.h: Change PR register to PRGEN because this
+	conflicts with a #defined symbol.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox128a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* NEWS: Add item to fixed bug list.
+
+2009-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Contributed by Bob Paddock:
+	(part of) patch #6720: FAQ update. Add EEPROM section, baud rate section.
+	Correct spelling.
+	* doc/api/faq.dox: Spelling fixes, remove trailing white space.
+
+2009-02-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Contributed by Bob Paddock:
+	(part of) patch #6720: FAQ update. Add EEPROM section, baud rate section.
+	Correct spelling.
+	* doc/api/faq.dox (faq_eeprom_corruption, faq_wrong_baud_rate): new
+	entries.
+
+2009-02-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/power.h: Add ATmega128RFA1.
+	* include/avr/sleep.h: (Ditto.)
+
+2009-02-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix repository breakage. Thanks to Anatoly.
+	* configure.ac: Test for xmega2 architecture. Fix architecture type.
+	* devtools/gen-avr-lib-tree.sh: Add missing semicolons.
+
+2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #25261.
+	* include/avr/iotn48.h: Add register TWHSR. Deprecate register TWIHSR.
+	* NEWS: Add item to fixed bug list.
+
+2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #25535.
+	* include/avr/iotn88.h: Remove AREFD, REFS1 bit definitions.
+	* include/avr/iotn48.h: Same.
+	* NEWS: Add item.
+
+2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/sleep.h: Add support for ATxmega32D4, ATxmega16A4,
+	ATxmega16D4.
+
+2009-02-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega32D4, ATxmega16A4, ATxmega16D4.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/Makefile.am: Same.
+	* include/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* NEWS: Same.
+	* devtools/gen-avr-lib-tree.sh (CFLAGS_SPACE_NO_CALL): Add. Optimize for
+	space but without -mcall-prologues flag.
+	(AVR6_DEV_INFO) Use CFLAGS_SPACE_NO_CALL.
+	(AVRXMEGA6_DEV_INFO) Use CFLAGS_SPACE_NO_CALL on devices with 256K+ flash.
+
+2009-02-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom128rfa1.h: Fix some buglets noticed
+	by Eric:
+	  - the __NOSTRUCT__ logic was broken
+	  - _VECTORS_SIZE was off by one vector
+	  - the *_vect_num definitions were missing
+
+2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Partial fix for bug #25535.
+	* include/avr/iotn88.h: Remove SM2 bit definition.
+	* include/avr/iotn48.h: Same.
+
+2009-02-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/assembler.dox: Add missing 3rd copyright clause.
+	* doc/api/malloc.dox: (Ditto.)
+	* doc/api/faq.dox: (Ditto.)
+
+2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #25131.
+	* include/avr/iotn2313.h: Fix LFUSE_DEFAULT definition.
+
+2009-02-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Make definition of XRAMEND more consistent across all I/O header files.
+	* include/avr/io.h: Add missing word in documentation on XRAMEND.
+	* include/avr/iousb82.h: Change XRAMEND definition from a constant to
+	RAMEND.
+	* include/avr/iousb162.h: Same.
+	* include/avr/iotn84.h: Same.
+	* include/avr/iotn85.h: Same.
+	* include/avr/iotn861.h: Same.
+	* include/avr/iotn44.h: Same.
+	* include/avr/iotn45.h: Same.
+	* include/avr/iotn461.h: Same.
+	* include/avr/iotn22.h: Same.
+	* include/avr/iotn2313.h: Same.
+	* include/avr/iotn24.h: Same.
+	* include/avr/iotn25.h: Same.
+	* include/avr/iotn26.h: Same.
+	* include/avr/iotn261.h: Same.
+	* include/avr/iotn13.h: Same.
+	* include/avr/iom8hva.h: Same.
+	* include/avr/iom88.h: Same.
+	* include/avr/iom8535.h: Same.
+	* include/avr/iom8.h: Same.
+	* include/avr/iom6490.h: Same.
+	* include/avr/iom649.h: Same.
+	* include/avr/iom6450.h: Same.
+	* include/avr/iom645.h: Same.
+	* include/avr/iom644.h: Same.
+	* include/avr/iom48.h: Same.
+	* include/avr/iom406.h: Same.
+	* include/avr/iotn43u.h: Same.
+	* include/avr/iom3290.h: Same.
+	* include/avr/iom329.h: Same.
+	* include/avr/iom325.h: Same.
+	* include/avr/iom3250.h: Same.
+	* include/avr/iom32.h: Same.
+	* include/avr/iom323.h: Same.
+	* include/avr/iom324.h: Same.
+	* include/avr/iom16hva.h: Same.
+	* include/avr/iom169.h: Same.
+	* include/avr/iom169p.h: Same.
+	* include/avr/iom168.h: Same.
+	* include/avr/iom165.h: Same.
+	* include/avr/iom165p.h: Same.
+	* include/avr/iom164.h: Same.
+	* include/avr/iom163.h: Same.
+	* include/avr/iom16.h: Same.
+	* include/avr/io90pwmx.h: Same.
+	* include/avr/io90pwm1.h: Same.
+	* include/avr/io86r401.h: Same.
+	* include/avr/io8535.h: Same.
+	* include/avr/io8534.h: Same.
+	* include/avr/io76c711.h: Same.
+	* include/avr/io4434.h: Same.
+	* include/avr/io4433.h: Same.
+	* include/avr/io43u35x.h: Same.
+	* include/avr/io43u32x.h: Same.
+	* include/avr/io2343.h: Same.
+	* include/avr/io2333.h: Same.
+	* include/avr/io2323.h: Same.
+	* include/avr/io2313.h: Same.
+	* include/avr/iotn88.h: Change XRAMEND definition to just RAMEND.
+	* include/avr/iotn48.h: Same.
+	* include/avr/iotn167.h: Same.
+	* include/avr/iotn13a.h: Same.
+	* include/avr/iom88p.h: Same.
+	* include/avr/iom48p.h: Same.
+	* include/avr/iom32hvb.h: Same.
+	* include/avr/iom328p.h: Same.
+	* include/avr/iom168p.h: Same.
+	* include/avr/iom1284p.h: Same.
+	* include/avr/ioa6289.h: Same.
+	* include/avr/io90scr100.h: Same.
+	* include/avr/io90pwm3b.h: Same.
+	* include/avr/io90pwm316.h: Same.
+	* include/avr/io90pwm2b.h: Same.
+	* include/avr/io90pwm216.h: Same.
+	* include/avr/iom32u6.h: Fix XRAMEND definition to be XRAMSIZE - 1.
+	* include/avr/iom32u4.h: Same.
+
+2009-02-08  Anatoly Sokolov  <aesok@post.ru>
+
+	* configure.ac: (FNO_JUMP_TABLES, CHECK_MNO_TABLEJUMP, 
+	CHECK_FNO_JUMP_TABLES): Add.
+	* libc\stdio\Rules.am (PRINTF_CFLAGS): Use FNO_JUMP_TABLES.
+
+2009-02-07  Anatoly Sokolov  <aesok@post.ru>
+
+	* include/avr/iotnx4.h: Add RSIG bit definition.
+	* include/avr/iotnx5.h: Same.
+
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotnx4.h: Add BODS and BODSE bit definitions.
+	* include/avr/iotnx5.h: Same.
+	* include/avr/iomxx4.h: Define BODS and BODSE only if not ATmega644.
+
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom1284p.h: Fix OCROA_0..OCROA_7 to OCR0A_0..OCR0A_7.
+	* include/avr/iom328p.h: Same.
+	* include/avr/iom168p.h: Same.
+	* include/avr/iom88p.h: Same.
+	* include/avr/iom48p.h: Same.
+	* include/avr/iotn48.h: Same.
+	* include/avr/iom32u6.h: Same.
+	* include/avr/io90scr100.h: Same.
+	* include/avr/iom128rfa1.h: Same.
+
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/sleep.h: Add support for AT90PWM81.
+
+2009-02-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* xml/avrgcc-header: Add Id line. Always add *PAGE_SIZE constant
+	definitions for xmega devices. Fix definition of XRAMEND constant for
+	classic AVR devices.
+	* include/avr/iox128a1.h: Add *PAGE_SIZE constants.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+
+2009-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Bump version date to 20090205
+
+2009-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* configure.ac: Add the ATmega128RFA1 device.
+	* devtools/gen-avr-lib-tree.sh: (Ditto.)
+	* include/avr/Makefile.am: (Ditto.)
+	* include/avr/io.h: (Ditto.)
+	* include/avr/wdt.h: (Ditto.)
+	* include/avr/iom128rfa1.h: (Ditto.)
+
+2009-02-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* bootstrap: Remove autoconf and automake version checks.
+	* configure.ac (AC_INIT): Make this call be first in script according
+	to docs.
+	(AC_PREREQ): Change minimum autoconf version to 2.59.
+	(AM_INIT_AUTOMAKE) Check for minimum automake version of 1.8
+
+2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for AT90PWM81.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* NEWS: Add news items.
+
+2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox32d4.h: New file.
+	* include/avr/iox16a4.h: New file.
+	* include/avr/iox16d4.h: New file.
+
+2009-02-01  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm81.h: New file.
+
+2009-01-29  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATA6289.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/ioa6289.h: New file.
+	* NEWS: Add news item.
+
+2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATmega64M1, ATmega64C1, ATmega16M1.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* NEWS: Add news items.
+
+2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/io90pwm2b.h: Bit definitions OCR0_0..OCR0_7 were
+	duplicated. Change to OCR0A_0..OCR0A_0 and OCR0B_0..OCR0B_7. Add
+	old definitions back in for backwards compatibility.
+	* include/avr/io90pwm3b.h: Same.
+
+2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom64m1.h: New file.
+	* include/avr/iom64c1.h: New file.
+	* include/avr/iom16m1.h: New file.
+
+2009-01-26  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom32m1.h: File has been regenerated from updated XML file.
+	SPM_PAGESIZE fix, new bit definitions, new 16-bit combined registers, 
+	22 renamed definitions, remove DAOE bitfield, fix bit definitions, 
+	new register PCICR, renamed EEPROM bit definitions, miscellaneous 
+	whitespace changes.
+	* include/avr/iom32c1.h: File has been regenerated from updated XML file.
+	Fix line endings to be Unix line endings, SPM_PAGESIZE fix, fix bit
+	definitions, remove DAOE bitfield, new register PCICR, renamed
+	EEPROM bit definitions, miscellaneous whitespace changes.
+	* include/avr/iox32a4.h: File has been regenerated from updated XML file.
+	PR.PR register renamed to PR.PRGEN. Fix missing AES definitions for 
+	PRGEN register.
+
+2009-01-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATxmega32A4.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* NEWS: Add news item.
+
+2009-01-23  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox32a4.h: New file.
+
+2009-01-23  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* Makefile.am (EXTRA_DIST): Add ChangeLog-2008.
+
+2009-01-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Add support for ATtiny87.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/iotn87.h: New file.
+	* NEWS: Add news item.
+
+For older changes see ChangeLog-2008
