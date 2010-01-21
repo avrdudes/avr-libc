@@ -104,7 +104,8 @@
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
   [#27434] Arguments of macros must be protected in parentheses
-  
+  [#28688] using_tools.dox fails to build due to extra underscore
+
 * Other changes:
 
   - Added 'avr35' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions

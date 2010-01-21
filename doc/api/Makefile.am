@@ -179,11 +179,15 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 		group__avr__interrupts.tex > tmp.$$ && \
 		mv -f tmp.$$ group__avr__interrupts.tex
 	cd latex_src && \
-		sed -e '/{TabularC}{3}/s/{TabularC}{3}/{longtable}{|l|l|l|}/' \
-		-e '/{longtable}{|l|l|l|}/,/TabularC/s/TabularC/longtable/' \
+		if [ -f using_tools.tex ] ; then \
+			UT=using_tools.tex; else \
+			UT=using__tools.tex; fi; \
+		sed -e '/{TabularC}{3}/s/{TabularC}{3}/{longtable}{|l|>{\PBS}p{5cm}|>{\PBS}p{3.5cm}|}/' \
+		-e '/begin{longtable}/,/TabularC/s/TabularC/longtable/' \
 		-e '/Architecture/s/\\\\\\hline/\\endhead\\hline/' \
-		using_tools.tex > tmp.$$ && \
-		mv -f tmp.$$ using_tools.tex
+		-e '/MCU types are currently/,/Architecture/s/>.*|/l|l|/' \
+		$$UT > tmp.$$ && \
+		mv -f tmp.$$ $$UT
 
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in

@@ -1,3 +1,10 @@
+2010-01-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #28688: using_tools.dox fails to build due to extra underscore
+	* doc/api/Makefile.am: added logic to detect which filename
+	doxygen did generate; while being here, fix the table layout as
+	well
+
 2010-01-20  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Rotate ChangeLogs.
