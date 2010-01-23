@@ -1,3 +1,7 @@
+2010-01-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox128a1u.h: Add new file.
+
 2010-01-21  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #28688: using_tools.dox fails to build due to extra underscore
