@@ -1,3 +1,10 @@
+2010-02-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #28756: Bug in AVR libc 1.6.7 (power.h for 8-bit AVR)
+	* include/avr/power.h (clock_prescale_set): Implement as an inline
+	function rather than a macro so it syntactically becomes a true
+	function.
+
 2010-01-22  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox128a1u.h: Add new file.
