@@ -1377,26 +1377,32 @@ typedef enum
 } clock_div_t;
 
 
+static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+
 /** \addtogroup avr_power
 \code clock_prescale_set(x) \endcode
-Set the clock prescaler register select bits, selecting a system clock division setting. They type of x is clock_div_t.
 
+Set the clock prescaler register select bits, selecting a system clock
+division setting. This function is inlined, even if compiler
+optimizations are disabled.
+
+The type of x is clock_div_t.
 */
-#define clock_prescale_set(x) \
-do { \
-        uint8_t tmp = _BV(CLKPCE); \
-        __asm__ __volatile__ ( \
-                "in __tmp_reg__,__SREG__" "\n\t" \
-                "cli" "\n\t" \
-                "sts %1, %0" "\n\t" \
-                "sts %1, %2" "\n\t" \
-                "out __SREG__, __tmp_reg__" \
-                : /* no outputs */ \
-                : "d" (tmp), \
-                  "M" (_SFR_MEM_ADDR(CLKPR)), \
-                  "d" (x) \
-                : "r0"); \
-} while (0)
+void clock_prescale_set(clock_div_t __x)
+{
+    uint8_t __tmp = _BV(CLKPCE);
+    __asm__ __volatile__ (
+        "in __tmp_reg__,__SREG__" "\n\t"
+        "cli" "\n\t"
+        "sts %1, %0" "\n\t"
+        "sts %1, %2" "\n\t"
+        "out __SREG__, __tmp_reg__"
+        : /* no outputs */
+        : "d" (__tmp),
+          "M" (_SFR_MEM_ADDR(CLKPR)),
+          "d" (__x)
+        : "r0");
+}
 
 /** \addtogroup avr_power
 \code clock_prescale_get() \endcode
@@ -1441,21 +1447,21 @@ typedef enum
 } clock_div_t;
 
 
-#define clock_prescale_set(x) \
-do { \
-        uint8_t tmp = _BV(CLKPCE); \
-        __asm__ __volatile__ ( \
-                "in __tmp_reg__,__SREG__" "\n\t" \
-                "cli" "\n\t" \
-                "out %1, %0" "\n\t" \
-                "out %1, %2" "\n\t" \
-                "out __SREG__, __tmp_reg__" \
-                : /* no outputs */ \
-                : "d" (tmp), \
-                  "I" (_SFR_IO_ADDR(CLKPR)), \
-                  "d" (x) \
-                : "r0"); \
-} while (0)
+void clock_prescale_set(clock_div_t __x)
+{
+    uint8_t __tmp = _BV(CLKPCE);
+    __asm__ __volatile__ (
+        "in __tmp_reg__,__SREG__" "\n\t"
+        "cli" "\n\t"
+        "out %1, %0" "\n\t"
+        "out %1, %2" "\n\t"
+        "out __SREG__, __tmp_reg__"
+        : /* no outputs */
+        : "d" (__tmp),
+          "I" (_SFR_IO_ADDR(CLKPR)),
+          "d" (__x)
+        : "r0");
+}
 
 
 #define clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
