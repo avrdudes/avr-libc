@@ -1,5 +1,9 @@
 2010-02-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: Bump for post-release 1.6.8.
+
+2010-02-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: Bump release in preparation of 1.6.8.
 
 2010-02-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
