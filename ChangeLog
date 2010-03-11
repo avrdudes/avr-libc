@@ -1,3 +1,9 @@
+2010-03-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix bug #28812.
+	* include/avr/iotn48.h: Fix values of TWS3-7.
+	* NEWS: Add to fixed bug list.
+
 2010-02-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #28756: Bug in AVR libc 1.6.7 (power.h for 8-bit AVR)

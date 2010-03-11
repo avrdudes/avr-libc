@@ -1,4 +1,4 @@
-/* Copyright (c) 2007 Atmel Corporation
+/* Copyright (c) 2007-2010 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -629,11 +629,11 @@
 #define TWSR _SFR_MEM8(0xB9)
 #define TWPS0 0
 #define TWPS1 1
-#define TWS3 2
-#define TWS4 3
-#define TWS5 4
-#define TWS6 5
-#define TWS7 6
+#define TWS3 3
+#define TWS4 4
+#define TWS5 5
+#define TWS6 6
+#define TWS7 7
 
 #define TWAR _SFR_MEM8(0xBA)
 #define TWGCE 0
