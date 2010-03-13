@@ -1,4 +1,5 @@
-/* Copyright (c) 2007 Anatoly Sokolov 
+/* Copyright (c) 2007 Anatoly Sokolov
+   Copyright (c) 2010 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -58,7 +59,7 @@
 #define FUSE_SUT1        (unsigned char)~_BV(5)
 #define FUSE_CKOUT       (unsigned char)~_BV(6)
 #define FUSE_CKDIV8      (unsigned char)~_BV(7)
-#define LFUSE_DEFAULT (CKSEL0 & SUT1 & CKDIV8)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_SUT1 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
 #define FUSE_BOOTRST     (unsigned char)~_BV(0)
@@ -69,14 +70,14 @@
 #define FUSE_SPIEN       (unsigned char)~_BV(5)
 #define FUSE_RSTDSBL     (unsigned char)~_BV(6)
 #define FUSE_DWEN        (unsigned char)~_BV(7)
-#define HFUSE_DEFAULT (BOOTSZ0 & BOOTSZ1 & SPIEN)
+#define HFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN)
 
 /* Extended Fuse Byte */
 #define FUSE_BODLEVEL0   (unsigned char)~_BV(0)
 #define FUSE_BODLEVEL1   (unsigned char)~_BV(1)
 #define FUSE_BODLEVEL2   (unsigned char)~_BV(2)
 #define FUSE_HWBE        (unsigned char)~_BV(3)
-#define EFUSE_DEFAULT (BODLEVEL0 & BODLEVEL1 & HWBE)
+#define EFUSE_DEFAULT (FUSE_BODLEVEL0 & FUSE_BODLEVEL1 & FUSE_HWBE)
 
 
 /* Lock Bits */

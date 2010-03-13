@@ -104,6 +104,7 @@
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
   [#27434] Arguments of macros must be protected in parentheses
+  [#28575] Minor bug in iousb162.h - missing FUSE_ prefixes
   [#28688] using_tools.dox fails to build due to extra underscore
   [#28756] Bug in AVR libc 1.6.7 (power.h for 8-bit AVR)
   [#28812] iotn48.h TWS# bits off by one
