@@ -206,7 +206,11 @@ avr_HEADERS = \
     version.h \
     wdt.h
 
+nodist_avr_HEADERS = \
+    builtins.h
+
 EXTRA_DIST = \
+    builtins.h.in \
     version.h.in
 
 do_subst = sed \

@@ -44,13 +44,8 @@ m4_define([avr_libc_reldate],  [20090205])dnl    release date
 dnl end of library versioning data
 
 dnl odd minor number marks a development branch, append date to version there
-m4_if(m4_eval(avr_libc_minor % 2 == 1), [0], [dnl
-  m4_define([avr_libc_version],
-            avr_libc_major.avr_libc_minor.avr_libc_revision)dnl
-  ],[dnl
-  m4_define([avr_libc_version],
-            avr_libc_major.avr_libc_minor.avr_libc_revision.avr_libc_reldate)dnl
-  ])dnl
+m4_define([avr_libc_version],
+          avr_libc_major.avr_libc_minor.avr_libc_revision)dnl
 m4_define([avr_libc_version_numeric],
           m4_eval(10000 * avr_libc_major + dnl
                     100 * avr_libc_minor + dnl
@@ -326,6 +321,9 @@ AC_SUBST(DOC_INST_DIR)
 FNO_JUMP_TABLES=""
 AC_SUBST(FNO_JUMP_TABLES)
 
+HAS_DELAY_CYCLES=0
+AC_SUBST(HAS_DELAY_CYCLES)
+
 AC_DEFUN(
   CHECK_MNO_TABLEJUMP,
   [
@@ -372,8 +370,29 @@ AC_DEFUN(
   ]
 )
 
+AC_DEFUN(
+  CHECK_BUILTIN_DELAY_CYCLES,
+  [
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(whether ${CC} supports __builtin_avr_delay_cycles)
+    AC_LINK_IFELSE(
+      [AC_LANG_PROGRAM([extern void __builtin_avr_delay_cycles(unsigned long);],
+      		       [__builtin_avr_delay_cycles(42);])],
+      [has_delay_cycles=yes],
+      [has_delay_cycles=no]
+    )
+    if test "x$has_delay_cycles" = "xyes"
+    then
+      HAS_DELAY_CYCLES=1
+    fi
+    AC_MSG_RESULT($has_delay_cycles)
+    CC=${old_CC}
+  ]
+)
+
 CHECK_MNO_TABLEJUMP
 CHECK_FNO_JUMP_TABLES
+CHECK_BUILTIN_DELAY_CYCLES
 
 dnl Some devices are only handled by newer version of gcc. This macro lets us
 dnl probe to see if the installed avr-gcc supports a questionable device.
@@ -943,8 +962,10 @@ AC_CONFIG_FILES([
 	doc/examples/Makefile
 	include/Makefile
 	include/avr/Makefile
+	include/avr/builtins.h
 	include/compat/Makefile
 	include/util/Makefile
+	include/util/delay.h
 	libc/Makefile
 	libc/misc/Makefile
 	libc/pmstring/Makefile

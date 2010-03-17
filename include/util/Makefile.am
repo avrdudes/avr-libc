@@ -33,8 +33,13 @@ avrdir = $(prefix)/avr/include/util
 avr_HEADERS = \
     atomic.h \
     crc16.h \
-    delay.h \
     delay_basic.h \
     setbaud.h \
     parity.h \
     twi.h
+
+nodist_avr_HEADERS = \
+    delay.h
+
+EXTRA_DIST = \
+    delay.h.in

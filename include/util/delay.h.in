@@ -35,6 +35,10 @@
 #ifndef _UTIL_DELAY_H_
 #define _UTIL_DELAY_H_ 1
 
+#ifndef __HAS_DELAY_CYCLES
+#define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
+#endif
+
 #include <inttypes.h>
 #include <util/delay_basic.h>
 
@@ -111,6 +115,10 @@ _delay_ms(double __ms)
 {
 	uint16_t __ticks;
 	double __tmp = ((F_CPU) / 4e3) * __ms;
+#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__)
+	extern void __builtin_avr_delay_cycles(unsigned long);
+	__builtin_avr_delay_cycles(__tmp);
+#else
 	if (__tmp < 1.0)
 		__ticks = 1;
 	else if (__tmp > 65535)
@@ -128,6 +136,7 @@ _delay_ms(double __ms)
 	else
 		__ticks = (uint16_t)__tmp;
 	_delay_loop_2(__ticks);
+#endif
 }
 
 /**
@@ -149,6 +158,10 @@ _delay_us(double __us)
 {
 	uint8_t __ticks;
 	double __tmp = ((F_CPU) / 3e6) * __us;
+#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__)
+	extern void __builtin_avr_delay_cycles(unsigned long);
+	__builtin_avr_delay_cycles(__tmp);
+#else
 	if (__tmp < 1.0)
 		__ticks = 1;
 	else if (__tmp > 255)
@@ -159,6 +172,7 @@ _delay_us(double __us)
 	else
 		__ticks = (uint8_t)__tmp;
 	_delay_loop_1(__ticks);
+#endif
 }
 
 
