@@ -1,3 +1,8 @@
+2010-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
+
+    * include/avr/iotn20.h: New file.
+    * include/avr/iotn40.h: New file.
+
 2010-03-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix bug #28575.
