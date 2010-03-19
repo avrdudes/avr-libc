@@ -13,6 +13,28 @@
 	* include/avr/iousb646.h: Same.
 	* NEWS: Add to fixed bug list.
 
+2010-02-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Probe the compiler for the availability of the
+	__builtin_avr_delay_cycles() function, and modify the header files
+	<util/delay.h> and <avr/builtins.h> appropriately.  Note that the
+	modification is done by setting __HAS_DELAY_CYCLES on top of those
+	files, which has been left overridable from the compiler
+	environment (i.e., commandline -D option) on purpose.  Note also
+	that _delay_us() and _delay_ms() can only use
+	__builtin_avr_delay_cycles() if optimization is enabled as they'd
+	otherwise try to pass a floating-point argument to it which is not
+	allowed.  (The compiler does not seem to be able to convert it
+	into an unsigned long internally, not even with a type cast.)
+	However, not enabling optimization for them yields garbage timing
+	anyway, due to moving the compile-time constant floating-point
+	calculations from the compiler into the AVR.
+	* configure.ac: Add detection of __builtin_avr_delay_cycles
+	* include/util/delay.h.in: repocopied from delay.h
+	* include/util/Makefile.am: added delay.h.in
+	* include/avr/builtins.h.in: New file.
+	* include/avr/Makefile.am: added builtins.h.in
+
 2010-03-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix bug #28812.
