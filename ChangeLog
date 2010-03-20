@@ -1,3 +1,8 @@
+2010-03-20  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/fuse.h: Add definition of FUSES for XMEGA devices.
+	* include/avr/iox128a1u.h: Regenerate file. New definitions, corrections.
+
 2010-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
     * include/avr/iotn20.h: New file.

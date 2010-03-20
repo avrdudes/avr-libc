@@ -260,9 +260,14 @@ typedef struct
 
 #endif
 
-#ifndef FUSES
-#define FUSES __fuse_t __fuse FUSEMEM
+#if !defined(FUSES)
+  #if defined(__AVR_XMEGA__)
+    #define FUSES NVM_FUSES_t __fuse FUSEMEM
+  #else
+    #define FUSES __fuse_t __fuse FUSEMEM
+  #endif
 #endif
+
 
 #endif /* !__ASSEMBLER__ */
 
