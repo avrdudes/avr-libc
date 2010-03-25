@@ -232,6 +232,8 @@
   + ATmega645P
   + ATmega6450P
   + ATmega329PA
+  + ATxmega128A1U
+  + ATxmega64A1U
 
 
 * Optimized functions:

@@ -345,12 +345,16 @@
 # define _EEPROM_SUFFIX   _x32d4
 #elif defined (__AVR_ATxmega64A1__)
 # define _EEPROM_SUFFIX   _x64a1
+#elif defined (__AVR_ATxmega64A1U__)
+# define _EEPROM_SUFFIX   _x64a1u
 #elif defined (__AVR_ATxmega64A3__)
 # define _EEPROM_SUFFIX   _x64a3
 #elif defined (__AVR_ATxmega64D3__)
 # define _EEPROM_SUFFIX   _x64d3
 #elif defined (__AVR_ATxmega128A1__)
 # define _EEPROM_SUFFIX   _x128a1
+#elif defined (__AVR_ATxmega128A1U__)
+# define _EEPROM_SUFFIX   _x128a1u
 #elif defined (__AVR_ATxmega128A3__)
 # define _EEPROM_SUFFIX   _x128a3
 #elif defined (__AVR_ATxmega128D3__)

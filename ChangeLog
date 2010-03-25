@@ -1,3 +1,18 @@
+2010-03-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add support for new devices: ATxmega128A1U, ATxmega64A1U.
+	* configure.ac: Add support for new devices.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item.
+
 2010-03-22  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox64a1u.h: New file.

@@ -912,6 +912,9 @@ AM_CONDITIONAL(HAS_avrxmega5, test "x$HAS_avrxmega5" = "xyes")
 CHECK_AVR_DEVICE(atxmega64a1)
 AM_CONDITIONAL(HAS_atxmega64a1, test "x$HAS_atxmega64a1" = "xyes")
 
+CHECK_AVR_DEVICE(atxmega64a1u)
+AM_CONDITIONAL(HAS_atxmega64a1u, test "x$HAS_atxmega64a1u" = "xyes")
+
 
 # avrxmega6
 CHECK_AVR_DEVICE(avrxmega6)
@@ -946,6 +949,8 @@ AM_CONDITIONAL(HAS_avrxmega7, test "x$HAS_avrxmega7" = "xyes")
 CHECK_AVR_DEVICE(atxmega128a1)
 AM_CONDITIONAL(HAS_atxmega128a1, test "x$HAS_atxmega128a1" = "xyes")
 
+CHECK_AVR_DEVICE(atxmega128a1u)
+AM_CONDITIONAL(HAS_atxmega128a1u, test "x$HAS_atxmega128a1u" = "xyes")
 
 
 # Generate all files from *.in sources.
@@ -1224,6 +1229,7 @@ AC_CONFIG_FILES([
 AC_CONFIG_FILES([
 	avr/lib/avrxmega5/Makefile
 	avr/lib/avrxmega5/atxmega64a1/Makefile
+	avr/lib/avrxmega5/atxmega64a1u/Makefile
 ])
 
 # avrxmega6
@@ -1242,6 +1248,7 @@ AC_CONFIG_FILES([
 AC_CONFIG_FILES([
 	avr/lib/avrxmega7/Makefile
 	avr/lib/avrxmega7/atxmega128a1/Makefile
+	avr/lib/avrxmega7/atxmega128a1u/Makefile
 ])
 
 
