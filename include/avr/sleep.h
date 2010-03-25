@@ -472,6 +472,23 @@
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
     } while(0)
 
+#elif defined(__AVR_ATtiny4__) \
+|| defined(__AVR_ATtiny5__) \
+|| defined(__AVR_ATtiny9__) \
+|| defined(__AVR_ATtiny10__) \
+|| defined(__AVR_ATtiny20__) \
+|| defined(__AVR_ATtiny40__)
+
+    #define SLEEP_MODE_IDLE         0
+    #define SLEEP_MODE_ADC          _BV(SM0)
+    #define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+    #define SLEEP_MODE_STANDBY      _BV(SM2)
+
+    #define set_sleep_mode(mode) \
+    do { \
+        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
+    } while(0)
+
 #else
 
     #error "No SLEEP mode defined for this device."

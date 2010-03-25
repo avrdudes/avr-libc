@@ -1,5 +1,19 @@
 2010-03-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Add support for new architecture: avrtiny10. Add support for new devices:
+	attiny4, attiny5, attiny9, attiny10, attiny20, attiny40.
+	* configure.ac: Add support for new devices.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/Makefile.am: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* NEWS: Add news item.
+
+2010-03-25  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Add support for new devices: ATxmega128A1U, ATxmega64A1U.
 	* configure.ac: Add support for new devices.
 	* devtools/gen-avr-lib-tree.sh: Same.
@@ -24,8 +38,8 @@
 
 2010-03-19  Eric B. Weddington  <eric.weddington@atmel.com>
 
-    * include/avr/iotn20.h: New file.
-    * include/avr/iotn40.h: New file.
+	* include/avr/iotn20.h: New file.
+	* include/avr/iotn40.h: New file.
 
 2010-03-17  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

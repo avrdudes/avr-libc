@@ -148,11 +148,15 @@ compile-time.
 
 \par tinyAVR Devices:
 
+- attiny4
+- attiny5
+- attiny10
 - attiny11 \ref supp_dev_footnote_one "[1]"
 - attiny12 \ref supp_dev_footnote_one "[1]"
 - attiny13
 - attiny13a
 - attiny15 \ref supp_dev_footnote_one "[1]"
+- attiny20
 - attiny22
 - attiny24
 - attiny24a
@@ -163,6 +167,7 @@ compile-time.
 - attiny28 \ref supp_dev_footnote_one "[1]"
 - attiny2313
 - attiny2313a
+- attiny40
 - attiny4313
 - attiny43u
 - attiny44
@@ -313,7 +318,7 @@ avr-libc can be freely used and redistributed, provided the following
 license conditions are met.
 
 \verbatim
-Portions of avr-libc are Copyright (c) 1999-2008
+Portions of avr-libc are Copyright (c) 1999-2010
 Werner Boellmann,
 Dean Camera,
 Pieter Conradie,

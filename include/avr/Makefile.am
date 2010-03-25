@@ -138,12 +138,17 @@ avr_HEADERS = \
     iomxx0_1.h \
     iomxx4.h \
     iomxxhva.h \
+    iotn4.h \
+    iotn5.h \
+    iotn9.h \
+    iotn10.h \
     iotn11.h \
     iotn12.h \
     iotn13.h \
     iotn13a.h \
     iotn15.h \
     iotn167.h \
+    iotn20.h \
     iotn22.h \
     iotn2313.h \
     iotn2313a.h \
@@ -154,6 +159,7 @@ avr_HEADERS = \
     iotn261.h \
     iotn261a.h \
     iotn28.h \
+    iotn40.h \
     iotn4313.h \
     iotn43u.h \
     iotn44.h \

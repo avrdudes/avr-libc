@@ -1241,7 +1241,11 @@ do{ \
 }while(0)
 
 
-#elif defined(__AVR_ATtiny13A__)
+#elif defined(__AVR_ATtiny4__) \
+|| defined(__AVR_ATtiny5__) \
+|| defined(__AVR_ATtiny9__) \
+|| defined(__AVR_ATtiny10__) \
+|| defined(__AVR_ATtiny13A__) \
 
 #define power_adc_enable()   (PRR &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()  (PRR |= (uint8_t)(1 << PRADC))
@@ -1251,6 +1255,28 @@ do{ \
 
 #define power_all_enable()      (PRR &= (uint8_t)~((1<<PRADC)|(1<<PRTIM0)))
 #define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRTIM0)))
+
+
+#elif defined(__AVR_ATtiny20__) \
+|| defined(__AVR_ATtiny40__)
+
+#define power_adc_enable()   (PRR &= (uint8_t)~(1 << PRADC))
+#define power_adc_disable()  (PRR |= (uint8_t)(1 << PRADC))
+
+#define power_timer0_enable()   (PRR &= (uint8_t)~(1 << PRTIM0))
+#define power_timer0_disable()  (PRR |= (uint8_t)(1 << PRTIM0))
+
+#define power_timer1_enable()   (PRR &= (uint8_t)~(1 << PRTIM1))
+#define power_timer1_disable()  (PRR |= (uint8_t)(1 << PRTIM1))
+
+#define power_spi_enable()   (PRR &= (uint8_t)~(1 << PRSPI))
+#define power_spi_disable()  (PRR |= (uint8_t)(1 << PRSPI))
+
+#define power_twi_enable()   (PRR &= (uint8_t)~(1 << PRTWI))
+#define power_twi_disable()  (PRR |= (uint8_t)(1 << PRTWI))
+
+#define power_all_enable()      (PRR &= (uint8_t)~((1<<PRADC)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRSPI)|(1<<PRTWI)))
+#define power_all_disable()     (PRR |= (uint8_t)((1<<PRADC)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRSPI)|(1<<PRTWI)))
 
 #endif
 

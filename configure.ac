@@ -953,6 +953,31 @@ CHECK_AVR_DEVICE(atxmega128a1u)
 AM_CONDITIONAL(HAS_atxmega128a1u, test "x$HAS_atxmega128a1u" = "xyes")
 
 
+# avrtiny10
+CHECK_AVR_DEVICE(avrtiny10)
+AM_CONDITIONAL(HAS_avrtiny10, test "x$HAS_avrtiny10" = "xyes")
+
+CHECK_AVR_DEVICE(attiny4)
+AM_CONDITIONAL(HAS_attiny4, test "x$HAS_attiny4" = "xyes")
+
+CHECK_AVR_DEVICE(attiny5)
+AM_CONDITIONAL(HAS_attiny5, test "x$HAS_attiny5" = "xyes")
+
+CHECK_AVR_DEVICE(attiny9)
+AM_CONDITIONAL(HAS_attiny9, test "x$HAS_attiny9" = "xyes")
+
+CHECK_AVR_DEVICE(attiny10)
+AM_CONDITIONAL(HAS_attiny10, test "x$HAS_attiny10" = "xyes")
+
+CHECK_AVR_DEVICE(attiny20)
+AM_CONDITIONAL(HAS_attiny20, test "x$HAS_attiny20" = "xyes")
+
+CHECK_AVR_DEVICE(attiny40)
+AM_CONDITIONAL(HAS_attiny40, test "x$HAS_attiny40" = "xyes")
+
+
+
+
 # Generate all files from *.in sources.
 
 AC_CONFIG_FILES([
@@ -1249,6 +1274,18 @@ AC_CONFIG_FILES([
 	avr/lib/avrxmega7/Makefile
 	avr/lib/avrxmega7/atxmega128a1/Makefile
 	avr/lib/avrxmega7/atxmega128a1u/Makefile
+])
+
+
+# avrtiny10
+AC_CONFIG_FILES([
+	avr/lib/avrtiny10/Makefile
+	avr/lib/avrtiny10/attiny4/Makefile
+	avr/lib/avrtiny10/attiny5/Makefile
+	avr/lib/avrtiny10/attiny9/Makefile
+	avr/lib/avrtiny10/attiny10/Makefile
+	avr/lib/avrtiny10/attiny20/Makefile
+	avr/lib/avrtiny10/attiny40/Makefile
 ])
 
 

@@ -394,6 +394,13 @@ AVR will be defined as well when using the standard levels gnu89
 
   <tr><td>avrxmega7</td><td>atxmega128a1</td><td>__AVR_ATxmega128A1__</td></tr>
   <tr><td>avrxmega7</td><td>atxmega128a1u</td><td>__AVR_ATxmega128A1U__</td></tr>
+  
+  <tr><td>avrtiny10</td><td>attiny4</td><td>__AVR_ATtiny4__</td></tr>
+  <tr><td>avrtiny10</td><td>attiny5</td><td>__AVR_ATtiny5__</td></tr>
+  <tr><td>avrtiny10</td><td>attiny9</td><td>__AVR_ATtiny9__</td></tr>
+  <tr><td>avrtiny10</td><td>attiny10</td><td>__AVR_ATtiny10__</td></tr>
+  <tr><td>avrtiny10</td><td>attiny20</td><td>__AVR_ATtiny20__</td></tr>
+  <tr><td>avrtiny10</td><td>attiny40</td><td>__AVR_ATtiny40__</td></tr>
 
   </table>
   </p>
