@@ -249,6 +249,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny461a</td><td>__AVR_ATtiny461A__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny48</td><td>__AVR_ATtiny48__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84</td><td>__AVR_ATtiny84__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84a</td><td>__AVR_ATtiny84A__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny85</td><td>__AVR_ATtiny85__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861</td><td>__AVR_ATtiny861__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861a</td><td>__AVR_ATtiny861A__</td></tr>
@@ -323,15 +324,19 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega324p</td><td>__AVR_ATmega324P__</td></tr>
   <tr><td>avr5</td><td>atmega324pa</td><td>__AVR_ATmega324PA__</td></tr>
   <tr><td>avr5</td><td>atmega325</td><td>__AVR_ATmega325__</td></tr>
+  <tr><td>avr5</td><td>atmega325a</td><td>__AVR_ATmega325A__</td></tr>
   <tr><td>avr5</td><td>atmega325p</td><td>__AVR_ATmega325P__</td></tr>
   <tr><td>avr5</td><td>atmega3250</td><td>__AVR_ATmega3250__</td></tr>
+  <tr><td>avr5</td><td>atmega3250a</td><td>__AVR_ATmega3250A__</td></tr>
   <tr><td>avr5</td><td>atmega3250p</td><td>__AVR_ATmega3250P__</td></tr>
   <tr><td>avr5</td><td>atmega328</td><td>__AVR_ATmega328__</td></tr>
   <tr><td>avr5</td><td>atmega328p</td><td>__AVR_ATmega328P__</td></tr>
   <tr><td>avr5</td><td>atmega329</td><td>__AVR_ATmega329__</td></tr>
+  <tr><td>avr5</td><td>atmega329a</td><td>__AVR_ATmega329A__</td></tr>
   <tr><td>avr5</td><td>atmega329p</td><td>__AVR_ATmega329P__</td></tr>
   <tr><td>avr5</td><td>atmega329pa</td><td>__AVR_ATmega329PA__</td></tr>
   <tr><td>avr5</td><td>atmega3290</td><td>__AVR_ATmega3290__</td></tr>
+  <tr><td>avr5</td><td>atmega3290a</td><td>__AVR_ATmega3290A__</td></tr>
   <tr><td>avr5</td><td>atmega3290p</td><td>__AVR_ATmega3290P__</td></tr>
   <tr><td>avr5</td><td>atmega32c1</td><td>__AVR_ATmega32C1__</td></tr>
   <tr><td>avr5</td><td>atmega32hvb</td><td>__AVR_ATmega32HVB__</td></tr>

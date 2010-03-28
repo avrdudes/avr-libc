@@ -214,13 +214,17 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega324PA__) \
 || defined(__AVR_ATmega325__) \
+|| defined(__AVR_ATmega325A__) \
 || defined(__AVR_ATmega3250__) \
+|| defined(__AVR_ATmega3250A__) \
 || defined(__AVR_ATmega328__) \
 || defined(__AVR_ATmega328P__) \
 || defined(__AVR_ATmega329__) \
+|| defined(__AVR_ATmega329A__) \
 || defined(__AVR_ATmega329P__) \
 || defined(__AVR_ATmega329PA__) \
 || defined(__AVR_ATmega3290__) \
+|| defined(__AVR_ATmega3290A__) \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32HVB__) \
@@ -398,7 +402,7 @@ __asm__ __volatile__ (  \
     See \c WDT0_15MS
     Note: This is only available on the 
     ATtiny2313, 
-    ATtiny24, ATtiny44, ATtiny84, 
+    ATtiny24, ATtiny44, ATtiny84, ATtiny84A,
     ATtiny25, ATtiny45, ATtiny85, 
     ATtiny261, ATtiny461, ATtiny861, 
     ATmega48, ATmega88, ATmega168,
@@ -419,7 +423,7 @@ __asm__ __volatile__ (  \
     See \c WDT0_15MS
     Note: This is only available on the 
     ATtiny2313, 
-    ATtiny24, ATtiny44, ATtiny84, 
+    ATtiny24, ATtiny44, ATtiny84, ATtiny84A,
     ATtiny25, ATtiny45, ATtiny85, 
     ATtiny261, ATtiny461, ATtiny861, 
     ATmega48, ATmega88, ATmega168,

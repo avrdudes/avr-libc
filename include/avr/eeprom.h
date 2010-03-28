@@ -173,10 +173,14 @@
 # define _EEPROM_SUFFIX  _m324pa
 #elif defined (__AVR_ATmega325__)
 # define _EEPROM_SUFFIX  _m325
+#elif defined (__AVR_ATmega325A__)
+# define _EEPROM_SUFFIX  _m325a
 #elif defined (__AVR_ATmega325P__)
 # define _EEPROM_SUFFIX  _m325p
 #elif defined (__AVR_ATmega3250__)
 # define _EEPROM_SUFFIX  _m3250
+#elif defined (__AVR_ATmega3250A__)
+# define _EEPROM_SUFFIX  _m3250a
 #elif defined (__AVR_ATmega3250P__)
 # define _EEPROM_SUFFIX  _m3250p
 #elif defined (__AVR_ATmega328__)
@@ -185,12 +189,16 @@
 # define _EEPROM_SUFFIX  _m328p
 #elif defined (__AVR_ATmega329__)
 # define _EEPROM_SUFFIX  _m329
+#elif defined (__AVR_ATmega329A__)
+# define _EEPROM_SUFFIX  _m329a
 #elif defined (__AVR_ATmega329P__)
 # define _EEPROM_SUFFIX  _m329p
 #elif defined (__AVR_ATmega329PA__)
 # define _EEPROM_SUFFIX  _m329pa
 #elif defined (__AVR_ATmega3290__)
 # define _EEPROM_SUFFIX  _m3290
+#elif defined (__AVR_ATmega3290A__)
+# define _EEPROM_SUFFIX  _m3290a
 #elif defined (__AVR_ATmega3290P__)
 # define _EEPROM_SUFFIX  _m3290p
 #elif defined (__AVR_ATmega32HVB__)
@@ -311,6 +319,8 @@
 # define _EEPROM_SUFFIX _tn44a
 #elif defined (__AVR_ATtiny84__)
 # define _EEPROM_SUFFIX _tn84
+#elif defined (__AVR_ATtiny84A__)
+# define _EEPROM_SUFFIX _tn84a
 #elif defined (__AVR_ATtiny261__)
 # define _EEPROM_SUFFIX _tn261
 #elif defined (__AVR_ATtiny261A__)

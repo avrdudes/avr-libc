@@ -1,3 +1,18 @@
+2010-03-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Add support for new devices: attiny84a, atmega325a, atmega3250a,
+	atmega329a, atmega3290a.
+	* configure.ac: Add support for new devices.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/power.h: Same.
+	* include/avr/wdt.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/eeprom.h: Same.
+	* NEWS: Add news item.
+
 2010-03-25  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Add support for new architecture: avrtiny10. Add support for new devices:

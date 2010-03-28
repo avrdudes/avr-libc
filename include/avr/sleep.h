@@ -235,6 +235,7 @@
 || defined(__AVR_ATtiny44__) \
 || defined(__AVR_ATtiny44A__) \
 || defined(__AVR_ATtiny84__) \
+|| defined(__AVR_ATtiny84A__) \
 || defined(__AVR_ATtiny25__) \
 || defined(__AVR_ATtiny45__) \
 || defined(__AVR_ATtiny48__) \
@@ -356,13 +357,17 @@
 || defined(__AVR_ATmega324P__) \
 || defined(__AVR_ATmega324PA__) \
 || defined(__AVR_ATmega325__) \
+|| defined(__AVR_ATmega325A__) \
 || defined(__AVR_ATmega3250__) \
+|| defined(__AVR_ATmega3250A__) \
 || defined(__AVR_ATmega328__) \
 || defined(__AVR_ATmega328P__) \
 || defined(__AVR_ATmega329__) \
+|| defined(__AVR_ATmega329A__) \
 || defined(__AVR_ATmega329P__) \
 || defined(__AVR_ATmega329PA__) \
 || defined(__AVR_ATmega3290__) \
+|| defined(__AVR_ATmega3290A__) \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32HVB__) \

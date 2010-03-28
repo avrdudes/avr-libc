@@ -118,8 +118,10 @@ compile-time.
 - atmega324p
 - atmega324pa
 - atmega325
+- atmega325a
 - atmega325p
 - atmega3250
+- atmega3250a
 - atmega3250p
 - atmega328
 - atmega328p
@@ -177,6 +179,7 @@ compile-time.
 - attiny461a
 - attiny48
 - attiny84
+- attiny84a
 - attiny85
 - attiny861
 - attiny861a
@@ -204,9 +207,11 @@ compile-time.
 - atmega169p
 - atmega169pa
 - atmega329
+- atmega329a
 - atmega329p
 - atmega329pa
 - atmega3290
+- atmega3290a
 - atmega3290p
 - atmega649
 - atmega649a

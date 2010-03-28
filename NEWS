@@ -242,7 +242,11 @@
   + ATtiny10
   + ATtiny20
   + ATtiny40
-
+  + ATtiny84A
+  + ATmega325A
+  + ATmega3250A
+  + ATmega329A
+  + ATmega3290A
 
 * Optimized functions:
 

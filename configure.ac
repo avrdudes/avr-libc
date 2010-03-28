@@ -506,6 +506,9 @@ AM_CONDITIONAL(HAS_attiny48, test "x$HAS_attiny48" = "xyes")
 CHECK_AVR_DEVICE(attiny84)
 AM_CONDITIONAL(HAS_attiny84, test "x$HAS_attiny84" = "xyes")
 
+CHECK_AVR_DEVICE(attiny84a)
+AM_CONDITIONAL(HAS_attiny84a, test "x$HAS_attiny84a" = "xyes")
+
 CHECK_AVR_DEVICE(attiny85)
 AM_CONDITIONAL(HAS_attiny85, test "x$HAS_attiny85" = "xyes")
 
@@ -721,11 +724,17 @@ AM_CONDITIONAL(HAS_atmega324pa, test "x$HAS_atmega324pa" = "xyes")
 CHECK_AVR_DEVICE(atmega325)
 AM_CONDITIONAL(HAS_atmega325, test "x$HAS_atmega325" = "xyes")
 
+CHECK_AVR_DEVICE(atmega325a)
+AM_CONDITIONAL(HAS_atmega325a, test "x$HAS_atmega325a" = "xyes")
+
 CHECK_AVR_DEVICE(atmega325p)
 AM_CONDITIONAL(HAS_atmega325p, test "x$HAS_atmega325p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega3250)
 AM_CONDITIONAL(HAS_atmega3250, test "x$HAS_atmega3250" = "xyes")
+
+CHECK_AVR_DEVICE(atmega3250a)
+AM_CONDITIONAL(HAS_atmega3250a, test "x$HAS_atmega3250a" = "xyes")
 
 CHECK_AVR_DEVICE(atmega3250p)
 AM_CONDITIONAL(HAS_atmega3250p, test "x$HAS_atmega3250p" = "xyes")
@@ -739,6 +748,9 @@ AM_CONDITIONAL(HAS_atmega328p, test "x$HAS_atmega328p" = "xyes")
 CHECK_AVR_DEVICE(atmega329)
 AM_CONDITIONAL(HAS_atmega329, test "x$HAS_atmega329" = "xyes")
 
+CHECK_AVR_DEVICE(atmega329a)
+AM_CONDITIONAL(HAS_atmega329a, test "x$HAS_atmega329a" = "xyes")
+
 CHECK_AVR_DEVICE(atmega329p)
 AM_CONDITIONAL(HAS_atmega329p, test "x$HAS_atmega329p" = "xyes")
 
@@ -747,6 +759,9 @@ AM_CONDITIONAL(HAS_atmega329pa, test "x$HAS_atmega329pa" = "xyes")
 
 CHECK_AVR_DEVICE(atmega3290)
 AM_CONDITIONAL(HAS_atmega3290, test "x$HAS_atmega3290" = "xyes")
+
+CHECK_AVR_DEVICE(atmega3290a)
+AM_CONDITIONAL(HAS_atmega3290a, test "x$HAS_atmega3290a" = "xyes")
 
 CHECK_AVR_DEVICE(atmega3290p)
 AM_CONDITIONAL(HAS_atmega3290p, test "x$HAS_atmega3290p" = "xyes")
@@ -1065,6 +1080,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr25/attiny461a/Makefile
 	avr/lib/avr25/attiny48/Makefile
 	avr/lib/avr25/attiny84/Makefile
+	avr/lib/avr25/attiny84a/Makefile
 	avr/lib/avr25/attiny85/Makefile
 	avr/lib/avr25/attiny861/Makefile
 	avr/lib/avr25/attiny861a/Makefile
@@ -1165,15 +1181,19 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega324p/Makefile
 	avr/lib/avr5/atmega324pa/Makefile
 	avr/lib/avr5/atmega325/Makefile
+	avr/lib/avr5/atmega325a/Makefile
 	avr/lib/avr5/atmega325p/Makefile
 	avr/lib/avr5/atmega3250/Makefile
+	avr/lib/avr5/atmega3250a/Makefile
 	avr/lib/avr5/atmega3250p/Makefile
 	avr/lib/avr5/atmega328/Makefile
 	avr/lib/avr5/atmega328p/Makefile
 	avr/lib/avr5/atmega329/Makefile
+	avr/lib/avr5/atmega329a/Makefile
 	avr/lib/avr5/atmega329p/Makefile
 	avr/lib/avr5/atmega329pa/Makefile
 	avr/lib/avr5/atmega3290/Makefile
+	avr/lib/avr5/atmega3290a/Makefile
 	avr/lib/avr5/atmega3290p/Makefile
 	avr/lib/avr5/atmega32c1/Makefile
 	avr/lib/avr5/atmega32hvb/Makefile

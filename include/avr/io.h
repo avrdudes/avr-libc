@@ -210,21 +210,21 @@
 #  include <avr/iom324.h>
 #elif defined (__AVR_ATmega324PA__)
 #  include <avr/iom324pa.h>
-#elif defined (__AVR_ATmega325__)
+#elif defined (__AVR_ATmega325__) || defined (__AVR_ATmega325A__)
 #  include <avr/iom325.h>
 #elif defined (__AVR_ATmega325P__)
 #  include <avr/iom325.h>
-#elif defined (__AVR_ATmega3250__)
+#elif defined (__AVR_ATmega3250__) || defined (__AVR_ATmega3250A__)
 #  include <avr/iom3250.h>
 #elif defined (__AVR_ATmega3250P__)
 #  include <avr/iom3250.h>
 #elif defined (__AVR_ATmega328P__) || defined (__AVR_ATmega328__)
 #  include <avr/iom328p.h>
-#elif defined (__AVR_ATmega329__)
+#elif defined (__AVR_ATmega329__) || defined (__AVR_ATmega329A__)
 #  include <avr/iom329.h>
 #elif defined (__AVR_ATmega329P__) || defined (__AVR_ATmega329PA__)
 #  include <avr/iom329.h>
-#elif defined (__AVR_ATmega3290__)
+#elif defined (__AVR_ATmega3290__) || defined (__AVR_ATmega3290A__)
 #  include <avr/iom3290.h>
 #elif defined (__AVR_ATmega3290P__)
 #  include <avr/iom3290.h>
@@ -342,7 +342,7 @@
 #  include <avr/iotn44.h>
 #elif defined (__AVR_ATtiny44A__)
 #  include <avr/iotn44a.h>
-#elif defined (__AVR_ATtiny84__)
+#elif defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny84A__)
 #  include <avr/iotn84.h>
 #elif defined (__AVR_ATtiny261__)
 #  include <avr/iotn261.h>
