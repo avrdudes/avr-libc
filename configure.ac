@@ -850,6 +850,10 @@ AM_CONDITIONAL(HAS_atmega64m1, test "x$HAS_atmega64m1" = "xyes")
 CHECK_AVR_DEVICE(atmega128rfa1)
 AM_CONDITIONAL(HAS_atmega128rfa1, test "x$HAS_atmega128rfa1" = "xyes")
 
+CHECK_AVR_DEVICE(m3000)
+AM_CONDITIONAL(HAS_m3000, test "x$HAS_m3000" = "xyes")
+
+
 
 #avr51
 CHECK_AVR_DEVICE(avr51)
@@ -1227,6 +1231,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega1281/Makefile
 	avr/lib/avr5/atmega1284p/Makefile
 	avr/lib/avr5/atmega128rfa1/Makefile
+	avr/lib/avr5/m3000/Makefile
 ])
 
 #avr51

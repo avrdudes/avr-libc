@@ -415,6 +415,8 @@
 #  include <avr/iotn12.h>
 #elif defined (__AVR_ATtiny11__)
 #  include <avr/iotn11.h>
+#elif defined (__AVR_M3000__)
+#  include <avr/iom3000.h>
 #else
 #  if !defined(__COMPILING_AVR_LIBC__)
 #    warning "device type not defined"

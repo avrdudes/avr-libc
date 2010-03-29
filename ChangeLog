@@ -1,5 +1,16 @@
 2010-03-28  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Add support for new device: m3000.
+	* configure.ac: Add support for new device.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* include/avr/io.h: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/iom3000.h: New file.
+	* NEWS: Add news item.
+
+2010-03-28  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Add support for new devices: attiny84a, atmega325a, atmega3250a,
 	atmega329a, atmega3290a.
 	* configure.ac: Add support for new devices.

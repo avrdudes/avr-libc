@@ -285,6 +285,7 @@ compile-time.
 - at86rf401
 - at90scr100
 - ata6289
+- m3000 \ref supp_dev_footnote_four "[4]"
 
 \par Classic AVR Devices:
 
@@ -316,6 +317,11 @@ these. More information would be welcomed.]
 
 \note <b>[3]</b> The at76c711 is a USB to fast serial interface bridge chip
 using an AVR core.
+
+\anchor supp_dev_footnote_four
+
+\note <b>[4]</b> The m3000 is a motor controller AVR ASIC from Intelligent
+Motion Systems (IMS) / Schneider Electric.
 
 \section license avr-libc License
 
