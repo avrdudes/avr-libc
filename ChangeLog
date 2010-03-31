@@ -1,5 +1,10 @@
 2010-03-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* crt1/gcrt1.S: Add more interrupt vectors to cover the ATxmega128A1U
+	device.
+
+2010-03-30  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* xml/avrgcc-header: Modify XMEGA portion of script to not generate CPU
 	and GPIO definitions that include references to non-existent structures.
 	This is a partial fix for bug #28901, for future header files.

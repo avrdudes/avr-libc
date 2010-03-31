@@ -175,6 +175,8 @@ __vectors:
 	vector	__vector_123
 	vector	__vector_124
 	vector	__vector_125
+	vector	__vector_126
+	vector	__vector_127
 	.endfunc
 
 	/* Handle unexpected interrupts (enabled and no handler), which
