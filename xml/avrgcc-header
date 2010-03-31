@@ -417,17 +417,22 @@ echo "IO Module Instances. Mapped to memory." >> $headerfile
 echo "==========================================================================" >> $headerfile
 echo "*/" >> $headerfile
 echo "" >> $headerfile
-xml sel -T \
-    -t -m /AVRPART/group \
-        -s "A:T:-" "@offset" \
-        -v "concat('#define ',@name,'    (*(',@implements,'_t *) ',@offset,')  /* ',@text,' */')" -n \
-    -t -n -n $headerfile-iogroups.xml >> $headerfile
+for i in $(xml sel -T -t -m /AVRPART/group -s "A:T:-" "@offset" -v "concat(@name,' ')" $headerfile-iogroups.xml | sed "s,GPIO ,,g" | sed "s,CPU ,,g") ; do
+    IMPLEMENTS=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v @implements $headerfile-iogroups.xml)
+    OFFSET=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v @offset $headerfile-iogroups.xml)
+    TEXT=$(xml sel -T -t -m '/AVRPART/group[@name='\'${i}\'']' -v @text $headerfile-iogroups.xml)
+    echo "#define ${i}    (*(${IMPLEMENTS}_t *) ${OFFSET})  /* ${TEXT} */" >> $headerfile
+done
+echo "" >> $headerfile
+echo "" >> $headerfile
 
 
 
 echo "#endif /* !defined (__ASSEMBLER__) */" >> $headerfile
 echo "" >> $headerfile
 echo "" >> $headerfile
+
+
 
 
 # XMEGA Flattened fully qualified IO register names
