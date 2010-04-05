@@ -38,6 +38,7 @@
 #include <avr/iotnx5.h>
 
 #define SPM_PAGESIZE 32
+#define RAMSTART     (0x60)
 #define RAMEND       0xDF
 #define XRAMEND      RAMEND
 #define E2END        0x7F

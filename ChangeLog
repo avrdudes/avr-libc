@@ -1,3 +1,43 @@
+2010-04-05  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #27367.
+	* include/avr/iom8.h: Add RAMSTART definition.
+	* include/avr/iom16.h: Same.
+	* include/avr/iom32.h: Same.
+	* include/avr/iom164.h: Same.
+	* include/avr/iom324.h: Same.
+	* include/avr/iom644.h: Same.
+	* include/avr/iom644p.h: Same.
+	* include/avr/iom328p.h: Same.
+	* include/avr/iom48.h: Same.
+	* include/avr/iom48p.h: Same.
+	* include/avr/iom88.h: Same.
+	* include/avr/iom88p.h: Same.
+	* include/avr/iom168.h: Same.
+	* include/avr/iom168p.h: Same.
+	* include/avr/iom325.h: Same.
+	* include/avr/iom645.h: Same.
+	* include/avr/iom3250.h: Same.
+	* include/avr/iom6450.h: Same.
+	* include/avr/iotn2313.h: Same.
+	* include/avr/iom8515.h: Same.
+	* include/avr/iom8535.h: Same.
+	* include/avr/iotn13.h: Same.
+	* include/avr/iotn24.h: Same.
+	* include/avr/iotn25.h: Same.
+	* include/avr/iotn44.h: Same.
+	* include/avr/iotn45.h: Same.
+	* include/avr/iotn84.h: Same.
+	* include/avr/iotn85.h: Same.
+	* include/avr/iotn261.h: Same.
+	* include/avr/iotn461.h: Same.
+	* include/avr/iotn861.h: Same.
+	* include/avr/iotn88.h: Same.
+	* include/avr/iotn48.h: Same.
+	* include/avr/iom1281.h: Same.
+	* include/avr/iom1284p.h: Same.
+	* NEW: Add to fixed bug list.
+
 2010-03-30  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* crt1/gcrt1.S: Add more interrupt vectors to cover the ATxmega128A1U

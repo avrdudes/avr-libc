@@ -320,6 +320,7 @@
 #define _VECTORS_SIZE 20
 
 #define SPM_PAGESIZE 32
+#define RAMSTART     (0x60)
 #define RAMEND      0x9F
 #define XRAMEND     RAMEND
 #define E2END       0x3F

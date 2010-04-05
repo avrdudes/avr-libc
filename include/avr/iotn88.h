@@ -706,6 +706,7 @@
 
 /* Constants */
 #define RAMEND       0x1FF
+#define RAMSTART     (0x100)
 #define XRAMSIZE     0
 #define XRAMEND      RAMEND
 #define E2END        0x3F

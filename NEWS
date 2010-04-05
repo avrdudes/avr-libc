@@ -103,6 +103,7 @@
   [#26840] Missing #define in iom32m1.h
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
+  [#27367] RAMSTART missing in elder device header files
   [#27434] Arguments of macros must be protected in parentheses
   [#28575] Minor bug in iousb162.h - missing FUSE_ prefixes
   [#28688] using_tools.dox fails to build due to extra underscore

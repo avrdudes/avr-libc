@@ -706,6 +706,7 @@
 
 /* Constants */
 #define SPM_PAGESIZE 32
+#define RAMSTART     (0x100)
 #define RAMEND       0x1FF
 #define XRAMSIZE     0
 #define XRAMEND      RAMEND
