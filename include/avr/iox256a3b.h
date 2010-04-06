@@ -2531,13 +2531,11 @@ IO Module Instances. Mapped to memory.
 ==========================================================================
 */
 
-#define GPIO    (*(GPIO_t *) 0x0000)  /* General Purpose IO Registers */
 #define VPORT0    (*(VPORT_t *) 0x0010)  /* Virtual Port 0 */
 #define VPORT1    (*(VPORT_t *) 0x0014)  /* Virtual Port 1 */
 #define VPORT2    (*(VPORT_t *) 0x0018)  /* Virtual Port 2 */
 #define VPORT3    (*(VPORT_t *) 0x001C)  /* Virtual Port 3 */
 #define OCD    (*(OCD_t *) 0x002E)  /* On-Chip Debug System */
-#define CPU    (*(CPU_t *) 0x0030)  /* CPU Registers */
 #define CLK    (*(CLK_t *) 0x0040)  /* Clock System */
 #define SLEEP    (*(SLEEP_t *) 0x0048)  /* Sleep Controller */
 #define OSC    (*(OSC_t *) 0x0050)  /* Oscillator Control */
