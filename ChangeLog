@@ -1,5 +1,10 @@
 2010-04-06  Anitha Boyapati <anitha.boyapati@atmel.com>
 
+        Fix bug #28627.
+	* include/avr/power.h - ATmega32U2 defined for clock_prescale_set.
+
+2010-04-06  Anitha Boyapati <anitha.boyapati@atmel.com>
+
         Fix bug #28901.
         * include/avr/iox128a1.h - Removed GPIO and CPU memory map entries.
         * include/avr/iox128a1u.h - Same.
