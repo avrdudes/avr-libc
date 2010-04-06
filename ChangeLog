@@ -1,5 +1,10 @@
 2010-04-06  Anitha Boyapati <anitha.boyapati@atmel.com>
 
+        Fix bug #28584.
+	* include/avr/iocanxx.h - Add word definitions CANIE and CANEN.
+
+2010-04-06  Anitha Boyapati <anitha.boyapati@atmel.com>
+
         Fix bug #28627.
 	* include/avr/power.h - ATmega32U2 defined for clock_prescale_set.
 

@@ -377,11 +377,17 @@
 /* RegDef:  CAN General Interrupt Enable Register*/
 #define CANGIE _SFR_MEM8(0xDB)
 
+/* Word Definition:  CAN Enable MOb Register*/
+#define CANEN _SFR_MEM16(0xDC) 
+
 /* RegDef:  CAN Enable MOb Register*/
 #define CANEN2 _SFR_MEM8(0xDC)
 
 /* RegDef:  CAN Enable MOb Register*/
 #define CANEN1 _SFR_MEM8(0xDD)
+
+/* Word Definition:  CAN Enable Interrupt MOb Register*/
+#define CANIE _SFR_MEM16(0xDE) 
 
 /* RegDef:  CAN Enable Interrupt MOb Register*/
 #define CANIE2 _SFR_MEM8(0xDE)

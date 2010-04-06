@@ -109,6 +109,7 @@
   [#28688] using_tools.dox fails to build due to extra underscore
   [#28756] Bug in AVR libc 1.6.7 (power.h for 8-bit AVR)
   [#28812] iotn48.h TWS# bits off by one
+  [#28584] iocanxx.h Add word definitions to iocanxx.h
   [#28627] power.h ATMEGA32U2 clock_prescale_set() not available
   [#28901] Xmega header files with missing definitions for GPIO_t and CPU_t
 
