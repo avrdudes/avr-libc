@@ -1,5 +1,11 @@
 2010-04-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac (CHECK_BUILTIN_DELAY_CYCLES): Reimplement as a
+	compiler + grep pipeline rather than through AC_LINK_IFELSE, as we
+	cannot rely on a working linker while building the library.
+
+2010-04-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* devtools/gen-avr-lib-tree.sh: Fix directory name for ATxmega64A1U.
 
 2010-04-06  Anitha Boyapati <anitha.boyapati@atmel.com>

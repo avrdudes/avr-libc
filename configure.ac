@@ -375,15 +375,16 @@ AC_DEFUN(
   [
     CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
     AC_MSG_CHECKING(whether ${CC} supports __builtin_avr_delay_cycles)
-    AC_LINK_IFELSE(
-      [AC_LANG_PROGRAM([extern void __builtin_avr_delay_cycles(unsigned long);],
-      		       [__builtin_avr_delay_cycles(42);])],
-      [has_delay_cycles=yes],
-      [has_delay_cycles=no]
-    )
-    if test "x$has_delay_cycles" = "xyes"
+    echo "extern void __builtin_avr_delay_cycles(unsigned long);\
+    int main(void) { __builtin_avr_delay_cycles(42); return 0; }" |\
+    ${CC} -S -xc -o- - |\
+    grep __builtin_avr_delay_cycles >/dev/null
+    if test "$?" != "0"
     then
       HAS_DELAY_CYCLES=1
+      has_delay_cycles="yes"
+    else
+      has_delay_cycles="no"
     fi
     AC_MSG_RESULT($has_delay_cycles)
     CC=${old_CC}
