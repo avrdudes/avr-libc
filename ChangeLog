@@ -1,3 +1,7 @@
+2010-04-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/gen-avr-lib-tree.sh: Fix directory name for ATxmega64A1U.
+
 2010-04-06  Anitha Boyapati <anitha.boyapati@atmel.com>
 
         Fix bug #28584.
