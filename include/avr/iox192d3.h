@@ -427,10 +427,18 @@ typedef struct EVSYS_struct
     register8_t CH1MUX;  /* Event Channel 1 Multiplexer */
     register8_t CH2MUX;  /* Event Channel 2 Multiplexer */
     register8_t CH3MUX;  /* Event Channel 3 Multiplexer */
+    register8_t reserved_0x04;
+    register8_t reserved_0x05;
+    register8_t reserved_0x06;
+    register8_t reserved_0x07;
     register8_t CH0CTRL;  /* Channel 0 Control Register */
     register8_t CH1CTRL;  /* Channel 1 Control Register */
     register8_t CH2CTRL;  /* Channel 2 Control Register */
     register8_t CH3CTRL;  /* Channel 3 Control Register */
+    register8_t reserved_0x0C;
+    register8_t reserved_0x0D;
+    register8_t reserved_0x0E;
+    register8_t reserved_0x0F;
     register8_t STROBE;  /* Event Strobe */
     register8_t DATA;  /* Event Data */
 } EVSYS_t;
@@ -981,6 +989,12 @@ typedef struct ADC_struct
     register8_t reserved_0x0E;
     register8_t reserved_0x0F;
     _WORDREGISTER(CH0RES);  /* Channel 0 Result */
+    register8_t reserved_0x12;
+    register8_t reserved_0x13;
+    register8_t reserved_0x14;
+    register8_t reserved_0x15;
+    register8_t reserved_0x16;
+    register8_t reserved_0x17;
     _WORDREGISTER(CMP);  /* Compare Value */
     register8_t reserved_0x1A;
     register8_t reserved_0x1B;

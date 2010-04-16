@@ -1,3 +1,14 @@
+2010-04-16  Anitha Boyapati <anitha.boyapati@atmel.com>
+
+        Fix bug #28574.
+	* include/avr/iox128d3.h - Modify EVSYS_t and ADC_t structures to 
+	  include reserved registers.	
+	* include/avr/iox16d4.h  - Same.
+	* include/avr/iox192d3.h - Same.
+	* include/avr/iox256d3.h - Same.
+	* include/avr/iox32d4.h  - Same.
+	* include/avr/iox64d3.h  - Same.
+
 2010-04-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac (CHECK_BUILTIN_DELAY_CYCLES): Reimplement as a

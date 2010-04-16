@@ -112,6 +112,7 @@
   [#28584] iocanxx.h Add word definitions to iocanxx.h
   [#28627] power.h ATMEGA32U2 clock_prescale_set() not available
   [#28901] Xmega header files with missing definitions for GPIO_t and CPU_t
+  [#28574] Xmega D ADC struct missing registers
 
 
 * Other changes:
