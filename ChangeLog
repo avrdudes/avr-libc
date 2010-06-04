@@ -1,3 +1,12 @@
+2010-06-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Add some initial malloc and realloc tests to test
+	suite.
+	* tests/simulate/stdlib/malloc-1.c: New file.
+	* tests/simulate/stdlib/malloc-2.c: (Ditto.)
+	* tests/simulate/stdlib/malloc-3.c: (Ditto.)
+	* tests/simulate/stdlib/realloc-1.c: (Ditto.)
+
 2010-04-16  Anitha Boyapati <anitha.boyapati@atmel.com>
 
         Fix bug #28574.

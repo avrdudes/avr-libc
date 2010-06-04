@@ -164,7 +164,22 @@ malloc(size_t len)
 	 * segment as dynamically requested from the operating system.
 	 * Since we don't have an operating system, just make sure
 	 * that we don't collide with the stack.
+	 * But first we check if there is a free chunk at the end of
+	 * the allocation area. Brkval is corrected downwards then,
+	 * so the free chunk gets added to the new chunk.
+	 * (fp2 still points to the last list entry from step 1)	 
 	 */
+	if (fp2 && (char*)fp2 + fp2->sz + sizeof(size_t) == __brkval) {
+    	__brkval = (char*)fp2;
+		for (fp1 = __flp, fp2 = 0;
+		     fp1->nx;
+	    	 fp2 = fp1, fp1 = fp1->nx)
+			{} 
+		if (fp2)
+			fp2->nx = 0;
+		else
+			__flp = 0;
+	}
 	if (__brkval == 0)
 		__brkval = __malloc_heap_start;
 	cp = __malloc_heap_end;
