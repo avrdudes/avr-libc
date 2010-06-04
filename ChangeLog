@@ -1,5 +1,13 @@
 2010-06-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Patch submitted by Stefan Ernst:
+	patch #6895: Improved malloc behaviour when expanding used area
+	bug #27235: malloc: Several things go wrong (part 1)
+	* stdlib/malloc.c: Improve allocation strategy.
+	* tests/simulate/regression/bug-27235-1.c: New file.
+
+2010-06-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Add some initial malloc and realloc tests to test
 	suite.
 	* tests/simulate/stdlib/malloc-1.c: New file.
