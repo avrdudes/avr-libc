@@ -1,3 +1,7 @@
+2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/stdlib/malloc-4.c: New file.
+
 2010-06-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Patch submitted by Stefan Ernst:
