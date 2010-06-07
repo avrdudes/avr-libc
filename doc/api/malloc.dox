@@ -214,7 +214,8 @@ When calling free(), a new freelist entry will be prepared.  An
 attempt is then made to aggregate the new entry with possible adjacent
 entries, yielding a single larger entry available for further
 allocations.  That way, the potential for heap fragmentation is hopefully
-reduced.
+reduced.  When deallocating the topmost chunk of memory, the size of the
+heap is reduced.
 
 A call to realloc() first determines whether the operation is about to
 grow or shrink the current allocation.  When shrinking, the case is

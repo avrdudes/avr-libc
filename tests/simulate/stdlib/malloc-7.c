@@ -67,39 +67,32 @@ int main(void)
     }
 
     free(ptrs[5]);
-    /* There must be exactly one entry in freelist. */
-    if ((char *)(ptrs[5]) - 2 != (void *)__flp) return __LINE__;
-    if (__flp->sz != 10) return __LINE__;
-    if (__flp->nx != NULL) return __LINE__;
-    if ((char *)(ptrs[5]) + 10 != (void *)__brkval) return __LINE__;
+    /* Freelist must be still empty, and __brkval reduced. */
+    if (__flp != NULL) return __LINE__;
+    if ((char *)(ptrs[5]) - 2 != __brkval) return __LINE__;
 
     free(ptrs[4]);
-    /* Still one entry expected. */
-    if ((char *)(ptrs[4]) - 2 != (void *)__flp) return __LINE__;
-    if (__flp->sz != 22) return __LINE__;
-    if (__flp->nx != NULL) return __LINE__;
-    if ((char *)(ptrs[4]) + 22 != (void *)__brkval) return __LINE__;
+    /* Still no entry, and __brkval further down. */
+    if (__flp != NULL) return __LINE__;
+    if ((char *)(ptrs[4]) - 2 != __brkval) return __LINE__;
 
     struct __freelist *ofp = __flp;
 
     free(ptrs[1]);
-    /* Another entry added. */
+    /* One entry added. */
     if ((char *)(ptrs[1]) - 2 != (void *)__flp) return __LINE__;
     if (__flp->sz != 10) return __LINE__;
     if (__flp->nx != (void *)ofp) return __LINE__;
 
     free(ptrs[3]);
-    /* Second entry must have been extended. */
-    if ((char *)(ptrs[3]) - 2 != (void *)__flp->nx) return __LINE__;
-    if (__flp->nx->sz != 34) return __LINE__;
-    if (__flp->nx->nx != NULL) return __LINE__;
-    if ((char *)(ptrs[3]) + 34 != (void *)__brkval) return __LINE__;
+    /* __brkval lowered again. */
+    if (__flp->nx != NULL) return __LINE__;
+    if ((char *)(ptrs[3]) - 2 != __brkval) return __LINE__;
 
     free(ptrs[2]);
-    /* Both chunks must have been combined. */
-    if (__flp->sz != 58) return __LINE__;
+    /* ...and again. */
     if (__flp->nx != NULL) return __LINE__;
-    if ((char *)(ptrs[1]) + 58 != (void *)__brkval) return __LINE__;
+    if ((char *)(ptrs[1]) - 2 != __brkval) return __LINE__;
 
     return 0;
 }

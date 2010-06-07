@@ -29,8 +29,8 @@
 
 /* $Id$ */
 
-/* Allocate a bunch of things, and free them again.  At the end,
-   the freelist is supposed to consist of a single entry. */
+/* Like malloc-1.c, but after freeing everything, try to subsequently
+   allocate everything through a single pointer, and realloc(). */
 
 #ifndef	__AVR__
 
@@ -88,6 +88,8 @@ int main(void)
        match the expected TARGETVAL */
     if (__brkval - __malloc_heap_start != TARGETVAL) return __LINE__;
 
+    char *obrk = __brkval;
+
     for (i = 0; i < 8; i++)
     {
         free(ptrs[i]);
@@ -95,6 +97,21 @@ int main(void)
 
     /* after freeing everything, the freelist must be empty */
     if (__flp != NULL) return __LINE__;
+    if (__brkval != __malloc_heap_start) return __LINE__;
+
+    size_t s = sizes[0];
+    void *p = malloc(s);
+    if (p == NULL) return __LINE__;
+    for (i = 1; i < 8; i++)
+    {
+        s += sizes[i];
+        void *q = realloc(p, s);
+        if (q == NULL) return __LINE__;
+        if (q != p) return __LINE__;
+    }
+
+    /* Verify the allocation length did not increase. */
+    if (__brkval > obrk) return __LINE__;
 
     return 0;
 }

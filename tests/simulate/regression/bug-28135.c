@@ -36,66 +36,90 @@
 #include "../../libc/stdlib/stdlib_private.h"
 
 
-/* Test code from bug #27242 (and #25723) */
+/* Test code from bug # */
 int main(void)
 {
 	char *p, *p1;
 
-	p = malloc(16);
+	/* Step 1: test with just one free chunk */
+
+	p = malloc(20);
 	if (!p)
 		return 1;
 
-	/* releasing 6 bytes creates a new free chunk */
+	/* releasing 10 bytes returns them from the heap */
 	p1 = realloc(p, 10);
 	if (p != p1)
 		return 2;
 
-	/*
-	 * The patch for bug #25723 introduces a regression to realloc()
-	 * when called to shrink a memory chunk. We simply verify if
-	 * the new __brkval starts immediately after the last allocated
-	 * chunk.
-	 */
-	p = p1 + 10;
-	if (__brkval != p)
+	if (__flp)
 		return 3;
 
-	/* use the last free chunk */
-	p1 = malloc(4);
-	if (!p1)
+	/* should extend the free chunk */
+	p = malloc(15);
+	if (!p)
 		return 4;
 
 	/* should be empty */
 	if (__flp)
 		return 5;
 
-	p = malloc(10);
-	if (!p)
+	/* should be the following chunk */
+	p1 += 10 + sizeof(size_t);
+	if (p != p1)
 		return 6;
 
-	/* force creation of a new minimal free chunk (sz = 3), which
-           will be returned from heap then */
-	p1 = realloc(p, 5);
-	if (p != p1)
+	/* should point right after the last chunk */
+	p += 15;
+	if (p != __brkval)
 		return 7;
 
-	p = p1 + 5;
-	if (__brkval != p)
+	/* Step 2: Test with 2 free chunks. */
+
+	p = malloc(8);
+	if (!p)
 		return 8;
 
-	/* merge with the free chunk (incr = 4 > sz = 3) */
-	p = realloc(p1, 9);
-	if (p != p1)
+	p1 = malloc(9);
+	if (!p1)
 		return 9;
 
-	/* chunk size should be 9 */
-	p -= sizeof(size_t);
-	if (*(size_t *)p != 9)
+	free(p);
+
+	p = malloc(20);
+	if (!p)
 		return 10;
 
-	/* should be empty */
-	if (__flp)
+	if (!__flp)
 		return 11;
+
+	p1 = realloc(p, 10);
+	if (p1 != p)
+		return 12;
+
+	if (!__flp)
+		return 13;
+
+	if (__flp->nx)
+		return 14;
+
+	p = malloc(15);
+	if (!p)
+		return 15;
+
+	if (!__flp)
+		return 16;
+
+	if (__flp->nx)
+		return 17;
+
+	p1 += 10 + sizeof(size_t);
+	if (p != p1)
+		return 18;
+
+	p += 15;
+	if (p != __brkval)
+		return 19;
 
 	return 0;
 }

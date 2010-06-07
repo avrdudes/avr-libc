@@ -103,7 +103,7 @@
   [#26840] Missing #define in iom32m1.h
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
-  [#27235] malloc: Several things go wrong (part 1)
+  [#27235] malloc: Several things go wrong
   [#27242] realloc: serious error when size shrinks
   [#27243] malloc: small error in comment
   [#27367] RAMSTART missing in elder device header files

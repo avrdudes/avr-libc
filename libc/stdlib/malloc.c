@@ -164,22 +164,7 @@ malloc(size_t len)
 	 * segment as dynamically requested from the operating system.
 	 * Since we don't have an operating system, just make sure
 	 * that we don't collide with the stack.
-	 * But first we check if there is a free chunk at the end of
-	 * the allocation area. Brkval is corrected downwards then,
-	 * so the free chunk gets added to the new chunk.
-	 * (fp2 still points to the last list entry from step 1)
 	 */
-	if (fp2 && (char*)fp2 + fp2->sz + sizeof(size_t) == __brkval) {
-    	__brkval = (char*)fp2;
-		for (fp1 = __flp, fp2 = 0;
-		     fp1->nx;
-	    	 fp2 = fp1, fp1 = fp1->nx)
-			{}
-		if (fp2)
-			fp2->nx = 0;
-		else
-			__flp = 0;
-	}
 	if (__brkval == 0)
 		__brkval = __malloc_heap_start;
 	cp = __malloc_heap_end;
@@ -225,10 +210,14 @@ free(void *p)
 
 	/*
 	 * Trivial case first: if there's no freelist yet, our entry
-	 * will be the only one on it.
+	 * will be the only one on it.  If this is the last entry, we
+	 * can reduce __brkval instead.
 	 */
 	if (__flp == 0) {
-		__flp = fpnew;
+		if ((char *)p + fpnew->sz == __brkval)
+			__brkval = cpnew;
+		else
+			__flp = fpnew;
 		return;
 	}
 
@@ -268,6 +257,22 @@ free(void *p)
 		/* lower junk adjacent, merge */
 		fp2->sz += fpnew->sz + sizeof(size_t);
 		fp2->nx = fpnew->nx;
+	}
+	/*
+	 * If there's a new topmost chunk, lower __brkval instead.
+	 */
+	while (fp2->nx != NULL) {
+		fp1 = fp2;
+		fp2 = fp2->nx;
+	}
+	cp2 = (char *)&(fp2->nx);
+	if (cp2 + fp2->sz == __brkval) {
+		if (fp1 == NULL)
+			/* Freelist is empty now. */
+			__flp = NULL;
+		else
+			fp1->nx = NULL;
+		__brkval = cp2 - sizeof(size_t);
 	}
 }
 

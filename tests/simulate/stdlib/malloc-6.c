@@ -67,11 +67,9 @@ int main(void)
     }
 
     free(ptrs[5]);
-    /* There must be exactly one entry in freelist. */
-    if ((char *)(ptrs[5]) - 2 != (void *)__flp) return __LINE__;
-    if (__flp->sz != 10) return __LINE__;
-    if (__flp->nx != NULL) return __LINE__;
-    if ((char *)(ptrs[5]) + 10 != (void *)__brkval) return __LINE__;
+    /* Freelist must be still empty, and __brkval reduced. */
+    if (__flp != NULL) return __LINE__;
+    if ((char *)(ptrs[5]) - 2 != __brkval) return __LINE__;
 
     return 0;
 }

@@ -1,5 +1,26 @@
 2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #27235, malloc: Several things go wrong
+	* libc/stdlib/malloc.c (malloc): Revert the patch
+	from r2123, as it is no longer needed.
+	* libc/stdlib/malloc.c (free): When freeing the
+	topmost chunk of the heap, reduce __brkval again,
+	returning the area from the heap entirely.
+	* doc/api/malloc.dox: Mention that the heap is now
+	reduced if possible.
+	* tests/simulate/regression/bug-27242.c: Adapt testscript
+	to match the new behaviour.
+	* tests/simulate/stdlib/malloc-1.c: (Ditto.)
+	* tests/simulate/stdlib/malloc-6.c: (Ditto.)
+	* tests/simulate/stdlib/malloc-7.c: (Ditto.)
+	* tests/simulate/stdlib/realloc-2.c: New file (test whether
+	subsequent allocation does not extend the heap).
+	* tests/simulate/regression/bug-28135.c: New file, another
+	regression test (actual bugfix from bug #28135 is no longer
+	needed)
+
+2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	More testscripts: test free() works as expected.
 	* tests/simulate/stdlib/malloc-5.c: New file.
 	* tests/simulate/stdlib/malloc-6.c: (Ditto.)
