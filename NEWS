@@ -103,6 +103,7 @@
   [#26840] Missing #define in iom32m1.h
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
+  [#27235] malloc: Several things go wrong (part 1)
   [#27367] RAMSTART missing in elder device header files
   [#27434] Arguments of macros must be protected in parentheses
   [#28575] Minor bug in iousb162.h - missing FUSE_ prefixes
@@ -113,6 +114,7 @@
   [#28627] power.h ATMEGA32U2 clock_prescale_set() not available
   [#28901] Xmega header files with missing definitions for GPIO_t and CPU_t
   [#28574] Xmega D ADC struct missing registers
+
 
 
 * Other changes:
@@ -279,6 +281,7 @@
   [#6718] Optimize the EEPROM functions
   [#6720] FAQ update. Add EEPROM section, baud rate section. Correct spelling.
   [#6878] eewr_byte.S update for patch #6718
+  [#6895] Improved malloc behaviour when expanding used area
   
 * New functions:
 
