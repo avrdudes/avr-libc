@@ -1,5 +1,12 @@
 2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	More testscripts: test free() works as expected.
+	* tests/simulate/stdlib/malloc-5.c: New file.
+	* tests/simulate/stdlib/malloc-6.c: (Ditto.)
+	* tests/simulate/stdlib/malloc-7.c: (Ditto.)
+
+2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Stefan Ernst:
 	bug #27243: malloc: small error in comment
 	* stdlib/malloc.c: Fix comment.
