@@ -104,6 +104,7 @@
   [#26876] include io.h into fuse.h
   [#27201] _WORDREGISTER in xmega headers does not work in C99 mode
   [#27235] malloc: Several things go wrong (part 1)
+  [#27242] realloc: serious error when size shrinks
   [#27367] RAMSTART missing in elder device header files
   [#27434] Arguments of macros must be protected in parentheses
   [#28575] Minor bug in iousb162.h - missing FUSE_ prefixes

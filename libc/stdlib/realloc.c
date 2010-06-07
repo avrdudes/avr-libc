@@ -1,4 +1,4 @@
-/* Copyright (c) 2004 Joerg Wunsch
+/* Copyright (c) 2004, 2010 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -60,7 +60,6 @@ realloc(void *ptr, size_t len)
 	if (cp < cp1)
 		/* Pointer wrapped across top of RAM, fail. */
 		return 0;
-	fp2 = (struct __freelist *)(cp - sizeof(size_t));
 
 	/*
 	 * See whether we are growing or shrinking.  When shrinking,
@@ -75,6 +74,7 @@ realloc(void *ptr, size_t len)
 		if (fp1->sz <= sizeof(struct __freelist) ||
 		    len > fp1->sz - sizeof(struct __freelist))
 			return ptr;
+		fp2 = (struct __freelist *)cp;
 		fp2->sz = fp1->sz - len - sizeof(size_t);
 		fp1->sz = len;
 		free(&(fp2->nx));
@@ -87,30 +87,28 @@ realloc(void *ptr, size_t len)
 	 */
 	incr = len - fp1->sz;
 	cp = (char *)ptr + fp1->sz;
+	fp2 = (struct __freelist *)cp;
 	for (s = 0, ofp3 = 0, fp3 = __flp;
 	     fp3;
 	     ofp3 = fp3, fp3 = fp3->nx) {
-		if (fp3 == fp2 && fp3->sz >= incr) {
+		if (fp3 == fp2 && fp3->sz + sizeof(size_t) >= incr) {
 			/* found something that fits */
-			if (incr <= fp3->sz + sizeof(size_t)) {
+			if (fp3->sz + sizeof(size_t) - incr > sizeof(struct __freelist)) {
+				/* split off a new freelist entry */
+				cp = (char *)ptr + len;
+				fp2 = (struct __freelist *)cp;
+				fp2->nx = fp3->nx;
+				fp2->sz = fp3->sz - incr;
+				fp1->sz = len;
+			} else {
 				/* it just fits, so use it entirely */
 				fp1->sz += fp3->sz + sizeof(size_t);
-				if (ofp3)
-					ofp3->nx = fp3->nx;
-				else
-					__flp = fp3->nx;
-				return ptr;
+				fp2 = fp3->nx;
 			}
-			/* split off a new freelist entry */
-			cp = (char *)ptr + len;
-			fp2 = (struct __freelist *)(cp - sizeof(size_t));
-			fp2->nx = fp3->nx;
-			fp2->sz = fp3->sz - incr - sizeof(size_t);
 			if (ofp3)
 				ofp3->nx = fp2;
 			else
 				__flp = fp2;
-			fp1->sz = len;
 			return ptr;
 		}
 		/*

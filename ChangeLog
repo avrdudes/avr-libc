@@ -1,5 +1,12 @@
 2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Aleksandar Kanchev:
+	bug #27242: realloc: serious error when size shrinks
+	* stdlib/reallo.c: Change freelist calculation.
+	* tests/simulate/regression/bug-27242.c: New file.
+
+2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* tests/simulate/stdlib/malloc-4.c: New file.
 
 2010-06-04  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
