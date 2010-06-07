@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, 2004 Joerg Wunsch
+/* Copyright (c) 2002, 2004, 2010 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -82,7 +82,7 @@ malloc(size_t len)
 	/*
 	 * First, walk the free list and try finding a chunk that
 	 * would match exactly.  If we found one, we are done.  While
-	 * walking, note down the size of the largest chunk we found
+	 * walking, note down the size of the smallest chunk we found
 	 * that would still fit the request -- we need it for step 2.
 	 *
 	 */

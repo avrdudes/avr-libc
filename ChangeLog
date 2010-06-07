@@ -1,8 +1,14 @@
 2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Stefan Ernst:
+	bug #27243: malloc: small error in comment
+	* stdlib/malloc.c: Fix comment.
+
+2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Aleksandar Kanchev:
 	bug #27242: realloc: serious error when size shrinks
-	* stdlib/reallo.c: Change freelist calculation.
+	* stdlib/realloc.c: Change freelist calculation.
 	* tests/simulate/regression/bug-27242.c: New file.
 
 2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
