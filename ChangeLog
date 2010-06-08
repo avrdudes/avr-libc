@@ -1,5 +1,12 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Krzysztof Kosciuszkiewicz:
+	patch #6690: Shorten calculation of dallas 1-wire crc
+	* include/util/crc16.h (_crc_ibutton_update): no need to
+	use the T flag bit to save bit 0 of the operand
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Tero Sinervo:
 	patch #6791: Minor fixes to stdio.h documentation
 	* include/stdio.h: Fix spelling mistakes.
