@@ -1,5 +1,12 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Heike C. Zimmerer:
+	patch #6897: Allow <util/setbaud.h> to be used with assembler source
+	* include/util/setbaud.h: Add assembler snippets (no UL suffix
+	added to numbers)
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Add test scripts for <util/crc16.h>
 	* tests/simulate/util/crc16-1.c: New file.
 	* tests/simulate/util/crc16-2.c: (Ditto.)

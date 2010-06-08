@@ -191,7 +191,11 @@
 #  define BAUD_TOL 2
 #endif
 
+#ifdef __ASSEMBLER__
+#define UBRR_VALUE (((F_CPU) + 8 * (BAUD)) / (16 * (BAUD)) -1)
+#else
 #define UBRR_VALUE (((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) -1UL)
+#endif
 
 #if 100 * (F_CPU) > \
   (16 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
@@ -206,7 +210,12 @@
 #if USE_2X
 /* U2X required, recalculate */
 #undef UBRR_VALUE
+
+#ifdef __ASSEMBLER__
+#define UBRR_VALUE (((F_CPU) + 4 * (BAUD)) / (8 * (BAUD)) -1)
+#else
 #define UBRR_VALUE (((F_CPU) + 4UL * (BAUD)) / (8UL * (BAUD)) -1UL)
+#endif
 
 #if 100 * (F_CPU) > \
   (8 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
