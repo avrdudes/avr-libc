@@ -33,6 +33,7 @@ avrdir = $(prefix)/avr/include/avr
 avr_HEADERS = \
     boot.h \
     common.h \
+    cpufunc.h \
     crc16.h \
     delay.h \
     eeprom.h \

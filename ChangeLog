@@ -1,5 +1,12 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Implement new header file: <avr/cpufunc.h>
+	* include/avr/cpufunc.h: New file.
+	* include/avr/Makefile.am (avr_HEADERS): Add cpufunc.h.
+	* doc/api/doxygen.config.in (INPUT): Add avr/cpufunc.h.
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Bob Paddock:
 	patch #6891: Add XMega software reset to the FAQ section on software
 	reset

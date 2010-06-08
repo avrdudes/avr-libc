@@ -178,6 +178,9 @@
     are assigned to a single port in ascending order.
 
   - Added support for avrtiny10 architecture, to support the ATtiny10 Family.
+
+  - Added new headerfile: <avr/cpufunc.h>; currently contains _NOP() and
+    _MemoryBarrier().
   
 
 * New devices supported:
