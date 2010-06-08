@@ -88,19 +88,19 @@ $username is set to your savannah username):
 
 -# Check out a fresh source tree from cvs HEAD.
 -# Update the NEWS file with pending release number and commit to cvs HEAD:<br>
-   Change &quot;Changes since avr-libc-\<last_release\>:&quot; to 
-   &quot;Changes in avr-libc-\<this_relelase\>:&quot;.
+   Change <em>Changes since avr-libc-\<last_release\>:</em> to 
+   <em>Changes in avr-libc-\<this_relelase\></em>.
 -# Set the branch-point tag (setting \<major\> and \<minor\> accordingly):<br>
-   'svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<major\>_\<minor\>-branchpoint'
+   <tt>svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branchpoint</tt>
 -# Create the branch:<br>
-   'svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<major\>_\<minor\>-branch'
+   <tt>svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
 -# Update the package version in configure.ac and commit configure.ac to cvs
    HEAD:<br>
    Change minor number to next odd value.
 -# Update the NEWS file and commit to cvs HEAD:<br>
-   Add &quot;Changes since avr-libc-\<this_release\>:&quot;
+   Add <em>Changes since avr-libc-\<this_release\>:</em>
 -# Check out a new tree for the branch:<br>
-   'svn co svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<major\>_\<minor\>-branch'
+   <tt>svn co svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
 -# Update the package version in configure.ac and commit configure.ac to cvs
    branch:<br>
    Change the patch number to 90 to denote that this now a branch leading up
@@ -115,8 +115,6 @@ $username is set to your savannah username):
 -# Announce the branch and the branch tag to the avr-libc-dev list so other
    developers can checkout the branch.
 
-\note CVS tags do not allow the use of periods ('.').
-
 \subsection release_rolling Making a release
 
 A stable release will only be done on a branch, not from the cvs HEAD.
@@ -124,26 +122,26 @@ A stable release will only be done on a branch, not from the cvs HEAD.
 The following steps should be taken when making a release:
 
 -# Make sure the source tree you are working from is on the correct branch:<br>
-   'svn switch svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<major\>_\<minor\>-branch'
+   <tt>svn switch svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
 -# Update the package version in configure.ac and commit it to cvs.
 -# Update the gnu tool chain version requirements in the README and commit
    to cvs.
 -# Update the ChangeLog file to note the release and commit to cvs on the
    branch:<br>
-   Add &quot;Released avr-libc-\<this_release\>.&quot;
+   Add <em>Released avr-libc-\<this_release\>.</em>
 -# Update the NEWS file with pending release number and commit to cvs:<br>
-   Change &quot;Changes since avr-libc-\<last_release\>:&quot; to
-   &quot;Changes in avr-libc-\<this_relelase\>:&quot;.
+   Change <em>Changes since avr-libc-\<last_release\>:</em> to
+   <em>Changes in avr-libc-\<this_relelase\>:</em>.
 -# Bring the build system up to date by running bootstrap and configure.
 -# Perform a 'make distcheck' and make sure it succeeds. This will create the
    source tarball.
 -# Tag the release:<br>
-   'svn copy . svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<major\>_\<minor\>_\<patch\>-release'<br>
+   <tt>svn copy . svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>_\<</tt><em>patch</em><tt>\>-release</tt><br>
    or<br>
-   'svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<major\>_\<minor\>-branch svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<major\>_\<minor\>_\<patch\>-release'
+   <tt>svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>_\<</tt><em>patch</em><tt>\>-release</tt>
 -# Upload the tarball to savannah.
 -# Update the NEWS file, and commit to cvs:<br>
-   Add &quot;Changes since avr-libc-\<major\>_\<minor\>_\<patch\>:&quot;
+   Add <em>Changes since avr-libc-\<major\>_\<minor\>_\<patch\>:</em>
 -# Update the bug tracker interface on Savannah: Bugs &mdash;&gt; Edit
    field values &mdash;&gt; Release / Fixed Release
 -# Generate the latest documentation and upload to savannah.
