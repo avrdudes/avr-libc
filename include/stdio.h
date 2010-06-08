@@ -229,7 +229,7 @@
     arguments of variadic functions on the stack (as opposed to passing
     them in registers for functions that take a fixed number of
     parameters), the ability to pass one parameter less by implying
-    \c stdin will also save some execution time.
+    \c stdin or stdout will also save some execution time.
 */
 
 #if !defined(__DOXYGEN__)
@@ -644,7 +644,7 @@ extern int	putchar(int __c);
 
 /**
    The function \c printf performs formatted output to stream
-   \c stderr.  See \c vfprintf() for details.
+   \c stdout.  See \c vfprintf() for details.
 */
 extern int	printf(const char *__fmt, ...);
 

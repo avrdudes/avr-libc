@@ -1,5 +1,11 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Tero Sinervo:
+	patch #6791: Minor fixes to stdio.h documentation
+	* include/stdio.h: Fix spelling mistakes.
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Heike C. Zimmerer:
 	patch #6897: Allow <util/setbaud.h> to be used with assembler source
 	* include/util/setbaud.h: Add assembler snippets (no UL suffix
