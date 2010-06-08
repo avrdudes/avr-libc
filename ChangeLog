@@ -1,5 +1,13 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Add test scripts for <util/crc16.h>
+	* tests/simulate/util/crc16-1.c: New file.
+	* tests/simulate/util/crc16-2.c: (Ditto.)
+	* tests/simulate/util/crc16-3.c: (Ditto.)
+	* tests/simulate/util/crc16-4.c: (Ditto.)
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Don Kinzer:
 	bug #29950: ATtiny167 SPM_PAGESIZE Discrepancy
 	* include/avr/iotn167.h: Bump SPM_PAGESIZE.
