@@ -1,5 +1,12 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Bob Paddock:
+	patch #6891: Add XMega software reset to the FAQ section on software
+	reset
+	* doc/api/faq.dox (faq_softreset): Mention the Xmega RST.CTRL method.
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Ruwan Jayanetti:
 	patch #6194: Twitest updated to handle larger EEPROM devices
 	* doc/examples/twitest/twitest.c: Implement the

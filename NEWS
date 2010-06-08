@@ -287,6 +287,7 @@
   [#6720] FAQ update. Add EEPROM section, baud rate section. Correct spelling.
   [#6791] Minor fixes to stdio.h documentation
   [#6878] eewr_byte.S update for patch #6718
+  [#6891] Add XMega software reset to the FAQ section on software reset
   [#6895] Improved malloc behaviour when expanding used area
   [#6897] Allow <util/setbaud.h> to be used with assembler source
 

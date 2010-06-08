@@ -1370,15 +1370,22 @@ $(OBJDIR)/%.o : %.bin
 
 \section faq_softreset How do I perform a software reset of the AVR?
 
-The canonical way to perform a software reset of the AVR is to use the
+The canonical way to perform a software reset of non-XMega AVR's is to use the
 watchdog timer. Enable the watchdog timer to the shortest timeout setting,
 then go into an infinite, do-nothing loop. The watchdog will then reset the
 processor.
 
-The reason why this is preferable over jumping to the reset vector, is that
-when the watchdog resets the AVR, the registers will be reset to their known,
-default settings. Whereas jumping to the reset vector will leave the registers
-in their previous state, which is generally not a good idea.
+XMega parts have a specific bit <tt>RST_SWRST_bm</tt> in the
+<tt>RST.CTRL</tt> register, that generates a hardware reset.
+RST_SWRST_bm is protected by the XMega Configuration Change Protection
+system.
+
+The reason why using the watchdog timer or <tt>RST_SWRST_bm</tt> is
+preferable over jumping to the reset vector, is that when the watchdog
+or <tt>RST_SWRST_bm</tt> resets the AVR, the registers will be reset
+to their known, default settings. Whereas jumping to the reset vector
+will leave the registers in their previous state, which is generally
+not a good idea.
 
 <b>CAUTION!</b> Older AVRs will have the watchdog timer disabled on a reset. For
 these older AVRs, doing a soft reset by enabling the watchdog is easy, as the
