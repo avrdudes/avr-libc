@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Joerg Wunsch
+/* Copyright (c) 2002, 2010 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -132,6 +132,14 @@ address bits (24C04 and above) "steal" subaddress bits and use them
 for the EEPROM cell address bits 9 to 11 as required.  This example
 simply assumes all subaddress bits are 0 for the smaller devices, so
 the E0, E1, and E2 inputs of the 24Cxx must be grounded.
+
+\par Note [3a]
+
+EEPROMs of type 24C32 and above cannot be addressed anymore even with
+the subaddress bit trick.  Thus, they require the upper address bits
+being sent separately on the bus.  When activating the
+\c WORD_ADDRESS_16BIT define, the algorithm implements that auxiliary
+address byte transmission.
 
 \par Note [4]
 

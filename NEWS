@@ -277,6 +277,7 @@
 
 * Contributed Patches:
 
+  [#6194] Twitest updated to handle larger EEPROM devices
   [#6500] Reentrant code faq
   [#6517] Pgmspace with float support
   [#6555] malloc improvement

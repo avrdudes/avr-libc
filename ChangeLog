@@ -1,5 +1,13 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Ruwan Jayanetti:
+	patch #6194: Twitest updated to handle larger EEPROM devices
+	* doc/examples/twitest/twitest.c: Implement the
+	WORD_ADDRESS_16BIT option.
+	* doc/examples/twitest/twitest.dox: Document the new option.
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Gerben van den Broeke:
 	patch #6555: malloc improvement
 	* libc/stdlib/malloc.c (malloc): Speed up reallocations.
