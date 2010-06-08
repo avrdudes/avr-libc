@@ -279,6 +279,7 @@
 
   [#6500] Reentrant code faq
   [#6517] Pgmspace with float support
+  [#6555] malloc improvement
   [#6649] sqrt.S in libm changes
   [#6690] Shorten calculation of dallas 1-wire crc
   [#6718] Optimize the EEPROM functions

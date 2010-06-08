@@ -1,4 +1,5 @@
 /* Copyright (c) 2002, 2004, 2010 Joerg Wunsch
+   Copyright (c) 2010  Gerben van den Broeke
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -66,7 +67,7 @@ ATTRIBUTE_CLIB_SECTION
 void *
 malloc(size_t len)
 {
-	struct __freelist *fp1, *fp2;
+	struct __freelist *fp1, *fp2, *sfp1, *sfp2;
 	char *cp;
 	size_t s, avail;
 
@@ -82,13 +83,15 @@ malloc(size_t len)
 	/*
 	 * First, walk the free list and try finding a chunk that
 	 * would match exactly.  If we found one, we are done.  While
-	 * walking, note down the size of the smallest chunk we found
-	 * that would still fit the request -- we need it for step 2.
+	 * walking, note down the smallest chunk we found that would
+	 * still fit the request -- we need it for step 2.
 	 *
 	 */
 	for (s = 0, fp1 = __flp, fp2 = 0;
 	     fp1;
 	     fp2 = fp1, fp1 = fp1->nx) {
+		if (fp1->sz < len)
+			continue;
 		if (fp1->sz == len) {
 			/*
 			 * Found it.  Disconnect the chunk from the
@@ -100,9 +103,13 @@ malloc(size_t len)
 				__flp = fp1->nx;
 			return &(fp1->nx);
 		}
-		if (fp1->sz > len) {
-			if (s == 0 || fp1->sz < s)
+		else {
+			if (s == 0 || fp1->sz < s) {
+				/* this is the smallest chunk found so far */
 				s = fp1->sz;
+				sfp1 = fp1;
+				sfp2 = fp2;
+			}
 		}
 	}
 	/*
@@ -116,44 +123,30 @@ malloc(size_t len)
 	 * and use the entire chunk.
 	 */
 	if (s) {
-		if (s - len < sizeof(struct __freelist))
-			len = s;
-		for (fp1 = __flp, fp2 = 0;
-		     fp1;
-		     fp2 = fp1, fp1 = fp1->nx) {
-			if (fp1->sz == s) {
-				if (len == s) {
-					/*
-					 * Use entire chunk; same as
-					 * above.
-					 */
-					if (fp2)
-						fp2->nx = fp1->nx;
-					else
-						__flp = fp1->nx;
-					return &(fp1->nx);
-				}
-				/*
-				 * Split them up.  Note that we leave
-				 * the first part as the new (smaller)
-				 * freelist entry, and return the
-				 * upper portion to the caller.  This
-				 * saves us the work to fix up the
-				 * freelist chain; we just need to
-				 * fixup the size of the current
-				 * entry, and note down the size of
-				 * the new chunk before returning it
-				 * to the caller.
-				 */
-				cp = (char *)fp1;
-				s -= len;
-				cp += s;
-				fp2 = (struct __freelist *)cp;
-				fp2->sz = len;
-				fp1->sz = s - sizeof(size_t);
-				return &(fp2->nx);
-			}
+		if (s - len < sizeof(struct __freelist)) {
+			/* Disconnect it from freelist and return it. */
+			if (sfp2)
+				sfp2->nx = sfp1->nx;
+			else
+				__flp = sfp1->nx;
+			return &(sfp1->nx);
 		}
+		/*
+		 * Split them up.  Note that we leave the first part
+		 * as the new (smaller) freelist entry, and return the
+		 * upper portion to the caller.  This saves us the
+		 * work to fix up the freelist chain; we just need to
+		 * fixup the size of the current entry, and note down
+		 * the size of the new chunk before returning it to
+		 * the caller.
+		 */
+		cp = (char *)sfp1;
+		s -= len;
+		cp += s;
+		sfp2 = (struct __freelist *)cp;
+		sfp2->sz = len;
+		sfp1->sz = s - sizeof(size_t);
+		return &(sfp2->nx);
 	}
 	/*
 	 * Step 3: If the request could not be satisfied from a

@@ -1,5 +1,11 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Gerben van den Broeke:
+	patch #6555: malloc improvement
+	* libc/stdlib/malloc.c (malloc): Speed up reallocations.
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Krzysztof Kosciuszkiewicz:
 	patch #6690: Shorten calculation of dallas 1-wire crc
 	* include/util/crc16.h (_crc_ibutton_update): no need to
