@@ -62,10 +62,16 @@
 
     Enables interrupts by setting the global interrupt mask. This function
     actually compiles into a single line of assembly, so there is no function
-    call overhead. */
+    call overhead.  However, the macro also implies a <i>memory barrier</i>
+    which can cause additional loss of optimization.
+
+    In order to implement atomic access to multi-byte objects,
+    consider using the macros from <util/atomic.h>, rather than
+    implementing them manually with cli() and sei().
+*/
 #define sei()
 #else  /* !DOXYGEN */
-# define sei()  __asm__ __volatile__ ("sei" ::)
+# define sei()  __asm__ __volatile__ ("sei" ::: "memory")
 #endif /* DOXYGEN */
 
 #if defined(__DOXYGEN__)
@@ -76,10 +82,16 @@
 
     Disables all interrupts by clearing the global interrupt mask. This function
     actually compiles into a single line of assembly, so there is no function
-    call overhead. */
+    call overhead.  However, the macro also implies a <i>memory barrier</i>
+    which can cause additional loss of optimization.
+
+    In order to implement atomic access to multi-byte objects,
+    consider using the macros from <util/atomic.h>, rather than
+    implementing them manually with cli() and sei().
+*/
 #define cli()
 #else  /* !DOXYGEN */
-# define cli()  __asm__ __volatile__ ("cli" ::)
+# define cli()  __asm__ __volatile__ ("cli" ::: "memory")
 #endif /* DOXYGEN */
 
 

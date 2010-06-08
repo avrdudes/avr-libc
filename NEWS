@@ -181,10 +181,15 @@
 
   - Added new headerfile: <avr/cpufunc.h>; currently contains _NOP() and
     _MemoryBarrier().
-  
+
+  - The twidemo can now optionally address 24C32 and larger EEPROMs
+    that require 16-bit word addressing.
+
+  - Add a "memory barrier" to the cli() and sei() macros.
+
 
 * New devices supported:
-  
+
   + ATxmega64D3
   + ATxmega128D3
   + ATxmega256D3

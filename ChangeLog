@@ -1,5 +1,10 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/interrupt.h (cli, sei): Add a memory barrier,
+	and cross-reference <util/atomic.h>.
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Implement new header file: <avr/cpufunc.h>
 	* include/avr/cpufunc.h: New file.
 	* include/avr/Makefile.am (avr_HEADERS): Add cpufunc.h.
