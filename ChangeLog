@@ -1,3 +1,9 @@
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Don Kinzer:
+	bug #29950: ATtiny167 SPM_PAGESIZE Discrepancy
+	* include/avr/iotn167.h: Bump SPM_PAGESIZE.
+
 2010-06-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #27235, malloc: Several things go wrong
