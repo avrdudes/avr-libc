@@ -1584,7 +1584,7 @@ Below is a table of library calls with known issues.
  </tr>
 </table>
 
-\q *** It's not clear one would ever want to do character
+\note It's not clear one would ever want to do character
 input simultaneously from more than one thread anyway, but
 these entries are included for completeness.
 

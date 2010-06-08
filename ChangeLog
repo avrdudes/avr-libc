@@ -1,5 +1,16 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Various documentation fixes, mostly cosmetic.
+	* include/avr/cpufunc.h: Fix doc grouping.
+	* include/util/delay_basic.h: Slightly reorder, so it actually
+	generates documentation again.
+	* doc/api/rel-method.dox: Update for our SVN repository.
+	* doc/api/malloc.dox: Fix doxygen warning.
+	* doc/api/tools-install.dox: (Ditto.)
+	* doc/api/faq.dox: (Ditto.)
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #30085: memcpy_P on XMega does not clr NVM.CMD before copy
 	* include/avr/pgmspace.h: Mention that for Xmega devices,
 	these functions require NVM.CMD being set to 0x00.

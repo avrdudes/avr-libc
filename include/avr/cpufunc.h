@@ -44,10 +44,11 @@
 
 */
 
-/** \ingroup avr_cpufunc */
-/*@{*/
 #if defined(__DOXYGEN__)
 /**
+   \ingroup avr_cpufunc
+   \def _NOP
+
    Execute a <i>no operation</i> (NOP) CPU instruction.  This
    should not be used to implement delays, better use the functions
    from <util/delay_basic.h> or <util/delay.h> for this.  For
@@ -62,6 +63,9 @@
 
 #if defined(__DOXYGEN__)
 /**
+   \ingroup avr_cpufunc
+   \def _MemoryBarrier
+
    Implement a read/write <i>memory barrier</i>.  A memory
    barrier instructs the compiler to not cache any memory data in
    registers beyond the barrier.  This can sometimes be more effective
@@ -72,7 +76,5 @@
 #else  /* real code */
 #define _MemoryBarrier() __asm__ __volatile__(:::"memory")
 #endif  /* __DOXYGEN__ */
-
-/*}@*/
 
 #endif /* _AVR_CPUFUNC_H_ */

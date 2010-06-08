@@ -131,8 +131,8 @@ See \ref harvard_arch "explanation" for offset 0x800000.
 See the chapter about \ref gcc_minusW "using gcc" for the \c -Wl
 options.
 
-\note The ld (linker) user manual states that using -Tdata=<x> is equivalent
-to using --section-start,.data=<x>. However, you have to use --section-start
+\note The ld (linker) user manual states that using -Tdata=&lt;x&gt; is equivalent
+to using --section-start,.data=&lt;x&gt;. However, you have to use --section-start
 as above because the GCC frontend also sets the -Tdata option for
 all MCU types where the SRAM doesn't start at 0x800060. Thus, the linker
 is being faced with two -Tdata options. Sarting with binutils 2.16, the linker 
