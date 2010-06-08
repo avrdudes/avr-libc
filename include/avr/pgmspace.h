@@ -71,6 +71,10 @@
     it can become a problem if there are too many of these constants, or
     for bootloaders on devices with more than 64 KB of ROM.
     <em>All these functions will not work in that situation.</em>
+
+    \note For <b>Xmega</b> devices, make sure the NVM controller
+    command register (\c NVM.CMD or \c NVM_CMD) is set to 0x00 (NOP)
+    before using any of these functions.
 */
 
 #ifndef __PGMSPACE_H_

@@ -1,5 +1,11 @@
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #30085: memcpy_P on XMega does not clr NVM.CMD before copy
+	* include/avr/pgmspace.h: Mention that for Xmega devices,
+	these functions require NVM.CMD being set to 0x00.
+
+2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/interrupt.h (cli, sei): Add a memory barrier,
 	and cross-reference <util/atomic.h>.
 
