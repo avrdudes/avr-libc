@@ -1,5 +1,11 @@
 2010-06-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #29502.
+	* include/avr/iox128a1.h (TC_EVACT_FRW_gc): Fix name to TC_EVACT_FRQ_gc.
+	* NEWS: Add to fixed bugs list.
+
+2010-06-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #29653.
 	* include/avr/iousbxx2.h (PUD): Add bit definition.
 	* NEWS: Add to fixed bugs list.
