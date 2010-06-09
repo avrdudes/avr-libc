@@ -254,17 +254,17 @@ free(void *p)
 	/*
 	 * If there's a new topmost chunk, lower __brkval instead.
 	 */
-	while (fp2->nx != NULL) {
-		fp1 = fp2;
-		fp2 = fp2->nx;
-	}
-	cp2 = (char *)&(fp2->nx);
-	if (cp2 + fp2->sz == __brkval) {
-		if (fp1 == NULL)
+	for (fp1 = __flp, fp2 = 0;
+	     fp1->nx != 0;
+	     fp2 = fp1, fp1 = fp1->nx)
+		/* advance to entry just before end of list */;
+	cp2 = (char *)&(fp1->nx);
+	if (cp2 + fp1->sz == __brkval) {
+		if (fp2 == NULL)
 			/* Freelist is empty now. */
 			__flp = NULL;
 		else
-			fp1->nx = NULL;
+			fp2->nx = NULL;
 		__brkval = cp2 - sizeof(size_t);
 	}
 }
