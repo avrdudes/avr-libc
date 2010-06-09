@@ -1493,6 +1493,9 @@ typedef struct RTC32_struct
     register8_t SYNCCTRL;  /* Synchronization Control/Status Register */
     register8_t INTCTRL;  /* Interrupt Control Register */
     register8_t INTFLAGS;  /* Interrupt Flags */
+    _DWORDREGISTER(CNT);  /* Count Register */
+    _DWORDREGISTER(PER);  /* Period Register */
+    _DWORDREGISTER(COMP);  /* Compare Register */
 } RTC32_t;
 
 /* Compare Interrupt level */

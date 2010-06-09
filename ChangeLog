@@ -1,5 +1,11 @@
 2010-06-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #28582.
+	* include/avr/iox256a3b.h: Add 3 missing double-word registers.
+	* NEWS: Add to fixed bugs list.
+
+2010-06-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #29502.
 	* include/avr/iox128a1.h (TC_EVACT_FRW_gc): Fix name to TC_EVACT_FRQ_gc.
 	* NEWS: Add to fixed bugs list.

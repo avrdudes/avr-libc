@@ -116,6 +116,7 @@
   [#28627] power.h ATMEGA32U2 clock_prescale_set() not available
   [#28901] Xmega header files with missing definitions for GPIO_t and CPU_t
   [#28574] Xmega D ADC struct missing registers
+  [#28582] XMEGA A3B, RTC32 not properly supported
   [#28921] pointer to function > 128k flash
   [#29502] literal error in iox128a1.h
   [#29653] PUD bit missing for at90usb82
