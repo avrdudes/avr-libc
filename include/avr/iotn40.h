@@ -629,20 +629,20 @@
 #define T0_PIN   PINCINT
 #define T0_BIT   INT4
 
-#define ADC3_DDR   DDR(PCINT
-#define ADC3_PORT  PORT(PCINT
-#define ADC3_PIN   PIN(PCINT
-#define ADC3_BIT   (PCINT3
+#define ADC3_DDR   DDRPCINT
+#define ADC3_PORT  PORTPCINT
+#define ADC3_PIN   PINPCINT
+#define ADC3_BIT   PCINT3
 
-#define ADC2_DDR   DDR(PCINT
-#define ADC2_PORT  PORT(PCINT
-#define ADC2_PIN   PIN(PCINT
-#define ADC2_BIT   (PCINT2
+#define ADC2_DDR   DDRPCINT
+#define ADC2_PORT  PORTPCINT
+#define ADC2_PIN   PINPCINT
+#define ADC2_BIT   PCINT2
 
-#define AIN1_DDR   DDR(PCINT
-#define AIN1_PORT  PORT(PCINT
-#define AIN1_PIN   PIN(PCINT
-#define AIN1_BIT   (PCINT2
+#define AIN1_DDR   DDRPCINT
+#define AIN1_PORT  PORTPCINT
+#define AIN1_PIN   PINPCINT
+#define AIN1_BIT   PCINT2
 
 #define ADC1_DDR   DDRCINT
 #define ADC1_PORT  PORTCINT
@@ -664,55 +664,55 @@
 #define CLKI_PIN   PINCINT1
 #define CLKI_BIT   INT17
 
-#define SDA_DDR   DDR(MOSI
-#define SDA_PORT  PORT(MOSI
-#define SDA_PIN   PIN(MOSI
-#define SDA_BIT   (MOSI
+#define SDA_DDR   DDRMOSI
+#define SDA_PORT  PORTMOSI
+#define SDA_PIN   PINMOSI
+#define SDA_BIT   MOSI
 
-#define PCINT16_DDR   DDR(MOSI
-#define PCINT16_PORT  PORT(MOSI
-#define PCINT16_PIN   PIN(MOSI
-#define PCINT16_BIT   (MOSI
+#define PCINT16_DDR   DDRMOSI
+#define PCINT16_PORT  PORTMOSI
+#define PCINT16_PIN   PINMOSI
+#define PCINT16_BIT   MOSI
 
 #define PCINT15_DDR   DDRRESET
 #define PCINT15_PORT  PORTRESET
 #define PCINT15_PIN   PINRESET
 #define PCINT15_BIT   RESET
 
-#define CLKO_DDR   DDR(INT
-#define CLKO_PORT  PORT(INT
-#define CLKO_PIN   PIN(INT
-#define CLKO_BIT   (INT0
+#define CLKO_DDR   DDRINT
+#define CLKO_PORT  PORTINT
+#define CLKO_PIN   PININT
+#define CLKO_BIT   INT0
 
-#define MISO_DDR   DDR(INT
-#define MISO_PORT  PORT(INT
-#define MISO_PIN   PIN(INT
-#define MISO_BIT   (INT0
+#define MISO_DDR   DDRINT
+#define MISO_PORT  PORTINT
+#define MISO_PIN   PININT
+#define MISO_BIT   INT0
 
-#define PCINT14_DDR   DDR(INT
-#define PCINT14_PORT  PORT(INT
-#define PCINT14_PIN   PIN(INT
-#define PCINT14_BIT   (INT0
+#define PCINT14_DDR   DDRINT
+#define PCINT14_PORT  PORTINT
+#define PCINT14_PIN   PININT
+#define PCINT14_BIT   INT0
 
-#define SCL_DDR   DDR(SCK
-#define SCL_PORT  PORT(SCK
-#define SCL_PIN   PIN(SCK
-#define SCL_BIT   (SCK
+#define SCL_DDR   DDRSCK
+#define SCL_PORT  PORTSCK
+#define SCL_PIN   PINSCK
+#define SCL_BIT   SCK
 
-#define ICP1_DDR   DDR(SCK
-#define ICP1_PORT  PORT(SCK
-#define ICP1_PIN   PIN(SCK
-#define ICP1_BIT   (SCK
+#define ICP1_DDR   DDRSCK
+#define ICP1_PORT  PORTSCK
+#define ICP1_PIN   PINSCK
+#define ICP1_BIT   SCK
 
-#define T1_DDR   DDR(SCK
-#define T1_PORT  PORT(SCK
-#define T1_PIN   PIN(SCK
-#define T1_BIT   (SCK
+#define T1_DDR   DDRSCK
+#define T1_PORT  PORTSCK
+#define T1_PIN   PINSCK
+#define T1_BIT   SCK
 
-#define PCINT13_DDR   DDR(SCK
-#define PCINT13_PORT  PORT(SCK
-#define PCINT13_PIN   PIN(SCK
-#define PCINT13_BIT   (SCK
+#define PCINT13_DDR   DDRSCK
+#define PCINT13_PORT  PORTSCK
+#define PCINT13_PIN   PINSCK
+#define PCINT13_BIT   SCK
 
 #define SS_DDR   DDROC0A
 #define SS_PORT  PORTOC0A
@@ -734,10 +734,10 @@
 #define PCINT10_PIN   PINADC1
 #define PCINT10_BIT   ADC10
 
-#define ADC9/PCINT9_DDR   DDRADC9/PCINT
-#define ADC9/PCINT9_PORT  PORTADC9/PCINT
-#define ADC9/PCINT9_PIN   PINADC9/PCINT
-#define ADC9/PCINT9_BIT   ADC9/PCINT9
+#define PCINT9_DDR   DDRADC9
+#define PCINT9_PORT  PORTADC9
+#define PCINT9_PIN   PINADC9
+#define PCINT9_BIT   ADC9
 
 #define PCINT8_DDR   DDRADC
 #define PCINT8_PORT  PORTADC

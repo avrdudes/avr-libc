@@ -1,3 +1,11 @@
+2010-06-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Don Kinzer:
+	bug #30018: Errors in include files
+	* include/avr/iotn40.h: Fix stray characters in macro names.
+	* include/avr/iom649p.h: (Ditto.)
+	* include/avr/iom169pa.h: (Ditto.)
+
 2010-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Various documentation fixes, mostly cosmetic.

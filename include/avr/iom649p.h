@@ -1293,15 +1293,15 @@
 #define SEG23_PIN   PING
 #define SEG23_BIT   4
 
-#define ICP/SEG22_DDR   DDRD
-#define ICP/SEG22_PORT  PORTD
-#define ICP/SEG22_PIN   PIND
-#define ICP/SEG22_BIT   0
+#define SEG22_DDR   DDRD
+#define SEG22_PORT  PORTD
+#define SEG22_PIN   PIND
+#define SEG22_BIT   0
 
-#define INT0/SEG21_DDR   DDRD
-#define INT0/SEG21_PORT  PORTD
-#define INT0/SEG21_PIN   PIND
-#define INT0/SEG21_BIT   1
+#define SEG21_DDR   DDRD
+#define SEG21_PORT  PORTD
+#define SEG21_PIN   PIND
+#define SEG21_BIT   1
 
 #define SEG20_DDR   DDRD
 #define SEG20_PORT  PORTD
