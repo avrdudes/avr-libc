@@ -59,6 +59,8 @@
  * memory that has been freed up again).
  */
 
+#define N 500
+
 struct list1
 {
   struct list1 *next;
@@ -248,7 +250,7 @@ main(void)
   __malloc_margin = 32;
 
   srandom(RAND_START_VALUE);
-  for (i = 0; i < 500; i++)
+  for (i = 0; i < N; i++)
     {
       r = random();
       x = r & 0x0f;
@@ -316,7 +318,7 @@ main(void)
   if (stats[0] != stats[1] || stats[2] != stats[3])
     exit(1);
 #ifdef __AVR__
-  if (__flp->nx != NULL)
+  if (__flp != NULL)
     exit(2);
 #endif
   return 0;
