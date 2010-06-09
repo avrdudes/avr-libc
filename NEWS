@@ -116,6 +116,7 @@
   [#28627] power.h ATMEGA32U2 clock_prescale_set() not available
   [#28901] Xmega header files with missing definitions for GPIO_t and CPU_t
   [#28574] Xmega D ADC struct missing registers
+  [#28921] pointer to function > 128k flash
   [#29950] ATtiny167 SPM_PAGESIZE Discrepancy
   [#30018] Errors in include files
   [#30085] memcpy_P on XMega does not clr NVM.CMD before copy

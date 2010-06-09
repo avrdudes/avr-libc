@@ -1,5 +1,11 @@
 2010-06-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #28921: pointer to function > 128k flash
+	* doc/api/faq.dox (faq_funcptr_gt128kib): Add entry describing
+	that -mrelax is needed for the trampolines to work as designed.
+
+2010-06-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Don Kinzer:
 	bug #30018: Errors in include files
 	* include/avr/iotn40.h: Fix stray characters in macro names.

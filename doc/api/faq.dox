@@ -68,6 +68,7 @@
 -# \ref faq_reentrant
 -# \ref faq_eeprom_corruption
 -# \ref faq_wrong_baud_rate
+-# \ref faq_funcptr_gt128kib
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1679,6 +1680,20 @@ in the formula:
 \endcode
 
 This is also the way it is implemented in \ref util_setbaud.
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_funcptr_gt128kib On a device with more than 128 KiB of flash, how to make function pointers work?
+
+Function pointers beyond the "magical" 128 KiB barrier(s) on larger
+devices are supposed to be resolved through so-called
+<em>trampolines</em> by the linker, so the actual pointers used in
+the code can remain 16 bits wide.
+
+In order for this to work, the option <tt>-mrelax</tt> must be given
+on the compiler command-line that is used to link the final ELF file.
+(Older compilers did not implement this option for the AVR, use
+<tt>-Wl,--relax</tt> instead.)
 
 <small>Back to \ref faq_index.</small>
 
