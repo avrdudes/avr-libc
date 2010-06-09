@@ -1,5 +1,11 @@
 2010-06-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Move some testscripts around.
+	* tests/simulate/other/malloc-01.c -> tests/simulate/stdlib/malloc-8.c
+	* tests/simulate/other/realloc-01.c -> tests/simulate/stdlib/realloc-3.c
+
+2010-06-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/stdlib/malloc.c: Fix a bug introduced in r2131 that could
 	cause the freelist to be discarded.
 
