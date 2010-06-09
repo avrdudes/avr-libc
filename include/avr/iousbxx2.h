@@ -288,6 +288,7 @@
 #define PORF    0
 
 #define MCUCR   _SFR_IO8(0x35)
+#define PUD     4
 #define IVSEL   1
 #define IVCE    0
 
