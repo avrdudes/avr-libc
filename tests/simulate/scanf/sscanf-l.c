@@ -129,6 +129,7 @@ int main ()
     CHECK (0, (n == 1) && (*(char *)(v.i) == FILL),
 	   " ", " %ln", &n);
 
+#if !defined(__AVR_AT90S8515__) /* this does not fit */
     /* All possible conversions.	*/
     CHECK (
 	8,
@@ -140,6 +141,7 @@ int main ()
 	v.i + 0, v.i + 1, v.i + 2, v.i + 3,
 	v.i + 4, v.i + 5, v.i + 6, v.i + 7,
 	v.i + 8);
+#endif
 
     /* Width field.	*/
     CHECK (

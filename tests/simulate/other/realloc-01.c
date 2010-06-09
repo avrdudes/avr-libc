@@ -72,6 +72,12 @@ struct list1
 
 struct list1 *l1head, *l1tail;
 
+#if defined(__AVR_AT90S8515__)
+#  define N 500
+#else
+#  define N 2000
+#endif
+
 bool l1append(char c)
 {
   struct list1 *ele = malloc(sizeof(struct list1) + 1);
@@ -233,7 +239,7 @@ main(void)
   __malloc_margin = 50;
 
   srandom(RAND_START_VALUE);
-  for (i = 0; i < 2000; i++)
+  for (i = 0; i < N; i++)
     {
       r = random();
       if (r & 0x01)

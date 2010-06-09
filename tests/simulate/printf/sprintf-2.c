@@ -123,6 +123,7 @@ int main ()
 	   "%-8.4d.%-8.4d.%-8.4d.%-8.4d", 1, 123, 1234, 12345);
     CHECK ("-0001   .-0123   .-1234   .-12345  ",
 	   "%-8.4d.%-8.4d.%-8.4d.%-8.4d", -1, -123, -1234, -12345);
+#if !defined(__AVR_AT90S8515__) /* this does not fit */
 
     CHECK ("                                                                "
 	   "                                                                "
@@ -150,6 +151,7 @@ int main ()
 
     /* '%i' specification	*/
     CHECK ("-9", "%i", -9);
+#endif
 
     /* '%u' specification	*/
     CHECK ("0 1 32767 32768 32769 65535",

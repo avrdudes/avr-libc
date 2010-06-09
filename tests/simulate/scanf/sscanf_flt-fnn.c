@@ -157,6 +157,7 @@ int main ()
 	"%e %E %f %F %g %G",
 	& v.x[0], & v.x[1], & v.x[2], & v.x[3], & v.x[4], & v.x[5]);
 
+#if !defined(__AVR_AT90S8515__) /* this does not fit */
     /* Character after Inf.	*/
     CHECK (
 	9,
@@ -178,6 +179,7 @@ int main ()
 	& v.x[3], & v.c[2],
 	& v.x[4],
 	& v.x[5]);
+#endif
 
     return 0;
 }

@@ -127,6 +127,7 @@ int main ()
            "%#8.4x.%#8.4x.%#8.4x.%#8.4x.%#8.4x",
 	   0, 1, 0x12, 0x123, 0x1234);
 
+#if !defined(__AVR_AT90S8515__) /* this does not fit */
     CHECK ("                                                                "
 	   "                                                                "
 	   "                                                                "
@@ -151,6 +152,6 @@ int main ()
 
     /* short arg	*/
     CHECK ("0 2 fffe", "%hx %hx %hx", 0, 2, 0xfffe);
-    
+#endif
     return 0;
 }

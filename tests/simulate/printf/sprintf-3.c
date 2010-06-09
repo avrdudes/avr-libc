@@ -126,6 +126,7 @@ int main ()
     CHECK ("    0000.    0001.    0012.    0123.   01234",
            "%#8.4o.%#8.4o.%#8.4o.%#8.4o.%#8.4o", 0, 1, 012, 0123, 01234);
 
+#if !defined(__AVR_AT90S8515__) /* this does not fit */
     CHECK ("                                                                "
 	   "                                                                "
 	   "                                                                "
@@ -147,6 +148,7 @@ int main ()
 	   "%lo %lo %lo %lo %lo %lo %lo",
 	   0L, 01234567L, 076543210L,
 	   0x7fffffffL, 0x80000000L, 0x80000001L, 0xffffffffL);
+#endif
 
     /* short arg	*/
     CHECK ("0 2 177776", "%ho %ho %ho", 0, 2, 0xfffe);

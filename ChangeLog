@@ -1,5 +1,16 @@
 2010-06-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* tests/simulate/other/realloc-01.c: Cut out some bits when compling for
+	an AT90S8515 to avoid resource exhaustion (the ATmega128 version still
+	contains everything).
+	* tests/simulate/printf/sprintf-2.c: (Ditto.)
+	* tests/simulate/printf/sprintf-3.c: (Ditto.)
+	* tests/simulate/printf/sprintf-4.c: (Ditto.)
+	* tests/simulate/scanf/sscanf-l.c: (Ditto.)
+	* tests/simulate/scanf/sscanf_flt-fnn.c: (Ditto.)
+
+2010-06-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #28921: pointer to function > 128k flash
 	* doc/api/faq.dox (faq_funcptr_gt128kib): Add entry describing
 	that -mrelax is needed for the trampolines to work as designed.
