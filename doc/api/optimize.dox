@@ -114,7 +114,7 @@ compiles with optimisations switched on (-Os) to
  128:	08 95       	ret
 \endverbatim
 
-where the potentially slow multiplication is moved across cli(),
+where the potentially slow division is moved across cli(),
 resulting in interrupts to be disabled longer than intended. Note,
 that the volatile access occurs in order with respect to cli() or
 sei(); so the "net effect" required by the standard is achieved as
