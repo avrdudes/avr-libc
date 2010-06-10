@@ -1,5 +1,11 @@
 2010-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #30104: power.h - Missing "power_usart1_/enable/disable()"
+	functions for ATmega644
+	* include/avr/power.h: Fix macros for ATmega644A/P/PA
+
+2010-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Jan Waclawek:
 	Document issues around compiler optimizations and code reordering
 	* doc/api/optimize.dox: New file.

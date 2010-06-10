@@ -124,6 +124,7 @@
   [#29950] ATtiny167 SPM_PAGESIZE Discrepancy
   [#30018] Errors in include files
   [#30085] memcpy_P on XMega does not clr NVM.CMD before copy
+  [#30104] power.h - Missing "power_usart1_/enable/disable()" functions for ATmega644
 
 * Other changes:
 

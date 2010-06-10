@@ -254,13 +254,13 @@ find out which macros are applicable to your device.
   <tr>
     <td>power_usart1_enable()</td>
     <td>Enable the USART 1 module.</td>
-    <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, ATmega164P, ATmega324P</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, ATmega164P, ATmega324P, ATmega644</td>
   </tr>
 
   <tr>
     <td>power_usart1_disable()</td>
     <td>Disable the USART 1 module.</td>
-    <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, ATmega164P, ATmega324P</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, ATmega164P, ATmega324P, ATmega644</td>
   </tr>
 
   <tr>
@@ -883,7 +883,10 @@ do{ \
 || defined(__AVR_ATmega164P__) \
 || defined(__AVR_ATmega324A__) \
 || defined(__AVR_ATmega324P__) \
-|| defined(__AVR_ATmega324PA__)
+|| defined(__AVR_ATmega324PA__) \
+|| defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega644A__) \
+|| defined(__AVR_ATmega644PA__)
 
 #define power_adc_enable()      (PRR0 &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR0 |= (uint8_t)(1 << PRADC))
@@ -913,9 +916,7 @@ do{ \
 #define power_all_disable()     (PRR0 |= (uint8_t)((1<<PRADC)|(1<<PRSPI)|(1<<PRUSART0)|(1<<PRUSART1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI)))
 
 
-#elif defined(__AVR_ATmega644__) \
-|| defined(__AVR_ATmega644A__) \
-|| defined(__AVR_ATmega644P__)
+#elif defined(__AVR_ATmega644__)
 
 #define power_adc_enable()      (PRR0 &= (uint8_t)~(1 << PRADC))
 #define power_adc_disable()     (PRR0 |= (uint8_t)(1 << PRADC))
