@@ -184,6 +184,8 @@ main(void)
     entering the ATOMIC_BLOCK, it should be executed with the
     parameter ATOMIC_RESTORESTATE rather than ATOMIC_FORCEON.
 
+    See \ref optim_code_reorder for things to be taken into account
+    with respect to compiler optimizations.
 */
 
 /** \def ATOMIC_BLOCK(type)

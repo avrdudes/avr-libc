@@ -71,6 +71,9 @@
    registers beyond the barrier.  This can sometimes be more effective
    than blocking certain optimizations by declaring some object with a
    \c volatile qualifier.
+
+   See \ref optim_code_reorder for things to be taken into account
+   with respect to compiler optimizations.
 */
 #define _MemoryBarrier()
 #else  /* real code */

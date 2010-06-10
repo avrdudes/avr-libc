@@ -1,0 +1,137 @@
+/* Copyright (c) 2010 Jan Waclawek
+   Copyright (c) 2010 Joerg Wunsch
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
+
+/** \page optimization Compiler optimization
+
+\section optim_code_reorder Problems with reordering code
+\author Jan Waclawek
+
+Programs contain sequences of statements, and a naive compiler would
+execute them exactly in the order as they are written. But an
+optimizing compiler is free to \e reorder the statements - or even
+parts of them - if the resulting "net effect" is the same. The
+"measure" of the "net effect" is what the standard calls "side
+effects", and is accomplished exclusively through accesses (reads and
+writes) to variables qualified as \c volatile. So, as long as all
+volatile reads and writes are to the same addresses and in the same
+order (and writes write the same values), the program is correct,
+regardless of other operations in it. (One important point to note
+here is, that time duration between consecutive volatile accesses is
+not considered at all.)
+
+Unfortunately, there are also operations which are not covered by
+volatile accesses. An example of this in avr-gcc/avr-libc are the
+cli() and sei() macros defined in <avr/interrupt.h>, which convert
+directly to the respective assembler mnemonics through the __asm__()
+statement. These don't constitute a variable access at all, not even
+volatile, so the compiler is free to move them around. Although there
+is a "volatile" qualifier which can be attached to the __asm__()
+statement, its effect on (re)ordering is not clear from the
+documentation (and is more likely only to prevent complete removal by
+the optimiser), as it (among other) states:
+
+<em>Note that even a volatile asm instruction can be moved
+relative to other code, including across jump instructions. [...]
+Similarly, you can't expect a sequence of volatile asm instructions to
+remain perfectly consecutive.</em>
+
+\sa http://gcc.gnu.org/onlinedocs/gcc-4.3.4/gcc/Extended-Asm.html
+
+There is another mechanism which can be used to achieve something
+similar: <em>memory barriers</em>. This is accomplished through adding a
+special "memory" clobber to the inline \c asm statement, and ensures that
+all variables are flushed from registers to memory before the
+statement, and then re-read after the statement. The purpose of memory
+barriers is slightly different than to enforce code ordering: it is
+supposed to ensure that there are no variables "cached" in registers,
+so that it is safe to change the content of registers e.g. when
+switching context in a multitasking OS (on "big" processors with
+out-of-order execution they also imply usage of special instructions
+which force the processor into "in-order" state (this is not the case
+of AVRs)).
+
+However, memory barrier works well in ensuring that all volatile
+accesses before and after the barrier occur in the given order with
+respect to the barrier. However, it does not ensure the compiler
+moving non-volatile-related statements across the barrier. Peter
+Dannegger provided a nice example of this effect:
+
+\code
+#define cli() __asm volatile( "cli" ::: "memory" )
+#define sei() __asm volatile( "sei" ::: "memory" )
+
+unsigned int ivar;
+
+void test2( unsigned int val )
+{
+  val = 65535U / val;
+
+  cli();
+
+  ivar = val;
+
+  sei();
+}
+\endcode
+
+compiles with optimisations switched on (-Os) to
+
+\verbatim
+00000112 <test2>:
+ 112:	bc 01       	movw	r22, r24
+ 114:	f8 94       	cli
+ 116:	8f ef       	ldi	r24, 0xFF	; 255
+ 118:	9f ef       	ldi	r25, 0xFF	; 255
+ 11a:	0e 94 96 00 	call	0x12c	; 0x12c <__udivmodhi4>
+ 11e:	70 93 01 02 	sts	0x0201, r23
+ 122:	60 93 00 02 	sts	0x0200, r22
+ 126:	78 94       	sei
+ 128:	08 95       	ret
+\endverbatim
+
+where the potentially slow multiplication is moved across cli(),
+resulting in interrupts to be disabled longer than intended. Note,
+that the volatile access occurs in order with respect to cli() or
+sei(); so the "net effect" required by the standard is achieved as
+intended, it is "only" the timing which is off. However, for most of
+embedded applications, timing is an important, sometimes critical
+factor.
+
+\sa https://www.mikrocontroller.net/topic/65923
+
+Unfortunately, at the moment, in avr-gcc (nor in the C standard),
+there is no mechanism to enforce complete match of written and
+executed code ordering - except maybe of switching the optimization
+completely off (-O0), or writing all the critical code in assembly.
+
+To sum it up:
+
+\li memory barriers ensure proper ordering of volatile accesses
+\li memory barriers don't ensure statements with no volatile accesses to be reordered across the barrier
+
+*/

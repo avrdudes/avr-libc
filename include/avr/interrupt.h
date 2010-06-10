@@ -51,7 +51,16 @@
 /** \name Global manipulation of the interrupt flag
 
     The global interrupt flag is maintained in the I bit of the status
-    register (SREG). 
+    register (SREG).
+
+    Handling interrupts frequently requires attention regarding atomic
+    access to objects that could be altered by code running within an
+    interrupt context, see <util/atomic.h>.
+
+    Frequently, interrupts are being disabled for periods of time in
+    order to perform certain operations without being disturbed; see
+    \ref optim_code_reorder for things to be taken into account with
+    respect to compiler optimizations.
 */
 
 #if defined(__DOXYGEN__)

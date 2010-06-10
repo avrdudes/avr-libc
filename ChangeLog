@@ -1,5 +1,19 @@
 2010-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Jan Waclawek:
+	Document issues around compiler optimizations and code reordering
+	* doc/api/optimize.dox: New file.
+	* doc/api/doxygen.config.in: Add optimize.dox.
+	* include/avr/cpufunc.h (_MemoryBarrier): xref to optim_code_reorder
+	* include/avr/interrupt.h: (Ditto.)
+	* include/util/atomic.h: (Ditto.)
+
+2010-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/rel-method.dox: Adapt to our new release numbering scheme.
+
+2010-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* tests/simulate/avr/eeprom-1.c: Remove the old AT90S2313 simulator
 	bug workaround, as the workaround doesn't work anymore now while the
 	original code does.
