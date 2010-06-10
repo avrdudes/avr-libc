@@ -1,5 +1,19 @@
 2010-06-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #26767.
+	* include/avr/iox256a3b.h: Added corrected names for GPIO registers.
+	* include/avr/iox128a1.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox192a3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a3.h: Same.
+
+2010-06-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #28582.
 	* include/avr/iox256a3b.h: Add 3 missing double-word registers.
 	* NEWS: Add to fixed bugs list.

@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (c) 2009-2010 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -50,6 +50,24 @@
 
 
 /* Ungrouped common registers */
+#define GPIOR0  _SFR_MEM8(0x0000)  /* General Purpose IO Register 0 */
+#define GPIOR1  _SFR_MEM8(0x0001)  /* General Purpose IO Register 1 */
+#define GPIOR2  _SFR_MEM8(0x0002)  /* General Purpose IO Register 2 */
+#define GPIOR3  _SFR_MEM8(0x0003)  /* General Purpose IO Register 3 */
+#define GPIOR4  _SFR_MEM8(0x0004)  /* General Purpose IO Register 4 */
+#define GPIOR5  _SFR_MEM8(0x0005)  /* General Purpose IO Register 5 */
+#define GPIOR6  _SFR_MEM8(0x0006)  /* General Purpose IO Register 6 */
+#define GPIOR7  _SFR_MEM8(0x0007)  /* General Purpose IO Register 7 */
+#define GPIOR8  _SFR_MEM8(0x0008)  /* General Purpose IO Register 8 */
+#define GPIOR9  _SFR_MEM8(0x0009)  /* General Purpose IO Register 9 */
+#define GPIORA  _SFR_MEM8(0x000A)  /* General Purpose IO Register 10 */
+#define GPIORB  _SFR_MEM8(0x000B)  /* General Purpose IO Register 11 */
+#define GPIORC  _SFR_MEM8(0x000C)  /* General Purpose IO Register 12 */
+#define GPIORD  _SFR_MEM8(0x000D)  /* General Purpose IO Register 13 */
+#define GPIORE  _SFR_MEM8(0x000E)  /* General Purpose IO Register 14 */
+#define GPIORF  _SFR_MEM8(0x000F)  /* General Purpose IO Register 15 */
+
+/* Deprecated */
 #define GPIO0  _SFR_MEM8(0x0000)  /* General Purpose IO Register 0 */
 #define GPIO1  _SFR_MEM8(0x0001)  /* General Purpose IO Register 1 */
 #define GPIO2  _SFR_MEM8(0x0002)  /* General Purpose IO Register 2 */
@@ -2613,6 +2631,24 @@ IO Module Instances. Mapped to memory.
 /* ========== Flattened fully qualified IO register names ========== */
 
 /* GPIO - General Purpose IO Registers */
+#define GPIO_GPIOR0  _SFR_MEM8(0x0000)
+#define GPIO_GPIOR1  _SFR_MEM8(0x0001)
+#define GPIO_GPIOR2  _SFR_MEM8(0x0002)
+#define GPIO_GPIOR3  _SFR_MEM8(0x0003)
+#define GPIO_GPIOR4  _SFR_MEM8(0x0004)
+#define GPIO_GPIOR5  _SFR_MEM8(0x0005)
+#define GPIO_GPIOR6  _SFR_MEM8(0x0006)
+#define GPIO_GPIOR7  _SFR_MEM8(0x0007)
+#define GPIO_GPIOR8  _SFR_MEM8(0x0008)
+#define GPIO_GPIOR9  _SFR_MEM8(0x0009)
+#define GPIO_GPIORA  _SFR_MEM8(0x000A)
+#define GPIO_GPIORB  _SFR_MEM8(0x000B)
+#define GPIO_GPIORC  _SFR_MEM8(0x000C)
+#define GPIO_GPIORD  _SFR_MEM8(0x000D)
+#define GPIO_GPIORE  _SFR_MEM8(0x000E)
+#define GPIO_GPIORF  _SFR_MEM8(0x000F)
+
+/* Deprecated */
 #define GPIO_GPIO0  _SFR_MEM8(0x0000)
 #define GPIO_GPIO1  _SFR_MEM8(0x0001)
 #define GPIO_GPIO2  _SFR_MEM8(0x0002)
