@@ -29,47 +29,26 @@
 
 \section version_info Release Version Numbering Scheme
 
-\subsection version_stable Stable Versions
+Release numbers consist of three parts, a major number, a minor
+number, and a revision number, each separated by a dot.
 
-A stable release will always have a minor number that is an even number. This
-implies that you should be able to upgrade to a new version of the library
-with the same major and minor numbers without fear that any of the APIs have
-changed. The only changes that should be made to a stable branch are bug fixes
-and under some circumstances, additional functionality (e.g. adding support
-for a new device).
+The major number is currently 1 (and has always been).  It will only
+be bumped in case a new version offers a major change in the API that
+is not backwards compatible.
 
-If major version number has changed, this implies that the required versions
-of gcc and binutils have changed. Consult the README file in the toplevel
-directory of the AVR Libc source for which versions are required.
+In the past (up to 1.6.x), even minor numbers have been used to
+indicate "stable" releases, and odd minor numbers have been reserved
+for development branches/versions.  As the latter has never really
+been used, and maintaining a stable branch that eventually became
+effectively the same as the development version has proven to be just
+a cumbersome and tedious job, this scheme has given up in early 2010,
+so starting with 1.7.0, every minor number will be used.  Minor
+numbers will be bumped upon judgement of the development team,
+whenever it seems appropriate, but at least in cases where some API
+was changed.
 
-\subsection version_dev Development Versions
-
-The major version number of a development series is always the same as the
-last stable release.
-
-The minor version number of a development series is always an odd number and
-is 1 more than the last stable release.
-
-The patch version number of a development series is always 0 until a new
-branch is cut at which point the patch number is changed to 90 to denote the
-branch is approaching a release and the date appended to the version to denote
-that it is still in development.
-
-All versions in development in SVN will also always have the date appended as
-a fourth version number. The format of the date will be YYYYMMDD.
-
-So, the development version number will look like this:
-
-\verbatim
-1.1.0.20030825
-\endverbatim
-
-While a pre-release version number on a branch (destined to become either 1.2
-or 2.0) will look like this:
-
-\verbatim
-1.1.90.20030828
-\endverbatim
+Starting with version 1.4.0, a file <avr/version.h> indicates the
+library version of an installed library tree.
 
 \section release_info Releasing AVR Libc
 
