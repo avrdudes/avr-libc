@@ -1,3 +1,9 @@
+2010-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* tests/simulate/avr/eeprom-1.c: Remove the old AT90S2313 simulator
+	bug workaround, as the workaround doesn't work anymore now while the
+	original code does.
+
 2010-06-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #26767.
