@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (c) 2009-2010 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -1233,26 +1233,26 @@ typedef struct EBI_struct
 } EBI_t;
 
 /* Chip Select adress space */
-typedef enum EBI_CS_ASPACE_enum
+typedef enum EBI_CS_ASIZE_enum
 {
-    EBI_CS_ASPACE_256B_gc = (0x00<<2),  /* 256 bytes */
-    EBI_CS_ASPACE_512B_gc = (0x01<<2),  /* 512 bytes */
-    EBI_CS_ASPACE_1KB_gc = (0x02<<2),  /* 1K bytes */
-    EBI_CS_ASPACE_2KB_gc = (0x03<<2),  /* 2K bytes */
-    EBI_CS_ASPACE_4KB_gc = (0x04<<2),  /* 4K bytes */
-    EBI_CS_ASPACE_8KB_gc = (0x05<<2),  /* 8K bytes */
-    EBI_CS_ASPACE_16KB_gc = (0x06<<2),  /* 16K bytes */
-    EBI_CS_ASPACE_32KB_gc = (0x07<<2),  /* 32K bytes */
-    EBI_CS_ASPACE_64KB_gc = (0x08<<2),  /* 64K bytes */
-    EBI_CS_ASPACE_128KB_gc = (0x09<<2),  /* 128K bytes */
-    EBI_CS_ASPACE_256KB_gc = (0x0A<<2),  /* 256K bytes */
-    EBI_CS_ASPACE_512KB_gc = (0x0B<<2),  /* 512K bytes */
-    EBI_CS_ASPACE_1MB_gc = (0x0C<<2),  /* 1M bytes */
-    EBI_CS_ASPACE_2MB_gc = (0x0D<<2),  /* 2M bytes */
-    EBI_CS_ASPACE_4MB_gc = (0x0E<<2),  /* 4M bytes */
-    EBI_CS_ASPACE_8MB_gc = (0x0F<<2),  /* 8M bytes */
-    EBI_CS_ASPACE_16M_gc = (0x10<<2),  /* 16M bytes */
-} EBI_CS_ASPACE_t;
+    EBI_CS_ASIZE_256B_gc = (0x00<<2),  /* 256 bytes */
+    EBI_CS_ASIZE_512B_gc = (0x01<<2),  /* 512 bytes */
+    EBI_CS_ASIZE_1KB_gc = (0x02<<2),  /* 1K bytes */
+    EBI_CS_ASIZE_2KB_gc = (0x03<<2),  /* 2K bytes */
+    EBI_CS_ASIZE_4KB_gc = (0x04<<2),  /* 4K bytes */
+    EBI_CS_ASIZE_8KB_gc = (0x05<<2),  /* 8K bytes */
+    EBI_CS_ASIZE_16KB_gc = (0x06<<2),  /* 16K bytes */
+    EBI_CS_ASIZE_32KB_gc = (0x07<<2),  /* 32K bytes */
+    EBI_CS_ASIZE_64KB_gc = (0x08<<2),  /* 64K bytes */
+    EBI_CS_ASIZE_128KB_gc = (0x09<<2),  /* 128K bytes */
+    EBI_CS_ASIZE_256KB_gc = (0x0A<<2),  /* 256K bytes */
+    EBI_CS_ASIZE_512KB_gc = (0x0B<<2),  /* 512K bytes */
+    EBI_CS_ASIZE_1MB_gc = (0x0C<<2),  /* 1M bytes */
+    EBI_CS_ASIZE_2MB_gc = (0x0D<<2),  /* 2M bytes */
+    EBI_CS_ASIZE_4MB_gc = (0x0E<<2),  /* 4M bytes */
+    EBI_CS_ASIZE_8MB_gc = (0x0F<<2),  /* 8M bytes */
+    EBI_CS_ASIZE_16M_gc = (0x10<<2),  /* 16M bytes */
+} EBI_CS_ASIZE_t;
 
 /*  */
 typedef enum EBI_CS_SRWS_enum
@@ -4075,18 +4075,18 @@ IO Module Instances. Mapped to memory.
 
 /* EBI - External Bus Interface */
 /* EBI_CS.CTRLA  bit masks and bit positions */
-#define EBI_CS_ASPACE_gm  0x7C  /* Address Space group mask. */
-#define EBI_CS_ASPACE_gp  2  /* Address Space group position. */
-#define EBI_CS_ASPACE0_bm  (1<<2)  /* Address Space bit 0 mask. */
-#define EBI_CS_ASPACE0_bp  2  /* Address Space bit 0 position. */
-#define EBI_CS_ASPACE1_bm  (1<<3)  /* Address Space bit 1 mask. */
-#define EBI_CS_ASPACE1_bp  3  /* Address Space bit 1 position. */
-#define EBI_CS_ASPACE2_bm  (1<<4)  /* Address Space bit 2 mask. */
-#define EBI_CS_ASPACE2_bp  4  /* Address Space bit 2 position. */
-#define EBI_CS_ASPACE3_bm  (1<<5)  /* Address Space bit 3 mask. */
-#define EBI_CS_ASPACE3_bp  5  /* Address Space bit 3 position. */
-#define EBI_CS_ASPACE4_bm  (1<<6)  /* Address Space bit 4 mask. */
-#define EBI_CS_ASPACE4_bp  6  /* Address Space bit 4 position. */
+#define EBI_CS_ASIZE_gm  0x7C  /* Address Size group mask. */
+#define EBI_CS_ASIZE_gp  2  /* Address Size group position. */
+#define EBI_CS_ASIZE0_bm  (1<<2)  /* Address Size bit 0 mask. */
+#define EBI_CS_ASIZE0_bp  2  /* Address Size bit 0 position. */
+#define EBI_CS_ASIZE1_bm  (1<<3)  /* Address Size bit 1 mask. */
+#define EBI_CS_ASIZE1_bp  3  /* Address Size bit 1 position. */
+#define EBI_CS_ASIZE2_bm  (1<<4)  /* Address Size bit 2 mask. */
+#define EBI_CS_ASIZE2_bp  4  /* Address Size bit 2 position. */
+#define EBI_CS_ASIZE3_bm  (1<<5)  /* Address Size bit 3 mask. */
+#define EBI_CS_ASIZE3_bp  5  /* Address Size bit 3 position. */
+#define EBI_CS_ASIZE4_bm  (1<<6)  /* Address Size bit 4 mask. */
+#define EBI_CS_ASIZE4_bp  6  /* Address Size bit 4 position. */
 
 #define EBI_CS_MODE_gm  0x03  /* Memory Mode group mask. */
 #define EBI_CS_MODE_gp  0  /* Memory Mode group position. */

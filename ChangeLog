@@ -1,5 +1,27 @@
 2010-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Atmel bug #11742.
+	* include/avr/iox128a1u.h: Change EBI_CS_ASPACE* to
+	EBI_CS_ASIZE*.
+	* include/avr/iox128a1.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox128d3.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox192a3.h: Same.
+	* include/avr/iox192d3.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox256d3.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox64a1u.h: Same.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox64d3.h: Same.
+
+2010-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Atmel bug #11738.
 	* include/avr/iox128d3.h (ADC_FLUSH_bm, ADC_ENABLE_bp): Add missing
 	definitions.
