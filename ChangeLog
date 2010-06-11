@@ -1,3 +1,13 @@
+2010-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Atmel bug #11738.
+	* include/avr/iox128d3.h (ADC_FLUSH_bm, ADC_ENABLE_bp): Add missing
+	definitions.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox192d3.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox64d3.h: Same.
+
 2010-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #30104: power.h - Missing "power_usart1_/enable/disable()"

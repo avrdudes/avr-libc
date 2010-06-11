@@ -3933,6 +3933,9 @@ IO Module Instances. Mapped to memory.
 #define ADC_CH0START_bm  0x04  /* Channel 0 Start Conversion bit mask. */
 #define ADC_CH0START_bp  2  /* Channel 0 Start Conversion bit position. */
 
+#define ADC_FLUSH_bm  0x02  /* ADC Flush bit mask. */
+#define ADC_FLUSH_bp  1  /* ADC Flush bit position. */
+
 #define ADC_ENABLE_bm  0x01  /* Enable ADC bit mask. */
 #define ADC_ENABLE_bp  0  /* Enable ADC bit position. */
 
