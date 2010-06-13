@@ -31,7 +31,7 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 
-/* $Id: strcat_PF.S,v 1.0 2006/01/04 12:00:00 ??????? Exp $ */
+/* $Id$ */
 
 #include "macros.inc"
 
