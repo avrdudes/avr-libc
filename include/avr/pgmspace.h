@@ -1,4 +1,6 @@
-/* Copyright (c) 2002 - 2007  Marek Michalkiewicz
+/* Copyright (c) 2002-2007  Marek Michalkiewicz
+   Copyright (c) 2006, Carlos Lamas
+   Copyright (c) 2009-2010, Jan Waclawek
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -849,6 +851,165 @@ not interfere with data accesses.
 #define PGM_VOID_P const prog_void *
 #endif
 
+
+/* GET_FAR_ADDRESS() macro
+
+   This macro facilitates the obtention of a 32 bit "far" pointer (only 24 bits
+   used) to data even passed the 64KB limit for the 16 bit ordinary pointer. It
+   is similar to the '&' operator, with some limitations.
+
+   Comments:
+
+   - The overhead is minimal and it's mainly due to the 32 bit size operation.
+
+   - 24 bit sizes guarantees the code compatibility for use in future devices.
+
+   - hh8() is an undocumented feature but seems to give the third significant byte
+     of a 32 bit data and accepts symbols, complementing the functionality of hi8()
+     and lo8(). There is not an equivalent assembler function to get the high
+     significant byte.
+
+   - 'var' has to be resolved at linking time as an existing symbol, i.e, a simple
+     type variable name, an array name (not an indexed element of the array, if the
+     index is a constant the compiler does not complain but fails to get the address
+     if optimization is enabled), a struct name or a struct field name, a function
+     identifier, a linker defined identifier,...
+
+   - The returned value is the identifier's VMA (virtual memory address) determined
+     by the linker and falls in the corresponding memory region. The AVR Harvard
+     architecture requires non overlapping VMA areas for the multiple address spaces
+     in the processor: Flash ROM, RAM, and EEPROM. Typical offset for this are
+     0x00000000, 0x00800xx0, and 0x00810000 respectively, derived from the linker
+	 script used and linker options. The value returned can be seen then as a
+     universal pointer.
+
+*/
+
+#define pgm_get_far_address(var)                          \
+({                                                    \
+	uint_farptr_t tmp;                                \
+                                                      \
+	__asm__ __volatile__(                             \
+                                                      \
+			"ldi	%A0, lo8(%1)"           "\n\t"    \
+			"ldi	%B0, hi8(%1)"           "\n\t"    \
+			"ldi	%C0, hh8(%1)"           "\n\t"    \
+			"clr	%D0"                    "\n\t"    \
+		:                                             \
+			"=d" (tmp)                                \
+		:                                             \
+			"p"  (&(var))                             \
+	);                                                \
+	tmp;                                              \
+})
+
+
+/* PROGMEM_FAR macro
+*/
+
+#ifndef PROGMEM_FAR
+#define PROGMEM_FAR __attribute__((__section__("._progmem_far")))
+#endif
+
+#ifndef PROGMEM_SEG1
+#define PROGMEM_SEG1 __attribute__((__section__("._progmem_segment1")))
+#endif
+
+#ifndef PROGMEM_SEG2
+#define PROGMEM_SEG2 __attribute__((__section__("._progmem_segment2")))
+#endif
+
+#ifndef PROGMEM_SEG3
+#define PROGMEM_SEG3 __attribute__((__section__("._progmem_segment3")))
+#endif
+
+#define PROGMEM_SEG1_BASE 0x10000UL
+#define PROGMEM_SEG2_BASE 0x20000UL
+#define PROGMEM_SEG3_BASE 0x30000UL
+
+/* PFSTR() macro
+
+
+*/
+
+# define PFSTR(s) (__extension__({static char __c[] PROGMEM_FAR = (s); pgm_get_far_address(__c[0]);}))
+# define PS1STR(s) (__extension__({static char __c[] PROGMEM_SEG1 = (s); PROGMEM_SEG1_BASE + (uint16_t)&__c[0];}))
+# define PS2STR(s) (__extension__({static char __c[] PROGMEM_SEG2 = (s); PROGMEM_SEG2_BASE + (uint16_t)&__c[0];}))
+# define PS3STR(s) (__extension__({static char __c[] PROGMEM_SEG3 = (s); PROGMEM_SEG3_BASE + (uint16_t)&__c[0];}))
+
+// for segmented access, pointers are 16-bit
+typedef uint16_t uint_segptr_t;
+
+
+#if defined (__AVR_HAVE_LPMX__)
+
+  #define pgm_read_byte_seg1(addr)          \
+  (__extension__({                          \
+      uint16_t __addr16 = (uint16_t)(addr); \
+      uint8_t __result;                     \
+      __asm__                               \
+      (                                     \
+          "ldi r30, 1"   "\n\t"             \
+          "out %2, r30"  "\n\t"             \
+          "movw r30, %1" "\n\t"             \
+          "elpm %0, Z+"  "\n\t"             \
+          : "=r" (__result)                 \
+          : "r" (__addr16),                 \
+            "I" (_SFR_IO_ADDR(RAMPZ))       \
+          : "r30", "r31"                    \
+      );                                    \
+      __result;                             \
+  }))
+
+
+  #define pgm_read_word_seg1(addr)          \
+  (__extension__({                          \
+      uint16_t __addr16 = (uint16_t)(addr); \
+      uint16_t __result;                    \
+      __asm__                               \
+      (                                     \
+          "ldi r30, 1"    "\n\t"            \
+          "out %2, r30"   "\n\t"            \
+          "movw r30, %1"  "\n\t"            \
+          "elpm %A0, Z+"  "\n\t"            \
+          "elpm %B0, Z"   "\n\t"            \
+          : "=r" (__result)                 \
+          : "r" (__addr16),                 \
+            "I" (_SFR_IO_ADDR(RAMPZ))       \
+          : "r30", "r31"                    \
+      );                                    \
+      __result;                             \
+  }))
+
+
+  #define pgm_read_dword_seg1(addr)         \
+  (__extension__({                          \
+      uint16_t __addr16 = (uint16_t)(addr); \
+      uint32_t __result;                    \
+      __asm__                               \
+      (                                     \
+          "ldi r30, 1"    "\n\t"            \
+          "out %2,  r30"  "\n\t"            \
+          "movw r30, %1"  "\n\t"            \
+          "elpm %A0, Z+"  "\n\t"            \
+          "elpm %B0, Z+"  "\n\t"            \
+          "elpm %C0, Z+"  "\n\t"            \
+          "elpm %D0, Z"   "\n\t"            \
+          : "=r" (__result)                 \
+          : "r" (__addr16),                 \
+            "I" (_SFR_IO_ADDR(RAMPZ))       \
+          : "r30", "r31"                    \
+      );                                    \
+      __result;                             \
+  }))
+
+
+#else
+  #error "No pgm_seg support for ATmega103."
+#endif
+
+
+
 extern PGM_VOID_P memchr_P(PGM_VOID_P, int __val, size_t __len) __ATTR_CONST__;
 extern int memcmp_P(const void *, PGM_VOID_P, size_t) __ATTR_PURE__;
 extern void *memccpy_P(void *, PGM_VOID_P, int __val, size_t);
@@ -878,6 +1039,23 @@ extern size_t strspn_P(const char *__s, PGM_P __accept) __ATTR_PURE__;
 extern char *strstr_P(const char *, PGM_P) __ATTR_PURE__;
 extern char *strtok_P(char *__s, PGM_P __delim);
 extern char *strtok_rP(char *__s, PGM_P __delim, char **__last);
+
+extern size_t strlen_PF (uint_farptr_t src) __ATTR_CONST__; /* program memory can't change */
+extern size_t strnlen_PF (uint_farptr_t src, size_t len) __ATTR_CONST__; /* program memory can't change */
+extern void *memcpy_PF (void *dest, uint_farptr_t src, size_t len);
+extern char *strcpy_PF (char *dest, uint_farptr_t src);
+extern char *strncpy_PF (char *dest, uint_farptr_t src, size_t len);
+extern char *strcat_PF (char *dest, uint_farptr_t src);
+extern size_t strlcat_PF (char *dst, uint_farptr_t src, size_t siz);
+extern char *strncat_PF (char *dest, uint_farptr_t src, size_t len);
+extern int strcmp_PF (const char *s1, uint_farptr_t s2) __ATTR_PURE__;
+extern int strncmp_PF (const char *s1, uint_farptr_t s2, size_t n) __ATTR_PURE__;
+extern int strcasecmp_PF (const char *s1, uint_farptr_t s2) __ATTR_PURE__;
+extern int strncasecmp_PF (const char *s1, uint_farptr_t s2, size_t n) __ATTR_PURE__;
+extern char *strstr_PF (const char *s1, uint_farptr_t s2);
+extern size_t strlcpy_PF (char *dst, uint_farptr_t src, size_t siz);
+extern int memcmp_PF(const void *, uint_farptr_t, size_t) __ATTR_PURE__;
+
 
 #ifdef __cplusplus
 }

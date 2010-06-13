@@ -58,6 +58,21 @@ pmstring_a_asm_sources = \
 	strsep_P.S \
 	strspn_P.S \
 	strstr_P.S \
-	strtok_rP.S
+	strtok_rP.S \
+	memcpy_PF.S \
+	strcasecmp_PF.S \
+	strcat_PF.S \
+	strcmp_PF.S \
+	strcpy_PF.S \
+	strlcat_PF.S \
+	strlcpy_PF.S \
+	strlen_PF.S \
+	strncasecmp_PF.S \
+	strncat_PF.S \
+	strncmp_PF.S \
+	strncpy_PF.S \
+	strnlen_PF.S \
+	strstr_PF.S \
+	memcmp_PF.S \
 
 # vim: set ft=make:

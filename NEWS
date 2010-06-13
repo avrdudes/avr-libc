@@ -1,4 +1,4 @@
-*** Changes since avr-libc-1.6.0:
+*** Changes in avr-libc-1.7.0:
 
 * Bugs fixed:
   [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
@@ -293,6 +293,7 @@
 * Contributed Patches:
 
   [#6194] Twitest updated to handle larger EEPROM devices
+  [#6352] Far pointer library
   [#6500] Reentrant code faq
   [#6517] Pgmspace with float support
   [#6555] malloc improvement
@@ -321,7 +322,24 @@
    memccpy_P
    strdup
    strtok
-   strtok_P, strtok_rP
+   strtok_P
+   strtok_rP
+   strlen_PF
+   strnlen_PF
+   memcpy_PF
+   strcpy_PF
+   strncpy_PF
+   strcat_PF
+   strlcat_PF
+   strncat_PF
+   strcmp_PF
+   strncmp_PF
+   strcasecmp_PF
+   strncasecmp_PF
+   strstr_PF
+   strlcpy_PF
+   memcmp_PF
+   
 
 *** Changes in avr-libc-1.6.0:
 

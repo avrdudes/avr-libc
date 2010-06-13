@@ -1,3 +1,27 @@
+2010-06-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Special thanks to Carlos Lamas and Jan Waclawek for contributing
+	code in patch #6352 (that should've gotten in a long time ago).
+	* libc/pmstring/Files.am: Add new files to list.
+	* libc/pmstring/memcmp_PF.S: New file.
+	* libc/pmstring/memcpy_PF.S: Same.
+	* libc/pmstring/strcasecmp_PF.S: Same.
+	* libc/pmstring/strcat_PF.S: Same.
+	* libc/pmstring/strcmp_PF.S: Same.
+	* libc/pmstring/strcpy_PF.S: Same.
+	* libc/pmstring/strlcat_PF.S: Same.
+	* libc/pmstring/strlcpy_PF.S: Same.
+	* libc/pmstring/strlen_PF.S: Same.
+	* libc/pmstring/strncasecmp_PF.S: Same.
+	* libc/pmstring/strncat_PF.S: Same.
+	* libc/pmstring/strncmp_PF.S: Same.
+	* libc/pmstring/strncpy_PF.S: Same.
+	* libc/pmstring/strnlen_PF.S: Same.
+	* libc/pmstring/strstr_PF.S: Same.
+	* include/avr/pgmspace.h: Add support for far program memory
+	functions and macros.
+	* NEWS: Add news items.
+
 2010-06-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Atmel bug #11742.
