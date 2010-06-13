@@ -1004,8 +1004,8 @@ typedef uint16_t uint_segptr_t;
   }))
 
 
-#else
-  #error "No pgm_seg support for ATmega103."
+//#else
+//  No support for segmented program space memory available.
 #endif
 
 

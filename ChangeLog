@@ -1,3 +1,8 @@
+2010-06-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/pgmspace.h: Remove the #error for architectures that
+	don't support segmented progmem access.
+
 2010-06-12  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Special thanks to Carlos Lamas and Jan Waclawek for contributing
