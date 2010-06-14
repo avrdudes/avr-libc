@@ -1,5 +1,9 @@
 2010-06-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* LICENSE: Update copyright year.
+
+2010-06-14  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/pgmspace.h: Remove new features regarding new segments.
 	Feature not yet ready. Correct comment.
 
