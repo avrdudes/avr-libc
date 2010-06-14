@@ -852,7 +852,7 @@ not interfere with data accesses.
 #endif
 
 
-/* GET_FAR_ADDRESS() macro
+/* pgm_get_far_address() macro
 
    This macro facilitates the obtention of a 32 bit "far" pointer (only 24 bits
    used) to data even passed the 64KB limit for the 16 bit ordinary pointer. It
@@ -902,112 +902,6 @@ not interfere with data accesses.
 	);                                                \
 	tmp;                                              \
 })
-
-
-/* PROGMEM_FAR macro
-*/
-
-#ifndef PROGMEM_FAR
-#define PROGMEM_FAR __attribute__((__section__("._progmem_far")))
-#endif
-
-#ifndef PROGMEM_SEG1
-#define PROGMEM_SEG1 __attribute__((__section__("._progmem_segment1")))
-#endif
-
-#ifndef PROGMEM_SEG2
-#define PROGMEM_SEG2 __attribute__((__section__("._progmem_segment2")))
-#endif
-
-#ifndef PROGMEM_SEG3
-#define PROGMEM_SEG3 __attribute__((__section__("._progmem_segment3")))
-#endif
-
-#define PROGMEM_SEG1_BASE 0x10000UL
-#define PROGMEM_SEG2_BASE 0x20000UL
-#define PROGMEM_SEG3_BASE 0x30000UL
-
-/* PFSTR() macro
-
-
-*/
-
-# define PFSTR(s) (__extension__({static char __c[] PROGMEM_FAR = (s); pgm_get_far_address(__c[0]);}))
-# define PS1STR(s) (__extension__({static char __c[] PROGMEM_SEG1 = (s); PROGMEM_SEG1_BASE + (uint16_t)&__c[0];}))
-# define PS2STR(s) (__extension__({static char __c[] PROGMEM_SEG2 = (s); PROGMEM_SEG2_BASE + (uint16_t)&__c[0];}))
-# define PS3STR(s) (__extension__({static char __c[] PROGMEM_SEG3 = (s); PROGMEM_SEG3_BASE + (uint16_t)&__c[0];}))
-
-// for segmented access, pointers are 16-bit
-typedef uint16_t uint_segptr_t;
-
-
-#if defined (__AVR_HAVE_LPMX__)
-
-  #define pgm_read_byte_seg1(addr)          \
-  (__extension__({                          \
-      uint16_t __addr16 = (uint16_t)(addr); \
-      uint8_t __result;                     \
-      __asm__                               \
-      (                                     \
-          "ldi r30, 1"   "\n\t"             \
-          "out %2, r30"  "\n\t"             \
-          "movw r30, %1" "\n\t"             \
-          "elpm %0, Z+"  "\n\t"             \
-          : "=r" (__result)                 \
-          : "r" (__addr16),                 \
-            "I" (_SFR_IO_ADDR(RAMPZ))       \
-          : "r30", "r31"                    \
-      );                                    \
-      __result;                             \
-  }))
-
-
-  #define pgm_read_word_seg1(addr)          \
-  (__extension__({                          \
-      uint16_t __addr16 = (uint16_t)(addr); \
-      uint16_t __result;                    \
-      __asm__                               \
-      (                                     \
-          "ldi r30, 1"    "\n\t"            \
-          "out %2, r30"   "\n\t"            \
-          "movw r30, %1"  "\n\t"            \
-          "elpm %A0, Z+"  "\n\t"            \
-          "elpm %B0, Z"   "\n\t"            \
-          : "=r" (__result)                 \
-          : "r" (__addr16),                 \
-            "I" (_SFR_IO_ADDR(RAMPZ))       \
-          : "r30", "r31"                    \
-      );                                    \
-      __result;                             \
-  }))
-
-
-  #define pgm_read_dword_seg1(addr)         \
-  (__extension__({                          \
-      uint16_t __addr16 = (uint16_t)(addr); \
-      uint32_t __result;                    \
-      __asm__                               \
-      (                                     \
-          "ldi r30, 1"    "\n\t"            \
-          "out %2,  r30"  "\n\t"            \
-          "movw r30, %1"  "\n\t"            \
-          "elpm %A0, Z+"  "\n\t"            \
-          "elpm %B0, Z+"  "\n\t"            \
-          "elpm %C0, Z+"  "\n\t"            \
-          "elpm %D0, Z"   "\n\t"            \
-          : "=r" (__result)                 \
-          : "r" (__addr16),                 \
-            "I" (_SFR_IO_ADDR(RAMPZ))       \
-          : "r30", "r31"                    \
-      );                                    \
-      __result;                             \
-  }))
-
-
-//#else
-//  No support for segmented program space memory available.
-#endif
-
 
 
 extern PGM_VOID_P memchr_P(PGM_VOID_P, int __val, size_t __len) __ATTR_CONST__;
