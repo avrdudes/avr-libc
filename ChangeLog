@@ -1,3 +1,9 @@
+2010-06-15  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* configure.ac: Change ATxemga32A4 from avrxmega3 to avrxmega2.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/using-tools.dox: Same.
+
 2010-06-14  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* LICENSE: Update copyright year.
