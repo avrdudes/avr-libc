@@ -2232,7 +2232,7 @@ TC - 16-bit Timer/Counter With PWM
 /* High-Resolution Extension */
 typedef struct HIRES_struct
 {
-    register8_t CTRL;  /* Control Register */
+    register8_t CTRLA;  /* Control Register A */
 } HIRES_t;
 
 /* Clock Selection */
@@ -3396,7 +3396,7 @@ IO Module Instances. Mapped to memory.
 #define AWEXC_OUTOVEN  _SFR_MEM8(0x088C)
 
 /* HIRESC - High-Resolution Extension C */
-#define HIRESC_CTRL  _SFR_MEM8(0x0890)
+#define HIRESC_CTRLA  _SFR_MEM8(0x0890)
 
 /* USARTC0 - Universal Asynchronous Receiver-Transmitter C0 */
 #define USARTC0_DATA  _SFR_MEM8(0x08A0)
@@ -3476,7 +3476,7 @@ IO Module Instances. Mapped to memory.
 #define TCD1_CCBBUF  _SFR_MEM16(0x097A)
 
 /* HIRESD - High-Resolution Extension D */
-#define HIRESD_CTRL  _SFR_MEM8(0x0990)
+#define HIRESD_CTRLA  _SFR_MEM8(0x0990)
 
 /* USARTD0 - Universal Asynchronous Receiver-Transmitter D0 */
 #define USARTD0_DATA  _SFR_MEM8(0x09A0)
@@ -3564,7 +3564,7 @@ IO Module Instances. Mapped to memory.
 #define AWEXE_OUTOVEN  _SFR_MEM8(0x0A8C)
 
 /* HIRESE - High-Resolution Extension E */
-#define HIRESE_CTRL  _SFR_MEM8(0x0A90)
+#define HIRESE_CTRLA  _SFR_MEM8(0x0A90)
 
 /* USARTE0 - Universal Asynchronous Receiver-Transmitter E0 */
 #define USARTE0_DATA  _SFR_MEM8(0x0AA0)
@@ -3639,7 +3639,7 @@ IO Module Instances. Mapped to memory.
 #define TCF1_CCBBUF  _SFR_MEM16(0x0B7A)
 
 /* HIRESF - High-Resolution Extension F */
-#define HIRESF_CTRL  _SFR_MEM8(0x0B90)
+#define HIRESF_CTRLA  _SFR_MEM8(0x0B90)
 
 /* USARTF0 - Universal Asynchronous Receiver-Transmitter F0 */
 #define USARTF0_DATA  _SFR_MEM8(0x0BA0)
@@ -6415,7 +6415,7 @@ IO Module Instances. Mapped to memory.
 #define AWEX_DTLSBUFV_bp  0  /* Dead Time Low Side Buffer Valid bit position. */
 
 
-/* HIRES.CTRL  bit masks and bit positions */
+/* HIRES.CTRLA  bit masks and bit positions */
 #define HIRES_HREN_gm  0x03  /* High Resolution Enable group mask. */
 #define HIRES_HREN_gp  0  /* High Resolution Enable group position. */
 #define HIRES_HREN0_bm  (1<<0)  /* High Resolution Enable bit 0 mask. */

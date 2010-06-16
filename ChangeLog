@@ -1,5 +1,11 @@
 2010-06-15  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix bug #30148.
+	* include/avr/iox128a1.h: Rename HIRES.CTRL to HIRES.CTRLA.
+	* NEWS: Add to fixed bug list.
+
+2010-06-15  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* configure.ac: Change ATxemga32A4 from avrxmega3 to avrxmega2.
 	* devtools/gen-avr-lib-tree.sh: Same.
 	* doc/api/using-tools.dox: Same.
