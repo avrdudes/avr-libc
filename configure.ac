@@ -39,7 +39,7 @@ dnl library versioning -- modify these on releases
 dnl        macro name           value            description
 m4_define([avr_libc_major],    [1])dnl           major version
 m4_define([avr_libc_minor],    [7])dnl           minor version
-m4_define([avr_libc_revision], [0])dnl           revision (dot-dot version)
+m4_define([avr_libc_revision], [1])dnl           revision (dot-dot version)
 m4_define([avr_libc_reldate],  [20100616])dnl    release date
 dnl end of library versioning data
 
