@@ -1,0 +1,16 @@
+The following tests are currently known to fail.  After changing
+source code of the library, no further failures must arise, or in
+case it is clear the modification causes a different internal
+behaviour (without changing the API) that is then going to be
+checked by one or more testscripts, the testscripts must be
+modified as well.  (An example of the latter was the modification
+to malloc/free to reduce the heap when the topmost chunk had been
+freed.  Several testscripts assumed the final freelist would
+consist of a single large entry which is no longer the case now.)
+
+Simulate: math/isinf-01.c atmega128 ... *** simulate failed: 22
+Simulate: math/isinf-01.c at90s8515 ... *** simulate failed: 22
+Simulate: math/modf-np.c atmega128 ... *** simulate failed: 47
+Simulate: math/modf-np.c at90s8515 ... *** simulate failed: 47
+Simulate: math/signbit-01.c atmega128 ... *** simulate failed: 2
+Simulate: math/signbit-01.c at90s8515 ... *** simulate failed: 2
