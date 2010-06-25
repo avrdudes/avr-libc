@@ -96,6 +96,7 @@ avr_HEADERS = \
     iom16u4.h \
     iom2560.h \
     iom2561.h \
+    iom3000.h \
     iom32.h \
     iom323.h \
     iom324.h \

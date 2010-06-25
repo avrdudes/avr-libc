@@ -1,3 +1,7 @@
+2010-06-24  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/Makefile.am (avr_HEADERS): Add iom3000.h.
+
 2010-06-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version to 1.7.1, after releasing.
