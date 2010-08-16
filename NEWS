@@ -2,6 +2,8 @@
 
 * Bugs fixed:
 
+  [#30783] Missing prototype in power.h
+
 * New devices supported:
 
 * Contributed Patches:

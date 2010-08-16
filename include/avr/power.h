@@ -1486,6 +1486,7 @@ typedef enum
     clock_div_256 = 8
 } clock_div_t;
 
+static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
 
 void clock_prescale_set(clock_div_t __x)
 {

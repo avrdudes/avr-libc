@@ -1,3 +1,11 @@
+2010-08-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Andr'e:
+	bug #30783 Missing prototype in power.h
+	* include/avr/power.h: Add prototype for clock_prescale_set()
+	for the second block (prescaler reachable by IN/OUT
+	instructions).
+
 2010-06-24  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/Makefile.am (avr_HEADERS): Add iom3000.h.
