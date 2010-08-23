@@ -1,3 +1,9 @@
+2010-08-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Atmel internal issue.
+	* include/avr/iotn87.h (BODS, BODSE): Fix value.
+	* include/avr/iotn167.h (BODS, BODSE): Same.
+
 2010-08-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Andr'e:

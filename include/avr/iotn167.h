@@ -1,4 +1,4 @@
-/* Copyright (c) 2008 Atmel Corporation
+/* Copyright (c) 2008-2010 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -298,8 +298,8 @@
 
 #define MCUCR _SFR_IO8(0x35)
 #define PUD 4
-#define BODS 5
-#define BODSE 6
+#define BODSE 5
+#define BODS 6
 
 #define SPMCSR _SFR_IO8(0x37)
 #define SPMEN 0
