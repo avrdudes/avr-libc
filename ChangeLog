@@ -1,3 +1,8 @@
+2010-09-21  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	* include/avr/io90pwm2b.h: Modified SPM_PAGESIZE to 64 bytes.
+	* include/avr/io90pwm3b.h: Same.
+
 2010-09-20  Anitha Boyapati  <anitha.boyapati@atmel.com>
 
 	* include/iom16m1.h: Add definitions for CANSIT, CANIDT and
