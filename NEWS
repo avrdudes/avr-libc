@@ -140,6 +140,7 @@
   [#30104] power.h - Missing "power_usart1_/enable/disable()" functions for ATmega644
   [#30148] XMEGA register discrepancy
   [#30600] Missing processor spec - wdt.h include file
+  [#30597] Missing definition for ATmega16/32/64m1/c1
 
 * Other changes:
 

@@ -1,4 +1,14 @@
 2010-09-20  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	* include/iom16m1.h: Add definitions for CANSIT, CANIDT and
+	CANIDM.
+	* include/iom32m1.h: Same.
+	* include/iom64m1.h: Same.
+	* include/iom32c1.h: Same.
+	* include/iom64c1.h: Same.
+
+2010-09-20  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
 	* include/avr/wdt.h: Add definitions for ATmega325P and
 	ATmega3250P
 
