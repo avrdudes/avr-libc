@@ -1,3 +1,7 @@
+2010-09-20  Anitha Boyapati  <anitha.boyapati@atmel.com>
+	* include/avr/wdt.h: Add definitions for ATmega325P and
+	ATmega3250P
+
 2010-08-22  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Atmel internal issue.

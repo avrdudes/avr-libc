@@ -215,8 +215,10 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega324PA__) \
 || defined(__AVR_ATmega325__) \
 || defined(__AVR_ATmega325A__) \
+|| defined(__AVR_ATmega325P__) \
 || defined(__AVR_ATmega3250__) \
 || defined(__AVR_ATmega3250A__) \
+|| defined(__AVR_ATmega3250P__) \
 || defined(__AVR_ATmega328__) \
 || defined(__AVR_ATmega328P__) \
 || defined(__AVR_ATmega329__) \
