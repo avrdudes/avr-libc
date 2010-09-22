@@ -145,6 +145,7 @@
   [#30552] Missing definition ADCW
   [#30569] ATmega16U4/32U4 wrong bit definition
   [#30669] Improve comment in stdiodemo
+  [#30735] bug in example twitest
 
 * Other changes:
 

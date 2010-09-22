@@ -368,7 +368,7 @@ ee24xx_write_page(uint16_t eeaddr, int len, uint8_t *buf)
   int rv = 0;
   uint16_t endaddr;
 
-  if (eeaddr + len < (eeaddr | (PAGE_SIZE - 1)))
+  if (eeaddr + len <= (eeaddr | (PAGE_SIZE - 1)))
     endaddr = eeaddr + len;
   else
     endaddr = (eeaddr | (PAGE_SIZE - 1)) + 1;
