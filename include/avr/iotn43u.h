@@ -74,7 +74,10 @@
 #define ADLAR  4
 #define ACME   6
 
+#ifndef _ASSEMBLER_
 #define ADC _SFR_IO16(0x04)
+#endif
+#define ADCW _SFR_IO16(0x04)
 
 #define ADCL _SFR_IO8(0x04)
 #define ADCL0  0

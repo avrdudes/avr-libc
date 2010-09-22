@@ -540,7 +540,10 @@
 
 #define TIMSK5 _SFR_MEM8(0x73)
 
+#ifndef _ASSEMBLER_
 #define ADC _SFR_MEM16(0x78)
+#endif
+#define ADCW _SFR_MEM16(0x78)
 
 #define ADCL _SFR_MEM8(0x78)
 #define ADCL0 0
@@ -576,7 +579,7 @@
 #define ADTS0 0
 #define ADTS1 1
 #define ADTS2 2
-#define ADTS3 4
+#define ADTS3 3
 #define MUX5 5
 #define ACME 6
 #define ADHSM 7

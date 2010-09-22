@@ -1,3 +1,14 @@
+2010-09-22  Anitha Boyapti  <anitha.boyapati@atmel.com>
+
+	Fix for bugs #30552 and #30569. 
+	Thanks to Frederic Nadeau for the patch.
+	* include/avr/iom16u4.h: Modify ADCTS3 to 3.
+	* include/avr/iom32u4.h: Add definition for ADCW.
+	Add__ASSEMBLER__ macro for ADC.
+	Modify ADCTS3 to 3
+	* include/avr/iotn43u.h: Add definition for ADCW.
+	Add__ASSEMBLER__ macro for ADC.
+
 2010-09-21  Anitha Boyapati  <anitha.boyapati@atmel.com>
 
 	* include/avr/io90pwm2b.h: Modified SPM_PAGESIZE to 64 bytes.

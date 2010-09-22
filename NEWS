@@ -142,6 +142,8 @@
   [#30600] Missing processor spec - wdt.h include file
   [#30597] Missing definition for ATmega16/32/64m1/c1
   [#30475] SPM_PAGESIZE is incorrect in io90pwm3b.h and io90pwm2b.h
+  [#30552] Missing definition ADCW
+  [#30569] ATmega16U4/32U4 wrong bit definition
 
 * Other changes:
 

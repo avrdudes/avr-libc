@@ -561,7 +561,7 @@
 #define ADTS0 0
 #define ADTS1 1
 #define ADTS2 2
-#define ADTS3 4
+#define ADTS3 3
 #define MUX5 5
 #define ACME 6
 #define ADHSM 7
