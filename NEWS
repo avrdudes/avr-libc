@@ -144,6 +144,7 @@
   [#30475] SPM_PAGESIZE is incorrect in io90pwm3b.h and io90pwm2b.h
   [#30552] Missing definition ADCW
   [#30569] ATmega16U4/32U4 wrong bit definition
+  [#30669] Improve comment in stdiodemo
 
 * Other changes:
 

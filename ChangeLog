@@ -1,5 +1,9 @@
 2010-09-22  Anitha Boyapti  <anitha.boyapati@atmel.com>
 
+	* doc/examples/stdiodemo/defines.h: Modify comment
+
+2010-09-22  Anitha Boyapti  <anitha.boyapati@atmel.com>
+
 	Fix for bugs #30552 and #30569. 
 	Thanks to Frederic Nadeau for the patch.
 	* include/avr/iom16u4.h: Modify ADCTS3 to 3.
