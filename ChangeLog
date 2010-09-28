@@ -1,3 +1,7 @@
+2010-09-28  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	* include/avr/iotn88.h: Fix RAMEND.
+
 2010-09-22  Anitha Boyapati  <anitha.boyapati@atmel.com>
 
 	* doc/examples/twitest/twitest.c: Fix endaddr calculation
