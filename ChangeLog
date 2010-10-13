@@ -1,3 +1,13 @@
+2010-10-13  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	* include/util/delay.h.in: Functions _delay_ms and 
+	_delay_us are modified. They now calculate new _ticks
+	value when builtin_avr_delay_cycle() is used. Macros
+	__DELAY_ROUND_DOWN__, __DELAY_ROUND_CLOSEST__ control
+	round up/closest of _ticks. __DELAY_BACKWARD_COMPATIBLE__
+	macro enables backward compatibility. This macro will be
+	deprecated.
+
 2010-09-28  Anitha Boyapati  <anitha.boyapati@atmel.com>
 
 	* include/avr/iotn88.h: Fix RAMEND.
