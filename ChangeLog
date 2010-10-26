@@ -1,3 +1,10 @@
+2010-10-26  Anitha Boyapati  <anitha.boyapati@atmel.com>
+
+	Thanks to Eric Weddington for the patch.
+	* common/macros.inc: __tmp_reg__ and __zero_reg__
+	redefined for tiny target.
+	* include/avr/iom3000.h: Define _VECTORS_SIZE.
+
 2010-10-13  Anitha Boyapati  <anitha.boyapati@atmel.com>
 
 	* include/util/delay.h.in: Functions _delay_ms and 

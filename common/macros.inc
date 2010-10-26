@@ -94,12 +94,20 @@
 #define r30 _R(r30)
 #define r31 _R(r31)
 
-#ifndef __tmp_reg__
-#define __tmp_reg__ r0
+#if !defined(__tmp_reg__)
+    #if defined(__AVR_TINY__)
+        #define __tmp_reg__ r16
+    #else
+        #define __tmp_reg__ r0
+    #endif
 #endif
 
-#ifndef __zero_reg__
-#define __zero_reg__ r1
+#if !defined(__zero_reg__)
+    #if defined(__AVR_TINY__)
+        #define __zero_reg__ r17
+    #else
+        #define __zero_reg__ r1
+    #endif
 #endif
 
 #if __AVR_MEGA__

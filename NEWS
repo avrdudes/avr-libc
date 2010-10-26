@@ -21,6 +21,8 @@
   [no-id] xmega header file updates.
   [no-id] Enable ATmega128RFA1 in <avr/power.h>
   [no-id] longjmp() writes to EIND register, it is forbidden by AVR-GCC's API
+  [no-id] Define _VECTORS_SIZE in iom3000.h
+  [no-id] Redefine __tmp_reg__ and __zer_reg__ for AVR TINY. 
   [AVR Tools: #9724] Error in ATtiny13A include file, PRR register
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [sourceforge.net: #1883630] ATmegaXX4 - USART0 and USART1 additional bits aliases
