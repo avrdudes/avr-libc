@@ -35,6 +35,9 @@
 
 /* $Id$ */
 
+
+#if !defined(__AVR_TINY__)
+
 #include "macros.inc"
 
 #define src_b3 r25
@@ -93,3 +96,5 @@ _U(strnlen_PF):
 	.size	_U(strnlen_PF), .L_strnlen_PF_end - _U(strnlen_PF)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

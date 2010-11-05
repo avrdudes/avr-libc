@@ -32,6 +32,8 @@
 /*
  */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -252,3 +254,5 @@ ENTRY   __mulsf3_pse			; post split entry
 	bld	rA3, 7		; sign
 	ret
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

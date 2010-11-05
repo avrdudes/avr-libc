@@ -40,6 +40,8 @@
     \returns The strncat_P() function returns a pointer to the resulting string
     dest.  */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -81,3 +83,5 @@ _U(strncat_P):
 	.size	_U(strncat_P), .L_strncat_P_end - _U(strncat_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

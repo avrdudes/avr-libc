@@ -33,6 +33,8 @@
 /* From: Id: printf_p_new.c,v 1.1.1.9 2002/10/15 20:10:28 joerg_wunsch Exp */
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include <avr/pgmspace.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -711,4 +713,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
   ret:
     return stream->len;
 }
+
 #endif	/* PRINTF_LEVEL > PRINTF_MIN */
+
+#endif /* !defined(__AVR_TINY__) */

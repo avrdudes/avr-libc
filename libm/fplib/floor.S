@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -68,3 +70,5 @@ ENTRY floor
 
 .L_nf:	rjmp	_U(__fp_mpack)	; pass nonfinite arg as is
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

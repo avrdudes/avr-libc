@@ -48,6 +48,8 @@
     \returns The strtok_r() function returns a pointer to the next token or
     NULL when no more tokens are found. */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -153,4 +155,7 @@ ENTRY strtok_r
 	ret
 
 ENDFUNC
+
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

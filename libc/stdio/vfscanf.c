@@ -32,6 +32,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include <avr/pgmspace.h>
 #include <ctype.h>
 #include <limits.h>
@@ -880,3 +882,5 @@ int vfscanf (FILE * stream, const char *fmt, va_list ap)
   eof:
     return nconvs ? nconvs : EOF;
 }
+
+#endif /* !defined(__AVR_TINY__) */

@@ -56,6 +56,9 @@
     of the substring, or NULL if the substring is not found. If \p s2
     points to a string of zero length, the function returns \p s1. */
 
+
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -113,3 +116,5 @@ _U(strstr_P):
 .size _U(strstr_P), . - _U(strstr_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

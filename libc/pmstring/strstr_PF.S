@@ -50,6 +50,8 @@
     If \c s2 points to a string of zero length, the function returns \c s1. The
     contents of RAMPZ SFR are undefined when the function returns */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #define s1_b1 r25
@@ -122,3 +124,5 @@ _U(strstr_PF):
 	.size _U(strstr_PF), .L_strstr_end_P - _U(strstr_PF)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

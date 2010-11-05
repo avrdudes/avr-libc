@@ -37,6 +37,9 @@
 
     \returns The memcpy_P() function returns a pointer to dest.  */
 
+
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -85,3 +88,5 @@ _U(memcpy_P):
 	.size	_U(memcpy_P), .L_memcpy_P_end - _U(memcpy_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

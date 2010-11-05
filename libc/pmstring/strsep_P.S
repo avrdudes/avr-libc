@@ -52,6 +52,9 @@
     value of \p *sp. If \p *sp is initially \c NULL, strsep_P() returns
     \c NULL.	*/
      
+
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -100,3 +103,5 @@ _U(strsep_P):
 
 	.size	_U(strsep_P), . - _U(strsep_P)
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

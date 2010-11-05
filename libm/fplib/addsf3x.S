@@ -41,6 +41,8 @@
      rA2.rA1.rA0.rAE.ZH
  */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -172,3 +174,5 @@ ENTRY	__addsf3x
 	ror	rA2
 	ret
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

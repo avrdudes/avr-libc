@@ -40,6 +40,8 @@
     character, or a pointer to the null byte at the end of \p s (i.e.,
     \c s+strlen(s)) if the character is not found.	*/
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -61,4 +63,7 @@ ENTRY strchrnul_P
 	X_movw	ret_lo, ZL
 	ret
 ENDFUNC
+
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

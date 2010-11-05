@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -116,3 +118,5 @@ ENTRY   __fp_splitA
 8:	sec
 	ret
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

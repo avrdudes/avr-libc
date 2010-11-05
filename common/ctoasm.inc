@@ -48,15 +48,27 @@
 
 #define rByte    r24   /* a function returning a byte passes this as if it was
                           an integer in R25:R24, but R25 is unused */
-/* temporary registers, usable without saving,
+
+/* Temporary registers, usable without saving,
    maybe clobbered after an external function call */
-#ifndef __tmp_reg__
-#define __tmp_reg__     r0
+#if !defined(__tmp_reg__)
+    #if defined(__AVR_TINY__)
+        #define __tmp_reg__ r16
+    #else
+        #define __tmp_reg__ r0
+    #endif
 #endif
-/* r1 MUST be cleared on return */
-#ifndef __zero_reg__
-#define __zero_reg__    r1
+
+/* The zero constant register MUST be cleared on return. */
+#if !defined(__zero_reg__)
+    #if defined(__AVR_TINY__)
+        #define __zero_reg__ r17
+    #else
+        #define __zero_reg__ r1
+    #endif
 #endif
+
+
 
 #define rTI0     r31  /* 1st temporary with immidiate */
 #define rTI1     r30  /* 2nd temporary with immidiate */

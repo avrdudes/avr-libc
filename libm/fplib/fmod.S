@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -130,3 +132,5 @@ ENTRY fmod
 	brne	9b
 	rjmp	8b
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

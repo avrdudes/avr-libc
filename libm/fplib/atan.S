@@ -42,6 +42,9 @@
 	    return x * (1 - C1 * x**2 + ... + C8 * x**16)
  */
 
+
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -112,3 +115,5 @@ ENDFUNC
 	.byte	0x91,0x6b,0xaa,0xaa,0xbe	; -0.3333314528
 	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
 	.end
+
+#endif /* !defined(__AVR_TINY__) */

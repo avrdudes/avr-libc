@@ -50,6 +50,8 @@
     \returns The strtok_rP() function returns a pointer to the next token or
     NULL when no more tokens are found. */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -229,4 +231,7 @@ ENTRY strtok_rP
 #endif	/* !__AVR_HAVE_LPMX__ */
 
 ENDFUNC
+
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

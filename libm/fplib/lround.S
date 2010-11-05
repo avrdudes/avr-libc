@@ -28,6 +28,9 @@
 
 /* $Id$ */
 
+
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -118,3 +121,5 @@ ENTRY lround
 .L_zr:	rjmp	_U(__fp_zero)	; return 0x00000000
 
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

@@ -43,6 +43,8 @@
     \returns The strchr() function returns a pointer to the matched
     character or \c NULL if the character is not found. */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -77,3 +79,5 @@ _U(strchr):
 	.size	_U(strchr), .L_strchr_end - _U(strchr)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

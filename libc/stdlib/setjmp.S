@@ -28,6 +28,10 @@
 
 /* $Id$ */
 
+
+#if !defined(__AVR_TINY__)
+
+
 /*
    setjmp.S
 
@@ -165,3 +169,5 @@ _U(longjmp):
 	.size	_U(longjmp), . - _U(longjmp)
 
 #endif	/* !__DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

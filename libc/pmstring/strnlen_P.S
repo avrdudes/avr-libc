@@ -44,6 +44,9 @@
     \c len, or \c len if there is no '\\0' character among the first \c len
     characters pointed to by \c src. */
 
+
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -75,3 +78,5 @@ _U(strnlen_P):
 	.size	_U(strnlen_P), .L_strnlen_P_end - _U(strnlen_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

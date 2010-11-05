@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -78,3 +80,5 @@ ENTRY fmin
 	ror	rA3
 	ret
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

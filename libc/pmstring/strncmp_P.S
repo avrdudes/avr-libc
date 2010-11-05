@@ -39,6 +39,8 @@
     or greater than zero if s1 (or the first n bytes thereof) is found,
     respectively, to be less than, to match, or be greater than s2.  */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -79,3 +81,5 @@ _U(strncmp_P):
 	.size	_U(strncmp_P), .L_strncmp_P_end - _U(strncmp_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

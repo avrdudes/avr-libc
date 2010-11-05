@@ -55,8 +55,22 @@
    Let us save it, as one is usefull to find externals quickly.	*/
 #define	_U(name)	name
 
-#define __tmp_reg__	r0
-#define __zero_reg__	r1
+#if !defined(__tmp_reg__)
+    #if defined(__AVR_TINY__)
+        #define __tmp_reg__ r16
+    #else
+        #define __tmp_reg__ r0
+    #endif
+#endif
+
+#if !defined(__zero_reg__)
+    #if defined(__AVR_TINY__)
+        #define __zero_reg__ r17
+    #else
+        #define __zero_reg__ r1
+    #endif
+#endif
+
 
 #define	XL	r26
 #define	XH	r27

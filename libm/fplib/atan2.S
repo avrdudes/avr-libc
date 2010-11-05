@@ -54,6 +54,10 @@
 	else
 	    return -Pi + atan(y/x)	// -3*Pi/4 .. -Pi
  */
+
+
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -137,3 +141,5 @@ ENTRY   atan2
 
 9:	ret
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

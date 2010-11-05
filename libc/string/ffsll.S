@@ -28,6 +28,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 /** \file */
 
 /** \ingroup avr_string
@@ -88,4 +90,7 @@ _U(ffsll):
 	
     .size  _U(ffsll), . - _U(ffsll)
     .end
+
 #endif	/* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

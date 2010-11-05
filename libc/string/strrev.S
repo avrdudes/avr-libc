@@ -47,6 +47,8 @@
     \returns The strrev() function returns a pointer to the beginning of the
     reversed string.  */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -84,3 +86,5 @@ _U(strrev):
     .size _U(strrev), . - _U(strrev)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

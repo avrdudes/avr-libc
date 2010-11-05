@@ -63,7 +63,7 @@
 #define ret_hi r25
 #define ret_lo r24
 
-#ifdef	Lprogmem
+#if defined(Lprogmem) && !defined(__AVR_TINY__)
 # define memccpy    memccpy_P
 # define LOAD	    X_lpm
 #else

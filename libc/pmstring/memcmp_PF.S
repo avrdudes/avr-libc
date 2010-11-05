@@ -52,6 +52,9 @@
     respectively, to be less than, to match, or be greater than the first
     \p len bytes of \p s2.  */
 
+
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -101,3 +104,5 @@ _U(memcmp_PF):
   .size _U(memcmp_PF), . - _U(memcmp_PF)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

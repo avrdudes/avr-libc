@@ -28,6 +28,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -88,4 +90,7 @@ ENTRY round
 
 .L_nf:	rjmp	_U(__fp_mpack)	; pass nonfinite arg "as is"
 .L_zr:	rjmp	_U(__fp_szero)	; return +0.0/-0.0
+
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

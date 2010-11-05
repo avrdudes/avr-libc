@@ -47,6 +47,7 @@
     The memmem_P() function is similar to memmem() except that \p s2 is
     pointer to a string in program space.	*/
 
+#if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)
 
@@ -124,4 +125,7 @@ ENTRY memmem
 	ret
 
 ENDFUNC
+
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

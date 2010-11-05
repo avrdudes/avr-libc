@@ -42,6 +42,8 @@
     ordering used by strcmp_P() is that if \p s1 is an initial substring
     of \p s2, then \p s1 is considered to be "less than" \p s2. */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -73,3 +75,5 @@ _U(strcmp_P):
 	.size	_U(strcmp_P), .L_strcmp_P_end - _U(strcmp_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

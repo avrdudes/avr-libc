@@ -37,6 +37,8 @@
 
     \returns The strlen() function returns the number of characters in src. */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -65,3 +67,5 @@ _U(strlen_P):
 	.size	_U(strlen_P), .L_strlen_P_end - _U(strlen_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

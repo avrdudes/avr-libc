@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -53,3 +55,5 @@ ENTRY __fixsfsi
 	rjmp	_U(__fp_szero)		; return 0x80000000
 	ret
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */

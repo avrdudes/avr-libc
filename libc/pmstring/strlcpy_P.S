@@ -49,6 +49,8 @@
     \returns The strlcpy_P() function returns strlen(src). If
     retval >= siz, truncation occurred.  */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -92,4 +94,7 @@ ENTRY strlcpy_P
 	rjmp	2b
 
 ENDFUNC
+
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

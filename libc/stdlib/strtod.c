@@ -30,6 +30,10 @@
 
 /* $Id$ */
 
+
+#if !defined(__AVR_TINY__)
+
+
 #include <avr/pgmspace.h>
 #include <ctype.h>
 #include <errno.h>
@@ -219,3 +223,5 @@ strtod (const char * nptr, char ** endptr)
 
     return x.flt;
 }
+
+#endif

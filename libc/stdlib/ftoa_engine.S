@@ -28,6 +28,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"
@@ -530,3 +532,5 @@ __ftoa_engine:
 
 	.end
 #endif	/* !__DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

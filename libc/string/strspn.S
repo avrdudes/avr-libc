@@ -39,6 +39,8 @@
     the initial segment of \p s which consist only of characters from \p
     accept. The terminating zero is not considered as a part of string.	*/
 
+#if !defined(__AVR_TINY__)
+
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"
@@ -79,4 +81,7 @@ _U(strspn):
 	ret
 
 	.size _U(strspn), . - _U(strspn)
+
 #endif	/* !__DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

@@ -41,6 +41,8 @@
     considered as a part of string: if one or both args are empty, the
     result will \c NULL.	*/
 
+#if !defined(__AVR_TINY__)
+
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"
@@ -78,4 +80,7 @@ _U(strpbrk):
 3:	ret
 
 	.size _U(strpbrk), . - _U(strpbrk)
+
 #endif	/* !__DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

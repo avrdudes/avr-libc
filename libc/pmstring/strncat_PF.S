@@ -34,6 +34,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "macros.inc"
 
 #define dest_b1 r25
@@ -107,3 +109,5 @@ _U(strncat_PF):
 	.size	_U(strncat_PF), .L_strncat_PF_end - _U(strncat_PF)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

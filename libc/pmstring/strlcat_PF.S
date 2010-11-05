@@ -54,6 +54,8 @@
     strlen(initial \e dst)).  If retval >= \e n, truncation occurred. The
     contents of RAMPZ SFR are undefined when the funcion returns */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -150,3 +152,5 @@ _U(strlcat_PF):
 	.size	_U(strlcat_PF), .L_strlcat_PF_end - _U(strlcat_PF)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

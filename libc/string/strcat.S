@@ -41,6 +41,8 @@
     \returns The strcat() function returns a pointer to the resulting string
     dest.  */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -72,3 +74,5 @@ _U(strcat):
 	.size	_U(strcat), .L_strcat_end - _U(strcat)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

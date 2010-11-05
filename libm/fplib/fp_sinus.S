@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -72,3 +74,5 @@ ENDFUNC
 	.byte	0xa6,0xaa,0xaa,0x2a,0xbe	; -0.1666666664
 	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
 	.end				
+
+#endif /* !defined(__AVR_TINY__) */

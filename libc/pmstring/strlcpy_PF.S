@@ -45,6 +45,8 @@
     truncation occurred.  The contents of RAMPZ SFR are undefined when the
     function returns */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -105,3 +107,5 @@ _U(strlcpy_PF):
 	.size	_U(strlcpy_PF), .L_strlcpy_PF_end - _U(strlcpy_PF)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

@@ -41,6 +41,8 @@
   ----------------------------------------------------------------------
 */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -94,3 +96,4 @@ _U(utoa):
 
 #endif /* not __DOXYGEN__ */
 
+#endif /* !defined(__AVR_TINY__) */

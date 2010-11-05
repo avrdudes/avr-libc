@@ -28,6 +28,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 /** \file */
 
 #include <avr/pgmspace.h>
@@ -52,6 +54,7 @@
     \note strtok_P() is NOT reentrant. For a reentrant version of this
     function see strtok_rP().
  */
+ 
 ATTRIBUTE_CLIB_SECTION
 char *
 strtok_P (char *s, PGM_P delim)
@@ -59,3 +62,5 @@ strtok_P (char *s, PGM_P delim)
     static char *p;
     return strtok_rP (s, delim, &p);
 }
+
+#endif /* !defined(__AVR_TINY__) */

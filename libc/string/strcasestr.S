@@ -48,6 +48,8 @@
     This funtion is similar to strcasestr() except that \p s2 is pointer
     to a string in program space.	*/
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -133,4 +135,7 @@ ENTRY strcasestr
 1:	ret
 
 ENDFUNC
+
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

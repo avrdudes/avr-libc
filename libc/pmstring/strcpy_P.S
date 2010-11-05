@@ -38,6 +38,9 @@
     \returns The strcpy_P() function returns a pointer to the destination
     string dest. */
 
+
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -66,3 +69,5 @@ _U(strcpy_P):
 	.size	_U(strcpy_P), .L_strcpy_P_end - _U(strcpy_P)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

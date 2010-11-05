@@ -32,6 +32,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "macros.inc"
 
 #define s1_b1 r25
@@ -91,3 +93,5 @@ _U(strcmp_PF):
 	.size	_U(strcmp_PF), .L_strcmp_PF_end - _U(strcmp_PF)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

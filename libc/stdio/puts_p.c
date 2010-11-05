@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include <stdio.h>
 #include <avr/pgmspace.h>
 #include "sectionname.h"
@@ -58,3 +60,5 @@ puts_P(const char *str)
 
 	return rv;
 }
+
+#endif /* !defined(__AVR_TINY__) */

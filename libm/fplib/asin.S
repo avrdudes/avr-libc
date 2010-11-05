@@ -33,6 +33,10 @@
      The asin() function returns the arc sine in radians and the value is
      mathematically defined to be between -PI/2 and PI/2 (inclusive).
  */
+
+
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -80,3 +84,5 @@ ENDFUNC
 	.byte	0xab,0xaa,0xaa,0x2a,0x3e	; 1/6
 	.byte	0x00,0x00,0x00,0x80,0x3f	; 1
 	.end
+
+#endif /* !defined(__AVR_TINY__) */

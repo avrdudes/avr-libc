@@ -40,6 +40,8 @@
     byte or \c NULL if the character does not occur in the given memory
     area.	*/
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -72,3 +74,5 @@ ENTRY memrchr
 ENDFUNC
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

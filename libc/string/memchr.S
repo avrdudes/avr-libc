@@ -40,6 +40,8 @@
     \returns The memchr() function returns a pointer to the matching byte or
     NULL if the character does not occur in the given memory area.  */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -77,3 +79,5 @@ _U(memchr):
 	.size	_U(memchr), .L_memchr_end - _U(memchr)
 
 #endif /* not __DOXYGEN__ */
+
+#endif /* !defined(__AVR_TINY__) */

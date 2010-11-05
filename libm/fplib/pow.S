@@ -29,6 +29,8 @@
 
 /* $Id$ */
 
+#if !defined(__AVR_TINY__)
+
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -212,3 +214,5 @@ ENTRY pow
 	rcall	_U(__mulsf3)
 	rjmp	_U(exp)
 ENDFUNC
+
+#endif /* !defined(__AVR_TINY__) */
