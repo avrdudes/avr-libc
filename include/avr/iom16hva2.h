@@ -690,8 +690,8 @@
 #define TIMER0_COMPB_vect      _VECTOR(14)  /* Timer 0 Compare Match B */
 #define TIMER0_OVF_vect_num  15
 #define TIMER0_OVF_vect      _VECTOR(15)  /* Timer 0 Overflow */
-#define SPI;STC_vect_num  16
-#define SPI;STC_vect      _VECTOR(16)  /* SPI Serial transfer complete */
+#define SPI_STC_vect_num  16
+#define SPI_STC_vect      _VECTOR(16)  /* SPI Serial transfer complete */
 #define VADC_vect_num  17
 #define VADC_vect      _VECTOR(17)  /* Voltage ADC Conversion Complete */
 #define CCADC_CONV_vect_num  18

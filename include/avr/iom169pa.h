@@ -794,20 +794,20 @@
 #define UBRR0 _SFR_MEM16(0xC4)
 
 #define UBRR0L _SFR_MEM8(0xC4)
-#define UBRR0 0
-#define UBRR1 1
-#define UBRR2 2
-#define UBRR3 3
-#define UBRR4 4
-#define UBRR5 5
-#define UBRR6 6
-#define UBRR7 7
+#define UBRR0_0 0
+#define UBRR0_1 1
+#define UBRR0_2 2
+#define UBRR0_3 3
+#define UBRR0_4 4
+#define UBRR0_5 5
+#define UBRR0_6 6
+#define UBRR0_7 7
 
 #define UBRR0H _SFR_MEM8(0xC5)
-#define UBRR8 0
-#define UBRR9 1
-#define UBRR10 2
-#define UBRR11 3
+#define UBRR0_8 0
+#define UBRR0_9 1
+#define UBRR0_10 2
+#define UBRR0_11 3
 
 #define UDR0 _SFR_MEM8(0xC6)
 #define UDR00 0

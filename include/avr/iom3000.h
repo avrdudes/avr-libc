@@ -1,4 +1,4 @@
-/* Copyright (c) 2010, Atmel Corporation
+1/* Copyright (c) 2010, Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -168,11 +168,15 @@
 #define VELACC2 _SFR_MEM8(0x212)
 #define VELACC3 _SFR_MEM8(0x213)
 #define VELCVEL _SFR_MEM8(0x214)
+/*
 #define VELCVEL _SFR_MEM8(0x215)
 #define VELCVEL _SFR_MEM8(0x216)
+*/
 #define VELTVEL _SFR_MEM8(0x217)
+/*
 #define VELTVEL _SFR_MEM8(0x218)
 #define VELTVEL _SFR_MEM8(0x219)
+*/
 #define VELVGCTL _SFR_MEM8(0x21A)
 #define VELSTB _SFR_MEM8(0x21B)
 #define VELIFLG _SFR_MEM8(0x21C)

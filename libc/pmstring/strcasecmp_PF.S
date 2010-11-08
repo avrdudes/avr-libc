@@ -109,4 +109,4 @@ _U(strcasecmp_PF):
 
 #endif /* not __DOXYGEN__ */
 
-#endif !defined(__AVR_TINY__)
+#endif /* !defined(__AVR_TINY__) */

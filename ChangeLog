@@ -1,120 +1,127 @@
+2010-11-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom169pa.h: Rename UBRR0* definitions to remove a duplicate.
+	* libc/pmstring/strcasecmp_PF.S: Fix warning at end of file.
+	* include/avr/iom16hva2.h: Fix SPI interrupt vector names.
+	* include/avr/iom3000.h: Comment out duplicate definitions.
+
 2010-11-05  Eric B. Weddington  <eric.weddington@atmel.com>
 
-	common/asmdef.h: Add conditional compilation to not compile for
+	* common/asmdef.h: Add conditional compilation to not compile for
 	ATiny10 family.
-	common/ctoasm.inc: Same.
-	libc/misc/eeupd_byte.S: Same.
-	libc/misc/itoa.S: Same.
-	libc/misc/utoa.S: Same.
-	libc/pmstring/memchr_P.S: Same.
-	libc/pmstring/memcmp_P.S: Same.
-	libc/pmstring/memcmp_PF.S: Same.
-	libc/pmstring/memcpy_P.S: Same.
-	libc/pmstring/memcpy_PF.S: Same.
-	libc/pmstring/memrchr_P.S: Same.
-	libc/pmstring/strcasecmp_P.S: Same.
-	libc/pmstring/strcasecmp_PF.S: Same.
-	libc/pmstring/strcat_P.S: Same.
-	libc/pmstring/strcat_PF.S: Same.
-	libc/pmstring/strchr_P.S: Same.
-	libc/pmstring/strchrnul_P.S: Same.
-	libc/pmstring/strcmp_P.S: Same.
-	libc/pmstring/strcmp_PF.S: Same.
-	libc/pmstring/strcpy_P.S: Same.
-	libc/pmstring/strcpy_PF.S: Same.
-	libc/pmstring/strcspn_P.S: Same.
-	libc/pmstring/strlcat_P.S: Same.
-	libc/pmstring/strlcat_PF.S: Same.
-	libc/pmstring/strlcpy_P.S: Same.
-	libc/pmstring/strlcpy_PF.S: Same.
-	libc/pmstring/strlen_P.S: Same.
-	libc/pmstring/strlen_PF.S: Same.
-	libc/pmstring/strncasecmp_P.S: Same.
-	libc/pmstring/strncasecmp_PF.S: Same.
-	libc/pmstring/strncat_P.S: Same.
-	libc/pmstring/strncat_PF.S: Same.
-	libc/pmstring/strncmp_P.S: Same.
-	libc/pmstring/strncmp_PF.S: Same.
-	libc/pmstring/strncpy_P.S: Same.
-	libc/pmstring/strncpy_PF.S: Same.
-	libc/pmstring/strnlen_P.S: Same.
-	libc/pmstring/strnlen_PF.S: Same.
-	libc/pmstring/strpbrk_P.S: Same.
-	libc/pmstring/strrchr_P.S: Same.
-	libc/pmstring/strsep_P.S: Same.
-	libc/pmstring/strspn_P.S: Same.
-	libc/pmstring/strstr_P.S: Same.
-	libc/pmstring/strstr_PF.S: Same.
-	libc/pmstring/strtok_P.c: Same.
-	libc/pmstring/strtok_rP.S: Same.
-	libc/stdio/fputs_p.c: Same.
-	libc/stdio/puts_p.c: Same.
-	libc/stdio/ultoa_invert.S: Same.
-	libc/stdio/vfprintf.c: Same.
-	libc/stdio/vfscanf.c: Same.
-	libc/stdlib/ftoa_engine.S: Same.
-	libc/stdlib/setjmp.S: Same.
-	libc/stdlib/strtod.c: Same.
-	libc/string/ffsll.S: Same.
-	libc/string/memccpy.S: Same.
-	libc/string/memchr.S: Same.
-	libc/string/memmem.S: Same.
-	libc/string/memrchr.S: Same.
-	libc/string/strcasestr.S: Same.
-	libc/string/strcat.S: Same.
-	libc/string/strchr.S: Same.
-	libc/string/strchrnul.S: Same.
-	libc/string/strcspn.S: Same.
-	libc/string/strlcpy.S: Same.
-	libc/string/strncat.S: Same.
-	libc/string/strpbrk.S: Same.
-	libc/string/strrchr.S: Same.
-	libc/string/strrev.S: Same.
-	libc/string/strsep.S: Same.
-	libc/string/strspn.S: Same.
-	libc/string/strstr.S: Same.
-	libc/string/strtok_r.S: Same.
-	libm/fplib/acos.S: Same.
-	libm/fplib/addsf3x.S: Same.
-	libm/fplib/asin.S: Same.
-	libm/fplib/atan.S: Same.
-	libm/fplib/atan2.S: Same.
-	libm/fplib/cbrt.S: Same.
-	libm/fplib/ceil.S: Same.
-	libm/fplib/divsf3x.S: Same.
-	libm/fplib/exp.S: Same.
-	libm/fplib/fdim.S: Same.
-	libm/fplib/fixsfsi.S: Same.
-	libm/fplib/floatsisf.S: Same.
-	libm/fplib/floatundisf.S: Same.
-	libm/fplib/floor.S: Same.
-	libm/fplib/fma.S: Same.
-	libm/fplib/fmax.S: Same.
-	libm/fplib/fmin.S: Same.
-	libm/fplib/fmod.S: Same.
-	libm/fplib/fp_cmp.S: Same.
-	libm/fplib/fp_mpack.S: Same.
-	libm/fplib/fp_powser.S: Same.
-	libm/fplib/fp_pscA.S: Same.
-	libm/fplib/fp_pscB.S: Same.
-	libm/fplib/fp_round.S: Same.
-	libm/fplib/fp_sinus.S: Same.
-	libm/fplib/fp_split3.S: Same.
-	libm/fplib/fp_trunc.S: Same.
-	libm/fplib/frexp.S: Same.
-	libm/fplib/isinf.S: Same.
-	libm/fplib/ldexp.S: Same.
-	libm/fplib/log.S: Same.
-	libm/fplib/lrint.S: Same.
-	libm/fplib/lround.S: Same.
-	libm/fplib/modf.S: Same.
-	libm/fplib/mulsf3x.S: Same.
-	libm/fplib/pow.S: Same.
-	libm/fplib/round.S: Same.
-	libm/fplib/sin.S: Same.
-	libm/fplib/sinh.S: Same.
-	libm/fplib/sqrt.S: Same.
-	libm/fplib/tanh.S: Same.
+	* common/ctoasm.inc: Same.
+	* libc/misc/eeupd_byte.S: Same.
+	* libc/misc/itoa.S: Same.
+	* libc/misc/utoa.S: Same.
+	* libc/pmstring/memchr_P.S: Same.
+	* libc/pmstring/memcmp_P.S: Same.
+	* libc/pmstring/memcmp_PF.S: Same.
+	* libc/pmstring/memcpy_P.S: Same.
+	* libc/pmstring/memcpy_PF.S: Same.
+	* libc/pmstring/memrchr_P.S: Same.
+	* libc/pmstring/strcasecmp_P.S: Same.
+	* libc/pmstring/strcasecmp_PF.S: Same.
+	* libc/pmstring/strcat_P.S: Same.
+	* libc/pmstring/strcat_PF.S: Same.
+	* libc/pmstring/strchr_P.S: Same.
+	* libc/pmstring/strchrnul_P.S: Same.
+	* libc/pmstring/strcmp_P.S: Same.
+	* libc/pmstring/strcmp_PF.S: Same.
+	* libc/pmstring/strcpy_P.S: Same.
+	* libc/pmstring/strcpy_PF.S: Same.
+	* libc/pmstring/strcspn_P.S: Same.
+	* libc/pmstring/strlcat_P.S: Same.
+	* libc/pmstring/strlcat_PF.S: Same.
+	* libc/pmstring/strlcpy_P.S: Same.
+	* libc/pmstring/strlcpy_PF.S: Same.
+	* libc/pmstring/strlen_P.S: Same.
+	* libc/pmstring/strlen_PF.S: Same.
+	* libc/pmstring/strncasecmp_P.S: Same.
+	* libc/pmstring/strncasecmp_PF.S: Same.
+	* libc/pmstring/strncat_P.S: Same.
+	* libc/pmstring/strncat_PF.S: Same.
+	* libc/pmstring/strncmp_P.S: Same.
+	* libc/pmstring/strncmp_PF.S: Same.
+	* libc/pmstring/strncpy_P.S: Same.
+	* libc/pmstring/strncpy_PF.S: Same.
+	* libc/pmstring/strnlen_P.S: Same.
+	* libc/pmstring/strnlen_PF.S: Same.
+	* libc/pmstring/strpbrk_P.S: Same.
+	* libc/pmstring/strrchr_P.S: Same.
+	* libc/pmstring/strsep_P.S: Same.
+	* libc/pmstring/strspn_P.S: Same.
+	* libc/pmstring/strstr_P.S: Same.
+	* libc/pmstring/strstr_PF.S: Same.
+	* libc/pmstring/strtok_P.c: Same.
+	* libc/pmstring/strtok_rP.S: Same.
+	* libc/stdio/fputs_p.c: Same.
+	* libc/stdio/puts_p.c: Same.
+	* libc/stdio/ultoa_invert.S: Same.
+	* libc/stdio/vfprintf.c: Same.
+	* libc/stdio/vfscanf.c: Same.
+	* libc/stdlib/ftoa_engine.S: Same.
+	* libc/stdlib/setjmp.S: Same.
+	* libc/stdlib/strtod.c: Same.
+	* libc/string/ffsll.S: Same.
+	* libc/string/memccpy.S: Same.
+	* libc/string/memchr.S: Same.
+	* libc/string/memmem.S: Same.
+	* libc/string/memrchr.S: Same.
+	* libc/string/strcasestr.S: Same.
+	* libc/string/strcat.S: Same.
+	* libc/string/strchr.S: Same.
+	* libc/string/strchrnul.S: Same.
+	* libc/string/strcspn.S: Same.
+	* libc/string/strlcpy.S: Same.
+	* libc/string/strncat.S: Same.
+	* libc/string/strpbrk.S: Same.
+	* libc/string/strrchr.S: Same.
+	* libc/string/strrev.S: Same.
+	* libc/string/strsep.S: Same.
+	* libc/string/strspn.S: Same.
+	* libc/string/strstr.S: Same.
+	* libc/string/strtok_r.S: Same.
+	* libm/fplib/acos.S: Same.
+	* libm/fplib/addsf3x.S: Same.
+	* libm/fplib/asin.S: Same.
+	* libm/fplib/atan.S: Same.
+	* libm/fplib/atan2.S: Same.
+	* libm/fplib/cbrt.S: Same.
+	* libm/fplib/ceil.S: Same.
+	* libm/fplib/divsf3x.S: Same.
+	* libm/fplib/exp.S: Same.
+	* libm/fplib/fdim.S: Same.
+	* libm/fplib/fixsfsi.S: Same.
+	* libm/fplib/floatsisf.S: Same.
+	* libm/fplib/floatundisf.S: Same.
+	* libm/fplib/floor.S: Same.
+	* libm/fplib/fma.S: Same.
+	* libm/fplib/fmax.S: Same.
+	* libm/fplib/fmin.S: Same.
+	* libm/fplib/fmod.S: Same.
+	* libm/fplib/fp_cmp.S: Same.
+	* libm/fplib/fp_mpack.S: Same.
+	* libm/fplib/fp_powser.S: Same.
+	* libm/fplib/fp_pscA.S: Same.
+	* libm/fplib/fp_pscB.S: Same.
+	* libm/fplib/fp_round.S: Same.
+	* libm/fplib/fp_sinus.S: Same.
+	* libm/fplib/fp_split3.S: Same.
+	* libm/fplib/fp_trunc.S: Same.
+	* libm/fplib/frexp.S: Same.
+	* libm/fplib/isinf.S: Same.
+	* libm/fplib/ldexp.S: Same.
+	* libm/fplib/log.S: Same.
+	* libm/fplib/lrint.S: Same.
+	* libm/fplib/lround.S: Same.
+	* libm/fplib/modf.S: Same.
+	* libm/fplib/mulsf3x.S: Same.
+	* libm/fplib/pow.S: Same.
+	* libm/fplib/round.S: Same.
+	* libm/fplib/sin.S: Same.
+	* libm/fplib/sinh.S: Same.
+	* libm/fplib/sqrt.S: Same.
+	* libm/fplib/tanh.S: Same.
 
 2010-10-26  Anitha Boyapati  <anitha.boyapati@atmel.com>
 
