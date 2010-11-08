@@ -1,5 +1,9 @@
 2010-11-08  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iom3000.h: Fix typo.
+
+2010-11-08  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom169pa.h: Rename UBRR0* definitions to remove a duplicate.
 	* libc/pmstring/strcasecmp_PF.S: Fix warning at end of file.
 	* include/avr/iom16hva2.h: Fix SPI interrupt vector names.
