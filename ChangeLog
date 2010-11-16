@@ -1,3 +1,22 @@
+2010-11-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix Atmel bug #12536.
+	* include/avr/iox64d3.h: Remove CALCTRL definitions.
+	* include/avr/iox64a3.h: Same.
+	* include/avr/iox64a1.h: Same.
+	* include/avr/iox32d4.h: Same.
+	* include/avr/iox32a4.h: Same.
+	* include/avr/iox256a3b.h: Same.
+	* include/avr/iox256a3.h: Same.
+	* include/avr/iox192d3.h: Same.
+	* include/avr/iox192a3.h: Same.
+	* include/avr/iox16d4.h: Same.
+	* include/avr/iox16a4.h: Same.
+	* include/avr/iox128d3.h: Same.
+	* include/avr/iox128a3.h: Same.
+	* include/avr/iox128a1.h: Same.
+	* NEWS: Add to fixed bugs list.
+
 2010-11-08  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom3000.h: Fix typo.

@@ -1226,7 +1226,7 @@ typedef struct ADC_struct
     register8_t REFCTRL;  /* Reference Control */
     register8_t EVCTRL;  /* Event Control */
     register8_t PRESCALER;  /* Clock Prescaler */
-    register8_t CALCTRL;  /* Calibration Control Register */
+    register8_t reserved_0x05;
     register8_t INTFLAGS;  /* Interrupt Flags */
     register8_t reserved_0x07;
     register8_t reserved_0x08;
@@ -2876,7 +2876,6 @@ IO Module Instances. Mapped to memory.
 #define ADCA_REFCTRL  _SFR_MEM8(0x0202)
 #define ADCA_EVCTRL  _SFR_MEM8(0x0203)
 #define ADCA_PRESCALER  _SFR_MEM8(0x0204)
-#define ADCA_CALCTRL  _SFR_MEM8(0x0205)
 #define ADCA_INTFLAGS  _SFR_MEM8(0x0206)
 #define ADCA_CAL  _SFR_MEM16(0x020C)
 #define ADCA_CH0RES  _SFR_MEM16(0x0210)
@@ -2911,7 +2910,6 @@ IO Module Instances. Mapped to memory.
 #define ADCB_REFCTRL  _SFR_MEM8(0x0242)
 #define ADCB_EVCTRL  _SFR_MEM8(0x0243)
 #define ADCB_PRESCALER  _SFR_MEM8(0x0244)
-#define ADCB_CALCTRL  _SFR_MEM8(0x0245)
 #define ADCB_INTFLAGS  _SFR_MEM8(0x0246)
 #define ADCB_CAL  _SFR_MEM16(0x024C)
 #define ADCB_CH0RES  _SFR_MEM16(0x0250)
@@ -5019,11 +5017,6 @@ IO Module Instances. Mapped to memory.
 #define ADC_PRESCALER1_bp  1  /* Clock Prescaler Selection bit 1 position. */
 #define ADC_PRESCALER2_bm  (1<<2)  /* Clock Prescaler Selection bit 2 mask. */
 #define ADC_PRESCALER2_bp  2  /* Clock Prescaler Selection bit 2 position. */
-
-
-/* ADC.CALCTRL  bit masks and bit positions */
-#define ADC_CAL_bm  0x01  /* ADC Calibration Start bit mask. */
-#define ADC_CAL_bp  0  /* ADC Calibration Start bit position. */
 
 
 /* ADC.INTFLAGS  bit masks and bit positions */

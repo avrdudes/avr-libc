@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [Atmel: 12536] Remove CALCTRL in xmega header files.
   [#30783] Missing prototype in power.h
 
 * New devices supported:
