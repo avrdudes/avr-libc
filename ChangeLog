@@ -1,3 +1,12 @@
+2010-11-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+    * configure.ac: Fix 2.64 cross compile detection for AVR by not trying to
+    compile fopen. This fix came from Newlib's config/override.m4. For some
+    reason autoconf 2.64 (and possibly above) puts in a check for the compiler
+    output file extension and creates a test program that has the fopen
+    function. Of course, this fails when avr-gcc is used to compile the test
+    program.
+
 2010-11-16  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix Atmel bug #12536.

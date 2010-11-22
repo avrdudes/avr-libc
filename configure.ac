@@ -126,6 +126,14 @@ AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip])
 # of this when we're building the libs.
 CFLAGS=""
 
+
+dnl This fix is from Newlib in config/override.m4.
+dnl Fix 2.64 cross compile detection for AVR by not trying to compile fopen.
+m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.64],
+  [m4_foreach([_GCC_LANG], [C, C++, Fortran, Fortran 77],
+     [m4_define([_AC_LANG_IO_PROGRAM(]_GCC_LANG[)], m4_defn([AC_LANG_PROGRAM(]_GCC_LANG[)]))])])
+
+
 # Checks for programs.
 
 AC_PROG_CC
