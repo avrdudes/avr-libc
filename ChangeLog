@@ -1,3 +1,8 @@
+2010-11-23  Eric B. Weddington  <eric.weddington@atmel.com>
+
+    * doc/api/rel-method.dox: Escape all instances of @svn to silence
+    doxygen warnings.
+
 2010-11-22  Eric B. Weddington  <eric.weddington@atmel.com>
 
     * configure.ac: Fix 2.64 cross compile detection for AVR by not trying to

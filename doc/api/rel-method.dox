@@ -70,15 +70,15 @@ $username is set to your savannah username):
    Change <em>Changes since avr-libc-\<last_release\>:</em> to 
    <em>Changes in avr-libc-\<this_relelase\></em>.
 -# Set the branch-point tag (setting \<major\> and \<minor\> accordingly):<br>
-   <tt>svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branchpoint</tt>
+   <tt>svn copy svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branchpoint</tt>
 -# Create the branch:<br>
-   <tt>svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
+   <tt>svn copy svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/trunk svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
 -# Update the package version in configure.ac and commit configure.ac to SVN trunk:<br>
    Change minor number to next odd value.
 -# Update the NEWS file and commit to SVN trunk:<br>
    Add <em>Changes since avr-libc-\<this_release\>:</em>
 -# Check out a new tree for the branch:<br>
-   <tt>svn co svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
+   <tt>svn co svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
 -# Update the package version in configure.ac and commit configure.ac to SVN branch:<br>
    Change the patch number to 90 to denote that this now a branch leading up
    to a release. Be sure to leave the \<date\> part of the version.
@@ -99,7 +99,7 @@ A stable release will only be done on a branch, not from the SVN trunk.
 The following steps should be taken when making a release:
 
 -# Make sure the source tree you are working from is on the correct branch:<br>
-   <tt>svn switch svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
+   <tt>svn switch svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch</tt>
 -# Update the package version in configure.ac and commit it to SVN.
 -# Update the gnu tool chain version requirements in the README and commit
    to SVN.
@@ -113,9 +113,9 @@ The following steps should be taken when making a release:
 -# Perform a 'make distcheck' and make sure it succeeds. This will create the
    source tarball.
 -# Tag the release:<br>
-   <tt>svn copy . svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>_\<</tt><em>patch</em><tt>\>-release</tt><br>
+   <tt>svn copy . svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>_\<</tt><em>patch</em><tt>\>-release</tt><br>
    or<br>
-   <tt>svn copy svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch svn+ssh://$username@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>_\<</tt><em>patch</em><tt>\>-release</tt>
+   <tt>svn copy svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/branches/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>-branch svn+ssh://$username\@svn.savannah.nongnu.org/avr-libc/tags/avr-libc-\<</tt><em>major</em><tt>\>_\<</tt><em>minor</em><tt>\>_\<</tt><em>patch</em><tt>\>-release</tt>
 -# Upload the tarball to savannah.
 -# Update the NEWS file, and commit to SVN:<br>
    Add <em>Changes since avr-libc-\<major\>_\<minor\>_\<patch\>:</em>
