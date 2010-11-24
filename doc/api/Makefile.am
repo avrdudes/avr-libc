@@ -163,6 +163,10 @@ clean-local:
 # as a magic string in order to replace the \\ at the end of the table
 # heading by \endhead so longtable will know what heading to repeat in
 # table continuations.
+#
+# The last sed command replaces the \renewcommand for \cftchapfont and
+# \cftchappagefont, respectively, by a \newcommand, to fix a LaTeX
+# error.
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
@@ -188,6 +192,10 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 		-e '/MCU types are currently/,/Architecture/s/>.*|/l|l|/' \
 		$$UT > tmp.$$ && \
 		mv -f tmp.$$ $$UT
+	cd latex_src && \
+		sed -e '/renewcommand.*cftchap.*font/s/renew/new/' \
+		doxygen.sty > tmp.$$ && \
+		mv -f tmp.$$ doxygen.sty
 
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in

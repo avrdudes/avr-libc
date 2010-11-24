@@ -1,3 +1,11 @@
+2010-11-24  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Workaround for LaTeX build error after upgrading doxygen to
+	version 1.7.x
+	* doc/api/Makefile.am: replace the \renewcommand for
+	\cftchapfont and \cftchappagefont, respectively, by a
+	\newcommand.
+
 2010-11-23  Eric B. Weddington  <eric.weddington@atmel.com>
 
     * doc/api/rel-method.dox: Escape all instances of @svn to silence
