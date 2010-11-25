@@ -187,6 +187,7 @@ compile-time.
 - attiny88
 
 \par Automotive AVR Devices:
+
 - atmega16m1
 - atmega32c1
 - atmega32m1
