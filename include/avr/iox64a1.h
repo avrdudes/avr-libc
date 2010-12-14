@@ -2210,7 +2210,7 @@ typedef struct AWEX_struct
 {
     register8_t CTRL;  /* Control Register */
     register8_t reserved_0x01;
-    register8_t FDEVMASK;  /* Fault Detection Event Mask */
+    register8_t FDEMASK;  /* Fault Detection Event Mask */
     register8_t FDCTRL;  /* Fault Detection Control Register */
     register8_t STATUS;  /* Status Register */
     register8_t reserved_0x05;
@@ -2232,7 +2232,7 @@ TC - 16-bit Timer/Counter With PWM
 /* High-Resolution Extension */
 typedef struct HIRES_struct
 {
-    register8_t CTRL;  /* Control Register */
+    register8_t CTRLA;  /* Control Register */
 } HIRES_t;
 
 /* Clock Selection */
@@ -3382,7 +3382,7 @@ IO Module Instances. Mapped to memory.
 
 /* AWEXC - Advanced Waveform Extension C */
 #define AWEXC_CTRL  _SFR_MEM8(0x0880)
-#define AWEXC_FDEVMASK  _SFR_MEM8(0x0882)
+#define AWEXC_FDEMASK  _SFR_MEM8(0x0882)
 #define AWEXC_FDCTRL  _SFR_MEM8(0x0883)
 #define AWEXC_STATUS  _SFR_MEM8(0x0884)
 #define AWEXC_DTBOTH  _SFR_MEM8(0x0886)
@@ -3394,7 +3394,7 @@ IO Module Instances. Mapped to memory.
 #define AWEXC_OUTOVEN  _SFR_MEM8(0x088C)
 
 /* HIRESC - High-Resolution Extension C */
-#define HIRESC_CTRL  _SFR_MEM8(0x0890)
+#define HIRESC_CTRLA  _SFR_MEM8(0x0890)
 
 /* USARTC0 - Universal Asynchronous Receiver-Transmitter C0 */
 #define USARTC0_DATA  _SFR_MEM8(0x08A0)
@@ -3474,7 +3474,7 @@ IO Module Instances. Mapped to memory.
 #define TCD1_CCBBUF  _SFR_MEM16(0x097A)
 
 /* HIRESD - High-Resolution Extension D */
-#define HIRESD_CTRL  _SFR_MEM8(0x0990)
+#define HIRESD_CTRLA  _SFR_MEM8(0x0990)
 
 /* USARTD0 - Universal Asynchronous Receiver-Transmitter D0 */
 #define USARTD0_DATA  _SFR_MEM8(0x09A0)
@@ -3550,7 +3550,7 @@ IO Module Instances. Mapped to memory.
 
 /* AWEXE - Advanced Waveform Extension E */
 #define AWEXE_CTRL  _SFR_MEM8(0x0A80)
-#define AWEXE_FDEVMASK  _SFR_MEM8(0x0A82)
+#define AWEXE_FDEMASK  _SFR_MEM8(0x0A82)
 #define AWEXE_FDCTRL  _SFR_MEM8(0x0A83)
 #define AWEXE_STATUS  _SFR_MEM8(0x0A84)
 #define AWEXE_DTBOTH  _SFR_MEM8(0x0A86)
@@ -3562,7 +3562,7 @@ IO Module Instances. Mapped to memory.
 #define AWEXE_OUTOVEN  _SFR_MEM8(0x0A8C)
 
 /* HIRESE - High-Resolution Extension E */
-#define HIRESE_CTRL  _SFR_MEM8(0x0A90)
+#define HIRESE_CTRLA  _SFR_MEM8(0x0A90)
 
 /* USARTE0 - Universal Asynchronous Receiver-Transmitter E0 */
 #define USARTE0_DATA  _SFR_MEM8(0x0AA0)
@@ -3637,7 +3637,7 @@ IO Module Instances. Mapped to memory.
 #define TCF1_CCBBUF  _SFR_MEM16(0x0B7A)
 
 /* HIRESF - High-Resolution Extension F */
-#define HIRESF_CTRL  _SFR_MEM8(0x0B90)
+#define HIRESF_CTRLA  _SFR_MEM8(0x0B90)
 
 /* USARTF0 - Universal Asynchronous Receiver-Transmitter F0 */
 #define USARTF0_DATA  _SFR_MEM8(0x0BA0)

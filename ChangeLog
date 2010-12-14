@@ -1,5 +1,21 @@
 2010-12-13  Eric B. Weddington  <eric.weddington@atmel.com>
 
+    Fix for Atmel bug #12314.
+    * include/avr/iox192a3.h: Fix field names and macro names.
+    * include/avr/iox128a3.h: Same.
+    * include/avr/iox128a1.h: Same.
+    * include/avr/iox64a3.h: Same.
+    * include/avr/iox64a1.h: Same.
+    * include/avr/iox32d4.h: Same.
+    * include/avr/iox32a4.h: Same.
+    * include/avr/iox16d4.h: Same.
+    * include/avr/iox16a4.h: Same.
+    * include/avr/iox256a3b.h: Same.
+    * include/avr/iox256a3.h: Same.
+    * NEWS: Add to fixed bug list.
+
+2010-12-13  Eric B. Weddington  <eric.weddington@atmel.com>
+
     Fix for Atmel bug #11793.
     * include/avr/iox32a4.h: Fix 4086 to 4096.
     * include/avr/iox16a4.h: Same.

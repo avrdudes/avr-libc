@@ -2210,7 +2210,7 @@ typedef struct AWEX_struct
 {
     register8_t CTRL;  /* Control Register */
     register8_t reserved_0x01;
-    register8_t FDEVMASK;  /* Fault Detection Event Mask */
+    register8_t FDEMASK;  /* Fault Detection Event Mask */
     register8_t FDCTRL;  /* Fault Detection Control Register */
     register8_t STATUS;  /* Status Register */
     register8_t reserved_0x05;
@@ -3382,7 +3382,7 @@ IO Module Instances. Mapped to memory.
 
 /* AWEXC - Advanced Waveform Extension C */
 #define AWEXC_CTRL  _SFR_MEM8(0x0880)
-#define AWEXC_FDEVMASK  _SFR_MEM8(0x0882)
+#define AWEXC_FDEMASK  _SFR_MEM8(0x0882)
 #define AWEXC_FDCTRL  _SFR_MEM8(0x0883)
 #define AWEXC_STATUS  _SFR_MEM8(0x0884)
 #define AWEXC_DTBOTH  _SFR_MEM8(0x0886)
@@ -3550,7 +3550,7 @@ IO Module Instances. Mapped to memory.
 
 /* AWEXE - Advanced Waveform Extension E */
 #define AWEXE_CTRL  _SFR_MEM8(0x0A80)
-#define AWEXE_FDEVMASK  _SFR_MEM8(0x0A82)
+#define AWEXE_FDEMASK  _SFR_MEM8(0x0A82)
 #define AWEXE_FDCTRL  _SFR_MEM8(0x0A83)
 #define AWEXE_STATUS  _SFR_MEM8(0x0A84)
 #define AWEXE_DTBOTH  _SFR_MEM8(0x0A86)

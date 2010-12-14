@@ -1865,7 +1865,7 @@ typedef struct AWEX_struct
 {
     register8_t CTRL;  /* Control Register */
     register8_t reserved_0x01;
-    register8_t FDEVMASK;  /* Fault Detection Event Mask */
+    register8_t FDEMASK;  /* Fault Detection Event Mask */
     register8_t FDCTRL;  /* Fault Detection Control Register */
     register8_t STATUS;  /* Status Register */
     register8_t reserved_0x05;
@@ -1887,7 +1887,7 @@ TC - 16-bit Timer/Counter With PWM
 /* High-Resolution Extension */
 typedef struct HIRES_struct
 {
-    register8_t CTRL;  /* Control Register */
+    register8_t CTRLA;  /* Control Register */
 } HIRES_t;
 
 /* Clock Selection */
@@ -2642,7 +2642,7 @@ IO Module Instances. Mapped to memory.
 
 /* AWEXC - Advanced Waveform Extension C */
 #define AWEXC_CTRL  _SFR_MEM8(0x0880)
-#define AWEXC_FDEVMASK  _SFR_MEM8(0x0882)
+#define AWEXC_FDEMASK  _SFR_MEM8(0x0882)
 #define AWEXC_FDCTRL  _SFR_MEM8(0x0883)
 #define AWEXC_STATUS  _SFR_MEM8(0x0884)
 #define AWEXC_DTBOTH  _SFR_MEM8(0x0886)
@@ -2654,7 +2654,7 @@ IO Module Instances. Mapped to memory.
 #define AWEXC_OUTOVEN  _SFR_MEM8(0x088C)
 
 /* HIRESC - High-Resolution Extension C */
-#define HIRESC_CTRL  _SFR_MEM8(0x0890)
+#define HIRESC_CTRLA  _SFR_MEM8(0x0890)
 
 /* USARTC0 - Universal Asynchronous Receiver-Transmitter C0 */
 #define USARTC0_DATA  _SFR_MEM8(0x08A0)
