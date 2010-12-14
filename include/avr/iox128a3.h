@@ -1489,7 +1489,7 @@ typedef enum DAC_REFRESH_enum
     DAC_REFRESH_512CLK_gc = (0x05<<0),  /* 512 CLK */
     DAC_REFRESH_1024CLK_gc = (0x06<<0),  /* 1024 CLK */
     DAC_REFRESH_2048CLK_gc = (0x07<<0),  /* 2048 CLK */
-    DAC_REFRESH_4086CLK_gc = (0x08<<0),  /* 4096 CLK */
+    DAC_REFRESH_4096CLK_gc = (0x08<<0),  /* 4096 CLK */
     DAC_REFRESH_8192CLK_gc = (0x09<<0),  /* 8192 CLK */
     DAC_REFRESH_16384CLK_gc = (0x0A<<0),  /* 16384 CLK */
     DAC_REFRESH_32768CLK_gc = (0x0B<<0),  /* 32768 CLK */

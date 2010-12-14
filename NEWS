@@ -2,7 +2,8 @@
 
 * Bugs fixed:
 
-  [Atmel: 12536] Remove CALCTRL in xmega header files.
+  [Atmel: #11793] XMEGA A devices: 4096-cycle DAC refresh interval setting has wrong name
+  [Atmel: #12536] Remove CALCTRL in xmega header files.
   [#30783] Missing prototype in power.h
 
 * New devices supported:
