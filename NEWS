@@ -7,6 +7,7 @@
   [Atmel: #12536] Remove CALCTRL in xmega header files.
   [#29235] power.h - warning: comma at end of enumerator list
   [#30783] Missing prototype in power.h
+  [#31270] Stale link to Philips (now NXP) I2C specification/users manual
 
 * New devices supported:
 

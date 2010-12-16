@@ -1,5 +1,11 @@
 2010-12-16  Eric B. Weddington  <eric.weddington@atmel.com>
 
+    Fix for bug #31270.
+    * doc/examples/twitest/twitest.dox: Fix stale document link.
+    * NEWS: Add to fixed bug list.
+
+2010-12-16  Eric B. Weddington  <eric.weddington@atmel.com>
+
     Fix for bug #29235.
     * include/avr/power.h: Rearrange commas to be -pedantic safe.
     * NEWS: Add to fixed bug list.

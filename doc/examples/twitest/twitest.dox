@@ -33,9 +33,9 @@ interfacing the microcontroller to a two-wire bus, called TWI.  This
 is essentially the same called I2C by Philips, but that term is
 avoided in Atmel's documentation due to patenting issues.
 
-For the original Philips documentation, see
+For further documentation, see:
 
-http://www.semiconductors.philips.com/buses/i2c/index.html
+http://www.nxp.com/documents/user_manual/UM10204.pdf
 
 \section twi_demo_intro Introduction into TWI
 
