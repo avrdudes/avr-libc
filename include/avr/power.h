@@ -1409,9 +1409,9 @@ typedef enum
     clock_div_32 = 5,
     clock_div_64 = 6,
     clock_div_128 = 7,
-    clock_div_256 = 8,
+    clock_div_256 = 8
 #if defined(__AVR_ATmega128RFA1__)
-    clock_div_1_rc = 15,
+    , clock_div_1_rc = 15
 #endif
 } clock_div_t;
 
