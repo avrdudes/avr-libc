@@ -1,0 +1,4 @@
+2011-02-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iom8x.h (_VECTORS_SIZE): fix wrong vector table size
+	for ATmega168A devices.
