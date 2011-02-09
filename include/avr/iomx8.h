@@ -726,7 +726,7 @@ must be defined for the mega48.
    per entry for an RJMP) while the mega168 table has double instruction
    entries (32 bits per entry for a JMP). */
 
-#if defined (__AVR_ATmega168__)
+#if defined (__AVR_ATmega168__) || defined (__AVR_ATmega168A__)
 #  define _VECTORS_SIZE 104
 #else
 #  define _VECTORS_SIZE 52
