@@ -1,3 +1,16 @@
+2011-02-11  Anitha Boyapati <anitha.boyapati@atmel.com>
+
+
+	Thanks to Praveen Kaushik <Praveen_Kumar.Kaushi@atmel.com> for
+	the fix for #bug31990.
+	* include/avr/io90pwm81.h: PRPSC0 is renamed to PRPSCR in sync 
+	with device XML file.
+	* include/avr/power.h:	power_psc0_enable()/disable() have been 
+	renamed to power_pscr_enable()/disable(). Documentation changes
+	to include PWM81 are also done.
+
+
+
 2011-02-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iom8x.h (_VECTORS_SIZE): fix wrong vector table size

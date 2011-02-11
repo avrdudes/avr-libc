@@ -854,7 +854,7 @@
 #define PRADC 0
 #define PRSPI 2
 #define PRTIM1 4
-#define PRPSC0 5
+#define PRPSCR 5
 #define PRPSC2 7
 
 #define PLLCSR _SFR_MEM8(0x87)

@@ -156,6 +156,7 @@
   [#30735] bug in example twitest
   [#31086] ATTINY88 RAMEND value not set to correct value in iotn88.h
   [#30363] _delay_xx() functions in <util/delay.h> are broken
+  [#31990] PRPSC0 used in power.h for AT90PWM81 instead of PRPSCR
 
 * Other changes:
 
