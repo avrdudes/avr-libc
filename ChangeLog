@@ -1,6 +1,6 @@
 2011-02-14  Anitha Boyapati <anitha.boyapati@atmel.com>
 
-	Thanks to Praveen Kaushik <usha.gupta@atmel.com> for the device
+	Thanks to Praveen Kaushik <Praveen_Kumar.Kaushi@atmel.com> for the device
 	support.
 	* configure.ac: Support for ATMega16HVB RevB, ATMega32HVB RevB.
 	* devtools/gen-avr-lib-tree.sh: Same.
