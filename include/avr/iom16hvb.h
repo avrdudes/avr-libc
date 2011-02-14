@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (c) 2011 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -903,8 +903,8 @@
 #define FUSE_BOOTSZ0  (unsigned char)~_BV(1)  /* Select Boot Size */
 #define FUSE_BOOTSZ1  (unsigned char)~_BV(2)  /* Select Boot Size */
 #define FUSE_DWEN  (unsigned char)~_BV(3)  /* Enable debugWire */
-#define FUSE_DUVRDINIT  (unsigned char)~_BV(4)  /* Reset Value of DUVRDRegister */
-#define HFUSE_DEFAULT (FUSE_DUVRDINIT & FUSE_BOOTSZ1 & FUSE_BOOTSZ0)
+#define FUSE_CKDIV  (unsigned char)~_BV(4)  /* Clock Divide Register */
+#define HFUSE_DEFAULT (FUSE_CKDIV & FUSE_BOOTSZ1 & FUSE_BOOTSZ0)
 
 
 /* Lock Bits */
@@ -970,10 +970,10 @@
 #define VREF_PIN   PINVREF
 #define VREF_BIT   VREF
 
-#define VREFGND_DDR   DDRVREFGND
-#define VREFGND_PORT  PORTVREFGND
-#define VREFGND_PIN   PINVREFGND
-#define VREFGND_BIT   VREFGND
+#define VREF_DDR   DDRVREFGND
+#define VREF_PORT  PORTVREFGND
+#define VREF_PIN   PINVREFGND
+#define VREF_BIT   VREFGND
 
 #define PI_DDR   DDRI
 #define PI_PORT  PORTI

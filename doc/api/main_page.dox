@@ -238,7 +238,9 @@ compile-time.
 - atmega16hva
 - atmega16hva2
 - atmega16hvb
+- atmega16hvbrevb
 - atmega32hvb
+- atmega32hvbrevb
 - atmega64hve
 - atmega406
 

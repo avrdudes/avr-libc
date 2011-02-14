@@ -227,6 +227,10 @@
 || defined(__AVR_ATmega103__) \
 || defined(__AVR_ATmega161__) \
 || defined(__AVR_ATmega163__) \
+|| defined(__AVR_ATmega16HVB__) \
+|| defined(__AVR_ATmega16HVBREVB__) \
+|| defined(__AVR_ATmega32HVB__) \
+|| defined(__AVR_ATmega32HVBREVB__) \
 || defined(__AVR_ATtiny13__) \
 || defined(__AVR_ATtiny13A__) \
 || defined(__AVR_ATtiny15__) \
@@ -345,7 +349,6 @@
 || defined(__AVR_ATmega169PA__) \
 || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_ATmega16HVA2__) \
-|| defined(__AVR_ATmega16HVB__) \
 || defined(__AVR_ATmega16M1__) \
 || defined(__AVR_ATmega16U2__) \
 || defined(__AVR_ATmega16U4__) \
@@ -370,7 +373,6 @@
 || defined(__AVR_ATmega3290A__) \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega32C1__) \
-|| defined(__AVR_ATmega32HVB__) \
 || defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega32U2__) \
 || defined(__AVR_ATmega32U4__) \

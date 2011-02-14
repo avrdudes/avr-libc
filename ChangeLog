@@ -1,5 +1,27 @@
 2011-02-14  Anitha Boyapati <anitha.boyapati@atmel.com>
 
+	Thanks to Praveen Kaushik <usha.gupta@atmel.com> for the device
+	support.
+	* configure.ac: Support for ATMega16HVB RevB, ATMega32HVB RevB.
+	* devtools/gen-avr-lib-tree.sh: Same.
+	* doc/api/main_page.dox: Same.
+	* doc/api/using-tools.dox: Same.
+	* include/avr/eeprom.h: Same.
+	* include/avr/io.h: Same.
+	* include/avr/iom16hvb.h: Header file regenerated.
+	* include/avr/iom16hvbrevb.h: Added newly.
+	* include/avr/iom32hvb.h: Header file regenerated.
+	* include/avr/iom32hvbrevb.h: Added newly.
+	* include/avr/Makefile.am: Support for atmega16HVB RevB, 
+	ATMega32HVB RevB.
+	* include/avr/power.h: Same.
+	* include/avr/sleep.h: Same.
+	* include/avr/wdt.h: Same.
+
+2011-02-14  Anitha Boyapati <anitha.boyapati@atmel.com>
+
+	Thanks to Usha Gupta <usha.gupta@atmel.com> for the device
+	support.
 	* include/avr/io.h: Support for AVR Tiny84a
 	* include/avr/iotn84a.h: Same.
 	* include/avr/Makefile.am: Same.

@@ -316,6 +316,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega16hva</td><td>__AVR_ATmega16HVA__</td></tr>
   <tr><td>avr5</td><td>atmega16hva2</td><td>__AVR_ATmega16HVA2__</td></tr>
   <tr><td>avr5</td><td>atmega16hvb</td><td>__AVR_ATmega16HVB__</td></tr>
+  <tr><td>avr5</td><td>atmega16hvbrevb</td><td>__AVR_ATmega16HVBREVB__</td></tr>
   <tr><td>avr5</td><td>atmega16m1</td><td>__AVR_ATmega16M1__</td></tr>
   <tr><td>avr5</td><td>atmega16u4</td><td>__AVR_ATmega16U4__</td></tr>
   <tr><td>avr5</td><td>atmega32</td><td>__AVR_ATmega32__</td></tr>
@@ -340,6 +341,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega3290p</td><td>__AVR_ATmega3290P__</td></tr>
   <tr><td>avr5</td><td>atmega32c1</td><td>__AVR_ATmega32C1__</td></tr>
   <tr><td>avr5</td><td>atmega32hvb</td><td>__AVR_ATmega32HVB__</td></tr>
+  <tr><td>avr5</td><td>atmega32hvbrevb</td><td>__AVR_ATmega32HVBREVB__</td></tr>
   <tr><td>avr5</td><td>atmega32m1</td><td>__AVR_ATmega32M1__</td></tr>
   <tr><td>avr5</td><td>atmega32u4</td><td>__AVR_ATmega32U4__</td></tr>
   <tr><td>avr5</td><td>atmega32u6</td><td>__AVR_ATmega32U6__</td></tr>

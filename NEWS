@@ -13,6 +13,8 @@
 * New devices supported:
 
   ATTiny84a
+  ATMega16HVB RevB
+  ATMega32HVB RevB
 
 * Contributed Patches:
 

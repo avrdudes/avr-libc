@@ -1,4 +1,4 @@
-/* Copyright (c) 2011 Atmel Corporation
+/* Copyright (c) 2009 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -28,9 +28,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom16hvb.h 2086 2009-12-15 03:24:16Z arcanum $ */
 
-/* avr/iom32hvb.h - definitions for ATmega32HVB */
+/* avr/iom16hvb.h - definitions for ATmega16HVB */
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -39,14 +39,14 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iom32hvb.h"
+#  define _AVR_IOXXX_H_ "iom16hvb.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
 
-#ifndef _AVR_ATmega32HVB_H_
-#define _AVR_ATmega32HVB_H_ 1
+#ifndef _AVR_ATmega16HVB_H_
+#define _AVR_ATmega16HVB_H_ 1
 
 
 /* Registers and associated bit numbers. */
@@ -874,14 +874,14 @@
 /* Constants */
 #define SPM_PAGESIZE (128)
 #define RAMSTART     (0x100)
-#define RAMSIZE      (2048)
+#define RAMSIZE      (1024)
 #define RAMEND       (RAMSTART + RAMSIZE - 1)
 #define XRAMSTART    (NA)
 #define XRAMSIZE     (NA)
 #define XRAMEND      (RAMEND)
-#define E2END        (0x3FF)
+#define E2END        (0x1FF)
 #define E2PAGESIZE   (4)
-#define FLASHEND     (0x7FFF)
+#define FLASHEND     (0x3FFF)
 
 
 /* Fuses */
@@ -903,8 +903,8 @@
 #define FUSE_BOOTSZ0  (unsigned char)~_BV(1)  /* Select Boot Size */
 #define FUSE_BOOTSZ1  (unsigned char)~_BV(2)  /* Select Boot Size */
 #define FUSE_DWEN  (unsigned char)~_BV(3)  /* Enable debugWire */
-#define FUSE_CKDIV  (unsigned char)~_BV(4)  /* CKDIV Register */
-#define HFUSE_DEFAULT (FUSE_CKDIV & FUSE_BOOTSZ1 & FUSE_BOOTSZ0)
+#define FUSE_DUVRDINIT  (unsigned char)~_BV(4)  /* Reset Value of DUVRDRegister */
+#define HFUSE_DEFAULT (FUSE_DUVRDINIT & FUSE_BOOTSZ1 & FUSE_BOOTSZ0)
 
 
 /* Lock Bits */
@@ -915,8 +915,8 @@
 
 /* Signature */
 #define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x95
-#define SIGNATURE_2 0x10
+#define SIGNATURE_1 0x94
+#define SIGNATURE_2 0x0D
 
 
 /* Device Pin Definitions */
@@ -970,10 +970,10 @@
 #define VREF_PIN   PINVREF
 #define VREF_BIT   VREF
 
-#define VREF_DDR   DDRVREFGND
-#define VREF_PORT  PORTVREFGND
-#define VREF_PIN   PINVREFGND
-#define VREF_BIT   VREFGND
+#define VREFGND_DDR   DDRVREFGND
+#define VREFGND_PORT  PORTVREFGND
+#define VREFGND_PIN   PINVREFGND
+#define VREFGND_BIT   VREFGND
 
 #define PI_DDR   DDRI
 #define PI_PORT  PORTI
@@ -1035,5 +1035,5 @@
 #define OC_PIN   PINOC
 #define OC_BIT   OC
 
-#endif /* _AVR_ATmega32HVB_H_ */
+#endif /* _AVR_ATmega16HVB_H_ */
 

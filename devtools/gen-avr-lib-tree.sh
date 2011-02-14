@@ -185,6 +185,7 @@ atmega169pa:crtm169pa.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega16hva:crtm16hva.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega16hva2:crtm16hva2.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega16hvb:crtm16hvb.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega16hvbrevb:crtm16hvbrevb.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega16m1:crtm16m1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega16u4:crtm16u4.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega32:crtm32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -209,6 +210,7 @@ atmega3290a:crtm3290a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega3290p:crtm3290p.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega32c1:crtm32c1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega32hvb:crtm32hvb.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega32hvbrevb:crtm32hvbrevb.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega32m1:crtm32m1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega32u4:crtm32u4.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega32u6:crtm32u6.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\

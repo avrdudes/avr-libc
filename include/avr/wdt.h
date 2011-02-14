@@ -204,6 +204,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega16HVA__) \
 || defined(__AVR_ATmega16HVA2__) \
 || defined(__AVR_ATmega16HVB__) \
+|| defined(__AVR_ATmega16HVBREVB__) \
 || defined(__AVR_ATmega16M1__) \
 || defined(__AVR_ATmega16U2__) \
 || defined(__AVR_ATmega16U4__) \
@@ -230,6 +231,7 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32HVB__) \
+|| defined(__AVR_ATmega32HVBREVB__) \
 || defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega32U2__) \
 || defined(__AVR_ATmega32U4__) \

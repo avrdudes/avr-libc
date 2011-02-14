@@ -1132,7 +1132,10 @@ do{ \
 }while(0)
 
 
-#elif defined(__AVR_ATmega32HVB__)
+#elif defined(__AVR_ATmega32HVB__) \
+|| defined(__AVR_ATmega32HVBREVB__) \
+|| defined(__AVR_ATmega16HVB__) \
+|| defined(__AVR_ATmega16HVBREVB__)
 
 
 #define power_twi_enable()      (PRR0 &= (uint8_t)~(1 << PRTWI))
@@ -1391,6 +1394,9 @@ do{ \
 || defined(__AVR_ATmega3290A__) \
 || defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32HVB__) \
+|| defined(__AVR_ATmega32HVBREVB__) \
+|| defined(__AVR_ATmega16HVB__) \
+|| defined(__AVR_ATmega16HVBREVB__) \
 || defined(__AVR_ATmega32M1__) \
 || defined(__AVR_ATmega32U2__) \
 || defined(__AVR_ATmega32U4__) \

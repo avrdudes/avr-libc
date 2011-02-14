@@ -203,6 +203,8 @@
 # define _EEPROM_SUFFIX  _m3290p
 #elif defined (__AVR_ATmega32HVB__)
 # define _EEPROM_SUFFIX  _m32hvb
+#elif defined (__AVR_ATmega32HVBREVB__)
+# define _EEPROM_SUFFIX  _m32hvbrevb
 #elif defined (__AVR_ATmega64HVE__)
 # define _EEPROM_SUFFIX  _m64hve
 #elif defined (__AVR_ATmega406__)
@@ -249,6 +251,8 @@
 # define _EEPROM_SUFFIX  _m16hva2
 #elif defined (__AVR_ATmega16HVB__)
 # define _EEPROM_SUFFIX  _m16hvb
+#elif defined (__AVR_ATmega16HVBREVB__)
+# define _EEPROM_SUFFIX  _m16hvbrevb
 #elif defined (__AVR_ATmega8__)
 # define _EEPROM_SUFFIX  _m8
 #elif defined (__AVR_ATmega48__)

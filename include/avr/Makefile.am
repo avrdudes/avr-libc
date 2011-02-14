@@ -91,6 +91,7 @@ avr_HEADERS = \
     iom16hva.h \
     iom16hva2.h \
     iom16hvb.h \
+    iom16hvbrevb.h \
     iom16m1.h \
     iom16u2.h \
     iom16u4.h \
@@ -107,6 +108,7 @@ avr_HEADERS = \
     iom329.h \
     iom3290.h \
     iom32hvb.h \
+    iom32hvbrevb.h \
     iom32c1.h \
     iom32m1.h \
     iom32u2.h \

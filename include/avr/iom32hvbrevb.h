@@ -1,4 +1,4 @@
-/* Copyright (c) 2011 Atmel Corporation
+/* Copyright (c) 2007 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,11 +26,12 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE. */
+  POSSIBILITY OF SUCH DAMAGE. 
+*/
 
-/* $Id$ */
+/* $Id: iom32hvb.h 2102 2010-03-16 22:52:39Z joerg_wunsch $ */
 
-/* avr/iom32hvb.h - definitions for ATmega32HVB */
+/* avr/iom32hvb.h - definitions for ATmega32HVB. */
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -45,11 +46,10 @@
 #endif 
 
 
-#ifndef _AVR_ATmega32HVB_H_
-#define _AVR_ATmega32HVB_H_ 1
+#ifndef _AVR_IOM32HVB_H_
+#define _AVR_IOM32HVB_H_ 1
 
-
-/* Registers and associated bit numbers. */
+/* Registers and associated bit numbers */
 
 #define PINA _SFR_IO8(0x00)
 #define PINA0 0
@@ -295,8 +295,6 @@
 #define SPDR6 6
 #define SPDR7 7
 
-#define DWDR _SFR_IO8(0x31)
-
 #define SMCR _SFR_IO8(0x33)
 #define SE 0
 #define SM0 1
@@ -539,13 +537,13 @@
 #define TWINT 7
 
 #define TWAMR _SFR_MEM8(0xBD)
-#define TWAM0 1
-#define TWAM1 2
-#define TWAM2 3
-#define TWAM3 4
-#define TWAM4 5
-#define TWAM5 6
-#define TWAM6 7
+#define TWAM0 0
+#define TWAM1 1
+#define TWAM2 2
+#define TWAM3 3
+#define TWAM4 4
+#define TWAM5 5
+#define TWAM6 6
 
 #define TWBCSR _SFR_MEM8(0xBE)
 #define TWBCIP 0
@@ -590,6 +588,8 @@
 #define CHGDISC0 2
 #define CHGDISC1 3
 #define BATTPVL 4
+
+#define CADAC _SFR_MEM32(0xE0)
 
 #define CADAC0 _SFR_MEM8(0xE0)
 #define CADAC00 0
@@ -808,232 +808,78 @@
 #define BPPLE 1
 
 
-/* Interrupt vectors */
-/* Vector 0 is the reset vector */
-#define BPINT_vect_num  1
-#define BPINT_vect      _VECTOR(1)  /* Battery Protection Interrupt */
-#define VREGMON_vect_num  2
-#define VREGMON_vect      _VECTOR(2)  /* Voltage regulator monitor interrupt */
-#define INT0_vect_num  3
-#define INT0_vect      _VECTOR(3)  /* External Interrupt Request 0 */
-#define INT1_vect_num  4
-#define INT1_vect      _VECTOR(4)  /* External Interrupt Request 1 */
-#define INT2_vect_num  5
-#define INT2_vect      _VECTOR(5)  /* External Interrupt Request 2 */
-#define INT3_vect_num  6
-#define INT3_vect      _VECTOR(6)  /* External Interrupt Request 3 */
-#define PCINT0_vect_num  7
-#define PCINT0_vect      _VECTOR(7)  /* Pin Change Interrupt 0 */
-#define PCINT1_vect_num  8
-#define PCINT1_vect      _VECTOR(8)  /* Pin Change Interrupt 1 */
-#define WDT_vect_num  9
-#define WDT_vect      _VECTOR(9)  /* Watchdog Timeout Interrupt */
-#define BGSCD_vect_num  10
-#define BGSCD_vect      _VECTOR(10)  /* Bandgap Buffer Short Circuit Detected */
-#define CHDET_vect_num  11
-#define CHDET_vect      _VECTOR(11)  /* Charger Detect */
-#define TIMER1_IC_vect_num  12
-#define TIMER1_IC_vect      _VECTOR(12)  /* Timer 1 Input capture */
-#define TIMER1_COMPA_vect_num  13
-#define TIMER1_COMPA_vect      _VECTOR(13)  /* Timer 1 Compare Match A */
-#define TIMER1_COMPB_vect_num  14
-#define TIMER1_COMPB_vect      _VECTOR(14)  /* Timer 1 Compare Match B */
-#define TIMER1_OVF_vect_num  15
-#define TIMER1_OVF_vect      _VECTOR(15)  /* Timer 1 overflow */
-#define TIMER0_IC_vect_num  16
-#define TIMER0_IC_vect      _VECTOR(16)  /* Timer 0 Input Capture */
-#define TIMER0_COMPA_vect_num  17
-#define TIMER0_COMPA_vect      _VECTOR(17)  /* Timer 0 Comapre Match A */
-#define TIMER0_COMPB_vect_num  18
-#define TIMER0_COMPB_vect      _VECTOR(18)  /* Timer 0 Compare Match B */
-#define TIMER0_OVF_vect_num  19
-#define TIMER0_OVF_vect      _VECTOR(19)  /* Timer 0 Overflow */
-#define TWIBUSCD_vect_num  20
-#define TWIBUSCD_vect      _VECTOR(20)  /* Two-Wire Bus Connect/Disconnect */
-#define TWI_vect_num  21
-#define TWI_vect      _VECTOR(21)  /* Two-Wire Serial Interface */
-#define SPI_STC_vect_num  22
-#define SPI_STC_vect      _VECTOR(22)  /* SPI Serial transfer complete */
-#define VADC_vect_num  23
-#define VADC_vect      _VECTOR(23)  /* Voltage ADC Conversion Complete */
-#define CCADC_CONV_vect_num  24
-#define CCADC_CONV_vect      _VECTOR(24)  /* Coulomb Counter ADC Conversion Complete */
-#define CCADC_REG_CUR_vect_num  25
-#define CCADC_REG_CUR_vect      _VECTOR(25)  /* Coloumb Counter ADC Regular Current */
-#define CCADC_ACC_vect_num  26
-#define CCADC_ACC_vect      _VECTOR(26)  /* Coloumb Counter ADC Accumulator */
-#define EE_READY_vect_num  27
-#define EE_READY_vect      _VECTOR(27)  /* EEPROM Ready */
-#define SPM_vect_num  28
-#define SPM_vect      _VECTOR(28)  /* SPM Ready */
 
-#define _VECTOR_SIZE 4 /* Size of individual vector. */
-#define _VECTORS_SIZE (29 * _VECTOR_SIZE)
+/* Interrupt Vectors */
+/* Interrupt Vector 0 is the reset vector. */
+
+#define BPINT_vect         _VECTOR(1)  /* Battery Protection Interrupt */
+#define VREGMON_vect       _VECTOR(2)  /* Voltage regulator monitor interrupt */
+#define INT0_vect          _VECTOR(3)  /* External Interrupt Request 0 */
+#define INT1_vect          _VECTOR(4)  /* External Interrupt Request 1 */
+#define INT2_vect          _VECTOR(5)  /* External Interrupt Request 2 */
+#define INT3_vect          _VECTOR(6)  /* External Interrupt Request 3 */
+#define PCINT0_vect        _VECTOR(7)  /* Pin Change Interrupt 0 */
+#define PCINT1_vect        _VECTOR(8)  /* Pin Change Interrupt 1 */
+#define WDT_vect           _VECTOR(9)  /* Watchdog Timeout Interrupt */
+#define BGSCD_vect         _VECTOR(10)  /* Bandgap Buffer Short Circuit Detected */
+#define CHDET_vect         _VECTOR(11)  /* Charger Detect */
+#define TIMER1_IC_vect     _VECTOR(12)  /* Timer 1 Input capture */
+#define TIMER1_COMPA_vect  _VECTOR(13)  /* Timer 1 Compare Match A */
+#define TIMER1_COMPB_vect  _VECTOR(14)  /* Timer 1 Compare Match B */
+#define TIMER1_OVF_vect    _VECTOR(15)  /* Timer 1 overflow */
+#define TIMER0_IC_vect     _VECTOR(16)  /* Timer 0 Input Capture */
+#define TIMER0_COMPA_vect  _VECTOR(17)  /* Timer 0 Comapre Match A */
+#define TIMER0_COMPB_vect  _VECTOR(18)  /* Timer 0 Compare Match B */
+#define TIMER0_OVF_vect    _VECTOR(19)  /* Timer 0 Overflow */
+#define TWIBUSCD_vect      _VECTOR(20)  /* Two-Wire Bus Connect/Disconnect */
+#define TWI_vect           _VECTOR(21)  /* Two-Wire Serial Interface */
+#define SPI_STC_vect       _VECTOR(22)  /* SPI Serial transfer complete */
+#define VADC_vect          _VECTOR(23)  /* Voltage ADC Conversion Complete */
+#define CCADC_CONV_vect    _VECTOR(24)  /* Coulomb Counter ADC Conversion Complete */
+#define CCADC_REG_CUR_vect _VECTOR(25)  /* Coloumb Counter ADC Regular Current */
+#define CCADC_ACC_vect     _VECTOR(26)  /* Coloumb Counter ADC Accumulator */
+#define EE_READY_vect      _VECTOR(27)  /* EEPROM Ready */
+#define SPM_vect           _VECTOR(28)  /* SPM Ready */
+
+#define _VECTORS_SIZE (29 * 4)
 
 
 /* Constants */
-#define SPM_PAGESIZE (128)
-#define RAMSTART     (0x100)
-#define RAMSIZE      (2048)
-#define RAMEND       (RAMSTART + RAMSIZE - 1)
-#define XRAMSTART    (NA)
-#define XRAMSIZE     (NA)
-#define XRAMEND      (RAMEND)
-#define E2END        (0x3FF)
-#define E2PAGESIZE   (4)
-#define FLASHEND     (0x7FFF)
+#define SPM_PAGESIZE 64
+#define RAMEND       0x8FF     /* Last On-Chip SRAM Location */
+#define XRAMSIZE     0
+#define XRAMEND      RAMEND
+#define E2END        0x3FF
+#define FLASHEND     0x7FFF
 
 
 /* Fuses */
+
 #define FUSE_MEMORY_SIZE 2
 
 /* Low Fuse Byte */
-#define FUSE_OSCSEL0  (unsigned char)~_BV(0)  /* Oscillator Select */
-#define FUSE_OSCSEL1  (unsigned char)~_BV(1)  /* Oscillator Select */
-#define FUSE_SUT0  (unsigned char)~_BV(2)  /* Select start-up time */
-#define FUSE_SUT1  (unsigned char)~_BV(3)  /* Select start-up time */
-#define FUSE_SUT2  (unsigned char)~_BV(4)  /* Select start-up time */
-#define FUSE_SPIEN  (unsigned char)~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define FUSE_WDTON   (unsigned char)~_BV(7)  /* Watchdog Timer Always On */
 #define FUSE_EESAVE  (unsigned char)~_BV(6)  /* EEPROM memory is preserved through chip erase */
-#define FUSE_WDTON  (unsigned char)~_BV(7)  /* Watchdog Timer Always On */
-#define LFUSE_DEFAULT (FUSE_SPIEN & FUSE_OSCSEL0)
+#define FUSE_SPIEN   (unsigned char)~_BV(5)  /* Enable Serial programming and Data Downloading */
+#define FUSE_SUT2    (unsigned char)~_BV(4)  /* Select start-up time */
+#define FUSE_SUT1    (unsigned char)~_BV(3)  /* Select start-up time */
+#define FUSE_SUT0    (unsigned char)~_BV(2)  /* Select start-up time */
+#define FUSE_OSCSEL1 (unsigned char)~_BV(1)  /* Oscillator Select */
+#define FUSE_OSCSEL0 (unsigned char)~_BV(0)  /* Oscillator Select */
+#define LFUSE_DEFAULT (FUSE_OSCSEL0 & FUSE_SPIEN)
 
 /* High Fuse Byte */
-#define FUSE_BOOTRST  (unsigned char)~_BV(0)  /* Select Reset Vector */
-#define FUSE_BOOTSZ0  (unsigned char)~_BV(1)  /* Select Boot Size */
-#define FUSE_BOOTSZ1  (unsigned char)~_BV(2)  /* Select Boot Size */
-#define FUSE_DWEN  (unsigned char)~_BV(3)  /* Enable debugWire */
-#define FUSE_CKDIV  (unsigned char)~_BV(4)  /* CKDIV Register */
-#define HFUSE_DEFAULT (FUSE_CKDIV & FUSE_BOOTSZ1 & FUSE_BOOTSZ0)
+#define FUSE_BOOTRST   (unsigned char)~_BV(0)  /* Select Reset Vector */
+#define FUSE_BOOTSZ0   (unsigned char)~_BV(1)  /* Select Boot Size */
+#define FUSE_BOOTSZ1   (unsigned char)~_BV(2)  /* Select Boot Size */
+#define FUSE_DWEN      (unsigned char)~_BV(3)  /* Enable debugWire */
+#define FUSE_DUVRDINIT (unsigned char)~_BV(4)  /* Reset Value of DUVRDRegister */
+#define HFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_DUVRDINIT)
+
 
 
 /* Lock Bits */
 #define __LOCK_BITS_EXIST
-#define __BOOT_LOCK_BITS_0_EXIST
-#define __BOOT_LOCK_BITS_1_EXIST
 
 
-/* Signature */
-#define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x95
-#define SIGNATURE_2 0x10
-
-
-/* Device Pin Definitions */
-#define PV2_DDR   DDRV
-#define PV2_PORT  PORTV
-#define PV2_PIN   PINV
-#define PV2_BIT   2
-
-#define PV1_DDR   DDRV
-#define PV1_PORT  PORTV
-#define PV1_PIN   PINV
-#define PV1_BIT   1
-
-#define NV_DDR   DDRNV
-#define NV_PORT  PORTNV
-#define NV_PIN   PINNV
-#define NV_BIT   NV
-
-#define VFET_DDR   DDRVFET
-#define VFET_PORT  PORTVFET
-#define VFET_PIN   PINVFET
-#define VFET_BIT   VFET
-
-#define CF1P_DDR   DDRCF1P
-#define CF1P_PORT  PORTCF1P
-#define CF1P_PIN   PINCF1P
-#define CF1P_BIT   CF1P
-
-#define CF1N_DDR   DDRCF1N
-#define CF1N_PORT  PORTCF1N
-#define CF1N_PIN   PINCF1N
-#define CF1N_BIT   CF1N
-
-#define CF2P_DDR   DDRCF2P
-#define CF2P_PORT  PORTCF2P
-#define CF2P_PIN   PINCF2P
-#define CF2P_BIT   CF2P
-
-#define CF2N_DDR   DDRCF2N
-#define CF2N_PORT  PORTCF2N
-#define CF2N_PIN   PINCF2N
-#define CF2N_BIT   CF2N
-
-#define VREG_DDR   DDRVREG
-#define VREG_PORT  PORTVREG
-#define VREG_PIN   PINVREG
-#define VREG_BIT   VREG
-
-#define VREF_DDR   DDRVREF
-#define VREF_PORT  PORTVREF
-#define VREF_PIN   PINVREF
-#define VREF_BIT   VREF
-
-#define VREF_DDR   DDRVREFGND
-#define VREF_PORT  PORTVREFGND
-#define VREF_PIN   PINVREFGND
-#define VREF_BIT   VREFGND
-
-#define PI_DDR   DDRI
-#define PI_PORT  PORTI
-#define PI_PIN   PINI
-#define PI_BIT   
-
-#define NI_DDR   DDRNI
-#define NI_PORT  PORTNI
-#define NI_PIN   PINNI
-#define NI_BIT   NI
-
-#define PA0_DDR   DDRA
-#define PA0_PORT  PORTA
-#define PA0_PIN   PINA
-#define PA0_BIT   0
-
-#define PA1_DDR   DDRA
-#define PA1_PORT  PORTA
-#define PA1_PIN   PINA
-#define PA1_BIT   1
-
-#define PA2_DDR   DDRA
-#define PA2_PORT  PORTA
-#define PA2_PIN   PINA
-#define PA2_BIT   2
-
-#define PB0_DDR   DDRB
-#define PB0_PORT  PORTB
-#define PB0_PIN   PINB
-#define PB0_BIT   0
-
-#define PB1_DDR   DDRB
-#define PB1_PORT  PORTB
-#define PB1_PIN   PINB
-#define PB1_BIT   1
-
-#define PB2_DDR   DDRB
-#define PB2_PORT  PORTB
-#define PB2_PIN   PINB
-#define PB2_BIT   2
-
-#define PB3_DDR   DDRB
-#define PB3_PORT  PORTB
-#define PB3_PIN   PINB
-#define PB3_BIT   3
-
-#define PC0_DDR   DDRC
-#define PC0_PORT  PORTC
-#define PC0_PIN   PINC
-#define PC0_BIT   0
-
-#define BATT_DDR   DDRBATT
-#define BATT_PORT  PORTBATT
-#define BATT_PIN   PINBATT
-#define BATT_BIT   BATT
-
-#define OC_DDR   DDROC
-#define OC_PORT  PORTOC
-#define OC_PIN   PINOC
-#define OC_BIT   OC
-
-#endif /* _AVR_ATmega32HVB_H_ */
-
+#endif  /* _AVR_IOM32HVB_H_ */
