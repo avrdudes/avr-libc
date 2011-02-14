@@ -1,5 +1,10 @@
-2011-02-11  Anitha Boyapati <anitha.boyapati@atmel.com>
+2011-02-14  Anitha Boyapati <anitha.boyapati@atmel.com>
 
+	Fix for #bug31873
+	* include/avr/power.h: Modifications to power_aes_enable/disable() 
+    power_all_enable/disable() functions for Xmega devices. 
+
+2011-02-11  Anitha Boyapati <anitha.boyapati@atmel.com>
 
 	Thanks to Praveen Kaushik <Praveen_Kumar.Kaushi@atmel.com> for
 	the fix for #bug31990.

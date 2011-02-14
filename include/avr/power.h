@@ -338,13 +338,13 @@ find out which macros are applicable to your device.
   <tr>
     <td>power_all_enable()</td>
     <td>Enable all modules.</td>
-    <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega325A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
+    <td>ATxmega6A4, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmegaA1, ATxmegaA1U, ATxmega128A3, ATxmega192A3, ATxmega256A3, ATxmegaA3B, ATxmega16D4, ATxmega32D4, ATxmega64D3, ATxmega128D3, ATxmega192D3, ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega325A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
 
   <tr>
     <td>power_all_disable()</td>
     <td>Disable all modules.</td>
-    <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega3250A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
+    <td>ATxmega6A4, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmegaA1, ATxmegaA1U, ATxmega128A3, ATxmega192A3, ATxmega256A3, ATxmegaA3B, ATxmega16D4, ATxmega32D4, ATxmega64D3, ATxmega128D3,ATxmega192D3, ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega325A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861</td>
   </tr>
 </table>
 </center>
@@ -352,6 +352,51 @@ find out which macros are applicable to your device.
 
 @} */
 
+// Xmega A series has AES, EBI and DMA bits
+// Include any other device on need basis
+#if defined(__AVR_ATxmega16A4__) \
+|| defined(__AVR_ATxmega32A4__) \
+|| defined(__AVR_ATxmega64A1__) \
+|| defined(__AVR_ATxmega64A1U__) \
+|| defined(__AVR_ATxmega64A3__) \
+|| defined(__AVR_ATxmega128A1__) \
+|| defined(__AVR_ATxmega128A1U__) \
+|| defined(__AVR_ATxmega128A3__) \
+|| defined(__AVR_ATxmega192A3__) \
+|| defined(__AVR_ATxmega256A3__) \
+|| defined(__AVR_ATxmega256A3B__)
+
+#define power_aes_enable()  (PR_PRGEN &= (uint8_t)~(PR_AES_bm))
+#define power_aes_disable() (PR_PRGEN |= (uint8_t)PR_AES_bm)
+
+#define power_ebi_enable()  (PR_PRGEN &= (uint8_t)~(PR_EBI_bm))
+#define power_ebi_disable() (PR_PRGEN |= (uint8_t)PR_EBI_bm)
+
+#define power_dma_enable()    (PR_PRGEN &= (uint8_t)~(PR_DMA_bm))
+#define power_dma_disable()   (PR_PRGEN |= (uint8_t)PR_DMA_bm)
+
+#define power_all_enable() \
+do { \
+    PR_PRGEN &= (uint8_t)~(PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); \
+    PR_PRPA &= (uint8_t)~(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PR_PRPB &= (uint8_t)~(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PR_PRPC &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPD &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPE &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPF &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+} while(0)
+
+
+#define power_all_disable() \
+do { \
+    PR_PRGEN|= (uint8_t)(PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); \
+    PR_PRPA |= (uint8_t)(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PR_PRPB |= (uint8_t)(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
+    PR_PRPC |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPD |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPE |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPF |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+#endif
 
 #if defined(__AVR_ATxmega16A4__) \
 || defined(__AVR_ATxmega16D4__) \
@@ -367,26 +412,15 @@ find out which macros are applicable to your device.
 || defined(__AVR_ATxmega128D3__) \
 || defined(__AVR_ATxmega192A3__) \
 || defined(__AVR_ATxmega192D3__) \
-|| defined(__AVR_ATxmega256D3__) \
 || defined(__AVR_ATxmega256A3__) \
 || defined(__AVR_ATxmega256A3B__)
 
-/*
-#define power_aes_enable()  (PR_PR &= (uint8_t)~(PR_AES_bm))
-#define power_aes_disable() (PR_PR |= (uint8_t)PR_AES_bm)
-*/
 
-#define power_ebi_enable()  (PR_PR &= (uint8_t)~(PR_EBI_bm))
-#define power_ebi_disable() (PR_PR |= (uint8_t)PR_EBI_bm)
+#define power_rtc_enable()  (PR_PRGEN &= (uint8_t)~(PR_RTC_bm))
+#define power_rtc_disable() (PR_PRGEN |= (uint8_t)PR_RTC_bm)
 
-#define power_rtc_enable()  (PR_PR &= (uint8_t)~(PR_RTC_bm))
-#define power_rtc_disable() (PR_PR |= (uint8_t)PR_RTC_bm)
-
-#define power_evsys_enable()    (PR_PR &= (uint8_t)~(PR_EVSYS_bm))
-#define power_evsys_disable()   (PR_PR |= (uint8_t)PR_EVSYS_bm)
-
-#define power_dma_enable()    (PR_PR &= (uint8_t)~(PR_DMA_bm))
-#define power_dma_disable()   (PR_PR |= (uint8_t)PR_DMA_bm)
+#define power_evsys_enable()    (PR_PRGEN &= (uint8_t)~(PR_EVSYS_bm))
+#define power_evsys_disable()   (PR_PRGEN |= (uint8_t)PR_EVSYS_bm)
 
 #define power_daca_enable()     (PR_PRPA &= (uint8_t)~(PR_DAC_bm))
 #define power_daca_disable()    (PR_PRPA |= (uint8_t)PR_DAC_bm)
@@ -466,10 +500,17 @@ find out which macros are applicable to your device.
 #define power_tc0f_enable()     (PR_PRPF &= (uint8_t)~(PR_TC0_bm))
 #define power_tc0f_disable()    (PR_PRPF |= (uint8_t)PR_TC0_bm)
 
+#endif
+
+#if defined(__AVR_ATxmega16D4__) \
+|| defined(__AVR_ATxmega32D4__) \
+|| defined(__AVR_ATxmega64D3__) \
+|| defined(__AVR_ATxmega128D3__) \
+|| defined(__AVR_ATxmega192D3__) 
+
 #define power_all_enable() \
 do { \
-    /* PR_PR &= (uint8_t)~(PR_AES_bm|PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); */ \
-    PR_PR &= (uint8_t)~(PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); \
+    PR_PRGEN &= (uint8_t)~(PR_RTC_bm|PR_EVSYS_bm); \
     PR_PRPA &= (uint8_t)~(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
     PR_PRPB &= (uint8_t)~(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
     PR_PRPC &= (uint8_t)~(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
@@ -481,8 +522,7 @@ do { \
 
 #define power_all_disable() \
 do { \
-    /* PM_PR_PR |= (uint8_t)(PR_AES_bm|PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); */ \
-    PR_PR |= (uint8_t)(PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); \
+    PR_PRGEN|= (uint8_t)(PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm); \
     PR_PRPA |= (uint8_t)(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
     PR_PRPB |= (uint8_t)(PR_DAC_bm|PR_ADC_bm|PR_AC_bm); \
     PR_PRPC |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
@@ -491,6 +531,7 @@ do { \
     PR_PRPF |= (uint8_t)(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
 } while(0)
 
+#endif
 
 #elif defined(__AVR_ATmega640__) \
 || defined(__AVR_ATmega1280__) \
