@@ -342,8 +342,10 @@
 #  include <avr/iotn44.h>
 #elif defined (__AVR_ATtiny44A__)
 #  include <avr/iotn44a.h>
-#elif defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny84A__)
+#elif defined (__AVR_ATtiny84__)
 #  include <avr/iotn84.h>
+#elif defined (__AVR_ATtiny84A__)
+#  include <avr/iotn84a.h>  
 #elif defined (__AVR_ATtiny261__)
 #  include <avr/iotn261.h>
 #elif defined (__AVR_ATtiny261A__)
