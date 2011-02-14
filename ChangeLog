@@ -1,5 +1,11 @@
 2011-02-14  Anitha Boyapati <anitha.boyapati@atmel.com>
 
+	* include/avr/io.h: Support for AVR Tiny84a
+	* include/avr/iotn84a.h: Same.
+	* include/avr/Makefile.am: Same.
+
+2011-02-14  Anitha Boyapati <anitha.boyapati@atmel.com>
+
 	Fix for #bug31873
 	* include/avr/power.h: Modifications to power_aes_enable/disable() 
     power_all_enable/disable() functions for Xmega devices. 
