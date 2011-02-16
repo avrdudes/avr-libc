@@ -1,5 +1,9 @@
 2011-02-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: Bump for post-release.
+
+2011-02-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Released avr-libc-1.7.1.
 
 2011-02-16  Anitha Boyapati <anitha.boyapati@atmel.com>
