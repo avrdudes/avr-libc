@@ -1,3 +1,8 @@
+2011-02-16  Anitha Boyapati <anitha.boyapati@atmel.com>
+
+	* include/avr/power.h: Changes to power_all_enable()/disable() for 
+	Xmega A and D family
+
 2011-02-14  Anitha Boyapati <anitha.boyapati@atmel.com>
 
 	Thanks to Praveen Kaushik <Praveen_Kumar.Kaushi@atmel.com> for the device
