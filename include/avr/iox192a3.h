@@ -6798,7 +6798,7 @@ IO Module Instances. Mapped to memory.
 #define IO_END       (IO_START + IO_SIZE - 1)
 
 #define MAPPED_EEPROM_START     (0x1000)
-#define MAPPED_EEPROM_SIZE      (4096)
+#define MAPPED_EEPROM_SIZE      (2048)
 #define MAPPED_EEPROM_PAGE_SIZE (0)
 #define MAPPED_EEPROM_END       (MAPPED_EEPROM_START + MAPPED_EEPROM_SIZE - 1)
 
@@ -6808,7 +6808,7 @@ IO Module Instances. Mapped to memory.
 #define INTERNAL_SRAM_END       (INTERNAL_SRAM_START + INTERNAL_SRAM_SIZE - 1)
 
 #define EEPROM_START     (0x0000)
-#define EEPROM_SIZE      (4096)
+#define EEPROM_SIZE      (2048)
 #define EEPROM_PAGE_SIZE (32)
 #define EEPROM_END       (EEPROM_START + EEPROM_SIZE - 1)
 

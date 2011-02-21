@@ -1,6 +1,8 @@
 *** Changes since avr-libc-1.7.1:
 
 * Bugs fixed:
+  
+  [#32419] Incorrect EEPROM size in header for ATxmega192A3
 
 * New devices supported:
 

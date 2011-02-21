@@ -1,3 +1,9 @@
+2011-02-21  Eric B. Weddington  <eric.weddington@atmel.com>
+
+    Fix for bug #32419.
+    * include/avr/iox192a3.h (*EEPROM_SIZE): Fix values.
+    * NEWS: Add item to fixed bugs list.
+
 2011-02-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump for post-release.
