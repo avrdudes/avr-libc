@@ -145,19 +145,19 @@ AC_CHECK_TOOL(AR, ar, ar)
 # Make sure that we found the right avr cross-compiler.
 
 case "${CC}" in
-   *avr-gcc*) ;;
+   *avr*gcc*) ;;
    *) AC_MSG_ERROR(Wrong C compiler found; check the PATH!) ;;
 esac
 case "${AS}" in
-   *avr-as*) ;;
+   *avr*as*) ;;
    *) AC_MSG_ERROR(Wrong assembler found; check the PATH!) ;;
 esac
 case "${AR}" in
-   *avr-ar*) ;;
+   *avr*ar*) ;;
    *) AC_MSG_ERROR(Wrong archiver found; check the PATH!) ;;
 esac
 case "${RANLIB}" in
-   *avr-ranlib*) ;;
+   *avr*ranlib*) ;;
    *) AC_MSG_ERROR(Wrong ranlib found; check the PATH!) ;;
 esac
 
