@@ -1,6 +1,6 @@
 /* Copyright (c) 2002,2005, Theodore Roth
    Copyright (c) 2006, Joerg Wunsch
-   Copyright (c) 2007, Eric B. Weddington
+   Copyright (c) 2007, 2010 Eric B. Weddington
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -95,7 +95,7 @@ each of the tools.
   http://gcc.gnu.org/ <br>
   \ref install_avr_gcc "Installation"
 
-- <b>AVR Libc</b><br>
+- <b>AVR LibC</b><br>
   http://savannah.gnu.org/projects/avr-libc/ <br>
   \ref install_avr_libc "Installation"<br>
 
@@ -240,7 +240,7 @@ http://www.freebsd.org/cgi/cvsweb.cgi/ports/devel/avr-gcc/files/patch-newdevices
 
 
 
-\section install_avr_libc AVR Libc
+\section install_avr_libc AVR LibC
 \addindex installation, avr-libc
 
 \warning You <em><b>must</b></em> install 
@@ -381,20 +381,20 @@ designed for running under a POSIX environment such as Unix and Linux. Windows
 does not natively provide such an environment.
 
 There are two projects available that provide such an environment, Cygwin and
-MinGW/MSYS. There are advantages and disadvantages to both. Cygwin provides a 
+MinGW. There are advantages and disadvantages to both. Cygwin provides a 
 very complete POSIX environment that allows one to build many Linux based tools
 from source with very little or no source modifications. However, POSIX 
 functionality is provided in the form of a DLL that is linked to the application.
 This DLL has to be redistributed with your application and there are issues if 
 the Cygwin DLL already exists on the installation system and different versions
-of the DLL. On the other hand, MinGW/MSYS can compile code as native Win32
+of the DLL. On the other hand, MinGW can compile code as native Win32
 applications. However, this means that programs designed for Unix and Linux (i.e.
-that use POSIX functionality) will not compile as MinGW/MSYS does not provide
+that use POSIX functionality) will not compile as MinGW does not provide
 that POSIX layer for you. Therefore most programs that compile on both types of
 host systems, usually must provide some sort of abstraction layer to allow an
 application to be built cross-platform. 
 
-MinGW/MSYS does provide somewhat of a POSIX environment that allows you to 
+MinGW does provide somewhat of a POSIX environment, called MSYS, that allows you to 
 build Unix and Linux applications as they woud normally do, with a \c configure 
 step and a \c make step. Cygwin also provides such an environment. This means
 that building the AVR toolchain is very similar to how it is built in Linux,
@@ -405,66 +405,39 @@ projects under Windows. We'll take a look at the tools next.
 
 \section install_windows_tools Tools Required for Building the Toolchain for Windows
 
-These are the tools that are currently used to build WinAVR 20070525 (or later).
+These are the tools that are currently used to build an AVR tool chain.
 This list may change, either the version of the tools, or the tools themselves,
 as improvements are made.
 
-- <b>MinGW/MSYS</b><br>
-    <http://downloads.sourceforge.net/mingw/MinGW-5.1.4.exe?use_mirror=superb-east>
-    - Put MinGW-5.1.4.exe in it's own directory (for example: C:\\MinGWSetup)
-    - Run MinGW-5.1.4.exe
-    - Select "Download and install"
-    - Select "Current" package.
-    - Select type of install: Full.
-
-- <b>Install MSYS-1.0.10.exe package.</b><br>
-    <http://prdownloads.sf.net/mingw/MSYS-1.0.10.exe?download>
-    - Default selections
-    - Batch file will ask:
-        - "Do you wish to continue with the post install?" Press "y" and press enter.
-        - "Do you have MinGW installed?" Press "y" and press enter.
-        - "Where is your MinGW installation?" Type in "c:/mingw" (without quotes) and press enter
-        - "Do you wish for me to add mount bindings for c:/mingw to /mingw?" Press "y" and press enter.
-        - It will display some messages on the screen, then it will display: "Press any key to continue . . .". Press any key.
-
-- <b>Edit c:\\msys\\1.0\\msys.bat</b><br>
-    Change line (should be line 41):
-    \verbatim
-        if EXIST rxvt.exe goto startrxvt
-    \endverbatim
-    to:
-    \verbatim
-        rem if EXIST rxvt.exe goto startrxvt
-    \endverbatim
-    to remark out this line. Doing this will cause MSYS to always use the bash shell and not the rxvt shell.
-
-\note The order of the next three is important. Install MSYS Developer toolkit before the autotools.
-
-- <b>MSYS Developer Toolkit version 1.0.1</b><br>
-    - This is needed to build avr-libc in MinGW.
-    - <http://downloads.sourceforge.net/mingw/msysDTK-1.0.1.exe?use_mirror=internap>
-    - Single file installer executable. Install.
-
-- <b>autoconf 2.59 from the "MSYS Developer Toolkit" release</b><br>
-    - autoconf 2.59/2.60 is needed to build avr-libc in MinGW.
-    - <http://downloads.sourceforge.net/mingw/msys-autoconf-2.59.tar.bz2?use_mirror=internap>
-    - Extract to c:\\msys\\1.0
-    
-- <b>automake 1.8.2</b><br>
-    - automake 1.8/1.9 is needed to build avr-libc in MinGW.
-    - <http://downloads.sourceforge.net/mingw/msys-automake-1.8.2.tar.bz2?use_mirror=internap>
-    - Extract to c:\\msys\\1.0
-
+- <b>MinGW</b><br>
+    Download the MinGW Automated Installer, 20100909 (or later)
+	<http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/mingw-get-inst/mingw-get-inst-20100909/mingw-get-inst-20100909.exe/download>
+	- Run mingw-get-inst-20100909.exe
+	- In the installation wizard, keep the default values and press the "Next" button
+	for all installer pages except for the pages explicitly listed below.
+    - In the installer page "Repository Catalogues", select the "Download latest
+	repository catalogues" radio button, and press the "Next" button
+	- In the installer page "License Agreement", select the "I accept the agreement"
+	radio button, and press the "Next" button
+	- In the installer page "Select Components", be sure to select these items:
+		- C compiler (default checked)
+		- C++ compiler
+		- Ada compiler
+		- MinGW Developer Toolkit (which includes "MSYS Basic System").
+	- Install.
+	
 - <b>Install Cygwin</b><br>
     - Install everything, all users, UNIX line endings. This will take a *long* time.
     A fat internet pipe is highly recommended. It is also recommended that you 
     download all to a directory first, and then install from that directory to
     your machine.
  
+\note GMP, MPFR, and MPC are required to build GCC.
 \note GMP is a prequisite for building MPFR. Build GMP first.
+\note MPFR is a prerequisite for building MPC. Build MPFR second.
 
 - <b>Build GMP for MinGW</b><br>
-    - Version 4.2.3
+    - Latest Version
     - <http://gmplib.org/>
     - Build script:
         \verbatim
@@ -477,41 +450,63 @@ as improvements are made.
     under /usr/local/lib.
 
 - <b>Build MPFR for MinGW</b><br>
-    - Version 2.3.2
+    - Latest Version
     - <http://www.mpfr.org/>
     - Build script:
         \verbatim
-        ./configure --with-gmp=/usr/local 2>&1 | tee mpfr-configure.log
+        ./configure --with-gmp=/usr/local --disable-shared 2>&1 | tee mpfr-configure.log
         make         2>&1 | tee mpfr-make.log
         make check   2>&1 | tee mpfr-make-check.log
         make install 2>&1 | tee mpfr-make-install.log
         \endverbatim
     - MPFR headers will be installed under /usr/local/include and library installed
     under /usr/local/lib.
- 
+
+- <b>Build MPC for MinGW</b><br>
+    - Latest Version
+    - <http://www.multiprecision.org/>
+    - Build script:
+        \verbatim
+        ./configure --with-gmp=/usr/local --with-mpfr=/usr/local --disable-shared 2>&1 | tee mpfr-configure.log
+        make         2>&1 | tee mpfr-make.log
+        make check   2>&1 | tee mpfr-make-check.log
+        make install 2>&1 | tee mpfr-make-install.log
+        \endverbatim
+    - MPFR headers will be installed under /usr/local/include and library installed
+    under /usr/local/lib.
+
+\note Doxygen is required to build AVR-LibC documentation.	
 - <b>Install Doxygen</b><br>
-    - Version 1.5.6
+    - Version 1.7.2
     - <http://www.stack.nl/~dimitri/doxygen/>
     - Download and install.
 
+\note NetPBM is required to build graphics in the AVR-LibC documentation.
 - <b>Install NetPBM</b><br>
     - Version 10.27.0
     - From the GNUWin32 project: <http://gnuwin32.sourceforge.net/packages.html>
     - Download and install.
 
+\note fig2dev is required to build graphics in the AVR-LibC documentation.
 - <b>Install fig2dev</b><br>
-    - Version 3.2 Patchlevel 5
-    - From WinFig 2.2: <http://www.schmidt-web-berlin.de/winfig/>
-    - Unzip the download file and install fig2dev.exe in a location of your choice.
+    - Version 3.2 patchlevel 5c
+    - From WinFig 4.62: <http://www.schmidt-web-berlin.de/winfig/>
+    - Download the zip file version of WinFig
+    - Unzip the download file and install fig2dev.exe in a location of your
+    choice, somewhere in the PATH.
+    - You may have to unzip and install related DLL files for fig2dev. In the
+    version above, you have to install QtCore4.dll and QtGui4.dll.
 
+\note MikTeX is required to build various documentation.
 - <b>Install MiKTeX</b><br>
-    - Version 2.7
+    - Version 2.9
     - <http://miktex.org/>
     - Download and install.
 
+\note Ghostscript is required to build various documentation.
 - <b>Install Ghostscript</b><br>
-    - Version 8.63
-    - <http://www.cs.wisc.edu/~ghost/>
+    - Version 9.00
+    - <http://www.ghostscript.com>
     - Download and install.
     - In the \\bin subdirectory of the installaion, copy gswin32c.exe to gs.exe.
 
@@ -525,13 +520,14 @@ All directories in the PATH enviornment variable should be specified using their
 short filename (8.3) version. This will also help to avoid NTVDM errors during
 building. These short filenames can be specific to each machine.
 
-Build the tools below in MSYS.
+Build the tools below in MinGW/MSYS.
 
 - <b>Binutils</b><br>
     - Open source code pacakge and patch as necessary.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>
+		- \<ghostscript executables\>
         - /usr/local/bin
         - /usr/bin
         - /bin
@@ -550,7 +546,7 @@ Build the tools below in MSYS.
             --with-gmp=/usr/local \
             --with-mpfr=/usr/local \
             2>&1 | tee binutils-configure.log
-        \endverbatim
+		\endverbatim
     - Make
         \verbatim
         make all html install install-html 2>&1 | tee binutils-make.log
@@ -563,6 +559,7 @@ Build the tools below in MSYS.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>
+		- \<ghostscript executables\>
         - /usr/local/bin
         - /usr/bin
         - /bin
@@ -571,26 +568,27 @@ Build the tools below in MSYS.
         - \<install directory\>/bin
     - Configure
         \verbatim
-        CFLAGS=-D__USE_MINGW_ACCESS  \
-        ../gcc-$version/configure \
-            --prefix=$installdir \
-            --target=$target \
-            --enable-languages=c,c++ \
-            --with-dwarf2 \
-            --enable-win32-registry=WinAVR-$release \
-            --disable-nls \
-            --with-gmp=/usr/local \
-            --with-mpfr=/usr/local \
-            --enable-doc \
-            --disable-libssp \
-            2>&1 | tee $package-configure.log
-        \endverbatim
+		LDFLAGS='-L /usr/local/lib -R /usr/local/lib' \
+		CFLAGS='-D__USE_MINGW_ACCESS'  \
+		../gcc-$version/configure \
+			--with-gmp=/usr/local \
+			--with-mpfr=/usr/local \
+			--with-mpc=/usr/local \
+			--prefix=$installdir \
+			--target=$target \
+			--enable-languages=c,c++ \
+			--with-dwarf2 \
+			--enable-doc \
+			--with-docdir=$installdir/doc/$project \
+			--disable-shared \
+			--disable-libada \
+			--disable-libssp \
+			2>&1 | tee $project-configure.log 
+		\endverbatim
     - Make
         \verbatim
         make all html install 2>&1 | tee $package-make.log
         \endverbatim
-    - Manually copy the HTML documentation from the source code tree to the
-    installation tree.
 
 
 - <b>avr-libc</b><br>

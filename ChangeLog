@@ -1,5 +1,10 @@
 2011-02-22  Eric B. Weddington  <eric.weddington@atmel.com>
 
+    * doc/api/tools-install.dox: Partial documentation changes
+    for building avr-libc for MinGW/Windows.
+
+2011-02-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #24861.
 	* include/avr/interrupt.h: Remove extra code blocks in documentation.
 	Fix spacing.
