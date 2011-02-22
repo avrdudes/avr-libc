@@ -2,6 +2,7 @@
 
 * Bugs fixed:
   
+  [#24861] Interrupt documentation contains extra include
   [#32103] Support for Target-Triplets
   [#32419] Incorrect EEPROM size in header for ATxmega192A3
 

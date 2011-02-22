@@ -1,3 +1,10 @@
+2011-02-22  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #24861.
+	* include/avr/interrupt.h: Remove extra code blocks in documentation.
+	Fix spacing.
+	* NEWS: Add item to fixed bugs list.
+
 2011-02-21  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #32103. Thanks to Thomas Rudin for fix.
