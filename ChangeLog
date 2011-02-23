@@ -1,5 +1,13 @@
 2011-02-23  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Partial fix for bug #28058, comment #2.
+	Thanks to Jan Waclawek for the code.
+	* include/avr/pgmspace.h: Add new strlen_P inline function.
+	* libc/pmstring/strlen_P.S: Rename function to __strlen_P.
+	* NEWS: Add item.
+
+2011-02-23  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #17815.
 	* doc/api/Makefile.am (install-dox-man): Rewrite to fix install
 	location to use mandir configuration option.
@@ -7,8 +15,8 @@
 
 2011-02-22  Eric B. Weddington  <eric.weddington@atmel.com>
 
-    * doc/api/tools-install.dox: Partial documentation changes
-    for building avr-libc for MinGW/Windows.
+	* doc/api/tools-install.dox: Partial documentation changes
+	for building avr-libc for MinGW/Windows.
 
 2011-02-22  Eric B. Weddington  <eric.weddington@atmel.com>
 

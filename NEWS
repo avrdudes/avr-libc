@@ -13,6 +13,11 @@
 
 * Other changes:
 
+  - Optimized strlen_P, thanks to Jan Waclawek. Rename strlen_P to be __strlen_P
+  and add new strlen_P inline function in header file that checks if value is a
+  constant and known at compile time. If not, then the new inline function calls
+  __strlen_P as normal.
+
 
 *** Changes in avr-libc-1.7.1:
 

@@ -35,7 +35,14 @@
     The strlen_P() function is similar to strlen(), except that src is a
     pointer to a string in program space.
 
-    \returns The strlen() function returns the number of characters in src. */
+    \returns The strlen() function returns the number of characters in src.
+    
+    \note strlen_P() is implemented as an inline function in the avr/pgmspace.h
+    header file, which will check if the length of the string is a constant
+    and known at compile time. If it is not known at compile time, the macro
+    will issue a call to __strlen_P() which will then calculate the length
+    of the string as normal.
+*/
 
 #if !defined(__AVR_TINY__)
 
@@ -46,12 +53,12 @@
 #define src_hi r25
 #define src_lo r24
 
-; 11 words, (14 + strlen_P(src) * 8) cycles
+; 11 words, (14 + __strlen_P(src) * 8) cycles
 
 	ASSEMBLY_CLIB_SECTION
-	.global	_U(strlen_P)
-	.type	_U(strlen_P), @function
-_U(strlen_P):
+	.global	_U(__strlen_P)
+	.type	_U(__strlen_P), @function
+_U(__strlen_P):
 	X_movw	ZL, src_lo
 .L_strlen_P_loop:
 	X_lpm	r0, Z+
@@ -64,7 +71,7 @@ _U(strlen_P):
 	adc	src_hi, ZH
 	ret
 .L_strlen_P_end:
-	.size	_U(strlen_P), .L_strlen_P_end - _U(strlen_P)
+	.size	_U(__strlen_P), .L_strlen_P_end - _U(__strlen_P)
 
 #endif /* not __DOXYGEN__ */
 

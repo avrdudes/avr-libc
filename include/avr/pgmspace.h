@@ -904,6 +904,15 @@ not interfere with data accesses.
 })
 
 
+
+__attribute__((__always_inline__)) static inline size_t strlen_P(PGM_P s);
+static inline size_t strlen_P(PGM_P s) {
+  return __builtin_constant_p(__builtin_strlen(s))
+     ? __builtin_strlen(s) : __strlen_P(s);
+} 
+
+
+
 extern PGM_VOID_P memchr_P(PGM_VOID_P, int __val, size_t __len) __ATTR_CONST__;
 extern int memcmp_P(const void *, PGM_VOID_P, size_t) __ATTR_PURE__;
 extern void *memccpy_P(void *, PGM_VOID_P, int __val, size_t);
@@ -920,7 +929,7 @@ extern char *strcasestr_P(const char *, PGM_P) __ATTR_PURE__;
 extern size_t strcspn_P(const char *__s, PGM_P __reject) __ATTR_PURE__;
 extern size_t strlcat_P (char *, PGM_P, size_t );
 extern size_t strlcpy_P (char *, PGM_P, size_t );
-extern size_t strlen_P(PGM_P) __ATTR_CONST__; /* program memory can't change */
+extern size_t __strlen_P(PGM_P) __ATTR_CONST__;  /* program memory can't change */
 extern size_t strnlen_P(PGM_P, size_t) __ATTR_CONST__; /* program memory can't change */
 extern int strncmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
 extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
