@@ -239,12 +239,8 @@ install-dox-pdf: dox-pdf
 	$(INSTALL_DATA) $(USER_MANUAL).pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
 
 install-dox-man: dox-html
-	$(mkinstalldirs) $(DOC_INST_DIR)/man/man3
-	@list='$(wildcard man/man3/*.3)'; \
-	for file in $$list ; do \
-	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file"; \
-	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
-	done
+	$(mkinstalldirs) $(mandir)/man3
+	$(INSTALL_DATA) -t $(mandir)/man3 man/man3/*.3
 
 .PHONY: html latex pdf demo demodox \
 	dox-html dox-pdf install-pdf install-html \
