@@ -92,22 +92,27 @@
 /* Interrupt vectors */
 
 /* External Interrupt 0 */
-#define INT0_vect			_VECTOR(1)
+#define INT0_vect_num			1
+#define INT0_vect	    		_VECTOR(1)
 #define SIG_INTERRUPT0			_VECTOR(1)
 
 /* External Interrupt 1 */
-#define INT1_vect			_VECTOR(2)
+#define INT1_vect_num			2
+#define INT1_vect	    		_VECTOR(2)
 #define SIG_INTERRUPT1			_VECTOR(2)
 
 /* Low-level Input on Port B */
-#define LOWLEVEL_IO_PINS_vect		_VECTOR(3)
-#define SIG_PIN				_VECTOR(3)
+#define LOWLEVEL_IO_PINS_vect_num  3
+#define LOWLEVEL_IO_PINS_vect	_VECTOR(3)
+#define SIG_PIN				    _VECTOR(3)
 
 /* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect_num		4
 #define TIMER0_OVF_vect			_VECTOR(4)
 #define SIG_OVERFLOW0			_VECTOR(4)
 
 /* Analog Comparator */
+#define ANA_COMP_vect_num		5
 #define ANA_COMP_vect			_VECTOR(5)
 #define SIG_COMPARATOR			_VECTOR(5)
 

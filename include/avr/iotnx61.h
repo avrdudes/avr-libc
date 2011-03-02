@@ -439,75 +439,93 @@
 /* Interrupt vectors */
 /* Interrupt vector 0 is the reset vector. */
 /* External Interrupt 0 */
-#define INT0_vect			_VECTOR(1)
+#define INT0_vect_num			1
+#define INT0_vect	    		_VECTOR(1)
 #define SIG_INTERRUPT0			_VECTOR(1)
 
 /* Pin Change Interrupt */
-#define PCINT_vect			_VECTOR(2)
+#define PCINT_vect_num			2
+#define PCINT_vect		    	_VECTOR(2)
 #define SIG_PIN_CHANGE			_VECTOR(2)
 
 /* Timer/Counter1 Compare Match 1A */
+#define TIMER1_COMPA_vect_num	3
 #define TIMER1_COMPA_vect		_VECTOR(3)
-#define SIG_OUTPUT_COMPARE1A		_VECTOR(3)
+#define SIG_OUTPUT_COMPARE1A	_VECTOR(3)
 
 /* Timer/Counter1 Compare Match 1B */
-#define TIMER1_COMPB_vect		_VECTOR(4)
-#define SIG_OUTPUT_COMPARE1B		_VECTOR(4)
+#define TIMER1_COMPB_vect_num	4
+#define TIMER1_COMPB_vect	    _VECTOR(4)
+#define SIG_OUTPUT_COMPARE1B	_VECTOR(4)
 
 /* Timer/Counter1 Overflow */
+#define TIMER1_OVF_vect_num		5
 #define TIMER1_OVF_vect			_VECTOR(5)
 #define SIG_OVERFLOW1			_VECTOR(5)
 
 /* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect_num 	6
 #define TIMER0_OVF_vect			_VECTOR(6)
 #define SIG_OVERFLOW0			_VECTOR(6)
 
 /* USI Start */
+#define USI_START_vect_num		7
 #define USI_START_vect			_VECTOR(7)
 #define SIG_USI_START			_VECTOR(7)
 
 /* USI Overflow */
+#define USI_OVF_vect_num		8
 #define USI_OVF_vect			_VECTOR(8)
 #define SIG_USI_OVERFLOW		_VECTOR(8)
 
 /* EEPROM Ready */
-#define EE_RDY_vect			_VECTOR(9)
+#define EE_RDY_vect_num			9
+#define EE_RDY_vect		    	_VECTOR(9)
 #define SIG_EEPROM_READY		_VECTOR(9)
 
 /* Analog Comparator */
+#define ANA_COMP_vect_num   	10
 #define ANA_COMP_vect			_VECTOR(10)
 #define SIG_ANA_COMP			_VECTOR(10)
 #define SIG_COMPARATOR			_VECTOR(10)
 
 /* ADC Conversion Complete */
-#define ADC_vect			_VECTOR(11)
-#define SIG_ADC				_VECTOR(11)
+#define ADC_vect_num			11
+#define ADC_vect	    		_VECTOR(11)
+#define SIG_ADC			    	_VECTOR(11)
 
 /* Watchdog Time-Out */
-#define WDT_vect			_VECTOR(12)
-#define SIG_WDT				_VECTOR(12)
+#define WDT_vect_num			12
+#define WDT_vect	    		_VECTOR(12)
+#define SIG_WDT			    	_VECTOR(12)
 
 /* External Interrupt 1 */
-#define INT1_vect			_VECTOR(13)
+#define INT1_vect_num			13
+#define INT1_vect	    		_VECTOR(13)
 #define SIG_INTERRUPT1			_VECTOR(13)
 
 /* Timer/Counter0 Compare Match A */
-#define TIMER0_COMPA_vect		_VECTOR(14)
+#define TIMER0_COMPA_vect_num		14
+#define TIMER0_COMPA_vect	    	_VECTOR(14)
 #define SIG_OUTPUT_COMPARE0A		_VECTOR(14)
 
 /* Timer/Counter0 Compare Match B */
-#define TIMER0_COMPB_vect		_VECTOR(15)
+#define TIMER0_COMPB_vect_num		15
+#define TIMER0_COMPB_vect	    	_VECTOR(15)
 #define SIG_OUTPUT_COMPARE0B		_VECTOR(15)
 
 /* ADC Conversion Complete */
-#define TIMER0_CAPT_vect		_VECTOR(16)
-#define SIG_INPUT_CAPTURE0		_VECTOR(16)
+#define TIMER0_CAPT_vect_num		16
+#define TIMER0_CAPT_vect	    	_VECTOR(16)
+#define SIG_INPUT_CAPTURE0		    _VECTOR(16)
 
 /* Timer/Counter1 Compare Match D */
-#define TIMER1_COMPD_vect		_VECTOR(17)
+#define TIMER1_COMPD_vect_num       17
+#define TIMER1_COMPD_vect		    _VECTOR(17)
 #define SIG_OUTPUT_COMPARE0D		_VECTOR(17)
 
 /* Timer/Counter1 Fault Protection */
+#define FAULT_PROTECTION_vect_num	18
 #define FAULT_PROTECTION_vect		_VECTOR(18)
 
 #define _VECTORS_SIZE 38

@@ -282,40 +282,49 @@
    10 0x0009 ADC ADC Conversion Complete */
 
 /* External Interrupt 0 */
-#define INT0_vect			_VECTOR(1)
+#define INT0_vect_num			1
+#define INT0_vect	    		_VECTOR(1)
 #define SIG_INTERRUPT0			_VECTOR(1)
 
 /* External Interrupt Request 0 */
-#define PCINT0_vect			_VECTOR(2)
+#define PCINT0_vect_num			2
+#define PCINT0_vect		    	_VECTOR(2)
 #define SIG_PIN_CHANGE0			_VECTOR(2)
 
 /* Timer/Counter0 Overflow */
+#define TIM0_OVF_vect_num		3
 #define TIM0_OVF_vect			_VECTOR(3)
 #define SIG_OVERFLOW0			_VECTOR(3)
 
 /* EEPROM Ready */
-#define EE_RDY_vect			_VECTOR(4)
+#define EE_RDY_vect_num			4
+#define EE_RDY_vect		    	_VECTOR(4)
 #define SIG_EEPROM_READY		_VECTOR(4)
 
 /* Analog Comparator */
+#define ANA_COMP_vect_num		5
 #define ANA_COMP_vect			_VECTOR(5)
 #define SIG_COMPARATOR			_VECTOR(5)
 
 /* Timer/Counter Compare Match A */
+#define TIM0_COMPA_vect_num  	6
 #define TIM0_COMPA_vect			_VECTOR(6)
-#define SIG_OUTPUT_COMPARE0A		_VECTOR(6)
+#define SIG_OUTPUT_COMPARE0A	_VECTOR(6)
 
 /* Timer/Counter Compare Match B */
+#define TIM0_COMPB_vect_num		7
 #define TIM0_COMPB_vect			_VECTOR(7)
-#define SIG_OUTPUT_COMPARE0B		_VECTOR(7)
+#define SIG_OUTPUT_COMPARE0B	_VECTOR(7)
 
 /* Watchdog Time-out */
-#define WDT_vect			_VECTOR(8)
-#define SIG_WATCHDOG_TIMEOUT		_VECTOR(8)
+#define WDT_vect_num			8
+#define WDT_vect	    		_VECTOR(8)
+#define SIG_WATCHDOG_TIMEOUT	_VECTOR(8)
 
 /* ADC Conversion Complete */
-#define ADC_vect			_VECTOR(9)
-#define SIG_ADC				_VECTOR(9)
+#define ADC_vect_num			9
+#define ADC_vect	    		_VECTOR(9)
+#define SIG_ADC			    	_VECTOR(9)
 
 #define _VECTORS_SIZE 20
 

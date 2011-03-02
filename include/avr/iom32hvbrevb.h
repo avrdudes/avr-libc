@@ -1,4 +1,4 @@
-/* Copyright (c) 2007 Atmel Corporation
+/* Copyright (c) 2007, 2011 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -29,9 +29,9 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id: iom32hvb.h 2102 2010-03-16 22:52:39Z joerg_wunsch $ */
+/* $Id: iom32hvbrevb.h 2102 2010-03-16 22:52:39Z joerg_wunsch $ */
 
-/* avr/iom32hvb.h - definitions for ATmega32HVB. */
+/* avr/iom32hvbrevb.h - definitions for ATmega32HVB revision B. */
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -40,14 +40,14 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iom32hvb.h"
+#  define _AVR_IOXXX_H_ "iom32hvbrevb.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
 
-#ifndef _AVR_IOM32HVB_H_
-#define _AVR_IOM32HVB_H_ 1
+#ifndef _AVR_IOM32HVBREVB_H_
+#define _AVR_IOM32HVBREVB_H_ 1
 
 /* Registers and associated bit numbers */
 
@@ -812,33 +812,88 @@
 /* Interrupt Vectors */
 /* Interrupt Vector 0 is the reset vector. */
 
+#define BPINT_vect_num     1
 #define BPINT_vect         _VECTOR(1)  /* Battery Protection Interrupt */
+
+#define VREGMON_vect_num   2
 #define VREGMON_vect       _VECTOR(2)  /* Voltage regulator monitor interrupt */
+
+#define INT0_vect_num      3
 #define INT0_vect          _VECTOR(3)  /* External Interrupt Request 0 */
+
+#define INT1_vect_num      4
 #define INT1_vect          _VECTOR(4)  /* External Interrupt Request 1 */
+
+#define INT2_vect_num      5
 #define INT2_vect          _VECTOR(5)  /* External Interrupt Request 2 */
+
+#define INT3_vect_num      6
 #define INT3_vect          _VECTOR(6)  /* External Interrupt Request 3 */
+
+#define PCINT0_vect_num    7
 #define PCINT0_vect        _VECTOR(7)  /* Pin Change Interrupt 0 */
+
+#define PCINT1_vect_num    8
 #define PCINT1_vect        _VECTOR(8)  /* Pin Change Interrupt 1 */
+
+#define WDT_vect_num       9
 #define WDT_vect           _VECTOR(9)  /* Watchdog Timeout Interrupt */
+
+#define BGSCD_vect_num     10
 #define BGSCD_vect         _VECTOR(10)  /* Bandgap Buffer Short Circuit Detected */
+
+#define CHDET_vect_num     11
 #define CHDET_vect         _VECTOR(11)  /* Charger Detect */
+
+#define TIMER1_IC_vect_num 12
 #define TIMER1_IC_vect     _VECTOR(12)  /* Timer 1 Input capture */
+
+#define TIMER1_COMPA_vect_num  13
 #define TIMER1_COMPA_vect  _VECTOR(13)  /* Timer 1 Compare Match A */
+
+#define TIMER1_COMPB_vect_num  14
 #define TIMER1_COMPB_vect  _VECTOR(14)  /* Timer 1 Compare Match B */
+
+#define TIMER1_OVF_vect_num   15
 #define TIMER1_OVF_vect    _VECTOR(15)  /* Timer 1 overflow */
+
+#define TIMER0_IC_vect_num 16
 #define TIMER0_IC_vect     _VECTOR(16)  /* Timer 0 Input Capture */
+
+#define TIMER0_COMPA_vect_num  17
 #define TIMER0_COMPA_vect  _VECTOR(17)  /* Timer 0 Comapre Match A */
+
+#define TIMER0_COMPB_vect_num  18
 #define TIMER0_COMPB_vect  _VECTOR(18)  /* Timer 0 Compare Match B */
+
+#define TIMER0_OVF_vect_num  19
 #define TIMER0_OVF_vect    _VECTOR(19)  /* Timer 0 Overflow */
+
+#define TWIBUSCD_vect_num  20
 #define TWIBUSCD_vect      _VECTOR(20)  /* Two-Wire Bus Connect/Disconnect */
+
+#define TWI_vect_num       21
 #define TWI_vect           _VECTOR(21)  /* Two-Wire Serial Interface */
+
+#define SPI_STC_vect_num   22
 #define SPI_STC_vect       _VECTOR(22)  /* SPI Serial transfer complete */
+
+#define VADC_vect_num      23
 #define VADC_vect          _VECTOR(23)  /* Voltage ADC Conversion Complete */
+
+#define CCADC_CONV_vect_num  24
 #define CCADC_CONV_vect    _VECTOR(24)  /* Coulomb Counter ADC Conversion Complete */
+
+#define CCADC_REG_CUR_vect_num 25
 #define CCADC_REG_CUR_vect _VECTOR(25)  /* Coloumb Counter ADC Regular Current */
+
+#define CCADC_ACC_vect_num 26
 #define CCADC_ACC_vect     _VECTOR(26)  /* Coloumb Counter ADC Accumulator */
+
+#define EE_READY_vect_num  27
 #define EE_READY_vect      _VECTOR(27)  /* EEPROM Ready */
+
+#define SPM_vect_num       28
 #define SPM_vect           _VECTOR(28)  /* SPM Ready */
 
 #define _VECTORS_SIZE (29 * 4)
@@ -882,4 +937,4 @@
 #define __LOCK_BITS_EXIST
 
 
-#endif  /* _AVR_IOM32HVB_H_ */
+#endif  /* _AVR_IOM32HVBREVB_H_ */

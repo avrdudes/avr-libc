@@ -1037,39 +1037,106 @@
 /* Interrupt Vectors */
 /* Interrupt Vector 0 is the reset vector. */
 
+#define INT0_vect_num     1
 #define INT0_vect         _VECTOR(1)  /* External Interrupt Request 0 */
+
+#define INT1_vect_num     2
 #define INT1_vect         _VECTOR(2)  /* External Interrupt Request 1 */
+
+#define INT2_vect_num     3
 #define INT2_vect         _VECTOR(3)  /* External Interrupt Request 2 */
+
+#define PCINT0_vect_num   4
 #define PCINT0_vect       _VECTOR(4)  /* Pin Change Interrupt Request 0 */
+
+#define PCINT1_vect_num   5
 #define PCINT1_vect       _VECTOR(5)  /* Pin Change Interrupt Request 1 */
+
+#define PCINT2_vect_num   6
 #define PCINT2_vect       _VECTOR(6)  /* Pin Change Interrupt Request 2 */
+
+#define PCINT3_vect_num   7
 #define PCINT3_vect       _VECTOR(7)  /* Pin Change Interrupt Request 3 */
+
+#define WDT_vect_num      8
 #define WDT_vect          _VECTOR(8)  /* Watchdog Time-out Interrupt */
+
+#define TIMER2_COMPA_vect_num  9
 #define TIMER2_COMPA_vect _VECTOR(9)  /* Timer/Counter2 Compare Match A */
+
+#define TIMER2_COMPB_vect_num  10
 #define TIMER2_COMPB_vect _VECTOR(10)  /* Timer/Counter2 Compare Match B */
+
+#define TIMER2_OVF_vect_num  11
 #define TIMER2_OVF_vect   _VECTOR(11)  /* Timer/Counter2 Overflow */
+
+#define TIMER1_CAPT_vect_num  12
 #define TIMER1_CAPT_vect  _VECTOR(12)  /* Timer/Counter1 Capture Event */
+
+#define TIMER1_COMPA_vect_num  13
 #define TIMER1_COMPA_vect _VECTOR(13)  /* Timer/Counter1 Compare Match A */
+
+#define TIMER1_COMPB_vect_num  14
 #define TIMER1_COMPB_vect _VECTOR(14)  /* Timer/Counter1 Compare Match B */
+
+#define TIMER1_OVF_vect_num  15
 #define TIMER1_OVF_vect   _VECTOR(15)  /* Timer/Counter1 Overflow */
+
+#define TIMER0_COMPA_vect_num  16
 #define TIMER0_COMPA_vect _VECTOR(16)  /* Timer/Counter0 Compare Match A */
+
+#define TIMER0_COMPB_vect_num  17
 #define TIMER0_COMPB_vect _VECTOR(17)  /* Timer/Counter0 Compare Match B */
+
+#define TIMER0_OVF_vect_num  18
 #define TIMER0_OVF_vect   _VECTOR(18)  /* Timer/Counter0 Overflow */
+
+#define SPI_STC_vect_num  19
 #define SPI_STC_vect      _VECTOR(19)  /* SPI Serial Transfer Complete */
+
+#define USART0_RX_vect_num  20
 #define USART0_RX_vect    _VECTOR(20)  /* USART0, Rx Complete */
+
+#define USART0_UDRE_vect_num  21
 #define USART0_UDRE_vect  _VECTOR(21)  /* USART0 Data register Empty */
+
+#define USART0_TX_vect_num  22
 #define USART0_TX_vect    _VECTOR(22)  /* USART0, Tx Complete */
+
+#define ANALOG_COMP_vect_num  23
 #define ANALOG_COMP_vect  _VECTOR(23)  /* Analog Comparator */
+
+#define ADC_vect_num      24
 #define ADC_vect          _VECTOR(24)  /* ADC Conversion Complete */
+
+#define EE_READY_vect_num 25
 #define EE_READY_vect     _VECTOR(25)  /* EEPROM Ready */
+
+#define TWI_vect_num      26
 #define TWI_vect          _VECTOR(26)  /* 2-wire Serial Interface */
+
+#define SPM_READY_vect_num  27
 #define SPM_READY_vect    _VECTOR(27)  /* Store Program Memory Read */
+
+#define USART1_RX_vect_num  28
 #define USART1_RX_vect    _VECTOR(28)  /* USART1 RX complete */
+
+#define USART1_UDRE_vect_num  29
 #define USART1_UDRE_vect  _VECTOR(29)  /* USART1 Data Register Empty */
+
+#define USART1_TX_vect_num  30
 #define USART1_TX_vect    _VECTOR(30)  /* USART1 TX complete */
+
+#define TIMER3_CAPT_vect_num  31
 #define TIMER3_CAPT_vect  _VECTOR(31)  /* Timer/Counter3 Capture Event */
+
+#define TIMER3_COMPA_vect_num  32
 #define TIMER3_COMPA_vect _VECTOR(32)  /* Timer/Counter3 Compare Match A */
+
+#define TIMER3_COMPB_vect_num  33
 #define TIMER3_COMPB_vect _VECTOR(33)  /* Timer/Counter3 Compare Match B */
+
+#define TIMER3_OVF_vect_num  34
 #define TIMER3_OVF_vect   _VECTOR(34)  /* Timer/Counter3 Overflow */
 
 #define _VECTORS_SIZE (35 * 4)

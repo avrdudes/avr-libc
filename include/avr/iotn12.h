@@ -124,23 +124,28 @@
 /* Interrupt vectors */
 
 /* External Interrupt 0 */
-#define INT0_vect			_VECTOR(1)
+#define INT0_vect_num			1
+#define INT0_vect	    		_VECTOR(1)
 #define SIG_INTERRUPT0			_VECTOR(1)
 
 /* External Interrupt Request 0 */
+#define IO_PINS_vect_num		2
 #define IO_PINS_vect			_VECTOR(2)
-#define SIG_PIN				_VECTOR(2)
+#define SIG_PIN			    	_VECTOR(2)
 #define SIG_PIN_CHANGE			_VECTOR(2)
 
 /* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect_num		3
 #define TIMER0_OVF_vect			_VECTOR(3)
 #define SIG_OVERFLOW0			_VECTOR(3)
 
 /* EEPROM Ready */
-#define EE_RDY_vect			_VECTOR(4)
+#define EE_RDY_vect_num			4
+#define EE_RDY_vect		    	_VECTOR(4)
 #define SIG_EEPROM_READY		_VECTOR(4)
 
 /* Analog Comparator */
+#define ANA_COMP_vect_num		5
 #define ANA_COMP_vect			_VECTOR(5)
 #define SIG_COMPARATOR			_VECTOR(5)
 

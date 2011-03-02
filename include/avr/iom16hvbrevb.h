@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (c) 2009, 2011 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -28,9 +28,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id: iom16hvb.h 2086 2009-12-15 03:24:16Z arcanum $ */
+/* $Id: iom16hvbrevb.h 2086 2009-12-15 03:24:16Z arcanum $ */
 
-/* avr/iom16hvb.h - definitions for ATmega16HVB */
+/* avr/iom16hvbrevb.h - definitions for ATmega16HVB revision B */
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
@@ -39,14 +39,14 @@
 #endif
 
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iom16hvb.h"
+#  define _AVR_IOXXX_H_ "iom16hvbrevb.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif 
 
 
-#ifndef _AVR_ATmega16HVB_H_
-#define _AVR_ATmega16HVB_H_ 1
+#ifndef _AVR_ATmega16HVBREVB_H_
+#define _AVR_ATmega16HVBREVB_H_ 1
 
 
 /* Registers and associated bit numbers. */
@@ -1035,5 +1035,5 @@
 #define OC_PIN   PINOC
 #define OC_BIT   OC
 
-#endif /* _AVR_ATmega16HVB_H_ */
+#endif /* _AVR_ATmega16HVBREVB_H_ */
 

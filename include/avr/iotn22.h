@@ -102,10 +102,12 @@
 /* Interrupt vectors */
 
 /* External Interrupt 0 */
-#define INT0_vect			_VECTOR(1)
+#define INT0_vect_num			1
+#define INT0_vect	    		_VECTOR(1)
 #define SIG_INTERRUPT0			_VECTOR(1)
 
 /* Timer/Counter0 Overflow */
+#define TIMER0_OVF0_vect_num	2
 #define TIMER0_OVF0_vect		_VECTOR(2)
 #define SIG_OVERFLOW0			_VECTOR(2)
 

@@ -1194,122 +1194,150 @@
 
 /* Interrupt vectors */
 /* PSC2 Capture Event */
+#define PSC2_CAPT_vect_num		1
 #define PSC2_CAPT_vect			_VECTOR(1)
 #define SIG_PSC2_CAPTURE		_VECTOR(1)
 
 /* PSC2 End Cycle */
+#define PSC2_EC_vect_num		2
 #define PSC2_EC_vect			_VECTOR(2)
 #define SIG_PSC2_END_CYCLE		_VECTOR(2)
 
 /* PSC1 Capture Event */
+#define PSC1_CAPT_vect_num		3
 #define PSC1_CAPT_vect			_VECTOR(3)
 #define SIG_PSC1_CAPTURE		_VECTOR(3)
 
 /* PSC1 End Cycle */
+#define PSC1_EC_vect_num		4
 #define PSC1_EC_vect			_VECTOR(4)
 #define SIG_PSC1_END_CYCLE		_VECTOR(4)
 
 /* PSC0 Capture Event */
+#define PSC0_CAPT_vect_num		5
 #define PSC0_CAPT_vect			_VECTOR(5)
 #define SIG_PSC0_CAPTURE		_VECTOR(5)
 
 /* PSC0 End Cycle */
+#define PSC0_EC_vect_num		6
 #define PSC0_EC_vect			_VECTOR(6)
 #define SIG_PSC0_END_CYCLE		_VECTOR(6)
 
 /* Analog Comparator 0 */
+#define ANALOG_COMP_0_vect_num	7
 #define ANALOG_COMP_0_vect		_VECTOR(7)
 #define SIG_COMPARATOR0			_VECTOR(7)
 
 /* Analog Comparator 1 */
+#define ANALOG_COMP_1_vect_num	8
 #define ANALOG_COMP_1_vect		_VECTOR(8)
 #define SIG_COMPARATOR1			_VECTOR(8)
 
 /* Analog Comparator 2 */
+#define ANALOG_COMP_2_vect_num	9
 #define ANALOG_COMP_2_vect		_VECTOR(9)
 #define SIG_COMPARATOR2			_VECTOR(9)
 
 /* External Interrupt Request 0 */
+#define INT0_vect_num		10
 #define INT0_vect			_VECTOR(10)
 #define SIG_INTERRUPT0			_VECTOR(10)
 
 /* Timer/Counter1 Capture Event */
+#define TIMER1_CAPT_vect_num	11
 #define TIMER1_CAPT_vect		_VECTOR(11)
 #define SIG_INPUT_CAPTURE1		_VECTOR(11)
 
 /* Timer/Counter1 Compare Match A */
+#define TIMER1_COMPA_vect_num	_VECTOR(12)
 #define TIMER1_COMPA_vect		_VECTOR(12)
 #define SIG_OUTPUT_COMPARE1A		_VECTOR(12)
 #define SIG_OUTPUT_COMPARE1_A		_VECTOR(12)
 
 /* Timer/Counter Compare Match B */
+#define TIMER1_COMPB_vect_num	13
 #define TIMER1_COMPB_vect		_VECTOR(13)
 #define SIG_OUTPUT_COMPARE1B		_VECTOR(13)
 #define SIG_OUTPUT_COMPARE1_B		_VECTOR(13)
 
 /* Timer/Counter1 Overflow */
+#define TIMER1_OVF_vect_num		15
 #define TIMER1_OVF_vect			_VECTOR(15)
 #define SIG_OVERFLOW1			_VECTOR(15)
 
 /* Timer/Counter0 Compare Match A */
+#define TIMER0_COMP_A_vect_num	16
 #define TIMER0_COMP_A_vect		_VECTOR(16)
 #define SIG_OUTPUT_COMPARE0A		_VECTOR(16)
 #define SIG_OUTPUT_COMPARE0_A		_VECTOR(16)
 
 /* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect_num		17
 #define TIMER0_OVF_vect			_VECTOR(17)
 #define SIG_OVERFLOW0			_VECTOR(17)
 
 /* ADC Conversion Complete */
+#define ADC_vect_num		18
 #define ADC_vect			_VECTOR(18)
 #define SIG_ADC				_VECTOR(18)
 
 /* External Interrupt Request 1 */
+#define INT1_vect_num		19
 #define INT1_vect			_VECTOR(19)
 #define SIG_INTERRUPT1			_VECTOR(19)
 
 /* SPI Serial Transfer Complete */
+#define SPI_STC_vect_num		20
 #define SPI_STC_vect			_VECTOR(20)
 #define SIG_SPI				_VECTOR(20)
 
 /* USART, Rx Complete */
+#define USART_RX_vect_num		21
 #define USART_RX_vect			_VECTOR(21)
 #define SIG_USART_RECV			_VECTOR(21)
 #define SIG_UART_RECV			_VECTOR(21)
 
 /* USART Data Register Empty */
+#define USART_UDRE_vect_num		22
 #define USART_UDRE_vect			_VECTOR(22)
 #define SIG_USART_DATA			_VECTOR(22)
 #define SIG_UART_DATA			_VECTOR(22)
 
 /* USART, Tx Complete */
+#define USART_TX_vect_num		23
 #define USART_TX_vect			_VECTOR(23)
 #define SIG_USART_TRANS			_VECTOR(23)
 #define SIG_UART_TRANS			_VECTOR(23)
 
 /* External Interrupt Request 2 */
+#define INT2_vect_num		24
 #define INT2_vect			_VECTOR(24)
 #define SIG_INTERRUPT2			_VECTOR(24)
 
 /* Watchdog Timeout Interrupt */
+#define WDT_vect_num		25
 #define WDT_vect			_VECTOR(25)
 #define SIG_WDT				_VECTOR(25)
 #define SIG_WATCHDOG_TIMEOUT		_VECTOR(25)
 
 /* EEPROM Ready */
+#define EE_READY_vect_num		26
 #define EE_READY_vect			_VECTOR(26)
 #define SIG_EEPROM_READY		_VECTOR(26)
 
 /* Timer Counter 0 Compare Match B */
+#define TIMER0_COMPB_vect_num	27
 #define TIMER0_COMPB_vect		_VECTOR(27)
 #define SIG_OUTPUT_COMPARE0B		_VECTOR(27)
 #define SIG_OUTPUT_COMPARE0_B		_VECTOR(27)
 
 /* External Interrupt Request 3 */
+#define INT3_vect_num		28
 #define INT3_vect			_VECTOR(28)
 #define SIG_INTERRUPT3			_VECTOR(28)
 
 /* Store Program Memory Read */
+#define SPM_READY_vect_num		31
 #define SPM_READY_vect			_VECTOR(31)
 #define SIG_SPM_READY			_VECTOR(31)
 

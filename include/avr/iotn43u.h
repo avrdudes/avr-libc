@@ -479,48 +479,63 @@
 /* Interrupt vector 0 is the reset vector. */
 
 /* External Interrupt Request 0 */
+#define INT0_vect_num       1
 #define INT0_vect           _VECTOR(1)
 
 /* Pin Change Interrupt Request 0 */
+#define PCINT0_vect_num     2
 #define PCINT0_vect         _VECTOR(2)
 
 /* Pin Change Interrupt Request 1 */
+#define PCINT1_vect_num     3
 #define PCINT1_vect         _VECTOR(3)
 
 /* Watchdog Time-out */
+#define WDT_vect_num        4
 #define WDT_vect            _VECTOR(4)
 
 /* Timer/Counter1 Compare Match A */
+#define TIM1_COMPA_vect_num 5
 #define TIM1_COMPA_vect     _VECTOR(5)
 
 /* Timer/Counter1 Compare Match B */
+#define TIM1_COMPB_vect_num 6
 #define TIM1_COMPB_vect     _VECTOR(6)
 
 /* Timer/Counter1 Overflow */
+#define TIM1_OVF_vect_num   7
 #define TIM1_OVF_vect       _VECTOR(7)
 
 /* Timer/Counter0 Compare Match A */
+#define TIM0_COMPA_vect_num 8
 #define TIM0_COMPA_vect     _VECTOR(8)
 
 /* Timer/Counter0 Compare Match B */
+#define TIM0_COMPB_vect_num 9
 #define TIM0_COMPB_vect     _VECTOR(9)
 
 /* Timer/Counter0 Overflow */
+#define TIM0_OVF_vect_num   10
 #define TIM0_OVF_vect       _VECTOR(10)
 
 /* Analog Comparator */
+#define ANA_COMP_vect_num   11
 #define ANA_COMP_vect       _VECTOR(11)
 
 /* ADC Conversion Complete */
+#define ADC_vect_num        12
 #define ADC_vect            _VECTOR(12)
 
 /* EEPROM Ready */
+#define EE_RDY_vect_num     13
 #define EE_RDY_vect         _VECTOR(13)
 
 /* USI START */
+#define USI_START_vect_num  14
 #define USI_START_vect      _VECTOR(14)
 
 /* USI Overflow */
+#define USI_OVF_vect_num    15
 #define USI_OVF_vect        _VECTOR(15)
 
 #define _VECTORS_SIZE 32

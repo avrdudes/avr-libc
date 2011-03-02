@@ -635,90 +635,93 @@
 /* Reserved [0xF9..0xFF] */
 
 /* Interrupt vectors */
+
 /* Battery Protection Interrupt */
+#define BPINT_vect_num		1
 #define BPINT_vect			_VECTOR(1)
 
-
 /* External Interrupt Request 0 */
+#define INT0_vect_num		2
 #define INT0_vect			_VECTOR(2)
 
-
 /* External Interrupt Request 1 */
+#define INT1_vect_num		3
 #define INT1_vect			_VECTOR(3)
 
-
 /* External Interrupt Request 2 */
+#define INT2_vect_num		4
 #define INT2_vect			_VECTOR(4)
 
-
 /* External Interrupt Request 3 */
+#define INT3_vect_num		5
 #define INT3_vect			_VECTOR(5)
 
-
 /* Pin Change Interrupt 0 */
+#define PCINT0_vect_num		6
 #define PCINT0_vect			_VECTOR(6)
 
-
 /* Pin Change Interrupt 1 */
+#define PCINT1_vect_num		7
 #define PCINT1_vect			_VECTOR(7)
 
-
 /* Watchdog Timeout Interrupt */
+#define WDT_vect_num		8
 #define WDT_vect			_VECTOR(8)
 
-
 /* Wakeup timer overflow */
+#define WAKE_UP_vect_num		9
 #define WAKE_UP_vect			_VECTOR(9)
 
-
 /* Timer/Counter 1 Compare Match */
+#define TIM1_COMP_vect_num		10
 #define TIM1_COMP_vect			_VECTOR(10)
 
-
 /* Timer/Counter 1 Overflow */
+#define TIM1_OVF_vect_num		11
 #define TIM1_OVF_vect			_VECTOR(11)
 
-
 /* Timer/Counter0 Compare A Match */
+#define TIM0_COMPA_vect_num		12
 #define TIM0_COMPA_vect			_VECTOR(12)
 
-
 /* Timer/Counter0 Compare B Match */
+#define TIM0_COMPB_vect_num		13
 #define TIM0_COMPB_vect			_VECTOR(13)
 
-
 /* Timer/Counter0 Overflow */
+#define TIM0_OVF_vect_num		14
 #define TIM0_OVF_vect			_VECTOR(14)
 
-
 /* Two-Wire Bus Connect/Disconnect */
+#define TWI_BUS_CD_vect_num		15
 #define TWI_BUS_CD_vect			_VECTOR(15)
 
-
 /* Two-Wire Serial Interface */
+#define TWI_vect_num		16
 #define TWI_vect			_VECTOR(16)
 
-
 /* Voltage ADC Conversion Complete */
+#define VADC_vect_num		17
 #define VADC_vect			_VECTOR(17)
 
-
 /* Coulomb Counter ADC Conversion Complete */
+#define CCADC_CONV_vect_num		18
 #define CCADC_CONV_vect			_VECTOR(18)
 
 /* Coloumb Counter ADC Regular Current */
+#define CCADC_REG_CUR_vect_num	19
 #define CCADC_REG_CUR_vect		_VECTOR(19)
 
-
 /* Coloumb Counter ADC Accumulator */
+#define CCADC_ACC_vect_num		20
 #define CCADC_ACC_vect			_VECTOR(20)
 
-
 /* EEPROM Ready */
+#define EE_READY_vect_num		21
 #define EE_READY_vect			_VECTOR(21)
 
-
 /* Store Program Memory Ready */
+#define SPM_READY_vect_num		22
 #define SPM_READY_vect			_VECTOR(22)
 
 #define _VECTORS_SIZE 92

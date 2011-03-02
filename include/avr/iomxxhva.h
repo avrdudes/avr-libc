@@ -454,63 +454,83 @@
 
 /* Interrupt vectors */
 /* Battery Protection Interrupt */
+#define BPINT_vect_num		1
 #define BPINT_vect			_VECTOR(1)
 
 /* Voltage Regulator Monitor Interrupt */
+#define VREGMON_vect_num		2
 #define VREGMON_vect			_VECTOR(2)
 
 /* External Interrupt Request 0 */
+#define INT0_vect_num		3
 #define INT0_vect			_VECTOR(3)
 
 /* External Interrupt Request 1 */
+#define INT1_vect_num		4
 #define INT1_vect			_VECTOR(4)
 
 /* External Interrupt Request 2 */
+#define INT2_vect_num		5
 #define INT2_vect			_VECTOR(5)
 
 /* Watchdog Timeout Interrupt */
+#define WDT_vect_num		6
 #define WDT_vect			_VECTOR(6)
 
 /* Timer/Counter 1 Input Capture */
+#define TIMER1_IC_vect_num		7
 #define TIMER1_IC_vect			_VECTOR(7)
 
 /* Timer/Counter 1 Compare A Match */
+#define TIMER1_COMPA_vect_num	8
 #define TIMER1_COMPA_vect		_VECTOR(8)
 
 /* Timer/Counter 1 Compare B Match */
+#define TIMER1_COMPB_vect_num	9
 #define TIMER1_COMPB_vect		_VECTOR(9)
 
 /* Timer/Counter 1 Overflow */
+#define TIMER1_OVF_vect_num		10
 #define TIMER1_OVF_vect			_VECTOR(10)
 
 /* Timer/Counter 0 Input Capture */
+#define TIMER0_IC_vect_num		11
 #define TIMER0_IC_vect			_VECTOR(11)
 
 /* Timer/Counter0 Compare A Match */
+#define TIMER0_COMPA_vect_num	12
 #define TIMER0_COMPA_vect		_VECTOR(12)
 
 /* Timer/Counter0 Compare B Match */
+#define TIMER0_COMPB_vect_num	13
 #define TIMER0_COMPB_vect		_VECTOR(13)
 
 /* Timer/Counter0 Overflow */
+#define TIMER0_OVF_vect_num		14
 #define TIMER0_OVF_vect			_VECTOR(14)
 
 /* SPI Serial Transfer Complete */
+#define SPI_STC_vect_num		15
 #define SPI_STC_vect			_VECTOR(15)
 
 /* Voltage ADC Conversion Complete */
+#define VADC_vect_num		16
 #define VADC_vect			_VECTOR(16)
 
 /* Coulomb Counter ADC Conversion Complete */
+#define CCADC_CONV_vect_num		17
 #define CCADC_CONV_vect			_VECTOR(17)
 
 /* Coloumb Counter ADC Regular Current */
+#define CCADC_REG_CUR_vect_num	18
 #define CCADC_REG_CUR_vect		_VECTOR(18)
 
 /* Coloumb Counter ADC Accumulator */
+#define CCADC_ACC_vect_num		19
 #define CCADC_ACC_vect			_VECTOR(19)
 
 /* EEPROM Ready */
+#define EE_READY_vect_num		20
 #define EE_READY_vect			_VECTOR(20)
 
 #if defined (__AVR_ATmega16HVA__)

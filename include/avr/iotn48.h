@@ -681,24 +681,61 @@
 /* Interrupt Vectors */
 /* Interrupt vector 0 is the reset vector. */
 
+#define INT0_vect_num     1
 #define INT0_vect         _VECTOR(1)
+
+#define INT1_vect_num     2
 #define INT1_vect         _VECTOR(2)
+
+#define PCINT0_vect_num   3
 #define PCINT0_vect       _VECTOR(3)
+
+#define PCINT1_vect_num   4
 #define PCINT1_vect       _VECTOR(4)
+
+#define PCINT2_vect_num   5
 #define PCINT2_vect       _VECTOR(5)
+
+#define PCINT3_vect_num   6
 #define PCINT3_vect       _VECTOR(6)
+
+#define WDT_vect_num      7
 #define WDT_vect          _VECTOR(7)
+
+#define TIMER1_CAPT_vect_num  8
 #define TIMER1_CAPT_vect  _VECTOR(8)
+
+#define TIMER1_COMPA_vect_num  9
 #define TIMER1_COMPA_vect _VECTOR(9)
+
+#define TIMER1_COMPB_vect_num  10
 #define TIMER1_COMPB_vect _VECTOR(10)
+
+#define TIMER1_OVF_vect_num  11
 #define TIMER1_OVF_vect   _VECTOR(11)
+
+#define TIMER0_COMPA_vect_num  12
 #define TIMER0_COMPA_vect _VECTOR(12)
+
+#define TIMER0_COMPB_vect_num  13
 #define TIMER0_COMPB_vect _VECTOR(13)
+
+#define TIMER0_OVF_vect_num  14
 #define TIMER0_OVF_vect   _VECTOR(14)
+
+#define SPI_STC_vect_num  15
 #define SPI_STC_vect      _VECTOR(15)
+
+#define ADC_vect_num      16
 #define ADC_vect          _VECTOR(16)
+
+#define EE_READY_vect_num 17
 #define EE_READY_vect     _VECTOR(17)
+
+#define ANALOG_COMP_vect_num  18
 #define ANALOG_COMP_vect  _VECTOR(18)
+
+#define TWI_vect_num      19
 #define TWI_vect          _VECTOR(19)
 
 #define _VECTORS_SIZE 40
