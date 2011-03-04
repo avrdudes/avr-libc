@@ -1,5 +1,9 @@
 2011-03-04  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	* include/avr/iom103.h: Poison deprecated items.
+
+2011-03-04  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	* include/avr/iom128.h: Poison deprecated items.
 
 2011-03-02  Eric B. Weddington  <eric.weddington@atmel.com>

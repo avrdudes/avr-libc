@@ -695,4 +695,37 @@
 #define SIGNATURE_2 0x01
 
 
+
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison SIG_INTERRUPT0
+#pragma GCC poison SIG_INTERRUPT1
+#pragma GCC poison SIG_INTERRUPT2
+#pragma GCC poison SIG_INTERRUPT3
+#pragma GCC poison SIG_INTERRUPT4
+#pragma GCC poison SIG_INTERRUPT5
+#pragma GCC poison SIG_INTERRUPT6
+#pragma GCC poison SIG_INTERRUPT7
+#pragma GCC poison SIG_OUTPUT_COMPARE2
+#pragma GCC poison SIG_OVERFLOW2
+#pragma GCC poison SIG_INPUT_CAPTURE1
+#pragma GCC poison SIG_OUTPUT_COMPARE1A
+#pragma GCC poison SIG_OUTPUT_COMPARE1B
+#pragma GCC poison SIG_OVERFLOW1
+#pragma GCC poison SIG_OUTPUT_COMPARE0
+#pragma GCC poison SIG_OVERFLOW0
+#pragma GCC poison SIG_SPI
+#pragma GCC poison SIG_UART_RECV
+#pragma GCC poison SIG_UART_DATA
+#pragma GCC poison SIG_UART_TRANS
+#pragma GCC poison SIG_ADC
+#pragma GCC poison SIG_EEPROM_READY
+#pragma GCC poison SIG_COMPARATOR
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
+
+
 #endif /* _AVR_IOM103_H_ */
