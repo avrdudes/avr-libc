@@ -1,3 +1,11 @@
+2011-03-06  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom163.h: Poison deprecated items.
+	* include/avr/iom165.h: Same.
+	* include/avr/iom165p.h: Same.
+	* include/avr/iom169.h: Same.
+	* include/avr/iom169p.h: Same.
+
 2011-03-05  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom162.h: Poison deprecated items.
