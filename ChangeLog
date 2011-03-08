@@ -1,3 +1,7 @@
+2011-03-08  Anitha Boyapati <anitha.boyapati@atmel.com>
+
+	* include/avr/power.h: Fix #endif error for Xmega A series.
+
 2011-03-06  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom163.h: Poison deprecated items.
