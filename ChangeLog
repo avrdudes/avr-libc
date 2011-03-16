@@ -1,7 +1,14 @@
+2011-03-15  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iom323.h: Poison deprecated items.
+	* include/avr/iom325.h: Same.
+	* include/avr/iom3250.h: Same.
+	* include/avr/iom329.h: Same.
+
 2011-03-08  Eric B. Weddington  <eric.weddington@atmel.com>
 
-    * include/avr/iom32.h: Poison deprecated items.
-	
+	* include/avr/iom32.h: Poison deprecated items.
+
 2011-03-08  Anitha Boyapati <anitha.boyapati@atmel.com>
 
 	Fix for bug #32698.
