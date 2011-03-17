@@ -1,3 +1,14 @@
+2011-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iotn11.h: Poison deprecated items.
+	* include/avr/iotn12.h: Same.
+	* include/avr/iotn13.h: Same.
+	* include/avr/iotn15.h: Same.
+	* include/avr/iotn22.h: Same.
+	* include/avr/iotn2313.h: Same. Also: remove duplicate definitions.
+	* include/avr/iotn26.h: Same.
+	* include/avr/iotn28.h: Same.
+
 2011-03-16  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iom3290.h: Poison deprecated items.
@@ -7,12 +18,12 @@
 	* include/avr/iom6450.h: Same.
 	* include/avr/iom649.h: Same.
 	* include/avr/iom8.h: Same.
-        * include/avr/iom8515.h: Same.
-        * include/avr/iom8535.h: Same.
-        * include/avr/iomx8.h: Same.
-        * include/avr/iomxx4.h: Same.
-        * include/avr/iomxx0_1: Same. Also add missing vector number
-        definitions.
+	* include/avr/iom8515.h: Same.
+	* include/avr/iom8535.h: Same.
+	* include/avr/iomx8.h: Same.
+	* include/avr/iomxx4.h: Same.
+	* include/avr/iomxx0_1: Same. Also add missing vector number
+	definitions.
 
 2011-03-15  Eric B. Weddington  <eric.weddington@atmel.com>
 

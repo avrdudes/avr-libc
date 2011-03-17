@@ -267,4 +267,19 @@
 #define SIGNATURE_2 0x05
 
 
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison SIG_INTERRUPT0
+#pragma GCC poison SIG_PIN
+#pragma GCC poison SIG_PIN_CHANGE
+#pragma GCC poison SIG_OVERFLOW0
+#pragma GCC poison SIG_EEPROM_READY
+#pragma GCC poison SIG_COMPARATOR
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
+
+
 #endif /* _AVR_IOTN12_H_ */

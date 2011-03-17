@@ -582,12 +582,10 @@
 #define USI_START_vect_num		15
 #define USI_START_vect			_VECTOR(15)
 #define SIG_USI_START			_VECTOR(15)
-#define SIG_USI_START			_VECTOR(15)
 
 /* USI Overflow */
 #define USI_OVERFLOW_vect_num	16
 #define USI_OVERFLOW_vect		_VECTOR(16)
-#define SIG_USI_OVERFLOW		_VECTOR(16)
 #define SIG_USI_OVERFLOW		_VECTOR(16)
 
 #define EEPROM_READY_vect_num	17
@@ -652,6 +650,49 @@
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x91
 #define SIGNATURE_2 0x0A
+
+
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison SIG_INTERRUPT0
+#pragma GCC poison SIG_INT0
+#pragma GCC poison SIG_INTERRUPT1
+#pragma GCC poison SIG_INT1
+#pragma GCC poison SIG_INPUT_CAPTURE1
+#pragma GCC poison SIG_TIMER1_CAPT
+#pragma GCC poison SIG_OUTPUT_COMPARE1A
+#pragma GCC poison SIG_TIMER1_COMPA
+#pragma GCC poison SIG_OVERFLOW1
+#pragma GCC poison SIG_TIMER1_OVF
+#pragma GCC poison SIG_OVERFLOW0
+#pragma GCC poison SIG_TIMER0_OVF
+#pragma GCC poison SIG_USART0_RECV
+#pragma GCC poison SIG_USART0_RX
+#pragma GCC poison SIG_USART0_DATA
+#pragma GCC poison SIG_USART0_UDRE
+#pragma GCC poison SIG_USART0_TRANS
+#pragma GCC poison SIG_USART0_TX
+#pragma GCC poison SIG_COMPARATOR
+#pragma GCC poison SIG_ANALOG_COMP
+#pragma GCC poison SIG_PIN_CHANGE
+#pragma GCC poison SIG_PCINT
+#pragma GCC poison SIG_OUTPUT_COMPARE1B
+#pragma GCC poison SIG_TIMER1_COMPB
+#pragma GCC poison SIG_OUTPUT_COMPARE0A
+#pragma GCC poison SIG_TIMER0_COMPA
+#pragma GCC poison SIG_OUTPUT_COMPARE0B
+#pragma GCC poison SIG_TIMER0_COMPB
+#pragma GCC poison SIG_USI_START
+#pragma GCC poison SIG_USI_OVERFLOW
+#pragma GCC poison SIG_EEPROM_READY
+#pragma GCC poison SIG_EE_READY
+#pragma GCC poison SIG_WATCHDOG_TIMEOUT
+#pragma GCC poison SIG_WDT_OVERFLOW
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
 
 
 #endif  /* _AVR_IOTN2313_H_ */
