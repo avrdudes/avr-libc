@@ -650,4 +650,32 @@
 #define SIGNATURE_2 0x06
 
 
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison SIG_INTERRUPT0
+#pragma GCC poison SIG_INTERRUPT1
+#pragma GCC poison SIG_INPUT_CAPTURE1
+#pragma GCC poison SIG_OUTPUT_COMPARE1A
+#pragma GCC poison SIG_OUTPUT_COMPARE1B
+#pragma GCC poison SIG_OVERFLOW1
+#pragma GCC poison SIG_OVERFLOW0
+#pragma GCC poison SIG_SPI
+#pragma GCC poison UART_RX_vect
+#pragma GCC poison SIG_UART_RECV
+#pragma GCC poison UART_UDRE_vect
+#pragma GCC poison SIG_UART_DATA
+#pragma GCC poison UART_TX_vect
+#pragma GCC poison SIG_UART_TRANS
+#pragma GCC poison SIG_COMPARATOR
+#pragma GCC poison SIG_INTERRUPT2
+#pragma GCC poison SIG_OUTPUT_COMPARE0
+#pragma GCC poison SIG_EEPROM_READY
+#pragma GCC poison SIG_SPM_READY
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
+
+
 #endif /* _AVR_IOM8515_H_ */

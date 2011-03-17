@@ -1576,5 +1576,36 @@
 #define SIGNATURE_2 0x84
 
 
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison POCR0SA_00
+#pragma GCC poison POCR0SA_01
+#pragma GCC poison POCR0RA_00
+#pragma GCC poison POCR0RA_01
+#pragma GCC poison POCR0SB_00
+#pragma GCC poison POCR0SB_01
+#pragma GCC poison POCR1SA_00
+#pragma GCC poison POCR1SA_01
+#pragma GCC poison POCR1RA_00
+#pragma GCC poison POCR1SB_00
+#pragma GCC poison POCR1SB_01
+#pragma GCC poison POCR2SA_00
+#pragma GCC poison POCR2SA_01
+#pragma GCC poison POCR2RA_00
+#pragma GCC poison POCR2RA_01
+#pragma GCC poison POCR2SB_00
+#pragma GCC poison POCR2SB_01
+#pragma GCC poison POCRxRB
+#pragma GCC poison POCRxRBL
+#pragma GCC poison POCRxRBH
+#pragma GCC poison POCR_RB_00
+#pragma GCC poison POCR_RB_01
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
+
+
 #endif /* _AVR_ATmega32M1_H_ */
 

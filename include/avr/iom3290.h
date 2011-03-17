@@ -1177,4 +1177,38 @@
 #define SIGNATURE_2 0x04
 
 
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison SIG_INTERRUPT0
+#pragma GCC poison SIG_PIN_CHANGE0
+#pragma GCC poison SIG_PIN_CHANGE1
+#pragma GCC poison SIG_OUTPUT_COMPARE2
+#pragma GCC poison SIG_OVERFLOW2
+#pragma GCC poison SIG_INPUT_CAPTURE1
+#pragma GCC poison SIG_OUTPUT_COMPARE1A
+#pragma GCC poison SIG_OUTPUT_COMPARE1B
+#pragma GCC poison SIG_OVERFLOW1
+#pragma GCC poison SIG_OUTPUT_COMPARE0
+#pragma GCC poison SIG_OVERFLOW0
+#pragma GCC poison SIG_SPI
+#pragma GCC poison SIG_UART_RECV
+#pragma GCC poison SIG_UART_DATA
+#pragma GCC poison SIG_UART_TRANS
+#pragma GCC poison SIG_USI_START
+#pragma GCC poison SIG_USI_OVERFLOW
+#pragma GCC poison SIG_COMPARATOR
+#pragma GCC poison SIG_ADC
+#pragma GCC poison SIG_EEPROM_READY
+#pragma GCC poison SIG_SPM_READY
+#pragma GCC poison SIG_LCD
+#pragma GCC poison SIG_PIN_CHANGE2
+#pragma GCC poison SIG_PIN_CHANGE3
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
+
+
+
 #endif /* _AVR_IOM3290_H_ */

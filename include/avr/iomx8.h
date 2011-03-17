@@ -757,4 +757,40 @@ must be defined for the mega48.
 #  define _VECTORS_SIZE 52
 #endif
 
+
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison SIG_INTERRUPT0
+#pragma GCC poison SIG_INTERRUPT1
+#pragma GCC poison SIG_PIN_CHANGE0
+#pragma GCC poison SIG_PIN_CHANGE1
+#pragma GCC poison SIG_PIN_CHANGE2
+#pragma GCC poison SIG_WATCHDOG_TIMEOUT
+#pragma GCC poison SIG_OUTPUT_COMPARE2A
+#pragma GCC poison SIG_OUTPUT_COMPARE2B
+#pragma GCC poison SIG_OVERFLOW2
+#pragma GCC poison SIG_INPUT_CAPTURE1
+#pragma GCC poison SIG_OUTPUT_COMPARE1A
+#pragma GCC poison SIG_OUTPUT_COMPARE1B
+#pragma GCC poison SIG_OVERFLOW1
+#pragma GCC poison SIG_OUTPUT_COMPARE0A
+#pragma GCC poison SIG_OUTPUT_COMPARE0B
+#pragma GCC poison SIG_OVERFLOW0
+#pragma GCC poison SIG_SPI
+#pragma GCC poison SIG_USART_RECV
+#pragma GCC poison SIG_USART_DATA
+#pragma GCC poison SIG_USART_TRANS
+#pragma GCC poison SIG_ADC
+#pragma GCC poison SIG_EEPROM_READY
+#pragma GCC poison SIG_COMPARATOR
+#pragma GCC poison SIG_TWI
+#pragma GCC poison SIG_2WIRE_SERIAL
+#pragma GCC poison SIG_SPM_READY
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
+
+
 #endif /* _AVR_IOM8_H_ */

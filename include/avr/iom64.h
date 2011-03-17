@@ -1258,4 +1258,47 @@
 #define SIGNATURE_2 0x02
 
 
+/* Deprecated items */
+#if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)
+
+#pragma GCC system_header
+
+#pragma GCC poison SIG_INTERRUPT0
+#pragma GCC poison SIG_INTERRUPT1
+#pragma GCC poison SIG_INTERRUPT2
+#pragma GCC poison SIG_INTERRUPT3
+#pragma GCC poison SIG_INTERRUPT4
+#pragma GCC poison SIG_INTERRUPT5
+#pragma GCC poison SIG_INTERRUPT6
+#pragma GCC poison SIG_INTERRUPT7
+#pragma GCC poison SIG_OUTPUT_COMPARE2
+#pragma GCC poison SIG_OVERFLOW2
+#pragma GCC poison SIG_INPUT_CAPTURE1
+#pragma GCC poison SIG_OUTPUT_COMPARE1A
+#pragma GCC poison SIG_OUTPUT_COMPARE1B
+#pragma GCC poison SIG_OVERFLOW1
+#pragma GCC poison SIG_OUTPUT_COMPARE0
+#pragma GCC poison SIG_OVERFLOW0
+#pragma GCC poison SIG_SPI
+#pragma GCC poison SIG_UART0_RECV
+#pragma GCC poison SIG_UART0_DATA
+#pragma GCC poison SIG_UART0_TRANS
+#pragma GCC poison SIG_ADC
+#pragma GCC poison SIG_EEPROM_READY
+#pragma GCC poison SIG_COMPARATOR
+#pragma GCC poison SIG_OUTPUT_COMPARE1C
+#pragma GCC poison SIG_INPUT_CAPTURE3
+#pragma GCC poison SIG_OUTPUT_COMPARE3A
+#pragma GCC poison SIG_OUTPUT_COMPARE3B
+#pragma GCC poison SIG_OUTPUT_COMPARE3C
+#pragma GCC poison SIG_OVERFLOW3
+#pragma GCC poison SIG_UART1_RECV
+#pragma GCC poison SIG_UART1_DATA
+#pragma GCC poison SIG_UART1_TRANS
+#pragma GCC poison SIG_2WIRE_SERIAL
+#pragma GCC poison SIG_SPM_READY
+
+#endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
+
+
 #endif /* _AVR_IOM64_H_ */
