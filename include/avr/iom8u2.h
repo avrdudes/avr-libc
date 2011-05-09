@@ -901,7 +901,7 @@
 #define TIMER1_OVF_vect      _VECTOR(18)  /* Timer/Counter1 Overflow */
 
 #define _VECTOR_SIZE 4 /* Size of individual vector. */
-#define _VECTORS_SIZE (28 * _VECTOR_SIZE)
+#define _VECTORS_SIZE (29 * _VECTOR_SIZE)
 
 
 /* Constants */
