@@ -7,7 +7,8 @@
   [#24861] Interrupt documentation contains extra include
   [#32103] Support for Target-Triplets
   [#32419] Incorrect EEPROM size in header for ATxmega192A3
-  [#32698] power.h has additional endif that will break the build 
+  [#32698] power.h has additional endif that will break the build
+  [#33238] Wrong _VECTORS_SIZE for mega8U2 et al
   system when power_all_disable() is used
 
 * New devices supported:

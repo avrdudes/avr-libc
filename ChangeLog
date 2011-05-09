@@ -1,3 +1,11 @@
+2011-05-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Fix for bug #33238.
+	* include/avr/iom8u2.h: Fix _VECTORS_SIZE value.
+	* include/avr/iom16u2.h: Same.
+	* include/avr/iom32u2.h: Same.
+	* NEWS: Add to fixed bug list.
+
 2011-03-17  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iotn11.h: Poison deprecated items.
