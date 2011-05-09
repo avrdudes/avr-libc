@@ -1,5 +1,11 @@
 2011-05-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #32988.
+	* include/avr/pgmspace.h: Add const keyword to PSTR definition.
+	* NEWS: Add to fixed bug list.
+
+2011-05-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #33230.
 	* include/avr/sleep.h: Move conditionals for devices attiny261,
 	attiny261a, attiny461, attiny461a, attiny861, attiny861a to

@@ -8,6 +8,7 @@
   [#32103] Support for Target-Triplets
   [#32419] Incorrect EEPROM size in header for ATxmega192A3
   [#32698] power.h has additional endif that will break the build
+  [#32988] Internal compiler error: build_unary_op
   [#33230] Sleep modes have incorrect names for ATtiny261/461/861
   [#33238] Wrong _VECTORS_SIZE for mega8U2 et al
   system when power_all_disable() is used
