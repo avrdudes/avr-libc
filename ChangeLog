@@ -1,5 +1,13 @@
 2011-05-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #33230.
+	* include/avr/sleep.h: Move conditionals for devices attiny261,
+	attiny261a, attiny461, attiny461a, attiny861, attiny861a to
+	correct location.
+	* NEWS: Add to fixed bug list.
+
+2011-05-09  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #33238.
 	* include/avr/iom8u2.h: Fix _VECTORS_SIZE value.
 	* include/avr/iom16u2.h: Same.

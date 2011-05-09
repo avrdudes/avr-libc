@@ -244,12 +244,6 @@
 || defined(__AVR_ATtiny45__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny85__) \
-|| defined(__AVR_ATtiny261__) \
-|| defined(__AVR_ATtiny261A__) \
-|| defined(__AVR_ATtiny461__) \
-|| defined(__AVR_ATtiny461A__) \
-|| defined(__AVR_ATtiny861__) \
-|| defined(__AVR_ATtiny861A__) \
 || defined(__AVR_ATtiny88__)
 
     #define SLEEP_MODE_IDLE         0
@@ -287,6 +281,12 @@
     } while(0)
 
 #elif defined(__AVR_ATtiny26__) \
+|| defined(__AVR_ATtiny261__) \
+|| defined(__AVR_ATtiny261A__) \
+|| defined(__AVR_ATtiny461__) \
+|| defined(__AVR_ATtiny461A__) \
+|| defined(__AVR_ATtiny861__) \
+|| defined(__AVR_ATtiny861A__) \
 || defined(__AVR_ATtiny43U__)
 
     #define SLEEP_MODE_IDLE         0
