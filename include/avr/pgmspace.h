@@ -905,14 +905,6 @@ not interfere with data accesses.
 
 
 
-__attribute__((__always_inline__)) static inline size_t strlen_P(PGM_P s);
-static inline size_t strlen_P(PGM_P s) {
-  return __builtin_constant_p(__builtin_strlen(s))
-     ? __builtin_strlen(s) : __strlen_P(s);
-} 
-
-
-
 extern PGM_VOID_P memchr_P(PGM_VOID_P, int __val, size_t __len) __ATTR_CONST__;
 extern int memcmp_P(const void *, PGM_VOID_P, size_t) __ATTR_PURE__;
 extern void *memccpy_P(void *, PGM_VOID_P, int __val, size_t);
@@ -958,6 +950,14 @@ extern int strncasecmp_PF (const char *s1, uint_farptr_t s2, size_t n) __ATTR_PU
 extern char *strstr_PF (const char *s1, uint_farptr_t s2);
 extern size_t strlcpy_PF (char *dst, uint_farptr_t src, size_t siz);
 extern int memcmp_PF(const void *, uint_farptr_t, size_t) __ATTR_PURE__;
+
+
+__attribute__((__always_inline__)) static inline size_t strlen_P(PGM_P s);
+static inline size_t strlen_P(PGM_P s) {
+  return __builtin_constant_p(__builtin_strlen(s))
+     ? __builtin_strlen(s) : __strlen_P(s);
+} 
+
 
 
 #ifdef __cplusplus

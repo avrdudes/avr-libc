@@ -37,12 +37,12 @@ ATTRIBUTE_CLIB_SECTION
 char *
 dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
 {
-    __attribute__((progmem)) static char str_nan[2][4] =
+    __attribute__((progmem)) static const char str_nan[2][4] =
 	{"nan", "NAN"};
-    __attribute__((progmem)) static char str_inf[2][sizeof(str_nan[0])] =
+    __attribute__((progmem)) static const char str_inf[2][sizeof(str_nan[0])] =
 	{"inf", "INF"};
     char *d;		/* dst	*/
-    char *s;		/* src	*/
+    const char *s;		/* src	*/
     signed char exp;
     unsigned char vtype;
 

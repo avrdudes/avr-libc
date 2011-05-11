@@ -1,3 +1,11 @@
+2011-05-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/pgmspace.h: Reorder so __strlen_P is declared by
+	the time it is attempted to be used.
+	* libc/stdlib/dtostre.c: Part #2 of fix for bug #32988: make
+	`s' a `const char *' as it is pointing to a constant (flash)
+	string.
+
 2011-05-09  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #32988.
