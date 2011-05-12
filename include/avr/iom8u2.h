@@ -840,6 +840,16 @@
 #define EPINT3 3
 #define EPINT4 4
 
+#define UPOE    _SFR_MEM8(0XFB)
+#define UPWE1   7
+#define UPWE0   6
+#define UPDRV1  5
+#define UPDRV0  4
+#define SCKI    3
+#define DATAI   2
+#define DPI     1
+#define DMI     0
+
 
 /* Interrupt vectors */
 /* Vector 0 is the reset vector */

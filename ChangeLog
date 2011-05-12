@@ -1,3 +1,10 @@
+2011-05-12  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	Patch #7226. Thanks to Avik Juneja for the patch.
+	* include/avr/iom8u2.h: Add UPOE register definition and bits.
+	* include/avr/power.h: Add ATmega8u2-16u2-32u2 devices in conditional.
+	* NEWS: Add to contributed patches list.
+
 2011-05-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Fix for bug #33130. Thanks to Antoine Mercier-Linteau for the patch.

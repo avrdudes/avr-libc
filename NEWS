@@ -20,6 +20,8 @@
 
 * Contributed Patches:
 
+  [#7226] ATMEGA8U2 Patches
+
 * Other changes:
 
   - Optimized strlen_P, thanks to Jan Waclawek. Rename strlen_P to be __strlen_P

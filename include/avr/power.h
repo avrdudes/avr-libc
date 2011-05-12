@@ -1421,6 +1421,9 @@ do{ \
 || defined(__AVR_ATmega6490P__) \
 || defined(__AVR_ATmega88__) \
 || defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega8U2__) \
+|| defined(__AVR_ATmega16U2__) \
+|| defined(__AVR_ATmega32U2__) \
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny167__) \
 || defined(__DOXYGEN__)
