@@ -1,8 +1,15 @@
 2011-05-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #32650.
+	* include/util/delay.h.in: Add math.h to list of includes.
+	* NEWS: Add to fixed bug list.
+
+2011-05-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #32675.
 	* include/avr/power.h: Add TIM1 to power_all_enable() and
 	power_all_disable().
+	* NEWS: Add to fixed bug list.
 
 2011-05-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
