@@ -325,6 +325,7 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
 	case TW_MR_DATA_ACK:
 	  *buf++ = TWDR;
 	  rv++;
+	  if(twst == TW_MR_DATA_NACK) goto quit;
 	  break;
 
 	default:

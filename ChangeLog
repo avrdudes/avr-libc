@@ -1,5 +1,10 @@
 2011-05-11  Eric B. Weddington  <eric.weddington@atmel.com>
 
+	Fix for bug #33130. Thanks to Antoine Mercier-Linteau for the patch.
+	* doc/examples/twitest/twitest.c: Check for reception of NAK.
+
+2011-05-11  Eric B. Weddington  <eric.weddington@atmel.com>
+
 	Fix for bug #32650.
 	* include/util/delay.h.in: Add math.h to list of includes.
 	* NEWS: Add to fixed bug list.
