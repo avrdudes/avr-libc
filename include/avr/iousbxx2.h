@@ -507,7 +507,8 @@
 
 /* Reserved [0xCF] */
 
-#define CKSEL0  _SFR_MEM8(0XD0)
+#define CKSEL0  _SFR_MEM8(0XD0)	/* old name; up to AVR Studio v 4.13 */
+#define CLKSEL0 _SFR_MEM8(0XD0)	/* since AVR Studio v 4.14 */
 #define RCSUT1  7
 #define RCSUT0  6
 #define EXSUT1  5
@@ -516,7 +517,8 @@
 #define EXTE    2
 #define CLKS    0
 
-#define CKSEL1  _SFR_MEM8(0XD1)
+#define CKSEL1  _SFR_MEM8(0XD1)	/* old name */
+#define CLKSEL1 _SFR_MEM8(0XD1)
 #define RCCKSEL3 7
 #define RCCKSEL2 6
 #define RCCKSEL1 5
@@ -526,7 +528,8 @@
 #define EXCKSEL1 1
 #define EXCKSEL0 0
 
-#define CKSTA   _SFR_MEM8(0XD2)
+#define CKSTA   _SFR_MEM8(0XD2)	/* old name */
+#define CLKSTA  _SFR_MEM8(0XD2)
 #define RCON    1
 #define EXTON   0
 

@@ -1,3 +1,9 @@
+2011-05-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Reported by Markus Lampert:
+	* include/avr/iousbxx2.h: Add new names for CLKSTA, CLKSEL0,
+	CLKSEL1 (old names have been without the `L').
+
 2011-05-12  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	Patch #7226. Thanks to Avik Juneja for the patch.
