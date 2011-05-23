@@ -22,6 +22,7 @@
 * Contributed Patches:
 
   [#7531] Bad name of bit in TCCR0A : WGM0 instead of CTC0 for ATtinyX61
+  [#7362] iom16a.h: USART vectors inconsistently named for ATmega16A
   [#7226] ATMEGA8U2 Patches
 
 * Other changes:

@@ -1,5 +1,13 @@
 2011-05-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Reported by Heike C. Zimmerer:
+	patch #7362: iom16a.h: USART vectors inconsistently named
+	for ATmega16A
+	* include/avr/iom16a.h: Add backwards-compatible USART
+	interrupt vector names.
+
+2011-05-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Reported by Palauqui Georges:
 	patch #7531: Bad name of bit in TCCR0A : WGM0 instead of CTC0
 	for ATtinyX61
