@@ -168,7 +168,9 @@
 #define TCNT0H  _SFR_IO8(0x14)
 
 #define TCCR0A  _SFR_IO8(0x15)
-#define WGM00   0
+#define WGM00   0		/* up to at least datasheet rev. B */
+#define CTC0    0		/* newer revisions; change not mentioned
+				 * in revision history */
 #define ACIC0   3
 #define ICES0   4
 #define ICNC0   5

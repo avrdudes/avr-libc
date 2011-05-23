@@ -1,3 +1,11 @@
+2011-05-23  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Reported by Palauqui Georges:
+	patch #7531: Bad name of bit in TCCR0A : WGM0 instead of CTC0
+	for ATtinyX61
+	* include/avr/iotnx61.h: Add new name CTC0 for bit 0 of
+	TCCR0A.
+
 2011-05-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Reported by Markus Lampert:
