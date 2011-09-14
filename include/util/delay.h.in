@@ -125,8 +125,11 @@ static inline void _delay_ms(double __ms) __attribute__((always_inline));
 
    Note: The new implementation of _delay_ms(double __ms) with 
     __builtin_avr_delay_cycles(unsigned long) support is not backward compatible. 
-   User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay
-   although this will be deprecated in future.
+   User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay.
+   Also, the backward compatible
+   algorithm will be chosen if the code is compiled in a <em>freestanding
+   environment</em> (GCC option \c -ffreestanding), as the math functions
+   required for rounding are not available to the compiler then.
 
  */
 void
@@ -134,7 +137,9 @@ _delay_ms(double __ms)
 {
 	uint16_t __ticks;
 	double __tmp ; 
-#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && !defined(__DELAY_BACKWARD_COMPATIBLE__)
+#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+  !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+  __STDC_HOSTED__
 	uint32_t __ticks_dc;
 	extern void __builtin_avr_delay_cycles(unsigned long);
 	__tmp = ((F_CPU) / 1e3) * __ms;
@@ -152,7 +157,7 @@ _delay_ms(double __ms)
 
 	__builtin_avr_delay_cycles(__ticks_dc);
 
-#elif !__HAS_DELAY_CYCLES || (__HAS_DELAY_CYCLES && !defined(__OPTIMIZE__)) || defined (__DELAY_BACKWARD_COMPATIBLE__)
+#else
 	__tmp = ((F_CPU) / 4e3) * __ms;
 	if (__tmp < 1.0)
 		__ticks = 1;
@@ -202,8 +207,11 @@ _delay_ms(double __ms)
  
    Note: The new implementation of _delay_us(double __us) with 
     __builtin_avr_delay_cycles(unsigned long) support is not backward compatible.
-   User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay
-   although this will be deprecated in future.
+   User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay.
+   Also, the backward compatible
+   algorithm will be chosen if the code is compiled in a <em>freestanding
+   environment</em> (GCC option \c -ffreestanding), as the math functions
+   required for rounding are not available to the compiler then.
 
  */
 void
@@ -211,7 +219,9 @@ _delay_us(double __us)
 {
 	uint8_t __ticks;
 	double __tmp ; 
-#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && !defined(__DELAY_BACKWARD_COMPATIBLE__)
+#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+  !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+  __STDC_HOSTED__
 	uint32_t __ticks_dc;
 	extern void __builtin_avr_delay_cycles(unsigned long);
 	__tmp = ((F_CPU) / 1e6) * __us;
@@ -229,7 +239,7 @@ _delay_us(double __us)
 
 	__builtin_avr_delay_cycles(__ticks_dc);
 
-#elif !__HAS_DELAY_CYCLES || (__HAS_DELAY_CYCLES && !defined(__OPTIMIZE__)) || defined (__DELAY_BACKWARD_COMPATIBLE__)
+#else
 	__tmp = ((F_CPU) / 3e6) * __us;
 	if (__tmp < 1.0)
 		__ticks = 1;
