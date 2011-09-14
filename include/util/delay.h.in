@@ -95,6 +95,12 @@ static inline void _delay_ms(double __ms) __attribute__((always_inline));
 # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
 #endif
 
+#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+  !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+  __STDC_HOSTED__
+#  include <math.h>
+#endif
+
 /**
    \ingroup util_delay
 
