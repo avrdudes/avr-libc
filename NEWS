@@ -16,6 +16,7 @@
   [#33238] Wrong _VECTORS_SIZE for mega8U2 et al
   [no-id]  New names for CLKSTA/CLKSEL0/1 for AT90USB82/162
   system when power_all_disable() is used
+  [no-id]  util/delay.h would not compile with -ffreestanding
 
 * New devices supported:
 
