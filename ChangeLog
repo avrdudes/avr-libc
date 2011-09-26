@@ -1,7 +1,13 @@
 2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
 
+	Fix for bug #33858.
+	* include/avr/power.h: Add condition for _AVR_ATmega328_.
+	* NEWS: Add to fixed bug list.
+
+2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
+
 	Fix for bug #33920.
-	* include/iotn167.h (ICR): Define ICR to be a word register.
+	* include/avr/iotn167.h (ICR): Define ICR to be a word register.
 	* NEWS: Add to fixed bug list.
 
 2011-09-22  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
