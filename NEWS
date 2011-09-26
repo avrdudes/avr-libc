@@ -14,6 +14,7 @@
   [#33130] twitest.c source code is broken
   [#33230] Sleep modes have incorrect names for ATtiny261/461/861
   [#33238] Wrong _VECTORS_SIZE for mega8U2 et al
+  [#33920] ICR1 incorrectly defined for tiny167
   [#34047] missing math.h include in delay.h
   [no-id]  New names for CLKSTA/CLKSEL0/1 for AT90USB82/162
   system when power_all_disable() is used

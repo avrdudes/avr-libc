@@ -529,7 +529,7 @@
 #define TCNT1H6 6
 #define TCNT1H7 7
 
-#define ICR1 _SFR_MEM8(0x86)
+#define ICR1 _SFR_MEM16(0x86)
 
 #define ICR1L _SFR_MEM8(0x86)
 #define ICR1L0 0
