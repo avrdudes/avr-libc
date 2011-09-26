@@ -118,18 +118,32 @@ extern "C" {
  * GCC, and confuses the typedefs with function decls, so
  * supply a doxygen-friendly view.
  */
+
 /**
    \ingroup avr_pgmspace
    \typedef prog_void
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of a "void" object located in flash ROM.  Does not make much
    sense by itself, but can be used to declare a "void *" object in
    flash ROM.
 */
 typedef void PROGMEM prog_void;
+
 /**
    \ingroup avr_pgmspace
    \typedef prog_char
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of a "char" object located in flash ROM.
 */
@@ -138,15 +152,26 @@ typedef char PROGMEM prog_char;
 /**
    \ingroup avr_pgmspace
    \typedef prog_uchar
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "unsigned char" object located in flash ROM.
 */
 typedef unsigned char PROGMEM prog_uchar;
 
-
 /**
    \ingroup avr_pgmspace
    \typedef prog_int8_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "int8_t" object located in flash ROM.
 */
@@ -155,6 +180,12 @@ typedef int8_t PROGMEM prog_int8_t;
 /**
    \ingroup avr_pgmspace
    \typedef prog_uint8_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "uint8_t" object located in flash ROM.
 */
@@ -163,6 +194,12 @@ typedef uint8_t PROGMEM prog_uint8_t;
 /**
    \ingroup avr_pgmspace
    \typedef prog_int16_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "int16_t" object located in flash ROM.
 */
@@ -171,6 +208,12 @@ typedef int16_t PROGMEM prog_int16_t;
 /**
    \ingroup avr_pgmspace
    \typedef prog_uint16_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "uint16_t" object located in flash ROM.
 */
@@ -179,6 +222,12 @@ typedef uint16_t PROGMEM prog_uint16_t;
 /**
    \ingroup avr_pgmspace
    \typedef prog_int32_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "int32_t" object located in flash ROM.
 */
@@ -187,6 +236,12 @@ typedef int32_t PROGMEM prog_int32_t;
 /**
    \ingroup avr_pgmspace
    \typedef prog_uint32_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "uint32_t" object located in flash ROM.
 */
@@ -195,6 +250,12 @@ typedef uint32_t PROGMEM prog_uint32_t;
 /**
    \ingroup avr_pgmspace
    \typedef prog_int64_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "int64_t" object located in flash ROM.
 
@@ -206,6 +267,12 @@ typedef int64_t PROGMEM prog_int64_t;
 /**
    \ingroup avr_pgmspace
    \typedef prog_uint64_t
+   \note DEPRECATED
+
+   This typedef is now deprecated because the usage of the __progmem__ 
+   attribute on a type is not supported in GCC. However, the use of the 
+   __progmem__ attribute on a variable declaration is supported, and this is 
+   now the recommended usage.
 
    Type of an "uint64_t" object located in flash ROM.
 
@@ -214,19 +281,18 @@ typedef int64_t PROGMEM prog_int64_t;
 */
 typedef uint64_t PROGMEM prog_uint64_t;
 #else  /* !DOXYGEN */
-typedef void prog_void PROGMEM;
-typedef char prog_char PROGMEM;
-typedef unsigned char prog_uchar PROGMEM;
-
-typedef int8_t    prog_int8_t   PROGMEM;
-typedef uint8_t   prog_uint8_t  PROGMEM;
-typedef int16_t   prog_int16_t  PROGMEM;
-typedef uint16_t  prog_uint16_t PROGMEM;
-typedef int32_t   prog_int32_t  PROGMEM;
-typedef uint32_t  prog_uint32_t PROGMEM;
+typedef void prog_void __attribute__((__progmem__,deprecated("prog_void type is deprecated.")));
+typedef char prog_char __attribute__((__progmem__,deprecated("prog_char type is deprecated.")));
+typedef unsigned char prog_uchar __attribute__((__progmem__,deprecated("prog_uchar type is deprecated.")));
+typedef int8_t    prog_int8_t   __attribute__((__progmem__,deprecated("prog_int8_t type is deprecated.")));
+typedef uint8_t   prog_uint8_t  __attribute__((__progmem__,deprecated("prog_uint8_t type is deprecated.")));
+typedef int16_t   prog_int16_t  __attribute__((__progmem__,deprecated("prog_int16_t type is deprecated.")));
+typedef uint16_t  prog_uint16_t __attribute__((__progmem__,deprecated("prog_uint16_t type is deprecated.")));
+typedef int32_t   prog_int32_t  __attribute__((__progmem__,deprecated("prog_int32_t type is deprecated.")));
+typedef uint32_t  prog_uint32_t __attribute__((__progmem__,deprecated("prog_uint32_t type is deprecated.")));
 #if !__USING_MINT8
-typedef int64_t   prog_int64_t  PROGMEM;
-typedef uint64_t  prog_uint64_t PROGMEM;
+typedef int64_t   prog_int64_t  __attribute__((__progmem__,deprecated("prog_int64_t type is deprecated.")));
+typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint64_t type is deprecated.")));
 #endif
 #endif /* defined(__DOXYGEN__) */
 

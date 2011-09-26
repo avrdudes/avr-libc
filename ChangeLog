@@ -1,5 +1,11 @@
 2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
 
+	Partial fix for bug #33716.
+	* include/avr/pgmspace.h: Deprecate typedefs with __progmem__ attribute.
+	Document as such.
+
+2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
+
 	Fix for bug #33858.
 	* include/avr/power.h: Add condition for _AVR_ATmega328_.
 	* NEWS: Add to fixed bug list.
