@@ -1637,20 +1637,7 @@ should always be performed before a write, to see if the value in the
 EEPROM actually needs to be written, so not to cause unnecessary EEPROM
 wear.
 
-AVRs use a paging mechanism for doing EEPROM writes.  This is almost
-entirely transparent to the user with one exception: When a byte is
-written to the EEPROM, the entire EEPROM page is also transparently
-erased and (re)written, which will cause wear to bytes that the
-programmer did not explicitly write.  If it is desired to extend
-EEPROM write lifetimes, in an attempt not to exceed the datasheet
-EEPROM write endurance specification for a given byte, then writes
-must be in multiples of the EEPROM page size, and not sequential
-bytes.  The EEPROM write page size varies with the device.  The EEPROM
-page size is found in the datasheet section on Memory Programming,
-generally before the Electrical Specifications near the end of the
-datasheet.
-
-The failure mechanism for an overwritten byte/page is generally one of
+The failure mechanism for an overwritten byte is generally one of
 "stuck" bits, i. e. a bit will stay at a one or zero state regardless of
 the byte written.  Also a write followed by a read may return the
 correct data, but the data will change with the passage of time, due

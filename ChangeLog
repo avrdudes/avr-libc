@@ -1,3 +1,8 @@
+2011-10-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_eeprom_corruption): Remove the remarks about
+	the EEPROM being erased pagewise, as they are not true.
+
 2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
 
 	Partial fix for bug #32945.
