@@ -1,3 +1,8 @@
+2011-10-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_assign_chain): Add paragraph about avoiding
+	IO register assignment chains.
+
 2011-10-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox (faq_eeprom_corruption): Remove the remarks about

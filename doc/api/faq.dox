@@ -69,6 +69,7 @@
 -# \ref faq_eeprom_corruption
 -# \ref faq_wrong_baud_rate
 -# \ref faq_funcptr_gt128kib
+-# \ref faq_assign_chain
 
 \section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
 
@@ -1681,6 +1682,41 @@ In order for this to work, the option <tt>-mrelax</tt> must be given
 on the compiler command-line that is used to link the final ELF file.
 (Older compilers did not implement this option for the AVR, use
 <tt>-Wl,--relax</tt> instead.)
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_assign_chain Why is assigning ports in a "chain" a bad idea?
+
+Suppose a number of IO port registers should get the value \c 0xff
+assigned.  Conveniently, it is implemented like this:
+
+\code
+  DDRB = DDRD = 0xff;
+\endcode
+
+According to the rules of the C language, this causes 0xff to be
+assigned to \c DDRD, then \c DDRD is read back, and the value is
+assigned to \c DDRB.  The compiler stands no chance to optimize the
+readback away, as an IO port register is declared "volatile".  Thus,
+chaining that kind of IO port assignments would better be avoided,
+using explicit assignments instead:
+
+\code
+  DDRB = 0xff;
+  DDRD = 0xff;
+\endcode
+
+Even worse ist this, e. g. on an ATmega1281:
+
+\code
+  DDRA = DDRB = DDRC = DDRD = DDRE = DDRF = DDRG = 0xff;
+\endcde
+
+The same happens as outlined above.  However, when reading back
+register \c DDRG, this register only implements 6 out of the 8 bits,
+so the two topmost (unimplemented) bits read back as 0!  Consequently,
+all remaining <tt>DDR</tt><em>x</em> registers get assigned the value
+0x3f, which does not match the intention of the developer in any way.
 
 <small>Back to \ref faq_index.</small>
 
