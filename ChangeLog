@@ -1,3 +1,8 @@
+2011-11-02  Eric B. Weddington  <eric.weddington@atmel.com>
+
+	* include/avr/iox64a1.h (enum TC_EVACT_enum): Fix typo in enum list.
+	Compared to iox128a1.h. Thanks to Francois Costin for the fix.
+
 2011-10-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox (faq_assign_chain): Add paragraph about avoiding
