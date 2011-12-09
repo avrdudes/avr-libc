@@ -17,6 +17,7 @@
   [#33858] in avr/power.h, clock_prescale_set() not defined for mega328
   [#33920] ICR1 incorrectly defined for tiny167
   [#34047] missing math.h include in delay.h
+  [#35020] stdint.h: signed types need explicit "signed"
   [no-id]  New names for CLKSTA/CLKSEL0/1 for AT90USB82/162
   system when power_all_disable() is used
   [no-id]  util/delay.h would not compile with -ffreestanding

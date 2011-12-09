@@ -1,3 +1,8 @@
+2011-12-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #35020: stdint.h: signed types need explicit "signed"
+	* include/stdint.h: explicitly declare int*_t types as signed
+
 2011-11-02  Eric B. Weddington  <eric.weddington@atmel.com>
 
 	* include/avr/iox64a1.h (enum TC_EVACT_enum): Fix typo in enum list.
