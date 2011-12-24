@@ -18,6 +18,7 @@
   [#33920] ICR1 incorrectly defined for tiny167
   [#34047] missing math.h include in delay.h
   [#35020] stdint.h: signed types need explicit "signed"
+  [#35093] strlcat_P fails for some destinations
   [no-id]  New names for CLKSTA/CLKSEL0/1 for AT90USB82/162
   system when power_all_disable() is used
   [no-id]  util/delay.h would not compile with -ffreestanding

@@ -102,7 +102,7 @@ ENTRY strlcat_P
 	ld	__tmp_reg__, X+
 	tst	__tmp_reg__
 	brne	1b
-	subi	XL, 1
+	sbiw	XL, 1
 	rjmp	3f
 
   ; copy loop

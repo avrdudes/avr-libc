@@ -1,3 +1,11 @@
+2011-12-24  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #35093. Thanks to Eric Mertens for the patch.
+	* libc/pmstring/strlcat_P.S: Fix X pointer decriment.
+	* libc/string/strlcat.S: Fix X pointer decriment.
+	* tests/regression/bug-35093.c: New file.
+	* NEWS: Add to fixed bug list.
+
 2011-12-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #35020: stdint.h: signed types need explicit "signed"
