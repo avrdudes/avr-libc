@@ -1,3 +1,10 @@
+2011-12-25  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #34514: misspelled in math.h
+	Thanks to Naotaka Fujita.
+	* include/math.h: Fix typo in documentation.
+	* NEWS: Add to fixed bug list.
+
 2011-12-24  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #35093. Thanks to Eric Mertens for the patch.

@@ -56,7 +56,7 @@
     functions.
 
     \par Notes:
-    - In order to access the functions delcared herein, it is usually
+    - In order to access the functions declared herein, it is usually
       also required to additionally link against the library \c libm.a.
       See also the related \ref faq_libm "FAQ entry".
     - Math functions do not raise exceptions and do not change the
