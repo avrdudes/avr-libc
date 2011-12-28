@@ -10,6 +10,7 @@
   [#32650] Missing include in util/delay.h
   [#32675] power_all_enable/disable does not affect timer1 on ATmega164P
   [#32698] power.h has additional endif that will break the build
+  [#32773] stdiodemo source code is broken
   [#32988] Internal compiler error: build_unary_op
   [#33130] twitest.c source code is broken
   [#33230] Sleep modes have incorrect names for ATtiny261/461/861
@@ -20,7 +21,6 @@
   [#34514] misspelled in math.h
   [#35020] stdint.h: signed types need explicit "signed"
   [#35093] strlcat_P fails for some destinations
-  [#32773] stdiodemo source code is broken
   [no-id]  New names for CLKSTA/CLKSEL0/1 for AT90USB82/162
   system when power_all_disable() is used
   [no-id]  util/delay.h would not compile with -ffreestanding
