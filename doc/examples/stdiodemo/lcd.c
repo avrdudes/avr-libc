@@ -38,20 +38,20 @@ lcd_init(void)
    * Clear the display.
    */
   hd44780_outcmd(HD44780_CLR);
-  hd44780_wait_ready();
+  hd44780_wait_ready(true);
 
   /*
    * Entry mode: auto-increment address counter, no display shift in
    * effect.
    */
   hd44780_outcmd(HD44780_ENTMODE(1, 0));
-  hd44780_wait_ready();
+  hd44780_wait_ready(false);
 
   /*
    * Enable display, activate non-blinking cursor.
    */
   hd44780_outcmd(HD44780_DISPCTL(1, 1, 0));
-  hd44780_wait_ready();
+  hd44780_wait_ready(false);
 }
 
 /*
@@ -68,11 +68,11 @@ lcd_putchar(char c, FILE *unused)
       /*
        * First character after newline, clear display and home cursor.
        */
-      hd44780_wait_ready();
+      hd44780_wait_ready(false);
       hd44780_outcmd(HD44780_CLR);
-      hd44780_wait_ready();
+      hd44780_wait_ready(false);
       hd44780_outcmd(HD44780_HOME);
-      hd44780_wait_ready();
+      hd44780_wait_ready(true);
       hd44780_outcmd(HD44780_DDADDR(0));
 
       nl_seen = false;
@@ -83,7 +83,7 @@ lcd_putchar(char c, FILE *unused)
     }
   else
     {
-      hd44780_wait_ready();
+      hd44780_wait_ready(false);
       hd44780_outdata(c);
     }
 

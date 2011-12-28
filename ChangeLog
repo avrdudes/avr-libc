@@ -1,3 +1,11 @@
+2011-12-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #32773: stdiodemo source code is broken
+	* doc/examples/stdiodemo/lcd.c: pass an argument when calling
+	hd44780_wait_ready()
+	* doc/examples/stdiodemo/Makefile: don't attempt to build the
+	EEPROM load files, as there are now EEPROM data
+
 2011-12-25  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #34514: misspelled in math.h
