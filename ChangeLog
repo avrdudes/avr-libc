@@ -1,3 +1,10 @@
+2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
+
+	(Patch re-applied after being backed out temporarily.)
+	Partial fix for bug #32945.
+	* common/macros.inc (LPM_R0_ZPLUS_* macros): Replace condition of
+	BIG_CODE with __AVR_HAVE_ELPM__.
+
 2011-12-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Bump version version for post-release.
