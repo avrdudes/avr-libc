@@ -38,13 +38,12 @@
 dnl library versioning -- modify these on releases
 dnl        macro name           value            description
 m4_define([avr_libc_major],    [1])dnl           major version
-m4_define([avr_libc_minor],    [7])dnl           minor version
-m4_define([avr_libc_revision], [2])dnl           revision (dot-dot version)
-m4_define([avr_libc_revision_suffix], [rc2252])dnl  revision suffix (if any)
-m4_define([avr_libc_reldate],  [20110922])dnl    release date
+m4_define([avr_libc_minor],    [8])dnl           minor version
+m4_define([avr_libc_revision], [0])dnl           revision (dot-dot version)
+m4_define([avr_libc_revision_suffix], [])dnl  revision suffix (if any)
+m4_define([avr_libc_reldate],  [20111228])dnl    release date
 dnl end of library versioning data
 
-dnl odd minor number marks a development branch, append date to version there
 m4_define([avr_libc_version],
           avr_libc_major.avr_libc_minor.avr_libc_revision()avr_libc_revision_suffix)dnl
 m4_define([avr_libc_version_numeric],

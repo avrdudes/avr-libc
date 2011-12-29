@@ -1,7 +1,7 @@
 *** Changes in avr-libc-1.8.0:
 
 * Bugs fixed:
-  
+
   [#17815] Configure does not honor --mandir option
   [#23234] Alternate interrupt macro
   [#24861] Interrupt documentation contains extra include
