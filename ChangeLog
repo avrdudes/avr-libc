@@ -1,5 +1,10 @@
 2011-12-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/iotnx5.h (TIMER1_OVF_vect_num): add definition,
+	replacing the misspelled duplicate for TIMER1_OVF_vect
+
+2011-12-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* libc/string/strlcat.S: add !__AVR_TINY__ protection
 
 2011-12-28  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

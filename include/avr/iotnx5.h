@@ -369,7 +369,7 @@
 /* Timer/Counter1 Overflow */
 #define TIM1_OVF_vect_num		4
 #define TIM1_OVF_vect			_VECTOR(4)
-#define TIMER1_OVF_vect			4
+#define TIMER1_OVF_vect_num		4
 #define TIMER1_OVF_vect			_VECTOR(4)
 #define SIG_OVERFLOW1			_VECTOR(4)
 
