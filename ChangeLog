@@ -47,12 +47,6 @@
 
 2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
 
-	Partial fix for bug #32945.
-	* common/macros.inc (LPM_R0_ZPLUS_* macros): Replace condition of
-    BIG_CODE with __AVR_HAVE_ELPM__.
-
-2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
-
 	Partial fix for bug #33716.
 	* include/avr/pgmspace.h: Deprecate typedefs with __progmem__ attribute.
 	Document as such.

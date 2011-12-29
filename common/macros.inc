@@ -342,7 +342,7 @@
 
 	.macro	LPM_R0_ZPLUS_INIT hhi
 #if __AVR_ENHANCED__
-  #if __AVR_HAVE_ELPM__
+  #if BIG_CODE
 	out	AVR_RAMPZ_ADDR, \hhi
   #endif
 #endif
@@ -350,7 +350,7 @@
 
 	.macro	LPM_R0_ZPLUS_NEXT hhi
 #if __AVR_ENHANCED__
-  #if __AVR_HAVE_ELPM__
+  #if BIG_CODE
     /* ELPM with RAMPZ:Z post-increment, load RAMPZ only once */
 	elpm	r0, Z+
   #else
@@ -358,7 +358,7 @@
 	lpm	r0, Z+
   #endif
 #else
-  #if __AVR_HAVE_ELPM__
+  #if BIG_CODE
     /* ELPM without post-increment, load RAMPZ each time (ATmega103) */
 	out	AVR_RAMPZ_ADDR, \hhi
 	elpm
