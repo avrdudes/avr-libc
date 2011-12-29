@@ -129,6 +129,10 @@ extern "C" {
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
 
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
+
    Type of a "void" object located in flash ROM.  Does not make much
    sense by itself, but can be used to declare a "void *" object in
    flash ROM.
@@ -145,6 +149,10 @@ typedef void PROGMEM prog_void;
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
 
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
+
    Type of a "char" object located in flash ROM.
 */
 typedef char PROGMEM prog_char;
@@ -158,6 +166,10 @@ typedef char PROGMEM prog_char;
    attribute on a type is not supported in GCC. However, the use of the 
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
+
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
 
    Type of an "unsigned char" object located in flash ROM.
 */
@@ -173,6 +185,10 @@ typedef unsigned char PROGMEM prog_uchar;
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
 
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
+
    Type of an "int8_t" object located in flash ROM.
 */
 typedef int8_t PROGMEM prog_int8_t;
@@ -186,6 +202,10 @@ typedef int8_t PROGMEM prog_int8_t;
    attribute on a type is not supported in GCC. However, the use of the 
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
+
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
 
    Type of an "uint8_t" object located in flash ROM.
 */
@@ -201,6 +221,10 @@ typedef uint8_t PROGMEM prog_uint8_t;
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
 
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
+
    Type of an "int16_t" object located in flash ROM.
 */
 typedef int16_t PROGMEM prog_int16_t;
@@ -214,6 +238,10 @@ typedef int16_t PROGMEM prog_int16_t;
    attribute on a type is not supported in GCC. However, the use of the 
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
+
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
 
    Type of an "uint16_t" object located in flash ROM.
 */
@@ -229,6 +257,10 @@ typedef uint16_t PROGMEM prog_uint16_t;
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
 
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
+
    Type of an "int32_t" object located in flash ROM.
 */
 typedef int32_t PROGMEM prog_int32_t;
@@ -243,6 +275,10 @@ typedef int32_t PROGMEM prog_int32_t;
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
 
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
+
    Type of an "uint32_t" object located in flash ROM.
 */
 typedef uint32_t PROGMEM prog_uint32_t;
@@ -256,6 +292,10 @@ typedef uint32_t PROGMEM prog_uint32_t;
    attribute on a type is not supported in GCC. However, the use of the 
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
+
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
 
    Type of an "int64_t" object located in flash ROM.
 
@@ -274,13 +314,38 @@ typedef int64_t PROGMEM prog_int64_t;
    __progmem__ attribute on a variable declaration is supported, and this is 
    now the recommended usage.
 
+   The typedef is only visible if the macro __PROG_TYPES_COMPAT__
+   has been defined before including <avr/pgmspace.h> (either by a
+   #define directive, or by a -D compiler option.)
+
    Type of an "uint64_t" object located in flash ROM.
 
    \note This type is not available when the compiler
    option -mint8 is in effect.
 */
 typedef uint64_t PROGMEM prog_uint64_t;
-#else  /* !DOXYGEN */
+
+/** \ingroup avr_pgmspace
+    \def PGM_P
+
+    Used to declare a variable that is a pointer to a string in program
+    space. */
+
+#ifndef PGM_P
+#define PGM_P const char *
+#endif
+
+/** \ingroup avr_pgmspace
+    \def PGM_VOID_P
+
+    Used to declare a generic pointer to an object in program space. */
+
+#ifndef PGM_VOID_P
+#define PGM_VOID_P const void *
+#endif
+
+#elif defined(__PROG_TYPES_COMPAT__)  /* !DOXYGEN */
+
 typedef void prog_void __attribute__((__progmem__,deprecated("prog_void type is deprecated.")));
 typedef char prog_char __attribute__((__progmem__,deprecated("prog_char type is deprecated.")));
 typedef unsigned char prog_uchar __attribute__((__progmem__,deprecated("prog_uchar type is deprecated.")));
@@ -294,7 +359,25 @@ typedef uint32_t  prog_uint32_t __attribute__((__progmem__,deprecated("prog_uint
 typedef int64_t   prog_int64_t  __attribute__((__progmem__,deprecated("prog_int64_t type is deprecated.")));
 typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint64_t type is deprecated.")));
 #endif
-#endif /* defined(__DOXYGEN__) */
+
+#ifndef PGM_P
+#define PGM_P const prog_char *
+#endif
+
+#ifndef PGM_VOID_P
+#define PGM_VOID_P const prog_void *
+#endif
+
+#else /* !defined(__DOXYGEN__), !defined(__PROG_TYPES_COMPAT__) */
+
+#ifndef PGM_P
+#define PGM_P const char *
+#endif
+
+#ifndef PGM_VOID_P
+#define PGM_VOID_P const void *
+#endif
+#endif /* defined(__DOXYGEN__), defined(__PROG_TYPES_COMPAT__) */
 
 /* Although in C, we can get away with just using __c, it does not work in
    C++. We need to use &__c[0] to avoid the compiler puking. Dave Hylands
@@ -898,26 +981,6 @@ not interfere with data accesses.
 
 #define pgm_read_float(address_short)   pgm_read_float_near(address_short)
 
-/** \ingroup avr_pgmspace
-    \def PGM_P
-
-    Used to declare a variable that is a pointer to a string in program
-    space. */
-
-#ifndef PGM_P
-#define PGM_P const prog_char *
-#endif
-
-/** \ingroup avr_pgmspace
-    \def PGM_VOID_P
-
-    Used to declare a generic pointer to an object in program space. */
-
-#ifndef PGM_VOID_P
-#define PGM_VOID_P const prog_void *
-#endif
-
-
 /* pgm_get_far_address() macro
 
    This macro facilitates the obtention of a 32 bit "far" pointer (only 24 bits
@@ -971,35 +1034,35 @@ not interfere with data accesses.
 
 
 
-extern PGM_VOID_P memchr_P(PGM_VOID_P, int __val, size_t __len) __ATTR_CONST__;
-extern int memcmp_P(const void *, PGM_VOID_P, size_t) __ATTR_PURE__;
-extern void *memccpy_P(void *, PGM_VOID_P, int __val, size_t);
-extern void *memcpy_P(void *, PGM_VOID_P, size_t);
-extern void *memmem_P(const void *, size_t, PGM_VOID_P, size_t) __ATTR_PURE__;
-extern PGM_VOID_P memrchr_P(PGM_VOID_P, int __val, size_t __len) __ATTR_CONST__;
-extern char *strcat_P(char *, PGM_P);
-extern PGM_P strchr_P(PGM_P, int __val) __ATTR_CONST__;
-extern PGM_P strchrnul_P(PGM_P, int __val) __ATTR_CONST__;
-extern int strcmp_P(const char *, PGM_P) __ATTR_PURE__;
-extern char *strcpy_P(char *, PGM_P);
-extern int strcasecmp_P(const char *, PGM_P) __ATTR_PURE__;
-extern char *strcasestr_P(const char *, PGM_P) __ATTR_PURE__;
-extern size_t strcspn_P(const char *__s, PGM_P __reject) __ATTR_PURE__;
-extern size_t strlcat_P (char *, PGM_P, size_t );
-extern size_t strlcpy_P (char *, PGM_P, size_t );
-extern size_t __strlen_P(PGM_P) __ATTR_CONST__;  /* program memory can't change */
-extern size_t strnlen_P(PGM_P, size_t) __ATTR_CONST__; /* program memory can't change */
-extern int strncmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
-extern int strncasecmp_P(const char *, PGM_P, size_t) __ATTR_PURE__;
-extern char *strncat_P(char *, PGM_P, size_t);
-extern char *strncpy_P(char *, PGM_P, size_t);
-extern char *strpbrk_P(const char *__s, PGM_P __accept) __ATTR_PURE__;
-extern PGM_P strrchr_P(PGM_P, int __val) __ATTR_CONST__;
-extern char *strsep_P(char **__sp, PGM_P __delim);
-extern size_t strspn_P(const char *__s, PGM_P __accept) __ATTR_PURE__;
-extern char *strstr_P(const char *, PGM_P) __ATTR_PURE__;
-extern char *strtok_P(char *__s, PGM_P __delim);
-extern char *strtok_rP(char *__s, PGM_P __delim, char **__last);
+extern const void * memchr_P(const void *, int __val, size_t __len) __ATTR_CONST__;
+extern int memcmp_P(const void *, const void *, size_t) __ATTR_PURE__;
+extern void *memccpy_P(void *, const void *, int __val, size_t);
+extern void *memcpy_P(void *, const void *, size_t);
+extern void *memmem_P(const void *, size_t, const void *, size_t) __ATTR_PURE__;
+extern const void * memrchr_P(const void *, int __val, size_t __len) __ATTR_CONST__;
+extern char *strcat_P(char *, const char *);
+extern const char * strchr_P(const char *, int __val) __ATTR_CONST__;
+extern const char * strchrnul_P(const char *, int __val) __ATTR_CONST__;
+extern int strcmp_P(const char *, const char *) __ATTR_PURE__;
+extern char *strcpy_P(char *, const char *);
+extern int strcasecmp_P(const char *, const char *) __ATTR_PURE__;
+extern char *strcasestr_P(const char *, const char *) __ATTR_PURE__;
+extern size_t strcspn_P(const char *__s, const char * __reject) __ATTR_PURE__;
+extern size_t strlcat_P (char *, const char *, size_t );
+extern size_t strlcpy_P (char *, const char *, size_t );
+extern size_t __strlen_P(const char *) __ATTR_CONST__;  /* program memory can't change */
+extern size_t strnlen_P(const char *, size_t) __ATTR_CONST__; /* program memory can't change */
+extern int strncmp_P(const char *, const char *, size_t) __ATTR_PURE__;
+extern int strncasecmp_P(const char *, const char *, size_t) __ATTR_PURE__;
+extern char *strncat_P(char *, const char *, size_t);
+extern char *strncpy_P(char *, const char *, size_t);
+extern char *strpbrk_P(const char *__s, const char * __accept) __ATTR_PURE__;
+extern const char * strrchr_P(const char *, int __val) __ATTR_CONST__;
+extern char *strsep_P(char **__sp, const char * __delim);
+extern size_t strspn_P(const char *__s, const char * __accept) __ATTR_PURE__;
+extern char *strstr_P(const char *, const char *) __ATTR_PURE__;
+extern char *strtok_P(char *__s, const char * __delim);
+extern char *strtok_rP(char *__s, const char * __delim, char **__last);
 
 extern size_t strlen_PF (uint_farptr_t src) __ATTR_CONST__; /* program memory can't change */
 extern size_t strnlen_PF (uint_farptr_t src, size_t len) __ATTR_CONST__; /* program memory can't change */
@@ -1018,8 +1081,8 @@ extern size_t strlcpy_PF (char *dst, uint_farptr_t src, size_t siz);
 extern int memcmp_PF(const void *, uint_farptr_t, size_t) __ATTR_PURE__;
 
 
-__attribute__((__always_inline__)) static inline size_t strlen_P(PGM_P s);
-static inline size_t strlen_P(PGM_P s) {
+__attribute__((__always_inline__)) static inline size_t strlen_P(const char * s);
+static inline size_t strlen_P(const char *s) {
   return __builtin_constant_p(__builtin_strlen(s))
      ? __builtin_strlen(s) : __strlen_P(s);
 } 

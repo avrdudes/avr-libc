@@ -1,5 +1,16 @@
 2011-12-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/avr/pgmspace.h: Do only include the deprecated prog_*
+	typedefs if the user requests this by defining
+	__PROG_TYPES_COMPAT__.  If they are generally defined, users are
+	being spammed with warning messages as soon as they include the
+	header file, regardless of whether they want to use these typedefs
+	or not.  Also, it's not good style to deprecate the old typedefs
+	but then use them ourselves, so make PGM_P and PGM_VOID_P use
+	the correct definitions.
+
+2011-12-29  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* include/avr/iotnx5.h (TIMER1_OVF_vect_num): add definition,
 	replacing the misspelled duplicate for TIMER1_OVF_vect
 
