@@ -49,6 +49,8 @@
     \returns The strlcat() function returns strlen(src) + MIN(siz,
     strlen(initial dst)).  If retval >= siz, truncation occurred.  */
 
+#if !defined(__AVR_TINY__)
+
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -126,3 +128,5 @@ ENTRY strlcat
 
 ENDFUNC
 #endif /* not __DOXYGEN__ */
+
+#endif /* not __AVR_TINY__ */
