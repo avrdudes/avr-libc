@@ -1710,7 +1710,7 @@ Even worse ist this, e. g. on an ATmega1281:
 
 \code
   DDRA = DDRB = DDRC = DDRD = DDRE = DDRF = DDRG = 0xff;
-\endcde
+\endcode
 
 The same happens as outlined above.  However, when reading back
 register \c DDRG, this register only implements 6 out of the 8 bits,

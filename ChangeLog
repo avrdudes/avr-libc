@@ -1,3 +1,9 @@
+2012-01-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_assign_chain): fix spelling of \endcode, so
+	this actually compiles again :/  (bug #35226)
+	* dox/api/Makefile.am: Add forgotten optimize.dox.
+
 2011-09-26  Eric B. Weddington <eric.weddington@atmel.com>
 
 	(Patch re-applied after being backed out temporarily.)
