@@ -187,6 +187,18 @@ keep the EEPROM-related definitions here.
 #    define EERIE  (3)
 #  endif
 
+
+/* RAM Page Z Select Register	*/
+#ifndef RAMPZ
+#  if     defined(__AVR_HAVE_RAMPZ__) && __AVR_HAVE_RAMPZ__
+#    if     __AVR__ARCH__ >= 100
+#      define RAMPZ	_SFR_MEM8(0x3B)
+#    else
+#      define RAMPZ	_SFR_IO8(0x3B)
+#    endif
+#  endif
+#endif
+
 #endif /* __COMPILING_AVR_LIBC__ */
 
 

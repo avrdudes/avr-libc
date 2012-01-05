@@ -1,3 +1,7 @@
+2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/common.h: Define RAMPZ.
+
 2012-01-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox (faq_assign_chain): fix spelling of \endcode, so
