@@ -40,7 +40,6 @@
     printf ("\n%s:%d: " fmt "\n", __FILE__, line, ##__VA_ARGS__);
 # define EXIT(code)	exit ((code) < 255 ? (code) : 100 + (code) % 100)
 # define memcmp_P	memcmp
-# define prog_void	void
 #else
 # define PRINTFLN(args...)
 # define EXIT(code)	exit (code)
@@ -51,9 +50,9 @@
  */
 static void
 Check (int line,
-       const prog_void *src , int val, size_t len,	/* memccpy() args */
+       const void *src , int val, size_t len,		/* memccpy() args */
        int expret,					/* expecter return */
-       const prog_void *expdst, size_t explen)		/* expected result */
+       const void *expdst, size_t explen)		/* expected result */
 {
     char tsrc[len];
     char tdst[len];

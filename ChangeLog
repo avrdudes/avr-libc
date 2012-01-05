@@ -1,5 +1,11 @@
 2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* tests/simulate/stdlib/realloc-3.c: Remove depricated PROGMEM types.
+	* tests/simulate/pmstring/memccpy_P.c: Same.
+	* tests/simulate/string/memccpy.c: Same.
+
+2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
 	Exclude worses with old GCC versions.
 	* configure.ac: Insert space after '-o' option (needed for GCC 3.3).
 	* tests/simulate/runtest.sh: Remove '-std=gnu99' option for

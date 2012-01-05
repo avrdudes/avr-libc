@@ -41,7 +41,6 @@
 #include "../../libc/stdlib/stdlib_private.h"
 #else
 #include "progmem.h"
-# define prog_char	char
 #endif
 
 /*
@@ -155,7 +154,7 @@ void fill_mem(void)
 size_t __malloc_margin;
 #endif
 
-#define S(i,s) static prog_char string##i[] = s
+#define S(i,s) static const char string##i[] PROGMEM = s
 
 S(0, "The ");
 S(1, "quick ");
@@ -166,12 +165,12 @@ S(5, "over ");
 S(6, "the lazy ");
 S(7, "dog.  ");
 
-static prog_char *strings[8] = {
+static const char *strings[8] = {
   string0, string1, string2, string3, string4, string5, string6, string7
 };
 
 static uint8_t s_idx;
-static prog_char *cur_c;
+static const char *cur_c;
 
 /*
  * Simulates e.g. a serial receiver.  "Receives" characters from some
