@@ -385,7 +385,7 @@ AC_DEFUN(
     AC_MSG_CHECKING(whether ${CC} supports __builtin_avr_delay_cycles)
     echo "extern void __builtin_avr_delay_cycles(unsigned long);\
     int main(void) { __builtin_avr_delay_cycles(42); return 0; }" |\
-    ${CC} -S -xc -o- - |\
+    ${CC} -S -xc -o - - |\
     grep __builtin_avr_delay_cycles >/dev/null
     if test "$?" != "0"
     then

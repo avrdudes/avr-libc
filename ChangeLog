@@ -1,5 +1,12 @@
 2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	Exclude worses with old GCC versions.
+	* configure.ac: Insert space after '-o' option (needed for GCC 3.3).
+	* tests/simulate/runtest.sh: Remove '-std=gnu99' option for
+	assembler sources.
+
+2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
 	* include/avr/common.h: Define RAMPZ.
 
 2012-01-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>

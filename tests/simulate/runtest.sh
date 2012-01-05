@@ -98,7 +98,7 @@ test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
 		avr/*.[cS]"}
     
 CPPFLAGS="-Wundef -I."
-CFLAGS="-g -W -Wall -std=gnu99 -pipe -Os"
+CFLAGS="-g -W -Wall -pipe -Os"
 CORE=core_avr_dump.core
 HOST_CC=gcc
 HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
@@ -209,6 +209,12 @@ Compile ()
 	    libs="$AVRDIR/avr/lib/avr$avrno/libscanf_flt.a $libs"
 	fi
 	;;
+    esac
+
+    # The GCC 4.1 (and older) does not define __ASSEMBLER__ with
+    # '-std=gnu99' option for *.S sources.
+    case `basename $1` in
+	*.c)	flags="$flags -std=gnu99" ;;
     esac
 
     $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 -o $3 $crt $1 $libs
