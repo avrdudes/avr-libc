@@ -1,5 +1,11 @@
 2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* tests/simulate/regression/bug-21872-1.c: Exclude GCC 4.6 warning.
+	* tests/simulate/regression/bug-21872-2.c: Same.
+	* tests/simulate/regression/bug-21955.c: Same.
+
+2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
 	* tests/simulate/scanf/sscanf-1.c: Add 'const' for PROGMEM variables.
 	* tests/simulate/scanf/sscanf-2.c: Same.
 	* tests/simulate/scanf/sscanf_brk-1.c: Same.

@@ -73,6 +73,12 @@ void very_big_function (void)
 }
 
 
+/* ???: GCC 4.6.2 produces this warning about volatile (!) variable.	*/
+#if	(__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+# pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#endif
+
+
 int main ()
 {
     volatile int rslt;
