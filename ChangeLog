@@ -1,5 +1,39 @@
 2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
+	* tests/simulate/scanf/sscanf-1.c: Add 'const' for PROGMEM variables.
+	* tests/simulate/scanf/sscanf-2.c: Same.
+	* tests/simulate/scanf/sscanf_brk-1.c: Same.
+	* tests/simulate/scanf/sscanf_brk-2.c: Same.
+	* tests/simulate/scanf/sscanf_brk-3.c: Same.
+	* tests/simulate/scanf/sscanf_brk-4.c: Same.
+	* tests/simulate/scanf/sscanf-c1.c: Same.
+	* tests/simulate/scanf/sscanf-c2.c: Same.
+	* tests/simulate/scanf/sscanf-d1.c: Same.
+	* tests/simulate/scanf/sscanf-d2.c: Same.
+	* tests/simulate/scanf/sscanf-eof.c: Same.
+	* tests/simulate/scanf/sscanf_flt-f1.c: Same.
+	* tests/simulate/scanf/sscanf_flt-f2.c: Same.
+	* tests/simulate/scanf/sscanf_flt-f3.c: Same.
+	* tests/simulate/scanf/sscanf_flt-fnn.c: Same.
+	* tests/simulate/scanf/sscanf_flt-fw.c: Same.
+	* tests/simulate/scanf/sscanf-h.c: Same.
+	* tests/simulate/scanf/sscanf-hh.c: Same.
+	* tests/simulate/scanf/sscanf-i.c: Same.
+	* tests/simulate/scanf/sscanf-l.c: Same.
+	* tests/simulate/scanf/sscanf-o1.c: Same.
+	* tests/simulate/scanf/sscanf-o2.c: Same.
+	* tests/simulate/scanf/sscanf-s1.c: Same.
+	* tests/simulate/scanf/sscanf-s2.c: Same.
+	* tests/simulate/scanf/sscanf-x1.c: Same.
+	* tests/simulate/scanf/sscanf-x2.c: Same.
+	* tests/simulate/scanf/sscanf-x3.c: Same.
+
+	* tests/simulate/stdlib/strtol-3.c: Same.
+	* tests/simulate/stdlib/strtoul-2.c: Same.
+	* tests/simulate/stdlib/strtoul-3.c: Same.
+
+2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
+
 	* tests/simulate/stdlib/realloc-3.c: Remove depricated PROGMEM types.
 	* tests/simulate/pmstring/memccpy_P.c: Same.
 	* tests/simulate/string/memccpy.c: Same.

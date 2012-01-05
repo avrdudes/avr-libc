@@ -78,7 +78,7 @@ void Check (int line, int expval, int rslt)
    to fill before run.	*/
 #define CHECK(expval, ass_expr, str, fmt, ...)				\
     do {								\
-	PROGMEM static char fmt_p[] = fmt;				\
+	PROGMEM static const char fmt_p[] = fmt;			\
 	char str_s[220];						\
 	char fmt_s[50];							\
 	char FILL;							\
@@ -120,7 +120,7 @@ int main ()
 	16,
 	!memcmp_P (
 	    v.x,
-	    ({	static float __x[8] PROGMEM = {
+	    ({	static const float __x[8] PROGMEM = {
 		    12, -45, 0.5, 10, .25, 1e1, 2e2, .125
 		};  __x; }),
 	    8 * sizeof(float))

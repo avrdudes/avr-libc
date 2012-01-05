@@ -37,7 +37,7 @@
 
 int main ()
 {
-    PROGMEM static struct t_s {
+    PROGMEM static const struct t_s {
 	char s[34];		/* string to convert	*/
 	int base;
 	long ret;		/* result must	*/

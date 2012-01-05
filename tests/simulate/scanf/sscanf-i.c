@@ -76,7 +76,7 @@ void Check (int line, int expval, int rslt)
    to fill before run.	*/
 #define CHECK(expval, ass_expr, str, fmt, ...)				\
     do {								\
-	PROGMEM static char fmt_p[] = fmt;				\
+	PROGMEM static const char fmt_p[] = fmt;			\
 	char str_s[220];						\
 	char fmt_s[40];							\
 	char FILL;							\
@@ -97,7 +97,7 @@ void Check (int line, int expval, int rslt)
 	}								\
     } while (0)
 
-#define	PVEC(args...)	({ static int __x[] PROGMEM = {args}; __x; })
+#define	PVEC(args...)	({ static const int __x[] PROGMEM = {args}; __x; })
 
 int main ()
 {
