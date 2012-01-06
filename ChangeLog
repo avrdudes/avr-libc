@@ -1,3 +1,7 @@
+2012-01-06  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* include/avr/common.h: Fix typo of last commit.
+
 2012-01-05  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/regression/bug-21872-1.c: Exclude GCC 4.6 warning.
