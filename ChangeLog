@@ -1,3 +1,9 @@
+2012-01-08  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/other/progtype-1.c: New file.
+	* tests/simulate/other/progtype-2.c: New file.
+	* tests/simulate/other/progtype-3.c: New file.
+
 2012-01-06  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* include/avr/common.h: Fix typo of last commit.
