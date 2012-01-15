@@ -540,7 +540,7 @@
 
 #define TIMSK5 _SFR_MEM8(0x73)
 
-#ifndef _ASSEMBLER_
+#ifndef __ASSEMBLER__
 #define ADC _SFR_MEM16(0x78)
 #endif
 #define ADCW _SFR_MEM16(0x78)

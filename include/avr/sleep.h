@@ -206,7 +206,7 @@
 
     #define set_sleep_mode(mode) \
     do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~__BV(SM)) | (mode)); \
+        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~_BV(SM)) | (mode)); \
     } while(0)
 
 #elif defined(__AVR_ATtiny167__) \

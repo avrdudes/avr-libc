@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [#35197] sleep.h _BV defined as __BV in AT90S8515 section
   [#35226] Online-documentation broken - [...]
 
 * New devices supported:

@@ -1,3 +1,13 @@
+2012-01-15  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #35197: sleep.h _BV defined as __BV in AT90S8515 section
+	Also fix a similar typo in 2 another files.
+	Thanks to Bingo.
+	* include/avr/iotn43u.h: Fix typo with __ASSEMBLER__.
+	* include/avr/iom32u4.h: Fix typo with __ASSEMBLER__.
+	* include/avr/sleep.h: Fix typo with _BV.
+	* NEWS: Add to fixed bug list.
+
 2012-01-08  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/other/progtype-1.c: New file.
