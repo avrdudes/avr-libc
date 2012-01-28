@@ -1,3 +1,8 @@
+2012-01-28  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	* tests/simulate/regression/bug-35366-1-printf_flt.c: New file.
+	* tests/simulate/regression/bug-35366-2-printf_flt.c: New file.
+
 2012-01-15  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #35197: sleep.h _BV defined as __BV in AT90S8515 section
