@@ -62,6 +62,8 @@
 
 #undef assert
 
+#include <stdlib.h>
+
 #if defined(__DOXYGEN__)
 /**
  * \def assert

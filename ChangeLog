@@ -1,3 +1,10 @@
+2012-02-04  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #35398: assert doesn't work unless stdlib.h is also
+	included.  Thanks to Britton Kerin.
+	* include/assert.h: Include <stdlib.h>.
+	* NEWS: Add to fixed bug list.
+
 2012-01-28  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	* tests/simulate/regression/bug-35366-1-printf_flt.c: New file.

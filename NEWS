@@ -4,6 +4,7 @@
 
   [#35197] sleep.h _BV defined as __BV in AT90S8515 section
   [#35226] Online-documentation broken - [...]
+  [#35398] assert doesn't work unless stdlib.h is also included
 
 * New devices supported:
 
