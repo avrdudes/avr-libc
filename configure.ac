@@ -1071,6 +1071,18 @@ AC_CONFIG_FILES([
 	avr/lib/avr2/at86rf401/Makefile
 ])
 
+#avr2/tiny-stack
+AC_CONFIG_FILES([
+	avr/lib/avr2/tiny-stack/Makefile
+	avr/lib/avr2/tiny-stack/at90s2313/Makefile
+	avr/lib/avr2/tiny-stack/at90s2323/Makefile
+	avr/lib/avr2/tiny-stack/at90s2333/Makefile
+	avr/lib/avr2/tiny-stack/at90s2343/Makefile
+	avr/lib/avr2/tiny-stack/at90s4433/Makefile
+	avr/lib/avr2/tiny-stack/attiny22/Makefile
+	avr/lib/avr2/tiny-stack/attiny26/Makefile
+])
+
 #avr25
 AC_CONFIG_FILES([
 	avr/lib/avr25/Makefile
@@ -1100,6 +1112,20 @@ AC_CONFIG_FILES([
 	avr/lib/avr25/attiny861a/Makefile
 	avr/lib/avr25/attiny87/Makefile
 	avr/lib/avr25/attiny88/Makefile
+])
+
+#avr25/tiny-stack
+AC_CONFIG_FILES([
+	avr/lib/avr25/tiny-stack/Makefile
+	avr/lib/avr25/tiny-stack/attiny13/Makefile
+	avr/lib/avr25/tiny-stack/attiny13a/Makefile
+	avr/lib/avr25/tiny-stack/attiny2313/Makefile
+	avr/lib/avr25/tiny-stack/attiny2313a/Makefile
+	avr/lib/avr25/tiny-stack/attiny24/Makefile
+	avr/lib/avr25/tiny-stack/attiny24a/Makefile
+	avr/lib/avr25/tiny-stack/attiny25/Makefile
+	avr/lib/avr25/tiny-stack/attiny261/Makefile
+	avr/lib/avr25/tiny-stack/attiny261a/Makefile
 ])
 
 #avr3

@@ -44,6 +44,7 @@
 # Define the special flags for special sub-targets.
 
 CFLAGS_SPACE="-mcall-prologues -Os"
+CFLAGS_TINY_STACK="-mtiny-stack -mcall-prologues -Os"
 CFLAGS_BIG_MEMORY='-Os $(FNO_JUMP_TABLES)'
 CFLAGS_SPEED="-Os"
 
@@ -81,6 +82,16 @@ attiny461:crttn461.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny861:crttn861.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
+AVR12TS_DEV_INFO="\
+at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+at90s2333:crts2333.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+at90s2343:crts2343.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+at90s4433:crts4433.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS}\
+"
+
 AVR25_DEV_INFO="\
 at86rf401:crt86401.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 ata6289:crta6289.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -108,6 +119,18 @@ attiny861:crttn861.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny861a:crttn861a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny87:crttn87.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny88:crttn88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+"
+
+AVR25TS_DEV_INFO="\
+attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny13a:crttn13a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny2313a:crttn2313a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny24:crttn24.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny24a:crttn24a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny25:crttn25.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny261:crttn261.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+attiny261a:crttn261a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS}\
 "
 
 AVR3_DEV_INFO="\
@@ -305,21 +328,23 @@ attiny40:crttn40.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 LIB_DEFS="-D__COMPILING_AVR_LIBC__"
 
 AVR_ARH_INFO="\
-avr2:AVR12_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr25:AVR25_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr3:AVR3_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr31:AVR31_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr35:AVR35_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr4:AVR4_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr5:AVR5_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr51:AVR51_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avr6:AVR6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega2:AVRXMEGA2_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avrxmega4:AVRXMEGA4_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega5:AVRXMEGA5_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega6:AVRXMEGA6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega7:AVRXMEGA7_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrtiny10:AVRTINY10_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+avr2::AVR12_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr2:tiny-stack:AVR12TS_DEV_INFO:${LIB_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+avr25::AVR25_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr25:tiny-stack:AVR25TS_DEV_INFO:${LIB_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
+avr3::AVR3_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr31::AVR31_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr35::AVR35_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr4::AVR4_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr5::AVR5_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr51::AVR51_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avr6::AVR6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega2::AVRXMEGA2_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avrxmega4::AVRXMEGA4_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega5::AVRXMEGA5_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega6::AVRXMEGA6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega7::AVRXMEGA7_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrtiny10::AVRTINY10_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 echo "Generating source directories:"
@@ -354,21 +379,38 @@ ARH_SUBDIRS=""
 for ath_lib in $AVR_ARH_INFO
 do
 	arh=$(echo $ath_lib | cut -d ':' -f 1)
-	dev_info=$(echo $ath_lib | cut -d ':' -f 2)
-	lib_defs=$(echo $ath_lib | cut -d ':' -f 3)
-	lib_cflags=$(echo $ath_lib | cut -d ':' -f 4)
-	lib_asflags=$(echo $ath_lib | cut -d ':' -f 5)
+	sublib=$(echo $ath_lib | cut -d ':' -f 2)
+	dev_info=$(echo $ath_lib | cut -d ':' -f 3)
+	lib_defs=$(echo $ath_lib | cut -d ':' -f 4)
+	lib_cflags=$(echo $ath_lib | cut -d ':' -f 5)
+	lib_asflags=$(echo $ath_lib | cut -d ':' -f 6)
 
 	install_dir=$arh
 	if [ $arh = avr2 ]
 	then
-		install_dir=""
+		if [ -z "$sublib" ] ; then
+			install_dir=""
+		else
+			install_dir=$sublib
+		fi
+	else
+		if [ -z "$sublib" ] ; then
+			install_dir=$arh
+		else
+			install_dir=$arh'/'$sublib
+		fi
 	fi
 
-	echo "  avr/lib/$arh/"
+	# Install directory for sed substitution, the '/' character is masked.
+	inst_dir_masked=`echo $install_dir | sed 's/\\//\\\\\\//'`
 
-	test -d $arh || mkdir $arh
-	cd $arh || exit 1
+	# In build tree.
+	subdir=${arh}${sublib:+/}${sublib}
+	echo "  avr/lib/$subdir/"
+
+	# The first record of each arch must be sublib-free.
+	test -d $subdir || mkdir $subdir
+	cd $subdir || exit 1
 
 	DEV_SUBDIRS=""
 
@@ -382,7 +424,7 @@ do
 		crt_cflags=$(echo $dev_crt | cut -d ':' -f 4)
 		crt_asflags=$(echo $dev_crt | cut -d ':' -f 5)
 
-		echo "  avr/lib/$arh/$dev"
+		echo "  avr/lib/$subdir/$dev"
 
 		test -d $dev || mkdir $dev
 
@@ -393,7 +435,7 @@ do
 		    -e "s/<<crt_defs>>/$crt_defs/g" \
 		    -e "s/<<crt_cflags>>/$crt_cflags/g" \
 		    -e "s/<<crt_asflags>>/$crt_asflags/g"  \
-		    -e "s/<<install_dir>>/$install_dir/g" $dev/Makefile.am \
+		    -e "s/<<install_dir>>/$inst_dir_masked/g" $dev/Makefile.am \
 		    > $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
 
 		DEV_SUBDIRS="$DEV_SUBDIRS $dev"
@@ -406,7 +448,7 @@ do
 	    -e "s/<<lib_defs>>/$lib_defs/g" \
 	    -e "s/<<lib_cflags>>/$lib_cflags/g" \
 	    -e "s/<<lib_asflags>>/$lib_asflags/g" \
-	    -e "s/<<install_dir>>/$install_dir/g" Makefile.am \
+	    -e "s/<<install_dir>>/$inst_dir_masked/g" Makefile.am \
 	    > tempfile && mv -f tempfile Makefile.am
 
 	# Find the first and the last lines of <<dev>> block.
@@ -428,19 +470,22 @@ do
 
 	# After the <<dev>> block.
 	tail -n +$(($n2 + 1)) Makefile.am >> tempfile
-	
+
 	# Result.
 	mv -f tempfile Makefile.am
 
-	ARH_SUBDIRS="$ARH_SUBDIRS $arh"
+	ARH_SUBDIRS="$ARH_SUBDIRS $subdir"
 
-	cd ..
+	cd .. || exit 1
+	if [ -n "$sublib" ] ; then
+		cd .. || exit 1
+	fi
 done
 
 cat $top_dir/devtools/Lib.am > Makefile.am
 
-sed -e "s/<<arh_subdirs>>/$ARH_SUBDIRS/g" Makefile.am \
-    > tempfile && mv -f tempfile Makefile.am
+sed -e "s/<<arh_subdirs>>/`echo $ARH_SUBDIRS | sed 's/\\//\\\\\\//g'`/g" \
+    Makefile.am > tempfile && mv -f tempfile Makefile.am
 
 cd ..
 

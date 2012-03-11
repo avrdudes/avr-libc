@@ -1,3 +1,10 @@
+2012-03-11  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Add multilib version for tiny-stack targets.
+	* devtools/gen-avr-lib-tree.sh: Add multilib DEV_INFO lists.  Add
+	multilib member for ARH_INFO.  Operate possible sublibs targets.
+	* configure.ac: Add tiny-stack targets.
+
 2012-02-04  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #35398: assert doesn't work unless stdlib.h is also
