@@ -1,3 +1,8 @@
+2012-05-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #36454: string.h: Error for long long in C90
+	* include/string.h (ffsll): declare as being a GCC extension
+
 2012-03-11  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Add multilib version for tiny-stack targets.

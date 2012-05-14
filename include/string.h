@@ -110,7 +110,7 @@ extern "C" {
 
 extern int ffs (int __val) __ATTR_CONST__;
 extern int ffsl (long __val) __ATTR_CONST__;
-extern int ffsll (long long __val) __ATTR_CONST__;
+__extension__ extern int ffsll (long long __val) __ATTR_CONST__;
 extern void *memccpy(void *, const void *, int, size_t);
 extern void *memchr(const void *, int, size_t) __ATTR_PURE__;
 extern int memcmp(const void *, const void *, size_t) __ATTR_PURE__;
