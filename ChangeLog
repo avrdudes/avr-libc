@@ -1,3 +1,8 @@
+2012-05-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #31267: misleading header iom128rfa1.h
+	* include/iom128rfa1.h: remove vectors 51 through 56
+
 2012-05-14  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #36454: string.h: Error for long long in C90

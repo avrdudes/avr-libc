@@ -5224,29 +5224,7 @@ struct __reg_TST_RX_LENGTH {
 #define TIMER5_OVF_vect                 _VECTOR(50)
 #define TIMER5_OVF_vect_num             50
 
-/* USART2, Rx Complete */
-#define USART2_RX_vect                  _VECTOR(51)
-#define USART2_RX_vect_num              51
-
-/* USART2 Data register Empty */
-#define USART2_UDRE_vect                _VECTOR(52)
-#define USART2_UDRE_vect_num            52
-
-/* USART2, Tx Complete */
-#define USART2_TX_vect                  _VECTOR(53)
-#define USART2_TX_vect_num              53
-
-/* USART3, Rx Complete */
-#define USART3_RX_vect                  _VECTOR(54)
-#define USART3_RX_vect_num              54
-
-/* USART3 Data register Empty */
-#define USART3_UDRE_vect                _VECTOR(55)
-#define USART3_UDRE_vect_num            55
-
-/* USART3, Tx Complete */
-#define USART3_TX_vect                  _VECTOR(56)
-#define USART3_TX_vect_num              56
+/* Vectors 51 through 56 are reserved (unimplemented UARTs) */
 
 /* TRX24 - PLL lock interrupt */
 #define TRX24_PLL_LOCK_vect             _VECTOR(57)
