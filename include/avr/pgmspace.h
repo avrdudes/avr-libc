@@ -1081,8 +1081,8 @@ extern size_t strlcpy_PF (char *dst, uint_farptr_t src, size_t siz);
 extern int memcmp_PF(const void *, uint_farptr_t, size_t) __ATTR_PURE__;
 
 
-__attribute__((__always_inline__)) static inline size_t strlen_P(const char * s);
-static inline size_t strlen_P(const char *s) {
+__attribute__((__always_inline__)) static __inline__ size_t strlen_P(const char * s);
+static __inline__ size_t strlen_P(const char *s) {
   return __builtin_constant_p(__builtin_strlen(s))
      ? __builtin_strlen(s) : __strlen_P(s);
 } 

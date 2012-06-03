@@ -1,3 +1,10 @@
+2012-06-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #36581: avr-libc: pgmspace.h is not ANSI compliant
+	* include/avr/pgmspace.h (strlen_P): use __inline__ rather
+	than inline to be independent from the compiler's standard
+	level option
+
 2012-05-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #31267: misleading header iom128rfa1.h
