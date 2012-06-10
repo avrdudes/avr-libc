@@ -1302,7 +1302,7 @@
 #define TIMER3_OVF_vect			_VECTOR(35)
 
 /* 2-wire Serial Interface */
-#define TWI_vect_num			_VECTOR(36)
+#define TWI_vect_num			36
 #define TWI_vect			    _VECTOR(36)
 
 /* Store Program Memory Read */

@@ -8,6 +8,7 @@
   [#35398] assert doesn't work unless stdlib.h is also included
   [#36454] string.h: Error for long long in C90
   [#36581] avr-libc: pgmspace.h is not ANSI compliant
+  [no-id]  XXX_vect_num not consistent io90pwmx.h, iousbxx6_7.h
 
 * New devices supported:
 

@@ -1249,7 +1249,7 @@
 #define SIG_INPUT_CAPTURE1		_VECTOR(11)
 
 /* Timer/Counter1 Compare Match A */
-#define TIMER1_COMPA_vect_num	_VECTOR(12)
+#define TIMER1_COMPA_vect_num	12
 #define TIMER1_COMPA_vect		_VECTOR(12)
 #define SIG_OUTPUT_COMPARE1A		_VECTOR(12)
 #define SIG_OUTPUT_COMPARE1_A		_VECTOR(12)

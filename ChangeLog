@@ -1,3 +1,10 @@
+2012-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Reported by Itai Nahshon:
+	XXX_vect_num not consistent io90pwmx.h, iousbxx6_7.h
+	* include/avr/iousbxx6_7.h (TWI_vect_num): make this a number
+	* include/avr/io90pwmx.h (TIMER1_COMPA_vect_num): (Dito.)
+
 2012-06-03  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #36581: avr-libc: pgmspace.h is not ANSI compliant
