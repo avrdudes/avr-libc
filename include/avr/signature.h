@@ -74,7 +74,8 @@
 
 #if defined(SIGNATURE_0) && defined(SIGNATURE_1) && defined(SIGNATURE_2)
 
-const unsigned char __signature[3] __attribute__((section (".signature"))) =
+const unsigned char __signature[3]
+__attribute__((__used__, __section__(".signature"))) =
         { SIGNATURE_2, SIGNATURE_1, SIGNATURE_0 };
 
 #endif  /* defined(SIGNATURE_0) && defined(SIGNATURE_1) && defined(SIGNATURE_2) */

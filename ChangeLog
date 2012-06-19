@@ -1,3 +1,8 @@
+2012-06-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/signature.h (__signature): mark as "used"
+	so the linker won't throw it away
+
 2012-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Reported by Itai Nahshon:
