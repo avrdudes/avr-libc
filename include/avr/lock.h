@@ -187,7 +187,7 @@
 #ifndef __ASSEMBLER__
 
 #ifndef LOCKMEM
-#define LOCKMEM  __attribute__((section (".lock")))
+#define LOCKMEM  __attribute__((__used__, __section__ (".lock")))
 #endif
 
 #ifndef LOCKBITS

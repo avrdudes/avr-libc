@@ -2,6 +2,8 @@
 
 	* include/avr/signature.h (__signature): mark as "used"
 	so the linker won't throw it away
+	* include/avr/fuse.h (FUSEMEM): (Dito.)
+	* include/avr/lock.h (LOCKMEM): (Dito.)
 
 2012-06-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

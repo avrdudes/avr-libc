@@ -223,7 +223,7 @@
 #ifndef __ASSEMBLER__
 
 #ifndef FUSEMEM
-#define FUSEMEM  __attribute__((section (".fuse")))
+#define FUSEMEM  __attribute__((__used__, __section__ (".fuse")))
 #endif
 
 #if FUSE_MEMORY_SIZE > 3
