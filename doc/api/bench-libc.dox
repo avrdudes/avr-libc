@@ -7,7 +7,7 @@
 
 \section bench_libc A few of libc functions.
 
-Avr-gcc version is 4.2.3
+Avr-gcc version is 4.7.1
 
 The size of function is given in view of all picked up functions. By default
 Avr-libc is compiled with \c -mcall-prologues option. In brackets the size
@@ -28,127 +28,127 @@ prologue/epilogue.
     <td> atoi ("12345")</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
     <td>82 (82)<br>2<br>155</td>
-    <td>78 (78)<br><br></td>
+    <td>78 (78)<br>2<br>149</td>
     <td>74 (74)<br>2<br>149</td>
   </tr>
   <tr>
     <td> atol ("12345")</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
     <td>122 (122)<br>2<br>221</td>
-    <td>118 (118)<br><br></td>
+    <td>118 (118)<br>2<br>219</td>
     <td>118 (118)<br>2<br>219</td>
   </tr>
   <tr>
     <td> dtostre (1.2345, s, 6, 0)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1184 (1072)<br>17<br>1313</td>
-    <td>1088 (978)<br><br></td>
-    <td>1088 (978)<br>17<br>1152</td>
+    <td>1116 (1004)<br>17<br>1247</td>
+    <td>1048 (938)<br>17<br>1105</td>
+    <td>1048 (938)<br>17<br>1105</td>
   </tr>
   <tr>
     <td> dtostrf (1.2345, 15, 6, s)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1676 (1564)<br>36<br>1608</td>
-    <td>1548 (1438)<br><br></td>
-    <td>1548 (1438)<br>36<br>1443</td>
+    <td>1616 (1616)<br>38<br>1634</td>
+    <td>1508 (1508)<br>38<br>1462</td>
+    <td>1508 (1508)<br>38<br>1462</td>
   </tr>
   <tr>
     <td> itoa (12345, s, 10)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>150 (150)<br>4<br>1172</td>
-    <td>134 (134)<br><br></td>
-    <td>134 (134)<br>4<br>1152</td>
+    <td>110 (110)<br>2<br>879</td>
+    <td>102 (102)<br>2<br>875</td>
+    <td>102 (102)<br>2<br>875</td>
   </tr>
   <tr>
     <td> ltoa (12345L, s, 10)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>220 (220)<br>9<br>3174</td>
-    <td>200 (200)<br><br></td>
-    <td>200 (200)<br>9<br>3136</td>
+    <td>134 (134)<br>2<br>1597</td>
+    <td>126 (126)<br>2<br>1593</td>
+    <td>126 (126)<br>2<br>1593</td>
   </tr>
   <tr>
     <td> malloc (1)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>554 (554)<br>4<br>196</td>
-    <td>506 (506)<br><br></td>
-    <td>506 (506)<br>4<br>178</td>
+    <td>768 (712)<br>6<br>215</td>
+    <td>714 (660)<br>6<br>201</td>
+    <td>714 (660)<br>6<br>201</td>
   </tr>
   <tr>
     <td> realloc ((void *)0, 1)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1152 (1040)<br>20<br>303</td>
-    <td>1042 (932)<br><br></td>
-    <td>1042 (932)<br>20<br>280</td>
+    <td>1284 (1172)<br>18<br>305</td>
+    <td>1174 (1064)<br>18<br>286</td>
+    <td>1174 (1064)<br>18<br>286</td>
   </tr>
   <tr>
     <td> qsort (s, sizeof(s), 1, cmp)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1242 (1130)<br>38<br>20914</td>
-    <td>990 (880)<br><br></td>
-    <td>1008 (898)<br>38<br>16678</td>
+    <td>1252 (1140)<br>42<br>21996</td>
+    <td>1022 (912)<br>42<br>19905</td>
+    <td>1028 (918)<br>42<br>17541</td>
   </tr>
   <tr>
     <td> sprintf_min (s, "%d", 12345)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1216 (1104)<br>59<br>1846</td>
-    <td>1090 (980)<br><br></td>
-    <td>1086 (976)<br>59<br>1711</td>
+    <td>1224 (1112)<br>53<br>1841</td>
+    <td>1092 (982)<br>53<br>1694</td>
+    <td>1088 (978)<br>53<br>1689</td>
   </tr>
   <tr>
     <td> sprintf (s, "%d", 12345)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1674 (1562)<br>58<br>1610</td>
-    <td>1542 (1432)<br><br></td>
-    <td>1498 (1388)<br>58<br>1528</td>
+    <td>1614 (1502)<br>58<br>1647</td>
+    <td>1476 (1366)<br>58<br>1552</td>
+    <td>1454 (1344)<br>58<br>1547</td>
   </tr>
   <tr>
     <td> sprintf_flt (s, "%e", 1.2345)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>3334 (3222)<br>66<br>2513</td>
-    <td>3084 (2974)<br><br></td>
-    <td>3040 (2930)<br>66<br>2297</td>
+    <td>3228 (3116)<br>67<br>2573</td>
+    <td>2990 (2880)<br>67<br>2311</td>
+    <td>2968 (2858)<br>67<br>2311</td>
   </tr>
   <tr>
     <td> sscanf_min ("12345", "%d", &i)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1540 (1428)<br>55<br>1339</td>
-    <td>1354 (1244)<br><br></td>
-    <td>1354 (1244)<br>55<br>1240</td>
+    <td>1532 (1420)<br>55<br>1607</td>
+    <td>1328 (1218)<br>55<br>1446</td>
+    <td>1328 (1218)<br>55<br>1446</td>
   </tr>
   <tr>
     <td> sscanf ("12345", "%d", &i)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1950 (1838)<br>53<br>1334</td>
-    <td>1704 (1594)<br><br></td>
-    <td>1704 (1594)<br>53<br>1235</td>
+    <td>2008 (1896)<br>55<br>1610</td>
+    <td>1748 (1638)<br>55<br>1449</td>
+    <td>1748 (1638)<br>55<br>1449</td>
   </tr>
   <tr>
     <td> sscanf ("point,color", "%[a-z]", s)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1950 (1838)<br>87<br>2878</td>
-    <td>1704 (1594)<br><br></td>
-    <td>1704 (1594)<br>87<br>2718</td>
+    <td>2008 (1896)<br>86<br>3067</td>
+    <td>1748 (1638)<br>86<br>2806</td>
+    <td>1748 (1638)<br>86<br>2806</td>
   </tr>
   <tr>
     <td> sscanf_flt ("1.2345", "%e", &x)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>3298 (3186)<br>63<br>2187</td>
-    <td>2934 (2824)<br><br></td>
-    <td>2918 (2808)<br>63<br>1833</td>
+    <td>3464 (3352)<br>71<br>2497</td>
+    <td>3086 (2976)<br>71<br>2281</td>
+    <td>3070 (2960)<br>71<br>2078</td>
   </tr>
   <tr>
     <td> strtod ("1.2345", &p)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>1570 (1458)<br>22<br>1237</td>
-    <td>1472 (1362)<br><br></td>
-    <td>1456 (1346)<br>22<br>971</td>
+    <td>1632 (1520)<br>20<br>1235</td>
+    <td>1536 (1426)<br>20<br>1177</td>
+    <td>1480 (1480)<br>21<br>1124</td>
   </tr>
   <tr>
     <td> strtol ("12345", &p, 0)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
-    <td>942 (830)<br>29<br>1074</td>
-    <td>874 (764)<br><br></td>
-    <td>808 (698)<br>21<br>722</td>
+    <td>918 (806)<br>22<br>956</td>
+    <td>834 (724)<br>22<br>891</td>
+    <td>792 (792)<br>28<br>794</td>
   </tr>
 </table>
 </small>

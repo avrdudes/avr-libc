@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Reiner Patommel
+/* Copyright (c) 2012  Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,74 +26,39 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id$	*/
 
-/*
-   utoa.S
+#if	!defined (__DOXYGEN__)
+#if	!defined (__AVR_TINY)
 
-   Contributors:
-   Created by Reiner Patommel based on
-   itoa.s by Michael Rickmann <mrickma@gwdg.de>
-   19 June 2003 changed by Reiner Patommel bug# 4010
+#include "asmdef.h"
 
-	#include <stdlib.h>
-	char *utoa(unsigned int value, char *string, int radix);
-  ----------------------------------------------------------------------
-*/
+/* char *utoa (unsigned val, char *s, int radix)
+   Commonly this program is't used, as the 'stdlib.h' obtains the inline
+   version of utoa() where radix is checked at compile time.
+ */
 
-#if !defined(__AVR_TINY__)
+#define val_lo	r24
+#define str_lo	r22
+#define rdx_lo	r20
+#define rdx_hi	r21
 
-#if !defined(__DOXYGEN__)
+ENTRY	utoa
+ENTRY	__utoa
 
-#include "macros.inc"
-#include "ctoasm.inc"
+	cpi	rdx_lo, 37
+	cpc	rdx_hi, __zero_reg__
+	brsh	1f
+	cpi	rdx_lo, 2
+	brlo	1f
+	XJMP	_U(__utoa_ncheck)
 
-    ASSEMBLY_CLIB_SECTION
-    .global _U(utoa)
-    .func _U(utoa)
+1:	X_movw	ZL, str_lo
+	st	Z, __zero_reg__
+	X_movw	r24, str_lo
+	ret
 
-/* arguments */
-#define r_val_hi r25
-#define r_val_lo r24
-#define r_str_hi r23
-#define r_str_lo r22
-#define r_radix  r20
+ENDFUNC
 
-/* local variables */
-#define r_lstr_hi r19
-#define r_lstr_lo r18
-
-
-
-_U(utoa):
-	X_movw	ZL, r_str_lo	; &string
-	X_movw	r_lstr_lo, ZL	; save &string
-	cpi	r_radix, 2	; no radix < 2
-	brlt	99f
-	cpi	r_radix, 37	; no radix > 36
-	brge	99f	
-1:
-	mov	r22, r_radix	; radix
-	clr	r23		;  dividend in r25:r24,   divisor in r23:r22
-	XCALL	_U(__udivmodhi4);  quotient in r23:r22, remainder in r25:r24
-				;  clobbered: r0, r21, r26, r27
-				;  call-used but preserved: r18,r19,r20,r30,r31
-	subi	r24, 0xd0	; + '0'
-	cpi	r24, 0x3a	; > '9' ?
-	brlt	10f
-	subi	r24, 0xd9	; + 'a' - 10 - '0'
-10:
-	st	Z+, r24		; write char to string in reverse order!
-	X_movw	r_val_lo,r22	; quotient -> dividend
-	sbiw	r_val_lo,0	; value == 0 ?
-	brne	1b
-99:
-	st	Z, __zero_reg__	; terminate string
-	X_movw	r_val_lo, r_lstr_lo	; restore &string as return value
-	XJMP	_U(strrev)	; reverse string
-
-	.endfunc
-
-#endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */
+#endif	/* !__AVR_TINY__ */
+#endif	/* !__DOXYGEN__ */

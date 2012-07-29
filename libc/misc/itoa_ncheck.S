@@ -33,30 +33,30 @@
 
 #include "asmdef.h"
 
-/* char *itoa (int val, char *s, int radix)
-   Commonly this program is't used, as the 'stdlib.h' obtains the inline
-   version of itoa() where radix is checked at compile time.
- */
+/* char *__itoa_ncheck (int val, char *s, unsigned char radix)	*/
 
 #define val_lo	r24
+#define val_hi	r25
 #define str_lo	r22
-#define rdx_lo	r20
-#define rdx_hi	r21
+#define radix	r20
 
-ENTRY	itoa
-ENTRY	__itoa
+#define sign	r27	/* Argument for __utoa_common()	*/
 
-	cpi	rdx_lo, 37
-	cpc	rdx_hi, __zero_reg__
-	brsh	1f
-	cpi	rdx_lo, 2
-	brlo	1f
-	XJMP	_U(__itoa_ncheck)
+ENTRY	__itoa_ncheck
 
-1:	X_movw	ZL, str_lo
-	st	Z, __zero_reg__
-	X_movw	r24, str_lo
-	ret
+	clr	sign
+	cpi	radix, 10
+	brne	1f
+	tst	val_hi
+	brpl	1f
+
+    ; radix == 10 && val < 0: sign = '-'
+	ldi	sign, '-'
+    ; val = -val to make val positive
+	com	val_hi
+	neg	val_lo
+	sbci	val_hi, -1
+1:	XJMP	_U(__utoa_common)
 
 ENDFUNC
 

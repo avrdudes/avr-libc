@@ -33,30 +33,63 @@
 
 #include "asmdef.h"
 
-/* char *itoa (int val, char *s, int radix)
-   Commonly this program is't used, as the 'stdlib.h' obtains the inline
-   version of itoa() where radix is checked at compile time.
+/* char *__utoa_ncheck (unsigned val, char *s, unsigned char radix)
+   This function is the utoa() without checking the radix for 2..36 margins.
  */
 
 #define val_lo	r24
+#define val_hi	r25
 #define str_lo	r22
-#define rdx_lo	r20
-#define rdx_hi	r21
+#define radix	r20
 
-ENTRY	itoa
-ENTRY	__itoa
+#define counter	r21
+#define digit	r26
+#define sign	r27
 
-	cpi	rdx_lo, 37
-	cpc	rdx_hi, __zero_reg__
-	brsh	1f
-	cpi	rdx_lo, 2
-	brlo	1f
-	XJMP	_U(__itoa_ncheck)
+ENTRY	__utoa_ncheck
+	clr	sign
 
-1:	X_movw	ZL, str_lo
-	st	Z, __zero_reg__
+ENTRY	__utoa_common
+	X_movw	ZL, str_lo
+	clr	counter
+
+1:  ; Vanilla 16:8 quotient and remainder to pop the digit
+    ; digit <- val % radix
+    ; val   <- val / radix
+	clr	digit
+
+2:	lsl	val_lo
+	rol	val_hi
+	rol	digit
+	cp	digit, radix
+	brlo	3f
+	sub	digit, radix
+	inc	val_lo
+3:	subi	counter, 16		; 256 / 16 == 16 loops
+	brne	2b
+
+    ; Convert the digit to ASCII...
+	subi	digit, -'0'
+	cpi	digit, '9'+1
+	brlo	4f
+	subi	digit, '0'-'a'+10
+4:  ; ... and store it to the reversed string
+	st	Z+, digit
+
+    ; Iterate until all digits are sucked out of VAL.
+	sbiw	val_lo, 0
+	brne	1b
+
+    ; Store the sign (if any)
+	cpse	sign, __zero_reg__
+	st	Z+, sign
+
+    ; Terminate the string with '\0'
+	st	Z+, __zero_reg__
+
+    ; Reverse the string and return the original string pointer
 	X_movw	r24, str_lo
-	ret
+	XJMP	_U(strrev)
 
 ENDFUNC
 

@@ -1,3 +1,30 @@
+2012-07-30  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	patch #3729: Printf for integers speed up
+	Thanks to Georg-Johann Lay.
+	* doc/api/bench-libc.dox: Regenerate with GCC 4.7.1 (and new integer
+	to ASCII functions).
+	* include/stdlib.h: Define *toa() as inline functions.
+	* libc/misc/Files.am: Add new files.
+	* libc/misc/itoa.S: Rewrite.
+	* libc/misc/itoa_ncheck.S: New file.
+	* libc/misc/ltoa.S: Rewrite.
+	* libc/misc/ltoa_ncheck.S: New file.
+	* libc/misc/ultoa.S: Rewrite.
+	* libc/misc/ultoa_ncheck.S: New file.
+	* libc/misc/utoa.S: Rewrite.
+	* libc/misc/utoa_ncheck.S: New file.
+	* tests/simulate/stdlib/itoa-1.c: New file.
+	* tests/simulate/stdlib/itoa-2.c: New file.
+	* tests/simulate/stdlib/ltoa-1.c: New file.
+	* tests/simulate/stdlib/ltoa-2.c: New file.
+	* tests/simulate/stdlib/ultoa-1.c: New file.
+	* tests/simulate/stdlib/ultoa-2.c: New file.
+	* tests/simulate/stdlib/ultoa-3.c: New file.
+	* tests/simulate/stdlib/utoa-1.c: New file.
+	* tests/simulate/stdlib/utoa-2.c: New file.
+	* tests/simulate/stdlib/utoa-3.c: New file.
+
 2012-06-19  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/signature.h (__signature): mark as "used"
