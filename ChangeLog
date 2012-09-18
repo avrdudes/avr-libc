@@ -1,3 +1,9 @@
+2012-09-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/xmega.h: New file, implement _PROTECTED_WRITE.
+	* include/avr/io.h: Include <avr/xmega.h>
+	* doc/api/doxygen.config.in: Add <avr/xmega.h> to documentation build.
+
 2012-07-30  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	patch #3729: Printf for integers speed up

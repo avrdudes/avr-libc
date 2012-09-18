@@ -435,6 +435,10 @@
 
 #include <avr/version.h>
 
+#if __AVR_ARCH__ >= 100
+#  include <avr/xmega.h>
+#endif
+
 /* Include fuse.h after individual IO header files. */
 #include <avr/fuse.h>
 

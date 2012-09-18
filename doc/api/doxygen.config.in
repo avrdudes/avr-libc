@@ -579,6 +579,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/avr/signature.h \
                          @top_srcdir@/include/avr/sleep.h \
                          @top_srcdir@/include/avr/version.h \
+                         @top_srcdir@/include/avr/xmega.h \
                          @top_srcdir@/include/avr/wdt.h \
                          @top_srcdir@/include/util \
                          @top_srcdir@/include/compat \
