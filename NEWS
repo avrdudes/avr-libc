@@ -18,6 +18,9 @@
 
 * Other changes:
 
+  - New macro _PROTECTED_WRITE(): write to Xmega IO registers that are
+    protected through the CCP mechanism
+
 
 *** Changes in avr-libc-1.8.0:
 
