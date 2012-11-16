@@ -655,6 +655,18 @@ extern char *dtostre(double __val, char *__s, unsigned char __prec,
 extern char *dtostrf(double __val, signed char __width,
                      unsigned char __prec, char *__s);
 
+/**
+   \ingroup avr_stdlib
+    Successful termination for exit(); evaluates to 0.
+*/
+#define EXIT_SUCCESS 0
+
+/**
+   \ingroup avr_stdlib
+    Unsuccessful termination for exit(); evaluates to a non-zero value.
+*/
+#define EXIT_FAILURE 1
+
 /*@}*/
 
 #if 0  /* not yet implemented */

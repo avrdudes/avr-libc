@@ -1,3 +1,8 @@
+2012-11-16  Eric B. Weddington <eric.weddington@atmel.com>
+
+	Fix for bug #35539. Thanks to Georg-Johann Lay for fix.
+	* include/stdlib.h (EXIT_SUCCESS, EXIT_FAILURE): Add.
+
 2012-09-18  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/xmega.h: New file, implement _PROTECTED_WRITE.
