@@ -1,4 +1,4 @@
-/* Copyright (c) 2004,2005,2007 Joerg Wunsch
+/* Copyright (c) 2004,2005,2007,2012 Joerg Wunsch
    Copyright (c) 2005, Carlos Lamas
    All rights reserved.
 
@@ -339,17 +339,25 @@ typedef uint32_t uint_farptr_t;
 #define		PRIXPTR			PRIX16
 
 
-#ifdef __avr_libc_does_not_implement_hh_in_scanf
-
+/** \ingroup avr_inttypes
+    decimal scanf format for int8_t */
 #define		SCNd8			"hhd"
+/** \ingroup avr_inttypes
+    decimal scanf format for int_least8_t */
 #define		SCNdLEAST8		"hhd"
+/** \ingroup avr_inttypes
+    decimal scanf format for int_fast8_t */
 #define		SCNdFAST8		"hhd"
 
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int8_t */
 #define		SCNi8			"hhi"
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int_least8_t */
 #define		SCNiLEAST8		"hhi"
+/** \ingroup avr_inttypes
+    generic-integer scanf format for int_fast8_t */
 #define		SCNiFAST8		"hhi"
-
-#endif
 
 
 /** \ingroup avr_inttypes
@@ -416,21 +424,35 @@ typedef uint32_t uint_farptr_t;
     generic-integer scanf format for intptr_t */
 #define		SCNiPTR			SCNi16
 
-#ifdef __avr_libc_does_not_implement_hh_in_scanf
-
+/** \ingroup avr_inttypes
+    octal scanf format for uint8_t */
 #define		SCNo8			"hho"
+/** \ingroup avr_inttypes
+    octal scanf format for uint_least8_t */
 #define		SCNoLEAST8		"hho"
+/** \ingroup avr_inttypes
+    octal scanf format for uint_fast8_t */
 #define		SCNoFAST8		"hho"
 
+/** \ingroup avr_inttypes
+    decimal scanf format for uint8_t */
 #define		SCNu8			"hhu"
+/** \ingroup avr_inttypes
+    decimal scanf format for uint_least8_t */
 #define		SCNuLEAST8		"hhu"
+/** \ingroup avr_inttypes
+    decimal scanf format for uint_fast8_t */
 #define		SCNuFAST8		"hhu"
 
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint8_t */
 #define		SCNx8			"hhx"
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint_least8_t */
 #define		SCNxLEAST8		"hhx"
+/** \ingroup avr_inttypes
+    hexadecimal scanf format for uint_fast8_t */
 #define		SCNxFAST8		"hhx"
-
-#endif
 
 /** \ingroup avr_inttypes
     octal scanf format for uint16_t */

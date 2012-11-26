@@ -1,3 +1,11 @@
+2012-11-26  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Standard scanf() conversion macros for 8-bit data types:
+	* include/inttypes.h (SCNd8, SCNdLEAST8, SCNdFAST8, SCNi8,
+	SCNiLEAST8, SCNiFAST8, SCNo8, SCNoLEAST8, SCNoFAST8, SCNu8,
+	SCNuLEAST8, SCNuFAST8, SCNx8, SCNxLEAST8, SCNxFAST8): New
+	macros.
+
 2012-11-16  Eric B. Weddington <eric.weddington@atmel.com>
 
 	Fix for bug #35539. Thanks to Georg-Johann Lay for fix.

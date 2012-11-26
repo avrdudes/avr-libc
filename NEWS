@@ -22,6 +22,10 @@
   - New macro _PROTECTED_WRITE(): write to Xmega IO registers that are
     protected through the CCP mechanism
 
+  - Add support for scanf() conversion macros for 8-bit data types to
+    <inttypes.h>: SCNd8, SCNdLEAST8, SCNdFAST8, SCNi8, SCNiLEAST8,
+    SCNiFAST8, SCNo8, SCNoLEAST8, SCNoFAST8, SCNu8, SCNuLEAST8,
+    SCNuFAST8, SCNx8, SCNxLEAST8, SCNxFAST8
 
 *** Changes in avr-libc-1.8.0:
 
