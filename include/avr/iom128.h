@@ -66,7 +66,7 @@
 #define PORTE     _SFR_IO8(0x03)
 
 /* ADC Data Register */
-#define ADCW      _SFR_IO16(0x04) /* for backwards compatibility */
+#define ADCW      _SFR_IO16(0x04)
 #ifndef __ASSEMBLER__
 #define ADC       _SFR_IO16(0x04)
 #endif
@@ -1241,7 +1241,6 @@
 
 #pragma GCC system_header
 
-#pragma GCC poison ADCW
 #pragma GCC poison MCUSR
 #pragma GCC poison SPMCR
 
