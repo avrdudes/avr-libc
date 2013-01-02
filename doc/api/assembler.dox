@@ -83,6 +83,13 @@ use case-insensitive filesystems since the actual decision is made
 based on the case of the filename suffix given on the command-line,
 not based on the actual filename from the file system.
 
+As an alternative to using \c .S, the suffix \c .sx is recognized for
+this purpose (starting with GCC 4.3.0).  This is primarily meant to be
+compatible with other compiler environments that have been providing
+this variant before in order to cope with operating systems where
+filenames are case-insensitive (and, with some versions of \c make
+that could not distinguish between \c .s and \c .S on such systems).
+
 Alternatively, the language can explicitly be specified using the
 <tt>-x assembler-with-cpp</tt> option.
 

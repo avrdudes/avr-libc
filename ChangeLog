@@ -1,0 +1,7 @@
+2013-01-02  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Jan Waclawek:
+	* doc/api/assembler.dox: Mention that .sx is an alternate suffix
+	for .S
+
+
