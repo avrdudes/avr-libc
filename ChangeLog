@@ -1,3 +1,8 @@
+2013-01-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Senthil Kumar Selvaraj:
+	* include/avr/Makefile.am (avr_HEADERS): add xmega.h
+
 2013-01-02  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Jan Waclawek:

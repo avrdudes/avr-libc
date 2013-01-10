@@ -217,7 +217,8 @@ avr_HEADERS = \
     signal.h \
     sleep.h \
     version.h \
-    wdt.h
+    wdt.h \
+    xmega.h
 
 nodist_avr_HEADERS = \
     builtins.h
