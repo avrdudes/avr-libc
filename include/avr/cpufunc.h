@@ -77,7 +77,7 @@
 */
 #define _MemoryBarrier()
 #else  /* real code */
-#define _MemoryBarrier() __asm__ __volatile__(:::"memory")
+#define _MemoryBarrier() __asm__ __volatile__("":::"memory")
 #endif  /* __DOXYGEN__ */
 
 #endif /* _AVR_CPUFUNC_H_ */

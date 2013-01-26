@@ -1,3 +1,11 @@
+2013-01-27  Dmitry Xmelkov  <dmix@gmail.ru>
+
+	Fix for bug #37778: _MemoryBarrier() in cpufunc.h error on compile
+	* include/avr/cpufunc.h: Place empty string for asm body. This is
+	needed for older GCC versions.
+	* tests/simulate/regression/bug-37778.c: New file.
+	* NEWS: Add to fixed bug list.
+
 2013-01-10  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Senthil Kumar Selvaraj:
