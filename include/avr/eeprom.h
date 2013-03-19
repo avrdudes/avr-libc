@@ -101,6 +101,14 @@
 # define _EEPROM_SUFFIX  _m1284p
 #elif defined (__AVR_ATmega128RFA1__)
 # define _EEPROM_SUFFIX  _m128rfa1
+#elif defined (__AVR_ATmega1284RFR2__)
+# define _EEPROM_SUFFIX  _m1284rfr2
+#elif defined (__AVR_ATmega128RFR2__)
+# define _EEPROM_SUFFIX  _m128rfr2
+#elif defined (__AVR_ATmega2564RFR2__)
+# define _EEPROM_SUFFIX  _m2564rfr2
+#elif defined (__AVR_ATmega256RFR2__)
+# define _EEPROM_SUFFIX  _m256rfr2
 #elif defined (__AVR_ATmega2560__)
 # define _EEPROM_SUFFIX  _m2560
 #elif defined (__AVR_ATmega2561__)
@@ -123,6 +131,10 @@
 # define _EEPROM_SUFFIX _usb1286
 #elif defined (__AVR_AT90USB1287__)
 # define _EEPROM_SUFFIX _usb1287
+#elif defined (__AVR_ATmega644RFR2__)
+# define _EEPROM_SUFFIX  _m644rfr2
+#elif defined (__AVR_ATmega64RFR2__)
+# define _EEPROM_SUFFIX  _m64rfr2
 #elif defined (__AVR_ATmega64__)
 # define _EEPROM_SUFFIX  _m64
 #elif defined (__AVR_ATmega640__)

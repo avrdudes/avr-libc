@@ -156,6 +156,14 @@
 #  include <avr/iom1284p.h>
 #elif defined (__AVR_ATmega128RFA1__)
 #  include <avr/iom128rfa1.h>
+#elif defined (__AVR_ATmega1284RFR2__)
+#  include <avr/iom1284rfr2.h>
+#elif defined (__AVR_ATmega128RFR2__)
+#  include <avr/iom128rfr2.h>
+#elif defined (__AVR_ATmega2564RFR2__)
+#  include <avr/iom2564rfr2.h>
+#elif defined (__AVR_ATmega256RFR2__)
+#  include <avr/iom256rfr2.h>
 #elif defined (__AVR_ATmega2560__)
 #  include <avr/iom2560.h>
 #elif defined (__AVR_ATmega2561__)
@@ -178,6 +186,10 @@
 #  include <avr/iousb1286.h>
 #elif defined (__AVR_AT90USB1287__)
 #  include <avr/iousb1287.h>
+#elif defined (__AVR_ATmega644RFR2__)
+#  include <avr/iom644rfr2.h>
+#elif defined (__AVR_ATmega64RFR2__)
+#  include <avr/iom64rfr2.h>
 #elif defined (__AVR_ATmega64__)
 #  include <avr/iom64.h>
 #elif defined (__AVR_ATmega640__)

@@ -799,6 +799,12 @@ AM_CONDITIONAL(HAS_atmega32u6, test "x$HAS_atmega32u6" = "xyes")
 CHECK_AVR_DEVICE(atmega406)
 AM_CONDITIONAL(HAS_atmega406, test "x$HAS_atmega406" = "xyes")
 
+CHECK_AVR_DEVICE(atmega644rfr2)
+AM_CONDITIONAL(HAS_atmega644rfr2, test "x$HAS_atmega644rfr2" = "xyes")
+
+CHECK_AVR_DEVICE(atmega64rfr2)
+AM_CONDITIONAL(HAS_atmega64rfr2, test "x$HAS_atmega64rfr2" = "xyes")
+
 CHECK_AVR_DEVICE(atmega64)
 AM_CONDITIONAL(HAS_atmega64, test "x$HAS_atmega64" = "xyes")
 
@@ -894,6 +900,12 @@ AM_CONDITIONAL(HAS_at90usb1286, test "x$HAS_at90usb1286" = "xyes")
 CHECK_AVR_DEVICE(at90usb1287)
 AM_CONDITIONAL(HAS_at90usb1287, test "x$HAS_at90usb1287" = "xyes")
 
+CHECK_AVR_DEVICE(atmega1284rfr2)
+AM_CONDITIONAL(HAS_atmega1284rfr2, test "x$HAS_atmega1284rfr2" = "xyes")
+
+CHECK_AVR_DEVICE(atmega128rfr2)
+AM_CONDITIONAL(HAS_atmega128rfr2, test "x$HAS_atmega128rfr2" = "xyes")
+
 
 # avr6
 CHECK_AVR_DEVICE(avr6)
@@ -904,6 +916,12 @@ AM_CONDITIONAL(HAS_atmega2560, test "x$HAS_atmega2560" = "xyes")
 
 CHECK_AVR_DEVICE(atmega2561)
 AM_CONDITIONAL(HAS_atmega2561, test "x$HAS_atmega2561" = "xyes")
+
+CHECK_AVR_DEVICE(atmega2564rfr2)
+AM_CONDITIONAL(HAS_atmega2564rfr2, test "x$HAS_atmega2564rfr2" = "xyes")
+
+CHECK_AVR_DEVICE(atmega256rfr2)
+AM_CONDITIONAL(HAS_atmega256rfr2, test "x$HAS_atmega256rfr2" = "xyes")
 
 
 # avrxmega2
@@ -1243,6 +1261,8 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega32u4/Makefile
 	avr/lib/avr5/atmega32u6/Makefile
 	avr/lib/avr5/atmega406/Makefile
+	avr/lib/avr5/atmega64rfr2/Makefile
+	avr/lib/avr5/atmega644rfr2/Makefile
 	avr/lib/avr5/atmega64/Makefile
 	avr/lib/avr5/atmega640/Makefile
 	avr/lib/avr5/atmega644/Makefile
@@ -1280,6 +1300,8 @@ AC_CONFIG_FILES([
 	avr/lib/avr51/atmega1281/Makefile
 	avr/lib/avr51/atmega1284p/Makefile
 	avr/lib/avr51/atmega128rfa1/Makefile
+	avr/lib/avr51/atmega128rfr2/Makefile
+	avr/lib/avr51/atmega1284rfr2/Makefile
 	avr/lib/avr51/at90can128/Makefile
 	avr/lib/avr51/at90usb1286/Makefile
 	avr/lib/avr51/at90usb1287/Makefile
@@ -1290,6 +1312,8 @@ AC_CONFIG_FILES([
 	avr/lib/avr6/Makefile
 	avr/lib/avr6/atmega2560/Makefile
 	avr/lib/avr6/atmega2561/Makefile
+	avr/lib/avr6/atmega256rfr2/Makefile
+	avr/lib/avr6/atmega2564rfr2/Makefile
 ])
 
 # avrxmega2

@@ -346,6 +346,8 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega32u4</td><td>__AVR_ATmega32U4__</td></tr>
   <tr><td>avr5</td><td>atmega32u6</td><td>__AVR_ATmega32U6__</td></tr>
   <tr><td>avr5</td><td>atmega406</td><td>__AVR_ATmega406__</td></tr>
+  <tr><td>avr5</td><td>atmega644rfr2</td><td>__AVR_ATmega644RFR2__</td></tr>
+  <tr><td>avr5</td><td>atmega64rfr2</td><td>__AVR_ATmega64RFR2__</td></tr>
   <tr><td>avr5</td><td>atmega64</td><td>__AVR_ATmega64__</td></tr>
   <tr><td>avr5</td><td>atmega640</td><td>__AVR_ATmega640__</td></tr>
   <tr><td>avr5</td><td>atmega644</td><td>__AVR_ATmega644__</td></tr>
@@ -376,9 +378,13 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1280</td><td>__AVR_ATmega1280__</td></tr>
   <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1281</td><td>__AVR_ATmega1281__</td></tr>
   <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1284p</td><td>__AVR_ATmega1284P__</td></tr>
+  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1284rfr2</td><td>__AVR_ATmega1284RFR2__</td></tr>
+  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega128rfr2</td><td>__AVR_ATmega128RFR2__</td></tr>
 
   <tr><td>avr6</td><td>atmega2560</td><td>__AVR_ATmega2560__</td></tr>
   <tr><td>avr6</td><td>atmega2561</td><td>__AVR_ATmega2561__</td></tr>
+  <tr><td>avr6</td><td>atmega2564rfr2</td><td>__AVR_ATmega2564RFR2__</td></tr>
+  <tr><td>avr6</td><td>atmega256rfr2</td><td>__AVR_ATmega256RFR2__</td></tr>
 
   <tr><td>avrxmega2</td><td>atxmega16a4</td><td>__AVR_ATxmega16A4__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega16d4</td><td>__AVR_ATxmega16D4__</td></tr>

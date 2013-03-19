@@ -1,3 +1,25 @@
+2013-03-19 Joerg Wunsch <joerg.wunsch@atmel.com>
+
+	* devtools/gen-avr-lib-tree.sh: Add ATmega64RFR2, ATmega644RFR2,
+	ATmega128RFR2, ATmega1284RFR2, ATmega256RFR2, ATmega2564RFR2
+	* configure.ac: (Dito.)
+	* doc/api/main_page.dox: Document new device support.
+	* doc/api/using-tools.dox: (Dito.)
+	* include/avr/io.h: Add hooks for ATmega*RFR2 devices.
+	* include/avr/Makefile.am (avr_HEADERS): Add new header files.
+	* include/avr/sleep.h: Add sleep modes for ATmega*RFR2 devices.
+	* include/avr/wdt.h: Add watchdog support for ATmega*RFR2 devices.
+	* include/avr/power.h: Add power management definitions for
+	ATmega*RFR2 devices.
+	* include/avr/eeprom.h: Add EEPROM definitions for ATmega*RFR2
+	devices.
+	* include/avr/iom64rfr2.h: (New file.)
+	* include/avr/iom644rfr2.h: (New file.)
+	* include/avr/iom128rfr2.h: (New file.)
+	* include/avr/iom1284rfr2.h: (New file.)
+	* include/avr/iom256rfr2.h: (New file.)
+	* include/avr/iom2564rfr2.h: (New file.)
+
 2013-01-27  Dmitry Xmelkov  <dmix@gmail.ru>
 
 	Fix for bug #37778: _MemoryBarrier() in cpufunc.h error on compile

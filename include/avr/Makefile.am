@@ -75,6 +75,8 @@ avr_HEADERS = \
     iom1281.h \
     iom1284p.h \
     iom128rfa1.h \
+    iom1284rfr2.h \
+    iom128rfr2.h \
     iom16.h \
     iom16a.h \
     iom161.h \
@@ -97,6 +99,8 @@ avr_HEADERS = \
     iom16u4.h \
     iom2560.h \
     iom2561.h \
+    iom256rfr2.h \
+    iom2564rfr2.h \
     iom3000.h \
     iom32.h \
     iom323.h \
@@ -130,6 +134,8 @@ avr_HEADERS = \
     iom64c1.h \
     iom64hve.h \
     iom64m1.h \
+    iom64rfr2.h \
+    iom644rfr2.h \
     iom8.h \
     iom8515.h \
     iom8535.h \

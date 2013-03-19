@@ -332,6 +332,8 @@
 || defined(__AVR_ATmega1281__) \
 || defined(__AVR_ATmega1284P__) \
 || defined(__AVR_ATmega128RFA1__) \
+|| defined(__AVR_ATmega1284RFR2__) \
+|| defined(__AVR_ATmega128RFR2__) \
 || defined(__AVR_ATmega16__) \
 || defined(__AVR_ATmega16A__) \
 || defined(__AVR_ATmega162__) \
@@ -354,6 +356,8 @@
 || defined(__AVR_ATmega16U4__) \
 || defined(__AVR_ATmega2560__) \
 || defined(__AVR_ATmega2561__) \
+|| defined(__AVR_ATmega2564RFR2__) \
+|| defined(__AVR_ATmega256RFR2__) \
 || defined(__AVR_ATmega32__) \
 || defined(__AVR_ATmega323__) \
 || defined(__AVR_ATmega324A__) \
@@ -402,6 +406,8 @@
 || defined(__AVR_ATmega64C1__) \
 || defined(__AVR_ATmega64HVE__) \
 || defined(__AVR_ATmega64M1__) \
+|| defined(__AVR_ATmega644RFR2__) \
+|| defined(__AVR_ATmega64RFR2__) \
 || defined(__AVR_ATmega8__) \
 || defined(__AVR_ATmega8515__) \
 || defined(__AVR_ATmega8535__) \

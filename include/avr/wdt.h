@@ -188,6 +188,8 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega1281__) \
 || defined(__AVR_ATmega1284P__) \
 || defined(__AVR_ATmega128RFA1__) \
+|| defined(__AVR_ATmega1284RFR2__) \
+|| defined(__AVR_ATmega128RFR2__) \
 || defined(__AVR_ATmega164__) \
 || defined(__AVR_ATmega164A__) \
 || defined(__AVR_ATmega164P__) \
@@ -210,6 +212,8 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega16U4__) \
 || defined(__AVR_ATmega2560__) \
 || defined(__AVR_ATmega2561__) \
+|| defined(__AVR_ATmega2564RFR2__) \
+|| defined(__AVR_ATmega256RFR2__) \
 || defined(__AVR_ATmega324__) \
 || defined(__AVR_ATmega324A__) \
 || defined(__AVR_ATmega324P__) \
@@ -240,6 +244,8 @@ __asm__ __volatile__ ( \
 || defined(__AVR_ATmega48__) \
 || defined(__AVR_ATmega48A__) \
 || defined(__AVR_ATmega48P__) \
+|| defined(__AVR_ATmega644RFR2__) \
+|| defined(__AVR_ATmega64RFR2__) \
 || defined(__AVR_ATmega640__) \
 || defined(__AVR_ATmega644__) \
 || defined(__AVR_ATmega644A__) \
@@ -436,6 +442,7 @@ __asm__ __volatile__ (  \
     ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561,
     ATmega8HVA, ATmega16HVA, ATmega32HVB,
     ATmega406, ATmega1284P,
+    ATmega2564RFR2, ATmega256RFR2, ATmega1284RFR2, ATmega128RFR2, ATmega644RFR2, ATmega64RFR2
     AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316,
     AT90PWM81,
     AT90USB82, AT90USB162,
