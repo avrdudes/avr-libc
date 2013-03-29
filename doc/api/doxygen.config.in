@@ -560,6 +560,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/stdio.h \
                          @top_srcdir@/include/stdlib.h \
                          @top_srcdir@/include/string.h \
+                         @top_srcdir@/include/time.h \
                          @top_srcdir@/libc \
                          @top_srcdir@/include/avr/boot.h \
                          @top_srcdir@/include/avr/cpufunc.h \

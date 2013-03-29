@@ -81,14 +81,14 @@ int32_t difftime(time_t time1, time_t time0);
 	The normal ranges of the elements are..
 	
 \code
-	tm_sec 		seconds after the minute — [0, 60]
-	tm_min 		minutes after the hour — [0, 59]
-	tm_hour 	hours since midnight — [0, 23]
-	tm_mday 	day of the month — [1, 31]
-	tm_wday 	days since Sunday — [0, 6]
-	tm_mon		months since January — [0, 11]	
+	tm_sec 		seconds after the minute - [0, 60]
+	tm_min 		minutes after the hour - [0, 59]
+	tm_hour 	hours since midnight - [0, 23]
+	tm_mday 	day of the month - [1, 31]
+	tm_wday 	days since Sunday - [0, 6]
+	tm_mon		months since January - [0, 11]	
 	tm_year 	years since 1900
-	tm_yday 	days since January 1 — [0, 365]	
+	tm_yday 	days since January 1 - [0, 365]	
 	tm_isdst	Daylight Saving Time flag
 
 \endcode
@@ -100,14 +100,14 @@ int32_t difftime(time_t time1, time_t time0);
 
 */
 struct tm{
-	int8_t tm_sec; 		/* 	seconds after the minute — [0, 60] 		*/
-	int8_t tm_min; 		/* 	minutes after the hour — [0, 59] 		*/
-	int8_t tm_hour; 	/* 	hours since midnight — [0, 23]			*/
-	int8_t tm_mday; 	/*	day of the month — [1, 31]				*/
-	int8_t tm_wday; 	/*	days since Sunday — [0, 6]				*/
-	int8_t tm_mon; 		/*	months since January — [0, 11]			*/
+	int8_t tm_sec; 		/* 	seconds after the minute - [0, 60] 		*/
+	int8_t tm_min; 		/* 	minutes after the hour - [0, 59] 		*/
+	int8_t tm_hour; 	/* 	hours since midnight - [0, 23]			*/
+	int8_t tm_mday; 	/*	day of the month - [1, 31]				*/
+	int8_t tm_wday; 	/*	days since Sunday - [0, 6]				*/
+	int8_t tm_mon; 		/*	months since January - [0, 11]			*/
 	int16_t tm_year; 	/*	years since 1900						*/
-	int16_t tm_yday; 	/*	days since January 1 — [0, 365]			*/
+	int16_t tm_yday; 	/*	days since January 1 - [0, 365]			*/
 	int16_t tm_isdst;	/*	Daylight Saving Time flag				*/
 };
 
