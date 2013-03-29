@@ -1,4 +1,4 @@
-/*	©2012 Michael Duane Rice
+/*(c)2012 Michael Duane Rice
    	All rights reserved.
 
    Redistribution and use in source and binary forms, with or without

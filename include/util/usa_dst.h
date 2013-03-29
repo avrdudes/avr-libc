@@ -1,5 +1,5 @@
 /*
- * ©2012 Michael Duane Rice All rights reserved.
+ * (c)2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -28,8 +28,26 @@
 
 /* $Id$ */
 
-/*
-	Daylight Savings function for the USA as of this date
+/**
+	Daylight Saving function for the USA. To utilize this function, you must 
+	\code #include <util/usa_dst.h> \endcode
+	and 
+	\code set_dst(usa_dst); \endcode
+	
+	Given the time stamp and time zone parameters provided, the Daylight Saving function must
+	return a value appropriate for the tm structures' tm_isdst element. That is...
+	
+	0 : If Daylight Saving is not in effect.
+	
+	-1 : If it cannot be determined if Daylight Saving is in effect.
+	
+	A positive integer : Represents the number of seconds a clock is advanced for Daylight Saving.
+	This will typically be ONE_HOUR.
+	
+	Daylight Saving 'rules' are subject to frequent change. For production applications it is 
+	recommended to write your own DST function, which uses 'rules' obtained from, and modifiable by,
+	the end user ( perhaps stored in EEPROM ).	
+	
 */
 
 #ifndef EU_DST_H
@@ -41,6 +59,22 @@ extern          "C" {
 
 #include <time.h>
 #include <inttypes.h>
+
+#ifndef DST_START_MONTH
+#define DST_START_MONTH MARCH
+#endif
+
+#ifndef DST_END_MONTH
+#define DST_END_MONTH NOVEMBER
+#endif
+
+#ifndef DST_START_WEEK
+#define DST_START_WEEK 2
+#endif
+
+#ifndef DST_END_WEEK
+#define DST_END_WEEK 1
+#endif
 
 	int             usa_dst(const time_t * timer, int32_t * z) {
 		time_t          t;
@@ -56,19 +90,19 @@ extern          "C" {
 		                week = week_of_month(&tmptr, 0);
 		                hour = tmptr.tm_hour;
 
-		if              ((month > MARCH) && (month < NOVEMBER))
+		if              ((month > __DST_START_MONTH) && (month < __DST_END_MONTH))
 			                return ONE_HOUR;
 
-		if              (month < MARCH)
+		if              (month < __DST_START_MONTH)
 			                return 0;
-		if              (month > NOVEMBER)
+		if              (month > __DST_END_MONTH)
 			                return 0;
 
-		if              (month == MARCH) {
+		if              (month == __DST_START_MONTH) {
 
-			if (week < 2)
+			if (week < __DST_START_WEEK)
 				return 0;
-			if (week > 2)
+			if (week > __DST_START_WEEK)
 				return ONE_HOUR;
 
 			if (day_of_week > SUNDAY)
@@ -77,9 +111,9 @@ extern          "C" {
 				return ONE_HOUR;
 			return 0;
 		}
-		if              (week > 1)
+		if              (week > __DST_END_WEEK)
 			                return 0;
-		if              (week < 1)
+		if              (week < __DST_END_WEEK)
 			                return ONE_HOUR;
 		if              (day_of_week > SUNDAY)
 			                return 0;

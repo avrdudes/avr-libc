@@ -1,5 +1,5 @@
 /*
- * ©2012 Michael Duane Rice All rights reserved.
+ * (C)2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -37,12 +37,11 @@
     
     The implementation attempts to conform to ISO/IEC 9899 (C90). However, since there is no 
     platform standard method to obtain the current time, time zone, or daylight savings 
-    'rules', the application needs to initialize the system time with this information. 
+    'rules', the application needs to initialize the time system with this information. 
 	The functions set_zone(), set_dst(), and set_system_time() are provided for this intialization.
 	
 	Once initialized, system time may be maintained by calling system_tick() at one
 	second intervals.
-	     
 */ 
 #ifndef TIME_H
 #define TIME_H

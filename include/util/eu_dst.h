@@ -1,5 +1,5 @@
 /*
- * ©2012 Michael Duane Rice All rights reserved.
+ * (c)2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -28,8 +28,25 @@
 
 /* $Id$ */
 
-/*
-	Summer Time function for the European Union as of this date.
+/**
+	Daylight Saving function for the European Union. To utilize this function, you must 
+	\code #include <util/eu_dst.h> \endcode
+	and 
+	\code set_dst(eu_dst); \endcode
+	
+	Given the time stamp and time zone parameters provided, the Daylight Saving function must
+	return a value appropriate for the tm structures' tm_isdst element. That is...
+	
+	0 : If Daylight Saving is not in effect.
+	
+	-1 : If it cannot be determined if Daylight Saving is in effect.
+	
+	A positive integer : Represents the number of seconds a clock is advanced for Daylight Saving.
+	This will typically be ONE_HOUR.
+	
+	Daylight Saving 'rules' are subject to frequent change. For production applications it is 
+	recommended to write your own DST function, which uses 'rules' obtained from, and modifiable by,
+	the end user ( perhaps stored in EEPROM ).	
 */
 
 #ifndef EU_DST_H
@@ -69,8 +86,7 @@ extern          "C" {
 		                d = n % 7;	/* date of first Sunday */
 
 		                n = 31 - d;
-		                n /= 7;	/* number of Sundays left in the
-					 * month */
+		                n /= 7;	/* number of Sundays left in the month */
 
 		                d = d + 7 * n;	/* mday of final Sunday */
 
