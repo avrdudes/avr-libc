@@ -36,7 +36,9 @@ avr_HEADERS = \
     delay_basic.h \
     setbaud.h \
     parity.h \
-    twi.h
+    twi.h \
+    eu_dst.h \
+    usa_dst.h
 
 nodist_avr_HEADERS = \
     delay.h

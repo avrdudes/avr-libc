@@ -36,7 +36,7 @@ AVR_TARGET_CFLAGS   = <<lib_cflags>>
 AVR_TARGET_ASFLAGS  = <<lib_asflags>>
 AVR_INSTALL_DIR     = <<install_dir>>
 
-VPATH = $(top_srcdir)/libc/stdlib:$(top_srcdir)/libc/pmstring:$(top_srcdir)/libc/string:$(top_srcdir)/libc/misc:$(top_srcdir)/libc/stdio:$(top_srcdir)/libm/fplib
+VPATH = $(top_srcdir)/libc/stdlib:$(top_srcdir)/libc/pmstring:$(top_srcdir)/libc/string:$(top_srcdir)/libc/misc:$(top_srcdir)/libc/stdio:$(top_srcdir)/libm/fplib:$(top_srcdir)/libc/time
 
 if HAS_<<arh>>
 
@@ -73,6 +73,7 @@ include $(top_srcdir)/libc/string/Rules.am
 include $(top_srcdir)/libc/misc/Rules.am
 include $(top_srcdir)/libc/stdio/Rules.am
 include $(top_srcdir)/libm/fplib/Rules.am
+include $(top_srcdir)/libc/time/Rules.am
 
 nodist_libc_a_SOURCES = \
 	$(stdlib_a_c_sources) \
@@ -86,7 +87,8 @@ nodist_libc_a_SOURCES = \
 	$(stdio_a_c_sources) \
 	$(stdio_a_asm_sources) \
 	$(libm_a_c_sources) \
-	$(libm_a_asm_sources)
+	$(libm_a_asm_sources) \
+	$(time_a_c_sources)
 
 nodist_libm_a_SOURCES = \
 	$(libm_a_c_sources) \
