@@ -29,24 +29,24 @@
 /* $Id$ */
 
 /**
-	Daylight Saving function for the European Union. To utilize this function, you must 
-	\code #include <util/eu_dst.h> \endcode
-	and 
-	\code set_dst(eu_dst); \endcode
-	
-	Given the time stamp and time zone parameters provided, the Daylight Saving function must
-	return a value appropriate for the tm structures' tm_isdst element. That is...
-	
-	0 : If Daylight Saving is not in effect.
-	
-	-1 : If it cannot be determined if Daylight Saving is in effect.
-	
-	A positive integer : Represents the number of seconds a clock is advanced for Daylight Saving.
-	This will typically be ONE_HOUR.
-	
-	Daylight Saving 'rules' are subject to frequent change. For production applications it is 
-	recommended to write your own DST function, which uses 'rules' obtained from, and modifiable by,
-	the end user ( perhaps stored in EEPROM ).	
+    Daylight Saving function for the European Union. To utilize this function, you must
+    \code #include <util/eu_dst.h> \endcode
+    and
+    \code set_dst(eu_dst); \endcode
+
+    Given the time stamp and time zone parameters provided, the Daylight Saving function must
+    return a value appropriate for the tm structures' tm_isdst element. That is...
+
+    0 : If Daylight Saving is not in effect.
+
+    -1 : If it cannot be determined if Daylight Saving is in effect.
+
+    A positive integer : Represents the number of seconds a clock is advanced for Daylight Saving.
+    This will typically be ONE_HOUR.
+
+    Daylight Saving 'rules' are subject to frequent change. For production applications it is
+    recommended to write your own DST function, which uses 'rules' obtained from, and modifiable by,
+    the end user ( perhaps stored in EEPROM ).
 */
 
 #ifndef EU_DST_H
@@ -59,55 +59,55 @@ extern          "C" {
 #include <time.h>
 #include <inttypes.h>
 
-	int             eu_dst(const time_t * timer, int32_t * z) {
-		struct tm       tmptr;
-		uint8_t         month, mday, hour, day_of_week, d;
-		int             n;
+    int             eu_dst(const time_t * timer, int32_t * z) {
+        struct tm       tmptr;
+        uint8_t         month, mday, hour, day_of_week, d;
+        int             n;
 
-		/* obtain the variables */
-		                gmtime_r(timer, &tmptr);
-		                month = tmptr.tm_mon;
-		                day_of_week = tmptr.tm_wday;
-		                mday = tmptr.tm_mday - 1;
-		                hour = tmptr.tm_hour;
+        /* obtain the variables */
+                        gmtime_r(timer, &tmptr);
+                        month = tmptr.tm_mon;
+                        day_of_week = tmptr.tm_wday;
+                        mday = tmptr.tm_mday - 1;
+                        hour = tmptr.tm_hour;
 
-		if              ((month > MARCH) && (month < OCTOBER))
-			                return ONE_HOUR;
+        if              ((month > MARCH) && (month < OCTOBER))
+                            return ONE_HOUR;
 
-		if              (month < MARCH)
-			                return 0;
-		if              (month > OCTOBER)
-			                return 0;
+        if              (month < MARCH)
+                            return 0;
+        if              (month > OCTOBER)
+                            return 0;
 
-		/* determine mday of last Sunday */
-		                n = tmptr.tm_mday - 1;
-		                n -= day_of_week;
-		                n += 7;
-		                d = n % 7;	/* date of first Sunday */
+        /* determine mday of last Sunday */
+                        n = tmptr.tm_mday - 1;
+                        n -= day_of_week;
+                        n += 7;
+                        d = n % 7;  /* date of first Sunday */
 
-		                n = 31 - d;
-		                n /= 7;	/* number of Sundays left in the month */
+                        n = 31 - d;
+                        n /= 7; /* number of Sundays left in the month */
 
-		                d = d + 7 * n;	/* mday of final Sunday */
+                        d = d + 7 * n;  /* mday of final Sunday */
 
-		if              (month == MARCH) {
-			if (d < mday)
-				return 0;
-			if (d > mday)
-				return ONE_HOUR;
-			if (hour < 1)
-				return 0;
-			return AN_HOUR;
-		}
-		if              (d < mday)
-			                return ONE_HOUR;
-		if              (d > mday)
-			                return 0;
-		if              (hour < 1)
-			                return ONE_HOUR;
-		                return 0;
+        if              (month == MARCH) {
+            if (d < mday)
+                return 0;
+            if (d > mday)
+                return ONE_HOUR;
+            if (hour < 1)
+                return 0;
+            return AN_HOUR;
+        }
+        if              (d < mday)
+                            return ONE_HOUR;
+        if              (d > mday)
+                            return 0;
+        if              (hour < 1)
+                            return ONE_HOUR;
+                        return 0;
 
-	}
+    }
 
 #ifdef __cplusplus
 }
