@@ -90,19 +90,19 @@ extern          "C" {
 		                week = week_of_month(&tmptr, 0);
 		                hour = tmptr.tm_hour;
 
-		if              ((month > __DST_START_MONTH) && (month < __DST_END_MONTH))
+		if              ((month > DST_START_MONTH) && (month < DST_END_MONTH))
 			                return ONE_HOUR;
 
-		if              (month < __DST_START_MONTH)
+		if              (month < DST_START_MONTH)
 			                return 0;
-		if              (month > __DST_END_MONTH)
+		if              (month > DST_END_MONTH)
 			                return 0;
 
-		if              (month == __DST_START_MONTH) {
+		if              (month == DST_START_MONTH) {
 
-			if (week < __DST_START_WEEK)
+			if (week < DST_START_WEEK)
 				return 0;
-			if (week > __DST_START_WEEK)
+			if (week > DST_START_WEEK)
 				return ONE_HOUR;
 
 			if (day_of_week > SUNDAY)
@@ -111,9 +111,9 @@ extern          "C" {
 				return ONE_HOUR;
 			return 0;
 		}
-		if              (week > __DST_END_WEEK)
+		if              (week > DST_END_WEEK)
 			                return 0;
-		if              (week < __DST_END_WEEK)
+		if              (week < DST_END_WEEK)
 			                return ONE_HOUR;
 		if              (day_of_week > SUNDAY)
 			                return 0;
