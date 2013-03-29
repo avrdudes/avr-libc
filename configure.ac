@@ -1049,6 +1049,7 @@ AC_CONFIG_FILES([
 	libc/stdio/Makefile
 	libc/stdlib/Makefile
 	libc/string/Makefile
+	libc/time/Makefile
 	libm/Makefile
 	libm/fplib/Makefile
 	scripts/Makefile
