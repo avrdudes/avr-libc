@@ -1,68 +1,68 @@
-# ©2012 Michael Duane Rice All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-#
-# Redistributions of source code must retain the above copyright notice, this
-# list of conditions and the following disclaimer. Redistributions in binary
-# form must reproduce the above copyright notice, this list of conditions
-# and the following disclaimer in the documentation and/or other materials
-# provided with the distribution. Neither the name of the copyright holders
-# nor the names of contributors may be used to endorse or promote products
-# derived from this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-# POSSIBILITY OF SUCH DAMAGE.
-#
+ # (C)2012 Michael Duane Rice All rights reserved.
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are
+ # met:
+ #
+ # Redistributions of source code must retain the above copyright notice, this
+ # list of conditions and the following disclaimer. Redistributions in binary
+ # form must reproduce the above copyright notice, this list of conditions
+ # and the following disclaimer in the documentation and/or other materials
+ # provided with the distribution. Neither the name of the copyright holders
+ # nor the names of contributors may be used to endorse or promote products
+ # derived from this software without specific prior written permission.
+ #
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ # ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ # LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ # CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ # SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ # POSSIBILITY OF SUCH DAMAGE.
 
-# $Id$
+ # $Id$
 
 time_a_c_sources = \
-	asctime.c \
-	asctime_r.c \
-	ctime.c \
-	ctime_r.c \
-	daylight_seconds.c \
-	difftime.c \
-	equation_of_time.c \
-	fatfs_time.c \
-	gm_sidereal.c \
-	gmtime.c \
-	gmtime_r.c \
-	isLeap.c \
-	isotime.c \
-	isotime_r.c \
-	lm_sidereal.c \
-	localtime.c \
-	localtime_r.c \
-	mk_gmtime.c \
-	mktime.c \
-	month_length.c \
-	moon_phase.c \
-	set_dst.c \
-	set_position.c \
-	set_system_time.c \
-	set_zone.c \
-	solar_declination.c \
-	strftime.c \
-	sun_rise.c \
-	sun_set.c \
-	system_tick.c \
-	time.c \
-	week_of_month.c \
-	week_of_year.c
-	
-time_a_extra_dist = \
-	asc_store.h \
-	time_private.h \
-	tm_store.h 
+    asc_store.c \
+    asctime.c \
+    asctime_r.c \
+    ctime.c \
+    ctime_r.c \
+    daylight_seconds.c \
+    difftime.c \
+    dst_pointer.c \
+    equation_of_time.c \
+    fatfs_time.c \
+    geo_location.c \
+    gm_sidereal.c \
+    gmtime.c \
+    gmtime_r.c \
+    isLeap.c \
+    isotime.c \
+    isotime_r.c \
+    lm_sidereal.c \
+    localtime.c \
+    localtime_r.c \
+    mk_gmtime.c \
+    mktime.c \
+    month_length.c \
+    moon_phase.c \
+    set_dst.c \
+    set_position.c \
+    set_system_time.c \
+    set_zone.c \
+    solar_declination.c \
+    strftime.c \
+    sun_rise.c \
+    sun_set.c \
+    system_tick.c \
+    system_time.c \
+    time.c \
+    tm_store.c \
+    utc_offset.c \
+    week_of_month.c \
+    week_of_year.c 

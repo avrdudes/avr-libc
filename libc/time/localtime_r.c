@@ -33,8 +33,11 @@
 	zone and Daylight savings offset, then break it down into calendar time.
 */
 
-#include "time_private.h"
 #include <time.h>
+
+extern long     __utc_offset;
+
+extern int      (*__dst_ptr) (const time_t *, int32_t *);
 
 void
 localtime_r(const time_t * timer, struct tm * timeptr)
@@ -44,10 +47,10 @@ localtime_r(const time_t * timer, struct tm * timeptr)
 
 	dst = -1;
 
-	if (_dst_ptr)
-		dst = _dst_ptr(timer, &_utc_offset);
+	if (__dst_ptr)
+		dst = __dst_ptr(timer, &__utc_offset);
 
-	lt = *timer + _utc_offset;
+	lt = *timer + __utc_offset;
 
 	if (dst > 0)
 		lt += dst;

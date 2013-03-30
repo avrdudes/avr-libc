@@ -33,8 +33,9 @@
 */
 
 #include <time.h>
-#include "time_private.h"
-#include "asc_store.h"
+
+extern char    *__asc_store;
+
 char           *
 asctime(const struct tm * timeptr)
 {

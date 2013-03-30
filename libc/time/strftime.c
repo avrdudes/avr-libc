@@ -32,8 +32,14 @@
 	Standard strftime(). This is a memory hungry monster.
 */
 
+#include <stdlib.h>
 #include <stdio.h>
-#include "time_private.h"
+#include <time.h>
+
+extern long     __utc_offset;
+
+//extern int    (*__dst_ptr) (const time_t *, int32_t *);
+
 
 #ifdef __MEMX
 
@@ -266,7 +272,7 @@ strftime(char *buffer, size_t limit, const char *pattern, const struct tm * time
 				break;
 
 			case ('z'):
-				d = _utc_offset / 60;
+				d = __utc_offset / 60;
 				w = timeptr->tm_isdst / 60;
 				if (w > 0)
 					d += w;

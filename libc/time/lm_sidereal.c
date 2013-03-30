@@ -33,14 +33,14 @@
 */
 #include <time.h>
 
-extern long     _longitude;
+extern long     __longitude;
 
 unsigned long
 lm_sidereal(const time_t * timer)
 {
 	long            n;
 
-	n = gm_sidereal(timer) + _longitude / 15L;
+	n = gm_sidereal(timer) + __longitude / 15L;
 	n += 86400L;
 	n %= 86400L;
 	return n;

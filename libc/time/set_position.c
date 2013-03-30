@@ -33,12 +33,12 @@
 	North latitude and East longitude being positive values.
 */
 
-long            _latitude;
-long            _longitude;
+extern long     __latitude;
+extern long     __longitude;
 
 void
 set_position(long lat, long lon)
 {
-	_latitude = lat;
-	_longitude = lon;
+	__latitude = lat;
+	__longitude = lon;
 }

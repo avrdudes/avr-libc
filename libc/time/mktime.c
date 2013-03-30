@@ -34,7 +34,10 @@
 */
 
 #include <time.h>
-#include "time_private.h"
+
+extern long     __utc_offset;
+
+extern int      (*__dst_ptr) (const time_t *, int32_t *);
 
 time_t
 mktime(struct tm * timeptr)
@@ -44,13 +47,13 @@ mktime(struct tm * timeptr)
 	ret = mk_gmtime(timeptr);
 
 	if (timeptr->tm_isdst < 0) {
-		if (_dst_ptr)
-			timeptr->tm_isdst = _dst_ptr(&ret, &_utc_offset);
+		if (__dst_ptr)
+			timeptr->tm_isdst = __dst_ptr(&ret, &__utc_offset);
 	}
 	if (timeptr->tm_isdst > 0)
 		ret -= timeptr->tm_isdst;
 
-	ret -= _utc_offset;
+	ret -= __utc_offset;
 
 	localtime_r(&ret, timeptr);
 

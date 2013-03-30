@@ -35,7 +35,6 @@
 */
 
 #include <time.h>
-#include "time_private.h"
 #include <math.h>
 
 int
@@ -51,7 +50,7 @@ equation_of_time(time_t * timer)
 	p = *timer - 191857UL;
 
 	/* limit to 1 tropical year */
-	y = tropical_year;
+	y = 31556926;
 	s %= y;
 	p %= y;
 

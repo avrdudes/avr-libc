@@ -28,30 +28,7 @@
 
 /* $Id$ */
 
-/*
-	Basic Solar declination calculation.
-*/
-
+#include <inttypes.h>
 #include <time.h>
-#include <math.h>
 
-double
-solar_declination(time_t * timer)
-{
-	unsigned long   i, y;
-	double          d;
-
-	/* what is our orbital position? */
-	y = 31556926;		/* one tropical year */
-	i = *timer % y;
-
-	/* convert position to radians */
-	d = i;
-	d /= y;
-	d *= 6.283185307179586;
-
-	/* compute result */
-	d = 0.006918 - 0.409092627750149 * cos(d) + 0.070257 * sin(d);
-
-	return d;
-}
+int             (*__dst_ptr) (const time_t *, int32_t *);

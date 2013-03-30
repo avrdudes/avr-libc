@@ -35,8 +35,7 @@
 #include <time.h>
 #include <inttypes.h>
 
-
-volatile time_t __system_time;
+extern volatile time_t __system_time;
 
 time_t
 time(time_t * timer)

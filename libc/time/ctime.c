@@ -33,7 +33,8 @@
 	private buffer, and return the buffer.
 */
 #include <time.h>
-#include "asc_store.h"
+
+extern char    *__asc_store;
 
 char           *
 ctime(const time_t * timeptr)

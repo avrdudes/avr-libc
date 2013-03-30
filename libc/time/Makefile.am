@@ -30,5 +30,4 @@
 include $(top_srcdir)/libc/time/Files.am
 
 EXTRA_DIST = \
-	$(time_a_c_sources) \
-	$(time_a_extra_dist)
+	$(time_a_c_sources)

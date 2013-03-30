@@ -33,7 +33,7 @@
 */
 
 #include <time.h>
-extern long     _longitude;
+extern long     __longitude;
 
 time_t
 sun_set(time_t * timer)
@@ -49,7 +49,7 @@ sun_set(time_t * timer)
 	n = daylight_seconds(timer) / 2L;
 	t += n;
 
-	n = _longitude / 15L;
+	n = __longitude / 15L;
 	t -= n;
 
 	return t;

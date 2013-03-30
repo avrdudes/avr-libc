@@ -1,10 +1,10 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
- *
+ * (c)2012 Michael Duane Rice All rights reserved.
+ * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- *
+ * 
  * Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer. Redistributions in binary
  * form must reproduce the above copyright notice, this list of conditions
@@ -12,7 +12,7 @@
  * provided with the distribution. Neither the name of the copyright holders
  * nor the names of contributors may be used to endorse or promote products
  * derived from this software without specific prior written permission.
- *
+ * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -29,29 +29,7 @@
 /* $Id$ */
 
 /*
-	Basic Solar declination calculation.
+	UTC offset in seconds East
 */
 
-#include <time.h>
-#include <math.h>
-
-double
-solar_declination(time_t * timer)
-{
-	unsigned long   i, y;
-	double          d;
-
-	/* what is our orbital position? */
-	y = 31556926;		/* one tropical year */
-	i = *timer % y;
-
-	/* convert position to radians */
-	d = i;
-	d /= y;
-	d *= 6.283185307179586;
-
-	/* compute result */
-	d = 0.006918 - 0.409092627750149 * cos(d) + 0.070257 * sin(d);
-
-	return d;
-}
+long            __utc_offset;

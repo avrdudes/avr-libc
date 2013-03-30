@@ -33,7 +33,8 @@
 */
 
 #include <time.h>
-#include "asc_store.h"
+
+extern char    *__asc_store;
 
 char           *
 isotime(struct tm * tmptr)

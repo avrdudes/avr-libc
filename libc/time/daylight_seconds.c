@@ -35,10 +35,8 @@
 
 #include <time.h>
 #include <math.h>
-#include "time_private.h"
 
-extern long     _latitude;
-
+extern long     __latitude;
 
 long
 daylight_seconds(time_t * timer)
@@ -47,7 +45,7 @@ daylight_seconds(time_t * timer)
 	long            n;
 
 	/* convert latitude to radians */
-	l = _latitude / 206264.806;
+	l = __latitude / 206264.806;
 
 	d = -solar_declination(timer);
 

@@ -32,10 +32,13 @@
 	Set the dst function pointer.
 */
 
-#include "time_private.h"
+#include <inttypes.h>
+#include <time.h>
+
+extern int      (*__dst_ptr) (const time_t *, int32_t *);
 
 void
 set_dst(int (*d) (const time_t *, int32_t *))
 {
-	_dst_ptr = d;
+	__dst_ptr = d;
 }

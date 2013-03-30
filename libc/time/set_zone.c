@@ -32,10 +32,10 @@
 	Set the system time zone. The parameter is seconds offset from UTC.
 */
 
-#include "time_private.h"
+extern long     __utc_offset;
 
 void
 set_zone(long z)
 {
-	_utc_offset = z;
+	__utc_offset = z;
 }

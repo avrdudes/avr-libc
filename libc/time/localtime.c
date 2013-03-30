@@ -32,8 +32,9 @@
 	Standard localtime() function.
 */
 
-#include "tm_store.h"
 #include <time.h>
+
+extern struct tm __tm_store;
 
 struct tm      *
 localtime(const time_t * timer)

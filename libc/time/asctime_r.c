@@ -32,7 +32,6 @@
 	Re-entrant version of asctime().
 	
 */
-#include "time_private.h"
 #include <time.h>
 #include <stdio.h>
 

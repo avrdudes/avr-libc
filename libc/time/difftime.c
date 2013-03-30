@@ -30,7 +30,7 @@
 
 /*
 	The C90 standard specifies this returns a 'double. Since we do not have a true double,
-	we return a work alike type. 
+	we return a work alike type.
 */
 #include <time.h>
 

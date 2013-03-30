@@ -34,12 +34,12 @@
 */
 
 #include <time.h>
-#include "tm_store.h"
+
+extern struct tm __tm_store;
 
 struct tm      *
 gmtime(const time_t * timeptr)
 {
-
 	gmtime_r(timeptr, &__tm_store);
 	return &__tm_store;
 }

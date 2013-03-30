@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * (c)2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -29,29 +29,8 @@
 /* $Id$ */
 
 /*
-	Basic Solar declination calculation.
+	The system time stamp.
 */
-
 #include <time.h>
-#include <math.h>
 
-double
-solar_declination(time_t * timer)
-{
-	unsigned long   i, y;
-	double          d;
-
-	/* what is our orbital position? */
-	y = 31556926;		/* one tropical year */
-	i = *timer % y;
-
-	/* convert position to radians */
-	d = i;
-	d /= y;
-	d *= 6.283185307179586;
-
-	/* compute result */
-	d = 0.006918 - 0.409092627750149 * cos(d) + 0.070257 * sin(d);
-
-	return d;
-}
+volatile time_t __system_time;
