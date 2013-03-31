@@ -29,14 +29,16 @@
 /* $Id$ */
 
 /*
-	Call this function at 1 Hz rate from a 'naked' ISR ( followed by reti ) to save a lot of 
-	stack activity.
+	Calling this function from a 'naked' ISR saves some stack activity.
 	
         ISR(TIMER2_COMPA_vect, ISR_NAKED)
         {
             system_tick_i();
             reti();
         }
+        
+    This is an experimental function not really meant for release. If it can be ensured to work in
+	all cases, it should replace the original 'c' code system_tick().
 */
 
 __SREG__ = 0x3f

@@ -243,6 +243,9 @@ void system_tick(void);
 	        system_tick_i();
 	        reti();
 	    }
+	    
+	This is an experimental function not really meant for release. If it can be ensured to work in
+	all cases, it should replace the original 'c' code system_tick().
 */
 void system_tick_i(void);
 
