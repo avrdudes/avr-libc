@@ -66,3 +66,6 @@ time_a_c_sources = \
     utc_offset.c \
     week_of_month.c \
     week_of_year.c 
+
+time_a_asm_sources = \
+        system_tick_i.S

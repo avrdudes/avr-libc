@@ -234,6 +234,18 @@ void set_system_time(struct tm * tmptr);
 */
 void system_tick(void);
 
+/**
+	This function increments the system clock, and must be called at a rate of one Hertz 
+	to maintain the system time. This function is safe to be called from a 'naked' ISR...
+	    
+	    ISR(TIMER2_COMPA_vect, ISR_NAKED)
+	    {
+	        system_tick_i();
+	        reti();
+	    }
+*/
+void system_tick_i(void);
+
 enum _WEEK_DAYS_{
 	SUNDAY,
 	MONDAY,
