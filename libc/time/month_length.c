@@ -29,8 +29,8 @@
 /* $Id$ */
 
 /*
-	Return the length of a month in days, given the year and month in question.
-	The month parameter must be '1 based', ranging from 1 to 12.
+    Return the length of a month in days, given the year and month in question.
+    The month parameter must be '1 based', ranging from 1 to 12.
 */
 
 #include <time.h>
@@ -38,14 +38,7 @@
 char
 month_length(int year, char month)
 {
-	char            ret;
-
-	if (month == 2) {
-		ret = 28;
-		if (is_leap_year(year))
-			ret++;
-	} else {
-		ret = 30 + ((month + month / 8) & 1);
-	}
-	return ret;
+    if (month == 2) return 28 + is_leap_year(year);
+        
+    return 30 + ((month + month / 8) & 1);
 }
