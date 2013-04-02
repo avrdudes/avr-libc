@@ -29,7 +29,7 @@
 /* $Id$ */
 
 /*
-	Local Mean Sidereal Time. See gm_sidereal() for for info.
+    Local Mean Sidereal Time. See gm_sidereal() for info.
 */
 #include <time.h>
 
@@ -38,10 +38,10 @@ extern long     __longitude;
 unsigned long
 lm_sidereal(const time_t * timer)
 {
-	long            n;
+    long            n;
 
-	n = gm_sidereal(timer) + __longitude / 15L;
-	n += 86400L;
-	n %= 86400L;
-	return n;
+    n = gm_sidereal(timer) + __longitude / 15L;
+    n += ONE_DAY;
+    n %= ONE_DAY;
+    return n;
 }
