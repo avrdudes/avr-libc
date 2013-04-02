@@ -29,7 +29,7 @@
 /* $Id$ */
 
 /*
-	Returns 0 if the given year is not a leap year, otherwise 1.
+    Return 1 if 'year' is a leap year, else 0.
 */
 
 #include <stdlib.h>
@@ -37,21 +37,20 @@
 unsigned char
 is_leap_year(int year)
 {
-	div_t           d;
+    div_t           d;
 
-	/* year must be divisible by 4 to be a leap year */
-	if (year & 3)
-		return 0;
+    /* year must be divisible by 4 to be a leap year */
+    if (year & 3)
+        return 0;
 
-	d = div(year, 100);
+    /* If theres a remainder after division by 100, year is not divisible by 100 or 400 */
+    d = div(year, 100);
+    if (d.rem)
+        return 1;
 
-	/* if theres a remainder, year is not divisible by 100 or 400 */
-	if (d.rem)
-		return 1;
+    /* If the quotient is divisible by 4, then year is divisible by 400 */
+    if ((d.quot & 3) == 0)
+        return 1;
 
-	/* if the quotient is divisible by 4, then year is divisible by 400 */
-	if ((d.quot & 3) == 0)
-		return 1;
-
-	return 0;
+    return 0;
 }
