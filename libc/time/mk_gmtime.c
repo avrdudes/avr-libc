@@ -29,10 +29,9 @@
 /* $Id$ */
 
 /*
-    Basically the inverse of gmtime_r(). We assume the values in timeptr represent
-    UTC, thus time zone and DST do not apply.
+    'Break down' a y2k time stamp into the elements of struct tm.
 
-    Unlike mktime(), we do not attempt to 'normalize' timeptr... saves some cpu cycles.
+    Unlike mktime(), this function does not 'normalize' the elements of timeptr.
 */
 
 #include <time.h>
@@ -41,61 +40,61 @@ time_t
 mk_gmtime(struct tm * timeptr)
 {
 
-	time_t          ret;
-	long            tmp;
-	int             n, m, d, leaps;
+    time_t          ret;
+    long            tmp;
+    int             n, m, d, leaps;
 
-	/*
+    /*
             Determine elapsed whole days, since Y2K, to the beginning of the year
         */
-	n = timeptr->tm_year - 100;
-	leaps = 0;
-	if (n) {
-		m = n - 1;
-		leaps = m / 4;
-		leaps -= m / 100;
-		leaps++;
-	}
-	tmp = 365L * n + leaps;
+    n = timeptr->tm_year - 100;
+    leaps = 0;
+    if (n) {
+        m = n - 1;
+        leaps = m / 4;
+        leaps -= m / 100;
+        leaps++;
+    }
+    tmp = 365L * n + leaps;
 
-	/*
+    /*
             Derive the day of year from month and day of month
         */
-	d = timeptr->tm_mday - 1;	/* tm_mday is one based */
+    d = timeptr->tm_mday - 1;   /* tm_mday is one based */
 
-	if (timeptr->tm_mon < 2) {
-		if (timeptr->tm_mon)
-			d += 31;
+    if (timeptr->tm_mon < 2) {
+        if (timeptr->tm_mon)
+            d += 31;
 
-	} else {
-		n = 59 + is_leap_year(timeptr->tm_year + 1900);
-		d += n;
+    } else {
+        n = 59 + is_leap_year(timeptr->tm_year + 1900);
+        d += n;
 
-		/* other months exhibit a regular pattern */
-		n = timeptr->tm_mon - 2;
-		if (n > 4)
-			d += 153;
+        /* Other months exhibit a regular pattern */
+        n = timeptr->tm_mon - 2;
+        if (n > 4)
+            d += 153;
 
-		n %= 5;
-		m = n / 2;
-		m *= 61;
-		d += m;
+        n %= 5;
+        m = n / 2;
+        m *= 61;
+        d += m;
 
-		n &= 1;
-		if (n)
-			d += 31;
-	}
+        n &= 1;
+        if (n)
+            d += 31;
+    }
 
-	/* add day of year to elapsed days, and convert to seconds */
-	tmp += d;
-	ret = 86400LL * tmp;
+    /* Add day of year to elapsed days, and convert to seconds */
+    tmp += d;
+    ret = 86400LL * tmp;
 
-	/* compute 'fractional' day */
-	tmp = 3600L * timeptr->tm_hour;
-	tmp += 60L * timeptr->tm_min;
-	tmp += timeptr->tm_sec;
+    /* compute 'fractional' day */
+    tmp = 3600L * timeptr->tm_hour;
+    tmp += 60L * timeptr->tm_min;
+    tmp += timeptr->tm_sec;
 
-	ret += tmp;
+    ret += tmp;
 
-	return ret;
+    return ret;
 }
