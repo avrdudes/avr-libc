@@ -29,8 +29,8 @@
 /* $Id$ */
 
 /*
-	Determine the amount of time the sun is above the horizon. At high latitudes, this can be zero,
-	or >= ONE_DAY.
+    Determine the amount of time the sun is above the horizon. At high latitudes, this can be zero,
+    or >= ONE_DAY.
 */
 
 #include <time.h>
@@ -41,27 +41,28 @@ extern long     __latitude;
 long
 daylight_seconds(time_t * timer)
 {
-	double          l, d;
-	long            n;
+    double          l, d;
+    long            n;
 
-	/* convert latitude to radians */
-	l = __latitude / 206264.806;
+    /* convert latitude to radians */
+    l = __latitude / 206264.806;
 
-	d = -solar_declination(timer);
+    d = -solar_declination(timer);
 
-	d = tan(l) * tan(d);
+    d = tan(l) * tan(d);
 
-	if (d > 1.0)
-		d = 1.0;
+    /* d may exceed a magnitude of 1.0 at high latitudes */
+    if (d > 1.0)
+        d = 1.0;
 
-	if (d < -1.0)
-		d = -1.0;
+    if (d < -1.0)
+        d = -1.0;
 
-	d = acos(d);
+    d = acos(d);
 
-	d /= 3.112505;
+    d /= 3.112505;
 
-	n = ONE_DAY * d;
+    n = ONE_DAY * d;
 
-	return n;
+    return n;
 }
