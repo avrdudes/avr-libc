@@ -29,10 +29,10 @@
 /* $Id$ */
 
 /*
-	Basically the inverse of gmtime_r(). We assume the values in timeptr represent
-	UTC, thus time zone and DST do not apply.
-	
-	Unlike mktime(), we do not attempt to 'normalize' timeptr... saves some cpu cycles.
+    Basically the inverse of gmtime_r(). We assume the values in timeptr represent
+    UTC, thus time zone and DST do not apply.
+
+    Unlike mktime(), we do not attempt to 'normalize' timeptr... saves some cpu cycles.
 */
 
 #include <time.h>
@@ -45,10 +45,10 @@ mk_gmtime(struct tm * timeptr)
 	long            tmp;
 	int             n, m, d, leaps;
 
-	/* n = years since epoch */
+	/*
+            Determine elapsed whole days, since Y2K, to the beginning of the year
+        */
 	n = timeptr->tm_year - 100;
-
-	/* compute leap days prior to timeptr */
 	leaps = 0;
 	if (n) {
 		m = n - 1;
@@ -56,47 +56,41 @@ mk_gmtime(struct tm * timeptr)
 		leaps -= m / 100;
 		leaps++;
 	}
-	/* compute days elapsed since EPOCH to the beginning of the year */
 	tmp = 365L * n + leaps;
 
-	m = timeptr->tm_mday - 1;
-	d = 0;
+	/*
+            Derive the day of year from month and day of month
+        */
+	d = timeptr->tm_mday - 1;	/* tm_mday is one based */
 
-	/* Special case January */
-	if (timeptr->tm_mon == 0) {
-		d += m;
-	}
-	/* Special case February */
-	else if (timeptr->tm_mon == 1) {
-		n = m + 31;
-		d += n;
+	if (timeptr->tm_mon < 2) {
+		if (timeptr->tm_mon)
+			d += 31;
+
 	} else {
-		d += 29;
-		if (is_leap_year(timeptr->tm_year + 1900))
-			d++;
-
-		m = timeptr->tm_mon - 1;
-
-		n = m / 2;
-		m -= n * 2;
-
-		n *= 61;
+		n = 59 + is_leap_year(timeptr->tm_year + 1900);
 		d += n;
 
-		if (m) {
-			d += 30;
-			if (timeptr->tm_mon > 6)
-				d++;
-		}
-		d += timeptr->tm_mday - 1;
+		/* other months exhibit a regular pattern */
+		n = timeptr->tm_mon - 2;
+		if (n > 4)
+			d += 153;
+
+		n %= 5;
+		m = n / 2;
+		m *= 61;
+		d += m;
+
+		n &= 1;
+		if (n)
+			d += 31;
 	}
 
+	/* add day of year to elapsed days, and convert to seconds */
 	tmp += d;
-
-	/* convert days into seconds */
 	ret = 86400LL * tmp;
 
-	/* add time of day */
+	/* compute 'fractional' day */
 	tmp = 3600L * timeptr->tm_hour;
 	tmp += 60L * timeptr->tm_min;
 	tmp += timeptr->tm_sec;

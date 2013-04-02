@@ -29,9 +29,9 @@
 /* $Id$ */
 
 /*
-	Return the week of month, where 'base' represents the day of week considered as
-	the beginning day. In the USA, the week is generally considered to be Sunday
-	(base = 0), while in Europe it is generally considered to be Monday (base = 1).
+	Return the week of month, where 'base' represents the starting day.
+	In the USA, the week is generally considered to start on Sunday (base = 0),
+	while in Europe it is generally considered to be Monday (base = 1).
 
 	Return value ranges from 0 to 5.
 */
