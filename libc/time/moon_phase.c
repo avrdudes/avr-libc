@@ -29,9 +29,8 @@
 /* $Id$ */
 
 /*
-	Return an approximation to the phase of the moon. Higher accuracy may be obtained
-	with a 4 term polynomial, but due to the limitations of our 'double', this simple
-	version is about as good, and much faster.
+    Return an approximation to the phase of the moon. This simple algorithm is almost as
+    accurate as more elaborate forumlae, given the limitations of the float implementation.
 */
 
 #include <time.h>
@@ -39,20 +38,20 @@
 int8_t
 moon_phase(time_t * gmt)
 {
-	uint32_t        t;
-	int32_t         n;
+    uint32_t        t;
+    int32_t         n;
 
-	/* refer to first new moon of the epoch */
-	t = *gmt - 1744800UL;
+    /* refer to first new moon of the epoch */
+    t = *gmt - 1744800UL;
 
-	/* constrain to 1 lunar cycle */
-	n = t % 2551443UL;
+    /* constrain to 1 lunar cycle */
+    n = t % 2551443UL;
 
-	/* offset by 1/2 lunar cycle */
-	n -= 1275721L;
+    /* offset by 1/2 lunar cycle */
+    n -= 1275721L;
 
-	/* scale to range - 100...+ 100 */
-	n /= 12757L;
+    /* scale to range - 100...+ 100 */
+    n /= 12757L;
 
-	return n;
+    return n;
 }
