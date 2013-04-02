@@ -29,7 +29,9 @@
 /* $Id$ */
 
 /*
-	Greenwich Mean Sidereal Time.
+    Greenwich Mean Sidereal Time. The ratio of sidereal to civil seconds is
+    1.00273790935ss / 1.0cs , which when shifted left to fill 32 bits becomes
+    0x8059B740.
 */
 
 #include <time.h>
@@ -37,16 +39,20 @@
 unsigned long
 gm_sidereal(const time_t * timer)
 {
-	unsigned long long tmp;
+    unsigned long long tmp;
 
-	tmp = *timer * 3133555966ULL;
-	tmp /= 3125000000ULL;
+    tmp = *timer;
 
+    /* multiply by 1.00273790935 sidereal seconds */
+    tmp *= 0x8059B740;
 
-	/* add GMST at epoch */
-	tmp += 23991ULL;
+    /* divide by 1.0 civil second */
+    tmp >>= 31;
 
-	/* mod by 1 day */
-	tmp %= 86400ULL;
-	return tmp;
+    /* add sidereal time at epoch */
+    tmp += 23991ULL;
+
+    tmp %= ONE_DAY;
+    return tmp;
 }
+
