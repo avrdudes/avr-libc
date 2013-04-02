@@ -29,7 +29,7 @@
 /* $Id$ */
 
 /*
-	Basic Solar declination calculation.
+    Basic Solar Declination calculation.
 */
 
 #include <time.h>
@@ -38,20 +38,20 @@
 double
 solar_declination(time_t * timer)
 {
-	unsigned long   i, y;
-	double          d;
+    unsigned long   p, Yt;
+    double          d;
 
-	/* what is our orbital position? */
-	y = 31556926;		/* one tropical year */
-	i = *timer % y;
+    /* Determine the mother ships orbital position, as seconds into a tropical year */
+    Yt = 31556926;
+    p = *timer % Yt;
 
-	/* convert position to radians */
-	d = i;
-	d /= y;
-	d *= 6.283185307179586;
+    /* convert to radians */
+    d = p;
+    d /= Yt;
+    d *= 2.0 * M_PI;
 
-	/* compute result */
-	d = 0.006918 - 0.409092627750149 * cos(d) + 0.070257 * sin(d);
+    /* compute result */
+    d = 0.006918 - 0.409092627750149 * cos(d) + 0.070257 * sin(d);
 
-	return d;
+    return d;
 }
