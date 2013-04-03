@@ -29,7 +29,7 @@
 /* $Id$ */
 
 /*
-	Standard strftime(). This is a memory hungry monster.
+    Standard strftime(). This is a memory hungry monster.
 */
 
 #include <stdlib.h>
@@ -37,9 +37,6 @@
 #include <time.h>
 
 extern long     __utc_offset;
-
-//extern int    (*__dst_ptr) (const time_t *, int32_t *);
-
 
 #ifdef __MEMX
 
@@ -52,8 +49,6 @@ const char      strfwkdays[] = "Sunday Monday Tuesday Wednesday Thursday Friday 
 const char      strfmonths[] = "January February March April May June July August September October November December ";
 
 #endif
-
-
 
 #ifdef __MEMX
 
@@ -69,244 +64,242 @@ pgm_copystring(const char *p, unsigned char i, char *b, unsigned char l)
 
 #endif
 
-	unsigned char   ret, c;
+    unsigned char   ret, c;
 
-	ret = 0;
-	while (i) {
-		c = *p++;
-		if (c == ' ')
-			i--;
-	}
+    ret = 0;
+    while (i) {
+        c = *p++;
+        if (c == ' ')
+            i--;
+    }
 
-	c = *p++;
-	while (c != ' ' && l--) {
-		*b++ = c;
-		ret++;
-		c = *p++;
-	}
-	*b = 0;
-	return ret;
+    c = *p++;
+    while (c != ' ' && l--) {
+        *b++ = c;
+        ret++;
+        c = *p++;
+    }
+    *b = 0;
+    return ret;
 }
 
 size_t
 strftime(char *buffer, size_t limit, const char *pattern, const struct tm * timeptr)
 {
-	unsigned int    count, length;
-	int             d, w;
-	char            c;
-	char            _store[26];
+    unsigned int    count, length;
+    int             d, w;
+    char            c;
+    char            _store[26];
 
-	count = length = 0;
-	while (count < limit) {
-		c = *pattern++;
-		if (c == '%') {
-			c = *pattern++;
-			if (c == 'E' || c == 'O')
-				c = *pattern++;
-			//we implement only the 'C' locale
-				switch (c) {
-			case ('%'):
-				_store[0] = c;
-				length = 1;
-				break;
+    count = length = 0;
+    while (count < limit) {
+        c = *pattern++;
+        if (c == '%') {
+            c = *pattern++;
+            if (c == 'E' || c == 'O')
+                c = *pattern++;
+            switch (c) {
+            case ('%'):
+                _store[0] = c;
+                length = 1;
+                break;
 
-			case ('a'):
-				length = pgm_copystring(strfwkdays, timeptr->tm_wday, _store, 3);
-				break;
+            case ('a'):
+                length = pgm_copystring(strfwkdays, timeptr->tm_wday, _store, 3);
+                break;
 
-			case ('A'):
-				length = pgm_copystring(strfwkdays, timeptr->tm_wday, _store, 255);
-				break;
+            case ('A'):
+                length = pgm_copystring(strfwkdays, timeptr->tm_wday, _store, 255);
+                break;
 
-			case ('b'):
-			case ('h'):
-				length = pgm_copystring(strfmonths, timeptr->tm_mon, _store, 3);
-				break;
+            case ('b'):
+            case ('h'):
+                length = pgm_copystring(strfmonths, timeptr->tm_mon, _store, 3);
+                break;
 
-			case ('B'):
-				length = pgm_copystring(strfmonths, timeptr->tm_mon, _store, 255);
-				break;
+            case ('B'):
+                length = pgm_copystring(strfmonths, timeptr->tm_mon, _store, 255);
+                break;
 
-			case ('c'):
-				length = sprintf(_store, "%u/%u/%u %.2u:%.2u:%.2u", \
-						 timeptr->tm_mon + 1, \
-						 timeptr->tm_mday, \
-						 timeptr->tm_year + 1900, \
-						 timeptr->tm_hour, \
-						 timeptr->tm_min, \
-						 timeptr->tm_sec
-					);
-				break;
+            case ('c'):
+                asctime_r(timeptr, _store);
+                length = 0;
+                while (_store[length])
+                    length++;
+                break;
 
-			case ('C'):
-				d = timeptr->tm_year + 1900;
-				d %= 100;
-				length = sprintf(_store, "%.2d", d);
-				break;
+            case ('C'):
+                d = timeptr->tm_year + 1900;
+                d /= 100;
+                length = sprintf(_store, "%.2d", d);
+                break;
 
-			case ('d'):
-				length = sprintf(_store, "%.2u", timeptr->tm_mday);
-				break;
+            case ('d'):
+                length = sprintf(_store, "%.2u", timeptr->tm_mday);
+                break;
 
-			case ('D'):
-				length = sprintf(_store, "%.2u/%.2u/%.2u", \
-						 timeptr->tm_mon + 1, \
-						 timeptr->tm_mday, \
-						 timeptr->tm_year + 1900 \
-					);
-				break;
+            case ('D'):
+                length = sprintf(_store, "%.2u/%.2u/%.2u", \
+                         timeptr->tm_mon + 1, \
+                         timeptr->tm_mday, \
+                         timeptr->tm_year \
+                    );
+                break;
 
-			case ('e'):
-				length = sprintf(_store, "%2d", timeptr->tm_mday);
-				break;
+            case ('e'):
+                length = sprintf(_store, "%2d", timeptr->tm_mday);
+                break;
 
-			case ('F'):
-				length = sprintf(_store, "%d-%.2d-%-2d", \
-						 timeptr->tm_year + 1900, \
-						 timeptr->tm_mon + 1, \
-						 timeptr->tm_mday \
-					);
-				break;
+            case ('F'):
+                length = sprintf(_store, "%d-%.2d-%.2d", \
+                         timeptr->tm_year + 1900, \
+                         timeptr->tm_mon + 1, \
+                         timeptr->tm_mday \
+                    );
+                break;
 
-			case ('H'):
-				length = sprintf(_store, "%.2u", timeptr->tm_hour);
-				break;
+            case ('H'):
+                length = sprintf(_store, "%.2u", timeptr->tm_hour);
+                break;
 
-			case ('I'):
-				d = timeptr->tm_hour;
-				if (d > 12)
-					d -= 12;
-				length = sprintf(_store, "%.2u", d);
-				break;
+            case ('I'):
+                d = timeptr->tm_hour % 12;
+                if (d == 0)
+                    d = 12;
+                length = sprintf(_store, "%.2u", d);
+                break;
 
-			case ('j'):
-				length = sprintf(_store, "%.3u", timeptr->tm_yday + 1);
-				break;
+            case ('j'):
+                length = sprintf(_store, "%.3u", timeptr->tm_yday + 1);
+                break;
 
-			case ('m'):
-				length = sprintf(_store, "%.2u", timeptr->tm_mon + 1);
-				break;
+            case ('m'):
+                length = sprintf(_store, "%.2u", timeptr->tm_mon + 1);
+                break;
 
-			case ('M'):
-				length = sprintf(_store, "%.2u", timeptr->tm_min);
-				break;
+            case ('M'):
+                length = sprintf(_store, "%.2u", timeptr->tm_min);
+                break;
 
-			case ('n'):
-				_store[0] = 10;
-				length = 1;
-				break;
+            case ('n'):
+                _store[0] = 10;
+                length = 1;
+                break;
 
-			case ('p'):
-				length = 2;
-				_store[0] = 'A';
-				if (timeptr->tm_hour > 11)
-					_store[0] = 'P';
-				_store[1] = 'M';
-				_store[2] = 0;
-				break;
+            case ('p'):
+                length = 2;
+                _store[0] = 'A';
+                if (timeptr->tm_hour > 11)
+                    _store[0] = 'P';
+                _store[1] = 'M';
+                _store[2] = 0;
+                break;
 
-			case ('r'):
-				length = sprintf(_store, "%2d:%.2d:%.2d", \
-					      (timeptr->tm_hour % 12) + 1, \
-						 timeptr->tm_min, \
-						 timeptr->tm_sec \
-					);
-				break;
+            case ('r'):
+                d = timeptr->tm_hour % 12;
+                if (d == 0)
+                    d = 12;
+                length = sprintf(_store, "%2d:%.2d:%.2d AM", \
+                         d, \
+                         timeptr->tm_min, \
+                         timeptr->tm_sec \
+                    );
+                if (timeptr->tm_hour > 11)
+                    _store[10] = 'P';
+                break;
 
-			case ('R'):
-				length = sprintf(_store, "%d:%.2d", timeptr->tm_hour, timeptr->tm_min);
-				break;
+            case ('R'):
+                length = sprintf(_store, "%.2d:%.2d", timeptr->tm_hour, timeptr->tm_min);
+                break;
 
-			case ('S'):
-				length = sprintf(_store, "%.2u", timeptr->tm_sec);
-				length = 2;
-				break;
+            case ('S'):
+                length = sprintf(_store, "%.2u", timeptr->tm_sec);
+                break;
 
-			case ('t'):
-				_store[0] = 9;
-				length = 1;
-				break;
+            case ('t'):
+                length = sprintf(_store, "\t");
+                break;
 
-			case ('T'):
-				length = sprintf(_store, "%.2d:%.2d:%.2d", \
-						 timeptr->tm_hour, \
-						 timeptr->tm_min, \
-						 timeptr->tm_sec \
-					);
-				break;
+            case ('T'):
+                length = sprintf(_store, "%.2d:%.2d:%.2d", \
+                         timeptr->tm_hour, \
+                         timeptr->tm_min, \
+                         timeptr->tm_sec \
+                    );
+                break;
 
-			case ('u'):
-				w = timeptr->tm_wday;
-				if (w == 0)
-					w = 7;
-				length = sprintf(_store, "%d", w);
-				break;
+            case ('u'):
+                w = timeptr->tm_wday;
+                if (w == 0)
+                    w = 7;
+                length = sprintf(_store, "%d", w);
+                break;
 
-			case ('U'):
-				length = sprintf(_store, "%.2u", week_of_year(timeptr, 0));
-				break;
+            case ('U'):
+                length = sprintf(_store, "%.2u", week_of_year(timeptr, 0));
+                break;
 
-			case ('w'):
-				length = sprintf(_store, "%u", timeptr->tm_wday);
-				break;
+            case ('w'):
+                length = sprintf(_store, "%u", timeptr->tm_wday);
+                break;
 
-			case ('W'):
-				w = week_of_year(timeptr, 1);
-				length = sprintf(_store, "%.2u", w);
-				break;
+            case ('W'):
+                w = week_of_year(timeptr, 1);
+                length = sprintf(_store, "%.2u", w);
+                break;
 
-			case ('x'):
-				length = sprintf(_store, "%.2u/%.2u/%.2u", timeptr->tm_mon + 1, timeptr->tm_mday, timeptr->tm_year + 1900);
-				break;
+            case ('x'):
+                length = sprintf(_store, "%.2u/%.2u/%.2u", timeptr->tm_mon + 1, timeptr->tm_mday, timeptr->tm_year % 100);
+                break;
 
-			case ('X'):
-				length = sprintf(_store, "%.2u:%.2u:%.2u", timeptr->tm_hour, timeptr->tm_min, timeptr->tm_sec);
-				break;
+            case ('X'):
+                length = sprintf(_store, "%.2u:%.2u:%.2u", timeptr->tm_hour, timeptr->tm_min, timeptr->tm_sec);
+                break;
 
-			case ('y'):
-				length = sprintf(_store, "%.2u", timeptr->tm_year % 100);
-				break;
+            case ('y'):
+                length = sprintf(_store, "%.2u", timeptr->tm_year % 100);
+                break;
 
-			case ('Y'):
-				length = sprintf(_store, "%u", timeptr->tm_year + 1900);
-				break;
+            case ('Y'):
+                length = sprintf(_store, "%u", timeptr->tm_year + 1900);
+                break;
 
-			case ('z'):
-				d = __utc_offset / 60;
-				w = timeptr->tm_isdst / 60;
-				if (w > 0)
-					d += w;
-				w = abs(d % 60);
-				d = d / 60;
-				length = sprintf(_store, "%+.2d%.2d", d, w);
-				break;
+            case ('z'):
+                d = __utc_offset / 60;
+                w = timeptr->tm_isdst / 60;
+                if (w > 0)
+                    d += w;
+                w = abs(d % 60);
+                d = d / 60;
+                length = sprintf(_store, "%+.2d%.2d", d, w);
+                break;
 
-			default:
-				length = 1;
-				_store[0] = '?';
-				_store[1] = 0;
-				break;
-			}
+            default:
+                length = 1;
+                _store[0] = '?';
+                _store[1] = 0;
+                break;
+            }
 
-			if ((length + count) < limit) {
-				count += length;
-				for (d = 0; d < length; d++) {
-					*buffer++ = _store[d];
-				}
-			} else {
-				*buffer = 0;
-				return count;
-			}
+            if ((length + count) < limit) {
+                count += length;
+                for (d = 0; d < (int) length; d++) {
+                    *buffer++ = _store[d];
+                }
+            } else {
+                *buffer = 0;
+                return count;
+            }
 
-		} else {	/* copy a literal */
-			*buffer = c;
-			buffer++;
-			count++;
-			if (c == 0)
-				return count;
-		}
-	}
+        } else {    /* copy a literal */
+            *buffer = c;
+            buffer++;
+            count++;
+            if (c == 0)
+                return count;
+        }
+    }
 
-	*buffer = 0;
-	return count;
+    *buffer = 0;
+    return count;
 }
