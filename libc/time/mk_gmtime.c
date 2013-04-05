@@ -30,7 +30,6 @@
 
 /*
     'Break down' a y2k time stamp into the elements of struct tm.
-
     Unlike mktime(), this function does not 'normalize' the elements of timeptr.
 */
 
@@ -87,10 +86,10 @@ mk_gmtime(struct tm * timeptr)
 
     /* Add day of year to elapsed days, and convert to seconds */
     tmp += d;
-    ret = 86400LL * tmp;
+    ret = ONE_DAY * tmp;
 
     /* compute 'fractional' day */
-    tmp = 3600L * timeptr->tm_hour;
+    tmp = ONE_HOUR * timeptr->tm_hour;
     tmp += 60L * timeptr->tm_min;
     tmp += timeptr->tm_sec;
 
