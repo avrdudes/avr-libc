@@ -35,11 +35,12 @@
 */
 
 #include <time.h>
+#include <stdint.h>
 
 unsigned long
 gm_sidereal(const time_t * timer)
 {
-    unsigned long long tmp;
+    uint64_t tmp;
 
     tmp = *timer;
 
@@ -50,7 +51,7 @@ gm_sidereal(const time_t * timer)
     tmp >>= 31;
 
     /* add sidereal time at epoch */
-    tmp += 23991ULL;
+    tmp += (uint64_t)23991;
 
     tmp %= ONE_DAY;
     return tmp;
