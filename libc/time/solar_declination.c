@@ -35,23 +35,42 @@
 #include <time.h>
 #include <math.h>
 
+#define TROP_YEAR 31556925
+#define ANOM_YEAR 31558433
+#define INCLINATION 0.409105176667471 /* Earths axial tilt */
+#define PERIHELION 31218166 /* perihelion of 1999 */
+#define SOLSTICE 836160 /* winter solstice of 1999 */
+#define TWO_PI 6.283185307179586
+#define DELTA_V 0.0167
+
 double
 solar_declination(time_t * timer)
 {
-    unsigned long   p, Yt;
-    double          d;
 
-    /* Determine the mother ships orbital position, as seconds into a tropical year */
-    Yt = 31556926;
-    p = *timer % Yt;
+    uint32_t   fT, oV;
+    double          dV, dT;
 
-    /* convert to radians */
-    d = p;
-    d /= Yt;
-    d *= 2.0 * M_PI;
+    /* fractional anomalistic year */
+    oV = *timer % ANOM_YEAR;
+    oV += PERIHELION;
 
-    /* compute result */
-    d = 0.006918 - 0.409092627750149 * cos(d) + 0.070257 * sin(d);
+    /* convert to angle */
+    dV = oV;
+    dV /= ANOM_YEAR;
+    dV *= TWO_PI;
 
-    return d;
+    /* orbital velocity correction */
+    dV = sin(dV);
+    dV *= DELTA_V;
+
+     /* fractional tropical year */
+    fT = *timer % TROP_YEAR;
+    fT += SOLSTICE;
+    dT = fT;
+    dT /= TROP_YEAR;
+    dT *= TWO_PI;
+
+    dT = cos(dT+dV) * INCLINATION;
+
+    return -dT;
 }
