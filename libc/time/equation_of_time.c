@@ -29,52 +29,53 @@
 /* $Id$ */
 
 /*
-	The so called Equation of Time. We determine the orbital position of the mothership,
-	and solve a two term polynomial. More accurate equations are available (more terms), but
-	without a true double there is little point in that.
+    The so called Equation of Time.
 */
 
 #include <time.h>
 #include <math.h>
 
+#define TROP_YEAR 31556925
+#define ANOM_YEAR 31558433
+#define PERIHELION 31218166 /* perihelion of 1999 */
+#define SOLSTICE 836160 /* winter solstice of 1999 */
+#define TWO_PI 6.283185307179586
+
 int
 equation_of_time(time_t * timer)
 {
-	unsigned long   s, p, y;
-	double          d, lf, hf;
+    unsigned long   s, p, y;
+    double          d, lf, hf;
 
-	/* s = time since solstice */
-	s = *timer + 836160UL;
+    /* s = time since solstice */
+    s = * timer % TROP_YEAR;
+    s += SOLSTICE;
 
-	/* p = time since perihelion */
-	p = *timer - 191857UL;
+    /* p = time since perihelion */
+    p = *timer % ANOM_YEAR;
+    p += PERIHELION;
 
-	/* limit to 1 tropical year */
-	y = 31556926;
-	s %= y;
-	p %= y;
+    /* low frequency component has 1 year period */
+    lf = p;
+    lf /= ANOM_YEAR;
 
-	/* low frequency component has 1 year period */
-	lf = p;
-	lf /= y;
+    /* high frequency component has 1/2 year period */
+    y = TROP_YEAR / 2;
+    hf = s;
+    hf /= y;
 
-	/* high frequency component has 1/2 year period */
-	y /= 2;
-	hf = s;
-	hf /= y;
+    /* convert years to radians */
+    d = 6.283185307179586;
+    hf *= d;
+    lf *= d;
 
-	/* convert years to radians */
-	d = 6.283185307179586;
-	hf *= d;
-	lf *= d;
+    /* hf has magnitude 592.2 */
+    hf = sin(hf) * 592.2;
 
-	/* hf has magnitude 592.2 */
-	hf = sin(hf) * 592.2;
+    /* lf has magnitude 451.8 */
+    lf = sin(lf) * 451.8;
 
-	/* lf has magnitude 451.8 */
-	lf = sin(lf) * 451.8;
+    d = lf + hf;
 
-	d = lf + hf;
-
-	return -d;
+    return -d;
 }
