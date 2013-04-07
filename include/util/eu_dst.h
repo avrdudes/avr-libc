@@ -97,7 +97,7 @@ extern          "C" {
                 return ONE_HOUR;
             if (hour < 1)
                 return 0;
-            return AN_HOUR;
+            return ONE_HOUR;
         }
         if              (d < mday)
                             return ONE_HOUR;
