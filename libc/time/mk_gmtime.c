@@ -40,7 +40,7 @@ mk_gmtime(struct tm * timeptr)
 {
 
     time_t          ret;
-    long            tmp;
+    uint32_t        tmp;
     int             n, m, d, leaps;
 
     /*
@@ -54,7 +54,7 @@ mk_gmtime(struct tm * timeptr)
         leaps -= m / 100;
         leaps++;
     }
-    tmp = 365L * n + leaps;
+    tmp = 365UL * n + leaps;
 
     /*
             Derive the day of year from month and day of month
@@ -86,13 +86,14 @@ mk_gmtime(struct tm * timeptr)
 
     /* Add day of year to elapsed days, and convert to seconds */
     tmp += d;
-    ret = ONE_DAY * tmp;
+    tmp *= ONE_DAY;
+    ret = tmp;
 
     /* compute 'fractional' day */
-    tmp = ONE_HOUR * timeptr->tm_hour;
-    tmp += 60L * timeptr->tm_min;
+    tmp = timeptr->tm_hour;
+    tmp *= ONE_HOUR;
+    tmp += timeptr->tm_min * 60UL;
     tmp += timeptr->tm_sec;
-
     ret += tmp;
 
     return ret;
