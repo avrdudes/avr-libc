@@ -30,52 +30,38 @@
 
 /*
     The so called Equation of Time.
+
 */
 
 #include <time.h>
 #include <math.h>
-
-#define TROP_YEAR 31556925
-#define ANOM_YEAR 31558433
-#define PERIHELION 31218166 /* perihelion of 1999 */
-#define SOLSTICE 836160 /* winter solstice of 1999 */
-#define TWO_PI 6.283185307179586
+#include "ephemera_common.h"
 
 int
 equation_of_time(time_t * timer)
 {
-    unsigned long   s, p, y;
-    double          d, lf, hf;
+    int32_t         s, p;
+    double          pf, sf;
 
-    /* s = time since solstice */
-    s = * timer % TROP_YEAR;
-    s += SOLSTICE;
-
-    /* p = time since perihelion */
+    /* compute orbital positions */
     p = *timer % ANOM_YEAR;
     p += PERIHELION;
+    pf = p;
+    pf /= ANOM_YEAR;
+    pf *= TWO_PI;       /* anomalous orbital angle */
 
-    /* low frequency component has 1 year period */
-    lf = p;
-    lf /= ANOM_YEAR;
+    s = *timer % TROP_YEAR;
+    s += SOLSTICE;
+    sf = s;
+    sf /= TROP_YEAR;
+    sf *= 2.0 * TWO_PI;     /* 2x tropical angle */
 
-    /* high frequency component has 1/2 year period */
-    y = TROP_YEAR / 2;
-    hf = s;
-    hf /= y;
+    pf = sin(pf);
+    sf = sin(sf);
+    pf *= 458.0;
+    sf *= 592.0;
 
-    /* convert years to radians */
-    d = 6.283185307179586;
-    hf *= d;
-    lf *= d;
+    s = pf + sf;
+    return -s;
 
-    /* hf has magnitude 592.2 */
-    hf = sin(hf) * 592.2;
-
-    /* lf has magnitude 451.8 */
-    lf = sin(lf) * 451.8;
-
-    d = lf + hf;
-
-    return -d;
 }
