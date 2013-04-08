@@ -28,49 +28,44 @@
 
 /* $Id$ */
 
-/*
-    Basic Solar Declination calculation.
-*/
-
 #include <time.h>
 #include <math.h>
+#include "ephemera_common.h"
 
-#define TROP_YEAR 31556925
-#define ANOM_YEAR 31558433
-#define INCLINATION 0.409105176667471 /* Earths axial tilt */
-#define PERIHELION 31218166 /* perihelion of 1999 */
-#define SOLSTICE 836160 /* winter solstice of 1999 */
-#define TWO_PI 6.283185307179586
-#define DELTA_V 0.0167
+#define DELTA_V 0.033
+#define LAG 37800
 
 double
 solar_declination(time_t * timer)
 {
 
-    uint32_t   fT, oV;
+    uint32_t        fT, oV;
     double          dV, dT;
 
-    /* fractional anomalistic year */
-    oV = *timer % ANOM_YEAR;
-    oV += PERIHELION;
-
-    /* convert to angle */
-    dV = oV;
-    dV /= ANOM_YEAR;
-    dV *= TWO_PI;
-
-    /* orbital velocity correction */
-    dV = sin(dV);
-    dV *= DELTA_V;
-
-     /* fractional tropical year */
+    /*
+     * Determine approximate orbital angle, relative to the winter
+     * solstice
+     */
     fT = *timer % TROP_YEAR;
     fT += SOLSTICE;
+    fT += LAG;
     dT = fT;
     dT /= TROP_YEAR;
     dT *= TWO_PI;
 
-    dT = cos(dT+dV) * INCLINATION;
+    /* Determine approximate orbital angle relative to perihelion */
+    oV = *timer % ANOM_YEAR;
+    oV += PERIHELION;
+    dV = oV;
+    dV /= ANOM_YEAR;
+    dV *= TWO_PI;
+
+    /* Derive a velocity correction factor from the perihelion angle */
+    dV = sin(dV);
+    dV *= DELTA_V;
+
+    /* compute declination */
+    dT = cos(dT + dV) * INCLINATION;
 
     return -dT;
 }
