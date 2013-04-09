@@ -375,6 +375,11 @@ extern          "C" {
     int32_t         daylight_seconds(time_t * timer);
 
     /**
+        Computes the time of solar noon, at the location of the observer.
+    */
+    time_t          solar_noon(time_t * timer);
+
+    /**
         Return the time of sunrise, at the location of the observer. See the note about daylight_seconds().
     */
     time_t          sun_rise(time_t * timer);

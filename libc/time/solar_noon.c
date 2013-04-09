@@ -29,21 +29,28 @@
 /* $Id$ */
 
 /*
-    Return the approximate time of sun set.
+    Return the time of solar noon at the observers position
 */
 
 #include <time.h>
 
-time_t
-sun_set(time_t * timer)
-{
-    long            n;
-    time_t          t;
+extern long     __longitude;
 
-    /* sunset is 1/2 'day' after solar noon */
-    t = solar_noon(timer);
-    n = daylight_seconds(timer) / 2L;
-    t += n;
+time_t
+solar_noon(time_t * timer)
+{
+    time_t          t;
+    long            n;
+
+    /* determine time of solar noon at the prime meridian */
+    t = *timer % ONE_DAY;
+    t = *timer - t;
+    t += 43200L;
+    t -= equation_of_time(timer);
+
+    /* rotate to observers longitude */
+    n = __longitude / 15L;
+    t -= n;
 
     return t;
 

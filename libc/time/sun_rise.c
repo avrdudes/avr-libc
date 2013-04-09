@@ -33,7 +33,6 @@
 */
 
 #include <time.h>
-extern long     __longitude;
 
 time_t
 sun_rise(time_t * timer)
@@ -41,18 +40,9 @@ sun_rise(time_t * timer)
     long            n;
     time_t          t;
 
-    /* determine time of solar noon at the prime meridian */
-    t = *timer % ONE_DAY;
-    t = *timer - t;
-    t += 43200L;
-    t -= equation_of_time(timer);
-
-    /* sunrise is 1/2 day earlier */
+    /* sunrise is 1/2 'day' before solar noon */
+    t = solar_noon(timer);
     n = daylight_seconds(timer) / 2L;
-    t -= n;
-
-    /* rotate to observers longitude */
-    n = __longitude / 15L;
     t -= n;
 
     return t;
