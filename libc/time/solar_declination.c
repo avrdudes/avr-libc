@@ -50,15 +50,13 @@ solar_declination(time_t * timer)
     fT += SOLSTICE;
     fT += LAG;
     dT = fT;
-    dT /= TROP_YEAR;
-    dT *= TWO_PI;
+    dT /= TROP_CYCLE;
 
-    /* Determine approximate orbital angle relative to perihelion */
+    /* Determine approximate orbital angle, relative to perihelion */
     oV = *timer % ANOM_YEAR;
     oV += PERIHELION;
     dV = oV;
-    dV /= ANOM_YEAR;
-    dV *= TWO_PI;
+    dV /= ANOM_CYCLE;
 
     /* Derive a velocity correction factor from the perihelion angle */
     dV = sin(dV);

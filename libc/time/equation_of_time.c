@@ -47,14 +47,13 @@ equation_of_time(time_t * timer)
     p = *timer % ANOM_YEAR;
     p += PERIHELION;
     pf = p;
-    pf /= ANOM_YEAR;
-    pf *= TWO_PI;       /* anomalous orbital angle */
+    pf /= ANOM_CYCLE;
 
     s = *timer % TROP_YEAR;
     s += SOLSTICE;
     sf = s;
-    sf /= TROP_YEAR;
-    sf *= 2.0 * TWO_PI;     /* 2x tropical angle */
+    sf /= TROP_CYCLE;
+    sf *= 2.0;        /* 2x tropical angle */
 
     pf = sin(pf);
     sf = sin(sf);

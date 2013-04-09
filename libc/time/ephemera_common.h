@@ -37,5 +37,7 @@
 #define PERIHELION 31316400    /* perihelion of 1999, 03 jan 13:00 UTC */
 #define SOLSTICE 836160        /* winter solstice of 1999, 22 Dec 07:44 UTC */
 #define TWO_PI 6.283185307179586
+#define TROP_CYCLE 5022440.6025
+#define ANOM_CYCLE 5022680.6082
 
 #endif
