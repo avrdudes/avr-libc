@@ -50,8 +50,8 @@
 
 */
 
-#ifndef EU_DST_H
-#define EU_DST_H
+#ifndef USA_DST_H
+#define USA_DST_H
 
 #ifdef __cplusplus
 extern          "C" {
