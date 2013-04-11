@@ -39,5 +39,6 @@
 #define TWO_PI 6.283185307179586
 #define TROP_CYCLE 5022440.6025
 #define ANOM_CYCLE 5022680.6082
+#define DELTA_V 0.03342044    /* 2x orbital eccentricity */
 
 #endif

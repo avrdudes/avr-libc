@@ -41,24 +41,30 @@ int
 equation_of_time(time_t * timer)
 {
     int32_t         s, p;
-    double          pf, sf;
+    double          pf, sf, dV;
 
-    /* compute orbital positions */
+    /* compute orbital position relative to perihelion */
     p = *timer % ANOM_YEAR;
     p += PERIHELION;
     pf = p;
     pf /= ANOM_CYCLE;
+    pf = sin(pf);
 
+    /* Derive a velocity correction factor from the perihelion angle */
+    dV = pf * DELTA_V;
+
+    /* compute approximate position relative to solstice */
     s = *timer % TROP_YEAR;
     s += SOLSTICE;
+    s *= 2;
     sf = s;
-    sf /= TROP_CYCLE;
-    sf *= 2.0;        /* 2x tropical angle */
 
-    pf = sin(pf);
+    sf /= TROP_CYCLE;
+    sf += dV;
+
     sf = sin(sf);
-    pf *= 458.0;
-    sf *= 592.0;
+    pf *= 459.6;
+    sf *= 592.2;
 
     s = pf + sf;
     return -s;

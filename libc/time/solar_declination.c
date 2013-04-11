@@ -32,8 +32,7 @@
 #include <math.h>
 #include "ephemera_common.h"
 
-#define DELTA_V 0.033
-#define LAG 37800
+#define LAG 38520
 
 double
 solar_declination(time_t * timer)
