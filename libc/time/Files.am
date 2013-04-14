@@ -59,13 +59,12 @@ time_a_c_sources = \
     strftime.c \
     sun_rise.c \
     sun_set.c \
-    system_tick.c \
     system_time.c \
     time.c \
     tm_store.c \
     utc_offset.c \
     week_of_month.c \
-    week_of_year.c 
+    week_of_year.c
 
 time_a_asm_sources = \
-        system_tick_i.S
+        system_tick.S

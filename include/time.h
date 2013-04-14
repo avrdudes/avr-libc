@@ -233,12 +233,6 @@ extern          "C" {
 
     /**
         This function increments the system clock, and must be called at a rate of one Hertz
-        to maintain the system time.
-    */
-    void            system_tick(void);
-
-    /**
-        This function increments the system clock, and must be called at a rate of one Hertz
         to maintain the system time. This function is safe to be called from a 'naked' ISR...
 
             ISR(TIMER2_COMPA_vect, ISR_NAKED)
@@ -246,11 +240,8 @@ extern          "C" {
                 system_tick_i();
                 reti();
             }
-
-        This is an experimental function. If it can be ensured to work in all cases,
-        it should replace the original 'c' code system_tick().
     */
-    void            system_tick_i(void);
+    void            system_tick(void);
 
     /**
         Enumerated labels for the days of the week.
