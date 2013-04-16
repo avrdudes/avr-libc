@@ -29,7 +29,7 @@
 /* $Id$ */
 
 /*
-	This function increments __system time by one second. It is safe to call from a 'naked' ISR.
+    Impoved system_tick Credit to Wouter van Gulik.
 */
 
 #include <avr/common.h>
@@ -38,31 +38,23 @@
 	.type	system_tick, @function
 system_tick:
     push r24
-	push r25
-	push r26
-	push r27
-	push r1
-	in r1,_SFR_IO_ADDR(SREG)
-	push r1
-	clr r1
+    in r24,_SFR_IO_ADDR(SREG)
+	push r24
 	cli
-	lds r24,__system_time
-	lds r25,__system_time+1
-	lds r26,__system_time+2
-	lds r27,__system_time+3
-	adiw r24,1
-	adc r26,r1
-	adc r27,r1
-	sts __system_time,r24
-	sts __system_time+1,r25
-	sts __system_time+2,r26
-	sts __system_time+3,r27
-	pop r1
-	out _SFR_IO_ADDR(SREG),r1
-	pop r1
-	pop r27
-	pop r26
-	pop r25
-	pop r24
-	ret
+    lds r24,__system_time+0
+    subi r24, (-1)
+    sts __system_time+0,r24
+    lds r24,__system_time+1
+    sbci r24, (-1)
+    sts __system_time+1,r24
+    lds r24,__system_time+2
+    sbci r24, (-1)
+    sts __system_time+2,r24
+    lds r24,__system_time+3
+    sbci r24, (-1)
+    sts __system_time+3,r24
+    pop r24
+    out _SFR_IO_ADDR(SREG),r24
+    pop r24
+    ret
 	.size	system_tick, .-system_tick
