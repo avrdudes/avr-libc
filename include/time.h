@@ -232,8 +232,14 @@ extern          "C" {
     void            set_system_time(struct tm * tmptr);
 
     /**
-        This function increments the system clock, and must be called at a rate of one Hertz
-        to maintain the system time. This function is safe to be called from a 'naked' ISR...
+        Maintain the system time by calling this function at a rate of 1 Hertz.
+
+        It is anticipated that this function will typically be called from within an
+        Interrupt Service Routine, (though that is not required). It therefore includes all necessary
+        prologue and epilogue, allowing it to be called from within a 'naked' ISR,  which will prevent
+        an unnecessary cpu register 'spill'
+
+        Such an ISR may resemble the following example...
 
             ISR(TIMER2_COMPA_vect, ISR_NAKED)
             {
