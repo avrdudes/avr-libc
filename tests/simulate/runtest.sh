@@ -93,10 +93,10 @@ while getopts "a:icg:ktTsh" opt ; do
     esac
 done
 shift $((OPTIND - 1))
-test_list=${*:-"regression/*.c stdlib/*.c string/*.c pmstring/*.c \
+test_list=${*:-"time/*.c regression/*.c stdlib/*.c string/*.c pmstring/*.c \
 		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c \
 		avr/*.[cS]"}
-    
+
 CPPFLAGS="-Wundef -I."
 CFLAGS="-g -W -Wall -pipe -Os"
 CORE=core_avr_dump.core
@@ -231,7 +231,7 @@ for test_file in $test_list ; do
 
 	*.c)
 	    n_files=$(($n_files + 1))
-	    
+
 	    rootname=`basename $test_file .c`
 
 	    if [ $HOST_PASS ] ; then
@@ -269,7 +269,7 @@ for test_file in $test_list ; do
 		    avr)  mcu_list="$MCU_LIST_FULL" ;;
 		    *)    mcu_list="$MCU_LIST" ;;
 		esac
-		
+
 	        elf_file=$rootname.elf
 		for prvers in $prlist ; do
 		    for mcu in $mcu_list ; do
@@ -305,7 +305,7 @@ for test_file in $test_list ; do
 
 	*.S)
 	    n_files=$(($n_files + 1))
-	    
+
 	    rootname=`basename $test_file .S`
 
 	    if [ -z $HOST_ONLY ] ; then
@@ -313,7 +313,7 @@ for test_file in $test_list ; do
 		    avr)  mcu_list="$MCU_LIST_FULL" ;;
 		    *)    mcu_list="$MCU_LIST" ;;
 		esac
-		
+
 	        elf_file=$rootname.elf
 		for mcu in $mcu_list ; do
 		    echo -n "Simulate: $test_file "
