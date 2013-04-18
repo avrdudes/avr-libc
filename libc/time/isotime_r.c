@@ -35,21 +35,16 @@
 #include <stdlib.h>
 #include <time.h>
 
-char           *
-__printem(int i, char *buffer)
+void
+__printem(int i, char *buffer, char s)
 {
-	int             n = 0;
+    div_t result;
 
-	if (i < 10)
-		*buffer++ = '0';
-	itoa(i, buffer, 10);
+    result = div(i, 10);
 
-	do {
-		n++;
-		i /= 10;
-	} while (i);
-
-	return buffer + n;
+	*buffer++ = result.quot + '0';
+	*buffer++ = result.rem + '0';
+	*buffer = s;
 }
 
 void
@@ -58,27 +53,28 @@ isotime_r(struct tm * tmptr, char *buffer)
 	int             i;
 
 	i = tmptr->tm_year + 1900;
-	buffer = __printem(i, buffer);
-	*buffer++ = '-';
+	__printem(i/100, buffer, '-');
+	buffer+=2;
+	__printem(i%100, buffer,'-');
+	buffer+=3;
 
 	i = tmptr->tm_mon + 1;
-	buffer = __printem(i, buffer);
-	*buffer++ = '-';
+	__printem(i, buffer,'-');
+	buffer+=3;
 
 	i = tmptr->tm_mday;
-	buffer = __printem(i, buffer);
-	*buffer++ = ' ';
+	__printem(i, buffer,' ');
+	buffer+=3;
 
 	i = tmptr->tm_hour;
-	buffer = __printem(i, buffer);
-	*buffer++ = ':';
+	__printem(i, buffer,':');
+	buffer+=3;
 
 	i = tmptr->tm_min;
-	buffer = __printem(i, buffer);
-	*buffer++ = ':';
+	__printem(i, buffer,':');
+	buffer+=3;
 
 	i = tmptr->tm_sec;
-	buffer = __printem(i, buffer);
+	__printem(i, buffer,0);
 
-	*buffer++ = 0;
 }
