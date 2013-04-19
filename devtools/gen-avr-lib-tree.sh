@@ -43,6 +43,8 @@
 
 # Define the special flags for special sub-targets.
 
+PATH=/usr/xpg4/bin:$PATH
+
 CFLAGS_SPACE="-mcall-prologues -Os"
 CFLAGS_TINY_STACK="-mtiny-stack -mcall-prologues -Os"
 CFLAGS_BIG_MEMORY='-Os $(FNO_JUMP_TABLES)'
@@ -357,12 +359,12 @@ echo "Generating source directories:"
 
 top_dir="UNKNOWN"
 
-if test -e AUTHORS
+if test -f AUTHORS
 then
 	top_dir="$PWD"
 else
 	cd ..
-	if test -e AUTHORS
+	if test -f AUTHORS
 	then
 		top_dir="$PWD"
 	fi
@@ -384,12 +386,12 @@ ARH_SUBDIRS=""
 
 for ath_lib in $AVR_ARH_INFO
 do
-	arh=$(echo $ath_lib | cut -d ':' -f 1)
-	sublib=$(echo $ath_lib | cut -d ':' -f 2)
-	dev_info=$(echo $ath_lib | cut -d ':' -f 3)
-	lib_defs=$(echo $ath_lib | cut -d ':' -f 4)
-	lib_cflags=$(echo $ath_lib | cut -d ':' -f 5)
-	lib_asflags=$(echo $ath_lib | cut -d ':' -f 6)
+	arh=`echo $ath_lib | cut -d ':' -f 1`
+	sublib=`echo $ath_lib | cut -d ':' -f 2`
+	dev_info=`echo $ath_lib | cut -d ':' -f 3`
+	lib_defs=`echo $ath_lib | cut -d ':' -f 4`
+	lib_cflags=`echo $ath_lib | cut -d ':' -f 5`
+	lib_asflags=`echo $ath_lib | cut -d ':' -f 6`
 
 	install_dir=$arh
 	if [ $arh = avr2 ]
@@ -424,11 +426,11 @@ do
 
 	for dev_crt in $DEV_INFO
 	do
-		dev=$(echo $dev_crt | cut -d ':' -f 1)
-		crt=$(echo $dev_crt | cut -d ':' -f 2)
-		crt_defs=$(echo $dev_crt | cut -d ':' -f 3)
-		crt_cflags=$(echo $dev_crt | cut -d ':' -f 4)
-		crt_asflags=$(echo $dev_crt | cut -d ':' -f 5)
+		dev=`echo $dev_crt | cut -d ':' -f 1`
+		crt=`echo $dev_crt | cut -d ':' -f 2`
+		crt_defs=`echo $dev_crt | cut -d ':' -f 3`
+		crt_cflags=`echo $dev_crt | cut -d ':' -f 4`
+		crt_asflags=`echo $dev_crt | cut -d ':' -f 5`
 
 		echo "  avr/lib/$subdir/$dev"
 
@@ -458,24 +460,24 @@ do
 	    > tempfile && mv -f tempfile Makefile.am
 
 	# Find the first and the last lines of <<dev>> block.
-	n1=`grep '^if[[:blank:]]+HAS_<<dev>>' -En Makefile.am	\
+	n1=`grep -En '^if[[:blank:]]+HAS_<<dev>>' Makefile.am	\
 	    | cut -d ':' -f 1`
-	n2=`grep '^endif[[:blank:]]+#[[:blank:]]*<<dev>>' -En Makefile.am \
+	n2=`grep -En '^endif[[:blank:]]+#[[:blank:]]*<<dev>>' Makefile.am \
 	    | cut -d ':' -f 1`
 
 	# Before the <<dev>> block.
-	head -n $(($n1 - 1)) Makefile.am > tempfile
+	head -n `expr $n1 - 1` Makefile.am > tempfile
 
 	# Duplicate the <<dev>> block and substitute.
 	for dev_crt in $DEV_INFO ; do
 		dev=`echo $dev_crt | cut -d ':' -f 1`
 		tail -n +$n1 Makefile.am	\
-		    | head -n $(($n2 - $n1 + 1))	\
+		    | head -n `expr $n2 - $n1 + 1`	\
 		    | sed -e "s/<<dev>>/$dev/g" >> tempfile
 	done
 
 	# After the <<dev>> block.
-	tail -n +$(($n2 + 1)) Makefile.am >> tempfile
+	tail -n +`expr $n2 + 1` Makefile.am >> tempfile
 
 	# Result.
 	mv -f tempfile Makefile.am
