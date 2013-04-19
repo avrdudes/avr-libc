@@ -35,10 +35,10 @@
 
 #include <time.h>
 
-char
-month_length(int year, char month)
+uint8_t
+month_length(int year, uint8_t month)
 {
     if (month == 2) return 28 + is_leap_year(year);
-        
+
     return 30 + ((month + month / 8) & 1);
 }

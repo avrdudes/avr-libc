@@ -288,7 +288,7 @@ extern          "C" {
     /**
         Return the length of month, given the year and month, where month is in the range 1 to 12.
      */
-    uint8_t         length_of_month(int16_t year, uint8_t month);
+    uint8_t         month_length(int16_t year, uint8_t month);
 
     /**
         Return the calendar week of year, where the first week is considered to begin on the
