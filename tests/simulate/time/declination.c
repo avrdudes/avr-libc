@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * (c)2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -28,17 +28,57 @@
 
 /* $Id$ */
 
+/*
+    Declination test. We test the result at the moment of the equinoxes and solstices of
+    the year 2020, as provided by the U.S. Naval Observatory.
+    We consider a difference greater than 0.01 degree as an error.
+
+*/
+
 #include <time.h>
 #include <math.h>
 
 int main(){
 time_t t;
+struct tm calendar;
 double e;
 
-    time(&t);
+    calendar.tm_year = 2020 - 1900;
+    calendar.tm_mon = 2;
+    calendar.tm_mday = 20;
+    calendar.tm_hour = 3;
+    calendar.tm_min = 50;
+    calendar.tm_sec = 0;
+    t = mk_gmtime(&calendar);
+    e = fabs(solar_declination(&t) * 57.295779513082325);
+    if(e > 0.01) return (__LINE__);
+
+    calendar.tm_mon = 5;
+    calendar.tm_mday = 20;
+    calendar.tm_hour = 21;
+    calendar.tm_min = 44;
+    t = mk_gmtime(&calendar);
     e = solar_declination(&t) * 57.295779513082325;
-    e = fabs(e + 23.01);
-    if(e > 0.1) return (__LINE__);
+    e = fabs(e - 23.44);
+    if(e > 0.01) return (__LINE__);
+
+    calendar.tm_mon = 8;
+    calendar.tm_mday = 22;
+    calendar.tm_hour = 13;
+    calendar.tm_min = 31;
+    t = mk_gmtime(&calendar);
+    e = fabs(solar_declination(&t) * 57.295779513082325);
+    if(e > 0.01) return (__LINE__);
+
+    calendar.tm_mon = 11;
+    calendar.tm_mday = 21;
+    calendar.tm_hour = 10;
+    calendar.tm_min = 2;
+    t = mk_gmtime(&calendar);
+    e = solar_declination(&t) * 57.295779513082325;
+    e = fabs(e + 23.44);
+    if(e > 0.01) return (__LINE__);
+
     return 0;
 
 }

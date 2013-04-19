@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * (c)2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -28,15 +28,31 @@
 
 /* $Id$ */
 
+/*
+    'Tick' test. This actually tests system_tick(), gmtime_r(), set_system_time(), and
+    time().
+*/
+
 #include <time.h>
 
 int main(){
 time_t t, tt;
+struct tm calendar;
 
     time(&t);
     system_tick();
     time(&tt);
     t++;
+
+    if(t != tt ) return (__LINE__);
+
+    t = 0xffffffff;
+    gmtime_r(&t, &calendar);
+    set_system_time(&calendar);
+
+    t++;
+    system_tick();
+    time(&tt);
 
     if(t != tt ) return (__LINE__);
 

@@ -29,33 +29,35 @@
 /* $Id$ */
 
 /*
-    This test ensures that the process of breaking down time is correct as well as
-    testing isotime() itself.
+    This test allows for 1 second error in calculation of sidereal time 136 years after
+    the epoch. The 'correct' value is 24004.8 seconds.
 */
 
 #include <time.h>
 #include <string.h>
-
-char           *Y2K_isostring = "2000-01-01 00:00:00";
-char           *end_isostring = "2136-02-07 06:28:15";
 
 int
 main()
 {
 
 	time_t          t;
-	struct tm * tmptr;
-	char           *cp;
+	struct tm calendar;
+	long e;
 
-	time(&t);
-	tmptr = localtime(&t);
-	cp = isotime(tmptr);
-	if (strcmp(Y2K_isostring, cp)) return (__LINE__);
 
-	t = 0xffffffff;
-	tmptr = localtime(&t);
-	cp = isotime(tmptr);
-	if (strcmp(end_isostring, cp)) return (__LINE__);
+	calendar.tm_year = 2136 - 1900;
+	calendar.tm_mon = 0;
+	calendar.tm_mday = 1;
+	calendar.tm_hour = 0;
+	calendar.tm_min = 0;
+	calendar.tm_sec = 0;
 
+	t = mk_gmtime(&calendar);
+	t = gm_sidereal(&t);
+	e = t - 24005L;
+	e = labs(e);
+
+	if ( e > 1 ) return (__LINE__);
 	return 0;
+
 }

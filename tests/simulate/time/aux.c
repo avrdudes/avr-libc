@@ -29,33 +29,20 @@
 /* $Id$ */
 
 /*
-    This test ensures that the process of breaking down time is correct as well as
-    testing isotime() itself.
+    This tests a few of the key 'helpers'.
 */
 
 #include <time.h>
-#include <string.h>
 
-char           *Y2K_isostring = "2000-01-01 00:00:00";
-char           *end_isostring = "2136-02-07 06:28:15";
+int main(){
 
-int
-main()
-{
 
-	time_t          t;
-	struct tm * tmptr;
-	char           *cp;
+    if(month_length(2100,2) != 28) return (__LINE__);
 
-	time(&t);
-	tmptr = localtime(&t);
-	cp = isotime(tmptr);
-	if (strcmp(Y2K_isostring, cp)) return (__LINE__);
+    if(month_length(2136,2) != 29) return (__LINE__);
 
-	t = 0xffffffff;
-	tmptr = localtime(&t);
-	cp = isotime(tmptr);
-	if (strcmp(end_isostring, cp)) return (__LINE__);
 
-	return 0;
+
+    return 0;
+
 }

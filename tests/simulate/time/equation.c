@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * (c)2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -28,16 +28,57 @@
 
 /* $Id$ */
 
+/*
+    Equation of time test. We test the equation at the zeroes of the year 2013, as
+    reported by the U.S. Naval Observatory. We consider a difference greater than
+    ten seconds to be an error.
+*/
+
 #include <time.h>
 #include <math.h>
 
 int main(){
 time_t t;
+struct tm calendar;
 int e;
 
-    time(&t);
-    e = abs(equation_of_time(&t) + 205);
-    if(e > 35) return (__LINE__);
+    calendar.tm_year = 2013 - 1900;
+    calendar.tm_mon = 3;
+    calendar.tm_mday = 15;
+    calendar.tm_hour = 9;
+    calendar.tm_min = 55;
+    calendar.tm_sec = 0;
+    t = mk_gmtime(&calendar);
+    e = equation_of_time(&t);
+    e = abs(e);
+    if( e > 10 ) return (__LINE__);
+
+    calendar.tm_mon = 5;
+    calendar.tm_mday = 13;
+    calendar.tm_hour = 2;
+    calendar.tm_min = 40;
+    t = mk_gmtime(&calendar);
+    e = equation_of_time(&t);
+    e = abs(e);
+    if( e > 10 ) return (__LINE__);
+
+    calendar.tm_mon = 8;
+    calendar.tm_mday = 1;
+    calendar.tm_hour = 6;
+    calendar.tm_min = 21;
+    t = mk_gmtime(&calendar);
+    e = equation_of_time(&t);
+    e = abs(e);
+    if( e > 10 ) return (__LINE__);
+
+    calendar.tm_mon = 11;
+    calendar.tm_mday = 25;
+    calendar.tm_hour = 5;
+    calendar.tm_min = 14;
+    t = mk_gmtime(&calendar);
+    e = equation_of_time(&t);
+    e = abs(e);
+    if( e > 10 ) return (__LINE__);
     return 0;
 
 }
