@@ -59,7 +59,7 @@ extern          "C" {
 
     /**
         time_t represents seconds elapsed from Midnight, Jan 1 2000 UTC (the Y2K 'epoch').
-        Its range allows time to be handled properly up to Tue Feb 7 01:28:15 2136.
+        Its range allows time to be handled properly up to Tue Feb 7 06:28:15 2136.
     */
     typedef uint32_t time_t;
 
@@ -235,15 +235,15 @@ extern          "C" {
         Maintain the system time by calling this function at a rate of 1 Hertz.
 
         It is anticipated that this function will typically be called from within an
-        Interrupt Service Routine, (though that is not required). It therefore includes all necessary
-        prologue and epilogue, allowing it to be called from within a 'naked' ISR,  which will prevent
-        an unnecessary cpu register 'spill'
+        Interrupt Service Routine, (though that is not required). It therefore includes code which
+        makes it simple to use from within a 'Naked' ISR, avoiding the cost of saving and restoring
+        all the cpu registers.
 
         Such an ISR may resemble the following example...
 
-            ISR(TIMER2_COMPA_vect, ISR_NAKED)
+            ISR(RTC_OVF_vect, ISR_NAKED)
             {
-                system_tick_i();
+                system_tick();
                 reti();
             }
     */
