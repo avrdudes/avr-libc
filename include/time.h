@@ -196,7 +196,7 @@ extern          "C" {
     This implementation handles all conversions specified by the standard, with the exception of g, G, V, and Z.
     Conversions not implemented are replaced in the output text with the character '?'
 
-    All conversions are made in the 'C Locale', ignoring the E or O modifiers.
+    All conversions are made using the 'C Locale', ignoring the E or O modifiers.
     */
     size_t          strftime(char *s, size_t maxsize, const char *format, const struct tm * timeptr);
 
@@ -227,9 +227,29 @@ extern          "C" {
     void            set_zone(int32_t);
 
     /**
-        Set the system time. The values of tmptr are interpreted as Local Standard Time.
+        Initialize the system time. Examples are...
+
+        From a Clock / Calendar type RTC:
+        \code
+        struct tm rtc_time;
+
+        read_rtc(&rtc_time);
+        rtc_time.tm_isdst = 0;
+        set_system_time( mktime(&rtc_time) );
+        \endcode
+
+        From a Network Time Protocol time stamp:
+        \code
+        set_system_time(ntp_timestamp - NTP_OFFSET);
+        \endcode
+
+        From a UNIX time stamp:
+         \code
+        set_system_time(ntp_timestamp - UNIX_OFFSET);
+        \endcode
+
     */
-    void            set_system_time(struct tm * tmptr);
+    void            set_system_time(time_t timestamp);
 
     /**
         Maintain the system time by calling this function at a rate of 1 Hertz.

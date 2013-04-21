@@ -47,8 +47,7 @@ struct tm calendar;
     if(t != tt ) return (__LINE__);
 
     t = 0xffffffff;
-    gmtime_r(&t, &calendar);
-    set_system_time(&calendar);
+    set_system_time(t);
 
     t++;
     system_tick();

@@ -39,17 +39,15 @@
 extern volatile time_t __system_time;
 
 void
-set_system_time(struct tm * tmptr)
+set_system_time(time_t timestamp)
 {
-	time_t          t;
 
-	t = mktime(tmptr);
 	asm             volatile(
 			                   "in __tmp_reg__, __SREG__" "\n\t"
 				                 "cli" "\n\t"
 				 ::
 	);
-	__system_time = t;
+	__system_time = timestamp;
 	asm             volatile(
 			                  "out __SREG__, __tmp_reg__" "\n\t"
 				 ::
