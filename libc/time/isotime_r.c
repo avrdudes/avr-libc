@@ -35,17 +35,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void
-__printem(int i, char *buffer, char s)
-{
-    div_t result;
-
-    result = div(i, 10);
-
-	*buffer++ = result.quot + '0';
-	*buffer++ = result.rem + '0';
-	*buffer = s;
-}
+extern void __print_lz(int , char *, char );
 
 void
 isotime_r(struct tm * tmptr, char *buffer)
@@ -53,28 +43,28 @@ isotime_r(struct tm * tmptr, char *buffer)
 	int             i;
 
 	i = tmptr->tm_year + 1900;
-	__printem(i/100, buffer, '-');
+	__print_lz(i/100, buffer, '-');
 	buffer+=2;
-	__printem(i%100, buffer,'-');
+	__print_lz(i%100, buffer,'-');
 	buffer+=3;
 
 	i = tmptr->tm_mon + 1;
-	__printem(i, buffer,'-');
+	__print_lz(i, buffer,'-');
 	buffer+=3;
 
 	i = tmptr->tm_mday;
-	__printem(i, buffer,' ');
+	__print_lz(i, buffer,' ');
 	buffer+=3;
 
 	i = tmptr->tm_hour;
-	__printem(i, buffer,':');
+	__print_lz(i, buffer,':');
 	buffer+=3;
 
 	i = tmptr->tm_min;
-	__printem(i, buffer,':');
+	__print_lz(i, buffer,':');
 	buffer+=3;
 
 	i = tmptr->tm_sec;
-	__printem(i, buffer,0);
+	__print_lz(i, buffer,0);
 
 }

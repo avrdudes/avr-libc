@@ -28,55 +28,18 @@
 
 /* $Id$ */
 
-/*
-	Re-entrant version of asctime().
+/* print 2 digit integer with leading zero: auxillary function for isotime and asctime */
 
-*/
-#include <time.h>
 #include <stdlib.h>
 
-#ifdef __MEMX
-const __memx char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-const __memx char ascdays[] = "SunMonTueWedThuFriSat";
-#else
-const char      ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-const char      ascdays[] = "SunMonTueWedThuFriSat";
-#endif
-
-extern void __print_lz(int , char *, char );
-
 void
-asctime_r(const struct tm * timeptr, char *buffer)
+__print_lz(int i, char *buffer, char s)
 {
-	unsigned char   i, m, d;
-	div_t result;
+    div_t result;
 
-	d = timeptr->tm_wday * 3;
-	m = timeptr->tm_mon * 3;
-	for (i = 0; i < 3; i++) {
-	    buffer[i] = ascdays[d++];
-	    buffer[i+4] = ascmonths[m++];
-	}
-	buffer[3]=buffer[7]=' ';
-	buffer += 8;
+    result = div(i, 10);
 
-	__print_lz(timeptr->tm_mday,buffer,' ');
-	buffer += 3;
-
-	__print_lz(timeptr->tm_hour,buffer,':');
-	buffer += 3;
-
-	__print_lz(timeptr->tm_min,buffer,':');
-	buffer += 3;
-
-	__print_lz(timeptr->tm_sec,buffer,' ');
-	buffer += 3;
-
-	result = div(timeptr->tm_year + 1900 , 100);
-
-	__print_lz(result.quot,buffer,' ');
-	buffer += 2;
-
-	__print_lz(result.rem,buffer,0);
-
+	*buffer++ = result.quot + '0';
+	*buffer++ = result.rem + '0';
+	*buffer = s;
 }
