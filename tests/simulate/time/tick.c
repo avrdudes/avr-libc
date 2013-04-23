@@ -37,7 +37,6 @@
 
 int main(){
 time_t t, tt;
-struct tm calendar;
 
     time(&t);
     system_tick();
