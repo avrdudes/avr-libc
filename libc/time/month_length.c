@@ -38,7 +38,11 @@
 uint8_t
 month_length(int year, uint8_t month)
 {
-    if (month == 2) return 28 + is_leap_year(year);
+    if (month == 2)
+        return 28 + is_leap_year(year);
 
-    return 30 + ((month + month / 8) & 1);
+    /* 'knuckles' algorithm */
+    if (month > 7)
+        month++;
+    return 30 + (month & 1);
 }
