@@ -39,20 +39,24 @@
 #include <time.h>
 
 uint8_t
-week_of_month(const struct tm * calendar, uint8_t base)
+week_of_month(const struct tm * timestruct, uint8_t base)
 {
-	int             w;
+	int             first, n;
 
 	/* zero base the day of month */
-	w = calendar->tm_mday - 1;
+	n = timestruct->tm_mday - 1;
 
-	/* find most recent base day */
-	w = w - calendar->tm_wday + base;
+	/* find the first base day of the month (start of week 1) */
+	first = 7 + n - timestruct->tm_wday + base;
+	first %= 7;
+
+	/* find days since the first week began */
+	n = n - first;
 
 	/* if negative, we are in week 0 */
-	if (w < 0)
+	if (n < 0)
 		return 0;
 
-	return w / 7 + 1;
+	return n / 7 + 1;
 
 }

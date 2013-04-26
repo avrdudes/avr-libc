@@ -39,16 +39,20 @@
 #include <time.h>
 
 uint8_t
-week_of_year(const struct tm * timeptr, uint8_t base)
+week_of_year(const struct tm * timestruct, uint8_t base)
 {
-	int             w;
+	int             first, n;
 
-	/* find most recent base day */
-	w = timeptr->tm_yday - timeptr->tm_wday + base;
+	/* find the first base day of the year (start of week 1) */
+	first = 7 + timestruct->tm_yday - timestruct->tm_wday + base;
+    first %= 7;
+
+	/* find days since that first base day*/
+	n = timestruct->tm_yday - first;
 
 	/* if negative, we are in week 0 */
-	if (w < 0)
+	if (n < 0)
 		return 0;
 
-	return w / 7 + 1;
+	return n / 7 + 1;
 }
