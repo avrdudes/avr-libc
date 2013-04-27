@@ -158,6 +158,24 @@ strftime(char *buffer, size_t limit, const char *pattern, const struct tm * time
                     );
                 break;
 
+            case ('g'):
+			case ('G'):
+				d = timeptr->tm_year + 1900;
+				w = iso_weeknum(timeptr);
+				if (w == 0)
+					d--;
+				if (w == 54)
+					d++;
+
+				if (c == 'g') {
+					d %= 100;
+					length = sprintf(_store, "%.2d", d);
+				} else {
+					length = sprintf(_store, "%.4d", d);
+				}
+
+				break;
+
             case ('H'):
                 length = sprintf(_store, "%.2u", timeptr->tm_hour);
                 break;
@@ -238,6 +256,15 @@ strftime(char *buffer, size_t limit, const char *pattern, const struct tm * time
             case ('U'):
                 length = sprintf(_store, "%.2u", week_of_year(timeptr, 0));
                 break;
+
+			case ('V'):
+				w = iso_weeknum(timeptr);
+				if (w == 0)
+					w = 53;
+				if (w == 54)
+					w = 1;
+				length = sprintf(_store, "%.2u", w);
+				break;
 
             case ('w'):
                 length = sprintf(_store, "%u", timeptr->tm_wday);
