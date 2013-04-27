@@ -35,13 +35,65 @@
     <h3>Introduction to the Time functions</h3>
     This file declares the time functions implemented in \c avr-libc.
 
-    The implementation attempts to conform to ISO/IEC 9899 (C90). However, since there is no
-    platform standard method to obtain the current time, time zone, or daylight savings
-    'rules', the application must initialize the time system with this information.
-    The functions set_zone(), set_dst(), and set_system_time() are provided for this intialization.
+    The implementation aspires to conform with ISO/IEC 9899 (C90). However, due to limitations of the
+    target processor and the nature of its development environment, a practical implementation must
+    of necessity deviate from the standard.
 
-    Once initialized, system time may be maintained by calling system_tick() at one
-    second intervals.
+
+
+    Section 7.23.2.1 clock()
+    The type clock_t, the macro CLOCKS_PER_SEC, and the function clock() are not implemented. We
+    consider these items belong to operating system code, or to application code when no operating
+    system is present.
+
+    Section 7.23.2.3 mktime()
+    The standard specifies that mktime() should return (time_t) -1, if the time cannot be represented.
+    This implementation always returns a 'best effort' representation.
+
+    Section 7.23.2.4 time()
+    The standard specifies that time() should return (time_t) -1, if the time is not available.
+    Since the application must initialize the time system, this functionality is not implemented.
+
+    Section 7.23.2.2, difftime()
+    Due to the lack of a 64 bit double, the function difftime() returns a long integer. In most cases
+    this change will be invisible to the user, handled automatically by the compiler.
+
+    Section 7.23.1.4 struct tm
+    Per the standard, struct tm->tm_isdst is greater than zero when Daylight Saving time is in effect.
+    This implementation further specifies that, when positive, the value of tm_isdst represents
+    the amount time is advanced during Daylight Saving time.
+
+    Section 7.23.3.5 strftime()
+    Only the 'C' locale is supported, therefore the modifiers 'E' and 'O' are ignored.
+    The 'Z' conversion is also ignored, due to the lack of time zone name.
+
+    In addition to the above departures from the standard, there are some behaviors which are different
+    from what is often expected, though allowed under the standard.
+
+    There is no 'platform standard' method to obtain the current time, time zone, or
+    daylight savings 'rules' in the AVR environment. Therefore the application must initialize
+    the time system with this information. The functions set_zone(), set_dst(), and
+    set_system_time() are provided for initialization. Once initialized, system time is maintained by
+    calling the function system_tick() at one second intervals.
+
+    Though not specified in the standard, it is often expected that time_t is a signed integer
+    representing an offset in seconds from Midnight Jan 1 1970... i.e. 'Unix time'. This implementation
+    uses an unsigned 32 bit integer offset from Midnight Jan 1 2000. The use of this 'epoch' helps to
+    simplify the conversion functions, while the 32 bit value allows time to be properly represented
+    until Tue Feb 7 06:28:15 2136 UTC. The macros UNIX_OFFSET and NTP_OFFSET are defined to assist in
+    converting to and from Unix and NTP time stamps.
+
+    Unlike desktop counterparts, it is impractical to implement or maintain the 'zoneinfo' database.
+    Therefore no attempt is made to account for time zone, daylight saving, or leap seconds in past dates.
+    All calculations are made according to the currently configured time zone and daylight saving 'rule'.
+
+    In addition to C standard functions, re-entrant versions of ctime(), asctime(), gmtime() and
+    localtime() are provided which, in addition to being re-entrant, have the property of claiming
+    less permanent storage in RAM. An additional time conversion, isotime() and its re-entrant version,
+    uses far less storage than either ctime() or asctime().
+
+    Along with the usual smattering of utility functions, such as is_leap_year(), this library includes
+    a set of functions related the sun and moon, as well as sidereal time functions.
 */
 
 #ifndef TIME_H
@@ -59,7 +111,7 @@ extern          "C" {
 
     /**
         time_t represents seconds elapsed from Midnight, Jan 1 2000 UTC (the Y2K 'epoch').
-        Its range allows time to be handled properly up to Tue Feb 7 06:28:15 2136.
+        Its range allows this implementation to represent time up to Tue Feb 7 06:28:15 2136 UTC.
     */
     typedef uint32_t time_t;
 
@@ -67,7 +119,7 @@ extern          "C" {
     The time function returns the systems current time stamp.
     If timer is not a null pointer, the return value is also assigned to the object it points to.
     */
-    time_t          time(time_t *);
+    time_t          time(time_t *timer);
 
     /**
     The difftime function returns the difference between two binary time stamps,
@@ -77,62 +129,67 @@ extern          "C" {
 
 
     /**
-        The tm structure contains a representation of time 'broken down' into its components.
+        The tm structure contains a representation of time 'broken down' into components of the
+        Gregorian calendar.
+
         The normal ranges of the elements are..
 
     \code
-        tm_sec      seconds after the minute - [0, 60]
-        tm_min      minutes after the hour - [0, 59]
-        tm_hour     hours since midnight - [0, 23]
-        tm_mday     day of the month - [1, 31]
-        tm_wday     days since Sunday - [0, 6]
-        tm_mon      months since January - [0, 11]
+        tm_sec      seconds after the minute - [ 0 to 59 ]
+        tm_min      minutes after the hour - [ 0 to 59 ]
+        tm_hour     hours since midnight - [ 0 to 23 ]
+        tm_mday     day of the month - [ 1 to 31 ]
+        tm_wday     days since Sunday - [ 0 to 6 ]
+        tm_mon      months since January - [ 0 to 11 ]
         tm_year     years since 1900
-        tm_yday     days since January 1 - [0, 365]
-        tm_isdst    Daylight Saving Time flag
+        tm_yday     days since January 1 - [ 0 to 365 ]
+        tm_isdst    Daylight Saving Time flag *
 
     \endcode
 
-        The value of tm_isdst is zero if Daylight Saving Time is not in effect,
-        negative if the information is not available.
-        If Daylight Saving Time is in effect, the value represents the number of
+        *The value of tm_isdst is zero if Daylight Saving Time is not in effect, and is negative if
+        the information is not available.
+
+        When Daylight Saving Time is in effect, the value represents the number of
         seconds the clock is advanced.
+
+        See the set_dst() function for more information about Daylight Saving.
 
     */
     struct tm {
-        int8_t          tm_sec; /* seconds after the minute - [0, 60]      */
-        int8_t          tm_min; /* minutes after the hour - [0, 59]        */
-        int8_t          tm_hour;    /* hours since midnight - [0,
-                         * 23]          */
-        int8_t          tm_mday;    /* day of the month - [1, 31]              */
-        int8_t          tm_wday;    /* days since Sunday - [0, 6]              */
-        int8_t          tm_mon; /* months since January - [0, 11]          */
-        int16_t         tm_year;    /* years since 1900                        */
-        int16_t         tm_yday;    /* days since January 1 - [0,
-                         * 365]         */
-        int16_t         tm_isdst;   /* Daylight Saving Time flag               */
+        int8_t          tm_sec;
+        int8_t          tm_min;
+        int8_t          tm_hour;
+        int8_t          tm_mday;
+        int8_t          tm_wday;
+        int8_t          tm_mon;
+        int16_t         tm_year;
+        int16_t         tm_yday;
+        int16_t         tm_isdst;
     };
 
 
     /**
-    This function 'compiles' broken-down time, returning a time stamp.
+    This function 'compiles' the elements of a broken-down time structure, returning a binary time stamp.
     The elements of timeptr are interpreted as representing Local Time.
 
     The original values of the tm_wday and tm_yday elements of the structure are ignored,
-    and the original values of the other elements are not restricted.
+    and the original values of the other elements are not restricted to the ranges stated for struct tm.
 
-    On successful completion, the values of all elements of the structure are set to their appropriate ranges.
+    On successful completion, the values of all elements of timeptr are set to the appropriate range.
     */
     time_t          mktime(struct tm * timeptr);
 
     /**
-    This function 'compiles' broken-down time, returning a time stamp.
+    This function 'compiles' the elements of a broken-down time structure, returning a binary time stamp.
     The elements of timeptr are interpreted as representing UTC.
 
     The original values of the tm_wday and tm_yday elements of the structure are ignored,
-    and the original values of the other elements are not restricted.
+    and the original values of the other elements are not restricted to the ranges stated for struct tm.
+
+    Unlike mktime(), this function DOES NOT modify the elements of timeptr.
     */
-    time_t          mk_gmtime(struct tm * timeptr);
+    time_t          mk_gmtime(const struct tm * timeptr);
 
     /**
     The gmtime function converts the time stamp pointed to by timer into broken-down time,
@@ -182,21 +239,19 @@ extern          "C" {
     The isotime function constructs an ascii string in the form
         \code2013-03-23 01:03:52\endcode
     */
-    char           *isotime(struct tm * tmptr);
+    char           *isotime(const struct tm * tmptr);
 
     /**
         Re entrant version of isotime()
     */
-    void            isotime_r(struct tm *, char *);
+    void            isotime_r(const struct tm *, char *);
 
     /**
     A complete description of strftime() is beyond the pale of this document.
     Refer to ISO/IEC document 9899 for details.
 
-    This implementation handles all conversions specified by the standard, with the exception of g, G, V, and Z.
-    Conversions not implemented are replaced in the output text with the character '?'
-
-    All conversions are made using the 'C Locale', ignoring the E or O modifiers.
+    All conversions are made using the 'C Locale', ignoring the E or O modifiers. Due to the lack of
+    a time zone 'name', the 'Z' conversion is also ignored.
     */
     size_t          strftime(char *s, size_t maxsize, const char *format, const struct tm * timeptr);
 
@@ -245,7 +300,7 @@ extern          "C" {
 
         From a UNIX time stamp:
          \code
-        set_system_time(ntp_timestamp - UNIX_OFFSET);
+        set_system_time(unix_timestamp - UNIX_OFFSET);
         \endcode
 
     */
@@ -260,12 +315,13 @@ extern          "C" {
         all the cpu registers.
 
         Such an ISR may resemble the following example...
-
+        \code
             ISR(RTC_OVF_vect, ISR_NAKED)
             {
                 system_tick();
                 reti();
             }
+        \endcode
     */
     void            system_tick(void);
 
@@ -311,10 +367,19 @@ extern          "C" {
     uint8_t         month_length(int16_t year, uint8_t month);
 
     /**
-        Return the calendar week of year, where the first week is considered to begin on the
+        Return the calendar week of year, where week 1 is considered to begin on the
         day of week specified by 'start'. The returned value may range from zero to 52.
     */
     uint8_t         week_of_year(const struct tm * timeptr, uint8_t start);
+
+    /**
+        Return the ISO 8601 week of year. Returned values are...
+
+            0 : The final week of the previous year.
+            1 ... 53 : The week number in the current year.
+            54 : The first week of the following year.
+    */
+    uint8_t         iso_week(const struct tm * timeptr, uint8_t start);
 
     /**
         Return the calendar week of month, where the first week is considered to begin on the
@@ -325,7 +390,7 @@ extern          "C" {
     /**
         Convert a Y2K time stamp into a FAT file system time stamp.
     */
-    uint32_t        fatfs_time(struct tm * timeptr);
+    uint32_t        fatfs_time(const struct tm * timeptr);
 
     /** One hour, expressed in seconds */
 #define ONE_HOUR 3600
@@ -379,42 +444,42 @@ extern          "C" {
         Computes the difference between apparent solar time and mean solar time.
         The returned value is in seconds.
     */
-    int16_t         equation_of_time(time_t * timer);
+    int16_t         equation_of_time(const time_t * timer);
 
     /**
         Computes the amount of time the sun is above the horizon, at the location of the observer.
 
-        NOTE: At observer locations inside the polar circles, this value can be zero during the winter,
+        NOTE: At observer locations inside a polar circle, this value can be zero during the winter,
         and can exceed ONE_DAY during the summer.
 
         The returned value is in seconds.
     */
-    int32_t         daylight_seconds(time_t * timer);
+    int32_t         daylight_seconds(const time_t * timer);
 
     /**
         Computes the time of solar noon, at the location of the observer.
     */
-    time_t          solar_noon(time_t * timer);
+    time_t          solar_noon(const time_t * timer);
 
     /**
         Return the time of sunrise, at the location of the observer. See the note about daylight_seconds().
     */
-    time_t          sun_rise(time_t * timer);
+    time_t          sun_rise(const time_t * timer);
 
     /**
         Return the time of sunset, at the location of the observer. See the note about daylight_seconds().
     */
-    time_t          sun_set(time_t * timer);
+    time_t          sun_set(const time_t * timer);
 
     /** Returns the declination of the sun in radians. */
-    double          solar_declination(time_t * timer);
+    double          solar_declination(const time_t * timer);
 
     /**
         Returns an approximation to the phase of the moon.
         The sign of the returned value indicates a waning or waxing phase.
         The magnitude of the returned value indicates the percentage illumination.
     */
-    int8_t          moon_phase(time_t * timer);
+    int8_t          moon_phase(const time_t * timer);
 
     /**
         Returns Greenwich Mean Sidereal Time, as seconds into the sidereal day.
