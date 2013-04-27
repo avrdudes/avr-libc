@@ -37,7 +37,7 @@
 extern char    *__asc_store;
 
 char           *
-isotime(struct tm * tmptr)
+isotime(const struct tm * tmptr)
 {
 	isotime_r(tmptr, __asc_store);
 	return __asc_store;

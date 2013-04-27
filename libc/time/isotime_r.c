@@ -38,7 +38,7 @@
 extern void __print_lz(int , char *, char );
 
 void
-isotime_r(struct tm * tmptr, char *buffer)
+isotime_r(const struct tm * tmptr, char *buffer)
 {
 	int             i;
 

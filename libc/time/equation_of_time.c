@@ -38,7 +38,7 @@
 #include "ephemera_common.h"
 
 int
-equation_of_time(time_t * timer)
+equation_of_time(const time_t * timer)
 {
     int32_t         s, p;
     double          pf, sf, dV;

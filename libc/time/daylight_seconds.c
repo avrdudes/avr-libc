@@ -39,7 +39,7 @@
 extern long     __latitude;
 
 long
-daylight_seconds(time_t * timer)
+daylight_seconds(const time_t * timer)
 {
     double          l, d;
     long            n;

@@ -35,7 +35,7 @@
 #include <time.h>
 
 time_t
-sun_rise(time_t * timer)
+sun_rise(const time_t * timer)
 {
     long            n;
     time_t          t;

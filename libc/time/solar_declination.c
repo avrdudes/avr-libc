@@ -35,7 +35,7 @@
 #define LAG 38520
 
 double
-solar_declination(time_t * timer)
+solar_declination(const time_t * timer)
 {
 
     uint32_t        fT, oV;

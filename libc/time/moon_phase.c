@@ -34,9 +34,10 @@
 */
 
 #include <time.h>
+#include <math.h>
 
 int8_t
-moon_phase(time_t * timestamp)
+moon_phase(const time_t * timestamp)
 {
 	uint32_t        t;
 	int32_t         n;

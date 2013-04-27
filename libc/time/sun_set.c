@@ -35,7 +35,7 @@
 #include <time.h>
 
 time_t
-sun_set(time_t * timer)
+sun_set(const time_t * timer)
 {
     long            n;
     time_t          t;

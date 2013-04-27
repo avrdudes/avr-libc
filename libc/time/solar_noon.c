@@ -37,7 +37,7 @@
 extern long     __longitude;
 
 time_t
-solar_noon(time_t * timer)
+solar_noon(const time_t * timer)
 {
     time_t          t;
     long            n;

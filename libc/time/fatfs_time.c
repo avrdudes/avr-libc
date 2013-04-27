@@ -35,7 +35,7 @@
 #include <time.h>
 
 uint32_t
-fat_time(struct tm * timeptr)
+fat_time(const struct tm * timeptr)
 {
 	uint32_t        ret;
 	uint32_t        n;
