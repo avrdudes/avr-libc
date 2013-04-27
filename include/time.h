@@ -379,7 +379,7 @@ extern          "C" {
             1 ... 53 : The week number in the current year.
             54 : The first week of the following year.
     */
-    uint8_t         iso_week(const struct tm * timeptr, uint8_t start);
+    uint8_t         iso_weeknum(const struct tm * timeptr, uint8_t start);
 
     /**
         Return the calendar week of month, where the first week is considered to begin on the
