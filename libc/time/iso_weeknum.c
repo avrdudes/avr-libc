@@ -28,27 +28,40 @@
 
 /* $Id$ */
 
-/* Compute the ISO 8601 week number of the year. */
+/*
+    Compute the ISO 8601 week number of the year.
+    We return 0 if the week is the final one of the previous year.
+    We return 54 if the week is the first week of the following year.
+    Otherwise we return week numbers 1 to 53
+*/
 
 #include <time.h>
 
 uint8_t
 iso_weeknum(const struct tm * timestruct)
 {
-	int             d, w;
+    int             d, w;
 
-	d = timestruct->tm_wday;
-	if (d == 0)
-		d = 7;
-	w = timestruct->tm_yday + 11 - d;
-	w /= 7;
-	if (w == 53) {
-		/* week 53 must include its thursday in the same year */
-		d = timestruct->tm_mday - 1;
-		d -= timestruct->tm_wday;
-		d += THURSDAY;
-		if (d > 30)
-			w++;	/* signal first week of the following year */
-	}
-	return w;
+    /* convert to a MONDAY based week */
+    d = timestruct->tm_wday;
+    if (d == 0)
+        d = 7;
+
+    /* compute tentative ISO 8601 week number */
+    w = timestruct->tm_yday + 11 - d;
+    w /= 7;
+
+    /*
+     * handle the special case where week 53 may actually be week 1 of
+     * the following year
+     */
+    if (w == 53) {
+        /* week 53 must include its thursday in the same year */
+        d = timestruct->tm_mday - 1;
+        d -= timestruct->tm_wday;
+        d += THURSDAY;
+        if (d > 30)
+            w++;    /* signal first week of the following year */
+    }
+    return w;
 }

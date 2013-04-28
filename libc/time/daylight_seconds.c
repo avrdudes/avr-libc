@@ -29,8 +29,9 @@
 /* $Id$ */
 
 /*
-    Determine the amount of time the sun is above the horizon. At high latitudes, this can be zero,
-    or >= ONE_DAY.
+    Determine the amount of time the sun is above the horizon. At high latitudes, around the
+    solstices, this can be zero or greater than ONE_DAY.
+
 */
 
 #include <time.h>
@@ -49,17 +50,20 @@ daylight_seconds(const time_t * timer)
 
     d = -solar_declination(timer);
 
+    /* partial 'Sunrise Equation' */
     d = tan(l) * tan(d);
 
-    /* d may exceed a magnitude of 1.0 at high latitudes */
+    /* magnitude of d may exceed 1.0 at near solstices */
     if (d > 1.0)
         d = 1.0;
 
     if (d < -1.0)
         d = -1.0;
 
+    /* derive hour angle */
     d = acos(d);
 
+    /* but for atmospheric refraction, this would be d /= M_PI */
     d /= 3.112505;
 
     n = ONE_DAY * d;

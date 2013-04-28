@@ -31,6 +31,19 @@
 /*
     The so called Equation of Time.
 
+    The eccentricity of Earths orbit contributes about 7.7 minutes of variation to the result. It
+    has a period of 1 anomalous year, with zeroes at perihelion and aphelion.
+
+    The tilt of Earths rotational axis (obliquity) contributes about 9.9 minutes of variation. It
+    has a period of 1/2 tropical year, with zeroes at solstices and equinoxes. The time of Earths
+    arrival at these events is influenced by the eccentricity, which causes it to progress along its
+    orbital path faster as it approaches perihelion, imposing a 'modulation' on the tropical phase.
+
+    The algorithm employed computes the orbital position with respect to perihelion, deriving
+    from that a 'velocity correction factor'. The orbital position with respect to the winter solstice
+    is then computed, as modulated by that factor. The individual contributions of the obliquity and the
+    eccentricity components are then summed, and returned as an integer value in seconds.
+
 */
 
 #include <time.h>
@@ -58,14 +71,15 @@ equation_of_time(const time_t * timer)
     s += SOLSTICE;
     s *= 2;
     sf = s;
-
     sf /= TROP_CYCLE;
+
+    /* modulate to derive actual position */
     sf += dV;
-
     sf = sin(sf);
-    pf *= 459.6;
-    sf *= 592.2;
 
+    /* compute contributions */
+    sf *= 592.2;
+    pf *= 459.6;
     s = pf + sf;
     return -s;
 

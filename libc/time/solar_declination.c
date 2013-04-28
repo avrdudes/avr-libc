@@ -28,6 +28,18 @@
 
 /* $Id$ */
 
+/*
+    Were it not for the eccentricity of Earths orbit, this would be a trivial function.
+
+    We compute the Earths orbital position with respect to perihelion, from which we derive a
+    'velocity correction factor'. We then compute the orbital angle with respect to the
+    December solstice, as 'modulated' by that correction factor.
+
+    Due to the accumulation of rounding errors, the computed December solstice of 2135 will lag
+    the actual solstice by many hours. A fudge factor, 'LAG', distributes the error across
+    the 136 year range of this library.
+*/
+
 #include <time.h>
 #include <math.h>
 #include "ephemera_common.h"
@@ -41,28 +53,25 @@ solar_declination(const time_t * timer)
     uint32_t        fT, oV;
     double          dV, dT;
 
-    /*
-     * Determine approximate orbital angle, relative to the winter
-     * solstice
-     */
-    fT = *timer % TROP_YEAR;
-    fT += SOLSTICE;
-    fT += LAG;
-    dT = fT;
-    dT /= TROP_CYCLE;
-
-    /* Determine approximate orbital angle, relative to perihelion */
+    /* Determine orbital angle relative to perihelion of January 1999 */
     oV = *timer % ANOM_YEAR;
     oV += PERIHELION;
     dV = oV;
     dV /= ANOM_CYCLE;
 
-    /* Derive a velocity correction factor from the perihelion angle */
+    /* Derive velocity correction factor from the perihelion angle */
     dV = sin(dV);
     dV *= DELTA_V;
 
-    /* compute declination */
-    dT = cos(dT + dV) * INCLINATION;
+    /* Determine orbital angle relative to solstice of December 1999 */
+    fT = *timer % TROP_YEAR;
+    fT += SOLSTICE + LAG;
+    dT = fT;
+    dT /= TROP_CYCLE;
+    dT += dV;
+
+    /* Finally having the solstice angle, we can compute the declination */
+    dT = cos(dT) * INCLINATION;
 
     return -dT;
 }
