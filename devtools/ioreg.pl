@@ -439,7 +439,8 @@ sub HELPMESSAGE(){
     print STDERR "$0 version: $VERSION Copyright (c) by Knut Schwichtenberg\n";
     print STDERR "Usage: $0\ [switches] AVR_XML_file\n";
     print STDERR "   -h This message\n";
-    print STDERR "   -v Version\n";
+    print STDERR "   -V Version\n";
+    print STDERR "   -v Verbose\n";
     print STDERR "   -x path to saxon9\n";
     print STDERR "   -o output file otherwise STDOUT \n";
 }
@@ -448,7 +449,7 @@ sub HELPMESSAGE(){
 # Handle the command line
 
 #$Getopt::Std::STANDARD_HELP_VERSION=1;
-$options = 'hVvx:c:o:';
+$options = 'hVvx:o:';
 getopts( $options, \%opts );
 if( defined $opts{'h'} ){
     HELPMESSAGE();
@@ -541,5 +542,80 @@ foreach $OneRegister (@allRegister) {
 }
 print $trailer;
 close;
-
 __END__
+=head1 NAME
+
+ioreg.pl  - Create debug information from Atmel XML files for IO-Ports and EEProm
+
+=head1 SYNOPSIS
+
+	perl ioreg.pl xxxxx.XML   
+
+=head1 DESCRIPTION
+
+Using GDB and AVaRICE to debug AVR code requies to know the addresses of
+IO registers! The GDB command "x PORTA" leads to an unkonwn address
+error. Beginning with Atmel Studio 5 well formed XML file are deliverd 
+as part of the installation. This script converts these XML-files using a 
+stylesheet into dwarf-2 debug information. To prevent Atmel's debugger from
+crashing only dwarf-2 can be used, while GDB could use debug information
+up to dwarf-4. Similar to the handling of the IO-addresses the eeprom
+start address can be accessed by the lable __eeprom.  Its type is an CPU 
+speficfic array of uint8_t.
+
+This debug information is added to the device specific start-up code of 
+avr-libc and now allows debugging symbolic 
+names. 
+It is possible to use dwarf-4 debug information for the 
+application and mix it with dwarf-2 of the start-up code.
+
+=head1 Preconditions
+
+This script relies on
+
+=over 3
+
+=item *
+Atmel's AVR XML files
+
+=item *
+Stylesheet file named "findreg.xsl". It has to be located in the same directory as ioreg.pl 
+
+=item *
+XSLT processor, either xsltproc or saxon9
+
+=back
+
+If xsltproc is used, it must be in the PATH. Using saxon9 gives a runtime warning which can be ignored.
+
+=head1 Command line parameter
+
+The following command line parameter are supported
+
+=over 5
+
+=item h
+
+Print the help infomation to STDERR
+
+=item V
+
+Print the version information to STDERR
+
+=item v
+
+Print verbose information to STDERR
+
+=item x
+
+Sets the path to saxon9. Default: /usr/share/java
+
+=item o
+
+Set the output file otherwise STDOUT is used 
+
+=back
+
+=head1 Authors
+
+Knut Schwichtenberg / Joerg Wunsch

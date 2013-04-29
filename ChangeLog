@@ -1,5 +1,10 @@
 2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Contributed by Knut Schwichtenberg:
+	* devtools/ioreg.pl: Add POD (plain old documentation).
+
+2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac (--with-debug-info): New option.
 	* devtools/Device.am: Replace hard-coded debug information
 	options by CDEBUG or ASDEBUG, respectively.
