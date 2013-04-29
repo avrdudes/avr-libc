@@ -1,5 +1,13 @@
 2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac (--with-debug-info): New option.
+	* devtools/Device.am: Replace hard-coded debug information
+	options by CDEBUG or ASDEBUG, respectively.
+	* devtools/Architecture.am: (Dito.)
+	* doc/api/tools-install.dox: Document the new option here, too.
+
+2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* devtools/findreg.xsl: Dig up EEPROM data, too.
 	* devtools/ioreg.pl: Add EEPROM DWARF-2 template.
 

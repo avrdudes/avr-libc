@@ -47,9 +47,9 @@ endif	# <<dev>>
 
 AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include -I$(top_builddir)/include
 
-AVRLIB_CFLAGS = -g -Wall -W -Wstrict-prototypes -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_CFLAGS)
+AVRLIB_CFLAGS = @CDEBUG@ -Wall -W -Wstrict-prototypes -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_CFLAGS)
 
-AVRLIB_ASFLAGS = -x assembler-with-cpp -Wa,-gstabs -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_ASFLAGS)
+AVRLIB_ASFLAGS = -x assembler-with-cpp @ASDEBUG@ -mmcu=$(AVR_TARGET) $(AVR_TARGET_DEFS) $(AVR_TARGET_ASFLAGS)
 
 AM_CFLAGS = $(AVRLIB_CFLAGS)
 AM_CCASFLAGS = $(AM_CPPFLAGS) $(AVRLIB_ASFLAGS)

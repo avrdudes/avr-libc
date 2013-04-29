@@ -30,8 +30,12 @@
     <inttypes.h>: SCNd8, SCNdLEAST8, SCNdFAST8, SCNi8, SCNiLEAST8,
     SCNiFAST8, SCNo8, SCNoLEAST8, SCNoFAST8, SCNu8, SCNuLEAST8,
     SCNuFAST8, SCNx8, SCNxLEAST8, SCNxFAST8
-    
+
   - Add time.h package, with 'ephemera'
+
+  - Introduce new configure option --with-debug-info=INFO, where INFO
+    can be either stabs, dwarf-2, or dwarf-4.  By default, no debug
+    information will be generated.
 
 *** Changes in avr-libc-1.8.0:
 

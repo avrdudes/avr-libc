@@ -261,6 +261,22 @@ $ make
 $ make install
 \endverbatim
 
+Optionally, generation of debug information can be requested with:
+
+\verbatim
+$ gunzip -c avr-libc-<version>.tar.gz | tar xf -
+$ cd avr-libc-<version>
+$ ./configure --prefix=$PREFIX --build=`./config.guess` --host=avr \
+  --with-debug-info=DEBUG_INFO
+$ make
+$ make install
+\endverbatim
+
+where \c DEBUG_INFO can be one of \c stabs, \c dwarf-2, or \c dwarf-4.
+
+The default is to not generate any debug information, which is
+suitable for binary distributions of avr-libc, where the user does not
+have the source code installed the debug information would refer to.
 
 \section install_avrprog AVRDUDE
 \addindex installation, avrprog
