@@ -6,6 +6,7 @@
 # to the gcrt1-file
 #
 # Created by Knut Schwichtenberg
+# DWARF-2 templates by Joerg Wunsch
 #
 # $Id$
 
@@ -36,14 +37,17 @@ use warnings;
 use Getopt::Std 'getopts';
 my $ContentTmplate;
 my $StaticContent;
+my $EepromTmplate;
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Static part of the DWARF file
 #
 $StaticContent = <<'EOST';
 #include <avr/version.h>
+#define DW_TAG_array_type               0x01
 #define DW_TAG_compile_unit             0x11
 #define DW_TAG_typedef                  0x16
+#define DW_TAG_subrange_type            0x21
 #define DW_TAG_base_type                0x24
 #define DW_TAG_variable                 0x34
 
@@ -69,6 +73,7 @@ $StaticContent = <<'EOST';
 #define DW_AT_stmt_list                 0x10
 #define DW_AT_language                  0x13
 #define DW_AT_producer                  0x25
+#define DW_AT_upper_bound               0x2f
 #define DW_AT_decl_file                 0x3a
 #define DW_AT_decl_line                 0x3b
 #define DW_AT_encoding                  0x3e
@@ -114,7 +119,8 @@ $StaticContent = <<'EOST';
 	.uleb128	DW_FORM_strp
 	.section	.debug_str
 .Lproducer:
-	.string		__AVR_LIBC_VERSION_STRING__
+	.ascii		"avr-libc "
+	.asciz		__AVR_LIBC_VERSION_STRING__
 	.section	.debug_info
 	.long		.Lproducer
 
@@ -131,7 +137,7 @@ $StaticContent = <<'EOST';
 	;; DIE #2: base type uint8_t
 	.section	.debug_info
 .Luint8_t:
-	.uleb128	2	; ref to abbrev 3
+	.uleb128	2	; ref to abbrev 2
 	.section	.debug_abbrev
 	.uleb128	2
 	.uleb128	DW_TAG_base_type
@@ -203,7 +209,7 @@ $ContentTmplate = <<'EODY';
 ;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	;; DIE #%No: variable %Reg
 	.section	.debug_info
-	.uleb128	%No	; ref to abbrev 4
+	.uleb128	%No	; ref to abbrev %No
 	.section	.debug_abbrev
 	.uleb128	%No
 	.uleb128	DW_TAG_variable
@@ -255,6 +261,107 @@ $ContentTmplate = <<'EODY';
 
 EODY
 
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+#
+$EepromTmplate = <<'EOEE';
+;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	;; DIE #%No1: EEPROM array base type: uint8_t
+	.section	.debug_info
+.Leeprom_t:
+	.uleb128	%No1	; ref to abbrev %No1
+	.section	.debug_abbrev
+	.uleb128	%No1
+	.uleb128	DW_TAG_array_type
+	.byte		DW_CHILDREN_yes
+
+	.uleb128	DW_AT_type
+	.uleb128	DW_FORM_ref4
+	.section	.debug_info
+	.long		.Luint8_t - .Lssinfo
+
+	.section	.debug_abbrev
+	.uleb128	0
+	.uleb128	0
+
+	;; DIE #%No2: EEPROM array subtype (index type/bounds): uint16_t
+	.section	.debug_info
+	.uleb128	%No2	; ref to abbrev %No2
+	.section	.debug_abbrev
+	.uleb128	%No2
+	.uleb128	DW_TAG_subrange_type
+	.byte		DW_CHILDREN_no
+
+	.uleb128	DW_AT_type
+	.uleb128	DW_FORM_ref4
+	.section	.debug_info
+	.long		.Luint16_t - .Lssinfo
+	.section	.debug_abbrev
+	.uleb128	DW_AT_upper_bound
+	.uleb128	DW_FORM_data2
+	.section	.debug_info
+	.word		%Eesize - 1
+	.section	.debug_abbrev
+	.uleb128	0
+	.uleb128	0
+
+	.section	.debug_info
+	.byte		0	; end of DIE #%No1 children
+
+	;; DIE #%No3: EEPROM array variable (name)
+	.section	.debug_info
+	.uleb128	%No3	; ref to abbrev %No3
+	.section	.debug_abbrev
+	.uleb128	%No3
+	.uleb128	DW_TAG_variable
+	.byte		DW_CHILDREN_no
+
+	.uleb128	DW_AT_name
+	.uleb128	DW_FORM_strp
+	.section	.debug_str
+.Lname%No3:
+	.string		"__eeprom"
+	.section	.debug_info
+	.long		.Lname%No3
+
+	.section	.debug_abbrev
+	.uleb128	DW_AT_decl_file
+	.uleb128	DW_FORM_data1
+	.section	.debug_info
+	.byte		0	; no source file information
+
+	.section	.debug_abbrev
+	.uleb128	DW_AT_decl_line
+	.uleb128	DW_FORM_data1
+	.section	.debug_info
+	.byte		0	; no source line information
+
+	.section	.debug_abbrev
+	.uleb128	DW_AT_type
+	.uleb128	DW_FORM_ref4
+	.section	.debug_info
+	.long		.Leeprom_t - .Lssinfo
+
+	.section	.debug_abbrev
+	.uleb128	DW_AT_external
+	.uleb128	DW_FORM_flag
+	.section	.debug_info
+	.byte		1
+
+	.section	.debug_abbrev
+	.uleb128	DW_AT_location
+	.uleb128	DW_FORM_block1
+	.section	.debug_info
+	.byte		5	; length of block
+	.byte		DW_OP_addr
+	.long		0x810000 + %Of
+
+	.section	.debug_abbrev
+	.uleb128	0
+	.uleb128	0
+
+EOEE
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # trailing part of the dwarf Info
@@ -357,7 +464,6 @@ $Filename = "ioreg_dyn.inc";
 #- - - - - - - - - - - - - - - - - - - -
 # use STDOUT as output file
 #
-$DynDIE=$ContentTmplate;
 print $StaticContent;  # Enter constants and DIE 1-3
 
 $DIE_No = 4;    # DIEs 1-3 are used by file, uint8_t, uint16_t
@@ -369,17 +475,34 @@ foreach $OneRegister (@allRegister) {
  chomp @RegisterParameter;
  @RegisterParameter = split /\s+/,$OneRegister; # Register, Base, Offset, Size
 
-#- - - - - - - - - - - - - - - - - - - -
-# Replace variables by register values
-#
- ($DynDIE = $ContentTmplate) =~ s/%Reg/$RegisterParameter[0]/g;
- $DynDIE =~ s/%No/$DIE_No/g;
- $RegisterParameter[3] *= 8; # This parameter is 1 -> uint8_t or 2
- $DynDIE =~ s/%Si/$RegisterParameter[3]/g;
- $DynDIE =~ s/%Ba/$RegisterParameter[1]/g;
- $DynDIE =~ s/%Of/$RegisterParameter[2]/g;
+ print STDERR "Adding entry for $RegisterParameter[0]\n" if $opts{'v'};
+
+ if ($RegisterParameter[0] eq "eeprom") {
+  # use EEPROM template
+  $DynDIE = $EepromTmplate;
+  $DynDIE =~ s/%No1/$DIE_No/g;
+  $DIE_No++;
+  $DynDIE =~ s/%No2/$DIE_No/g;
+  $DIE_No++;
+  $DynDIE =~ s/%No3/$DIE_No/g;
+  $DIE_No++;
+  $DynDIE =~ s/%Eesize/$RegisterParameter[3]/g;
+  $DynDIE =~ s/%Of/$RegisterParameter[2]/g;
+ } else {
+  # use IO register template
+
+  #- - - - - - - - - - - - - - - - - - - -
+  # Replace variables by register values
+  #
+  ($DynDIE = $ContentTmplate) =~ s/%Reg/$RegisterParameter[0]/g;
+  $DynDIE =~ s/%No/$DIE_No/g;
+  $RegisterParameter[3] *= 8; # This parameter is 1 -> uint8_t or 2
+  $DynDIE =~ s/%Si/$RegisterParameter[3]/g;
+  $DynDIE =~ s/%Ba/$RegisterParameter[1]/g;
+  $DynDIE =~ s/%Of/$RegisterParameter[2]/g;
+  $DIE_No++;
+ }
  print $DynDIE;
- $DIE_No++;
 }
 print $trailer;
 close;

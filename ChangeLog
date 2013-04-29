@@ -1,3 +1,8 @@
+2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* devtools/findreg.xsl: Dig up EEPROM data, too.
+	* devtools/ioreg.pl: Add EEPROM DWARF-2 template.
+
 2013-04-25 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* devtools/ioreg.pl: (New file.), contributed by Knut

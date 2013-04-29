@@ -41,6 +41,14 @@
 -->
     <xsl:output method="text"/>
 
+    <xsl:template match="//address-space[@name='eeprom']">
+	<xsl:value-of select="@name" />
+	<xsl:text>&#9;0&#9;</xsl:text>
+	<xsl:value-of select="@start" />
+	<xsl:text>&#9;</xsl:text>
+	<xsl:value-of select="@size" />
+	<xsl:text>&#10;</xsl:text>
+    </xsl:template>
     <!--
 	Pick all register-groups which are located in the
 	address-space named "data".  Lock and fuse bits are also
