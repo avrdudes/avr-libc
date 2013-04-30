@@ -1,5 +1,10 @@
 2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Contributed by Wouter van Gulik:
+	* devtools/ioreg.pl: Fix some typos in documentation.
+
+2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Contributed by Knut Schwichtenberg:
 	* devtools/ioreg.pl: Add POD (plain old documentation).
 

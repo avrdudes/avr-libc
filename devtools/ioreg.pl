@@ -553,15 +553,15 @@ ioreg.pl  - Create debug information from Atmel XML files for IO-Ports and EEPro
 
 =head1 DESCRIPTION
 
-Using GDB and AVaRICE to debug AVR code requies to know the addresses of
-IO registers! The GDB command "x PORTA" leads to an unkonwn address
+Using GDB and AVaRICE to debug AVR code requires to know the addresses of
+IO registers! The GDB command "x PORTA" leads to an unknown address
 error. Beginning with Atmel Studio 5 well formed XML file are deliverd 
 as part of the installation. This script converts these XML-files using a 
 stylesheet into dwarf-2 debug information. To prevent Atmel's debugger from
 crashing only dwarf-2 can be used, while GDB could use debug information
 up to dwarf-4. Similar to the handling of the IO-addresses the eeprom
-start address can be accessed by the lable __eeprom.  Its type is an CPU 
-speficfic array of uint8_t.
+start address can be accessed by the label __eeprom.  Its type is an CPU 
+specific array of uint8_t.
 
 This debug information is added to the device specific start-up code of 
 avr-libc and now allows debugging symbolic 
@@ -588,9 +588,9 @@ XSLT processor, either xsltproc or saxon9
 
 If xsltproc is used, it must be in the PATH. Using saxon9 gives a runtime warning which can be ignored.
 
-=head1 Command line parameter
+=head1 Command line parameters
 
-The following command line parameter are supported
+The following command line parameters are supported
 
 =over 5
 
