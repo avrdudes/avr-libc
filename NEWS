@@ -37,6 +37,9 @@
     can be either stabs, dwarf-2, or dwarf-4.  By default, no debug
     information will be generated.
 
+  - Add IO register debug symbols to crt*.o, so debuggers can see the
+    per-device defined IO registers (and __eeprom).
+
 *** Changes in avr-libc-1.8.0:
 
 * Bugs fixed:
