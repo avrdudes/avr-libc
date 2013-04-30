@@ -1059,6 +1059,7 @@ AC_CONFIG_FILES([
 	avr/lib/Makefile
 	common/Makefile
 	crt1/Makefile
+	crt1/iosym/Makefile
 	doc/Makefile
 	doc/api/Makefile
 	doc/examples/Makefile

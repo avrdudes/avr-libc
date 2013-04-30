@@ -27,4 +27,6 @@
 #
 
 EXTRA_DIST = gcrt1.S
+SUBDIRS = iosym
+DIST_SUBDIRS = iosym
 

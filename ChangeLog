@@ -1,12 +1,15 @@
 2013-04-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Add IO symbol definitions to crt*.o files:
+	* configure.ac: add crt1/iosym/Makefile to the build
 	* devtools/ioreg.pl: Emit a DIE for uint32_t if needed.
 	* devtools/generate_iosym.sh: New file.
 	* devtools/Device.am (AVRLIB_ASFLAGS): Pass name of iosym/*.S
 	include file as a -D option when compiling gcrt1.o.
 	* crt1/gcrt1.S: Include IOSYMFILE
+	* crt1/Makefile.am (SUBDIRS, DIST_SUBDIRS): add "iosym"
 	* crt1/iosym: New directory.
+	* crt1/iosym/Makefile.am: New file.
 	* crt1/iosym/template.S: Empty template to use for devices where
 	there is no actual IO symbol definition file.
 	* crt1/iosym/at43usb320.S: New file.
