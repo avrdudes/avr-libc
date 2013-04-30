@@ -264,7 +264,7 @@ strftime(char *buffer, size_t limit, const char *pattern, const struct tm * time
 					/* we need the week number of the final week of the previous year */
 					tm_temp.tm_year = timeptr->tm_year - 1;
 					tm_temp.tm_mon = 11;
-					tm_temp.tm_mday = 11;
+					tm_temp.tm_mday = 31;
 					tm_temp.tm_hour = tm_temp.tm_min = tm_temp.tm_sec = 0;
 					mktime(&tm_temp);
 					w = iso_weeknum(&tm_temp);
