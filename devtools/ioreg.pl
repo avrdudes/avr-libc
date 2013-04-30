@@ -38,6 +38,9 @@ use Getopt::Std 'getopts';
 my $ContentTmplate;
 my $StaticContent;
 my $EepromTmplate;
+my $Uint32Tmplate;
+
+my $HaveUint32t = 0;
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Static part of the DWARF file
@@ -236,6 +239,46 @@ $StaticContent = <<'EOST';
 	.uleb128	0
 
 EOST
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+#
+$Uint32Tmplate = <<'EOU32';
+;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	;; DIE #%No: base type uint32_t
+	.section	.debug_info
+.Luint32_t:
+	.uleb128	%No	; ref to abbrev %No
+	.section	.debug_abbrev
+	.uleb128	%No
+	.uleb128	DW_TAG_base_type
+	.byte		DW_CHILDREN_no
+
+	.uleb128	DW_AT_name
+	.uleb128	DW_FORM_strp
+	.section	.debug_str
+.Luint32_t_name:
+	.string		"uint32_t"
+	.section	.debug_info
+	.long		.Luint32_t_name
+
+	.section	.debug_abbrev
+	.uleb128	DW_AT_byte_size
+	.uleb128	DW_FORM_data1
+	.section	.debug_info
+	.byte		4
+
+	.section	.debug_abbrev
+	.uleb128	DW_AT_encoding
+	.uleb128	DW_FORM_data1
+	.section	.debug_info
+	.byte		DW_ATE_unsigned
+
+	.section	.debug_abbrev
+	.uleb128	0
+	.uleb128	0
+
+EOU32
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -527,12 +570,20 @@ foreach $OneRegister (@allRegister) {
  } else {
   # use IO register template
 
+  $RegisterParameter[3] *= 8; # 1 -> uint8_t, 2 -> uint16_t, 4 -> uint32_t
+  if ($RegisterParameter[3] == 32 && !$HaveUint32t) {
+   $HaveUint32t = 1;
+   $DynDIE = $Uint32Tmplate;
+   $DynDIE =~ s/%No/$DIE_No/g;
+   $DIE_No++;
+   print $DynDIE;
+  }
+
   #- - - - - - - - - - - - - - - - - - - -
   # Replace variables by register values
   #
   ($DynDIE = $ContentTmplate) =~ s/%Reg/$RegisterParameter[0]/g;
   $DynDIE =~ s/%No/$DIE_No/g;
-  $RegisterParameter[3] *= 8; # This parameter is 1 -> uint8_t or 2
   $DynDIE =~ s/%Si/$RegisterParameter[3]/g;
   $DynDIE =~ s/%Ba/$RegisterParameter[1]/g;
   $DynDIE =~ s/%Of/$RegisterParameter[2]/g;

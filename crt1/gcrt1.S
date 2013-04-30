@@ -35,6 +35,8 @@
 #error "GCC version >= 3.3 required"
 #endif
 
+#include IOSYMFILE
+
 #include "macros.inc"
 
 	.macro	vector name
