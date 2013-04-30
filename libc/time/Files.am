@@ -71,3 +71,6 @@ time_a_c_sources = \
 
 time_a_asm_sources = \
 	system_tick.S
+
+time_a_extra_dist = \
+	ephemera_common.h
