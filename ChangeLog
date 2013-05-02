@@ -1,5 +1,12 @@
 2013-04-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Alex Crawford:
+	patch #7909 Adding __volatile__ to __asm__ within pgmspace header
+	* include/avr/pgmspace.h: Make all __asm__ statements
+	volatile.
+
+2013-04-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Add IO symbol definitions to crt*.o files:
 	* configure.ac: add crt1/iosym/Makefile to the build
 	* devtools/ioreg.pl: Emit a DIE for uint32_t if needed.

@@ -20,6 +20,7 @@
 * Contributed Patches:
 
   [#3729] Printf for integers speed up
+  [#7909] Adding __volatile__ to __asm__ within pgmspace header
 
 * Other changes:
 

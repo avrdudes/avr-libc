@@ -408,7 +408,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                \
     uint16_t __addr16 = (uint16_t)(addr); \
     uint8_t __result;           \
-    __asm__                     \
+    __asm__ __volatile__        \
     (                           \
         "lpm" "\n\t"            \
         "mov %0, r0" "\n\t"     \
@@ -423,7 +423,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                \
     uint16_t __addr16 = (uint16_t)(addr); \
     uint8_t __result;           \
-    __asm__                     \
+    __asm__ __volatile__        \
     (                           \
         "lpm %0, Z" "\n\t"      \
         : "=r" (__result)       \
@@ -436,7 +436,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint16_t __result;                      \
-    __asm__                                 \
+    __asm__ __volatile__                    \
     (                                       \
         "lpm"           "\n\t"              \
         "mov %A0, r0"   "\n\t"              \
@@ -454,7 +454,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint16_t __result;                      \
-    __asm__                                 \
+    __asm__ __volatile__                    \
     (                                       \
         "lpm %A0, Z+"   "\n\t"              \
         "lpm %B0, Z"    "\n\t"              \
@@ -468,7 +468,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint32_t __result;                      \
-    __asm__                                 \
+    __asm__ __volatile__                    \
     (                                       \
         "lpm"           "\n\t"              \
         "mov %A0, r0"   "\n\t"              \
@@ -492,7 +492,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     uint32_t __result;                      \
-    __asm__                                 \
+    __asm__ __volatile__                    \
     (                                       \
         "lpm %A0, Z+"   "\n\t"              \
         "lpm %B0, Z+"   "\n\t"              \
@@ -508,7 +508,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     float __result;                         \
-    __asm__                                 \
+    __asm__ __volatile__                    \
     (                                       \
         "lpm"           "\n\t"              \
         "mov %A0, r0"   "\n\t"              \
@@ -532,7 +532,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                            \
     uint16_t __addr16 = (uint16_t)(addr);   \
     float __result;                         \
-    __asm__                                 \
+    __asm__ __volatile__                    \
     (                                       \
         "lpm %A0, Z+"   "\n\t"              \
         "lpm %B0, Z+"   "\n\t"              \
@@ -602,7 +602,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                    \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint8_t __result;               \
-    __asm__                         \
+    __asm__ __volatile__            \
     (                               \
         "out %2, %C1" "\n\t"        \
         "mov r31, %B1" "\n\t"       \
@@ -621,7 +621,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                    \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint8_t __result;               \
-    __asm__                         \
+    __asm__ __volatile__            \
     (                               \
         "out %2, %C1" "\n\t"        \
         "movw r30, %1" "\n\t"       \
@@ -638,7 +638,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                    \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint8_t __result;               \
-    __asm__                         \
+    __asm__ __volatile__            \
     (                               \
         "in __tmp_reg__, %2" "\n\t" \
         "out %2, %C1" "\n\t"        \
@@ -657,7 +657,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                        \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint16_t __result;                  \
-    __asm__                             \
+    __asm__ __volatile__                \
     (                                   \
         "out %2, %C1"   "\n\t"          \
         "mov r31, %B1"  "\n\t"          \
@@ -682,7 +682,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                        \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint16_t __result;                  \
-    __asm__                             \
+    __asm__ __volatile__                \
     (                                   \
         "out %2, %C1"   "\n\t"          \
         "movw r30, %1"  "\n\t"          \
@@ -700,7 +700,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                        \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint16_t __result;                  \
-    __asm__                             \
+    __asm__ __volatile__                \
     (                                   \
         "in __tmp_reg__, %2" "\n\t"     \
         "out %2, %C1"   "\n\t"          \
@@ -720,7 +720,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint32_t __result;                    \
-    __asm__                               \
+    __asm__ __volatile__                  \
     (                                     \
         "out %2, %C1"          "\n\t"     \
         "mov r31, %B1"         "\n\t"     \
@@ -757,7 +757,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint32_t __result;                    \
-    __asm__                               \
+    __asm__ __volatile__                  \
     (                                     \
         "out %2, %C1"   "\n\t"            \
         "movw r30, %1"  "\n\t"            \
@@ -777,7 +777,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     uint32_t __result;                    \
-    __asm__                               \
+    __asm__ __volatile__                  \
     (                                     \
         "in __tmp_reg__, %2" "\n\t"       \
         "out %2, %C1"   "\n\t"            \
@@ -799,7 +799,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     float __result;                       \
-    __asm__                               \
+    __asm__ __volatile__                  \
     (                                     \
         "out %2, %C1"          "\n\t"     \
         "mov r31, %B1"         "\n\t"     \
@@ -836,7 +836,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     float __result;                       \
-    __asm__                               \
+    __asm__ __volatile__                  \
     (                                     \
         "out %2, %C1"   "\n\t"            \
         "movw r30, %1"  "\n\t"            \
@@ -856,7 +856,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 (__extension__({                          \
     uint32_t __addr32 = (uint32_t)(addr); \
     float __result;                       \
-    __asm__                               \
+    __asm__ __volatile__                  \
     (                                     \
         "in __tmp_reg__, %2" "\n\t"       \
         "out %2, %C1"   "\n\t"            \
