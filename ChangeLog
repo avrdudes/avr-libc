@@ -1,4 +1,11 @@
-2013-04-30 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+2013-05-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/tools-install.dox: Drop references to FreeBSD's
+	CVSweb, as it's no longer maintained.  Add a comment that the
+	historically available per-language GCC source files are no
+	longer available, starting with GCC 4.7.
+
+2013-05-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Alex Crawford:
 	patch #7909 Adding __volatile__ to __asm__ within pgmspace header

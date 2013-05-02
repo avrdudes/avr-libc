@@ -197,11 +197,6 @@ You should now have the programs from binutils installed into
 <tt>$PREFIX/bin</tt>.  Don't forget to \ref path "set your PATH" environment
 variable before going to build avr-gcc.
 
-\note The official version of binutils might lack support for recent AVR
-devices.  A patch that adds more AVR types can be found at
-http://www.freebsd.org/cgi/cvsweb.cgi/ports/devel/avr-binutils/files/patch-newdevices
-
-
 
 \section install_avr_gcc GCC for the AVR target
 \addindex installation, gcc
@@ -227,17 +222,13 @@ $ make install
 To save your self some download time, you can alternatively download only the
 <tt>gcc-core-\<version\>.tar.bz2</tt> and <tt>gcc-c++-\<version\>.tar.bz2</tt>
 parts of the gcc.  Also, if you don't need C++ support, you only need the core
-part and should only enable the C language support.
+part and should only enable the C language support.  (Starting with GCC 4.7
+releases, these split files are no longer available though.)
 
 \note Early versions of these tools did not support C++.
 
 \note The stdc++ libs are not included with C++ for AVR due to the size
 limitations of the devices.
-
-\note The official version of GCC might lack support for recent AVR
-devices.  A patch that adds more AVR types can be found at
-http://www.freebsd.org/cgi/cvsweb.cgi/ports/devel/avr-gcc/files/patch-newdevices
-
 
 
 \section install_avr_libc AVR LibC
