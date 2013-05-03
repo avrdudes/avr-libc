@@ -1,5 +1,12 @@
 2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Frédéric Nadeau:
+	patch #7260: Addition to power.h
+	* include/avr/power.h: Extend clock prescaler support to devices
+	with XDIV (ATmega103, ATmega64, ATmega128)
+
+2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Maksim Kuleshov:
 	patch #7654 include/delay.h: delay_us >255us without decreasing
 	resolution

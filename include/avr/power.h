@@ -1,4 +1,5 @@
 /* Copyright (c) 2006, 2007, 2008  Eric B. Weddington
+   Copyright (c) 2011 Frédéric Nadeau
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -42,19 +43,27 @@
 
 Many AVRs contain a Power Reduction Register (PRR) or Registers (PRRx) that 
 allow you to reduce power consumption by disabling or enabling various on-board 
-peripherals as needed.
+peripherals as needed. Some devices have the XTAL Divide Control Register
+(XDIV) which offer similar functionality as System Clock Prescale
+Register (CLKPR).
 
 There are many macros in this header file that provide an easy interface
 to enable or disable on-board peripherals to reduce power. See the table below.
 
 \note Not all AVR devices have a Power Reduction Register (for example
-the ATmega128). On those devices without a Power Reduction Register, these 
-macros are not available.
+the ATmega8). On those devices without a Power Reduction Register, the
+power reduction macros are not available..
 
 \note Not all AVR devices contain the same peripherals (for example, the LCD
 interface), or they will be named differently (for example, USART and 
 USART0). Please consult your device's datasheet, or the header file, to 
 find out which macros are applicable to your device.
+
+\note For device using the XTAL Divide Control Register (XDIV), when prescaler
+is used, Timer/Counter0 can only be used in asynchronous mode. Keep in mind
+that Timer/Counter0 source shall be less than ¼th of peripheral clock.
+Therefore, when using a typical 32.768 kHz crystal, one shall not scale
+the clock below 131.072 kHz.
 
 */
 
@@ -1571,11 +1580,16 @@ do{ \
 
 Some of the newer AVRs contain a System Clock Prescale Register (CLKPR) that
 allows you to decrease the system clock frequency and the power consumption
-when the need for processing power is low. Below are two macros and an
-enumerated type that can be used to interface to the Clock Prescale Register.
+when the need for processing power is low.
+On some earlier AVRs (ATmega103, ATmega64, ATmega128), similar
+functionality can be achieved through the XTAL Divide Control Register.
+Below are two macros and an enumerated type that can be used to
+interface to the Clock Prescale Register or
+XTAL Divide Control Register.
 
-\note Not all AVR devices have a Clock Prescale Register. On those devices
-without a Clock Prescale Register, these macros are not available.
+\note Not all AVR devices have a clock prescaler. On those devices
+without a Clock Prescale Register or XTAL Divide Control Register, these
+macros are not available.
 */
 
 
@@ -1595,7 +1609,24 @@ typedef enum
     clock_div_1_rc = 15, // ATmega128RFA1 only
 } clock_div_t;
 \endcode
-Clock prescaler setting enumerations.
+Clock prescaler setting enumerations for device using
+System Clock Prescale Register.
+
+\code
+typedef enum
+{
+    clock_div_1 = 1,
+    clock_div_2 = 2,
+    clock_div_4 = 4,
+    clock_div_8 = 8,
+    clock_div_16 = 16,
+    clock_div_32 = 32,
+    clock_div_64 = 64,
+    clock_div_128 = 128
+} clock_div_t;
+\endcode
+Clock prescaler setting enumerations for device using
+XTAL Divide Control Register.
 
 */
 typedef enum
@@ -1630,7 +1661,10 @@ Set the clock prescaler register select bits, selecting a system clock
 division setting. This function is inlined, even if compiler
 optimizations are disabled.
 
-The type of x is clock_div_t.
+The type of \c x is \c clock_div_t.
+
+\note For device with XTAL Divide Control Register (XDIV), \c x can actually range
+from 1 to 129. Thus, one does not need to use \c clock_div_t type as argument.
 */
 void clock_prescale_set(clock_div_t __x)
 {
@@ -1650,8 +1684,12 @@ void clock_prescale_set(clock_div_t __x)
 
 /** \addtogroup avr_power
 \code clock_prescale_get() \endcode
-Gets and returns the clock prescaler register setting. The return type is clock_div_t.
+Gets and returns the clock prescaler register setting. The return type is \c clock_div_t.
 
+\note For device with XTAL Divide Control Register (XDIV), return can actually
+range from 1 to 129. Care should be taken has the return value could differ from the
+typedef enum clock_div_t. This should only happen if clock_prescale_set was previously
+called with a value other than those defined by \c clock_div_t.
 */
 #define clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
 
@@ -1712,10 +1750,93 @@ void clock_prescale_set(clock_div_t __x)
 
 #define clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
 
+#elif defined(__AVR_ATmega64__) \
+|| defined(__AVR_ATmega103__) \
+|| defined(__AVR_ATmega128__)
 
+//Enum is declared for code compatibility
+typedef enum
+{
+    clock_div_1 = 1,
+    clock_div_2 = 2,
+    clock_div_4 = 4,
+    clock_div_8 = 8,
+    clock_div_16 = 16,
+    clock_div_32 = 32,
+    clock_div_64 = 64,
+    clock_div_128 = 128
+} clock_div_t;
+
+static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+
+void clock_prescale_set(clock_div_t __x)
+{
+    if((__x <= 0) || (__x > 129))
+    {
+        return;//Invalid value.
+    }
+    else
+    {
+        uint8_t __tmp = 0;
+        //Algo explained:
+        //1 - Clear XDIV in order for it to accept a new value (actually only
+        //    XDIVEN need to be cleared, but clearing XDIV is faster than
+        //    read-modify-write since we will rewrite XDIV later anyway)
+        //2 - wait 8 clock cycle for stability, see datasheet erreta
+        //3 - Exist if requested prescaller is 1
+        //4 - Calculate XDIV6..0 value = 129 - __x
+        //5 - Set XDIVEN bit in calculated value
+        //6 - write XDIV with calculated value
+        //7 - wait 8 clock cycle for stability, see datasheet erreta
+        __asm__ __volatile__ (
+            "in __tmp_reg__,__SREG__" "\n\t"
+            "cli" "\n\t"
+            "out %1, __zero_reg__" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "cpi %0, 0x01" "\n\t"
+            "breq L_%=" "\n\t"
+            "ldi %2, 0x81" "\n\t" //129
+            "sub %2, %0" "\n\t"
+            "ori %2, 0x80" "\n\t" //128
+            "out %1, %2" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "nop" "\n\t"
+            "L_%=: " "out __SREG__, __tmp_reg__"
+            : /* no outputs */
+            :"d" (__x),
+             "I" (_SFR_IO_ADDR(XDIV)),
+             "d" (__tmp)
+            : "r0");
+    }
+}
+
+static __inline__ clock_div_t clock_prescale_get(void) __attribute__((__always_inline__));
+
+clock_div_t clock_prescale_get(void)
+{
+    if(bit_is_clear(XDIV, XDIVEN))
+    {
+        return 1;
+    }
+    else
+    {
+        return (clock_div_t)(129 - (XDIV & 0x7F));
+    }
+}
+ 
 #endif
-
-
-
 
 #endif /* _AVR_POWER_H_ */
