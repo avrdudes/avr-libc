@@ -1,5 +1,12 @@
 2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Dean Camera:
+	patch #7212: Add pgm_read_ptr() macros to pgmspace.h
+	* include/avr/pgmspace.h (pgm_read_ptr_near, pgm_read_ptr_far,
+	pgm_read_ptr): New macros.
+
+2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Radoslaw Koppel:
 	patch #7220: Add UBRR overload functionality to <util/setbaud.h>
 	* include/util/setbaud.h: check for overflow of UBRR_VALUE

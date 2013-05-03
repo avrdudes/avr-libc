@@ -590,6 +590,15 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 #define pgm_read_float_near(address_short) \
     __LPM_float((uint16_t)(address_short))
 
+/** \ingroup avr_pgmspace
+    \def pgm_read_ptr_near(address_short)
+    Read a pointer from the program space with a 16-bit (near) address. 
+    \note The address is a byte address. 
+    The address is in the program space. */
+
+#define pgm_read_ptr_near(address_short) \
+    (void*)__LPM_word((uint16_t)(address_short))
+
 #if defined(RAMPZ) || defined(__DOXYGEN__)
 
 /* Only for devices with more than 64K of program memory.
@@ -943,6 +952,15 @@ not interfere with data accesses.
 
 #define pgm_read_float_far(address_long) __ELPM_float((uint32_t)(address_long))
 
+/** \ingroup avr_pgmspace
+    \def pgm_read_ptr_far(address_long)
+    Read a pointer from the program space with a 32-bit (far) address. 
+
+    \note The address is a byte address.
+    The address is in the program space. */
+
+#define pgm_read_ptr_far(address_long) (void*)__ELPM_word((uint32_t)(address_long))
+
 #endif /* RAMPZ or __DOXYGEN__ */
 
 /** \ingroup avr_pgmspace
@@ -980,6 +998,15 @@ not interfere with data accesses.
     The address is in the program space. */
 
 #define pgm_read_float(address_short)   pgm_read_float_near(address_short)
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_ptr(address_short)
+    Read a pointer from the program space with a 16-bit (near) address. 
+
+    \note The address is a byte address. 
+    The address is in the program space. */
+
+#define pgm_read_ptr(address_short)     pgm_read_ptr_near(address_short)
 
 /* pgm_get_far_address() macro
 
