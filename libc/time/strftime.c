@@ -90,7 +90,7 @@ strftime(char *buffer, size_t limit, const char *pattern, const struct tm * time
     int             d, w;
     char            c;
     char            _store[26];
-    struct tm       tm_temp;
+    struct week_date wd;
 
     count = length = 0;
     while (count < limit) {
@@ -161,19 +161,12 @@ strftime(char *buffer, size_t limit, const char *pattern, const struct tm * time
 
             case ('g'):
 			case ('G'):
-				d = timeptr->tm_year + 1900;
-				w = iso_weeknum(timeptr);
-				if (w == 0)
-					d--;
-				if (w == 54)
-					d++;
-
-				if (c == 'g') {
-					d %= 100;
-					length = sprintf(_store, "%.2d", d);
-				} else {
-					length = sprintf(_store, "%.4d", d);
-				}
+				iso_week_date_r(timeptr->tm_year + 1900, timeptr->tm_yday, &wd);
+                if (c == 'g') {
+                    length = sprintf(_store, "%.2d", wd.year % 100);
+                } else {
+                    length = sprintf(_store, "%.4d", wd.year);
+                }
 
 				break;
 
@@ -259,19 +252,8 @@ strftime(char *buffer, size_t limit, const char *pattern, const struct tm * time
                 break;
 
 			case ('V'):
-				w = iso_weeknum(timeptr);
-				if (w == 0){
-					/* we need the week number of the final week of the previous year */
-					tm_temp.tm_year = timeptr->tm_year - 1;
-					tm_temp.tm_mon = 11;
-					tm_temp.tm_mday = 31;
-					tm_temp.tm_hour = tm_temp.tm_min = tm_temp.tm_sec = 0;
-					mktime(&tm_temp);
-					w = iso_weeknum(&tm_temp);
-				}
-				if (w == 54)
-					w = 1;
-				length = sprintf(_store, "%.2u", w);
+				iso_week_date_r(timeptr->tm_year + 1900, timeptr->tm_yday, &wd);
+                length = sprintf(_store, "%.2u", wd.week);
 				break;
 
             case ('w'):

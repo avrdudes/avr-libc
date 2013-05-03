@@ -373,19 +373,32 @@ extern          "C" {
     uint8_t         week_of_year(const struct tm * timeptr, uint8_t start);
 
     /**
-        Return the ISO 8601 week of year. Returned values are...
-
-            0 : The final week of the previous year.
-            1 ... 53 : The week number in the current year.
-            54 : The first week of the following year.
-    */
-    uint8_t         iso_weeknum(const struct tm * timeptr);
-
-    /**
         Return the calendar week of month, where the first week is considered to begin on the
         day of week specified by 'start'. The returned value may range from zero to 5.
     */
     uint8_t         week_of_month(const struct tm * timeptr, uint8_t start);
+
+    /**
+        Structure which represents a date as a year, week number of that year, and day of week.
+        See http://en.wikipedia.org/wiki/ISO_week_date for more information.
+    */
+    struct week_date{
+        int year;
+        int week;
+        int day;
+    };
+
+    /**
+        Return a week_date structure with the ISO_8601 week based date corresponding to the given
+        year and day of year. See http://en.wikipedia.org/wiki/ISO_week_date for more
+        information.
+    */
+    struct week_date * iso_week_date( int year, int yday);
+
+    /**
+        Re-entrant version of iso-week_date.
+    */
+    void iso_week_date_r( int year, int yday, struct week_date *);
 
     /**
         Convert a Y2K time stamp into a FAT file system time stamp.

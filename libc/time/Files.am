@@ -43,7 +43,8 @@ time_a_c_sources = \
 	gmtime_r.c \
 	isLeap.c \
 	isotime.c \
-	iso_weeknum.c \
+	iso_week_date.c \
+	iso_week_date_r.c \
 	isotime_r.c \
 	lm_sidereal.c \
 	localtime.c \
