@@ -40,7 +40,8 @@
     SCNiFAST8, SCNo8, SCNoLEAST8, SCNoFAST8, SCNu8, SCNuLEAST8,
     SCNuFAST8, SCNx8, SCNxLEAST8, SCNxFAST8
 
-  - Add time.h package, with 'ephemera'
+  - Add time.h package, with 'ephemera' functions for e.g. time of sun rise or set,
+    sidereal time, moon phase.
 
   - Introduce new configure option --with-debug-info=INFO, where INFO
     can be either stabs, dwarf-2, or dwarf-4.  By default, no debug
@@ -131,7 +132,7 @@
   [no-id] Enable ATmega128RFA1 in <avr/power.h>
   [no-id] longjmp() writes to EIND register, it is forbidden by AVR-GCC's API
   [no-id] Define _VECTORS_SIZE in iom3000.h
-  [no-id] Redefine __tmp_reg__ and __zer_reg__ for AVR TINY. 
+  [no-id] Redefine __tmp_reg__ and __zer_reg__ for AVR TINY.
   [AVR Tools: #9724] Error in ATtiny13A include file, PRR register
   [sourceforge.net: #1836849] Multiplication does not work for AT90USB162
   [sourceforge.net: #1883630] ATmegaXX4 - USART0 and USART1 additional bits aliases
@@ -149,7 +150,7 @@
   [sourceforge.net: #2420567] ATmega329P missing in sleep.h
   [sourceforge.net: #2693898] ATmega32U6 missing in power.h
   [sourceforge.net: #2738926] avr/eeprom.h EEGET and EEPUT
-  [sourceforge.net: #2812125] ATmega16U4 missing in power.h 
+  [sourceforge.net: #2812125] ATmega16U4 missing in power.h
   [sourceforge.net: #2913419] Misspelled Structure Element - xmega
   [#3485]  Using float arithmetic without linking with -lm result in incorrect code
   [#19079] sscanf %s eats 1 char too much
@@ -157,7 +158,7 @@
   [#21410] Incorrect use of 16-bit eeprom addresses in devices with 8-Bit address registers
   [#21621] Allow autoconf 2.61
   [#21622] Support building in a subdirectory
-  [#21623] boot.h: Use the "z" register constraint  
+  [#21623] boot.h: Use the "z" register constraint
   [#21869] Multiple defines in iotn2313.h
   [#21872] __floatunsisf/undisf incorrectly named
   [#21905] scanf: float conversion ignores the suppression symbol
@@ -265,8 +266,8 @@
 * Other changes:
 
   - Added 'avr35' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
-    supported for AT90USB82 and AT90USB162 devices. GCC 4.3 or above is 
-    necessary to use this. 
+    supported for AT90USB82 and AT90USB162 devices. GCC 4.3 or above is
+    necessary to use this.
 
   - Function vfscanf() is rewriten. The float point version is optimized
     considerably: the expense of a stack was cut by half, and the size of
@@ -310,7 +311,7 @@
 
   - Signature API added in <avr/signature.h>.
 
-  - All functions are now placed in the .text.avr-libc section, and the 
+  - All functions are now placed in the .text.avr-libc section, and the
     floating point functions are placed in the .text.avr-libc.fplib section. This
     allows the user the ability to relocate all avr-libc routines to a different
     address using a custom linker script.
@@ -475,7 +476,7 @@
    strstr_PF
    strlcpy_PF
    memcmp_PF
-   
+
 
 *** Changes in avr-libc-1.6.0:
 
@@ -566,7 +567,7 @@
   [#18686] AT90USB**** devices are absent in interrupt-verctor-names table
   [#18688] vfscanf and vfprintf don't use malloc
   [#18726] the dtostrf function description is missing in AVR-Libc's webpage
-  [#18903] ATmega644 register definitions for SPI and PRR (datasheet vs. 
+  [#18903] ATmega644 register definitions for SPI and PRR (datasheet vs.
            iom*.h)
   [#18915] PWM1X Bit missing for ATtiny261/461/861
   [#18964] USART definitions *wrong* in iocanxx.h
@@ -651,9 +652,9 @@
     macros, types, variables) into the documentation.
 
   - Added 'avr25' architecture. Now 'MOVW' and 'LPM Rx, Z[+]' instructions
-    supported for AT86RF401, ATtiny13, ATtiny2313, ATtiny24, ATtiny25, 
-    ATtiny261, ATtiny44, ATtiny45, ATtiny461, ATtiny84, ATtiny85 and 
-    ATtiny861 devices. GCC 4.2 or above is necessary to use this. 
+    supported for AT86RF401, ATtiny13, ATtiny2313, ATtiny24, ATtiny25,
+    ATtiny261, ATtiny44, ATtiny45, ATtiny461, ATtiny84, ATtiny85 and
+    ATtiny861 devices. GCC 4.2 or above is necessary to use this.
 
   - Add the benchmark page.
 
@@ -709,7 +710,7 @@
   + AT90PWM2B
   + AT90PWM3B
 
-* New functions: 
+* New functions:
 
    strstr_P (Contributed by Werner Boellmann)
    round
@@ -819,7 +820,7 @@
   [patch #3925] Dallas iButton 8-bit CRC
   [patch #4087] C99 conformal headers stdint.h and inttypes.h
   [patch #4505] Unified interrupt vector names in header files
-  [patch #4557] Adds to the fplib usage of MUL instruction 
+  [patch #4557] Adds to the fplib usage of MUL instruction
                 in group avr4; avr5 devices
   [patch #4608] rpm spec file update
   [patch #4622] unify doc file location in rpms
@@ -965,7 +966,7 @@ program-space string.
           is used.
   [#5799] error(?) in iom162.h
   [#2233] Documentation issues with inline asm
-  [#6352] Sleep mode for ATmega162, ATmega161, and ATmega8515 
+  [#6352] Sleep mode for ATmega162, ATmega161, and ATmega8515
   [#7469] "Problem" by using the library function "boot_lock_bits_set"
   [#7556] printf and friends improperly handle non-null terminated strings when
           a %s argument has a precision.
@@ -983,7 +984,7 @@ program-space string.
   [#8649] sfr_defs.h: missed _SFR_BYTE() in bit_is_set/clear
   [#9345] Zero-Padding on vfprintf
   [#10150] Update release versions compatible with avr-libc and instructions.
-  [#10489] Sleep mode for atmega48/88/168 family 
+  [#10489] Sleep mode for atmega48/88/168 family
   [#10733] Fix bit identifer ADFR to ADATE in mega64.
   [#10828] Fix licenses on files to have same BSD license.
   [#11242] Add the EEARH register definition for the mega48.
@@ -1120,8 +1121,8 @@ list set up for discussion of development of avr-libc.
 
 * License changes.
 
-All the files in the project now are covered by a modified BSD license. This 
-allows royalty free use of the library in commerical products. All of the 
+All the files in the project now are covered by a modified BSD license. This
+allows royalty free use of the library in commerical products. All of the
 public domain files in the project have been switched to the new license and
 copyright given to the contributors of the files.
 
@@ -1144,7 +1145,7 @@ prone to fragmentation.
 * Documentation!
 
 Joerg Wunsch and Ted Roth and have been working on using the doxygen program to
-embed documentation comments into source code. Additionally, Harald Kipp's 
+embed documentation comments into source code. Additionally, Harald Kipp's
 inline asm cookbook and Rich Neswold's Avr Tools document have been merged into
 the user manual. The goal is to have a single place for all the documentation
 a user would need to get started developing for AVR microcontrollers using
@@ -1192,7 +1193,7 @@ The arguments for outb()/outw() have been reversed.
 * New pgmspace.h API.
 
 Changed function names and added new functions to read the Program Space
-FLASH. Added new functions to read 16-bit (word) values. The new API should 
+FLASH. Added new functions to read 16-bit (word) values. The new API should
 also clear up problems with reading data from devices with > 64K of FLASH.
 
 The API now includes:
@@ -1208,7 +1209,7 @@ pgm_read_word_far
 
 #include <avr/boot.h>
 
-This provides bootloader support functions to those processors that have 
+This provides bootloader support functions to those processors that have
 builtin bootloader support.
 
 * inb / outb / inw / outw / cbi / sbi macros are deprecated.

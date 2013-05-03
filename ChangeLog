@@ -1,3 +1,7 @@
+2013-05-03 Mike Rice <mike@mikerice.name>
+
+    * Deleted function iso_weeknum(), replaced with iso_week_date()
+
 2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Georg-Johann Lay:
@@ -270,6 +274,10 @@
 	* crt1/iosym/atxmega64d3.S: (Dito.)
 	* crt1/iosym/m3000.S: (Dito.)
 
+2013-04-30 Mike Rice <mike@mikerice.name>
+
+    * Corrected date for determing final week of year ( /libc/time/strftime.c )
+
 2013-04-29 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Contributed by Wouter van Gulik:
@@ -293,11 +301,88 @@
 	* devtools/findreg.xsl: Dig up EEPROM data, too.
 	* devtools/ioreg.pl: Add EEPROM DWARF-2 template.
 
+04-29 Mike Rice <mike@mikerice.name>
+
+    * Corrected 'D' conversion of strftime to display two digit year
+    * Corrected 'V' conversion to display final week number of previous year
+        libc/time/strftime
+
+2013-04-28 Mike Rice <mike@mikerice.name>
+
+    * Augmented comments to explain the algorithm employed in libc/time/...
+        daylight_seconds.c
+        equation_of_time.c
+        gm_sidereal.c
+        gmtime_r.c
+        iso_weeknum.c
+        mk_gmtime.c
+        solar_declination.c
+
+2013-04-27 Mike Rice <mike@mikerice.name>
+
+    * libc/time/strftime.c now handles all conversions, in the C locale.
+    * New function/file libc/time/iso_weeknum .
+    * Declared time_t and struct tm parameters 'const' in libc/time/...
+        daylight_seconds.c
+        equation_of_time.c
+        fatfs_time.c
+        isotime.c
+        isotime_r.c
+        mk_gmtime.c
+        moon_phase.c
+        solar_declination.c
+        solar_noon.c
+        sun_rise.c
+        sun_set.c
+
+    * Edited the docs overview with a more complete description, references to the standard,
+    * and details on the departures from standard.
+        include/time.h
+
+    * Corrected the name of the iso week number function from iso_week to iso_weeknum
+        libc/time/iso_weeknum.c
+
+2013-04-26 Mike Rice <mike@mikerice.name>
+
+    * Re-write of the 'week_of' functions. The original was often incorrect for any base day except
+    * Sunday (libc/time)
+        week_of_month.c
+        week_of_year.c
+
 2013-04-25 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* devtools/ioreg.pl: (New file.), contributed by Knut
 	Schwichtenberg
 	* devtools/findreg.xsl: (New file.)
+
+2013-04-24 Mike Rice <mike@mikerice.name>
+
+    * Modified moon_phase() to give a more realistic 'curve' (libc/time/moonphase.c)
+
+2013-04-23 Mike Rice <mike@mikerice.name>
+
+    * Changed month_length() to use the 'knuckles' algorithm. Slightly less code and
+    * easier to understand.
+        libc/time/month_length.c
+
+    * Fixed unused variable warning in tests/simulate/time/tick.c
+
+2013-04-21 Mike Rice <mike@mikerice.name>
+
+    * Changed the method of setting the system time
+        include/time.h
+        libc/time/set_system_time.c
+
+    * Broke out function common to isotime_r and asctime_r (libc/time)
+        asctime_r.c
+        isotime_r.c
+        print_lz.c
+
+2013-04-20 Mike Rice <mike@mikerice.name>
+
+    * libc/include/time.h
+        Edited docs of system_tick()
+        Corrected figure for the 'end of time'
 
 2013-04-19 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
@@ -307,6 +392,142 @@
 	/usr/xpg4/bin (doesn't harm for non-Solaris systems), but as for
 	the shell this script is running under, the only other option
 	were to let autoconf detect it, which is a bit of overkill.
+
+2013-04-19 Mike Rice <mike@mikerice.name>
+
+    * Improved tests in tests/simulate/time
+    * Corrected month length function to match its prototype
+        include/time.h
+        libc/time/month_length.c
+
+2013-04-18 Mike Rice <mike@mikerice.name>
+
+    * Improvement to isotime_r saves some cpu cycles
+        libc/time/isotime_r.c
+
+    * Added some basic tests to tests/simulate/time
+
+2013-04-16 Mike Rice <mike@mikerice.name>
+
+    * Modified system_tick() to much a more efficient version suggested by Wouter van Gulik
+        libc/time/system_tick.c
+        include/time.h
+
+2013-04-11 Mike Rice <mike@mikerice.name>
+
+    * Experimental system_tick_i() proves out (libc/time)
+        remove system_tick.c
+        rename system_tick_i.c to system_tick.c
+        modify include/time.h to reflect the change
+
+2013-04-11 Mike Rice <mike@mikerice.name>
+
+    * Found conflicting data between USNO and NOAA tables. Settled on using USNO data (libc/time)
+        ephemera_common.h
+        equation_of_time.c
+        solar_declination.c
+
+2013-04-10 Mike Rice <mike@mikerice.name>
+
+    * Erroneous 'include once' in libc/include/util/eu_dst prevented inclusion of both
+      daylight savings functions in one application
+
+2013-04-11 Mike Rice <mike@mikerice.name>
+
+    * Found conflicting data between USNO and NOAA tables. Settled on using USNO data (libc/time)
+        ephemera_common.h
+        equation_of_time.c
+        solar_declination.c
+
+2013-04-10 Mike Rice <mike@mikerice.name>
+
+    * Erroneous 'include once' in libc/include/util/eu_dst prevented inclusion of both
+    * daylight savings functions in one application
+
+2013-04-09 Mike Rice <mike@mikerice.name>
+
+    * Gathered some constant terms from ephemera (libc/time)
+            ephemera_common.h
+            equation_of_time.c
+            solar_declination.c
+
+    * Pulled calculation of solar noon from sun_rise and sun_set, creating new function
+      solar_noon() (libc)
+        /include/time.h
+        /time/sun_rise.c
+        /time/sun_set.c
+        /time/solar_noon.c
+
+2013-04-08 Mike Rice <mike@mikerice.name>
+
+      * Moved some macros common to the ephemera functions to a new header file, changing
+      * some values for closer fits to the 'zeroes' of the equations (libc/time)
+            ephemera_common.h
+            equation_of_time.c
+            solar_declination.c
+
+2013-04-07 Mike Rice <mike@mikerice.name>
+
+    * Corrected an error computing fractional day in libc/time/mk_gmtime.c
+    * fixed a typo in libc/include/util/eu_dst.c
+
+2013-04-06 Mike Rice <mike@mikerice.name>
+
+    * Improved overall precision of equation of time and declination (libc/time)
+        solar_declination.c
+        equation_of_time.c
+
+2013-04-05 Mike Rice <mike@mikerice.name>
+
+    * fixed warnings about 'long long' when compiled with -Wextra (libc/time)
+        gm_sidereal.c
+        mk_gmtime.c
+
+2013-04-03 Mike Rice <mike@mikerice.name>
+
+    * libc/time/strftime.c
+        Modified 'c' conversion to use the asctime() function
+        corrected 'F' conversion year formatting
+        corrected 'R' conversion hour formatting
+        corrected 'x' conversion year formatting
+
+2013-04-02 Mike Rice <mike@mikerice.name>
+
+    * Rearrange code and comments for clarity ( libc )
+        include/time.h
+
+        time/asc_store.c
+        time/gmtime_r.c
+        time/mk_gmtime.c
+        time/tm_store.c
+        time/utc_offset.c
+        time/week_of_month.c
+        time/week_of_year.c
+        time/solar_declination.c
+        time/sun_rise.c
+        time/sun_set.c
+        time/daylight_seconds.c
+        time/gm_sidereal.c
+        time/lm_sidereal.c
+        time/moon_phase.c
+        time/is_leap_year.c
+
+
+
+2013-03-31 Mike Rice <mike@mikerice.name>
+
+    * Added experimental function system_tick_i() ( libc/time/system_tick_i.c )
+        assembler code for greater efficiency
+        easy to call from 'naked' ISR
+
+2013-03-30 Mike Rice <mike@mikerice.name>
+
+    * Mar 30 moved private time variables out to separate C files ( libc/time )
+        asc_store.c :  asctime() private character buffer
+        dst_pointer.c : daylight savings function pointer
+        geo_location.c : __latitude, __longitude
+        tm_store.c : gmtime(), localtime() private struct tm
+        utc_offset.c : __utc_offset
 
 2013-03-29 Mike Rice <mike@mikerice.name>
 
