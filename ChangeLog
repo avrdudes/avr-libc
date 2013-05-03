@@ -1,5 +1,12 @@
 2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Georg-Johann Lay:
+	bug #38135: Install a dummy stdfix-avrlibc.h
+	* include/stdfix-avrlibc.h: New file.
+	* include/Makefile.am (avr_HEADERS): Add stdfix-avrlibc.h.
+
+2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Dean Camera:
 	patch #7212: Add pgm_read_ptr() macros to pgmspace.h
 	* include/avr/pgmspace.h (pgm_read_ptr_near, pgm_read_ptr_far,

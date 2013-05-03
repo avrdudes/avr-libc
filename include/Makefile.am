@@ -38,6 +38,7 @@ avr_HEADERS = \
     inttypes.h \
     math.h \
     setjmp.h \
+    stdfix-avrlibc.h \
     stdint.h \
     stdio.h \
     stdlib.h \
