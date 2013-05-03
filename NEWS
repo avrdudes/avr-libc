@@ -20,6 +20,7 @@
 * Contributed Patches:
 
   [#3729] Printf for integers speed up
+  [#7826] Add ATMega32u4 support to the led-blinking demo
   [#7909] Adding __volatile__ to __asm__ within pgmspace header
   [#7910] Add missing PCINT2_vect to iotn40.h and update all the
           following vector numbers

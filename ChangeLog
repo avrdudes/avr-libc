@@ -1,5 +1,12 @@
 2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by W. Trevor King:
+	patch #7826 Add ATMega32u4 support to the led-blinking demo
+	* doc/examples/demo/iocompat.h: Add ATmega32U4
+	* doc/examples/demo/Makefile: (Dito.)
+
+2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Stefan Kristiansson:
 	patch #7910 Add missing PCINT2_vect to iotn40.h and update
 	all the following vector numbers

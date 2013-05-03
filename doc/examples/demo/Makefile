@@ -27,6 +27,7 @@ OBJ            = demo.o
 #MCU_TARGET     = atmega3250
 #MCU_TARGET     = atmega329
 #MCU_TARGET     = atmega3290
+#MCU_TARGET     = atmega32u4
 #MCU_TARGET     = atmega48
 #MCU_TARGET     = atmega64
 #MCU_TARGET     = atmega640
