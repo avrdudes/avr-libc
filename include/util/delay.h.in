@@ -141,7 +141,6 @@ static inline void _delay_ms(double __ms) __attribute__((always_inline));
 void
 _delay_ms(double __ms)
 {
-	uint16_t __ticks;
 	double __tmp ; 
 #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
@@ -164,6 +163,7 @@ _delay_ms(double __ms)
 	__builtin_avr_delay_cycles(__ticks_dc);
 
 #else
+	uint16_t __ticks;
 	__tmp = ((F_CPU) / 4e3) * __ms;
 	if (__tmp < 1.0)
 		__ticks = 1;
@@ -223,7 +223,6 @@ _delay_ms(double __ms)
 void
 _delay_us(double __us)
 {
-	uint8_t __ticks;
 	double __tmp ; 
 #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
@@ -246,12 +245,20 @@ _delay_us(double __us)
 	__builtin_avr_delay_cycles(__ticks_dc);
 
 #else
+	uint8_t __ticks;
+	double __tmp2 ; 
 	__tmp = ((F_CPU) / 3e6) * __us;
+	__tmp2 = ((F_CPU) / 4e6) * __us;
 	if (__tmp < 1.0)
 		__ticks = 1;
-	else if (__tmp > 255)
+	else if (__tmp2 > 65535)
 	{
 		_delay_ms(__us / 1000.0);
+	}
+	else if (__tmp > 255)
+	{
+		uint16_t __ticks=(uint16_t)__tmp2;
+		_delay_loop_2(__ticks);
 		return;
 	}
 	else

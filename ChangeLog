@@ -1,5 +1,16 @@
 2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Maksim Kuleshov:
+	patch #7654 include/delay.h: delay_us >255us without decreasing
+	resolution
+	* include/util/delay.h.in (_delay_us): Add a second decision
+	logic that decides whether _delay_loop_2() could still be
+	used, or the fallback to _delay_ms() is required; while here,
+	reorder local variables so it compiles warning-free in all
+	configurations
+
+2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by W. Trevor King:
 	patch #7826 Add ATMega32u4 support to the led-blinking demo
 	* doc/examples/demo/iocompat.h: Add ATmega32U4
