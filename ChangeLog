@@ -1,5 +1,11 @@
 2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Radoslaw Koppel:
+	patch #7220: Add UBRR overload functionality to <util/setbaud.h>
+	* include/util/setbaud.h: check for overflow of UBRR_VALUE
+
+2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Frédéric Nadeau:
 	patch #7260: Addition to power.h
 	* include/avr/power.h: Extend clock prescaler support to devices

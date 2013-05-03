@@ -230,6 +230,11 @@
 #endif /* USE_U2X */
 
 #ifdef UBRR_VALUE
+   /* Check for overflow */
+#  if UBRR_VALUE >= (1 << 12)
+#    warning "UBRR value overflow"
+#  endif
+
 #  define UBRRL_VALUE (UBRR_VALUE & 0xff)
 #  define UBRRH_VALUE (UBRR_VALUE >> 8)
 #endif

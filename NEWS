@@ -20,6 +20,7 @@
 * Contributed Patches:
 
   [#3729] Printf for integers speed up
+  [#7220] Add UBRR overload functionality to <util/setbaud.h>
   [#7260] Addition to power.h
   [#7654] include/delay.h: delay_us >255us without decreasing resolution
   [#7826] Add ATMega32u4 support to the led-blinking demo
