@@ -545,35 +545,37 @@
 #define PCINT0_vect      _VECTOR(2)  /* Pin Change Interrupt Request 0 */
 #define PCINT1_vect_num  3
 #define PCINT1_vect      _VECTOR(3)  /* Pin Change Interrupt Request 1 */
-#define WDT_vect_num  4
-#define WDT_vect      _VECTOR(4)  /* Watchdog Time-out */
-#define TIM1_CAPT_vect_num  5
-#define TIM1_CAPT_vect      _VECTOR(5)  /* Timer/Counter1 Input Capture */
-#define TIM1_COMPA_vect_num  6
-#define TIM1_COMPA_vect      _VECTOR(6)  /*  Timer/Counter1 Compare Match A */
-#define TIM1_COMPB_vect_num  7
-#define TIM1_COMPB_vect      _VECTOR(7)  /*  Timer/Counter1 Compare Match B */
-#define TIM1_OVF_vect_num  8
-#define TIM1_OVF_vect      _VECTOR(8)  /* Timer/Counter1 Overflow */
-#define TIM0_COMPA_vect_num  9
-#define TIM0_COMPA_vect      _VECTOR(9)  /* Timer/Counter0 Compare Match A */
-#define TIM0_COMPB_vect_num  10
-#define TIM0_COMPB_vect      _VECTOR(10)  /* Timer/Counter0 Compare Match B */
-#define TIM0_OVF_vect_num  11
-#define TIM0_OVF_vect      _VECTOR(11)  /* Timer/Counter0 Overflow */
-#define ANA_COMP_vect_num  12
-#define ANA_COMP_vect      _VECTOR(12)  /* Analog Comparator */
-#define ADC_ADC_vect_num  13
-#define ADC_ADC_vect      _VECTOR(13)  /* Conversion Complete */
-#define TWI_SLAVE_vect_num  14
-#define TWI_SLAVE_vect      _VECTOR(14)  /* Two-Wire Interface */
-#define SPI_vect_num  15
-#define SPI_vect      _VECTOR(15)  /* Serial Peripheral Interface */
-#define QTRIP_vect_num  16
-#define QTRIP_vect      _VECTOR(16)  /* Touch Sensing */
+#define PCINT2_vect_num  4
+#define PCINT2_vect      _VECTOR(4)  /* Pin Change Interrupt Request 2 */
+#define WDT_vect_num  5
+#define WDT_vect      _VECTOR(5)  /* Watchdog Time-out */
+#define TIM1_CAPT_vect_num  6
+#define TIM1_CAPT_vect      _VECTOR(6)  /* Timer/Counter1 Input Capture */
+#define TIM1_COMPA_vect_num  7
+#define TIM1_COMPA_vect      _VECTOR(7)  /*  Timer/Counter1 Compare Match A */
+#define TIM1_COMPB_vect_num  8
+#define TIM1_COMPB_vect      _VECTOR(8)  /*  Timer/Counter1 Compare Match B */
+#define TIM1_OVF_vect_num  9
+#define TIM1_OVF_vect      _VECTOR(9)  /* Timer/Counter1 Overflow */
+#define TIM0_COMPA_vect_num  10
+#define TIM0_COMPA_vect      _VECTOR(10)  /* Timer/Counter0 Compare Match A */
+#define TIM0_COMPB_vect_num  11
+#define TIM0_COMPB_vect      _VECTOR(11)  /* Timer/Counter0 Compare Match B */
+#define TIM0_OVF_vect_num  12
+#define TIM0_OVF_vect      _VECTOR(12)  /* Timer/Counter0 Overflow */
+#define ANA_COMP_vect_num  13
+#define ANA_COMP_vect      _VECTOR(13)  /* Analog Comparator */
+#define ADC_vect_num  14
+#define ADC_vect      _VECTOR(14)  /* Conversion Complete */
+#define TWI_SLAVE_vect_num  15
+#define TWI_SLAVE_vect      _VECTOR(15)  /* Two-Wire Interface */
+#define SPI_vect_num  16
+#define SPI_vect      _VECTOR(16)  /* Serial Peripheral Interface */
+#define QTRIP_vect_num  17
+#define QTRIP_vect      _VECTOR(17)  /* Touch Sensing */
 
 #define _VECTOR_SIZE 2 /* Size of individual vector. */
-#define _VECTORS_SIZE (17 * _VECTOR_SIZE)
+#define _VECTORS_SIZE (18 * _VECTOR_SIZE)
 
 
 /* Constants */

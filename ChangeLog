@@ -1,3 +1,12 @@
+2013-05-03 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Stefan Kristiansson:
+	patch #7910 Add missing PCINT2_vect to iotn40.h and update
+	all the following vector numbers
+	* include/avr/iotn40.h: Add PCINT2_vect, and shift all
+	subsequent (misplaced) vectors; rename ADC_ADC_vect into
+	ADC_vect to match the datasheet.
+
 2013-05-02 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/tools-install.dox: Drop references to FreeBSD's
