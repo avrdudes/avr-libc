@@ -26,10 +26,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* $ID$ */
+/* $Id$ */
 
 /*
     Compute the ISO 8601 week date corresponding to the given year and day of year.
+    See http://en.wikipedia.org/wiki/ISO_week_date for a full description. To summarize:
+
+        Weeks are numbered from 1 to 53.
+        Week days are numbered 1 to 7, beginning with Monday as day 1.
+
+        The first week of the year contains the first Thursday in that year.
+        Dates prior to week 1 belong to the final week of the previous year.
+
+        The final week of the year contains the last Thursday in that year.
+        Dates after the final week belong to week 1 of the following year.
+
 */
 
 #include <time.h>
@@ -39,15 +50,19 @@ iso_week_date_r(int y, int yday, struct week_date * iso)
 {
     uint16_t        years, n, wday;
     int             weeknum;
+    int isLeap;
 
     iso->year = y;
+
+    isLeap = is_leap_year(y);
 
     /* compute days elapsed since epoch */
     years = y - 2000;
     n = 365 * years + yday;
     if (years) {
         n++;        /* epoch was a leap year */
-        n += (years - 1) / 4;
+        n += years / 4;
+        n -= isLeap;
         if (years > 100)
             n--;
     }
@@ -66,19 +81,20 @@ iso_week_date_r(int y, int yday, struct week_date * iso)
 
     /* if 53, it could be week 1 of the following year */
     if (weeknum == 53) {
+        /*
+            The final week must include its Thursday in the year. We determine the yday of this
+            weeks Thursday, and test whether it exceeds this years length.
+        */
 
         /* determine final yday of this year, 364 or 365 */
-        n = 364 + is_leap_year(y);
+        n = 364 + isLeap;
 
         /* compute yday of this weeks Thursday */
-        wday--;       /* revert to zero based week */
+        wday--;       /* convert to zero based week, Monday = 0 */
         yday -= wday; /* yday of this weeks Monday */
         yday += 3;    /* yday of this weeks Thursday */
 
-        /*
-         * If this weeks Thursday is not in this year, its week 1 of
-         * the following year
-         */
+        /* Is this weeks Thursday included in the year? */
         if (yday > (int) n) {
             iso->year++;
             weeknum = 1;
@@ -86,7 +102,10 @@ iso_week_date_r(int y, int yday, struct week_date * iso)
     }
     iso->week = weeknum;
 
-    /* if zero, it is final week of previous year */
+    /*
+        If zero, it is the final week of the previous year.
+        We determine that by asking for the week number of Dec 31.
+    */
     if (weeknum == 0) {
         y = y - 1;
         iso_week_date_r(y, 364 + is_leap_year(y), iso);

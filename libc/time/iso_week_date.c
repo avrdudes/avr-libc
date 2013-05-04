@@ -26,7 +26,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* $ID$ */
+/* $Id$ */
+
+/*
+    Compute the ISO 8601 week date corresponding to the given year and day of year.
+    See http://en.wikipedia.org/wiki/ISO_week_date for a full description.
+
+    See iso_week_date_r.c for implementation details.
+
+*/
 
 #include <time.h>
 
