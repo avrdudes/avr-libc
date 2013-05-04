@@ -40,8 +40,8 @@
     SCNiFAST8, SCNo8, SCNoLEAST8, SCNoFAST8, SCNu8, SCNuLEAST8,
     SCNuFAST8, SCNx8, SCNxLEAST8, SCNxFAST8
 
-  - Add time.h package, with 'ephemera' functions for e.g. time of sun rise or set,
-    sidereal time, moon phase.
+  - Add time.h package, C standard functions such as mktime() and localtime,
+    along with 'ephemera' such as solar declination, time of sun rise and set.
 
   - Introduce new configure option --with-debug-info=INFO, where INFO
     can be either stabs, dwarf-2, or dwarf-4.  By default, no debug
