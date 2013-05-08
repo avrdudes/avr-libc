@@ -1,5 +1,7 @@
 /* Copyright (c) 2002, 2003, 2004  Marek Michalkiewicz
    Copyright (c) 2005, 2007 Joerg Wunsch
+   Copyright (c) 2013 Dave Hylands
+   Copyright (c) 2013 Frederic Nadeau
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -330,6 +332,72 @@ _crc_ibutton_update(uint8_t __crc, uint8_t __data)
 		: "=r" (__crc), "=d" (__i), "=d" (__pattern)
 		: "0" (__crc), "r" (__data));
 	return __crc;
+}
+
+/** \ingroup util_crc
+    Optimized CRC-8-CCITT calculation.
+
+    Polynomial: x^8 + x^2 + x + 1 (0xE0)<br>
+    
+    For use with simple CRC-8<br>
+    Initial value: 0x0
+    
+    For use with CRC-8-ROHC<br>
+    Initial value: 0xff<br>
+    Reference: http://tools.ietf.org/html/rfc3095#section-5.9.1
+    
+    For use with CRC-8-ATM/ITU<br>
+    Initial value: 0xff<br>
+    Final XOR value: 0x55<br>
+    Reference: http://www.itu.int/rec/T-REC-I.432.1-199902-I/en
+    
+    The C equivalent has been originally written by Dave Hylands.
+    Assembly code is based on _crc_ibutton_update optimization.
+
+    The following is the equivalent functionality written in C.
+
+    \code
+    uint8_t
+    _crc8_ccitt_update (uint8_t inCrc, uint8_t inData)
+    {
+        uint8_t   i;
+        uint8_t   data;
+
+        data = inCrc ^ inData;
+
+        for ( i = 0; i < 8; i++ )
+        {
+            if (( data & 0x80 ) != 0 )
+            {
+                data <<= 1;
+                data ^= 0x07;
+            }
+            else
+            {
+                data <<= 1;
+            }
+        }
+        return data;
+    }
+    \endcode
+*/
+
+static __inline__ uint8_t
+_crc8_ccitt_update(uint8_t __crc, uint8_t __data)
+{
+    uint8_t __i, __pattern;
+    __asm__ __volatile__ (
+        "    eor    %0, %4" "\n\t"
+        "    ldi    %1, 8" "\n\t"
+        "    ldi    %2, 0x07" "\n\t"
+        "1:  lsl    %0" "\n\t"
+        "    brcc   2f" "\n\t"
+        "    eor    %0, %2" "\n\t"
+        "2:  dec    %1" "\n\t"
+        "    brne   1b" "\n\t"
+        : "=r" (__crc), "=d" (__i), "=d" (__pattern)
+        : "0" (__crc), "r" (__data));
+    return __crc;
 }
 
 #endif /* _UTIL_CRC16_H_ */

@@ -25,6 +25,7 @@
   [#7212] Add pgm_read_ptr() macros to pgmspace.h
   [#7220] Add UBRR overload functionality to <util/setbaud.h>
   [#7260] Addition to power.h
+  [#7485] CRC8-CCITT
   [#7654] include/delay.h: delay_us >255us without decreasing resolution
   [#7826] Add ATMega32u4 support to the led-blinking demo
   [#7909] Adding __volatile__ to __asm__ within pgmspace header

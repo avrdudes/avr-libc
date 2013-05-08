@@ -1,8 +1,15 @@
-2013-01-15  Pitchumani Sivanupandi  <Pitchumani.S@atmel.com>
+2013-05-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Frédéric Nadeau:
+	patch #7485 CRC8-CCITT
+	* include/util/crc16.h (_crc8_ccitt_update): New function.
+	* tests/simulate/util/crc16-5.c: New file.
+
+2013-05-08  Pitchumani Sivanupandi  <Pitchumani.S@atmel.com>
 
 	* include/avr/power.h: Specialize clock_prescale_set/get
 	for mega hvb devices
-4
+
 2013-05-03 Mike Rice <mike@mikerice.name>
 
     * Deleted function iso_weeknum(), replaced with iso_week_date()
