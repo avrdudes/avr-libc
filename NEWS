@@ -12,6 +12,7 @@
   [#37778] _MemoryBarrier() in cpufunc.h error on compile
   [#38135] Install a dummy stdfix-avrlibc.h
   [no-id]  XXX_vect_num not consistent io90pwmx.h, iousbxx6_7.h
+  [no-id]  Specialize clock_prescale_set/get for mega hvb devices
 
 * New devices supported:
 
