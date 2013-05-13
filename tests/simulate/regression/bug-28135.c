@@ -32,6 +32,7 @@
 /* $Id$ */
 
 #include <stdlib.h>
+#include <avr/cpufunc.h>
 
 #include "../../libc/stdlib/stdlib_private.h"
 
@@ -52,6 +53,7 @@ int main(void)
 	if (p != p1)
 		return 2;
 
+	_MemoryBarrier();
 	if (__flp)
 		return 3;
 
@@ -60,6 +62,7 @@ int main(void)
 	if (!p)
 		return 4;
 
+	_MemoryBarrier();
 	/* should be empty */
 	if (__flp)
 		return 5;
@@ -90,6 +93,7 @@ int main(void)
 	if (!p)
 		return 10;
 
+	_MemoryBarrier();
 	if (!__flp)
 		return 11;
 
@@ -97,6 +101,7 @@ int main(void)
 	if (p1 != p)
 		return 12;
 
+	_MemoryBarrier();
 	if (!__flp)
 		return 13;
 
@@ -107,6 +112,7 @@ int main(void)
 	if (!p)
 		return 15;
 
+	_MemoryBarrier();
 	if (!__flp)
 		return 16;
 
