@@ -44,16 +44,9 @@ int main ()
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <avr/cpufunc.h>
 
-struct __freelist {
-        size_t sz;
-        struct __freelist *nx;
-};
-
-extern char *__brkval;          /* first location not yet allocated */
-extern struct __freelist *__flp; /* freelist pointer (head of freelist) */
-extern char *__malloc_heap_start;
-extern char *__malloc_heap_end;
+#include "../../libc/stdlib/stdlib_private.h"
 
 #if defined(__AVR_ATmega128__)
 static const int sizes[8] =
@@ -84,6 +77,7 @@ int main(void)
         if (p == NULL) return __LINE__;
         ptrs[i] = p;
     }
+    _MemoryBarrier();
     /* second test: the amount of memory allocated to the heap must
        match the expected TARGETVAL */
     if (__brkval - __malloc_heap_start != TARGETVAL) return __LINE__;
@@ -95,6 +89,7 @@ int main(void)
         free(ptrs[i]);
     }
 
+    _MemoryBarrier();
     /* after freeing everything, the freelist must be empty */
     if (__flp != NULL) return __LINE__;
     if (__brkval != __malloc_heap_start) return __LINE__;
@@ -110,6 +105,7 @@ int main(void)
         if (q != p) return __LINE__;
     }
 
+    _MemoryBarrier();
     /* Verify the allocation length did not increase. */
     if (__brkval > obrk) return __LINE__;
 

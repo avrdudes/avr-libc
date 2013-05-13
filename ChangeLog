@@ -5,6 +5,9 @@
 	memory barrier before any evaluations of __flp or __brkval to
 	ensure the compiler actually reads them from the respective memory
 	locations.
+	* tests/simulate/stdlib/malloc-7.c: (Dito.)  Also replace private
+	library definitions by "stdlib_private.h"
+	* tests/simulate/stdlib/realloc-2.c: (Dito.)
 
 2013-05-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

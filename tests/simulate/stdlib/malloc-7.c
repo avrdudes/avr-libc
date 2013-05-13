@@ -43,16 +43,9 @@ int main ()
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <avr/cpufunc.h>
 
-struct __freelist {
-        size_t sz;
-        struct __freelist *nx;
-};
-
-extern char *__brkval;          /* first location not yet allocated */
-extern struct __freelist *__flp; /* freelist pointer (head of freelist) */
-extern char *__malloc_heap_start;
-extern char *__malloc_heap_end;
+#include "../../libc/stdlib/stdlib_private.h"
 
 int main(void)
 {
@@ -67,11 +60,13 @@ int main(void)
     }
 
     free(ptrs[5]);
+    _MemoryBarrier();
     /* Freelist must be still empty, and __brkval reduced. */
     if (__flp != NULL) return __LINE__;
     if ((char *)(ptrs[5]) - 2 != __brkval) return __LINE__;
 
     free(ptrs[4]);
+    _MemoryBarrier();
     /* Still no entry, and __brkval further down. */
     if (__flp != NULL) return __LINE__;
     if ((char *)(ptrs[4]) - 2 != __brkval) return __LINE__;
@@ -79,17 +74,20 @@ int main(void)
     struct __freelist *ofp = __flp;
 
     free(ptrs[1]);
+    _MemoryBarrier();
     /* One entry added. */
     if ((char *)(ptrs[1]) - 2 != (void *)__flp) return __LINE__;
     if (__flp->sz != 10) return __LINE__;
     if (__flp->nx != (void *)ofp) return __LINE__;
 
     free(ptrs[3]);
+    _MemoryBarrier();
     /* __brkval lowered again. */
     if (__flp->nx != NULL) return __LINE__;
     if ((char *)(ptrs[3]) - 2 != __brkval) return __LINE__;
 
     free(ptrs[2]);
+    _MemoryBarrier();
     /* ...and again. */
     if (__flp->nx != NULL) return __LINE__;
     if ((char *)(ptrs[1]) - 2 != __brkval) return __LINE__;
