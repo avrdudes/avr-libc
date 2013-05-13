@@ -1,5 +1,10 @@
 2013-05-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* tests/simulate/other/progtype-3.c (s): Initialize progmem
+	variable to get rid of a warning.
+
+2013-05-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* tests/simulate/regression/bug-28135.c: GCC 4.5+ implies malloc()
 	and free() have no side-effects to global variables.  Place a
 	memory barrier before any evaluations of __flp or __brkval to

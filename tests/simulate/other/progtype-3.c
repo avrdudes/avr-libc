@@ -44,7 +44,7 @@ int main ()	{ return 0; }
 #define __PROG_TYPES_COMPAT__
 #include <avr/pgmspace.h>
 
-static const prog_char s[10];
+static const prog_char s[10] = { 0 };
 
 int main ()
 {
