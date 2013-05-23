@@ -1642,7 +1642,7 @@ typedef enum
 || defined(__AVR_ATmega644RFR2__) \
 || defined(__AVR_ATmega256RFR2__) \
 || defined(__AVR_ATmega128RFR2__) \
-|| defined(__AVR_ATmega64RFR2__) \
+|| defined(__AVR_ATmega64RFR2__)
     , clock_div_1_rc = 15
 #endif
 } clock_div_t;
