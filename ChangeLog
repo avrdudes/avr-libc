@@ -1,3 +1,9 @@
+2013-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #36410: avr/boot.h: poisoned SPMCR for ATmega128
+	* include/avr/boot.h: Don't evaluate SPMCR if SPMCSR was
+	already around.
+
 2013-05-13  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* tests/simulate/other/progtype-3.c (s): Initialize progmem
