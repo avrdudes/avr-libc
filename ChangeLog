@@ -1,3 +1,8 @@
+2013-09-09  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/xmega.h (_PROTECTED_WRITE): add forgotten
+	leading underscore.
+
 2013-06-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #36410: avr/boot.h: poisoned SPMCR for ATmega128

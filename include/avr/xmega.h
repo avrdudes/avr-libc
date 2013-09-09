@@ -58,7 +58,7 @@
  */
 #define _PROTECTED_WRITE(reg, value)
 #else  /* !__DOXYGEN__ */
-#define PROTECTED_WRITE(reg, value)				\
+#define _PROTECTED_WRITE(reg, value)				\
   __asm__ __volatile__("out %[ccp], %[ccp_ioreg]" "\n\t"	\
 		       "sts %[ioreg], %[val]"			\
 		       :					\
