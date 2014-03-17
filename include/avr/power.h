@@ -81,6 +81,18 @@ the clock below 131.072 kHz.
   </tr>
 
   <tr>
+    <td>power_aca_disable()</td>
+    <td>Disable the Analog Comparator on PortA.</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_aca_enable()</td>
+    <td>Enable the Analog Comparator on PortA.</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
     <td>power_adc_enable()</td>
     <td>Enable the Analog to Digital Converter module.</td>
     <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, AT90PWM81, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega3250A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861, ATmega256RFR2, ATmega2564RFR2, ATmega128RFR2, ATmega1284RFR2, ATmega64RFR2, ATmega644RFR2</td>
@@ -93,6 +105,42 @@ the clock below 131.072 kHz.
   </tr>
 
   <tr>
+    <td>power_adca_disable()</td>
+    <td>Disable the Analog to Digital Converter module on PortA</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_adca_enable()</td>
+    <td>Enable the Analog to Digital Converter module on PortA</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_evsys_disable()</td>
+    <td>Disable the EVSYS module</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_evsys_enable()</td>
+    <td>Enable the EVSYS module</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_hiresc_disable()</td>
+    <td>Disable the HIRES module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_hiresc_enable()</td>
+    <td>Enable the HIRES module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+   <tr>
     <td>power_lcd_enable()</td>
     <td>Enable the LCD module.</td>
     <td>ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490</td>
@@ -213,6 +261,18 @@ the clock below 131.072 kHz.
   </tr>
 
   <tr>
+    <td>power_rtc_disable()</td>
+    <td>Disable the RTC module</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_rtc_enable()</td>
+    <td>Enable the RTC module</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
     <td>power_spi_enable()</td>
     <td>Enable the Serial Peripheral Interface module.</td>
     <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, AT90PWM81, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega3250A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega48, ATmega88, ATmega168, ATmega256RFR2, ATmega2564RFR2, ATmega128RFR2, ATmega1284RFR2, ATmega64RFR2, ATmega644RFR2</td>
@@ -222,6 +282,114 @@ the clock below 131.072 kHz.
     <td>power_spi_disable()</td>
     <td>Disable the Serial Peripheral Interface module.</td>
     <td>ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, AT90PWM81, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega3250A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega48, ATmega88, ATmega168, ATmega256RFR2, ATmega2564RFR2, ATmega128RFR2, ATmega1284RFR2, ATmega64RFR2, ATmega644RFR2</td>
+  </tr>
+
+  <tr>
+    <td>power_spic_disable()</td>
+    <td>Disable the SPI module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_spic_enable()</td>
+    <td>Enable the SPI module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_spid_disable()</td>
+    <td>Disable the SPI module on PortD</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_spid_enable()</td>
+    <td>Enable the SPI module on PortD</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0c_disable()</td>
+    <td>Disable the TC0 module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0c_enable()</td>
+    <td>Enable the TC0 module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0d_disable()</td>
+    <td>Disable the TC0 module on PortD</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0d_enable()</td>
+    <td>Enable the TC0 module on PortD</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0e_disable()</td>
+    <td>Disable the TC0 module on PortE</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0e_enable()</td>
+    <td>Enable the TC0 module on PortE</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0f_disable()</td>
+    <td>Disable the TC0 module on PortF</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc0f_enable()</td>
+    <td>Enable the TC0 module on PortF</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc1c_disable()</td>
+    <td>Disable the TC1 module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_tc1c_enable()</td>
+    <td>Enable the TC1 module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_twic_disable()</td>
+    <td>Disable the Two Wire Interface module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_twic_enable()</td>
+    <td>Enable the Two Wire Interface module on PortC</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_twie_disable()</td>
+    <td>Disable the Two Wire Interface module on PortE</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
+  </tr>
+
+  <tr>
+    <td>power_twie_enable()</td>
+    <td>Enable the Two Wire Interface module on PortE</td>
+    <td>ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3</td>
   </tr>
 
   <tr>
@@ -369,6 +537,54 @@ the clock below 131.072 kHz.
   </tr>
 
   <tr>
+    <td>power_usartc0_disable()</td>
+    <td> Disable the USART0 module on PortC</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
+    <td>power_usartc0_enable()</td>
+    <td> Enable the USART0 module on PortC</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
+    <td>power_usartd0_disable()</td>
+    <td> Disable the USART0 module on PortD</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
+    <td>power_usartd0_enable()</td>
+    <td> Enable the USART0 module on PortD</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
+    <td>power_usarte0_disable()</td>
+    <td> Disable the USART0 module on PortE</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
+    <td>power_usarte0_enable()</td>
+    <td> Enable the USART0 module on PortE</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
+    <td>power_usartf0_disable()</td>
+    <td> Disable the USART0 module on PortF</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
+    <td>power_usartf0_enable()</td>
+    <td> Enable the USART0 module on PortF</td>
+    <td>ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561</td>
+  </tr>
+
+  <tr>
     <td>power_usb_enable()</td>
     <td>Enable the USB module.</td>
     <td>AT90USB646, AT90USB647, AT90USB1286, AT90USB1287</td>
@@ -407,13 +623,13 @@ the clock below 131.072 kHz.
   <tr>
     <td>power_all_enable()</td>
     <td>Enable all modules.</td>
-    <td>ATxmega6A4, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmegaA1, ATxmegaA1U, ATxmega128A3, ATxmega192A3, ATxmega256A3, ATxmegaA3B, ATxmega16D4, ATxmega32D4, ATxmega64D3, ATxmega128D3, ATxmega192D3, ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega325A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861, ATmega256RFR2, ATmega2564RFR2, ATmega128RFR2, ATmega1284RFR2, ATmega64RFR2, ATmega644RFR2</td>
+    <td>ATxmega6A4, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmegaA1, ATxmegaA1U, ATxmega128A3, ATxmega192A3, ATxmega256A3, ATxmegaA3B, ATxmega16D4, ATxmega32D4, ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3, ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega325A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861, ATmega256RFR2, ATmega2564RFR2, ATmega128RFR2, ATmega1284RFR2, ATmega64RFR2, ATmega644RFR2</td>
   </tr>
 
   <tr>
     <td>power_all_disable()</td>
     <td>Disable all modules.</td>
-    <td>ATxmega6A4, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmegaA1, ATxmegaA1U, ATxmega128A3, ATxmega192A3, ATxmega256A3, ATxmegaA3B, ATxmega16D4, ATxmega32D4, ATxmega64D3, ATxmega128D3,ATxmega192D3, ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega325A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861, ATmega256RFR2, ATmega2564RFR2, ATmega128RFR2, ATmega1284RFR2, ATmega64RFR2, ATmega644RFR2</td>
+    <td>ATxmega6A4, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmegaA1, ATxmegaA1U, ATxmega128A3, ATxmega192A3, ATxmega256A3, ATxmegaA3B, ATxmega16D4, ATxmega32D4, ATxmega64D3, ATxmega128D3, ATxmega192D3, ATxmega256D3, ATmega640, ATmega1280, ATmega1281, ATmega128RFA1, ATmega2560, ATmega2561, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM2, AT90PWM2B, AT90PWM3, AT90PWM3B, AT90PWM216, AT90PWM316, ATmega165, ATmega165P, ATmega325, ATmega325A, ATmega3250, ATmega325A, ATmega645, ATmega6450, ATmega169, ATmega169P, ATmega329, ATmega329A, ATmega3290, ATmega3290A, ATmega649, ATmega6490, ATmega164P, ATmega324P, ATmega644, ATmega406, ATmega48, ATmega88, ATmega168, ATtiny24, ATtiny44, ATtiny84, ATtiny84A, ATtiny25, ATtiny45, ATtiny85, ATtiny261, ATtiny461, ATtiny861, ATmega256RFR2, ATmega2564RFR2, ATmega128RFR2, ATmega1284RFR2, ATmega64RFR2, ATmega644RFR2</td>
   </tr>
 </table>
 </center>
@@ -482,6 +698,79 @@ do { \
 } while(0)
 #endif
 
+#if defined(__AVR_ATxmega64D3__) \
+|| defined(__AVR_ATxmega128D3__) \
+|| defined(__AVR_ATxmega192D3__) \
+|| defined(__AVR_ATxmega256D3__)
+
+#define power_rtc_enable()      (PR_PRGEN &= (uint8_t)~(PR_RTC_bm))
+#define power_rtc_disable()     (PR_PRGEN |= (uint8_t)PR_RTC_bm)
+
+#define power_evsys_enable()    (PR_PRGEN &= (uint8_t)~(PR_EVSYS_bm))
+#define power_evsys_disable()   (PR_PRGEN |= (uint8_t)PR_EVSYS_bm)
+
+#define power_adca_enable()     (PR_PRPA &= (uint8_t)~(PR_ADC_bm))
+#define power_adca_disable()    (PR_PRPA |= (uint8_t)PR_ADC_bm)
+
+#define power_aca_enable()      (PR_PRPA &= (uint8_t)~(PR_AC_bm))
+#define power_aca_disable()     (PR_PRPA |= (uint8_t)PR_AC_bm)
+
+#define power_twic_enable()     (PR_PRPC &= (uint8_t)~(PR_TWI_bm))
+#define power_twic_disable()    (PR_PRPC |= (uint8_t)PR_TWI_bm)
+#define power_twie_enable()     (PR_PRPE &= (uint8_t)~(PR_TWI_bm))
+#define power_twie_disable()    (PR_PRPE |= (uint8_t)PR_TWI_bm)
+
+#define power_usartc0_enable()  (PR_PRPC &= (uint8_t)~(PR_USART0_bm))
+#define power_usartc0_disable() (PR_PRPC |= (uint8_t)PR_USART0_bm)
+#define power_usartd0_enable()  (PR_PRPD &= (uint8_t)~(PR_USART0_bm))
+#define power_usartd0_disable() (PR_PRPD |= (uint8_t)PR_USART0_bm)
+#define power_usarte0_enable()  (PR_PRPE &= (uint8_t)~(PR_USART0_bm))
+#define power_usarte0_disable() (PR_PRPE |= (uint8_t)PR_USART0_bm)
+#define power_usartf0_enable()  (PR_PRPF &= (uint8_t)~(PR_USART0_bm))
+#define power_usartf0_disable() (PR_PRPF |= (uint8_t)PR_USART0_bm)
+
+#define power_spic_enable()     (PR_PRPC &= (uint8_t)~(PR_SPI_bm))
+#define power_spic_disable()    (PR_PRPC |= (uint8_t)PR_SPI_bm)
+#define power_spid_enable()     (PR_PRPD &= (uint8_t)~(PR_SPI_bm))
+#define power_spid_disable()    (PR_PRPD |= (uint8_t)PR_SPI_bm)
+
+#define power_hiresc_enable()   (PR_PRPC &= (uint8_t)~(PR_HIRES_bm))
+#define power_hiresc_disable()  (PR_PRPC |= (uint8_t)PR_HIRES_bm)
+
+#define power_tc1c_enable()     (PR_PRPC &= (uint8_t)~(PR_TC1_bm))
+#define power_tc1c_disable()    (PR_PRPC |= (uint8_t)PR_TC1_bm)
+
+#define power_tc0c_enable()     (PR_PRPC &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0c_disable()    (PR_PRPC |= (uint8_t)PR_TC0_bm)
+#define power_tc0d_enable()     (PR_PRPD &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0d_disable()    (PR_PRPD |= (uint8_t)PR_TC0_bm)
+#define power_tc0e_enable()     (PR_PRPE &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0e_disable()    (PR_PRPE |= (uint8_t)PR_TC0_bm)
+#define power_tc0f_enable()     (PR_PRPF &= (uint8_t)~(PR_TC0_bm))
+#define power_tc0f_disable()    (PR_PRPF |= (uint8_t)PR_TC0_bm)
+
+#define power_all_enable() \
+do { \
+    PR_PRGEN &= (uint8_t)~(PR_RTC_bm|PR_EVSYS_bm); \
+    PR_PRPA &= (uint8_t)~(PR_ADC_bm|PR_AC_bm); \
+    PR_PRPC &= (uint8_t)~(PR_TWI_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPD &= (uint8_t)~(PR_USART0_bm|PR_SPI_bm|PR_TC0_bm); \
+    PR_PRPE &= (uint8_t)~(PR_TWI_bm|PR_USART0_bm|PR_TC0_bm); \
+    PR_PRPF &= (uint8_t)~(PR_USART0_bm|PR_TC0_bm); \
+} while(0)
+
+
+#define power_all_disable() \
+do { \
+    PR_PRGEN|= (uint8_t)(PR_RTC_bm|PR_EVSYS_bm); \
+    PR_PRPA |= (uint8_t)(PR_ADC_bm|PR_AC_bm); \
+    PR_PRPC |= (uint8_t)(PR_TWI_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm); \
+    PR_PRPD |= (uint8_t)(PR_USART0_bm|PR_SPI_bm|PR_TC0_bm); \
+    PR_PRPE |= (uint8_t)(PR_TWI_bm|PR_USART0_bm|PR_TC0_bm); \
+    PR_PRPF |= (uint8_t)(PR_USART0_bm|PR_TC0_bm); \
+} while(0)
+#endif
+
 #if defined(__AVR_ATxmega16A4__) \
 || defined(__AVR_ATxmega16D4__) \
 || defined(__AVR_ATxmega32A4__) \
@@ -489,7 +778,6 @@ do { \
 || defined(__AVR_ATxmega64A1__) \
 || defined(__AVR_ATxmega64A1U__) \
 || defined(__AVR_ATxmega64A3__) \
-|| defined(__AVR_ATxmega64D3__) \
 || defined(__AVR_ATxmega128A1__) \
 || defined(__AVR_ATxmega128A1U__) \
 || defined(__AVR_ATxmega128A3__) \
@@ -570,13 +858,8 @@ do { \
 #define power_tc0f_enable()     (PR_PRPF &= (uint8_t)~(PR_TC0_bm))
 #define power_tc0f_disable()    (PR_PRPF |= (uint8_t)PR_TC0_bm)
 
-#endif
-
 #if defined(__AVR_ATxmega16D4__) \
-|| defined(__AVR_ATxmega32D4__) \
-|| defined(__AVR_ATxmega64D3__) \
-|| defined(__AVR_ATxmega128D3__) \
-|| defined(__AVR_ATxmega192D3__) 
+|| defined(__AVR_ATxmega32D4__) 
 
 #define power_all_enable() \
 do { \

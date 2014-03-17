@@ -1,0 +1,12 @@
+2014-03-17  Pitchumani Sivanupandi <pitchumani.s@atmel.com> 
+
+	* include/avr/iox64d3.h (PR_struct): Remove PRPB.
+	(CRC_struct): Add CRC definitions.
+	Remove incorrect PR definitions.
+	* include/avr/iox128d3.h: Same.
+	* include/avr/iox192d3.h: Same.
+	* include/avr/iox256d3.h (PR_struct): Add power reduction definitions.
+	(CRC_struct): Add CRC definitions.
+	Add PR and CRC macro definitions.
+	* include/avr/power.h: Add power reduction macro docs and update power
+	reduction macro definitions for xmega64/128/192/256 D3 devices.

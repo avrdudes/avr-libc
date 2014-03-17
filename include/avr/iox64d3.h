@@ -174,7 +174,7 @@ typedef struct PR_struct
 {
     register8_t PRGEN;  /* General Power Reduction */
     register8_t PRPA;  /* Power Reduction Port A */
-    register8_t PRPB;  /* Power Reduction Port B */
+    register8_t reserved_0x02;
     register8_t PRPC;  /* Power Reduction Port C */
     register8_t PRPD;  /* Power Reduction Port D */
     register8_t PRPE;  /* Power Reduction Port E */
@@ -412,6 +412,46 @@ typedef struct PMIC_struct
     register8_t INTPRI;  /* Interrupt Priority */
     register8_t CTRL;  /* Control Register */
 } PMIC_t;
+
+
+/*
+--------------------------------------------------------------------------
+CRC - Cyclic Redundancy Checker
+--------------------------------------------------------------------------
+*/
+
+/* Cyclic Redundancy Checker */
+typedef struct CRC_struct
+{
+    register8_t CTRL;  /* Control Register */
+    register8_t STATUS;  /* Status Register */
+    register8_t reserved_0x02;
+    register8_t DATAIN;  /* Data Input */
+    register8_t CHECKSUM0;  /* Checksum byte 0 */
+    register8_t CHECKSUM1;  /* Checksum byte 1 */
+    register8_t CHECKSUM2;  /* Checksum byte 2 */
+    register8_t CHECKSUM3;  /* Checksum byte 3 */
+} CRC_t;
+
+/* Reset */
+typedef enum CRC_RESET_enum
+{
+    CRC_RESET_NO_gc = (0x00<<6),  /* No Reset */
+    CRC_RESET_RESET0_gc = (0x02<<6),  /* Reset CRC with CHECKSUM to all zeros */
+    CRC_RESET_RESET1_gc = (0x03<<6),  /* Reset CRC with CHECKSUM to all ones */
+} CRC_RESET_t;
+
+/* Input Source */
+typedef enum CRC_SOURCE_enum
+{
+    CRC_SOURCE_DISABLE_gc = (0x00<<0),  /* Disabled */
+    CRC_SOURCE_IO_gc = (0x01<<0),  /* I/O Interface */
+    CRC_SOURCE_FLASH_gc = (0x02<<0),  /* Flash */
+    CRC_SOURCE_DMAC0_gc = (0x04<<0),  /* DMAC Channel 0 */
+    CRC_SOURCE_DMAC1_gc = (0x05<<0),  /* DMAC Channel 1 */
+    CRC_SOURCE_DMAC2_gc = (0x06<<0),  /* DMAC Channel 2 */
+    CRC_SOURCE_DMAC3_gc = (0x07<<0),  /* DMAC Channel 3 */
+} CRC_SOURCE_t;
 
 
 /*
@@ -2180,6 +2220,7 @@ IO Module Instances. Mapped to memory.
 #define MCU    (*(MCU_t *) 0x0090)  /* MCU Control */
 #define PMIC    (*(PMIC_t *) 0x00A0)  /* Programmable Interrupt Controller */
 #define PORTCFG    (*(PORTCFG_t *) 0x00B0)  /* Port Configuration */
+#define CRC    (*(CRC_t *) 0x00D0)  /* Cyclic Redundancy Checker */
 #define EVSYS    (*(EVSYS_t *) 0x0180)  /* Event System */
 #define NVM    (*(NVM_t *) 0x01C0)  /* Non Volatile Memory Controller */
 #define ADCA    (*(ADC_t *) 0x0200)  /* Analog to Digital Converter A */
@@ -2311,7 +2352,6 @@ IO Module Instances. Mapped to memory.
 /* PR - Power Reduction */
 #define PR_PRGEN  _SFR_MEM8(0x0070)
 #define PR_PRPA  _SFR_MEM8(0x0071)
-#define PR_PRPB  _SFR_MEM8(0x0072)
 #define PR_PRPC  _SFR_MEM8(0x0073)
 #define PR_PRPD  _SFR_MEM8(0x0074)
 #define PR_PRPE  _SFR_MEM8(0x0075)
@@ -2346,6 +2386,15 @@ IO Module Instances. Mapped to memory.
 #define PORTCFG_VPCTRLA  _SFR_MEM8(0x00B2)
 #define PORTCFG_VPCTRLB  _SFR_MEM8(0x00B3)
 #define PORTCFG_CLKEVOUT  _SFR_MEM8(0x00B4)
+
+/* CRC - Cyclic Redundancy Checker */
+#define CRC_CTRL  _SFR_MEM8(0x00D0)
+#define CRC_STATUS  _SFR_MEM8(0x00D1)
+#define CRC_DATAIN  _SFR_MEM8(0x00D3)
+#define CRC_CHECKSUM0  _SFR_MEM8(0x00D4)
+#define CRC_CHECKSUM1  _SFR_MEM8(0x00D5)
+#define CRC_CHECKSUM2  _SFR_MEM8(0x00D6)
+#define CRC_CHECKSUM3  _SFR_MEM8(0x00D7)
 
 /* EVSYS - Event System */
 #define EVSYS_CH0MUX  _SFR_MEM8(0x0180)
@@ -2915,50 +2964,22 @@ IO Module Instances. Mapped to memory.
 
 
 /* PR.PRGEN  bit masks and bit positions */
-#define PR_AES_bm  0x10  /* AES bit mask. */
-#define PR_AES_bp  4  /* AES bit position. */
-
-#define PR_EBI_bm  0x08  /* External Bus Interface bit mask. */
-#define PR_EBI_bp  3  /* External Bus Interface bit position. */
-
 #define PR_RTC_bm  0x04  /* Real-time Counter bit mask. */
 #define PR_RTC_bp  2  /* Real-time Counter bit position. */
 
 #define PR_EVSYS_bm  0x02  /* Event System bit mask. */
 #define PR_EVSYS_bp  1  /* Event System bit position. */
 
-#define PR_DMA_bm  0x01  /* DMA-Controller bit mask. */
-#define PR_DMA_bp  0  /* DMA-Controller bit position. */
-
-
 /* PR.PRPA  bit masks and bit positions */
-#define PR_DAC_bm  0x04  /* Port A DAC bit mask. */
-#define PR_DAC_bp  2  /* Port A DAC bit position. */
-
 #define PR_ADC_bm  0x02  /* Port A ADC bit mask. */
 #define PR_ADC_bp  1  /* Port A ADC bit position. */
 
 #define PR_AC_bm  0x01  /* Port A Analog Comparator bit mask. */
 #define PR_AC_bp  0  /* Port A Analog Comparator bit position. */
 
-
-/* PR.PRPB  bit masks and bit positions */
-/* PR_DAC_bm  Predefined. */
-/* PR_DAC_bp  Predefined. */
-
-/* PR_ADC_bm  Predefined. */
-/* PR_ADC_bp  Predefined. */
-
-/* PR_AC_bm  Predefined. */
-/* PR_AC_bp  Predefined. */
-
-
 /* PR.PRPC  bit masks and bit positions */
 #define PR_TWI_bm  0x40  /* Port C Two-wire Interface bit mask. */
 #define PR_TWI_bp  6  /* Port C Two-wire Interface bit position. */
-
-#define PR_USART1_bm  0x20  /* Port C USART1 bit mask. */
-#define PR_USART1_bp  5  /* Port C USART1 bit position. */
 
 #define PR_USART0_bm  0x10  /* Port C USART0 bit mask. */
 #define PR_USART0_bp  4  /* Port C USART0 bit position. */
@@ -2966,8 +2987,8 @@ IO Module Instances. Mapped to memory.
 #define PR_SPI_bm  0x08  /* Port C SPI bit mask. */
 #define PR_SPI_bp  3  /* Port C SPI bit position. */
 
-#define PR_HIRES_bm  0x04  /* Port C AWEX bit mask. */
-#define PR_HIRES_bp  2  /* Port C AWEX bit position. */
+#define PR_HIRES_bm  0x04  /* Port C HIRES bit mask. */
+#define PR_HIRES_bp  2  /* Port C HIRES bit position. */
 
 #define PR_TC1_bm  0x02  /* Port C Timer/Counter1 bit mask. */
 #define PR_TC1_bp  1  /* Port C Timer/Counter1 bit position. */
@@ -2975,75 +2996,32 @@ IO Module Instances. Mapped to memory.
 #define PR_TC0_bm  0x01  /* Port C Timer/Counter0 bit mask. */
 #define PR_TC0_bp  0  /* Port C Timer/Counter0 bit position. */
 
-
 /* PR.PRPD  bit masks and bit positions */
-/* PR_TWI_bm  Predefined. */
-/* PR_TWI_bp  Predefined. */
-
-/* PR_USART1_bm  Predefined. */
-/* PR_USART1_bp  Predefined. */
-
 /* PR_USART0_bm  Predefined. */
 /* PR_USART0_bp  Predefined. */
 
 /* PR_SPI_bm  Predefined. */
 /* PR_SPI_bp  Predefined. */
 
-/* PR_HIRES_bm  Predefined. */
-/* PR_HIRES_bp  Predefined. */
-
-/* PR_TC1_bm  Predefined. */
-/* PR_TC1_bp  Predefined. */
-
 /* PR_TC0_bm  Predefined. */
 /* PR_TC0_bp  Predefined. */
-
 
 /* PR.PRPE  bit masks and bit positions */
 /* PR_TWI_bm  Predefined. */
 /* PR_TWI_bp  Predefined. */
 
-/* PR_USART1_bm  Predefined. */
-/* PR_USART1_bp  Predefined. */
-
 /* PR_USART0_bm  Predefined. */
 /* PR_USART0_bp  Predefined. */
 
-/* PR_SPI_bm  Predefined. */
-/* PR_SPI_bp  Predefined. */
-
-/* PR_HIRES_bm  Predefined. */
-/* PR_HIRES_bp  Predefined. */
-
-/* PR_TC1_bm  Predefined. */
-/* PR_TC1_bp  Predefined. */
-
 /* PR_TC0_bm  Predefined. */
 /* PR_TC0_bp  Predefined. */
-
 
 /* PR.PRPF  bit masks and bit positions */
-/* PR_TWI_bm  Predefined. */
-/* PR_TWI_bp  Predefined. */
-
-/* PR_USART1_bm  Predefined. */
-/* PR_USART1_bp  Predefined. */
-
 /* PR_USART0_bm  Predefined. */
 /* PR_USART0_bp  Predefined. */
 
-/* PR_SPI_bm  Predefined. */
-/* PR_SPI_bp  Predefined. */
-
-/* PR_HIRES_bm  Predefined. */
-/* PR_HIRES_bp  Predefined. */
-
-/* PR_TC1_bm  Predefined. */
-/* PR_TC1_bp  Predefined. */
-
 /* PR_TC0_bm  Predefined. */
 /* PR_TC0_bp  Predefined. */
-
 
 /* SLEEP - Sleep Controller */
 /* SLEEP.CTRL  bit masks and bit positions */
@@ -3323,6 +3301,37 @@ IO Module Instances. Mapped to memory.
 
 #define PMIC_LOLVLEN_bm  0x01  /* Low Level Enable bit mask. */
 #define PMIC_LOLVLEN_bp  0  /* Low Level Enable bit position. */
+
+
+/* CRC - Cyclic Redundancy Checker */
+/* CRC.CTRL  bit masks and bit positions */
+#define CRC_RESET_gm  0xC0  /* Reset group mask. */
+#define CRC_RESET_gp  6  /* Reset group position. */
+#define CRC_RESET0_bm  (1<<6)  /* Reset bit 0 mask. */
+#define CRC_RESET0_bp  6  /* Reset bit 0 position. */
+#define CRC_RESET1_bm  (1<<7)  /* Reset bit 1 mask. */
+#define CRC_RESET1_bp  7  /* Reset bit 1 position. */
+
+#define CRC_CRC32_bm  0x20  /* CRC Mode bit mask. */
+#define CRC_CRC32_bp  5  /* CRC Mode bit position. */
+
+#define CRC_SOURCE_gm  0x0F  /* Input Source group mask. */
+#define CRC_SOURCE_gp  0  /* Input Source group position. */
+#define CRC_SOURCE0_bm  (1<<0)  /* Input Source bit 0 mask. */
+#define CRC_SOURCE0_bp  0  /* Input Source bit 0 position. */
+#define CRC_SOURCE1_bm  (1<<1)  /* Input Source bit 1 mask. */
+#define CRC_SOURCE1_bp  1  /* Input Source bit 1 position. */
+#define CRC_SOURCE2_bm  (1<<2)  /* Input Source bit 2 mask. */
+#define CRC_SOURCE2_bp  2  /* Input Source bit 2 position. */
+#define CRC_SOURCE3_bm  (1<<3)  /* Input Source bit 3 mask. */
+#define CRC_SOURCE3_bp  3  /* Input Source bit 3 position. */
+
+/* CRC.STATUS  bit masks and bit positions */
+#define CRC_ZERO_bm  0x02  /* Zero detection bit mask. */
+#define CRC_ZERO_bp  1  /* Zero detection bit position. */
+
+#define CRC_BUSY_bm  0x01  /* Busy bit mask. */
+#define CRC_BUSY_bp  0  /* Busy bit position. */
 
 
 /* EVSYS - Event System */
