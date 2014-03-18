@@ -1,6 +1,13 @@
 2014-03-18  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	Submitted by Vishnu KS
+	Fix for bug #40595: iotn2313a.h: wrong fuses definitions for High Fuse Byte
+	* include/avr/iotn2313a.h: Update high fuse byte definitions.
+	* include/avr/iotn4313.h: Same.
+
+2014-03-18  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	Submitted by Vishnu KS
 	Fix for bug #41519: wrong SPM_PAGESIZE definition in iotn[48]8.h
 	* include/avr/iotn48.h: update SPM_PAGESIZE to 64
 	* include/avr/iotn88.h: Same.
