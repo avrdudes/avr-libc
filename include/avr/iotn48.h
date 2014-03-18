@@ -742,7 +742,7 @@
 
 
 /* Constants */
-#define SPM_PAGESIZE 32
+#define SPM_PAGESIZE 64
 #define RAMSTART     (0x100)
 #define RAMEND       0x1FF
 #define XRAMSIZE     0

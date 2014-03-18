@@ -1,3 +1,10 @@
+2014-03-18  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	Submitted by Vishnu KS
+	Fix for bug #41519: wrong SPM_PAGESIZE definition in iotn[48]8.h
+	* include/avr/iotn48.h: update SPM_PAGESIZE to 64
+	* include/avr/iotn88.h: Same.
+
 2014-03-17  Pitchumani Sivanupandi <pitchumani.s@atmel.com> 
 
 	* include/avr/iox64d3.h (PR_struct): Remove PRPB.

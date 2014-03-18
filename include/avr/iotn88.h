@@ -749,7 +749,7 @@
 #define E2END        0x3F
 #define E2PAGESIZE   4
 #define FLASHEND     0x1FFF
-#define SPM_PAGESIZE 32
+#define SPM_PAGESIZE 64
 
 
 /* Fuse Information */
