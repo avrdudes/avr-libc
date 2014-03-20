@@ -1415,6 +1415,16 @@ struct __reg_EICRB {
 /* Pin Change Mask Register 0 */
 #define PCMSK0                          _SFR_MEM8(0x6B)
 
+#if !(defined(__ASSEMBLER__) || defined(__NOSTRUCT__))
+
+struct __reg_PCMSK0 {
+        unsigned int pcint : 8;	/* Pin Change Enable Mask */
+};
+
+#define PCMSK0_struct _SFR_MEM8_STRUCT(0x6b, struct __reg_PCMSK0)
+
+#endif /* __ASSEMBLER__ */
+
   /* PCMSK0 */
 
 #define PCINT0                          0
