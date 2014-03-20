@@ -1,5 +1,12 @@
 2014-03-20  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
+	Submitted by Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
+	Fix for bug #35948: iom32u4.h for ATmega32U4 incorrectly defines Timer 2
+	* include/avr/iom32u4.h: Remove timer2 related definitions (TIFR2, TCCR2A,
+	TCCR2B, TCNT2, OCR2A and OCR2B)
+
+2014-03-20  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
 	Submitted by Barnabas Bodnar, Pitchumani Sivanupandi
 	Fix for bug #36053: Declaration of the register USIBR missing for ATtiny 
 	2313a/4313
