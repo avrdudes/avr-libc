@@ -51,6 +51,16 @@
 
 /* Registers and associated bit numbers. */
 
+#define USIBR _SFR_IO8(0x000)
+#define USIBR0 0
+#define USIBR1 1
+#define USIBR2 2
+#define USIBR3 3
+#define USIBR4 4
+#define USIBR5 5
+#define USIBR6 6
+#define USIBR7 7
+
 #define DIDR _SFR_IO8(0x001)
 #define AIN0D 0
 #define AIN1D 1
@@ -68,7 +78,12 @@
 #define USBS 3
 #define UPM0 4
 #define UPM1 5
-#define UMSEL 6
+#define UMSEL0 6
+#define UMSEL1 7
+
+/* When in MSPIM mode */
+#define UCPHA 1
+#define UDORD 2
 
 #define PCMSK1 _SFR_IO8(0x004)
 #define PCINT8 0
@@ -304,6 +319,7 @@
 #define EEAR6 6
 
 #define PCMSK _SFR_IO8(0x020)
+#define PCMSK0 _SFR_IO8(0x020)
 #define PCINT0 0
 #define PCINT1 1
 #define PCINT2 2
@@ -529,12 +545,17 @@
 #define TOIE1 7
 
 #define EIFR _SFR_IO8(0x03A)
-#define PCIF 5
+#define GIFR _SFR_IO8(0x03A)
+#define PCIF1 3
+#define PCIF2 4
+#define PCIF0 5
 #define INTF0 6
 #define INTF1 7
 
 #define GIMSK _SFR_IO8(0x03B)
-#define PCIE 5
+#define PCIE1 3
+#define PCIE2 4
+#define PCIE0 5
 #define INT0 6
 #define INT1 7
 
@@ -563,16 +584,24 @@
 #define TIMER1_OVF_vect      _VECTOR(5)  /* Timer/Counter1 Overflow */
 #define TIMER0_OVF_vect_num  6
 #define TIMER0_OVF_vect      _VECTOR(6)  /* Timer/Counter0 Overflow */
+#define USART0_RX_vect_num  7
+#define USART0_RX_vect      _VECTOR(7)  /* USART, Rx Complete */
 #define USART_RX_vect_num  7
-#define USART_RX_vect      _VECTOR(7)  /* USART, Rx Complete */
+#define USART_RX_vect      _VECTOR(7)  /* alias */
+#define USART0_UDRE_vect_num  8
+#define USART0_UDRE_vect      _VECTOR(8)  /* USART Data Register Empty */
 #define USART_UDRE_vect_num  8
-#define USART_UDRE_vect      _VECTOR(8)  /* USART Data Register Empty */
+#define USART_UDRE_vect      _VECTOR(8)  /* alias */
+#define USART0_TX_vect_num  9
+#define USART0_TX_vect      _VECTOR(9)  /* USART, Tx Complete */
 #define USART_TX_vect_num  9
-#define USART_TX_vect      _VECTOR(9)  /* USART, Tx Complete */
+#define USART_TX_vect      _VECTOR(9)  /* alias */
 #define ANA_COMP_vect_num  10
 #define ANA_COMP_vect      _VECTOR(10)  /* Analog Comparator */
+#define PCINT0_vect_num  11
+#define PCINT0_vect      _VECTOR(11)  /* Pin Change Interrupt Request 0 */
 #define PCINT_B_vect_num  11
-#define PCINT_B_vect      _VECTOR(11)  /* Pin Change Interrupt Request B */
+#define PCINT_B_vect      _VECTOR(11)  /* alias */
 #define TIMER1_COMPB_vect_num  12
 #define TIMER1_COMPB_vect      _VECTOR(12)  /*  */
 #define TIMER0_COMPA_vect_num  13
@@ -583,14 +612,18 @@
 #define USI_START_vect      _VECTOR(15)  /* USI Start Condition */
 #define USI_OVERFLOW_vect_num  16
 #define USI_OVERFLOW_vect      _VECTOR(16)  /* USI Overflow */
+#define EEPROM_Ready_vect_num  17
+#define EEPROM_Ready_vect      _VECTOR(17)  /* EEPROM Ready */
 #define WDT_OVERFLOW_vect_num  18
 #define WDT_OVERFLOW_vect      _VECTOR(18)  /* Watchdog Timer Overflow */
-#define PCINT_D_vect_num  20
-#define PCINT_D_vect      _VECTOR(20)  /* Pin Change Interrupt Request D */
-#define EEPROM_Ready_vect_num  17
-#define EEPROM_Ready_vect      _VECTOR(17)  /*  */
+#define PCINT1_vect_num  19
+#define PCINT1_vect      _VECTOR(19)  /* Pin Change Interrupt Request 1 */
 #define PCINT_A_vect_num  19
-#define PCINT_A_vect      _VECTOR(19)  /* Pin Change Interrupt Request A */
+#define PCINT_A_vect      _VECTOR(19)  /* alias */
+#define PCINT2_vect_num  20
+#define PCINT2_vect      _VECTOR(20)  /* Pin Change Interrupt Request 2 */
+#define PCINT_D_vect_num  20
+#define PCINT_D_vect      _VECTOR(20)  /* alias */
 
 #define _VECTOR_SIZE 2 /* Size of individual vector. */
 #define _VECTORS_SIZE (21 * _VECTOR_SIZE)

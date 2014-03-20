@@ -1,5 +1,18 @@
 2014-03-20  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
+	Submitted by Barnabas Bodnar, Pitchumani Sivanupandi
+	Fix for bug #36053: Declaration of the register USIBR missing for ATtiny 
+	2313a/4313
+	Fix for bug #35971: attiny4313 (2313a) pin-change interrupts PCINT[0...2]
+	vect etc.
+	* include/avr/iotn2313a.h: Add USIBR register and bit definitions.
+	Update bit definitions for UCSRC, GIFR, GIMSK. Add PCMSK0 and GIFR as
+	alias name for PCMSK and EIFR respectively. Add alias names for USART and 
+	PCINT interrupt vectors.
+	* include/avr/iotn4313.h: Same.
+
+2014-03-20  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
 	Submitted by Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
 	Fix for bug #38516: Missing TWI and UCSR1D definitions for ATmega16/32 U4
 	* include/avr/iom16u4.h: Add TWBR,TWSR,TWAR,TWDR,TWCR,TWAMR and UCSR1D

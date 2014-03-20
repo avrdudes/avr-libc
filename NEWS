@@ -7,6 +7,8 @@
   [#35226] Online-documentation broken - [...]
   [#35398] assert doesn't work unless stdlib.h is also included
   [#35539] stdlib.h does not provide EXIT_SUCCESS et al.
+  [#35971] attiny4313 (2313a) pin-change interrupts PCINT[0...2] vect etc
+  [#36053] Declaration of the register USIBR missing for ATtiny2313a/4313
   [#36410] avr/boot.h: poisoned SPMCR for ATmega128
   [#36454] string.h: Error for long long in C90
   [#36581] avr-libc: pgmspace.h is not ANSI compliant
