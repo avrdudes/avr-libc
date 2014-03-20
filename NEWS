@@ -12,6 +12,7 @@
   [#36581] avr-libc: pgmspace.h is not ANSI compliant
   [#37778] _MemoryBarrier() in cpufunc.h error on compile
   [#38135] Install a dummy stdfix-avrlibc.h
+  [#38516] Missing TWI and UCSR1D definitions for ATmega16/32 U4
   [#39783] CRC missing definitions and incorrect power macros for xmega D3
   [#40595] iotn2313a.h: wrong fuses definitions for High Fuse Byte
   [#41519] wrong SPM_PAGESIZE definition in iotn[48]8.h

@@ -1146,6 +1146,10 @@
 #define UMSEL10 6
 #define UMSEL11 7
 
+#define UCSR1D _SFR_MEM8(0xCB)
+#define RTSEN 0
+#define CTSEN 1
+
 #define UBRR1 _SFR_MEM16(0xCC)
 
 #define UBRR1L _SFR_MEM8(0xCC)
