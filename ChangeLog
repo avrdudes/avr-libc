@@ -1,3 +1,8 @@
+2014-03-21  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	Fix for bug #40567: Invalid names in iotn13a.h (EEPE/EEMPE/BODS/BODSE)
+	* include/avr/iotn13a.h: Update EECR bit definitions.
+
 2014-03-21  Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
 
 	* include/avr/iotn13a.h: Rename BODCR register's bit definitions.
