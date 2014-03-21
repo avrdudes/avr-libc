@@ -114,7 +114,7 @@
 
 #define PORTCR _SFR_IO8(0x12)
 #define PUDA 0
-#define PUDB 2
+#define PUDB 1
 #define BBMA 4
 #define BBMB 5
 

@@ -1,3 +1,13 @@
+2014-03-21  Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
+
+	* include/avr/iotn13a.h: Rename BODCR register's bit definitions.
+	* include/avr/iotn24a.h: Add BODSE and BODS bits to MCUCR register.
+	Add WDT_vect interrupt vector.
+	* include/avr/iotn44a.h: Add BODSE and BODS bits to MCUCR register.
+	* include/avr/iotn84a.h: Same.
+	* include/avr/iotn167.h: Update PUDB bit definition.
+	* include/avr/iom328p.h: Update High and extended fuse byte definitions.
+
 2014-03-20  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	Submitted by Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>

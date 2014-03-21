@@ -229,8 +229,8 @@
 #define COM0A1 7
 
 #define BODCR _SFR_IO8(0x30)
-#define BPDSE 0
-#define BPDS 1
+#define BODSE 0
+#define BODS 1
 
 #define OSCCAL _SFR_IO8(0x31)
 #define CAL0 0

@@ -486,10 +486,12 @@
 #define MCUCR _SFR_IO8(0x35)
 #define ISC00 0
 #define ISC01 1
+#define BODSE 2
 #define SM0 3
 #define SM1 4
 #define SE 5
 #define PUD 6
+#define BODS 7
 
 #define OCR0A _SFR_IO8(0x36)
 #define OCR0A_0 0
@@ -547,8 +549,10 @@
 #define PCINT0_vect      _VECTOR(2)  /* Pin Change Interrupt Request 0 */
 #define PCINT1_vect_num  3
 #define PCINT1_vect      _VECTOR(3)  /* Pin Change Interrupt Request 1 */
+#define WDT_vect_num  4
+#define WDT_vect      _VECTOR(4)  /* Watchdog Time-out */
 #define WATCHDOG_vect_num  4
-#define WATCHDOG_vect      _VECTOR(4)  /* Watchdog Time-out */
+#define WATCHDOG_vect      _VECTOR(4)  /* alias */
 #define TIM1_CAPT_vect_num  5
 #define TIM1_CAPT_vect      _VECTOR(5)  /* Timer/Counter1 Capture Event */
 #define TIM1_COMPA_vect_num  6

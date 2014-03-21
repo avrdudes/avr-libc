@@ -893,21 +893,22 @@
 #define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
-#define FUSE_BODLEVEL0 (unsigned char)~_BV(0)  /* Brown-out Detector trigger level */
-#define FUSE_BODLEVEL1 (unsigned char)~_BV(1)  /* Brown-out Detector trigger level */
-#define FUSE_BODLEVEL2 (unsigned char)~_BV(2)  /* Brown-out Detector trigger level */
+#define FUSE_BOOTRST (unsigned char)~_BV(0)
+#define FUSE_BOOTSZ0 (unsigned char)~_BV(1)
+#define FUSE_BOOTSZ1 (unsigned char)~_BV(2)
 #define FUSE_EESAVE    (unsigned char)~_BV(3)  /* EEPROM memory is preserved through chip erase */
 #define FUSE_WDTON     (unsigned char)~_BV(4)  /* Watchdog Timer Always On */
 #define FUSE_SPIEN     (unsigned char)~_BV(5)  /* Enable Serial programming and Data Downloading */
 #define FUSE_DWEN      (unsigned char)~_BV(6)  /* debugWIRE Enable */
 #define FUSE_RSTDISBL  (unsigned char)~_BV(7)  /* External reset disable */
-#define HFUSE_DEFAULT (FUSE_SPIEN)
+#define HFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN)
 
 /* Extended Fuse Byte */
-#define FUSE_BOOTRST (unsigned char)~_BV(0)
-#define FUSE_BOOTSZ0 (unsigned char)~_BV(1)
-#define FUSE_BOOTSZ1 (unsigned char)~_BV(2)
-#define EFUSE_DEFAULT (FUSE_BOOTSZ0 & FUSE_BOOTSZ1)
+#define FUSE_BODLEVEL0 (unsigned char)~_BV(0)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL1 (unsigned char)~_BV(1)  /* Brown-out Detector trigger level */
+#define FUSE_BODLEVEL2 (unsigned char)~_BV(2)  /* Brown-out Detector trigger level */
+
+#define EFUSE_DEFAULT ()
 
 
 
