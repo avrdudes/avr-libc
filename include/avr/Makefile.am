@@ -61,8 +61,15 @@ avr_HEADERS = \
     io90pwm216.h \
     io90pwm3b.h \
     io90pwm316.h \
+    io90pwm161.h \
     io90pwm81.h \
     io90scr100.h \
+    ioa5505.h \
+    ioa5272.h \
+    ioa5790.h \
+    ioa5795.h \
+    ioa6285.h \
+    ioa6286.h \
     ioa6289.h \
     ioat94k.h \
     iocan32.h \
@@ -71,8 +78,10 @@ avr_HEADERS = \
     iocanxx.h \
     iom103.h \
     iom128.h \
+    iom128a.h \
     iom1280.h \
     iom1281.h \
+    iom1284.h \
     iom1284p.h \
     iom128rfa1.h \
     iom1284rfr2.h \
@@ -83,10 +92,13 @@ avr_HEADERS = \
     iom162.h \
     iom163.h \
     iom164.h \
+    iom164pa.h \
     iom165.h \
     iom165p.h \
+    iom165pa.h \
     iom168.h \
     iom168p.h \
+    iom168pa.h \
     iom169.h \
     iom169p.h \
     iom169pa.h \
@@ -103,14 +115,18 @@ avr_HEADERS = \
     iom2564rfr2.h \
     iom3000.h \
     iom32.h \
+    iom32a.h \
     iom323.h \
     iom324.h \
     iom324pa.h \
     iom325.h \
+    iom325pa.h \
     iom3250.h \
+    iom3250pa.h \
     iom328p.h \
     iom329.h \
     iom3290.h \
+    iom3290pa.h \
     iom32hvb.h \
     iom32hvbrevb.h \
     iom32c1.h \
@@ -119,9 +135,11 @@ avr_HEADERS = \
     iom32u4.h \
     iom32u6.h \
     iom48.h \
+    iom48pa.h \
     iom48p.h \
     iom406.h \
     iom64.h \
+    iom64a.h \
     iom640.h \
     iom644.h \
     iom644p.h \
@@ -137,6 +155,7 @@ avr_HEADERS = \
     iom64rfr2.h \
     iom644rfr2.h \
     iom8.h \
+    iom8a.h \
     iom8515.h \
     iom8535.h \
     iom88.h \
@@ -158,8 +177,10 @@ avr_HEADERS = \
     iotn13a.h \
     iotn15.h \
     iotn167.h \
+    iotn1634.h \
     iotn20.h \
     iotn22.h \
+    iotn828.h \
     iotn2313.h \
     iotn2313a.h \
     iotn24.h \
@@ -197,22 +218,45 @@ avr_HEADERS = \
     iousb647.h \
     iousbxx6_7.h \
     iox64d3.h \
+    iox64d4.h \
     iox128a1.h \
     iox128a1u.h \
+    iox128a4u.h \
     iox128a3.h \
+    iox128a3u.h \
+    iox128b1.h \
+    iox128b3.h \
+    iox128c3.h \
     iox128d3.h \
+    iox128d4.h \
     iox16a4.h \
+    iox16a4u.h \
+    iox16c4.h \
     iox16d4.h \
     iox192a3.h \
+    iox192a3u.h \
+    iox192c3.h \
     iox192d3.h \
     iox256a3.h \
+    iox256a3u.h \
     iox256a3b.h \
+    iox256a3bu.h \
+    iox256c3.h \
     iox256d3.h \
+    iox384c3.h \
+    iox384d3.h \
     iox32a4.h \
+    iox32a4u.h \
+    iox32c4.h \
     iox32d4.h \
     iox64a1.h \
     iox64a1u.h \
     iox64a3.h \
+    iox64a3u.h \
+    iox64a4u.h \
+    iox64b1.h \
+    iox64b3.h \
+    iox64c3.h \
     lock.h \
     parity.h \
     pgmspace.h \

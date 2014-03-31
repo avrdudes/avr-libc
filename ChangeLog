@@ -1,3 +1,113 @@
+2014-03-31  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	* configure.ac: Add AT90pwm161, ATA5272, ATA5505, ATA5790, ATA5795,
+	ATA6285, ATA6286, ATmega1284, ATmega128A, ATmega164PA, ATmega165PA,
+	ATmega168PA, ATmega3250PA, ATmega325PA, ATmega3290PA, ATmega32A,
+	ATmega48PA, ATmega64A, ATmega8A, ATtiny1634, ATtiny828, ATxmega128A3U,
+	ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D4,
+	ATxmega16A4U, ATxmega16C4, ATxmega192A3U, ATxmega192C3, ATxmega256A3BU,
+	ATxmega256A3U, ATxmega256C3, ATxmega32A4U, ATxmega32C4, ATxmega384C3,
+	ATxmega384D3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3,
+	ATxmega64C3, ATxmega64D4 devices.
+	* devtools/gen-avr-lib-tree.sh: Ditto.
+	* devtools/generate_iosym.sh: Ditto.
+	* doc/api/main_page.dox: Document new device support.
+	* doc/api/using-tools.dox: Ditto.
+	* include/avr/Makefile.am (avr_HEADERS): Add new header files.
+	* include/avr/eeprom.h: Add EEPROM definitions for new devices.
+	* include/avr/io.h: Add hooks for new devices.
+	* include/avr/power.h: Add power management definitions for new devices.
+	* include/avr/sleep.h: Add sleep modes for new devices.
+	* include/avr/wdt.h: Add watchdog support for new devices.
+	* include/avr/io90pwm161.h: Newfile.
+	* include/avr/ioa5272.h: Ditto.
+	* include/avr/ioa5505.h: Ditto.
+	* include/avr/ioa5790.h: Ditto.
+	* include/avr/ioa5795.h: Ditto.
+	* include/avr/ioa6285.h: Ditto.
+	* include/avr/ioa6286.h: Ditto.
+	* include/avr/iom1284.h: Ditto.
+	* include/avr/iom128a.h: Ditto.
+	* include/avr/iom164pa.h: Ditto.
+	* include/avr/iom165pa.h: Ditto.
+	* include/avr/iom168pa.h: Ditto.
+	* include/avr/iom3250pa.h: Ditto.
+	* include/avr/iom325pa.h: Ditto.
+	* include/avr/iom3290pa.h: Ditto.
+	* include/avr/iom32a.h: Ditto.
+	* include/avr/iom48pa.h: Ditto.
+	* include/avr/iom64a.h: Ditto.
+	* include/avr/iom8a.h: Ditto.
+	* include/avr/iotn1634.h: Ditto.
+	* include/avr/iotn828.h: Ditto.
+	* include/avr/iox128a3u.h: Ditto.
+	* include/avr/iox128a4u.h: Ditto.
+	* include/avr/iox128b1.h: Ditto.
+	* include/avr/iox128b3.h: Ditto.
+	* include/avr/iox128c3.h: Ditto.
+	* include/avr/iox128d4.h: Ditto.
+	* include/avr/iox16a4u.h: Ditto.
+	* include/avr/iox16c4.h: Ditto.
+	* include/avr/iox192a3u.h: Ditto.
+	* include/avr/iox192c3.h: Ditto.
+	* include/avr/iox256a3bu.h: Ditto.
+	* include/avr/iox256a3u.h: Ditto.
+	* include/avr/iox256c3.h: Ditto.
+	* include/avr/iox32a4u.h: Ditto.
+	* include/avr/iox32c4.h: Ditto.
+	* include/avr/iox384c3.h: Ditto.
+	* include/avr/iox384d3.h: Ditto.
+	* include/avr/iox64a3u.h: Ditto.
+	* include/avr/iox64a4u.h: Ditto.
+	* include/avr/iox64b1.h: Ditto.
+	* include/avr/iox64b3.h: Ditto.
+	* include/avr/iox64c3.h: Ditto.
+	* include/avr/iox64d4.h: Ditto.
+	* crt1/iosym/at90pwm161.S: Ditto.
+	* crt1/iosym/ata5272.S: Ditto.
+	* crt1/iosym/ata5505.S: Ditto.
+	* crt1/iosym/ata5790.S: Ditto.
+	* crt1/iosym/ata5795.S: Ditto.
+	* crt1/iosym/ata6285.S: Ditto.
+	* crt1/iosym/ata6286.S: Ditto.
+	* crt1/iosym/atmega1284.S: Ditto.
+	* crt1/iosym/atmega128a.S: Ditto.
+	* crt1/iosym/atmega164pa.S: Ditto.
+	* crt1/iosym/atmega165pa.S: Ditto.
+	* crt1/iosym/atmega168pa.S: Ditto.
+	* crt1/iosym/atmega3250pa.S: Ditto.
+	* crt1/iosym/atmega325pa.S: Ditto.
+	* crt1/iosym/atmega3290pa.S: Ditto.
+	* crt1/iosym/atmega32a.S: Ditto.
+	* crt1/iosym/atmega48pa.S: Ditto.
+	* crt1/iosym/atmega64a.S: Ditto.
+	* crt1/iosym/atmega8a.S: Ditto.
+	* crt1/iosym/attiny1634.S: Ditto.
+	* crt1/iosym/attiny828.S: Ditto.
+	* crt1/iosym/atxmega128a3u.S: Ditto.
+	* crt1/iosym/atxmega128a4u.S: Ditto.
+	* crt1/iosym/atxmega128b1.S: Ditto.
+	* crt1/iosym/atxmega128b3.S: Ditto.
+	* crt1/iosym/atxmega128c3.S: Ditto.
+	* crt1/iosym/atxmega128d4.S: Ditto.
+	* crt1/iosym/atxmega16a4u.S: Ditto.
+	* crt1/iosym/atxmega16c4.S: Ditto.
+	* crt1/iosym/atxmega192a3u.S: Ditto.
+	* crt1/iosym/atxmega192c3.S: Ditto.
+	* crt1/iosym/atxmega256a3bu.S: Ditto.
+	* crt1/iosym/atxmega256a3u.S: Ditto.
+	* crt1/iosym/atxmega256c3.S: Ditto.
+	* crt1/iosym/atxmega32a4u.S: Ditto.
+	* crt1/iosym/atxmega32c4.S: Ditto.
+	* crt1/iosym/atxmega384c3.S: Ditto.
+	* crt1/iosym/atxmega384d3.S: Ditto.
+	* crt1/iosym/atxmega64a3u.S: Ditto.
+	* crt1/iosym/atxmega64a4u.S: Ditto.
+	* crt1/iosym/atxmega64b1.S: Ditto.
+	* crt1/iosym/atxmega64b3.S: Ditto.
+	* crt1/iosym/atxmega64c3.S: Ditto.
+	* crt1/iosym/atxmega64d4.S: Ditto.
+
 2014-03-21  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	Fix for bug #40567: Invalid names in iotn13a.h (EEPE/EEMPE/BODS/BODSE)

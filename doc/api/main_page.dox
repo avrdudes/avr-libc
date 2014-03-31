@@ -94,8 +94,10 @@ compile-time.
 
 - atmega103
 - atmega128
+- atmega128a
 - atmega1280
 - atmega1281
+- atmega1284
 - atmega1284p
 - atmega16
 - atmega161
@@ -103,16 +105,20 @@ compile-time.
 - atmega163
 - atmega164a
 - atmega164p
+- atmega164pa
 - atmega165
 - atmega165a
 - atmega165p
+- atmega165pa
 - atmega168
 - atmega168a
 - atmega168p
+- atmega168pa
 - atmega16a
 - atmega2560
 - atmega2561
 - atmega32
+- atmega32a
 - atmega323
 - atmega324a
 - atmega324p
@@ -120,15 +126,19 @@ compile-time.
 - atmega325
 - atmega325a
 - atmega325p
+- atmega325pa
 - atmega3250
 - atmega3250a
 - atmega3250p
+- atmega3250pa
 - atmega328
 - atmega328p
 - atmega48
 - atmega48a
+- atmega48pa
 - atmega48p
 - atmega64
+- atmega64a
 - atmega640
 - atmega644
 - atmega644a
@@ -141,6 +151,7 @@ compile-time.
 - atmega6450a
 - atmega6450p
 - atmega8
+- atmega8a
 - atmega88
 - atmega88a
 - atmega88p
@@ -178,6 +189,7 @@ compile-time.
 - attiny461
 - attiny461a
 - attiny48
+- attiny828
 - attiny84
 - attiny84a
 - attiny85
@@ -185,6 +197,7 @@ compile-time.
 - attiny861a
 - attiny87
 - attiny88
+- attiny1634
 
 \par Automotive AVR Devices:
 
@@ -194,6 +207,10 @@ compile-time.
 - atmega64c1
 - atmega64m1
 - attiny167
+- ata5505
+- ata5272
+- ata5790
+- ata5795
 
 \par CAN AVR Devices:
 
@@ -214,6 +231,7 @@ compile-time.
 - atmega3290
 - atmega3290a
 - atmega3290p
+- atmega3290pa
 - atmega649
 - atmega649a
 - atmega6490
@@ -230,6 +248,7 @@ compile-time.
 - at90pwm3
 - at90pwm3b
 - at90pwm316
+- at90pwm161
 - at90pwm81
 
 \par Smart Battery AVR Devices:
@@ -262,22 +281,45 @@ compile-time.
 \par XMEGA Devices:
 
 - atxmega16a4
+- atxmega16a4u
+- atxmega16c4
 - atxmega16d4
 - atxmega32a4
+- atxmega32a4u
+- atxmega32c4
 - atxmega32d4
 - atxmega64a1
 - atxmega64a1u
 - atxmega64a3
+- atxmega64a3u
+- atxmega64a4u
+- atxmega64b1
+- atxmega64b3
+- atxmega64c3
 - atxmega64d3
+- atxmega64d4
 - atxmega128a1
 - atxmega128a1u
 - atxmega128a3
+- atxmega128a3u
+- atxmega128a4u
+- atxmega128b1
+- atxmega128b3
+- atxmega128c3
 - atxmega128d3
+- atxmega128d4
 - atxmega192a3
+- atxmega192a3u
+- atxmega192c3
 - atxmega192d3
 - atxmega256a3
+- atxmega256a3u
 - atxmega256a3b
+- atxmega256a3bu
+- atxmega256c3
 - atxmega256d3
+- atxmega384c3
+- atxmega384d3
 
 \par Wireless AVR devices:
 
@@ -297,6 +339,8 @@ compile-time.
 - at43usb355
 - at86rf401
 - at90scr100
+- ata6285
+- ata6286
 - ata6289
 - m3000 \ref supp_dev_footnote_four "[4]"
 
