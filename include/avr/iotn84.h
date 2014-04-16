@@ -70,7 +70,7 @@
 #define FUSE_SPIEN       (unsigned char)~_BV(5)
 #define FUSE_DWEN        (unsigned char)~_BV(6)
 #define FUSE_RSTDISBL    (unsigned char)~_BV(7)
-#define FUSE_HFUSE_DEFAULT (FUSE_SPIEN)
+#define HFUSE_DEFAULT    (FUSE_SPIEN)
 
 /* Extended Fuse Byte */
 #define FUSE_SELFPRGEN   (unsigned char)~_BV(0)

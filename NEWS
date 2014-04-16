@@ -20,6 +20,7 @@
   [#40567] Invalid names in iotn13a.h (EEPE/EEMPE/BODS/BODSE)
   [#40595] iotn2313a.h: wrong fuses definitions for High Fuse Byte
   [#41519] wrong SPM_PAGESIZE definition in iotn[48]8.h
+  [#42085] HFUSE_DEFAULT not defined for iotn84.h
   [no-id]  XXX_vect_num not consistent io90pwmx.h, iousbxx6_7.h
   [no-id]  Specialize clock_prescale_set/get for mega hvb devices
   [no-id]  Update register and bit definitions for tiny 13a/24a/44a/84a,

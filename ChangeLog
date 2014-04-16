@@ -1,3 +1,9 @@
+2014-04-16  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	Fix for bug #42085: HFUSE_DEFAULT not defined for iotn84.h
+	Submitted by ralphdoncaster
+	* include/avr/iotn84.h: Rename FUSE_HFUSE_DEFAULT to HFUSE_DEFAULT.
+
 2014-03-31  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	* configure.ac: Add AT90pwm161, ATA5272, ATA5505, ATA5790, ATA5795,
