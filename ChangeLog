@@ -1,5 +1,11 @@
 2014-04-16  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
+	Fix for bug #42084: wrong LFUSE_DEFAULT in iotn84a.h
+	Submitted by ralphdoncaster
+	* include/avr/iotn84a.h: Update LFUSE_DEFAULT as per datasheet.
+
+2014-04-16  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
 	Fix for bug #42085: HFUSE_DEFAULT not defined for iotn84.h
 	Submitted by ralphdoncaster
 	* include/avr/iotn84.h: Rename FUSE_HFUSE_DEFAULT to HFUSE_DEFAULT.
