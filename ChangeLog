@@ -1,3 +1,8 @@
+2014-04-28  Joey Morin <joeymorin@gmail.com>
+
+	Fix for bug #40003: Integer type promotion leads to inefficent code in wdt.h
+	* include/avr/wdt.h (wdt_enable): cast expression to destination type
+
 2014-04-16  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	Fix for bug #42084: wrong LFUSE_DEFAULT in iotn84a.h

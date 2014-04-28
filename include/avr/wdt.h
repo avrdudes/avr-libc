@@ -333,7 +333,7 @@ __asm__ __volatile__ (  \
     "sts %0,%2" "\n\t" \
     : /* no outputs */  \
     : "M" (_SFR_MEM_ADDR(_WD_CONTROL_REG)), \
-    "r" (_BV(_WD_CHANGE_BIT) | _BV(WDE)), \
+    "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))), \
     "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
         _BV(WDE) | (value & 0x07)) ) \
     : "r0"  \
@@ -368,7 +368,7 @@ __asm__ __volatile__ (  \
         "out %0,%2" \
         : /* no outputs */  \
         : "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)), \
-        "r" (_BV(_WD_CHANGE_BIT) | _BV(WDE)),   \
+        "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),   \
         "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
             _BV(WDE) | (value & 0x07)) ) \
         : "r0"  \
