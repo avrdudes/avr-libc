@@ -1,3 +1,16 @@
+2014-04-28  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	Fix for bug #42024: build break regarding avrtiny10
+	Submitted by baxelrod@irobot.com
+	* libc/misc/itoa.S: Fix typo in avr tiny macro.
+	* libc/misc/itoa_ncheck.S: Same.
+	* libc/misc/ltoa.S: Same.
+	* libc/misc/ltoa_ncheck.S: Same.
+	* libc/misc/utoa.S: Same.
+	* libc/misc/utoa_ncheck.S: Same.
+	* libc/misc/ultoa.S: Same.
+	* libc/misc/ultoa_ncheck.S: Same.
+
 2014-04-28  Joey Morin <joeymorin@gmail.com>
 
 	Fix for bug #40003: Integer type promotion leads to inefficent code in wdt.h

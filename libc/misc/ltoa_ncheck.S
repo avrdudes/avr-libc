@@ -29,7 +29,7 @@
 /* $Id$	*/
 
 #if	!defined (__DOXYGEN__)
-#if	!defined (__AVR_TINY)
+#if	!defined (__AVR_TINY__)
 
 #include "asmdef.h"
 
