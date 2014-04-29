@@ -13,6 +13,7 @@
   [#36410] avr/boot.h: poisoned SPMCR for ATmega128
   [#36454] string.h: Error for long long in C90
   [#36581] avr-libc: pgmspace.h is not ANSI compliant
+  [#37103] ATtiny5/9/10/20/40 watchdog can't be enabled
   [#37778] _MemoryBarrier() in cpufunc.h error on compile
   [#38135] Install a dummy stdfix-avrlibc.h
   [#38516] Missing TWI and UCSR1D definitions for ATmega16/32 U4

@@ -1,3 +1,9 @@
+2014-04-29  George Thomas <george.thomas@atmel.com>
+
+	Fix for bug #37103: ATtiny5/9/10/20/40 watchdog can't be enabled
+	* include/avr/wdt.h: Add wdt_enable and wdt_disable macros for tiny 4,5,
+	9,10,20 and 40 devices.
+
 2014-04-29  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
 	Fix for bug #39049: Clock prescaler set and get are missing for TINY arch

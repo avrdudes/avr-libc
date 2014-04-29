@@ -107,8 +107,10 @@
 
 #if defined(WDTCSR)
 #  define _WD_CONTROL_REG     WDTCSR
-#else
+#elif defined(WDTCR)
 #  define _WD_CONTROL_REG     WDTCR
+#else
+#  define _WD_CONTROL_REG     WDT
 #endif
 
 #if defined(WDTOE)
@@ -353,6 +355,51 @@ __asm__ __volatile__ (  \
 )
 
 
+#elif defined(__AVR_ATtiny4__) \
+|| defined(__AVR_ATtiny5__) \
+|| defined(__AVR_ATtiny9__) \
+|| defined(__AVR_ATtiny10__) \
+|| defined(__AVR_ATtiny20__) \
+|| defined(__AVR_ATtiny40__) 
+
+#define wdt_enable(value) \
+__asm__ __volatile__ ( \
+    "in __tmp_reg__,__SREG__" "\n\t"  \
+    "cli" "\n\t"  \
+    "wdr" "\n\t"  \
+    "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"  \
+    "out %[WDTREG],%[WDVALUE]" "\n\t"  \
+    "out __SREG__,__tmp_reg__" "\n\t"  \
+    : /* no outputs */  \
+    : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)),  \
+      [SIGNATURE] "r" ((uint8_t)0xD8), \
+      [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)), \
+      [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00) \
+      | _BV(WDE) | value)) \
+    : "r16" \
+)
+
+#define wdt_disable() \
+do { \
+uint8_t temp_wd; \
+__asm__ __volatile__ ( \
+    "in __tmp_reg__,__SREG__" "\n\t"  \
+    "cli" "\n\t"  \
+    "wdr" "\n\t"  \
+    "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"  \
+    "in  %[TEMP_WD],%[WDTREG]" "\n\t" \
+    "cbr %[TEMP_WD],%[WDVALUE]" "\n\t" \
+    "out %[WDTREG],%[TEMP_WD]" "\n\t" \
+    "out __SREG__,__tmp_reg__" "\n\t" \
+    : /*no output */ \
+    : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)), \
+      [SIGNATURE] "r" ((uint8_t)0xD8), \
+      [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)), \
+      [TEMP_WD] "d" (temp_wd), \
+      [WDVALUE] "I" (1 << WDE) \
+    : "r16" \
+); \
+}while(0)
     
 #else  
 
