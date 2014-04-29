@@ -1,5 +1,11 @@
 2014-04-29  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
+	Fix for bug #39049: Clock prescaler set and get are missing for TINY arch
+	* include/avr/power.h: Add clock_prescale_set and get function/macro for 
+	tiny 4, 5, 9, 10, 20 and 40 devices.
+
+2014-04-29  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
 	Fix for bug #40206: incorrect SP init in startup code for xmegas
 	* crt1/gcrt1.S: write to SPL and then SPH for xmega SP initialization
 

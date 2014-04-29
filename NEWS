@@ -16,6 +16,7 @@
   [#37778] _MemoryBarrier() in cpufunc.h error on compile
   [#38135] Install a dummy stdfix-avrlibc.h
   [#38516] Missing TWI and UCSR1D definitions for ATmega16/32 U4
+  [#39049] Clock prescaler set and get are missing for TINY architecture
   [#39783] CRC missing definitions and incorrect power macros for xmega D3
   [#40003] Integer type promotion leads to inefficent code in wdt.h
   [#40206] incorrect SP init in startup code for xmegas
