@@ -18,6 +18,7 @@
   [#38516] Missing TWI and UCSR1D definitions for ATmega16/32 U4
   [#39783] CRC missing definitions and incorrect power macros for xmega D3
   [#40003] Integer type promotion leads to inefficent code in wdt.h
+  [#40206] incorrect SP init in startup code for xmegas
   [#40567] Invalid names in iotn13a.h (EEPE/EEMPE/BODS/BODSE)
   [#40595] iotn2313a.h: wrong fuses definitions for High Fuse Byte
   [#41519] wrong SPM_PAGESIZE definition in iotn[48]8.h

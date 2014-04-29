@@ -218,11 +218,19 @@ __init:
 	clr	__zero_reg__
 	out	AVR_STATUS_ADDR, __zero_reg__
 	ldi	r28,lo8(__stack)
+#ifdef __AVR_XMEGA__
+	out	AVR_STACK_POINTER_LO_ADDR, r28
+#ifdef _HAVE_AVR_STACK_POINTER_HI
+	ldi	r29,hi8(__stack)
+	out	AVR_STACK_POINTER_HI_ADDR, r29
+#endif	/* _HAVE_AVR_STACK_POINTER_HI */
+#else
 #ifdef _HAVE_AVR_STACK_POINTER_HI
 	ldi	r29,hi8(__stack)
 	out	AVR_STACK_POINTER_HI_ADDR, r29
 #endif	/* _HAVE_AVR_STACK_POINTER_HI */
 	out	AVR_STACK_POINTER_LO_ADDR, r28
+#endif  /* __AVR_XMEGA__ */
 
 #ifdef __AVR_3_BYTE_PC__
 	ldi	r16, hh8(pm(__vectors))

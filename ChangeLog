@@ -1,3 +1,8 @@
+2014-04-29  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
+	Fix for bug #40206: incorrect SP init in startup code for xmegas
+	* crt1/gcrt1.S: write to SPL and then SPH for xmega SP initialization
+
 2014-04-28  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	Fix for bug #42024: build break regarding avrtiny10
