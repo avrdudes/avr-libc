@@ -1,3 +1,7 @@
+2014-04-29  Aurelien Jarno  <aurelien@aurel32.net>
+
+	* include/util/setbaud.h: correct typo.
+
 2014-04-29  George Thomas <george.thomas@atmel.com>
 
 	Fix for bug #37103: ATtiny5/9/10/20/40 watchdog can't be enabled

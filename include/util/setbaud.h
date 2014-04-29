@@ -174,7 +174,7 @@
    \def USE_2X
    \ingroup util_setbaud
 
-   Output bacro from <util/setbaud.h>
+   Output macro from <util/setbaud.h>
 
    Contains the value 1 if the desired baud rate tolerance could only
    be achieved by setting the U2X bit in the UART configuration.
