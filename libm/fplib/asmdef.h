@@ -83,6 +83,18 @@ FUNCTION \name
 _U(\name):
 .endm
 
+/* Because we define the double type to have the same representation as
+   float, we want to share some code for multiple function definitions.
+   While we could also provide aliases in header files using
+   __asm__ in the declaration to specifiy the symbol to reference,
+   it is preferable to provide actual symbols in the library, so
+   that code that expects to be able to use them directly -
+   like gcc/gcc/testsuite/gcc.dg/pr41963.c using sqrtf - will work.  */
+.macro	ALIAS_ENTRY	name
+	.global	_U(\name)
+_U(\name):
+.endm
+
 .macro	ENDFUNC
 .LEND:
 .endm

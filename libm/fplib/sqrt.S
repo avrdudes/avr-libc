@@ -46,6 +46,7 @@ FUNCTION sqrt
 .L_pk:	rjmp	_U(__fp_mpack)
 
 ENTRY sqrt
+ALIAS_ENTRY sqrtf
   ; split and check arg.
 	rcall	_U(__fp_splitA)
 	brcs	.L_nf		; !isfinite(A)

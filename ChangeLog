@@ -1,5 +1,11 @@
 2014-05-01  Joern Rennecke  <joern.rennecke@embecosm.com>
 
+	* include/math.h (sqrtf): Don't #define, declare.
+	* libm/fplib/asmdef.h (ALIAS_ENTRY): Define.
+	* libm/fplib/sqrt.S (sqrtf): New ALIAS_ENTRY.
+
+2014-05-01  Joern Rennecke  <joern.rennecke@embecosm.com>
+
 	* configure.ac (AC_CONFIG_FILES): Add include/sys/Makefile.
 	* include/Makefile.am (avr_HEADERS): Add fcntl.h, locale.h, unistd.h.
 	(SUBDIRS): Add sys.

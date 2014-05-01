@@ -175,7 +175,7 @@ extern float modff (float __x, float *__iptr);
     The sqrt() function returns the non-negative square root of \a __x.
  */
 extern double sqrt(double __x) __ATTR_CONST__;
-#define sqrtf	sqrt		/**< The alias for sqrt().	*/
+extern float sqrtf (float) __ATTR_CONST__;
 
 /**
     The cbrt() function returns the cube root of \a __x.
