@@ -669,9 +669,9 @@ extern char *dtostrf(double __val, signed char __width,
 
 /*@}*/
 
-#if 0  /* not yet implemented */
 extern int atexit(void (*)(void));
-#endif
+extern int system (const char *);
+extern char *getenv (const char *);
 
 #ifdef __cplusplus
 }

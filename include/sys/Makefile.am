@@ -1,4 +1,4 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2005,  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,60 +29,6 @@
 # $Id$
 #
 
-stdlib_a_c_sources = \
-	abs.c \
-	assert.c \
-	atexit.c \
-	bsearch.c \
-	calloc.c \
-	errno.c \
-	dtoa_prf.c \
-	dtostre.c \
-	dtostrf.c \
-	getenv.c \
-	labs.c \
-	malloc.c \
-	qsort.c \
-	rand.c \
-	random.c \
-	realloc.c \
-	strtod.c \
-	strtol.c \
-	strtoul.c \
-	system.c \
-	dtoa_conv.h \
-	stdlib_private.h
-
-stdlib_a_asm_sources = \
-	abort.S \
-	atof.S \
-	atoi.S \
-	atol.S \
-	div.S \
-	exit.S \
-	ftoa_engine.S \
-	ldiv.S \
-	setjmp.S \
-	isascii.S \
-	toascii.S \
-	isalnum.S \
-	cty_isfalse.S \
-	isalpha.S \
-	isdigit.S \
-	isxdigit.S \
-	iscntrl.S \
-	isprint.S \
-	isspace.S \
-	isblank.S \
-	ispunct.S \
-	tolower.S \
-	toupper.S
-
-
-stdlib_a_extra_dist = \
-	ctype.S \
-	abort.c \
-	atoi.c \
-	atol.c
-
-# vim: set ft=make:
+avrdir = $(prefix)/avr/include/sys
+avr_HEADERS = \
+    types.h

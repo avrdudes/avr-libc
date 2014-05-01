@@ -35,7 +35,9 @@ avr_HEADERS = \
     assert.h \
     ctype.h \
     errno.h \
+    fcntl.h \
     inttypes.h \
+    locale.h \
     math.h \
     setjmp.h \
     stdfix-avrlibc.h \
@@ -43,7 +45,8 @@ avr_HEADERS = \
     stdio.h \
     stdlib.h \
     string.h \
-    time.h
+    time.h \
+    unistd.h
 
 
-SUBDIRS = avr compat util
+SUBDIRS = avr compat util sys

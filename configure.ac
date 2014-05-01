@@ -1200,6 +1200,7 @@ AC_CONFIG_FILES([
 	include/compat/Makefile
 	include/util/Makefile
 	include/util/delay.h
+	include/sys/Makefile
 	libc/Makefile
 	libc/misc/Makefile
 	libc/pmstring/Makefile

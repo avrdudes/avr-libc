@@ -147,6 +147,12 @@ extern char *strtok(char *, const char *);
 extern char *strtok_r(char *, const char *, char **);
 extern char *strupr(char *);
 
+#if 1 /* ??? unimplemented */
+extern int strcoll(const char *s1, const char *s2);
+extern char *strerror(int errnum);
+extern size_t strxfrm(char *dest, const char *src, size_t n);
+#endif
+
 #ifdef __cplusplus
 }
 #endif

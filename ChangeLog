@@ -1,5 +1,30 @@
 2014-05-01  Joern Rennecke  <joern.rennecke@embecosm.com>
 
+	* configure.ac (AC_CONFIG_FILES): Add include/sys/Makefile.
+	* include/Makefile.am (avr_HEADERS): Add fcntl.h, locale.h, unistd.h.
+	(SUBDIRS): Add sys.
+	* include/errno.h: Add definitions for error codes required to compile
+	libstdc++-v3.
+	* include/locale.h, include/unistd.h, include/fcntl.h: New files.
+	* include/stdio.h (FILE): Change to a typedef.
+	(BUFSIZ, _IONBF): Define.
+	(fpos_t): Typedef.
+	(fgetpos, fopen, freopen, fdopen, fseek, fsetpos, ftell): Prototype.
+	(ftell, fileno, perror, remote, rename, rewind, setbuf): Likewise.
+	(setvbuf, tmpfile, tmpnam): Likewise.
+	* include/stdlib.h (atexit, system, getenv): Prototype.
+	* include/string.h (strcoll, strerror, strxfrm): Prototype.
+	* include/sys: New directory.
+	* include/time.h (_CLOCKS_PER_SEC_): Declare.
+	(CLOCKS_PER_SEC): Define.
+	(clock): Declare.
+	* libc/stdlib/Files.am (stdlib_a_c_sources): Add atexit.c, getenv.c,
+	system.c
+	* libc/stdlib/atexit.c: New file.
+	* libc/stdlib/getenv.c, * libc/stdlib/system.c: New stub files.
+
+2014-05-01  Joern Rennecke  <joern.rennecke@embecosm.com>
+
 	* include/stdint.h [!__USING_MINT8] (UINT8_MAX): Provide (signed)
 	int value.
 	(SIZE_MAX): Define as UINT16_MAX.

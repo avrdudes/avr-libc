@@ -168,6 +168,15 @@ extern          "C" {
         int16_t         tm_isdst;
     };
 
+    
+    /* We have to provide clock_t / CLOCKS_PER_SEC so that libstdc++-v3 can
+       be built.  We define CLOCKS_PER_SEC via a symbol _CLOCKS_PER_SEC_
+       so that the user can provide the value on the link line, which should
+       result in little or no run-time overhead compared with a constant.  */
+    typedef unsigned long clock_t;
+    extern char *_CLOCKS_PER_SEC_;
+#define CLOCKS_PER_SEC ((clock_t) _CLOCKS_PER_SEC_)
+    extern clock_t clock(void);
 
     /**
     This function 'compiles' the elements of a broken-down time structure, returning a binary time stamp.
