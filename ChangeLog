@@ -1,4 +1,12 @@
-2014-05-01  Joern Rennecke <joern.rennecke@embecosm.com>
+2014-05-01  Joern Rennecke  <joern.rennecke@embecosm.com>
+
+	* include/stdint.h [!__USING_MINT8] (UINT8_MAX): Provide (signed)
+	int value.
+	(SIZE_MAX): Define as UINT16_MAX.
+	[!WCHAR_MAX] (WCHAR_MAX, WCHAR_MIN): Define.
+	[!WINT_MAX] (WINT_MAX, WINT_MIN): Define.
+
+2014-05-01  Joern Rennecke  <joern.rennecke@embecosm.com>
 
 	* include/stdint.h (INT8_C): Also define for __cplusplus >= 201103L.
 	If __INT8_C is defined, use GNU C preprocessor builtin-macro

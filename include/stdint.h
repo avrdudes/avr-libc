@@ -305,12 +305,9 @@ typedef uint64_t uintmax_t;
 
 #define INT8_MIN (-INT8_MAX - 1)
 
-/** \ingroup avr_stdint
-    largest value an uint8_t can hold. */
+#if __USING_MINT8
 
 #define UINT8_MAX (__CONCAT(INT8_MAX, U) * 2U + 1U)
-
-#if __USING_MINT8
 
 #define INT16_MAX 0x7fffL
 #define INT16_MIN (-INT16_MAX - 1L)
@@ -321,6 +318,11 @@ typedef uint64_t uintmax_t;
 #define UINT32_MAX (__CONCAT(INT32_MAX, U) * 2ULL + 1ULL)
 
 #else /* !__USING_MINT8 */
+
+/** \ingroup avr_stdint
+    largest value an uint8_t can hold. */
+
+#define UINT8_MAX (INT8_MAX * 2 + 1)
 
 /** \ingroup avr_stdint
     largest positive value an int16_t can hold. */
@@ -578,7 +580,7 @@ typedef uint64_t uintmax_t;
 /** \ingroup avr_stdint
     largest value a size_t can hold. */
 
-#define SIZE_MAX (__CONCAT(INT16_MAX, U))
+#define SIZE_MAX UINT16_MAX
 
 
 /* Limits of wchar_t */
@@ -589,8 +591,14 @@ typedef uint64_t uintmax_t;
 
 /* Limits of wint_t */
 /* wchar.h is currently not implemented */
-/* #define WINT_MAX */
-/* #define WINT_MIN */
+#ifndef WCHAR_MAX
+#define WCHAR_MAX __WCHAR_MAX__
+#define WCHAR_MIN __WCHAR_MIN__
+#endif
+#ifndef WINT_MAX
+#define WINT_MAX __WINT_MAX__
+#define WINT_MIN __WINT_MIN__
+#endif
 
 
 #endif /* !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS) */
