@@ -1,6 +1,7 @@
 /* Copyright (c) 2002,2004,2005 Marek Michalkiewicz
    Copyright (c) 2005, Carlos Lamas
    Copyright (c) 2005,2007 Joerg Wunsch
+   Copyright (c) 2013 Embecosm
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -594,7 +595,8 @@ typedef uint64_t uintmax_t;
 
 #endif /* !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS) */
 
-#if !defined(__cplusplus) || defined(__STDC_CONSTANT_MACROS)
+#if (!defined __cplusplus || __cplusplus >= 201103L \
+     || defined __STDC_CONSTANT_MACROS)
 
 /** \name Macros for integer constants
     C++ implementations should define these macros only when
@@ -603,6 +605,20 @@ typedef uint64_t uintmax_t;
     These definitions are valid for integer constants without suffix and
     for macros defined as integer constant without suffix */
 
+/* The GNU C preprocessor defines special macros in the implementation
+   namespace to allow a definition that works in #if expressions.  */
+#ifdef __INT8_C
+#define INT8_C(c) __INT8_C(c)
+#define INT16_C(c) __INT16_C(c)
+#define INT32_C(c) __INT32_C(c)
+#define INT64_C(c) __INT64_C(c)
+#define UINT8_C(c) __UINT8_C(c)
+#define UINT16_C(c) __UINT16_C(c)
+#define UINT32_C(c) __UINT32_C(c)
+#define UINT64_C(c) __UINT64_C(c)
+#define INTMAX_C(c) __INTMAX_C(c)
+#define UINTMAX_C(c) __UINTMAX_C(c)
+#else
 /** \ingroup avr_stdint
     define a constant of type int8_t */
 
@@ -665,9 +681,12 @@ typedef uint64_t uintmax_t;
 
 #define UINTMAX_C(value) __CONCAT(value, ULL)
 
+#endif /* !__INT8_C */
+
 /*@}*/
 
-#endif /* !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS) */
+#endif /* (!defined __cplusplus || __cplusplus >= 201103L \
+	   || defined __STDC_CONSTANT_MACROS) */
 
 
 #endif /* _STDINT_H_ */
