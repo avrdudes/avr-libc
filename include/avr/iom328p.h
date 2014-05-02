@@ -907,8 +907,7 @@
 #define FUSE_BODLEVEL0 (unsigned char)~_BV(0)  /* Brown-out Detector trigger level */
 #define FUSE_BODLEVEL1 (unsigned char)~_BV(1)  /* Brown-out Detector trigger level */
 #define FUSE_BODLEVEL2 (unsigned char)~_BV(2)  /* Brown-out Detector trigger level */
-
-#define EFUSE_DEFAULT ()
+#define EFUSE_DEFAULT  (0xFF)
 
 
 

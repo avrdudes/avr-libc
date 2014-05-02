@@ -1,3 +1,7 @@
+2014-05-02  Pieter Agten  <pieter.agten@gmail.com>
+
+	* include/avr/iom328p.h (EFUSE_DEFAULT): update default value.
+
 2014-05-01  Joern Rennecke  <joern.rennecke@embecosm.com>
 
 	* include/math.h (sqrtf): Don't #define, declare.

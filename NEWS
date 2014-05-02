@@ -24,6 +24,7 @@
   [#40206] incorrect SP init in startup code for xmegas
   [#40567] Invalid names in iotn13a.h (EEPE/EEMPE/BODS/BODSE)
   [#40595] iotn2313a.h: wrong fuses definitions for High Fuse Byte
+  [#41006] iom328p.h: wrong fuse defaults
   [#41519] wrong SPM_PAGESIZE definition in iotn[48]8.h
   [#42024] build break regarding avrtiny10
   [#42084] wrong LFUSE_DEFAULT in iotn84a.h
