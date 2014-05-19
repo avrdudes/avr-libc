@@ -1,3 +1,8 @@
+2014-05-19  Joern Rennecke <joern.rennecke@embecosm.com>
+
+	* include/Makefile.am (avr_HEADERS): Add signal.h .
+	* include/signal.h: New file.
+
 2014-05-02  Pieter Agten  <pieter.agten@gmail.com>
 
 	* include/avr/iom328p.h (EFUSE_DEFAULT): update default value.

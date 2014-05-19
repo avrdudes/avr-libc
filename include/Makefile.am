@@ -40,6 +40,7 @@ avr_HEADERS = \
     locale.h \
     math.h \
     setjmp.h \
+    signal.h \
     stdfix-avrlibc.h \
     stdint.h \
     stdio.h \
