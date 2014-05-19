@@ -59,6 +59,7 @@
   [#7909] Adding __volatile__ to __asm__ within pgmspace header
   [#7910] Add missing PCINT2_vect to iotn40.h and update all the
           following vector numbers
+  [no-id] correction in xmega wdt_enable and wdt_disable added for xmega
 
 * Other changes:
 

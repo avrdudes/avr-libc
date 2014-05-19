@@ -1,3 +1,9 @@
+2014-05-19  Pitchumani Sivanupandi  <pitchumani.s@atmel.com>
+
+	* include/avr/wdt.h (wdt_enable): update wdt_enable for xmega to wait
+	till sync finished (as per datasheet).
+	(wdt_disable): Add wdt_disable for xmega devices.
+
 2014-05-19  Joern Rennecke <joern.rennecke@embecosm.com>
 
 	* include/Makefile.am (avr_HEADERS): Add signal.h .

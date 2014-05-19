@@ -173,24 +173,55 @@
 || defined(__AVR_ATxmega384D3__)
 
 /*
-    wdt_enable(WDT_PER_8KCLK_gc);
+   wdt_enable(timeout) for xmega devices
+** write signature (CCP_IOREG_gc) that enables change of protected I/O
+   registers to the CCP register
+** At the same time,
+   1) set WDT change enable (WDT_CEN_bm)
+   2) enable WDT (WDT_ENABLE_bm)
+   3) set timeout (timeout)
+** Synchronization starts when ENABLE bit of WDT is set. So, wait till it 
+   finishes (SYNCBUSY of STATUS register is automatically cleared after the
+   sync is finished).
 */
-#define wdt_enable(value) \
-__asm__ __volatile__ ( \
-    "in __tmp_reg__, %0"  "\n\t" \
-    "out %1, %3"          "\n\t" \
-    "sts %2, %4"          "\n\t" \
-    "wdr"                 "\n\t" \
-    "out %0, __tmp_reg__" "\n\t" \
+#define wdt_enable(timeout) \
+do { \
+uint8_t temp; \
+__asm__ __volatile__ (         \
+    "out %[ccp_reg], %[ioreg_cen_mask]"     "\n\t" \
+    "sts %[wdt_reg], %[wdt_enable_timeout]" "\n\t" \
+    "1:lds %[tmp], %[wdt_status_reg]"       "\n\t" \
+    "sbrc  %[tmp], %[wdt_syncbusy_bit]"     "\n\t" \
+    "rjmp 1b"                               "\n\t" \
+    "wdr"                                   "\n\t" \
     : \
-    : "M" (_SFR_MEM_ADDR(RAMPD)), \
-      "M" (_SFR_MEM_ADDR(CCP)), \
-      "M" (_SFR_MEM_ADDR(WDT_CTRL)), \
-      "r" ((uint8_t)0xD8), \
-      "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | value)) \
+    : [ccp_reg]            "M" _SFR_MEM_ADDR(CCP),        \
+      [ioreg_cen_mask]     "r" CCP_IOREG_gc,              \
+      [wdt_reg]            "M" _SFR_MEM_ADDR(WDT_CTRL),   \
+      [wdt_enable_timeout] "r" (WDT_CEN_bm | WDT_ENABLE_bm | timeout), \
+      [wdt_status_reg]     "M" _SFR_MEM_ADDR(WDT_STATUS), \
+      [wdt_syncbusy_bit]   "I" WDT_SYNCBUSY_bm,           \
+      [tmp]                "r" temp                       \
     : "r0" \
-)
+) \
+} while(0)
 
+#define wdt_disable() \
+do { \
+uint8_t temp; \
+__asm__ __volatile__ (  \
+    "out %[ccp_reg], %[ioreg_cen_mask]" "\n\t" \
+    "lds %[tmp], %[wdt_reg]"            "\n\t" \
+    "andi %[tmp], %[disable_mask]"      "\n\t" \
+    "sts %[wdt_reg], %[wdt_disable]"    "\n\t" \
+    : \
+    : [ccp_reg]           "M" _SFR_MEM_ADDR(CCP),      \
+      [ioreg_cen_mask]    "r" CCP_IOREG_gc,            \
+      [wdt_reg]           "M" _SFR_MEM_ADDR(WDT_CTRL), \
+      [tmp]               "r" temp,                    \
+      [disable_mask]      "M" ~WDT_ENABLE_bm,          \
+      [wdt_disable]       "r" (temp | WDT_CEN_bm)      \
+)
 
 #elif defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \
