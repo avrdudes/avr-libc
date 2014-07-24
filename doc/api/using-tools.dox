@@ -230,7 +230,6 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr2</td><td>at90s8535</td><td>__AVR_AT90S8535__</td></tr>
 
   <tr><td>avr2/avr25&nbsp;[1]</td><td>at86rf401</td><td>__AVR_AT86RF401__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>ata6289</td><td>__AVR_ATA6289__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>ata5272</td><td>__AVR_ATA5272__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13</td><td>__AVR_ATtiny13__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13a</td><td>__AVR_ATtiny13A__</td></tr>
@@ -276,6 +275,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr3</td><td>at76c711</td><td>__AVR_AT76C711__</td></tr>
   <tr><td>avr4</td><td>ata6285</td><td>__AVR_ATA6285__</td></tr>
   <tr><td>avr4</td><td>ata6286</td><td>__AVR_ATA6286__</td></tr>
+  <tr><td>avr4</td><td>ata6289</td><td>__AVR_ATA6289__</td></tr>
   <tr><td>avr4</td><td>atmega48</td><td>__AVR_ATmega48__</td></tr>
   <tr><td>avr4</td><td>atmega48a</td><td>__AVR_ATmega48A__</td></tr>
   <tr><td>avr4</td><td>atmega48pa</td><td>__AVR_ATmega48PA__</td></tr>

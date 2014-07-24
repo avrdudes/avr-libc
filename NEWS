@@ -60,6 +60,7 @@
   [#7910] Add missing PCINT2_vect to iotn40.h and update all the
           following vector numbers
   [no-id] correction in xmega wdt_enable and wdt_disable added for xmega
+  [#8499] Device ata6289 should be of avr4 architecture
 
 * Other changes:
 

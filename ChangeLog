@@ -1,3 +1,10 @@
+2014-07-24  Pitchumani Sivanupandi  <pitchumani.s@atmel.com>
+
+	Move device ata6289 from avr25 arch group to avr4.
+	* devtools/gen-avr-lib-tree.sh: Move device ata6289 to avr4 arch group.
+	* configure.ac: Same. 
+	* doc/api/using-tools.dox: Same.
+
 2014-05-19  Pitchumani Sivanupandi  <pitchumani.s@atmel.com>
 
 	* include/avr/wdt.h (wdt_enable): update wdt_enable for xmega to wait
