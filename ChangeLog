@@ -1,3 +1,9 @@
+2014-07-30  Matthijs Kooijman <matthijs>
+
+	Fix bug #40569: sleep_bod_disable does not work in attiny13a
+	* include/avr/sleep.h: define BOD_CONTROL_REG based on BODCR.
+	(sleep_bod_disable): use BOD_CONTROL_REG in place of MCUCR.
+
 2014-07-24  Pitchumani Sivanupandi  <pitchumani.s@atmel.com>
 
 	Move device ata6289 from avr25 arch group to avr4.

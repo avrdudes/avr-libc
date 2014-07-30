@@ -651,6 +651,16 @@ extern void sleep_bod_disable (void);
 
 #if defined(BODS) && defined(BODSE)
 
+#ifdef BODCR
+
+#define BOD_CONTROL_REG BODCR
+
+#else
+
+#define BOD_CONTROL_REG MCUCR
+
+#endif
+
 #define sleep_bod_disable() \
 do { \
   uint8_t tempreg; \
@@ -660,7 +670,7 @@ do { \
                        "andi %[tempreg], %[not_bodse]" "\n\t" \
                        "out %[mcucr], %[tempreg]" \
                        : [tempreg] "=&d" (tempreg) \
-                       : [mcucr] "I" _SFR_IO_ADDR(MCUCR), \
+                       : [mcucr] "I" _SFR_IO_ADDR(BOD_CONTROL_REG), \
                          [bods_bodse] "i" (_BV(BODS) | _BV(BODSE)), \
                          [not_bodse] "i" (~_BV(BODSE))); \
 } while (0)
