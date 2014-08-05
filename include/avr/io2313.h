@@ -352,6 +352,7 @@
 #define    EERE    0
        
 /* Constants */ 
+#define    RAMSTART   0x60
 #define    RAMEND     0xDF
 #define    XRAMEND    RAMEND
 #define    E2END      0x7F

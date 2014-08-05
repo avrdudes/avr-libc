@@ -1184,6 +1184,7 @@
 
 /* Constants */
 #define SPM_PAGESIZE 256
+#define RAMSTART   0x100
 #define RAMEND     0x10FF     /* Last On-Chip SRAM Location */
 #define XRAMEND    0xFFFF
 #define E2END      0x0FFF

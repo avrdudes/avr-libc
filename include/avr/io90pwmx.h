@@ -1346,11 +1346,12 @@
 /* Constants */
 #define SPM_PAGESIZE    64
 
+#define RAMSTART    0x100
 #define RAMEND      0x02FF
 #define XRAMEND     RAMEND
 #define E2END       0x01FF
 #define E2PAGESIZE  4
-#define FLASHEND    0x0FFF
+#define FLASHEND    0x1FFF
 
 
 /* Fuse Information */

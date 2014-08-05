@@ -1,3 +1,69 @@
+2014-08-05  Senthil Kumar Selvaraj  <senthil_kumar.selvaraj@atmel.com>
+
+	* include/avr/io1200.h: Add RAMSTART.
+	* include/avr/io2313.h: Likewise.
+	* include/avr/io2323.h: Likewise.
+	* include/avr/io2333.h: Likewise.
+	* include/avr/io2343.h: Likewise.
+	* include/avr/io43u32x.h: Likewise.
+	* include/avr/io43u35x.h: Likewise.
+	* include/avr/io4414.h: Likewise.
+	* include/avr/io4433.h: Likewise.
+	* include/avr/io4434.h: Likewise.
+	* include/avr/io76c711.h: Likewise.
+	* include/avr/io8515.h: Likewise.
+	* include/avr/io8534.h: Likewise.
+	* include/avr/io8535.h: Likewise.
+	* include/avr/io86r401.h: Likewise.
+	* include/avr/io90pwm216.h: Likewise.
+	* include/avr/io90pwm2b.h: Likewise.
+	* include/avr/io90pwm316.h: Likewise.
+	* include/avr/io90pwm3b.h: Likewise.
+	* include/avr/ioat94k.h: Likewise.
+	* include/avr/iocan128.h: Likewise.
+	* include/avr/iocan32.h: Likewise.
+	* include/avr/iocan64.h: Likewise.
+	* include/avr/iom103.h: Likewise.
+	* include/avr/iom128.h: Likewise.
+	* include/avr/iom1280.h: Likewise.
+	* include/avr/iom161.h: Likewise.
+	* include/avr/iom162.h: Likewise.
+	* include/avr/iom163.h: Likewise.
+	* include/avr/iom165.h: Likewise.
+	* include/avr/iom165p.h: Likewise.
+	* include/avr/iom169.h: Likewise.
+	* include/avr/iom169p.h: Likewise.
+	* include/avr/iom16hva.h: Likewise.
+	* include/avr/iom2560.h: Likewise.
+	* include/avr/iom2561.h: Likewise.
+	* include/avr/iom323.h: Likewise.
+	* include/avr/iom329.h: Likewise.
+	* include/avr/iom3290.h: Likewise.
+	* include/avr/iom32hvbrevb.h: Likewise.
+	* include/avr/iom406.h: Likewise.
+	* include/avr/iom64.h: Likewise.
+	* include/avr/iom640.h: Likewise.
+	* include/avr/iom649.h: Likewise.
+	* include/avr/iom6490.h: Likewise.
+	* include/avr/iom8hva.h: Likewise.
+	* include/avr/iotn11.h: Likewise.
+	* include/avr/iotn12.h: Likewise.
+	* include/avr/iotn15.h: Likewise.
+	* include/avr/iotn22.h: Likewise.
+	* include/avr/iotn26.h: Likewise.
+	* include/avr/iotn28.h: Likewise.
+	* include/avr/iotn43u.h: Likewise.
+	* include/avr/iousb1286.h: Likewise.
+	* include/avr/iousb1287.h: Likewise.
+	* include/avr/iousb162.h: Likewise.
+	* include/avr/iousb646.h: Likewise.
+	* include/avr/iousb647.h: Likewise.
+	* include/avr/iousb82.h: Likewise.
+	* include/avr/io90pwm1.h: Add RAMSTART and fix FLASHEND.
+	* include/avr/io90pwmx.h: Likewise.
+	* include/avr/iom3000.h: Add RAMSTART and fix RAMEND.
+	* include/avr/iotn167.h: Fix RAMSIZE.
+
 2014-07-30  Matthijs Kooijman <matthijs>
 
 	Fix bug #40569: sleep_bod_disable does not work in attiny13a

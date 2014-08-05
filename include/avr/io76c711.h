@@ -471,6 +471,7 @@
 #define USB_DMA_EN	0x10A
 
 /* Last memory addresses */
+#define RAMSTART    0x60
 #define RAMEND		0x07FF
 #define XRAMEND		RAMEND
 #define E2END		0

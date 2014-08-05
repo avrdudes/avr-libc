@@ -233,6 +233,7 @@
 #define EEWE    1
 #define EERE    0
 
+#define RAMSTART    0x60
 /* Last memory addresses */
 #define RAMEND		0x1F
 #define XRAMEND		0x0

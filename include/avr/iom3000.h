@@ -225,7 +225,8 @@
 
 
 /* Constants */
-#define RAMEND       0xFFF    /* Last On-Chip SRAM Location */
+#define RAMSTART     0x1000
+#define RAMEND       0x1FFF    /* Last On-Chip SRAM Location */
 #define E2END        0x0
 #define E2PAGESIZE   0
 #define FLASHEND     0xFFFF

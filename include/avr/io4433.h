@@ -453,6 +453,7 @@
 #define    EERE      0
 
 /* Constants */
+#define RAMSTART   0x60
 #define RAMEND     0xDF    /*Last On-Chip SRAM location*/
 #define XRAMEND    RAMEND
 #define E2END      0xFF

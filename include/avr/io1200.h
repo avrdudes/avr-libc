@@ -243,6 +243,7 @@
 
 #undef ZH
 
+#define RAMSTART    0x60
 /* Last memory addresses */
 #define RAMEND		0x1F
 #define XRAMEND		0x0

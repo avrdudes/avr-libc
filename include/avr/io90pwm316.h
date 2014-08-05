@@ -1191,6 +1191,7 @@
 
 /* Constants */
 
+#define RAMSTART       0x100
 #define RAMEND         0x4FF
 #define XRAMSIZE       0
 #define XRAMEND        RAMEND

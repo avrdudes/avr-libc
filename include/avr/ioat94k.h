@@ -540,6 +540,10 @@
    (all in the same 36K total of SRAM, loaded from external EEPROM).
  */
 
+#ifndef RAMSTART
+#define RAMSTART 0x60
+#endif
+
 #ifndef RAMEND
 #define RAMEND 0x0FFF
 #endif
