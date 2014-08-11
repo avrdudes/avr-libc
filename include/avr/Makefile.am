@@ -94,6 +94,7 @@ avr_HEADERS = \
     iom164.h \
     iom164pa.h \
     iom165.h \
+    iom165a.h \
     iom165p.h \
     iom165pa.h \
     iom168.h \
