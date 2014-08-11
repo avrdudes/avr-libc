@@ -30,6 +30,8 @@
 
 /* avr/io86r401.h - definitions for AT86RF401 */
 
+/* $Id$ */
+
 #ifndef _AVR_IO86RF401_H_
 #define _AVR_IO86RF401_H_ 1
 

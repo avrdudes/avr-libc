@@ -31,6 +31,8 @@
 
 /* avr/iom329.h - definitions for ATmega329 and ATmega329P.  */
 
+/* $Id$ */
+
 #ifndef _AVR_IOM329_H_
 #define _AVR_IOM329_H_ 1
 

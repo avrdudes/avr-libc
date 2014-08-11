@@ -31,6 +31,8 @@
 
 /* avr/iom6490.h - definitions for ATmega6490 */
 
+/* $Id$ */
+
 #ifndef _AVR_IOM6490_H_
 #define _AVR_IOM6490_H_ 1
 

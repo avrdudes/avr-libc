@@ -32,6 +32,8 @@
  ****************************************************************************/
 
 
+/* $Id$ */
+
 #ifndef _AVR_ATMEGA48PA_H_INCLUDED
 #define _AVR_ATMEGA48PA_H_INCLUDED
 

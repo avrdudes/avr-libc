@@ -31,6 +31,8 @@
 
 /* avr/iom649.h - definitions for ATmega649 */
 
+/* $Id$ */
+
 #ifndef _AVR_IOM649_H_
 #define _AVR_IOM649_H_ 1
 
