@@ -1,8 +1,13 @@
 2014-08-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #42957 missing SPMCSR defines in iom328p.h
+	bug #41690 Bit definitions for SPMCSR
 	* include/iom328p.h: fix SPMCSR names; add correct signature for
 	ATmega328 device
+	* include/avr/iom168p.h: fix SPMCSR names
+	* include/avr/iom48p.h: (Dito.)
+	* include/avr/iom88p.h: (Dito.)
+	* include/avr/iom88pa.h: (Dito.)
 
 2014-08-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 

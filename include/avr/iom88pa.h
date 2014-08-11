@@ -337,10 +337,12 @@
 
 #define SPMCSR _SFR_IO8(0x37)
 #define SELFPRGEN 0
+#define SPMEN 0
 #define PGERS 1
 #define PGWRT 2
 #define BLBSET 3
 #define RWWSRE 4
+#define SIGRD 5
 #define RWWSB 6
 #define SPMIE 7
 

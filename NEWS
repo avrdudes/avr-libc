@@ -32,7 +32,8 @@
   [#42085] HFUSE_DEFAULT not defined for iotn84.h
   [#39779] PCIE0 and PCIE1 defined incorrectly for mega165a and mega165pa devices
   [#38614] dtostrf - wrong behavior or wrong documentation
-  [#42957] missing SPMCSR defines in iom328p.h
+  [#42957] missing SPMCSR defines in iom328p.h#
+  [#41690] Bit definitions for SPMCSR
   [no-id]  XXX_vect_num not consistent io90pwmx.h, iousbxx6_7.h
   [no-id]  Specialize clock_prescale_set/get for mega hvb devices
   [no-id]  Update register and bit definitions for tiny 13a/24a/44a/84a,
