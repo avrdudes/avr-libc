@@ -1,5 +1,10 @@
 2014-08-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	bug #38614 dtostrf - wrong behavior or wrong documentation
+	* include/stdlib.h (dtostrf): add "possible for the decimal dot
+
+2014-08-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	bug #39779 PCIE0 and PCIE1 defined incorrectly for mega165a and mega165pa devices
 	* include/avr/iom165a.h: Create a separate IO header file for
 	the ATmega165A (derived from ATmega165PA which has already been

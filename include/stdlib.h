@@ -645,7 +645,7 @@ extern char *dtostre(double __val, char *__s, unsigned char __prec,
    is responsible for providing sufficient storage in \c s.
 
    Conversion is done in the format \c "[-]d.ddd".  The minimum field
-   width of the output string (including the \c '.' and the possible
+   width of the output string (including the possible \c '.' and the possible
    sign for negative values) is given in \c width, and \c prec determines
    the number of digits after the decimal sign. \c width is signed value,
    negative for left adjustment.
