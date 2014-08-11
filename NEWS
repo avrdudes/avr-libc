@@ -84,6 +84,9 @@
   - Add IO register debug symbols to crt*.o, so debuggers can see the
     per-device defined IO registers (and __eeprom).
 
+  - A number of changes have been applied to make avr-libc more C++
+    aware.
+
 *** Changes in avr-libc-1.8.0:
 
 * Bugs fixed:
