@@ -36,6 +36,7 @@ EXTRA_DIST = \
 	at90can32.S \
 	at90can64.S \
 	at90pwm1.S \
+	at90pwm161.S \
 	at90pwm2.S \
 	at90pwm216.S \
 	at90pwm2b.S \
@@ -61,13 +62,21 @@ EXTRA_DIST = \
 	at90usb647.S \
 	at90usb82.S \
 	at94k.S \
+	ata5272.S \
+	ata5505.S \
+	ata5790.S \
+	ata5795.S \
+	ata6285.S \
+	ata6286.S \
 	ata6289.S \
 	atmega103.S \
 	atmega128.S \
 	atmega1280.S \
 	atmega1281.S \
+	atmega1284.S \
 	atmega1284p.S \
 	atmega1284rfr2.S \
+	atmega128a.S \
 	atmega128rfa1.S \
 	atmega128rfr2.S \
 	atmega16.S \
@@ -76,12 +85,15 @@ EXTRA_DIST = \
 	atmega163.S \
 	atmega164a.S \
 	atmega164p.S \
+	atmega164pa.S \
 	atmega165.S \
 	atmega165a.S \
 	atmega165p.S \
+	atmega165pa.S \
 	atmega168.S \
 	atmega168a.S \
 	atmega168p.S \
+	atmega168pa.S \
 	atmega169.S \
 	atmega169a.S \
 	atmega169p.S \
@@ -107,17 +119,21 @@ EXTRA_DIST = \
 	atmega3250.S \
 	atmega3250a.S \
 	atmega3250p.S \
+	atmega3250pa.S \
 	atmega325a.S \
 	atmega325p.S \
+	atmega325pa.S \
 	atmega328.S \
 	atmega328p.S \
 	atmega329.S \
 	atmega3290.S \
 	atmega3290a.S \
 	atmega3290p.S \
+	atmega3290pa.S \
 	atmega329a.S \
 	atmega329p.S \
 	atmega329pa.S \
+	atmega32a.S \
 	atmega32c1.S \
 	atmega32hvb.S \
 	atmega32hvbrevb.S \
@@ -129,6 +145,7 @@ EXTRA_DIST = \
 	atmega48.S \
 	atmega48a.S \
 	atmega48p.S \
+	atmega48pa.S \
 	atmega64.S \
 	atmega640.S \
 	atmega644.S \
@@ -148,6 +165,7 @@ EXTRA_DIST = \
 	atmega6490p.S \
 	atmega649a.S \
 	atmega649p.S \
+	atmega64a.S \
 	atmega64c1.S \
 	atmega64hve.S \
 	atmega64m1.S \
@@ -159,6 +177,7 @@ EXTRA_DIST = \
 	atmega88a.S \
 	atmega88p.S \
 	atmega88pa.S \
+	atmega8a.S \
 	atmega8hva.S \
 	atmega8u2.S \
 	attiny10.S \
@@ -167,6 +186,7 @@ EXTRA_DIST = \
 	attiny13.S \
 	attiny13a.S \
 	attiny15.S \
+	attiny1634.S \
 	attiny167.S \
 	attiny20.S \
 	attiny22.S \
@@ -190,6 +210,7 @@ EXTRA_DIST = \
 	attiny461a.S \
 	attiny48.S \
 	attiny5.S \
+	attiny828.S \
 	attiny84.S \
 	attiny84a.S \
 	attiny85.S \
@@ -201,19 +222,42 @@ EXTRA_DIST = \
 	atxmega128a1.S \
 	atxmega128a1u.S \
 	atxmega128a3.S \
+	atxmega128a3u.S \
+	atxmega128a4u.S \
+	atxmega128b1.S \
+	atxmega128b3.S \
+	atxmega128c3.S \
 	atxmega128d3.S \
+	atxmega128d4.S \
 	atxmega16a4.S \
+	atxmega16a4u.S \
+	atxmega16c4.S \
 	atxmega16d4.S \
 	atxmega192a3.S \
+	atxmega192a3u.S \
+	atxmega192c3.S \
 	atxmega192d3.S \
 	atxmega256a3.S \
 	atxmega256a3b.S \
+	atxmega256a3bu.S \
+	atxmega256a3u.S \
+	atxmega256c3.S \
 	atxmega256d3.S \
 	atxmega32a4.S \
+	atxmega32a4u.S \
+	atxmega32c4.S \
 	atxmega32d4.S \
+	atxmega384c3.S \
+	atxmega384d3.S \
 	atxmega64a1.S \
 	atxmega64a1u.S \
 	atxmega64a3.S \
+	atxmega64a3u.S \
+	atxmega64a4u.S \
+	atxmega64b1.S \
+	atxmega64b3.S \
+	atxmega64c3.S \
 	atxmega64d3.S \
+	atxmega64d4.S \
 	m3000.S \
 	template.S
