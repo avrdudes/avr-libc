@@ -28,7 +28,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id: iom16hvbrevb.h 2086 2009-12-15 03:24:16Z arcanum $ */
+/* $Id$ */
 
 /* avr/iom16hvbrevb.h - definitions for ATmega16HVB revision B */
 

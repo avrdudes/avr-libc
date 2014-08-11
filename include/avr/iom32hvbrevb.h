@@ -29,7 +29,7 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id: iom32hvbrevb.h 2102 2010-03-16 22:52:39Z joerg_wunsch $ */
+/* $Id$ */
 
 /* avr/iom32hvbrevb.h - definitions for ATmega32HVB revision B. */
 
