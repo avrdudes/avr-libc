@@ -339,11 +339,14 @@
 #define BODS 6
 
 #define SPMCSR _SFR_IO8(0x37)
-#define SELFPRGEN 0
+#define SELFPRGEN 0 /* only for backwards compatibility with previous
+		     * avr-libc versions; not an official name */
+#define SPMEN 0
 #define PGERS 1
 #define PGWRT 2
 #define BLBSET 3
 #define RWWSRE 4
+#define SIGRD 5
 #define RWWSB 6
 #define SPMIE 7
 
@@ -920,7 +923,11 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x95
-#define SIGNATURE_2 0x0F
+#if defined(__AVR_ATmega328__)
+#  define SIGNATURE_2 0x14
+#else /* ATmega328P */
+#  define SIGNATURE_2 0x0F
+#endif
 
 
 #endif  /* _AVR_IOM328P_H_ */

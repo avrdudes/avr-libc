@@ -1,3 +1,9 @@
+2014-08-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	bug #42957 missing SPMCSR defines in iom328p.h
+	* include/iom328p.h: fix SPMCSR names; add correct signature for
+	ATmega328 device
+
 2014-08-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #38614 dtostrf - wrong behavior or wrong documentation
