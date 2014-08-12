@@ -1,5 +1,9 @@
 2014-08-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: Post-release 1.8.1
+
+2014-08-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: Prepare for release 1.8.1
 
 2014-08-12  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
