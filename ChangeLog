@@ -1,3 +1,12 @@
+2014-08-12  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	patch #8512 Rename tiny arch to avrtiny to sync with binutils
+	* devtools/gen-avr-lib-tree.sh: AVRTINY10_DEV_INFO changed to
+	AVRTINY_DEV_INFO.
+	(AVR_ARH_INFO): Tiny arch name changed to avrtiny.
+	* configure.ac: Tiny arch name changed to avrtiny.
+	(AC_CONFIG_FILES): Change lib path for new architecture name.
+
 2014-08-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	bug #42957 missing SPMCSR defines in iom328p.h

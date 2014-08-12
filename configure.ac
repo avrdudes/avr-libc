@@ -1156,9 +1156,9 @@ CHECK_AVR_DEVICE(atxmega128a4u)
 AM_CONDITIONAL(HAS_atxmega128a4u, test "x$HAS_atxmega128a4u" = "xyes")
 
 
-# avrtiny10
-CHECK_AVR_DEVICE(avrtiny10)
-AM_CONDITIONAL(HAS_avrtiny10, test "x$HAS_avrtiny10" = "xyes")
+# avrtiny
+CHECK_AVR_DEVICE(avrtiny)
+AM_CONDITIONAL(HAS_avrtiny, test "x$HAS_avrtiny" = "xyes")
 
 CHECK_AVR_DEVICE(attiny4)
 AM_CONDITIONAL(HAS_attiny4, test "x$HAS_attiny4" = "xyes")
@@ -1562,15 +1562,15 @@ AC_CONFIG_FILES([
 ])
 
 
-# avrtiny10
+# avrtiny
 AC_CONFIG_FILES([
-	avr/lib/avrtiny10/Makefile
-	avr/lib/avrtiny10/attiny4/Makefile
-	avr/lib/avrtiny10/attiny5/Makefile
-	avr/lib/avrtiny10/attiny9/Makefile
-	avr/lib/avrtiny10/attiny10/Makefile
-	avr/lib/avrtiny10/attiny20/Makefile
-	avr/lib/avrtiny10/attiny40/Makefile
+	avr/lib/avrtiny/Makefile
+	avr/lib/avrtiny/attiny4/Makefile
+	avr/lib/avrtiny/attiny5/Makefile
+	avr/lib/avrtiny/attiny9/Makefile
+	avr/lib/avrtiny/attiny10/Makefile
+	avr/lib/avrtiny/attiny20/Makefile
+	avr/lib/avrtiny/attiny40/Makefile
 ])
 
 

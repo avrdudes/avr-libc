@@ -67,6 +67,7 @@
   [no-id] correction in xmega wdt_enable and wdt_disable added for xmega
   [#8499] Device ata6289 should be of avr4 architecture
   [no-id] Add RAMSTART, fix RAMSIZE, RAMEND and FLASHEND in device headers
+  [#8512] Rename tiny arch to avrtiny to sync with binutils
 
 * Other changes:
 
