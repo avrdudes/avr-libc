@@ -180,48 +180,50 @@
    1) set WDT change enable (WDT_CEN_bm)
    2) enable WDT (WDT_ENABLE_bm)
    3) set timeout (timeout)
-** Synchronization starts when ENABLE bit of WDT is set. So, wait till it 
+** Synchronization starts when ENABLE bit of WDT is set. So, wait till it
    finishes (SYNCBUSY of STATUS register is automatically cleared after the
    sync is finished).
 */
 #define wdt_enable(timeout) \
 do { \
-uint8_t temp; \
+uint8_t temp = 0; \
 __asm__ __volatile__ (         \
+    "in __tmp_reg__, %[rampd]"              "\n\t" \
+    "out %[rampd], __zero_reg__"            "\n\t" \
     "out %[ccp_reg], %[ioreg_cen_mask]"     "\n\t" \
     "sts %[wdt_reg], %[wdt_enable_timeout]" "\n\t" \
     "1:lds %[tmp], %[wdt_status_reg]"       "\n\t" \
     "sbrc  %[tmp], %[wdt_syncbusy_bit]"     "\n\t" \
     "rjmp 1b"                               "\n\t" \
-    "wdr"                                   "\n\t" \
-    : \
-    : [ccp_reg]            "M" _SFR_MEM_ADDR(CCP),        \
-      [ioreg_cen_mask]     "r" CCP_IOREG_gc,              \
-      [wdt_reg]            "M" _SFR_MEM_ADDR(WDT_CTRL),   \
-      [wdt_enable_timeout] "r" (WDT_CEN_bm | WDT_ENABLE_bm | timeout), \
-      [wdt_status_reg]     "M" _SFR_MEM_ADDR(WDT_STATUS), \
-      [wdt_syncbusy_bit]   "I" WDT_SYNCBUSY_bm,           \
-      [tmp]                "r" temp                       \
+    "out %[rampd], __tmp_reg__"             "\n\t" \
+    : "=r" (temp) \
+    : [rampd]              "M" (_SFR_MEM_ADDR(RAMPD)),      \
+      [ccp_reg]            "I" (_SFR_MEM_ADDR(CCP)),        \
+      [ioreg_cen_mask]     "r" ((uint8_t)CCP_IOREG_gc),     \
+      [wdt_reg]            "M" (_SFR_MEM_ADDR(WDT_CTRL)),   \
+      [wdt_enable_timeout] "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | timeout)), \
+      [wdt_status_reg]     "M" (_SFR_MEM_ADDR(WDT_STATUS)), \
+      [wdt_syncbusy_bit]   "I" (WDT_SYNCBUSY_bm),           \
+      [tmp]                "r" (temp)                       \
     : "r0" \
-) \
+); \
 } while(0)
 
 #define wdt_disable() \
-do { \
-uint8_t temp; \
 __asm__ __volatile__ (  \
+    "in __tmp_reg__, %[rampd]"          "\n\t" \
+    "out %[rampd], __zero_reg__"        "\n\t" \
     "out %[ccp_reg], %[ioreg_cen_mask]" "\n\t" \
-    "lds %[tmp], %[wdt_reg]"            "\n\t" \
-    "andi %[tmp], %[disable_mask]"      "\n\t" \
-    "sts %[wdt_reg], %[wdt_disable]"    "\n\t" \
+    "sts %[wdt_reg], %[disable_mask]"   "\n\t" \
+    "out %[rampd], __tmp_reg__"         "\n\t" \
     : \
-    : [ccp_reg]           "M" _SFR_MEM_ADDR(CCP),      \
-      [ioreg_cen_mask]    "r" CCP_IOREG_gc,            \
-      [wdt_reg]           "M" _SFR_MEM_ADDR(WDT_CTRL), \
-      [tmp]               "r" temp,                    \
-      [disable_mask]      "M" ~WDT_ENABLE_bm,          \
-      [wdt_disable]       "r" (temp | WDT_CEN_bm)      \
-)
+    : [rampd]             "M" (_SFR_MEM_ADDR(RAMPD)),    \
+      [ccp_reg]           "I" (_SFR_MEM_ADDR(CCP)),      \
+      [ioreg_cen_mask]    "r" ((uint8_t)CCP_IOREG_gc),   \
+      [wdt_reg]           "M" (_SFR_MEM_ADDR(WDT_CTRL)), \
+      [disable_mask]      "r" ((uint8_t)((~WDT_ENABLE_bm) | WDT_CEN_bm)) \
+    : "r0" \
+);
 
 #elif defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \

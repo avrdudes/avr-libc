@@ -1,3 +1,9 @@
+2014-09-25  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	* include/avr/wdt.h (wdt_enable): save & restore rampd register.
+	correct syntax.
+	(wdt_disable): Likewise.
+
 2014-08-12  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* configure.ac: Post-release 1.8.1

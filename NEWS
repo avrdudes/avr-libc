@@ -6,6 +6,8 @@
 
 * Contributed Patches:
 
+  [no-id] save & restore rampd register in xmega wdt_enable and wdt_disable
+
 * Other changes:
 
 
