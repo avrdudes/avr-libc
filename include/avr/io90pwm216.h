@@ -434,7 +434,8 @@
 /* Power Reduction Register */
 #define PRR     _SFR_MEM8(0x64)
 #define PRADC   0   /* Power Reduction ADC */
-#define PRUSART 1   /* Power Reduction USART */
+#define PRUSART0 1  /* Power Reduction USART */
+#define PRUSART PRUSART0 /* Define to maintain backward-compatibility */
 #define PRSPI   2   /* Power Reduction Serial Peripheral Interface */
 #define PRTIM0  3   /* Power Reduction Timer/Counter0 */
 #define PRTIM1  4   /* Power Reduction Timer/Counter1 */

@@ -1045,6 +1045,15 @@ typedef struct ADC_struct
     ADC_CH_t CH0;  /* ADC Channel 0 */
 } ADC_t;
 
+/* Current Limitation */
+typedef enum ADC_CURRLIMIT_enum
+{
+    ADC_CURRLIMIT_NO_gc = (0x00<<5),  /* No current limit,     300ksps max sampling rate */
+    ADC_CURRLIMIT_LOW_gc = (0x01<<5),  /* Low current limit,    225ksps max sampling rate */
+    ADC_CURRLIMIT_MED_gc = (0x02<<5),  /* Medium current limit, 150ksps max sampling rate */
+    ADC_CURRLIMIT_HIGH_gc = (0x03<<5),  /* High current limit,   75ksps max sampling rate */
+} ADC_CURRLIMIT_t;
+
 /* Positive input multiplexer selection */
 typedef enum ADC_CH_MUXPOS_enum
 {
@@ -1099,6 +1108,7 @@ typedef enum ADC_CH_GAIN_enum
     ADC_CH_GAIN_16X_gc = (0x04<<2),  /* 16x gain */
     ADC_CH_GAIN_32X_gc = (0x05<<2),  /* 32x gain */
     ADC_CH_GAIN_64X_gc = (0x06<<2),  /* 64x gain */
+    ADC_CH_GAIN_DIV2_gc = (0x07<<2),  /* x/2 gain */	
 } ADC_CH_GAIN_t;
 
 /* Conversion result resolution */
@@ -2229,6 +2239,7 @@ IO Module Instances. Mapped to memory.
 #define ACB    (*(AC_t *) 0x0390)  /* Analog Comparator B */
 #define RTC    (*(RTC_t *) 0x0400)  /* Real-Time Counter */
 #define TWIC    (*(TWI_t *) 0x0480)  /* Two-Wire Interface C */
+#define TWIE    (*(TWI_t *) 0x04A0)  /* Two-Wire Interface */
 #define PORTA    (*(PORT_t *) 0x0600)  /* Port A */
 #define PORTB    (*(PORT_t *) 0x0620)  /* Port B */
 #define PORTC    (*(PORT_t *) 0x0640)  /* Port C */
@@ -2485,6 +2496,22 @@ IO Module Instances. Mapped to memory.
 #define TWIC_SLAVE_ADDR  _SFR_MEM8(0x048B)
 #define TWIC_SLAVE_DATA  _SFR_MEM8(0x048C)
 #define TWIC_SLAVE_ADDRMASK  _SFR_MEM8(0x048D)
+
+/* TWIE - Two-Wire Interface E */
+#define TWIE_CTRL  _SFR_MEM8(0x04A0)
+#define TWIE_MASTER_CTRLA  _SFR_MEM8(0x04A1)
+#define TWIE_MASTER_CTRLB  _SFR_MEM8(0x04A2)
+#define TWIE_MASTER_CTRLC  _SFR_MEM8(0x04A3)
+#define TWIE_MASTER_STATUS  _SFR_MEM8(0x04A4)
+#define TWIE_MASTER_BAUD  _SFR_MEM8(0x04A5)
+#define TWIE_MASTER_ADDR  _SFR_MEM8(0x04A6)
+#define TWIE_MASTER_DATA  _SFR_MEM8(0x04A7)
+#define TWIE_SLAVE_CTRLA  _SFR_MEM8(0x04A8)
+#define TWIE_SLAVE_CTRLB  _SFR_MEM8(0x04A9)
+#define TWIE_SLAVE_STATUS  _SFR_MEM8(0x04AA)
+#define TWIE_SLAVE_ADDR  _SFR_MEM8(0x04AB)
+#define TWIE_SLAVE_DATA  _SFR_MEM8(0x04AC)
+#define TWIE_SLAVE_ADDRMASK  _SFR_MEM8(0x04AD)
 
 /* PORTA - Port A */
 #define PORTA_DIR  _SFR_MEM8(0x0600)
@@ -3963,6 +3990,13 @@ IO Module Instances. Mapped to memory.
 
 
 /* ADC.CTRLB  bit masks and bit positions */
+#define ADC_CURRLIMIT_gm  0x60  /* Current Limitation group mask. */
+#define ADC_CURRLIMIT_gp  5  /* Current Limitation group position. */
+#define ADC_CURRLIMIT0_bm  (1<<5)  /* Current Limitation bit 0 mask. */
+#define ADC_CURRLIMIT0_bp  5  /* Current Limitation bit 0 position. */
+#define ADC_CURRLIMIT1_bm  (1<<6)  /* Current Limitation bit 1 mask. */
+#define ADC_CURRLIMIT1_bp  6  /* Current Limitation bit 1 position. */
+
 #define ADC_CONMODE_bm  0x10  /* Conversion Mode bit mask. */
 #define ADC_CONMODE_bp  4  /* Conversion Mode bit position. */
 
@@ -5429,6 +5463,12 @@ IO Module Instances. Mapped to memory.
 #define PORTE_INT0_vect      _VECTOR(43)  /* External Interrupt 0 */
 #define PORTE_INT1_vect_num  44
 #define PORTE_INT1_vect      _VECTOR(44)  /* External Interrupt 1 */
+
+/* TWIE interrupt vectors */
+#define TWIE_TWIS_vect_num  45
+#define TWIE_TWIS_vect      _VECTOR(45)  /* TWI Slave Interrupt */
+#define TWIE_TWIM_vect_num  46
+#define TWIE_TWIM_vect      _VECTOR(46)  /* TWI Master Interrupt */
 
 /* TCE0 interrupt vectors */
 #define TCE0_OVF_vect_num  47

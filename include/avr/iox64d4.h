@@ -939,10 +939,6 @@ typedef enum ADC_CH_MUXPOS_enum
     ADC_CH_MUXPOS_PIN9_gc = (0x09<<3),  /* Input pin 9 */
     ADC_CH_MUXPOS_PIN10_gc = (0x0A<<3),  /* Input pin 10 */
     ADC_CH_MUXPOS_PIN11_gc = (0x0B<<3),  /* Input pin 11 */
-    ADC_CH_MUXPOS_PIN12_gc = (0x0C<<3),  /* Input pin 12 */
-    ADC_CH_MUXPOS_PIN13_gc = (0x0D<<3),  /* Input pin 13 */
-    ADC_CH_MUXPOS_PIN14_gc = (0x0E<<3),  /* Input pin 14 */
-    ADC_CH_MUXPOS_PIN15_gc = (0x0F<<3),  /* Input pin 15 */
 } ADC_CH_MUXPOS_t;
 
 /* Internal input multiplexer selections */

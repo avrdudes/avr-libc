@@ -472,9 +472,9 @@
 #define ADC7D 7
 
 #define DIDR1 _SFR_MEM8(0x7F)
-#define ADC8D 0
-#define ADC9D 1
-#define ADC10D 2
+#define ADC8D 4
+#define ADC9D 5
+#define ADC10D 6
 
 #define TCCR1A _SFR_MEM8(0x80)
 #define WGM10 0

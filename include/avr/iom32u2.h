@@ -474,6 +474,12 @@
 #define DIDR1 _SFR_MEM8(0x7F)
 #define AIN0D 0
 #define AIN1D 1
+#define AIN2D 2
+#define AIN3D 3
+#define AIN4D 4
+#define AIN5D 5
+#define AIN6D 6
+#define AIN7D 7
 
 #define TCCR1A _SFR_MEM8(0x80)
 #define WGM10 0

@@ -1,3 +1,32 @@
+2014-09-26  Soundararajan Dhakshinamoorthy <sounderarajan.d@atmel.com>
+
+	patch $8543: Fix multiple issues with device header files.
+	* include/avr/iom16hvb.h: define VREFGND_DDR instead of duplicate VREF_DDR.
+	* include/avr/iom32hvb.h: Likewise.
+	* include/avr/io90pwm216.h: Alias PRUSART0 for PRUSART as per datasheet.
+	* include/avr/io90pwm316.h: Likewise.
+	* include/avr/io90pwmx.h: Likewise.
+	* include/avr/iotn167.h: Fix the values for DIDR1 register bitfields.
+	* include/avr/iotn87.h: Likewise.
+	* include/avr/iom8u2.h: Define the missing DIDR1 register bitfields.
+	* include/avr/iom16u2.h: Likewise.
+	* include/avr/iom32u2.h: Likewise.
+	* include/avr/iom165.h (SIGNATURE_2): Correct the value.
+	* include/avr/iotn13a.h: Fix typo and maintain backward compatibility.
+	* include/avr/iomx8.h (RWWSB, RWWSRE): Enable for additional devices mega 
+	88P,168P,88A,168A and 168PA.
+	(SIGRD): Add for devices mega 48A, 48PA, 88A, 88PA, 168A and 168PA.
+	* include/avr/iox64d3.h: Define missing TWIE and ADC registers.
+	* include/avr/iox128d3.h: Likewise.
+	* include/avr/iox192d3.h: Likewise.
+	* include/avr/iox256d3.h: Likewise.
+	* include/avr/iox16d4.h: Define missing CRC register definitions. Define
+	missing TWIE module registers and possible ADC_CURRLIMIT enumerations.
+	* include/avr/iox32d4.h: Likewise.
+	* include/avr/iox64d4.h: Remove invalid ADC_CH_MUXPOS pin definitions.
+	* include/avr/iox128d4.h: Likewise.
+	* include/avr/iox256a3b.h: Remove obsoleted USARTF1 module register.
+
 2014-09-25  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	* include/avr/wdt.h (wdt_enable): save & restore rampd register.

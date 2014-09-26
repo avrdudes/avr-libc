@@ -2611,7 +2611,6 @@ IO Module Instances. Mapped to memory.
 #define TCF0    (*(TC0_t *) 0x0B00)  /* Timer/Counter F0 */
 #define HIRESF    (*(HIRES_t *) 0x0B90)  /* High-Resolution Extension F */
 #define USARTF0    (*(USART_t *) 0x0BA0)  /* Universal Asynchronous Receiver-Transmitter F0 */
-#define USARTF1    (*(USART_t *) 0x0BB0)  /* Universal Asynchronous Receiver-Transmitter F1 */
 #define SPIF    (*(SPI_t *) 0x0BC0)  /* Serial Peripheral Interface F */
 
 
@@ -3447,15 +3446,6 @@ IO Module Instances. Mapped to memory.
 #define USARTF0_CTRLC  _SFR_MEM8(0x0BA5)
 #define USARTF0_BAUDCTRLA  _SFR_MEM8(0x0BA6)
 #define USARTF0_BAUDCTRLB  _SFR_MEM8(0x0BA7)
-
-/* USARTF1 - Universal Asynchronous Receiver-Transmitter F1 */
-#define USARTF1_DATA  _SFR_MEM8(0x0BB0)
-#define USARTF1_STATUS  _SFR_MEM8(0x0BB1)
-#define USARTF1_CTRLA  _SFR_MEM8(0x0BB3)
-#define USARTF1_CTRLB  _SFR_MEM8(0x0BB4)
-#define USARTF1_CTRLC  _SFR_MEM8(0x0BB5)
-#define USARTF1_BAUDCTRLA  _SFR_MEM8(0x0BB6)
-#define USARTF1_BAUDCTRLB  _SFR_MEM8(0x0BB7)
 
 /* SPIF - Serial Peripheral Interface F */
 #define SPIF_CTRL  _SFR_MEM8(0x0BC0)

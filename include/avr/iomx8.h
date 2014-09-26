@@ -305,9 +305,12 @@ must be defined for the mega48.
 #define SPMCSR  _SFR_IO8 (0x37)
 /* SPMCSR */
 #define SPMIE     7
-#if defined (__AVR_ATmega88__) || defined (__AVR_ATmega168__)
+#if defined (__AVR_ATmega88__) || defined (__AVR_ATmega168__) || (__AVR_ATmega88P__) || defined (__AVR_ATmega168P__) || (__AVR_ATmega88A__) || defined (__AVR_ATmega168A__) || (__AVR_ATmega88PA__) || defined (__AVR_ATmega168PA__)
 #  define RWWSB   6
 #  define RWWSRE  4
+#endif
+#if defined(__AVR_ATmega48A) || defined(__AVR_ATmega48PA) || defined(__AVR_ATmega88A) || defined(__AVR_ATmega88PA) || defined(__AVR_ATmega168A) || defined(__AVR_ATmega168PA)
+	#define SIGRD 5
 #endif
 #define BLBSET    3
 #define PGWRT     2

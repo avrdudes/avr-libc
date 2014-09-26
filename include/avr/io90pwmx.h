@@ -492,7 +492,8 @@
 #define PRTIM1  4   /* Power Reduction Timer/Counter1 */
 #define PRTIM0  3   /* Power Reduction Timer/Counter0 */
 #define PRSPI   2   /* Power Reduction Serial Peripheral Interface */
-#define PRUSART 1   /* Power Reduction USART */
+#define PRUSART0 1  /* Power Reduction USART */
+#define PRUSART PRUSART0 /* Define to maintain backward-compatibility */
 #define PRADC   0   /* Power Reduction ADC */
 
 /* Oscillator Calibration Value */

@@ -149,8 +149,10 @@
 
 #define EECR _SFR_IO8(0x1C)
 #define EERE 0
-#define EEPE 1
-#define EEMPE 2
+#define EEWE 1
+#define EEPE EEWE
+#define EEMWE 2
+#define EEMPE EEMWE
 #define EERIE 3
 #define EEPM0 4
 #define EEPM1 5
