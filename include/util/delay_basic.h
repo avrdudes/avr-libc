@@ -37,8 +37,8 @@
 #include <inttypes.h>
 
 #if !defined(__DOXYGEN__)
-static inline void _delay_loop_1(uint8_t __count) __attribute__((always_inline));
-static inline void _delay_loop_2(uint16_t __count) __attribute__((always_inline));
+static __inline__ void _delay_loop_1(uint8_t __count) __attribute__((__always_inline__));
+static __inline__ void _delay_loop_2(uint16_t __count) __attribute__((__always_inline__));
 #endif
 
 /** \file */

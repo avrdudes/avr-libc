@@ -1,3 +1,8 @@
+2014-10-15  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+	* include/util/delay.h.in: Replace inline with __inline__ and
+	always_inline with __always_inline__.
+	* include/util/delay_basic.h: Likewise.
+
 2014-09-26  Soundararajan Dhakshinamoorthy <sounderarajan.d@atmel.com>
 
 	patch $8543: Fix multiple issues with device header files.
