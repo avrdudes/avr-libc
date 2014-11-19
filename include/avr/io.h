@@ -284,8 +284,10 @@
 #  include <avr/iom165p.h>
 #elif defined (__AVR_ATmega165PA__)
 #  include <avr/iom165pa.h>
-#elif defined (__AVR_ATmega168__) || defined (__AVR_ATmega168A__)
+#elif defined (__AVR_ATmega168__)
 #  include <avr/iom168.h>
+#elif defined (__AVR_ATmega168A__)
+#  include <avr/iom168a.h>
 #elif defined (__AVR_ATmega168P__)
 #  include <avr/iom168p.h>
 #elif defined (__AVR_ATmega168PA__)
@@ -310,14 +312,18 @@
 #  include <avr/iom8.h>
 #elif defined (__AVR_ATmega8A__)
 #  include <avr/iom8a.h>
-#elif defined (__AVR_ATmega48__) || defined (__AVR_ATmega48A__)
+#elif defined (__AVR_ATmega48__)
 #  include <avr/iom48.h>
+#elif defined (__AVR_ATmega48A__)
+#  include <avr/iom48a.h>
 #elif defined (__AVR_ATmega48PA__)
 #  include <avr/iom48pa.h>
 #elif defined (__AVR_ATmega48P__)
 #  include <avr/iom48p.h>
-#elif defined (__AVR_ATmega88__) || defined (__AVR_ATmega88A__)
+#elif defined (__AVR_ATmega88__)
 #  include <avr/iom88.h>
+#elif defined (__AVR_ATmega88A__)
+#  include <avr/iom88a.h>
 #elif defined (__AVR_ATmega88P__)
 #  include <avr/iom88p.h>
 #elif defined (__AVR_ATmega88PA__)

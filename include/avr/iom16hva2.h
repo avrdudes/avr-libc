@@ -867,5 +867,11 @@
 #define OC_PIN   PINOC
 #define OC_BIT   OC
 
+
+#define SLEEP_MODE_IDLE (0x00<<1)
+#define SLEEP_MODE_ADC (0x01<<1)
+#define SLEEP_MODE_PWR_SAVE (0x03<<1)
+#define SLEEP_MODE_PWR_OFF (0x04<<1)
+
 #endif /* _AVR_ATmega16HVA2_H_ */
 

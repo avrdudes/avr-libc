@@ -1694,5 +1694,12 @@
 #define SIGNATURE_2 0xC1
 
 
+
+#define SLEEP_MODE_IDLE         (0)
+#define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+#define SLEEP_MODE_PWR_SAVE     (_BV(SM0) | _BV(SM1))
+#define SLEEP_MODE_STANDBY      (_BV(SM1) | _BV(SM2))
+#define SLEEP_MODE_EXT_STANDBY  (_BV(SM0) | _BV(SM1) | _BV(SM2))
+
 #endif /* _AVR_AT90SCR100_H_ */
 

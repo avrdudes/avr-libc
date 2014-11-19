@@ -1473,5 +1473,12 @@
 #define ADC0_PIN   PINF
 #define ADC0_BIT   0
 
+
+#define SLEEP_MODE_IDLE (0x00<<1)
+#define SLEEP_MODE_ADC (0x01<<1)
+#define SLEEP_MODE_PWR_DOWN (0x02<<1)
+#define SLEEP_MODE_PWR_SAVE (0x03<<1)
+#define SLEEP_MODE_STANDBY (0x06<<1)
+
 #endif /* _AVR_ATmega649_H_ */
 

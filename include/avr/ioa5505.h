@@ -743,5 +743,11 @@
 #define SIGNATURE_2 0x87
 
 
+
+#define SLEEP_MODE_IDLE (0x00<<1)
+#define SLEEP_MODE_ADC (0x01<<1)
+#define SLEEP_MODE_PWR_DOWN (0x02<<1)
+#define SLEEP_MODE_PWR_SAVE (0x03<<1)
+
 #endif /* #ifdef _AVR_ATA5505_H_INCLUDED */
 

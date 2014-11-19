@@ -798,5 +798,10 @@
 #define SCL_PIN   PINB
 #define SCL_BIT   7
 
+
+#define SLEEP_MODE_IDLE (0x00<<4)
+#define SLEEP_MODE_STANDBY (0x04<<4)
+#define SLEEP_MODE_PWR_DOWN (0x05<<4)
+
 #endif /* _AVR_ATtiny2313A_H_ */
 

@@ -560,5 +560,12 @@
 #define SIGNATURE_2 0x07
 
 
+
+#define SLEEP_MODE_IDLE (0x00<<4)
+#define SLEEP_MODE_ADC (0x01<<4)
+#define SLEEP_MODE_PWR_DOWN (0x02<<4)
+#define SLEEP_MODE_PWR_SAVE (0x03<<4)
+#define SLEEP_MODE_STANDBY (0x06<<4)
+
 #endif /* #ifdef _AVR_ATMEGA8A_H_INCLUDED */
 

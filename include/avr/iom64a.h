@@ -959,6 +959,20 @@
 #define SIGNATURE_1 0x96
 #define SIGNATURE_2 0x02
 
+#define SLEEP_MODE_IDLE (0x00<<2)
+#define SLEEP_MODE_ADC (0x02<<2)
+#define SLEEP_MODE_PWR_DOWN (0x04<<2)
+#define SLEEP_MODE_PWR_SAVE (0x06<<2)
+#define SLEEP_MODE_STANDBY (0x05<<2)
+#define SLEEP_MODE_EXT_STANDBY (0x07<<2)
+
+
+#define SLEEP_MODE_IDLE (0x00<<2)
+#define SLEEP_MODE_ADC (0x02<<2)
+#define SLEEP_MODE_PWR_DOWN (0x04<<2)
+#define SLEEP_MODE_PWR_SAVE (0x06<<2)
+#define SLEEP_MODE_STANDBY (0x05<<2)
+#define SLEEP_MODE_EXT_STANDBY (0x07<<2)
 
 #endif /* #ifdef _AVR_ATMEGA64A_H_INCLUDED */
 

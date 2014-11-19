@@ -1398,4 +1398,10 @@
 #define __BOOT_LOCK_BITS_1_EXIST 
 
 
+#define SLEEP_MODE_IDLE         (0)
+#define SLEEP_MODE_ADC          _BV(SM0)
+#define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+#define SLEEP_MODE_STANDBY      (_BV(SM1) | _BV(SM2))
+
+
 #endif /* _AVR_IO90PWMX_H_ */

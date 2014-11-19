@@ -751,5 +751,11 @@
 #define PCINT7_PIN   PINADC
 #define PCINT7_BIT   ADC7
 
+
+#define SLEEP_MODE_IDLE (0x00<<1)
+#define SLEEP_MODE_ADC (0x01<<1)
+#define SLEEP_MODE_PWR_DOWN (0x02<<1)
+#define SLEEP_MODE_STANDBY (0x04<<1)
+
 #endif /* _AVR_ATtiny40_H_ */
 

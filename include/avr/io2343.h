@@ -209,4 +209,8 @@
 #define SIGNATURE_2 0x03
 
 
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_PWR_DOWN     _BV(SM)
+
+
 #endif /* _AVR_IO2343_H_ */

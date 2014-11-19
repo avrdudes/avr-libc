@@ -490,5 +490,12 @@
    0x3000 - 0x37FF - DPRAM
    0x8000 - 0xBFFF - program SRAM (read/write), would be nice if other
                      AVR devices did that as well (no need to use LPM!)
+
  */
+
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_ADC          _BV(SM0)
+#define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+#define SLEEP_MODE_PWR_SAVE     (_BV(SM0) | _BV(SM1))
+
 #endif /* _AVR_IO76C711_H_ */

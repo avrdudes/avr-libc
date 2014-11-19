@@ -695,4 +695,9 @@
 #endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
 
 
+#define SLEEP_MODE_IDLE (0x00<<4)
+#define SLEEP_MODE_STANDBY (0x04<<4)
+#define SLEEP_MODE_PWR_DOWN (0x05<<4)
+
+
 #endif  /* _AVR_IOTN2313_H_ */

@@ -972,5 +972,11 @@
 #define PA0_PIN   PINADC
 #define PA0_BIT   ADC0
 
+
+#define SLEEP_MODE_IDLE (0x00<<3)
+#define SLEEP_MODE_ADC (0x01<<3)
+#define SLEEP_MODE_PWR_DOWN (0x02<<3)
+#define SLEEP_MODE_STANDBY (0x03<<3)
+
 #endif /* _AVR_ATtiny461A_H_ */
 

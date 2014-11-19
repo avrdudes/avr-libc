@@ -720,4 +720,9 @@
 #endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
 
 
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_PWR_DOWN     1
+#define SLEEP_MODE_PWR_SAVE     2
+
+
 #endif /* _AVR_IOM161_H_ */

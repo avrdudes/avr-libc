@@ -98,6 +98,7 @@ avr_HEADERS = \
     iom165p.h \
     iom165pa.h \
     iom168.h \
+    iom168a.h \
     iom168p.h \
     iom168pa.h \
     iom169.h \
@@ -136,6 +137,7 @@ avr_HEADERS = \
     iom32u4.h \
     iom32u6.h \
     iom48.h \
+    iom48a.h \
     iom48pa.h \
     iom48p.h \
     iom406.h \
@@ -160,6 +162,7 @@ avr_HEADERS = \
     iom8515.h \
     iom8535.h \
     iom88.h \
+    iom88a.h \
     iom88p.h \
     iom88pa.h \
     iom8hva.h \

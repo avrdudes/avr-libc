@@ -1013,4 +1013,12 @@
 #endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
 
 
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_PWR_DOWN     1
+#define SLEEP_MODE_PWR_SAVE     2
+#define SLEEP_MODE_ADC          3
+#define SLEEP_MODE_STANDBY      4
+#define SLEEP_MODE_EXT_STANDBY  5
+
+
 #endif  /* _AVR_IOM162_H_ */

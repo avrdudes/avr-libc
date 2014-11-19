@@ -840,5 +840,10 @@
 #define SIGNATURE_2 0x82
 
 
+
+#define SLEEP_MODE_IDLE                     (0)
+#define SLEEP_MODE_SENSOR_NOISE_REDUCTION   (_BV(SM0))
+#define SLEEP_MODE_PWR_DOWN                 (_BV(SM1))
+
 #endif /* _AVR_ATA6289_H_ */
 

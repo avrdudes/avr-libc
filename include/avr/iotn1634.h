@@ -853,5 +853,11 @@
 #define SIGNATURE_2 0x12
 
 
+
+#define SLEEP_MODE_IDLE (0x00<<5)
+#define SLEEP_MODE_ADC (0x01<<5)
+#define SLEEP_MODE_PWR_DOWN (0x02<<5)
+#define SLEEP_MODE_STANDBY (0x03<<5)
+
 #endif /* #ifdef _AVR_ATTINY1634_H_INCLUDED */
 

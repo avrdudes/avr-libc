@@ -830,5 +830,10 @@
 #define SIGNATURE_2 0x14
 
 
+
+#define SLEEP_MODE_IDLE (0x00<<1)
+#define SLEEP_MODE_ADC (0x01<<1)
+#define SLEEP_MODE_PWR_DOWN (0x02<<1)
+
 #endif /* #ifdef _AVR_ATTINY828_H_INCLUDED */
 

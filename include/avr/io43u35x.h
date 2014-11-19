@@ -426,4 +426,8 @@
 #define    E2END    0x0000
 #define    FLASHEND 0x5FFF
 
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_PWR_DOWN     _BV(SM)
+
+
 #endif /* _AVR_43USB355_H_ */

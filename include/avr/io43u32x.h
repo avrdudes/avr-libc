@@ -434,4 +434,8 @@
    but no RAMPZ causes gcrt1.S build to fail, so assume 64K for now...  */
 #define    FLASHEND 0x0FFFF
 
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_PWR_DOWN     _BV(SM)
+
+
 #endif /* _AVR_43USB32X_H_ */

@@ -558,4 +558,9 @@
 #define FLASHEND 0x7FFF
 #endif
 
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_PWR_DOWN     _BV(SM1)
+#define SLEEP_MODE_PWR_SAVE     (_BV(SM0) | _BV(SM1))
+
+
 #endif /* _AVR_IOAT94K_H_ */

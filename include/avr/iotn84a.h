@@ -829,5 +829,11 @@
 #define PCINT5_PIN   PINA
 #define PCINT5_BIT   5
 
+
+#define SLEEP_MODE_IDLE (0x00<<3)
+#define SLEEP_MODE_ADC (0x01<<3)
+#define SLEEP_MODE_PWR_DOWN (0x02<<3)
+#define SLEEP_MODE_STANDBY (0x03<<3)
+
 #endif /* _AVR_ATtiny84A_H_ */
 
