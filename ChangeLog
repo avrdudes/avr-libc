@@ -1,5 +1,11 @@
 2014-11-18  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
+	* include/avr/sleep.h (set_sleep_mode): Remove SLEEP_MODE defines 
+	for tiny and mega devices as well. Branch on presence of SM<n> 
+	instead of device name.
+
+2014-11-18  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
 	* include/avr/Makefile.am: Add new headers iom{48,88,168}a.h.
 	* include/avr/io.h: Include them.
 	* include/avr/iom48a.h: New.
