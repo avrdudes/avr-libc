@@ -449,52 +449,7 @@
         _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
     } while(0)
 
-#elif defined(__AVR_ATxmega16A4__) \
-|| defined(__AVR_ATxmega16A4U__) \
-|| defined(__AVR_ATxmega16C4__) \
-|| defined(__AVR_ATxmega16D4__) \
-|| defined(__AVR_ATxmega32A4__) \
-|| defined(__AVR_ATxmega32A4U__) \
-|| defined(__AVR_ATxmega32C4__) \
-|| defined(__AVR_ATxmega32D4__) \
-|| defined(__AVR_ATxmega64A1__) \
-|| defined(__AVR_ATxmega64A1U__) \
-|| defined(__AVR_ATxmega64A3__) \
-|| defined(__AVR_ATxmega64A3U__) \
-|| defined(__AVR_ATxmega64A4U__) \
-|| defined(__AVR_ATxmega64B1__) \
-|| defined(__AVR_ATxmega64B3__) \
-|| defined(__AVR_ATxmega64C3__) \
-|| defined(__AVR_ATxmega64D3__) \
-|| defined(__AVR_ATxmega64D4__) \
-|| defined(__AVR_ATxmega128A1__) \
-|| defined(__AVR_ATxmega128A1U__) \
-|| defined(__AVR_ATxmega128A3__) \
-|| defined(__AVR_ATxmega128A3U__) \
-|| defined(__AVR_ATxmega128A4U__) \
-|| defined(__AVR_ATxmega128B1__) \
-|| defined(__AVR_ATxmega128B3__) \
-|| defined(__AVR_ATxmega128C3__) \
-|| defined(__AVR_ATxmega128D3__) \
-|| defined(__AVR_ATxmega128D4__) \
-|| defined(__AVR_ATxmega192A3__) \
-|| defined(__AVR_ATxmega192A3U__) \
-|| defined(__AVR_ATxmega192C3__) \
-|| defined(__AVR_ATxmega192D3__) \
-|| defined(__AVR_ATxmega256A3__) \
-|| defined(__AVR_ATxmega256A3U__) \
-|| defined(__AVR_ATxmega256C3__) \
-|| defined(__AVR_ATxmega256D3__) \
-|| defined(__AVR_ATxmega256A3B__) \
-|| defined(__AVR_ATxmega256A3BU__) \
-|| defined(__AVR_ATxmega384C3__) \
-|| defined(__AVR_ATxmega384D3__)
-
-    #define SLEEP_MODE_IDLE         (0)
-    #define SLEEP_MODE_PWR_DOWN     (SLEEP_SMODE1_bm)
-    #define SLEEP_MODE_PWR_SAVE     (SLEEP_SMODE1_bm | SLEEP_SMODE0_bm)
-    #define SLEEP_MODE_STANDBY      (SLEEP_SMODE2_bm | SLEEP_SMODE1_bm)
-    #define SLEEP_MODE_EXT_STANDBY  (SLEEP_SMODE2_bm | SLEEP_SMODE1_bm | SLEEP_SMODE0_bm)
+#elif defined(__AVR_XMEGA__)
 
     #define set_sleep_mode(mode) \
     do { \

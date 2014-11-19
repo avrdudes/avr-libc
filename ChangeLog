@@ -1,3 +1,50 @@
+2014-10-15  Soundararajan Dhakshinamoorthy <sounderarajan.d@atmel.com>
+
+	patch $8557: Proposing to remove device specific xmega macros 
+	from sleep.h.
+	* include/avr/iox128a1.h: Add SLEEP_MODE defines.
+	* include/avr/iox128a1u.h: Likewise.
+	* include/avr/iox128a3.h: Likewise.
+	* include/avr/iox128a3u.h: Likewise.
+	* include/avr/iox128a4u.h: Likewise.
+	* include/avr/iox128b1.h: Likewise.
+	* include/avr/iox128b3.h: Likewise.
+	* include/avr/iox128c3.h: Likewise.
+	* include/avr/iox128d3.h: Likewise.
+	* include/avr/iox128d4.h: Likewise.
+	* include/avr/iox16a4.h: Likewise.
+	* include/avr/iox16a4u.h: Likewise.
+	* include/avr/iox16c4.h: Likewise.
+	* include/avr/iox16d4.h: Likewise.
+	* include/avr/iox192a3.h: Likewise.
+	* include/avr/iox192a3u.h: Likewise.
+	* include/avr/iox192c3.h: Likewise.
+	* include/avr/iox192d3.h: Likewise.
+	* include/avr/iox256a3.h: Likewise.
+	* include/avr/iox256a3b.h: Likewise.
+	* include/avr/iox256a3bu.h: Likewise.
+	* include/avr/iox256a3u.h: Likewise.
+	* include/avr/iox256c3.h: Likewise.
+	* include/avr/iox256d3.h: Likewise.
+	* include/avr/iox32a4.h: Likewise.
+	* include/avr/iox32a4u.h: Likewise.
+	* include/avr/iox32c4.h: Likewise.
+	* include/avr/iox32d4.h: Likewise.
+	* include/avr/iox384c3.h: Likewise.
+	* include/avr/iox384d3.h: Likewise.
+	* include/avr/iox64a1.h: Likewise.
+	* include/avr/iox64a1u.h: Likewise.
+	* include/avr/iox64a3.h: Likewise.
+	* include/avr/iox64a3u.h: Likewise.
+	* include/avr/iox64a4u.h: Likewise.
+	* include/avr/iox64b1.h: Likewise.
+	* include/avr/iox64b3.h: Likewise.
+	* include/avr/iox64c3.h: Likewise.
+	* include/avr/iox64d3.h: Likewise.
+	* include/avr/iox64d4.h: Likewise.
+	* include/avr/sleep.h (set_sleep_mode): Use __AVR_XMEGA__ instead
+	of device names. Remove SLEEP_MODE defines.
+
 2014-10-18  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 	     Georg-Johann Lay <avr@gjlay.de>
 
