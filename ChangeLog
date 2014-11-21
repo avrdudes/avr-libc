@@ -1,3 +1,8 @@
+2014-11-21  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
+    * crt1/gcrt1.S: Add a note section embedding device info.
+    * doc/api/sections.dox: Document it.
+
 2014-11-20  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
 	* include/avr/sleep.h (set_sleep_mode): Branch on presence of 

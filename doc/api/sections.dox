@@ -207,6 +207,51 @@ Unused. User definable.
 Goes into an infinite loop after program termination and completion of any
 _exit() code (execution of code in the .fini9 -> .fini1 sections).
 
+\section sec_dot_note The .note.gnu.avr.deviceinfo Section
+
+This section contains device specific information picked up from the device
+header file and compiler builtin macros. The layout conforms to the standard ELF
+note section layout (http://docs.oracle.com/cd/E23824_01/html/819-0690/chapter6-18048.html).
+
+The section contents are laid out as below.
+
+\code
+#define __NOTE_NAME_LEN 4
+struct __note_gnu_avr_deviceinfo
+{
+    struct
+    {
+        uint32_t namesz;          /* = __NOTE_NAME_LEN */
+        uint32_t descsz;          /* =  size of avr_desc */
+        uint32_t type;            /* = 1 - no other AVR note types exist */
+        char note_name[__NOTE_NAME_LEN]; /* = "AVR\0" */
+    }
+    note_header;
+    struct
+    {
+        uint32_t flash_start;
+        uint32_t flash_size;
+        uint32_t sram_start;
+        uint32_t sram_size;
+        uint32_t eeprom_start;
+        uint32_t eeprom_size;
+        uint32_t offset_table_size;
+        uint32_t offset_table[1];  /* Offset table containing byte offsets into
+                                      string table that immediately follows it.
+                                      index 0: Device name byte offset
+                                    */
+        char str_table [2 +
+          strlen(__AVR_DEVICE_NAME__)]; /* Standard ELF string table.
+                                           index 0 : NULL
+                                           index 1 : Device name
+                                           index 2 : NULL
+                                        */
+    }
+    avr_desc;
+};
+\endcode
+
+
 \section asm_sections Using Sections in Assembler Code
 
 Example:
