@@ -7632,6 +7632,69 @@ IO Module Instances. Mapped to memory.
 #define SIGNATURE_1 0x96
 #define SIGNATURE_2 0x42
 
+/* ========== Power Reduction Condition Definitions ========== */
+
+/* PR.PRGEN */
+#define __AVR_HAVE_PRGEN	(PR_USB_bm|PR_AES_bm|PR_EBI_bm|PR_RTC_bm|PR_EVSYS_bm|PR_DMA_bm)
+#define __AVR_HAVE_PRGEN_USB
+#define __AVR_HAVE_PRGEN_AES
+#define __AVR_HAVE_PRGEN_EBI
+#define __AVR_HAVE_PRGEN_RTC
+#define __AVR_HAVE_PRGEN_EVSYS
+#define __AVR_HAVE_PRGEN_DMA
+
+/* PR.PRPA */
+#define __AVR_HAVE_PRPA	(PR_DAC_bm|PR_ADC_bm|PR_AC_bm)
+#define __AVR_HAVE_PRPA_DAC
+#define __AVR_HAVE_PRPA_ADC
+#define __AVR_HAVE_PRPA_AC
+
+/* PR.PRPB */
+#define __AVR_HAVE_PRPB	(PR_DAC_bm|PR_ADC_bm|PR_AC_bm)
+#define __AVR_HAVE_PRPB_DAC
+#define __AVR_HAVE_PRPB_ADC
+#define __AVR_HAVE_PRPB_AC
+
+/* PR.PRPC */
+#define __AVR_HAVE_PRPC	(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm)
+#define __AVR_HAVE_PRPC_TWI
+#define __AVR_HAVE_PRPC_USART1
+#define __AVR_HAVE_PRPC_USART0
+#define __AVR_HAVE_PRPC_SPI
+#define __AVR_HAVE_PRPC_HIRES
+#define __AVR_HAVE_PRPC_TC1
+#define __AVR_HAVE_PRPC_TC0
+
+/* PR.PRPD */
+#define __AVR_HAVE_PRPD	(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm)
+#define __AVR_HAVE_PRPD_TWI
+#define __AVR_HAVE_PRPD_USART1
+#define __AVR_HAVE_PRPD_USART0
+#define __AVR_HAVE_PRPD_SPI
+#define __AVR_HAVE_PRPD_HIRES
+#define __AVR_HAVE_PRPD_TC1
+#define __AVR_HAVE_PRPD_TC0
+
+/* PR.PRPE */
+#define __AVR_HAVE_PRPE	(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm)
+#define __AVR_HAVE_PRPE_TWI
+#define __AVR_HAVE_PRPE_USART1
+#define __AVR_HAVE_PRPE_USART0
+#define __AVR_HAVE_PRPE_SPI
+#define __AVR_HAVE_PRPE_HIRES
+#define __AVR_HAVE_PRPE_TC1
+#define __AVR_HAVE_PRPE_TC0
+
+/* PR.PRPF */
+#define __AVR_HAVE_PRPF	(PR_TWI_bm|PR_USART1_bm|PR_USART0_bm|PR_SPI_bm|PR_HIRES_bm|PR_TC1_bm|PR_TC0_bm)
+#define __AVR_HAVE_PRPF_TWI
+#define __AVR_HAVE_PRPF_USART1
+#define __AVR_HAVE_PRPF_USART0
+#define __AVR_HAVE_PRPF_SPI
+#define __AVR_HAVE_PRPF_HIRES
+#define __AVR_HAVE_PRPF_TC1
+#define __AVR_HAVE_PRPF_TC0
+
 
 #endif /* #ifdef _AVR_ATXMEGA64A3U_H_INCLUDED */
 

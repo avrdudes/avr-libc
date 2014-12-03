@@ -308,6 +308,13 @@
 #define PRSPI 3
 #define PRVRM 5
 
+#define __AVR_HAVE_PRR0	((1<<PRVADC)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRSPI)|(1<<PRVRM))
+#define __AVR_HAVE_PRR0_PRVADC
+#define __AVR_HAVE_PRR0_PRTIM0
+#define __AVR_HAVE_PRR0_PRTIM1
+#define __AVR_HAVE_PRR0_PRSPI
+#define __AVR_HAVE_PRR0_PRVRM
+
 #define FOSCCAL _SFR_MEM8(0x66)
 #define FCAL0 0
 #define FCAL1 1

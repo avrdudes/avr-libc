@@ -503,6 +503,13 @@
 #define PRSPI 3
 #define PRTWI 4
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRSPI)|(1<<PRTWI))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM1
+#define __AVR_HAVE_PRR_PRSPI
+#define __AVR_HAVE_PRR_PRTWI
+
 #define CLKPSR _SFR_IO8(0x36)
 #define CLKPS0 0
 #define CLKPS1 1

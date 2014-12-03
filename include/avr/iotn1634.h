@@ -382,6 +382,15 @@
 #define PRTIM1  5
 #define PRTWI   6
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRUSART0)|(1<<PRUSART1)|(1<<PRUSI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRTWI))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRUSART0
+#define __AVR_HAVE_PRR_PRUSART1
+#define __AVR_HAVE_PRR_PRUSI
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM1
+#define __AVR_HAVE_PRR_PRTWI
+
 #define MCUSR   _SFR_IO8(0x35)
 #define PORF    0
 #define EXTRF   1

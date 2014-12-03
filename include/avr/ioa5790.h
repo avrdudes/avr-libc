@@ -439,9 +439,23 @@
 #define PRDS    6
 #define PRVM    7
 
+#define __AVR_HAVE_PRR0	((1<<PRLFR)|(1<<PRT1)|(1<<PRT2)|(1<<PRT3)|(1<<PRTM)|(1<<PRCU)|(1<<PRDS)|(1<<PRVM))
+#define __AVR_HAVE_PRR0_PRLFR
+#define __AVR_HAVE_PRR0_PRT1
+#define __AVR_HAVE_PRR0_PRT2
+#define __AVR_HAVE_PRR0_PRT3
+#define __AVR_HAVE_PRR0_PRTM
+#define __AVR_HAVE_PRR0_PRCU
+#define __AVR_HAVE_PRR0_PRDS
+#define __AVR_HAVE_PRR0_PRVM
+
 #define PRR1    _SFR_MEM8(0x64)
 #define PRCI    0
 #define PRSPI   1
+
+#define __AVR_HAVE_PRR1	((1<<PRCI)|(1<<PRSPI))
+#define __AVR_HAVE_PRR1_PRCI
+#define __AVR_HAVE_PRR1_PRSPI
 
 #define SRCCAL  _SFR_MEM8(0x65)
 

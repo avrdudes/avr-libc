@@ -191,6 +191,10 @@
 #define PRADC 0
 #define PRTIM0 1
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRTIM0))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRTIM0
+
 #define CLKPR _SFR_IO8(0x26)
 #define CLKPS0 0
 #define CLKPS1 1

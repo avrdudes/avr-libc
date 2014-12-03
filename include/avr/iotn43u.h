@@ -57,6 +57,12 @@
 #define PRTIM0 2
 #define PRTIM1 3
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRUSI)|(1<<PRTIM0)|(1<<PRTIM1))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRUSI
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM1
+
 #define DIDR0 _SFR_IO8(0x01)
 #define ADC0D  0
 #define ADC1D  1

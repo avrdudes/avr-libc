@@ -352,6 +352,14 @@
 #define PRSPI 4
 #define PRLIN 5
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRUSI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRSPI)|(1<<PRLIN))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRUSI
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM1
+#define __AVR_HAVE_PRR_PRSPI
+#define __AVR_HAVE_PRR_PRLIN
+
 #define OSCCAL _SFR_MEM8(0x66)
 #define CAL0 0
 #define CAL1 1

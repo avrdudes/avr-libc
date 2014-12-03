@@ -857,6 +857,13 @@
 #define PRPSCR 5
 #define PRPSC2 7
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRPSCR)|(1<<PRPSC2))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRSPI
+#define __AVR_HAVE_PRR_PRTIM1
+#define __AVR_HAVE_PRR_PRPSCR
+#define __AVR_HAVE_PRR_PRPSC2
+
 #define PLLCSR _SFR_MEM8(0x87)
 #define PLOCK 0
 #define PLLE 1

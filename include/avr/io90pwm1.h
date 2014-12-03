@@ -473,6 +473,15 @@
 #define PRSPI   2   /* Power Reduction Serial Peripheral Interface */
 #define PRADC   0   /* Power Reduction ADC */
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRSPI)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRPSC0)|(1<<PRPSC1)|(1<<PRPSC2))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRSPI
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM1
+#define __AVR_HAVE_PRR_PRPSC0
+#define __AVR_HAVE_PRR_PRPSC1
+#define __AVR_HAVE_PRR_PRPSC2
+
 /* Reserved [0x65] */
 
 /* Oscillator Calibration Value */

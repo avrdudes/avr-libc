@@ -380,6 +380,22 @@
 #define PRUSART0	1
 #define PRADC		0
 
+#if !defined(__AVR_ATmega644__)
+#define __AVR_HAVE_PRR0	((1<<PRADC)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRUSART0)|(1<<PRUSART1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI))
+#else
+#define __AVR_HAVE_PRR0 ((1<<PRADC)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRUSART0)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI))
+#endif
+#define __AVR_HAVE_PRR0_PRADC
+#define __AVR_HAVE_PRR0_PRSPI
+#define __AVR_HAVE_PRR0_PRTIM1
+#define __AVR_HAVE_PRR0_PRUSART0
+#if !defined(__AVR_ATmega644__)
+#define __AVR_HAVE_PRR0_PRUSART1
+#endif
+#define __AVR_HAVE_PRR0_PRTIM0
+#define __AVR_HAVE_PRR0_PRTIM2
+#define __AVR_HAVE_PRR0_PRTWI
+
 /* Reserved [0x65] */
 
 #define OSCCAL	_SFR_MEM8(0x66)

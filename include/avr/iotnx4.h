@@ -55,6 +55,12 @@
 #define PRUSI   1
 #define PRADC   0
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRUSI)|(1<<PRTIM0)|(1<<PRTIM1))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRUSI
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM1
+
 #define DIDR0    _SFR_IO8(0x01)
 #define ADC7D   7
 #define ADC6D   6

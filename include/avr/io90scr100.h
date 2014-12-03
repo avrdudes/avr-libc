@@ -460,6 +460,14 @@
 #define PRTIM2 6
 #define PRTWI 7
 
+#define __AVR_HAVE_PRR0 ((1<<PRUSART0)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI))
+#define __AVR_HAVE_PRR0_PRUSART0
+#define __AVR_HAVE_PRR0_PRSPI
+#define __AVR_HAVE_PRR0_PRTIM1
+#define __AVR_HAVE_PRR0_PRTIM0
+#define __AVR_HAVE_PRR0_PRTIM2
+#define __AVR_HAVE_PRR0_PRTWI
+
 #define PRR1 _SFR_MEM8(0x65)
 #define PRUSBH 0
 #define PRUSB 1
@@ -467,6 +475,14 @@
 #define PRSCI 3
 #define PRAES 4
 #define PRKB 5
+
+#define __AVR_HAVE_PRR1 ((1<<PRUSBH)|(1<<PRUSB)|(1<<PRHSSPI)|(1<<PRSCI)|(1<<PRAES)|(1<<PRKB))
+#define __AVR_HAVE_PRR1_PRUSBH
+#define __AVR_HAVE_PRR1_PRUSB
+#define __AVR_HAVE_PRR1_PRHSSPI
+#define __AVR_HAVE_PRR1_PRSCI
+#define __AVR_HAVE_PRR1_PRAES
+#define __AVR_HAVE_PRR1_PRKB
 
 #define OSCCAL _SFR_MEM8(0x66)
 #define CAL0 0

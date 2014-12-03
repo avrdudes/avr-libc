@@ -105,6 +105,12 @@
 #define PRTIM0 2
 #define PRTIM1 3
 
+#define __AVR_HAVE_PRR	((1<<PRUSART)|(1<<PRUSI)|(1<<PRTIM0)|(1<<PRTIM1))
+#define __AVR_HAVE_PRR_PRUSART
+#define __AVR_HAVE_PRR_PRUSI
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM1
+
 #define BODCR _SFR_IO8(0x007)
 #define BPDSE 0
 #define BPDS 1

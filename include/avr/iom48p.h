@@ -370,6 +370,15 @@
 #define PRTIM2 6
 #define PRTWI 7
 
+#define __AVR_HAVE_PRR	((1<<PRADC)|(1<<PRUSART0)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI))
+#define __AVR_HAVE_PRR_PRADC
+#define __AVR_HAVE_PRR_PRUSART0
+#define __AVR_HAVE_PRR_PRSPI
+#define __AVR_HAVE_PRR_PRTIM1
+#define __AVR_HAVE_PRR_PRTIM0
+#define __AVR_HAVE_PRR_PRTIM2
+#define __AVR_HAVE_PRR_PRTWI
+
 #define OSCCAL _SFR_MEM8(0x66)
 #define CAL0 0
 #define CAL1 1
