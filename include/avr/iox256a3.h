@@ -2282,7 +2282,8 @@ typedef enum TC_EVACT_enum
     TC_EVACT_UPDOWN_gc = (0x02<<5),  /* Externally Controlled Up/Down Count */
     TC_EVACT_QDEC_gc = (0x03<<5),  /* Quadrature Decode */
     TC_EVACT_RESTART_gc = (0x04<<5),  /* Restart */
-    TC_EVACT_FRW_gc = (0x05<<5),  /* Frequency Capture */
+    TC_EVACT_FRQ_gc = (0x05<<5),  /* Frequency Capture */
+    TC_EVACT_FRW_gc = (0x05<<5),  /* Frequency Capture (typo in earlier header file) */
     TC_EVACT_PW_gc = (0x06<<5),  /* Pulse-width Capture */
 } TC_EVACT_t;
 

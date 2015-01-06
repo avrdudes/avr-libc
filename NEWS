@@ -2,6 +2,9 @@
 
 * Bugs fixed:
 
+  [no-id] TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc in some Xmega
+          header files
+
 * New devices supported:
 
 * Contributed Patches:

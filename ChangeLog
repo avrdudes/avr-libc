@@ -1,0 +1,13 @@
+2015-01-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/avr/iox128a3.h: Fix an obvious long-standing
+	typo: TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc
+	(keep old name for backwards compatibility anyway)
+	* include/avr/iox16a4.h: (Dito.)
+	* include/avr/iox16d4.h: (Dito.)
+	* include/avr/iox192a3.h: (Dito.)
+	* include/avr/iox256a3b.h: (Dito.)
+	* include/avr/iox256a3.h: (Dito.)
+	* include/avr/iox32a4.h: (Dito.)
+	* include/avr/iox32d4.h: (Dito.)
+	* include/avr/iox64a3.h: (Dito.)
