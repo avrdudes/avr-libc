@@ -1,3 +1,9 @@
+2015-02-05  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+            Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+    * include/avr/wdt.h: Add conditional branch to enable/disable wdt
+    for devices that has CCP.
+
 2015-01-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/avr/iox128a3.h: Fix an obvious long-standing
