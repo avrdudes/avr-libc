@@ -56,9 +56,7 @@ AVR12_DEV_INFO="\
 at90s1200:crts1200.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny11:crttn11.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny12:crttn12.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny15:crttn15.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny28:crttn28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -71,17 +69,7 @@ at90s8515:crts8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s8535:crts8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at86rf401:crt86401.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny25:crttn25.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny45:crttn45.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny85:crttn85.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny24:crttn24.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny44:crttn44.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny84:crttn84.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny261:crttn261.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny461:crttn461.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny861:crttn861.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 AVR12TS_DEV_INFO="\
@@ -137,12 +125,8 @@ attiny261a:crttn261a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS}\
 "
 
 AVR3_DEV_INFO="\
-atmega103:crtm103.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at43usb320:crt43320.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at43usb355:crt43355.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at76c711:crt76711.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90usb82:crtusb82.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90usb162:crtusb162.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+at76c711:crt76711.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 AVR31_DEV_INFO="\
@@ -189,15 +173,12 @@ at90pwm81:crt90pwm81.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 AVR5_DEV_INFO="\
 at90can32:crtcan32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90can64:crtcan64.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90can128:crtcan128.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm216:crt90pwm216.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm316:crt90pwm316.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90pwm161:crt90pwm161.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90scr100:crt90scr100.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90usb646:crtusb646.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90usb647:crtusb647.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90usb1286:crtusb1286.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90usb1287:crtusb1287.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at94k:crtat94k.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 ata5790:crta5790.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 ata5795:crta5795.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -282,11 +263,6 @@ atmega6490p:crtm6490p.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega64c1:crtm64c1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega64hve:crtm64hve.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega64m1:crtm64m1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega128:crtm128.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega1280:crtm1280.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega1281:crtm1281.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega1284p:crtm1284p.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-atmega128rfa1:crtm128rfa1.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 m3000:crtm3000.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
@@ -428,6 +404,8 @@ cd avr/lib || exit 1
 IFS=';'
 ARH_SUBDIRS=""
 
+DEV_SUBDIRS=""
+
 for ath_lib in $AVR_ARH_INFO
 do
 	arh=`echo $ath_lib | cut -d ':' -f 1`
@@ -456,6 +434,36 @@ do
 	# Install directory for sed substitution, the '/' character is masked.
 	inst_dir_masked=`echo $install_dir | sed 's/\\//\\\\\\//'`
 
+	eval DEV_INFO=\"\$\{$dev_info\}\"
+
+	for dev_crt in $DEV_INFO
+	do
+		dev=`echo $dev_crt | cut -d ':' -f 1`
+		crt=crt1.o
+		crt_defs=`echo $dev_crt | cut -d ':' -f 3`
+		crt_cflags=`echo $dev_crt | cut -d ':' -f 4`
+		crt_asflags=`echo $dev_crt | cut -d ':' -f 5`
+
+		dev_inst_dir_masked="dev\\/$dev"
+
+		echo "  avr/lib/dev/$dev"
+
+		test -d dev || mkdir dev
+		test -d dev/$dev || mkdir dev/$dev
+
+		cat $top_dir/devtools/Device.am > dev/$dev/Makefile.am
+
+		sed -e "s/<<dev>>/$dev/g" \
+		    -e "s/<<crt>>/$crt/g" \
+		    -e "s/<<crt_defs>>/$crt_defs/g" \
+		    -e "s/<<crt_cflags>>/$crt_cflags/g" \
+		    -e "s/<<crt_asflags>>/$crt_asflags/g"  \
+		    -e "s/<<install_dir>>/$dev_inst_dir_masked/g" dev/$dev/Makefile.am \
+		    > dev/$dev/tempfile && mv -f dev/$dev/tempfile dev/$dev/Makefile.am
+
+		DEV_SUBDIRS="$DEV_SUBDIRS dev/$dev"
+	done
+
 	# In build tree.
 	subdir=${arh}${sublib:+/}${sublib}
 	echo "  avr/lib/$subdir/"
@@ -464,38 +472,9 @@ do
 	test -d $subdir || mkdir $subdir
 	cd $subdir || exit 1
 
-	DEV_SUBDIRS=""
-
-	eval DEV_INFO=\"\$\{$dev_info\}\"
-
-	for dev_crt in $DEV_INFO
-	do
-		dev=`echo $dev_crt | cut -d ':' -f 1`
-		crt=`echo $dev_crt | cut -d ':' -f 2`
-		crt_defs=`echo $dev_crt | cut -d ':' -f 3`
-		crt_cflags=`echo $dev_crt | cut -d ':' -f 4`
-		crt_asflags=`echo $dev_crt | cut -d ':' -f 5`
-
-		echo "  avr/lib/$subdir/$dev"
-
-		test -d $dev || mkdir $dev
-
-		cat $top_dir/devtools/Device.am > $dev/Makefile.am
-
-		sed -e "s/<<dev>>/$dev/g" \
-		    -e "s/<<crt>>/$crt/g" \
-		    -e "s/<<crt_defs>>/$crt_defs/g" \
-		    -e "s/<<crt_cflags>>/$crt_cflags/g" \
-		    -e "s/<<crt_asflags>>/$crt_asflags/g"  \
-		    -e "s/<<install_dir>>/$inst_dir_masked/g" $dev/Makefile.am \
-		    > $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
-
-		DEV_SUBDIRS="$DEV_SUBDIRS $dev"
-	done
-
 	cat $top_dir/devtools/Architecture.am > Makefile.am
 
-	sed -e "s/<<dev_subdirs>>/$DEV_SUBDIRS/g" \
+	sed -e "s/<<dev_subdirs>>//g" \
 	    -e "s/<<arh>>/$arh/g" \
 	    -e "s/<<lib_defs>>/$lib_defs/g" \
 	    -e "s/<<lib_cflags>>/$lib_cflags/g" \
@@ -536,7 +515,7 @@ done
 
 cat $top_dir/devtools/Lib.am > Makefile.am
 
-sed -e "s/<<arh_subdirs>>/`echo $ARH_SUBDIRS | sed 's/\\//\\\\\\//g'`/g" \
+sed -e "s/<<arh_subdirs>>/`echo $ARH_SUBDIRS $DEV_SUBDIRS | sed 's/\\//\\\\\\//g'`/g" \
     Makefile.am > tempfile && mv -f tempfile Makefile.am
 
 cd ..

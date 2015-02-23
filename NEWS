@@ -12,9 +12,10 @@
   [no-id] save & restore rampd register in xmega wdt_enable and wdt_disable
   [#8543] Fix multiple issues with device header files
   [#8563] Generalize power reduction macros in power.h by removing hard coded device names
-  [#8590] WDT enable/disable for devices with CCP
   [#8565] Compute and include device header file name from
           __AVR_DEV_LIB_NAME__ as fallback in io.h.
+  [#8587] Move device specific functions to libdev.a
+  [#8590] WDT enable/disable for devices with CCP
 
 * Other changes:
 

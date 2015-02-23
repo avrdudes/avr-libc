@@ -35,7 +35,9 @@ AVR_TARGET_CFLAGS   = <<crt_cflags>>
 AVR_TARGET_ASFLAGS  = <<crt_asflags>>
 AVR_INSTALL_DIR     = <<install_dir>>
 
-VPATH = $(top_srcdir)/crt1
+VPATH = $(top_srcdir)/crt1:$(top_srcdir)/libc/misc
+
+include $(top_srcdir)/libc/misc/Rules.am
 
 if HAS_<<dev>>
 
@@ -56,6 +58,8 @@ avrlibdir = $(__install_dir)
 
 noinst_LIBRARIES = libcrt.a
 nodist_libcrt_a_SOURCES = gcrt1.S
+avr_LIBRARIES = libdev.a
+libdev_a_SOURCES = $(eeprom_asm_sources)
 
 avr_DATA = $(AVR_TARGET_CRT)
 

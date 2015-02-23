@@ -1,3 +1,22 @@
+2015-02-23  Joern Rennecke  <joern.rennecke@embecosm.com>
+
+    Patch #8587: Move device specific functions to libdev.a
+	* configure.ac: (AC_CONFIG_FILES): Place all devices under avr/lib/dev.
+	Remove device duplicates. Remove device specific lib for tiny-stack.
+	* devtools/Device.am (VPATH): Add $(top_srcdir)/libc/misc.
+	($(top_srcdir)/libc/misc/Rules.am): Include.
+	(avr_LIBRARIES, libdev_a_SOURCES): New library.
+	* devtools/gen-avr-lib-tree.sh (AVR12_DEV_INFO): Remove duplicate devices.
+	(AVR3_DEV_INFO, AVR31_DEV_INFO): Likewise.
+	Place all devices under avr/lib/dev.
+	* libc/misc/Rules.am: Remove eeprom file name mangling.
+
+2015-02-23  Joern Rennecke  <joern.rennecke@embecosm.com>
+		    Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
+	patch #8565:
+	* include/avr/io.h: Use __AVR_DEV_LIB_NAME__ as a fallback.
+
 2015-02-05  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
             Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
@@ -17,9 +36,3 @@
 	* include/avr/iox32a4.h: (Dito.)
 	* include/avr/iox32d4.h: (Dito.)
 	* include/avr/iox64a3.h: (Dito.)
-
-2015-02-23  Joern Rennecke  <joern.rennecke@embecosm.com>
-		    Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
-
-	patch #8565:
-	* include/avr/io.h: Use __AVR_DEV_LIB_NAME__ as a fallback.

@@ -1217,360 +1217,320 @@ AC_CONFIG_FILES([
 #avr1 and avr2
 AC_CONFIG_FILES([
 	avr/lib/avr2/Makefile
-	avr/lib/avr2/at90s1200/Makefile
-	avr/lib/avr2/at90s2313/Makefile
-	avr/lib/avr2/at90s2323/Makefile
-	avr/lib/avr2/at90s2333/Makefile
-	avr/lib/avr2/at90s2343/Makefile
-	avr/lib/avr2/at90s4414/Makefile
-	avr/lib/avr2/at90s4433/Makefile
-	avr/lib/avr2/at90s4434/Makefile
-	avr/lib/avr2/at90s8515/Makefile
-	avr/lib/avr2/at90c8534/Makefile
-	avr/lib/avr2/at90s8535/Makefile
-	avr/lib/avr2/attiny11/Makefile
-	avr/lib/avr2/attiny12/Makefile
-	avr/lib/avr2/attiny13/Makefile
-	avr/lib/avr2/attiny15/Makefile
-	avr/lib/avr2/attiny22/Makefile
-	avr/lib/avr2/attiny24/Makefile
-	avr/lib/avr2/attiny25/Makefile
-	avr/lib/avr2/attiny26/Makefile
-	avr/lib/avr2/attiny261/Makefile
-	avr/lib/avr2/attiny28/Makefile
-	avr/lib/avr2/attiny44/Makefile
-	avr/lib/avr2/attiny45/Makefile
-	avr/lib/avr2/attiny461/Makefile
-	avr/lib/avr2/attiny84/Makefile
-	avr/lib/avr2/attiny85/Makefile
-	avr/lib/avr2/attiny861/Makefile
-	avr/lib/avr2/attiny2313/Makefile
-	avr/lib/avr2/at86rf401/Makefile
+	avr/lib/dev/at90s1200/Makefile
+	avr/lib/dev/at90s2313/Makefile
+	avr/lib/dev/at90s2323/Makefile
+	avr/lib/dev/at90s2333/Makefile
+	avr/lib/dev/at90s2343/Makefile
+	avr/lib/dev/at90s4414/Makefile
+	avr/lib/dev/at90s4433/Makefile
+	avr/lib/dev/at90s4434/Makefile
+	avr/lib/dev/at90s8515/Makefile
+	avr/lib/dev/at90c8534/Makefile
+	avr/lib/dev/at90s8535/Makefile
+	avr/lib/dev/attiny11/Makefile
+	avr/lib/dev/attiny12/Makefile
+	avr/lib/dev/attiny15/Makefile
+	avr/lib/dev/attiny22/Makefile
+	avr/lib/dev/attiny26/Makefile
+	avr/lib/dev/attiny28/Makefile
 ])
 
 #avr2/tiny-stack
 AC_CONFIG_FILES([
 	avr/lib/avr2/tiny-stack/Makefile
-	avr/lib/avr2/tiny-stack/at90s2313/Makefile
-	avr/lib/avr2/tiny-stack/at90s2323/Makefile
-	avr/lib/avr2/tiny-stack/at90s2333/Makefile
-	avr/lib/avr2/tiny-stack/at90s2343/Makefile
-	avr/lib/avr2/tiny-stack/at90s4433/Makefile
-	avr/lib/avr2/tiny-stack/attiny22/Makefile
-	avr/lib/avr2/tiny-stack/attiny26/Makefile
 ])
 
 #avr25
 AC_CONFIG_FILES([
 	avr/lib/avr25/Makefile
-	avr/lib/avr25/at86rf401/Makefile
-	avr/lib/avr25/ata5272/Makefile
-	avr/lib/avr25/attiny13/Makefile
-	avr/lib/avr25/attiny13a/Makefile
-	avr/lib/avr25/attiny2313/Makefile
-	avr/lib/avr25/attiny2313a/Makefile
-	avr/lib/avr25/attiny24/Makefile
-	avr/lib/avr25/attiny24a/Makefile
-	avr/lib/avr25/attiny25/Makefile
-	avr/lib/avr25/attiny261/Makefile
-	avr/lib/avr25/attiny261a/Makefile
-	avr/lib/avr25/attiny4313/Makefile
-	avr/lib/avr25/attiny43u/Makefile
-	avr/lib/avr25/attiny44/Makefile
-	avr/lib/avr25/attiny44a/Makefile
-	avr/lib/avr25/attiny45/Makefile
-	avr/lib/avr25/attiny461/Makefile
-	avr/lib/avr25/attiny461a/Makefile
-	avr/lib/avr25/attiny48/Makefile
-	avr/lib/avr25/attiny828/Makefile
-	avr/lib/avr25/attiny84/Makefile
-	avr/lib/avr25/attiny84a/Makefile
-	avr/lib/avr25/attiny85/Makefile
-	avr/lib/avr25/attiny861/Makefile
-	avr/lib/avr25/attiny861a/Makefile
-	avr/lib/avr25/attiny87/Makefile
-	avr/lib/avr25/attiny88/Makefile
+	avr/lib/dev/at86rf401/Makefile
+	avr/lib/dev/ata5272/Makefile
+	avr/lib/dev/attiny13/Makefile
+	avr/lib/dev/attiny13a/Makefile
+	avr/lib/dev/attiny2313/Makefile
+	avr/lib/dev/attiny2313a/Makefile
+	avr/lib/dev/attiny24/Makefile
+	avr/lib/dev/attiny24a/Makefile
+	avr/lib/dev/attiny25/Makefile
+	avr/lib/dev/attiny261/Makefile
+	avr/lib/dev/attiny261a/Makefile
+	avr/lib/dev/attiny4313/Makefile
+	avr/lib/dev/attiny43u/Makefile
+	avr/lib/dev/attiny44/Makefile
+	avr/lib/dev/attiny44a/Makefile
+	avr/lib/dev/attiny45/Makefile
+	avr/lib/dev/attiny461/Makefile
+	avr/lib/dev/attiny461a/Makefile
+	avr/lib/dev/attiny48/Makefile
+	avr/lib/dev/attiny828/Makefile
+	avr/lib/dev/attiny84/Makefile
+	avr/lib/dev/attiny84a/Makefile
+	avr/lib/dev/attiny85/Makefile
+	avr/lib/dev/attiny861/Makefile
+	avr/lib/dev/attiny861a/Makefile
+	avr/lib/dev/attiny87/Makefile
+	avr/lib/dev/attiny88/Makefile
 ])
 
 #avr25/tiny-stack
 AC_CONFIG_FILES([
 	avr/lib/avr25/tiny-stack/Makefile
-	avr/lib/avr25/tiny-stack/attiny13/Makefile
-	avr/lib/avr25/tiny-stack/attiny13a/Makefile
-	avr/lib/avr25/tiny-stack/attiny2313/Makefile
-	avr/lib/avr25/tiny-stack/attiny2313a/Makefile
-	avr/lib/avr25/tiny-stack/attiny24/Makefile
-	avr/lib/avr25/tiny-stack/attiny24a/Makefile
-	avr/lib/avr25/tiny-stack/attiny25/Makefile
-	avr/lib/avr25/tiny-stack/attiny261/Makefile
-	avr/lib/avr25/tiny-stack/attiny261a/Makefile
 ])
 
 #avr3
 AC_CONFIG_FILES([
 	avr/lib/avr3/Makefile
-	avr/lib/avr3/atmega103/Makefile
-	avr/lib/avr3/at43usb320/Makefile
-	avr/lib/avr3/at43usb355/Makefile
-	avr/lib/avr3/at76c711/Makefile
-	avr/lib/avr3/at90usb82/Makefile
-	avr/lib/avr3/at90usb162/Makefile
+	avr/lib/dev/at43usb355/Makefile
+	avr/lib/dev/at76c711/Makefile
 ])
 
 #avr31
 AC_CONFIG_FILES([
 	avr/lib/avr31/Makefile
-	avr/lib/avr31/atmega103/Makefile
-	avr/lib/avr31/at43usb320/Makefile
+	avr/lib/dev/atmega103/Makefile
+	avr/lib/dev/at43usb320/Makefile
 ])
 
 #avr35
 AC_CONFIG_FILES([
 	avr/lib/avr35/Makefile
-	avr/lib/avr35/at90usb82/Makefile
-	avr/lib/avr35/at90usb162/Makefile
-	avr/lib/avr35/ata5505/Makefile
-	avr/lib/avr35/atmega8u2/Makefile
-	avr/lib/avr35/atmega16u2/Makefile
-	avr/lib/avr35/atmega32u2/Makefile
-	avr/lib/avr35/attiny167/Makefile
-	avr/lib/avr35/attiny1634/Makefile
+	avr/lib/dev/at90usb82/Makefile
+	avr/lib/dev/at90usb162/Makefile
+	avr/lib/dev/ata5505/Makefile
+	avr/lib/dev/atmega8u2/Makefile
+	avr/lib/dev/atmega16u2/Makefile
+	avr/lib/dev/atmega32u2/Makefile
+	avr/lib/dev/attiny167/Makefile
+	avr/lib/dev/attiny1634/Makefile
 ])
 
 #avr4
 AC_CONFIG_FILES([
 	avr/lib/avr4/Makefile
-	avr/lib/avr4/ata6285/Makefile
-	avr/lib/avr4/ata6286/Makefile
-	avr/lib/avr4/ata6289/Makefile
-	avr/lib/avr4/atmega48/Makefile
-	avr/lib/avr4/atmega48a/Makefile
-	avr/lib/avr4/atmega48pa/Makefile
-	avr/lib/avr4/atmega48p/Makefile
-	avr/lib/avr4/atmega8/Makefile
-	avr/lib/avr4/atmega8a/Makefile
-	avr/lib/avr4/atmega88/Makefile
-	avr/lib/avr4/atmega88a/Makefile
-	avr/lib/avr4/atmega88p/Makefile
-	avr/lib/avr4/atmega88pa/Makefile
-	avr/lib/avr4/atmega8515/Makefile
-	avr/lib/avr4/atmega8535/Makefile
-	avr/lib/avr4/atmega8hva/Makefile
-	avr/lib/avr4/at90pwm1/Makefile
-	avr/lib/avr4/at90pwm2/Makefile
-	avr/lib/avr4/at90pwm2b/Makefile
-	avr/lib/avr4/at90pwm3/Makefile
-	avr/lib/avr4/at90pwm3b/Makefile
-	avr/lib/avr4/at90pwm81/Makefile
+	avr/lib/dev/ata6285/Makefile
+	avr/lib/dev/ata6286/Makefile
+	avr/lib/dev/ata6289/Makefile
+	avr/lib/dev/atmega48/Makefile
+	avr/lib/dev/atmega48a/Makefile
+	avr/lib/dev/atmega48pa/Makefile
+	avr/lib/dev/atmega48p/Makefile
+	avr/lib/dev/atmega8/Makefile
+	avr/lib/dev/atmega8a/Makefile
+	avr/lib/dev/atmega88/Makefile
+	avr/lib/dev/atmega88a/Makefile
+	avr/lib/dev/atmega88p/Makefile
+	avr/lib/dev/atmega88pa/Makefile
+	avr/lib/dev/atmega8515/Makefile
+	avr/lib/dev/atmega8535/Makefile
+	avr/lib/dev/atmega8hva/Makefile
+	avr/lib/dev/at90pwm1/Makefile
+	avr/lib/dev/at90pwm2/Makefile
+	avr/lib/dev/at90pwm2b/Makefile
+	avr/lib/dev/at90pwm3/Makefile
+	avr/lib/dev/at90pwm3b/Makefile
+	avr/lib/dev/at90pwm81/Makefile
 ])
 
 #avr5
 AC_CONFIG_FILES([
 	avr/lib/avr5/Makefile
-	avr/lib/avr5/at90can32/Makefile
-	avr/lib/avr5/at90can64/Makefile
-	avr/lib/avr5/at90can128/Makefile
-	avr/lib/avr5/at90pwm216/Makefile
-	avr/lib/avr5/at90pwm316/Makefile
-	avr/lib/avr5/at90pwm161/Makefile
-	avr/lib/avr5/at90scr100/Makefile
-	avr/lib/avr5/at90usb646/Makefile
-	avr/lib/avr5/at90usb647/Makefile
-	avr/lib/avr5/at90usb1286/Makefile
-	avr/lib/avr5/at90usb1287/Makefile
-	avr/lib/avr5/at94k/Makefile 
-	avr/lib/avr5/ata5790/Makefile 
-	avr/lib/avr5/ata5795/Makefile 
-	avr/lib/avr5/atmega16/Makefile
-	avr/lib/avr5/atmega16a/Makefile
-	avr/lib/avr5/atmega161/Makefile
-	avr/lib/avr5/atmega162/Makefile
-	avr/lib/avr5/atmega163/Makefile
-	avr/lib/avr5/atmega164a/Makefile
-	avr/lib/avr5/atmega164p/Makefile
-	avr/lib/avr5/atmega164pa/Makefile
-	avr/lib/avr5/atmega165/Makefile
-	avr/lib/avr5/atmega165a/Makefile
-	avr/lib/avr5/atmega165p/Makefile
-        avr/lib/avr5/atmega165pa/Makefile
-	avr/lib/avr5/atmega168/Makefile
-	avr/lib/avr5/atmega168a/Makefile
-	avr/lib/avr5/atmega168p/Makefile
-	avr/lib/avr5/atmega168pa/Makefile
-	avr/lib/avr5/atmega169/Makefile
-	avr/lib/avr5/atmega169a/Makefile
-	avr/lib/avr5/atmega169p/Makefile
-	avr/lib/avr5/atmega169pa/Makefile
-	avr/lib/avr5/atmega16hva/Makefile
-	avr/lib/avr5/atmega16hva2/Makefile
-	avr/lib/avr5/atmega16hvb/Makefile
-	avr/lib/avr5/atmega16hvbrevb/Makefile
-	avr/lib/avr5/atmega16m1/Makefile
-	avr/lib/avr5/atmega16u4/Makefile
-	avr/lib/avr5/atmega32/Makefile
-	avr/lib/avr5/atmega32a/Makefile
-	avr/lib/avr5/atmega323/Makefile
-	avr/lib/avr5/atmega324a/Makefile
-	avr/lib/avr5/atmega324p/Makefile
-	avr/lib/avr5/atmega324pa/Makefile
-	avr/lib/avr5/atmega325/Makefile
-	avr/lib/avr5/atmega325a/Makefile
-	avr/lib/avr5/atmega325p/Makefile
-	avr/lib/avr5/atmega325pa/Makefile
-	avr/lib/avr5/atmega3250/Makefile
-	avr/lib/avr5/atmega3250a/Makefile
-	avr/lib/avr5/atmega3250p/Makefile
-	avr/lib/avr5/atmega3250pa/Makefile
-	avr/lib/avr5/atmega328/Makefile
-	avr/lib/avr5/atmega328p/Makefile
-	avr/lib/avr5/atmega329/Makefile
-	avr/lib/avr5/atmega329a/Makefile
-	avr/lib/avr5/atmega329p/Makefile
-	avr/lib/avr5/atmega329pa/Makefile
-	avr/lib/avr5/atmega3290/Makefile
-	avr/lib/avr5/atmega3290a/Makefile
-	avr/lib/avr5/atmega3290p/Makefile
-	avr/lib/avr5/atmega3290pa/Makefile
-	avr/lib/avr5/atmega32c1/Makefile
-	avr/lib/avr5/atmega32hvb/Makefile
-	avr/lib/avr5/atmega32hvbrevb/Makefile
-	avr/lib/avr5/atmega32m1/Makefile
-	avr/lib/avr5/atmega32u4/Makefile
-	avr/lib/avr5/atmega32u6/Makefile
-	avr/lib/avr5/atmega406/Makefile
-	avr/lib/avr5/atmega64rfr2/Makefile
-	avr/lib/avr5/atmega644rfr2/Makefile
-	avr/lib/avr5/atmega64/Makefile
-	avr/lib/avr5/atmega64a/Makefile
-	avr/lib/avr5/atmega640/Makefile
-	avr/lib/avr5/atmega644/Makefile
-	avr/lib/avr5/atmega644a/Makefile
-	avr/lib/avr5/atmega644p/Makefile
-	avr/lib/avr5/atmega644pa/Makefile
-	avr/lib/avr5/atmega645/Makefile
-	avr/lib/avr5/atmega645a/Makefile
-	avr/lib/avr5/atmega645p/Makefile
-	avr/lib/avr5/atmega6450/Makefile
-	avr/lib/avr5/atmega6450a/Makefile
-	avr/lib/avr5/atmega6450p/Makefile
-	avr/lib/avr5/atmega649/Makefile
-	avr/lib/avr5/atmega649a/Makefile
-	avr/lib/avr5/atmega649p/Makefile
-	avr/lib/avr5/atmega6490/Makefile
-	avr/lib/avr5/atmega6490a/Makefile
-	avr/lib/avr5/atmega6490p/Makefile
-	avr/lib/avr5/atmega64c1/Makefile
-	avr/lib/avr5/atmega64hve/Makefile
-	avr/lib/avr5/atmega64m1/Makefile
-	avr/lib/avr5/atmega128/Makefile
-	avr/lib/avr5/atmega1280/Makefile
-	avr/lib/avr5/atmega1281/Makefile
-	avr/lib/avr5/atmega1284p/Makefile
-	avr/lib/avr5/atmega128rfa1/Makefile
-	avr/lib/avr5/m3000/Makefile
+	avr/lib/dev/at90can32/Makefile
+	avr/lib/dev/at90can64/Makefile
+	avr/lib/dev/at90pwm216/Makefile
+	avr/lib/dev/at90pwm316/Makefile
+	avr/lib/dev/at90pwm161/Makefile
+	avr/lib/dev/at90scr100/Makefile
+	avr/lib/dev/at90usb646/Makefile
+	avr/lib/dev/at90usb647/Makefile
+	avr/lib/dev/at94k/Makefile 
+	avr/lib/dev/ata5790/Makefile 
+	avr/lib/dev/ata5795/Makefile 
+	avr/lib/dev/atmega16/Makefile
+	avr/lib/dev/atmega16a/Makefile
+	avr/lib/dev/atmega161/Makefile
+	avr/lib/dev/atmega162/Makefile
+	avr/lib/dev/atmega163/Makefile
+	avr/lib/dev/atmega164a/Makefile
+	avr/lib/dev/atmega164p/Makefile
+	avr/lib/dev/atmega164pa/Makefile
+	avr/lib/dev/atmega165/Makefile
+	avr/lib/dev/atmega165a/Makefile
+	avr/lib/dev/atmega165p/Makefile
+	avr/lib/dev/atmega165pa/Makefile
+	avr/lib/dev/atmega168/Makefile
+	avr/lib/dev/atmega168a/Makefile
+	avr/lib/dev/atmega168p/Makefile
+	avr/lib/dev/atmega168pa/Makefile
+	avr/lib/dev/atmega169/Makefile
+	avr/lib/dev/atmega169a/Makefile
+	avr/lib/dev/atmega169p/Makefile
+	avr/lib/dev/atmega169pa/Makefile
+	avr/lib/dev/atmega16hva/Makefile
+	avr/lib/dev/atmega16hva2/Makefile
+	avr/lib/dev/atmega16hvb/Makefile
+	avr/lib/dev/atmega16hvbrevb/Makefile
+	avr/lib/dev/atmega16m1/Makefile
+	avr/lib/dev/atmega16u4/Makefile
+	avr/lib/dev/atmega32/Makefile
+	avr/lib/dev/atmega32a/Makefile
+	avr/lib/dev/atmega323/Makefile
+	avr/lib/dev/atmega324a/Makefile
+	avr/lib/dev/atmega324p/Makefile
+	avr/lib/dev/atmega324pa/Makefile
+	avr/lib/dev/atmega325/Makefile
+	avr/lib/dev/atmega325a/Makefile
+	avr/lib/dev/atmega325p/Makefile
+	avr/lib/dev/atmega325pa/Makefile
+	avr/lib/dev/atmega3250/Makefile
+	avr/lib/dev/atmega3250a/Makefile
+	avr/lib/dev/atmega3250p/Makefile
+	avr/lib/dev/atmega3250pa/Makefile
+	avr/lib/dev/atmega328/Makefile
+	avr/lib/dev/atmega328p/Makefile
+	avr/lib/dev/atmega329/Makefile
+	avr/lib/dev/atmega329a/Makefile
+	avr/lib/dev/atmega329p/Makefile
+	avr/lib/dev/atmega329pa/Makefile
+	avr/lib/dev/atmega3290/Makefile
+	avr/lib/dev/atmega3290a/Makefile
+	avr/lib/dev/atmega3290p/Makefile
+	avr/lib/dev/atmega3290pa/Makefile
+	avr/lib/dev/atmega32c1/Makefile
+	avr/lib/dev/atmega32hvb/Makefile
+	avr/lib/dev/atmega32hvbrevb/Makefile
+	avr/lib/dev/atmega32m1/Makefile
+	avr/lib/dev/atmega32u4/Makefile
+	avr/lib/dev/atmega32u6/Makefile
+	avr/lib/dev/atmega406/Makefile
+	avr/lib/dev/atmega64rfr2/Makefile
+	avr/lib/dev/atmega644rfr2/Makefile
+	avr/lib/dev/atmega64/Makefile
+	avr/lib/dev/atmega64a/Makefile
+	avr/lib/dev/atmega640/Makefile
+	avr/lib/dev/atmega644/Makefile
+	avr/lib/dev/atmega644a/Makefile
+	avr/lib/dev/atmega644p/Makefile
+	avr/lib/dev/atmega644pa/Makefile
+	avr/lib/dev/atmega645/Makefile
+	avr/lib/dev/atmega645a/Makefile
+	avr/lib/dev/atmega645p/Makefile
+	avr/lib/dev/atmega6450/Makefile
+	avr/lib/dev/atmega6450a/Makefile
+	avr/lib/dev/atmega6450p/Makefile
+	avr/lib/dev/atmega649/Makefile
+	avr/lib/dev/atmega649a/Makefile
+	avr/lib/dev/atmega649p/Makefile
+	avr/lib/dev/atmega6490/Makefile
+	avr/lib/dev/atmega6490a/Makefile
+	avr/lib/dev/atmega6490p/Makefile
+	avr/lib/dev/atmega64c1/Makefile
+	avr/lib/dev/atmega64hve/Makefile
+	avr/lib/dev/atmega64m1/Makefile
+	avr/lib/dev/m3000/Makefile
 ])
 
 #avr51
 AC_CONFIG_FILES([
 	avr/lib/avr51/Makefile
-	avr/lib/avr51/atmega128/Makefile
-	avr/lib/avr51/atmega128a/Makefile
-	avr/lib/avr51/atmega1280/Makefile
-	avr/lib/avr51/atmega1281/Makefile
-	avr/lib/avr51/atmega1284/Makefile
-	avr/lib/avr51/atmega1284p/Makefile
-	avr/lib/avr51/atmega128rfa1/Makefile
-	avr/lib/avr51/atmega128rfr2/Makefile
-	avr/lib/avr51/atmega1284rfr2/Makefile
-	avr/lib/avr51/at90can128/Makefile
-	avr/lib/avr51/at90usb1286/Makefile
-	avr/lib/avr51/at90usb1287/Makefile
+	avr/lib/dev/atmega128/Makefile
+	avr/lib/dev/atmega128a/Makefile
+	avr/lib/dev/atmega1280/Makefile
+	avr/lib/dev/atmega1281/Makefile
+	avr/lib/dev/atmega1284/Makefile
+	avr/lib/dev/atmega1284p/Makefile
+	avr/lib/dev/atmega128rfa1/Makefile
+	avr/lib/dev/atmega128rfr2/Makefile
+	avr/lib/dev/atmega1284rfr2/Makefile
+	avr/lib/dev/at90can128/Makefile
+	avr/lib/dev/at90usb1286/Makefile
+	avr/lib/dev/at90usb1287/Makefile
 ])
 
 #avr6
 AC_CONFIG_FILES([
 	avr/lib/avr6/Makefile
-	avr/lib/avr6/atmega2560/Makefile
-	avr/lib/avr6/atmega2561/Makefile
-	avr/lib/avr6/atmega256rfr2/Makefile
-	avr/lib/avr6/atmega2564rfr2/Makefile
+	avr/lib/dev/atmega2560/Makefile
+	avr/lib/dev/atmega2561/Makefile
+	avr/lib/dev/atmega256rfr2/Makefile
+	avr/lib/dev/atmega2564rfr2/Makefile
 ])
 
 # avrxmega2
 AC_CONFIG_FILES([
 	avr/lib/avrxmega2/Makefile
-	avr/lib/avrxmega2/atxmega16a4/Makefile
-	avr/lib/avrxmega2/atxmega16a4u/Makefile
-	avr/lib/avrxmega2/atxmega16c4/Makefile
-	avr/lib/avrxmega2/atxmega16d4/Makefile
-	avr/lib/avrxmega2/atxmega32a4/Makefile
-	avr/lib/avrxmega2/atxmega32a4u/Makefile
-	avr/lib/avrxmega2/atxmega32c4/Makefile
-	avr/lib/avrxmega2/atxmega32d4/Makefile
+	avr/lib/dev/atxmega16a4/Makefile
+	avr/lib/dev/atxmega16a4u/Makefile
+	avr/lib/dev/atxmega16c4/Makefile
+	avr/lib/dev/atxmega16d4/Makefile
+	avr/lib/dev/atxmega32a4/Makefile
+	avr/lib/dev/atxmega32a4u/Makefile
+	avr/lib/dev/atxmega32c4/Makefile
+	avr/lib/dev/atxmega32d4/Makefile
 ])
 
 # avrxmega4
 AC_CONFIG_FILES([
 	avr/lib/avrxmega4/Makefile
-	avr/lib/avrxmega4/atxmega64a3/Makefile
-	avr/lib/avrxmega4/atxmega64a3u/Makefile
-	avr/lib/avrxmega4/atxmega64a4u/Makefile
-	avr/lib/avrxmega4/atxmega64b1/Makefile
-	avr/lib/avrxmega4/atxmega64b3/Makefile
-	avr/lib/avrxmega4/atxmega64c3/Makefile
-	avr/lib/avrxmega4/atxmega64d3/Makefile
-	avr/lib/avrxmega4/atxmega64d4/Makefile
+	avr/lib/dev/atxmega64a3/Makefile
+	avr/lib/dev/atxmega64a3u/Makefile
+	avr/lib/dev/atxmega64a4u/Makefile
+	avr/lib/dev/atxmega64b1/Makefile
+	avr/lib/dev/atxmega64b3/Makefile
+	avr/lib/dev/atxmega64c3/Makefile
+	avr/lib/dev/atxmega64d3/Makefile
+	avr/lib/dev/atxmega64d4/Makefile
 ])
 
 # avrxmega5
 AC_CONFIG_FILES([
 	avr/lib/avrxmega5/Makefile
-	avr/lib/avrxmega5/atxmega64a1/Makefile
-	avr/lib/avrxmega5/atxmega64a1u/Makefile
+	avr/lib/dev/atxmega64a1/Makefile
+	avr/lib/dev/atxmega64a1u/Makefile
 ])
 
 # avrxmega6
 AC_CONFIG_FILES([
 	avr/lib/avrxmega6/Makefile
-	avr/lib/avrxmega6/atxmega128a3/Makefile
-	avr/lib/avrxmega6/atxmega128a3u/Makefile
-	avr/lib/avrxmega6/atxmega128b1/Makefile
-	avr/lib/avrxmega6/atxmega128b3/Makefile
-	avr/lib/avrxmega6/atxmega128c3/Makefile
-	avr/lib/avrxmega6/atxmega128d3/Makefile
-	avr/lib/avrxmega6/atxmega128d4/Makefile
-	avr/lib/avrxmega6/atxmega192a3/Makefile
-	avr/lib/avrxmega6/atxmega192a3u/Makefile
-	avr/lib/avrxmega6/atxmega192c3/Makefile
-	avr/lib/avrxmega6/atxmega192d3/Makefile
-	avr/lib/avrxmega6/atxmega256a3/Makefile
-	avr/lib/avrxmega6/atxmega256a3u/Makefile
-	avr/lib/avrxmega6/atxmega256a3b/Makefile
-	avr/lib/avrxmega6/atxmega256a3bu/Makefile
-	avr/lib/avrxmega6/atxmega256c3/Makefile
-	avr/lib/avrxmega6/atxmega256d3/Makefile
-	avr/lib/avrxmega6/atxmega384c3/Makefile
-	avr/lib/avrxmega6/atxmega384d3/Makefile
+	avr/lib/dev/atxmega128a3/Makefile
+	avr/lib/dev/atxmega128a3u/Makefile
+	avr/lib/dev/atxmega128b1/Makefile
+	avr/lib/dev/atxmega128b3/Makefile
+	avr/lib/dev/atxmega128c3/Makefile
+	avr/lib/dev/atxmega128d3/Makefile
+	avr/lib/dev/atxmega128d4/Makefile
+	avr/lib/dev/atxmega192a3/Makefile
+	avr/lib/dev/atxmega192a3u/Makefile
+	avr/lib/dev/atxmega192c3/Makefile
+	avr/lib/dev/atxmega192d3/Makefile
+	avr/lib/dev/atxmega256a3/Makefile
+	avr/lib/dev/atxmega256a3u/Makefile
+	avr/lib/dev/atxmega256a3b/Makefile
+	avr/lib/dev/atxmega256a3bu/Makefile
+	avr/lib/dev/atxmega256c3/Makefile
+	avr/lib/dev/atxmega256d3/Makefile
+	avr/lib/dev/atxmega384c3/Makefile
+	avr/lib/dev/atxmega384d3/Makefile
 ])
 
 # avrxmega7
 AC_CONFIG_FILES([
 	avr/lib/avrxmega7/Makefile
-	avr/lib/avrxmega7/atxmega128a1/Makefile
-	avr/lib/avrxmega7/atxmega128a1u/Makefile
-	avr/lib/avrxmega7/atxmega128a4u/Makefile
+	avr/lib/dev/atxmega128a1/Makefile
+	avr/lib/dev/atxmega128a1u/Makefile
+	avr/lib/dev/atxmega128a4u/Makefile
 ])
 
 
 # avrtiny
 AC_CONFIG_FILES([
 	avr/lib/avrtiny/Makefile
-	avr/lib/avrtiny/attiny4/Makefile
-	avr/lib/avrtiny/attiny5/Makefile
-	avr/lib/avrtiny/attiny9/Makefile
-	avr/lib/avrtiny/attiny10/Makefile
-	avr/lib/avrtiny/attiny20/Makefile
-	avr/lib/avrtiny/attiny40/Makefile
+	avr/lib/dev/attiny4/Makefile
+	avr/lib/dev/attiny5/Makefile
+	avr/lib/dev/attiny9/Makefile
+	avr/lib/dev/attiny10/Makefile
+	avr/lib/dev/attiny20/Makefile
+	avr/lib/dev/attiny40/Makefile
 ])
 
 
