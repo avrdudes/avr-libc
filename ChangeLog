@@ -17,3 +17,9 @@
 	* include/avr/iox32a4.h: (Dito.)
 	* include/avr/iox32d4.h: (Dito.)
 	* include/avr/iox64a3.h: (Dito.)
+
+2015-02-23  Joern Rennecke  <joern.rennecke@embecosm.com>
+		    Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
+	patch #8565:
+	* include/avr/io.h: Use __AVR_DEV_LIB_NAME__ as a fallback.

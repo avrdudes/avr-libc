@@ -531,6 +531,11 @@
 #  include <avr/iotn11.h>
 #elif defined (__AVR_M3000__)
 #  include <avr/iom3000.h>
+#elif defined (__AVR_DEV_LIB_NAME__)
+#  define __concat__(a,b) a##b
+#  define __header1__(a,b) __concat__(a,b)
+#  define __AVR_DEVICE_HEADER__ <avr/__header1__(io,__AVR_DEV_LIB_NAME__).h>
+#  include __AVR_DEVICE_HEADER__
 #else
 #  if !defined(__COMPILING_AVR_LIBC__)
 #    warning "device type not defined"
