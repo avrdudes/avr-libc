@@ -1,3 +1,12 @@
+2015-02-25  Joern Rennecke  <joern.rennecke@embecosm.com>
+            Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
+	Patch #8610: Remove eeprom function name mangling
+	* include/avr/eeprom.h: Remove _EEPROM_SUFFIX definition and eeprom
+	function name mangling.
+	(EEARL): define with EEAR.
+	* libc/misc/eedef.h: Remove eeprom function name mangling.
+
 2015-02-23  Joern Rennecke  <joern.rennecke@embecosm.com>
 
     Patch #8587: Move device specific functions to libdev.a

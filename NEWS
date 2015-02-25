@@ -16,6 +16,7 @@
           __AVR_DEV_LIB_NAME__ as fallback in io.h.
   [#8587] Move device specific functions to libdev.a
   [#8590] WDT enable/disable for devices with CCP
+  [#8610] Remove eeprom function name mangling
 
 * Other changes:
 

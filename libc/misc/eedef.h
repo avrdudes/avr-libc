@@ -33,11 +33,6 @@
 
 #ifndef	__DOXYGEN__
 
-/* Internal functions redefinition.	*/
-#define eeprom_read_blraw   _EEPROM_CONCAT2 (__eerd_blraw, _EEPROM_SUFFIX)
-#define eeprom_write_r18    _EEPROM_CONCAT2 (__eewr_r18, _EEPROM_SUFFIX)
-#define eeprom_update_r18   _EEPROM_CONCAT2 (__eeupd_r18, _EEPROM_SUFFIX)
-
 /* EEPROM address arg for a set of byte/word/dword functions and for
    the internal eeprom_read_blraw().	*/
 #define addr_lo	r24
