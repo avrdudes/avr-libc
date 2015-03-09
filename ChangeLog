@@ -1,3 +1,9 @@
+2015-03-09  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #44140: wdt_disable() macro clobbers prescaller bits ...
+	* include/avr/wdt.h (wdt_disable): Add WD reset before changing.
+	Prescaler bits are not overwritten while setting WDCE and WDE.
+
 2015-02-25  Joern Rennecke  <joern.rennecke@embecosm.com>
             Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 

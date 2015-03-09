@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [#44140] wdt_disable() macro clobbers prescaller bits 
   [no-id] TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc in some Xmega
           header files
 
