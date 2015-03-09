@@ -145,7 +145,12 @@ AC_CHECK_TOOL(AR, ar, ar)
 # Make sure that we found the right avr cross-compiler.
 
 case "${CC}" in
-   *avr*gcc*) ;;
+   *gcc*)
+       case "X`${CC} -dumpmachine`X" in
+           XavrX) ;;
+           *) AC_MSG_ERROR(Wrong C compiler found; check the PATH!) ;;
+       esac
+       ;;
    *) AC_MSG_ERROR(Wrong C compiler found; check the PATH!) ;;
 esac
 case "${AS}" in

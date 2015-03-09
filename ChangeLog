@@ -1,3 +1,9 @@
+2015-03-09  Georg-Johann Lay <avr@gjlay.de>
+
+	bug #34719: Check for right build compiler
+	* configure.ac (CC): Use `${CC} -dumpmachine` to query for
+	right cross compiler instead of checking CC.
+
 2015-03-09  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	bug #44140: wdt_disable() macro clobbers prescaller bits ...
