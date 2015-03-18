@@ -46,7 +46,7 @@
 PATH=/usr/xpg4/bin:$PATH
 
 CFLAGS_SPACE="-mcall-prologues -Os"
-CFLAGS_TINY_STACK="-mtiny-stack -mcall-prologues -Os"
+CFLAGS_TINY_STACK="-msp8 -mcall-prologues -Os"
 CFLAGS_BIG_MEMORY='-Os $(FNO_JUMP_TABLES)'
 CFLAGS_SPEED="-Os"
 

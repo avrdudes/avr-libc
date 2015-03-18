@@ -1,5 +1,11 @@
 2015-03-18  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
+	bug #44514: Wrong build option '-mtiny-stack' instead of '-msp8'
+	* devtools/gen-avr-lib-tree.sh (CFLAGS_TINY_STACK): Change
+	-mtiny-stack to -msp8.
+
+2015-03-18  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
+
 	bug #43044: memory sections require __attribute__ ((used))
 	* doc/api/sections.dox: Add __attribute__ ((used)) and
 	a brief explanation of why it is needed.

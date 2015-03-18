@@ -2,6 +2,7 @@
 
 * Bugs fixed:
 
+  [#44515] Wrong build option '-mtiny-stack' instead of '-msp8'
   [#43044] memory sections require __attribute__ ((used))
   [#34719] Check for right build compiler
   [#44140] wdt_disable() macro clobbers prescaller bits 
