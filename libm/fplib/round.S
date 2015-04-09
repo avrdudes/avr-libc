@@ -49,7 +49,7 @@
    This is a balance between space and speed.
  */
 ENTRY round
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_nf
   ; A is finite
 	cpi	rA3, 126	; exponent field of 0.5
@@ -86,10 +86,10 @@ ENTRY round
 	ror	rA0
 	inc	rA3
   ; merge
-4:	rjmp	_U(__fp_mintl)
+4:	XJMP	_U(__fp_mintl)
 
-.L_nf:	rjmp	_U(__fp_mpack)	; pass nonfinite arg "as is"
-.L_zr:	rjmp	_U(__fp_szero)	; return +0.0/-0.0
+.L_nf:	XJMP	_U(__fp_mpack)	; pass nonfinite arg "as is"
+.L_zr:	XJMP	_U(__fp_szero)	; return +0.0/-0.0
 
 ENDFUNC
 

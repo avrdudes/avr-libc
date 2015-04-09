@@ -68,13 +68,13 @@
 
 FUNCTION atan2
 
-.L_nf:	rcall	_U(__fp_pscA)
+.L_nf:	XCALL	_U(__fp_pscA)
 	brcs	.L_nan
 	ldi	rA2, 0x80
 	ldi	rA3, 0x01	; replace finite to very small value
 	brne	1f
 	ldi	rA3, 0xfe	; replace Inf to very big value
-1:	rcall	_U(__fp_pscB)
+1:	XCALL	_U(__fp_pscB)
 	brcs	.L_nan
 	ldi	rB2, 0x80
 	ldi	rB3, 0x01	; replace finite to very small value
@@ -82,15 +82,15 @@ FUNCTION atan2
 	ldi	rB3, 0xfe	; replace Inf to very big value
 	rjmp	.L_cmp
 
-.L_nan:	rjmp	_U(__fp_nan)
-.L_zr:	rjmp	_U(__fp_zero)
+.L_nan:	XJMP	_U(__fp_nan)
+.L_zr:	XJMP	_U(__fp_zero)
 
 ENTRY   atan2
   ; save 'y' sign
 	mov	disp, rA3
 	andi	disp, 0x80
   ; split
-	rcall	_U(__fp_split3)
+	XCALL	_U(__fp_split3)
 	brcs	.L_nf
   ; check the (0,0) case
 	mov	r0, rA3
@@ -124,9 +124,9 @@ ENTRY   atan2
 	X_movw	rB2, XL
   ; save displacement and calculate atan
 2:	push	disp
-	rcall	_U(__divsf3_pse)
-	rcall	_U(__fp_round)
-	rcall	_U(atan)
+	XCALL	_U(__divsf3_pse)
+	XCALL	_U(__fp_round)
+	XCALL	_U(atan)
   ; restore disp and analize
 	pop	rB3		; hhi8()
 	tst	rB3
@@ -137,7 +137,7 @@ ENTRY   atan2
 	ldi	rB2, hlo8(PI)
 	sbrc	rB3, 0		; hhi8(PI) == 0x40,  hhi8(PI_2) == 0x3f
 	ldi	rB2, hlo8(PI_2)
-	rjmp	_U(__addsf3)
+	XJMP	_U(__addsf3)
 
 9:	ret
 ENDFUNC

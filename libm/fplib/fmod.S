@@ -42,19 +42,19 @@
 
 FUNCTION fmod
 
-0:	rcall	_U(__fp_pscA)
+0:	XCALL	_U(__fp_pscA)
 	brcs	.L_nan		; isnan(A)
 	breq	.L_nan		; isinf(A)
-	rcall	_U(__fp_pscB)
+	XCALL	_U(__fp_pscB)
 	brcc	1f		; isinf(B) -- legal arg: return A
 
-.L_nan:	rjmp	_U(__fp_nan)
-.L_sz:	rjmp	_U(__fp_szero)
+.L_nan:	XJMP	_U(__fp_nan)
+.L_sz:	XJMP	_U(__fp_szero)
 
 ENTRY fmod
   ; split and check exceptions
 	mov	ZL, rA3		; save
-	rcall	_U(__fp_split3)
+	XCALL	_U(__fp_split3)
 	brcs	0b
 	tst	rB3
 	breq	.L_nan		; B == 0
@@ -124,7 +124,7 @@ ENTRY fmod
 	brne	7b
 8:	inc	rA3
 .L_pk:
-	rjmp	_U(__fp_mpack)
+	XJMP	_U(__fp_mpack)
 9:	lsr	rA2
 	ror	rA1
 	ror	rA0

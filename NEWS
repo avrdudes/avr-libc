@@ -2,10 +2,12 @@
 
 * Bugs fixed:
 
-  [#44515] Wrong build option '-mtiny-stack' instead of '-msp8'
-  [#43044] memory sections require __attribute__ ((used))
+  [#33698] Explicit use of RJMP/RCALL can cause "relocation truncated to fit:
+           R_AVR_13_PCREL" linker error
   [#34719] Check for right build compiler
+  [#43044] memory sections require __attribute__ ((used))
   [#44140] wdt_disable() macro clobbers prescaller bits 
+  [#44515] Wrong build option '-mtiny-stack' instead of '-msp8'
   [no-id] TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc in some Xmega
           header files
 

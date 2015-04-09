@@ -48,7 +48,7 @@ ENTRY acos
 	push	rA3
   ; A = arccos(fabs(A))
 	andi	rA3, 0x7f
-	rcall	_U(__fp_arccos)
+	XCALL	_U(__fp_arccos)
   ; check sign
 	pop	r0
 	tst	r0
@@ -60,9 +60,9 @@ ENTRY acos
 	ldi	rB1,  hi8(HI40_PI)
 	ldi	rB2, hlo8(HI40_PI)
 	ldi	rB3, hhi8(HI40_PI)
-	rcall	_U(__addsf3x)
+	XCALL	_U(__addsf3x)
   ; round
-1:	rjmp	_U(__fp_round)
+1:	XJMP	_U(__fp_round)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

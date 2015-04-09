@@ -68,22 +68,22 @@ ENTRY atan
 	cpc	rB3, rAE
 	brsh	1f
 	mov	corr, rA3		; rA3 != 0
-	rcall	_U(inverse)
+	XCALL	_U(inverse)
   ; calculate atan(A) for -1.0 <= A <= +1.0
 1:	push	rA3
 	push	rA2
 	push	rA1
 	push	rA0
-	rcall	_U(square)
+	XCALL	_U(square)
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rcall	_U(__fp_powser)
-	rcall	_U(__fp_round)
+	XCALL	_U(__fp_powser)
+	XCALL	_U(__fp_round)
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
-	rcall	_U(__mulsf3x)
+	XCALL	_U(__mulsf3x)
   ; is correction needed ?
 	tst	corr
 	breq	2f
@@ -96,10 +96,10 @@ ENTRY atan
 	ldi	rB3, hhi8(HI40_PI_2)
 	andi	corr, 0x80
 	eor	rB3, corr
-	rcall	_U(__addsf3x)
+	XCALL	_U(__addsf3x)
   ; restore and round
 2:	pop	corr
-	rjmp	_U(__fp_round)
+	XJMP	_U(__fp_round)
 ENDFUNC
 
 	PGM_SECTION

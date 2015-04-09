@@ -33,6 +33,6 @@
 #include "asmdef.h"
 
 ENTRY   __mulsf3
-	rcall	_U(__mulsf3x)
-	rjmp	_U(__fp_round)
+	XCALL	_U(__mulsf3x)
+	XJMP	_U(__fp_round)
 ENDFUNC

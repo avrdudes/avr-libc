@@ -41,19 +41,19 @@ FUNCTION __mulsf3x
 
 #if	defined(__AVR_ENHANCED__) && __AVR_ENHANCED__
 
-0:	rcall	_U(__fp_pscA)
+0:	XCALL	_U(__fp_pscA)
 	brcs	1f
-	rcall	_U(__fp_pscB)
+	XCALL	_U(__fp_pscB)
 	brcs	1f
 	and	rA3, rB3		; one of args is 0xff
 	breq	1f
-	rjmp	_U(__fp_inf)		; nonzero * Inf --> Inf
-1:	rjmp	_U(__fp_nan)		; 0 * Inf --> NaN
+	XJMP	_U(__fp_inf)		; nonzero * Inf --> Inf
+1:	XJMP	_U(__fp_nan)		; 0 * Inf --> NaN
 2:	clr	r1			; after 'mul rA3,rB3'
-	rjmp	_U(__fp_szero)
+	XJMP	_U(__fp_szero)
 
 ENTRY   __mulsf3x
-	rcall	_U(__fp_split3)
+	XCALL	_U(__fp_split3)
 	brcs	0b
 
 ENTRY   __mulsf3_pse			; post split entry
@@ -122,18 +122,18 @@ ENTRY   __mulsf3_pse			; post split entry
 
 #else	/* to __AVR_ENHANCED__	*/
 
-0:	rcall	_U(__fp_pscA)
+0:	XCALL	_U(__fp_pscA)
 	brcs	1f
-	rcall	_U(__fp_pscB)
+	XCALL	_U(__fp_pscB)
 	brcs	1f
 	and	rA3, rB3		; one of args is 0xff
 	breq	1f
-	rjmp	_U(__fp_inf)		; nonzero * Inf --> Inf
-1:	rjmp	_U(__fp_nan)		; 0 * Inf --> NaN
-2:	rjmp	_U(__fp_szero)
+	XJMP	_U(__fp_inf)		; nonzero * Inf --> Inf
+1:	XJMP	_U(__fp_nan)		; 0 * Inf --> NaN
+2:	XJMP	_U(__fp_szero)
 
 ENTRY   __mulsf3x
-	rcall	_U(__fp_split3)
+	XCALL	_U(__fp_split3)
 	brcs	0b
 
 ENTRY   __mulsf3_pse			; post split entry
@@ -228,9 +228,9 @@ ENTRY   __mulsf3_pse			; post split entry
 11:	cpi	rA3, 254
 	cpc	rB3, r1
 	brlo	15f
-	rjmp	_U(__fp_inf)
+	XJMP	_U(__fp_inf)
   ; check lowest value of exponent to avoid long operation
-12:	rjmp	_U(__fp_szero)
+12:	XJMP	_U(__fp_szero)
 13:	cpi	rB3, hi8(-24)		; here rB3 < 0
 	brlt	12b
 	cpi	rA3, lo8(-24)

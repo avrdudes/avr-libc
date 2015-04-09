@@ -48,26 +48,26 @@
 
 FUNCTION __addsf3x
 
-0:	rcall	_U(__fp_pscA)
+0:	XCALL	_U(__fp_pscA)
 	brcs	.L_nan
-	rcall	_U(__fp_pscB)
+	XCALL	_U(__fp_pscB)
 	brcs	.L_nan
 	brne	.L_inf		; B is finite --> return A
 	cpi	rA3, 255
 	brne	.L_infB		; A is finite --> return B
 	brtc	.L_inf		; Inf + Inf with the same sign
 .L_nan:
-	rjmp	_U(__fp_nan)
+	XJMP	_U(__fp_nan)
 .L_infB:
 	brtc	.L_inf
 	com	ZL
 .L_inf:
 	bst	ZL, 7
-	rjmp	_U(__fp_inf)
+	XJMP	_U(__fp_inf)
 
 ENTRY	__addsf3x
 	mov	ZL, rA3		; save sign of A
-	rcall	_U(__fp_split3)
+	XCALL	_U(__fp_split3)
 	brcs	0b
   ; compare A and B
 	cp	rAE, rBE
@@ -78,7 +78,7 @@ ENTRY	__addsf3x
 	brlo	2f		; fabs(A) < fabs(B)
 	brne	4f		; fabs(A) > fabs(B)
 	brtc	.L_add
-	rjmp	_U(__fp_zero)	; A + (-A) = +0.0
+	XJMP	_U(__fp_zero)	; A + (-A) = +0.0
   ; swap A and B
 2:	brtc	3f
 	com	ZL		; update sign

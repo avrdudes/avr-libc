@@ -47,5 +47,5 @@ ENTRY inverse
 	ldi	rA2, hlo8(FL_1)
 	ldi	rA3, hhi8(FL_1)
 
-	rjmp	_U(__divsf3)
+	XJMP	_U(__divsf3)
 ENDFUNC

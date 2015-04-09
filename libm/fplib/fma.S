@@ -45,12 +45,12 @@
 #define	rC2	r16
 
 ENTRY fma
-	rcall	_U(__mulsf3x)
+	XCALL	_U(__mulsf3x)
 	X_movw	rB0, rC0
 	X_movw	rB2, rC2
 	clr	rBE
-	rcall	_U(__addsf3x)
-	rjmp	_U(__fp_round)
+	XCALL	_U(__addsf3x)
+	XJMP	_U(__fp_round)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

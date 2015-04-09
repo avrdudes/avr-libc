@@ -57,18 +57,18 @@ ENTRY asin
   ; for small x
 	ldi	ZL, lo8 (.L_table)
 	ldi	ZH, hi8 (.L_table)
-	rcall	_U(__fp_powsodd)
+	XCALL	_U(__fp_powsodd)
 	rjmp	2f
   ; arcsin(x) = Pi/2 - arccos(x)
-1:	rcall	_U(__fp_arccos)
+1:	XCALL	_U(__fp_arccos)
 	subi	rA3, 0x80
 	ldi	rBE, LO40_PI_2
 	ldi	rB0,  lo8(HI40_PI_2)
 	ldi	rB1,  hi8(HI40_PI_2)
 	ldi	rB2, hlo8(HI40_PI_2)
 	ldi	rB3, hhi8(HI40_PI_2)
-	rcall	_U(__addsf3x)
-	rcall	_U(__fp_round)
+	XCALL	_U(__addsf3x)
+	XCALL	_U(__fp_round)
   ; restore sign
 2:	pop	r0
 	sbrc	r0, 7

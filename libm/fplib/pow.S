@@ -190,7 +190,7 @@ ENTRY pow
 .L_noint:
 	brts	.L_pow
 .L_nan:
-	rjmp	_U(__fp_nan)
+	XJMP	_U(__fp_nan)
 .L_one:
 	ldi	rA0,  lo8(FL_1)
 	ldi	rA1,  hi8(FL_1)
@@ -206,13 +206,13 @@ ENTRY pow
 	push	rB2
 	push	rB1
 	push	rB0
-	rcall	_U(log)
+	XCALL	_U(log)
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
-	rcall	_U(__mulsf3)
-	rjmp	_U(exp)
+	XCALL	_U(__mulsf3)
+	XJMP	_U(exp)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

@@ -55,7 +55,7 @@ ENTRY   __eqsf2
 ENTRY   __nesf2
 ENTRY   __ltsf2
 ENTRY   __lesf2
-	rcall	_U(__fp_cmp)
+	XCALL	_U(__fp_cmp)
 	brcc	1f
 	ldi	ret_lo, 1
 1:	ret

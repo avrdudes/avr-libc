@@ -39,7 +39,7 @@
 #include "asmdef.h"
 
 ENTRY   __unordsf2
-	rcall	_U(__fp_cmp)	; return C=1, if any of args is NaN
+	XCALL	_U(__fp_cmp)	; return C=1, if any of args is NaN
 	sbc	r24, r24
 	sbc	r25, r25
 	ret

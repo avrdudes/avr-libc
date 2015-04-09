@@ -57,7 +57,7 @@
  */
 
 ENTRY __fp_trunc
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	9f
   ; A is finite
 	ldi	rAE, 126

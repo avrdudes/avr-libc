@@ -110,7 +110,7 @@
     #endif
 #endif
 
-#if __AVR_MEGA__
+#if (__AVR_HAVE_JMP_CALL__)
   #define XJMP jmp
   #define XCALL call
 #else

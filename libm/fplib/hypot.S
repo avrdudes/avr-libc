@@ -71,25 +71,25 @@
 
 FUNCTION hypot
 
-.L_nf:	rcall	_U(__fp_pscA)
+.L_nf:	XCALL	_U(__fp_pscA)
 	breq	1f		; hypot(Inf, *) --> Inf
-	rcall	_U(__fp_pscB)
+	XCALL	_U(__fp_pscB)
 	breq	1f		; hypot(*, Inf) --> Inf
-	rjmp	_U(__fp_nan)	; NaN and finite, or both NaN
-1:	rjmp	_U(__fp_inf)	; T is 0 after __fp_split3()
+	XJMP	_U(__fp_nan)	; NaN and finite, or both NaN
+1:	XJMP	_U(__fp_inf)	; T is 0 after __fp_split3()
 
 .L_retB:
 	X_movw	rA0, rB0
 	X_movw	rA2, rB2
 .L_retA:
-	rjmp	_U(__fp_mpack)
+	XJMP	_U(__fp_mpack)
 
 ENTRY hypot
   ; clear signs
 	andi	rA3, 0x7f
 	andi	rB3, 0x7f
   ; split and check args
-	rcall	_U(__fp_split3)
+	XCALL	_U(__fp_split3)
 	brcs	.L_nf
 	tst	rA3
 	breq	.L_retB
@@ -170,7 +170,7 @@ ENTRY hypot
 	mov	rBE, rAE
 	movw	rB0, rA0
 	movw	rB2, rA2
-	rcall	_U(__mulsf3_pse)
+	XCALL	_U(__mulsf3_pse)
 	
 	movw	rB0, rC0
 	movw	rB2, rC2
@@ -183,7 +183,7 @@ ENTRY hypot
 	mov	rAE, rBE
 	movw	rA0, rB0
 	movw	rA2, rB2
-	rcall	_U(__mulsf3_pse)
+	XCALL	_U(__mulsf3_pse)
 
 	pop	rBE	
 	movw	rB0, rC0
@@ -206,7 +206,7 @@ ENTRY hypot
 	mov	rB1, rA1
 	mov	rB2, rA2
 	mov	rB3, rA3
-	rcall	_U(__mulsf3_pse)
+	XCALL	_U(__mulsf3_pse)
 	
 	pop	rB0
 	pop	rB1
@@ -225,7 +225,7 @@ ENTRY hypot
 	mov	rA1, rB1
 	mov	rA2, rB2
 	mov	rA3, rB3
-	rcall	_U(__mulsf3_pse)
+	XCALL	_U(__mulsf3_pse)
 	
 	pop	rBE
 	pop	rB0
@@ -234,9 +234,9 @@ ENTRY hypot
 	pop	rB3
 #endif	/* ! __AVR_HAVE_MOVW__	*/
 	
-	rcall	_U(__addsf3x)
-	rcall	_U(__fp_round)
-	rcall	_U(sqrt)
+	XCALL	_U(__addsf3x)
+	XCALL	_U(__fp_round)
+	XCALL	_U(sqrt)
 
   ; restore a scale
 #if (-SCALE_SMALL & SCALE_BIG) == 0
@@ -248,5 +248,5 @@ ENTRY hypot
 	clr	exp_hi
 	sbrc	exp_lo, 7
 	com	exp_hi
-	rjmp	_U(ldexp)
+	XJMP	_U(ldexp)
 ENDFUNC

@@ -110,11 +110,11 @@ FUNCTION cbrt
 	ret
 #endif
 
-0:	rjmp	_U(__fp_mpack)
+0:	XJMP	_U(__fp_mpack)
 
 ENTRY cbrt
   ; split and check arg.
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	0b		; !isfinite(A)
 	tst	rA3
 	breq	0b		; return 0 with original sign

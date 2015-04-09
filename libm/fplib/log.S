@@ -50,13 +50,13 @@
 FUNCTION log
 
 .L_nf:	brts	.L_nan		; branch, if -Inf
-	rjmp	_U(__fp_mpack)	; pass as is: NaN --> NaN, +Inf --> +Inf
-.L_nan:	rjmp	_U(__fp_nan)
+	XJMP	_U(__fp_mpack)	; pass as is: NaN --> NaN, +Inf --> +Inf
+.L_nan:	XJMP	_U(__fp_nan)
 .L_min:	set
-	rjmp	_U(__fp_inf)
+	XJMP	_U(__fp_inf)
 
 ENTRY log
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; !isfinite(A)
 	tst	rA3
 	breq	.L_min		; -Inf
@@ -93,14 +93,14 @@ ENTRY log
 	brlo	4f
 	adiw	rC2, 1
 	andi	rA2, ~0x80
-3:	rcall	_U(__addsf3)
+3:	XCALL	_U(__addsf3)
 	ldi	ZL, lo8(.L_tlow)
 	ldi	ZH, hi8(.L_tlow)
 	rjmp	5f
-4:	rcall	_U(__addsf3)
+4:	XCALL	_U(__addsf3)
 	ldi	ZL, lo8(.L_thigh)
 	ldi	ZH, hi8(.L_thigh)
-5:	rcall	_U(__fp_powser)
+5:	XCALL	_U(__fp_powser)
 
 	X_movw	rC0, rA0
 	X_movw	rA0, rC2	; rA1.rA0 = exponent (possible negative)
@@ -113,12 +113,12 @@ ENTRY log
 	rol	rA1		; C = rA1 sign bit
 	sbc	rA2, rA2
 	sbc	rA3, rA3
-	rcall	_U(__floatsisf)
+	XCALL	_U(__floatsisf)
 	ldi	rB0,  lo8(LN_2)
 	ldi	rB1,  hi8(LN_2)
 	ldi	rB2, hlo8(LN_2)
 	ldi	rB3, hhi8(LN_2)
-	rcall	_U(__mulsf3x)
+	XCALL	_U(__mulsf3x)
 	
 	mov	rBE, rCE
 	X_movw	rB0, rC0
@@ -130,8 +130,8 @@ ENTRY log
 	pop	rC2
 	pop	rC3
 	
-	rcall	_U(__addsf3x)
-	rjmp	_U(__fp_round)
+	XCALL	_U(__addsf3x)
+	XJMP	_U(__fp_round)
 ENDFUNC
 	
 	PGM_SECTION

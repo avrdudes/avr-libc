@@ -42,11 +42,11 @@
  */
 
 ENTRY trunc
-	rcall	_U(__fp_trunc)
+	XCALL	_U(__fp_trunc)
 	brcs	2f		; pass nonfinite arg as is
 	cpi	rA3, 127
 	brsh	1f		; fabs(A) >= 1.0
-	rjmp	_U(__fp_szero)
-1:	rjmp	_U(__fp_mintl)
-2:	rjmp	_U(__fp_mpack)
+	XJMP	_U(__fp_szero)
+1:	XJMP	_U(__fp_mintl)
+2:	XJMP	_U(__fp_mpack)
 ENDFUNC

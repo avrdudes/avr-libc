@@ -76,7 +76,7 @@ ENTRY __fp_powser
 1:	mov	rcntr, rBE
 
 .Loop:	X_movw	YL, ZL
-	rcall	_U(__mulsf3x)
+	XCALL	_U(__mulsf3x)
 	X_movw	ZL, YL
 
 	clt
@@ -89,7 +89,7 @@ ENTRY __fp_powser
 	brts	1b
 
 	X_movw	YL, ZL
-	rcall	_U(__addsf3x)
+	XCALL	_U(__addsf3x)
 	X_movw	ZL, YL
 
 	X_movw	rB0, rC0

@@ -64,7 +64,7 @@ ENTRY frexp
 	st	Z, r1
 	std	Z+1, r1
 1:
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_nf			; return the same value
 	tst	rA3
 	breq	3f
@@ -72,7 +72,7 @@ ENTRY frexp
 	sbc	rB3, rB3
 
 	sbrs	rA2, 7
-	rcall	_U(__fp_norm2)
+	XCALL	_U(__fp_norm2)
 
 #if  defined(__AVR_XMEGA__) && __AVR_XMEGA__
 	adiw	ZL, 0
@@ -94,7 +94,7 @@ ENTRY frexp
 3:	bld	rA3, 7		; restore sign
 	ret
 .L_nf:
-	rjmp	_U(__fp_mpack)
+	XJMP	_U(__fp_mpack)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

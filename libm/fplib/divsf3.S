@@ -37,6 +37,6 @@
 #include "asmdef.h"
 
 ENTRY	__divsf3
-	rcall	_U(__divsf3x)
-	rjmp	_U(__fp_round)
+	XCALL	_U(__divsf3x)
+	XJMP	_U(__fp_round)
 ENDFUNC

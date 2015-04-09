@@ -41,6 +41,6 @@ ENTRY	__subsf3
 ENTRY	__addsf3
 	clr	rAE
 	clr	rBE
-	rcall	_U(__addsf3x)
-	rjmp	_U(__fp_round)
+	XCALL	_U(__addsf3x)
+	XJMP	_U(__fp_round)
 ENDFUNC

@@ -77,7 +77,7 @@
 
 GLOBAL(isascii)
           CPSE    rHigh,__zero_reg__
-          RJMP    _U(__ctype_isfalse)
+          XJMP    _U(__ctype_isfalse)
           COM     rLow
           ANDI    rLow, 0x80
           RET
@@ -103,12 +103,12 @@ GLOBAL(toascii)
 
 GLOBAL(isalnum)
 	cpse	rHigh, __zero_reg__
-	rjmp	_U(__ctype_isfalse)
+	XJMP	_U(__ctype_isfalse)
 	subi	rLow, '0'
 	subi	rLow, '9'-'0'+1
 	brlo	2f			; rLow is digit, return negative val.
 	subi	rLow, lo8(-'9'-1)	; restore rLow
-	rjmp	_U(isalpha)
+	XJMP	_U(isalpha)
 2:	ret
 
           ENDFUNC
@@ -135,15 +135,15 @@ GLOBAL(__ctype_istrue)
 
 GLOBAL(isupper)
           ;CPSE  rHigh,__zero_reg__
-          ;RJMP  _U(__ctype_isfalse)    ; checked by _islower later on
+          ;XJMP  _U(__ctype_isfalse)    ; checked by _islower later on
           SBRC  rLow,5       ; if bit 5 is set it is no upper
-          RJMP  _U(__ctype_isfalse)     ; bit 5 is clear, so if isalpha is true it is an upper
+          XJMP  _U(__ctype_isfalse)     ; bit 5 is clear, so if isalpha is true it is an upper
 GLOBAL(isalpha)
           ORI     rLow,0x20        ; make a lower out of an upper (all others are changed but do not get alpha)
 GLOBAL(islower)
           CPSE  rHigh,__zero_reg__
 1:
-          RJMP  _U(__ctype_isfalse)
+          XJMP  _U(__ctype_isfalse)
           SUBI	rLow, 'a'
           SUBI	rLow, 'z'-'a'+1
           BRSH	1b
@@ -161,7 +161,7 @@ GLOBAL(islower)
 GLOBAL(isdigit)
           CPSE  rHigh,__zero_reg__
 1:        
-          RJMP  _U(__ctype_isfalse)
+          XJMP  _U(__ctype_isfalse)
           SUBI  rLow,'0'
           SUBI  rLow,10
           BRSH  1b
@@ -183,7 +183,7 @@ GLOBAL(isdigit)
 
 GLOBAL(isxdigit)
 	cpse	rHigh, __zero_reg__
-1:	rjmp	_U(__ctype_isfalse)
+1:	XJMP	_U(__ctype_isfalse)
 	subi	rLow, '0'
 	subi	rLow, '9'-'0'+1
 	brlo	2f			; decimal digit
@@ -206,7 +206,7 @@ GLOBAL(isxdigit)
 GLOBAL(iscntrl)
           CPSE  rHigh,__zero_reg__
 1:
-          RJMP  _U(__ctype_isfalse)
+          XJMP  _U(__ctype_isfalse)
           CPI   rLow,0x7F
           BREQ  2f
           SUBI  rLow, ' '
@@ -228,7 +228,7 @@ GLOBAL(isgraph)
           BREQ  1f
 GLOBAL(isprint)
 	  CPSE	rHigh, __zero_reg__
-1:	  RJMP	_U(__ctype_isfalse)
+1:	  XJMP	_U(__ctype_isfalse)
 	  SUBI	rLow, ' '
 	  SUBI	rLow, 0x7E - ' ' + 1
 	  BRSH	1b
@@ -251,7 +251,7 @@ GLOBAL(isprint)
 GLOBAL(isspace)
           CPSE  rHigh,__zero_reg__
 1:
-          RJMP  _U(__ctype_isfalse)
+          XJMP  _U(__ctype_isfalse)
           CPI   rLow,' '           ; blank
           BREQ  2f
 	  SUBI	rLow, '\t'
@@ -270,12 +270,12 @@ GLOBAL(isspace)
 
 GLOBAL(ispunct)
 	cpse	rHigh, __zero_reg__
-1:	rjmp	_U(__ctype_isfalse)
+1:	XJMP	_U(__ctype_isfalse)
 	subi	rLow, ' ' + 1
 	subi	rLow, 0x7e - ' '
 	brsh	1b			; if (!isgraph(c)) return 0
 	subi	rLow, lo8(-0x7e - 1)	; restore rLow
-	rcall	_U(isalnum)
+	XCALL	_U(isalnum)
 	tst	rLow
 	brne	1b			; if (isalnum(c)) return 0
 	ldi	rLow, 1
@@ -293,7 +293,7 @@ GLOBAL(ispunct)
 GLOBAL(isblank)
           CPSE  rHigh,__zero_reg__
 1:
-          RJMP  _U(__ctype_isfalse)
+          XJMP  _U(__ctype_isfalse)
           CPI   rLow,' '           ; blank
           BREQ  2f
           CPI   rLow,0x09    ;'\t' ; tab

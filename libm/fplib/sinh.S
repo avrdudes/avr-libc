@@ -59,15 +59,15 @@ ENTRY sinh
   ; for small x
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rcall	_U(__fp_powsodd)
+	XCALL	_U(__fp_powsodd)
 	rjmp	2f
   ; exp(-fabs(x))	// negative to exclude an extra inversion
 1:	ori	rA3, 0x80
-	rcall	_U(exp)
+	XCALL	_U(exp)
   ; exp(-fabs(x)) / 2
 	ldi	exp_lo, lo8(-1)
 	ldi	exp_hi, hi8(-1)
-	rcall	_U(ldexp)
+	XCALL	_U(ldexp)
   ; save
 	push	rA3
 	push	rA2
@@ -76,14 +76,14 @@ ENTRY sinh
   ; exp(fabs(x)) / 2
 	ldi	exp_lo, lo8(2)
 	ldi	exp_hi, hi8(2)
-	rcall	_U(ldexp)
-	rcall	_U(inverse)
+	XCALL	_U(ldexp)
+	XCALL	_U(inverse)
   ; result (in absolute value)
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
-	rcall	_U(__subsf3)
+	XCALL	_U(__subsf3)
   ; set sign
 2:	pop	r0
 	sbrc	r0, 7

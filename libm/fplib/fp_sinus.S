@@ -50,9 +50,9 @@ ENTRY __fp_sinus
 	ldi	rB1,  hi8(HI40_PIO2)
 	ldi	rB2, hlo8(HI40_PIO2)
 	ldi	rB3, hhi8(HI40_PIO2 | 0x80000000)
-	rcall	_U(__addsf3x)
+	XCALL	_U(__addsf3x)
 
-1:	rcall	_U(__fp_round)
+1:	XCALL	_U(__fp_round)
 
 	pop	r0
 	inc	r0
@@ -61,7 +61,7 @@ ENTRY __fp_sinus
 
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rjmp	_U(__fp_powsodd)
+	XJMP	_U(__fp_powsodd)
 ENDFUNC
 	
 	PGM_SECTION

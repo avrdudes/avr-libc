@@ -40,11 +40,11 @@
 
 ENTRY sin
 	push	rA3
-	rcall	_U(__fp_rempio2)
+	XCALL	_U(__fp_rempio2)
 	pop	r0
 	sbrc	r0, 7
 	subi	ZL, -2
-	rjmp	_U(__fp_sinus)
+	XJMP	_U(__fp_sinus)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

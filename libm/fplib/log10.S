@@ -39,10 +39,10 @@
 #define	INV_LN_10	0x3ede5bd9	/* 1.0/log(10.0)	*/
 
 ENTRY log10
-	rcall	_U(log)
+	XCALL	_U(log)
 	ldi	rB0,  lo8(INV_LN_10)
 	ldi	rB1,  hi8(INV_LN_10)
 	ldi	rB2, hlo8(INV_LN_10)
 	ldi	rB3, hhi8(INV_LN_10)
-	rjmp	_U(__mulsf3)
+	XJMP	_U(__mulsf3)
 ENDFUNC

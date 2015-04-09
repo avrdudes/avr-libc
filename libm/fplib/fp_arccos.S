@@ -60,8 +60,8 @@ ENTRY __fp_arccos
 
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rcall	_U(__fp_powser)
-	rcall	_U(__fp_round)
+	XCALL	_U(__fp_powser)
+	XCALL	_U(__fp_round)
 
 	movw	rB0, rC0
 	movw	rB2, rC2
@@ -73,8 +73,8 @@ ENTRY __fp_arccos
 	ldi	rA1,  hi8(FL_1)
 	ldi	rA2, hlo8(FL_1)
 	ldi	rA3, hhi8(FL_1)
-	rcall	_U(__subsf3)
-	rcall	_U(sqrt)
+	XCALL	_U(__subsf3)
+	XCALL	_U(sqrt)
 
 	movw	rB0, rC0
 	movw	rB2, rC2
@@ -84,7 +84,7 @@ ENTRY __fp_arccos
 	pop	rC1
 	pop	rC2
 	pop	rC3
-	rjmp	_U(__mulsf3x)
+	XJMP	_U(__mulsf3x)
 
 #else	/* to __AVR_HAVE_MOVW__ */
 
@@ -96,8 +96,8 @@ ENTRY __fp_arccos
   ; calculate: C0 + A*(C1 + ...)
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rcall	_U(__fp_powser)
-	rcall	_U(__fp_round)
+	XCALL	_U(__fp_powser)
+	XCALL	_U(__fp_round)
   ; restore A
 	pop	rB0
 	pop	rB1
@@ -113,14 +113,14 @@ ENTRY __fp_arccos
 	ldi	rA1,  hi8(FL_1)
 	ldi	rA2, hlo8(FL_1)
 	ldi	rA3, hhi8(FL_1)
-	rcall	_U(__subsf3)
-	rcall	_U(sqrt)
+	XCALL	_U(__subsf3)
+	XCALL	_U(sqrt)
   ; multiply
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
-	rjmp	_U(__mulsf3x)
+	XJMP	_U(__mulsf3x)
 
 #endif
 ENDFUNC

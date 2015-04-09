@@ -42,13 +42,13 @@ FUNCTION sqrt
 
 .L_nf:	brne	.L_pk		; NaN, return as is
 	brtc	.L_pk		; sqrt(+Inf) --> +Inf
-.L_nan:	rjmp	_U(__fp_nan)
-.L_pk:	rjmp	_U(__fp_mpack)
+.L_nan:	XJMP	_U(__fp_nan)
+.L_pk:	XJMP	_U(__fp_mpack)
 
 ENTRY sqrt
 ALIAS_ENTRY sqrtf
   ; split and check arg.
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; !isfinite(A)
 	tst	rA3
 	breq	.L_pk		; return 0 with original sign
@@ -58,7 +58,7 @@ ALIAS_ENTRY sqrtf
 	sbc	rB3, rB3	; exponent high byte
   ; normalize, if A is subnormal
 	sbrs	rA2, 7
-	rcall	_U(__fp_norm2)
+	XCALL	_U(__fp_norm2)
 
 #define	msk0	r0
 #define msk1	r1

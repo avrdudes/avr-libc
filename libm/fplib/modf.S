@@ -87,7 +87,7 @@ ENTRY modff
   ; write B
 	rcall	.L_write
   ; return nonzero fraction:  A - B
-	rjmp	_U(__subsf3)
+	XJMP	_U(__subsf3)
   ; exponent too big:  compare with smallest NaN (0x7f800001)
 4:	cpi	rA0, 1
 	cpc	rA1, r1

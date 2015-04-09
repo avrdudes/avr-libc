@@ -43,11 +43,11 @@
 
 FUNCTION ldexp
 
-.L_inf:	rjmp	_U(__fp_inf)
-.L_pk:	rjmp	_U(__fp_mpack)
+.L_inf:	XJMP	_U(__fp_inf)
+.L_pk:	XJMP	_U(__fp_mpack)
 
 ENTRY ldexp
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_pk			; as is
 	tst	rA3
 	breq	.L_pk			; ldexp(0,*) is always 0
@@ -110,7 +110,7 @@ ENTRY ldexp
 	sbci	rA3, -1
 	rjmp	.L_pack
 .L_zero:
-	rjmp	_U(__fp_szero)
+	XJMP	_U(__fp_szero)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

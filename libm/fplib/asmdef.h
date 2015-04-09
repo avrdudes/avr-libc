@@ -43,6 +43,16 @@
 # endif
 #endif
 
+/* Define XJMP/XCALL with rjmp/rcall if the arch do not have
+   jmp/call instructions. */
+#if (__AVR_HAVE_JMP_CALL__)
+# define XJMP jmp
+# define XCALL call
+#else
+# define XJMP rjmp
+# define XCALL rcall
+#endif
+
 /* Historicaly, the _U() was intended to concatinate '_' prefix.
    Let us save it, as one is usefull to find externals quickly.	*/
 #define	_U(name)	name

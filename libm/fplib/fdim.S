@@ -55,7 +55,7 @@ ENTRY fdim
 	cpc	rA2, rB2
 	cpc	rA3, rB3
 	brcs	3f
-1:	rjmp	_U(__subsf3)
+1:	XJMP	_U(__subsf3)
   ; A < 0 or B < 0
 2:	cp	rB0, rA0
 	cpc	rB1, rA1
@@ -79,9 +79,9 @@ ENTRY fdim
 	cpc	ZH, rB3
 	brlo	.L_nan
   ; return 0
-	rjmp	_U(__fp_zero)
+	XJMP	_U(__fp_zero)
 
-.L_nan:	rjmp	_U(__fp_nan)
+.L_nan:	XJMP	_U(__fp_nan)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

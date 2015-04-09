@@ -43,23 +43,23 @@
 
 FUNCTION __divsf3x
 
-0:	rcall	_U(__fp_pscB)
+0:	XCALL	_U(__fp_pscB)
 	brcs	.L_nan
-	rcall	_U(__fp_pscA)
+	XCALL	_U(__fp_pscA)
 	brcs	.L_nan
 	brne	.L_zr		; finite / Inf --> 0
 .L_infA:
 	cpi	rB3, 255
 	breq	.L_nan		; Inf / Inf --> NaN
 .L_inf:
-	rjmp	_U(__fp_inf)
+	XJMP	_U(__fp_inf)
 1:
 	cpse	rB3, r1		; 0/finite --> 0,  0/0 --> NaN
-.L_zr:	rjmp	_U(__fp_szero)
-.L_nan:	rjmp	_U(__fp_nan)
+.L_zr:	XJMP	_U(__fp_szero)
+.L_nan:	XJMP	_U(__fp_nan)
 
 ENTRY	__divsf3x
-	rcall	_U(__fp_split3)
+	XCALL	_U(__fp_split3)
 	brcs	0b
 
 ENTRY	__divsf3_pse		; post split entry
@@ -130,9 +130,9 @@ ENTRY	__divsf3_pse		; post split entry
 11:	cpi	rA3, 254
 	cpc	rB3, r1
 	brlo	15f
-	rjmp	_U(__fp_inf)
+	XJMP	_U(__fp_inf)
   ; check lowest value of exponent to avoid long operation
-12:	rjmp	_U(__fp_szero)
+12:	XJMP	_U(__fp_szero)
 13:	cpi	rB3, hi8(-24)		; here rB3 < 0
 	brlt	12b
 	cpi	rA3, lo8(-24)

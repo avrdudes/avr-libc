@@ -42,6 +42,6 @@
 ENTRY   __floatdisf
 	bst	rA3, 7		; sign
 	brtc	1f
-	rcall	_U(__fp_negdi)
-1:	rjmp	_U(__fp_di2sf)
+	XCALL	_U(__fp_negdi)
+1:	XJMP	_U(__fp_di2sf)
 ENDFUNC

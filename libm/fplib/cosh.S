@@ -46,10 +46,10 @@
 ENTRY cosh
   ; A = exp(-fabs(x))/2 	negative to exclude an extra inversion
 	ori	rA3, 0x80
-	rcall	_U(exp)
+	XCALL	_U(exp)
 	ldi	exp_lo, lo8(-1)
 	ldi	exp_hi, hi8(-1)
-	rcall	_U(ldexp)
+	XCALL	_U(ldexp)
   ; save A and calculate exp(fabs(x))/2
 	push	rA3
 	push	rA2
@@ -57,12 +57,12 @@ ENTRY cosh
 	push	rA0
 	ldi	exp_lo, lo8(2)
 	ldi	exp_hi, hi8(2)
-	rcall	_U(ldexp)
-	rcall	_U(inverse)
+	XCALL	_U(ldexp)
+	XCALL	_U(inverse)
   ; exp(x)/2 + exp(-x)/2
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
-	rjmp	_U(__addsf3)
+	XJMP	_U(__addsf3)
 ENDFUNC

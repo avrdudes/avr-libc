@@ -66,7 +66,7 @@
  */
 
 ENTRY __fixunssfsi
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_err
   ; A is finite
 	subi	rA3, 127	; exponent field of 1.0
@@ -91,11 +91,11 @@ ENTRY __fixunssfsi
 2:	cpi	rAE, 1
 	breq	.L_sign		; rAE: overflow for 'signed long' usage
 
-.L_err:	rcall	_U(__fp_zero)
+.L_err:	XCALL	_U(__fp_zero)
 	ldi	rAE, 1		; error flag
 	ret
 
-.L_zr:	rjmp	_U(__fp_zero)	; return 0x00000000, clear rAE
+.L_zr:	XJMP	_U(__fp_zero)	; return 0x00000000, clear rAE
 
   ; fabs(A) <= 0x0.ffffffp+23
   ; Shift A to right by 1 (rA3==-1) .. 23 (rA3==-23) positions.

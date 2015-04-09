@@ -37,7 +37,7 @@
      radians.
  */
 ENTRY cos
-	rcall	_U(__fp_rempio2)
+	XCALL	_U(__fp_rempio2)
 	inc	ZL
-	rjmp	_U(__fp_sinus)
+	XJMP	_U(__fp_sinus)
 ENDFUNC

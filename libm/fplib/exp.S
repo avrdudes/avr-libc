@@ -50,13 +50,13 @@ FUNCTION exp
 
 .L_nf:	brne	.L_nan
 .L_tb:	brts	.L_zr
-	rjmp	_U(__fp_inf)
-.L_zr:	rjmp	_U(__fp_zero)
-.L_nan:	rjmp	_U(__fp_nan)
+	XJMP	_U(__fp_inf)
+.L_zr:	XJMP	_U(__fp_zero)
+.L_nan:	XJMP	_U(__fp_nan)
 
 ENTRY exp
   ; split and analize A
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; A is not a finite number
 	cpi	rA3, hhi8(X2BIG << 1)
 	brsh	.L_tb		; A is too big (in absolute value)
@@ -69,7 +69,7 @@ ENTRY exp
 	ldi	rB1,  hi8(FL_1_LN2)
 	ldi	rB2, hlo8(FL_1_LN2 | 0x800000)		; hidden '1'
 	ldi	rB3, hhi8(FL_1_LN2 << 1)		; exponent
-	rcall	_U(__mulsf3_pse)
+	XCALL	_U(__mulsf3_pse)
   ; split A into fraction and integral parts
 	push	r0
 	push	r0
@@ -77,11 +77,11 @@ ENTRY exp
 	in	exp_lo, SPL_IO_ADDR
 	in	exp_hi, SPH_IO_ADDR
 	push	r0
-	rcall	_U(modf)
+	XCALL	_U(modf)
   ; calculate 2**(-x) for 0 <= x < 1
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rcall	_U(__fp_powser)
+	XCALL	_U(__fp_powser)
   ; get integral part
 	pop	exp_lo
 	pop	exp_hi
@@ -102,11 +102,11 @@ ENTRY exp
   ; negate and scale
 	neg	exp_lo
 	sbc	exp_hi, exp_hi
-2:	rcall	_U(ldexp)
+2:	XCALL	_U(ldexp)
   ; inverse for positive arg.
 	pop	r0
 	sbrs	r0, 7
-	rjmp	_U(inverse)
+	XJMP	_U(inverse)
 	ret
 ENDFUNC
 	

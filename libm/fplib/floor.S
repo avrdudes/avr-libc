@@ -45,7 +45,7 @@
 #define FL_M1	0xbf800000	/* -1.0	*/
 
 ENTRY floor
-	rcall	_U(__fp_trunc)
+	XCALL	_U(__fp_trunc)
 	brcs	.L_nf
   ; A is finite
 	cpi	rA3, 127
@@ -53,7 +53,7 @@ ENTRY floor
   ; fabs(A) < 1.0
 	cpse	rA3, r1		; floor(-0.0) is -0.0
 	brts	1f
-	rjmp	_U(__fp_szero)
+	XJMP	_U(__fp_szero)
   ; fabs (-1.0 < A < 0.0) --> -1.0
 1:	ldi	rA0,  lo8(FL_M1)
 	ldi	rA1,  hi8(FL_M1)
@@ -66,9 +66,9 @@ ENTRY floor
 	adc	rA0, r1
 	adc	rA1, r1
 	adc	rA2, r1		; rA2 was < 0x80, overflow is impossible
-3:	rjmp	_U(__fp_mintl)
+3:	XJMP	_U(__fp_mintl)
 
-.L_nf:	rjmp	_U(__fp_mpack)	; pass nonfinite arg as is
+.L_nf:	XJMP	_U(__fp_mpack)	; pass nonfinite arg as is
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

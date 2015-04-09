@@ -43,7 +43,7 @@
  */
 
 ENTRY isinf
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	ldi	r24, 0
 	ldi	r25, 0
 	brcc	2f			; normal value

@@ -53,7 +53,7 @@
  */
 
 ENTRY lround
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_err
   ; A is finite
 	subi	rA3, 126	; exponent field of 0.5
@@ -116,9 +116,9 @@ ENTRY lround
 6:	ret
 
 .L_err:	set			; force return 0x80000000
-	rjmp	_U(__fp_szero)
+	XJMP	_U(__fp_szero)
 
-.L_zr:	rjmp	_U(__fp_zero)	; return 0x00000000
+.L_zr:	XJMP	_U(__fp_zero)	; return 0x00000000
 
 ENDFUNC
 

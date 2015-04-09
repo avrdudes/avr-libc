@@ -52,7 +52,7 @@
  */
 ENTRY   __gesf2
 ENTRY   __gtsf2
-	rcall	_U(__fp_cmp)
+	XCALL	_U(__fp_cmp)
 	brcc	1f
 	ldi	ret_lo, -1
 1:	ret

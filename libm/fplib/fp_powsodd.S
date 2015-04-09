@@ -56,15 +56,15 @@ ENTRY __fp_powsodd
 
 	X_movw	rB0, rA0
 	X_movw	rB2, rA2
-	rcall	_U(__mulsf3)
+	XCALL	_U(__mulsf3)
 
 	pop	ZL
 	pop	ZH
-	rcall	_U(__fp_powser)
+	XCALL	_U(__fp_powser)
 
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
-	rjmp	_U(__mulsf3)
+	XJMP	_U(__mulsf3)
 ENDFUNC

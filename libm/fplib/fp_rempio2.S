@@ -47,11 +47,11 @@
 
 FUNCTION __fp_rempio2
 
-0:	rjmp	_U(__fp_nan)
+0:	XJMP	_U(__fp_nan)
 
 ENTRY __fp_rempio2
   ; split and check finite
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	0b		; only finite numbers are valid
 	clt			; ignore a sign
   ; init division result
@@ -98,7 +98,7 @@ ENTRY __fp_rempio2
 	brpl	4b
 
 5:	sbci	rA3, hhi8((HI40_PIO2<<1) + 0x01000000)	; undo the subi 0x7f
-	rjmp	_U(__fp_mpack_finite)
+	XJMP	_U(__fp_mpack_finite)
 ENDFUNC
 
 #if 0

@@ -90,7 +90,7 @@ ENTRY	__fixunssfdi
 	clr	rB1
 	X_movw	rB2, rB0
   ; split
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	brcs	.L_ovfl		; is not finite
 
 	subi	rA3, 127	; 1.0 exponent field
@@ -147,7 +147,7 @@ ENTRY	__fixunssfdi
 	brne	6b
 .L_sign:
 	brtc	7f
-	rcall	_U(__fp_negdi)
+	XCALL	_U(__fp_negdi)
 7:	clc
 	ret
 

@@ -63,14 +63,14 @@ ENTRY tanh
   ; for small x
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rcall	_U(__fp_powsodd)
+	XCALL	_U(__fp_powsodd)
 	rjmp	2f
   ; exp(-2*fabs(x))
 1:	ori	rA3, 0x80
 	ldi	exp_lo, lo8(1)
 	ldi	exp_hi, hi8(1)
-	rcall	_U(ldexp)	; possible overflow -- no matter
-	rcall	_U(exp)
+	XCALL	_U(ldexp)	; possible overflow -- no matter
+	XCALL	_U(exp)
   ; save result and calculate 1 + exp(-2*fabs(x))
 	push	rA3
 	push	rA2
@@ -80,7 +80,7 @@ ENTRY tanh
 	ldi	rB1,  hi8(FL_P1)
 	ldi	rB2, hlo8(FL_P1)
 	ldi	rB3, hhi8(FL_P1)
-	rcall	_U(__addsf3)
+	XCALL	_U(__addsf3)
   ; save/restore and calculate 1 - exp(-2*fabs(x))
 	pop	rB0
 	pop	rB1
@@ -94,14 +94,14 @@ ENTRY tanh
 	ldi	rA1,  hi8(FL_P1)
 	ldi	rA2, hlo8(FL_P1)
 	ldi	rA3, hhi8(FL_P1)
-	rcall	_U(__subsf3)
+	XCALL	_U(__subsf3)
   ; restore
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
   ; divide
-	rcall	_U(__divsf3)
+	XCALL	_U(__divsf3)
   ; sign
 2:	pop	r0
 	sbrc	r0, 7

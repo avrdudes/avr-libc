@@ -41,7 +41,7 @@
  */
 
 ENTRY isnan
-	rcall	_U(__fp_splitA)
+	XCALL	_U(__fp_splitA)
 	ldi	r24, 0
 	ldi	r25, 0
 	breq	1f		; Z = 1 for Normal or Inf

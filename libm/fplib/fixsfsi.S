@@ -49,10 +49,10 @@
  */
 
 ENTRY __fixsfsi
-	rcall	_U(__fixunssfsi)
+	XCALL	_U(__fixunssfsi)
 	set
 	cpse	rAE, r1			; error flag
-	rjmp	_U(__fp_szero)		; return 0x80000000
+	XJMP	_U(__fp_szero)		; return 0x80000000
 	ret
 ENDFUNC
 

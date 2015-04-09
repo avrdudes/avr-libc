@@ -55,7 +55,7 @@ ENTRY tan
 	push	rsign
 	mov	rsign, rA3
   ; fmod by Pi/2
-	rcall	_U(__fp_rempio2)
+	XCALL	_U(__fp_rempio2)
   ; save perion number
 	lsr	ZL
 	ror	rsign
@@ -81,16 +81,16 @@ ENTRY tan
 	ldi	rBE, LO40_PIO2
 	ldi	rB2, hlo8(HI40_PIO2)
 	ori	rA3, 0x80
-	rcall	_U(__addsf3x)
-	rcall	_U(__fp_round)
+	XCALL	_U(__addsf3x)
+	XCALL	_U(__fp_round)
   ; calculate tan(A) for  0 <= A <= Pi/4
 1:	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
-	rcall	_U(__fp_powsodd)
+	XCALL	_U(__fp_powsodd)
   ; correct result
 	lsl	rsign
 	brvs	2f
-	rcall	_U(inverse)
+	XCALL	_U(inverse)
 2:	lsl	rsign
 	brvc	3f
 	subi	rA3, 0x80

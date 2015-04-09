@@ -1,3 +1,67 @@
+2015-04-08  Martin Nowak <code@dawg.eu>
+            Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #33698: Explicit use of RJMP/RCALL can cause "relocation truncated
+	to fit: R_AVR_13_PCREL" linker error
+	* common/macros.inc: Use __AVR_HAVE_JMP_CALL__ instead of __AVR_MEGA__
+	to define XJMP/XCALL macros.
+	* libm/fplib/asmdef.h: Define XJMP and XCALL with rjmp/rcall or jmp/call
+	based on jmp/call instruction availability.
+	* libc/stdlib/ctype.S: Use XJMP/XCALL instead of explicit rjmp/rcall for
+	external functions.
+	* libm/fplib/acos.S: Ditto.
+	* libm/fplib/addsf3.S: Ditto.
+	* libm/fplib/addsf3x.S: Ditto.
+	* libm/fplib/asin.S: Ditto.
+	* libm/fplib/atan.S: Ditto.
+	* libm/fplib/atan2.S: Ditto.
+	* libm/fplib/cbrt.S: Ditto.
+	* libm/fplib/ceil.S: Ditto.
+	* libm/fplib/cmpsf2.S: Ditto.
+	* libm/fplib/cos.S: Ditto.
+	* libm/fplib/cosh.S: Ditto.
+	* libm/fplib/divsf3.S: Ditto.
+	* libm/fplib/divsf3x.S: Ditto.
+	* libm/fplib/exp.S: Ditto.
+	* libm/fplib/fdim.S: Ditto.
+	* libm/fplib/fixsfdi.S: Ditto.
+	* libm/fplib/fixsfsi.S: Ditto.
+	* libm/fplib/fixunssfsi.S: Ditto.
+	* libm/fplib/floatdisf.S: Ditto.
+	* libm/fplib/floor.S: Ditto.
+	* libm/fplib/fma.S: Ditto.
+	* libm/fplib/fmod.S: Ditto.
+	* libm/fplib/fp_arccos.S: Ditto.
+	* libm/fplib/fp_powser.S: Ditto.
+	* libm/fplib/fp_powsodd.S: Ditto.
+	* libm/fplib/fp_rempio2.S: Ditto.
+	* libm/fplib/fp_sinus.S: Ditto.
+	* libm/fplib/fp_trunc.S: Ditto.
+	* libm/fplib/frexp.S: Ditto.
+	* libm/fplib/gesf2.S: Ditto.
+	* libm/fplib/hypot.S: Ditto.
+	* libm/fplib/inverse.S: Ditto.
+	* libm/fplib/isinf.S: Ditto.
+	* libm/fplib/isnan.S: Ditto.
+	* libm/fplib/ldexp.S: Ditto.
+	* libm/fplib/log.S: Ditto.
+	* libm/fplib/log10.S: Ditto.
+	* libm/fplib/lrint.S: Ditto.
+	* libm/fplib/lround.S: Ditto.
+	* libm/fplib/modf.S: Ditto.
+	* libm/fplib/mulsf3.S: Ditto.
+	* libm/fplib/mulsf3x.S: Ditto.
+	* libm/fplib/pow.S: Ditto.
+	* libm/fplib/round.S: Ditto.
+	* libm/fplib/sin.S: Ditto.
+	* libm/fplib/sinh.S: Ditto.
+	* libm/fplib/sqrt.S: Ditto.
+	* libm/fplib/square.S: Ditto.
+	* libm/fplib/tan.S: Ditto.
+	* libm/fplib/tanh.S: Ditto.
+	* libm/fplib/trunc.S: Ditto.
+	* libm/fplib/unordsf2.S: Ditto.
+	 
 2015-03-18  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
 	bug #44514: Wrong build option '-mtiny-stack' instead of '-msp8'
