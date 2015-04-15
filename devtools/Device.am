@@ -58,8 +58,8 @@ avrlibdir = $(__install_dir)
 
 noinst_LIBRARIES = libcrt.a
 nodist_libcrt_a_SOURCES = gcrt1.S
-avr_LIBRARIES = libdev.a
-libdev_a_SOURCES = $(eeprom_asm_sources)
+avr_LIBRARIES = lib<<dev>>.a
+lib<<dev>>_a_SOURCES = $(eeprom_asm_sources)
 
 avr_DATA = $(AVR_TARGET_CRT)
 

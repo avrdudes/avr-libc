@@ -1,3 +1,17 @@
+2015-04-15  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #44574: Place device-specific libraries in their multilib directory.
+	* configure.ac (AC_CONFIG_FILES): Replace dev directory with architecture
+	directory where device specific lib (lib<device>.a) and startup object
+	file (crt<device>.o) to be installed.
+	* devtools/Devices.am (avr_LIBRARIES): Change device library name to
+	lib<device>.a.
+	* devtools/gen-avr-lib-tree.sh (AVR12_DEV_INFO): Remove tiny stack devices
+	as they are part of AVR12TS_DEV_INFO.
+	(AVR25_DEV_INFO): Ditto.
+	Change startup object file name to crt<device>.o and install location to
+	multilib (architecture) directory.
+
 2015-04-08  Martin Nowak <code@dawg.eu>
             Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 

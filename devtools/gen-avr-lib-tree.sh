@@ -58,18 +58,11 @@ attiny11:crttn11.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny12:crttn12.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny15:crttn15.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny28:crttn28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90s2333:crts2333.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90s2343:crts2343.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90s4433:crts4433.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s4414:crts4414.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s4434:crts4434.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s8515:crts8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s8535:crts8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 AVR12TS_DEV_INFO="\
@@ -85,15 +78,6 @@ attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS}\
 AVR25_DEV_INFO="\
 at86rf401:crt86401.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 ata5272:crta5272.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny13a:crttn13a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny2313a:crttn2313a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny24:crttn24.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny24a:crttn24a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny25:crttn25.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny261:crttn261.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny261a:crttn261a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny4313:crttn4313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny43u:crttn43u.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny44:crttn44.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -404,8 +388,6 @@ cd avr/lib || exit 1
 IFS=';'
 ARH_SUBDIRS=""
 
-DEV_SUBDIRS=""
-
 for ath_lib in $AVR_ARH_INFO
 do
 	arh=`echo $ath_lib | cut -d ':' -f 1`
@@ -434,47 +416,46 @@ do
 	# Install directory for sed substitution, the '/' character is masked.
 	inst_dir_masked=`echo $install_dir | sed 's/\\//\\\\\\//'`
 
+    # In build tree.
+    subdir=${arh}${sublib:+/}${sublib}
+    echo "  avr/lib/$subdir/"
+
+    # The first record of each arch must be sublib-free.
+    test -d $subdir || mkdir $subdir
+    cd $subdir || exit 1
+
+    DEV_SUBDIRS=""
+
 	eval DEV_INFO=\"\$\{$dev_info\}\"
 
 	for dev_crt in $DEV_INFO
 	do
 		dev=`echo $dev_crt | cut -d ':' -f 1`
-		crt=crt1.o
+		crt=crt`echo $dev_crt | cut -d ':' -f 1`.o
 		crt_defs=`echo $dev_crt | cut -d ':' -f 3`
 		crt_cflags=`echo $dev_crt | cut -d ':' -f 4`
 		crt_asflags=`echo $dev_crt | cut -d ':' -f 5`
 
-		dev_inst_dir_masked="dev\\/$dev"
+		echo "  avr/lib/$subdir/$dev"
 
-		echo "  avr/lib/dev/$dev"
+		test -d $dev || mkdir $dev
 
-		test -d dev || mkdir dev
-		test -d dev/$dev || mkdir dev/$dev
-
-		cat $top_dir/devtools/Device.am > dev/$dev/Makefile.am
+		cat $top_dir/devtools/Device.am > $dev/Makefile.am
 
 		sed -e "s/<<dev>>/$dev/g" \
 		    -e "s/<<crt>>/$crt/g" \
 		    -e "s/<<crt_defs>>/$crt_defs/g" \
 		    -e "s/<<crt_cflags>>/$crt_cflags/g" \
 		    -e "s/<<crt_asflags>>/$crt_asflags/g"  \
-		    -e "s/<<install_dir>>/$dev_inst_dir_masked/g" dev/$dev/Makefile.am \
-		    > dev/$dev/tempfile && mv -f dev/$dev/tempfile dev/$dev/Makefile.am
+		    -e "s/<<install_dir>>/$inst_dir_masked/g" $dev/Makefile.am \
+		    > $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
 
-		DEV_SUBDIRS="$DEV_SUBDIRS dev/$dev"
+		DEV_SUBDIRS="$DEV_SUBDIRS $dev"
 	done
-
-	# In build tree.
-	subdir=${arh}${sublib:+/}${sublib}
-	echo "  avr/lib/$subdir/"
-
-	# The first record of each arch must be sublib-free.
-	test -d $subdir || mkdir $subdir
-	cd $subdir || exit 1
 
 	cat $top_dir/devtools/Architecture.am > Makefile.am
 
-	sed -e "s/<<dev_subdirs>>//g" \
+	sed -e "s/<<dev_subdirs>>/$DEV_SUBDIRS/g" \
 	    -e "s/<<arh>>/$arh/g" \
 	    -e "s/<<lib_defs>>/$lib_defs/g" \
 	    -e "s/<<lib_cflags>>/$lib_cflags/g" \
@@ -515,7 +496,7 @@ done
 
 cat $top_dir/devtools/Lib.am > Makefile.am
 
-sed -e "s/<<arh_subdirs>>/`echo $ARH_SUBDIRS $DEV_SUBDIRS | sed 's/\\//\\\\\\//g'`/g" \
+sed -e "s/<<arh_subdirs>>/`echo $ARH_SUBDIRS | sed 's/\\//\\\\\\//g'`/g" \
     Makefile.am > tempfile && mv -f tempfile Makefile.am
 
 cd ..
