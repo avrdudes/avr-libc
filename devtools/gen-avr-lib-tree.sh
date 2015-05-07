@@ -431,7 +431,7 @@ do
 	for dev_crt in $DEV_INFO
 	do
 		dev=`echo $dev_crt | cut -d ':' -f 1`
-		crt=crt`echo $dev_crt | cut -d ':' -f 1`.o
+		crt=`echo $dev_crt | cut -d ':' -f 2`
 		crt_defs=`echo $dev_crt | cut -d ':' -f 3`
 		crt_cflags=`echo $dev_crt | cut -d ':' -f 4`
 		crt_asflags=`echo $dev_crt | cut -d ':' -f 5`

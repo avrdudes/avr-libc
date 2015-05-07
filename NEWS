@@ -9,6 +9,7 @@
   [#44140] wdt_disable() macro clobbers prescaller bits 
   [#44515] Wrong build option '-mtiny-stack' instead of '-msp8'
   [#44574] Place device-specific libraries in their multilib directory
+  [#44869] trunk doesn't work with gcc 5.1.0-RC-20150412
   [no-id] TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc in some Xmega
           header files
 

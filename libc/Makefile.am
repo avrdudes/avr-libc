@@ -29,5 +29,11 @@
 # $Id$
 #
 
-SUBDIRS = stdlib pmstring string misc stdio time
-DIST_SUBDIRS = stdlib pmstring string misc stdio time
+# do not include misc (eeprom) in libc if device library enabled
+if HAS_DEV_LIB
+MISC=
+else
+MISC=misc
+endif
+SUBDIRS = stdlib pmstring string ${MISC} stdio time
+DIST_SUBDIRS = stdlib pmstring string ${MISC} stdio time

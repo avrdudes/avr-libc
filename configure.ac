@@ -170,6 +170,25 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 
+dnl Check if avr-gcc >= 5.1.0 as they expect device library
+GCC_VER=`${CC} -dumpversion`
+AS_VERSION_COMPARE(${GCC_VER},"5.1.0",[DEV_LIB="no"],[DEV_LIB="yes"],[DEV_LIB="yes"])
+AM_CONDITIONAL(HAS_GCC_5_1, test "x${GCC_VER}" = "x5.1.0")
+
+dnl Enable device library when specified. If not specified and
+dnl gcc expects (e.g. >= 5) device lib then enable device library.
+AC_ARG_ENABLE(device-lib,
+[  --enable-device-lib     build separate device library],
+[enable_device_lib=true],
+[case "${DEV_LIB}" in
+  yes) enable_device_lib=true
+       AC_MSG_NOTICE(Enabled device library) ;;
+  *) ;;
+ esac])
+
+dnl define HAS_DEV_LIB if device library enabled
+AM_CONDITIONAL(HAS_DEV_LIB, [test x$enable_device_lib = xtrue])
+
 dnl TODO: Check for various tools used to build the documentation. If anything
 dnl is missing, don't build the docs by default.
 

@@ -29,15 +29,31 @@
 #
 
 AVR_TARGET          = <<dev>>
+if HAS_DEV_LIB
+if HAS_GCC_5_1
+# avr-gcc 5.1.0 expects crt file as crt1.o and 
+# device library in dev directory
+AVR_TARGET_CRT      = crt1.o
+AVR_INSTALL_DIR     = dev/<<dev>>
+else
+# avr-gcc > 5.1.0 expects crt file as crt<device name>.o and
+# device library in multi-lib directory itself
+AVR_TARGET_CRT      = crt<<dev>>.o
+AVR_INSTALL_DIR     = <<install_dir>>
+endif
+else
 AVR_TARGET_CRT      = <<crt>>
+AVR_INSTALL_DIR     = <<install_dir>>
+endif
 AVR_TARGET_DEFS     = <<crt_defs>>
 AVR_TARGET_CFLAGS   = <<crt_cflags>>
 AVR_TARGET_ASFLAGS  = <<crt_asflags>>
-AVR_INSTALL_DIR     = <<install_dir>>
 
 VPATH = $(top_srcdir)/crt1:$(top_srcdir)/libc/misc
 
+if HAS_DEV_LIB
 include $(top_srcdir)/libc/misc/Rules.am
+endif
 
 if HAS_<<dev>>
 
@@ -58,8 +74,18 @@ avrlibdir = $(__install_dir)
 
 noinst_LIBRARIES = libcrt.a
 nodist_libcrt_a_SOURCES = gcrt1.S
+
+if HAS_DEV_LIB
+if HAS_GCC_5_1
+# avr-gcc 5.1.0 expects device library as libdev.a
+avr_LIBRARIES = libdev.a
+libdev_a_SOURCES = $(eeprom_asm_sources)
+else
+# avr-gcc > 5.1.0 expects device library as lib<device name>.a
 avr_LIBRARIES = lib<<dev>>.a
 lib<<dev>>_a_SOURCES = $(eeprom_asm_sources)
+endif
+endif
 
 avr_DATA = $(AVR_TARGET_CRT)
 

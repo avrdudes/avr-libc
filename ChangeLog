@@ -1,3 +1,19 @@
+2015-05-07  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #44869: trunk doesn't work with gcc 5.1.0-RC-20150412
+	* configure.ac (HAS_GCC_5_1): Define if avr-gcc version is 5.1.0
+	(--enable-device-lib): Add configure option.
+	(HAS_DEV_LIB): Define if enabled by --enable-device-lib or avr-gcc
+	version is >= 5.1.0.
+	* devtools/Device.am (AVR_TARGET_CRT, AVR_INSTALL_DIR): Define
+	based on avr-gcc version.
+	(avr_LIBRARIES): Likewise.
+	* devtools/gen-avr-lib-tree.sh: Use old crt name.
+	* libc/Makefile.am: Include misc sub-directory if device library is
+	not enabled.
+	* libc/misc/Rules.am: Include eeprom function name mangling if device
+	library is not enabled.
+
 2015-04-15  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	bug #44574: Place device-specific libraries in their multilib directory.
