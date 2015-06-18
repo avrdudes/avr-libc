@@ -6,6 +6,7 @@
            R_AVR_13_PCREL" linker error
   [#34719] Check for right build compiler
   [#43044] memory sections require __attribute__ ((used))
+  [#43828] wdt.h: Wrong inline assembler arguments
   [#44140] wdt_disable() macro clobbers prescaller bits 
   [#44515] Wrong build option '-mtiny-stack' instead of '-msp8'
   [#44574] Place device-specific libraries in their multilib directory

@@ -1,3 +1,10 @@
+2015-06-18  Georg-Johann Lay <avr@gjlay.de>
+            Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #43828: wdt.h: Wrong inline assembler arguments
+	* include/avr/wdt.h (wdt_enable/wdt_disable): Update constraints for
+	inline asm operands
+
 2015-05-07  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	bug #44869: trunk doesn't work with gcc 5.1.0-RC-20150412
