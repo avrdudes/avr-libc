@@ -5,6 +5,7 @@
   [#33698] Explicit use of RJMP/RCALL can cause "relocation truncated to fit:
            R_AVR_13_PCREL" linker error
   [#34719] Check for right build compiler
+  [#43011] Bug in struct definition of __reg_UCSR1C and __reg_UCSR0C in iom128rfa1.h
   [#43044] memory sections require __attribute__ ((used))
   [#43828] wdt.h: Wrong inline assembler arguments
   [#44140] wdt_disable() macro clobbers prescaller bits 

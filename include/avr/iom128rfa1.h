@@ -2508,12 +2508,15 @@ struct __reg_UCSR0B {
 struct __reg_UCSR0C {
         unsigned int ucpol0 : 1;	/* Clock Polarity */
         unsigned int ucsz0 : 2;	/* Character Size */
-        unsigned int ucpha0 : 1;	/* Clock Phase */
-        unsigned int udord0 : 1;	/* Data Order */
         unsigned int usbs0 : 1;	/* Stop Bit Select */
         unsigned int upm0 : 2;	/* Parity Mode */
         unsigned int umsel0 : 2;	/* USART Mode Select */
 };
+/* NOTE: UCSR0C in SPI mode have only lower three bits.
+  UCORD1 Data Order
+  UCPHA1 Clock Phase
+  UCPOL1 Clock Polarity
+*/
 
 #define UCSR0C_struct _SFR_MEM8_STRUCT(0xc2, struct __reg_UCSR0C)
 
@@ -2523,9 +2526,7 @@ struct __reg_UCSR0C {
 
 #define UCPOL0                          0
 #define UCPHA0                          1
-#define UCPHA0                          1
 #define UCSZ00                          1
-#define UDORD0                          2
 #define UDORD0                          2
 #define UCSZ01                          2
 #define USBS0                           3
@@ -2625,13 +2626,15 @@ struct __reg_UCSR1B {
 struct __reg_UCSR1C {
         unsigned int ucpol1 : 1;	/* Clock Polarity */
         unsigned int ucsz1 : 2;	/* Character Size */
-        unsigned int ucpha1 : 1;	/* Clock Phase */
-        unsigned int udord1 : 1;	/* Data Order */
         unsigned int usbs1 : 1;	/* Stop Bit Select */
         unsigned int upm1 : 2;	/* Parity Mode */
         unsigned int umsel1 : 2;	/* USART Mode Select */
 };
-
+/* NOTE: UCSR1C in SPI mode have only lower three bits.
+  UCORD1 Data Order
+  UCPHA1 Clock Phase
+  UCPOL1 Clock Polarity
+*/
 #define UCSR1C_struct _SFR_MEM8_STRUCT(0xca, struct __reg_UCSR1C)
 
 #endif /* __ASSEMBLER__ */
@@ -2640,9 +2643,7 @@ struct __reg_UCSR1C {
 
 #define UCPOL1                          0
 #define UCPHA1                          1
-#define UCPHA1                          1
 #define UCSZ10                          1
-#define UDORD1                          2
 #define UDORD1                          2
 #define UCSZ11                          2
 #define USBS1                           3

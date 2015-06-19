@@ -1,3 +1,11 @@
+2015-06-19  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #43011: Bug in struct definition of __reg_UCSR1C and 
+	__reg_UCSR0C in iom128rfa1.h
+	* include/avr/iom128rfa1.h (struct __reg_UCSR0C, struct __reg_UCSR1C):
+	Remove SPI mode only bitfields.
+	(UCPHA0,UDORD0,UCPHA1,UDORD1): Remove duplicates.
+
 2015-06-18  Georg-Johann Lay <avr@gjlay.de>
             Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
