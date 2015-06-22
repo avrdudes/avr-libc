@@ -586,6 +586,7 @@ typedef struct CRC_struct
 {
     register8_t CTRL;  /* CRC Control Register */
     register8_t STATUS;  /* CRC Status Register */
+    register8_t reserved_0x02;
     register8_t DATAIN;  /* CRC Data Input */
     register8_t CHECKSUM0;  /* CRC Checksum byte 0 */
     register8_t CHECKSUM1;  /* CRC Checksum byte 1 */
@@ -2105,6 +2106,7 @@ typedef struct PORT_struct
     register8_t INT1MASK;  /* Port Interrupt 1 Mask */
     register8_t INTFLAGS;  /* Interrupt Flag Register */
     register8_t reserved_0x0D;
+    register8_t REMAP;  /* I/O Port Pin Remap Register */
     register8_t reserved_0x0F;
     register8_t PIN0CTRL;  /* Pin 0 Control Register */
     register8_t PIN1CTRL;  /* Pin 1 Control Register */
@@ -7451,10 +7453,10 @@ IO Module Instances. Mapped to memory.
 #define AES_INT_vect      _VECTOR(31)  /* AES Interrupt */
 
 /* NVM interrupt vectors */
-#define NVM_SPM_vect_num  32
-#define NVM_SPM_vect      _VECTOR(32)  /* SPM Interrupt */
-#define NVM_EE_vect_num  33
-#define NVM_EE_vect      _VECTOR(33)  /* EE Interrupt */
+#define NVM_EE_vect_num  32
+#define NVM_EE_vect      _VECTOR(32)  /* EE Interrupt */
+#define NVM_SPM_vect_num  33
+#define NVM_SPM_vect      _VECTOR(33)  /* SPM Interrupt */
 
 /* PORTB interrupt vectors */
 #define PORTB_INT0_vect_num  34
@@ -7698,13 +7700,12 @@ IO Module Instances. Mapped to memory.
 
 /* USB interrupt vectors */
 #define USB_BUSEVENT_vect_num  125
-#define USB_BUSEVENT_vect      _VECTOR(125)  /* SOF, suspend, resume, reset bus event interrupts and crc, underflow, overflow and stall error interrupts */
-#define USB_TRNCOMPL_vect_num  127
-#define USB_TRNCOMPL_vect      _VECTOR(127)  /* Transaction complete interrupt */
-
+#define USB_BUSEVENT_vect      _VECTOR(125)  /* SOF, suspend, resume, reset bus event interrupts, crc, underflow, overflow and stall error interrupts */
+#define USB_TRNCOMPL_vect_num  126
+#define USB_TRNCOMPL_vect      _VECTOR(126)  /* Transaction complete interrupt */
 
 #define _VECTOR_SIZE 4 /* Size of individual vector. */
-#define _VECTORS_SIZE (128 * _VECTOR_SIZE)
+#define _VECTORS_SIZE (127 * _VECTOR_SIZE)
 
 
 /* ========== Constants ========== */

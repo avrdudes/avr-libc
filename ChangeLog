@@ -1,3 +1,15 @@
+2015-06-22  Jethro <jethro.donaldson@gmail.com>
+            Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #44977: Incorrect PORT_t and CRC_t definitions for ATxmega64A1U
+	and 128A1U
+	bug #44279: incorrect USB_TRNCOMPL_vect_num in iox64a1u.h, iox128a1u.h
+	* include/avr/iox64a1u.h (CRC_t): Add reserved slot as member.
+	(PORT_t): Add member for REMAP.
+	(NVM_EE_vect, NVM_SPM_vect,USB_TRNCOMPL_vect): Update vector number.
+	(_VECTORS_SIZE): Update size.
+	* include/avr/iox128a1u.h: Likewise.
+
 2015-06-19  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	bug #43011: Bug in struct definition of __reg_UCSR1C and 
