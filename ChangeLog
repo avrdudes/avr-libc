@@ -1,3 +1,10 @@
+2015-07-22  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	bug #45539: iom32u4.h defines reserved IO address (TIMSK2 (0x70),
+	TIMSK5 (0x73) etc)
+	* include/avr/iom32u4.h: Remove defines for reserved IO
+	register addresses.
+
 2015-06-22  Jethro <jethro.donaldson@gmail.com>
             Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 

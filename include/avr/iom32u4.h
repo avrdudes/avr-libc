@@ -439,6 +439,8 @@
 #define CLKPS3 3
 #define CLKPCE 7
 
+/* Reserved [0x62..0x63] */
+
 #define PRR0 _SFR_MEM8(0x64)
 #define PRADC 0
 #define PRUSART0 1
@@ -513,9 +515,7 @@
 #define PCINT6 6
 #define PCINT7 7
 
-#define PCMSK1 _SFR_MEM8(0x6C)
-
-#define PCMSK2 _SFR_MEM8(0x6D)
+/* Reserved [0x6C..0x6D] */
 
 #define TIMSK0 _SFR_MEM8(0x6E)
 #define TOIE0 0
@@ -529,10 +529,7 @@
 #define OCIE1C 3
 #define ICIE1 5
 
-#define TIMSK2 _SFR_MEM8(0x70)
-#define TOIE2 0
-#define OCIE2A 1
-#define OCIE2B 2
+/* Reserved [0x70] */
 
 #define TIMSK3 _SFR_MEM8(0x71)
 #define TOIE3 0
@@ -547,7 +544,7 @@
 #define OCIE4A 6
 #define OCIE4D 7
 
-#define TIMSK5 _SFR_MEM8(0x73)
+/* Reserved [0x73..0x77] */
 
 #ifndef __ASSEMBLER__
 #define ADC _SFR_MEM16(0x78)
@@ -648,6 +645,8 @@
 #define FOC1C 5 
 #define FOC1B 6 
 #define FOC1A 7 
+
+/* Reserved [0x83] */
 
 #define TCNT1 _SFR_MEM16(0x84)
 
@@ -759,6 +758,8 @@
 #define OCR1CH6 6
 #define OCR1CH7 7
 
+/* Reserved [0x8E..0x8F] */
+
 #define TCCR3A _SFR_MEM8(0x90)
 #define WGM30 0
 #define WGM31 1
@@ -782,6 +783,8 @@
 #define FOC3C 5
 #define FOC3B 6
 #define FOC3A 7
+
+/* Reserved [0x93] */
 
 #define TCNT3 _SFR_MEM16(0x94)
 
@@ -893,44 +896,7 @@
 #define OCR3CH6 6
 #define OCR3CH7 7
 
-#define UHCON _SFR_MEM8(0x9E)
-
-#define UHINT _SFR_MEM8(0x9F)
-
-#define UHIEN _SFR_MEM8(0xA0)
-
-#define UHADDR _SFR_MEM8(0xA1)
-
-#define UHFNUM _SFR_MEM16(0xA2)
-
-#define UHFNUML _SFR_MEM8(0xA2)
-
-#define UHFNUMH _SFR_MEM8(0xA3)
-
-#define UHFLEN _SFR_MEM8(0xA4)
-
-#define UPINRQX _SFR_MEM8(0xA5)
-
-#define UPINTX _SFR_MEM8(0xA6)
-
-#define UPNUM _SFR_MEM8(0xA7)
-
-#define UPRST _SFR_MEM8(0xA8)
-
-#define UPCONX _SFR_MEM8(0xA9)
-
-#define UPCFG0X _SFR_MEM8(0xAA)
-
-#define UPCFG1X _SFR_MEM8(0xAB)
-
-#define UPSTAX _SFR_MEM8(0xAC)
-
-#define UPCFG2X _SFR_MEM8(0xAD)
-
-#define UPIENX _SFR_MEM8(0xAE)
-
-#define UPDATX _SFR_MEM8(0xAF)
-
+/* Reserved [0x9E..0xB7] */
 
 #define TWBR _SFR_MEM8(0xB8)
 #define TWBR0 0
@@ -1170,6 +1136,8 @@
 #define OCR4D6 6
 #define OCR4D7 7
 
+/* Reserved [0xD3] */
+
 #define DT4 _SFR_MEM8(0xD4)
 #define DT4L0 0
 #define DT4L1 1
@@ -1180,27 +1148,25 @@
 #define DT4L6 6
 #define DT4L7 7
 
-#define UHWCON _SFR_MEM8(0xD7)
-#define UVREGE 0
+/* Reserved [0xD5..0xD6] */
 
-#define USBCON _SFR_MEM8(0xD8)
-#define VBUSTE 0
+#define UHWCON  _SFR_MEM8(0xD7)
+#define UVREGE  0
+
+#define USBCON  _SFR_MEM8(0xD8)
+#define VBUSTE  0
 #define OTGPADE 4
-#define FRZCLK 5
-#define USBE 7
+#define FRZCLK  5
+#define USBE    7
 
-#define USBSTA _SFR_MEM8(0xD9)
-#define VBUS 0
-#define SPEED 3
+#define USBSTA  _SFR_MEM8(0xD9)
+#define VBUS    0
+#define SPEED   3
 
-#define USBINT _SFR_MEM8(0xDA)
-#define VBUSTI 0
+#define USBINT  _SFR_MEM8(0xDA)
+#define VBUSTI  0
 
-#define OTGCON _SFR_MEM8(0xDD)
-
-#define OTGIEN _SFR_MEM8(0xDE)
-
-#define OTGINT _SFR_MEM8(0xDF)
+/* Reserved [0xDB..0xDF] */
 
 #define UDCON _SFR_MEM8(0xE0)
 #define DETACH 0
@@ -1254,7 +1220,7 @@
 #define UDMFN _SFR_MEM8(0xE6)
 #define FNCERR 4
 
-#define UDTST _SFR_MEM8(0xE7)
+/* Reserved [0xE7] */
 
 #define UEINTX _SFR_MEM8(0xE8)
 #define TXINI 0
@@ -1355,15 +1321,6 @@
 #define EPINT5 5
 #define EPINT6 6
 
-#define UPERRX _SFR_MEM8(0xF5)
-
-#define UPBCLX _SFR_MEM8(0xF6)
-
-#define UPBCHX _SFR_MEM8(0xF7)
-
-#define UPINT _SFR_MEM8(0xF8)
-
-#define OTGTCON _SFR_MEM8(0xF9)
 
 
 
