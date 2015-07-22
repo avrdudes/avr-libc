@@ -15,6 +15,7 @@
   [#44869] trunk doesn't work with gcc 5.1.0-RC-20150412
   [#44977] Incorrect PORT_t and CRC_t definitions for ATxmega64A1U and 128A1U
   [#45539] iom32u4.h defines reserved IO address (TIMSK2 (0x70), TIMSK5 (0x73) etc)
+  [#45551] Power-save mode not supported for ATtiny167
   [no-id] TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc in some Xmega
           header files
 

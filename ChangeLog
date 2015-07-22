@@ -1,5 +1,11 @@
 2015-07-22  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
+	bug #45551: Power-save mode not supported for ATtiny167
+	* include/avr/iotn167.h (SLEEP_MODE_PWR_SAVE): Define for power save
+	sleep mode.
+
+2015-07-22  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
 	bug #45539: iom32u4.h defines reserved IO address (TIMSK2 (0x70),
 	TIMSK5 (0x73) etc)
 	* include/avr/iom32u4.h: Remove defines for reserved IO
