@@ -1,3 +1,7 @@
+2015-07-29  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+    * include/avr/wdt.h: Fix typo in documentation.
+
 2015-07-22  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	bug #45551: Power-save mode not supported for ATtiny167

@@ -508,37 +508,37 @@ void wdt_disable (void)
 #define WDTO_15MS   0
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS */
+    See \c WDTO_15MS */
 #define WDTO_30MS   1
 
-/** \ingroup avr_watchdog See
-    \c WDT0_15MS */
+/** \ingroup avr_watchdog
+    See \c WDTO_15MS */
 #define WDTO_60MS   2
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS */
+    See \c WDTO_15MS */
 #define WDTO_120MS  3
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS */
+    See \c WDTO_15MS */
 #define WDTO_250MS  4
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS */
+    See \c WDTO_15MS */
 #define WDTO_500MS  5
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS */
+    See \c WDTO_15MS */
 #define WDTO_1S     6
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS */
+    See \c WDTO_15MS */
 #define WDTO_2S     7
 
 #if defined(__DOXYGEN__) || defined(WDP3)
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS
+    See \c WDTO_15MS
     Note: This is only available on the 
     ATtiny2313, 
     ATtiny24, ATtiny44, ATtiny84, ATtiny84A,
@@ -559,7 +559,7 @@ void wdt_disable (void)
 #define WDTO_4S     8
 
 /** \ingroup avr_watchdog
-    See \c WDT0_15MS
+    See \c WDTO_15MS
     Note: This is only available on the 
     ATtiny2313, 
     ATtiny24, ATtiny44, ATtiny84, ATtiny84A,
