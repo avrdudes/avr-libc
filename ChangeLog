@@ -1,3 +1,23 @@
+2015-08-06  Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
+
+	* include/avr/iox32a4.h: Renamed member LOCKBITS to LOCK_BITS.
+	(ADC_CH_MUXPOS_enum): Add missed pinmux positions.
+	* include/avr/iox32d4.h: Likewise.
+	* include/avr/iox16a4.h: Likewise.
+	* include/avr/iox16d4.h: Likewise.
+	(ADC_CH_MUXNEG_enum): correct pinmux values.
+	* include/avr/iox128a1.h: Renamed member LOCKBITS to LOCK_BITS.
+	* include/avr/iox128a3.h: Likewise.
+	* include/avr/iox128d3.h: Likewise.
+	* include/avr/iox192a3.h: Likewise.
+	* include/avr/iox192d3.h: Likewise.
+	* include/avr/iox256a3.h: Likewise.
+	* include/avr/iox256a3b.h: Likewise.
+	* include/avr/iox256d3.h: Likewise.
+	* include/avr/iox64a1.h: Likewise.
+	* include/avr/iox64a3.h: Likewise.
+	* include/avr/iox64d3.h: Likewise.
+
 2015-07-29  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
     * include/avr/wdt.h: Fix typo in documentation.

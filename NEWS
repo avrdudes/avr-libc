@@ -18,6 +18,9 @@
   [#45551] Power-save mode not supported for ATtiny167
   [no-id] TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc in some Xmega
           header files
+  [no-id] LOCKBITS renamed to LOCK_BITS in Xmega header files as LOCKBITS
+          clashes with definition in lock.h. Added missed defines to ADC_CH_MUXPOS_enum.
+          Corrected pinmux values in ADC_CH_MUXNEG_enum. 
 
 * New devices supported:
 

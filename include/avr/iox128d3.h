@@ -254,7 +254,6 @@ typedef enum SLEEP_SMODE_enum
 #define SLEEP_MODE_STANDBY (0x06<<1)
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
 
-
 /*
 --------------------------------------------------------------------------
 OSC - Oscillator
@@ -654,7 +653,7 @@ typedef struct NVM_struct
     register8_t INTCTRL;  /* Interrupt Control */
     register8_t reserved_0x0E;
     register8_t STATUS;  /* Status */
-    register8_t LOCKBITS;  /* Lock Bits */
+    register8_t LOCK_BITS;  /* Lock Bits */
 } NVM_t;
 
 /*

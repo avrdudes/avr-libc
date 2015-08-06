@@ -654,7 +654,7 @@ typedef struct NVM_struct
     register8_t INTCTRL;  /* Interrupt Control */
     register8_t reserved_0x0E;
     register8_t STATUS;  /* Status */
-    register8_t LOCKBITS;  /* Lock Bits */
+    register8_t LOCK_BITS;  /* Lock Bits */
 } NVM_t;
 
 /*
@@ -894,7 +894,6 @@ typedef enum BODLVL_enum
     BODLVL_2V9_gc = (0x02<<0),  /* 2.9 V */
     BODLVL_3V2_gc = (0x01<<0),  /* 3.2 V */
 } BODLVL_t;
-
 
 /*
 --------------------------------------------------------------------------

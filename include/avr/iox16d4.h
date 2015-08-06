@@ -265,7 +265,6 @@ typedef enum SLEEP_SMODE_enum
     SLEEP_SMODE_ESTDBY_gc = (0x07<<1),  /* Extended Standby Mode */
 } SLEEP_SMODE_t;
 
-
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_PWR_DOWN (0x02<<1)
 #define SLEEP_MODE_PWR_SAVE (0x03<<1)
@@ -668,7 +667,7 @@ typedef struct NVM_struct
     register8_t INTCTRL;  /* Interrupt Control */
     register8_t reserved_0x0E;
     register8_t STATUS;  /* Status */
-    register8_t LOCKBITS;  /* Lock Bits */
+    register8_t LOCK_BITS;  /* Lock Bits */
 } NVM_t;
 
 /*
@@ -1077,6 +1076,10 @@ typedef enum ADC_CH_MUXPOS_enum
     ADC_CH_MUXPOS_PIN5_gc = (0x05<<3),  /* Input pin 5 */
     ADC_CH_MUXPOS_PIN6_gc = (0x06<<3),  /* Input pin 6 */
     ADC_CH_MUXPOS_PIN7_gc = (0x07<<3),  /* Input pin 7 */
+	ADC_CH_MUXPOS_PIN8_gc = (0x08<<3),   /* Input pin 8  */
+	ADC_CH_MUXPOS_PIN9_gc = (0x09<<3),   /* Input pin 9  */
+	ADC_CH_MUXPOS_PIN10_gc = (0x10<<3),  /* Input pin 10 */
+	ADC_CH_MUXPOS_PIN11_gc = (0x11<<3),  /* Input pin 11 */
 } ADC_CH_MUXPOS_t;
 
 /* Internal input multiplexer selections */
@@ -1091,14 +1094,14 @@ typedef enum ADC_CH_MUXINT_enum
 /* Negative input multiplexer selection */
 typedef enum ADC_CH_MUXNEG_enum
 {
-    ADC_CH_MUXNEG_PIN0_gc = (0x00<<0),  /* Input pin 0 */
-    ADC_CH_MUXNEG_PIN1_gc = (0x01<<0),  /* Input pin 1 */
-    ADC_CH_MUXNEG_PIN2_gc = (0x02<<0),  /* Input pin 2 */
-    ADC_CH_MUXNEG_PIN3_gc = (0x03<<0),  /* Input pin 3 */
-    ADC_CH_MUXNEG_PIN4_gc = (0x04<<0),  /* Input pin 4 */
-    ADC_CH_MUXNEG_PIN5_gc = (0x05<<0),  /* Input pin 5 */
-    ADC_CH_MUXNEG_PIN6_gc = (0x06<<0),  /* Input pin 6 */
-    ADC_CH_MUXNEG_PIN7_gc = (0x07<<0),  /* Input pin 7 */
+    ADC_CH_MUXNEG_PIN0_gc = (0x00<<0),  /* Input pin 0, INPUTMODE[1:0] = 10 */
+    ADC_CH_MUXNEG_PIN1_gc = (0x01<<0),  /* Input pin 1, INPUTMODE[1:0] = 10 */
+    ADC_CH_MUXNEG_PIN2_gc = (0x02<<0),  /* Input pin 2, INPUTMODE[1:0] = 10 */
+    ADC_CH_MUXNEG_PIN3_gc = (0x03<<0),  /* Input pin 3, INPUTMODE[1:0] = 10 */
+    ADC_CH_MUXNEG_PIN4_gc = (0x00<<0),  /* Input pin 4, INPUTMODE[1:0] = 11 */
+    ADC_CH_MUXNEG_PIN5_gc = (0x01<<0),  /* Input pin 5, INPUTMODE[1:0] = 11 */
+    ADC_CH_MUXNEG_PIN6_gc = (0x02<<0),  /* Input pin 6, INPUTMODE[1:0] = 11 */
+    ADC_CH_MUXNEG_PIN7_gc = (0x03<<0),  /* Input pin 7, INPUTMODE[1:0] = 11 */
 } ADC_CH_MUXNEG_t;
 
 /* Input mode */
