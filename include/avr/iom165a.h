@@ -380,8 +380,6 @@
 #define IVCE    0
 #define IVSEL   1
 #define PUD     4
-#define BODSE   5
-#define BODS    6
 
 /* Reserved [0x36] */
 

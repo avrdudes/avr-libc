@@ -676,8 +676,10 @@
 #define TIMER1_OVF_vect      _VECTOR(8)  /* Timer/Counter1 Overflow */
 #define TIMER0_OVF_vect_num  9
 #define TIMER0_OVF_vect      _VECTOR(9)  /* Timer/Counter0 Overflow */
+#define SPI_STC_vect_num  10
+#define SPI_STC_vect      _VECTOR(10)  /* Serial Transfer Complete */
 #define SPISTC_vect_num  10
-#define SPISTC_vect      _VECTOR(10)  /* Serial Transfer Complete */
+#define SPISTC_vect      _VECTOR(10)  /* Keep for backward-compatibility */
 
 /* The following vectors use an inconsistent (to the ATmega16 etc.)
    naming scheme.  The inconsistent names are preserved here for softwares

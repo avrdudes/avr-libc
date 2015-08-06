@@ -197,15 +197,14 @@
 #define SIGNATURE_1 0x91
 #define SIGNATURE_2 0x02
 
+#define SLEEP_MODE_IDLE         0
+#define SLEEP_MODE_PWR_DOWN     _BV(SM)
+
 
 #endif  /* _AVR_IO2323_H_ */
 
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x91
-
-#define SLEEP_MODE_IDLE         0
-#define SLEEP_MODE_PWR_DOWN     _BV(SM)
-
 #define SIGNATURE_2 0x02
 

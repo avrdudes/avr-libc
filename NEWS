@@ -20,7 +20,8 @@
           header files
   [no-id] LOCKBITS renamed to LOCK_BITS in Xmega header files as LOCKBITS
           clashes with definition in lock.h. Added missed defines to ADC_CH_MUXPOS_enum.
-          Corrected pinmux values in ADC_CH_MUXNEG_enum. 
+          Corrected pinmux values in ADC_CH_MUXNEG_enum.
+  [no-id] Fix typos and incorrect definitions in header files.
 
 * New devices supported:
 

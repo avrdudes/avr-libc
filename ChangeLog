@@ -1,5 +1,19 @@
 2015-08-06  Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
 
+	Fix typos and incorrect defines in header files.
+	* include/avr/io90pwm216.h: corrted typo in comment.
+	* include/avr/iousbxx6_7.h: Add ADHSM bit definition to ADCSRB.
+	* include/avr/iom165a.h: Remove BODSE and BODS.
+	* include/avr/io2323.h: Move sleep mode definitions to correct place.
+	* include/avr/io90pwm316.h: corrected typo in comment.
+	(PIM1): Add pin definitions.
+	* include/avr/iom16a.h: Add SPI_STC_vect. Keep old name for backward
+	compatibility.
+	* include/avr/iom324.h: Remove duplicate sleep mode definitions.
+	* include/avr/iotn861a.h (PWM1X): Define.
+
+2015-08-06  Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
+
 	* include/avr/iox32a4.h: Renamed member LOCKBITS to LOCK_BITS.
 	(ADC_CH_MUXPOS_enum): Add missed pinmux positions.
 	* include/avr/iox32d4.h: Likewise.

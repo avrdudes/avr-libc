@@ -496,6 +496,7 @@
 #define DTPS10 4
 #define DTPS11 5
 #define PSR1 6
+#define PWM1X 7
 
 #define TCCR1A _SFR_IO8(0x30)
 #define PWM1B 0
@@ -977,7 +978,6 @@
 #define PA0_PORT  PORTADC
 #define PA0_PIN   PINADC
 #define PA0_BIT   ADC0
-
 
 #define SLEEP_MODE_IDLE (0x00<<3)
 #define SLEEP_MODE_ADC (0x01<<3)

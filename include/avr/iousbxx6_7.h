@@ -581,6 +581,7 @@
 #define ADPS0   0
 
 #define ADCSRB  _SFR_MEM8(0x7B)
+#define ADHSM  7
 #define ACME    6
 #define ADTS2   2
 #define ADTS1   1
