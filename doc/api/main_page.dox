@@ -323,13 +323,13 @@ compile-time.
 
 \par Wireless AVR devices:
 
--atmega644rfr2
--atmega64rfr2
--atmega128rfa1
--atmega1284rfr2
--atmega128rfr2
--atmega2564rfr2
--atmega256rfr2
+- atmega644rfr2
+- atmega64rfr2
+- atmega128rfa1
+- atmega1284rfr2
+- atmega128rfr2
+- atmega2564rfr2
+- atmega256rfr2
 
 \par Miscellaneous Devices:
 
