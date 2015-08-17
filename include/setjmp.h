@@ -40,17 +40,20 @@ extern "C" {
 /*
    jmp_buf:
 	offset	size	description
-	 0	16	call-saved registers (r2-r17)
-	16	 2	frame pointer (r29:r28)
-	18	 2	stack pointer (SPH:SPL)
-	20	 1	status register (SREG)
-	21	 2/3	return address (PC) (2 bytes used for <=128Kw flash)
-	23/24 = total size
+	 0	16/2	call-saved registers (r2-r17)
+				(AVR_TINY arch has only 2 call saved registers (r18,r19))
+	16/2	 2	frame pointer (r29:r28)
+	18/4	 2	stack pointer (SPH:SPL)
+	20/6	 1	status register (SREG)
+	21/7	 2/3	return address (PC) (2 bytes used for <=128Kw flash)
+	23/24/9 = total size (AVR_TINY arch always has 2 bytes PC)
  */
 
 #if !defined(__DOXYGEN__)
 
-#if	defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
+#if defined(__AVR_TINY__)
+# define _JBLEN  9
+#elif	defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
 # define _JBLEN  24
 #else
 # define _JBLEN  23

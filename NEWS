@@ -35,6 +35,7 @@
   [#8587] Move device specific functions to libdev.a
   [#8590] WDT enable/disable for devices with CCP
   [#8610] Remove eeprom function name mangling
+  [#8716] Enable setjmp/longjmp functions for AVR_TINY architecture
 
 * Other changes:
 

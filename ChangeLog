@@ -1,3 +1,11 @@
+2015-08-17  Praveen Kumar Kaushik
+            Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	patch #8716: Enable setjmp/longjmp functions for AVR_TINY architecture
+	* include/setjmp.h (_JBLEN): Update for AVR_TINY arch conditionally.
+	* libc/stdlib/setjmp.S: Enable setjmp and longjmp for AVR_TINY
+	(setjmp, longjmp): Update call-saved registers for AVR_TINY
+
 2015-08-06  Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
 
 	Fix typos and incorrect defines in header files.

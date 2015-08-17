@@ -29,8 +29,6 @@
 /* $Id$ */
 
 
-#if !defined(__AVR_TINY__)
-
 
 /*
    setjmp.S
@@ -42,12 +40,13 @@
 /*
    jmp_buf:
 	offset	size	description
-	 0	16	call-saved registers (r2-r17)
-	16	 2	frame pointer (r29:r28)
-	18	 2	stack pointer (SPH:SPL)
-	20	 1	status register (SREG)
-	21	 2/3	return address (PC) (2 bytes used for <=128Kw flash)
-	23/24 = total size
+	 0	16/2	call-saved registers (r2-r17)
+				(AVR_TINY arch has only 2 call saved registers (r18,r19))
+	16/2	 2	frame pointer (r29:r28)
+	18/4	 2	stack pointer (SPH:SPL)
+	20/6	 1	status register (SREG)
+	21/7	 2/3	return address (PC) (2 bytes used for <=128Kw flash)
+	23/24/9 = total size (AVR_TINY arch always has 2 bytes PC)
    All multibytes are stored as little-endian.
 
    int setjmp(jmp_buf __jmpb);
@@ -82,7 +81,11 @@
 _U(setjmp):
 	X_movw	XL, jmpb_lo
   ; save call-saved registers and frame pointer
+#if !defined(__AVR_TINY__)
 	.irp	.L_regno, 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,28,29
+#else
+	.irp	.L_regno, 18,19,28,29
+#endif
 	st	X+, r\.L_regno
 	.endr
   ; get return address
@@ -129,7 +132,11 @@ _U(longjmp):
 	cpc	ret_hi, __zero_reg__
 	adc	ret_lo, __zero_reg__
   ; restore call-saved registers and frame pointer
+#if !defined(__AVR_TINY__)
 	.irp	.L_regno, 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,28,29
+#else
+	.irp	.L_regno, 18,19,28,29
+#endif
 	ld	r\.L_regno, X+
 	.endr
   ; restore stack pointer (SP value before the setjmp() call) and SREG
@@ -169,5 +176,3 @@ _U(longjmp):
 	.size	_U(longjmp), . - _U(longjmp)
 
 #endif	/* !__DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */
