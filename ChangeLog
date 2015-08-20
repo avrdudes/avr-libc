@@ -1,3 +1,13 @@
+2015-08-20  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	patch #8718: Enable EEPROM memory map only for devices with 
+	EEPROM Data Memory Mapping Enable bit (EEMAPEN)
+	* libc/misc/eerd_byte.S (eeprom_read_byte): Enable EEPROM map
+	only when NVM_EEMAPEN_bm is defined.
+	* libc/misc/eerd_block.S (eeprom_read_block): Likewise.
+	* libc/misc/eewr_byte.S (eeprom_write_byte): Likewise.
+	* libc/misc/readme_eeprom.txt: Update comments for default EEPROM map.
+
 2015-08-17  Praveen Kumar Kaushik
             Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 

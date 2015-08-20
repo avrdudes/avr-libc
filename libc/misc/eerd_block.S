@@ -61,7 +61,16 @@
 ENTRY eeprom_read_block
 
 #if  __AVR_XMEGA__	/* --------------------------------------------	*/
-
+  
+  ; It has to be noted that for some Xmega parts (Eg. Xmega E family) EEPROM
+  ; is always memory mapped. So it is not required to  enable EEPROM mapping
+  ; explicitly. 
+  ; The presence of NVM_EEMAPEN_bm macro (from the part header file) can be
+  ; checked to find out whether the device supports enabling/disabling of
+  ; EEPROM mapping. Absence of NVM_EEMAPEN_bm could be interpreted safely as
+  ; EEPROM always memory mapped and explicit memory mapping of EEPROM is not 
+  ; required/invalid.
+#if 	defined (NVM_EEMAPEN_bm)
   ; Load base address of NVM.
 	ldi	ZL, lo8(NVM_BASE)
 	ldi	ZH, hi8(NVM_BASE)
@@ -75,6 +84,7 @@ ENTRY eeprom_read_block
 	ldd	XL, Z + NVM_CTRLB - NVM_BASE
 	ori	XL, NVM_EEMAPEN_bm
 	std	Z + NVM_CTRLB - NVM_BASE, XL
+#endif
 
   ; Correct EEPROM address to read from data space.
 	subi	eepr_lo, lo8(-MAPPED_EEPROM_START)

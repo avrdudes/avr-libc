@@ -121,4 +121,5 @@ Register usage of internally-used functions, XMEGA arch:
 	Output:
 	    r25,r24	- incremented EEPROM address
 	Scratch:
-	    r31,r30,r19,r18
+	    r31,r30,r27,r26,r19,r18
+	    Only r27,r26 is used when EEPROM is always memory mapped

@@ -70,6 +70,15 @@ ENTRY	eeprom_write_r18
 	sbrc	r19, NVM_NVMBUSY_bp
 	rjmp	1b
 
+  ; It has to be noted that for some Xmega parts (Eg. Xmega E family) EEPROM
+  ; is always memory mapped. So it is not possible to disable EEPROM mapping
+  ; explicitly. 
+  ; The presence of NVM_EEMAPEN_bm macro (from the part header file) can be
+  ; checked to find out whether the device supports enabling/disabling of
+  ; EEPROM mapping. Absence of NVM_EEMAPEN_bm could be interpreted safely as
+  ; EEPROM always memory mapped and explicit memory mapping of EEPROM is not 
+  ; required/invalid.
+#if     defined (NVM_EEMAPEN_bm)
   ; Disable EEPROM mapping into data space.
 	ldd	r19, Z + NVM_CTRLB - NVM_BASE
 	andi	r19, ~NVM_EEMAPEN_bm
@@ -103,10 +112,18 @@ ENTRY	eeprom_write_r18
   ; Issue EEPROM Buffer Load command.
 3:	ldi	r19, NVM_CMD_LOAD_EEPROM_BUFFER_gc
 	std	Z + NVM_CMD - NVM_BASE, r19
+#endif
 	std	Z + NVM_ADDR0 - NVM_BASE, addr_lo
 	std	Z + NVM_ADDR1 - NVM_BASE, addr_hi
 	std	Z + NVM_ADDR2 - NVM_BASE, __zero_reg__
+#if     defined (NVM_EEMAPEN_bm)
 	std	Z + NVM_DATA0 - NVM_BASE, r18
+#else
+  	movw 	XL, addr_lo
+	subi	XL, lo8(-MAPPED_EEPROM_START)
+	sbci	XH, hi8(-MAPPED_EEPROM_START)
+	st	X, r18
+#endif
 
   ; Issue EEPROM Erase & Write command.
 	ldi	r18, NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc
