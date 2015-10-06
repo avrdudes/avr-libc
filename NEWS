@@ -38,6 +38,7 @@
   [#8716] Enable setjmp/longjmp functions for AVR_TINY architecture
   [#8718] Enable EEPROM memory map only for devices with EEPROM Data Memory
           Mapping Enable bit (EEMAPEN)
+  [#8731] Header file for atmega644a
 
 * Other changes:
 

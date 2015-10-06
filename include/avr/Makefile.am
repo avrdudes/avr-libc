@@ -145,6 +145,7 @@ avr_HEADERS = \
     iom64a.h \
     iom640.h \
     iom644.h \
+    iom644a.h \
     iom644p.h \
     iom644pa.h \
     iom645.h \

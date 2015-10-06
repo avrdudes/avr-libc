@@ -202,8 +202,10 @@
 #  include <avr/iom64a.h>
 #elif defined (__AVR_ATmega640__)
 #  include <avr/iom640.h>
-#elif defined (__AVR_ATmega644__) || defined (__AVR_ATmega644A__)
+#elif defined (__AVR_ATmega644__)
 #  include <avr/iom644.h>
+#elif defined (__AVR_ATmega644A__)
+#  include <avr/iom644a.h>
 #elif defined (__AVR_ATmega644P__)
 #  include <avr/iom644p.h>
 #elif defined (__AVR_ATmega644PA__)
