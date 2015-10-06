@@ -1,3 +1,9 @@
+2015-10-06  Joern Rennecke <joern.rennecke@embecosm.com>
+
+	patch #8564: Add dwarf debug info alternative, build printf with debug info
+	* configure.ac (--enable-debug-info=): Add dwarf alternative.
+	* libc/stdio/Rules.am (PRINTF_CFLAGS): Add @CDEBUG@.
+
 2015-10-06  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	patch #8731: Header file for atmega644a

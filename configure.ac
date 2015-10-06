@@ -353,7 +353,7 @@ AC_SUBST(DOC_INST_DIR)
 dnl Let the user decide which debug information to generate.
 dnl Default is nothing, suitable for binary distributions of the
 dnl compiled library.  Alternative options include stabs, dwarf-2,
-dnl or dwarf-4.
+dnl dwarf-4 or [compiler's default version] dwarf.
 AC_ARG_ENABLE(debug-info,
 [  --enable-debug-info=stabs|dwarf-2|dwarf-4  Enable generation of debugging information],
 [case "${enableval}" in
@@ -361,6 +361,7 @@ AC_ARG_ENABLE(debug-info,
   no)                 debuginfo="" ;;
   stabs)              debuginfo=stabs ;;
   dwarf4|dwarf-4)     debuginfo=dwarf4 ;;
+  dwarf)              debuginfo=dwarf ;;
   *)                  AC_MSG_ERROR([bad value ${enableval} for --enable-debug-info option; should be either stabs, dwarf-2, or dwarf-4]) ;;
  esac], [debuginfo=""])
 
@@ -370,6 +371,7 @@ case "$debuginfo" in
 stabs)   CDEBUG="-gstabs"; ASDEBUG="-Wa,-gstabs" ;;
 dwarf2)  CDEBUG="-gdwarf-2"; ASDEBUG="-Wa,-gdwarf-2" ;;
 dwarf4)  CDEBUG="-gdwarf-4"; ASDEBUG="-Wa,-gdwarf-2" ;;
+dwarf)   CDEBUG="-gdwarf"; ASDEBUG="-Wa,-gdwarf-2" ;;
 esac
 
 AC_SUBST(CDEBUG)
