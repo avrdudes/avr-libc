@@ -138,7 +138,7 @@ located in a single include file.
 
 AVR GCC has \c sei() for \c __enable_interrupts(), and \c cli() for
 \c __disable_interrupts(). Both of these macros are located in 
-\c <avr/interrupts.h>.
+\c <avr/interrupt.h>.
 
 AVR GCC has the macro \c wdt_reset() in place of \c __watchdog_reset(). However,
 there is a whole Watchdog Timer API available in AVR GCC that can be found
