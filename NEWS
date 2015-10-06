@@ -40,6 +40,7 @@
   [#8718] Enable EEPROM memory map only for devices with EEPROM Data Memory
           Mapping Enable bit (EEMAPEN)
   [#8731] Header file for atmega644a
+  [#8728] Use __extension__ with long long
 
 * Other changes:
 

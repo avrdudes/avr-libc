@@ -1,3 +1,8 @@
+2015-10-06  Georg-Johann Lay <avr@gjlay.de>
+
+	patch #8728: Use __extension__ with long long
+	* include/stdio.h: Use __extension__ when using long long.
+
 2015-10-06  Joern Rennecke <joern.rennecke@embecosm.com>
 
 	patch #8564: Add dwarf debug info alternative, build printf with debug info

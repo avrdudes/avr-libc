@@ -944,7 +944,7 @@ static __inline__ int fflush(FILE *stream __attribute__((unused)))
 #if 1 /* ??? unimplemented  */
 #define BUFSIZ 1024
 #define _IONBF 0
-typedef long long fpos_t;
+__extension__ typedef long long fpos_t;
 extern int fgetpos(FILE *stream, fpos_t *pos);
 extern FILE *fopen(const char *path, const char *mode);
 extern FILE *freopen(const char *path, const char *mode, FILE *stream);
