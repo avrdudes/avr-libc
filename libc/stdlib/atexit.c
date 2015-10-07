@@ -28,7 +28,11 @@
 
 #include <stdlib.h>
 
-struct atexit_s { void (*fun) (void); struct atexit_s *next; } *__atexit_p;
+static struct atexit_s
+{
+  void (*fun) (void);
+  struct atexit_s *next;
+} *atexit_p;
 
 int
 atexit (void (*fun) (void))
@@ -37,18 +41,30 @@ atexit (void (*fun) (void))
   if (!new_as)
     return 1;
   new_as->fun = fun;
-  new_as->next = __atexit_p;
-  __atexit_p = new_as;
+  new_as->next = atexit_p;
+  atexit_p = new_as;
   return 0;
 }
 
-void __attribute__((section(".fini6a")))
-__atexit_fini (void)
+/* Don't inline this code as naked to arrange for the very unlikely case
+   that it needs a frame.   This won't work as naked function.  */
+
+static void __attribute__((__noinline__))
+atexit_finido (void)
 {
-  while (__atexit_p)
+  while (atexit_p)
     {
-      void (*fun) (void) = __atexit_p->fun;
-      __atexit_p = __atexit_p->next;
+      void (*fun) (void) = atexit_p->fun;
+      atexit_p = atexit_p->next;
       (*fun) ();
     }
+}
+
+/* Run functions registered by atexit in .fini8 so that they are
+   sequenced before static destructors which run in .fini6.  */
+
+static void __attribute__((__naked__, __used__, __section__(".fini8")))
+atexit_fini (void)
+{
+  atexit_finido ();
 }

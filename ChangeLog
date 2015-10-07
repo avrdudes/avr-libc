@@ -1,3 +1,12 @@
+2015-10-07  Georg-Johann Lay <avr@gjlay.de>
+
+	patch #8556: Fix atexit.c
+	* libc/stdlib/atexit.c (__atexit_fini): Rename to...
+	(atexit_fini): ...this.  Make static, naked, and used.
+	Move to section .fini8.  Outsource worker code to...
+	(atexit_finido): ...this new function.
+	(atexit_p): Renamed from __atexit_p.  Make static.
+
 2015-10-06  Georg-Johann Lay <avr@gjlay.de>
 
 	patch #8728: Use __extension__ with long long

@@ -41,6 +41,7 @@
           Mapping Enable bit (EEMAPEN)
   [#8731] Header file for atmega644a
   [#8728] Use __extension__ with long long
+  [#8556] Fix atexit.c
 
 * Other changes:
 
