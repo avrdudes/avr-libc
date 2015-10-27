@@ -95,7 +95,7 @@ extern          "C" {
                 return 0;
             if (d > mday)
                 return ONE_HOUR;
-            if (hour < 1)
+            if (hour < 2)
                 return 0;
             return ONE_HOUR;
         }
@@ -103,7 +103,7 @@ extern          "C" {
                             return ONE_HOUR;
         if              (d > mday)
                             return 0;
-        if              (hour < 1)
+        if              (hour < 2)
                             return ONE_HOUR;
                         return 0;
 
