@@ -1,3 +1,7 @@
+2015-10-07  Mike Rice <mike@mikerice.name>
+	bug #36303: Wrong hour for EU Summertime
+	* include/util/eu_dst.h: Corrected hour to 2 AM UTC
+
 2015-10-07  Georg-Johann Lay <avr@gjlay.de>
 
 	patch #8556: Fix atexit.c
@@ -23,11 +27,11 @@
 	patch #8731: Header file for atmega644a
 	* include/avr/io.h: include new header iom644a.h for ATmega644A.
 	* include/avr/Makefile.am (avr_HEADERS): add iom644a.h.
-	* include/avr/iom644a.h: New file. 
+	* include/avr/iom644a.h: New file.
 
 2015-08-20  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
-	patch #8718: Enable EEPROM memory map only for devices with 
+	patch #8718: Enable EEPROM memory map only for devices with
 	EEPROM Data Memory Mapping Enable bit (EEMAPEN)
 	* libc/misc/eerd_byte.S (eeprom_read_byte): Enable EEPROM map
 	only when NVM_EEMAPEN_bm is defined.
@@ -108,7 +112,7 @@
 
 2015-06-19  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
-	bug #43011: Bug in struct definition of __reg_UCSR1C and 
+	bug #43011: Bug in struct definition of __reg_UCSR1C and
 	__reg_UCSR0C in iom128rfa1.h
 	* include/avr/iom128rfa1.h (struct __reg_UCSR0C, struct __reg_UCSR1C):
 	Remove SPI mode only bitfields.
@@ -214,7 +218,7 @@
 	* libm/fplib/tanh.S: Ditto.
 	* libm/fplib/trunc.S: Ditto.
 	* libm/fplib/unordsf2.S: Ditto.
-	 
+
 2015-03-18  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
 	bug #44514: Wrong build option '-mtiny-stack' instead of '-msp8'
