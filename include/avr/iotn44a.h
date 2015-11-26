@@ -611,7 +611,7 @@
 #define FUSE_SUT1  (unsigned char)~_BV(5)  /* Select start-up time */
 #define FUSE_CKOUT  (unsigned char)~_BV(6)  /* Clock Output Enable */
 #define FUSE_CKDIV8  (unsigned char)~_BV(7)  /* Divide clock by 8 */
-#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_SUT0 & FUSE_CKDIV8)
+#define LFUSE_DEFAULT (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8)
 
 /* High Fuse Byte */
 #define FUSE_BODLEVEL0  (unsigned char)~_BV(0)  /* Brown-out Detector trigger level */

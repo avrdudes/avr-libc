@@ -1,3 +1,10 @@
+2015-11-26  Morten Engelhardt Olsen <Morten_engelhardt.Olsen@atmel.com>
+
+	patch #8810: Fix LFUSE_DEFAULT for tiny24a/44a
+	* inclue/avr/iotn24a.h: Add missing FUSE_CKSEL3 to LFUSE_DEFAULT
+	definition.
+	* include/avr/iotn44a.h: Likewise.
+
 2015-10-07  Mike Rice <mike@mikerice.name>
 	bug #36303: Wrong hour for EU Summertime
 	* include/util/eu_dst.h: Corrected hour to 2 AM UTC
