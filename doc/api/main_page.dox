@@ -185,6 +185,7 @@ compile-time.
 - attiny43u
 - attiny44
 - attiny44a
+- attiny441
 - attiny45
 - attiny461
 - attiny461a
@@ -192,6 +193,7 @@ compile-time.
 - attiny828
 - attiny84
 - attiny84a
+- attiny841
 - attiny85
 - attiny861
 - attiny861a
@@ -211,6 +213,7 @@ compile-time.
 - ata5272
 - ata5790
 - ata5795
+- ata6616c
 
 \par CAN AVR Devices:
 

@@ -24,14 +24,14 @@ atmega64rfr2 atmega8 atmega8515 atmega8535 atmega88 atmega88a \
 atmega88p atmega88pa atmega8hva atmega8u2 attiny10 attiny11 attiny12 \
 attiny13 attiny13a attiny15 attiny167 attiny20 attiny22 attiny2313 \
 attiny2313a attiny24 attiny24a attiny25 attiny26 attiny261 attiny261a \
-attiny28 attiny4 attiny40 attiny4313 attiny43u attiny44 attiny44a \
-attiny45 attiny461 attiny461a attiny48 attiny5 attiny84 attiny84a \
+attiny28 attiny4 attiny40 attiny4313 attiny43u attiny44 attiny44a attiny441 \
+attiny45 attiny461 attiny461a attiny48 attiny5 attiny84 attiny84a attiny841 \
 attiny85 attiny861 attiny861a attiny87 attiny88 attiny9 atxmega128a1 \
 atxmega128a1u atxmega128a3 atxmega128d3 atxmega16a4 atxmega16d4 \
 atxmega192a3 atxmega192d3 atxmega256a3 atxmega256a3b atxmega256d3 \
 atxmega32a4 atxmega32d4 atxmega64a1 atxmega64a1u atxmega64a3 \
 atxmega64d3 at90pwm161 ata5272 ata5505 ata5790 ata5795 ata6285 \
-ata6286 atmega1284 atmega128a atmega164pa atmega165pa atmega168pa \
+ata6286 ata6616c atmega1284 atmega128a atmega164pa atmega165pa atmega168pa \
 atmega3250pa atmega325pa atmega3290pa atmega32a atmega48pa atmega64a \
 atmega8a attiny1634 attiny828 atxmega128a3u atxmega128a4u atxmega128b1 \
 atxmega128b3 atxmega128c3 atxmega128d4 atxmega16a4u atxmega16c4 \

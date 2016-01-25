@@ -25,6 +25,8 @@
 
 * New devices supported:
 
+  - ATA6616C, ATtiny441, ATtiny841
+
 * Contributed Patches:
 
   [no-id] save & restore rampd register in xmega wdt_enable and wdt_disable

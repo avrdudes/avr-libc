@@ -71,6 +71,7 @@ avr_HEADERS = \
     ioa6285.h \
     ioa6286.h \
     ioa6289.h \
+    ioa6616c.h \
     ioat94k.h \
     iocan32.h \
     iocan64.h \
@@ -200,6 +201,7 @@ avr_HEADERS = \
     iotn43u.h \
     iotn44.h \
     iotn44a.h \
+    iotn441.h \
     iotn45.h \
     iotn461.h \
     iotn461a.h \
@@ -207,6 +209,7 @@ avr_HEADERS = \
     iotn88.h \
     iotn84.h \
     iotn84a.h \
+    iotn841.h \
     iotn85.h \
     iotn861.h \
     iotn861a.h \

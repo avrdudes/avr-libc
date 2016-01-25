@@ -1,0 +1,15 @@
+2016-01-25  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	* configure.ac: Add ATA6616C, ATtiny441 and ATtiny841 devices.
+	* devtools/gen-avr-lib-tree.sh: Likewise.
+	* devtools/generate_iosym.sh: Likewise.
+	* doc/api/main_page.dox: Document new device support.
+	* doc/api/using-tools.dox: Likewise.
+	* include/avr/Makefile.am (avr_HEADERS): Add new header files.
+	* include/avr/io.h: Add hooks for new devices.
+	* include/avr/ioa6616c.h: Newfile.
+	* include/avr/iotn441.h: Ditto.
+	* include/avr/iotn841.h: Ditto.
+	* crt1/iosym/ata6616c.S: Generated.
+	* crt1/iosym/attiny441.S: Ditto.
+	* crt1/iosym/attiny841.S: Ditto.

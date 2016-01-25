@@ -231,6 +231,7 @@ AVR will be defined as well when using the standard levels gnu89
 
   <tr><td>avr2/avr25&nbsp;[1]</td><td>at86rf401</td><td>__AVR_AT86RF401__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>ata5272</td><td>__AVR_ATA5272__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>ata6616c</td><td>__AVR_ATA6616C__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13</td><td>__AVR_ATtiny13__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13a</td><td>__AVR_ATtiny13A__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny2313</td><td>__AVR_ATtiny2313__</td></tr>
@@ -244,6 +245,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny43u</td><td>__AVR_ATtiny43U__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny44</td><td>__AVR_ATtiny44__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny44a</td><td>__AVR_ATtiny44A__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny441</td><td>__AVR_ATtiny441__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny45</td><td>__AVR_ATtiny45__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny461</td><td>__AVR_ATtiny461__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny461a</td><td>__AVR_ATtiny461A__</td></tr>
@@ -251,6 +253,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny828</td><td>__AVR_ATtiny828__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84</td><td>__AVR_ATtiny84__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84a</td><td>__AVR_ATtiny84A__</td></tr>
+  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny841</td><td>__AVR_ATtiny841__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny85</td><td>__AVR_ATtiny85__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861</td><td>__AVR_ATtiny861__</td></tr>
   <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861a</td><td>__AVR_ATtiny861A__</td></tr>
