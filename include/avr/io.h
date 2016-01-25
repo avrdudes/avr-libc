@@ -320,6 +320,8 @@
 #  include <avr/iom48a.h>
 #elif defined (__AVR_ATmega48PA__)
 #  include <avr/iom48pa.h>
+#elif defined (__AVR_ATmega48PB__)
+#  include <avr/iom48pb.h>
 #elif defined (__AVR_ATmega48P__)
 #  include <avr/iom48p.h>
 #elif defined (__AVR_ATmega88__)
@@ -330,6 +332,8 @@
 #  include <avr/iom88p.h>
 #elif defined (__AVR_ATmega88PA__)
 #  include <avr/iom88pa.h>
+#elif defined (__AVR_ATmega88PB__)
+#  include <avr/iom88pb.h>
 #elif defined (__AVR_ATmega8515__)
 #  include <avr/iom8515.h>
 #elif defined (__AVR_ATmega8535__)
@@ -524,8 +528,14 @@
 #  include <avr/ioa6286.h>
 #elif defined (__AVR_ATA6289__)
 #  include <avr/ioa6289.h>
+#elif defined (__AVR_ATA6612C__)
+#  include <avr/ioa6612c.h>
 #elif defined (__AVR_ATA6616C__)
 #  include <avr/ioa6616c.h>
+#elif defined (__AVR_ATA6617C__)
+#  include <avr/ioa6617c.h>
+#elif defined (__AVR_ATA664251__)
+#  include <avr/ioa664251.h>
 /* avr1: the following only supported for assembler programs */
 #elif defined (__AVR_ATtiny28__)
 #  include <avr/iotn28.h>

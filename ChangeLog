@@ -1,5 +1,26 @@
 2016-01-25  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
+	* configure.ac: Add ATA6612C, ATA6617C, ATA664251, ATmega48PB and
+	ATmega88PB devices.
+	* devtools/gen-avr-lib-tree.sh: Likewise.
+	* devtools/generate_iosym.sh: Likewise.
+	* doc/api/main_page.dox: Document new device support.
+	* doc/api/using-tools.dox: Likewise.
+	* include/avr/Makefile.am (avr_HEADERS): Add new header files.
+	* include/avr/io.h: Add hooks for new devices.
+	* include/avr/ioa6612c.h: Newfile.
+	* include/avr/ioa6617c.h: Ditto.
+	* include/avr/ioa664251.h: Ditto.
+	* include/avr/iom48pb.h: Ditto.
+	* include/avr/iom88pb.h: Ditto.
+	* crt1/iosym/ata6612c.S: Generated.
+	* crt1/iosym/ata6617c.S: Ditto.
+	* crt1/iosym/ata664251.S: Ditto.
+	* crt1/iosym/atmega48pb.S: Ditto.
+	* crt1/iosym/atmega88pb: Ditto.
+
+2016-01-25  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
 	* configure.ac: Add ATA6616C, ATtiny441 and ATtiny841 devices.
 	* devtools/gen-avr-lib-tree.sh: Likewise.
 	* devtools/generate_iosym.sh: Likewise.

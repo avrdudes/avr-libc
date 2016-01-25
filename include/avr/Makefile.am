@@ -71,7 +71,10 @@ avr_HEADERS = \
     ioa6285.h \
     ioa6286.h \
     ioa6289.h \
+    ioa6612c.h \
     ioa6616c.h \
+    ioa6617c.h \
+    ioa664251.h \
     ioat94k.h \
     iocan32.h \
     iocan64.h \
@@ -140,6 +143,7 @@ avr_HEADERS = \
     iom48.h \
     iom48a.h \
     iom48pa.h \
+    iom48pb.h \
     iom48p.h \
     iom406.h \
     iom64.h \
@@ -167,6 +171,7 @@ avr_HEADERS = \
     iom88a.h \
     iom88p.h \
     iom88pa.h \
+    iom88pb.h \
     iom8hva.h \
     iom8u2.h \
     iomx8.h \

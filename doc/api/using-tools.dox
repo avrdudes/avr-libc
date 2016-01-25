@@ -269,6 +269,8 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb82</td><td>__AVR_AT90USB82__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb162</td><td>__AVR_AT90USB162__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>ata5505</td><td>__AVR_ATA5505__</td></tr>
+  <tr><td>avr3/avr35&nbsp;[2]</td><td>ata6617c</td><td>__AVR_ATA6617C__</td></tr>
+  <tr><td>avr3/avr35&nbsp;[2]</td><td>ata664251</td><td>__AVR_ATA664251__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega8u2</td><td>__AVR_ATmega8U2__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega16u2</td><td>__AVR_ATmega16U2__</td></tr>
   <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega32u2</td><td>__AVR_ATmega32U2__</td></tr>
@@ -279,9 +281,11 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr4</td><td>ata6285</td><td>__AVR_ATA6285__</td></tr>
   <tr><td>avr4</td><td>ata6286</td><td>__AVR_ATA6286__</td></tr>
   <tr><td>avr4</td><td>ata6289</td><td>__AVR_ATA6289__</td></tr>
+  <tr><td>avr4</td><td>ata6612c</td><td>__AVR_ATA6612C__</td></tr>
   <tr><td>avr4</td><td>atmega48</td><td>__AVR_ATmega48__</td></tr>
   <tr><td>avr4</td><td>atmega48a</td><td>__AVR_ATmega48A__</td></tr>
   <tr><td>avr4</td><td>atmega48pa</td><td>__AVR_ATmega48PA__</td></tr>
+  <tr><td>avr4</td><td>atmega48pb</td><td>__AVR_ATmega48PB__</td></tr>
   <tr><td>avr4</td><td>atmega48p</td><td>__AVR_ATmega48P__</td></tr>
   <tr><td>avr4</td><td>atmega8</td><td>__AVR_ATmega8__</td></tr>
   <tr><td>avr4</td><td>atmega8a</td><td>__AVR_ATmega8A__</td></tr>
@@ -291,6 +295,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr4</td><td>atmega88a</td><td>__AVR_ATmega88A__</td></tr>
   <tr><td>avr4</td><td>atmega88p</td><td>__AVR_ATmega88P__</td></tr>
   <tr><td>avr4</td><td>atmega88pa</td><td>__AVR_ATmega88PA__</td></tr>
+  <tr><td>avr4</td><td>atmega88pb</td><td>__AVR_ATmega88PB__</td></tr>
   <tr><td>avr4</td><td>atmega8hva</td><td>__AVR_ATmega8HVA__</td></tr>
   <tr><td>avr4</td><td>at90pwm1</td><td>__AVR_AT90PWM1__</td></tr>
   <tr><td>avr4</td><td>at90pwm2</td><td>__AVR_AT90PWM2__</td></tr>

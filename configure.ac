@@ -626,6 +626,12 @@ AM_CONDITIONAL(HAS_at90usb162, test "x$HAS_at90usb162" = "xyes")
 CHECK_AVR_DEVICE(ata5505)
 AM_CONDITIONAL(HAS_ata5505, test "x$HAS_ata5505" = "xyes")
 
+CHECK_AVR_DEVICE(ata6617c)
+AM_CONDITIONAL(HAS_ata6617c, test "x$HAS_ata6617c" = "xyes")
+
+CHECK_AVR_DEVICE(ata664251)
+AM_CONDITIONAL(HAS_ata664251, test "x$HAS_ata664251" = "xyes")
+
 CHECK_AVR_DEVICE(atmega8u2)
 AM_CONDITIONAL(HAS_atmega8u2, test "x$HAS_atmega8u2" = "xyes")
 
@@ -657,6 +663,9 @@ AM_CONDITIONAL(HAS_ata6286, test "x$HAS_ata6286" = "xyes")
 CHECK_AVR_DEVICE(ata6289)
 AM_CONDITIONAL(HAS_ata6289, test "x$HAS_ata6289" = "xyes")
 
+CHECK_AVR_DEVICE(ata6612c)
+AM_CONDITIONAL(HAS_ata6612c, test "x$HAS_ata6612c" = "xyes")
+
 CHECK_AVR_DEVICE(atmega8a)
 AM_CONDITIONAL(HAS_atmega8a, test "x$HAS_atmega8a" = "xyes")
 
@@ -668,6 +677,9 @@ AM_CONDITIONAL(HAS_atmega48a, test "x$HAS_atmega48a" = "xyes")
 
 CHECK_AVR_DEVICE(atmega48pa)
 AM_CONDITIONAL(HAS_atmega48pa, test "x$HAS_atmega48pa" = "xyes")
+
+CHECK_AVR_DEVICE(atmega48pb)
+AM_CONDITIONAL(HAS_atmega48pb, test "x$HAS_atmega48pb" = "xyes")
 
 CHECK_AVR_DEVICE(atmega48p)
 AM_CONDITIONAL(HAS_atmega48p, test "x$HAS_atmega48p" = "xyes")
@@ -683,6 +695,9 @@ AM_CONDITIONAL(HAS_atmega88p, test "x$HAS_atmega88p" = "xyes")
 
 CHECK_AVR_DEVICE(atmega88pa)
 AM_CONDITIONAL(HAS_atmega88pa, test "x$HAS_atmega88pa" = "xyes")
+
+CHECK_AVR_DEVICE(atmega88pb)
+AM_CONDITIONAL(HAS_atmega88pb, test "x$HAS_atmega88pb" = "xyes")
 
 CHECK_AVR_DEVICE(atmega8hva)
 AM_CONDITIONAL(HAS_atmega8hva, test "x$HAS_atmega8hva" = "xyes")
@@ -1336,6 +1351,8 @@ AC_CONFIG_FILES([
 	avr/lib/avr35/at90usb82/Makefile
 	avr/lib/avr35/at90usb162/Makefile
 	avr/lib/avr35/ata5505/Makefile
+	avr/lib/avr35/ata6617c/Makefile
+	avr/lib/avr35/ata664251/Makefile
 	avr/lib/avr35/atmega8u2/Makefile
 	avr/lib/avr35/atmega16u2/Makefile
 	avr/lib/avr35/atmega32u2/Makefile
@@ -1349,9 +1366,11 @@ AC_CONFIG_FILES([
 	avr/lib/avr4/ata6285/Makefile
 	avr/lib/avr4/ata6286/Makefile
 	avr/lib/avr4/ata6289/Makefile
+	avr/lib/avr4/ata6612c/Makefile
 	avr/lib/avr4/atmega48/Makefile
 	avr/lib/avr4/atmega48a/Makefile
 	avr/lib/avr4/atmega48pa/Makefile
+	avr/lib/avr4/atmega48pb/Makefile
 	avr/lib/avr4/atmega48p/Makefile
 	avr/lib/avr4/atmega8/Makefile
 	avr/lib/avr4/atmega8a/Makefile
@@ -1359,6 +1378,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr4/atmega88a/Makefile
 	avr/lib/avr4/atmega88p/Makefile
 	avr/lib/avr4/atmega88pa/Makefile
+	avr/lib/avr4/atmega88pb/Makefile
 	avr/lib/avr4/atmega8515/Makefile
 	avr/lib/avr4/atmega8535/Makefile
 	avr/lib/avr4/atmega8hva/Makefile

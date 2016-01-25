@@ -136,6 +136,7 @@ compile-time.
 - atmega48
 - atmega48a
 - atmega48pa
+- atmega48pb
 - atmega48p
 - atmega64
 - atmega64a
@@ -156,6 +157,7 @@ compile-time.
 - atmega88a
 - atmega88p
 - atmega88pa
+- atmega88pb
 - atmega8515
 - atmega8535
 
@@ -213,7 +215,10 @@ compile-time.
 - ata5272
 - ata5790
 - ata5795
+- ata6612c
 - ata6616c
+- ata6617c
+- ata664251
 
 \par CAN AVR Devices:
 
