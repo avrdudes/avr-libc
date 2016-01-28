@@ -79,11 +79,11 @@ if HAS_DEV_LIB
 if HAS_GCC_5_1
 # avr-gcc 5.1.0 expects device library as libdev.a
 avr_LIBRARIES = libdev.a
-libdev_a_SOURCES = $(eeprom_asm_sources)
+nodist_libdev_a_SOURCES = $(eeprom_asm_sources)
 else
 # avr-gcc > 5.1.0 expects device library as lib<device name>.a
 avr_LIBRARIES = lib<<dev>>.a
-lib<<dev>>_a_SOURCES = $(eeprom_asm_sources)
+nodist_lib<<dev>>_a_SOURCES = $(eeprom_asm_sources)
 endif
 endif
 

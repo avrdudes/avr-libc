@@ -36,4 +36,4 @@ else
 MISC=misc
 endif
 SUBDIRS = stdlib pmstring string ${MISC} stdio time
-DIST_SUBDIRS = stdlib pmstring string ${MISC} stdio time
+DIST_SUBDIRS = stdlib pmstring string misc stdio time

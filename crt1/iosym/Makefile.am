@@ -69,6 +69,10 @@ EXTRA_DIST = \
 	ata6285.S \
 	ata6286.S \
 	ata6289.S \
+	ata6612c.S \
+	ata6616c.S \
+	ata6617c.S \
+	ata664251.S \
 	atmega103.S \
 	atmega128.S \
 	atmega1280.S \
@@ -146,6 +150,7 @@ EXTRA_DIST = \
 	atmega48a.S \
 	atmega48p.S \
 	atmega48pa.S \
+	atmega48pb.S \
 	atmega64.S \
 	atmega640.S \
 	atmega644.S \
@@ -177,6 +182,7 @@ EXTRA_DIST = \
 	atmega88a.S \
 	atmega88p.S \
 	atmega88pa.S \
+	atmega88pb.S \
 	atmega8a.S \
 	atmega8hva.S \
 	atmega8u2.S \
@@ -205,6 +211,7 @@ EXTRA_DIST = \
 	attiny43u.S \
 	attiny44.S \
 	attiny44a.S \
+	attiny441.S \
 	attiny45.S \
 	attiny461.S \
 	attiny461a.S \
@@ -213,6 +220,7 @@ EXTRA_DIST = \
 	attiny828.S \
 	attiny84.S \
 	attiny84a.S \
+	attiny841.S \
 	attiny85.S \
 	attiny861.S \
 	attiny861a.S \
