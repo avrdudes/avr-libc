@@ -66,12 +66,18 @@ avr_HEADERS = \
     io90scr100.h \
     ioa5505.h \
     ioa5272.h \
+    ioa5702m322.h \
+    ioa5782.h \
     ioa5790.h \
+    ioa5790n.h \
     ioa5795.h \
+    ioa5831.h \
     ioa6285.h \
     ioa6286.h \
     ioa6289.h \
     ioa6612c.h \
+    ioa6613c.h \
+    ioa6614q.h \
     ioa6616c.h \
     ioa6617c.h \
     ioa664251.h \
@@ -160,6 +166,7 @@ avr_HEADERS = \
     iom6490.h \
     iom64c1.h \
     iom64hve.h \
+    iom64hve2.h \
     iom64m1.h \
     iom64rfr2.h \
     iom644rfr2.h \
@@ -260,8 +267,11 @@ avr_HEADERS = \
     iox384d3.h \
     iox32a4.h \
     iox32a4u.h \
+    iox32c3.h \
     iox32c4.h \
+    iox32d3.h \
     iox32d4.h \
+    iox32e5.h \
     iox64a1.h \
     iox64a1u.h \
     iox64a3.h \
@@ -270,6 +280,7 @@ avr_HEADERS = \
     iox64b1.h \
     iox64b3.h \
     iox64c3.h \
+    iox8e5.h \
     lock.h \
     parity.h \
     pgmspace.h \

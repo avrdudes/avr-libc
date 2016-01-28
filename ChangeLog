@@ -1,5 +1,40 @@
 2016-01-28  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
+	Added new devices.
+	* configure.ac: Add ATA5702M322, ATA5782, ATA5790N, ATA5831, ATA6613C,
+	ATA6614Q, ATmega64HVE2, ATxmega8E5, ATxmega32C3, ATxmega32D3
+	and ATxmega32E5 devices.
+	* devtools/gen-avr-lib-tree.sh: Likewise.
+	* devtools/iosym/Makefile.am: Add assembly macro files for new devices.
+	* doc/api/main_page.dox: Document new device support.
+	* doc/api/using-tools.dox: Likewise.
+	* include/avr/Makefile.am (avr_HEADERS): Add new header files.
+	* include/avr/io.h: Add hooks for new devices.
+	* include/avr/ioa5702m322.h: New device header file.
+	* include/avr/ioa5782.h: Ditto.
+	* include/avr/ioa5790n.h: Ditto.
+	* include/avr/ioa5831.h: Ditto.
+	* include/avr/ioa6613c.h: Ditto.
+	* include/avr/ioa6614q.h: Ditto.
+	* include/avr/iom64hve2.h: Ditto.
+	* include/avr/iox32c3.h: Ditto.
+	* include/avr/iox32d3.h: Ditto.
+	* include/avr/iox32e5.h: Ditto.
+	* include/avr/iox8e5.h: Ditto.
+	* crt1/iosym/ata5702m322.S: Generated.
+	* crt1/iosym/ata5782.S: Ditto.
+	* crt1/iosym/ata5790n.S: Ditto.
+	* crt1/iosym/ata5831.S: Ditto.
+	* crt1/iosym/ata6613c.S: Ditto.
+	* crt1/iosym/ata6614q.S: Ditto.
+	* crt1/iosym/atmega64hve2.S: Ditto.
+	* crt1/iosym/atxmega32c3.S: Ditto.
+	* crt1/iosym/atxmega32d3.S: Ditto.
+	* crt1/iosym/atxmega32e5.S: Ditto.
+	* crt1/iosym/atxmega8e5.S: Ditto.
+
+2016-01-28  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
 	Fixed distcheck errors.
 	* crt1/iosym/Makefile.am (EXTRA_DIST): Add missed device files.
 	* devtools/Device.am: Donot distribute libdev and lib<dev> sources.

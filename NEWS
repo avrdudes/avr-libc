@@ -26,7 +26,8 @@
 * New devices supported:
 
   - ATA6616C, ATtiny441, ATtiny841, ATA6612C, ATA6617C, ATA664251, ATmega48PB,
-    ATmega88PB
+    ATmega88PB, ATA5702M322, ATA5782, ATA5790N, ATA5831, ATA6613C, ATA6614Q,
+    ATmega64HVE2, ATxmega8E5, ATxmega32C3, ATxmega32D3, ATxmega32E5
 
 * Contributed Patches:
 

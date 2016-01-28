@@ -64,12 +64,18 @@ EXTRA_DIST = \
 	at94k.S \
 	ata5272.S \
 	ata5505.S \
+	ata5702m322.S \
+	ata5782.S \
 	ata5790.S \
+	ata5790n.S \
 	ata5795.S \
+	ata5831.S \
 	ata6285.S \
 	ata6286.S \
 	ata6289.S \
 	ata6612c.S \
+	ata6613c.S \
+	ata6614q.S \
 	ata6616c.S \
 	ata6617c.S \
 	ata664251.S \
@@ -173,6 +179,7 @@ EXTRA_DIST = \
 	atmega64a.S \
 	atmega64c1.S \
 	atmega64hve.S \
+	atmega64hve2.S \
 	atmega64m1.S \
 	atmega64rfr2.S \
 	atmega8.S \
@@ -253,8 +260,11 @@ EXTRA_DIST = \
 	atxmega256d3.S \
 	atxmega32a4.S \
 	atxmega32a4u.S \
+	atxmega32c3.S \
 	atxmega32c4.S \
+	atxmega32d3.S \
 	atxmega32d4.S \
+	atxmega32e5.S \
 	atxmega384c3.S \
 	atxmega384d3.S \
 	atxmega64a1.S \
@@ -267,5 +277,6 @@ EXTRA_DIST = \
 	atxmega64c3.S \
 	atxmega64d3.S \
 	atxmega64d4.S \
+	atxmega8e5.S \
 	m3000.S \
 	template.S

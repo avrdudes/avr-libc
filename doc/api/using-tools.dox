@@ -314,8 +314,14 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>at90usb647</td><td>__AVR_AT90USB647__</td></tr>
   <tr><td>avr5</td><td>at94k</td><td>__AVR_AT94K__</td></tr>
   <tr><td>avr5</td><td>atmega16</td><td>__AVR_ATmega16__</td></tr>
+  <tr><td>avr5</td><td>ata5702m322</td><td>__AVR_ATA5702M322__</td></tr>
+  <tr><td>avr5</td><td>ata5782</td><td>__AVR_ATA5782__</td></tr>
   <tr><td>avr5</td><td>ata5790</td><td>__AVR_ATA5790__</td></tr>
+  <tr><td>avr5</td><td>ata5790n</td><td>__AVR_ATA5790N__</td></tr>
   <tr><td>avr5</td><td>ata5795</td><td>__AVR_ATA5795__</td></tr>
+  <tr><td>avr5</td><td>ata5831</td><td>__AVR_ATA5831__</td></tr>
+  <tr><td>avr5</td><td>ata6613c</td><td>__AVR_ATA6613C__</td></tr>
+  <tr><td>avr5</td><td>ata6614q</td><td>__AVR_ATA6614Q__</td></tr>
   <tr><td>avr5</td><td>atmega161</td><td>__AVR_ATmega161__</td></tr>
   <tr><td>avr5</td><td>atmega162</td><td>__AVR_ATmega162__</td></tr>
   <tr><td>avr5</td><td>atmega163</td><td>__AVR_ATmega163__</td></tr>
@@ -395,6 +401,7 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr5</td><td>atmega649p</td><td>__AVR_ATmega649P__</td></tr>
   <tr><td>avr5</td><td>atmega64c1</td><td>__AVR_ATmega64C1__</td></tr>
   <tr><td>avr5</td><td>atmega64hve</td><td>__AVR_ATmega64HVE__</td></tr>
+  <tr><td>avr5</td><td>atmega64hve2</td><td>__AVR_ATmega64HVE2__</td></tr>
   <tr><td>avr5</td><td>atmega64m1</td><td>__AVR_ATmega64M1__</td></tr>
   <tr><td>avr5</td><td>m3000</td><td>__AVR_M3000__</td></tr>
 
@@ -415,14 +422,18 @@ AVR will be defined as well when using the standard levels gnu89
   <tr><td>avr6</td><td>atmega2564rfr2</td><td>__AVR_ATmega2564RFR2__</td></tr>
   <tr><td>avr6</td><td>atmega256rfr2</td><td>__AVR_ATmega256RFR2__</td></tr>
 
+  <tr><td>avrxmega2</td><td>atxmega8e5</td><td>__AVR_ATxmega8E5__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega16a4</td><td>__AVR_ATxmega16A4__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega16a4u</td><td>__AVR_ATxmega16A4U__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega16c4</td><td>__AVR_ATxmega16C4__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega16d4</td><td>__AVR_ATxmega16D4__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega32a4</td><td>__AVR_ATxmega32A4__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega32a4u</td><td>__AVR_ATxmega32A4U__</td></tr>
+  <tr><td>avrxmega2</td><td>atxmega32c3</td><td>__AVR_ATxmega32C3__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega32c4</td><td>__AVR_ATxmega32C4__</td></tr>
+  <tr><td>avrxmega2</td><td>atxmega32d3</td><td>__AVR_ATxmega32D3__</td></tr>
   <tr><td>avrxmega2</td><td>atxmega32d4</td><td>__AVR_ATxmega32D4__</td></tr>
+  <tr><td>avrxmega2</td><td>atxmega32e5</td><td>__AVR_ATxmega32E5__</td></tr>
 
   <tr><td>avrxmega4</td><td>atxmega64a3</td><td>__AVR_ATxmega64A3__</td></tr>
   <tr><td>avrxmega4</td><td>atxmega64a3u</td><td>__AVR_ATxmega64A3U__</td></tr>

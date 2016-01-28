@@ -751,11 +751,29 @@ AM_CONDITIONAL(HAS_at90pwm161, test "x$HAS_at90pwm161" = "xyes")
 CHECK_AVR_DEVICE(at94k)
 AM_CONDITIONAL(HAS_at94k, test "x$HAS_at94k" = "xyes")
 
+CHECK_AVR_DEVICE(ata5702m322)
+AM_CONDITIONAL(HAS_ata5702m322, test "x$HAS_ata5702m322" = "xyes")
+
+CHECK_AVR_DEVICE(ata5782)
+AM_CONDITIONAL(HAS_ata5782, test "x$HAS_ata5782" = "xyes")
+
 CHECK_AVR_DEVICE(ata5790)
 AM_CONDITIONAL(HAS_ata5790, test "x$HAS_ata5790" = "xyes")
 
+CHECK_AVR_DEVICE(ata5790n)
+AM_CONDITIONAL(HAS_ata5790n, test "x$HAS_ata5790n" = "xyes")
+
 CHECK_AVR_DEVICE(ata5795)
 AM_CONDITIONAL(HAS_ata5795, test "x$HAS_ata5795" = "xyes")
+
+CHECK_AVR_DEVICE(ata5831)
+AM_CONDITIONAL(HAS_ata5831, test "x$HAS_ata5831" = "xyes")
+
+CHECK_AVR_DEVICE(ata6613c)
+AM_CONDITIONAL(HAS_ata6613c, test "x$HAS_ata6613c" = "xyes")
+
+CHECK_AVR_DEVICE(ata6614q)
+AM_CONDITIONAL(HAS_ata6614q, test "x$HAS_ata6614q" = "xyes")
 
 CHECK_AVR_DEVICE(atmega16)
 AM_CONDITIONAL(HAS_atmega16, test "x$HAS_atmega16" = "xyes")
@@ -997,6 +1015,9 @@ AM_CONDITIONAL(HAS_atmega64c1, test "x$HAS_atmega64c1" = "xyes")
 CHECK_AVR_DEVICE(atmega64hve)
 AM_CONDITIONAL(HAS_atmega64hve, test "x$HAS_atmega64hve" = "xyes")
 
+CHECK_AVR_DEVICE(atmega64hve2)
+AM_CONDITIONAL(HAS_atmega64hve2, test "x$HAS_atmega64hve2" = "xyes")
+
 CHECK_AVR_DEVICE(atmega64m1)
 AM_CONDITIONAL(HAS_atmega64m1, test "x$HAS_atmega64m1" = "xyes")
 
@@ -1066,6 +1087,9 @@ AM_CONDITIONAL(HAS_atmega256rfr2, test "x$HAS_atmega256rfr2" = "xyes")
 CHECK_AVR_DEVICE(avrxmega2)
 AM_CONDITIONAL(HAS_avrxmega2, test "x$HAS_avrxmega2" = "xyes")
 
+CHECK_AVR_DEVICE(atxmega8e5)
+AM_CONDITIONAL(HAS_atxmega8e5, test "x$HAS_atxmega8e5" = "xyes")
+
 CHECK_AVR_DEVICE(atxmega16a4)
 AM_CONDITIONAL(HAS_atxmega16a4, test "x$HAS_atxmega16a4" = "xyes")
 
@@ -1084,11 +1108,20 @@ AM_CONDITIONAL(HAS_atxmega32a4, test "x$HAS_atxmega32a4" = "xyes")
 CHECK_AVR_DEVICE(atxmega32a4u)
 AM_CONDITIONAL(HAS_atxmega32a4u, test "x$HAS_atxmega32a4u" = "xyes")
 
+CHECK_AVR_DEVICE(atxmega32c3)
+AM_CONDITIONAL(HAS_atxmega32c3, test "x$HAS_atxmega32c3" = "xyes")
+
 CHECK_AVR_DEVICE(atxmega32c4)
 AM_CONDITIONAL(HAS_atxmega32c4, test "x$HAS_atxmega32c4" = "xyes")
 
+CHECK_AVR_DEVICE(atxmega32d3)
+AM_CONDITIONAL(HAS_atxmega32d3, test "x$HAS_atxmega32d3" = "xyes")
+
 CHECK_AVR_DEVICE(atxmega32d4)
 AM_CONDITIONAL(HAS_atxmega32d4, test "x$HAS_atxmega32d4" = "xyes")
+
+CHECK_AVR_DEVICE(atxmega32e5)
+AM_CONDITIONAL(HAS_atxmega32e5, test "x$HAS_atxmega32e5" = "xyes")
 
 
 # avrxmega4
@@ -1402,8 +1435,14 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/at90usb646/Makefile
 	avr/lib/avr5/at90usb647/Makefile
 	avr/lib/avr5/at94k/Makefile 
+	avr/lib/avr5/ata5702m322/Makefile 
+	avr/lib/avr5/ata5782/Makefile 
 	avr/lib/avr5/ata5790/Makefile 
+	avr/lib/avr5/ata5790n/Makefile 
 	avr/lib/avr5/ata5795/Makefile 
+	avr/lib/avr5/ata5831/Makefile 
+	avr/lib/avr5/ata6613c/Makefile 
+	avr/lib/avr5/ata6614q/Makefile 
 	avr/lib/avr5/atmega16/Makefile
 	avr/lib/avr5/atmega16a/Makefile
 	avr/lib/avr5/atmega161/Makefile
@@ -1484,6 +1523,7 @@ AC_CONFIG_FILES([
 	avr/lib/avr5/atmega6490p/Makefile
 	avr/lib/avr5/atmega64c1/Makefile
 	avr/lib/avr5/atmega64hve/Makefile
+	avr/lib/avr5/atmega64hve2/Makefile
 	avr/lib/avr5/atmega64m1/Makefile
 	avr/lib/avr5/m3000/Makefile
 ])
@@ -1517,14 +1557,18 @@ AC_CONFIG_FILES([
 # avrxmega2
 AC_CONFIG_FILES([
 	avr/lib/avrxmega2/Makefile
+	avr/lib/avrxmega2/atxmega8e5/Makefile
 	avr/lib/avrxmega2/atxmega16a4/Makefile
 	avr/lib/avrxmega2/atxmega16a4u/Makefile
 	avr/lib/avrxmega2/atxmega16c4/Makefile
 	avr/lib/avrxmega2/atxmega16d4/Makefile
 	avr/lib/avrxmega2/atxmega32a4/Makefile
 	avr/lib/avrxmega2/atxmega32a4u/Makefile
+	avr/lib/avrxmega2/atxmega32c3/Makefile
 	avr/lib/avrxmega2/atxmega32c4/Makefile
+	avr/lib/avrxmega2/atxmega32d3/Makefile
 	avr/lib/avrxmega2/atxmega32d4/Makefile
+	avr/lib/avrxmega2/atxmega32e5/Makefile
 ])
 
 # avrxmega4

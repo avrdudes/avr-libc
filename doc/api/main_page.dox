@@ -213,9 +213,15 @@ compile-time.
 - attiny167
 - ata5505
 - ata5272
+- ata5702m322
+- ata5782
 - ata5790
+- ata5790n
+- ata5831
 - ata5795
 - ata6612c
+- ata6613c
+- ata6614q
 - ata6616c
 - ata6617c
 - ata664251
@@ -269,6 +275,7 @@ compile-time.
 - atmega32hvb
 - atmega32hvbrevb
 - atmega64hve
+- atmega64hve2
 - atmega406
 
 \par USB AVR Devices:
@@ -288,14 +295,18 @@ compile-time.
 
 \par XMEGA Devices:
 
+- atxmega8e5
 - atxmega16a4
 - atxmega16a4u
 - atxmega16c4
 - atxmega16d4
 - atxmega32a4
 - atxmega32a4u
+- atxmega32c3
 - atxmega32c4
+- atxmega32d3
 - atxmega32d4
+- atxmega32e5
 - atxmega64a1
 - atxmega64a1u
 - atxmega64a3
