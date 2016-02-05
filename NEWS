@@ -47,6 +47,8 @@
   [#8728] Use __extension__ with long long
   [#8556] Fix atexit.c
   [#8810] Fix LFUSE_DEFAULT for tiny24a/44a
+  [#8902] Xmega's PROTECTED_WRITE is incorrect for IO registers whose address
+          is more than one byte
 
 * Other changes:
 

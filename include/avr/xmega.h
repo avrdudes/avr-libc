@@ -63,9 +63,9 @@
 		       "sts %[ioreg], %[val]"			\
 		       :					\
 		       : [ccp] "I" (_SFR_IO_ADDR(CCP)),		\
-			 [ccp_ioreg] "d" (CCP_IOREG_gc),	\
-			 [ioreg] "M" (_SFR_MEM_ADDR(reg)),	\
-			 [val] "r" (value))
+			 [ccp_ioreg] "d" ((uint8_t)CCP_IOREG_gc),	\
+			 [ioreg] "n" (_SFR_MEM_ADDR(reg)),	\
+			 [val] "r" ((uint8_t)value))
 #endif /* DOXYGEN */
 
 #endif /* _AVR_XMEGA_H */

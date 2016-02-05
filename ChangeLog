@@ -1,3 +1,11 @@
+2016-02-05  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	patch #8902: Xmega's PROTECTED_WRITE is incorrect for IO registers
+	whose address is more than one byte
+	* include/avr/xmega.h (_PROTECTED_WRITE): Update constraint for
+	IO register to allow more than 1 byte address. Cast CCP signature and
+	value to be written to avoid un-optimal load.
+
 2016-01-28  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	Added new devices.
