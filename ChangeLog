@@ -1,3 +1,10 @@
+2016-02-06  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/doxygen.config.in: Update doxygen infrastructur to Doxygen 1.8.7
+	* doc/api/dox.css: Ditto.
+	* doc/api/dox_html_footer: Ditto.
+	* doc/api/dox_html_header: Ditto.
+
 2016-02-05  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	patch #8902: Xmega's PROTECTED_WRITE is incorrect for IO registers
