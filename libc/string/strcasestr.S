@@ -41,12 +41,6 @@
     \return The strcasestr() function returns a pointer to the beginning
     of the substring, or \c NULL if the substring is not found. If \p s2
     points to a string of zero length, the function returns \p s1. */
-    
-/** \ingroup avr_pgmspace
-    \fn char *strcasestr_P(const char *s1, PGM_P s2)
-    
-    This funtion is similar to strcasestr() except that \p s2 is pointer
-    to a string in program space.	*/
 
 #if !defined(__AVR_TINY__)
 

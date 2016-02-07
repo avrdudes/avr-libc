@@ -28,19 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn size_t strcspn_P(const char *s, PGM_P reject)
-    
-    The strcspn_P() function calculates the length of the initial segment
-    of \p s which consists entirely of characters not in \p reject. This
-    function is similar to strcspn() except that \p reject is a pointer
-    to a string in program space.
-
-    \return The strcspn_P() function returns the number of characters in
-    the initial segment of \p s which are not in the string \p reject.
-    The terminating zero is not considered as a part of string.	*/
-
 #if !defined(__AVR_TINY__)
 
 #ifndef	__DOXYGEN__

@@ -47,21 +47,6 @@
 #define len_b1 r21
 #define len_b0 r20
 
-/** \ingroup avr_pgmspace
-    \fn size_t strnlen_PF(uint_farptr_t s, size_t len)
-    \brief Determine the length of a fixed-size string
-
-    The strnlen_PF() function is similar to strnlen(), except that \e s is a
-    far pointer to a string in program space
-
-    \param s A far pointer to the string in Flash
-    \param len The maximum number of length to return
-
-    \returns The strnlen_PF function returns strlen_P(\e s), if that is less
-    than \e len, or \e len if there is no '\\0' character among the first \e
-    len characters pointed to by \e s. The contents of RAMPZ SFR are
-    undefined when the function returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

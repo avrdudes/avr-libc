@@ -29,17 +29,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn char *strncat_P(char *dest, PGM_P src, size_t len)
-    \brief Concatenate two strings.
-
-    The strncat_P() function is similar to strncat(), except that the \e src
-    string must be located in program space (flash).
-
-    \returns The strncat_P() function returns a pointer to the resulting string
-    dest.  */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

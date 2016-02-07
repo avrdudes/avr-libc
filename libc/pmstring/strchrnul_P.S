@@ -28,18 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn PGM_P strchrnul_P(PGM_P s, int c)
-
-    The strchrnul_P() function is like strchr_P() except that if \p c is
-    not found in \p s, then it returns a pointer to the null byte at the
-    end of \p s, rather than \c NULL. (Glibc, GNU extension.)
-
-    \return The strchrnul_P() function returns a pointer to the matched
-    character, or a pointer to the null byte at the end of \p s (i.e.,
-    \c s+strlen(s)) if the character is not found.	*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

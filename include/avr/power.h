@@ -1242,6 +1242,7 @@ __power_all_disable()
 #endif
 }
 
+#ifndef __DOXYGEN__
 #ifndef power_all_enable
 #define power_all_enable() __power_all_enable()
 #endif
@@ -1249,6 +1250,7 @@ __power_all_disable()
 #ifndef power_all_disable
 #define power_all_disable() __power_all_disable()
 #endif
+#endif	/* !__DOXYGEN__ */
 
 
 #if defined(__AVR_AT90CAN32__) \
@@ -1407,6 +1409,7 @@ Clock prescaler setting enumerations for device using
 XTAL Divide Control Register.
 
 */
+#ifndef __DOXYGEN__
 typedef enum
 {
     clock_div_1 = 0,
@@ -1429,11 +1432,12 @@ typedef enum
 #endif
 } clock_div_t;
 
-
 static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+#endif	/* !__DOXYGEN__ */
 
-/** \addtogroup avr_power
-\code clock_prescale_set(x) \endcode
+/**
+   \ingroup avr_power
+   \fn clock_prescale_set(clock_div_t x)
 
 Set the clock prescaler register select bits, selecting a system clock
 division setting. This function is inlined, even if compiler
@@ -1461,7 +1465,7 @@ void clock_prescale_set(clock_div_t __x)
 }
 
 /** \addtogroup avr_power
-\code clock_prescale_get() \endcode
+\def clock_prescale_get()
 Gets and returns the clock prescaler register setting. The return type is \c clock_div_t.
 
 \note For device with XTAL Divide Control Register (XDIV), return can actually

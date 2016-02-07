@@ -29,21 +29,6 @@
 /* $Id$ */
 
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn char *strncpy_P(char *dest, PGM_P src, size_t n)
-
-    The strncpy_P() function is similar to strcpy_P() except that not more
-    than n bytes of src are copied.  Thus, if there is no null byte among the
-    first n bytes of src, the result will not be null-terminated.
-
-    In the case where the length of src is less than that of n, the remainder
-    of dest will be padded with nulls.
-
-    \returns The strncpy_P() function returns a pointer to the destination
-    string dest.  */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

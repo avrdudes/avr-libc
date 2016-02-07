@@ -184,7 +184,7 @@
 */
 
 
-#ifndef __ASSEMBLER__
+#if !(defined(__ASSEMBLER__) || defined(__DOXYGEN__))
 
 #ifndef LOCKMEM
 #define LOCKMEM  __attribute__((__used__, __section__ (".lock")))
@@ -193,9 +193,6 @@
 #ifndef LOCKBITS
 #define LOCKBITS unsigned char __lock LOCKMEM
 #endif
-
-#endif  /* !__ASSEMBLER */
-
 
 /* Lock Bit Modes */
 #if defined(__LOCK_BITS_EXIST)
@@ -235,5 +232,8 @@
 
 
 #define LOCKBITS_DEFAULT (0xFF)
+
+#endif  /* !(__ASSEMBLER || __DOXYGEN__) */
+
 
 #endif /* _AVR_LOCK_H_ */

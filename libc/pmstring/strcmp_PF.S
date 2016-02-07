@@ -46,21 +46,6 @@
 #define ret_b1 r25
 #define ret_b0 r24
 
-/** \ingroup avr_pgmspace
-    \fn int strcmp_PF (const char *s1, uint_farptr_t s2)
-	\brief Compares two strings
-
-    The strcmp_PF() function is similar to strcmp() except that \e s2 is a far
-    pointer to a string in program space
-
-    \param s1 A pointer to the first string in SRAM
-    \param s2 A far pointer to the second string in Flash
-
-    \returns The strcmp_PF() function returns an integer less than, equal to,
-    or greater than zero if \e s1 is found, respectively, to be less than, to
-    match, or be greater than \e s2. The contents of RAMPZ SFR are undefined
-    when the function returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

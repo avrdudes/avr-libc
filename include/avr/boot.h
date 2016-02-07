@@ -137,6 +137,7 @@
 
 #define BOOTLOADER_SECTION    __attribute__ ((section (".bootloader")))
 
+#ifndef __DOXYGEN__
 /* Create common bit definitions. */
 #ifdef ASB
 #define __COMMON_ASB    ASB
@@ -156,6 +157,7 @@
 #define BLB11           4
 #define BLB02           3
 #define BLB01           2
+#endif	/* __DOXYGEN__ */
 
 /** \ingroup avr_boot
     \def boot_spm_interrupt_enable()
@@ -193,6 +195,7 @@
 
 #define boot_spm_busy_wait()          do{}while(boot_spm_busy())
 
+#ifndef __DOXYGEN__
 #define __BOOT_PAGE_ERASE         (_BV(__SPM_ENABLE) | _BV(PGERS))
 #define __BOOT_PAGE_WRITE         (_BV(__SPM_ENABLE) | _BV(PGWRT))
 #define __BOOT_PAGE_FILL          _BV(__SPM_ENABLE)
@@ -429,6 +432,7 @@
         : "r0", "r30", "r31"                               \
     );                                                     \
 }))
+#endif	/* __DOXYGEN__ */
 
 /*
    Reading lock and fuse bits:
@@ -497,6 +501,9 @@
     __result;                                              \
 }))
 
+#ifndef __DOXYGEN__
+#define __BOOT_SIGROW_READ (_BV(__SPM_ENABLE) | _BV(SIGRD))
+#endif
 /** \ingroup avr_boot
     \def boot_signature_byte_get(address)
 
@@ -507,8 +514,6 @@
     Parameter \c address can be 0-0x1f as documented by the datasheet.
     \note The values are MCU type dependent.
 */
-
-#define __BOOT_SIGROW_READ (_BV(__SPM_ENABLE) | _BV(SIGRD))
 
 #define boot_signature_byte_get(addr) \
 (__extension__({                      \

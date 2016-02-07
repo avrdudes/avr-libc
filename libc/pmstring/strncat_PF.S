@@ -47,22 +47,6 @@
 #define len_b1 r19
 #define len_b0 r18
 
-/** \ingroup avr_pgmspace
-    \fn char *strncat_PF (char *dst, uint_farptr_t src, size_t n)
-    \brief Concatenate two strings
-
-    The strncat_PF() function is similar to strncat(), except that the \e src
-    string must be located in program space (flash) and is addressed using a
-    far pointer
-
-    \param dst A pointer to the destination string in SRAM
-    \param src A far pointer to the source string in Flash
-    \param n The maximum number of bytes to append
-
-    \returns The strncat_PF() function returns a pointer to the resulting
-    string \e dst. The contents of RAMPZ SFR are undefined when the function
-    returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

@@ -41,6 +41,7 @@
 
 #ifndef __ASSEMBLER__
 
+#ifndef __DOXYGEN__
 #define __need_NULL
 #define __need_size_t
 #define __need_wchar_t
@@ -49,6 +50,7 @@
 #ifndef __ptr_t
 #define __ptr_t void *
 #endif
+#endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -669,9 +671,12 @@ extern char *dtostrf(double __val, signed char __width,
 
 /*@}*/
 
+#ifndef __DOXYGEN__
+/* dummy declarations for libstdc++ compatibility */
 extern int atexit(void (*)(void));
 extern int system (const char *);
 extern char *getenv (const char *);
+#endif	/* __DOXYGEN__ */
 
 #ifdef __cplusplus
 }

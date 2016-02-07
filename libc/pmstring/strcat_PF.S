@@ -44,21 +44,6 @@
 #define src_b1 r21
 #define src_b0 r20
 
-/** \ingroup avr_pgmspace
-    \fn char *strcat_PF (char *dst, uint_farptr_t src)
-	\brief Concatenates two strings
-
-    The strcat_PF() function is similar to strcat() except that the \e src
-    string must be located in program space (flash) and is addressed using
-    a far pointer
-
-    \param dst A pointer to the destination string in SRAM
-    \param src A far pointer to the string to be appended in Flash
-
-    \returns The strcat_PF() function returns a pointer to the resulting
-    string \e dst. The contents of RAMPZ SFR are undefined when the function
-    returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

@@ -173,7 +173,7 @@ will be run by the compiler front-end first, resolving all \c \#include,
 passed on to the assembler.
 
 As the C preprocessor strips all C-style comments, preprocessed
-assembly source files can have both, C-style (<tt>/* ... *</tt><tt>/</tt>,
+assembly source files can have both, C-style (<tt>/</tt><tt>* ... *</tt><tt>/</tt>,
 <tt>// ...</tt>) as well as assembly-style (<tt>; ...</tt>) comments.
 
 At the top, the IO register definition file <tt>avr/io.h</tt> and the

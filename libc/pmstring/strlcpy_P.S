@@ -35,20 +35,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn size_t strlcpy_P (char *dst, PGM_P src, size_t siz)
-    \brief Copy a string from progmem to RAM.
-
-    Copy \p src to string \p dst of size \p siz.  At most \p siz-1
-    characters will be copied.  Always NULL terminates (unless \p siz == 0).
-    The strlcpy_P() function is similar to strlcpy() except that the
-    \p src is pointer to a string in memory space.
-
-    \returns The strlcpy_P() function returns strlen(src). If
-    retval >= siz, truncation occurred.  */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

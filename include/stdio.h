@@ -44,9 +44,11 @@
 #include <inttypes.h>
 #include <stdarg.h>
 
+#ifndef __DOXYGEN__
 #define __need_NULL
 #define __need_size_t
 #include <stddef.h>
+#endif	/* !__DOXYGEN__ */
 
 /** \file */
 /** \defgroup avr_stdio <stdio.h>: Standard IO facilities
@@ -941,7 +943,8 @@ static __inline__ int fflush(FILE *stream __attribute__((unused)))
 }
 #endif
 
-#if 1 /* ??? unimplemented  */
+#ifndef __DOXYGEN__
+/* only mentioned for libstdc++ support, not implemented in library */
 #define BUFSIZ 1024
 #define _IONBF 0
 __extension__ typedef long long fpos_t;
@@ -961,7 +964,7 @@ extern void setbuf(FILE *stream, char *buf);
 extern int setvbuf(FILE *stream, char *buf, int mode, size_t size);
 extern FILE *tmpfile(void);
 extern char *tmpnam (char *s);
-#endif
+#endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
 }
@@ -969,6 +972,7 @@ extern char *tmpnam (char *s);
 
 /*@}*/
 
+#ifndef __DOXYGEN__
 /*
  * The following constants are currently not used by avr-libc's
  * stdio subsystem.  They are defined here since the gcc build
@@ -977,6 +981,8 @@ extern char *tmpnam (char *s);
 #define SEEK_SET 0
 #define SEEK_CUR 1
 #define SEEK_END 2
+
+#endif
 
 #endif /* __ASSEMBLER */
 

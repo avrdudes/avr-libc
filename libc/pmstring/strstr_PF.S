@@ -35,21 +35,6 @@
 
 #include "macros.inc"
 
-/** \ingroup avr_pgmspace
-    \fn char *strstr_PF (const char *s1, uint_farptr_t s2)
-    \brief Locate a substring.
-
-    The strstr_PF() function finds the first occurrence of the substring \c s2
-    in the string \c s1.  The terminating '\\0' characters are not
-    compared.
-    The strstr_PF() function is similar to strstr() except that \c s2 is a
-    far pointer to a string in program space.
-
-    \returns The strstr_PF() function returns a pointer to the beginning of the
-    substring, or NULL if the substring is not found.
-    If \c s2 points to a string of zero length, the function returns \c s1. The
-    contents of RAMPZ SFR are undefined when the function returns */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

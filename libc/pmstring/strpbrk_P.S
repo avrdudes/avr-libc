@@ -28,22 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn char *strpbrk_P(const char *s, PGM_P accept)
-    
-    The strpbrk_P() function locates the first occurrence in the string
-    \p s of any of the characters in the flash string \p accept. This
-    function is similar to strpbrk() except that \p accept is a pointer
-    to a string in program space.
-
-    \return  The strpbrk_P() function returns a pointer to the character
-    in \p s that matches one of the characters in \p accept, or \c NULL
-    if no such character is found. The terminating zero is not considered
-    as a part of string: if one or both args are empty, the result will
-    \c NULL.	*/
-
-
 #if !defined(__AVR_TINY__)
 
 #ifndef	__DOXYGEN__

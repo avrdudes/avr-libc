@@ -28,19 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn PGM_P strrchr_P(PGM_P s, int val)
-    \brief Locate character in string.
-
-    The strrchr_P() function returns a pointer to the last occurrence of
-    the character \p val in the flash string \p s.
-
-    \return The strrchr_P() function returns a pointer to the matched
-    character or \c NULL if the character is not found. */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

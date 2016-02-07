@@ -43,20 +43,6 @@
 #define src_b1 r21
 #define src_b0 r20
 
-/** \ingroup avr_pgmspace
-    \fn char *strcpy_PF (char *dst, uint_farptr_t src)
-	\brief Duplicate a string
-
-    The strcpy_PF() function is similar to strcpy() except that \e src is a far
-    pointer to a string in program space
-
-    \param dst A pointer to the destination string in SRAM
-    \param src A far pointer to the source string in Flash
-
-    \returns The strcpy_PF() function returns a pointer to the destination
-    string \e dst. The contents of RAMPZ SFR are undefined when the funcion
-    returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

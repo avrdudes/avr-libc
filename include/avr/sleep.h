@@ -151,7 +151,7 @@
     #define _SLEEP_CONTROL_REG  MCUR
     #define _SLEEP_ENABLE_MASK  _BV(SE)
 
-#else
+#elif !defined(__DOXYGEN__)
 
     #define _SLEEP_CONTROL_REG  MCUCR
     #define _SLEEP_ENABLE_MASK  _BV(SE)
@@ -302,6 +302,10 @@ do {                                             \
 
 #if defined(__DOXYGEN__)
 
+/** \ingroup avr_sleep
+
+    Put the device into sleep mode, taking care of setting
+    the SE bit before, and clearing it afterwards. */
 extern void sleep_mode (void);
 
 #else
@@ -318,6 +322,11 @@ do {                 \
 
 #if defined(__DOXYGEN__)
 
+/** \ingroup avr_sleep
+
+    Disable BOD before going to sleep.
+    Not available on all devices.
+*/
 extern void sleep_bod_disable (void);
 
 #else

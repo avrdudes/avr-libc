@@ -40,6 +40,7 @@
 #ifndef	_STRING_H_
 #define	_STRING_H_ 1
 
+#ifndef __DOXYGEN__
 #define	__need_NULL
 #define	__need_size_t
 #include <stddef.h>
@@ -51,6 +52,7 @@
 #ifndef __ATTR_CONST__
 # define __ATTR_CONST__	__attribute__((__const__))
 #endif
+#endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -147,11 +149,12 @@ extern char *strtok(char *, const char *);
 extern char *strtok_r(char *, const char *, char **);
 extern char *strupr(char *);
 
-#if 1 /* ??? unimplemented */
+#ifndef __DOXYGEN__
+/* libstdc++ compatibility, dummy declarations */
 extern int strcoll(const char *s1, const char *s2);
 extern char *strerror(int errnum);
 extern size_t strxfrm(char *dest, const char *src, size_t n);
-#endif
+#endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
 }

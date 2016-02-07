@@ -35,17 +35,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn char *strcat_P(char *dest, PGM_P src)
-
-    The strcat_P() function is similar to strcat() except that the \e src
-    string must be located in program space (flash).
-
-    \returns The strcat() function returns a pointer to the resulting string
-    \e dest. */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

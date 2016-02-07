@@ -98,6 +98,7 @@
 
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 
+#ifndef __DOXYGEN__
 
 #if defined(WDP3)
 # define _WD_PS3_MASK       _BV(WDP3)
@@ -118,6 +119,8 @@
 #else
 #define _WD_CHANGE_BIT      WDCE
 #endif
+
+#endif	/* !__DOXYGEN__ */
 
 
 /**

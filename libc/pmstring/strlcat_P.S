@@ -35,24 +35,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn size_t strlcat_P (char *dst, PGM_P src, size_t siz)
-    \brief Concatenate two strings.
-
-    The strlcat_P() function is similar to strlcat(), except that the \p src
-    string must be located in program space (flash).
-
-    Appends \p src to string \p dst of size \p siz (unlike strncat(),
-    \p siz is the full size of \p dst, not space left).  At most \p siz-1
-    characters will be copied.  Always NULL terminates (unless \p siz <=
-    \p strlen(dst)).
-
-    \returns The strlcat_P() function returns strlen(src) + MIN(siz,
-    strlen(initial dst)).  If retval >= siz, truncation occurred.	*/
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

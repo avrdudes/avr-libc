@@ -34,17 +34,6 @@
 
 /* $Id$ */
 
-/** \ingroup avr_pgmspace
-    \fn size_t strlcpy_PF (char *dst, uint_farptr_t src, size_t siz)
-    \brief Copy a string from progmem to RAM.
-
-    Copy src to string dst of size siz.  At most siz-1 characters will be
-    copied. Always NULL terminates (unless siz == 0).
-
-    \returns The strlcpy_PF() function returns strlen(src). If retval >= siz,
-    truncation occurred.  The contents of RAMPZ SFR are undefined when the
-    function returns */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

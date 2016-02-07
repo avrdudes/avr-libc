@@ -29,27 +29,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn char *strtok_rP (char *string, PGM_P delim, char **last)
-    \brief Parses string into tokens.
-
-    The strtok_rP() function parses \p string into tokens. The first call to
-    strtok_rP() should have string as its first argument. Subsequent calls
-    should have the first argument set to NULL. If a token ends with a
-    delimiter, this delimiting character is overwritten with a '\\0' and a
-    pointer to the next character is saved for the next call to strtok_rP().
-    The delimiter string \p delim may be different for each call. \p last is
-    a user allocated char* pointer. It must be the same while parsing the
-    same string. strtok_rP() is a reentrant version of strtok_P().
-
-    The strtok_rP() function is similar to strtok_r() except that \p delim
-    is pointer to a string in program space.
-
-    \returns The strtok_rP() function returns a pointer to the next token or
-    NULL when no more tokens are found. */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

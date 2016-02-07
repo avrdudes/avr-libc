@@ -49,21 +49,6 @@
 #define tmp s2_b1	/* copied to Z pointer */
 #define cht s2_b0
 
-/** \ingroup avr_pgmspace
-    \fn int strcasecmp_PF (const char *s1, uint_farptr_t s2)
-    \brief Compare two strings ignoring case
-
-    The strcasecmp_PF() function compares the two strings \e s1 and \e s2, ignoring
-    the case of the characters
-
-    \param s1 A pointer to the first string in SRAM
-    \param s2 A far pointer to the second string in Flash
-
-    \returns The strcasecmp_PF() function returns an integer less than, equal
-    to, or greater than zero if \e s1 is found, respectively, to be less than, to
-    match, or be greater than \e s2. The contents of RAMPZ SFR are undefined
-    when the function returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

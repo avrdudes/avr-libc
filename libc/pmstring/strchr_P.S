@@ -29,24 +29,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn PGM_P strchr_P(PGM_P s, int val)
-    \brief Locate character in program space string.
-
-    The strchr_P() function locates the first occurrence of \p val
-    (converted to a char) in the string pointed to by \p s in program
-    space. The terminating null character is considered to be part of
-    the string.
-    
-    The strchr_P() function is similar to strchr() except that \p s is
-    pointer to a string in program space.
-
-    \returns The strchr_P() function returns a pointer to the matched
-    character or \c NULL if the character is not found. */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

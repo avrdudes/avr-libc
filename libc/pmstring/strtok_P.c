@@ -30,31 +30,9 @@
 
 #if !defined(__AVR_TINY__)
 
-/** \file */
-
 #include <avr/pgmspace.h>
 #include "sectionname.h"
 
-/** \ingroup avr_pgmspace
-    \brief Parses the string into tokens.
-
-    strtok_P() parses the string \p s into tokens. The first call to
-    strtok_P() should have \p s as its first argument. Subsequent calls
-    should have the first argument set to NULL. If a token ends with a
-    delimiter, this delimiting character is overwritten with a '\\0' and a
-    pointer to the next character is saved for the next call to strtok_P().
-    The delimiter string \p delim may be different for each call.
-
-    The strtok_P() function is similar to strtok() except that \p delim
-    is pointer to a string in program space.
-
-    \returns The strtok_P() function returns a pointer to the next token or
-    NULL when no more tokens are found.
-
-    \note strtok_P() is NOT reentrant. For a reentrant version of this
-    function see strtok_rP().
- */
- 
 ATTRIBUTE_CLIB_SECTION
 char *
 strtok_P (char *s, PGM_P delim)

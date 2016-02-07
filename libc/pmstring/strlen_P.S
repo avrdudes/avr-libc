@@ -28,22 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn size_t strlen_P(PGM_P src)
-
-    The strlen_P() function is similar to strlen(), except that src is a
-    pointer to a string in program space.
-
-    \returns The strlen() function returns the number of characters in src.
-    
-    \note strlen_P() is implemented as an inline function in the avr/pgmspace.h
-    header file, which will check if the length of the string is a constant
-    and known at compile time. If it is not known at compile time, the macro
-    will issue a call to __strlen_P() which will then calculate the length
-    of the string as normal.
-*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

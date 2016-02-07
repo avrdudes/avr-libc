@@ -28,17 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn char *strcpy_P(char *dest, PGM_P src)
-
-    The strcpy_P() function is similar to strcpy() except that src is a
-    pointer to a string in program space.
-
-    \returns The strcpy_P() function returns a pointer to the destination
-    string dest. */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

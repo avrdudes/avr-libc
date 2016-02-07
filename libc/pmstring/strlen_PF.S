@@ -41,18 +41,6 @@
 #define src_b1 r23
 #define src_b0 r22
 
-/** \ingroup avr_pgmspace
-    \fn size_t strlen_PF (uint_farptr_t s)
-    \brief Obtain the length of a string
-
-    The strlen_PF() function is similar to strlen(), except that \e s is a
-    far pointer to a string in program space
-
-    \param s A far pointer to the string in flash
-
-    \returns The strlen_PF() function returns the number of characters in
-    \e s. The contents of RAMPZ SFR are undefined when the function returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

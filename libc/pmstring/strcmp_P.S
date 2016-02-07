@@ -28,20 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn int strcmp_P(const char *s1, PGM_P s2)
-
-    The strcmp_P() function is similar to strcmp() except that \p s2 is
-    pointer to a string in program space.
-
-    \returns The strcmp_P() function returns an integer less than, equal
-    to, or greater than zero if \p s1 is found, respectively, to be less
-    than, to match, or be greater than \p s2. A consequence of the
-    ordering used by strcmp_P() is that if \p s1 is an initial substring
-    of \p s2, then \p s1 is considered to be "less than" \p s2. */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

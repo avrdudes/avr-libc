@@ -28,14 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn void *memcpy_P(void *dest, PGM_VOID_P src, size_t n)
-
-    The memcpy_P() function is similar to memcpy(), except the src string
-    resides in program space.
-
-    \returns The memcpy_P() function returns a pointer to dest.  */
 
 
 #if !defined(__AVR_TINY__)

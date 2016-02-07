@@ -32,19 +32,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn size_t strnlen_P(PGM_P src, size_t len)
-    \brief Determine the length of a fixed-size string.
-
-    The strnlen_P() function is similar to strnlen(), except that \c src is a
-    pointer to a string in program space.
-
-    \returns The strnlen_P function returns strlen_P(src), if that is less than
-    \c len, or \c len if there is no '\\0' character among the first \c len
-    characters pointed to by \c src. */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

@@ -36,26 +36,6 @@
    Contributors:
      Created by Reiner Patommel
 */
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn int strncasecmp_P(const char *s1, PGM_P s2, size_t n)
-    \brief Compare two strings ignoring case.
-
-    The strncasecmp_P() function is similar to strcasecmp_P(), except it
-    only compares the first \p n characters of \p s1.
-
-    \param s1 A pointer to a string in the devices SRAM.
-    \param s2 A pointer to a string in the devices Flash.
-    \param n The maximum number of bytes to compare.
-
-    \returns The strncasecmp_P() function returns an integer less than,
-    equal to, or greater than zero if \p s1 (or the first \p n bytes
-    thereof) is found, respectively, to be less than, to match, or be
-    greater than \p s2. A consequence of the ordering used by
-    strncasecmp_P() is that if \p s1 is an initial substring of \p s2,
-    then \p s1 is considered to be "less than" \p s2.  */
-
 
 #if !defined(__AVR_TINY__)
 

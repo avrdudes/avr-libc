@@ -51,23 +51,6 @@
 #define ret_b1 r25
 #define ret_b0 r24
 
-/** \ingroup avr_pgmspace
-    \fn int strncasecmp_PF (const char *s1, uint_farptr_t s2, size_t n)
-    \brief Compare two strings ignoring case
-
-    The strncasecmp_PF() function is similar to strcasecmp_PF(), except it
-    only compares the first \e n characters of \e s1 and the string in flash is
-    addressed using a far pointer
-
-    \param s1 A pointer to a string in SRAM
-    \param s2 A far pointer to a string in Flash
-    \param n The maximum number of bytes to compare
-
-    \returns The strncasecmp_PF() function returns an integer less than, equal
-    to, or greater than zero if \e s1 (or the first \e n bytes thereof) is found,
-    respectively, to be less than, to match, or be greater than \e s2. The
-    contents of RAMPZ SFR are undefined when the function returns  */
-
 #if !defined(__DOXYGEN__)
 
 	.text

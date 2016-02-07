@@ -49,6 +49,7 @@
     Since these typedefs are mandated by the C99 standard, they are preferred
     over rolling your own typedefs.  */
 
+#ifndef __DOXYGEN__
 /*
  * __USING_MINT8 is defined to 1 if the -mint8 option is in effect.
  */
@@ -57,6 +58,8 @@
 #else
 # define __USING_MINT8 0
 #endif
+
+#endif	/* !__DOXYGEN__ */
 
 /* Integer types */
 
@@ -281,11 +284,14 @@ typedef uint64_t uintmax_t;
 
 /*@}*/
 
+#ifndef __DOXYGEN__
 /* Helping macro */
 #ifndef __CONCAT
 #define __CONCATenate(left, right) left ## right
 #define __CONCAT(left, right) __CONCATenate(left, right)
 #endif
+
+#endif	/* !__DOXYGEN__ */
 
 #if !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS)
 

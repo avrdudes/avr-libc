@@ -36,23 +36,6 @@
    Contributors:
      Created by Reiner Patommel
 */
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn int strcasecmp_P(const char *s1, PGM_P s2)
-    \brief Compare two strings ignoring case.
-
-    The strcasecmp_P() function compares the two strings \p s1 and \p s2,
-    ignoring the case of the characters.
-
-    \param s1 A pointer to a string in the devices SRAM.
-    \param s2 A pointer to a string in the devices Flash.
-
-    \returns The strcasecmp_P() function returns an integer less than,
-    equal to, or greater than zero if \p s1 is found, respectively, to
-    be less than, to match, or be greater than \p s2. A consequence of
-    the ordering used by strcasecmp_P() is that if \p s1 is an initial
-    substring of \p s2, then \p s1 is considered to be "less than" \p s2. */
 
 
 #if !defined(__AVR_TINY__)

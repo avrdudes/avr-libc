@@ -29,20 +29,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn PGM_VOID_P memchr_P(PGM_VOID_P s, int val, size_t len)
-    \brief Scan flash memory for a character.
-
-    The memchr_P() function scans the first \p len bytes of the flash
-    memory area pointed to by \p s for the character \p val.  The first
-    byte to match \p val (interpreted as an unsigned character) stops
-    the operation.
-
-    \return The memchr_P() function returns a pointer to the matching
-    byte or \c NULL if the character does not occur in the given memory
-    area.	*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

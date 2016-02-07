@@ -28,11 +28,13 @@
 
 #include <stdlib.h>
 
+#ifndef __DOXYGEN__
 static struct atexit_s
 {
   void (*fun) (void);
   struct atexit_s *next;
 } *atexit_p;
+#endif
 
 int
 atexit (void (*fun) (void))
@@ -46,6 +48,7 @@ atexit (void (*fun) (void))
   return 0;
 }
 
+#ifndef __DOXYGEN__
 /* Don't inline this code as naked to arrange for the very unlikely case
    that it needs a frame.   This won't work as naked function.  */
 
@@ -68,3 +71,4 @@ atexit_fini (void)
 {
   atexit_finido ();
 }
+#endif	/* !__DOXYGEN__ */

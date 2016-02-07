@@ -28,20 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_pgmspace
-    \fn size_t strspn_P(const char *s, PGM_P accept)
-
-    The strspn_P() function calculates the length of the initial segment
-    of \p s which consists entirely of characters in \p accept. This
-    function is similar to strspn() except that \p accept is a pointer
-    to a string in program space.
-		 
-    \return  The strspn_P() function returns the number of characters in
-    the initial segment of \p s which consist only of characters from \p
-    accept. The terminating zero is not considered as a part of string.	*/
-
-
 #if !defined(__AVR_TINY__)
 
 #ifndef	__DOXYGEN__

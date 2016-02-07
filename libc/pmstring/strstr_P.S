@@ -2,7 +2,7 @@
    Copyright (c) 2005, 2006, 2007 Werner Boellmann
    Copyright (c) 2007  Dmirty Xmelkov
    All rights reserved.
-   
+
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
@@ -36,26 +36,10 @@
 
    Originally contributed by:
      Philip Soeberg <philip@soeberg.net>
-     
-   Modified for string s2 in program space by: 
+
+   Modified for string s2 in program space by:
      Werner Boellmann <wb@muekno.de>
 */
-
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn char *strstr_P(const char *s1, PGM_P s2)
-    \brief Locate a substring.
-
-    The strstr_P() function finds the first occurrence of the substring
-    \p s2 in the string \p s1.  The terminating '\\0' characters are not
-    compared. The strstr_P() function is similar to strstr() except that
-    \p s2 is pointer to a string in program space.
-
-    \returns The strstr_P() function returns a pointer to the beginning
-    of the substring, or NULL if the substring is not found. If \p s2
-    points to a string of zero length, the function returns \p s1. */
-
 
 #if !defined(__AVR_TINY__)
 

@@ -29,21 +29,6 @@
   
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn int memcmp_P(const void *s1, PGM_VOID_P s2, size_t len)
-    \brief Compare memory areas
-    
-    The memcmp_P() function compares the first \p len bytes of the memory
-    areas \p s1 and flash \p s2. The comparision is performed using unsigned
-    char operations.
-    
-    \returns The memcmp_P() function returns an integer less than, equal
-    to, or greater than zero if the first \p len bytes of \p s1 is found,
-    respectively, to be less than, to match, or be greater than the first
-    \p len bytes of \p s2.	*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

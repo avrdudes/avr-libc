@@ -41,17 +41,24 @@
     Some functions in the library set the global variable \c errno when an
     error occurs. The file, \c <errno.h>, provides symbolic names for various
     error codes. 
+ */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/** \ingroup avr_errno
+    \brief Error code for last error encountered by library
+
+    The variable \c errno holds the last error code encountered by
+    a library function.  This variable must be cleared by the
+    user prior to calling a library function.
 
     \warning The \c errno global variable is not safe to use in a threaded or
     multi-task system. A race condition can occur if a task is interrupted
     between the call which sets \c error and when the task examines \c
     errno. If another task changes \c errno during this time, the result will
     be incorrect for the interrupted task. */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 extern int errno;
 
 #ifdef __cplusplus
@@ -69,6 +76,8 @@ extern int errno;
 
     Range error. */
 #define ERANGE     34
+
+#ifndef __DOXYGEN__
 
 /* ((((('E'-64)*26+('N'-64))*26+('O'-64))*26+('S'-64))*26+('Y'-64))*26+'S'-64 */
 #define ENOSYS ((int)(66081697 & 0x7fff))
@@ -139,5 +148,7 @@ extern int errno;
 
 /* ((((('E'-64)*26+('N'-64))*26+('O'-64))*26+('E'-64))*26+('R'-64))*26+'R'-64 */
 #define ENOERR ((int)(66072050 & 0xffff))
+
+#endif	/* !__DOXYGEN__ */
 
 #endif

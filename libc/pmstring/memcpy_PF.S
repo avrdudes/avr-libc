@@ -45,20 +45,6 @@
 #define len_b1 r19
 #define len_b0 r18
 
-/** \ingroup avr_pgmspace
-    \fn void *memcpy_PF (void *dest, uint_farptr_t src, size_t n)
-    \brief Copy a memory block from flash to SRAM
-
-    The memcpy_PF() function is similar to memcpy(), except the data
-    is copied from the program space and is addressed using a far pointer
-
-	\param dst A pointer to the destination buffer
-	\param src A far pointer to the origin of data in flash memory
-	\param n The number of bytes to be copied
-
-    \returns The memcpy_PF() function returns a pointer to \e dst. The contents
-    of RAMPZ SFR are undefined when the function returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

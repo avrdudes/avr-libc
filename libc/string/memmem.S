@@ -41,12 +41,6 @@
     the substring, or \c NULL if the substring is not found. If \p len2
     is zero, the function returns \p s1.	*/
 
-/** \ingroup avr_pgmspace
-    \fn void *memmem_P(const void *s1, size_t len1, PGM_VOID_P s2, size_t len2)
-    
-    The memmem_P() function is similar to memmem() except that \p s2 is
-    pointer to a string in program space.	*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

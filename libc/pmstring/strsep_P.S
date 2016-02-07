@@ -31,28 +31,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn char *strsep_P(char **sp, PGM_P delim)
-    \brief Parse a string into tokens.
-
-    The strsep_P() function locates, in the string referenced by \p *sp,
-    the first occurrence of any character in the string \p delim (or the
-    terminating '\\0' character) and replaces it with a '\\0'.  The
-    location of the next character after the delimiter character (or \c
-    NULL, if the end of the string was reached) is stored in \p *sp. An
-    ``empty'' field, i.e. one caused by two adjacent delimiter
-    characters, can be detected by comparing the location referenced by
-    the pointer returned in \p *sp to '\\0'. This function is similar to
-    strsep() except that \p delim is a pointer to a string in program
-    space.
-   
-    \return The strsep_P() function returns a pointer to the original
-    value of \p *sp. If \p *sp is initially \c NULL, strsep_P() returns
-    \c NULL.	*/
-     
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

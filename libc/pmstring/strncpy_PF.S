@@ -46,25 +46,6 @@
 #define len_b0 r18
 
 
-/** \ingroup avr_pgmspace
-    \fn char *strncpy_PF (char *dst, uint_farptr_t src, size_t n)
-	\brief Duplicate a string until a limited length
-
-    The strncpy_PF() function is similar to strcpy_PF() except that not more
-    than \e n bytes of \e src are copied.  Thus, if there is no null byte among
-    the first \e n bytes of \e src, the result will not be null-terminated
-
-    In the case where the length of \e src is less than that of \e n, the
-    remainder of \e dst will be padded with nulls
-
-    \param dst A pointer to the destination string in SRAM
-    \param src A far pointer to the source string in Flash
-    \param n The maximum number of bytes to copy
-
-    \returns The strncpy_PF() function returns a pointer to the destination
-    string \e dst. The contents of RAMPZ SFR are undefined when the function
-    returns */
-
 #if !defined(__DOXYGEN__)
 
 	.text

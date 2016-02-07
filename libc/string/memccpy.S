@@ -42,12 +42,6 @@
     in \p dest after \p val, or NULL if \p val was not found in the first
     \p len characters of \p src.	*/
 
-/** \ingroup avr_pgmspace
-    \fn void *memccpy_P (void *dest, PGM_VOID_P src, int val, size_t len)
-
-    This function is similar to memccpy() except that \p src is pointer
-    to a string in program space.	*/
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"

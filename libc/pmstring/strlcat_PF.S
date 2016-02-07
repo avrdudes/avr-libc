@@ -34,26 +34,6 @@
 
 /* $Id$ */
 
-/** \ingroup avr_pgmspace
-    \fn size_t strlcat_PF (char *dst, uint_farptr_t src, size_t n)
-    \brief Concatenate two strings
-
-    The strlcat_PF() function is similar to strlcat(), except that the \e src
-    string must be located in program space (flash) and is addressed using
-	a far pointer
-
-    Appends src to string dst of size \e n (unlike strncat(), \e n is the
-    full size of \e dst, not space left).  At most \e n-1 characters
-    will be copied.  Always NULL terminates (unless \e n <= strlen(\e dst))
-
-    \param dst A pointer to the destination string in SRAM
-    \param src A far pointer to the source string in Flash
-    \param n The total number of bytes allocated to the destination string
-
-    \returns The strlcat_PF() function returns strlen(\e src) + MIN(\e n,
-    strlen(initial \e dst)).  If retval >= \e n, truncation occurred. The
-    contents of RAMPZ SFR are undefined when the funcion returns */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

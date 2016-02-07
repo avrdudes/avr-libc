@@ -35,24 +35,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_pgmspace
-    \fn int memcmp_PF(const void *s1, uint_farptr_t s2, size_t len)
-    \brief Compare memory areas
-
-    The memcmp_PF() function compares the first \p len bytes of the memory
-    areas \p s1 and flash \p s2. The comparision is performed using unsigned
-    char operations. It is an equivalent of memcmp_P() function, except
-    that it is capable working on all FLASH including the exteded area
-    above 64kB.
-
-    \returns The memcmp_PF() function returns an integer less than, equal
-    to, or greater than zero if the first \p len bytes of \p s1 is found,
-    respectively, to be less than, to match, or be greater than the first
-    \p len bytes of \p s2.  */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

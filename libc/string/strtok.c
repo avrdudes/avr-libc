@@ -50,7 +50,9 @@
 #include <string.h>
 #include "sectionname.h"
 
+#ifndef __DOXYGEN__
 static char *p;
+#endif
 
 ATTRIBUTE_CLIB_SECTION
 char *
