@@ -405,7 +405,7 @@ avr-libc can be freely used and redistributed, provided the following
 license conditions are met.
 
 \verbatim
-Portions of avr-libc are Copyright (c) 1999-2010
+Portions of avr-libc are Copyright (c) 1999-2016
 Werner Boellmann,
 Dean Camera,
 Pieter Conradie,

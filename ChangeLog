@@ -1,3 +1,7 @@
+2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/main_page.dox: Update copyright year.
+
 2016-02-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fix most of the doxygen warnings.
