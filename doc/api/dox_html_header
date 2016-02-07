@@ -52,17 +52,17 @@ $extrastylesheet
 </table>
 <table>
   <tr>
-    <td align="left"><a href="http://www.nongnu.org/avr-libc/">AVR Libc Home Page</a></td>
+    <td align="left"><a href="http://www.nongnu.org/avr-libc/"><h2>AVR Libc Home Page</h2></a></td>
     <td align="center" colspan=4><img src="avrs.png" alt="AVRs" align="middle" border="0"></td>
-    <td align="right"><a href="https://savannah.nongnu.org/projects/avr-libc/">AVR Libc Development Pages</a></td>
+    <td align="right"><a href="https://savannah.nongnu.org/projects/avr-libc/"><h2>AVR Libc Development Pages</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="13%"><a href="index.html">Main Page</a></td>
-    <td align="center" width="13%"><a href="pages.html">User Manual</a></td>
-    <td align="center" width="13%"><a href="modules.html">Library Reference</a></td>
-    <td align="center" width="13%"><a href="FAQ.html">FAQ</a></td>
-    <td align="center" width="13%"><a href="globals.html">Alphabetical Index</a></td>
-    <td align="center" width="13%"><a href="group__demos.html">Example Projects</a></td>
+    <td align="center" width="13%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="13%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="13%"><a href="modules.html"><h2>Library Reference</h2></a></td>
+    <td align="center" width="13%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="13%"><a href="globals.html"><h2>Alphabetical Index</h2></a></td>
+    <td align="center" width="13%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
   </tr>
 </table>
 </div>
