@@ -1,5 +1,10 @@
 2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* configure.ac: Bump version to 2.0.0, in preparation of the
+	upcoming release.
+
+2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/dox_html_header: Drop the alphabetical index from the
 	top bar, as it does not work as expected when setting
 	DISABLE_INDEX in the config file (it only yielded the very first

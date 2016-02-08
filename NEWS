@@ -1,4 +1,8 @@
-*** Changes since avr-libc-1.8.1:
+*** Changes in avr-libc-2.0.0:
+
+* General:
+
+    This is the first official release supporting AVR-GCC 5 (and above).
 
 * Bugs fixed:
 
