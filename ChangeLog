@@ -1,5 +1,10 @@
 2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/overview.dox: Remove obsolete sentence claiming
+	SimulAVR were unmaintained.
+
+2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* configure.ac: Bump version to 2.0.0, in preparation of the
 	upcoming release.
 

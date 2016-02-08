@@ -234,8 +234,7 @@ In-Circuit Emulator (ICE), to provide emulation capabilities.
 
 \section overview_simulavr SimulAVR
 
-SimulAVR is an AVR simulator used as a back-end with AVR GDB. Unfortunately,
-this project is currently unmaintained and could use some help.
+SimulAVR is an AVR simulator used as a back-end with AVR GDB.
 
 
 \section overview_utilities Utilities
