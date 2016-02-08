@@ -1,5 +1,13 @@
 2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/doxygen.config.in (MARKDOWN_SUPPORT): Turn off markdown
+	support, as it clashes with the use of __FOO__-style macro names.
+	* include/util/delay.h.in: Rephrase and reformat the documentation
+	of _delay_ms() and _delay_us().  This fixes the remaining doxygen
+	warnings.
+
+2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/main_page.dox: Update copyright year.
 
 2016-02-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
