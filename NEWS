@@ -16,6 +16,8 @@
   [#44977] Incorrect PORT_t and CRC_t definitions for ATxmega64A1U and 128A1U
   [#45539] iom32u4.h defines reserved IO address (TIMSK2 (0x70), TIMSK5 (0x73) etc)
   [#45551] Power-save mode not supported for ATtiny167
+  [#36303] Wrong hour for EU Summertime
+  [#44514] Wrong build option '-mtiny-stack' instead of '-msp8'
   [no-id] TC_EVACT_FRQ_gc was misspelled as TC_EVACT_FRW_gc in some Xmega
           header files
   [no-id] LOCKBITS renamed to LOCK_BITS in Xmega header files as LOCKBITS
@@ -33,6 +35,7 @@
 
   [no-id] save & restore rampd register in xmega wdt_enable and wdt_disable
   [#8543] Fix multiple issues with device header files
+  [#8557] Proposing to remove device specific xmega macros from sleep.h
   [#8563] Generalize power reduction macros in power.h by removing hard coded device names
   [#8564] Add dwarf debug info alternative, build printf with debug info
   [#8565] Compute and include device header file name from
