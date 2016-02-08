@@ -1,5 +1,14 @@
 2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/dox_html_header: Drop the alphabetical index from the
+	top bar, as it does not work as expected when setting
+	DISABLE_INDEX in the config file (it only yielded the very first
+	index block, i.e. names starting with an underscore). Since
+	there's now a search field, the value of the index is questionable
+	anyway.
+
+2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/doxygen.config.in (MARKDOWN_SUPPORT): Turn off markdown
 	support, as it clashes with the use of __FOO__-style macro names.
 	* include/util/delay.h.in: Rephrase and reformat the documentation
