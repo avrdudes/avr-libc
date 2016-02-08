@@ -21,6 +21,7 @@
 	* include/stdlib.h: (Dito.)
 	* include/string.h: (Dito.)
 	* include/time.h: (Dito.)
+	* include/util/delay.h.in: (Dito.)
 	* libc/pmstring/memchr_P.S: (Dito.)
 	* libc/pmstring/memcmp_P.S: (Dito.)
 	* libc/pmstring/memcmp_PF.S: (Dito.)

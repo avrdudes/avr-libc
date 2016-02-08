@@ -35,9 +35,11 @@
 #ifndef _UTIL_DELAY_H_
 #define _UTIL_DELAY_H_ 1
 
-#ifndef __HAS_DELAY_CYCLES
-#define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
-#endif
+#ifndef __DOXYGEN__
+#  ifndef __HAS_DELAY_CYCLES
+#    define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
+#  endif
+#endif  /* __DOXYGEN__ */
 
 #include <inttypes.h>
 #include <util/delay_basic.h>
@@ -88,6 +90,21 @@ static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__))
 #ifndef F_CPU
 /* prevent compiler error by supplying a default */
 # warning "F_CPU not defined for <util/delay.h>"
+/** \ingroup util_delay
+    \def F_CPU
+    \brief CPU frequency in Hz
+
+    The macro F_CPU specifies the CPU frequency to be considered by
+    the delay macros.  This macro is normally supplied by the
+    environment (e.g. from within a project header, or the project's
+    Makefile).  The value 1 MHz here is only provided as a "vanilla"
+    fallback if no such user-provided definition could be found.
+
+    In terms of the delay functions, the CPU frequency can be given as
+    a floating-point constant (e.g. 3.6864E6 for 3.6864 MHz).
+    However, the macros in <util/setbaud.h> require it to be an
+    integer value.
+ */
 # define F_CPU 1000000UL
 #endif
 
