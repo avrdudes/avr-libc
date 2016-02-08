@@ -1,5 +1,9 @@
 2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* doc/api/rel-method.dox: Mention major number 2.
+
+2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/overview.dox: Remove obsolete sentence claiming
 	SimulAVR were unmaintained.
 

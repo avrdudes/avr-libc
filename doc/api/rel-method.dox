@@ -32,9 +32,10 @@
 Release numbers consist of three parts, a major number, a minor
 number, and a revision number, each separated by a dot.
 
-The major number is currently 1 (and has always been).  It will only
-be bumped in case a new version offers a major change in the API that
-is not backwards compatible.
+The major number is currently 2, to indicate the multilib layout has
+been adapted to the fairly different one used starting with AVR-GCC
+version 5.  Nevertheless, it is still believed to be generally
+API-compatible with release versions 1.x.
 
 In the past (up to 1.6.x), even minor numbers have been used to
 indicate "stable" releases, and odd minor numbers have been reserved
