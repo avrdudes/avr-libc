@@ -40,8 +40,8 @@ dnl        macro name           value            description
 m4_define([avr_libc_major],    [2])dnl           major version
 m4_define([avr_libc_minor],    [0])dnl           minor version
 m4_define([avr_libc_revision], [0])dnl           revision (dot-dot version)
-m4_define([avr_libc_revision_suffix], [])dnl     revision suffix (if any)
-m4_define([avr_libc_reldate],  [20150208])dnl    release date
+m4_define([avr_libc_revision_suffix], [yes])dnl     revision suffix (if any)
+m4_define([avr_libc_reldate],  [20150209])dnl    release date
 dnl end of library versioning data
 
 m4_define([avr_libc_version],
