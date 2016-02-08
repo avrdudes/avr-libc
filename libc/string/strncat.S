@@ -28,17 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn char *strncat(char *dest, const char *src, size_t len)
-    \brief Concatenate two strings.
-
-    The strncat() function is similar to strcat(), except that only the first
-    n characters of src are appended to dest.
-
-    \returns The strncat() function returns a pointer to the resulting string
-    dest.  */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

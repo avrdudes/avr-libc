@@ -28,13 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_string
-    \fn int ffsl (long val);
-
-    \brief Same as ffs(), for an argument of type long.	*/
-
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"

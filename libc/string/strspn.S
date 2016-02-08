@@ -28,17 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn size_t strspn(const char *s, const char *accept)
-
-    The strspn() function calculates the length of the initial segment
-    of \p s which consists entirely of characters in \p accept.
-		 
-    \return  The strspn() function returns the number of characters in
-    the initial segment of \p s which consist only of characters from \p
-    accept. The terminating zero is not considered as a part of string.	*/
-
 #if !defined(__AVR_TINY__)
 
 #ifndef	__DOXYGEN__

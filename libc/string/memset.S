@@ -28,16 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn void *memset(void *dest, int val, size_t len)
-    \brief Fill memory with a constant byte.
-
-    The memset() function fills the first len bytes of the memory area pointed
-    to by dest with the constant byte val.
-
-    \returns The memset() function returns a pointer to the memory area dest. */
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"

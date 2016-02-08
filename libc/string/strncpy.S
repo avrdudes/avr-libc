@@ -28,21 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn char *strncpy(char *dest, const char *src, size_t len)
-    \brief Copy a string.
-
-    The strncpy() function is similar to strcpy(), except that not more than n
-    bytes of src are copied. Thus, if there is no null byte among the first n
-    bytes of src, the result will not be null-terminated.
-
-    In the case where the length of src is less than that of n, the remainder
-    of dest will be padded with nulls.
-
-    \returns The strncpy() function returns a pointer to the destination
-    string dest.  */
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"

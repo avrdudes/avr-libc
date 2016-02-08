@@ -28,18 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn char *strchrnul(const char *s, int c)
-
-    The strchrnul() function is like strchr() except that if \p c is not
-    found in \p s, then it returns a pointer to the null byte at the end
-    of \p s, rather than \c NULL. (Glibc, GNU extension.)
-
-    \return The strchrnul() function returns a pointer to the matched
-    character, or a pointer to the null byte at the end of \p s (i.e.,
-    \c s+strlen(s)) if the character is not found.	*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

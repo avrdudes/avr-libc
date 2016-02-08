@@ -28,18 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-	\fn void *memchr(const void *src, int val, size_t len)
-    \brief Scan memory for a character.
-
-    The memchr() function scans the first len bytes of the memory area pointed
-    to by src for the character val.  The first byte to match val (interpreted
-    as an unsigned character) stops the operation.
-
-    \returns The memchr() function returns a pointer to the matching byte or
-    NULL if the character does not occur in the given memory area.  */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

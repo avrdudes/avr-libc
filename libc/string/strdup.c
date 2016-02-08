@@ -32,26 +32,6 @@
 #include <string.h>
 #include "sectionname.h"
 
-/** \file */
-/** \ingroup avr_string
-    \fn char *strdup(const char *s1)
-    \brief Duplicate a string.
-
-    The strdup() function allocates memory and copies into it the string
-    addressed by s1, including the terminating null character.
-
-    \warning The strdup() function calls malloc() to allocate the memory
-    for the duplicated string! The user is responsible for freeing the
-    memory by calling free(). 
-    
-    \returns The strdup() function returns a pointer to the resulting string
-    dest. If malloc() cannot allocate enough storage for the string, strdup() 
-    will return NULL.
-
-    \warning Be sure to check the return value of the strdup() function to
-    make sure that the function has succeeded in allocating the memory!
-*/
-
 ATTRIBUTE_CLIB_SECTION
 char *
 strdup(const char *s1)

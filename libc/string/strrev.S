@@ -36,16 +36,6 @@
    Contributors:
      Created by Reiner Patommel
 */
-/** \file */
-
-/** \ingroup avr_string
-    \fn char *strrev(char *s)
-    \brief Reverse a string.
-
-    The strrev() function reverses the order of the string.
-
-    \returns The strrev() function returns a pointer to the beginning of the
-    reversed string.  */
 
 #if !defined(__AVR_TINY__)
 

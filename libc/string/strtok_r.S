@@ -30,24 +30,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_string
-    \fn char *strtok_r(char *string, const char *delim, char **last)
-    \brief Parses string into tokens.
-
-    strtok_r parses string into tokens. The first call to strtok_r
-    should have string as its first argument. Subsequent calls should have
-    the first argument set to NULL. If a token ends with a delimiter, this
-    delimiting character is overwritten with a '\\0' and a pointer to the next
-    character is saved for the next call to strtok_r. The delimiter string
-    \p delim may be different for each call. \p last is a user allocated char*
-    pointer. It must be the same while parsing the same string. strtok_r is
-    a reentrant version of strtok().
-
-    \returns The strtok_r() function returns a pointer to the next token or
-    NULL when no more tokens are found. */
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

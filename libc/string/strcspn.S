@@ -28,17 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn size_t strcspn(const char *s, const char *reject)
-    
-    The strcspn() function calculates the length of the initial segment
-    of \p s which consists entirely of characters not in \p reject.
-
-    \return The strcspn() function returns the number of characters in
-    the initial segment of \p s which are not in the string \p reject.
-    The terminating zero is not considered as a part of string.	*/
-
 #if !defined(__AVR_TINY__)
 
 #ifndef	__DOXYGEN__

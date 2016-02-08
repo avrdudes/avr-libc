@@ -28,20 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_string
-    \fn void *memccpy(void *dest, const void *src, int val, size_t len)
-    \brief Copy memory area.
-
-    The memccpy() function copies no more than \p len bytes from memory
-    area \p src to memory area \p dest, stopping when the character \p val
-    is found.
-
-    \returns The memccpy() function returns a pointer to the next character
-    in \p dest after \p val, or NULL if \p val was not found in the first
-    \p len characters of \p src.	*/
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
