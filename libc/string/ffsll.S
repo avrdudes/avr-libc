@@ -30,13 +30,6 @@
 
 #if !defined(__AVR_TINY__)
 
-/** \file */
-
-/** \ingroup avr_string
-    \fn int ffsll (long long val);
-
-    \brief Same as ffs(), for an argument of type long long.	*/
-
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"

@@ -36,21 +36,6 @@
    Contributors:
      Created by Reiner Patommel
 */
-/** \file */
-
-/** \ingroup avr_string
-    \fn int strncasecmp(const char *s1, const char *s2, size_t len)
-    \brief Compare two strings ignoring case.
-
-    The strncasecmp() function is similar to strcasecmp(), except it
-    only compares the first \p len characters of \p s1.
-
-    \returns The strncasecmp() function returns an integer less than,
-    equal to, or greater than zero if \p s1 (or the first \p len bytes
-    thereof) is found, respectively, to be less than, to match, or be
-    greater than \p s2. A consequence of the ordering used by
-    strncasecmp() is that if \p s1 is an initial substring of \p s2,
-    then \p s1 is considered to be "less than" \p s2.  */
 
 #if !defined(__DOXYGEN__)
 
@@ -70,7 +55,7 @@
 	ASSEMBLY_CLIB_SECTION
 	.global	_U(strncasecmp)
 	.type	_U(strncasecmp), @function
-	
+
 _U(strncasecmp):
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo

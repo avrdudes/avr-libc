@@ -25,26 +25,8 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
-  
+
 /* $Id$ */
-
-/** \file */
-/** \ingroup avr_string
-    \fn int memcmp(const void *s1, const void *s2, size_t len)
-    \brief Compare memory areas
-    
-    The memcmp() function compares the first len bytes of the memory areas s1
-    and s2. The comparision is performed using unsigned char operations.
-    
-    \returns The memcmp() function returns an integer less than, equal to, or
-    greater than zero if the first len bytes of s1 is found, respectively, to be
-    less than, to match, or be greater than the first len bytes of s2.
-
-    \note Be sure to store the result in a 16 bit variable since you may get
-    incorrect results if you use an unsigned char or char due to truncation.
-
-    \warning This function is not -mint8 compatible, although if you only care
-    about testing for equality, this function should be safe to use. */
 
 #if !defined(__DOXYGEN__)
 

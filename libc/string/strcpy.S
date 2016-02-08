@@ -28,24 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn char *strcpy(char *dest, const char *src)
-    \brief Copy a string.
-
-    The strcpy() function copies the string pointed to by src (including the
-    terminating '\\0' character) to the array pointed to by dest.  The strings
-    may not overlap, and the destination string dest must be large enough to
-    receive the copy.
-
-    \returns The strcpy() function returns a pointer to the destination
-    string dest. 
-
-    \note If the destination string of a strcpy() is not large enough (that
-    is, if the programmer was stupid/lazy, and failed to check the size before
-    copying) then anything might happen.  Overflowing fixed length strings is
-    a favourite cracker technique. */
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"

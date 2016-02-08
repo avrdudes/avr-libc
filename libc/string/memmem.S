@@ -28,19 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_string
-    \fn void *memmem(const void *s1, size_t len1, const void *s2, size_t len2)
-
-    The memmem() function finds the start of the first occurrence of the
-    substring \p s2 of length \p len2 in the memory area \p s1 of length
-    \p len1.
-
-    \return The memmem() function returns a pointer to the beginning of
-    the substring, or \c NULL if the substring is not found. If \p len2
-    is zero, the function returns \p s1.	*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

@@ -36,21 +36,6 @@
    Contributors:
      Created by Reiner Patommel
 */
-/** \file */
-
-/** \ingroup avr_string
-    \fn int strcasecmp(const char *s1, const char *s2)
-    \brief Compare two strings ignoring case.
-
-    The strcasecmp() function compares the two strings \p s1 and \p s2,
-    ignoring the case of the characters.
-
-    \returns The strcasecmp() function returns an integer less than,
-    equal to, or greater than zero if \p s1 is found, respectively, to
-    be less than, to match, or be greater than \p s2. A consequence of
-    the ordering used by strcasecmp() is that if \p s1 is an initial
-    substring of \p s2, then \p s1 is considered to be "less than"
-    \p s2.	*/
 
 #if !defined(__DOXYGEN__)
 
@@ -69,7 +54,7 @@
 	ASSEMBLY_CLIB_SECTION
 	.global	_U(strcasecmp)
 	.type	_U(strcasecmp), @function
-	
+
 _U(strcasecmp):
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo

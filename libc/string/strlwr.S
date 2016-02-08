@@ -37,19 +37,6 @@
      Created by Reiner Patommel
 */
 
-/** \file */
-
-/** \ingroup avr_string
-    \fn char *strlwr(char *s)
-    \brief Convert a string to lower case.
-
-    The strlwr() function will convert a string to lower case. Only the upper
-    case alphabetic characters [A .. Z] are converted.  Non-alphabetic
-    characters will not be changed.
-
-    \returns The strlwr() function returns a pointer to the converted
-    string. */
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"

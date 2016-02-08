@@ -28,16 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn void *memmove(void *dest, const void *src, size_t len)
-    \brief Copy memory area.
-
-    The memmove() function copies len bytes from memory area src to memory area
-    dest.  The memory areas may overlap.
-
-    \returns The memmove() function returns a pointer to dest.  */
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"

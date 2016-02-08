@@ -28,19 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn char *strpbrk(const char *s, const char *accept)
-    
-    The strpbrk() function locates the first occurrence in the string
-    \p s of any of the characters in the string \p accept.
-
-    \return  The strpbrk() function returns a pointer to the character
-    in \p s that matches one of the characters in \p accept, or \c NULL
-    if no such character is found. The terminating zero is not
-    considered as a part of string: if one or both args are empty, the
-    result will \c NULL.	*/
-
 #if !defined(__AVR_TINY__)
 
 #ifndef	__DOXYGEN__

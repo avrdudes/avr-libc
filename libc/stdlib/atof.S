@@ -28,16 +28,6 @@
 
 /* $Id$ */
 
-/** \ingroup avr_stdlib
-    \fn  double atof (const char *nptr)
-
-    The atof() function converts the initial portion of the string pointed
-    to by \a nptr to double representation.
-
-    It is equivalent to calling
-	\code strtod(nptr, (char **)0); \endcode
- */
-
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"

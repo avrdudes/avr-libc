@@ -28,18 +28,6 @@
 
 /* $Id$ */
 
-/** \file */
-/** \ingroup avr_string
-    \fn void *memrchr(const void *src, int val, size_t len)
-
-    The memrchr() function is like the memchr() function, except that it
-    searches backwards from the end of the \p len bytes pointed to by \p
-    src instead of forwards from the front. (Glibc, GNU extension.)
-
-    \return The memrchr() function returns a pointer to the matching
-    byte or \c NULL if the character does not occur in the given memory
-    area.	*/
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

@@ -35,19 +35,6 @@
 
 /* $Id$ */
 
-/** \file */
-
-/** \ingroup avr_string
-    \fn size_t strlcpy (char *dst, const char *src, size_t siz)
-    \brief Copy a string.
-
-    Copy \p src to string \p dst of size \p siz.  At most \p siz-1
-    characters will be copied.  Always NULL terminates (unless \p siz == 0).
-
-    \returns The strlcpy() function returns strlen(src). If retval >= siz,
-    truncation occurred.  */
-
-
 #if !defined(__AVR_TINY__)
 
 #if !defined(__DOXYGEN__)

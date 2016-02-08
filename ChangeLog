@@ -4,6 +4,51 @@
 
 2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	* include/stdlib.h: Move all documentation from assembly code
+	files into the header files, so Doxygen will pick it up.
+	* include/string.h: (Dito.)
+	* libc/stdlib/atof.S: (Dito.)
+	* libc/string/ffs.S: (Dito.)
+	* libc/string/ffsl.S: (Dito.)
+	* libc/string/ffsll.S: (Dito.)
+	* libc/string/memccpy.S: (Dito.)
+	* libc/string/memchr.S: (Dito.)
+	* libc/string/memcmp.S: (Dito.)
+	* libc/string/memcpy.S: (Dito.)
+	* libc/string/memmem.S: (Dito.)
+	* libc/string/memmove.S: (Dito.)
+	* libc/string/memrchr.S: (Dito.)
+	* libc/string/memset.S: (Dito.)
+	* libc/string/strcasecmp.S: (Dito.)
+	* libc/string/strcasestr.S: (Dito.)
+	* libc/string/strcat.S: (Dito.)
+	* libc/string/strchr.S: (Dito.)
+	* libc/string/strchrnul.S: (Dito.)
+	* libc/string/strcmp.S: (Dito.)
+	* libc/string/strcpy.S: (Dito.)
+	* libc/string/strcspn.S: (Dito.)
+	* libc/string/strdup.c: (Dito.)
+	* libc/string/strlcat.S: (Dito.)
+	* libc/string/strlcpy.S: (Dito.)
+	* libc/string/strlen.S: (Dito.)
+	* libc/string/strlwr.S: (Dito.)
+	* libc/string/strncasecmp.S: (Dito.)
+	* libc/string/strncat.S: (Dito.)
+	* libc/string/strncmp.S: (Dito.)
+	* libc/string/strncpy.S: (Dito.)
+	* libc/string/strnlen.S: (Dito.)
+	* libc/string/strpbrk.S: (Dito.)
+	* libc/string/strrchr.S: (Dito.)
+	* libc/string/strrev.S: (Dito.)
+	* libc/string/strsep.S: (Dito.)
+	* libc/string/strspn.S: (Dito.)
+	* libc/string/strstr.S: (Dito.)
+	* libc/string/strtok.c: (Dito.)
+	* libc/string/strtok_r.S: (Dito.)
+	* libc/string/strupr.S: (Dito.)
+
+2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	* doc/api/rel-method.dox: Mention major number 2.
 
 2016-02-08  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
