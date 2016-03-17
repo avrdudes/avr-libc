@@ -6,6 +6,9 @@
 
 * Contributed Patches:
 
+  [no-id] Define weak symbols for known memory region sizes based on device 
+  header definitions, starting with fuse region.
+
 * Other changes:
 
 

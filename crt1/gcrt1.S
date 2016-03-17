@@ -372,3 +372,12 @@ __do_copy_data:
 .L__desc_end:
     .balign 4
 
+  /* Set REGION_LENGTH symbol values for well known memory regions.
+  The default linker script uses these symbols to set MEMORY 
+  region lengths, and by defining these here, the linker can detect
+  memory overflows accurately on a per device basis, since the 
+  values are picked up from the device header file.
+  */
+
+  .weak __FUSE_REGION_LENGTH__
+  .set __FUSE_REGION_LENGTH__, FUSE_MEMORY_SIZE
