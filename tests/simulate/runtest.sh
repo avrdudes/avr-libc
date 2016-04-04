@@ -122,11 +122,12 @@ Host_exe ()
 # Usage: Simulate ELFILE MCU
 Simulate ()
 {
-    local bin_file=`basename $1 .elf`.bin
     local exit_addr=0x`$AVR_NM $1 | grep __stop_program | cut -f1 -d' '`
-    $AVR_OBJCOPY -O binary -R .eeprom $1 $bin_file
+    # change the exit address from byte address to word address
+    exit_addr=`printf "0x%08x" $((exit_addr/2))`
     rm -f $CORE
-    if	$SIMULAVR -d $2 -B $exit_addr -C $bin_file 2>&1 >/dev/null \
+    # pass device name, exit address, elf file, dump file and timeout (60 seconds).
+    if	$SIMULAVR -d $2 -B $exit_addr -f $1 -C $CORE -m 60000000000 2>&1 >/dev/null \
 	| grep "ERROR:"
     then
 	RETVAL=-1
@@ -145,7 +146,6 @@ Simulate ()
 	    RETVAL=-1
 	fi
     fi
-    rm $bin_file
     [ $RETVAL -eq 0 ]
 }
 
@@ -157,23 +157,20 @@ Compile ()
     local flags=
 
     if [ -z "$AVRDIR" ] ; then
-	libs="-lm"
+	  libs="-lm"
     else
-	local avrno
-        case $2 in
-	    at90s2313)  avrno=2 ; crt=crts2313.o ;;
-	    at90s4414)  avrno=2 ; crt=crts4414.o ;;
-	    at90s8515)  avrno=2 ; crt=crts8515.o ;;
-	    atmega8)    avrno=4 ; crt=crtm8.o ;;
-	    atmega16)   avrno=5 ; crt=crtm16.o ;;
-	    atmega128)  avrno=5 ; crt=crtm128.o ;;
-	    *)
-		Errx "Compile(): invalid MCU: $2"
-	esac
-	flags="-isystem $AVRDIR/include -nostdlib"
-	crt=`find $AVRDIR/avr/lib -name $crt -print | head -1`
-	libs="$AVRDIR/avr/lib/avr$avrno/libc.a	\
-	      $AVRDIR/avr/lib/avr$avrno/libm.a -lgcc"
+      local multilibdir=`$AVR_GCC -mmcu=$2 -print-multi-directory`
+      # prefix dir 'avr2' if multilib dir is default or not starts with 'avr'
+      # example: '.' or 'tinystack'
+      if [[ $multilibdir != "avr"* ]]; then
+        multilibdir="avr2/$multilibdir"
+      fi
+      crt=crt$2.o
+	  flags="-isystem $AVRDIR/include -nostdlib"
+      crt=`find $AVRDIR/avr/lib -name $crt -print | head -1`
+      libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
+            $AVRDIR/avr/lib/$multilibdir/libm.a \
+            $AVRDIR/avr/lib/$multilibdir/$2/lib$2.a -lgcc"
     fi
 
     case $4 in
@@ -182,7 +179,7 @@ Compile ()
 	if [ -z "$AVRDIR" ] ; then
 	    libs="-lprintf_min $libs"
 	else
-	    libs="$AVRDIR/avr/lib/avr$avrno/libprintf_min.a $libs"
+	    libs="$AVRDIR/avr/lib/$multilibdir/libprintf_min.a $libs"
 	fi
 	;;
       PR_FLT)
@@ -190,7 +187,7 @@ Compile ()
 	if [ -z "$AVRDIR" ] ; then
 	    libs="-lprintf_flt $libs"
 	else
-	    libs="$AVRDIR/avr/lib/avr$avrno/libprintf_flt.a $libs"
+	    libs="$AVRDIR/avr/lib/$multilibdir/libprintf_flt.a $libs"
 	fi
 	;;
       SC_MIN)
@@ -198,7 +195,7 @@ Compile ()
 	if [ -z "$AVRDIR" ] ; then
 	    libs="-lscanf_min $libs"
 	else
-	    libs="$AVRDIR/avr/lib/avr$avrno/libscanf_min.a $libs"
+	    libs="$AVRDIR/avr/lib/$multilibdir/libscanf_min.a $libs"
 	fi
 	;;
       SC_FLT)
@@ -206,7 +203,7 @@ Compile ()
 	if [ -z "$AVRDIR" ] ; then
 	    libs="-lscanf_flt $libs"
 	else
-	    libs="$AVRDIR/avr/lib/avr$avrno/libscanf_flt.a $libs"
+	    libs="$AVRDIR/avr/lib/$multilibdir/libscanf_flt.a $libs"
 	fi
 	;;
     esac

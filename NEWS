@@ -8,6 +8,7 @@
 
   [no-id] Define weak symbols for known memory region sizes based on device 
   header definitions, starting with fuse region.
+  [#8961] Update test script for new simulavr and library layout
 
 * Other changes:
 

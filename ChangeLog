@@ -1,3 +1,12 @@
+2016-04-04  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	patch #8961: Update test script
+	* tests/simulate/runtest.sh (Simulate): Do not generate bin file.
+	Change exit address from byte to word address. Update options and add
+	timeout parameter when invoking simulavr.
+	(Compile): Auto detect multilib and CRT filename. Add device library
+	to libraries list.
+
 2016-03-17  Senthil Kumar Selvaraj <senthil_kumar.selvaraj@atmel.com>
 
 	* crt1/gcrt1.S: Weakly define __FUSE_REGION_LENGTH__.
