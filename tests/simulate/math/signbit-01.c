@@ -116,7 +116,9 @@ int main ()
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_word (& t[i].z);
 	v = signbit (x.fl);
-	if (v != z) {
+	/* expect non-zero if sign bit is not set.
+	   avr-libc implementation returns 1 if signed. */
+	if (!(z ? v : v == 0)) {
 	    PRINTFLN ("i= %d  v= %d", i, v);
 	    EXIT (i + 1);
 	}

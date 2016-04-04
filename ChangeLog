@@ -1,5 +1,14 @@
 2016-04-04  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
+	patch #8964: Update tests
+	* tests/simulate/math/isinf-01.c: Update test condition as the expected
+	value of isinf is non-zero in case of argument is infinite.
+	* tests/simulate/math/signbit-01.c: Likewise for signbit function.
+	* tests/simulate/math/modf-np.c: Update test to use avr-libc's modf
+	function.
+
+2016-04-04  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
 	patch #8961: Update test script
 	* tests/simulate/runtest.sh (Simulate): Do not generate bin file.
 	Change exit address from byte to word address. Update options and add

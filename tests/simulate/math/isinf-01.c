@@ -115,7 +115,8 @@ int main ()
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_word (& t[i].z);
 	v = isinf (x.fl);
-	if (v != z) {
+    /* expect non-zero in case of infinite value.  */
+	if (!(z ? v : v == 0)) {
 	    PRINTFLN ("i= %d  v= %d", i, v);
 	    EXIT (i + 1);
 	}

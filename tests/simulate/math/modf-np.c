@@ -36,12 +36,14 @@
 int main ()
 {
     double z;
+    double (* volatile vp)(double, double*);
 
     {
 #ifdef	__AVR__
 	/* Address of R1 is 0x0001	*/
 	unsigned char r1;
-	z = modf (257.5, 0);		/* 257 == 0x0101	*/
+	vp = &modf;
+	z = vp (257.5, 0);		/* 257 == 0x0101	*/
 	asm ("mov %0,r1 \n\t clr r1" : "=r"(r1));
 	if (r1)
 	    exit (__LINE__);
