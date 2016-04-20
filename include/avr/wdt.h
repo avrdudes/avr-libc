@@ -558,6 +558,10 @@ void wdt_disable (void)
     AT90USB82, AT90USB162,
     AT90USB646, AT90USB647, AT90USB1286, AT90USB1287,
     ATtiny48, ATtiny88.
+
+    Note: This value does <em>not</em> match the bit pattern of the
+    respective control register.  It is solely meant to be used together
+    with wdt_enable().
     */
 #define WDTO_4S     8
 
@@ -583,6 +587,10 @@ void wdt_disable (void)
     ATxmega16a4u, ATxmega32a4u,
     ATxmega16c4, ATxmega32c4,
     ATxmega128c3, ATxmega192c3, ATxmega256c3.
+
+    Note: This value does <em>not</em> match the bit pattern of the
+    respective control register.  It is solely meant to be used together
+    with wdt_enable().
     */
 #define WDTO_8S     9
 
