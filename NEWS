@@ -2,6 +2,9 @@
 
 * Bugs fixed:
 
+  [#36933] Documentation no longer correctly describes how to declare
+  strings for storage in program memory
+
 * New devices supported:
 
 * Contributed Patches:

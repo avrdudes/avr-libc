@@ -1,3 +1,10 @@
+2016-08-14  Aurelien Jarno  <aurelien@aurel32.net>
+
+	Fix for bug #36933: Documentation no longer correctly describes how to
+	declare strings for storage in program memory
+	* doc/api/pgmspace.dox: Add const keyword to variables in PROGMEM
+	section. 
+
 2016-04-04  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	patch #8964: Update tests

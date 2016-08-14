@@ -129,7 +129,7 @@ but before the initializer, like so:
 .
 .
 .
-unsigned char mydata[11][10] PROGMEM =
+const unsigned char mydata[11][10] PROGMEM =
 {
 	{0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09},
 	{0x0A,0x0B,0x0C,0x0D,0x0E,0x0F,0x10,0x11,0x12,0x13},
@@ -229,17 +229,17 @@ In order to put the strings in Program Space, you have to have explicit
 declarations for each string, and put each string in Program Space:
 
 \code
-char string_1[] PROGMEM = "String 1";
-char string_2[] PROGMEM = "String 2";
-char string_3[] PROGMEM = "String 3";
-char string_4[] PROGMEM = "String 4";
-char string_5[] PROGMEM = "String 5";
+const char string_1[] PROGMEM = "String 1";
+const char string_2[] PROGMEM = "String 2";
+const char string_3[] PROGMEM = "String 3";
+const char string_4[] PROGMEM = "String 4";
+const char string_5[] PROGMEM = "String 5";
 \endcode
 
 Then use the new symbols in your table, like so:
 
 \code
-PGM_P string_table[] PROGMEM = 
+PGM_P const string_table[] PROGMEM = 
 {
     string_1,
     string_2,
