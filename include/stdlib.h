@@ -634,14 +634,14 @@ extern long random_r(unsigned long *__ctx);
    one digit before the decimal-point character and the number of
    digits after it is equal to the precision \c prec; if the precision
    is zero, no decimal-point character appears.  If \c flags has the
-   DTOSTRE_UPPERCASE bit set, the letter \c 'E' (rather than \c 'e' ) will be
+   DTOSTR_UPPERCASE bit set, the letter \c 'E' (rather than \c 'e' ) will be
    used to introduce the exponent.  The exponent always contains two
    digits; if the value is zero, the exponent is \c "00".
 
-   If \c flags has the DTOSTRE_ALWAYS_SIGN bit set, a space character
+   If \c flags has the DTOSTR_ALWAYS_SIGN bit set, a space character
    will be placed into the leading position for positive numbers.
 
-   If \c flags has the DTOSTRE_PLUS_SIGN bit set, a plus sign will be
+   If \c flags has the DTOSTR_PLUS_SIGN bit set, a plus sign will be
    used instead of a space character in this case.
 
    The dtostre() function returns the pointer to the converted string \c s.

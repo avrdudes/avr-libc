@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#36933] Documentation no longer correctly describes how to declare
+  [#49020] dtostre() flags documentation error
   strings for storage in program memory
 
 * New devices supported:

@@ -1,9 +1,14 @@
+2016-09-07  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix for bug #49020: dtostre() flags documentation error
+	* include/stdlib.h: Fix documentation of dtostre() flags.
+
 2016-08-14  Aurelien Jarno  <aurelien@aurel32.net>
 
 	Fix for bug #36933: Documentation no longer correctly describes how to
 	declare strings for storage in program memory
 	* doc/api/pgmspace.dox: Add const keyword to variables in PROGMEM
-	section. 
+	section.
 
 2016-04-04  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
