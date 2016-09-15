@@ -3,6 +3,7 @@
 * Bugs fixed:
 
   [#36933] Documentation no longer correctly describes how to declare
+  [#48898] power_usart3_* functions no more defined in power.h
   [#49020] dtostre() flags documentation error
   strings for storage in program memory
 
