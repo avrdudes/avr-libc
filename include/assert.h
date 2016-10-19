@@ -95,6 +95,12 @@
 #  endif /* NDEBUG */
 #endif /* DOXYGEN */
 
+#if (defined __STDC_VERSION__ && __STDC_VERSION__ >= 201112L) || \
+    ((_GNUC_ > 4 || (_GNUC_ == 4 && _GNUC_MINOR_ >= 6)) && !defined __cplusplus)
+#  undef static_assert
+#  define static_assert _Static_assert
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

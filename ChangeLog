@@ -1,3 +1,8 @@
+2016-10-19  azudem
+
+	Fix for bug #41689: add static_assert to assert.h
+	* include/assert.h (static_assert): Define if C11 std or >= gcc-4.6 used.
+
 2016-09-15  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
 
 	Fix for bug ##48898: power_usart3_* functions no more defined in power.h
