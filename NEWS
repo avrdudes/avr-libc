@@ -6,6 +6,7 @@
   [#41689] add static_assert to assert.h
   [#48898] power_usart3_* functions no more defined in power.h
   [#49020] dtostre() flags documentation error
+  [#49447] Example code for uart_putchar() has error in recursive call
   strings for storage in program memory
 
 * New devices supported:

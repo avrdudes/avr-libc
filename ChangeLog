@@ -1,3 +1,8 @@
+2016-10-27  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Fix for bug #49447: Example code for uart_putchar() has error in recursive call
+	* include/stdio.h: Add 2nd "stream" parameter in example code
+
 2016-10-19  azudem
 
 	Fix for bug #41689: add static_assert to assert.h
