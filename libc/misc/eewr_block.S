@@ -34,13 +34,15 @@
 
 #if	E2END && __AVR_ARCH__ > 1
 
+/* Skip for Xmega with valid page size. Refer. eewr_block_xmega.c.  */
+#if !(__AVR_XMEGA__ && defined (E2PAGESIZE) && (E2PAGESIZE))
+
 #include <avr/eeprom.h>
 #include "asmdef.h"
 #include "eedef.h"
 
 /* void eeprom_write_block (const void *sram, void *eepr, size_t n)
  */
-
 #define sram_lo	r24	/* SRAM address		*/
 #define eepr_lo	r22	/* EEPROM address	*/
 
@@ -71,6 +73,6 @@ ENTRY	eeprom_write_block
 	ret
 
 ENDFUNC
-
+#endif  /* All except __AVR_XMEGA__ && E2PAGESIZE */
 #endif	/* E2END && __AVR_ARCH__ > 1 */
 #endif	/* !__DOXYGEN__ */

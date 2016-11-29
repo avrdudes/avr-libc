@@ -1,3 +1,18 @@
+2016-11-29  Pitchumani Sivanupandi <pitchumani.s@atmel.com>
+
+	patch #9163: New eeprom write block function for xmega
+	* devtools/Device.am: Add new files.
+	* devtools/gen-avr-libc-tree.sh: Avoid c files for assembler only devices.
+	* include/avr/cpufunc.h (ccp_write_io): Add new function.
+	* libc/misc/Files.am (eeprom_c_sources): Add new file.
+	(dev_asm_sources): Likewise.
+	* libc/misc/Makefile.am: Likewise.
+	* libc/misc/ccp_write.S: New file for function ccp_write_io.
+	* libc/misc/eewr_block.S: Skip definition for Xmega devices as new
+	definition is from eewr_block_xmega.c.
+	* libc/misc/eewr_block_xmega.c: New file for function eeprom_write_block
+	for xmega devices with eeprom pages.
+
 2016-10-27  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Fix for bug #49447: Example code for uart_putchar() has error in recursive call

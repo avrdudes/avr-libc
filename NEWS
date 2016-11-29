@@ -17,6 +17,7 @@
   header definitions, starting with fuse region.
   [#8961] Update test script for new simulavr and library layout
   [#8964] Update tests isinf-01.c, signbit-01.c and modf-np.c
+  [#9163] New eeprom write block function for xmega using eeprom page write
 
 * Other changes:
 

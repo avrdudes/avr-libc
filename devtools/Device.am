@@ -83,7 +83,8 @@ nodist_libdev_a_SOURCES = $(eeprom_asm_sources)
 else
 # avr-gcc > 5.1.0 expects device library as lib<device name>.a
 avr_LIBRARIES = lib<<dev>>.a
-nodist_lib<<dev>>_a_SOURCES = $(eeprom_asm_sources)
+nodist_lib<<dev>>_a_SOURCES = $(eeprom_c_sources) $(dev_c_sources) \
+	$(eeprom_asm_sources) $(dev_asm_sources)
 endif
 endif
 

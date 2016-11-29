@@ -467,7 +467,18 @@ do
 		    -e "s/<<crt_cflags>>/$crt_cflags/g" \
 		    -e "s/<<crt_asflags>>/$crt_asflags/g"  \
 		    -e "s/<<install_dir>>/$inst_dir_masked/g" $dev/Makefile.am \
-		    > $dev/tempfile && mv -f $dev/tempfile $dev/Makefile.am
+		    > $dev/tempfile
+
+		case "$dev" in
+		  at90s1200|attiny11|attiny12|attiny15|attiny28)
+			sed -e "s/\$(eeprom_c_sources)//g" \
+				-e "s/\$(dev_c_sources)//g" $dev/tempfile \
+			> $dev/tempfile_2 && mv -f $dev/tempfile_2 $dev/Makefile.am
+			;;
+		  *)
+			mv -f $dev/tempfile $dev/Makefile.am
+			;;
+		esac
 
 		DEV_SUBDIRS="$DEV_SUBDIRS $dev"
 	done

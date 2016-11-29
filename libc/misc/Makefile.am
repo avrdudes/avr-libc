@@ -32,7 +32,10 @@
 include $(top_srcdir)/libc/misc/Files.am
 
 EXTRA_DIST = \
+	$(eeprom_c_sources) \
 	$(eeprom_asm_sources) \
+	$(dev_c_sources) \
+	$(dev_asm_sources) \
 	$(misc_a_asm_sources) \
 	$(misc_a_c_sources) \
 	$(misc_a_extra_dist)

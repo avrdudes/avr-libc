@@ -31,6 +31,9 @@
 
 misc_a_c_sources =
 
+eeprom_c_sources = \
+	eewr_block_xmega.c
+
 eeprom_asm_sources = \
 	eerd_block.S \
 	eerd_byte.S \
@@ -44,6 +47,11 @@ eeprom_asm_sources = \
 	eewr_byte.S \
 	eewr_dword.S \
 	eewr_word.S
+
+dev_c_sources =
+
+dev_asm_sources = \
+	ccp_write.S
 
 misc_a_asm_sources = \
 	itoa.S \
