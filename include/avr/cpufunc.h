@@ -35,6 +35,8 @@
 #ifndef _AVR_CPUFUNC_H_
 #define _AVR_CPUFUNC_H_ 1
 
+#include <stdint.h>
+
 /** \file */
 /** \defgroup avr_cpufunc <avr/cpufunc.h>: Special AVR CPU functions
     \code #include <avr/cpufunc.h> \endcode
