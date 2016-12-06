@@ -91,8 +91,8 @@ void Check (int line,
 
 #define FILLBUF	0x55	/* Before call of function to test
 			   buf[] is filled with nonzero value.	*/
-#define CHECK(expval, expstr, buf, size, fmt, ...)	\
-    memset (buf, FILLBUF, sizeof(buf));			\
+#define CHECK(expval, expstr, buf, bufsize, size, fmt, ...)	\
+    memset (buf, FILLBUF, bufsize);			\
     Check (__LINE__, expval, PSTR(expstr),		\
 	   buf, size, PFMT(fmt), ##__VA_ARGS__)
 
@@ -102,7 +102,7 @@ int main ()
     int i;
 
     /* size == 0	*/
-    CHECK (0, "", s+10, 0, "");
+    CHECK (0, "", s+10, sizeof(s)-10, 0, "");
 
     /* bug #19280: snprintf(s,0,...) write to s[-1]	*/
     memset (s, FILLBUF, sizeof(s));
@@ -114,20 +114,20 @@ int main ()
 
     /* size == 1	*/
     s[0] = 1;
-    CHECK (0, "", s, 1, "");
-    CHECK (3, "", s, 1, "foo");
+    CHECK (0, "", s, sizeof(s), 1, "");
+    CHECK (3, "", s, sizeof(s), 1, "foo");
 
     /* size == 2	*/
-    CHECK (0, "", s, 2, "");
-    CHECK (1, ".", s, 2, ".");
-    CHECK (2, "a", s, 2, "aa");
-    CHECK (5, "1", s, 2, "%d", 12345);
+    CHECK (0, "", s, sizeof(s), 2, "");
+    CHECK (1, ".", s, sizeof(s), 2, ".");
+    CHECK (2, "a", s, sizeof(s), 2, "aa");
+    CHECK (5, "1", s, sizeof(s), 2, "%d", 12345);
 
     /* big size	*/
-    CHECK (6, "-12345", s, sizeof(s), "%d", -12345);
-    CHECK (5, "54321", s, ~0u >> 1, "%u", 54321);		/* 32767 */
-    CHECK (4, "abcd", s, ~(~0u >> 1), "%x", 0xabcd);		/* 32768 */
-    CHECK (3, "123", s, ~0u, "%o", 0123);			/* 65535 */
+    CHECK (6, "-12345", s, sizeof(s), sizeof(s), "%d", -12345);
+    CHECK (5, "54321", s, sizeof(s), ~0u >> 1, "%u", 54321);		/* 32767 */
+    CHECK (4, "abcd", s, sizeof(s), ~(~0u >> 1), "%x", 0xabcd);		/* 32768 */
+    CHECK (3, "123", s, sizeof(s), ~0u, "%o", 0123);			/* 65535 */
 
     return 0;
 }

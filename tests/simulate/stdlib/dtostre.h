@@ -89,7 +89,7 @@ void run_dtostre (const struct dtostre_s *pt, int testno)
     unsigned char prec, flags;
     static char s[2*PZLEN + sizeof(pt->pattern)];
     char c, *ps;
-    void *pv;
+    const void *pv;
     
     memset(s, testno, sizeof(s));
 

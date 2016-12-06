@@ -122,12 +122,9 @@ Host_exe ()
 # Usage: Simulate ELFILE MCU
 Simulate ()
 {
-    local exit_addr=0x`$AVR_NM $1 | grep __stop_program | cut -f1 -d' '`
-    # change the exit address from byte address to word address
-    exit_addr=`printf "0x%08x" $((exit_addr/2))`
     rm -f $CORE
     # pass device name, exit address, elf file, dump file and timeout (60 seconds).
-    if	$SIMULAVR -d $2 -B $exit_addr -f $1 -C $CORE -m 60000000000 2>&1 >/dev/null \
+    if	$SIMULAVR -d $2 -T __stop_program -f $1 -C $CORE -m 60000000000 2>&1 >/dev/null \
 	| grep "ERROR:"
     then
 	RETVAL=-1
