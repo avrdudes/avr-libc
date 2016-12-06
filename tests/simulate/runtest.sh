@@ -162,9 +162,12 @@ Compile ()
       local multilibdir=`$AVR_GCC -mmcu=$2 -print-multi-directory`
       # prefix dir 'avr2' if multilib dir is default or not starts with 'avr'
       # example: '.' or 'tinystack'
-      if [[ $multilibdir != "avr"* ]]; then
-        multilibdir="avr2/$multilibdir"
-      fi
+      case "$multilibdir" in
+      avr*)
+           ;;
+      *)
+           multilibdir="avr2/$multilibdir"
+      esac
       crt=crt$2.o
 	  flags="-isystem $AVRDIR/include -nostdlib"
       crt=`find $AVRDIR/avr/lib -name $crt -print | head -1`
