@@ -46,7 +46,7 @@ myname="$0"
 
 : ${AVRDIR=../..}
 : ${MCU_LIST="atmega128 at90s8515"}
-: ${MCU_LIST_FULL="atmega128 at90s2313 at90s4414 at90s8515 atmega8 atmega16"}
+: ${MCU_LIST_FULL="atmega128 attiny2313 at90s8515 atmega8 atmega16"}
 
 HOST_PASS=			# Add pass at host computer
 HOST_ONLY=			# Pass at host only, skip AVR mode
