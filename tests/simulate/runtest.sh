@@ -74,11 +74,12 @@ Options:
   -T          Pass at host only
   -s          Stop at any error, temparary files will save
   -h          Print this help
+  -v          Verbose mode; echo shell commands being executed
 If FILE is not specified, the full test list is used.
 EOF
 }
 
-while getopts "a:icg:ktTsh" opt ; do
+while getopts "a:icg:ktTshv" opt ; do
     case $opt in
 	a)	AVRDIR="$OPTARG" ;;
 	i)	AVRDIR= ;;
@@ -89,6 +90,7 @@ while getopts "a:icg:ktTsh" opt ; do
 	T)	HOST_ONLY=1 ; HOST_PASS=1 ;;
 	s)	FLAG_STOP=1 ;;
 	h)	Usage `basename $myname` ; exit 0 ;;
+	v)	set -x ;;
 	*)	Errx "Invalid option(s). Try '-h' for more info."
     esac
 done
