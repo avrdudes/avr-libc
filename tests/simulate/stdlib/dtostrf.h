@@ -74,7 +74,7 @@ void run_dtostrf (const struct dtostrf_s *pt, int testno)
     unsigned char prec;
     static char s[2*PZLEN + sizeof(pt->pattern)];
     char c, *ps;
-    void *pv;
+    char const *pp;
     
     memset (s, testno, sizeof(s));
 
@@ -96,17 +96,17 @@ void run_dtostrf (const struct dtostrf_s *pt, int testno)
 	    exit (testno + 0x2000);
     }
 
-    pv = & pt->pattern;
+    pp = pt->pattern;
 #ifdef	__AVR__
     do {
-	c = pgm_read_byte(pv++);
+	c = pgm_read_byte(pp++);
 	if (*ps++ != c) {
 	    exit (testno + 0x3000);
 	}
     } while (c);
 #else
     do {
-	c = *(char *)(pv++);
+	c = *pp++;
 	if (*ps++ != c) {
 	    printf ("*** testno= %d:  must= %s  was= %s\n",
 		testno, pt->pattern, s + PZLEN);
