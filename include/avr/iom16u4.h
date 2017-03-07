@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iom16u4.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATmega16U4_H_
@@ -458,11 +458,13 @@
 #define PRR1 _SFR_MEM8(0x65)
 #define PRUSART1 0
 #define PRTIM3 3
+#define PRTIM4 4
 #define PRUSB 7
 
-#define __AVR_HAVE_PRR1	((1<<PRUSART1)|(1<<PRTIM3)|(1<<PRUSB))
+#define __AVR_HAVE_PRR1	((1<<PRUSART1)|(1<<PRTIM4)|(1<<PRTIM3)|(1<<PRUSB))
 #define __AVR_HAVE_PRR1_PRUSART1
 #define __AVR_HAVE_PRR1_PRTIM3
+#define __AVR_HAVE_PRR1_PRTIM4
 #define __AVR_HAVE_PRR1_PRUSB
 
 #define OSCCAL _SFR_MEM8(0x66)
@@ -1410,7 +1412,6 @@
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
 #define SIGNATURE_2 0x88
-
 
 
 #define SLEEP_MODE_IDLE (0x00<<1)

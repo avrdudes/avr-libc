@@ -8,6 +8,7 @@
   [#49020] dtostre() flags documentation error
   [#49447] Example code for uart_putchar() has error in recursive call
   strings for storage in program memory
+  [#50439] avr/iom32u4.h does not define PRTIM4
 
 * New devices supported:
 

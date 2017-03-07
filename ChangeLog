@@ -1,0 +1,7 @@
+2017-03-07  Pitchumani Sivanupandi <pitchumani.sivanupandi@microchip.com>
+
+	Fix for bug #50439: avr/iom32u4.h does not define PRTIM4
+	* include/avr/iom16u4.h (PRTIM4): Define.
+	(__AVR_HAVE_PRR1): Update definition.
+	(__AR_HAVE_PRR1_PRTIM4): Define.
+	* include/avr/iom33u4.h: Likewise.
