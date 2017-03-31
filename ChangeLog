@@ -1,3 +1,8 @@
+2017-03-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* include/util/eu_dst.h: Fix reversed DST decision logic for March
+	and October.
+
 2017-03-07  Pitchumani Sivanupandi <pitchumani.sivanupandi@microchip.com>
 
 	Fix for bug #50439: avr/iom32u4.h does not define PRTIM4
