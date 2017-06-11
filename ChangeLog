@@ -1,3 +1,9 @@
+2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Georg-Johann Lay:
+	patch #8729: [avr/interrupt.h] Add ISR_NOICF, ISR_FLATTEN. Fix namespace of identifiers.
+	* include/avr/interrupt.h: Add ISR_NOICF, ISR_FLATTEN
+
 2017-03-31  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* include/util/eu_dst.h: Fix reversed DST decision logic for March

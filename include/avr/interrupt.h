@@ -126,18 +126,18 @@
 #else  /* real code */
 
 #if (__GNUC__ == 4 && __GNUC_MINOR__ >= 1) || (__GNUC__ > 4)
-#  define __INTR_ATTRS used, externally_visible
+#  define __INTR_ATTRS __used__, __externally_visible__
 #else /* GCC < 4.1 */
-#  define __INTR_ATTRS used
+#  define __INTR_ATTRS __used__
 #endif
 
 #ifdef __cplusplus
 #  define ISR(vector, ...)            \
-    extern "C" void vector (void) __attribute__ ((signal,__INTR_ATTRS)) __VA_ARGS__; \
+    extern "C" void vector (void) __attribute__ ((__signal__,__INTR_ATTRS)) __VA_ARGS__; \
     void vector (void)
 #else
 #  define ISR(vector, ...)            \
-    void vector (void) __attribute__ ((signal,__INTR_ATTRS)) __VA_ARGS__; \
+    void vector (void) __attribute__ ((__signal__,__INTR_ATTRS)) __VA_ARGS__; \
     void vector (void)
 #endif
 
@@ -158,11 +158,11 @@
 
 #ifdef __cplusplus
 #  define SIGNAL(vector)					\
-    extern "C" void vector(void) __attribute__ ((signal, __INTR_ATTRS));	\
+    extern "C" void vector(void) __attribute__ ((__signal__, __INTR_ATTRS));	\
     void vector (void)
 #else
 #  define SIGNAL(vector)					\
-    void vector (void) __attribute__ ((signal, __INTR_ATTRS));		\
+    void vector (void) __attribute__ ((__signal__, __INTR_ATTRS));		\
     void vector (void)
 #endif
 
@@ -182,12 +182,12 @@
 
 #ifdef __cplusplus
 #  define EMPTY_INTERRUPT(vector)                \
-    extern "C" void vector(void) __attribute__ ((signal,naked,__INTR_ATTRS));    \
-    void vector (void) {  __asm__ __volatile__ ("reti" ::); }
+    extern "C" void vector(void) __attribute__ ((__signal__,__naked__,__INTR_ATTRS));    \
+    void vector (void) {  __asm__ __volatile__ ("reti" ::: "memory"); }
 #else
 #  define EMPTY_INTERRUPT(vector)                \
-    void vector (void) __attribute__ ((signal,naked,__INTR_ATTRS));    \
-    void vector (void) { __asm__ __volatile__ ("reti" ::); }
+    void vector (void) __attribute__ ((__signal__,__naked__,__INTR_ATTRS));    \
+    void vector (void) { __asm__ __volatile__ ("reti" ::: "memory"); }
 #endif
 
 #endif /* DOXYGEN */
@@ -225,25 +225,13 @@
 #else /* real code */
 
 #ifdef __cplusplus
-#  if defined(__AVR_MEGA__) && __AVR_MEGA__
 #    define ISR_ALIAS(vector, tgt) extern "C" void vector (void) \
-	__attribute__((signal, naked, __INTR_ATTRS)); \
-	void vector (void) { asm volatile ("jmp " __STRINGIFY(tgt) ::); }
-#  else /* !__AVR_MEGA */
-#    define ISR_ALIAS(vector, tgt) extern "C" void vector (void) \
-	__attribute__((signal, naked, __INTR_ATTRS)); \
-	void vector (void) { asm volatile ("rjmp " __STRINGIFY(tgt) ::); }
-#  endif  /* __AVR_MEGA__ */
+	__attribute__((__signal__, __naked__, __INTR_ATTRS)); \
+	void vector (void) { __asm__ __volatile__ ("%~jmp " __STRINGIFY(tgt) ::); }
 #else	  /* !__cplusplus */
-#  if defined(__AVR_MEGA__) && __AVR_MEGA__
 #  define ISR_ALIAS(vector, tgt) void vector (void) \
-	__attribute__((signal, naked, __INTR_ATTRS)); \
-	void vector (void) { asm volatile ("jmp " __STRINGIFY(tgt) ::); }
-#  else /* !__AVR_MEGA */
-#  define ISR_ALIAS(vector, tgt) void vector (void) \
-	__attribute__((signal, naked, __INTR_ATTRS)); \
-	void vector (void) { asm volatile ("rjmp " __STRINGIFY(tgt) ::); }
-#  endif  /* __AVR_MEGA__ */
+	__attribute__((__signal__, __naked__, __INTR_ATTRS)); \
+	void vector (void) { __asm__ __volatile__ ("%~jmp " __STRINGIFY(tgt) ::); }
 #endif	/* __cplusplus */
 
 #endif /* DOXYGEN */
@@ -261,7 +249,7 @@
 */
 #  define reti()
 #else  /* !DOXYGEN */
-#  define reti()  __asm__ __volatile__ ("reti" ::)
+#  define reti()  __asm__ __volatile__ ("reti" ::: "memory")
 #endif /* DOXYGEN */
 
 #if defined(__DOXYGEN__)
@@ -323,6 +311,26 @@
 */
 #  define ISR_NAKED
 
+/** \def ISR_FLATTEN
+    \ingroup avr_interrupts
+
+    The compiler will try to inline all called function into the ISR.
+    This has an effect with GCC 4.6 and newer only.
+
+    Use this attribute in the attributes parameter of the ISR macro.
+*/
+#  define ISR_FLATTEN
+
+/** \def ISR_NOICF
+    \ingroup avr_interrupts
+
+    Avoid identical-code-folding optimization against this ISR.
+    This has an effect with GCC 5 and newer only.
+
+    Use this attribute in the attributes parameter of the ISR macro.
+*/
+#  define ISR_NOICF
+
 /** \def ISR_ALIASOF(target_vector)
     \ingroup avr_interrupts
 
@@ -330,13 +338,39 @@
     This is compatible with GCC 4.2 and greater only.
 
     Use this attribute in the attributes parameter of the ISR macro.
+    Example:
+    \code
+    ISR (INT0_vect)
+    {
+        PORTB = 42;
+    }
+
+    ISR (INT1_vect, ISR_ALIASOF (INT0_vect));
+    \endcode 
 */
 #  define ISR_ALIASOF(target_vector)
 #else  /* !DOXYGEN */
-#  define ISR_BLOCK
-#  define ISR_NOBLOCK    __attribute__((interrupt))
-#  define ISR_NAKED      __attribute__((naked))
-#  define ISR_ALIASOF(v) __attribute__((alias(__STRINGIFY(v))))
+#  define ISR_BLOCK /* empty */
+/* FIXME: This won't work with older versions of avr-gcc as ISR_NOBLOCK
+          will use `signal' and `interrupt' at the same time.  */
+#  define ISR_NOBLOCK    __attribute__((__interrupt__))
+#  define ISR_NAKED      __attribute__((__naked__))
+
+#if (__GNUC__ == 4 && __GNUC_MINOR__ >= 6) || (__GNUC__ >= 5)
+#  define ISR_FLATTEN    __attribute__((__flatten__))
+#else
+#  define ISR_FLATTEN    /* empty */
+#endif /* has flatten (GCC 4.6+) */
+
+#if defined (__has_attribute)
+#if __has_attribute (__no_icf__)
+#  define ISR_NOICF      __attribute__((__no_icf__))
+#else
+#  define ISR_NOICF      /* empty */
+#endif /* has no_icf */
+#endif /* has __has_attribute (GCC 5+) */
+
+#  define ISR_ALIASOF(v) __attribute__((__alias__(__STRINGIFY(v))))
 #endif /* DOXYGEN */
 
 /* \@} */
