@@ -94,8 +94,8 @@ static __inline__ void __iRestore(const  uint8_t *__s)
     Interrupt Status (I) bit of the SREG register. Exit paths from
     both block types are all managed automatically without the need
     for special considerations, i. e. the interrupt status will be
-    restored to the same value it has been when entering the
-    respective block.
+    restored to the same value it had when entering the respective
+    block (unless ATOMIC_FORCEON or NONATOMIC_FORCEOFF are used).
 
     A typical example that requires atomic access is a 16 (or more)
     bit variable that is shared between the main execution path and an

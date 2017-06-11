@@ -1,6 +1,12 @@
 2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Britton Kerin:
+	patch #8650: another small doc fix in atomic.h
+	* include/util/atomic.h: Improve documentation.
+
+2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Britton Kerin:
 	patch #8649: small documentation fixes in
 	* include/util/atomic.h: Improve documentation.
 
