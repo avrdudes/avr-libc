@@ -22,6 +22,7 @@
   [#9163] New eeprom write block function for xmega using eeprom page write
   [#8729] [avr/interrupt.h] Add ISR_NOICF, ISR_FLATTEN. Fix namespace of identifiers.
   [#8536] Fix a typo within <stdio.h>
+  [#8649] small documentation fixes in
 
 * Other changes:
 
