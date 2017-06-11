@@ -21,6 +21,7 @@
   [#8964] Update tests isinf-01.c, signbit-01.c and modf-np.c
   [#9163] New eeprom write block function for xmega using eeprom page write
   [#8729] [avr/interrupt.h] Add ISR_NOICF, ISR_FLATTEN. Fix namespace of identifiers.
+  [#8536] Fix a typo within <stdio.h>
 
 * Other changes:
 

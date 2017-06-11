@@ -1,5 +1,11 @@
 2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Karol Babioch:
+	patch #8536: Fix a typo within <stdio.h>
+	* include/stdio.h: Fix small typo.
+
+2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Georg-Johann Lay:
 	patch #8729: [avr/interrupt.h] Add ISR_NOICF, ISR_FLATTEN. Fix namespace of identifiers.
 	* include/avr/interrupt.h: Add ISR_NOICF, ISR_FLATTEN

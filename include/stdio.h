@@ -594,7 +594,7 @@ extern int	fclose(FILE *__stream);
    \par Notes:
    - For floating-point conversions, if you link default or minimized
      version of vfprintf(), the symbol \c ? will be output and double
-     argument will be skiped. So you output below will not be crashed.
+     argument will be skipped. So you output below will not be crashed.
      For default version the width field and the "pad to left" ( symbol
      minus ) option will work in this case.
    - The \c hh length modifier is ignored (\c char argument is
