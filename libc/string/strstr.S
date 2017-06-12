@@ -37,8 +37,6 @@
      Philip Soeberg <philip@soeberg.net>
 */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -50,7 +48,7 @@
 
 #define chr1   r20
 #define	beg2   r21	/* begin of s2: s2[0]	*/
-#define chr2   r0
+#define chr2   __tmp_reg__
 
 ASSEMBLY_CLIB_SECTION
 .global _U(strstr)
@@ -89,12 +87,10 @@ _U(strstr):
 	ldi	s1_lo, lo8(1)
 	ldi	s1_hi, hi8(1)
 .L_match:
-	sbiw	s1_lo, 1	; restore after post-increment
+	X_sbiw	s1_lo, 1	; restore after post-increment
 .L_ret:
 	ret
 
 .size _U(strstr), . - _U(strstr)
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

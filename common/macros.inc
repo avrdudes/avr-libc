@@ -225,6 +225,45 @@
 	.endif
 .endm
 
+
+.macro  X_sbiw dst val
+	.L_sbiw_dst = -1
+	.L_sbiw_n = 24
+	.irp  reg,	r24,r26,r28,r30
+		.ifc  \reg,\dst
+			.L_sbiw_dst = .L_sbiw_n
+		.endif
+		.L_sbiw_n = .L_sbiw_n + 2
+	.endr
+	.L_sbiw_n = 24
+	.irp  reg,	R24,R26,R28,R30
+		.ifc  \reg,\dst
+			.L_sbiw_dst = .L_sbiw_n
+		.endif
+		.L_sbiw_n = .L_sbiw_n + 2
+	.endr
+	.if   .L_sbiw_dst < 0
+		.L_sbiw_n = 24
+		.rept   4
+			.if \dst == .L_sbiw_n
+				.L_sbiw_dst = .L_sbiw_n
+			.endif
+			.L_sbiw_n = .L_sbiw_n + 2
+		.endr
+	.endif
+	.if   (.L_sbiw_dst < 0)
+		.err    ; Invalid 'X_sbiw' arg.
+	.endif
+
+#if !defined (__AVR_TINY__)
+	sbiw    \dst, \val
+#else
+	subi    (.L_sbiw_dst), \val
+	sbci    (.L_sbiw_dst)+1, 0
+#endif
+.endm
+
+
 /* Macro 'X_lpm' extends enhanced lpm instruction for classic chips.
    Usage:
 	X_lpm	reg, dst

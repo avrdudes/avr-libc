@@ -37,8 +37,6 @@
      Created by Reiner Patommel
 */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -60,7 +58,7 @@ _U(strrev):
 	ld	ltemp, Z+
 	tst	ltemp
 	brne	1b
-	sbiw	ZL, 2		; to last nonzero byte
+	X_sbiw	ZL, 2		; to last nonzero byte
 	rjmp	3f
   ; swap bytes
 2:	ld	ltemp, X
@@ -76,5 +74,3 @@ _U(strrev):
     .size _U(strrev), . - _U(strrev)
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

@@ -28,8 +28,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -49,7 +47,12 @@ _U(strcat):
 	ld	__tmp_reg__, X+
 	tst	__tmp_reg__
 	brne	.L_strcat_skip
-	sbiw	XL, 1		; undo post-increment
+	; undo post-increment
+#if !defined(__AVR_TINY__)
+	sbiw	XL, 1
+#else
+	ld	__tmp_reg__, -X
+#endif /* !__AVR_TINY__ */
 .L_strcat_loop:
 	ld	__tmp_reg__, Z+
 	st	X+, __tmp_reg__
@@ -61,5 +64,3 @@ _U(strcat):
 	.size	_U(strcat), .L_strcat_end - _U(strcat)
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

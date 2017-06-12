@@ -28,8 +28,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -42,16 +40,18 @@
 ENTRY strchrnul
 	X_movw	ZL, src_lo
 
-1:	ld	r0, Z+
-	cp	r0, val
-	cpse	r0, __zero_reg__
+1:	ld	__tmp_reg__, Z+
+	cp	__tmp_reg__, val
+	cpse	__tmp_reg__, __zero_reg__
 	brne	1b
-
-	sbiw	ZL, 1		; undo post-increment
+	; undo post-increment
+#if !defined(__AVR_TINY__)
+	sbiw	ZL, 1
+#else
+	ld	__tmp_reg__, -Z
+#endif /* !__AVR_TINY__ */
 	X_movw	ret_lo, ZL
 	ret
 ENDFUNC
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

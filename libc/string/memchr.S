@@ -28,8 +28,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -56,7 +54,12 @@ _U(memchr):
 	ld	__tmp_reg__, Z+
 	cp	__tmp_reg__, val_lo
 	brne	.L_memchr_loop
-	sbiw	ZL, 1		; undo post-increment
+	; undo post-increment
+#if !defined(__AVR_TINY__)
+	sbiw	ZL, 1
+#else
+	ld	__tmp_reg__, -Z
+#endif /*!__AVR_TINY__*/
 	X_movw	ret_lo, ZL
 	ret
 .L_memchr_notfound:
@@ -67,5 +70,3 @@ _U(memchr):
 	.size	_U(memchr), .L_memchr_end - _U(memchr)
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

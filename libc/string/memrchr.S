@@ -28,8 +28,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -44,13 +42,13 @@
 
 ENTRY memrchr
 	X_movw	ZL, len_lo
-	adiw	ZL, 0
+	X_sbiw	ZL, 0
 	breq	2f			; len is 0, return NULL
 	add	ZL, src_lo
 	adc	ZH, src_hi
 
-1:	ld	r0, -Z
-	cp	r0, val
+1:	ld	__tmp_reg__, -Z
+	cp	__tmp_reg__, val
 	breq	2f			; val is found
 	subi	len_lo, lo8(1)
 	sbci	len_hi, hi8(1)
@@ -62,5 +60,3 @@ ENTRY memrchr
 ENDFUNC
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

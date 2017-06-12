@@ -29,7 +29,6 @@
 /* $Id$	*/
 
 #if	!defined (__DOXYGEN__)
-#if	!defined (__AVR_TINY__)
 
 #include "asmdef.h"
 
@@ -77,7 +76,7 @@ ENTRY	__utoa_common
 	st	Z+, digit
 
     ; Iterate until all digits are sucked out of VAL.
-	sbiw	val_lo, 0
+	X_sbiw	val_lo, 0
 	brne	1b
 
     ; Store the sign (if any)
@@ -93,5 +92,4 @@ ENTRY	__utoa_common
 
 ENDFUNC
 
-#endif	/* !__AVR_TINY__ */
 #endif	/* !__DOXYGEN__ */

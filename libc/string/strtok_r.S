@@ -30,8 +30,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -87,13 +85,16 @@
 #define dch	r18
 
 ENTRY strtok_r
+#if defined(__AVR_TINY__)
+	push	dch
+#endif /* __AVR_TINY__ */
 	X_movw	ZL, lst_lo
 	ld	XL, Z+			; X = *last
 	ld	XH, Z
   ; check str
-	sbiw	str_lo, 0
+	X_sbiw	str_lo, 0
 	brne	1f
-	sbiw	XL, 0
+	X_sbiw	XL, 0
 	breq	.Lret			; end of string
 	X_movw	str_lo, XL		; continue parsing
 
@@ -119,7 +120,11 @@ ENTRY strtok_r
 	cp	dch, __tmp_reg__	; __tmp_reg__ != 0
 	brne	7f
 	st	-X, __zero_reg__
+#if !defined(__AVR_TINY__)
 	adiw	XL, 1
+#else
+	ld	__tmp_reg__, X+
+#endif /* __AVR_TINY__ */
 	rjmp	.Lret
 7:	tst	dch
 	brne	6b
@@ -134,10 +139,11 @@ ENTRY strtok_r
 .Lret:	X_movw	ZL, lst_lo		; *last = X
 	st	Z+, XL
 	st	Z, XH
+#if defined(__AVR_TINY__)
+	pop	dch
+#endif /* __AVR_TINY__ */
 	ret
 
 ENDFUNC
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

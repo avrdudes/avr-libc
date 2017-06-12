@@ -35,8 +35,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
@@ -84,7 +82,7 @@ ENTRY strlcat
 	ld	__tmp_reg__, X+
 	tst	__tmp_reg__
 	brne	1b
-	sbiw	XL, 1
+	X_sbiw	XL, 1
 	rjmp	3f
 
   ; copy loop
@@ -114,5 +112,3 @@ ENTRY strlcat
 
 ENDFUNC
 #endif /* not __DOXYGEN__ */
-
-#endif /* not __AVR_TINY__ */

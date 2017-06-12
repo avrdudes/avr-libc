@@ -206,6 +206,25 @@ _U(\name):
 #endif
 .endm
 
+/* Macro 'X_sbiw' extends SBIW instruction for AVR_TINY chips. */
+.macro	X_sbiw	dst,val
+#if !defined (__AVR_TINY__)
+	sbiw	\dst,\val
+#else
+  REGNO	.L__sbiw_dst, \dst
+  .if	.L__sbiw_dst < 0
+    .exitm
+  .endif
+  .if	.L__sbiw_dst % 1
+    .err	; Invalid register arg in X_sbiw macro.
+    .exitm
+  .endif
+
+	subi	.L__sbiw_dst, \val
+	sbci	.L__sbiw_dst + 1, 0
+#endif /* AVR_TINY */
+.endm
+
 /* Macro 'X_lpm' extends enhanced lpm instruction for classic chips.
    Usage:
 	X_lpm	reg, dst

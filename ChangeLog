@@ -1,5 +1,38 @@
 2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
+	Submitted by Georg-Johann Lay:
+	patch #9187: [AVR_TINY]: Support 16-bit xtoa functons and more string functions.
+	* common/asmdef.h (X_sbiw): New asm macro.
+	* common/macros.inc (X_sbiw): New asm macro.
+	* libc/misc/itoa.S: Don't restrict to !AVR_TINY.
+	* libc/misc/itoa_ncheck.S: Same.
+	* libc/misc/utoa.S: Same.
+	* libc/misc/utoa_ncheck.S: Same. And use X_sbiw instead of sbiw.
+	* libc/string/strlcat.S: Same.
+	* libc/string/strncat.S: Same.
+	* libc/string/strrev.S: Same.
+	* libc/string/strrchr.S: Same.
+	* libc/string/memchr.S: Don't restrict to !AVR_TINY.
+	[AVR_TINY]: Use "ld __tmp_reg__,-R" instead of "sbiw R,1".
+	* libc/string/strcat.S: Same.
+	* libc/string/strchr.S: Same.
+	* libc/string/memrchr.S: Don't restrict to !AVR_TINY.
+	(r0): Use __tmp_reg__ instead.
+	(adiw ZL,0): Use X_sbiw ZL,0 for comparison against 0 instead.
+	* libc/string/strchrnul.S: Don't restrict to !AVR_TINY.
+	(r0): Use __tmp_reg__ instead.
+	[AVR_TINY]: Use "ld __tmp_reg__,-R" instead of "sbiw R,1".
+	* libc/string/strpbrk.S: Same.
+	* libc/string/strstr.S: Don't restrict to !AVR_TINY.
+	Use X_sbiw instead of sbiw.
+	(chr2): Define to __tmp_reg__ instead of to r0.
+	* libc/string/strtok_r.S: Don't restrict to !AVR_TINY.
+	Use X_sbiw instead of sbiw.
+	(dch) [AVR_TINY]: Push / pop r18 around function.
+	[AVR_TINY]: Use "ld __tmp_reg__,R+" instead of "adiw R,1".
+
+2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
 	Submitted by Britton Kerin:
 	patch #8650: another small doc fix in atomic.h
 	* include/util/atomic.h: Improve documentation.

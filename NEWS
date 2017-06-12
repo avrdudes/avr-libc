@@ -1,5 +1,13 @@
 *** Changes since avr-libc-2.0.0:
 
+* Improvements and additions:
+
+  - Patch #9187 improved the library coverage for the AVR_TINY
+    architecture (ATtiny10 and relatives).  In particular, many
+    of the functions from <string.h> are now available there.
+
+  - Patch #8729 adds ISR_NOICF and ISR_FLATTEN to <avr/interrupt.h>
+
 * Bugs fixed:
 
   [#36933] Documentation no longer correctly describes how to declare
@@ -23,6 +31,7 @@
   [#8729] [avr/interrupt.h] Add ISR_NOICF, ISR_FLATTEN. Fix namespace of identifiers.
   [#8536] Fix a typo within <stdio.h>
   [#8649] small documentation fixes in
+  [#9187] [AVR_TINY]: Support 16-bit xtoa functons and more string functions.
 
 * Other changes:
 

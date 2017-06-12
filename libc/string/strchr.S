@@ -28,8 +28,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "macros.inc"
@@ -57,12 +55,15 @@ _U(strchr):
 	clr	ret_hi
 	ret
 .L_strchr_found:
-	sbiw	ZL, 1		; undo post-increment
+	; undo post-increment
+#if !defined(__AVR_TINY__)
+	sbiw	ZL, 1
+#else
+	ld	__tmp_reg__, -Z
+#endif /*!__AVR_TINY__*/
 	X_movw	ret_lo, ZL
 	ret
 .L_strchr_end:
 	.size	_U(strchr), .L_strchr_end - _U(strchr)
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */
