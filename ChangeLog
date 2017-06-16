@@ -1,3 +1,8 @@
+2017-06-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	* doc/api/faq.dox (faq_reg_usage): Document differences for
+	AVR_TINY architecture.
+
 2017-06-11  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	Submitted by Georg-Johann Lay:

@@ -674,6 +674,9 @@ You \e may use them freely in assembler subroutines.
 Calling C subroutines can clobber any of them -
 the caller is responsible for saving and restoring.
 
+\note For the AVR_TINY architecture (ATtiny10 and relatives),
+r18 and r19 are call-saved.
+
 - <strong>Call-saved registers (r2-r17, r28-r29):</strong><br>
 May be allocated by gcc for local data.
 Calling C subroutines leaves them unchanged.
@@ -685,6 +688,9 @@ The requirement for the callee to save/preserve
 the contents of these registers even applies in
 situations where the compiler assigns them for
 argument passing.
+
+\note For the AVR_TINY architecture (ATtiny10 and relatives),
+r18 and r19 are call-saved, and r0 through r16 do not exist.
 
 - <strong>Fixed registers (r0, r1):</strong><br>
 Never allocated by gcc for local data, but often
@@ -705,6 +711,9 @@ which return their result in r1:r0.
 Interrupt handlers save and clear r1 on entry,
 and restore r1 on exit (in case it was non-zero).
 </p>
+
+\note For the AVR_TINY architecture (ATtiny10 and relatives),
+r16 is used as temporary register, and r17 as zero.
 
 - <strong>Function call conventions:</strong><br>
 Arguments - allocated left to right, r25 to r8.
