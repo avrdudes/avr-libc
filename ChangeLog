@@ -1,3 +1,16 @@
+2017-07-05  Georg-Johann Lay <avr@gjlay.de>
+
+	patch #9400: Add multilib support for avrxmega3 + avrxmega3/short-calls.
+	* configure.ac (CHECK_AVR_DEVICE): Add one for avrxmega3.
+	(AM_CONDITIONAL): Add one for HAS_avrxmega3.
+	(AC_CONFIG_FILES): Add avr/lib/avrxmega3/Makefile,
+	avr/lib/avrxmega3/short-calls/Makefile.
+	* devtools/gen-avr-lib-tree.sh (CFLAGS_SHORT_CALLS): New.
+	(AVRXMEGA3_DEV_INFO): New.
+	(AVRXMEGA3SC_DEV_INFO): New.
+	(AVR_ARH_INFO): Add entries avrxmega3, avrxmega3/short-calls.
+	* include/avr/pgmspace.h (__AVR_HAVE_RAMPD__): Fix comment.
+
 2017-06-16  Joerg Wunsch <j.gnu@uriah.heep.sax.de>
 
 	* doc/api/faq.dox (faq_reg_usage): Document differences for

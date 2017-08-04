@@ -1124,6 +1124,11 @@ CHECK_AVR_DEVICE(atxmega32e5)
 AM_CONDITIONAL(HAS_atxmega32e5, test "x$HAS_atxmega32e5" = "xyes")
 
 
+# avrxmega3
+CHECK_AVR_DEVICE(avrxmega3)
+AM_CONDITIONAL(HAS_avrxmega3, test "x$HAS_avrxmega3" = "xyes")
+
+
 # avrxmega4
 CHECK_AVR_DEVICE(avrxmega4)
 AM_CONDITIONAL(HAS_avrxmega4, test "x$HAS_avrxmega4" = "xyes")
@@ -1569,6 +1574,16 @@ AC_CONFIG_FILES([
 	avr/lib/avrxmega2/atxmega32d3/Makefile
 	avr/lib/avrxmega2/atxmega32d4/Makefile
 	avr/lib/avrxmega2/atxmega32e5/Makefile
+])
+
+# avrxmega3
+AC_CONFIG_FILES([
+	avr/lib/avrxmega3/Makefile
+])
+
+# avrxmega3/short-calls
+AC_CONFIG_FILES([
+	avr/lib/avrxmega3/short-calls/Makefile
 ])
 
 # avrxmega4
