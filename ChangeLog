@@ -1,3 +1,9 @@
+2017-08-18  basil
+
+	Fix for bug #51755: iotn441.h & iotn841.h missing definitions for PUEA[0-7] and PUEB[0-3]
+	* include/avr/iotn441.h: Add defines for PUEA[0-7] and PUEB[0-3]
+	* include/avr/iotn841.h: Likewise.
+
 2017-07-05  Georg-Johann Lay <avr@gjlay.de>
 
 	patch #9400: Add multilib support for avrxmega3 + avrxmega3/short-calls.

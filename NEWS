@@ -17,6 +17,7 @@
   [#49447] Example code for uart_putchar() has error in recursive call
   strings for storage in program memory
   [#50439] avr/iom32u4.h does not define PRTIM4
+  [#51755] iotn441.h & iotn841.h missing definitions for PUEA[0-7] and PUEB[0-3]
   [no-id] util/eu_dst.h: fix reversed DST decision logic for March and October
 
 * New devices supported:

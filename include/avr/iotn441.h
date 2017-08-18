@@ -403,8 +403,20 @@
 #define ADC9D   3
 
 #define PUEB    _SFR_MEM8(0x62)
+#define PUEB3   3
+#define PUEB2   2
+#define PUEB1   1
+#define PUEB0   0
 
 #define PUEA    _SFR_MEM8(0x63)
+#define PUEA7   7
+#define PUEA6   6
+#define PUEA5   5
+#define PUEA4   4
+#define PUEA3   3
+#define PUEA2   2
+#define PUEA1   1
+#define PUEA0   0
 
 #define PORTCR  _SFR_MEM8(0x64)
 #define BBMB    1
