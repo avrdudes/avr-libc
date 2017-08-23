@@ -366,8 +366,8 @@
 
 /* Reserved [0x62..0x63] */
 
-#define PRR	_SFR_MEM8(0x64)  /* Datasheets: ATmega164P/324P/644P 8011D–AVR–02/07
-                                   and ATmega644 2593L–AVR–02/07.  */
+#define PRR	_SFR_MEM8(0x64)  /* Datasheets: ATmega164P/324P/644P 8011D-AVR-02/07
+                                   and ATmega644 2593L-AVR-02/07.  */
 #define PRR0	_SFR_MEM8(0x64)  /* AVR Studio 4.13, build 524.  */
 #define PRTWI		7
 #define PRTIM2		6
