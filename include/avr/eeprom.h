@@ -112,8 +112,10 @@ extern "C" {
  */
 #if	defined (__DOXYGEN__)
 # define eeprom_is_ready()
-#elif	defined (__AVR_XMEGA__) && __AVR_XMEGA__
+#elif	defined (NVM_STATUS)
 # define eeprom_is_ready()	bit_is_clear (NVM_STATUS, NVM_NVMBUSY_bp)
+#elif	defined (NVMCTRL_STATUS)
+# define eeprom_is_ready()	bit_is_clear (NVMCTRL_STATUS, NVMCTRL_EEBUSY_bp)
 #elif	defined (DEECR)
 # define eeprom_is_ready()	bit_is_clear (DEECR, BSY)
 #elif	defined (EEPE)
