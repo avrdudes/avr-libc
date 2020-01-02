@@ -1,0 +1,7 @@
+2018-06-29  Pitchumani Sivanupandi <pitchumani.sivanupandi@microchip.com>
+
+	Patch #9659: Update eeprom_is_ready for avrxmega3 devices
+	* include/avr/eeprom.h (eeprom_is_ready): Replace xmega specific definition
+	with NVM control register based definition as the names are not same for
+	all xmega devices.
+
