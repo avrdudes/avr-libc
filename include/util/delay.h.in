@@ -285,6 +285,7 @@ _delay_us(double __us)
 	else if (__tmp2 > 65535)
 	{
 		_delay_ms(__us / 1000.0);
+		return;
 	}
 	else if (__tmp > 255)
 	{

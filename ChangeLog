@@ -1,0 +1,4 @@
+2020-10-10 Joerg Wunsch <j.gnu@uriah.heep.sax.de>
+
+	Submitted by Yuriy M. Kaminskiy:
+	* include/util/delay.h.in: Add missing return statement
