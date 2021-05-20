@@ -1,0 +1,9 @@
+2021-05-20 Georg-Johann Lay
+
+	patch #9553: Fix some issues in libc/
+	* libc/stdio/vfscanf.c (GETBYTE) [LPMx]: Early-clobber %0.
+	(GETBYTE) [default]: Use shorter instruction sequence.
+	* libc/stdio/vfprintf.c: Same.
+	(vfprintf): Fix build-warnings.
+	* libc/stdlib/dtostre.c (dtostre): Fix build warning.
+	* libc/stdlib/getenv.c (getenv): Fix build warning.

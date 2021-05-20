@@ -49,7 +49,7 @@ dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
     if (prec > 7) prec = 7;
     
     exp = __ftoa_engine (val, sbeg, prec, 0);
-    d = s = sbeg;
+    s = d = sbeg;
     vtype = *s++;
 
     if ((vtype & FTOA_MINUS) && !(vtype & FTOA_NAN))	/* like 'Glibc'	*/

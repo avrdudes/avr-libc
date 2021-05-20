@@ -79,7 +79,7 @@
 	"lpm	%0,Z+	\n\t"			\
 	"sbrs	%2,%3	\n\t"			\
 	"ld	%0,Z+	"			\
-	: "=r" (__c),				\
+	: "=&r" (__c),				\
 	  "+z" (pnt)				\
 	: "r" (flag),				\
 	  "I" (ntz(mask))			\
@@ -90,7 +90,6 @@
 # define GETBYTE(flag, mask, pnt)	({	\
     unsigned char __c;				\
     asm (					\
-	"sbrc	%2,%3	\n\t"			\
 	"lpm		\n\t"			\
 	"sbrs	%2,%3	\n\t"			\
 	"ld	r0,Z	\n\t"			\
@@ -219,7 +218,7 @@ vfprintf (FILE * stream, const char *fmt, va_list ap)
 		goto ultoa;
 	      case 'p':
 	        flags |= FL_ALT;
-		/* no break */
+		/* fallthrough */
 	      case 'x':
 		flags |= (FL_ALTHEX | FL_ALTLWR);
 	        base = 16;
@@ -618,7 +617,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		goto ultoa;
 	      case 'p':
 	        flags |= FL_ALT;
-		/* no break */
+		/* fallthrough */
 	      case 'x':
 		if (flags & FL_ALT)
 		    flags |= FL_ALTHEX;

@@ -129,7 +129,7 @@ typedef unsigned char width_t;
 	"lpm	%0,Z+	\n\t"			\
 	"sbrs	%2,%3	\n\t"			\
 	"ld	%0,Z+	"			\
-	: "=r" (__c),				\
+	: "=&r" (__c),				\
 	  "+z" (pnt)				\
 	: "r" (flag),				\
 	  "I" (_FFS(mask) - 1)			\
@@ -140,7 +140,6 @@ typedef unsigned char width_t;
 # define GETBYTE(flag, mask, pnt)	({	\
     unsigned char __c;				\
     asm (					\
-	"sbrc	%2,%3	\n\t"			\
 	"lpm		\n\t"			\
 	"sbrs	%2,%3	\n\t"			\
 	"ld	r0,Z	\n\t"			\

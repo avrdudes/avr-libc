@@ -36,6 +36,7 @@
   [#9187] [AVR_TINY]: Support 16-bit xtoa functons and more string functions.
   [#9400] Add avrxmega3 multilibs
   [#9659] Update eeprom_is_ready for avrxmega3 devices
+  [#9553] Fix some issues in libc/
 
 * Other changes:
 
