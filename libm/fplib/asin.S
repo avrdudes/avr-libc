@@ -29,8 +29,8 @@
 
 /* $Id$ */
 
-/* float asin (float A);
-     The asin() function returns the arc sine in radians and the value is
+/* float asinf (float A);
+     The asinf() function returns the arc sine in radians and the value is
      mathematically defined to be between -PI/2 and PI/2 (inclusive).
  */
 
@@ -44,7 +44,7 @@
 #define HI40_PI_2   0x3fc90fda		/* high 4 bytes of Pi/2	*/
 #define	LO40_PI_2   0xa2		/* lowest byte of Pi/2	*/
 
-ENTRY asin
+ENTRY asinf
   ; save A sign
 	push	rA3
   ; A = fabs(A)

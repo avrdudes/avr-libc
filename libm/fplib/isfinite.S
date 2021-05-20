@@ -32,12 +32,12 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* int isfinite (float x);
-     The isfinite() function returns a nonzero value if x is finite: not
+/* int isfinitef (float x);
+     The isfinitef() function returns a nonzero value if x is finite: not
      plus or minus infinity, and not NaN.
 */
 
-ENTRY isfinite
+ENTRY isfinitef
 /* It is not needed to return 1 if number is finite. Any nonzero value
    is suitable.  This realization returns 0xff in low byte and nonzero
    value (1..255) in high byte.	*/

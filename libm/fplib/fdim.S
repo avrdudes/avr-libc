@@ -34,8 +34,8 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float fdim (float x, float y);
-     The fdim() function  return max(x-y,0). If x or y or both are NaN,
+/* float fdimf (float x, float y);
+     The fdimf() function  return maxf(x-y,0). If x or y or both are NaN,
      NaN is returned.
 
    Notes:
@@ -44,7 +44,7 @@
      is fast if both arguments are equal.
  */
 
-ENTRY fdim
+ENTRY fdimf
   ; sign(A) | sign(B)
 	mov	r0, rA3
 	or	r0, rB3

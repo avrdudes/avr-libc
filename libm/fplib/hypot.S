@@ -33,8 +33,8 @@
 #include "asmdef.h"
 #include "ntz.h"
 
-/* double hypot (double x, double y);
-     The hypot() function returns `sqrt (x*x + y*y)'. This is the length
+/* float hypotf (float x, float y);
+     The hypotf() function returns `sqrtf (x*x + y*y)'. This is the length
      of the hypotenuse of a right triangle with sides of length x and y,
      or the distance of the point (x, y) from the origin. Using this
      function instead of the direct formula is wise, since the error is
@@ -61,7 +61,7 @@
 # error
 #endif
 
-#define	exp_lo	r20		/* ldexp (float x, int exp);		*/
+#define	exp_lo	r20		/* ldexpf (float x, int exp);		*/
 #define	exp_hi	r21
 
 #define	rC0	r14
@@ -69,12 +69,12 @@
 #define	rC2	r16
 #define	rC3	r17
 
-FUNCTION hypot
+FUNCTION hypotf
 
 .L_nf:	XCALL	_U(__fp_pscA)
-	breq	1f		; hypot(Inf, *) --> Inf
+	breq	1f		; hypotf(Inf, *) --> Inf
 	XCALL	_U(__fp_pscB)
-	breq	1f		; hypot(*, Inf) --> Inf
+	breq	1f		; hypotf(*, Inf) --> Inf
 	XJMP	_U(__fp_nan)	; NaN and finite, or both NaN
 1:	XJMP	_U(__fp_inf)	; T is 0 after __fp_split3()
 
@@ -84,7 +84,7 @@ FUNCTION hypot
 .L_retA:
 	XJMP	_U(__fp_mpack)
 
-ENTRY hypot
+ENTRY hypotf
   ; clear signs
 	andi	rA3, 0x7f
 	andi	rB3, 0x7f
@@ -236,7 +236,7 @@ ENTRY hypot
 	
 	XCALL	_U(__addsf3x)
 	XCALL	_U(__fp_round)
-	XCALL	_U(sqrt)
+	XCALL	_U(sqrtf)
 
   ; restore a scale
 #if (-SCALE_SMALL & SCALE_BIG) == 0
@@ -248,5 +248,5 @@ ENTRY hypot
 	clr	exp_hi
 	sbrc	exp_lo, 7
 	com	exp_hi
-	XJMP	_U(ldexp)
+	XJMP	_U(ldexpf)
 ENDFUNC

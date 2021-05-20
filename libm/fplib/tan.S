@@ -32,16 +32,16 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float tan (float A);
-     The tan() function returns the tangent of A, where A is given
+/* float tanf (float A);
+     The tanf() function returns the tangent of A, where A is given
      in radians.
  */
 
 /* Calculation:
-     0 <= x <= Pi/4	 --> tan(x)		fmod
-     Pi/4 < x < Pi/2	 --> 1/tan(Pi/2-x)	fmod, Pi/2-x, 1/x
-     Pi/2 <= x <= 3*Pi/4 --> -1/tan(x-Pi/2)	fmod, 1/x, -x
-     3*Pi/4 < x < Pi	 --> -tan(Pi-x)		fmod, Pi/2-x, -x
+     0 <= x <= Pi/4	 --> tanf(x)		fmodf
+     Pi/4 < x < Pi/2	 --> 1/tanf(Pi/2-x)	fmodf, Pi/2-x, 1/x
+     Pi/2 <= x <= 3*Pi/4 --> -1/tanf(x-Pi/2)	fmodf, 1/x, -x
+     3*Pi/4 < x < Pi	 --> -tanf(Pi-x)		fmodf, Pi/2-x, -x
  */
 #define	HI40_PIO4	0x3F490FDA	/* (flt40_t) Pi/4	*/
 #define	LO40_PIO4	0xA2		/* --"--		*/
@@ -50,7 +50,7 @@
 
 #define	rsign	YH
 
-ENTRY tan
+ENTRY tanf
   ; save sign
 	push	rsign
 	mov	rsign, rA3

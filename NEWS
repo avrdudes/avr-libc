@@ -37,6 +37,7 @@
   [#9400] Add avrxmega3 multilibs
   [#9659] Update eeprom_is_ready for avrxmega3 devices
   [#9553] Fix some issues in libc/
+  [#9864] Use proper float function names and prototypes
 
 * Other changes:
 

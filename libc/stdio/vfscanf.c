@@ -395,7 +395,7 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
    long to float.  Instead it uses a signed long to float conversion
    function along with a large inline code to correct the result.
    Seems, GCC 4.3 does not use it also.	*/
-extern double __floatunsisf (unsigned long);
+extern float __floatunsisf (unsigned long);
 
 PROGMEM static const float pwr_p10 [6] = {
     1e+1, 1e+2, 1e+4, 1e+8, 1e+16, 1e+32
@@ -597,7 +597,7 @@ static int skip_spaces (FILE *stream)
      to <tt>char</tt> (rather than <tt>int</tt>).
    - the character \c l indicating that the argument is a pointer
      to <tt>long int</tt> (rather than <tt>int</tt>, for integer
-     type conversions), or a pointer to \c double (for floating
+     type conversions), or a pointer to \c float (for floating
      point conversions),
 
    In addition, a maximal field width may be specified as a nonzero

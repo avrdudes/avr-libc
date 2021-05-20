@@ -32,14 +32,14 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* double log (double A);
-   The log10() function returns the base 10 logarithm of A.
+/* float logf (float A);
+   The log10f() function returns the base 10 logarithm of A.
  */
 
 #define	INV_LN_10	0x3ede5bd9	/* 1.0/log(10.0)	*/
 
-ENTRY log10
-	XCALL	_U(log)
+ENTRY log10f
+	XCALL	_U(logf)
 	ldi	rB0,  lo8(INV_LN_10)
 	ldi	rB1,  hi8(INV_LN_10)
 	ldi	rB2, hlo8(INV_LN_10)

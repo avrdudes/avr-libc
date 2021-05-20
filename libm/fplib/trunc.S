@@ -32,16 +32,16 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* double trunc (double x);
-     The trunc() function rounds x to the nearest integer not larger in
+/* float truncf (float x);
+     The truncf() function rounds x to the nearest integer not larger in
      absolute value.
 
    Examples:
-     trunc(1.9) --> 1.0
-     trunc(-1.9) --> -1.0
+     truncf(1.9) --> 1.0
+     truncf(-1.9) --> -1.0
  */
 
-ENTRY trunc
+ENTRY truncf
 	XCALL	_U(__fp_trunc)
 	brcs	2f		; pass nonfinite arg as is
 	cpi	rA3, 127

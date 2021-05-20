@@ -34,11 +34,11 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float sin (float A);
-     The sin() function returns the sine of A, where A is given in radians.
+/* float sinf (float A);
+     The sinf() function returns the sine of A, where A is given in radians.
  */
 
-ENTRY sin
+ENTRY sinf
 	push	rA3
 	XCALL	_U(__fp_rempio2)
 	pop	r0

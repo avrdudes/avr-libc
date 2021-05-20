@@ -29,12 +29,12 @@
 
 /* $Id$ */
 
-/* double ceil (double x);
-     The ceil() function rounds x up to the nearest integer.
+/* float ceilf (float x);
+     The ceilf() function rounds x up to the nearest integer.
 
    Examples:
-     ceil(1.9) --> 2.0
-     ceil(-1.9) --> -1.0
+     ceilf(1.9) --> 2.0
+     ceilf(-1.9) --> -1.0
  */
 
 
@@ -45,7 +45,7 @@
 
 #define FL_P1	0x3f800000	/* +1.0	*/
 
-ENTRY   ceil
+ENTRY   ceilf
 	XCALL	_U(__fp_trunc)
 	brcs	.L_nf
   ; A is finite

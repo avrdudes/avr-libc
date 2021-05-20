@@ -34,15 +34,15 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float frexp (float A, int *pexp);
-     The frexp() function is used to split the number A into a normalized
+/* float frexpf (float A, int *pexp);
+     The frexpf() function is used to split the number A into a normalized
      fraction and an exponent which is stored by pexp.
 
    Return:
-     If A is a normal float point number, the frexp() function returns the
+     If A is a normal float point number, the frexpf() function returns the
      value v, such that v has a magnitude in the interval [1/2, 1) or zero,
      and A equals v times 2 raised to the power *pexp. If A is zero, both
-     parts of the result are zero. If A is not a finite number, the frexp()
+     parts of the result are zero. If A is not a finite number, the frexpf()
      returns A as is and stores 0 by pexp.
 
    Note:
@@ -52,7 +52,7 @@
 
 #define	pexp_lo	r20
 
-ENTRY frexp
+ENTRY frexpf
 
 	X_movw	ZL, pexp_lo
 

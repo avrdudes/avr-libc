@@ -34,19 +34,19 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float exp (float x);
-     The exp() function returns the value of e (the base of natural
+/* float expf (float x);
+     The expf() function returns the value of e (the base of natural
      logarithms) raised to the power of x.
  */
 
 #define	X2BIG	 0x43000000	/* exp(-X2BIG) < 0x00000001	*/
 #define	FL_1_LN2 0x3fb8aa3b	/* 1 / ln(2)			*/
 
-/* second arg for modf(), ldexp() functions.	*/
+/* second arg for modff(), ldexpf() functions.	*/
 #define	exp_lo	r20
 #define	exp_hi	r21
 
-FUNCTION exp
+FUNCTION expf
 
 .L_nf:	brne	.L_nan
 .L_tb:	brts	.L_zr
@@ -54,7 +54,7 @@ FUNCTION exp
 .L_zr:	XJMP	_U(__fp_zero)
 .L_nan:	XJMP	_U(__fp_nan)
 
-ENTRY exp
+ENTRY expf
   ; split and analize A
 	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; A is not a finite number
@@ -77,7 +77,7 @@ ENTRY exp
 	in	exp_lo, SPL_IO_ADDR
 	in	exp_hi, SPH_IO_ADDR
 	push	r0
-	XCALL	_U(modf)
+	XCALL	_U(modff)
   ; calculate 2**(-x) for 0 <= x < 1
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
@@ -102,7 +102,7 @@ ENTRY exp
   ; negate and scale
 	neg	exp_lo
 	sbc	exp_hi, exp_hi
-2:	XCALL	_U(ldexp)
+2:	XCALL	_U(ldexpf)
   ; inverse for positive arg.
 	pop	r0
 	sbrs	r0, 7

@@ -34,8 +34,8 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float pow (float x, float y);
-     The pow() function returns the value of x raised to the power of y.
+/* float powf (float x, float y);
+     The powf() function returns the value of x raised to the power of y.
 
    Args combinations:
 	x	y		pow(x,y)
@@ -105,7 +105,7 @@
 
 #define	FL_1	0x3f800000	/* +1.0	*/
 
-ENTRY pow
+ENTRY powf
   ; ZH := exponent of y
 	X_movw	ZL, rB2
 	lsl	ZL
@@ -206,13 +206,13 @@ ENTRY pow
 	push	rB2
 	push	rB1
 	push	rB0
-	XCALL	_U(log)
+	XCALL	_U(logf)
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
 	XCALL	_U(__mulsf3)
-	XJMP	_U(exp)
+	XJMP	_U(expf)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

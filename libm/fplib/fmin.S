@@ -34,13 +34,13 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float fmin (float x, float y);
-     The fmin() function returns the lesser of the two values x and y.
+/* float fminf (float x, float y);
+     The fminf() function returns the lesser of the two values x and y.
      If an argument is NaN, the other argument is returned. If both
      arguments are NaN, NaN is returned.
  */
 
-ENTRY fmin
+ENTRY fminf
 	lsl	rA3
 	sbc	rAE, rAE	; rAE = (A < 0) ? -1 : 0
 	lsl	rB3

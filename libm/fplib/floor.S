@@ -34,17 +34,17 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* double floor (double x);
-     The floor() function rounds x down to the nearest integer.
+/* float floorf (float x);
+     The floorf() function rounds x down to the nearest integer.
 
    Examples:
-     floor(1.9) --> 1.0
-     floor(-1.9) --> -2.0
+     floorf(1.9) --> 1.0
+     floorf(-1.9) --> -2.0
  */
 
 #define FL_M1	0xbf800000	/* -1.0	*/
 
-ENTRY floor
+ENTRY floorf
 	XCALL	_U(__fp_trunc)
 	brcs	.L_nf
   ; A is finite

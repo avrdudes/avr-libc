@@ -29,8 +29,8 @@
 
 /* $Id$ */
 
-/* float acos (float x);
-     The acos() function calculates the arc cosine of x; that is the value
+/* float acosf (float x);
+     The acosf() function calculates the arc cosine of x; that is the value
      whose cosine is x.
  */
  
@@ -43,7 +43,7 @@
 #define	HI40_PI	0x40490FDA	/* Pi	*/
 #define	LO40_PI	0xA2
 
-ENTRY acos
+ENTRY acosf
   ; save A sign
 	push	rA3
   ; A = arccos(fabs(A))

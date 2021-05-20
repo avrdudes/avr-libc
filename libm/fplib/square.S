@@ -32,11 +32,11 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float square (float A);
-     The square() function returns square of A.
+/* float squaref (float A);
+     The squaref() function returns square of A.
  */
 
-ENTRY square
+ENTRY squaref
 	X_movw	rB0, rA0
 	X_movw	rB2, rA2	; B = A
 

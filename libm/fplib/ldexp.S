@@ -34,19 +34,19 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* double ldexp (double x, int exp)
-   The ldexp() function returns the result of multiplying the
+/* float ldexpf (float x, int exp)
+   The ldexpf() function returns the result of multiplying the
    floating-point number x by 2 raised to the power exp.
  */
 #define	exp_lo	r20
 #define	exp_hi	r21
 
-FUNCTION ldexp
+FUNCTION ldexpf
 
 .L_inf:	XJMP	_U(__fp_inf)
 .L_pk:	XJMP	_U(__fp_mpack)
 
-ENTRY ldexp
+ENTRY ldexpf
 	XCALL	_U(__fp_splitA)
 	brcs	.L_pk			; as is
 	tst	rA3

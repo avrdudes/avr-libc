@@ -117,228 +117,252 @@
 # define __ATTR_CONST__ __attribute__((__const__))
 #endif
 
+#if __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
+/* In order to provide aliases for double functions in the case where
+   double = float, use declarations with according assembler name.
+   That way:
+   1) We do *NOT* use macros like
+         #define sin sinf
+      because that would interfere with C++.  For example, if some class
+      would implement a method 'sin', or if there was polymorthism for
+      a function 'sin', then we would silently rename these to 'sinf'.
+   2) We have proper prototypes, both for 'sin' and for 'sinf'.
+   3) It is zero-overhead.  */
+#define __ASM_ALIAS(x) __asm(#x)
+#else
+/* double != float: Provide double prototypes. */
+#define __ASM_ALIAS(x) /* empty */
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /**
-    The cos() function returns the cosine of \a __x, measured in radians.
+    The cosf() function returns the cosine of \a __x, measured in radians.
  */
-extern double cos(double __x) __ATTR_CONST__;
-#define cosf	cos		/**< The alias for cos().	*/
+__ATTR_CONST__ extern float cosf (float __x);
+__ATTR_CONST__ extern double cos (double __x) __ASM_ALIAS(cosf);		/**< The alias for cosf().	*/
 
 /**
-    The sin() function returns the sine of \a __x, measured in radians.
+    The sinf() function returns the sine of \a __x, measured in radians.
  */
-extern double sin(double __x) __ATTR_CONST__;
-#define sinf	sin		/**< The alias for sin().	*/
+__ATTR_CONST__ extern float sinf (float __x);
+__ATTR_CONST__ extern double sin (double __x) __ASM_ALIAS(sinf);		/**< The alias for sinf().	*/
 
 /**
-    The tan() function returns the tangent of \a __x, measured in radians.
+    The tanf() function returns the tangent of \a __x, measured in radians.
  */
-extern double tan(double __x) __ATTR_CONST__;
-#define tanf	tan		/**< The alias for tan().	*/
+__ATTR_CONST__ extern float tanf (float __x);
+__ATTR_CONST__ extern double tan (double __x) __ASM_ALIAS(tanf);		/**< The alias for tanf().	*/
 
 /**
-    The fabs() function computes the absolute value of a floating-point
+    The fabsf() function computes the absolute value of a floating-point
     number \a __x.
  */
-extern double fabs(double __x) __ATTR_CONST__;
-#define fabsf	fabs		/**< The alias for fabs().	*/
+static inline float fabsf (float __x)
+{
+    return __builtin_fabsf (__x);
+}
+
+static inline double fabs (double __x)
+{
+    return __builtin_fabs (__x);
+}
 
 /**
-    The function fmod() returns the floating-point remainder of <em>__x /
+    The function fmodf() returns the floating-point remainder of <em>__x /
     __y</em>.
  */
-extern double fmod(double __x, double __y) __ATTR_CONST__;
-#define fmodf	fmod		/**< The alias for fmod().	*/
+__ATTR_CONST__ extern float fmodf (float __x, float __y);
+__ATTR_CONST__ extern double fmod (double __x, double __y) __ASM_ALIAS(fmodf);		/**< The alias for fmodf().	*/
 
 /**
-    The modf() function breaks the argument \a __x into integral and
+    The modff() function breaks the argument \a __x into integral and
     fractional parts, each of which has the same sign as the argument. 
     It stores the integral part as a double in the object pointed to by
     \a __iptr.
 
-    The modf() function returns the signed fractional part of \a __x.
+    The modff() function returns the signed fractional part of \a __x.
 
     \note This implementation skips writing by zero pointer.  However,
     the GCC 4.3 can replace this function with inline code that does not
     permit to use NULL address for the avoiding of storing.
  */
-extern double modf(double __x, double *__iptr);
-
-/** An alias for modf(). */
 extern float modff (float __x, float *__iptr);
 
-/**
-    The sqrt() function returns the non-negative square root of \a __x.
- */
-extern double sqrt(double __x) __ATTR_CONST__;
+/** An alias for modff(). */
+extern double modf (double __x, double *__iptr) __ASM_ALIAS(modff);
 
-/** An alias for sqrt(). */
-extern float sqrtf (float) __ATTR_CONST__;
+/**
+    The sqrtf() function returns the non-negative square root of \a __x.
+ */
+__ATTR_CONST__ extern float sqrtf (float __x);
+
+/** An alias for sqrtf(). */
+__ATTR_CONST__ extern double sqrt (double __x) __ASM_ALIAS(sqrtf);
 
 /**
     The cbrt() function returns the cube root of \a __x.
  */
-extern double cbrt(double __x) __ATTR_CONST__;
-#define cbrtf	cbrt		/**< The alias for cbrt().	*/
+__ATTR_CONST__ extern float cbrtf (float __x);
+__ATTR_CONST__ extern double cbrt (double __x) __ASM_ALIAS(cbrtf);		/**< The alias for cbrtf().	*/
 
 /**
-    The hypot() function returns <em>sqrt(__x*__x + __y*__y)</em>. This
+    The hypotf() function returns <em>sqrtf(__x*__x + __y*__y)</em>. This
     is the length of the hypotenuse of a right triangle with sides of
     length \a __x and \a __y, or the  distance of the point (\a __x, \a
     __y) from the origin. Using this function  instead of the direct
     formula is wise, since the error is much smaller. No underflow with
     small \a __x and \a __y. No overflow if result is in range.
  */
-extern double hypot (double __x, double __y) __ATTR_CONST__;
-#define hypotf	hypot		/**< The alias for hypot().	*/
+__ATTR_CONST__ extern float hypotf (float __x, float __y);
+__ATTR_CONST__ extern double hypot (double __x, double __y) __ASM_ALIAS(hypotf);		/**< The alias for hypotf().	*/
 
 /**
-    The function square() returns <em>__x * __x</em>.
+    The function squaref() returns <em>__x * __x</em>.
 
     \note This function does not belong to the C standard definition.
  */
-extern double square(double __x) __ATTR_CONST__;
-#define squaref	square		/**< The alias for square().	*/
+__ATTR_CONST__ extern float squaref (float __x);
+__ATTR_CONST__ extern double square (double __x) __ASM_ALIAS(squaref);		/**< The alias for squaref().	*/
 
 /**
-    The floor() function returns the largest integral value less than or
+    The floorf() function returns the largest integral value less than or
     equal to \a __x, expressed as a floating-point number.
  */
-extern double floor(double __x) __ATTR_CONST__;
-#define floorf	floor		/**< The alias for floor().	*/
+__ATTR_CONST__ extern float floorf (float __x);
+__ATTR_CONST__ extern double floor (double __x) __ASM_ALIAS(floorf);		/**< The alias for floorf().	*/
 
 /**
-    The ceil() function returns the smallest integral value greater than
+    The ceilf() function returns the smallest integral value greater than
     or equal to \a __x, expressed as a floating-point number.
  */
-extern double ceil(double __x) __ATTR_CONST__;
-#define ceilf	ceil		/**< The alias for ceil().	*/
+__ATTR_CONST__ extern float ceilf (float __x);
+__ATTR_CONST__ extern double ceil (double __x) __ASM_ALIAS(ceilf);		/**< The alias for ceilf().	*/
 
 /**
-    The frexp() function breaks a floating-point number into a normalized
+    The frexpf() function breaks a floating-point number into a normalized
     fraction and an integral power of 2.  It stores the integer in the \c
     int object pointed to by \a __pexp.
 
-    If \a __x is a normal float point number, the frexp() function
+    If \a __x is a normal float point number, the frexpf() function
     returns the value \c v, such that \c v has a magnitude in the
     interval [1/2, 1) or zero, and \a __x equals \c v times 2 raised to
     the power \a __pexp. If \a __x is zero, both parts of the result are
-    zero. If \a __x is not a finite number, the frexp() returns \a __x as
+    zero. If \a __x is not a finite number, the frexpf() returns \a __x as
     is and stores 0 by \a __pexp.
 
     \note  This implementation permits a zero pointer as a directive to
     skip a storing the exponent.
  */
-extern double frexp(double __x, int *__pexp);
-#define frexpf	frexp		/**< The alias for frexp().	*/
+__ATTR_CONST__ extern float frexpf (float __x, int *__pexp);
+__ATTR_CONST__ extern double frexp (double __x, int *__pexp) __ASM_ALIAS(frexpf);		/**< The alias for frexpf().	*/
 
 /**
-    The ldexp() function multiplies a floating-point number by an integral
+    The ldexpf() function multiplies a floating-point number by an integral
     power of 2. It returns the value of \a __x times 2 raised to the power
     \a __exp.
  */
-extern double ldexp(double __x, int __exp) __ATTR_CONST__;
-#define ldexpf	ldexp		/**< The alias for ldexp().	*/
+__ATTR_CONST__ extern float ldexpf (float __x, int __exp);
+__ATTR_CONST__ extern double ldexp (double __x, int __exp) __ASM_ALIAS(ldexpf);		/**< The alias for ldexpf().	*/
 
 /**
-    The exp() function returns the exponential value of \a __x.
+    The expf() function returns the exponential value of \a __x.
  */
-extern double exp(double __x) __ATTR_CONST__;
-#define expf	exp		/**< The alias for exp().	*/
+__ATTR_CONST__ extern float expf (float __x);
+__ATTR_CONST__ extern double exp (double __x) __ASM_ALIAS(expf);		/**< The alias for expf().	*/
 
 /**
-    The cosh() function returns the hyperbolic cosine of \a __x.
+    The coshf() function returns the hyperbolic cosine of \a __x.
  */
-extern double cosh(double __x) __ATTR_CONST__;
-#define coshf	cosh		/**< The alias for cosh().	*/
+__ATTR_CONST__ extern float coshf (float __x);
+__ATTR_CONST__ extern double cosh (double __x) __ASM_ALIAS(coshf);		/**< The alias for coshf().	*/
 
 /**
-    The sinh() function returns the hyperbolic sine of \a __x.
+    The sinhf() function returns the hyperbolic sine of \a __x.
  */
-extern double sinh(double __x) __ATTR_CONST__;
-#define sinhf	sinh		/**< The alias for sinh().	*/
+__ATTR_CONST__ extern float sinhf (float __x);
+__ATTR_CONST__ extern double sinh (double __x) __ASM_ALIAS(sinhf);		/**< The alias for sinhf().	*/
 
 /**
-    The tanh() function returns the hyperbolic tangent of \a __x.
+    The tanhf() function returns the hyperbolic tangent of \a __x.
  */
-extern double tanh(double __x) __ATTR_CONST__;
-#define tanhf	tanh		/**< The alias for tanh().	*/
+__ATTR_CONST__ extern float tanhf (float __x);
+__ATTR_CONST__ extern double tanh (double __x) __ASM_ALIAS(tanhf);		/**< The alias for tanhf().	*/
 
 /**
-    The acos() function computes the principal value of the arc cosine of
+    The acosf() function computes the principal value of the arc cosine of
     \a __x.  The returned value is in the range [0, pi] radians. A domain
     error occurs for arguments not in the range [-1, +1].
  */
-extern double acos(double __x) __ATTR_CONST__;
-#define acosf	acos		/**< The alias for acos().	*/
+__ATTR_CONST__ extern float acosf (float __x);
+__ATTR_CONST__ extern double acos (double __x) __ASM_ALIAS(acosf);		/**< The alias for acosf().	*/
 
 /**
-    The asin() function computes the principal value of the arc sine of
+    The asinf() function computes the principal value of the arc sine of
     \a __x.  The returned value is in the range [-pi/2, pi/2] radians. A
     domain error occurs for arguments not in the range [-1, +1].
  */
-extern double asin(double __x) __ATTR_CONST__;
-#define asinf	asin		/**< The alias for asin().	*/
+__ATTR_CONST__ extern float asinf (float __x);
+__ATTR_CONST__ extern double asin (double __x) __ASM_ALIAS(asinf);		/**< The alias for asinf().	*/
 
 /**
-    The atan() function computes the principal value of the arc tangent
+    The atanf() function computes the principal value of the arc tangent
     of \a __x.  The returned value is in the range [-pi/2, pi/2] radians.
  */
-extern double atan(double __x) __ATTR_CONST__;
-#define atanf	atan		/**< The alias for atan().	*/
+__ATTR_CONST__ extern float atanf (float __x);
+__ATTR_CONST__ extern double atan (double __x) __ASM_ALIAS(atanf);		/**< The alias for atanf().	*/
 
 /**
-    The atan2() function computes the principal value of the arc tangent
+    The atan2f() function computes the principal value of the arc tangent
     of <em>__y / __x</em>, using the signs of both arguments to determine
     the quadrant of the return value.  The returned value is in the range
     [-pi, +pi] radians.
  */
-extern double atan2(double __y, double __x) __ATTR_CONST__;
-#define atan2f	atan2		/**< The alias for atan2().	*/
+__ATTR_CONST__ extern float atan2f (float __y, float __x);
+__ATTR_CONST__ extern double atan2 (double __y, double __x) __ASM_ALIAS(atan2f);		/**< The alias for atan2f().	*/
 
 /**
-    The log() function returns the natural logarithm of argument \a __x.
+    The logf() function returns the natural logarithm of argument \a __x.
  */
-extern double log(double __x) __ATTR_CONST__;
-#define logf	log		/**< The alias for log().	*/
+__ATTR_CONST__ extern float logf (float __x);
+__ATTR_CONST__ extern double log (double __x) __ASM_ALIAS(logf);		/**< The alias for logf().	*/
 
 /**
-    The log10() function returns the logarithm of argument \a __x to base 10.
+    The log10f() function returns the logarithm of argument \a __x to base 10.
  */
-extern double log10(double __x) __ATTR_CONST__;
-#define log10f	log10		/**< The alias for log10().	*/
+__ATTR_CONST__ extern float log10f (float __x);
+__ATTR_CONST__ extern double log10 (double __x) __ASM_ALIAS(log10f);		/**< The alias for log10f().	*/
 
 /**
-    The function pow() returns the value of \a __x to the exponent \a __y.
+    The function powf() returns the value of \a __x to the exponent \a __y.
  */
-extern double pow(double __x, double __y) __ATTR_CONST__;
-#define powf	pow		/**< The alias for pow().	*/
+__ATTR_CONST__ extern float powf (float __x, float __y);
+__ATTR_CONST__ extern double pow (double __x, double __y) __ASM_ALIAS(powf);		/**< The alias for powf().	*/
 
 /**
-    The function isnan() returns 1 if the argument \a __x represents a
+    The function isnanf() returns 1 if the argument \a __x represents a
     "not-a-number" (NaN) object, otherwise 0.
  */
-extern int isnan(double __x) __ATTR_CONST__;
-#define	isnanf	isnan		/**< The alias for isnan().	*/
+__ATTR_CONST__ extern int isnanf (float __x);
+__ATTR_CONST__ extern int isnan (double __x) __ASM_ALIAS(isnanf);		/**< The alias for isnanf().	*/
 
 /**
-    The function isinf() returns 1 if the argument \a __x is positive
+    The function isinff() returns 1 if the argument \a __x is positive
     infinity, -1 if \a __x is negative infinity, and 0 otherwise.
 
     \note The GCC 4.3 can replace this function with inline code that
     returns the 1 value for both infinities (gcc bug #35509).
  */
-extern int isinf(double __x) __ATTR_CONST__;
-#define isinff	isinf		/**< The alias for isinf().	*/
+__ATTR_CONST__ extern int isinff (float __x);
+__ATTR_CONST__ extern int isinf (double __x) __ASM_ALIAS(isinff);		/**< The alias for isinff().	*/
 
 /**
-    The isfinite() function returns a nonzero value if \a __x is finite:
+    The isfinitef() function returns a nonzero value if \a __x is finite:
     not plus or minus infinity, and not NaN.
  */
-__ATTR_CONST__ static inline int isfinite (double __x)
+__ATTR_CONST__ static inline int isfinitef (float __x)
 {
     unsigned char __exp;
     __asm__ (
@@ -350,13 +374,19 @@ __ATTR_CONST__ static inline int isfinite (double __x)
 	: "r" (__x)	);
     return __exp != 0xff;
 }
-#define isfinitef isfinite	/**< The alias for isfinite().	*/
+
+#if __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
+static inline int isfinite (double __x) /**< The alias for isfinitef().	*/
+{
+    return isfinitef (__x);
+}
+#endif /* double = float */
 
 /**
-    The copysign() function returns \a __x but with the sign of \a __y.
+    The copysignf() function returns \a __x but with the sign of \a __y.
     They work even if \a __x or \a __y are NaN or zero.
 */
-__ATTR_CONST__ static inline double copysign (double __x, double __y)
+__ATTR_CONST__ static inline float copysignf (float __x, float __y)
 {
     __asm__ (
 	"bst	%D2, 7	\n\t"
@@ -365,85 +395,94 @@ __ATTR_CONST__ static inline double copysign (double __x, double __y)
 	: "0" (__x), "r" (__y) );
     return __x;
 }
-#define copysignf copysign	/**< The alias for copysign().	*/
+
+__ATTR_CONST__ static inline double copysign (double __x, double __y)
+{
+    __asm__ (
+	"bst	%r1+%2-1, 7" "\n\t"
+	"bld	%r0+%2-1, 7"
+	: "+r" (__x)
+	: "r" (__y), "n" (__SIZEOF_DOUBLE__));
+    return __x;
+}
 
 /**
-    The signbit() function returns a nonzero value if the value of \a __x
+    The signbitf() function returns a nonzero value if the value of \a __x
     has its sign bit set.  This is not the same as `\a __x < 0.0',
     because IEEE 754 floating point allows zero to be signed. The
     comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return a
     nonzero value.
  */
-extern int signbit (double __x) __ATTR_CONST__;
-#define signbitf signbit	/**< The alias for signbit().	*/
+__ATTR_CONST__ extern int signbitf (float __x);
+__ATTR_CONST__ extern int signbit (double __x) __ASM_ALIAS(signbitf);	/**< The alias for signbitf().	*/
 
 /**
-    The fdim() function returns <em>max(__x - __y, 0)</em>. If \a __x or
+    The fdimf() function returns <em>maxf(__x - __y, 0)</em>. If \a __x or
     \a __y or both are NaN, NaN is returned.
  */
-extern double fdim (double __x, double __y) __ATTR_CONST__;
-#define fdimf	fdim		/**< The alias for fdim().	*/
+__ATTR_CONST__ extern float fdimf (float __x, float __y);
+__ATTR_CONST__ extern double fdim (double __x, double __y) __ASM_ALIAS(fdimf);		/**< The alias for fdimf().	*/
 
 /**
-    The fma() function performs floating-point multiply-add. This is the
+    The fmaf() function performs floating-point multiply-add. This is the
     operation <em>(__x * __y) + __z</em>, but the intermediate result is
     not rounded to the destination type.  This can sometimes improve the
     precision of a calculation.
  */
-extern double fma (double __x, double __y, double __z) __ATTR_CONST__;
-#define fmaf	fma		/**< The alias for fma().	*/
+__ATTR_CONST__ extern float fmaf (float __x, float __y, float __z);
+__ATTR_CONST__ extern double fma (double __x, double __y, double __z) __ASM_ALIAS(fmaf);		/**< The alias for fmaf().	*/
 
 /**
-    The fmax() function returns the greater of the two values \a __x and
+    The fmaxf() function returns the greater of the two values \a __x and
     \a __y. If an argument is NaN, the other argument is returned. If
     both arguments are NaN, NaN is returned.
  */
-extern double fmax (double __x, double __y) __ATTR_CONST__;
-#define fmaxf	fmax		/**< The alias for fmax().	*/
+__ATTR_CONST__ extern float fmaxf (float __x, float __y);
+__ATTR_CONST__ extern double fmax (double __x, double __y) __ASM_ALIAS(fmaxf);		/**< The alias for fmaxf().	*/
 
 /**
-    The fmin() function returns the lesser of the two values \a __x and
+    The fminf() function returns the lesser of the two values \a __x and
     \a __y. If an argument is NaN, the other argument is returned. If
     both arguments are NaN, NaN is returned.
  */
-extern double fmin (double __x, double __y) __ATTR_CONST__;
-#define fminf	fmin		/**< The alias for fmin().	*/
+__ATTR_CONST__ extern float fminf (float __x, float __y);
+__ATTR_CONST__ extern double fmin (double __x, double __y) __ASM_ALIAS(fminf);		/**< The alias for fminf().	*/
 
 /**
-    The trunc() function rounds \a __x to the nearest integer not larger
+    The truncf() function rounds \a __x to the nearest integer not larger
     in absolute value.
  */
-extern double trunc (double __x) __ATTR_CONST__;
-#define truncf	trunc		/**< The alias for trunc().	*/
+__ATTR_CONST__ extern float truncf (float __x);
+__ATTR_CONST__ extern double trunc (double __x) __ASM_ALIAS(truncf);		/**< The alias for truncf().	*/
 
 /**
-    The round() function rounds \a __x to the nearest integer, but rounds
+    The roundf() function rounds \a __x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
     Overflow is impossible.
 
     \return The rounded value. If \a __x is an integral or infinite, \a
     __x itself is returned. If \a __x is \c NaN, then \c NaN is returned.
  */
-extern double round (double __x) __ATTR_CONST__;
-#define roundf	round		/**< The alias for round().	*/
+__ATTR_CONST__ extern float roundf (float __x);
+__ATTR_CONST__ extern double round (double __x) __ASM_ALIAS(roundf);		/**< The alias for roundf().	*/
 
 /**
-    The lround() function rounds \a __x to the nearest integer, but rounds
+    The lroundf() function rounds \a __x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
-    This function is similar to round() function, but it differs in type of
+    This function is similar to roundf() function, but it differs in type of
     return value and in that an overflow is possible.
 
     \return The rounded long integer value. If \a __x is not a finite number
     or an overflow was, this realization returns the \c LONG_MIN value
     (0x80000000).
  */
-extern long lround (double __x) __ATTR_CONST__;
-#define lroundf	lround		/**< The alias for lround().	*/
+__ATTR_CONST__ extern long lroundf (float __x);
+__ATTR_CONST__ extern long lround (double __x) __ASM_ALIAS(lroundf);		/**< The alias for lroundf().	*/
 
 /**
-    The lrint() function rounds \a __x to the nearest integer, rounding the
+    The lrintf() function rounds \a __x to the nearest integer, rounding the
     halfway cases to the even integer direction. (That is both 1.5 and 2.5
-    values are rounded to 2). This function is similar to rint() function,
+    values are rounded to 2). This function is similar to rintf() function,
     but it differs in type of return value and in that an overflow is
     possible.
 
@@ -451,8 +490,8 @@ extern long lround (double __x) __ATTR_CONST__;
     number or an overflow was, this realization returns the \c LONG_MIN
     value (0x80000000).
  */
-extern long lrint (double __x) __ATTR_CONST__;
-#define lrintf	lrint		/**< The alias for lrint().	*/
+__ATTR_CONST__ extern long lrintf (float __x);
+__ATTR_CONST__ extern long lrint (double __x) __ASM_ALIAS(lrintf);		/**< The alias for lrintf().	*/
 
 #ifdef __cplusplus
 }

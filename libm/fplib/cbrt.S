@@ -33,7 +33,7 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* double cbrt (double)
+/* float cbrtf (float)
    Cube root function.
  */
 
@@ -72,7 +72,7 @@
 
 #define	REM	RD0
 
-FUNCTION cbrt
+FUNCTION cbrtf
 
 /* Division by 3.
    Input:
@@ -112,7 +112,7 @@ FUNCTION cbrt
 
 0:	XJMP	_U(__fp_mpack)
 
-ENTRY cbrt
+ENTRY cbrtf
   ; split and check arg.
 	XCALL	_U(__fp_splitA)
 	brcs	0b		; !isfinite(A)

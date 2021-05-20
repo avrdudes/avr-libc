@@ -34,13 +34,13 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float fmax (float x, float y);
-     The fmax() function returns the greater of the two values x and y.
+/* float fmaxf (float x, float y);
+     The fmaxf() function returns the greater of the two values x and y.
      If an argument is NaN, the other argument is returned. If both
      arguments are NaN, NaN is returned.
  */
 
-ENTRY fmax
+ENTRY fmaxf
 	lsl	rA3
 	sbc	rAE, rAE	; rAE = (A < 0) ? -1 : 0
 	lsl	rB3

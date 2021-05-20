@@ -34,24 +34,24 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float tanh (float x);
-     The tanh() function returns the hyperbolic tangent of x, which is
+/* float tanhf (float x);
+     The tanhf() function returns the hyperbolic tangent of x, which is
      defined mathematically as sinh(x) / cosh(x).
 
    Algorithm:
-	if (fabs(x) <= X2SMALL)
+	if (|x| <= X2SMALL)
 	    return Polinom(x)
 	else
-	    return sign(x) * (1 - exp(-2*fabs(x))) / (1 + exp(-2*fabs(x)))
+	    return sign(x) * (1 - exp(-2*|x|)) / (1 + exp(-2*|x|))
  */
 
 #define	X2SMALL	0x3e0fffff	/* < 0.140625	*/
 #define	FL_P1	0x3f800000	/* +1.0	*/
 
-#define	exp_lo	r20		/* float ldexp (float, int exp);	*/
+#define	exp_lo	r20		/* float ldexpf (float, int exp);	*/
 #define	exp_hi	r21
 
-ENTRY tanh
+ENTRY tanhf
   ; save sign
 	push	rA3
   ; is arg too small ?
@@ -69,9 +69,9 @@ ENTRY tanh
 1:	ori	rA3, 0x80
 	ldi	exp_lo, lo8(1)
 	ldi	exp_hi, hi8(1)
-	XCALL	_U(ldexp)	; possible overflow -- no matter
-	XCALL	_U(exp)
-  ; save result and calculate 1 + exp(-2*fabs(x))
+	XCALL	_U(ldexpf)	; possible overflow -- no matter
+	XCALL	_U(expf)
+  ; save result and calculate 1 + expf(-2*fabsf(x))
 	push	rA3
 	push	rA2
 	push	rA1
@@ -81,7 +81,7 @@ ENTRY tanh
 	ldi	rB2, hlo8(FL_P1)
 	ldi	rB3, hhi8(FL_P1)
 	XCALL	_U(__addsf3)
-  ; save/restore and calculate 1 - exp(-2*fabs(x))
+  ; save/restore and calculate 1 - expf(-2*fabsf(x))
 	pop	rB0
 	pop	rB1
 	pop	rB2

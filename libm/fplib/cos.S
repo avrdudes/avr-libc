@@ -32,11 +32,11 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float cos (float A);
-     The cos() function returns the cosine of A, where A is given in
+/* float cosf (float A);
+     The cosf() function returns the cosine of A, where A is given in
      radians.
  */
-ENTRY cos
+ENTRY cosf
 	XCALL	_U(__fp_rempio2)
 	inc	ZL
 	XJMP	_U(__fp_sinus)

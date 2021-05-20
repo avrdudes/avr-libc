@@ -34,20 +34,20 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float sinh (float x);
-     The sinh() function returns the hyperbolic sine of x, which is
+/* float sinhf (float x);
+     The sinhf() function returns the hyperbolic sine of x, which is
      defined mathematically as (exp(x) - exp(-x)) / 2.
 
    Notes:
-     ldexp() is used twice to avoid overflow for big x.
+     ldexpf() is used twice to avoid overflow for big x.
  */
 
 #define	X2SMALL	0x3e9fffff	/* < 0.3125	*/
 
-#define	exp_lo	r20		/* float ldexp (float, int exp);	*/
+#define	exp_lo	r20		/* float ldexpf (float, int exp);	*/
 #define	exp_hi	r21
 
-ENTRY sinh
+ENTRY sinhf
   ; save sign
 	push	rA3
   ; is arg too small ?
@@ -61,22 +61,22 @@ ENTRY sinh
 	ldi	ZH, hi8(.L_table)
 	XCALL	_U(__fp_powsodd)
 	rjmp	2f
-  ; exp(-fabs(x))	// negative to exclude an extra inversion
+  ; expf(-fabsf(x))	// negative to exclude an extra inversion
 1:	ori	rA3, 0x80
-	XCALL	_U(exp)
-  ; exp(-fabs(x)) / 2
+	XCALL	_U(expf)
+  ; expf(-fabsf(x)) / 2
 	ldi	exp_lo, lo8(-1)
 	ldi	exp_hi, hi8(-1)
-	XCALL	_U(ldexp)
+	XCALL	_U(ldexpf)
   ; save
 	push	rA3
 	push	rA2
 	push	rA1
 	push	rA0
-  ; exp(fabs(x)) / 2
+  ; expf(fabsf(x)) / 2
 	ldi	exp_lo, lo8(2)
 	ldi	exp_hi, hi8(2)
-	XCALL	_U(ldexp)
+	XCALL	_U(ldexpf)
 	XCALL	_U(inverse)
   ; result (in absolute value)
 	pop	rB0

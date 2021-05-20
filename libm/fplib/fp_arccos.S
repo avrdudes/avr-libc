@@ -74,7 +74,7 @@ ENTRY __fp_arccos
 	ldi	rA2, hlo8(FL_1)
 	ldi	rA3, hhi8(FL_1)
 	XCALL	_U(__subsf3)
-	XCALL	_U(sqrt)
+	XCALL	_U(sqrtf)
 
 	movw	rB0, rC0
 	movw	rB2, rC2
@@ -114,7 +114,7 @@ ENTRY __fp_arccos
 	ldi	rA2, hlo8(FL_1)
 	ldi	rA3, hhi8(FL_1)
 	XCALL	_U(__subsf3)
-	XCALL	_U(sqrt)
+	XCALL	_U(sqrtf)
   ; multiply
 	pop	rB0
 	pop	rB1

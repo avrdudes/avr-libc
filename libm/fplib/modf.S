@@ -34,9 +34,9 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/*  double modf (double x, double *iptr);
+/*  float modff (float x, float *iptr);
 
-    The modf() function breaks the argument x into an integral part and a
+    The modff() function breaks the argument x into an integral part and a
     fractional part, each of which has the same sign as x. The integral part
     is stored in iptr.
 	This implementation skips writing by zero pointer.
@@ -44,7 +44,6 @@
 
 #define	iptr_lo	r20
 
-ENTRY modf
 ENTRY modff
   ; save iptr
 	X_movw	ZL, iptr_lo

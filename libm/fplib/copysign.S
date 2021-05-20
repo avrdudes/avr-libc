@@ -32,12 +32,12 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float copysign (float x, float y);
-     The copysign() function returns x but with the sign of y.
+/* float copysignf (float x, float y);
+     The copysignf() function returns x but with the sign of y.
      They work even if x or y are NaN or zero.
  */
 
-ENTRY   copysign
+ENTRY   copysignf
 	bst	rB3, 7
 	bld	rA3, 7
 	ret

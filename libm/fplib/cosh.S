@@ -32,34 +32,34 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float cosh (float x);
-     The cosh() function returns the hyperbolic cosine of x, which is
+/* float coshf (float x);
+     The coshf() function returns the hyperbolic cosine of x, which is
      defined mathematically as (exp(x) + exp(-x)) / 2.
 
    Notes:
-     ldexp() is called twice to avoid overflow with too big x argument.
+     ldexpf() is called twice to avoid overflow with too big x argument.
  */
 
 #define	exp_lo	r20
 #define	exp_hi	r21
 
-ENTRY cosh
-  ; A = exp(-fabs(x))/2 	negative to exclude an extra inversion
+ENTRY coshf
+  ; A = expf(-fabsf(x))/2 	negative to exclude an extra inversion
 	ori	rA3, 0x80
-	XCALL	_U(exp)
+	XCALL	_U(expf)
 	ldi	exp_lo, lo8(-1)
 	ldi	exp_hi, hi8(-1)
-	XCALL	_U(ldexp)
-  ; save A and calculate exp(fabs(x))/2
+	XCALL	_U(ldexpf)
+  ; save A and calculate expf(fabsf(x))/2
 	push	rA3
 	push	rA2
 	push	rA1
 	push	rA0
 	ldi	exp_lo, lo8(2)
 	ldi	exp_hi, hi8(2)
-	XCALL	_U(ldexp)
+	XCALL	_U(ldexpf)
 	XCALL	_U(inverse)
-  ; exp(x)/2 + exp(-x)/2
+  ; expf(x)/2 + expf(-x)/2
 	pop	rB0
 	pop	rB1
 	pop	rB2

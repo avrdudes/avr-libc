@@ -34,15 +34,15 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* int isinf (double)
-     The isinf() function returns -1 if value represents negative
+/* int isinff (float)
+     The isinff() function returns -1 if value represents negative
      infinity, 1 if value represents positive infinity, and 0 otherwise.
    Notes:
      * It is implemented to save space, as there is a time effective
      isfinite() inline function.
  */
 
-ENTRY isinf
+ENTRY isinff
 	XCALL	_U(__fp_splitA)
 	ldi	r24, 0
 	ldi	r25, 0
