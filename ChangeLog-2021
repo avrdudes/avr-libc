@@ -1,0 +1,67 @@
+2021-05-20 Georg-Johann Lay
+
+	patch #9553: Fix some issues in libc/
+	* libc/stdio/vfscanf.c (GETBYTE) [LPMx]: Early-clobber %0.
+	(GETBYTE) [default]: Use shorter instruction sequence.
+	* libc/stdio/vfprintf.c: Same.
+	(vfprintf): Fix build-warnings.
+	* libc/stdlib/dtostre.c (dtostre): Fix build warning.
+	* libc/stdlib/getenv.c (getenv): Fix build warning.
+
+2021-05-20 Georg-Johann Lay
+
+	patch #9864: Use proper float function names and prototypes
+	* include/math.h
+	(cos, sin, tan, fmod, modf, sqrt, cbrt, hypot, square, floor, ceil)
+	(frexp, ldexp, exp, cosh, sinh, tanh, asin, acos, atan, atan2)
+	(log, log10, pow, isnan, isinf, signbit, fdim, fma, fmax, fmin)
+	(trunc, round, lround, lrint) [double=64-bit]: Provide double
+	prototypes.
+	[double=32-bit]: Provide protos with assembler names which are
+	the corresponding float function name.
+	(cosf, sinf, tanf, fmodf, modff, sqrtf, cbrtf, hypotf, squaref)
+	(floorf, ceilf, frexpf, ldexpf, expf, coshf, sinhf, tanhf, asinf)
+	(acosf, atanf, atan2f, logf, log10f, powf, isnanf, isinff)
+	(signbitf, fdimf, fmaf, fmaxf, fmin, truncf, roundf, lroundf)
+	(lrintf):
+	Turn from macro to proper prototype.
+	(fabs, fabsf, isfinite, isfinitef, copysign, copysignf): Implement.
+	* libm/fplib/acos.S: Use correct names for functions that deal
+	with float, e.g. acosf instead of acos.	 Adjust comments.
+	* libm/fplib/asin.S: Same.
+	* libm/fplib/atan.S: Same.
+	* libm/fplib/atan2.S: Same.
+	* libm/fplib/cbrt.S: Same.
+	* libm/fplib/ceil.S: Same.
+	* libm/fplib/copysign.S: Same.
+	* libm/fplib/cos.S: Same.
+	* libm/fplib/cosh.S: Same.
+	* libm/fplib/exp.S: Same.
+	* libm/fplib/fdim.S: Same.
+	* libm/fplib/floor.S: Same.
+	* libm/fplib/fma.S: Same.
+	* libm/fplib/fmax.S: Same.
+	* libm/fplib/fmin.S: Same.
+	* libm/fplib/fmod.S: Same.
+	* libm/fplib/fp_arccos.S: Same.
+	* libm/fplib/frexp.S: Same.
+	* libm/fplib/hypot.S: Same.
+	* libm/fplib/isfinite.S: Same.
+	* libm/fplib/isinf.S: Same.
+	* libm/fplib/isnan.S: Same.
+	* libm/fplib/ldexp.S: Same.
+	* libm/fplib/log.S: Same.
+	* libm/fplib/log10.S: Same.
+	* libm/fplib/lrint.S: Same.
+	* libm/fplib/lround.S: Same.
+	* libm/fplib/modf.S: Same.
+	* libm/fplib/pow.S: Same.
+	* libm/fplib/round.S: Same.
+	* libm/fplib/signbit.S: Same.
+	* libm/fplib/sin.S: Same.
+	* libm/fplib/sinh.S: Same.
+	* libm/fplib/sqrt.S: Same.
+	* libm/fplib/square.S: Same.
+	* libm/fplib/tan.S: Same.
+	* libm/fplib/tanh.S: Same.
+	* libm/fplib/trunc.S: Same.
