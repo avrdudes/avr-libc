@@ -32,26 +32,41 @@
 # $Id$
 #
 
-# This is a script to automate the generation of the avr/lib/ tree. Since
-# there is a build directory for each device and each of those directories is
-# virtually the same, it is easier to maintain a single file instead of an
-# ever growing number of small Makefile.am fragments.
+# This is a script to automate the generation of the avr/lib/ and avr/devices
+# trees.  Since there is a build directory for each device and each of
+# those directories is virtually the same, it is easier to maintain a single
+# file instead of an ever growing number of small Makefile.am fragments.
+# This file basically contains which devices avr-libc is capable to support,
+# where each supported device is represented by a line that also specifies
+# additional options to be set when generating code for that device.
+# This information -- together with extra flags for the multilib variants
+# of the C libraries -- is dumped to files tmp-device-info and tmp-core-info
+# which is picked up by mlib-gen.py.  The latter script is the working horse
+# that pops ./avr into existence.
 
-# Make sure that we are the top-level of the source tree. We will look for the
-# the AUTHORS file in the current dir and the parent. After that, we complain
-# and fatal error out.
-
-# Define the special flags for special sub-targets.
 
 PATH=/usr/xpg4/bin:$PATH
 
+# Define extra flags for our devices.  These flags MUST NOT be any multilib
+# option.  Multlib options are:
+#     -mmcu=* -msp8 -mshort-calls
+#     -mdouble=32 -mdouble=64 -mlong-double=32 -mlong-double=64.
+
 CFLAGS_SPACE="-mcall-prologues -Os"
-CFLAGS_TINY_STACK="-msp8 -mcall-prologues -Os"
-CFLAGS_SHORT_CALLS="-mshort-calls -mcall-prologues -Os"
 CFLAGS_BIG_MEMORY='-Os $(FNO_JUMP_TABLES)'
 CFLAGS_SPEED="-Os"
 
 ASFLAGS_SPEED="-DOPTIMIZE_SPEED"
+
+# The devices we support. Assigning a device to a specific variable like
+# AVR12_DEV_INFO is for historical reasons.  Today, a device is no more
+# "bound" to a core, and the assignment is just for easier maintaining
+# this file with its many entries.  The outcome will be that each device
+# ends up as a line in tmp-device-info, and each core ends up as a line
+# in tmp-core-info to be picked up by mlib-gen.py.
+
+# The 2nd row is legacy.  If you add support for a new device, just
+# leave it empty.
 
 AVR12_DEV_INFO="\
 at90s1200:crts1200.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
@@ -63,17 +78,14 @@ at90s4414:crts4414.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s4434:crts4434.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s8515:crts8515.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 at90s8535:crts8535.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
-"
-
-AVR12TS_DEV_INFO="\
-at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-at90s2333:crts2333.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-at90s2343:crts2343.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-at90s4433:crts4433.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS}\
+at90c8534:crtc8534.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2313:crts2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2323:crts2323.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2333:crts2333.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s2343:crts2343.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+at90s4433:crts4433.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny22:crttn22.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny26:crttn26.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 AVR25_DEV_INFO="\
@@ -97,19 +109,16 @@ attiny85:crttn85.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny861:crttn861.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny861a:crttn861a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny87:crttn87.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-attiny88:crttn88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
-"
-
-AVR25TS_DEV_INFO="\
-attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny13a:crttn13a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny2313a:crttn2313a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny24:crttn24.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny24a:crttn24a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny25:crttn25.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny261:crttn261.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-attiny261a:crttn261a.o:${DEV_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS}\
+attiny88:crttn88.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny13:crttn13.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny13a:crttn13a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny2313:crttn2313.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny2313a:crttn2313a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny24:crttn24.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny24a:crttn24a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny25:crttn25.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny261:crttn261.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+attiny261a:crttn261a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 AVR3_DEV_INFO="\
@@ -306,9 +315,6 @@ atxmega32e5:crtx32e5.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 AVRXMEGA3_DEV_INFO="\
 "
 
-AVRXMEGA3SC_DEV_INFO="\
-"
-
 AVRXMEGA4_DEV_INFO="\
 atxmega64a3:crtx64a3.o:${DEV_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 atxmega64a3u:crtx64a3u.o:${DEV_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
@@ -362,32 +368,39 @@ attiny20:crttn20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny40:crttn40.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
+# The "architectures" or "cores".  The second row only serves as a pointer
+# to all the supported devices as we iterate over AVR_ARH_INFO below.
+# Mentioning AVR25_DEV_INFO after avr25 only serves the purpose to include
+# the devices in tmp-device-info -- it does NOT mean that these devices
+# are associated to the core in any way.
+
+# Extra options to be set when building the C libraries.  The options for the
+# cores MUST NOT contain any multlilb options.
 
 LIB_DEFS="-D__COMPILING_AVR_LIBC__"
 
 AVR_ARH_INFO="\
-avr2::AVR12_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr2:tiny-stack:AVR12TS_DEV_INFO:${LIB_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-avr25::AVR25_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr25:tiny-stack:AVR25TS_DEV_INFO:${LIB_DEFS}:${CFLAGS_TINY_STACK}:${DEV_ASFLAGS};\
-avr3::AVR3_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr31::AVR31_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr35::AVR35_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr4::AVR4_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr5::AVR5_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avr51::AVR51_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avr6::AVR6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega2::AVRXMEGA2_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avrxmega3::AVRXMEGA3_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avrxmega3:short-calls:AVRXMEGA3SC_DEV_INFO:${LIB_DEFS}:${CFLAGS_SHORT_CALLS}:${DEV_ASFLAGS};\
-avrxmega4::AVRXMEGA4_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega5::AVRXMEGA5_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega6::AVRXMEGA6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrxmega7::AVRXMEGA7_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrtiny::AVRTINY_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+avr2:AVR12_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr25:AVR25_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr3:AVR3_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr31:AVR31_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr35:AVR35_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr4:AVR4_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr5:AVR5_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr51:AVR51_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avr6:AVR6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega2:AVRXMEGA2_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avrxmega3:AVRXMEGA3_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avrxmega4:AVRXMEGA4_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega5:AVRXMEGA5_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega6:AVRXMEGA6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrxmega7:AVRXMEGA7_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
+avrtiny:AVRTINY_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
-echo "Generating source directories:"
+# Make sure that we are the top-level of the source tree. We will look for the
+# the AUTHORS file in the current dir and the parent. After that, we complain
+# and fatal error out.
 
 top_dir="UNKNOWN"
 
@@ -408,136 +421,26 @@ then
 	exit 1
 fi
 
-test -d avr || mkdir avr
-test -d avr/lib || mkdir avr/lib
+echo "Generating source directories: $PWD"
 
-cd avr/lib || exit 1
+# Print device info to file tmp-device-info and core info to file tmp-core-info
+# to be picked up by mlib-gen.py.
+
+rm -f ./tmp-device-info
+rm -f ./tmp-core-info
+echo "unknown:unknown.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}" > tmp-device-info
 
 IFS=';'
-ARH_SUBDIRS=""
-
 for ath_lib in $AVR_ARH_INFO
 do
-	arh=`echo $ath_lib | cut -d ':' -f 1`
-	sublib=`echo $ath_lib | cut -d ':' -f 2`
-	dev_info=`echo $ath_lib | cut -d ':' -f 3`
-	lib_defs=`echo $ath_lib | cut -d ':' -f 4`
-	lib_cflags=`echo $ath_lib | cut -d ':' -f 5`
-	lib_asflags=`echo $ath_lib | cut -d ':' -f 6`
-
-	install_dir=$arh
-	if [ $arh = avr2 ]
-	then
-		if [ -z "$sublib" ] ; then
-			install_dir=""
-		else
-			install_dir=$sublib
-		fi
-	else
-		if [ -z "$sublib" ] ; then
-			install_dir=$arh
-		else
-			install_dir=$arh'/'$sublib
-		fi
-	fi
-
-	# Install directory for sed substitution, the '/' character is masked.
-	inst_dir_masked=`echo $install_dir | sed 's/\\//\\\\\\//'`
-
-    # In build tree.
-    subdir=${arh}${sublib:+/}${sublib}
-    echo "  avr/lib/$subdir/"
-
-    # The first record of each arch must be sublib-free.
-    test -d $subdir || mkdir $subdir
-    cd $subdir || exit 1
-
-    DEV_SUBDIRS=""
-
-	eval DEV_INFO=\"\$\{$dev_info\}\"
-
-	for dev_crt in $DEV_INFO
-	do
-		dev=`echo $dev_crt | cut -d ':' -f 1`
-		crt=`echo $dev_crt | cut -d ':' -f 2`
-		crt_defs=`echo $dev_crt | cut -d ':' -f 3`
-		crt_cflags=`echo $dev_crt | cut -d ':' -f 4`
-		crt_asflags=`echo $dev_crt | cut -d ':' -f 5`
-
-		echo "  avr/lib/$subdir/$dev"
-
-		test -d $dev || mkdir $dev
-
-		cat $top_dir/devtools/Device.am > $dev/Makefile.am
-
-		sed -e "s/<<dev>>/$dev/g" \
-		    -e "s/<<crt>>/$crt/g" \
-		    -e "s/<<crt_defs>>/$crt_defs/g" \
-		    -e "s/<<crt_cflags>>/$crt_cflags/g" \
-		    -e "s/<<crt_asflags>>/$crt_asflags/g"  \
-		    -e "s/<<install_dir>>/$inst_dir_masked/g" $dev/Makefile.am \
-		    > $dev/tempfile
-
-		case "$dev" in
-		  at90s1200|attiny11|attiny12|attiny15|attiny28)
-			sed -e "s/\$(eeprom_c_sources)//g" \
-				-e "s/\$(dev_c_sources)//g" $dev/tempfile \
-			> $dev/tempfile_2 && mv -f $dev/tempfile_2 $dev/Makefile.am
-			;;
-		  *)
-			mv -f $dev/tempfile $dev/Makefile.am
-			;;
-		esac
-
-		DEV_SUBDIRS="$DEV_SUBDIRS $dev"
-	done
-
-	cat $top_dir/devtools/Architecture.am > Makefile.am
-
-	sed -e "s/<<dev_subdirs>>/$DEV_SUBDIRS/g" \
-	    -e "s/<<arh>>/$arh/g" \
-	    -e "s/<<lib_defs>>/$lib_defs/g" \
-	    -e "s/<<lib_cflags>>/$lib_cflags/g" \
-	    -e "s/<<lib_asflags>>/$lib_asflags/g" \
-	    -e "s/<<install_dir>>/$inst_dir_masked/g" Makefile.am \
-	    > tempfile && mv -f tempfile Makefile.am
-
-	# Find the first and the last lines of <<dev>> block.
-	n1=`grep -En '^if[[:blank:]]+HAS_<<dev>>' Makefile.am	\
-	    | cut -d ':' -f 1`
-	n2=`grep -En '^endif[[:blank:]]+#[[:blank:]]*<<dev>>' Makefile.am \
-	    | cut -d ':' -f 1`
-
-	# Before the <<dev>> block.
-	head -n `expr $n1 - 1` Makefile.am > tempfile
-
-	# Duplicate the <<dev>> block and substitute.
-	for dev_crt in $DEV_INFO ; do
-		dev=`echo $dev_crt | cut -d ':' -f 1`
-		tail -n +$n1 Makefile.am	\
-		    | head -n `expr $n2 - $n1 + 1`	\
-		    | sed -e "s/<<dev>>/$dev/g" >> tempfile
-	done
-
-	# After the <<dev>> block.
-	tail -n +`expr $n2 + 1` Makefile.am >> tempfile
-
-	# Result.
-	mv -f tempfile Makefile.am
-
-	ARH_SUBDIRS="$ARH_SUBDIRS $subdir"
-
-	cd .. || exit 1
-	if [ -n "$sublib" ] ; then
-		cd .. || exit 1
-	fi
+    arh=`echo $ath_lib | cut -d ':' -f 1`
+    dev_info=`echo $ath_lib | cut -d ':' -f 2`
+    eval DEV_INFO=\"\$\{$dev_info\}\"
+    echo $ath_lib >> tmp-core-info
+    for d in $DEV_INFO
+    do
+	echo $d >> tmp-device-info
+    done
 done
 
-cat $top_dir/devtools/Lib.am > Makefile.am
-
-sed -e "s/<<arh_subdirs>>/`echo $ARH_SUBDIRS | sed 's/\\//\\\\\\//g'`/g" \
-    Makefile.am > tempfile && mv -f tempfile Makefile.am
-
-cd ..
-
-cat $top_dir/devtools/Avr.am > Makefile.am
+./devtools/mlib-gen.py -devices tmp-device-info -cores tmp-core-info || exit 1

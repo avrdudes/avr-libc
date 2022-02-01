@@ -39,11 +39,11 @@ else
 # avr-gcc > 5.1.0 expects crt file as crt<device name>.o and
 # device library in multi-lib directory itself
 AVR_TARGET_CRT      = crt<<dev>>.o
-AVR_INSTALL_DIR     = <<install_dir>>
+AVR_INSTALL_DIR     = $(MULTIDIR_<<dev>>)
 endif
 else
 AVR_TARGET_CRT      = <<crt>>
-AVR_INSTALL_DIR     = <<install_dir>>
+AVR_INSTALL_DIR     = $(MULTIDIR_<<dev>>)
 endif
 AVR_TARGET_DEFS     = <<crt_defs>>
 AVR_TARGET_CFLAGS   = <<crt_cflags>>
@@ -51,11 +51,11 @@ AVR_TARGET_ASFLAGS  = <<crt_asflags>>
 
 VPATH = $(top_srcdir)/crt1:$(top_srcdir)/libc/misc
 
+if HAS_<<dev>>
+
 if HAS_DEV_LIB
 include $(top_srcdir)/libc/misc/Rules.am
 endif
-
-if HAS_<<dev>>
 
 AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include -I$(top_builddir)/include
 
@@ -93,6 +93,39 @@ avr_DATA = $(AVR_TARGET_CRT)
 $(AVR_TARGET_CRT): gcrt1.o
 	rm -f $@
 	ln $< $@ || cp $< $@
+
+## If -mdouble=32/64 resp. -mlong-double=32/64 is mentioned in
+## avr-gcc -print-multi-lib -- which means that there is some multilib
+## variant that needs the respective option -- then just copy
+## crt<<dev>>.o and lib<<dev>>.a to the respective multilib-subfolder.
+
+if HAS_MULTIOPT_double64
+avrD64dir = $(avrdir)/$(DIR_double64)
+avrD64libdir = $(avrlibdir)/$(DIR_double64)
+avrD64_DATA = $(AVR_TARGET_CRT)
+avrD64_LIBRARIES = lib<<dev>>.a
+endif
+
+if HAS_MULTIOPT_double32
+avrD32dir = $(avrdir)/$(DIR_double32)
+avrD32libdir = $(avrlibdir)/$(DIR_double32)
+avrD32_DATA = $(AVR_TARGET_CRT)
+avrD32_LIBRARIES = lib<<dev>>.a
+endif
+
+if HAS_MULTIOPT_long_double64
+avrL64dir = $(avrdir)/$(DIR_long_double64)
+avrL64libdir = $(avrlibdir)/$(DIR_long_double64)
+avrL64_DATA = $(AVR_TARGET_CRT)
+avrL64_LIBRARIES = lib<<dev>>.a
+endif
+
+if HAS_MULTIOPT_long_double32
+avrL32dir = $(avrdir)/$(DIR_long_double32)
+avrL32libdir = $(avrlibdir)/$(DIR_long_double32)
+avrL32_DATA = $(AVR_TARGET_CRT)
+avrL32_LIBRARIES = lib<<dev>>.a
+endif
 
 else
 

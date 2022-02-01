@@ -31,9 +31,8 @@
 
 EXTRA_DIST = \
     Architecture.am \
-    Avr.am \
     Device.am \
-    Lib.am \
     cr_check.py \
     gen-avr-lib-tree.sh \
+    mlib-gen.py \
     make-binary-dist.sh
