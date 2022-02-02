@@ -52,7 +52,7 @@
    Objections to saturation are listen in __fixunssfsi.S file.
  */
 
-ENTRY lroundf
+ENTRY_FLOAT lroundf lround lroundl
 	XCALL	_U(__fp_splitA)
 	brcs	.L_err
   ; A is finite

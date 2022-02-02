@@ -54,7 +54,7 @@ FUNCTION expf
 .L_zr:	XJMP	_U(__fp_zero)
 .L_nan:	XJMP	_U(__fp_nan)
 
-ENTRY expf
+ENTRY_FLOAT expf exp expl
   ; split and analize A
 	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; A is not a finite number

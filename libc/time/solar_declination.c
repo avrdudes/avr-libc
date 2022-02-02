@@ -43,35 +43,39 @@
 #include <time.h>
 #include <math.h>
 #include "ephemera_common.h"
+#include "alias.h"
 
 #define LAG 38520
 
-double
-solar_declination(const time_t * timer)
+float
+solar_declinationf(const time_t * timer)
 {
 
     uint32_t        fT, oV;
-    double          dV, dT;
+    float           dV, dT;
 
     /* Determine orbital angle relative to perihelion of January 1999 */
     oV = *timer % ANOM_YEAR;
-    oV += PERIHELION;
+    oV += (float) PERIHELION;
     dV = oV;
-    dV /= ANOM_CYCLE;
+    dV /= (float) ANOM_CYCLE;
 
     /* Derive velocity correction factor from the perihelion angle */
-    dV = sin(dV);
-    dV *= DELTA_V;
+    dV = sinf(dV);
+    dV *= (float) DELTA_V;
 
     /* Determine orbital angle relative to solstice of December 1999 */
     fT = *timer % TROP_YEAR;
-    fT += SOLSTICE + LAG;
+    fT += (float) (SOLSTICE + LAG);
     dT = fT;
-    dT /= TROP_CYCLE;
+    dT /= (float) TROP_CYCLE;
     dT += dV;
 
     /* Finally having the solstice angle, we can compute the declination */
-    dT = cos(dT) * INCLINATION;
+    dT = cosf(dT) * (float) INCLINATION;
 
     return -dT;
 }
+
+DALIAS (solar_declinationf) double solar_declination (const time_t*);
+LALIAS (solar_declinationf) long double solar_declinationl (const time_t*);

@@ -480,7 +480,9 @@ extern          "C" {
     time_t          sun_set(const time_t * timer);
 
     /** Returns the declination of the sun in radians. */
+    float           solar_declinationf(const time_t * timer);
     double          solar_declination(const time_t * timer);
+    long double     solar_declinationl(const time_t * timer);
 
     /**
         Returns an approximation to the phase of the moon.

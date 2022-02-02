@@ -46,7 +46,7 @@ FUNCTION ldexpf
 .L_inf:	XJMP	_U(__fp_inf)
 .L_pk:	XJMP	_U(__fp_mpack)
 
-ENTRY ldexpf
+ENTRY_FLOAT ldexpf ldexp ldexpl
 	XCALL	_U(__fp_splitA)
 	brcs	.L_pk			; as is
 	tst	rA3

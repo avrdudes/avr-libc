@@ -112,7 +112,7 @@ FUNCTION cbrtf
 
 0:	XJMP	_U(__fp_mpack)
 
-ENTRY cbrtf
+ENTRY_FLOAT cbrtf cbrt cbrtl
   ; split and check arg.
 	XCALL	_U(__fp_splitA)
 	brcs	0b		; !isfinite(A)

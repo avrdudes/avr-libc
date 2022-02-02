@@ -44,7 +44,7 @@
 #define HI40_PI_2   0x3fc90fda		/* high 4 bytes of Pi/2	*/
 #define	LO40_PI_2   0xa2		/* lowest byte of Pi/2	*/
 
-ENTRY asinf
+ENTRY_FLOAT asinf asin asinl
   ; save A sign
 	push	rA3
   ; A = fabs(A)

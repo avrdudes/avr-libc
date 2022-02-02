@@ -33,14 +33,8 @@
 
 #include <stdio.h>
 
-int dtoa_prf (double val, char *s, unsigned char width, unsigned char prec,
+int ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
               unsigned char flags);
-int dtoa_lim (double val, char *s, unsigned char width, unsigned char prec,
-              unsigned char flags);
-int dtoa_cln (double val, char *s, unsigned char ndigs, unsigned char flags);
-
-void d2stream (double val, FILE *stream,
-               unsigned char width, unsigned char prec, unsigned char flags);
 
 #define	DTOA_SPACE  0x01	/* put space for positives	*/
 #define	DTOA_PLUS   0x02	/* put '+' for positives	*/

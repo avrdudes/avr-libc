@@ -52,7 +52,7 @@
 
 #define	pexp_lo	r20
 
-ENTRY frexpf
+ENTRY_FLOAT frexpf frexp frexpl
 
 	X_movw	ZL, pexp_lo
 

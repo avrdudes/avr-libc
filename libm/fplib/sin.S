@@ -38,7 +38,7 @@
      The sinf() function returns the sine of A, where A is given in radians.
  */
 
-ENTRY sinf
+ENTRY_FLOAT sinf sin sinl
 	push	rA3
 	XCALL	_U(__fp_rempio2)
 	pop	r0

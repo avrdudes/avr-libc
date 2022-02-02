@@ -37,7 +37,7 @@
      plus or minus infinity, and not NaN.
 */
 
-ENTRY isfinitef
+ENTRY_FLOAT isfinitef isfinite isfinitel
 /* It is not needed to return 1 if number is finite. Any nonzero value
    is suitable.  This realization returns 0xff in low byte and nonzero
    value (1..255) in high byte.	*/

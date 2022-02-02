@@ -31,15 +31,18 @@
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"
+#include "alias.h"
 
 	ASSEMBLY_CLIB_SECTION
-	.global	atof
-	.type	atof, "function"
-atof:
+	.global	atoff
+	.type	atoff, "function"
+atoff:
+DALIAS atof
+LALIAS atofl
 	clr	r22
 	clr	r23
 	XJMP	strtod
 
-	.size atof, .-atof
+	.size atoff, .-atoff
 	.end
 #endif	/* !__DOXYGEN__ */

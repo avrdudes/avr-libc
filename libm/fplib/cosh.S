@@ -43,7 +43,7 @@
 #define	exp_lo	r20
 #define	exp_hi	r21
 
-ENTRY coshf
+ENTRY_FLOAT coshf cosh coshl
   ; A = expf(-fabsf(x))/2 	negative to exclude an extra inversion
 	ori	rA3, 0x80
 	XCALL	_U(expf)

@@ -84,7 +84,7 @@ FUNCTION hypotf
 .L_retA:
 	XJMP	_U(__fp_mpack)
 
-ENTRY hypotf
+ENTRY_FLOAT hypotf hypot hypotl
   ; clear signs
 	andi	rA3, 0x7f
 	andi	rB3, 0x7f

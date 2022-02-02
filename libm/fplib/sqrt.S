@@ -45,7 +45,7 @@ FUNCTION sqrtf
 .L_nan:	XJMP	_U(__fp_nan)
 .L_pk:	XJMP	_U(__fp_mpack)
 
-ENTRY sqrtf
+ENTRY_FLOAT sqrtf sqrt sqrtl
   ; split and check arg.
 	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; !isfinite(A)

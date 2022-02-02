@@ -37,7 +37,7 @@
      They work even if x or y are NaN or zero.
  */
 
-ENTRY   copysignf
+ENTRY_FLOAT copysignf copysign copysignl
 	bst	rB3, 7
 	bld	rA3, 7
 	ret

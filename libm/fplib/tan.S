@@ -50,7 +50,7 @@
 
 #define	rsign	YH
 
-ENTRY tanf
+ENTRY_FLOAT tanf tan tanl
   ; save sign
 	push	rsign
 	mov	rsign, rA3

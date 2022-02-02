@@ -33,7 +33,7 @@
 
 #ifndef	__ASSEMBLER__
 
-int __ftoa_engine (double val, char *buf,
+int __ftoa_engine (float val, char *buf,
                    unsigned char prec, unsigned char maxdgs);
 
 #endif

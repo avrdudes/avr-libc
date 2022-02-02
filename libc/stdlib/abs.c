@@ -30,8 +30,10 @@
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION
+__attribute__((__weak__)) int abs_impl (int) __asm ("abs");
+
 int
-abs(int x)
+abs_impl (int x)
 {
 	return (x < 0) ? -x : x;
 }

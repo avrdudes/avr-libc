@@ -31,10 +31,11 @@
 #include "ftoa_engine.h"
 #include "dtoa_conv.h"
 #include "sectionname.h"
+#include "alias.h"
 
 ATTRIBUTE_CLIB_SECTION
 int
-dtoa_prf (double val, char *s, unsigned char width, unsigned char prec,
+ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
           unsigned char flags)
 {
     int exp;
@@ -149,4 +150,9 @@ dtoa_prf (double val, char *s, unsigned char width, unsigned char prec,
 
     return 0;
 }
-			/*** end of file ***/
+
+DALIAS (ftoa_prf)
+int dtoa_prf (double, char*, unsigned char, unsigned char, unsigned char);
+
+LALIAS (ftoa_prf)
+int ldtoa_prf (long double, char*, unsigned char, unsigned char, unsigned char);

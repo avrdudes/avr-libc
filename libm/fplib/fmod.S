@@ -51,7 +51,7 @@ FUNCTION fmodf
 .L_nan:	XJMP	_U(__fp_nan)
 .L_sz:	XJMP	_U(__fp_szero)
 
-ENTRY fmodf
+ENTRY_FLOAT fmodf fmod fmodl
   ; split and check exceptions
 	mov	ZL, rA3		; save
 	XCALL	_U(__fp_split3)

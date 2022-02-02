@@ -41,7 +41,7 @@
      truncf(-1.9) --> -1.0
  */
 
-ENTRY truncf
+ENTRY_FLOAT truncf trunc truncl
 	XCALL	_U(__fp_trunc)
 	brcs	2f		; pass nonfinite arg as is
 	cpi	rA3, 127

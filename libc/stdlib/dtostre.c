@@ -32,10 +32,11 @@
 #include <avr/pgmspace.h>
 #include "ftoa_engine.h"
 #include "sectionname.h"
+#include "alias.h"
 
 ATTRIBUTE_CLIB_SECTION
 char *
-dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
+ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
 {
     __attribute__((progmem)) static const char str_nan[2][4] =
 	{"nan", "NAN"};
@@ -106,4 +107,9 @@ dtostre (double val, char *sbeg, unsigned char prec, unsigned char flags)
   ret:
     return sbeg;
 }
-			/*** end of file ***/
+
+DALIAS (ftostre)
+char* dtostre (double, char*, unsigned char, unsigned char);
+
+LALIAS (ftostre)
+char* ldtostre (long double, char*, unsigned char, unsigned char);

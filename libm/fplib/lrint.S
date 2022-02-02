@@ -50,7 +50,7 @@
      - restore the sign
  */
 
-ENTRY lrintf
+ENTRY_FLOAT lrintf lrint lrintl
 	XCALL	_U(__fp_splitA)
 	brcs	.L_err
   ; A is finite

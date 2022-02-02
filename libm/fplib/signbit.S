@@ -43,7 +43,7 @@
     to builtin GCC realization.
  */
 
-ENTRY signbitf
+ENTRY_FLOAT signbitf signbit signbitl
 	lsl	rA3
 	sbc	rA2, rA2
 	neg	rA2

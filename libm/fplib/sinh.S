@@ -47,7 +47,7 @@
 #define	exp_lo	r20		/* float ldexpf (float, int exp);	*/
 #define	exp_hi	r21
 
-ENTRY sinhf
+ENTRY_FLOAT sinhf sinh sinhl
   ; save sign
 	push	rA3
   ; is arg too small ?

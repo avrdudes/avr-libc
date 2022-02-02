@@ -38,7 +38,7 @@
 
 #define	INV_LN_10	0x3ede5bd9	/* 1.0/log(10.0)	*/
 
-ENTRY log10f
+ENTRY_FLOAT log10f log10 log10l
 	XCALL	_U(logf)
 	ldi	rB0,  lo8(INV_LN_10)
 	ldi	rB1,  hi8(INV_LN_10)

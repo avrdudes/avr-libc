@@ -36,7 +36,7 @@
      The cosf() function returns the cosine of A, where A is given in
      radians.
  */
-ENTRY cosf
+ENTRY_FLOAT cosf cos cosl
 	XCALL	_U(__fp_rempio2)
 	inc	ZL
 	XJMP	_U(__fp_sinus)

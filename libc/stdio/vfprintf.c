@@ -122,6 +122,7 @@
 #define FL_ALTLWR	0x20
 #define FL_NEGATIVE	0x40
 #define FL_LONG 	0x80
+#define FL_LONG_DOUBLE 	(__SIZEOF_LONG_DOUBLE__ != __SIZEOF_DOUBLE__ ? 0x08 : 0)
 
 ATTRIBUTE_CLIB_SECTION
 int
@@ -162,13 +163,20 @@ vfprintf (FILE * stream, const char *fmt, va_list ap)
 		flags |= FL_LONG;
 		continue;
 	    }
+	    if (c == 'L') {
+		flags |= FL_LONG_DOUBLE;
+		continue;
+	    }
 	    break;
 	}
 
 	/* Only a format character is valid.	*/
 
 	if (c && strchr_P (PSTR("EFGefg"), c)) {
-	    (void) va_arg (ap, double);
+            if (flags & FL_LONG_DOUBLE)
+                (void) va_arg (ap, long double);
+            else
+                (void) va_arg (ap, double);
 	    putc ('?', stream);
 	    continue;
 	}
@@ -281,6 +289,10 @@ vfprintf (FILE * stream, const char *fmt, va_list ap)
 #define FL_FLTEXP	FL_PREC
 #define	FL_FLTFIX	FL_LONG
 
+/* %Lf might not be the same like %f. */
+#define XFL_LONG	((__SIZEOF_LONG_DOUBLE__ != __SIZEOF_DOUBLE__) << 0)
+
+
 ATTRIBUTE_CLIB_SECTION
 int vfprintf (FILE * stream, const char *fmt, va_list ap)
 {
@@ -289,6 +301,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
     unsigned char width;
     unsigned char prec;
     unsigned char buf[11];	/* size for -1 in octal, without '\0'	*/
+    unsigned char xflags;
 
     stream->len = 0;
 
@@ -307,6 +320,8 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	    putc (c, stream);
 	}
 
+	if (XFL_LONG)
+	    xflags = 0;
 	flags = 0;
 	width = 0;
 	prec = 0;
@@ -353,6 +368,10 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		    flags |= FL_LONG;
 		    continue;
 		}
+		if (c == 'L') {
+		    xflags |= XFL_LONG;
+		    continue;
+		}
 		if (c == 'h')
 		    continue;
 	    }
@@ -366,7 +385,19 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 # error
 #endif
 
-#if PRINTF_LEVEL >= PRINTF_FLT
+	/* We only support 32-bit floating point, hence if double is 64 bits
+	   wide, there is nothing to do here because ... will promote float
+	   to double.  */
+#if (PRINTF_LEVEL >= PRINTF_FLT) && (__SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__)
+
+	if ((xflags & XFL_LONG)
+	    && ((c >= 'E' && c <= 'G') || (c >= 'e' && c <= 'g')))
+	{
+	    (void) va_arg (ap, long double);
+	    buf[0] = '?';
+	    goto buf_addr;
+	}
+
 	if (c >= 'E' && c <= 'G') {
 	    flags |= FL_FLTUPP;
 	    c += 'e' - 'E';
@@ -539,9 +570,12 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 # undef ndigs
 	}
 
-#else		/* to: PRINTF_LEVEL >= PRINTF_FLT */
+#else		/* to: PRINTF_LEVEL >= PRINTF_FLT && double == float */
 	if ((c >= 'E' && c <= 'G') || (c >= 'e' && c <= 'g')) {
-	    (void) va_arg (ap, double);
+	    if (xflags & XFL_LONG)
+		(void) va_arg (ap, long double);
+	    else
+		(void) va_arg (ap, double);
 	    buf[0] = '?';
 	    goto buf_addr;
 	}
@@ -556,9 +590,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 
 	      case 'c':
 		buf[0] = va_arg (ap, int);
-#if  PRINTF_LEVEL < PRINTF_FLT
-	      buf_addr:
-#endif
+	      buf_addr: if (0) goto buf_addr;
 		pnt = (char *)buf;
 		size = 1;
 		goto no_pgmstring;

@@ -48,7 +48,7 @@
      - merge to float
    This is a balance between space and speed.
  */
-ENTRY roundf
+ENTRY_FLOAT roundf round roundl
 	XCALL	_U(__fp_splitA)
 	brcs	.L_nf
   ; A is finite

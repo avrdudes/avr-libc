@@ -54,7 +54,7 @@
 
 #define	corr	YH
 
-ENTRY atanf
+ENTRY_FLOAT atanf atan atanl
 	push	corr
 	clr	corr
   ; inverse A, if needed

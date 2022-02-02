@@ -105,7 +105,7 @@
 
 #define	FL_1	0x3f800000	/* +1.0	*/
 
-ENTRY powf
+ENTRY_FLOAT powf pow powl
   ; ZH := exponent of y
 	X_movw	ZL, rB2
 	lsl	ZL

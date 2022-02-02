@@ -85,7 +85,7 @@ FUNCTION atan2f
 .L_nan:	XJMP	_U(__fp_nan)
 .L_zr:	XJMP	_U(__fp_zero)
 
-ENTRY   atan2f
+ENTRY_FLOAT atan2f atan2 atan2l
   ; save 'y' sign
 	mov	disp, rA3
 	andi	disp, 0x80

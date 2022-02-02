@@ -44,7 +44,7 @@
      is fast if both arguments are equal.
  */
 
-ENTRY fdimf
+ENTRY_FLOAT fdimf fdim fdiml
   ; sign(A) | sign(B)
 	mov	r0, rA3
 	or	r0, rB3

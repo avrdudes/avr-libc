@@ -45,7 +45,7 @@
 
 #define FL_P1	0x3f800000	/* +1.0	*/
 
-ENTRY   ceilf
+ENTRY_FLOAT ceilf ceil ceill
 	XCALL	_U(__fp_trunc)
 	brcs	.L_nf
   ; A is finite

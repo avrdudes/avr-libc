@@ -43,7 +43,7 @@
 #define	HI40_PI	0x40490FDA	/* Pi	*/
 #define	LO40_PI	0xA2
 
-ENTRY acosf
+ENTRY_FLOAT acosf acos acosl
   ; save A sign
 	push	rA3
   ; A = arccos(fabs(A))

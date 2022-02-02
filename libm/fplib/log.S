@@ -55,7 +55,7 @@ FUNCTION logf
 .L_min:	set
 	XJMP	_U(__fp_inf)
 
-ENTRY logf
+ENTRY_FLOAT logf log logl
 	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; !isfinite(A)
 	tst	rA3

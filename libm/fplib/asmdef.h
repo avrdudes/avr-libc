@@ -93,16 +93,24 @@ FUNCTION \name
 _U(\name):
 .endm
 
-/* Because we define the double type to have the same representation as
-   float, we want to share some code for multiple function definitions.
+/* If the layout of the double type is the same like the float layout,
+   provide a weak alias of the float symbol for double, same for long double.
    While we could also provide aliases in header files using
    __asm__ in the declaration to specifiy the symbol to reference,
    it is preferable to provide actual symbols in the library, so
    that code that expects to be able to use them directly -
    like gcc/gcc/testsuite/gcc.dg/pr41963.c using sqrtf - will work.  */
-.macro	ALIAS_ENTRY	name
-	.global	_U(\name)
-_U(\name):
+
+.macro	ENTRY_FLOAT  fname  dname  lname
+ENTRY \fname
+#if (__SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__)
+	.weak	_U(\dname)
+_U(\dname):
+#endif /* double = float */
+#if (__SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__)
+	.weak	_U(\lname)
+_U(\lname):
+#endif /* long double = float */
 .endm
 
 .macro	ENDFUNC

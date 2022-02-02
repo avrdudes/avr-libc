@@ -40,7 +40,7 @@
      arguments are NaN, NaN is returned.
  */
 
-ENTRY fminf
+ENTRY_FLOAT fminf fmin fminl
 	lsl	rA3
 	sbc	rAE, rAE	; rAE = (A < 0) ? -1 : 0
 	lsl	rB3

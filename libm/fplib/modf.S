@@ -44,7 +44,7 @@
 
 #define	iptr_lo	r20
 
-ENTRY modff
+ENTRY_FLOAT modff modf modfl
   ; save iptr
 	X_movw	ZL, iptr_lo
   ; XH = exponent field

@@ -44,7 +44,7 @@
 
 #define FL_M1	0xbf800000	/* -1.0	*/
 
-ENTRY floorf
+ENTRY_FLOAT floorf floor floorl
 	XCALL	_U(__fp_trunc)
 	brcs	.L_nf
   ; A is finite

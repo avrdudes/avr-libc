@@ -1,7 +1,4 @@
-/* Copyright (c) 2005, Dmitry Xmelkov
-   All rights reserved.
-
-   Redistribution and use in source and binary forms, with or without
+/* Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
 
    * Redistributions of source code must retain the above copyright
@@ -26,40 +23,34 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+#if !defined (__ASSEMBLER__)
 
-#include <stdlib.h>
-#include "ftoa_engine.h"
-#include "dtoa_conv.h"
-#include "sectionname.h"
-#include "alias.h"
+#if __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
+#define DALIAS(X) __attribute__((__weak__,__alias__(#X)))
+#else
+#define DALIAS(X) /* empty */
+#endif
 
-/* ???  Is 'width' a signed value?
-   dtostrf.S comment:
-	If precision is < 0, the string is left adjusted with leading spaces.
-	If precision is > 0, the string is right adjusted with trailing spaces.
-   dtostrf.S code:
-	'p_width' is a register for left/right adjustment
-   avr-libc manual:
-	nothing about this
+#if __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
+#define LALIAS(X) __attribute__((__weak__,__alias__(#X)))
+#else
+#define LALIAS(X) /* empty */
+#endif
 
-   So, for compatibilty 'width' is signed value to left/right adjust.
- */
+#else /* Assembly */
 
-ATTRIBUTE_CLIB_SECTION
-char *
-ftostrf (float val, signed char width, unsigned char prec, char *sout)
-{
-    unsigned char flags;
+.macro DALIAS name
+#if __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
+.weak \name
+\name:
+#endif
+.endm
 
-    /* DTOA_UPPER: for compatibility with avr-libc <= 1.4 with NaNs	*/
-    flags = width < 0 ? DTOA_LEFT | DTOA_UPPER : DTOA_UPPER;
-    ftoa_prf (val, sout, abs(width), prec, flags);
-    return sout;
-}
+.macro LALIAS name
+#if __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
+.weak \name
+\name:
+#endif
+.endm
 
-DALIAS (ftostrf)
-char* dtostrf (double, signed char, unsigned char, char*);
-
-LALIAS (ftostrf)
-char* ldtostrf (long double, signed char, unsigned char, char*);
+#endif /* Assembly */

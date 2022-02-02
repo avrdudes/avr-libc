@@ -42,7 +42,7 @@
      isfinite() inline function.
  */
 
-ENTRY isinff
+ENTRY_FLOAT isinff isinf isinfl
 	XCALL	_U(__fp_splitA)
 	ldi	r24, 0
 	ldi	r25, 0

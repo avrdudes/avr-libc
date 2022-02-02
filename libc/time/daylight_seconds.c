@@ -42,29 +42,29 @@ extern long     __latitude;
 long
 daylight_seconds(const time_t * timer)
 {
-    double          l, d;
+    float           l, d;
     long            n;
 
     /* convert latitude to radians */
-    l = __latitude / 206264.806;
+    l = __latitude / 206264.806f;
 
-    d = -solar_declination(timer);
+    d = -solar_declinationf(timer);
 
     /* partial 'Sunrise Equation' */
-    d = tan(l) * tan(d);
+    d = tanf(l) * tanf(d);
 
     /* magnitude of d may exceed 1.0 at near solstices */
-    if (d > 1.0)
-        d = 1.0;
+    if (d > 1.0f)
+        d = 1.0f;
 
-    if (d < -1.0)
-        d = -1.0;
+    if (d < -1.0f)
+        d = -1.0f;
 
     /* derive hour angle */
-    d = acos(d);
+    d = acosf(d);
 
     /* but for atmospheric refraction, this would be d /= M_PI */
-    d /= 3.112505;
+    d /= 3.112505f;
 
     n = ONE_DAY * d;
 

@@ -36,7 +36,7 @@
      The squaref() function returns square of A.
  */
 
-ENTRY squaref
+ENTRY_FLOAT squaref square squarel
 	X_movw	rB0, rA0
 	X_movw	rB2, rA2	; B = A
 

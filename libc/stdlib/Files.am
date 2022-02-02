@@ -85,4 +85,8 @@ stdlib_a_extra_dist = \
 	atoi.c \
 	atol.c
 
+malloc.o: AVRLIB_CFLAGS += -Wno-maybe-uninitialized
+
+qsort.o: AVRLIB_CFLAGS += -Wno-sign-compare
+
 # vim: set ft=make:

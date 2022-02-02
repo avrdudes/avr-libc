@@ -30,8 +30,11 @@
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION
+__attribute__((__weak__))
+long labs_impl (long x) __asm ("labs");
+
 long
-labs(long x)
+labs_impl (long x)
 {
 	return (x < 0) ? -x : x;
 }

@@ -44,7 +44,7 @@
 #define	rC0	r14	/* lower byte of arg. C	*/
 #define	rC2	r16
 
-ENTRY fmaf
+ENTRY_FLOAT fmaf fma fmal
 	XCALL	_U(__mulsf3x)
 	X_movw	rB0, rC0
 	X_movw	rB2, rC2
