@@ -31,16 +31,7 @@
 
 EXTRA_DIST = \
 	LICENSE \
-	bootstrap \
-	ChangeLog \
-	ChangeLog-2009 \
-	ChangeLog-2008 \
-	ChangeLog-2007 \
-	ChangeLog-2006 \
-	ChangeLog-2005 \
-	ChangeLog-2004 \
-	ChangeLog-2003 \
-	ChangeLog-2002
+	bootstrap
 
 DISTCHECK_CONFIGURE_FLAGS=--host=avr
 
