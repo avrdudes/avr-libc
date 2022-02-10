@@ -61,6 +61,12 @@ ENTRY	eeprom_write_r18
 #  define NVM_CMD_ERASE_EEPROM_BUFFER_gc	0x36
 # endif
 
+#if    ! defined (NVM_EEMAPEN_bm)
+  ; Saving X register because it might contain source address of block
+    push XL
+    push XH
+#endif
+
   ; Prepare base address of NVM.
 	ldi	ZL, lo8(NVM_BASE)
 	ldi	ZH, hi8(NVM_BASE)
@@ -112,11 +118,11 @@ ENTRY	eeprom_write_r18
   ; Issue EEPROM Buffer Load command.
 3:	ldi	r19, NVM_CMD_LOAD_EEPROM_BUFFER_gc
 	std	Z + NVM_CMD - NVM_BASE, r19
-#endif
+
 	std	Z + NVM_ADDR0 - NVM_BASE, addr_lo
 	std	Z + NVM_ADDR1 - NVM_BASE, addr_hi
 	std	Z + NVM_ADDR2 - NVM_BASE, __zero_reg__
-#if     defined (NVM_EEMAPEN_bm)
+
 	std	Z + NVM_DATA0 - NVM_BASE, r18
 #else
   	movw 	XL, addr_lo
@@ -126,15 +132,28 @@ ENTRY	eeprom_write_r18
 #endif
 
   ; Issue EEPROM Erase & Write command.
+#if defined(NVMCTRL_CTRLA)
+	ldi	r18, CCP_SPM_gc
+	out CCP, r18
+	ldi	r18, NVMCTRL_CMD_PAGEERASEWRITE_gc
+	std	Z + NVMCTRL_CTRLA - NVM_BASE, r18
+#else
 	ldi	r18, NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc
 	std	Z + NVM_CMD - NVM_BASE, r18
 	ldi	r18, CCP_IOREG_gc
 	ldi	r19, NVM_CMDEX_bm
 	out	CCP, r18
 	std	Z + NVM_CTRLA - NVM_BASE, r19
+#endif
 
   ; Increment address.
 	adiw	addr_lo, 1
+
+#if    ! defined (NVM_EEMAPEN_bm)
+  ; Restoring X register
+    pop XH
+    pop XL
+#endif
 
 	ret
 

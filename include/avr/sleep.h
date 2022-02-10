@@ -140,6 +140,14 @@
     /* XMEGA devices */
     #define _SLEEP_CONTROL_REG  SLEEP_CTRL
     #define _SLEEP_ENABLE_MASK  SLEEP_SEN_bm
+    #define _SLEEP_SMODE_GROUP_MASK  SLEEP_SMODE_gm
+
+#elif defined(SLPCTRL)
+
+    /* New xmega devices */
+    #define _SLEEP_CONTROL_REG  SLPCTRL_CTRLA
+    #define _SLEEP_ENABLE_MASK  SLPCTRL_SEN_bm
+    #define _SLEEP_SMODE_GROUP_MASK  SLPCTRL_SMODE_gm
 
 #elif defined(SMCR)
 
@@ -182,29 +190,11 @@
 
 /* For xmegas, check presence of SLEEP_SMODE<n>_bm and define set_sleep_mode accordingly. */
 #elif defined(__AVR_XMEGA__)
-#if defined(SLEEP_SMODE2_bm)
 
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(SLEEP_SMODE2_bm | SLEEP_SMODE1_bm | SLEEP_SMODE0_bm)) | (mode)); \
-    } while(0)
-
-#elif defined(SLEEP_SMODE1_bm)
-
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(SLEEP_SMODE1_bm | SLEEP_SMODE0_bm)) | (mode)); \
-    } while(0)
-
-#else
-
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~( SLEEP_SMODE0_bm)) | (mode)); \
-    } while(0)
-
-
-#endif /* #if defined(SLEEP_SMODE2_bm) */
+#define set_sleep_mode(mode) \
+  do { \
+    _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_SLEEP_SMODE_GROUP_MASK)) | (mode)); \
+  } while(0)
 
 /* For everything else, check for presence of SM<n> and define set_sleep_mode accordingly. */
 #else

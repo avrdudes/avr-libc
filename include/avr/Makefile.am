@@ -229,6 +229,40 @@ avr_HEADERS = \
     iotnx4.h \
     iotnx5.h \
     iotnx61.h \
+    iotn202.h \
+    iotn204.h \
+    iotn212.h \
+    iotn214.h \
+    iotn402.h \
+    iotn404.h \
+    iotn406.h \
+    iotn412.h \
+    iotn414.h \
+    iotn416.h \
+    iotn417.h \
+    iotn804.h \
+    iotn806.h \
+    iotn807.h \
+    iotn814.h \
+    iotn816.h \
+    iotn817.h \
+    iotn1604.h \
+    iotn1606.h \
+    iotn1607.h \
+    iotn1614.h \
+    iotn1616.h \
+    iotn1617.h \
+    iotn3214.h \
+    iotn3216.h \
+    iotn3217.h \
+    iom808.h \
+    iom809.h \
+    iom1608.h \
+    iom1609.h \
+    iom3208.h \
+    iom3209.h \
+    iom4808.h \
+    iom4809.h \
     iousb82.h \
     iousb1286.h \
     iousb1287.h \

@@ -47,6 +47,25 @@
 
 # define NVM_BASE	NVM_ADDR0
 
+#if defined(NVMCTRL_CTRLA)
+#  undef NVM_BASE
+#  define NVM_BASE       NVMCTRL_CTRLA
+
+#  define NVM_ADDR0      NVMCTRL_ADDR0
+#  define NVM_ADDR1      NVMCTRL_ADDR1
+#  define NVM_DATA0      NVMCTRL_DATA0
+#  define NVM_DATA1      NVMCTRL_DATA1
+#  define NVM_NVMBUSY_bp NVMCTRL_EEBUSY_bp
+#  define NVM_STATUS     NVMCTRL_STATUS
+#  define NVM_CTRLA      NVMCTRL_CTRLA
+#  define NVM_CTRLB      NVMCTRL_CTRLB
+#  ifndef CCP_SPM_gc
+#    define CCP_SPM_gc   (0x9D)
+#  endif
+#  ifndef NVMCTRL_CMD_PAGEERASEWRITE_gc
+#    define NVMCTRL_CMD_PAGEERASEWRITE_gc 3
+#  endif
+#endif
 #else
 
 # if	!defined (EECR) && defined (DEECR)	/* AT86RF401	*/

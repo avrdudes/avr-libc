@@ -57,7 +57,27 @@
  \endcode
  */
 #define _PROTECTED_WRITE(reg, value)
+
+/**
+ \def _PROTECTED_WRITE_SPM
+ \ingroup avr_io
+
+ Write value \c value to register \c reg that is protected through
+ the Xmega configuration change protection (CCP) key for self
+ programming (SPM).  This implements the timed sequence that is
+ required for CCP.
+
+ Example to modify the CPU clock:
+ \code
+ #include <avr/io.h>
+
+ _PROTECTED_WRITE_SPM(NVMCTRL_CTRLA, NVMCTRL_CMD_PAGEERASEWRITE_gc);
+ \endcode
+ */
+#define _PROTECTED_WRITE_SPM(reg, value)
+
 #else  /* !__DOXYGEN__ */
+
 #define _PROTECTED_WRITE(reg, value)				\
   __asm__ __volatile__("out %[ccp], %[ccp_ioreg]" "\n\t"	\
 		       "sts %[ioreg], %[val]"			\
@@ -66,6 +86,15 @@
 			 [ccp_ioreg] "d" ((uint8_t)CCP_IOREG_gc),	\
 			 [ioreg] "n" (_SFR_MEM_ADDR(reg)),	\
 			 [val] "r" ((uint8_t)value))
+
+#define _PROTECTED_WRITE_SPM(reg, value) \
+  __asm__ __volatile__("out %[ccp], %[ccp_spm_mask]" "\n\t" \
+                       "sts %[ioreg], %[val]"               \
+                       :                                    \
+                       : [ccp]          "I" (_SFR_IO_ADDR(CCP)), \
+                         [ccp_spm_mask] "d" ((uint8_t)CCP_SPM_gc), \
+                         [ioreg]        "n" (_SFR_MEM_ADDR(reg)), \
+                         [val]          "r" ((uint8_t)value))
 #endif /* DOXYGEN */
 
 #endif /* _AVR_XMEGA_H */
