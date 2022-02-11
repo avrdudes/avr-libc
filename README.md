@@ -20,6 +20,4 @@ The library is distributed using a modified BSD-style
 ## AVR LibC Source Code
 
 The official source code repository is located at
-https://gitlab.com/avrdudes/avr-libc/
-
-
+https://github.com/avrdudes/avr-libc/
