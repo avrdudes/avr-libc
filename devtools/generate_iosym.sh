@@ -47,9 +47,9 @@ atxmega32a4u atxmega32c4 atxmega384c3 atxmega384d3 atxmega64a3u \
 atxmega64a4u atxmega64b1 atxmega64b3 atxmega64c3 atxmega64d4 ata6617c \
 ata664251 ata6612c atmega48pb atmega88pb "
 
-if [ x"$XMLDIR" = x ]
+if [ x"$ATDFDIR" = x ]
 then
-    echo 'Please set $XMLDIR in your environment' >&2
+    echo 'Please set $ATDFDIR in your environment' >&2
     exit 64
 fi
 
@@ -57,9 +57,9 @@ for dev in $devs
 do
     xmldev=$(echo $dev | tr '[a-z]' '[A-Z]' |\
              sed -e s/XMEGA/xmega/ -e s/MEGA/mega/ -e s/TINY/tiny/)
-    if [ -f "${XMLDIR}/${xmldev}.xml" ]
+    if [ -f "${ATDFDIR}/${xmldev}.atdf" ]
     then
         echo "Generating ${dev}.S"
-        ./ioreg.pl "${XMLDIR}/${xmldev}.xml" > ../crt1/iosym/${dev}.S
+        ./ioreg.pl "${ATDFDIR}/${xmldev}.atdf" > ../crt1/iosym/${dev}.S
     fi
 done
