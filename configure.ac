@@ -636,6 +636,107 @@ AM_CONDITIONAL(HAS_atmega4808, test "x$HAS_atmega4808" = "xyes")
 CHECK_AVR_DEVICE(atmega4809)
 AM_CONDITIONAL(HAS_atmega4809, test "x$HAS_atmega4809" = "xyes")
 
+CHECK_AVR_DEVICE(avr32da28)
+AM_CONDITIONAL(HAS_avr32da28, test "x$HAS_avr32da28" = "xyes")
+
+CHECK_AVR_DEVICE(avr32da32)
+AM_CONDITIONAL(HAS_avr32da32, test "x$HAS_avr32da32" = "xyes")
+
+CHECK_AVR_DEVICE(avr32da48)
+AM_CONDITIONAL(HAS_avr32da48, test "x$HAS_avr32da48" = "xyes")
+
+CHECK_AVR_DEVICE(avr64da28)
+AM_CONDITIONAL(HAS_avr64da28, test "x$HAS_avr64da28" = "xyes")
+
+CHECK_AVR_DEVICE(avr64da32)
+AM_CONDITIONAL(HAS_avr64da32, test "x$HAS_avr64da32" = "xyes")
+
+CHECK_AVR_DEVICE(avr64da48)
+AM_CONDITIONAL(HAS_avr64da48, test "x$HAS_avr64da48" = "xyes")
+
+CHECK_AVR_DEVICE(avr64da64)
+AM_CONDITIONAL(HAS_avr64da64, test "x$HAS_avr64da64" = "xyes")
+
+CHECK_AVR_DEVICE(avr128da28)
+AM_CONDITIONAL(HAS_avr128da28, test "x$HAS_avr128da28" = "xyes")
+
+CHECK_AVR_DEVICE(avr128da32)
+AM_CONDITIONAL(HAS_avr128da32, test "x$HAS_avr128da32" = "xyes")
+
+CHECK_AVR_DEVICE(avr128da48)
+AM_CONDITIONAL(HAS_avr128da48, test "x$HAS_avr128da48" = "xyes")
+
+CHECK_AVR_DEVICE(avr128da64)
+AM_CONDITIONAL(HAS_avr128da64, test "x$HAS_avr128da64" = "xyes")
+
+CHECK_AVR_DEVICE(avr32db28)
+AM_CONDITIONAL(HAS_avr32db28, test "x$HAS_avr32db28" = "xyes")
+
+CHECK_AVR_DEVICE(avr32db32)
+AM_CONDITIONAL(HAS_avr32db32, test "x$HAS_avr32db32" = "xyes")
+
+CHECK_AVR_DEVICE(avr32db48)
+AM_CONDITIONAL(HAS_avr32db48, test "x$HAS_avr32db48" = "xyes")
+
+CHECK_AVR_DEVICE(avr64db28)
+AM_CONDITIONAL(HAS_avr64db28, test "x$HAS_avr64db28" = "xyes")
+
+CHECK_AVR_DEVICE(avr64db32)
+AM_CONDITIONAL(HAS_avr64db32, test "x$HAS_avr64db32" = "xyes")
+
+CHECK_AVR_DEVICE(avr64db48)
+AM_CONDITIONAL(HAS_avr64db48, test "x$HAS_avr64db48" = "xyes")
+
+CHECK_AVR_DEVICE(avr64db64)
+AM_CONDITIONAL(HAS_avr64db64, test "x$HAS_avr64db64" = "xyes")
+
+CHECK_AVR_DEVICE(avr128db28)
+AM_CONDITIONAL(HAS_avr128db28, test "x$HAS_avr128db28" = "xyes")
+
+CHECK_AVR_DEVICE(avr128db32)
+AM_CONDITIONAL(HAS_avr128db32, test "x$HAS_avr128db32" = "xyes")
+
+CHECK_AVR_DEVICE(avr128db48)
+AM_CONDITIONAL(HAS_avr128db48, test "x$HAS_avr128db48" = "xyes")
+
+CHECK_AVR_DEVICE(avr128db64)
+AM_CONDITIONAL(HAS_avr128db64, test "x$HAS_avr128db64" = "xyes")
+
+CHECK_AVR_DEVICE(avr16dd14)
+AM_CONDITIONAL(HAS_avr16dd14, test "x$HAS_avr16dd14" = "xyes")
+
+CHECK_AVR_DEVICE(avr16dd20)
+AM_CONDITIONAL(HAS_avr16dd20, test "x$HAS_avr16dd20" = "xyes")
+
+CHECK_AVR_DEVICE(avr16dd28)
+AM_CONDITIONAL(HAS_avr16dd28, test "x$HAS_avr16dd28" = "xyes")
+
+CHECK_AVR_DEVICE(avr16dd32)
+AM_CONDITIONAL(HAS_avr16dd32, test "x$HAS_avr16dd32" = "xyes")
+
+CHECK_AVR_DEVICE(avr32dd14)
+AM_CONDITIONAL(HAS_avr32dd14, test "x$HAS_avr32dd14" = "xyes")
+
+CHECK_AVR_DEVICE(avr32dd20)
+AM_CONDITIONAL(HAS_avr32dd20, test "x$HAS_avr32dd20" = "xyes")
+
+CHECK_AVR_DEVICE(avr32dd28)
+AM_CONDITIONAL(HAS_avr32dd28, test "x$HAS_avr32dd28" = "xyes")
+
+CHECK_AVR_DEVICE(avr32dd32)
+AM_CONDITIONAL(HAS_avr32dd32, test "x$HAS_avr32dd32" = "xyes")
+
+CHECK_AVR_DEVICE(avr64dd14)
+AM_CONDITIONAL(HAS_avr64dd14, test "x$HAS_avr64dd14" = "xyes")
+
+CHECK_AVR_DEVICE(avr64dd20)
+AM_CONDITIONAL(HAS_avr64dd20, test "x$HAS_avr64dd20" = "xyes")
+
+CHECK_AVR_DEVICE(avr64dd28)
+AM_CONDITIONAL(HAS_avr64dd28, test "x$HAS_avr64dd28" = "xyes")
+
+CHECK_AVR_DEVICE(avr64dd32)
+AM_CONDITIONAL(HAS_avr64dd32, test "x$HAS_avr64dd32" = "xyes")
 
 dnl Check whether options like -mdouble=64 act as a multilib selector,
 dnl i.e. $CC will mention it like @mdouble64 with $CC -print-multi-lib.

@@ -389,6 +389,43 @@ attiny20:crttn20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 attiny40:crttn40.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
+AVRDX_DEV_INFO="\
+avr32da28:crtavr32da28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32da32:crtavr32da32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32da48:crtavr32da48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64da28:crtavr64da28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64da32:crtavr64da32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64da48:crtavr64da48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64da64:crtavr64da64.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128da28:crtavr128da28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128da32:crtavr128da32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128da48:crtavr128da48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128da64:crtavr128da64.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32db28:crtavr32db28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32db32:crtavr32db32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32db48:crtavr32db48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64db28:crtavr64db28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64db32:crtavr64db32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64db48:crtavr64db48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64db64:crtavr64db64.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128db28:crtavr128db28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128db32:crtavr128db32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128db48:crtavr128db48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr128db64:crtavr128db64.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16dd14:crtavr16dd14.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16dd20:crtavr16dd20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16dd28:crtavr16dd28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16dd32:crtavr16dd32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32dd14:crtavr32dd14.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32dd20:crtavr32dd20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32dd28:crtavr32dd28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32dd32:crtavr32dd32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64dd14:crtavr64dd14.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64dd20:crtavr64dd20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64dd28:crtavr64dd28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64dd32:crtavr64dd32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+"
+
 # The "architectures" or "cores".  The second row only serves as a pointer
 # to all the supported devices as we iterate over AVR_ARH_INFO below.
 # Mentioning AVR25_DEV_INFO after avr25 only serves the purpose to include
@@ -416,7 +453,8 @@ avrxmega4:AVRXMEGA4_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrxmega5:AVRXMEGA5_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrxmega6:AVRXMEGA6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrxmega7:AVRXMEGA7_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
-avrtiny:AVRTINY_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+avrtiny:AVRTINY_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avrdx:AVRDX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 # Make sure that we are the top-level of the source tree. We will look for the

@@ -82,6 +82,40 @@ avr_HEADERS = \
     ioa6617c.h \
     ioa664251.h \
     ioat94k.h \
+    ioavr16dd14.h \
+    ioavr16dd20.h \
+    ioavr16dd28.h \
+    ioavr16dd32.h \
+    ioavr32da28.h \
+    ioavr32da32.h \
+    ioavr32da48.h \
+    ioavr32db28.h \
+    ioavr32db32.h \
+    ioavr32db48.h \
+    ioavr32dd14.h \
+    ioavr32dd20.h \
+    ioavr32dd28.h \
+    ioavr32dd32.h \
+    ioavr64da28.h \
+    ioavr64da32.h \
+    ioavr64da48.h \
+    ioavr64da64.h \
+    ioavr64db28.h \
+    ioavr64db32.h \
+    ioavr64db48.h \
+    ioavr64db64.h \
+    ioavr64dd14.h \
+    ioavr64dd20.h \
+    ioavr64dd28.h \
+    ioavr64dd32.h \
+    ioavr128da28.h \
+    ioavr128da32.h \
+    ioavr128da48.h \
+    ioavr128da64.h \
+    ioavr128db28.h \
+    ioavr128db32.h \
+    ioavr128db48.h \
+    ioavr128db64.h \
     iocan32.h \
     iocan64.h \
     iocan128.h \
