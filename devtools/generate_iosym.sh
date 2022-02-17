@@ -59,7 +59,7 @@ do
              sed -e s/XMEGA/xmega/ -e s/MEGA/mega/ -e s/TINY/tiny/)
     if [ -f "${XMLDIR}/${xmldev}.xml" ]
     then
-	echo "Generating ${dev}.S"
-	./ioreg.pl "${XMLDIR}/${xmldev}.xml" > ../crt1/iosym/${dev}.S
+        echo "Generating ${dev}.S"
+        ./ioreg.pl "${XMLDIR}/${xmldev}.xml" > ../crt1/iosym/${dev}.S
     fi
 done
