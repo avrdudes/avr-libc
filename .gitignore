@@ -19,3 +19,9 @@ config.h
 /missing
 /tmp-core-info
 /tmp-device-info
+/avr-libc.spec
+/config.log
+/config.status
+/include/avr/builtins.h
+/include/util/delay.h
+/stamp-h1
