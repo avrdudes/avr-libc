@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 #
 # Copyright (c) 2005,2006,2007  Joerg Wunsch
 # All rights reserved.
