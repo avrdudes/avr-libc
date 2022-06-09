@@ -95,7 +95,17 @@
 #endif
 
 #ifndef __ATTR_PROGMEM__
+#if defined __has_attribute
+#if __has_attribute(__progmem__)
 #define __ATTR_PROGMEM__ __attribute__((__progmem__))
+#endif
+#endif
+#endif
+
+#ifndef __ATTR_PROGMEM__
+#ifdef __clang_version__
+#define __ATTR_PROGMEM__ __flash  // not really an attr
+#endif
 #endif
 
 #ifndef __ATTR_PURE__
