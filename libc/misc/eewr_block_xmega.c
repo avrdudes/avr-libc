@@ -33,8 +33,13 @@
 
 /* Handle XTINY devices from avrxmega3.  */
 
-#define NVMADDRL NVMCTRL_ADDRL
-#define NVMADDRH NVMCTRL_ADDRH
+#if defined(NVMCTRL_ADDRH)
+#  define NVMADDRL NVMCTRL_ADDRL
+#  define NVMADDRH NVMCTRL_ADDRH
+#elif defined(NVMCTRL_ADDR0)
+#  define NVMADDRL NVMCTRL_ADDR0
+#  define NVMADDRH NVMCTRL_ADDR1
+#endif
 
 #define NVMBUSY_WAIT()                                                  \
   do {                                                                  \
@@ -47,8 +52,11 @@
     _PROTECTED_WRITE_SPM (NVMCTRL.CTRLA, ((uint8_t) command));  \
   } while (0)                                                   \
 
-#define NVM_PAGEERASEWRITE_CMD \
-  NVMCTRL_CMD_PAGEERASEWRITE_gc
+#if NVMCTRL_CMD_gm == 0x7
+#  define NVM_PAGEERASEWRITE_CMD NVMCTRL_CMD_PAGEERASEWRITE_gc
+#elif NVMCTRL_CMD_gm == 0x7F
+#  define NVM_PAGEERASEWRITE_CMD NVMCTRL_CMD_EEERWR_gc
+#endif
 
 #endif /* NVM{CTRL} */
 

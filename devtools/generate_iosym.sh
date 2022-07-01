@@ -45,11 +45,17 @@ atxmega128b3 atxmega128c3 atxmega128d4 atxmega16a4u atxmega16c4 \
 atxmega192a3u atxmega192c3 atxmega256a3bu atxmega256a3u atxmega256c3 \
 atxmega32a4u atxmega32c4 atxmega384c3 atxmega384d3 atxmega64a3u \
 atxmega64a4u atxmega64b1 atxmega64b3 atxmega64c3 atxmega64d4 ata6617c \
-ata664251 ata6612c atmega48pb atmega88pb "
+ata664251 ata6612c atmega48pb atmega88pb avr16dd14 avr16dd20 avr16dd28 \
+avr16dd32 avr32da28 avr32da32 avr32da48 avr32db28 avr32db32 avr32db48 \
+avr32dd14 avr32dd20 avr32dd28 avr32dd32 avr64da28 avr64da32 avr64da48 \
+avr64da64 avr64db28 avr64db32 avr64db48 avr64db64 avr64dd14 avr64dd20 \
+avr64dd28 avr64dd32 avr128da28 avr128da32 avr128da48 avr128da64 avr128db28 \
+avr128db32 avr128db48 avr128db64"
 
-if [ x"$XMLDIR" = x ]
+
+if [ x"$ATDFDIR" = x ]
 then
-    echo 'Please set $XMLDIR in your environment' >&2
+    echo 'Please set $ATDFDIR in your environment' >&2
     exit 64
 fi
 
@@ -57,9 +63,9 @@ for dev in $devs
 do
     xmldev=$(echo $dev | tr '[a-z]' '[A-Z]' |\
              sed -e s/XMEGA/xmega/ -e s/MEGA/mega/ -e s/TINY/tiny/)
-    if [ -f "${XMLDIR}/${xmldev}.xml" ]
+    if [ -f "${ATDFDIR}/${xmldev}.atdf" ]
     then
-	echo "Generating ${dev}.S"
-	./ioreg.pl "${XMLDIR}/${xmldev}.xml" > ../crt1/iosym/${dev}.S
+        echo "Generating ${dev}.S"
+        ./ioreg.pl "${ATDFDIR}/${xmldev}.atdf" > ../crt1/iosym/${dev}.S
     fi
 done
