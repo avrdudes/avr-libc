@@ -461,7 +461,7 @@ void wdt_enable (const uint8_t value)
 				"out __SREG__,__tmp_reg__" "\n\t"
 				"out %0, %2" "\n \t"
 				: /* no outputs */
-				: "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+				: "I" (_SFR_IO_ADDR(_WD_CONTROL_REG) & 0b111111),
 				"r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),
 				"r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) |
 						_BV(WDE) | (value & 0x07)) )
@@ -504,7 +504,7 @@ void wdt_disable (void)
 				"out %[WDTREG],__zero_reg__" "\n\t"
 				"out __SREG__,__tmp_reg__"   "\n\t"
 				: [TEMPREG] "=d" (temp_reg)
-				: [WDTREG]  "I"  (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+				: [WDTREG]  "I"  (_SFR_IO_ADDR(_WD_CONTROL_REG) & 0b111111),
 				[WDCE_WDE]  "n"  ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE)))
 				: "r0"
 		);
