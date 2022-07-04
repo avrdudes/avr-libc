@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 #
 # Copyright (c) 2004,2005  Theodore A. Roth
 # All rights reserved.
