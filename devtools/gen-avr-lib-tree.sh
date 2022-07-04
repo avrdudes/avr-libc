@@ -487,4 +487,7 @@ do
     done
 done
 
-./devtools/mlib-gen.py -devices tmp-device-info -cores tmp-core-info || exit 1
+# Allow users to overwrite the python version to use via environment variable
+# PYTHON
+export PYTHON=${PYTHON:-python3}
+${PYTHON} ./devtools/mlib-gen.py -devices tmp-device-info -cores tmp-core-info || exit 1
