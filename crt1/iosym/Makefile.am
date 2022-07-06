@@ -90,6 +90,8 @@ EXTRA_DIST = \
 	atmega128rfa1.S \
 	atmega128rfr2.S \
 	atmega16.S \
+	atmega1608.S \
+	atmega1609.S \
 	atmega161.S \
 	atmega162.S \
 	atmega163.S \
@@ -121,6 +123,8 @@ EXTRA_DIST = \
 	atmega2564rfr2.S \
 	atmega256rfr2.S \
 	atmega32.S \
+	atmega3208.S \
+	atmega3209.S \
 	atmega323.S \
 	atmega324a.S \
 	atmega324p.S \
@@ -153,6 +157,8 @@ EXTRA_DIST = \
 	atmega32u6.S \
 	atmega406.S \
 	atmega48.S \
+	atmega4808.S \
+	atmega4809.S \
 	atmega48a.S \
 	atmega48p.S \
 	atmega48pa.S \
@@ -183,6 +189,8 @@ EXTRA_DIST = \
 	atmega64m1.S \
 	atmega64rfr2.S \
 	atmega8.S \
+	atmega808.S \
+	atmega809.S \
 	atmega8515.S \
 	atmega8535.S \
 	atmega88.S \
@@ -199,9 +207,22 @@ EXTRA_DIST = \
 	attiny13.S \
 	attiny13a.S \
 	attiny15.S \
+	attiny1604.S \
+	attiny1606.S \
+	attiny1607.S \
+	attiny1614.S \
+	attiny1616.S \
+	attiny1617.S \
+	attiny1624.S \
+	attiny1626.S \
+	attiny1627.S \
 	attiny1634.S \
 	attiny167.S \
 	attiny20.S \
+	attiny202.S \
+	attiny204.S \
+	attiny212.S \
+	attiny214.S \
 	attiny22.S \
 	attiny2313.S \
 	attiny2313a.S \
@@ -212,22 +233,47 @@ EXTRA_DIST = \
 	attiny261.S \
 	attiny261a.S \
 	attiny28.S \
+	attiny3214.S \
+	attiny3216.S \
+	attiny3217.S \
+	attiny3224.S \
+	attiny3226.S \
+	attiny3227.S \
 	attiny4.S \
 	attiny40.S \
+	attiny402.S \
+	attiny404.S \
+	attiny406.S \
+	attiny412.S \
+	attiny414.S \
+	attiny416.S \
+	attiny417.S \
+	attiny424.S \
+	attiny426.S \
+	attiny427.S \
 	attiny4313.S \
 	attiny43u.S \
 	attiny44.S \
-	attiny44a.S \
 	attiny441.S \
+	attiny44a.S \
 	attiny45.S \
 	attiny461.S \
 	attiny461a.S \
 	attiny48.S \
 	attiny5.S \
+	attiny804.S \
+	attiny806.S \
+	attiny807.S \
+	attiny814.S \
+	attiny816.S \
+	attiny817.S \
+	attiny824.S \
+	attiny826.S \
+	attiny827.S \
 	attiny828.S \
 	attiny84.S \
-	attiny84a.S \
 	attiny841.S \
+	attiny84a.S \
 	attiny85.S \
 	attiny861.S \
 	attiny861a.S \
@@ -278,5 +324,39 @@ EXTRA_DIST = \
 	atxmega64d3.S \
 	atxmega64d4.S \
 	atxmega8e5.S \
+	avr128da28.S \
+	avr128da32.S \
+	avr128da48.S \
+	avr128da64.S \
+	avr128db28.S \
+	avr128db32.S \
+	avr128db48.S \
+	avr128db64.S \
+	avr16dd14.S \
+	avr16dd20.S \
+	avr16dd28.S \
+	avr16dd32.S \
+	avr32da28.S \
+	avr32da32.S \
+	avr32da48.S \
+	avr32db28.S \
+	avr32db32.S \
+	avr32db48.S \
+	avr32dd14.S \
+	avr32dd20.S \
+	avr32dd28.S \
+	avr32dd32.S \
+	avr64da28.S \
+	avr64da32.S \
+	avr64da48.S \
+	avr64da64.S \
+	avr64db28.S \
+	avr64db32.S \
+	avr64db48.S \
+	avr64db64.S \
+	avr64dd14.S \
+	avr64dd20.S \
+	avr64dd28.S \
+	avr64dd32.S \
 	m3000.S \
 	template.S
