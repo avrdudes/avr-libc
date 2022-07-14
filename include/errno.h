@@ -79,75 +79,88 @@ extern int errno;
 
 #ifndef __DOXYGEN__
 
+/* The following enums are generated using the following polinomial hash:
+def hashStr(s: str) -> int:
+    res = 0
+    p = 1
+    for c in reversed(s):
+        res += (ord(c) - 64) * p
+        p *= 26
+    return res & 0x7fff
+
+for nm in names:
+    print("#define", nm , hex(hashStr(nm)))
+*/
+
 /* ((((('E'-64)*26+('N'-64))*26+('O'-64))*26+('S'-64))*26+('Y'-64))*26+'S'-64 */
 #define ENOSYS ((int)(66081697 & 0x7fff))
 
 /* (((('E'-64)*26+('I'-64))*26+('N'-64))*26+('T'-64))*26+('R'-64) */
 #define EINTR ((int)(2453066 & 0x7fff))
 
-#define E2BIG ENOERR
-#define EACCES ENOERR
-#define EADDRINUSE ENOERR
-#define EADDRNOTAVAIL ENOERR
-#define EAFNOSUPPORT ENOERR
-#define EAGAIN ENOERR
-#define EALREADY ENOERR
-#define EBADF ENOERR
-#define EBUSY ENOERR
-#define ECHILD ENOERR
-#define ECONNABORTED ENOERR
-#define ECONNREFUSED ENOERR
-#define ECONNRESET ENOERR
-#define EDEADLK ENOERR
-#define EDESTADDRREQ ENOERR
-#define EEXIST ENOERR
-#define EFAULT ENOERR
-#define EFBIG ENOERR
-#define EHOSTUNREACH ENOERR
-#define EILSEQ ENOERR
-#define EINPROGRESS ENOERR
-#define EINVAL ENOERR
-#define EIO ENOERR
-#define EISCONN ENOERR
-#define EISDIR ENOERR
-#define ELOOP ENOERR
-#define EMFILE ENOERR
-#define EMLINK ENOERR
-#define EMSGSIZE ENOERR
-#define ENAMETOOLONG ENOERR
-#define ENETDOWN ENOERR
-#define ENETRESET ENOERR
-#define ENETUNREACH ENOERR
-#define ENFILE ENOERR
-#define ENOBUFS ENOERR
-#define ENODEV ENOERR
-#define ENOENT ENOERR
-#define ENOEXEC ENOERR
-#define ENOLCK ENOERR
-#define ENOMEM ENOERR
-#define ENOMSG ENOERR
-#define ENOPROTOOPT ENOERR
-#define ENOSPC ENOERR
-#define ENOTCONN ENOERR
-#define ENOTDIR ENOERR
-#define ENOTEMPTY ENOERR
-#define ENOTSOCK ENOERR
-#define ENOTTY ENOERR
-#define ENXIO ENOERR
-#define EOPNOTSUPP ENOERR
-#define EPERM ENOERR
-#define EPIPE ENOERR
-#define EPROTONOSUPPORT ENOERR
-#define EPROTOTYPE ENOERR
-#define EROFS ENOERR
-#define ESPIPE ENOERR
-#define ESRCH ENOERR
-#define ETIMEDOUT ENOERR
-#define EWOULDBLOCK ENOERR
-#define EXDEV ENOERR
+#define E2BIG 0x2259
+#define EACCES 0x49a9
+#define EADDRINUSE 0x7367
+#define EADDRNOTAVAIL 0x65a
+#define EAFNOSUPPORT 0x7364
+#define EAGAIN 0x5764
+#define EALREADY 0x13cd
+#define EBADF 0x69b2
+#define EBUSY 0x201b
+#define ECHILD 0x2390
+#define ECONNABORTED 0x7196
+#define ECONNREFUSED 0x707a
+#define ECONNRESET 0x51ea
+#define EDEADLK 0x438b
+#define EDESTADDRREQ 0x43eb
+#define EEXIST 0x60f6
+#define EFAULT 0x4de8
+#define EFBIG 0x7f79
+#define EHOSTUNREACH 0x5e62
+#define EILSEQ 0x264f
+#define EINPROGRESS 0x3555
+#define EINVAL 0x371e
+#define EIO 0xe2d
+#define EISCONN 0x31e
+#define EISDIR 0x5fb4
+#define ELOOP 0x3e62
+#define EMFILE 0x54e1
+#define EMLINK 0x710b
+#define EMSGSIZE 0x74f5
+#define ENAMETOOLONG 0x47bf
+#define ENETDOWN 0x3000
+#define ENETRESET 0x44ea
+#define ENETUNREACH 0x262
+#define ENFILE 0x4df1
+#define ENOBUFS 0x6363
+#define ENODEV 0x2a00
+#define ENOENT 0x2d8c
+#define ENOEXEC 0x391d
+#define ENOLCK 0x3ee1
+#define ENOMEM 0x41bb
+#define ENOMSG 0x4321
+#define ENOPROTOOPT 0xa48
+#define ENOSPC 0x52a7
+#define ENOTCONN 0x5eae
+#define ENOTDIR 0xa9c
+#define ENOTEMPTY 0xc79
+#define ENOTSOCK 0x280d
+#define ENOTTY 0x55c9
+#define ENXIO 0x5ed9
+#define EOPNOTSUPP 0x15bc
+#define EPERM 0x36e5
+#define EPIPE 0x4139
+#define EPROTONOSUPPORT 0x3964
+#define EPROTOTYPE 0x35f9
+#define EROFS 0x596b
+#define ESPIPE 0x5a39
+#define ESRCH 0x25a6
+#define ETIMEDOUT 0x2822
+#define EWOULDBLOCK 0x8f5
+#define EXDEV 0x5838
 
 /* ((((('E'-64)*26+('N'-64))*26+('O'-64))*26+('E'-64))*26+('R'-64))*26+'R'-64 */
-#define ENOERR ((int)(66072050 & 0xffff))
+#define ENOERR ((int)(66072050 & 0x7fff))
 
 #endif	/* !__DOXYGEN__ */
 
