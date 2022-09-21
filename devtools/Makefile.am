@@ -35,4 +35,3 @@ EXTRA_DIST = \
     cr_check.py \
     gen-avr-lib-tree.sh \
     mlib-gen.py \
-    make-binary-dist.sh

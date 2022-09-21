@@ -819,7 +819,6 @@ m4_include([multilib.m4])
 
 AC_CONFIG_FILES([
 	Makefile
-	avr-libc.spec
 	common/Makefile
 	crt1/Makefile
 	crt1/iosym/Makefile

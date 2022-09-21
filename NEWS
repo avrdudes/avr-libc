@@ -2,6 +2,21 @@
 
 * General:
 
+  - Issue #894: Remove scripts that make binary distributions and RPMs.
+    The reason is that AVR-LibC depends on avr-gcc which is tested during
+    configure.  When you then install AVR-LibC configured against a
+    different GCC version than is finally used with AVR-LibC, this might
+    result in a malfunctioning toolchain.
+
+    The same applies to dependencies between GCC and Binutils:
+    GCC tests for Binutils features like, say, specific Binutils
+    options like -mgcc-isr, or whether avrxmega3 .rodata sections
+    are located in RAM or in flash, just to mention a few.
+
+    The only reasonable way to handle this is to have binary distros
+    that include at least binutils + gcc + libc all configured to
+    match each other.
+
   - Project moved to Github
 
 * Improvements and additions:
