@@ -527,4 +527,7 @@ do
     done
 done
 
-./devtools/mlib-gen.py -devices tmp-device-info -cores tmp-core-info || exit 1
+# configure's AM_PATH_PYTHON will work out the command to run Python.
+set -x
+@PYTHON@ devtools/mlib-gen.py -devices tmp-device-info -cores tmp-core-info \
+    || exit 1

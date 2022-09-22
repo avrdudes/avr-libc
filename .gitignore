@@ -7,3 +7,11 @@ Makefile
 Makefile.in
 config.h.in
 config.h
+config.log
+autom4te.cache
+config.status
+config.guess
+
+devtools/gen-avr-lib-tree.sh
+! devtools/aclocal.m4
+! devtools/configure

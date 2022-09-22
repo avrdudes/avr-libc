@@ -30,9 +30,12 @@
 #
 
 EXTRA_DIST = \
+    aclocal.m4 \
+    configure.ac \
+    configure \
     Architecture.am \
     Device.am \
     cr_check.py \
-    gen-avr-lib-tree.sh \
+    gen-avr-lib-tree.sh.in \
     mlib-gen.py \
     make-binary-dist.sh
