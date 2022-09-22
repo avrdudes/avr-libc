@@ -14,6 +14,12 @@ AUTOMAKE="${AUTOMAKE} --foreign --add-missing --copy"
 
 export AUTOMAKE AUTOCONF ACLOCAL AUTOHEADER
 
+# gen-avr-lib-tree.sh calls the Python interpreter on mlib-gen.py
+# at the end.  Apparently, mlib-gen.py's shebang "#!/usr/bin/env python"
+# does not work on all systems.  So use Autotools AM_PATH_PYTHON to
+# determine how to call Python.
+(cd devtools; ./configure) || exit 1
+
 # to see what is executed
 set -x
 
