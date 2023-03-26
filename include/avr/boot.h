@@ -502,7 +502,11 @@
 }))
 
 #ifndef __DOXYGEN__
+#if defined(SIGRD)
 #define __BOOT_SIGROW_READ (_BV(__SPM_ENABLE) | _BV(SIGRD))
+#elif defined(RSIG)
+#define __BOOT_SIGROW_READ (_BV(__SPM_ENABLE) | _BV(RSIG))
+#endif
 #endif
 /** \ingroup avr_boot
     \def boot_signature_byte_get(address)
