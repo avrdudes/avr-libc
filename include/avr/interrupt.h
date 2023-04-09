@@ -64,6 +64,16 @@
 */
 
 #if defined(__DOXYGEN__)
+/** \def interrupts_enable
+    \ingroup avr_interrupts
+
+    Convenience macro that makes code-readability easier over 'sei'. See
+    sei() for details.
+*/
+#endif /* DOXYGEN */
+#define interrupts_enable sei
+
+#if defined(__DOXYGEN__)
 /** \def sei()
     \ingroup avr_interrupts
 
@@ -80,6 +90,16 @@
 #else  /* !DOXYGEN */
 # define sei()  __asm__ __volatile__ ("sei" ::: "memory")
 #endif /* DOXYGEN */
+
+#if defined(__DOXYGEN__)
+/** \def interrupts_enable
+    \ingroup avr_interrupts
+
+    Convenience macro that makes code-readability easier over 'cli'. See
+    cli() for details.
+*/
+#endif /* DOXYGEN */
+#define interrupts_disable cli
 
 #if defined(__DOXYGEN__)
 /** \def cli()
