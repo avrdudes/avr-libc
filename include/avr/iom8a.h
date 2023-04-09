@@ -568,4 +568,3 @@
 #define SLEEP_MODE_STANDBY (0x06<<4)
 
 #endif /* #ifdef _AVR_ATMEGA8A_H_INCLUDED */
-

@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iom3000.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_IOM3000_H_
@@ -79,7 +79,7 @@
 #define UBRRH _SFR_IO8(0x15)  /* Alias. */
 #define UBRRLO _SFR_IO8(0x14) /* Name according to datasheet. */
 #define UBRRHI _SFR_IO8(0x15) /* Name according to datasheet. */
-#define GIFR _SFR_IO8(0x16) 
+#define GIFR _SFR_IO8(0x16)
 #define GIMSK _SFR_IO8(0x17)
 #define DACVAL _SFR_IO16(0x18)
 #define DACVALL _SFR_IO8(0x18)  /* Alias. */
@@ -234,4 +234,3 @@
 
 
 #endif  /* _AVR_IOM3000_H_ */
-

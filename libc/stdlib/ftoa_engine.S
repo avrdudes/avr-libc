@@ -103,7 +103,7 @@
 #define	zero	r1
 
     ASSEMBLY_CLIB_SECTION
-	
+
     .global	__ftoa_engine
     .type	__ftoa_engine, "function"
 __ftoa_engine:
@@ -395,7 +395,7 @@ __ftoa_engine:
 	brsh	23f
 	mov	prec, maxdgs
 23:	inc	prec
-	mov	maxdgs, prec	
+	mov	maxdgs, prec
   ; operate digit
 25:	cpi	digit, '0' + 10
 	brlo	27f

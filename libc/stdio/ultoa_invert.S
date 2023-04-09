@@ -174,7 +174,7 @@ __ultoa_invert:
 	rcall	.L_lsr_4
 	brne	.L_hex
 	rjmp	.L_eos
-	
+
 .L_lsr_4:
 	ldi	cnt, 4
 .L_lsr:

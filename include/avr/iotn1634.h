@@ -869,4 +869,3 @@
 #define SLEEP_MODE_STANDBY (0x03<<5)
 
 #endif /* #ifdef _AVR_ATTINY1634_H_INCLUDED */
-

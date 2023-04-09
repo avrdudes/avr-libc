@@ -36,7 +36,7 @@
 #undef clearerr
 
 ATTRIBUTE_CLIB_SECTION
-void 
+void
 clearerr(FILE *stream)
 {
 

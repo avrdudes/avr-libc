@@ -45,7 +45,7 @@
 
 ENTRY   __floatundisf
 	clt			; result sign
-	
+
 ENTRY   __fp_di2sf
 	mov	ZH, rA3
 	ldi	rA3, 127 + 55	; exponent for 00.80.00.00.00.00.00.00
@@ -88,7 +88,7 @@ ENTRY   __fp_di2sf
 	mov	rB1, rB0
 	ldi	rB0, 0
 	breq	3b		; Z is result of 'or rA2,rA1'
-	
+
 /* rA2 is not 0.  It is needed shift to left by 0..7 positions.
    Optimization: rB2..rB0 are not shifted. Instead, save an info
    about tail in rB2.	*/

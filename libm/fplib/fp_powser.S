@@ -72,7 +72,7 @@ ENTRY __fp_powser
 	X_movw	rC2, rA2
 
 	set			; as flag to return
-	rjmp	.Load5	
+	rjmp	.Load5
 1:	mov	rcntr, rBE
 
 .Loop:	X_movw	YL, ZL
@@ -96,7 +96,7 @@ ENTRY __fp_powser
 	X_movw	rB2, rC2
 	dec	rcntr
 	brne	.Loop
-	
+
 	pop	rcntr
 	pop	rC0
 	pop	rC1

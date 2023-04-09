@@ -1,4 +1,3 @@
-
 /* Copyright (c) 2004, Theodore A. Roth
    All rights reserved.
 

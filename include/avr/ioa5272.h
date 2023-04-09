@@ -758,4 +758,3 @@
 #define SLEEP_MODE_PWR_SAVE (0x03<<1)
 
 #endif /* #ifdef _AVR_ATA5272_H_INCLUDED */
-

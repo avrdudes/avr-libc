@@ -49,7 +49,7 @@ nodist_libscanf_flt_a_SOURCES=
 
 libscanf_flt_a_LIBADD = vfscanf_flt.o
 
-# vfprintf is compiled best with -Os -g -fno-jump-tables (-mno-tablejump), 
+# vfprintf is compiled best with -Os -g -fno-jump-tables (-mno-tablejump),
 # this gives the smallest code.
 PRINTF_CFLAGS = -Os @CDEBUG@ $(FNO_JUMP_TABLES)
 

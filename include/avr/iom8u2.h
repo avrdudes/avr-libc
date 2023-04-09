@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iom8u2.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATmega8U2_H_
@@ -996,4 +996,3 @@
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
 
 #endif /* _AVR_ATmega8U2_H_ */
-

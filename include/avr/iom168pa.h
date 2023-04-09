@@ -787,4 +787,3 @@
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
 
 #endif /* #ifdef _AVR_ATMEGA168PA_H_INCLUDED */
-

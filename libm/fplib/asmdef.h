@@ -204,7 +204,7 @@ _U(\lname):
 	lpm / mov Rd,r0
 	lpm / adiw ZL,1
 	lpm / mov Rd,r0 / adiw ZL,1
-	
+
    For enhanced chips it is one instruction always.
 
    ATTENTION:  unlike enhanced chips SREG (S,V,N,Z,C) flags are
@@ -218,7 +218,7 @@ _U(\lname):
     .exitm	; do not multiply errors
   .endif
 
-  /* src evaluation	*/    
+  /* src evaluation	*/
   .L__lpm_src = -1
   .L__lpm_n = 0
   .irp  reg,  z,Z,z+,Z+
@@ -232,7 +232,7 @@ _U(\lname):
     .err	; Invalid src arg of 'X_lpm' macro.
   .endif
 
-  /* instruction(s)	*/    
+  /* instruction(s)	*/
   .if  .L__lpm_src < 2
     .if  .L__lpm_dst == 0
 	lpm

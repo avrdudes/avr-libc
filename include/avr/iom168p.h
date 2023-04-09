@@ -26,7 +26,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE. 
+  POSSIBILITY OF SUCH DAMAGE.
 */
 
 /* $Id$ */
@@ -43,7 +43,7 @@
 #  define _AVR_IOXXX_H_ "iom168p.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_IOM168P_H_
@@ -331,7 +331,7 @@
 #define WDRF 3
 
 #define MCUCR _SFR_IO8(0x35)
-#define IVCE 0 
+#define IVCE 0
 #define IVSEL 1
 #define PUD 4
 #define BODSE 5
@@ -831,7 +831,7 @@
 #define TIMER1_COMPA_vect _VECTOR(11)  /* Timer/Counter1 Compare Match A */
 
 #define TIMER1_COMPB_vect_num 12
-#define TIMER1_COMPB_vect _VECTOR(12)  /* Timer/Counter1 Compare Match B */ 
+#define TIMER1_COMPB_vect _VECTOR(12)  /* Timer/Counter1 Compare Match B */
 
 #define TIMER1_OVF_vect_num   13
 #define TIMER1_OVF_vect   _VECTOR(13)  /* Timer/Counter1 Overflow */
@@ -924,7 +924,7 @@
 /* Lock Bits */
 #define __LOCK_BITS_EXIST
 #define __BOOT_LOCK_BITS_0_EXIST
-#define __BOOT_LOCK_BITS_1_EXIST 
+#define __BOOT_LOCK_BITS_1_EXIST
 
 
 /* Signature */

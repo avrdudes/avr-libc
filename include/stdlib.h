@@ -124,7 +124,7 @@ static __ATTR_ALWAYS_INLINE__
 int abs (int __i)
 {
     return __builtin_abs (__i);
-} 
+}
 #endif
 /** The abs() function computes the absolute value of the integer \c i.
    \note The abs() and labs() functions are builtins of gcc.
@@ -136,7 +136,7 @@ static __ATTR_ALWAYS_INLINE__
 long labs (long __i)
 {
     return __builtin_labs (__i);
-} 
+}
 #endif
 /** The labs() function computes the absolute value of the long integer
     \c i.
@@ -258,7 +258,7 @@ extern long strtol(const char *__nptr, char **__endptr, int __base);
     or, if there was a leading minus sign, the negation of the result
     of the conversion, unless the original (non-negated) value would
     overflow; in the latter case, strtoul() returns ULONG_MAX, and \c
-    errno is set to \ref avr_errno "ERANGE".  If no conversion could 
+    errno is set to \ref avr_errno "ERANGE".  If no conversion could
     be performed, 0 is returned.
 */
 extern unsigned long strtoul(const char *__nptr, char **__endptr, int __base);
@@ -433,7 +433,7 @@ extern int rand_r(unsigned long *__ctx);
    number between 2 (binary conversion) and up to 36.  If \c radix
    is greater than 10, the next digit after \c '9' will be the letter
    \c 'a'.
-    
+
     If radix is 10 and val is negative, a minus sign will be prepended.
 
    The itoa() function returns the pointer passed as \c s.
@@ -459,7 +459,7 @@ char *itoa (int __val, char *__s, int __radix)
 
 /**
  \ingroup avr_stdlib
- 
+
    \brief Convert a long integer to a string.
 
    The function ltoa() converts the long integer value from \c val into an
@@ -646,7 +646,7 @@ extern long random_r(unsigned long *__ctx);
    an ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
-   Conversion is done in the format \c "[-]d.ddde±dd" where there is
+   Conversion is done in the format \c "[-]d.dddeÂ±dd" where there is
    one digit before the decimal-point character and the number of
    digits after it is equal to the precision \c prec; if the precision
    is zero, no decimal-point character appears.  If \c flags has the

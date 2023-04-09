@@ -97,7 +97,7 @@ ENTRY_FLOAT tanf tan tanl
 3:	pop	rsign
 	ret
 ENDFUNC
-	
+
 	PGM_SECTION
 .L_table:
 	.byte	6

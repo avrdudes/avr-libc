@@ -83,13 +83,13 @@
 /* Lock Bits */
 #define __LOCK_BITS_EXIST
 #define __BOOT_LOCK_BITS_0_EXIST
-#define __BOOT_LOCK_BITS_1_EXIST 
+#define __BOOT_LOCK_BITS_1_EXIST
 
 
 /* Signature (ATmega164P) */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
-#define SIGNATURE_2 0x0A 
+#define SIGNATURE_2 0x0A
 
 
 #define SLEEP_MODE_IDLE (0x00<<1)

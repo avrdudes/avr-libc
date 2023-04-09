@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iom16a.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATmega16A_H_
@@ -923,4 +923,3 @@
 #define SLEEP_MODE_EXT_STANDBY (0x0B<<4)
 
 #endif /* _AVR_ATmega16A_H_ */
-

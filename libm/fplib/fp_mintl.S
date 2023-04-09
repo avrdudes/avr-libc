@@ -68,7 +68,7 @@ ENTRY __fp_mintl
 	brne	2f
 	clr	rA3
 	rjmp	.L_sign
-  ; low mantissa byte != 0	
+  ; low mantissa byte != 0
 2:	subi	rA3, 16
 	or	rA2, rA0	; to obtain N flag (rA2 was 0)
 	ldi	rA1, 0

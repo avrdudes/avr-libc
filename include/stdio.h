@@ -493,7 +493,7 @@ extern int	fclose(FILE *__stream);
             signed conversion.  A + overrides a space if both are
             used.</li>
       </ul>
-      
+
    -   An optional decimal digit string specifying a minimum field width.
        If the converted value has fewer characters than the field width, it
        will be padded with spaces on the left (or right, if the left-adjustment
@@ -536,7 +536,7 @@ extern int	fclose(FILE *__stream);
    - \c %  A \c % is written.  No argument is converted.  The complete
            conversion specification is "%%".
    - \c eE The double argument is rounded and converted in the format
-           \c "[-]d.ddde±dd" where there is one digit before the
+           \c "[-]d.dddeÂ±dd" where there is one digit before the
            decimal-point character and the number of digits after it
            is equal to the precision; if the precision is missing, it
            is taken as 6; if the precision is zero, no decimal-point
@@ -803,7 +803,7 @@ extern int	getchar(void);
 
    Currently, only a single character can be pushed back onto the
    stream.
-   
+
    The ungetc() function returns the character pushed back after the
    conversion, or \c EOF if the operation fails.  If the value of the
    argument \c c character equals \c EOF, the operation will fail and

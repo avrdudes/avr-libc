@@ -171,7 +171,7 @@ __ATTR_CONST__ extern long double fmodl (long double __x, long double __y);
 
 /**
     The modf() function breaks the argument \a __x into integral and
-    fractional parts, each of which has the same sign as the argument. 
+    fractional parts, each of which has the same sign as the argument.
     It stores the integral part as a double in the object pointed to by
     \a __iptr.
 

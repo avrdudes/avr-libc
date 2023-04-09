@@ -373,9 +373,9 @@ __do_copy_data:
     .balign 4
 
   /* Set REGION_LENGTH symbol values for well known memory regions.
-  The default linker script uses these symbols to set MEMORY 
+  The default linker script uses these symbols to set MEMORY
   region lengths, and by defining these here, the linker can detect
-  memory overflows accurately on a per device basis, since the 
+  memory overflows accurately on a per device basis, since the
   values are picked up from the device header file.
   */
 

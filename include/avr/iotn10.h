@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iotn10.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATtiny10_H_
@@ -510,4 +510,3 @@
 #define SLEEP_MODE_STANDBY (0x04<<1)
 
 #endif /* _AVR_ATtiny10_H_ */
-

@@ -63,7 +63,7 @@ extern "C" {
     \code #include <string.h> \endcode
 
     The string functions perform string operations on NULL terminated
-    strings. 
+    strings.
 
     \note If the strings you are working on resident in program space (flash),
     you will need to use the string functions described in \ref avr_pgmspace. */
@@ -617,4 +617,3 @@ extern size_t strxfrm(char *dest, const char *src, size_t n);
 #endif
 
 #endif /* _STRING_H_ */
-

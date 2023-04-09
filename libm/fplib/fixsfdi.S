@@ -55,7 +55,7 @@ ENTRY	__fixsfdi
    or NaN, the 0 is returned.  For negative x (if fabs(x) < 2**64, result
    is corresponded to signed conversion (with possible overflow). This is
    similar to Gcc+Glibc in 'float --> unsigned long' conversion case.
-   
+
    Examples:
      __fixunssfdi(-1.0)		   --> 0xff..ffLL
      __fixunssfdi(0x0.ffffffp+63)  --> 0x7fffff8000000000LL
@@ -63,7 +63,7 @@ ENTRY	__fixsfdi
      __fixunssfdi(0x1.000002p+63)  --> 0x8000010000000000LL
      __fixunssfdi(0x1.fffffep+63)  --> 0xffffff0000000000LL
      __fixunssfdi(0x1.000000p+64)  --> 0LL
-   
+
    Note: Gcc+Glibc give the strange results for negative x in such convers.
  */
 ENTRY	__fixunssfdi
@@ -132,7 +132,7 @@ ENTRY	__fixunssfdi
 	clr	rA2
 	subi	rAE, 8
 	brpl	4b
-	
+
 5:	subi	rAE, -8		; rAE = 0..7
 	breq	.L_sign
   ; shift to 1..7 positions

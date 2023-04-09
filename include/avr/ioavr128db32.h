@@ -7109,4 +7109,3 @@ IO Module Instances. Mapped to memory.
 #define SIGNATURE_2 0x0D
 
 #endif /* #ifdef _AVR_AVR128DB32_H_INCLUDED */
-
