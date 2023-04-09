@@ -31,5 +31,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
 
+#ifndef _AVR_IOM168A_H_
+#define _AVR_IOM168A_H_ 1
+
 #include "iom168.h"
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
+
+#endif /* _AVR_IOM168A_H_ */
