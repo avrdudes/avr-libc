@@ -139,14 +139,32 @@ extern "C" {
 uint8_t eeprom_read_byte (const uint8_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
+    Read one uint8 from EEPROM address \a __p.
+ */
+#define eeprom_read_uint8(__p) \
+        eeprom_read_byte(__p)
+
+/** \ingroup avr_eeprom
     Read one 16-bit word (little endian) from EEPROM address \a __p.
  */
 uint16_t eeprom_read_word (const uint16_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
+    Read one uint16 (little endian) from EEPROM address \a __p.
+ */
+#define eeprom_read_uint16(__p) \
+        eeprom_read_word(__p)
+
+/** \ingroup avr_eeprom
     Read one 32-bit double word (little endian) from EEPROM address \a __p.
  */
 uint32_t eeprom_read_dword (const uint32_t *__p) __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
+    Read one uint32 (little endian) from EEPROM address \a __p.
+ */
+#define eeprom_read_uint32(__p) \
+        eeprom_read_dword(__p)
 
 /** \ingroup avr_eeprom
     Read one float value (little endian) from EEPROM address \a __p.
@@ -166,14 +184,32 @@ void eeprom_read_block (void *__dst, const void *__src, size_t __n);
 void eeprom_write_byte (uint8_t *__p, uint8_t __value);
 
 /** \ingroup avr_eeprom
+    Write a uint8 \a __value to EEPROM address \a __p.
+ */
+#define eeprom_write_uint8(__p, __value) \
+        eeprom_write_byte(__p, __value)
+
+/** \ingroup avr_eeprom
     Write a word \a __value to EEPROM address \a __p.
  */
 void eeprom_write_word (uint16_t *__p, uint16_t __value);
 
 /** \ingroup avr_eeprom
+    Write a uint16 \a __value to EEPROM address \a __p.
+ */
+#define eeprom_write_uint16(__p, __value) \
+        eeprom_write_word(__p, __value)
+
+/** \ingroup avr_eeprom
     Write a 32-bit double word \a __value to EEPROM address \a __p.
  */
 void eeprom_write_dword (uint32_t *__p, uint32_t __value);
+
+/** \ingroup avr_eeprom
+    Write a uint32 \a __value to EEPROM address \a __p.
+ */
+#define eeprom_write_uint32(__p, __value) \
+        eeprom_write_dword(__p, __value)
 
 /** \ingroup avr_eeprom
     Write a float \a __value to EEPROM address \a __p.
@@ -193,14 +229,32 @@ void eeprom_write_block (const void *__src, void *__dst, size_t __n);
 void eeprom_update_byte (uint8_t *__p, uint8_t __value);
 
 /** \ingroup avr_eeprom
+    Update a uint8 \a __value to EEPROM address \a __p.
+ */
+#define eeprom_update_uint8(__p, __value) \
+        eeprom_update_byte(__p, __value)
+
+/** \ingroup avr_eeprom
     Update a word \a __value to EEPROM address \a __p.
  */
 void eeprom_update_word (uint16_t *__p, uint16_t __value);
 
 /** \ingroup avr_eeprom
+    Update a uint16 \a __value to EEPROM address \a __p.
+ */
+#define eeprom_update_uint16(__p, __value) \
+        eeprom_update_word(__p, __value)
+
+/** \ingroup avr_eeprom
     Update a 32-bit double word \a __value to EEPROM address \a __p.
  */
 void eeprom_update_dword (uint32_t *__p, uint32_t __value);
+
+/** \ingroup avr_eeprom
+    Update a uint32 \a __value to EEPROM address \a __p.
+ */
+#define eeprom_update_uint32(__p, __value) \
+        eeprom_update_dword(__p, __value)
 
 /** \ingroup avr_eeprom
     Update a float \a __value to EEPROM address \a __p.

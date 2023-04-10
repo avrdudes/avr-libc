@@ -561,6 +561,10 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 #define __LPM_float(addr)   __LPM_float_classic__(addr)
 #endif
 
+#define __LPM_uint8(addr)   __LPM(addr)
+#define __LPM_uint16(addr)  __LPM_word(addr)
+#define __LPM_uint32(addr)  __LPM_dword(addr)
+
 #endif  /* !__DOXYGEN__ */
 
 /** \ingroup avr_pgmspace
@@ -572,12 +576,24 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 #define pgm_read_byte_near(address_short) __LPM((uint16_t)(address_short))
 
 /** \ingroup avr_pgmspace
+    \dev pgm_read_uint8_near(address_short)
+    See pgm_read_byte_near(address_short). */
+#define pgm_read_uint8_near(address_short) \
+        __LPM_uint8((uint16_t)(address_short))
+
+/** \ingroup avr_pgmspace
     \def pgm_read_word_near(address_short)
     Read a word from the program space with a 16-bit (near) address. 
     \note The address is a byte address. 
     The address is in the program space. */
 
 #define pgm_read_word_near(address_short) __LPM_word((uint16_t)(address_short))
+
+/** \ingroup avr_pgmspace
+    \dev pgm_read_uint16_near(address_short)
+    See pgm_read_word_near(address_short). */
+#define pgm_read_uint16_near(address_short) \
+        __LPM_uint16((uint16_t)(address_short))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword_near(address_short)
@@ -587,6 +603,12 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 
 #define pgm_read_dword_near(address_short) \
     __LPM_dword((uint16_t)(address_short))
+
+/** \ingroup avr_pgmspace
+    \dev pgm_read_uint32_near(address_short)
+    See pgm_read_dword_near(address_short). */
+#define pgm_read_uint32_near(address_short) \
+        __LPM_uint32((uint16_t)(address_short))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float_near(address_short)
@@ -923,6 +945,10 @@ not interfere with data accesses.
 
 #endif  /* __AVR_HAVE_RAMPD__ */
 
+#define __ELPM_uint8(addr)  __ELPM(addr)
+#define __ELPM_uint16(addr) __ELPM_word(addr)
+#define __ELPM_uint32(addr) __ELPM_dword(addr)
+
 #endif	/* !__DOXYGEN__ */
 
 /** \ingroup avr_pgmspace
@@ -935,6 +961,12 @@ not interfere with data accesses.
 #define pgm_read_byte_far(address_long)  __ELPM((uint32_t)(address_long))
 
 /** \ingroup avr_pgmspace
+    \dev pgm_read_uint8_far(address_long)
+    See pgm_read_byte_far(address_long). */
+#define pgm_read_uint8_far(address_long) \
+        __ELPM_uint8((uint32_t)(address_long))
+
+/** \ingroup avr_pgmspace
     \def pgm_read_word_far(address_long)
     Read a word from the program space with a 32-bit (far) address. 
 
@@ -944,6 +976,12 @@ not interfere with data accesses.
 #define pgm_read_word_far(address_long)  __ELPM_word((uint32_t)(address_long))
 
 /** \ingroup avr_pgmspace
+    \dev pgm_read_uint16_far(address_long)
+    See pgm_read_byte_far(address_long). */
+#define pgm_read_uint16_far(address_long) \
+        __ELPM_uint16((uint32_t)(address_long))
+
+/** \ingroup avr_pgmspace
     \def pgm_read_dword_far(address_long)
     Read a double word from the program space with a 32-bit (far) address. 
 
@@ -951,6 +989,12 @@ not interfere with data accesses.
     The address is in the program space. */
 
 #define pgm_read_dword_far(address_long) __ELPM_dword((uint32_t)(address_long))
+
+/** \ingroup avr_pgmspace
+    \dev pgm_read_uint32_far(address_long)
+    See pgm_read_byte_far(address_long). */
+#define pgm_read_uint32_far(address_long) \
+        __ELPM_uint32((uint32_t)(address_long))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float_far(address_long)
@@ -982,6 +1026,11 @@ not interfere with data accesses.
 #define pgm_read_byte(address_short)    pgm_read_byte_near(address_short)
 
 /** \ingroup avr_pgmspace
+    \dev pgm_read_uint8(address_short)
+    See pgm_read_byte(address_short). */
+#define pgm_read_uint8(address_short)   __LPM_uint8((uint16_t)(address_short))
+
+/** \ingroup avr_pgmspace
     \def pgm_read_word(address_short)
     Read a word from the program space with a 16-bit (near) address. 
 
@@ -991,6 +1040,11 @@ not interfere with data accesses.
 #define pgm_read_word(address_short)    pgm_read_word_near(address_short)
 
 /** \ingroup avr_pgmspace
+    \dev pgm_read_uint16(address_short)
+    See pgm_read_byte(address_short). */
+#define pgm_read_uint16(address_short)  __LPM_uint16((uint16_t)(address_short))
+
+/** \ingroup avr_pgmspace
     \def pgm_read_dword(address_short)
     Read a double word from the program space with a 16-bit (near) address. 
 
@@ -998,6 +1052,11 @@ not interfere with data accesses.
     The address is in the program space. */
 
 #define pgm_read_dword(address_short)   pgm_read_dword_near(address_short)
+
+/** \ingroup avr_pgmspace
+    \dev pgm_read_uint32(address_short)
+    See pgm_read_byte(address_short). */
+#define pgm_read_uint32(address_short)  __LPM_uint32((uint16_t)(address_short))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float(address_short)
