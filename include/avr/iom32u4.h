@@ -399,6 +399,7 @@
 #define BORF 2
 #define WDRF 3
 #define JTRF 4
+#define USBRF 5
 
 #define MCUCR _SFR_IO8(0x35)
 #define IVCE 0
