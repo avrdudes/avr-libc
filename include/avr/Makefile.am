@@ -280,6 +280,7 @@ avr_HEADERS = \
     iotn814.h \
     iotn816.h \
     iotn817.h \
+    iotn424.h \
     iotn1604.h \
     iotn1606.h \
     iotn1607.h \
