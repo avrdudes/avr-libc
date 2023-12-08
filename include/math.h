@@ -251,9 +251,9 @@ __ATTR_CONST__ extern long double ceill (long double __x);
     \note  This implementation permits a zero pointer as a directive to
     skip a storing the exponent.
  */
-__ATTR_CONST__ extern float frexpf (float __x, int *__pexp);
-__ATTR_CONST__ extern double frexp (double __x, int *__pexp);
-__ATTR_CONST__ extern long double frexpl (long double __x, int *__pexp);
+extern float frexpf (float __x, int *__pexp);
+extern double frexp (double __x, int *__pexp);
+extern long double frexpl (long double __x, int *__pexp);
 
 /**
     The ldexp() function multiplies a floating-point number by an integral
