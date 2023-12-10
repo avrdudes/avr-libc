@@ -244,6 +244,37 @@ __init:
 	out	AVR_RAMPZ_ADDR, __zero_reg__
 #endif
 
+#ifdef __AVR_HAVE_FLMAP__
+	;; Initialize NVMCTRL_CTRLB.FLMAP to __flmap provided not -mrodata-in-ram.
+	;; For interworking of the __flmap* symbols, see Binutils PR31124
+	;; and ./ld/scripttempl/avr.sc.
+
+#if ! defined NVMCTRL_CTRLB || ! defined NVMCTRL_FLMAP_gm
+#error NVMCTRL_CTRLB and NVMCTRL_FLMAP_gm must be defined if __AVR_HAVE_FLMAP__
+#endif /* __AVR_HAVE_FLMAP__ implies NVMCTRL_CTRLB and NVMCTRL_FLMAP_gm */
+
+	;; Defaulting __flmap to the last 32k flash block.
+	;; This is also the hardware default for FLMAP.
+	.weak	__flmap
+	.set	__flmap, (FLASHEND + 1 - 0x8000) >> 15
+	;; Conditional RJMP depending on emulation:
+	;; avrxmega[2|4]        ->  __flmap_noinit_start
+	;; avrxmega[2|4]_flmap  ->  __flmap_init_start
+	.global __flmap_init_start
+	.global __flmap_noinit_start
+	rjmp __flmap_init_label     ; Resolves to one of __flmap_[no]init_start
+	__flmap_init_start = .
+	lds r18, NVMCTRL_CTRLB
+#if NVMCTRL_FLMAP_gm == 0x30
+	cbr r18, NVMCTRL_FLMAP_gm
+	ori r18, __flmap_lsl4       ; __flmap_lsl4 = __flmap << 4
+#else
+#error init FLMAP
+#endif
+	sts NVMCTRL_CTRLB, r18
+	__flmap_noinit_start = .
+#endif /* __AVR_HAVE_FLMAP__ */
+
 #if defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3))
 #if BIG_CODE
 	/* Only for >64K devices with RAMPZ, replaces the default code
