@@ -393,9 +393,6 @@ __do_copy_data:
    memory overflows accurately on a per device basis, since the
    values are picked up from the device header file.  */
 
-.weak __FUSE_REGION_LENGTH__
-.set  __FUSE_REGION_LENGTH__, FUSE_MEMORY_SIZE
-
 #if defined (FLASHEND)
 #if ! defined FLASHSTART
 #define FLASHSTART 0
@@ -404,8 +401,8 @@ __do_copy_data:
     ;; but MEMORY region text starts at __TEXT_REGION_ORIGIN__ only
     ;; since Binutils PR31177 (v2.42 released 2024).  Older versions
     ;; of Binutils have text region start hard coded as 0x0.
-    ;; Therefore, only provide strict region layout for devices where
-    ;; program memory starts at 0x0.
+    ;; Therefore, only provide strict text region layout for devices
+    ;; where program memory starts at 0x0.
 #if FLASHSTART == 0
     .weak __TEXT_REGION_ORIGIN__
     .set  __TEXT_REGION_ORIGIN__, (FLASHSTART)
@@ -424,6 +421,14 @@ __do_copy_data:
     .set  __DATA_REGION_LENGTH__, 1 + (RAMEND) - (RAMSTART)
 #endif /* have RAMSTART and RAMEND */
 
+/* The VMA ORIGINs of other MEMORY regions are hard-coded in the ld scripts:
+   eeprom:          0x810000
+   fuse:            0x820000
+   lock:            0x830000
+   signature:       0x840000
+   user_signatures: 0x850000
+   rodata:          0xa00000  (only for the AVR64 and AVR128 devices)  */
+
 #if defined (EEPROM_SIZE) && (EEPROM_SIZE) > 0
     .weak __EEPROM_REGION_LENGTH__
     .set  __EEPROM_REGION_LENGTH__, EEPROM_SIZE
@@ -431,3 +436,26 @@ __do_copy_data:
     .weak __EEPROM_REGION_LENGTH__
     .set  __EEPROM_REGION_LENGTH__, 1 + (E2END)
 #endif /* E2END > 0 */
+
+#if defined (FUSES_SIZE) && (FUSES_SIZE) > 0
+    .weak __FUSE_REGION_LENGTH__
+    .set  __FUSE_REGION_LENGTH__, FUSES_SIZE
+#elif defined (FUSE_MEMORY_SIZE) && (FUSE_MEMORY_SIZE) > 0
+    .weak __FUSE_REGION_LENGTH__
+    .set  __FUSE_REGION_LENGTH__, FUSE_MEMORY_SIZE
+#endif
+
+#if defined (LOCKBITS_SIZE) && (LOCKBITS_SIZE) > 0
+    .weak __LOCK_REGION_LENGTH__
+    .set  __LOCK_REGION_LENGTH__, LOCKBITS_SIZE
+#endif
+
+#if defined (USER_SIGNATURES_SIZE) && (USER_SIGNATURES_SIZE) > 0
+    .weak __USER_SIGNATURE_REGION_LENGTH__
+    .set  __USER_SIGNATURE_REGION_LENGTH__, USER_SIGNATURES_SIZE
+#endif
+
+#if defined (SIGNATURES_SIZE) && (SIGNATURES_SIZE) > 0
+    .weak __SIGNATURE_REGION_LENGTH__
+    .set  __SIGNATURE_REGION_LENGTH__, SIGNATURES_SIZE
+#endif
