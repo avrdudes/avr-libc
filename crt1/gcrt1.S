@@ -386,12 +386,48 @@ __do_copy_data:
 .L__desc_end:
     .balign 4
 
-  /* Set REGION_LENGTH symbol values for well known memory regions.
-  The default linker script uses these symbols to set MEMORY 
-  region lengths, and by defining these here, the linker can detect
-  memory overflows accurately on a per device basis, since the 
-  values are picked up from the device header file.
-  */
 
-  .weak __FUSE_REGION_LENGTH__
-  .set __FUSE_REGION_LENGTH__, FUSE_MEMORY_SIZE
+/* Set REGION_LENGTH symbol values for well known memory regions.
+   The default linker script uses these symbols to set MEMORY
+   region lengths, and by defining these here, the linker can detect
+   memory overflows accurately on a per device basis, since the
+   values are picked up from the device header file.  */
+
+.weak __FUSE_REGION_LENGTH__
+.set  __FUSE_REGION_LENGTH__, FUSE_MEMORY_SIZE
+
+#if defined (FLASHEND)
+#if ! defined FLASHSTART
+#define FLASHSTART 0
+#endif
+    ;; Some of the Automotive devices have Flash start at 0x8000,
+    ;; but MEMORY region text starts at __TEXT_REGION_ORIGIN__ only
+    ;; since Binutils PR31177 (v2.42 released 2024).  Older versions
+    ;; of Binutils have text region start hard coded as 0x0.
+    ;; Therefore, only provide strict region layout for devices where
+    ;; program memory starts at 0x0.
+#if FLASHSTART == 0
+    .weak __TEXT_REGION_ORIGIN__
+    .set  __TEXT_REGION_ORIGIN__, (FLASHSTART)
+    .weak __TEXT_REGION_LENGTH__
+    .set  __TEXT_REGION_LENGTH__, 1 + (FLASHEND) - (FLASHSTART)
+#endif /* FLASHSTART == 0 */
+#endif /* FLASHEND */
+
+;; The RAM virtual memory address used by Binutils to linearize memory.
+#define RAM_VMA 0x800000
+
+#if defined (RAMSTART) && defined (RAMEND)
+    .weak __DATA_REGION_ORIGIN__
+    .set  __DATA_REGION_ORIGIN__, (RAM_VMA) | (RAMSTART)
+    .weak __DATA_REGION_LENGTH__
+    .set  __DATA_REGION_LENGTH__, 1 + (RAMEND) - (RAMSTART)
+#endif /* have RAMSTART and RAMEND */
+
+#if defined (EEPROM_SIZE) && (EEPROM_SIZE) > 0
+    .weak __EEPROM_REGION_LENGTH__
+    .set  __EEPROM_REGION_LENGTH__, EEPROM_SIZE
+#elif defined (E2END) && (E2END) > 0
+    .weak __EEPROM_REGION_LENGTH__
+    .set  __EEPROM_REGION_LENGTH__, 1 + (E2END)
+#endif /* E2END > 0 */
