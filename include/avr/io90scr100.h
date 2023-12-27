@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: io90scr100.h 1910 2009-03-04 17:45:30Z arcanum $ */
 
 /* avr/io90scr100.h - definitions for AT90SCR100 */
 
@@ -1708,8 +1709,6 @@
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x96
 #define SIGNATURE_2 0xC1
-
-
 
 #define SLEEP_MODE_IDLE         (0)
 #define SLEEP_MODE_PWR_DOWN     _BV(SM1)

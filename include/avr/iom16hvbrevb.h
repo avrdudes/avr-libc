@@ -1,4 +1,4 @@
-/* Copyright (c) 2009, 2011 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom16hvbrevb.h 2086 2009-12-15 03:24:16Z arcanum $ */
 
 /* avr/iom16hvbrevb.h - definitions for ATmega16HVB revision B */
 
@@ -1042,7 +1043,6 @@
 #define OC_PORT  PORTOC
 #define OC_PIN   PINOC
 #define OC_BIT   OC
-
 
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)

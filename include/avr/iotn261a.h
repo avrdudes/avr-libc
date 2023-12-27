@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iotn261a.h 2063 2009-11-18 22:06:28Z arcanum $ */
 
 /* avr/iotn261a.h - definitions for ATtiny261A */
 
@@ -496,6 +497,7 @@
 #define DTPS10 4
 #define DTPS11 5
 #define PSR1 6
+#define PWM1X 7
 
 #define TCCR1A _SFR_IO8(0x30)
 #define PWM1B 0
@@ -977,7 +979,6 @@
 #define PA0_PORT  PORTADC
 #define PA0_PIN   PINADC
 #define PA0_BIT   ADC0
-
 
 #define SLEEP_MODE_IDLE (0x00<<3)
 #define SLEEP_MODE_ADC (0x01<<3)

@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom16a.h 2248 2011-05-23 19:54:32Z joerg_wunsch $ */
 
 /* avr/iom16a.h - definitions for ATmega16A */
 
@@ -678,8 +679,6 @@
 #define TIMER0_OVF_vect      _VECTOR(9)  /* Timer/Counter0 Overflow */
 #define SPI_STC_vect_num  10
 #define SPI_STC_vect      _VECTOR(10)  /* Serial Transfer Complete */
-#define SPISTC_vect_num  10
-#define SPISTC_vect      _VECTOR(10)  /* Keep for backward-compatibility */
 
 /* The following vectors use an inconsistent (to the ATmega16 etc.)
    naming scheme.  The inconsistent names are preserved here for softwares
@@ -913,7 +912,6 @@
 #define SS_PORT  PORTB
 #define SS_PIN   PINB
 #define SS_BIT   4
-
 
 #define SLEEP_MODE_IDLE (0x00<<4)
 #define SLEEP_MODE_ADC (0x01<<4)

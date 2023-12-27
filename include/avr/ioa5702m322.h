@@ -1,36 +1,32 @@
-/*****************************************************************************
- *
- * Copyright (C) 2016 Atmel Corporation
+/*
+ * Copyright (C) 2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
  *
- * * Redistributions of source code must retain the above copyright
- *   notice, this list of conditions and the following disclaimer.
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
  *
- * * Redistributions in binary form must reproduce the above copyright
- *   notice, this list of conditions and the following disclaimer in
- *   the documentation and/or other materials provided with the
- *   distribution.
+ *     1. Redistributions of source code must retain the above copyright notice, this list of
+ *        conditions and the following disclaimer.
  *
- * * Neither the name of the copyright holders nor the names of
- *   contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *        of conditions and the following disclaimer in the documentation and/or other
+ *        materials provided with the distribution. Publication is not required when
+ *        this file is used in an embedded application.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- ****************************************************************************/
-
+ *     3. Microchip's name may not be used to endorse or promote products derived from this
+ *        software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #ifndef _AVR_ATA5702M322_H_INCLUDED
 #define _AVR_ATA5702M322_H_INCLUDED
@@ -75,14 +71,16 @@
 #define PRTWI2  1
 #define PRSF    2
 #define PRDF    3
+#define VXTSDI  4
 #define PRTM    6
 #define PRSSM   7
 
-#define __AVR_HAVE_PRR2	((1<<PRSPI2)|(1<<PRTWI2)|(1<<PRSF)|(1<<PRDF)|(1<<PRTM)|(1<<PRSSM))
+#define __AVR_HAVE_PRR2	((1<<PRSPI2)|(1<<PRTWI2)|(1<<PRSF)|(1<<PRDF)|(1<<VXTSDI)|(1<<PRTM)|(1<<PRSSM))
 #define __AVR_HAVE_PRR2_PRSPI2
 #define __AVR_HAVE_PRR2_PRTWI2
 #define __AVR_HAVE_PRR2_PRSF
 #define __AVR_HAVE_PRR2_PRDF
+#define __AVR_HAVE_PRR2_VXTSDI
 #define __AVR_HAVE_PRR2_PRTM
 #define __AVR_HAVE_PRR2_PRSSM
 
@@ -2119,9 +2117,11 @@
 #define CRCSE1  5
 #define CRCEN   7
 
-#define PHCST   _SFR_MEM8(0x1DA)
+/* Combine PHCSTL and PHCSTH */
+#define PHCST   _SFR_MEM16(0x1DA)
 
-/* Reserved [0x1DB] */
+#define PHCSTL  _SFR_MEM8(0x1DA)
+#define PHCSTH  _SFR_MEM8(0x1DB)
 
 /* Combine PHCRPL and PHCRPH */
 #define PHCRP   _SFR_MEM16(0x1DC)
@@ -2129,9 +2129,11 @@
 #define PHCRPL  _SFR_MEM8(0x1DC)
 #define PHCRPH  _SFR_MEM8(0x1DD)
 
-#define PHCSR   _SFR_MEM8(0x1DE)
+/* Combine PHCSRL and PHCSRH */
+#define PHCSR   _SFR_MEM16(0x1DE)
 
-/* Reserved [0x1DF] */
+#define PHCSRL  _SFR_MEM8(0x1DE)
+#define PHCSRH  _SFR_MEM8(0x1DF)
 
 #define CRCDIR  _SFR_MEM8(0x1E0)
 
@@ -2340,6 +2342,16 @@
 
 
 
+/* Values and associated defines */
+
+
+#define SLEEP_MODE_IDLE (0x00<<1)
+#define SLEEP_MODE_PWR_SAVE (0x01<<1)
+#define SLEEP_MODE_EXT_PWR_SAVE (0x02<<1)
+#define SLEEP_MODE_PWR_DOWN (0x03<<1)
+#define SLEEP_MODE_EXT_PWR_DOWN (0x04<<1)
+#define SLEEP_MODE_PWR_OFF (0x05<<1)
+
 /* Interrupt vectors */
 /* Vector 0 is the reset vector */
 /* External Interrupt Request 0 */
@@ -2542,21 +2554,44 @@
 #define TWI2_vect            _VECTOR(50)
 #define TWI2_vect_num        50
 
-#define _VECTORS_SIZE 204
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define _VECTORS_SIZE 204
+#else
+#  define _VECTORS_SIZE 204U
+#endif
 
 
 /* Constants */
 
-#define SPM_PAGESIZE 64
-#define FLASHSTART   0x8000
-#define FLASHEND     0xFFFF
-#define RAMSTART     0x0200
-#define RAMSIZE      1024
-#define RAMEND       0x05FF
-#define E2START     0
-#define E2SIZE      2304
-#define E2PAGESIZE  16
-#define E2END       0x08FF
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define SPM_PAGESIZE 64
+#  define FLASHSTART   0x8000
+#  define FLASHEND     0xFFFF
+#else
+#  define SPM_PAGESIZE 64U
+#  define FLASHSTART   0x8000U
+#  define FLASHEND     0xFFFFU
+#endif
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define RAMSTART     0x0200
+#  define RAMSIZE      1024
+#  define RAMEND       0x05FF
+#else
+#  define RAMSTART     0x0200U
+#  define RAMSIZE      1024U
+#  define RAMEND       0x05FFU
+#endif
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define E2START     0
+#  define E2SIZE      2176
+#  define E2PAGESIZE  16
+#  define E2END       0x087F
+#else
+#  define E2START     0U
+#  define E2SIZE      2176U
+#  define E2PAGESIZE  16U
+#  define E2END       0x087FU
+#endif
 #define XRAMEND      RAMEND
 
 
@@ -2565,14 +2600,14 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Fuse Byte */
-#define FUSE_EXTCLKEN    (unsigned char)~_BV(0)
+#define FUSE_PCEE1       (unsigned char)~_BV(0)
 #define FUSE_EEACC       (unsigned char)~_BV(1)
 #define FUSE_BOOTRST     (unsigned char)~_BV(2)
 #define FUSE_EESAVE      (unsigned char)~_BV(3)
 #define FUSE_WDTON       (unsigned char)~_BV(4)
 #define FUSE_SPIEN       (unsigned char)~_BV(5)
 #define FUSE_DWEN        (unsigned char)~_BV(6)
-#define FUSE_CKDIV8      (unsigned char)~_BV(7)
+#define FUSE_CKSTART     (unsigned char)~_BV(7)
 #define LFUSE_DEFAULT    (FUSE_SPIEN)
 
 
@@ -2585,6 +2620,8 @@
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x95
 #define SIGNATURE_2 0x69
+
+
 
 
 #endif /* #ifdef _AVR_ATA5702M322_H_INCLUDED */

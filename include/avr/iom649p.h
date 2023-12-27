@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom649p.h 2146 2010-06-09 06:38:54Z joerg_wunsch $ */
 
 /* avr/iom649p.h - definitions for ATmega649 */
 
@@ -42,7 +43,7 @@
 #  define _AVR_IOXXX_H_ "iom649p.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATmega649_H_
@@ -325,7 +326,8 @@
 #define EEAR10 2
 
 #define GTCCR _SFR_IO8(0x23)
-#define PSR310 0
+#define PSR310 0 /* Kept for legacy reasons */
+#define PSR10 0
 #define PSR2 1
 #define TSM 7
 
@@ -1479,7 +1481,6 @@
 #define ADC0_PORT  PORTF
 #define ADC0_PIN   PINF
 #define ADC0_BIT   0
-
 
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)

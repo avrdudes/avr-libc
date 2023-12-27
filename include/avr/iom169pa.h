@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom169pa.h 2192 2010-11-08 13:53:24Z arcanum $ */
 
 /* avr/iom169pa.h - definitions for ATmega169PA */
 
@@ -42,7 +43,7 @@
 #  define _AVR_IOXXX_H_ "iom169pa.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATmega169PA_H_
@@ -321,7 +322,8 @@
 #define EEAR8 0
 
 #define GTCCR _SFR_IO8(0x23)
-#define PSR310 0
+#define PSR310 0 /* Kept for legacy reasons */
+#define PSR10 0
 #define PSR2 1
 #define TSM 7
 
@@ -1474,7 +1476,6 @@
 #define ADC0_PORT  PORTF
 #define ADC0_PIN   PINF
 #define ADC0_BIT   0
-
 
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)

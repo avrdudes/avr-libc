@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom32m1.h 2235 2011-03-17 04:13:14Z arcanum $ */
 
 /* avr/iom32m1.h - definitions for ATmega32M1 */
 
@@ -1614,7 +1615,6 @@
 #pragma GCC poison POCR_RB_01
 
 #endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
-
 
 
 #define SLEEP_MODE_IDLE (0x00<<1)

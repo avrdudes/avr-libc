@@ -28,7 +28,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: io8534.h 1873 2009-02-11 17:53:39Z arcanum $ */
 
 /* avr/io8534.h - definitions for AT90C8534 */
 

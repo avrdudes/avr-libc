@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -28,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom16u4.h 2185 2010-09-22 07:06:35Z aboyapati $ */
 
 /* avr/iom16u4.h - definitions for ATmega16U4 */
 
@@ -446,7 +447,7 @@
 #define PRTIM2 6
 #define PRTWI 7
 
-#define __AVR_HAVE_PRR0	((1<<PRADC)|(1<<PRUSART0)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI))
+#define __AVR_HAVE_PRR0 ((1<<PRADC)|(1<<PRUSART0)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI))
 #define __AVR_HAVE_PRR0_PRADC
 #define __AVR_HAVE_PRR0_PRUSART0
 #define __AVR_HAVE_PRR0_PRSPI
@@ -461,7 +462,7 @@
 #define PRTIM4 4
 #define PRUSB 7
 
-#define __AVR_HAVE_PRR1	((1<<PRUSART1)|(1<<PRTIM4)|(1<<PRTIM3)|(1<<PRUSB))
+#define __AVR_HAVE_PRR1 ((1<<PRUSART1)|(1<<PRTIM4)|(1<<PRTIM3)|(1<<PRUSB))
 #define __AVR_HAVE_PRR1_PRUSART1
 #define __AVR_HAVE_PRR1_PRTIM3
 #define __AVR_HAVE_PRR1_PRTIM4

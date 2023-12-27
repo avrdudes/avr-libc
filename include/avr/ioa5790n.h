@@ -1,36 +1,32 @@
-/*****************************************************************************
- *
- * Copyright (C) 2016 Atmel Corporation
+/*
+ * Copyright (C) 2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
  *
- * * Redistributions of source code must retain the above copyright
- *   notice, this list of conditions and the following disclaimer.
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
  *
- * * Redistributions in binary form must reproduce the above copyright
- *   notice, this list of conditions and the following disclaimer in
- *   the documentation and/or other materials provided with the
- *   distribution.
+ *     1. Redistributions of source code must retain the above copyright notice, this list of
+ *        conditions and the following disclaimer.
  *
- * * Neither the name of the copyright holders nor the names of
- *   contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *        of conditions and the following disclaimer in the documentation and/or other
+ *        materials provided with the distribution. Publication is not required when
+ *        this file is used in an embedded application.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- ****************************************************************************/
-
+ *     3. Microchip's name may not be used to endorse or promote products derived from this
+ *        software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #ifndef _AVR_ATA5790N_H_INCLUDED
 #define _AVR_ATA5790N_H_INCLUDED
@@ -872,21 +868,44 @@
 #define SPMREADY_vect            _VECTOR(30)
 #define SPMREADY_vect_num        30
 
-#define _VECTORS_SIZE 124
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define _VECTORS_SIZE 124
+#else
+#  define _VECTORS_SIZE 124U
+#endif
 
 
 /* Constants */
 
-#define SPM_PAGESIZE 128
-#define FLASHSTART   0x0000
-#define FLASHEND     0x3FFF
-#define RAMSTART     0x0100
-#define RAMSIZE      512
-#define RAMEND       0x02FF
-#define E2START     0
-#define E2SIZE      2048
-#define E2PAGESIZE  16
-#define E2END       0x07FF
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define SPM_PAGESIZE 128
+#  define FLASHSTART   0x0000
+#  define FLASHEND     0x3FFF
+#else
+#  define SPM_PAGESIZE 128U
+#  define FLASHSTART   0x0000U
+#  define FLASHEND     0x3FFFU
+#endif
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define RAMSTART     0x0100
+#  define RAMSIZE      512
+#  define RAMEND       0x02FF
+#else
+#  define RAMSTART     0x0100U
+#  define RAMSIZE      512U
+#  define RAMEND       0x02FFU
+#endif
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define E2START     0
+#  define E2SIZE      2048
+#  define E2PAGESIZE  16
+#  define E2END       0x07FF
+#else
+#  define E2START     0U
+#  define E2SIZE      2048U
+#  define E2PAGESIZE  16U
+#  define E2END       0x07FFU
+#endif
 #define XRAMEND      RAMEND
 
 
@@ -916,6 +935,8 @@
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
 #define SIGNATURE_2 0x62
+
+
 
 
 #endif /* #ifdef _AVR_ATA5790N_H_INCLUDED */

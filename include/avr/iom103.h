@@ -28,7 +28,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom103.h 2227 2011-03-04 19:35:10Z arcanum $ */
 
 /* avr/iom103.h - definitions for ATmega103 */
 

@@ -1,5 +1,5 @@
 /* Copyright (c) 2002, Peter Jansen
-   Copyright (c) 2007, Atmel Corporation
+   Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* $Id: iom128.h 2226 2011-03-04 17:47:16Z arcanum $ */
 
 /* avr/iom128.h - defines for ATmega128 
 
@@ -1289,14 +1289,11 @@
 
 #endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
 
-
-
 #define SLEEP_MODE_IDLE (0x00<<2)
 #define SLEEP_MODE_ADC (0x02<<2)
 #define SLEEP_MODE_PWR_DOWN (0x04<<2)
 #define SLEEP_MODE_PWR_SAVE (0x06<<2)
 #define SLEEP_MODE_STANDBY (0x05<<2)
 #define SLEEP_MODE_EXT_STANDBY (0x07<<2)
-
 
 #endif /* _AVR_IOM128_H_ */

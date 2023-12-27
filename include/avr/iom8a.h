@@ -1,38 +1,32 @@
-/*****************************************************************************
- *
- * Copyright (C) 2014 Atmel Corporation
+/*
+ * Copyright (C) 2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
  *
- * * Redistributions of source code must retain the above copyright
- *   notice, this list of conditions and the following disclaimer.
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
  *
- * * Redistributions in binary form must reproduce the above copyright
- *   notice, this list of conditions and the following disclaimer in
- *   the documentation and/or other materials provided with the
- *   distribution.
+ *     1. Redistributions of source code must retain the above copyright notice, this list of
+ *        conditions and the following disclaimer.
  *
- * * Neither the name of the copyright holders nor the names of
- *   contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *        of conditions and the following disclaimer in the documentation and/or other
+ *        materials provided with the distribution. Publication is not required when
+ *        this file is used in an embedded application.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- ****************************************************************************/
-
-
-/* $Id$ */
+ *     3. Microchip's name may not be used to endorse or promote products derived from this
+ *        software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #ifndef _AVR_ATMEGA8A_H_INCLUDED
 #define _AVR_ATMEGA8A_H_INCLUDED
@@ -164,13 +158,29 @@
 
 #define DDRD    _SFR_IO8(0x11)
 #define DDRD7   7
+// Inserted "DDD7" from "DDRD7" due to compatibility
+#define DDD7    7
 #define DDRD6   6
+// Inserted "DDD6" from "DDRD6" due to compatibility
+#define DDD6    6
 #define DDRD5   5
+// Inserted "DDD5" from "DDRD5" due to compatibility
+#define DDD5    5
 #define DDRD4   4
+// Inserted "DDD4" from "DDRD4" due to compatibility
+#define DDD4    4
 #define DDRD3   3
+// Inserted "DDD3" from "DDRD3" due to compatibility
+#define DDD3    3
 #define DDRD2   2
+// Inserted "DDD2" from "DDRD2" due to compatibility
+#define DDD2    2
 #define DDRD1   1
+// Inserted "DDD1" from "DDRD1" due to compatibility
+#define DDD1    1
 #define DDRD0   0
+// Inserted "DDD0" from "DDRD0" due to compatibility
+#define DDD0    0
 
 #define PORTD   _SFR_IO8(0x12)
 #define PORTD7  7
@@ -193,12 +203,26 @@
 
 #define DDRC    _SFR_IO8(0x14)
 #define DDRC6   6
+// Inserted "DDC6" from "DDRC6" due to compatibility
+#define DDC6    6
 #define DDRC5   5
+// Inserted "DDC5" from "DDRC5" due to compatibility
+#define DDC5    5
 #define DDRC4   4
+// Inserted "DDC4" from "DDRC4" due to compatibility
+#define DDC4    4
 #define DDRC3   3
+// Inserted "DDC3" from "DDRC3" due to compatibility
+#define DDC3    3
 #define DDRC2   2
+// Inserted "DDC2" from "DDRC2" due to compatibility
+#define DDC2    2
 #define DDRC1   1
+// Inserted "DDC1" from "DDRC1" due to compatibility
+#define DDC1    1
 #define DDRC0   0
+// Inserted "DDC0" from "DDRC0" due to compatibility
+#define DDC0    0
 
 #define PORTC   _SFR_IO8(0x15)
 #define PORTC6  6
@@ -221,13 +245,29 @@
 
 #define DDRB    _SFR_IO8(0x17)
 #define DDRB7   7
+// Inserted "DDB7" from "DDRB7" due to compatibility
+#define DDB7    7
 #define DDRB6   6
+// Inserted "DDB6" from "DDRB6" due to compatibility
+#define DDB6    6
 #define DDRB5   5
+// Inserted "DDB5" from "DDRB5" due to compatibility
+#define DDB5    5
 #define DDRB4   4
+// Inserted "DDB4" from "DDRB4" due to compatibility
+#define DDB4    4
 #define DDRB3   3
+// Inserted "DDB3" from "DDRB3" due to compatibility
+#define DDB3    3
 #define DDRB2   2
+// Inserted "DDB2" from "DDRB2" due to compatibility
+#define DDB2    2
 #define DDRB1   1
+// Inserted "DDB1" from "DDRB1" due to compatibility
+#define DDB1    1
 #define DDRB0   0
+// Inserted "DDB0" from "DDRB0" due to compatibility
+#define DDB0    0
 
 #define PORTB   _SFR_IO8(0x18)
 #define PORTB7  7
@@ -431,6 +471,15 @@
 
 
 
+/* Values and associated defines */
+
+
+#define SLEEP_MODE_IDLE (0x00<<4)
+#define SLEEP_MODE_ADC (0x01<<4)
+#define SLEEP_MODE_PWR_DOWN (0x02<<4)
+#define SLEEP_MODE_PWR_SAVE (0x03<<4)
+#define SLEEP_MODE_STANDBY (0x06<<4)
+
 /* Interrupt vectors */
 /* Vector 0 is the reset vector */
 /* External Interrupt Request 0 */
@@ -505,21 +554,44 @@
 #define SPM_RDY_vect            _VECTOR(18)
 #define SPM_RDY_vect_num        18
 
-#define _VECTORS_SIZE 38
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define _VECTORS_SIZE 38
+#else
+#  define _VECTORS_SIZE 38U
+#endif
 
 
 /* Constants */
 
-#define SPM_PAGESIZE 64
-#define FLASHSTART   0x0000
-#define FLASHEND     0x1FFF
-#define RAMSTART     0x0060
-#define RAMSIZE      1024
-#define RAMEND       0x045F
-#define E2START     0
-#define E2SIZE      512
-#define E2PAGESIZE  4
-#define E2END       0x01FF
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define SPM_PAGESIZE 64
+#  define FLASHSTART   0x0000
+#  define FLASHEND     0x1FFF
+#else
+#  define SPM_PAGESIZE 64U
+#  define FLASHSTART   0x0000U
+#  define FLASHEND     0x1FFFU
+#endif
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define RAMSTART     0x0060
+#  define RAMSIZE      1024
+#  define RAMEND       0x045F
+#else
+#  define RAMSTART     0x0060U
+#  define RAMSIZE      1024U
+#  define RAMEND       0x045FU
+#endif
+#if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
+#  define E2START     0
+#  define E2SIZE      512
+#  define E2PAGESIZE  4
+#  define E2END       0x01FF
+#else
+#  define E2START     0U
+#  define E2SIZE      512U
+#  define E2PAGESIZE  4U
+#  define E2END       0x01FFU
+#endif
 #define XRAMEND      RAMEND
 
 
@@ -536,6 +608,8 @@
 #define FUSE_SUT_CKSEL5  (unsigned char)~_BV(5)
 #define FUSE_BODEN       (unsigned char)~_BV(6)
 #define FUSE_BODLEVEL    (unsigned char)~_BV(7)
+#define LFUSE_DEFAULT    (FUSE_SUT_CKSEL1 & FUSE_SUT_CKSEL2 & FUSE_SUT_CKSEL3 & FUSE_SUT_CKSEL4)
+
 
 /* High Fuse Byte */
 #define FUSE_BOOTRST     (unsigned char)~_BV(0)
@@ -544,8 +618,10 @@
 #define FUSE_EESAVE      (unsigned char)~_BV(3)
 #define FUSE_CKOPT       (unsigned char)~_BV(4)
 #define FUSE_SPIEN       (unsigned char)~_BV(5)
-#define FUSE_WTDON       (unsigned char)~_BV(6)
+#define FUSE_WDTON       (unsigned char)~_BV(6)
 #define FUSE_RSTDISBL    (unsigned char)~_BV(7)
+#define HFUSE_DEFAULT    (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN)
+
 
 
 /* Lock Bits */
@@ -561,11 +637,6 @@
 
 
 
-#define SLEEP_MODE_IDLE (0x00<<4)
-#define SLEEP_MODE_ADC (0x01<<4)
-#define SLEEP_MODE_PWR_DOWN (0x02<<4)
-#define SLEEP_MODE_PWR_SAVE (0x03<<4)
-#define SLEEP_MODE_STANDBY (0x06<<4)
 
 #endif /* #ifdef _AVR_ATMEGA8A_H_INCLUDED */
 

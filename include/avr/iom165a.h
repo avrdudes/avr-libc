@@ -1,6 +1,6 @@
 /*****************************************************************************
  *
- * Copyright (C) 2014 Atmel Corporation
+ * Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,8 @@
  * * Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in
  *   the documentation and/or other materials provided with the
- *   distribution.
+ *   distribution. Publication is not required when this file is used
+ *   in an embedded application.
  *
  * * Neither the name of the copyright holders nor the names of
  *   contributors may be used to endorse or promote products derived
@@ -32,7 +33,7 @@
  ****************************************************************************/
 
 
-/* $Id$ */
+/* $Id: iom165a.h 2442 2014-08-11 21:42:11Z joerg_wunsch $ */
 
 #ifndef _AVR_ATMEGA165A_H_INCLUDED
 #define _AVR_ATMEGA165A_H_INCLUDED
@@ -295,9 +296,10 @@
 #define EEARH   _SFR_IO8(0x22)
 
 #define GTCCR   _SFR_IO8(0x23)
-#define PSR310  0
-#define TSM     7
+#define PSR310  0 /* Kept for legacy reason */
+#define PSR10  0
 #define PSR2    1
+#define TSM     7
 
 #define TCCR0A  _SFR_IO8(0x24)
 #define CS00    0
@@ -823,12 +825,10 @@
 #define SIGNATURE_2 0x10
 
 
-
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)
 #define SLEEP_MODE_PWR_DOWN (0x02<<1)
 #define SLEEP_MODE_PWR_SAVE (0x03<<1)
 #define SLEEP_MODE_STANDBY (0x06<<1)
-
 #endif /* #ifdef _AVR_ATMEGA165A_H_INCLUDED */
 
