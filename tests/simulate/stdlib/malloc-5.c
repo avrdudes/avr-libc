@@ -54,6 +54,9 @@ extern struct __freelist *__flp; /* freelist pointer (head of freelist) */
 extern char *__malloc_heap_start;
 extern char *__malloc_heap_end;
 
+#if __GNUC__ >= 12
+#pragma GCC diagnostic ignored "-Wuse-after-free"
+#endif
 int main(void)
 {
     void *ptrs[6];
