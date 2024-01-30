@@ -100,7 +100,9 @@ test_list=${*:-"time/*.c regression/*.c stdlib/*.c string/*.c pmstring/*.c \
 		avr/*.[cS]"}
 
 CPPFLAGS="-Wundef -I."
-CFLAGS="-gdwarf-4 -W -Wall -pipe -Os"
+# -Wno-array-bounds: Ditch wrong warnings due to avr-gcc PR105523.
+# This works with more GCC versions than --param=min-pagesize=0.
+CFLAGS="-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds"
 CORE=core_avr_dump.core
 HOST_CC=gcc
 HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
@@ -159,20 +161,20 @@ Compile ()
 	  libs="-lm"
     else
       local multilibdir=`$AVR_GCC -mmcu=$2 -print-multi-directory`
-      # prefix dir 'avr2' if multilib dir is default or not starts with 'avr'
-      # example: '.' or 'tinystack'
-      case "$multilibdir" in
-      avr*)
-           ;;
-      *)
-           multilibdir="avr2/$multilibdir"
-      esac
+      # Use the same replacements like in mlib-gen.py::to_ident() and
+      # configure.ac's CHECK_AVR_DEVICE.  This flattens out the multilib path.
+      # For example, "avr25/tiny-stack" becomes "avr25_tiny_stack",
+      # and "." becomes "avr2".
+      multilibdir=$(echo "$multilibdir"     \
+                    | sed -e 's:^\.$:avr2:' \
+                    | sed -e 's:/:_:g'      \
+                    | sed -e 's:-:_:g')
       crt=crt$2.o
-	  flags="-isystem $AVRDIR/include -nostdlib"
-      crt=`find $AVRDIR/avr/lib -name $crt -print | head -1`
+      flags="-isystem $AVRDIR/include -nostdlib"
+      crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
       libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
             $AVRDIR/avr/lib/$multilibdir/libm.a \
-            $AVRDIR/avr/lib/$multilibdir/$2/lib$2.a -lgcc"
+            $AVRDIR/avr/devices/$2/lib$2.a -lgcc"
     fi
 
     case $4 in
