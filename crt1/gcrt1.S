@@ -286,6 +286,25 @@ __init:
 #endif
 	sts NVMCTRL_CTRLB, r18
 	__flmap_noinit_start = .
+
+	;; There may be the case that this crt*.o is used with a toolchain
+	;; that does not support Binutils PR31124.  This can happen when the
+	;; crt*.o is shipped with a device support pack.  In that case, linking
+	;; against crt*.o would raise undefined references to __flmap_init_label
+	;; and __flmap_value_with_lock.  Therefore, provide default values for
+	;; these symbols, which will reduce the negative impact to 5 superfluous
+	;; instructions from above.
+	.weak	__flmap_value_with_lock
+	.set	__flmap_value_with_lock, NVMCTRL_FLMAP_gm
+	;; The linker scripts for emulations avrxmega2/4_flmap define symbol
+	;; __flmap_init_label as PROVIDE, hence a weak definition like below
+	;; would bypass the instructions above.  There is an addendum to PR31124,
+	;; but that's not in v2.42 but only in v2.43 (or v2.42.1).
+	;; In the case when an undefined reference occurs, a work-around is to
+	;; -Wl,--defsym,__flmap_init_label=__flmap_noinit_start
+	;; or to achieve the same by defining the symbol in assembly like below.
+	;.weak	__flmap_init_label
+	;.set	__flmap_init_label, __flmap_noinit_start
 #endif /* __AVR_HAVE_FLMAP__ */
 
 #if defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3))
