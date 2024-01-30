@@ -108,42 +108,42 @@ int main ()
 
 	for (i = 0; i < 16; i++) {
 	    CHECK (1 << i, radix);
-	    CHECK (~0 << i, radix);
+	    CHECK (~0u << i, radix);
 	}
 
 	for (i = 0; i < 15; i++) {
 	    CHECK (3 << i, radix);
-	    CHECK (~3 << i, radix);
+	    CHECK (~3u << i, radix);
 	}
 
 	for (i = 0; i < 14; i++) {
 	    CHECK (7 << i, radix);
-	    CHECK (~7 << i, radix);
+	    CHECK (~7u << i, radix);
 	}
 
 	for (i = 0; i < 13; i++) {
 	    CHECK (017 << i, radix);
-	    CHECK (~017 << i, radix);
+	    CHECK (~017u << i, radix);
 	}
 
 	for (i = 0; i < 12; i++) {
 	    CHECK (037 << i, radix);
-	    CHECK (~037 << i, radix);
+	    CHECK (~037u << i, radix);
 	}
 
 	for (i = 0; i < 11; i++) {
 	    CHECK (077 << i, radix);
-	    CHECK (~077 << i, radix);
+	    CHECK (~077u << i, radix);
 	}
 
 	for (i = 0; i < 10; i++) {
 	    CHECK (0177 << i, radix);
-	    CHECK (~0177 << i, radix);
+	    CHECK (~0177u << i, radix);
 	}
 
 	for (i = 0; i < 9; i++) {
 	    CHECK (0377 << i, radix);
-	    CHECK (~0377 << i, radix);
+	    CHECK (~0377u << i, radix);
 	}
 
 	n = radix*radix;

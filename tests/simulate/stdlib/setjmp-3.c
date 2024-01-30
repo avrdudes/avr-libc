@@ -63,6 +63,7 @@ int main ()
 		break;
 	    case 0:
 		foo ();
+		/* fallthrough */
 	    default:
 		exit (__LINE__);
 	}
