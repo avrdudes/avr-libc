@@ -232,7 +232,7 @@ __asm__ __volatile__ (  \
       [disable_mask]      "r" ((uint8_t)((~WDT_ENABLE_bm) | WDT_CEN_bm)) \
     : "r0" \
 ); \
-while(0)
+} while(0)
 
 #endif // defined (WDT_CTRLA) && !defined(RAMPD)
 
@@ -255,7 +255,7 @@ __asm__ __volatile__ ( \
       | _BV(WDE) | (value & 0x07) )) \
     : "r16" \
 ); \
-while(0)
+} while(0)
 
 #define wdt_disable() \
 do { \
@@ -276,7 +276,7 @@ __asm__ __volatile__ ( \
       [WDVALUE] "n" (1 << WDE) \
     : "r16" \
 ); \
-}while(0)
+} while(0)
 
 #elif defined(CCP)
 
