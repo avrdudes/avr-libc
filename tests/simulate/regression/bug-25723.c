@@ -38,6 +38,8 @@
 /*
  * Test code from bug #25723, courtesy Lou Amadio.
  */
+void *ptr;
+
 void testMalloc(void)
 {
     size_t *array = malloc(4 * sizeof(size_t));
@@ -47,7 +49,7 @@ void testMalloc(void)
     array = realloc(array, sizeof(size_t));
     array = realloc(array, 2 * sizeof(size_t));
     array = realloc(array, 3 * sizeof(size_t));
-    realloc(array, 4 * sizeof(size_t));
+    ptr = realloc(array, 4 * sizeof(size_t));
 }
 
 int
