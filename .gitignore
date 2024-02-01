@@ -2,7 +2,10 @@ aclocal.m4
 devices.m4
 devlist.m4
 files.m4
-multilib.m4  
+multilib.m4
+tmp-core-info
+tmp-device-info
+avr/
 Makefile
 Makefile.in
 config.h.in
@@ -11,6 +14,12 @@ config.log
 autom4te.cache
 config.status
 config.guess
+config.sub
+install-sh
+missing
+configure
+compile
+depcomp
 
 devtools/gen-avr-lib-tree.sh
 ! devtools/aclocal.m4
