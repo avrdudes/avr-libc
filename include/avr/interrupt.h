@@ -331,6 +331,16 @@
 */
 #  define ISR_NOICF
 
+/** \def ISR_NOGCCISR
+    \ingroup avr_interrupts
+
+    Do not generate \c __gcc_isr pseudo instructions for this ISR.
+    This has an effect with GCC 8 and newer only.
+
+    Use this attribute in the attributes parameter of the ISR macro.
+*/
+#  define ISR_NOGCCISR
+
 /** \def ISR_ALIASOF(target_vector)
     \ingroup avr_interrupts
 
@@ -368,6 +378,12 @@
 #else
 #  define ISR_NOICF      /* empty */
 #endif /* has no_icf */
+
+#if __has_attribute (__no_gccisr__)
+#  define ISR_NOGCCISR      __attribute__((__no_gccisr__))
+#else
+#  define ISR_NOGCCISR      /* empty */
+#endif /* has no_gccisr */
 #endif /* has __has_attribute (GCC 5+) */
 
 #  define ISR_ALIASOF(v) __attribute__((__alias__(__STRINGIFY(v))))
