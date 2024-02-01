@@ -1050,23 +1050,22 @@ not interfere with data accesses.
      universal pointer.
 */
 
-#define pgm_get_far_address(var)                          \
-({                                                    \
-	uint_farptr_t tmp;                                \
+#define pgm_get_far_address(var)                      \
+(__extension__({                                      \
+    uint_farptr_t __tmp;                              \
                                                       \
-	__asm__ __volatile__(                             \
-                                                      \
-			"ldi	%A0, lo8(%1)"           "\n\t"    \
-			"ldi	%B0, hi8(%1)"           "\n\t"    \
-			"ldi	%C0, hh8(%1)"           "\n\t"    \
-			"clr	%D0"                    "\n\t"    \
-		:                                             \
-			"=d" (tmp)                                \
-		:                                             \
-			"p"  (&(var))                             \
-	);                                                \
-	tmp;                                              \
-})
+    __asm__ __volatile__ (                            \
+        "ldi    %A0, lo8(%1)"           "\n\t"        \
+        "ldi    %B0, hi8(%1)"           "\n\t"        \
+        "ldi    %C0, hh8(%1)"           "\n\t"        \
+        "clr    %D0"                                  \
+        :                                             \
+            "=d" (__tmp)                              \
+        :                                             \
+            "i"  (&(var))                             \
+    );                                                \
+    __tmp;                                            \
+}))
 
 
 
