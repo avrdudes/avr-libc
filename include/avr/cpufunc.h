@@ -88,6 +88,14 @@
    Write \a __value to Configuration Change Protected (CCP) IO register
    at \a __ioaddr.
  */
-void ccp_write_io (uint8_t *__ioaddr, uint8_t __value);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void ccp_write_io (volatile uint8_t *__ioaddr, uint8_t __value);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _AVR_CPUFUNC_H_ */
