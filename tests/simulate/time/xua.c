@@ -34,15 +34,13 @@
 
 #include <time.h>
 
-int main(){
+int main (void)
+{
+    if (month_length (2100, 2) != 28)
+        return (__LINE__);
 
-
-    if(month_length(2100,2) != 28) return (__LINE__);
-
-    if(month_length(2136,2) != 29) return (__LINE__);
-
-
+    if (month_length (2136, 2) != 29)
+        return (__LINE__);
 
     return 0;
-
 }
