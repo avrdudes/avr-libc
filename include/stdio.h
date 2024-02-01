@@ -386,13 +386,20 @@ typedef struct __file FILE;
  */
 #define FDEV_SETUP_STREAM(put, get, rwflag)
 #else  /* !DOXYGEN */
-#define FDEV_SETUP_STREAM(p, g, f) \
-	{ \
-		.put = p, \
-		.get = g, \
-		.flags = f, \
-		.udata = 0, \
-	}
+/* In order to work with C++, we have to mention the fields in the order
+   as they appear in struct __file.  Also, designated initializers are
+   only supported since C++20.  */
+#define FDEV_SETUP_STREAM(PU, GE, FL) \
+    {                                 \
+        (char*) 0  /* buf */,         \
+        0u         /* unget */,       \
+        FL         /* flags */,       \
+        0          /* size */,        \
+        0          /* len */,         \
+        PU         /* put */,         \
+        GE         /* get */,         \
+        (void*) 0  /* udata */        \
+    }
 #endif /* DOXYGEN */
 
 #ifdef __cplusplus
