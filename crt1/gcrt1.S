@@ -284,6 +284,8 @@ __init:
 #else
 #error init FLMAP
 #endif
+	ldi r19, CCP_IOREG_gc
+	out CCP, r19
 	sts NVMCTRL_CTRLB, r18
 	__flmap_noinit_start = .
 
