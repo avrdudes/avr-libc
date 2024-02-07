@@ -117,6 +117,10 @@
 # define __ATTR_CONST__ __attribute__((__const__))
 #endif
 
+#ifndef __ATTR_ALWAYS_INLINE__
+#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -146,17 +150,17 @@ __ATTR_CONST__ extern long double tanl (long double __x);
     The fabs() function computes the absolute value of a floating-point
     number \a __x.
  */
-static inline float fabsf (float __x)
+static __ATTR_ALWAYS_INLINE__ float fabsf (float __x)
 {
     return __builtin_fabsf (__x);
 }
 
-static inline double fabs (double __x)
+static __ATTR_ALWAYS_INLINE__ double fabs (double __x)
 {
     return __builtin_fabs (__x);
 }
 
-static inline long double fabsl (long double __x)
+static __ATTR_ALWAYS_INLINE__ long double fabsl (long double __x)
 {
     return __builtin_fabsl (__x);
 }
@@ -372,7 +376,7 @@ __ATTR_CONST__ extern int isinfl (long double __x);
     The isfinite() function returns a nonzero value if \a __x is finite:
     not plus or minus infinity, and not NaN.
  */
-__ATTR_CONST__ static inline int isfinitef (float __x)
+__ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ int isfinitef (float __x)
 {
     unsigned char __exp;
     __asm__ (
@@ -386,7 +390,7 @@ __ATTR_CONST__ static inline int isfinitef (float __x)
 }
 
 #if __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
-static inline int isfinite (double __x)
+static __ATTR_ALWAYS_INLINE__ int isfinite (double __x)
 {
     return isfinitef (__x);
 }
@@ -395,7 +399,7 @@ int isfinite (double __x);
 #endif /* double = float */
 
 #if __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
-static inline int isfinitel (long double __x)
+static __ATTR_ALWAYS_INLINE__ int isfinitel (long double __x)
 {
     return isfinitef (__x);
 }
@@ -407,7 +411,7 @@ int isfinitel (long double __x);
     The copysign() function returns \a __x but with the sign of \a __y.
     They work even if \a __x or \a __y are NaN or zero.
 */
-__ATTR_CONST__ static inline float copysignf (float __x, float __y)
+__ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ float copysignf (float __x, float __y)
 {
     __asm__ (
 	"bst	%D2, 7	\n\t"
@@ -417,7 +421,7 @@ __ATTR_CONST__ static inline float copysignf (float __x, float __y)
     return __x;
 }
 
-__ATTR_CONST__ static inline double copysign (double __x, double __y)
+__ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ double copysign (double __x, double __y)
 {
     __asm__ (
 	"bst	%r1+%2-1, 7" "\n\t"
@@ -427,7 +431,7 @@ __ATTR_CONST__ static inline double copysign (double __x, double __y)
     return __x;
 }
 
-__ATTR_CONST__ static inline long double copysignl (long double __x, long double __y)
+__ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ long double copysignl (long double __x, long double __y)
 {
     __asm__ (
 	"bst	%r1+%2-1, 7" "\n\t"
