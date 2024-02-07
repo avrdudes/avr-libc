@@ -51,6 +51,7 @@
  */
 
 	ASSEMBLY_CLIB_SECTION
+	.type   _U(__mulhi_const_10), @function
 	.global _U(__mulhi_const_10)
 
 _U(__mulhi_const_10):
@@ -74,5 +75,6 @@ _U(__mulhi_const_10):
 	adc r_hi,r_hi
 #endif
 	ret
+	.size _U(__mulhi_const_10), .-_U(__mulhi_const_10)
 
 #endif /* not __DOXYGEN__ */
