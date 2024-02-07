@@ -284,6 +284,11 @@ __init:
 #else
 #error init FLMAP
 #endif
+	;; NVMCTRL_CTRLB is CCP protected with pass-phrase CCP_IOREG_gc = 0xd8.
+    ;; That value is not defined for assembly however, but only as C/C++ enum.
+#ifndef CCP_IOREG_gc
+#define CCP_IOREG_gc 0xd8
+#endif
 	ldi r19, CCP_IOREG_gc
 	out CCP, r19
 	sts NVMCTRL_CTRLB, r18
