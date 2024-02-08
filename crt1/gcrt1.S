@@ -38,6 +38,20 @@
 #include IOSYMFILE
 
 #include "macros.inc"
+;; Use _VECTOR_SIZE from the I/O header which might be more reliable than
+;; using macros.inc's XJMP according to __AVR_HAVE_JMP_CALL__.  As an example,
+;; take ATmega808 which avr-gcc lists as short-calls and thus with a vector
+;; size of 2 bytes according to macros.inc, but ATmega808 has _VECTOR_SIZE = 4.
+#ifdef _VECTOR_SIZE
+#undef XJMP
+#if _VECTOR_SIZE == 2
+#define XJMP rjmp
+#elif _VECTOR_SIZE == 4
+#define XJMP jmp
+#else
+#error _VECTOR_SIZE must be 2 or 4 bytes
+#endif
+#endif /* _VECTOR_SIZE */
 
 	.macro	vector name
 	.if (. - __vectors < _VECTORS_SIZE)

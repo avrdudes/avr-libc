@@ -702,6 +702,8 @@
 #define SPMREADY_vect            _VECTOR(22)
 #define SPMREADY_vect_num        22
 
+#define _VECTOR_SIZE 2
+
 #if (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
 #  define _VECTORS_SIZE 46
 #else

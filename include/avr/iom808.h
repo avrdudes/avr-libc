@@ -4902,7 +4902,7 @@ IO Module Instances. Mapped to memory.
 #define PORTE_PORT_vect_num  35
 #define PORTE_PORT_vect      _VECTOR(35)  /*  */
 
-#define _VECTOR_SIZE 2 /* Size of individual vector. */
+#define _VECTOR_SIZE 4 /* Size of individual vector. */
 #define _VECTORS_SIZE (36 * _VECTOR_SIZE)
 
 

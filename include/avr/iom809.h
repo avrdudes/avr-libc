@@ -4977,7 +4977,7 @@ IO Module Instances. Mapped to memory.
 #define USART3_TXC_vect_num  39
 #define USART3_TXC_vect      _VECTOR(39)  /*  */
 
-#define _VECTOR_SIZE 2 /* Size of individual vector. */
+#define _VECTOR_SIZE 4 /* Size of individual vector. */
 #define _VECTORS_SIZE (40 * _VECTOR_SIZE)
 
 
