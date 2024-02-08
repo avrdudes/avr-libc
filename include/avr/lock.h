@@ -230,8 +230,9 @@
 #define BLBB1 ~_BV(7)
 #endif
 
-
+#ifndef LOCKBITS_DEFAULT
 #define LOCKBITS_DEFAULT (0xFF)
+#endif
 
 #endif  /* !(__ASSEMBLER || __DOXYGEN__) */
 
