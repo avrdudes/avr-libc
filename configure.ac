@@ -186,6 +186,10 @@ dnl Build a list of all .h files in  $srcdir/include/avr.
 dnl Used by include/avr/Makefile.am::avr_HEADERS.
 SUBST_BASENAME_FILES(AVRLIBC_INCLUDE_HFILES, [$srcdir/include/avr/*.h])
 
+dnl Build a list of all .S files in  $srcdir/crt1/iosym.
+dnl Used by crt1/iosym/Makefile.am::EXTRA_DIST.
+SUBST_BASENAME_FILES(AVRLIBC_IOSYM_SFILES, [$srcdir/crt1/iosym/*.S])
+
 
 dnl Check if avr-gcc >= 5.1.0 as they expect device library
 GCC_VER=`${CC} -dumpversion`
