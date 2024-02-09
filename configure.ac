@@ -170,6 +170,23 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 
+
+dnl Substitute $1 with the basenames of all files in glob $2.
+dnl We use this to avoid $(echo $(basename -a $2)) which is not POSIX,
+dnl hence we need a loop over all files in $2.
+AC_DEFUN([SUBST_BASENAME_FILES],[dnl
+fils=
+for fil in $2; do
+    fils="$fils $(basename $fil)"
+done
+AC_SUBST($1,[$fils])
+])
+
+dnl Build a list of all .h files in  $srcdir/include/avr.
+dnl Used by include/avr/Makefile.am::avr_HEADERS.
+SUBST_BASENAME_FILES(AVRLIBC_INCLUDE_HFILES, [$srcdir/include/avr/*.h])
+
+
 dnl Check if avr-gcc >= 5.1.0 as they expect device library
 GCC_VER=`${CC} -dumpversion`
 AS_VERSION_COMPARE(${GCC_VER},"5.1.0",[DEV_LIB="no"],[DEV_LIB="yes"],[DEV_LIB="yes"])
