@@ -33,6 +33,8 @@ avrdir = $(prefix)/avr/include/avr
 
 avr_HEADERS = version.h @AVRLIBC_INCLUDE_HFILES@
 
+EXTRA_HEADERS =
+
 nodist_avr_HEADERS = \
     builtins.h
 
