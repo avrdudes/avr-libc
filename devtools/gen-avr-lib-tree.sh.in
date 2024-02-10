@@ -451,6 +451,22 @@ avr64dd28:crtavr64dd28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 avr64dd32:crtavr64dd32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
+AVREX_DEV_INFO="\
+avr16ea28:crtavr16ea28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16ea32:crtavr16ea32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16ea48:crtavr16ea48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16eb14:crtavr16eb14.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16eb20:crtavr16eb20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16eb28:crtavr16eb28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16eb32:crtavr16eb32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32ea28:crtavr32ea28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32ea32:crtavr32ea32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32ea48:crtavr32ea48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64ea28:crtavr64ea28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64ea32:crtavr64ea32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr64ea48:crtavr64ea48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+"
+
 # The "architectures" or "cores".  The second row only serves as a pointer
 # to all the supported devices as we iterate over AVR_ARH_INFO below.
 # Mentioning AVR25_DEV_INFO after avr25 only serves the purpose to include
@@ -479,7 +495,8 @@ avrxmega5:AVRXMEGA5_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrxmega6:AVRXMEGA6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrxmega7:AVRXMEGA7_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrtiny:AVRTINY_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
-avrdx:AVRDX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
+avrdx:AVRDX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avrex:AVREX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
 # Make sure that we are the top-level of the source tree. We will look for the
