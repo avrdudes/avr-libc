@@ -731,6 +731,32 @@
 #  include <avr/ioavr64dd28.h>
 #elif defined (__AVR_AVR64DD32__)
 #  include <avr/ioavr64dd32.h>
+#elif defined (__AVR_AVR16EA28__)
+#  include <avr/ioavr16ea28.h>
+#elif defined (__AVR_AVR16EA32__)
+#  include <avr/ioavr16ea32.h>
+#elif defined (__AVR_AVR16EA48__)
+#  include <avr/ioavr16ea48.h>
+#elif defined (__AVR_AVR16EB14__)
+#  include <avr/ioavr16eb14.h>
+#elif defined (__AVR_AVR16EB20__)
+#  include <avr/ioavr16eb20.h>
+#elif defined (__AVR_AVR16EB28__)
+#  include <avr/ioavr16eb28.h>
+#elif defined (__AVR_AVR16EB32__)
+#  include <avr/ioavr16eb32.h>
+#elif defined (__AVR_AVR32EA28__)
+#  include <avr/ioavr32ea28.h>
+#elif defined (__AVR_AVR32EA32__)
+#  include <avr/ioavr32ea32.h>
+#elif defined (__AVR_AVR32EA48__)
+#  include <avr/ioavr32ea48.h>
+#elif defined (__AVR_AVR64EA28__)
+#  include <avr/ioavr64ea28.h>
+#elif defined (__AVR_AVR64EA32__)
+#  include <avr/ioavr64ea32.h>
+#elif defined (__AVR_AVR64EA48__)
+#  include <avr/ioavr64ea48.h>
 #elif defined (__AVR_DEV_LIB_NAME__)
 #  define __concat__(a,b) a##b
 #  define __header1__(a,b) __concat__(a,b)

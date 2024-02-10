@@ -50,8 +50,8 @@ avr16dd32 avr32da28 avr32da32 avr32da48 avr32db28 avr32db32 avr32db48 \
 avr32dd14 avr32dd20 avr32dd28 avr32dd32 avr64da28 avr64da32 avr64da48 \
 avr64da64 avr64db28 avr64db32 avr64db48 avr64db64 avr64dd14 avr64dd20 \
 avr64dd28 avr64dd32 avr128da28 avr128da32 avr128da48 avr128da64 avr128db28 \
-avr128db32 avr128db48 avr128db64"
-
+avr128db32 avr128db48 avr128db64 avr16ea28 avr16ea32 avr16ea48 avr16eb14 \
+avr16eb20 avr16eb28 avr16eb32 avr32ea28 avr32ea32 avr32ea48 avr64ea28 avr64ea32 avr64ea48"
 
 if [ x"$ATDFDIR" = x ]
 then
