@@ -149,14 +149,18 @@
 void init_flmap (void);
 #else /* __DOXYGEN__ */
 
+#ifndef __ASSEMBLER__
+
 #ifndef __ATTR_ALWAYS_INLINE__
 #define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#endif
 
 static __ATTR_ALWAYS_INLINE__
 void init_flmap (void)
 {
-  __asm ("__init_flmap");
+  __asm ("__do_init_flmap");
 }
+#endif /* ASSEMBLER */
 #endif /* __DOXYGEN__ */
 
 #endif /* _AVR_XMEGA_H */

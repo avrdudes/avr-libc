@@ -16,7 +16,9 @@
 #define FUNC_SEGNAME ".init3"
 #include "asmdef.h"
 
-ENTRY   _U(__init_flmap)
+/* Referenced by the complier as needed.  This function must not be called
+   because it is naked.  */
+ENTRY   _U(__do_flmap_init)
 
 /* Definitions in avr/io*.h are neglecting assembly, so...  */
 #ifndef CCP_IOREG_gc
@@ -80,18 +82,20 @@ __flmap_noinit_start = .
 .weak   __flmap_value_with_lock
 .set    __flmap_value_with_lock, NVMCTRL_FLMAP_gm
 ;; The linker scripts for emulations avrxmega2/4_flmap define symbol
-;; __flmap_init_label as PROVIDE, hence a weak definition like below would
-;; bypass the instructions above by  RJMP __flmap_noinit_start.
-;; There is an addendum PR31321 to PR31124 which removes the PROVIDE,
-;; but that's not in v2.42 but only in v2.43 (or v2.42.1).
+;; __flmap_init_label as PROVIDE, hence a weak definition of __flmap_init_label
+;; like below would bypass the instructions above by  RJMP __flmap_noinit_start.
+;; There is an addendum PR31321 to PR31124 which removes the PROVIDE, but
+;; that's not in v2.42 and only in v2.43 (or v2.42.1).
 ;; In the case when an undefined reference occurs, the fix is to
 ;;     -Wl,--defsym,__flmap_init_label=__flmap_noinit_start
 ;; The same can be achieved with (inline) assembly:
-;;     .weak  __flmap_init_label
-;;     .set   __flmap_init_label, __flmap_noinit_start
-
-#endif  /* Have NVMCTRL_CTRLB.FLMAP */
+;      .weak  __flmap_init_label
+;      .set   __flmap_init_label, __flmap_noinit_start
+;; Alternatively, one can  -Wl,--defsym,__init_flmap=0  in order to satisfy
+;; the symbol so that the code from above is not dragged.
 
 ENDFUNC
+
+#endif  /* Have NVMCTRL_CTRLB.FLMAP */
 
 #endif  /* !__DOXYGEN__ */
