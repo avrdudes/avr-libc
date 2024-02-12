@@ -51,6 +51,7 @@ eeprom_asm_sources = \
 dev_c_sources =
 
 dev_asm_sources = \
+	flmap_init.S \
 	ccp_write.S
 
 misc_a_asm_sources = \
