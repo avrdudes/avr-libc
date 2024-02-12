@@ -8,6 +8,7 @@
 #include <assert.h>
 #include "sectionname.h"
 #include <avr/eeprom.h>
+#include "eedef.h"
 
 #if defined (NVM)
 
@@ -52,15 +53,8 @@
     _PROTECTED_WRITE_SPM (NVMCTRL.CTRLA, ((uint8_t) command));  \
   } while (0)                                                   \
 
-#if NVMCTRL_CMD_gm == 0x7
-#  define NVM_PAGEERASEWRITE_CMD NVMCTRL_CMD_PAGEERASEWRITE_gc
-#elif NVMCTRL_CMD_gm == 0x7F
-#  if defined (__AVR_AVR16EA28__) || defined (__AVR_AVR16EA32__) || defined (__AVR_AVR16EA48__) || defined (__AVR_AVR16EB14__) || defined (__AVR_AVR16EB20__) || defined (__AVR_AVR16EB28__) || defined (__AVR_AVR16EB32__) || defined (__AVR_AVR32EA28__) || defined (__AVR_AVR32EA32__) || defined (__AVR_AVR32EA48__) || defined (__AVR_AVR64EA28__) || defined (__AVR_AVR64EA32__) || defined (__AVR_AVR64EA48__)
-#    define NVM_PAGEERASEWRITE_CMD NVMCTRL_CMD_EEPERW_gc
-#  else
-#    define NVM_PAGEERASEWRITE_CMD NVMCTRL_CMD_EEERWR_gc
-#  endif
-#endif
+#define NVM_PAGEERASEWRITE_CMD \
+  NVMCTRL_CMD_PAGEERASEWRITE_gc
 
 #endif /* NVM{CTRL} */
 
