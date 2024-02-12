@@ -63,9 +63,42 @@
 #    define CCP_SPM_gc   (0x9D)
 #  endif
 #  ifndef NVMCTRL_CMD_PAGEERASEWRITE_gc
-#    define NVMCTRL_CMD_PAGEERASEWRITE_gc 3
-#  endif
-#endif
+#    if NVMCTRL_CMD_gm == 0x7F
+#      if defined (__AVR_AVR16EA28__) || defined (__AVR_AVR16EA32__) || defined (__AVR_AVR16EA48__) || \
+          defined (__AVR_AVR16EB14__) || defined (__AVR_AVR16EB20__) || defined (__AVR_AVR16EB28__) || \
+          defined (__AVR_AVR16EB32__) || defined (__AVR_AVR32EA28__) || defined (__AVR_AVR32EA32__) || \
+          defined (__AVR_AVR32EA48__) || defined (__AVR_AVR64EA28__) || defined (__AVR_AVR64EA32__) || \
+          defined (__AVR_AVR64EA48__)
+         /* AVR-Ex family
+          * value of NVMCTRL_CMD_enum.NVMCTRL_CMD_EEPERW_gc */
+#        define NVMCTRL_CMD_PAGEERASEWRITE_gc (0x15<<0)
+#      elif defined (__AVR_AVR32DA28__) || defined (__AVR_AVR32DA32__) || defined (__AVR_AVR32DA48__) || \
+            defined (__AVR_AVR64DA28__) || defined (__AVR_AVR64DA32__) || defined (__AVR_AVR64DA48__) || \
+            defined (__AVR_AVR64DA64__) || defined (__AVR_AVR128DA28__) || defined (__AVR_AVR128DA32__) || \
+            defined (__AVR_AVR128DA48__) || defined (__AVR_AVR128DA64__) || defined (__AVR_AVR32DB28__) || \
+            defined (__AVR_AVR32DB32__) || defined (__AVR_AVR32DB48__) || defined (__AVR_AVR64DB28__) || \
+            defined (__AVR_AVR64DB32__) || defined (__AVR_AVR64DB48__) || defined (__AVR_AVR64DB64__) || \
+            defined (__AVR_AVR128DB28__) || defined (__AVR_AVR128DB32__) || defined (__AVR_AVR128DB48__) || \
+            defined (__AVR_AVR128DB64__) || defined (__AVR_AVR16DD14__) || defined (__AVR_AVR16DD20__) || \
+            defined (__AVR_AVR16DD28__) || defined (__AVR_AVR16DD32__) || defined (__AVR_AVR32DD14__) || \
+            defined (__AVR_AVR32DD20__) || defined (__AVR_AVR32DD32__) || defined (__AVR_AVR32DD28__) || \
+            defined (__AVR_AVR64DD14__) || defined (__AVR_AVR64DD20__) || defined (__AVR_AVR64DD28__) || \
+            defined (__AVR_AVR64DD32__)
+         /* AVR-Dx family
+          * value of NVMCTRL_CMD_enum.NVMCTRL_CMD_EEERWR_gc */
+#        define NVMCTRL_CMD_PAGEERASEWRITE_gc (0x13<<0)
+#      else
+         /* To add support for a new device, define NVMCTRL CMD_PAGEERASEWRITE_gc with the value
+          * of "Erase and Write EEPROM Page" comand code for - Persistent Memory Controller (NVMCTRL).*/
+#        error "Not supported devices"
+#      endif
+#    else
+       /* the rest of the AVR devices with NVMCTRL_CTRLA (0x07)
+        * value of NVMCTRL_CMD_enum.NVMCTRL_CMD_PAGEERASEWRITE_gc */
+#      define NVMCTRL_CMD_PAGEERASEWRITE_gc 3
+#    endif
+#  endif /* NVMCTRL_CMD_PAGEERASEWRITE_gc */
+#endif /* defined(NVMCTRL_CTRLA) */
 #else
 
 # if	!defined (EECR) && defined (DEECR)	/* AT86RF401	*/
