@@ -109,7 +109,7 @@ ENTRY_FLOAT expf exp expl
 	XJMP	_U(inverse)
 	ret
 ENDFUNC
-	
+
 	PGM_SECTION
 .L_table:
 	.byte	7

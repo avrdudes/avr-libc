@@ -45,7 +45,7 @@
 #  define _AVR_IOXXX_H_ "io2323.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 /* I/O registers */
 
@@ -202,9 +202,3 @@
 
 
 #endif  /* _AVR_IO2323_H_ */
-
-/* Signature */
-#define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x91
-#define SIGNATURE_2 0x02
-

@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iotn87.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATtiny87_H_
@@ -857,4 +857,3 @@
 #define SLEEP_MODE_PWR_DOWN (0x02<<1)
 
 #endif /* _AVR_ATtiny87_H_ */
-

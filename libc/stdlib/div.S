@@ -34,4 +34,3 @@
 	.global div
 div:
 	XJMP	__divmodhi4
-

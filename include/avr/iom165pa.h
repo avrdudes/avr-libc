@@ -833,4 +833,3 @@
 #define SLEEP_MODE_STANDBY (0x06<<1)
 
 #endif /* #ifdef _AVR_ATMEGA165PA_H_INCLUDED */
-

@@ -318,12 +318,12 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
     unsigned char frange;
     unsigned char cabove;
     int i;
-    
+
     memset (msk, 0, sizeof(msk));
     fnegate = 0;
     frange = 0;
     cabove = 0;			/* init to avoid compiler warning	*/
-    
+
     for (i = 0; ; i++) {
 	unsigned char c = GETBYTE(stream->flags, __SPGM, fmt);
 
@@ -339,9 +339,9 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
 		continue;
 	    }
 	}
-	
+
 	if (!frange) cabove = c;
-	
+
 	for (;;) {
 	    msk[c >> 3] |= 1 << (c & 7);
 	    if (c == cabove) break;
@@ -379,7 +379,7 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
 	if (addr) *addr++ = i;
 	fnegate = 0;
     } while (--width);
-    
+
     if (fnegate) {
 	return 0;
     } else {
@@ -449,13 +449,13 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
       operate_pstr:
         {
 	    unsigned char c;
-	    
+
 	    while ((c = pgm_read_byte (p++)) != 0) {
 		if (!--width
 		    || (i = getc (stream)) < 0
 		    || ((unsigned char)tolower(i) != c
 			&& (ungetc (i, stream), 1)))
-		{	
+		{
 		    if (p == pstr_nfinity + 3)
 			break;
 		    goto err;
@@ -471,7 +471,7 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
 	do {
 
 	    unsigned char c = i - '0';
-    
+
 	    if (c <= 9) {
 		flag |= FL_ANY;
 		if (flag & FL_OVFL) {
@@ -491,10 +491,10 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
 		break;
 	    }
 	} while (--width && (i = getc (stream)) >= 0);
-    
+
 	if (!(flag & FL_ANY))
 	    goto err;
-    
+
 	if ((unsigned char)i == 'e' || (unsigned char)i == 'E')
 	{
 	    int expacc;
@@ -521,7 +521,7 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
 	}
 
 	if (width && i >= 0) ungetc (i, stream);
-    
+
 	x.flt = __floatunsisf (x.u32);
 
 	if (exp < 0) {
@@ -731,7 +731,7 @@ int vfscanf (FILE * stream, const char *fmt, va_list ap)
 		ungetc (i, stream);
 		break;
 	    }
-	
+
 	} else {
 	    flags = 0;
 
@@ -808,7 +808,7 @@ int vfscanf (FILE * stream, const char *fmt, va_list ap)
 
 		if (skip_spaces (stream) < 0)
 		    goto eof;
-		
+
 		switch (c) {
 
 		  case 's':

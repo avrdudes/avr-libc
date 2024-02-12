@@ -22,6 +22,5 @@ ENTRY	ccp_write_io
 	ret
 ENDFUNC
 
-#endif  /* __AVR_XMEGA__ && CCP_IOREG_gc */ 
+#endif  /* __AVR_XMEGA__ && CCP_IOREG_gc */
 #endif  /* !__DOXYGEN__ */
-

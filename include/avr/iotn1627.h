@@ -1,4 +1,3 @@
-
 /* This file is part of avr-libc.
 
    Automatically created by devtools/gen-ioheader-atdf-avr8x.py
@@ -5356,5 +5355,3 @@ IO Module Instances. Mapped to memory.
 
 
 #endif /* #ifdef _AVR_ATTINY1627_H_INCLUDED */
-
-

@@ -5057,5 +5057,3 @@ IO Module Instances. Mapped to memory.
 
 
 #endif /* #ifdef _AVR_ATMEGA808_H_INCLUDED */
-
-

@@ -58,7 +58,7 @@ ENTRY memmem
 	cp	len2_lo, __zero_reg__
 	cpc	len2_hi, __zero_reg__
 	breq	.L_ret			; s2[] is empty
-	
+
 	push	beg2
 	push	c1
 
@@ -70,7 +70,7 @@ ENTRY memmem
 	X_movw	ZL, s2_lo
 	LOAD	beg2, Z+		; beg2 = s2[0]
 	X_movw	s2_lo, ZL		; save: address of s2[1]
-	
+
 1:	X_movw	XL, s1_lo		; goto to begin of s1[]
 
 2:	cp	XL, len1_lo		; find first char that is matched
@@ -94,7 +94,7 @@ ENTRY memmem
 	cp	c1, c2
 	breq	3b
 	rjmp	1b			; no equal
-	
+
 .L_nomatch:
 	ldi	s1_lo, lo8(1)
 	ldi	s1_hi, hi8(1)

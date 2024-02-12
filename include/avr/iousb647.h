@@ -1,5 +1,5 @@
 /* Copyright (c) 2006 Anatoly Sokolov
-   Copyright (c) 2010 Atmel Corporation 
+   Copyright (c) 2010 Atmel Corporation
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -84,7 +84,7 @@
 /* Lock Bits */
 #define __LOCK_BITS_EXIST
 #define __BOOT_LOCK_BITS_0_EXIST
-#define __BOOT_LOCK_BITS_1_EXIST 
+#define __BOOT_LOCK_BITS_1_EXIST
 
 
 /* Signature */

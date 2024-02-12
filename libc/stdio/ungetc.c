@@ -56,4 +56,3 @@ ungetc(int c, FILE *stream)
 
 	return stream->unget;
 }
-

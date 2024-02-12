@@ -33,10 +33,10 @@
      The acosf() function calculates the arc cosine of x; that is the value
      whose cosine is x.
  */
- 
- 
+
+
 #if !defined(__AVR_TINY__)
- 
+
 #include "fp32def.h"
 #include "asmdef.h"
 

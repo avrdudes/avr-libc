@@ -76,11 +76,11 @@ extern void *myrealloc(void *, size_t);
 
 #define __heap_start mymem[0]
 #define __heap_end mymem[256]
-extern char mymem[];    
+extern char mymem[];
 #define STACK_POINTER() (mymem + 256)
 
 #else /* !MALLOC_TEST */
-         
+
 extern char __heap_start;
 extern char __heap_end;
 

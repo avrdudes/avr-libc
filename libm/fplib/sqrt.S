@@ -1,7 +1,7 @@
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
    Copyright (c) 2006  Dmitry Xmelkov
    Copyright (c) 2008  Ruud v Gessel
-   
+
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -111,7 +111,7 @@ ENTRY_FLOAT sqrtf sqrt sqrtl
 	; Loop for bit 0 and rounding
 .Loop1:	lsl	rA0
 	rol	rA1
-	rol	rA2		; Shift left remainder argument	
+	rol	rA2		; Shift left remainder argument
 	brcs	4f		; C--> Last bits always 1
 	cp	rB0, rA0
 	cpc	rB1, rA1

@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iotn13a.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATTINY13A_H_
@@ -392,4 +392,3 @@
 #define SLEEP_MODE_PWR_DOWN (0x02<<3)
 
 #endif /* _AVR_ATTINY13A_H_ */
-

@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iom64c1.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATmega64C1_H_
@@ -1319,4 +1319,3 @@
 #define SLEEP_MODE_STANDBY (0x06<<1)
 
 #endif /* _AVR_ATmega64C1_H_ */
-

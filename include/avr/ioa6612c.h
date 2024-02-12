@@ -792,4 +792,3 @@
 
 
 #endif /* #ifdef _AVR_ATA6612C_H_INCLUDED */
-

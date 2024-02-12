@@ -61,7 +61,7 @@ ENTRY_FLOAT logf log logl
 	tst	rA3
 	breq	.L_min		; -Inf
 	brts	.L_nan		; log(negative)
-	
+
 	push	rC3
 	push	rC2
 	push	rC1
@@ -119,7 +119,7 @@ ENTRY_FLOAT logf log logl
 	ldi	rB2, hlo8(LN_2)
 	ldi	rB3, hhi8(LN_2)
 	XCALL	_U(__mulsf3x)
-	
+
 	mov	rBE, rCE
 	X_movw	rB0, rC0
 	X_movw	rB2, rC2
@@ -129,11 +129,11 @@ ENTRY_FLOAT logf log logl
 	pop	rC1
 	pop	rC2
 	pop	rC3
-	
+
 	XCALL	_U(__addsf3x)
 	XJMP	_U(__fp_round)
 ENDFUNC
-	
+
 	PGM_SECTION
 
 .L_tlow:		; __fp_powser() table for small values
@@ -159,7 +159,7 @@ ENDFUNC
 	.byte   0x4c,0x80,0xef,0xff,0xbe        ; -0.4998741238
 	.byte   0x01,0xc4,0xff,0x7f,0x3f        ;  0.9999964239
 	.byte   0x00,0x00,0x00,0x00,0x00        ;  0.0000000000
-											
+
 	.end
 
 #endif /* !defined(__AVR_TINY__) */

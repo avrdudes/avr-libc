@@ -160,7 +160,7 @@ GLOBAL(islower)
 
 GLOBAL(isdigit)
           CPSE  rHigh,__zero_reg__
-1:        
+1:
           XJMP  _U(__ctype_isfalse)
           SUBI  rLow,'0'
           SUBI  rLow,10

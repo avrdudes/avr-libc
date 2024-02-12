@@ -99,7 +99,7 @@ ENTRY __fixunssfsi
 
   ; fabs(A) <= 0x0.ffffffp+23
   ; Shift A to right by 1 (rA3==-1) .. 23 (rA3==-23) positions.
-	
+
 3:	mov	rA0, rA1
 	mov	rA1, rA2
 	clr	rA2
@@ -108,7 +108,7 @@ ENTRY __fixunssfsi
 
 4:	cpi	rAE, -7
 	brlt	3b		; quick shift is possible
-	
+
 5:	lsr	rA2
 	ror	rA1
 	ror	rA0

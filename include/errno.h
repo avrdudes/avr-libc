@@ -40,7 +40,7 @@
 
     Some functions in the library set the global variable \c errno when an
     error occurs. The file, \c <errno.h>, provides symbolic names for various
-    error codes. 
+    error codes.
  */
 
 #ifdef __cplusplus

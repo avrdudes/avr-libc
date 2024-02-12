@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iotn44a.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATtiny44A_H_
@@ -842,4 +842,3 @@
 #define SLEEP_MODE_STANDBY (0x03<<3)
 
 #endif /* _AVR_ATtiny44A_H_ */
-

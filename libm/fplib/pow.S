@@ -46,56 +46,56 @@
 	+0	-Inf		+Inf	exp(log(x)*y)
 	+0	y > 0		+0	exp(log(x)*y)
 	+0	y < 0		+Inf	exp(log(x)*y)
-	
+
 	-0	NaN		NaN	exp(log(x)*y)
 	-0	+0,-0		+1
 	-0	1,3,5...	-0	-exp(log(x)*y)
 	-0	y > 0		+0	exp(log(x)*y)
 	-0	-1,-3,-5...	-Inf	-exp(log(x)*y)
 	-0	y < 0		+Inf	exp(log(x)*y)
-	
+
 	+1	NaN		+1
 	+1	+Inf,-Inf	+1
 	+1	else		+1	exp(log(x)*y)
-	
+
 	-1	+0,-0		+1
 	-1	1,3,5...	-1
 	-1	-1,-3,-5...	-1
 	-1	2,4,6...	+1
 	-1	-2,-4,-6...	+1
 	-1	else		NaN	exp(log(x)*y)
-	
+
 	+Inf	NaN		NaN	exp(log(x)*y)
 	+Inf	+0,-0		+1
 	+Inf	y > 0		+Inf	exp(log(x)*y)
 	+Inf	y < 0		+0	exp(log(x)*y)
-	
+
 	-Inf	NaN		NaN	exp(log(x)*y)
 	-Inf	+0,-0		+1
 	-Inf	1,3,5...	-Inf
 	-Inf	y > 0		+Inf
 	-Inf	-1,-3,-5...	-0
 	-Inf	y < 0		+0
-	
+
 	NaN	+0,-0		+1
 	NaN	else		NaN	exp(log(x)*y)
-	
+
 	(0,1)	NaN		NaN	exp(log(x)*y)
 	(0,1)	+0,-0		+1	exp(log(x)*y)
 	(0,1)	+Inf		+0	exp(log(x)*y)
 	(0,1)	-Inf		+Inf	exp(log(x)*y)
-	
+
 	(-1,0)	NaN		NaN
 	(-1,0)	+0,-0		+1
 	(-1,0)	+Inf		+0
 	(-1,0)	-Inf		+Inf
 	(-1,0)	nonintegral	NaN
-	
+
 	x > 1	NaN		NaN
 	x > 1	+0,-0		+1
 	x > 1   +Inf		+Inf
 	x > 1	-Inf		+0
-	
+
 	x < -1	NaN		NaN
 	x < -1	+0,-0		+1
 	x < -1	+Inf		+Inf

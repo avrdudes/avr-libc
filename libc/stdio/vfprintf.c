@@ -325,7 +325,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	flags = 0;
 	width = 0;
 	prec = 0;
-	
+
 	do {
 	    if (flags < FL_WIDTH) {
 		switch (c) {
@@ -375,7 +375,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		if (c == 'h')
 		    continue;
 	    }
-	    
+
 	    break;
 	} while ( (c = GETBYTE (stream->flags, __SPGM, fmt)) != 0);
 
@@ -434,7 +434,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	    }
 	    exp = __ftoa_engine (va_arg(ap,double), (char *)buf, vtype, ndigs);
 	    vtype = buf[0];
-    
+
 	    sign = 0;
 	    if ((vtype & FTOA_MINUS) && !(vtype & FTOA_NAN))
 		sign = '-';
@@ -493,7 +493,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 			   ? prec - exp : 0;	/* fractional part length  */
 		}
 	    }
-    
+
 	    /* Conversion result length, width := free space length	*/
 	    if (flags & FL_FLTFIX)
 		n = (exp>0 ? exp+1 : 1);
@@ -502,7 +502,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 	    if (sign) n += 1;
 	    if (prec) n += prec + 1;
 	    width = width > n ? width - n : 0;
-    
+
 	    /* Output before first digit	*/
 	    if (!(flags & (FL_LPAD | FL_ZFILL))) {
 		while (width) {
@@ -517,7 +517,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		    width--;
 		}
 	    }
-    
+
 	    if (flags & FL_FLTFIX) {		/* 'f' format		*/
 
 		n = exp > 0 ? exp : 0;		/* exponent of left digit */
@@ -537,7 +537,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		    flags = '1';
 		}
 		putc (flags, stream);
-	
+
 	    } else {				/* 'e(E)' format	*/
 
 		/* mantissa	*/
@@ -709,7 +709,7 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		    len++;
 		}
 	    }
-	
+
 	    width =  (len < width) ? width - len : 0;
 
 	    if (flags & FL_ALT) {
@@ -722,17 +722,17 @@ int vfprintf (FILE * stream, const char *fmt, va_list ap)
 		if (flags & FL_NEGATIVE) z = '-';
 		putc (z, stream);
 	    }
-		
+
 	    while (prec > c) {
 		putc ('0', stream);
 		prec--;
 	    }
-	
+
 	    do {
 		putc (buf[--c], stream);
 	    } while (c);
 	}
-	
+
       tail:
 	/* Tail is possible.	*/
 	while (width) {

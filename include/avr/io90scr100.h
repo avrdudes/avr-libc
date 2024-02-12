@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "io90scr100.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_AT90SCR100_H_
@@ -1718,4 +1718,3 @@
 #define SLEEP_MODE_EXT_STANDBY  (_BV(SM0) | _BV(SM1) | _BV(SM2))
 
 #endif /* _AVR_AT90SCR100_H_ */
-

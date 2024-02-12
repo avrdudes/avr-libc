@@ -29,7 +29,7 @@
 # $Id$
 #
 
-libm_a_c_sources = 
+libm_a_c_sources =
 
 libm_a_asm_sources = \
 	acos.S \

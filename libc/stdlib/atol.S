@@ -38,7 +38,7 @@
 
    TODO: this implementation uses an inline isspace(). If Avr-libc will
    use locales other than C/POSIX it is needed to call an external isspace().
-   
+
    ATTENTION: an external __mulsi_const_10() function is used: nonstandart
    call conventions: some registers and bit T must be nochanged.
  */

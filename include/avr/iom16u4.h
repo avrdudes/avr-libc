@@ -1422,4 +1422,3 @@
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
 
 #endif /* _AVR_ATmega16U4_H_ */
-

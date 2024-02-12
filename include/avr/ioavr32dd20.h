@@ -6417,4 +6417,3 @@ IO Module Instances. Mapped to memory.
 #define SIGNATURE_2 0x3A
 
 #endif /* #ifdef _AVR_AVR32DD20_H_INCLUDED */
-

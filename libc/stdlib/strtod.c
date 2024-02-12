@@ -123,7 +123,7 @@ strtof (const char * nptr, char ** endptr)
     } else if (c == '+') {
 	c = *nptr++;
     }
-    
+
     if (!strncasecmp_P (nptr - 1, pstr_inf, 3)) {
 	nptr += 2;
 	if (!strncasecmp_P (nptr, pstr_inity, 5))
@@ -132,7 +132,7 @@ strtof (const char * nptr, char ** endptr)
 	    *endptr = (char *)nptr;
 	return flag & FL_MINUS ? -INFINITYf : +INFINITYf;
     }
-    
+
     /* NAN() construction is not realised.
        Length would be 3 characters only.	*/
     if (!strncasecmp_P (nptr - 1, pstr_nan, 3)) {
@@ -144,9 +144,9 @@ strtof (const char * nptr, char ** endptr)
     x.u32 = 0;
     exp = 0;
     while (1) {
-    
+
 	c -= '0';
-    
+
 	if (c <= 9) {
 	    flag |= FL_ANY;
 	    if (flag & FL_OVFL) {
@@ -168,7 +168,7 @@ strtof (const char * nptr, char ** endptr)
 	}
 	c = *nptr++;
     }
-    
+
     if (c == (('e'-'0') & 0xff) || c == (('E'-'0') & 0xff))
     {
 	int i;
@@ -197,14 +197,14 @@ strtof (const char * nptr, char ** endptr)
 	    exp += i;
 	}
     }
-    
+
     if ((flag & FL_ANY) && endptr)
 	*endptr = (char *)nptr - 1;
-    
+
     x.flt = __floatunsisf (x.u32);		/* manually	*/
     if ((flag & FL_MINUS) && (flag & FL_ANY))
 	x.flt = -x.flt;
-	
+
     if (x.flt != 0) {
 	int pwr;
 	if (exp < 0) {

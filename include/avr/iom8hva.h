@@ -1,4 +1,4 @@
-/* Copyright (c) 2007, Anatoly Sokolov 
+/* Copyright (c) 2007, Anatoly Sokolov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -74,4 +74,3 @@
 #define SLEEP_MODE_PWR_OFF (0x04<<1)
 
 #endif /* _AVR_IOM8HVA_H_ */
-

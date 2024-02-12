@@ -78,11 +78,11 @@ ENTRY	eeprom_write_r18
 
   ; It has to be noted that for some Xmega parts (Eg. Xmega E family) EEPROM
   ; is always memory mapped. So it is not possible to disable EEPROM mapping
-  ; explicitly. 
+  ; explicitly.
   ; The presence of NVM_EEMAPEN_bm macro (from the part header file) can be
   ; checked to find out whether the device supports enabling/disabling of
   ; EEPROM mapping. Absence of NVM_EEMAPEN_bm could be interpreted safely as
-  ; EEPROM always memory mapped and explicit memory mapping of EEPROM is not 
+  ; EEPROM always memory mapped and explicit memory mapping of EEPROM is not
   ; required/invalid.
 #if     defined (NVM_EEMAPEN_bm)
   ; Disable EEPROM mapping into data space.

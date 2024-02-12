@@ -35,7 +35,7 @@
      that the signs of both arguments are used to determine the quadrant
      of the result. The atan2f() function returns the result in radians,
      which is between -PI and PI (inclusive).
-     
+
    Note:
      This implementation returns +0.0 in all four cases: +0/+0, +0/-0,
      -0/+0 and -0/-0.  Unlike x86 (GCC/Glibc).

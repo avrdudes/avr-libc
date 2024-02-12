@@ -90,7 +90,7 @@ ENTRY_FLOAT sinhf sinh sinhl
 	ori	rA3, 0x80
 	ret
 ENDFUNC
-	
+
 	PGM_SECTION
 .L_table:
 	.byte	2

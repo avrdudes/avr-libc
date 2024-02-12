@@ -97,7 +97,7 @@ _U(setjmp):
   ; save stack pointer (after poping)
 	in	ret_lo, AVR_STACK_POINTER_LO_ADDR
 	st	X+, ret_lo
-#ifdef _HAVE_AVR_STACK_POINTER_HI    
+#ifdef _HAVE_AVR_STACK_POINTER_HI
 	in	ret_lo, AVR_STACK_POINTER_HI_ADDR
 	st	X+, ret_lo
 #else

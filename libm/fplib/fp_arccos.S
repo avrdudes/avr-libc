@@ -78,7 +78,7 @@ ENTRY __fp_arccos
 
 	movw	rB0, rC0
 	movw	rB2, rC2
-	
+
   ; restore and multiply
 	pop	rC0
 	pop	rC1
@@ -108,7 +108,7 @@ ENTRY __fp_arccos
 	push	rA2
 	push	rA1
 	push	rA0
-  ; sqrt(1-A)	
+  ; sqrt(1-A)
 	ldi	rA0,  lo8(FL_1)
 	ldi	rA1,  hi8(FL_1)
 	ldi	rA2, hlo8(FL_1)
@@ -124,7 +124,7 @@ ENTRY __fp_arccos
 
 #endif
 ENDFUNC
-	
+
 	PGM_SECTION
 .L_table:
 	.byte	7

@@ -1,4 +1,3 @@
-
 /* Copyright (c) 2004, Theodore A. Roth
    All rights reserved.
 
@@ -31,6 +30,11 @@
 
 /* $Id$ */
 
+#ifndef _AVR_IOM48A_H_
+#define _AVR_IOM48A_H_ 1
+
 #include "iom48.h"
 
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
+
+#endif /* _AVR_IOM48A_H_ */

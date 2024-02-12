@@ -82,7 +82,7 @@
     them).
 
     - All write functions force erase_and_write programming mode.
-    
+
     - For Xmega the EEPROM start address is 0, like other architectures.
     The reading functions add the 0x2000 value to use EEPROM mapping into
     data space.
@@ -129,7 +129,7 @@ extern "C" {
     \ingroup avr_eeprom
     Loops until the eeprom is no longer busy.
     \returns Nothing.
- */ 	 
+ */
 #define eeprom_busy_wait() do {} while (!eeprom_is_ready())
 
 

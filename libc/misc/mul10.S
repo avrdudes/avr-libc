@@ -43,7 +43,7 @@
 #define r_tmp_lo r22
 #define r_tmp_hi r23
 
-/* 
+/*
    r_hi:r_lo *= 10
 
    Optimized version, without calling __mulhi3 (which is slow for
@@ -64,7 +64,7 @@ _U(__mulhi_const_10):
 	add r_hi,r1
 	clr r1	; __zero_reg__
 #else
-	X_movw	r_tmp_lo, r_lo 
+	X_movw	r_tmp_lo, r_lo
 	add r_lo,r_lo
 	adc r_hi,r_hi
 	add r_lo,r_lo

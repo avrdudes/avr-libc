@@ -45,7 +45,7 @@
 #  define _AVR_IOXXX_H_ "iom103.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 /* I/O registers */
 
@@ -202,7 +202,7 @@
 /* Timer/Counter Interrupt MaSK register */
 #define TIMSK	_SFR_IO8(0x37)
 
-/* Èxternal Interrupt Flag Register */
+/* Ãˆxternal Interrupt Flag Register */
 #define EIFR	_SFR_IO8(0x38)
 
 /* External Interrupt MaSK register */
@@ -377,7 +377,7 @@
 #define    INT1         1
 #define    INT0         0
 
-/* Èxternal Interrupt Flag Register */
+/* Ãˆxternal Interrupt Flag Register */
 #define    INTF7        7
 #define    INTF6        6
 #define    INTF5        5

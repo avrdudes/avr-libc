@@ -615,4 +615,3 @@
 #define SLEEP_MODE_EXT_STANDBY (0x07<<4)
 
 #endif /* #ifdef _AVR_ATMEGA32A_H_INCLUDED */
-

@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "iom64hve.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_ATmega64HVE_H_
@@ -965,7 +965,7 @@
 #define PI_DDR   DDRI
 #define PI_PORT  PORTI
 #define PI_PIN   PINI
-#define PI_BIT   
+#define PI_BIT
 
 #define NI_DDR   DDRNI
 #define NI_PORT  PORTNI
@@ -1031,4 +1031,3 @@
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
 
 #endif /* _AVR_ATmega64HVE_H_ */
-

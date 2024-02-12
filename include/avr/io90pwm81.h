@@ -42,7 +42,7 @@
 #  define _AVR_IOXXX_H_ "io90pwm81.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 
 #ifndef _AVR_AT90PWM81_H_
@@ -1035,4 +1035,3 @@
 #define SLEEP_MODE_STANDBY (0x06<<1)
 
 #endif /* _AVR_AT90PWM81_H_ */
-

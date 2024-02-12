@@ -48,7 +48,7 @@ extern "C" {
 /** \defgroup ctype <ctype.h>: Character Operations
     These functions perform various operations on characters.
 
-    \code #include <ctype.h>\endcode 
+    \code #include <ctype.h>\endcode
 
 */
 
@@ -149,7 +149,7 @@ extern int isxdigit(int __c);
 
 /* @} */
 
-/** \name Character convertion routines 
+/** \name Character convertion routines
 
     This realization permits all possible values of integer argument.
     The toascii() function clears all highest bits. The tolower() and
