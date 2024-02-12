@@ -1,11 +1,13 @@
-aclocal.m4
-devices.m4
-devlist.m4
-files.m4
-multilib.m4
-tmp-core-info
-tmp-device-info
-avr/
+/aclocal.m4
+/devices.m4
+/devlist.m4
+/files.m4
+/multilib.m4
+/tmp-core-info
+/tmp-device-info
+/configure
+/avr/
+
 Makefile
 Makefile.in
 config.h.in
@@ -17,10 +19,7 @@ config.guess
 config.sub
 install-sh
 missing
-configure
 compile
 depcomp
 
 devtools/gen-avr-lib-tree.sh
-! devtools/aclocal.m4
-! devtools/configure
