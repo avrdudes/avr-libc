@@ -16,7 +16,7 @@
 #define FUNC_SEGNAME ".init3"
 #include "asmdef.h"
 
-/* Referenced by the complier as needed.  This function must not be called
+/* Referenced by the compiler as needed.  This function must not be called
    because it is naked.  */
 ENTRY   _U(__do_flmap_init)
 
