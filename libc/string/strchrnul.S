@@ -32,6 +32,8 @@
 
 #include "asmdef.h"
 
+TINY_WEAK_ALIAS _U(strchrnul_P) _U(strchrnul)
+
 #define src_lo	r24
 #define val	r22
 

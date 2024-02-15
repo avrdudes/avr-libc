@@ -101,6 +101,11 @@
 #ifndef __ATTR_PURE__
 #define __ATTR_PURE__ __attribute__((__pure__))
 #endif
+
+#ifndef __ATTR_ALWAYS_INLINE__
+#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#endif
+
 #endif	/* !__DOXYGEN__ */
 
 /**
@@ -549,7 +554,18 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
     __result;                               \
 }))
 
-#if defined (__AVR_HAVE_LPMX__)
+
+#if defined (__AVR_TINY__)
+/* Attribute __progmem__ on Reduced Tiny works different than for
+   all the other devices:  When taking the address of a symbol that's
+   attributed as progmem, then the compiler adds an offset of 0x4000
+   to the value of the symbol.  This means that accessing data in
+   progmem can be performed by vanilla C/C++ code.  */
+#define __LPM(addr)         (* (const uint8_t*)(addr))
+#define __LPM_word(addr)    (* (const uint16_t*)(addr))
+#define __LPM_dword(addr)   (* (const uint32_t*)(addr))
+#define __LPM_float(addr)   (* (const float*)(addr))
+#elif defined (__AVR_HAVE_LPMX__)
 #define __LPM(addr)         __LPM_enhanced__(addr)
 #define __LPM_word(addr)    __LPM_word_enhanced__(addr)
 #define __LPM_dword(addr)   __LPM_dword_enhanced__(addr)
@@ -1701,14 +1717,22 @@ extern int memcmp_PF(const void *, uint_farptr_t, size_t) __ATTR_PURE__;
     of the string as normal.
 */
 static inline size_t strlen_P(const char * s);
+#else /* !DOXYGEN */
+
+#ifdef __AVR_TINY__
+#define __strlen_P strlen
+extern size_t strlen (const char*);
 #else
 extern size_t __strlen_P(const char *) __ATTR_CONST__;  /* internal helper function */
-__attribute__((__always_inline__)) static __inline__ size_t strlen_P(const char * s);
-static __inline__ size_t strlen_P(const char *s) {
+#endif
+
+static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char * s);
+size_t strlen_P(const char *s)
+{
   return __builtin_constant_p(__builtin_strlen(s))
      ? __builtin_strlen(s) : __strlen_P(s);
 }
-#endif
+#endif /* DOXYGEN */
 
 #ifdef __cplusplus
 }

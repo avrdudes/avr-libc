@@ -32,6 +32,8 @@
 
 #include "macros.inc"
 
+TINY_WEAK_ALIAS _U(memcmp_P) _U(memcmp)
+
 #define s1_hi r25
 #define s1_lo r24
 #define s2_hi r23

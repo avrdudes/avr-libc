@@ -32,6 +32,8 @@
 
 #include "asmdef.h"
 
+TINY_WEAK_ALIAS _U(memccpy_P) _U(memccpy)
+
 #define dest_hi r25
 #define dest_lo r24
 #define src_hi r23

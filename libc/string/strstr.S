@@ -41,6 +41,8 @@
 
 #include "macros.inc"
 
+TINY_WEAK_ALIAS _U(strstr_P) _U(strstr)
+
 #define s1_hi r25
 #define s1_lo r24
 #define s2_hi r23

@@ -32,6 +32,8 @@
 
 #include "macros.inc"
 
+TINY_WEAK_ALIAS _U(memcpy_P) _U(memcpy)
+
 #define dest_hi r25
 #define dest_lo r24
 #define src_hi r23

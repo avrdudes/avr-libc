@@ -32,6 +32,8 @@
 
 #include "macros.inc"
 
+TINY_WEAK_ALIAS _U(strnlen_P) _U(strnlen)
+
 #define src_hi r25
 #define src_lo r24
 #define len_hi r23

@@ -294,4 +294,15 @@ _U(\name):
   .endif
 .endm
 
+#ifndef HAVE_TINY_WEAK_ALIAS
+#define HAVE_TINY_WEAK_ALIAS
+.macro TINY_WEAK_ALIAS new old
+#ifdef __AVR_TINY__
+    .weak \new
+    .type \new, @function
+    \new = \old
+#endif /* __AVR_TINY__ */
+.endm
+#endif /* !HAVE_TINY_WEAK_ALIAS */
+
 #endif	/* !_ASMDEF_H */

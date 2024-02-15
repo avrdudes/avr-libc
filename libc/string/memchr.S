@@ -32,6 +32,8 @@
 
 #include "macros.inc"
 
+TINY_WEAK_ALIAS _U(memchr_P) _U(memchr)
+
 #define src_hi r25
 #define src_lo r24
 ; #define val_hi r23
