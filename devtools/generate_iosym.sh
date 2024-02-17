@@ -1,6 +1,8 @@
 #! /bin/sh
 
-devs="at43usb320 at43usb355 at76c711 at86rf401 at90c8534 at90can128 \
+# Allow to only generate for selected devices by providing DEVS.
+# Only when DEVS is not defined use the devices below.
+devs=${DEVS-"at43usb320 at43usb355 at76c711 at86rf401 at90c8534 at90can128 \
 at90can32 at90can64 at90pwm1 at90pwm2 at90pwm216 at90pwm2b at90pwm3 \
 at90pwm316 at90pwm3b at90pwm81 at90s1200 at90s2313 at90s2323 at90s2333 \
 at90s2343 at90s4414 at90s4433 at90s4434 at90s8515 at90s8535 at90scr100 \
@@ -51,7 +53,8 @@ avr32dd14 avr32dd20 avr32dd28 avr32dd32 avr64da28 avr64da32 avr64da48 \
 avr64da64 avr64db28 avr64db32 avr64db48 avr64db64 avr64dd14 avr64dd20 \
 avr64dd28 avr64dd32 avr128da28 avr128da32 avr128da48 avr128da64 avr128db28 \
 avr128db32 avr128db48 avr128db64 avr16ea28 avr16ea32 avr16ea48 avr16eb14 \
-avr16eb20 avr16eb28 avr16eb32 avr32ea28 avr32ea32 avr32ea48 avr64ea28 avr64ea32 avr64ea48"
+avr16eb20 avr16eb28 avr16eb32 avr32ea28 avr32ea32 avr32ea48 avr64ea28 avr64ea32 avr64ea48 \
+"}
 
 if [ x"$ATDFDIR" = x ]
 then
