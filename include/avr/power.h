@@ -1848,6 +1848,8 @@ clock_div_t clock_prescale_get(void)
 || defined(__AVR_ATtiny5__) \
 || defined(__AVR_ATtiny9__) \
 || defined(__AVR_ATtiny10__) \
+|| defined(__AVR_ATtiny102__) \
+|| defined(__AVR_ATtiny104__) \
 || defined(__AVR_ATtiny20__) \
 || defined(__AVR_ATtiny40__) \
 

@@ -372,6 +372,10 @@
 #  include <avr/iotn9.h>
 #elif defined (__AVR_ATtiny10__)
 #  include <avr/iotn10.h>
+#elif defined (__AVR_ATtiny102__)
+#  include <avr/iotn102.h>
+#elif defined (__AVR_ATtiny104__)
+#  include <avr/iotn104.h>
 #elif defined (__AVR_ATtiny20__)
 #  include <avr/iotn20.h>
 #elif defined (__AVR_ATtiny40__)

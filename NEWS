@@ -27,6 +27,8 @@
   - Added support for AVR-Ex devices:
     AVR16EA28 AVR16EA32 AVR16EA48 AVR16EB14 AVR16EB20 AVR16EB28 AVR16EB32
     AVR32EA28 AVR32EA32 AVR32EA48 AVR64EA28 AVR64EA32 AVR64EA48
+  - Added support for Reduced Tiny devices:
+    ATiny102 ATtiny104
 
 * Issues closed:
 

@@ -23,8 +23,8 @@ atmega644p atmega644pa atmega644rfr2 atmega645 atmega6450 atmega6450a \
 atmega6450p atmega645a atmega645p atmega649 atmega6490 atmega6490a \
 atmega6490p atmega649a atmega649p atmega64c1 atmega64hve atmega64m1 \
 atmega64rfr2 atmega8 atmega8515 atmega8535 atmega88 atmega88a \
-atmega88p atmega88pa atmega8hva atmega8u2 attiny10 attiny11 attiny12 \
-attiny13 attiny13a attiny15 attiny167 attiny20 attiny22 attiny2313 \
+atmega88p atmega88pa atmega8hva atmega8u2 attiny10 attiny102 attiny104 attiny11 \
+attiny12 attiny13 attiny13a attiny15 attiny167 attiny20 attiny22 attiny2313 \
 attiny2313a attiny24 attiny24a attiny25 attiny26 attiny261 attiny261a \
 attiny28 attiny4 attiny40 attiny4313 attiny43u attiny44 attiny44a attiny441 \
 attiny45 attiny461 attiny461a attiny48 attiny5 attiny84 attiny84a attiny841 \
