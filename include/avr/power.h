@@ -1343,6 +1343,7 @@ __power_all_disable()
 || defined(__AVR_ATmega256RFR2__) \
 || defined(__AVR_ATmega324A__) \
 || defined(__AVR_ATmega324P__) \
+|| defined(__AVR_ATmega324PA__) \
 || defined(__AVR_ATmega325__) \
 || defined(__AVR_ATmega325A__) \
 || defined(__AVR_ATmega325PA__) \
