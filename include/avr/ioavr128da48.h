@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -1422,10 +1422,10 @@ typedef enum EVSYS_CHANNEL9_enum
     EVSYS_CHANNEL9_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
     EVSYS_CHANNEL9_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
     EVSYS_CHANNEL9_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL9_RTC_PIT_DIV8192_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL9_RTC_PIT_DIV4096_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL9_RTC_PIT_DIV2048_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL9_RTC_PIT_DIV1024_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV512_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV256_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV128_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV64_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
     EVSYS_CHANNEL9_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
     EVSYS_CHANNEL9_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
     EVSYS_CHANNEL9_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
@@ -1486,8 +1486,8 @@ typedef enum EVSYS_SWEVENTA_enum
 /* Software event on channel select */
 typedef enum EVSYS_SWEVENTB_enum
 {
-    EVSYS_SWEVENTB_CH8_gc = (0x00<<0),  /* Software event on channel 8 */
-    EVSYS_SWEVENTB_CH9_gc = (0x01<<0)  /* Software event on channel 9 */
+    EVSYS_SWEVENTB_CH8_gc = (0x01<<0),  /* Software event on channel 8 */
+    EVSYS_SWEVENTB_CH9_gc = (0x02<<0)  /* Software event on channel 9 */
 } EVSYS_SWEVENTB_t;
 
 /* User channel select */
@@ -2236,10 +2236,10 @@ typedef enum SPI_MODE_enum
 /* Prescaler select */
 typedef enum SPI_PRESC_enum
 {
-    SPI_PRESC_DIV4_gc = (0x00<<1),  /* System Clock / 4 */
-    SPI_PRESC_DIV16_gc = (0x01<<1),  /* System Clock / 16 */
-    SPI_PRESC_DIV64_gc = (0x02<<1),  /* System Clock / 64 */
-    SPI_PRESC_DIV128_gc = (0x03<<1)  /* System Clock / 128 */
+    SPI_PRESC_DIV4_gc = (0x00<<1),  /* CLK_PER / 4 */
+    SPI_PRESC_DIV16_gc = (0x01<<1),  /* CLK_PER / 16 */
+    SPI_PRESC_DIV64_gc = (0x02<<1),  /* CLK_PER / 64 */
+    SPI_PRESC_DIV128_gc = (0x03<<1)  /* CLK_PER / 128 */
 } SPI_PRESC_t;
 
 /*
@@ -2338,14 +2338,14 @@ typedef union TCA_union
 /* Clock Selection */
 typedef enum TCA_SINGLE_CLKSEL_enum
 {
-    TCA_SINGLE_CLKSEL_DIV1_gc = (0x00<<1),  /* System Clock */
-    TCA_SINGLE_CLKSEL_DIV2_gc = (0x01<<1),  /* System Clock / 2 */
-    TCA_SINGLE_CLKSEL_DIV4_gc = (0x02<<1),  /* System Clock / 4 */
-    TCA_SINGLE_CLKSEL_DIV8_gc = (0x03<<1),  /* System Clock / 8 */
-    TCA_SINGLE_CLKSEL_DIV16_gc = (0x04<<1),  /* System Clock / 16 */
-    TCA_SINGLE_CLKSEL_DIV64_gc = (0x05<<1),  /* System Clock / 64 */
-    TCA_SINGLE_CLKSEL_DIV256_gc = (0x06<<1),  /* System Clock / 256 */
-    TCA_SINGLE_CLKSEL_DIV1024_gc = (0x07<<1)  /* System Clock / 1024 */
+    TCA_SINGLE_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
+    TCA_SINGLE_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER / 2 */
+    TCA_SINGLE_CLKSEL_DIV4_gc = (0x02<<1),  /* CLK_PER / 4 */
+    TCA_SINGLE_CLKSEL_DIV8_gc = (0x03<<1),  /* CLK_PER / 8 */
+    TCA_SINGLE_CLKSEL_DIV16_gc = (0x04<<1),  /* CLK_PER / 16 */
+    TCA_SINGLE_CLKSEL_DIV64_gc = (0x05<<1),  /* CLK_PER / 64 */
+    TCA_SINGLE_CLKSEL_DIV256_gc = (0x06<<1),  /* CLK_PER / 256 */
+    TCA_SINGLE_CLKSEL_DIV1024_gc = (0x07<<1)  /* CLK_PER / 1024 */
 } TCA_SINGLE_CLKSEL_t;
 
 /* Command select */
@@ -2397,14 +2397,14 @@ typedef enum TCA_SINGLE_WGMODE_enum
 /* Clock Selection */
 typedef enum TCA_SPLIT_CLKSEL_enum
 {
-    TCA_SPLIT_CLKSEL_DIV1_gc = (0x00<<1),  /* System Clock */
-    TCA_SPLIT_CLKSEL_DIV2_gc = (0x01<<1),  /* System Clock / 2 */
-    TCA_SPLIT_CLKSEL_DIV4_gc = (0x02<<1),  /* System Clock / 4 */
-    TCA_SPLIT_CLKSEL_DIV8_gc = (0x03<<1),  /* System Clock / 8 */
-    TCA_SPLIT_CLKSEL_DIV16_gc = (0x04<<1),  /* System Clock / 16 */
-    TCA_SPLIT_CLKSEL_DIV64_gc = (0x05<<1),  /* System Clock / 64 */
-    TCA_SPLIT_CLKSEL_DIV256_gc = (0x06<<1),  /* System Clock / 256 */
-    TCA_SPLIT_CLKSEL_DIV1024_gc = (0x07<<1)  /* System Clock / 1024 */
+    TCA_SPLIT_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
+    TCA_SPLIT_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER / 2 */
+    TCA_SPLIT_CLKSEL_DIV4_gc = (0x02<<1),  /* CLK_PER / 4 */
+    TCA_SPLIT_CLKSEL_DIV8_gc = (0x03<<1),  /* CLK_PER / 8 */
+    TCA_SPLIT_CLKSEL_DIV16_gc = (0x04<<1),  /* CLK_PER / 16 */
+    TCA_SPLIT_CLKSEL_DIV64_gc = (0x05<<1),  /* CLK_PER / 64 */
+    TCA_SPLIT_CLKSEL_DIV256_gc = (0x06<<1),  /* CLK_PER / 256 */
+    TCA_SPLIT_CLKSEL_DIV1024_gc = (0x07<<1)  /* CLK_PER / 1024 */
 } TCA_SPLIT_CLKSEL_t;
 
 /* Command select */

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -1774,10 +1774,10 @@ typedef enum SPI_MODE_enum
 /* Prescaler select */
 typedef enum SPI_PRESC_enum
 {
-    SPI_PRESC_DIV4_gc = (0x00<<1),  /* System Clock / 4 */
-    SPI_PRESC_DIV16_gc = (0x01<<1),  /* System Clock / 16 */
-    SPI_PRESC_DIV64_gc = (0x02<<1),  /* System Clock / 64 */
-    SPI_PRESC_DIV128_gc = (0x03<<1)  /* System Clock / 128 */
+    SPI_PRESC_DIV4_gc = (0x00<<1),  /* CLK_PER / 4 */
+    SPI_PRESC_DIV16_gc = (0x01<<1),  /* CLK_PER / 16 */
+    SPI_PRESC_DIV64_gc = (0x02<<1),  /* CLK_PER / 64 */
+    SPI_PRESC_DIV128_gc = (0x03<<1)  /* CLK_PER / 128 */
 } SPI_PRESC_t;
 
 /*
@@ -1876,14 +1876,14 @@ typedef union TCA_union
 /* Clock Selection */
 typedef enum TCA_SINGLE_CLKSEL_enum
 {
-    TCA_SINGLE_CLKSEL_DIV1_gc = (0x00<<1),  /* System Clock */
-    TCA_SINGLE_CLKSEL_DIV2_gc = (0x01<<1),  /* System Clock / 2 */
-    TCA_SINGLE_CLKSEL_DIV4_gc = (0x02<<1),  /* System Clock / 4 */
-    TCA_SINGLE_CLKSEL_DIV8_gc = (0x03<<1),  /* System Clock / 8 */
-    TCA_SINGLE_CLKSEL_DIV16_gc = (0x04<<1),  /* System Clock / 16 */
-    TCA_SINGLE_CLKSEL_DIV64_gc = (0x05<<1),  /* System Clock / 64 */
-    TCA_SINGLE_CLKSEL_DIV256_gc = (0x06<<1),  /* System Clock / 256 */
-    TCA_SINGLE_CLKSEL_DIV1024_gc = (0x07<<1)  /* System Clock / 1024 */
+    TCA_SINGLE_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
+    TCA_SINGLE_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER / 2 */
+    TCA_SINGLE_CLKSEL_DIV4_gc = (0x02<<1),  /* CLK_PER / 4 */
+    TCA_SINGLE_CLKSEL_DIV8_gc = (0x03<<1),  /* CLK_PER / 8 */
+    TCA_SINGLE_CLKSEL_DIV16_gc = (0x04<<1),  /* CLK_PER / 16 */
+    TCA_SINGLE_CLKSEL_DIV64_gc = (0x05<<1),  /* CLK_PER / 64 */
+    TCA_SINGLE_CLKSEL_DIV256_gc = (0x06<<1),  /* CLK_PER / 256 */
+    TCA_SINGLE_CLKSEL_DIV1024_gc = (0x07<<1)  /* CLK_PER / 1024 */
 } TCA_SINGLE_CLKSEL_t;
 
 /* Command select */
@@ -1935,14 +1935,14 @@ typedef enum TCA_SINGLE_WGMODE_enum
 /* Clock Selection */
 typedef enum TCA_SPLIT_CLKSEL_enum
 {
-    TCA_SPLIT_CLKSEL_DIV1_gc = (0x00<<1),  /* System Clock */
-    TCA_SPLIT_CLKSEL_DIV2_gc = (0x01<<1),  /* System Clock / 2 */
-    TCA_SPLIT_CLKSEL_DIV4_gc = (0x02<<1),  /* System Clock / 4 */
-    TCA_SPLIT_CLKSEL_DIV8_gc = (0x03<<1),  /* System Clock / 8 */
-    TCA_SPLIT_CLKSEL_DIV16_gc = (0x04<<1),  /* System Clock / 16 */
-    TCA_SPLIT_CLKSEL_DIV64_gc = (0x05<<1),  /* System Clock / 64 */
-    TCA_SPLIT_CLKSEL_DIV256_gc = (0x06<<1),  /* System Clock / 256 */
-    TCA_SPLIT_CLKSEL_DIV1024_gc = (0x07<<1)  /* System Clock / 1024 */
+    TCA_SPLIT_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
+    TCA_SPLIT_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER / 2 */
+    TCA_SPLIT_CLKSEL_DIV4_gc = (0x02<<1),  /* CLK_PER / 4 */
+    TCA_SPLIT_CLKSEL_DIV8_gc = (0x03<<1),  /* CLK_PER / 8 */
+    TCA_SPLIT_CLKSEL_DIV16_gc = (0x04<<1),  /* CLK_PER / 16 */
+    TCA_SPLIT_CLKSEL_DIV64_gc = (0x05<<1),  /* CLK_PER / 64 */
+    TCA_SPLIT_CLKSEL_DIV256_gc = (0x06<<1),  /* CLK_PER / 256 */
+    TCA_SPLIT_CLKSEL_DIV1024_gc = (0x07<<1)  /* CLK_PER / 1024 */
 } TCA_SPLIT_CLKSEL_t;
 
 /* Command select */
