@@ -204,6 +204,8 @@
 #define __BOOT_LOCK_BITS_SET      (_BV(__SPM_ENABLE) | _BV(BLBSET))
 #elif defined(RFLB)  /* Some devices have RFLB defined instead of BLBSET. */
 #define __BOOT_LOCK_BITS_SET      (_BV(__SPM_ENABLE) | _BV(RFLB))
+#elif defined(RWFLB)  /* Some devices have RWFLB defined instead of BLBSET. */
+#define __BOOT_LOCK_BITS_SET      (_BV(__SPM_ENABLE) | _BV(RWFLB))
 #endif
 
 #define __boot_page_fill_normal(address, data)   \
