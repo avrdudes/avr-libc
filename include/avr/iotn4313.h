@@ -325,6 +325,7 @@
 #define EEAR6 6
 
 #define PCMSK _SFR_IO8(0x020)
+#define PCMSK0 _SFR_IO8(0x020)
 #define PCINT0 0
 #define PCINT1 1
 #define PCINT2 2
