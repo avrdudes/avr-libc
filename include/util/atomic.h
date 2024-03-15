@@ -86,14 +86,14 @@ static __inline__ void __iRestore(const  uint8_t *__s)
     set to either \c c99 or \c gnu99.
 
     The macros in this header file deal with code blocks that are
-    guaranteed to be excuted Atomically or Non-Atmomically.  The term
-    "Atomic" in this context refers to the unability of the respective
+    guaranteed to be executed Atomically or Non-Atomically.  The term
+    "Atomic" in this context refers to the inability of the respective
     code to be interrupted.
 
     These macros operate via automatic manipulation of the Global
     Interrupt Status (I) bit of the SREG register. Exit paths from
     both block types are all managed automatically without the need
-    for special considerations, i. e. the interrupt status will be
+    for special considerations, i.e. the interrupt status will be
     restored to the same value it had when entering the respective
     block (unless ATOMIC_FORCEON or NONATOMIC_FORCEOFF are used).
 
@@ -251,7 +251,7 @@ main(void)
     This is a possible parameter for ATOMIC_BLOCK. When used, it will
     cause the ATOMIC_BLOCK to force the state of the SREG register on
     exit, enabling the Global Interrupt Status flag bit. This saves a
-    small amout of flash space, a register, and one or more processor
+    small amount of flash space, a register, and one or more processor
     cycles, since the previous value of the SREG register does not need
     to be saved at the start of the block.
 
