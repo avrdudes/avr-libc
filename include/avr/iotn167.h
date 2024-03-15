@@ -584,24 +584,24 @@
 #define OCR1B _SFR_MEM16(0x8A)
 
 #define OCR1BL _SFR_MEM8(0x8A)
-#define OCR1AL0 0
-#define OCR1AL1 1
-#define OCR1AL2 2
-#define OCR1AL3 3
-#define OCR1AL4 4
-#define OCR1AL5 5
-#define OCR1AL6 6
-#define OCR1AL7 7
+#define OCR1BL0 0
+#define OCR1BL1 1
+#define OCR1BL2 2
+#define OCR1BL3 3
+#define OCR1BL4 4
+#define OCR1BL5 5
+#define OCR1BL6 6
+#define OCR1BL7 7
 
 #define OCR1BH _SFR_MEM8(0x8B)
-#define OCR1AH0 0
-#define OCR1AH1 1
-#define OCR1AH2 2
-#define OCR1AH3 3
-#define OCR1AH4 4
-#define OCR1AH5 5
-#define OCR1AH6 6
-#define OCR1AH7 7
+#define OCR1BH0 0
+#define OCR1BH1 1
+#define OCR1BH2 2
+#define OCR1BH3 3
+#define OCR1BH4 4
+#define OCR1BH5 5
+#define OCR1BH6 6
+#define OCR1BH7 7
 
 #define ASSR _SFR_MEM8(0xB6)
 #define TCR0BUB 0
