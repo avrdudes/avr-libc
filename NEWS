@@ -30,7 +30,7 @@
   - Added support for Reduced Tiny devices:
     ATiny102 ATtiny104
   - Added support for Classic devices:
-    ATmega168PB ATmega328PB
+    ATmega168PB ATmega328PB ATmega324PB
 
 * Issues closed:
 

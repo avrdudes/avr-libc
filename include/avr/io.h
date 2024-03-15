@@ -236,6 +236,8 @@
 #  include <avr/iom324.h>
 #elif defined (__AVR_ATmega324PA__)
 #  include <avr/iom324pa.h>
+#elif defined (__AVR_ATmega324PB__)
+#  include <avr/iom324pb.h>
 #elif defined (__AVR_ATmega325__) || defined (__AVR_ATmega325A__)
 #  include <avr/iom325.h>
 #elif defined (__AVR_ATmega325P__)
