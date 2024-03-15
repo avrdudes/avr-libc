@@ -296,6 +296,8 @@
 #  include <avr/iom168p.h>
 #elif defined (__AVR_ATmega168PA__)
 #  include <avr/iom168pa.h>
+#elif defined (__AVR_ATmega168PB__)
+#  include <avr/iom168pb.h>
 #elif defined (__AVR_ATmega169__) || defined (__AVR_ATmega169A__)
 #  include <avr/iom169.h>
 #elif defined (__AVR_ATmega169P__)

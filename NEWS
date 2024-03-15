@@ -29,6 +29,8 @@
     AVR32EA28 AVR32EA32 AVR32EA48 AVR64EA28 AVR64EA32 AVR64EA48
   - Added support for Reduced Tiny devices:
     ATiny102 ATtiny104
+  - Added support for Classic devices:
+    ATmega168PB
 
 * Issues closed:
 

@@ -206,6 +206,7 @@ atmega168:crtm168.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega168a:crtm168a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega168p:crtm168p.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega168pa:crtm168pa.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atmega168pb:crtm168pb.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega169:crtm169.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega169a:crtm169a.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atmega169p:crtm169p.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\

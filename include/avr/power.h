@@ -1332,6 +1332,7 @@ __power_all_disable()
 || defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega168P__) \
 || defined(__AVR_ATmega168PA__) \
+|| defined(__AVR_ATmega168PB__) \
 || defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169A__) \
 || defined(__AVR_ATmega169P__) \
