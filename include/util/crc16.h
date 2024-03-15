@@ -38,6 +38,10 @@
 
 #include <stdint.h>
 
+#ifndef __ATTR_ALWAYS_INLINE__
+#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#endif
+
 /** \file */
 /** \defgroup util_crc <util/crc16.h>: CRC Computations
     \code#include <util/crc16.h>\endcode
@@ -109,7 +113,7 @@
 
     \endcode */
 
-static __inline__ uint16_t
+static __ATTR_ALWAYS_INLINE__ uint16_t
 _crc16_update(uint16_t __crc, uint8_t __data)
 {
 	uint8_t __tmp;
@@ -175,8 +179,8 @@ _crc16_update(uint16_t __crc, uint8_t __data)
     }
     \endcode */
 
-static __inline__ uint16_t
-_crc_xmodem_update(uint16_t __crc, uint8_t __data)
+static __ATTR_ALWAYS_INLINE__ uint16_t
+_crc_xmodem_update (uint16_t __crc, uint8_t __data)
 {
     uint16_t __ret;             /* %B0:%A0 (alias for __crc) */
     uint8_t __tmp1;             /* %1 */
@@ -184,38 +188,27 @@ _crc_xmodem_update(uint16_t __crc, uint8_t __data)
                                 /* %3  __data */
 
     __asm__ __volatile__ (
-        "eor    %B0,%3"          "\n\t" /* crc.hi ^ data */
-        "mov    __tmp_reg__,%B0" "\n\t"
-        "swap   __tmp_reg__"     "\n\t" /* swap(crc.hi ^ data) */
-
-        /* Calculate the ret.lo of the CRC. */
-        "mov    %1,__tmp_reg__"  "\n\t"
-        "andi   %1,0x0f"         "\n\t"
-        "eor    %1,%B0"          "\n\t"
+        "eor    %B0,%3"          "\n\t"
+        "mov    %1,%A0"          "\n\t"
         "mov    %2,%B0"          "\n\t"
-        "eor    %2,__tmp_reg__"  "\n\t"
-        "lsl    %2"              "\n\t"
-        "andi   %2,0xe0"         "\n\t"
-        "eor    %1,%2"           "\n\t" /* __tmp1 is now ret.lo. */
 
-        /* Calculate the ret.hi of the CRC. */
-        "mov    %2,__tmp_reg__"  "\n\t"
+        "mov    %A0,%B0"         "\n\t"
+        "swap   %B0"             "\n\t"
+        "eor    %A0,%B0"         "\n\t"
+
+        "andi   %A0,0xf0"        "\n\t"
+        "andi   %B0,0x0f"        "\n\t"
+
+        "eor    %1,%A0"          "\n\t"
         "eor    %2,%B0"          "\n\t"
-        "andi   %2,0xf0"         "\n\t"
-        "lsr    %2"              "\n\t"
-        "mov    __tmp_reg__,%B0" "\n\t"
-        "lsl    __tmp_reg__"     "\n\t"
-        "rol    %2"              "\n\t"
-        "lsr    %B0"             "\n\t"
-        "lsr    %B0"             "\n\t"
-        "lsr    %B0"             "\n\t"
-        "andi   %B0,0x1f"        "\n\t"
-        "eor    %B0,%2"          "\n\t"
-        "eor    %B0,%A0"         "\n\t" /* ret.hi is now ready. */
-        "mov    %A0,%1"          "\n\t" /* ret.lo is now ready. */
-        : "=d" (__ret), "=d" (__tmp1), "=d" (__tmp2)
+
+        "lsl    %A0"             "\n\t"
+        "rol    %B0"             "\n\t"
+
+        "eor    %B0,%1"          "\n\t"
+        "eor    %A0,%2"
+        : "=d" (__ret), "=r" (__tmp1), "=r" (__tmp2)
         : "r" (__data), "0" (__crc)
-        : "r0"
     );
     return __ret;
 }
@@ -249,7 +242,7 @@ _crc_xmodem_update(uint16_t __crc, uint8_t __data)
     }
     \endcode */
 
-static __inline__ uint16_t
+static __ATTR_ALWAYS_INLINE__ uint16_t
 _crc_ccitt_update (uint16_t __crc, uint8_t __data)
 {
     uint16_t __ret;
@@ -316,7 +309,7 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
     \endcode
 */
 
-static __inline__ uint8_t
+static __ATTR_ALWAYS_INLINE__ uint8_t
 _crc_ibutton_update(uint8_t __crc, uint8_t __data)
 {
 	uint8_t __i, __pattern;
@@ -382,7 +375,7 @@ _crc_ibutton_update(uint8_t __crc, uint8_t __data)
     \endcode
 */
 
-static __inline__ uint8_t
+static __ATTR_ALWAYS_INLINE__ uint8_t
 _crc8_ccitt_update(uint8_t __crc, uint8_t __data)
 {
     uint8_t __i, __pattern;
