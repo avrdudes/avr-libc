@@ -1353,6 +1353,7 @@ __power_all_disable()
 || defined(__AVR_ATmega3250PA__) \
 || defined(__AVR_ATmega328__) \
 || defined(__AVR_ATmega328P__) \
+|| defined(__AVR_ATmega328PB__) \
 || defined(__AVR_ATmega329__) \
 || defined(__AVR_ATmega329A__) \
 || defined(__AVR_ATmega329P__) \
