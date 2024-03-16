@@ -690,24 +690,24 @@
 #define OCR1B _SFR_MEM16(0x8A)
 
 #define OCR1BL _SFR_MEM8(0x8A)
-#define OCR1AL0 0
-#define OCR1AL1 1
-#define OCR1AL2 2
-#define OCR1AL3 3
-#define OCR1AL4 4
-#define OCR1AL5 5
-#define OCR1AL6 6
-#define OCR1AL7 7
+#define OCR1BL0 0
+#define OCR1BL1 1
+#define OCR1BL2 2
+#define OCR1BL3 3
+#define OCR1BL4 4
+#define OCR1BL5 5
+#define OCR1BL6 6
+#define OCR1BL7 7
 
 #define OCR1BH _SFR_MEM8(0x8B)
-#define OCR1AH0 0
-#define OCR1AH1 1
-#define OCR1AH2 2
-#define OCR1AH3 3
-#define OCR1AH4 4
-#define OCR1AH5 5
-#define OCR1AH6 6
-#define OCR1AH7 7
+#define OCR1BH0 0
+#define OCR1BH1 1
+#define OCR1BH2 2
+#define OCR1BH3 3
+#define OCR1BH4 4
+#define OCR1BH5 5
+#define OCR1BH6 6
+#define OCR1BH7 7
 
 #define TCCR3A _SFR_MEM8(0x90)
 #define WGM30 0
@@ -799,24 +799,24 @@
 #define OCR3B _SFR_MEM16(0x9A)
 
 #define OCR3BL _SFR_MEM8(0x9A)
-#define OCR3AL0 0
-#define OCR3AL1 1
-#define OCR3AL2 2
-#define OCR3AL3 3
-#define OCR3AL4 4
-#define OCR3AL5 5
-#define OCR3AL6 6
-#define OCR3AL7 7
+#define OCR3BL0 0
+#define OCR3BL1 1
+#define OCR3BL2 2
+#define OCR3BL3 3
+#define OCR3BL4 4
+#define OCR3BL5 5
+#define OCR3BL6 6
+#define OCR3BL7 7
 
 #define OCR3BH _SFR_MEM8(0x9B)
-#define OCR3AH0 0
-#define OCR3AH1 1
-#define OCR3AH2 2
-#define OCR3AH3 3
-#define OCR3AH4 4
-#define OCR3AH5 5
-#define OCR3AH6 6
-#define OCR3AH7 7
+#define OCR3BH0 0
+#define OCR3BH1 1
+#define OCR3BH2 2
+#define OCR3BH3 3
+#define OCR3BH4 4
+#define OCR3BH5 5
+#define OCR3BH6 6
+#define OCR3BH7 7
 
 #define TCCR2A _SFR_MEM8(0xB0)
 #define WGM20 0
