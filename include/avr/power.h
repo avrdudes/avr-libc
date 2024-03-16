@@ -1332,12 +1332,15 @@ __power_all_disable()
 || defined(__AVR_ATmega165PA__) \
 || defined(__AVR_ATmega168__) \
 || defined(__AVR_ATmega168P__) \
+|| defined(__AVR_ATmega168A__) \
 || defined(__AVR_ATmega168PA__) \
 || defined(__AVR_ATmega168PB__) \
 || defined(__AVR_ATmega169__) \
 || defined(__AVR_ATmega169A__) \
 || defined(__AVR_ATmega169P__) \
 || defined(__AVR_ATmega169PA__) \
+|| defined(__AVR_ATmega16M1__) \
+|| defined(__AVR_ATmega16U2__) \
 || defined(__AVR_ATmega16U4__) \
 || defined(__AVR_ATmega2560__) \
 || defined(__AVR_ATmega2561__) \
@@ -1362,6 +1365,7 @@ __power_all_disable()
 || defined(__AVR_ATmega329PA__) \
 || defined(__AVR_ATmega3290__) \
 || defined(__AVR_ATmega3290A__) \
+|| defined(__AVR_ATmega3290P__) \
 || defined(__AVR_ATmega3290PA__) \
 || defined(__AVR_ATmega32C1__) \
 || defined(__AVR_ATmega32M1__) \
@@ -1386,17 +1390,23 @@ __power_all_disable()
 || defined(__AVR_ATmega6450P__) \
 || defined(__AVR_ATmega649__) \
 || defined(__AVR_ATmega649A__) \
+|| defined(__AVR_ATmega64M1__) \
+|| defined(__AVR_ATmega64C1__) \
 || defined(__AVR_ATmega6490__) \
 || defined(__AVR_ATmega6490A__) \
 || defined(__AVR_ATmega6490P__) \
 || defined(__AVR_ATmega644RFR2__) \
 || defined(__AVR_ATmega64RFR2__) \
 || defined(__AVR_ATmega88__) \
+|| defined(__AVR_ATmega88A__) \
 || defined(__AVR_ATmega88P__) \
+|| defined(__AVR_ATmega88PA__) \
 || defined(__AVR_ATmega8U2__) \
 || defined(__AVR_ATmega16U2__) \
 || defined(__AVR_ATmega32U2__) \
 || defined(__AVR_ATtiny48__) \
+|| defined(__AVR_ATtiny88__) \
+|| defined(__AVR_ATtiny87__) \
 || defined(__AVR_ATtiny167__) \
 || defined(__DOXYGEN__)
 
