@@ -92,410 +92,410 @@ compile-time.
 
 \par megaAVR Devices:
 
-- atmega103
-- atmega128
-- atmega128a
-- atmega1280
-- atmega1281
-- atmega1284
-- atmega1284p
-- atmega16
-- atmega161
-- atmega162
-- atmega163
-- atmega164a
-- atmega164p
-- atmega164pa
-- atmega165
-- atmega165a
-- atmega165p
-- atmega165pa
-- atmega168
-- atmega168a
-- atmega168p
-- atmega168pa
-- atmega168pb
-- atmega16a
-- atmega2560
-- atmega2561
-- atmega32
-- atmega32a
-- atmega323
-- atmega324a
-- atmega324p
-- atmega324pa
-- atmega324pb
-- atmega325
-- atmega325a
-- atmega325p
-- atmega325pa
-- atmega3250
-- atmega3250a
-- atmega3250p
-- atmega3250pa
-- atmega328
-- atmega328p
-- atmega328pb
-- atmega48
-- atmega48a
-- atmega48pa
-- atmega48pb
-- atmega48p
-- atmega64
-- atmega64a
-- atmega640
-- atmega644
-- atmega644a
-- atmega644p
-- atmega644pa
-- atmega645
-- atmega645a
-- atmega645p
-- atmega6450
-- atmega6450a
-- atmega6450p
-- atmega8
-- atmega8a
-- atmega88
-- atmega88a
-- atmega88p
-- atmega88pa
-- atmega88pb
-- atmega8515
-- atmega8535
+- ATmega103
+- ATmega128
+- ATmega128A
+- ATmega1280
+- ATmega1281
+- ATmega1284
+- ATmega1284P
+- ATmega16
+- ATmega161
+- ATmega162
+- ATmega163
+- ATmega164A
+- ATmega164P
+- ATmega164PA
+- ATmega165
+- ATmega165A
+- ATmega165P
+- ATmega165PA
+- ATmega168
+- ATmega168A
+- ATmega168P
+- ATmega168PA
+- ATmega168PB
+- ATmega16A
+- ATmega2560
+- ATmega2561
+- ATmega32
+- ATmega32A
+- ATmega323
+- ATmega324A
+- ATmega324P
+- ATmega324PA
+- ATmega324PB
+- ATmega325
+- ATmega325A
+- ATmega325P
+- ATmega325PA
+- ATmega3250
+- ATmega3250A
+- ATmega3250P
+- ATmega3250PA
+- ATmega328
+- ATmega328P
+- ATmega328PB
+- ATmega48
+- ATmega48A
+- ATmega48PA
+- ATmega48PB
+- ATmega48P
+- ATmega64
+- ATmega64A
+- ATmega640
+- ATmega644
+- ATmega644A
+- ATmega644P
+- ATmega644PA
+- ATmega645
+- ATmega645A
+- ATmega645P
+- ATmega6450
+- ATmega6450A
+- ATmega6450P
+- ATmega8
+- ATmega8A
+- ATmega88
+- ATmega88A
+- ATmega88P
+- ATmega88PA
+- ATmega88PB
+- ATmega8515
+- ATmega8535
 
 \par megaAVR 0-Series Devices:
 
-- atmega808
-- atmega809
-- atmega1608
-- atmega1609
-- atmega3208
-- atmega3209
-- atmega4808
-- atmega4809
+- ATmega808
+- ATmega809
+- ATmega1608
+- ATmega1609
+- ATmega3208
+- ATmega3209
+- ATmega4808
+- ATmega4809
 
 \par tinyAVR Devices:
 
-- attiny11 \ref supp_dev_footnote_one "[1]"
-- attiny12 \ref supp_dev_footnote_one "[1]"
-- attiny13
-- attiny13a
-- attiny15 \ref supp_dev_footnote_one "[1]"
-- attiny22
-- attiny24
-- attiny24a
-- attiny25
-- attiny26
-- attiny261
-- attiny261a
-- attiny28 \ref supp_dev_footnote_one "[1]"
-- attiny2313
-- attiny2313a
-- attiny4313
-- attiny43u
-- attiny44
-- attiny44a
-- attiny441
-- attiny45
-- attiny461
-- attiny461a
-- attiny48
-- attiny828
-- attiny84
-- attiny84a
-- attiny841
-- attiny85
-- attiny861
-- attiny861a
-- attiny87
-- attiny88
-- attiny1634
+- ATtiny11 \ref supp_dev_footnote_one "[1]"
+- ATtiny12 \ref supp_dev_footnote_one "[1]"
+- ATtiny13
+- attiny13A
+- ATtiny15 \ref supp_dev_footnote_one "[1]"
+- ATtiny22
+- ATtiny24
+- ATtiny24A
+- ATtiny25
+- ATtiny26
+- ATtiny261
+- ATtiny261A
+- ATtiny28 \ref supp_dev_footnote_one "[1]"
+- ATtiny2313
+- ATtiny2313A
+- ATtiny4313
+- ATtiny43U
+- ATtiny44
+- ATtiny44A
+- ATtiny441
+- ATtiny45
+- ATtiny461
+- ATtiny461A
+- ATtiny48
+- ATtiny828
+- ATtiny84
+- ATtiny84A
+- ATtiny841
+- ATtiny85
+- ATtiny861
+- ATtiny861A
+- ATtiny88
+- ATtiny1634
 
 \par tinyAVR 0-Series Devices:
 
-- attiny202
-- attiny204
-- attiny402
-- attiny404
-- attiny406
-- attiny804
-- attiny806
-- attiny807
-- attiny1604
-- attiny1606
-- attiny1607
+- ATtiny202
+- ATtiny204
+- ATtiny402
+- ATtiny404
+- ATtiny406
+- ATtiny804
+- ATtiny806
+- ATtiny807
+- ATtiny1604
+- ATtiny1606
+- ATtiny1607
 
 \par tinyAVR 1-Series Devices:
 
-- attiny212
-- attiny214
-- attiny412
-- attiny414
-- attiny416
-- attiny417
-- attiny814
-- attiny816
-- attiny817
-- attiny1614
-- attiny1616
-- attiny1617
-- attiny3214
-- attiny3216
-- attiny3217
+- ATtiny212
+- ATtiny214
+- ATtiny412
+- ATtiny414
+- ATtiny416
+- ATtiny417
+- ATtiny814
+- ATtiny816
+- ATtiny817
+- ATtiny1614
+- ATtiny1616
+- ATtiny1617
+- ATtiny3214
+- ATtiny3216
+- ATtiny3217
 
 \par tinyAVR 2-Series Devices:
 
-- attiny424
-- attiny426
-- attiny427
-- attiny824
-- attiny826
-- attiny827
-- attiny1624
-- attiny1626
-- attiny1627
-- attiny3224
-- attiny3226
-- attiny3227
+- ATtiny424
+- ATtiny426
+- ATtiny427
+- ATtiny824
+- ATtiny826
+- ATtiny827
+- ATtiny1624
+- ATtiny1626
+- ATtiny1627
+- ATtiny3224
+- ATtiny3226
+- ATtiny3227
 
 \par Reduced tinyAVR Devices with only 16 GPRs:
 
-- attiny4
-- attiny5
-- attiny9
-- attiny10
-- attiny102
-- attiny104
-- attiny20
-- attiny40
+- ATtiny4
+- ATtiny5
+- ATtiny9
+- ATtiny10
+- ATtiny102
+- ATtiny104
+- ATtiny20
+- ATtiny40
 
 \par Automotive AVR Devices:
 
-- atmega16m1
-- atmega32c1
-- atmega32m1
-- atmega64c1
-- atmega64m1
-- attiny167
-- ata5505
-- ata5272
-- ata5702m322
-- ata5782
-- ata5790
-- ata5790n
-- ata5831
-- ata5795
-- ata6612c
-- ata6613c
-- ata6614q
-- ata6616c
-- ata6617c
-- ata664251
+- ATmega16M1
+- ATmega32C1
+- ATmega32M1
+- ATmega64C1
+- ATmega64M1
+- ATtiny87
+- ATtiny167
+- ATA5505
+- ATA5272
+- ATA5702M322
+- ATA5782
+- ATA5790
+- ATA5790N
+- ATA5831
+- ATA5795
+- ATA6612C
+- ATA6613C
+- ATA6614Q
+- ATA6616C
+- ATA6617C
+- ATA664251
 
 \par CAN AVR Devices:
 
-- at90can32
-- at90can64
-- at90can128
+- AT90CAN32
+- AT90CAN64
+- AT90CAN128
 
 \par LCD AVR Devices:
 
-- atmega169
-- atmega169a
-- atmega169p
-- atmega169pa
-- atmega329
-- atmega329a
-- atmega329p
-- atmega329pa
-- atmega3290
-- atmega3290a
-- atmega3290p
-- atmega3290pa
-- atmega649
-- atmega649a
-- atmega6490
-- atmega6490a
-- atmega6490p
-- atmega649p
+- ATmega169
+- ATmega169A
+- ATmega169P
+- ATmega169PA
+- ATmega329
+- ATmega329A
+- ATmega329P
+- ATmega329PA
+- ATmega3290
+- ATmega3290A
+- ATmega3290P
+- ATmega3290PA
+- ATmega649
+- ATmega649A
+- ATmega6490
+- ATmega6490A
+- ATmega6490P
+- ATmega649P
 
 \par Lighting AVR Devices:
 
-- at90pwm1
-- at90pwm2
-- at90pwm2b
-- at90pwm216
-- at90pwm3
-- at90pwm3b
-- at90pwm316
-- at90pwm161
-- at90pwm81
+- AT90PWM1
+- AT90PWM2
+- AT90PWM2B
+- AT90PWM216
+- AT90PWM3
+- AT90PWM3B
+- AT90PWM316
+- AT90PWM161
+- AT90PWM81
 
 \par Smart Battery AVR Devices:
 
-- atmega8hva
-- atmega16hva
-- atmega16hva2
-- atmega16hvb
-- atmega16hvbrevb
-- atmega32hvb
-- atmega32hvbrevb
-- atmega64hve
-- atmega64hve2
-- atmega406
+- ATmega8HVA
+- ATmega16HVA
+- ATmega16HVA2
+- ATmega16HVB
+- ATmega16HVBREVB
+- ATmega32HVB
+- ATmega32HVBREVB
+- ATmega64HVE
+- ATmega64HVE2
+- ATmega406
 
 \par USB AVR Devices:
 
-- at90usb82
-- at90usb162
-- at90usb646
-- at90usb647
-- at90usb1286
-- at90usb1287
-- atmega8u2
-- atmega16u2
-- atmega16u4
-- atmega32u2
-- atmega32u4
-- atmega32u6
+- AT90USB82
+- AT90USB162
+- AT90USB646
+- AT90USB647
+- AT90USB1286
+- AT90USB1287
+- ATmega8U2
+- ATmega16U2
+- ATmega16U4
+- ATmega32U2
+- ATmega32U4
+- ATmega32U6
 
 \par XMEGA Devices:
 
-- atxmega8e5
-- atxmega16a4
-- atxmega16a4u
-- atxmega16c4
-- atxmega16d4
-- atxmega32a4
-- atxmega32a4u
-- atxmega32c3
-- atxmega32c4
-- atxmega32d3
-- atxmega32d4
-- atxmega32e5
-- atxmega64a1
-- atxmega64a1u
-- atxmega64a3
-- atxmega64a3u
-- atxmega64a4u
-- atxmega64b1
-- atxmega64b3
-- atxmega64c3
-- atxmega64d3
-- atxmega64d4
-- atxmega128a1
-- atxmega128a1u
-- atxmega128a3
-- atxmega128a3u
-- atxmega128a4u
-- atxmega128b1
-- atxmega128b3
-- atxmega128c3
-- atxmega128d3
-- atxmega128d4
-- atxmega192a3
-- atxmega192a3u
-- atxmega192c3
-- atxmega192d3
-- atxmega256a3
-- atxmega256a3u
-- atxmega256a3b
-- atxmega256a3bu
-- atxmega256c3
-- atxmega256d3
-- atxmega384c3
-- atxmega384d3
+- ATxmega8E5
+- ATxmega16A4
+- ATxmega16A4U
+- ATxmega16C4
+- ATxmega16D4
+- ATxmega32A4
+- ATxmega32A4U
+- ATxmega32C3
+- ATxmega32C4
+- ATxmega32D3
+- ATxmega32D4
+- ATxmega32E5
+- ATxmega64A1
+- ATxmega64A1U
+- ATxmega64A3
+- ATxmega64A3U
+- ATxmega64A4U
+- ATxmega64B1
+- ATxmega64B3
+- ATxmega64C3
+- ATxmega64D3
+- ATxmega64D4
+- ATxmega128A1
+- ATxmega128A1U
+- ATxmega128A3
+- ATxmega128A3U
+- ATxmega128A4U
+- ATxmega128B1
+- ATxmega128B3
+- ATxmega128C3
+- ATxmega128D3
+- ATxmega128D4
+- ATxmega192A3
+- ATxmega192A3U
+- ATxmega192C3
+- ATxmega192D3
+- ATxmega256A3
+- ATxmega256A3U
+- ATxmega256A3B
+- ATxmega256A3BU
+- ATxmega256C3
+- ATxmega256D3
+- ATxmega384C3
+- ATxmega384D3
 
 \par AVR-Dx Devices:
 
-- avr16dd14
-- avr16dd20
-- avr16dd28
-- avr16dd32
-- avr32da28
-- avr32da32
-- avr32da48
-- avr32db28
-- avr32db32
-- avr32db48
-- avr32dd14
-- avr32dd20
-- avr32dd28
-- avr32dd32
-- avr64da28
-- avr64da32
-- avr64da48
-- avr64da64
-- avr64db28
-- avr64db32
-- avr64db48
-- avr64db64
-- avr64dd14
-- avr64dd20
-- avr64dd28
-- avr64dd32
-- avr128da28
-- avr128da32
-- avr128da48
-- avr128da64
-- avr128db28
-- avr128db32
-- avr128db48
-- avr128db64
+- AVR16DD14
+- AVR16DD20
+- AVR16DD28
+- AVR16DD32
+- AVR32DA28
+- AVR32DA32
+- AVR32DA48
+- AVR32DB28
+- AVR32DB32
+- AVR32DB48
+- AVR32DD14
+- AVR32DD20
+- AVR32DD28
+- AVR32DD32
+- AVR64DA28
+- AVR64DA32
+- AVR64DA48
+- AVR64DA64
+- AVR64DB28
+- AVR64DB32
+- AVR64DB48
+- AVR64DB64
+- AVR64DD14
+- AVR64DD20
+- AVR64DD28
+- AVR64DD32
+- AVR128DA28
+- AVR128DA32
+- AVR128DA48
+- AVR128DA64
+- AVR128DB28
+- AVR128DB32
+- AVR128DB48
+- AVR128DB64
 
 \par AVR-Ex Devices:
 
-- avr16ea28
-- avr16ea32
-- avr16ea48
-- avr16eb14
-- avr16eb20
-- avr16eb28
-- avr16eb32
-- avr32ea28
-- avr32ea32
-- avr32ea48
-- avr64ea28
-- avr64ea32
-- avr64ea48
+- AVR16EA28
+- AVR16EA32
+- AVR16EA48
+- AVR16EB14
+- AVR16EB20
+- AVR16EB28
+- AVR16EB32
+- AVR32EA28
+- AVR32EA32
+- AVR32EA48
+- AVR64EA28
+- AVR64EA32
+- AVR64EA48
 
 \par Wireless AVR devices:
 
-- atmega644rfr2
-- atmega64rfr2
-- atmega128rfa1
-- atmega1284rfr2
-- atmega128rfr2
-- atmega2564rfr2
-- atmega256rfr2
+- ATmega644RFR2
+- ATmega64RFR2
+- ATmega128RFA1
+- ATmega1284RFR2
+- ATmega128RFR2
+- ATmega2564RFR2
+- ATmega256RFR2
 
 \par Miscellaneous Devices:
 
-- at94K \ref supp_dev_footnote_two "[2]"
-- at76c711 \ref supp_dev_footnote_three "[3]"
-- at43usb320
-- at43usb355
-- at86rf401
-- at90scr100
-- ata6285
-- ata6286
-- ata6289
-- m3000 \ref supp_dev_footnote_four "[4]"
+- AT94K \ref supp_dev_footnote_two "[2]"
+- AT76C711 \ref supp_dev_footnote_three "[3]"
+- AT43USB320
+- AT43USB355
+- AT86RF401
+- AT90SCR100
+- ATA6285
+- ATA6286
+- ATA6289
+- M3000 \ref supp_dev_footnote_four "[4]"
 
 \par Classic AVR Devices:
 
-- at90s1200 \ref supp_dev_footnote_one "[1]"
-- at90s2313
-- at90s2323
-- at90s2333
-- at90s2343
-- at90s4414
-- at90s4433
-- at90s4434
-- at90s8515
-- at90c8534
-- at90s8535
+- AT90S1200 \ref supp_dev_footnote_one "[1]"
+- AT90S2313
+- AT90S2323
+- AT90S2333
+- AT90S2343
+- AT90S4414
+- AT90S4433
+- AT90S4434
+- AT90S8515
+- AT90C8534
+- AT90S8535
 
 \anchor supp_dev_footnote_one
 
@@ -505,18 +505,18 @@ possible to program them in C, see the \ref faq_tinyavr_c "FAQ" for an option.
 
 \anchor supp_dev_footnote_two
 
-\note <b>[2]</b> The at94K devices are a combination of FPGA and AVR
+\note <b>[2]</b> The AT94K devices are a combination of FPGA and AVR
 microcontroller. [TRoth-2002/11/12: Not sure of the level of support for
 these. More information would be welcomed.]
 
 \anchor supp_dev_footnote_three
 
-\note <b>[3]</b> The at76c711 is a USB to fast serial interface bridge chip
+\note <b>[3]</b> The AT76C711 is a USB to fast serial interface bridge chip
 using an AVR core.
 
 \anchor supp_dev_footnote_four
 
-\note <b>[4]</b> The m3000 is a motor controller AVR ASIC from Intelligent
+\note <b>[4]</b> The M3000 is a motor controller AVR ASIC from Intelligent
 Motion Systems (IMS) / Schneider Electric.
 
 \section license avr-libc License
