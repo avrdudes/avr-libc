@@ -114,6 +114,7 @@ compile-time.
 - atmega168a
 - atmega168p
 - atmega168pa
+- atmega168pb
 - atmega16a
 - atmega2560
 - atmega2561
@@ -123,6 +124,7 @@ compile-time.
 - atmega324a
 - atmega324p
 - atmega324pa
+- atmega324pb
 - atmega325
 - atmega325a
 - atmega325p
@@ -133,6 +135,7 @@ compile-time.
 - atmega3250pa
 - atmega328
 - atmega328p
+- atmega328pb
 - atmega48
 - atmega48a
 - atmega48pa
@@ -161,17 +164,24 @@ compile-time.
 - atmega8515
 - atmega8535
 
+\par megaAVR 0-Series Devices:
+
+- atmega808
+- atmega809
+- atmega1608
+- atmega1609
+- atmega3208
+- atmega3209
+- atmega4808
+- atmega4809
+
 \par tinyAVR Devices:
 
-- attiny4
-- attiny5
-- attiny10
 - attiny11 \ref supp_dev_footnote_one "[1]"
 - attiny12 \ref supp_dev_footnote_one "[1]"
 - attiny13
 - attiny13a
 - attiny15 \ref supp_dev_footnote_one "[1]"
-- attiny20
 - attiny22
 - attiny24
 - attiny24a
@@ -182,7 +192,6 @@ compile-time.
 - attiny28 \ref supp_dev_footnote_one "[1]"
 - attiny2313
 - attiny2313a
-- attiny40
 - attiny4313
 - attiny43u
 - attiny44
@@ -202,6 +211,64 @@ compile-time.
 - attiny87
 - attiny88
 - attiny1634
+
+\par tinyAVR 0-Series Devices:
+
+- attiny202
+- attiny204
+- attiny402
+- attiny404
+- attiny406
+- attiny804
+- attiny806
+- attiny807
+- attiny1604
+- attiny1606
+- attiny1607
+
+\par tinyAVR 1-Series Devices:
+
+- attiny212
+- attiny214
+- attiny412
+- attiny414
+- attiny416
+- attiny417
+- attiny814
+- attiny816
+- attiny817
+- attiny1614
+- attiny1616
+- attiny1617
+- attiny3214
+- attiny3216
+- attiny3217
+
+\par tinyAVR 2-Series Devices:
+
+- attiny424
+- attiny426
+- attiny427
+- attiny824
+- attiny826
+- attiny827
+- attiny1624
+- attiny1626
+- attiny1627
+- attiny3224
+- attiny3226
+- attiny3227
+
+\par Reduced tinyAVR Devices with only 16 GPRs:
+
+- attiny4
+- attiny5
+- attiny9
+- attiny10
+- attiny102
+- attiny104
+- attiny20
+- attiny40
 
 \par Automotive AVR Devices:
 
@@ -339,6 +406,59 @@ compile-time.
 - atxmega256d3
 - atxmega384c3
 - atxmega384d3
+
+\par AVR-Dx Devices:
+
+- avr16dd14
+- avr16dd20
+- avr16dd28
+- avr16dd32
+- avr32da28
+- avr32da32
+- avr32da48
+- avr32db28
+- avr32db32
+- avr32db48
+- avr32dd14
+- avr32dd20
+- avr32dd28
+- avr32dd32
+- avr64da28
+- avr64da32
+- avr64da48
+- avr64da64
+- avr64db28
+- avr64db32
+- avr64db48
+- avr64db64
+- avr64dd14
+- avr64dd20
+- avr64dd28
+- avr64dd32
+- avr128da28
+- avr128da32
+- avr128da48
+- avr128da64
+- avr128db28
+- avr128db32
+- avr128db48
+- avr128db64
+
+\par AVR-Ex Devices:
+
+- avr16ea28
+- avr16ea32
+- avr16ea48
+- avr16eb14
+- avr16eb20
+- avr16eb28
+- avr16eb32
+- avr32ea28
+- avr32ea32
+- avr32ea48
+- avr64ea28
+- avr64ea32
+- avr64ea48
 
 \par Wireless AVR devices:
 
