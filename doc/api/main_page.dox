@@ -37,7 +37,7 @@ The latest version of this document is always available from
 http://savannah.nongnu.org/projects/avr-libc/
 
 The AVR Libc package provides a subset of the standard C library for
-<a href="http://www.atmel.com/products/AVR/">Atmel AVR
+<a href="https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/8-bit-mcus/avr-mcus">Atmel AVR
 8-bit RISC microcontrollers</a>. In addition, the library provides the basic
 startup code needed by most applications.
 
@@ -57,9 +57,9 @@ list, you might want to try reading the \ref FAQ chapter of this document.
 
 \note If you think you've found a bug, or have a suggestion for an
 improvement, either in this documentation or in the library itself,
-please use the bug tracker at
-https://savannah.nongnu.org/bugs/?group=avr-libc to ensure the issue
-won't be forgotten.
+please use the
+<a href="https://github.com/avrdudes/avr-libc/issues">bug tracker</a>
+to ensure the issue won't be forgotten.
 
 \section avr_libc_general General information about this library
 
