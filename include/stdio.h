@@ -543,7 +543,7 @@ extern int	fclose(FILE *__stream);
    - \c %  A \c % is written.  No argument is converted.  The complete
            conversion specification is "%%".
    - \c eE The double argument is rounded and converted in the format
-           \c "[-]d.ddde±dd" where there is one digit before the
+           \c "[-]d.dddeÂ±dd" where there is one digit before the
            decimal-point character and the number of digits after it
            is equal to the precision; if the precision is missing, it
            is taken as 6; if the precision is zero, no decimal-point
