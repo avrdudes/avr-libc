@@ -68,7 +68,7 @@ _U(ffsll):
 	subi	cntr, -16
 	sbiw	wrd_lo, 0
 	breq	9f
-	
+
 1:	tst	wrd_lo
 	brne	3f
 	subi	cntr, -7
@@ -76,11 +76,11 @@ _U(ffsll):
 2:	inc	cntr
 3:	ror	wrd_lo
 	brcc	2b
-	
+
 	mov	r24, cntr
 	clr	r25
 9:	ret
-	
+
     .size  _U(ffsll), . - _U(ffsll)
     .end
 

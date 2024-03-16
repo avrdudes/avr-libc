@@ -68,7 +68,7 @@ _U(strrev):
 3:	cp	XL, ZL
 	cpc	XH, ZH
 	brlo	2b
-	
+
 	ret
 
     .size _U(strrev), . - _U(strrev)

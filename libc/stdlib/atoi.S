@@ -24,7 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE. */  
+  POSSIBILITY OF SUCH DAMAGE. */
 
 /* $Id$ */
 
@@ -37,7 +37,7 @@
 
    TODO: this implementation uses an inline isspace(). If Avr-libc will
    use locales other than C/POSIX it is needed to call an external isspace().
-   
+
    ATTENTION: an external __mulhi_const_10() function is used: nonstandart
    call conventions: some registers and bit T must be nochanged.
  */
@@ -46,7 +46,7 @@
 /** \ingroup avr_stdlib
     \fn int atoi(const char *s)
     \brief Convert a string to an integer.
-        
+
     The atoi() function converts the initial portion of the string
     pointed to by \p s to integer representation. In contrast to
 
@@ -104,7 +104,7 @@ _U(atoi):
 	BRNE	.L_atoi_digit
 	SET				; remember number is negative
 	RJMP	.L_atoi_loop2
-	
+
 2:	XCALL	__mulhi_const_10	; r25:r24 *= 10
 	ADD	num_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_hi, __zero_reg__

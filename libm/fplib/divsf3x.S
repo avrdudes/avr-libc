@@ -67,10 +67,10 @@ ENTRY	__divsf3_pse		; post split entry
 	breq	1b
 	tst	rB3
 	breq	.L_inf		; finite / 0.0 --> Inf
-	
+
 	sub	rA3, rB3
 	sbc	rB3, rB3
-	
+
 /* Prepare to division:
      A:  rAE.rA2.rA1.rA0	0x00000001..0x00FFFFFF
      B:  rBE.rB2.rB1.rB0	0x00000002..0x01FFFFFE
@@ -119,9 +119,9 @@ ENTRY	__divsf3_pse		; post split entry
 	sbc	rAE, rAE
 
 4:	mov	rA2, r0
-	X_movw	rA0, ZL	
+	X_movw	rA0, ZL
 	clr	ZH
-	
+
   ; exponent += 125
 	subi	rA3, lo8(-125)
 	sbci	rB3, hi8(-125)

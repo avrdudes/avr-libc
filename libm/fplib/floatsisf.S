@@ -41,7 +41,7 @@
 ENTRY   __floatunsisf
 	clt
 	rjmp	1f
-	
+
 ENTRY   __floatsisf
 	bst	rA3, 7		; sign
 	brtc	1f
@@ -91,7 +91,7 @@ ENTRY   __floatsisf
 	mov	rA2, rA1
 	mov	rA1, rA0
 	rjmp	7f
-	
+
 6:	tst	rA0
 	breq	9f		; 0.0
 	ldi	rA3, 127 + 7

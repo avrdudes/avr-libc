@@ -42,7 +42,7 @@
 
 ENTRY __fp_sinus
 	push	ZL
-	
+
 	sbrs	ZL, 0
 	rjmp	1f
 	ldi	rBE, LO40_PIO2
@@ -63,7 +63,7 @@ ENTRY __fp_sinus
 	ldi	ZH, hi8(.L_table)
 	XJMP	_U(__fp_powsodd)
 ENDFUNC
-	
+
 	PGM_SECTION
 .L_table:
 	.byte	5
@@ -73,6 +73,6 @@ ENDFUNC
 	.byte	0x91,0x86,0x88,0x08,0x3c	;  0.0083333315
 	.byte	0xa6,0xaa,0xaa,0x2a,0xbe	; -0.1666666664
 	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
-	.end				
+	.end
 
 #endif /* !defined(__AVR_TINY__) */

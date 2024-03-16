@@ -339,7 +339,7 @@ ENTRY_FLOAT cbrtf cbrt cbrtl
 	rol	RM6
 	dec	RD0
 	brne	25b
-	
+
 	dec	RCNT
 	breq	26f
 	rjmp	.Loop2

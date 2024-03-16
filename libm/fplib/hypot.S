@@ -162,19 +162,19 @@ ENTRY_FLOAT hypotf hypot hypotl
 	push	rC2
 	push	rC1
 	push	rC0
-	
+
 	movw	rC0, rB0
 	movw	rC2, rB2
-	
+
 	clr	rAE
 	mov	rBE, rAE
 	movw	rB0, rA0
 	movw	rB2, rA2
 	XCALL	_U(__mulsf3_pse)
-	
+
 	movw	rB0, rC0
 	movw	rB2, rC2
-	
+
 	push	rAE
 	movw	rC0, rA0
 	movw	rC2, rA2
@@ -185,21 +185,21 @@ ENTRY_FLOAT hypotf hypot hypotl
 	movw	rA2, rB2
 	XCALL	_U(__mulsf3_pse)
 
-	pop	rBE	
+	pop	rBE
 	movw	rB0, rC0
 	movw	rB2, rC2
-	
+
 	pop	rC0
 	pop	rC1
 	pop	rC2
 	pop	rC3
-	
+
 #else	/* to __AVR_HAVE_MOVW__	*/
 	push	rB3
 	push	rB2
 	push	rB1
 	push	rB0
-	
+
 	clr	rAE
 	mov	rBE, rAE
 	mov	rB0, rA0
@@ -207,7 +207,7 @@ ENTRY_FLOAT hypotf hypot hypotl
 	mov	rB2, rA2
 	mov	rB3, rA3
 	XCALL	_U(__mulsf3_pse)
-	
+
 	pop	rB0
 	pop	rB1
 	pop	rB2
@@ -218,7 +218,7 @@ ENTRY_FLOAT hypotf hypot hypotl
 	push	rA1
 	push	rA0
 	push	rAE
-	
+
 	clr	rBE
 	mov	rAE, rBE
 	mov	rA0, rB0
@@ -226,14 +226,14 @@ ENTRY_FLOAT hypotf hypot hypotl
 	mov	rA2, rB2
 	mov	rA3, rB3
 	XCALL	_U(__mulsf3_pse)
-	
+
 	pop	rBE
 	pop	rB0
 	pop	rB1
 	pop	rB2
 	pop	rB3
 #endif	/* ! __AVR_HAVE_MOVW__	*/
-	
+
 	XCALL	_U(__addsf3x)
 	XCALL	_U(__fp_round)
 	XCALL	_U(sqrtf)

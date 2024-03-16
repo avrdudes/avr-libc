@@ -35,8 +35,8 @@
 #include "asmdef.h"
 
 /* float fmaf (float A, float B, float C)
-     The `fmaf' function performs floating-point multiply-add. This is the   
-     operation (A * B) + C, but the intermediate result is not rounded to   
+     The `fmaf' function performs floating-point multiply-add. This is the
+     operation (A * B) + C, but the intermediate result is not rounded to
      the destination type.  This can sometimes improve the precision of a
      calculation.
  */

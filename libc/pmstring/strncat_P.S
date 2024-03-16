@@ -45,7 +45,7 @@
 	ASSEMBLY_CLIB_SECTION
 	.global	_U(strncat_P)
 	.type	_U(strncat_P), @function
-	
+
 _U(strncat_P):
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo

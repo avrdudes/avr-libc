@@ -50,7 +50,7 @@ ENTRY __fp_powsodd
 	push	rA2
 	push	rA1
 	push	rA0
-	
+
 	push	ZH
 	push	ZL
 
