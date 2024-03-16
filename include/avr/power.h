@@ -35,6 +35,9 @@
 #include <avr/io.h>
 #include <stdint.h>
 
+#ifndef __ATTR_ALWAYS_INLINE__
+#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#endif
 
 /** \file */
 /** \defgroup avr_power <avr/power.h>: Power Reduction Management
@@ -1759,6 +1762,42 @@ void clock_prescale_set(clock_div_t __x)
 
 
 #define clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
+
+#elif defined(__AVR_ATtiny441__) \
+|| defined(__AVR_ATtiny841__)
+
+typedef enum
+{
+	clock_div_1 = 0,
+	clock_div_2 = 1,
+	clock_div_4 = 2,
+	clock_div_8 = 3,
+	clock_div_16 = 4,
+	clock_div_32 = 5,
+	clock_div_64 = 6,
+	clock_div_128 = 7,
+	clock_div_256 = 8
+} clock_div_t;
+
+static __ATTR_ALWAYS_INLINE__ void clock_prescale_set (clock_div_t);
+
+void clock_prescale_set (clock_div_t __x)
+{
+	__asm__ __volatile__ (
+        "in __tmp_reg__,__SREG__" "\n\t"
+        "cli"                     "\n\t"
+        "sts %2, %3"              "\n\t"
+        "sts %1, %0"              "\n\t"
+        "out __SREG__, __tmp_reg__"
+        : /* no outputs */
+        : "r" (__x),
+          "n" (_SFR_MEM_ADDR(CLKPR)),
+          "n" (_SFR_MEM_ADDR(CCP)),
+          "r" ((uint8_t) 0xD8)
+        : "r0");
+}
+
+#define clock_prescale_get()  (clock_div_t) (CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
 
 #elif defined(__AVR_ATmega64__) \
 || defined(__AVR_ATmega103__) \

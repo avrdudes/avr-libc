@@ -48,6 +48,9 @@
     Bus Interface): ATxmega64A1, ATxmega64A1U, ATxmega128A1,
     ATxmega128A1U,  ATxmega128A4U.
 
+  - Add device support to avr/power.h for:
+    ATtiny441 ATtiny841
+
 * Pull requests:
 
   - README.md: fix typo in URL #873
