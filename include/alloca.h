@@ -48,7 +48,7 @@
     \return alloca() returns a pointer to the beginning of the allocated
     space. If the allocation causes stack overflow, program behaviour is
     undefined.
-    
+
     \warning Avoid use alloca() inside the list of arguments of a function
     call.
  */

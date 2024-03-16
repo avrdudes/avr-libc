@@ -500,7 +500,7 @@ extern int	fclose(FILE *__stream);
             signed conversion.  A + overrides a space if both are
             used.</li>
       </ul>
-      
+
    -   An optional decimal digit string specifying a minimum field width.
        If the converted value has fewer characters than the field width, it
        will be padded with spaces on the left (or right, if the left-adjustment
@@ -810,7 +810,7 @@ extern int	getchar(void);
 
    Currently, only a single character can be pushed back onto the
    stream.
-   
+
    The ungetc() function returns the character pushed back after the
    conversion, or \c EOF if the operation fails.  If the value of the
    argument \c c character equals \c EOF, the operation will fail and

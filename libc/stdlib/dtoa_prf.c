@@ -49,7 +49,7 @@ ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
     exp = __ftoa_engine (val, (char *)buf, 7, ndigs);
     vtype = buf[0];
 
-    sign = 0;    
+    sign = 0;
     if ((vtype & (FTOA_MINUS | FTOA_NAN)) == FTOA_MINUS)
 	sign = '-';
     else if (flags & DTOA_PLUS)
@@ -105,7 +105,7 @@ ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
 
     n = (sign ? 1 : 0) + (exp>0 ? exp+1 : 1) + (prec ? prec+1 : 0);
     width = width > n ? width - n : 0;
-    
+
     if (!(flags & DTOA_LEFT) && !(flags & DTOA_ZFILL)) {
 	while (width) {
 	    *s++ = ' ';
@@ -141,7 +141,7 @@ ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
     if ( n == exp && (sign > '5' || (sign == '5' && !(vtype & FTOA_CARRY))) )
 	flags = '1';
     *s++ = flags;
-    
+
     while (width) {
 	*s++ = ' ';
 	width--;

@@ -48,7 +48,7 @@ ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
     unsigned char vtype;
 
     if (prec > 7) prec = 7;
-    
+
     exp = __ftoa_engine (val, sbeg, prec, 0);
     s = d = sbeg;
     vtype = *s++;
@@ -64,7 +64,7 @@ ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
 	s = str_nan[0];
 	goto copy;
     }
-    
+
     if (vtype & FTOA_INF) {
 	s = str_inf[0];
       copy:
@@ -73,7 +73,7 @@ ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
 	strcpy_P (d, s);
 	goto ret;
     }
-    
+
     /* mantissa	*/
     if ( (*d++ = *s++) != '1')
 	vtype &= ~FTOA_CARRY;		/* for possible exponent "-00"	*/
@@ -103,7 +103,7 @@ ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
     *d++ = prec;
     *d++ = '0' + exp;
     *d = 0;
-    
+
   ret:
     return sbeg;
 }

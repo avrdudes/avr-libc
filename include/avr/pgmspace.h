@@ -133,9 +133,9 @@ extern "C" {
    \typedef prog_void
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -153,9 +153,9 @@ typedef void PROGMEM prog_void;
    \typedef prog_char
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -171,9 +171,9 @@ typedef char PROGMEM prog_char;
    \typedef prog_uchar
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -189,9 +189,9 @@ typedef unsigned char PROGMEM prog_uchar;
    \typedef prog_int8_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -207,9 +207,9 @@ typedef int8_t PROGMEM prog_int8_t;
    \typedef prog_uint8_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -225,9 +225,9 @@ typedef uint8_t PROGMEM prog_uint8_t;
    \typedef prog_int16_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -243,9 +243,9 @@ typedef int16_t PROGMEM prog_int16_t;
    \typedef prog_uint16_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -261,9 +261,9 @@ typedef uint16_t PROGMEM prog_uint16_t;
    \typedef prog_int32_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -279,9 +279,9 @@ typedef int32_t PROGMEM prog_int32_t;
    \typedef prog_uint32_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -297,9 +297,9 @@ typedef uint32_t PROGMEM prog_uint32_t;
    \typedef prog_int64_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -318,9 +318,9 @@ typedef int64_t PROGMEM prog_int64_t;
    \typedef prog_uint64_t
    \note DEPRECATED
 
-   This typedef is now deprecated because the usage of the __progmem__ 
-   attribute on a type is not supported in GCC. However, the use of the 
-   __progmem__ attribute on a variable declaration is supported, and this is 
+   This typedef is now deprecated because the usage of the __progmem__
+   attribute on a type is not supported in GCC. However, the use of the
+   __progmem__ attribute on a variable declaration is supported, and this is
    now the recommended usage.
 
    The typedef is only visible if the macro __PROG_TYPES_COMPAT__
@@ -581,7 +581,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_near(address_short)
-    Read a byte from the program space with a 16-bit (near) address. 
+    Read a byte from the program space with a 16-bit (near) address.
     \note The address is a byte address.
     The address is in the program space. */
 
@@ -589,16 +589,16 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_near(address_short)
-    Read a word from the program space with a 16-bit (near) address. 
-    \note The address is a byte address. 
+    Read a word from the program space with a 16-bit (near) address.
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_word_near(address_short) __LPM_word((uint16_t)(address_short))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword_near(address_short)
-    Read a double word from the program space with a 16-bit (near) address. 
-    \note The address is a byte address. 
+    Read a double word from the program space with a 16-bit (near) address.
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_dword_near(address_short) \
@@ -606,8 +606,8 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float_near(address_short)
-    Read a float from the program space with a 16-bit (near) address. 
-    \note The address is a byte address. 
+    Read a float from the program space with a 16-bit (near) address.
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_float_near(address_short) \
@@ -615,8 +615,8 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr_near(address_short)
-    Read a pointer from the program space with a 16-bit (near) address. 
-    \note The address is a byte address. 
+    Read a pointer from the program space with a 16-bit (near) address.
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_ptr_near(address_short) \
@@ -943,16 +943,16 @@ not interfere with data accesses.
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_far(address_long)
-    Read a byte from the program space with a 32-bit (far) address. 
+    Read a byte from the program space with a 32-bit (far) address.
 
-    \note The address is a byte address. 
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_byte_far(address_long)  __ELPM((uint32_t)(address_long))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_far(address_long)
-    Read a word from the program space with a 32-bit (far) address. 
+    Read a word from the program space with a 32-bit (far) address.
 
     \note The address is a byte address.
     The address is in the program space. */
@@ -961,7 +961,7 @@ not interfere with data accesses.
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword_far(address_long)
-    Read a double word from the program space with a 32-bit (far) address. 
+    Read a double word from the program space with a 32-bit (far) address.
 
     \note The address is a byte address.
     The address is in the program space. */
@@ -970,7 +970,7 @@ not interfere with data accesses.
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float_far(address_long)
-    Read a float from the program space with a 32-bit (far) address. 
+    Read a float from the program space with a 32-bit (far) address.
 
     \note The address is a byte address.
     The address is in the program space. */
@@ -979,7 +979,7 @@ not interfere with data accesses.
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr_far(address_long)
-    Read a pointer from the program space with a 32-bit (far) address. 
+    Read a pointer from the program space with a 32-bit (far) address.
 
     \note The address is a byte address.
     The address is in the program space. */
@@ -990,45 +990,45 @@ not interfere with data accesses.
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte(address_short)
-    Read a byte from the program space with a 16-bit (near) address. 
+    Read a byte from the program space with a 16-bit (near) address.
 
-    \note The address is a byte address. 
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_byte(address_short)    pgm_read_byte_near(address_short)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word(address_short)
-    Read a word from the program space with a 16-bit (near) address. 
+    Read a word from the program space with a 16-bit (near) address.
 
-    \note The address is a byte address. 
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_word(address_short)    pgm_read_word_near(address_short)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword(address_short)
-    Read a double word from the program space with a 16-bit (near) address. 
+    Read a double word from the program space with a 16-bit (near) address.
 
-    \note The address is a byte address. 
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_dword(address_short)   pgm_read_dword_near(address_short)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float(address_short)
-    Read a float from the program space with a 16-bit (near) address. 
+    Read a float from the program space with a 16-bit (near) address.
 
-    \note The address is a byte address. 
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_float(address_short)   pgm_read_float_near(address_short)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr(address_short)
-    Read a pointer from the program space with a 16-bit (near) address. 
+    Read a pointer from the program space with a 16-bit (near) address.
 
-    \note The address is a byte address. 
+    \note The address is a byte address.
     The address is in the program space. */
 
 #define pgm_read_ptr(address_short)     pgm_read_ptr_near(address_short)

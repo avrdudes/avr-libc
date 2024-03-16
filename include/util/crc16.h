@@ -237,7 +237,7 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
         data ^= lo8 (crc);
         data ^= data << 4;
 
-        return ((((uint16_t)data << 8) | hi8 (crc)) ^ (uint8_t)(data >> 4) 
+        return ((((uint16_t)data << 8) | hi8 (crc)) ^ (uint8_t)(data >> 4)
                 ^ ((uint16_t)data << 3));
     }
     \endcode */
@@ -331,19 +331,19 @@ _crc_ibutton_update(uint8_t __crc, uint8_t __data)
     Optimized CRC-8-CCITT calculation.
 
     Polynomial: x^8 + x^2 + x + 1 (0xE0)<br>
-    
+
     For use with simple CRC-8<br>
     Initial value: 0x0
-    
+
     For use with CRC-8-ROHC<br>
     Initial value: 0xff<br>
     Reference: http://tools.ietf.org/html/rfc3095#section-5.9.1
-    
+
     For use with CRC-8-ATM/ITU<br>
     Initial value: 0xff<br>
     Final XOR value: 0x55<br>
     Reference: http://www.itu.int/rec/T-REC-I.432.1-199902-I/en
-    
+
     The C equivalent has been originally written by Dave Hylands.
     Assembly code is based on _crc_ibutton_update optimization.
 

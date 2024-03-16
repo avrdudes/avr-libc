@@ -42,9 +42,9 @@
 #define __STRINGIFY(x) #x
 #endif /* !defined(__DOXYGEN__) */
 
-/** 
-\file 
-\@{ 
+/**
+\file
+\@{
 */
 
 
@@ -218,8 +218,8 @@
     }
 
     ISR_ALIAS(INT1_vect, INT0_vect);
-    \endcode 
-    
+    \endcode
+
 */
 #  define ISR_ALIAS(vector, target_vector)
 #else /* real code */
@@ -356,7 +356,7 @@
     }
 
     ISR (INT1_vect, ISR_ALIASOF (INT0_vect));
-    \endcode 
+    \endcode
 */
 #  define ISR_ALIASOF(target_vector)
 #else  /* !DOXYGEN */

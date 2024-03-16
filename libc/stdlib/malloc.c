@@ -29,8 +29,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 */
- 
- 
+
+
 /* $Id$ */
 
 #include <stdlib.h>
@@ -53,7 +53,7 @@ char mymem[256];
  * calls must not require more stack space, or they'll risk to collide
  * with the data segment.
  */
- 
+
 /* May be changed by the user only before the first malloc() call.  */
 
 size_t __malloc_margin = 32;
