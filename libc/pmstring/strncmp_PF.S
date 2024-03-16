@@ -80,6 +80,7 @@ _U(strncmp_PF):
 ; ret_hi = SREG.C ? 0xFF : 0
 
 	sbc	ret_b1, ret_b1
+	LPM_R0_ZPLUS_FINI
 	ret
 
 .L_strncmp_PF_end:

@@ -98,6 +98,7 @@ _U(memcpy_PF):
 
 ; return dest (unchanged)
 
+	LPM_R0_ZPLUS_FINI
 	ret
 
 .L_memcpy_PF_end:

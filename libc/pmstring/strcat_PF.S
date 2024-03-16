@@ -72,6 +72,7 @@ _U(strcat_PF):
 
 ; return dest (unchanged)
 
+	LPM_R0_ZPLUS_FINI
 	ret
 
 .L_strcat_PF_end:

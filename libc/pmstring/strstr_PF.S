@@ -64,6 +64,8 @@ _U(strstr_PF):
 	LPM_R0_ZPLUS_NEXT s2_b2
 	tst	r0		; is str2 empty?
 	brne	.L_findstart_P
+.L_done:
+	LPM_R0_ZPLUS_FINI
 	ret			; return original string (req'd by standard)
 
 .L_findstart_P:
@@ -98,11 +100,11 @@ _U(strstr_PF):
 
 	clr	ret_b0
 	clr	ret_b1
-	ret
+	rjmp	.L_done
 
 .L_match_P:
 	sbiw	ret_b0, 1
-	ret
+	rjmp	.L_done
 
 .L_strstr_end_P:
 

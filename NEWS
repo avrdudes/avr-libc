@@ -39,6 +39,14 @@
     --print-multi-directory #642
   - [bug #57071] Fix math.h and function names that block 64-bit
     double #670
+  - Issue #476 [bug #32945] RAMPZ clobbered in far-pointer library.
+    Functions from the far-pointer library in libc/pmstring like
+    memcpy_PF that read from program memory using ELPM must set
+    RAMPZ to the high byte of the 24-bit address.  On devices that
+    don't use RAMPZ exclusively with ELPM, RAMPZ has to be reset when
+    the function is finished.  These are devices with an EBI (External
+    Bus Interface): ATxmega64A1, ATxmega64A1U, ATxmega128A1,
+    ATxmega128A1U,  ATxmega128A4U.
 
 * Pull requests:
 

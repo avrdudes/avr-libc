@@ -89,6 +89,7 @@ _U(strlcpy_PF):
 	sbc	ZH, src_b1		; Z points past \0
 	sbiw	ZL, 1
 	X_movw	rWord_b0, ZL
+	LPM_R0_ZPLUS_FINI
 	ret
 
 .L_strlcpy_PF_end:

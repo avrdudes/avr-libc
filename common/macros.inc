@@ -377,6 +377,9 @@
    high byte (bits 23-16) of the address, bits 15-0 should be in
    the Z (r31:r30) register.  It can be any register except for:
    r0, r1 (__zero_reg__ - assumed to always contain 0), r30, r31.
+
+   LPM_R0_ZPLUS_FINI is used atfer all reads to restore RAMPZ
+   in the case a restoration is required.
  */
 
 	.macro	LPM_R0_ZPLUS_INIT hhi
@@ -408,6 +411,17 @@
 	lpm
 	adiw	r30,1
   #endif
+#endif
+	.endm
+
+/* We only have to restore RAMPZ when the device has the RAMPD (sic!)
+   register.  In that case, we have to restore RAMPZ to zero because
+   RAMPZ is concatenated with Z to get 24-bit addresses for RAM access.
+   When the device has no RAMPD, then the device has no RAMPZ, or RAMPZ
+   is used exclusively with ELPM and need not to be restored.  */
+	.macro	LPM_R0_ZPLUS_FINI
+#ifdef __AVR_HAVE_RAMPD__
+	out	AVR_RAMPZ_ADDR, __zero_reg__
 #endif
 	.endm
 

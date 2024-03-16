@@ -65,6 +65,7 @@ _U(strlen_PF):
 	add	src_b0, ZL
 	adc	src_b1, ZH
 	X_movw	src_b2, src_b0	; size_t is 16 bits
+	LPM_R0_ZPLUS_FINI
 	ret
 
 .L_strlen_PF_end:

@@ -125,6 +125,7 @@ _U(strlcat_PF):
 	sub	rWord_b0, src_b0
 	sbc	rWord_b1, src_b1	; return(dlen + (Z - src))
 	pop	src_b2
+	LPM_R0_ZPLUS_FINI
 	ret
 
 .L_strlcat_PF_end:

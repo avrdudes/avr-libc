@@ -64,6 +64,7 @@ _U(strcpy_PF):
 
 ; return dest (unchanged)
 
+	LPM_R0_ZPLUS_FINI
 	ret
 
 .L_strcpy_PF_end:
