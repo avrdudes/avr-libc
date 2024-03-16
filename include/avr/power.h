@@ -1187,8 +1187,7 @@ the clock below 131.072 kHz.
 #define power_usartf1_disable() (PR_PRPF |= (uint8_t)PR_USART1_bm)
 #endif
 
-static __inline void
-__attribute__ ((__always_inline__))
+static __ATTR_ALWAYS_INLINE__ void
 __power_all_enable()
 {
 #ifdef __AVR_HAVE_PRR
@@ -1236,8 +1235,7 @@ __power_all_enable()
 #endif
 }
 
-static __inline void
-__attribute__ ((__always_inline__))
+static __ATTR_ALWAYS_INLINE__ void
 __power_all_disable()
 {
 #ifdef __AVR_HAVE_PRR
@@ -1479,7 +1477,7 @@ typedef enum
 #endif
 } clock_div_t;
 
-static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 #endif	/* !__DOXYGEN__ */
 
 /**
@@ -1535,7 +1533,7 @@ typedef enum
     clock_div_8 = 3
 } clock_div_t;
 
-static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
 void clock_prescale_set(clock_div_t __x)
 {
@@ -1570,7 +1568,7 @@ typedef enum
     clock_div_128 = 7,
 } clock_div_t;
 
-static __inline__ void system_clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void system_clock_prescale_set(clock_div_t);
 
 void system_clock_prescale_set(clock_div_t __x)
 {
@@ -1602,7 +1600,7 @@ typedef enum
     timer_clock_div_64 = 7
 } timer_clock_div_t;
 
-static __inline__ void timer_clock_prescale_set(timer_clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void timer_clock_prescale_set(timer_clock_div_t);
 
 void timer_clock_prescale_set(timer_clock_div_t __x)
 {
@@ -1643,7 +1641,7 @@ typedef enum
     clock_div_128 = 7
 } clock_div_t;
 
-static __inline__ void system_clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void system_clock_prescale_set(clock_div_t);
 
 void system_clock_prescale_set(clock_div_t __x)
 {
@@ -1681,7 +1679,7 @@ typedef enum
     timer_clock_div_64 = 7
 } timer_clock_div_t;
 
-static __inline__ void timer_clock_prescale_set(timer_clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void timer_clock_prescale_set(timer_clock_div_t);
 
 void timer_clock_prescale_set(timer_clock_div_t __x)
 {
@@ -1742,7 +1740,7 @@ typedef enum
     clock_div_256 = 8
 } clock_div_t;
 
-static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
 void clock_prescale_set(clock_div_t __x)
 {
@@ -1816,7 +1814,7 @@ typedef enum
     clock_div_128 = 128
 } clock_div_t;
 
-static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
 void clock_prescale_set(clock_div_t __x)
 {
@@ -1908,7 +1906,7 @@ typedef enum
     clock_div_256 = 8 
 } clock_div_t; 
 
-static __inline__ void clock_prescale_set(clock_div_t) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
 void clock_prescale_set(clock_div_t __x)
 {
