@@ -1,5 +1,5 @@
 /* Copyright (c) 2006, 2007, 2008  Eric B. Weddington
-   Copyright (c) 2011 Frédéric Nadeau
+   Copyright (c) 2011 FrÃ©dÃ©ric Nadeau
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -64,7 +64,7 @@ find out which macros are applicable to your device.
 
 \note For device using the XTAL Divide Control Register (XDIV), when prescaler
 is used, Timer/Counter0 can only be used in asynchronous mode. Keep in mind
-that Timer/Counter0 source shall be less than ¼th of peripheral clock.
+that Timer/Counter0 source shall be less than Â¼th of peripheral clock.
 Therefore, when using a typical 32.768 kHz crystal, one shall not scale
 the clock below 131.072 kHz.
 
@@ -1829,12 +1829,12 @@ void clock_prescale_set(clock_div_t __x)
         //1 - Clear XDIV in order for it to accept a new value (actually only
         //    XDIVEN need to be cleared, but clearing XDIV is faster than
         //    read-modify-write since we will rewrite XDIV later anyway)
-        //2 - wait 8 clock cycle for stability, see datasheet erreta
-        //3 - Exist if requested prescaller is 1
+        //2 - wait 8 clock cycle for stability, see datasheet errata
+        //3 - Exit if requested prescaler is 1
         //4 - Calculate XDIV6..0 value = 129 - __x
         //5 - Set XDIVEN bit in calculated value
         //6 - write XDIV with calculated value
-        //7 - wait 8 clock cycle for stability, see datasheet erreta
+        //7 - wait 8 clock cycle for stability, see datasheet errata
         __asm__ __volatile__ (
             "in __tmp_reg__,__SREG__" "\n\t"
             "cli" "\n\t"
@@ -1870,17 +1870,17 @@ void clock_prescale_set(clock_div_t __x)
     }
 }
 
-static __inline__ clock_div_t clock_prescale_get(void) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ clock_div_t clock_prescale_get(void);
 
 clock_div_t clock_prescale_get(void)
 {
-    if(bit_is_clear(XDIV, XDIVEN))
+    if (bit_is_clear(XDIV, XDIVEN))
     {
         return 1;
     }
     else
     {
-        return (clock_div_t)(129 - (XDIV & 0x7F));
+        return (clock_div_t) (129 - (XDIV & 0x7F));
     }
 }
  
