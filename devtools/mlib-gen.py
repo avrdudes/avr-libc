@@ -74,12 +74,12 @@ def gcc_print_multi_lib ():
         pml2 += [ m ]
         (path,opt) = m.split(";")
         path = "" if path == "." else (path + "/")
-        
+
         pml2 += [ path + "double32;" + opt + "@mdouble=32" ]
         pml2 += [ path + "double64;" + opt + "@mdouble=64" ]
         pml2 += [ path + "long-double32;" + opt + "@mlong-double=32" ]
         pml2 += [ path + "long-double64;" + opt + "@mlong-double=64" ]
-            
+
     return "\n".join (pml2)
 
 
@@ -104,7 +104,7 @@ class MLib (object):
         self.ident = to_ident(self.mdir)
 
         # Work out the build directory name like avr25_tiny_stack which
-        # will be an immediate subfolders of ./avr/lib.
+        # will be an immediate subfolder of ./avr/lib.
         self.builddir = self.ident
 
         # The options for this variant, as a set.
@@ -158,7 +158,7 @@ class Device (object):
 
         if not type(list5) is list or len(list5) != 5:
             raise ValueError("expecting list with 5 elements, got:", list5)
-        self.mcu     = list5[0] 
+        self.mcu     = list5[0]
         self.crt_o   = list5[1] if list5[1] != "" else ("crt%s.o" % self.mcu)
         self.defs    = set(list5[2].split())
         self.cflags  = set(list5[3].split())
@@ -234,7 +234,7 @@ class Makefile (object):
 def to_ident(var):
     """Turn a string (usually a (sub)folder) into some canonical
        representation that can be used as (part of) an indentifier
-       or of a file name."""
+       or a file name."""
 
     # This are the same replacements that are performed by CHECK_AVR_DEVICE
     # to get to DEVLIST_<<ident>> used by Architecture.am.  DEVLIST_<<ident>>
@@ -357,7 +357,7 @@ def makedir_avr_devices_device(device):
         # option -mmcu=<device> is enough.  In the case where fancy variants
         # like "double64" are supported, the assumption is that no object for
         # any device depends on such options like -mdouble=64.  In that case,
-        # the Makefile will just install the recpective stuff like crt<mcu>.o
+        # the Makefile will just install the respective stuff like crt<mcu>.o
         # and lib<mcu>.a in multiple places, cf. Makefile.am.
         "<<crt_defs>>"    : " ".join(device.defs - multilib_options),
         "<<crt_cflags>>"  : " ".join(device.cflags - multilib_options),

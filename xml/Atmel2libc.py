@@ -52,20 +52,20 @@ class Element:
         self.children = []
 
         self.depth = depth
-        
+
     def AddChild(self, element, depth=0):
         'Add a reference to a child element'
         element.depth = depth
         self.children.append(element)
-        
+
     def getAttribute(self,key):
         'Get an attribute value'
         return self.attributes.get(key)
-    
+
     def getData(self):
         'Get the cdata'
         return self.cdata
-        
+
     def getElements(self,name=''):
         'Get a list of child elements'
         #If no tag name is specified, return the all children
@@ -118,16 +118,16 @@ class Xml2Obj:
     'XML to Object'
 
     encoding = 'utf-8'
-    
+
     def __init__(self):
         self.root = None
         self.nodeStack = []
-        
+
     def StartElement(self,name,attributes):
         'SAX start element even handler'
         # Instantiate an Element object
         element = Element(name.encode(Xml2Obj.encoding),attributes)
-        
+
         # Push element onto the stack and make it a child of parent
         if len(self.nodeStack) > 0:
             parent = self.nodeStack[-1]
@@ -135,7 +135,7 @@ class Xml2Obj:
         else:
             self.root = element
         self.nodeStack.append(element)
-        
+
     def EndElement(self,name):
         'SAX end element event handler'
         self.nodeStack = self.nodeStack[:-1]
@@ -160,7 +160,7 @@ class Xml2Obj:
 
         # Parse the XML File
         ParserStatus = Parser.Parse(open(filename,'r').read(), 1)
-        
+
         return self.root
 
 def convert_vect_addr (addr):

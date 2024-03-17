@@ -504,7 +504,7 @@ avrdx:AVRDX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 avrex:AVREX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
-# Make sure that we are the top-level of the source tree. We will look for the
+# Make sure that we are at the top-level of the source tree. We will look for
 # the AUTHORS file in the current dir and the parent. After that, we complain
 # and fatal error out.
 
