@@ -646,7 +646,7 @@ situation (since with normal memory operands where the order doesn't
 matter, this sometimes yields shorter code).
 
 See
-http://mail.nongnu.org/archive/html/avr-libc-dev/2003-01/msg00044.html
+http://mail.gnu.org/archive/html/avr-libc-dev/2003-01/msg00044.html
 for a possible workaround.
 
 avr-gcc versions after 3.3 have been fixed in a way where this
