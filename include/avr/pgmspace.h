@@ -355,18 +355,18 @@ typedef uint64_t PROGMEM prog_uint64_t;
 
 #elif defined(__PROG_TYPES_COMPAT__)  /* !DOXYGEN */
 
-typedef void prog_void __attribute__((__progmem__,deprecated("prog_void type is deprecated.")));
-typedef char prog_char __attribute__((__progmem__,deprecated("prog_char type is deprecated.")));
-typedef unsigned char prog_uchar __attribute__((__progmem__,deprecated("prog_uchar type is deprecated.")));
-typedef int8_t    prog_int8_t   __attribute__((__progmem__,deprecated("prog_int8_t type is deprecated.")));
-typedef uint8_t   prog_uint8_t  __attribute__((__progmem__,deprecated("prog_uint8_t type is deprecated.")));
-typedef int16_t   prog_int16_t  __attribute__((__progmem__,deprecated("prog_int16_t type is deprecated.")));
-typedef uint16_t  prog_uint16_t __attribute__((__progmem__,deprecated("prog_uint16_t type is deprecated.")));
-typedef int32_t   prog_int32_t  __attribute__((__progmem__,deprecated("prog_int32_t type is deprecated.")));
-typedef uint32_t  prog_uint32_t __attribute__((__progmem__,deprecated("prog_uint32_t type is deprecated.")));
+typedef void prog_void __attribute__((__progmem__,__deprecated__("prog_void type is deprecated.")));
+typedef char prog_char __attribute__((__progmem__,__deprecated__("prog_char type is deprecated.")));
+typedef unsigned char prog_uchar __attribute__((__progmem__,__deprecated__("prog_uchar type is deprecated.")));
+typedef int8_t    prog_int8_t   __attribute__((__progmem__,__deprecated__("prog_int8_t type is deprecated.")));
+typedef uint8_t   prog_uint8_t  __attribute__((__progmem__,__deprecated__("prog_uint8_t type is deprecated.")));
+typedef int16_t   prog_int16_t  __attribute__((__progmem__,__deprecated__("prog_int16_t type is deprecated.")));
+typedef uint16_t  prog_uint16_t __attribute__((__progmem__,__deprecated__("prog_uint16_t type is deprecated.")));
+typedef int32_t   prog_int32_t  __attribute__((__progmem__,__deprecated__("prog_int32_t type is deprecated.")));
+typedef uint32_t  prog_uint32_t __attribute__((__progmem__,__deprecated__("prog_uint32_t type is deprecated.")));
 #if !__USING_MINT8
-typedef int64_t   prog_int64_t  __attribute__((__progmem__,deprecated("prog_int64_t type is deprecated.")));
-typedef uint64_t  prog_uint64_t __attribute__((__progmem__,deprecated("prog_uint64_t type is deprecated.")));
+typedef int64_t   prog_int64_t  __attribute__((__progmem__,__deprecated__("prog_int64_t type is deprecated.")));
+typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_uint64_t type is deprecated.")));
 #endif
 
 #ifndef PGM_P

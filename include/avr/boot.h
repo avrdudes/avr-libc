@@ -135,7 +135,7 @@
     can then be relocated to any address (such as the bootloader
     NRWW area) at link-time. */
 
-#define BOOTLOADER_SECTION    __attribute__ ((section (".bootloader")))
+#define BOOTLOADER_SECTION    __attribute__ ((__section__(".bootloader")))
 
 #ifndef __DOXYGEN__
 /* Create common bit definitions. */

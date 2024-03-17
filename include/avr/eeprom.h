@@ -104,7 +104,7 @@ extern "C" {
     \ingroup avr_eeprom
     Attribute expression causing a variable to be allocated within the
     .eeprom section.	*/
-#define EEMEM __attribute__((section(".eeprom")))
+#define EEMEM __attribute__((__section__(".eeprom")))
 
 /** \def eeprom_is_ready
     \ingroup avr_eeprom
