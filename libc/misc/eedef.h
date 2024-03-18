@@ -83,7 +83,8 @@
             defined (__AVR_AVR16DD28__) || defined (__AVR_AVR16DD32__) || defined (__AVR_AVR32DD14__) || \
             defined (__AVR_AVR32DD20__) || defined (__AVR_AVR32DD32__) || defined (__AVR_AVR32DD28__) || \
             defined (__AVR_AVR64DD14__) || defined (__AVR_AVR64DD20__) || defined (__AVR_AVR64DD28__) || \
-            defined (__AVR_AVR64DD32__)
+            defined (__AVR_AVR64DD32__) \
+            || defined (__AVR_AVR64DU28__) || defined (__AVR_AVR64DU32__)
          /* AVR-Dx family
           * value of NVMCTRL_CMD_enum.NVMCTRL_CMD_EEERWR_gc */
 #        define NVMCTRL_CMD_PAGEERASEWRITE_gc (0x13<<0)

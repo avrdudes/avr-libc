@@ -741,6 +741,10 @@
 #  include <avr/ioavr64dd28.h>
 #elif defined (__AVR_AVR64DD32__)
 #  include <avr/ioavr64dd32.h>
+#elif defined (__AVR_AVR64DU28__)
+#  include <avr/ioavr64du28.h>
+#elif defined (__AVR_AVR64DU32__)
+#  include <avr/ioavr64du32.h>
 #elif defined (__AVR_AVR16EA28__)
 #  include <avr/ioavr16ea28.h>
 #elif defined (__AVR_AVR16EA32__)
