@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2024, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -1294,36 +1294,50 @@ typedef struct PORTMUX_struct
     register8_t TWIROUTEA;  /* TWI route A */
     register8_t TCEROUTEA;  /* TCE route A */
     register8_t TCBROUTEA;  /* TCB route A */
-    register8_t reserved_2[3];
+    register8_t reserved_2[1];
+    register8_t ACROUTEA;  /* AC route A */
+    register8_t reserved_3[1];
     register8_t TCFROUTEA;  /* TCF Route A */
-    register8_t reserved_3[19];
+    register8_t reserved_4[19];
 } PORTMUX_t;
+
+/* Analog Comparator 0 Output select */
+typedef enum PORTMUX_AC0_enum
+{
+    PORTMUX_AC0_DEFAULT_gc = (0x00<<0)  /* OUT: PA7 */
+} PORTMUX_AC0_t;
+
+/* Analog Comparator 1 Output select */
+typedef enum PORTMUX_AC1_enum
+{
+    PORTMUX_AC1_DEFAULT_gc = (0x00<<1)  /* OUT: PA7 */
+} PORTMUX_AC1_t;
 
 /* Event Output A select */
 typedef enum PORTMUX_EVOUTA_enum
 {
-    PORTMUX_EVOUTA_DEFAULT_gc = (0x00<<0),  /* EVOUT on PA2 */
-    PORTMUX_EVOUTA_ALT1_gc = (0x01<<0)  /* EVOUT on PA7 */
+    PORTMUX_EVOUTA_DEFAULT_gc = (0x00<<0),  /* EVOUTA: PA2 */
+    PORTMUX_EVOUTA_ALT1_gc = (0x01<<0)  /* EVOUTA: PA7 */
 } PORTMUX_EVOUTA_t;
 
 /* Event Output C select */
 typedef enum PORTMUX_EVOUTC_enum
 {
-    PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2)  /* EVOUT on PC2 */
+    PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2)  /* EVOUTC: PC2 */
 } PORTMUX_EVOUTC_t;
 
 /* Event Output D select */
 typedef enum PORTMUX_EVOUTD_enum
 {
-    PORTMUX_EVOUTD_DEFAULT_gc = (0x00<<3),  /* EVOUT on PD2 */
-    PORTMUX_EVOUTD_ALT1_gc = (0x01<<3)  /* EVOUT on PD7 */
+    PORTMUX_EVOUTD_DEFAULT_gc = (0x00<<3),  /* EVOUTD: PD2 */
+    PORTMUX_EVOUTD_ALT1_gc = (0x01<<3)  /* EVOUTD: PD7 */
 } PORTMUX_EVOUTD_t;
 
 /* Event Output F select */
 typedef enum PORTMUX_EVOUTF_enum
 {
-    PORTMUX_EVOUTF_DEFAULT_gc = (0x00<<5),  /* EVOUT on PF2 */
-    PORTMUX_EVOUTF_ALT1_gc = (0x01<<5)  /* EVOUT on PF7 */
+    PORTMUX_EVOUTF_DEFAULT_gc = (0x00<<5),  /* EVOUTF: PF2 */
+    PORTMUX_EVOUTF_ALT1_gc = (0x01<<5)  /* EVOUTF: PF7 */
 } PORTMUX_EVOUTF_t;
 
 /* CCL Look-Up Table 0 Signals select */
@@ -1336,7 +1350,8 @@ typedef enum PORTMUX_LUT0_enum
 /* CCL Look-Up Table 1 Signals select */
 typedef enum PORTMUX_LUT1_enum
 {
-    PORTMUX_LUT1_DEFAULT_gc = (0x00<<1)  /* Out: PC3 In: PC0, PC1, PC2 */
+    PORTMUX_LUT1_DEFAULT_gc = (0x00<<1),  /* Out: PC3 In: PC0, PC1, PC2 */
+    PORTMUX_LUT1_ALT1_gc = (0x01<<1)  /* Out: - In: PC0, PC1, PC2 */
 } PORTMUX_LUT1_t;
 
 /* CCL Look-Up Table 2 Signals select */
@@ -1355,64 +1370,65 @@ typedef enum PORTMUX_LUT3_enum
 /* SPI0 Signals select */
 typedef enum PORTMUX_SPI0_enum
 {
-    PORTMUX_SPI0_DEFAULT_gc = (0x00<<0),  /* PA4, PA5, PA6, PA7 */
-    PORTMUX_SPI0_ALT3_gc = (0x03<<0),  /* PA0, PA1, PC0, PC1 */
-    PORTMUX_SPI0_ALT4_gc = (0x04<<0),  /* PD4, PD5, PD6, PD7 */
-    PORTMUX_SPI0_ALT5_gc = (0x05<<0),  /* PC0, PC1, PC2, PC3 */
-    PORTMUX_SPI0_ALT6_gc = (0x06<<0),  /* PC1, PC2, PC3, - */
+    PORTMUX_SPI0_DEFAULT_gc = (0x00<<0),  /* MOSI: PA4, MISO: PA5, SCK: PA6, SS: PA7 */
+    PORTMUX_SPI0_ALT3_gc = (0x03<<0),  /* MOSI: PA0, MISO: PA1, SCK: PC0, SS: PC1 */
+    PORTMUX_SPI0_ALT4_gc = (0x04<<0),  /* MOSI: PD4, MISO: PD5, SCK: PD6, SS: PD7 */
+    PORTMUX_SPI0_ALT5_gc = (0x05<<0),  /* MOSI: PC0, MISO: PC1, SCK: PC2, SS: PC3 */
+    PORTMUX_SPI0_ALT6_gc = (0x06<<0),  /* MOSI: PC1, MISO: PC2, SCK: PC3, SS: PF7 */
     PORTMUX_SPI0_NONE_gc = (0x07<<0)  /* Not connected to any pins, SS set to 1 */
 } PORTMUX_SPI0_t;
 
 /* TCB0 Output select */
 typedef enum PORTMUX_TCB0_enum
 {
-    PORTMUX_TCB0_DEFAULT_gc = (0x00<<0),  /* PA2 */
-    PORTMUX_TCB0_ALT1_gc = (0x01<<0)  /* PF4 */
+    PORTMUX_TCB0_DEFAULT_gc = (0x00<<0),  /* WO: PA2 */
+    PORTMUX_TCB0_ALT1_gc = (0x01<<0)  /* WO: PF4 */
 } PORTMUX_TCB0_t;
 
 /* TCB1 Output select */
 typedef enum PORTMUX_TCB1_enum
 {
-    PORTMUX_TCB1_DEFAULT_gc = (0x00<<1),  /* PA3 */
-    PORTMUX_TCB1_ALT1_gc = (0x01<<1)  /* PF5 */
+    PORTMUX_TCB1_DEFAULT_gc = (0x00<<1),  /* WO: PA3 */
+    PORTMUX_TCB1_ALT1_gc = (0x01<<1)  /* WO: PF5 */
 } PORTMUX_TCB1_t;
 
 /* TCE0 Signals select */
 typedef enum PORTMUX_TCE0_enum
 {
-    PORTMUX_TCE0_PORTA_gc = (0x00<<0),  /* PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7 */
-    PORTMUX_TCE0_PORTC_gc = (0x02<<0),  /* PC0, PC1, PC2, PC3, -, -, -, - */
-    PORTMUX_TCE0_PORTD_gc = (0x03<<0),  /* PD0, PD1, PD2, PD3, PD4, PD5, PD6, PD7 */
-    PORTMUX_TCE0_PORTF_gc = (0x05<<0),  /* PF0, PF1, PF2, PF3, PF4, PF5, -, - */
-    PORTMUX_TCE0_PORTC2_gc = (0x08<<0),  /* PA0, PA1, PC0, PC1, PC2, PC3, -, - */
-    PORTMUX_TCE0_PORTA2_gc = (0x09<<0)  /* PA2, PA3, PA4, PA5, PA6, PA7, -, - */
+    PORTMUX_TCE0_PORTA_gc = (0x00<<0),  /* WOn: PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7 */
+    PORTMUX_TCE0_PORTC_gc = (0x02<<0),  /* WOn: PC0, PC1, PC2, PC3, -, -, -, - */
+    PORTMUX_TCE0_PORTD_gc = (0x03<<0),  /* WOn: PD0, PD1, PD2, PD3, PD4, PD5, PD6, PD7 */
+    PORTMUX_TCE0_PORTF_gc = (0x05<<0),  /* WOn: PF0, PF1, PF2, PF3, PF4, PF5, -, - */
+    PORTMUX_TCE0_PORTC2_gc = (0x08<<0),  /* WOn: PA0, PA1, PC0, PC1, PC2, PC3, -, - */
+    PORTMUX_TCE0_PORTA2_gc = (0x09<<0)  /* WOn: PA2, PA3, PA4, PA5, PA6, PA7, -, - */
 } PORTMUX_TCE0_t;
 
 /* TCF0 Output select */
 typedef enum PORTMUX_TCF0_enum
 {
-    PORTMUX_TCF0_DEFAULT_gc = (0x00<<0),  /* PA0, PA1 */
-    PORTMUX_TCF0_ALT1_gc = (0x01<<0),  /* PA6, PA7 */
-    PORTMUX_TCF0_ALT2_gc = (0x02<<0)  /* PF4, PF5 */
+    PORTMUX_TCF0_DEFAULT_gc = (0x00<<0),  /* WOn: PA0, PA1 */
+    PORTMUX_TCF0_ALT1_gc = (0x01<<0),  /* WOn: PA6, PA7 */
+    PORTMUX_TCF0_ALT2_gc = (0x02<<0)  /* WOn: PF4, PF5 */
 } PORTMUX_TCF0_t;
 
 /* TWI0 Signals select */
 typedef enum PORTMUX_TWI0_enum
 {
-    PORTMUX_TWI0_DEFAULT_gc = (0x00<<0),  /* {PA2, PA3}, {PC2, PC3} */
-    PORTMUX_TWI0_ALT2_gc = (0x02<<0),  /* {PC2, PC3}, {-, -} */
-    PORTMUX_TWI0_ALT3_gc = (0x03<<0)  /* {PA0, PA1}, {PC2, PC3} */
+    PORTMUX_TWI0_DEFAULT_gc = (0x00<<0),  /* SDA: PA2, SCL: PA3. Dual mode: SDA: PC2, SCL: PC3 */
+    PORTMUX_TWI0_ALT1_gc = (0x01<<0),  /* SDA: PA2, SCL: PA3. Dual mode: SDA: -, SCL: - */
+    PORTMUX_TWI0_ALT2_gc = (0x02<<0),  /* SDA: PC2, SCL: PC3. Dual mode: SDA: -, SCL: - */
+    PORTMUX_TWI0_ALT3_gc = (0x03<<0)  /* SDA: PA0, SCL: PA1. Dual mode: SDA: PC2, SCL: PC3 */
 } PORTMUX_TWI0_t;
 
 /* USART0 Routing select */
 typedef enum PORTMUX_USART0_enum
 {
-    PORTMUX_USART0_DEFAULT_gc = (0x00<<0),  /* {PA0, PA1, PA2, PA3} */
-    PORTMUX_USART0_ALT1_gc = (0x01<<0),  /* {PA4, PA5, PA6, PA7} */
-    PORTMUX_USART0_ALT2_gc = (0x02<<0),  /* {PA2,PA3, -, -} */
-    PORTMUX_USART0_ALT3_gc = (0x03<<0),  /* {PD4, PD5, PD6, PD7} */
-    PORTMUX_USART0_ALT4_gc = (0x04<<0),  /* {PC1, PC2, PC3, -} */
-    PORTMUX_USART0_ALT6_gc = (0x06<<0),  /* {PF7, PF6, -, -} */
+    PORTMUX_USART0_DEFAULT_gc = (0x00<<0),  /* TxD: PA0, RxD: PA1, XCK: PA2, XDIR: PA3 */
+    PORTMUX_USART0_ALT1_gc = (0x01<<0),  /* TxD: PA4, RxD: PA5, XCK: PA6, XDIR: PA7 */
+    PORTMUX_USART0_ALT2_gc = (0x02<<0),  /* TxD: PA2, RxD: PA3, XCK: -, XDIR: - */
+    PORTMUX_USART0_ALT3_gc = (0x03<<0),  /* TxD: PD4, RxD: PD5, XCK: PD6, XDIR: PD7 */
+    PORTMUX_USART0_ALT4_gc = (0x04<<0),  /* TxD: PC1, RxD: PC2, XCK: PC3, XDIR: - */
+    PORTMUX_USART0_ALT6_gc = (0x06<<0),  /* TxD: PF7, RxD: PF6, XCK: -, XDIR: - */
     PORTMUX_USART0_NONE_gc = (0x07<<0)  /* Not connected to any pins */
 } PORTMUX_USART0_t;
 
@@ -2853,6 +2869,7 @@ IO Module Instances. Mapped to memory.
 #define PORTMUX_TWIROUTEA  _SFR_MEM8(0x05E6)
 #define PORTMUX_TCEROUTEA  _SFR_MEM8(0x05E7)
 #define PORTMUX_TCBROUTEA  _SFR_MEM8(0x05E8)
+#define PORTMUX_ACROUTEA  _SFR_MEM8(0x05EA)
 #define PORTMUX_TCFROUTEA  _SFR_MEM8(0x05EC)
 
 
@@ -4679,6 +4696,12 @@ IO Module Instances. Mapped to memory.
 #define PORTMUX_TCB1_bm  0x02  /* TCB1 Output bit mask. */
 #define PORTMUX_TCB1_bp  1  /* TCB1 Output bit position. */
 
+/* PORTMUX.ACROUTEA  bit masks and bit positions */
+#define PORTMUX_AC0_bm  0x01  /* Analog Comparator 0 Output bit mask. */
+#define PORTMUX_AC0_bp  0  /* Analog Comparator 0 Output bit position. */
+#define PORTMUX_AC1_bm  0x02  /* Analog Comparator 1 Output bit mask. */
+#define PORTMUX_AC1_bp  1  /* Analog Comparator 1 Output bit position. */
+
 /* PORTMUX.TCFROUTEA  bit masks and bit positions */
 #define PORTMUX_TCF0_gm  0x03  /* TCF0 Output group mask. */
 #define PORTMUX_TCF0_gp  0  /* TCF0 Output group position. */
@@ -6142,6 +6165,8 @@ IO Module Instances. Mapped to memory.
 #define PORTA_PORT_vect      _VECTOR(6)  /*  */
 
 /* WEX0 interrupt vectors */
+#define WEX0_FAULTDET_vect_num  7
+#define WEX0_FAULTDET_vect      _VECTOR(7)  /*  */
 #define WEX0_FDFEVA_vect_num  7
 #define WEX0_FDFEVA_vect      _VECTOR(7)  /*  */
 #define WEX0_FDFEVB_vect_num  7

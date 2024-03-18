@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2024, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -1269,78 +1269,85 @@ typedef struct PORTMUX_struct
 /* Event Output C select */
 typedef enum PORTMUX_EVOUTC_enum
 {
-    PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2)  /* EVOUT on PC2 */
+    PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2)  /* EVOUTC: PC2 */
 } PORTMUX_EVOUTC_t;
 
 /* Event Output D select */
 typedef enum PORTMUX_EVOUTD_enum
 {
-    PORTMUX_EVOUTD_ALT1_gc = (0x01<<3)  /* EVOUT on PD7 */
+    PORTMUX_EVOUTD_DEFAULT_gc = (0x00<<3),  /* Not connected to any pins */
+    PORTMUX_EVOUTD_ALT1_gc = (0x01<<3)  /* EVOUTD: PD7 */
 } PORTMUX_EVOUTD_t;
 
 /* Event Output F select */
 typedef enum PORTMUX_EVOUTF_enum
 {
-    PORTMUX_EVOUTF_ALT1_gc = (0x01<<5)  /* EVOUT on PF7 */
+    PORTMUX_EVOUTF_DEFAULT_gc = (0x00<<5),  /* Not connected to any pins */
+    PORTMUX_EVOUTF_ALT1_gc = (0x01<<5)  /* EVOUTF: PF7 */
 } PORTMUX_EVOUTF_t;
 
 /* CCL Look-Up Table 0 Signals select */
 typedef enum PORTMUX_LUT0_enum
 {
-    PORTMUX_LUT0_DEFAULT_gc = (0x00<<0)  /* Out: PA3 In: PA0, PA1, PA2 */
+    PORTMUX_LUT0_DEFAULT_gc = (0x00<<0),  /* Out: - In: PA0, PA1, - */
+    PORTMUX_LUT0_ALT1_gc = (0x01<<0)  /* Out: - In: PA0, PA1, - */
 } PORTMUX_LUT0_t;
 
 /* CCL Look-Up Table 1 Signals select */
 typedef enum PORTMUX_LUT1_enum
 {
-    PORTMUX_LUT1_DEFAULT_gc = (0x00<<1)  /* Out: PC3 In: PC0, PC1, PC2 */
+    PORTMUX_LUT1_DEFAULT_gc = (0x00<<1),  /* Out: PC3 In: PC0, PC1, PC2 */
+    PORTMUX_LUT1_ALT1_gc = (0x01<<1)  /* Out: - In: PC0, PC1, PC2 */
 } PORTMUX_LUT1_t;
 
 /* CCL Look-Up Table 2 Signals select */
 typedef enum PORTMUX_LUT2_enum
 {
-    PORTMUX_LUT2_ALT1_gc = (0x01<<2)  /* Out: PD6 In: PD0, PD1, PD2 */
+    PORTMUX_LUT2_DEFAULT_gc = (0x00<<2),  /* Not connected to any pins */
+    PORTMUX_LUT2_ALT1_gc = (0x01<<2)  /* Out: PD6 In: -, -, - */
 } PORTMUX_LUT2_t;
 
 /* SPI0 Signals select */
 typedef enum PORTMUX_SPI0_enum
 {
-    PORTMUX_SPI0_ALT3_gc = (0x03<<0),  /* PA0, PA1, PC0, PC1 */
-    PORTMUX_SPI0_ALT4_gc = (0x04<<0),  /* PD4, PD5, PD6, PD7 */
-    PORTMUX_SPI0_ALT5_gc = (0x05<<0),  /* PC0, PC1, PC2, PC3 */
-    PORTMUX_SPI0_ALT6_gc = (0x06<<0),  /* PC1, PC2, PC3, - */
+    PORTMUX_SPI0_DEFAULT_gc = (0x00<<0),  /* Not connected to any pins */
+    PORTMUX_SPI0_ALT3_gc = (0x03<<0),  /* MOSI: PA0, MISO: PA1, SCK: PC0, SS: PC1 */
+    PORTMUX_SPI0_ALT4_gc = (0x04<<0),  /* MOSI: PD4, MISO: PD5, SCK: PD6, SS: PD7 */
+    PORTMUX_SPI0_ALT5_gc = (0x05<<0),  /* MOSI: PC0, MISO: PC1, SCK: PC2, SS: PC3 */
+    PORTMUX_SPI0_ALT6_gc = (0x06<<0),  /* MOSI: PC1, MISO: PC2, SCK: PC3, SS: PF7 */
     PORTMUX_SPI0_NONE_gc = (0x07<<0)  /* Not connected to any pins, SS set to 1 */
 } PORTMUX_SPI0_t;
 
 /* TCE0 Signals select */
 typedef enum PORTMUX_TCE0_enum
 {
-    PORTMUX_TCE0_PORTA_gc = (0x00<<0),  /* PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7 */
-    PORTMUX_TCE0_PORTC_gc = (0x02<<0),  /* PC0, PC1, PC2, PC3, -, -, -, - */
-    PORTMUX_TCE0_PORTC2_gc = (0x08<<0)  /* PA0, PA1, PC0, PC1, PC2, PC3, -, - */
+    PORTMUX_TCE0_PORTA_gc = (0x00<<0),  /* WOn: PA0, PA1, -, -, -, -, -, - */
+    PORTMUX_TCE0_PORTC_gc = (0x02<<0),  /* WOn: PC0, PC1, PC2, PC3, -, -, -, - */
+    PORTMUX_TCE0_PORTD_gc = (0x03<<0),  /* WOn: -, -, -, -, PD4, PD5, PD6, PD7 */
+    PORTMUX_TCE0_PORTC2_gc = (0x08<<0)  /* WOn: PA0, PA1, PC0, PC1, PC2, PC3, -, - */
 } PORTMUX_TCE0_t;
 
 /* TCF0 Output select */
 typedef enum PORTMUX_TCF0_enum
 {
-    PORTMUX_TCF0_DEFAULT_gc = (0x00<<0)  /* PA0, PA1 */
+    PORTMUX_TCF0_DEFAULT_gc = (0x00<<0)  /* WOn: PA0, PA1 */
 } PORTMUX_TCF0_t;
 
 /* TWI0 Signals select */
 typedef enum PORTMUX_TWI0_enum
 {
-    PORTMUX_TWI0_DEFAULT_gc = (0x00<<0),  /* {PA2, PA3}, {PC2, PC3} */
-    PORTMUX_TWI0_ALT2_gc = (0x02<<0),  /* {PC2, PC3}, {-, -} */
-    PORTMUX_TWI0_ALT3_gc = (0x03<<0)  /* {PA0, PA1}, {PC2, PC3} */
+    PORTMUX_TWI0_DEFAULT_gc = (0x00<<0),  /* SDA: -, SCL: -. Dual mode: SDA: PC2, SCL: PC3 */
+    PORTMUX_TWI0_ALT2_gc = (0x02<<0),  /* SDA: PC2, SCL: PC3. Dual mode: SDA: -, SCL: - */
+    PORTMUX_TWI0_ALT3_gc = (0x03<<0)  /* SDA: PA0, SCL: PA1. Dual mode: SDA: PC2, SCL: PC3 */
 } PORTMUX_TWI0_t;
 
 /* USART0 Routing select */
 typedef enum PORTMUX_USART0_enum
 {
-    PORTMUX_USART0_DEFAULT_gc = (0x00<<0),  /* {PA0, PA1, PA2, PA3} */
-    PORTMUX_USART0_ALT3_gc = (0x03<<0),  /* {PD4, PD5, PD6, PD7} */
-    PORTMUX_USART0_ALT4_gc = (0x04<<0),  /* {PC1, PC2, PC3, -} */
-    PORTMUX_USART0_ALT6_gc = (0x06<<0),  /* {PF7, PF6, -, -} */
+    PORTMUX_USART0_DEFAULT_gc = (0x00<<0),  /* TxD: PA0, RxD: PA1, XCK: -, XDIR: - */
+    PORTMUX_USART0_ALT3_gc = (0x03<<0),  /* TxD: PD4, RxD: PD5, XCK: PD6, XDIR: PD7 */
+    PORTMUX_USART0_ALT4_gc = (0x04<<0),  /* TxD: PC1, RxD: PC2, XCK: PC3, XDIR: - */
+    PORTMUX_USART0_ALT6_gc = (0x06<<0),  /* TxD: PF7, RxD: PF6, XCK: -, XDIR: - */
     PORTMUX_USART0_NONE_gc = (0x07<<0)  /* Not connected to any pins */
 } PORTMUX_USART0_t;
 
@@ -6059,6 +6066,8 @@ IO Module Instances. Mapped to memory.
 #define PORTA_PORT_vect      _VECTOR(6)  /*  */
 
 /* WEX0 interrupt vectors */
+#define WEX0_FAULTDET_vect_num  7
+#define WEX0_FAULTDET_vect      _VECTOR(7)  /*  */
 #define WEX0_FDFEVA_vect_num  7
 #define WEX0_FDFEVA_vect      _VECTOR(7)  /*  */
 #define WEX0_FDFEVB_vect_num  7
