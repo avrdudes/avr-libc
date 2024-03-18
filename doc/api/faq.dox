@@ -751,7 +751,7 @@ strings. The most obvious (and incorrect) thing to do is this:
 \code
 #include <avr/pgmspace.h>
 
-PGM_P array[2] PROGMEM = {
+const char* array[2] PROGMEM = {
     "Foo",
     "Bar"
 };
@@ -776,7 +776,7 @@ To work around this, you need to do something like this:
 const char foo[] PROGMEM = "Foo";
 const char bar[] PROGMEM = "Bar";
 
-PGM_P array[2] PROGMEM = {
+const char* array[2] PROGMEM = {
     foo,
     bar
 };
@@ -784,10 +784,10 @@ PGM_P array[2] PROGMEM = {
 int main (void)
 {
     char buf[32];
-    PGM_P p;
+    const char *p;
     int i;
 
-    memcpy_P(&p, &array[i], sizeof(PGM_P));
+    memcpy_P(&p, &array[i], sizeof(const char*));
     strcpy_P(buf, p);
     return 0;
 }
@@ -815,7 +815,7 @@ in flash as such:
 Then in main we see this:
 
 \code
-    memcpy_P(&p, &array[i], sizeof(PGM_P));
+    memcpy_P(&p, &array[i], sizeof(const char*));
   70:   66 0f           add     r22, r22
   72:   77 1f           adc     r23, r23
   74:   6a 5d           subi    r22, 0xDA       ; 218
