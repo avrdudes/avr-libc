@@ -59,6 +59,7 @@ extern char *__malloc_heap_end;
 #elif defined(__AVR_AT90S8515__)
 #define HEAP_START 0x100
 #else
+/* SKIP_AVRTEST: "Unknown MCU type" */
 #  error "Unknown MCU type"
 #endif
 

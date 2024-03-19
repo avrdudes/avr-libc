@@ -46,6 +46,12 @@ int main ()
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
+#ifdef USE_AVRTEST
+#define EXTRA_SIZE 100
+#else
+#define EXTRA_SIZE 0
+#endif
+
 /* avr-gcc 4.1.2, Avr-libc 1.6.1, main() contains only 1 line with
    pgm_read_word, bytes:
       MIN_SIZE == 90  --> Fault
@@ -60,7 +66,7 @@ int main ()
 # define MIN_SIZE 640
 #endif
 
-#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE)/2)
+#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE - EXTRA_SIZE) / 2)
 void very_big_function (void)
 {
     asm volatile (

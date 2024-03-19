@@ -43,9 +43,16 @@
      700   avr-gcc 4.3.0, ATmega128, before fixing
      280   avr-gcc 4.3.0, ATmega128, after fixing of this bug
  */
+#ifndef USE_AVRTEST
 #define MIN_SIZE 320
+#define RAM_USED 0
+#else
+/* avrtest's exit-mcu.o module consumes more flash.  */
+#define MIN_SIZE (320 + 110)
+#define RAM_USED 16
+#endif
 
-#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE)/2)
+#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE - RAM_USED)/2)
 void very_big_function (void)
 {
     asm volatile (

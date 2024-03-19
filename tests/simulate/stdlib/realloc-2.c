@@ -61,6 +61,7 @@ static const int sizes[8] =
 };
 #define TARGETVAL 348
 #else
+/* SKIP_AVRTEST: "Unknown MCU type" */
 #  error "Unknown MCU type"
 #endif
 

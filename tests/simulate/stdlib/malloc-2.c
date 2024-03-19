@@ -66,6 +66,7 @@ extern char *__malloc_heap_end;
 #define ALLOC_FAILS 0x100
 #define ALLOC_WORKS 0xfe
 #else
+/* SKIP_AVRTEST: "Unknown MCU type" */
 #  error "Unknown MCU type"
 #endif
 

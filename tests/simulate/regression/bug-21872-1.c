@@ -35,6 +35,12 @@
 
 #ifdef	__AVR__
 
+#ifdef USE_AVRTEST
+#define EXTRA_SIZE 100
+#else
+#define EXTRA_SIZE 0
+#endif
+
 #include <avr/io.h>
 
 /* avr-gcc 4.2.2 + Avr-libc 1.6.1, before correction:
@@ -52,7 +58,7 @@
 # define MIN_SIZE 850
 #endif
 
-#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE)/2)
+#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE - EXTRA_SIZE)/2)
 void very_big_function (void)
 {
     asm volatile (

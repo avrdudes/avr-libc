@@ -35,6 +35,8 @@
 
 volatile int v;		/* to suppress any optimization	*/
 
+/* SKIP_AVRTEST: "abort already in exit-mcu.o" */
+
 __attribute__((noreturn)) void abort (void)
 {
     exit (v);
