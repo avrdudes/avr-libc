@@ -330,7 +330,8 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
    all the other devices:  When taking the address of a symbol that's
    attributed as progmem, then the compiler adds an offset of 0x4000
    to the value of the symbol.  This means that accessing data in
-   progmem can be performed by vanilla C/C++ code.  */
+   progmem can be performed by vanilla C/C++ code.  This assumes
+   - GCC PR71948 - Make progmem work on Reduced Tiny (GCC v7 / 2016-08)  */
 #define __LPM(addr)         (* (const uint8_t*)(addr))
 #define __LPM_word(addr)    (* (const uint16_t*)(addr))
 #define __LPM_dword(addr)   (* (const uint32_t*)(addr))
