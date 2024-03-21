@@ -1997,7 +1997,174 @@ size_t strlen_P(const char *s)
 #endif /* DOXYGEN */
 
 #ifdef __cplusplus
-}
+} // extern "C"
 #endif
+
+#if defined(__cplusplus) && defined(__pgm_read_template__)
+
+/* Caveat: When this file is found via -isystem <path>, then some older
+   avr-g++ versions come up with
+
+       error: template with C linkage
+
+   because the target description did not define NO_IMPLICIT_EXTERN_C.  */
+
+template<typename __T, size_t>
+struct __pgm_read_impl
+{
+  // A default implementaton for T's with a size not in { 1, 2, 3, 4, 8 }.
+  // While this works, the performance is absolute scrap because GCC does
+  // not handle objects well that don't fit in a register (i.e. avr-gcc
+  // has no respective machine_mode).
+  __T operator() (const __T *__addr) const
+  {
+    __T __res;
+    memcpy_P (&__res, __addr, sizeof(__T));
+    return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_impl<__T, 1>
+{
+  __T operator() (const __T *__addr) const
+  {
+    __T __res; __LPM__1 (__res, __addr); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_impl<__T, 2>
+{
+  __T operator() (const __T *__addr) const
+  {
+    __T __res; __LPM__2 (__res, __addr); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_impl<__T, 3>
+{
+  __T operator() (const __T *__addr) const
+  {
+    __T __res; __LPM__3 (__res, __addr); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_impl<__T, 4>
+{
+  __T operator() (const __T *__addr) const
+  {
+    __T __res; __LPM__4 (__res, __addr); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_impl<__T, 8>
+{
+  __T operator() (const __T *__addr) const
+  {
+    __T __res; __LPM__8 (__res, __addr); return __res;
+  }
+};
+
+template<typename __T>
+__T pgm_read (const __T *__addr)
+{
+  return __pgm_read_impl<__T, sizeof(__T)>() (__addr);
+}
+
+//////////////////////////////////////////////////////////
+
+template<typename __T, size_t>
+struct __pgm_read_far_impl
+{
+  // A default implementaton for T's with a size not in { 1, 2, 3, 4, 8 }.
+  // While this works, the performance is absolute scrap because GCC does
+  // not handle objects well that don't fit in a register (i.e. avr-gcc
+  // has no respective machine_mode).
+  __T operator() (const __T *__addr) const
+  {
+    __T __res;
+    memcpy_PF (&__res, __addr, sizeof(__T));
+    return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_far_impl<__T, 1>
+{
+  __T operator() (uint_farptr_t __addr) const
+  {
+    __T __res; __ELPM__1 (__res, __addr, __T); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_far_impl<__T, 2>
+{
+  __T operator() (uint_farptr_t __addr) const
+  {
+    __T __res; __ELPM__2 (__res, __addr, __T); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_far_impl<__T, 3>
+{
+  __T operator() (uint_farptr_t __addr) const
+  {
+    __T __res; __ELPM__3 (__res, __addr, __T); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_far_impl<__T, 4>
+{
+  __T operator() (uint_farptr_t __addr) const
+  {
+    __T __res; __ELPM__4 (__res, __addr, __T); return __res;
+  }
+};
+
+template<typename __T>
+struct __pgm_read_far_impl<__T, 8>
+{
+  __T operator() (uint_farptr_t __addr) const
+  {
+    __T __res; __ELPM__8 (__res, __addr, __T); return __res;
+  }
+};
+
+template<typename __T>
+__T pgm_read_far (uint_farptr_t __addr)
+{
+  return __pgm_read_far_impl<__T, sizeof(__T)>() (__addr);
+}
+
+#endif /* C++ */
+
+#ifdef __DOXYGEN__
+/** \ingroup avr_pgmspace
+    \fn T pgm_read<T> (const T *addr)
+
+    Read an object of type \c T from program memory address \p addr and
+    return it.
+    This template is only available when macro \c __pgm_read_template__
+    is defined.  */
+template<typename T>
+T pgm_read<T> (const T *addr);
+
+/** \ingroup avr_pgmspace
+    \fn T pgm_read_far<T> (uint_farptr_t addr)
+
+    Read an object of type \c T from program memory address \p addr and
+    return it.
+    This template is only available when macro \c __pgm_read_template__
+    is defined.  */
+template<typename T>
+T pgm_read_far<T> (uint_farptr_t addr);
+#endif /* DOXYGEN */
 
 #endif /* __PGMSPACE_H_ */
