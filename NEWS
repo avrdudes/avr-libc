@@ -33,6 +33,20 @@
   - Added support for Classic devices:
     ATmega168PB ATmega328PB ATmega324PB
 
+  - Added inline functions to read from progmem that return a type as
+    indicated by the function name, like char pgm_read_char (const char*).
+    The functions adjust to -mint8, -mdouble= and -mlong-double=.
+    Functions for fixed-width types are pgm_read_i64, pgm_read_u24, etc.
+    * Functions that read from beyond 64 KiB are suffixed _far and take
+      an uint_farptr_t as argument.
+    * pgm_read_float has been turned from a macro that takes uint16_t to
+      an inline function that takes const float*.
+    * pgm_read_byte, pgm_read_word and pgm_read_dword remain as they were
+      and still take an uint16_t argument for compatibility and legacy code.
+
+  - Added experimental templates pgm_read<> and pgm_read_far<>.  They are
+    only available when macro __pgm_read_template__ is defined.
+
 * Issues closed:
 
   - [patch #9543] Add avrxmega3 devices. #824
