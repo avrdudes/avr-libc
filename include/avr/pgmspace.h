@@ -48,16 +48,14 @@
     \endcode
 
     The functions in this module provide interfaces for a program to access
-    data stored in program space (flash memory) of the device.  In order to
-    use these functions, the target device must support either the \c LPM or
-    \c ELPM instructions.
+    data stored in program space (flash memory) of the device.
 
     \note These functions are an attempt to provide some compatibility with
     header files that come with IAR C, to make porting applications between
     different compilers easier.  This is not 100% compatibility though (GCC
     does not have full support for multiple address spaces yet).
 
-    \note If you are working with strings which are completely based in ram,
+    \note If you are working with strings which are completely based in RAM,
     use the standard string functions described in \ref avr_string.
 
     \note If possible, put your constant tables in the lower 64 KB and use
@@ -106,7 +104,11 @@
 #define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
 #endif
 
+#define PROGMEM __ATTR_PROGMEM__
+
 #endif	/* !__DOXYGEN__ */
+
+#ifdef __DOXYGEN__
 
 /**
    \ingroup avr_pgmspace
@@ -115,9 +117,7 @@
    Attribute to use in order to declare an object being located in
    flash ROM.
  */
-#define PROGMEM __ATTR_PROGMEM__
-
-#ifdef __DOXYGEN__
+#define PROGMEM attribute((__progmem__))
 
 /** \ingroup avr_pgmspace
     \fn char pgm_read_char (const char *address)
@@ -145,13 +145,13 @@ static inline uint8_t pgm_read_u8 (const uint8_t *address);
 
 /** \ingroup avr_pgmspace
     \fn int8_t pgm_read_i8 (const int8_t *address)
-    Read a <tt>int8_t</tt> from 16-bit (near) byte-address \p address.
+    Read an <tt>int8_t</tt> from 16-bit (near) byte-address \p address.
     The address is in the lower 64 KiB of program memory. */
 static inline int8_t pgm_read_i8 (const int8_t *address);
 
 /** \ingroup avr_pgmspace
     \fn int pgm_read_int (const int *address)
-    Read a <tt>int</tt> from 16-bit (near) byte-address \p address.
+    Read an <tt>int</tt> from 16-bit (near) byte-address \p address.
     The address is in the lower 64 KiB of program memory. */
 static inline int pgm_read_int (const int *address);
 
@@ -199,13 +199,13 @@ static inline uint16_t pgm_read_u16 (const uint16_t *address);
 
 /** \ingroup avr_pgmspace
     \fn int16_t pgm_read_i16 (const int16_t *address)
-    Read a <tt>int16_t</tt> from 16-bit (near) byte-address \p address.
+    Read an <tt>int16_t</tt> from 16-bit (near) byte-address \p address.
     The address is in the lower 64 KiB of program memory. */
 static inline int16_t pgm_read_i16 (const int16_t *address);
 
 /** \ingroup avr_pgmspace
     \fn int pgm_read_int (const int *address)
-    Read a <tt>int</tt> from 16-bit (near) byte-address \p address.
+    Read an <tt>int</tt> from 16-bit (near) byte-address \p address.
     The address is in the lower 64 KiB of program memory. */
 static inline int pgm_read_int (const int *address);
 
@@ -277,7 +277,7 @@ static inline uint32_t pgm_read_u32 (const uint32_t *address);
 
 /** \ingroup avr_pgmspace
     \fn int32_t pgm_read_i32 (const int32_t *address)
-    Read a <tt>int32_t</tt> from 16-bit (near) byte-address \p address.
+    Read an <tt>int32_t</tt> from 16-bit (near) byte-address \p address.
     The address is in the lower 64 KiB of program memory. */
 static inline int32_t pgm_read_i32 (const int32_t *address);
 
@@ -331,7 +331,7 @@ static inline uint64_t pgm_read_u64 (const uint64_t *address);
 
 /** \ingroup avr_pgmspace
     \fn int64_t pgm_read_i64 (const int64_t *address)
-    Read a <tt>int64_t</tt> from 16-bit (near) byte-address \p address.
+    Read an <tt>int64_t</tt> from 16-bit (near) byte-address \p address.
     The address is in the lower 64 KiB of program memory. */
 static inline int64_t pgm_read_i64 (const int64_t *address);
 
@@ -585,13 +585,13 @@ static inline uint8_t pgm_read_u8_far (uint_farptr_t address);
 
 /** \ingroup avr_pgmspace
     \fn int8_t pgm_read_i8_far (uint_farptr_t address)
-    Read a <tt>int8_t</tt> from far byte-address \p address.
+    Read an <tt>int8_t</tt> from far byte-address \p address.
     The address is in the program memory. */
 static inline int8_t pgm_read_i8_far (uint_farptr_t address);
 
 /** \ingroup avr_pgmspace
     \fn int pgm_read_int_far (uint_farptr_t address)
-    Read a <tt>int</tt> from far byte-address \p address.
+    Read an <tt>int</tt> from far byte-address \p address.
     The address is in the program memory. */
 static inline int pgm_read_int_far (uint_farptr_t address);
 
@@ -639,13 +639,13 @@ static inline uint16_t pgm_read_u16_far (uint_farptr_t address);
 
 /** \ingroup avr_pgmspace
     \fn int16_t pgm_read_i16_far (uint_farptr_t address)
-    Read a <tt>int16_t</tt> from far byte-address \p address.
+    Read an <tt>int16_t</tt> from far byte-address \p address.
     The address is in the program memory. */
 static inline int16_t pgm_read_i16_far (uint_farptr_t address);
 
 /** \ingroup avr_pgmspace
     \fn int pgm_read_int_far (uint_farptr_t address)
-    Read a <tt>int</tt> from far byte-address \p address.
+    Read an <tt>int</tt> from far byte-address \p address.
     The address is in the program memory. */
 static inline int pgm_read_int_far (uint_farptr_t address);
 
@@ -717,7 +717,7 @@ static inline uint32_t pgm_read_u32_far (uint_farptr_t address);
 
 /** \ingroup avr_pgmspace
     \fn int32_t pgm_read_i32_far (uint_farptr_t address)
-    Read a <tt>int32_t</tt> from far byte-address \p address.
+    Read an <tt>int32_t</tt> from far byte-address \p address.
     The address is in the program memory. */
 static inline int32_t pgm_read_i32_far (uint_farptr_t address);
 
@@ -771,7 +771,7 @@ static inline uint64_t pgm_read_u64_far (uint_farptr_t address);
 
 /** \ingroup avr_pgmspace
     \fn int64_t pgm_read_i64_far (uint_farptr_t address)
-    Read a <tt>int64_t</tt> from far byte-address \p address.
+    Read an <tt>int64_t</tt> from far byte-address \p address.
     The address is in the program memory. */
 static inline int64_t pgm_read_i64_far (uint_farptr_t address);
 
@@ -799,7 +799,7 @@ static inline double pgm_read_double_far (uint_farptr_t address);
     The address is in the program memory. */
 static inline long double pgm_read_long_double_far (uint_farptr_t address);
 
-#else /* !DOCYGEN */
+#else /* !DOXYGEN */
 
 #if defined(__AVR_HAVE_ELPMX__)
 
@@ -1123,170 +1123,70 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 # define PSTR(s) (__extension__({static const char __c[] PROGMEM = (s); &__c[0];}))
 #endif /* DOXYGEN */
 
-#ifndef __DOXYGEN__ /* Internal macros, not documented. */
-#define __LPM_classic__(addr)   \
-(__extension__({                \
-    uint16_t __addr16 = (uint16_t)(addr); \
-    uint8_t __result;           \
-    __asm__ __volatile__        \
-    (                           \
-        "lpm" "\n\t"            \
-        "mov %0, r0" "\n\t"     \
-        : "=r" (__result)       \
-        : "z" (__addr16)        \
-        : "r0"                  \
-    );                          \
-    __result;                   \
-}))
+#ifndef __DOXYGEN__
 
-#define __LPM_enhanced__(addr)  \
-(__extension__({                \
-    uint16_t __addr16 = (uint16_t)(addr); \
-    uint8_t __result;           \
-    __asm__ __volatile__        \
-    (                           \
-        "lpm %0, Z" "\n\t"      \
-        : "=r" (__result)       \
-        : "z" (__addr16)        \
-    );                          \
-    __result;                   \
-}))
-
-#define __LPM_word_classic__(addr)          \
-(__extension__({                            \
-    uint16_t __addr16 = (uint16_t)(addr);   \
-    uint16_t __result;                      \
-    __asm__ __volatile__                    \
-    (                                       \
-        "lpm"           "\n\t"              \
-        "mov %A0, r0"   "\n\t"              \
-        "adiw r30, 1"   "\n\t"              \
-        "lpm"           "\n\t"              \
-        "mov %B0, r0"   "\n\t"              \
-        : "=r" (__result), "=z" (__addr16)  \
-        : "1" (__addr16)                    \
-        : "r0"                              \
-    );                                      \
-    __result;                               \
-}))
-
-#define __LPM_word_enhanced__(addr)         \
-(__extension__({                            \
-    uint16_t __addr16 = (uint16_t)(addr);   \
-    uint16_t __result;                      \
-    __asm__ __volatile__                    \
-    (                                       \
-        "lpm %A0, Z+"   "\n\t"              \
-        "lpm %B0, Z"    "\n\t"              \
-        : "=r" (__result), "=z" (__addr16)  \
-        : "1" (__addr16)                    \
-    );                                      \
-    __result;                               \
-}))
-
-#define __LPM_dword_classic__(addr)         \
-(__extension__({                            \
-    uint16_t __addr16 = (uint16_t)(addr);   \
-    uint32_t __result;                      \
-    __asm__ __volatile__                    \
-    (                                       \
-        "lpm"           "\n\t"              \
-        "mov %A0, r0"   "\n\t"              \
-        "adiw r30, 1"   "\n\t"              \
-        "lpm"           "\n\t"              \
-        "mov %B0, r0"   "\n\t"              \
-        "adiw r30, 1"   "\n\t"              \
-        "lpm"           "\n\t"              \
-        "mov %C0, r0"   "\n\t"              \
-        "adiw r30, 1"   "\n\t"              \
-        "lpm"           "\n\t"              \
-        "mov %D0, r0"   "\n\t"              \
-        : "=r" (__result), "=z" (__addr16)  \
-        : "1" (__addr16)                    \
-        : "r0"                              \
-    );                                      \
-    __result;                               \
-}))
-
-#define __LPM_dword_enhanced__(addr)        \
-(__extension__({                            \
-    uint16_t __addr16 = (uint16_t)(addr);   \
-    uint32_t __result;                      \
-    __asm__ __volatile__                    \
-    (                                       \
-        "lpm %A0, Z+"   "\n\t"              \
-        "lpm %B0, Z+"   "\n\t"              \
-        "lpm %C0, Z+"   "\n\t"              \
-        "lpm %D0, Z"    "\n\t"              \
-        : "=r" (__result), "=z" (__addr16)  \
-        : "1" (__addr16)                    \
-    );                                      \
-    __result;                               \
-}))
-
-#define __LPM_float_classic__(addr)         \
-(__extension__({                            \
-    uint16_t __addr16 = (uint16_t)(addr);   \
-    float __result;                         \
-    __asm__ __volatile__                    \
-    (                                       \
-        "lpm"           "\n\t"              \
-        "mov %A0, r0"   "\n\t"              \
-        "adiw r30, 1"   "\n\t"              \
-        "lpm"           "\n\t"              \
-        "mov %B0, r0"   "\n\t"              \
-        "adiw r30, 1"   "\n\t"              \
-        "lpm"           "\n\t"              \
-        "mov %C0, r0"   "\n\t"              \
-        "adiw r30, 1"   "\n\t"              \
-        "lpm"           "\n\t"              \
-        "mov %D0, r0"   "\n\t"              \
-        : "=r" (__result), "=z" (__addr16)  \
-        : "1" (__addr16)                    \
-        : "r0"                              \
-    );                                      \
-    __result;                               \
-}))
-
-#define __LPM_float_enhanced__(addr)        \
-(__extension__({                            \
-    uint16_t __addr16 = (uint16_t)(addr);   \
-    float __result;                         \
-    __asm__ __volatile__                    \
-    (                                       \
-        "lpm %A0, Z+"   "\n\t"              \
-        "lpm %B0, Z+"   "\n\t"              \
-        "lpm %C0, Z+"   "\n\t"              \
-        "lpm %D0, Z"    "\n\t"              \
-        : "=r" (__result), "=z" (__addr16)  \
-        : "1" (__addr16)                    \
-    );                                      \
-    __result;                               \
-}))
-
+/* These are used down the line for pgm_read_byte[_near] etc. */
 
 #if defined (__AVR_TINY__)
 /* Attribute __progmem__ on Reduced Tiny works different than for
    all the other devices:  When taking the address of a symbol that's
    attributed as progmem, then the compiler adds an offset of 0x4000
    to the value of the symbol.  This means that accessing data in
-   progmem can be performed by vanilla C/C++ code.  This assumes
+   progmem can be performed by vanilla C/C++ code.  This requires
    - GCC PR71948 - Make progmem work on Reduced Tiny (GCC v7 / 2016-08)  */
 #define __LPM(addr)         (* (const uint8_t*)(addr))
 #define __LPM_word(addr)    (* (const uint16_t*)(addr))
 #define __LPM_dword(addr)   (* (const uint32_t*)(addr))
-#define __LPM_float(addr)   (* (const float*)(addr))
-#elif defined (__AVR_HAVE_LPMX__)
-#define __LPM(addr)         __LPM_enhanced__(addr)
-#define __LPM_word(addr)    __LPM_word_enhanced__(addr)
-#define __LPM_dword(addr)   __LPM_dword_enhanced__(addr)
-#define __LPM_float(addr)   __LPM_float_enhanced__(addr)
 #else
-#define __LPM(addr)         __LPM_classic__(addr)
-#define __LPM_word(addr)    __LPM_word_classic__(addr)
-#define __LPM_dword(addr)   __LPM_dword_classic__(addr)
-#define __LPM_float(addr)   __LPM_float_classic__(addr)
-#endif
+#define __LPM(addr)                             \
+  (__extension__({                              \
+      uint16_t __addr16 = (uint16_t) (addr);    \
+      uint8_t __result;                         \
+      __LPM__1 (__result, __addr16);            \
+      __result;                                 \
+}))
+
+#define __LPM_word(addr)                        \
+  (__extension__({                              \
+      uint16_t __addr16 = (uint16_t) (addr);    \
+      uint16_t __result;                        \
+      __LPM__2 (__result, __addr16);            \
+      __result;                                 \
+}))
+
+#define __LPM_dword(addr)                       \
+  (__extension__({                              \
+      uint16_t __addr16 = (uint16_t) (addr);    \
+      uint32_t __result;                        \
+      __LPM__4 (__result, __addr16);            \
+      __result;                                 \
+}))
+#endif /* AVR_TINY */
+
+
+#define __ELPM(addr)                                    \
+  (__extension__({                                      \
+      uint_farptr_t __addr32 = (addr);                  \
+      uint8_t __result;                                 \
+      __ELPM__1 (__result, __addr32, uint8_t);          \
+      __result;                                         \
+}))
+
+#define __ELPM_word(addr)                               \
+  (__extension__({                                      \
+      uint_farptr_t __addr32 = (addr);                  \
+      uint16_t __result;                                \
+      __ELPM__2 (__result, __addr32, uint16_t);         \
+      __result;                                         \
+}))
+
+#define __ELPM_dword(addr)                              \
+  (__extension__({                                      \
+      uint_farptr_t __addr32 = (addr);                  \
+      uint32_t __result;                                \
+      __ELPM__4 (__result, __addr32, uint32_t);         \
+      __result;                                         \
+}))
 
 #endif  /* !__DOXYGEN__ */
 
@@ -1316,13 +1216,12 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
     __LPM_dword((uint16_t)(address_short))
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_float_near(address_short)
-    Read a float from the program space with a 16-bit (near) address.
+    \def pgm_read_float_near (const float *address)
+    Read a \c float from the program space with a 16-bit (near) address.
     \note The address is a byte address.
     The address is in the program space. */
 
-#define pgm_read_float_near(address_short) \
-    __LPM_float((uint16_t)(address_short))
+#define pgm_read_float_near(addr)  pgm_read_float (addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr_near(address_short)
@@ -1333,325 +1232,6 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 #define pgm_read_ptr_near(address_short) \
     (void*)__LPM_word((uint16_t)(address_short))
 
-#if defined(RAMPZ) || defined(__DOXYGEN__)
-
-/* Only for devices with more than 64K of program memory.
-   RAMPZ must be defined (see iom103.h, iom128.h).
-*/
-
-/* The classic functions are needed for ATmega103. */
-#ifndef __DOXYGEN__		/* These are internal macros, avoid "is
-				   not documented" warnings. */
-#define __ELPM_classic__(addr)      \
-(__extension__({                    \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint8_t __result;               \
-    __asm__ __volatile__            \
-    (                               \
-        "out %2, %C1" "\n\t"        \
-        "mov r31, %B1" "\n\t"       \
-        "mov r30, %A1" "\n\t"       \
-        "elpm" "\n\t"               \
-        "mov %0, r0" "\n\t"         \
-        : "=r" (__result)           \
-        : "r" (__addr32),           \
-          "I" (_SFR_IO_ADDR(RAMPZ)) \
-        : "r0", "r30", "r31"        \
-    );                              \
-    __result;                       \
-}))
-
-#define __ELPM_enhanced__(addr)     \
-(__extension__({                    \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint8_t __result;               \
-    __asm__ __volatile__            \
-    (                               \
-        "out %2, %C1" "\n\t"        \
-        "movw r30, %1" "\n\t"       \
-        "elpm %0, Z+" "\n\t"        \
-        : "=r" (__result)           \
-        : "r" (__addr32),           \
-          "I" (_SFR_IO_ADDR(RAMPZ)) \
-        : "r30", "r31"              \
-    );                              \
-    __result;                       \
-}))
-
-#define __ELPM_xmega__(addr)        \
-(__extension__({                    \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint8_t __result;               \
-    __asm__ __volatile__            \
-    (                               \
-        "in __tmp_reg__, %2" "\n\t" \
-        "out %2, %C1" "\n\t"        \
-        "movw r30, %1" "\n\t"       \
-        "elpm %0, Z+" "\n\t"        \
-        "out %2, __tmp_reg__"       \
-        : "=r" (__result)           \
-        : "r" (__addr32),           \
-          "I" (_SFR_IO_ADDR(RAMPZ)) \
-        : "r30", "r31"              \
-    );                              \
-    __result;                       \
-}))
-
-#define __ELPM_word_classic__(addr)     \
-(__extension__({                        \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint16_t __result;                  \
-    __asm__ __volatile__                \
-    (                                   \
-        "out %2, %C1"   "\n\t"          \
-        "mov r31, %B1"  "\n\t"          \
-        "mov r30, %A1"  "\n\t"          \
-        "elpm"          "\n\t"          \
-        "mov %A0, r0"   "\n\t"          \
-        "in r0, %2"     "\n\t"          \
-        "adiw r30, 1"   "\n\t"          \
-        "adc r0, __zero_reg__" "\n\t"   \
-        "out %2, r0"    "\n\t"          \
-        "elpm"          "\n\t"          \
-        "mov %B0, r0"   "\n\t"          \
-        : "=r" (__result)               \
-        : "r" (__addr32),               \
-          "I" (_SFR_IO_ADDR(RAMPZ))     \
-        : "r0", "r30", "r31"            \
-    );                                  \
-    __result;                           \
-}))
-
-#define __ELPM_word_enhanced__(addr)    \
-(__extension__({                        \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint16_t __result;                  \
-    __asm__ __volatile__                \
-    (                                   \
-        "out %2, %C1"   "\n\t"          \
-        "movw r30, %1"  "\n\t"          \
-        "elpm %A0, Z+"  "\n\t"          \
-        "elpm %B0, Z"   "\n\t"          \
-        : "=r" (__result)               \
-        : "r" (__addr32),               \
-          "I" (_SFR_IO_ADDR(RAMPZ))     \
-        : "r30", "r31"                  \
-    );                                  \
-    __result;                           \
-}))
-
-#define __ELPM_word_xmega__(addr)       \
-(__extension__({                        \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint16_t __result;                  \
-    __asm__ __volatile__                \
-    (                                   \
-        "in __tmp_reg__, %2" "\n\t"     \
-        "out %2, %C1"   "\n\t"          \
-        "movw r30, %1"  "\n\t"          \
-        "elpm %A0, Z+"  "\n\t"          \
-        "elpm %B0, Z"   "\n\t"          \
-        "out %2, __tmp_reg__"           \
-        : "=r" (__result)               \
-        : "r" (__addr32),               \
-          "I" (_SFR_IO_ADDR(RAMPZ))     \
-        : "r30", "r31"                  \
-    );                                  \
-    __result;                           \
-}))
-
-#define __ELPM_dword_classic__(addr)      \
-(__extension__({                          \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint32_t __result;                    \
-    __asm__ __volatile__                  \
-    (                                     \
-        "out %2, %C1"          "\n\t"     \
-        "mov r31, %B1"         "\n\t"     \
-        "mov r30, %A1"         "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %A0, r0"          "\n\t"     \
-        "in r0, %2"            "\n\t"     \
-        "adiw r30, 1"          "\n\t"     \
-        "adc r0, __zero_reg__" "\n\t"     \
-        "out %2, r0"           "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %B0, r0"          "\n\t"     \
-        "in r0, %2"            "\n\t"     \
-        "adiw r30, 1"          "\n\t"     \
-        "adc r0, __zero_reg__" "\n\t"     \
-        "out %2, r0"           "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %C0, r0"          "\n\t"     \
-        "in r0, %2"            "\n\t"     \
-        "adiw r30, 1"          "\n\t"     \
-        "adc r0, __zero_reg__" "\n\t"     \
-        "out %2, r0"           "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %D0, r0"          "\n\t"     \
-        : "=r" (__result)                 \
-        : "r" (__addr32),                 \
-          "I" (_SFR_IO_ADDR(RAMPZ))       \
-        : "r0", "r30", "r31"              \
-    );                                    \
-    __result;                             \
-}))
-
-#define __ELPM_dword_enhanced__(addr)     \
-(__extension__({                          \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint32_t __result;                    \
-    __asm__ __volatile__                  \
-    (                                     \
-        "out %2, %C1"   "\n\t"            \
-        "movw r30, %1"  "\n\t"            \
-        "elpm %A0, Z+"  "\n\t"            \
-        "elpm %B0, Z+"  "\n\t"            \
-        "elpm %C0, Z+"  "\n\t"            \
-        "elpm %D0, Z"   "\n\t"            \
-        : "=r" (__result)                 \
-        : "r" (__addr32),                 \
-          "I" (_SFR_IO_ADDR(RAMPZ))       \
-        : "r30", "r31"                    \
-    );                                    \
-    __result;                             \
-}))
-
-#define __ELPM_dword_xmega__(addr)        \
-(__extension__({                          \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    uint32_t __result;                    \
-    __asm__ __volatile__                  \
-    (                                     \
-        "in __tmp_reg__, %2" "\n\t"       \
-        "out %2, %C1"   "\n\t"            \
-        "movw r30, %1"  "\n\t"            \
-        "elpm %A0, Z+"  "\n\t"            \
-        "elpm %B0, Z+"  "\n\t"            \
-        "elpm %C0, Z+"  "\n\t"            \
-        "elpm %D0, Z"   "\n\t"            \
-        "out %2, __tmp_reg__"             \
-        : "=r" (__result)                 \
-        : "r" (__addr32),                 \
-          "I" (_SFR_IO_ADDR(RAMPZ))       \
-        : "r30", "r31"                    \
-    );                                    \
-    __result;                             \
-}))
-
-#define __ELPM_float_classic__(addr)      \
-(__extension__({                          \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    float __result;                       \
-    __asm__ __volatile__                  \
-    (                                     \
-        "out %2, %C1"          "\n\t"     \
-        "mov r31, %B1"         "\n\t"     \
-        "mov r30, %A1"         "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %A0, r0"          "\n\t"     \
-        "in r0, %2"            "\n\t"     \
-        "adiw r30, 1"          "\n\t"     \
-        "adc r0, __zero_reg__" "\n\t"     \
-        "out %2, r0"           "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %B0, r0"          "\n\t"     \
-        "in r0, %2"            "\n\t"     \
-        "adiw r30, 1"          "\n\t"     \
-        "adc r0, __zero_reg__" "\n\t"     \
-        "out %2, r0"           "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %C0, r0"          "\n\t"     \
-        "in r0, %2"            "\n\t"     \
-        "adiw r30, 1"          "\n\t"     \
-        "adc r0, __zero_reg__" "\n\t"     \
-        "out %2, r0"           "\n\t"     \
-        "elpm"                 "\n\t"     \
-        "mov %D0, r0"          "\n\t"     \
-        : "=r" (__result)                 \
-        : "r" (__addr32),                 \
-          "I" (_SFR_IO_ADDR(RAMPZ))       \
-        : "r0", "r30", "r31"              \
-    );                                    \
-    __result;                             \
-}))
-
-#define __ELPM_float_enhanced__(addr)     \
-(__extension__({                          \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    float __result;                       \
-    __asm__ __volatile__                  \
-    (                                     \
-        "out %2, %C1"   "\n\t"            \
-        "movw r30, %1"  "\n\t"            \
-        "elpm %A0, Z+"  "\n\t"            \
-        "elpm %B0, Z+"  "\n\t"            \
-        "elpm %C0, Z+"  "\n\t"            \
-        "elpm %D0, Z"   "\n\t"            \
-        : "=r" (__result)                 \
-        : "r" (__addr32),                 \
-          "I" (_SFR_IO_ADDR(RAMPZ))       \
-        : "r30", "r31"                    \
-    );                                    \
-    __result;                             \
-}))
-
-#define __ELPM_float_xmega__(addr)        \
-(__extension__({                          \
-    uint32_t __addr32 = (uint32_t)(addr); \
-    float __result;                       \
-    __asm__ __volatile__                  \
-    (                                     \
-        "in __tmp_reg__, %2" "\n\t"       \
-        "out %2, %C1"   "\n\t"            \
-        "movw r30, %1"  "\n\t"            \
-        "elpm %A0, Z+"  "\n\t"            \
-        "elpm %B0, Z+"  "\n\t"            \
-        "elpm %C0, Z+"  "\n\t"            \
-        "elpm %D0, Z"   "\n\t"            \
-        "out %2, __tmp_reg__"             \
-        : "=r" (__result)                 \
-        : "r" (__addr32),                 \
-          "I" (_SFR_IO_ADDR(RAMPZ))       \
-        : "r30", "r31"                    \
-    );                                    \
-    __result;                             \
-}))
-
-/*
-Check for architectures that implement RAMPD (avrxmega5, avrxmega7)
-as they need to save/restore RAMPZ for ELPM macros so it does
-not interfere with data accesses.
-*/
-#if defined (__AVR_HAVE_RAMPD__)
-
-#define __ELPM(addr)        __ELPM_xmega__(addr)
-#define __ELPM_word(addr)   __ELPM_word_xmega__(addr)
-#define __ELPM_dword(addr)  __ELPM_dword_xmega__(addr)
-#define __ELPM_float(addr)  __ELPM_float_xmega__(addr)
-
-#else
-
-#if defined (__AVR_HAVE_LPMX__)
-
-#define __ELPM(addr)        __ELPM_enhanced__(addr)
-#define __ELPM_word(addr)   __ELPM_word_enhanced__(addr)
-#define __ELPM_dword(addr)  __ELPM_dword_enhanced__(addr)
-#define __ELPM_float(addr)  __ELPM_float_enhanced__(addr)
-
-#else
-
-#define __ELPM(addr)        __ELPM_classic__(addr)
-#define __ELPM_word(addr)   __ELPM_word_classic__(addr)
-#define __ELPM_dword(addr)  __ELPM_dword_classic__(addr)
-#define __ELPM_float(addr)  __ELPM_float_classic__(addr)
-
-#endif  /* __AVR_HAVE_LPMX__ */
-
-#endif  /* __AVR_HAVE_RAMPD__ */
-
-#endif	/* !__DOXYGEN__ */
-
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_far(address_long)
     Read a byte from the program space with a 32-bit (far) address.
@@ -1659,7 +1239,7 @@ not interfere with data accesses.
     \note The address is a byte address.
     The address is in the program space. */
 
-#define pgm_read_byte_far(address_long)  __ELPM((uint32_t)(address_long))
+#define pgm_read_byte_far(address_long)  __ELPM (address_long)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_far(address_long)
@@ -1668,7 +1248,7 @@ not interfere with data accesses.
     \note The address is a byte address.
     The address is in the program space. */
 
-#define pgm_read_word_far(address_long)  __ELPM_word((uint32_t)(address_long))
+#define pgm_read_word_far(address_long)  __ELPM_word (address_long)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword_far(address_long)
@@ -1677,7 +1257,7 @@ not interfere with data accesses.
     \note The address is a byte address.
     The address is in the program space. */
 
-#define pgm_read_dword_far(address_long) __ELPM_dword((uint32_t)(address_long))
+#define pgm_read_dword_far(address_long) __ELPM_dword (address_long)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr_far(address_long)
@@ -1686,9 +1266,7 @@ not interfere with data accesses.
     \note The address is a byte address.
     The address is in the program space. */
 
-#define pgm_read_ptr_far(address_long) (void*)__ELPM_word((uint32_t)(address_long))
-
-#endif /* RAMPZ or __DOXYGEN__ */
+#define pgm_read_ptr_far(address_long) (void*)__ELPM_word (address_long)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte(address_short)
@@ -1729,34 +1307,27 @@ not interfere with data accesses.
 /** \ingroup avr_pgmspace
     \def pgm_get_far_address(var)
 
-   This macro facilitates the obtention of a 32 bit "far" pointer (only 24 bits
-   used) to data even passed the 64KB limit for the 16 bit ordinary pointer. It
-   is similar to the '&' operator, with some limitations.
+   This macro evaluates to a ::uint_farptr_t 32-bit "far" pointer (only
+   24 bits used) to data even beyond the 64 KiB limit for the 16-bit ordinary
+   pointer.  It is similar to the '&' operator, with some limitations.
 
    Comments:
 
-   - The overhead is minimal and it's mainly due to the 32 bit size operation.
+   - The overhead is minimal and it's mainly due to the 32-bit size operation.
 
    - 24 bit sizes guarantees the code compatibility for use in future devices.
 
-   - hh8() is an undocumented feature but seems to give the third significant byte
-     of a 32 bit data and accepts symbols, complementing the functionality of hi8()
-     and lo8(). There is not an equivalent assembler function to get the high
-     significant byte.
+   - \p var has to be resolved at link-time as an existing symbol,
+     i.e. a simple variable name, an array name, or an array or structure
+     element provided the offset is known at compile-time, etc.
 
-   - 'var' has to be resolved at linking time as an existing symbol, i.e, a simple
-     type variable name, an array name (not an indexed element of the array, if the
-     index is a constant the compiler does not complain but fails to get the address
-     if optimization is enabled), a struct name or a struct field name, a function
-     identifier, a linker defined identifier,...
-
-   - The returned value is the identifier's VMA (virtual memory address) determined
-     by the linker and falls in the corresponding memory region. The AVR Harvard
-     architecture requires non overlapping VMA areas for the multiple address spaces
-     in the processor: Flash ROM, RAM, and EEPROM. Typical offset for this are
-     0x00000000, 0x00800xx0, and 0x00810000 respectively, derived from the linker
-     script used and linker options. The value returned can be seen then as a
-     universal pointer.
+   - The returned value is the symbol's VMA (virtual memory address)
+     determined by the linker and falls in the corresponding memory region.
+     The AVR Harvard architecture requires non-overlapping VMA areas for
+     the multiple address spaces in the processor: Flash ROM, RAM, and EEPROM.
+     Typical offset for these are
+     0x00000000, 0x00800xx0, and 0x00810000 respectively, derived from the
+     linker script used and linker options.
 */
 
 #define pgm_get_far_address(var)                      \
@@ -1768,10 +1339,8 @@ not interfere with data accesses.
         "ldi    %B0, hi8(%1)"           "\n\t"        \
         "ldi    %C0, hh8(%1)"           "\n\t"        \
         "clr    %D0"                                  \
-        :                                             \
-            "=d" (__tmp)                              \
-        :                                             \
-            "i"  (&(var))                             \
+        :   "=d" (__tmp)                              \
+        :   "i"  (&(var))                             \
     );                                                \
     __tmp;                                            \
 }))
