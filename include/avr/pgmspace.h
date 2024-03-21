@@ -557,6 +557,506 @@ _Avrlibc_Def_Pgm_8 (long_double, long double)
 
 #endif /* DOXYGEN */
 
+#ifdef __DOXYGEN__
+
+/** \ingroup avr_pgmspace
+    \fn char pgm_read_char_far (uint_farptr_t address)
+    Read a <tt>char</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline char pgm_read_char_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned char pgm_read_unsigned_char_far (uint_farptr_t address)
+    Read a <tt>unsigned char</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned char pgm_read_unsigned_char_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn signed char pgm_read_signed_char_far (uint_farptr_t address)
+    Read a <tt>signed char</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline signed char pgm_read_signed_char_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn uint8_t pgm_read_u8_far (uint_farptr_t address)
+    Read a <tt>uint8_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline uint8_t pgm_read_u8_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn int8_t pgm_read_i8_far (uint_farptr_t address)
+    Read a <tt>int8_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline int8_t pgm_read_i8_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn int pgm_read_int_far (uint_farptr_t address)
+    Read a <tt>int</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline int pgm_read_int_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned pgm_read_unsigned_far (uint_farptr_t address)
+    Read a <tt>unsigned</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned pgm_read_unsigned_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned int pgm_read_unsigned_int_far (uint_farptr_t address)
+    Read a <tt>unsigned int</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned int pgm_read_unsigned_int_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn signed pgm_read_signed_far (uint_farptr_t address)
+    Read a <tt>signed</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline signed pgm_read_signed_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn signed int pgm_read_signed_int_far (uint_farptr_t address)
+    Read a <tt>signed int</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline signed int pgm_read_signed_int_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn short pgm_read_short_far (uint_farptr_t address)
+    Read a <tt>short</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline short pgm_read_short_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned short pgm_read_unsigned_short_far (uint_farptr_t address)
+    Read a <tt>unsigned short</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned short pgm_read_unsigned_short_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn uint16_t pgm_read_u16_far (uint_farptr_t address)
+    Read a <tt>uint16_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline uint16_t pgm_read_u16_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn int16_t pgm_read_i16_far (uint_farptr_t address)
+    Read a <tt>int16_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline int16_t pgm_read_i16_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn int pgm_read_int_far (uint_farptr_t address)
+    Read a <tt>int</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline int pgm_read_int_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned pgm_read_unsigned_far (uint_farptr_t address)
+    Read a <tt>unsigned</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned pgm_read_unsigned_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned int pgm_read_unsigned_int_far (uint_farptr_t address)
+    Read a <tt>unsigned int</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned int pgm_read_unsigned_int_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn signed pgm_read_signed_far (uint_farptr_t address)
+    Read a <tt>signed</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline signed pgm_read_signed_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn signed int pgm_read_signed_int_far (uint_farptr_t address)
+    Read a <tt>signed int</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline signed int pgm_read_signed_int_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn short pgm_read_short_far (uint_farptr_t address)
+    Read a <tt>short</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline short pgm_read_short_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned short pgm_read_unsigned_short_far (uint_farptr_t address)
+    Read a <tt>unsigned short</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned short pgm_read_unsigned_short_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn long pgm_read_long_far (uint_farptr_t address)
+    Read a <tt>long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline long pgm_read_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned long pgm_read_unsigned_long_far (uint_farptr_t address)
+    Read a <tt>unsigned long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn __int24 pgm_read_i24_far (uint_farptr_t address)
+    Read a <tt>__int24</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline __int24 pgm_read_i24_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn __uint24 pgm_read_u24_far (uint_farptr_t address)
+    Read a <tt>__uint24</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline __uint24 pgm_read_u24_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn uint32_t pgm_read_u32_far (uint_farptr_t address)
+    Read a <tt>uint32_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline uint32_t pgm_read_u32_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn int32_t pgm_read_i32_far (uint_farptr_t address)
+    Read a <tt>int32_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline int32_t pgm_read_i32_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn float pgm_read_float_far (uint_farptr_t address)
+    Read a <tt>float</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline float pgm_read_float_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn long pgm_read_long_far (uint_farptr_t address)
+    Read a <tt>long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline long pgm_read_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned long pgm_read_unsigned_long_far (uint_farptr_t address)
+    Read a <tt>unsigned long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn long long pgm_read_long_long_far (uint_farptr_t address)
+    Read a <tt>long long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline long long pgm_read_long_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address)
+    Read a <tt>unsigned long long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn double pgm_read_double_far (uint_farptr_t address)
+    Read a <tt>double</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline double pgm_read_double_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn long double pgm_read_long_double_far (uint_farptr_t address)
+    Read a <tt>long double</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline long double pgm_read_long_double_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn uint64_t pgm_read_u64_far (uint_farptr_t address)
+    Read a <tt>uint64_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline uint64_t pgm_read_u64_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn int64_t pgm_read_i64_far (uint_farptr_t address)
+    Read a <tt>int64_t</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline int64_t pgm_read_i64_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn long long pgm_read_long_long_far (uint_farptr_t address)
+    Read a <tt>long long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline long long pgm_read_long_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address)
+    Read a <tt>unsigned long long</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn double pgm_read_double_far (uint_farptr_t address)
+    Read a <tt>double</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline double pgm_read_double_far (uint_farptr_t address);
+
+/** \ingroup avr_pgmspace
+    \fn long double pgm_read_long_double_far (uint_farptr_t address)
+    Read a <tt>long double</tt> from far byte-address \p address.
+    The address is in the program memory. */
+static inline long double pgm_read_long_double_far (uint_farptr_t address);
+
+#else /* !DOCYGEN */
+
+#if defined(__AVR_HAVE_ELPMX__)
+
+#ifdef __AVR_HAVE_RAMPD__
+/* For devices with EBI, reset RAMPZ to zero after.  */
+#define __pgm_clr_RAMPZ_ "\n\t" "out  %i2,__zero_reg__"
+#else
+/* Devices without EBI: no need to reset RAMPZ.  */
+#define __pgm_clr_RAMPZ_ /* empty */
+#endif
+
+#define __ELPM__1(res, addr, T)                         \
+  __asm __volatile__ ("movw r30,%1"         "\n\t"      \
+                      "out  %i2,%C1"        "\n\t"      \
+                      "elpm %A0,Z"                      \
+                      __pgm_clr_RAMPZ_                  \
+                      : "=r" (res)                      \
+                      : "r" (addr), "n" (& RAMPZ)       \
+                      : "r30", "r31")
+
+#define __ELPM__2(res, addr, T)                         \
+  __asm __volatile__ ("movw r30,%1"         "\n\t"      \
+                      "out  %i2,%C1"        "\n\t"      \
+                      "elpm %A0,Z+"         "\n\t"      \
+                      "elpm %B0,Z+"                     \
+                      __pgm_clr_RAMPZ_                  \
+                      : "=r" (res)                      \
+                      : "r" (addr), "n" (& RAMPZ)       \
+         : "r30", "r31")
+
+#define __ELPM__3(res, addr, T)                         \
+  __asm __volatile__ ("movw r30,%1"         "\n\t"      \
+                      "out  %i2,%C1"        "\n\t"      \
+                      "elpm %A0,Z+"         "\n\t"      \
+                      "elpm %B0,Z+"         "\n\t"      \
+                      "elpm %C0,Z+"                     \
+                      __pgm_clr_RAMPZ_                  \
+                      : "=r" (res)                      \
+                      : "r" (addr), "n" (& RAMPZ)       \
+                      : "r30", "r31")
+
+#define __ELPM__4(res, addr, T)                         \
+  __asm __volatile__ ("movw r30,%1"         "\n\t"      \
+                      "out  %i2,%C1"        "\n\t"      \
+                      "elpm %A0,Z+"         "\n\t"      \
+                      "elpm %B0,Z+"         "\n\t"      \
+                      "elpm %C0,Z+"         "\n\t"      \
+                      "elpm %D0,Z+"                     \
+                      __pgm_clr_RAMPZ_                  \
+                      : "=r" (res)                      \
+                      : "r" (addr), "n" (& RAMPZ)       \
+                      : "r30", "r31")
+
+#define __ELPM__8(res, addr, T)                         \
+  __asm __volatile__ ("movw r30,%1"         "\n\t"      \
+                      "out  %i2,%C1"        "\n\t"      \
+                      "elpm %r0+0,Z+"       "\n\t"      \
+                      "elpm %r0+1,Z+"       "\n\t"      \
+                      "elpm %r0+2,Z+"       "\n\t"      \
+                      "elpm %r0+3,Z+"       "\n\t"      \
+                      "elpm %r0+4,Z+"       "\n\t"      \
+                      "elpm %r0+5,Z+"       "\n\t"      \
+                      "elpm %r0+6,Z+"       "\n\t"      \
+                      "elpm %r0+7,Z+"                   \
+                      __pgm_clr_RAMPZ_                  \
+                      : "=r" (res)                      \
+                      : "r" (addr), "n" (& RAMPZ)       \
+                      : "r30", "r31")
+#elif defined(__AVR_HAVE_ELPM__)
+/* The poor devices without ELPMx: Do 24-bit addresses by hand... */
+#define __ELPM__1(res, addr, T)                                         \
+  __asm __volatile__ ("mov r30,%A1"    "\n\t"                           \
+                      "mov r31,%B1"    "\n\t"                           \
+                      "out %i2,%C1 $ elpm $ mov %A0,r0"                 \
+                      : "=r" (res)                                      \
+                      : "r" (addr), "n" (& RAMPZ)                       \
+                      : "r30", "r31", "r0")
+
+#define __ELPM__2(res, addr, T)                                         \
+  __asm __volatile__                                                    \
+  ("mov r30,%A1"    "\n\t"                                              \
+   "mov r31,%B1"    "\n\t"                                              \
+   "mov %B0,%C1"    "\n\t"                                              \
+   "out %i2,%B0 $ elpm $ mov %A0,r0 $ adiw r30,1 $ adc %B0,r1" "\n\t"   \
+   "out %i2,%B0 $ elpm $ mov %B0,r0"                                    \
+   : "=r" (res)                                                         \
+   : "r" (addr), "n" (& RAMPZ)                                          \
+   : "r30", "r31", "r0")
+
+#define __ELPM__3(res, addr, T)                                         \
+  __asm __volatile__                                                    \
+  ("mov r30,%A1"    "\n\t"                                              \
+   "mov r31,%B1"    "\n\t"                                              \
+   "mov %C0,%C1"    "\n\t"                                              \
+   "out %i2,%C0 $ elpm $ mov %A0,r0 $ adiw r30,1 $ adc %C0,r1" "\n\t"   \
+   "out %i2,%C0 $ elpm $ mov %B0,r0 $ adiw r30,1 $ adc %C0,r1" "\n\t"   \
+   "out %i2,%C0 $ elpm $ mov %C0,r0"                                    \
+   : "=r" (res)                                                         \
+   : "r" (addr), "n" (& RAMPZ)                                          \
+   : "r30", "r31", "r0")
+
+#define __ELPM__4(res, addr, T)                                         \
+  __asm __volatile__                                                    \
+  ("mov r30,%A1"    "\n\t"                                              \
+   "mov r31,%B1"    "\n\t"                                              \
+   "mov %D0,%C1"    "\n\t"                                              \
+   "out %i2,%D0 $ elpm $ mov %A0,r0 $ adiw r30,1 $ adc %D0,r1" "\n\t"   \
+   "out %i2,%D0 $ elpm $ mov %B0,r0 $ adiw r30,1 $ adc %D0,r1" "\n\t"   \
+   "out %i2,%D0 $ elpm $ mov %C0,r0 $ adiw r30,1 $ adc %D0,r1" "\n\t"   \
+   "out %i2,%D0 $ elpm $ mov %D0,r0"                                    \
+   : "=r" (res)                                                         \
+   : "r" (addr), "n" (& RAMPZ)                                          \
+   : "r30", "r31", "r0")
+
+#define __ELPM__8(res, addr, T)                                         \
+  __asm __volatile__                                                    \
+  ("mov r30,%A1"    "\n\t"                                              \
+   "mov r31,%B1"    "\n\t"                                              \
+   "mov %r0+7,%C1"  "\n\t"                                              \
+   "out %i2,%r0+7 $ elpm $ mov %r0+0,r0 $ adiw r30,1 $ adc %r0+7,r1" "\n\t" \
+   "out %i2,%r0+7 $ elpm $ mov %r0+1,r0 $ adiw r30,1 $ adc %r0+7,r1" "\n\t" \
+   "out %i2,%r0+7 $ elpm $ mov %r0+2,r0 $ adiw r30,1 $ adc %r0+7,r1" "\n\t" \
+   "out %i2,%r0+7 $ elpm $ mov %r0+3,r0 $ adiw r30,1 $ adc %r0+7,r1" "\n\t" \
+   "out %i2,%r0+7 $ elpm $ mov %r0+4,r0 $ adiw r30,1 $ adc %r0+7,r1" "\n\t" \
+   "out %i2,%r0+7 $ elpm $ mov %r0+5,r0 $ adiw r30,1 $ adc %r0+7,r1" "\n\t" \
+   "out %i2,%r0+7 $ elpm $ mov %r0+6,r0 $ adiw r30,1 $ adc %r0+7,r1" "\n\t" \
+   "out %i2,%r0+7 $ elpm $ mov %r0+7,r0"                                \
+   : "=r" (res)                                                         \
+   : "r" (addr), "n" (& RAMPZ)                                          \
+   : "r30", "r31", "r0")
+#else
+/* No ELPM: Fall back to __LPM__<N>.  */
+#define __ELPM__1(r,a,T) const T *__a = (const T*)(uint16_t) a; __LPM__1(r,__a)
+#define __ELPM__2(r,a,T) const T *__a = (const T*)(uint16_t) a; __LPM__2(r,__a)
+#define __ELPM__3(r,a,T) const T *__a = (const T*)(uint16_t) a; __LPM__3(r,__a)
+#define __ELPM__4(r,a,T) const T *__a = (const T*)(uint16_t) a; __LPM__4(r,__a)
+#define __ELPM__8(r,a,T) const T *__a = (const T*)(uint16_t) a; __LPM__8(r,__a)
+#endif /* ELPM cases */
+
+#define _Avrlibc_Def_Pgm_Far_1(Name, Typ)          \
+  static __ATTR_ALWAYS_INLINE__                    \
+  Typ pgm_read_##Name##_far (uint_farptr_t __addr) \
+  {                                                \
+    Typ __res;                                     \
+    __ELPM__1 (__res, __addr, Typ);                \
+    return __res;                                  \
+  }
+
+#define _Avrlibc_Def_Pgm_Far_2(Name, Typ)          \
+  static __ATTR_ALWAYS_INLINE__                    \
+  Typ pgm_read_##Name##_far (uint_farptr_t __addr) \
+  {                                                \
+    Typ __res;                                     \
+    __ELPM__2 (__res, __addr, Typ);                \
+    return __res;                                  \
+  }
+
+#define _Avrlibc_Def_Pgm_Far_3(Name, Typ)          \
+  static __ATTR_ALWAYS_INLINE__                    \
+  Typ pgm_read_##Name##_far (uint_farptr_t __addr) \
+  {                                                \
+    Typ __res;                                     \
+    __ELPM__3 (__res, __addr, Typ);                \
+    return __res;                                  \
+  }
+
+#define _Avrlibc_Def_Pgm_Far_4(Name, Typ)          \
+  static __ATTR_ALWAYS_INLINE__                    \
+  Typ pgm_read_##Name##_far (uint_farptr_t __addr) \
+  {                                                \
+    Typ __res;                                     \
+    __ELPM__4 (__res, __addr, Typ);                \
+    return __res;                                  \
+  }
+
+#define _Avrlibc_Def_Pgm_Far_8(Name, Typ)          \
+  static __ATTR_ALWAYS_INLINE__                    \
+  Typ pgm_read_##Name##_far (uint_farptr_t __addr) \
+  {                                                \
+    Typ __res;                                     \
+    __ELPM__8 (__res, __addr, Typ);                \
+    return __res;                                  \
+  }
+
+_Avrlibc_Def_Pgm_Far_1 (char, char)
+_Avrlibc_Def_Pgm_Far_1 (unsigned_char, unsigned char)
+_Avrlibc_Def_Pgm_Far_1 (signed_char, signed char)
+_Avrlibc_Def_Pgm_Far_1 (u8, uint8_t)
+_Avrlibc_Def_Pgm_Far_1 (i8, int8_t)
+#if __SIZEOF_INT__ == 1
+_Avrlibc_Def_Pgm_Far_1 (int, int)
+_Avrlibc_Def_Pgm_Far_1 (unsigned, unsigned)
+_Avrlibc_Def_Pgm_Far_1 (unsigned_int, unsigned int)
+_Avrlibc_Def_Pgm_Far_1 (signed, signed)
+_Avrlibc_Def_Pgm_Far_1 (signed_int, signed int)
+#endif
+#if __SIZEOF_SHORT__ == 1
+_Avrlibc_Def_Pgm_Far_1 (short, short)
+_Avrlibc_Def_Pgm_Far_1 (unsigned_short, unsigned short)
+#endif
+
+_Avrlibc_Def_Pgm_Far_2 (u16, uint16_t)
+_Avrlibc_Def_Pgm_Far_2 (i16, int16_t)
+#if __SIZEOF_INT__ == 2
+_Avrlibc_Def_Pgm_Far_2 (int, int)
+_Avrlibc_Def_Pgm_Far_2 (unsigned, unsigned)
+_Avrlibc_Def_Pgm_Far_2 (unsigned_int, unsigned int)
+_Avrlibc_Def_Pgm_Far_2 (signed, signed)
+_Avrlibc_Def_Pgm_Far_2 (signed_int, signed int)
+#endif
+#if __SIZEOF_SHORT__ == 2
+_Avrlibc_Def_Pgm_Far_2 (short, short)
+_Avrlibc_Def_Pgm_Far_2 (unsigned_short, unsigned short)
+#endif
+#if __SIZEOF_LONG__ == 2
+_Avrlibc_Def_Pgm_Far_2 (long, long)
+_Avrlibc_Def_Pgm_Far_2 (unsigned_long, unsigned long)
+#endif
+
+#if defined(__INT24_MAX__)
+_Avrlibc_Def_Pgm_Far_3 (i24, __int24)
+_Avrlibc_Def_Pgm_Far_3 (u24, __uint24)
+#endif /* Have __int24 */
+
+_Avrlibc_Def_Pgm_Far_4 (u32, uint32_t)
+_Avrlibc_Def_Pgm_Far_4 (i32, int32_t)
+_Avrlibc_Def_Pgm_Far_4 (float, float)
+#if __SIZEOF_LONG__ == 4
+_Avrlibc_Def_Pgm_Far_4 (long, long)
+_Avrlibc_Def_Pgm_Far_4 (unsigned_long, unsigned long)
+#endif
+#if __SIZEOF_LONG_LONG__ == 4
+_Avrlibc_Def_Pgm_Far_4 (long_long, long long)
+_Avrlibc_Def_Pgm_Far_4 (unsigned_long_long, unsigned long long)
+#endif
+#if __SIZEOF_DOUBLE__ == 4
+_Avrlibc_Def_Pgm_Far_4 (double, double)
+#endif
+#if __SIZEOF_LONG_DOUBLE__ == 4
+_Avrlibc_Def_Pgm_Far_4 (long_double, long double)
+#endif
+
+#if __SIZEOF_LONG_LONG__ == 8
+_Avrlibc_Def_Pgm_Far_8 (u64, uint64_t)
+_Avrlibc_Def_Pgm_Far_8 (i64, int64_t)
+_Avrlibc_Def_Pgm_Far_8 (long_long, long long)
+_Avrlibc_Def_Pgm_Far_8 (unsigned_long_long, unsigned long long)
+#endif
+#if __SIZEOF_DOUBLE__ == 8
+_Avrlibc_Def_Pgm_Far_8 (double, double)
+#endif
+#if __SIZEOF_LONG_DOUBLE__ == 8
+_Avrlibc_Def_Pgm_Far_8 (long_double, long double)
+#endif
+
+#endif /* DOXYGEN */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -1178,15 +1678,6 @@ not interfere with data accesses.
     The address is in the program space. */
 
 #define pgm_read_dword_far(address_long) __ELPM_dword((uint32_t)(address_long))
-
-/** \ingroup avr_pgmspace
-    \def pgm_read_float_far(address_long)
-    Read a float from the program space with a 32-bit (far) address.
-
-    \note The address is a byte address.
-    The address is in the program space. */
-
-#define pgm_read_float_far(address_long) __ELPM_float((uint32_t)(address_long))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr_far(address_long)
