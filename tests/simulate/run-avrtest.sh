@@ -205,12 +205,14 @@ set_extra_options ()
 
     o_gcc= # Extra options for gcc
     o_sim= # Extra options for avrtest.  Default mmcu=avr51
+    # To test the pgm_read_far functions.
+    local o_data="-Wl,--section-start,.mydata=0xffff"
     case $1 in
 	atmega128 | atmega103)
-	    o_gcc="$(o_mem 0 0x2000 0xffff)"
+	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_data"
 	    ;;
 	atmega2560)
-	    o_sim="-mmcu=avr6"
+	    o_sim="-mmcu=avr6 $o_data"
 	    o_gcc="$(o_mem 0 0x2000 0xffff)"
 	    ;;
 	attiny3216)
@@ -219,11 +221,15 @@ set_extra_options ()
 	    ;;
 	atxmega128a3)
 	    o_sim="-mmcu=avrxmega6"
-	    o_gcc="$(o_mem 0 0x2000 0xffff)"
+	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_data"
+	    ;;
+	atxmega128a1)
+	    o_sim="-mmcu=avrxmega7"
+	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_data"
 	    ;;
 	avr128da32)
 	    o_sim="-mmcu=avrxmega4"
-	    o_gcc="$(o_mem 0 0x1000 0x7fff)"
+	    o_gcc="$(o_mem 0 0x1000 0x7fff) $o_data"
 	    ;;
 	attiny40)
 	    o_sim="-mmcu=avrtiny -s 8k"
