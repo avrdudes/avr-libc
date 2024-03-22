@@ -116,8 +116,8 @@
     be used for a single function, with a space seperating each
     attribute.
 
-    Valid attributes are ISR_BLOCK, ISR_NOBLOCK, ISR_NAKED and
-    ISR_ALIASOF(vect).
+    Valid attributes are #ISR_BLOCK, #ISR_NOBLOCK, #ISR_NAKED,
+    #ISR_FLATTEN, #ISR_NOICF, #ISR_NOGCCISR and ISR_ALIASOF(vect).
 
     \c vector must be one of the interrupt vector names that are
     valid for the particular MCU type.
@@ -278,7 +278,7 @@
     interrupts are initially disabled by the AVR hardware when
     entering the ISR, without the compiler modifying this state.
 
-    Use this attribute in the attributes parameter of the ISR macro.
+    Use this attribute in the attributes parameter of the #ISR macro.
 */
 #  define ISR_BLOCK
 
@@ -295,7 +295,7 @@
     the ISR for those cases where the AVR hardware does not clear the
     respective interrupt flag before entering the ISR.
 
-    Use this attribute in the attributes parameter of the ISR macro.
+    Use this attribute in the attributes parameter of the #ISR macro.
 */
 #  define ISR_NOBLOCK
 
@@ -307,7 +307,7 @@
     SREG register, as well as placing a reti() at the end of the
     interrupt routine.
 
-    Use this attribute in the attributes parameter of the ISR macro.
+    Use this attribute in the attributes parameter of the #ISR macro.
 */
 #  define ISR_NAKED
 
@@ -317,7 +317,7 @@
     The compiler will try to inline all called function into the ISR.
     This has an effect with GCC 4.6 and newer only.
 
-    Use this attribute in the attributes parameter of the ISR macro.
+    Use this attribute in the attributes parameter of the #ISR macro.
 */
 #  define ISR_FLATTEN
 
@@ -327,17 +327,21 @@
     Avoid identical-code-folding optimization against this ISR.
     This has an effect with GCC 5 and newer only.
 
-    Use this attribute in the attributes parameter of the ISR macro.
+    Use this attribute in the attributes parameter of the #ISR macro.
 */
 #  define ISR_NOICF
 
 /** \def ISR_NOGCCISR
     \ingroup avr_interrupts
 
-    Do not generate \c __gcc_isr pseudo instructions for this ISR.
-    This has an effect with GCC 8 and newer only.
+    Do not generate
+    <a href="https://sourceware.org/binutils/docs/as/AVR-Pseudo-Instructions.html">\c __gcc_isr pseudo instructions</a>
+    for this ISR.
+    This has an effect with
+    <a href="https://gcc.gnu.org/gcc-8/changes.html#avr">GCC 8</a>
+    and newer only.
 
-    Use this attribute in the attributes parameter of the ISR macro.
+    Use this attribute in the attributes parameter of the #ISR macro.
 */
 #  define ISR_NOGCCISR
 
@@ -347,7 +351,7 @@
     The ISR is linked to another ISR, specified by the vect parameter.
     This is compatible with GCC 4.2 and greater only.
 
-    Use this attribute in the attributes parameter of the ISR macro.
+    Use this attribute in the attributes parameter of the #ISR macro.
     Example:
     \code
     ISR (INT0_vect)
