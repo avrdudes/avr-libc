@@ -34,6 +34,14 @@
 #ifndef _UTIL_PARITY_H_
 #define _UTIL_PARITY_H_
 
+#include <stdint.h>
+
+#ifndef __DOXYGEN__
+#ifndef __ATTR_ALWAYS_INLINE__
+#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#endif
+#endif /* !DOXYGEN */
+
 /** \file */
 /** \defgroup util_parity <util/parity.h>: Parity bit generation
     \code #include <util/parity.h> \endcode
@@ -41,25 +49,31 @@
     This header file contains optimized assembler code to calculate
     the parity bit for a byte.
 */
-/** \def parity_even_bit
+/** \fn uint8_t parity_even_bit (uint8_t val);
     \ingroup util_parity
-    \returns 1 if \c val has an odd number of bits set. */
-#define parity_even_bit(val)				\
-(__extension__({					\
-	unsigned char __t;				\
-	__asm__ (					\
-		"mov __tmp_reg__,%0" "\n\t"		\
-		"swap %0" "\n\t"			\
-		"eor %0,__tmp_reg__" "\n\t"		\
-		"mov __tmp_reg__,%0" "\n\t"		\
-		"lsr %0" "\n\t"				\
-		"lsr %0" "\n\t"				\
-		"eor %0,__tmp_reg__" 			\
-		: "=r" (__t)				\
-		: "0" ((unsigned char)(val))		\
-		: "r0"					\
-	);						\
-	(((__t + 1) >> 1) & 1);				\
- }))
+    \returns 1 if \c val has an odd number of bits set, and 0 otherwise. */
+
+static __ATTR_ALWAYS_INLINE__
+uint8_t parity_even_bit (uint8_t __val)
+{
+  if (__builtin_constant_p (__builtin_parity (__val)))
+    return (uint8_t) __builtin_parity (__val);
+
+  __asm (/* parity is in [0..7] */
+         "mov  __tmp_reg__, %0"  "\n\t"
+         "swap __tmp_reg__"      "\n\t"
+         "eor  %0, __tmp_reg__"  "\n\t"
+         /* parity is in [0..3] */
+         "subi %0, -4"           "\n\t"
+         "andi %0, -5"           "\n\t"
+         "subi %0, -6"           "\n\t"
+         /* parity is in [0,3] */
+         "sbrc %0, 3"            "\n\t"
+         "inc  %0"
+         /* parity is in [0] */
+         : "+d" (__val) :: "r0");
+
+  return __val & 1;
+}
 
 #endif /* _UTIL_PARITY_H_ */
