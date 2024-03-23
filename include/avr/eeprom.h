@@ -71,7 +71,7 @@
     ready to be accessed.  Since this may cause long delays if a
     write operation is still pending, time-critical applications
     should first poll the EEPROM e. g. using eeprom_is_ready() before
-    attempting any actual I/O.  But this functions are not wait until
+    attempting any actual I/O.  But this functions does not wait until
     SELFPRGEN in SPMCSR becomes zero.  Do this manually, if your
     softwate contains the Flash burning.
 
@@ -149,9 +149,38 @@ uint16_t eeprom_read_word (const uint16_t *__p) __ATTR_PURE__;
 uint32_t eeprom_read_dword (const uint32_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
+    Read one 64-bit quad word (little endian) from EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+uint64_t eeprom_read_qword (const uint64_t *__p) __ATTR_PURE__;
+#endif
+
+/** \ingroup avr_eeprom
     Read one float value (little endian) from EEPROM address \a __p.
  */
 float eeprom_read_float (const float *__p) __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
+    Read one double value (little endian) from EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__)
+double eeprom_read_double (const double *__p);
+#elif __SIZEOF_DOUBLE__ == 4
+double eeprom_read_double (const double *__p) __asm("eeprom_read_dword");
+#elif __SIZEOF_DOUBLE__ == 8
+double eeprom_read_double (const double *__p) __asm("eeprom_read_qword");
+#endif
+
+/** \ingroup avr_eeprom
+    Read one long double value (little endian) from EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__)
+long double eeprom_read_long_double (const long double *__p);
+#elif __SIZEOF_LONG_DOUBLE__ == 4
+long double eeprom_read_long_double (const long double *__p) __asm("eeprom_read_dword");
+#elif __SIZEOF_LONG_DOUBLE__ == 8
+long double eeprom_read_long_double (const long double *__p) __asm("eeprom_read_qword");
+#endif
 
 /** \ingroup avr_eeprom
     Read a block of \a __n bytes from EEPROM address \a __src to SRAM
@@ -176,9 +205,38 @@ void eeprom_write_word (uint16_t *__p, uint16_t __value);
 void eeprom_write_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
+    Write a 64-bit quad word \a __value to EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+void eeprom_write_qword (uint64_t *__p, uint64_t __value);
+#endif
+
+/** \ingroup avr_eeprom
     Write a float \a __value to EEPROM address \a __p.
  */
 void eeprom_write_float (float *__p, float __value);
+
+/** \ingroup avr_eeprom
+    Write a double \a __value to EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__)
+void eeprom_write_double (double *__p, double __value);
+#elif __SIZEOF_DOUBLE__ == 4
+void eeprom_write_double (double *__p, double __value) __asm("eeprom_write_dword");
+#elif __SIZEOF_DOUBLE__ == 8
+void eeprom_write_double (double *__p, double __value) __asm("eeprom_write_qword");
+#endif
+
+/** \ingroup avr_eeprom
+    Write a long double \a __value to EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__)
+void eeprom_write_long_double (long double *__p, long double __value);
+#elif __SIZEOF_LONG_DOUBLE__ == 4
+void eeprom_write_long_double (long double *__p, long double __value) __asm("eeprom_write_dword");
+#elif __SIZEOF_LONG_DOUBLE__ == 8
+void eeprom_write_long_double (long double *__p, long double __value) __asm("eeprom_write_qword");
+#endif
 
 /** \ingroup avr_eeprom
     Write a block of \a __n bytes to EEPROM address \a __dst from \a __src.
@@ -188,27 +246,56 @@ void eeprom_write_block (const void *__src, void *__dst, size_t __n);
 
 
 /** \ingroup avr_eeprom
-    Update a byte \a __value to EEPROM address \a __p.
+    Update a byte \a __value at EEPROM address \a __p.
  */
 void eeprom_update_byte (uint8_t *__p, uint8_t __value);
 
 /** \ingroup avr_eeprom
-    Update a word \a __value to EEPROM address \a __p.
+    Update a word \a __value at EEPROM address \a __p.
  */
 void eeprom_update_word (uint16_t *__p, uint16_t __value);
 
 /** \ingroup avr_eeprom
-    Update a 32-bit double word \a __value to EEPROM address \a __p.
+    Update a 32-bit double word \a __value at EEPROM address \a __p.
  */
 void eeprom_update_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
-    Update a float \a __value to EEPROM address \a __p.
+    Update a 64-bit quad word \a __value at EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+void eeprom_update_qword (uint64_t *__p, uint64_t __value);
+#endif
+
+/** \ingroup avr_eeprom
+    Update a float \a __value at EEPROM address \a __p.
  */
 void eeprom_update_float (float *__p, float __value);
 
 /** \ingroup avr_eeprom
-    Update a block of \a __n bytes to EEPROM address \a __dst from \a __src.
+    Update a double \a __value at EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__)
+void eeprom_update_double (double *__p, double __value);
+#elif __SIZEOF_DOUBLE__ == 4
+void eeprom_update_double (double *__p, double __value) __asm("eeprom_update_dword");
+#elif __SIZEOF_DOUBLE__ == 8
+void eeprom_update_double (double *__p, double __value) __asm("eeprom_update_qword");
+#endif
+
+/** \ingroup avr_eeprom
+    Update a long double \a __value at EEPROM address \a __p.
+ */
+#if defined(__DOXYGEN__)
+void eeprom_update_long_double (long double *__p, long double __value);
+#elif __SIZEOF_LONG_DOUBLE__ == 4
+void eeprom_update_long_double (long double *__p, long double __value) __asm("eeprom_update_dword");
+#elif __SIZEOF_LONG_DOUBLE__ == 8
+void eeprom_update_long_double (long double *__p, long double __value) __asm("eeprom_update_qword");
+#endif
+
+/** \ingroup avr_eeprom
+    Update a block of \a __n bytes at EEPROM address \a __dst from \a __src.
     \note The argument order is mismatch with common functions like strcpy().
  */
 void eeprom_update_block (const void *__src, void *__dst, size_t __n);

@@ -37,14 +37,17 @@ eeprom_c_sources = \
 eeprom_asm_sources = \
 	eerd_block.S \
 	eerd_byte.S \
+	eerd_qword.S \
 	eerd_dword.S \
 	eerd_word.S \
 	eeupd_block.S \
 	eeupd_byte.S \
+	eeupd_qword.S \
 	eeupd_dword.S \
 	eeupd_word.S \
 	eewr_block.S \
 	eewr_byte.S \
+	eewr_qword.S \
 	eewr_dword.S \
 	eewr_word.S
 

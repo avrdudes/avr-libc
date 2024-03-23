@@ -47,6 +47,8 @@
   - Added experimental templates pgm_read<> and pgm_read_far<>.  They are
     only available when macro __pgm_read_template__ is defined.
 
+  - Added EEPROM support for: double, long double, uint64_t (*_qword).
+
 * Issues closed:
 
   - [patch #9543] Add avrxmega3 devices. #824
