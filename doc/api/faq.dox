@@ -666,12 +666,13 @@ sections in the avr-gcc Wiki.
 
 - <strong>Data types:</strong><br>
   \c char is 8 bits, \c int and \c short are 16 bits, \c long is 32 bits,
-  \c long long is 64 bits, \c float is 32 bits, \c double and \c long double
-  are 32 bits or 64 bits, pointers are 16 bits (function pointers are word
+  \c long \c long is 64 bits, \c float is 32 bits,
+  \c double and \c long \c double are 32 bits or 64 bits,
+  pointers are 16 bits (function pointers are word
   addresses to allow addressing up to 128K program memory space).
 
   - There is a \c -mint8 option (see \ref using_avr_gcc) to
-  make \c int and \c short 8 bits, \c long 16 bits and \long long 32 bits.
+  make \c int and \c short 8 bits, \c long 16 bits and \c long \c long 32 bits.
   But that is not supported by avr-libc (except for \c stdint.h and
   \c avr/pgmspace.h) and violates C standards
   (\c int \e must be at least 16 bits).
@@ -682,8 +683,8 @@ sections in the avr-gcc Wiki.
   Calling C subroutines can clobber any of them -
   the caller is responsible for saving and restoring.
 
-   For the AVR_TINY architecture (ATtiny10 and relative	s),
-   r18 and r19 are call-saved.
+   For the AVR_TINY architecture (ATtiny10 and relatives),
+   r20-r27 and r30-31 are call-clobbered.
 
 - <strong>Call-saved registers (r2-r17, r28-r29):</strong><br>
   May be allocated by gcc for local data.
@@ -698,7 +699,8 @@ sections in the avr-gcc Wiki.
   argument passing.
 
   For the AVR_TINY architecture (ATtiny10 etc.),
-  r18 and r19 are call-saved, and r0 through r16 do not exist.
+  r18-r19 and  r28-r29 are call-saved.
+  Registers r0 through r15 do not exist.
 
 - <strong>Fixed registers (r0, r1):</strong><br>
   Never allocated by gcc for local data, but often
@@ -719,7 +721,7 @@ sections in the avr-gcc Wiki.
   Interrupt handlers save and clear \c __zero_reg__ on entry,
   and restore it on exit (in case it was non-zero).
 
-  - <strong>T flag</strong> - the \c T flag in the status register
+  - <strong>T flag</strong> - the \c T flag in the status register (\c SREG)
   can be used the same way like \c __tmp_reg__.
 
   For the AVR_TINY architecture (ATtiny10 etc.),
@@ -734,11 +736,27 @@ sections in the avr-gcc Wiki.
 
   If too many, those that don't fit are passed on the stack.
 
-  Return values: 8-bit in r24, 16-bit in r25:r24,
+  On AVR_TINY, r25 to r20 are used to pass values.
+
+- Return values: 8-bit in r24, 16-bit in r25:r24,
   up to 32 bits in r22-r25, up to 64 bits in r18-r25.
-  Arguments to functions with variable argument lists
-  (\c printf etc.) are all passed on stack, and \c char
-  is extended to \c int.
+
+- Arguments to functions with a variable number of lists like
+  \c printf get all their values on the stack.
+  \c char is extended to \c int, and \c float is extended to \c double.
+
+- When an argument is passed on the stack, all subsequent arguments are
+  also passed on the stack.
+
+- An argument is either passed completely in registers or completely on
+  the stack.
+
+- Arguments with a size of zero or with a size larger than 8 bytes
+  (4 bytes on AVR_TINY) are returned in memory.  The caller provides
+  the memory location as implicit first argument to the callee.
+
+- When an argument is returned in registers, its size is padded to the
+  next power of 2.
 .
 
 <small>Back to \ref faq_index.</small>
