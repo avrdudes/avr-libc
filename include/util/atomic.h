@@ -83,7 +83,7 @@ static __inline__ void __iRestore(const  uint8_t *__s)
     ("ISO C99") feature of for loop variables that are declared inside
     the for loop itself.  For that reason, this header file can only
     be used if the standard level of the compiler (option --std=) is
-    set to either \c c99 or \c gnu99.
+    set to either \c c99, \c gnu99 or higher.
 
     The macros in this header file deal with code blocks that are
     guaranteed to be executed Atomically or Non-Atomically.  The term
@@ -96,6 +96,10 @@ static __inline__ void __iRestore(const  uint8_t *__s)
     for special considerations, i.e. the interrupt status will be
     restored to the same value it had when entering the respective
     block (unless ATOMIC_FORCEON or NONATOMIC_FORCEOFF are used).
+    \warning The features in this header are implemented by means of
+    a for loop.  This means that commands like \c break and \c continue
+    that are located in an atomic block refer to the atomic for loop,
+    not to a loop construct that hosts the atomic block.
 
     A typical example that requires atomic access is a 16 (or more)
     bit variable that is shared between the main execution path and an
