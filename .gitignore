@@ -27,3 +27,14 @@ depcomp
 stamp-h1
 
 devtools/gen-avr-lib-tree.sh
+
+*.bin
+*.elf
+*.hex
+*.map
+*.srec
+*.png
+*.eps
+*.pdf
+
+__pycache__
