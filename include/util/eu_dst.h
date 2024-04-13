@@ -29,86 +29,75 @@
 /* $Id$ */
 
 /**
-    Daylight Saving function for the European Union. To utilize this function, you must
-    \code #include <util/eu_dst.h> \endcode
-    and
-    \code set_dst(eu_dst); \endcode
+    Daylight Saving function for the European Union. To utilize this function,
+    you must \code #include <util/eu_dst.h> \endcode
+    and \code set_dst(eu_dst); \endcode
 
-    Given the time stamp and time zone parameters provided, the Daylight Saving function must
-    return a value appropriate for the tm structures' tm_isdst element. That is...
+    Given the time stamp and time zone parameters provided, the Daylight
+    Saving function must return a value appropriate for the tm structures'
+    tm_isdst element. That is:
 
     0 : If Daylight Saving is not in effect.
 
     -1 : If it cannot be determined if Daylight Saving is in effect.
 
-    A positive integer : Represents the number of seconds a clock is advanced for Daylight Saving.
-    This will typically be ONE_HOUR.
+    A positive integer: Represents the number of seconds a clock is advanced
+    for Daylight Saving.  This will typically be ONE_HOUR.
 
-    Daylight Saving 'rules' are subject to frequent change. For production applications it is
-    recommended to write your own DST function, which uses 'rules' obtained from, and modifiable by,
-    the end user ( perhaps stored in EEPROM ).
+    Daylight Saving 'rules' are subject to frequent change.  For production
+    applications it is recommended to write your own DST function, which
+    uses 'rules' obtained from, and modifiable by, the end user (perhaps
+    stored in EEPROM).
 */
 
 #ifndef EU_DST_H
 #define EU_DST_H
 
 #ifdef __cplusplus
-extern          "C" {
+extern "C" {
 #endif
 
 #include <time.h>
-#include <inttypes.h>
+#include <stdint.h>
 
-    int             eu_dst(const time_t * timer, int32_t * z) {
-        struct tm       tmptr;
-        uint8_t         month, mday, hour, day_of_week, d;
-        int             n;
+int eu_dst (const time_t *timer, int32_t *z)
+{
+    struct tm utc;
+    (void) z;
 
-        /* obtain the variables */
-                        gmtime_r(timer, &tmptr);
-                        month = tmptr.tm_mon;
-                        day_of_week = tmptr.tm_wday;
-                        mday = tmptr.tm_mday - 1;
-                        hour = tmptr.tm_hour;
+    gmtime_r (timer, &utc);
 
-        if              ((month > MARCH) && (month < OCTOBER))
-                            return ONE_HOUR;
+    // Tip: March and October are both 31-day long
+    const uint8_t current_month = utc.tm_mon;
+    const uint8_t current_day = utc.tm_mday;
+    const uint8_t current_hour = utc.tm_hour;
+    const uint8_t current_weekday = utc.tm_wday;
 
-        if              (month < MARCH)
-                            return 0;
-        if              (month > OCTOBER)
-                            return 0;
+    if (current_month == MARCH || current_month == OCTOBER)
+    {
+        // Daylight saving hour (UTC)
+        // See https://en.wikipedia.org/wiki/Daylight_saving_time_by_country
+        const uint8_t daylight_saving_hour = 1;
 
-        /* determine mday of last Sunday */
-                        n = tmptr.tm_mday - 1;
-                        n -= day_of_week;
-                        n += 7;
-                        d = n % 7;  /* date of first Sunday */
+        // Do NOT switch:
+        // - before the last week (of March/October) or
+        // - before Sunday 01:00
+        const uint8_t before_switching =
+            (current_day + (7 - current_weekday) <= 31
+             || (current_weekday == SUNDAY
+                 && current_hour < daylight_saving_hour));
 
-                        n = 31 - d;
-                        n /= 7; /* number of Sundays left in the month */
-
-                        d = d + 7 * n;  /* d: mday of final Sunday */
-
-        if              (month == MARCH) {
-            if (mday < d) /* before last Sunday */
-                return 0;
-            if (mday > d) /* past last Sunday */
-                return ONE_HOUR;
-            if (hour < 2) /* at last Sunday, before switching */
-                return 0;
-            return ONE_HOUR; /* at last Sunday, after switching */
-        }
-	/* month == OCTOBER */
-        if              (mday < d) /* before last Sunday */
-                            return ONE_HOUR;
-        if              (mday > d) /* past last Sunday */
-                            return 0;
-        if              (hour < 2) /* at last Sunday, before switching */
-                            return ONE_HOUR;
-                        return 0; /* at last Sunday, after switchin */
-
+        return (current_month == MARCH) == (before_switching != 0)
+            ? 0
+            : ONE_HOUR;
     }
+
+    // Return one hour offset if current date is between March and October
+    // or past the switching time, in which case both tests return false
+    return current_month < MARCH || current_month > OCTOBER
+        ? 0
+        : ONE_HOUR;
+}
 
 #ifdef __cplusplus
 }
