@@ -43,7 +43,6 @@
 
 #include <inttypes.h>
 #include <util/delay_basic.h>
-#include <math.h>
 
 /** \file */
 /** \defgroup util_delay <util/delay.h>: Convenience functions for busy-wait delay loops
@@ -79,7 +78,6 @@
     The functions available allow the specification of microsecond, and
     millisecond delays directly, using the application-supplied macro
     F_CPU as the CPU clock frequency (in Hertz).
-
 */
 
 #if !defined(__DOXYGEN__)
@@ -110,12 +108,6 @@ static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__))
 
 #ifndef __OPTIMIZE__
 # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-#endif
-
-#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
-  !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
-  __STDC_HOSTED__
-#  include <math.h>
 #endif
 
 /**
@@ -155,33 +147,27 @@ static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__))
    __builtin_avr_delay_cycles() is not backward compatible with older
    implementations.  In order to get functionality backward compatible
    with previous versions, the macro \c "__DELAY_BACKWARD_COMPATIBLE__"
-   must be defined before including this header file. Also, the
-   backward compatible algorithm will be chosen if the code is
-   compiled in a <em>freestanding environment</em> (GCC option
-   \c -ffreestanding), as the math functions required for rounding are
-   not available to the compiler then.
-
+   must be defined before including this header file.
  */
 void
 _delay_ms(double __ms)
 {
 	double __tmp ;
-#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
-  !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
-  __STDC_HOSTED__
+#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) \
+  && !defined(__DELAY_BACKWARD_COMPATIBLE__)
 	uint32_t __ticks_dc;
-	extern void __builtin_avr_delay_cycles(unsigned long);
+	extern void __builtin_avr_delay_cycles(uint32_t);
 	__tmp = ((F_CPU) / 1e3) * __ms;
 
 	#if defined(__DELAY_ROUND_DOWN__)
-		__ticks_dc = (uint32_t)fabs(__tmp);
+		__ticks_dc = (uint32_t)__builtin_fabs(__tmp);
 
 	#elif defined(__DELAY_ROUND_CLOSEST__)
-		__ticks_dc = (uint32_t)(fabs(__tmp)+0.5);
+		__ticks_dc = (uint32_t)(__builtin_fabs(__tmp)+0.5);
 
 	#else
 		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+		__ticks_dc = (uint32_t)(__builtin_ceil(__builtin_fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
@@ -244,33 +230,27 @@ _delay_ms(double __ms)
    __builtin_avr_delay_cycles() is not backward compatible with older
    implementations.  In order to get functionality backward compatible
    with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__
-   must be defined before including this header file. Also, the
-   backward compatible algorithm will be chosen if the code is
-   compiled in a <em>freestanding environment</em> (GCC option
-   \c -ffreestanding), as the math functions required for rounding are
-   not available to the compiler then.
-
+   must be defined before including this header file.
  */
 void
 _delay_us(double __us)
 {
 	double __tmp ;
-#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
-  !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
-  __STDC_HOSTED__
+#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) \
+  && !defined(__DELAY_BACKWARD_COMPATIBLE__)
 	uint32_t __ticks_dc;
-	extern void __builtin_avr_delay_cycles(unsigned long);
+	extern void __builtin_avr_delay_cycles(uint32_t);
 	__tmp = ((F_CPU) / 1e6) * __us;
 
 	#if defined(__DELAY_ROUND_DOWN__)
-		__ticks_dc = (uint32_t)fabs(__tmp);
+		__ticks_dc = (uint32_t)__builtin_fabs(__tmp);
 
 	#elif defined(__DELAY_ROUND_CLOSEST__)
-		__ticks_dc = (uint32_t)(fabs(__tmp)+0.5);
+		__ticks_dc = (uint32_t)(__builtin_fabs(__tmp)+0.5);
 
 	#else
 		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+		__ticks_dc = (uint32_t)(__builtin_ceil(__builtin_fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
