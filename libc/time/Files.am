@@ -55,6 +55,7 @@ time_a_c_sources = \
 	moon_phase.c \
 	print_lz.c \
 	set_dst.c \
+	eu_dst.c \
 	set_position.c \
 	set_system_time.c \
 	set_zone.c \

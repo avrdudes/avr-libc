@@ -28,20 +28,20 @@
 
 /* $Id$ */
 
-/** \file */
-/** \defgroup eu_dst <util/eu_dst.h>: Daylight Saving function for the European Union.
-    To utilize this function, you must \code #include <util/eu_dst.h> \endcode
+/**
+    Daylight Saving function for the European Union. To utilize this function,
+    you must \code #include <util/eu_dst.h> \endcode
     and \code set_dst(eu_dst); \endcode
 
     Given the time stamp and time zone parameters provided, the Daylight
     Saving function must return a value appropriate for the tm structures'
     tm_isdst element. That is:
 
-    - \c 0 : If Daylight Saving is not in effect.
+    0 : If Daylight Saving is not in effect.
 
-    - \c -1 : If it cannot be determined if Daylight Saving is in effect.
+    -1 : If it cannot be determined if Daylight Saving is in effect.
 
-    - A positive integer: Represents the number of seconds a clock is advanced
+    A positive integer: Represents the number of seconds a clock is advanced
     for Daylight Saving.  This will typically be ONE_HOUR.
 
     Daylight Saving 'rules' are subject to frequent change.  For production
@@ -50,20 +50,44 @@
     stored in EEPROM).
 */
 
-#ifndef EU_DST_H
-#define EU_DST_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <time.h>
 #include <stdint.h>
 
-extern int eu_dst (const time_t *timer, int32_t *z);
+int eu_dst (const time_t *timer, int32_t *z)
+{
+    struct tm utc;
+    (void) z;
 
-#ifdef __cplusplus
+    gmtime_r (timer, &utc);
+
+    // Tip: March and October are both 31-day long
+    const uint8_t current_month = utc.tm_mon;
+    const uint8_t current_day = utc.tm_mday;
+    const uint8_t current_hour = utc.tm_hour;
+    const uint8_t current_weekday = utc.tm_wday;
+
+    if (current_month == MARCH || current_month == OCTOBER)
+    {
+        // Daylight saving hour (UTC)
+        // See https://en.wikipedia.org/wiki/Daylight_saving_time_by_country
+        const uint8_t daylight_saving_hour = 1;
+
+        // Do NOT switch:
+        // - before the last week (of March/October) or
+        // - before Sunday 01:00
+        const uint8_t before_switching =
+            (current_day + (7 - current_weekday) <= 31
+             || (current_weekday == SUNDAY
+                 && current_hour < daylight_saving_hour));
+
+        return (current_month == MARCH) == (before_switching != 0)
+            ? 0
+            : ONE_HOUR;
+    }
+
+    // Return one hour offset if current date is between March and October
+    // or past the switching time, in which case both tests return false
+    return current_month < MARCH || current_month > OCTOBER
+        ? 0
+        : ONE_HOUR;
 }
-#endif
-
-#endif
