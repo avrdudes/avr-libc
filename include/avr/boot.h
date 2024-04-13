@@ -250,13 +250,13 @@
     (                                            \
         "movw  r0, %4\n\t"                       \
         "movw r30, %A3\n\t"                      \
-        "sts %1, %C3\n\t"                        \
+        "out %1, %C3\n\t"                        \
         "sts %0, %2\n\t"                         \
         "spm\n\t"                                \
         "clr  r1\n\t"                            \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
-          "i" (_SFR_MEM_ADDR(RAMPZ)),            \
+          "i" (_SFR_IO_ADDR(RAMPZ)),             \
           "r" ((uint8_t)(__BOOT_PAGE_FILL)),     \
           "r" ((uint32_t)(address)),             \
           "r" ((uint16_t)(data))                 \
@@ -297,12 +297,12 @@
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
-        "sts  %1, %C3\n\t"                       \
+        "out  %1, %C3\n\t"                       \
         "sts %0, %2\n\t"                         \
         "spm\n\t"                                \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
-          "i" (_SFR_MEM_ADDR(RAMPZ)),            \
+          "i" (_SFR_IO_ADDR(RAMPZ)),             \
           "r" ((uint8_t)(__BOOT_PAGE_ERASE)),    \
           "r" ((uint32_t)(address))              \
         : "r30", "r31"                           \
@@ -342,12 +342,12 @@
     __asm__ __volatile__                         \
     (                                            \
         "movw r30, %A3\n\t"                      \
-        "sts %1, %C3\n\t"                        \
+        "out %1, %C3\n\t"                        \
         "sts %0, %2\n\t"                         \
         "spm\n\t"                                \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
-          "i" (_SFR_MEM_ADDR(RAMPZ)),            \
+          "i" (_SFR_IO_ADDR(RAMPZ)),             \
           "r" ((uint8_t)(__BOOT_PAGE_WRITE)),    \
           "r" ((uint32_t)(address))              \
         : "r30", "r31"                           \
