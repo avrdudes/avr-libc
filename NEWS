@@ -33,6 +33,8 @@
   - Added support for Classic devices:
     ATmega168PB ATmega328PB ATmega324PB
 
+  - Added support for: strndup.
+
   - Added inline functions to read from progmem that return a type as
     indicated by the function name, like char pgm_read_char (const char*).
     The functions adjust to -mint8, -mdouble= and -mlong-double=.

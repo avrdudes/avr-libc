@@ -364,6 +364,19 @@ extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
 extern char *strdup(const char *s1);
 
 /** \ingroup avr_string
+    \fn char *strndup(const char *s, size_t n)
+    \brief Duplicate a string.
+
+    The strndup() function is similar to strdup(), but copies at most
+    \p n bytes. If \p s is longer than \p n, only \p n bytes are copied,
+    and a terminating null byte (<tt>'\0'</tt>) is added.
+
+    Memory for the new string is obtained with malloc(), and can be freed
+    with free().
+*/
+extern char *strndup(const char *s, size_t n);
+
+/** \ingroup avr_string
     \fn size_t strlcat(char *dst, const char *src, size_t siz)
     \brief Concatenate two strings.
 
