@@ -28,9 +28,8 @@
 
 /* $Id$ */
 
-/** \file */
-/** \defgroup usa_dst <util/usa_dst.h>: Daylight Saving function for the USA.
-    To utilize this function, you must
+/**
+    Daylight Saving function for the USA. To utilize this function, you must
     \code #include <util/usa_dst.h> \endcode
     and
     \code set_dst(usa_dst); \endcode
@@ -39,33 +38,81 @@
     Saving function must return a value appropriate for the tm structures'
     tm_isdst element. That is:
 
-    - \c 0 : If Daylight Saving is not in effect.
+    - 0 : If Daylight Saving is not in effect.
 
-    - \c -1 : If it cannot be determined if Daylight Saving is in effect.
+    - -1 : If it cannot be determined if Daylight Saving is in effect.
 
-    - A positive integer : Represents the number of seconds a clock is
+    - A positive integer: Represents the number of seconds a clock is
     advanced for Daylight Saving.  This will typically be ONE_HOUR.
 
     Daylight Saving 'rules' are subject to frequent change. For production
     applications it is recommended to write your own DST function, which
-    uses 'rules' obtained from, and modifiable by, the end user
+    uses 'rules' obtained from, and modifiable by,  the end user
     (perhaps stored in EEPROM).
 */
 
-#ifndef USA_DST_H
-#define USA_DST_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <time.h>
 #include <stdint.h>
+#include <util/usa_dst.h>
 
-int usa_dst (const time_t *timer, int32_t *z);
+#ifndef DST_START_MONTH
+#define DST_START_MONTH MARCH
+#endif
 
-#ifdef __cplusplus
+#ifndef DST_END_MONTH
+#define DST_END_MONTH NOVEMBER
+#endif
+
+#ifndef DST_START_WEEK
+#define DST_START_WEEK 2
+#endif
+
+#ifndef DST_END_WEEK
+#define DST_END_WEEK 1
+#endif
+
+int usa_dst (const time_t *timer, int32_t *z)
+{
+    struct tm tmptr;
+
+    /* Obtain the variables */
+    time_t t = *timer + *z;
+    gmtime_r (&t, &tmptr);
+    uint8_t month = tmptr.tm_mon;
+    uint8_t day_of_week = tmptr.tm_wday;
+    uint8_t week = week_of_month (&tmptr, 0);
+    uint8_t hour = tmptr.tm_hour;
+
+    if (month > DST_START_MONTH && month < DST_END_MONTH)
+        return ONE_HOUR;
+    else if (month < DST_START_MONTH)
+        return 0;
+    else if (month > DST_END_MONTH)
+        return 0;
+
+    if (month == DST_START_MONTH)
+    {
+        if (week < DST_START_WEEK)
+            return 0;
+        else if (week > DST_START_WEEK)
+            return ONE_HOUR;
+
+        if (day_of_week > SUNDAY)
+            return ONE_HOUR;
+        else if (hour >= 2)
+            return ONE_HOUR;
+        else
+            return 0;
+    }
+
+    if (week > DST_END_WEEK)
+        return 0;
+    else if (week < DST_END_WEEK)
+        return ONE_HOUR;
+    else if (day_of_week > SUNDAY)
+        return 0;
+    else if (hour >= 1)
+        return 0;
+    else
+        return ONE_HOUR;
 }
-#endif
-
-#endif
