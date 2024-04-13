@@ -50,11 +50,6 @@
     \note Not all AVR processors provide bootloader support. See your
     processor datasheet to see if it provides bootloader support.
 
-    \todo From email with Marek: On smaller devices (all except ATmega64/128),
-    __SPM_REG is in the I/O space, accessible with the shorter "in" and "out"
-    instructions - since the boot loader has a limited size, this could be an
-    important optimization.
-
     \par API Usage Example
     The following code shows typical usage of the boot API.
 
@@ -210,31 +205,42 @@
 
 #define __boot_page_fill_normal(address, data)   \
 (__extension__({                                 \
-    __asm__ __volatile__                         \
-    (                                            \
-        "movw  r0, %3\n\t"                       \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
-        "clr  r1\n\t"                            \
+    if (_SFR_IO_REG_P(__SPM_REG))                \
+      __asm__ __volatile__ (                     \
+        "movw r0, %3"     "\n\t"                 \
+        "out  %0, %1"     "\n\t"                 \
+        "spm"             "\n\t"                 \
+        "clr  __zero_reg__"                      \
+        :                                        \
+        : "i" (_SFR_IO_ADDR(__SPM_REG)),         \
+          "r" ((uint8_t)(__BOOT_PAGE_FILL)),     \
+          "z" ((uint16_t)(address)),             \
+          "r" ((uint16_t)(data))                 \
+        : "r0");                                 \
+    else                                         \
+      __asm__ __volatile__ (                     \
+        "movw r0, %3"      "\n\t"                \
+        "sts  %0, %1"      "\n\t"                \
+        "spm"              "\n\t"                \
+        "clr  __zero_reg__"                      \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_FILL)),     \
           "z" ((uint16_t)(address)),             \
           "r" ((uint16_t)(data))                 \
-        : "r0"                                   \
-    );                                           \
+        : "r0");                                 \
 }))
 
 #define __boot_page_fill_alternate(address, data)\
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw  r0, %3\n\t"                       \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
-        ".word 0xffff\n\t"                       \
-        "nop\n\t"                                \
-        "clr  r1\n\t"                            \
+        "movw r0, %3"     "\n\t"                 \
+        "sts  %0, %1"     "\n\t"                 \
+        "spm"             "\n\t"                 \
+        ".word 0xffff"    "\n\t"                 \
+        "nop"             "\n\t"                 \
+        "clr  __zero_reg__"                      \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_FILL)),     \
@@ -248,12 +254,12 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw  r0, %4\n\t"                       \
-        "movw r30, %A3\n\t"                      \
-        "out %1, %C3\n\t"                        \
-        "sts %0, %2\n\t"                         \
-        "spm\n\t"                                \
-        "clr  r1\n\t"                            \
+        "movw r0, %4"      "\n\t"                \
+        "movw r30, %A3"    "\n\t"                \
+        "out  %1, %C3"     "\n\t"                \
+        "sts  %0, %2"      "\n\t"                \
+        "spm"              "\n\t"                \
+        "clr __zero_reg__"                       \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "i" (_SFR_IO_ADDR(RAMPZ)),             \
@@ -266,25 +272,32 @@
 
 #define __boot_page_erase_normal(address)        \
 (__extension__({                                 \
-    __asm__ __volatile__                         \
-    (                                            \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
+    if (_SFR_IO_REG_P(__SPM_REG))                \
+      __asm__ __volatile__ (                     \
+        "out %0, %1"       "\n\t"                \
+        "spm"                                    \
+        :                                        \
+        : "i" (_SFR_IO_ADDR(__SPM_REG)),         \
+          "r" ((uint8_t)(__BOOT_PAGE_ERASE)),    \
+          "z" ((uint16_t)(address)));            \
+    else                                         \
+      __asm__ __volatile__ (                     \
+        "sts %0, %1"       "\n\t"                \
+        "spm"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_ERASE)),    \
-          "z" ((uint16_t)(address))              \
-    );                                           \
+          "z" ((uint16_t)(address)));            \
 }))
 
 #define __boot_page_erase_alternate(address)     \
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
-        ".word 0xffff\n\t"                       \
-        "nop\n\t"                                \
+        "sts %0, %1"      "\n\t"                 \
+        "spm"             "\n\t"                 \
+        ".word 0xffff"    "\n\t"                 \
+        "nop"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_ERASE)),    \
@@ -296,10 +309,10 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw r30, %A3\n\t"                      \
-        "out  %1, %C3\n\t"                       \
-        "sts %0, %2\n\t"                         \
-        "spm\n\t"                                \
+        "movw r30, %A3"     "\n\t"               \
+        "out  %1, %C3"      "\n\t"               \
+        "sts  %0, %2"       "\n\t"               \
+        "spm"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "i" (_SFR_IO_ADDR(RAMPZ)),             \
@@ -311,25 +324,32 @@
 
 #define __boot_page_write_normal(address)        \
 (__extension__({                                 \
-    __asm__ __volatile__                         \
-    (                                            \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
+    if (_SFR_IO_REG_P(__SPM_REG))                \
+      __asm__ __volatile__ (                     \
+        "out %0, %1"       "\n\t"                \
+        "spm"                                    \
+        :                                        \
+        : "i" (_SFR_IO_ADDR(__SPM_REG)),         \
+          "r" ((uint8_t)(__BOOT_PAGE_WRITE)),    \
+          "z" ((uint16_t)(address)));            \
+    else                                         \
+      __asm__ __volatile__ (                     \
+        "sts %0, %1"       "\n\t"                \
+        "spm"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_WRITE)),    \
-          "z" ((uint16_t)(address))              \
-    );                                           \
+          "z" ((uint16_t)(address)));            \
 }))
 
 #define __boot_page_write_alternate(address)     \
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
-        ".word 0xffff\n\t"                       \
-        "nop\n\t"                                \
+        "sts %0, %1"     "\n\t"                  \
+        "spm"            "\n\t"                  \
+        ".word 0xffff"   "\n\t"                  \
+        "nop"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_WRITE)),    \
@@ -341,10 +361,10 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "movw r30, %A3\n\t"                      \
-        "out %1, %C3\n\t"                        \
-        "sts %0, %2\n\t"                         \
-        "spm\n\t"                                \
+        "movw r30, %A3"    "\n\t"                \
+        "out  %1, %C3"     "\n\t"                \
+        "sts  %0, %2"      "\n\t"                \
+        "spm"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "i" (_SFR_IO_ADDR(RAMPZ)),             \
@@ -358,8 +378,8 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
+        "sts %0, %1"   "\n\t"                    \
+        "spm"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_RWW_ENABLE))     \
@@ -370,10 +390,10 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1\n\t"                         \
-        "spm\n\t"                                \
-        ".word 0xffff\n\t"                       \
-        "nop\n\t"                                \
+        "sts %0, %1"     "\n\t"                  \
+        "spm"            "\n\t"                  \
+        ".word 0xffff"   "\n\t"                  \
+        "nop"                                    \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_RWW_ENABLE))     \
@@ -402,11 +422,11 @@
     uint8_t value = (uint8_t)(~(lock_bits));               \
     __asm__ __volatile__                                   \
     (                                                      \
-        "ldi r30, 1\n\t"                                   \
-        "ldi r31, 0\n\t"                                   \
-        "mov r0, %2\n\t"                                   \
-        "sts %0, %1\n\t"                                   \
-        "spm\n\t"                                          \
+        "ldi r30, 1"     "\n\t"                            \
+        "ldi r31, 0"     "\n\t"                            \
+        "mov r0, %2"     "\n\t"                            \
+        "sts %0, %1"     "\n\t"                            \
+        "spm"                                              \
         :                                                  \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
           "r" ((uint8_t)(__BOOT_LOCK_BITS_SET)),           \
@@ -420,13 +440,13 @@
     uint8_t value = (uint8_t)(~(lock_bits));               \
     __asm__ __volatile__                                   \
     (                                                      \
-        "ldi r30, 1\n\t"                                   \
-        "ldi r31, 0\n\t"                                   \
-        "mov r0, %2\n\t"                                   \
-        "sts %0, %1\n\t"                                   \
-        "spm\n\t"                                          \
-        ".word 0xffff\n\t"                                 \
-        "nop\n\t"                                          \
+        "ldi r30, 1"    "\n\t"                             \
+        "ldi r31, 0"    "\n\t"                             \
+        "mov r0, %2"    "\n\t"                             \
+        "sts %0, %1"    "\n\t"                             \
+        "spm"           "\n\t"                             \
+        ".word 0xffff"  "\n\t"                             \
+        "nop"                                              \
         :                                                  \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
           "r" ((uint8_t)(__BOOT_LOCK_BITS_SET)),           \
@@ -522,13 +542,13 @@
     \note The values are MCU type dependent.
 */
 
-#define boot_signature_byte_get(addr) \
-(__extension__({                      \
+#define boot_signature_byte_get(addr)           \
+  (__extension__({                              \
       uint8_t __result;                         \
       __asm__ __volatile__                      \
       (                                         \
-        "sts %1, %2\n\t"                        \
-        "lpm %0, Z" "\n\t"                      \
+        "sts %1, %2"   "\n\t"                   \
+        "lpm %0, Z"                             \
         : "=r" (__result)                       \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),       \
           "r" ((uint8_t)(__BOOT_SIGROW_READ)),  \
