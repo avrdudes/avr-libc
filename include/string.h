@@ -62,7 +62,7 @@ extern "C" {
 /** \defgroup avr_string <string.h>: Strings
     \code #include <string.h> \endcode
 
-    The string functions perform string operations on NULL terminated
+    The string functions perform string operations on \c NULL terminated
     strings.
 
     \note If the strings you are working on resident in program space (flash),
@@ -116,7 +116,7 @@ extern "C" {
     \brief This function finds the first (least significant) bit set in the input value.
 
     \returns The ffs() function returns the position of the first
-    (least significant) bit set in the word val, or 0 if no bits are set.
+    (least significant) bit set in the word \p val, or 0 if no bits are set.
     The least significant bit is position 1.
 
     \note For expressions that are constant at compile time, consider
@@ -133,7 +133,7 @@ extern int ffsl(long __val) __ATTR_CONST__;
 /** \ingroup avr_string
     \fn int ffsll(long long val);
 
-    \brief Same as ffs(), for an argument of type long long. */
+    \brief Same as ffs(), for an argument of type <tt>long long</tt>. */
 __extension__ extern int ffsll(long long __val) __ATTR_CONST__;
 
 /** \ingroup avr_string
@@ -145,7 +145,7 @@ __extension__ extern int ffsll(long long __val) __ATTR_CONST__;
     is found.
 
     \returns The memccpy() function returns a pointer to the next character
-    in \p dest after \p val, or NULL if \p val was not found in the first
+    in \p dest after \p val, or \c NULL if \p val was not found in the first
     \p len characters of \p src. */
 extern void *memccpy(void *, const void *, int, size_t);
 
@@ -251,14 +251,12 @@ extern char *strcat(char *, const char *);
     \fn char *strchr(const char *src, int val)
     \brief Locate character in string.
 
-    The strchr() function returns a pointer to the first occurrence of
-    the character \p val in the string \p src.
-
-    Here "character" means "byte" - these functions do not work with
-    wide or multi-byte characters.
-
-    \returns The strchr() function returns a pointer to the matched
-    character or \c NULL if the character is not found. */
+    \returns The strchr() function returns a pointer to the first occurrence of
+    the character \p val in the string \p src, or \c NULL if the character
+    is not found.
+    <br><br>
+    Here "character" means "byte" -- these functions do not work with
+    wide or multi-byte characters.  */
 extern char *strchr(const char *, int) __ATTR_PURE__;
 
 /** \ingroup avr_string
@@ -348,7 +346,7 @@ extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
     \brief Duplicate a string.
 
     The strdup() function allocates memory and copies into it the string
-    addressed by s1, including the terminating null character.
+    addressed by \p s1, including the terminating null character.
 
     \warning The strdup() function calls malloc() to allocate the memory
     for the duplicated string! The user is responsible for freeing the
@@ -356,7 +354,7 @@ extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
 
     \returns The strdup() function returns a pointer to the resulting string
     dest. If malloc() cannot allocate enough storage for the string, strdup()
-    will return NULL.
+    will return \c NULL.
 
     \warning Be sure to check the return value of the strdup() function to
     make sure that the function has succeeded in allocating the memory!
@@ -364,15 +362,18 @@ extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
 extern char *strdup(const char *s1);
 
 /** \ingroup avr_string
-    \fn char *strndup(const char *s, size_t n)
+    \fn char *strndup(const char *s, size_t len)
     \brief Duplicate a string.
 
     The strndup() function is similar to strdup(), but copies at most
-    \p n bytes. If \p s is longer than \p n, only \p n bytes are copied,
+    \p len bytes. If \p s is longer than \p len, only \p len bytes are copied,
     and a terminating null byte (<tt>'\0'</tt>) is added.
 
     Memory for the new string is obtained with malloc(), and can be freed
     with free().
+
+    \returns The strndup() function returns the location of the newly malloc'ed
+    memory, or \c NULL if the allocation failed.
 */
 extern char *strndup(const char *s, size_t n);
 
@@ -382,7 +383,7 @@ extern char *strndup(const char *s, size_t n);
 
     Appends \p src to string \p dst of size \p siz (unlike strncat(),
     \p siz is the full size of \p dst, not space left).  At most \p siz-1
-    characters will be copied.  Always NULL terminates (unless \p siz <=
+    characters will be copied.  Always \p '\\0' terminated (unless \p siz <=
     \p strlen(dst)).
 
     \returns The strlcat() function returns strlen(src) + MIN(siz,
@@ -394,7 +395,7 @@ extern size_t strlcat(char *, const char *, size_t);
     \brief Copy a string.
 
     Copy \p src to string \p dst of size \p siz.  At most \p siz-1
-    characters will be copied.  Always NULL terminates (unless \p siz == 0).
+    characters will be copied.  Always '\\0' terminated (unless \p siz == 0).
 
     \returns The strlcpy() function returns strlen(src). If retval >= siz,
     truncation occurred.  */
@@ -404,11 +405,11 @@ extern size_t strlcpy(char *, const char *, size_t);
     \fn size_t strlen(const char *src)
     \brief Calculate the length of a string.
 
-    The strlen() function calculates the length of the string src, not
+    The strlen() function calculates the length of the string \p src, not
     including the terminating '\\0' character.
 
     \returns The strlen() function returns the number of characters in
-    src.  */
+    \p src.  */
 extern size_t strlen(const char *) __ATTR_PURE__;
 
 /** \ingroup avr_string
@@ -420,7 +421,7 @@ extern size_t strlen(const char *) __ATTR_PURE__;
     characters will not be changed.
 
     \returns The strlwr() function returns a pointer to the converted
-    string. */
+    string.  Conversion is perfomed in-place.  */
 extern char *strlwr(char *);
 
 /** \ingroup avr_string
@@ -428,10 +429,10 @@ extern char *strlwr(char *);
     \brief Concatenate two strings.
 
     The strncat() function is similar to strcat(), except that only the first
-    n characters of src are appended to dest.
+    \p len characters of \p src are appended to \p dest.
 
     \returns The strncat() function returns a pointer to the resulting string
-    dest.  */
+    \p dest.  */
 extern char *strncat(char *, const char *, size_t);
 
 /** \ingroup avr_string
@@ -439,26 +440,26 @@ extern char *strncat(char *, const char *, size_t);
     \brief Compare two strings.
 
     The strncmp() function is similar to strcmp(), except it only compares the
-    first (at most) n characters of s1 and s2.
+    first (at most) \p len characters of \p s1 and \p s2.
 
     \returns The strncmp() function returns an integer less than, equal to, or
-    greater than zero if s1 (or the first n bytes thereof) is found,
-    respectively, to be less than, to match, or be greater than s2.  */
+    greater than zero if \p s1 (or the first \p len bytes thereof) is found,
+    respectively, to be less than, to match, or be greater than \p s2.  */
 extern int strncmp(const char *, const char *, size_t) __ATTR_PURE__;
 
 /** \ingroup avr_string
     \fn char *strncpy(char *dest, const char *src, size_t len)
     \brief Copy a string.
 
-    The strncpy() function is similar to strcpy(), except that not more than n
-    bytes of src are copied. Thus, if there is no null byte among the first n
-    bytes of src, the result will not be null-terminated.
+    The strncpy() function is similar to strcpy(), except that not more than
+    \p len bytes of \p src are copied. Thus, if there is no null byte among
+    the first \p len bytes of \p src, the result will not be null-terminated.
 
-    In the case where the length of src is less than that of n, the remainder
-    of dest will be padded with nulls.
+    In the case where the length of \p src is less than that of \p len,
+    the remainder of \p dest will be padded with nulls (<tt>'\0'</tt>).
 
     \returns The strncpy() function returns a pointer to the destination
-    string dest.  */
+    string \p dest.  */
 extern char *strncpy(char *, const char *, size_t);
 
 /** \ingroup avr_string
@@ -480,14 +481,14 @@ extern int strncasecmp(const char *, const char *, size_t) __ATTR_PURE__;
     \fn size_t strnlen(const char *src, size_t len)
     \brief Determine the length of a fixed-size string.
 
-    The strnlen function returns the number of characters in the string
-    pointed to by src, not including the terminating '\\0' character, but at
-    most len. In doing this, strnlen looks only at the first len characters at
-    src and never beyond src+len.
+    The strnlen() function returns the number of characters in the string
+    pointed to by \p src, not including the terminating '\\0' character, but at
+    most \p len. In doing this, strnlen() looks only at the first \p len
+    characters at \p src and never beyond \p src + \p len.
 
     \returns The strnlen function returns strlen(src), if that is less than
-    len, or len if there is no '\\0' character among the first len
-    characters pointed to by src. */
+    \p len, or \p len if there is no '\\0' character among the first \p len
+    characters pointed to by \p src. */
 extern size_t strnlen(const char *, size_t) __ATTR_PURE__;
 
 /** \ingroup avr_string
@@ -510,11 +511,11 @@ extern char *strpbrk(const char *__s, const char *__accept) __ATTR_PURE__;
     The strrchr() function returns a pointer to the last occurrence of the
     character val in the string src.
 
-    Here "character" means "byte" - these functions do not work with wide or
+    Here "character" means "byte" -- these functions do not work with wide or
     multi-byte characters.
 
     \returns The strrchr() function returns a pointer to the matched character
-    or NULL if the character is not found. */
+    or \c NULL if the character is not found. */
 extern char *strrchr(const char *, int) __ATTR_PURE__;
 
 /** \ingroup avr_string
@@ -575,13 +576,13 @@ extern char *strstr(const char *, const char *) __ATTR_PURE__;
 
     strtok parses the string s into tokens. The first call to strtok
     should have s as its first argument. Subsequent calls should have
-    the first argument set to NULL. If a token ends with a delimiter, this
+    the first argument set to \c NULL. If a token ends with a delimiter, this
     delimiting character is overwritten with a '\\0' and a pointer to the next
     character is saved for the next call to strtok. The delimiter string
     delim may be different for each call.
 
     \returns The strtok() function returns a pointer to the next token or
-    NULL when no more tokens are found.
+    \c NULL when no more tokens are found.
 
     \note strtok() is NOT reentrant. For a reentrant version of this function
     see \c strtok_r().
@@ -594,7 +595,7 @@ extern char *strtok(char *, const char *);
 
     strtok_r parses string into tokens. The first call to strtok_r
     should have string as its first argument. Subsequent calls should have
-    the first argument set to NULL. If a token ends with a delimiter, this
+    the first argument set to \c NULL. If a token ends with a delimiter, this
     delimiting character is overwritten with a '\\0' and a pointer to the next
     character is saved for the next call to strtok_r. The delimiter string
     \p delim may be different for each call. \p last is a user allocated char*
@@ -602,7 +603,7 @@ extern char *strtok(char *, const char *);
     a reentrant version of strtok().
 
     \returns The strtok_r() function returns a pointer to the next token or
-    NULL when no more tokens are found. */
+    \c NULL when no more tokens are found. */
 extern char *strtok_r(char *, const char *, char **);
 
 /** \ingroup avr_string
