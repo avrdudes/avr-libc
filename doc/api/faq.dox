@@ -770,7 +770,7 @@ strings. The most obvious (and incorrect) thing to do is this:
 \code
 #include <avr/pgmspace.h>
 
-const char* array[2] PROGMEM = {
+const char* const array[2] PROGMEM = {
     "Foo",
     "Bar"
 };
@@ -784,7 +784,7 @@ int main (void)
 \endcode
 
 The result is not what you want though. What you end up with is the array
-stored in ROM, while the individual strings end up in RAM (in the \c .data
+stored in ROM, while the individual strings end up in RAM (in the \c .rodata
 section).
 
 To work around this, you need to do something like this:
@@ -795,20 +795,17 @@ To work around this, you need to do something like this:
 const char foo[] PROGMEM = "Foo";
 const char bar[] PROGMEM = "Bar";
 
-const char* array[2] PROGMEM = {
+const char* const array[2] PROGMEM = {
     foo,
     bar
 };
 
-int main (void)
+void func (uint8_t i)
 {
     char buf[32];
-    const char *p;
-    int i;
 
-    memcpy_P(&p, &array[i], sizeof(const char*));
-    strcpy_P(buf, p);
-    return 0;
+    const char *p = pgm_read_ptr (&array[i]);
+    strcpy_P (buf, p);
 }
 \endcode
 
@@ -817,8 +814,7 @@ in flash as such:
 
 \code
 00000026 <array>:
-  26:   2e 00           .word   0x002e  ; ????
-  28:   2a 00           .word   0x002a  ; ????
+  26:   2e 00 2a 00
 
 0000002a <bar>:
   2a:   42 61 72 00                                         Bar.
@@ -827,54 +823,38 @@ in flash as such:
   2e:   46 6f 6f 00                                         Foo.
 \endcode
 
-\c foo is at addr 0x002e.<br>
-\c bar is at addr 0x002a.<br>
-\c array is at addr 0x0026.<br>
+\c foo is at address 0x002e.<br>
+\c bar is at address 0x002a.<br>
+\c array is at address 0x0026.<br>
 
-Then in main we see this:
-
-\code
-    memcpy_P(&p, &array[i], sizeof(const char*));
-  70:   66 0f           add     r22, r22
-  72:   77 1f           adc     r23, r23
-  74:   6a 5d           subi    r22, 0xDA       ; 218
-  76:   7f 4f           sbci    r23, 0xFF       ; 255
-  78:   42 e0           ldi     r20, 0x02       ; 2
-  7a:   50 e0           ldi     r21, 0x00       ; 0
-  7c:   ce 01           movw    r24, r28
-  7e:   81 96           adiw    r24, 0x21       ; 33
-  80:   08 d0           rcall   .+16            ; 0x92
-\endcode
-
-This code reads the pointer to the desired string from the ROM table
-\c array into a register pair.
-
-The value of \c i (in r22:r23) is doubled to accommodate for the word
-offset required to access array[], then the address of array (0x26) is
-added, by subtracting the negated address (0xffda).  The address of
-variable \c p is computed by adding its offset within the stack frame
-(33) to the Y pointer register, and <tt><b>memcpy_P</b></tt> is
-called.
+Then in func we see this:
 
 \code
-    strcpy_P(buf, p);
-  82:   69 a1           ldd     r22, Y+33       ; 0x21
-  84:   7a a1           ldd     r23, Y+34       ; 0x22
-  86:   ce 01           movw    r24, r28
-  88:   01 96           adiw    r24, 0x01       ; 1
-  8a:   0c d0           rcall   .+24            ; 0xa4
+    const char *p = pgm_read_ptr (&array[i]);
+  72:  e8 2f      mov    r30, r24     ; Z = 2 * i
+  74:  f0 e0      ldi    r31, 0x00
+  76:  ee 0f      add    r30, r30
+  78:  ff 1f      adc    r31, r31
+  7a:  ea 5d      subi   r30, 0xDA    ; Z += 0x0026
+  7c:  ff 4f      sbci   r31, 0xFF
+  7e:  65 91      lpm    r22, Z+      ; r22 = *Z
+  80:  75 91      lpm    r23, Z+
+    strcpy_P (buf, p);
+  82:  ce 01      movw   r24, r28     ; r24 = buf
+  84:  01 96      adiw   r24, 0x01
+  86:  0c d0      rcall  .+24         ; <strcpy_P>
 \endcode
 
-This will finally copy the ROM string into the local buffer \c buf.
+The value of \c i (in R24) is moved to the Z register and doubled to
+accommodate for the word offset required to access \c array[], then the
+address of \c array (0x26) is added by subtracting the negated address (0xffda).
 
-Variable \c p (located at Y+33) is read, and passed together with the
-address of buf (Y+1) to <tt><b>strcpy_P</b></tt>.  This will copy the
-string from ROM to \c buf.
+Then the code uses \c LPM to read the pointer \p to the desired string from
+the ROM table \c array into register pair R23:R22.
 
-Note that when using a compile-time constant index, omitting the first
-step (reading the pointer from ROM via <tt><b>memcpy_P</b></tt>)
-usually remains unnoticed, since the compiler would then optimize the
-code for accessing \c array at compile-time.
+The address of variable \c buf is computed by adding its offset within
+the stack frame (0x1) to the Y pointer register, and strcpy_P() is
+called, which copies the ROM string into the local RAM buffer \c buf.
 
 <small>Back to \ref faq_index.</small>
 
