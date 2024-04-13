@@ -868,7 +868,16 @@ static inline long double pgm_read_long_double_far (uint_farptr_t address);
                       : "=r" (res)                      \
                       : "r" (addr), "n" (& RAMPZ)       \
                       : "r30", "r31")
-#elif defined(__AVR_HAVE_ELPM__)
+
+/* FIXME: AT43USB320 does not have RAMPZ but supports (external) program
+   memory of 64 KiW, at least that's what the comments in io43usb32x.h are
+   indicating.  A solution would be to put the device in a different
+   multilib-set (see GCC PR78275), as io.h has  "#define FLASHEND 0x0FFFF".
+   For now, just exclude AT43USB320 from code that uses RAMPZ. Also note
+   that the manual asserts that the entire program memory can be accessed
+   by LPM, implying only 64 KiB of program memory.  */
+#elif defined(__AVR_HAVE_ELPM__) \
+      && !defined(__AVR_AT43USB320__)
 /* The poor devices without ELPMx: Do 24-bit addresses by hand... */
 #define __ELPM__1(res, addr, T)                                         \
   __asm __volatile__ ("mov r30,%A1"    "\n\t"                           \
