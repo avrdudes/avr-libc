@@ -379,31 +379,51 @@ read_timer1(void)
 So you tried this:
 
 \code
-asm volatile("sbi 0x18,0x07;");
+asm volatile ("sbi 0x18, 7");
 \endcode
 
 Which works. When you do the same thing but replace the address of the port
 by its macro name, like this:
 
 \code
-asm volatile("sbi PORTB,0x07;");
+asm volatile ("sbi PORTB, 7");
 \endcode
 
-you get a compilation error: <tt>"Error: constant value required"</tt>.
+you get a syntax error from the assembler:
+<tt>"Error: constant value required"</tt>.
 
 \c PORTB is a precompiler definition included in the processor specific file
 included in \c avr/io.h. As you may know, the precompiler will not touch
-strings and <tt>PORTB</tt>, instead of <tt>0x18</tt>, gets passed to the
-assembler. One way to avoid this problem is:
+strings, and <tt>PORTB</tt> gets passed to the
+assembler instead of <tt>0x18</tt>. One way to avoid this problem is:
 
 \code
-asm volatile("sbi %0, 0x07" : "I" (_SFR_IO_ADDR(PORTB)):);
+asm volatile ("sbi %0, 7" :: "I" (_SFR_IO_ADDR(PORTB)));
 \endcode
 
 \note For C programs, rather use the standard C bit operators instead,
 so the above would be expressed as <tt>PORTB |= (1 << 7)</tt>.  The
 optimizer will take care to transform this into a single SBI
 instruction, assuming the operands allow for this.
+
+There are situation though where the address of a special function register
+(SFR) is required in inline assembly.  When the register can be accessed by
+\c LDS and \STS, one can use the RAM address of the SFR:
+
+\code
+asm volatile ("sts %0, __zero_reg__" :: "n" (& PORTB));
+\endcode
+
+When the I/O address of the register is required, one way is to use
+\c _SFR_IO_ADDR to get the I/O address like in the example above.
+A different approach is to use inline asm print modifier <tt>%i</tt> supported
+since avr-gcc v4.7:
+
+\code
+asm volatile ("out %i0, __zero_reg__" :: "n" (& PORTB));
+\endcode
+
+The <tt>%i0</tt> will print the address of \c PORTB as an I/O address.
 
 <small>Back to \ref faq_index.
 </small>
