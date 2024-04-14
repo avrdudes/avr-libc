@@ -34,9 +34,12 @@
 
 #include <time.h>
 
-extern char    *__asc_store;
+extern char *__asc_store;
 
-char           *
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
+char*
 asctime(const struct tm * timeptr)
 {
 	asctime_r(timeptr, __asc_store);

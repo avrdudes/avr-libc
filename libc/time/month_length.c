@@ -35,6 +35,9 @@
 
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 uint8_t
 month_length(int year, uint8_t month)
 {

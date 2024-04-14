@@ -38,8 +38,11 @@
 
 #include <time.h>
 
-extern char    *__asc_store;
+extern char *__asc_store;
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 struct week_date *
 iso_week_date(int y, int yday)
 {

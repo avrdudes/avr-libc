@@ -34,9 +34,12 @@
 
 #include <time.h>
 
-extern char    *__asc_store;
+extern char *__asc_store;
 
-char           *
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
+char*
 isotime(const struct tm * tmptr)
 {
 	isotime_r(tmptr, __asc_store);

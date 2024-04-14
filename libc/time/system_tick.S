@@ -33,7 +33,9 @@
 */
 
 #include <avr/common.h>
+#include "sectionname.h"
 
+ASSEMBLY_CLIB_SECTION
     .global	system_tick
 	.type	system_tick, @function
 system_tick:

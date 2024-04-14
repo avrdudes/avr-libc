@@ -33,14 +33,15 @@
 */
 #include <time.h>
 
-extern long     __longitude;
+extern long __longitude;
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 unsigned long
-lm_sidereal(const time_t * timer)
+lm_sidereal(const time_t *timer)
 {
-    long            n;
-
-    n = gm_sidereal(timer) + __longitude / 15L;
+    long n = gm_sidereal(timer) + __longitude / 15L;
     n += ONE_DAY;
     n %= ONE_DAY;
     return n;

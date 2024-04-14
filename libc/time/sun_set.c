@@ -34,11 +34,14 @@
 
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 time_t
 sun_set(const time_t * timer)
 {
-    long            n;
-    time_t          t;
+    long n;
+    time_t t;
 
     /* sunset is 1/2 'day' after solar noon */
     t = solar_noon(timer);

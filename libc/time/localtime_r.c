@@ -28,24 +28,25 @@
 
 /* $Id$ */
 
-/*
-	Re entrant version of localtime(). Given a binary UTC time stamp, add the time
-	zone and Daylight savings offset, then break it down into calendar time.
-*/
+/* Re entrant version of localtime(). Given a binary UTC time stamp,
+   add the time zone and Daylight savings offset, then break it down
+   into calendar time.  */
 
 #include <time.h>
 
-extern long     __utc_offset;
+extern long __utc_offset;
 
-extern int      (*__dst_ptr) (const time_t *, int32_t *);
+extern int (*__dst_ptr) (const time_t *, int32_t *);
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 localtime_r(const time_t * timer, struct tm * timeptr)
 {
-	time_t          lt;
-	int16_t         dst;
+	time_t lt;
 
-	dst = -1;
+	int16_t dst = -1;
 
 	if (__dst_ptr)
 		dst = __dst_ptr(timer, &__utc_offset);

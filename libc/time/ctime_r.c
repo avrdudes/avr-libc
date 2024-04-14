@@ -33,6 +33,9 @@
 */
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 ctime_r(const time_t * timeptr, char *buffer)
 {

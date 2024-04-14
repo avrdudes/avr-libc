@@ -53,6 +53,9 @@
 #include <time.h>
 #include <stdint.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 int eu_dst (const time_t *timer, int32_t *z)
 {
     struct tm utc;

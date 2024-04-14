@@ -34,6 +34,9 @@
 */
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 int32_t
 difftime(time_t t1, time_t t2)
 {

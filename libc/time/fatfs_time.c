@@ -34,6 +34,9 @@
 
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 uint32_t
 fat_time(const struct tm * timeptr)
 {

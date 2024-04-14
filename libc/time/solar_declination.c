@@ -28,17 +28,15 @@
 
 /* $Id$ */
 
-/*
-    Were it not for the eccentricity of Earths orbit, this would be a trivial function.
+/* Were it not for the eccentricity of Earths orbit, this would be a trivial
+   function.  We compute the Earths orbital position with respect to
+   perihelion, from which we derive a 'velocity correction factor'.
+   We then compute the orbital angle with respect to the December solstice,
+   as 'modulated' by that correction factor.
 
-    We compute the Earths orbital position with respect to perihelion, from which we derive a
-    'velocity correction factor'. We then compute the orbital angle with respect to the
-    December solstice, as 'modulated' by that correction factor.
-
-    Due to the accumulation of rounding errors, the computed December solstice of 2135 will lag
-    the actual solstice by many hours. A fudge factor, 'LAG', distributes the error across
-    the 136 year range of this library.
-*/
+   Due to the accumulation of rounding errors, the computed December solstice
+   of 2135 will lag the actual solstice by many hours. A fudge factor, 'LAG',
+   distributes the error across the 136 year range of this library.  */
 
 #include <time.h>
 #include <math.h>
@@ -47,12 +45,14 @@
 
 #define LAG 38520
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 float
 solar_declinationf(const time_t * timer)
 {
-
-    uint32_t        fT, oV;
-    float           dV, dT;
+    uint32_t fT, oV;
+    float dV, dT;
 
     /* Determine orbital angle relative to perihelion of January 1999 */
     oV = *timer % ANOM_YEAR;

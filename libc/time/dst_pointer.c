@@ -31,4 +31,4 @@
 #include <inttypes.h>
 #include <time.h>
 
-int             (*__dst_ptr) (const time_t *, int32_t *);
+int (*__dst_ptr) (const time_t *, int32_t *);

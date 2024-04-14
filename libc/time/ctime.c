@@ -34,9 +34,12 @@
 */
 #include <time.h>
 
-extern char    *__asc_store;
+extern char *__asc_store;
 
-char           *
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
+char*
 ctime(const time_t * timeptr)
 {
 	struct tm       calendar;

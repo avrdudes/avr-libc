@@ -32,8 +32,11 @@
 	Set the system time zone. The parameter is seconds offset from UTC.
 */
 
-extern long     __utc_offset;
+extern long __utc_offset;
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 set_zone(long z)
 {

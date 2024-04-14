@@ -45,6 +45,9 @@
 #include <time.h>
 #include <stdint.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 unsigned long
 gm_sidereal(const time_t * timer)
 {

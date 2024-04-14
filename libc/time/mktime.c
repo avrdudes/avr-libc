@@ -35,10 +35,13 @@
 
 #include <time.h>
 
-extern long     __utc_offset;
+extern long __utc_offset;
 
-extern int      (*__dst_ptr) (const time_t *, int32_t *);
+extern int (*__dst_ptr) (const time_t *, int32_t *);
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 time_t
 mktime(struct tm * timeptr)
 {
@@ -46,7 +49,8 @@ mktime(struct tm * timeptr)
 
 	ret = mk_gmtime(timeptr);
 
-	if (timeptr->tm_isdst < 0) {
+	if (timeptr->tm_isdst < 0)
+    {
 		if (__dst_ptr)
 			timeptr->tm_isdst = __dst_ptr(&ret, &__utc_offset);
 	}

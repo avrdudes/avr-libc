@@ -34,21 +34,21 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 gmtime_r(const time_t * timer, struct tm * timeptr)
 {
-    int32_t         fract;
-    ldiv_t          lresult;
-    div_t           result;
-    uint16_t        days, n, leapyear, years;
+    ldiv_t lresult;
+    div_t result;
+    uint16_t n, leapyear, years;
 
     /* break down timer into whole and fractional parts of 1 day */
-    days = *timer / 86400UL;
-    fract = *timer % 86400UL;
+    uint16_t days = *timer / 86400UL;
+    int32_t fract = *timer % 86400UL;
 
-    /*
-            Extract hour, minute, and second from the fractional day
-        */
+    /* Extract hour, minute, and second from the fractional day */
     lresult = ldiv(fract, 60L);
     timeptr->tm_sec = lresult.rem;
     result = div(lresult.quot, 60);
@@ -60,13 +60,12 @@ gmtime_r(const time_t * timer, struct tm * timeptr)
     n %= 7;
     timeptr->tm_wday = n;
 
-    /*
-        * Our epoch year has the property of being at the conjunction of all three 'leap cycles',
-        * 4, 100, and 400 years ( though we can ignore the 400 year cycle in this library).
-        *
-        * Using this property, we can easily 'map' the time stamp into the leap cycles, quickly
-        * deriving the year and day of year, along with the fact of whether it is a leap year.
-        */
+    /* Our epoch year has the property of being at the conjunction of all
+       three 'leap cycles' 4, 100, and 400 years (though we can ignore
+       the 400 year cycle in this library).
+       Using this property, we can easily 'map' the time stamp into the leap
+       cycles, quickly deriving the year and day of year, along with the fact
+       of whether it is a leap year.  */
 
     /* map into a 100 year cycle */
     lresult = ldiv((long) days, 36525L);
@@ -79,10 +78,9 @@ gmtime_r(const time_t * timer, struct tm * timeptr)
     if (years > 100)
         days++;
 
-    /*
-         * 'years' is now at the first year of a 4 year leap cycle, which will always be a leap year,
-         * unless it is 100. 'days' is now an index into that cycle.
-         */
+    /* 'years' is now at the first year of a 4 year leap cycle, which will
+       always be a leap year, unless it is 100. 'days' is now an index into
+       that cycle.  */
     leapyear = 1;
     if (years == 100)
         leapyear = 0;
@@ -90,10 +88,8 @@ gmtime_r(const time_t * timer, struct tm * timeptr)
     /* compute length, in days, of first year of this cycle */
     n = 364 + leapyear;
 
-    /*
-     * if the number of days remaining is greater than the length of the
-     * first year, we make one more division.
-     */
+    /* If the number of days remaining is greater than the length of the
+       first year, we make one more division.  */
     if (days > n) {
         days -= leapyear;
         leapyear = 0;
@@ -104,23 +100,24 @@ gmtime_r(const time_t * timer, struct tm * timeptr)
     timeptr->tm_year = 100 + years;
     timeptr->tm_yday = days;
 
-    /*
-            Given the year, day of year, and leap year indicator, we can break down the
-            month and day of month. If the day of year is less than 59 (or 60 if a leap year), then
-            we handle the Jan/Feb month pair as an exception.
-        */
+    /* Given the year, day of year, and leap year indicator, we can break
+       down the month and day of month. If the day of year is less than 59
+       (or 60 if a leap year), then we handle the Jan/Feb month pair as an
+       exception.  */
     n = 59 + leapyear;
-    if (days < n) {
+    if (days < n)
+    {
         /* special case: Jan/Feb month pair */
         result = div(days, 31);
         timeptr->tm_mon = result.quot;
         timeptr->tm_mday = result.rem;
-    } else {
-        /*
-            The remaining 10 months form a regular pattern of 31 day months alternating with 30 day
-            months, with a 'phase change' between July and August (153 days after March 1).
-            We proceed by mapping our position into either March-July or August-December.
-            */
+    }
+    else
+    {
+        /* The remaining 10 months form a regular pattern of 31 day months
+           alternating with 30 day months, with a 'phase change' between
+           July and August (153 days after March 1).  We proceed by mapping
+           our position into either March-July or August-December.  */
         days -= n;
         result = div(days, 153);
         timeptr->tm_mon = 2 + result.quot * 5;
@@ -135,10 +132,7 @@ gmtime_r(const time_t * timer, struct tm * timeptr)
         timeptr->tm_mday = result.rem;
     }
 
-    /*
-            Cleanup and return
-        */
+    /* Cleanup and return */
     timeptr->tm_isdst = 0;  /* gmt is never in DST */
     timeptr->tm_mday++; /* tm_mday is 1 based */
-
 }

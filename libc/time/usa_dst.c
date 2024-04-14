@@ -71,6 +71,9 @@
 #define DST_END_WEEK 1
 #endif
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 int usa_dst (const time_t *timer, int32_t *z)
 {
     struct tm tmptr;

@@ -33,26 +33,27 @@
 	may be incremented at interrupt time.
 */
 #include <time.h>
-#include <inttypes.h>
+#include <avr/interrupt.h>
 
 extern volatile time_t __system_time;
 
-time_t
-time(time_t * timer)
-{
-	time_t          ret;
+#include "sectionname.h"
 
-	asm             volatile(
-			                   "in __tmp_reg__, __SREG__" "\n\t"
-				                 "cli" "\n\t"
-				 ::
-	);
-	ret = __system_time;
-	asm             volatile(
-			                  "out __SREG__, __tmp_reg__" "\n\t"
-				 ::
-	);
-	if (timer)
-		*timer = ret;
-	return ret;
+ATTRIBUTE_CLIB_SECTION
+time_t
+time(time_t *timer)
+{
+    time_t ret;
+
+    uint8_t sreg = SREG;
+    cli();
+
+    ret = __system_time;
+
+    SREG = sreg;
+
+    if (timer)
+        *timer = ret;
+
+    return ret;
 }

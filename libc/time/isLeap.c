@@ -34,23 +34,24 @@
 
 #include <stdlib.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 unsigned char
 is_leap_year(int year)
 {
-    div_t           d;
+    div_t d;
 
     /* year must be divisible by 4 to be a leap year */
     if (year & 3)
         return 0;
 
-    /* If theres a remainder after division by 100, year is not divisible by 100 or 400 */
+    /* If theres a remainder after division by 100, year is not divisible
+       by 100 or 400 */
     d = div(year, 100);
     if (d.rem)
         return 1;
 
     /* If the quotient is divisible by 4, then year is divisible by 400 */
-    if ((d.quot & 3) == 0)
-        return 1;
-
-    return 0;
+    return (d.quot & 3) == 0;
 }

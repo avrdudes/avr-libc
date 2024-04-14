@@ -28,21 +28,21 @@
 
 /* $Id$ */
 
-/*
-	Re entrant version of isotime(),  which prints the date and time in ISO 8601 format.
-*/
+/* Re entrant version of isotime(),  which prints the date and time
+   in ISO 8601 format.  */
 
 #include <stdlib.h>
 #include <time.h>
 
-extern void __print_lz(int , char *, char );
+extern void __print_lz (int, char *, char);
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 isotime_r(const struct tm * tmptr, char *buffer)
 {
-	int             i;
-
-	i = tmptr->tm_year + 1900;
+	int i = tmptr->tm_year + 1900;
 	__print_lz(i/100, buffer, '-');
 	buffer+=2;
 	__print_lz(i%100, buffer,'-');
@@ -66,5 +66,4 @@ isotime_r(const struct tm * tmptr, char *buffer)
 
 	i = tmptr->tm_sec;
 	__print_lz(i, buffer,0);
-
 }

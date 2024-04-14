@@ -37,7 +37,10 @@
 
 extern struct tm __tm_store;
 
-struct tm      *
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
+struct tm*
 gmtime(const time_t * timeptr)
 {
 	gmtime_r(timeptr, &__tm_store);

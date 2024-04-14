@@ -28,28 +28,26 @@
 
 /* $Id$ */
 
-/*
- * Set the system time. The values passed are assumed to represent local
- * standard time, such as would be obtained from the typical Real Time Clock
- * integrated circuit. It is necessary for this to be atomic, as the value may be
- * incremented at interrupt time.
- */
+/* Set the system time. The values passed are assumed to represent local
+   standard time, such as would be obtained from the typical Real Time Clock
+   integrated circuit. It is necessary for this to be atomic, as the value
+   may be incremented at interrupt time.  */
 
 #include <time.h>
+#include <avr/interrupt.h>
+
 extern volatile time_t __system_time;
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 set_system_time(time_t timestamp)
 {
+	uint8_t sreg = SREG;
+    cli();
 
-	asm             volatile(
-			                   "in __tmp_reg__, __SREG__" "\n\t"
-				                 "cli" "\n\t"
-				 ::
-	);
 	__system_time = timestamp;
-	asm             volatile(
-			                  "out __SREG__, __tmp_reg__" "\n\t"
-				 ::
-	);
+
+	SREG = sreg;
 }

@@ -28,10 +28,14 @@
 
 /* $Id$ */
 
-/* print 2 digit integer with leading zero: auxillary function for isotime and asctime */
+/* Print 2-digit integer with leading zero: auxillary function for isotime
+   and asctime. */
 
 #include <stdlib.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 __print_lz(int i, char *buffer, char s)
 {

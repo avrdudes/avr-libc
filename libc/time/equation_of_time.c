@@ -50,6 +50,9 @@
 #include <math.h>
 #include "ephemera_common.h"
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 int
 equation_of_time(const time_t * timer)
 {
@@ -82,5 +85,4 @@ equation_of_time(const time_t * timer)
     pf *= 459.6;
     s = pf + sf;
     return -s;
-
 }

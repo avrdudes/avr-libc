@@ -43,8 +43,11 @@ const char      ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
 const char      ascdays[] = "SunMonTueWedThuFriSat";
 #endif
 
-extern void __print_lz(int , char *, char );
+extern void __print_lz (int, char *, char);
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 asctime_r(const struct tm * timeptr, char *buffer)
 {
@@ -78,5 +81,4 @@ asctime_r(const struct tm * timeptr, char *buffer)
 	buffer += 2;
 
 	__print_lz(result.rem,buffer,0);
-
 }

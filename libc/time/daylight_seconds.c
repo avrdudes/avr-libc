@@ -37,18 +37,20 @@
 #include <time.h>
 #include <math.h>
 
-extern long     __latitude;
+extern long __latitude;
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 long
 daylight_seconds(const time_t * timer)
 {
-    float           l, d;
-    long            n;
+    long n;
 
     /* convert latitude to radians */
-    l = __latitude / 206264.806f;
+    float l = __latitude / 206264.806f;
 
-    d = -solar_declinationf(timer);
+    float d = -solar_declinationf(timer);
 
     /* partial 'Sunrise Equation' */
     d = tanf(l) * tanf(d);

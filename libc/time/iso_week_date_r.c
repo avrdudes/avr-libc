@@ -45,11 +45,14 @@
 
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 iso_week_date_r(int y, int yday, struct week_date * iso)
 {
-    uint16_t        years, n, wday;
-    int             weeknum;
+    uint16_t years, n, wday;
+    int weeknum;
     int isLeap;
 
     iso->year = y;
@@ -80,11 +83,11 @@ iso_week_date_r(int y, int yday, struct week_date * iso)
     weeknum /= 7;
 
     /* if 53, it could be week 1 of the following year */
-    if (weeknum == 53) {
-        /*
-            The final week must include its Thursday in the year. We determine the yday of this
-            weeks Thursday, and test whether it exceeds this years length.
-        */
+    if (weeknum == 53)
+    {
+        /* The final week must include its Thursday in the year.
+           We determine the yday of this weeks Thursday, and test whether
+           it exceeds this years length.  */
 
         /* determine final yday of this year, 364 or 365 */
         n = 364 + isLeap;
@@ -102,11 +105,10 @@ iso_week_date_r(int y, int yday, struct week_date * iso)
     }
     iso->week = weeknum;
 
-    /*
-        If zero, it is the final week of the previous year.
-        We determine that by asking for the week number of Dec 31.
-    */
-    if (weeknum == 0) {
+    /* If zero, it is the final week of the previous year.
+       We determine that by asking for the week number of Dec 31.  */
+    if (weeknum == 0)
+    {
         y = y - 1;
         iso_week_date_r(y, 364 + is_leap_year(y), iso);
         iso->day = wday;

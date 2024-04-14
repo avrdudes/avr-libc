@@ -36,8 +36,11 @@
 
 extern struct tm __tm_store;
 
-struct tm      *
-localtime(const time_t * timer)
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
+struct tm*
+localtime(const time_t *timer)
 {
 	localtime_r(timer, &__tm_store);
 	return &__tm_store;

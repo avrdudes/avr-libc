@@ -36,21 +36,23 @@
 
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 time_t
 mk_gmtime(const struct tm * timeptr)
 {
+    time_t ret;
+    uint32_t tmp;
+    int m, d;
 
-    time_t          ret;
-    uint32_t        tmp;
-    int             n, m, d, leaps;
-
-    /*
-        Determine elapsed whole days since the epoch to the beginning of this year. Since our epoch is
-        at a conjunction of the leap cycles, we can do this rather quickly.
-        */
-    n = timeptr->tm_year - 100;
-    leaps = 0;
-    if (n) {
+    /* Determine elapsed whole days since the epoch to the beginning of
+       this year. Since our epoch is at a conjunction of the leap cycles,
+       we can do this rather quickly.  */
+    int n = timeptr->tm_year - 100;
+    int leaps = 0;
+    if (n)
+    {
         m = n - 1;
         leaps = m / 4;
         leaps -= m / 100;
@@ -58,19 +60,20 @@ mk_gmtime(const struct tm * timeptr)
     }
     tmp = 365UL * n + leaps;
 
-    /*
-                Derive the day of year from month and day of month. We use the pattern of 31 day months
-                followed by 30 day months to our advantage, but we must 'special case' Jan/Feb, and
-                account for a 'phase change' between July and August (153 days after March 1).
-            */
+    /* Derive the day of year from month and day of month. We use the
+       pattern of 31 day months followed by 30 day months to our advantage,
+       but we must 'special case' Jan/Feb, and account for a 'phase change'
+       between July and August (153 days after March 1).  */
     d = timeptr->tm_mday - 1;   /* tm_mday is one based */
 
     /* handle Jan/Feb as a special case */
-    if (timeptr->tm_mon < 2) {
+    if (timeptr->tm_mon < 2)
+    {
         if (timeptr->tm_mon)
             d += 31;
-
-    } else {
+    }
+    else
+    {
         n = 59 + is_leap_year(timeptr->tm_year + 1900);
         d += n;
         n = timeptr->tm_mon - MARCH;
@@ -80,18 +83,13 @@ mk_gmtime(const struct tm * timeptr)
             d += 153;
         n %= 5;
 
-        /*
-         * n is now an index into a group of alternating 31 and 30
-         * day months... 61 day pairs.
-         */
+        /* n is now an index into a group of alternating 31 and 30
+           day months... 61 day pairs.  */
         m = n / 2;
         m *= 61;
         d += m;
 
-        /*
-         * if n is odd, we are in the second half of the
-         * month pair
-         */
+        /* If n is odd, we are in the second half of the month pair.  */
         if (n & 1)
             d += 31;
     }

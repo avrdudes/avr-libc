@@ -38,6 +38,9 @@
 
 #include <time.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 uint8_t
 week_of_month(const struct tm * timestruct, uint8_t base)
 {
@@ -58,5 +61,4 @@ week_of_month(const struct tm * timestruct, uint8_t base)
 		return 0;
 
 	return n / 7 + 1;
-
 }

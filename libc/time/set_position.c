@@ -28,14 +28,15 @@
 
 /* $Id$ */
 
-/*
-	Set the geographic position of the observer. Both parameters are in seconds, with
-	North latitude and East longitude being positive values.
-*/
+/* Set the geographic position of the observer. Both parameters are in
+   seconds, with North latitude and East longitude being positive values.  */
 
 extern long     __latitude;
 extern long     __longitude;
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 void
 set_position(long lat, long lon)
 {

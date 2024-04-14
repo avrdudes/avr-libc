@@ -34,13 +34,16 @@
 
 #include <time.h>
 
-extern long     __longitude;
+extern long __longitude;
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 time_t
 solar_noon(const time_t * timer)
 {
-    time_t          t;
-    long            n;
+    time_t t;
+    long n;
 
     /* determine time of solar noon at the prime meridian */
     t = *timer % ONE_DAY;
@@ -53,5 +56,4 @@ solar_noon(const time_t * timer)
     t -= n;
 
     return t;
-
 }

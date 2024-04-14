@@ -28,26 +28,26 @@
 
 /* $Id$ */
 
-/*
-    Return an approximation to the phase of the moon. Since no attempt is made to account for
-    Sol, Jupiter or Venus, it will often be off by several hours.
-*/
+/* Return an approximation to the phase of the moon. Since no attempt is
+   made to account for Sol, Jupiter or Venus, it will often be off by
+   several hours.  */
 
 #include <time.h>
 #include <math.h>
 
+#include "sectionname.h"
+
+ATTRIBUTE_CLIB_SECTION
 int8_t
 moon_phase(const time_t * timestamp)
 {
-	uint32_t        t;
-	int32_t         n;
-	double          mc;
+	double mc;
 
 	/* refer to first new moon of the epoch */
-	t = *timestamp - 1744800UL;
+	uint32_t t = *timestamp - 1744800UL;
 
 	/* constrain to 1 lunar cycle */
-	n = t % 2551443UL;
+	int32_t n = t % 2551443UL;
 
 	/* offset by 1/2 lunar cycle */
 	n -= 1275721L;
