@@ -64,7 +64,6 @@
 -# \ref faq_linkerscripts
 -# \ref faq_binarydata
 -# \ref faq_softreset
--# \ref faq_math
 -# \ref faq_reentrant
 -# \ref faq_eeprom_corruption
 -# \ref faq_wrong_baud_rate
@@ -104,6 +103,9 @@ volatile uint8_t flag;
 
 \section faq_libm I get "undefined reference to..." for functions like "sin()"
 
+\note The text below only applies to GCC v4.6 and older.  Since GCC v4.7.2,
+the compiler driver adds \c -lm to all linker invocations.
+
 In order to access the mathematical functions that are declared in
 <tt>\<math.h\></tt>, the linker needs to be told to also link the
 mathematical library, <tt>libm.a</tt>.
@@ -115,12 +117,6 @@ filename suffix from the library are written immediately after a \a -l
 flag.  So for a <tt>libfoo.a</tt> library, <tt>-lfoo</tt> needs to be
 provided.)  This will make the linker search the library in a path
 known to the system.
-
-An alternative would be to specify the full path to the
-<tt>libm.a</tt> file at the same place on the command line, i. e. \a
-after all the object files (<tt>*.o</tt>).  However, since this
-requires knowledge of where the build system will exactly find those
-library files, this is deprecated for system libraries.
 
 <small>Back to \ref faq_index.
 </small>
@@ -408,7 +404,7 @@ instruction, assuming the operands allow for this.
 
 There are situation though where the address of a special function register
 (SFR) is required in inline assembly.  When the register can be accessed by
-\c LDS and \STS, one can use the RAM address of the SFR:
+\c LDS and \c STS, one can use the RAM address of the SFR:
 
 \code
 asm volatile ("sts %0, __zero_reg__" :: "n" (& PORTB));
@@ -432,11 +428,11 @@ The <tt>%i0</tt> will print the address of \c PORTB as an I/O address.
 
 When compiling a program with both optimization (\c -O) and debug
 information (\c -g) which is fortunately possible in \c avr-gcc, the
-code watched in the debugger is optimized code.  While it is not
-guaranteed, very often this code runs with the exact same
+code watched in the debugger is optimized code.
+It is guaranteed that the code runs with the exact same
 optimizations as it would run without the \c -g switch.
 
-This can have unwanted side effects.  Since the compiler is free to
+Since the compiler is free to
 reorder code execution as long as the semantics do not change, code
 is often rearranged in order to make it possible to use a single
 branch instruction for conditional operations.  Branch instructions
@@ -456,7 +452,11 @@ the variable in \c avr-gdb, the displayed result will then look
 garbled.
 
 So in order to avoid these side effects, optimization can be turned
-off while debugging.  However, some of these optimizations might also
+off while debugging, or at least optimization level \c -Og can be used
+which was introduced to improve good debugging experience while it still
+provides a reasonable amount of optimization.
+
+However, some of these optimizations might also
 have the side effect of uncovering bugs that would otherwise not be
 obvious, so it must be noted that turning off optimization can easily
 change the bug pattern. In most cases, you are better off leaving
@@ -481,19 +481,19 @@ to be told to include line-number information into the output file.
 (Other debug information like data types and variable allocation
 cannot be generated, since unlike a compiler, the assembler basically
 doesn't know about this.)  This is done using the (GNU) assembler
-option \c --gstabs.
+option \c \--gstabs.
 
 Example:
 
 \verbatim
-  $ avr-as -mmcu=atmega128 --gstabs -o foo.o foo.s
+$ avr-as -mmcu=atmega128 --gstabs -o foo.o foo.s
 \endverbatim
 
 When the assembler is not called directly but through the C compiler
 frontend (either implicitly by passing a source file ending in \c .S,
 or explicitly using <tt>-x assembler-with-cpp</tt>), the compiler
-frontend needs to be told to pass the \c --gstabs option down to the
-assembler.  This is done using <tt>-Wa,--gstabs</tt>.  Please take
+frontend needs to be told to pass the \c \--gstabs option down to the
+assembler.  This is done using <tt>-Wa,\--gstabs</tt>.  Please take
 care to \e only pass this option when compiling an assembler input
 file.  Otherwise, the assembler code that results from the C
 compilation stage will also get line number information, which
@@ -505,8 +505,8 @@ extra \c '-' for you.
 Example:
 
 \verbatim
-  $ EXTRA_OPTS="-Wall -mmcu=atmega128 -x assembler-with-cpp"
-  $ avr-gcc -Wa,--gstabs ${EXTRA_OPTS} -c -o foo.o foo.S
+$ EXTRA_OPTS="-Wall -mmcu=atmega128 -x assembler-with-cpp"
+$ avr-gcc -Wa,--gstabs ${EXTRA_OPTS} -c -o foo.o foo.S
 \endverbatim
 
 Also note that the debugger might get confused when entering a piece
@@ -523,30 +523,30 @@ will pick the closest label with the same number and given direction.
 Example:
 
 \code
-myfunc:	push	r16
-	push	r17
-	push	r18
-	push	YL
-	push	YH
-	...
-	eor	r16, r16	; start loop
-	ldi	YL, lo8(sometable)
-	ldi	YH, hi8(sometable)
-	rjmp	2f		; jump to loop test at end
-1:	ld	r17, Y+		; loop continues here
-	...
-	breq	1f		; return from myfunc prematurely
-	...
-	inc	r16
-2:	cmp	r16, r18
-	brlo	1b		; jump back to top of loop
-
-1:	pop	YH
-	pop	YL
-	pop	r18
-	pop	r17
-	pop	r16
-	ret
+myfunc:
+    push    r16
+    push    r17
+    push    r18
+    push    YL
+    push    YH
+    ...
+    clr     r16             ; start loop
+    ldi     YL, lo8(sometable)
+    ldi     YH, hi8(sometable)
+    rjmp    2f              ; jump to loop test at end
+1:  ld      r17, Y+         ; loop continues here
+    ...
+    breq    3f              ; return from myfunc prematurely
+    ...
+    inc     r16
+2:  cmp     r16, r18
+    brlo    1b              ; jump back to top of loop
+3:  pop     YH
+    pop     YL
+    pop     r18
+    pop     r17
+    pop     r16
+    ret
 \endcode
 
 <small>Back to \ref faq_index.
@@ -593,8 +593,8 @@ mega128). This is seen clearly when looking at the disassembly of the call:
 
 \verbatim
     set_bits_func_wrong (PORTB, 0xaa);
- 10a:   6a ea           ldi     r22, 0xAA       ; 170
- 10c:   88 b3           in      r24, 0x18       ; 24
+ 10a:   6a ea           ldi     r22, 0xAA
+ 10c:   88 b3           in      r24, 0x18
  10e:   0e 94 65 00     call    0xca
 \endverbatim
 
@@ -610,9 +610,9 @@ function. Here's the object code generated for the function call:
 
 \verbatim
     set_bits_func_correct (&PORTB, 0x55);
- 112:   65 e5           ldi     r22, 0x55       ; 85
- 114:   88 e3           ldi     r24, 0x38       ; 56
- 116:   90 e0           ldi     r25, 0x00       ; 0
+ 112:   65 e5           ldi     r22, 0x55
+ 114:   88 e3           ldi     r24, 0x38
+ 116:   90 e0           ldi     r25, 0x00
  118:   0e 94 7c 00     call    0xf8
 \endverbatim
 
@@ -648,9 +648,9 @@ speed and code size:
 
 \verbatim
     set_bits_macro (PORTB, 0xf0);
- 11c:   88 b3           in      r24, 0x18       ; 24
- 11e:   80 6f           ori     r24, 0xF0       ; 240
- 120:   88 bb           out     0x18, r24       ; 24
+ 11c:   88 b3           in      r24, 0x18
+ 11e:   80 6f           ori     r24, 0xF0
+ 120:   88 bb           out     0x18, r24
 \endverbatim
 
 Of course, in a real application, you might be doing a lot more in your
@@ -684,7 +684,9 @@ See also the
 <a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">Calling Convention</a>
 sections in the avr-gcc Wiki.
 
-- <strong>Data types:</strong><br>
+<dl>
+<dt>Data types</dt>
+<dd>
   \c char is 8 bits, \c int and \c short are 16 bits, \c long is 32 bits,
   \c long \c long is 64 bits, \c float is 32 bits,
   \c double and \c long \c double are 32 bits or 64 bits,
@@ -693,11 +695,13 @@ sections in the avr-gcc Wiki.
 
   - There is a \c -mint8 option (see \ref using_avr_gcc) to
   make \c int and \c short 8 bits, \c long 16 bits and \c long \c long 32 bits.
-  But that is not supported by avr-libc (except for \c stdint.h and
-  \c avr/pgmspace.h) and violates C standards
-  (\c int \e must be at least 16 bits).
+  But that is not supported by AVR-LibC (except for \c stdint.h and
+  \c avr/pgmspace.h, but no 64-bit integer types are available)
+  and violates C standards (\c int \e must be at least 16 bits).
+</dd>
 
-- <strong>Call-used registers (r18-r27, r30-r31):</strong><br>
+<dt>Call-used registers (r18-r27, r30-r31)</dt>
+<dd>
   May be allocated by gcc for local data.
   You \e may use them freely in assembly subroutines.
   Calling C subroutines can clobber any of them -
@@ -705,8 +709,10 @@ sections in the avr-gcc Wiki.
 
    For the AVR_TINY architecture (ATtiny10 and relatives),
    r20-r27 and r30-31 are call-clobbered.
+</dd>
 
-- <strong>Call-saved registers (r2-r17, r28-r29):</strong><br>
+<dt>Call-saved registers (r2-r17, r28-r29)</dt>
+<dd>
   May be allocated by gcc for local data.
   Calling C subroutines leaves them unchanged.
   Assembly subroutines are responsible for saving
@@ -721,17 +727,19 @@ sections in the avr-gcc Wiki.
   For the AVR_TINY architecture (ATtiny10 etc.),
   r18-r19 and  r28-r29 are call-saved.
   Registers r0 through r15 do not exist.
+</dd>
 
-- <strong>Fixed registers (r0, r1):</strong><br>
+<dt>Fixed registers (r0, r1)</dt>
+<dd>
   Never allocated by gcc for local data, but often
   used for fixed purposes:
 
-  - <strong>r0</strong> (\c __tmp_reg__) - temporary register,
+  - <strong>r0</strong> (\c __tmp_reg__) --- temporary register,
   can be clobbered by any code (except interrupt handlers which save it),
   \e may be used to remember something for a while
   within one piece of assembly code
 
-  - <strong>r1</strong> (\c __zero_reg__) - assumed to be always zero
+  - <strong>r1</strong> (\c __zero_reg__) --- assumed to be always zero
   in any C code,
   \e may be used to remember something for a while
   within one piece of assembler code, but \e must
@@ -741,13 +749,15 @@ sections in the avr-gcc Wiki.
   Interrupt handlers save and clear \c __zero_reg__ on entry,
   and restore it on exit (in case it was non-zero).
 
-  - <strong>T flag</strong> - the \c T flag in the status register (\c SREG)
+  - <strong>T flag</strong> --- the \c T flag in the status register (\c SREG)
   can be used the same way like \c __tmp_reg__.
 
   For the AVR_TINY architecture (ATtiny10 etc.),
   \c __tmp_reg__ is r16, and \c __zero_reg__ is r17.
+</dd>
 
-- <strong>Function call conventions:</strong><br>
+<dt>Function call conventions</dt>
+<dd>
   Arguments - allocated left to right, r25 to r8.
   All arguments are aligned to start in even-numbered
   registers (odd-sized arguments, including \c char, have
@@ -778,6 +788,8 @@ sections in the avr-gcc Wiki.
 - When an argument is returned in registers, its size is padded to the
   next power of 2.
 .
+</dd>
+</dl>
 
 <small>Back to \ref faq_index.</small>
 
@@ -1005,7 +1017,7 @@ void boot(void) __attribute__ ((section (".bootloader")));
 \endcode
 
 To relocate the section to a fixed address the linker flag
-\c --section-start is used.  This option can be passed to the linker
+\c \--section-start is used.  This option can be passed to the linker
 using the \ref gcc_minusW "-Wl compiler option":
 
 \code
@@ -1421,9 +1433,9 @@ not a good idea.
 these older AVRs, doing a soft reset by enabling the watchdog is easy, as the
 watchdog will then be disabled after the reset. On newer AVRs, once the watchdog
 is enabled, then it <b>stays enabled, even after a reset</b>! For these
-newer AVRs a function needs to be added to the .init3 section (i.e. during the
-startup code, before main()) to disable the watchdog early enough so it does
-not continually reset the AVR.
+newer AVRs a function needs to be added to the \c .init3 section (i.e. during
+the startup code, before main()) to disable the watchdog early enough so
+it does not continually reset the AVR.
 
 Here is some example code that creates a macro that can be called to perform
 a soft reset:
@@ -1433,14 +1445,12 @@ a soft reset:
 
 ...
 
-#define soft_reset()        \
-do                          \
-{                           \
-    wdt_enable(WDTO_15MS);  \
-    for(;;)                 \
-    {                       \
-    }                       \
-} while(0)
+static inline __attribute__((__always_inline__))
+void soft_reset (void)
+{
+    wdt_enable (WDTO_15MS);
+    for(;;) {}
+}
 \endcode
 
 For newer AVRs (such as the ATmega1281) also add this function to your code
@@ -1452,36 +1462,23 @@ to then disable the watchdog after a reset (e.g., after a soft reset):
 ...
 
 // Function Pototype
-void wdt_init(void) __attribute__((naked)) __attribute__((section(".init3")));
+static void wdt_init(void) __attribute__((used, unused, naked, section(".init3")));
 
 ...
 
 // Function Implementation
-void wdt_init(void)
+void wdt_init (void)
 {
     MCUSR = 0;
     wdt_disable();
-
-    return;
 }
-
 \endcode
-
-<small>Back to \ref faq_index.</small>
-
-\section faq_math I am using floating point math. Why is the compiled code so big? Why does my code not work?
-
-You are not linking in the math library from AVR-LibC. GCC has a library that
-is used for floating point operations, but it is not optimized for the AVR, and
-so it generates big code, or it could be incorrect. This can happen even when
-you are not using any floating point math functions from the Standard C library,
-but you are just doing floating point math operations.
-
-When you link in the math library from AVR-LibC, those
-routines get replaced by hand-optimized AVR assembly and it produces much
-smaller code.
-
-See \ref faq_libm for more details on how to link in the math library.
+The code is placed in section \c .init3 so that it is executed as part of the
+normal startup procedure.  The \c naked attribute is required so that the
+code does not <tt>ret</tt>urn (code in init sections is executed as it
+is located; the code is not called).  The \c used attribute makes sure that the
+compiler does not throw the semmingly unused function away.
+The \c unused attributes avoids warnings about unused code.
 
 <small>Back to \ref faq_index.</small>
 
@@ -1494,7 +1491,7 @@ operating system, or when using interrupts since an
 interrupt is really a temporary thread.
 
 The code generated natively by gcc is reentrant.  But, only
-some of the libraries in avr-libc are explicitly reentrant,
+some of the libraries in AVR-LibC are explicitly reentrant,
 and some are known not to be reentrant.  In general, any
 library call that reads and writes global variables
 (including I/O registers) is not reentrant.
@@ -1709,7 +1706,11 @@ the code can remain 16 bits wide.
 In order for this to work, the option <tt>-mrelax</tt> must be given
 on the compiler command-line that is used to link the final ELF file.
 (Older compilers did not implement this option for the AVR, use
-<tt>-Wl,--relax</tt> instead.)
+<tt>-Wl,\--relax</tt> instead.)
+
+See also the avr-gcc online documentation on the
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
+   >\c EIND special function register</a> and indirect calls.
 
 <small>Back to \ref faq_index.</small>
 

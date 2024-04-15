@@ -41,694 +41,384 @@ explained in detail in the manual page.
 
 The following machine-specific options are recognized by the C
 compiler frontend.
-In addition to the preprocessor macros indicated in the tables
-below, the preprocessor will define the macros __AVR and __AVR__
+The preprocessor will define the macros \c __AVR and \c __AVR__
 (to the value 1) when compiling for an AVR target.  The macro
-AVR will be defined as well when using the standard levels gnu89
-(default) and gnu99 but not with c89 and c99.
+\c AVR will be defined as well, except in strict ANSI mode.
 
-- <tt>-mmcu=</tt><em>architecture</em>
-  <p>
-  Compile code for \e architecture.  Currently known architectures
-  are
-  </p>
-  <p>
-  <table>
-  <tr>
-    <td>Architecture</td>
-    <td>Macros</td>
-    <td>Description</td>
-  </tr>
-  <tr>
-    <td>avr1</td>
-    <td>
-    __AVR_ARCH__=1<BR>
-    __AVR_ASM_ONLY__<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>Simple CPU core, only assembler support</td>
-  </tr>
-  <tr>
-    <td>avr2</td>
-    <td>
-    __AVR_ARCH__=2<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Classic" CPU core, up to 8 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr25&nbsp;[1]</td>
-    <td>
-    __AVR_ARCH__=25<BR>
-    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
-    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Classic" CPU core with 'MOVW' and 'LPM Rx, Z[+]' instruction, up to 8 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr3</td>
-    <td>
-    __AVR_ARCH__=3<BR>
-    __AVR_MEGA__&nbsp;[5]<BR>
-    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Classic" CPU core, 16 KB to 64 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr31</td>
-    <td>
-    __AVR_ARCH__=31<BR>
-    __AVR_MEGA__&nbsp;[5]<BR>
-    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
-    __AVR_HAVE_RAMPZ__&nbsp;[4]<BR>
-    __AVR_HAVE_ELPM__&nbsp;[4]<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Classic" CPU core, 128 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr35&nbsp;[3]</td>
-    <td>
-    __AVR_ARCH__=35<BR>
-    __AVR_MEGA__&nbsp;[5]<BR>
-    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
-    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
-    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Classic" CPU core with 'MOVW' and 'LPM Rx, Z[+]' instruction, 16 KB to 64 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr4</td>
-    <td>
-    __AVR_ARCH__=4<BR>
-    __AVR_ENHANCED__&nbsp;[5]<BR>
-    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
-    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
-    __AVR_HAVE_MUL__&nbsp;[1]<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Enhanced" CPU core, up to 8 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr5</td>
-    <td>
-    __AVR_ARCH__=5<BR>
-    __AVR_MEGA__&nbsp;[5]<BR>
-    __AVR_ENHANCED__&nbsp;[5]<BR>
-    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
-    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
-    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
-    __AVR_HAVE_MUL__&nbsp;[1]<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Enhanced" CPU core, 16 KB to 64 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr51</td>
-    <td>
-    __AVR_ARCH__=51<BR>
-    __AVR_MEGA__&nbsp;[5]<BR>
-    __AVR_ENHANCED__&nbsp;[5]<BR>
-    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
-    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
-    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
-    __AVR_HAVE_MUL__&nbsp;[1]<BR>
-    __AVR_HAVE_RAMPZ__&nbsp;[4]<BR>
-    __AVR_HAVE_ELPM__&nbsp;[4]<BR>
-    __AVR_HAVE_ELPMX__&nbsp;[4]<BR>
-    __AVR_2_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Enhanced" CPU core, 128 KB of ROM</td>
-  </tr>
-  <tr>
-    <td>avr6&nbsp;[2]</td>
-    <td>
-    __AVR_ARCH__=6<BR>
-    __AVR_MEGA__&nbsp;[5]<BR>
-    __AVR_ENHANCED__&nbsp;[5]<BR>
-    __AVR_HAVE_JMP_CALL__&nbsp;[4]<BR>
-    __AVR_HAVE_MOVW__&nbsp;[1]<BR>
-    __AVR_HAVE_LPMX__&nbsp;[1]<BR>
-    __AVR_HAVE_MUL__&nbsp;[1]<BR>
-    __AVR_HAVE_RAMPZ__&nbsp;[4]<BR>
-    __AVR_HAVE_ELPM__&nbsp;[4]<BR>
-    __AVR_HAVE_ELPMX__&nbsp;[4]<BR>
-    __AVR_3_BYTE_PC__&nbsp;[2]
-    </td>
-    <td>"Enhanced" CPU core, 256 KB of ROM</td>
-  </tr>
-  </table>
-  <p>
-  [1] New in GCC 4.2<BR>
-  [2] Unofficial patch for GCC 4.1<BR>
-  [3] New in GCC 4.2.3<BR>
-  [4] New in GCC 4.3<BR>
-  [5] Obsolete.
-  </p>
-  </p>
-  <p>
-  By default, code is generated for the avr2 architecture.
-  </p>
-  <p>
-  Note that when only using <tt>-mmcu=</tt><em>architecture</em> but
-  no <tt>-mmcu=</tt><em>MCU type</em>, including the file
-  <tt>&lt;avr/io.h&gt;</tt> cannot work since it cannot decide which
-  device's definitions to select.
-  </p>
+There are many options supported by avr-gcc, which also depend on
+the compiler version.  For a complete overview, please see the documentation
+of avr-gcc's command line options.  Here are links to supported
+options of the respective release series:
 
-- <tt>-mmcu=</tt><em>MCU type</em>
-  <p>
-  The following MCU types are currently understood by avr-gcc.  The
-  table matches them against the corresponding avr-gcc architecture
-  name, and shows the preprocessor symbol declared by the \c -mmcu
-  option.
-  </p>
-  <p>
-  <table>
-  <tr><td>Architecture</td><td>MCU name</td><td>Macro</td></tr>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html"
+     >Current development</a> (work in progress)
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-13.2.0/gcc/AVR-Options.html"
+     >v13</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-12.3.0/gcc/AVR-Options.html"
+     >v12</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-11.4.0/gcc/AVR-Options.html"
+     >v11</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-10.5.0/gcc/AVR-Options.html"
+     >v10</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-9.5.0/gcc/AVR-Options.html">v9</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-8.5.0/gcc/AVR-Options.html">v8</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-7.5.0/gcc/AVR-Options.html">v7</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-6.5.0/gcc/AVR-Options.html">v6</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-5.5.0/gcc/AVR-Options.html">v5</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-4.9.4/gcc/AVR-Options.html"
+     >v4.9</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-4.8.5/gcc/AVR-Options.html"
+     >v4.8</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/AVR-Options.html"
+     >v4.7</a>
 
-  <tr><td>avr1</td><td>at90s1200</td><td>__AVR_AT90S1200__</td></tr>
-  <tr><td>avr1</td><td>attiny11</td><td>__AVR_ATtiny11__</td></tr>
-  <tr><td>avr1</td><td>attiny12</td><td>__AVR_ATtiny12__</td></tr>
-  <tr><td>avr1</td><td>attiny15</td><td>__AVR_ATtiny15__</td></tr>
-  <tr><td>avr1</td><td>attiny28</td><td>__AVR_ATtiny28__</td></tr>
+Apart from the documentation of command line options, the linked pages also
+contain:
 
-  <tr><td>avr2</td><td>at90s2313</td><td>__AVR_AT90S2313__</td></tr>
-  <tr><td>avr2</td><td>at90s2323</td><td>__AVR_AT90S2323__</td></tr>
-  <tr><td>avr2</td><td>at90s2333</td><td>__AVR_AT90S2333__</td></tr>
-  <tr><td>avr2</td><td>at90s2343</td><td>__AVR_AT90S2343__</td></tr>
-  <tr><td>avr2</td><td>attiny22</td><td>__AVR_ATtiny22__</td></tr>
-  <tr><td>avr2</td><td>attiny26</td><td>__AVR_ATtiny26__</td></tr>
-  <tr><td>avr2</td><td>at90s4414</td><td>__AVR_AT90S4414__</td></tr>
-  <tr><td>avr2</td><td>at90s4433</td><td>__AVR_AT90S4433__</td></tr>
-  <tr><td>avr2</td><td>at90s4434</td><td>__AVR_AT90S4434__</td></tr>
-  <tr><td>avr2</td><td>at90s8515</td><td>__AVR_AT90S8515__</td></tr>
-  <tr><td>avr2</td><td>at90c8534</td><td>__AVR_AT90C8534__</td></tr>
-  <tr><td>avr2</td><td>at90s8535</td><td>__AVR_AT90S8535__</td></tr>
+- The documentation of
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avr-macros"
+     >built-in macros</a> like \c __AVR_ARCH__, \c __AVR_ATmega328P__
+  and \c __AVR_HAVE_MUL__, just to mention a few.
 
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>at86rf401</td><td>__AVR_AT86RF401__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>ata5272</td><td>__AVR_ATA5272__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>ata6616c</td><td>__AVR_ATA6616C__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13</td><td>__AVR_ATtiny13__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny13a</td><td>__AVR_ATtiny13A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny2313</td><td>__AVR_ATtiny2313__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny2313a</td><td>__AVR_ATtiny2313A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny24</td><td>__AVR_ATtiny24__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny24a</td><td>__AVR_ATtiny24A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny25</td><td>__AVR_ATtiny25__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny261</td><td>__AVR_ATtiny261__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny261a</td><td>__AVR_ATtiny261A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny4313</td><td>__AVR_ATtiny4313__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny43u</td><td>__AVR_ATtiny43U__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny44</td><td>__AVR_ATtiny44__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny44a</td><td>__AVR_ATtiny44A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny441</td><td>__AVR_ATtiny441__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny45</td><td>__AVR_ATtiny45__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny461</td><td>__AVR_ATtiny461__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny461a</td><td>__AVR_ATtiny461A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny48</td><td>__AVR_ATtiny48__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny828</td><td>__AVR_ATtiny828__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84</td><td>__AVR_ATtiny84__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny84a</td><td>__AVR_ATtiny84A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny841</td><td>__AVR_ATtiny841__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny85</td><td>__AVR_ATtiny85__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861</td><td>__AVR_ATtiny861__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny861a</td><td>__AVR_ATtiny861A__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny87</td><td>__AVR_ATtiny87__</td></tr>
-  <tr><td>avr2/avr25&nbsp;[1]</td><td>attiny88</td><td>__AVR_ATtiny88__</td></tr>
+- How the compiler treats the
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#ramp"
+     >\c RAMPX, \c RAMPY, \c RAMPZ and \c RAMPD special function registers</a>
+  on devices that have (one of) them.
 
-  <tr><td>avr3</td><td>atmega603</td><td>__AVR_ATmega603__</td></tr>
-  <tr><td>avr3</td><td>at43usb355</td><td>__AVR_AT43USB355__</td></tr>
+- How the compiler treats the
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
+     >\c EIND special function register</a>
+  on devices with more than 128 KiB of program memory,
+  and how indirect calls are realized on such devices.
 
-  <tr><td>avr3/avr31&nbsp;[3]</td><td>atmega103</td><td>__AVR_ATmega103__</td></tr>
-  <tr><td>avr3/avr31&nbsp;[3]</td><td>at43usb320</td><td>__AVR_AT43USB320__</td></tr>
+<dl>
+<dt><tt>-mmcu=<em>arch</em></tt></dt>
+<dt><tt>-mmcu=<em>mcu</em></tt></dt>
+<dd>
+  Compile code for architecture <tt><em>arch</em></tt> resp.
+  AVR device <tt><em>mcu</em></tt>.
 
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb82</td><td>__AVR_AT90USB82__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>at90usb162</td><td>__AVR_AT90USB162__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>ata5505</td><td>__AVR_ATA5505__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>ata6617c</td><td>__AVR_ATA6617C__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>ata664251</td><td>__AVR_ATA664251__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega8u2</td><td>__AVR_ATmega8U2__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega16u2</td><td>__AVR_ATmega16U2__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>atmega32u2</td><td>__AVR_ATmega32U2__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>attiny167</td><td>__AVR_ATtiny167__</td></tr>
-  <tr><td>avr3/avr35&nbsp;[2]</td><td>attiny1634</td><td>__AVR_ATtiny1634__</td></tr>
+  Since GCC v5, the compiler no more supports indivitual devices,
+  instead the compiler comes with
+  <a href="https://gcc.gnu.org/wiki/avr-gcc#spec-files">device specs files</a>
+  that describe which options to use with each sub-processes like
+  pre-processor, compiler proper, assembler and linker.
 
-  <tr><td>avr3</td><td>at76c711</td><td>__AVR_AT76C711__</td></tr>
-  <tr><td>avr4</td><td>ata6285</td><td>__AVR_ATA6285__</td></tr>
-  <tr><td>avr4</td><td>ata6286</td><td>__AVR_ATA6286__</td></tr>
-  <tr><td>avr4</td><td>ata6289</td><td>__AVR_ATA6289__</td></tr>
-  <tr><td>avr4</td><td>ata6612c</td><td>__AVR_ATA6612C__</td></tr>
-  <tr><td>avr4</td><td>atmega48</td><td>__AVR_ATmega48__</td></tr>
-  <tr><td>avr4</td><td>atmega48a</td><td>__AVR_ATmega48A__</td></tr>
-  <tr><td>avr4</td><td>atmega48pa</td><td>__AVR_ATmega48PA__</td></tr>
-  <tr><td>avr4</td><td>atmega48pb</td><td>__AVR_ATmega48PB__</td></tr>
-  <tr><td>avr4</td><td>atmega48p</td><td>__AVR_ATmega48P__</td></tr>
-  <tr><td>avr4</td><td>atmega8</td><td>__AVR_ATmega8__</td></tr>
-  <tr><td>avr4</td><td>atmega8a</td><td>__AVR_ATmega8A__</td></tr>
-  <tr><td>avr4</td><td>atmega8515</td><td>__AVR_ATmega8515__</td></tr>
-  <tr><td>avr4</td><td>atmega8535</td><td>__AVR_ATmega8535__</td></tr>
-  <tr><td>avr4</td><td>atmega88</td><td>__AVR_ATmega88__</td></tr>
-  <tr><td>avr4</td><td>atmega88a</td><td>__AVR_ATmega88A__</td></tr>
-  <tr><td>avr4</td><td>atmega88p</td><td>__AVR_ATmega88P__</td></tr>
-  <tr><td>avr4</td><td>atmega88pa</td><td>__AVR_ATmega88PA__</td></tr>
-  <tr><td>avr4</td><td>atmega88pb</td><td>__AVR_ATmega88PB__</td></tr>
-  <tr><td>avr4</td><td>atmega8hva</td><td>__AVR_ATmega8HVA__</td></tr>
-  <tr><td>avr4</td><td>at90pwm1</td><td>__AVR_AT90PWM1__</td></tr>
-  <tr><td>avr4</td><td>at90pwm2</td><td>__AVR_AT90PWM2__</td></tr>
-  <tr><td>avr4</td><td>at90pwm2b</td><td>__AVR_AT90PWM2B__</td></tr>
-  <tr><td>avr4</td><td>at90pwm3</td><td>__AVR_AT90PWM3__</td></tr>
-  <tr><td>avr4</td><td>at90pwm3b</td><td>__AVR_AT90PWM3B__</td></tr>
-  <tr><td>avr4</td><td>at90pwm81</td><td>__AVR_AT90PWM81__</td></tr>
+  The purpose of these specs files is to add support for AVR devices that
+  the compiler does not yet support.
 
-  <tr><td>avr5</td><td>at90can32</td><td>__AVR_AT90CAN32__</td></tr>
-  <tr><td>avr5</td><td>at90can64</td><td>__AVR_AT90CAN64__</td></tr>
-  <tr><td>avr5</td><td>at90pwm161</td><td>__AVR_AT90PWM161__</td></tr>
-  <tr><td>avr5</td><td>at90pwm216</td><td>__AVR_AT90PWM216__</td></tr>
-  <tr><td>avr5</td><td>at90pwm316</td><td>__AVR_AT90PWM316__</td></tr>
-  <tr><td>avr5</td><td>at90scr100</td><td>__AVR_AT90SCR100__</td></tr>
-  <tr><td>avr5</td><td>at90usb646</td><td>__AVR_AT90USB646__</td></tr>
-  <tr><td>avr5</td><td>at90usb647</td><td>__AVR_AT90USB647__</td></tr>
-  <tr><td>avr5</td><td>at94k</td><td>__AVR_AT94K__</td></tr>
-  <tr><td>avr5</td><td>atmega16</td><td>__AVR_ATmega16__</td></tr>
-  <tr><td>avr5</td><td>ata5702m322</td><td>__AVR_ATA5702M322__</td></tr>
-  <tr><td>avr5</td><td>ata5782</td><td>__AVR_ATA5782__</td></tr>
-  <tr><td>avr5</td><td>ata5790</td><td>__AVR_ATA5790__</td></tr>
-  <tr><td>avr5</td><td>ata5790n</td><td>__AVR_ATA5790N__</td></tr>
-  <tr><td>avr5</td><td>ata5795</td><td>__AVR_ATA5795__</td></tr>
-  <tr><td>avr5</td><td>ata5831</td><td>__AVR_ATA5831__</td></tr>
-  <tr><td>avr5</td><td>ata6613c</td><td>__AVR_ATA6613C__</td></tr>
-  <tr><td>avr5</td><td>ata6614q</td><td>__AVR_ATA6614Q__</td></tr>
-  <tr><td>avr5</td><td>atmega161</td><td>__AVR_ATmega161__</td></tr>
-  <tr><td>avr5</td><td>atmega162</td><td>__AVR_ATmega162__</td></tr>
-  <tr><td>avr5</td><td>atmega163</td><td>__AVR_ATmega163__</td></tr>
-  <tr><td>avr5</td><td>atmega164a</td><td>__AVR_ATmega164A__</td></tr>
-  <tr><td>avr5</td><td>atmega164p</td><td>__AVR_ATmega164P__</td></tr>
-  <tr><td>avr5</td><td>atmega164pa</td><td>__AVR_ATmega164PA__</td></tr>
-  <tr><td>avr5</td><td>atmega165</td><td>__AVR_ATmega165__</td></tr>
-  <tr><td>avr5</td><td>atmega165a</td><td>__AVR_ATmega165A__</td></tr>
-  <tr><td>avr5</td><td>atmega165p</td><td>__AVR_ATmega165P__</td></tr>
-  <tr><td>avr5</td><td>atmega165pa</td><td>__AVR_ATmega165PA__</td></tr>
-  <tr><td>avr5</td><td>atmega168</td><td>__AVR_ATmega168__</td></tr>
-  <tr><td>avr5</td><td>atmega168a</td><td>__AVR_ATmega168A__</td></tr>
-  <tr><td>avr5</td><td>atmega168p</td><td>__AVR_ATmega168P__</td></tr>
-  <tr><td>avr5</td><td>atmega168pa</td><td>__AVR_ATmega168PA__</td></tr>
-  <tr><td>avr5</td><td>atmega169</td><td>__AVR_ATmega169__</td></tr>
-  <tr><td>avr5</td><td>atmega169a</td><td>__AVR_ATmega169A__</td></tr>
-  <tr><td>avr5</td><td>atmega169p</td><td>__AVR_ATmega169P__</td></tr>
-  <tr><td>avr5</td><td>atmega169pa</td><td>__AVR_ATmega169PA__</td></tr>
-  <tr><td>avr5</td><td>atmega16a</td><td>__AVR_ATmega16A__</td></tr>
-  <tr><td>avr5</td><td>atmega16hva</td><td>__AVR_ATmega16HVA__</td></tr>
-  <tr><td>avr5</td><td>atmega16hva2</td><td>__AVR_ATmega16HVA2__</td></tr>
-  <tr><td>avr5</td><td>atmega16hvb</td><td>__AVR_ATmega16HVB__</td></tr>
-  <tr><td>avr5</td><td>atmega16hvbrevb</td><td>__AVR_ATmega16HVBREVB__</td></tr>
-  <tr><td>avr5</td><td>atmega16m1</td><td>__AVR_ATmega16M1__</td></tr>
-  <tr><td>avr5</td><td>atmega16u4</td><td>__AVR_ATmega16U4__</td></tr>
-  <tr><td>avr5</td><td>atmega32</td><td>__AVR_ATmega32__</td></tr>
-  <tr><td>avr5</td><td>atmega32a</td><td>__AVR_ATmega32A__</td></tr>
-  <tr><td>avr5</td><td>atmega323</td><td>__AVR_ATmega323__</td></tr>
-  <tr><td>avr5</td><td>atmega324a</td><td>__AVR_ATmega324A__</td></tr>
-  <tr><td>avr5</td><td>atmega324p</td><td>__AVR_ATmega324P__</td></tr>
-  <tr><td>avr5</td><td>atmega324pa</td><td>__AVR_ATmega324PA__</td></tr>
-  <tr><td>avr5</td><td>atmega325</td><td>__AVR_ATmega325__</td></tr>
-  <tr><td>avr5</td><td>atmega325a</td><td>__AVR_ATmega325A__</td></tr>
-  <tr><td>avr5</td><td>atmega325p</td><td>__AVR_ATmega325P__</td></tr>
-  <tr><td>avr5</td><td>atmega325pa</td><td>__AVR_ATmega325PA__</td></tr>
-  <tr><td>avr5</td><td>atmega3250</td><td>__AVR_ATmega3250__</td></tr>
-  <tr><td>avr5</td><td>atmega3250a</td><td>__AVR_ATmega3250A__</td></tr>
-  <tr><td>avr5</td><td>atmega3250p</td><td>__AVR_ATmega3250P__</td></tr>
-  <tr><td>avr5</td><td>atmega3250pa</td><td>__AVR_ATmega3250PA__</td></tr>
-  <tr><td>avr5</td><td>atmega328</td><td>__AVR_ATmega328__</td></tr>
-  <tr><td>avr5</td><td>atmega328p</td><td>__AVR_ATmega328P__</td></tr>
-  <tr><td>avr5</td><td>atmega329</td><td>__AVR_ATmega329__</td></tr>
-  <tr><td>avr5</td><td>atmega329a</td><td>__AVR_ATmega329A__</td></tr>
-  <tr><td>avr5</td><td>atmega329p</td><td>__AVR_ATmega329P__</td></tr>
-  <tr><td>avr5</td><td>atmega329pa</td><td>__AVR_ATmega329PA__</td></tr>
-  <tr><td>avr5</td><td>atmega3290</td><td>__AVR_ATmega3290__</td></tr>
-  <tr><td>avr5</td><td>atmega3290a</td><td>__AVR_ATmega3290A__</td></tr>
-  <tr><td>avr5</td><td>atmega3290p</td><td>__AVR_ATmega3290P__</td></tr>
-  <tr><td>avr5</td><td>atmega3290pa</td><td>__AVR_ATmega3290PA__</td></tr>
-  <tr><td>avr5</td><td>atmega32c1</td><td>__AVR_ATmega32C1__</td></tr>
-  <tr><td>avr5</td><td>atmega32hvb</td><td>__AVR_ATmega32HVB__</td></tr>
-  <tr><td>avr5</td><td>atmega32hvbrevb</td><td>__AVR_ATmega32HVBREVB__</td></tr>
-  <tr><td>avr5</td><td>atmega32m1</td><td>__AVR_ATmega32M1__</td></tr>
-  <tr><td>avr5</td><td>atmega32u4</td><td>__AVR_ATmega32U4__</td></tr>
-  <tr><td>avr5</td><td>atmega32u6</td><td>__AVR_ATmega32U6__</td></tr>
-  <tr><td>avr5</td><td>atmega406</td><td>__AVR_ATmega406__</td></tr>
-  <tr><td>avr5</td><td>atmega644rfr2</td><td>__AVR_ATmega644RFR2__</td></tr>
-  <tr><td>avr5</td><td>atmega64rfr2</td><td>__AVR_ATmega64RFR2__</td></tr>
-  <tr><td>avr5</td><td>atmega64</td><td>__AVR_ATmega64__</td></tr>
-  <tr><td>avr5</td><td>atmega64a</td><td>__AVR_ATmega64A__</td></tr>
-  <tr><td>avr5</td><td>atmega640</td><td>__AVR_ATmega640__</td></tr>
-  <tr><td>avr5</td><td>atmega644</td><td>__AVR_ATmega644__</td></tr>
-  <tr><td>avr5</td><td>atmega644a</td><td>__AVR_ATmega644A__</td></tr>
-  <tr><td>avr5</td><td>atmega644p</td><td>__AVR_ATmega644P__</td></tr>
-  <tr><td>avr5</td><td>atmega644pa</td><td>__AVR_ATmega644PA__</td></tr>
-  <tr><td>avr5</td><td>atmega645</td><td>__AVR_ATmega645__</td></tr>
-  <tr><td>avr5</td><td>atmega645a</td><td>__AVR_ATmega645A__</td></tr>
-  <tr><td>avr5</td><td>atmega645p</td><td>__AVR_ATmega645P__</td></tr>
-  <tr><td>avr5</td><td>atmega6450</td><td>__AVR_ATmega6450__</td></tr>
-  <tr><td>avr5</td><td>atmega6450a</td><td>__AVR_ATmega6450A__</td></tr>
-  <tr><td>avr5</td><td>atmega6450p</td><td>__AVR_ATmega6450P__</td></tr>
-  <tr><td>avr5</td><td>atmega649</td><td>__AVR_ATmega649__</td></tr>
-  <tr><td>avr5</td><td>atmega649a</td><td>__AVR_ATmega649A__</td></tr>
-  <tr><td>avr5</td><td>atmega6490</td><td>__AVR_ATmega6490__</td></tr>
-  <tr><td>avr5</td><td>atmega6490a</td><td>__AVR_ATmega6490A__</td></tr>
-  <tr><td>avr5</td><td>atmega6490p</td><td>__AVR_ATmega6490P__</td></tr>
-  <tr><td>avr5</td><td>atmega649p</td><td>__AVR_ATmega649P__</td></tr>
-  <tr><td>avr5</td><td>atmega64c1</td><td>__AVR_ATmega64C1__</td></tr>
-  <tr><td>avr5</td><td>atmega64hve</td><td>__AVR_ATmega64HVE__</td></tr>
-  <tr><td>avr5</td><td>atmega64hve2</td><td>__AVR_ATmega64HVE2__</td></tr>
-  <tr><td>avr5</td><td>atmega64m1</td><td>__AVR_ATmega64M1__</td></tr>
-  <tr><td>avr5</td><td>m3000</td><td>__AVR_M3000__</td></tr>
-
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>at90can128</td><td>__AVR_AT90CAN128__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>at90usb1286</td><td>__AVR_AT90USB1286__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>at90usb1287</td><td>__AVR_AT90USB1287__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega128</td><td>__AVR_ATmega128__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega128a</td><td>__AVR_ATmega128A__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1280</td><td>__AVR_ATmega1280__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1281</td><td>__AVR_ATmega1281__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1284</td><td>__AVR_ATmega1284__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1284p</td><td>__AVR_ATmega1284P__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega1284rfr2</td><td>__AVR_ATmega1284RFR2__</td></tr>
-  <tr><td>avr5/avr51&nbsp;[3]</td><td>atmega128rfr2</td><td>__AVR_ATmega128RFR2__</td></tr>
-
-  <tr><td>avr6</td><td>atmega2560</td><td>__AVR_ATmega2560__</td></tr>
-  <tr><td>avr6</td><td>atmega2561</td><td>__AVR_ATmega2561__</td></tr>
-  <tr><td>avr6</td><td>atmega2564rfr2</td><td>__AVR_ATmega2564RFR2__</td></tr>
-  <tr><td>avr6</td><td>atmega256rfr2</td><td>__AVR_ATmega256RFR2__</td></tr>
-
-  <tr><td>avrxmega2</td><td>atxmega8e5</td><td>__AVR_ATxmega8E5__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega16a4</td><td>__AVR_ATxmega16A4__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega16a4u</td><td>__AVR_ATxmega16A4U__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega16c4</td><td>__AVR_ATxmega16C4__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega16d4</td><td>__AVR_ATxmega16D4__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega32a4</td><td>__AVR_ATxmega32A4__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega32a4u</td><td>__AVR_ATxmega32A4U__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega32c3</td><td>__AVR_ATxmega32C3__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega32c4</td><td>__AVR_ATxmega32C4__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega32d3</td><td>__AVR_ATxmega32D3__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega32d4</td><td>__AVR_ATxmega32D4__</td></tr>
-  <tr><td>avrxmega2</td><td>atxmega32e5</td><td>__AVR_ATxmega32E5__</td></tr>
-
-  <tr><td>avrxmega4</td><td>atxmega64a3</td><td>__AVR_ATxmega64A3__</td></tr>
-  <tr><td>avrxmega4</td><td>atxmega64a3u</td><td>__AVR_ATxmega64A3U__</td></tr>
-  <tr><td>avrxmega4</td><td>atxmega64a4u</td><td>__AVR_ATxmega64A4U__</td></tr>
-  <tr><td>avrxmega4</td><td>atxmega64b1</td><td>__AVR_ATxmega64B1__</td></tr>
-  <tr><td>avrxmega4</td><td>atxmega64b3</td><td>__AVR_ATxmega64B3__</td></tr>
-  <tr><td>avrxmega4</td><td>atxmega64c3</td><td>__AVR_ATxmega64C3__</td></tr>
-  <tr><td>avrxmega4</td><td>atxmega64d3</td><td>__AVR_ATxmega64D3__</td></tr>
-  <tr><td>avrxmega4</td><td>atxmega64d4</td><td>__AVR_ATxmega64D4__</td></tr>
-
-  <tr><td>avrxmega5</td><td>atxmega64a1</td><td>__AVR_ATxmega64A1__</td></tr>
-  <tr><td>avrxmega5</td><td>atxmega64a1u</td><td>__AVR_ATxmega64A1U__</td></tr>
-
-  <tr><td>avrxmega6</td><td>atxmega128a3</td><td>__AVR_ATxmega128A3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega128a3u</td><td>__AVR_ATxmega128A3U__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega128b1</td><td>__AVR_ATxmega128B1__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega128b3</td><td>__AVR_ATxmega128B3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega128c3</td><td>__AVR_ATxmega128C3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega128d3</td><td>__AVR_ATxmega128D3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega128d4</td><td>__AVR_ATxmega128D4__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega192a3</td><td>__AVR_ATxmega192A3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega192a3u</td><td>__AVR_ATxmega192A3U__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega192c3</td><td>__AVR_ATxmega192C3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega192d3</td><td>__AVR_ATxmega192D3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega256a3</td><td>__AVR_ATxmega256A3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega256a3u</td><td>__AVR_ATxmega256A3U__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega256a3b</td><td>__AVR_ATxmega256A3B__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega256a3bu</td><td>__AVR_ATxmega256A3BU__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega256c3</td><td>__AVR_ATxmega256C3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega256d3</td><td>__AVR_ATxmega256D3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega384c3</td><td>__AVR_ATxmega384C3__</td></tr>
-  <tr><td>avrxmega6</td><td>atxmega384d3</td><td>__AVR_ATxmega384D3__</td></tr>
-
-  <tr><td>avrxmega7</td><td>atxmega128a1</td><td>__AVR_ATxmega128A1__</td></tr>
-  <tr><td>avrxmega7</td><td>atxmega128a1u</td><td>__AVR_ATxmega128A1U__</td></tr>
-  <tr><td>avrxmega7</td><td>atxmega128a4u</td><td>__AVR_ATxmega128A4U__</td></tr>
- 
-  <tr><td>avrtiny10</td><td>attiny4</td><td>__AVR_ATtiny4__</td></tr>
-  <tr><td>avrtiny10</td><td>attiny5</td><td>__AVR_ATtiny5__</td></tr>
-  <tr><td>avrtiny10</td><td>attiny9</td><td>__AVR_ATtiny9__</td></tr>
-  <tr><td>avrtiny10</td><td>attiny10</td><td>__AVR_ATtiny10__</td></tr>
-  <tr><td>avrtiny10</td><td>attiny20</td><td>__AVR_ATtiny20__</td></tr>
-  <tr><td>avrtiny10</td><td>attiny40</td><td>__AVR_ATtiny40__</td></tr>
-
-  </table>
-  </p>
-  <p>
-  [1] 'avr25' architecture is new in GCC 4.2<BR>
-  [2] 'avr35' architecture is new in GCC 4.2.3<BR>
-  [3] 'avr31' and 'avr51' architectures is new in GCC 4.3
-  </p>
-
-- \c -morder1
-- \c -morder2
-  <p>
-  Change the order of register assignment.  The default is
-  </p>
-  <p>
-    r24, r25, r18, r19, r20, r21, r22, r23, r30, r31, r26, r27, r28,
-    r29, r17, r16, r15, r14, r13, r12, r11, r10, r9, r8, r7, r6, r5,
-    r4, r3, r2, r0, r1
-  </p>
-  <p>
-  Order 1 uses
-  </p>
-  <p>
-    r18, r19, r20, r21, r22, r23, r24, r25, r30, r31, r26, r27, r28,
-    r29, r17, r16, r15, r14, r13, r12, r11, r10, r9, r8, r7, r6, r5,
-    r4, r3, r2, r0, r1
-  </p>
-  <p>
-  Order 2 uses
-  </p>
-  <p>
-    r25, r24, r23, r22, r21, r20, r19, r18, r30, r31, r26, r27, r28,
-    r29, r17, r16, r15, r14, r13, r12, r11, r10, r9, r8, r7, r6, r5,
-    r4, r3, r2, r1, r0
-  </p>
-
-- \c -mint8
-  <p>
-  Assume \c int to be an 8-bit integer.  Note that this is not really
-  supported by \c avr-libc, so it should normally not be used.  The
-  default is to use 16-bit integers.
-  </p>
-
-- \c -mno-interrupts
-  <p>
-  Generates code that changes the stack pointer without disabling
-  interrupts.  Normally, the state of the status register \c SREG
-  is saved in a temporary register, interrupts are disabled while
-  changing the stack pointer, and \c SREG is restored.
-  </p>
-  <p>
-  Specifying this option will define the preprocessor macro
-  \c __NO_INTERRUPTS__ to the value 1.
-  </p>
-
-- \c -mcall-prologues
-  <p>
-  Use subroutines for function prologue/epilogue.  For complex
-  functions that use many registers (that needs to be saved/restored
-  on function entry/exit), this saves some space at the cost of a
-  slightly increased execution time.
-  </p>
-
-- \c -mtiny-stack
-  <p>
-  Change only the low 8 bits of the stack pointer.
-  </p>
-
-- \c -mno-tablejump
-  <p>
-  Deprecated, use \c -fno-jump-tables instead.
-  </p>
-
-- \c -mshort-calls
-  <p>
-  Use \c rjmp/rcall (limited range) on >8K devices.  On \c avr2 and
-  \c avr4 architectures (less than 8 KB or flash memory), this is
-  always the case.  On \c avr3 and \c avr5 architectures, calls and
-  jumps to targets outside the current function will by default
-  use \c jmp/call instructions that can cover the entire address
-  range, but that require more flash ROM and execution time.
-  </p>
-
-- \c -mrtl
-  <p>
-  Dump the internal compilation result called "RTL" into comments in
-  the generated assembler code.  Used for debugging avr-gcc.
-  </p>
-
-- \c -msize
-  <p>
-  Dump the address, size, and relative cost of each statement into
-  comments in the generated assembler code.  Used for debugging avr-gcc.
-  </p>
-
-- \c -mdeb
-  <p>
-  Generate lots of debugging information to \c stderr.
-  </p>
-
+  The easiest way to add support for an unsupported device is to use
+  device support from an
+  <a href="https://gcc.gnu.org/wiki/avr-gcc#atpack">atpack archive</a>
+  as provided by the hardware manufacturer.  Apart from the
+  <tt><em>mcu</em></tt> specific specs file, it provides device headers
+  <tt>io*.h</tt>, startup code <tt>crt<em>mcu</em>.o</tt> and
+  device library <tt>lib<em>mcu</em>.a</tt>.
+</dd>
+</dl>
 
 \subsection using_sel_gcc_opts Selected general compiler options
 
 The following general gcc options might be of some interest to AVR
 users.
 
-- <tt>-O</tt><em>n</em>
-  <p>
+<dl>
+<dt><tt>-O<em>n</em></tt></dt>
+<dd>
   \anchor gcc_optO
-  Optimization level \e n.  Increasing \e n is meant to optimize more,
-  an optimization level of 0 means no optimization at all, which is
-  the default if no \c -O option is present.  The special option \c
-  -Os is meant to turn on all \c -O2 optimizations that are not
-  expected to increase code size.
-  </p>
-  <p>
-  Note that at \c -O3, gcc attempts to inline all "simple" functions.
-  For the AVR target, this will normally constitute a large
-  pessimization due to the code increasement.  The only other
-  optimization turned on with \c -O3 is \c -frename-registers, which
-  could rather be enabled manually instead.
-  </p>
-  <p>
-  A simple \c -O option is equivalent to \c -O1.
-  </p>
-  <p>
-  Note also that turning off all optimizations will prevent some
+  Optimization level \e n.  Increasing \e n is meant to optimize more.
+
+  \c -O0  reduces compilation time and makes debugging produce the expected
+  results. This is the default.<br>
+  Turning off all optimizations will prevent some
   warnings from being issued since the generation of those warnings
   depends on code analysis steps that are only performed when
-  optimizing (unreachable code, unused variables).
-  </p>
-  <p>
+  optimizing (unreachable code, unused variables).  Moreover, the
+  delay routines in <tt>\<util/delay.h\></tt> require optimization
+  to be turned on.
+
+  \c -Os turns on all \c -O2 optimizations except those that often increase
+  code size.  In most cases, this is the preferred optimization level
+  for AVR programs.
+
+  \c -Og optimizes debugging experience. This should be the optimization
+  level of choice for the standard edit-compile-debug cycle, offering a
+  reasonable level of optimization while maintaining fast compilation and
+  a good debugging experience.
+
+  \c -O3 attempts to inline all "simple" functions and might unroll some loops.
+  For the AVR target, this will normally constitute a large
+  pessimization due to the code increasement.
+
+  \c -O is equivalent to \c -O1. The compiler tries to reduce code size
+  and execution time, without performing any optimizations that take a
+  great deal of compilation time.
+
   See also the \ref faq_gdboptimize "appropriate FAQ entry" for
   issues regarding debugging optimized code.
-  </p>
-
-- <tt>-Wa,</tt><em>assembler-options</em>
-- <tt>-Wl,</tt><em>linker-options</em>
-  <p>
+</dd>
+<dt><tt>-Wp,<em>preprocessor-options</em></tt></dt>
+<dt><tt>-Wa,<em>assembler-options</em></tt></dt>
+<dt><tt>-Wl,<em>linker-options</em></tt></dt>
+<dd>
   \anchor gcc_minusW
-  Pass the listed options to the assembler, or linker, respectively.
-  </p>
+  Pass the listed options to the C preprocessor, the assembler or the linker,
+  respectively. Several options can be passed at once when they are
+  separated by a \c , (comma).
+</dd>
 
-- \c -g
-  <p>
+<dt><tt>-g</tt></dt>
+<dd>
   Generate debugging information that can be used by avr-gdb.
-  </p>
+  GCC v12 changed the default from STABS to DWARF.
+  Different DWARF levels can be selected by \c -g2 or \c -gdwarf-3.
 
-- \c -ffreestanding
-  <p>
-  Assume a "freestanding" environment as per the C standard.  This
-  turns off automatic builtin functions (though they can still be
-  reached by prepending \c __builtin_ to the actual function name).
-  It also makes the compiler not complain when \c main() is declared
-  with a \c void return type which makes some sense in a
-  microcontroller environment where the application cannot
-  meaningfully provide a return value to its environment (in most
-  cases, \c main() won't even return anyway).  However, this also
-  turns off all optimizations normally done by the compiler which
-  assume that functions known by a certain name behave as described
-  by the standard.  E. g., applying the function strlen() to a
-  literal string will normally cause the compiler to immediately
-  replace that call by the actual length of the string, while with
-  \c -ffreestanding, it will always call strlen() at run-time.
-  </p>
+  The compiler may use GNU extensions to the DWARF format.
+  When a debugger has problems with that, try \c -gstrict-dwarf.
+</dd>
 
-- \c -funsigned-char
-  <p>
+<dt><tt>-x <em>lang</em></tt></dt>
+<dd>
+  Compile the following files in language \e lang.  Values for \e lang are:
+  \c c, \c c++, \c assembler, \c assembler-with-cpp and \c none.
+
+  For example, GCC does not recognize the \c .asm file extension as assembly
+  source.  With <tt>-x assembler-with-cpp file.asm</tt>, the compiler
+  first runs the C preprocessor on \c file.asm (so that
+  <tt>\#include \<avr/io.h\></tt> can be used in assembly), and then calls
+  the assembler.
+
+  Another use case is to compile a C file that's read from standard input,
+  which is specified as <tt>-</tt> (dash) instead of the name of a source
+  file.  As no source file name is specified, the compiler must be told
+  which language to use:  The command
+  \verbatim
+$ echo '#include <avr/io.h>' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR
+  \endverbatim
+  pre-processes the C file <tt>\#include \<avr/io.h\></tt> and writes all
+  macro definitions to stdout.  The output is then filtered by \c grep to
+  show all possible #ISR vector names for ATmega8.
+
+  <tt>-x none</tt> returns to the default for the following inputs, i.e.
+  infer the respective source languages from the file extensions.
+</dd>
+
+<dt><tt>-save-temps</tt></dt>
+<dt><tt>-save-temps=obj</tt></dt>
+<dt><tt>-save-temps=cwd</tt></dt>
+<dt><tt>-dumpbase <em>base</em></tt></dt>
+<dt><tt>-dumpdir <em>dir</em></tt></dt>
+<dd>
+  Don't remove temporary, intermediate files like preprocessor output
+  and assembly code generated by the compiler.  The intermediate
+  files have file extension \c .i (preprocessed C),
+  \c .ii (preprocessed C++) and \c .s (preprocessed assembly,
+  compiler-generated assembly).
+
+  \c -dumpbase and \c -dumpdir can be used to adjust file names and locations.
+
+  With \c -fverbose-asm, the compiler adds the high level source code to
+  the assembly output.  Compiling without debugging information (\c -g0)
+  improves legibility of the generated assembly.
+
+  The preprocessed files can be used to check if macro expansions work as
+  expected.  With \c -g3 or higher, the preprocessed files will also contain
+  all macro definitions and indications where they are defined: Built-in,
+  on the command line, or in some header file as indicated by \c \#line notes.
+</dd>
+
+<dt><tt>-l<em>name</em></tt></dt>
+<dd>
+  Locate the archive library named <tt>lib</tt><em>name</em><tt>.a</tt>,
+  and use it to resolve currently unresolved symbols from it.  The
+  library is searched along a path that consists of builtin pathname
+  entries that have been specified at configure time (e. g.
+  \c /usr/local/avr/lib on Unix systems), possibly extended by
+  pathname entries as specified by \c -L options (that must precede the
+  \c -l options on the command-line).
+</dd>
+
+<dt><tt>-L<em>path</em></tt></dt>
+<dd>
+  Additional directory \e path to look for archive libraries requested by
+  \c -l options.
+</dd>
+
+<dt><tt>-Tbss <em>org</em></tt></dt>
+<dt><tt>-Tdata <em>org</em></tt></dt>
+<dt><tt>-Ttext <em>org</em></tt></dt>
+<dd>
+  Start the \c bss, \c data, or \c text section at VMA address \e org,
+  respectively.
+</dd>
+
+<dt><tt>-T <em>scriptfile</em></tt></dt>
+<dd>
+  Use \e scriptfile as the linker script, replacing or augmenting the
+  default linker script.
+
+  Default linker scripts are stored in a system-specific
+  location (e. g. under \c /usr/local/avr/lib/ldscripts on Unix
+  systems), and consist of the AVR architecture name (\c avr2 through
+  \c avrxmega7) with the suffix \c .x appended.
+  They describe how the various \ref mem_sections "memory sections" will be
+  linked together and which input sections go into them.
+  Notice that the default linker scripts are part of the linker binary,
+  changing them on file will have no effect.
+
+  For a simple linker script augmentation, see the avr-gcc Wiki
+  on <a href="https://gcc.gnu.org/wiki/avr-gcc#Address_Spaces"
+	>named address spaces</a>.
+</dd>
+
+<dt><tt>-nostdlib</tt></dt>
+<dd>Don't link against standard libraries.</dd>
+
+<dt><tt>-nodefaultlibs</tt></dt>
+<dd>Don't link against default libraries.</dd>
+
+<dt><tt>-nodevicelib</tt></dt>
+<dd>
+  Don't link against AVR-LibC's <tt>lib<em>mcu</em>.a</tt> that contains
+  EEPROM support and other stuff.  This can be used when no such library
+  is available.
+</dd>
+
+<dt><tt>-nostartfiles</tt></dt>
+<dd>
+  Don't link against AVR-LibC's startup code <tt>crt<em>mcu</em>.o</tt>.
+
+  Notice that parts of the startup code are provided by \c libgcc.a.
+  To get rid of that, one can \c -nostdlib or \c -nodefaultlibs; however that
+  also removes other code like functions required for arithmetic.  To just get
+  rid of the startup bits, define the respective symbols, for example \n
+  <tt>-Wl,\--defsym,__do_clear_bss=0</tt> and similar for
+  \c __do_copy_data, \c __do_global_ctors and \c __do_global_dtors.
+</dd>
+
+<dt><tt>-funsigned-char</tt></dt>
+<dd>
+  This option changes the binary interface!\n
   Make any unqualfied \c char type an unsigned char.  Without this
   option, they default to a signed char.
-  </p>
+</dd>
 
-- \c -funsigned-bitfields
-  <p>
+<dt><tt>-funsigned-bitfields</tt></dt>
+<dd>
+  This option changes the binary interface!\n
   Make any unqualified bitfield type unsigned.  By default, they
   are signed.
-  </p>
+</dd>
 
-- \c -fshort-enums
-  <p>
+<dt><tt>-fshort-enums</tt></dt>
+<dd>
+  This option changes the binary interface!\n
   Allocate to an \c enum type only as many bytes as it needs for the
   declared range of possible values. Specifically, the enum type will
   be equivalent to the smallest integer type which has enough room.
-  </p>
+</dd>
 
-- \c -fpack-struct
-  <p>
+<dt><tt>-fpack-struct</tt></dt>
+<dd>
+  This option changes the binary interface!\n
   Pack all structure members together without holes.
-  </p>
+</dd>
 
-- \c -fno-jump-tables
-  <p>
+<dt><tt>-fno-jump-tables</tt></dt>
+<dd>
   Do not generate tablejump instructions.  By default, jump tables can
   be used to optimize \c switch statements.  When turned off,
   sequences of compare statements are used instead.  Jump tables are
   usually faster to execute on average, but in particular for \c switch
   statements, where most of the jumps would go to the default label,
   they might waste a bit of flash memory.
-  </p>
-  <p>  
-  NOTE: The tablejump instructions use the LPM assembler instruction for 
-  access to jump tables. Always use \c -fno-jump-tables switch, if 
-  compiling a bootloader for devices with more than 64 KB of code memory.
-  </p>
+
+  Note: Sinve GCC v4.9.2, tablejump code uses the \c ELPM instruction to read
+  from jump tables.  In older version, use the \c -fno-jump-tables switch when
+  compiling a bootloader for devices with more than 64 KiB of code memory.
+</dd>
+
+<dt><tt>-ffreestanding</tt></dt>
+<dd>
+  Assume a "freestanding" environment as per the C standard.  This
+  turns off automatic builtin functions (though they can still be
+  reached by prepending \c __builtin_ to the actual function name).
+  It also makes the compiler not complain when \c main() is declared
+  with a \c void return type. (In most
+  cases, \c main() won't even return anyway, and hence using a return type
+  of \c int has no downsides at all).
+
+  However, this option also
+  turns off all optimizations normally done by the compiler which
+  assume that functions known by a certain name behave as described
+  by the standard.  For example, applying the function strlen() to a
+  literal string will normally cause the compiler to immediately
+  replace that call by the actual length of the string, while with
+  \c -ffreestanding, it will always call strlen() at run-time.
+</dd>
+</dl>
 
 \section using_avr_as Options for the assembler avr-as
 
+\note The preferred way to assemble a file if by means of using \c avr-gcc:
+- \c avr-gcc, which is a driver program to call sub-programs like the
+assembler, knows which options it has to add to the assembler's command line,
+like:
+<tt>-mmcu=<em>arch</em></tt>, -c -mno-skip-bug, etc.
+- \c avr-gcc will call the C preprocessor on the assembler input for sources
+with extensions \c .S and \c .sx.  For other extensions, use
+\verbatim
+$ avr-gcc -x assembler-with-cpp file.asm ...
+\endverbatim
+This allows to use preprocessor directives like
+\code
+#include <avr/io.h>
+\endcode
+in assembly sources.
+
 \subsection using_avr_as_mach_opts Machine-specific assembler options
 
-- <tt>-mmcu=</tt><em>architecture</em>
-- <tt>-mmcu=</tt><em>MCU name</em>
-  <p>
-  avr-as understands the same \c -mmcu= options as
-  \ref using_avr_gcc "avr-gcc".  By default, avr2 is assumed,
-  but this can be altered by using the appropriate \c .arch
-  pseudo-instruction inside the assembler source file.
-  </p>
+<dl>
+<dt><tt>-mmcu=</tt><em>architecture</em></dt>
+<dt><tt>-mmcu=</tt><em>mcu</em></dt>
+<dd>
+  \c avr-as does not support all <em>mcu</em>s supported by the
+  compiler.  As explained in the note above, the preferred way to run
+  the assembler is by using \c avr-gcc.
+</dd>
 
-- \c -mall-opcodes
-  <p>
-  Turns off opcode checking for the actual MCU type, and allows any
+<dt><tt>-mall-opcodes</tt></dt>
+<dd>
+  Turns off opcode checking, and allows any
   possible AVR opcode to be assembled.
-  </p>
+</dd>
 
-- \c -mno-skip-bug
-  <p>
+<dt><tt>-mno-skip-bug</tt></dt>
+<dd>
   Don't emit a warning when trying to skip a 2-word instruction
   with a <tt>CPSE/SBIC/SBIS/SBRC/SBRS</tt> instruction.  Early AVR
   devices suffered from a hardware bug where these instructions
   could not be properly skipped.
-  </p>
+</dd>
 
-- \c -mno-wrap
-  <p>
+<dt><tt>-mno-wrap</tt></dt>
+<dd>
   For <tt>RJMP/RCALL</tt> instructions, don't allow the target address
-  to wrap around for devices that have more than 8 KB of memory.
-  </p>
+  to wrap around for devices that have more than 8 KiB of memory.
+</dd>
 
-- \c --gstabs
-  <p>
+<dt><tt>\--gstabs</tt></dt>
+<dd>
   Generate \c .stabs debugging symbols for assembler source lines.
-  This enables avr-gdb to trace through assembler source files.  This
+  This enables \c avr-gdb to trace through assembler source files.  This
   option <em>must not</em> be used when assembling sources that have
   been generated by the C compiler; these files already contain the
   appropriate line number information from the C source files.
-  </p>
+</dd>
 
-- <tt>-a[cdhlmns=</tt><em>file</em><tt>]</tt>
-  <p>
+<dt><tt>-a[cdhlmns=<em>file</em>]</tt></dt>
+<dd>
   Turn on the assembler listing.  The sub-options are:
-  </p>
-  <p>
   <ul>
     <li>\c c     omit false conditionals</li>
     <li>\c d     omit debugging directives</li>
@@ -737,24 +427,23 @@ users.
     <li>\c m     include macro expansions</li>
     <li>\c n     omit forms processing</li>
     <li>\c s     include symbols</li>
-    <li><tt>=</tt><em>file</em>   set the name of the listing file</li>
+    <li><tt>=<em>file</em></tt>  set the name of the listing file</li>
   </ul>
-  </p>
-  <p>
   The various sub-options can be combined into a single \c -a option
   list; \e =file must be the last one in that case.
-  </p>
+</dd>
+</dl>
 
 \subsection using_avr_example Examples for assembler options passed through the C compiler
 
 Remember that assembler options can be passed from the C compiler
-frontend using \c -Wa (see \ref gcc_minusW "above"), so in order to
+frontend using \c -Wa (see \ref gcc_minusW above), so in order to
 include the C source code into the assembler listing in file
-\c foo.lst, when compiling \c foo.c, the following compiler command-line
+\c foo.lss, when compiling \c foo.c, the following compiler command-line
 can be used:
 
 \verbatim
-	$ avr-gcc -c -O foo.c -o foo.o -Wa,-ahls=foo.lst
+$ avr-gcc -mmcu=atmega8 -c foo.c -o foo.o -Wa,-ahls=foo.lss
 \endverbatim
 
 In order to pass an assembler file through the C preprocessor first,
@@ -762,7 +451,7 @@ and have the assembler generate line number debugging information for
 it, the following command can be used:
 
 \verbatim
-	$ avr-gcc -c -x assembler-with-cpp -o foo.o foo.S -Wa,--gstabs
+$ avr-gcc -c -x assembler-with-cpp -o foo.o foo.asm -Wa,--gstabs
 \endverbatim
 
 Note that on Unix systems that have case-distinguishing file systems,
@@ -773,88 +462,68 @@ preprocessing done).
 
 \section using_avr_ld Controlling the linker avr-ld
 
+\note It is highly recommended to use the compiler driver \c avr-gcc
+or \c avr-g++ for linking.
+- The driver knows which options to pass down to the linker. This includes
+the correct multilib path, support libraries like \c libc.a, \c libm.a,
+\c libgcc.a and <tt>lib<em>mcu</em>.a</tt>, as well as options for LTO
+(link-time optimization) and options for plugins (that call back the compiler
+to compile LTO byte code), startup code and many more.
+- The driver program understands options like <tt>-l<em>lib</em></tt>,
+<tt>-L<em>path</em></tt>, \c Ttext, \c Tdata, \c Tbss and
+<tt>-T <em>script</em></tt>, so no \c -Wl is required for them.
+
 \subsection using_sel_ld_opts Selected linker options
 
-While there are no machine-specific options for avr-ld, a number of
-the standard options might be of interest to AVR users.
+A number of the standard options might be of interest to AVR users.
 
-- <tt>-l</tt><em>name</em>
-  <p>
-  Locate the archive library named <tt>lib</tt><em>name</em><tt>.a</tt>,
-  and use it to resolve currently unresolved symbols from it.  The
-  library is searched along a path that consists of builtin pathname
-  entries that have been specified at compile time (e. g.
-  \c /usr/local/avr/lib on Unix systems), possibly extended by
-  pathname entries as specified by \c -L options (that must precede the
-  \c -l options on the command-line).
-  </p>
+<dl>
+<dt><tt>\--defsym <em>symbol=expr</em></tt></dt>
+<dd>Define a global symbol \e symbol using \e expr as the value.</dd>
 
-- <tt>-L</tt><em>path</em>
-  <p>
-  Additional location to look for archive libraries requested by
-  \c -l options.
-  </p>
+<dt><tt>-M</tt></dt>
+<dd>Print a linker map to \c stdout.</dd>
 
-- <tt>--defsym </tt><em>symbol=expr</em>
-  <p>
-  Define a global symbol \e symbol using \e expr as the value.
-  </p>
+<dt><tt>-Map <em>mapfile</em></tt></dt>
+<dd>Print a linker map to \e mapfile.</dd>
 
-- \c -M
-  <p>
-  Print a linker map to \c stdout.
-  </p>
-
-- <tt>-Map </tt><em>mapfile</em>
-  <p>
-  Print a linker map to \e mapfile.
-  </p>
-
-- \c --cref
-  <p>
+<dt><tt>\--cref</tt></dt>
+<dd>
   Output a cross reference table to the map file (in case \c -Map is
   also present), or to \c stdout.
-  </p>
+</dd>
 
-- <tt>--section-start </tt><em>sectionname=org</em>
-  <p>
-  Start section \e sectionname at absolute address \e org.
-  </p>
+<dt><tt>\--gc-sections</tt></dt>
+<dd>
+  Only keep input sections that are referenced (by other sections or the
+  entry symbol), and that are not marked as \c KEEP in the linker script.
+  This is used to reduce code size, usually together with compiler option
+  \c -ffunction-sections so that input section granularity is on function
+  level rather than on the level of compilation units.
+</dd>
 
-- <tt>-Tbss </tt><em>org</em>
-- <tt>-Tdata </tt><em>org</em>
-- <tt>-Ttext </tt><em>org</em>
-  <p>
-  Start the \c bss, \c data, or \c text section at \e org,
-  respectively.
-  </p>
-
-- <tt>-T </tt><em>scriptfile</em>
-  <p>
-  Use \e scriptfile as the linker script, replacing the default linker
-  script.  Default linker scripts are stored in a system-specific
-  location (e. g. under \c /usr/local/avr/lib/ldscripts on Unix
-  systems), and consist of the AVR architecture name (avr2 through avr5)
-  with the suffix \c .x appended.  They describe how the various
-  \ref mem_sections "memory sections" will be linked together.
-  </p>
+<dt><tt>\--section-start <em>sectionname=org</em></tt></dt>
+<dd>Start section \e sectionname at absolute address \e org.</dd>
+</dl>
 
 \subsection using_pass_ld_opts Passing linker options from the C compiler
 
-By default, all unknown non-option arguments on the avr-gcc
+By default, all unknown non-option arguments on the \c avr-gcc
 command-line (i. e., all filename arguments that don't have a suffix
-that is handled by avr-gcc) are passed straight to the linker.  Thus,
+that is handled by \c avr-gcc) are passed straight to the linker.  Thus,
 all files ending in \c .o (object files) and \c .a (object libraries)
 are provided to the linker.
 
 System libraries are usually not passed by their explicit filename but
 rather using the \c -l option which uses an abbreviated form of the
-archive filename (see above).  avr-libc ships two system libraries,
-\c libc.a, and \c libm.a.  While the standard library \c libc.a will
+archive filename (see above).  AVR-LibC ships system libraries,
+\c libc.a, \c libm.a and <tt>lib<em>mcu</em>.a</tt>.
+While the standard library \c libc.a will
 always be searched for unresolved references when the linker is started
 using the C compiler frontend (i. e., there's always at least one
-implied \c -lc option), the mathematics library \c libm.a needs to be
-explicitly requested using \c -lm.  See also the
+implied \c -lc option), the mathematics library \c libm.a
+is only automatically added in GCC v4.7 and above.  On older versions, it
+needs to be explicitly requested using \c -lm.  See also the
 \ref faq_libm "entry in the FAQ" explaining this.
 
 Conventionally, Makefiles use the \c make macro \c LDLIBS to keep
@@ -868,17 +537,17 @@ used to resolve global symbols that are still unresolved at this
 point.
 
 Specific linker flags can be passed from the C compiler command-line
-using the \c -Wl compiler option, see \ref gcc_minusW "above".
+using the \c -Wl compiler option, see \ref gcc_minusW above.
 This option requires that there be no spaces in the appended linker
 option, while some of the linker options above (like \c -Map or
-\c --defsym) would require a space.  In these situations, the space
+\c \--defsym) would require a space.  In these situations, the space
 can be replaced by an equal sign as well.  For example, the following
 command-line can be used to compile \c foo.c into an executable, and
 also produce a link map that contains a cross-reference list in the
 file \c foo.map:
 
 \verbatim
-	$ avr-gcc -O -o foo.out -Wl,-Map=foo.map -Wl,--cref foo.c
+$ avr-gcc -mmcu=atmega8 foo.c -o foo.elf -Wl,-Map,foo.map -Wl,--cref
 \endverbatim
 
 Alternatively, a comma as a placeholder will be replaced by a space
@@ -887,7 +556,7 @@ external SRAM, the following command-line would cause the linker to
 place the data segment at address 0x2000 in the SRAM:
 
 \verbatim
-	$ avr-gcc -mmcu=atmega128 -o foo.out -Wl,-Tdata,0x802000
+$ avr-gcc -mmcu=atmega128 foo.c -o foo.elf -Wl,-Tdata,0x802000
 \endverbatim
 
 See the explanation of the \ref sec_dot_data "data section" for why
