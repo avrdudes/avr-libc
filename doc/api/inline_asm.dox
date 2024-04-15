@@ -220,7 +220,7 @@ changes the register usage definitions.
 \section io_ops Input and Output Operands
 
 Each input and output operand is described by a constraint string followed by
-a C expression in parantheses. <tt>AVR-GCC</tt> 3.3 knows the following
+a C expression in parantheses. avr-gcc knows the following
 constraint characters:
 
 \note The most up-to-date and detailed information on contraints for the avr
@@ -236,24 +236,18 @@ the \c z register is <tt>r31:r30</tt>
   <tr><td>d</td><td>Upper register</td><td>r16 to r31</td></tr>
   <tr><td>e</td><td>Pointer register pairs</td><td>x, y, z</td></tr>
   <tr><td>q</td><td>Stack pointer register</td><td>SPH:SPL</td></tr>
-  <tr><td>r</td><td>Any register</td><td>r0 to r31</td></tr>
-  <tr><td>t</td><td>Temporary register</td><td>r0</td></tr>
+  <tr><td>r</td><td>Any register</td><td>r2 to r31</td></tr>
   <tr><td>w</td><td>Special upper register pairs</td><td>r24, r26, r28, r30</td></tr>
   <tr><td>x</td><td>Pointer register pair X</td><td>x (r27:r26)</td></tr>
   <tr><td>y</td><td>Pointer register pair Y</td><td>y (r29:r28)</td></tr>
   <tr><td>z</td><td>Pointer register pair Z</td><td>z (r31:r30)</td></tr>
-  <tr><td>G</td><td>Floating point constant</td><td>0.0</td></tr>
   <tr><td>I</td><td>6-bit positive integer constant</td><td>0 to 63</td></tr>
   <tr><td>J</td><td>6-bit negative integer constant</td><td>-63 to 0</td></tr>
-  <tr><td>K</td><td>Integer constant</td><td>2</td></tr>
-  <tr><td>L</td><td>Integer constant</td><td>0</td></tr>
-  <tr><td>l</td><td>Lower registers</td><td>r0 to r15</td></tr>
+  <tr><td>l</td><td>Lower registers</td><td>r2 to r15</td></tr>
   <tr><td>M</td><td>8-bit integer constant</td><td>0 to 255</td></tr>
-  <tr><td>N</td><td>Integer constant</td><td>-1</td></tr>
-  <tr><td>O</td><td>Integer constant</td><td>8, 16, 24</td></tr>
-  <tr><td>P</td><td>Integer constant</td><td>1</td></tr>
-  <tr><td>Q</td><td>(GCC >= 4.2.x) A memory address based on Y or Z pointer with displacement.</td><td>&nbsp;</td></tr>
-  <tr><td>R</td><td>(GCC >= 4.3.x) Integer constant.</td><td>-6 to 5</td></tr>
+  <tr><td>m</td><td>a memory location</td><td></td></tr>
+  <tr><td>n</td><td>integer known at compile-time</td><td></td></tr>
+  <tr><td>X</td><td>any operand will fit</td><td></td></tr>
 </table>
 
 The selection of
@@ -543,7 +537,7 @@ problem:
 
 \code
 asm volatile("in %0,%1"    "\n\t"
-             "out %1, %2"  "\n\t" 
+             "out %1, %2"
              : "=&r" (input) 
              : "I" (_SFR_IO_ADDR(port)), "r" (output)
             );
@@ -560,7 +554,7 @@ swapping. Here is the code to swap high and low byte of a 16-bit value:
 \code
 asm volatile("mov __tmp_reg__, %A0" "\n\t"
              "mov %A0, %B0"         "\n\t"
-             "mov %B0, __tmp_reg__" "\n\t"
+             "mov %B0, __tmp_reg__"
              : "=r" (value)
              : "0" (value)
             );
@@ -580,7 +574,7 @@ asm volatile("mov __tmp_reg__, %A0" "\n\t"
              "mov %D0, __tmp_reg__" "\n\t"
              "mov __tmp_reg__, %B0" "\n\t"
              "mov %B0, %C0"         "\n\t"
-             "mov %C0, __tmp_reg__" "\n\t"
+             "mov %C0, __tmp_reg__"
              : "=r" (value)
              : "0" (value)
             );
@@ -597,7 +591,7 @@ asm volatile("mov __tmp_reg__, %A0" "\n\t"
              "mov %D0, __tmp_reg__" "\n\t"
              "mov __tmp_reg__, %B0" "\n\t"
              "mov %B0, %C0"         "\n\t"
-             "mov %C0, __tmp_reg__" "\n\t"
+             "mov %C0, __tmp_reg__"
              : "+r" (value));
 \endcode
 
@@ -656,7 +650,7 @@ asm volatile(
     "ld r24, %a0"       "\n\t"
     "inc r24"           "\n\t"
     "st %a0, r24"       "\n\t"
-    "sei"               "\n\t"
+    "sei"
     :
     : "e" (ptr)
     : "r24"
@@ -682,7 +676,7 @@ asm volatile(
     "ld __tmp_reg__, %a0"       "\n\t"
     "inc __tmp_reg__"           "\n\t"
     "st %a0, __tmp_reg__"       "\n\t"
-    "sei"                       "\n\t"
+    "sei"
     :
     : "e" (ptr)
 );
@@ -705,7 +699,7 @@ variable.
         "ld __tmp_reg__, %a1"       "\n\t"
         "inc __tmp_reg__"           "\n\t"
         "st %a1, __tmp_reg__"       "\n\t"
-        "out __SREG__, %0"          "\n\t"
+        "out __SREG__, %0"
         : "=&r" (s)
         : "e" (ptr)
     );
@@ -729,7 +723,7 @@ case is:
         "ld __tmp_reg__, %a1"       "\n\t"
         "inc __tmp_reg__"           "\n\t"
         "st %a1, __tmp_reg__"       "\n\t"
-        "out __SREG__, %0"          "\n\t"
+        "out __SREG__, %0"
         : "=&r" (s)
         : "e" (ptr)
         : "memory"
@@ -774,14 +768,15 @@ unique number on each \c asm statement. The following code had been taken from
 <tt>avr/include/iomacros.h</tt>:
 
 
-\verbatim#define loop_until_bit_is_clear(port,bit)  \
-        __asm__ __volatile__ (             \
-        "L_%=: " "sbic %0, %1" "\n\t"      \
-                 "rjmp L_%="               \
-                 : /* no outputs */        \
-                 : "I" (_SFR_IO_ADDR(port)),  \
-                   "I" (bit)    \
-        )
+\verbatim
+#define loop_until_bit_is_clear(port, bit) \
+   __asm volatile (                        \
+       "L_%=: sbic %0, %1" "\n\t"          \
+       "rjmp L_%="                         \
+       : /* no outputs */                  \
+       : "I" (_SFR_IO_ADDR(port)),         \
+         "I" (bit)                         \
+   )
 \endverbatim
 
 When used for the first time, \c L_%= may be translated to \c L_1404, the next
@@ -791,14 +786,15 @@ too.
 Another option is to use Unix-assembler style numeric labels.  They are
 explained in \ref faq_asmstabs.  The above example would then look like:
 
-\verbatim#define loop_until_bit_is_clear(port,bit)  \
-        __asm__ __volatile__ (             \
-        "1: " "sbic %0, %1" "\n\t"      \
-                 "rjmp 1b"               \
-                 : /* no outputs */        \
-                 : "I" (_SFR_IO_ADDR(port)),  \
-                   "I" (bit)    \
-        )
+\verbatim
+#define loop_until_bit_is_clear(port, bit)  \
+   __asm volatile (                         \
+      "1:  sbic %0, %1" "\n\t"              \
+      "rjmp 1b"                             \
+      : /* no outputs */                    \
+      : "I" (_SFR_IO_ADDR(port)),           \
+        "I" (bit)                           \
+   )
 \endverbatim
 
 
@@ -814,15 +810,14 @@ void delay(uint8_t ms)
 {
     uint16_t cnt;
     asm volatile (
-        "\n"
-        "L_dl1%=:" "\n\t"
-        "mov %A0, %A2" "\n\t"
-        "mov %B0, %B2" "\n"
-        "L_dl2%=:" "\n\t"
-        "sbiw %A0, 1" "\n\t"
-        "brne L_dl2%=" "\n\t"
-        "dec %1" "\n\t"
-        "brne L_dl1%=" "\n\t"
+        "L_dl1%=:"      "\n\t"
+        "mov %A0, %A2"  "\n\t"
+        "mov %B0, %B2"  "\n"
+        "L_dl2%=:"      "\n\t"
+        "sbiw %A0, 1"   "\n\t"
+        "brne L_dl2%="  "\n\t"
+        "dec %1"        "\n\t"
+        "brne L_dl1%="
         : "=&w" (cnt)
         : "r" (ms), "r" (delay_count)
         );
@@ -844,7 +839,7 @@ uint16_t inw(uint8_t port)
 {
     uint16_t result;
     asm volatile (
-        "in %A0,%1" "\n\t"
+        "in %A0,%1"       "\n\t"
         "in %B0,(%1) + 1"
         : "=r" (result)
         : "I" (_SFR_IO_ADDR(port))
