@@ -113,11 +113,11 @@
 #define INFINITY	__builtin_inf()
 
 
-#ifndef __ATTR_CONST__
+#if ! defined(__ATTR_CONST__) && ! defined(__DOXYGEN__)
 # define __ATTR_CONST__ __attribute__((__const__))
 #endif
 
-#ifndef __ATTR_ALWAYS_INLINE__
+#if ! defined(__ATTR_ALWAYS_INLINE__) && ! defined(__DOXYGEN__)
 #define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
 #endif
 

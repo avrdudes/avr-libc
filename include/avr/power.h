@@ -35,7 +35,7 @@
 #include <avr/io.h>
 #include <stdint.h>
 
-#ifndef __ATTR_ALWAYS_INLINE__
+#if ! defined(__ATTR_ALWAYS_INLINE__) && ! defined(__DOXYGEN__)
 #define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
 #endif
 
