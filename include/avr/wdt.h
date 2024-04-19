@@ -122,7 +122,7 @@
 
 #endif	/* !__DOXYGEN__ */
 
-
+#ifdef __DOXYGEN__
 /**
    \ingroup avr_watchdog
    Enable the watchdog timer, configuring it for expiry after
@@ -133,6 +133,8 @@
 
    See also the symbolic constants \c WDTO_15MS et al.
 */
+#define wdt_enable(timeout)
+#endif	/* __DOXYGEN__ */
 
 
 #if defined(__AVR_XMEGA__)
