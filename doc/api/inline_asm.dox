@@ -156,7 +156,6 @@ Notes on the various parts:
   Instead of \c volatile, \c __volatile or \c __volatile__ can be used.
 </dd>
 
-<dl>
 <dt><tt>code-string</tt></dt>
 <dd>
   A string literal that contains the code that is to be injected in the
@@ -632,7 +631,7 @@ operands, and the related constraints.
 
 \section inline_asm_print_modifiers Print Modifiers
 
-The %-operands in the assembly template can be adjusted by special
+The %-operands in the inline assembly template can be adjusted by special
 print-modify characters.  The one-letter modifier follows the \c \%
 and precedes the operand number like in <tt>"%a0"</tt>, or precedes the
 name in named operands like in <tt>"%a[address]"</tt>.

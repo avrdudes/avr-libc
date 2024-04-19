@@ -140,36 +140,30 @@ Extreme care should be taken that the entire application is
 compiled with a consistent set of register-allocated variables,
 including possibly used library functions.
 
-See \ref c_names_in_asm for more details.
-
 <small>Back to \ref faq_index.
 </small>
 
 \section faq_startup How to modify MCUCR or WDTCR early?
 
-The method of early initialization (<tt>MCUCR</tt>, <tt>WDTCR</tt> or
-anything else) is different (and more flexible) in the current
-version.  Basically, write a small assembler file which looks like
-this:
+Basically, write a small function which looks like this:
 
 \code
-;; begin xram.S
-
 #include <avr/io.h>
 
-        .section .init1,"ax",@progbits
+static __attribute__((used, unused, naked, section(".init3")))
+void init_MCUCR (void);
 
-        ldi r16,_BV(SRE) | _BV(SRW)
-        out _SFR_IO_ADDR(MCUCR),r16
-
-;; end xram.S
+void init_MCUCR (void)
+{
+    MCUCR = _BV(SRE) | _BV(SRW);
+}
 \endcode
 
-Assemble it, link the resulting <tt>xram.o</tt> with other files in
-your program, and this piece of code will be inserted in
-initialization code, which is run right after reset.  See the linker
+Do not call this function by hand! This piece of code will be inserted in
+startup code, which is run right after reset.  See the linker
 script for comments about the new <tt>.init</tt><em>N</em> sections
-(which one to use, etc.).
+(which one to use, etc.).  For the meaning of the attributes,
+see \ref faq_softreset
 
 The advantage of this method is that you can insert any initialization
 code you want (just remember that this is very early startup -- no
@@ -225,7 +219,7 @@ However, using the macro often makes the program better readable.
 (<tt>CTC2</tt> = 1).  Make OC2 (<tt>PD7</tt>) an output.
 
 \code
-	TCCR2 = _BV(COM20)|_BV(CTC2)|_BV(CS20);
+	TCCR2 = _BV(COM20) | _BV(CTC2) | _BV(CS20);
 	DDRD = _BV(PD7);
 \endcode
 
@@ -253,7 +247,7 @@ compiled.  Among them are:
   external references.  (This could perhaps be fixed.)
 
 - Some of the supplied include files are not C++ safe, i. e. they need
-  to be wrapped into \code extern "C" { . . . } \endcode
+  to be wrapped into \code extern "C" { ... } \endcode
   (This could certainly be fixed, too.)
 
 - Exceptions are not supported.  Since exceptions are enabled by
@@ -412,8 +406,8 @@ asm volatile ("sts %0, __zero_reg__" :: "n" (& PORTB));
 
 When the I/O address of the register is required, one way is to use
 \c _SFR_IO_ADDR to get the I/O address like in the example above.
-A different approach is to use inline asm print modifier <tt>%i</tt> supported
-since avr-gcc v4.7:
+A different approach is to use inline asm \ref inline_asm_print_modifiers
+"print modifier" <tt>%i</tt> supported since avr-gcc v4.7:
 
 \code
 asm volatile ("out %i0, __zero_reg__" :: "n" (& PORTB));
@@ -1285,7 +1279,7 @@ programmed fuse cells read out as bit value 0.
 
 \section faq_asmops Which AVR-specific assembler operators are available?
 
-See \ref ass_pseudoops.
+See \ref ass_pseudoops "Pseudo-Ops" and \ref assembly_operand_modifiers.
 
 <small>Back to \ref faq_index.</small>
 
@@ -1462,9 +1456,8 @@ to then disable the watchdog after a reset (e.g., after a soft reset):
 ...
 
 // Function Pototype
-static void wdt_init(void) __attribute__((used, unused, naked, section(".init3")));
-
-...
+static  __attribute__((used, unused, naked, section(".init3")))
+void wdt_init (void);
 
 // Function Implementation
 void wdt_init (void)
@@ -1475,9 +1468,11 @@ void wdt_init (void)
 \endcode
 The code is placed in section \c .init3 so that it is executed as part of the
 normal startup procedure.  The \c naked attribute is required so that the
-code does not <tt>ret</tt>urn (code in init sections is executed as it
-is located; the code is not called).  The \c used attribute makes sure that the
-compiler does not throw the semmingly unused function away.
+code does not <tt>ret</tt>urn (Code in init sections is executed as it
+is located; the code is not called, and code from one init section
+falls through to the code in the next one).
+The \c used attribute makes sure that the
+compiler does not throw the seemingly unused function away.
 The \c unused attributes avoids warnings about unused code.
 
 <small>Back to \ref faq_index.</small>
