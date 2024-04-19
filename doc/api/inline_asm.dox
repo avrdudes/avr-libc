@@ -30,24 +30,37 @@
 AVR-GCC<br>
 Inline Assembler Cookbook
 
-About this Document
+- \ref inline_asm_about
+- \ref inline_asm_anatomy
+- \ref inline_asm_special_sequences
+- \ref inline_asm_constraints
+  - \ref constraint_modifiers "Constraint Modifiers"
+  - \ref instructions_and_constraints "Instructions and Constraints"
+- \ref inline_asm_print_modifiers
+- \ref assembly_operand_modifiers
+- \ref inline_asm_examples
+  - \ref inline_asm_swap_nibbles
+  - \ref inline_asm_swap_bytes
+  - \ref inline_asm_access_memory
+  - \ref builtin_constant_p_in_inline_functions
+         "Inline Functions and __builtin_constant_p"
+  - \ref inline_asm_jumping
+- \ref inline_asm_local_vars
+  - \ref inline_asm_abi_interface
+- \ref c_names_in_asm
 
-The GNU C compiler for Atmel AVR RISC processors offers, to embed assembly
-language code into C programs. This cool feature may be used for manually
-optimizing time critical parts of the software or to use specific processor
-instruction, which are not available in the C language.
+\section inline_asm_about About this Document
 
-Because of a lack of documentation, especially for the AVR version of the
-compiler, it may take some time to figure out the implementation details by
-studying the compiler and assembler source code. There are also a few sample
-programs available in the net. Hopefully this document will help to increase
-their number.
+The GNU C/C++ compiler for AVR RISC processors offers to embed assembly
+language code into C/C++ programs. This cool feature may be used for manually
+optimizing time critical parts of the software, or to use specific processor
+instructions which are not available in the C language.
 
-It's assumed, that you are familiar with writing AVR assembler programs,
-because this is not an AVR assembler programming tutorial. It's not a C
-language tutorial either.
+It's assumed that you are familiar with writing AVR assembler programs,
+because this is not an AVR assembler programming tutorial. It's not a C/C++
+tutorial either.
 
-Note that this document does not cover file written completely in assembler
+Note that this document does not cover files written completely in assembly
 language, refer to \ref assembler for this.
 
 Copyright (C) 2001-2002 by egnite Software GmbH
@@ -58,849 +71,1221 @@ all copies. Permission is granted to copy and distribute modified versions of
 this manual provided that the entire resulting derived work is distributed
 under the terms of a permission notice identical to this one.
 
-This document describes version 3.3 of the compiler. There may be some
-parts, which hadn't been completely understood by the author himself and not
-all samples had been tested so far. Because the author is German and not
-familiar with the English language, there are definitely some typos and syntax
-errors in the text. As a programmer the author knows, that a wrong
-documentation sometimes might be worse than none. Anyway, he decided to offer
-his little knowledge to the public, in the hope to get enough response to
-improve this document. Feel free to contact the author via e-mail. For the
-latest release check http://www.ethernut.de/.
+This document describes version 4.7 of the compiler or newer.
 
 Herne, 17th of May 2002
 Harald Kipp
 harald.kipp-at-egnite.de
 
-\note As of 26th of July 2002, this document has been merged into the
-documentation for avr-libc. The latest version is now available at 
-http://savannah.nongnu.org/projects/avr-libc/.
+\section inline_asm_anatomy The Anatomy of a GCC asm Statement
 
-\section gcc_asm GCC asm Statement
+A GCC inline assembly statement starts with the keyword \c asm, \c __asm
+or \c __asm__, where the first one is not available in strict ANSI mode.
 
-Let's start with a simple example of reading a value from port D:
-
+In its simplest form, the inline assembly statement has no operands and
+injects just one instruction into the code stream, like in
 \code
-asm("in %0, %1" : "=r" (value) : "I" (_SFR_IO_ADDR(PORTD)) );
+__asm ("nop");
 \endcode
+In its generic form, an asm statements can have one of the following three
+forms:
 
-Each \c asm statement is devided by colons into (up to) four parts:
+<dl>
+<dt>A simple asm without operands</dt>
+<dd>
+  \code{none}
+  __asm (code-string);
+  \endcode
+  \c code-string is a string literal that will be added as is into the
+  generated assembly code.  This even applies to the \% character.
+  The only replacement is that \\n and \\t are interpreted as newline resp.
+  TAB character.
 
--# The assembler instructions, defined as a single string constant:
-   \code "in %0, %1" \endcode
--# A list of output operands, separated by commas. Our example uses just one:
-   \code "=r" (value) \endcode
--# A comma separated list of input operands. Again our example uses one
-   operand only: \code "I" (_SFR_IO_ADDR(PORTD)) \endcode
--# Clobbered registers, left empty in our example.
+  This type of asm statement may occur at top level, outside any function
+  as global asm.  When its placement relative to functions is important,
+  consider \c -fno-toplevel-reorder.
+</dd>
 
-You can write assembler instructions in much the same way as you would write
-assembler programs. However, registers and constants are used in a different
-way if they refer to expressions of your C program. The connection between
-registers and C operands is specified in the second and third part of the
-<tt>asm</tt> instruction, the list of input and output operands, respectively.
-The general form is
+<dt>An asm with operands</dt>
+<dd>
+  \code{none}
+  __asm volatile (code-string : output-operands : input-operands : clobbers);
+  \endcode
+  This is the most widely used form of an asm statement.  It must be located
+  in a function.
 
-\code
-asm(code : output operand list : input operand list [: clobber list]);
-\endcode
+  \c output-operands, \c input-operands and \c clobbers are comma-separated
+  lists of operands resp. clobber specifications.  Any of them may be empty,
+  for example when the asm has no outputs.  At least one \c : (colon) must be
+  present, otherwise it will be a simple asm without operands and without
+  \c \% replacements.
+</dd>
 
-In the code section, operands are referenced by a percent sign followed by a
-single digit. \c %0 refers to the first \c %1 to the second operand and so
-forth. From the above example:
+<dt>An asm goto statement</dt>
+<dd>
+  \code{none}
+  __asm goto (code-string : : input-operands : clobbers : labels);
+  \endcode
+  Like the asm above, but \c labels is a comma-separated list of C/C++
+  code labels which would be valid in a \c goto statement.
+  And \c output-operands must be empty, because it is impossible to generate
+  output reloads after the code has transferred control to one of the labels.
+  <br>
+  As there are no output operands, asm goto is implicitly volatile.
+  When \c volatile is specified explicitly, the \c goto keyword may be
+  placed after or before the \c volatile.
+</dd>
+</dl>
 
-\c %0 refers to <tt>"=r" (value)</tt> and<br>
-\c %1 refers to <tt>"I" (_SFR_IO_ADDR(PORTD))</tt>.
+Notes on the various parts:
 
-This may still look a little odd now, but the syntax of an operand list will
-be explained soon. Let us first examine the part of a compiler listing which
-may have been generated from our example:
+<dl>
+<dt>Volatility</dt>
+<dd>
+  Keyword  \c volatile is optional and means that the asm statement has side
+  effects that are not expressed in terms of the operands or clobbers.
+  The asm statement must not be optimized away or reordered with respect
+  to other volatile statements like volatile memory accesses or other
+  volatile asm.
 
-\code
-        lds r24,value
-/* #APP */
-        in r24, 12
-/* #NOAPP */
-        sts value,r24
-\endcode
+  Any asm statement without \c output-operands is implicitly volatile.
 
-The comments have been added by the compiler to inform the assembler that the
-included code was not generated by the compilation of C statements, but by
-inline assembler statements. The compiler selected register \c r24 for storage
-of the value read from <tt>PORTD</tt>.  The compiler could have selected any
-other register, though.  It may not explicitely load or store the value and it
-may even decide not to include your assembler code at all. All these decisions
-are part of the compiler's optimization strategy. For example, if you never
-use the variable value in the remaining part of the C program, the compiler
-will most likely remove your code unless you switched off optimization. To
-avoid this, you can add the volatile attribute to the \c asm statement:
+  A non-volatile asm statement with output operands that are all unused
+  may be optimized away when all output operands are unused.
 
-\code
-asm volatile("in %0, %1" : "=r" (value) : "I" (_SFR_IO_ADDR(PORTD)));
-\endcode
+  Instead of \c volatile, \c __volatile or \c __volatile__ can be used.
+</dd>
 
-Alternatively, operands can be given names.  The name is prepended in
-brackets to the constraints in the operand list, and references to the
-named operand use the bracketed name instead of a number after the %
-sign.  Thus, the above example could also be written as
+<dl>
+<dt><tt>code-string</tt></dt>
+<dd>
+  A string literal that contains the code that is to be injected in the
+  assembly code generated by the compiler.  \c %-expressions are replaced
+  by the string representations of the operands, and the number of lines
+  is determined to estimate the code size of the asm.<br>
+  Apart from that, <b>the compiler does not analyze the code provided in
+	the code template.</b><br>
+  This means that the code appears to the compiler <em>as if it was
+	executed in one parallel chunk, all at once</em>.  It is important to
+  keep that in mind, in particular for cases where input and output operands
+  may overlap.
+</dd>
 
-\code
-asm("in %[retval], %[port]" :
-    [retval] "=r" (value) :
-    [port] "I" (_SFR_IO_ADDR(PORTD)) );
-\endcode
+<dt><tt>output-operands</tt></dt>
+<dt><tt>input-operands</tt></dt>
+<dd>
+  A comma-separated list of operands, which may take the following forms.
+  In any case, the first operand can be referred to as \c "%0" in
+  \c code-string, the second one as \c "%1" etc.
+  <dl>
+  <dt><tt>"constraints" (expr)</tt></dt>
+  <dd>
+    \c expr is a C expression that's an input or output (or both) to the
+    asm statement. An output expression must be an lvalue, i.e. it must
+    be valid to assign a value to it.
+    <br>
+    \c "constraints" is a string literal with \ref constraints and
+    \ref constraint_modifiers "constraint modifiers".
+    For example,
+    constraint \c "r" stands for <em>general-purpose register</em>.
+    A simple input operand would be
+    \code
+    "r" (value + 1)
+    \endcode
+    The compiler computes <tt>value + 1</tt> and supplies it in some
+    general-purpose register R2...R31.  In many cases, an upper d-register
+    R16...R31 is required for instructions like \c LDI or \c ANDI.
+    A respective output operand specification is
+    \code
+    "=d" (result)
+    \endcode
+    <b>Notice that this operand may overlap with input operands!</b><br>
+    When an operand is written before all input operands are consumed, then
+    in almost all cases the output operand requires an early-clobber modifier
+    \c \& so that it won't overlap with any input operand:
+    \code
+    "=&d" (result)
+    \endcode
+    An operand that's both an output and an input can be expressed with
+    the \c + constraint modifier:
+    \code
+    "+d" (result)
+    \endcode
+    Such an operand is both output and input, and hence it won't overlap
+    with other operands.
+  </dd>
+  <dt><tt>[name] "constraints" (expr)</tt></dt>
+  <dd>
+    Like above. In addition, a named operand can be referred to as
+    <tt>\%[name]</tt> in \c code-string.  This is useful in long asm
+    statements with many operands.
+  </dd>
+  </dl>
+</dd>
 
-The last part of the \c asm instruction, the clobber list, is mainly used to
-tell the compiler about modifications done by the assembler code. This part
-may be omitted, all other parts are required, but may be left empty. If your
-assembler routine won't use any input or output operand, two colons must still
-follow the assembler code string. A good example is a simple statement to
-disable interrupts:
+<dt><tt>clobbers</tt></dt>
+<dd>
+  A comma-separated list of string literals like \c "16", "r16" or "memory".
 
-\code
-asm volatile("cli"::);
-\endcode
+  The first two clobbers mean that the asm destroys register R16. Only the
+  lower-case form is allowed, and register names like Z are not recognized.
 
-\section asm_code Assembler Code
+  \c "memory" means that the asm touches memory in some way.
+  When the asm writes to some RAM location for example, the compiler must not
+  optimize RAM accesses across the asm because the memory may change.
 
-You can use the same assembler instruction mnemonics as you'd use with any
-other AVR assembler. And you can write as many assembler statements into one
-code string as you like and your flash memory is able to hold.
+  Clobbering \c __tmp_reg__ by means of \c "r0" has no effect, but such
+  a clobber may be added to indicate to the reader that the asm clobbers R0.
 
-\note The available assembler directives vary from one assembler to another.
+  Clobbering \c __zero_reg__ by means of \c "r1" has no effect.
+  When the asm destroys the zero register, for example by means of
+  a \c MUL instruction, then the code must restore the register at
+  the end by means of <tt>"clr __zero_reg__"</tt>
+</dd>
 
-To make it more readable, you should put each statement on a seperate line:
+<dt>The size of an asm\anchor inline_asm_size</dt>
+<dd>
+  The code size of an asm statement is the number of lines multiplied by
+  4&nbsp;bytes, the maximal possible AVR instruction length.
+  The length is needed when (conditional) jumps cross the
+  asm statement in order to compute (upper bounds for) jump offsets
+  of PC-relative jumps.
 
-\code
-asm volatile("nop\n\t"
-             "nop\n\t"
-             "nop\n\t"
-             "nop\n\t"
-             ::);
-\endcode
+  The number of lines is one plus the number of line breaks in
+  \c code-string.  These may be physical line breaks from \c \\n characters
+  and logical line breaks from \c \$ characters.
+</dd>
+</dl>
 
-The linefeed and tab characters will make the assembler listing generated by
-the compiler more readable. It may look a bit odd for the first time, but
-that's the way the compiler creates it's own assembler code.
+Before we start with the first examples, we list all the bells and
+whistles that can be used to compose an inline assembly statement:
+\ref special_sequences "special sequences",
+\ref constraints,
+\ref constraint_modifiers "constraint modifiers",
+\ref print_modifiers "print modifiers" and
+\ref operand_modifiers "operand modifiers".
 
-You may also make use of some special registers.
+\section inline_asm_special_sequences Special Sequences
+
+There are special sequences that can be used in the assembly template.
 
 <table>
-  <tr>
-    <td><b>Symbol</b></td>
-    <td><b>Register</b></td>
-  </tr>
-  <tr>
-    <td><tt>__SREG__</tt></td>
-    <td>Status register at address 0x3F</td>
-  </tr>
-  <tr>
-    <td><tt>__SP_H__</tt></td>
-    <td>Stack pointer high byte at address 0x3E</td>
-  </tr>
-  <tr>
-    <td><tt>__SP_L__</tt></td>
-    <td>Stack pointer low byte at address 0x3D</td>
-  </tr>
-  <tr>
-    <td><tt>__tmp_reg__</tt></td>
-    <td>Register r0, used for temporary storage</td>
-  </tr>
-  <tr>
-    <td><tt>__zero_reg__</tt></td>
-    <td>Register r1, always zero</td>
-  </tr>
+<caption id="special_sequences">Inline asm Special Sequences</caption>
+<tr>
+  <th>Sequence
+  <th>Description
+</tr>
+<tr>
+  <td><tt>__SREG__</tt></td>
+  <td>The I/O address of the status register SREG at 0x3F</td>
+</tr>
+<tr>
+  <td><tt>__tmp_reg__</tt></td>
+  <td>The temporary register R0 (R16 on reduced Tiny)</td>
+</tr>
+<tr>
+  <td><tt>__zero_reg__</tt></td>
+  <td>The zero register R1, always zero (R17 on reduced Tiny)</td>
+</tr>
+<tr>
+  <td><tt>$</tt>
+  <td>A logical line separator, used to separate multiple instruction in
+    one physical line
+</tr>
+<tr>
+  <td><tt>\\n</tt>
+  <td>A physical newline, used to separate multiple instructions
+</tr>
+<tr>
+  <td><tt>\\t</tt>
+  <td>A TAB character, can be used for better legibility of the generated asm
+</tr>
+<tr>
+  <td><tt>\\\"</tt>
+  <td>A \c \" character (double quote)
+</tr>
+<tr>
+  <td><tt>\\\\</tt>
+  <td>A \c \\ character (backslash)
+</tr>
+<tr>
+  <td><tt>\%\%</tt>
+  <td>A \c \% charater (percent)
+</tr>
+<tr>
+  <td><tt>%~</tt>
+  <td>\c "r" or \c "", used to construct \c call or \c rcall by means of
+    \c "%~call", depending on the architecture
+</tr>
+<tr>
+  <td><tt>%!</tt>
+  <td>\c "" or \c "e", used to construct indirect calls like \c icall
+    or \c eicall by means of \c "%!icall", depending on the architecture
+</tr>
+<tr>
+  <td><tt>%=</tt>
+  <td>A number that's unique for the compilation unit and the respective
+    inline asm code, used to construct unique labels
+</tr>
+<tr>
+  <th>Comment
+  <th>Description
+</tr>
+<tr>
+  <td><tt>; text</tt>
+  <td>A single-line assembly comment that extends to the end of the
+    physical line
+</tr>
+<tr>
+  <td><tt>/* text *<!-- -->/</tt>
+  <td>A multi-line C comment
+</tr>
 </table>
 
-Register \c r0 may be freely used by your assembler code and need not be
-restored at the end of your code. It's a good idea to use \c __tmp_reg__ and
-\c __zero_reg__ instead of \c r0 or \c r1, just in case a new compiler version
-changes the register usage definitions.
+- Moreover, the following I/O addresses are defined provided the device
+supports the respective SFR: <tt>__SP_L__</tt>, <tt>__SP_H__</tt>,
+<tt>__CCP__</tt>, <tt>__RAMPX__</tt>, <tt>__RAMPY__</tt>,
+<tt>__RAMPZ__</tt>, <tt>__RAMPD__</tt>.
 
-\section io_ops Input and Output Operands
+- Register \c __tmp_reg__ may be freely used by inline assembly code and
+need not be restored at the end of the code.
 
-Each input and output operand is described by a constraint string followed by
-a C expression in parantheses. avr-gcc knows the following
-constraint characters:
+- Register \c __zero_reg__ contains a value of zero.  When that value is
+destroyed, for example by a \c MUL instruction, its value has to be
+restored at the end of the code by means of
+\code
+clr __zero_reg__
+\endcode
 
-\note The most up-to-date and detailed information on contraints for the avr
-can be found in the gcc manual.
+- In inline asm without operands (i.e without a single colon), a \c \% will
+always insert a single \c \%. No \c %-codes are available.
 
-\note The \c x register is \c r27:r26, the \c y register is \c r29:r28, and
-the \c z register is <tt>r31:r30</tt>
+Sequences like \c __SREG__ are not evaluated as part of the inline asm,
+they are just copied to the asm code as they are.  At the top of each
+assembly file, the compiler prints definitions like
+\code
+__SREG__ = 0x3f
+\endcode
+so that they can also be used in inline assembly.
+
+\section inline_asm_constraints Constraints
+
+The most up-to-date and detailed information on constraints for the AVR
+can be found in the
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Constraints">avr-gcc Wiki</a>.
 
 <table>
-  <tr><td><b>Constraint</b></td><td><b>Used for</b></td><td><b>Range</b></td></tr>
-  <tr><td>a</td><td>Simple upper registers</td><td>r16 to r23</td></tr>
-  <tr><td>b</td><td>Base pointer registers pairs</td><td>y, z</td></tr>
-  <tr><td>d</td><td>Upper register</td><td>r16 to r31</td></tr>
-  <tr><td>e</td><td>Pointer register pairs</td><td>x, y, z</td></tr>
-  <tr><td>q</td><td>Stack pointer register</td><td>SPH:SPL</td></tr>
-  <tr><td>r</td><td>Any register</td><td>r2 to r31</td></tr>
-  <tr><td>w</td><td>Special upper register pairs</td><td>r24, r26, r28, r30</td></tr>
-  <tr><td>x</td><td>Pointer register pair X</td><td>x (r27:r26)</td></tr>
-  <tr><td>y</td><td>Pointer register pair Y</td><td>y (r29:r28)</td></tr>
-  <tr><td>z</td><td>Pointer register pair Z</td><td>z (r31:r30)</td></tr>
-  <tr><td>I</td><td>6-bit positive integer constant</td><td>0 to 63</td></tr>
-  <tr><td>J</td><td>6-bit negative integer constant</td><td>-63 to 0</td></tr>
-  <tr><td>l</td><td>Lower registers</td><td>r2 to r15</td></tr>
-  <tr><td>M</td><td>8-bit integer constant</td><td>0 to 255</td></tr>
-  <tr><td>m</td><td>a memory location</td><td></td></tr>
-  <tr><td>n</td><td>integer known at compile-time</td><td></td></tr>
-  <tr><td>X</td><td>any operand will fit</td><td></td></tr>
+  <caption id="constraints">Inline asm Operand Constraints</caption>
+  <tr>
+    <th>Constraint
+    <th>Registers
+    <th>Range
+  </tr>
+  <tr><td>\c a</td><td>Simple upper registers that support \c FMUL</td>
+    <td>R16 ... R23</td></tr>
+  <tr><td>\c b</td><td>Base pointer registers that support \c LDD, \c STD</td>
+    <td>Y, Z (R28 ... R31)</td></tr>
+  <tr><td>\c d</td><td>Upper registers</td><td>R16 ... R31</td></tr>
+  <tr><td>\c e</td><td>Pointer registers that support \c LD, \c ST</td>
+    <td>X, Y, Z (R26 ... R31)</td></tr>
+  <tr><td>\c l</td><td>Lower registers</td><td>R2 ... R15</td></tr>
+  <tr><td>\c r</td><td>Any register</td><td>R2 ... R31</td></tr>
+  <tr><td>\c w</td><td>Upper registers that support \c ADIW</td>
+    <td>R24 ... R31</td></tr>
+  <tr><td>\c x</td><td>X pointer registers</td><td>R26, R27</td></tr>
+  <tr><td>\c y</td><td>Y pointer registers</td><td>R28, R29</td></tr>
+  <tr><td>\c z</td><td>Z pointer registers</td><td>R30, R31</td></tr>
+  <tr>
+    <th>Constraint
+    <th>Constant
+    <th>Range
+  </tr>
+  <tr><td>\c I</td><td>6-bit unsigned integer constant</td><td>0 to 63</td></tr>
+  <tr><td>\c J</td><td>6-bit negative integer constant</td><td>&minus;63 to 0</td></tr>
+  <tr><td>\c M</td><td>8-bit unsigned integer constant</td><td>0 to 255</td></tr>
+  <tr><td>\c n</td><td>Integer constant</td><td></td></tr>
+  <tr><td>\c i</td><td>Immediate value known at link-time, like the
+    address of a variable in static storage</td><td></td></tr>
+  <tr><td>\c EF</td><td>Floating-point constant</td><td></td></tr>
+  <tr><td>\c Ynn</td><td>Fixed-point or integer constant</td><td></td></tr>
+  <tr>
+    <th>Constraint
+    <th>Explanation
+    <th>Notes
+  </tr>
+  <tr><td>\c m</td><td>A memory location</td><td></td></tr>
+  <tr><td>\c X</td><td>Any valid operand</td><td></td></tr>
+  <tr><td>\c 0 ... \c 9</td><td>Matches the respective operand number</td><td></td></tr>
+</table>
+
+\anchor constraint_modifiers
+- Constraints without a modifier specify input operands.
+- Constraints with a modifier specify output operands.
+- More than one constaint like in \c "rn" specifies the union of the
+  specified constraints; \c "r" and \c "n" in this case.
+- All constraints listed above are single-letter constraints, except \c Ynn
+  which is a 3-letter constraint.
+
+Constraint modifiers are:
+
+<table>
+  <caption>Constraint Modifiers</caption>
+  <tr>
+    <th>Modifier
+    <th>Meaning
+  </tr>
+  <tr>
+    <td>\c =
+    <td>Output-only operand. Without \c \& it may overlap with
+      input operands
+  </tr>
+  <tr>
+    <td>\c +
+    <td>Output operand that's also an input</td>
+  </tr>
+  <tr>
+    <td>\c =\&
+    <td>"Early-clobber". Register should be used for output only
+    and won't overlap with any input operand(s)
+  </tr>
 </table>
 
 The selection of
-the proper contraint depends on the range of the constants or registers, which
+the proper constraint depends on the range of the constants or registers, which
 must be acceptable to the AVR instruction they are used with. The C compiler
 doesn't check any line of your assembler code. But it is able to check the
 constraint against your C expression. However, if you specify the wrong
 constraints, then the compiler may silently pass wrong code to the assembler.
 And, of course, the assembler will fail with some cryptic output or internal
-errors. For example, if you specify the constraint \c "r" and you are using
-this register with an \c "ori" instruction in your assembler code, then the
-compiler may select any register. This will fail, if the compiler chooses
-<tt>r2</tt> to \c r15. (It will never choose \c r0 or \c r1, because these are
+errors, or in the worst case wrong code may be the result.
+
+For example, if you specify the constraint \c "r" and you are using
+this register with an \c ORI instruction, then the
+compiler may select any register. This will fail if the compiler chooses
+\c R2 to \c R15. (It will never choose \c R0 or \c R1, because these are
 uses for special purposes.) That's why the correct constraint in that case is
 <tt>"d"</tt>. On the other hand, if you use the constraint <tt>"M"</tt>, the
-compiler will make sure that you don't pass anything else but an 8-bit value.
-Later on we will see how to pass multibyte expression results to the
-assembler code.
+compiler will make sure that you don't pass anything else but an 8-bit
+unsigned integer value known at compile-time.
 
-The following table shows all AVR assembler mnemonics which require operands,
-and the related contraints. Because of the improper constraint definitions in
-version 3.3, they aren't strict enough. There is, for example, no
-constraint, which restricts integer constants to the range 0 to 7 for bit set
-and bit clear operations.
+The following table shows all AVR assembler mnemonics which require
+operands, and the related constraints.
 
 <table>
-  <tr>
-    <td><b>Mnemonic</b></td>
-    <td><b>Constraints</b></td>
-    <td> </td>
-    <td><b>Mnemonic</b></td>
-    <td><b>Constraints</b></td>
-  </tr>
-  <tr>
-    <td>adc</td>
-    <td>r,r</td>
-    <td> </td>
-    <td>add</td>
-    <td>r,r</td>
-  </tr>
-  <tr>
-    <td>adiw</td>
-    <td>w,I</TD>
-    <td> </td>
-    <td>and</td>
-    <td>r,r</td>
-  </tr>
-  <tr>
-    <td>andi</td>
-    <td>d,M</TD>
-    <td> </td>
-    <td>asr</td>
-    <td>r</td>
-  </tr>
-  <tr>
-    <td>bclr</td>
-    <td>I</TD>
-    <td> </td>
-    <td>bld</td>
-    <td>r,I</TD>
-  </tr>
-  <tr>
-    <td>brbc</td>
-    <td>I,label</td>
-    <td> </td>
-    <td>brbs</td>
-    <td>I,label</td>
-  </tr>
-  <tr>
-    <td>bset</td>
-    <td>I</TD>
-    <td> </td>
-    <td>bst</td>
-    <td>r,I</TD>
-  </tr>
-  <tr>
-    <td>cbi</td>
-    <td>I,I</TD>
-    <td> </td>
-    <td>cbr</td>
-    <td>d,I</TD>
-  </tr>
-  <tr>
-    <td>com</td>
-    <td>r</td>
-    <td> </td>
-    <td>cp</td>
-    <td>r,r</td>
-  </tr>
-  <tr>
-    <td>cpc</td>
-    <td>r,r</td>
-    <td> </td>
-    <td>cpi</td>
-    <td>d,M</TD>
-  </tr>
-  <tr>
-    <td>cpse</td>
-    <td>r,r</td>
-    <td> </td>
-    <td>dec</td>
-    <td>r</td>
-  </tr>
-  <tr>
-    <td>elpm</td>
-    <td>t,z</td>
-    <td> </td>
-    <td>eor</td>
-    <td>r,r</td>
-  </tr>
-  <tr>
-    <td>in</td>
-    <td>r,I</TD>
-    <td> </td>
-    <td>inc</td>
-    <td>r</td>
-  </tr>
-  <tr>
-    <td>ld</td>
-    <td>r,e</td>
-    <td> </td>
-    <td>ldd</td>
-    <td>r,b</td>
-  </tr>
-  <tr>
-    <td>ldi</td>
-    <td>d,M</TD>
-    <td> </td>
-    <td>lds</td>
-    <td>r,label</td>
-  </tr>
-  <tr>
-    <td>lpm</td>
-    <td>t,z</td>
-    <td> </td>
-    <td>lsl</td>
-    <td>r</td>
-  </tr>
-  <tr>
-    <td>lsr</td>
-    <td>r</td>
-    <td> </td>
-    <td>mov</td>
-    <td>r,r</td>
-  </tr>
-  <tr>
-    <td>movw</td>
-    <td>r,r</td>
-    <td> </td>
-    <td>mul</td>
-    <td>r,r</td>
-  </tr>
-  <tr>
-    <td>neg</td>
-    <td>r</td>
-    <td> </td>
-    <td>or</td>
-    <td>r,r</td>
-  </tr>
-  <tr>
-    <td>ori</td>
-    <td>d,M</TD>
-    <td> </td>
-    <td>out</td>
-    <td>I,r</td>
-  </tr>
-  <tr>
-    <td>pop</td>
-    <td>r</td>
-    <td> </td>
-    <td>push</td>
-    <td>r</td>
-  </tr>
-  <tr>
-    <td>rol</td>
-    <td>r</td>
-    <td> </td>
-    <td>ror</td>
-    <td>r</td>
-  </tr>
-  <tr>
-    <td>sbc</td>
-    <td>r,r</td>
-    <td> </td>
-    <td>sbci</td>
-    <td>d,M</TD>
-  </tr>
-  <tr>
-    <td>sbi</td>
-    <td>I,I</TD>
-    <td> </td>
-    <td>sbic</td>
-    <td>I,I</TD>
-  </tr>
-  <tr>
-    <td>sbiw</td>
-    <td>w,I</TD>
-    <td> </td>
-    <td>sbr</td>
-    <td>d,M</TD>
-  </tr>
-  <tr>
-    <td>sbrc</td>
-    <td>r,I</TD>
-    <td> </td>
-    <td>sbrs</td>
-    <td>r,I</TD>
-  </tr>
-  <tr>
-    <td>ser</td>
-    <td>d</td>
-    <td> </td>
-    <td>st</td>
-    <td>e,r</td>
-  </tr>
-  <tr>
-    <td>std</td>
-    <td>b,r</td>
-    <td> </td>
-    <td>sts</td>
-    <td>label,r</td>
-  </tr>
-  <tr>
-    <td>sub</td>
-    <td>r,r</td>
-    <td> </td>
-    <td>subi</td>
-    <td>d,M</TD>
-  </tr>
-  <tr>
-    <td>swap</td>
-    <td>r</td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
-  </tr>
+<caption id="instructions_and_constraints">AVR Instructions and
+  Constraints</caption>
+<tr>
+  <th>Mnemonic
+  <th>Constraints
+  <td>
+  <th>Mnemonic
+  <th>Constraints
+</tr>
+<tr>
+  <td><tt>adc</tt>    <td><tt>r,r</tt>
+  <td rowspan="36">
+  <td><tt>add</tt>    <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>adiw</tt>   <td><tt>w,I</tt>
+  <td><tt>and</tt>    <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>andi</tt>   <td><tt>d,M</tt>
+  <td><tt>asr</tt>    <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>bclr</tt>   <td><tt>I</tt>
+  <td><tt>bld</tt>    <td><tt>r,I</tt>
+</tr>
+<tr>
+  <td><tt>brbc</tt>   <td><tt>I,label</tt>
+  <td><tt>brbs</tt>   <td><tt>I,label</tt>
+</tr>
+<tr>
+  <td><tt>bset</tt>   <td><tt>I</tt>
+  <td><tt>bst</tt>    <td><tt>r,I</tt>
+</tr>
+<tr>
+  <td><tt>call</tt>   <td><tt>i</tt>
+  <td><tt>cbi</tt>    <td><tt>I,I</tt>
+</tr>
+<tr>
+  <td><tt>cbr</tt>    <td><tt>d,I</tt>
+  <td><tt>clr</tt>    <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>com</tt>    <td><tt>r</tt>
+  <td><tt>cp</tt>     <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>cpc</tt>    <td><tt>r,r</tt>
+  <td><tt>cpi</tt>    <td><tt>d,M</tt>
+</tr>
+<tr>
+  <td><tt>cpse</tt>   <td><tt>r,r</tt>
+  <td><tt>dec</tt>    <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>elpm</tt>   <td><tt>r,z</tt>
+  <td><tt>eor</tt>    <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>fmul</tt>   <td><tt>a,a</tt>
+  <td><tt>fmuls</tt>  <td><tt>a,a</tt>
+</tr>
+<tr>
+  <td><tt>fmulsu</tt> <td><tt>a,a</tt>
+  <td><tt>in</tt>     <td><tt>r,I</tt>
+</tr>
+<tr>
+  <td><tt>inc</tt>    <td><tt>r</tt>
+  <td><tt>jmp</tt>    <td><tt>i</tt>
+</tr>
+<tr>
+  <td><tt>lac</tt>    <td><tt>z,r</tt>
+  <td><tt>las</tt>    <td><tt>z,r</tt>
+</tr>
+<tr>
+  <td><tt>lat</tt>    <td><tt>z,r</tt>
+  <td><tt>ld</tt>     <td><tt>r,e</tt>
+</tr>
+<tr>
+  <td><tt>ldd</tt>    <td><tt>r,b</tt>
+  <td><tt>ldi</tt>    <td><tt>d,M</tt>
+</tr>
+<tr>
+  <td><tt>lds</tt>    <td><tt>r,i</tt>
+  <td><tt>lpm</tt>    <td><tt>r,z</tt>
+</tr>
+<tr>
+  <td><tt>lsl</tt>    <td><tt>r</tt>
+  <td><tt>lsr</tt>    <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>mov</tt>    <td><tt>r,r</tt>
+  <td><tt>movw</tt>   <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>mul</tt>    <td><tt>r,r</tt>
+  <td><tt>muls</tt>   <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>mulsu</tt>  <td><tt>a,a</tt>
+  <td><tt>neg</tt>    <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>or</tt>     <td><tt>r,r</tt>
+  <td><tt>ori</tt>    <td><tt>d,M</tt>
+</tr>
+<tr>
+  <td><tt>out</tt>    <td><tt>I,r</tt>
+  <td><tt>pop</tt>    <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>push</tt>   <td><tt>r</tt>
+  <td><tt>rcall</tt>  <td><tt>i</tt>
+</tr>
+<tr>
+  <td><tt>rjmp</tt>   <td><tt>i</tt>
+  <td><tt>rol</tt>    <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>ror</tt>    <td><tt>r</tt>
+  <td><tt>sbc</tt>    <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>sbci</tt>   <td><tt>d,M</tt>
+  <td><tt>sbi</tt>    <td><tt>I,I</tt>
+</tr>
+<tr>
+  <td><tt>sbic</tt>   <td><tt>I,I</tt>
+  <td><tt>sbiw</tt>   <td><tt>w,I</tt>
+</tr>
+<tr>
+  <td><tt>sbr</tt>    <td><tt>d,M</tt>
+  <td><tt>sbrc</tt>   <td><tt>r,I</tt>
+</tr>
+<tr>
+  <td><tt>sbrs</tt>   <td><tt>r,I</tt>
+  <td><tt>ser</tt>    <td><tt>d</tt>
+</tr>
+<tr>
+  <td><tt>st</tt>     <td><tt>e,r</tt>
+  <td><tt>std</tt>    <td><tt>b,r</tt>
+</tr>
+<tr>
+  <td><tt>sts</tt>    <td><tt>i,r</tt>
+  <td><tt>sub</tt>    <td><tt>r,r</tt>
+</tr>
+<tr>
+  <td><tt>subi</tt>   <td><tt>d,M</tt>
+  <td><tt>swap</tt>   <td><tt>r</tt>
+</tr>
+<tr>
+  <td><tt>tst</tt>
+  <td><tt>r</tt>
+  <td><tt>xch</tt>
+  <td><tt>z,r</tt>
+</tr>
 </table>
 
-Constraint characters may be prepended by a single constraint modifier.
-Contraints without a modifier specify read-only operands. Modifiers are:
+\section inline_asm_print_modifiers Print Modifiers
+
+The %-operands in the assembly template can be adjusted by special
+print-modify characters.  The one-letter modifier follows the \c \%
+and precedes the operand number like in <tt>"%a0"</tt>, or precedes the
+name in named operands like in <tt>"%a[address]"</tt>.
 
 <table>
-  <tr>
-    <td><b>Modifier</b></td>
-    <td><b>Specifies</b></td>
-  </tr>
-  <tr>
-    <td>=</td>
-    <td>Write-only operand, usually used for all output operands.</td>
-  </tr>
-  <tr>
-    <td>+</td>
-    <td>Read-write operand</td>
-  </tr>
-  <tr>
-    <td>&</td>
-    <td>Register should be used for output only</td>
-  </tr>
+<caption id="print_modifiers">Inline asm Print Modifiers</caption>
+<tr>
+  <th>Modifier
+  <th>Number of<br>Arguments
+  <th>Explanation
+  <th>Suitable<br>Constraints
+</tr>
+<tr>
+  <td><tt>\%a0</tt> <td> 1
+  <td> Print pointer register as address <tt>X</tt>, <tt>Y</tt> or <tt>Z</tt>,
+    like in <tt>"LD r0, %a0+"</tt>
+  <td> <tt>x</tt>, <tt>y</tt>, <tt>z</tt>, <tt>b</tt>, <tt>e</tt>
+</tr>
+<tr>
+  <td><tt>\%i0</tt> <td> 1
+  <td> Print compile-time RAM address as I/O address,
+    like in <tt>"OUT %i0, r0"</tt> with argument <tt>"n"(&SREG)</tt>
+  <td> <tt>n</tt>
+</tr>
+<tr>
+  <td><tt>\%n0</tt> <td> 1
+  <td> Print the negative of a compile-time integer constant
+  <td><tt>n</tt>
+</tr>
+<tr>
+  <td><tt>\%r0</tt> <td> 1
+  <td> Print the register number of a register, like in <tt>"CLR %r0+7"</tt>
+    for the MSB of a 64-bit register
+  <td> reg
+</tr>
+<tr>
+  <td><tt>\%x0</tt> <td> 1
+  <td> Print a function name without <tt>gs()</tt> modifier, like in
+    <tt>"%~CALL %x0"</tt> with argument <tt>"s"(main)</tt>
+  <td> <tt>s</tt>
+</tr>
+<tr>
+  <td><tt>\%A0</tt> <td> 1
+  <td> Add 0 to the register number (no effect)
+  <td> reg
+</tr>
+<tr>
+  <td><tt>\%B0</tt> <td> 1
+  <td> Add 1 to the register number
+  <td> reg
+</tr>
+<tr>
+  <td><tt>\%C0</tt> <td> 1
+  <td> Add 2 to the register number
+  <td> reg
+</tr>
+<tr>
+  <td><tt>\%D0</tt> <td> 1
+  <td> Add 3 to the register number
+  <td> reg
+</tr>
+<tr>
+  <td><tt>\%T0\%t1</tt> <td> 2
+  <td> Print the register that holds bit number <tt>%1</tt> of register
+    <tt>%0</tt>
+  <td> reg + <tt>n</tt>
+</tr>
+<tr>
+  <td><tt>\%T0\%T1</tt> <td> 2
+  <td> Print operands suitable for <tt>BLD</tt>/<tt>BST</tt>, like in
+    <tt>"BST %T0%T1"</tt>, including the required <tt>,</tt>
+  <td> reg + <tt>n</tt>
+</tr>
 </table>
 
-Output operands must be write-only and the C expression result must be an
-lvalue, which means that the operands must be valid on the left side of
-assignments.  Note, that the compiler will not check if the operands are of
-reasonable type for the kind of operation used in the assembler instructions.
+- Register constraints are: <tt>r</tt>, <tt>d</tt>, <tt>w</tt>, <tt>x</tt>,
+<tt>y</tt>, <tt>z</tt>, <tt>b</tt>, <tt>e</tt>, <tt>a</tt>, <tt>l</tt>.
 
-Input operands are, you guessed it, read-only. But what if you need the same
-operand for input and output? As stated above, read-write operands are not
-supported in inline assembler code. But there is another solution. For input
-operators it is possible to use a single digit in the constraint string. Using
-digit n tells the compiler to use the same register as for the n-th operand,
-starting with zero. Here is an example:
+\section assembly_operand_modifiers Operand Modifiers
 
+<table>
+<caption id="operand_modifiers">Assembly Code Operand Modifiers</caption>
+<tr>
+  <th>Modifier
+  <th>Explanation
+  <th>Purpose
+</tr>
+<tr>
+  <td><tt>lo8()</tt>
+  <td> 1<sup>st</sup> Byte of a link-time constant, bits 0...7
+  <td rowspan="5"> Getting parts<br>of a byte-address
+</tr>
+<tr>
+  <td><tt>hi8()</tt>
+  <td> 2<sup>nd</sup> Byte of a link-time constant, bits 8...15
+</tr>
+<tr>
+  <td><tt>hlo8()</tt>
+  <td> 3<sup>rd</sup> Byte of a link-time constant, bits 16...23
+</tr>
+<tr>
+  <td><tt>hhi8()</tt>
+  <td> 4<sup>th</sup> Byte of a link-time constant, bits 24...31
+</tr>
+<tr>
+  <td><tt>hh8()</tt>
+  <td> Same like <tt>hlo8</tt>
+</tr>
+<tr>
+  <td><tt>pm_lo8()</tt>
+  <td> 1<sup>st</sup> Byte of a link-time constant divided by 2, bits 1...8
+    <td rowspan="3"> Getting parts<br>of a word-address
+</tr>
+<tr>
+  <td><tt>pm_hi8()</tt>
+  <td> 2<sup>nd</sup> Byte of a link-time constant divided by 2, bits 9...16
+</tr>
+<tr>
+  <td><tt>pm_hh8()</tt>
+  <td> 3<sup>rd</sup> Byte of a link-time constant divided by 2, bits 17...24
+</tr>
+<tr>
+  <td><tt>pm()</tt>
+  <td> Link-time constant divided by 2 in order to get a <b>p</b>rogram
+    <b>m</b>emory (word) addresses, like in <tt>lo8(pm(main))</tt>
+    <td>Word-address
+</tr>
+<tr>
+  <td><tt>gs()</tt>
+  <td> Function address divided by 2 in order to get a (word) addresses,
+    like in <tt>lo8(gs(main))</tt>. <b>G</b>enerate <b>s</b>tub (trampoline)
+    as needed. This is required to calculate the address of a code label on
+    devices with more than 128&nbsp;KiB of program memory that's supposed
+    to be used in \c EICALL. For rationale, see the
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
+       >GCC documentation</a>. On devices with less program memory,
+    <tt>gs()</tt> behaves like <tt>pm()</tt>
+  <td>Function address<br>for <tt>[E]ICALL</tt>
+</tr>
+</table>
+
+When the argument of a modifier is not computable at assembler-time,
+then the assembler has to encode the expression in an abstract form using
+<a href="https://github.com/bminor/binutils-gdb/blob/master/include/elf/avr.h"
+   >RELOCs</a>.
+Consequence is that only a very limited number of argument expressions is
+supported when they are not computable at assembler-time.
+
+\section inline_asm_examples Examples
+
+Some examples show the assembly code as generated by the compiler.
+It's the code from the \c \.s files as generated with option \c -save-temps.
+Adding the high-level source to the generated assembly can be turned on
+with \c -fverbose-asm since GCC v8.
+
+\subsection inline_asm_swap_nibbles Swapping Nibbles
+
+The fist example uses the \c swap instruction to swap the nibbles of
+a byte.  Input and output of \c swap are located in the same general
+purpose register.
+This means the input operand, operand 1 below, must be located in the
+same register(s) like operand 0, so that the right \ref constraints
+"constraint" for operand 1 is \c "0":
 \code
-asm volatile("swap %0" : "=r" (value) : "0" (value));
+asm ("swap" : "=r" (value) : "0" (value));
+\endcode
+All side effects of the code are described by the constraints and the clobbers,
+so that there is no need for this asm to be volatile.  In particular, this
+asm may be optimized out when the output value is unused.<br>
+A shorter pattern to state that \c value is both input and output is by
+means of \ref constraint_modifiers "constraint modifier" \c +
+\code
+asm ("swap" : "+r" (value));
 \endcode
 
-This statement will swap the nibbles of an 8-bit variable named value.
-Constraint \c "0" tells the compiler, to use the same input register as for
-the first operand. Note however, that this doesn't automatically imply the
-reverse case. The compiler may choose the same registers for input and output,
-even if not told to do so. This is not a problem in most cases, but may be
-fatal if the output operator is modified by the assembler code before the
-input operator is used. In the situation where your code depends on different
-registers used for input and output operands, you must add the \c & constraint
-modifier to your output operand. The following example demonstrates this
-problem:
+\subsection inline_asm_swap_bytes Swapping Bytes
+
+Swapping nibbles was a piece of cake, so let's swap the bytes of a
+16-bit value.  In order to access the constituent bytes of the 16-bit
+input and output values, we use the \ref inline_asm_print_modifiers
+"print modifiers" \c \%A and \c \%B.
+
+The asm is placed in a small C test case so that we can inspect the
+resulting assembly code as generated by the compiler with \c -save-temps.
 
 \code
-asm volatile("in %0,%1"    "\n\t"
-             "out %1, %2"
-             : "=&r" (input) 
-             : "I" (_SFR_IO_ADDR(port)), "r" (output)
-            );
-\endcode
+void callee (int, int);
 
-In this example an input value is read from a port and then an output value is
-written to the same port. If the compiler would have choosen the same register
-for input and output, then the output value would have been destroyed on the
-first assembler instruction. Fortunately, this example uses the \c &
-constraint modifier to instruct the compiler not to select any register for
-the output value, which is used for any of the input operands.  Back to
-swapping. Here is the code to swap high and low byte of a 16-bit value:
-
-\code
-asm volatile("mov __tmp_reg__, %A0" "\n\t"
-             "mov %A0, %B0"         "\n\t"
-             "mov %B0, __tmp_reg__"
-             : "=r" (value)
-             : "0" (value)
-            );
-\endcode
-
-First you will notice the usage of register <tt>__tmp_reg__</tt>, which we
-listed among other special registers in the \ref asm_code section. You can use
-this register without saving its contents. Completely new are those letters
-<tt>A</tt> and \c B in <tt>\%A0</tt> and <tt>\%B0</tt>. In fact they refer to
-two different 8-bit registers, both containing a part of value.
-
-Another example to swap bytes of a 32-bit value:
-
-\code
-asm volatile("mov __tmp_reg__, %A0" "\n\t"
-             "mov %A0, %D0"         "\n\t"
-             "mov %D0, __tmp_reg__" "\n\t"
-             "mov __tmp_reg__, %B0" "\n\t"
-             "mov %B0, %C0"         "\n\t"
-             "mov %C0, __tmp_reg__"
-             : "=r" (value)
-             : "0" (value)
-            );
-\endcode
-
-Instead of listing the same operand as both, input and output operand,
-it can also be declared as a read-write operand.  This must be applied
-to an output operand, and the respective input operand list remains
-empty:
-
-\code
-asm volatile("mov __tmp_reg__, %A0" "\n\t"
-             "mov %A0, %D0"         "\n\t"
-             "mov %D0, __tmp_reg__" "\n\t"
-             "mov __tmp_reg__, %B0" "\n\t"
-             "mov %B0, %C0"         "\n\t"
-             "mov %C0, __tmp_reg__"
-             : "+r" (value));
-\endcode
-
-If operands do not fit into a single register, the compiler will automatically
-assign enough registers to hold the entire operand. In the assembler code you
-use <tt>\%A0</tt> to refer to the lowest byte of the first operand,
-<tt>\%A1</tt> to the lowest byte of the second operand and so on. The next
-byte of the first operand will be <tt>\%B0</tt>, the next byte <tt>\%C0</tt>
-and so on.
-
-This also implies, that it is often neccessary to cast the type of an input
-operand to the desired size.
-
-A final problem may arise while using pointer register pairs. If you define an
-input operand
-
-\code
-"e" (ptr)
-\endcode
-
-and the compiler selects register \c Z \c (r30:r31), then 
-
-<tt>\%A0</tt> refers to \c r30 and<br>
-<tt>\%B0</tt> refers to \c r31.
-
-But both versions will fail during the assembly stage of the compiler, if you
-explicitely need \c Z, like in
-
-\code
-ld r24,Z
-\endcode
-
-If you write
-
-\code
-ld r24, %a0
-\endcode
-
-with a lower case \c a following the percent sign, then the compiler will
-create the proper assembler line.
-
-\section clobbers Clobbers
-
-As stated previously, the last part of the \c asm statement, the list of
-clobbers, may be omitted, including the colon seperator. However, if you are
-using registers, which had not been passed as operands, you need to inform the
-compiler about this. The following example will do an atomic increment. It
-increments an 8-bit value pointed to by a pointer variable in one go, without
-being interrupted by an interrupt routine or another thread in a multithreaded
-environment. Note, that we must use a pointer, because the incremented value
-needs to be stored before interrupts are enabled.
-
-\code
-asm volatile(
-    "cli"               "\n\t"
-    "ld r24, %a0"       "\n\t"
-    "inc r24"           "\n\t"
-    "st %a0, r24"       "\n\t"
-    "sei"
-    :
-    : "e" (ptr)
-    : "r24"
-);
-\endcode
-
-The compiler might produce the following code:
-
-\code
-    cli
-    ld r24, Z
-    inc r24
-    st Z, r24
-    sei
-\endcode
-
-One easy solution to avoid clobbering register \c r24 is, to make use of the
-special temporary register \c __tmp_reg__ defined by the compiler.
-
-\code
-asm volatile(
-    "cli"                       "\n\t"
-    "ld __tmp_reg__, %a0"       "\n\t"
-    "inc __tmp_reg__"           "\n\t"
-    "st %a0, __tmp_reg__"       "\n\t"
-    "sei"
-    :
-    : "e" (ptr)
-);
-\endcode
-
-The compiler is prepared to reload this register next time it uses it. Another
-problem with the above code is, that it should not be called in code sections,
-where interrupts are disabled and should be kept disabled, because it will
-enable interrupts at the end. We may store the current status, but then we
-need another register. Again we can solve this without clobbering a fixed, but
-let the compiler select it. This could be done with the help of a local C
-variable.
-
-\code
+void func (int param)
 {
-    uint8_t s;
-    asm volatile(
-        "in %0, __SREG__"           "\n\t"
-        "cli"                       "\n\t"
-        "ld __tmp_reg__, %a1"       "\n\t"
-        "inc __tmp_reg__"           "\n\t"
-        "st %a1, __tmp_reg__"       "\n\t"
-        "out __SREG__, %0"
-        : "=&r" (s)
-        : "e" (ptr)
-    );
+    int swapped;
+
+    asm ("mov %A0, %B1" "\n\t"
+         "mov %B0, %A1"
+         : "=r" (swapped) : "r" (param));
+
+    callee (param, swapped);
 }
 \endcode
 
-Now every thing seems correct, but it isn't really. The assembler code
-modifies the variable, that \c ptr points to. The compiler will not recognize
-this and may keep its value in any of the other registers. Not only does the
-compiler work with the wrong value, but the assembler code does too.  The C
-program may have modified the value too, but the compiler didn't update the
-memory location for optimization reasons. The worst thing you can do in this
-case is:
-
+The \c "\n\t" \ref special_sequences "sequence" adds a line feed that
+is required between the
+two instructions, and a TAB to align the two instructions in the generated
+assembly. There is no \c "\n\t" after the last instruction because that would
+just increase the \ref inline_asm_size "size of the asm".<br>
+The generated assembly works as expected. The compiler wraps it in
+\c \#APP / \c \#NOAPP annotations:
 \code
+func:
+/* #APP */
+    mov r22, r25     ;  swapped, param
+    mov r23, r24     ;  swapped, param
+/* #NOAPP */
+    jmp callee
+\endcode
+
+Wrong!
+<b>While the generated code above is correct, the inline asm itself is not!</b>
+<br>
+We see this with a slightly adjusted test case where the arguments of
+\c callee have been swapped, but that uses the same inline asm:
+\code
+void func (int param)
 {
-    uint8_t s;
-    asm volatile(
-        "in %0, __SREG__"           "\n\t"
-        "cli"                       "\n\t"
-        "ld __tmp_reg__, %a1"       "\n\t"
-        "inc __tmp_reg__"           "\n\t"
-        "st %a1, __tmp_reg__"       "\n\t"
-        "out __SREG__, %0"
-        : "=&r" (s)
-        : "e" (ptr)
-        : "memory"
-    );
+    int swapped;
+
+    asm ("mov %A0, %B1" "\n\t"
+         "mov %B0, %A1"
+         : "=r" (swapped) : "r" (param));
+
+    callee (swapped, param);
 }
 \endcode
 
-The special clobber "memory" informs the compiler that the assembler code may
-modify any memory location. It forces the compiler to update all variables for
-which the contents are currently held in a register before executing the
-assembler code. And of course, everything has to be reloaded again after this
-code.
-
-In most situations, a much better solution would be to declare the pointer
-destination itself volatile:
+The result is the following assembly:
 
 \code
-volatile uint8_t *ptr;
+func:
+    movw r22,r24
+/* #APP */
+    mov r24, r25     ;  swapped, param
+    mov r25, r24     ;  swapped, param
+/* #NOAPP */
+    jmp callee
 \endcode
 
-This way, the compiler expects the value pointed to by \c ptr to be changed
-and will load it whenever used and store it whenever modified.
+which is obviously wrong, because after the code from the inline asm,
+the low byte of \c swapped and the high byte will always have the same
+value of \c r25.
 
-Situations in which you need clobbers are very rare. In most cases there will
-be better ways. Clobbered registers will force the compiler to store their
-values before and reload them after your assembler code. Avoiding clobbers
-gives the compiler more freedom while optimizing your code.
+The reason is that the output operand overlaps the input,
+<em>and</em> the output is changed before all of the input operands
+are consumed.  This is a so-called <em>early-clobber</em> situation.
+There are two possible solutions to this predicament:
 
-\section asm_macros Assembler Macros
+- Mark the output operand with the early-clobber \ref constraint_modifiers
+"constraint modifier":
+\code
+    asm ("mov %A0, %B1" "\n\t"
+         "mov %B0, %A1"
+         : "=&r" (swapped) : "r" (param));
+\endcode
 
-In order to reuse your assembler language parts, it is useful to define them
-as macros and put them into include files. AVR Libc comes with a bunch of
-them, which could be found in the directory \c avr/include. Using such include
-files may produce compiler warnings, if they are used in modules, which are
-compiled in strict ANSI mode. To avoid that, you can write \c __asm__ instead
-of \c asm and \c __volatile__ instead of \c volatile. These are equivalent
-aliases.
+- Use constraints and a code sequence that expect input and output in the
+same registers:
+\code
+    asm ("eor %A0, %B0" "\n\t"
+         "eor %B0, %A0" "\n\t"
+         "eor %A0, %B0"
+         : "=r" (swapped) : "0" (param));
+\endcode
 
-Another problem with reused macros arises if you are using labels. In such
-cases you may make use of the special pattern \c %=, which is replaced by a
-unique number on each \c asm statement. The following code had been taken from
-<tt>avr/include/iomacros.h</tt>:
+\subsection inline_asm_access_memory Accessing Memory
 
+Accessing memory requires that the AVR instructions that perform the memory
+access are provided with the appropriate memory address.
 
-\verbatim
-#define loop_until_bit_is_clear(port, bit) \
-   __asm volatile (                        \
-       "L_%=: sbic %0, %1" "\n\t"          \
-       "rjmp L_%="                         \
-       : /* no outputs */                  \
-       : "I" (_SFR_IO_ADDR(port)),         \
-         "I" (bit)                         \
-   )
-\endverbatim
+-# The address can be provided directly, like \c __SREG__,
+0x3f, as a symbol, or as a symbol plus a constant offset.
+-# Provide the address by means of an inline asm operand.
 
-When used for the first time, \c L_%= may be translated to \c L_1404, the next
-usage might create \c L_1405 or whatever. In any case, the labels became unique
-too.
+Approach 1 is simpler as it does not require an asm operand,
+while approach 2 is in many cases more powerful
+because macros defined per, say, <code>\#include <avr/io.h></code> can be used
+as operands, whereas such headers are not included in the assembly code as
+generated by the compiler.
 
-Another option is to use Unix-assembler style numeric labels.  They are
-explained in \ref faq_asmstabs.  The above example would then look like:
+Reading a SFR like \c PORTB can be performed by
+\code
+asm volatile ("in %0, %1" : "=r" (result) : "I" _SFR_IO_ADDR (PORTB));
+\endcode
+Macro \c _SFR_IO_ADDR is provided by <code>avr/sfr_defs.h</code> which is
+included by <code>avr/io.h</code>.
 
-\verbatim
-#define loop_until_bit_is_clear(port, bit)  \
-   __asm volatile (                         \
-      "1:  sbic %0, %1" "\n\t"              \
-      "rjmp 1b"                             \
-      : /* no outputs */                    \
-      : "I" (_SFR_IO_ADDR(port)),           \
-        "I" (bit)                           \
-   )
-\endverbatim
-
-
-\section asm_c_stubs C Stub Functions
-
-Macro definitions will include the same assembler code whenever they are
-referenced. This may not be acceptable for larger routines. In this case you
-may define a C stub function, containing nothing other than your assembler
-code.
+Since GCC v4.7, \ref print_modifiers "print modifier" \c \%i is supported,
+which prints RAM addresses like <code>& PORTB</code> as an I/O address:
 
 \code
-void delay(uint8_t ms)
+asm volatile ("in %0, %i1" : "=r" (result) : "I" (& PORTB));
+\endcode
+
+When the address is not an I/O address, then \c LDS or \c LD must be used,
+depending on whether the address is known at link-time or only at run-time.
+For example, the following macro provides the functionality to clear an SFR.
+The code discriminates between the possibilities that
+- The SFR address is known at compile-time and is an I/O address.
+- The SFR address is known at compile-time but is not in the I/O range.
+- The SFR address is not known at compile-time.
+
+<!-- "none" because Doxygen messes up syntax hilit -->
+\code{none}
+#include <avr/io.h>
+
+#define CLEAR_REG(sfr)                          \
+do {                                            \
+  if (__builtin_constant_p (& (sfr))            \
+      && _SFR_IO_REG_P (sfr))                   \
+    asm volatile ("out %i0, __zero_reg__"       \
+                  :: "I" (& (sfr)) : "memory"); \
+  else if (__builtin_constant_p (& (sfr)))      \
+    asm volatile ("sts %0, __zero_reg__"        \
+                  :: "n" (& (sfr)) : "memory"); \
+  else                                          \
+    asm volatile ("st %a0, __zero_reg__"        \
+                  :: "e" (& (sfr)) : "memory"); \
+} while (0)
+\endcode
+
+The last case with constraint \c "e" works because \c \&sfr is a 16-bit
+value, and 16-bit values (and larger) start in even registers.  Therefore,
+the address will be located in R27:R26, R29:R28 or in R31:R30, which
+print modifier \c \%a will print as X, Y or Z, respectively.
+The address will never end up in, say, R30:R29.
+
+The test case
+
+\code
+void clear_3_regs (uint8_t volatile *psfr)
 {
-    uint16_t cnt;
-    asm volatile (
-        "L_dl1%=:"      "\n\t"
-        "mov %A0, %A2"  "\n\t"
-        "mov %B0, %B2"  "\n"
-        "L_dl2%=:"      "\n\t"
-        "sbiw %A0, 1"   "\n\t"
-        "brne L_dl2%="  "\n\t"
-        "dec %1"        "\n\t"
-        "brne L_dl1%="
-        : "=&w" (cnt)
-        : "r" (ms), "r" (delay_count)
-        );
+    CLEAR_REG (PORTB);
+    CLEAR_REG (UDR0);
+    CLEAR_REG (*psfr);
 }
 \endcode
 
-The purpose of this function is to delay the program execution by a specified
-number of milliseconds using a counting loop. The global 16 bit variable
-delay_count must contain the CPU clock frequency in Hertz divided by 4000 and
-must have been set before calling this routine for the first time.  As
-described in the \ref clobbers "clobber" section, the routine uses a local
-variable to hold a temporary value.
-
-Another use for a local variable is a return value. The following function
-returns a 16 bit value read from two successive port addresses.
+compiles for ATmega328 and with optimization turned on to
 
 \code
-uint16_t inw(uint8_t port)
+clear_3_regs:
+    movw r30,r24
+/* #APP */
+    out 0x5, __zero_reg__
+    sts 198, __zero_reg__
+    st Z,    __zero_reg__   ;  psfr
+/* #NOAPP */
+    ret
+\endcode
+
+\anchor builtin_constant_p_in_inline_functions
+As \c __builtin_constant_p is used to infer whether the address of
+the SFR is known at compile-time, extra care must be taken when the
+functionality is implemented as an inline function:
+\code
+static inline __attribute__((__always_inline__))
+void clear_reg (uint8_t volatile *psfr)
 {
-    uint16_t result;
-    asm volatile (
-        "in %A0,%1"       "\n\t"
-        "in %B0,(%1) + 1"
-        : "=r" (result)
-        : "I" (_SFR_IO_ADDR(port))
-        );
-    return result;
+  // !!! The following cast is required to make __builtin_constant_p
+  // !!! work as expected in the inline function.
+  uintptr_t addr = (uintptr_t) psfr;
+
+  if (__builtin_constant_p (addr)
+      && _SFR_IO_REG_P (* psfr))
+    asm volatile ("out %i0, __zero_reg__"
+                  :: "I" (addr) : "memory");
+  else if (__builtin_constant_p (addr))
+    asm volatile ("sts %0, __zero_reg__"
+                  :: "n" (addr) : "memory");
+  else
+    asm volatile ("st %a0, __zero_reg__"
+                  :: "e" (addr) : "memory");
+}
+
+void clear_3_pregs (uint8_t volatile *psfr)
+{
+  clear_reg (& PORTB);
+  clear_reg (& UDR0);
+  clear_reg (psfr);
 }
 \endcode
 
-\note inw() is supplied by avr-libc.
+<b>Casting the address \c psfr to an integer type in the inline function
+  is required</b> so that the compiler will recognize constant addresses.<br>
+Also notice that we have to pass the <em>address of the SFR</em> to the
+inline function.  Passing the SFR directly like in the marco approach
+won't work for obvious reasons.
 
-\section c_names_in_asm C Names Used in Assembler Code
+Finally, an example that atomically increments a 16-bit integer.
+The code is wrapped in <tt>IN SREG</tt> / <tt>CLI</tt> / <tt>OUT SREG</tt>
+to make it atomic. It reads the 16-bit value \c data from its absolute
+address, increments it and then writes it back:
 
-By default \c AVR-GCC uses the same symbolic names of functions or variables
-in C and assembler code. You can specify a different name for the assembler
-code by using a special form of the \c asm statement:
+\code{c}
+uint16_t volatile data;
 
-\code
-unsigned long value asm("clock") = 3686400;
-\endcode
-
-This statement instructs the compiler to use the symbol name clock rather than
-value. This makes sense only for external or static variables, because local
-variables do not have symbolic names in the assembler code. However, local
-variables may be held in registers.
-
-With \c AVR-GCC you can specify the use of a specific register:
-
-\code
-void Count(void)
+void inc_data (void)
 {
-    register unsigned char counter asm("r3");
-
-    ... some code...
-    asm volatile("clr r3");
-    ... more code...
+    uint16_t tmp;
+    asm volatile ("in __tmp_reg__, __SREG__"   "\n\t"
+                  "cli"                        "\n\t"
+                  "lds %A[temp], %[addr]"      "\n\t"
+                  "lds %B[temp], %[addr]+1"    "\n\t"
+#ifdef __AVR_TINY__
+                  // Reduced Tiny does not have ADIW.
+                  "subi %A[temp], lo8(-1)"     "\n\t"
+                  "sbci %B[temp], hi8(-1)"     "\n\t"
+#else
+                  "adiw %[temp], 1"            "\n\t"
+#endif
+                  "sts %[addr]+1, %B[temp]"    "\n\t"
+                  "sts %[addr],   %A[temp]"    "\n\t"
+                  "out __SREG__, __tmp_reg__"
+#ifdef __AVR_TINY__
+                  // No need to restrict tmp to a "w" register. And on
+                  // avr-gcc v13.2 and older, "w" contains no regs.
+                  : [temp] "=d" (tmp), "+m" (data)
+#else
+                  : [temp] "=w" (tmp), "+m" (data)
+#endif
+                  : [addr] "i" (& data));
 }
 \endcode
 
-The assembler instruction, <tt>"clr r3"</tt>, will clear the variable counter.
-\c AVR-GCC will not completely reserve the specified register. If the
-optimizer recognizes that the variable will not be referenced any longer, the
-register may be re-used. But the compiler is not able to check wether this
-register usage conflicts with any predefined register. If you reserve too many
-registers in this way, the compiler may even run out of registers during code
-generation.
+Notice there are three different ways required to access the different
+bytes of the involved 16-bit entities:
 
-In order to change the name of a function, you need a prototype declaration,
-because the compiler will not accept the \c asm keyword in the function
-definition:
+- For the 16-bit general purpose register \c \%[temp], \ref print_modifiers
+"print modifiers" \c \%A and \c \%B are used.
 
+- For the 16-bit value \c data in static storage, <code>%[addr]+1</code>
+is used to access the high byte. The resulting expression <code>data+1</code>
+is computable at link-time and evaluated by the linker.
+
+- In the compilation variant for Reduced Tiny, the bytes of the 16-bit
+subtrahend \c &minus;1 are accessed with
+the \ref operand_modifiers "operand modifiers" \c lo8 and \c hi8 that are
+evaluated by the assembler because \c &minus;1 is known at assembler-time.
+
+\c data is located in static storage, hence its address is known to the linker
+and fits \ref constraints "constraint" \c "i".
+
+The sole purpose of operand <code>"+m" (data)</code> is to describe the
+effect of the asm on data memory: It changes \c data.
+Notice that there is no \c "memory"
+clobber, because that operand already describes all memory side effects,
+and it does this in a less intrusive way than a catch-all \c "memory".
+The operand is not used in the asm template; but in principle it would
+be possible to use it as operand with \c LDS and \c STS instead of
+operand <code>[addr] "i" (& data)</code>.  However, there are many
+situations where a memory operand constrained by \c "m" takes a form that
+cannot be used with AVR instructions because there are no matching print
+modifiers, or because it is not known a priori what specific form the
+memory operand takes.
+In such cases, one would take the address of the operand and supply it
+as address in a pointer register to the inline asm.  The compiler generates
+the required instructions for address computation, and the inline asm knows
+that it can use \c LD and \c ST.
+
+\subsection inline_asm_jumping Jumping and Branching
+
+When an inline asm contains jumps, then it also requires labels.
+When the label is inside the asm, then care must be taken that the
+label is unique in the compilation unit even when the inline asm is
+used multiple times, e.g. when the code is located in an unrolled loop
+or a function has multiple incarnations due to cloning, or simply because
+a macro or inline function that contains an asm statement is used
+more than once.
+<br>
+There are two kinds of labels that can be used:
+
+- Local labels of the form <tt><em>n</em>:</tt> where <em>n</em> is
+some (small, non-negative) number.  They can be targeted by means
+of <tt><em>n</em>b</tt>
+or <tt><em>n</em>f</tt>, depending on whether the jump direction is
+<b>b</b>ackwards or <b>f</b>orwards. Such a numeric labels may be present
+more than once.  The taken label is the first one with the specified number
+in the respective direction:
 \code
-extern long Calc(void) asm ("CALCULATE");
+    // Loop until bit PORTB.7 is set.
+    asm volatile ("1: sbrs %i[sfr], %[bitno]"  "\n\t"
+                  "rjmp 1b"
+                  :: [sfr] "I" (& PORTB), [bitno] "n" (PB7));
 \endcode
 
-Calling the function \c Calc() will create assembler instructions to call the
-function \c CALCULATE.
+- Local labels that contain the \ref special_sequences "sequence" <tt>\%=</tt>
+which yields some number that's unique amongst all asm incarnations
+in the respective compilation unit:
+\code
+    // Loop until bit PORTB.7 is set.
+    asm volatile (".Loop.%=: sbrs %i[sfr], %[bitno]"  "\n\t"
+                  "rjmp .Loop.%="
+                  :: [sfr] "I" (& PORTB), [bitno] "n" (PB7));
+\endcode
 
-\section links Links
+Which form is used is a matter of taste. In practice, the first variant is
+often preferred in short sequences, whereas the second form is usually
+seen in longer algorithms.
 
-For a more thorough discussion of inline assembly usage, see the gcc user
-manual. The latest version of the gcc manual is always available here:
-http://gcc.gnu.org/onlinedocs/
+For labels that are defined in the surrounding C/C++ code, asm goto has to
+be used.  The \ref print_modifiers "print modifier" <tt>\%x0</tt> prints
+\c panic as a raw label, not as \c gs(panic) like it would be
+the case with <tt>\%0</tt>.
+\code
+int main (void)
+{
+    asm goto ("tst __zero_reg__" "\n\t"
+              "brne %x0"
+              :::: panic);
+    /* ...Application code here... */
+    return 0;
+panic:
+    // __zero_reg__ is supposed to contain 0, but doesn't.
+    return 1;
+}
+\endcode
 
-*/
+This assumes that the jump offset can be encoded in the \c brne instruction in
+all situations.  When static analysis cannot prove that the jump offset fits,
+then a jumpity jump has to be used:
+\code
+    asm goto ("tst   __zero_reg__" "\n\t"
+              "breq  1f"           "\n\t"
+              "%~jmp %x0"          "\n"
+              "1: ;; all fine"
+              :::: panic);
+\endcode
+
+Sequence <tt>"%~jmp"</tt> yields <tt>"rjmp"</tt> or <tt>"jmp"</tt> depending
+on the architecture.  Notice that a \c jmp can be relaxed to an \c rjmp
+with option \c -mrelax provided the jump offset fits.
+
+\section inline_asm_local_vars Binding local Variables to Registers
+
+One use of GCC's \c asm keyword is to bind local register variables to
+hardware registers.<br>
+<b>Such bindings of local variables to registers are only guaranteed
+during inline asm which has these variables as operands.</b>
+
+\subsection inline_asm_abi_interface Interfacing non-ABI Functions
+
+Suppose we want to interface a
+non-<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention"
+       >ABI</a> assembly function \c mul_8_16 that
+multiplies R24 with R27:R26, clobbers R0, R1 and R25, and returns the
+24-bit result in R20:R19:R18.  One way to implement such an interface
+would be to provide an assembly function that performs the required
+copying and call to \c mul_8_16.  Such a function would destroy some of
+the performance gain obtained by using assembly for \c mul_8_16:  Additional
+copying back and forth and extra \c CALL and \c RET instructions.
+
+The compiler comes to the rescue. We can bind local variables to the
+required registers:
+\code
+extern void mul_8_16 (void); // Non-ABI function. Don't call in C/C++!
+
+static inline __attribute__((__always_inline__))
+__uint24 mul_8_16_gccabi (uint8_t val8, uint16_t val16)
+{
+    register uint8_t r24 __asm("r24") = val8;
+    register __uint24 r18 __asm("r18");
+
+    asm ("%~call %x[func]"  "\n\t"
+         "clr    __zero_reg__"
+         : "=r" (r18)
+         : "r" (r24), "x" (val16), [func] "i" (mul_8_16)
+         : "r25", "r0");
+
+    return r18;
+}
+\endcode
+
+- The 8-bit parameter is bound to R24, and the 24-bit return value is
+bound to R18...R20.
+
+- The \c register keyword is mandatory.
+
+- The hard register is specified as a string literal for the lower case
+register name or register number, like \c "18" or \c "r18".
+Specifications like \c "R18", \c 18 or \c "Z" are not supported.
+
+- The 16-bit parameter of \c mul_8_16 happens to be required in R27:R26,
+which is the X register for which there is \ref constraints
+"register constraint" <tt>"x"</tt>.
+Therefore, no register binding is required for \c val16.
+
+- As \c mul_8_16 clobbers the zero register R1, it has to be restored
+by means of
+\code
+clr __zero_reg__
+\endcode
+
+- The asm is pure arithmetic and hence not volatile. (It might be
+advisable to make it volatile anyway, so that it won't be reorderd across
+\c sei() or \c cli() instructions.)
+
+Let's have a look at how this performs in a test case:
+\code
+void use_mul_8_16_gccabi (uint8_t val, uint8_t a, uint8_t b)
+{
+    if (mul_8_16_gccabi (val, a * b) >= 0x2010)
+        __builtin_abort();
+}
+\endcode
+For ATmega8 we get the following assembly:
+\code
+use_mul_8_16_gccabi:
+    mul  r22,r20
+    movw r26,r0
+    clr  __zero_reg__
+/* #APP */
+    rcall mul_8_16
+    clr   __zero_reg__
+/* #NOAPP */
+    cpi  r18,16
+    sbci r19,32
+    cpc  r20,__zero_reg__
+    brlo .L1
+    rcall abort
+.L1:
+    ret
+\endcode
+
+No superfluous register moves. Great!
+
+\section c_names_in_asm Specifying the Assembly Name of Static Objects
+
+Sometimes, it is desirable to use a different name for an object or
+function rather than the (mangled) name from the C/C++ implementation.
+Just add an asm specifier with the desired name as a string literal at the
+end of the declaration.
+
+For example, this is how <code>avr/eeprom.h</code> implements the
+\c eeprom_read_double() function:
+\code
+#if __SIZEOF_DOUBLE__ == 4
+double eeprom_read_double (const double*) __asm("eeprom_read_dword");
+#elif __SIZEOF_DOUBLE__ == 8
+double eeprom_read_double (const double*) __asm("eeprom_read_qword");
+#endif
+\endcode
+
+- It uses the implementation of \c eeprom_read_dword for \c eeprom_read_double,
+provided \c double is a 32-bit type.
+
+- It uses the implementation of \c eeprom_read_qword for 64-bit doubles.
+
+*/ */
