@@ -129,13 +129,13 @@
 #define NANL __builtin_nanl("")
 
 /** \c float INFINITY constant.	*/
-#define INFINITY __builtin_inff()
+#define INFINITYF __builtin_inff()
 
 /** \c double INFINITY constant.	*/
 #define INFINITY __builtin_inf()
 
 /** \c lonf \c double INFINITY constant.	*/
-#define INFINITY __builtin_infl()
+#define INFINITYL __builtin_infl()
 
 
 #if ! defined(__ATTR_CONST__) && ! defined(__DOXYGEN__)
@@ -263,10 +263,19 @@ __ATTR_CONST__ extern long double hypotl (long double x, long double y);
 __ATTR_CONST__ extern float squaref (float x);
 /** The function square() returns <em>x * x</em>.
     \note This function does not belong to the C standard definition. */
+#if defined(__DOXYGEN__) || __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
 __ATTR_CONST__ extern double square (double x);
+#elif defined(__WITH_LIBF7_MATH__)
+__ATTR_CONST__ extern double square (double x) __asm("__f7_square");
+#endif
+
 /** The function squarel() returns <em>x * x</em>.
     \note This function does not belong to the C standard definition. */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
 __ATTR_CONST__ extern long double squarel (long double x);
+#elif defined(__WITH_LIBF7_MATH__)
+__ATTR_CONST__ extern long double squarel (long double x) __asm("__f7_square");
+#endif
 
 /** The floorf() function returns the largest integral value less than or
     equal to \a x, expressed as a floating-point number. */
