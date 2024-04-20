@@ -35,9 +35,11 @@
 #include <avr/io.h>
 #include <stdint.h>
 
-#if ! defined(__ATTR_ALWAYS_INLINE__) && ! defined(__DOXYGEN__)
+#ifndef __DOXYGEN__
+#ifndef __ATTR_ALWAYS_INLINE__
 #define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
 #endif
+#endif /* ! DOXYGEN */
 
 /** \file */
 /** \defgroup avr_power <avr/power.h>: Power Reduction Management
