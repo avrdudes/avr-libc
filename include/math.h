@@ -56,30 +56,43 @@
     functions.
 
     \par Notes:
-    - In order to access the functions declared herein, it is usually
-      also required to additionally link against the library \c libm.a.
-      See also the related \ref faq_libm "FAQ entry".
     - Math functions do not raise exceptions and do not change the
       \c errno variable. Therefore the majority of them are declared
-      with const attribute, for better optimization by GCC.	*/
+      with const attribute, for better optimization by GCC.
+    - 64-bit floating point arithmetic is only available in
+      <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">avr-gcc v10</a>
+      and up.
+      The size of the \c double and \c long \c double type can be selected
+      at compile-time with options like <tt>-mdouble=64</tt>,
+      <tt>-mlong-double=32</tt>, etc.  Whether such options are available
+      depends on how the compiler has been configured.
+    - The implementation of 64-bit floating-point arithmetic has some
+      shortcomings and limitations, see the
+      <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a>
+      for details.
+    - In order to access the <tt>float</tt> functions declared herein,
+      in avr-gcc v4.6 and older it is usually
+      also required to additionally link against the library \c libm.a.
+      See the related \ref faq_libm "FAQ entry".
+*/
 
 
-/** \ingroup avr_math	*/
-/*@{*/
+/** \ingroup avr_math */
+/**@{*/
 
-/** The constant \a e.	*/
-#define M_E		2.7182818284590452354
+/** The constant Euler's number \a e. */
+#define M_E 2.7182818284590452354
 
-/** The logarithm of the \a e to base 2. */
-#define M_LOG2E		1.4426950408889634074	/* log_2 e */
+/** The constant logarithm of Euler's number \a e to base 2. */
+#define M_LOG2E 1.4426950408889634074 /* log_2 e */
 
-/** The logarithm of the \a e to base 10. */
+/** The constant logarithm of Euler's number \a e to base 10. */
 #define M_LOG10E	0.43429448190325182765	/* log_10 e */
 
-/** The natural logarithm of the 2.	*/
+/** The constant natural logarithm of 2.	*/
 #define M_LN2		0.69314718055994530942	/* log_e 2 */
 
-/** The natural logarithm of the 10.	*/
+/** The constant natural logarithm of 10.	*/
 #define M_LN10		2.30258509299404568402	/* log_e 10 */
 
 /** The constant \a pi.	*/
@@ -106,11 +119,23 @@
 /** The constant \a 1/sqrt(2).	*/
 #define M_SQRT1_2	0.70710678118654752440	/* 1/sqrt(2) */
 
-/** NAN constant.	*/
+/** The \c float representation of a constant quiet NaN. */
+#define NANF __builtin_nanf("")
+
+/** The \c double representation of a constant quiet NaN. */
 #define NAN	__builtin_nan("")
 
-/** INFINITY constant.	*/
-#define INFINITY	__builtin_inf()
+/** The \c long \c double representation of a constant quiet NaN. */
+#define NANL __builtin_nanl("")
+
+/** \c float INFINITY constant.	*/
+#define INFINITY __builtin_inff()
+
+/** \c double INFINITY constant.	*/
+#define INFINITY __builtin_inf()
+
+/** \c lonf \c double INFINITY constant.	*/
+#define INFINITY __builtin_infl()
 
 
 #if ! defined(__ATTR_CONST__) && ! defined(__DOXYGEN__)
@@ -125,271 +150,332 @@
 extern "C" {
 #endif
 
-/**
-    The cos() function returns the cosine of \a __x, measured in radians.
- */
-__ATTR_CONST__ extern float cosf (float __x);
-__ATTR_CONST__ extern double cos (double __x);
-__ATTR_CONST__ extern long double cosl (long double __x);
+/** The cosf() function returns the cosine of \a x, measured in radians. */
+__ATTR_CONST__ extern float cosf (float x);
+/** The cos() function returns the cosine of \a x, measured in radians. */
+__ATTR_CONST__ extern double cos (double x);
+/** The cosl() function returns the cosine of \a x, measured in radians. */
+__ATTR_CONST__ extern long double cosl (long double x);
 
-/**
-    The sin() function returns the sine of \a __x, measured in radians.
- */
-__ATTR_CONST__ extern float sinf (float __x);
-__ATTR_CONST__ extern double sin (double __x);
-__ATTR_CONST__ extern long double sinl (long double __x);
+/** The sinf() function returns the sine of \a x, measured in radians. */
+__ATTR_CONST__ extern float sinf (float x);
+/** The sin() function returns the sine of \a x, measured in radians. */
+__ATTR_CONST__ extern double sin (double x);
+/** The sinl() function returns the sine of \a x, measured in radians. */
+__ATTR_CONST__ extern long double sinl (long double x);
 
-/**
-    The tan() function returns the tangent of \a __x, measured in radians.
- */
-__ATTR_CONST__ extern float tanf (float __x);
-__ATTR_CONST__ extern double tan (double __x);
-__ATTR_CONST__ extern long double tanl (long double __x);
+/** The tanf() function returns the tangent of \a x, measured in radians. */
+__ATTR_CONST__ extern float tanf (float x);
+/** The tan() function returns the tangent of \a x, measured in radians. */
+__ATTR_CONST__ extern double tan (double x);
+/** The tanl() function returns the tangent of \a x, measured in radians. */
+__ATTR_CONST__ extern long double tanl (long double x);
 
-/**
-    The fabs() function computes the absolute value of a floating-point
-    number \a __x.
- */
+/** The fabsf() function computes the absolute value of a floating-point number \a x. */
 static __ATTR_ALWAYS_INLINE__ float fabsf (float __x)
 {
     return __builtin_fabsf (__x);
 }
 
+/** The fabs() function computes the absolute value of a floating-point number \a x. */
 static __ATTR_ALWAYS_INLINE__ double fabs (double __x)
 {
     return __builtin_fabs (__x);
 }
 
+/** The fabsl() function computes the absolute value of a floating-point number \a x. */
 static __ATTR_ALWAYS_INLINE__ long double fabsl (long double __x)
 {
     return __builtin_fabsl (__x);
 }
 
-/**
-    The function fmod() returns the floating-point remainder of <em>__x /
-    __y</em>.
- */
-__ATTR_CONST__ extern float fmodf (float __x, float __y);
-__ATTR_CONST__ extern double fmod (double __x, double __y);
-__ATTR_CONST__ extern long double fmodl (long double __x, long double __y);
+/** The function fmodf() returns the floating-point remainder of <em>x / y</em>. */
+__ATTR_CONST__ extern float fmodf (float x, float y);
+/** The function fmod() returns the floating-point remainder of <em>x / y</em>. */
+__ATTR_CONST__ extern double fmod (double x, double y);
+/** The function fmodl() returns the floating-point remainder of <em>x / y</em>. */
+__ATTR_CONST__ extern long double fmodl (long double x, long double y);
 
-/**
-    The modf() function breaks the argument \a __x into integral and
+/** The modff() function breaks the argument \a x into integral and
     fractional parts, each of which has the same sign as the argument.
-    It stores the integral part as a double in the object pointed to by
-    \a __iptr.
+    It stores the integral part as a \c float in the object pointed to by
+    \a iptr.
 
-    The modf() function returns the signed fractional part of \a __x.
+    The modff() function returns the signed fractional part of \a x.
 
     \note This implementation skips writing by zero pointer.  However,
     the GCC 4.3 can replace this function with inline code that does not
-    permit to use NULL address for the avoiding of storing.
- */
-extern float modff (float __x, float *__iptr);
-extern double modf (double __x, double *__iptr);
-extern long double modfl (long double __x, long double *__iptr);
+    permit to use NULL address for the avoiding of storing. */
+extern float modff (float x, float *iptr);
+/** The modf() function breaks the argument \a x into integral and
+    fractional parts, each of which has the same sign as the argument.
+    It stores the integral part as a \c double in the object pointed to by
+    \a iptr.
 
-/**
-    The sqrt() function returns the non-negative square root of \a __x.
- */
-__ATTR_CONST__ extern float sqrtf (float __x);
-__ATTR_CONST__ extern double sqrt (double __x);
-__ATTR_CONST__ extern long double sqrtl (long double __x);
+    The modf() function returns the signed fractional part of \a x. */
+extern double modf (double x, double *iptr);
+/** The modfl() function breaks the argument \a x into integral and
+    fractional parts, each of which has the same sign as the argument.
+    It stores the integral part as a \c long \c double in the object pointed to by
+    \a iptr.
 
-/**
-    The cbrt() function returns the cube root of \a __x.
- */
-__ATTR_CONST__ extern float cbrtf (float __x);
-__ATTR_CONST__ extern double cbrt (double __x);
-__ATTR_CONST__ extern long double cbrtl (long double __x);
+    The modf() function returns the signed fractional part of \a x. */
+extern long double modfl (long double x, long double *iptr);
 
-/**
-    The hypot() function returns <em>sqrt(__x*__x + __y*__y)</em>. This
+/** The sqrtf() function returns the non-negative square root of \a x. */
+__ATTR_CONST__ extern float sqrtf (float x);
+/** The sqrt() function returns the non-negative square root of \a x. */
+__ATTR_CONST__ extern double sqrt (double x);
+/** The sqrtl() function returns the non-negative square root of \a x. */
+__ATTR_CONST__ extern long double sqrtl (long double x);
+
+/** The cbrtf() function returns the cube root of \a x. */
+__ATTR_CONST__ extern float cbrtf (float x);
+/** The cbrt() function returns the cube root of \a x. */
+__ATTR_CONST__ extern double cbrt (double x);
+/** The cbrtl() function returns the cube root of \a x. */
+__ATTR_CONST__ extern long double cbrtl (long double x);
+
+/** The hypotf() function returns <em>sqrtf(x*x + y*y)</em>. This
     is the length of the hypotenuse of a right triangle with sides of
-    length \a __x and \a __y, or the  distance of the point (\a __x, \a
-    __y) from the origin. Using this function  instead of the direct
+    length \a x and \a y, or the  distance of the point (\a x, \a
+    y) from the origin. Using this function  instead of the direct
     formula is wise, since the error is much smaller. No underflow with
-    small \a __x and \a __y. No overflow if result is in range.
- */
-__ATTR_CONST__ extern float hypotf (float __x, float __y);
-__ATTR_CONST__ extern double hypot (double __x, double __y);
-__ATTR_CONST__ extern long double hypotl (long double __x, long double __y);
+    small \a x and \a y. No overflow if result is in range. */
+__ATTR_CONST__ extern float hypotf (float x, float y);
+/** The hypot() function returns <em>sqrt(x*x + y*y)</em>. This
+    is the length of the hypotenuse of a right triangle with sides of
+    length \a x and \a y, or the  distance of the point (\a x, \a
+    y) from the origin. Using this function  instead of the direct
+    formula is wise, since the error is much smaller. No underflow with
+    small \a x and \a y. No overflow if result is in range. */
+__ATTR_CONST__ extern double hypot (double x, double y);
+/** The hypotl() function returns <em>sqrtl(x*x + y*y)</em>. This
+    is the length of the hypotenuse of a right triangle with sides of
+    length \a x and \a y, or the  distance of the point (\a x, \a
+    y) from the origin. Using this function  instead of the direct
+    formula is wise, since the error is much smaller. No underflow with
+    small \a x and \a y. No overflow if result is in range. */
+__ATTR_CONST__ extern long double hypotl (long double x, long double y);
 
-/**
-    The function square() returns <em>__x * __x</em>.
+/** The function squaref() returns <em>x * x</em>.
+    \note This function does not belong to the C standard definition. */
+__ATTR_CONST__ extern float squaref (float x);
+/** The function square() returns <em>x * x</em>.
+    \note This function does not belong to the C standard definition. */
+__ATTR_CONST__ extern double square (double x);
+/** The function squarel() returns <em>x * x</em>.
+    \note This function does not belong to the C standard definition. */
+__ATTR_CONST__ extern long double squarel (long double x);
 
-    \note This function does not belong to the C standard definition.
- */
-__ATTR_CONST__ extern float squaref (float __x);
-__ATTR_CONST__ extern double square (double __x);
-__ATTR_CONST__ extern long double squarel (long double __x);
+/** The floorf() function returns the largest integral value less than or
+    equal to \a x, expressed as a floating-point number. */
+__ATTR_CONST__ extern float floorf (float x);
+/** The floor() function returns the largest integral value less than or
+    equal to \a x, expressed as a floating-point number. */
+__ATTR_CONST__ extern double floor (double x);
+/** The floorl() function returns the largest integral value less than or
+    equal to \a x, expressed as a floating-point number. */
+__ATTR_CONST__ extern long double floorl (long double x);
 
-/**
-    The floor() function returns the largest integral value less than or
-    equal to \a __x, expressed as a floating-point number.
- */
-__ATTR_CONST__ extern float floorf (float __x);
-__ATTR_CONST__ extern double floor (double __x);
-__ATTR_CONST__ extern long double floorl (long double __x);
+/** The ceilf() function returns the smallest integral value greater than
+    or equal to \a x, expressed as a floating-point number. */
+__ATTR_CONST__ extern float ceilf (float x);
+/** The ceil() function returns the smallest integral value greater than
+    or equal to \a x, expressed as a floating-point number. */
+__ATTR_CONST__ extern double ceil (double x);
+/** The ceill() function returns the smallest integral value greater than
+    or equal to \a x, expressed as a floating-point number. */
+__ATTR_CONST__ extern long double ceill (long double x);
 
-/**
-    The ceil() function returns the smallest integral value greater than
-    or equal to \a __x, expressed as a floating-point number.
- */
-__ATTR_CONST__ extern float ceilf (float __x);
-__ATTR_CONST__ extern double ceil (double __x);
-__ATTR_CONST__ extern long double ceill (long double __x);
-
-/**
-    The frexp() function breaks a floating-point number into a normalized
+/** The frexpf() function breaks a floating-point number into a normalized
     fraction and an integral power of 2.  It stores the integer in the \c
-    int object pointed to by \a __pexp.
+    int object pointed to by \a pexp.
 
-    If \a __x is a normal float point number, the frexp() function
+    If \a x is a normal float point number, the frexpf() function
     returns the value \c v, such that \c v has a magnitude in the
-    interval [1/2, 1) or zero, and \a __x equals \c v times 2 raised to
-    the power \a __pexp. If \a __x is zero, both parts of the result are
-    zero. If \a __x is not a finite number, the frexp() returns \a __x as
-    is and stores 0 by \a __pexp.
+    interval [1/2, 1) or zero, and \a x equals \c v times 2 raised to
+    the power \a pexp. If \a x is zero, both parts of the result are
+    zero. If \a x is not a finite number, the frexpf() returns \a x as
+    is and stores 0 by \a pexp.
 
     \note  This implementation permits a zero pointer as a directive to
     skip a storing the exponent.
  */
-extern float frexpf (float __x, int *__pexp);
-extern double frexp (double __x, int *__pexp);
-extern long double frexpl (long double __x, int *__pexp);
+extern float frexpf (float x, int *pexp);
+/** The frexp() function breaks a floating-point number into a normalized
+    fraction and an integral power of 2.  It stores the integer in the \c
+    int object pointed to by \a pexp.
 
-/**
-    The ldexp() function multiplies a floating-point number by an integral
-    power of 2. It returns the value of \a __x times 2 raised to the power
-    \a __exp.
- */
-__ATTR_CONST__ extern float ldexpf (float __x, int __exp);
-__ATTR_CONST__ extern double ldexp (double __x, int __exp);
-__ATTR_CONST__ extern long double ldexpl (long double __x, int __exp);
+    If \a x is a normal float point number, the frexp() function
+    returns the value \c v, such that \c v has a magnitude in the
+    interval [1/2, 1) or zero, and \a x equals \c v times 2 raised to
+    the power \a pexp. If \a x is zero, both parts of the result are
+    zero. If \a x is not a finite number, the frexp() returns \a x as
+    is and stores 0 by \a pexp. */
+extern double frexp (double x, int *pexp);
+/** The frexpl() function breaks a floating-point number into a normalized
+    fraction and an integral power of 2.  It stores the integer in the \c
+    int object pointed to by \a pexp.
 
-/**
-    The exp() function returns the exponential value of \a __x.
- */
-__ATTR_CONST__ extern float expf (float __x);
-__ATTR_CONST__ extern double exp (double __x);
-__ATTR_CONST__ extern long double expl (long double __x);
+    If \a x is a normal float point number, the frexpl() function
+    returns the value \c v, such that \c v has a magnitude in the
+    interval [1/2, 1) or zero, and \a x equals \c v times 2 raised to
+    the power \a pexp. If \a x is zero, both parts of the result are
+    zero. If \a x is not a finite number, the frexpl() returns \a x as
+    is and stores 0 by \a pexp. */
+extern long double frexpl (long double x, int *pexp);
 
-/**
-    The cosh() function returns the hyperbolic cosine of \a __x.
- */
-__ATTR_CONST__ extern float coshf (float __x);
-__ATTR_CONST__ extern double cosh (double __x);
-__ATTR_CONST__ extern long double coshl (long double __x);
+/** The ldexpf() function multiplies a floating-point number by an integral
+    power of 2. It returns the value of \a x times 2 raised to the power
+    \a iexp. */
+__ATTR_CONST__ extern float ldexpf (float x, int iexp);
+/** The ldexp() function multiplies a floating-point number by an integral
+    power of 2. It returns the value of \a x times 2 raised to the power
+    \a iexp. */
+__ATTR_CONST__ extern double ldexp (double x, int iexp);
+/** The ldexpl() function multiplies a floating-point number by an integral
+    power of 2. It returns the value of \a x times 2 raised to the power
+    \a iexp. */
+__ATTR_CONST__ extern long double ldexpl (long double x, int iexp);
 
-/**
-    The sinh() function returns the hyperbolic sine of \a __x.
- */
-__ATTR_CONST__ extern float sinhf (float __x);
-__ATTR_CONST__ extern double sinh (double __x);
-__ATTR_CONST__ extern long double sinhl (long double __x);
+/** The expf() function returns the exponential value of \a x. */
+__ATTR_CONST__ extern float expf (float x);
+/** The exp() function returns the exponential value of \a x. */
+__ATTR_CONST__ extern double exp (double x);
+/** The expl() function returns the exponential value of \a x. */
+__ATTR_CONST__ extern long double expl (long double x);
 
-/**
-    The tanh() function returns the hyperbolic tangent of \a __x.
- */
-__ATTR_CONST__ extern float tanhf (float __x);
-__ATTR_CONST__ extern double tanh (double __x);
-__ATTR_CONST__ extern long double tanhl (long double __x);
+/** The coshf() function returns the hyperbolic cosine of \a x. */
+__ATTR_CONST__ extern float coshf (float x);
+/** The cosh() function returns the hyperbolic cosine of \a x. */
+__ATTR_CONST__ extern double cosh (double x);
+/** The coshl() function returns the hyperbolic cosine of \a x. */
+__ATTR_CONST__ extern long double coshl (long double x);
 
-/**
-    The acos() function computes the principal value of the arc cosine of
-    \a __x.  The returned value is in the range [0, pi] radians. A domain
-    error occurs for arguments not in the range [-1, +1].
- */
-__ATTR_CONST__ extern float acosf (float __x);
-__ATTR_CONST__ extern double acos (double __x);
-__ATTR_CONST__ extern long double acosl (long double __x);
+/** The sinhf() function returns the hyperbolic sine of \a x. */
+__ATTR_CONST__ extern float sinhf (float x);
+/** The sinh() function returns the hyperbolic sine of \a x. */
+__ATTR_CONST__ extern double sinh (double x);
+/** The sinhl() function returns the hyperbolic sine of \a x. */
+__ATTR_CONST__ extern long double sinhl (long double x);
 
-/**
-    The asin() function computes the principal value of the arc sine of
-    \a __x.  The returned value is in the range [-pi/2, pi/2] radians. A
-    domain error occurs for arguments not in the range [-1, +1].
- */
-__ATTR_CONST__ extern float asinf (float __x);
-__ATTR_CONST__ extern double asin (double __x);
-__ATTR_CONST__ extern long double asinl (long double __x);
+/** The tanhf() function returns the hyperbolic tangent of \a x. */
+__ATTR_CONST__ extern float tanhf (float x);
+/** The tanh() function returns the hyperbolic tangent of \a x. */
+__ATTR_CONST__ extern double tanh (double x);
+/** The tanhl() function returns the hyperbolic tangent of \a x. */
+__ATTR_CONST__ extern long double tanhl (long double x);
 
-/**
-    The atan() function computes the principal value of the arc tangent
-    of \a __x.  The returned value is in the range [-pi/2, pi/2] radians.
- */
-__ATTR_CONST__ extern float atanf (float __x);
-__ATTR_CONST__ extern double atan (double __x);
-__ATTR_CONST__ extern long double atanl (long double __x);
+/** The acosf() function computes the principal value of the arc cosine of
+    \a x.  The returned value is in the range [0, pi] radians. A domain
+    error occurs for arguments not in the range [&minus;1, +1]. */
+__ATTR_CONST__ extern float acosf (float x);
+/** The acos() function computes the principal value of the arc cosine of
+    \a x.  The returned value is in the range [0, pi] radians. */
+__ATTR_CONST__ extern double acos (double x);
+/** The acosl() function computes the principal value of the arc cosine of
+    \a x.  The returned value is in the range [0, pi] radians. */
+__ATTR_CONST__ extern long double acosl (long double x);
 
-/**
-    The atan2() function computes the principal value of the arc tangent
-    of <em>__y / __x</em>, using the signs of both arguments to determine
+/** The asinf() function computes the principal value of the arc sine of
+    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. A
+    domain error occurs for arguments not in the range [&minus;1, +1]. */
+__ATTR_CONST__ extern float asinf (float x);
+/** The asin() function computes the principal value of the arc sine of
+    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+__ATTR_CONST__ extern double asin (double x);
+/** The asinl() function computes the principal value of the arc sine of
+    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+__ATTR_CONST__ extern long double asinl (long double x);
+
+/** The atanf() function computes the principal value of the arc tangent
+    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+__ATTR_CONST__ extern float atanf (float x);
+/** The atan() function computes the principal value of the arc tangent
+    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+__ATTR_CONST__ extern double atan (double x);
+/** The atanl() function computes the principal value of the arc tangent
+    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+__ATTR_CONST__ extern long double atanl (long double x);
+
+/** The atan2f() function computes the principal value of the arc tangent
+    of <em>y / x</em>, using the signs of both arguments to determine
     the quadrant of the return value.  The returned value is in the range
-    [-pi, +pi] radians.
- */
-__ATTR_CONST__ extern float atan2f (float __y, float __x);
-__ATTR_CONST__ extern double atan2 (double __y, double __x);
-__ATTR_CONST__ extern long double atan2l (long double __y, long double __x);
+    [&minus;pi, +pi] radians. */
+__ATTR_CONST__ extern float atan2f (float y, float x);
+/** The atan2() function computes the principal value of the arc tangent
+    of <em>y / x</em>, using the signs of both arguments to determine
+    the quadrant of the return value.  The returned value is in the range
+    [&minus;pi, +pi] radians. */
+__ATTR_CONST__ extern double atan2 (double y, double x);
+/** The atan2l() function computes the principal value of the arc tangent
+    of <em>y / x</em>, using the signs of both arguments to determine
+    the quadrant of the return value.  The returned value is in the range
+    [&minus;pi, +pi] radians. */
+__ATTR_CONST__ extern long double atan2l (long double y, long double x);
 
-/**
-    The log() function returns the natural logarithm of argument \a __x.
- */
-__ATTR_CONST__ extern float logf (float __x);
-__ATTR_CONST__ extern double log (double __x);
-__ATTR_CONST__ extern long double logl (long double __x);
+/** The logf() function returns the natural logarithm of argument \a x. */
+__ATTR_CONST__ extern float logf (float x);
+/** The log() function returns the natural logarithm of argument \a x. */
+__ATTR_CONST__ extern double log (double x);
+/** The logl() function returns the natural logarithm of argument \a x. */
+__ATTR_CONST__ extern long double logl (long double x);
 
-/**
-    The log10() function returns the logarithm of argument \a __x to base 10.
- */
-__ATTR_CONST__ extern float log10f (float __x);
-__ATTR_CONST__ extern double log10 (double __x);
-__ATTR_CONST__ extern long double log10l (long double __x);
+/** The log10f() function returns the logarithm of argument \a x to base 10. */
+__ATTR_CONST__ extern float log10f (float x);
+/** The log10() function returns the logarithm of argument \a x to base 10. */
+__ATTR_CONST__ extern double log10 (double x);
+/** The log10l() function returns the logarithm of argument \a x to base 10. */
+__ATTR_CONST__ extern long double log10l (long double x);
 
-/**
-    The function pow() returns the value of \a __x to the exponent \a __y.
- */
-__ATTR_CONST__ extern float powf (float __x, float __y);
-__ATTR_CONST__ extern double pow (double __x, double __y);
-__ATTR_CONST__ extern long double powl (long double __x, long double __y);
+/** The function powf() returns the value of \a x to the exponent \a y. */
+__ATTR_CONST__ extern float powf (float x, float y);
+/** The function pow() returns the value of \a x to the exponent \a y. */
+__ATTR_CONST__ extern double pow (double x, double y);
+/** The function powl() returns the value of \a x to the exponent \a y. */
+__ATTR_CONST__ extern long double powl (long double x, long double y);
 
-/**
-    The function isnan() returns 1 if the argument \a __x represents a
-    "not-a-number" (NaN) object, otherwise 0.
- */
-__ATTR_CONST__ extern int isnanf (float __x);
-__ATTR_CONST__ extern int isnan (double __x);
-__ATTR_CONST__ extern int isnanl (long double __x);
+/** The function isnanf() returns 1 if the argument \a x represents a
+    "not-a-number" (NaN) object, otherwise 0. */
+__ATTR_CONST__ extern int isnanf (float x);
+/** The function isnan() returns 1 if the argument \a x represents a
+    "not-a-number" (NaN) object, otherwise 0. */
+__ATTR_CONST__ extern int isnan (double x);
+/** The function isnanl() returns 1 if the argument \a x represents a
+    "not-a-number" (NaN) object, otherwise 0. */
+__ATTR_CONST__ extern int isnanl (long double x);
 
-/**
-    The function isinf() returns 1 if the argument \a __x is positive
-    infinity, -1 if \a __x is negative infinity, and 0 otherwise.
+/** The function isinff() returns 1 if the argument \a x is positive
+    infinity, &minus;1 if \a x is negative infinity, and 0 otherwise. */
+__ATTR_CONST__ extern int isinff (float x);
+/** The function isinf() returns 1 if the argument \a x is positive
+    infinity, &minus;1 if \a x is negative infinity, and 0 otherwise. */
+__ATTR_CONST__ extern int isinf (double x);
+/** The function isinfl() returns 1 if the argument \a x is positive
+    infinity, &minus;1 if \a x is negative infinity, and 0 otherwise. */
+__ATTR_CONST__ extern int isinfl (long double x);
 
-    \note The GCC 4.3 can replace this function with inline code that
-    returns the 1 value for both infinities (gcc bug #35509).
- */
-__ATTR_CONST__ extern int isinff (float __x);
-__ATTR_CONST__ extern int isinf (double __x);
-__ATTR_CONST__ extern int isinfl (long double __x);
-
-/**
-    The isfinite() function returns a nonzero value if \a __x is finite:
-    not plus or minus infinity, and not NaN.
- */
+/** The isfinitef() function returns a nonzero value if \a __x is finite:
+    not plus or minus infinity, and not NaN. */
 __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ int isfinitef (float __x)
 {
     unsigned char __exp;
     __asm__ (
-	"mov	%0, %C1		\n\t"
-	"lsl	%0		\n\t"
-	"mov	%0, %D1		\n\t"
-	"rol	%0		"
-	: "=&r" (__exp)
-	: "r" (__x)	);
+        "mov    %0, %C1"     "\n\t"
+        "lsl    %0"          "\n\t"
+        "mov    %0, %D1"     "\n\t"
+        "rol    %0"
+        : "=&r" (__exp)
+        : "r" (__x) );
     return __exp != 0xff;
 }
 
-#if __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
+/** The isfinite() function returns a nonzero value if \a __x is finite:
+    not plus or minus infinity, and not NaN. */
+#ifdef __DOXYGEN__
+static __ATTR_ALWAYS_INLINE__ int isfinite (double __x);
+#elif __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
 static __ATTR_ALWAYS_INLINE__ int isfinite (double __x)
 {
     return isfinitef (__x);
@@ -398,7 +484,11 @@ static __ATTR_ALWAYS_INLINE__ int isfinite (double __x)
 int isfinite (double __x);
 #endif /* double = float */
 
-#if __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
+/** The isfinite() function returns a nonzero value if \a __x is finite:
+    not plus or minus infinity, and not NaN. */
+#ifdef __DOXYGEN__
+static __ATTR_ALWAYS_INLINE__ int isfinitel (long double __x);
+#elif __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
 static __ATTR_ALWAYS_INLINE__ int isfinitel (long double __x)
 {
     return isfinitef (__x);
@@ -407,139 +497,207 @@ static __ATTR_ALWAYS_INLINE__ int isfinitel (long double __x)
 int isfinitel (long double __x);
 #endif /* long double = float */
 
-/**
-    The copysign() function returns \a __x but with the sign of \a __y.
-    They work even if \a __x or \a __y are NaN or zero.
-*/
+/** The copysignf() function returns \a __x but with the sign of \a __y.
+    They work even if \a __x or \a __y are NaN or zero. */
 __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ float copysignf (float __x, float __y)
 {
     __asm__ (
-	"bst	%D2, 7	\n\t"
-	"bld	%D0, 7	"
-	: "=r" (__x)
-	: "0" (__x), "r" (__y) );
+        "bst    %D2, 7"  "\n\t"
+        "bld    %D0, 7"
+        : "=r" (__x)
+        : "0" (__x), "r" (__y));
     return __x;
 }
 
+/** The copysign() function returns \a __x but with the sign of \a __y.
+    They work even if \a __x or \a __y are NaN or zero. */
 __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ double copysign (double __x, double __y)
 {
     __asm__ (
-	"bst	%r1+%2-1, 7" "\n\t"
-	"bld	%r0+%2-1, 7"
-	: "+r" (__x)
-	: "r" (__y), "n" (__SIZEOF_DOUBLE__));
+        "bst    %r1+%2-1, 7" "\n\t"
+        "bld    %r0+%2-1, 7"
+        : "+r" (__x)
+        : "r" (__y), "n" (__SIZEOF_DOUBLE__));
     return __x;
 }
 
+/** The copysignl() function returns \a __x but with the sign of \a __y.
+    They work even if \a __x or \a __y are NaN or zero. */
 __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ long double copysignl (long double __x, long double __y)
 {
     __asm__ (
-	"bst	%r1+%2-1, 7" "\n\t"
-	"bld	%r0+%2-1, 7"
-	: "+r" (__x)
-	: "r" (__y), "n" (__SIZEOF_LONG_DOUBLE__));
+        "bst	%r1+%2-1, 7" "\n\t"
+        "bld	%r0+%2-1, 7"
+        : "+r" (__x)
+        : "r" (__y), "n" (__SIZEOF_LONG_DOUBLE__));
     return __x;
 }
 
-/**
-    The signbit() function returns a nonzero value if the value of \a __x
-    has its sign bit set.  This is not the same as `\a __x < 0.0',
+/** The signbitf() function returns a nonzero value if the value of \a x
+    has its sign bit set.  This is not the same as `\a x < 0.0',
     because IEEE 754 floating point allows zero to be signed. The
-    comparison `-0.0 < 0.0' is false, but `signbit (-0.0)' will return a
-    nonzero value.
- */
-__ATTR_CONST__ extern int signbitf (float __x);
-__ATTR_CONST__ extern int signbit (double __x);
-__ATTR_CONST__ extern int signbitl (long double __x);
+    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)' will return a
+    nonzero value. */
+__ATTR_CONST__ extern int signbitf (float x);
+/** The signbit() function returns a nonzero value if the value of \a x
+    has its sign bit set.  This is not the same as `\a x < 0.0',
+    because IEEE 754 floating point allows zero to be signed. The
+    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)' will return a
+    nonzero value. */
+__ATTR_CONST__ extern int signbit (double x);
+/** The signbitl() function returns a nonzero value if the value of \a x
+    has its sign bit set.  This is not the same as `\a x < 0.0',
+    because IEEE 754 floating point allows zero to be signed. The
+    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)' will return a
+    nonzero value. */
+__ATTR_CONST__ extern int signbitl (long double x);
 
-/**
-    The fdim() function returns <em>max(__x - __y, 0)</em>. If \a __x or
-    \a __y or both are NaN, NaN is returned.
- */
-__ATTR_CONST__ extern float fdimf (float __x, float __y);
-__ATTR_CONST__ extern double fdim (double __x, double __y);
-__ATTR_CONST__ extern long double fdiml (long double __x, long double __y);
+/** The fdimf() function returns <em>max(x &minus; y, 0)</em>. If \a x or
+    \a y or both are NaN, NaN is returned. */
+__ATTR_CONST__ extern float fdimf (float x, float y);
+/** The fdim() function returns <em>max(x &minus; y, 0)</em>. If \a x or
+    \a y or both are NaN, NaN is returned. */
+__ATTR_CONST__ extern double fdim (double x, double y);
+/** The fdiml() function returns <em>max(x &minus; y, 0)</em>. If \a x or
+    \a y or both are NaN, NaN is returned. */
+__ATTR_CONST__ extern long double fdiml (long double x, long double y);
 
-/**
-    The fma() function performs floating-point multiply-add. This is the
-    operation <em>(__x * __y) + __z</em>, but the intermediate result is
+/** The fmaf() function performs floating-point multiply-add. This is the
+    operation <em>(x * y) + z</em>, but the intermediate result is
     not rounded to the destination type.  This can sometimes improve the
-    precision of a calculation.
- */
-__ATTR_CONST__ extern float fmaf (float __x, float __y, float __z);
-__ATTR_CONST__ extern double fma (double __x, double __y, double __z);
-__ATTR_CONST__ extern long double fmal (long double __x, long double __y, long double __z);
+    precision of a calculation. */
+__ATTR_CONST__ extern float fmaf (float x, float y, float z);
+/** The fma() function performs floating-point multiply-add. This is the
+    operation <em>(x * y) + z</em>, but the intermediate result is
+    not rounded to the destination type.  This can sometimes improve the
+    precision of a calculation. */
+__ATTR_CONST__ extern double fma (double x, double y, double z);
+/** The fmal() function performs floating-point multiply-add. This is the
+    operation <em>(x * y) + z</em>, but the intermediate result is
+    not rounded to the destination type.  This can sometimes improve the
+    precision of a calculation. */
+__ATTR_CONST__ extern long double fmal (long double x, long double y, long double z);
 
-/**
-    The fmax() function returns the greater of the two values \a __x and
-    \a __y. If an argument is NaN, the other argument is returned. If
-    both arguments are NaN, NaN is returned.
- */
-__ATTR_CONST__ extern float fmaxf (float __x, float __y);
-__ATTR_CONST__ extern double fmax (double __x, double __y);
-__ATTR_CONST__ extern long double fmaxl (long double __x, long double __y);
+/** The fmaxf() function returns the greater of the two values \a x and
+    \a y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned. */
+__ATTR_CONST__ extern float fmaxf (float x, float y);
+/** The fmax() function returns the greater of the two values \a x and
+    \a y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned. */
+__ATTR_CONST__ extern double fmax (double x, double y);
+/** The fmaxl() function returns the greater of the two values \a x and
+    \a y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned. */
+__ATTR_CONST__ extern long double fmaxl (long double x, long double y);
 
-/**
-    The fmin() function returns the lesser of the two values \a __x and
-    \a __y. If an argument is NaN, the other argument is returned. If
-    both arguments are NaN, NaN is returned.
- */
-__ATTR_CONST__ extern float fminf (float __x, float __y);
-__ATTR_CONST__ extern double fmin (double __x, double __y);
-__ATTR_CONST__ extern long double fminl (long double __x, long double __y);
+/** The fminf() function returns the lesser of the two values \a x and
+    \a y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned. */
+__ATTR_CONST__ extern float fminf (float x, float y);
+/** The fmin() function returns the lesser of the two values \a x and
+    \a y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned. */
+__ATTR_CONST__ extern double fmin (double x, double y);
+/** The fminl() function returns the lesser of the two values \a x and
+    \a y. If an argument is NaN, the other argument is returned. If
+    both arguments are NaN, NaN is returned. */
+__ATTR_CONST__ extern long double fminl (long double x, long double y);
 
-/**
-    The trunc() function rounds \a __x to the nearest integer not larger
-    in absolute value.
- */
-__ATTR_CONST__ extern float truncf (float __x);
-__ATTR_CONST__ extern double trunc (double __x);
-__ATTR_CONST__ extern long double truncl (long double __x);
+/** The truncf() function rounds \a x to the nearest integer not larger
+    in absolute value. */
+__ATTR_CONST__ extern float truncf (float x);
+/** The trunc() function rounds \a x to the nearest integer not larger
+    in absolute value. */
+__ATTR_CONST__ extern double trunc (double x);
+/** The truncl() function rounds \a x to the nearest integer not larger
+    in absolute value. */
+__ATTR_CONST__ extern long double truncl (long double x);
 
-/**
-    The round() function rounds \a __x to the nearest integer, but rounds
+/** The roundf() function rounds \a x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
     Overflow is impossible.
 
-    \return The rounded value. If \a __x is an integral or infinite, \a
-    __x itself is returned. If \a __x is \c NaN, then \c NaN is returned.
- */
-__ATTR_CONST__ extern float roundf (float __x);
-__ATTR_CONST__ extern double round (double __x);
-__ATTR_CONST__ extern long double roundl (long double __x);
+    \return The rounded value. If \a x is an integral or infinite, \a
+    x itself is returned. If \a x is \c NaN, then \c NaN is returned. */
+__ATTR_CONST__ extern float roundf (float x);
+/** The round() function rounds \a x to the nearest integer, but rounds
+    halfway cases away from zero (instead of to the nearest even integer).
+    Overflow is impossible.
 
-/**
-    The lround() function rounds \a __x to the nearest integer, but rounds
+    \return The rounded value. If \a x is an integral or infinite, \a
+    x itself is returned. If \a x is \c NaN, then \c NaN is returned. */
+__ATTR_CONST__ extern double round (double x);
+/** The roundl() function rounds \a x to the nearest integer, but rounds
+    halfway cases away from zero (instead of to the nearest even integer).
+    Overflow is impossible.
+
+    \return The rounded value. If \a x is an integral or infinite, \a
+    x itself is returned. If \a x is \c NaN, then \c NaN is returned. */
+__ATTR_CONST__ extern long double roundl (long double x);
+
+/** The lroundf() function rounds \a x to the nearest integer, but rounds
     halfway cases away from zero (instead of to the nearest even integer).
     This function is similar to round() function, but it differs in type of
     return value and in that an overflow is possible.
 
-    \return The rounded long integer value. If \a __x is not a finite number
+    \return The rounded long integer value. If \a x is not a finite number
     or an overflow was, this realization returns the \c LONG_MIN value
-    (0x80000000).
- */
-__ATTR_CONST__ extern long lroundf (float __x);
-__ATTR_CONST__ extern long lround (double __x);
-__ATTR_CONST__ extern long lroundl (long double __x);
+    (0x80000000). */
+__ATTR_CONST__ extern long lroundf (float x);
+/** The lround() function rounds \a x to the nearest integer, but rounds
+    halfway cases away from zero (instead of to the nearest even integer).
+    This function is similar to round() function, but it differs in type of
+    return value and in that an overflow is possible.
 
-/**
-    The lrint() function rounds \a __x to the nearest integer, rounding the
+    \return The rounded long integer value. If \a x is not a finite number
+    or an overflow was, this realization returns the \c LONG_MIN value
+    (0x80000000). */
+__ATTR_CONST__ extern long lround (double x);
+/** The lroundl() function rounds \a x to the nearest integer, but rounds
+    halfway cases away from zero (instead of to the nearest even integer).
+    This function is similar to round() function, but it differs in type of
+    return value and in that an overflow is possible.
+
+    \return The rounded long integer value. If \a x is not a finite number
+    or an overflow was, this realization returns the \c LONG_MIN value
+    (0x80000000). */
+__ATTR_CONST__ extern long lroundl (long double x);
+
+/** The lrintf() function rounds \a x to the nearest integer, rounding the
+    halfway cases to the even integer direction. (That is both 1.5 and 2.5
+    values are rounded to 2). This function is similar to rintf() function,
+    but it differs in type of return value and in that an overflow is
+    possible.
+
+    \return The rounded long integer value. If \a x is not a finite
+    number or an overflow was, this realization returns the \c LONG_MIN
+    value (0x80000000). */
+__ATTR_CONST__ extern long lrintf (float x);
+/** The lrint() function rounds \a x to the nearest integer, rounding the
     halfway cases to the even integer direction. (That is both 1.5 and 2.5
     values are rounded to 2). This function is similar to rint() function,
     but it differs in type of return value and in that an overflow is
     possible.
 
-    \return The rounded long integer value. If \a __x is not a finite
+    \return The rounded long integer value. If \a x is not a finite
     number or an overflow was, this realization returns the \c LONG_MIN
-    value (0x80000000).
- */
-__ATTR_CONST__ extern long lrintf (float __x);
-__ATTR_CONST__ extern long lrint (double __x);
-__ATTR_CONST__ extern long lrintl (long double __x);
+    value (0x80000000). */
+__ATTR_CONST__ extern long lrint (double x);
+/** The lrintl() function rounds \a x to the nearest integer, rounding the
+    halfway cases to the even integer direction. (That is both 1.5 and 2.5
+    values are rounded to 2). This function is similar to rintl() function,
+    but it differs in type of return value and in that an overflow is
+    possible.
+
+    \return The rounded long integer value. If \a x is not a finite
+    number or an overflow was, this realization returns the \c LONG_MIN
+    value (0x80000000). */
+__ATTR_CONST__ extern long lrintl (long double x);
 
 #ifdef __cplusplus
 }
 #endif
 
-/*@}*/
+/**@}*/
 #endif /* !__MATH_H */
