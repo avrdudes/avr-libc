@@ -42,12 +42,14 @@ Inline Assembler Cookbook
   - \ref inline_asm_swap_nibbles
   - \ref inline_asm_swap_bytes
   - \ref inline_asm_access_memory
+  - \ref inline_asm_bytes
   - \ref builtin_constant_p_in_inline_functions
          "Inline Functions and __builtin_constant_p"
   - \ref inline_asm_jumping
 - \ref inline_asm_local_vars
   - \ref inline_asm_abi_interface
 - \ref c_names_in_asm
+- \ref inline_asm_fails
 
 \section inline_asm_about About this Document
 
@@ -1028,6 +1030,8 @@ Also notice that we have to pass the <em>address of the SFR</em> to the
 inline function.  Passing the SFR directly like in the marco approach
 won't work for obvious reasons.
 
+\subsection inline_asm_bytes Accessing Bytes of wider Expressions
+
 Finally, an example that atomically increments a 16-bit integer.
 The code is wrapped in <tt>IN SREG</tt> / <tt>CLI</tt> / <tt>OUT SREG</tt>
 to make it atomic. It reads the 16-bit value \c data from its absolute
@@ -1286,5 +1290,37 @@ double eeprom_read_double (const double*) __asm("eeprom_read_qword");
 provided \c double is a 32-bit type.
 
 - It uses the implementation of \c eeprom_read_qword for 64-bit doubles.
+
+\section inline_asm_fails What won't work
+
+GCC inline asm has some limitations.
+
+\subsection inline_asm_fails_regvar Letting an Operand cross the Boundaries of the Y Register
+
+It is not possible to bind a value to a local register variable that
+crosses the boundaries of the Y register.  For example, trying to
+bind a 32-bit value to R31:R28 by means of
+\code
+register uint32_t r28 __asm ("28");
+\endcode
+will result in an error message like
+\code{none}
+error: register specified for 'r28' isn't suitable for data type
+\endcode
+
+Similarly, an operand described by a constaint will be located either
+completely below the Y register, as part of Y register, or above it.
+
+\subsection asm_fails_output_match Using a Matching Constraints "=0"..."=9" with Output Operands
+
+Suppose we want an inline asm that returns the low byte of a 16-bit
+value \c val16:
+\code
+asm ("" : "=1" (lo8) : "r" (val16));
+\endcode
+The diagnostic will be:
+\code{none}
+error: matching constraint not valid in output operand
+\endcode
 
 */ */
