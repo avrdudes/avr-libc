@@ -1123,10 +1123,10 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
  * purposes only.
  */
 /** \ingroup avr_pgmspace
-    \def PSTR(s)
+    \def PSTR(str)
 
     Used to declare a static pointer to a string in program space. */
-# define PSTR(s) ((const PROGMEM char *)(s))
+# define PSTR(str) ({ static const PROGMEM char c[] = (str); &c[0]; })
 #else  /* !DOXYGEN */
 /* The real thing. */
 # define PSTR(s) (__extension__({static const char __c[] PROGMEM = (s); &__c[0];}))

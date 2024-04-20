@@ -360,17 +360,17 @@ $ echo '#include <avr/io.h>' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR
 
 \section using_avr_as Options for the assembler avr-as
 
-\note The preferred way to assemble a file if by means of using \c avr-gcc:
+\note The preferred way to assemble a file is by means of using \c avr-gcc:
 - \c avr-gcc, which is a driver program to call sub-programs like the
 assembler, knows which options it has to add to the assembler's command line,
 like:
-<tt>-mmcu=<em>arch</em></tt>, -c -mno-skip-bug, etc.
+<tt>-mmcu=<em>arch</em></tt>, \c -mno-skip-bug, etc.
 - \c avr-gcc will call the C preprocessor on the assembler input for sources
 with extensions \c .S and \c .sx.  For other extensions, use
 \verbatim
 $ avr-gcc -x assembler-with-cpp file.asm ...
 \endverbatim
-This allows to use preprocessor directives like
+This allows to use C preprocessor directives like
 \code
 #include <avr/io.h>
 \endcode
@@ -384,7 +384,7 @@ in assembly sources.
 <dd>
   \c avr-as does not support all <em>mcu</em>s supported by the
   compiler.  As explained in the note above, the preferred way to run
-  the assembler is by using \c avr-gcc.
+  the assembler is by using the compiler driver \c avr-gcc.
 </dd>
 
 <dt><tt>-mall-opcodes</tt></dt>

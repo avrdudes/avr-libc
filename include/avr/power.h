@@ -75,11 +75,10 @@ the clock below 131.072 kHz.
 
 \anchor avr_powermacros
 <small>
-<center>
-<table border="3">
+<table>
   <tr>
-    <td width="10%"><strong>Power Macro</strong></td>
-    <td width="15%"><strong>Description</strong></td>
+    <th>Power Macro
+    <th>Description
   </tr>
 
   <tr>
@@ -542,7 +541,6 @@ the clock below 131.072 kHz.
     <td>Disable all modules.</td>
   </tr>
 </table>
-</center>
 </small>
 
 @} */

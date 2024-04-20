@@ -71,14 +71,14 @@
     uint8_t serno[] = { 0x02, 0x1c, 0xb8, 0x01, 0, 0, 0, 0xa2 };
 
     int
-    checkcrc(void)
+    checkcrc (void)
     {
-	uint8_t crc = 0, i;
+        uint8_t crc = 0, i;
 
-	for (i = 0; i < sizeof serno / sizeof serno[0]; i++)
-	    crc = _crc_ibutton_update(crc, serno[i]);
+        for (i = 0; i < sizeof serno / sizeof serno[0]; i++)
+            crc = _crc_ibutton_update (crc, serno[i]);
 
-	return crc; // must be 0
+        return crc; // must be 0
     }
     \endcode
 */
@@ -86,8 +86,8 @@
 /** \ingroup util_crc
     Optimized CRC-16 calculation.
 
-    Polynomial: x^16 + x^15 + x^2 + 1 (0xa001)<br>
-    Initial value: 0xffff
+    Polynomial: x<sup>16</sup> + x<sup>15</sup> + x<sup>2</sup> + 1 (0xa001)<br>
+    Initial value: \c 0xffff
 
     This CRC is normally used in disk-drive controllers.
 
@@ -95,22 +95,19 @@
 
     \code
     uint16_t
-    crc16_update(uint16_t crc, uint8_t a)
+    crc16_update (uint16_t crc, uint8_t a)
     {
-	int i;
+        crc ^= a;
+        for (int i = 0; i < 8; ++i)
+        {
+            if (crc & 1)
+                crc = (crc >> 1) ^ 0xA001;
+            else
+                crc = crc >> 1;
+        }
 
-	crc ^= a;
-	for (i = 0; i < 8; ++i)
-	{
-	    if (crc & 1)
-		crc = (crc >> 1) ^ 0xA001;
-	    else
-		crc = (crc >> 1);
-	}
-
-	return crc;
+        return crc;
     }
-
     \endcode */
 
 static __ATTR_ALWAYS_INLINE__ uint16_t
@@ -153,8 +150,8 @@ _crc16_update(uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-XMODEM calculation.
 
-    Polynomial: x^16 + x^12 + x^5 + 1 (0x1021)<br>
-    Initial value: 0x0
+    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x1021)<br>
+    Initial value: \c 0x0
 
     This is the CRC used by the Xmodem-CRC protocol.
 
@@ -164,10 +161,8 @@ _crc16_update(uint16_t __crc, uint8_t __data)
     uint16_t
     crc_xmodem_update (uint16_t crc, uint8_t data)
     {
-        int i;
-
         crc = crc ^ ((uint16_t)data << 8);
-        for (i=0; i<8; i++)
+        for (int i = 0; i < 8; i++)
         {
             if (crc & 0x8000)
                 crc = (crc << 1) ^ 0x1021;
@@ -216,8 +211,8 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-CCITT calculation.
 
-    Polynomial: x^16 + x^12 + x^5 + 1 (0x8408)<br>
-    Initial value: 0xffff
+    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x8408)<br>
+    Initial value: \c 0xffff
 
     This is the CRC used by PPP and IrDA.
 
@@ -282,8 +277,8 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized Dallas (now Maxim) iButton 8-bit CRC calculation.
 
-    Polynomial: x^8 + x^5 + x^4 + 1 (0x8C)<br>
-    Initial value: 0x0
+    Polynomial: x<sup>8</sup> + x<sup>5</sup> + x<sup>4</sup> + 1 (0x8C)<br>
+    Initial value: \c 0x0
 
     See http://www.maxim-ic.com/appnotes.cfm/appnote_number/27
 
@@ -291,37 +286,35 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
 
     \code
     uint8_t
-    _crc_ibutton_update(uint8_t crc, uint8_t data)
+    _crc_ibutton_update (uint8_t crc, uint8_t data)
     {
-	uint8_t i;
+        crc = crc ^ data;
+        for (uint8_t i = 0; i < 8; i++)
+        {
+            if (crc & 0x01)
+                crc = (crc >> 1) ^ 0x8C;
+            else
+                crc >>= 1;
+        }
 
-	crc = crc ^ data;
-	for (i = 0; i < 8; i++)
-	{
-	    if (crc & 0x01)
-	        crc = (crc >> 1) ^ 0x8C;
-	    else
-	        crc >>= 1;
-	}
-
-	return crc;
+        return crc;
     }
     \endcode
 */
 
 static __ATTR_ALWAYS_INLINE__ uint8_t
-_crc_ibutton_update(uint8_t __crc, uint8_t __data)
+_crc_ibutton_update (uint8_t __crc, uint8_t __data)
 {
 	uint8_t __i, __pattern;
 	__asm__ __volatile__ (
-		"	eor	%0, %4" "\n\t"
-		"	ldi	%1, 8" "\n\t"
-		"	ldi	%2, 0x8C" "\n\t"
-		"1:	lsr	%0" "\n\t"
-		"	brcc	2f" "\n\t"
-		"	eor	%0, %2" "\n\t"
-		"2:	dec	%1" "\n\t"
-		"	brne	1b" "\n\t"
+		"eor	%0, %4"    "\n\t"
+		"ldi	%1, 8"     "\n\t"
+		"ldi	%2, 0x8C"  "\n"
+		"1:	lsr	%0"        "\n\t"
+		"brcc	2f"        "\n\t"
+		"eor	%0, %2"    "\n"
+		"2:	dec	%1"        "\n\t"
+		"brne	1b"
 		: "=r" (__crc), "=d" (__i), "=d" (__pattern)
 		: "0" (__crc), "r" (__data));
 	return __crc;
@@ -330,7 +323,7 @@ _crc_ibutton_update(uint8_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-8-CCITT calculation.
 
-    Polynomial: x^8 + x^2 + x + 1 (0xE0)<br>
+    Polynomial: x<sup>8</sup> + x<sup>2</sup> + x + 1 (0xE0)<br>
 
     For use with simple CRC-8<br>
     Initial value: 0x0
@@ -353,14 +346,11 @@ _crc_ibutton_update(uint8_t __crc, uint8_t __data)
     uint8_t
     _crc8_ccitt_update (uint8_t inCrc, uint8_t inData)
     {
-        uint8_t   i;
-        uint8_t   data;
+        uint8_t data = inCrc ^ inData;
 
-        data = inCrc ^ inData;
-
-        for ( i = 0; i < 8; i++ )
+        for (int i = 0; i < 8; i++)
         {
-            if (( data & 0x80 ) != 0 )
+            if ((data & 0x80) != 0)
             {
                 data <<= 1;
                 data ^= 0x07;
@@ -380,14 +370,14 @@ _crc8_ccitt_update(uint8_t __crc, uint8_t __data)
 {
     uint8_t __i, __pattern;
     __asm__ __volatile__ (
-        "    eor    %0, %4" "\n\t"
-        "    ldi    %1, 8" "\n\t"
-        "    ldi    %2, 0x07" "\n\t"
-        "1:  lsl    %0" "\n\t"
-        "    brcc   2f" "\n\t"
-        "    eor    %0, %2" "\n\t"
-        "2:  dec    %1" "\n\t"
-        "    brne   1b" "\n\t"
+        "eor    %0, %4"   "\n\t"
+        "ldi    %1, 8"    "\n\t"
+        "ldi    %2, 0x07" "\n"
+        "1:	lsl    %0"    "\n\t"
+        "brcc   2f"       "\n\t"
+        "eor    %0, %2"   "\n"
+        "2:	dec    %1"    "\n\t"
+        "brne   1b"
         : "=r" (__crc), "=d" (__i), "=d" (__pattern)
         : "0" (__crc), "r" (__data));
     return __crc;

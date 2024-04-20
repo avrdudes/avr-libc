@@ -58,14 +58,15 @@
     \par Notes:
     - Math functions do not raise exceptions and do not change the
       \c errno variable. Therefore the majority of them are declared
-      with const attribute, for better optimization by GCC.
-    - 64-bit floating point arithmetic is only available in
+      with \c const attribute, for better optimization by GCC.
+    - 64-bit floating-point arithmetic is only available in
       <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">avr-gcc v10</a>
       and up.
       The size of the \c double and \c long \c double type can be selected
-      at compile-time with options like <tt>-mdouble=64</tt>,
-      <tt>-mlong-double=32</tt>, etc.  Whether such options are available
-      depends on how the compiler has been configured.
+      at compile-time with options like <tt>-mdouble=64</tt> and
+      <tt>-mlong-double=32</tt>.  Whether such options are available,
+      and their default values,
+      depend on how the compiler has been configured.
     - The implementation of 64-bit floating-point arithmetic has some
       shortcomings and limitations, see the
       <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a>
@@ -84,40 +85,40 @@
 #define M_E 2.7182818284590452354
 
 /** The constant logarithm of Euler's number \a e to base 2. */
-#define M_LOG2E 1.4426950408889634074 /* log_2 e */
+#define M_LOG2E 1.4426950408889634074
 
 /** The constant logarithm of Euler's number \a e to base 10. */
-#define M_LOG10E	0.43429448190325182765	/* log_10 e */
+#define M_LOG10E	0.43429448190325182765
 
 /** The constant natural logarithm of 2.	*/
-#define M_LN2		0.69314718055994530942	/* log_e 2 */
+#define M_LN2		0.69314718055994530942
 
 /** The constant natural logarithm of 10.	*/
-#define M_LN10		2.30258509299404568402	/* log_e 10 */
+#define M_LN10		2.30258509299404568402
 
 /** The constant \a pi.	*/
-#define M_PI		3.14159265358979323846	/* pi */
+#define M_PI		3.14159265358979323846
 
 /** The constant \a pi/2.	*/
-#define M_PI_2		1.57079632679489661923	/* pi/2 */
+#define M_PI_2		1.57079632679489661923
 
 /** The constant \a pi/4.	*/
-#define M_PI_4		0.78539816339744830962	/* pi/4 */
+#define M_PI_4		0.78539816339744830962
 
 /** The constant \a 1/pi.	*/
-#define M_1_PI		0.31830988618379067154	/* 1/pi */
+#define M_1_PI		0.31830988618379067154
 
 /** The constant \a 2/pi.	*/
-#define M_2_PI		0.63661977236758134308	/* 2/pi */
+#define M_2_PI		0.63661977236758134308
 
 /** The constant \a 2/sqrt(pi).	*/
-#define M_2_SQRTPI	1.12837916709551257390	/* 2/sqrt(pi) */
+#define M_2_SQRTPI	1.12837916709551257390
 
 /** The square root of 2.	*/
-#define M_SQRT2		1.41421356237309504880	/* sqrt(2) */
+#define M_SQRT2		1.41421356237309504880
 
 /** The constant \a 1/sqrt(2).	*/
-#define M_SQRT1_2	0.70710678118654752440	/* 1/sqrt(2) */
+#define M_SQRT1_2	0.70710678118654752440
 
 /** The \c float representation of a constant quiet NaN. */
 #define NANF __builtin_nanf("")
@@ -128,13 +129,13 @@
 /** The \c long \c double representation of a constant quiet NaN. */
 #define NANL __builtin_nanl("")
 
-/** \c float INFINITY constant.	*/
+/** \c float infinity constant.	*/
 #define INFINITYF __builtin_inff()
 
-/** \c double INFINITY constant.	*/
+/** \c double infinity constant.	*/
 #define INFINITY __builtin_inf()
 
-/** \c lonf \c double INFINITY constant.	*/
+/** \c long \c double infinity constant.	*/
 #define INFINITYL __builtin_infl()
 
 
@@ -381,10 +382,10 @@ __ATTR_CONST__ extern long double tanhl (long double x);
     error occurs for arguments not in the range [&minus;1, +1]. */
 __ATTR_CONST__ extern float acosf (float x);
 /** The acos() function computes the principal value of the arc cosine of
-    \a x.  The returned value is in the range [0, pi] radians. */
+    \a x.  The returned value is in the range [0, pi] radians or NaN. */
 __ATTR_CONST__ extern double acos (double x);
 /** The acosl() function computes the principal value of the arc cosine of
-    \a x.  The returned value is in the range [0, pi] radians. */
+    \a x.  The returned value is in the range [0, pi] radians or NaN. */
 __ATTR_CONST__ extern long double acosl (long double x);
 
 /** The asinf() function computes the principal value of the arc sine of
@@ -392,10 +393,10 @@ __ATTR_CONST__ extern long double acosl (long double x);
     domain error occurs for arguments not in the range [&minus;1, +1]. */
 __ATTR_CONST__ extern float asinf (float x);
 /** The asin() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians or NaN. */
 __ATTR_CONST__ extern double asin (double x);
 /** The asinl() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians or NaN. */
 __ATTR_CONST__ extern long double asinl (long double x);
 
 /** The atanf() function computes the principal value of the arc tangent

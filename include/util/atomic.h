@@ -108,7 +108,7 @@ static __inline__ void __iRestore(const  uint8_t *__s)
     guarantee atomic access to it.  Assuming the following example:
 
     \code
-#include <inttypes.h>
+#include <stdint.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
@@ -149,7 +149,7 @@ main(void)
     rewritten like:
 
     \code
-#include <inttypes.h>
+#include <stdint.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/atomic.h>
@@ -185,8 +185,8 @@ main(void)
     This will install the appropriate interrupt protection before
     accessing variable \c ctr, so it is guaranteed to be consistently
     tested.  If the global interrupt state were uncertain before
-    entering the ATOMIC_BLOCK, it should be executed with the
-    parameter ATOMIC_RESTORESTATE rather than ATOMIC_FORCEON.
+    entering the #ATOMIC_BLOCK, it should be executed with the
+    parameter #ATOMIC_RESTORESTATE rather than #ATOMIC_FORCEON.
 
     See \ref optim_code_reorder for things to be taken into account
     with respect to compiler optimizations.
@@ -200,8 +200,8 @@ main(void)
     flag in SREG is disabled, and re-enabled upon exiting the block
     from any exit path.
 
-    Two possible macro parameters are permitted, ATOMIC_RESTORESTATE
-    and ATOMIC_FORCEON.
+    Two possible macro parameters are permitted, #ATOMIC_RESTORESTATE
+    and #ATOMIC_FORCEON.
 */
 #if defined(__DOXYGEN__)
 #define ATOMIC_BLOCK(type)
@@ -222,7 +222,7 @@ main(void)
     ATOMIC_BLOCK.
 
     Two possible macro parameters are permitted,
-    NONATOMIC_RESTORESTATE and NONATOMIC_FORCEOFF.
+    #NONATOMIC_RESTORESTATE and #NONATOMIC_FORCEOFF.
 */
 #if defined(__DOXYGEN__)
 #define NONATOMIC_BLOCK(type)
@@ -234,7 +234,7 @@ main(void)
 /** \def ATOMIC_RESTORESTATE
     \ingroup util_atomic
 
-    This is a possible parameter for ATOMIC_BLOCK. When used, it will
+    This is a possible parameter for #ATOMIC_BLOCK. When used, it will
     cause the ATOMIC_BLOCK to restore the previous state of the SREG
     register, saved before the Global Interrupt Status flag bit was
     disabled. The net effect of this is to make the ATOMIC_BLOCK's
@@ -252,7 +252,7 @@ main(void)
 /** \def ATOMIC_FORCEON
     \ingroup util_atomic
 
-    This is a possible parameter for ATOMIC_BLOCK. When used, it will
+    This is a possible parameter for #ATOMIC_BLOCK. When used, it will
     cause the ATOMIC_BLOCK to force the state of the SREG register on
     exit, enabling the Global Interrupt Status flag bit. This saves a
     small amount of flash space, a register, and one or more processor
@@ -274,7 +274,7 @@ main(void)
 /** \def NONATOMIC_RESTORESTATE
     \ingroup util_atomic
 
-    This is a possible parameter for NONATOMIC_BLOCK. When used, it
+    This is a possible parameter for #NONATOMIC_BLOCK. When used, it
     will cause the NONATOMIC_BLOCK to restore the previous state of
     the SREG register, saved before the Global Interrupt Status flag
     bit was enabled. The net effect of this is to make the
@@ -292,7 +292,7 @@ main(void)
 /** \def NONATOMIC_FORCEOFF
     \ingroup util_atomic
 
-    This is a possible parameter for NONATOMIC_BLOCK. When used, it
+    This is a possible parameter for #NONATOMIC_BLOCK. When used, it
     will cause the NONATOMIC_BLOCK to force the state of the SREG
     register on exit, disabling the Global Interrupt Status flag
     bit.  This saves a small amout of flash space, a register, and one

@@ -72,10 +72,10 @@
 
     uint8_t mcusr_mirror __attribute__ ((section (".noinit")));
 
-    void get_mcusr(void) \
-      __attribute__((naked)) \
-      __attribute__((section(".init3")));
-    void get_mcusr(void)
+    __attribute__((used, unused, naked, section(".init3")))
+    static void get_mcusr (void);
+
+    void get_mcusr (void)
     {
       mcusr_mirror = MCUSR;
       MCUSR = 0;
