@@ -302,7 +302,7 @@ void eeprom_update_block (const void *__src, void *__dst, size_t __n);
 
 
 /** \name IAR C compatibility defines	*/
-/*@{*/
+/**@{*/
 
 /** \def _EEPUT
     \ingroup avr_eeprom
@@ -324,7 +324,7 @@ void eeprom_update_block (const void *__src, void *__dst, size_t __n);
     Read a byte from EEPROM. Compatibility define for IAR C.	*/
 #define __EEGET(var, addr) (var) = eeprom_read_byte ((const uint8_t *)(addr))
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

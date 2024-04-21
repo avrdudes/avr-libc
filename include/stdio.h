@@ -269,7 +269,7 @@ struct __file {
 
 #endif /* not __DOXYGEN__ */
 
-/*@{*/
+/**@{*/
 /**
    \c FILE is the opaque structure that is passed around between the
    various standard IO functions.
@@ -977,7 +977,7 @@ extern char *tmpnam (char *s);
 }
 #endif
 
-/*@}*/
+/**@}*/
 
 #ifndef __DOXYGEN__
 /*
@@ -993,4 +993,4 @@ extern char *tmpnam (char *s);
 
 #endif /* __ASSEMBLER */
 
-#endif /* _STDLIB_H_ */
+#endif /* _STDIO_H_ */

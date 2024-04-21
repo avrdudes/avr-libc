@@ -115,9 +115,11 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN]; } jmp_buf[1];
     }
     \endcode */
 
-#if !(defined(__ATTR_NORETURN__) || defined(__DOXYGEN__))
+#ifndef __DOXYGEN__
+#ifndef __ATTR_NORETURN__
 #define __ATTR_NORETURN__ __attribute__((__noreturn__))
 #endif
+#endif /* ! DOXYGEN */
 
 /** \ingroup setjmp
     \brief Save stack context for non-local goto.

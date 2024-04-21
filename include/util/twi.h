@@ -53,7 +53,7 @@
   <br>TW_SR_xxx - slave receiver
   */
 
-/*@{*/
+/**@{*/
 /* Master */
 /** \ingroup util_twi
     \def TW_START
@@ -216,13 +216,13 @@
  * TWSR, masked by TW_STATUS_MASK
  */
 #define TW_STATUS		(TWSR & TW_STATUS_MASK)
-/*@}*/
+/**@}*/
 
 /**
  * \name R/~W bit in SLA+R/W address field.
  */
 
-/*@{*/
+/**@{*/
 /** \ingroup util_twi
     \def TW_READ
     SLA+R address */
@@ -232,6 +232,6 @@
     \def TW_WRITE
     SLA+W address */
 #define TW_WRITE	0
-/*@}*/
+/**@}*/
 
 #endif  /* _UTIL_TWI_H_ */

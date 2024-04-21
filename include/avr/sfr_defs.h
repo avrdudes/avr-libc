@@ -193,7 +193,7 @@
 
 /** \name Bit manipulation */
 
-/*@{*/
+/**@{*/
 /** \def _BV
     \ingroup avr_sfr
 
@@ -207,7 +207,7 @@
     
 #define _BV(bit) (1 << (bit))
 
-/*@}*/
+/**@}*/
 
 #ifndef _VECTOR
 #define _VECTOR(N) __vector_ ## N
@@ -218,7 +218,7 @@
 
 /** \name IO register bit manipulation */
 
-/*@{*/
+/**@{*/
 
 
 
@@ -262,7 +262,7 @@
 
 #define loop_until_bit_is_clear(sfr, bit) do { } while (bit_is_set(sfr, bit))
 
-/*@}*/
+/**@}*/
 
 #endif /* !__ASSEMBLER__ */
 

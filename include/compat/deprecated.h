@@ -72,7 +72,7 @@
     different interrupt enabled, you could inadvertantly disable it by
     enabling another intterupt. */
 
-/*@{*/
+/**@{*/
 
 /** \ingroup deprecated_items
     \def enable_external_int(mask)
@@ -143,7 +143,7 @@ void signame (void) __attribute__ ((interrupt,__INTR_ATTRS));	\
 void signame (void)
 #endif
 
-/*@}*/
+/**@}*/
 
 /**
    \name Obsolete IO macros
@@ -165,7 +165,7 @@ void signame (void)
    memory locations as well.
 */
 
-/*@{*/
+/**@{*/
 
 /**
    \ingroup deprecated_items
@@ -221,6 +221,6 @@ void signame (void)
 */
 #define cbi(port, bit) (port) &= ~(1 << (bit))
 
-/*@}*/
+/**@}*/
 
 #endif /* _COMPAT_DEPRECATED_H_ */

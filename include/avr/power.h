@@ -73,8 +73,9 @@ the clock below 131.072 kHz.
 */
 
 
-/** \addtogroup avr_power
-
+/** \addtogroup avr_power */
+/**@{*/
+/**
 \anchor avr_powermacros
 <small>
 <table>
@@ -544,8 +545,8 @@ the clock below 131.072 kHz.
   </tr>
 </table>
 </small>
-
-@} */
+*/
+/**@}*/
 
 #if defined(__AVR_HAVE_PRR_PRADC)
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))

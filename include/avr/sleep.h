@@ -41,8 +41,9 @@
 
 /** \file */
 
-/** \defgroup avr_sleep <avr/sleep.h>: Power Management and Sleep Modes
-
+/** \defgroup avr_sleep <avr/sleep.h>: Power Management and Sleep Modes */
+/**@{*/
+/**
     \code #include <avr/sleep.h>\endcode
 
     Use of the \c SLEEP instruction can allow an application to reduce its
@@ -352,6 +353,6 @@ do { \
 #endif
 
 
-/*@}*/
+/**@}*/
 
 #endif /* _AVR_SLEEP_H_ */

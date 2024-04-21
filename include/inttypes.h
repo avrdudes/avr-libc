@@ -71,7 +71,7 @@
 
 /** \name Far pointers for memory access >64K */
 
-/*@{*/
+/**@{*/
 /** \ingroup avr_inttypes
     signed integer type that can hold a pointer > 64 KB */
 typedef int32_t int_farptr_t;
@@ -79,7 +79,7 @@ typedef int32_t int_farptr_t;
 /** \ingroup avr_inttypes
     unsigned integer type that can hold a pointer > 64 KB */
 typedef uint32_t uint_farptr_t;
-/*@}*/
+/**@}*/
 
 #if !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS)
 
@@ -90,7 +90,7 @@ typedef uint32_t uint_farptr_t;
     is defined before including <inttypes.h>.
  */
 
-/*@{*/
+/**@{*/
 /** \ingroup avr_inttypes
     decimal printf format for int8_t */
 #define		PRId8			"d"
@@ -546,7 +546,7 @@ typedef uint32_t uint_farptr_t;
     hexadecimal scanf format for uintptr_t */
 #define		SCNxPTR			SCNx16
 
-/*@}*/
+/**@}*/
 
 
 #endif	/* !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS) */
