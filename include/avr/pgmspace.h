@@ -117,7 +117,7 @@
    Attribute to use in order to declare an object being located in
    flash ROM.
  */
-#define PROGMEM attribute((__progmem__))
+#define PROGMEM __attribute__((__progmem__))
 
 /** \ingroup avr_pgmspace
     \fn char pgm_read_char (const char *address)
