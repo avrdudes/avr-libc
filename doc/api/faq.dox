@@ -952,10 +952,10 @@ the different optimization levels, and added about 2.5 KB to the code.
 
 <table>
  <tr>
-  <td><strong>Optimization flags</strong></td>
-  <td><strong>Size of .text</strong></td>
-  <td><strong>Time for test \#1</strong></td>
-  <td><strong>Time for test \#2</strong></td>
+  <th>Optimization Flags
+  <th>Size of .text
+  <th>Time for Test \#1
+  <th>Time for Test \#2
  </tr>
  <tr>
   <td>-O3</td>
@@ -1504,71 +1504,77 @@ Below is a table of library calls with known issues.
 
 <table>
  <tr>
-  <td><strong>Library call</strong></td>
-  <td><strong>Reentrant Issue</strong></td>
-  <td><strong>Workaround/Alternative</strong></td>
+  <th>Library Call
+  <th>Reentrant Issue
+  <th>Workaround / Alternative
  </tr>
  <tr>
-  <td>rand(), random()</td>
+  <td><tt>#rand</tt>, <tt>#random</tt></td>
   <td>Uses global variables to keep state information.</td>
-  <td>Use special reentrant versions: rand_r(), random_r().</td>
+  <td>Use special reentrant versions: #rand_r, #random_r.</td>
  </tr>
  <tr>
-  <td>strtod(), strtol(), strtoul()</td>
+  <td><tt>#strtof</tt>, <tt>#strtod</tt>, <tt>#strtol</tt>,
+    <tt>#strtoul</tt></td>
   <td>Uses the global variable \c errno to return success/failure.</td>
-  <td>Ignore \c errno, or protect calls with cli()/sei() or ATOMIC_BLOCK()
-      if the application can tolerate it.  Or use sccanf() or sccanf_P()
+  <td>Ignore \c errno, or protect calls with #cli/#sei
+      or #ATOMIC_BLOCK
+      if the application can tolerate it.  Or use #scanf or #scanf_P
       if possible.
   </td>
  </tr>
  <tr>
-  <td>malloc(), realloc(), calloc(), free()</td>
+  <td><tt>#malloc</tt>, <tt>#realloc</tt>, <tt>#calloc</tt>, <tt>#free</tt></td>
   <td>Uses the stack pointer and global variables to allocate and
       free memory.</td>
-  <td>Protect calls with cli()/sei() or ATOMIC_BLOCK() if the application
+  <td>Protect calls with #cli/#sei or #ATOMIC_BLOCK if the application
       can tolerate it.  If using an OS,
       use the OS provided memory allocator since the OS is likely modifying
       the stack pointer anyway.
   </td>
  </tr>
  <tr>
-  <td>fdevopen(), fclose()</td>
-  <td>Uses calloc() and free().</td>
-  <td>Protect calls with cli()/sei() or ATOMIC_BLOCK() if the application
-      can tolerate it.  Or use fdev_setup_stream() or FDEV_SETUP_STREAM().
+  <td><tt>#fdevopen</tt>, <tt>#fclose</tt></td>
+  <td>Uses #calloc and #free.</td>
+  <td>Protect calls with #cli/#sei or
+    #ATOMIC_BLOCK if the application
+    can tolerate it.  Or use #fdev_setup_stream or #FDEV_SETUP_STREAM.
       <br>
-      Note: fclose() will only call free() if the stream has been opened with fdevopen().
+      Note: #fclose will only call #free if the stream has been opened with #fdevopen.
   </td>
  </tr>
  <tr>
-  <td>eeprom_*(), boot_*()</td>
+  <td><tt>\ref avr_eeprom "eeprom_*"</tt>,
+    <tt>\ref avr_boot "boot_*"</tt></td>
   <td>Accesses I/O registers.</td>
-  <td>Protect calls with cli()/sei(), ATOMIC_BLOCK(), or use OS locking.</td>
+  <td>Protect calls with #cli/#sei, #ATOMIC_BLOCK, or use OS locking.</td>
  </tr>
  <tr>
-  <td>pgm_*_far()</td>
+  <td><tt>\ref avr_pgmspace "pgm_*_far"</tt></td>
   <td>Accesses I/O register RAMPZ.</td>
-  <td>Starting with GCC 4.3, RAMPZ is automatically saved for ISRs, so
-      nothing further is needed if only using interrupts.
+  <td>Starting with GCC 4.3, RAMPZ is automatically saved for \ref ISR "ISRs",
+      so nothing further is needed if only using interrupts.
       <br>Some OSes may automatically preserve RAMPZ during context switching.
       Check the OS documentation before assuming it does.
-      <br>Otherwise, protect calls with cli()/sei(), ATOMIC_BLOCK(), or use
+      <br>Otherwise, protect calls with #cli/#sei, #ATOMIC_BLOCK, or use
           explicit OS locking.
   </td>
  </tr>
  <tr>
-  <td>printf(), printf_P(), vprintf(), vprintf_P(), puts(), puts_P()</td>
+  <td><tt>#printf</tt>, <tt>#printf_P</tt>, <tt>#vprintf</tt>,
+    <tt>#puts</tt>, <tt>#puts_P</tt></td>
   <td>Alters flags and character count in global FILE \c stdout.</td>
   <td>Use only in one thread.  Or if returned character count is unimportant,
       do not use the *_P versions.
-      <br>Note: Formatting to a string output, e.g. sprintf(), sprintf_P(),
-      snprintf(), snprintf_P(), vsprintf(), vsprintf_P(), vsnprintf(), vsnprintf_P(),
-      is thread safe.  The formatted string could then be followed by an fwrite()
-      which simply calls the lower layer to send the string.
+      <br>Note: Formatting to a string output, e.g. #sprintf, #sprintf_P,
+      #snprintf, #snprintf_P, #vsprintf, #vsprintf_P, #vsnprintf, #vsnprintf_P,
+      is thread safe.  The formatted string could then be followed by an 
+      #fwrite which simply calls the lower layer to send the string.
   </td>
  </tr>
  <tr>
-  <td>fprintf(), fprintf_P(), vfprintf(), vfprintf_P(), fputs(), fputs_P()</td>
+  <td><tt>#fprintf</tt>, <tt>#fprintf_P</tt>, <tt>#vfprintf</tt>,
+    <tt>#vfprintf_P</tt>, <tt>#fputs</tt>, <tt>#fputs_P</tt></td>
   <td>Alters flags and character count in the FILE argument.
       Problems can occur if a global FILE is used from multiple threads.
   </td>
@@ -1577,12 +1583,12 @@ Below is a table of library calls with known issues.
   </td>
  </tr>
  <tr>
-  <td>assert()</td>
-  <td>Contains an embedded fprintf().  See above for fprintf().</td>
-  <td>See above for fprintf().</td>
+  <td><tt>#assert</tt></td>
+  <td>Contains an embedded #fprintf.  See above for #fprintf.</td>
+  <td>See above for #fprintf.</td>
  </tr>
  <tr>
-  <td>clearerr()</td>
+  <td><tt>#clearerr</tt></td>
   <td>Alters flags in the FILE argument.
   </td>
   <td>Assign each thread its own FILE for output.
@@ -1590,17 +1596,19 @@ Below is a table of library calls with known issues.
  </tr>
 
  <tr>
-  <td>getchar(), gets()</td>
+  <td><tt>#getchar</tt>, <tt>#gets</tt></td>
   <td>Alters flags, character count, and unget buffer in global FILE \c stdin.</td>
   <td>Use only in one thread. ***</td>
  </tr>
 
  <tr>
-  <td>fgetc(), ungetc(), fgets(), scanf(), scanf_P(), fscanf(), fscanf_P(),
-      vscanf(), vfscanf(), vfscanf_P(), fread()
+  <td><tt>#fgetc</tt>, <tt>#ungetc</tt>, <tt>#fgets</tt>,
+    <tt>#scanf</tt>, <tt>#scanf_P</tt>, <tt>#fscanf</tt>,
+    <tt>#fscanf_P</tt>, <tt>#vscanf</tt>, <tt>#vfscanf</tt>,
+    <tt>#vfscanf_P</tt>, <tt>#fread</tt>
   <td>Alters flags, character count, and unget buffer in the FILE argument.</td>
   <td>Assign each thread its own FILE for input. ***
-      <br>Note: Scanning from a string, e.g. sscanf() and sscanf_P(),
+      <br>Note: Scanning from a string, e.g. #sscanf and #sscanf_P,
       are thread safe.
   </td>
  </tr>
