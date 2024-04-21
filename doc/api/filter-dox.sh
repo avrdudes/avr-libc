@@ -7,9 +7,10 @@
 sed -e 's:__ATTR_ALWAYS_INLINE__::g' \
     -e 's:__ATTR_CONST__::g' \
     -e 's:__ATTR_PURE__::g' \
+    -e 's:__ATTR_NORETURN__::g' \
+    -e 's:__ATTR_MALLOC__::g' \
     -e 's:__extension__::g' \
     -e 's:__inline__:inline:g' \
-    -e 's:__attribute__:attribute:g' \
     -e 's:__progmem__:progmem:g' \
     -e 's:__section__:section:g' \
     $1
