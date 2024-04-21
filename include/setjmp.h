@@ -68,17 +68,17 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN]; } jmp_buf[1];
     While the C language has the dreaded \c goto statement, it can only be
     used to jump to a label in the same (local) function.  In order to jump
     directly to another (non-local) function, the C library provides the
-    setjmp() and longjmp() functions.  setjmp() and longjmp() are useful for
+    #setjmp and #longjmp functions.  setjmp and longjmp are useful for
     dealing with errors and interrupts encountered in a low-level subroutine
     of a program.
 
-    \note setjmp() and longjmp() make programs hard to understand and maintain.
+    \note #setjmp and #longjmp make programs hard to understand and maintain.
     If possible, an alternative should be used.
 
-    \note longjmp() can destroy changes made to global register
+    \note longjmp can destroy changes made to global register
     variables (see \ref faq_regbind).
 
-    For a very detailed discussion of setjmp()/longjmp(), see Chapter 7 of
+    For a very detailed discussion of setjmp/longjmp, see Chapter 7 of
     <em>Advanced Programming in the UNIX Environment</em>, by W. Richard
     Stevens.
 
@@ -93,20 +93,18 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN]; } jmp_buf[1];
     {
         if (setjmp (env))
         {
-            ... handle error ...
+            // Handle error ...
         }
 
         while (1)
         {
-           ... main processing loop which calls foo() some where ...
+           // Main processing loop which calls foo() somewhere ...
         }
     }
 
-    ...
-
     void foo (void)
     {
-        ... blah, blah, blah ...
+        // blah, blah, blah ...
 
         if (err)
         {
