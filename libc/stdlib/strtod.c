@@ -66,8 +66,8 @@ PROGMEM static const char pstr_inf[] = {'I','N','F'};
 PROGMEM static const char pstr_inity[] = {'I','N','I','T','Y'};
 PROGMEM static const char pstr_nan[] = {'N','A','N'};
 
-/**  The strtod() function converts the initial portion of the string pointed
-     to by \a nptr to double representation.
+/**  The strtof() function converts the initial portion of the string pointed
+     to by \a nptr to \c float representation.
 
      The expected form of the string is an optional plus ( \c '+' ) or minus
      sign ( \c '-' ) followed by a sequence of digits optionally containing
@@ -77,7 +77,7 @@ PROGMEM static const char pstr_nan[] = {'N','A','N'};
 
      Leading white-space characters in the string are skipped.
 
-     The strtod() function returns the converted value, if any.
+     The strtof() function returns the converted value, if any.
 
      If \a endptr is not \c NULL, a pointer to the character after the last
      character used in the conversion is stored in the location referenced by
