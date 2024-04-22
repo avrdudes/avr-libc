@@ -364,7 +364,7 @@ read_timer1(void)
 <small>Back to \ref faq_index.
 </small>
 
-\section faq_asmconst How do I use a \#define'd constant in an asm statement?
+\section faq_asmconst How do I use a \#define&apos;d constant in an asm statement?
 
 So you tried this:
 
@@ -994,33 +994,61 @@ get the last few percent of speed benefit from using \c -O3.
 
 \section faq_reloc_code How do I relocate code to a fixed address?
 
-First, the code should be put into a new
+First, put the function into a new, orphan
 \ref mem_sections "named section".
-This is done with a section attribute:
+This is done with a \c section attribute that specifies the name of
+the section with the prototype of the function:
 
 \code
-__attribute__ ((section (".bootloader")))
+__attribute__ ((noinline, noclone, section (".bootloader")))
+void boot (void);
 \endcode
 
-In this example, \c .bootloader is the name of the new section.  This
-attribute needs to be placed after the prototype of any function to
-force the function into the new section.
+The \c noinline and \c noclone attributes are required to make sure
+that the function is not (partially) inlined into the caller,
+which does not have a respective section attribute.
 
+Second, locate the section to the desired fixed address by means
+of linking with, say
 \code
-void boot(void) __attribute__ ((section (".bootloader")));
+-Wl,--section-start,.bootloader=0x1E000
+\endcode
+see the \ref gcc_minusW "-Wl compiler option".
+The name after \c \--section-start is the name of the section to be
+located, and the number specifies the beginning address of the named section.
+
+This will only work when the section is an orphan section, i.e. a
+section that is not mentioned in the linker script.  For sections
+that <em>are</em> mentioned in the linker script, like for example
+<code>.text.bootloader</code>, this will not work because
+\c \--section-start refers to an output section, but the
+output section for input section <code>.text.bootloader</code> is the
+\c .text section.
+
+To verify that everything went as expected,
+generate the disassembly with <tt>avr-objdump ... -j .bootloader</tt>.
+The top of the list file will show
+\code{none}
+  1 .bootloader   00000004  00002000  00002000  00000204  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+\endcode
+Or display section properties with <tt>avr-readelf \--section-details</tt>
+\code{none}
+$ avr-readelf -t main.elf
+Section Headers:
+  [Nr] Name
+       Type            Addr     Off    Size   ES   Lk Inf Al
+       Flags
+  [ 2] .bootloader
+       PROGBITS        00002000 000204 000004 00   0   0  1
+       [00000006]: ALLOC, EXEC
 \endcode
 
-To relocate the section to a fixed address the linker flag
-\c \--section-start is used.  This option can be passed to the linker
-using the \ref gcc_minusW "-Wl compiler option":
-
-\code
--Wl,--section-start=.bootloader=0x1E000
-\endcode
-
-The name after section-start is the name of the section to be
-relocated. The number after the section name is the beginning address
-of the named section.
+A different way to locate the section is by means of a custom linker
+script. The
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Address_Spaces">avr-gcc Wiki</a>
+has an example that locates the \c .progmem2.data section which is used
+by the compiler for variables in address-space \c __flash2.
 
 <small>Back to \ref faq_index.</small>
 

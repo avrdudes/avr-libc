@@ -123,9 +123,8 @@ The following general gcc options might be of some interest to AVR
 users.
 
 <dl>
-<dt><tt>-O<em>n</em></tt></dt>
+<dt>\anchor gcc_optO<tt>-O<em>n</em></tt></dt>
 <dd>
-  \anchor gcc_optO
   Optimization level \e n.  Increasing \e n is meant to optimize more.
 
   \c -O0  reduces compilation time and makes debugging produce the expected
@@ -157,11 +156,10 @@ users.
   See also the \ref faq_gdboptimize "appropriate FAQ entry" for
   issues regarding debugging optimized code.
 </dd>
-<dt><tt>-Wp,<em>preprocessor-options</em></tt></dt>
+<dt>\anchor gcc_minusW<tt>-Wp,<em>preprocessor-options</em></tt></dt>
 <dt><tt>-Wa,<em>assembler-options</em></tt></dt>
 <dt><tt>-Wl,<em>linker-options</em></tt></dt>
 <dd>
-  \anchor gcc_minusW
   Pass the listed options to the C preprocessor, the assembler or the linker,
   respectively. Several options can be passed at once when they are
   separated by a \c , (comma).
