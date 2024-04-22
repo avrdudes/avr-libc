@@ -120,23 +120,32 @@
 /** The constant \a 1/sqrt(2).	*/
 #define M_SQRT1_2	0.70710678118654752440
 
-/** The \c float representation of a constant quiet NaN. */
-#define NANF __builtin_nanf("")
-
 /** The \c double representation of a constant quiet NaN. */
 #define NAN	__builtin_nan("")
 
-/** The \c long \c double representation of a constant quiet NaN. */
-#define NANL __builtin_nanl("")
+/** The \c float representation of a constant quiet NaN.
+    \p __tag is a string constant like \c "" or \c "123". */
+#define nanf(__tagp)	__builtin_nanf(__tag)
 
-/** \c float infinity constant.	*/
-#define INFINITYF __builtin_inff()
+/** The \c double representation of a constant quiet NaN.
+    \p __tag is a string constant like \c "" or \c "123". */
+#define nan(__tag)	__builtin_nan(__tag)
+
+/** The \c long \c double representation of a constant quiet NaN.
+    \p __tag is a string constant like \c "" or \c "123". */
+#define nanl(__tag)	__builtin_nanl(__tag)
 
 /** \c double infinity constant.	*/
 #define INFINITY __builtin_inf()
 
+/** \c float infinity constant.	*/
+#define HUGE_VALF __builtin_huge_valf()
+
+/** \c double infinity constant.	*/
+#define HUGE_VAL __builtin_huge_val()
+
 /** \c long \c double infinity constant.	*/
-#define INFINITYL __builtin_infl()
+#define HUGE_VALL __builtin_huge_vall()
 
 #ifndef __DOXYGEN__
 #ifndef  __ATTR_CONST__
