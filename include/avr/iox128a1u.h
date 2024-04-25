@@ -4295,6 +4295,60 @@ IO Module Instances. Mapped to memory.
 /* PR_TC0_bp  Predefined. */
 
 
+/*
+--------------------------------------------------------------------------
+SIGROW - Signature Row
+--------------------------------------------------------------------------
+*/
+
+/* Production Signatures */
+typedef struct NVM_PROD_SIGNATURES_struct
+{
+    register8_t RCOSC2M;  /* RCOSC 2 MHz Calibration Value B */
+    register8_t RCOSC2MA;  /* RCOSC 2 MHz Calibration Value A */
+    register8_t RCOSC32K;  /* RCOSC 32.768 kHz Calibration Value */
+    register8_t RCOSC32M;  /* RCOSC 32 MHz Calibration Value B */
+    register8_t RCOSC32MA;  /* RCOSC 32 MHz Calibration Value A */
+    register8_t reserved_1[3];
+    register8_t LOTNUM0;  /* Lot Number Byte 0, ASCII */
+    register8_t LOTNUM1;  /* Lot Number Byte 1, ASCII */
+    register8_t LOTNUM2;  /* Lot Number Byte 2, ASCII */
+    register8_t LOTNUM3;  /* Lot Number Byte 3, ASCII */
+    register8_t LOTNUM4;  /* Lot Number Byte 4, ASCII */
+    register8_t LOTNUM5;  /* Lot Number Byte 5, ASCII */
+    register8_t reserved_2[2];
+    register8_t WAFNUM;  /* Wafer Number */
+    register8_t reserved_3[1];
+    register8_t COORDX0;  /* Wafer Coordinate X Byte 0 */
+    register8_t COORDX1;  /* Wafer Coordinate X Byte 1 */
+    register8_t COORDY0;  /* Wafer Coordinate Y Byte 0 */
+    register8_t COORDY1;  /* Wafer Coordinate Y Byte 1 */
+    register8_t reserved_4[4];
+    register8_t USBCAL0;  /* USB Calibration Byte 0 */
+    register8_t USBCAL1;  /* USB Calibration Byte 1 */
+    register8_t USBRCOSC;  /* USB RCOSC Calibration Value B */
+    register8_t USBRCOSCA;  /* USB RCOSC Calibration Value A */
+    register8_t reserved_5[2];
+    register8_t ADCACAL0;  /* ADCA Calibration Byte 0 */
+    register8_t ADCACAL1;  /* ADCA Calibration Byte 1 */
+    register8_t reserved_6[2];
+    register8_t ADCBCAL0;  /* ADCB Calibration Byte 0 */
+    register8_t ADCBCAL1;  /* ADCB Calibration Byte 1 */
+    register8_t reserved_7[8];
+    register8_t TEMPSENSE0;  /* Temperature Sensor Calibration Byte 0 */
+    register8_t TEMPSENSE1;  /* Temperature Sensor Calibration Byte 1 */
+    register8_t DACA0OFFCAL;  /* DACA0 Calibration Byte 0 */
+    register8_t DACA0GAINCAL;  /* DACA0 Calibration Byte 1 */
+    register8_t DACB0OFFCAL;  /* DACB0 Calibration Byte 0 */
+    register8_t DACB0GAINCAL;  /* DACB0 Calibration Byte 1 */
+    register8_t DACA1OFFCAL;  /* DACA1 Calibration Byte 0 */
+    register8_t DACA1GAINCAL;  /* DACA1 Calibration Byte 1 */
+    register8_t DACB1OFFCAL;  /* DACB1 Calibration Byte 0 */
+    register8_t DACB1GAINCAL;  /* DACB1 Calibration Byte 1 */
+    register8_t reserved_8[16];
+} NVM_PROD_SIGNATURES_t;
+
+
 /* SLEEP - Sleep Controller */
 /* SLEEP.CTRL  bit masks and bit positions */
 #define SLEEP_SMODE_gm  0x0E  /* Sleep Mode group mask. */
