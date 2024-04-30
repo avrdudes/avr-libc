@@ -27,6 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdlib.h>
+#include "sectionname.h"
 
 #ifndef __DOXYGEN__
 static struct atexit_s
@@ -36,6 +37,7 @@ static struct atexit_s
 } *atexit_p;
 #endif
 
+ATTRIBUTE_CLIB_SECTION
 int
 atexit (void (*fun) (void))
 {
@@ -52,6 +54,7 @@ atexit (void (*fun) (void))
 /* Don't inline this code as naked to arrange for the very unlikely case
    that it needs a frame.   This won't work as naked function.  */
 
+ATTRIBUTE_CLIB_SECTION
 static void __attribute__((__noinline__))
 atexit_finido (void)
 {

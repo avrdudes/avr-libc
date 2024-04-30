@@ -375,6 +375,14 @@ extern double strtod(const char *__nptr, char **__endptr);
     32-bit type. */
 extern long double strtold(const char *__nptr, char **__endptr);
 
+/**
+   \ingroup avr_stdlib
+   The atexit() function registers function \a func to be run as part of
+   the \c exit() function during \ref sec_dot_fini ".fini8".
+   atexit() calls malloc().
+ */
+extern int atexit(void (*func)(void));
+
 /** \ingroup avr_stdlib
     \fn float atoff (const char *nptr)
 
@@ -766,7 +774,6 @@ extern char *ldtostrf(long double __val, signed char __width,
 
 #ifndef __DOXYGEN__
 /* dummy declarations for libstdc++ compatibility */
-extern int atexit(void (*)(void));
 extern int system (const char *);
 extern char *getenv (const char *);
 #endif	/* __DOXYGEN__ */
