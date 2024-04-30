@@ -53,23 +53,25 @@ static char sccsid[] = "@(#)bsearch.c	8.1 (Berkeley) 6/4/93";
  */
 ATTRIBUTE_CLIB_SECTION
 void *
-bsearch(register const void *key, const void *base0, size_t nmemb,
-        register size_t size, register int (*compar)(const void *, const void *))
+bsearch (const void *key, const void *base0, size_t nmemb,
+         size_t size, int (*compar)(const void *, const void *))
 {
-	register const char *base = base0;
-	register size_t lim;
-	register int cmp;
-	register const void *p;
+    const char *base = base0;
+    size_t lim;
 
-	for (lim = nmemb; lim != 0; lim >>= 1) {
-		p = base + (lim >> 1) * size;
-		cmp = (*compar)(key, p);
-		if (cmp == 0)
-			return ((void *)p);
-		if (cmp > 0) {	/* key > p: move right */
-			base = (char *)p + size;
-			lim--;
-		}		/* else move left */
-	}
-	return (NULL);
+    for (lim = nmemb; lim != 0; lim >>= 1)
+    {
+        const void *p = base + (lim >> 1) * size;
+        int cmp = (*compar)(key, p);
+        if (cmp == 0)
+            return ((void *)p);
+        if (cmp > 0)
+        {
+            /* key > p: move right */
+            base = (char *)p + size;
+            lim--;
+        }
+        /* else move left */
+    }
+    return NULL;
 }
