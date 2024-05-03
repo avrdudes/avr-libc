@@ -4,7 +4,7 @@
 # Prune some identifiers so that the generated documentation
 # looks nicer and avoids internal stuff like __ATTR_PURE__.
 
-sed -e 's:__ATTR_ALWAYS_INLINE__::g' \
+sed -e 's:__ATTR_ALWAYS_INLINE__:inline:g' \
     -e 's:__ATTR_CONST__::g' \
     -e 's:__ATTR_PURE__::g' \
     -e 's:__ATTR_NORETURN__::g' \
