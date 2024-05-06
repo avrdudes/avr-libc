@@ -349,10 +349,10 @@ __do_copy_data:
     .long RAMSTART
 #ifdef RAMSIZE
     .long RAMSIZE
-#elif RAMEND > 0
+#elif RAMEND > RAMSTART
     .long RAMEND - RAMSTART + 1
 #else
-    .long RAMEND
+    .long 0
 #endif
 #ifdef E2START
     .long E2START
@@ -418,7 +418,11 @@ __do_copy_data:
     .weak __DATA_REGION_ORIGIN__
     .set  __DATA_REGION_ORIGIN__, (RAM_VMA) | (RAMSTART)
     .weak __DATA_REGION_LENGTH__
+#if RAMEND > RAMSTART
     .set  __DATA_REGION_LENGTH__, 1 + (RAMEND) - (RAMSTART)
+#else
+    .set  __DATA_REGION_LENGTH__, 0
+#endif
 #endif /* have RAMSTART and RAMEND */
 
 /* The VMA ORIGINs of other MEMORY regions are hard-coded in the ld scripts:
