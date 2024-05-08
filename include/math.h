@@ -449,11 +449,17 @@ __ATTR_CONST__ extern double log10 (double x);
 /** The log10l() function returns the logarithm of argument \a x to base 10. */
 __ATTR_CONST__ extern long double log10l (long double x);
 
-/** The function powf() returns the value of \a x to the exponent \a y. */
+/** The function powf() returns the value of \a x to the exponent \a y.
+    \n Notice that for integer exponents, there is the more efficient
+    <code>float __builtin_powif(float x, int y)</code>. */
 __ATTR_CONST__ extern float powf (float x, float y);
-/** The function pow() returns the value of \a x to the exponent \a y. */
+/** The function pow() returns the value of \a x to the exponent \a y.
+    \n Notice that for integer exponents, there is the more efficient
+    <code>double __builtin_powi(double x, int y)</code>. */
 __ATTR_CONST__ extern double pow (double x, double y);
-/** The function powl() returns the value of \a x to the exponent \a y. */
+/** The function powl() returns the value of \a x to the exponent \a y.
+    \n Notice that for integer exponents, there is the more efficient
+    <code>long double __builtin_powil(long double x, int y)</code>. */
 __ATTR_CONST__ extern long double powl (long double x, long double y);
 
 /** The function isnanf() returns 1 if the argument \a x represents a
