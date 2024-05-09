@@ -35,6 +35,8 @@
 
   - Added support for: strndup.
 
+  - Added support for ccp_write_spm() in avr/cpufunc.h
+
   - The delay routines no more include math.h but use built-in functions
     __builtin_fabs and __builtin_ceil instead of fabs and ceil.  This means
     the delay roudines are now independent of -f[no-]freestanding.
