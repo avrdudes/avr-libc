@@ -27,275 +27,1043 @@
 
 /** \page mem_sections Memory Sections
 
+Section are used to organize code and data of a program on
+the binary level.
+
+The (compiler-generated) assembly code assigns code,
+data and other entities like debug information to so called input sections.
+These sections serve as input to the linker, which bundles
+similar sections together to output sections like <tt>.text</tt> and
+<tt>.data</tt> according to rules defined in the linker description file.
+
+The final ELF binary is then used by programming tools like
+\c avrdude, simulators, debuggers and other programs, for example
+programs from the GNU Binutils family like
+\c avr-size, \c avr-objdump and \c avr-readelf.
+
+Sections may have extra properties like
+\ref sec_align "section alignment",
+\ref sec_flags "section flags",
+\ref sec_type "section type"
+and rules to locate them or to assign them to
+\ref sec_memory_regions "memory regions".
+
+- \ref sec_concepts
+  - \ref sec_named
+    - \ref sec_flags
+    - \ref sec_type
+    - \ref sec_align
+    - \ref sec_subsection
+  - \ref sec_orphan
+  - \ref sec_lma
+  - \ref sec_vma
+
+- \ref sec_ld_script_blocks
+  - \ref sec_input_output
+  - \ref sec_memory_regions
+  - \ref sec_symbols
+
+- \ref sec_ld_script
+  - \ref sec_dot_text ".text"
+  - \ref sec_dot_data ".data"
+  - \ref sec_dot_bss ".bss"
+  - \ref sec_dot_noinit ".noinit"
+  - \ref sec_dot_rodata ".rodata"
+  - \ref sec_dot_eeprom ".eeprom"
+  - \ref sec_dot_fuse ".fuse, .lock and .signature"
+  - \ref sec_dot_note ".note.gnu.avr.deviceinfo"
+
+- \ref sec_size
+
+- \ref sec_using
+  - \ref c_sections
+  - \ref asm_sections
+
+
 \remarks Need to list all the sections which are available to the avr.
 
 \par Weak Bindings
 FIXME: need to discuss the .weak directive.
 
-The following describes the various sections available. 
+\section sec_concepts Concepts
 
-\section sec_dot_text The .text Section
+\subsection sec_named Named Sections
 
-The .text section contains the actual machine instructions which make up
-your program.  This section is further subdivided by the .initN and .finiN
-sections dicussed below.
-
-\note The \c avr-size program (part of binutils), coming from a Unix
-background, doesn't account for the .data initialization space added to the
-.text section, so in order to know how much flash the final program will
-consume, one needs to add the values for both, .text and .data (but not .bss),
-while the amount of pre-allocated SRAM is the sum of .data and .bss.
-
-\section sec_dot_data The .data Section
-
-This section contains static data which was defined in your code. Things like
-the following would end up in .data:
-
+Named section are section that can be referred to by their name.
+The name and other properties can be provided with the <tt>.section</tt>
+directive like in
 \code
-char err_str[] = "Your program has died a horrible death!";
-
-struct point pt = { 1, 1 };
+.section name, "flags", @type
 \endcode
+or with the <tt>.pushsection</tt> directive, which directs the
+assembler to assemble the following code into the named section.
+
+An example of a section that is not referred to by its name is the COMMON
+section. In order to put an object in that section, special directives like
+<tt>.comm name,size</tt> or <tt>.lcomm name,size</tt>
+have to be used.
+
+Directives like <tt>.text</tt> are basically the same like
+<tt>.section .text</tt>, where the assembler assumes appropriate
+section flags and type; same for directives <tt>.data</tt> and <tt>.bss</tt>.
+
+\subsubsection sec_flags Section Flags
+
+The section flags can be specified with the <tt>.section</tt> and
+<tt>.pushsection</tt> directives, see \ref sec_type "section type"
+for an example.
+Section flags of output sections can be specified in the linker description
+file, and the linker implements heuristics to determine the section flags
+of output sections from the various input section that go into it.
+
+<table>
+<caption>Section Flags</caption>
+<tr>
+  <th>Flag
+  <th>Meaning
+</tr>
+<tr>
+  <td>\c a
+  <td>
+    The section will be <b>a</b>llocated, i.e. it occupies space
+    on the target hardware
+</tr>
+<tr>
+  <td>\c w
+  <td>
+    The section contains data that can be <b>w</b>ritten at run-time.
+    Sections that only contain read-only entities don't have the \c w flag set
+</tr>
+<tr>
+  <td>\c x
+  <td>
+    The section contains e<b>x</b>ecutable code,
+    though the section may also contain non-executable objects
+</tr>
+<tr>
+  <td>\c M
+  <td>A <b>m</b>ergeable section
+</tr>
+<tr>
+  <td>\c S
+  <td>A <b>s</b>tring section
+</tr>
+<tr>
+  <td>\c G
+  <td>A section <b>g</b>roup, like used with \c comdat objects
+</tr>
+</table>
+
+The last three flags are listed for completeness.  They are used by the
+compiler, for example for header-only C++ modules and to ensure that
+multiplle instanciations of the same template in different compilaton
+units does occur at most once in the executable file.
+
+\subsubsection sec_type Section Type
+
+The section type can be specified with the <tt>.section</tt> and
+<tt>.pushsection</tt> directives, like in
+\code
+.section .text.myfunc,"ax",@progbits
+.pushsection ".data.myvar", "a", "progbits"
+\endcode
+On ELF level, the section type is stored in the section header like
+<tt>Elf32_Shdr.sh_type = SHT_PROGBITS</tt>.
+
+<table>
+<caption>Section Types</caption>
+<tr>
+  <th>Type
+  <th>Meaning
+</tr>
+<tr>
+  <td>\c \@progbits
+  <td>
+    The section contains data that will be loaded to the target, like
+    objects in the <tt>.text</tt> and <tt>.data</tt> sections.
+</tr>
+<tr>
+  <td>\c \@nobits
+  <td>
+    The section does not contain data that needs to be transferred to the
+    target device, like data in the <tt>.bss</tt> and <tt>.noinit</tt>
+    sections.  The section still occupies space on the target.
+</tr>
+<tr>
+  <td>\c \@note
+  <td>
+    The section is a note, like for example the
+    \ref sec_dot_note ".note.gnu.avr.deviceinfo" section.
+</tr>
+</table>
+
+\subsubsection sec_align Section Alignment
+
+The alignment of a section is the maximum over the alignments of the
+objects in the section.
+
+\subsubsection sec_subsection Subsections
+
+Subsections are compartmets of named sections and are
+introduced with the <tt>\ref dot_subsection ".subsection"</tt> directive.
+Subsections are located in order of increasing index in their input section.
+The default subsection after switching to a new section is subsection&nbsp;0.
+
+\note A common misconception is that a section like <tt>.text.module.func</tt>
+were a subsection of <tt>.text.module</tt>. This is not the case. These two
+sections are independent, and there is no subset relation.  The sections
+may have different flags and type, and they may be assigned to different
+output sections.
+
+\subsection sec_orphan Orphan Sections
+
+<em>Orphan sections</em> are sections that are not mentioned in the linker
+description file.  When an input section is orphan, then the GNU linker
+implicitly generates an output section of the same name.
+The linker implements various heuristics to determine
+sections flags, section type  and location of orphaned sections.
+One use of orphan sections is to
+\ref faq_reloc_code "locate code to a fixed address".
+
+Like for any other output section, the start address can be specified
+by means of linking with
+<code>-Wl,\--section-start,<em>secname</em>=<em>address</em></code>
+
+\subsection sec_lma LMA: Load Memory Address
+
+The LMA of an object is the address where a loader like
+\c avrdude puts the object when the binary is being uploaded to the
+target device.
+
+\subsection sec_vma VMA: Virtual Memory Address
+
+The VMA is the address of an object as used by the running program.
+
+VMA and LMA may be different: Suppose a small ATmega8 program with
+executable code that extends from byte address 0x0 to 0x20f,
+and one variable \c my_var in static strorage.
+The default linker script puts the content of the <code>.data</code> output
+section after the <code>.text</code> output section and into
+the <code>text</code> \ref sec_memory_regions "segment". The startup code
+then copies \c my_data from its LMA location beginning at 0x210 to its
+VMA location beginning at 0x800060, because C/C++ requires that all
+data in static storage must have been initialized when \c main is entered.
+
+The internal SRAM of ATmega8 starts at RAM address 0x60, which is offset
+by 0x800000 in order to linearize the address space (VMA 0x60 is a
+flash address). The AVR program only ever uses the lower 16 bits of VMAs
+in static storage so that the offset of 0x800000 is masked out.
+But code like <code>"LDI r24,hh8(my_data)"</code>
+actually sets R24 to 0x80 and reveals that \c my_data is an object
+located in RAM.
+
+\section sec_ld_script_blocks The Linker Script: Building Blocks
+
+The linker description file is the central hub to channel functions
+and static storage objects of a program to the various memory spaces
+and address ranges of a device.
+
+\anchor sec_input
+\anchor sec_output
+
+\subsection sec_input_output Input Sections and Output Sections
+
+<em>Input sections</em> are sections that are inputs to the linker.
+Functions and static variables but also additional notes and debug
+information are assigned to different input sections by means of
+\ref ass_directives "assembler directives" like \c \.section or \c \.text.
+The linker takes all these sections and assigns them to output sections
+as specified in the linker script.
+
+<em>Output sections</em> are defind in the linker description file.
+Contrary to the unlimited number of input sections a program can come up
+with, there is only a handfull of output sections like \c \.text and
+\c \.data, that roughly correspond to the memory spaces of the target device.
+
+One step in the final link is to <em>locate</em> the sections, that is
+the linker/locator determines at which memory location to put the output
+sections, and how to arrange the many input sections within their
+assigned output section.
+<em>Locating</em> means that the linker assigns
+\ref sec_lma "Load Memory Addresses"
+--- addresses as used by a loader like \c avrdude ---
+and \ref sec_vma "Virtual Memory Addresses", which are the addresses
+as used by the running program.
+
+While it is possible to directly assign LMAs and VMAs to output sections
+in the linker script, the default linker scripts provided by Binutils
+assign <em>memory regions</em> (aka. <em>memory segments</em>) to the
+output sections. This has some advantages like a linker script that is
+easier to maintain.
+An output sections can be assigned to more than one memory region.
+For example, non-zero data in static storage (\c \.data) goes to
+-# the \c data region (VMA), because such variables occupy RAM
+which has to be allocated
+-# the \c text region (LMA), because the initializers for such data has
+to be kept in some non-volatile memory (program ROM), so that the startup
+code can initialize that data so that the variables have their expected
+initial values when \c main() is entered.
+
+The <tt>SECTIONS{}</tt> portion of a linker script models the
+input and output section, and it assignes the output section to
+the memory regions defined in the <tt>MEMORY{}</tt> part.
+
+\subsection sec_memory_regions Memory Regions
+
+The memory regions defined in the default linker script
+model and correspond to the different kinds of memories of a device.
+
+<table>
+<caption>Memory Regions of the Default Linker Script</caption>
+<tr>
+  <th>Region
+  <th>Virtual<br>Address<sup>1</sup>
+  <th>Flags
+  <th>Purpose
+</tr>
+<tr>
+  <td>\c text
+  <td><code>0</code><sup>2</sup>
+  <td>\c rx
+  <td>\ref sec_text_text "Executable code",
+    \ref sec_dot_vectors "vector table",
+    data in #PROGMEM, \c __flash and \c __memx,
+    \ref sec_dot_init "startup code",
+    \ref sec_dot_trampolines "linker stubs",
+    initializers for <tt>.data</tt>
+</tr>
+<tr>
+  <td>\c data
+  <td><code>0x800000</code><sup>2</sup>
+  <td>\c rw
+  <td>Data in static storage
+</tr>
+<tr>
+  <td><tt>rodata</tt><sup>3</sup>
+  <td><code>0xa00000</code><sup>2</sup>
+  <td>\c r
+  <td>Read-only data in static storage
+</tr>
+<tr><td>\c eeprom    <td>\c 0x810000 <td>\c rw  <td>EEPROM data        </tr>
+<tr><td>\c fuse      <td>\c 0x820000 <td>\c rw  <td>Fuse bytes         </tr>
+<tr><td>\c lock      <td>\c 0x830000 <td>\c rw  <td>Lock bytes         </tr>
+<tr><td>\c signature <td>\c 0x840000 <td>\c rw  <td>Device signature   </tr>
+<tr><td>\c user_signatures<td>\c 0x850000 <td>\c rw <td>User signature </tr>
+</table>
+
+\anchor harvard_arch
+Notes
+
+-# The \ref sec_vma "VMA"s for regions other than \c text are offset in
+order to linearize the non-linear memory address space of the AVR
+Harvard architecture.
+The target code only ever uses the lower 16 bits of
+the VMA to access objects in non-<tt>text</tt> regions.
+
+-# The addresses for regions \c text, \c data \c and rodata are actually
+defined as symbols like \c __TEXT_REGION_ORIGIN__, so that they can be
+adjusted by means of, say
+<tt>-Wl,\--defsym,__DATA_REGION_ORIGIN__=0x800060</tt>.
+Same applies for the lengths of all the regions, which is
+<tt>__<em>NAME</em>_REGION_LENGTH__</tt> for region <em>name</em>.
+
+-# The \c rodata region is only present in the \c avrxmega2_flmap and
+\c avrxmega4_flmap emulations, which is the case for Binutils since
+v2.42 for the AVR64 and AVR128 devices without
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
+   ><tt>-mrodata-in-ram</tt></a>.
+
+\subsection sec_symbols Symbols
+
+Most of the symbols like \c main are defined in the code of the
+application, but some symbols are defined in the default linker script:
+
+<dl>
+<dt><tt>__<em>name</em>_REGION_ORIGIN__</tt></dt>
+<dd>
+  Describes the physical properties of memory region <tt><em>name</em></tt>,
+  where <tt><em>name</em></tt> is one of \c TEXT or  \c DATA.
+  The address is a VMA and offset at explained above.
+  <br>
+  The linker script only supplies a default for the symbol values when
+  they have not been defined by other means, like for example
+  in the startup code or by <tt>\ref opt_defsym "--defsym"</tt>.
+</dd>
+<dt><tt>__<em>name</em>_REGION_LENGTH__</tt></dt>
+<dd>
+  Describes the physical properties of memory region <tt><em>name</em></tt>,
+  where <tt><em>name</em></tt> is one of:
+  \c TEXT, \c DATA, \c EEPROM, \c LOCK, \c FUSE, \c SIGNATURE or
+  \c USER_SIGNATURE.
+  <br>
+  Only a default is supplied when the symbol is not yet defined by
+  other means. Most of these symbols are
+  \ref dot_weak "weakly" defined in the startup code.
+</dd>
+<dt><tt>__data_start</tt></dt>
+<dt><tt>__data_end</tt></dt>
+<dd>
+  Start and (one past the) end \ref sec_vma "VMA" address of the
+  <tt>\ref sec_dot_data ".data"</tt> section in RAM.
+</dd>
+<dt><tt>__data_load_start</tt></dt>
+<dt><tt>__data_load_end</tt></dt>
+<dd>
+  Start and (one past the) end \ref sec_lma "LMA" address of the
+  <tt>\ref sec_dot_data ".data"</tt> section initializers located
+  in program memory.
+  Used together with the VMA addresses above by the
+  \ref sec_dot_init "startup code" to copy data initializers from
+  program memory to RAM.
+</dd>
+<dt><tt>__bss_start</tt></dt>
+<dt><tt>__bss_end</tt></dt>
+<dd>
+  Start and (one past the) end VMA address of the
+  <tt>\ref sec_dot_bss ".bss"</tt> section.
+  The startup code clears this part of the RAM.
+</dd>
+<dt><tt>__rodata_start</tt></dt>
+<dt><tt>__rodata_end</tt></dt>
+<dt><tt>__rodata_load_start</tt></dt>
+<dt><tt>__rodata_load_end</tt></dt>
+<dd>
+  Start and (one past the) end VMA resp. LMA address of the \c \.rodata
+  output section. These symbols are only defined when \c \.rodata is not
+  output to the \c text region, which is the case for emulations
+  \c avrxmega2_flmap and \c avrxmega4_flmap.
+</dd>
+<dt><tt>__heap_start</tt></dt>
+<dd>
+  One past the last object located in static storage.  Immediately
+  follows the <tt>\ref sec_dot_noinit ".noinit"</tt> section
+  (which immediately follows <tt>\ref sec_dot_bss ".bss"</tt>,
+  which immediately follows <tt>\ref sec_dot_data ".data"</tt>).
+  Used by \ref malloc "malloc()" and friends.
+</dd>
+</dl>
+
+\section sec_ld_script Output Sections of the Default Linker Script
+
+This section describes the various \ref sec_output "output sections" defined
+in the default linker description files.
+
+<table>
+<caption>Output Sections and Memory Regions</caption>
+<tr>
+  <th rowspan="2">Output<br>Section
+  <th rowspan="2">Purpose
+  <th colspan="2">Memory Region
+</tr>
+<tr>
+  <th>LMA
+  <th>VMA
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_text ".text"</tt>
+  <td>Executable code, data in progmem
+  <td colspan="2"><center>text</center>
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_data ".data"</tt>
+  <td>Non-zero data in static storage
+  <td>text
+  <td>data
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_bss ".bss"</tt>
+  <td>Zero data in static storage
+  <td>---
+  <td>data
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_noinit ".noinit"</tt>
+  <td>Non-initialized data in static storage
+  <td>---
+  <td>data
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_rodata ".rodata"</tt><sup>1</sup>
+  <td>Read-only data in static storage
+  <td>text
+  <td>LMA + offset<sup>3</sup>
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_rodata ".rodata"</tt><sup>2</sup>
+  <td>Read-only data in static storage
+  <td>0x8000 * <code>__flmap</code><sup>4</sup>
+  <td>rodata
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_eeprom ".eeprom"</tt>
+  <td>Data in EEPROM
+  <td rowspan="5">Note<sup>5</sup>
+  <td>eeprom
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_fuse ".fuse"</tt>
+  <td>Fuse bytes
+  <td>fuse
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_fuse ".lock"</tt>
+  <td>Lock bytes
+  <td>lock
+</tr>
+<tr>
+  <td><tt>\ref sec_dot_fuse ".signature"</tt>
+  <td>Signature bytes
+  <td>signature
+</tr>
+<tr>
+  <td>
+  <td>User signature bytes
+  <td>user_signatures
+</tr>
+</table>
+
+Notes
+
+-# On
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3"
+   >avrxmega3</a> and
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny"
+   >avrtiny</a> devices.
+
+-# On
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega2"
+   >AVR64</a> and
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega4"
+   >AVR128</a> devices without \c -mrodata-in-ram.
+
+-# With an offset \c __RODATA_PM_OFFSET__ of 0x4000 or 0x8000 depending
+on the device.
+
+-# The value of symbol <code>__flmap</code> defaults to the last 32 KiB
+block of program memory, see the GCC
+<a href="https://gcc.gnu.org/gcc-14/changes.html#avr"
+   >v14 release notes</a>.
+
+-# The \ref sec_lma "LMA" actually equals the \ref sec_vma "VMA", but is
+unused.  The flash loader like avrdude knows where to put the data,
+
+
+\subsection sec_dot_text The .text Output Section
+
+The <code>.text</code> output section contains the actual machine instructions
+which make up the program, but also additional code like jump tables
+and lookup tables placed in program memory with the #PROGMEM attribute.
+
+The <code>.text</code> output section contains the input sections
+described below.
+Input sections that are not used by the tools are omitted.
+A <b><tt>*</tt></b> wildcard stands for any sequence of characters, including
+empty ones, that are valid in a section name.
+
+<dl>
+<dt>\anchor sec_dot_vectors <code>.vectors</code></dt>
+<dd>
+  The <code>.vectors</code> sections contains the interrupt vector table which
+  consists of jumps to weakly defined labels: To \c __init for the first
+  entry at index&nbsp;0, and to <code>__vector_<em>N</em></code> for the entry
+  at index <code><em>N</em></code>&nbsp;&ge;&nbsp;1.
+  The default value for <code>__vector_<em>N</em></code> is
+  <code>__bad_interrupt</code>, which jumps to weakly defined
+  <code>__vector_default</code>, which jumps to
+  \c __vectors, which is the start of the <code>.vectors</code> section.
+
+  Implementing an interrupt service ruotine (ISR) is performed with the
+  help of the \c #ISR macro in C/C++ code.
+</dd>
+<dt>\anchor sec_dot_progmem <code>.progmem.data</code></dt>
+<dt><code>.progmem.data.*</code></dt>
+<dt><code>.progmem.gcc.*</code></dt>
+<dd>
+  This section is used for read-only data declared with attribute
+  #PROGMEM, and for data in address-space
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html">
+    __flash</a>.
+
+  The compiler assumes that the <code>.progmem</code> sectons are located
+  in the lower 64 KiB of program memory.  When it does not fit in the
+  lower 64 KiB block, then the program reads garbage except
+  \ref avr_pgmspace "pgm_read_*_far" is used. In that case however,
+  code can be located in the \ref sec_dot_progmemx ".progmemx"
+  section which does not require to be located in the lower program memory.
+</dd>
+<dt>\anchor sec_dot_trampolines .trampolines</dt>
+<dd>
+  Linker stubs for indirect jumps and calls on devices with more
+  than 128 KiB of program memory.  This section must be located in the
+  same 128 KiB block like the interrupt vector table. For some background
+  on linker stubs, see the GCC documentation on
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
+     >EIND</a>.
+</dd>
+<dt>\anchor sec_text_text <code>.text</code></dt>
+<dt><code>.text.*</code></dt>
+<dd>
+  Executable code. This is where almost all of the executable code
+  of an application will go.
+</dd>
+<dt>\anchor sec_dot_ctors <code>.ctors</code></dt>
+<dt>\anchor sec_dot_dtors <code>.dtors</code></dt>
+<dd>
+  Tables with addresses of static constructors and destructors, like C++
+  static constructors and functions declared with attribute
+  \c constructor.
+</dd>
+</dd>
+<dt>\anchor sec_dot_init The <code>.init<em>N</em></code> Sections</dt>
+<dd>
+  These sections are used to hold the startup code from reset up through
+  the start of main().
+
+  The <tt>.init<em>N</em></tt> sections are executed in order
+  from 0 to 9: The code from one init section falls through to the
+  next higher init section.
+  This is the reason for why code in these sections must
+  be naked (more precisely, it must not contain return instructions),
+  and why code in these sections must never be called explicitly.
+
+  When several modules put code in the same init section, the order
+  of execuation is not specified.
+
+  <table>
+  <caption>The <tt>.init<em>N</em></tt> Sections</caption>
+  <tr>
+    <th>Section
+    <th>Performs
+    <th>Hosted By
+    <th>Symbol<sup>1</sup>
+  </tr>
+  <tr>
+    <td><tt>.init0</tt>
+    <td>Weakly defines the <tt>__init</tt> label which is the jump target
+      of the first vector in the interrupt vector table.  When the user
+      defines the <code>__init()</code> function, it will be jumped to
+      instead.
+    <td>AVR-LibC<sup>2</sup>
+    <td rowspan="3">
+  </tr>
+  <tr>
+    <td><tt>.init1</tt>
+    <td>Unused
+    <td>---
+  </tr>
+  <tr>
+    <td><tt>.init2</tt>
+    <td>
+      - Clears \ref zero_reg "\c __zero_reg__"
+      - Initializes the stack pointer to the value of weak symbol \c __stack,
+      which has a default value of \c RAMEND as defined in <code>avr/io.h</code>
+      - Initializes
+      <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
+	 ><code>EIND</code></a> to <code>hh8(pm(__vectors))</code>
+      on devices that have it
+      - Initializes
+      <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#ramp"
+	 ><code>RAMPX</code>, <code>RAMPY</code>, <code>RAMPZ</code>
+	and <code>RAMPD</code></a> on devices that have all of them
+    <td>AVR-LibC
+  </tr>
+  <tr>
+    <td><tt>.init3</tt>
+    <td>Initializes the <code>NVMCTRLB.FLMAP</code> bit-field on devices that
+      have it, except when
+      <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
+	 ><code>-mrodata-in-ram</code></a> is specified
+    <td>AVR-LibC
+    <td>\c __do_flmap_init
+  </tr>
+  <tr>
+    <td><tt>.init4</tt>
+    <td>Initializes data in static storage: Initializes
+      <tt>\ref sec_dot_data ".data"</tt> and clears
+      <tt>\ref sec_dot_bss ".bss"</tt>
+    <td>libgcc
+    <td>\c __do_copy_data<br>\c __do_clear_bss
+  </tr>
+  <tr>
+    <td><tt>.init5</tt>
+    <td>Unused
+    <td>---
+    <td>
+  </tr>
+  <tr>
+    <td><tt>.init6</tt>
+    <td>Run static C++ constructors and functions defined with
+      <code>__attribute__((constructor))</code>.
+    <td>libgcc
+    <td>\c __do_global_ctors
+  </tr>
+  <tr>
+    <td><tt>.init7</tt>
+    <td>Unused
+    <td>---
+    <td rowspan="3">
+  </tr>
+  <tr>
+    <td><tt>.init8</tt>
+    <td>Unused
+    <td>---
+  </tr>
+  <tr>
+    <td><tt>.init9</tt>
+    <td>Calls \c main and then jumps to \c #exit
+    <td>AVR-LibC
+  </tr>
+  </table>
+
+  Notes
+  -# Code in the <tt>.init3</tt>, <tt>.init4</tt> and <tt>.init6</tt>
+  sections is optional; it will only be present when there is something
+  to do. This will be tracked by the compiler --- or has to be tracked by
+  the assembly programmer --- which pulls in the code from the respective
+  library by means of the mentioned symbols, e.g. by linking
+  with <tt>-Wl,-u,__do_flmap_init</tt> or by means of
+  \code
+  .global __do_copy_data
+  \endcode
+  Conversely, when the respective code is not desired for some reason, the
+  symbol can be satisfied by defining it with, say,
+  <tt>-Wl,\--defsym,__do_copy_data=0</tt> so that the code is not pulled in
+  any more.
+  -# The code is provided by
+  <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
+     ><tt>gcrt1.S</tt></a>.
+</dd>
+<dt>\anchor sec_dot_fini The <code>.fini<em>N</em></code> Sections</dt>
+<dd>
+  Shutdown code.
+  These sections are used to hold the exit code executed after return from
+  main() or a call to exit().
+
+  The <tt>.fini<em>N</em></tt> sections are executed in descending order
+  from 9 to 0 in a fallthrough manner.
+
+  <table>
+  <caption>The <tt>.fini<em>N</em></tt> Sections</caption>
+  <tr>
+    <th>Section
+    <th>Performs
+    <th>Hosted By
+    <th>Symbol
+  </tr>
+  <tr>
+    <td><tt>.fini9</tt>
+    <td>Defines \c _exit and weakly defines the \c #exit label
+    <td>libgcc
+    <td rowspan="3">
+  </tr>
+  <tr>
+    <td><tt>.fini8</tt>
+    <td>Run functions registered with \c atexit()
+    <td>AVR-LibC
+  </tr>
+  <tr>
+    <td><tt>.fini7</tt>
+    <td>Unused
+    <td>---
+  </tr>
+  <tr>
+    <td><tt>.fini6</tt>
+    <td>Run static C++ destructors and functions defined with
+      <code>__attribute__((destructor))</code>
+    <td>libgcc
+    <td>\c __do_global_dtors
+  </tr>
+  <tr>
+    <td><tt>.fini5...1</tt>
+    <td>Unused
+    <td>---
+    <td rowspan="2">
+  </tr>
+  <tr>
+    <td><tt>.fini0</tt>
+    <td>Globally disables interrupts and enters an infinite loop to
+      label \c __stop_program
+    <td>libgcc
+  </tr>
+  </table>
+  It is unlikely that ordinary code uses the fini sections.
+  When there are no static destructors and \c atexit() is not used, then
+  the respective code is not pulled in form the libraries, and the
+  fini code just consumes four bytes: a \c CLI and a RJMP to itself.
+  Common use cases of fini code is when running the GCC test suite where
+  it reduces fallout, and in simulators to determine (un)orderly
+  termination of a simulated program.
+</dd>
+<dt>\anchor sec_dot_progmemx <tt>.progmemx.*</tt></dt>
+<dd>
+  Read-only data in program memory without the requirement that it
+  must reside in the lower 64 KiB. The compiler uses this section
+  for data in the named address-space \c __memx.
+  Data can be accessed with \ref avr_pgmspace "pgm_read_*_far" when it is
+  not in a named address-space:
+  \code
+  #include <avr/pgmspace.h>
+
+  const __memx int array1[] = { 1, 4, 9, 16, 25, 36 };
+
+  __attribute__((section (".progmemx.data.array2")))
+  const int array2[] = { 2, 3, 5, 7, 11, 13, 17 };
+
+  int add (uint8_t id1, uint8_t id2)
+  {
+      uint_farptr_t p_array2 = pgm_get_far_address (array2);
+      int val2 = pgm_read_int_far (p_array2 + sizeof(int) * id2);
+
+      return val2 + array1[id1];
+  }
+  \endcode
+<dt>\anchor sec_dot_jumptables <tt>.jumptables*</tt></dt>
+<dd>
+  Used to place jump tables in some cases.
+</dd>
+</dd>
+</dl>
+
+
+\subsection sec_dot_data The .data Output Section
+
+This section contains data in static storage which has an initializer
+that is not all zeroes.
+This includes the following input sections:
+
+<dl>
+  <dt><tt>.data*</tt></dt>
+  <dd>
+    Read-write data
+  </dd>
+  <dt><tt>.rodata*</tt></dt>
+  <dd>
+    Read-only data.  These input sections are only included on devices
+    that host read-only data in RAM.
+  </dd>
+</dl>
 
 It is possible to tell the linker the SRAM address of the beginning of the
-.data section. This is accomplished by adding
-<b><tt>-Wl,-Tdata,<em>addr</em></tt></b> to the \c avr-gcc command used to the
-link your program. Not that <em><tt>addr</tt></em> must be offset by adding
+<tt>.data</tt> section. This is accomplished by linking with
+\code
+avr-gcc ... -Tdata addr -Wl,--defsym,__DATA_REGION_START__=addr
+\endcode
+
+Note that <tt>addr</tt> must be \ref harvard_arch "offset" by adding
 0x800000 the to real SRAM address so that the linker knows that the address is
-in the SRAM memory space. Thus, if you want the .data section to start at
-0x1100, pass 0x801100 at the address to the linker.
-[offset \ref harvard_arch "explained"]
+in the SRAM memory segment. Thus, if you want the <tt>.data</tt> section
+to start at \c 0x1100, pass \c 0x801100 at the address to the linker.
 
 \note
 When using \c malloc() in the application (which could even happen inside
 library calls), \ref malloc_extram "additional adjustments" are required.
 
-\section sec_dot_bss The .bss Section
+\subsection sec_dot_bss  The .bss Output Section
 
-Uninitialized global or static variables end up in the .bss section.
+Data in static storage that will be zeroed by the startup code.
+This are data objects without explicit initializer, and data objects
+with initializers that are all zeroes.
 
-\section sec_dot_eeprom The .eeprom Section
+Input sections are <tt>.bss*</tt> and \c COMMON. Common symbols are
+defined with directives <tt>.comm</tt> or <tt>.lcomm</tt>.
 
-This is where eeprom variables are stored.
+\subsection sec_dot_noinit The .noinit Output Section
 
-\section sec_dot_noinit The .noinit Section
-
-This sections is a part of the .bss section. What makes the .noinit section
-special is that variables which are defined as such:
-
+Data objects in static storage that should not be initialized by the
+startup code.  As the C/C++ standard requires that <em>all</em> data
+in static storage is initialized --- which includes data without explicit
+initializer, which will be initialized to all zeroes --- such objects
+have to be put into section <tt>.noinit</tt> by hand:
 \code
-int foo __attribute__ ((section (".noinit")));
+__attribute__ ((section (".noinit")))
+int foo;
 \endcode
+The only input section in this output section is <tt>.noinit</tt>.
+Only data without initializer can be put in this section.
 
-will not be initialized to zero during startup as would normal .bss data.
+\subsection sec_dot_rodata The .rodata Output Section
 
-Only uninitialized variables can be placed in the .noinit section. Thus, the
-following code will cause \c avr-gcc to issue an error:
+This section contains read-only data in static storage from
+<tt>.rodata*</tt> input sections.  This output section is only
+present for devices where read-only data remains in program memory,
+which are the devices where (parts of) the program memory are visible in the
+RAM address space.  This is currently the case for the emulations
+\c avrtiny, \c avrxmega3, \c avrxmega2_flmap and \c avrxmega4_flmap.
 
-\code
-int bar __attribute__ ((section (".noinit"))) = 0xaa;
-\endcode
+\subsection sec_dot_eeprom The .eeprom Output Section
 
-It is possible to tell the linker explicitly where to place the .noinit
-section by adding <tt>-Wl,--section-start=.noinit=0x802000</tt> to the
-<tt>avr-gcc</tt> command line at the linking stage. For example, suppose you
-wish to place the .noinit section at SRAM address 0x2000:
+This is where EEPROM variables are stored, for example variables declared
+with the \c #EEMEM attribute.
+The only input section (pattern) is <tt>.eeprom*</tt>.
 
-\verbatim
-	$ avr-gcc ... -Wl,--section-start=.noinit=0x802000 ...
-\endverbatim
+\subsection sec_dot_fuse The .fuse, .lock and .signature Output Sections
 
-\anchor harvard_arch
-\note Because of the Harvard architecture of the AVR devices, you must
-manually add 0x800000 to the address you pass to the linker as the start of
-the section.  Otherwise, the linker thinks you want to put the .noinit section
-into the .text section instead of .data/.bss and will complain.
+These sections contain fuse bytes, lock bytes and device signature bytes,
+respectively.  The respective input section patterns are
+<tt>.fuse*</tt> <tt>.lock*</tt> and <tt>.signature*</tt>.
 
-Alternatively, you can write your own linker script to automate this. [FIXME:
-need an example or ref to dox for writing linker scripts.]
+\subsection sec_dot_note The .note.gnu.avr.deviceinfo Section
 
-\section sec_dot_init The .initN Sections
+This section is actually <em>not mentioned</em> in the default linker
+script, which means it is an \ref sec_orphan "orphan section"
+and hence the respective output section is implicit.
 
-These sections are used to define the startup code from reset up through
-the start of main(). These all are subparts of the 
-\ref sec_dot_text ".text section".
+The startup code from AVR-LibC puts device information in that section
+to be picked up by simulators or tools like avr-size, avr-objdump,
+avr-readelf, etc,
 
-The purpose of these sections is to allow for more specific placement of code
-within your program.
-
-\note Sometimes, it is convenient to think of the .initN and .finiN sections as
-functions, but in reality they are just symbolic names which tell the linker
-where to stick a chunk of code which is \em not a function. Notice that the
-examples for \ref asm_sections "asm" and \ref c_sections "C" can not be called
-as functions and should not be jumped into.
-
-The <b>.initN</b> sections are  executed in order from 0 to 9.
-
-\par .init0:
-Weakly bound to __init(). If user defines __init(), it will be jumped into
-immediately after a reset.
-
-\par .init1:
-Unused. User definable.
-
-\par .init2:
-In C programs, weakly bound to initialize the stack, and to clear
-__zero_reg__ (r1).
-
-\par .init3:
-Unused. User definable.
-
-\par .init4:
-
-For devices with > 64 KB of ROM, .init4 defines the code
-which takes care of copying the contents of .data from the flash to
-SRAM.
-For all other devices, this code as well as the code to zero out the .bss
-section is loaded from libgcc.a.
-
-\par .init5:
-Unused. User definable.
-
-\par .init6:
-Unused for C programs, but used for constructors in C++ programs.
-
-\par .init7:
-Unused. User definable.
-
-\par .init8:
-Unused. User definable.
-
-\par .init9:
-Jumps into main().
-
-\section sec_dot_fini The .finiN Sections
-
-These sections are used to define the exit code executed after return from
-main() or a call to exit(). These all are subparts of the 
-\ref sec_dot_text ".text section".
-
-The <b>.finiN</b> sections are executed in descending order from 9 to 0.
-
-\par .finit9:
-Unused. User definable. This is effectively where _exit() starts.
-
-\par .fini8:
-Unused. User definable.
-
-\par .fini7:
-Unused. User definable.
-
-\par .fini6:
-Unused for C programs, but used for destructors in C++ programs.
-
-\par .fini5:
-Unused. User definable.
-
-\par .fini4:
-Unused. User definable.
-
-\par .fini3:
-Unused. User definable.
-
-\par .fini2:
-Unused. User definable.
-
-\par .fini1:
-Unused. User definable.
-
-\par .fini0:
-Goes into an infinite loop after program termination and completion of any
-_exit() code (execution of code in the .fini9 -> .fini1 sections).
-
-\section sec_dot_note The .note.gnu.avr.deviceinfo Section
-
-This section contains device specific information picked up from the device
-header file and compiler builtin macros. The layout conforms to the standard ELF
-note section layout (http://docs.oracle.com/cd/E23824_01/html/819-0690/chapter6-18048.html).
-
-The section contents are laid out as below.
+The section is contained in the ELF file but not loaded onto the target.
+Source of the device specific information are the device header file
+and compiler builtin macros. The layout conforms to the standard
+<a href="https://man7.org/linux/man-pages/man5/elf.5.html"
+   >ELF note section</a> layout and is laid out as follows.
 
 \code
-#define __NOTE_NAME_LEN 4
-struct __note_gnu_avr_deviceinfo
+#include <elf.h>
+
+typedef struct
 {
+    Elf32_Word n_namesz;     /* AVR_NOTE_NAME_LEN */
+    Elf32_Word n_descsz;     /* size of avr_desc */
+    Elf32_Word n_type;       /* 1 - the only AVR note type */
+} Elf32_Nhdr;
+
+#define AVR_NOTE_NAME_LEN 4
+
+struct note_gnu_avr_deviceinfo
+{
+    Elf32_Nhdr nhdr;
+    char note_name[AVR_NOTE_NAME_LEN]; /* = "AVR\0" */
+
     struct
     {
-        uint32_t namesz;          /* = __NOTE_NAME_LEN */
-        uint32_t descsz;          /* =  size of avr_desc */
-        uint32_t type;            /* = 1 - no other AVR note types exist */
-        char note_name[__NOTE_NAME_LEN]; /* = "AVR\0" */
-    }
-    note_header;
-    struct
-    {
-        uint32_t flash_start;
-        uint32_t flash_size;
-        uint32_t sram_start;
-        uint32_t sram_size;
-        uint32_t eeprom_start;
-        uint32_t eeprom_size;
-        uint32_t offset_table_size;
-        uint32_t offset_table[1];  /* Offset table containing byte offsets into
-                                      string table that immediately follows it.
-                                      index 0: Device name byte offset
-                                    */
-        char str_table [2 +
-          strlen(__AVR_DEVICE_NAME__)]; /* Standard ELF string table.
-                                           index 0 : NULL
-                                           index 1 : Device name
-                                           index 2 : NULL
-                                        */
-    }
-    avr_desc;
+        Elf32_Word flash_start;
+        Elf32_Word flash_size;
+        Elf32_Word sram_start;
+        Elf32_Word sram_size;
+        Elf32_Word eeprom_start;
+        Elf32_Word eeprom_size;
+        Elf32_Word offset_table_size;
+        /* Offset table containing byte offsets into
+           string table that immediately follows it.
+           index 0: Device name byte offset */
+        Elf32_Off offset_table[1];
+        /* Standard ELF string table.
+           index 0 : NULL
+           index 1 : Device name
+           index 2 : NULL */
+        char strtab[2 + strlen(__AVR_DEVICE_NAME__)];
+    } avr_desc;
 };
 \endcode
 
+The contents of this section can be displayed with
 
-\section asm_sections Using Sections in Assembler Code
+- <tt>avr-objdump -P avr-deviceinfo <em>file</em></tt>, which is supported since
+Binutils v2.43.
 
-Example:
+- <tt>avr-readelf -n <em>file</em></tt>, which displays all notes.
+
+
+\section sec_size Output Sections and Code Size
+
+The \c avr-size program (part of Binutils), coming from a Unix background,
+doesn't account for the <code>\ref sec_dot_data ".data"</code> initialization
+space added to the <code>\ref sec_dot_text ".text"</code> section,
+so in order to know how much flash the final program will consume, one
+needs to add the values for both, <code>.text</code> and <code>.data</code>
+(but not <code>\ref sec_dot_bss ".bss"</code>), while the amount of
+pre-allocated SRAM is the sum of <code>.data</code> and <code>.bss</code>.
+
+Memory usage and free memory can also be displayed with
+\verbatim
+avr-objdump -P mem-usage code.elf
+\endverbatim
+
+\section sec_using Using Sections
+
+\subsection c_sections In C/C++ Code
+
+The following example shows how to read and reset the \c MCUCR special
+function register on ATmega328.
+This SFR holds to reset source like "watchdog reset" or "external reset",
+and should be read early, prior to the initialization of RAM and
+execution of static constructors which may take some time. This means the
+code has to be placed prior to <tt>\ref sec_dot_init ".init4"</tt>
+which initializes static storage, but after <tt>.init2</tt> which
+initializes <tt>\ref zero_reg "__zero_reg__"</tt>.
+As the code runs prior to the initialization of static storage,
+variable \c mcucr must be placed in section
+<tt>\ref sec_dot_noinit ".noinit"</tt> so that it won't be overridden
+by that part of the startup code:
 
 \code
 #include <avr/io.h>
 
-	.section .init1,"ax",@progbits
-	ldi	  r0, 0xff
-	out	  _SFR_IO_ADDR(PORTB), r0
-	out	  _SFR_IO_ADDR(DDRB), r0
-\endcode
+__attribute__((section(".noinit")))
+uint8_t mcucr;
 
-\note The <b><tt>,"ax",\@progbits</tt></b> tells the assembler that the section
-is allocatable ("a"), executable ("x") and contains data ("@progbits"). For
-more detailed information on the .section directive, see the gas user manual.
-
-<!-- I know, poorly named section. - TRoth -->
-\section c_sections Using Sections in C Code
-
-Example:
-
-\code
-#include <avr/io.h>
-
-void my_init_portb (void) __attribute__ ((naked)) \
-    __attribute__ ((section (".init3")))
-    __attribute__ ((used));
-
-void
-my_init_portb (void)
+__attribute__((used, unused, naked, section(".init3")))
+static void read_MCUCR (void)
 {
-	PORTB = 0xff;
-	DDRB = 0xff;
+    mcucr = MCUCR;
+    MCUCR = 0;
 }
 \endcode
 
-\note Section .init3 is used in this example, as this ensures the
-inernal <tt>__zero_reg__</tt> has already been set up.  The code
-generated by the compiler might blindly rely on <tt>__zero_reg__</tt>
-being really 0. <tt>__attribute__ ((used))</tt> tells the compiler
-that code must be generated for this function even if it appears
-that the function is not referenced - this is necessary to prevent 
-compiler optimizations (like LTO) from eliminating the function.
+- The \c used attribute tells the compiler that the function
+is used although it is never called.
+
+- The \c unused attribute tells the compiler that it is fine that
+the function is unused, and silences respective diagnostics
+about the seemingly unused functions.
+
+- The \c naked attribute is required because the code is located in an
+init section.  The function <em>must not have a \c RET statement</em>
+because the function is never called.
+According to the GCC documentation, the only code supported in naked
+functions is inline assembly, but the code above is simple enough so
+that GCC can deal with it.
+
+\subsection asm_sections In Assembly Code
+
+Example:
+
+\code
+#include <avr/io.h>
+
+.section .init3,"ax",@progbits
+    lds     r0, MCUCR
+
+.pushsection .noinit,"a",@nobits
+mcucr:
+    .type   mcucr, @object
+    .size   mcucr, 1
+    .space  1
+.popsection                     ; Proceed with .init3
+
+    sts     mcucr, r0
+    sts     MCUCR, __zero_reg__ ; Initialized in .init2
+
+.text
+    .global main
+    .type   main, @function
+    lds     r24,    mcucr
+    clr     r25
+    rjmp    putchar
+    .size main, .-main
+\endcode
+
+- The <tt>"ax"</tt> \ref sec_flags "flags" tells that the sections is
+<b>a</b>llocatable (consumes space on the target hardware) and is
+e<b>x</b>ecutable.
+
+- The <tt>\@progbits</tt> \ref sec_type "type"
+tells that the section contains bits that have to be uploaded to the
+target hardware.
+
+For more detais, see the see the gas user manual on the
+<a href="https://sourceware.org/binutils/docs/as/Section.html#ELF-Version"
+   ><tt>.section</tt></a> directive.
 
 */
-
