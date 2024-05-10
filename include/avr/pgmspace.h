@@ -115,249 +115,249 @@
    \def PROGMEM
 
    Attribute to use in order to declare an object being located in
-   flash ROM.
- */
+   flash ROM.  */
 #define PROGMEM __attribute__((__progmem__))
 
 /** \ingroup avr_pgmspace
-    \fn char pgm_read_char (const char *address)
-    Read a <tt>char</tt> from 16-bit (near) byte-address \p address.
+    \fn char pgm_read_char (const char *__addr)
+    Read a <tt>char</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline char pgm_read_char (const char *address);
+static inline char pgm_read_char (const char *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned char pgm_read_unsigned_char (const unsigned char *address)
-    Read an <tt>unsigned char</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned char pgm_read_unsigned_char (const unsigned char *__addr)
+    Read an <tt>unsigned char</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned char pgm_read_unsigned_char (const unsigned char *address);
+static inline unsigned char pgm_read_unsigned_char (const unsigned char *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed char pgm_read_signed_char (const signed char *address)
-    Read a <tt>signed char</tt> from 16-bit (near) byte-address \p address.
+    \fn signed char pgm_read_signed_char (const signed char *__addr)
+    Read a <tt>signed char</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline signed char pgm_read_signed_char (const signed char *address);
+static inline signed char pgm_read_signed_char (const signed char *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint8_t pgm_read_u8 (const uint8_t *address)
-    Read an <tt>uint8_t</tt> from 16-bit (near) byte-address \p address.
+    \fn uint8_t pgm_read_u8 (const uint8_t *__addr)
+    Read an <tt>uint8_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline uint8_t pgm_read_u8 (const uint8_t *address);
+static inline uint8_t pgm_read_u8 (const uint8_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn int8_t pgm_read_i8 (const int8_t *address)
-    Read an <tt>int8_t</tt> from 16-bit (near) byte-address \p address.
+    \fn int8_t pgm_read_i8 (const int8_t *__addr)
+    Read an <tt>int8_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline int8_t pgm_read_i8 (const int8_t *address);
+static inline int8_t pgm_read_i8 (const int8_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn int pgm_read_int (const int *address)
-    Read an <tt>int</tt> from 16-bit (near) byte-address \p address.
+    \fn int pgm_read_int (const int *__addr)
+    Read an <tt>int</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline int pgm_read_int (const int *address);
+static inline int pgm_read_int (const int *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed pgm_read_signed (const signed *address)
-    Read a <tt>signed</tt> from 16-bit (near) byte-address \p address.
+    \fn signed pgm_read_signed (const signed *__addr)
+    Read a <tt>signed</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline signed pgm_read_signed (const signed *address);
+static inline signed pgm_read_signed (const signed *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned pgm_read_unsigned (const unsigned *address)
-    Read an <tt>unsigned</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned pgm_read_unsigned (const unsigned *__addr)
+    Read an <tt>unsigned</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned pgm_read_unsigned (const unsigned *address);
+static inline unsigned pgm_read_unsigned (const unsigned *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed int pgm_read_signed_int (const signed int *address)
-    Read a <tt>signed int</tt> from 16-bit (near) byte-address \p address.
+    \fn signed int pgm_read_signed_int (const signed int *__addr)
+    Read a <tt>signed int</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline signed int pgm_read_signed_int (const signed int *address);
+static inline signed int pgm_read_signed_int (const signed int *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned int pgm_read_unsigned_int (const unsigned int *address)
-    Read an <tt>unsigned int</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned int pgm_read_unsigned_int (const unsigned int *__addr)
+    Read an <tt>unsigned int</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned int pgm_read_unsigned_int (const unsigned int *address);
+static inline unsigned int pgm_read_unsigned_int (const unsigned int *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn short pgm_read_short (const short *address)
-    Read a <tt>short</tt> from 16-bit (near) byte-address \p address.
+    \fn short pgm_read_short (const short *__addr)
+    Read a <tt>short</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline short pgm_read_short (const short *address);
+static inline short pgm_read_short (const short *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned short pgm_read_unsigned_short (const unsigned short *address)
-    Read an <tt>unsigned short</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned short pgm_read_unsigned_short (const unsigned short *__addr)
+    Read an <tt>unsigned short</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned short pgm_read_unsigned_short (const unsigned short *address);
+static inline unsigned short pgm_read_unsigned_short (const unsigned short *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint16_t pgm_read_u16 (const uint16_t *address)
-    Read an <tt>uint16_t</tt> from 16-bit (near) byte-address \p address.
+    \fn uint16_t pgm_read_u16 (const uint16_t *__addr)
+    Read an <tt>uint16_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline uint16_t pgm_read_u16 (const uint16_t *address);
+static inline uint16_t pgm_read_u16 (const uint16_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn int16_t pgm_read_i16 (const int16_t *address)
-    Read an <tt>int16_t</tt> from 16-bit (near) byte-address \p address.
+    \fn int16_t pgm_read_i16 (const int16_t *__addr)
+    Read an <tt>int16_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline int16_t pgm_read_i16 (const int16_t *address);
+static inline int16_t pgm_read_i16 (const int16_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn int pgm_read_int (const int *address)
-    Read an <tt>int</tt> from 16-bit (near) byte-address \p address.
+    \fn int pgm_read_int (const int *__addr)
+    Read an <tt>int</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline int pgm_read_int (const int *address);
+static inline int pgm_read_int (const int *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed pgm_read_signed (const signed *address)
-    Read a <tt>signed</tt> from 16-bit (near) byte-address \p address.
+    \fn signed pgm_read_signed (const signed *__addr)
+    Read a <tt>signed</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline signed pgm_read_signed (const signed *address);
+static inline signed pgm_read_signed (const signed *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned pgm_read_unsigned (const unsigned *address)
-    Read an <tt>unsigned</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned pgm_read_unsigned (const unsigned *__addr)
+    Read an <tt>unsigned</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned pgm_read_unsigned (const unsigned *address);
+static inline unsigned pgm_read_unsigned (const unsigned *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed int pgm_read_signed_int (const signed int *address)
-    Read a <tt>signed int</tt> from 16-bit (near) byte-address \p address.
+    \fn signed int pgm_read_signed_int (const signed int *__addr)
+    Read a <tt>signed int</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline signed int pgm_read_signed_int (const signed int *address);
+static inline signed int pgm_read_signed_int (const signed int *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned int pgm_read_unsigned_int (const unsigned int *address)
-    Read an <tt>unsigned int</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned int pgm_read_unsigned_int (const unsigned int *__addr)
+    Read an <tt>unsigned int</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned int pgm_read_unsigned_int (const unsigned int *address);
+static inline unsigned int pgm_read_unsigned_int (const unsigned int *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn short pgm_read_short (const short *address)
-    Read a <tt>short</tt> from 16-bit (near) byte-address \p address.
+    \fn short pgm_read_short (const short *__addr)
+    Read a <tt>short</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline short pgm_read_short (const short *address);
+static inline short pgm_read_short (const short *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned short pgm_read_unsigned_short (const unsigned short *address)
-    Read an <tt>unsigned short</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned short pgm_read_unsigned_short (const unsigned short *__addr)
+    Read an <tt>unsigned short</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned short pgm_read_unsigned_short (const unsigned short *address);
+static inline unsigned short pgm_read_unsigned_short (const unsigned short *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn long pgm_read_long (const long *address)
-    Read a <tt>long</tt> from 16-bit (near) byte-address \p address.
+    \fn long pgm_read_long (const long *__addr)
+    Read a <tt>long</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline long pgm_read_long (const long *address);
+static inline long pgm_read_long (const long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long pgm_read_unsigned_long (const unsigned long *address)
-    Read an <tt>unsigned long</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned long pgm_read_unsigned_long (const unsigned long *__addr)
+    Read an <tt>unsigned long</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned long pgm_read_unsigned_long (const unsigned long *address);
+static inline unsigned long pgm_read_unsigned_long (const unsigned long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn __int24 pgm_read_i24 (const __int24 *address)
-    Read an <tt>__int24</tt> from 16-bit (near) byte-address \p address.
+    \fn __int24 pgm_read_i24 (const __int24 *__addr)
+    Read an <tt>__int24</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline __int24 pgm_read_i24 (const __int24 *address);
+static inline __int24 pgm_read_i24 (const __int24 *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn __uint24 pgm_read_u24 (const __uint24 *address)
-    Read an <tt>__uint24</tt> from 16-bit (near) byte-address \p address.
+    \fn __uint24 pgm_read_u24 (const __uint24 *__addr)
+    Read an <tt>__uint24</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline __uint24 pgm_read_u24 (const __uint24 *address);
+static inline __uint24 pgm_read_u24 (const __uint24 *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint32_t pgm_read_u32 (const uint32_t *address)
-    Read an <tt>uint32_t</tt> from 16-bit (near) byte-address \p address.
+    \fn uint32_t pgm_read_u32 (const uint32_t *__addr)
+    Read an <tt>uint32_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline uint32_t pgm_read_u32 (const uint32_t *address);
+static inline uint32_t pgm_read_u32 (const uint32_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn int32_t pgm_read_i32 (const int32_t *address)
-    Read an <tt>int32_t</tt> from 16-bit (near) byte-address \p address.
+    \fn int32_t pgm_read_i32 (const int32_t *__addr)
+    Read an <tt>int32_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline int32_t pgm_read_i32 (const int32_t *address);
+static inline int32_t pgm_read_i32 (const int32_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn float pgm_read_float (const float *address)
-    Read a <tt>float</tt> from 16-bit (near) byte-address \p address.
+    \fn float pgm_read_float (const float *__addr)
+    Read a <tt>float</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline float pgm_read_float (const float *address);
+static inline float pgm_read_float (const float *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn long pgm_read_long (const long *address)
-    Read a <tt>long</tt> from 16-bit (near) byte-address \p address.
+    \fn long pgm_read_long (const long *__addr)
+    Read a <tt>long</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline long pgm_read_long (const long *address);
+static inline long pgm_read_long (const long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long pgm_read_unsigned_long (const unsigned long *address)
-    Read an <tt>unsigned long</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned long pgm_read_unsigned_long (const unsigned long *__addr)
+    Read an <tt>unsigned long</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned long pgm_read_unsigned_long (const unsigned long *address);
+static inline unsigned long pgm_read_unsigned_long (const unsigned long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn long long pgm_read_long_long (const long long *address)
-    Read a <tt>long long</tt> from 16-bit (near) byte-address \p address.
+    \fn long long pgm_read_long_long (const long long *__addr)
+    Read a <tt>long long</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline long long pgm_read_long_long (const long long *address);
+static inline long long pgm_read_long_long (const long long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long long pgm_read_unsigned_long_long (const unsigned long long *address)
-    Read an <tt>unsigned long long</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned long long pgm_read_unsigned_long_long (const unsigned long long *__addr)
+    Read an <tt>unsigned long long</tt> from 16-bit (near) byte-address
+    \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned long long pgm_read_unsigned_long_long (const unsigned long long *address);
+static inline unsigned long long pgm_read_unsigned_long_long (const unsigned long long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn double pgm_read_double (const double *address)
-    Read a <tt>double</tt> from 16-bit (near) byte-address \p address.
+    \fn double pgm_read_double (const double *__addr)
+    Read a <tt>double</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline double pgm_read_double (const double *address);
+static inline double pgm_read_double (const double *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn long double pgm_read_long_double (const long double *address)
-    Read a <tt>long double</tt> from 16-bit (near) byte-address \p address.
+    \fn long double pgm_read_long_double (const long double *__addr)
+    Read a <tt>long double</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline long double pgm_read_long_double (const long double *address);
+static inline long double pgm_read_long_double (const long double *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint64_t pgm_read_u64 (const uint64_t *address)
-    Read an <tt>uint64_t</tt> from 16-bit (near) byte-address \p address.
+    \fn uint64_t pgm_read_u64 (const uint64_t *__addr)
+    Read an <tt>uint64_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline uint64_t pgm_read_u64 (const uint64_t *address);
+static inline uint64_t pgm_read_u64 (const uint64_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn int64_t pgm_read_i64 (const int64_t *address)
-    Read an <tt>int64_t</tt> from 16-bit (near) byte-address \p address.
+    \fn int64_t pgm_read_i64 (const int64_t *__addr)
+    Read an <tt>int64_t</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline int64_t pgm_read_i64 (const int64_t *address);
+static inline int64_t pgm_read_i64 (const int64_t *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn long long pgm_read_long_long (const long long *address)
-    Read a <tt>long long</tt> from 16-bit (near) byte-address \p address.
+    \fn long long pgm_read_long_long (const long long *__addr)
+    Read a <tt>long long</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline long long pgm_read_long_long (const long long *address);
+static inline long long pgm_read_long_long (const long long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long long pgm_read_unsigned_long_long (const unsigned long long *address)
-    Read an <tt>unsigned long long</tt> from 16-bit (near) byte-address \p address.
+    \fn unsigned long long pgm_read_unsigned_long_long (const unsigned long long *__addr)
+    Read an <tt>unsigned long long</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline unsigned long long pgm_read_unsigned_long_long (const unsigned long long *address);
+static inline unsigned long long pgm_read_unsigned_long_long (const unsigned long long *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn double pgm_read_double (const double *address)
-    Read a <tt>double</tt> from 16-bit (near) byte-address \p address.
+    \fn double pgm_read_double (const double *__addr)
+    Read a <tt>double</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline double pgm_read_double (const double *address);
+static inline double pgm_read_double (const double *__addr);
 
 /** \ingroup avr_pgmspace
-    \fn long double pgm_read_long_double (const long double *address)
-    Read a <tt>long double</tt> from 16-bit (near) byte-address \p address.
+    \fn long double pgm_read_long_double (const long double *__addr)
+    Read a <tt>long double</tt> from 16-bit (near) byte-address \p __addr.
     The address is in the lower 64 KiB of program memory. */
-static inline long double pgm_read_long_double (const long double *address);
+static inline long double pgm_read_long_double (const long double *__addr);
 
 #else /* !DOXYGEN */
 #if defined(__AVR_TINY__)
@@ -560,244 +560,244 @@ _Avrlibc_Def_Pgm_8 (long_double, long double)
 #ifdef __DOXYGEN__
 
 /** \ingroup avr_pgmspace
-    \fn char pgm_read_char_far (uint_farptr_t address)
-    Read a <tt>char</tt> from far byte-address \p address.
+    \fn char pgm_read_char_far (uint_farptr_t __addr)
+    Read a <tt>char</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline char pgm_read_char_far (uint_farptr_t address);
+static inline char pgm_read_char_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned char pgm_read_unsigned_char_far (uint_farptr_t address)
-    Read an <tt>unsigned char</tt> from far byte-address \p address.
+    \fn unsigned char pgm_read_unsigned_char_far (uint_farptr_t __addr)
+    Read an <tt>unsigned char</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned char pgm_read_unsigned_char_far (uint_farptr_t address);
+static inline unsigned char pgm_read_unsigned_char_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed char pgm_read_signed_char_far (uint_farptr_t address)
-    Read a <tt>signed char</tt> from far byte-address \p address.
+    \fn signed char pgm_read_signed_char_far (uint_farptr_t __addr)
+    Read a <tt>signed char</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline signed char pgm_read_signed_char_far (uint_farptr_t address);
+static inline signed char pgm_read_signed_char_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint8_t pgm_read_u8_far (uint_farptr_t address)
-    Read an <tt>uint8_t</tt> from far byte-address \p address.
+    \fn uint8_t pgm_read_u8_far (uint_farptr_t __addr)
+    Read an <tt>uint8_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline uint8_t pgm_read_u8_far (uint_farptr_t address);
+static inline uint8_t pgm_read_u8_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn int8_t pgm_read_i8_far (uint_farptr_t address)
-    Read an <tt>int8_t</tt> from far byte-address \p address.
+    \fn int8_t pgm_read_i8_far (uint_farptr_t __addr)
+    Read an <tt>int8_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline int8_t pgm_read_i8_far (uint_farptr_t address);
+static inline int8_t pgm_read_i8_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn int pgm_read_int_far (uint_farptr_t address)
-    Read an <tt>int</tt> from far byte-address \p address.
+    \fn int pgm_read_int_far (uint_farptr_t __addr)
+    Read an <tt>int</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline int pgm_read_int_far (uint_farptr_t address);
+static inline int pgm_read_int_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned pgm_read_unsigned_far (uint_farptr_t address)
-    Read an <tt>unsigned</tt> from far byte-address \p address.
+    \fn unsigned pgm_read_unsigned_far (uint_farptr_t __addr)
+    Read an <tt>unsigned</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned pgm_read_unsigned_far (uint_farptr_t address);
+static inline unsigned pgm_read_unsigned_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned int pgm_read_unsigned_int_far (uint_farptr_t address)
-    Read an <tt>unsigned int</tt> from far byte-address \p address.
+    \fn unsigned int pgm_read_unsigned_int_far (uint_farptr_t __addr)
+    Read an <tt>unsigned int</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned int pgm_read_unsigned_int_far (uint_farptr_t address);
+static inline unsigned int pgm_read_unsigned_int_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed pgm_read_signed_far (uint_farptr_t address)
-    Read a <tt>signed</tt> from far byte-address \p address.
+    \fn signed pgm_read_signed_far (uint_farptr_t __addr)
+    Read a <tt>signed</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline signed pgm_read_signed_far (uint_farptr_t address);
+static inline signed pgm_read_signed_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed int pgm_read_signed_int_far (uint_farptr_t address)
-    Read a <tt>signed int</tt> from far byte-address \p address.
+    \fn signed int pgm_read_signed_int_far (uint_farptr_t __addr)
+    Read a <tt>signed int</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline signed int pgm_read_signed_int_far (uint_farptr_t address);
+static inline signed int pgm_read_signed_int_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn short pgm_read_short_far (uint_farptr_t address)
-    Read a <tt>short</tt> from far byte-address \p address.
+    \fn short pgm_read_short_far (uint_farptr_t __addr)
+    Read a <tt>short</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline short pgm_read_short_far (uint_farptr_t address);
+static inline short pgm_read_short_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned short pgm_read_unsigned_short_far (uint_farptr_t address)
-    Read an <tt>unsigned short</tt> from far byte-address \p address.
+    \fn unsigned short pgm_read_unsigned_short_far (uint_farptr_t __addr)
+    Read an <tt>unsigned short</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned short pgm_read_unsigned_short_far (uint_farptr_t address);
+static inline unsigned short pgm_read_unsigned_short_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint16_t pgm_read_u16_far (uint_farptr_t address)
-    Read an <tt>uint16_t</tt> from far byte-address \p address.
+    \fn uint16_t pgm_read_u16_far (uint_farptr_t __addr)
+    Read an <tt>uint16_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline uint16_t pgm_read_u16_far (uint_farptr_t address);
+static inline uint16_t pgm_read_u16_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn int16_t pgm_read_i16_far (uint_farptr_t address)
-    Read an <tt>int16_t</tt> from far byte-address \p address.
+    \fn int16_t pgm_read_i16_far (uint_farptr_t __addr)
+    Read an <tt>int16_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline int16_t pgm_read_i16_far (uint_farptr_t address);
+static inline int16_t pgm_read_i16_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn int pgm_read_int_far (uint_farptr_t address)
-    Read an <tt>int</tt> from far byte-address \p address.
+    \fn int pgm_read_int_far (uint_farptr_t __addr)
+    Read an <tt>int</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline int pgm_read_int_far (uint_farptr_t address);
+static inline int pgm_read_int_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned pgm_read_unsigned_far (uint_farptr_t address)
-    Read an <tt>unsigned</tt> from far byte-address \p address.
+    \fn unsigned pgm_read_unsigned_far (uint_farptr_t __addr)
+    Read an <tt>unsigned</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned pgm_read_unsigned_far (uint_farptr_t address);
+static inline unsigned pgm_read_unsigned_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned int pgm_read_unsigned_int_far (uint_farptr_t address)
-    Read an <tt>unsigned int</tt> from far byte-address \p address.
+    \fn unsigned int pgm_read_unsigned_int_far (uint_farptr_t __addr)
+    Read an <tt>unsigned int</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned int pgm_read_unsigned_int_far (uint_farptr_t address);
+static inline unsigned int pgm_read_unsigned_int_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed pgm_read_signed_far (uint_farptr_t address)
-    Read a <tt>signed</tt> from far byte-address \p address.
+    \fn signed pgm_read_signed_far (uint_farptr_t __addr)
+    Read a <tt>signed</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline signed pgm_read_signed_far (uint_farptr_t address);
+static inline signed pgm_read_signed_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn signed int pgm_read_signed_int_far (uint_farptr_t address)
-    Read a <tt>signed int</tt> from far byte-address \p address.
+    \fn signed int pgm_read_signed_int_far (uint_farptr_t __addr)
+    Read a <tt>signed int</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline signed int pgm_read_signed_int_far (uint_farptr_t address);
+static inline signed int pgm_read_signed_int_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn short pgm_read_short_far (uint_farptr_t address)
-    Read a <tt>short</tt> from far byte-address \p address.
+    \fn short pgm_read_short_far (uint_farptr_t __addr)
+    Read a <tt>short</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline short pgm_read_short_far (uint_farptr_t address);
+static inline short pgm_read_short_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned short pgm_read_unsigned_short_far (uint_farptr_t address)
-    Read an <tt>unsigned short</tt> from far byte-address \p address.
+    \fn unsigned short pgm_read_unsigned_short_far (uint_farptr_t __addr)
+    Read an <tt>unsigned short</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned short pgm_read_unsigned_short_far (uint_farptr_t address);
+static inline unsigned short pgm_read_unsigned_short_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn long pgm_read_long_far (uint_farptr_t address)
-    Read a <tt>long</tt> from far byte-address \p address.
+    \fn long pgm_read_long_far (uint_farptr_t __addr)
+    Read a <tt>long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline long pgm_read_long_far (uint_farptr_t address);
+static inline long pgm_read_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long pgm_read_unsigned_long_far (uint_farptr_t address)
-    Read an <tt>unsigned long</tt> from far byte-address \p address.
+    \fn unsigned long pgm_read_unsigned_long_far (uint_farptr_t __addr)
+    Read an <tt>unsigned long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t address);
+static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn __int24 pgm_read_i24_far (uint_farptr_t address)
-    Read an <tt>__int24</tt> from far byte-address \p address.
+    \fn __int24 pgm_read_i24_far (uint_farptr_t __addr)
+    Read an <tt>__int24</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline __int24 pgm_read_i24_far (uint_farptr_t address);
+static inline __int24 pgm_read_i24_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn __uint24 pgm_read_u24_far (uint_farptr_t address)
-    Read an <tt>__uint24</tt> from far byte-address \p address.
+    \fn __uint24 pgm_read_u24_far (uint_farptr_t __addr)
+    Read an <tt>__uint24</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline __uint24 pgm_read_u24_far (uint_farptr_t address);
+static inline __uint24 pgm_read_u24_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint32_t pgm_read_u32_far (uint_farptr_t address)
-    Read an <tt>uint32_t</tt> from far byte-address \p address.
+    \fn uint32_t pgm_read_u32_far (uint_farptr_t __addr)
+    Read an <tt>uint32_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline uint32_t pgm_read_u32_far (uint_farptr_t address);
+static inline uint32_t pgm_read_u32_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn int32_t pgm_read_i32_far (uint_farptr_t address)
-    Read an <tt>int32_t</tt> from far byte-address \p address.
+    \fn int32_t pgm_read_i32_far (uint_farptr_t __addr)
+    Read an <tt>int32_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline int32_t pgm_read_i32_far (uint_farptr_t address);
+static inline int32_t pgm_read_i32_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn float pgm_read_float_far (uint_farptr_t address)
-    Read a <tt>float</tt> from far byte-address \p address.
+    \fn float pgm_read_float_far (uint_farptr_t __addr)
+    Read a <tt>float</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline float pgm_read_float_far (uint_farptr_t address);
+static inline float pgm_read_float_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn long pgm_read_long_far (uint_farptr_t address)
-    Read a <tt>long</tt> from far byte-address \p address.
+    \fn long pgm_read_long_far (uint_farptr_t __addr)
+    Read a <tt>long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline long pgm_read_long_far (uint_farptr_t address);
+static inline long pgm_read_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long pgm_read_unsigned_long_far (uint_farptr_t address)
-    Read an <tt>unsigned long</tt> from far byte-address \p address.
+    \fn unsigned long pgm_read_unsigned_long_far (uint_farptr_t __addr)
+    Read an <tt>unsigned long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t address);
+static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn long long pgm_read_long_long_far (uint_farptr_t address)
-    Read a <tt>long long</tt> from far byte-address \p address.
+    \fn long long pgm_read_long_long_far (uint_farptr_t __addr)
+    Read a <tt>long long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline long long pgm_read_long_long_far (uint_farptr_t address);
+static inline long long pgm_read_long_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address)
-    Read an <tt>unsigned long long</tt> from far byte-address \p address.
+    \fn unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t __addr)
+    Read an <tt>unsigned long long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address);
+static inline unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn double pgm_read_double_far (uint_farptr_t address)
-    Read a <tt>double</tt> from far byte-address \p address.
+    \fn double pgm_read_double_far (uint_farptr_t __addr)
+    Read a <tt>double</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline double pgm_read_double_far (uint_farptr_t address);
+static inline double pgm_read_double_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn long double pgm_read_long_double_far (uint_farptr_t address)
-    Read a <tt>long double</tt> from far byte-address \p address.
+    \fn long double pgm_read_long_double_far (uint_farptr_t __addr)
+    Read a <tt>long double</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline long double pgm_read_long_double_far (uint_farptr_t address);
+static inline long double pgm_read_long_double_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn uint64_t pgm_read_u64_far (uint_farptr_t address)
-    Read an <tt>uint64_t</tt> from far byte-address \p address.
+    \fn uint64_t pgm_read_u64_far (uint_farptr_t __addr)
+    Read an <tt>uint64_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline uint64_t pgm_read_u64_far (uint_farptr_t address);
+static inline uint64_t pgm_read_u64_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn int64_t pgm_read_i64_far (uint_farptr_t address)
-    Read an <tt>int64_t</tt> from far byte-address \p address.
+    \fn int64_t pgm_read_i64_far (uint_farptr_t __addr)
+    Read an <tt>int64_t</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline int64_t pgm_read_i64_far (uint_farptr_t address);
+static inline int64_t pgm_read_i64_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn long long pgm_read_long_long_far (uint_farptr_t address)
-    Read a <tt>long long</tt> from far byte-address \p address.
+    \fn long long pgm_read_long_long_far (uint_farptr_t __addr)
+    Read a <tt>long long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline long long pgm_read_long_long_far (uint_farptr_t address);
+static inline long long pgm_read_long_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address)
-    Read an <tt>unsigned long long</tt> from far byte-address \p address.
+    \fn unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t __addr)
+    Read an <tt>unsigned long long</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t address);
+static inline unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn double pgm_read_double_far (uint_farptr_t address)
-    Read a <tt>double</tt> from far byte-address \p address.
+    \fn double pgm_read_double_far (uint_farptr_t __addr)
+    Read a <tt>double</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline double pgm_read_double_far (uint_farptr_t address);
+static inline double pgm_read_double_far (uint_farptr_t __addr);
 
 /** \ingroup avr_pgmspace
-    \fn long double pgm_read_long_double_far (uint_farptr_t address)
-    Read a <tt>long double</tt> from far byte-address \p address.
+    \fn long double pgm_read_long_double_far (uint_farptr_t __addr)
+    Read a <tt>long double</tt> from far byte-address \p __addr.
     The address is in the program memory. */
-static inline long double pgm_read_long_double_far (uint_farptr_t address);
+static inline long double pgm_read_long_double_far (uint_farptr_t __addr);
 
 #else /* !DOXYGEN */
 
@@ -1200,24 +1200,24 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 #endif  /* !__DOXYGEN__ */
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_byte_near(address_short)
+    \def pgm_read_byte_near(__addr)
     Read a byte from the program space with a 16-bit (near) byte-address. */
 
-#define pgm_read_byte_near(address_short) __LPM((uint16_t)(address_short))
+#define pgm_read_byte_near(__addr) __LPM ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_word_near(address_short)
+    \def pgm_read_word_near(__addr)
     Read a word from the program space with a 16-bit (near) byte-address. */
 
-#define pgm_read_word_near(address_short) __LPM_word((uint16_t)(address_short))
+#define pgm_read_word_near(__addr) __LPM_word ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_dword_near(address_short)
+    \def pgm_read_dword_near(__addr)
     Read a double word from the program space with a 16-bit (near)
     byte-address.  */
 
-#define pgm_read_dword_near(address_short) \
-    __LPM_dword((uint16_t)(address_short))
+#define pgm_read_dword_near(__addr) \
+    __LPM_dword ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float_near (const float *address)
@@ -1226,61 +1226,61 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 #define pgm_read_float_near(addr)  pgm_read_float (addr)
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_ptr_near(address_short)
+    \def pgm_read_ptr_near(__addr)
     Read a pointer from the program space with a 16-bit (near) byte-address. */
 
-#define pgm_read_ptr_near(address_short) \
-    (void*)__LPM_word((uint16_t)(address_short))
+#define pgm_read_ptr_near(__addr) \
+    ((void*) __LPM_word ((uint16_t)(__addr)))
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_byte_far(address_long)
+    \def pgm_read_byte_far(__addr)
     Read a byte from the program space with a 32-bit (far) byte-address. */
 
-#define pgm_read_byte_far(address_long)  __ELPM (address_long)
+#define pgm_read_byte_far(__addr)  __ELPM (__addr)
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_word_far(address_long)
+    \def pgm_read_word_far(__addr)
     Read a word from the program space with a 32-bit (far) byte-address. */
 
-#define pgm_read_word_far(address_long)  __ELPM_word (address_long)
+#define pgm_read_word_far(__addr)  __ELPM_word (__addr)
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_dword_far(address_long)
+    \def pgm_read_dword_far(__addr)
     Read a double word from the program space with a 32-bit (far)
     byte-address. */
 
-#define pgm_read_dword_far(address_long) __ELPM_dword (address_long)
+#define pgm_read_dword_far(__addr) __ELPM_dword (__addr)
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_ptr_far(address_long)
+    \def pgm_read_ptr_far(__addr)
     Read a pointer from the program space with a 32-bit (far) byte-address. */
 
-#define pgm_read_ptr_far(address_long) (void*)__ELPM_word (address_long)
+#define pgm_read_ptr_far(__addr) ((void*) __ELPM_word (__addr))
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_byte(address_short)
+    \def pgm_read_byte(__addr)
     Read a byte from the program space with a 16-bit (near) nyte-address. */
 
-#define pgm_read_byte(address_short)    pgm_read_byte_near(address_short)
+#define pgm_read_byte(__addr)    pgm_read_byte_near(__addr)
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_word(address_short)
+    \def pgm_read_word(__addr)
     Read a word from the program space with a 16-bit (near) byte-address. */
 
-#define pgm_read_word(address_short)    pgm_read_word_near(address_short)
+#define pgm_read_word(__addr)    pgm_read_word_near(__addr)
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_dword(address_short)
+    \def pgm_read_dword(__addr)
     Read a double word from the program space with a 16-bit (near)
     byte-address. */
 
-#define pgm_read_dword(address_short)   pgm_read_dword_near(address_short)
+#define pgm_read_dword(__addr)   pgm_read_dword_near(__addr)
 
 /** \ingroup avr_pgmspace
-    \def pgm_read_ptr(address_short)
+    \def pgm_read_ptr(__addr)
     Read a pointer from the program space with a 16-bit (near) byte-address. */
 
-#define pgm_read_ptr(address_short)     pgm_read_ptr_near(address_short)
+#define pgm_read_ptr(__addr)     pgm_read_ptr_near(__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_get_far_address(var)
@@ -1311,14 +1311,16 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 
    - \p var has to be resolved at link-time as an existing symbol,
      i.e. a simple variable name, an array name, or an array or structure
-     element provided the offset is known at compile-time, etc.
+     element provided the offset is known at compile-time, and \p var is
+     located in static storage, etc.
 
-   - The returned value is the symbol's VMA (virtual memory address)
+   - The returned value is the symbol's \ref sec_vma "VMA"
+     (virtual memory address)
      determined by the linker and falls in the corresponding memory region.
      The AVR Harvard architecture requires non-overlapping VMA areas for
-     the multiple address spaces in the processor: Flash ROM, RAM, and EEPROM.
-     Typical offset for these are
-     0x00000000, 0x00800xx0, and 0x00810000 respectively, derived from the
+     the multiple \ref sec_memory_regions "memory regions" in the processor:
+     Flash ROM, RAM, and EEPROM.  Typical offset for these are
+     \c 0x0, \c 0x800xx0, and \c 0x810000 respectively, derived from the
      linker script used and linker options.
 */
 

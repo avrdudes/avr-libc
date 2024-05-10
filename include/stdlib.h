@@ -295,8 +295,8 @@ extern int atoi(const char *__s) __ATTR_PURE__;
    all code processing.  Before entering the infinite loop, interrupts
    are globally disabled.
 
-   In a C++ context, global destructors will be called before halting
-   execution.
+   Global destructors will be called before halting
+   execution, see the \ref sec_dot_fini ".fini" sections.
 */
 extern void exit(int __status) __ATTR_NORETURN__;
 

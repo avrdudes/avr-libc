@@ -69,15 +69,17 @@
     \endcode
 */
 
-/** \name Far pointers for memory access >64K */
+/** \name Far pointers for memory access > 64K */
 
 /**@{*/
 /** \ingroup avr_inttypes
-    signed integer type that can hold a pointer > 64 KB */
+    signed integer type that can hold a pointer > 64 KiB */
 typedef int32_t int_farptr_t;
 
 /** \ingroup avr_inttypes
-    unsigned integer type that can hold a pointer > 64 KB */
+    unsigned integer type that can hold a pointer > 64 KiB,
+    see also pgm_get_far_address()
+ */
 typedef uint32_t uint_farptr_t;
 /**@}*/
 
