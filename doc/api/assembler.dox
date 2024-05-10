@@ -28,7 +28,16 @@
 
 /* $Id$ */
 
-/** \page assembler avr-libc and assembler programs
+/** \page assembler AVR-LibC and Assembler Programs
+
+- \ref ass_intro
+- \ref ass_tools
+- \ref ass_example
+- \ref ass_directives
+  - \ref ass_sections "Sections"
+  - \ref ass_symbols  "Symbols"
+  - \ref ass_data_and_align "Data and Alignment
+- \ref ass_modifiers
 
 \section ass_intro Introduction
 
@@ -43,7 +52,7 @@ using plain assembler source code.  Among them are:
 Usually, all but the first could probably be done easily using the
 \ref inline_asm "inline assembler" facility of the compiler.
 
-Although avr-libc is primarily targeted to support programming AVR
+Although AVR-LibC is primarily targeted to support programming AVR
 microcontrollers using the C (and C++) language, there's limited
 support for direct assembler usage as well.  The benefits of it are:
 
@@ -57,7 +66,7 @@ support for direct assembler usage as well.  The benefits of it are:
   \ref sec_dot_init "initializing the RAM variables" can also
   be utilized.
 
-\section ass_tools Invoking the compiler
+\section ass_tools Invoking the Compiler
 
 For the purpose described in this document, the assembler and linker
 are usually not invoked manually, but rather using the C compiler
@@ -74,264 +83,441 @@ This approach has the following advantages:
 - The invokation of the linker will be automatic, and will
   include the appropriate options to locate additional libraries
   as well as the application start-up code
-  (<tt>crt</tt><em>XXX</em><tt>.o</tt>) and linker script.
+  (<tt>crt<em>XXX</em>.o</tt>) and linker script.
 
 Note that the invokation of the C preprocessor will be automatic when
-the filename provided for the assembler file ends in \c .S (the
+the filename provided for the assembler file ends in \c \.S (the
 capital letter "s").  This would even apply to operating systems that
 use case-insensitive filesystems since the actual decision is made
 based on the case of the filename suffix given on the command-line,
 not based on the actual filename from the file system.
 
-As an alternative to using \c .S, the suffix \c .sx is recognized for
-this purpose (starting with GCC 4.3.0).  This is primarily meant to be
+As an alternative to using \c \.S, the suffix \c \.sx is
+recognized for this purpose (starting with GCC v4.3).
+This is primarily meant to be
 compatible with other compiler environments that have been providing
 this variant before in order to cope with operating systems where
 filenames are case-insensitive (and, with some versions of \c make
-that could not distinguish between \c .s and \c .S on such systems).
+that could not distinguish between \c \.s and \c \.S on such systems).
 
 Alternatively, the language can explicitly be specified using the
 <tt>-x assembler-with-cpp</tt> option.
 
-\section ass_example Example program
+\section ass_example Example Program
 
 The following annotated example features a simple 100 kHz square wave
 generator using an AT90S1200 clocked with a 10.7 MHz crystal.  Pin
 PD6 will be used for the square wave output.
 
 \code
-#include <avr/io.h>		; Note [1]
+#include <avr/io.h>           // Note [1]
 
-work	=	16		; Note [2]
-tmp	=	17
+work    =   16                // Note [2]
+tmp     =   17
 
-inttmp	=	19
+inttmp  =   19
+intsav  =   0
 
-intsav	=	0
+SQUARE  =   PD6               // Note [3]
 
-SQUARE	=	PD6		; Note [3]
+#define IO(x) _SFR_IO_ADDR(x)
 
-				; Note [4]:
-tmconst= 10700000 / 200000	; 100 kHz => 200000 edges/s
-fuzz=	8			; # clocks in ISR until TCNT0 is set
+// Note [4]:
+// 100 kHz => 200000 edges/s
+tmconst = 10700000 / 200000
 
-	.section .text
+// # clocks in ISR until TCNT0 is set
+fuzz = 8
 
-	.global	main				; Note [5]
+.text
+
+.global main                        // Note [5]
 main:
-	rcall	ioinit
-1:
-	rjmp	1b				; Note [6]
+    rcall   ioinit
+1:  rjmp    1b                      // Note [6]
 
-	.global	TIMER0_OVF_vect			; Note [7]
+.global TIMER0_OVF_vect             // Note [7]
 TIMER0_OVF_vect:
-	ldi	inttmp, 256 - tmconst + fuzz
-	out	_SFR_IO_ADDR(TCNT0), inttmp	; Note [8]
+    ldi     inttmp, 256 - tmconst + fuzz
+    out     IO(TCNT0), inttmp       // Note [8]
 
-	in	intsav, _SFR_IO_ADDR(SREG)	; Note [9]
+    in      intsav, IO(SREG)        // Note [9]
 
-	sbic	_SFR_IO_ADDR(PORTD), SQUARE
-	rjmp	1f
-	sbi	_SFR_IO_ADDR(PORTD), SQUARE
-	rjmp	2f
-1:	cbi	_SFR_IO_ADDR(PORTD), SQUARE
+    sbic    IO(PORTD), SQUARE
+    rjmp    1f
+    sbi     IO(PORTD), SQUARE
+    rjmp    2f
+1:  cbi     IO(PORTD), SQUARE
 2:
-
-	out	_SFR_IO_ADDR(SREG), intsav
-	reti
+    out     IO(SREG), intsav
+    reti
 
 ioinit:
-	sbi	_SFR_IO_ADDR(DDRD), SQUARE
+    sbi     IO(DDRD), SQUARE
 
-	ldi	work, _BV(TOIE0)
-	out	_SFR_IO_ADDR(TIMSK), work
+    ldi     work, _BV(TOIE0)
+    out     IO(TIMSK), work
 
-	ldi	work, _BV(CS00)		; tmr0:	 CK/1
-	out	_SFR_IO_ADDR(TCCR0), work
+    ldi     work, _BV(CS00)         // tmr0:  CK/1
+    out     IO(TCCR0), work
 
-	ldi	work, 256 - tmconst
-	out	_SFR_IO_ADDR(TCNT0), work
+    ldi     work, 256 - tmconst
+    out     IO(TCNT0), work
 
-	sei
+    sei
 
-	ret
+    ret
 
-	.global __vector_default		; Note [10]
+.global __vector_default            // Note [10]
 __vector_default:
-	reti
-
-	.end
+    reti
 \endcode
 
-\par Note [1]
+<dl>
+<dt>Note [1]</dt>
+<dd>
+  As in C programs, this includes the central processor-specific file
+  containing the IO port definitions for the device.  Note that not all
+  include files can be included into assembler sources.
+</dd>
+<dt>Note [2]</dt>
+<dd>
+  Assignment of registers to symbolic names used locally.  Another
+  option would be to use a C preprocessor macro instead:
 
-As in C programs, this includes the central processor-specific file
-containing the IO port definitions for the device.  Note that not all
-include files can be included into assembler sources.
+  \code #define work 16 \endcode
+</dd>
+<dt>Note [3]</dt>
+<dd>
+  Our bit number for the square wave output.  Note that the right-hand
+  side consists of a CPP macro which will be substituted by its value (6
+  in this case) before actually being passed to the assembler.
+</dd>
+<dt>Note [4]</dt>
+<dd>
+  The assembler uses integer operations in the host-defined integer size
+  (32 bits or longer) when evaluating expressions.  This is in contrast
+  to the C compiler that uses the C type \c int by default in order to
+  calculate constant integer expressions.
 
-\par Note [2]
+  In order to get a 100 kHz output, we need to toggle the PD6 line
+  200000 times per second.  Since we use timer 0 without any prescaling
+  options in order to get the desired frequency and accuracy, we already
+  run into serious timing considerations: while accepting and processing
+  the timer overflow interrupt, the timer already continues to count.
+  When pre-loading the \c TCCNT0 register, we therefore have to account
+  for the number of clock cycles required for interrupt acknowledge and
+  for the instructions to reload \c TCCNT0 (4 clock cycles for interrupt
+  acknowledge, 2 cycles for the jump from the interrupt vector, 2 cycles
+  for the 2 instructions that reload \c TCCNT0).  This is what the
+  constant \c fuzz is for.
+</dd>
+<dt>Note [5]</dt>
+<dd>
+  External functions need to be declared to be <tt>.global</tt>.  \c main is
+  the application entry point that will be jumped to from the
+  ininitalization routine in \c crts1200.o.
+</dd>
+<dt>Note [6]</dt>
+<dd>
+  The main loop is just a single jump back to itself.  Square wave
+  generation itself is completely handled by the timer 0 overflow
+  interrupt service.  A \c sleep instruction (using idle mode) could be
+  used as well, but probably would not conserve much energy anyway since
+  the interrupt service is executed quite frequently.
+</dd>
+<dt>Note [7]</dt>
+<dd>
+  Interrupt functions can get the \ref avr_signames "usual names" that
+  are also available to C programs.  The linker will then put them into
+  the appropriate interrupt vector slots.  Note that they must be
+  declared <tt>.global</tt> in order to be acceptable for this purpose.
+  This will only work if <tt>&lt;avr/io.h&gt;</tt> has been included.
+  Note that the assembler or linker have no chance to check the correct
+  spelling of an interrupt function, so it should be double-checked.
+  (When analyzing the resulting object file using \c avr-objdump or
+  \c avr-nm, a name like <tt>__vector_<em>N</em></tt> should appear,
+  with \e N being a small integer number.)
+</dd>
+<dt>Note [8]</dt>
+<dd>
+  As explained in the section about
+  \ref avr_sfr_notes "special function registers",
+  the actual IO port address should be obtained using the macro
+  \c _SFR_IO_ADDR.  (The AT90S1200 does not have RAM thus the memory-mapped
+  approach to access the IO registers is not available.  It would be
+  slower than using \c in / \c out instructions anyway.)
 
-Assignment of registers to symbolic names used locally.  Another
-option would be to use a C preprocessor macro instead:
+  Since the operation to reload \c TCCNT0 is time-critical, it is even
+  performed before saving \c SREG.  Obviously, this requires that the
+  instructions involved would not change any of the flag bits in \c SREG.
+</dd>
+<dt>\anchor ass_isr Note [9]</dt>
+<dd>
+  Interrupt routines must not clobber the global CPU state.  Thus, it is
+  usually necessary to save at least the state of the flag bits in \c SREG.
+  (Note that this serves as an example here only since actually, all the
+  following instructions would not modify \c SREG either, but that's not
+  commonly the case.)
 
-\code #define work 16 \endcode
+  Also, it must be made sure that registers used inside the interrupt
+  routine do not conflict with those used outside.  In the case of a
+  RAM-less device like the AT90S1200, this can only be done by agreeing
+  on a set of registers to be used exclusively inside the interrupt
+  routine; there would not be any other chance to "save" a register
+  anywhere.
 
-\par Note [3]
+  If the interrupt routine is to be linked together with C modules, care
+  must be taken to follow the \ref faq_reg_usage "register usage guidelines"
+  imposed by the C compiler.  Also, any register modified inside the
+  interrupt sevice needs to be saved, usually on the stack.
+</dd>
+<dt>Note [10]</dt>
+<dd>
+  As explained in \ref avr_interrupts "Interrupts", a global "catch-all"
+  interrupt handler that gets all unassigned interrupt vectors can be installed
+  using the name \c __vector_default.  This must be <tt>.global</tt>, and
+  obviously, should end in a \c reti instruction.  (By default, a jump
+  to location 0 would be implied instead.)
+</dd>
+</dl>
 
-Our bit number for the square wave output.  Note that the right-hand
-side consists of a CPP macro which will be substituted by its value (6
-in this case) before actually being passed to the assembler.
+\anchor ass_pseudoops
+\section ass_directives Assembler Directives
 
-\par Note [4]
+The directives available in the assembler are described in the GNU
+assembler (gas) manual at
+<a href="https://sourceware.org/binutils/docs/as/Pseudo-Ops.html"
+   >Assembler Directives</a>.
 
-The assembler uses integer operations in the host-defined integer size
-(32 bits or longer) when evaluating expressions.  This is in contrast
-to the C compiler that uses the C type \c int by default in order to
-calculate constant integer expressions.
-<br>
-In order to get a 100 kHz output, we need to toggle the PD6 line
-200000 times per second.  Since we use timer 0 without any prescaling
-options in order to get the desired frequency and accuracy, we already
-run into serious timing considerations: while accepting and processing
-the timer overflow interrupt, the timer already continues to count.
-When pre-loading the \c TCCNT0 register, we therefore have to account
-for the number of clock cycles required for interrupt acknowledge and
-for the instructions to reload \c TCCNT0 (4 clock cycles for interrupt
-acknowledge, 2 cycles for the jump from the interrupt vector, 2 cycles
-for the 2 instructions that reload \c TCCNT0).  This is what the
-constant \c fuzz is for.
-
-\par Note [5]
-
-External functions need to be declared to be \c .global.  \c main is
-the application entry point that will be jumped to from the
-ininitalization routine in \c crts1200.o.
-
-\par Note [6]
-
-The main loop is just a single jump back to itself.  Square wave
-generation itself is completely handled by the timer 0 overflow
-interrupt service.  A \c sleep instruction (using idle mode) could be
-used as well, but probably would not conserve much energy anyway since
-the interrupt service is executed quite frequently.
-
-\par Note [7]
-
-Interrupt functions can get the \ref avr_signames "usual names" that
-are also available to C programs.  The linker will then put them into
-the appropriate interrupt vector slots.  Note that they must be
-declared \c .global in order to be acceptable for this purpose.
-This will only work if <tt>&lt;avr/io.h&gt;</tt> has been included.
-Note that the assembler or linker have no chance to check the correct
-spelling of an interrupt function, so it should be double-checked.
-(When analyzing the resulting object file using \c avr-objdump or
-\c avr-nm, a name like <tt>__vector_<em>N</em></tt> should appear,
-with \e N being a small integer number.)
-
-\par Note [8]
-
-As explained in the section about
-\ref avr_sfr_notes "special function registers",
-the actual IO port address should be obtained using the macro
-\c _SFR_IO_ADDR.  (The AT90S1200 does not have RAM thus the memory-mapped
-approach to access the IO registers is not available.  It would be
-slower than using \c in / \c out instructions anyway.)
-<br>
-Since the operation to reload \c TCCNT0 is time-critical, it is even
-performed before saving \c SREG.  Obviously, this requires that the
-instructions involved would not change any of the flag bits in \c SREG.
-
-\anchor ass_isr
-\par Note [9]
-
-Interrupt routines must not clobber the global CPU state.  Thus, it is
-usually necessary to save at least the state of the flag bits in \c SREG.
-(Note that this serves as an example here only since actually, all the
-following instructions would not modify \c SREG either, but that's not
-commonly the case.)
-<br>
-Also, it must be made sure that registers used inside the interrupt
-routine do not conflict with those used outside.  In the case of a
-RAM-less device like the AT90S1200, this can only be done by agreeing
-on a set of registers to be used exclusively inside the interrupt
-routine; there would not be any other chance to "save" a register
-anywhere.
-<br>
-If the interrupt routine is to be linked together with C modules, care
-must be taken to follow the \ref faq_reg_usage "register usage guidelines"
-imposed by the C compiler.  Also, any register modified inside the
-interrupt sevice needs to be saved, usually on the stack.
-
-\par Note [10]
-
-As explained in \ref avr_interrupts "Interrupts", a global "catch-all" interrupt
-handler that gets all unassigned interrupt vectors can be installed
-using the name \c __vector_default.  This must be \c .global, and
-obviously, should end in a \c reti instruction.  (By default, a jump
-to location 0 would be implied instead.)
-
-\section ass_pseudoops Pseudo-ops and operators
-
-The available pseudo-ops in the assembler are described in the GNU
-assembler (gas) manual.  The manual can be found online as part of the
-current binutils release under http://sources.redhat.com/binutils/.
-
-As gas comes from a Unix origin, its pseudo-op and overall assembler
+As gas comes from a Unix origin, its directives and overall assembler
 syntax is slightly different than the one being used by other
-assemblers.  Numeric constants follow the C notation (prefix \c 0x for
-hexadecimal constants), expressions use a C-like syntax.
+assemblers.  Numeric constants follow the C notation
+(prefix \c 0x for hexadecimal constants, \0b for binary constants),
+expressions use a C-like syntax.
 
-Some common pseudo-ops include:
+Some common directives include:
 
-- \c .byte allocates single byte constants
+<table>
+<caption>\anchor ass_sections Assembler Directives: Sections</caption>
+<tr>
+  <th>Section Ops
+  <th>Description
+</tr>
+<tr>
+  <td>\anchor dot_section <tt>.section&nbsp;<em>name</em>,<em>"flags"</em>,\@<em>typ</em></tt>
+  <td>Put the following objects into
+    \ref sec_named "named section" <em>name</em>.
+    Set \ref sec_flags "section flags" <em>flags</em> and
+    \ref sec_type "section type" to <em>typ</em>
+</tr>
+<tr>
+  <td>\anchor dot_pushsection <tt>.pushsection ...<br>.popsection</tt>
+  <td>Like <tt>.section</tt>, but also pushes the current
+    section and subsection onto the section stack.
+    The current section and subsection can be restored
+    with <tt>.popsection</tt>.
+</tr>
+<tr>
+  <td>\anchor dot_subsection <tt>.subsection <em>int</em></tt>
+  <td>Put the following code into subsection number <em>int</em>
+    which is some integer.  Subsections are located in order of increasing
+    index within their input section.
+    The default after switching to a new section by means of
+    <tt>.section</tt> or <tt>.pushsection</tt> is subsection 0.
+</tr>
+<tr>
+  <td><tt>.text</tt><br><tt>.data</tt><br><tt>.bss</tt>
+  <td>Put the following code into the <tt>.text</tt>
+    section, <tt>.data</tt> section or <tt>.bss</tt> section,
+    respectively.  The assembler knows the right section flags and
+    section type, for example the <tt>.text</tt> directive is basically
+    the same like <tt>.section .text,"ax",\@progbits</tt>.
+    The directives support an optional subsection argument, see
+    <tt>.subsection</tt> above.
+</tr>
+</table>
 
-- \c .ascii allocates a non-terminated string of characters
+<!----------------------------------------------------------------->
+<table>
+<caption>\anchor ass_symbols Assembler Directives: Symbols</caption>
+<tr>
+  <th>Symbol&nbsp;Ops
+  <th>Description
+</tr>
+<tr>
+  <td><tt>.global <em>sym</em>
+      <br>.globl <em>sym</em></tt>
+  <td>Globalize symbol <em>sym</em> so that it can be
+    referred to in other modules.
+    When a symbol is used without prior declaration or definition,
+    the symbol is implicitly global. The <tt>.global</tt>
+    directive can also by used to refer to that symbol, so that the linker
+    pulls in code that defines the symbol (provided such a symbol definition
+    exists).  For example, code that puts objects in the <tt>.data</tt>
+    section and that assumes that the \ref sec_dot_init "startup code"
+    initializes that area, would use <tt>.global __do_copy_data</tt>.
+</tr>
+<tr>
+  <td>\anchor dot_weak <tt>.weak <em>syms</em></tt>
+  <td>Declare symbols <em>syms</em> as weak symbols,
+    where <em>syms</em> is a comma-separated list of symbols.
+    This applies only when the symbols are also defined in the same module.
+    When the linker encounters a weak symbol that is also defined as
+    <tt>.global</tt> in a different module, then the linker will use the
+    latter without raising a diagnostic about multiple symbol definitions.
+</tr>
+<tr>
+  <td><tt>.type&nbsp;<em>sym,\@kind</em></tt>
+  <td>Set the type of symbol <em>sym</em> to <em>kind</em>.
+    Commonly used symbol types are <tt>\@function</tt> for function
+    symbols like \c main and <tt>\@object</tt> for data symbols.
+    This has an affect for disassemblers, debuggers and tools that
+    show function / object properties.
+</tr>
+<tr>
+  <td><tt>.size <em>sym,size</em></tt>
+  <td>Set the size associated with symbol <em>sym</em> to
+    expression <em>size</em>.
+    The linker works on the level of sections, it does not even know what
+    functions are.  This directive serves book-keeping, and may be useful
+    for debuggers, disassemblers or tools that show which function / object
+    consumes how much memory.
+</tr>
+<tr>
+  <td><tt>.set&nbsp;<em>sym,&nbsp;expr</em>
+      <br>.equ&nbsp;<em>sym,&nbsp;expr</em>
+      <br><em>sym&nbsp;=&nbsp;expr</em></tt>
+  <td>Set the value of symbol <em>sym</em> to the value
+    of expression <em>expr</em>.
+    When a global symbol is set multiple times, the value stored in the
+    object file is the last value stored into the symbol.
+</tr>
+<tr>
+  <td><tt>.extern</tt>
+    <td colspan="2">Ignored for compatibility with other assemblers.
+</tr>
+</table>
 
+<!----------------------------------------------------------------->
+<table>
+<caption>\anchor ass_data_and_align
+  Assembler Directives: Data and Alignment</caption>
+<tr>
+  <th>Data Ops
+  <th>Description
+  <th>Alias
+</tr>
+<tr>
+  <td><tt>.byte <em>list</em></tt>
+  <td>Allocate bytes specified by a list of comma-separated expressions.
+  <td>
+</tr>
+<tr>
+  <td><tt>.2byte <em>list</em></tt>
+  <td>Similar to <tt>.byte</tt>, but for 16-bit values.
+  <td><tt>.word</tt>
+</tr>
+<tr>
+  <td><tt>.4byte <em>list</em></tt>
+  <td>Similar to <tt>.byte</tt>, but for 32-bit values.
+  <td><tt>.long</tt>
+</tr>
+<tr>
+  <td><tt>.8byte <em>list</em></tt>
+  <td>Similar to <tt>.byte</tt>, but for 64-bit values.
+  <td><tt>.qword</tt>
+</tr>
+<tr>
+  <td><tt>.ascii <em>"string"</em></tt>
+  <td>Allocate a string of characters without \\0 termination.
+  <td>
+</tr>
+<tr>
+  <td><tt>.asciz <em>"string"</em></tt>
+  <td>Allocate a \\0 terminated string.
+  <td>
+</tr>
+<tr>
+  <td><tt>.float <em>list</em></tt>
+  <td>Allocate IEEE-754 single 32-bit floating-point values specified
+    in the comma-separated <em>list</em>.
+  <td>
+</tr>
+<tr>
+  <td><tt>.double <em>list</em></tt>
+  <td>Same, but for IEEE-754 double 64-bit floats.
+  <td>
+</tr>
+<tr>
+  <td><tt>.space&nbsp;<em>num[,val]</em></tt>
+  <td>Allocate <em>num</em> bytes with value <em>val</em> where
+    <em>val</em> is optional and defaults to zero.
+  <td><tt>.skip</tt>
+</tr>
+<tr>
+  <td><tt>.zero <em>num</em></tt>
+  <td>Insert <em>num</em> zero bytes.
+  <td>
+</tr>
+<tr>
+  <th>Alignment Ops
+  <th>Description
+  <th>Alias
+</tr>
+<tr>
+  <td><tt>.balign <em>val</em></tt>
+  <td>Align the following code to <em>val</em> bytes, where <em>val</em>
+    is an absolute expression that evaluates to a power of 2.
+  <td><tt>.align</tt>
+</tr>
+<tr>
+  <td><tt>.p2align&nbsp;<em>expo</em></tt>
+  <td>Align the following code to 2<sup><em>expo</em></sup> bytes.
+  <td>
+</tr>
+</table>
 
-- \c .asciz allocates a \\0-terminated string of characters (C string)
+Moreover, there is the <b><tt>.macro</tt></b> directive, which starts
+an assembler macro.  The GNU assembler implements a powerful macro
+processor which even supports recursive macro definitions.
+For an example, see the gas documentation for
+<a href="https://sourceware.org/binutils/docs/as/Macro.html"
+   ><tt>.macro</tt></a>.
+A gas <tt>.macro</tt> can further be combined with C preprocessor directives.
+For some real-world examples, see the AVR-LibC sources
+<a href="https://github.com/avrdudes/avr-libc/blob/main/common/macros.inc"
+   ><tt>macros.inc</tt></a> and
+<a href="https://github.com/avrdudes/avr-libc/blob/main/common/asmdef.h"
+   ><tt>asmdef.h</tt></a>.
 
-- \c .data switches to the .data section (initialized RAM variables)
-
-- \c .text switches to the .text section (code and ROM constants)
-
-- \c .set declares a symbol as a constant expression (identical to
-  \c .equ)
-
-- \c .global (or \c .globl) declares a public symbol that is visible
-  to the linker (e. g. function entry point, global variable)
-
-- \c .extern declares a symbol to be externally defined; this is
-  effectively a comment only, as gas treats all undefined symbols
-  it encounters as globally undefined anyway
-
-Note that \c .org is available in gas as well, but is a fairly
+Note that \c \.org is available in gas as well, but is a fairly
 pointless pseudo-op in an assembler environment that uses relocatable
 object files, as it is the linker that determines the final position
-of some object in ROM or RAM.
+of some object in ROM or RAM. The \c \.org directive advances the
+location pointer to a specified offset relative to the beginning of
+the section.  The location counter cannot be moved backwards.
 
-Along with the architecture-independent standard operators, there are
-some AVR-specific operators available which are unfortunately not yet
-described in the official documentation.  The most notable operators
-are:
 
-- \c lo8 Takes the least significant 8 bits of a 16-bit integer
+\section ass_modifiers Operand Modifiers
 
-- \c hi8 Takes the most significant 8 bits of a 16-bit integer
-
-- \c pm Takes a program-memory (ROM) address, and converts it into a
-  RAM address.  This implies a division by 2 as the AVR handles ROM
-  addresses as 16-bit words (e.g. in an \c IJMP or \c ICALL
-  instruction), and can also handle relocatable symbols on the
-  right-hand side.
+There are some AVR-specific operators available like \c lo8(), \c hi8(),
+\c pm(), \c gs() etc.
+For an overview see the documentation of the
+\ref assembly_operand_modifiers "operand modifiers"
+in the inline assembly Cookbook.
 
 Example:
 \verbatim
-	ldi	r24, lo8(pm(somefunc))
-	ldi	r25, hi8(pm(somefunc))
-	call	something
+    ldi	 r24, lo8(gs(somefunc))
+    ldi	 r25, hi8(gs(somefunc))
+    call      something
+    subi r24, lo8(-(my_var))
+    sbci r25, hi8(-(my_var))
 \endverbatim
 
 This passes the address of function \c somefunc as the first parameter
-to function \c something.
+to function \c something, and <em>adds</em> the address of variable \c my_var
+to the 16-bit return value of \c something.
 
 */
