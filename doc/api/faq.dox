@@ -181,7 +181,8 @@ For more information on using sections,
 see \ref mem_sections.
 There is also an example for \ref c_sections.
 Note that in C code, any such function would
-preferably be placed into section \c .init3 as the code in \c .init2
+preferably be placed into section <code>.init3</code> as the code in
+<code>.init2</code>
 ensures the internal register <tt>__zero_reg__</tt> is already cleared.
 
 <small>Back to \ref faq_index.
@@ -230,7 +231,7 @@ However, using the macro often makes the program better readable.
 
 Basically yes, C++ is supported (assuming your compiler has been
 configured and compiled to support it, of course).  Source files
-ending in \c .cc, \c .cpp or \c .C will automatically cause the
+ending in \c \.cc, \c \.cpp or \c \.C will automatically cause the
 compiler frontend to invoke the C++ compiler.  Alternatively, the C++
 compiler could be explicitly called by the name \c avr-c++.
 
@@ -274,7 +275,7 @@ wasted.  Thus, casual inspection of the generated assembler code
 
 Global and static variables are guaranteed to be initialized to 0 by
 the C standard.  \c avr-gcc does this by placing the appropriate code
-into section \c .init4 (see \ref sec_dot_init).  With respect to the
+into section \c \.init4 (see \ref sec_dot_init).  With respect to the
 standard, this sentence is somewhat simplified (because the standard
 allows for machines where the actual bit pattern used differs
 from all bits being 0), but for the AVR target, in general, all integer-type
@@ -484,7 +485,7 @@ $ avr-as -mmcu=atmega128 --gstabs -o foo.o foo.s
 \endverbatim
 
 When the assembler is not called directly but through the C compiler
-frontend (either implicitly by passing a source file ending in \c .S,
+frontend (either implicitly by passing a source file ending in <code>.S</code>,
 or explicitly using <tt>-x assembler-with-cpp</tt>), the compiler
 frontend needs to be told to pass the \c \--gstabs option down to the
 assembler.  This is done using <tt>-Wa,\--gstabs</tt>.  Please take
@@ -723,7 +724,7 @@ sections in the avr-gcc Wiki.
   Registers r0 through r15 do not exist.
 </dd>
 
-<dt>Fixed registers (r0, r1)</dt>
+<dt>\anchor zero_reg Fixed registers (r0, r1)</dt>
 <dd>
   Never allocated by gcc for local data, but often
   used for fixed purposes:
@@ -810,8 +811,8 @@ int main (void)
 \endcode
 
 The result is not what you want though. What you end up with is the array
-stored in ROM, while the individual strings end up in RAM (in the \c .rodata
-section).
+stored in ROM, while the individual strings end up in RAM (in the
+<code>.rodata</code> section).
 
 To work around this, you need to do something like this:
 
@@ -897,7 +898,8 @@ registers affecting the external memory operation like \c XMCRA and
 Refer to the datasheet for details.
 
 If the external RAM is going to be used to store the variables from
-the C program (i. e., the \c .data and/or \c .bss segment) in that
+the C program (i. e., the <code>.data</code> and/or <code>.bss</code> segment)
+in that
 memory area, it is essential to set up the external memory interface
 early during the \ref sec_dot_init "device initialization" so the
 initialization of these variable will take place.  Refer to
@@ -918,7 +920,7 @@ private data storage kept outside the domain of the C compiler
 particular address), it would be sufficient to defer the
 initialization of the external RAM interface to the beginning of
 <tt><b>main</b><b>()</b></tt>,
-so no tweaking of the \c .init3 section is necessary.  The
+so no tweaking of the <code>.init3</code> section is necessary.  The
 same applies if only the heap is going to be located there, since the
 application start-up code does not affect the heap.
 
@@ -995,9 +997,9 @@ get the last few percent of speed benefit from using \c -O3.
 \section faq_reloc_code How do I relocate code to a fixed address?
 
 First, put the function into a new, orphan
-\ref mem_sections "named section".
+\ref sec_named "named section".
 This is done with a \c section attribute that specifies the name of
-the section with the prototype of the function:
+the \ref sec_input "input section" with the prototype of the function:
 
 \code
 __attribute__ ((noinline, noclone, section (".bootloader")))
@@ -1017,13 +1019,14 @@ see the \ref gcc_minusW "-Wl compiler option".
 The name after \c \--section-start is the name of the section to be
 located, and the number specifies the beginning address of the named section.
 
-This will only work when the section is an orphan section, i.e. a
+This will only work when the section is an \ref sec_orphan "orphan section",
+i.e. a
 section that is not mentioned in the linker script.  For sections
 that <em>are</em> mentioned in the linker script, like for example
 <code>.text.bootloader</code>, this will not work because
 \c \--section-start refers to an output section, but the
 output section for input section <code>.text.bootloader</code> is the
-\c .text section.
+<code>.text</code> section.
 
 To verify that everything went as expected,
 generate the disassembly with <tt>avr-objdump ... -j .bootloader</tt>.
@@ -1047,8 +1050,8 @@ Section Headers:
 A different way to locate the section is by means of a custom linker
 script. The
 <a href="https://gcc.gnu.org/wiki/avr-gcc#Address_Spaces">avr-gcc Wiki</a>
-has an example that locates the \c .progmem2.data section which is used
-by the compiler for variables in address-space \c __flash2.
+has an example that locates the <code>.progmem2.data</code> section which
+is used by the compiler for variables in address-space \c __flash2.
 
 <small>Back to \ref faq_index.</small>
 
@@ -1455,7 +1458,8 @@ not a good idea.
 these older AVRs, doing a soft reset by enabling the watchdog is easy, as the
 watchdog will then be disabled after the reset. On newer AVRs, once the watchdog
 is enabled, then it <b>stays enabled, even after a reset</b>! For these
-newer AVRs a function needs to be added to the \c .init3 section (i.e. during
+newer AVRs a function needs to be added to the <code>.init3</code> section
+(i.e. during
 the startup code, before main()) to disable the watchdog early enough so
 it does not continually reset the AVR.
 
@@ -1494,7 +1498,8 @@ void wdt_init (void)
     wdt_disable();
 }
 \endcode
-The code is placed in section \c .init3 so that it is executed as part of the
+The code is placed in section <code>.init3</code> so that it is executed
+as part of the
 normal startup procedure.  The \c naked attribute is required so that the
 code does not <tt>ret</tt>urn (Code in init sections is executed as it
 is located; the code is not called, and code from one init section
