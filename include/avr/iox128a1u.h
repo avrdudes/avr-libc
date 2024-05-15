@@ -1147,6 +1147,7 @@ typedef struct ADC_CH_struct
     register8_t INTCTRL;  /* Channel Interrupt Control */
     register8_t INTFLAGS;  /* Interrupt Flags */
     _WORDREGISTER(RES);  /* Channel Result */
+    register8_t SCAN;  /* Input Channel Scan */
     register8_t reserved_0x7;
 } ADC_CH_t;
 
@@ -1224,15 +1225,18 @@ typedef enum ADC_CH_MUXINT_enum
 /* Negative input multiplexer selection */
 typedef enum ADC_CH_MUXNEG_enum
 {
-    ADC_CH_MUXNEG_PIN0_gc = (0x00<<0),  /* Input pin 0 */
-    ADC_CH_MUXNEG_PIN1_gc = (0x01<<0),  /* Input pin 1 */
-    ADC_CH_MUXNEG_PIN2_gc = (0x02<<0),  /* Input pin 2 */
-    ADC_CH_MUXNEG_PIN3_gc = (0x03<<0),  /* Input pin 3 */
-    ADC_CH_MUXNEG_PIN4_gc = (0x00<<0),  /* Input pin 4 */
-    ADC_CH_MUXNEG_PIN5_gc = (0x01<<0),  /* Input pin 5 */
-    ADC_CH_MUXNEG_PIN6_gc = (0x02<<0),  /* Input pin 6 */
-    ADC_CH_MUXNEG_PIN7_gc = (0x03<<0),  /* Input pin 7 */
-} ADC_CH_MUXNEG_t;
+    ADC_CH_MUXNEG_PIN0_gc = (0x00<<0),  /* Input pin 0 (Input Mode = 2) */
+    ADC_CH_MUXNEG_PIN4_gc = (0x00<<0),  /* Input pin 4 (Input Mode = 3) */
+    ADC_CH_MUXNEG_PIN1_gc = (0x01<<0),  /* Input pin 1 (Input Mode = 2) */
+    ADC_CH_MUXNEG_PIN5_gc = (0x01<<0),  /* Input pin 5 (Input Mode = 3) */
+    ADC_CH_MUXNEG_PIN2_gc = (0x02<<0),  /* Input pin 2 (Input Mode = 2) */
+    ADC_CH_MUXNEG_PIN6_gc = (0x02<<0),  /* Input pin 6 (Input Mode = 3) */
+    ADC_CH_MUXNEG_PIN3_gc = (0x02<<0),  /* Input pin 6 (Input Mode = 2) */
+    ADC_CH_MUXNEG_PIN7_gc = (0x03<<0),  /* Input pin 7 (Input Mode = 3) */
+    ADC_CH_MUXNEG_INTGND_MODE4_gc = (0x04<<0),  /* Internal Ground (Input Mode = 3) */
+    ADC_CH_MUXNEG_GND_MODE3_gc = (0x05<<0),  /* PAD Ground (Input Mode = 2) */
+    ADC_CH_MUXNEG_INTGND_MODE3_gc = (0x07<<0),  /* Internal Ground (Input Mode = 2) */
+    ADC_CH_MUXNEG_GND_MODE4_gc = (0x07<<0),  /* PAD Ground (Input Mode = 3) */} ADC_CH_MUXNEG_t;
 
 /* Input mode */
 typedef enum ADC_CH_INPUTMODE_enum
@@ -1253,7 +1257,7 @@ typedef enum ADC_CH_GAIN_enum
     ADC_CH_GAIN_16X_gc = (0x04<<2),  /* 16x gain */
     ADC_CH_GAIN_32X_gc = (0x05<<2),  /* 32x gain */
     ADC_CH_GAIN_64X_gc = (0x06<<2),  /* 64x gain */
-    ADC_CH_GAIN_128X_gc = (0x07<<2),  /* 128x gain */
+    ADC_CH_GAIN_DIV2_gc = (0x07<<2),  /* one-half gain */
 } ADC_CH_GAIN_t;
 
 /* Conversion result resolution */
@@ -1267,10 +1271,10 @@ typedef enum ADC_RESOLUTION_enum
 /* Current Limitation Mode */
 typedef enum ADC_CURRENT_enum
 {
-    ADC_CURRENT_NO_gc = (0x00<<5),  /* No Current Reduction */
-    ADC_CURRENT_SMALL_gc = (0x01<<5),  /* 10% current reduction */
-    ADC_CURRENT_MEDIUM_gc = (0x02<<5),  /* 20% current reduction */
-    ADC_CURRENT_LARGE_gc = (0x03<<5),  /* 30% current reduction */
+    ADC_CURRENT_NO_gc = (0x00<<5),  /* No limit */
+    ADC_CURRENT_LOW_gc = (0x01<<5),  /* Low current limit, max. sampling rate 1.5MSPS */
+    ADC_CURRENT_MED_gc = (0x02<<5),  /* Medium current limit, max. sampling rate 1MSPS */
+    ADC_CURRENT_HIGH_gc = (0x03<<5),  /* High current limit, max. sampling rate 0.5MSPS */
 } ADC_CURRENT_t;
 
 /* Voltage reference selection */
@@ -1280,7 +1284,7 @@ typedef enum ADC_REFSEL_enum
     ADC_REFSEL_VCC_gc = (0x01<<4),  /* Internal VCC / 1.6 */
     ADC_REFSEL_AREFA_gc = (0x02<<4),  /* External reference on PORT A */
     ADC_REFSEL_AREFB_gc = (0x03<<4),  /* External reference on PORT B */
-    ADC_REFSEL_VCCDIV2_gc = (0x04<<4),  /* Internal VCC / 2 */
+    ADC_REFSEL_INTVCC2_gc = (0x04<<4),  /* Internal VCC / 2 */
 } ADC_REFSEL_t;
 
 /* Channel sweep selection */
@@ -5416,12 +5420,14 @@ typedef struct NVM_PROD_SIGNATURES_struct
 #define ADC_CH_MUXINT3_bm  (1<<6)  /* MUX selection on Internal ADC input bit 3 mask. */
 #define ADC_CH_MUXINT3_bp  6  /* MUX selection on Internal ADC input bit 3 position. */
 
-#define ADC_CH_MUXNEG_gm  0x03  /* MUX selection on Negative ADC input group mask. */
+#define ADC_CH_MUXNEG_gm  0x07  /* MUX selection on Negative ADC input group mask. */
 #define ADC_CH_MUXNEG_gp  0  /* MUX selection on Negative ADC input group position. */
 #define ADC_CH_MUXNEG0_bm  (1<<0)  /* MUX selection on Negative ADC input bit 0 mask. */
 #define ADC_CH_MUXNEG0_bp  0  /* MUX selection on Negative ADC input bit 0 position. */
 #define ADC_CH_MUXNEG1_bm  (1<<1)  /* MUX selection on Negative ADC input bit 1 mask. */
 #define ADC_CH_MUXNEG1_bp  1  /* MUX selection on Negative ADC input bit 1 position. */
+#define ADC_CH_MUXNEG2_bm  (1<<2)  /* MUX selection on Negative ADC input bit 2 mask. */
+#define ADC_CH_MUXNEG2_bp  1  /* MUX selection on Negative ADC input bit 2 position. */
 
 
 /* ADC_CH.INTCTRL  bit masks and bit positions */
