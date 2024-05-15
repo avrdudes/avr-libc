@@ -1231,7 +1231,7 @@ typedef enum ADC_CH_MUXNEG_enum
     ADC_CH_MUXNEG_PIN5_gc = (0x01<<0),  /* Input pin 5 (Input Mode = 3) */
     ADC_CH_MUXNEG_PIN2_gc = (0x02<<0),  /* Input pin 2 (Input Mode = 2) */
     ADC_CH_MUXNEG_PIN6_gc = (0x02<<0),  /* Input pin 6 (Input Mode = 3) */
-    ADC_CH_MUXNEG_PIN3_gc = (0x02<<0),  /* Input pin 6 (Input Mode = 2) */
+    ADC_CH_MUXNEG_PIN3_gc = (0x03<<0),  /* Input pin 6 (Input Mode = 2) */
     ADC_CH_MUXNEG_PIN7_gc = (0x03<<0),  /* Input pin 7 (Input Mode = 3) */
     ADC_CH_MUXNEG_INTGND_MODE4_gc = (0x04<<0),  /* Internal Ground (Input Mode = 3) */
     ADC_CH_MUXNEG_GND_MODE3_gc = (0x05<<0),  /* PAD Ground (Input Mode = 2) */
