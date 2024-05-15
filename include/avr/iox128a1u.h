@@ -258,6 +258,7 @@ typedef enum CLK_USBPSDIV_enum
 typedef enum CLK_USBSRC_enum
 {
     CLK_USBSRC_PLL_gc = (0x00<<1),  /* PLL */
+    CLK_USBSRC_RC32M_gc = (0x01<<1),  /* Internal 32 MHz RC Oscillator */
 } CLK_USBSRC_t;
 
 
@@ -341,6 +342,7 @@ typedef enum OSC_RC32MCREF_enum
 {
     OSC_RC32MCREF_RC32K_gc = (0x00<<1),  /* Internal 32.768 kHz RC Oscillator */
     OSC_RC32MCREF_XOSC32_gc = (0x01<<1),  /* External 32.768 kHz Crystal Oscillator */
+    OSC_RC32MCREF_USBSOF_gc = (0x02<<1),  /* USB Start of Frame */
 } OSC_RC32MCREF_t;
 
 
@@ -4209,8 +4211,8 @@ typedef struct NVM_PROD_SIGNATURES_struct
 #define CLK_USBSRC1_bm  (1<<2)  /* Clock Source bit 1 mask. */
 #define CLK_USBSRC1_bp  2  /* Clock Source bit 1 position. */
 
-#define CLK_USBEN_bm  0x01  /* Clock Source Enable bit mask. */
-#define CLK_USBEN_bp  0  /* Clock Source Enable bit position. */
+#define CLK_USBSEN_bm  0x01  /* Clock Source Enable bit mask. */
+#define CLK_USBSEN_bp  0  /* Clock Source Enable bit position. */
 
 
 /* PR.PRGEN  bit masks and bit positions */
