@@ -81,11 +81,6 @@ and rules to locate them or to assign them to
   - \ref asm_sections
 
 
-\remarks Need to list all the sections which are available to the avr.
-
-\par Weak Bindings
-FIXME: need to discuss the .weak directive.
-
 \section sec_concepts Concepts
 
 \subsection sec_named Named Sections
