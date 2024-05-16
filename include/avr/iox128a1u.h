@@ -2288,6 +2288,14 @@ typedef struct TC1_struct
     _WORDREGISTER(CCBBUF);  /* Compare Or Capture B Buffer */
 } TC1_t;
 
+/* Byte Mode */
+typedef enum TC_BYTEM_enum
+{
+    TC_BYTEM_NORMAL_gc = (0x00<<0),  /* 16-bit mode */
+    TC_BYTEM_BYTEMODE_gc = (0x01<<0),  /* Timer/Counter operating in byte mode only */
+    TC_BYTEM_SPLITMODE_gc = (0x02<<0),  /* Timer/Counter split into two 8-bit Counters (TC2) */
+} TC_BYTEM_t;
+
 /* Clock Selection */
 typedef enum TC_CLKSEL_enum
 {
@@ -2314,9 +2322,13 @@ typedef enum TC_WGMODE_enum
 {
     TC_WGMODE_NORMAL_gc = (0x00<<0),  /* Normal Mode */
     TC_WGMODE_FRQ_gc = (0x01<<0),  /* Frequency Generation Mode */
+    TC_WGMODE_SINGLESLOPE_gc = (0x03<<0),  /* Single Slope */
     TC_WGMODE_SS_gc = (0x03<<0),  /* Single Slope */
+    TC_WGMODE_DSTOP_gc = (0x05<<0),  /* Dual Slope, Update on TOP */
     TC_WGMODE_DS_T_gc = (0x05<<0),  /* Dual Slope, Update on TOP */
-    TC_WGMODE_DS_TB_gc = (0x06<<0),  /* Dual Slope, Update on TOP and BOTTOM */
+    TC_WGMODE_DSBOTH_gc = (0x06<<0),  /* Dual Slope, Update on both TOP and BOTTOM */
+    TC_WGMODE_DS_TB_gc = (0x06<<0),  /* Dual Slope, Update on both TOP and BOTTOM */
+    TC_WGMODE_DSBOTTOM_gc = (0x07<<0),  /* Dual Slope, Update on BOTTOM */
     TC_WGMODE_DS_B_gc = (0x07<<0),  /* Dual Slope, Update on BOTTOM */
 } TC_WGMODE_t;
 
@@ -2441,6 +2453,165 @@ typedef enum AWEX_FDACT_enum
     AWEX_FDACT_CLEAROE_gc = (0x01<<0),  /* Clear Output Enable Bits */
     AWEX_FDACT_CLEARDIR_gc = (0x03<<0),  /* Clear I/O Port Direction Bits */
 } AWEX_FDACT_t;
+
+
+/*
+--------------------------------------------------------------------------
+TC2 - 16-bit Timer/Counter type 2
+--------------------------------------------------------------------------
+*/
+
+/* 16-bit Timer/Counter type 2 */
+typedef struct TC2_struct
+{
+    register8_t CTRLA;  /* Control Register A */
+    register8_t CTRLB;  /* Control Register B */
+    register8_t CTRLC;  /* Control register C */
+    register8_t reserved_0x03;
+    register8_t CTRLE;  /* Control Register E */
+    register8_t reserved_0x05;
+    register8_t INTCTRLA;  /* Interrupt Control Register A */
+    register8_t INTCTRLB;  /* Interrupt Control Register B */
+    register8_t reserved_0x08;
+    register8_t CTRLF;  /* Control Register F */
+    register8_t reserved_0x0A;
+    register8_t reserved_0x0B;
+    register8_t INTFLAGS;  /* Interrupt Flag Register */
+    register8_t reserved_0x0D;
+    register8_t reserved_0x0E;
+    register8_t reserved_0x0F;
+    register8_t reserved_0x10;
+    register8_t reserved_0x11;
+    register8_t reserved_0x12;
+    register8_t reserved_0x13;
+    register8_t reserved_0x14;
+    register8_t reserved_0x15;
+    register8_t reserved_0x16;
+    register8_t reserved_0x17;
+    register8_t reserved_0x18;
+    register8_t reserved_0x19;
+    register8_t reserved_0x1A;
+    register8_t reserved_0x1B;
+    register8_t reserved_0x1C;
+    register8_t reserved_0x1D;
+    register8_t reserved_0x1E;
+    register8_t reserved_0x1F;
+    register8_t LCNT;  /* Low Byte Count */
+    register8_t HCNT;  /* High Byte Count */
+    register8_t reserved_0x22;
+    register8_t reserved_0x23;
+    register8_t reserved_0x24;
+    register8_t reserved_0x25;
+    register8_t LPER;  /* Low Byte Period */
+    register8_t HPER;  /* High Byte Period */
+    register8_t LCMPA;  /* Low Byte Compare A */
+    register8_t HCMPA;  /* High Byte Compare A */
+    register8_t LCMPB;  /* Low Byte Compare B */
+    register8_t HCMPB;  /* High Byte Compare B */
+    register8_t LCMPC;  /* Low Byte Compare C */
+    register8_t HCMPC;  /* High Byte Compare C */
+    register8_t LCMPD;  /* Low Byte Compare D */
+    register8_t HCMPD;  /* High Byte Compare D */
+} TC2_t;
+
+/* Byte Mode */
+typedef enum TC2_BYTEM_enum
+{
+    TC2_BYTEM_NORMAL_gc = (0x00<<0),  /* 16-bit mode */
+    TC2_BYTEM_BYTEMODE_gc = (0x01<<0),  /* Timer/Counter operating in byte mode only (TC2) */
+    TC2_BYTEM_SPLITMODE_gc = (0x02<<0),  /* Timer/Counter split into two 8-bit Counters */
+} TC2_BYTEM_t;
+
+/* Clock Selection */
+typedef enum TC2_CLKSEL_enum
+{
+    TC2_CLKSEL_OFF_gc = (0x00<<0),  /* Timer Off */
+    TC2_CLKSEL_DIV1_gc = (0x01<<0),  /* System Clock */
+    TC2_CLKSEL_DIV2_gc = (0x02<<0),  /* System Clock / 2 */
+    TC2_CLKSEL_DIV4_gc = (0x03<<0),  /* System Clock / 4 */
+    TC2_CLKSEL_DIV8_gc = (0x04<<0),  /* System Clock / 8 */
+    TC2_CLKSEL_DIV64_gc = (0x05<<0),  /* System Clock / 64 */
+    TC2_CLKSEL_DIV256_gc = (0x06<<0),  /* System Clock / 256 */
+    TC2_CLKSEL_DIV1024_gc = (0x07<<0),  /* System Clock / 1024 */
+    TC2_CLKSEL_EVCH0_gc = (0x08<<0),  /* Event Channel 0 */
+    TC2_CLKSEL_EVCH1_gc = (0x09<<0),  /* Event Channel 1 */
+    TC2_CLKSEL_EVCH2_gc = (0x0A<<0),  /* Event Channel 2 */
+    TC2_CLKSEL_EVCH3_gc = (0x0B<<0),  /* Event Channel 3 */
+    TC2_CLKSEL_EVCH4_gc = (0x0C<<0),  /* Event Channel 4 */
+    TC2_CLKSEL_EVCH5_gc = (0x0D<<0),  /* Event Channel 5 */
+    TC2_CLKSEL_EVCH6_gc = (0x0E<<0),  /* Event Channel 6 */
+    TC2_CLKSEL_EVCH7_gc = (0x0F<<0),  /* Event Channel 7 */
+} TC2_CLKSEL_t;
+
+/* Timer/Counter Command */
+typedef enum TC2_CMD_enum
+{
+    TC2_CMD_NONE_gc = (0x00<<2),  /* No Command */
+    TC2_CMD_RESTART_gc = (0x02<<2),  /* Force Restart */
+    TC2_CMD_RESET_gc = (0x03<<2),  /* Force Hard Reset */
+} TC2_CMD_t;
+
+/* Timer/Counter Command */
+typedef enum TC2_CMDEN_enum
+{
+    TC2_CMDEN_LOW_gc = (0x01<<0),  /* Low Byte Timer/Counter */
+    TC2_CMDEN_HIGH_gc = (0x02<<0),  /* High Byte Timer/Counter */
+    TC2_CMDEN_BOTH_gc = (0x03<<0),  /* Both Low Byte and High Byte Timer/Counters */
+} TC2_CMDEN_t;
+
+/* High Byte Underflow Interrupt Level */
+typedef enum TC2_HUNFINTLVL_enum
+{
+    TC2_HUNFINTLVL_OFF_gc = (0x00<<2),  /* Interrupt Disabled */
+    TC2_HUNFINTLVL_LO_gc = (0x01<<2),  /* Low Level */
+    TC2_HUNFINTLVL_MED_gc = (0x02<<2),  /* Medium Level */
+    TC2_HUNFINTLVL_HI_gc = (0x03<<2),  /* High Level */
+} TC2_HUNFINTLVL_t;
+
+/* Low Byte Compare A Interrupt Level */
+typedef enum TC2_LCMPAINTLVL_enum
+{
+    TC2_LCMPAINTLVL_OFF_gc = (0x00<<0),  /* Interrupt Disabled */
+    TC2_LCMPAINTLVL_LO_gc = (0x01<<0),  /* Low Level */
+    TC2_LCMPAINTLVL_MED_gc = (0x02<<0),  /* Medium Level */
+    TC2_LCMPAINTLVL_HI_gc = (0x03<<0),  /* High Level */
+} TC2_LCMPAINTLVL_t;
+
+/* Low Byte Compare B Interrupt Level */
+typedef enum TC2_LCMPBINTLVL_enum
+{
+    TC2_LCMPBINTLVL_OFF_gc = (0x00<<2),  /* Interrupt Disabled */
+    TC2_LCMPBINTLVL_LO_gc = (0x01<<2),  /* Low Level */
+    TC2_LCMPBINTLVL_MED_gc = (0x02<<2),  /* Medium Level */
+    TC2_LCMPBINTLVL_HI_gc = (0x03<<2),  /* High Level */
+} TC2_LCMPBINTLVL_t;
+
+/* Low Byte Compare C Interrupt Level */
+typedef enum TC2_LCMPCINTLVL_enum
+{
+    TC2_LCMPCINTLVL_OFF_gc = (0x00<<4),  /* Interrupt Disabled */
+    TC2_LCMPCINTLVL_LO_gc = (0x01<<4),  /* Low Level */
+    TC2_LCMPCINTLVL_MED_gc = (0x02<<4),  /* Medium Level */
+    TC2_LCMPCINTLVL_HI_gc = (0x03<<4),  /* High Level */
+} TC2_LCMPCINTLVL_t;
+
+/* Low Byte Compare D Interrupt Level */
+typedef enum TC2_LCMPDINTLVL_enum
+{
+    TC2_LCMPDINTLVL_OFF_gc = (0x00<<6),  /* Interrupt Disabled */
+    TC2_LCMPDINTLVL_LO_gc = (0x01<<6),  /* Low Level */
+    TC2_LCMPDINTLVL_MED_gc = (0x02<<6),  /* Medium Level */
+    TC2_LCMPDINTLVL_HI_gc = (0x03<<6),  /* High Level */
+} TC2_LCMPDINTLVL_t;
+
+/* Low Byte Underflow Interrupt Level */
+typedef enum TC2_LUNFINTLVL_enum
+{
+    TC2_LUNFINTLVL_OFF_gc = (0x00<<0),  /* Interrupt Disabled */
+    TC2_LUNFINTLVL_LO_gc = (0x01<<0),  /* Low Level */
+    TC2_LUNFINTLVL_MED_gc = (0x02<<0),  /* Medium Level */
+    TC2_LUNFINTLVL_HI_gc = (0x03<<0),  /* High Level */
+} TC2_LUNFINTLVL_t;
 
 
 /*
@@ -6834,9 +7005,12 @@ typedef struct NVM_PROD_SIGNATURES_struct
 
 
 /* TC0.CTRLE  bit masks and bit positions */
-#define TC0_BYTEM_bm  0x01  /* Byte Mode bit mask. */
-#define TC0_BYTEM_bp  0  /* Byte Mode bit position. */
-
+#define TC0_BYTEM_gm  0x03  /* Byte Mode group mask. */
+#define TC0_BYTEM_gp  0  /* Byte Mode group position. */
+#define TC0_BYTEM0_bm  (1<<0)  /* Byte Mode bit 0 mask. */
+#define TC0_BYTEM0_bp  0  /* Byte Mode bit 0 position. */
+#define TC0_BYTEM1_bm  (1<<1)  /* Byte Mode bit 1 mask. */
+#define TC0_BYTEM1_bp  1  /* Byte Mode bit 1 position. */
 
 /* TC0.INTCTRLA  bit masks and bit positions */
 #define TC0_ERRINTLVL_gm  0x0C  /* Error Interrupt Level group mask. */
@@ -7132,6 +7306,132 @@ typedef struct NVM_PROD_SIGNATURES_struct
 
 #define TC1_OVFIF_bm  0x01  /* Overflow Interrupt Flag bit mask. */
 #define TC1_OVFIF_bp  0  /* Overflow Interrupt Flag bit position. */
+
+
+/* TC2 - 16-bit Timer/Counter type 2 */
+/* TC2.CTRLA  bit masks and bit positions */
+#define TC2_CLKSEL_gm  0x0F  /* Clock Selection group mask. */
+#define TC2_CLKSEL_gp  0  /* Clock Selection group position. */
+#define TC2_CLKSEL0_bm  (1<<0)  /* Clock Selection bit 0 mask. */
+#define TC2_CLKSEL0_bp  0  /* Clock Selection bit 0 position. */
+#define TC2_CLKSEL1_bm  (1<<1)  /* Clock Selection bit 1 mask. */
+#define TC2_CLKSEL1_bp  1  /* Clock Selection bit 1 position. */
+#define TC2_CLKSEL2_bm  (1<<2)  /* Clock Selection bit 2 mask. */
+#define TC2_CLKSEL2_bp  2  /* Clock Selection bit 2 position. */
+#define TC2_CLKSEL3_bm  (1<<3)  /* Clock Selection bit 3 mask. */
+#define TC2_CLKSEL3_bp  3  /* Clock Selection bit 3 position. */
+
+/* TC2.CTRLB  bit masks and bit positions */
+#define TC2_LCMPAEN_bm  0x01  /* Low Byte Compare A Enable bit mask. */
+#define TC2_LCMPAEN_bp  0  /* Low Byte Compare A Enable bit position. */
+#define TC2_LCMPBEN_bm  0x02  /* Low Byte Compare B Enable bit mask. */
+#define TC2_LCMPBEN_bp  1  /* Low Byte Compare B Enable bit position. */
+#define TC2_LCMPCEN_bm  0x04  /* Low Byte Compare C Enable bit mask. */
+#define TC2_LCMPCEN_bp  2  /* Low Byte Compare C Enable bit position. */
+#define TC2_LCMPDEN_bm  0x08  /* Low Byte Compare D Enable bit mask. */
+#define TC2_LCMPDEN_bp  3  /* Low Byte Compare D Enable bit position. */
+#define TC2_HCMPAEN_bm  0x10  /* High Byte Compare A Enable bit mask. */
+#define TC2_HCMPAEN_bp  4  /* High Byte Compare A Enable bit position. */
+#define TC2_HCMPBEN_bm  0x20  /* High Byte Compare B Enable bit mask. */
+#define TC2_HCMPBEN_bp  5  /* High Byte Compare B Enable bit position. */
+#define TC2_HCMPCEN_bm  0x40  /* High Byte Compare C Enable bit mask. */
+#define TC2_HCMPCEN_bp  6  /* High Byte Compare C Enable bit position. */
+#define TC2_HCMPDEN_bm  0x80  /* High Byte Compare D Enable bit mask. */
+#define TC2_HCMPDEN_bp  7  /* High Byte Compare D Enable bit position. */
+
+/* TC2.CTRLC  bit masks and bit positions */
+#define TC2_LCMPA_bm  0x01  /* Low Byte Compare A Output Value bit mask. */
+#define TC2_LCMPA_bp  0  /* Low Byte Compare A Output Value bit position. */
+#define TC2_LCMPB_bm  0x02  /* Low Byte Compare B Output Value bit mask. */
+#define TC2_LCMPB_bp  1  /* Low Byte Compare B Output Value bit position. */
+#define TC2_LCMPC_bm  0x04  /* Low Byte Compare C Output Value bit mask. */
+#define TC2_LCMPC_bp  2  /* Low Byte Compare C Output Value bit position. */
+#define TC2_LCMPD_bm  0x08  /* Low Byte Compare D Output Value bit mask. */
+#define TC2_LCMPD_bp  3  /* Low Byte Compare D Output Value bit position. */
+#define TC2_HCMPA_bm  0x10  /* High Byte Compare A Output Value bit mask. */
+#define TC2_HCMPA_bp  4  /* High Byte Compare A Output Value bit position. */
+#define TC2_HCMPB_bm  0x20  /* High Byte Compare B Output Value bit mask. */
+#define TC2_HCMPB_bp  5  /* High Byte Compare B Output Value bit position. */
+#define TC2_HCMPC_bm  0x40  /* High Byte Compare C Output Value bit mask. */
+#define TC2_HCMPC_bp  6  /* High Byte Compare C Output Value bit position. */
+#define TC2_HCMPD_bm  0x80  /* High Byte Compare D Output Value bit mask. */
+#define TC2_HCMPD_bp  7  /* High Byte Compare D Output Value bit position. */
+
+/* TC2.CTRLE  bit masks and bit positions */
+#define TC2_BYTEM_gm  0x03  /* Byte Mode group mask. */
+#define TC2_BYTEM_gp  0  /* Byte Mode group position. */
+#define TC2_BYTEM0_bm  (1<<0)  /* Byte Mode bit 0 mask. */
+#define TC2_BYTEM0_bp  0  /* Byte Mode bit 0 position. */
+#define TC2_BYTEM1_bm  (1<<1)  /* Byte Mode bit 1 mask. */
+#define TC2_BYTEM1_bp  1  /* Byte Mode bit 1 position. */
+
+/* TC2.INTCTRLA  bit masks and bit positions */
+#define TC2_LUNFINTLVL_gm  0x03  /* Low Byte Underflow interrupt level group mask. */
+#define TC2_LUNFINTLVL_gp  0  /* Low Byte Underflow interrupt level group position. */
+#define TC2_LUNFINTLVL0_bm  (1<<0)  /* Low Byte Underflow interrupt level bit 0 mask. */
+#define TC2_LUNFINTLVL0_bp  0  /* Low Byte Underflow interrupt level bit 0 position. */
+#define TC2_LUNFINTLVL1_bm  (1<<1)  /* Low Byte Underflow interrupt level bit 1 mask. */
+#define TC2_LUNFINTLVL1_bp  1  /* Low Byte Underflow interrupt level bit 1 position. */
+#define TC2_HUNFINTLVL_gm  0x0C  /* High Byte Underflow Interrupt Level group mask. */
+#define TC2_HUNFINTLVL_gp  2  /* High Byte Underflow Interrupt Level group position. */
+#define TC2_HUNFINTLVL0_bm  (1<<2)  /* High Byte Underflow Interrupt Level bit 0 mask. */
+#define TC2_HUNFINTLVL0_bp  2  /* High Byte Underflow Interrupt Level bit 0 position. */
+#define TC2_HUNFINTLVL1_bm  (1<<3)  /* High Byte Underflow Interrupt Level bit 1 mask. */
+#define TC2_HUNFINTLVL1_bp  3  /* High Byte Underflow Interrupt Level bit 1 position. */
+
+/* TC2.INTCTRLB  bit masks and bit positions */
+#define TC2_LCMPAINTLVL_gm  0x03  /* Low Byte Compare A Interrupt Level group mask. */
+#define TC2_LCMPAINTLVL_gp  0  /* Low Byte Compare A Interrupt Level group position. */
+#define TC2_LCMPAINTLVL0_bm  (1<<0)  /* Low Byte Compare A Interrupt Level bit 0 mask. */
+#define TC2_LCMPAINTLVL0_bp  0  /* Low Byte Compare A Interrupt Level bit 0 position. */
+#define TC2_LCMPAINTLVL1_bm  (1<<1)  /* Low Byte Compare A Interrupt Level bit 1 mask. */
+#define TC2_LCMPAINTLVL1_bp  1  /* Low Byte Compare A Interrupt Level bit 1 position. */
+#define TC2_LCMPBINTLVL_gm  0x0C  /* Low Byte Compare B Interrupt Level group mask. */
+#define TC2_LCMPBINTLVL_gp  2  /* Low Byte Compare B Interrupt Level group position. */
+#define TC2_LCMPBINTLVL0_bm  (1<<2)  /* Low Byte Compare B Interrupt Level bit 0 mask. */
+#define TC2_LCMPBINTLVL0_bp  2  /* Low Byte Compare B Interrupt Level bit 0 position. */
+#define TC2_LCMPBINTLVL1_bm  (1<<3)  /* Low Byte Compare B Interrupt Level bit 1 mask. */
+#define TC2_LCMPBINTLVL1_bp  3  /* Low Byte Compare B Interrupt Level bit 1 position. */
+#define TC2_LCMPCINTLVL_gm  0x30  /* Low Byte Compare C Interrupt Level group mask. */
+#define TC2_LCMPCINTLVL_gp  4  /* Low Byte Compare C Interrupt Level group position. */
+#define TC2_LCMPCINTLVL0_bm  (1<<4)  /* Low Byte Compare C Interrupt Level bit 0 mask. */
+#define TC2_LCMPCINTLVL0_bp  4  /* Low Byte Compare C Interrupt Level bit 0 position. */
+#define TC2_LCMPCINTLVL1_bm  (1<<5)  /* Low Byte Compare C Interrupt Level bit 1 mask. */
+#define TC2_LCMPCINTLVL1_bp  5  /* Low Byte Compare C Interrupt Level bit 1 position. */
+#define TC2_LCMPDINTLVL_gm  0xC0  /* Low Byte Compare D Interrupt Level group mask. */
+#define TC2_LCMPDINTLVL_gp  6  /* Low Byte Compare D Interrupt Level group position. */
+#define TC2_LCMPDINTLVL0_bm  (1<<6)  /* Low Byte Compare D Interrupt Level bit 0 mask. */
+#define TC2_LCMPDINTLVL0_bp  6  /* Low Byte Compare D Interrupt Level bit 0 position. */
+#define TC2_LCMPDINTLVL1_bm  (1<<7)  /* Low Byte Compare D Interrupt Level bit 1 mask. */
+#define TC2_LCMPDINTLVL1_bp  7  /* Low Byte Compare D Interrupt Level bit 1 position. */
+
+/* TC2.CTRLF  bit masks and bit positions */
+#define TC2_CMDEN_gm  0x03  /* Command Enable group mask. */
+#define TC2_CMDEN_gp  0  /* Command Enable group position. */
+#define TC2_CMDEN0_bm  (1<<0)  /* Command Enable bit 0 mask. */
+#define TC2_CMDEN0_bp  0  /* Command Enable bit 0 position. */
+#define TC2_CMDEN1_bm  (1<<1)  /* Command Enable bit 1 mask. */
+#define TC2_CMDEN1_bp  1  /* Command Enable bit 1 position. */
+#define TC2_CMD_gm  0x0C  /* Command group mask. */
+#define TC2_CMD_gp  2  /* Command group position. */
+#define TC2_CMD0_bm  (1<<2)  /* Command bit 0 mask. */
+#define TC2_CMD0_bp  2  /* Command bit 0 position. */
+#define TC2_CMD1_bm  (1<<3)  /* Command bit 1 mask. */
+#define TC2_CMD1_bp  3  /* Command bit 1 position. */
+
+/* TC2.INTFLAGS  bit masks and bit positions */
+#define TC2_LUNFIF_bm  0x01  /* Low Byte Underflow Interrupt Flag bit mask. */
+#define TC2_LUNFIF_bp  0  /* Low Byte Underflow Interrupt Flag bit position. */
+#define TC2_HUNFIF_bm  0x02  /* High Byte Underflow Interrupt Flag bit mask. */
+#define TC2_HUNFIF_bp  1  /* High Byte Underflow Interrupt Flag bit position. */
+#define TC2_LCMPAIF_bm  0x10  /* Low Byte Compare A Interrupt Flag bit mask. */
+#define TC2_LCMPAIF_bp  4  /* Low Byte Compare A Interrupt Flag bit position. */
+#define TC2_LCMPBIF_bm  0x20  /* Low Byte Compare B Interrupt Flag bit mask. */
+#define TC2_LCMPBIF_bp  5  /* Low Byte Compare B Interrupt Flag bit position. */
+#define TC2_LCMPCIF_bm  0x40  /* Low Byte Compare C Interrupt Flag bit mask. */
+#define TC2_LCMPCIF_bp  6  /* Low Byte Compare C Interrupt Flag bit position. */
+#define TC2_LCMPDIF_bm  0x80  /* Low Byte Compare D Interrupt Flag bit mask. */
+#define TC2_LCMPDIF_bp  7  /* Low Byte Compare D Interrupt Flag bit position. */
 
 
 /* AWEX - Timer/Counter Advanced Waveform Extension */
