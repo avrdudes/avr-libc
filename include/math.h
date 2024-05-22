@@ -71,10 +71,10 @@
       shortcomings and limitations, see the
       <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a>
       for details.
-    - In order to access the <tt>float</tt> functions declared herein,
+    - In order to access the <tt>float</tt> functions,
       in avr-gcc v4.6 and older it is usually
-      also required to additionally link against the library \c libm.a.
-      See the related \ref faq_libm "FAQ entry".
+      also required to link with \c -lm. In avr-gcc v4.7 and up, \c -lm
+      is added automatically to all linker invocations.
 */
 
 

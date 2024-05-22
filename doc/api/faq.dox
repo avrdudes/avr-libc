@@ -34,43 +34,60 @@
 
 \addindex FAQ
 
--# \ref faq_volatile
--# \ref faq_libm
--# \ref faq_regbind
--# \ref faq_startup
--# \ref faq_use_bv
--# \ref faq_cplusplus
--# \ref faq_varinit
--# \ref faq_16bitio
--# \ref faq_asmconst "How do I use a \#define'd constant in an asm statement?"<!-- The explicit text is necessary since doxygen stumbles on the #define otherwise. -->
--# \ref faq_gdboptimize
--# \ref faq_asmstabs
--# \ref faq_port_pass
--# \ref faq_reg_usage
--# \ref faq_rom_array
--# \ref faq_ext_ram
--# \ref faq_optflags
--# \ref faq_reloc_code
--# \ref faq_fuses
--# \ref faq_flashstrings
--# \ref faq_intpromote
--# \ref faq_ramoverlap
--# \ref faq_tinyavr_c
--# \ref faq_clockskew
--# \ref faq_intbits
--# \ref faq_fuselow
--# \ref faq_asmops
--# \ref faq_spman
--# \ref faq_linkerscripts
--# \ref faq_binarydata
--# \ref faq_softreset
--# \ref faq_reentrant
--# \ref faq_eeprom_corruption
--# \ref faq_wrong_baud_rate
--# \ref faq_funcptr_gt128kib
--# \ref faq_assign_chain
+- <b>Interrupts</b>
+  - \ref faq_volatile
+  - \ref faq_16bitio
+  - \ref faq_isr_names
+  - \ref faq_reentrant
+  - \ref faq_spman
+  - \ref faq_intbits
 
-\section faq_volatile My program doesn't recognize a variable updated within an interrupt routine
+- <b>C/C++</b>
+  - \ref faq_cplusplus
+  - \ref faq_optflags
+  - \ref faq_varinit
+  - \ref faq_port_pass
+  - \ref faq_flashstrings
+  - \ref faq_rom_array
+  - \ref faq_startup
+  - \ref faq_softreset
+  - \ref faq_funcptr_gt128kib
+  - \ref faq_reg_usage
+  - \ref faq_regbind
+  - \ref faq_assign_chain
+  - \ref faq_use_bv
+  - \ref faq_tinyavr_c
+
+- <b>(Inline) Assembly</b>
+
+  - \ref faq_asmconst "How do I use a \#define'd constant in an asm statement?"<!-- The explicit text is necessary since doxygen stumbles on the #define otherwise. -->
+  - \ref faq_asmops
+
+- <b>Linking and Binaries</b>
+  - \ref faq_reloc_code
+  - \ref faq_binarydata
+  - \ref faq_linkerscripts
+
+- <b>Static Analysis</b>
+  - \ref faq_headers
+  - \ref faq_macros
+  - \ref faq_ramoverlap
+
+- <b>Debugging</b>
+  - \ref faq_gdboptimize
+  - \ref faq_asmstabs
+
+- <b>Hardware</b>
+  - \ref faq_eeprom_corruption
+  - \ref faq_fuses
+  - \ref faq_fuselow
+  - \ref faq_ext_ram
+
+- <b>Other</b>
+  - \ref faq_wrong_baud_rate
+  - \ref faq_clockskew
+
+\section faq_volatile Why doesn't my program recognize a variable updated in an interrupt routine?
 
 When using the optimizer, in a loop like the following one:
 
@@ -82,9 +99,9 @@ ISR(SOME_vect) {
 }
 ...
 
-	while (flag == 0) {
-		...
-	}
+    while (flag == 0) {
+        ...
+    }
 \endcode
 
 the compiler will typically access \c flag only once, and optimize further accesses completely
@@ -98,50 +115,41 @@ to be declared like:
 volatile uint8_t flag;
 \endcode
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
 
-\section faq_libm I get "undefined reference to..." for functions like "sin()"
-
-\note The text below only applies to GCC v4.6 and older.  Since GCC v4.7.2,
-the compiler driver adds \c -lm to all linker invocations.
-
-In order to access the mathematical functions that are declared in
-<tt>\<math.h\></tt>, the linker needs to be told to also link the
-mathematical library, <tt>libm.a</tt>.
-
-Typically, system libraries like <tt>libm.a</tt> are given to the
-final C compiler command line that performs the linking step by adding
-a flag <tt>-lm</tt> at the end.  (That is, the initial \a lib and the
-filename suffix from the library are written immediately after a \a -l
-flag.  So for a <tt>libfoo.a</tt> library, <tt>-lfoo</tt> needs to be
-provided.)  This will make the linker search the library in a path
-known to the system.
-
-<small>Back to \ref faq_index.
-</small>
 
 \section faq_regbind How to permanently bind a variable to a register?
 
 This can be done with
 
 \code
-register unsigned char counter asm("r3");
+register uint8_t counter __asm("r3");
 \endcode
 
 Typically, it should be safe to use r2 through r7 that way.
 
-Registers r8 through r15 can be used for argument passing by the
+Registers r8 through r25 can be used for argument passing by the
 compiler in case many or long arguments are being passed to callees.
 If this is not the case throughout the entire application, these
 registers could be used for register variables as well.
 
 Extreme care should be taken that the entire application is
-compiled with a consistent set of register-allocated variables,
-including possibly used library functions.
+compiled with a consistent set of register-allocated variables
+including possibly used library functions.  This can be achieved
+by compiling each module with \c -ffixed-r3 or \c -ffixed-3.
+Notice that when you are using library functions from libgcc
+(the avr-gcc runtime library) or AVR-LibC, then these libraries
+were generated \e without the requirement to avoid specific registers.
+Hence when you are using libraries from the distribution, you must
+make sure that none of the reserved registers is used in the generated
+binary.
 
-<small>Back to \ref faq_index.
-</small>
+Also notice that global register variables can't be volatile,
+because only variables in memory can be volatile, and register variables
+are not located in memory.
+
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_startup How to modify MCUCR or WDTCR early?
 
@@ -160,15 +168,13 @@ void init_MCUCR (void)
 \endcode
 
 Do not call this function by hand! This piece of code will be inserted in
-startup code, which is run right after reset.  See the linker
-script for comments about the new <tt>.init</tt><em>N</em> sections
-(which one to use, etc.).  For the meaning of the attributes,
-see \ref faq_softreset
+\ref sec_dot_init "startup code", which is run right after reset.
+For the meaning of the attributes, see \ref faq_softreset
 
 The advantage of this method is that you can insert any initialization
 code you want (just remember that this is very early startup -- no
-stack and no <tt>__zero_reg__</tt> yet), and no program memory space
-is wasted if this feature is not used.
+stack and no <tt>\ref zero_reg "__zero_reg__"</tt> yet),
+and no program memory space is wasted if this feature is not used.
 
 There should be no need to modify linker scripts anymore, except for
 some very special cases.  It is best to leave <tt>__stack</tt> at its
@@ -185,8 +191,8 @@ preferably be placed into section <code>.init3</code> as the code in
 <code>.init2</code>
 ensures the internal register <tt>__zero_reg__</tt> is already cleared.
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_use_bv What is all this _BV() stuff about?
 
@@ -224,8 +230,8 @@ However, using the macro often makes the program better readable.
 	DDRD = _BV(PD7);
 \endcode
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_cplusplus Can I use C++ on the AVR?
 
@@ -268,52 +274,36 @@ easily add up into a considerable amount of time and program memory
 wasted.  Thus, casual inspection of the generated assembler code
 (using the \c -S compiler option) seems to be warranted.
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_varinit Shouldn't I initialize all my variables?
 
-Global and static variables are guaranteed to be initialized to 0 by
-the C standard.  \c avr-gcc does this by placing the appropriate code
-into section \c \.init4 (see \ref sec_dot_init).  With respect to the
+Variables in static storage are guaranteed to be initialized by the C standard.
+This includes global and static variables without explicit initializer,
+which are initialized to 0.
+\c avr-gcc does this by placing the appropriate code
+into section <tt>\ref sec_dot_init ".init4"</tt>.  With respect to the
 standard, this sentence is somewhat simplified (because the standard
 allows for machines where the actual bit pattern used differs
 from all bits being 0), but for the AVR target, in general, all integer-type
 variables are set to 0, all pointers to a NULL pointer, and all
 floating-point variables to 0.0.
 
-As long as these variables are not initialized (i. e. they don't have
-an equal sign and an initialization expression to the right within the
-definition of the variable), they go into the \ref sec_dot_bss ".bss"
-section of the file.  This section simply records the size of the
+As long as these variables are not explicitly initialized, or their
+initializer is all zeros, they go into the \ref sec_dot_bss ".bss"
+output section.  This section simply records the size of the
 variable, but otherwise doesn't consume space, neither within the
 object file nor within flash memory.  (Of course, being a variable, it
 will consume space in the target's SRAM.)
 
-In contrast, global and static variables that have an initializer go
-into the \ref sec_dot_data ".data" section of the file.  This will
+In contrast, global and static variables that have a non-zero initializer go
+into the \ref sec_dot_data ".data" output section of the file.  This will
 cause them to consume space in the object file (in order to record the
 initializing value), \e and in the flash ROM of the target device.
-The latter is needed since the flash ROM is the only way that the
-compiler can tell the target device the value this variable is going
-to be initialized to.
-
-Now if some programmer "wants to make doubly sure" their variables
-really get a 0 at program startup, and adds an initializer just
-containing 0 on the right-hand side, they waste space.  While this
-waste of space applies to virtually any platform C is implemented on,
-it's usually not noticeable on larger machines like PCs, while the
-waste of flash ROM storage can be very painful on a small
-microcontroller like the AVR.
-
-So in general, variables should only be explicitly initialized if the initial
-value is non-zero.
-
-\note Recent versions of GCC are now smart enough to detect this
-situation, and revert variables that are explicitly initialized to 0
-to the .bss section.  Still, other compilers might not do that
-optimization, and as the C standard guarantees the initialization, it
-is safe to rely on it.
+The latter is needed to initialize the variables in RAM from the
+initializers kept in ROM during the startup code, so that all variables
+will have their expected initial values when \c main() is entered.
 
 <small>Back to \ref faq_index.
 </small>
@@ -811,16 +801,16 @@ int main (void)
 \endcode
 
 The result is not what you want though. What you end up with is the array
-stored in ROM, while the individual strings end up in RAM (in the
-<code>.rodata</code> section).
+stored in ROM, while the individual strings end up in RAM (in some
+<code>.rodata</code> input section).
 
 To work around this, you need to do something like this:
 
 \code
 #include <avr/pgmspace.h>
 
-const char foo[] PROGMEM = "Foo";
-const char bar[] PROGMEM = "Bar";
+static const char foo[] PROGMEM = "Foo";
+static const char bar[] PROGMEM = "Bar";
 
 const char* const array[2] PROGMEM = {
     foo,
@@ -854,34 +844,32 @@ in flash as such:
 \c bar is at address 0x002a.<br>
 \c array is at address 0x0026.<br>
 
-Then in func we see this:
+
+\subsection faq_rom_array_as Using named address-spaces
+
+An alternative is to use the named address-space \c __flash,
+which is supported since avr-gcc v4.7 and in GNU-C99 and up:
 
 \code
-    const char *p = pgm_read_ptr (&array[i]);
-  72:  e8 2f      mov    r30, r24     ; Z = 2 * i
-  74:  f0 e0      ldi    r31, 0x00
-  76:  ee 0f      add    r30, r30
-  78:  ff 1f      adc    r31, r31
-  7a:  ea 5d      subi   r30, 0xDA    ; Z += 0x0026
-  7c:  ff 4f      sbci   r31, 0xFF
-  7e:  65 91      lpm    r22, Z+      ; r22 = *Z
-  80:  75 91      lpm    r23, Z+
-    strcpy_P (buf, p);
-  82:  ce 01      movw   r24, r28     ; r24 = buf
-  84:  01 96      adiw   r24, 0x01
-  86:  0c d0      rcall  .+24         ; <strcpy_P>
+#include <avr/pgmspace.h>
+
+#define F(X) ((const __flash char[]) { X })
+
+const __flash char* const __flash array[] =
+{
+    F("Foo"), F("Bar")
+};
+
+int compare (const char *str, uint8_t i)
+{
+    return strcmp_P (str, array[i]);
+}
 \endcode
 
-The value of \c i (in R24) is moved to the Z register and doubled to
-accommodate for the word offset required to access \c array[], then the
-address of \c array (0x26) is added by subtracting the negated address (0xffda).
+Moreover, there is no more need for <tt>pgm_read_xxx()</tt>: The (addresses of)
+the string literals can be read directly by means of <tt>array[i]</tt>.
+The header is only needed for the \c strcmp_P prototype.
 
-Then the code uses \c LPM to read the pointer \p to the desired string from
-the ROM table \c array into register pair R23:R22.
-
-The address of variable \c buf is computed by adding its offset within
-the stack frame (0x1) to the Y pointer register, and strcpy_P() is
-called, which copies the ROM string into the local RAM buffer \c buf.
 
 <small>Back to \ref faq_index.</small>
 
@@ -1086,18 +1074,17 @@ By default, all strings are handled as all other initialized
 variables: they occupy RAM (even though the compiler might warn you
 when it detects write attempts to these RAM locations), and occupy the
 same amount of flash ROM so they can be initialized to the actual
-string by startup code.  The compiler can optimize multiple identical
-strings into a single one, but obviously only for one compilation unit
-(i. e., a single C source file).
+string by startup code.
 
 That way, any string literal will be a valid argument to any C
-function that expects a <tt>const char *</tt> argument.
+function that expects a <tt>const char*</tt> argument.
 
-Of course, this is going to waste a lot of SRAM.  In
-\ref avr_pgmspace "Program Space String Utilities", a method is described how such
+Of course, this is going to waste a lot of SRAM.
+In \ref avr_pgmspace "Program Space String Utilities",
+a method is described how such
 constant data can be moved out to flash ROM.  However, a constant
 string located in flash ROM is no longer a valid argument to pass to a
-function that expects a <tt>const char *</tt>-type string, since the
+function that expects a <tt>const char*</tt>-type string, since the
 AVR processor needs the special instruction \c LPM to access these
 strings.  Thus, separate functions are needed that take this into
 account.  Many of the standard C library functions have equivalents
@@ -1111,8 +1098,7 @@ messages that will be sent through a UART:
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
-int
-uart_putchar(char c)
+int uart_putchar(char c)
 {
   if (c == '\n')
     uart_putchar('\r');
@@ -1121,8 +1107,7 @@ uart_putchar(char c)
   return 0; /* so it could be used for fdevopen(), too */
 }
 
-void
-debug_P(const char *addr)
+void debug_P(const char *addr)
 {
   char c;
 
@@ -1130,8 +1115,7 @@ debug_P(const char *addr)
     uart_putchar(c);
 }
 
-int
-main(void)
+int main(void)
 {
   ioinit(); /* initialize UART, ... */
   debug_P(PSTR("foo was here\n"));
@@ -1142,30 +1126,6 @@ main(void)
 \note By convention, the suffix \b _P to the function name is used as
 an indication that this function is going to accept a "program-space
 string".  Note also the use of the PSTR() macro.
-
-<small>Back to \ref faq_index.</small>
-
-\section faq_intpromote Why does the compiler compile an 8-bit operation that uses bitwise operators into a 16-bit operation in assembly?
-
-Bitwise operations in Standard C will automatically promote their
-operands to an int, which is (by default) 16 bits in avr-gcc.
-
-To work around this use typecasts on the operands, including
-literals, to declare that the values are to be 8 bit operands.
-
-This may be especially important when clearing a bit:
-
-\code
-var &= ~mask;  /* wrong way! */
-\endcode
-
-The bitwise "not" operator (\c ~) will also promote the value in \c mask
-to an int. To keep it an 8-bit value, typecast before the "not"
-operator:
-
-\code
-var &= (unsigned char)~mask;
-\endcode
 
 <small>Back to \ref faq_index.</small>
 
@@ -1454,22 +1414,25 @@ to their known, default settings. Whereas jumping to the reset vector
 will leave the registers in their previous state, which is generally
 not a good idea.
 
-<b>CAUTION!</b> Older AVRs will have the watchdog timer disabled on a reset. For
-these older AVRs, doing a soft reset by enabling the watchdog is easy, as the
-watchdog will then be disabled after the reset. On newer AVRs, once the watchdog
-is enabled, then it <b>stays enabled, even after a reset</b>! For these
-newer AVRs a function needs to be added to the <code>.init3</code> section
-(i.e. during
-the startup code, before main()) to disable the watchdog early enough so
-it does not continually reset the AVR.
+<dl>
+<dt>CAUTION!</dt>
+<dd>
+  Older AVRs will have the watchdog timer disabled on a reset. For these older
+  AVRs, doing a soft reset by enabling the watchdog is easy, as the watchdog
+  will then be disabled after the reset. On newer AVRs, once the watchdog
+  is enabled, then it <b>stays enabled, even after a reset</b>! For these
+  newer AVRs a function needs to be added to the <code>.init3</code> section
+  (i.e. during
+  the startup code, before main()) to disable the watchdog early enough so
+  it does not continually reset the AVR.
+</dd>
+</dl>
 
 Here is some example code that creates a macro that can be called to perform
 a soft reset:
 
 \code
 #include <avr/wdt.h>
-
-...
 
 static inline __attribute__((__always_inline__))
 void soft_reset (void)
@@ -1485,8 +1448,6 @@ to then disable the watchdog after a reset (e.g., after a soft reset):
 \code
 #include <avr/wdt.h>
 
-...
-
 // Function Pototype
 static  __attribute__((used, unused, naked, section(".init3")))
 void wdt_init (void);
@@ -1498,8 +1459,8 @@ void wdt_init (void)
     wdt_disable();
 }
 \endcode
-The code is placed in section <code>.init3</code> so that it is executed
-as part of the
+The code is placed in section <tt>\ref sec_dot_init ".init3"</tt>
+so that it is executed as part of the
 normal startup procedure.  The \c naked attribute is required so that the
 code does not <tt>ret</tt>urn (Code in init sections is executed as it
 is located; the code is not called, and code from one init section
@@ -1782,6 +1743,146 @@ register \c DDRG, this register only implements 6 out of the 8 bits,
 so the two topmost (unimplemented) bits read back as 0!  Consequently,
 all remaining <tt>DDR</tt><em>x</em> registers get assigned the value
 0x3f, which does not match the intention of the developer in any way.
+
+
+\section faq_headers Which header files are included in my program?
+
+Suppose we have a simple program like
+\code
+#include <avr/pgmspace.h>
+
+int main (void)
+{
+    return 0;
+}
+\endcode
+
+and we want to know which files this \c \#include triggers.
+Just add option \c -H to the compiler options and check what is printed
+on standard output:
+\verbatim
+$ avr-gcc -H -S main.c -mmcu=atmega8
+. <install>/avr/include/avr/pgmspace.h
+.. <install>/avr/include/inttypes.h
+... <install>/lib/gcc/avr/<version>/include/stdint.h
+.... <install>/avr/include/stdint.h
+.. <install>/lib/gcc/avr/<version>/include/stddef.h
+.. <install>/avr/include/avr/io.h
+... <install>/avr/include/avr/sfr_defs.h
+... <install>/avr/include/avr/iom8.h
+... <install>/avr/include/avr/portpins.h
+...
+\endverbatim
+where <tt>&lt;install&gt;</tt> denotes the installation path,
+<tt>&lt;version&gt;</tt> denotes the GCC version,
+and the number of dots indicates the include level,
+e.g. \c inttypes.h is included by
+<tt>pgmspace.h</tt>.
+
+When \c -v is added to the compiler options, then the search paths are also
+displayed (amongst other stuff):
+\verbatim
+#include "..." search starts here:
+#include <...> search starts here:
+ <install>/bin/../lib/gcc/avr/<version>/include
+ <install>/bin/../lib/gcc/avr/<version>/include-fixed
+ <install>/bin/../lib/gcc/avr/<version>/../../../../avr/include
+End of search list.
+\endverbatim
+After resolving the <tt>..</tt>'s for <em>"parent directory"</em>,
+the last directory becomes<br>
+<tt>&lt;install&gt;/avr/include</tt>.
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_macros Which macros are defined in my program? Where are they defined, and to what value?
+
+One way is to add
+<tt>\ref opt_save_temps "-save-temps"</tt> and <tt>\ref opt_g "-g3"</tt>
+to the compiler options.  This saves the temporary files like the
+pre-processed source code in an \c \.i file (for C sources),
+an \c \.ii (for C++), or a \c \.s (for assembly).
+A debug level of DWARF3 or higher is required to include the macro
+definitions in the file, with lower debug levels, only the preprocessed
+source will be present.
+
+For a module with a simple <tt>\#include <avr/pgmspace.h></tt>, the
+saved intermediate file might look something like:
+
+\verbatim
+# 0 "<built-in>"
+#define __STDC__ 1
+\endverbatim
+
+The \c __STDC__ macro is defined built-in in the compiler.
+
+\verbatim
+# 0 "<command-line>"
+#define __AVR_DEVICE_NAME__ atmega8
+\endverbatim
+
+The \c __AVR_DEVICE_NAME__ macro is defined on the command line by
+means of <tt>-D __AVR_DEVICE_NAME__=atmega8</tt>. In this special case,
+the \c -D option is added by the specs file <tt>specs-atmega8</tt>.
+
+\verbatim
+# 81 "<install>/avr/include/avr/pgmspace.h" 3
+#define __PGMSPACE_H_ 1
+
+
+#define __need_size_t
+\endverbatim
+
+The \c __PGMSPACE_H_ macro is defined in line 81 of that header file.
+When there is no line note directly above the definition, go up until
+you find a line note.  For example,
+the \c __need_size_t macro is defined in line 84 of that file.
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_isr_names What ISR names are available for my device?
+
+One way to find the possible #ISR names is to pre-process a small
+file, and to grep for possible names, like in:
+
+\verbatim
+$ echo "#include <avr/io.h>" | avr-gcc -xc - -mmcu=atmega8 -E -dM  | grep _VECTOR
+#define INT0_vect _VECTOR(1)
+#define INT1_vect _VECTOR(2)
+#define TIMER2_COMP_vect _VECTOR(3)
+#define TIMER2_OVF_vect _VECTOR(4)
+#define TIMER1_CAPT_vect _VECTOR(5)
+...
+\endverbatim
+
+Explanation:
+<dl>
+<dt><tt>echo "#include <avr/io.h>"</tt></dt>
+<dd>
+  This prints <tt>\#include &lt;avr/io.h&gt;</tt>
+  to the standard output, which is picked up by the following command
+  as a C program to be preprocessed.
+</dd>
+
+<dt><tt>avr-gcc -xc - -mmcu=atmega8 -E -dM</tt></dt>
+<dd>
+  Set the \ref opt_x "input language" to C,
+  read the program from standard input (specified by a dash), preprocess,
+  and print all macro definitions to the standard output.
+</dd>
+
+<dt><tt>grep _VECTOR</tt></dt>
+<dd>
+  Only print lines with \c _VECTOR in them.<br>
+  The output above was actually generated with an additional
+  <tt>| sort -t '(' -k 2n</tt> so that the vectors are printed in order.
+
+  In order to find the respective vector numbers, use <tt>grep _vect_num</tt>
+  instead.
+</dd>
+</dl>
 
 <small>Back to \ref faq_index.</small>
 

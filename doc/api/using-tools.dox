@@ -174,7 +174,7 @@ users.
   separated by a \c , (comma).
 </dd>
 
-<dt><tt>-g</tt></dt>
+<dt>\anchor opt_g <tt>-g</tt></dt>
 <dd>
   Generate debugging information that can be used by avr-gdb.
   GCC v12 changed the default from STABS to DWARF.
@@ -184,7 +184,7 @@ users.
   When a debugger has problems with that, try \c -gstrict-dwarf.
 </dd>
 
-<dt><tt>-x <em>lang</em></tt></dt>
+<dt>\anchor opt_x <tt>-x <em>lang</em></tt></dt>
 <dt><tt>-x none</tt></dt>
 <dd>
   Compile the following files in language \e lang.  Values for \e lang are:
@@ -212,7 +212,7 @@ $ echo '#include <avr/io.h>' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR
   infer the respective source languages from the file extensions.
 </dd>
 
-<dt><tt>-save-temps</tt></dt>
+<dt>\anchor opt_save_temps <tt>-save-temps</tt></dt>
 <dt><tt>-save-temps=obj</tt></dt>
 <dt><tt>-save-temps=cwd</tt></dt>
 <dt>\anchor opt_fverbose_asm <tt>-fverbose-asm</tt></dt>
@@ -559,8 +559,7 @@ always be searched for unresolved references when the linker is started
 using the C compiler frontend (i. e., there's always at least one
 implied \c -lc option), the mathematics library \c libm.a
 is only automatically added in GCC v4.7 and above.  On older versions, it
-needs to be explicitly requested using \c -lm.  See also the
-\ref faq_libm "entry in the FAQ" explaining this.
+needs to be explicitly requested using \c -lm.
 
 Conventionally, Makefiles use the \c make macro \c LDLIBS to keep
 track of \c -l (and possibly \c -L) options that should only be
