@@ -238,10 +238,12 @@ Notes on the various parts:
   When the asm writes to some RAM location for example, the compiler must not
   optimize RAM accesses across the asm because the memory may change.
 
-  Clobbering \c __tmp_reg__ by means of \c "r0" has no effect, but such
+  Clobbering <tt>\ref tmp_reg "__tmp_reg__"</tt> by means of
+  \c "r0" has no effect, but such
   a clobber may be added to indicate to the reader that the asm clobbers R0.
 
-  Clobbering \c __zero_reg__ by means of \c "r1" has no effect.
+  Clobbering <tt>\ref zero_reg "__zero_reg__"</tt> by means of
+  \c "r1" has no effect.
   When the asm destroys the zero register, for example by means of
   a \c MUL instruction, then the code must restore the register at
   the end by means of <tt>"clr __zero_reg__"</tt>
@@ -285,11 +287,11 @@ There are special sequences that can be used in the assembly template.
 </tr>
 <tr>
   <td><tt>__tmp_reg__</tt></td>
-  <td>The temporary register R0 (R16 on reduced Tiny)</td>
+  <td>The \ref tmp_reg "temporary register" R0 (R16 on reduced Tiny)</td>
 </tr>
 <tr>
   <td><tt>__zero_reg__</tt></td>
-  <td>The zero register R1, always zero (R17 on reduced Tiny)</td>
+  <td>The \ref zero_reg "zero register" R1, always zero (R17 on reduced Tiny)</td>
 </tr>
 <tr>
   <td><tt>$</tt>

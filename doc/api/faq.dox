@@ -714,7 +714,7 @@ sections in the avr-gcc Wiki.
   Registers r0 through r15 do not exist.
 </dd>
 
-<dt>\anchor zero_reg Fixed registers (r0, r1)</dt>
+<dt>\anchor zero_reg \anchor tmp_reg Fixed registers (r0, r1)</dt>
 <dd>
   Never allocated by gcc for local data, but often
   used for fixed purposes:

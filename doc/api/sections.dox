@@ -490,7 +490,8 @@ empty ones, that are valid in a section name.
 <dt>\anchor sec_dot_vectors <code>.vectors</code></dt>
 <dd>
   The <code>.vectors</code> sections contains the interrupt vector table which
-  consists of jumps to weakly defined labels: To \c __init for the first
+  consists of jumps to \ref dot_weak "weak"ly defined labels:
+  To \c __init for the first
   entry at index&nbsp;0, and to <code>__vector_<em>N</em></code> for the entry
   at index <code><em>N</em></code>&nbsp;&ge;&nbsp;1.
   The default value for <code>__vector_<em>N</em></code> is
@@ -564,7 +565,8 @@ empty ones, that are valid in a section name.
   </tr>
   <tr>
     <td><tt>.init0</tt>
-    <td>Weakly defines the <tt>__init</tt> label which is the jump target
+    <td>\ref dot_weak "Weak"ly defines the <tt>__init</tt> label which is
+      the jump target
       of the first vector in the interrupt vector table.  When the user
       defines the <code>__init()</code> function, it will be jumped to
       instead.
