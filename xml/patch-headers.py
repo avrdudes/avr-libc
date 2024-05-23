@@ -401,14 +401,13 @@ print '''
 
 \\anchor avr_signames
 <small>
-<table border="3">
+<table>
   <tr>
-    <td width="20%"><strong>Vector name</strong></td>
-    <td width="20%"><strong>Old vector name</strong></td>
-    <td width="20%"><strong>Description</strong></td>
-    <td width="40%"><strong>Applicable for device</strong></td>
-  </tr>
-'''
+    <th width="15%">Vector Name</th>
+    <th width="15%">Deprecated</th>
+    <th width="20%">Description</th>
+    <th width="50%">Applicable for Device</th>
+  </tr>'''
 
 vecs = docs.keys()
 vecs.sort()

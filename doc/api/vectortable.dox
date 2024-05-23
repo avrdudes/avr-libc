@@ -40,14 +40,20 @@
 
 \anchor avr_signames
 <small>
-<table border="3">
+<table>
+<caption>
+\latexonly
+Due to its sheer size the following table is only available in the
+HTML version of the documentation.
+\endlatexonly
+</caption>
   <tr>
-    <td width="20%"><strong>Vector name</strong></td>
-    <td width="20%"><strong>Old vector name</strong></td>
-    <td width="20%"><strong>Description</strong></td>
-    <td width="40%"><strong>Applicable for device</strong></td>
+    <th width="15%">Vector Name</th>
+    <th width="15%">Deprecated</th>
+    <th width="20%">Description</th>
+    <th width="50%">Applicable for Device</th>
   </tr>
-
+\htmlonly
   <tr>
     <td>ADC_vect</td>
     <td>SIG_ADC</td>
@@ -786,6 +792,7 @@
     <td>Watchdog Timeout Interrupt</td>
     <td>AT90PWM3, AT90PWM2, AT90PWM1, ATmega1284P, ATmega168P, ATmega328P, ATmega32HVB, ATmega406, ATmega48P, ATmega88P, ATmega168, ATmega48, ATmega88, ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561, ATmega324P, ATmega164P, ATmega644P, ATmega644, ATmega16HVA, ATtiny13, ATtiny43U, ATtiny48, ATtiny45, ATtiny25, ATtiny85, ATtiny261, ATtiny461, ATtiny861, AT90USB162, AT90USB82, AT90USB1287, AT90USB1286, AT90USB647, AT90USB646</td>
   </tr>
+\endhtmlonly
 </table>
 </small>
 

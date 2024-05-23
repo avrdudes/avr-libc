@@ -200,30 +200,39 @@ ISR(TIMER1_OVF_vect, ISR_NAKED)
 The interrupt is chosen by supplying one of the symbols in following table.
 
 There are currently two different styles present for naming the
-vectors.  One form uses names starting with \c SIG_, followed by
-a relatively verbose but arbitrarily chosen name describing the
-interrupt vector.  This has been the only available style in
-avr-libc up to version 1.2.x.
+vectors.
 
-Starting with avr-libc version 1.4.0, a second style of interrupt
-vector names has been added, where a short phrase for the vector
-description is followed by \c _vect.  The short phrase matches the
+- Starting with AVR-LibC v1.4, the style of interrupt
+vector names is a short phrase for the vector
+description followed by \c _vect.  The short phrase matches the
 vector name as described in the datasheet of the respective device
-(and in Atmel's XML files), with spaces replaced by an underscore
+(and in the hardware manufacturer's XML files),
+with spaces replaced by an underscore
 and other non-alphanumeric characters dropped.  Using the suffix
 \c _vect is intented to improve portability to other C compilers
 available for the AVR that use a similar naming convention.
 
-The historical naming style might become deprecated in a future
-release, so it is not recommended for new projects.
+- A deprecated form that uses names starting with \c SIG_, followed by
+a relatively verbose but arbitrarily chosen name describing the
+interrupt vector.  This has been the only available style in
+avr-libc up to version 1.2.x.
+This historical naming style is and not recommended for new projects.
 
 \note The ISR() macro cannot really spell-check
 the argument passed to them.  Thus, by misspelling one of the names
-below in a call to ISR(), a function will be created
+below used in ISR(), a function will be created
 that, while possibly being usable as an interrupt function, is not
 actually wired into the interrupt vector table.  The compiler will
-generate a warning if it detects a suspiciously looking name of a
+generate a warning if it detects a suspiciously looking name of an
 ISR() function (i.e. one that after macro replacement does not
-start with "__vector_").
+start with <tt>"__vector_"</tt>).
+
+Apart from the <tt><em>NAME</em>_vect</tt> macros listed below, for each
+such ISR name there is also a macro <tt><em>NAME</em>_vect_num</tt>
+defined which resolves to the IRQ number.  This is the index into the
+vector table, where indices start at index 0 (the reset vector).
+
+See also \ref faq_isr_names in the FAQ for how find all the IRQ names for
+a specific device
 
 */
