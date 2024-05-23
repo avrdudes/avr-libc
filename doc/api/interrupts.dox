@@ -48,9 +48,7 @@ used if you don't define your own.
 Patching into the vector table is only one part of the problem. The compiler
 uses, by convention, a set of registers when it's normally executing
 compiler-generated code. It's important that these registers, as well as the
-status register, get saved and restored. The extra code needed to do this is
-enabled by tagging the interrupt function with
-<tt>__attribute__((signal))</tt>.
+status register, get saved and restored.
 
 These details seem to make interrupt routines a little messy, but all these
 details are handled by the Interrupt API. An interrupt routine is defined with
@@ -68,17 +66,18 @@ ISR(ADC_vect)
 \endcode
 
 Refer to the chapter explaining \ref ass_isr "assembler programming" for an
-explanation about interrupt routines written solely in assembler language.
+explanation about interrupt routines written solely in assembly.
 
 <h3>Catch-all interrupt vector</h3>
 
-If an unexpected interrupt occurs (interrupt is enabled and no handler is
+If an unexpected interrupt occurs (interrupt is enabled but no handler is
 installed, which usually indicates a bug), then the default action is to reset
 the device by jumping to the reset vector. You can override this by supplying
 a function named \c BADISR_vect which should be defined with
-ISR() as such.  (The name BADISR_vect is actually an alias for __vector_default.
+#ISR() as such.
+The name \c BADISR_vect is actually an alias for \c __vector_default.
 The latter must be used inside assembly code in case <avr/interrupt.h> is
-not included.)
+not included.
 
 \code
 #include <avr/interrupt.h>
@@ -91,11 +90,11 @@ ISR(BADISR_vect)
 
 <h3>Nested interrupts</h3>
 
-The AVR hardware clears the global interrupt flag in SREG before
-entering an interrupt vector.  Thus, normally interrupts will remain
+The AVR hardware clears the global interrupt flag in SREG when
+an interrupt request is serviced.  Thus, normally interrupts will remain
 disabled inside the handler until the handler exits, where the RETI
 instruction (that is emitted by the compiler as part of the normal
-function epilogue for an interrupt handler) will eventually re-enable
+function epilogue for an ISR) will eventually re-enable
 further interrupts.  For that reason, interrupt handlers normally do
 not nest.  For most interrupt handlers, this is the desired behaviour,
 for some it is even required in order to prevent infinitely recursive
@@ -103,11 +102,11 @@ interrupts (like UART interrupts, or level-triggered external
 interrupts).  In rare circumstances though it might be desired to
 re-enable the global interrupt flag as early as possible in the
 interrupt handler, in order to not defer any other interrupt more than
-absolutely needed.  This could be done using an sei() instruction
+absolutely needed.  This could be done using an \c sei() instruction
 right at the beginning of the interrupt handler, but this still leaves
 few instructions inside the compiler-generated function prologue to
 run with global interrupts disabled.  The compiler can be instructed
-to insert an SEI instruction right at the beginning of an interrupt
+to insert a \c SEI instruction right at the beginning of an interrupt
 handler by declaring the handler the following way:
 
 \anchor attr_interrupt
@@ -129,7 +128,7 @@ for the ISR would suffice.  For example, pin-change interrupts
 arriving from two different ports could logically signal an event that
 is independent from the actual port (and thus interrupt vector) where
 it happened.  Sharing interrupt vector code can be accomplished using
-the ISR_ALIASOF() attribute to the ISR macro:
+the #ISR_ALIASOF() attribute to the #ISR macro:
 
 \code
 ISR(PCINT0_vect)
@@ -179,16 +178,20 @@ an example of how to implement it that way.
 
 Another solution is to still implement the ISR in C language but take
 over the compiler's job of generating the prologue and epilogue.  This
-can be done using the ISR_NAKED attribute to the ISR() macro.  Note
+can be done using the #ISR_NAKED attribute to the ISR() macro.  Note
 that the compiler does not generate \e anything as prologue or
 epilogue, so the final reti() must be provided by the actual
 implementation.  SREG must be manually saved if the ISR code modifies
-it, and the compiler-implied assumption of \c __zero_reg__ always
-being 0 could be wrong (e. g. when interrupting right after of a MUL
+it, and the compiler-implied assumption of <tt>\ref zero_reg "__zero_reg__"</tt>
+always being 0 could be wrong (e. g. when interrupting right after of a \c MUL
 instruction).
 
+\warning According to the GCC documentation, only
+\ref inline_asm "inline assembly" is supported in \c naked functions,
+like with #ISR_NAKED.
+
 \code
-ISR(TIMER1_OVF_vect, ISR_NAKED)
+ISR(TIMER1_OVF_vect,  ISR_NAKED)
 {
   PORTB |= _BV(0);  // results in SBI which does not affect SREG
   reti();
@@ -197,7 +200,8 @@ ISR(TIMER1_OVF_vect, ISR_NAKED)
 
 <h3>Choosing the vector: Interrupt vector names</h3>
 
-The interrupt is chosen by supplying one of the symbols in following table.
+The interrupt is chosen by supplying one of the vector names in the
+following table.
 
 There are currently two different styles present for naming the
 vectors.
@@ -206,17 +210,19 @@ vectors.
 vector names is a short phrase for the vector
 description followed by \c _vect.  The short phrase matches the
 vector name as described in the datasheet of the respective device
-(and in the hardware manufacturer's XML files),
+(and in the hardware manufacturer's XML/ATDF files),
 with spaces replaced by an underscore
 and other non-alphanumeric characters dropped.  Using the suffix
 \c _vect is intented to improve portability to other C compilers
 available for the AVR that use a similar naming convention.
 
-- A deprecated form that uses names starting with \c SIG_, followed by
+- A \b deprecated form that uses names starting with \c SIG_, followed by
 a relatively verbose but arbitrarily chosen name describing the
 interrupt vector.  This has been the only available style in
-avr-libc up to version 1.2.x.
-This historical naming style is and not recommended for new projects.
+AVR-LibC up to version 1.2.x.
+This historical naming style is not recommended for new projects,
+and some headers require that the macro \c __AVR_LIBC_DEPRECATED_ENABLE__
+is defined so that the \c SIG_ names ISR names are available.
 
 \note The ISR() macro cannot really spell-check
 the argument passed to them.  Thus, by misspelling one of the names
@@ -233,6 +239,6 @@ defined which resolves to the IRQ number.  This is the index into the
 vector table, where indices start at index 0 (the reset vector).
 
 See also \ref faq_isr_names in the FAQ for how find all the IRQ names for
-a specific device
+a specific device.
 
 */
