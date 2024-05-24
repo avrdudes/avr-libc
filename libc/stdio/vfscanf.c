@@ -397,15 +397,18 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
    Seems, GCC 4.3 does not use it also.	*/
 extern float __floatunsisf (unsigned long);
 
-PROGMEM static const float pwr_p10 [6] = {
-    1e+1, 1e+2, 1e+4, 1e+8, 1e+16, 1e+32
-};
-PROGMEM static const float pwr_m10 [6] = {
-    1e-1, 1e-2, 1e-4, 1e-8, 1e-16, 1e-32
-};
+#ifdef __AVR_HAVE_ELPM__
+#define PROG_SECTION __attribute__((__section__(".progmemx.data")))
+#else
+#define PROG_SECTION PROGMEM
+#endif
 
-PROGMEM static const char pstr_nfinity[] = "nfinity";
-PROGMEM static const char pstr_an[] = "an";
+/* In libc/stdio/pwr_10.c */
+extern const float __avrlibc_pwr_p10 [6];
+extern const float __avrlibc_pwr_m10 [6];
+
+PROG_SECTION static const char pstr_nfinity[] = "nfinity";
+PROG_SECTION static const char pstr_an[] = "an";
 
 __attribute__((noinline))
 ATTRIBUTE_CLIB_SECTION
@@ -416,8 +419,12 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
 	float flt;
     } x;
     int i;
-    const char *p;
     int exp;
+#ifndef __AVR_HAVE_ELPM__
+    const char *p;
+#else
+    uint_farptr_t pf;
+#endif
 
     unsigned char flag;
 #define FL_MINUS    0x80	/* number is negative	*/
@@ -440,6 +447,7 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
 
     switch (tolower (i)) {
 
+#ifndef __AVR_HAVE_ELPM__
       case 'n':
 	p = pstr_an;
 	goto operate_pstr;
@@ -464,6 +472,33 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
         }
 	x.flt = (p == pstr_an + 3) ? NAN : INFINITY;
 	break;
+
+#else /* ..ELPM.. */
+      case 'n':
+	pf = pgm_get_far_address (pstr_an[0]);
+	goto operate_pstr;
+
+      case 'i':
+	pf = pgm_get_far_address (pstr_nfinity[0]);
+      operate_pstr:
+        {
+	    uint8_t c;
+
+	    while ((c = pgm_read_u8_far (pf++)) != 0) {
+		if (!--width
+		    || (i = getc (stream)) < 0
+		    || ((uint8_t) tolower(i) != c
+			&& (ungetc (i, stream), 1)))
+		{
+		    if (pf == pgm_get_far_address (pstr_nfinity[3]))
+			break;
+		    goto err;
+		}
+	    }
+        }
+	x.flt = (pf == pgm_get_far_address (pstr_an[3])) ? NAN : INFINITY;
+	break;
+#endif /* ELPM ? */
 
       default:
         exp = 0;
@@ -524,23 +559,35 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
 
 	x.flt = __floatunsisf (x.u32);
 
+#ifndef __AVR_HAVE_ELPM__
+	const float *f_pwr;
 	if (exp < 0) {
-	    p = (void *)(pwr_m10 + 5);
+	    f_pwr = __avrlibc_pwr_m10 + 5;
 	    exp = -exp;
 	} else {
-	    p = (void *)(pwr_p10 + 5);
+	    f_pwr = __avrlibc_pwr_p10 + 5;
 	}
 	for (width = 32; width; width >>= 1) {
 	    for (; (unsigned)exp >= width; exp -= width) {
-		union {
-		    long lo;
-		    float fl;
-		} y;
-		y.lo = pgm_read_dword (p);
-		x.flt *= y.fl;
+		x.flt *= pgm_read_float (f_pwr);
 	    }
-	    p = (void *)p - sizeof(float);
+	    --f_pwr;
 	}
+#else
+	uint_farptr_t f_pwr;
+	if (exp < 0) {
+	    f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[5]);
+	    exp = -exp;
+	} else {
+	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[5]);
+	}
+	for (width = 32; width; width >>= 1) {
+	    for (; (unsigned)exp >= width; exp -= width) {
+		x.flt *= pgm_read_float_far (f_pwr);
+	    }
+	    f_pwr -= sizeof (float);
+	}
+#endif /* ELPM ? */
     } /* switch */
 
     if (flag & FL_MINUS)

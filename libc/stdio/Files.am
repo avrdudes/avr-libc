@@ -30,6 +30,7 @@
 #
 
 stdio_a_c_sources =	\
+	pwr_10.c \
 	clearerr.c \
 	fclose.c \
 	fdevopen.c \

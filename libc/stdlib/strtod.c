@@ -54,17 +54,22 @@ extern int isfinitef (float);
    conversion along with a large inline code to correct the result.	*/
 extern float __floatunsisf (unsigned long);
 
-PROGMEM static const float pwr_p10 [6] = {
-    1e+1, 1e+2, 1e+4, 1e+8, 1e+16, 1e+32
-};
-PROGMEM static const float pwr_m10 [6] = {
-    1e-1, 1e-2, 1e-4, 1e-8, 1e-16, 1e-32
-};
+#ifdef __AVR_HAVE_ELPM__
+#define PROG_SECTION __attribute__((__section__(".progmemx.data")))
+#define STRNCASECMP_P(a, b, c) strncasecmp_PF (a, pgm_get_far_address(b), c)
+#else
+#define PROG_SECTION PROGMEM
+#define STRNCASECMP_P(a, b, c) strncasecmp_P (a, b, c)
+#endif
+
+/* In libc/stdio/pwr_10.c */
+extern const float __avrlibc_pwr_p10 [6];
+extern const float __avrlibc_pwr_m10 [6];
 
 /* PSTR() is not used to save 1 byte per string: '\0' at the tail.	*/
-PROGMEM static const char pstr_inf[] = {'I','N','F'};
-PROGMEM static const char pstr_inity[] = {'I','N','I','T','Y'};
-PROGMEM static const char pstr_nan[] = {'N','A','N'};
+PROG_SECTION static const char pstr_inf[] = {'I','N','F'};
+PROG_SECTION static const char pstr_inity[] = {'I','N','I','T','Y'};
+PROG_SECTION static const char pstr_nan[] = {'N','A','N'};
 
 /**  The strtof() function converts the initial portion of the string pointed
      to by \a nptr to \c float representation.
@@ -124,9 +129,9 @@ strtof (const char * nptr, char ** endptr)
 	c = *nptr++;
     }
 
-    if (!strncasecmp_P (nptr - 1, pstr_inf, 3)) {
+    if (!STRNCASECMP_P (nptr - 1, pstr_inf, 3)) {
 	nptr += 2;
-	if (!strncasecmp_P (nptr, pstr_inity, 5))
+	if (!STRNCASECMP_P (nptr, pstr_inity, 5))
 	    nptr += 5;
 	if (endptr)
 	    *endptr = (char *)nptr;
@@ -135,7 +140,7 @@ strtof (const char * nptr, char ** endptr)
 
     /* NAN() construction is not realised.
        Length would be 3 characters only.	*/
-    if (!strncasecmp_P (nptr - 1, pstr_nan, 3)) {
+    if (!STRNCASECMP_P (nptr - 1, pstr_nan, 3)) {
 	if (endptr)
 	    *endptr = (char *)nptr + 2;
 	return NANf;
@@ -143,8 +148,8 @@ strtof (const char * nptr, char ** endptr)
 
     x.u32 = 0;
     exp = 0;
-    while (1) {
-
+    while (1)
+    {
 	c -= '0';
 
 	if (c <= 9) {
@@ -205,25 +210,37 @@ strtof (const char * nptr, char ** endptr)
     if ((flag & FL_MINUS) && (flag & FL_ANY))
 	x.flt = -x.flt;
 
-    if (x.flt != 0) {
-	int pwr;
+    if (x.flt != 0)
+    {
+#ifndef __AVR_HAVE_ELPM__
+	const float *f_pwr;
 	if (exp < 0) {
-	    nptr = (void *)(pwr_m10 + 5);
+	    f_pwr = __avrlibc_pwr_m10 + 5;
 	    exp = -exp;
 	} else {
-	    nptr = (void *)(pwr_p10 + 5);
+	    f_pwr = __avrlibc_pwr_p10 + 5;
 	}
-	for (pwr = 32; pwr; pwr >>= 1) {
+	for (int pwr = 32; pwr; pwr >>= 1) {
 	    for (; exp >= pwr; exp -= pwr) {
-		union {
-		    unsigned long u32;
-		    float flt;
-		} y;
-		y.u32 = pgm_read_dword ((float *)nptr);
-		x.flt *= y.flt;
+		x.flt *= pgm_read_float (f_pwr);
 	    }
-	    nptr -= sizeof(float);
+	    --f_pwr;
 	}
+#else
+	uint_farptr_t f_pwr;
+	if (exp < 0) {
+	    f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[5]);
+	    exp = -exp;
+	} else {
+	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[5]);
+	}
+	for (int pwr = 32; pwr; pwr >>= 1) {
+	    for (; exp >= pwr; exp -= pwr) {
+		x.flt *= pgm_read_float_far (f_pwr);
+	    }
+	    f_pwr -= sizeof (float);
+	}
+#endif /* ELPM ? */
 	if (!isfinitef(x.flt) || x.flt == 0)
 	    errno = ERANGE;
     }
