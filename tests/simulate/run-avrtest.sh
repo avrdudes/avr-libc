@@ -37,6 +37,10 @@
 #     MCUS="..." ./run-avrtest.sh ...
 #
 # in order to override the predefined list of mcus.
+# Notice that this requires an  exit-<mcu>.o module  for each of the mcus.
+# When it is not present, you can generate it with, say
+#
+#    (cd $AVRTEST_HOME; make exit-<mcu>.o)
 
 
 ##########################################################################
@@ -122,7 +126,7 @@ Options:
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
   -t          Add pass at host computer
   -T          Pass at host only
-  -s          Stop at any error, temparary files will save
+  -s          Stop at any error, temporary files will save
   -h          Print this help
   -v          Verbose mode; echo shell commands being executed
 If FILE is not specified, the full test list is used.
@@ -217,8 +221,8 @@ set_extra_options ()
 	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_data"
 	    ;;
 	atmega2560)
-	    o_sim="-mmcu=avr6 $o_data"
-	    o_gcc="$(o_mem 0 0x2000 0xffff)"
+	    o_sim="-mmcu=avr6"
+	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_data"
 	    ;;
 	attiny3216)
 	    o_sim="-mmcu=avrxmega3"
@@ -235,6 +239,10 @@ set_extra_options ()
 	avr128da32)
 	    o_sim="-mmcu=avrxmega4"
 	    o_gcc="$(o_mem 0 0x1000 0x7fff) $o_data"
+	    ;;
+	at90s8515)
+	    o_sim="-mmcu=avr2"
+	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_data"
 	    ;;
 	attiny40)
 	    o_sim="-mmcu=avrtiny -s 8k"
@@ -277,14 +285,14 @@ Simulate_avrtest ()
     # -no-stdin keepy avrtest from hanging in rare situations of bogus
     # code that tries to read from stdin, but there is no input.
 
-    # avrtest has 3 flavours: avrtest, abrtest-xmega and avrtext-tiny.
+    # avrtest has 3 flavours: avrtest, avrtest-xmega and avrtest-tiny.
     local suff=
     case "$o_sim" in
 	*avrxmega* ) suff="-xmega" ;;
 	*avrtiny*  ) suff="-tiny"  ;;
     esac
 
-    msg=$($AVRTEST_HOME/$avrtest$suff \
+    msg=$(${AVRTEST_HOME}/${avrtest}${suff} \
 	      -q -no-stdin $1 $o_sim -m 60000000000 2>&1)
     RETVAL=$?
     #echo "MSG = $msg"
