@@ -32,7 +32,12 @@
 
 # Script for testing Avr-libc fuctions, mainly, by simulating.
 # avrtest is needed. The script is tuned to run after 'make'
-# without any options, at this place.
+# without any options, at this place.  Use
+#
+#     MCUS="..." ./run-avrtest.sh ...
+#
+# in order to override the predefined list of mcus.
+
 
 ##########################################################################
 # This script is similar to runtest.sh but uses avrtest for simulation.
@@ -431,7 +436,7 @@ for test_file in $test_list ; do
 
 	        elf_file=$rootname.elf
 		for prvers in $prlist ; do
-		    for mcu in $mcu_list ; do
+		    for mcu in ${MCUS-$mcu_list} ; do
 			set_extra_options $mcu
 			echo -n "Simulate avrtest: $test_file "
 			case $prvers in
@@ -477,7 +482,7 @@ for test_file in $test_list ; do
 		esac
 
 	        elf_file=$rootname.elf
-		for mcu in $mcu_list ; do
+		for mcu in ${MCUS-$mcu_list} ; do
 		    set_extra_options $mcu
 		    echo -n "Simulate: $test_file "
 		    echo -n "$mcu ... "
