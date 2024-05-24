@@ -142,6 +142,7 @@ def canonicalize_comment (txt):
              (" A Match", " Match A"),
              (" B Match", " Match B"),
              # Use shorter terms / abbreviations.
+             ("2 Wire", "Two Wire"),
              ("Interruption", "Interrupt"),
              ("Interrupt Vectors", "IRQs"),
              ("Interrupt Request", "IRQ"),
@@ -176,9 +177,37 @@ def canonicalize_comment (txt):
 class Isr (object):
     """One specific ISR"""
 
-    pat_pcint = re.compile (r"PCINT(\d+)")
-    pat_timer_comp = re.compile (r"TIMER(\d)_COMP([A-Z])")
-    pat_timer_capt = re.compile (r"TIMER(\d)_CAPT")
+    pat_0_args = (("ADC",         "ADC Conversion Complete"),
+                  ("USART_START", "USART Start Edge"),
+                  ("USART_RX",    "USART Rx Complete"),
+                  ("USART_TX",    "USART Tx Complete"),
+                  ("USI_START",   "USI Start Condition"),
+                  ("USI_STR",     "USI Start Condition"),
+                  ("USI_OVF",     "USI Counter Overflow"),
+                  ("TWI_SLAVE",   "TWI Slave"),
+                  )
+    pat_1_arg = tuple((re.compile(p), desc) for (p,desc) in (
+        (r"PCINT(\d)",       "Pin Change IRQ %s"),
+        (r"TIM(\d)_CAPT",    "Timer/Counter%s Input Capture"),
+        (r"TIMER(\d)_CAPT",  "Timer/Counter%s Input Capture"),
+        (r"TIMER(\d)_IC",    "Timer/Counter%s Input Capture"),
+        (r"TIMER(\d)_OVF",   "Timer/Counter%s Overflow"),
+        (r"UART(\d)_UDRE",   "UART%s Data Register Empty"),
+        (r"UART(\d)_RX",     "UART%s Rx Complete"),
+        (r"UART(\d)_TX",     "UART%s Tx Complete"),
+        (r"USART(\d)_RX",    "USART%s Rx Complete"),
+        (r"USART(\d)_TX",    "USART%s Tx Complete"),
+        (r"USART(\d)_RXC",   "USART%s Rx Complete"),
+        (r"USART(\d)_TXC",   "USART%s Tx Complete"),
+        (r"USART(\d)_START", "USART%s Start Frame Detection"),
+        (r"USART(\d)_DRE",   "USART%s Data Register Empty"),
+        (r"USART(\d)_UDRE",  "USART%s Data Register Empty"),
+        (r"TWI(\d)",         "Two Wire Serial Interface %s"),
+    ))
+    pat_2_args = tuple((re.compile(p), desc) for (p,desc) in (
+        (r"TIM(\d)_COMP([A-Z])",   "Timer/Counter%s Compare Match %s"),
+        (r"TIMER(\d)_COMP([A-Z])", "Timer/Counter%s Compare Match %s"),
+        ))
 
     def __init__(self, mcu, isr, num, text):
         # AVR device, in lower case.
@@ -197,28 +226,32 @@ class Isr (object):
             text = vect_to_desc[vect]
 
         self.text = canonicalize_comment (text)
-        self.fixup()
+        self.text = self.fixup()
 
     def fixup (self):
         """ Some descriptions are obviously wrong.  Reconstruct them. """
-        m = re.match (self.pat_pcint, self.isr)
-        if m:
-            self.text = "Pin Change IRQ %s" % m.group(1)
+        # 0 Arguments
+        for (pat, desc) in self.pat_0_args:
+            if self.isr == pat:
+                return desc
 
-        m = re.match (self.pat_timer_comp, self.isr)
-        if m:
-            self.text = ("Timer/Counter%s Compare Match %s"
-                         % (m.group(1), m.group(2)))
+        # 1 Argument
+        for (pat, desc) in self.pat_1_arg:
+            m = pat.fullmatch (self.isr)
+            if m:
+                return desc % m.group(1)
 
-        m = re.match (self.pat_timer_capt, self.isr)
-        if m:
-            self.text = "Timer/Counter%s Capture Event" % m.group(1)
+        # 2 Arguments
+        for (pat, desc) in self.pat_2_args:
+            m = pat.fullmatch (self.isr)
+            if m:
+                return desc % (m.group(1), m.group(2))
 
-        if self.isr == "ADC":
-            self.text = "ADC Conversion Complete"
+        return self.text
 
     def ignore (self):
-        """ Ignore some ISRs for brevity."""
+        """ Ignore some ISRs for brevity.  These are double defined vectors
+            that are aliases, and "reserved for future" ones. """
         if re.search ("reserved", self.text, re.IGNORECASE):
             return True
         return self.text in ("Keep for backward compatibility",
@@ -274,7 +307,7 @@ for line in sys.stdin.readlines():
         continue
 
     # /* cmt */
-    m = re.match (pat_comment, line)
+    m = re.fullmatch (pat_comment, line)
     if m:
         cmt = m.group(1).strip()
         if "0 is the reset vector" in cmt:
@@ -310,7 +343,6 @@ for line in sys.stdin.readlines():
             isrs.append (None)
         mcu_to_isrs[mcu][num] = isr
 
-        #print ("ISR:" + str(isr))
         continue
 
     # Anything that's not recognized is ignored, but also invalidates cmt.
@@ -319,7 +351,7 @@ for line in sys.stdin.readlines():
 #############################################################################
 # Step 2: Build all IRQ:Description Pairs and map them to MCU lists.
 
-# Map "vect:Description" to list of mcus.
+# Map "vect:Description" key to list of mcus.
 key_to_mcus = {}
 
 for mcu in mcu_to_isrs:
@@ -334,13 +366,11 @@ for mcu in mcu_to_isrs:
             key_to_mcus[key] = frozenset()
         key_to_mcus[key] |= set([isr.mcu])
 
-me = sys.argv[0]
 mcus_SIG_only = []
 
 for mcu in mcu_to_isrs:
     if (not mcu_to_isrs[mcu]) and mcu != "unknown":
         mcus_SIG_only.append (mcu)
-        #print ("%s: warning: no vect's found for" % me, mcu, file=sys.stderr)
 
 #############################################################################
 # Step 3: Print the file
@@ -357,8 +387,8 @@ for key in sorted(key_to_mcus.keys()):
 print (TABLE_END)
 
 if mcus_SIG_only:
-    print (r"\note For the following devices, only the deprecated SIGnal names"
+    print (r"\note For the following devices, only the deprecated \c SIG_ names"
            + r" are available:",
-           ", ".join (to_Mcu(m) for m in mcus_SIG_only) + ".")
+           ", ".join (to_Mcu(m) for m in sorted(mcus_SIG_only)) + ".")
 
 print (FOOTER)
