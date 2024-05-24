@@ -38,12 +38,8 @@ ATTRIBUTE_CLIB_SECTION
 char *
 ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
 {
-    __attribute__((progmem)) static const char str_nan[2][4] =
-	{"nan", "NAN"};
-    __attribute__((progmem)) static const char str_inf[2][sizeof(str_nan[0])] =
-	{"inf", "INF"};
     char *d;		/* dst	*/
-    const char *s;		/* src	*/
+    const char *s;	/* src	*/
     signed char exp;
     unsigned char vtype;
 
@@ -61,17 +57,23 @@ ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
 	*d++ = ' ';
 
     if (vtype & FTOA_NAN) {
-	s = str_nan[0];
-	goto copy;
+	/* "NAN" or "nan" */
+	char c = (flags & DTOSTR_UPPERCASE) ? 'N' : 'n';
+	d[0] = c;
+	d[2] = c;
+	d[1] = c + 'a' - 'n';
+	d[3] = '\0';
+	return sbeg;
     }
 
     if (vtype & FTOA_INF) {
-	s = str_inf[0];
-      copy:
-	if (flags & DTOSTR_UPPERCASE)
-	    s += sizeof(str_nan[0]);
-	strcpy_P (d, s);
-	goto ret;
+	/* "INF" or "inf" */
+	char c = (flags & DTOSTR_UPPERCASE) ? 'I' : 'i';
+	d[0] = c;
+	d[1] = c + 'n' - 'i';
+	d[2] = c + 'f' - 'i';
+	d[3] = '\0';
+	return sbeg;
     }
 
     /* mantissa	*/
@@ -104,7 +106,6 @@ ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
     *d++ = '0' + exp;
     *d = 0;
 
-  ret:
     return sbeg;
 }
 
