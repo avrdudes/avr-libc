@@ -35,14 +35,17 @@
 #include "macros.inc"
 #include "ftoa_engine.h"
 
-#if  defined(__AVR_HAVE_LPMX__) && __AVR_HAVE_LPMX__
-#  define AVR_ENH_LPM	1
+#if defined(__AVR_HAVE_ELPM__) && !defined(__AVR_HAVE_ELPMX__)
+#  define Z_HH8         r13
+#  define PUSH_ZHH8     push Z_HH8
+#  define POP_ZHH8      pop  Z_HH8
 #else
-#  define AVR_ENH_LPM	0
+#  define PUSH_ZHH8     /* empty */
+#  define POP_ZHH8      /* empty */
 #endif
 
 /*
-   int __ftoa_engine (double val, char *buf,
+   int __ftoa_engine (float val, char *buf,
                       unsigned char prec, unsigned char maxdgs)
  Input:
     val    - value to convert
@@ -101,6 +104,52 @@
 
     /* Fixed */
 #define	zero	r1
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; reg = *Z++ from program memory, using ELPM or LPM as required.
+;;; In the case where ELPM is available but not ELPMx, an extra
+;;; register Z_HH8 is needed to track the hh8 part of the address.
+;;;
+;;; INSN is an instruction that has to be emit at the end when we
+;;; clobbered SREG.
+.macro .ELPM_Zplus reg, insn=
+#if defined(__AVR_HAVE_ELPMX__)
+	elpm	\reg, Z+
+#elif defined(__AVR_HAVE_ELPM__)
+	elpm
+	adiw	r30, 1
+	brcc .Lnoinc.\@
+	inc	Z_HH8
+	out	AVR_RAMPZ_ADDR, Z_HH8
+.Lnoinc.\@:
+	.ifc \reg,r0
+	.else
+		mov	\reg, r0
+	.endif
+	\insn
+#elif defined(__AVR_HAVE_LPMX__)
+	X_lpm	\reg, Z+
+#else
+	X_lpm	\reg, Z+
+	\insn
+#endif
+.endm
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+.macro .ELPM_Z reg
+#if defined(__AVR_HAVE_ELPMX__)
+	elpm	\reg, Z
+#elif defined(__AVR_HAVE_ELPM__)
+	elpm
+	mov	\reg, r0
+#elif defined(__AVR_HAVE_LPMX__)
+	lpm	\reg, Z
+#else
+	lpm
+	mov	\reg, r0
+#endif
+.endm
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     ASSEMBLY_CLIB_SECTION
 
@@ -168,6 +217,7 @@ __ftoa_engine:
 	push	r16
 	push	r15
 	push	r14
+	PUSH_ZHH8
 
 /* --------------------------------------------------------------------
    Multiplication of mantisses (val and table).
@@ -192,6 +242,14 @@ __ftoa_engine:
 	clr	ZH
 	subi	ZL, lo8(-(.L_base10))
 	sbci	ZH, hi8(-(.L_base10))
+#ifdef __AVR_HAVE_ELPM__
+	clr	val_hhi
+	sbci	val_hhi, hh8(-(.L_base10))
+	out	AVR_RAMPZ_ADDR, val_hhi
+#ifdef Z_HH8
+	mov	Z_HH8, val_hhi
+#endif
+#endif
   ; highest mantissa byte  (mult. shifting prepare)
 	clr	val_hhi
   ; result initializ.
@@ -202,12 +260,7 @@ __ftoa_engine:
 	X_movw	mlt_6, mlt_2
 
   ; multiply to 1-st table byte
-#if  AVR_ENH_LPM
-	lpm	r0, Z+
-#else
-	lpm
-	adiw	ZL, 1
-#endif
+	.ELPM_Zplus r0
 	sec			; for loop end control
 	ror	r0
   ; addition
@@ -226,14 +279,8 @@ __ftoa_engine:
 	lsr	r0
 	brne	10b
 
-  ; second table byte
-#if  AVR_ENH_LPM
-	lpm	r0, Z+		; C flag is stay 1
-#else
-	lpm
-	adiw	ZL, 1
-	sec
-#endif
+  ; 2-nd table byte
+	.ELPM_Zplus r0, sec		; C flag stays 1
 	ror	r0
   ; addition
 12:	brcc	13f
@@ -251,14 +298,8 @@ __ftoa_engine:
 	lsr	r0
 	brne	12b
 
-  ; 3-t table byte
-#if  AVR_ENH_LPM
-	lpm	r0, Z+		; C flag is stay 1
-#else
-	lpm
-	adiw	ZL, 1
-	sec
-#endif
+  ; 3-th table byte
+	.ELPM_Zplus r0, sec		; C flag stays 1
 	ror	r0
   ; addition
 14:	brcc	15f
@@ -276,12 +317,8 @@ __ftoa_engine:
 	lsr	r0
 	brne	14b
 
-  ; 4-t table byte
-#if  AVR_ENH_LPM
-	lpm	r0, Z+		; C flag is stay 1
-#else
-	lpm
-#endif
+  ; 4-th table byte
+	.ELPM_Zplus r0, sec		; C flag stays 1
 	ror	r0
   ; addition
 16:	brcc	17f
@@ -299,13 +336,7 @@ __ftoa_engine:
 	brne	16b
 
   ; decimal exponent
-#if  AVR_ENH_LPM
-	lpm	exp10, Z
-#else
-	adiw	ZL, 1
-	lpm
-	mov	exp10, r0
-#endif
+	.ELPM_Z	exp10
 
   ; result shift:  mlt_7..2 >>= (~exp & 7)
 	com	exp_sv
@@ -348,17 +379,24 @@ __ftoa_engine:
 */
 
   ; to find first digit
+#ifdef __AVR_HAVE_ELPM__
+	ldi	ZL, hh8(.L_powr10)
+	out	AVR_RAMPZ_ADDR, ZL
+#ifdef Z_HH8
+	mov	Z_HH8, ZL
+#endif
+#endif
 	ldi	ZL, lo8(.L_powr10)
 	ldi	ZH, hi8(.L_powr10)
 	set
   ; 'pwr10' element reading
 .L_digit:
-	X_lpm	pwr_2, Z+
-	X_lpm	pwr_3, Z+
-	X_lpm	pwr_4, Z+
-	X_lpm	pwr_5, Z+
-	X_lpm	pwr_6, Z+
-	X_lpm	pwr_7, Z+
+	.ELPM_Zplus	pwr_2
+	.ELPM_Zplus	pwr_3
+	.ELPM_Zplus	pwr_4
+	.ELPM_Zplus	pwr_5
+	.ELPM_Zplus	pwr_6
+	.ELPM_Zplus	pwr_7
   ; 'digit' init.
 	ldi	digit, '0' - 1
   ; subtraction loop
@@ -408,7 +446,13 @@ __ftoa_engine:
   ; write digit
 27:	st	X+, digit
 	dec	prec
+#ifndef Z_HH8
 	brne	.L_digit
+#else
+	breq 1f
+	jmp	.L_digit
+1:
+#endif
 
 /* --------------------------------------------------------------------
     Rounding.
@@ -456,6 +500,10 @@ __ftoa_engine:
   ; restore
 .L_rest:
 	clr	zero
+#ifdef __AVR_HAVE_RAMPD__
+	out AVR_RAMPZ_ADDR, zero
+#endif
+	POP_ZHH8
 	pop	r14
 	pop	r15
 	pop	r16
@@ -473,7 +521,7 @@ __ftoa_engine:
 /* --------------------------------------------------------------------
     Tables.  '.L_powr10' is placed first -- for subnormals stability.
 */
-    .section .progmem.data,"a",@progbits
+    .section .progmemx.data,"a",@progbits
 
     .type .L_powr10, "object"
 .L_powr10:
