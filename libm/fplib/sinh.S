@@ -77,7 +77,7 @@ ENTRY_FLOAT sinhf sinh sinhl
 	ldi	exp_lo, lo8(2)
 	ldi	exp_hi, hi8(2)
 	XCALL	_U(ldexpf)
-	XCALL	_U(inverse)
+	XCALL	_U(__inversef)
   ; result (in absolute value)
 	pop	rB0
 	pop	rB1

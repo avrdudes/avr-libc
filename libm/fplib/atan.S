@@ -68,7 +68,7 @@ ENTRY_FLOAT atanf atan atanl
 	cpc	rB3, rAE
 	brsh	1f
 	mov	corr, rA3		; rA3 != 0
-	XCALL	_U(inverse)
+	XCALL	_U(__inversef)
   ; calculate atan(A) for -1.0 <= A <= +1.0
 1:	push	rA3
 	push	rA2

@@ -58,7 +58,7 @@ ENTRY_FLOAT coshf cosh coshl
 	ldi	exp_lo, lo8(2)
 	ldi	exp_hi, hi8(2)
 	XCALL	_U(ldexpf)
-	XCALL	_U(inverse)
+	XCALL	_U(__inversef)
   ; expf(x)/2 + expf(-x)/2
 	pop	rB0
 	pop	rB1

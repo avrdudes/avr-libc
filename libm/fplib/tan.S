@@ -90,7 +90,7 @@ ENTRY_FLOAT tanf tan tanl
   ; correct result
 	lsl	rsign
 	brvs	2f
-	XCALL	_U(inverse)
+	XCALL	_U(__inversef)
 2:	lsl	rsign
 	brvc	3f
 	subi	rA3, 0x80

@@ -32,13 +32,13 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float inverse (float A);
-     The inverse() function returns 1/A value.
+/* float __inversef (float A);
+     The __inversef() function returns 1.0f / A.
  */
 
 #define	FL_1	0x3f800000	/* +1.0	*/
 
-ENTRY inverse
+ENTRY __inversef
 	X_movw	rB0, rA0
 	X_movw	rB2, rA2	; B = A
 

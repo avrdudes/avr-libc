@@ -106,7 +106,7 @@ ENTRY_FLOAT expf exp expl
   ; inverse for positive arg.
 	pop	r0
 	sbrs	r0, 7
-	XJMP	_U(inverse)
+	XJMP	_U(__inversef)
 	ret
 ENDFUNC
 
