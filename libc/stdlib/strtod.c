@@ -55,10 +55,8 @@ extern int isfinitef (float);
 extern float __floatunsisf (unsigned long);
 
 #ifdef __AVR_HAVE_ELPM__
-#define PROG_SECTION __attribute__((__section__(".progmemx.data")))
 #define STRNCASECMP_P(a, b, c) strncasecmp_PF (a, pgm_get_far_address(b), c)
 #else
-#define PROG_SECTION PROGMEM
 #define STRNCASECMP_P(a, b, c) strncasecmp_P (a, b, c)
 #endif
 
@@ -67,9 +65,9 @@ extern const float __avrlibc_pwr_p10 [6];
 extern const float __avrlibc_pwr_m10 [6];
 
 /* PSTR() is not used to save 1 byte per string: '\0' at the tail.	*/
-PROG_SECTION static const char pstr_inf[] = {'I','N','F'};
-PROG_SECTION static const char pstr_inity[] = {'I','N','I','T','Y'};
-PROG_SECTION static const char pstr_nan[] = {'N','A','N'};
+PROGMEM_FAR static const char pstr_inf[] = {'I','N','F'};
+PROGMEM_FAR static const char pstr_inity[] = {'I','N','I','T','Y'};
+PROGMEM_FAR static const char pstr_nan[] = {'N','A','N'};
 
 /**  The strtof() function converts the initial portion of the string pointed
      to by \a nptr to \c float representation.

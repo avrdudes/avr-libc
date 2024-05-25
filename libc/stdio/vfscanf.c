@@ -397,18 +397,12 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
    Seems, GCC 4.3 does not use it also.	*/
 extern float __floatunsisf (unsigned long);
 
-#ifdef __AVR_HAVE_ELPM__
-#define PROG_SECTION __attribute__((__section__(".progmemx.data")))
-#else
-#define PROG_SECTION PROGMEM
-#endif
-
 /* In libc/stdio/pwr_10.c */
 extern const float __avrlibc_pwr_p10 [6];
 extern const float __avrlibc_pwr_m10 [6];
 
-PROG_SECTION static const char pstr_nfinity[] = "nfinity";
-PROG_SECTION static const char pstr_an[] = "an";
+PROGMEM_FAR static const char pstr_nfinity[] = "nfinity";
+PROGMEM_FAR static const char pstr_an[] = "an";
 
 __attribute__((noinline))
 ATTRIBUTE_CLIB_SECTION

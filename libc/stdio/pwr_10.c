@@ -39,14 +39,7 @@
 
 #if !defined(__AVR_TINY__)
 
-#include <avr/pgmspace.h>
-
-#ifdef __AVR_HAVE_ELPM__
 #define PROG_SECTION __attribute__((__section__(".progmemx.data.pwr_10")))
-#else
-#define PROG_SECTION PROGMEM
-#endif
-
 
 PROG_SECTION const float __avrlibc_pwr_p10[6] =
 {
