@@ -101,7 +101,7 @@ filenames are case-insensitive (and, with some versions of \c make
 that could not distinguish between \c \.s and \c \.S on such systems).
 
 Alternatively, the language can explicitly be specified using the
-<tt>-x assembler-with-cpp</tt> option.
+<tt>\ref opt_x "-x assembler-with-cpp"</tt> option.
 
 \section ass_example Example Program
 
@@ -293,7 +293,7 @@ assembler (gas) manual at
 As gas comes from a Unix origin, its directives and overall assembler
 syntax is slightly different than the one being used by other
 assemblers.  Numeric constants follow the C notation
-(prefix \c 0x for hexadecimal constants, \0b for binary constants),
+(prefix \c 0x for hexadecimal constants, \c 0b for binary constants),
 expressions use a C-like syntax.
 
 Some common directives include:
@@ -395,8 +395,18 @@ Some common directives include:
 </tr>
 <tr>
   <td><tt>.extern</tt>
-    <td colspan="2">Ignored for compatibility with other assemblers.
+  <td>Ignored for compatibility with other assemblers.
 </tr>
+<tr>
+  <td><tt>.org</tt>
+  <td>Advance the location pointer to a specified offset \e relative
+    to the beginning of the \ref sec_input "input section".
+    The location counter cannot be moved backwards.<br>
+    This is a fairly pointless directive in an assembler environment
+    that uses relocatable object files.
+    The linker determines the final location of the objects.
+    See the \ref faq_reloc_code "FAQ" on how to relocate code to
+    a fixed address.
 </table>
 
 <!----------------------------------------------------------------->
@@ -490,14 +500,6 @@ For some real-world examples, see the AVR-LibC sources
    ><tt>macros.inc</tt></a> and
 <a href="https://github.com/avrdudes/avr-libc/blob/main/common/asmdef.h"
    ><tt>asmdef.h</tt></a>.
-
-Note that \c \.org is available in gas as well, but is a fairly
-pointless pseudo-op in an assembler environment that uses relocatable
-object files, as it is the linker that determines the final position
-of some object in ROM or RAM. The \c \.org directive advances the
-location pointer to a specified offset relative to the beginning of
-the section.  The location counter cannot be moved backwards.
-
 
 \section ass_modifiers Operand Modifiers
 

@@ -280,6 +280,9 @@ compile-time.
 - ATA5790N
 - ATA5831
 - ATA5795
+- ATA6285
+- ATA6286
+- ATA6289
 - ATA6612C
 - ATA6613C
 - ATA6614Q
@@ -362,6 +365,8 @@ compile-time.
 - ATmega32U2
 - ATmega32U4
 - ATmega32U6
+- AT43USB320
+- AT43USB355
 
 \par XMEGA Devices:
 
@@ -484,13 +489,8 @@ compile-time.
 \par Miscellaneous Devices:
 
 - AT94K \ref supp_dev_footnote_two "[2]"
-- AT43USB320
-- AT43USB355
 - AT86RF401
 - AT90SCR100
-- ATA6285
-- ATA6286
-- ATA6289
 - M3000 \ref supp_dev_footnote_four "[4]"
 
 \par Classic AVR Devices:

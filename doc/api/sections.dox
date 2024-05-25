@@ -85,7 +85,7 @@ and rules to locate them or to assign them to
 
 \subsection sec_named Named Sections
 
-Named section are section that can be referred to by their name.
+<em>Named sections</em> are sections that can be referred to by their name.
 The name and other properties can be provided with the <tt>.section</tt>
 directive like in
 \code
@@ -105,7 +105,7 @@ section flags and type; same for directives <tt>.data</tt> and <tt>.bss</tt>.
 
 \subsubsection sec_flags Section Flags
 
-The section flags can be specified with the <tt>.section</tt> and
+The <em>section flags</em> can be specified with the <tt>.section</tt> and
 <tt>.pushsection</tt> directives, see \ref sec_type "section type"
 for an example.
 Section flags of output sections can be specified in the linker description
@@ -157,7 +157,7 @@ units does occur at most once in the executable file.
 
 \subsubsection sec_type Section Type
 
-The section type can be specified with the <tt>.section</tt> and
+The <em>section type</em> can be specified with the <tt>.section</tt> and
 <tt>.pushsection</tt> directives, like in
 \code
 .section .text.myfunc,"ax",@progbits
@@ -195,12 +195,12 @@ On ELF level, the section type is stored in the section header like
 
 \subsubsection sec_align Section Alignment
 
-The alignment of a section is the maximum over the alignments of the
+The \e alignment of a section is the maximum over the alignments of the
 objects in the section.
 
 \subsubsection sec_subsection Subsections
 
-Subsections are compartmets of named sections and are
+\e Subsections are compartments of named sections and are
 introduced with the <tt>\ref dot_subsection ".subsection"</tt> directive.
 Subsections are located in order of increasing index in their input section.
 The default subsection after switching to a new section is subsection&nbsp;0.
@@ -306,7 +306,7 @@ the memory regions defined in the <tt>MEMORY{}</tt> part.
 
 \subsection sec_memory_regions Memory Regions
 
-The memory regions defined in the default linker script
+The <em>memory regions</em> defined in the default linker script
 model and correspond to the different kinds of memories of a device.
 
 <table>
@@ -733,7 +733,7 @@ empty ones, that are valid in a section name.
 
   const __memx int array1[] = { 1, 4, 9, 16, 25, 36 };
 
-  __attribute__((section (".progmemx.data.array2")))
+  PROGMEM_FAR
   const int array2[] = { 2, 3, 5, 7, 11, 13, 17 };
 
   int add (uint8_t id1, uint8_t id2)
@@ -779,7 +779,7 @@ avr-gcc ... -Tdata addr -Wl,--defsym,__DATA_REGION_START__=addr
 Note that <tt>addr</tt> must be \ref harvard_arch "offset" by adding
 0x800000 the to real SRAM address so that the linker knows that the address is
 in the SRAM memory segment. Thus, if you want the <tt>.data</tt> section
-to start at \c 0x1100, pass \c 0x801100 at the address to the linker.
+to start at \c 0x1100, pass \c 0x801100 as the address to the linker.
 
 \note
 When using \c malloc() in the application (which could even happen inside

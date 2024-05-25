@@ -261,7 +261,7 @@ $ echo '#include <avr/io.h>' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR
   \ref sec_input "input section".  This is used with
   <tt>-Wl,\--gc-sections</tt> so the linker can better garbage-collect
   unused sections, which are sections that are neither referenced by
-  other sections, nor are marked as \c KEEPctive, nor are referenced
+  other sections, nor are marked as \c KEEP, nor are referenced
   by an entry symbol.
 </dd>
 
