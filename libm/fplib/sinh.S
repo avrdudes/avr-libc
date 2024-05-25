@@ -59,6 +59,7 @@ ENTRY_FLOAT sinhf sinh sinhl
   ; for small x
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powsodd)
 	rjmp	2f
   ; expf(-fabsf(x))	// negative to exclude an extra inversion
@@ -91,7 +92,7 @@ ENTRY_FLOAT sinhf sinh sinhl
 	ret
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.sinh)
 .L_table:
 	.byte	2
 	.byte	     0x89,0x88,0x08,0x3c	; 1/120

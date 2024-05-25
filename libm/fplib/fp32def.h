@@ -24,8 +24,17 @@
 #endif
 #define FUNC_SEGNAME	MLIB_SECTION
 
-/* Put constant tables at low addresses in program memory, so they are
-   reachable for "lpm" without using RAMPZ on >64K devices.  */
-#define PGM_SECTION	.section  .progmem.gcc_fplib, "a", @progbits
+/* Put constant tables in .progmemx in program memory, so they
+   don't nibble on the lower 64K PROGMEM.  */
+#define PGMX_SECTION(x)	.section .progmemx.gcc_fplib##x, "a", @progbits
+
+#ifdef __AVR_HAVE_ELPM__
+#  if !defined(AVR_RAMPZ_ADDR)
+#  define AVR_RAMPZ_ADDR 0x3b
+#  endif
+#  define LDI_XH_hh8(sym)	ldi XH, hh8(sym)
+#else /* ELPM ? */
+#  define LDI_XH_hh8(sym)	/* empty */
+#endif /* ELPM ? */
 
 #endif	/* !_FP32DEF_H */

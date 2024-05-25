@@ -34,12 +34,13 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* flt40_t __fp_powser (float x, ZH.ZL);
+/* flt40_t __fp_powser (float x, [XH.]ZH.ZL);
      The __fp_powser() function calculates the polynom.
 
    Input:
      rA3.rA2.rA1.rA0	- an 'x' arg
-     ZH.ZL		- table address (in low 64K flash memory)
+     ZH.ZL		- table address
+     XH			- hh8(table address) on ELPM devices
    Output:
      rA3.rA2.rA1.rA0.rAE - result (is't rounded)
 
@@ -59,6 +60,25 @@
 #define	rC0	r14
 #define	rcntr	r13
 
+
+.macro .ELPM_Zplus reg
+#ifdef __AVR_HAVE_ELPMX__
+	elpm	\reg, Z+
+#elif defined(__AVR_HAVE_ELPM__)
+        elpm
+	mov	\reg, r0
+        adiw	r30, 1
+        brcc    .Lnoinc.\@
+	in	r0, AVR_RAMPZ_ADDR
+        inc	r0
+	out	AVR_RAMPZ_ADDR, r0
+.Lnoinc.\@:
+#else
+	X_lpm	\reg, Z+
+#endif
+.endm
+
+
 ENTRY __fp_powser
 	push	YH
 	push	YL
@@ -67,7 +87,9 @@ ENTRY __fp_powser
 	push	rC1
 	push	rC0
 	push	rcntr
-
+#ifdef __AVR_HAVE_ELPM__
+	out	AVR_RAMPZ_ADDR, XH
+#endif
 	X_movw	rC0, rA0
 	X_movw	rC2, rA2
 
@@ -81,11 +103,11 @@ ENTRY __fp_powser
 
 	clt
 .Load5:
-	X_lpm	rBE, Z+
-	X_lpm	rB0, Z+
-	X_lpm	rB1, Z+
-	X_lpm	rB2, Z+
-	X_lpm	rB3, Z+
+	.ELPM_Zplus	rBE
+	.ELPM_Zplus	rB0
+	.ELPM_Zplus	rB1
+	.ELPM_Zplus	rB2
+	.ELPM_Zplus	rB3
 	brts	1b
 
 	X_movw	YL, ZL
@@ -104,6 +126,9 @@ ENTRY __fp_powser
 	pop	rC3
 	pop	YL
 	pop	YH
+#if defined(__AVR_HAVE_ELPM__) && defined (__AVR_HAVE_RAMPD__)
+	out	AVR_RAMPZ_ADDR, r1
+#endif
 	ret
 ENDFUNC
 

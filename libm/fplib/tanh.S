@@ -64,6 +64,7 @@ ENTRY_FLOAT tanhf tanh tanhl
   ; for small x
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powsodd)
 	rjmp	2f
   ; exp(-2*fabs(x))
@@ -110,7 +111,7 @@ ENTRY_FLOAT tanhf tanh tanhl
 	ret
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.tanh)
 .L_table:
 	.byte	2
 	.byte	     0x89,0x88,0x08,0x3e	; 2/15
