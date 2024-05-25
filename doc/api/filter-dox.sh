@@ -11,6 +11,4 @@ sed -e 's:__ATTR_ALWAYS_INLINE__:inline:g' \
     -e 's:__ATTR_MALLOC__::g' \
     -e 's:__extension__::g' \
     -e 's:__inline__:inline:g' \
-    -e 's:__progmem__:progmem:g' \
-    -e 's:__section__:section:g' \
     $1

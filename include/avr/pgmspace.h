@@ -108,6 +108,22 @@
 
 #endif	/* !__DOXYGEN__ */
 
+/**
+   \ingroup avr_pgmspace
+   \def PROGMEM_FAR
+
+   Attribute to use in order to declare an object being located in
+   far flash ROM.  This is similar to #PROGMEM, except that it puts
+   the static storage object in section
+   <tt>\ref sec_dot_progmemx ".progmemx.data"</tt>.
+   In order to access the object,
+   the <tt>pgm_read_*_far</tt> and \c _PF functions declare in this header
+   can be used.  In order to get its address, see pgm_get_far_address().
+
+   It only makes sense to put read-only objects in this section,
+   though there compiler does not diagnose when this is not the case.  */
+#define PROGMEM_FAR __attribute__((__section__(".progmemx.data")))
+
 #ifdef __DOXYGEN__
 
 /**
