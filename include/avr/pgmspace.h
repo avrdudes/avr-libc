@@ -1148,6 +1148,17 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 # define PSTR(s) (__extension__({static const char __c[] PROGMEM = (s); &__c[0];}))
 #endif /* DOXYGEN */
 
+#if defined(__DOXYGEN__)
+/** \ingroup avr_pgmspace
+    \def PSTR_FAR(str)
+
+    Used to declare a static far pointer to a string in far program space. */
+# define PSTR_FAR(str) ({ static const PROGMEM_FAR char c[] = (str); pgm_get_far_address(c[0]); })
+#else  /* !DOXYGEN */
+/* The real thing. */
+# define PSTR_FAR(s) (__extension__({static const char __c[] PROGMEM_FAR = (s); pgm_get_far_address(__c[0]);}))
+#endif /* DOXYGEN */
+
 #ifndef __DOXYGEN__
 
 /* These are used down the line for pgm_read_byte[_near] etc. */
