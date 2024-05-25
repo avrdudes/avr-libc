@@ -42,14 +42,21 @@
 #define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
 #endif
 
+/* For GCC built-ins, we should not define prototypes,
+   hence only document that stuff.  */
+#ifdef __DOXYGEN__
+
 /** \file */
-/** \defgroup avr_builtins <avr/builtins.h>: GCC builtins
+/** \defgroup avr_builtins <avr/builtins.h>: avr-gcc builtins documentation
     \code #include <avr/builtins.h> \endcode
 
-    This header file declares AVR builtins.
-    All the functions documented here are built into the
-    compiler, and cause it to emit the corresponding assembly
-    code instructions.
+    \note This file only documents some avr-gcc builtins.
+    For functions built-in in the compiler, there should be no
+    prototype declarations.
+
+    See also the
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html"
+       >GCC documentation</a> for a full list of avr-gcc builtins.
 */
 
 /**
@@ -81,33 +88,33 @@ extern void __builtin_avr_wdr(void);
     \ingroup avr_builtins
 
     Emits a SWAP (nibble swap) instruction on __b.  */
-extern unsigned char __builtin_avr_swap(unsigned char __b);
+extern uint8_t __builtin_avr_swap(uint8_t __b);
 
 /**
     \ingroup avr_builtins
 
     Emits an FMUL (fractional multiply unsigned) instruction.  */
-extern unsigned int __builtin_avr_fmul(unsigned char __a, unsigned char __b);
+extern uint16_t __builtin_avr_fmul(uint8_t __a, uint8_t __b);
 
 /**
     \ingroup avr_builtins
 
     Emits an FMUL (fractional multiply signed) instruction.  */
-extern int __builtin_avr_fmuls(char __a, char __b);
+extern int16_t __builtin_avr_fmuls(int8_t __a, int8_t __b);
 
 /**
     \ingroup avr_builtins
 
     Emits an FMUL (fractional multiply signed with unsigned) instruction.  */
-extern int __builtin_avr_fmulsu(char __a, unsigned char __b);
+extern int16_t __builtin_avr_fmulsu(int8_t __a, uint8_t __b);
 
-#if __HAS_DELAY_CYCLES || defined(__DOXYGEN__)
+#if __HAS_DELAY_CYCLES
 /**
     \ingroup avr_builtins
 
     Emits a sequence of instructions causing the CPU to spend
     \c __n cycles on it.  */
-extern void __builtin_avr_delay_cycles(unsigned long __n);
+extern void __builtin_avr_delay_cycles(uint32_t __n);
 #endif
-
+#endif /* DOXYGEN */
 #endif /* _AVR_BUILTINS_H_ */

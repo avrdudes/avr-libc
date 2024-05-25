@@ -791,6 +791,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/avr/signature.h \
                          @top_srcdir@/include/avr/sleep.h \
                          @top_builddir@/include/avr/version.h \
+                         @top_builddir@/include/avr/builtins.h \
                          @top_srcdir@/include/avr/xmega.h \
                          @top_srcdir@/include/avr/wdt.h \
                          @top_builddir@/include/util/delay.h \
