@@ -41,6 +41,15 @@
 # When it is not present, you can generate it with, say
 #
 #    (cd $AVRTEST_HOME; make exit-<mcu>.o)
+#
+# Use
+#
+#     EXTRA_CFLAGS="..." ./run-avrtest.sh ...
+#
+# in order to add additional CFLAGS.
+# In order to replace the CFLAGS below entirely, use
+#
+#     CFLAGS="..." ./run-avrtest.sh ...
 
 
 ##########################################################################
@@ -155,7 +164,7 @@ test_list=${*:-"time/*.c regression/*.c stdlib/*.c string/*.c pmstring/*.c \
 CPPFLAGS="-Wundef -I."
 # -Wno-array-bounds: Ditch wrong warnings due to avr-gcc PR105523.
 # This works with more GCC versions than --param=min-pagesize=0.
-CFLAGS=${CFLAGS-"-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds"}
+CFLAGS=${CFLAGS-"-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds ${CFLAGS_EXTRA}"}
 HOST_CC=gcc
 HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
 
