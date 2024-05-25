@@ -35,6 +35,8 @@
 
   - Added support for: strndup.
 
+  - Added support for: strchr_PF.
+
   - Added support for ccp_write_spm() in avr/cpufunc.h
 
   - The delay routines no more include math.h but use built-in functions

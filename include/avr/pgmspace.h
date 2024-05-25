@@ -1914,6 +1914,23 @@ extern int strcasecmp_PF(const char *s1, uint_farptr_t s2) __ATTR_PURE__;
 extern int strncasecmp_PF(const char *s1, uint_farptr_t s2, size_t n) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
+    \fn uint_farptr_t strchr_PF(uint_farptr_t s, int val)
+    \brief Locate character in far program space string.
+
+    The strchr_PF() function locates the first occurrence of \p val
+    (converted to a char) in the string pointed to by \p s in far program
+    space. The terminating null character is considered to be part of
+    the string.
+
+    The strchr_PF() function is similar to strchr() except that \p s is
+    a far pointer to a string in program space that's \e not \e required to be
+    located in the lower 64 KiB block like it is the case  for strchr_P().
+
+    \returns The strchr_PF() function returns a far pointer to the matched
+    character or \c 0 if the character is not found. */
+extern uint_farptr_t strchr_PF(uint_farptr_t, int __val) __ATTR_CONST__;
+
+/** \ingroup avr_pgmspace
     \fn char *strstr_PF(const char *s1, uint_farptr_t s2)
     \brief Locate a substring.
 

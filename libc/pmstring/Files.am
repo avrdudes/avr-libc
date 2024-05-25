@@ -72,6 +72,7 @@ pmstring_a_asm_sources = \
 	strncmp_PF.S \
 	strncpy_PF.S \
 	strnlen_PF.S \
+	strchr_PF.S \
 	strstr_PF.S \
 	memcmp_PF.S
 
