@@ -826,8 +826,14 @@ int vfscanf (FILE * stream, const char *fmt, va_list ap)
 # define CNV_FLOAT	""
 #endif
 #define CNV_LIST	CNV_BASE CNV_BRACKET CNV_FLOAT
+
+#ifndef __AVR_HAVE_ELPM__
 	    if (!c || !strchr_P (PSTR (CNV_LIST), c))
 		break;
+#else
+	    if (!c || !strchr_PF (PSTR_FAR (CNV_LIST), c))
+		break;
+#endif
 
 	    addr = (flags & FL_STAR) ? 0 : va_arg (ap, void *);
 
