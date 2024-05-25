@@ -39,16 +39,21 @@
 #  ifndef __HAS_DELAY_CYCLES
 #    define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
 #  endif
+
+#  ifndef __ATTR_ALWAYS_INLINE__
+#    define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#  endif
+
 #endif  /* __DOXYGEN__ */
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <util/delay_basic.h>
 
 /** \file */
 /** \defgroup util_delay <util/delay.h>: Convenience functions for busy-wait delay loops
     \code
     #define F_CPU 1000000UL  // 1 MHz
-    //#define F_CPU 14.7456E6
+    //#define F_CPU 14.7456e6
     #include <util/delay.h>
     \endcode
 
@@ -58,7 +63,7 @@
     used.
 
     The functions in this header file are wrappers around the basic
-    busy-wait functions from <util/delay_basic.h>.  They are meant as
+    busy-wait functions from <tt>\<util/delay_basic.h\></tt>.  They are meant as
     convenience functions where actual time values can be specified
     rather than a number of cycles to wait for.  The idea behind is
     that compile-time constant expressions will be eliminated by
@@ -80,10 +85,6 @@
     F_CPU as the CPU clock frequency (in Hertz).
 */
 
-#if !defined(__DOXYGEN__)
-static __inline__ void _delay_us(double __us) __attribute__((__always_inline__));
-static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__));
-#endif
 
 #ifndef F_CPU
 /* prevent compiler error by supplying a default */
@@ -99,7 +100,7 @@ static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__))
     fallback if no such user-provided definition could be found.
 
     In terms of the delay functions, the CPU frequency can be given as
-    a floating-point constant (e.g. 3.6864E6 for 3.6864 MHz).
+    a floating-point constant (e.g. 3.6864e6 for 3.6864 MHz).
     However, the macros in <util/setbaud.h> require it to be an
     integer value.
  */
@@ -115,24 +116,24 @@ static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__))
 
    Perform a delay of \c __ms milliseconds, using _delay_loop_2().
 
-   The macro F_CPU is supposed to be defined to a
+   The macro #F_CPU is supposed to be defined to a
    constant defining the CPU clock frequency (in Hertz).
 
    The maximal possible delay is 262.14 ms / F_CPU in MHz.
 
    When the user request delay which exceed the maximum possible one,
    _delay_ms() provides a decreased resolution functionality. In this
-   mode _delay_ms() will work with a resolution of 1/10 ms, providing
+   mode _delay_ms() will work with a resolution of 1/10&nbsp;ms, providing
    delays up to 6.5535 seconds (independent from CPU frequency).  The
    user will not be informed about decreased resolution.
 
-   If the avr-gcc toolchain has __builtin_avr_delay_cycles()
+   If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
    support, maximal possible delay is 4294967.295 ms/ F_CPU in MHz. For
-   values greater than the maximal possible delay, overflows results in
-   no delay i.e., 0ms.
+   values greater than the maximal possible delay, overflow may result in
+   no delay i.e., 0&nbsp;ms.
 
    Conversion of \c __ms into clock cycles may not always result in
-   integer.  By default, the clock cycles rounded up to next
+   an integral value.  By default, the clock cycles are rounded up to the next
    integer. This ensures that the user gets at least \c __ms
    microseconds of delay.
 
@@ -141,14 +142,14 @@ static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__))
    algorithm can be made to round down, or round to closest integer,
    respectively.
 
-   \note
-
-   The implementation of _delay_ms() based on
-   __builtin_avr_delay_cycles() is not backward compatible with older
+   \note The implementation of _delay_ms() based on
+   \c __builtin_avr_delay_cycles() is not backward compatible with older
    implementations.  In order to get functionality backward compatible
-   with previous versions, the macro \c "__DELAY_BACKWARD_COMPATIBLE__"
+   with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__
    must be defined before including this header file.
  */
+static __ATTR_ALWAYS_INLINE__ void _delay_ms(double __ms);
+
 void
 _delay_ms(double __ms)
 {
@@ -200,22 +201,22 @@ _delay_ms(double __ms)
 
    Perform a delay of \c __us microseconds, using _delay_loop_1().
 
-   The macro F_CPU is supposed to be defined to a
+   The macro #F_CPU is supposed to be defined to a
    constant defining the CPU clock frequency (in Hertz).
 
-   The maximal possible delay is 768 us / F_CPU in MHz.
+   The maximal possible delay is 768 &mu;s / F_CPU in MHz.
 
    If the user requests a delay greater than the maximal possible one,
    _delay_us() will automatically call _delay_ms() instead.  The user
    will not be informed about this case.
 
    If the avr-gcc toolchain has __builtin_avr_delay_cycles()
-   support, maximal possible delay is 4294967.295 us/ F_CPU in MHz. For
-   values greater than the maximal possible delay, overflow results in
-   no delay i.e., 0us.
+   support, maximal possible delay is 4294967.295 &mu;s/ F_CPU in MHz. For
+   values greater than the maximal possible delay, overflow may result in
+   no delay i.e., 0&nbsp;&mu;s.
 
    Conversion of \c __us into clock cycles may not always result in
-   integer.  By default, the clock cycles rounded up to next
+   integer.  By default, the clock cycles are rounded up to next
    integer. This ensures that the user gets at least \c __us
    microseconds of delay.
 
@@ -224,14 +225,14 @@ _delay_ms(double __ms)
    algorithm can be made to round down, or round to closest integer,
    respectively.
 
-   \note
-
-   The implementation of _delay_ms() based on
-   __builtin_avr_delay_cycles() is not backward compatible with older
+   \note The implementation of _delay_us() based on
+   \c __builtin_avr_delay_cycles() is not backward compatible with older
    implementations.  In order to get functionality backward compatible
    with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__
    must be defined before including this header file.
  */
+static __ATTR_ALWAYS_INLINE__ void _delay_us(double __us);
+
 void
 _delay_us(double __us)
 {
