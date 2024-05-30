@@ -42,6 +42,7 @@
 #endif /* ! DOXYGEN */
 
 /** \file */
+/**@{*/
 /** \defgroup avr_power <avr/power.h>: Power Reduction Management
 
 \code #include <avr/power.h>\endcode
@@ -72,7 +73,6 @@ the clock below 131.072 kHz.
 
 */
 
-
 /** \addtogroup avr_power */
 /**@{*/
 /**
@@ -83,465 +83,375 @@ the clock below 131.072 kHz.
     <th>Power Macro
     <th>Description
   </tr>
-
   <tr>
-    <td>power_aca_disable()</td>
-    <td>Disable the Analog Comparator on PortA.</td>
+    <td>\c power_aca_disable()</td>
+    <td>Disable the Analog Comparator on PortA</td>
   </tr>
-
   <tr>
-    <td>power_aca_enable()</td>
-    <td>Enable the Analog Comparator on PortA.</td>
+    <td>\c power_aca_enable()</td>
+    <td>Enable the Analog Comparator on PortA</td>
   </tr>
-
   <tr>
-    <td>power_adc_enable()</td>
-    <td>Enable the Analog to Digital Converter module.</td>
+    <td>\c power_adc_enable()</td>
+    <td>Enable the Analog to Digital Converter module</td>
   </tr>
-
   <tr>
-    <td>power_adc_disable()</td>
-    <td>Disable the Analog to Digital Converter module.</td>
+    <td>\c power_adc_disable()</td>
+    <td>Disable the Analog to Digital Converter module</td>
   </tr>
-
   <tr>
-    <td>power_adca_disable()</td>
+    <td>\c power_adca_disable()</td>
     <td>Disable the Analog to Digital Converter module on PortA</td>
   </tr>
-
   <tr>
-    <td>power_adca_enable()</td>
+    <td>\c power_adca_enable()</td>
     <td>Enable the Analog to Digital Converter module on PortA</td>
   </tr>
-
   <tr>
-    <td>power_evsys_disable()</td>
+    <td>\c power_evsys_disable()</td>
     <td>Disable the EVSYS module</td>
   </tr>
-
   <tr>
-    <td>power_evsys_enable()</td>
+    <td>\c power_evsys_enable()</td>
     <td>Enable the EVSYS module</td>
   </tr>
-
   <tr>
-    <td>power_hiresc_disable()</td>
+    <td>\c power_hiresc_disable()</td>
     <td>Disable the HIRES module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_hiresc_enable()</td>
+    <td>\c power_hiresc_enable()</td>
     <td>Enable the HIRES module on PortC</td>
   </tr>
 
    <tr>
-    <td>power_lcd_enable()</td>
-    <td>Enable the LCD module.</td>
+    <td>\c power_lcd_enable()</td>
+    <td>Enable the LCD module</td>
   </tr>
-
   <tr>
-    <td>power_lcd_disable().</td>
-    <td>Disable the LCD module.</td>
+    <td>\c power_lcd_disable()</td>
+    <td>Disable the LCD module</td>
   </tr>
-
   <tr>
-    <td>power_pga_enable()</td>
-    <td>Enable the Programmable Gain Amplifier module.</td>
+    <td>\c power_pga_enable()</td>
+    <td>Enable the Programmable Gain Amplifier module</td>
   </tr>
-
   <tr>
-    <td>power_pga_disable()</td>
-    <td>Disable the Programmable Gain Amplifier module.</td>
+    <td>\c power_pga_disable()</td>
+    <td>Disable the Programmable Gain Amplifier module</td>
   </tr>
   
   <tr>
-    <td>power_pscr_enable()</td>
-    <td>Enable the Reduced Power Stage Controller module.</td>
+    <td>\c power_pscr_enable()</td>
+    <td>Enable the Reduced Power Stage Controller module</td>
   </tr>
-
   <tr>
-    <td>power_pscr_disable()</td>
-    <td>Disable the Reduced Power Stage Controller module.</td>
+    <td>\c power_pscr_disable()</td>
+    <td>Disable the Reduced Power Stage Controller module</td>
   </tr>
-
   <tr>
-    <td>power_psc0_enable()</td>
-    <td>Enable the Power Stage Controller 0 module.</td>
+    <td>\c power_psc0_enable()</td>
+    <td>Enable the Power Stage Controller 0 module</td>
   </tr>
-
   <tr>
-    <td>power_psc0_disable()</td>
-    <td>Disable the Power Stage Controller 0 module.</td>
+    <td>\c power_psc0_disable()</td>
+    <td>Disable the Power Stage Controller 0 module</td>
   </tr>
-
   <tr>
-    <td>power_psc1_enable()</td>
-    <td>Enable the Power Stage Controller 1 module.</td>
+    <td>\c power_psc1_enable()</td>
+    <td>Enable the Power Stage Controller 1 module</td>
   </tr>
-
   <tr>
-    <td>power_psc1_disable()</td>
-    <td>Disable the Power Stage Controller 1 module.</td>
+    <td>\c power_psc1_disable()</td>
+    <td>Disable the Power Stage Controller 1 module</td>
   </tr>
-
   <tr>
-    <td>power_psc2_enable()</td>
-    <td>Enable the Power Stage Controller 2 module.</td>
+    <td>\c power_psc2_enable()</td>
+    <td>Enable the Power Stage Controller 2 module</td>
   </tr>
-
   <tr>
-    <td>power_psc2_disable()</td>
-    <td>Disable the Power Stage Controller 2 module.</td>
+    <td>\c power_psc2_disable()</td>
+    <td>Disable the Power Stage Controller 2 module</td>
   </tr>
-
   <tr>
-    <td>power_ram0_enable()</td>
-    <td>Enable the SRAM block 0 .</td>
+    <td>\c power_ram0_enable()</td>
+    <td>Enable the SRAM block 0</td>
   </tr>
-
   <tr>
-    <td>power_ram0_disable()</td>
-    <td>Disable the SRAM block 0. </td>
+    <td>\c power_ram0_disable()</td>
+    <td>Disable the SRAM block 0</td>
   </tr>
-
   <tr>
-    <td>power_ram1_enable()</td>
-    <td>Enable the SRAM block 1 .</td>
+    <td>\c power_ram1_enable()</td>
+    <td>Enable the SRAM block 1</td>
   </tr>
-
   <tr>
-    <td>power_ram1_disable()</td>
-    <td>Disable the SRAM block 1. </td>
+    <td>\c power_ram1_disable()</td>
+    <td>Disable the SRAM block 1</td>
   </tr>
-
   <tr>
-    <td>power_ram2_enable()</td>
-    <td>Enable the SRAM block 2 .</td>
+    <td>\c power_ram2_enable()</td>
+    <td>Enable the SRAM block 2</td>
   </tr>
-
   <tr>
-    <td>power_ram2_disable()</td>
-    <td>Disable the SRAM block 2. </td>
+    <td>\c power_ram2_disable()</td>
+    <td>Disable the SRAM block 2</td>
   </tr>
-
   <tr>
-    <td>power_ram3_enable()</td>
-    <td>Enable the SRAM block 3 .</td>
+    <td>\c power_ram3_enable()</td>
+    <td>Enable the SRAM block 3</td>
   </tr>
-
   <tr>
-    <td>power_ram3_disable()</td>
-    <td>Disable the SRAM block 3. </td>
+    <td>\c power_ram3_disable()</td>
+    <td>Disable the SRAM block 3</td>
   </tr>
-
   <tr>
-    <td>power_rtc_disable()</td>
+    <td>\c power_rtc_disable()</td>
     <td>Disable the RTC module</td>
   </tr>
-
   <tr>
-    <td>power_rtc_enable()</td>
+    <td>\c power_rtc_enable()</td>
     <td>Enable the RTC module</td>
   </tr>
-
   <tr>
-    <td>power_spi_enable()</td>
-    <td>Enable the Serial Peripheral Interface module.</td>
+    <td>\c power_spi_enable()</td>
+    <td>Enable the Serial Peripheral Interface module</td>
   </tr>
-
   <tr>
-    <td>power_spi_disable()</td>
-    <td>Disable the Serial Peripheral Interface module.</td>
+    <td>\c power_spi_disable()</td>
+    <td>Disable the Serial Peripheral Interface module</td>
   </tr>
-
   <tr>
-    <td>power_spic_disable()</td>
+    <td>\c power_spic_disable()</td>
     <td>Disable the SPI module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_spic_enable()</td>
+    <td>\c power_spic_enable()</td>
     <td>Enable the SPI module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_spid_disable()</td>
+    <td>\c power_spid_disable()</td>
     <td>Disable the SPI module on PortD</td>
   </tr>
-
   <tr>
-    <td>power_spid_enable()</td>
+    <td>\c power_spid_enable()</td>
     <td>Enable the SPI module on PortD</td>
   </tr>
-
   <tr>
-    <td>power_tc0c_disable()</td>
+    <td>\c power_tc0c_disable()</td>
     <td>Disable the TC0 module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_tc0c_enable()</td>
+    <td>\c power_tc0c_enable()</td>
     <td>Enable the TC0 module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_tc0d_disable()</td>
+    <td>\c power_tc0d_disable()</td>
     <td>Disable the TC0 module on PortD</td>
   </tr>
-
   <tr>
-    <td>power_tc0d_enable()</td>
+    <td>\c power_tc0d_enable()</td>
     <td>Enable the TC0 module on PortD</td>
   </tr>
-
   <tr>
-    <td>power_tc0e_disable()</td>
+    <td>\c power_tc0e_disable()</td>
     <td>Disable the TC0 module on PortE</td>
   </tr>
-
   <tr>
-    <td>power_tc0e_enable()</td>
+    <td>\c power_tc0e_enable()</td>
     <td>Enable the TC0 module on PortE</td>
   </tr>
-
   <tr>
-    <td>power_tc0f_disable()</td>
+    <td>\c power_tc0f_disable()</td>
     <td>Disable the TC0 module on PortF</td>
   </tr>
-
   <tr>
-    <td>power_tc0f_enable()</td>
+    <td>\c power_tc0f_enable()</td>
     <td>Enable the TC0 module on PortF</td>
   </tr>
-
   <tr>
-    <td>power_tc1c_disable()</td>
+    <td>\c power_tc1c_disable()</td>
     <td>Disable the TC1 module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_tc1c_enable()</td>
+    <td>\c power_tc1c_enable()</td>
     <td>Enable the TC1 module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_twic_disable()</td>
+    <td>\c power_twic_disable()</td>
     <td>Disable the Two Wire Interface module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_twic_enable()</td>
+    <td>\c power_twic_enable()</td>
     <td>Enable the Two Wire Interface module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_twie_disable()</td>
+    <td>\c power_twie_disable()</td>
     <td>Disable the Two Wire Interface module on PortE</td>
   </tr>
-
   <tr>
-    <td>power_twie_enable()</td>
+    <td>\c power_twie_enable()</td>
     <td>Enable the Two Wire Interface module on PortE</td>
   </tr>
-
   <tr>
-    <td>power_timer0_enable()</td>
-    <td>Enable the Timer 0 module.</td>
+    <td>\c power_timer0_enable()</td>
+    <td>Enable the Timer 0 module</td>
   </tr>
-
   <tr>
-    <td>power_timer0_disable()</td>
-    <td>Disable the Timer 0 module.</td>
+    <td>\c power_timer0_disable()</td>
+    <td>Disable the Timer 0 module</td>
   </tr>
-
   <tr>
-    <td>power_timer1_enable()</td>
-    <td>Enable the Timer 1 module.</td>
+    <td>\c power_timer1_enable()</td>
+    <td>Enable the Timer 1 module</td>
   </tr>
-
   <tr>
-    <td>power_timer1_disable()</td>
-    <td>Disable the Timer 1 module.</td>
+    <td>\c power_timer1_disable()</td>
+    <td>Disable the Timer 1 module</td>
   </tr>
-
   <tr>
-    <td>power_timer2_enable()</td>
-    <td>Enable the Timer 2 module.</td>
+    <td>\c power_timer2_enable()</td>
+    <td>Enable the Timer 2 module</td>
   </tr>
-
   <tr>
-    <td>power_timer2_disable()</td>
-    <td>Disable the Timer 2 module.</td>
+    <td>\c power_timer2_disable()</td>
+    <td>Disable the Timer 2 module</td>
   </tr>
-
   <tr>
-    <td>power_timer3_enable()</td>
-    <td>Enable the Timer 3 module.</td>
+    <td>\c power_timer3_enable()</td>
+    <td>Enable the Timer 3 module</td>
   </tr>
-
   <tr>
-    <td>power_timer3_disable()</td>
-    <td>Disable the Timer 3 module.</td>
+    <td>\c power_timer3_disable()</td>
+    <td>Disable the Timer 3 module</td>
   </tr>
-
   <tr>
-    <td>power_timer4_enable()</td>
-    <td>Enable the Timer 4 module.</td>
+    <td>\c power_timer4_enable()</td>
+    <td>Enable the Timer 4 module</td>
   </tr>
-
   <tr>
-    <td>power_timer4_disable()</td>
-    <td>Disable the Timer 4 module.</td>
+    <td>\c power_timer4_disable()</td>
+    <td>Disable the Timer 4 module</td>
   </tr>
-
   <tr>
-    <td>power_timer5_enable()</td>
-    <td>Enable the Timer 5 module.</td>
+    <td>\c power_timer5_enable()</td>
+    <td>Enable the Timer 5 module</td>
   </tr>
-
   <tr>
-    <td>power_timer5_disable()</td>
-    <td>Disable the Timer 5 module.</td>
+    <td>\c power_timer5_disable()</td>
+    <td>Disable the Timer 5 module</td>
   </tr>
-
   <tr>
-    <td>power_twi_enable()</td>
-    <td>Enable the Two Wire Interface module.</td>
+    <td>\c power_twi_enable()</td>
+    <td>Enable the Two Wire Interface module</td>
   </tr>
-
   <tr>
-    <td>power_twi_disable()</td>
-    <td>Disable the Two Wire Interface module.</td>
+    <td>\c power_twi_disable()</td>
+    <td>Disable the Two Wire Interface module</td>
   </tr>
-
   <tr>
-    <td>power_usart_enable()</td>
-    <td>Enable the USART module.</td>
+    <td>\c power_usart_enable()</td>
+    <td>Enable the USART module</td>
   </tr>
-
   <tr>
-    <td>power_usart_disable()</td>
-    <td>Disable the USART module.</td>
+    <td>\c power_usart_disable()</td>
+    <td>Disable the USART module</td>
   </tr>
-
   <tr>
-    <td>power_usart0_enable()</td>
-    <td>Enable the USART 0 module.</td>
+    <td>\c power_usart0_enable()</td>
+    <td>Enable the USART 0 module</td>
   </tr>
-
   <tr>
-    <td>power_usart0_disable()</td>
-    <td>Disable the USART 0 module.</td>
+    <td>\c power_usart0_disable()</td>
+    <td>Disable the USART 0 module</td>
   </tr>
-
   <tr>
-    <td>power_usart1_enable()</td>
-    <td>Enable the USART 1 module.</td>
+    <td>\c power_usart1_enable()</td>
+    <td>Enable the USART 1 module</td>
   </tr>
-
   <tr>
-    <td>power_usart1_disable()</td>
-    <td>Disable the USART 1 module.</td>
+    <td>\c power_usart1_disable()</td>
+    <td>Disable the USART 1 module</td>
   </tr>
-
   <tr>
-    <td>power_usart2_enable()</td>
-    <td>Enable the USART 2 module.</td>
+    <td>\c power_usart2_enable()</td>
+    <td>Enable the USART 2 module</td>
   </tr>
-
   <tr>
-    <td>power_usart2_disable()</td>
-    <td>Disable the USART 2 module.</td>
+    <td>\c power_usart2_disable()</td>
+    <td>Disable the USART 2 module</td>
   </tr>
-
   <tr>
-    <td>power_usart3_enable()</td>
-    <td>Enable the USART 3 module.</td>
+    <td>\c power_usart3_enable()</td>
+    <td>Enable the USART 3 module</td>
   </tr>
-
   <tr>
-    <td>power_usart3_disable()</td>
-    <td>Disable the USART 3 module.</td>
+    <td>\c power_usart3_disable()</td>
+    <td>Disable the USART 3 module</td>
   </tr>
-
   <tr>
-    <td>power_usartc0_disable()</td>
+    <td>\c power_usartc0_disable()</td>
     <td> Disable the USART0 module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_usartc0_enable()</td>
+    <td>\c power_usartc0_enable()</td>
     <td> Enable the USART0 module on PortC</td>
   </tr>
-
   <tr>
-    <td>power_usartd0_disable()</td>
+    <td>\c power_usartd0_disable()</td>
     <td> Disable the USART0 module on PortD</td>
   </tr>
-
   <tr>
-    <td>power_usartd0_enable()</td>
+    <td>\c power_usartd0_enable()</td>
     <td> Enable the USART0 module on PortD</td>
   </tr>
-
   <tr>
-    <td>power_usarte0_disable()</td>
+    <td>\c power_usarte0_disable()</td>
     <td> Disable the USART0 module on PortE</td>
   </tr>
-
   <tr>
-    <td>power_usarte0_enable()</td>
+    <td>\c power_usarte0_enable()</td>
     <td> Enable the USART0 module on PortE</td>
   </tr>
-
   <tr>
-    <td>power_usartf0_disable()</td>
+    <td>\c power_usartf0_disable()</td>
     <td> Disable the USART0 module on PortF</td>
   </tr>
-
   <tr>
-    <td>power_usartf0_enable()</td>
+    <td>\c power_usartf0_enable()</td>
     <td> Enable the USART0 module on PortF</td>
   </tr>
-
   <tr>
-    <td>power_usb_enable()</td>
-    <td>Enable the USB module.</td>
+    <td>\c power_usb_enable()</td>
+    <td>Enable the USB module</td>
   </tr>
-
   <tr>
-    <td>power_usb_disable()</td>
-    <td>Disable the USB module.</td>
+    <td>\c power_usb_disable()</td>
+    <td>Disable the USB module</td>
   </tr>
-
   <tr>
-    <td>power_usi_enable()</td>
-    <td>Enable the Universal Serial Interface module.</td>
+    <td>\c power_usi_enable()</td>
+    <td>Enable the Universal Serial Interface module</td>
   </tr>
-
   <tr>
-    <td>power_usi_disable()</td>
-    <td>Disable the Universal Serial Interface module.</td>
+    <td>\c power_usi_disable()</td>
+    <td>Disable the Universal Serial Interface module</td>
   </tr>
-
   <tr>
-    <td>power_vadc_enable()</td>
-    <td>Enable the Voltage ADC module.</td>
+    <td>\c power_vadc_enable()</td>
+    <td>Enable the Voltage ADC module</td>
   </tr>
-
   <tr>
-    <td>power_vadc_disable()</td>
-    <td>Disable the Voltage ADC module.</td>
+    <td>\c power_vadc_disable()</td>
+    <td>Disable the Voltage ADC module</td>
   </tr>
-
   <tr>
-    <td>power_all_enable()</td>
-    <td>Enable all modules.</td>
+    <td>\c power_all_enable()</td>
+    <td>Enable all modules</td>
   </tr>
-
   <tr>
-    <td>power_all_disable()</td>
-    <td>Disable all modules.</td>
+    <td>\c power_all_disable()</td>
+    <td>Disable all modules</td>
   </tr>
 </table>
 </small>
@@ -1188,8 +1098,7 @@ the clock below 131.072 kHz.
 #define power_usartf1_disable() (PR_PRPF |= (uint8_t)PR_USART1_bm)
 #endif
 
-static __ATTR_ALWAYS_INLINE__ void
-__power_all_enable()
+static __ATTR_ALWAYS_INLINE__ void __power_all_enable()
 {
 #ifdef __AVR_HAVE_PRR
     PRR &= (uint8_t)~(__AVR_HAVE_PRR);
@@ -1236,8 +1145,7 @@ __power_all_enable()
 #endif
 }
 
-static __ATTR_ALWAYS_INLINE__ void
-__power_all_disable()
+static __ATTR_ALWAYS_INLINE__ void __power_all_disable()
 {
 #ifdef __AVR_HAVE_PRR
     PRR |= (uint8_t)(__AVR_HAVE_PRR);
@@ -1295,7 +1203,8 @@ __power_all_disable()
 #endif	/* !__DOXYGEN__ */
 
 
-#if defined(__AVR_AT90CAN32__) \
+#if defined(__DOXYGEN__) \
+|| defined(__AVR_AT90CAN32__) \
 || defined(__AVR_AT90CAN64__) \
 || defined(__AVR_AT90CAN128__) \
 || defined(__AVR_AT90PWM1__) \
@@ -1408,8 +1317,7 @@ __power_all_disable()
 || defined(__AVR_ATtiny48__) \
 || defined(__AVR_ATtiny88__) \
 || defined(__AVR_ATtiny87__) \
-|| defined(__AVR_ATtiny167__) \
-|| defined(__DOXYGEN__)
+|| defined(__AVR_ATtiny167__)
 
 
 /** \addtogroup avr_power
