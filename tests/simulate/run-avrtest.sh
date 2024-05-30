@@ -349,7 +349,7 @@ Compile ()
                     | sed -e 's:/:_:g'      \
                     | sed -e 's:-:_:g')
       crt=crt$2.o
-      flags="-isystem $AVRDIR/include -nostdlib"
+      flags="-I../../include -I $AVRDIR/include -nostdlib"
       crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
       libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
             $AVRDIR/avr/lib/$multilibdir/libm.a \
