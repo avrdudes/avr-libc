@@ -59,6 +59,10 @@
 
   - Added EEPROM support for: double, long double, uint64_t (*_qword).
 
+  - AVR LibC does not use section .progmem.* any more for lookup tables and
+    string literals.  Instead, .progmemx.* is used which does not require
+    that the data resides in the lower 64 KiB of program memory (Issue #962).
+
 * Issues closed:
 
   - [patch #9543] Add avrxmega3 devices. #824
