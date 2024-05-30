@@ -1,7 +1,7 @@
 /*
-  $ CFLAGS_EXTRA="-include high-progmemx.h" ./run-avrtest.sh ...
+  Used per "-include high-progmemx.h" by run-avrtest.sh
 
-  will force .progmemx to a high address.
+  Will force .progmemx to a high address.
 */
 
 #ifdef __AVR_HAVE_ELPM__

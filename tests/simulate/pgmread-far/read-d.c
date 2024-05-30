@@ -7,11 +7,7 @@ int main (void) { return 0; }
 
 #define VAL (-1.125)
 
-#ifdef __AVR_HAVE_ELPM__
-__attribute__((__section__(".mydata")))
-#else
-PROGMEM
-#endif
+PROGMEM_FAR
 const double data[] = { VAL, -3 * VAL, 77 * VAL };
 
 double get_val (uint8_t i)

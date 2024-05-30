@@ -7,11 +7,7 @@
 #define VAL 0x0105
 #endif
 
-#ifdef __AVR_HAVE_ELPM__
-__attribute__((__section__(".mydata")))
-#else
-PROGMEM
-#endif
+PROGMEM_FAR
 const long data[] = { -VAL, -2 * VAL, -7 * VAL };
 
 long get_val (uint8_t i)

@@ -3,11 +3,7 @@
 
 #define VAL 0x11
 
-#ifdef __AVR_HAVE_ELPM__
-__attribute__((__section__(".mydata")))
-#else
-PROGMEM
-#endif
+PROGMEM_FAR
 const unsigned char data[] = { VAL, 2 * VAL, 7 * VAL };
 
 unsigned char get_val (uint8_t i)

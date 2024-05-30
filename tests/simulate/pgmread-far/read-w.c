@@ -8,11 +8,7 @@
 
 #define VAL 0x0105
 
-#ifdef __AVR_HAVE_ELPM__
-__attribute__((__section__(".mydata")))
-#else
-PROGMEM
-#endif
+PROGMEM_FAR
 const uint16_t data[] = { VAL, 2 * VAL, 7 * VAL };
 
 uint16_t get_val (uint8_t i)

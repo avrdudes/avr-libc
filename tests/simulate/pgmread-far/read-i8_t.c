@@ -3,11 +3,7 @@
 
 #define VAL 0x11
 
-#ifdef __AVR_HAVE_ELPM__
-__attribute__((__section__(".mydata")))
-#else
-PROGMEM
-#endif
+PROGMEM_FAR
 const int8_t data[] = { -VAL, -2 * VAL, -7 * VAL };
 
 int8_t get_val (uint8_t i)
