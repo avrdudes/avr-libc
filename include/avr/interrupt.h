@@ -63,7 +63,6 @@
     respect to compiler optimizations.
 */
 
-#if defined(__DOXYGEN__)
 /** \def sei()
     \ingroup avr_interrupts
 
@@ -76,12 +75,8 @@
     consider using the macros from <util/atomic.h>, rather than
     implementing them manually with cli() and sei().
 */
-#define sei()
-#else  /* !DOXYGEN */
 # define sei()  __asm__ __volatile__ ("sei" ::: "memory")
-#endif /* DOXYGEN */
 
-#if defined(__DOXYGEN__)
 /** \def cli()
     \ingroup avr_interrupts
 
@@ -94,10 +89,7 @@
     consider using the macros from <util/atomic.h>, rather than
     implementing them manually with cli() and sei().
 */
-#define cli()
-#else  /* !DOXYGEN */
 # define cli()  __asm__ __volatile__ ("cli" ::: "memory")
-#endif /* DOXYGEN */
 
 
 /** \name Macros for writing interrupt handler functions */
@@ -173,7 +165,7 @@
     \ingroup avr_interrupts
 
     Defines an empty interrupt handler function. This will not generate
-    any prolog or epilog code and will only return from the ISR. Do not
+    any prolog or epilog code and will only return from the #ISR. Do not
     define a function body as this will define it for you.
     Example:
     \code EMPTY_INTERRUPT(ADC_vect);\endcode */
@@ -236,21 +228,20 @@
 
 #endif /* DOXYGEN */
 
-#if defined(__DOXYGEN__)
 /** \def reti()
     \ingroup avr_interrupts
 
     Returns from an interrupt routine, enabling global interrupts. This should
-    be the last command executed before leaving an ISR defined with the ISR_NAKED
-    attribute.
+    be the last command executed before leaving an #ISR defined with the
+    #ISR_NAKED attribute.
 
     This macro actually compiles into a single line of assembly, so there is
     no function call overhead.
+
+    \note According to the GCC documentation, the only code supported in
+    naked functions is \ref inline_asm "inline assembly".
 */
-#  define reti()
-#else  /* !DOXYGEN */
 #  define reti()  __asm__ __volatile__ ("reti" ::: "memory")
-#endif /* DOXYGEN */
 
 #if defined(__DOXYGEN__)
 /** \def BADISR_vect
@@ -259,7 +250,7 @@
     \code #include <avr/interrupt.h> \endcode
 
     This is a vector which is aliased to __vector_default, the vector
-    executed when an ISR fires with no accompanying ISR handler. This
+    executed when an IRQ fires with no accompanying ISR handler. This
     may be used along with the ISR() macro to create a catch-all for
     undefined but used ISRs for debugging purposes.
 */
@@ -308,6 +299,9 @@
     interrupt routine.
 
     Use this attribute in the attributes parameter of the #ISR macro.
+
+    \note According to GCC documentation, the only code supported in
+    naked functions is \ref inline_asm "inline assembly".
 */
 #  define ISR_NAKED
 
