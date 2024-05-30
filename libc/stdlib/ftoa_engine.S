@@ -142,11 +142,8 @@
 #elif defined(__AVR_HAVE_ELPM__)
 	elpm
 	mov	\reg, r0
-#elif defined(__AVR_HAVE_LPMX__)
-	lpm	\reg, Z
 #else
-	lpm
-	mov	\reg, r0
+	X_lpm	\reg
 #endif
 .endm
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
