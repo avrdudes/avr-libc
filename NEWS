@@ -43,6 +43,8 @@
     __builtin_fabs and __builtin_ceil instead of fabs and ceil.  This means
     the delay roudines are now independent of -f[no-]freestanding.
 
+  - Added macros pgm_read_qword, pgm_read_qword_near, pgm_read_qword_far.
+
   - Added inline functions to read from progmem that return a type as
     indicated by the function name, like char pgm_read_char (const char*).
     The functions adjust to -mint8, -mdouble= and -mlong-double=.
