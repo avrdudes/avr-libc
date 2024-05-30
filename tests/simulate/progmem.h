@@ -33,25 +33,15 @@
 
 # include <avr/pgmspace.h>
 
-# define pgm_read_qword(addr)	({			\
-    union {						\
-	unsigned long __dw[2];				\
-	unsigned long long __qw[1];			\
-    } __u;						\
-    __u.__dw[0] = pgm_read_dword (addr);		\
-    __u.__dw[1] = pgm_read_dword ((void *)addr + 4);	\
-    __u.__qw[0];					\
-  })
-
 #else
 
 # define PROGMEM
 # define PSTR(s)		(s)
-# define pgm_read_byte(addr)	(*(unsigned char *)(addr))
-# define pgm_read_word(addr)	(*(unsigned int *)(addr))
-# define pgm_read_dword(addr)	(*(unsigned long *)(addr))
+# define pgm_read_byte(addr)	(*(const __UINT8_TYPE__ *)(addr))
+# define pgm_read_word(addr)	(*(const __UINT16_TYPE__ *)(addr))
+# define pgm_read_dword(addr)	(*(const __UINT32_TYPE__ *)(addr))
 # define pgm_read_float(addr)	(*(float *)(addr))
-# define pgm_read_qword(addr)	(*(unsigned long long *)(addr))
+# define pgm_read_qword(addr)	(*(const __UINT64_TYPE__ *)(addr))
 # define strlen_P		strlen
 # define strcmp_P		strcmp
 # define strcpy_P		strcpy

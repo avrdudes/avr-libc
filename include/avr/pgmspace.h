@@ -1173,6 +1173,9 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 #define __LPM(addr)         (* (const uint8_t*)(addr))
 #define __LPM_word(addr)    (* (const uint16_t*)(addr))
 #define __LPM_dword(addr)   (* (const uint32_t*)(addr))
+#  if __SIZEOF_LONG_LONG__ == 8
+#  define __LPM_qword(addr)   (* (const uint64_t*)(addr))
+#  endif
 #else
 #define __LPM(addr)                             \
   (__extension__({                              \
@@ -1197,6 +1200,16 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
       __LPM__4 (__result, __addr16);            \
       __result;                                 \
 }))
+
+#if __SIZEOF_LONG_LONG__ == 8
+#define __LPM_qword(addr)                       \
+  (__extension__({                              \
+      uint16_t __addr16 = (uint16_t) (addr);    \
+      uint64_t __result;                        \
+      __LPM__8 (__result, __addr16);            \
+      __result;                                 \
+}))
+#endif
 #endif /* AVR_TINY */
 
 
@@ -1224,6 +1237,16 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
       __result;                                         \
 }))
 
+#if __SIZEOF_LONG_LONG__ == 8
+#define __ELPM_qword(addr)                              \
+  (__extension__({                                      \
+      uint_farptr_t __addr32 = (addr);                  \
+      uint64_t __result;                                \
+      __ELPM__8 (__result, __addr32, uint64_t);         \
+      __result;                                         \
+}))
+#endif
+
 #endif  /* !__DOXYGEN__ */
 
 /** \ingroup avr_pgmspace
@@ -1245,6 +1268,13 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 
 #define pgm_read_dword_near(__addr) \
     __LPM_dword ((uint16_t)(__addr))
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_qword_near(__addr)
+    Read a quad-word from the program space with a 16-bit (near)
+    byte-address.  */
+
+#define pgm_read_qword_near(__addr) __LPM_qword ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float_near (const float *address)
@@ -1279,6 +1309,13 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 #define pgm_read_dword_far(__addr) __ELPM_dword (__addr)
 
 /** \ingroup avr_pgmspace
+    \def pgm_read_qword_far(__addr)
+    Read a quad-word from the program space with a 32-bit (far)
+    byte-address. */
+
+#define pgm_read_qword_far(__addr) __ELPM_qword (__addr)
+
+/** \ingroup avr_pgmspace
     \def pgm_read_ptr_far(__addr)
     Read a pointer from the program space with a 32-bit (far) byte-address. */
 
@@ -1302,6 +1339,13 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
     byte-address. */
 
 #define pgm_read_dword(__addr)   pgm_read_dword_near(__addr)
+
+/** \ingroup avr_pgmspace
+    \def pgm_read_qword(__addr)
+    Read a quad-word from the program space with a 16-bit (near)
+    byte-address. */
+
+#define pgm_read_qword(__addr)   pgm_read_qword_near(__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr(__addr)

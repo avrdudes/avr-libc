@@ -44,16 +44,6 @@ int main ()	{ return 0; }
 #define __PROG_TYPES_COMPAT__
 #include <avr/pgmspace.h>
 
-#define pgm_read_qword(addr)	({			\
-    union {						\
-	unsigned long __dw[2];				\
-	unsigned long long __qw[1];			\
-    } __u;						\
-    __u.__dw[0] = pgm_read_dword (addr);		\
-    __u.__dw[1] = pgm_read_dword ((void *)addr + 4);	\
-    __u.__qw[0];					\
-  })
-
 
 #define DCLEXT(prefix, array) \
     const prog_char	prefix##_char   array;	\
