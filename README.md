@@ -8,7 +8,7 @@ standard, with the notable exception of `wchar_t` support. It also
 contains a lot of auxiliary functionality targeted to the AVR
 controller family. Further, it includes customizable startup code,
 tailored to work together with the linker scripts provided by the GNU
-binutils, so for most AVR applications, there is usually no need to
+Binutils, so for most AVR applications, there is usually no need to
 provide project-specific files for that purpose.
 
 See the [documentation](https://www.nongnu.org/avr-libc/user-manual/)
