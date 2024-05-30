@@ -32,13 +32,14 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float __fp_powsodd (float A, ZH.ZL);
+/* float __fp_powsodd (float A, [XH.]ZH.ZL);
      The __fp_powsodd() function calculates a polynom with only odd
      powers of x.  Result is rounded.
 
    Input:
      rA3.rA2.rA1.rA0	- an 'x' arg
-     ZH.ZL		- table address (in flash low 64K memory)
+     ZH.ZL		- table address in flash
+     XH			- hh8(table address) on ELPM devices
 
    Notes:
      * As __fp_powsodd() is one of base function, square() is't used.
@@ -51,6 +52,9 @@ ENTRY __fp_powsodd
 	push	rA1
 	push	rA0
 
+#ifdef __AVR_HAVE_ELPM__
+	push	XH
+#endif
 	push	ZH
 	push	ZL
 
@@ -60,6 +64,9 @@ ENTRY __fp_powsodd
 
 	pop	ZL
 	pop	ZH
+#ifdef __AVR_HAVE_ELPM__
+	pop	XH
+#endif
 	XCALL	_U(__fp_powser)
 
 	pop	rB0

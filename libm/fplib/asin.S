@@ -57,6 +57,7 @@ ENTRY_FLOAT asinf asin asinl
   ; for small x
 	ldi	ZL, lo8 (.L_table)
 	ldi	ZH, hi8 (.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powsodd)
 	rjmp	2f
   ; arcsin(x) = Pi/2 - arccos(x)
@@ -76,7 +77,7 @@ ENTRY_FLOAT asinf asin asinl
 	ret
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.asin)
 .L_table:
 	.byte	3
 	.byte	     0x6e,0xdb,0x36,0x3d	; 15/336

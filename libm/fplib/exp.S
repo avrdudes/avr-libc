@@ -81,6 +81,7 @@ ENTRY_FLOAT expf exp expl
   ; calculate 2**(-x) for 0 <= x < 1
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powser)
   ; get integral part
 	pop	exp_lo
@@ -110,7 +111,7 @@ ENTRY_FLOAT expf exp expl
 	ret
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.exp)
 .L_table:
 	.byte	7
 	.byte	     0x63,0x42,0x36,0xb7	; -0.0000108635

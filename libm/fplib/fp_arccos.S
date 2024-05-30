@@ -60,6 +60,7 @@ ENTRY __fp_arccos
 
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powser)
 	XCALL	_U(__fp_round)
 
@@ -96,6 +97,7 @@ ENTRY __fp_arccos
   ; calculate: C0 + A*(C1 + ...)
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powser)
 	XCALL	_U(__fp_round)
   ; restore A
@@ -125,7 +127,7 @@ ENTRY __fp_arccos
 #endif
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.arccos)
 .L_table:
 	.byte	7
 	.byte	     0x2c,0x7a,0xa5,0xba	; -0.0012624911

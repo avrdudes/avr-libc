@@ -86,6 +86,7 @@ ENTRY_FLOAT tanf tan tanl
   ; calculate tan(A) for  0 <= A <= Pi/4
 1:	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powsodd)
   ; correct result
 	lsl	rsign
@@ -98,7 +99,7 @@ ENTRY_FLOAT tanf tan tanl
 	ret
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.tan)
 .L_table:
 	.byte	6
 	.byte	     0x64,0xec,0x1b,0x3c	;  0.0095168091

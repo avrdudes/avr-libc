@@ -61,10 +61,11 @@ ENTRY __fp_sinus
 
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XJMP	_U(__fp_powsodd)
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.sinus)
 .L_table:
 	.byte	5
 	.byte	     0xa8,0x4c,0xcd,0xb2	; -0.0000000239

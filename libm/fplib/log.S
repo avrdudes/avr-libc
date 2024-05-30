@@ -96,10 +96,12 @@ ENTRY_FLOAT logf log logl
 3:	XCALL	_U(__addsf3)
 	ldi	ZL, lo8(.L_tlow)
 	ldi	ZH, hi8(.L_tlow)
+	LDI_XH_hh8(.L_tlow)
 	rjmp	5f
 4:	XCALL	_U(__addsf3)
 	ldi	ZL, lo8(.L_thigh)
 	ldi	ZH, hi8(.L_thigh)
+	LDI_XH_hh8(.L_thigh)
 5:	XCALL	_U(__fp_powser)
 
 	X_movw	rC0, rA0
@@ -134,7 +136,7 @@ ENTRY_FLOAT logf log logl
 	XJMP	_U(__fp_round)
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.log)
 
 .L_tlow:		; __fp_powser() table for small values
 	.byte	8

@@ -77,6 +77,7 @@ ENTRY_FLOAT atanf atan atanl
 	XCALL	_U(squaref)
 	ldi	ZL, lo8(.L_table)
 	ldi	ZH, hi8(.L_table)
+	LDI_XH_hh8(.L_table)
 	XCALL	_U(__fp_powser)
 	XCALL	_U(__fp_round)
 	pop	rB0
@@ -102,7 +103,7 @@ ENTRY_FLOAT atanf atan atanl
 	XJMP	_U(__fp_round)
 ENDFUNC
 
-	PGM_SECTION
+	PGMX_SECTION(.atan)
 .L_table:
 	.byte	8
 	.byte	     0x4a,0xd7,0x3b,0x3b	;  0.0028662257
