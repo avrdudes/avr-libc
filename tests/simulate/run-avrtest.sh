@@ -129,7 +129,7 @@ Usage ()
     cat <<EOF
 Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTsh] [FILE]...
 Options:
-  -a AVRDIR   Specify avr-libc root (default is $AVRDIR)
+  -a AVRDIR   Specify avr-libc builddir (default is $AVRDIR)
   -i          Test an installed avr-libc
   -c          Compile/link only
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)

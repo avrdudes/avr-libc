@@ -65,7 +65,7 @@ Usage ()
     cat <<EOF
 Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTsh] [FILE]...
 Options:
-  -a AVRDIR   Specify avr-libc root (default is $AVRDIR)
+  -a AVRDIR   Specify avr-libc builddir (default is $AVRDIR)
   -i          Test an installed avr-libc
   -c          Compile/link only
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
@@ -170,7 +170,7 @@ Compile ()
                     | sed -e 's:/:_:g'      \
                     | sed -e 's:-:_:g')
       crt=crt$2.o
-      flags="-isystem $AVRDIR/include -nostdlib"
+      flags="-I../../include -I $AVRDIR/include -nostdlib"
       crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
       libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
             $AVRDIR/avr/lib/$multilibdir/libm.a \
