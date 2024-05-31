@@ -121,7 +121,7 @@
    can be used.  In order to get its address, see pgm_get_far_address().
 
    It only makes sense to put read-only objects in this section,
-   though there compiler does not diagnose when this is not the case.  */
+   though the compiler does not diagnose when this is not the case.  */
 #define PROGMEM_FAR __attribute__((__section__(".progmemx.data")))
 
 #ifdef __DOXYGEN__
@@ -996,7 +996,8 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 /** \ingroup avr_pgmspace
     \def PSTR_FAR(str)
 
-    Used to declare a static far pointer to a string in far program space. */
+    Used to define a string literal in far program space, and to return its
+    address of type #uint_farptr_t. */
 # define PSTR_FAR(str) ({ static const PROGMEM_FAR char c[] = (str); pgm_get_far_address(c[0]); })
 #else  /* !DOXYGEN */
 /* The real thing. */
@@ -1213,7 +1214,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 
    int get_data (uint8_t idx)
    {
-       uint_farptr_t pdata = pgm_get_far_address (data);
+       uint_farptr_t pdata = pgm_get_far_address (data[0]);
        return pgm_read_int_far (pdata + idx * sizeof(int));
    }
    \endcode
