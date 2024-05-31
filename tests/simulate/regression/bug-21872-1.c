@@ -28,59 +28,37 @@
  */
 
 /* bug #21872: __floatunsisf/undisf incorrectly named
-   $Id$
-
-   Idea is to force 'region text is full' in case of libgcc's conversion
-   function usage.	*/
+   $Id$ */
 
 #ifdef	__AVR__
 
-#ifdef USE_AVRTEST
-#define EXTRA_SIZE 100
-#else
-#define EXTRA_SIZE 0
-#endif
+#include <stdint.h>
 
-#include <avr/io.h>
-
-/* avr-gcc 4.2.2 + Avr-libc 1.6.1, before correction:
-      MIN_SIZE == 1000 --> Fault
-      MIN_SIZE == 1100 --> OK
-   avr-gcc 4.2.2 + Avr-libc 1.6.1, after correction:
-      MIN_SIZE == 220 --> Fault
-      MIN_SIZE == 230 --> OK
-   avr-gcc 4.1.2 + Avr-libc 1.6.1, after correction:
-      MIN_SIZE == 650 --> Fault
-      MIN_SIZE == 660 --> OK	*/
-#if	(__GNUC__ == 4 && __GNUC_MINOR__ >= 2) || (__GNUC__ > 4)
-# define MIN_SIZE 400
-#else
-# define MIN_SIZE 850
-#endif
-
-#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE - EXTRA_SIZE)/2)
-void very_big_function (void)
+float call_floatunsisf (uint32_t si)
 {
-    asm volatile (
-	".rept	(%0)*256 + %1	\n\t"
-	"nop			\n\t"
-	".endr "
-	:: "M" (NWORDS / 256),
-	   "M" (NWORDS % 256)
-    );
+    __asm (".macro call addr"          "\n\t"
+           ".ifc \\addr,__floatunsisf" "\n\t"
+           ".else"                     "\n\t"
+           ".error \"wrong call\""     "\n\t"
+           ".endif"                    "\n\t"
+           ".endm"                     "\n\t"
+
+           ".macro rcall addr"         "\n\t"
+           ".ifc \\addr,__floatunsisf" "\n\t"
+           ".else"                     "\n\t"
+           ".error \"wrong rcall\""    "\n\t"
+           ".endif"                    "\n\t"
+           ".endm"
+           : "+r" (si));
+
+    float sf;
+    sf = si;
+    __asm ("" : "+r" (sf));
+    return sf;
 }
-
-#endif
-
-/* ???: GCC 4.6.2 produces this warning about volatile (!) variable.	*/
-#if	(__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
-# pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 #endif
 
 int main ()
 {
-    volatile unsigned long vsi = 0;
-    volatile float vsf;
-    vsf = vsi;		/* call of conversion function	*/
     return 0;
 }
