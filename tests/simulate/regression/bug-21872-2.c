@@ -36,18 +36,16 @@
 
 float call_floatundisf (uint64_t di)
 {
-    __asm (".macro call addr"          "\n\t"
-           ".ifc \\addr,__floatundisf" "\n\t"
-           ".else"                     "\n\t"
-           ".error \"wrong call\""     "\n\t"
-           ".endif"                    "\n\t"
-           ".endm"                     "\n\t"
+    __asm (".macro call addr"           "\n\t"
+           ".ifnc \\addr,__floatundisf" "\n\t"
+           ".error \"wrong call\""      "\n\t"
+           ".endif"                     "\n\t"
+           ".endm"                      "\n\t"
 
-           ".macro rcall addr"         "\n\t"
-           ".ifc \\addr,__floatundisf" "\n\t"
-           ".else"                     "\n\t"
-           ".error \"wrong rcall\""    "\n\t"
-           ".endif"                    "\n\t"
+           ".macro rcall addr"          "\n\t"
+           ".ifnc \\addr,__floatundisf" "\n\t"
+           ".error \"wrong rcall\""     "\n\t"
+           ".endif"                     "\n\t"
            ".endm"
            : "+r" (di));
 
