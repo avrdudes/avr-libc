@@ -6,7 +6,7 @@
 
 * Improvements and additions:
 
-  - Add support to new multilib layout / 64-bit double compiler
+  - Add support to new multilib layout / 64-bit [long] double compiler
     (Issues #642, #670)
   - Added support for new devices (Issue #824):
     ATtiny202 ATtiny204 ATtiny212 ATtiny214 ATtiny402 ATtiny404
@@ -64,6 +64,13 @@
   - AVR LibC does not use section .progmem.* any more for lookup tables and
     string literals.  Instead, .progmemx.* is used which does not require
     that the data resides in the lower 64 KiB of program memory (Issue #962).
+
+  - The startup code now defines symbols like __DATA_REGION__LENGTH__ and
+    __DATA_REGION_ORIGIN__ according to the memories of the used AVR device.
+    These symbols are used by the default linker scripts to diagnose when
+    the text or data region overflows.
+    To date, only a core specific default value was used, but the devices
+    that belong to the same core architecture have different memory sizes.
 
 * Issues closed:
 
