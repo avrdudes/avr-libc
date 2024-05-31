@@ -28,10 +28,7 @@
  */
 
 /* bug #21955: pgm_read_xxxx() does not use enhanced LPM instruction
-   $Id$
-
-   Idea is to force 'region text is full': pgm_read_word() takes 5 words
-   in case of classic LPM, and takes 2 words with enhanced LPM.	*/
+   $Id$ */
 
 #ifndef	__AVR__
 
@@ -46,49 +43,12 @@ int main ()
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
-#ifdef USE_AVRTEST
-#define EXTRA_SIZE 100
-#else
-#define EXTRA_SIZE 0
-#endif
+extern int theSize[];
 
-/* avr-gcc 4.1.2, Avr-libc 1.6.1, main() contains only 1 line with
-   pgm_read_word, bytes:
-      MIN_SIZE == 90  --> Fault
-      MIN_SIZE == 100 --> OK
-   So, for 50 lines it would:
-      100 + 8*49 =  492  for enhanced
-      100 + 14*49 = 786  for enhanced
-   No use __AVR_HAVE_LPMX__ for preprocessing.	*/
-#if  (__AVR_ARCH__ == 2) || (__AVR_ARCH__ == 3)
-# define MIN_SIZE 940
-#else
-# define MIN_SIZE 640
-#endif
-
-#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE - EXTRA_SIZE) / 2)
-void very_big_function (void)
+int use_pgm_read_word (unsigned addr)
 {
-    asm volatile (
-	".rept	(%0)*256 + %1	\n\t"
-	"nop			\n\t"
-	".endr "
-	:: "M" (NWORDS / 256),
-	   "M" (NWORDS % 256)
-    );
-}
-
-
-/* ???: GCC 4.6.2 produces this warning about volatile (!) variable.	*/
-#if	(__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
-# pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-#endif
-
-
-int main ()
-{
-    volatile int rslt;
-    int addr = 0;
+    __asm volatile (".Lsize = ."
+                    : "+r" (addr) :: "memory");
 
     /* 10*4 words with enhanced LPM
        10*7 words with classic LPM	*/
@@ -155,7 +115,23 @@ int main ()
     addr = pgm_read_word (addr) & 0x7FF;
     addr = pgm_read_word (addr) & 0x7FF;		/* 50 */
 
-    rslt = (int)addr;
+    __asm volatile (".global theSize\n\t"
+                    "theSize = . - .Lsize"
+                    : "+r" (addr) :: "memory");
+    return addr;
+}
+
+int main (void)
+{
+#ifdef __AVR_HAVE_LPMX__
+    unsigned max_insns = 5;
+#else
+    unsigned max_insns = 8;
+#endif
+
+    if ((unsigned) theSize > 10 + 2 * 50 * max_insns)
+        __builtin_exit (__LINE__);
+
     return 0;
 }
 
