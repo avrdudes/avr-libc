@@ -30,46 +30,43 @@
 /* Bug: isinf() produces too large code with GCC 4.3.0
    $Id$
 
-   GCC 4.3.0 unrolls the isinf() function with call of __unordsf2().
-   The testing method is to force 'region text is full' in case
-   of libgcc's __unordsf2() function usage.	*/
+   GCC 4.3.0 unrolls the isinff() function with call of __unordsf2().
+   The testing method is to abort on big code size.
+   As a work around, -fno-builtin-isinff can be used.
+   Notice that this is rather a GCC issue.  */
 
 #ifdef	__AVR__
 
-#include <avr/io.h>
+extern int isinff (float);
+extern int theSize[];
 
-/* Sufficient MIN_SIZE value:
-     200   avr-gcc 4.1.2, ATmega128
-     700   avr-gcc 4.3.0, ATmega128, before fixing
-     280   avr-gcc 4.3.0, ATmega128, after fixing of this bug
- */
-#ifndef USE_AVRTEST
-#define MIN_SIZE 320
-#define RAM_USED 0
-#else
-/* avrtest's exit-mcu.o module consumes more flash.  */
-#define MIN_SIZE (320 + 110)
-#define RAM_USED 16
-#endif
-
-#define NWORDS	((FLASHEND - _VECTORS_SIZE - MIN_SIZE - RAM_USED)/2)
-void very_big_function (void)
+int use_isinff (float x)
 {
-    asm volatile (
-	".rept	(%0)*256 + %1	\n\t"
-	"nop			\n\t"
-	".endr "
-	:: "M" (NWORDS / 256),
-	   "M" (NWORDS % 256)
-    );
+    int res;
+    __asm volatile (".Lsize = ."
+                    : "+r" (x) :: "memory");
+
+    res = isinff (x);
+
+    __asm volatile (".global theSize\n\t"
+                    "theSize = . - .Lsize"
+                    : "+r" (res) :: "memory");
+    return res;
 }
 
-#endif
 
-int isinf (double);
+int main (void)
+{
+    if ((unsigned) theSize > 20)
+        __builtin_exit (__LINE__);
+
+    return 0;
+}
+
+#else
 
 int main ()
 {
-    static volatile double x;
-    return isinf (x);
+    return 0;
 }
+#endif
