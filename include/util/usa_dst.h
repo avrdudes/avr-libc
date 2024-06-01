@@ -28,11 +28,24 @@
 
 /* $Id$ */
 
+#ifndef USA_DST_H
+#define USA_DST_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <time.h>
+#include <stdint.h>
+
 /** \file */
 /** \defgroup usa_dst <util/usa_dst.h>: Daylight Saving function for the USA.
-    To utilize this function, you must
     \code #include <util/usa_dst.h> \endcode
-    and
+    Daylight Saving function for the USA. */
+    
+/** \ingroup usa_dst
+    \fn int usa_dst (const time_t *timer, int32_t *z)
+    To utilize this function, call
     \code set_dst(usa_dst); \endcode
 
     Given the time stamp and time zone parameters provided, the Daylight
@@ -51,17 +64,6 @@
     uses 'rules' obtained from, and modifiable by, the end user
     (perhaps stored in EEPROM).
 */
-
-#ifndef USA_DST_H
-#define USA_DST_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <time.h>
-#include <stdint.h>
-
 int usa_dst (const time_t *timer, int32_t *z);
 
 #ifdef __cplusplus

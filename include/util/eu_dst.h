@@ -28,10 +28,25 @@
 
 /* $Id$ */
 
+#ifndef EU_DST_H
+#define EU_DST_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <time.h>
+#include <stdint.h>
+
 /** \file */
 /** \defgroup eu_dst <util/eu_dst.h>: Daylight Saving function for the European Union.
-    To utilize this function, you must \code #include <util/eu_dst.h> \endcode
-    and \code set_dst(eu_dst); \endcode
+
+    \code #include <util/eu_dst.h> \endcode
+    Dayligh Saving Time for the European Union */
+
+/** \ingroup eu_dst
+    \fn int eu_dst (const time_t *timer, int32_t *z)
+    To utilize this function, call \code set_dst(eu_dst); \endcode
 
     Given the time stamp and time zone parameters provided, the Daylight
     Saving function must return a value appropriate for the tm structures'
@@ -49,18 +64,7 @@
     uses 'rules' obtained from, and modifiable by, the end user (perhaps
     stored in EEPROM).
 */
-
-#ifndef EU_DST_H
-#define EU_DST_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <time.h>
-#include <stdint.h>
-
-extern int eu_dst (const time_t *timer, int32_t *z);
+int eu_dst (const time_t *timer, int32_t *z);
 
 #ifdef __cplusplus
 }

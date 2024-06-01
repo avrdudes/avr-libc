@@ -28,6 +28,16 @@
 
 /* $Id$ */
 
+#ifndef TIME_H
+#define TIME_H
+
+#ifdef __cplusplus
+extern  "C" {
+#endif
+
+#include <stdint.h>
+#include <stdlib.h>
+
 /** \file */
 
 /** \defgroup avr_time <time.h>: Time
@@ -93,16 +103,6 @@
     Along with the usual smattering of utility functions, such as is_leap_year(), this library includes
     a set of functions related the sun and moon, as well as sidereal time functions.
 */
-
-#ifndef TIME_H
-#define TIME_H
-
-#ifdef __cplusplus
-extern  "C" {
-#endif
-
-#include <stdint.h>
-#include <stdlib.h>
 
 /** \ingroup avr_time */
 /**@{*/

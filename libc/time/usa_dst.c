@@ -28,29 +28,6 @@
 
 /* $Id$ */
 
-/**
-    Daylight Saving function for the USA. To utilize this function, you must
-    \code #include <util/usa_dst.h> \endcode
-    and
-    \code set_dst(usa_dst); \endcode
-
-    Given the time stamp and time zone parameters provided, the Daylight
-    Saving function must return a value appropriate for the tm structures'
-    tm_isdst element. That is:
-
-    - 0 : If Daylight Saving is not in effect.
-
-    - -1 : If it cannot be determined if Daylight Saving is in effect.
-
-    - A positive integer: Represents the number of seconds a clock is
-    advanced for Daylight Saving.  This will typically be ONE_HOUR.
-
-    Daylight Saving 'rules' are subject to frequent change. For production
-    applications it is recommended to write your own DST function, which
-    uses 'rules' obtained from, and modifiable by,  the end user
-    (perhaps stored in EEPROM).
-*/
-
 #include <time.h>
 #include <stdint.h>
 #include <util/usa_dst.h>
