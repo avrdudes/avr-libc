@@ -127,19 +127,19 @@ static __inline__ void timer_enable_int (unsigned char ints)
 */
 
 #if (__GNUC__ == 4 && __GNUC_MINOR__ >= 1) || (__GNUC__ > 4)
-#  define __INTR_ATTRS used, externally_visible
+#  define __INTR_ATTRS __used__, __externally_visible__
 #else /* GCC < 4.1 */
-#  define __INTR_ATTRS used
+#  define __INTR_ATTRS __used__
 #endif
 
 #ifdef __cplusplus
 #define INTERRUPT(signame)				\
 extern "C" void signame(void);				\
-void signame (void) __attribute__ ((interrupt,__INTR_ATTRS));	\
+void signame (void) __attribute__ ((__interrupt__,__INTR_ATTRS));	\
 void signame (void)
 #else
 #define INTERRUPT(signame)				\
-void signame (void) __attribute__ ((interrupt,__INTR_ATTRS));	\
+void signame (void) __attribute__ ((__interrupt__,__INTR_ATTRS));	\
 void signame (void)
 #endif
 
