@@ -117,8 +117,7 @@ the clock below 131.072 kHz.
     <td>\c power_hiresc_enable()</td>
     <td>Enable the HIRES module on PortC</td>
   </tr>
-
-   <tr>
+  <tr>
     <td>\c power_lcd_enable()</td>
     <td>Enable the LCD module</td>
   </tr>
@@ -134,7 +133,6 @@ the clock below 131.072 kHz.
     <td>\c power_pga_disable()</td>
     <td>Disable the Programmable Gain Amplifier module</td>
   </tr>
-  
   <tr>
     <td>\c power_pscr_enable()</td>
     <td>Enable the Reduced Power Stage Controller module</td>
