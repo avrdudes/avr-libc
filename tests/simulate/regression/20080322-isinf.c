@@ -33,7 +33,9 @@
    GCC 4.3.0 unrolls the isinff() function with call of __unordsf2().
    The testing method is to abort on big code size.
    As a work around, -fno-builtin-isinff can be used.
-   Notice that this is rather a GCC issue.  */
+
+   Notice that this is rather a GCC issue PR115307, fixed in v14.2+
+   and v13.4.  And similar problems persist for isnan().  */
 
 #ifdef	__AVR__
 
