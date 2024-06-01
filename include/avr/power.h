@@ -42,7 +42,6 @@
 #endif /* ! DOXYGEN */
 
 /** \file */
-/**@{*/
 /** \defgroup avr_power <avr/power.h>: Power Reduction Management
 
 \code #include <avr/power.h>\endcode
@@ -71,14 +70,9 @@ that Timer/Counter0 source shall be less than ¼th of peripheral clock.
 Therefore, when using a typical 32.768 kHz crystal, one shall not scale
 the clock below 131.072 kHz.
 
-*/
-
-/** \addtogroup avr_power */
-/**@{*/
-/**
-\anchor avr_powermacros
 <small>
 <table>
+  <caption>\anchor avr_powermacros Power Macros</caption>
   <tr>
     <th>Power Macro
     <th>Description
@@ -456,7 +450,6 @@ the clock below 131.072 kHz.
 </table>
 </small>
 */
-/**@}*/
 
 #if defined(__AVR_HAVE_PRR_PRADC)
 #define power_adc_enable()      (PRR &= (uint8_t)~(1 << PRADC))
@@ -1098,6 +1091,14 @@ the clock below 131.072 kHz.
 #define power_usartf1_disable() (PR_PRPF |= (uint8_t)PR_USART1_bm)
 #endif
 
+#ifdef __DOXYGEN__
+/**
+   \ingroup avr_power
+   \fn void power_all_enable()
+   Enable all modules.
+ */
+static __ATTR_ALWAYS_INLINE__ void power_all_enable();
+#else
 static __ATTR_ALWAYS_INLINE__ void __power_all_enable()
 {
 #ifdef __AVR_HAVE_PRR
@@ -1144,7 +1145,16 @@ static __ATTR_ALWAYS_INLINE__ void __power_all_enable()
     PR_PRPF &= (uint8_t)~(__AVR_HAVE_PRPF);
 #endif
 }
+#endif /* __DOXYGEN__ */
 
+#ifdef __DOXYGEN__
+/**
+   \ingroup avr_power
+   \fn void power_all_disable()
+   Disable all modules.
+ */
+static __ATTR_ALWAYS_INLINE__ void power_all_disable();
+#else
 static __ATTR_ALWAYS_INLINE__ void __power_all_disable()
 {
 #ifdef __AVR_HAVE_PRR
@@ -1191,6 +1201,7 @@ static __ATTR_ALWAYS_INLINE__ void __power_all_disable()
     PR_PRPF |= (uint8_t)(__AVR_HAVE_PRPF);
 #endif
 }
+#endif /* __DOXYGEN__ */
 
 #ifndef __DOXYGEN__
 #ifndef power_all_enable
@@ -1334,10 +1345,7 @@ XTAL Divide Control Register.
 \note Not all AVR devices have a clock prescaler. On those devices
 without a Clock Prescale Register or XTAL Divide Control Register, these
 macros are not available.
-*/
 
-
-/** \addtogroup avr_power
 \code 
 typedef enum
 {
@@ -1428,7 +1436,7 @@ void clock_prescale_set(clock_div_t __x)
         : "r0");
 }
 
-/** \addtogroup avr_power
+/** \ingroup avr_power
 \def clock_prescale_get()
 Gets and returns the clock prescaler register setting. The return type is \c clock_div_t.
 
