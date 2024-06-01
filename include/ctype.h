@@ -60,7 +60,7 @@ extern "C" {
     argument is any value '0' though '9', inclusive). If the input is not
     an unsigned char value, all of this function return false.	*/
 
- /* @{ */
+/**@{*/
 
 /** \ingroup ctype
 
@@ -147,7 +147,7 @@ extern int isupper(int __c);
 
 extern int isxdigit(int __c);
 
-/* @} */
+/**@}*/
 
 /** \name Character convertion routines
 
@@ -156,7 +156,7 @@ extern int isxdigit(int __c);
     toupper() functions return an input argument as is, if it is not an
     unsigned char value.	*/
 
-/* @{ */
+/**@{*/
 
 /** \ingroup ctype
 
@@ -180,7 +180,7 @@ extern int tolower(int __c);
 
 extern int toupper(int __c);
 
-/* @} */
+/**@}*/
 
 #ifdef __cplusplus
 }

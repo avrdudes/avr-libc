@@ -42,10 +42,8 @@
 #define __STRINGIFY(x) #x
 #endif /* !defined(__DOXYGEN__) */
 
-/**
-\file
-\@{
-*/
+/** \file */
+/**@{*/
 
 
 /** \name Global manipulation of the interrupt flag
@@ -387,6 +385,6 @@
 #  define ISR_ALIASOF(v) __attribute__((__alias__(__STRINGIFY(v))))
 #endif /* DOXYGEN */
 
-/* \@} */
+/**@}*/
 
 #endif

@@ -107,7 +107,7 @@ extern          "C" {
 #include <stdlib.h>
 
     /** \ingroup avr_time */
-    /* @{ */
+    /**@{*/
 
     /**
         time_t represents seconds elapsed from Midnight, Jan 1 2000 UTC (the Y2K 'epoch').
@@ -503,7 +503,7 @@ extern          "C" {
     */
     unsigned long   lm_sidereal(const time_t * timer);
 
-    /* @} */
+    /**@}*/
 #ifdef __cplusplus
 }
 #endif
