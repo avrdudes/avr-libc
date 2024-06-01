@@ -60,9 +60,9 @@
    a pointer to FILE as its single argument,
    and return one character from the device, passed as an
    \c int type.  If an error occurs when trying to read from the
-   device, it shall return \c _FDEV_ERR.
+   device, it shall return <tt>#_FDEV_ERR</tt>.
    If an end-of-file condition was reached while reading from the
-   device, \c _FDEV_EOF shall be returned.
+   device, <tt>#_FDEV_EOF</tt> shall be returned.
 
    If both functions are provided, the stream is opened with read
    and write intent.

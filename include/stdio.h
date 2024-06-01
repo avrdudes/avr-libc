@@ -136,7 +136,7 @@
     standard name, where the format string is expected to be in
     SRAM, as well as a version with the suffix "_P" where the format
     string is expected to reside in the flash ROM.  The macro
-    \c PSTR (explained in \ref avr_pgmspace) becomes very handy
+    #PSTR (explained in \ref avr_pgmspace) becomes very handy
     for declaring these format strings.
 
     \anchor stdio_without_malloc
@@ -194,14 +194,17 @@
 
     <h3>Notes</h3>
 
-    \anchor stdio_note1 \par Note 1:
+<dl>
+<dt>\anchor stdio_note1 Note 1:</dt>
+<dd>    
     It might have been possible to implement a device abstraction that
     is compatible with \c fopen() but since this would have required
     to parse a string, and to take all the information needed either
     out of this string, or out of an additional table that would need to be
     provided by the application, this approach was not taken.
-
-    \anchor stdio_note2 \par Note 2:
+</dd>
+<dt>\anchor stdio_note2 Note 2:</dt>
+<dd>
     This basically follows the Unix approach: if a device such as a
     terminal needs special handling, it is in the domain of the
     terminal device driver to provide this functionality.  Thus, a
@@ -220,8 +223,9 @@
       return 0;
     }
     \endcode
-
-    \anchor stdio_note3 \par Note 3:
+</dd>
+<dt>\anchor stdio_note3 Note 3:</dt>
+<dd>
     This implementation has been chosen because the cost of maintaining
     an alias is considerably smaller than the cost of maintaining full
     copies of each stream.  Yet, providing an implementation that offers
@@ -232,6 +236,8 @@
     them in registers for functions that take a fixed number of
     parameters), the ability to pass one parameter less by implying
     \c stdin or stdout will also save some execution time.
+</dd>
+</dl>
 */
 
 #if !defined(__DOXYGEN__)
@@ -331,13 +337,13 @@ typedef struct __file FILE;
    This macro takes a user-supplied buffer \c stream, and sets it up
    as a stream that is valid for stdio operations, similar to one that
    has been obtained dynamically from fdevopen(). The buffer to setup
-   must be of type FILE.
+   must be of type #FILE.
 
    The arguments \c put and \c get are identical to those that need to
    be passed to fdevopen().
 
-   The \c rwflag argument can take one of the values _FDEV_SETUP_READ,
-   _FDEV_SETUP_WRITE, or _FDEV_SETUP_RW, for read, write, or read/write
+   The \c rwflag argument can take one of the values #_FDEV_SETUP_READ,
+   #_FDEV_SETUP_WRITE, or #_FDEV_SETUP_RW, for read, write, or read/write
    intent, respectively.
 
    \note No assignments to the standard streams will be performed by
