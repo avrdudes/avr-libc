@@ -101,7 +101,7 @@
 extern  "C" {
 #endif
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 /** \ingroup avr_time */
@@ -476,9 +476,24 @@ time_t sun_rise(const time_t * timer);
 */
 time_t sun_set(const time_t * timer);
 
-/** Returns the declination of the sun in radians. */
+/**
+    Returns the declination of the sun in radians.
+*/
 float           solar_declinationf(const time_t * timer);
+
+/**
+    Returns the declination of the sun in radians.
+
+    This implementation is only available when \c double is a 32-bit type.
+*/
 double          solar_declination(const time_t * timer);
+
+/**
+    Returns the declination of the sun in radians.
+
+    This implementation is only available when <tt>long double</tt> is
+    a 32-bit type.
+*/
 long double     solar_declinationl(const time_t * timer);
 
 /**
