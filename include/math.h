@@ -48,6 +48,10 @@
 #ifndef __MATH_H
 #define __MATH_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** \file */
 /** \defgroup avr_math <math.h>: Mathematics
     \code #include <math.h> \endcode
@@ -78,7 +82,7 @@
 */
 
 
-/** \ingroup avr_math */
+/** \addtogroup avr_math */
 /**@{*/
 
 /** The constant Euler's number \a e. */
@@ -156,10 +160,6 @@
 #define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
 #endif
 #endif /* ! DOXYGEN */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /** The cosf() function returns the cosine of \a x, measured in radians. */
 __ATTR_CONST__ extern float cosf (float x);
@@ -268,25 +268,6 @@ __ATTR_CONST__ extern double hypot (double x, double y);
     formula is wise, since the error is much smaller. No underflow with
     small \a x and \a y. No overflow if result is in range. */
 __ATTR_CONST__ extern long double hypotl (long double x, long double y);
-
-/** The function squaref() returns <em>x * x</em>.
-    \note This function does not belong to the C standard definition. */
-__ATTR_CONST__ extern float squaref (float x);
-/** The function square() returns <em>x * x</em>.
-    \note This function does not belong to the C standard definition. */
-#if defined(__DOXYGEN__) || __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
-__ATTR_CONST__ extern double square (double x);
-#elif defined(__WITH_LIBF7_MATH__)
-__ATTR_CONST__ extern double square (double x) __asm("__f7_square");
-#endif
-
-/** The function squarel() returns <em>x * x</em>.
-    \note This function does not belong to the C standard definition. */
-#if defined(__DOXYGEN__) || __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
-__ATTR_CONST__ extern long double squarel (long double x);
-#elif defined(__WITH_LIBF7_MATH__)
-__ATTR_CONST__ extern long double squarel (long double x) __asm("__f7_square");
-#endif
 
 /** The floorf() function returns the largest integral value less than or
     equal to \a x, expressed as a floating-point number. */
@@ -721,9 +702,33 @@ __ATTR_CONST__ extern long lrint (double x);
     value (0x80000000). */
 __ATTR_CONST__ extern long lrintl (long double x);
 
+/** \name Non-Standard Math Functions */
+
+/** The function squaref() returns <em>x * x</em>.
+    \note This function does not belong to the C standard definition. */
+__ATTR_CONST__ extern float squaref (float x);
+
+/** The function square() returns <em>x * x</em>.
+    \note This function does not belong to the C standard definition. */
+
+#if defined(__DOXYGEN__) || __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
+__ATTR_CONST__ extern double square (double x);
+#elif defined(__WITH_LIBF7_MATH__)
+__ATTR_CONST__ extern double square (double x) __asm("__f7_square");
+#endif
+
+/** The function squarel() returns <em>x * x</em>.
+    \note This function does not belong to the C standard definition. */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
+__ATTR_CONST__ extern long double squarel (long double x);
+#elif defined(__WITH_LIBF7_MATH__)
+__ATTR_CONST__ extern long double squarel (long double x) __asm("__f7_square");
+#endif
+
+/**@}*/
+
 #ifdef __cplusplus
 }
 #endif
 
-/**@}*/
 #endif /* !__MATH_H */
