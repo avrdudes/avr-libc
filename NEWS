@@ -91,6 +91,8 @@
   - Add device support to avr/power.h for:
     ATtiny441 ATtiny841
 
+  - FDEV_SETUP_STREAM from stdio.h now works with C++ (Issue #898)
+
 * Pull requests:
 
   - README.md: fix typo in URL #873
