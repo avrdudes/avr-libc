@@ -82,7 +82,7 @@ extern "C" {
 */
 
 
-/** \addtogroup avr_math */
+/** \ingroup avr_math */
 /**@{*/
 
 /** The constant Euler's number \a e. */
@@ -702,9 +702,15 @@ __ATTR_CONST__ extern long lrint (double x);
     value (0x80000000). */
 __ATTR_CONST__ extern long lrintl (long double x);
 
-/** \name Non-Standard Math Functions */
+/**@}*/
 
-/** The function squaref() returns <em>x * x</em>.
+/**@{*/
+/**
+   \name Non-Standard Math Functions
+*/
+
+/** \ingroup avr_math
+    The function squaref() returns <em>x * x</em>.
     \note This function does not belong to the C standard definition. */
 __ATTR_CONST__ extern float squaref (float x);
 
