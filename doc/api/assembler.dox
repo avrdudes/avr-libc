@@ -299,7 +299,7 @@ expressions use a C-like syntax.
 Some common directives include:
 
 <table>
-<caption>\anchor ass_sections Assembler Directives: Sections</caption>
+<caption id="ass_sections">Assembler Directives: Sections</caption>
 <tr>
   <th>Section Ops
   <th>Description
@@ -340,7 +340,7 @@ Some common directives include:
 
 <!----------------------------------------------------------------->
 <table>
-<caption>\anchor ass_symbols Assembler Directives: Symbols</caption>
+<caption id="ass_symbols">Assembler Directives: Symbols</caption>
 <tr>
   <th>Symbol&nbsp;Ops
   <th>Description
@@ -411,8 +411,7 @@ Some common directives include:
 
 <!----------------------------------------------------------------->
 <table>
-<caption>\anchor ass_data_and_align
-  Assembler Directives: Data and Alignment</caption>
+<caption id="ass_data_and_align">Assembler Directives: Data and Alignment</caption>
 <tr>
   <th>Data Ops
   <th>Description

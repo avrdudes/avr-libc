@@ -72,7 +72,7 @@ the clock below 131.072 kHz.
 
 <small>
 <table>
-  <caption>\anchor avr_powermacros Power Macros</caption>
+  <caption id="avr_powermacros">Power Macros</caption>
   <tr>
     <th>Power Macro
     <th>Description
