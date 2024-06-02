@@ -10,7 +10,7 @@
 Avr-gcc version is 4.7.1
 
 The size of function is given in view of all picked up functions. By default
-Avr-libc is compiled with \c -mcall-prologues option. In brackets the size
+AVR-LibC is compiled with \c -mcall-prologues option. In brackets the size
 without taking into account modules of a prologue and an epilogue is
 resulted. Both of the size can coincide, if function does not cause a
 prologue/epilogue.

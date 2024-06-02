@@ -36,7 +36,7 @@
 This project extends the basic idea of the
 \ref demo_project "simple project" to control a LED with a PWM
 output, but adds methods to adjust the LED brightness.
-It employs a lot of the basic concepts of avr-libc to achieve
+It employs a lot of the basic concepts of AVR-LibC to achieve
 that goal.
 
 Understanding this project assumes the simple project has been

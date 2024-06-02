@@ -62,7 +62,7 @@
 	improvements to the \ref demo_project "demo project".
 
 	- Theodore A. Roth for having been a long-time maintainer of
-	many of the tools (\b AVR-Libc, the AVR port of \b GDB, \b AVaRICE,
+	many of the tools (\b AVR-LibC, the AVR port of \b GDB, \b AVaRICE,
 	\b uisp, \b avrdude).
 
 	- All the people who currently maintain the tools, and/or

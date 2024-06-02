@@ -164,7 +164,7 @@ this will expand to the library filename:
 libm.a
 \endcode
 
-which happens to be the math library included in avr-libc.
+which happens to be the math library included in AVR-LibC.
 
 If you use this on your linker command line:
 

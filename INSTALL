@@ -1,4 +1,4 @@
-NB: avr-libc requires a cross-compiler.  The recommended way to run
+NB: AVR-LibC requires a cross-compiler.  The recommended way to run
 configure is
 
 ./configure --build=`./config.guess` --host=avr [other options]

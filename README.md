@@ -1,4 +1,4 @@
-# AVR LibC
+# AVR-LibC
 
 This is the standard library for Atmel AVR devices together with the
 AVR-GCC compiler.
@@ -17,7 +17,7 @@ for details.
 The library is distributed using a modified BSD-style
 [license](LICENSE).
 
-## AVR LibC Source Code
+## AVR-LibC Source Code
 
 The official source code repository is located at
 https://github.com/avrdudes/avr-libc/

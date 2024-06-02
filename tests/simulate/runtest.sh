@@ -30,7 +30,7 @@
 
 # $Id$
 
-# Script for testing Avr-libc fuctions, mainly, by simulating. An installed
+# Script for testing AVR-LibC fuctions, mainly, by simulating. An installed
 # simulavr is needed. The simulavr-0.1.2.1 is suitable, only the correction
 # of divide_by_zero error is needed. The script is tuned to run after 'make'
 # without any options, at this place.
@@ -65,8 +65,8 @@ Usage ()
     cat <<EOF
 Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTsh] [FILE]...
 Options:
-  -a AVRDIR   Specify avr-libc builddir (default is $AVRDIR)
-  -i          Test an installed avr-libc
+  -a AVRDIR   Specify AVR-LibC builddir (default is $AVRDIR)
+  -i          Test an installed AVR-LibC
   -c          Compile/link only
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
   -k          Keep simulator core file upon simulation error

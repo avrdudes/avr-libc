@@ -39,7 +39,7 @@
     \brief Allocate \a __size bytes of space in the stack frame of the caller.
 
     This temporary space is automatically freed when the function that
-    called alloca() returns to its caller. Avr-libc defines the alloca() as
+    called alloca() returns to its caller. AVR-LibC defines the alloca() as
     a macro, which is translated into the inlined \c __builtin_alloca()
     function. The fact that the code is inlined, means that it is impossible
     to take the address of this function, or to change its behaviour by

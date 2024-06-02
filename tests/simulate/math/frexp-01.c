@@ -177,7 +177,7 @@ int main ()
     }
 
 #ifdef	__AVR__
-    /* NULL is a legal address for Avr-libc realization: skip writing.	*/
+    /* NULL is a legal address for AVR-LibC realization: skip writing.	*/
     {
 	unsigned char r1 = 1;
         vf.fl = frexp (48, (int *)0);

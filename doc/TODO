@@ -1,4 +1,4 @@
-TODO for avr-libc:
+TODO for AVR-LibC:
 
 Before 1.8:
     - Document:
@@ -13,7 +13,7 @@ Before 1.8:
     - fix signed/unsigned gcc warnings (qsort.c).
       [Joerg has patch [1] for this that just needs some love before it's
       committed.]
-    - Write for avr-libc [3] : stddef.h, sys/types.h, limits.h,
+    - Write for AVR-LibC [3] : stddef.h, sys/types.h, limits.h,
       sys/systemcfg.h?
     - Add <compat/io.h>: smallest common denominator for IO port
       declarations. [7]

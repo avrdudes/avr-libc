@@ -1,5 +1,5 @@
 /*
-   AVR LIBC
+   AVR-LibC
    strlcat_P()
 
    Copyright (c) 2003, 2005, 2006, 2007 Eric B. Weddington, R. Patommel

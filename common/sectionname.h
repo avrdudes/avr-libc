@@ -32,7 +32,7 @@
 #ifndef __SECTIONNAME_H__
 #define __SECTIONNAME_H__
 
-/* Put all avr-libc functions in a common, unique sub-section name under .text. */
+/* Put all AVR-LibC functions in a common, unique sub-section name under .text. */
 
 #define CLIB_SECTION    .text.avr-libc
 #define MLIB_SECTION    .text.avr-libc.fplib

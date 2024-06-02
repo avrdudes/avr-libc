@@ -30,7 +30,7 @@
 
 # $Id$
 
-# Script for testing Avr-libc fuctions, mainly, by simulating.
+# Script for testing AVR-LibC fuctions, mainly, by simulating.
 # avrtest is needed. The script is tuned to run after 'make'
 # without any options, at this place.  Use
 #
@@ -129,8 +129,8 @@ Usage ()
     cat <<EOF
 Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTsh] [FILE]...
 Options:
-  -a AVRDIR   Specify avr-libc builddir (default is $AVRDIR)
-  -i          Test an installed avr-libc
+  -a AVRDIR   Specify AVR-LibC builddir (default is $AVRDIR)
+  -i          Test an installed AVR-LibC
   -c          Compile/link only
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
   -t          Add pass at host computer

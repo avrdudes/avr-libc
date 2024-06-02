@@ -9,7 +9,7 @@ Installation instructions:
    (configure --target=avr --enable-languages=c,c++).  C++ support is
    still experimental and incomplete (no libstdc++), and needs testing.
 
-3. Now you can build and install avr-libc - type
+3. Now you can build and install AVR-LibC - type
 
    ./configure --build=`./config.guess` --host=avr && make
 
@@ -27,7 +27,7 @@ that if you execute ./configure ... --prefix=/location. There are
 other configure options if you like.  Type "./configure --help" to see
 them.
 
-Note: If you obtained avr-libc directly from cvs, you will need to run
+Note: If you obtained AVR-LibC directly from cvs, you will need to run
 the bootstrap script.  Be sure to use recent versions of autoconf and
 automake.  automake version 1.7 and autoconf version 2.57 or above are
 required (1.9, and 2.59 resp. are recommended).

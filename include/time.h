@@ -43,7 +43,7 @@ extern  "C" {
 /** \defgroup avr_time <time.h>: Time
     \code #include <time.h> \endcode
     <h3>Introduction to the Time functions</h3>
-    This file declares the time functions implemented in avr-libc.
+    This file declares the time functions implemented in AVR-LibC.
 
     The implementation aspires to conform with ISO/IEC 9899 (C90). However, due to limitations of the
     target processor and the nature of its development environment, a practical implementation must

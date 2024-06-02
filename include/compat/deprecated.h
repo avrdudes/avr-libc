@@ -148,7 +148,7 @@ void signame (void)
 /**
    \name Obsolete IO macros
 
-   Back in a time when AVR-GCC and avr-libc could not handle IO port
+   Back in a time when AVR-GCC and AVR-LibC could not handle IO port
    access in the direct assignment form as they are handled now, all
    IO port access had to be done through specific macros that
    eventually resulted in inline assembly instructions performing the

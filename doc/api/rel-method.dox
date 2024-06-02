@@ -51,9 +51,9 @@ was changed.
 Starting with version 1.4.0, a file <avr/version.h> indicates the
 library version of an installed library tree.
 
-\section release_info Releasing AVR Libc
+\section release_info Releasing AVR-LibC
 
-The information in this section is only relevant to AVR Libc developers and
+The information in this section is only relevant to AVR-LibC developers and
 can be ignored by end users.
 
 \note In what follows, I assume you know how to use SVN and how to checkout

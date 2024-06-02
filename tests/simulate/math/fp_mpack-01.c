@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Test of __fp_mpack() function. This is an internal function of Avr-libc.
+/* Test of __fp_mpack() function. This is an internal function of AVR-LibC.
    $Id$
  */
 #include <math.h>

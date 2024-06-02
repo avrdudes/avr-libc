@@ -51,7 +51,7 @@ device IO header files, and after <avr/sfr_defs.h>
 /*
 These are registers that are not previously defined in the individual
 IO header files, OR they are defined here because they are used in parts of
-avr-libc even if a device is not selected but a general architecture has
+AVR-LibC even if a device is not selected but a general architecture has
 been selected.
 */
 

@@ -30,8 +30,8 @@
 /* bug #22800: sprintf() expands a 128char string parameter incorrectly
    $Id$
    
-   This bug is marked as INVALID.  It is take place with avr-libc 1.4 only,
-   which is not supported now.  Avr-libc 1.6 is correct.
+   This bug is marked as INVALID.  It is take place with AVR-LibC 1.4 only,
+   which is not supported now.  AVR-LibC 1.6 is correct.
  */
 
 #include <stdio.h>

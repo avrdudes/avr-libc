@@ -161,7 +161,7 @@ AVR GCC uses Variable Attributes to achieve the same effect:
 
 \note See the GCC User Manual for more information about Variable Attributes.
 
-avr-libc provides a convenience macro for the Variable Attribute:
+AVR-LibC provides a convenience macro for the Variable Attribute:
 
 \code
 #include <avr/pgmspace.h>

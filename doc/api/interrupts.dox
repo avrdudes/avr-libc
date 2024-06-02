@@ -33,7 +33,7 @@
 \note This discussion of interrupts was originally taken from Rich Neswold's
 document. See \ref acks.
 
-<h3>Introduction to avr-libc's interrupt handling</h3>
+<h3>Introduction to AVR-LibC's interrupt handling</h3>
 
 It's nearly impossible to find compilers that agree on how to handle interrupt
 code. Since the C language tries to stay away from machine dependent details,

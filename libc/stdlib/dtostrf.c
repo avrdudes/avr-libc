@@ -40,7 +40,7 @@
 	If precision is > 0, the string is right adjusted with trailing spaces.
    dtostrf.S code:
 	'p_width' is a register for left/right adjustment
-   avr-libc manual:
+   AVR-LibC manual:
 	nothing about this
 
    So, for compatibilty 'width' is signed value to left/right adjust.
@@ -52,7 +52,7 @@ ftostrf (float val, signed char width, unsigned char prec, char *sout)
 {
     unsigned char flags;
 
-    /* DTOA_UPPER: for compatibility with avr-libc <= 1.4 with NaNs	*/
+    /* DTOA_UPPER: for compatibility with AVR-LibC <= 1.4 with NaNs	*/
     flags = width < 0 ? DTOA_LEFT | DTOA_UPPER : DTOA_UPPER;
     ftoa_prf (val, sout, abs(width), prec, flags);
     return sout;

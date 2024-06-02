@@ -87,7 +87,7 @@ if test "x${build_alias}" = "x${host_alias}"; then
 	fi
 	AC_MSG_RESULT(no)
 	AC_MSG_WARN()
-	AC_MSG_WARN(AVR-LIBC must be built using an avr cross-compiler.)
+	AC_MSG_WARN(AVR-LibC must be built using an avr cross-compiler.)
 	AC_MSG_WARN(Try configuring with:)
 	AC_MSG_WARN("$0 --build=$build_alias --host=avr")
 	AC_MSG_WARN()

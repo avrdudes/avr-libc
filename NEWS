@@ -1,4 +1,4 @@
-*** Changes since avr-libc-2.1.0:
+*** Changes since AVR-LibC-2.1.0:
 
 * General:
 
@@ -61,7 +61,7 @@
 
   - Added EEPROM support for: double, long double, uint64_t (*_qword).
 
-  - AVR LibC does not use section .progmem.* any more for lookup tables and
+  - AVR-LibC does not use section .progmem.* any more for lookup tables and
     string literals.  Instead, .progmemx.* is used which does not require
     that the data resides in the lower 64 KiB of program memory (Issue #962).
 
@@ -101,7 +101,7 @@
 * Other changes:
 
 
-*** Changes in avr-libc-2.1.0:
+*** Changes in AVR-LibC-2.1.0:
 
 * Improvements and additions:
 
@@ -145,7 +145,7 @@
 * Other changes:
 
 
-*** Changes in avr-libc-2.0.0:
+*** Changes in AVR-LibC-2.0.0:
 
 * General:
 
@@ -209,7 +209,7 @@
   Overhaul of doxygen documentation.
 
 
-*** Changes in avr-libc-1.8.1:
+*** Changes in AVR-LibC-1.8.1:
 
 * Bugs fixed:
 
@@ -303,7 +303,7 @@
   - A number of changes have been applied to make avr-libc more C++
     aware.
 
-*** Changes in avr-libc-1.8.0:
+*** Changes in AVR-LibC-1.8.0:
 
 * Bugs fixed:
 
@@ -351,7 +351,7 @@
   then the new inline function calls __strlen_P as normal.
 
 
-*** Changes in avr-libc-1.7.1:
+*** Changes in AVR-LibC-1.7.1:
 
 * Bugs fixed:
 
@@ -374,7 +374,7 @@
 * Other changes:
 
 
-*** Changes in avr-libc-1.7.0:
+*** Changes in AVR-LibC-1.7.0:
 
 * Bugs fixed:
   [Atmel: #7159] the memory location of tccr0b is mixed with tccr0a for tiny48/88
@@ -489,7 +489,7 @@
   [#27434] Arguments of macros must be protected in parentheses
   [#28575] Minor bug in iousb162.h - missing FUSE_ prefixes
   [#28688] using_tools.dox fails to build due to extra underscore
-  [#28756] Bug in AVR libc 1.6.7 (power.h for 8-bit AVR)
+  [#28756] Bug in AVR-LibC 1.6.7 (power.h for 8-bit AVR)
   [#28812] iotn48.h TWS# bits off by one
   [#28584] iocanxx.h Add word definitions to iocanxx.h
   [#28627] power.h ATMEGA32U2 clock_prescale_set() not available
@@ -731,7 +731,7 @@
    memcmp_PF
 
 
-*** Changes in avr-libc-1.6.0:
+*** Changes in AVR-LibC-1.6.0:
 
 * Main changes from avr-libc 1.4 to 1.6:
 
@@ -974,7 +974,7 @@
 
    dtostre
 
-*** Changes in avr-libc-1.4.0:
+*** Changes in AVR-LibC-1.4.0:
 
 * Major API changes:
 
@@ -1116,7 +1116,7 @@
   string/strsep
   string/strstr
 
-*** Changes since avr-libc-1.2.4:
+*** Changes since AVR-LibC-1.2.4:
 
 * Bugs fixed:
 
@@ -1134,7 +1134,7 @@
           respective addresses (low/high/ext fuse, lock bits)
 
 
-*** Changes since avr-libc-1.2.3:
+*** Changes since AVR-LibC-1.2.3:
 
 * Bugs fixed:
 
@@ -1161,13 +1161,13 @@
 
 * demo.c extended for ATmega16
 
-*** Changes since avr-libc-1.2.2:
+*** Changes since AVR-LibC-1.2.2:
 
 * Bugs fixed:
 
   [#11987] sscanf parsing problem : leading zero ignored in %u
 
-*** Changes since avr-libc-1.2.1:
+*** Changes since AVR-LibC-1.2.1:
 
 * Bugs fixed:
 
@@ -1178,7 +1178,7 @@
   [#11898] Change optimisation level for building printf libraries to -Os.
 
 
-*** Changes since avr-libc-1.2.0:
+*** Changes since AVR-LibC-1.2.0:
 
 * Bugs fixed:
 
@@ -1207,7 +1207,7 @@ As a prerequisite for this, the function strnlen_P() has been added
 which is similar to strnlen() except that it takes a pointer to a
 program-space string.
 
-*** Changes in avr-libc-1.2:
+*** Changes in AVR-LibC-1.2:
 
 * Bugs fixed:
 
@@ -1365,7 +1365,7 @@ applications based on avr-libc.
 
 To build the documentation, doxygen-1.3.4 or newer is strongly recommended.
 
-*** Changes in avr-libc-1.0:
+*** Changes in AVR-LibC-1.0:
 
 * Move source to cvs repositiory at http://savannah.gnu.org/projects/avr-libc
 
@@ -1486,7 +1486,7 @@ eeprom_write_word
 eeprom_write_block
 
 
-*** Changes up to avr-libc-20020203:
+*** Changes up to AVR-LibC-20020203:
 
 See the ChangeLog file up to 2002-02-03 for details.
 

@@ -168,7 +168,7 @@ Convert addresses to file and line.
 Filter to demangle encoded C++ symbols.
 
 
-\section overview_avr-libc avr-libc
+\section overview_avr-libc AVR-LibC
 
 GCC and Binutils provides a lot of the tools to develop software, but there is
 one critical component that they do not provide: a Standard C Library.
@@ -176,20 +176,20 @@ one critical component that they do not provide: a Standard C Library.
 There are different open source projects that provide a Standard C Library
 depending upon your system time, whether for a native compiler (GNU Libc),
 for some other embedded system (newlib), or for some versions of Linux (uCLibc). 
-The open source AVR toolchain has its own Standard C Library project: avr-libc.
+The open source AVR toolchain has its own Standard C Library project: AVR-LibC.
 
-AVR-Libc provides many of the same functions found in a regular Standard C
+AVR-LibC provides many of the same functions found in a regular Standard C
 Library and many additional library functions that is specific to an AVR. Some
 of the Standard C Library functions that are commonly used on a PC environment
 have limitations or additional issues that a user needs to be aware of when 
 used on an embedded system.
 
-AVR-Libc also contains the most documentation about the whole AVR toolchain.
+AVR-LibC also contains the most documentation about the whole AVR toolchain.
 
 
 \section overview_building_software Building Software
 
-Even though GCC, Binutils, and avr-libc are the core projects that are used
+Even though GCC, Binutils, and AVR-LibC are the core projects that are used
 to build software for the AVR, there is another piece of software that
 ties it all together: Make. GNU Make is a program that makes things, and 
 mainly software. Make interprets and executes a Makefile that is written

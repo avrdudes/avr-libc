@@ -59,13 +59,13 @@ parentheses. In AVR GCC, there is a special attribute called \c progmem. This
 attribute is use on data declarations, and tells the compiler to place
 the data in the Program Memory (Flash).
 
-AVR-Libc provides a simple macro \c PROGMEM that is defined as the attribute
+AVR-LibC provides a simple macro \c PROGMEM that is defined as the attribute
 syntax of GCC with the \c progmem attribute. This macro was created as a
 convenience to the end user, as we will see below. The \c PROGMEM macro is
 defined in the \c <avr/pgmspace.h> system header file.
 
 It is difficult to modify GCC to create new extensions to the C language syntax,
-so instead, avr-libc has created macros to retrieve the data from the Program
+so instead, AVR-LibC has created macros to retrieve the data from the Program
 Space. These macros are also found in the \c <avr/pgmspace.h> system header
 file.
 

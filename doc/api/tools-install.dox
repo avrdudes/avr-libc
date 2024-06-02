@@ -83,7 +83,7 @@ systems, and another section for Windows.
   \ref install_avr_gcc "Installation"
 </dd>
 
-<dt>AVR LibC</dt>
+<dt>AVR-LibC</dt>
 <dd>
   Project Home: http://savannah.gnu.org/projects/avr-libc <br>
   Source Downloads: https://download-mirror.savannah.gnu.org/releases/avr-libc <br>
@@ -326,13 +326,13 @@ $ make install-strip
 can save you some space.
 
 
-\subsection install_avr_libc AVR LibC
+\subsection install_avr_libc AVR-LibC
 \addindex installation, avr-libc
 
 \warning You \b must install
 \ref install_avr_binutils "avr-binutils",
 \ref install_avr_gcc "avr-gcc" and make sure your
-\ref path "path is set" properly before installing avr-libc.
+\ref path "path is set" properly before installing AVR-LibC.
 
 \note If you have obtained the latest AVR-LibC from \ref using_git "git",
 you will have to run the \c \./bootstrap script before using either of the
@@ -410,7 +410,7 @@ $ make install
 \note You might want to have already installed
 \ref install_avr_binutils "avr-binutils",
 \ref install_avr_gcc "avr-gcc" and
-\ref install_avr_libc "avr-libc"
+\ref install_avr_libc "AVR-LibC"
 if you want to have the test programs built in the simulavr source.
 
 
@@ -634,7 +634,7 @@ make all html install 2>&1 | tee $package-make.log
         \endverbatim
 
 
-- <b>avr-libc</b><br>
+- <b>AVR-LibC</b><br>
     - Open source code package.
     - Configure and build at the top of the source code tree.
     - Set PATH, in order:
