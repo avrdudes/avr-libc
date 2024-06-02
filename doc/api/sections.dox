@@ -388,7 +388,7 @@ in the default linker description files.
 <tr>
   <td><tt>\ref sec_dot_text ".text"</tt>
   <td>Executable code, data in progmem
-  <td colspan="2"><center>text</center>
+  <td>
 </tr>
 <tr>
   <td><tt>\ref sec_dot_data ".data"</tt>
