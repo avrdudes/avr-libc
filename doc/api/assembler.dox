@@ -298,6 +298,7 @@ expressions use a C-like syntax.
 
 Some common directives include:
 
+\anchor ass_sections
 <table>
 <caption id="ass_sections">Assembler Directives: Sections</caption>
 <tr>
@@ -338,7 +339,6 @@ Some common directives include:
 </tr>
 </table>
 
-<!-- ------------------------------------------------------------- -->
 <table>
 <caption id="ass_symbols">Assembler Directives: Symbols</caption>
 <tr>
@@ -409,7 +409,6 @@ Some common directives include:
     a fixed address.
 </table>
 
-<!-- ------------------------------------------------------------- -->
 <table>
 <caption id="ass_data_and_align">Assembler Directives: Data and Alignment</caption>
 <tr>
