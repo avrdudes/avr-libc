@@ -32,7 +32,7 @@
 
 \section malloc_intro Introduction
 
-Many of the devices that are possible targets of avr-libc have a minimal
+Many of the devices that are possible targets of AVR-LibC have a minimal
 amount of RAM.  The smallest parts supported by the C environment come
 with 128 bytes of RAM.  This needs to be shared between initialized
 and uninitialized variables (\ref mem_sections "sections" \c .data and
@@ -73,7 +73,7 @@ and to get it all done with reasonably few CPU cycles. Microcontrollers
 are often low on space and also run at much lower speeds than the typical PC 
 these days.
 
-The memory allocator implemented in avr-libc tries to cope with all of
+The memory allocator implemented in AVR-LibC tries to cope with all of
 these constraints, and offers some tuning options that can be used if
 there are more resources available than in the default configuration.
 

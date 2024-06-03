@@ -83,7 +83,7 @@ systems, and another section for Windows.
   \ref install_avr_gcc "Installation"
 </dd>
 
-<dt>AVR LibC</dt>
+<dt>AVR-LibC</dt>
 <dd>
   Project Home: http://savannah.gnu.org/projects/avr-libc <br>
   Source Downloads: https://download-mirror.savannah.gnu.org/releases/avr-libc <br>
@@ -326,7 +326,7 @@ $ make install-strip
 can save you some space.
 
 
-\subsection install_avr_libc AVR LibC
+\subsection install_avr_libc AVR-LibC
 \addindex installation, avr-libc
 
 \warning You \b must install

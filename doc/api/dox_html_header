@@ -52,9 +52,9 @@ $extrastylesheet
 </table>
 <table>
   <tr>
-    <td align="left"><a href="http://www.nongnu.org/avr-libc/"><h2>AVR Libc Home Page</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
     <td align="center" colspan=4><img src="avrs.png" alt="AVRs" align="middle" border="0"></td>
-    <td align="right"><a href="https://savannah.nongnu.org/projects/avr-libc/"><h2>AVR Libc Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
   </tr>
   <tr>
     <td align="center" width="20%"><a href="index.html"><h2>Main Page</h2></a></td>
