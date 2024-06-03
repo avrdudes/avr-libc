@@ -34,7 +34,7 @@
 \section avr_libc_intro Introduction
 
 The latest version of this document is always available from
-http://savannah.nongnu.org/projects/avr-libc/
+https://avrdudes.github.io/avr-libc/
 
 The AVR-LibC package provides a subset of the standard C library for
 <a href="https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/8-bit-mcus/avr-mcus">Atmel AVR
@@ -551,7 +551,7 @@ AVR-LibC can be freely used and redistributed, provided the following
 license conditions are met.
 
 \verbatim
-Portions of AVR-LibC are Copyright (c) 1999-2016
+Portions of AVR-LibC are Copyright (c) 1999-2024
 Werner Boellmann,
 Dean Camera,
 Pieter Conradie,

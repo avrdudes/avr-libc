@@ -169,7 +169,7 @@ AVR-LibC provides a convenience macro for the Variable Attribute:
 .
 .
 int mydata[] PROGMEM = ....
-\endcode 
+\endcode
 
 \note The PROGMEM macro expands to the Variable Attribute of \c progmem. This
 macro requires that you include \c <avr/pgmspace.h>. This is the canonical 

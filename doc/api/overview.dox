@@ -175,7 +175,7 @@ one critical component that they do not provide: a Standard C Library.
 
 There are different open source projects that provide a Standard C Library
 depending upon your system time, whether for a native compiler (GNU Libc),
-for some other embedded system (newlib), or for some versions of Linux (uCLibc). 
+for some other embedded system (Newlib), or for some versions of Linux (uCLibc).
 The open source AVR toolchain has its own Standard C Library project: AVR-LibC.
 
 AVR-LibC provides many of the same functions found in a regular Standard C
