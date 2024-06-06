@@ -813,7 +813,6 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/using-tools.dox \
                          @top_srcdir@/doc/api/optimize.dox \
                          @top_srcdir@/doc/api/using-avrprog.dox \
-                         @top_srcdir@/doc/api/rel-method.dox \
                          @top_srcdir@/doc/api/acknowledge.dox \
                          @top_srcdir@/doc/api/main_page.dox \
                          @top_srcdir@/doc/examples \
