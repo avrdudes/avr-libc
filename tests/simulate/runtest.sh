@@ -79,7 +79,19 @@ If FILE is not specified, the full test list is used.
 EOF
 }
 
-while getopts "a:icg:ktTshv" opt ; do
+OPTS="a:icg:ktTshv"
+
+# First option pass for -h only so that we get the defaults right when
+# options like -a are specified.
+while getopts $OPTS opt ; do
+    case $opt in
+	h)	Usage `basename $myname` ; exit 0 ;;
+    esac
+done
+
+# Second option pass: When -h was not specified, do the work.
+OPTIND=1
+while getopts $OPTS opt ; do
     case $opt in
 	a)	AVRDIR="$OPTARG" ;;
 	i)	AVRDIR= ;;
@@ -89,7 +101,6 @@ while getopts "a:icg:ktTshv" opt ; do
 	t)	HOST_PASS=1 ;;
 	T)	HOST_ONLY=1 ; HOST_PASS=1 ;;
 	s)	FLAG_STOP=1 ;;
-	h)	Usage `basename $myname` ; exit 0 ;;
 	v)	set -x ;;
 	*)	Errx "Invalid option(s). Try '-h' for more info."
     esac
@@ -218,7 +229,7 @@ Compile ()
 	*.c)	flags="$flags -std=gnu99" ;;
     esac
 
-    $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 -o $3 $crt $1 $libs
+    $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 $crt $1 $libs -o $3
 }
 
 
