@@ -71,7 +71,8 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` \( -name crtm8.o -o -name exit.o \) -print | grep avr4)
+DEMO_LIBS            =  $(abs_top_builddir)/avr/lib/avr4/exit.o
+DEMO_LIBS            += $(abs_top_builddir)/avr/devices/atmega8/crtatmega8.o
 # As avr-gcc must have been installed already, we can reference its
 # library by a -l option.
 DEMO_LIBS            += -lgcc
