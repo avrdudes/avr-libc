@@ -1300,6 +1300,41 @@ provided \c double is a 32-bit type.
 
 GCC inline asm has some limitations.
 
+\subsection inline_asm_fails_split Setting a Register on one asm and using it in a different one
+
+Sequences like the following are not supposed to work:
+\code
+char var;
+
+void set_var (char c)
+{
+    __asm ("inc r24");
+    __asm ("sts var, r24");
+}
+\endcode
+
+- There is no guarantee whatsoever that the value in R24 will survive from
+one asm to the next.  Such code might work in many situations, but it
+is still wrong and the compiler may very well put instructions bewtween the
+asm statements that change R24 prior to the first asm and also between the
+asm statements.
+
+- R24 is changed without noticing the compiler. When R24 contains other data,
+then that data will be trashed.
+
+A correct code would be
+\code
+    __asm ("inc %0"    "\n\t"
+           "sts var, %0"
+           :: "r" (c) : "memory");
+\endcode
+or
+\code
+    __asm ("inc %1"    "\n\t"
+           "sts %0, %1"
+           : "=m" (var) : "r" (c));
+\endcode
+
 \subsection inline_asm_fails_regvar Letting an Operand cross the Boundaries of the Y Register
 
 It is not possible to bind a value to a local register variable that
