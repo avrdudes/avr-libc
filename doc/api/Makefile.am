@@ -71,12 +71,12 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-DEMO_LIBS            =  $(abs_top_builddir)/avr/lib/avr4/exit.o
+DEMO_LIBS            = $(abs_top_builddir)/avr/lib/avr4/exit.o
 DEMO_LIBS            += $(abs_top_builddir)/avr/devices/atmega8/crtatmega8.o
 # As avr-gcc must have been installed already, we can reference its
 # library by a -l option.
 DEMO_LIBS            += -lgcc
-DEMO_INC             = $(shell cd $(top_srcdir) && echo "-I`pwd`/include")
+DEMO_INC             = -I$(abs_top_srcdir)/include
 
 # All demo projects where we need to run "make dox" beforehand.
 DEMOS                = demo largedemo stdiodemo
