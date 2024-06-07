@@ -377,12 +377,12 @@ in the default linker description files.
 <table>
 <caption>Output Sections and Memory Regions</caption>
 <tr>
-  <th>Output<br>Section
+  <th>Output
   <th>Purpose
   <th colspan="2">Memory Region
 </tr>
 <tr>
-  <th>
+  <th>Section
   <th>
   <th>LMA
   <th>VMA
@@ -390,8 +390,8 @@ in the default linker description files.
 <tr>
   <td><tt>\ref sec_dot_text ".text"</tt>
   <td>Executable code, data in progmem
-  <td>
-  <td>
+  <td>text
+  <td>text
 </tr>
 <tr>
   <td><tt>\ref sec_dot_data ".data"</tt>

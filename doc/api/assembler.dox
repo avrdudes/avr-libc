@@ -298,7 +298,6 @@ expressions use a C-like syntax.
 
 Some common directives include:
 
-\anchor ass_sections
 <table>
 <caption id="ass_sections">Assembler Directives: Sections</caption>
 <tr>
