@@ -57,7 +57,7 @@
     <h3>Introduction to the Standard IO facilities</h3>
 
     This file declares the standard IO facilities that are implemented
-    in \c avr-libc.  Due to the nature of the underlying hardware,
+    in AVR-LibC.  Due to the nature of the underlying hardware,
     only a limited subset of standard IO is implemented.  There is no
     actual file implementation available, so only device IO can be
     performed.  Since there's no operating system, the application
@@ -74,7 +74,7 @@
     Also, they are not fast due to the nature of interpreting the
     format string at run-time.  Whenever possible, resorting to the
     (sometimes non-standard) predetermined conversion facilities that are
-    offered by avr-libc will usually cost much less in terms of speed
+    offered by AVR-LibC will usually cost much less in terms of speed
     and code size.
 
     <h3>Tunable options for code size vs. feature set</h3>
@@ -88,16 +88,16 @@
     <h3>Outline of the chosen API</h3>
 
     The standard streams \c stdin, \c stdout, and \c stderr are
-    provided, but contrary to the C standard, since avr-libc has no
+    provided, but contrary to the C standard, since AVR-LibC has no
     knowledge about applicable devices, these streams are not already
     pre-initialized at application startup.  Also, since there is no
-    notion of "file" whatsoever to avr-libc, there is no function
+    notion of "file" whatsoever to AVR-LibC, there is no function
     \c fopen() that could be used to associate a stream to some device.
     (See \ref stdio_note1 "note 1".)  Instead, the function \c fdevopen()
     is provided to associate a stream to a device, where the device
     needs to provide a function to send a character, to receive a
     character, or both.  There is no differentiation between "text" and
-    "binary" streams inside avr-libc.  Character \c \\n is sent
+    "binary" streams inside AVR-LibC.  Character \c \\n is sent
     literally down to the device's \c put() function.  If the device
     requires a carriage return (\c \\r) character to be sent before
     the linefeed, its \c put() routine must implement this (see
@@ -422,13 +422,13 @@ extern struct __file *__iob[];
 #if defined(__STDIO_FDEVOPEN_COMPAT_12)
 /*
  * Declare prototype for the discontinued version of fdevopen() that
- * has been in use up to avr-libc 1.2.x.  The new implementation has
+ * has been in use up to AVR-LibC 1.2.x.  The new implementation has
  * some backwards compatibility with the old version.
  */
 extern FILE *fdevopen(int (*__put)(char), int (*__get)(void),
                       int __opts __attribute__((unused)));
 #else  /* !defined(__STDIO_FDEVOPEN_COMPAT_12) */
-/* New prototype for avr-libc 1.4 and above. */
+/* New prototype for AVR-LibC 1.4 and above. */
 extern FILE *fdevopen(int (*__put)(char, FILE*), int (*__get)(FILE*));
 #endif /* defined(__STDIO_FDEVOPEN_COMPAT_12) */
 
@@ -648,7 +648,7 @@ extern int	putchar(int __c);
 /**
    The macro \c putc used to be a "fast" macro implementation with a
    functionality identical to fputc().  For space constraints, in
-   \c avr-libc, it is just an alias for \c fputc.
+   AVR-LibC, it is just an alias for \c fputc.
 */
 #define putc(__c, __stream) fputc(__c, __stream)
 
@@ -798,7 +798,7 @@ extern int	getchar(void);
 /**
    The macro \c getc used to be a "fast" macro implementation with a
    functionality identical to fgetc().  For space constraints, in
-   \c avr-libc, it is just an alias for \c fgetc.
+   AVR-LibC, it is just an alias for \c fgetc.
 */
 #define getc(__stream) fgetc(__stream)
 
@@ -987,7 +987,7 @@ extern char *tmpnam (char *s);
 
 #ifndef __DOXYGEN__
 /*
- * The following constants are currently not used by avr-libc's
+ * The following constants are currently not used by AVR-LibC's
  * stdio subsystem.  They are defined here since the gcc build
  * environment expects them to be here.
  */

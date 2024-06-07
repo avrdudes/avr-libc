@@ -47,7 +47,7 @@
 %define _with_docs 1
 %{?_without_docs: %define _with_docs 0}
 
-Summary: AVR libc.
+Summary: AVR-LibC.
 Name: avr-libc
 Version: %{libc_version}
 Release: 1

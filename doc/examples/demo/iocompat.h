@@ -61,7 +61,7 @@
 #  define OC1 PA6
 #  define DDROC DDRA
 #  if !defined(OCR1A)
-#    /* work around misspelled name in avr-libc 1.4.[0..1] */
+#    /* work around misspelled name in AVR-LibC 1.4.[0..1] */
 #    define OCR OCRA1
 #  else
 #    define OCR OCR1A

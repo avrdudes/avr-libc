@@ -34,7 +34,7 @@
 #define _STDFIX_AVRLIBC_H
 
 /*
- * avr-libc addendum file for Embedded C Fixed-Point support
+ * AVR-LibC addendum file for Embedded C Fixed-Point support
  *
  * See: ISO/IEC TR 18037
  * http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1169.pdf
@@ -44,6 +44,6 @@
 #warning please include <stdfix.h> directly rather than <stdfix-avrlibc.h>
 #endif /* _AVRGCC_STDFIX_H */
 
-/* Room for avr-libc specific extensions */
+/* Room for AVR-LibC specific extensions */
 
 #endif /* _STDFIX_AVRLIBC_H */

@@ -688,7 +688,8 @@ extern long random_r(unsigned long *__ctx);
    an ASCII representation that will be stored under \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
-   Conversion is done in the format \c "[-]d.ddde±dd" where there is
+   Conversion is done in the format
+   <tt>&quot;[-]d.ddde&plusmn;dd&quot;</tt> where there is
    one digit before the decimal-point character and the number of
    digits after it is equal to the precision \c prec; if the precision
    is zero, no decimal-point character appears.  If \c flags has the

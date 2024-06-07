@@ -30,7 +30,7 @@
 
 # $Id$
 
-# Script for testing Avr-libc fuctions, mainly, by simulating.
+# Script for testing AVR-LibC fuctions, mainly, by simulating.
 # avrtest is needed. The script is tuned to run after 'make'
 # without any options, at this place.  Use
 #
@@ -129,8 +129,8 @@ Usage ()
     cat <<EOF
 Usage: $1 [-a AVRDIR] [-g AVR_GCC] [-ictTsh] [FILE]...
 Options:
-  -a AVRDIR   Specify avr-libc builddir (default is $AVRDIR)
-  -i          Test an installed avr-libc
+  -a AVRDIR   Specify AVR-LibC builddir (default is $AVRDIR)
+  -i          Test an installed AVR-LibC
   -c          Compile/link only
   -g AVRGCC   Specify avr-gcc program (default is $AVR_GCC)
   -t          Add pass at host computer
@@ -142,7 +142,19 @@ If FILE is not specified, the full test list is used.
 EOF
 }
 
-while getopts "a:icg:tTshv" opt ; do
+OPTS="a:icg:tTshv"
+
+# First option pass for -h only so that we get the defaults right when
+# options like -a are specified.
+while getopts $OPTS opt ; do
+    case $opt in
+	h)	Usage `basename $myname` ; exit 0 ;;
+    esac
+done
+
+# Second option pass: When -h was not specified, do the work.
+OPTIND=1
+while getopts $OPTS opt ; do
     case $opt in
 	a)	AVRDIR="$OPTARG" ;;
 	i)	AVRDIR= ;;
@@ -397,7 +409,7 @@ Compile ()
 	*.c)	flags="$flags -std=gnu99" ;;
     esac
 
-    $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 -o $3 $crt $1 $o_gcc $libs
+    $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 $crt $1 $o_gcc $libs -o $3
 }
 
 

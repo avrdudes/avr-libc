@@ -85,7 +85,7 @@ int main ()
     CHECK (6, "12345 ", "%d %+l", 12345);
 #endif
 
-    /* 'hh' length modifier is possible, but it is ignored in avr-libc	*/
+    /* 'hh' length modifier is possible, but it is ignored in AVR-LibC	*/
     CHECK (3, "123", "%hhd", 123);
     
     /* Length modifier and conversion mismatch: ignored	*/

@@ -76,7 +76,7 @@
 
    \note If the macro __STDIO_FDEVOPEN_COMPAT_12 is declared before
    including <stdio.h>, a function prototype for fdevopen() will be
-   chosen that is backwards compatible with avr-libc version 1.2 and
+   chosen that is backwards compatible with AVR-LibC version 1.2 and
    before.  This is solely intented for providing a simple migration
    path without the need to immediately change all source code.  Do
    not use for new code.

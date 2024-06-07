@@ -42,7 +42,7 @@
 
   The \ref largedemo "more sophisticated demo project" builds on top
   of that simple project, and adds some controls to it.  It touches
-  a number of avr-libc's basic concepts on its way.
+  a number of AVR-LibC's basic concepts on its way.
 
   A \ref stdiodemo "comprehensive example on using the standard IO facilities"
   intends to explain that complex topic, using a

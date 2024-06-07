@@ -2,7 +2,7 @@
 
 # @configure_input@
 
-# Doxygen configuration file for the avr-libc project.
+# Doxygen configuration file for the AVR-LibC project.
 
 # Doxyfile 1.8.7
 
@@ -828,7 +828,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
 # possible encodings.
 # The default value is: UTF-8.
 
-#INPUT_ENCODING         = ISO-8859-1
+INPUT_ENCODING         = UTF-8
 
 # If the value of the INPUT tag contains directories, you can use the
 # FILE_PATTERNS tag to specify one or more wildcard patterns (like *.cpp and

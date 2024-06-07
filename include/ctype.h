@@ -128,7 +128,7 @@ extern int ispunct(int __c);
 
 /** \ingroup ctype
 
-    Checks for white-space characters.  For the avr-libc library, these are:
+    Checks for white-space characters.  For the AVR-LibC library, these are:
     space, form-feed ('\\f'), newline ('\\n'), carriage return ('\\r'),
     horizontal tab ('\\t'), and vertical tab ('\\v'). */
 

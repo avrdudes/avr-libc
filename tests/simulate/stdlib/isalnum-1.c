@@ -74,7 +74,7 @@ int main ()
     
 
 /* Skip the host, as according to C standart it is not safety to use an
-   argument beyound -1..255 value.  But Avr-libc's ctype functions permit
+   argument beyound -1..255 value.  But AVR-LibC's ctype functions permit
    this.	*/
 #ifdef	__AVR__
     {

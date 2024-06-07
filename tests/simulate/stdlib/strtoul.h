@@ -35,7 +35,7 @@
 #ifndef	__AVR__
 # include <stdio.h>
 #endif
-#ifndef	EINVAL		/* Addition for errno.h in avr-libc-1.2.0	*/
+#ifndef	EINVAL		/* Addition for errno.h in AVR-LibC-1.2.0	*/
 # define EINVAL	22	/* Invalid argument	*/
 #endif
 
