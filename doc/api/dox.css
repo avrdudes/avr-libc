@@ -1,7 +1,4 @@
 /* $Id$ */
-BODY {
-    background-color: #feffe2
-}
 
 div.line {
     /* The original doxgen.css has a line-height of 1.0 at this place.
