@@ -108,10 +108,44 @@
 
   - FDEV_SETUP_STREAM from stdio.h now works with C++ (Issue #898)
 
+  - More than 800, mostly historic issues have been closed -- too many
+    to mention all of them here
+
 * Pull requests:
 
-  - README.md: fix typo in URL #873
-  - Added support for AVR-DA and DB devices #881
+  - README.md: fix typo in URL [#873]
+  - Added support for AVR-DA and DB devices [#881]
+  - Documentation fixes [#968]
+  - Issue #962 - libm: Use ELPM for tables on ELPM devices. [#964]
+  - Issue #934: Fix EEPROM write issue on AVR-Ex and AVR-Dx family [#948]
+  - Add code to initialize NVMCTRL_CTRLB.FLMAP in new module flmap-init.S enhancement [#947]
+  - Add AVR-Ex devices enhancement [#946]
+  - Issue 940 runtest [#941]
+  - include/avr/io*.h: Update I/O header files enhancement [#938]
+  - Issue #936: Provide symbols for exact memory layout. enhancement [#937]
+  - Issue #931: Initialize NVMCTRL_CTRLB.FLMAP for Devices that have it. enhancement [#935]
+  - Issue #931: Initialize NVMCTRL_CTRLB.FLMAP for Devices that have it. [#933]
+  - Issue 929: Remove __ATTR_CONST__ from frexp* protoypes in math.h. [#932]
+  - #890 #884: Fix / add entries for ATmega808/9, ATmega1608/9, ATmega3… [#927]
+  - #921: Use all h files of $srcdir/include/avr in Makefile.am. enhancement [#925]
+  - #892: configure.ac has outdated CHECK_AVR_DEVICE and AM_CONDITIONAL l… [#924]
+  - avrxmega3: fix header installation for attiny424 [#921]
+  - Rename aux.c to _aux_.c duplicate [#920]
+  - iom32u4.h #define USBRF 5 [#919]
+  - memory: Allow the use of stdint types [#918]
+  - doc: Note attiny9 being supported documentation [#915]
+  - Fix __BOOT_SIGROW_READ for some ATtiny [#914]
+  - .githud [#908]
+  - Extend _delay_loop_2 so it works with AVR_TINY. [#902]
+  - Fix inline asm constraints of wdt_enable, wdt_disable. [#901]
+  - Use autotools to determine Python command to run mlib-gen.py. [#896]
+  - Issue #894: Remove scripts that make binary distributions and RPMs. [#895]
+  - Fix issue #892: [#893]
+  - Fix some avrxmega3 device names of generated files [#885]
+  - .gitignore: Add outputs of ./boostrap [#883]
+  - *.py: Use python3 instead of python [#882]
+  - Added support for AVR-DA and DB devices [#881]
+  - README.md: fix typo in URL [#873]
 
 * Other changes:
 
