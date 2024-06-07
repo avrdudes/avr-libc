@@ -63,7 +63,14 @@
 
   - AVR-LibC does not use section .progmem.* any more for lookup tables and
     string literals.  Instead, .progmemx.* is used which does not require
-    that the data resides in the lower 64 KiB of program memory (Issue #962).
+    that the data resides in the lower 64 KiB of program memory.
+    This means that on devices with more than 64 KiB of program memory,
+    the ELPM instruction is used to read the data where formerly it was LPM.
+    Hence code size and execution times on such devices will slightly
+    increase for functions from the prinft and scanf families, and for libm
+    functions that use power series.  (Issue #962).
+    Notice that only since Binutils v2.29 (PR21849), section .progmemx is
+    located after the .text sections.
 
   - The startup code now defines symbols like __DATA_REGION__LENGTH__ and
     __DATA_REGION_ORIGIN__ according to the memories of the used AVR device.
