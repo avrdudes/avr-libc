@@ -44,12 +44,8 @@ m4_define([avr_libc_revision_suffix], [git])dnl  revision suffix (if any)
 m4_define([avr_libc_reldate],  [20220701])dnl    release date
 dnl end of library versioning data
 
-dnl for interim versions:
 m4_define([avr_libc_version],
           avr_libc_major.avr_libc_minor.avr_libc_revision()avr_libc_revision_suffix)dnl
-dnl for releases
-dnl m4_define([avr_libc_version],
-dnl           avr_libc_major.avr_libc_minor.avr_libc_revision())dnl
 m4_define([avr_libc_version_numeric],
           m4_eval(10000 * avr_libc_major + dnl
                     100 * avr_libc_minor + dnl
