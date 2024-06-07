@@ -51,7 +51,6 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        using-avrprog.dox \
                        using-tools.dox \
                        faq.dox \
-                       rel-method.dox \
                        bench.dox \
                        bench-libc.dox \
                        bench-libm.dox \
