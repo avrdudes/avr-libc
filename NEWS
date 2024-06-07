@@ -79,6 +79,14 @@
     To date, only a core specific default value was used, but the devices
     that belong to the same core architecture have different memory sizes.
 
+  - The pgm_read_* and pgm_read_*_far macros and functions now also work for
+    the Reduced Tiny devices. (Issue #563).  The implementation assumes that
+    GCC implements PR71948 which was added in v7.  Notice that on Reduced Tiny:
+    * There is no need for PROGEMM at all because all const objects in static
+      storage are located in program memory since Binutils v2.27 (PR20849).
+    * Even when PROGMEM is used, no pgm_read functions or macros are required.
+      See the GCC documentation on the __progmem__ attribute for Reduced Tiny.
+
 * Issues closed:
 
   - [patch #9543] Add avrxmega3 devices. #824
