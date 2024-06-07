@@ -311,7 +311,7 @@ will have their expected initial values when \c main() is entered.
 \section faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
 
 Some of the timer-related 16-bit IO registers use a temporary register
-(called TEMP in the Atmel datasheet) to guarantee an atomic access to
+(called TEMP in the AVR datasheet) to guarantee an atomic access to
 the register despite the fact that two separate 8-bit IO transfers are
 required to actually move the data.  Typically, this includes access
 to the current timer/counter value register (<tt>TCNT</tt><em>n</em>),

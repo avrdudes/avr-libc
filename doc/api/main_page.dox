@@ -37,7 +37,7 @@ The latest version of this document is always available from
 https://avrdudes.github.io/avr-libc/
 
 The AVR-LibC package provides a subset of the standard C library for
-<a href="https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/8-bit-mcus/avr-mcus">Atmel AVR
+<a href="https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/8-bit-mcus/avr-mcus">Microchip (formerly Atmel) AVR
 8-bit RISC microcontrollers</a>. In addition, the library provides the basic
 startup code needed by most applications.
 
