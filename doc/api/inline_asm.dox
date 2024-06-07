@@ -275,8 +275,9 @@ whistles that can be used to compose an inline assembly statement:
 
 There are special sequences that can be used in the assembly template.
 
+\anchor special_sequences
 <table>
-<caption id="special_sequences">Inline asm Special Sequences</caption>
+<caption>Inline asm Special Sequences</caption>
 <tr>
   <th>Sequence
   <th>Description
@@ -380,8 +381,9 @@ The most up-to-date and detailed information on constraints for the AVR
 can be found in the
 <a href="https://gcc.gnu.org/wiki/avr-gcc#Constraints">avr-gcc Wiki</a>.
 
+\anchor constraints
 <table>
-  <caption id="constraints">Inline asm Operand Constraints</caption>
+  <caption>Inline asm Operand Constraints</caption>
   <tr>
     <th>Constraint
     <th>Registers
@@ -477,8 +479,9 @@ unsigned integer value known at compile-time.
 The following table shows all AVR assembler mnemonics which require
 operands, and the related constraints.
 
+\anchor instructions_and_constraints
 <table>
-<caption id="instructions_and_constraints">AVR Instructions and
+<caption>AVR Instructions and
   Constraints</caption>
 <tr>
   <th>Mnemonic
@@ -643,8 +646,9 @@ print-modify characters.  The one-letter modifier follows the \c \%
 and precedes the operand number like in <tt>"%a0"</tt>, or precedes the
 name in named operands like in <tt>"%a[address]"</tt>.
 
+\anchor print_modifiers
 <table>
-<caption id="print_modifiers">Inline asm Print Modifiers</caption>
+<caption>Inline asm Print Modifiers</caption>
 <tr>
   <th>Modifier
   <th>Number of<br>Arguments
@@ -719,8 +723,9 @@ name in named operands like in <tt>"%a[address]"</tt>.
 
 \section assembly_operand_modifiers Operand Modifiers
 
+\anchor operand_modifiers
 <table>
-<caption id="operand_modifiers">Assembly Code Operand Modifiers</caption>
+<caption>Assembly Code Operand Modifiers</caption>
 <tr>
   <th>Modifier
   <th>Explanation
