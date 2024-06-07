@@ -113,8 +113,6 @@
 
 * Pull requests:
 
-  - README.md: fix typo in URL [#873]
-  - Added support for AVR-DA and DB devices [#881]
   - Documentation fixes [#968]
   - Issue #962 - libm: Use ELPM for tables on ELPM devices. [#964]
   - Issue #934: Fix EEPROM write issue on AVR-Ex and AVR-Dx family [#948]
