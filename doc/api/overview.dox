@@ -34,7 +34,7 @@
 
 \section overview_introduction Introduction
 
-Welcome to the open source software development toolset for the Atmel AVR!
+Welcome to the open source software development toolset for the Microchip (formerly Atmel) AVR!
 
 There is not a single tool that provides everything needed to develop software
 for the AVR. It takes many tools working together. Collectively, the group of
@@ -228,7 +228,7 @@ is another popular GUI front end to GDB, available on Unix and Linux systems.
 
 \section overview_avarice AVaRICE
 
-AVaRICE is a back-end program to AVR GDB and interfaces to the Atmel JTAG
+AVaRICE is a back-end program to AVR GDB and interfaces to the AVR JTAG
 In-Circuit Emulator (ICE), to provide emulation capabilities.
 
 
