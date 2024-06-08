@@ -113,10 +113,13 @@
 * Issues closed:
 
   - [patch #9543] Add avrxmega3 devices. #824
+
   - [bug #49567] Use meta-info from --print-multi-lib and
     --print-multi-directory #642
+
   - [bug #57071] Fix math.h and function names that block 64-bit
     double #670
+
   - Issue #476 [bug #32945] RAMPZ clobbered in far-pointer library.
     Functions from the far-pointer library in libc/pmstring like
     memcpy_PF that read from program memory using ELPM must set
@@ -135,6 +138,8 @@
     to mention all of them here
 
   - Fixed wrong prototypes of frexp, frexpf, frexpl in math.h (Issue #929)
+
+  - time.h: function mktime() is off by 1h when [EU] DST is active (Issue #967)
 
 * Pull requests:
 
