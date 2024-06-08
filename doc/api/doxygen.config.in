@@ -57,7 +57,7 @@ PROJECT_BRIEF          = "Standard C library for AVR-GCC"
 # and the maximum width should not exceed 200 pixels. Doxygen will copy the logo
 # to the output directory.
 
-PROJECT_LOGO           = 
+PROJECT_LOGO           = avr-libc-logo.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -1673,7 +1673,7 @@ EXTRA_PACKAGES         =
 # PROJECT_NAME), or the project number (see PROJECT_NUMBER).
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-LATEX_HEADER           =
+LATEX_HEADER           = dox_latex_header.tex
 
 # The LATEX_FOOTER tag can be used to specify a personal LaTeX footer for the
 # generated LaTeX document. The footer should contain everything after the last

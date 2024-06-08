@@ -175,6 +175,7 @@ clean-local:
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
 	cp $(top_srcdir)/doc/api/avrs.png-save $(AVR_LIBC_USER_MANUAL)/avrs.png
+	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
 	cd latex_src && \
 		sed -e '/tocdepth/s/1/2/' \
 		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \
