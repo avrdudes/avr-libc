@@ -175,31 +175,6 @@ clean-local:
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
 	cp $(top_srcdir)/doc/api/avrs.png-save $(AVR_LIBC_USER_MANUAL)/avrs.png
-	cd latex_src && \
-		sed -e '/tocdepth/s/1/2/' \
-		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \
-		refman.tex > tmp.$$ && \
-		mv -f tmp.$$ refman.tex
-	cd latex_src && \
-		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|p{1.7cm}|p{1.7cm}|p{2cm}|p{5cm}|}/' \
-		-e '/TabularC/s/TabularC/longtable/' \
-		-e '/Vector name/,/^[^ ]/s/\\\\\\hline/\\endhead\\hline/' \
-		group__avr__interrupts.tex > tmp.$$ && \
-		mv -f tmp.$$ group__avr__interrupts.tex
-	cd latex_src && \
-		if [ -f using_tools.tex ] ; then \
-			UT=using_tools.tex; else \
-			UT=using__tools.tex; fi; \
-		sed -e '/{TabularC}{3}/s/{TabularC}{3}/{longtable}{|l|>{\PBS}p{5cm}|>{\PBS}p{3.5cm}|}/' \
-		-e '/begin{longtable}/,/TabularC/s/TabularC/longtable/' \
-		-e '/Architecture/s/\\\\\\hline/\\endhead\\hline/' \
-		-e '/MCU types are currently/,/Architecture/s/>.*|/l|l|/' \
-		$$UT > tmp.$$ && \
-		mv -f tmp.$$ $$UT
-	cd latex_src && \
-		sed -e '/renewcommand.*cftchap.*font/s/renew/new/' \
-		doxygen.sty > tmp.$$ && \
-		mv -f tmp.$$ doxygen.sty
 
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in
