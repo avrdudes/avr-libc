@@ -108,8 +108,10 @@
 
   - FDEV_SETUP_STREAM from stdio.h now works with C++ (Issue #898)
 
-  - More than 800, mostly historic issues have been closed -- too many
+  - More than 80, mostly historic issues have been closed -- too many
     to mention all of them here
+
+  - Fixed wrong prototypes of frexp, frexpf, frexpl in math.h (Issue #929)
 
 * Pull requests:
 
