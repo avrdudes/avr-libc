@@ -38,7 +38,7 @@ CLEANFILES           = *.html *.pdf *.ma *.mas \
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        doxygen.config.in \
-                       main_page.dox \
+                       main_page.dox.in \
                        assembler.dox \
                        inline_asm.dox \
                        interrupts.dox \
@@ -110,7 +110,7 @@ FIG2DEV= fig2dev
 	$(FIG2DEV) -L png $< $@
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig \
-		avr-libc-logo.png avr-libc-logo-small.png
+		avr-libc-logo.png avr-libc-logo.png
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
@@ -172,10 +172,17 @@ clean-local:
 # \cftchappagefont, respectively, by a \newcommand, to fix a LaTeX
 # error.
 
-latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
+latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 	doxygen doxygen.config
 	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
+
+# Add contents of toplevel LICENSE to main page
+main_page.dox: main_page.dox.in
+	cat $(srcdir)/main_page.dox.in > main_page.dox
+	cat $(top_srcdir)/LICENSE >> main_page.dox
+	echo '\endverbatim' >> main_page.dox
+	echo '*/' >> main_page.dox
 
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in

@@ -1,4 +1,4 @@
-The contents of avr-libc are licensed with a Modified BSD License.
+The contents of AVR-LibC are licensed with a Modified BSD License.
 
 All of this is supposed to be Free Software, Open Source, DFSG-free,
 GPL-compatible, and OK to use in both free and proprietary applications.
@@ -9,18 +9,31 @@ Additions and corrections to this file are welcome.
 
 *******************************************************************************
 Portions of avr-libc are Copyright (c) 1999-2024
+Werner Boellmann,
+Dean Camera,
+Pieter Conradie,
+Brian Dean,
 Keith Gudger,
+Wouter van Gulik,
 Bjoern Haase,
 Steinar Haugen,
 Peter Jansen,
 Reinhard Jessich,
 Magnus Johansson,
 Georg Johann Lay,
+Harald Kipp,
+Carlos Lamas,
+Cliff Lawson,
 Artur Lipowski,
 Marek Michalkiewicz,
+Todd C. Miller,
+Rich Neswold,
 Colin O'Flynn,
 Bob Paddock,
+Andrey Pashchenko,
 Reiner Patommel,
+Florin-Viorel Petrov,
+Alexander Popov,
 Michael Rickman,
 Theodore A. Roth,
 Juergen Schilling,
@@ -29,9 +42,11 @@ Anatoly Sokolov,
 Nils Kristian Strom,
 Michael Stumpf,
 Stefan Swanepoel,
+Helmut Wallner,
 Eric B. Weddington,
 Joerg Wunsch,
 Dmitry Xmelkov,
+egnite Software GmbH,
 The Regents of the University of California.
 All rights reserved.
 
