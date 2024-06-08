@@ -44,6 +44,13 @@
   - Added support for Classic devices:
     ATmega168PB ATmega328PB ATmega324PB
 
+  - Added a new module to lib<mcu>.a that can be used as part of the
+    startup code by the compiler.  The compiler will link the code when
+    a device from the AVR-Dx or AVR-Ex families uses a non-default layout
+    of NVMCTRL_CTRLB.FLMAP (Issue #931, Binutils PR31124, GCC PR112944).
+    For more details on the feature see the GCC v14 release notes at
+    https://gcc.gnu.org/gcc-14/changes.html#avr
+
   - Added support for: strndup.
 
   - Added support for: PROGMEM_FAR, PSTR_FAR, strchr_PF.
