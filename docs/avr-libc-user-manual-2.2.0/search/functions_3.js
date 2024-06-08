@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['calloc_0',['calloc',['../group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963',1,'calloc(size_t __nele, size_t __size):&#160;calloc.c'],['../group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963',1,'calloc(size_t nele, size_t size):&#160;calloc.c']]],
+  ['cbrt_1',['cbrt',['../group__avr__math.html#ga8af00e2203928978e0242b4afd1d899f',1,'math.h']]],
+  ['cbrtf_2',['cbrtf',['../group__avr__math.html#ga396c6a553500a355627741e234045bf4',1,'math.h']]],
+  ['cbrtl_3',['cbrtl',['../group__avr__math.html#ga521c2f4c10b7bb5363bad058ef56794c',1,'math.h']]],
+  ['ccp_5fwrite_5fio_4',['ccp_write_io',['../group__avr__cpufunc.html#ga89d819c032df8d8ec04c5b4e2431ec0d',1,'cpufunc.h']]],
+  ['ccp_5fwrite_5fspm_5',['ccp_write_spm',['../group__avr__cpufunc.html#ga116f0aa57ac1b8db9a22d24469aa2624',1,'cpufunc.h']]],
+  ['ceil_6',['ceil',['../group__avr__math.html#ga1ea6d7b591132268abc2e843ababd084',1,'math.h']]],
+  ['ceilf_7',['ceilf',['../group__avr__math.html#ga8c1a8db0710bb3f25f643a0fca68fc60',1,'math.h']]],
+  ['ceill_8',['ceill',['../group__avr__math.html#gae11b7781f057eb7ba5d7ed95be7fdbee',1,'math.h']]],
+  ['clearerr_9',['clearerr',['../group__avr__stdio.html#gaaa6d255675688c736c99ebd32f2a7214',1,'clearerr(FILE *__stream):&#160;clearerr.c'],['../group__avr__stdio.html#gaaa6d255675688c736c99ebd32f2a7214',1,'clearerr(FILE *stream):&#160;clearerr.c']]],
+  ['clock_5fprescale_5fset_10',['clock_prescale_set',['../group__avr__power.html#gae2d32c0c4f18f0019e680354bcc1c3ef',1,'power.h']]],
+  ['copysign_11',['copysign',['../group__avr__math.html#gaaebf29a8e50e6d8f88b6caf697021c86',1,'math.h']]],
+  ['copysignf_12',['copysignf',['../group__avr__math.html#gacb6ce4b4d73846457683e7db5a285795',1,'math.h']]],
+  ['copysignl_13',['copysignl',['../group__avr__math.html#gaed61407ffa2e84c723468f549baabd46',1,'math.h']]],
+  ['cos_14',['cos',['../group__avr__math.html#ga5e7b53a694b3cf0f2d7debd444140fbd',1,'math.h']]],
+  ['cosf_15',['cosf',['../group__avr__math.html#ga7b126b2344591e649c21c9ab0b8adb40',1,'math.h']]],
+  ['cosh_16',['cosh',['../group__avr__math.html#ga3795d3c1f1d30819be56da4e4d67f64b',1,'math.h']]],
+  ['coshf_17',['coshf',['../group__avr__math.html#ga498b368486b7ce8677820beeb78d8f66',1,'math.h']]],
+  ['coshl_18',['coshl',['../group__avr__math.html#ga57602cd20f8de2dceea4f05ffb516d82',1,'math.h']]],
+  ['cosl_19',['cosl',['../group__avr__math.html#ga659287f7399efa8d6bc66dc37c8e35f4',1,'math.h']]],
+  ['ctime_20',['ctime',['../group__avr__time.html#gade979a7ee138738acbce0774bbc95ddf',1,'ctime(const time_t *timer):&#160;ctime.c'],['../group__avr__time.html#gade979a7ee138738acbce0774bbc95ddf',1,'ctime(const time_t *timeptr):&#160;ctime.c']]],
+  ['ctime_5fr_21',['ctime_r',['../group__avr__time.html#ga34fa7766f6b0a8a74a41683693eabad9',1,'ctime_r(const time_t *timer, char *buf):&#160;ctime_r.c'],['../group__avr__time.html#ga34fa7766f6b0a8a74a41683693eabad9',1,'ctime_r(const time_t *timeptr, char *buffer):&#160;ctime_r.c']]]
+];
