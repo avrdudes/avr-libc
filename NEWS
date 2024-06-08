@@ -1,4 +1,4 @@
-*** Changes since AVR-LibC-2.1.0:
+*** Changes in AVR-LibC-2.2.0:
 
 * General:
 
@@ -143,6 +143,7 @@
 
 * Pull requests:
 
+  - Logo [#969]
   - Documentation fixes [#968]
   - Issue #962 - libm: Use ELPM for tables on ELPM devices. [#964]
   - Issue #934: Fix EEPROM write issue on AVR-Ex and AVR-Dx family [#948]
