@@ -19,6 +19,7 @@
 
   - Add support to new multilib layout / 64-bit [long] double compiler
     (Issues #642, #670)
+
   - Added support for new devices (Issue #824):
     ATtiny202 ATtiny204 ATtiny212 ATtiny214 ATtiny402 ATtiny404
     ATtiny406 ATtiny412 ATtiny414 ATtiny416 ATtiny417 ATtiny424
@@ -28,6 +29,7 @@
     ATtiny1626 ATtiny1627 ATtiny3214 ATtiny3216 ATtiny3217 ATtiny3224
     ATtiny3226 ATtiny3227 ATmega808 ATmega809 ATmega1608 ATmega1609
     ATmega3208 ATmega3209 ATmega4808 ATmega4809
+
   - Added support for AVR-Dx devices (Issue #881):
     AVR16DD14 AVR16DD20 AVR16DD28 AVR16DD32 AVR32DA28 AVR32DA32
     AVR32DA48 AVR32DB28 AVR32DB32 AVR32DB48 AVR32DD14 AVR32DD20
@@ -36,11 +38,14 @@
     AVR64DD28 AVR64DD32 AVR128DA28 AVR128DA32 AVR128DA48 AVR128DA64
     AVR128DB28 AVR128DB32 AVR128DB48 AVR128DB64
     AVR64DU28 AVR64DU32
+
   - Added support for AVR-Ex devices:
     AVR16EA28 AVR16EA32 AVR16EA48 AVR16EB14 AVR16EB20 AVR16EB28 AVR16EB32
     AVR32EA28 AVR32EA32 AVR32EA48 AVR64EA28 AVR64EA32 AVR64EA48
+
   - Added support for Reduced Tiny devices:
     ATiny102 ATtiny104
+
   - Added support for Classic devices:
     ATmega168PB ATmega328PB ATmega324PB
 
