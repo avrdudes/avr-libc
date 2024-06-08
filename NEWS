@@ -4,6 +4,17 @@
 
   - Project moved to Github
 
+  - Support for many new devices has been added, like devices from the
+    AVR 0-series, 1-series, 2-series, AVR-Dx and AVR-Ex, but also for
+    some older devices.
+
+  - Parts of the user manual have been reworked, like the inline assembly
+    Cookbook and the documentation of memory sections.
+
+  - The multilib layout of the library, and what device belongs to which
+    multilib variant, is no more hard coded in AVR-LibC but follows the
+    compiler's multilib layout.
+
 * Improvements and additions:
 
   - Add support to new multilib layout / 64-bit [long] double compiler
@@ -41,7 +52,7 @@
 
   - The delay routines no more include math.h but use built-in functions
     __builtin_fabs and __builtin_ceil instead of fabs and ceil.  This means
-    the delay roudines are now independent of -f[no-]freestanding.
+    the delay routines are now independent of -f[no-]freestanding (Issue 580).
 
   - Added macros pgm_read_qword, pgm_read_qword_near, pgm_read_qword_far.
 
@@ -67,15 +78,15 @@
     This means that on devices with more than 64 KiB of program memory,
     the ELPM instruction is used to read the data where formerly it was LPM.
     Hence code size and execution times on such devices will slightly
-    increase for functions from the prinft and scanf families, and for libm
+    increase for functions from the printf and scanf families, and for libm
     functions that use power series.  (Issue #962).
     Notice that only since Binutils v2.29 (PR21849), section .progmemx is
     located after the .text sections.
 
   - The startup code now defines symbols like __DATA_REGION__LENGTH__ and
-    __DATA_REGION_ORIGIN__ according to the memories of the used AVR device.
-    These symbols are used by the default linker scripts to diagnose when
-    the text or data region overflows.
+    __DATA_REGION_ORIGIN__ according to the memories of the used AVR device
+    (Issue #936).  These symbols are used by the default linker scripts to
+    diagnose when the text or data region overflows.
     To date, only a core specific default value was used, but the devices
     that belong to the same core architecture have different memory sizes.
 
