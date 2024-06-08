@@ -28,7 +28,7 @@ $extrastylesheet
   <td id="projectlogo"><img alt="Logo" src="$relpath^$projectlogo"/></td>
   <!--END PROJECT_LOGO-->
   <!--BEGIN PROJECT_NAME-->
-  <td style="padding-left: 0.5em;">
+  <td style="padding-left: 4em;">
    <div id="projectname">$projectname
    <!--BEGIN PROJECT_NUMBER-->&#160;<span id="projectnumber">$projectnumber</span><!--END PROJECT_NUMBER-->
    </div>
@@ -37,7 +37,7 @@ $extrastylesheet
   <!--END PROJECT_NAME-->
   <!--BEGIN !PROJECT_NAME-->
    <!--BEGIN PROJECT_BRIEF-->
-    <td style="padding-left: 0.5em;">
+    <td style="padding-left: 4em;">
     <div id="projectbrief">$projectbrief</div>
     </td>
    <!--END PROJECT_BRIEF-->
