@@ -110,7 +110,7 @@ FIG2DEV= fig2dev
 	$(FIG2DEV) -L png $< $@
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig \
-		avrs.png-save
+		avr-libc-logo.png avr-libc-logo-small.png
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
@@ -174,7 +174,8 @@ clean-local:
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
 	doxygen doxygen.config
-	cp $(top_srcdir)/doc/api/avrs.png-save $(AVR_LIBC_USER_MANUAL)/avrs.png
+	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
+	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
 
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in
