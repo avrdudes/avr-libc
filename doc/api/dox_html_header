@@ -57,11 +57,12 @@ $extrastylesheet
     <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="20%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="20%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="20%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="20%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="20%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
+    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
+    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
+    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
   </tr>
 </table>
 </div>
