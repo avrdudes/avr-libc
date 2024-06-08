@@ -168,6 +168,11 @@ extern clock_t clock(void);
     The original values of the tm_wday and tm_yday elements of the structure are ignored,
     and the original values of the other elements are not restricted to the ranges stated for struct tm.
 
+    The element tm_isdst is used for input and output. If set to 0 or a positive value on input, this
+    requests calculation for Daylight Savings Time being off or on, respectively. If set to a negative
+    value on input, it requests calculation to return whether Daylight Savings Time is in effect or
+    not according to the other values.
+
     On successful completion, the values of all elements of timeptr are set to the appropriate range.
 */
 time_t          mktime(struct tm * timeptr);
