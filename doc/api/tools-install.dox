@@ -887,7 +887,7 @@ Useful options for git clone:
 <dd>
   Specify an optional directory name for the cloned repository, like:
   \verbatim
-$ git clone https://github.com/avrdudes/avr-libc.git ./source/avr-libc-master
+$ git clone https://github.com/avrdudes/avr-libc.git ./source/avr-libc-main
   \endverbatim
   Without \c dirname, the name of the git file like \c avr-libc is used.
 </dd>
@@ -902,7 +902,7 @@ $ git clone https://github.com/avrdudes/avr-libc.git ./source/avr-libc-master
 <dt><tt>\--branch <em>branch</em></tt></dt>
 <dd>
   The default branch is the head of the latest development, which is
-  \c master for GCC and Binutils, and \c root for AVR-LibC.
+  \c master for GCC and Binutils, and \c main for AVR-LibC.
 
   When you want a different ref, like GCC's <tt>releases/gcc-14</tt>
   for the head of the GCC v14 branch, or <tt>releases/gcc-14.1.0</tt>
