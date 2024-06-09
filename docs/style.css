@@ -23,14 +23,17 @@ a:hover {
     color: #ff4080;
 }
 
-/* Responsive Styles */
+/* Fit logo and description side by side for standard desktop
+   browser sizes. */
+.row { display: flex; margin:  0.5rem -0.6rem; align-items: stretch; }
+.row [class*="col"] { width: 50%; padding: 0  0.6rem; }
+.row [class*="logo"] { padding: 0  0.6rem; }
+.toplogo { display: none; }
+.row .col .logo   { flex: 1 1 100%; }
 
-table.intro {
-    max-width: 600px;
-}
-
-@media screen and (max-height: 800px) {
-    h1 {
-	font-size: 30px;
-    }
+/* For narrow screens (mobile devices), put logo on top instead. */
+@media screen and (max-width : 1000px){
+    .row [class*="logo"] { display: none; }
+    .toplogo { display: block; }
+    .row [class*="col"] { width: 100%; padding: 0  0.6rem; }
 }
