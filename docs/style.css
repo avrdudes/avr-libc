@@ -31,9 +31,14 @@ a:hover {
 .toplogo { display: none; }
 .row .col .logo   { flex: 1 1 100%; }
 
-/* For narrow screens (mobile devices), put logo on top instead. */
+/* For narrow screens (mobile devices), put logo on top instead,
+   and increase font size. */
 @media screen and (max-width : 1000px){
     .row [class*="logo"] { display: none; }
     .toplogo { display: block; }
     .row [class*="col"] { width: 100%; padding: 0  0.6rem; }
+
+    body {
+        font-size: 20pt;
+    }
 }
