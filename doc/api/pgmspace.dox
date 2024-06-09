@@ -477,13 +477,12 @@ void foo(void)
 {
     char buffer[10];
 
-    for (uint8_t i = 0; i < 5; i++)
+    for (uint8_t i = 0; i < 3; i++)
     {
         strcpy_P (buffer, (const char*) pgm_read_ptr (& string_table[i]));
 
         // Display buffer on LCD.
     }
-    return;
 }
 \endcode
 
