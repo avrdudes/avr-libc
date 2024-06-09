@@ -1,0 +1,36 @@
+body {
+    font-family: sans-serif;
+    font-size: 100%;
+    background-color: #fefff0;
+    color: #000;
+    padding: 0;
+}
+
+h1 { font-size: 50px; text-shadow: .05em .05em #ccc; text-align: center; }
+
+a {
+    color: #c04080;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #804080;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ff4080;
+}
+
+/* Responsive Styles */
+
+table.intro {
+    max-width: 600px;
+}
+
+@media screen and (max-height: 800px) {
+    h1 {
+	font-size: 30px;
+    }
+}
