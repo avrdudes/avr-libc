@@ -7,3 +7,20 @@ div.line {
        rendering engine and was observed with FireFox v124.  */
     line-height: 1.2 !important;
 }
+
+.logo {
+    display: block;
+}
+.invlogo {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo {
+        display: none;
+    }
+    .invlogo {
+        display: block;
+    }
+}
+
