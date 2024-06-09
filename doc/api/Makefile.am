@@ -111,7 +111,7 @@ FIG2DEV= fig2dev
 	$(FIG2DEV) -L png $< $@
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig \
-		avr-libc-logo.png avr-libc-logo.png
+		avr-libc-logo.png avr-libc-logo.png avr-libc-logo-inverted.png
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
@@ -151,31 +151,26 @@ clean-local:
 # Rules for generating documentation with doxygen
 #
 
+# Notes on the logo image:
 #
-# The sed magic below does the following:
+# The overall Gimp source file is avr-libc-logo.xcf.bz2, 518px x 182px
+# It contains layers for the individual logo components:
+# * the AVR logo (taken from the AVRDUDE project)
+# * the "LibC" text
+# * the sourcecode snippet background
+# * a white background just for visibility, not to be exported
 #
-# It bumps the subsection level that is to be displayed in the TOC.
-# For Postscript output, only \page and \section headings will be
-# displayed, while the PDF document will also show \subsection so the
-# browsable index in the PDF file will provide a good help to the
-# user.
-#
-# The magic around TabularC replaces doxygen's own tabular environment
-# (named TabularC) by an explicit call to longtable in the document
-# that describes the vector names, so the rather long table can be
-# split across multiple pages.  Note that there are some nasty things
-# going on here: the string "Vector Name" in the table heading is used
-# as a magic string in order to replace the \\ at the end of the table
-# heading by \endhead so longtable will know what heading to repeat in
-# table continuations.
-#
-# The last sed command replaces the \renewcommand for \cftchapfont and
-# \cftchappagefont, respectively, by a \newcommand, to fix a LaTeX
-# error.
+# The logo is then exported to avr-libc-logo-large.png, to be used in the
+# PDF documentation.
+# A version scaled to 200px x 70px is exported to avr-libc-logo.png, to
+# be used in HTML documentation.
+# This version is further color-inverted, and exported to
+# avr-libc-logo-inverted.png, to be used for "dark mode" HTML display.
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 	doxygen doxygen.config
 	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
+	cp $(top_srcdir)/doc/api/avr-libc-logo-inverted.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
 
 # Add contents of toplevel LICENSE to main page
