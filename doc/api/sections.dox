@@ -222,7 +222,7 @@ One use of orphan sections is to
 \ref faq_reloc_code "locate code to a fixed address".
 
 Like for any other output section, the start address can be specified
-by means of linking with
+by means of linking with<br>
 <code>-Wl,\--section-start,<em>secname</em>=<em>address</em></code>
 
 \subsection sec_lma LMA: Load Memory Address
@@ -830,7 +830,7 @@ The only input section (pattern) is <tt>.eeprom*</tt>.
 
 These sections contain fuse bytes, lock bytes and device signature bytes,
 respectively.  The respective input section patterns are
-<tt>.fuse*</tt> <tt>.lock*</tt> and <tt>.signature*</tt>.
+<tt>.fuse*</tt>, <tt>.lock*</tt> and <tt>.signature*</tt>.
 
 \subsection sec_dot_note The .note.gnu.avr.deviceinfo Section
 
@@ -839,8 +839,8 @@ script, which means it is an \ref sec_orphan "orphan section"
 and hence the respective output section is implicit.
 
 The startup code from AVR-LibC puts device information in that section
-to be picked up by simulators or tools like avr-size, avr-objdump,
-avr-readelf, etc,
+to be picked up by simulators or tools like \c avr-size, \c avr-objdump,
+\c avr-readelf, etc,
 
 The section is contained in the ELF file but not loaded onto the target.
 Source of the device specific information are the device header file
@@ -973,11 +973,12 @@ avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100
 Code that computes a checksum over all relevant code and data in program
 memory has to consider:
 - The range from the beginning of the \c \.text section
-(address 0x0 in the default layout) up to \c __data_load_start.
+(address 0x0 in the default layout) up to \c __data_load_end.
 - For emulations that have the \c rodata
-\ref sec_memory_regions "memory region",
+\ref sec_memory_regions "memory region"
+(\c avrxmega2_flmap and \c avrxmega4_flmap),
 the range from \c __rodata_load_start to \c __rodata_load_end has also to be
-taken into account.
+taken into account, too.
 
 
 \section sec_size Output Sections and Code Size

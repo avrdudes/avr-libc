@@ -848,7 +848,7 @@ in flash as such:
 \subsection faq_rom_array_as Using named address-spaces
 
 An alternative is to use the named address-space \c __flash,
-which is supported since avr-gcc v4.7 and in GNU-C99 and up:
+which is supported since avr-gcc v4.7 and in GNU-C99 (\c -std=gnu99) and up:
 
 \code
 #include <avr/pgmspace.h>
