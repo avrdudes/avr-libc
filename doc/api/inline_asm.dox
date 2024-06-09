@@ -275,8 +275,9 @@ whistles that can be used to compose an inline assembly statement:
 
 There are special sequences that can be used in the assembly template.
 
+\anchor special_sequences
 <table>
-<caption id="special_sequences">Inline asm Special Sequences</caption>
+<caption>Inline asm Special Sequences</caption>
 <tr>
   <th>Sequence
   <th>Description
@@ -380,8 +381,9 @@ The most up-to-date and detailed information on constraints for the AVR
 can be found in the
 <a href="https://gcc.gnu.org/wiki/avr-gcc#Constraints">avr-gcc Wiki</a>.
 
+\anchor constraints
 <table>
-  <caption id="constraints">Inline asm Operand Constraints</caption>
+  <caption>Inline asm Operand Constraints</caption>
   <tr>
     <th>Constraint
     <th>Registers
@@ -477,8 +479,9 @@ unsigned integer value known at compile-time.
 The following table shows all AVR assembler mnemonics which require
 operands, and the related constraints.
 
+\anchor instructions_and_constraints
 <table>
-<caption id="instructions_and_constraints">AVR Instructions and
+<caption>AVR Instructions and
   Constraints</caption>
 <tr>
   <th>Mnemonic
@@ -643,8 +646,9 @@ print-modify characters.  The one-letter modifier follows the \c \%
 and precedes the operand number like in <tt>"%a0"</tt>, or precedes the
 name in named operands like in <tt>"%a[address]"</tt>.
 
+\anchor print_modifiers
 <table>
-<caption id="print_modifiers">Inline asm Print Modifiers</caption>
+<caption>Inline asm Print Modifiers</caption>
 <tr>
   <th>Modifier
   <th>Number of<br>Arguments
@@ -719,8 +723,9 @@ name in named operands like in <tt>"%a[address]"</tt>.
 
 \section assembly_operand_modifiers Operand Modifiers
 
+\anchor operand_modifiers
 <table>
-<caption id="operand_modifiers">Assembly Code Operand Modifiers</caption>
+<caption>Assembly Code Operand Modifiers</caption>
 <tr>
   <th>Modifier
   <th>Explanation
@@ -1299,6 +1304,41 @@ provided \c double is a 32-bit type.
 \section inline_asm_fails What won't work
 
 GCC inline asm has some limitations.
+
+\subsection inline_asm_fails_split Setting a Register on one asm and using it in a different one
+
+Sequences like the following are not supposed to work:
+\code
+char var;
+
+void set_var (char c)
+{
+    __asm ("inc r24");
+    __asm ("sts var, r24");
+}
+\endcode
+
+- There is no guarantee whatsoever that the value in R24 will survive from
+one asm to the next.  Such code might work in many situations, but it
+is still wrong and the compiler may very well put instructions bewtween the
+asm statements that change R24 prior to the first asm and also between the
+asm statements.
+
+- R24 is changed without noticing the compiler. When R24 contains other data,
+then that data will be trashed.
+
+A correct code would be
+\code
+    __asm ("inc %0"    "\n\t"
+           "sts var, %0"
+           :: "r" (c) : "memory");
+\endcode
+or
+\code
+    __asm ("inc %1"    "\n\t"
+           "sts %0, %1"
+           : "=m" (var) : "r" (c));
+\endcode
 
 \subsection inline_asm_fails_regvar Letting an Operand cross the Boundaries of the Y Register
 

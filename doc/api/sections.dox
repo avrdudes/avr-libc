@@ -377,18 +377,21 @@ in the default linker description files.
 <table>
 <caption>Output Sections and Memory Regions</caption>
 <tr>
-  <th rowspan="2">Output<br>Section
-  <th rowspan="2">Purpose
+  <th>Output
+  <th>Purpose
   <th colspan="2">Memory Region
 </tr>
 <tr>
+  <th>Section
+  <th>
   <th>LMA
   <th>VMA
 </tr>
 <tr>
   <td><tt>\ref sec_dot_text ".text"</tt>
   <td>Executable code, data in progmem
-  <td colspan="2"><center>text</center>
+  <td>text
+  <td>text
 </tr>
 <tr>
   <td><tt>\ref sec_dot_data ".data"</tt>

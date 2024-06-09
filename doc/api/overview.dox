@@ -34,7 +34,7 @@
 
 \section overview_introduction Introduction
 
-Welcome to the open source software development toolset for the Atmel AVR!
+Welcome to the open source software development toolset for the Microchip (formerly Atmel) AVR!
 
 There is not a single tool that provides everything needed to develop software
 for the AVR. It takes many tools working together. Collectively, the group of
@@ -61,7 +61,7 @@ its GNU/Linux variant." The FSF remains the primary sponsor of the GNU project.
 
 The GNU Project was launched in 1984 to develop a complete Unix-like operating 
 system which is free software: the GNU system. GNU is a recursive acronym for 
-»GNU's Not Unix«; it is pronounced guh-noo, approximately like canoe.
+"GNU's Not Unix"; it is pronounced guh-noo, approximately like canoe.
 
 One of the main projects of the GNU system is the GNU Compiler Collection, or
 GCC, and its sister project, GNU Binutils. These two open source projects 
@@ -175,7 +175,7 @@ one critical component that they do not provide: a Standard C Library.
 
 There are different open source projects that provide a Standard C Library
 depending upon your system time, whether for a native compiler (GNU Libc),
-for some other embedded system (newlib), or for some versions of Linux (uCLibc). 
+for some other embedded system (Newlib), or for some versions of Linux (uCLibc).
 The open source AVR toolchain has its own Standard C Library project: AVR-LibC.
 
 AVR-LibC provides many of the same functions found in a regular Standard C
@@ -228,7 +228,7 @@ is another popular GUI front end to GDB, available on Unix and Linux systems.
 
 \section overview_avarice AVaRICE
 
-AVaRICE is a back-end program to AVR GDB and interfaces to the Atmel JTAG
+AVaRICE is a back-end program to AVR GDB and interfaces to the AVR JTAG
 In-Circuit Emulator (ICE), to provide emulation capabilities.
 
 

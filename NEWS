@@ -1,13 +1,38 @@
-*** Changes since AVR-LibC-2.1.0:
+*** Changes since AVR-LibC-2.2.0:
+
+* General:
+
+* Improvements and additions:
+
+* Issues closed:
+
+* Pull requests:
+
+* Other changes:
+
+
+*** Changes in AVR-LibC-2.2.0:
 
 * General:
 
   - Project moved to Github
 
+  - Support for many new devices has been added, like devices from the
+    AVR 0-series, 1-series, 2-series, AVR-Dx and AVR-Ex, but also for
+    some older devices.
+
+  - Parts of the user manual have been reworked, like the inline assembly
+    Cookbook and the documentation of memory sections.
+
+  - The multilib layout of the library, and what device belongs to which
+    multilib variant, is no more hard coded in AVR-LibC but follows the
+    compiler's multilib layout.
+
 * Improvements and additions:
 
   - Add support to new multilib layout / 64-bit [long] double compiler
     (Issues #642, #670)
+
   - Added support for new devices (Issue #824):
     ATtiny202 ATtiny204 ATtiny212 ATtiny214 ATtiny402 ATtiny404
     ATtiny406 ATtiny412 ATtiny414 ATtiny416 ATtiny417 ATtiny424
@@ -17,6 +42,7 @@
     ATtiny1626 ATtiny1627 ATtiny3214 ATtiny3216 ATtiny3217 ATtiny3224
     ATtiny3226 ATtiny3227 ATmega808 ATmega809 ATmega1608 ATmega1609
     ATmega3208 ATmega3209 ATmega4808 ATmega4809
+
   - Added support for AVR-Dx devices (Issue #881):
     AVR16DD14 AVR16DD20 AVR16DD28 AVR16DD32 AVR32DA28 AVR32DA32
     AVR32DA48 AVR32DB28 AVR32DB32 AVR32DB48 AVR32DD14 AVR32DD20
@@ -25,13 +51,23 @@
     AVR64DD28 AVR64DD32 AVR128DA28 AVR128DA32 AVR128DA48 AVR128DA64
     AVR128DB28 AVR128DB32 AVR128DB48 AVR128DB64
     AVR64DU28 AVR64DU32
+
   - Added support for AVR-Ex devices:
     AVR16EA28 AVR16EA32 AVR16EA48 AVR16EB14 AVR16EB20 AVR16EB28 AVR16EB32
     AVR32EA28 AVR32EA32 AVR32EA48 AVR64EA28 AVR64EA32 AVR64EA48
+
   - Added support for Reduced Tiny devices:
     ATiny102 ATtiny104
+
   - Added support for Classic devices:
     ATmega168PB ATmega328PB ATmega324PB
+
+  - Added a new module to lib<mcu>.a that can be used as part of the
+    startup code by the compiler.  The compiler will link the code when
+    a device from the AVR-Dx or AVR-Ex families uses a non-default layout
+    of NVMCTRL_CTRLB.FLMAP (Issue #931, Binutils PR31124, GCC PR112944).
+    For more details on the feature see the GCC v14 release notes at
+    https://gcc.gnu.org/gcc-14/changes.html#avr
 
   - Added support for: strndup.
 
@@ -41,7 +77,7 @@
 
   - The delay routines no more include math.h but use built-in functions
     __builtin_fabs and __builtin_ceil instead of fabs and ceil.  This means
-    the delay roudines are now independent of -f[no-]freestanding.
+    the delay routines are now independent of -f[no-]freestanding (Issue 580).
 
   - Added macros pgm_read_qword, pgm_read_qword_near, pgm_read_qword_far.
 
@@ -63,22 +99,40 @@
 
   - AVR-LibC does not use section .progmem.* any more for lookup tables and
     string literals.  Instead, .progmemx.* is used which does not require
-    that the data resides in the lower 64 KiB of program memory (Issue #962).
+    that the data resides in the lower 64 KiB of program memory.
+    This means that on devices with more than 64 KiB of program memory,
+    the ELPM instruction is used to read the data where formerly it was LPM.
+    Hence code size and execution times on such devices will slightly
+    increase for functions from the printf and scanf families, and for libm
+    functions that use power series.  (Issue #962).
+    Notice that only since Binutils v2.29 (PR21849), section .progmemx is
+    located after the .text sections.
 
   - The startup code now defines symbols like __DATA_REGION__LENGTH__ and
-    __DATA_REGION_ORIGIN__ according to the memories of the used AVR device.
-    These symbols are used by the default linker scripts to diagnose when
-    the text or data region overflows.
+    __DATA_REGION_ORIGIN__ according to the memories of the used AVR device
+    (Issue #936).  These symbols are used by the default linker scripts to
+    diagnose when the text or data region overflows.
     To date, only a core specific default value was used, but the devices
     that belong to the same core architecture have different memory sizes.
+
+  - The pgm_read_* and pgm_read_*_far macros and functions now also work for
+    the Reduced Tiny devices. (Issue #563).  The implementation assumes that
+    GCC implements PR71948 which was added in v7.  Notice that on Reduced Tiny:
+    * There is no need for PROGEMM at all because all const objects in static
+      storage are located in program memory since Binutils v2.27 (PR20849).
+    * Even when PROGMEM is used, no pgm_read functions or macros are required.
+      See the GCC documentation on the __progmem__ attribute for Reduced Tiny.
 
 * Issues closed:
 
   - [patch #9543] Add avrxmega3 devices. #824
+
   - [bug #49567] Use meta-info from --print-multi-lib and
     --print-multi-directory #642
+
   - [bug #57071] Fix math.h and function names that block 64-bit
     double #670
+
   - Issue #476 [bug #32945] RAMPZ clobbered in far-pointer library.
     Functions from the far-pointer library in libc/pmstring like
     memcpy_PF that read from program memory using ELPM must set
@@ -93,10 +147,47 @@
 
   - FDEV_SETUP_STREAM from stdio.h now works with C++ (Issue #898)
 
+  - More than 80, mostly historic issues have been closed -- too many
+    to mention all of them here
+
+  - Fixed wrong prototypes of frexp, frexpf, frexpl in math.h (Issue #929)
+
+  - time.h: function mktime() is off by 1h when [EU] DST is active (Issue #967)
+
 * Pull requests:
 
-  - README.md: fix typo in URL #873
-  - Added support for AVR-DA and DB devices #881
+  - Logo [#969]
+  - Documentation fixes [#968]
+  - Issue #962 - libm: Use ELPM for tables on ELPM devices. [#964]
+  - Issue #934: Fix EEPROM write issue on AVR-Ex and AVR-Dx family [#948]
+  - Add code to initialize NVMCTRL_CTRLB.FLMAP in new module flmap-init.S enhancement [#947]
+  - Add AVR-Ex devices enhancement [#946]
+  - Issue 940 runtest [#941]
+  - include/avr/io*.h: Update I/O header files enhancement [#938]
+  - Issue #936: Provide symbols for exact memory layout. enhancement [#937]
+  - Issue #931: Initialize NVMCTRL_CTRLB.FLMAP for Devices that have it. enhancement [#935]
+  - Issue #931: Initialize NVMCTRL_CTRLB.FLMAP for Devices that have it. [#933]
+  - Issue 929: Remove __ATTR_CONST__ from frexp* protoypes in math.h. [#932]
+  - #890 #884: Fix / add entries for ATmega808/9, ATmega1608/9, ATmega3… [#927]
+  - #921: Use all h files of $srcdir/include/avr in Makefile.am. enhancement [#925]
+  - #892: configure.ac has outdated CHECK_AVR_DEVICE and AM_CONDITIONAL l… [#924]
+  - avrxmega3: fix header installation for attiny424 [#921]
+  - Rename aux.c to _aux_.c duplicate [#920]
+  - iom32u4.h #define USBRF 5 [#919]
+  - memory: Allow the use of stdint types [#918]
+  - doc: Note attiny9 being supported documentation [#915]
+  - Fix __BOOT_SIGROW_READ for some ATtiny [#914]
+  - .githud [#908]
+  - Extend _delay_loop_2 so it works with AVR_TINY. [#902]
+  - Fix inline asm constraints of wdt_enable, wdt_disable. [#901]
+  - Use autotools to determine Python command to run mlib-gen.py. [#896]
+  - Issue #894: Remove scripts that make binary distributions and RPMs. [#895]
+  - Fix issue #892: [#893]
+  - Fix some avrxmega3 device names of generated files [#885]
+  - .gitignore: Add outputs of ./boostrap [#883]
+  - *.py: Use python3 instead of python [#882]
+  - Added support for AVR-DA and DB devices [#881]
+  - README.md: fix typo in URL [#873]
 
 * Other changes:
 

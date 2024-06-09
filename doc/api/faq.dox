@@ -311,7 +311,7 @@ will have their expected initial values when \c main() is entered.
 \section faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
 
 Some of the timer-related 16-bit IO registers use a temporary register
-(called TEMP in the Atmel datasheet) to guarantee an atomic access to
+(called TEMP in the AVR datasheet) to guarantee an atomic access to
 the register despite the fact that two separate 8-bit IO transfers are
 required to actually move the data.  Typically, this includes access
 to the current timer/counter value register (<tt>TCNT</tt><em>n</em>),
@@ -950,30 +950,30 @@ the different optimization levels, and added about 2.5 KB to the code.
  <tr>
   <td>-O3</td>
   <td>6898</td>
-  <td>903 탎</td>
+  <td>903 &mu;s</td>
   <td>19.7 ms</td>
  </tr>
  <tr>
   <td>-O2</td>
   <td>6666</td>
-  <td>972 탎</td>
+  <td>972 &mu;s</td>
   <td>20.1 ms</td>
  </tr>
  <tr>
   <td>-Os</td>
   <td>6618</td>
-  <td>955 탎</td>
+  <td>955 &mu;s</td>
   <td>20.1 ms</td>
  </tr>
  <tr>
   <td>-Os -mcall-prologues</td>
   <td>6474</td>
-  <td>972 탎</td>
+  <td>972 &mu;s</td>
   <td>20.1 ms</td>
  </tr>
 </table>
 
-(The difference between 955 탎 and 972 탎 was just a single
+(The difference between 955 &mu;s and 972 &mu;s was just a single
 timer-tick, so take this with a grain of salt.)
 
 So generally, it seems <tt>-Os -mcall-prologues</tt> is the most

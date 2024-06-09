@@ -33,8 +33,10 @@ devtools/gen-avr-lib-tree.sh
 *.hex
 *.map
 *.srec
-*.png
 *.eps
 *.pdf
+doc/api/malloc-x1.png
+doc/api/malloc-std.png
+doc/api/malloc-x2.png
 
 __pycache__

@@ -41,7 +41,7 @@ m4_define([avr_libc_major],    [2])dnl           major version
 m4_define([avr_libc_minor],    [2])dnl           minor version
 m4_define([avr_libc_revision], [0])dnl           revision (dot-dot version)
 m4_define([avr_libc_revision_suffix], [git])dnl  revision suffix (if any)
-m4_define([avr_libc_reldate],  [20220701])dnl    release date
+m4_define([avr_libc_reldate],  [20240609])dnl    release date
 dnl end of library versioning data
 
 m4_define([avr_libc_version],
@@ -51,7 +51,7 @@ m4_define([avr_libc_version_numeric],
                     100 * avr_libc_minor + dnl
                           avr_libc_revision))dnl
 
-AC_INIT(avr-libc, avr_libc_version, avr-libc-dev@nongnu.org)
+AC_INIT(avr-libc, avr_libc_version, https://github.com/avrdudes/avr-libc/issues)
 
 AC_PREREQ(2.59)
 AC_REVISION($Revision$)

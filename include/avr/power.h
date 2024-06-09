@@ -70,9 +70,10 @@ that Timer/Counter0 source shall be less than ¼th of peripheral clock.
 Therefore, when using a typical 32.768 kHz crystal, one shall not scale
 the clock below 131.072 kHz.
 
+\anchor avr_powermacros
 <small>
 <table>
-  <caption id="avr_powermacros">Power Macros</caption>
+  <caption>Power Macros</caption>
   <tr>
     <th>Power Macro
     <th>Description

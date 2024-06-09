@@ -33,12 +33,13 @@
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
 CLEANFILES           = *.html *.pdf *.ma *.mas \
-                       *.png *.eps fix_png \
-                       doxygen.config doxygen-pdf.config
+                       malloc-std.png malloc-x1.png malloc-x2.png \
+                       *.eps fix_png \
+                       doxygen.config main_page.dox doxygen-pdf.config
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        doxygen.config.in \
-                       main_page.dox \
+                       main_page.dox.in \
                        assembler.dox \
                        inline_asm.dox \
                        interrupts.dox \
@@ -51,7 +52,6 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        using-avrprog.dox \
                        using-tools.dox \
                        faq.dox \
-                       rel-method.dox \
                        bench.dox \
                        bench-libc.dox \
                        bench-libm.dox \
@@ -60,6 +60,9 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        overview.dox \
                        pgmspace.dox \
                        library.dox \
+                       gen-vectortable-dox.sh \
+                       isrs-to-dox.py \
+                       mcus-to-isrs.sh \
                        vectortable.dox
 
 SUFFIXES             = .pdf .fig .png .eps
@@ -68,11 +71,12 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-DEMO_LIBS            = $(shell cd $(top_srcdir) && find `pwd` \( -name crtm8.o -o -name exit.o \) -print | grep avr4)
+DEMO_LIBS            = $(abs_top_builddir)/avr/lib/avr4/exit.o
+DEMO_LIBS            += $(abs_top_builddir)/avr/devices/atmega8/crtatmega8.o
 # As avr-gcc must have been installed already, we can reference its
 # library by a -l option.
 DEMO_LIBS            += -lgcc
-DEMO_INC             = $(shell cd $(top_srcdir) && echo "-I`pwd`/include")
+DEMO_INC             = -I$(abs_top_srcdir)/include
 
 # All demo projects where we need to run "make dox" beforehand.
 DEMOS                = demo largedemo stdiodemo
@@ -106,8 +110,8 @@ FIG2DEV= fig2dev
 .fig.png:
 	$(FIG2DEV) -L png $< $@
 
-IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig releases.fig \
-		avrs.png-save
+IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig \
+		avr-libc-logo.png avr-libc-logo.png
 
 IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 
@@ -169,34 +173,17 @@ clean-local:
 # \cftchappagefont, respectively, by a \newcommand, to fix a LaTeX
 # error.
 
-latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG)
+latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 	doxygen doxygen.config
-	cp $(top_srcdir)/doc/api/avrs.png-save $(AVR_LIBC_USER_MANUAL)/avrs.png
-	cd latex_src && \
-		sed -e '/tocdepth/s/1/2/' \
-		-e '/usepackage{doxygen}/s/$$/\\usepackage{longtable}/' \
-		refman.tex > tmp.$$ && \
-		mv -f tmp.$$ refman.tex
-	cd latex_src && \
-		sed -e '/{TabularC}{.}/s/{TabularC}{.}/{longtable}{|p{1.7cm}|p{1.7cm}|p{2cm}|p{5cm}|}/' \
-		-e '/TabularC/s/TabularC/longtable/' \
-		-e '/Vector name/,/^[^ ]/s/\\\\\\hline/\\endhead\\hline/' \
-		group__avr__interrupts.tex > tmp.$$ && \
-		mv -f tmp.$$ group__avr__interrupts.tex
-	cd latex_src && \
-		if [ -f using_tools.tex ] ; then \
-			UT=using_tools.tex; else \
-			UT=using__tools.tex; fi; \
-		sed -e '/{TabularC}{3}/s/{TabularC}{3}/{longtable}{|l|>{\PBS}p{5cm}|>{\PBS}p{3.5cm}|}/' \
-		-e '/begin{longtable}/,/TabularC/s/TabularC/longtable/' \
-		-e '/Architecture/s/\\\\\\hline/\\endhead\\hline/' \
-		-e '/MCU types are currently/,/Architecture/s/>.*|/l|l|/' \
-		$$UT > tmp.$$ && \
-		mv -f tmp.$$ $$UT
-	cd latex_src && \
-		sed -e '/renewcommand.*cftchap.*font/s/renew/new/' \
-		doxygen.sty > tmp.$$ && \
-		mv -f tmp.$$ doxygen.sty
+	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
+	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
+
+# Add contents of toplevel LICENSE to main page
+main_page.dox: main_page.dox.in
+	cat $(srcdir)/main_page.dox.in > main_page.dox
+	cat $(top_srcdir)/LICENSE >> main_page.dox
+	echo '\endverbatim' >> main_page.dox
+	echo '*/' >> main_page.dox
 
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in
