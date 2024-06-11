@@ -275,6 +275,10 @@ whistles that can be used to compose an inline assembly statement:
 
 There are special sequences that can be used in the assembly template.
 
+Resolution of \c % is only performed when the inline asm has operands or
+clobbers.  For example, <tt>asm("%%")</tt> inserts \e two <tt>%</tt>'s
+whereas <tt>asm("%%":)</tt> only inserts one.
+
 \anchor special_sequences
 <table>
 <caption>Inline asm Special Sequences</caption>
@@ -296,7 +300,7 @@ There are special sequences that can be used in the assembly template.
 </tr>
 <tr>
   <td><tt>$</tt>
-  <td>A logical line separator, used to separate multiple instruction in
+  <td>A logical line separator, used to separate multiple instructions in
     one physical line
 </tr>
 <tr>
@@ -433,6 +437,8 @@ can be found in the
   specified constraints; \c "r" and \c "n" in this case.
 - All constraints listed above are single-letter constraints, except \c Ynn
   which is a 3-letter constraint.
+- According to the avr-gcc ABI, values that occupy more than one register
+  will start at an even register number.
 
 Constraint modifiers are:
 
@@ -457,6 +463,51 @@ Constraint modifiers are:
     and won't overlap with any input operand(s)
   </tr>
 </table>
+
+Examples:
+
+<dl>
+<dt><tt>"a" (10)</tt></dt>
+<dd>
+  Load the value of 10 into a register in the range of the \c a
+  constraint, i.e. R16...R23.  As \c int is a 16-bit value, so is \c 10,
+  and the constant will occupy two consecutive hard registers.
+</dd>
+<dt><tt>"a" ((uint8_t) 10)</tt></dt>
+<dd>
+  Same, but this time the constant only occupies one register.
+</dd>
+<dt><tt>"I" (10)</tt></dt>
+<dd>
+  The literal value \c 10 can be used in the according \c \% operand.
+</dd>
+<dt><tt>"J" (10)</tt></dt>
+<dd>
+  An error: The value 10 is not in the range &minus;63...0 of
+  the \c J constraint.
+</dd>
+<dt><tt>"=a" (10)</tt></dt>
+<dd>
+  An error: \c 10 is not an lvalue and cannot be written to.
+</dd>
+<dt><tt>"a" (var)</tt></dt>
+<dd>
+  The variable \c var will be loaded into a register in the range R16...R23.
+  A 4-byte value will occupy 4 consecutive registers etc.
+</dd>
+<dt><tt>"+a" (var)</tt></dt>
+<dd>
+  The variable \c var will be loaded into a register in the range R16...R23.
+  It is an input as well as an output of the inline asm, i.e. it must be an
+  lvalue. Otherwise, e.g. when \c var is read-only, the compiler will complain.
+</dd>
+<dt><tt>"I" (var)</tt></dt>
+<dd>
+  In most cases, this is an error because \c var is not known at compile-time.
+  Only when <tt>__builtin_constant_p(var)</tt> is true and \c var is in the
+  range 0...63, then \c var is accepted by the compiler.
+</dd>
+</dl>
 
 The selection of
 the proper constraint depends on the range of the constants or registers, which
