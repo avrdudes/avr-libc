@@ -118,17 +118,7 @@ IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating html output.
-html: demo demodox fix_png $(TARGET_DOX_HTML)
-
-# Make the background color of the png's transparent.
-fix_png: $(wildcard $(USER_MANUAL)/*.png) latex_src/refman.tex
-	cd $(USER_MANUAL) || exit 0; \
-	for png in *.png; do \
-		echo "Fixing transparency for $$png"; \
-		$(PNGTOPNM) $$png > tmp.pnm; \
-		$(PNMTOPNG) -transparent rgb:ff/ff/ff tmp.pnm > $$png && rm tmp.pnm; \
-	done
-	echo timestamp > fix_png
+html: demo demodox $(TARGET_DOX_HTML)
 
 # Rule for generating PDF output
 pdf: demo demodox $(TARGET_DOX_PDF)
@@ -194,7 +184,7 @@ doxygen.config: doxygen.config.in
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only
 # a prerequisite for ps.
-dox-html: demo demodox fix_png $(USER_MANUAL)/index.html
+dox-html: demo demodox $(USER_MANUAL)/index.html $(USER_MANUAL).tar.bz2
 
 $(USER_MANUAL)/index.html: latex_src/refman.tex
 
@@ -203,6 +193,9 @@ dox-pdf: $(USER_MANUAL).pdf
 $(USER_MANUAL).pdf: latex_src/refman.tex
 	cd latex_src && ${MAKE} refman.pdf
 	cp latex_src/refman.pdf $(USER_MANUAL).pdf
+
+$(USER_MANUAL).tar.bz2: $(USER_MANUAL)/index.html
+	tar -cjf $(USER_MANUAL).tar.bz2 $(USER_MANUAL)
 
 # Install rules for the various documentation parts.  The actual
 # access to those rules is from the install-data-local target above,
