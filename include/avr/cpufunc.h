@@ -46,7 +46,7 @@
 
 */
 
-#if defined(__DOXYGEN__)
+
 /**
    \ingroup avr_cpufunc
    \def _NOP
@@ -58,12 +58,9 @@
    is guaranteed to be not optimized away by the compiler, so it can
    always become a breakpoint in the debugger.
 */
-#define _NOP()
-#else  /* real code */
 #define _NOP() __asm__ __volatile__("nop")
-#endif  /* __DOXYGEN__ */
 
-#if defined(__DOXYGEN__)
+
 /**
    \ingroup avr_cpufunc
    \def _MemoryBarrier
@@ -77,10 +74,8 @@
    See \ref optim_code_reorder for things to be taken into account
    with respect to compiler optimizations.
 */
-#define _MemoryBarrier()
-#else  /* real code */
-#define _MemoryBarrier() __asm__ __volatile__("":::"memory")
-#endif  /* __DOXYGEN__ */
+#define _MemoryBarrier() __asm__ __volatile__("" ::: "memory")
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -90,7 +85,7 @@ extern "C" {
    \ingroup avr_cpufunc
 
    Write \a __value to IO Register Protected (CCP) IO register
-   at \a __ioaddr.  . See also \c _PROTECTED_WRITE().  */
+   at \a __ioaddr. See also \c _PROTECTED_WRITE().  */
 void ccp_write_io (volatile uint8_t *__ioaddr, uint8_t __value);
 
 /**
