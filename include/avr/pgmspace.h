@@ -1209,7 +1209,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
    #include <avr/pgmspace.h>
 
    // Section .progmemx.data is located after all the code sections.
-   __attribute__((section(".progmemx.data")))
+   PROGMEM_FAR
    const int data[] = { 2, 3, 5, 7, 9, 11 };
 
    int get_data (uint8_t idx)
@@ -1229,17 +1229,11 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
      i.e. a simple variable name, an array name, or an array or structure
      element provided the offset is known at compile-time, and \p var is
      located in static storage, etc.
-
-   - The returned value is the symbol's \ref sec_vma "VMA"
-     (virtual memory address)
-     determined by the linker and falls in the corresponding memory region.
-     The AVR Harvard architecture requires non-overlapping VMA areas for
-     the multiple \ref sec_memory_regions "memory regions" in the processor:
-     Flash ROM, RAM, and EEPROM.  Typical offset for these are
-     \c 0x0, \c 0x800xx0, and \c 0x810000 respectively, derived from the
-     linker script used and linker options.
 */
-
+#ifdef __DOXYGEN__
+#define pgm_get_far_address(var)
+#else
+#ifndef __AVR_TINY__
 #define pgm_get_far_address(var)                      \
 (__extension__({                                      \
     uint_farptr_t __tmp;                              \
@@ -1254,7 +1248,28 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
     );                                                \
     __tmp;                                            \
 }))
-
+#else
+/* The working of the pgm_read_far() functions and macros is such
+   that they decay to pgm_read() for devices without ELPM.
+   Since GCC v7 PR71948, the compiler adds an offset of 0x4000 on
+   Reduced Tiny when it takes the address of an object in PROGMEM,
+   which means we have to add 0x4000 here, too.  */
+#define pgm_get_far_address(var)                      \
+(__extension__({                                      \
+    uint_farptr_t __tmp;                              \
+                                                      \
+    __asm__ __volatile__ (                            \
+        "ldi    %A0, lo8(0x4000+(%1))"  "\n\t"        \
+        "ldi    %B0, hi8(0x4000+(%1))"  "\n\t"        \
+        "ldi    %C0, hh8(0x4000+(%1))"  "\n\t"        \
+        "clr    %D0"                                  \
+        :   "=d" (__tmp)                              \
+        :   "i"  (&(var))                             \
+    );                                                \
+    __tmp;                                            \
+}))
+#endif /* AVR TINY */
+#endif /* DOXYGEN */
 
 
 /** \ingroup avr_pgmspace
