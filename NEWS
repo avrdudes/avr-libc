@@ -6,6 +6,11 @@
 
 * Issues closed:
 
+  - On Reduced Tiny, add 0x4000 to the symbol address when
+    pgm_get_far_address() takes the address of an object in PROGMEM_FAR.
+    This works similar to how the compiler implements the &-operator
+    for PROGMEM objects (Issue #970).
+
 * Pull requests:
 
 * Other changes:
