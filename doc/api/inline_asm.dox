@@ -233,6 +233,8 @@ Notes on the various parts:
 
   The first two clobbers mean that the asm destroys register R16. Only the
   lower-case form is allowed, and register names like Z are not recognized.
+  A register that's clobbered will not be used as (part of) an input or
+  output operand.
 
   \c "memory" means that the asm touches memory in some way.
   When the asm writes to some RAM location for example, the compiler must not
