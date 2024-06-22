@@ -415,6 +415,12 @@ __do_copy_data:
 #define RAM_VMA 0x800000
 
 #if defined (RAMSTART) && defined (RAMEND)
+    ;; __DATA_REGION_ORIGIN__ is used since ld v2.40 / 2023-01-14 / PR29741.
+    ;; Prior to that, a core specific default value $DATA_ORIGIN was used.
+    ;; __DATA_REGION_LENGTH__ however is in use since 2015 / cb0728165e282b
+    ;; which means that with Binutils older than v2.40, we may get a
+    ;;    ld: address <X> of <FILE> section `.data' is not within region `data'
+    ;; error from the linker when $DATA_ORIGIN is not __DATA_REGION_ORIGIN__.
     .weak __DATA_REGION_ORIGIN__
     .set  __DATA_REGION_ORIGIN__, (RAM_VMA) | (RAMSTART)
     .weak __DATA_REGION_LENGTH__
