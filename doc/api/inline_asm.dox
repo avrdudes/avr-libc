@@ -1360,7 +1360,7 @@ provided \c double is a 32-bit type.
 
 GCC inline asm has some limitations.
 
-\subsection inline_asm_fails_split Setting a Register on one asm and using it in a different one
+\subsection inline_asm_fails_split Setting a Register in one asm and using it in a different one
 
 Sequences like the following are not supposed to work:
 \code
@@ -1392,6 +1392,25 @@ or
     __asm ("inc %1"    "\n\t"
            "sts %0, %1"
            : "=m" (var) : "r" (c));
+\endcode
+
+\subsection inline_asm_fails_lreg Referring to a Local Register Variable that's not an Operand to the asm
+
+Code like the following won't work:
+
+\code
+    register uint8_t reg2 __asm("r2");
+    __asm ("clr r2");
+\endcode
+
+That code assumes that the local register variable \c reg2 is bound to register
+R2 in the inline asm, but that is not the case. Only when a local register
+variable is used as an operand it will be loaded to the specified register:
+
+\code
+    __asm ("clr r2" : "=r" (reg2));
+    // or
+    __asm ("clr %0" : "=r" (reg2));
 \endcode
 
 \subsection inline_asm_fails_regvar Letting an Operand cross the Boundaries of the Y Register
