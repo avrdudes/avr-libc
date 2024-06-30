@@ -30,11 +30,11 @@
 
 /* $Id$ */
 
-/** \defgroup avr_version <avr/version.h>: avr-libc version macros
+/** \defgroup avr_version <avr/version.h>: AVR-LibC version macros
     \code #include <avr/version.h> \endcode
 
     This header file defines macros that contain version numbers and
-    strings describing the current version of avr-libc.
+    strings describing the current version of AVR-LibC.
 
     The version number itself basically consists of three pieces that
     are separated by a dot: the major number, the minor number, and

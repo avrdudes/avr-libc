@@ -65,16 +65,16 @@ Requires: avr-gcc >= 3.4.3
 %define ourdocdir %{_defaultdocdir}/%{name}
 
 %description
-Avr-libc is a C library for developing applications for Atmel AVR
-microcontrollers.
+AVR-LibC is a C library for developing applications for AVR
+8-bit microcontrollers.
 
 %if %{_with_docs}
 ## The avr-libc-docs subpackage
 %package docs
-Summary: Documentation for avr-libc.
+Summary: Documentation for AVR-LibC.
 Group: Avr/Documentation
 %description docs
-Documentation for avr-libc in html, postscript and pdf formats.
+Documentation for AVR-LibC in html, postscript and pdf formats.
 %endif
 
 %prep

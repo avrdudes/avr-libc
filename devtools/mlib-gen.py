@@ -6,13 +6,13 @@ import re, argparse
 
 MMCU_DEFAULT = "avr2"
 
-parser = argparse.ArgumentParser('Generate multilib tree for avr-libc')
+parser = argparse.ArgumentParser('Generate multilib tree for AVR-LibC')
 
 parser.add_argument("-devices", dest="devices", required=True,
-                    help="Text file with devices supported by avr-libc")
+                    help="Text file with devices supported by AVR-LibC")
 
 parser.add_argument("-cores", dest="cores", required=True,
-                    help="Text file with cores supported by avr-libc")
+                    help="Text file with cores supported by AVR-LibC")
 
 args = parser.parse_args()
 

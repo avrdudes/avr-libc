@@ -34,7 +34,7 @@
 #
 
 #
-# Use this script from the toplevel of the avr-libc tree to find files with
+# Use this script from the toplevel of the AVR-LibC tree to find files with
 # bogus carriage returns.
 #
 
