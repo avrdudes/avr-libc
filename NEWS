@@ -6,6 +6,18 @@
 
 * Issues closed:
 
+  - Since v2.2.0 (Issue #936), gcrt1.S defines symbols __DATA_REGION_ORIGIN__
+    and __DATA_REGIO_LENGTH__ to allow for more precise diagnostics from
+    the linker when the data region overflows.  However, letting .data start
+    at __DATA_REGION_ORIGIN__ is a relatively new addition in Binutils v2.40
+    PR29741, whereas using __DATA_REGION_LENGTH__ for .data size is a much
+    older addition.  Outcome may be that the linker script adopts the true
+    size of .data but not its start address, resulting in incorrect errors
+    from the linker (Issue #971).  In order to resolve #971, a configure
+    test has been added that checks for PR29741, and only defines the mentioned
+    symbols when PR29741 is available.  A similar test has been added for
+    PR31177 which is a similar feature for the .text region.
+
   - On Reduced Tiny, add 0x4000 to the symbol address when
     pgm_get_far_address() takes the address of an object in PROGMEM_FAR.
     This works similar to how the compiler implements the &-operator

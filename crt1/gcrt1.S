@@ -38,6 +38,8 @@
 #include IOSYMFILE
 
 #include "macros.inc"
+#include "config.h"
+
 ;; Use _VECTOR_SIZE from the I/O header which might be more reliable than
 ;; using macros.inc's XJMP according to __AVR_HAVE_JMP_CALL__.  As an example,
 ;; take ATmega808 which avr-gcc lists as short-calls and thus with a vector
@@ -403,7 +405,7 @@ __do_copy_data:
     ;; of Binutils have text region start hard coded as 0x0.
     ;; Therefore, only provide strict text region layout for devices
     ;; where program memory starts at 0x0.
-#if FLASHSTART == 0
+#if FLASHSTART == 0 || defined (HAVE_LDSCRIPT_PR31177)
     .weak __TEXT_REGION_ORIGIN__
     .set  __TEXT_REGION_ORIGIN__, (FLASHSTART)
     .weak __TEXT_REGION_LENGTH__
@@ -414,13 +416,13 @@ __do_copy_data:
 ;; The RAM virtual memory address used by Binutils to linearize memory.
 #define RAM_VMA 0x800000
 
-#if defined (RAMSTART) && defined (RAMEND)
-    ;; __DATA_REGION_ORIGIN__ is used since ld v2.40 / 2023-01-14 / PR29741.
-    ;; Prior to that, a core specific default value $DATA_ORIGIN was used.
-    ;; __DATA_REGION_LENGTH__ however is in use since 2015 / cb0728165e282b
-    ;; which means that with Binutils older than v2.40, we may get a
-    ;;    ld: address <X> of <FILE> section `.data' is not within region `data'
-    ;; error from the linker when $DATA_ORIGIN is not __DATA_REGION_ORIGIN__.
+;; __DATA_REGION_ORIGIN__ is used since ld v2.40 / 2023-01-14 / PR29741.
+;; Prior to that, a core specific default value $DATA_ORIGIN was used.
+;; __DATA_REGION_LENGTH__ however is in use since 2015 / cb0728165e282b
+;; which means that with Binutils older than v2.40, we may get a
+;;    ld: address <X> of <FILE> section `.data' is not within region `data'
+;; error from the linker when $DATA_ORIGIN is not __DATA_REGION_ORIGIN__.
+#if defined (RAMSTART) && defined (RAMEND) && defined (HAVE_LDSCRIPT_PR29741)
     .weak __DATA_REGION_ORIGIN__
     .set  __DATA_REGION_ORIGIN__, (RAM_VMA) | (RAMSTART)
     .weak __DATA_REGION_LENGTH__
