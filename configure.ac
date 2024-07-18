@@ -138,9 +138,11 @@ m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.64],
 
 AC_PROG_CC
 AC_CHECK_TOOL(AS, as, as)
+AC_CHECK_TOOL(LD, ld, ld)
 AM_PROG_AS
 AC_PROG_RANLIB
 AC_CHECK_TOOL(AR, ar, ar)
+AC_CHECK_TOOL(OBJDUMP, objdump, objdump)
 
 # Make sure that we found the right avr cross-compiler.
 
@@ -157,6 +159,14 @@ case "${AS}" in
    *avr*as*) ;;
    *) AC_MSG_ERROR(Wrong assembler found; check the PATH!) ;;
 esac
+case "${LD}" in
+   *avr*ld*) ;;
+   *) AC_MSG_ERROR(Wrong linker found; check the PATH!) ;;
+esac
+case "${OBJDUMP}" in
+   *avr*objdump*) ;;
+   *) AC_MSG_ERROR(Wrong objdump found; check the PATH!) ;;
+esac
 case "${AR}" in
    *avr*ar*) ;;
    *) AC_MSG_ERROR(Wrong archiver found; check the PATH!) ;;
@@ -169,6 +179,44 @@ esac
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
+
+
+dnl $1 = MSG_CHECKING
+dnl Assemble and link assembly source $2 with extra $AS options $3
+dnl and extra $LD options $4.  When pattern $5 is found in `objdump -h`,
+dnl then run $6, else run $7.
+AC_DEFUN([CHECK_OBJDUMP_MINUS_H],[dnl
+AC_MSG_CHECKING($1)
+rm -f conftest.s conftest.o conftest.elf conftest.lst
+cat > conftest.s <<EOF
+$2
+EOF
+AC_TRY_COMMAND([$AS conftest.s $3 -o conftest.o])
+AC_TRY_COMMAND([$LD conftest.o $4 -o conftest.elf])
+AC_TRY_COMMAND([$OBJDUMP -h conftest.elf > conftest.lst])
+AS_IF([grep $5 conftest.lst > /dev/null],has_pat=yes,has_pat=no)
+AC_MSG_RESULT($has_pat)
+AS_IF([test "x$has_pat" = "xyes"], [$6], [$7])
+rm -f conftest.s conftest.o conftest.elf conftest.lst
+])
+
+dnl Outcome is consumed by crt1/gcrt1.S
+CHECK_OBJDUMP_MINUS_H([whether data region starts at __DATA_REGION_ORIGIN__],dnl
+    [.data],dnl
+    [-mmcu=avr2], [-mavr2 --defsym __DATA_REGION_ORIGIN__=0x800066],
+    ['\.data.*00800066'],
+    AC_DEFINE([HAVE_LDSCRIPT_PR29741], 1,
+        [Define if the ld script uses __DATA_REGION_ORIGIN__ as data start.]),
+)
+
+dnl Outcome is consumed by crt1/gcrt1.S
+CHECK_OBJDUMP_MINUS_H([whether text region starts at __TEXT_REGION_ORIGIN__],dnl
+    [.data],dnl
+    [-mmcu=avr2], [-mavr2 --defsym __TEXT_REGION_ORIGIN__=0x22],
+    ['\.text.*00000022'],
+    AC_DEFINE([HAVE_LDSCRIPT_PR31177], 1,
+        [Define if the ld script uses __TEXT_REGION_ORIGIN__ as text start.]),
+)
 
 
 dnl Substitute $1 with the basenames of all files in glob $2.
