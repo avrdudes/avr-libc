@@ -1,4 +1,4 @@
-*** Changes since AVR-LibC-2.2.0:
+*** Changes in AVR-LibC-2.2.1:
 
 * General:
 
@@ -24,6 +24,8 @@
     for PROGMEM objects (Issue #970).
 
 * Pull requests:
+
+  - Issue #971 - configure.ac: Test for Binutils PR29741 / PR31177. (PR #972)
 
 * Other changes:
 
