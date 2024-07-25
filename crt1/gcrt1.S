@@ -346,7 +346,7 @@ __do_copy_data:
 #elif FLASHEND > 0
     .long FLASHEND + 1
 #else
-    .long FLASHEND
+    .long 0
 #endif
     .long RAMSTART
 #ifdef RAMSIZE
@@ -366,7 +366,7 @@ __do_copy_data:
 #elif E2END > 0
     .long E2END + 1
 #else
-    .long E2END
+    .long 0
 #endif
     /* String offsets table.
     Index 0 - Size of offset table in bytes

@@ -23,6 +23,8 @@
     This works similar to how the compiler implements the &-operator
     for PROGMEM objects (Issue #970).
 
+  - ld: undefined reference to `E2END' #973
+
 * Pull requests:
 
 * Other changes:
