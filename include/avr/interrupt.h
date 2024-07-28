@@ -101,7 +101,7 @@
     routine) that runs with global interrupts initially disabled
     by default with no attributes specified.
 
-    The attributes are optional and alter the behaviour and resultant
+    The \c attributes are optional and alter the behaviour and resultant
     generated code of the interrupt routine. Multiple attributes may
     be used for a single function, with a space seperating each
     attribute.
@@ -134,6 +134,66 @@
 #endif /* DOXYGEN */
 
 #if defined(__DOXYGEN__)
+/** \def ISR_N(vector_num [, attributes])
+    \ingroup avr_interrupts
+
+    Introduces an interrupt handler function (interrupt service
+    routine) that runs with global interrupts initially disabled
+    by default with no attributes specified.
+
+    \c vector_num must be a positive interrupt vector number that is
+    valid for the particular MCU type.
+
+    Contrary to the #ISR macro, #ISR_N does not provide a declarator for
+    the ISR.  #ISR_N may be specified more than once, which can be used
+    to define aliases.  For example, the follwing definition provides
+    an ISR for IRQ numbers 3 and 4 on an ATmega328:
+\code
+    ISR_N (PCINT0_vect_num)
+    ISR_N (PCINT1_vect_num)
+    static void my_isr_handler (void)
+    {
+      // Code
+    }
+\endcode
+    The \c attributes are optional and alter the behaviour and resultant
+    generated code of the interrupt routine. Multiple attributes may
+    be used for a single function, with a space seperating each
+    attribute.
+
+    Valid attributes are #ISR_BLOCK, #ISR_NOBLOCK, #ISR_NAKED,
+    #ISR_FLATTEN, #ISR_NOICF and #ISR_NOGCCISR.
+
+    #ISR_N is only supported when the compiler supports the
+    <tt>signal(n)</tt> attribute, i.e. the \c signal attribute with arguments.
+    This is the case for
+    <a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>
+    and up.
+*/
+#  define ISR_N(vector_num, [attributes])
+#else  /* real code */
+
+#if defined __HAVE_SIGNAL_N__
+/* Notice that "used" is implicit since v15, and that there is no requirement
+   that the handler function is externally visible.  */
+#define ISR_N(N, ...)				\
+  __attribute__((__signal__(N))) __VA_ARGS__
+#else /* HAVE_SIGNAL_N */
+/* When GCC does not support "signal(n)", which is the case up to v14,
+   then try to emit a helpful error message.  */
+#define __ISR_N_error2(L)                                               \
+  __attribute__((__used__,__error__(					\
+    "ISR_N not supported by this version of the compiler")))            \
+  int AVR_LibC_show_error##L (int x)					\
+  {									\
+    return x ? 1 : x * AVR_LibC_show_error##L (x - 1);			\
+  }
+#define __ISR_N_error1(L) __ISR_N_error2(L)
+#define ISR_N(...) __ISR_N_error1(__LINE__)
+#endif /* HAVE_SIGNAL_N */
+#endif /* DOXYGEN ISR_N */
+
+#if defined(__DOXYGEN__)
 /** \def SIGNAL(vector)
     \ingroup avr_interrupts
 
@@ -141,7 +201,7 @@
     initially disabled.
 
     This is the same as the ISR macro without optional attributes.
-    \deprecated Do not use SIGNAL() in new code. Use ISR() instead.
+    \deprecated Do not use SIGNAL() in new code. Use ISR() or ISR_N() instead.
 */
 #  define SIGNAL(vector)
 #else  /* real code */
@@ -197,19 +257,37 @@
     JMP/RJMP opcode used.
 
     \deprecated
-    For new code, the use of ISR(..., ISR_ALIASOF(...))  is
-    recommended.
+    For new code, the use of ISR(..., ISR_ALIASOF(...))  or #ISR_N is
+    recommended.  Notice that using #ISR_N does \e not impose a
+    JMP/RJMP overhead.
 
     Example:
     \code
-    ISR(INT0_vect)
+    ISR (INT0_vect)
     {
         PORTB = 42;
     }
 
-    ISR_ALIAS(INT1_vect, INT0_vect);
-    \endcode
+    ISR_ALIAS (INT1_vect, INT0_vect);
 
+    // Alternative using ISR_N
+
+    ISR_N (INT0_vect_num)
+    ISR_N (INT1_vect_num)
+    static void my_int01_handler (void)
+    {
+        PORTB = 42;
+    }
+
+    // or
+
+    ISR (INT0_vect,
+         [attributes]
+         ISR_N (INT1_vect_num))
+    {
+        PORTB = 42;
+    }
+    \endcode
 */
 #  define ISR_ALIAS(vector, target_vector)
 #else /* real code */
@@ -267,7 +345,8 @@
     interrupts are initially disabled by the AVR hardware when
     entering the ISR, without the compiler modifying this state.
 
-    Use this attribute in the attributes parameter of the #ISR macro.
+    Use this attribute in the \c attributes parameter of the #ISR
+    and #ISR_N macros.
 */
 #  define ISR_BLOCK
 
@@ -284,7 +363,8 @@
     the ISR for those cases where the AVR hardware does not clear the
     respective interrupt flag before entering the ISR.
 
-    Use this attribute in the attributes parameter of the #ISR macro.
+    Use this attribute in the \c attributes parameter of the #ISR and
+    #ISR_N macros.
 */
 #  define ISR_NOBLOCK
 
@@ -296,7 +376,8 @@
     SREG register, as well as placing a reti() at the end of the
     interrupt routine.
 
-    Use this attribute in the attributes parameter of the #ISR macro.
+    Use this attribute in the \c attributes parameter of the #ISR and
+    #ISR_N macros.
 
     \note According to GCC documentation, the only code supported in
     naked functions is \ref inline_asm "inline assembly".
@@ -309,7 +390,8 @@
     The compiler will try to inline all called function into the ISR.
     This has an effect with GCC 4.6 and newer only.
 
-    Use this attribute in the attributes parameter of the #ISR macro.
+    Use this attribute in the \c attributes parameter of the #ISR and
+    #ISR_N macros.
 */
 #  define ISR_FLATTEN
 
@@ -319,7 +401,8 @@
     Avoid identical-code-folding optimization against this ISR.
     This has an effect with GCC 5 and newer only.
 
-    Use this attribute in the attributes parameter of the #ISR macro.
+    Use this attribute in the \c attributes parameter of the #ISR and
+    #ISR_N macros.
 */
 #  define ISR_NOICF
 
@@ -333,7 +416,8 @@
     <a href="https://gcc.gnu.org/gcc-8/changes.html#avr">GCC 8</a>
     and newer only.
 
-    Use this attribute in the attributes parameter of the #ISR macro.
+    Use this attribute in the \c attributes parameter of the #ISR and
+    #ISR_N macros.
 */
 #  define ISR_NOGCCISR
 
@@ -343,7 +427,7 @@
     The ISR is linked to another ISR, specified by the vect parameter.
     This is compatible with GCC 4.2 and greater only.
 
-    Use this attribute in the attributes parameter of the #ISR macro.
+    Use this attribute in the \c attributes parameter of the #ISR macro.
     Example:
     \code
     ISR (INT0_vect)
@@ -353,13 +437,26 @@
 
     ISR (INT1_vect, ISR_ALIASOF (INT0_vect));
     \endcode
+
+    Notice that the #ISR_ALIASOF macro implments its own IRQ handler that
+    jumps to the aliased ISR, which means there is a run-time overhead of
+    a JMP/RJMP instruction.  For an alternative without overhead, see
+    the #ISR_N macro.
 */
 #  define ISR_ALIASOF(target_vector)
 #else  /* !DOXYGEN */
 #  define ISR_BLOCK /* empty */
 /* FIXME: This won't work with older versions of avr-gcc as ISR_NOBLOCK
           will use `signal' and `interrupt' at the same time.  */
+#  ifdef __HAVE_SIGNAL_N__
+/* Use "noblock" if available.  This works rather like a flag that can be
+   combined with "signal(n)" without imposing a specific function name,
+   like "interrupt" would do.  */
+#  define ISR_NOBLOCK    __attribute__((__noblock__))
+#  else
 #  define ISR_NOBLOCK    __attribute__((__interrupt__))
+#  endif /* Have signal(n) and noblock */
+
 #  define ISR_NAKED      __attribute__((__naked__))
 
 #if (__GNUC__ == 4 && __GNUC_MINOR__ >= 6) || (__GNUC__ >= 5)

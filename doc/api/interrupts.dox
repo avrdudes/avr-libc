@@ -52,14 +52,22 @@ status register, get saved and restored.
 
 These details seem to make interrupt routines a little messy, but all these
 details are handled by the Interrupt API. An interrupt routine is defined with
-ISR(). This macro register and mark
+ISR() or ISR_N(). These macros register and mark
 the routine as an interrupt handler for the specified peripheral. The
 following is an example definition of a handler for the ADC interrupt.
 
 \code
 #include <avr/interrupt.h>
 
-ISR(ADC_vect)
+ISR (ADC_vect)
+{
+    // user code here
+}
+
+// Alternative using the ISR_N macro
+
+ISR_N (ADC_vect_num)
+[static] void my_adc_handler (void)
 {
     // user code here
 }
@@ -82,7 +90,7 @@ not included.
 \code
 #include <avr/interrupt.h>
 
-ISR(BADISR_vect)
+ISR (BADISR_vect)
 {
     // user code here
 }
@@ -111,7 +119,15 @@ handler by declaring the handler the following way:
 
 \anchor attr_interrupt
 \code
-ISR(XXX_vect, ISR_NOBLOCK)
+ISR (XXX_vect, ISR_NOBLOCK)
+{
+  ...
+}
+
+// or
+
+ISR_N (XXX_vect_num, ISR_NOBLOCK)
+[static] void my_XXX_handler (void)
 {
   ...
 }
@@ -131,13 +147,31 @@ it happened.  Sharing interrupt vector code can be accomplished using
 the #ISR_ALIASOF() attribute to the #ISR macro:
 
 \code
-ISR(PCINT0_vect)
+ISR (PCINT0_vect)
 {
-  ...
   // Code to handle the event.
 }
 
-ISR(PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
+ISR (PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
+
+// Alternative using ISR_N
+
+ISR_N (PCINT0_vect_NUM)
+ISR_N (PCINT1_vect_NUM)
+[static] void my_pcint_handler (void)
+{
+  // Code to handle the event.
+}
+
+// or
+
+ISR (PCINT0_vect,
+     [attributes]
+     ISR_N (PCINT1_vect_NUM)
+     ISR_N (PCINT2_vect_NUM))
+{
+  // Code to handle the event.
+}
 \endcode
 
 \note There is no body to the aliased ISR.
@@ -178,8 +212,8 @@ an example of how to implement it that way.
 
 Another solution is to still implement the ISR in C language but take
 over the compiler's job of generating the prologue and epilogue.  This
-can be done using the #ISR_NAKED attribute to the ISR() macro.  Note
-that the compiler does not generate \e anything as prologue or
+can be done using the #ISR_NAKED attribute to the ISR() and ISR_N() macros.
+Note that the compiler does not generate \e anything as prologue or
 epilogue, so the final reti() must be provided by the actual
 implementation.  SREG must be manually saved if the ISR code modifies
 it, and the compiler-implied assumption of <tt>\ref zero_reg "__zero_reg__"</tt>
@@ -191,7 +225,16 @@ instruction).
 like with #ISR_NAKED.
 
 \code
-ISR(TIMER1_OVF_vect,  ISR_NAKED)
+ISR (TIMER1_OVF_vect, ISR_NAKED)
+{
+  PORTB |= _BV(0);  // results in SBI which does not affect SREG
+  reti();
+}
+
+// or
+
+ISR_N (TIMER1_OVF_vect_num, ISR_NAKED)
+[static] void my_ovf_handler (void)
 {
   PORTB |= _BV(0);  // results in SBI which does not affect SREG
   reti();
@@ -202,6 +245,10 @@ ISR(TIMER1_OVF_vect,  ISR_NAKED)
 
 The interrupt is chosen by supplying one of the vector names in the
 following table.
+Apart from the <tt><em>NAME</em>_vect</tt> macros listed below, for each
+such ISR name there is also a macro <tt><em>NAME</em>_vect_num</tt>
+defined which resolves to the IRQ number and that can be used in the
+#ISR_N macro.
 
 There are currently two different styles present for naming the
 vectors.
@@ -232,11 +279,6 @@ actually wired into the interrupt vector table.  The compiler will
 generate a warning if it detects a suspiciously looking name of an
 ISR() function (i.e. one that after macro replacement does not
 start with <tt>"__vector_"</tt>).
-
-Apart from the <tt><em>NAME</em>_vect</tt> macros listed below, for each
-such ISR name there is also a macro <tt><em>NAME</em>_vect_num</tt>
-defined which resolves to the IRQ number.  This is the index into the
-vector table, where indices start at index 0 (the reset vector).
 
 See also \ref faq_isr_names in the FAQ for how find all the IRQ names for
 a specific device.
