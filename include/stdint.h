@@ -105,14 +105,14 @@ typedef unsigned long int uint32_t;
 /** \ingroup avr_stdint
     64-bit signed type.
     \note This type is not available when the compiler
-    option -mint8 is in effect. */
+    option \c -mint8 is in effect. */
 
 typedef signed long long int int64_t;
 
 /** \ingroup avr_stdint
     64-bit unsigned type.
     \note This type is not available when the compiler
-    option -mint8 is in effect. */
+    option \c -mint8 is in effect. */
 
 typedef unsigned long long int uint64_t;
 
@@ -120,18 +120,29 @@ typedef unsigned long long int uint64_t;
 
 #else /* !defined(__DOXYGEN__) */
 
-/* actual implementation goes here */
+/* Actual implementation goes here.  Define to what built-ins
+   like __UINT32_TYPE__ would resolve to.  */
 
-typedef signed int int8_t __attribute__((__mode__(__QI__)));
-typedef unsigned int uint8_t __attribute__((__mode__(__QI__)));
-typedef signed int int16_t __attribute__ ((__mode__ (__HI__)));
-typedef unsigned int uint16_t __attribute__ ((__mode__ (__HI__)));
-typedef signed int int32_t __attribute__ ((__mode__ (__SI__)));
-typedef unsigned int uint32_t __attribute__ ((__mode__ (__SI__)));
+typedef signed char int8_t;
+typedef unsigned char uint8_t;
+
 #if !__USING_MINT8
-typedef signed int int64_t __attribute__((__mode__(__DI__)));
-typedef unsigned int uint64_t __attribute__((__mode__(__DI__)));
-#endif
+
+typedef int int16_t;
+typedef unsigned int uint16_t;
+typedef long int int32_t;
+typedef long unsigned int uint32_t;
+typedef long long int int64_t;
+typedef long long unsigned int uint64_t;
+
+#else /* __USING_MINT8 */
+
+typedef long int int16_t;
+typedef long unsigned int uint16_t;
+typedef long long int int32_t;
+typedef long long unsigned int uint32_t;
+
+#endif /* __USING_MINT8 */
 
 #endif /* defined(__DOXYGEN__) */
 

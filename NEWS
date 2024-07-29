@@ -30,6 +30,9 @@
     This works similar to how the compiler implements the &-operator
     for PROGMEM objects (Issue #970).
 
+  - Define types from stdint.h like int32_t without attribute((mode)).
+    (Issue #496)
+
   - ld: undefined reference to `E2END' #973
 
 * Pull requests:
