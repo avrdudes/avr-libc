@@ -411,8 +411,9 @@ Some common directives include:
 </table>
 
 \anchor ass_data_and_align
+\anchor ass_data
 <table>
-<caption>Assembler Directives: Data and Alignment</caption>
+<caption>Assembler Directives: Data</caption>
 <tr>
   <th>Data Ops
   <th>Description
@@ -449,6 +450,12 @@ Some common directives include:
   <td>
 </tr>
 <tr>
+  <td><tt>.base64 <em>"string"</em></tt>
+  <td>Used for more efficient encoding of (large) blocks of binary data,
+    see <a href="https://sourceware.org/PR31964">PR31964</a>.
+  <td>
+</tr>
+<tr>
   <td><tt>.float <em>list</em></tt>
   <td>Allocate IEEE-754 single 32-bit floating-point values specified
     in the comma-separated <em>list</em>.
@@ -470,6 +477,11 @@ Some common directives include:
   <td>Insert <em>num</em> zero bytes.
   <td>
 </tr>
+</table>
+
+\anchor ass_data
+<table>
+<caption>Assembler Directives: Alignment</caption>
 <tr>
   <th>Alignment Ops
   <th>Description
