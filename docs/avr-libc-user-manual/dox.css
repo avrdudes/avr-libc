@@ -1,0 +1,26 @@
+/* $Id$ */
+
+div.line {
+    /* The original doxgen.css has a line-height of 1.0 at this place.
+       Use more space so that underscores at the bottom line are not hidden
+       behind the frame around \code blocks.  This artifact depends on the
+       rendering engine and was observed with FireFox v124.  */
+    line-height: 1.2 !important;
+}
+
+.logo {
+    display: block;
+}
+.invlogo {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo {
+        display: none;
+    }
+    .invlogo {
+        display: block;
+    }
+}
+
