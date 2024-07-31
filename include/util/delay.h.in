@@ -157,7 +157,6 @@ _delay_ms(double __ms)
 #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) \
   && !defined(__DELAY_BACKWARD_COMPATIBLE__)
 	uint32_t __ticks_dc;
-	extern void __builtin_avr_delay_cycles(uint32_t);
 	__tmp = ((F_CPU) / 1e3) * __ms;
 
 	#if defined(__DELAY_ROUND_DOWN__)
@@ -240,7 +239,6 @@ _delay_us(double __us)
 #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) \
   && !defined(__DELAY_BACKWARD_COMPATIBLE__)
 	uint32_t __ticks_dc;
-	extern void __builtin_avr_delay_cycles(uint32_t);
 	__tmp = ((F_CPU) / 1e6) * __us;
 
 	#if defined(__DELAY_ROUND_DOWN__)
