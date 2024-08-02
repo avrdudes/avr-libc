@@ -44,7 +44,7 @@ systems, and another section for Windows.
 - \ref optional_tools
 - \ref install_unix
   - \ref install_preparations
-    - \ref install_location
+    - \ref install_host_tools "Required Build Tools"
     - \ref install_dir_layout
   - \ref install_avr_binutils "GNU Binutils"
   - \ref install_avr_gcc "GCC"
@@ -150,6 +150,17 @@ each of the tools.
 
 
 \subsection install_preparations Preparations
+
+\subsubsection install_host_tools Required Tools on the Build Machine
+
+In order to be able to build and install the compiler and other tools,
+the build machine requires some software packages.  The
+<a href="https://gcc.gnu.org/wiki/cauldron2023talks?action=AttachFile&do=view&target=2023-Cauldron-Getting-Started-session.pdf"
+   >Debian package list</a> is something like:
+
+- perl gawk binutils gcc-multilib python3 python3-pip gzip make tar zstd
+autoconf automake gettext gperf dejagnu autogen guile-3.0 expect
+tcl flex texinfo git diffutils patch git-email
 
 \subsubsection install_location Install Location
 
