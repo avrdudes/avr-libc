@@ -38,6 +38,15 @@
   - \ref ass_symbols  "Symbols"
   - \ref ass_data_and_align "Data and Alignment"
 - \ref ass_modifiers
+- \ref c_runtime
+  - \ref c_runtime_default
+    - \ref c_runtime_vectors
+    - \ref c_runtime_init
+  - \ref c_runtime_by_hand
+    - \ref c_runtime_copy_data
+    - \ref c_runtime_clear_bss
+    - \ref c_runtime_ctors
+    - \ref c_runtime_misc
 
 \section ass_intro Introduction
 
@@ -479,7 +488,7 @@ Some common directives include:
 </tr>
 </table>
 
-\anchor ass_data
+\anchor ass_align
 <table>
 <caption>Assembler Directives: Alignment</caption>
 <tr>
@@ -533,5 +542,137 @@ Example:
 This passes the address of function \c somefunc as the first parameter
 to function \c something, and <em>adds</em> the address of variable \c my_var
 to the 16-bit return value of \c something.
+
+\section c_runtime Using the C Runtime
+
+The C runtime is a collection of code that is required for a
+correct operation of a C/C++ program, and that is not generated
+by the compiler but provided by support libraries and startup-code.
+For example, variables in static storage like <tt>int two = 2;</tt>
+have to be initialized so that when \c main starts, these variables
+hold their required initial value.
+
+This support code can also be used in assembly programs.
+The code can be devided into two classes: Code that is used per default,
+and code that has to be explicitly pulled in from a target library.
+As explained above, the assembler should be invoked via \c avr-gcc, so
+that the C runtime and support libraries are available.
+
+\subsection c_runtime_default Code that is used per Default
+
+\subsubsection c_runtime_vectors The Interrupt Vector Table
+
+The code is linked against the interrupt vector table as provided by
+AVR-LibC, hence code like the following will work out of the box:
+\verbatim
+#include <avr/io.h>
+
+.global INT0_vect
+
+INT0_vect:
+    ;; Code for INT0 ISR
+    reti
+\endverbatim
+
+This will add the respective entry to the interrupt vector table
+e.g. \c __vector_1 in the case of an ATmega8.
+
+\subsubsection c_runtime_init The __init Label and Code
+
+The startup code from AVR-LibC also sets up the stackpointer according
+to the value of symbol \c __stack, and it sets \c __zero_reg__ (R1)
+to zero.  This code starts at \c __init wich is jumped to from the
+reset vector via the very first entry in the vector table.
+\c __init label is located in section <tt>\ref sec_dot_init ".init0"</tt>,
+so that all the following init sections will also be executed an a
+fallthrough manner until section \c \.init9 with finally calls \c main.
+Thus, the following code will be executed without any further ado:
+\verbatim
+.text
+.global main
+
+main:
+    ;; Code for main
+\endverbatim
+
+When you prefer to implement all this in a custom manner,
+then you can link with option \c -nostartfiles.
+
+\subsection c_runtime_by_hand Code that has to be pulled in by Hand
+
+\subsubsection c_runtime_copy_data Initializing .data
+
+In order to initialize variables in the \c \.data section,
+startup routine \c __do_copy_data from libgcc has to be pulled in.
+It will run during <tt>\ref sec_dot_init ".init4"</tt>.
+
+\verbatim
+.data
+.type   var, @object
+.size   ccc, 2
+var:
+    .2byte  1234
+
+.global __do_copy_data
+\endverbatim
+
+\subsubsection c_runtime_clear_bss Clearing .bss
+
+Similarly, variables that clears the \c \.bss section can be pulled in
+by referencing \c __do_clear_bss from libgcc.
+It will run during <tt>\ref sec_dot_init ".init4"</tt>.
+
+\verbatim
+.bss
+.type  var0, @object
+.size  var0, 2
+var0:
+    .zero  2
+
+.global __do_clear_bss
+\endverbatim
+
+\subsubsection c_runtime_ctors Running static Constructors
+
+Suppose you have a function \c func that you want to register as a constructor.
+The code that runs the constructors is \c __do_global_ctors from libgcc
+that runs during <tt>\ref sec_dot_init ".init6"</tt>.
+The addresses of the constructors are listed in section \c \.ctors:
+
+\verbatim
+;; Define void func (void) as an ordinary function.
+.type   func, @function
+func:
+    ;; Code
+    ret
+.size  func, .-func
+
+;; Add func to the list of static constructors
+.section .ctors,"a",@progbits
+.p2align 1
+.word  gs(func)
+
+;; Pull in code to call the functions listed in .ctors
+.global __do_global_ctors
+\endverbatim
+
+Similarly, static destructors are run by \c __do_global_dtors.
+
+\subsubsection c_runtime_misc Other Routines
+
+All function in libgcc, libc and libm can be used, for example the
+16-bit signed integer division routine:
+
+\verbatim
+    ;; R23:22 = R25:24 div R23:22
+    ;; R25:24 = R25:24 mod R23:22
+    ;; Clobbers: R21, R26, R27, SREG.
+    call __divmodhi4
+\endverbatim
+
+Notice that not all functions are following the
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention"
+   >avr-gcc calling convention</a>,
+and availability of some functions depends on the instruction set.
 
 */
