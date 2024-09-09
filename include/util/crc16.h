@@ -61,7 +61,7 @@
 
     \par
 
-    Jack Crenshaw's "Implementing CRCs" article in the January 1992 isue of \e
+    Jack Crenshaw's "Implementing CRCs" article in the January 1992 issue of \e
     Embedded \e Systems \e Programming. This may be difficult to find, but it
     explains CRC's in very clear and concise terms. Well worth the effort to
     obtain a copy.
@@ -222,7 +222,7 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
 
     \note Although the CCITT polynomial is the same as that used by the Xmodem
     protocol, they are quite different. The difference is in how the bits are
-    shifted through the alorgithm. Xmodem shifts the MSB of the CRC and the
+    shifted through the algorithm. Xmodem shifts the MSB of the CRC and the
     input first, while CCITT shifts the LSB of the CRC and the input first.
 
     The following is the equivalent functionality written in C.

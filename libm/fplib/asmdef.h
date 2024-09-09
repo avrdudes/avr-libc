@@ -53,8 +53,8 @@
 # define XCALL rcall
 #endif
 
-/* Historicaly, the _U() was intended to concatinate '_' prefix.
-   Let us save it, as one is usefull to find externals quickly.	*/
+/* Historically, the _U() was intended to concatenate '_' prefix.
+   Let us save it, as one is useful to find externals quickly.	*/
 #define	_U(name)	name
 
 #define	XL	r26
@@ -96,7 +96,7 @@ _U(\name):
 /* If the layout of the double type is the same like the float layout,
    provide a weak alias of the float symbol for double, same for long double.
    While we could also provide aliases in header files using
-   __asm__ in the declaration to specifiy the symbol to reference,
+   __asm__ in the declaration to specify the symbol to reference,
    it is preferable to provide actual symbols in the library, so
    that code that expects to be able to use them directly -
    like gcc/gcc/testsuite/gcc.dg/pr41963.c using sqrtf - will work.  */

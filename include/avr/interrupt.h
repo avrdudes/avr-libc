@@ -103,7 +103,7 @@
 
     The \c attributes are optional and alter the behaviour and resultant
     generated code of the interrupt routine. Multiple attributes may
-    be used for a single function, with a space seperating each
+    be used for a single function, with a space separating each
     attribute.
 
     Valid attributes are #ISR_BLOCK, #ISR_NOBLOCK, #ISR_NAKED,
@@ -146,7 +146,7 @@
 
     Contrary to the #ISR macro, #ISR_N does not provide a declarator for
     the ISR.  #ISR_N may be specified more than once, which can be used
-    to define aliases.  For example, the follwing definition provides
+    to define aliases.  For example, the following definition provides
     an ISR for IRQ numbers 3 and 4 on an ATmega328:
 \code
     ISR_N (PCINT0_vect_num)
@@ -158,7 +158,7 @@
 \endcode
     The \c attributes are optional and alter the behaviour and resultant
     generated code of the interrupt routine. Multiple attributes may
-    be used for a single function, with a space seperating each
+    be used for a single function, with a space separating each
     attribute.
 
     Valid attributes are #ISR_BLOCK, #ISR_NOBLOCK, #ISR_NAKED,
@@ -438,7 +438,7 @@
     ISR (INT1_vect, ISR_ALIASOF (INT0_vect));
     \endcode
 
-    Notice that the #ISR_ALIASOF macro implments its own IRQ handler that
+    Notice that the #ISR_ALIASOF macro implements its own IRQ handler that
     jumps to the aliased ISR, which means there is a run-time overhead of
     a JMP/RJMP instruction.  For an alternative without overhead, see
     the #ISR_N macro.

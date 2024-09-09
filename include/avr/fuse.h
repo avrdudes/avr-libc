@@ -163,7 +163,7 @@
     }
     \endcode
 
-    If you are compiling in C++, you cannot use the designated intializers so
+    If you are compiling in C++, you cannot use the designated initializers so
     you must do:
 
     \code
@@ -202,7 +202,7 @@
 
     You must initialize ALL fields in the __fuse_t structure. This is because
     the fuse bits in all bytes default to a logical 1, meaning unprogrammed.
-    Normal uninitialized data defaults to all locgial zeros. So it is vital that
+    Normal uninitialized data defaults to all logical zeros. So it is vital that
     all fuse bytes are initialized, even with default data. If they are not,
     then the fuse bits may not programmed to the desired settings.
 

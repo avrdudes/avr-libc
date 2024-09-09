@@ -33,7 +33,7 @@
 #include "asmdef.h"
 
 /* float __fp_powsodd (float A, [XH.]ZH.ZL);
-     The __fp_powsodd() function calculates a polynom with only odd
+     The __fp_powsodd() function calculates a polynomial with only odd
      powers of x.  Result is rounded.
 
    Input:

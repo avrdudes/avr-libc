@@ -149,7 +149,7 @@ extern int isxdigit(int __c);
 
 /**@}*/
 
-/** \name Character convertion routines
+/** \name Character conversion routines
 
     This realization permits all possible values of integer argument.
     The toascii() function clears all highest bits. The tolower() and

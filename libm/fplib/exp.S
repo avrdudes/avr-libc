@@ -55,7 +55,7 @@ FUNCTION expf
 .L_nan:	XJMP	_U(__fp_nan)
 
 ENTRY_FLOAT expf exp expl
-  ; split and analize A
+  ; split and analyze A
 	XCALL	_U(__fp_splitA)
 	brcs	.L_nf		; A is not a finite number
 	cpi	rA3, hhi8(X2BIG << 1)

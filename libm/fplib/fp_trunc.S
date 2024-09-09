@@ -42,7 +42,7 @@
 
    Return:
      T	   - sign bit
-     C	   - set if A is not finite (A is splited)
+     C	   - set if A is not finite (A is split)
      rA3   - exponent:
     		0	-  A is zero
 		1..126	-  fabs(A) < 1

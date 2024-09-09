@@ -295,7 +295,7 @@ main(void)
     This is a possible parameter for #NONATOMIC_BLOCK. When used, it
     will cause the NONATOMIC_BLOCK to force the state of the SREG
     register on exit, disabling the Global Interrupt Status flag
-    bit.  This saves a small amout of flash space, a register, and one
+    bit.  This saves a small amount of flash space, a register, and one
     or more processor cycles, since the previous value of the SREG
     register does not need to be saved at the start of the block.
 

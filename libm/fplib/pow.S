@@ -162,10 +162,10 @@ ENTRY_FLOAT powf pow powl
 	mov	XH, ZL
 	subi	ZH, -8
 	brcs	1b
-	rjmp	.L_noint	; mantisa too big
+	rjmp	.L_noint	; mantissa too big
   ; Bit search loop.
 2:	subi	ZH, -1
-	brcc	.L_noint	; mantisa too big
+	brcc	.L_noint	; mantissa too big
 	lsr	XL
 	brcc	2b
   ; Check exponent, is y an integral value?

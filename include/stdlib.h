@@ -728,7 +728,7 @@ extern char *ldtostre(long double __val, char *__s, unsigned char __prec,
 /**
    \ingroup avr_stdlib
    The ftostrf() function converts the \c float value passed in \c val into
-   an ASCII representationthat will be stored in \c s.  The caller
+   an ASCII representation that will be stored in \c s.  The caller
    is responsible for providing sufficient storage in \c s.
 
    Conversion is done in the format \c "[-]d.ddd".  The minimum field
