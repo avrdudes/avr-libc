@@ -56,7 +56,7 @@ static __inline__ void _delay_loop_2(uint16_t __count) __attribute__((__always_i
     functions described here do not disable interrupts.
 
     In general, for long delays, the use of hardware timers is
-    much preferrable, as they free the CPU, and allow for
+    much preferable, as they free the CPU, and allow for
     concurrent processing of other events while the timer is
     running.  However, in particular for very short delays, the
     overhead of setting up a hardware timer is too much compared

@@ -34,7 +34,7 @@
 
 /* unsigned long __fixunssfsi (float A);
      The __fixunssfsi() function converts A to the integer value. No
-     rounding, the fractional is losted. The compiler calls this function
+     rounding, the fractional is lost. The compiler calls this function
      to perform a cast operation from float (i.e. double) to unsigned long.
      No saturation. Negative input is permissable (like GCC/x86). Besides
      a normal 32-bits value __fixunssfsi() returns the extra error flag
@@ -56,7 +56,7 @@
    Why no saturation?
      - GCC on Intel's x86 does not do it
      - with saturation it will be more difficult to check result
-     - if cast is to 'int' (16 bits for AVR) then saturation is unusefull
+     - if cast is to 'int' (16 bits for AVR) then saturation is not useful
      - in practice saturation is needed with user's desirable limits
 
    Algorithm roughly:

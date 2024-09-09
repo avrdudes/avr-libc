@@ -85,7 +85,7 @@ extern "C" {
     \returns The _FFS() macro returns the position of the first
     (least significant) bit set in the word val, or 0 if no bits are set.
     The least significant bit is position 1.  Only 16 bits of argument
-    are evaluted.
+    are evaluated.
 */
 #if defined(__DOXYGEN__)
 #define _FFS(x)

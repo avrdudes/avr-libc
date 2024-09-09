@@ -47,7 +47,7 @@
     \code #include <avr/sleep.h>\endcode
 
     Use of the \c SLEEP instruction can allow an application to reduce its
-    power comsumption considerably. AVR devices can be put into different
+    power consumption considerably. AVR devices can be put into different
     sleep modes. Refer to the datasheet for the details relating to the device
     you are using.
 
@@ -56,9 +56,9 @@
     set the desired sleep mode using \c set_sleep_mode() (it usually
     defaults to idle mode where the CPU is put on sleep but all
     peripheral clocks are still running), and then call
-    \c sleep_mode(). This macro automatically sets the sleep enable bit, goes 
+    \c sleep_mode(). This macro automatically sets the sleep enable bit, goes
     to sleep, and clears the sleep enable bit.
-    
+
     Example:
     \code
     #include <avr/sleep.h>
@@ -67,8 +67,8 @@
       set_sleep_mode(<mode>);
       sleep_mode();
     \endcode
-    
-    Note that unless your purpose is to completely lock the CPU (until a 
+
+    Note that unless your purpose is to completely lock the CPU (until a
     hardware reset), interrupts need to be enabled before going to sleep.
 
     As the \c sleep_mode() macro might cause race conditions in some
@@ -100,11 +100,11 @@
     This sequence ensures an atomic test of \c some_condition with
     interrupts being disabled.  If the condition is met, sleep mode
     will be prepared, and the \c SLEEP instruction will be scheduled
-    immediately after an \c SEI instruction.  As the intruction right
+    immediately after an \c SEI instruction.  As the instruction right
     after the \c SEI is guaranteed to be executed before an interrupt
     could trigger, it is sure the device will really be put to sleep.
 
-    Some devices have the ability to disable the Brown Out Detector (BOD) before 
+    Some devices have the ability to disable the Brown Out Detector (BOD) before
     going to sleep. This will also reduce power while sleeping. If the
     specific AVR device has this ability then an additional macro is defined:
     \c sleep_bod_disable(). This macro generates inlined assembly code

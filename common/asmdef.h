@@ -51,8 +51,8 @@
 # endif
 #endif
 
-/* Historicaly, the _U() was intended to concatinate '_' prefix.
-   Let us save it, as one is usefull to find externals quickly.	*/
+/* Historically, the _U() was intended to concatenate '_' prefix.
+   Let us save it, as one is useful to find externals quickly.	*/
 #define	_U(name)	name
 
 #if !defined(__tmp_reg__)
@@ -93,7 +93,7 @@
 /* Macro FUNCTION is intended to start a function body without an entry.
    It is needed where an entry is at the middle of function. After this,
    you can to use an ENTRY macro below, one time or more.
-   
+
    TODO: make a possibility to define a few of blocks FUNCTION..ENDFUNC
    in a one source file.
  */
@@ -238,7 +238,7 @@ _U(\name):
 	lpm / mov Rd,r0
 	lpm / adiw ZL,1
 	lpm / mov Rd,r0 / adiw ZL,1
-	
+
    For enhanced chips it is one instruction always.
 
    ATTENTION:  unlike enhanced chips SREG (S,V,N,Z,C) flags are
@@ -252,7 +252,7 @@ _U(\name):
     .exitm	; do not multiply errors
   .endif
 
-  /* src evaluation	*/    
+  /* src evaluation	*/
   .L__lpm_src = -1
   .L__lpm_n = 0
   .irp  reg,  z,Z,z+,Z+
@@ -266,7 +266,7 @@ _U(\name):
     .err	; Invalid src arg of 'X_lpm' macro.
   .endif
 
-  /* instruction(s)	*/    
+  /* instruction(s)	*/
   .if  .L__lpm_src < 2
     .if  .L__lpm_dst == 0
 	lpm

@@ -54,7 +54,7 @@
     interrupt needs to be enabled separately if interrupts for this device are
     desired.  While some devices maintain their interrupt enable bit inside
     the device's register set, external and timer interrupts have system-wide
-    configuration registers. 
+    configuration registers.
 
     Example:
 
@@ -69,8 +69,8 @@
     \endcode
 
     \note Be careful when you use these functions. If you already have a
-    different interrupt enabled, you could inadvertantly disable it by
-    enabling another intterupt. */
+    different interrupt enabled, you could inadvertently disable it by
+    enabling another interrupt. */
 
 /**@{*/
 
@@ -81,7 +81,7 @@
     This macro gives access to the \c GIMSK register (or \c EIMSK register
     if using an AVR Mega device or \c GICR register for others). Although this
     macro is essentially the same as assigning to the register, it does
-    adapt slightly to the type of device being used. This macro is 
+    adapt slightly to the type of device being used. This macro is
     unavailable if none of the registers listed above are defined. */
 
 /* Define common register definition if available. */

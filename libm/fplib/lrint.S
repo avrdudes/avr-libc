@@ -84,7 +84,7 @@ ENTRY_FLOAT lrintf lrint lrintl
 2:	cpi	rA3, -7
 	brge	3f
   ; Quick shift to right by 8. The trick with rAE is needed to save info
-  ; about the lowerest bits. This will be used to compare fraction with
+  ; about the lowest bits. This will be used to compare fraction with
   ; 0.5 value.
 	cpse	rAE, r1
 	ldi	rAE, 1
@@ -101,7 +101,7 @@ ENTRY_FLOAT lrintf lrint lrintl
 	ror	rA0
 	ror	rAE
 	brcc	4f
-	ori	rAE, 1		; save flag that lowerst bits are not all 0
+	ori	rAE, 1		; save flag that lowest bits are not all 0
 4:	inc	rA3
 	brne	3b
   ; round

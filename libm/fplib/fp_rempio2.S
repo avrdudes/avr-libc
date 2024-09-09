@@ -103,7 +103,7 @@ ENDFUNC
 
 #if 0
 /* This is a test program to find the smallest value of rA2.1.0.E after
-   division. The nonzero value gives a garanty that normalization loop
+   division. The nonzero value gives a guaranty that normalization loop
    is finite.	*/
 
 #include <stdio.h>

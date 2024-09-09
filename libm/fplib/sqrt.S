@@ -71,7 +71,7 @@ ENTRY_FLOAT sqrtf sqrt sqrtl
 				;	10100000.00000000.00000000
 
 /* TODO: Now the Avr-libs does not have an infrastructure to build and
-   *test automaticaly* with both OPTIMIZE_SPEED definitions. So the
+   *test automatically* with both OPTIMIZE_SPEED definitions. So the
    one variant is enabled today only.
  */
 #if	1 /* defined(OPTIMIZE_SPEED) && OPTIMIZE_SPEED	*/

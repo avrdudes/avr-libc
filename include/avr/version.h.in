@@ -62,7 +62,7 @@
 
     In the numerical representation, the major number is multiplied by
     10000, the minor number by 100, and all three parts are then
-    added.  It is intented to provide a monotonically increasing
+    added.  It is intended to provide a monotonically increasing
     numerical value that can easily be used in numerical checks.
  */
 #define __AVR_LIBC_VERSION__        @AVR_LIBC_VERSION_NUMERIC@UL

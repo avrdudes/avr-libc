@@ -36,7 +36,7 @@
 
 /* long __fixsfsi (float A);
      The __fixsfsi() function converts A to the integer value. No rounding,
-     the fractional is losted. The compiler calls this function to perform
+     the fractional is lost. The compiler calls this function to perform
      a cast operation from float (i.e. double) to long. No saturation.
 
    Return:

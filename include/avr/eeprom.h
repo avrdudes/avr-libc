@@ -64,7 +64,7 @@
 
     - In addition to the write functions there is a set of update ones.
     This functions read each byte first and skip the burning if the
-    old value is the same with new.  The scaning direction is from
+    old value is the same with new.  The scanning direction is from
     high address to low, to obtain quick return in common cases.
 
     - All of the read/write functions first make sure the EEPROM is
@@ -73,7 +73,7 @@
     should first poll the EEPROM e. g. using eeprom_is_ready() before
     attempting any actual I/O.  But this functions does not wait until
     SELFPRGEN in SPMCSR becomes zero.  Do this manually, if your
-    softwate contains the Flash burning.
+    software contains the Flash burning.
 
     - As these functions modify IO registers, they are known to be
     non-reentrant.  If any of these functions are used from both,

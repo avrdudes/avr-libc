@@ -969,7 +969,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 
 /* Although in C, we can get away with just using __c, it does not work in
    C++. We need to use &__c[0] to avoid the compiler puking. Dave Hylands
-   explaned it thusly,
+   explained it thusly,
 
      Let's suppose that we use PSTR("Test"). In this case, the type returned
      by __c is a prog_char[5] and not a prog_char *. While these are
@@ -1416,7 +1416,7 @@ extern int strcasecmp_P(const char *, const char *) __ATTR_PURE__;
 /** \ingroup avr_pgmspace
     \fn char *strcasestr_P(const char *s1, const char *s2)
 
-    This funtion is similar to strcasestr() except that \p s2 is pointer
+    This function is similar to strcasestr() except that \p s2 is pointer
     to a string in program space.	*/
 extern char *strcasestr_P(const char *, const char *) __ATTR_PURE__;
 
@@ -1699,7 +1699,7 @@ extern void *memcpy_PF(void *dest, uint_farptr_t src, size_t len);
     \param src A far pointer to the source string in Flash
 
     \returns The strcpy_PF() function returns a pointer to the destination
-    string \e dst. The contents of RAMPZ SFR are undefined when the funcion
+    string \e dst. The contents of RAMPZ SFR are undefined when the function
     returns. */
 extern char *strcpy_PF(char *dest, uint_farptr_t src);
 
@@ -1757,7 +1757,7 @@ extern char *strcat_PF(char *dest, uint_farptr_t src);
 
     \returns The strlcat_PF() function returns strlen(\e src) + MIN(\e n,
     strlen(initial \e dst)).  If retval >= \e n, truncation occurred. The
-    contents of RAMPZ SFR are undefined when the funcion returns. */
+    contents of RAMPZ SFR are undefined when the function returns. */
 extern size_t strlcat_PF(char *dst, uint_farptr_t src, size_t siz);
 
 /** \ingroup avr_pgmspace
@@ -1896,7 +1896,7 @@ extern size_t strlcpy_PF(char *dst, uint_farptr_t src, size_t siz);
     The memcmp_PF() function compares the first \p len bytes of the memory
     areas \p s1 and flash \p s2. The comparision is performed using unsigned
     char operations. It is an equivalent of memcmp_P() function, except
-    that it is capable working on all FLASH including the exteded area
+    that it is capable working on all FLASH including the extended area
     above 64kB.
 
     \returns The memcmp_PF() function returns an integer less than, equal
@@ -1954,7 +1954,7 @@ size_t strlen_P(const char *s)
 template<typename __T, size_t>
 struct __pgm_read_impl
 {
-  // A default implementaton for T's with a size not in { 1, 2, 3, 4, 8 }.
+  // A default implementation for T's with a size not in { 1, 2, 3, 4, 8 }.
   // While this works, the performance is absolute scrap because GCC does
   // not handle objects well that don't fit in a register (i.e. avr-gcc
   // has no respective machine_mode).
@@ -2022,7 +2022,7 @@ __T pgm_read (const __T *__addr)
 template<typename __T, size_t>
 struct __pgm_read_far_impl
 {
-  // A default implementaton for T's with a size not in { 1, 2, 3, 4, 8 }.
+  // A default implementation for T's with a size not in { 1, 2, 3, 4, 8 }.
   // While this works, the performance is absolute scrap because GCC does
   // not handle objects well that don't fit in a register (i.e. avr-gcc
   // has no respective machine_mode).

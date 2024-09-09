@@ -35,7 +35,7 @@
 #include "asmdef.h"
 
 /* flt40_t __fp_powser (float x, [XH.]ZH.ZL);
-     The __fp_powser() function calculates the polynom.
+     The __fp_powser() function calculates the polynomial.
 
    Input:
      rA3.rA2.rA1.rA0	- an 'x' arg
@@ -47,7 +47,7 @@
    Table format:
      ; example for 3 power: C0 + x*(C1 + x*(C2 + x*C3))
      ; all floats are little-endian
-	.byte	3		; polynom power
+	.byte	3		; polynomial power
 	.byte	   C3,C3,C3,C3	; flt32_t C3
 	.byte	C2,C2,C2,C2,C2	; flt40_t C2
 	.byte	C1,C1,C1,C1,C1	; flt40_t C1
