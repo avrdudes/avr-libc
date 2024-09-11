@@ -53,7 +53,7 @@ memory clobber, and they are (implicitly) volatile because they don't
 have an output operand.  So the compiler may not reorder these
 \ref inline_asm "inline asm" statements with respect to other
 memory accesses or volatile actions.
-However, such asm statementy may still be reordered with
+However, such asm statement may still be reordered with
 other statement that are neither volatile nor access memory.
 
 <em>Note that even a volatile asm instruction can be moved
@@ -122,21 +122,21 @@ completely off (\c -O0), or writing all the critical code in assembly.
 \note The artifact with the \c __udivmodhi4 function is specific to
 avr-gcc and how the compiler represents the division internally.
 On other target platforms that are using a library function for
-division or whatever expensive operation, this eccect will not occur.
+division or whatever expensive operation, this effect will not occur.
 The reason is that avr-gcc does not represent the library call as a
 function call but rather like an ordinary instruction. Outcome is that
 the GCC middle-end concludes that the division is cheap (because the
 backend has an instruction for it) but in fact it's not.
 
 A work around for the code from above would be to enforce that the
-division havvens prior to the \c cli():
+division happens prior to the \c cli():
 \code
   val = 65535U / val;
   __asm __volatile__ ("" : "+r" (val));
   cli();
 \endcode
 
-- The \c volatile forces the asm statememt prior to the \c cli.
+- The \c volatile forces the asm statement prior to the \c cli.
 - The asm has \c val as input operand, hence the division must be carried
 out prior to the asm because \c val is set by the division.
 

@@ -156,7 +156,7 @@ users.
 
   <b>\c -O3</b> attempts to inline all "simple" functions and might unroll
   some loops.  For the AVR target, this will normally constitute a large
-  pessimization due to the code increasement.
+  pessimization due to the code increase.
 
   <b>\c -O</b> is equivalent to <b>\c -O1</b>.
   The compiler tries to reduce code size and execution time, without

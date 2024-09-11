@@ -54,7 +54,7 @@ transfer), or as a slave (they only act when being called by a
 master).  The bus is multi-master capable, and a particular device
 implementation can act as either master or slave at different times.
 Devices are addressed using a 7-bit address (coordinated by Philips)
-transfered as the first byte after the so-called start condition.  The
+transferred as the first byte after the so-called start condition.  The
 LSB of that byte is R/~W, i. e. it determines whether the request to
 the slave is to read or write data during the next cycles.  (There is
 also an option to have devices using 10-bit addresses but that is not
@@ -152,7 +152,7 @@ tables in the datasheets.
 
 The datasheet explains why a minimum TWBR value of 10 should be
 maintained when running in master mode.  Thus, for system clocks below
-3.6 MHz, we cannot run the bus at the intented clock rate of 100 kHz
+3.6 MHz, we cannot run the bus at the intended clock rate of 100 kHz
 but have to slow down accordingly.
 
 \par Note [6]
@@ -163,9 +163,9 @@ utilized in this example for debugging and demonstration purposes.
 \par Note [7]
 
 In order to shorten the data to be sent over the TWI bus, the 24Cxx
-EEPROMs support multiple data bytes transfered within a single
+EEPROMs support multiple data bytes transferred within a single
 request, maintaining an internal address counter that is updated after
-each data byte transfered successfully.  When reading data, one
+each data byte transferred successfully.  When reading data, one
 request can read the entire device memory if desired (the counter
 would wrap around and start back from 0 when reaching the end of the
 device).
@@ -207,7 +207,7 @@ Next, the device slave is going to be reselected (using a so-called
 repeated start condition which is meant to guarantee that the bus
 arbitration will remain at the current master) using the same slave
 address (SLA), but this time with read intent (R/~W bit set to 1) in
-order to request the device slave to start transfering data from the
+order to request the device slave to start transferring data from the
 slave to the master in the next packet.
 
 \par Note [11]
@@ -216,7 +216,7 @@ If the EEPROM device is still busy writing one or more cells after a
 previous write request, it will simply leave its bus interface drivers
 at high impedance, and does not respond to a selection in any way at
 all.  The master selecting the device will see the high level at SDA
-after transfering the SLA+R/W packet as a NACK to its selection
+after transferring the SLA+R/W packet as a NACK to its selection
 request.  Thus, the select process is simply started over (effectively
 causing a <em>repeated start condition</em>), until the device will
 eventually respond.  This polling procedure is recommended in the

@@ -28,32 +28,32 @@
 
 /* $Id$ */
 
-/** 
+/**
 
 \page porting Porting From IAR to AVR GCC
 
 
 \section iar_porting_intro Introduction
 
-C language was designed to be a portable language. There two main types 
-of porting activities: porting an application to a different platform 
-(OS and/or processor), and porting to a different compiler. Porting to a 
-different compiler can be exacerbated when the application is an embedded 
-system. For example, the C language Standard, strangely, does not specify a 
-standard for declaring and defining Interrupt Service Routines (ISRs). 
-Different compilers have different ways of defining registers, some of which 
+C language was designed to be a portable language. There two main types
+of porting activities: porting an application to a different platform
+(OS and/or processor), and porting to a different compiler. Porting to a
+different compiler can be exacerbated when the application is an embedded
+system. For example, the C language Standard, strangely, does not specify a
+standard for declaring and defining Interrupt Service Routines (ISRs).
+Different compilers have different ways of defining registers, some of which
 use non-standard language constructs.
 
 This chapter describes some methods and pointers on porting an AVR application
-built with the IAR compiler to the GNU toolchain (AVR GCC). Note that this may 
+built with the IAR compiler to the GNU toolchain (AVR GCC). Note that this may
 not be an exhaustive list.
 
 
 \section iar_porting_register Registers
 
-IO header files contain identifiers for all the register names and bit names 
+IO header files contain identifiers for all the register names and bit names
 for a particular processor. IAR has individual header files for each processor
-and they must be included when registers are being used in the code. For 
+and they must be included when registers are being used in the code. For
 example:
 
 \code #include <iom169.h> \endcode
@@ -63,13 +63,13 @@ used in the AVR datasheet.
 
 AVR GCC also has individual IO header files for each processor. However, the
 actual processor type is specified as a command line flag to the compiler.
-(Using the \c -mmcu=<em>processor</em> flag.) This is usually done in the Makefile. 
+(Using the \c -mmcu=<em>processor</em> flag.) This is usually done in the Makefile.
 This allows you to specify only a single header file for any processor type:
 
 \code #include <avr/io.h> \endcode
 
-\note The forward slash in the <avr/io.h> file name that is used to separate 
-subdirectories can be used on Windows distributions of the toolchain and is 
+\note The forward slash in the <avr/io.h> file name that is used to separate
+subdirectories can be used on Windows distributions of the toolchain and is
 the recommended method of including this file.
 
 The compiler knows the processor type and through the single header file above,
@@ -79,14 +79,14 @@ can easily port your application to another processor type without having to
 change every file to include the new IO header file.
 
 The AVR toolchain tries to adhere to the exact names of the registers and
-names of the bits found in the AVR datasheet. There may be some descrepencies
+names of the bits found in the AVR datasheet. There may be some discrepancies
 between the register names found in the IAR IO header files and the AVR GCC IO
 header files.
 
 
 \section iar_porting_isr Interrupt Service Routines (ISRs)
 
-As mentioned above, the C language Standard, strangely, does not specify a 
+As mentioned above, the C language Standard, strangely, does not specify a
 standard way of declaring and defining an ISR. Hence, every compiler seems
 to have their own special way of doing so.
 
@@ -103,12 +103,12 @@ __interrupt void MotorPWMBottom()
 In AVR GCC, you declare an ISR like so:
 \code
 ISR(PCINT1_vect)
-{ 
+{
     //code
 }
 \endcode
 
-AVR GCC uses the \c ISR macro to define an ISR. This macro requries the 
+AVR GCC uses the \c ISR macro to define an ISR. This macro requires the
 header file:
 
 \code
@@ -119,7 +119,7 @@ The names of the various interrupt vectors are found in the individual processor
 IO header files that you must include with \c <avr/io.h>.
 
 \note The names of the interrupt vectors in AVR GCC has been changed to match
-the names of the vectors in IAR. This significantly helps in porting 
+the names of the vectors in IAR. This significantly helps in porting
 applications from IAR to AVR GCC.
 
 
@@ -133,11 +133,11 @@ IAR has a number of intrinsic routine such as
 
 These intrinsic functions compile to specific AVR opcodes (SEI, CLI, WDR).
 
-There are equivalent macros that are used in AVR GCC, however they are not 
+There are equivalent macros that are used in AVR GCC, however they are not
 located in a single include file.
 
 AVR GCC has \c sei() for \c __enable_interrupts(), and \c cli() for
-\c __disable_interrupts(). Both of these macros are located in 
+\c __disable_interrupts(). Both of these macros are located in
 \c <avr/interrupt.h>.
 
 AVR GCC has the macro \c wdt_reset() in place of \c __watchdog_reset(). However,
@@ -172,10 +172,10 @@ int mydata[] PROGMEM = ....
 \endcode
 
 \note The PROGMEM macro expands to the Variable Attribute of \c progmem. This
-macro requires that you include \c <avr/pgmspace.h>. This is the canonical 
+macro requires that you include \c <avr/pgmspace.h>. This is the canonical
 method for defining a variable in Program Space.
 
-To read back flash data, use the \c pgm_read_*() macros defined in 
+To read back flash data, use the \c pgm_read_*() macros defined in
 \c <avr/pgmspace.h>. All Program Memory handling macros are defined there.
 
 There is also a way to create a method to define variables in Program Memory
@@ -212,7 +212,7 @@ To do the equivalent in AVR GCC, do this:
 
 \code
 void main(void) __attribute__((noreturn));
-	
+
 void main(void)
 {
     //...
@@ -228,15 +228,15 @@ define main() as normal. Note that the return type for main() is now \c void.
 
 \section iar_porting_locking Locking Registers
 
-The IAR compiler allows a user to lock general registers from r15 and down by 
+The IAR compiler allows a user to lock general registers from r15 and down by
 using compiler options and this keyword syntax:
 
 \code
 __regvar __no_init volatile unsigned int filteredTimeSinceCommutation @14;
 \endcode
 
-This line locks r14 for use only when explicitly referenced in your code 
-thorugh the var name "filteredTimeSinceCommutation". This means that the 
+This line locks r14 for use only when explicitly referenced in your code
+through the var name "filteredTimeSinceCommutation". This means that the
 compiler cannot dispose of it at its own will.
 
 To do this in AVR GCC, do this:
@@ -247,11 +247,11 @@ register unsigned char counter asm("r3");
 
 Typically, it should be possible to use r2 through r15 that way.
 
-\note Do not reserve r0 or r1 as these are used internally by the compiler for 
+\note Do not reserve r0 or r1 as these are used internally by the compiler for
 a temporary register and for a zero value.
 
-\note Locking registers is not recommended in AVR GCC as it removes this 
-register from the control of the compiler, which may make code generation worse. 
+\note Locking registers is not recommended in AVR GCC as it removes this
+register from the control of the compiler, which may make code generation worse.
 Use at your own risk.
 
 */

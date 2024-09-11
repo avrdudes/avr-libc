@@ -194,7 +194,7 @@ made to put \c i2 in PROGMEM.
 -# \anchor foor_ram_addrspace More precisely, these variables have to be
 located in the RAM <em>address space</em> for the code to work.
 For example, some AVR devices see (a part of) the program memory in the
-RAM address space, and hence can use the LD instruction to access porgram
+RAM address space, and hence can use the LD instruction to access program
 memory.<br>
 For example, an ATmega3208 sees the program memory range of
 0x0...0x7fff in the RAM address space at addresses 0x4000...0xbfff.
@@ -406,7 +406,7 @@ or have a look at
 \ref faq_rom_array_as "FAQ: How to put an array of strings completely in ROM?"
 
 Now that you can successfully store and retrieve simple data from Program Space
-you want to store and retrive strings from Program Space. And specifically
+you want to store and retrieve strings from Program Space. And specifically
 you want to store and array of strings to Program Space. So you start off
 with your array, like so:
 

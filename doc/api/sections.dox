@@ -152,7 +152,7 @@ of output sections from the various input section that go into it.
 
 The last three flags are listed for completeness.  They are used by the
 compiler, for example for header-only C++ modules and to ensure that
-multiplle instanciations of the same template in different compilaton
+multiple instantiations of the same template in different compilation
 units does occur at most once in the executable file.
 
 \subsubsection sec_type Section Type
@@ -237,7 +237,7 @@ The VMA is the address of an object as used by the running program.
 
 VMA and LMA may be different: Suppose a small ATmega8 program with
 executable code that extends from byte address 0x0 to 0x20f,
-and one variable \c my_var in static strorage.
+and one variable \c my_var in static storage.
 The default linker script puts the content of the <code>.data</code> output
 section after the <code>.text</code> output section and into
 the <code>text</code> \ref sec_memory_regions "segment". The startup code
@@ -271,9 +271,9 @@ information are assigned to different input sections by means of
 The linker takes all these sections and assigns them to output sections
 as specified in the linker script.
 
-<em>Output sections</em> are defind in the linker description file.
+<em>Output sections</em> are defined in the linker description file.
 Contrary to the unlimited number of input sections a program can come up
-with, there is only a handfull of output sections like \c \.text and
+with, there is only a handful of output sections like \c \.text and
 \c \.data, that roughly correspond to the memory spaces of the target device.
 
 One step in the final link is to <em>locate</em> the sections, that is
@@ -301,7 +301,7 @@ code can initialize that data so that the variables have their expected
 initial values when \c main() is entered.
 
 The <tt>SECTIONS{}</tt> portion of a linker script models the
-input and output section, and it assignes the output section to
+input and output section, and it assigns the output section to
 the memory regions defined in the <tt>MEMORY{}</tt> part.
 
 \subsection sec_memory_regions Memory Regions
@@ -502,7 +502,7 @@ empty ones, that are valid in a section name.
   <code>__vector_default</code>, which jumps to
   \c __vectors, which is the start of the <code>.vectors</code> section.
 
-  Implementing an interrupt service ruotine (ISR) is performed with the
+  Implementing an interrupt service routine (ISR) is performed with the
   help of the \c #ISR macro in C/C++ code.
 </dd>
 <dt>\anchor sec_dot_progmem <code>.progmem.data</code></dt>
@@ -514,7 +514,7 @@ empty ones, that are valid in a section name.
   <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html">
     __flash</a>.
 
-  The compiler assumes that the <code>.progmem</code> sectons are located
+  The compiler assumes that the <code>.progmem</code> sections are located
   in the lower 64 KiB of program memory.  When it does not fit in the
   lower 64 KiB block, then the program reads garbage except
   \ref avr_pgmspace "pgm_read_*_far" is used. In that case however,
@@ -556,7 +556,7 @@ empty ones, that are valid in a section name.
   and why code in these sections must never be called explicitly.
 
   When several modules put code in the same init section, the order
-  of execuation is not specified.
+  of execution is not specified.
 
   <table>
   <caption>The <tt>.init<em>N</em></tt> Sections</caption>
@@ -780,7 +780,7 @@ avr-gcc ... -Tdata addr -Wl,--defsym,__DATA_REGION_START__=addr
 \endcode
 
 Note that <tt>addr</tt> must be \ref harvard_arch "offset" by adding
-0x800000 the to real SRAM address so that the linker knows that the address is
+0x800000 to the real SRAM address so that the linker knows that the address is
 in the SRAM memory segment. Thus, if you want the <tt>.data</tt> section
 to start at \c 0x1100, pass \c 0x801100 as the address to the linker.
 
@@ -1078,7 +1078,7 @@ e<b>x</b>ecutable.
 tells that the section contains bits that have to be uploaded to the
 target hardware.
 
-For more detais, see the see the gas user manual on the
+For more details, see the see the gas user manual on the
 <a href="https://sourceware.org/binutils/docs/as/Section.html#ELF-Version"
    ><tt>.section</tt></a> directive.
 

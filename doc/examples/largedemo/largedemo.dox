@@ -158,7 +158,7 @@ about 3 seconds of idle time after the last change.  If that EEPROM
 cell contains a reasonable (i. e. non-erased) value at startup, it is
 taken as the initial value for the PWM.  This virtually preserves the
 last value across power cycles.  By not updating the EEPROM
-immmediately but only after a timeout, EEPROM wear is reduced
+immediately but only after a timeout, EEPROM wear is reduced
 considerably compared to immediately writing the value at each change.
 
 \section largedemo_code A code walkthrough
@@ -291,7 +291,7 @@ In order to allow for a simple calculation of a percentage value
 without requiring floating-point mathematics, the maximal value of the
 PWM is restricted to 1000 rather than 1023, so a simple division by 10
 can be used.  Due to the nature of the human eye, the difference in
-LED brightness between 1000 and 1023 is not noticable anyway.
+LED brightness between 1000 and 1023 is not noticeable anyway.
 
 \subsection largedemo_code_p5 Part 5: main()
 

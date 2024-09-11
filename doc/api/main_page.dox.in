@@ -52,7 +52,7 @@ AVR-LibC and many others.
 
 If you find yourself stuck on a problem which this document doesn't quite
 address, you may wish to post a message to the avr-gcc mailing list. Most of
-the developers of the AVR Binutils and GCC ports in addition to the devleopers
+the developers of the AVR Binutils and GCC ports in addition to the developers
 of AVR-LibC subscribe to the list, so you will usually be able to get your
 problem resolved. You can subscribe to the list at
 http://lists.nongnu.org/mailman/listinfo/avr-gcc-list . Before posting to the
