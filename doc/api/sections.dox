@@ -905,7 +905,7 @@ application, but some symbols are defined in the default linker script:
 <dd>
   Describes the physical properties of memory region <tt><em>name</em></tt>,
   where <tt><em>name</em></tt> is one of \c TEXT or  \c DATA.
-  The address is a VMA and offset at explained above.
+  The address is a VMA and offset as explained above.
   <br>
   The linker script only supplies a default for the symbol values when
   they have not been defined by other means, like for example

@@ -34,7 +34,7 @@
 
 Many of the devices that are possible targets of AVR-LibC have a minimal
 amount of RAM.  The smallest parts supported by the C environment come
-with 128 bytes of RAM.  This needs to be shared between initialized
+with 32 bytes of RAM.  This needs to be shared between initialized
 and uninitialized variables (\ref mem_sections "sections" \c .data and
 \c .bss), the dynamic memory allocator, and the stack that is used for
 calling subroutines and storing local (automatic) variables.
@@ -56,7 +56,7 @@ even happen if the allocations aren't all that large but
 dynamic memory allocations get fragmented over time such that new requests
 don't quite fit into the "holes" of previously freed regions.  Large
 stack space requirements can arise in a C function containing large and/or
-numerous local variables or when recursively calling function.
+numerous local variables or when recursively calling functions.
 
 \note
 The pictures shown in this document represent typical situations where the
@@ -92,8 +92,8 @@ the \c .data and \c .bss sections are also going to be located there.
 The stack should always be kept in internal RAM.  Some devices
 even require this, and in general, internal RAM can be accessed
 faster since no extra wait states are required.  When using dynamic memory
-allocation and stack and heap are separated in distinct memory areas, this is the safest way to avoid a
-stack-heap collision.
+allocation and stack and heap are separated in distinct memory areas,
+this is the safest way to avoid a stack-heap collision.
 
 \section malloc_tunables Tunables for malloc()
 
@@ -131,12 +131,16 @@ See \ref harvard_arch "explanation" for offset 0x800000.
 See the chapter about \ref gcc_minusW "using gcc" for the \c -Wl
 options.
 
-\note The ld (linker) user manual states that using -Tdata=&lt;x&gt; is equivalent
-to using --section-start,.data=&lt;x&gt;. However, you have to use --section-start
-as above because the GCC frontend also sets the -Tdata option for
-all MCU types where the SRAM doesn't start at 0x800060. Thus, the linker
-is being faced with two -Tdata options. Sarting with binutils 2.16, the linker
+\note The ld (linker) user manual states that using <tt>-Tdata=&lt;x&gt;</tt>
+is equivalent to using <tt>\--section-start,.data=&lt;x&gt;</tt>.
+However, you have to use \c \--section-start
+as above because the GCC device-specs also sets the -Tdata option for
+all MCU types where the SRAM doesn't start at the core specific default,
+and when the user did not specify \c -Tdata. Thus, the linker
+is being faced with two -Tdata options. Starting with Binutils 2.16, the linker
 changed the preference, and picks the "wrong" option in this situation.
+Symbols like \c __DATA_REGION_ORIGIN__ and \c __DATA_REGION_LENGTH__
+should also be adjusted, see \ref sec_symbols.
 
 \image html malloc-x1.png "Internal RAM: stack only, external RAM: variables and heap"
 \image latex malloc-x1.eps "Internal RAM: stack only, external RAM: variables and heap" width=12cm
