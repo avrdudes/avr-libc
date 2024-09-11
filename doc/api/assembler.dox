@@ -86,15 +86,15 @@ This approach has the following advantages:
 
 - There is basically only one program to be called directly,
   \c avr-gcc, regardless of the actual source language used.
-- The invokation of the C preprocessor will be automatic,
+- The invocation of the C preprocessor will be automatic,
   and will include the appropriate options to locate required
   include files in the filesystem.
-- The invokation of the linker will be automatic, and will
+- The invocation of the linker will be automatic, and will
   include the appropriate options to locate additional libraries
   as well as the application start-up code
   (<tt>crt<em>XXX</em>.o</tt>) and linker script.
 
-Note that the invokation of the C preprocessor will be automatic when
+Note that the invocation of the C preprocessor will be automatic when
 the filename provided for the assembler file ends in \c \.S (the
 capital letter "s").  This would even apply to operating systems that
 use case-insensitive filesystems since the actual decision is made
@@ -279,7 +279,7 @@ __vector_default:
   If the interrupt routine is to be linked together with C modules, care
   must be taken to follow the \ref faq_reg_usage "register usage guidelines"
   imposed by the C compiler.  Also, any register modified inside the
-  interrupt sevice needs to be saved, usually on the stack.
+  interrupt service needs to be saved, usually on the stack.
 </dd>
 <dt>Note [10]</dt>
 <dd>
@@ -553,7 +553,7 @@ have to be initialized so that when \c main starts, these variables
 hold their required initial value.
 
 This support code can also be used in assembly programs.
-The code can be devided into two classes: Code that is used per default,
+The code can be divided into two classes: Code that is used per default,
 and code that has to be explicitly pulled in from a target library.
 As explained above, the assembler should be invoked via \c avr-gcc, so
 that the C runtime and support libraries are available.
@@ -581,7 +581,7 @@ e.g. \c __vector_1 in the case of an ATmega8.
 
 The startup code from AVR-LibC also sets up the stackpointer according
 to the value of symbol \c __stack, and it sets \c __zero_reg__ (R1)
-to zero.  This code starts at \c __init wich is jumped to from the
+to zero.  This code starts at \c __init which is jumped to from the
 reset vector via the very first entry in the vector table.
 \c __init label is located in section <tt>\ref sec_dot_init ".init0"</tt>,
 so that all the following init sections will also be executed an a

@@ -14,7 +14,7 @@
  * neutral point).  Depending on the value of the decoded incoming
  * PWM, an outgoing PWM is controlled between 0 and 100 %.
  *
- * The project is intented to be run on an ATtiny13 that has only one
+ * The project is intended to be run on an ATtiny13 that has only one
  * timer channel (timer 0), so both the incoming signal discrimination
  * as well as the outgoing PWM need to run on the same timer.
  *

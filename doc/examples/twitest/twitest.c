@@ -16,7 +16,7 @@
 /* $Id$ */
 
 /*
- * Simple demo program that talks to a 24Cxx I²C EEPROM using the
+ * Simple demo program that talks to a 24Cxx Iï¿½C EEPROM using the
  * builtin TWI interface of an ATmega device.
  */
 
@@ -80,8 +80,8 @@
  * selection.  Should be large enough to allow for a pending write to
  * complete, but low enough to properly abort an infinite loop in case
  * a slave is broken or not present at all.  With 100 kHz TWI clock,
- * transfering the start condition and SLA+R/W packet takes about 10
- * µs.  The longest write period is supposed to not exceed ~ 10 ms.
+ * transferring the start condition and SLA+R/W packet takes about 10
+ * ï¿½s.  The longest write period is supposed to not exceed ~ 10 ms.
  * Thus, normal operation should not require more than 100 iterations
  * to get the device to respond to a selection.
  */
@@ -160,8 +160,8 @@ uart_putchar(char c, FILE *unused)
  *
  * This requires two bus cycles: during the first cycle, the device
  * will be selected (master transmitter mode), and the address
- * transfered.
- * Address bits exceeding 256 are transfered in the
+ * transferred.
+ * Address bits exceeding 256 are transferred in the
  * E2/E1/E0 bits (subaddress bits) of the device selector.
  * Address is sent in two dedicated 8 bit transfers
  * for 16 bit address devices (larger EEPROM devices)
@@ -169,7 +169,7 @@ uart_putchar(char c, FILE *unused)
  * The second bus cycle will reselect the device (repeated start
  * condition, going into master receiver mode), and transfer the data
  * from the device to the TWI master.  Multiple bytes can be
- * transfered by ACKing the client's transfer.  The last transfer will
+ * transferred by ACKing the client's transfer.  The last transfer will
  * be NACKed, which the client will take as an indication to not
  * initiate further transfers.
  */
@@ -347,7 +347,7 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
  * Write "len" bytes into EEPROM starting at "eeaddr" from "buf".
  *
  * This is a bit simpler than the previous function since both, the
- * address and the data bytes will be transfered in master transmitter
+ * address and the data bytes will be transferred in master transmitter
  * mode, thus no reselection of the device is necessary.  However, the
  * EEPROMs are only capable of writing one "page" simultaneously, so
  * care must be taken to not cross a page boundary within one write

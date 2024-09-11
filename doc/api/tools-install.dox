@@ -30,13 +30,13 @@
 
 /* $Id$ */
 
-/** 
+/**
 
 \page install_tools Building and Installing the GNU Tool Chain
 \addindex installation
 
-This chapter shows how to build and install, from source code, a complete 
-development environment for the AVR processors using the GNU toolset. There are 
+This chapter shows how to build and install, from source code, a complete
+development environment for the AVR processors using the GNU toolset. There are
 two main sections, one for Linux, FreeBSD, and other Unix-like operating
 systems, and another section for Windows.
 
@@ -231,7 +231,7 @@ AVR assembler (<tt>\ref using_avr_as "avr-as"</tt>),
 linker (<tt>\ref using_avr_ld "avr-ld"</tt>),
 and librarian (\c avr-ar and \c avr-ranlib).
 In addition, you get tools which extract data from object files
-(\c avr-objcopy), dissassemble object file information
+(\c avr-objcopy), disassemble object file information
 (\c avr-objdump), and strip information from object files
 (\c avr-strip).  Before we can build the C compiler, these tools need to
 be in place.

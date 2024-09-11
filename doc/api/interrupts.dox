@@ -260,7 +260,7 @@ vector name as described in the datasheet of the respective device
 (and in the hardware manufacturer's XML/ATDF files),
 with spaces replaced by an underscore
 and other non-alphanumeric characters dropped.  Using the suffix
-\c _vect is intented to improve portability to other C compilers
+\c _vect is intended to improve portability to other C compilers
 available for the AVR that use a similar naming convention.
 
 - A \b deprecated form that uses names starting with \c SIG_, followed by

@@ -143,7 +143,7 @@ F_CPU macro in order to adjust the cycle counts.  As the \c _delay_ms()
 function has a limited range of allowable argument values (depending on
 \c F_CPU), a value of 10 ms has been chosen as the base delay which
 would be safe for CPU frequencies of up to about 26 MHz.  This function
-is then called 100 times to accomodate for the actual one-second delay.
+is then called 100 times to accommodate for the actual one-second delay.
 
 In a practical application, long delays like this one were better be
 handled by a hardware timer, so the main CPU would be free for other

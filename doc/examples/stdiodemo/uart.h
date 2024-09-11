@@ -29,6 +29,6 @@ int	uart_putchar(char c, FILE *stream);
 /*
  * Receive one character from the UART.  The actual reception is
  * line-buffered, and one character is returned from the buffer at
- * each invokation.
+ * each invocation.
  */
 int	uart_getchar(FILE *stream);

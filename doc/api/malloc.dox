@@ -50,7 +50,7 @@ so-called "heap" available for the dynamic memory allocator will be
 placed beyond the end of \c .bss.  Thus, there's no risk that dynamic
 memory will ever collide with the RAM variables (unless there were
 bugs in the implementation of the allocator). There is still a risk that
-the heap and stack could collide if there are large requirements for 
+the heap and stack could collide if there are large requirements for
 either dynamic memory or stack space.  The former can
 even happen if the allocations aren't all that large but
 dynamic memory allocations get fragmented over time such that new requests
@@ -67,10 +67,10 @@ The memory addresses used are not displayed in a linear scale.
 \image latex malloc-std.eps "RAM map of a device with internal RAM" width=7.5cm
 
 On a simple device like a microcontroller it is a challenge to implement a
-dynamic memory allocator that is simple enough so the code size requirements 
-will remain low, yet powerful enough to avoid unnecessary memory fragmentation 
+dynamic memory allocator that is simple enough so the code size requirements
+will remain low, yet powerful enough to avoid unnecessary memory fragmentation
 and to get it all done with reasonably few CPU cycles. Microcontrollers
-are often low on space and also run at much lower speeds than the typical PC 
+are often low on space and also run at much lower speeds than the typical PC
 these days.
 
 The memory allocator implemented in AVR-LibC tries to cope with all of
@@ -118,7 +118,7 @@ by writing directly to this variable, or it can be done automatically at
 link-time, by adjusting the value of the symbol \c __heap_end.
 
 \anchor malloc_extram
-The following example shows a linker command to relocate the entire \c .data 
+The following example shows a linker command to relocate the entire \c .data
 and \c .bss segments, and the heap to location 0x1100 in external RAM.  The
 heap will extend up to address 0xffff.
 
@@ -135,7 +135,7 @@ options.
 to using --section-start,.data=&lt;x&gt;. However, you have to use --section-start
 as above because the GCC frontend also sets the -Tdata option for
 all MCU types where the SRAM doesn't start at 0x800060. Thus, the linker
-is being faced with two -Tdata options. Sarting with binutils 2.16, the linker 
+is being faced with two -Tdata options. Sarting with binutils 2.16, the linker
 changed the preference, and picks the "wrong" option in this situation.
 
 \image html malloc-x1.png "Internal RAM: stack only, external RAM: variables and heap"
@@ -185,7 +185,7 @@ are done when recycling memory from the freelist.
 The freelist itself is not maintained as a separate data structure,
 but rather by modifying the contents of the freed memory to contain
 pointers chaining the pieces together.  That way, no additional memory
-is reqired to maintain this list except for a variable that keeps track
+is required to maintain this list except for a variable that keeps track
 of the lowest memory segment available for reallocation.  Since both,
 a chain pointer and the size of the chunk need to be recorded in each
 chunk, the minimum chunk size on the freelist is four bytes.

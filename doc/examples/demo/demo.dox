@@ -122,7 +122,7 @@ interrupts.
 The main loop of the program does nothing -- all the work is done by the
 interrupt routine! The <tt>sleep_mode()</tt> puts the processor on sleep
 until the next interrupt, to conserve power.  Of course, that probably
-won't be noticable as we are still driving a LED, it is merely mentioned
+won't be noticeable as we are still driving a LED, it is merely mentioned
 here to demonstrate the basic principle.
 
 \par Note [8]:
@@ -223,7 +223,7 @@ Some points of interest in the \c demo.map file are:
 The \c .text segment (where program instructions are stored) starts at
 location 0x0.
 
-\skipline *(.fini2) 
+\skipline *(.fini2)
 \until __eeprom_end
 
 The last address in the \c .text segment is location \c 0x114 ( denoted by \c

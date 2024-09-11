@@ -75,12 +75,12 @@ In order to verify parts of the algorithm, and the underlying
 hardware, the demo has been set up in a way so the pin-compatible but
 more expensive ATtiny45 (or its siblings ATtiny25 and ATtiny85) could
 be used as well.  In that case, no separate assembly code is required,
-as two timer channels are avaible.
+as two timer channels are available.
 
 \section asmdemo_hw Hardware setup
 
 The incoming PWM pulse train is fed into PB4.  It will generate a pin
-change interrupt there on eache edge of the incoming signal.
+change interrupt there on each edge of the incoming signal.
 
 The outgoing PWM is generated through OC0B of timer channel 0 (PB1).
 For demonstration purposes, a LED should be connected to that pin
@@ -205,7 +205,7 @@ is currently counting down rather than up, the value fetched from
 \c TCNT0 must be negated.  Finally, if this pin-change interrupt was
 triggered by a rising edge, the time computed will be recorded as the
 start time only.  Then, at the falling edge, this start time will be
-subracted from the current time to compute the actual pulse width seen
+subtracted from the current time to compute the actual pulse width seen
 (left in \c pwm_incoming), and the upper layers are informed of the
 new value by setting bit 0 in the \c intbits flags.  At the same time,
 this pin-change interrupt will be disabled so no new measurement can
