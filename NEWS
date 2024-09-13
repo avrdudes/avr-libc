@@ -14,7 +14,7 @@
 * Issues closed:
 
   - Since v2.2.0 (Issue #936), gcrt1.S defines symbols __DATA_REGION_ORIGIN__
-    and __DATA_REGIO_LENGTH__ to allow for more precise diagnostics from
+    and __DATA_REGION_LENGTH__ to allow for more precise diagnostics from
     the linker when the data region overflows.  However, letting .data start
     at __DATA_REGION_ORIGIN__ is a relatively new addition in Binutils v2.40
     PR29741, whereas using __DATA_REGION_LENGTH__ for .data size is a much
@@ -137,7 +137,7 @@
     Notice that only since Binutils v2.29 (PR21849), section .progmemx is
     located after the .text sections.
 
-  - The startup code now defines symbols like __DATA_REGION__LENGTH__ and
+  - The startup code now defines symbols like __DATA_REGION_LENGTH__ and
     __DATA_REGION_ORIGIN__ according to the memories of the used AVR device
     (Issue #936).  These symbols are used by the default linker scripts to
     diagnose when the text or data region overflows.
@@ -147,7 +147,7 @@
   - The pgm_read_* and pgm_read_*_far macros and functions now also work for
     the Reduced Tiny devices. (Issue #563).  The implementation assumes that
     GCC implements PR71948 which was added in v7.  Notice that on Reduced Tiny:
-    * There is no need for PROGEMM at all because all const objects in static
+    * There is no need for PROGEM at all because all const objects in static
       storage are located in program memory since Binutils v2.27 (PR20849).
     * Even when PROGMEM is used, no pgm_read functions or macros are required.
       See the GCC documentation on the __progmem__ attribute for Reduced Tiny.
@@ -196,7 +196,7 @@
   - Issue #936: Provide symbols for exact memory layout. enhancement [#937]
   - Issue #931: Initialize NVMCTRL_CTRLB.FLMAP for Devices that have it. enhancement [#935]
   - Issue #931: Initialize NVMCTRL_CTRLB.FLMAP for Devices that have it. [#933]
-  - Issue 929: Remove __ATTR_CONST__ from frexp* protoypes in math.h. [#932]
+  - Issue 929: Remove __ATTR_CONST__ from frexp* prototypes in math.h. [#932]
   - #890 #884: Fix / add entries for ATmega808/9, ATmega1608/9, ATmega3… [#927]
   - #921: Use all h files of $srcdir/include/avr in Makefile.am. enhancement [#925]
   - #892: configure.ac has outdated CHECK_AVR_DEVICE and AM_CONDITIONAL l… [#924]
@@ -248,7 +248,7 @@
 
 * Contributed Patches:
 
-  [no-id] Define weak symbols for known memory region sizes based on device 
+  [no-id] Define weak symbols for known memory region sizes based on device
   header definitions, starting with fuse region.
   [#8961] Update test script for new simulavr and library layout
   [#8964] Update tests isinf-01.c, signbit-01.c and modf-np.c

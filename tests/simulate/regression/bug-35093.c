@@ -32,7 +32,7 @@
 
 #ifndef __AVR__
 
-/* Omit the test, as strlcat() is not a standart C function.	*/
+/* Omit the test, as strlcat() is not a standard C function.	*/
 int main ()	{ return 0; }
 
 #else

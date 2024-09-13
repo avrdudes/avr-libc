@@ -102,7 +102,7 @@ int main ()	{ return 0; }
      && sizeof (prefix##_uint64) == 8 * (nelems))
 
 
-/* With 64-bit values onle the little 4 bytes are checked.	*/
+/* With 64-bit values only the little 4 bytes are checked.	*/
 #define CHKVAL_SET(prefix, ch, uch, i8, u8, i16, u16, i32, u32, i64, u64) \
     (pgm_read_byte (& prefix##_char) == (ch)		\
      && pgm_read_byte (& prefix##_uchar) == (uch)	\

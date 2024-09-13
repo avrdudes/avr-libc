@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Test of _SFR's macroses.  Old style ASM program, where the ports are
+/* Test of _SFR's macros.  Old style ASM program, where the ports are
    values, suitable to use with LDS/STS instruction.
    $Id$	*/
 

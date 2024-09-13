@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Test of _SFR's macroses.  Semi-old style C program, where the ports are
+/* Test of _SFR's macros.  Semi-old style C program, where the ports are
    the numbers, suitable to use with LDS/STS instruction.
    $Id$	*/
 

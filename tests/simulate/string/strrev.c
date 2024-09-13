@@ -36,11 +36,11 @@
 #include <string.h>
 #include "progmem.h"
 
-#ifndef	__AVR__		/* strrev() is't a standart function	*/
+#ifndef	__AVR__		/* strrev() is't a standard function	*/
 char * strrev (char *s)
 {
     char *p1, *p2;
-    
+
     for (p2 = s; *p2; ) p2++;
     p1 = s;
     while (p1 < p2) {
@@ -98,16 +98,16 @@ int main ()
 {
     /* Empty string.	*/
     CHECK ("", "");
-    
+
     /* 1 char long	*/
     CHECK ("a", "a");
     CHECK ("\001", "\001");
     CHECK ("\377", "\377");
-    
+
     /* 2 chars long	*/
     CHECK ("01", "10");
     CHECK ("**", "**");
-    
+
     /* 3 and more chars long	*/
     CHECK ("abc", "cba");
     CHECK ("qwer", "rewq");
@@ -144,6 +144,6 @@ int main ()
 	   "6..............................................................5"
 	   "4..............................................................3"
 	   "2..............................................................1");
-    
+
     return 0;
 }

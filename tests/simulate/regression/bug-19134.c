@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* bug #19134: strcasecmp(): result sign is not changed by swaping args.
+/* bug #19134: strcasecmp(): result sign is not changed by swapping args.
    $Id$	*/
 
 #include <string.h>

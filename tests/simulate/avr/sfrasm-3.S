@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Test of _SFR's macroses.  Implicit setting of default behaviour.
+/* Test of _SFR's macros.  Implicit setting of default behaviour.
    $Id$	*/
 
 #define __SFR_OFFSET	0x20

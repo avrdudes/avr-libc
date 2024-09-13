@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Test of _SFR's macroses.  Old style C program.
+/* Test of _SFR's macros.  Old style C program.
    $Id$	*/
 
 /* XXX: Seems, the _SFR_MEM_ADDR() is worse.  In case of _SFR_ASM_COMPAT
