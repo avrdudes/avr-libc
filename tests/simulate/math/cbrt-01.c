@@ -50,7 +50,7 @@ union float_u {
 };
 
 /* Result is placed into SRAM variable, allocated at the start of
-   memory. This is convinient to debug: read a core dump.	*/
+   memory. This is convenient to debug: read a core dump.	*/
 volatile union float_u v = {.u32 = 1};
 
 PROGMEM const struct {
@@ -77,7 +77,7 @@ PROGMEM const struct {
     { { 729 },	{ 9 } },
     { { 1000 },	{ 10 } },
     { {-1000 },	{-10 } },
-    
+
     { { 0.125 }, { 0.5 } },
     { { 0.015625 }, { 0.25 } },
     { {-0.001953125 }, {-0.125 } },
@@ -87,7 +87,7 @@ int main ()
 {
     int i;
     union float_u tx, tz;
-    
+
     for (i = 0;  (size_t)i < sizeof(t) / sizeof(t[0]); i++) {
 	tx.u32 = pgm_read_dword (& t[i].x);
 	tz.u32 = pgm_read_dword (& t[i].z);
@@ -98,6 +98,6 @@ int main ()
 	    EXIT (i + 1);
 	}
     }
-    
+
     return 0;
 }

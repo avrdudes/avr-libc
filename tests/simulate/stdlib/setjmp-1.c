@@ -78,7 +78,7 @@ int main ()
     }
 
     /* Repeat above with volatile function pointers: exclude
-       posible compiler optimization.	*/
+       possible compiler optimization.	*/
     v_setjmp = setjmp;
     v_longjmp = longjmp;
 
@@ -104,7 +104,7 @@ int main ()
 	default:
 	    exit (__LINE__);
     }
-    
+
     switch (v_setjmp (env)) {
 	case 0:
 	    v_longjmp (env, -1);

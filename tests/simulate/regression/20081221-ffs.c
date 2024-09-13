@@ -28,9 +28,9 @@
  */
 
 /* The _FFS() macro is wrong in case of CPP conditional usage.
-   Seems, it is a bug in CPP parser in case of few '?:' expersions.
+   Seems, it is a bug in CPP parser in case of few '?:' expressions.
    The CC parser is correct.
-   
+
    $Id$
  */
 

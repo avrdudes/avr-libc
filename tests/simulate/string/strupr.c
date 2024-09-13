@@ -37,7 +37,7 @@
 #include <string.h>
 #include "progmem.h"
 
-#ifndef	__AVR__			/* strupr() is't a standart function	*/
+#ifndef	__AVR__			/* strupr() is't a standard function	*/
 char * strupr (char *s)
 {
     char *p = s;
@@ -84,7 +84,7 @@ int main ()
 {
     /* Empty string.	*/
     CHECK ("", "");
-    
+
     CHECK ("a", "A");
     CHECK ("z", "Z");
     CHECK ("@[", "@[");		/* '@'=='A'-1, '['=='Z'+1	*/
@@ -92,7 +92,7 @@ int main ()
 
     CHECK ("qwertyuiopasdfghjklzxcvbnm", "QWERTYUIOPASDFGHJKLZXCVBNM");
     CHECK ("fOo", "FOO");
-    
+
     /* non-ASCII	*/
     CHECK ("\001a\177\200\201b\377", "\001A\177\200\201B\377");
 

@@ -50,7 +50,7 @@ union float_u {
 };
 
 /* Result is placed into SRAM variable, allocated at the start of
-   memory. This is convinient to debug: read a core dump.	*/
+   memory. This is convenient to debug: read a core dump.	*/
 volatile float vz = 1;
 volatile unsigned long ve = 1;
 
@@ -72,7 +72,7 @@ int main ()
     union float_u tx, tz;	/* from table		*/
     union float_u r;		/* calculation result	*/
     int i;
-    
+
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	unsigned long delta;
 	tx.u32 = pgm_read_dword (& t[i].x);

@@ -35,7 +35,7 @@
 
 int main ()
 {
-#ifdef	__AVR__		/* dtostre() is not a standart C function.	*/
+#ifdef	__AVR__		/* dtostre() is not a standard C function.	*/
     char s[20];
     dtostre (1e-15, s, 3, 0);
     if (strcmp (s, "1.000e-15")) exit (__LINE__);

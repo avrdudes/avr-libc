@@ -57,7 +57,7 @@ union lofl_u {
 };
 
 /* Result is placed into SRAM variable, allocated at the start of
-   memory. This is convinient to debug: read a core dump.	*/
+   memory. This is convenient to debug: read a core dump.	*/
 volatile long v = 1;
 
 PROGMEM const struct {		/* Table of test cases.	*/
@@ -68,7 +68,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     /* Zero	*/
     { { .fl= +0.0 },	0 },
     { { .fl= -0.0 },	0 },
-    
+
     /* A few of normal values	*/
     { { .fl= 0.1 },		0 },
     { { .fl= 0.5 },		1 },
@@ -96,7 +96,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0x80000100 }, 0 },
     { { 0x80010000 }, 0 },
     { { 0x807fffff }, 0 },
-    
+
     /* Margin values (positive).	*/
     { { 0x00800000 }, 0 },		/* the smallest nonzero normal	*/
 
@@ -209,7 +209,7 @@ int main ()
     long z;
     int i;
 
-    /* Table.	*/    
+    /* Table.	*/
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_dword (& t[i].z);

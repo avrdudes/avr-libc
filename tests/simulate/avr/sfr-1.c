@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Test of _SFR's macroses.  Default usage without any definition.
+/* Test of _SFR's macros.  Default usage without any definition.
    $Id$	*/
 
 #include <avr/io.h>

@@ -85,14 +85,14 @@ PROGMEM const struct {		/* Table of test cases:  x, (float)x	*/
     { 12345678000000000LL, { .fl = 1.2345678e+16 } },
     { 123456780000000000LL, { .fl = 1.2345678e+17 } },
     { 1234567800000000000LL, { .fl = 1.2345678e+18 } },
-    
+
     /* big values	*/
     { 0x7fffffffffffffffLL, { .fl = 0x1p+63 } },
     { 0x8000000000000000LL, { .fl = 0x1p+63 } },
     { 0x8000000000000001LL, { .fl = 0x1p+63 } },
     { 0xffffffffffffffffLL, { .fl = 0x1p+64 } },
-    
-    /* all possible shifts	*/    
+
+    /* all possible shifts	*/
     { 0x00000001, { .fl = 0x1p+00 } },
     { 0x00000002, { .fl = 0x1p+01 } },
     { 0x00000004, { .fl = 0x1p+02 } },
@@ -157,7 +157,7 @@ PROGMEM const struct {		/* Table of test cases:  x, (float)x	*/
     { 0x2000000000000000LL, { .fl = 0x1p+61 } },
     { 0x4000000000000000LL, { .fl = 0x1p+62 } },
     { 0x8000000000000000LL, { .fl = 0x1p+63 } },
-    
+
     /* bytes order	*/
     { 0x0000000000000102LL, { .fl = 0x102p+00 } },
     { 0x0000000000010203LL, { .fl = 0x10203p+00 } },
@@ -257,7 +257,7 @@ PROGMEM const struct {		/* Table of test cases:  x, (float)x	*/
     { 0x7ffffec0, { .fl = 0x0.fffffep+31 } },
     { 0x7fffff40, { .fl = 0x0.fffffep+31 } },
     { 0x7fffffc0, { .fl = 0x1.000000p+31 } },
-    
+
     /* LSB bits in rounding (shift to left)	*/
     { 0x01000000000000LL, { .fl = 0x0.800000p+49 } },
     { 0x01000001000000LL, { .fl = 0x0.800000p+49 } },
@@ -298,12 +298,12 @@ int main ()
     unsigned long long x;
     union lofl_u z;
     int i;
-    
+
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x = pgm_read_qword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
 #ifdef __AVR__
-	/* Force library's convertion function usage. This is needed for
+	/* Force library's conversion function usage. This is needed for
 	   GCC before 4.2	*/
 	extern float __floatundisf (unsigned long long);
 	v.fl = __floatundisf (x);
