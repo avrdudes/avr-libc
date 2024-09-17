@@ -107,7 +107,7 @@ strtof (const char * nptr, char ** endptr)
 
     unsigned char flag;
 #define FL_MINUS    0x01	/* number is negative	*/
-#define FL_ANY	    0x02	/* any digit was readed	*/
+#define FL_ANY	    0x02	/* any digit was read	*/
 #define FL_OVFL	    0x04	/* overflow was		*/
 #define FL_DOT	    0x08	/* decimal '.' was	*/
 #define FL_MEXP	    0x10	/* exponent 'e' is neg.	*/

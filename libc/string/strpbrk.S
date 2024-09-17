@@ -52,7 +52,7 @@ _U(strpbrk):
 1:	ld	ret_lo, X+	; *s++
 	tst	ret_lo
 	breq	3f
-  ; check an occurance
+  ; check an occurrence
 	X_movw	ZL, acc_lo
 2:	ld	__tmp_reg__, Z+
 	cp	__tmp_reg__, ret_lo

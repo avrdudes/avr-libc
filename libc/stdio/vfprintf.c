@@ -51,7 +51,7 @@
  * is to offer the usual modifiers and integer formatting support
  * (level 2).  Level 1 maintains a minimal version that just offers
  * integer formatting, but no modifier support whatsoever.  Level 3 is
- * intented for floating point support.
+ * intended for floating point support.
  */
 
 #ifndef PRINTF_LEVEL
@@ -207,7 +207,7 @@ vfprintf (FILE * stream, const char *fmt, va_list ap)
 	    flags &= ~FL_ALT;
 	    if (x < 0) {
 		x = -x;
-		/* `putc ('-', stream)' will considarably inlarge stack size.
+		/* `putc ('-', stream)' will considerably enlarge stack size.
 		   So flag is used.	*/
 		flags |= FL_NEGATIVE;
 	    }

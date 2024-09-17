@@ -29,7 +29,7 @@
 
 /* $Id$ */
 
-/* <non_standart> __addsf3x (float_40 A, float_40 B);
+/* <non_standard> __addsf3x (float_40 A, float_40 B);
      Internal function to add float point numbers.
 
    Input:

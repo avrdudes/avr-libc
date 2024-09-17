@@ -54,7 +54,7 @@
 int main ()
 {
     int i;
-    
+
     for (i = -1; i < 256; i++) {
 	if (i && strchr (" \t\n\v\f\r", i)) {
 	    if (!isspace (i)) {
@@ -68,10 +68,10 @@ int main ()
 	    }
 	}
     }
-    
 
-/* Skip the host, as according to C standart it is not safety to use an
-   argument beyound -1..255 value. AVR-LibC's ctype functions permit
+
+/* Skip the host, as according to C standard it is not safe to use an
+   argument beyond -1..255 value. AVR-LibC's ctype functions permit
    this.	*/
 #ifdef	__AVR__
     {

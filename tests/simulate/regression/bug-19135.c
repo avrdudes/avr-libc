@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* bug #19135: strstr(): `needle' is not always founded.
+/* bug #19135: strstr(): `needle' is not always found.
    $Id$	*/
 
 #include <string.h>

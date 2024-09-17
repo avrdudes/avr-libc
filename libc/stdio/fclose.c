@@ -50,7 +50,7 @@ fclose(FILE *stream)
 
 	/*
 	 * The standard streams are only aliases.  So if the stream to
-	 * be closed is also refered to by a standard stream name,
+	 * be closed is also referred to by a standard stream name,
 	 * mark its slot as empty.
 	 */
 	for (i = 0; i < 3; i++)

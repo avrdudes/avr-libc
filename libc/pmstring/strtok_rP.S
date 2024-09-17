@@ -47,7 +47,7 @@
 	}
 
 	p = s;
-	for (;;) {			// skip delimeters
+	for (;;) {			// skip delimiters
 	    s = p;			// space optimization (vs. s = p-1)
 	    if (!(c = *p++)) {
 		s = 0;
@@ -88,14 +88,14 @@
 ENTRY strtok_rP
 
 /* Two variants below are different in registers to load chars. In case
-   of enhanced core it is convinient to use <R0,R1> pair as zero word.
-   In classic case it is optimal to load delimeter char (flash) to R0.
+   of enhanced core it is convenient to use <R0,R1> pair as zero word.
+   In classic case it is optimal to load delimiter char (flash) to R0.
  */
 
 /* --------------------------------------------------------------------	*/
 #if	__AVR_HAVE_LPMX__
 
-# define dlm_ch r18		/* delimeter character	*/
+# define dlm_ch r18		/* delimiter character	*/
 # define str_ch r0		/* string character	*/
 
 	X_movw	ZL, lst_lo
@@ -108,7 +108,7 @@ ENTRY strtok_rP
 	breq	.Lret			; end of string
 	X_movw	str_lo, XL		; continue parsing
 
-  ; skip delimeters
+  ; skip delimiters
 1:	X_movw	XL, str_lo		; p = str
 2:	X_movw	str_lo, XL
 	ld	str_ch, X+
@@ -150,7 +150,7 @@ ENTRY strtok_rP
 /* --------------------------------------------------------------------	*/
 #else	/* !__AVR_HAVE_LPMX__ */
 
-# define dlm_ch r0		/* delimeter character	*/
+# define dlm_ch r0		/* delimiter character	*/
 # define str_ch r18		/* string character	*/
 
 	X_movw	ZL, lst_lo
@@ -163,7 +163,7 @@ ENTRY strtok_rP
 	breq	.Lret			; end of string
 	X_movw	str_lo, XL		; continue parsing
 
-  ; skip delimeters
+  ; skip delimiters
 1:	X_movw	XL, str_lo		; p = str
 2:	X_movw	str_lo, XL
 	ld	str_ch, X+

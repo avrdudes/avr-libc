@@ -55,7 +55,7 @@
 void Check (int line, const char *s, int c, size_t len, int expect)
 {
     const char *p;
-    
+
     p = memrchr_P (s, c, len);
 
     if (expect < 0) {
@@ -81,7 +81,7 @@ int main ()
     CHECK ("", 0, 0, -1);
     CHECK ("", 255, 0, -1);
     CHECK ("ABCDEF", 'a', 6, -1);
-    
+
     /* Found	*/
     CHECK ("\000", 0, 1, 0);
     CHECK ("\001", 1, 1, 0);
@@ -93,14 +93,14 @@ int main ()
     CHECK (".\000.", 0, 3, 1);
     CHECK ("\000a\000b", 'b', 4, 3);
 
-    /* Last occurance	*/
+    /* Last occurrence	*/
     CHECK ("abcdabcd", 'b', 8, 5);
     CHECK ("........", '.', 8, 7);
-    
+
     /* 'c' converted to a char	*/
     CHECK ("ABCDEF", 'A'+0x100, 6, 0);
     CHECK ("ABCDE\377", ~0, 6, 5);
-    
+
     /* Very long string	*/
     CHECK ("................................................................"
 	   "................................................................"

@@ -35,7 +35,7 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* <non_standart> __fp_trunc (float A);
+/* <non_standard> __fp_trunc (float A);
      This is an internal functions. __fp_trunc() splits argument and
      truncates to zero direction. It is intended as first part of work
      in floor(), ceil(), trunc() functions.
