@@ -196,7 +196,7 @@
 
 <dl>
 <dt>\anchor stdio_note1 Note 1:</dt>
-<dd>    
+<dd>
     It might have been possible to implement a device abstraction that
     is compatible with \c fopen() but since this would have required
     to parse a string, and to take all the information needed either
@@ -772,7 +772,7 @@ extern int	puts_P(const char *__str);
    The first byte of the first object is referenced by \c ptr.
 
    Returns the number of objects successfully written, i. e.
-   \c nmemb unless an output error occured.
+   \c nmemb unless an output error occurred.
  */
 extern size_t	fwrite(const void *__ptr, size_t __size, size_t __nmemb,
 		       FILE *__stream);
@@ -848,7 +848,7 @@ extern char	*gets(char *__str);
    to the buffer pointed to by \c ptr.
 
    Returns the number of objects successfully read, i. e.
-   \c nmemb unless an input error occured or end-of-file was
+   \c nmemb unless an input error occurred or end-of-file was
    encountered.  feof() and ferror() must be used to distinguish
    between these two conditions.
  */

@@ -57,11 +57,11 @@ _U(memchr_P):
 	lpm	r0, Z+
 	cp	r0, val
 	brne	1b
-  ; OK, val is founded
+  ; OK, val is found
 	sbiw	ZL, 1
 	X_movw	ret_lo, ZL
 	ret
-  ; fault, val is't founded
+  ; fault, val is't found
 2:	clr	ret_lo
 	clr	ret_hi
 	ret

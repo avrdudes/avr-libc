@@ -64,12 +64,12 @@ _U(strsep_P):
 	cpse	r0, __zero_reg__
 	brne	2b	; if symbol is't match && no delim end
 	brne	1b	; if symbol is absent in delim[] && not a zero
-  ; chr is founded in delim[] (possible, it is a terminating zero of str)
+  ; chr is found in delim[] (possible, it is a terminating zero of str)
 	tst	r0			; the same, as chr
 	brne	3f
 	X_movw	XL, r0			; __zero_reg__ is r1
 	rjmp	4f
-  ; OK, delimeter symbol is founded
+  ; OK, delimiter symbol is found
 3:	st	-X, __zero_reg__	; replace by '\0'
 	adiw	XL, 1			; address of next token
   ; save result to *sp and return

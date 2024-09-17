@@ -42,7 +42,7 @@ extern "C" {
 /** \defgroup eu_dst <util/eu_dst.h>: Daylight Saving function for the European Union.
 
     \code #include <util/eu_dst.h> \endcode
-    Dayligh Saving Time for the European Union */
+    Daylight Saving Time for the European Union */
 
 /** \ingroup eu_dst
     \fn int eu_dst (const time_t *timer, int32_t *z)

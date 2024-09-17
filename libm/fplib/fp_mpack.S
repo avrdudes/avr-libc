@@ -34,7 +34,7 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float __fp_mpack (<non_standart>);
+/* float __fp_mpack (<non_standard>);
      Merge parts of float value.
 
   Input:

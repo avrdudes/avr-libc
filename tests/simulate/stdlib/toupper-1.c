@@ -70,7 +70,7 @@ int main ()
     }
 
 
-/* Skip the host, as according to C standard it is not safety to use an
+/* Skip the host, as according to C standard it is not safe to use an
    argument beyond -1..255 value. AVR-LibC's ctype functions permit
    this.	*/
 #ifdef	__AVR__

@@ -46,7 +46,7 @@
 	}
 
 	p = s;
-	for (;;) {			// skip delimeters
+	for (;;) {			// skip delimiters
 	    s = p;			// space optimization (vs. s = p-1)
 	    if (!(c = *p++)) {
 		s = 0;
@@ -98,7 +98,7 @@ ENTRY strtok_r
 	breq	.Lret			; end of string
 	X_movw	str_lo, XL		; continue parsing
 
-  ; skip delimeters
+  ; skip delimiters
 1:	X_movw	XL, str_lo		; p = str
 2:	X_movw	str_lo, XL
 	ld	__tmp_reg__, X+

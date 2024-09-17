@@ -29,7 +29,7 @@
 
 /* $Id$ */
 
-/* <non_standart> __divsf3x (float A, float B);
+/* <non_standard> __divsf3x (float A, float B);
    Output:
      T
      rA3

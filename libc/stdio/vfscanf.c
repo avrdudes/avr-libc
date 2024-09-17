@@ -367,7 +367,7 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
     /* And now it is a flag of fault.	*/
     fnegate = 1;
 
-    /* NUL ('\0') is consided as normal character. This is match to Glibc.
+    /* NUL ('\0') is considered as a normal character. This is match to Glibc.
        Note, there is no method to include NUL into symbol list.	*/
     do {
 	i = getc (stream);
@@ -422,7 +422,7 @@ static unsigned char conv_flt (FILE *stream, width_t width, float *addr)
 
     unsigned char flag;
 #define FL_MINUS    0x80	/* number is negative	*/
-#define FL_ANY	    0x02	/* any digit was readed	*/
+#define FL_ANY	    0x02	/* any digit was read	*/
 #define FL_OVFL	    0x04	/* overflow was		*/
 #define FL_DOT	    0x08	/* decimal '.' was	*/
 #define FL_MEXP	    0x10	/* exponent 'e' is neg.	*/

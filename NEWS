@@ -650,7 +650,7 @@
 
     Briefly:
       . Restrictions of a float point format are eliminated.
-      . Conversion '%[' is present in standart version now.
+      . Conversion '%[' is present in standard version now.
       . The minimal version differs from standard only absence of '%[' conv.
       . The 'hh' type qualifier is added ('char *', C99).
       . The maximal field width is increased up to 255 (65535 in float version).

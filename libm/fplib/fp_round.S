@@ -34,7 +34,7 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float __fp_round (<non_standart>);
+/* float __fp_round (<non_standard>);
      The __fp_round() function rounds an input number. This is an internal
      function intended to run after __addsf3x() and like.
    Input:

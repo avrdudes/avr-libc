@@ -55,9 +55,9 @@
 void Check (int line, const char *s, int c, int expect)
 {
     const char *p;
-    
+
     p = strchrnul_P (s, c);
-    
+
     if (p != s + expect) {
 	PRINTFLN (line, "expect: %d, result: %d", expect, p - s);
 	EXIT (line);
@@ -74,7 +74,7 @@ int main ()
     CHECK ("", 1, 0);
     CHECK ("", 255, 0);
     CHECK ("ABCDEF", 'a', 6);
-    
+
     /* Found	*/
     CHECK ("\001", 1, 0);
     CHECK ("\377", 255, 0);
@@ -84,13 +84,13 @@ int main ()
     CHECK ("12345", 0, 5);
     CHECK ("", 0, 0);
 
-    /* First occurance	*/
+    /* First occurrence	*/
     CHECK ("abcdabcd", 'b', 1);
-    
+
     /* 'c' converted to a char	*/
     CHECK ("ABCDEF", 'A'+0x100, 0);
     CHECK ("ABCDE\377", ~0, 5);
-    
+
     /* Very long string	*/
     CHECK ("................................................................"
 	   "................................................................"

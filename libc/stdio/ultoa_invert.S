@@ -87,7 +87,7 @@ __ultoa_invert:
   ; decimal format
 	clt				; flag of val == 0
 .L_dec_loop:
-	push	v_lo			; to calculate remander
+	push	v_lo			; to calculate the remainder
   ; val &= ~1
 	andi	v_lo, ~1
   ; val += 2

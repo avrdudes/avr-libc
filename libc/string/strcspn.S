@@ -51,7 +51,7 @@ _U(strcspn):
 1:	ld	chs, X+		; *s++
 	tst	chs
 	breq	3f
-  ; check an occurance
+  ; check an occurrence
 	X_movw	ZL, acc_lo
 2:	ld	r0, Z+
 	cp	r0, chs
