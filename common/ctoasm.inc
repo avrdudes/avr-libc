@@ -70,13 +70,13 @@
 
 
 
-#define rTI0     r31  /* 1st temporary with immidiate */
-#define rTI1     r30  /* 2nd temporary with immidiate */
-#define rTI2     r27  /* 3rd temporary with immidiate */
-#define rTI3     r26  /* 4th temporary with immidiate */
+#define rTI0     r31  /* 1st temporary with immediate */
+#define rTI1     r30  /* 2nd temporary with immediate */
+#define rTI2     r27  /* 3rd temporary with immediate */
+#define rTI3     r26  /* 4th temporary with immediate */
 
-/* registers wich have to be saved */
-#define rSI0     r17   /* first saved (pushed) register with immidiate */
+/* registers which have to be saved */
+#define rSI0     r17   /* first saved (pushed) register with immediate */
 #define rSI1     r16   /* 2nd push register  */
 #define rSI2     r29   /* 3rd saved (pushed) register */
 #define rSI3     r28   /* 4th saved (pushed) register  */
