@@ -854,7 +854,7 @@ with <tt>\ref opt_fverbose_asm "-fverbose-asm"</tt> since GCC v8.
 
 \subsection inline_asm_swap_nibbles Swapping Nibbles
 
-The fist example uses the \c swap instruction to swap the nibbles of
+The first example uses the \c swap instruction to swap the nibbles of
 a byte.  Input and output of \c swap are located in the same general
 purpose register.
 This means the input operand, operand 1 below, must be located in the

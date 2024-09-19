@@ -32,7 +32,7 @@ source can be found on
 
 Note that to build AVR-LibC directly by cloning the GitHub repository, you will
 need to run the `bootstrap` script in the root directory first. AVR-LibC uses
-[autoconf](https://www.gnu.org/software/autoconf/) so be sure to use resent
+[autoconf](https://www.gnu.org/software/autoconf/) so be sure to use recent
 versions of `autoconf` (>= 1.9) and `automake` (>= 2.59) to generate the
-`configure` script and the `Makefiles`. This also requires Python being
+`configure` script and the `Makefile`s. This also requires Python being
 installed and available in the system path.
