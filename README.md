@@ -24,15 +24,15 @@ https://github.com/avrdudes/avr-libc/.
 
 ### Building and installing AVR-LibC from source
 
-AVR-LibC depends on [GNU Binutils](https://sourceware.org/binutils/) (>= 2.13)
-and [GCC](https://gcc.gnu.org/) (>= 3.3) that should be built for the AVR
-target (`configure --target=avr`). Detailed instructions how to build these from
-source can be found on
+AVR-LibC depends on [GNU Binutils](https://sourceware.org/binutils/) and
+[GCC](https://gcc.gnu.org/) that should be built for the AVR target. We
+recommend to use the most recent versions of these tools. Detailed instructions
+on building these tools from source can be found in
 [Building and Installing the GNU Tool Chain](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/install_tools.html).
 
 Note that to build AVR-LibC directly by cloning the GitHub repository, you will
 need to run the `bootstrap` script in the root directory first. AVR-LibC uses
 [autoconf](https://www.gnu.org/software/autoconf/) so be sure to use recent
-versions of `autoconf` (>= 1.9) and `automake` (>= 2.59) to generate the
-`configure` script and the `Makefile`s. This also requires Python being
-installed and available in the system path.
+versions of `autoconf` and `automake` to generate the `configure` script and
+the `Makefile`s. This also requires Python being installed and available in
+the system path.
