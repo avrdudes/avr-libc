@@ -145,7 +145,9 @@ void fill_mem(void) __attribute__((section(".init3"),naked));
 void fill_mem(void)
 {
   extern uint8_t __bss_end;
-  uint8_t *p = &__bss_end;
+  /* Issue #987: Use "volatile" to defeat GCC from using memset which
+     would shred the stack frame.  */
+  uint8_t volatile *p = &__bss_end;
   do
     *p++ = 0xa5;
   while (p < (uint8_t *)RAMEND);
