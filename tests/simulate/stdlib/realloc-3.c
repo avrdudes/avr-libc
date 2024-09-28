@@ -39,6 +39,18 @@
 #ifdef __AVR__
 #include <avr/pgmspace.h>
 #include "../../libc/stdlib/stdlib_private.h"
+
+/* malloc() and friends are attributed "malloc", which asserts that the
+   value returned by such a function won't alias any other variable.
+   For the tests below to work as expected, we have to "get rid" of that
+   attribute (or use some other means like inline asm ho hide the result).  */
+void* my_realloc (void*, size_t) __asm("realloc");
+void* my_malloc (size_t) __asm("malloc");
+void my_free (void*) __asm("free");
+#define malloc(a) my_malloc (a)
+#define realloc(a, b) my_realloc (a, b)
+#define free(a) my_free (a)
+
 #else
 #include "progmem.h"
 #endif
