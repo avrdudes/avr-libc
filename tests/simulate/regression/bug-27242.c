@@ -31,7 +31,6 @@
 
 /* $Id$ */
 
-#include <avr/cpufunc.h>
 #include <stdlib.h>
 
 #include "../../libc/stdlib/stdlib_private.h"
@@ -57,7 +56,6 @@ int main(void)
 	 * the new __brkval starts immediately after the last allocated
 	 * chunk.
 	 */
-	_MemoryBarrier();
 	p = p1 + 10;
 	if (__brkval != p)
 		return 3;
@@ -81,7 +79,6 @@ int main(void)
 	if (p != p1)
 		return 7;
 
-	_MemoryBarrier();
 	p = p1 + 5;
 	if (__brkval != p)
 		return 8;
