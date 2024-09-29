@@ -30,14 +30,14 @@
 
 # $Id$
 
-# Script for testing AVR-LibC fuctions, mainly, by simulating.
-# avrtest is needed. The script is tuned to run after 'make'
+# Script for testing AVR-LibC functions, mainly, by simulating.
+# AVRtest is needed. The script is tuned to run after 'make'
 # without any options, at this place.  Use
 #
 #     MCUS="..." ./run-avrtest.sh ...
 #
-# in order to override the predefined list of mcus.
-# Notice that this requires an  exit-<mcu>.o module  for each of the mcus.
+# in order to override the predefined list of MCUs.
+# Notice that this requires an  exit-<mcu>.o module  for each of the MCUs.
 # When it is not present, you can generate it with, say
 #
 #    (cd $AVRTEST_HOME; make exit-<mcu>.o)
@@ -53,16 +53,16 @@
 
 
 ##########################################################################
-# This script is similar to runtest.sh but uses avrtest for simulation.
+# This script is similar to runtest.sh but uses AVRtest for simulation.
 #
 #     https://github.com/sprintersb/atest
 #
-# There are ups and downs of using avrtest instead of simulavr:
+# There are ups and downs of using AVRtest instead of SimulAVR:
 #
-# + avrtest is order of magnitide(s) faster than simulavr.
+# + AVRtest is order of magnitude(s) faster than SimulAVR.
 #
-# + avrtest can simulate for much more devices than simulavr supports.
-#   But this comes at a cost:  avrtest only simulates the core, no I/O and
+# + AVRtest can simulate for much more devices than SimulAVR supports.
+#   But this comes at a cost:  AVRtest only simulates the core, no I/O and
 #   no SFRs or interrupts.  But it can simulate code for
 #   ATmega103, ATtiny3216, ATmega128, ATtiny40, ATtiny3216, AVR128DA32, ...
 #
@@ -74,13 +74,13 @@
 #   by the core arch).  For example we pretend ATtiny40 has a program size
 #   of 8 KiB.
 
-# When you want to skip a test with avrtest for whatever reason, add a
+# When you want to skip a test with AVRtest for whatever reason, add a
 # magic comment like
 #
 #     /* SKIP_AVRTEST: "This is the reason" */
 
-# When you want to run part of a code only with avrtest, e.g. because
-# simulavr is slow, then wrap the code in
+# When you want to run part of a code only with AVRtest, e.g. because
+# SimulAVR is slow, then wrap the code in
 #
 #     #ifdef USE_AVRTEST
 
@@ -198,7 +198,7 @@ Host_exe ()
 
 # Compose extra avr-gcc options for extended memory layout.
 # $1 = 0: Stack is below static storage
-# $1 = 1: Stack is at end of static storage
+# $1 = 1: Stack is at the end of static storage
 # $2 = RAM start
 # $3 = RAM end
 o_mem ()
@@ -212,7 +212,7 @@ o_mem ()
 	# Stack is located below static storage.
 	stack=$(printf "0x%x" $((${ramSTART} - 1 - ${ramVMA})))
     else
-	# Stack is located at end of static storage.
+	# Stack is located at the end of static storage.
 	stack=$(printf "0x%x" $((${ramEND} - ${ramVMA})))
     fi
 
@@ -225,16 +225,16 @@ o_mem ()
     echo "${ramstart} ${ramlen} ${stack} ${heap}"
 }
 
-# $1 = MCU as understood by ave-gcc.
+# $1 = MCU as understood by avr-gcc.
 # o_gcc: Extra options for avr-gcc
 # o_sim: Extra options for avrtext
 set_extra_options ()
 {
-    # As avrtest is just simulating cores, not exact hardware, we can
+    # As AVRtest is just simulating cores, not exact hardware, we can
     # add more RAM at will.
 
     o_gcc= # Extra options for gcc
-    o_sim= # Extra options for avrtest.  Default mmcu=avr51
+    o_sim= # Extra options for AVRtest.  Default mmcu=avr51
     # To test the pgm_read_far functions.
     local o_pgmx="-include high-progmemx.h"
     case $1 in
@@ -282,7 +282,7 @@ set_extra_options ()
 
 # $1 = ELF file
 # $2 = mcu as understood by avr-gcc
-# Extra options for avrtest are passed in o_sim.
+# Extra options for AVRtest are passed in o_sim.
 Simulate_avrtest ()
 {
     # The following exit stati will be returned with -q:
@@ -303,10 +303,10 @@ Simulate_avrtest ()
     # - 22  Program file could not be found / read.
     # - 42  Fatal error in avrtest.
 
-    # -no-stdin keepy avrtest from hanging in rare situations of bogus
+    # -no-stdin keeps AVRtest from hanging in rare situations of bogus
     # code that tries to read from stdin, but there is no input.
 
-    # avrtest has 3 flavours: avrtest, avrtest-xmega and avrtest-tiny.
+    # AVRtest has 3 flavours: avrtest, avrtest-xmega and avrtest-tiny.
     local suff=
     case "$o_sim" in
 	*avrxmega* ) suff="-xmega" ;;
@@ -323,7 +323,7 @@ Simulate_avrtest ()
 
 
 # $1 = relative file name of file to be simulated.
-# avrtest does not support SFR magic like EEPROM etc.
+# AVRtest does not support SFR magic like EEPROM etc.
 Skip_with_avrtest ()
 {
     local reason=
@@ -417,7 +417,7 @@ n_files=0	# number of operated files
 n_emake=0	# number of compile/link errors
 n_ehost=0	# number of 'run-at-host' errors
 n_esimul=0	# number of simulation errors
-n_skips=0	# number of skipped tests (avrtest can't EEPROM, SFRs or ISRs)
+n_skips=0	# number of skipped tests (AVRtest can't EEPROM, SFRs or ISRs)
 
 for test_file in $test_list ; do
     case `basename $test_file` in
