@@ -303,7 +303,7 @@ main(void)
   if (stats[0] != stats[1])
     exit(1);
 #ifdef __AVR__
-  if (__flp->nx != NULL)
+  if (__flp && __flp->nx != NULL)
     exit(2);
 #endif
   return 0;
