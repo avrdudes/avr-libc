@@ -100,7 +100,7 @@ int main(void)
     free(ptrs[2]);
     _MemoryBarrier();
     /* ...and again. */
-    if (__flp->nx != NULL) return __LINE__;
+    if (__flp != NULL) return __LINE__;
     if ((char *)(ptrs[1]) - 2 != __brkval) return __LINE__;
 
     return 0;
