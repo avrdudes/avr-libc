@@ -38,7 +38,7 @@
 /* malloc() and friends are attributed "malloc", which asserts that the
    value returned by such a function won't alias any other variable.
    For the tests below to work as expected, we have to "get rid" of that
-   attribute (or use some other means like inline asm ho hide the result).  */
+   attribute (or use some other means like inline asm to hide the result).  */
 void* my_realloc (void*, size_t) __asm("realloc");
 void* my_malloc (size_t) __asm("malloc");
 #define malloc(a) my_malloc (a)
