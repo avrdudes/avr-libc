@@ -64,7 +64,7 @@ ISR (ADC_vect)
     // user code here
 }
 
-// Alternative using the ISR_N macro
+// Alternative using the ISR_N macro with avr-gcc v15
 
 ISR_N (ADC_vect_num)
 [static] void my_adc_handler (void)
@@ -154,10 +154,12 @@ ISR (PCINT0_vect)
 
 ISR (PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
 
+\note There is no body to the aliased ISR.
+
 // Alternative using ISR_N
 
-ISR_N (PCINT0_vect_NUM)
-ISR_N (PCINT1_vect_NUM)
+ISR_N (PCINT0_vect_num)
+ISR_N (PCINT1_vect_num)
 [static] void my_pcint_handler (void)
 {
   // Code to handle the event.
@@ -167,19 +169,18 @@ ISR_N (PCINT1_vect_NUM)
 
 ISR (PCINT0_vect,
      [attributes]
-     ISR_N (PCINT1_vect_NUM)
-     ISR_N (PCINT2_vect_NUM))
+     ISR_N (PCINT1_vect_num)
+     ISR_N (PCINT2_vect_num))
 {
   // Code to handle the event.
 }
 \endcode
 
-\note There is no body to the aliased ISR.
-
 Note that the ISR_ALIASOF() feature requires GCC 4.2 or above (or a
 patched version of GCC 4.1.x).  See the documentation of the
 ISR_ALIAS() macro for an implementation which is less elegant but
 could be applied to all compiler versions.
+The ISR_N() macro required GCC v15 or higher.
 
 <h3>Empty interrupt service routines</h3>
 
