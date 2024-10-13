@@ -180,7 +180,7 @@ Note that the ISR_ALIASOF() feature requires GCC 4.2 or above (or a
 patched version of GCC 4.1.x).  See the documentation of the
 ISR_ALIAS() macro for an implementation which is less elegant but
 could be applied to all compiler versions.
-The ISR_N() macro required GCC v15 or higher.
+The ISR_N() macro requires GCC v15 or higher.
 
 <h3>Empty interrupt service routines</h3>
 
