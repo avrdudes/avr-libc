@@ -190,7 +190,7 @@ void
 free(void *p)
 {
 	struct __freelist *fp1, *fp2, *fpnew;
-	char *cp1, *cp2, *cpnew;
+	char *cp1, *cpnew;
 
 	/* ISO C says free(NULL) must be a no-op */
 	if (p == 0)
@@ -215,14 +215,14 @@ free(void *p)
 	             fp1->nx != 0;
 	             fp2 = fp1, fp1 = fp1->nx)
 			/* advance to entry just before end of list */;
-		cp2 = (char *)&(fp1->nx);
-		if (cp2 + fp1->sz == __brkval) {
+		cp1 = (char *)&(fp1->nx);
+		if (cp1 + fp1->sz == __brkval) {
 			if (fp2 == NULL)
 				/* Freelist is empty now. */
 				__flp = NULL;
 			else
 				fp2->nx = NULL;
-			__brkval = cp2 - sizeof(size_t);
+			__brkval = cp1 - sizeof(size_t);
 		}
 		return;
 	}
@@ -263,8 +263,8 @@ free(void *p)
 	 * with the lower chunk if possible.
 	 */
 	fp2->nx = fpnew;
-	cp2 = (char *)&(fp2->nx);
-	if (cp2 + fp2->sz == cpnew) {
+	cp1 = (char *)&(fp2->nx);
+	if (cp1 + fp2->sz == cpnew) {
 		/* lower junk adjacent, merge */
 		fp2->sz += fpnew->sz + sizeof(size_t);
 		fp2->nx = fpnew->nx;
