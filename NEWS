@@ -4,12 +4,14 @@
 
 * Improvements and additions:
 
-  Support the ISR_N macro in avr/interrupt.h.  This allows to specify the
-  IRQ number as an argument to the signal attribute, which is supported
-  since GCC v15 PR116056.  It allows to use static functions or functions
-  defined in a C++ namespace as an ISR.   It also allows to define ISR
-  aliases without the penalty of an additional JMP/RJMP instruction.
-  (Issue #765).
+  - Improve runtime performance of free() (Request #991).
+
+  - Support the ISR_N macro in avr/interrupt.h.  This allows to specify the
+    IRQ number as an argument to the signal attribute, which is supported
+    since GCC v15 PR116056.  It allows to use static functions or functions
+    defined in a C++ namespace as an ISR.   It also allows to define ISR
+    aliases without the penalty of an additional JMP/RJMP instruction.
+    (Issue #765).
 
 * Issues closed:
 

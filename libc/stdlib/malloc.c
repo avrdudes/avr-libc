@@ -190,7 +190,7 @@ void
 free(void *p)
 {
 	struct __freelist *fp1, *fp2, *fpnew;
-	char *cp1, *cp2, *cpnew;
+	char *cp1, *cpnew;
 
 	/* ISO C says free(NULL) must be a no-op */
 	if (p == 0)
@@ -201,19 +201,37 @@ free(void *p)
 	fpnew = (struct __freelist *)cpnew;
 	fpnew->nx = 0;
 
-	/*
-	 * Trivial case first: if there's no freelist yet, our entry
-	 * will be the only one on it.  If this is the last entry, we
-	 * can reduce __brkval instead.
-	 */
-	if (__flp == 0) {
-		if ((char *)p + fpnew->sz == __brkval)
-			__brkval = cpnew;
-		else
-			__flp = fpnew;
+	/* First, check if we can reduce __brkval. */
+	if ((char *)p + fpnew->sz == __brkval) {
+		__brkval = cpnew;
+		/* If there is no freelist, we are done. */
+		if (!__flp)
+			return;
+		/*
+		 * Otherwise, walk the entire list to see if there is a
+		 * new top-most chunk.
+		 */
+		for (fp1 = __flp, fp2 = 0;
+	             fp1->nx != 0;
+	             fp2 = fp1, fp1 = fp1->nx)
+			/* advance to entry just before end of list */;
+		cp1 = (char *)&(fp1->nx);
+		if (cp1 + fp1->sz == __brkval) {
+			if (fp2 == NULL)
+				/* Freelist is empty now. */
+				__flp = NULL;
+			else
+				fp2->nx = NULL;
+			__brkval = cp1 - sizeof(size_t);
+		}
 		return;
 	}
-
+	/* __brkval can't be reduced */
+	/* If there is no freelist yet, create a new one. */
+	if (!__flp) {
+		__flp = fpnew;
+		return;
+	}
 	/*
 	 * Now, find the position where our new entry belongs onto the
 	 * freelist.  Try to aggregate the chunk with adjacent chunks
@@ -245,27 +263,11 @@ free(void *p)
 	 * with the lower chunk if possible.
 	 */
 	fp2->nx = fpnew;
-	cp2 = (char *)&(fp2->nx);
-	if (cp2 + fp2->sz == cpnew) {
+	cp1 = (char *)&(fp2->nx);
+	if (cp1 + fp2->sz == cpnew) {
 		/* lower junk adjacent, merge */
 		fp2->sz += fpnew->sz + sizeof(size_t);
 		fp2->nx = fpnew->nx;
-	}
-	/*
-	 * If there's a new topmost chunk, lower __brkval instead.
-	 */
-	for (fp1 = __flp, fp2 = 0;
-	     fp1->nx != 0;
-	     fp2 = fp1, fp1 = fp1->nx)
-		/* advance to entry just before end of list */;
-	cp2 = (char *)&(fp1->nx);
-	if (cp2 + fp1->sz == __brkval) {
-		if (fp2 == NULL)
-			/* Freelist is empty now. */
-			__flp = NULL;
-		else
-			fp2->nx = NULL;
-		__brkval = cp2 - sizeof(size_t);
 	}
 }
 
