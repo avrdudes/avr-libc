@@ -107,7 +107,6 @@ libm_a_asm_sources = \
 
 libm_a_extra_dist = \
 	asmdef.h \
-	fp32def.h \
-	ntz.h
+	fp32def.h
 
 # vim: set ft=make:
