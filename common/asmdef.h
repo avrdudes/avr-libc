@@ -127,7 +127,27 @@ FUNCTION \name
 _U(\name):
 .endm
 
-/* This macro must used at the end of function body to calculate size.
+/* If the layout of the double type is the same like the float layout,
+   provide a weak alias of the float symbol for double, same for long double.
+   While we could also provide aliases in header files using
+   __asm__ in the declaration to specify the symbol to reference,
+   it is preferable to provide actual symbols in the library, so
+   that code that expects to be able to use them directly -
+   like gcc/gcc/testsuite/gcc.dg/pr41963.c using sqrtf - will work.  */
+
+.macro	ENTRY_FLOAT  fname  dname  lname
+ENTRY \fname
+#if (__SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__)
+	.weak	_U(\dname)
+_U(\dname):
+#endif /* double = float */
+#if (__SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__)
+	.weak	_U(\lname)
+_U(\lname):
+#endif /* long double = float */
+.endm
+
+/* This macro must be used at the end of function body to calculate size.
  */
 .macro	ENDFUNC
 .L__END:

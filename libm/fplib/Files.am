@@ -106,7 +106,6 @@ libm_a_asm_sources = \
 	unordsf2.S
 
 libm_a_extra_dist = \
-	asmdef.h \
-	fp32def.h 
+	asmdef.h
 
 # vim: set ft=make:
