@@ -4,6 +4,10 @@
 
 * Improvements and additions:
 
+  - common/asmdef.h used a sub-optimal definition of XJMP and XCALL (#993).
+    Outcome was a sub-optimal code generation for some devices like the
+    ones in avrxmega3/short-calls.
+
   - Improve runtime performance of free() (Request #991).
 
   - Support the ISR_N macro in avr/interrupt.h.  This allows to specify the

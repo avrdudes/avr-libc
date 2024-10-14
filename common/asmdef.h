@@ -82,7 +82,7 @@
 #define SPL_IO_ADDR	0x3D
 #define SPH_IO_ADDR	0x3E
 
-#if	defined(__AVR_MEGA__) && __AVR_MEGA__
+#if	defined(__AVR_HAVE_JMP_CALL__)
 # define XJMP	jmp
 # define XCALL	call
 #else
