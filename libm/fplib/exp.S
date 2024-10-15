@@ -106,9 +106,9 @@ ENTRY_FLOAT expf exp expl
 2:	XCALL	_U(ldexpf)
   ; inverse for positive arg.
 	pop	r0
-	sbrs	r0, 7
-	XJMP	_U(__inversef)
+	sbrc	r0, 7
 	ret
+	XJMP	_U(__inversef)
 ENDFUNC
 
 	PGMX_SECTION(.exp)

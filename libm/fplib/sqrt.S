@@ -56,8 +56,14 @@ ENTRY_FLOAT sqrtf sqrt sqrtl
 	subi	rA3, 127
 	sbc	rB3, rB3	; exponent high byte
   ; normalize, if A is subnormal
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	sbrc	rA2, 7
+	rjmp	0f
+#else
 	sbrs	rA2, 7
+#endif
 	XCALL	_U(__fp_norm2)
+0:
 
 #define	msk0	r0
 #define msk1	r1

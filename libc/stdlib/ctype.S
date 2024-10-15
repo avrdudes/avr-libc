@@ -76,8 +76,14 @@
           FUNCTION(isascii)
 
 GLOBAL(isascii)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+          TST     rHigh
+          BREQ    0f
+#else
           CPSE    rHigh,__zero_reg__
+#endif
           XJMP    _U(__ctype_isfalse)
+0:
           COM     rLow
           ANDI    rLow, 0x80
           RET
@@ -102,9 +108,14 @@ GLOBAL(toascii)
           FUNCTION(isalnum)
 
 GLOBAL(isalnum)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rHigh
+	breq	0f
+#else
 	cpse	rHigh, __zero_reg__
+#endif
 	XJMP	_U(__ctype_isfalse)
-	subi	rLow, '0'
+0:      subi	rLow, '0'
 	subi	rLow, '9'-'0'+1
 	brlo	2f			; rLow is digit, return negative val.
 	subi	rLow, lo8(-'9'-1)	; restore rLow
@@ -136,14 +147,25 @@ GLOBAL(__ctype_istrue)
 GLOBAL(isupper)
           ;CPSE  rHigh,__zero_reg__
           ;XJMP  _U(__ctype_isfalse)    ; checked by _islower later on
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+          SBRS  rLow,5
+          RJMP  _U(isalpha)
+#else
           SBRC  rLow,5       ; if bit 5 is set it is no upper
+#endif
           XJMP  _U(__ctype_isfalse)     ; bit 5 is clear, so if isalpha is true it is an upper
 GLOBAL(isalpha)
           ORI     rLow,0x20        ; make a lower out of an upper (all others are changed but do not get alpha)
 GLOBAL(islower)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+          TST   rHigh
+          BREQ  0f
+#else
           CPSE  rHigh,__zero_reg__
+#endif
 1:
           XJMP  _U(__ctype_isfalse)
+0:
           SUBI	rLow, 'a'
           SUBI	rLow, 'z'-'a'+1
           BRSH	1b
@@ -159,9 +181,15 @@ GLOBAL(islower)
           FUNCTION(isdigit)
 
 GLOBAL(isdigit)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+          TST   rHigh
+          BREQ  0f
+#else
           CPSE  rHigh,__zero_reg__
+#endif
 1:
           XJMP  _U(__ctype_isfalse)
+0:
           SUBI  rLow,'0'
           SUBI  rLow,10
           BRSH  1b
@@ -182,9 +210,14 @@ GLOBAL(isdigit)
 .endif
 
 GLOBAL(isxdigit)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rHigh
+	breq	0f
+#else
 	cpse	rHigh, __zero_reg__
+#endif
 1:	XJMP	_U(__ctype_isfalse)
-	subi	rLow, '0'
+0:      subi	rLow, '0'
 	subi	rLow, '9'-'0'+1
 	brlo	2f			; decimal digit
 	subi	rLow, lo8(-'9'-1)	; restore rLow
@@ -204,9 +237,15 @@ GLOBAL(isxdigit)
           FUNCTION(iscntrl)
 
 GLOBAL(iscntrl)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+          TST   rHigh
+          BREQ  0f
+#else
           CPSE  rHigh,__zero_reg__
+#endif
 1:
           XJMP  _U(__ctype_isfalse)
+0:
           CPI   rLow,0x7F
           BREQ  2f
           SUBI  rLow, ' '
@@ -227,9 +266,14 @@ GLOBAL(isgraph)
           CPI   rLow,' '
           BREQ  1f
 GLOBAL(isprint)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	  TST	rHigh
+	  BREQ	0f
+#else
 	  CPSE	rHigh, __zero_reg__
+#endif
 1:	  XJMP	_U(__ctype_isfalse)
-	  SUBI	rLow, ' '
+0:	  SUBI	rLow, ' '
 	  SUBI	rLow, 0x7E - ' ' + 1
 	  BRSH	1b
 	  RET			; TRUE: rlow is negative value
@@ -249,9 +293,15 @@ GLOBAL(isprint)
 .endif
 
 GLOBAL(isspace)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+          TST   rHigh
+          BREQ  0f
+#else
           CPSE  rHigh,__zero_reg__
+#endif
 1:
           XJMP  _U(__ctype_isfalse)
+0:
           CPI   rLow,' '           ; blank
           BREQ  2f
 	  SUBI	rLow, '\t'
@@ -269,9 +319,14 @@ GLOBAL(isspace)
           FUNCTION(ispunct)
 
 GLOBAL(ispunct)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rHigh
+	breq	0f
+#else
 	cpse	rHigh, __zero_reg__
+#endif
 1:	XJMP	_U(__ctype_isfalse)
-	subi	rLow, ' ' + 1
+0:	subi	rLow, ' ' + 1
 	subi	rLow, 0x7e - ' '
 	brsh	1b			; if (!isgraph(c)) return 0
 	subi	rLow, lo8(-0x7e - 1)	; restore rLow
@@ -291,9 +346,15 @@ GLOBAL(ispunct)
           FUNCTION(isblank)
 
 GLOBAL(isblank)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+          TST   rHigh
+          BREQ  0f
+#else
           CPSE  rHigh,__zero_reg__
+#endif
 1:
           XJMP  _U(__ctype_isfalse)
+0:
           CPI   rLow,' '           ; blank
           BREQ  2f
           CPI   rLow,0x09    ;'\t' ; tab
@@ -311,9 +372,14 @@ GLOBAL(isblank)
           FUNCTION(tolower)
 
 GLOBAL(tolower)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rHigh
+	breq	0f
+#else
 	cpse	rHigh, __zero_reg__
+#endif
 	ret				; return as is
-	subi	rLow, 'A'
+0:	subi	rLow, 'A'
 	subi	rLow, 'Z'-'A'+1
 	brsh	1f			; return as is
 	subi	rLow, lo8('A'-'a')	; conversion
@@ -330,9 +396,14 @@ GLOBAL(tolower)
           FUNCTION(toupper)
 
 GLOBAL(toupper)
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rHigh
+	breq	0f
+#else
 	cpse	rHigh, __zero_reg__
+#endif
 	ret				; return as is
-	subi	rLow, 'a'
+0:	subi	rLow, 'a'
 	subi	rLow, 'z'-'a'+1
 	brsh	1f			; return as is
 	subi	rLow, lo8('a'-'A')	; conversion

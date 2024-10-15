@@ -51,9 +51,14 @@
 ENTRY __fixsfsi
 	XCALL	_U(__fixunssfsi)
 	set
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rAE			; error flag
+	breq	0f
+#else
 	cpse	rAE, r1			; error flag
+#endif
 	XJMP	_U(__fp_szero)		; return 0x80000000
-	ret
+0:	ret
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

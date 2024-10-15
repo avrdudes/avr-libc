@@ -41,6 +41,11 @@
 
   - ld: undefined reference to `E2END' #973
 
+  - Don't skip 2-word instructions on cores with an according silicon bug.
+    This will fix AVR-LibC build warnings like
+    > libc/stdlib/ctype.S:80: Warning: skipping two-word instruction
+    as mentioned in #994.
+
 * Pull requests:
 
 * Other changes:
