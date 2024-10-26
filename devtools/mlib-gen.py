@@ -30,7 +30,7 @@ def leave(msg):
 # double variants provided avr-gcc supports -m[long-]double=32/64.
 #    The @-encoded options right of ; are not used by this script except for
 # removing potential multilib options from gen-avr-lib-tree.sh.  The very
-# multilib options are determinded by configure.ac's CHECK_MULTI_VARIANT
+# multilib options are determined by configure.ac's CHECK_MULTI_VARIANT
 # (by gcc -print-multi-lib for the C libraries) and CHECK_AVR_DEVICE
 # (by gcc -print-multi-directory -mmcu=<device> for the devices).
 
@@ -233,7 +233,7 @@ class Makefile (object):
 
 def to_ident(var):
     """Turn a string (usually a (sub)folder) into some canonical
-       representation that can be used as (part of) an indentifier
+       representation that can be used as (part of) an identifier
        or a file name."""
 
     # This are the same replacements that are performed by CHECK_AVR_DEVICE

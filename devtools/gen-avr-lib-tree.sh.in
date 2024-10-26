@@ -481,7 +481,7 @@ avr64ea48:crtavr64ea48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 # are associated to the core in any way.
 
 # Extra options to be set when building the C libraries.  The options for the
-# cores MUST NOT contain any multlilb options.
+# cores MUST NOT contain any multilib options.
 
 LIB_DEFS="-D__COMPILING_AVR_LIBC__"
 
