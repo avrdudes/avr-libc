@@ -898,7 +898,13 @@ Binutils v2.43.
 \section sec_symbols Symbols in the Default Linker Script
 
 Most of the symbols like \c main are defined in the code of the
-application, but some symbols are defined in the default linker script:
+application, but some symbols are defined in the default linker script.
+
+The following two groups of symbols have architecture specific default
+values and can be adjusted by defining the respective symbol.
+One use case is to adjust the <code>.data</code> region when external
+RAM should be used.  Most of the symbols get their default value from
+the startup code according to the memory layout of the respective device.
 
 <dl>
 <dt><tt>__<em>name</em>_REGION_ORIGIN__</tt></dt>
@@ -915,6 +921,11 @@ application, but some symbols are defined in the default linker script:
   \verbatim
 avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100
   \endverbatim
+
+  Notice that <tt>__DATA_REGION_ORIGIN__</tt> was only introduced since
+  Binutils <a href="https://sourceware.org/PR29741">v2.40</a>. Prior
+  to that, a core specific default value was used for the beginning
+  of the data region, and thus defining this symbol had no effect.
 </dd>
 <dt><tt>__<em>name</em>_REGION_LENGTH__</tt></dt>
 <dd>
@@ -927,6 +938,12 @@ avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100
   other means. Most of these symbols are
   \ref dot_weak "weakly" defined in the startup code.
 </dd>
+</dl>
+
+The following symbols are provided by the default linker script.
+The application can read them to infer properties of the binary.
+
+<dl>
 <dt><tt>__data_start</tt></dt>
 <dt><tt>__data_end</tt></dt>
 <dd>
@@ -1078,7 +1095,7 @@ e<b>x</b>ecutable.
 tells that the section contains bits that have to be uploaded to the
 target hardware.
 
-For more details, see the see the gas user manual on the
+For more details, see the gas user manual on the
 <a href="https://sourceware.org/binutils/docs/as/Section.html#ELF-Version"
    ><tt>.section</tt></a> directive.
 
