@@ -48,9 +48,8 @@
 PATH=/usr/xpg4/bin:$PATH
 
 # Define extra flags for our devices.  These flags MUST NOT be any multilib
-# option.  Multlib options are:
-#     -mmcu=* -msp8 -mshort-calls
-#     -mdouble=32 -mdouble=64 -mlong-double=32 -mlong-double=64.
+# option.  Multilib options are:
+#     -mmcu=*  -msp8  -mshort-calls  -mdouble=*  -mlong-double=*
 
 CFLAGS_SPACE="-mcall-prologues -Os"
 CFLAGS_BIG_MEMORY='-Os $(FNO_JUMP_TABLES)'
@@ -65,7 +64,7 @@ ASFLAGS_SPEED="-DOPTIMIZE_SPEED"
 # ends up as a line in tmp-device-info, and each core ends up as a line
 # in tmp-core-info to be picked up by mlib-gen.py.
 
-# The 2nd row is legacy.  If you add support for a new device, just
+# The 2nd column is legacy.  If you add support for a new device, just
 # leave it empty.
 
 AVR12_DEV_INFO="\
@@ -474,7 +473,7 @@ avr64ea32:crtavr64ea32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 avr64ea48:crtavr64ea48.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
-# The "architectures" or "cores".  The second row only serves as a pointer
+# The "architectures" or "cores".  The second column only serves as a pointer
 # to all the supported devices as we iterate over AVR_ARH_INFO below.
 # Mentioning AVR25_DEV_INFO after avr25 only serves the purpose to include
 # the devices in tmp-device-info -- it does NOT mean that these devices
@@ -536,6 +535,8 @@ echo "Generating source directories: $PWD"
 
 rm -f ./tmp-device-info
 rm -f ./tmp-core-info
+# The "unknown" MCU is just for AVR-LibC code coverage, in order to cover
+# the code path that would be take for an unsupported MCU.
 echo "unknown:unknown.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}" > tmp-device-info
 
 IFS=';'
