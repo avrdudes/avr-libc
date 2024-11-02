@@ -82,7 +82,7 @@
     /* Float value parse	*/
 #define	flag	r19
 
-    /* Multiplication of mantisses	*/
+    /* Multiplication of mantissas	*/
 #define	exp_sv	r17
 #define	mlt_1	r19	/* lowest result byte	*/
 #define mlt_2	r14
@@ -217,9 +217,9 @@ __ftoa_engine:
 	PUSH_ZHH8
 
 /* --------------------------------------------------------------------
-   Multiplication of mantisses (val and table).
+   Multiplication of mantissas (val and table).
    At the begin:
-	val_hlo .. val_lo  - input value mantisse
+	val_hlo .. val_lo  - input value mantissa
 	val_hhi            - input value exponent
 	X                  - second byte address (string begin)
    At the end:
@@ -412,10 +412,10 @@ __ftoa_engine:
 	adc	mlt_5, pwr_5
 	adc	mlt_6, pwr_6
 	adc	mlt_7, pwr_7
-  ; analisys
+  ; analysis
 	brtc	25f
 	cpi	digit, '0'
-	brne	21f		; this is the first digit finded
+	brne	21f		; this is the first digit found
 	dec	exp10
 	rjmp	.L_digit
   ; now is the first digit
