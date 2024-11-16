@@ -66,6 +66,12 @@ extern "C" {
  */
 extern fract rdivi(int num, int denom);
 
+/*
+ * The urdivi() function computes the value \c num/denom and returns the
+ * result of the \c unsigned \c fract type.
+ */
+extern unsigned fract urdivi(unsigned int num, unsigned int denom);
+
 #ifdef __cplusplus
 }
 #endif
