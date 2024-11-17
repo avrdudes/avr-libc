@@ -78,6 +78,7 @@ stdlib_a_asm_sources = \
 	rdivi.S \
 	tolower.S \
 	toupper.S \
+	ulrdivi.S \
 	urdivi.S
 
 stdlib_a_extra_dist = \
