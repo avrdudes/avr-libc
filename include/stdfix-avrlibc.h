@@ -72,6 +72,13 @@ extern fract rdivi(int num, int denom);
  */
 extern unsigned fract urdivi(unsigned int num, unsigned int denom);
 
+/*
+ * The ulrdivi() function computes the value of \c num/denom and returns the
+ * result of the unsigned long fract type.
+ */
+extern unsigned long fract
+ulrdivi(unsigned long int num, unsigned long int denom);
+
 #ifdef __cplusplus
 }
 #endif
