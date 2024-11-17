@@ -27,14 +27,14 @@
 FUNCTION urdivi
 ENTRY urdivi
 	; Check if the divisor is less than the dividend.
-	cp r24, r22
-	cpc r25, r23
-	brlo num_lt_denom    ; branch if numerator < denominator
+	cp  r_arg1L, r_arg2L
+	cpc r_arg1H, r_arg2H
+	brlo 0f    ; branch if numerator < denominator
 	; otherwise, return saturated
-	ldi r25, hi8(UFRACT_MAX)
-	ldi r24, lo8(UFRACT_MAX)
+	ldi r_arg1H, hi8(UFRACT_MAX)
+	ldi r_arg1L, lo8(UFRACT_MAX)
 	ret
-num_lt_denom:
+0:
 	X_movw r_quotL, r_arg2L
 	clr r_quotHL
 	clr r_quotHH
