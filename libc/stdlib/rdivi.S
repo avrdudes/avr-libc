@@ -81,5 +81,5 @@ ENDFUNC
 #undef r_arv1H
 
 #undef FRACT_MIN
-#indef FRACT_MAX
+#undef FRACT_MAX
 #undef SIGNBIT
