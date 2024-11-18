@@ -1,6 +1,6 @@
 #include "asmdef.h"
 
-#if defined(__USING_MINT8) && !__USING_MINT8
+#if defined(__USING_MINT8) && __USING_MINT8
 #error "-mint8 option is not supported"
 #endif
 
