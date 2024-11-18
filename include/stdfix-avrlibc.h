@@ -67,6 +67,12 @@ extern "C" {
 extern fract rdivi(int num, int denom);
 
 /*
+ * The lrdivi() function computes the value of \c num/denom and returns the
+ * result of the long fract type.
+ */
+extern long fract lrdivi(long int num, long int denom);
+
+/*
  * The urdivi() function computes the value \c num/denom and returns the
  * result of the \c unsigned \c fract type.
  */
