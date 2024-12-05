@@ -104,7 +104,7 @@ case "$host" in
 	* )
 		AC_MSG_RESULT(no)
 		AC_MSG_WARN()
-		AC_MSG_WARN(Avr-libc must be built using an avr cross-compiler.)
+		AC_MSG_WARN(AVR-LibC must be built using an avr cross-compiler.)
 		AC_MSG_WARN(Try configuring with:)
 		AC_MSG_WARN("$0 --build=$build --host=avr")
 		AC_MSG_WARN()
