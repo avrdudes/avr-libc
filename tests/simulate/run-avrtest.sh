@@ -176,7 +176,7 @@ test_list=${*:-"time/*.c regression/*.c stdlib/*.c string/*.c pmstring/*.c \
 CPPFLAGS="-Wundef -I."
 # -Wno-array-bounds: Ditch wrong warnings due to avr-gcc PR105523.
 # This works with more GCC versions than --param=min-pagesize=0.
-CFLAGS=${CFLAGS-"-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds ${CFLAGS_EXTRA}"}
+CFLAGS=${CFLAGS-"-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds ${EXTRA_CFLAGS}"}
 HOST_CC=gcc
 HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
 
