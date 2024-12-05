@@ -45,6 +45,12 @@ int main ()
 #include <stdint.h>
 #include <stdlib.h>
 
+/* Attribute "malloc" may spoil this test, hence hide malloc and realloc.  */
+void* hidden_malloc (size_t) __asm ("malloc");
+void* hidden_realloc (void*, size_t) __asm ("realloc");
+#define malloc(x)     hidden_malloc (x)
+#define realloc(x, y) hidden_realloc (x, y)
+
 struct __freelist {
         size_t sz;
         struct __freelist *nx;
