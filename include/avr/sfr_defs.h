@@ -251,7 +251,7 @@
 
     Wait until bit \c bit in IO register \c sfr is set. */
 
-#define loop_until_bit_is_set(sfr, bit) do { } while (bit_is_clear(sfr, bit))
+#define loop_until_bit_is_set(sfr, bit) do { } while (bit_is_set(sfr, bit))
 
 /** \def loop_until_bit_is_clear
     \ingroup avr_sfr
@@ -260,7 +260,7 @@
 
     Wait until bit \c bit in IO register \c sfr is clear. */
 
-#define loop_until_bit_is_clear(sfr, bit) do { } while (bit_is_set(sfr, bit))
+#define loop_until_bit_is_clear(sfr, bit) do { } while (bit_is_clear(sfr, bit))
 
 /**@}*/
 
