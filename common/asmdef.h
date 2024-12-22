@@ -92,7 +92,7 @@
 
 /* Macro FUNCTION is intended to start a function body without an entry.
    It is needed where an entry is at the middle of function. After this,
-   you can to use an ENTRY macro below, one time or more.
+   you can use the ENTRY macro below multiple times.
 
    TODO: make a possibility to define a few of blocks FUNCTION..ENDFUNC
    in a one source file.
