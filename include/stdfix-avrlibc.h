@@ -46,4 +46,47 @@
 
 /* Room for AVR-LibC specific extensions */
 
+/* 7.18a.6.1 The fixed-point arithmetic operation support functions */
+
+/*
+ * The functions below compute the result of the multiplication or division
+ * operation on the operands with the indicated types, and return a value with
+ * the indicated type.  The return value is rounded towards zero, and is
+ * saturated on overflow.  If the second operand of one of the divide
+ * functions is zero, the behavior is undefined.
+ */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/*
+ * The rdivi() function computes the value \c num/denom and returns the
+ * result of the \c fract type.
+ */
+extern fract rdivi (int num, int denom);
+
+/*
+ * The lrdivi() function computes the value of \c num/denom and returns the
+ * result of the long fract type.
+ */
+extern long fract lrdivi (long int num, long int denom);
+
+/*
+ * The urdivi() function computes the value \c num/denom and returns the
+ * result of the \c unsigned \c fract type.
+ */
+extern unsigned fract urdivi (unsigned int num, unsigned int denom);
+
+/*
+ * The ulrdivi() function computes the value of \c num/denom and returns the
+ * result of the unsigned long fract type.
+ */
+extern unsigned long fract
+ulrdivi (unsigned long int num, unsigned long int denom);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* _STDFIX_AVRLIBC_H */

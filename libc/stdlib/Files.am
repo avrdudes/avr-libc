@@ -75,9 +75,12 @@ stdlib_a_asm_sources = \
 	isspace.S \
 	isblank.S \
 	ispunct.S \
+	lrdivi.S \
+	rdivi.S \
 	tolower.S \
-	toupper.S
-
+	toupper.S \
+	ulrdivi.S \
+	urdivi.S
 
 stdlib_a_extra_dist = \
 	ctype.S \
