@@ -115,7 +115,9 @@
 #  define ISR(vector, [attributes])
 #else  /* real code */
 
-#if (__GNUC__ == 4 && __GNUC_MINOR__ >= 1) || (__GNUC__ > 4)
+#if defined (__clang__)
+#  define __INTR_ATTRS __used__
+#elif (__GNUC__ == 4 && __GNUC_MINOR__ >= 1) || (__GNUC__ > 4)
 #  define __INTR_ATTRS __used__, __externally_visible__
 #else /* GCC < 4.1 */
 #  define __INTR_ATTRS __used__
