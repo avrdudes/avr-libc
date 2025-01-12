@@ -44,6 +44,10 @@
 #warning please include <stdfix.h> directly rather than <stdfix-avrlibc.h>
 #endif /* _AVRGCC_STDFIX_H */
 
+#ifndef __ATTR_CONST__
+#define __ATTR_CONST__ __attribute__((__const__))
+#endif
+
 /* Room for AVR-LibC specific extensions */
 
 /* 7.18a.6.1 The fixed-point arithmetic operation support functions */
@@ -64,24 +68,28 @@ extern "C" {
  * The rdivi() function computes the value \c num/denom and returns the
  * result of the \c fract type.
  */
+__ATTR_CONST__
 extern fract rdivi (int num, int denom);
 
 /*
  * The lrdivi() function computes the value of \c num/denom and returns the
  * result of the long fract type.
  */
+__ATTR_CONST__
 extern long fract lrdivi (long int num, long int denom);
 
 /*
  * The urdivi() function computes the value \c num/denom and returns the
  * result of the \c unsigned \c fract type.
  */
+__ATTR_CONST__
 extern unsigned fract urdivi (unsigned int num, unsigned int denom);
 
 /*
  * The ulrdivi() function computes the value of \c num/denom and returns the
  * result of the unsigned long fract type.
  */
+__ATTR_CONST__
 extern unsigned long fract
 ulrdivi (unsigned long int num, unsigned long int denom);
 
