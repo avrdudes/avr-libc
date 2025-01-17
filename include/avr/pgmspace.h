@@ -458,8 +458,10 @@ _Avrlibc_Def_Pgm_2 (unsigned_long, unsigned long)
 #endif
 
 #if defined(__INT24_MAX__)
-_Avrlibc_Def_Pgm_3 (i24, __int24)
-_Avrlibc_Def_Pgm_3 (u24, __uint24)
+__extension__ typedef __int24 __i24_t;
+__extension__ typedef __uint24 __u24_t;
+_Avrlibc_Def_Pgm_3 (i24, __i24_t)
+_Avrlibc_Def_Pgm_3 (u24, __u24_t)
 #endif /* Have __int24 */
 
 _Avrlibc_Def_Pgm_4 (u32, uint32_t)
@@ -889,8 +891,8 @@ _Avrlibc_Def_Pgm_Far_2 (unsigned_long, unsigned long)
 #endif
 
 #if defined(__INT24_MAX__)
-_Avrlibc_Def_Pgm_Far_3 (i24, __int24)
-_Avrlibc_Def_Pgm_Far_3 (u24, __uint24)
+_Avrlibc_Def_Pgm_Far_3 (i24, __i24_t)
+_Avrlibc_Def_Pgm_Far_3 (u24, __u24_t)
 #endif /* Have __int24 */
 
 _Avrlibc_Def_Pgm_Far_4 (u32, uint32_t)
