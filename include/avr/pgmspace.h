@@ -1255,7 +1255,9 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
    that they decay to pgm_read() for devices without ELPM.
    Since GCC v7 PR71948, the compiler adds an offset of 0x4000 on
    Reduced Tiny when it takes the address of an object in PROGMEM,
-   which means we have to add 0x4000 here, too.  */
+   which means we have to add 0x4000 here, too.  Notice that
+   PROGMEM_FAR is just a section attribute without __progmem__, and
+   therefore the compiler doesn't add 0x4000.  */
 #define pgm_get_far_address(var)                      \
 (__extension__({                                      \
     uint_farptr_t __tmp;                              \
