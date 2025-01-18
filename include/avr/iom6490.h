@@ -966,7 +966,7 @@
 
 #define LCDDR17 _SFR_MEM8(0XFD)
 #define SEG316  0
-#define SEG217  1
+#define SEG317  1
 #define SEG318  2
 #define SEG319  3
 #define SEG320  4
