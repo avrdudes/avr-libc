@@ -426,7 +426,7 @@ extern struct __file *__iob[];
  * some backwards compatibility with the old version.
  */
 extern FILE *fdevopen(int (*__put)(char), int (*__get)(void),
-                      int __opts __attribute__((unused)));
+                      int __opts __attribute__((__unused__)));
 #else  /* !defined(__STDIO_FDEVOPEN_COMPAT_12) */
 /* New prototype for AVR-LibC 1.4 and above. */
 extern FILE *fdevopen(int (*__put)(char, FILE*), int (*__get)(FILE*));
@@ -709,13 +709,13 @@ extern int	snprintf_P(char *__s, size_t __n, const char *__fmt, ...);
    Like \c sprintf() but takes a variable argument list for the
    arguments.
 */
-extern int	vsprintf(char *__s, const char *__fmt, va_list ap);
+extern int	vsprintf(char *__s, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vsprintf() that uses a \c fmt string that resides
    in program memory.
 */
-extern int	vsprintf_P(char *__s, const char *__fmt, va_list ap);
+extern int	vsprintf_P(char *__s, const char *__fmt, va_list __ap);
 
 /**
    Like \c vsprintf(), but instead of assuming \c s to be of infinite
@@ -725,13 +725,13 @@ extern int	vsprintf_P(char *__s, const char *__fmt, va_list ap);
    Returns the number of characters that would have been written to
    \c s if there were enough space.
 */
-extern int	vsnprintf(char *__s, size_t __n, const char *__fmt, va_list ap);
+extern int	vsnprintf(char *__s, size_t __n, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vsnprintf() that uses a \c fmt string that resides
    in program memory.
 */
-extern int	vsnprintf_P(char *__s, size_t __n, const char *__fmt, va_list ap);
+extern int	vsnprintf_P(char *__s, size_t __n, const char *__fmt, va_list __ap);
 /**
    The function \c fprintf performs formatted output to \c stream.
    See \c vfprintf() for details.
@@ -950,7 +950,7 @@ extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
  */
 extern int	fflush(FILE *stream);
 #else
-static __inline__ int fflush(FILE *stream __attribute__((unused)))
+static __inline__ int fflush(FILE *stream __attribute__((__unused__)))
 {
 	return 0;
 }
