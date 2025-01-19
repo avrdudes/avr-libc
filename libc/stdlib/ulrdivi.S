@@ -2,10 +2,6 @@
 
 #ifndef __AVR_TINY__
 
-#ifndef ULFRACT_MAX
-#define ULFRACT_MAX 0xffffffff
-#endif
-
 #define r_arg1HH r25
 #define r_arg1HL r24
 #define r_arg1H  r23
@@ -34,11 +30,10 @@ ENTRY ulrdivi
 	cpc r_arg1HH, r_arg2HH
 	;; Branch if numerator < denominator
 	brlo 0f
-	;; ...otherwise, return saturated value.
-	ldi r_arg1HH, hhi8(ULFRACT_MAX)
-	ldi r_arg1HL, hlo8(ULFRACT_MAX)
-	ldi r_arg1H ,  hi8(ULFRACT_MAX)
-	ldi r_arg1L ,  lo8(ULFRACT_MAX)
+	;; ...otherwise, return saturated value: r_arg1 = 0xffffffff.
+	ldi r_arg1H,  0xff
+	ldi r_arg1L,  0xff
+	X_movw r_arg1HL, r_arg1L
 	ret
 0:
 	; call-saved registers
@@ -55,17 +50,15 @@ ENTRY ulrdivi
 	X_movw r_den2, r_arg2HL
 	clr r_den4
 	clr r_den5
-	clr r_den6
-	clr r_den7
+	X_movw r_den6, r_den4
 	; Prepare second arg for __udivdi3.
 	; The hight bytes in r_arg1HH:r_arg1L are already set,
 	; so just clear the low bytes.
 	clr r_arg2L
 	clr r_arg2H
-	clr r_arg2HL
-	clr r_arg2HH
+	X_movw r_arg2HL, r_arg2L
 
-	XCALL __udivdi3
+	XCALL _U(__udivdi3)
 	X_movw r_arg1L,  r_arg2L
 	X_movw r_arg1HL, r_arg2HL
 

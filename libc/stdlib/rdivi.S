@@ -40,7 +40,7 @@ ENTRY rdivi
 	sbci r_arg1H, 0xff
 1:
 	push __tmp_reg__
-	XCALL urdivi
+	XCALL _U(urdivi)
 	pop __tmp_reg__
 	; values of fract type should be shifted
 	; right w.r.t values of unsigned fract type

@@ -45,7 +45,7 @@ ENTRY urdivi
 	clr r_arg2L
 	clr r_arg2H
 
-	XCALL __udivmodsi4
+	XCALL _U(__udivmodsi4)
 	X_movw r_arg1L, r_quotL
 	ret
 ENDFUNC

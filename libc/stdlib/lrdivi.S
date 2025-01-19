@@ -42,16 +42,10 @@ ENTRY lrdivi
 	; If positive move on
 	brtc 1f
 	; otherwise, negate r_arg1HH:r_arg1L.
-	com r_arg1HH
-	com r_arg1HL
-	com r_arg1H
-	neg r_arg1L
-	sbci r_arg1H , 0xff
-	sbci r_arg1HL, 0xff
-	sbci r_arg1HH, 0xff
+	rcall 3f
 1:
 	push __tmp_reg__
-	XCALL ulrdivi
+	XCALL _U(ulrdivi)
 	pop __tmp_reg__
 	; Shift right to get the value of fract from unsigned fract.
 	lsr r_arg1HH
