@@ -1,6 +1,6 @@
 #include "asmdef.h"
 
-#if !defined(__AVR_TINY)
+#if !defined(__AVR_TINY__)
 
 #if defined(__USING_MINT8) && __USING_MINT8
 #error "-mint8 option is not supported"
@@ -108,4 +108,4 @@ ENDFUNC
 #undef LFRACT_MAX
 #undef SIGNBIT
 
-#endif /* !__AVR_TINY */
+#endif /* !__AVR_TINY__ */
