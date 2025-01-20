@@ -25,7 +25,7 @@ FUNCTION lrdivi
 ENTRY lrdivi
 	bst r_arg2HH, SIGNBIT
 	mov __tmp_reg__, r_arg2HH
-	;; If positive move on
+	;; If positive move on,
 	brtc 0f
 	; otherwise, negate r_arg2HH:r_arg2L.
 	com r_arg2HH
@@ -38,12 +38,11 @@ ENTRY lrdivi
 0:
 	;; Store sign of the result in SIGNBIT.
 	eor __tmp_reg__, r_arg1HH
-	bst r_arg1HH, SIGNBIT
-	; If positive move on
-	brtc 1f
+	; If positive move on,
+	sbrc r_arg1HH, SIGNBIT
 	; otherwise, negate r_arg1HH:r_arg1L.
-	rcall 3f
-1:
+	rcall .Lnegate_arg1
+
 	push __tmp_reg__
 	XCALL _U(ulrdivi)
 	pop __tmp_reg__
@@ -53,45 +52,32 @@ ENTRY lrdivi
 	ror r_arg1H
 	ror r_arg1L
 	; If zero after the shift, then return.
-	tst r_arg1HH
-	brne 2f
-	tst r_arg1HL
-	brne 2f
-	tst r_arg1H
-	brne 2f
-	tst r_arg1L
-	brne 2f
-	ret
-2:
-	; Check the sign of the result
+	brne 1f
+	sbiw r_arg1HL, 0
+	sbci r_arg1H, 0
+	breq .Llrdivi_exit
+1:
+	; Check the sign of the result.
 	bst __tmp_reg__, SIGNBIT
 	brtc .Llrdivi_exit
-	; if negative, check for saturation
-	; because it is a special case
-	cpi r_arg1HH, hhi8(LFRACT_MAX)
-	brne 3f
-	cpi r_arg1HL, hlo8(LFRACT_MAX)
-	brne 3f
-	cpi r_arg1H ,  hi8(LFRACT_MAX)
-	brne 3f
-	cpi r_arg1L ,  lo8(LFRACT_MAX)
+	; If negative, check for saturation because it is a special case.
+	; Compare r_arg1 against LFRACT_MAX = 0x7fffffff.
+	ldi r_arg2L,  hhi8(LFRACT_MAX)
+	cpi r_arg1L,  lo8(LFRACT_MAX)
+	cpc r_arg1H,  r_arg1L
+	cpc r_arg1HL, r_arg1L
+	cpc r_arg1HH, r_arg2L
+	brne .Lnegate_arg1
 	; Return negative saturated.
 	ldi r_arg1HH, hhi8(LFRACT_MIN)
 	ldi r_arg1HL, hlo8(LFRACT_MIN)
 	ldi r_arg1H ,  hi8(LFRACT_MIN)
 	ldi r_arg1L ,  lo8(LFRACT_MIN)
-	ret
-3:
-	; Negate r_arg1HH:r_arg1L
-	com r_arg1HH
-	com r_arg1HL
-	com r_arg1H
-	neg r_arg1L
-	sbci r_arg1H , 0xff
-	sbci r_arg1HL, 0xff
-	sbci r_arg1HH, 0xff
 .Llrdivi_exit:
 	ret
+.Lnegate_arg1:
+	; libgcc: Negate r_arg1HH:r_arg1L === R25:R22.
+	XJMP _U(__negsi2)
 ENDFUNC
 
 #undef r_arg2L
