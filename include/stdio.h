@@ -132,12 +132,13 @@
 
     <h3>Format strings in flash ROM</h3>
 
-    All the \c printf and \c scanf family functions come in two flavours: the
-    standard name, where the format string is expected to be in
-    SRAM, as well as a version with the suffix "_P" where the format
-    string is expected to reside in the flash ROM.  The macro
-    #PSTR (explained in \ref avr_pgmspace) becomes very handy
-    for declaring these format strings.
+    All the \c printf and \c scanf family functions come in three flavours:
+    the standard name, where the format string is expected to be in
+    SRAM, as well as two versions with the suffix "_P" and "_F" where the
+    format string is expected to reside in the flash ROM.  The macros
+    #PSTR (explained in \ref avr_pgmspace) and #FSTR (explained in
+    \ref avr_flash "<avr/flash.h>") become very handy for declaring
+    these format strings.
 
     \anchor stdio_without_malloc
     <h3>Running stdio without malloc()</h3>
@@ -624,7 +625,7 @@ extern int	vfprintf(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vfprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #vfprintf_F.
 */
 extern int	vfprintf_P(FILE *__stream, const char *__fmt, va_list __ap);
 
@@ -665,7 +666,7 @@ extern int	printf(const char *__fmt, ...);
 
 /**
    Variant of \c printf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #printf_F.
 */
 extern int	printf_P(const char *__fmt, ...);
 
@@ -685,7 +686,7 @@ extern int	sprintf(char *__s, const char *__fmt, ...);
 
 /**
    Variant of \c sprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #sprintf_F.
 */
 extern int	sprintf_P(char *__s, const char *__fmt, ...);
 
@@ -701,7 +702,7 @@ extern int	snprintf(char *__s, size_t __n, const char *__fmt, ...);
 
 /**
    Variant of \c snprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #snprintf_F.
 */
 extern int	snprintf_P(char *__s, size_t __n, const char *__fmt, ...);
 
@@ -713,7 +714,7 @@ extern int	vsprintf(char *__s, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vsprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #vsprintf_F.
 */
 extern int	vsprintf_P(char *__s, const char *__fmt, va_list __ap);
 
@@ -729,7 +730,7 @@ extern int	vsnprintf(char *__s, size_t __n, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vsnprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #vsnprintf_F.
 */
 extern int	vsnprintf_P(char *__s, size_t __n, const char *__fmt, va_list __ap);
 /**
@@ -740,7 +741,7 @@ extern int	fprintf(FILE *__stream, const char *__fmt, ...);
 
 /**
    Variant of \c fprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #fprintf_F.
 */
 extern int	fprintf_P(FILE *__stream, const char *__fmt, ...);
 
@@ -753,6 +754,7 @@ extern int	fputs(const char *__str, FILE *__stream);
 
 /**
    Variant of fputs() where \c str resides in program memory.
+   See also #fputs_F.
 */
 extern int	fputs_P(const char *__str, FILE *__stream);
 
@@ -764,6 +766,7 @@ extern int	puts(const char *__str);
 
 /**
    Variant of puts() where \c str resides in program memory.
+   See also #puts_F.
 */
 extern int	puts_P(const char *__str);
 
@@ -891,6 +894,7 @@ extern int	vfscanf(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
    Variant of vfscanf() using a \c fmt string in program memory.
+   See also #vfscanf_F.
  */
 extern int	vfscanf_P(FILE *__stream, const char *__fmt, va_list __ap);
 
@@ -904,6 +908,7 @@ extern int	fscanf(FILE *__stream, const char *__fmt, ...);
 
 /**
    Variant of fscanf() using a \c fmt string in program memory.
+   See also #fscanf_F.
  */
 extern int	fscanf_P(FILE *__stream, const char *__fmt, ...);
 
@@ -916,6 +921,7 @@ extern int	scanf(const char *__fmt, ...);
 
 /**
    Variant of scanf() where \c fmt resides in program memory.
+   See also #scanf_F.
  */
 extern int	scanf_P(const char *__fmt, ...);
 
@@ -937,6 +943,7 @@ extern int	sscanf(const char *__buf, const char *__fmt, ...);
 
 /**
    Variant of sscanf() using a \c fmt string in program memory.
+   See also #sscanf_F.
  */
 extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
 

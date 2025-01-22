@@ -4,6 +4,12 @@
 
 * Improvements and additions:
 
+  - Support a new header <avr/flash.h> for better support of avr-gcc's
+    named address spaces __flash and __flashx.  For example, it provides
+    functions like <tt>strcpy_F</tt> and <tt>strcpy_FX</tt> that work
+    the same like <tt>strcpy_P</tt> and <tt>strcpy_PF</tt> from
+    <var/pgmspace.h>, but use proper address-space qualifiers.
+
   - Support for Compact Vector Tables has been added as #1010.
     It is provided by crt<mcu>-cvt.o.  One way to use that variant
     of the startup code is by means of avr-gcc -mcvt which is

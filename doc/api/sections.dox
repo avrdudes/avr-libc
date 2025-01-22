@@ -323,7 +323,7 @@ model and correspond to the different kinds of memories of a device.
   <td>\c rx
   <td>\ref sec_text_text "Executable code",
     \ref sec_dot_vectors "vector table",
-    data in #PROGMEM, \c __flash and \c __memx,
+    data in #PROGMEM, #__flash, #__memx, #__flashx and #__memx,
     \ref sec_dot_init "startup code",
     \ref sec_dot_trampolines "linker stubs",
     initializers for <tt>.data</tt>
@@ -510,15 +510,14 @@ empty ones, that are valid in a section name.
 <dt><code>.progmem.gcc.*</code></dt>
 <dd>
   This section is used for read-only data declared with attribute
-  #PROGMEM, and for data in address-space
-  <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html">
-    __flash</a>.
+  #PROGMEM, and for data in address-space #__flash.
 
-  The compiler assumes that the <code>.progmem</code> sections are located
-  in the lower 64 KiB of program memory.  When it does not fit in the
-  lower 64 KiB block, then the program reads garbage except
+  The compiler assumes that the <code>.progmem.data</code> sections are
+  located in the lower 64 KiB of program memory.  When it does not fit
+  in the lower 64 KiB block, then the program reads garbage except
+  address-space #__flashx or
   \ref avr_pgmspace "pgm_read_*_far" is used. In that case however,
-  code can be located in the \ref sec_dot_progmemx ".progmemx"
+  code can be located in the \ref sec_dot_progmemx ".progmemx.data"
   section which does not require to be located in the lower program memory.
 </dd>
 <dt>\anchor sec_dot_trampolines .trampolines</dt>
@@ -737,7 +736,7 @@ empty ones, that are valid in a section name.
 <dd>
   Read-only data in program memory without the requirement that it
   must reside in the lower 64 KiB. The compiler uses this section
-  for data in the named address-space \c __memx.
+  for data in the named address-spaces #__flashx and #__memx.
   Data can be accessed with \ref avr_pgmspace "pgm_read_*_far" when it is
   not in a named address-space:
   \code
@@ -756,6 +755,8 @@ empty ones, that are valid in a section name.
       return val2 + array1[id1];
   }
   \endcode
+  For data in address-space #__flashx there are support functions
+  in \ref avr_flash "<avr/flash.h>".
 </dd>
 <dt>\anchor sec_dot_jumptables <tt>.jumptables*</tt></dt>
 <dd>

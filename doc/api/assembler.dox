@@ -456,7 +456,7 @@ Some common directives include:
 <tr>
   <td><tt>.asciz <em>"string"</em></tt>
   <td>Allocate a \\0 terminated string.
-  <td>
+  <td><tt>.string</tt>
 </tr>
 <tr>
   <td><tt>.base64 <em>"string"</em></tt>

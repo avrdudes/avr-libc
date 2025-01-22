@@ -48,28 +48,29 @@
     \endcode
 
     The functions in this module provide interfaces for a program to access
-    data stored in program space (flash memory) of the device.
+    data stored in program space (flash memory) of the device.<br>
+    For a different approach using named address-spaces like #__flash,
+    see \ref avr_flash "<avr/flash.h>".
 
     \note These functions are an attempt to provide some compatibility with
     header files that come with IAR C, to make porting applications between
-    different compilers easier.  This is not 100% compatibility though (GCC
-    does not have full support for multiple address spaces yet).
+    different compilers easier.  This is not 100% compatibility though.
 
     \note If you are working with strings which are completely based in RAM,
     use the standard string functions described in \ref avr_string.
 
-    \note If possible, put your constant tables in the lower 64 KB and use
-    pgm_read_byte_near() or pgm_read_word_near() instead of
-    pgm_read_byte_far() or pgm_read_word_far() since it is more efficient that
-    way, and you can still use the upper 64K for executable code.
+    \note If possible, put your constant tables in the lower 64 KiB and use
+    #pgm_read_byte, #pgm_read_char or #pgm_read_u8 etc. instead of
+    #pgm_read_byte_far since it is more efficient that
+    way, and you can still use the upper 64 KiB for executable code.
     All functions that are suffixed with a \c _P \e require their
-    arguments to be in the lower 64 KB of the flash ROM, as they do
-    not use ELPM instructions.  This is normally not a big concern as
+    arguments to be in the lower 64 KiB of the flash ROM, as they do
+    not use \c ELPM instructions.  This is normally not a big concern as
     the linker setup arranges any program space constants declared
-    using the macros from this header file so they are placed right after
-    the interrupt vectors, and in front of any executable code.  However,
+    using #PROGMEM to be placed right after the interrupt vectors,
+    and in front of any executable code.  However,
     it can become a problem if there are too many of these constants, or
-    for bootloaders on devices with more than 64 KB of ROM.
+    for bootloaders on devices with more than 64 KiB of ROM.
     <em>All these functions will not work in that situation.</em>
 
     \note For <b>Xmega</b> devices, make sure the NVM controller
@@ -124,6 +125,12 @@
 
    It only makes sense to put read-only objects in this section,
    though the compiler does not diagnose when this is not the case.
+
+   As an alternative available since AVR-LibC v2.3 and avr-gcc v15,
+   you can use the 24-bit address-space #__flashx and functions from
+   \ref avr_flash "<avr/flash.h>" that work the same like the \c _far
+   functions.
+
    \since AVR-LibC v2.2  */
 #define PROGMEM_FAR __attribute__((__section__(".progmemx.data")))
 
@@ -1736,11 +1743,11 @@ extern size_t strlen (const char*);
 extern size_t __strlen_P(const char *) __ATTR_CONST__;  /* internal helper function */
 #endif
 
-static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char * s);
-size_t strlen_P(const char *s)
+static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s);
+size_t strlen_P(const char *__s)
 {
-  return __builtin_constant_p(__builtin_strlen(s))
-     ? __builtin_strlen(s) : __strlen_P(s);
+  return __builtin_constant_p(__builtin_strlen(__s))
+     ? __builtin_strlen(__s) : __strlen_P(__s);
 }
 #endif /* DOXYGEN */
 

@@ -338,18 +338,18 @@ the global interrupt flag before accessing one of those registers is
 uncertain, something like the following example code can be used.
 
 \code
-uint16_t
-read_timer1(void)
+#include <avr/io.h>
+
+uint16_t read_timer1 (void)
 {
-	uint8_t sreg;
-	uint16_t val;
+    uint8_t sreg = SREG;
+    uint16_t val;
 
-	sreg = SREG;
-	cli();
-	val = TCNT1;
-	SREG = sreg;
+    cli();
+    val = TCNT1;
+    SREG = sreg;
 
-	return val;
+    return val;
 }
 \endcode
 
@@ -508,7 +508,7 @@ will pick the closest label with the same number and given direction.
 
 Example:
 
-\code
+\verbatim
 myfunc:
     push    r16
     push    r17
@@ -533,7 +533,7 @@ myfunc:
     pop     r17
     pop     r16
     ret
-\endcode
+\endverbatim
 
 <small>Back to \ref faq_index.
 </small>
@@ -543,7 +543,7 @@ myfunc:
 Consider this example code:
 
 \code
-#include <inttypes.h>
+#include <stdint.h>
 #include <avr/io.h>
 
 void
@@ -558,7 +558,7 @@ set_bits_func_correct (volatile uint8_t *port, uint8_t mask)
     *port |= mask;
 }
 
-#define set_bits_macro(port,mask) ((port) |= (mask))
+#define set_bits_macro(port, mask) ((port) |= (mask))
 
 int main (void)
 {
@@ -788,9 +788,9 @@ strings. The most obvious (and incorrect) thing to do is this:
 \code
 #include <avr/pgmspace.h>
 
-const char* const array[2] PROGMEM = {
-    "Foo",
-    "Bar"
+const char* const array[2] PROGMEM =
+{
+    "Foo", "Bar"
 };
 
 int main (void)
@@ -810,12 +810,12 @@ To work around this, you need to do something like this:
 \code
 #include <avr/pgmspace.h>
 
-static const char foo[] PROGMEM = "Foo";
-static const char bar[] PROGMEM = "Bar";
+static const char s_foo[] PROGMEM = "Foo";
+static const char s_bar[] PROGMEM = "Bar";
 
-const char* const array[2] PROGMEM = {
-    foo,
-    bar
+const char* const array[2] PROGMEM =
+{
+    s_foo, s_bar
 };
 
 void func (uint8_t i)
@@ -830,16 +830,16 @@ void func (uint8_t i)
 Looking at the disassembly of the resulting object file we see that array is
 in flash as such:
 
-\code
+\verbatim
 00000026 <array>:
   26:   2e 00 2a 00
 
 0000002a <bar>:
-  2a:   42 61 72 00                                         Bar.
+  2a:   42 61 72 00          Bar.
 
 0000002e <foo>:
-  2e:   46 6f 6f 00                                         Foo.
-\endcode
+  2e:   46 6f 6f 00          Foo.
+\endverbatim
 
 \c foo is at address 0x002e.<br>
 \c bar is at address 0x002a.<br>
@@ -848,28 +848,25 @@ in flash as such:
 
 \subsection faq_rom_array_as Using named address-spaces
 
-An alternative is to use the named address-space \c __flash,
+An alternative is to use the named address-space #__flash,
 which is supported since avr-gcc v4.7 and in GNU-C99 (\c -std=gnu99) and up:
 
 \code
-#include <avr/pgmspace.h>
-
-#define F(X) ((const __flash char[]) { X })
+#include <avr/flash.h>
 
 const __flash char* const __flash array[] =
 {
-    F("Foo"), F("Bar")
+    FLIT("Foo"), FLIT("Bar")
 };
 
 int compare (const char *str, uint8_t i)
 {
-    return strcmp_P (str, array[i]);
+    return strcmp_F (str, array[i]);
 }
 \endcode
 
 Moreover, there is no more need for <tt>pgm_read_xxx()</tt>: The (addresses of)
 the string literals can be read directly by means of <tt>array[i]</tt>.
-The header is only needed for the \c strcmp_P prototype.
 
 
 <small>Back to \ref faq_index.</small>
@@ -1001,9 +998,9 @@ which does not have a respective section attribute.
 
 Second, locate the section to the desired fixed address by means
 of linking with, say
-\code
+\verbatim
 -Wl,--section-start,.bootloader=0x1E000
-\endcode
+\endverbatim
 see the \ref gcc_minusW "-Wl compiler option".
 The name after \c \--section-start is the name of the section to be
 located, and the number specifies the beginning address of the named section.
@@ -1020,12 +1017,12 @@ output section for input section <code>.text.bootloader</code> is the
 To verify that everything went as expected,
 generate the disassembly with <tt>avr-objdump ... -j .bootloader</tt>.
 The top of the list file will show
-\code{none}
+\verbatim
   1 .bootloader   00000004  00002000  00002000  00000204  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-\endcode
+\endverbatim
 Or display section properties with <tt>avr-readelf \--section-details</tt>
-\code{none}
+\verbatim
 $ avr-readelf -t main.elf
 Section Headers:
   [Nr] Name
@@ -1034,7 +1031,7 @@ Section Headers:
   [ 2] .bootloader
        PROGBITS        00002000 000204 000004 00   0   0  1
        [00000006]: ALLOC, EXEC
-\endcode
+\endverbatim
 
 A different way to locate the section is by means of a custom linker
 script. The
@@ -1095,31 +1092,30 @@ For example, the following can be used to implement simple debugging
 messages that will be sent through a UART:
 
 \code
-#include <inttypes.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
-int uart_putchar(char c)
+int uart_putchar (char c)
 {
   if (c == '\n')
     uart_putchar('\r');
-  loop_until_bit_is_set(USR, UDRE);
+  loop_until_bit_is_set (USR, UDRE);
   UDR = c;
   return 0; /* so it could be used for fdevopen(), too */
 }
 
-void debug_P(const char *addr)
+void debug_P (const char *addr)
 {
   char c;
 
   while ((c = pgm_read_byte(addr++)))
-    uart_putchar(c);
+    uart_putchar (c);
 }
 
-int main(void)
+int main (void)
 {
   ioinit(); /* initialize UART, ... */
-  debug_P(PSTR("foo was here\n"));
+  debug_P (PSTR("foo was here\n"));
   return 0;
 }
 \endcode
@@ -1127,6 +1123,33 @@ int main(void)
 \note By convention, the suffix \b _P to the function name is used as
 an indication that this function is going to accept a "program-space
 string".  Note also the use of the PSTR() macro.
+
+As an alternative, the GNU-C named address-space #__flash can be used.
+Notice the proper address-space qualification of \c debug_F, the usage
+of #FSTR instead of \c PSTR, and that reading from a #__flash address
+can be accomplished by open-coded C code like in <tt>*addr++</tt>.
+
+\code
+#include <avr/io.h>
+#include <avr/flash.h>
+
+// ...
+
+void debug_F (const __flash char *addr)
+{
+  char c;
+
+  while ((c = *addr++))
+    uart_putchar (c);
+}
+
+int main (void)
+{
+  ioinit(); /* initialize UART, ... */
+  debug_F (FSTR("foo was here\n"));
+  return 0;
+}
+\endcode
 
 <small>Back to \ref faq_index.</small>
 
@@ -1280,13 +1303,13 @@ that provides a CVT and activates it by setting the
 
 ISR (__vector_2)
 {
-    /* Code for Prio1 IRQ. */
+    /* Code for Prio1 IRQ */
 }
 
 ISR_N (3)
 static void prio0_isr (void)
 {
-    /* code */
+    /* Code for Prio0 IRQs */
 }
 \endcode
 
@@ -1332,7 +1355,7 @@ See \ref ass_pseudoops "Pseudo-Ops" and \ref assembly_operand_modifiers.
 When setting up space for local variables on the stack, the compiler
 generates code like this:
 
-\code
+\verbatim
 /* prologue: frame size=20 */
 	push r28
 	push r29
@@ -1345,7 +1368,7 @@ generates code like this:
 	out __SREG__,__tmp_reg__
 	out __SP_L__,r28
 /* prologue end (size=10) */
-\endcode
+\endverbatim
 
 It reads the current stack pointer value, decrements it by the
 required amount of bytes, then disables interrupts, writes back the
@@ -1416,9 +1439,9 @@ load file.
 <tt>avr-objcopy</tt> can create a relocatable object file from
 arbitrary binary input, like
 
-\code
+\verbatim
 avr-objcopy -I binary -O elf32-avr foo.bin foo.o
-\endcode
+\endverbatim
 
 This will create a file named <tt>foo.o</tt>, with the contents of
 <tt>foo.bin</tt>.  The contents will default to section .data, and two
@@ -1430,9 +1453,9 @@ If the goal is to have those data go to flash ROM (similar to having
 used the PROGMEM attribute in C source code), the sections have to be
 renamed while copying, and it's also useful to set the section flags:
 
-\code
+\verbatim
 avr-objcopy --rename-section .data=.progmem.data,contents,alloc,load,readonly,data -I binary -O elf32-avr foo.bin foo.o
-\endcode
+\endverbatim
 
 Note that all this could be conveniently wired into a Makefile, so
 whenever <tt>foo.bin</tt> changes, it will trigger the recreation of
@@ -1441,7 +1464,7 @@ whenever <tt>foo.bin</tt> changes, it will trigger the recreation of
 Below are two Makefile fragments that provide rules to convert a .txt file
 to an object file, and to convert a .bin file to an object file:
 
-\code
+\verbatim
 $(OBJDIR)/%.o : %.txt
 	@echo Converting $<
 	@cp $(<) $(*).tmp
@@ -1470,7 +1493,7 @@ $(OBJDIR)/%.o : %.bin
 	@echo "extern const char" $(*)_end"[] PROGMEM;" >> $(*).h
 	@echo "extern const char" $(*)_size_sym"[];" >> $(*).h
 	@echo "#define $(*)_size ((int)$(*)_size_sym)" >> $(*).h
-\endcode
+\endverbatim
 
 <small>Back to \ref faq_index.</small>
 
@@ -1752,7 +1775,7 @@ the EEPROM's inability to hold a charge from the excessive write wear.
 Some AVR datasheets give the following formula for calculating baud rates:
 
 \code
-(F_CPU/(UART_BAUD_RATE*16L)-1)
+(F_CPU / (UART_BAUD_RATE * 16L) - 1)
 \endcode
 
 Unfortunately that formula does not work with all combinations of
