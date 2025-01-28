@@ -45,7 +45,6 @@
 #define len_b1 r19
 #define len_b0 r18
 
-#define cht s2_b1
 #define tmp s2_b0
 
 #define ret_b1 r25
@@ -69,20 +68,20 @@ _U(strncasecmp_PF):
 	sbci	len_b1, hi8(1)
 	brcs	.L_strncasecmp_PF_equal
 	ld	ret_b0, X+		; load *s1
-	LPM_R0_ZPLUS_NEXT s2_b2		; load *s2
+	cpi	ret_b0, 'A'		; if ret_b0 in [A-Z]...
+	brlt	1f
+	cpi	ret_b0, 'Z'+1
+	brge	1f
+	subi	ret_b0, 'A'-'a'		; ...then tolower().
+1:	LPM_R0_ZPLUS_NEXT s2_b2		; load *s2
 	mov	tmp, r0			; copy of *s2 to tmp
-	mov	cht, r0			; copy of *s2 to cht
-	ori	cht, 0x20		; make it lower case
-	cpi	cht, 'a'		; test on [a .. z]
-	brlt	.L_strncasecmp_PF_tst
-	cpi	cht, 'z'+1
-	brge	.L_strncasecmp_PF_tst
-	ori	tmp, 0x20		; we got an alpha in s2
-	ori	ret_b0, 0x20		; make *s1, *s2 lower case
+	cpi	tmp, 'A'		; if tmp in [A-Z]...
+	brlt	2f
+	cpi	tmp, 'Z'+1
+	brge	2f
+	subi	tmp, 'A'-'a'		; ...then tolower().
 
-.L_strncasecmp_PF_tst:
-
-	sub	ret_b0, tmp
+2:	sub	ret_b0, tmp
 	brne	.L_strncasecmp_PF_done
 	tst	r0
 	brne	.L_strncasecmp_PF_loop

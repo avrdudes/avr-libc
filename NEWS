@@ -52,6 +52,10 @@
     > libc/stdlib/ctype.S:80: Warning: skipping two-word instruction
     as mentioned in #994.
 
+  - The str[n]casecmp_PF functions used an algorithm that lead to different
+    results compared to str[n]casecmp[_P].  The far versions have been
+    fixed so that they comply to POSIX.1-2008. (Issue #1009)
+
 * Pull requests:
 
 * Other changes:
