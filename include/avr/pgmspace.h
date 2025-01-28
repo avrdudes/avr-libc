@@ -1240,7 +1240,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 (__extension__({                                      \
     uint_farptr_t __tmp;                              \
                                                       \
-    __asm__ __volatile__ (                            \
+    __asm__ (                                         \
         "ldi    %A0, lo8(%1)"           "\n\t"        \
         "ldi    %B0, hi8(%1)"           "\n\t"        \
         "ldi    %C0, hh8(%1)"           "\n\t"        \
@@ -1262,7 +1262,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 (__extension__({                                      \
     uint_farptr_t __tmp;                              \
                                                       \
-    __asm__ __volatile__ (                            \
+    __asm__ (                                         \
         "ldi    %A0, lo8(0x4000+(%1))"  "\n\t"        \
         "ldi    %B0, hi8(0x4000+(%1))"  "\n\t"        \
         "ldi    %C0, hh8(0x4000+(%1))"  "\n\t"        \
