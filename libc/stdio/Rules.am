@@ -53,6 +53,9 @@ libscanf_flt_a_LIBADD = vfscanf_flt.o
 # this gives the smallest code.
 PRINTF_CFLAGS = -Os @CDEBUG@ $(FNO_JUMP_TABLES)
 
+# When float is involved, then -mcall-prologes is likely profitable.
+PRINTF_FLT_CFLAGS = $(PRINTF_CFLAGS) -mcall-prologues
+
 vfprintf_min.o: vfprintf.c
 	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_MIN -c -o $@ $<
 
@@ -60,7 +63,7 @@ vfprintf_std.o: vfprintf.c
 	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_STD -c -o $@ $<
 
 vfprintf_flt.o: vfprintf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_FLT -c -o $@ $<
+	$(COMPILE) $(PRINTF_FLT_CFLAGS) -DPRINTF_LEVEL=PRINTF_FLT -c -o $@ $<
 
 vfscanf_min.o: vfscanf.c
 	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_MIN -c -o $@ $<
@@ -69,6 +72,6 @@ vfscanf_std.o: vfscanf.c
 	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_STD -c -o $@ $<
 
 vfscanf_flt.o: vfscanf.c
-	$(COMPILE) $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_FLT -c -o $@ $<
+	$(COMPILE) $(PRINTF_FLT_CFLAGS) -DSCANF_LEVEL=SCANF_FLT -c -o $@ $<
 
 # vim: set ft=make:
