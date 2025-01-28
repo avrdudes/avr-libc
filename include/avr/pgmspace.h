@@ -1328,7 +1328,7 @@ extern void *memcpy_P(void *, const void *, size_t);
 extern void *memmem_P(const void *, size_t, const void *, size_t) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
-    \fn const void +memrchr_P(const void *src, int val, size_t len)
+    \fn const void *memrchr_P(const void *src, int val, size_t len)
 
     The memrchr_P() function is like the memchr_P() function, except
     that it searches backwards from the end of the \p len bytes pointed
