@@ -49,6 +49,11 @@
 
 _U(strlen_PF):
 
+#ifndef __AVR_HAVE_ELPM__
+	X_movw	src_b2, src_b0
+	XJMP	_U(__strlen_P)
+#else /* Have ELPM */
+
 	LPM_R0_ZPLUS_INIT src_b2
 	X_movw	ZL, src_b0
 
@@ -67,10 +72,9 @@ _U(strlen_PF):
 	X_movw	src_b2, src_b0	; size_t is 16 bits
 	LPM_R0_ZPLUS_FINI
 	ret
+#endif /* Have ELPM */
 
-.L_strlen_PF_end:
-
-	.size	_U(strlen_PF), .L_strlen_PF_end - _U(strlen_PF)
+	.size	_U(strlen_PF), . - _U(strlen_PF)
 
 #endif /* not __DOXYGEN__ */
 
