@@ -54,13 +54,7 @@ ENTRY	__ltoa_ncheck
 
     ; radix == 10 && val < 0: sign = '-' and val = -val
 	ldi	sign, '-'
-	com	val_hhi
-	com	val_hlo
-	com	val_hi
-	neg	val_lo
-	sbci	val_hi, -1
-	sbci	val_hlo, -1
-	sbci	val_hhi, -1
+	XCALL	_U(__negsi2)
 1:	XJMP	_U(__ultoa_common)
 
 ENDFUNC
