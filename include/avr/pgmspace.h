@@ -1658,7 +1658,7 @@ extern char *strtok_rP(char *__s, const char * __delim, char **__last);
     \param s A far pointer to the string in flash
 
     \returns The strlen_PF() function returns the number of characters in
-    \e s. The contents of RAMPZ SFR are undefined when the function returns. */
+    \e s. */
 extern size_t strlen_PF(uint_farptr_t src) __ATTR_CONST__; /* program memory can't change */
 
 /** \ingroup avr_pgmspace
@@ -1671,10 +1671,9 @@ extern size_t strlen_PF(uint_farptr_t src) __ATTR_CONST__; /* program memory can
     \param s A far pointer to the string in Flash
     \param len The maximum number of length to return
 
-    \returns The strnlen_PF function returns strlen_P(\e s), if that is less
+    \returns The strnlen_PF function returns strlen_PF(\e s), if that is less
     than \e len, or \e len if there is no '\\0' character among the first \e
-    len characters pointed to by \e s. The contents of RAMPZ SFR are
-    undefined when the function returns. */
+    len characters pointed to by \e s. */
 extern size_t strnlen_PF(uint_farptr_t src, size_t len) __ATTR_CONST__; /* program memory can't change */
 
 /** \ingroup avr_pgmspace
@@ -1688,8 +1687,7 @@ extern size_t strnlen_PF(uint_farptr_t src, size_t len) __ATTR_CONST__; /* progr
     \param src A far pointer to the origin of data in flash memory
     \param n The number of bytes to be copied
 
-    \returns The memcpy_PF() function returns a pointer to \e dst. The contents
-    of RAMPZ SFR are undefined when the function returns. */
+    \returns The memcpy_PF() function returns a pointer to \e dst. */
 extern void *memcpy_PF(void *dest, uint_farptr_t src, size_t len);
 
 /** \ingroup avr_pgmspace
@@ -1703,8 +1701,7 @@ extern void *memcpy_PF(void *dest, uint_farptr_t src, size_t len);
     \param src A far pointer to the source string in Flash
 
     \returns The strcpy_PF() function returns a pointer to the destination
-    string \e dst. The contents of RAMPZ SFR are undefined when the function
-    returns. */
+    string \e dst. */
 extern char *strcpy_PF(char *dest, uint_farptr_t src);
 
 /** \ingroup avr_pgmspace
@@ -1723,8 +1720,7 @@ extern char *strcpy_PF(char *dest, uint_farptr_t src);
     \param n The maximum number of bytes to copy
 
     \returns The strncpy_PF() function returns a pointer to the destination
-    string \e dst. The contents of RAMPZ SFR are undefined when the function
-    returns. */
+    string \e dst. */
 extern char *strncpy_PF(char *dest, uint_farptr_t src, size_t len);
 
 /** \ingroup avr_pgmspace
@@ -1739,8 +1735,7 @@ extern char *strncpy_PF(char *dest, uint_farptr_t src, size_t len);
     \param src A far pointer to the string to be appended in Flash
 
     \returns The strcat_PF() function returns a pointer to the resulting
-    string \e dst. The contents of RAMPZ SFR are undefined when the function
-    returns */
+    string \e dst. */
 extern char *strcat_PF(char *dest, uint_farptr_t src);
 
 /** \ingroup avr_pgmspace
@@ -1760,8 +1755,7 @@ extern char *strcat_PF(char *dest, uint_farptr_t src);
     \param n The total number of bytes allocated to the destination string
 
     \returns The strlcat_PF() function returns strlen(\e src) + MIN(\e n,
-    strlen(initial \e dst)).  If retval >= \e n, truncation occurred. The
-    contents of RAMPZ SFR are undefined when the function returns. */
+    strlen(initial \e dst)).  If retval >= \e n, truncation occurred. */
 extern size_t strlcat_PF(char *dst, uint_farptr_t src, size_t siz);
 
 /** \ingroup avr_pgmspace
@@ -1777,8 +1771,7 @@ extern size_t strlcat_PF(char *dst, uint_farptr_t src, size_t siz);
     \param n The maximum number of bytes to append
 
     \returns The strncat_PF() function returns a pointer to the resulting
-    string \e dst. The contents of RAMPZ SFR are undefined when the function
-    returns. */
+    string \e dst. */
 extern char *strncat_PF(char *dest, uint_farptr_t src, size_t len);
 
 /** \ingroup avr_pgmspace
@@ -1793,8 +1786,7 @@ extern char *strncat_PF(char *dest, uint_farptr_t src, size_t len);
 
     \returns The strcmp_PF() function returns an integer less than, equal to,
     or greater than zero if \e s1 is found, respectively, to be less than, to
-    match, or be greater than \e s2. The contents of RAMPZ SFR are undefined
-    when the function returns. */
+    match, or be greater than \e s2. */
 extern int strcmp_PF(const char *s1, uint_farptr_t s2) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
@@ -1810,8 +1802,7 @@ extern int strcmp_PF(const char *s1, uint_farptr_t s2) __ATTR_PURE__;
 
     \returns The strncmp_PF() function returns an integer less than, equal
     to, or greater than zero if \e s1 (or the first \e n bytes thereof) is found,
-    respectively, to be less than, to match, or be greater than \e s2. The
-    contents of RAMPZ SFR are undefined when the function returns. */
+    respectively, to be less than, to match, or be greater than \e s2. */
 extern int strncmp_PF(const char *s1, uint_farptr_t s2, size_t n) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
@@ -1826,8 +1817,7 @@ extern int strncmp_PF(const char *s1, uint_farptr_t s2, size_t n) __ATTR_PURE__;
 
     \returns The strcasecmp_PF() function returns an integer less than, equal
     to, or greater than zero if \e s1 is found, respectively, to be less than, to
-    match, or be greater than \e s2. The contents of RAMPZ SFR are undefined
-    when the function returns. */
+    match, or be greater than \e s2. */
 extern int strcasecmp_PF(const char *s1, uint_farptr_t s2) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
@@ -1844,8 +1834,7 @@ extern int strcasecmp_PF(const char *s1, uint_farptr_t s2) __ATTR_PURE__;
 
     \returns The strncasecmp_PF() function returns an integer less than, equal
     to, or greater than zero if \e s1 (or the first \e n bytes thereof) is found,
-    respectively, to be less than, to match, or be greater than \e s2. The
-    contents of RAMPZ SFR are undefined when the function returns.  */
+    respectively, to be less than, to match, or be greater than \e s2. */
 extern int strncasecmp_PF(const char *s1, uint_farptr_t s2, size_t n) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
@@ -1877,8 +1866,7 @@ extern uint_farptr_t strchr_PF(uint_farptr_t, int __val) __ATTR_CONST__;
 
     \returns The strstr_PF() function returns a pointer to the beginning of the
     substring, or NULL if the substring is not found.
-    If \c s2 points to a string of zero length, the function returns \c s1. The
-    contents of RAMPZ SFR are undefined when the function returns. */
+    If \c s2 points to a string of zero length, the function returns \c s1. */
 extern char *strstr_PF(const char *s1, uint_farptr_t s2);
 
 /** \ingroup avr_pgmspace
@@ -1889,8 +1877,7 @@ extern char *strstr_PF(const char *s1, uint_farptr_t s2);
     copied. Always NULL terminates (unless siz == 0).
 
     \returns The strlcpy_PF() function returns strlen(src). If retval >= siz,
-    truncation occurred.  The contents of RAMPZ SFR are undefined when the
-    function returns. */
+    truncation occurred.  */
 extern size_t strlcpy_PF(char *dst, uint_farptr_t src, size_t siz);
 
 /** \ingroup avr_pgmspace
