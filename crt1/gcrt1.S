@@ -55,6 +55,15 @@
 #endif
 #endif /* _VECTOR_SIZE */
 
+;; Devices that support a CVT (Compact Vector Table) have only 4 vectors.
+;; This is a build variant for crt<mcu>-cvt.o realized by Device.am.
+#ifdef USE_COMPACT_VECTOR_TABLE
+#undef  _VECTORS_SIZE
+#define _VECTORS_SIZE (4 * _VECTOR_SIZE)
+;; Pull in code from the device lib to set CPUINT_CTRLA.CPUINT_CVT in .init3.
+.global __do_cvt_init
+#endif /* Use Compact Vector Table */
+
 	.macro	vector name
 	.if (. - __vectors < _VECTORS_SIZE)
 	.weak	\name

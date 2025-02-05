@@ -568,6 +568,37 @@ dnl Same replacements as performed by mlib-gen.py::to_ident().
 )
 
 
+dnl Some devices support a compact vector table (CVT), which requires
+dnl its own crt<mcu>-cvt.o.  avr-gcc supports -mcvt since v15, which
+dnl makes using crt<mcu>-cvt.o more convenient.
+AC_DEFUN(
+  CHECK_AVR_CVT,
+  [
+    if test "x${MULTIDIR_$1}" != "x"
+    then
+      old_CFLAGS=${CFLAGS}
+      CFLAGS="-mmcu=$1 -I${srcdir}/include"
+      AC_MSG_CHECKING(if $1 supports a compact vector table)
+      AC_COMPILE_IFELSE(
+        [AC_LANG_SOURCE([
+	  #include <avr/io.h>
+	  #ifndef CPUINT_CVT_bm
+	  int a[-1];
+	  #endif
+	  ],[])],
+          [has_$1_cvt=yes],
+          [has_$1_cvt=no]
+        )
+      AC_MSG_RESULT([${has_$1_cvt}])
+    else
+      has_$1_cvt=no
+    fi
+    CFLAGS=${old_CFLAGS}
+    AM_CONDITIONAL(HAS_$1_CVT, test "x${has_$1_cvt}" = "xyes")
+  ]
+)
+
+
 dnl Check whether options like -mdouble=64 act as a multilib selector,
 dnl i.e. $CC will mention it like @mdouble64 with $CC -print-multi-lib.
 dnl If so, set DIR_$2=$3 and DIR_$2=<empty>, otherwise.  $3 is the

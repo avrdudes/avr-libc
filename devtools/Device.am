@@ -34,17 +34,21 @@ if HAS_GCC_5_1
 # avr-gcc 5.1.0 expects crt file as crt1.o and 
 # device library in dev directory
 AVR_TARGET_CRT      = crt1.o
+AVR_TARGET_CVT      = crt1-cvt.o
 AVR_INSTALL_DIR     = dev/<<dev>>
 else
 # avr-gcc > 5.1.0 expects crt file as crt<device name>.o and
 # device library in multi-lib directory itself
 AVR_TARGET_CRT      = crt<<dev>>.o
+AVR_TARGET_CVT      = crt<<dev>>-cvt.o
 AVR_INSTALL_DIR     = $(MULTIDIR_<<dev>>)
 endif
 else
 AVR_TARGET_CRT      = <<crt>>
+AVR_TARGET_CVT      = <<crt>>-cvt
 AVR_INSTALL_DIR     = $(MULTIDIR_<<dev>>)
 endif
+
 AVR_TARGET_DEFS     = <<crt_defs>>
 AVR_TARGET_CFLAGS   = <<crt_cflags>>
 AVR_TARGET_ASFLAGS  = <<crt_asflags>>
@@ -72,8 +76,15 @@ __install_dir = $(prefix)/avr/lib/$(AVR_INSTALL_DIR)
 avrdir = $(__install_dir)
 avrlibdir = $(__install_dir)
 
-noinst_LIBRARIES = libcrt.a
 nodist_libcrt_a_SOURCES = gcrt1.S
+nodist_libcvt_a_SOURCES =
+
+if HAS_<<dev>>_CVT
+noinst_LIBRARIES = libcrt.a libcvt.a
+libcvt_a_LIBADD = gcrt1-cvt.o
+else
+noinst_LIBRARIES = libcrt.a
+endif
 
 if HAS_DEV_LIB
 if HAS_GCC_5_1
@@ -94,6 +105,19 @@ $(AVR_TARGET_CRT): gcrt1.o
 	rm -f $@
 	ln $< $@ || cp $< $@
 
+if HAS_<<dev>>_CVT
+cvtdir = $(__install_dir)
+cvtlibdir = $(__install_dir)
+cvt_DATA = $(AVR_TARGET_CVT)
+
+gcrt1-cvt.o: gcrt1.S
+	$(COMPILE) $(AM_CCASFLAGS) -c -o $@ $< -DUSE_COMPACT_VECTOR_TABLE
+
+$(AVR_TARGET_CVT): gcrt1-cvt.o
+	rm -f $@
+	ln $< $@ || cp $< $@
+endif
+
 ## If -mdouble=32/64 resp. -mlong-double=32/64 is mentioned in
 ## avr-gcc -print-multi-lib -- which means that there is some multilib
 ## variant that needs the respective option -- then just copy
@@ -102,28 +126,44 @@ $(AVR_TARGET_CRT): gcrt1.o
 if HAS_MULTIOPT_double64
 avrD64dir = $(avrdir)/$(DIR_double64)
 avrD64libdir = $(avrlibdir)/$(DIR_double64)
+if HAS_<<dev>>_CVT
+avrD64_DATA = $(AVR_TARGET_CRT) $(AVR_TARGET_CVT)
+else
 avrD64_DATA = $(AVR_TARGET_CRT)
+endif
 avrD64_LIBRARIES = lib<<dev>>.a
 endif
 
 if HAS_MULTIOPT_double32
 avrD32dir = $(avrdir)/$(DIR_double32)
 avrD32libdir = $(avrlibdir)/$(DIR_double32)
+if HAS_<<dev>>_CVT
+avrD32_DATA = $(AVR_TARGET_CRT) $(AVR_TARGET_CVT)
+else
 avrD32_DATA = $(AVR_TARGET_CRT)
+endif
 avrD32_LIBRARIES = lib<<dev>>.a
 endif
 
 if HAS_MULTIOPT_long_double64
 avrL64dir = $(avrdir)/$(DIR_long_double64)
 avrL64libdir = $(avrlibdir)/$(DIR_long_double64)
+if HAS_<<dev>>_CVT
+avrL64_DATA = $(AVR_TARGET_CRT) $(AVR_TARGET_CVT)
+else
 avrL64_DATA = $(AVR_TARGET_CRT)
+endif
 avrL64_LIBRARIES = lib<<dev>>.a
 endif
 
 if HAS_MULTIOPT_long_double32
 avrL32dir = $(avrdir)/$(DIR_long_double32)
 avrL32libdir = $(avrlibdir)/$(DIR_long_double32)
+if HAS_<<dev>>_CVT
+avrL32_DATA = $(AVR_TARGET_CRT) $(AVR_TARGET_CVT)
+else
 avrL32_DATA = $(AVR_TARGET_CRT)
+endif
 avrL32_LIBRARIES = lib<<dev>>.a
 endif
 

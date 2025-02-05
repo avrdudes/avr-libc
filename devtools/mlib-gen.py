@@ -425,7 +425,8 @@ def make_lib_tree():
         makedir_avr_devices_device(d)
 
 # devices.m4 will be lines of:
-check_avr_device = "CHECK_AVR_DEVICE(%s)\n"
+devices_m4 = ("CHECK_AVR_DEVICE(%s)\n",
+              "CHECK_AVR_CVT(%s)\n")
 
 # multilib.m4 will be lines of:
 check_multi_variant = "CHECK_MULTI_VARIANT([%s], [%s])\n"
@@ -441,8 +442,9 @@ def make_m4():
 
     Info ("Writing devices.m4...")
     with open ("devices.m4", "w") as f:
-        for device in devices:
-            f.write (check_avr_device % device.mcu)
+        for line in devices_m4:
+            for device in devices:
+                f.write (line % device.mcu)
 
     Info ("Writing devlist.m4...")
     with open ("devlist.m4", "w") as f:

@@ -54,6 +54,7 @@ eeprom_asm_sources = \
 dev_c_sources =
 
 dev_asm_sources = \
+	cvt_init.S \
 	flmap_init.S \
 	ccp_write_spm.S \
 	ccp_write.S

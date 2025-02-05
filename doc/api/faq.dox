@@ -41,6 +41,7 @@
   - \ref faq_reentrant
   - \ref faq_spman
   - \ref faq_intbits
+  - \ref faq_cvt
 
 - <b>C/C++</b>
   - \ref faq_cplusplus
@@ -1256,6 +1257,58 @@ simply use
 \code
 TIFR = _BV(TOV0);
 \endcode
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_cvt How to use a Compact Vector Table?
+
+Some devices support a Compact Vector Table:
+
+- Devices from the 0-series, 1-series, 2-series
+- AVR16, AVR32, AVR64, AVR128 devices
+
+A CVT consists of only four vectors: 0=Reset, 1=NMI, 2=Prio1 IRQ, 3=Prio0 IRQs.
+The easiest way is to link and compile with
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"
+   ><code>-mcvt</code></a>
+which is supported since avr-gcc v15.  This will link the
+<code>crt<i>mcu</i>-cvt.o</code> variant of the startup code
+that provides a CVT and activates it by setting the
+<code>CPUINT_CTRLA.CPUINT_CVT</code> bit.  A C code will look something like:
+\code
+#include <avr/interrupt.h>
+
+ISR (__vector_2)
+{
+    /* Code for Prio1 IRQ. */
+}
+
+ISR_N (3)
+static void prio0_isr (void)
+{
+    /* code */
+}
+\endcode
+
+When you are using an older compiler but at least AVR-LibC v2.3,
+you can link with <tt>-nostartfiles <i>path</i>/crt<i>mcu</i>-cvt.o</tt>
+where:
+- <tt><i>mcu</i></tt> is the name of the device like <tt>attiny202</tt> for
+ATtiny202.
+- <tt><i>path</i></tt> is of the form
+<tt><i>prefix</i>/avr/lib/<i>mlib</i></tt> where
+  - <tt><i>prefix</i></tt> is the install path
+  - <tt><i>mlib</i></tt> is the multilib path that can be inferred
+  with <tt>$(avr-gcc -mmcu=<i>mcu</i> -print-multi-directory)</tt> like
+  <tt>avrxmega3/short-calls</tt> for <tt>-mmcu=attiny202</tt>.
+
+When you are using AVR-LibC older than v2.3, then you will have to build
+<tt>crt<i>mcu</i>-cvt.o</tt> yourself from the current
+<a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
+   ><tt>gcrt1.S</tt></a>
+source with <tt>-D USE_COMPACT_VECTOR_TABLE</tt>, and you have to activate
+the CVT by hand (or you can implement <tt>__do_cvt_init</tt> as, say,
+a static constructor or as a naked function in section <tt>.init3</tt>).
 
 <small>Back to \ref faq_index.</small>
 
