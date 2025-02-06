@@ -1381,6 +1381,32 @@ A .xbn script is for linking with -N flag (mix text and data on same page).
 
 \section faq_binarydata How to add a raw binary image to linker output?
 
+Before answering this question, lets mention the <tt>#embed</tt>
+directive introduced in C23.  While <tt>#embed</tt> doesn't strictly
+conform to the requirement of the question, it is so much more convenient
+that you still may want to use it.  <tt>#embed</tt> embeds the contents
+of a file into a compilation unit. Here is an example:
+\code
+#include <stdio.h>
+#include <avr/pgmspace.h>
+
+static const char foo_c[] PROGMEM =
+{
+#embed "foo.c"
+    // Append \0 so that foo_c becomes a proper C string
+    // (assuming foo.c is a text file).
+    , '\0'
+};
+
+int main ()
+{
+    printf ("== foo.c has %d bytes ==\n%S\n",
+            (int) sizeof (foo_c) - 1, foo_c);
+}
+\endcode
+
+Alternatively, GNU Binutils can be used.
+
 The GNU linker <tt>avr-ld</tt> cannot handle binary data
 directly. However, there's a companion tool called
 <tt>avr-objcopy</tt>. This is already known from the output side: it's
