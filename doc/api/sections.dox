@@ -598,7 +598,7 @@ empty ones, that are valid in a section name.
     <td>AVR-LibC
   </tr>
   <tr>
-    <td rowspan="2"><tt>.init3</tt>
+    <td><tt>.init3</tt>
     <td>Initializes the <code>NVMCTRLB.FLMAP</code> bit-field on devices that
       have it, except when
       <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
@@ -607,6 +607,7 @@ empty ones, that are valid in a section name.
     <td>\c __do_flmap_init
   </tr>
   <tr>
+    <td><tt>.init3</tt>
     <td>Sets the \c CPUINT_CTRLA.CPUINT_CVT bit provided a compact
       vector table is in effect
       (<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"

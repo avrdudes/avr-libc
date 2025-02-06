@@ -1381,10 +1381,10 @@ A .xbn script is for linking with -N flag (mix text and data on same page).
 
 \section faq_binarydata How to add a raw binary image to linker output?
 
-Before answering this question, lets mention the <tt>#embed</tt>
-directive introduced in C23.  While <tt>#embed</tt> doesn't strictly
+Before answering this question, lets mention the <tt>\#embed</tt>
+directive introduced in C23.  While <tt>\#embed</tt> doesn't strictly
 conform to the requirement of the question, it is so much more convenient
-that you still may want to use it.  <tt>#embed</tt> embeds the contents
+that you still may want to use it.  <tt>\#embed</tt> embeds the contents
 of a file into a compilation unit. Here is an example:
 \code
 #include <stdio.h>
