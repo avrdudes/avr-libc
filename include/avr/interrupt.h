@@ -164,11 +164,7 @@
     Valid attributes are #ISR_BLOCK, #ISR_NOBLOCK, #ISR_NAKED,
     #ISR_FLATTEN, #ISR_NOICF and #ISR_NOGCCISR.
 
-    #ISR_N is only supported when the compiler supports the
-    <tt>signal(n)</tt> attribute, i.e. the \c signal attribute with arguments.
-    This is the case for
-    <a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>
-    and up.
+\since AVR-LibC v2.3, <a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>
 */
 #  define ISR_N(vector_num, [attributes])
 #else  /* real code */
