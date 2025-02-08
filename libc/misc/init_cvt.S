@@ -11,7 +11,7 @@
 
 /* Referenced by gcrt1.S.  This function must not be called
    because it is naked.  */
-ENTRY   _U(__do_cvt_init)
+ENTRY   _U(__init_cvt)
 
 /* Definitions in avr/io*.h are neglecting assembly, so...  */
 #ifndef CCP_IOREG_gc

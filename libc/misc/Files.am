@@ -55,7 +55,7 @@ dev_c_sources =
 
 dev_asm_sources = \
 	init_sp.S \
-	cvt_init.S \
+	init_cvt.S \
 	flmap_init.S \
 	call_main.S \
 	ccp_write_spm.S \

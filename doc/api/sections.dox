@@ -609,7 +609,7 @@ empty ones, that are valid in a section name.
       <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
 	 ><code>-mrodata-in-ram</code></a> is specified
     <td>AVR-LibC
-    <td>\c __do_flmap_init
+    <td>\c __do_flmap_init<sup>v2.2</sup>
   </tr>
   <tr>
     <td><tt>.init3</tt>
@@ -618,7 +618,7 @@ empty ones, that are valid in a section name.
       (<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"
 	 ><code>-mcvt</code></a>).
     <td>AVR-LibC
-    <td>\c __do_cvt_init
+    <td>\c __init_cvt<sup>v2.3</sup>
   </tr>
   <tr>
     <td><tt>.init4</tt>

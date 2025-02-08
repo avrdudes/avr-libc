@@ -61,7 +61,7 @@
 #undef  _VECTORS_SIZE
 #define _VECTORS_SIZE (4 * _VECTOR_SIZE)
 ;; Pull in code from the device lib to set CPUINT_CTRLA.CPUINT_CVT in .init3.
-.global __do_cvt_init
+.global __init_cvt
 #endif /* Use Compact Vector Table */
 
 	.macro	vector name
