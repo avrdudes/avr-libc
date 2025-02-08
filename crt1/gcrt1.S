@@ -309,13 +309,9 @@ __do_copy_data:
 	.set	__stack, RAMEND
 #endif /* !__AVR_ASM_ONLY__ */
 
-	.section .init9,"ax",@progbits
-#ifdef __AVR_ASM_ONLY__
-	XJMP	main
-#else	/* !__AVR_ASM_ONLY__ */
-	XCALL	main
-	XJMP	exit
-#endif	/* __AVR_ASM_ONLY__ */
+	;; Pull in __call_main from the device lib.
+	.global __call_main
+
 ;	.endfunc
 
     .section .note.gnu.avr.deviceinfo, "", @note

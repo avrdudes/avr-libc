@@ -645,7 +645,7 @@ empty ones, that are valid in a section name.
     <td><tt>.init7</tt>
     <td>Unused
     <td>---
-    <td rowspan="3">
+    <td rowspan="2">
   </tr>
   <tr>
     <td><tt>.init8</tt>
@@ -656,6 +656,7 @@ empty ones, that are valid in a section name.
     <td><tt>.init9</tt>
     <td>Calls \c main and then jumps to \c #exit
     <td>AVR-LibC
+    <td>\c __call_main<sup>3</sup>
   </tr>
   </table>
 
