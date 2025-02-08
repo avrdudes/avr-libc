@@ -584,8 +584,6 @@ empty ones, that are valid in a section name.
     <td><tt>.init2</tt>
     <td>
       - Clears \ref zero_reg "\c __zero_reg__"
-      - Initializes the stack pointer to the value of weak symbol \c __stack,
-      which has a default value of \c RAMEND as defined in <code>avr/io.h</code>
       - Initializes
       <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
 	 ><code>EIND</code></a> to <code>hh8(pm(__vectors))</code>
@@ -595,6 +593,14 @@ empty ones, that are valid in a section name.
 	 ><code>RAMPX</code>, <code>RAMPY</code>, <code>RAMPZ</code>
 	and <code>RAMPD</code></a> on devices that have all of them
     <td>AVR-LibC
+  </tr>
+  <tr>
+    <td><tt>.init2</tt>
+    <td>
+      Initializes the stack pointer to the value of weak symbol \c __stack,
+      which has a default value of \c RAMEND as defined in <code>avr/io.h</code>
+    <td>AVR-LibC
+    <td>\c __init_sp<sup>3</sup>
   </tr>
   <tr>
     <td><tt>.init3</tt>
@@ -670,6 +676,9 @@ empty ones, that are valid in a section name.
   -# The code is provided by
   <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
      ><tt>gcrt1.S</tt></a>.
+  -# Since AVR-LibC v2.3, the startup code pulls in the respective code
+  from <tt>lib<i>mcu</i>.a</tt>. Prior to that, the code was located
+  in <tt>gcrt1.S</tt>.
 </dd>
 <dt>\anchor sec_dot_fini The <code>.fini<em>N</em></code> Sections</dt>
 <dd>
