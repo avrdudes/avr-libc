@@ -1737,18 +1737,27 @@ static inline size_t strlen_P(const char * s);
 #else /* !DOXYGEN */
 
 #ifdef __AVR_TINY__
-#define __strlen_P strlen
+/* PR71948: AVR_TINY may use open coded C/C++ to read from progmem.  */
+#define strlen_P(x) strlen(x)
 extern size_t strlen (const char*);
 #else
-extern size_t __strlen_P(const char *) __ATTR_CONST__;  /* internal helper function */
-#endif
 
-static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s);
-size_t strlen_P(const char *__s)
+static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s)
 {
-  return __builtin_constant_p(__builtin_strlen(__s))
-     ? __builtin_strlen(__s) : __strlen_P(__s);
+  if (__builtin_constant_p (__builtin_strlen (__s)))
+    {
+      return __builtin_strlen (__s);
+    }
+  else
+    {
+      register const char *__r24 __asm("24") = __s;
+      register size_t __res __asm("24");
+      __asm ("%~call __strlen_P" : "=r" (__res) : "r" (__r24)
+             : "0", "30", "31");
+      return __res;
+    }
 }
+#endif
 #endif /* DOXYGEN */
 
 #ifdef __cplusplus
