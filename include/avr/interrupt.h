@@ -323,11 +323,11 @@
 
     \code #include <avr/interrupt.h> \endcode
 
-    This is a vector which is aliased to __vector_default, the vector
+    This is a vector which is aliased to \c __vector_default, the vector
     executed when an IRQ fires with no accompanying ISR handler. This
     may be used along with the ISR() macro to create a catch-all for
-    undefined but used ISRs for debugging purposes.
-*/
+    undefined but used ISRs for debugging purposes.  It cannot be used
+    with #ISR_N since there is no associated interrupt number.  */
 #  define BADISR_vect
 #else  /* !DOXYGEN */
 #  define BADISR_vect __vector_default

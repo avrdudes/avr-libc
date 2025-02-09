@@ -279,9 +279,9 @@ that, while possibly being usable as an interrupt function, is not
 actually wired into the interrupt vector table.  The compiler will
 generate a warning if it detects a suspiciously looking name of an
 ISR() function (i.e. one that after macro replacement does not
-start with <tt>"__vector_"</tt>).
+start with <tt>"__vector"</tt>).
 
-See also \ref faq_isr_names in the FAQ for how find all the IRQ names for
-a specific device.
+See also \ref faq_isr_names in the FAQ for how find all the
+vector names for a specific device.
 
 */

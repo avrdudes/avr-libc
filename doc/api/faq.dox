@@ -1946,7 +1946,13 @@ the \c __need_size_t macro is defined in line 84 of that file.
 
 \section faq_isr_names What ISR names are available for my device?
 
-One way to find the possible #ISR names is to pre-process a small
+The HTML documentation comes with an exhaustive
+\ref avr_signames "table of vector names". In order to get a vector
+number for the \c ISR_N macro, just append \c _num to the vector
+name as used with \c ISR.  For example use \c ISR_N(ADC0_vect_num)
+instead of ISR(ADC0_vect).
+
+One way to find the available vector names is to pre-process a small
 file, and to grep for possible names, like in:
 
 \verbatim
