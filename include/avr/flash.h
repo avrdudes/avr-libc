@@ -1248,8 +1248,9 @@ int strcmp_F (const char *__s, const __flash char *__f)
 
 
 /* strcpy_F is common so we model strcpy_P's GPR footprint. */
-static __ATTR_ALWAYS_INLINE__ const char*
-strcpy_F (char *__s, const __flash char *__f)
+extern const char* strcpy_F (char *__s, const __flash char *__f) __asm("strcpy_P");
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+const char* strcpy_F (char *__s, const __flash char *__f)
 {
   register char *__r24 __asm("24") = __s;
   register const __flash char *__r22 __asm("22") = __f;
@@ -1260,24 +1261,21 @@ strcpy_F (char *__s, const __flash char *__f)
 
 
 /* strlen_F is common so we model strlen_P's GPR footprint. */
-static __ATTR_ALWAYS_INLINE__ size_t
-__strlen_F (const __flash char *__s)
-{
-  register const __flash char *__r24 __asm("24") = __s;
-  register size_t __res __asm("24");
-  __asm ("%~call strlen_P" : "=r" (__res) : "r" (__r24)
-         : "0", "30", "31");
-  return __res;
-}
-
-static __ATTR_ALWAYS_INLINE__ size_t
-strlen_F (const __flash char *__s)
+extern size_t strlen_F (const __flash char *__s) __asm("strlen_P");
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+size_t strlen_F (const __flash char *__s)
 {
 #ifdef __BUILTIN_AVR_STRLEN_FLASH
   if (__builtin_constant_p (__builtin_avr_strlen_flash (__s)))
     return __builtin_avr_strlen_flash (__s);
 #endif
-  return __strlen_F (__s);
+  {
+    register const __flash char *__r24 __asm("24") = __s;
+    register size_t __res __asm("24");
+    __asm ("%~call strlen_P" : "=r" (__res) : "r" (__r24)
+           : "0", "30", "31");
+    return __res;
+  }
 }
 
 
