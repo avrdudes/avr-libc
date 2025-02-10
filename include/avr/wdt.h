@@ -100,9 +100,7 @@
 
 #ifndef __DOXYGEN__
 
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
+#include <bits/attribs.h>
 
 #if defined(WDP3)
 # define _WD_PS3_MASK       _BV(WDP3)

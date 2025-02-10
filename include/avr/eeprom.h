@@ -92,13 +92,7 @@
 extern "C" {
 #endif
 
-#ifndef	__ATTR_PURE__
-# ifdef	 __DOXYGEN__
-#  define __ATTR_PURE__
-# else
-#  define __ATTR_PURE__  __attribute__((__pure__))
-# endif
-#endif
+#include <bits/attribs.h>
 
 /** \def EEMEM
     \ingroup avr_eeprom

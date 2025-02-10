@@ -690,6 +690,7 @@ AC_CONFIG_FILES([
 	include/Makefile
 	include/avr/Makefile
 	include/avr/builtins.h
+	include/bits/Makefile
 	include/compat/Makefile
 	include/util/Makefile
 	include/util/delay.h

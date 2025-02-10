@@ -35,12 +35,7 @@
 #define _UTIL_PARITY_H_
 
 #include <stdint.h>
-
-#ifndef __DOXYGEN__
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
-#endif /* !DOXYGEN */
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup util_parity <util/parity.h>: Parity bit generation

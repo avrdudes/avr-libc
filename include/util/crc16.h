@@ -37,12 +37,7 @@
 #define _UTIL_CRC16_H_
 
 #include <stdint.h>
-
-#ifndef __DOXYGEN__
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
-#endif /* ! DOXYGEN */
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup util_crc <util/crc16.h>: CRC Computations

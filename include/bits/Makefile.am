@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2005,2007  Joerg Wunsch
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,25 +29,6 @@
 # $Id$
 #
 
-avrdir = $(prefix)/avr/include
+avrdir = $(prefix)/include/bits
 avr_HEADERS = \
-    alloca.h \
-    assert.h \
-    ctype.h \
-    errno.h \
-    fcntl.h \
-    inttypes.h \
-    locale.h \
-    math.h \
-    setjmp.h \
-    signal.h \
-    stdfix-avrlibc.h \
-    stdint.h \
-    stdio.h \
-    stdlib.h \
-    string.h \
-    time.h \
-    unistd.h
-
-
-SUBDIRS = avr compat util sys bits
+    attribs.h

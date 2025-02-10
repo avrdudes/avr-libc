@@ -89,25 +89,11 @@
 #include <avr/io.h>
 
 #ifndef __DOXYGEN__
-#ifndef __ATTR_CONST__
-#define __ATTR_CONST__ __attribute__((__const__))
-#endif
 
-#ifndef __ATTR_PROGMEM__
-#define __ATTR_PROGMEM__ __attribute__((__progmem__))
-#endif
-
-#ifndef __ATTR_PURE__
-#define __ATTR_PURE__ __attribute__((__pure__))
-#endif
-
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
+#include <bits/attribs.h>
+#include <avr/lpm-elpm.h>
 
 #define PROGMEM __ATTR_PROGMEM__
-
-#include <avr/lpm-elpm.h>
 
 #endif	/* !__DOXYGEN__ */
 

@@ -114,9 +114,9 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN]; } jmp_buf[1];
     \endcode */
 
 #ifndef __DOXYGEN__
-#ifndef __ATTR_NORETURN__
-#define __ATTR_NORETURN__ __attribute__((__noreturn__))
-#endif
+
+#include <bits/attribs.h>
+
 #endif /* ! DOXYGEN */
 
 /** \ingroup setjmp

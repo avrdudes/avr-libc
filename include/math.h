@@ -151,15 +151,7 @@ extern "C" {
 /** \c long \c double infinity constant.	*/
 #define HUGE_VALL __builtin_huge_vall()
 
-#ifndef __DOXYGEN__
-#ifndef  __ATTR_CONST__
-# define __ATTR_CONST__ __attribute__((__const__))
-#endif
-
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
-#endif /* ! DOXYGEN */
+#include <bits/attribs.h>
 
 /** The cosf() function returns the cosine of \a x, measured in radians. */
 __ATTR_CONST__ extern float cosf (float x);

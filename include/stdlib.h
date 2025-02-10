@@ -84,33 +84,7 @@ typedef int (*__compar_fn_t)(const void *, const void *);
 
 #ifndef __DOXYGEN__
 
-#ifndef __ATTR_CONST__
-# define __ATTR_CONST__ __attribute__((__const__))
-#endif
-
-#ifndef __ATTR_MALLOC__
-# define __ATTR_MALLOC__ __attribute__((__malloc__))
-#endif
-
-#ifndef __ATTR_NORETURN__
-# define __ATTR_NORETURN__ __attribute__((__noreturn__))
-#endif
-
-#ifndef __ATTR_PURE__
-# define __ATTR_PURE__ __attribute__((__pure__))
-#endif
-
-#ifndef	__ATTR_GNU_INLINE__
-# ifdef  __GNUC_STDC_INLINE__
-#  define __ATTR_GNU_INLINE__   __attribute__((__gnu_inline__))
-# else
-#  define __ATTR_GNU_INLINE__
-# endif
-#endif
-
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
+#include <bits/attribs.h>
 
 #endif
 

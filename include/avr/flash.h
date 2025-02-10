@@ -1198,20 +1198,9 @@ static inline long double flashx_read_long_double (const __flashx long double *a
 
 #else /* !__DOXYGEN__ */
 
-#ifndef __ATTR_CONST__
-#define __ATTR_CONST__ __attribute__((__const__))
-#endif
-
-#ifndef __ATTR_PURE__
-#define __ATTR_PURE__ __attribute__((__pure__))
-#endif
-
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
-
 #define __need_size_t
 #include <stddef.h>
+#include <bits/attribs.h>
 
 #ifdef __FLASH
 

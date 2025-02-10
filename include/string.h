@@ -44,14 +44,8 @@
 #define	__need_NULL
 #define	__need_size_t
 #include <stddef.h>
+#include <bits/attribs.h>
 
-#ifndef __ATTR_PURE__
-#define __ATTR_PURE__ __attribute__((__pure__))
-#endif
-
-#ifndef __ATTR_CONST__
-# define __ATTR_CONST__	__attribute__((__const__))
-#endif
 #endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus

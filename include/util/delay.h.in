@@ -40,14 +40,11 @@
 #    define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
 #  endif
 
-#  ifndef __ATTR_ALWAYS_INLINE__
-#    define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#  endif
-
 #endif  /* __DOXYGEN__ */
 
 #include <stdint.h>
 #include <util/delay_basic.h>
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup util_delay <util/delay.h>: Convenience functions for busy-wait delay loops

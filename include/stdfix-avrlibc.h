@@ -44,9 +44,7 @@
 #warning please include <stdfix.h> directly rather than <stdfix-avrlibc.h>
 #endif /* _AVRGCC_STDFIX_H */
 
-#ifndef __ATTR_CONST__
-#define __ATTR_CONST__ __attribute__((__const__))
-#endif
+#include <bits/attribs.h>
 
 /* Room for AVR-LibC specific extensions */
 
