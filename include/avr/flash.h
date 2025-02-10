@@ -402,7 +402,7 @@ extern const __flash char * strchrnul_F(const __flash char *, int val);
     than, to match, or be greater than \p s2. A consequence of the
     ordering used by #strcmp_F is that if \p s1 is an initial substring
     of \p s2, then \p s1 is considered to be "less than" \p s2. */
-static inline int strcmp_F(const char *, const __flash char *);
+extern inline int strcmp_F(const char *, const __flash char *);
 
 /** \ingroup avr_flash
     \fn char *strcpy_F(char *dest, const __flash char *src)
@@ -1234,8 +1234,9 @@ extern char *strtok_F(char *, const __flash char * __delim) __asm("strtok_P");
 extern char *strtok_rF(char *, const __flash char * __delim, char **__last) __asm("strtok_rP");
 
 /* strcmp_F is common so we model strcmp_P's GPR footprint. */
-static __ATTR_ALWAYS_INLINE__ int
-strcmp_F (const char *__s, const __flash char *__f)
+extern int strcmp_F (const char*, const __flash char*) __asm ("strcmp_P");
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int strcmp_F (const char *__s, const __flash char *__f)
 {
   register const char *__r24 __asm("24") = __s;
   register const __flash char *__r22 __asm("22") = __f;
