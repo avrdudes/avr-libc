@@ -133,6 +133,20 @@ m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.64],
   [m4_foreach([_GCC_LANG], [C, C++, Fortran, Fortran 77],
      [m4_define([_AC_LANG_IO_PROGRAM(]_GCC_LANG[)], m4_defn([AC_LANG_PROGRAM(]_GCC_LANG[)]))])])
 
+# Add option to use LLVM tools
+AC_ARG_ENABLE([use-llvm],
+    [AS_HELP_STRING([--enable-use-llvm],
+        [Use LLVM tools for AS, AR, RANLIB, OBJDUMP, LD])],
+    [use_llvm=$enableval],
+    [use_llvm=no])
+
+if test "x$use_llvm" = "xyes"; then
+    : ${AR:=llvm-ar}
+    : ${AS:="llvm-mc"}
+    : ${LD:=lld}
+    : ${OBJDUMP:=llvm-objdump}
+    : ${RANLIB:=llvm-ranlib}
+fi
 
 # Checks for programs.
 
@@ -156,23 +170,28 @@ case "${CC}" in
    *) AC_MSG_ERROR(Wrong C compiler found; check the PATH!) ;;
 esac
 case "${AS}" in
-   *avr*as*) ;;
+    *llvm-mc*)
+        # We need to pass correct target flag for llvm-mc
+        AS_FLAGS="-arch=avr"
+        ;;
+    *avr*as*|*as*)
+        ;;
    *) AC_MSG_ERROR(Wrong assembler found; check the PATH!) ;;
 esac
 case "${LD}" in
-   *avr*ld*) ;;
+   *avr*ld*|*lld*) ;;
    *) AC_MSG_ERROR(Wrong linker found; check the PATH!) ;;
 esac
 case "${OBJDUMP}" in
-   *avr*objdump*) ;;
+   *avr*objdump*|*llvm*objdump*) ;;
    *) AC_MSG_ERROR(Wrong objdump found; check the PATH!) ;;
 esac
 case "${AR}" in
-   *avr*ar*) ;;
+   *avr*ar*|*llvm*ar*) ;;
    *) AC_MSG_ERROR(Wrong archiver found; check the PATH!) ;;
 esac
 case "${RANLIB}" in
-   *avr*ranlib*) ;;
+   *avr*ranlib*|*llvm*ranlib) ;;
    *) AC_MSG_ERROR(Wrong ranlib found; check the PATH!) ;;
 esac
 
