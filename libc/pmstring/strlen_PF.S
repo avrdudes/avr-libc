@@ -51,7 +51,7 @@ _U(strlen_PF):
 
 #ifndef __AVR_HAVE_ELPM__
 	X_movw	src_b2, src_b0
-	XJMP	_U(__strlen_P)
+	XJMP	_U(strlen_P)
 #else /* Have ELPM */
 
 	LPM_R0_ZPLUS_INIT src_b2

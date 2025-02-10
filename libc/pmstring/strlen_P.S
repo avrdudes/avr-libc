@@ -37,12 +37,12 @@
 #define src_hi r25
 #define src_lo r24
 
-; 11 words, (14 + __strlen_P(src) * 8) cycles
+; 11 words, (14 + strlen_P(src) * 8) cycles
 
 	ASSEMBLY_CLIB_SECTION
-	.global	_U(__strlen_P)
-	.type	_U(__strlen_P), @function
-_U(__strlen_P):
+	.global	_U(strlen_P)
+	.type	_U(strlen_P), @function
+_U(strlen_P):
 	X_movw	ZL, src_lo
 .L_strlen_P_loop:
 	X_lpm	r0, Z+
@@ -54,8 +54,8 @@ _U(__strlen_P):
 	add	src_lo, ZL
 	adc	src_hi, ZH
 	ret
-.L_strlen_P_end:
-	.size	_U(__strlen_P), .L_strlen_P_end - _U(__strlen_P)
+
+	.size	_U(strlen_P), . - _U(strlen_P)
 
 #endif /* not __DOXYGEN__ */
 

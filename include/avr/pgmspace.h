@@ -1714,12 +1714,6 @@ extern int memcmp_PF(const void *, uint_farptr_t, size_t) __ATTR_PURE__;
     pointer to a string in program space.
 
     \returns The strlen_P() function returns the number of characters in src.
-
-    \note strlen_P() is implemented as an inline function in the avr/pgmspace.h
-    header file, which will check if the length of the string is a constant
-    and known at compile time. If it is not known at compile time, the macro
-    will issue a call to __strlen_P() which will then calculate the length
-    of the string as normal.
 */
 static inline size_t strlen_P(const char * s);
 #else /* !DOXYGEN */
@@ -1733,7 +1727,8 @@ static inline size_t strlen_P(const char * s);
 
 #else
 
-static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s)
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+size_t strlen_P(const char *__s)
 {
   if (__builtin_constant_p (__builtin_strlen (__s)))
     {
@@ -1743,7 +1738,7 @@ static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s)
     {
       register const char *__r24 __asm("24") = __s;
       register size_t __res __asm("24");
-      __asm ("%~call __strlen_P" : "=r" (__res) : "r" (__r24)
+      __asm ("%~call strlen_P" : "=r" (__res) : "r" (__r24)
              : "0", "30", "31");
       return __res;
     }

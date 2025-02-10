@@ -1259,13 +1259,13 @@ strcpy_F (char *__s, const __flash char *__f)
 }
 
 
-/* strlen_F is common so we model __strlen_P's GPR footprint. */
+/* strlen_F is common so we model strlen_P's GPR footprint. */
 static __ATTR_ALWAYS_INLINE__ size_t
 __strlen_F (const __flash char *__s)
 {
   register const __flash char *__r24 __asm("24") = __s;
   register size_t __res __asm("24");
-  __asm ("%~call __strlen_P" : "=r" (__res) : "r" (__r24)
+  __asm ("%~call strlen_P" : "=r" (__res) : "r" (__r24)
          : "0", "30", "31");
   return __res;
 }
