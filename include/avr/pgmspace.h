@@ -1726,8 +1726,11 @@ static inline size_t strlen_P(const char * s);
 
 #ifdef __AVR_TINY__
 /* PR71948: AVR_TINY may use open coded C/C++ to read from progmem.  */
+#include <string.h>
+
 #define strlen_P(x) strlen(x)
-extern size_t strlen (const char*);
+#define strcpy_P(x, y) strcpy(x, y)
+
 #else
 
 static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s)
@@ -1745,13 +1748,6 @@ static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s)
       return __res;
     }
 }
-#endif
-
-#ifdef __AVR_TINY__
-/* PR71948: AVR_TINY may use open coded C/C++ to read from progmem.  */
-#define strcpy_P(x, y) strcpy(x, y)
-extern char* strcpy (char*, const char*);
-#else
 
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* strcpy_P(char *__x, const char *__z)
@@ -1761,7 +1757,7 @@ char* strcpy_P(char *__x, const char *__z)
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __ret;
 }
-#endif
+#endif /* AVR_TINY */
 
 #endif /* DOXYGEN */
 
