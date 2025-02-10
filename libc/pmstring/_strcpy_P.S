@@ -34,22 +34,19 @@
 
 #include "macros.inc"
 
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-
 	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcpy_P)
-	.type	_U(strcpy_P), @function
-_U(strcpy_P):
-	X_movw	ZL, src_lo
-	X_movw	XL, dest_lo
-	XJMP	_U(__strcpy_P)
-; return dest (unchanged)
+	.global	_U(__strcpy_P)
+	.type	_U(__strcpy_P), @function
+_U(__strcpy_P):
+.Loop:
+	X_lpm	r0, Z+
+	st	X+, r0
+	tst	r0
+	brne	.Loop
+	ret
 
-	.size	_U(strcpy_P), . - _U(strcpy_P)
+	.size	_U(__strcpy_P), . - _U(__strcpy_P)
 
-#endif /* not __DOXYGEN__ */
+#endif /* ! __DOXYGEN__ */
 
-#endif /* !defined(__AVR_TINY__) */
+#endif /* ! AVR_TINY */

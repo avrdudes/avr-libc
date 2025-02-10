@@ -1206,7 +1206,9 @@ extern int strcmp_P(const char *, const char *) __ATTR_PURE__;
 
     \returns The strcpy_P() function returns a pointer to the destination
     string dest. */
-extern char *strcpy_P(char *, const char *);
+#ifdef __DOXYGEN__
+extern inline char *strcpy_P(char *, const char *);
+#endif
 
 /** \ingroup avr_pgmspace
     \fn int strcasecmp_P(const char *s1, const char *s2)
@@ -1744,6 +1746,23 @@ static __ATTR_ALWAYS_INLINE__ size_t strlen_P(const char *__s)
     }
 }
 #endif
+
+#ifdef __AVR_TINY__
+/* PR71948: AVR_TINY may use open coded C/C++ to read from progmem.  */
+#define strcpy_P(x, y) strcpy(x, y)
+extern char* strcpy (char*, const char*);
+#else
+
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char* strcpy_P(char *__x, const char *__z)
+{
+  char *__ret = __x;
+  __asm volatile ("%~call __strcpy_P"
+                  : "+x" (__x), "+z" (__z) :: "0", "memory");
+  return __ret;
+}
+#endif
+
 #endif /* DOXYGEN */
 
 #ifdef __cplusplus
