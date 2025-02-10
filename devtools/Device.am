@@ -110,8 +110,8 @@ cvtdir = $(__install_dir)
 cvtlibdir = $(__install_dir)
 cvt_DATA = $(AVR_TARGET_CVT)
 
-gcrt1-cvt.o: gcrt1.S
-	$(COMPILE) $(AM_CCASFLAGS) -c -o $@ $< -DUSE_COMPACT_VECTOR_TABLE
+gcrt1-cvt.o: gcrt1.S gcrt1.o
+	$(CPPASCOMPILE) -c -o $@ $< -DUSE_COMPACT_VECTOR_TABLE
 
 $(AVR_TARGET_CVT): gcrt1-cvt.o
 	rm -f $@
