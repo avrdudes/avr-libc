@@ -31,6 +31,115 @@
 
 /* $Id$ */
 
+/* Introduction to the Startup Code
+   ================================
+
+   The startup-code has been designed to provide maximal flexibility,
+   and to reduce overhead when possible.  To that end, the startup code
+   is being stiched together by the linker from a multitude of parts.
+   A part is pulled in when the respective symbol is undefined.
+
+   Notice that when a part is not available for some reason, e.g. you
+   are linking with -nodefaultlibs, then the linker WILL NOT complain
+   about an undefined reference, since these symbols are usually
+   referenced like  .global __init_sp   or  -Wl,-u,__do_flmap_init.
+
+   The startup code is composed of the following parts:
+
+   - Code in this file.
+
+   - Code hosted by GCC's libgcc:
+       o  __do_copy_data          Initialize .[ro]data from flash    [1]
+       o  __do_clear_bss          Clear .bss                         [1]
+       o  __do_global_ctors       Run static constructors            [1]
+       o  __do_global_dtors       Run static destructors             [1]
+
+   - Code hosted by AVR-LibC's lib<mcu>.a
+       o  __init_sp               Initialize SP with symbol __stack  [2]
+       o  __init_cvt              Activate a Compact Vector Table    [3]
+       o  __do_flmap_init         Set FLMAP according to __flmap     [4]
+       o  __call_main             Call main() and jump to exit().    [5]
+
+   [1] The compiler will pull in that code only when it is needed.
+       See  https://gcc.gnu.org/PR18145
+   [2] Always[6] pulled in by the code below.  The user may satisfy the
+       symbol when SP is initialized by hardware, and SP=RAMEND is fine.
+   [3] Always[6] pulled in by the USE_COMPACT_VECTOR_TABLE variant.
+   [4] Pulled in by the compiler (the device-specs file actually) when
+       the code is compiled for a device with FLMAP (AVR64, AVR128)
+       and -mrodata-in-ram is NOT selected (the default).  This part of
+       the startup code is the most complicated of all:
+       - With -mrodata-in-ram, the avrxmega2/4 emulation is selected.
+       - With rodata in flash (default) the avrxmega2/4_flmap emulation
+         is selected.
+       The default linker script for the respective emulation defines
+       symbols to augment the __do_flmap_init code, for example it
+       selects a label to (not) skip the initialization of FLMAP.
+       The NVMCTRL_CTRLB.FLMAP selects which 32 KiB portion of the
+       program flash memory is visible in the RAM address space, and
+       can be chosen by defining symbol __flmap.
+          For more technical details see  https://sourceware.org/PR31124
+       https://gcc.gnu.org/PR112944  and also libc/misc/flmap.init.S
+       which implements __do_flmap_init.
+   [5] Always[6] pulled in by the code below.  Calls main() and then
+       jumps to exit().  With -mon-call-main, the compiler will put
+       main itself into .init9 any satisfy __call_main.
+   [6] When CRT_SELF_CONTAINED if off, the respective parts will be pulled in.
+       When CRT_SELF_CONTAINED is on, the code is inserted inline below.
+
+   Customizing the Startup Code using C Macros
+   ===========================================
+
+   CRT_SELF_CONTAINED
+      If defined, include code that otherwise will be outsourced to the
+      device library lib<mcu>.a.  This is a choice when you are building
+      the startup code on your own, without the burden of also having to
+      build the device library.  AVR-LibC doesn't use CRT_SELF_CONTAINED.
+
+      If not defined (default), outsourced code will be pulled in from
+      the device library lib<mcu>.a.  The compiler can pull in respective
+      parts of the startup code as needed.  When some part of the code
+      is not needed or desired, the respective symbol can be satisfied
+      by the compiler or the user:
+
+      Pulling in can be achieved by asm code like  .global <symbol>
+      or by means of linking with  -Wl,-u,<symbol>
+
+      Defining a symbol so the respective code is not pulled in can be
+      achieved by asm code like
+          .global <symbol>
+          <symbol> = 0
+      or by menas of linking with  -Wl,--defsym,<symbol>=0
+
+      The following parts are affected by CRT_SELF_CONTAINED:
+
+      - Initialize SP to the value of symbol __stack.
+        Section: .init2    Symbol: __init_sp
+
+      - Set bit CPUINT_CTRLA.CPUINT_CVT provided the build variant for a
+        compact vector table has been selected (USE_COMPACT_VECTOR_TABLE).
+        Section: .init3    Symbol: __init_cvt
+
+      - Call main() and jump to exit().
+        Section: .init9    Symbol: __call_main
+
+   USE_COMPACT_VECTOR_TABLE
+      Some devices support a CVT with only 4 entries: 0=Reset, 1=NMI,
+      2=Prio1 IRQ, 3=Prio0 IRQs.  This macro activates a build variant
+      with a CVT, and that adds code to .init3 which activates the CVT.
+
+   HAVE_LDSCRIPT_PR29741
+   HAVE_LDSCRIPT_PR31177
+      Defined if respective features from GNU Binutils are available.
+      You can:
+      - Goto https://sourceware.org/PR29741 and https://sourceware.org/PR31177
+        and find out whether your version of Binutils is supporting them.
+      - Reproduce how the toplevel configure.ac is determining them.
+      - Don't define them.  Drawback will be less precise diagnostics
+        from the linker when you are running out of RAM or Flash, and
+        less precise size reports.
+ */
+
 #if (__GNUC__ < 3) || (__GNUC__ == 3 && __GNUC_MINOR__ < 3)
 #error "GCC version >= 3.3 required"
 #endif
@@ -60,8 +169,23 @@
 #ifdef USE_COMPACT_VECTOR_TABLE
 #undef  _VECTORS_SIZE
 #define _VECTORS_SIZE (4 * _VECTOR_SIZE)
-;; Pull in code from the device lib to set CPUINT_CTRLA.CPUINT_CVT in .init3.
-.global __init_cvt
+
+#ifdef CRT_SELF_CONTAINED
+    .pushsection ".init3", "ax", @progbits
+    /* Definitions in avr/io*.h are neglecting assembly, so...  */
+#   ifndef CCP_IOREG_gc
+#   define CCP_IOREG_gc    0xD8    /* IO Register Protection */
+#   endif
+    lds     r18, CPUINT_CTRLA
+    ori     r18, CPUINT_CVT_bm
+    ldi     r19, CCP_IOREG_gc   ; Load I/O reg change protection signature.
+    out     CCP, r19
+    sts     CPUINT_CTRLA, r18
+    .popsection
+#else
+    ;; Pull in code from libmcu.a to set CPUINT_CTRLA.CPUINT_CVT in .init3.
+    .global __init_cvt
+#endif /* CRT self contained */
 #endif /* Use Compact Vector Table */
 
 	.macro	vector name
@@ -243,8 +367,25 @@ __init:
 	clr	__zero_reg__
 	out	AVR_STATUS_ADDR, __zero_reg__
 
-	;; Pull in __init_sp from the device lib
+#ifdef CRT_SELF_CONTAINED
+	ldi	r28,lo8(__stack)
+#ifdef __AVR_XMEGA__
+	out	AVR_STACK_POINTER_LO_ADDR, r28
+#ifdef _HAVE_AVR_STACK_POINTER_HI
+	ldi	r29,hi8(__stack)
+	out	AVR_STACK_POINTER_HI_ADDR, r29
+#endif	/* _HAVE_AVR_STACK_POINTER_HI */
+#else
+#ifdef _HAVE_AVR_STACK_POINTER_HI
+	ldi	r29,hi8(__stack)
+	out	AVR_STACK_POINTER_HI_ADDR, r29
+#endif	/* _HAVE_AVR_STACK_POINTER_HI */
+	out	AVR_STACK_POINTER_LO_ADDR, r28
+#endif  /* __AVR_XMEGA__ */
+#else
+	;; Pull in __init_sp from the device lib to .init2
 	.global __init_sp
+#endif /* CRT self contained */
 
 #ifdef __AVR_3_BYTE_PC__
 	ldi	r16, hh8(pm(__vectors))
@@ -309,8 +450,18 @@ __do_copy_data:
 	.set	__stack, RAMEND
 #endif /* !__AVR_ASM_ONLY__ */
 
-	;; Pull in __call_main from the device lib.
+#ifdef CRT_SELF_CONTAINED
+	.section .init9,"ax",@progbits
+#ifdef __AVR_ASM_ONLY__
+	XJMP	main
+#else	/* !__AVR_ASM_ONLY__ */
+	XCALL	main
+	XJMP	exit
+#endif	/* __AVR_ASM_ONLY__ */
+#else
+	;; Pull in __call_main from the device lib to .init9
 	.global __call_main
+#endif /* CRT self contained */
 
 ;	.endfunc
 
