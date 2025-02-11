@@ -618,6 +618,26 @@ extern char *strupr(char *);
 extern int strcoll(const char *s1, const char *s2);
 extern char *strerror(int errnum);
 extern size_t strxfrm(char *dest, const char *src, size_t n);
+
+/* strlen is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+size_t strlen(const char *__s)
+{
+  if (__builtin_constant_p (__builtin_strlen (__s)))
+    {
+      return __builtin_strlen (__s);
+    }
+  else
+    {
+      register const char *__r24 __asm("24") = __s;
+      register size_t __res __asm("24");
+      __asm ("%~call %x2" : "=r" (__res) : "r" (__r24), "i" (strlen)
+             : "30", "31");
+      return __res;
+    }
+}
+
+
 #endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
