@@ -42,7 +42,7 @@ pmstring_a_asm_sources = \
 	strcat_P.S \
 	strchr_P.S \
 	strchrnul_P.S \
-	strcmp_P.S \
+	strcmp_P.S _strcmp_P.S \
 	strcpy_P.S _strcpy_P.S \
 	strcspn_P.S \
 	strlcat_P.S \

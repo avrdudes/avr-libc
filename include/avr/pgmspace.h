@@ -1727,6 +1727,7 @@ static inline size_t strlen_P(const char * s);
 
 #else
 
+/* strlen_P is common so we model its GPR footprint.  */
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 size_t strlen_P(const char *__s)
 {
@@ -1744,6 +1745,7 @@ size_t strlen_P(const char *__s)
     }
 }
 
+/* strcpy_P is common so we model its GPR footprint.  */
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* strcpy_P(char *__x, const char *__z)
 {
@@ -1752,6 +1754,17 @@ char* strcpy_P(char *__x, const char *__z)
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __ret;
 }
+
+/* strcmp_P is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int strcmp_P(const char *__x, const char *__z)
+{
+  register int __ret __asm("24");
+  __asm ("%~call __strcmp_P"
+         : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
+  return __ret;
+}
+
 #endif /* AVR_TINY */
 
 #endif /* DOXYGEN */

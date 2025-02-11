@@ -34,20 +34,24 @@
 
 #include "macros.inc"
 
-#define s1_hi r25
-#define s1_lo r24
-#define s2_hi r23
-#define s2_lo r22
+#define ret_hi r25
+#define ret_lo r24
 
 	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcmp_P)
-	.type	_U(strcmp_P), @function
-_U(strcmp_P):
-	X_movw	ZL, s2_lo
-	X_movw	XL, s1_lo
-	XJMP	_U(__strcmp_P)
+	.global	_U(__strcmp_P)
+	.type	_U(__strcmp_P), @function
+_U(__strcmp_P):
+.Loop:
+	ld	ret_lo, X+
+	X_lpm	r0, Z+
+	sub	ret_lo, r0
+	cpse	r0, __zero_reg__
+	breq	.Loop
+; ret_hi = SREG.C ? 0xFF : 0
+	sbc	ret_hi, ret_hi
+	ret
 
-	.size	_U(strcmp_P), . - _U(strcmp_P)
+	.size	_U(__strcmp_P), . - _U(__strcmp_P)
 
 #endif /* not __DOXYGEN__ */
 
