@@ -412,7 +412,7 @@ extern inline int strcmp_F(const char *, const __flash char *);
 
     \returns The #strcpy_F function returns a pointer to the destination
     string dest. */
-static inline char *strcpy_F(char *, const __flash char *);
+extern inline char *strcpy_F(char *, const __flash char *);
 
 /** \ingroup avr_flash
     \fn int strcasecmp_F(const char *s1, const __flash char *s2)
@@ -1246,15 +1246,14 @@ int strcmp_F (const char *__x, const __flash char *__z)
 
 
 /* strcpy_F is common so we model strcpy_P's GPR footprint. */
-extern const char* strcpy_F (char *__s, const __flash char *__f) __asm("strcpy_P");
+extern char* strcpy_F (char *__x, const __flash char *__z) __asm("strcpy_P");
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
-const char* strcpy_F (char *__s, const __flash char *__f)
+char* strcpy_F (char *__x, const __flash char *__z)
 {
-  register char *__r24 __asm("24") = __s;
-  register const __flash char *__r22 __asm("22") = __f;
-  __asm volatile ("%~call strcpy_P" :: "r" (__r24), "r" (__r22)
-                  : "0", "26", "27", "30", "31", "memory");
-  return __s;
+  char *__ret = __x;
+  __asm volatile ("%~call __strcpy_P"
+                  : "+x" (__x), "+z" (__z) :: "0", "memory");
+  return __ret;
 }
 
 
