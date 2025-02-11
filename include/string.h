@@ -290,11 +290,25 @@ extern int strcmp(const char *, const char *) __ATTR_PURE__;
     \returns The strcpy() function returns a pointer to the destination
     string dest.
 
-    \note If the destination string of a strcpy() is not large enough (that
-    is, if the programmer was stupid/lazy, and failed to check the size before
-    copying) then anything might happen.  Overflowing fixed length strings is
-    a favourite cracker technique. */
+    \see strncpy(), stpcpy(), strcpy_P(), strcpy_F().  */
 extern char *strcpy(char *, const char *);
+
+/** \ingroup avr_string
+    \fn char *stpcpy(char *dest, const char *src)
+    \brief Copy a string.
+
+    The stpcpy() function copies the string pointed to by \p src
+    (including the terminating '\\0' character) to the array pointed
+    to by \p dest.
+    The strings may not overlap, and the destination string \p dest must
+    be large enough to receive the copy.
+
+    \returns The stpcpy() function returns a pointer to the <b>end</b> of
+    the string \p dest (that is, the address of the terminating null byte)
+    rather than the beginning.
+
+    \since AVR-LibC v2.3  */
+extern char *stpcpy(char *, const char *);
 
 /** \ingroup avr_string
     \fn int strcasecmp(const char *s1, const char *s2)
@@ -643,8 +657,16 @@ char* strcpy(char *__x, const char *__z)
 {
   char *__ret = __x;
   __asm volatile ("%~call __strcpy"
-                  : "+x" (__x), "+z" (__z) :: "0", "memory");
+                  : "+x" (__x), "+z" (__z) :: "memory");
   return __ret;
+}
+
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char* stpcpy(char *__x, const char *__z)
+{
+  __asm volatile ("%~call __strcpy"
+                  : "+x" (__x), "+z" (__z) :: "memory");
+  return __x - 1;
 }
 
 /* strcmp is common so we model its GPR footprint.  */
