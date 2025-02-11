@@ -1211,6 +1211,18 @@ extern inline char *strcpy_P(char *, const char *);
 #endif
 
 /** \ingroup avr_pgmspace
+    \fn char *stpcpy_P(char *dest, const char *src)
+
+    The stpcpy_P() function is similar to stpcpy() except that \p src is a
+    pointer to a string in program space.
+
+    \returns The stpcpy_P() function returns a pointer to the
+    terminating '\\0' character of destination string \p dest.
+
+    \since AVR-LibC 2.3   */
+extern char *stpcpy_P(char *, const char *);
+
+/** \ingroup avr_pgmspace
     \fn int strcasecmp_P(const char *s1, const char *s2)
     \brief Compare two strings ignoring case.
 
@@ -1724,6 +1736,7 @@ static inline size_t strlen_P(const char * s);
 
 #define strlen_P(x) strlen(x)
 #define strcpy_P(x, y) strcpy(x, y)
+#define stpcpy_P(x, y) stpcpy(x, y)
 
 #else
 
@@ -1753,6 +1766,14 @@ char* strcpy_P(char *__x, const char *__z)
   __asm volatile ("%~call __strcpy_P"
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __ret;
+}
+
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char* stpcpy_P(char *__x, const char *__z)
+{
+  __asm volatile ("%~call __strcpy_P"
+                  : "+x" (__x), "+z" (__z) :: "0", "memory");
+  return __x - 1;
 }
 
 /* strcmp_P is common so we model its GPR footprint.  */

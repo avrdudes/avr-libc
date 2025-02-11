@@ -415,6 +415,17 @@ extern inline int strcmp_F(const char *, const __flash char *);
 extern inline char *strcpy_F(char *, const __flash char *);
 
 /** \ingroup avr_flash
+    \fn char *stpcpy_F(char *dest, const __flash char *src)
+
+    The #stpcpy_F function is similar to #stpcpy except that \p src is a
+    pointer to a string in address-space #__flash.
+
+    \returns #stpcpy_F returns a pointer to the <b>end</b> of
+    the string \p dest (that is, the address of the terminating null byte)
+    rather than the beginning.  */
+extern inline char *stpcpy_F(char *, const __flash char *);
+
+/** \ingroup avr_flash
     \fn int strcasecmp_F(const char *s1, const __flash char *s2)
     \brief Compare two strings ignoring case.
 
@@ -1254,6 +1265,16 @@ char* strcpy_F (char *__x, const __flash char *__z)
   __asm volatile ("%~call __strcpy_P"
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __ret;
+}
+
+
+extern char* stpcpy_F (char *__x, const __flash char *__z) __asm("stpcpy_P");
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char* stpcpy_F (char *__x, const __flash char *__z)
+{
+  __asm volatile ("%~call __strcpy_P"
+                  : "+x" (__x), "+z" (__z) :: "0", "memory");
+  return __x - 1;
 }
 
 
