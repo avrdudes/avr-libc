@@ -29,6 +29,6 @@
 # $Id$
 #
 
-avrdir = $(prefix)/include/bits
+avrdir = $(prefix)/avr/include/bits
 avr_HEADERS = \
     attribs.h
