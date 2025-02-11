@@ -53,7 +53,7 @@ string_a_asm_sources = \
 	strcat.S \
 	strchr.S \
 	strchrnul.S \
-	strcmp.S \
+	strcmp.S _strcmp.S \
 	strcpy.S _strcpy.S \
 	strcspn.S \
 	strlcat.S \

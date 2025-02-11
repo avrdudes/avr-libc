@@ -32,21 +32,23 @@
 
 #include "macros.inc"
 
-TINY_WEAK_ALIAS _U(strcmp_P) _U(strcmp)
-
-#define s1_hi r25
-#define s1_lo r24
-#define s2_hi r23
-#define s2_lo r22
+#define ret_hi r25
+#define ret_lo r24
 
 	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcmp)
-	.type	_U(strcmp), @function
-_U(strcmp):
-	X_movw	ZL, s2_lo
-	X_movw	XL, s1_lo
-	XJMP	_U(__strcmp)
+	.global	_U(__strcmp)
+	.type	_U(__strcmp), @function
+_U(__strcmp):
+.Loop:
+	ld	ret_lo, X+
+	ld	__tmp_reg__, Z+
+	sub	ret_lo, __tmp_reg__
+	cpse	__tmp_reg__, __zero_reg__
+	breq	.Loop
+; ret_hi = SREG.C ? 0xFF : 0
+	sbc	ret_hi, ret_hi
+	ret
 
-	.size	_U(strcmp), . - _U(strcmp)
+	.size	_U(__strcmp), . - _U(__strcmp)
 
 #endif /* not __DOXYGEN__ */

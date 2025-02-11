@@ -647,6 +647,16 @@ char* strcpy(char *__x, const char *__z)
   return __ret;
 }
 
+/* strcmp is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int strcmp(const char *__x, const char *__z)
+{
+  register int __ret __asm("24");
+  __asm ("%~call __strcmp"
+         : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
+  return __ret;
+}
+
 #endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
