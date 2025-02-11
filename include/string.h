@@ -646,7 +646,7 @@ size_t strlen(const char *__s)
       register const char *__r24 __asm("24") = __s;
       register size_t __res __asm("24");
       __asm ("%~call %x2" : "=r" (__res) : "r" (__r24), "i" (strlen)
-             : "30", "31");
+             : "30", "31", "memory");
       return __res;
     }
 }
