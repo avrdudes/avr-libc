@@ -637,6 +637,15 @@ size_t strlen(const char *__s)
     }
 }
 
+/* strcpy is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char* strcpy(char *__x, const char *__z)
+{
+  char *__ret = __x;
+  __asm volatile ("%~call __strcpy"
+                  : "+x" (__x), "+z" (__z) :: "0", "memory");
+  return __ret;
+}
 
 #endif	/* !__DOXYGEN__ */
 

@@ -32,22 +32,17 @@
 
 #include "macros.inc"
 
-TINY_WEAK_ALIAS _U(strcpy_P) _U(strcpy)
-
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
-
 	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcpy)
-	.type	_U(strcpy), @function
-_U(strcpy):
-	X_movw	ZL, src_lo
-	X_movw	XL, dest_lo
-	XJMP	_U(__strcpy)
-; return dest (unchanged)
+	.global	_U(__strcpy)
+	.type	_U(__strcpy), @function
+_U(__strcpy):
+.Loop:
+	ld	__tmp_reg__, Z+
+	st	X+, __tmp_reg__
+	tst	__tmp_reg__
+	brne	.Loop
+	ret
 
-	.size	_U(strcpy), . - _U(strcpy)
+	.size	_U(__strcpy), . - _U(__strcpy)
 
 #endif /* not __DOXYGEN__ */
