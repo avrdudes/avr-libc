@@ -748,6 +748,20 @@ extern size_t strnlen_FX(const __flashx char *src, size_t len);
 extern char *strcpy_FX(char *dest, const __flashx char *src);
 
 /** \ingroup avr_flash
+    \fn char *stpcpy_FX(char *dst, const __flashx char *src)
+    \brief Duplicate a string from address-space __flashx
+
+    The #stpcpy_FX function is similar to #stpcpy except that \e src
+    is a string located in address-space #__flashx.
+
+    \param dst A pointer to the destination string in SRAM.
+    \param src A pointer to the source string in #__flashx.
+
+    \returns The stpcpy_PF() function returns a pointer to the
+    terminating '\\0' character of the destination string \e dst.  */
+extern char *stpcpy_FX(char *dest, const __flashx char *src);
+
+/** \ingroup avr_flash
     \fn char *strncpy_FX(char *dst, const __flashx char *src, size_t n)
     \brief Duplicate a string from address-space __flashx until a limited length
 
@@ -1322,6 +1336,7 @@ extern int sscanf_F(const char *__buf, const __flash char *__fmt, ...) __asm("ss
 extern size_t strnlen_FX(const __flashx char *, size_t) __asm("strnlen_PF") __ATTR_CONST__;
 extern void *memcpy_FX(void *, const __flashx void *, size_t) __asm("memcpy_PF");
 extern char *strcpy_FX(char *, const __flashx char *) __asm("strcpy_PF");
+extern char *stpcpy_FX(char *, const __flashx char *) __asm("stpcpy_PF");
 extern char *strncpy_FX(char *, const __flashx char *, size_t) __asm("strncpy_PF");
 extern char *strcat_FX(char *, const __flashx char *) __asm("strcat_PF");
 extern size_t strlcat_FX(char *, const __flashx char *, size_t) __asm("strlcat_PF");

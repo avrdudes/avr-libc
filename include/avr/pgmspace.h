@@ -1527,6 +1527,22 @@ extern void *memcpy_PF(void *dest, uint_farptr_t src, size_t len);
 extern char *strcpy_PF(char *dest, uint_farptr_t src);
 
 /** \ingroup avr_pgmspace
+    \fn char *stpcpy_PF(char *dst, uint_farptr_t src)
+    \brief Duplicate a string
+
+    The stpcpy_PF() function is similar to stpcpy() except that \e src
+    is a far pointer to a string in program space.
+
+    \param dst A pointer to the destination string in SRAM
+    \param src A far pointer to the source string in Flash
+
+    \returns The stpcpy_PF() function returns a pointer to the
+    terminating '\\0' character of the destination string \e dst.
+
+    \since AVR-LibC 2.3  */
+extern char *stpcpy_PF(char *dest, uint_farptr_t src);
+
+/** \ingroup avr_pgmspace
     \fn char *strncpy_PF(char *dst, uint_farptr_t src, size_t n)
     \brief Duplicate a string until a limited length
 

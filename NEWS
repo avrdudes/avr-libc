@@ -15,8 +15,8 @@
        main must be executed by other means, e.g. by putting it in
        section .init9.
 
-  - Support has been added for the stpcpy, stpcpy_P and stpcpy_F
-    functions (#1015).
+  - Support has been added for the stpcpy, stpcpy_P, stpcpy_F,
+    stpcpy_PF, stpcpy_FX functions (#1015).
 
   - Support a new header <avr/flash.h> for better support of avr-gcc's
     named address spaces __flash and __flashx.  For example, it provides
