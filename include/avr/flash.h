@@ -1236,13 +1236,11 @@ extern char *strtok_rF(char *, const __flash char * __delim, char **__last) __as
 /* strcmp_F is common so we model strcmp_P's GPR footprint. */
 extern int strcmp_F (const char*, const __flash char*) __asm ("strcmp_P");
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
-int strcmp_F (const char *__s, const __flash char *__f)
+int strcmp_F (const char *__x, const __flash char *__z)
 {
-  register const char *__r24 __asm("24") = __s;
-  register const __flash char *__r22 __asm("22") = __f;
   register int __ret __asm("24");
-  __asm ("%~call strcmp_P" : "=r" (__ret) : "r" (__r24), "r" (__r22)
-         : "0", "26", "27", "30", "31", "memory");
+  __asm ("%~call __strcmp_P"
+         : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
   return __ret;
 }
 
