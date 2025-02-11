@@ -81,6 +81,9 @@
     results compared to str[n]casecmp[_P].  The far versions have been
     fixed so that they comply to POSIX.1-2008. (Issue #1009)
 
+  - fflush() is now implemented as a proper (non-inline) function so that
+    features like --wrap will work as expected (#1017, #1003).
+
 * Pull requests:
 
 * Other changes:

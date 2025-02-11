@@ -36,6 +36,7 @@ stdio_a_c_sources =	\
 	fdevopen.c \
 	feof.c \
 	ferror.c \
+	fflush.c \
 	fgetc.c \
 	fgets.c \
 	fprintf.c \
