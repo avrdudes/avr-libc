@@ -238,8 +238,28 @@ _U(\lname):
     .exitm
   .endif
 
-	subi	.L__sbiw_dst, \val
-	sbci	.L__sbiw_dst + 1, 0
+	subi	.L__sbiw_dst,     lo8(\val)
+	sbci	.L__sbiw_dst + 1, hi8(\val)
+#endif /* AVR_TINY */
+.endm
+
+/* Macro 'X_adiw' extends ADIW instruction for AVR_TINY chips
+   except for the flags (only N and Z will be the same).  */
+.macro	X_adiw	dst,val
+#if !defined (__AVR_TINY__)
+	adiw	\dst,\val
+#else
+  REGNO	.L__adiw_dst, \dst
+  .if	.L__adiw_dst < 0
+    .exitm
+  .endif
+  .if	.L__adiw_dst % 1
+    .err	; Invalid register arg in X_adiw macro.
+    .exitm
+  .endif
+
+    subi	.L__adiw_dst,     lo8(-(\val))
+	sbci	.L__adiw_dst + 1, hi8(-(\val))
 #endif /* AVR_TINY */
 .endm
 
