@@ -1258,6 +1258,17 @@ extern char *strstr_F(const char *, const __flash char *) __asm("strstr_P") __AT
 extern char *strtok_F(char *, const __flash char * __delim) __asm("strtok_P");
 extern char *strtok_rF(char *, const __flash char * __delim, char **__last) __asm("strtok_rP");
 
+/* memcpy_F is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+void* memcpy_F(void *__x, const __flash void *__z, size_t __s)
+{
+  register size_t __r20 __asm("20") = __s;
+  void *__ret = __x;
+  __asm volatile ("%~call __memcpy_P" : "+x" (__x), "+z" (__z), "+r" (__r20)
+                  :: "0", "memory");
+  return __ret;
+}
+
 /* strcmp_F is common so we model strcmp_P's GPR footprint. */
 extern int strcmp_F (const char*, const __flash char*) __asm ("strcmp_P");
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__

@@ -1747,14 +1747,26 @@ static inline size_t strlen_P(const char * s);
 #else /* !DOXYGEN */
 
 #ifdef __AVR_TINY__
-/* PR71948: AVR_TINY may use open coded C/C++ to read from progmem.  */
+/* GCC PR71948: AVR_TINY may use open coded C/C++ to read from progmem.  */
 #include <string.h>
 
+#define memcpy_P(x, y, z) memcpy(x, y, z)
 #define strlen_P(x) strlen(x)
 #define strcpy_P(x, y) strcpy(x, y)
 #define stpcpy_P(x, y) stpcpy(x, y)
 
 #else
+
+/* memcpy_P is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+void* memcpy_P(void *__x, const void *__z, size_t __s)
+{
+  register size_t __r20 __asm("20") = __s;
+  void *__ret = __x;
+  __asm volatile ("%~call __memcpy_P" : "+x" (__x), "+z" (__z), "+r" (__r20)
+                  :: "0", "memory");
+  return __ret;
+}
 
 /* strlen_P is common so we model its GPR footprint.  */
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__

@@ -36,23 +36,39 @@
 
 #include "macros.inc"
 
-#define dest_hi r25
-#define dest_lo r24
-#define src_hi r23
-#define src_lo r22
 #define len_hi r21
 #define len_lo r20
 
 	ASSEMBLY_CLIB_SECTION
-	.global	_U(memcpy_P)
-	.type	_U(memcpy_P), @function
-_U(memcpy_P):
-	X_movw	ZL, src_lo
-	X_movw	XL, dest_lo
-	XJMP	_U(__memcpy_P)
-; return dest (unchanged)
+	.global	_U(__memcpy_P)
+	.type	_U(__memcpy_P), @function
+.L_memcpy_P_begin:
+#if OPTIMIZE_SPEED
+_U(__memcpy_P):
+	sbrs	len_lo, 0
+	rjmp	.L_memcpy_P_even
+	rjmp	.L_memcpy_P_odd
+.Loop:
+	X_lpm	r0, Z+
+	st	X+, r0
+.L_memcpy_P_odd:
+	X_lpm	r0, Z+
+	st	X+, r0
+.L_memcpy_P_even:
+	subi	len_lo, lo8(2)
+	sbci	len_hi, hi8(2)
+#else
+.Loop:
+	X_lpm	r0, Z+
+	st	X+, r0
+_U(__memcpy_P):
+	subi	len_lo, lo8(1)
+	sbci	len_hi, hi8(1)
+#endif
+	brcc	.Loop
+	ret
 
-	.size	_U(memcpy_P), . - _U(memcpy_P)
+	.size	_U(__memcpy_P), . - .L_memcpy_P_begin
 
 #endif /* not __DOXYGEN__ */
 
