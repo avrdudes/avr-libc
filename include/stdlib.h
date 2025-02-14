@@ -450,7 +450,7 @@ extern int rand_r(unsigned long *__ctx);
 #ifdef  __DOXYGEN__
 extern char *itoa(int val, char *s, int radix);
 #else
-extern __inline__ __ATTR_GNU_INLINE__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char *itoa (int __val, char *__s, int __radix)
 {
     if (!__builtin_constant_p (__radix)) {
@@ -495,7 +495,7 @@ char *itoa (int __val, char *__s, int __radix)
 #ifdef  __DOXYGEN__
 extern char *ltoa(long val, char *s, int radix);
 #else
-extern __inline__ __ATTR_GNU_INLINE__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char *ltoa (long __val, char *__s, int __radix)
 {
     if (!__builtin_constant_p (__radix))
@@ -543,7 +543,7 @@ char *ltoa (long __val, char *__s, int __radix)
 #ifdef  __DOXYGEN__
 extern char *utoa(unsigned int val, char *s, int radix);
 #else
-extern __inline__ __ATTR_GNU_INLINE__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char *utoa (unsigned int __val, char *__s, int __radix)
 {
     if (!__builtin_constant_p (__radix))
@@ -590,7 +590,7 @@ char *utoa (unsigned int __val, char *__s, int __radix)
 #ifdef  __DOXYGEN__
 extern char *ultoa(unsigned long val, char *s, int radix);
 #else
-extern __inline__ __ATTR_GNU_INLINE__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char *ultoa (unsigned long __val, char *__s, int __radix)
 {
     if (!__builtin_constant_p (__radix)) {
