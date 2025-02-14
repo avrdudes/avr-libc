@@ -29,7 +29,6 @@
 /* $Id$	*/
 
 #if	!defined (__DOXYGEN__)
-#if	!defined (__AVR_TINY__)
 
 #include "asmdef.h"
 
@@ -40,11 +39,22 @@
 #define val_hlo	r24
 #define val_hhi	r25
 #define str_lo	r20
+#ifdef __AVR_TINY__
+#define rdx_lo	__tmp_reg__
+#else
 #define rdx_lo	r18
+#endif
 
 #define sign	r27	/* Argument for __ultoa_common()	*/
 
 ENTRY	__ltoa_ncheck
+#ifdef __AVR_TINY__
+        ;; Radix is passed on the stack
+	in	ZL, SPL_IO_ADDR
+	in	ZH, SPH_IO_ADDR
+	X_adiw 	ZL, 1 + 2	; 2 pushed (RET-address)
+	ld	rdx_lo, Z
+#endif
 
 	clr	sign
 	cpi	rdx_lo, 10
@@ -59,5 +69,4 @@ ENTRY	__ltoa_ncheck
 
 ENDFUNC
 
-#endif	/* !__AVR_TINY__ */
 #endif	/* !__DOXYGEN__ */

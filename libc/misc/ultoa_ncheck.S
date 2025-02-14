@@ -29,7 +29,6 @@
 /* $Id$	*/
 
 #if	!defined (__DOXYGEN__)
-#if	!defined (__AVR_TINY__)
 
 #include "asmdef.h"
 
@@ -44,7 +43,11 @@
 #define str_lo	r20
 #define radix	r18
 
+#ifdef __AVR_TINY__
+#define counter	__tmp_reg__
+#else
 #define counter	r19
+#endif
 #define digit	r26
 #define sign	r27
 
@@ -53,6 +56,14 @@ ENTRY	__ultoa_ncheck
 	clr	sign
 
 ENTRY	__ultoa_common
+#ifdef __AVR_TINY__
+        ;; Radix is passed on the stack
+	push	radix
+	in	ZL, SPL_IO_ADDR
+	in	ZH, SPH_IO_ADDR
+	X_adiw 	ZL, 1 + 3	; 3 pushed (RET-address, r18).
+	ld	radix, Z
+#endif
 	X_movw	ZL, str_lo
 
 1:  ; Saves one iteration of the digit-loop:
@@ -108,9 +119,11 @@ ENTRY	__ultoa_common
 
     ; Reverse the string and return the original string pointer
 	X_movw	r24, str_lo
+#ifdef __AVR_TINY__
+	pop	radix
+#endif
 	XJMP	_U(strrev)
 
 ENDFUNC
 
-#endif	/* !__AVR_TINY__ */
 #endif	/* !__DOXYGEN__ */
