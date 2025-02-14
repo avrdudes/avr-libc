@@ -32,6 +32,8 @@
 
 #include "macros.inc"
 
+TINY_WEAK_ALIAS _U(strpbrk_P) _U(strpbrk)
+
 #define str_lo	r24
 #define acc_lo	r22
 
