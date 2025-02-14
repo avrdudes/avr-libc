@@ -84,16 +84,16 @@ extern "C" {
 /**
    \ingroup avr_cpufunc
 
-   Write \a __value to IO Register Protected (CCP) IO register
+   Write \a __value to IO Register Protected (CCP) 8-bit IO register
    at \a __ioaddr. See also \c _PROTECTED_WRITE().  */
-void ccp_write_io (volatile uint8_t *__ioaddr, uint8_t __value);
+void ccp_write_io (volatile void *__ioaddr, uint8_t __value);
 
 /**
    \ingroup avr_cpufunc
 
-   Write \a __value to SPM Instruction Protected (CCP) IO register
+   Write \a __value to SPM Instruction Protected (CCP) 8-bit IO register
    at \a __ioaddr. See also \c _PROTECTED_WRITE_SPM().  */
-void ccp_write_spm (volatile uint8_t *__ioaddr, uint8_t __value);
+void ccp_write_spm (volatile void *__ioaddr, uint8_t __value);
 
 #ifdef __cplusplus
 }
