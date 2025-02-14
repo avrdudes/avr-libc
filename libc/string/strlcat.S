@@ -39,6 +39,8 @@
 
 #include "asmdef.h"
 
+TINY_WEAK_ALIAS _U(strlcat_P) _U(strlcat)
+
 /*  size_t strlcat (char *dst, const char *src, size_t siz)
     {
 	char *d = dst;
