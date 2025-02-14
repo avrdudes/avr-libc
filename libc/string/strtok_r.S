@@ -34,6 +34,8 @@
 
 #include "asmdef.h"
 
+TINY_WEAK_ALIAS _U(strtok_rP) _U(strtok_r)
+
 /*  char *strtok_r (char *s, const char *delim, char **last)
     {
 	char *p = *last;

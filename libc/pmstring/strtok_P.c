@@ -28,8 +28,6 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #include <avr/pgmspace.h>
 #include "sectionname.h"
 
@@ -40,5 +38,3 @@ strtok_P (char *s, PGM_P delim)
     static char *p;
     return strtok_rP (s, delim, &p);
 }
-
-#endif /* !defined(__AVR_TINY__) */
