@@ -28,11 +28,11 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #ifndef	__DOXYGEN__
 
 #include "macros.inc"
+
+TINY_WEAK_ALIAS _U(strcspn_P) _U(strcspn)
 
 #define str_lo	r24
 #define str_hi	r25
@@ -53,9 +53,9 @@ _U(strcspn):
 	breq	3f
   ; check an occurrence
 	X_movw	ZL, acc_lo
-2:	ld	r0, Z+
-	cp	r0, chs
-	cpse	r0, __zero_reg__
+2:	ld	__tmp_reg__, Z+
+	cp	__tmp_reg__, chs
+	cpse	__tmp_reg__, __zero_reg__
 	brne	2b
 	brne	1b		; branch if chs is't present in reject[]
   ; end of scanning: chs is found or end of s[] is reached
@@ -69,5 +69,3 @@ _U(strcspn):
 	.size _U(strcspn), . - _U(strcspn)
 
 #endif	/* !__DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */
