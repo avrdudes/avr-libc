@@ -18,8 +18,8 @@
   - Support has been added for the stpcpy, stpcpy_P, stpcpy_F,
     stpcpy_PF, stpcpy_FX functions (#1015).
 
-  - strcasestr, strcasestr_P, memmem and memmem_P are now also available
-    on Reduced Tiny (AVRrc).
+  - Support has been added for some functions on Reduced Tiny (AVRrc):
+    memmem, memmem_P, strlcpy, strlcpy_P, strcasestr, strcasestr_P.
 
   - Support a new header <avr/flash.h> for better support of avr-gcc's
     named address spaces __flash and __flashx.  For example, it provides

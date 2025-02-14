@@ -35,11 +35,11 @@
 
 /* $Id$ */
 
-#if !defined(__AVR_TINY__)
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
+
+TINY_WEAK_ALIAS _U(strlcpy_P) _U(strlcpy)
 
 #define dst_lo		r24
 #define src_hi		r23
@@ -66,7 +66,7 @@ ENTRY strlcpy
   ; calculate result (Z - 1 - src) and return
 2:	sub	ZL, src_lo
 	sbc	ZH, src_hi
-	sbiw	ZL, 1
+	X_sbiw	ZL, 1
 	X_movw	rslt_lo, ZL
 	ret
 
@@ -82,5 +82,3 @@ ENTRY strlcpy
 ENDFUNC
 
 #endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */
