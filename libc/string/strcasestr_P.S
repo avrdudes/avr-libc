@@ -28,5 +28,7 @@
 
 /* $Id$	*/
 
+#ifndef __AVR_TINY__
 #define Lprogmem  1
 #include "strcasestr.S"
+#endif
