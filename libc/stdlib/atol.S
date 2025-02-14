@@ -68,7 +68,11 @@
 #define num_hi_lo	r24
 #define num_lo_hi	r23
 #define num_lo_lo	r22
+#ifdef __AVR_TINY__
+#define tmp		__tmp_reg__
+#else
 #define tmp		r17
+#endif
 
 	ASSEMBLY_CLIB_SECTION
 	.global _U(atol)

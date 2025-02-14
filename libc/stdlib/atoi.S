@@ -65,7 +65,11 @@
 #define str_lo	r24
 #define num_hi	r25
 #define num_lo	r24
+#ifdef __AVR_TINY__
+#define tmp	__tmp_reg__
+#else
 #define tmp	r18
+#endif
 
 	ASSEMBLY_CLIB_SECTION
 	.global _U(atoi)

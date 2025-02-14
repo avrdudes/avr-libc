@@ -72,7 +72,9 @@
     This works similar to how the compiler implements the &-operator
     for PROGMEM objects (Issue #970).
 
-  - Fixed memccpy (and memccpy_P) on Reduced Tiny (#1018).
+  - Fixed memccpy (and memccpy_P) on AVRrc (#1018).
+
+  - Fixed atoi and atol on AVRrc (#1019).
 
   - Define types from stdint.h like int32_t without attribute((mode)).
     (Issue #496)
