@@ -549,6 +549,8 @@
 #elif defined (__AVR_ATxmega16D4__)
 #  include <avr/iox16d4.h>
 #elif defined (__AVR_ATxmega32A4__)
+#  include <avr/iox16e5.h>
+#elif defined (__AVR_ATxmega16E5__)
 #  include <avr/iox32a4.h>
 #elif defined (__AVR_ATxmega32A4U__)
 #  include <avr/iox32a4u.h>

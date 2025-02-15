@@ -308,6 +308,7 @@ atxmega16a4:crtx16a4.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atxmega16a4u:crtx16a4u.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atxmega16c4:crtx16c4.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atxmega16d4:crtx16d4.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+atxmega16e5:crtx16e5.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atxmega32a4:crtx32a4.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atxmega32a4u:crtx32a4u.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 atxmega32c3:crtx32c3.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\

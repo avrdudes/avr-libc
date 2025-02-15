@@ -384,6 +384,7 @@ compile-time.
   ATxmega8E5,
   ATxmega16A4,
   ATxmega16D4,
+  ATxmega16E5,
   ATxmega32A4,
   ATxmega32D3,
   ATxmega32D4,

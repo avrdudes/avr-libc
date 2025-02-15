@@ -77,17 +77,17 @@
   <tr>
     <td>ACA_AC0_vect</td>
     <td>AC0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>ACA_AC1_vect</td>
     <td>AC1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>ACA_ACW_vect</td>
     <td>ACW Window Mode</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>ACB_AC0_vect</td>
@@ -147,27 +147,27 @@
   <tr>
     <td>ADCA_CH0_vect</td>
     <td>ADC Channel</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>ADCA_CH0_vect</td>
     <td>Interrupt 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>ADCA_CH1_vect</td>
     <td>Interrupt 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>ADCA_CH2_vect</td>
     <td>Interrupt 2</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>ADCA_CH3_vect</td>
     <td>Interrupt 3</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>ADCB_CH0_vect</td>
@@ -212,7 +212,7 @@
   <tr>
     <td>AES_INT_vect</td>
     <td>AES</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3</td>
   </tr>
   <tr>
     <td>AES_Operation_vect</td>
@@ -402,22 +402,22 @@
   <tr>
     <td>DMA_CH0_vect</td>
     <td>Channel 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3</td>
   </tr>
   <tr>
     <td>DMA_CH1_vect</td>
     <td>Channel 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3</td>
   </tr>
   <tr>
     <td>DMA_CH2_vect</td>
     <td>Channel 2</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>DMA_CH3_vect</td>
     <td>Channel 3</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>E2CINT_vect</td>
@@ -427,22 +427,22 @@
   <tr>
     <td>EDMA_CH0_vect</td>
     <td>EDMA Channel 0</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>EDMA_CH1_vect</td>
     <td>EDMA Channel 1</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>EDMA_CH2_vect</td>
     <td>EDMA Channel 2</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>EDMA_CH3_vect</td>
     <td>EDMA Channel 3</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>EEPROM_READY_vect</td>
@@ -727,12 +727,12 @@
   <tr>
     <td>NVM_EE_vect</td>
     <td>EEPROM</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>NVM_SPM_vect</td>
     <td>SPM</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>OSC_OSCF_vect</td>
@@ -742,12 +742,12 @@
   <tr>
     <td>OSC_OSCF_vect</td>
     <td>Oscillator Failure Interrupt (NMI)</td>
-    <td>ATxmega128A1U, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D4, ATxmega16A4U, ATxmega16C4, ATxmega192A3U, ATxmega192C3, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1U, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1U, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D4, ATxmega16A4U, ATxmega16C4, ATxmega192A3U, ATxmega192C3, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1U, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>OSC_XOSCF_vect</td>
     <td>External Oscillator Failure Interrupt (NMI)</td>
-    <td>ATxmega128A1, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D4, ATxmega64A1, ATxmega64A3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D4, ATxmega64A1, ATxmega64A3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>OVRIT_vect</td>
@@ -802,17 +802,17 @@
   <tr>
     <td>PORTA_INT0_vect</td>
     <td>External IRQ 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTA_INT1_vect</td>
     <td>External IRQ 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTA_INT_vect</td>
     <td>External IRQ</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>PORTA_PORT_vect</td>
@@ -822,12 +822,12 @@
   <tr>
     <td>PORTB_INT0_vect</td>
     <td>External IRQ 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTB_INT1_vect</td>
     <td>External IRQ 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTB_PORT_vect</td>
@@ -837,17 +837,17 @@
   <tr>
     <td>PORTC_INT0_vect</td>
     <td>External IRQ 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTC_INT1_vect</td>
     <td>External IRQ 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTC_INT_vect</td>
     <td>External IRQ</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>PORTC_PORT_vect</td>
@@ -857,17 +857,17 @@
   <tr>
     <td>PORTD_INT0_vect</td>
     <td>External IRQ 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTD_INT1_vect</td>
     <td>External IRQ 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTD_INT_vect</td>
     <td>External IRQ</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>PORTD_PORT_vect</td>
@@ -877,12 +877,12 @@
   <tr>
     <td>PORTE_INT0_vect</td>
     <td>External IRQ 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTE_INT1_vect</td>
     <td>External IRQ 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTE_PORT_vect</td>
@@ -972,17 +972,17 @@
   <tr>
     <td>PORTR_INT0_vect</td>
     <td>External IRQ 0</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTR_INT1_vect</td>
     <td>External IRQ 1</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>PORTR_INT_vect</td>
     <td>External IRQ</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>PSC0_CAPT_vect</td>
@@ -1082,12 +1082,12 @@
   <tr>
     <td>RTC_COMP_vect</td>
     <td>Compare</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>RTC_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>RTC_PIT_vect</td>
@@ -1182,12 +1182,12 @@
   <tr>
     <td>SPIC_INT_vect</td>
     <td>SPI</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>SPID_INT_vect</td>
     <td>SPI</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>SPIE_INT_vect</td>
@@ -1512,52 +1512,52 @@
   <tr>
     <td>TCC0_CCA_vect</td>
     <td>Compare or Capture A</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCC0_CCB_vect</td>
     <td>Compare or Capture B</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCC0_CCC_vect</td>
     <td>Compare or Capture C</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCC0_CCD_vect</td>
     <td>Compare or Capture D</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCC0_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCC0_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128B3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64B1, ATxmega64B3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCC1_CCA_vect</td>
     <td>Compare or Capture A</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCC1_CCB_vect</td>
     <td>Compare or Capture B</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCC1_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCC1_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCC2_HUNF_vect</td>
@@ -1592,82 +1592,82 @@
   <tr>
     <td>TCC4_CCA_vect</td>
     <td>Channel A Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC4_CCB_vect</td>
     <td>Channel B Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC4_CCC_vect</td>
     <td>Channel C Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC4_CCD_vect</td>
     <td>Channel D Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC4_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC4_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC5_CCA_vect</td>
     <td>Channel A Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC5_CCB_vect</td>
     <td>Channel B Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC5_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCC5_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCD0_CCA_vect</td>
     <td>Compare or Capture A</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCD0_CCB_vect</td>
     <td>Compare or Capture B</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCD0_CCC_vect</td>
     <td>Compare or Capture C</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCD0_CCD_vect</td>
     <td>Compare or Capture D</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCD0_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCD0_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128D3, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64D3</td>
   </tr>
   <tr>
     <td>TCD0_OVF_vect</td>
@@ -1682,22 +1682,22 @@
   <tr>
     <td>TCD1_CCA_vect</td>
     <td>Compare or Capture A</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>TCD1_CCB_vect</td>
     <td>Compare or Capture B</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>TCD1_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>TCD1_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>TCD2_HUNF_vect</td>
@@ -1732,42 +1732,42 @@
   <tr>
     <td>TCD5_CCA_vect</td>
     <td>Channel A Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCD5_CCB_vect</td>
     <td>Channel B Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCD5_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCD5_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TCE0_CCA_vect</td>
     <td>Compare or Capture A</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCE0_CCB_vect</td>
     <td>Compare or Capture B</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCE0_CCC_vect</td>
     <td>Compare or Capture C</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCE0_CCD_vect</td>
     <td>Compare or Capture D</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCE0_CMP0_vect</td>
@@ -1792,12 +1792,12 @@
   <tr>
     <td>TCE0_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCE0_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A4U, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3, ATxmega32A4U, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A4U, ATxmega64B1, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TCE0_OVF_vect</td>
@@ -1807,22 +1807,22 @@
   <tr>
     <td>TCE1_CCA_vect</td>
     <td>Compare or Capture A</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
   </tr>
   <tr>
     <td>TCE1_CCB_vect</td>
     <td>Compare or Capture B</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
   </tr>
   <tr>
     <td>TCE1_ERR_vect</td>
     <td>Error</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
   </tr>
   <tr>
     <td>TCE1_OVF_vect</td>
     <td>Overflow</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega16A4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U</td>
   </tr>
   <tr>
     <td>TCE2_HUNF_vect</td>
@@ -2347,12 +2347,12 @@
   <tr>
     <td>TWIC_TWIM_vect</td>
     <td>TWI Master</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TWIC_TWIS_vect</td>
     <td>TWI Slave</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>TWID_TWIM_vect</td>
@@ -2367,12 +2367,12 @@
   <tr>
     <td>TWIE_TWIM_vect</td>
     <td>TWI Master</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TWIE_TWIS_vect</td>
     <td>TWI Slave</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>TWIF_TWIM_vect</td>
@@ -2667,77 +2667,77 @@
   <tr>
     <td>USARTC0_DRE_vect</td>
     <td>Data Register Empty</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>USARTC0_RXC_vect</td>
     <td>Reception Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>USARTC0_TXC_vect</td>
     <td>Transmission Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>USARTC1_DRE_vect</td>
     <td>Data Register Empty</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega32C4, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>USARTC1_RXC_vect</td>
     <td>Reception Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega32C4, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>USARTC1_TXC_vect</td>
     <td>Transmission Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega32C4, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega32C4, ATxmega384C3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>USARTD0_DRE_vect</td>
     <td>Data Register Empty</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>USARTD0_RXC_vect</td>
     <td>Reception Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>USARTD0_TXC_vect</td>
     <td>Transmission Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16C4, ATxmega16D4, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64C3, ATxmega64D3, ATxmega64D4, ATxmega8E5</td>
   </tr>
   <tr>
     <td>USARTD1_DRE_vect</td>
     <td>Data Register Empty</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>USARTD1_RXC_vect</td>
     <td>Reception Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>USARTD1_TXC_vect</td>
     <td>Transmission Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega32A4U, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U</td>
   </tr>
   <tr>
     <td>USARTE0_DRE_vect</td>
     <td>Data Register Empty</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32D3, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32D3, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>USARTE0_RXC_vect</td>
     <td>Reception Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32D3, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32D3, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>USARTE0_TXC_vect</td>
     <td>Transmission Complete</td>
-    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4, ATxmega32A4U, ATxmega32C3, ATxmega32D3, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
+    <td>ATxmega128A1, ATxmega128A1U, ATxmega128A3, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128C3, ATxmega128D3, ATxmega128D4, ATxmega16A4, ATxmega16A4U, ATxmega16E5, ATxmega192A3, ATxmega192A3U, ATxmega192C3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256A3BU, ATxmega256A3U, ATxmega256C3, ATxmega256D3, ATxmega32A4U, ATxmega32C3, ATxmega32D3, ATxmega384C3, ATxmega384D3, ATxmega64A1, ATxmega64A1U, ATxmega64A3, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64C3, ATxmega64D3, ATxmega64D4</td>
   </tr>
   <tr>
     <td>USARTE1_DRE_vect</td>
@@ -2977,12 +2977,12 @@
   <tr>
     <td>XCL_CC_vect</td>
     <td>Timer/Counter Compare or Capture</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>XCL_UNF_vect</td>
     <td>Timer/Counter Underflow</td>
-    <td>ATxmega32E5, ATxmega8E5</td>
+    <td>ATxmega32A4, ATxmega32E5, ATxmega8E5</td>
   </tr>
   <tr>
     <td>XOSCFD_vect</td>
