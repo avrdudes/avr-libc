@@ -36,7 +36,7 @@
 #define _UTIL_DELAY_H_ 1
 
 #ifndef __DOXYGEN__
-#  ifndef __HAS_DELAY_CYCLES
+#  if !defined(__HAS_DELAY_CYCLES) && !defined(__clang__)
 #    define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
 #  endif
 
@@ -106,6 +106,10 @@
 
 #ifndef __OPTIMIZE__
 # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+#endif
+
+#ifdef __clang__
+# warning "Compiling with Clang; functions from <util/delay.h> won't work as designed"
 #endif
 
 /**
