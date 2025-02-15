@@ -39,7 +39,7 @@ atmega808 atmega809 atmega1608 atmega1609 atmega3208 atmega3209 atmega4808 atmeg
 atxmega128a1u atxmega128a3 atxmega128d3 atxmega16a4 atxmega16d4 \
 atxmega192a3 atxmega192d3 atxmega256a3 atxmega256a3b atxmega256d3 \
 atxmega32a4 atxmega32d4 atxmega64a1 atxmega64a1u atxmega64a3 \
-atxmega64d3 at90pwm161 ata5272 ata5505 ata5790 ata5795 ata6285 \
+atxmega64d3 at90pwm161 ata5272 ata5505 ata5790 ata5791 ata5795 ata6285 \
 ata6286 ata6616c atmega1284 atmega128a atmega164pa atmega165pa atmega168pa \
 atmega168pb atmega328pb atmega324pb \
 atmega3250pa atmega325pa atmega3290pa atmega32a atmega48pa atmega64a \

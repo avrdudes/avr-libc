@@ -634,6 +634,8 @@
 #  include <avr/ioa5790.h>
 #elif defined (__AVR_ATA5790N__)
 #  include <avr/ioa5790n.h>
+#elif defined (__AVR_ATA5791__)
+#  include <avr/ioa5791.h>
 #elif defined (__AVR_ATA5831__)
 #  include <avr/ioa5831.h>
 #elif defined (__AVR_ATA5272__)
