@@ -43,7 +43,7 @@
   ./avr/devices/ata5791/crtata5791.o
   ./avr/devices/ata5791/libata5791.a
   ```
-  which will be installed in their multilib destination:
+* Installing will put these files in their multilib destination(s):
   ```
   $ find . -name '*5791.*'
   ./avr/include/avr/ioa5791.h
