@@ -297,8 +297,9 @@ compile-time.
   ATA6614Q,
   ATA6616C,
   ATA6617C,
-  ATA664251
-  ATA8210
+  ATA664251,
+  ATA8210,
+  ATA8510
 </dd>
 <dt>Automotive CAN AVR Devices:</dt>
 <dd>
