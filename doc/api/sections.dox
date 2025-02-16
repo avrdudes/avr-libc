@@ -64,6 +64,7 @@ and rules to locate them or to assign them to
 
 - \ref sec_ld_script
   - \ref sec_dot_text ".text"
+    - \ref sec_dot_init ".initN: startup code"
   - \ref sec_dot_data ".data"
   - \ref sec_dot_bss ".bss"
   - \ref sec_dot_noinit ".noinit"
@@ -323,7 +324,7 @@ model and correspond to the different kinds of memories of a device.
   <td>\c rx
   <td>\ref sec_text_text "Executable code",
     \ref sec_dot_vectors "vector table",
-    data in #PROGMEM, #__flash, #__memx, #__flashx and #__memx,
+    data in #PROGMEM, #__flash, #__flashx and #__memx,
     \ref sec_dot_init "startup code",
     \ref sec_dot_trampolines "linker stubs",
     initializers for <tt>.data</tt>
