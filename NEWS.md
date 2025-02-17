@@ -1,22 +1,27 @@
-# Changes since AVR-LibC-2.2.0
+# Changes since AVR-LibC v2.2.0
 
 ## General
 
 ## ABI and API Changes
 
-- Part of the startup code is now optional and has been moved from
-  `gcrt1.S` to the device support lib `lib<mcu>.a`.  When the respective
-  parts of the startup code are not wanted, a specific symbol can be
-  defined so that the associated code is no more pulled in.
+- **Parts of the startup code are now optional and have been moved
+  from `crt<mcu>.o` to the device support library `lib<mcu>.a`.**\
+  When a specific part of the startup code are not wanted,
+  a respective symbol can be defined so that the associated code
+  is no more pulled in:
   - Define `__init_sp` to skip the setting of SP in `.init2` (#1011).
-  - Define `__init_cvt` to skip setting CPUINT_CTRLA.CPUINT_CVT in
-    `.init3` (#1010).
   - Define `__call_main` to skip calling `main` and `exit`
-    in `.init9` (#1012).<br>
+    in `.init9` (#1012).\
     `main` must be executed by other means, e.g. by putting it in
-    section `.init9`.  This feature is supported by
+    section `.init9` which is supported by
     [-mno-call-main](https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mno-call-main)
     since [GCC v15](https://gcc.gnu.org/gcc-15/changes.html#avr).
+  - Define `__init_cvt` to skip setting CPUINT_CTRLA.CPUINT_CVT in
+    `.init3` (#1010).\
+    This is only relevant when a *Compact Vector Table* is in effect,
+    for example my means of
+    [-mcvt](https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt)
+    as supported since GCC v15.
 
 ## Improvements and Additions
 
