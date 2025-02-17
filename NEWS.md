@@ -97,10 +97,10 @@
 
 - Fixed `atoi` and `atol` on AVRrc (#1019).
 
-- Define types from `stdint.h` like `int32_t` without `attribute((mode))`.
-  (#496)
+- Define types from `stdint.h` like `int32_t` without `attribute((mode))`
+  (#496).
 
-- Fixed `ld: undefined reference to E2END` (#973)
+- Fixed `ld: undefined reference to E2END` (#973).
 
 - Don't skip 2-word instructions on cores with an according silicon bug.
   This will fix AVR-LibC build warnings as mentioned in #994 like:<br>
@@ -108,7 +108,7 @@
 
 - The `str[n]casecmp_PF` functions used an algorithm that lead to different
   results compared to `str[n]casecmp[_P]`.  The far versions have been
-  fixed so that they comply to POSIX.1-2008. (#1009)
+  fixed so that they comply to POSIX.1-2008 (#1009).
 
 - `fflush()` is now implemented as a proper (non-inline) function so that
   features like `-wrap` will work as expected (#1017, #1003).
@@ -119,4 +119,4 @@
 
 ## Other Changes
 
-- New news are now in `NEWS.md` and no more in `NEWS`.
+- New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
