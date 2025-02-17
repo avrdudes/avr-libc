@@ -43,23 +43,8 @@
 /** \defgroup util_crc <util/crc16.h>: CRC Computations
     \code#include <util/crc16.h>\endcode
 
-    This header file provides a optimized inline functions for calculating
+    This header file provides optimized inline functions for calculating
     cyclic redundancy checks (CRC) using common polynomials.
-
-    \par References:
-
-    \par
-
-    See the Dallas Semiconductor app note 27 for 8051 assembler example and
-    general CRC optimization suggestions. The table on the last page of the
-    app note is the key to understanding these implementations.
-
-    \par
-
-    Jack Crenshaw's "Implementing CRCs" article in the January 1992 issue of \e
-    Embedded \e Systems \e Programming. This may be difficult to find, but it
-    explains CRC's in very clear and concise terms. Well worth the effort to
-    obtain a copy.
 
     A typical application would look like:
 
@@ -78,6 +63,16 @@
         return crc; // must be 0
     }
     \endcode
+
+    \par References:
+    See the Dallas Semiconductor app note 27 for 8051 assembler example and
+    general CRC optimization suggestions. The table on the last page of the
+    app note is the key to understanding these implementations.
+    \par
+    Jack Crenshaw's "Implementing CRCs" article in the January 1992 issue of \e
+    Embedded \e Systems \e Programming. This may be difficult to find, but it
+    explains CRC's in very clear and concise terms. Well worth the effort to
+    obtain a copy.
 */
 
 /** \ingroup util_crc
@@ -91,8 +86,8 @@
     The following is the equivalent functionality written in C.
 
     \code
-    uint16_t
-    crc16_update (uint16_t crc, uint8_t a)
+    static inline uint16_t
+    _crc16_update (uint16_t crc, uint8_t a)
     {
         crc ^= a;
         for (int i = 0; i < 8; ++i)
@@ -155,8 +150,8 @@ _crc16_update(uint16_t __crc, uint8_t __data)
     The following is the equivalent functionality written in C.
 
     \code
-    uint16_t
-    crc_xmodem_update (uint16_t crc, uint8_t data)
+    static inline uint16_t
+    _crc_xmodem_update (uint16_t crc, uint8_t data)
     {
         crc = crc ^ ((uint16_t)data << 8);
         for (int i = 0; i < 8; i++)
@@ -223,8 +218,8 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
     The following is the equivalent functionality written in C.
 
     \code
-    uint16_t
-    crc_ccitt_update (uint16_t crc, uint8_t data)
+    static inline uint16_t
+    _crc_ccitt_update (uint16_t crc, uint8_t data)
     {
         data ^= lo8 (crc);
         data ^= data << 4;
@@ -282,7 +277,7 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
     The following is the equivalent functionality written in C.
 
     \code
-    uint8_t
+    static inline uint8_t
     _crc_ibutton_update (uint8_t crc, uint8_t data)
     {
         crc = crc ^ data;
@@ -335,12 +330,12 @@ _crc_ibutton_update (uint8_t __crc, uint8_t __data)
     Reference: http://www.itu.int/rec/T-REC-I.432.1-199902-I/en
 
     The C equivalent has been originally written by Dave Hylands.
-    Assembly code is based on _crc_ibutton_update optimization.
+    Assembly code is based on \c _crc_ibutton_update optimization.
 
     The following is the equivalent functionality written in C.
 
     \code
-    uint8_t
+    static inline uint8_t
     _crc8_ccitt_update (uint8_t inCrc, uint8_t inData)
     {
         uint8_t data = inCrc ^ inData;
