@@ -339,7 +339,7 @@ typedef uint64_t uintmax_t;
 /** \ingroup avr_stdint
     largest value an uint8_t can hold. */
 
-#define UINT8_MAX (INT8_MAX * 2 + 1)
+#define UINT8_MAX (__CONCAT(INT8_MAX, U) * 2U + 1U)
 
 /** \ingroup avr_stdint
     largest positive value an int16_t can hold. */
