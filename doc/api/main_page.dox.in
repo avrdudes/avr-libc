@@ -278,16 +278,20 @@ compile-time.
 </dd>
 <dt>Automotive AVR Devices:</dt>
 <dd>
+  ATtiny416auto,
   ATtiny87,
   ATtiny167,
   ATA5505,
   ATA5272,
+  ATA5700M322,
   ATA5702M322,
   ATA5782,
+  ATA5787,
   ATA5790,
   ATA5790N,
   ATA5791,
   ATA5831,
+  ATA5835,
   ATA5795,
   ATA6285,
   ATA6286,
