@@ -681,109 +681,28 @@
 #  include <avr/iotn11.h>
 #elif defined (__AVR_M3000__)
 #  include <avr/iom3000.h>
-#elif defined (__AVR_AVR32DA28__)
-#  include <avr/ioavr32da28.h>
-#elif defined (__AVR_AVR32DA32__)
-#  include <avr/ioavr32da32.h>
-#elif defined (__AVR_AVR32DA48__)
-#  include <avr/ioavr32da48.h>
-#elif defined (__AVR_AVR64DA28__)
-#  include <avr/ioavr64da28.h>
-#elif defined (__AVR_AVR64DA32__)
-#  include <avr/ioavr64da32.h>
-#elif defined (__AVR_AVR64DA48__)
-#  include <avr/ioavr64da48.h>
-#elif defined (__AVR_AVR64DA64__)
-#  include <avr/ioavr64da64.h>
-#elif defined (__AVR_AVR128DA28__)
-#  include <avr/ioavr128da28.h>
-#elif defined (__AVR_AVR128DA32__)
-#  include <avr/ioavr128da32.h>
-#elif defined (__AVR_AVR128DA48__)
-#  include <avr/ioavr128da48.h>
-#elif defined (__AVR_AVR128DA64__)
-#  include <avr/ioavr128da64.h>
-#elif defined (__AVR_AVR32DB28__)
-#  include <avr/ioavr32db28.h>
-#elif defined (__AVR_AVR32DB32__)
-#  include <avr/ioavr32db32.h>
-#elif defined (__AVR_AVR32DB48__)
-#  include <avr/ioavr32db48.h>
-#elif defined (__AVR_AVR64DB28__)
-#  include <avr/ioavr64db28.h>
-#elif defined (__AVR_AVR64DB32__)
-#  include <avr/ioavr64db32.h>
-#elif defined (__AVR_AVR64DB48__)
-#  include <avr/ioavr64db48.h>
-#elif defined (__AVR_AVR64DB64__)
-#  include <avr/ioavr64db64.h>
-#elif defined (__AVR_AVR128DB28__)
-#  include <avr/ioavr128db28.h>
-#elif defined (__AVR_AVR128DB32__)
-#  include <avr/ioavr128db32.h>
-#elif defined (__AVR_AVR128DB48__)
-#  include <avr/ioavr128db48.h>
-#elif defined (__AVR_AVR128DB64__)
-#  include <avr/ioavr128db64.h>
-#elif defined (__AVR_AVR16DD14__)
-#  include <avr/ioavr16dd14.h>
-#elif defined (__AVR_AVR16DD20__)
-#  include <avr/ioavr16dd20.h>
-#elif defined (__AVR_AVR16DD28__)
-#  include <avr/ioavr16dd28.h>
-#elif defined (__AVR_AVR16DD32__)
-#  include <avr/ioavr16dd32.h>
-#elif defined (__AVR_AVR32DD14__)
-#  include <avr/ioavr32dd14.h>
-#elif defined (__AVR_AVR32DD20__)
-#  include <avr/ioavr32dd20.h>
-#elif defined (__AVR_AVR32DD28__)
-#  include <avr/ioavr32dd28.h>
-#elif defined (__AVR_AVR32DD32__)
-#  include <avr/ioavr32dd32.h>
-#elif defined (__AVR_AVR64DD14__)
-#  include <avr/ioavr64dd14.h>
-#elif defined (__AVR_AVR64DD20__)
-#  include <avr/ioavr64dd20.h>
-#elif defined (__AVR_AVR64DD28__)
-#  include <avr/ioavr64dd28.h>
-#elif defined (__AVR_AVR64DD32__)
-#  include <avr/ioavr64dd32.h>
-#elif defined (__AVR_AVR64DU28__)
-#  include <avr/ioavr64du28.h>
-#elif defined (__AVR_AVR64DU32__)
-#  include <avr/ioavr64du32.h>
-#elif defined (__AVR_AVR16EA28__)
-#  include <avr/ioavr16ea28.h>
-#elif defined (__AVR_AVR16EA32__)
-#  include <avr/ioavr16ea32.h>
-#elif defined (__AVR_AVR16EA48__)
-#  include <avr/ioavr16ea48.h>
-#elif defined (__AVR_AVR16EB14__)
-#  include <avr/ioavr16eb14.h>
-#elif defined (__AVR_AVR16EB20__)
-#  include <avr/ioavr16eb20.h>
-#elif defined (__AVR_AVR16EB28__)
-#  include <avr/ioavr16eb28.h>
-#elif defined (__AVR_AVR16EB32__)
-#  include <avr/ioavr16eb32.h>
-#elif defined (__AVR_AVR32EA28__)
-#  include <avr/ioavr32ea28.h>
-#elif defined (__AVR_AVR32EA32__)
-#  include <avr/ioavr32ea32.h>
-#elif defined (__AVR_AVR32EA48__)
-#  include <avr/ioavr32ea48.h>
-#elif defined (__AVR_AVR64EA28__)
-#  include <avr/ioavr64ea28.h>
-#elif defined (__AVR_AVR64EA32__)
-#  include <avr/ioavr64ea32.h>
-#elif defined (__AVR_AVR64EA48__)
-#  include <avr/ioavr64ea48.h>
+/* The headers for the AVR-Dx and AVR-Ex devices follow the uniform
+   naming convention of io<mcu>.h.  Thus there is no need to list them
+   all since they are covered by the __AVR_DEVICE_NAME__ case below.  */
+
 #elif defined (__AVR_DEV_LIB_NAME__)
+/* This case is used for devices that are not supported by AVR-LibC but by
+   means of an ATPACK device support pack.  For details see the avr-gcc Wiki.
+   The macro is here due to the dreaded AVR-LibC naming for device headers
+   like listed above, and that are impossible to predict by the compiler.  */
 #  define __concat__(a,b) a##b
 #  define __header1__(a,b) __concat__(a,b)
 #  define __AVR_DEVICE_HEADER__ <avr/__header1__(io,__AVR_DEV_LIB_NAME__).h>
 #  include __AVR_DEVICE_HEADER__
+
+#elif defined (__AVR_DEVICE_NAME__)
+/* Since GCC v5:  __AVR_DEVICE_NAME__ is defined in the device-specs file
+   to <mcu> qua  avr-gcc -mmcu=<mcu>  (except for cores like avr2).  */
+#  define __concat__(a,b) a##b
+#  define __header1__(a,b) __concat__(a,b)
+#  define __AVR_DEVICE_HEADER__ <avr/__header1__(io,__AVR_DEVICE_NAME__).h>
+#  include __AVR_DEVICE_HEADER__
+
 #else
 #  if !defined(__COMPILING_AVR_LIBC__)
 #    warning "device type not defined"

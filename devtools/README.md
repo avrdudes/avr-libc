@@ -2,7 +2,9 @@
 
 * Store the device header like `ioa5791.h` in `include/avr/`.
 
-* Add a line in `include/avr/io.h`, like
+* When the name of the device header is *not* like `io<mcu>.h`
+  (which is currentlx tha case for all devices except for the
+  AVR-Dx and AVR-Ex ones), then a line in `include/avr/io.h` like:
   ```
   #elif defined (__AVR_ATA5791__)
   #  include <avr/ioa5791.h>
