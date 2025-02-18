@@ -32,3 +32,9 @@
 avrdir = $(prefix)/avr/include/bits
 avr_HEADERS = \
     attribs.h
+
+nodist_avr_HEADERS = \
+    devinfo.h
+
+EXTRA_DIST = \
+    devinfo.h.in

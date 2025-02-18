@@ -1,0 +1,12 @@
+#ifndef __BITS_DEVINFO_H_
+#define __BITS_DEVINFO_H_
+
+#if @COND_DEFINED_Dx@
+#define __AVR_Dx__
+#endif
+
+#if @COND_DEFINED_Ex@
+#define __AVR_Ex__
+#endif
+
+#endif /* __BITS_DEVINFO_H_ */
