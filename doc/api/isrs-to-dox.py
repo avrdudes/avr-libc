@@ -5,6 +5,7 @@
 #     $ ./mcus-to-isrs.sh ../../tmp-device-info
 
 import sys, re, time
+from functools import cmp_to_key
 from vect_to_desc import vect_to_desc
 
 isr_names = frozenset()
@@ -148,6 +149,8 @@ def canonicalize_comment (txt):
              ("Interrupt Request", "IRQ"),
              ("External Interrupt", "External IRQ"),
              ("Pin Change Interrupt", "Pin Change IRQ"),
+             ("External Oscillator Failure Interrupt (NMI)", "External Oscillator Failure (NMI)"),
+             ("Oscillator Failure Interrupt (NMI)", "External Oscillator Failure (NMI)"),
              # Typos
              ("Couner", "Counter"),
              ("Comapre", "Compare"),
@@ -271,6 +274,7 @@ def to_Mcu (mcu):
     mcu = mcu.replace ("TINY", "tiny")
     mcu = mcu.replace ("XMEGA", "xmega")
     mcu = mcu.replace ("MEGA", "mega")
+    mcu = mcu.replace ("AUTO", "auto")
     return mcu
 
 # #define %s_vect _VECTOR(%d) /* %s */
@@ -348,6 +352,72 @@ for line in sys.stdin.readlines():
     # Anything that's not recognized is ignored, but also invalidates cmt.
     cmt = ""
 
+
+#############################################################################
+# Use an AVR-friendly MCU string comparator.
+
+avr_prefixes = ("attiny", "atmega", "atxmega", "avr", "at90can",
+                "at90usb", "at90", "ata", "m")
+
+avr_sizes = (384, 256, 192, 128, 103, 64, 48, 32, 16)
+
+def str_cmp (a, b):
+    # Starship string comparison like C's strcmp."""
+    for i in range (min (len(a), len(b))):
+        if a[i] != b[i]:
+            return ord(a[i]) - ord(b[i])
+    return len(a) - len(b)
+
+def avr_prefix_id (avr, prefixes):
+    for i in range (len(prefixes)):
+        if avr.startswith (prefixes[i]):
+            return i
+    return -1
+
+def avr_flash_size (a):
+    # Try to determine the flash size.
+    for s in avr_sizes:
+        if a.startswith (str(s)):
+            if s == 48:
+                return 48 if a.startswith("480") else 4
+            return s
+    return int(a[0]) if a[0].isdigit() else 0
+
+def avr_comparator (a, b):
+    # 1: Sort according to prefix like "atmega" or "attiny".
+    ida = avr_prefix_id (a, avr_prefixes)
+    idb = avr_prefix_id (b, avr_prefixes)
+    if ida < 0 or idb < 0:
+        return str_cmp (a, b)
+    if ida != idb:
+        return ida - idb
+
+    # Consume prefix.
+    a = a[len(avr_prefixes[ida]):]
+    b = b[len(avr_prefixes[idb]):]
+
+    # 2: Sort according to flash size.
+    sa = avr_flash_size(a)
+    sb = avr_flash_size(b)
+
+    if sa == 0 or sb == 0:
+        return str_cmp (a, b)
+    elif sa != sb:
+        return sa - sb
+
+    # Consume flash size.
+    a = a[len(str(sa)):]
+    b = b[len(str(sb)):]
+
+    # 3: Sort according to suffix; letters go before digits.
+    if len(a) == 0 or len(b) == 0:
+        return str_cmp (a, b)
+
+    if bool(a[0].isdigit()) != bool(b[0].isdigit()):
+        return str_cmp (b, a)
+    return str_cmp (a, b)
+
+
 #############################################################################
 # Step 2: Build all IRQ:Description Pairs and map them to MCU lists.
 
@@ -381,7 +451,8 @@ print (TABLE_START)
 
 for key in sorted(key_to_mcus.keys()):
     irq, desc = key.split (":", 2)
-    mcus = [ to_Mcu(mcu) for mcu in sorted (key_to_mcus[key]) ]
+    mcus = [ to_Mcu(mcu) for mcu in sorted (key_to_mcus[key],
+                                            key=cmp_to_key(avr_comparator))]
     print (TABLE_TR % (irq + "_vect", desc, ", ".join(mcus)))
 
 print (TABLE_END)
