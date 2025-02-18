@@ -25,7 +25,8 @@
 
 ## Improvements and Additions
 
-- Support has been added for: ATxmega16E5, ATA5791, ATA8210, ATA8510 (#876).
+- Support has been added for: ATxmega16E5, ATA5791, ATA8210, ATA8510 (#876),
+  AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32.
 
 - Support has been added for the `stpcpy`, `stpcpy_P`, `stpcpy_F`,
   `stpcpy_PF`, `stpcpy_FX` functions (#1015).

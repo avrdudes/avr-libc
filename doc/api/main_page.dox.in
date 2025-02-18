@@ -469,6 +469,10 @@ compile-time.
 </dd>
 <dt>USB AVR-Dx Devices:</dt>
 <dd>
+  AVR16DU14,
+  AVR16DU20,
+  AVR16DU28,
+  AVR16DU32,
   AVR64DU28,
   AVR64DU32
 </dd>
