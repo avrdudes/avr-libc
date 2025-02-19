@@ -1946,8 +1946,10 @@ the \c __need_size_t macro is defined in line 84 of that file.
 
 \section faq_isr_names What ISR names are available for my device?
 
-The HTML documentation comes with an exhaustive
-\ref avr_signames "table of vector names". In order to get a vector
+The HTML documentation comes with exhaustive
+\ref avr_signames "Vector &rarr; AVRs" and
+\ref avr_mcu_signames "AVR &rarr; Vectors" tables.
+In order to get a vector
 number for the \c ISR_N macro, just append \c _num to the vector
 name as used with \c ISR.  For example use \c ISR_N(ADC0_vect_num)
 instead of ISR(ADC0_vect).
