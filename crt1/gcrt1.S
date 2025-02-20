@@ -146,13 +146,14 @@
 
 #include IOSYMFILE
 
-#include "macros.inc"
+#include <avr/io.h>
+#include "asmdef.h"
 #include "config.h"
 
 ;; Use _VECTOR_SIZE from the I/O header which might be more reliable than
-;; using macros.inc's XJMP according to __AVR_HAVE_JMP_CALL__.  As an example,
+;; using asmdef.h's XJMP according to __AVR_HAVE_JMP_CALL__.  As an example,
 ;; take ATmega808 which avr-gcc lists as short-calls and thus with a vector
-;; size of 2 bytes according to macros.inc, but ATmega808 has _VECTOR_SIZE = 4.
+;; size of 2 bytes according to asmdef.h, but ATmega808 has _VECTOR_SIZE = 4.
 #ifdef _VECTOR_SIZE
 #undef XJMP
 #if _VECTOR_SIZE == 2
@@ -400,6 +401,12 @@ __init:
 #endif
 
 #if defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3))
+#if defined(__AVR_HAVE_ELPM__) || FLASHEND > 0x10000  /* ATmega103 */
+  #define BIG_CODE 1
+#else
+  #define BIG_CODE 0
+#endif
+
 #if BIG_CODE
 	/* Only for >64K devices with RAMPZ, replaces the default code
 	   provided by libgcc.S which is only linked in if necessary.  */

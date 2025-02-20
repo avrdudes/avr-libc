@@ -30,8 +30,8 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "gasava.inc"
-#include "macros.inc"
+#include "asmdef.h"
+
 ;================================================================================
 ; ctype.s
 ;
@@ -68,14 +68,12 @@
 ;
 ;================================================================================
 
-#define rHigh    rP0
-#define rLow     rP1
+#define rHigh    r25   /* first incoming parameter (MSB) */
+#define rLow     r24   /* first incoming parameter (LSB) */
 
 #if defined (Lisascii)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isascii)
 
-GLOBAL(isascii)
+ENTRY isascii
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
           TST     rHigh
           BREQ    0f
@@ -87,27 +85,23 @@ GLOBAL(isascii)
           COM     rLow
           ANDI    rLow, 0x80
           RET
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 #if defined (Ltoascii)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(toascii)
 
-GLOBAL(toascii)
+ENTRY toascii
           CLR     rHigh
           ANDI    rLow, 0x7F
           RET
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 #if defined (Lisalnum)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isalnum)
 
-GLOBAL(isalnum)
+ENTRY isalnum
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
 	tst	rHigh
 	breq	0f
@@ -121,30 +115,26 @@ GLOBAL(isalnum)
 	subi	rLow, lo8(-'9'-1)	; restore rLow
 	XJMP	_U(isalpha)
 2:	ret
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 #if defined (Lcty_isfalse)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(__ctype_isfalse)
 
-GLOBAL(__ctype_isfalse)
+ENTRY __ctype_isfalse
           CLR   rHigh
           CLR   rLow
-GLOBAL(__ctype_istrue)
+ENTRY __ctype_istrue
           RET
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Lisalpha)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isupper)
 
-GLOBAL(isupper)
+ENTRY isupper
           ;CPSE  rHigh,__zero_reg__
           ;XJMP  _U(__ctype_isfalse)    ; checked by _islower later on
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
@@ -154,9 +144,9 @@ GLOBAL(isupper)
           SBRC  rLow,5       ; if bit 5 is set it is no upper
 #endif
           XJMP  _U(__ctype_isfalse)     ; bit 5 is clear, so if isalpha is true it is an upper
-GLOBAL(isalpha)
+ENTRY isalpha
           ORI     rLow,0x20        ; make a lower out of an upper (all others are changed but do not get alpha)
-GLOBAL(islower)
+ENTRY islower
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
           TST   rHigh
           BREQ  0f
@@ -170,17 +160,15 @@ GLOBAL(islower)
           SUBI	rLow, 'z'-'a'+1
           BRSH	1b
           RET			; TRUE: rLow is in -26..-1
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Lisdigit)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isdigit)
 
-GLOBAL(isdigit)
+ENTRY isdigit
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
           TST   rHigh
           BREQ  0f
@@ -194,22 +182,20 @@ GLOBAL(isdigit)
           SUBI  rLow,10
           BRSH  1b
           RET                      ; rLow: -10..-1
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Lisxdigit)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isxdigit)
 
 ; This fact is used below.
 .if	'a' - 'A' - 0x20
   .err
 .endif
 
-GLOBAL(isxdigit)
+ENTRY isxdigit
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
 	tst	rHigh
 	breq	0f
@@ -226,17 +212,15 @@ GLOBAL(isxdigit)
 	subi	rLow, 'f'-'a'+1
 	brsh	1b
 2:	ret				; OK: return a negative value
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Liscntrl)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(iscntrl)
 
-GLOBAL(iscntrl)
+ENTRY iscntrl
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
           TST   rHigh
           BREQ  0f
@@ -252,20 +236,18 @@ GLOBAL(iscntrl)
           BRSH  1b		; iscntrl('\0') --> true
 2:
           RET			; TRUE: rLow is 0x7F or negative value
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Lisprint)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isgraph)
 
-GLOBAL(isgraph)
+ENTRY isgraph
           CPI   rLow,' '
           BREQ  1f
-GLOBAL(isprint)
+ENTRY isprint
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
 	  TST	rHigh
 	  BREQ	0f
@@ -277,22 +259,20 @@ GLOBAL(isprint)
 	  SUBI	rLow, 0x7E - ' ' + 1
 	  BRSH	1b
 	  RET			; TRUE: rlow is negative value
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Lisspace)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isspace)
 
 /* This fact is used below.	*/
 .if	('\t'-9) | ('\n'-10) | ('\f'-12) | ('\r'-13)	; '\v' is 11
   .err
 .endif
 
-GLOBAL(isspace)
+ENTRY isspace
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
           TST   rHigh
           BREQ  0f
@@ -308,17 +288,15 @@ GLOBAL(isspace)
 	  SUBI	rLow, '\r'-'\t'+1
 	  BRSH	1b
 2:	  RET			; TRUE result: rLow is -5..-1 or ' '
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Lispunct)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(ispunct)
 
-GLOBAL(ispunct)
+ENTRY ispunct
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
 	tst	rHigh
 	breq	0f
@@ -335,17 +313,15 @@ GLOBAL(ispunct)
 	brne	1b			; if (isalnum(c)) return 0
 	ldi	rLow, 1
 	ret
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Lisblank)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(isblank)
 
-GLOBAL(isblank)
+ENTRY isblank
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
           TST   rHigh
           BREQ  0f
@@ -361,17 +337,15 @@ GLOBAL(isblank)
           BRNE  1b
 2:
           RET
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Ltolower)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(tolower)
 
-GLOBAL(tolower)
+ENTRY tolower
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
 	tst	rHigh
 	breq	0f
@@ -385,17 +359,15 @@ GLOBAL(tolower)
 	subi	rLow, lo8('A'-'a')	; conversion
 1:	subi	rLow, lo8(-'Z'-1)	; restore
 	ret
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 ;-------------------------------------------------------------------
 
 #if defined (Ltoupper)
-          ASSEMBLY_CLIB_SECTION
-          FUNCTION(toupper)
 
-GLOBAL(toupper)
+ENTRY toupper
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
 	tst	rHigh
 	breq	0f
@@ -409,8 +381,8 @@ GLOBAL(toupper)
 	subi	rLow, lo8('a'-'A')	; conversion
 1:	subi	rLow, lo8(-'z'-1)	; restore
 	ret
+ENDFUNC
 
-          ENDFUNC
 #endif
 
 #endif /* not __DOXYGEN__ */
