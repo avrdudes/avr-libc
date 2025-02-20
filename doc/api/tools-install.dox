@@ -369,6 +369,12 @@ Where the \c \--build platform can be guessed by running
 $ ./source/avr-libc-<version>/config.guess
 \endverbatim
 
+When you want to build and install with extra options, you can for example:
+\verbatim
+$ make CFLAGS=-Werror CCASFLAGS=-Werror
+$ make install prefix=/home/me/install/my-avr-gcc
+\endverbatim
+
 
 \subsection install_avrprog AVRDUDE
 \addindex installation, avrprog
