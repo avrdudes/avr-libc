@@ -30,6 +30,8 @@
 #
 
 EXTRA_DIST = \
+    ctoasm.inc \
+    gasava.inc \
     macros.inc \
     alias.h \
     asmdef.h \

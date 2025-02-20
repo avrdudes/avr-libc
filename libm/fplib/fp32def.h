@@ -29,6 +29,9 @@
 #define PGMX_SECTION(x)	.section .progmemx.gcc_fplib##x, "a", @progbits
 
 #ifdef __AVR_HAVE_ELPM__
+#  if !defined(AVR_RAMPZ_ADDR)
+#  define AVR_RAMPZ_ADDR 0x3b
+#  endif
 #  define LDI_XH_hh8(sym)	ldi XH, hh8(sym)
 #else /* ELPM ? */
 #  define LDI_XH_hh8(sym)	/* empty */

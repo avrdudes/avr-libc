@@ -516,7 +516,9 @@ For an example, see the gas documentation for
 <a href="https://sourceware.org/binutils/docs/as/Macro.html"
    ><tt>.macro</tt></a>.
 A gas <tt>.macro</tt> can further be combined with C preprocessor directives.
-For some real-world examples, see the AVR-LibC source
+For some real-world examples, see the AVR-LibC sources
+<a href="https://github.com/avrdudes/avr-libc/blob/main/common/macros.inc"
+   ><tt>macros.inc</tt></a> and
 <a href="https://github.com/avrdudes/avr-libc/blob/main/common/asmdef.h"
    ><tt>asmdef.h</tt></a>.
 
