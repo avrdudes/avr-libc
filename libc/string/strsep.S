@@ -31,7 +31,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 TINY_WEAK_ALIAS _U(strsep_P) _U(strsep)
 

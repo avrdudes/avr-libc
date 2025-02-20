@@ -28,7 +28,7 @@
 
 /* div() is the same as __divmodhi4() in libgcc */
 
-#include "asmdef.h"
+#include "macros.inc"
 
 	ASSEMBLY_CLIB_SECTION
 	.global div

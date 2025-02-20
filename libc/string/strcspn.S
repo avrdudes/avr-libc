@@ -30,7 +30,7 @@
 
 #ifndef	__DOXYGEN__
 
-#include "asmdef.h"
+#include "macros.inc"
 
 TINY_WEAK_ALIAS _U(strcspn_P) _U(strcspn)
 

@@ -30,7 +30,7 @@
 
 #ifndef	__DOXYGEN__
 
-#include "asmdef.h"
+#include "macros.inc"
 
 #define	val_lo	r22
 #define	val_hi	r23

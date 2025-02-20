@@ -36,7 +36,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 #define src_hi r25
 #define src_lo r24

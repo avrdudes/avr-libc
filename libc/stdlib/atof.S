@@ -30,7 +30,7 @@
 
 #ifndef	__DOXYGEN__
 
-#include "asmdef.h"
+#include "macros.inc"
 #include "alias.h"
 
 	ASSEMBLY_CLIB_SECTION

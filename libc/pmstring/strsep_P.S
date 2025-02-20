@@ -35,7 +35,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 #define strp_lo	r24
 #define dlm_lo	r22

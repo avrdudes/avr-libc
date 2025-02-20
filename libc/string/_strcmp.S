@@ -30,7 +30,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 #define ret_hi r25
 #define ret_lo r24

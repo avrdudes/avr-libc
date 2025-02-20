@@ -30,7 +30,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 TINY_WEAK_ALIAS _U(strncmp_P) _U(strncmp)
 

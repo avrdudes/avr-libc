@@ -1,6 +1,6 @@
 #ifndef __DOXYGEN__
 
-#include "asmdef.h"
+#include "macros.inc"
 
 /* The purpose of this module is to initialize SP to the value
    of symbol __stack, which defaults to RAMEND.  */

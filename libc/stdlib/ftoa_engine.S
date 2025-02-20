@@ -32,7 +32,7 @@
 
 #ifndef	__DOXYGEN__
 
-#include "asmdef.h"
+#include "macros.inc"
 #include "ftoa_engine.h"
 
 #if defined(__AVR_HAVE_ELPM__) && !defined(__AVR_HAVE_ELPMX__)

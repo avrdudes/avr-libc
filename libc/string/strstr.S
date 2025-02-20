@@ -39,7 +39,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 TINY_WEAK_ALIAS _U(strstr_P) _U(strstr)
 

@@ -39,7 +39,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 #define s1_b1 r25
 #define s1_b0 r24

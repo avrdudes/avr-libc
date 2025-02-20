@@ -30,7 +30,7 @@
 
 #ifndef	__DOXYGEN__
 
-#include "asmdef.h"
+#include "macros.inc"
 
 	ASSEMBLY_CLIB_SECTION
 	.global _U(abort)

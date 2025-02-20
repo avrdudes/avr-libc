@@ -1,6 +1,6 @@
 #ifndef __DOXYGEN__
 
-#include "asmdef.h"
+#include "macros.inc"
 
 /* The purpose of this module is to call main and exit.  */
 

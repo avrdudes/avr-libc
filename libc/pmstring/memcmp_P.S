@@ -33,7 +33,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "asmdef.h"
+#include "macros.inc"
 
 #define s1_hi r25
 #define s1_lo r24

@@ -29,7 +29,7 @@
 
 /* ldiv() is the same as __divmodsi4() in libgcc */
 
-#include "asmdef.h"
+#include "macros.inc"
 
 	ASSEMBLY_CLIB_SECTION
 	.global ldiv

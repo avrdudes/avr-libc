@@ -30,6 +30,7 @@
 #
 
 EXTRA_DIST = \
+    macros.inc \
     alias.h \
     asmdef.h \
     ftoa_engine.h \
