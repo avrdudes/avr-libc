@@ -29,7 +29,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
+#include "asmdef.h"
 
 /*
 int getc(FILE *stream);

@@ -56,7 +56,7 @@
 #ifndef	__DOXYGEN__
 
 #include <avr/io.h>
-#include "macros.inc"
+#include "asmdef.h"
 
 /* ???: What was a reason to use aliases for common registers?
    Check the address: is it a port number (value for IN/OUT)?	*/

@@ -30,7 +30,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 	ASSEMBLY_CLIB_SECTION
 	.global	_U(__strcpy)

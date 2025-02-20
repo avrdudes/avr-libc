@@ -34,7 +34,7 @@
 
 #if !defined(__AVR_TINY__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dest_b1 r25
 #define dest_b0 r24
