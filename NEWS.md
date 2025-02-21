@@ -121,7 +121,8 @@
 - `fflush()` is now implemented as a proper (non-inline) function so that
   features like `-wrap` will work as expected (#1017, #1003).
 
-- Distribution is missing `doc/api/dox_latex_header.tex` (#1023).
+- Distribution is missing `dox_latex_header.tex`, `filter-dox.sh`,
+  `avr-libc-logo-large.png` from `doc/api/` (#1023).
 
 ## Pull Requests
 
