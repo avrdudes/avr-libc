@@ -33,7 +33,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define str_hh	r24
 #define str_hi	r23

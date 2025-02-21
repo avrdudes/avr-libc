@@ -32,7 +32,7 @@
 
 #ifndef	__DOXYGEN__
 
-#include "macros.inc"
+#include "asmdef.h"
 #include "ntz.h"
 #include "xtoa_fast.h"
 

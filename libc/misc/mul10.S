@@ -35,7 +35,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define r_hi r25
 #define r_lo r24

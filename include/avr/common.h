@@ -94,6 +94,18 @@ for them.
 #  endif /* XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__) */
 #endif /* __AVR_ARCH__ != 1 */
 
+#if !defined(__AVR_HAVE_SPH__) && !defined(__AVR_SP8__) && __AVR_ARCH__ != 1
+#warning unsupported compiler version
+#endif
+
+/* Stack Pointer High Register */
+#if defined(__AVR_HAVE_SPH__) && !defined(SPH) && __AVR_ARCH__ != 1
+#  if __AVR_ARCH__ >= 100
+#    define SPH _SFR_MEM8(0x3E)
+#  else
+#    define SPH _SFR_IO8(0x3E)
+#  endif
+#endif
 
 /* Status Register */
 #ifndef SREG

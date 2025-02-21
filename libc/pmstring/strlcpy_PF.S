@@ -38,7 +38,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dst_b1		r25
 #define dst_b0		r24

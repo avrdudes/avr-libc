@@ -34,7 +34,7 @@
 
 #if !defined(__AVR_TINY__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define src_b3 r25	/* MSB, ignored */
 #define src_b2 r24

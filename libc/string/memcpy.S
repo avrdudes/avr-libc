@@ -30,7 +30,7 @@
 
 #if !defined(__DOXYGEN__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(memcpy_P) _U(memcpy)
 

@@ -33,7 +33,7 @@
 
 /* $Id$ */
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #if !defined(__AVR_TINY__)
 
