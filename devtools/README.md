@@ -3,8 +3,8 @@
 * Store the device header like `ioa5791.h` in `include/avr/`.
 
 * When the name of the device header is *not* like `io<mcu>.h`
-  (which is currentlx tha case for all devices except for the
-  AVR-Dx and AVR-Ex ones), then a line in `include/avr/io.h` like:
+  (which is currently the case for all devices except for the
+  AVR-Dx and AVR-Ex ones), then add a line in `include/avr/io.h` like:
   ```
   #elif defined (__AVR_ATA5791__)
   #  include <avr/ioa5791.h>
@@ -72,7 +72,7 @@
 
 ## Deploying
 
-* Mention the new device in the NEWS file.
+* Mention the new device in the [NEWS.md](../NEWS.md) file.
 
 * Add the changed files and the two new files (device header
   and iosym file) to git.
