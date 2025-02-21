@@ -121,6 +121,8 @@
 - `fflush()` is now implemented as a proper (non-inline) function so that
   features like `-wrap` will work as expected (#1017, #1003).
 
+- Distribution is missing `doc/api/dox_latex_header.tex` (#1023).
+
 ## Pull Requests
 
 - Improve runtime performance of `free()` (#991).

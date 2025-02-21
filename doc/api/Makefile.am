@@ -38,6 +38,7 @@ CLEANFILES           = *.html *.pdf *.ma *.mas \
                        doxygen.config main_page.dox doxygen-pdf.config
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
+                       dox_latex_header.tex \
                        doxygen.config.in \
                        main_page.dox.in \
                        assembler.dox \
