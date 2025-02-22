@@ -98,8 +98,10 @@
     \ingroup avr_interrupts
 
     Introduces an interrupt handler function (interrupt service
-    routine) that runs with global interrupts initially disabled
+    routine) that runs with the \c SREG.I flag unchanged
     by default with no attributes specified.
+    (On most devices this means that global interrupts are disabled
+    upon servicing the IRQ.)
 
     The \c attributes are optional and alter the behaviour and resultant
     generated code of the interrupt routine. Multiple attributes may
@@ -109,8 +111,11 @@
     Valid attributes are #ISR_BLOCK, #ISR_NOBLOCK, #ISR_NAKED,
     #ISR_FLATTEN, #ISR_NOICF, #ISR_NOGCCISR and ISR_ALIASOF(vect).
 
-    \c vector must be one of the interrupt vector names that are
+    \c vector must be one of the
+    \ref avr_mcu_signames "interrupt vector names" that are
     valid for the particular MCU type.
+
+    See also the #ISR_N macro for an alternative way to introduce an ISR.
 */
 #  define ISR(vector, [attributes])
 #else  /* real code */
@@ -140,11 +145,14 @@
     \ingroup avr_interrupts
 
     Introduces an interrupt handler function (interrupt service
-    routine) that runs with global interrupts initially disabled
+    routine) that runs with the \c SREG.I flag unchanged
     by default with no attributes specified.
+    (On most devices this means that global interrupts are disabled
+    upon servicing the IRQ.)
 
     \c vector_num must be a positive interrupt vector number that is
-    valid for the particular MCU type.
+    valid for the particular MCU type. For available vector number, see
+    for example the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
 
     Contrary to the #ISR macro, #ISR_N does not provide a declarator for
     the ISR.  #ISR_N may be specified more than once, which can be used
