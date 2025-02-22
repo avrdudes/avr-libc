@@ -40,7 +40,8 @@
 @{
 
 \anchor avr_signames
-Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
+Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.<br>
+\ref avr_skip_signames "Skip tables".
 
 
 
@@ -144,7 +145,7 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
   <tr>
     <td>ADC_vect</td>
     <td>ADC Conversion Complete</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny15, ATtiny24, ATtiny24A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny40, ATtiny43U, ATtiny44, ATtiny441, ATtiny44A, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny5, ATtiny828, ATtiny84, ATtiny841, ATtiny84A, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny88, ATtiny167, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8, ATmega8A, ATmega8535, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16, ATmega16A, ATmega16M1, ATmega16U4, ATmega163, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega169, ATmega169A, ATmega169P, ATmega169PA, ATmega32, ATmega32A, ATmega32C1, ATmega32M1, ATmega32U4, ATmega32U6, ATmega323, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega325A, ATmega325P, ATmega325PA, ATmega328, ATmega328P, ATmega328PB, ATmega329, ATmega3290, ATmega3290A, ATmega3290P, ATmega3290PA, ATmega329A, ATmega329P, ATmega329PA, ATmega64, ATmega64A, ATmega64C1, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega645, ATmega6450, ATmega6450A, ATmega6450P, ATmega645A, ATmega645P, ATmega649, ATmega6490, ATmega6490A, ATmega6490P, ATmega649A, ATmega649P, ATmega103, ATmega128, ATmega128A, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90CAN32, AT90CAN64, AT90CAN128, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM161, AT90PWM2, AT90PWM216, AT90PWM2B, AT90PWM3, AT90PWM316, AT90PWM3B, AT90PWM81, AT90S2333, AT90S4433, AT90S4434, AT90S8535, ATA5272, ATA5505, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251</td>
+    <td>ATtiny5, ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny15, ATtiny24, ATtiny24A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny40, ATtiny43U, ATtiny44, ATtiny441, ATtiny44A, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny828, ATtiny84, ATtiny841, ATtiny84A, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny88, ATtiny167, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8, ATmega8A, ATmega8535, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16, ATmega16A, ATmega16M1, ATmega16U4, ATmega163, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega169, ATmega169A, ATmega169P, ATmega169PA, ATmega32, ATmega32A, ATmega32C1, ATmega32M1, ATmega32U4, ATmega32U6, ATmega323, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega325A, ATmega325P, ATmega325PA, ATmega328, ATmega328P, ATmega328PB, ATmega329, ATmega3290, ATmega3290A, ATmega3290P, ATmega3290PA, ATmega329A, ATmega329P, ATmega329PA, ATmega64, ATmega64A, ATmega64C1, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega645, ATmega6450, ATmega6450A, ATmega6450P, ATmega645A, ATmega645P, ATmega649, ATmega6490, ATmega6490A, ATmega6490P, ATmega649A, ATmega649P, ATmega103, ATmega128, ATmega128A, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90CAN32, AT90CAN64, AT90CAN128, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM161, AT90PWM2, AT90PWM216, AT90PWM2B, AT90PWM3, AT90PWM316, AT90PWM3B, AT90PWM81, AT90S2333, AT90S4433, AT90S4434, AT90S8535, ATA5272, ATA5505, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251</td>
   </tr>
   <tr>
     <td>ADCA_CH0_vect</td>
@@ -284,7 +285,7 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
   <tr>
     <td>ANA_COMP_vect</td>
     <td>Analog Comparator</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny11, ATtiny12, ATtiny13, ATtiny13A, ATtiny15, ATtiny20, ATtiny2313, ATtiny2313A, ATtiny24, ATtiny24A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny28, ATtiny4, ATtiny40, ATtiny4313, ATtiny43U, ATtiny44, ATtiny44A, ATtiny45, ATtiny461, ATtiny461A, ATtiny5, ATtiny84, ATtiny84A, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny9, ATtiny1634, ATtiny167, ATmega8, ATmega8A, ATmega8515, ATmega8535, ATmega16, ATmega16A, ATmega161, ATmega162, ATmega163, ATmega32, ATmega32A, ATmega323, AT90S1200, AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, ATA5272, ATA5505, ATA6616C, ATA6617C, ATA664251</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny11, ATtiny12, ATtiny13, ATtiny13A, ATtiny15, ATtiny20, ATtiny2313, ATtiny2313A, ATtiny24, ATtiny24A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny28, ATtiny40, ATtiny4313, ATtiny43U, ATtiny44, ATtiny44A, ATtiny45, ATtiny461, ATtiny461A, ATtiny84, ATtiny84A, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny1634, ATtiny167, ATmega8, ATmega8A, ATmega8515, ATmega8535, ATmega16, ATmega16A, ATmega161, ATmega162, ATmega163, ATmega32, ATmega32A, ATmega323, AT90S1200, AT90S2313, AT90S2333, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, ATA5272, ATA5505, ATA6616C, ATA6617C, ATA664251</td>
   </tr>
   <tr>
     <td>AVCCL_vect</td>
@@ -519,7 +520,7 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
   <tr>
     <td>INT0_vect</td>
     <td>External IRQ 0</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny11, ATtiny12, ATtiny13, ATtiny13A, ATtiny15, ATtiny20, ATtiny22, ATtiny2313, ATtiny2313A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny28, ATtiny4, ATtiny40, ATtiny4313, ATtiny43U, ATtiny441, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny5, ATtiny828, ATtiny841, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny88, ATtiny9, ATtiny1634, ATtiny167, ATmega406, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8, ATmega8A, ATmega8HVA, ATmega8U2, ATmega8515, ATmega8535, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16, ATmega16A, ATmega16HVA, ATmega16HVA2, ATmega16HVB, ATmega16HVBREVB, ATmega16M1, ATmega16U2, ATmega16U4, ATmega161, ATmega162, ATmega163, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega169, ATmega169A, ATmega169P, ATmega169PA, ATmega32, ATmega32A, ATmega32C1, ATmega32HVB, ATmega32HVBREVB, ATmega32M1, ATmega32U2, ATmega32U4, ATmega32U6, ATmega323, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega325A, ATmega325P, ATmega325PA, ATmega328, ATmega328P, ATmega328PB, ATmega329, ATmega3290, ATmega3290A, ATmega3290P, ATmega3290PA, ATmega329A, ATmega329P, ATmega329PA, ATmega64, ATmega64A, ATmega64C1, ATmega64HVE, ATmega64HVE2, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega645, ATmega6450, ATmega6450A, ATmega6450P, ATmega645A, ATmega645P, ATmega649, ATmega6490, ATmega6490A, ATmega6490P, ATmega649A, ATmega649P, ATmega103, ATmega128, ATmega128A, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90CAN32, AT90CAN64, AT90CAN128, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM161, AT90PWM2, AT90PWM216, AT90PWM2B, AT90PWM3, AT90PWM316, AT90PWM3B, AT90PWM81, AT90S1200, AT90S2313, AT90S2323, AT90S2333, AT90S2343, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90SCR100, ATA5272, ATA5505, ATA5700M322, ATA5702M322, ATA5782, ATA5787, ATA5790, ATA5790N, ATA5791, ATA5795, ATA5831, ATA5835, ATA6285, ATA6286, ATA6289, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251, ATA8210, ATA8510</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny11, ATtiny12, ATtiny13, ATtiny13A, ATtiny15, ATtiny20, ATtiny22, ATtiny2313, ATtiny2313A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny28, ATtiny40, ATtiny4313, ATtiny43U, ATtiny441, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny828, ATtiny841, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny88, ATtiny1634, ATtiny167, ATmega406, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8, ATmega8A, ATmega8HVA, ATmega8U2, ATmega8515, ATmega8535, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16, ATmega16A, ATmega16HVA, ATmega16HVA2, ATmega16HVB, ATmega16HVBREVB, ATmega16M1, ATmega16U2, ATmega16U4, ATmega161, ATmega162, ATmega163, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega169, ATmega169A, ATmega169P, ATmega169PA, ATmega32, ATmega32A, ATmega32C1, ATmega32HVB, ATmega32HVBREVB, ATmega32M1, ATmega32U2, ATmega32U4, ATmega32U6, ATmega323, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega325A, ATmega325P, ATmega325PA, ATmega328, ATmega328P, ATmega328PB, ATmega329, ATmega3290, ATmega3290A, ATmega3290P, ATmega3290PA, ATmega329A, ATmega329P, ATmega329PA, ATmega64, ATmega64A, ATmega64C1, ATmega64HVE, ATmega64HVE2, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega645, ATmega6450, ATmega6450A, ATmega6450P, ATmega645A, ATmega645P, ATmega649, ATmega6490, ATmega6490A, ATmega6490P, ATmega649A, ATmega649P, ATmega103, ATmega128, ATmega128A, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90CAN32, AT90CAN64, AT90CAN128, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM161, AT90PWM2, AT90PWM216, AT90PWM2B, AT90PWM3, AT90PWM316, AT90PWM3B, AT90PWM81, AT90S1200, AT90S2313, AT90S2323, AT90S2333, AT90S2343, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90S8535, AT90SCR100, ATA5272, ATA5505, ATA5700M322, ATA5702M322, ATA5782, ATA5787, ATA5790, ATA5790N, ATA5791, ATA5795, ATA5831, ATA5835, ATA6285, ATA6286, ATA6289, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251, ATA8210, ATA8510</td>
   </tr>
   <tr>
     <td>INT1_vect</td>
@@ -774,7 +775,7 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
   <tr>
     <td>PCINT0_vect</td>
     <td>Pin Change IRQ 0</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny2313A, ATtiny24, ATtiny24A, ATtiny25, ATtiny4, ATtiny40, ATtiny4313, ATtiny43U, ATtiny44, ATtiny441, ATtiny44A, ATtiny45, ATtiny48, ATtiny5, ATtiny828, ATtiny84, ATtiny841, ATtiny84A, ATtiny85, ATtiny87, ATtiny88, ATtiny9, ATtiny1634, ATtiny167, ATmega406, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8U2, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16HVA2, ATmega16HVB, ATmega16HVBREVB, ATmega16M1, ATmega16U2, ATmega16U4, ATmega162, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega169, ATmega169A, ATmega169P, ATmega169PA, ATmega32C1, ATmega32HVB, ATmega32HVBREVB, ATmega32M1, ATmega32U2, ATmega32U4, ATmega32U6, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega325A, ATmega325P, ATmega325PA, ATmega328, ATmega328P, ATmega328PB, ATmega329, ATmega3290, ATmega3290A, ATmega3290P, ATmega3290PA, ATmega329A, ATmega329P, ATmega329PA, ATmega64C1, ATmega64HVE, ATmega64HVE2, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega645, ATmega6450, ATmega6450A, ATmega6450P, ATmega645A, ATmega645P, ATmega649, ATmega6490, ATmega6490A, ATmega6490P, ATmega649A, ATmega649P, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90SCR100, ATA5272, ATA5505, ATA5790, ATA5790N, ATA5791, ATA5795, ATA6285, ATA6286, ATA6289, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny2313A, ATtiny24, ATtiny24A, ATtiny25, ATtiny40, ATtiny4313, ATtiny43U, ATtiny44, ATtiny441, ATtiny44A, ATtiny45, ATtiny48, ATtiny828, ATtiny84, ATtiny841, ATtiny84A, ATtiny85, ATtiny87, ATtiny88, ATtiny1634, ATtiny167, ATmega406, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8U2, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16HVA2, ATmega16HVB, ATmega16HVBREVB, ATmega16M1, ATmega16U2, ATmega16U4, ATmega162, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega169, ATmega169A, ATmega169P, ATmega169PA, ATmega32C1, ATmega32HVB, ATmega32HVBREVB, ATmega32M1, ATmega32U2, ATmega32U4, ATmega32U6, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega325A, ATmega325P, ATmega325PA, ATmega328, ATmega328P, ATmega328PB, ATmega329, ATmega3290, ATmega3290A, ATmega3290P, ATmega3290PA, ATmega329A, ATmega329P, ATmega329PA, ATmega64C1, ATmega64HVE, ATmega64HVE2, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega645, ATmega6450, ATmega6450A, ATmega6450P, ATmega645A, ATmega645P, ATmega649, ATmega6490, ATmega6490A, ATmega6490P, ATmega649A, ATmega649P, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90SCR100, ATA5272, ATA5505, ATA5790, ATA5790N, ATA5791, ATA5795, ATA6285, ATA6286, ATA6289, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251</td>
   </tr>
   <tr>
     <td>PCINT1_vect</td>
@@ -1949,22 +1950,22 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
   <tr>
     <td>TIM0_CAPT_vect</td>
     <td>Timer/Counter0 Input Capture</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny4, ATtiny5, ATtiny9</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104</td>
   </tr>
   <tr>
     <td>TIM0_COMPA_vect</td>
     <td>Timer/Counter0 Compare Match A</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24, ATtiny24A, ATtiny4, ATtiny40, ATtiny43U, ATtiny44, ATtiny44A, ATtiny5, ATtiny84, ATtiny84A, ATtiny9, ATtiny1634, ATmega406</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24, ATtiny24A, ATtiny40, ATtiny43U, ATtiny44, ATtiny44A, ATtiny84, ATtiny84A, ATtiny1634, ATmega406</td>
   </tr>
   <tr>
     <td>TIM0_COMPB_vect</td>
     <td>Timer/Counter0 Compare Match B</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24, ATtiny24A, ATtiny4, ATtiny40, ATtiny43U, ATtiny44, ATtiny44A, ATtiny5, ATtiny84, ATtiny84A, ATtiny9, ATtiny1634, ATmega406</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24, ATtiny24A, ATtiny40, ATtiny43U, ATtiny44, ATtiny44A, ATtiny84, ATtiny84A, ATtiny1634, ATmega406</td>
   </tr>
   <tr>
     <td>TIM0_OVF_vect</td>
     <td>Timer/Counter0 Overflow</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24, ATtiny24A, ATtiny4, ATtiny40, ATtiny43U, ATtiny44, ATtiny44A, ATtiny5, ATtiny84, ATtiny84A, ATtiny9, ATtiny1634, ATmega406</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24, ATtiny24A, ATtiny40, ATtiny43U, ATtiny44, ATtiny44A, ATtiny84, ATtiny84A, ATtiny1634, ATmega406</td>
   </tr>
   <tr>
     <td>TIM1_CAPT_vect</td>
@@ -2929,7 +2930,7 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
   <tr>
     <td>VLM_vect</td>
     <td>Vcc Voltage Level Monitor</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny4, ATtiny5, ATtiny9</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104</td>
   </tr>
   <tr>
     <td>VMINT_vect</td>
@@ -2969,7 +2970,7 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
   <tr>
     <td>WDT_vect</td>
     <td>Watchdog Timeout</td>
-    <td>ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24A, ATtiny25, ATtiny261, ATtiny261A, ATtiny4, ATtiny40, ATtiny43U, ATtiny441, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny5, ATtiny828, ATtiny841, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny88, ATtiny9, ATtiny1634, ATtiny167, ATmega406, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8HVA, ATmega8U2, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16HVA, ATmega16HVA2, ATmega16HVB, ATmega16HVBREVB, ATmega16M1, ATmega16U2, ATmega16U4, ATmega164A, ATmega164P, ATmega164PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega32C1, ATmega32HVB, ATmega32HVBREVB, ATmega32M1, ATmega32U2, ATmega32U4, ATmega32U6, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega328, ATmega328P, ATmega328PB, ATmega64C1, ATmega64HVE, ATmega64HVE2, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM161, AT90PWM2, AT90PWM216, AT90PWM2B, AT90PWM3, AT90PWM316, AT90PWM3B, AT90PWM81, AT90SCR100, ATA5272, ATA5505, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251</td>
+    <td>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny13, ATtiny13A, ATtiny20, ATtiny24A, ATtiny25, ATtiny261, ATtiny261A, ATtiny40, ATtiny43U, ATtiny441, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny828, ATtiny841, ATtiny85, ATtiny861, ATtiny861A, ATtiny87, ATtiny88, ATtiny1634, ATtiny167, ATmega406, ATmega48, ATmega48A, ATmega48P, ATmega48PA, ATmega48PB, ATmega8HVA, ATmega8U2, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega16HVA, ATmega16HVA2, ATmega16HVB, ATmega16HVBREVB, ATmega16M1, ATmega16U2, ATmega16U4, ATmega164A, ATmega164P, ATmega164PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega32C1, ATmega32HVB, ATmega32HVBREVB, ATmega32M1, ATmega32U2, ATmega32U4, ATmega32U6, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega328, ATmega328P, ATmega328PB, ATmega64C1, ATmega64HVE, ATmega64HVE2, ATmega64M1, ATmega64RFR2, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega644RFR2, ATmega128RFA1, ATmega128RFR2, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega1284RFR2, ATmega256RFR2, ATmega2560, ATmega2561, ATmega2564RFR2, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, AT90PWM1, AT90PWM161, AT90PWM2, AT90PWM216, AT90PWM2B, AT90PWM3, AT90PWM316, AT90PWM3B, AT90PWM81, AT90SCR100, ATA5272, ATA5505, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251</td>
   </tr>
   <tr>
     <td>WDT_OVERFLOW_vect</td>
@@ -3029,7 +3030,8 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
 
 @{
 \anchor avr_mcu_signames
-Go up to the \ref avr_signames "Vector Name &rarr; MCUs" table.
+Go up to the \ref avr_signames "Vector Name &rarr; MCUs" table.<br>
+\ref avr_skip_signames "Skip this table".
 
 
 
@@ -3051,7 +3053,11 @@ Go up to the \ref avr_signames "Vector Name &rarr; MCUs" table.
   </tr>
 \htmlonly
   <tr>
-    <td>ATtiny10, ATtiny5</td>
+    <td>ATtiny4, ATtiny9</td>
+    <td>ANA_COMP, INT0, PCINT0, TIM0_CAPT, TIM0_COMPA, TIM0_COMPB, TIM0_OVF, VLM, WDT</td>
+  </tr>
+  <tr>
+    <td>ATtiny5, ATtiny10</td>
     <td>ADC, ANA_COMP, INT0, PCINT0, TIM0_CAPT, TIM0_COMPA, TIM0_COMPB, TIM0_OVF, VLM, WDT</td>
   </tr>
   <tr>
@@ -3129,10 +3135,6 @@ Go up to the \ref avr_signames "Vector Name &rarr; MCUs" table.
   <tr>
     <td>ATtiny28</td>
     <td>ANA_COMP, INT0, INT1, LOWLEVEL_IO_PINS, TIMER0_OVF</td>
-  </tr>
-  <tr>
-    <td>ATtiny4, ATtiny9</td>
-    <td>ANA_COMP, INT0, PCINT0, TIM0_CAPT, TIM0_COMPA, TIM0_COMPB, TIM0_OVF, VLM, WDT</td>
   </tr>
   <tr>
     <td>ATtiny40</td>
@@ -3552,5 +3554,8 @@ Go up to the \ref avr_signames "Vector Name &rarr; MCUs" table.
 
 \note For the following devices, only the deprecated \c SIG_ names are available: AT43USB320, AT43USB355, AT76C711, AT90C8534, AT94K, M3000.
 
+\anchor avr_skip_signames
+Go up to the \ref avr_signames "Vector Name &rarr; MCUs" table.<br>
+Go up to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
 @}
 */
