@@ -235,93 +235,47 @@ and families.
 
 /* Status Register */
 #if defined(SREG)
-#  define AVR_STATUS_REG   SREG
-#  if __AVR_ARCH__ >= 100
-#    define AVR_STATUS_ADDR  _SFR_MEM_ADDR(SREG)
-#  else
-#    define AVR_STATUS_ADDR  _SFR_IO_ADDR(SREG)
-#  endif
+#  define SREG_IO_ADDR  _SFR_IO_ADDR(SREG)
 #endif
 
 /* Stack Pointer (combined) Register */
 #if defined(SP)
-#  define AVR_STACK_POINTER_REG   SP
-#  if __AVR_ARCH__ >= 100
-#    define AVR_STACK_POINTER_ADDR  _SFR_MEM_ADDR(SP)
-#  else
-#    define AVR_STACK_POINTER_ADDR  _SFR_IO_ADDR(SP)
-#  endif
+#  define SP_IO_ADDR  _SFR_IO_ADDR(SP)
 #endif
 
 /* Stack Pointer High Register */
 #if defined(SPH)
-#  define _HAVE_AVR_STACK_POINTER_HI 1
-#  define AVR_STACK_POINTER_HI_REG   SPH
-#  if __AVR_ARCH__ >= 100
-#    define AVR_STACK_POINTER_HI_ADDR  _SFR_MEM_ADDR(SPH)
-#  else
-#    define AVR_STACK_POINTER_HI_ADDR  _SFR_IO_ADDR(SPH)
-#  endif
+#  define SPH_IO_ADDR  _SFR_IO_ADDR(SPH)
 #endif
 
 /* Stack Pointer Low Register */
 #if defined(SPL)
-#  define AVR_STACK_POINTER_LO_REG   SPL
-#  if __AVR_ARCH__ >= 100
-#    define AVR_STACK_POINTER_LO_ADDR  _SFR_MEM_ADDR(SPL)
-#  else
-#    define AVR_STACK_POINTER_LO_ADDR  _SFR_IO_ADDR(SPL)
-#  endif
+#  define SPL_IO_ADDR  _SFR_IO_ADDR(SPL)
 #endif
 
 /* RAMPD Register */
 #if defined(RAMPD)
-#  define AVR_RAMPD_REG   RAMPD
-#  if __AVR_ARCH__ >= 100
-#    define AVR_RAMPD_ADDR  _SFR_MEM_ADDR(RAMPD)
-#  else
-#    define AVR_RAMPD_ADDR  _SFR_IO_ADDR(RAMPD)
-#  endif
+#  define RAMPD_IO_ADDR  _SFR_IO_ADDR(RAMPD)
 #endif
 
 /* RAMPX Register */
 #if defined(RAMPX)
-#  define AVR_RAMPX_REG   RAMPX
-#  if __AVR_ARCH__ >= 100
-#    define AVR_RAMPX_ADDR  _SFR_MEM_ADDR(RAMPX)
-#  else
-#    define AVR_RAMPX_ADDR  _SFR_IO_ADDR(RAMPX)
-#  endif
+#  define RAMPX_IO_ADDR  _SFR_IO_ADDR(RAMPX)
 #endif
 
 /* RAMPY Register */
 #if defined(RAMPY)
-#  define AVR_RAMPY_REG   RAMPY
-#  if __AVR_ARCH__ >= 100
-#    define AVR_RAMPY_ADDR  _SFR_MEM_ADDR(RAMPY)
-#  else
-#    define AVR_RAMPY_ADDR  _SFR_IO_ADDR(RAMPY)
-#  endif
+#  define RAMPY_IO_ADDR  _SFR_IO_ADDR(RAMPY)
 #endif
 
 /* RAMPZ Register */
 #if defined(RAMPZ)
-#  define AVR_RAMPZ_REG   RAMPZ
-#  if __AVR_ARCH__ >= 100
-#    define AVR_RAMPZ_ADDR  _SFR_MEM_ADDR(RAMPZ)
-#  else
-#    define AVR_RAMPZ_ADDR  _SFR_IO_ADDR(RAMPZ)
-#  endif
+#  define RAMPZ_IO_ADDR  _SFR_IO_ADDR(RAMPZ)
 #endif
 
 /* Extended Indirect Register */
 #if defined(EIND)
-#  define AVR_EXTENDED_INDIRECT_REG   EIND
-#  if __AVR_ARCH__ >= 100
-#    define AVR_EXTENDED_INDIRECT_ADDR  _SFR_MEM_ADDR(EIND)
-#  else
-#    define AVR_EXTENDED_INDIRECT_ADDR  _SFR_IO_ADDR(EIND)
-#  endif
+#  define EIND_IO_ADDR  _SFR_IO_ADDR(EIND)
 #endif
 
 /*------------ Workaround to old compilers (4.1.2 and earlier)  ------------*/

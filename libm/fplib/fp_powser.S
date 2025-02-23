@@ -69,9 +69,9 @@
 	mov	\reg, r0
         adiw	r30, 1
         brcc    .Lnoinc.\@
-	in	r0, AVR_RAMPZ_ADDR
+	in	r0, RAMPZ_IO_ADDR
         inc	r0
-	out	AVR_RAMPZ_ADDR, r0
+	out	RAMPZ_IO_ADDR, r0
 .Lnoinc.\@:
 #else
 	X_lpm	\reg, Z+
@@ -88,7 +88,7 @@ ENTRY __fp_powser
 	push	rC0
 	push	rcntr
 #ifdef __AVR_HAVE_ELPM__
-	out	AVR_RAMPZ_ADDR, XH
+	out	RAMPZ_IO_ADDR, XH
 #endif
 	X_movw	rC0, rA0
 	X_movw	rC2, rA2
@@ -127,7 +127,7 @@ ENTRY __fp_powser
 	pop	YL
 	pop	YH
 #if defined(__AVR_HAVE_ELPM__) && defined (__AVR_HAVE_RAMPD__)
-	out	AVR_RAMPZ_ADDR, r1
+	out	RAMPZ_IO_ADDR, r1
 #endif
 	ret
 ENDFUNC

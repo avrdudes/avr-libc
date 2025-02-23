@@ -42,8 +42,6 @@
    XL, XH                     ; Via avr/common.h
    YL, YH                     ; Via avr/common.h
    ZL, ZH                     ; Via avr/common.h
-   SPL_IO_ADDR
-   SPH_IO_ADDR
 
    FUNCTION                   ; Just for #ifdef
 
@@ -95,8 +93,6 @@
     #define __zero_reg__ r1
 #endif
 
-#define SPL_IO_ADDR	0x3D
-#define SPH_IO_ADDR	0x3E
 
 #if	defined(__AVR_HAVE_JMP_CALL__)
 # define XJMP	jmp
@@ -368,7 +364,7 @@ _U(\lname):
 	.macro	LPM_R0_ZPLUS_INIT hhi
 #if __AVR_ENHANCED__
   #if __AVR_HAVE_ELPM__
-	out	AVR_RAMPZ_ADDR, \hhi
+	out	RAMPZ_IO_ADDR, \hhi
   #endif
 #endif
 	.endm
@@ -385,7 +381,7 @@ _U(\lname):
 #else
   #if __AVR_HAVE_ELPM__
     /* ELPM without post-increment, load RAMPZ each time (ATmega103) */
-	out	AVR_RAMPZ_ADDR, \hhi
+	out	RAMPZ_IO_ADDR, \hhi
 	elpm
 	adiw	r30,1
 	adc	\hhi, __zero_reg__
@@ -404,7 +400,7 @@ _U(\lname):
    is used exclusively with ELPM and need not to be restored.  */
 	.macro	LPM_R0_ZPLUS_FINI
 #ifdef __AVR_HAVE_RAMPD__
-	out	AVR_RAMPZ_ADDR, __zero_reg__
+	out	RAMPZ_IO_ADDR, __zero_reg__
 #endif
 	.endm
 

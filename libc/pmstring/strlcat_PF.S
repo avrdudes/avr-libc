@@ -103,9 +103,9 @@ _U(strlcat_PF):
 1:	st	X, __zero_reg__		; *X = '\0'
 	sbiw	ZL, 1			; undo post increment
 #ifdef RAMPZ
-	in	r0, _SFR_IO_ADDR(RAMPZ)
+	in	r0, RAMPZ_IO_ADDR
 	sbc	r0, __zero_reg__
-	out	_SFR_IO_ADDR(RAMPZ), r0
+	out	RAMPZ_IO_ADDR, r0
 #endif
 
 .L_strlcat_PF_slen:
@@ -115,9 +115,9 @@ _U(strlcat_PF):
 	brne	.L_strlcat_PF_slen	; --> next char
 	sbiw	ZL, 1			; undo post increment
 #ifdef RAMPZ
-	in	r0, _SFR_IO_ADDR(RAMPZ)
+	in	r0, RAMPZ_IO_ADDR
 	sbc	r0, __zero_reg__
-	out	_SFR_IO_ADDR(RAMPZ), r0
+	out	RAMPZ_IO_ADDR, r0
 #endif
 	X_movw	rWord_b0, dlen_b0
 	add	rWord_b0, ZL

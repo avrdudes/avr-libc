@@ -120,7 +120,7 @@
 	adiw	r30, 1
 	brcc .Lnoinc.\@
 	inc	Z_HH8
-	out	AVR_RAMPZ_ADDR, Z_HH8
+	out	RAMPZ_IO_ADDR, Z_HH8
 .Lnoinc.\@:
 	.ifc \reg,r0
 	.else
@@ -242,7 +242,7 @@ __ftoa_engine:
 #ifdef __AVR_HAVE_ELPM__
 	clr	val_hhi
 	sbci	val_hhi, hh8(-(.L_base10))
-	out	AVR_RAMPZ_ADDR, val_hhi
+	out	RAMPZ_IO_ADDR, val_hhi
 #ifdef Z_HH8
 	mov	Z_HH8, val_hhi
 #endif
@@ -378,7 +378,7 @@ __ftoa_engine:
   ; to find first digit
 #ifdef __AVR_HAVE_ELPM__
 	ldi	ZL, hh8(.L_powr10)
-	out	AVR_RAMPZ_ADDR, ZL
+	out	RAMPZ_IO_ADDR, ZL
 #ifdef Z_HH8
 	mov	Z_HH8, ZL
 #endif
@@ -498,7 +498,7 @@ __ftoa_engine:
 .L_rest:
 	clr	zero
 #ifdef __AVR_HAVE_RAMPD__
-	out AVR_RAMPZ_ADDR, zero
+	out RAMPZ_IO_ADDR, zero
 #endif
 	POP_ZHH8
 	pop	r14

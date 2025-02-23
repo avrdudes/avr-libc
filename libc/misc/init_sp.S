@@ -16,17 +16,19 @@ _U(__init_sp):
 
     ldi r28, lo8(__stack)
 #ifdef __AVR_XMEGA__
-    out AVR_STACK_POINTER_LO_ADDR, r28
-#ifdef _HAVE_AVR_STACK_POINTER_HI
+    out SPL_IO_ADDR, r28
+#ifdef SPH_IO_ADDR
     ldi r29, hi8(__stack)
-    out AVR_STACK_POINTER_HI_ADDR, r29
-#endif  /* _HAVE_AVR_STACK_POINTER_HI */
+    out SPH_IO_ADDR, r29
+#endif  /* Have SPH */
 #else
-#ifdef _HAVE_AVR_STACK_POINTER_HI
+#ifdef SPH_IO_ADDR
     ldi r29, hi8(__stack)
-    out AVR_STACK_POINTER_HI_ADDR, r29
-#endif  /* _HAVE_AVR_STACK_POINTER_HI */
-    out AVR_STACK_POINTER_LO_ADDR, r28
+    out SPH_IO_ADDR, r29
+#endif  /* Have SPH */
+#ifdef SPL_IO_ADDR
+    out SPL_IO_ADDR, r28
+#endif  /* Have SPL */
 #endif  /* __AVR_XMEGA__ */
 
 .size _U(__init_sp), . - _U(__init_sp)

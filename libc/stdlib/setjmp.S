@@ -41,7 +41,7 @@
    jmp_buf:
 	offset	size	description
 	 0	16/2	call-saved registers (r2-r17)
-				(AVR_TINY arch has only 2 call saved registers (r18,r19))
+			(AVR_TINY arch has only 2 call saved registers (r18,r19))
 	16/2	 2	frame pointer (r29:r28)
 	18/4	 2	stack pointer (SPH:SPL)
 	20/6	 1	status register (SREG)
@@ -55,15 +55,7 @@
 
 #ifndef	__DOXYGEN__
 
-#include <avr/io.h>
 #include "asmdef.h"
-
-/* ???: What was a reason to use aliases for common registers?
-   Check the address: is it a port number (value for IN/OUT)?	*/
-#if	AVR_STACK_POINTER_LO_ADDR != 0x3D	\
-     || AVR_STATUS_ADDR != 0x3F
-# error  "Strange address of common registers SPL, SREG"
-#endif
 
 #define jmpb_hi	r25
 #define jmpb_lo	r24
@@ -95,16 +87,16 @@ _U(setjmp):
 	pop	ZH
 	pop	ZL
   ; save stack pointer (after poping)
-	in	ret_lo, AVR_STACK_POINTER_LO_ADDR
+	in	ret_lo, SPL_IO_ADDR
 	st	X+, ret_lo
-#ifdef _HAVE_AVR_STACK_POINTER_HI
-	in	ret_lo, AVR_STACK_POINTER_HI_ADDR
+#ifdef SPH_IO_ADDR
+	in	ret_lo, SPH_IO_ADDR
 	st	X+, ret_lo
 #else
 	st	X+, __zero_reg__
 #endif
   ; save status register (I flag)
-	in	ret_lo, AVR_STATUS_ADDR
+	in	ret_lo, SREG_IO_ADDR
 	st	X+, ret_lo
   ; save return address
 	st	X+, ZL
@@ -146,19 +138,19 @@ _U(longjmp):
 #if  defined (__AVR_XMEGA__) && __AVR_XMEGA__
 	/* A write to SPL will automatically disable interrupts for up to 4
 	   instructions or until the next I/O memory write.	*/
-	out	AVR_STATUS_ADDR, __tmp_reg__
-	out	AVR_STACK_POINTER_LO_ADDR, ZL
-	out	AVR_STACK_POINTER_HI_ADDR, ZH
+	out	SREG_IO_ADDR, __tmp_reg__
+	out	SPL_IO_ADDR, ZL
+	out	SPH_IO_ADDR, ZH
 #else
-# ifdef _HAVE_AVR_STACK_POINTER_HI
+# ifdef SPH_IO_ADDR
 	/* interrupts disabled for shortest possible time (3 cycles) */
 	cli
-	out	AVR_STACK_POINTER_HI_ADDR, ZH
+	out	SPH_IO_ADDR, ZH
 # endif
 	/* Restore status register (including the interrupt enable flag).
 	   Interrupts are re-enabled only after the next instruction.  */
-	out	AVR_STATUS_ADDR, __tmp_reg__
-	out	AVR_STACK_POINTER_LO_ADDR, ZL
+	out	SREG_IO_ADDR, __tmp_reg__
+	out	SPL_IO_ADDR, ZL
 #endif
   ; get return address and jump
 	ld	ZL, X+

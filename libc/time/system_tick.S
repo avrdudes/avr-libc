@@ -40,9 +40,9 @@ ASSEMBLY_CLIB_SECTION
 	.type	system_tick, @function
 system_tick:
     push r24
-    in r24,_SFR_IO_ADDR(SREG)
-	push r24
-	cli
+    in r24,SREG_IO_ADDR
+    push r24
+    cli
     lds r24,__system_time+0
     subi r24, (-1)
     sts __system_time+0,r24
@@ -56,7 +56,7 @@ system_tick:
     sbci r24, (-1)
     sts __system_time+3,r24
     pop r24
-    out _SFR_IO_ADDR(SREG),r24
+    out SREG_IO_ADDR,r24
     pop r24
     ret
 	.size	system_tick, .-system_tick
