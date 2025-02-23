@@ -107,6 +107,7 @@ while getopts $OPTS opt ; do
 done
 shift $((OPTIND - 1))
 test_list=${*:-"time/*.c regression/*.c stdlib/*.c string/*.c pmstring/*.c \
+		stdfix/*.c \
 		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c \
 		avr/*.[cS]"}
 
