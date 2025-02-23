@@ -261,7 +261,7 @@ AM_CONDITIONAL(HAS_DEV_LIB, [test x$enable_device_lib = xtrue])
 dnl TODO: Check for various tools used to build the documentation. If anything
 dnl is missing, don't build the docs by default.
 
-dnl Disable building of dox by default since it they may not build properly on
+dnl Disable building of dox by default since they may not build properly on
 dnl all systems. This isn't optimal, but how do we work around the user not
 dnl having fig2dev and still build all the formats?
 
@@ -682,7 +682,7 @@ m4_include([devices.m4])
 AC_SUBST(COND_DEFINED_Dx)
 AC_SUBST(COND_DEFINED_Ex)
 
-dnl The following include must preceed multilib.m4 and is only
+dnl The following include must precede multilib.m4 and is only
 dnl needed with avr-gcc v4.9 or older, namely if !HAS_DEV_LIB.
 m4_include([devlist.m4])
 
@@ -717,6 +717,7 @@ AC_CONFIG_FILES([
 	libc/time/Makefile
 	libm/Makefile
 	libm/fplib/Makefile
+	libm/fxlib/Makefile
 	scripts/Makefile
 	devtools/Makefile
 ])

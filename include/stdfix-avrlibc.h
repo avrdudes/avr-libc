@@ -91,6 +91,21 @@ __ATTR_CONST__
 extern unsigned long fract
 ulrdivi (unsigned long int num, unsigned long int denom);
 
+/* AVR-LibC extensions for mathematical functions on fixed-point numbers. */
+
+/* Fixed-point square roots using integer arithmetics.
+ * See "Fast Integer Square Root" by Ross M. Fosler, Microchip DS91040 (2000).
+ */
+
+/* Square root of short fract. */
+__ATTR_CONST__
+extern short fract sqrthr(short fract) __asm__("__avr_libc_sqrthr");
+
+/* Square root of unsigned short fract. */
+__ATTR_CONST__
+extern unsigned short fract
+sqrtuhr(unsigned short fract) __asm__("__avr_libc_sqrtuhr");
+
 #ifdef __cplusplus
 }
 #endif

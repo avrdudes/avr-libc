@@ -29,6 +29,5 @@
 # $Id$
 #
 
-SUBDIRS = fplib
-DIST_SUBDIRS = fplib
-
+SUBDIRS = fplib fxlib
+DIST_SUBDIRS = fplib fxlib
