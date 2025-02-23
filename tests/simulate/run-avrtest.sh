@@ -334,7 +334,7 @@ Skip_with_avrtest ()
     esac
 
     grep -i eeprom    $1 > /dev/null && skip_why="EEPROM"
-    grep -i sfr       $1 > /dev/null && skip_why="SFRs"
+    grep -i sfr_      $1 > /dev/null && skip_why="SFRs"
     reason=$(grep SKIP_AVRTEST $1) > /dev/null \
 	&& skip_why=$(echo "$reason" | awk -F\" '{ print $2 }' )
 
