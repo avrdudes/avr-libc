@@ -399,7 +399,7 @@ _U(\lname):
    When the device has no RAMPD, then the device has no RAMPZ, or RAMPZ
    is used exclusively with ELPM and need not to be restored.  */
 	.macro	LPM_R0_ZPLUS_FINI
-#ifdef __AVR_HAVE_RAMPD__
+#if defined(__AVR_HAVE_ELPM__) && defined(__AVR_HAVE_RAMPD__)
 	out	RAMPZ_IO_ADDR, __zero_reg__
 #endif
 	.endm
