@@ -14,8 +14,7 @@
 #define prod_hi __zero_reg__
 #define prod_lo __tmp_reg__
 
-FUNCTION __avr_libc_sqrthi
-ENTRY    __avr_libc_sqrthi
+ENTRY   __sqrthi
 	ldi  cbit, 0x80      ; set initial msb bit
 	clr  res_lo          ; load the initial guess
 .Lnextbit:
@@ -29,7 +28,7 @@ ENTRY    __avr_libc_sqrthi
 	push res_hi
 	push res_lo
 	mov arg_lo, res_lo
-	XCALL __umulqihi3
+	XCALL _U(__umulqihi3)
 	X_movw prod_lo, arg_lo
 	pop res_lo
 	pop res_hi
@@ -44,7 +43,7 @@ ENTRY    __avr_libc_sqrthi
 	com  cbit            ; revert current bit back
 1:	lsr  cbit            ; shift bit for the next iteration
 	breq .Lexit          ; if all bits done, break the cycle
-	XJMP .Lnextbit
+	rjmp .Lnextbit
 .Lexit:
 	mov  arg_lo, res_lo
 	clr  arg_hi          ; msb of the result is always zero

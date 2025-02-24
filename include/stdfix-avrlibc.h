@@ -99,12 +99,12 @@ ulrdivi (unsigned long int num, unsigned long int denom);
 
 /* Square root of short fract. */
 __ATTR_CONST__
-extern short fract sqrthr(short fract) __asm__("__avr_libc_sqrthr");
+extern short fract sqrthr(short fract) __asm__("__sqrthr");
 
 /* Square root of unsigned short fract. */
 __ATTR_CONST__
 extern unsigned short fract
-sqrtuhr(unsigned short fract) __asm__("__avr_libc_sqrtuhr");
+sqrtuhr(unsigned short fract) __asm__("__sqrtuhr");
 
 #ifdef __cplusplus
 }
