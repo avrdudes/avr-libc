@@ -46,6 +46,18 @@
 
 #include <bits/attribs.h>
 
+/** \file */
+/** \defgroup avr_stdfix <stdfix.h>: ISO/IEC TR 18037 Fixed-Point Arithmetic
+    \code #include <stdfix.h> \endcode
+
+As an extension, GNU C supports fixed-point types as defined in the
+N1169 draft of ISO/IEC DTR 18037.
+
+\since <a href="https://gcc.gnu.org/gcc-4.8/changes.html#avr"
+        >avr-gcc v4.8</a>
+*/
+
+
 /* Room for AVR-LibC specific extensions */
 
 /* 7.18a.6.1 The fixed-point arithmetic operation support functions */
@@ -62,31 +74,37 @@
 extern "C" {
 #endif
 
-/*
- * The rdivi() function computes the value \c num/denom and returns the
- * result of the \c fract type.
- */
+/** \name Division */
+
+/** \ingroup avr_stdfix
+    The rdivi() function computes the value \c num/denom and returns the
+    result of the \c fract type.
+    \since AVR-LibC v2.3
+*/
 __ATTR_CONST__
 extern fract rdivi (int num, int denom);
 
-/*
- * The lrdivi() function computes the value of \c num/denom and returns the
- * result of the long fract type.
- */
+/** \ingroup avr_stdfix
+    The lrdivi() function computes the value of \c num/denom and returns the
+    result of the long fract type.
+    \since AVR-LibC v2.3
+*/
 __ATTR_CONST__
 extern long fract lrdivi (long int num, long int denom);
 
-/*
- * The urdivi() function computes the value \c num/denom and returns the
- * result of the \c unsigned \c fract type.
- */
+/** \ingroup avr_stdfix
+    The urdivi() function computes the value \c num/denom and returns the
+    result of the \c unsigned \c fract type.
+    \since AVR-LibC v2.3
+*/
 __ATTR_CONST__
 extern unsigned fract urdivi (unsigned int num, unsigned int denom);
 
-/*
- * The ulrdivi() function computes the value of \c num/denom and returns the
- * result of the unsigned long fract type.
- */
+/** \ingroup avr_stdfix
+    The ulrdivi() function computes the value of \c num/denom and returns the
+    result of the <tt>unsigned long fract</tt> type.
+    \since AVR-LibC v2.3
+*/
 __ATTR_CONST__
 extern unsigned long fract
 ulrdivi (unsigned long int num, unsigned long int denom);
@@ -97,14 +115,30 @@ ulrdivi (unsigned long int num, unsigned long int denom);
  * See "Fast Integer Square Root" by Ross M. Fosler, Microchip DS91040 (2000).
  */
 
-/* Square root of short fract. */
-__ATTR_CONST__
-extern short fract sqrthr(short fract) __asm__("__sqrthr");
+/** \name Square Root */
 
-/* Square root of unsigned short fract. */
+/** \ingroup avr_stdfix
+    Square root of the value \p radic rounded down.
+    \since AVR-LibC v2.3
+*/
+#ifdef __DOXYGEN__
+short fract sqrthr(short fract radic);
+#else
+__ATTR_CONST__
+extern short fract sqrthr(short fract radic) __asm__("__sqrthr");
+#endif /* Doxygen */
+
+/** \ingroup avr_stdfix
+    Square root of the value \p radic rounded down.
+    \since AVR-LibC v2.3
+*/
+#ifdef __DOXYGEN__
+unsigned short fract sqrtuhr(unsigned short fract radic);
+#else
 __ATTR_CONST__
 extern unsigned short fract
 sqrtuhr(unsigned short fract) __asm__("__sqrtuhr");
+#endif /* Doxygen */
 
 #ifdef __cplusplus
 }
