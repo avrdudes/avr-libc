@@ -18,7 +18,7 @@ ENTRY   __sqrthi
 	ldi  cbit, 0x80      ; set initial msb bit
 	clr  res_lo          ; load the initial guess
 .Lnextbit:
-	or   res_lo, cbit    ; set current bit in the guess
+	add  res_lo, cbit    ; set current bit in the guess
 #ifdef __AVR_HAVE_MUL__
 	mul  res_lo, res_lo  ; take the square of the guess
 #else
@@ -38,13 +38,9 @@ ENTRY   __sqrthi
 	cp   arg_lo, prod_lo
 	cpc  arg_hi, prod_hi
 	brsh 1f              ; if square less than arg, set next bit
-	com  cbit            ; mask to negate current bit
-	and  res_lo, cbit    ; clear current bit in the guess
-	com  cbit            ; revert current bit back
+	sub  res_lo, cbit    ; clear current bit in the guess
 1:	lsr  cbit            ; shift bit for the next iteration
-	breq .Lexit          ; if all bits done, break the cycle
-	rjmp .Lnextbit
-.Lexit:
+	brne .Lnextbit
 	mov  arg_lo, res_lo
 	clr  arg_hi          ; msb of the result is always zero
 	clr  __zero_reg__
