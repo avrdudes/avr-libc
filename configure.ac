@@ -534,7 +534,7 @@ AC_DEFUN(
     old_CFLAGS=${CFLAGS}
     CFLAGS="-mmcu=$1"
     CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
-    AC_MSG_CHECKING(if ${CC} has support for $1)
+    AC_MSG_CHECKING(if ${CC} supports $1)
     AC_COMPILE_IFELSE(
       [AC_LANG_SOURCE([],[])],
       [has_dev_support=yes],
@@ -584,7 +584,7 @@ AC_DEFUN(
     then
       old_CFLAGS=${CFLAGS}
       CFLAGS="-mmcu=$1 -I${srcdir}/include"
-      AC_MSG_CHECKING(if $1 supports a compact vector table)
+      AC_MSG_CHECKING(compact vector table support for $1)
       AC_COMPILE_IFELSE(
         [AC_LANG_SOURCE([
 	  #include <avr/io.h>
@@ -617,7 +617,7 @@ AC_DEFUN(
   [
     old_CC=${CC}
     CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
-    AC_MSG_CHECKING(whether ${CC} supports $1 as a multilib selector)
+    AC_MSG_CHECKING(if ${CC} supports multilib option $1)
 
     pml=`${CC} -print-multi-lib | sed 's/@/ -/g'`
     opt=`echo "$1" | sed 's/-/\\\\-/g'`
@@ -644,7 +644,7 @@ AC_DEFUN(
   [
     old_CC=${CC}
     CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
-    AC_MSG_CHECKING(whether ${CC} supports $1 as a multilib path)
+    AC_MSG_CHECKING(if ${CC} supports multilib $1)
     mdir=`echo "$1" | sed -e 's/\\./\\\\./g'`
     pml=`${CC} -print-multi-lib | grep -e "^${mdir};"`
     if test "x$pml" != "x"; then
