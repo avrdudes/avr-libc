@@ -85,10 +85,12 @@ systems, and another section for Windows.
 
 <dt>AVR-LibC</dt>
 <dd>
-  Project Home: http://savannah.gnu.org/projects/avr-libc <br>
-  Source Downloads: https://download-mirror.savannah.gnu.org/releases/avr-libc <br>
+  New Project Home: https://avrdudes.github.io/avr-libc <br>
+  New Source Downloads (&ge; v2.2): https://github.com/avrdudes/avr-libc/releases <br>
   Git: %https://github.com/avrdudes/avr-libc.git <br>
   GitHub: https://github.com/avrdudes/avr-libc <br>
+  Old Project Home: http://savannah.gnu.org/projects/avr-libc <br>
+  Old Source Downloads (&le; v2.1): https://download-mirror.savannah.gnu.org/releases/avr-libc <br>
   \ref install_avr_libc "Installation"
 </dd>
 </dl>
