@@ -62,14 +62,6 @@ N1169 draft of ISO/IEC DTR 18037.
 
 /* 7.18a.6.1 The fixed-point arithmetic operation support functions */
 
-/*
- * The functions below compute the result of the multiplication or division
- * operation on the operands with the indicated types, and return a value with
- * the indicated type.  The return value is rounded towards zero, and is
- * saturated on overflow.  If the second operand of one of the divide
- * functions is zero, the behavior is undefined.
- */
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -121,12 +113,21 @@ long long accum absllk (long long accum val);
 
 #endif /* Doxygen */
 
+/*
+ * The functions below compute the result of the multiplication or division
+ * operation on the operands with the indicated types, and return a value with
+ * the indicated type.  The return value is rounded towards zero, and is
+ * saturated on overflow.  If the second operand of one of the divide
+ * functions is zero, the behavior is undefined.
+ */
 
 /** \name Division */
 
 /** \ingroup avr_stdfix
     The rdivi() function computes the value \c num/denom and returns the
     result of the \c fract type.
+    The return value is rounded towards zero, and is saturated on overflow.
+    If \c denom is zero, the behavior is undefined.
     \since AVR-LibC v2.3
 */
 __ATTR_CONST__
@@ -135,6 +136,8 @@ extern fract rdivi (int num, int denom);
 /** \ingroup avr_stdfix
     The lrdivi() function computes the value of \c num/denom and returns the
     result of the long fract type.
+    The return value is rounded towards zero, and is saturated on overflow.
+    If \c denom is zero, the behavior is undefined.
     \since AVR-LibC v2.3
 */
 __ATTR_CONST__
@@ -143,6 +146,8 @@ extern long fract lrdivi (long int num, long int denom);
 /** \ingroup avr_stdfix
     The urdivi() function computes the value \c num/denom and returns the
     result of the \c unsigned \c fract type.
+    The return value is rounded towards zero, and is saturated on overflow.
+    If \c denom is zero, the behavior is undefined.
     \since AVR-LibC v2.3
 */
 __ATTR_CONST__
@@ -151,6 +156,8 @@ extern unsigned fract urdivi (unsigned int num, unsigned int denom);
 /** \ingroup avr_stdfix
     The ulrdivi() function computes the value of \c num/denom and returns the
     result of the <tt>unsigned long fract</tt> type.
+    The return value is rounded towards zero, and is saturated on overflow.
+    If \c denom is zero, the behavior is undefined.
     \since AVR-LibC v2.3
 */
 __ATTR_CONST__
