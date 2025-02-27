@@ -21,11 +21,10 @@
 #define r_den6   r16
 #define r_den7   r17
 
-FUNCTION ulrdivi
 ENTRY ulrdivi
 	; Check if the numerator is less that the denominator.
-	cp  r_arg1L , r_arg2L
-	cpc r_arg1H , r_arg2H
+	cp  r_arg1L,  r_arg2L
+	cpc r_arg1H,  r_arg2H
 	cpc r_arg1HL, r_arg2HL
 	cpc r_arg1HH, r_arg2HH
 	;; Branch if numerator < denominator

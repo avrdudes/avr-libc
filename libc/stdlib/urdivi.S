@@ -24,7 +24,6 @@
 #define r_quotH  r19
 #define r_quotL  r18
 
-FUNCTION urdivi
 ENTRY urdivi
 	; Check if the divisor is less than the dividend.
 	cp  r_arg1L, r_arg2L

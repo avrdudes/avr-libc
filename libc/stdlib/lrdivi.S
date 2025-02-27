@@ -21,7 +21,6 @@
 #define r_arg2H  r19
 #define r_arg2L  r18
 
-FUNCTION lrdivi
 ENTRY lrdivi
 	bst r_arg2HH, SIGNBIT
 	mov __tmp_reg__, r_arg2HH
@@ -32,7 +31,7 @@ ENTRY lrdivi
 	com r_arg2HL
 	com r_arg2H
 	neg r_arg2L
-	sbci r_arg2H , 0xff
+	sbci r_arg2H,  0xff
 	sbci r_arg2HL, 0xff
 	sbci r_arg2HH, 0xff
 0:
@@ -71,8 +70,8 @@ ENTRY lrdivi
 	; Return negative saturated.
 	ldi r_arg1HH, hhi8(LFRACT_MIN)
 	ldi r_arg1HL, hlo8(LFRACT_MIN)
-	ldi r_arg1H ,  hi8(LFRACT_MIN)
-	ldi r_arg1L ,  lo8(LFRACT_MIN)
+	ldi r_arg1H,   hi8(LFRACT_MIN)
+	ldi r_arg1L,   lo8(LFRACT_MIN)
 .Llrdivi_exit:
 	ret
 .Lnegate_arg1:

@@ -23,7 +23,6 @@
 #define r_arg2H r23
 #define r_arg2L r22
 
-FUNCTION rdivi
 ENTRY rdivi
 	bst r_arg2H, SIGNBIT
 	mov __tmp_reg__, r_arg2H
