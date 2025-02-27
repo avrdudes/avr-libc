@@ -494,130 +494,114 @@ ulrdivi (unsigned long int num, unsigned long int denom);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 short fract roundhr (short fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 unsigned short fract rounduhr (unsigned short fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 fract roundr (fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 unsigned fract roundur (unsigned fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 long fract roundlr (long fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 unsigned long fract roundulr (unsigned long fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 long long fract roundllr (long long fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
-    fit into the range of the return type, the result is saturated.
-
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    fit into the range of the return type, the result is saturated.  */
 unsigned long long fract roundullr (unsigned long long fract val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 short accum roundhk (short accum val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 unsigned short accum rounduhk (unsigned short accum val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 accum roundk (accum val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 unsigned accum rounduk (unsigned accum val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 long accum roundlk (long accum val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 unsigned long accum roundulk (unsigned long accum val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 long long accum roundllk (long long accum val, int bit);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 unsigned long long accum roundullk (unsigned long long accum val, int bit);
 
 
@@ -654,8 +638,9 @@ int countlsfx (type val);
     Round \p val to \p bit fractional bits.  When the result does not
     fit into the range of the return type, the result is saturated.
 
-    As an extension, \p bit may by less or equal to zero.
-    For example, <tt>bit = -1</tt> rounds to an even value.  */
+    As an extension, \p bit may be in the range
+    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
 type roundfx (type val, int bit);
 
 #else /* Doxygen */
