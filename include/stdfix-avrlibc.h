@@ -74,6 +74,54 @@ N1169 draft of ISO/IEC DTR 18037.
 extern "C" {
 #endif
 
+
+/** \name Absolute Value */
+
+#ifdef __DOXYGEN__
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+short fract abshr (short fract val);
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+fract absr (fract val);
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+long fract abslr (long fract val);
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+long long fract absllr (long long fract val);
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+short accum abshk (short accum val);
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+accum absk (accum val);
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+long accum abslk (long accum val);
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of \p val.  When the result does not
+    fit into the range of the return type, the result is saturated.  */
+long long accum absllk (long long accum val);
+
+#endif /* Doxygen */
+
+
 /** \name Division */
 
 /** \ingroup avr_stdfix
@@ -109,35 +157,38 @@ __ATTR_CONST__
 extern unsigned long fract
 ulrdivi (unsigned long int num, unsigned long int denom);
 
+
 /* AVR-LibC extensions for mathematical functions on fixed-point numbers. */
 
 /* Fixed-point square roots using integer arithmetics.
  * See "Fast Integer Square Root" by Ross M. Fosler, Microchip DS91040 (2000).
  */
 
+#ifdef __DOXYGEN__
 /** \name Square Root */
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
-    \since AVR-LibC v2.3
-*/
-#ifdef __DOXYGEN__
+    \since AVR-LibC v2.3  */
 short fract sqrthr(short fract radic);
-#else
-__ATTR_CONST__
-extern short fract sqrthr(short fract radic) __asm__("__sqrthr");
-#endif /* Doxygen */
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
-    \since AVR-LibC v2.3
-*/
-#ifdef __DOXYGEN__
+    \since AVR-LibC v2.3  */
 unsigned short fract sqrtuhr(unsigned short fract radic);
-#else
-__ATTR_CONST__
-extern unsigned short fract
-sqrtuhr(unsigned short fract) __asm__("__sqrtuhr");
+
+
+/** \name Type-Generic Functions */
+
+/** \ingroup avr_stdfix
+    Computes the absolute value of fixed-point value \p val.
+    When the result does not fit into the range of the return type,
+    the result is saturated.  */
+type absfx (type val);
+
+#else /* Doxygen */
+extern short fract sqrthr(short fract radic) __asm__("__sqrthr") __ATTR_CONST__;
+extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
 #endif /* Doxygen */
 
 #ifdef __cplusplus
