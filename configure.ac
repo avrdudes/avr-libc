@@ -556,6 +556,7 @@ dnl Same replacements as performed by mlib-gen.py::to_ident().
 		| sed -e 's:-:_:g' \
 		`
       eval "DEVLIST_${ident}=\"\${DEVLIST_${ident}} $1\""
+      SUPPORTED_MCUS="${SUPPORTED_MCUS} $1"
       upper=$(echo "$1" | tr a-z A-Z)
       defd="defined(__AVR_${upper}__)"
       AS_CASE([$1],
@@ -676,9 +677,11 @@ AC_SUBST(DIR_avr1)
 
 COND_DEFINED_Dx="0"
 COND_DEFINED_Ex="0"
+SUPPORTED_MCUS=""
 
 m4_include([devices.m4])
 
+AC_SUBST(SUPPORTED_MCUS)
 AC_SUBST(COND_DEFINED_Dx)
 AC_SUBST(COND_DEFINED_Ex)
 
@@ -693,6 +696,7 @@ m4_include([multilib.m4])
 AC_CONFIG_FILES([
 	Makefile
 	avr-libc.spec
+	supported-mcus.txt
 	common/Makefile
 	crt1/Makefile
 	crt1/iosym/Makefile
