@@ -31,6 +31,7 @@
 
 EXTRA_DIST = \
 	LICENSE \
+	NEWS.md \
 	bootstrap
 
 DISTCHECK_CONFIGURE_FLAGS=--host=avr
