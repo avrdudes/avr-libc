@@ -299,6 +299,135 @@ long long accum llkbits (long long val);
     and with the same bit representation like \p val.  */
 unsigned long long accum ullkbits (unsigned long long val);
 
+/** \name Count Left-Shift */
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlshr (short fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsuhr (unsigned short fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsr (fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsur (unsigned fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlslr (long fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsulr (unsigned long fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsllr (long long fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsullr (unsigned long long fract val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlshk (short accum val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsuhk (unsigned short accum val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsk (accum val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsuk (unsigned accum val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlslk (long accum val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsulk (unsigned long accum val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsllk (long long accum val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsullk (unsigned long long accum val);
 
 #endif /* Doxygen */
 
@@ -512,6 +641,14 @@ unsigned short fract sqrtuhr(unsigned short fract radic);
     When the result does not fit into the range of the return type,
     the result is saturated.  */
 type absfx (type val);
+
+/** \ingroup avr_stdfix
+    - If \p val is non-zero, the return value is the largest integer
+    \c k for which the expression <tt>val &lt;&lt; k</tt> does not overflow.
+    - If \p val is zero, an integer value is returned that is at least
+    as large as <tt>N - 1</tt>, where <tt>N</tt> is the total number
+    of bits of the type of the argument. */
+int countlsfx (type val);
 
 /** \ingroup avr_stdfix
     Round \p val to \p bit fractional bits.  When the result does not
