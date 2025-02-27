@@ -76,6 +76,7 @@ N1169 draft of ISO/IEC DTR 18037.
 <tr><td align="right"><tt>ulk</tt> <td align="right"><tt>unsigned long accum</tt>  <td>8<td>32.32
 <tr><td align="right"><tt>ullk</tt><td align="right"><tt>unsigned long long accum</tt> <td>8<td>16.48<td>AVR extension
 </table>
+Upper case constant suffixes are also supported.
 */
 
 
@@ -131,6 +132,173 @@ long accum abslk (long accum val);
     Computes the absolute value of \p val.  When the result does not
     fit into the range of the return type, the result is saturated.  */
 long long accum absllk (long long accum val);
+
+
+/** \name Bit-Conversions to Integer */
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+signed char bitshr (short fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned char bitsuhr (unsigned short fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+int bitsr (fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned int bitsur (unsigned fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long bitslr (long fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long bitsulr (unsigned long fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long long bitsllr (long long fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long long bitsullr (unsigned long long fract val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+int bitshk (short accum val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned int bitsuhk (unsigned short accum val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long bitsk (accum val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long bitsuk (unsigned accum val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long long bitslk (long accum val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long long bitsulk (unsigned long accum val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long long bitsllk (long long accum val);
+
+/** \ingroup avr_stdfix
+    Return an integer value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long long bitsullk (unsigned long long accum val);
+
+
+/** \name Bit-Conversions to Fixed-Point */
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+short fract hrbits (signed char val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned short fract uhrbits (unsigned char val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+fract rbits (int val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned fract urbits (unsigned int val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long fract lrbits (long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long fract ulrbits (unsigned long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long long fract llrbits (long long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long long fract ullrbits (unsigned long long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+short accum hkbits (int val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned short accum uhkbits (unsigned int val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+accum kbits (long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned accum ukbits (unsigned long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long accum lkbits (long long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long accum ulkbits (unsigned long long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+long long accum llkbits (long long val);
+
+/** \ingroup avr_stdfix
+    Return a fixed-point value of the same size and signedness,
+    and with the same bit representation like \p val.  */
+unsigned long long accum ullkbits (unsigned long long val);
+
 
 #endif /* Doxygen */
 
@@ -354,7 +522,7 @@ type absfx (type val);
 type roundfx (type val, int bit);
 
 #else /* Doxygen */
-extern short fract sqrthr(short fract radic) __asm__("__sqrthr") __ATTR_CONST__;
+extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
 #endif /* Doxygen */
 
