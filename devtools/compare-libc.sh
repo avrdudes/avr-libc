@@ -87,17 +87,15 @@ do_cmp_lib ()
     L1=$INST/avr/lib/$L
     L2=$LIBC/avr/lib/$ID
 
-    pat=john
-    # Different includes lead to different local \@ in .macro.
-    # -r: GNU sed use regexp like [0-9]+
-    prune="sed -r -e s:\.Lnoinc\.[0-9]++:.Lnoinc.XX+:g"
+    cmd="avr-objdump -dr"
+    #cmd="avr-nm -g"
 
-    (avr-objdump -dr $L1/libc.a | Filter > x0.lst) || exit 1
-    (avr-objdump -dr $L2/libc.a | Filter > x1.lst) || exit 1
+    ($cmd $L1/libc.a | Filter > x0.lst) || exit 1
+    ($cmd $L2/libc.a | Filter > x1.lst) || exit 1
     diff x0.lst x1.lst || exit 1
 
-    (avr-objdump -dr $L1/libm.a | Filter > x0.lst) || exit 1
-    (avr-objdump -dr $L2/libm.a | Filter > x1.lst) || exit 1
+    ($cmd $L1/libm.a | Filter > x0.lst) || exit 1
+    ($cmd $L2/libm.a | Filter > x1.lst) || exit 1
     diff x0.lst x1.lst || exit 1
 }
 
