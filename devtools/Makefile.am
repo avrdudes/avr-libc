@@ -38,5 +38,6 @@ EXTRA_DIST = \
     cr_check.py \
     compare-libc.sh \
     gen-avr-lib-tree.sh.in \
+    update-news.in \
     mlib-gen.py \
     make-binary-dist.sh
