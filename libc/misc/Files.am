@@ -29,8 +29,6 @@
 # $Id$
 #
 
-misc_a_c_sources =
-
 eeprom_c_sources = \
 	eewr_block_xmega.c
 
@@ -61,6 +59,8 @@ dev_asm_sources = \
 	ccp_write_spm.S \
 	ccp_write.S
 
+misc_a_c_sources =
+
 misc_a_asm_sources = \
 	itoa.S \
 	itoa_ncheck.S \
@@ -68,6 +68,7 @@ misc_a_asm_sources = \
 	ltoa_ncheck.S \
 	mulsi10.S \
 	mul10.S \
+	sqrthi.S \
 	ultoa.S \
 	ultoa_ncheck.S \
 	utoa.S \

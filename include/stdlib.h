@@ -648,6 +648,26 @@ extern void srandom(unsigned long __seed);
    so the function becomes re-entrant.
 */
 extern long random_r(unsigned long *__ctx);
+
+/** \ingroup avr_stdlib
+    \return Returns the square root of the 16-bit value \p radic,
+    rounded down to the next integral value.
+ */
+#ifdef __DOXYGEN__
+extern unsigned char sqrtu16_floor(unsigned int radic);
+#else
+extern unsigned char sqrtu16_floor(unsigned) __asm("__sqrthi");
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+unsigned char sqrtu16_floor(unsigned __r)
+{
+  if (__builtin_constant_p ((unsigned char) __builtin_sqrtf ((float) __r)))
+    return (unsigned char) __builtin_sqrtf ((float) __r);
+  extern unsigned char __sqrthi (unsigned);
+  return __sqrthi (__r);
+}
+#endif /* Doxygen */
+
+
 #endif /* __ASSEMBLER */
 /**@}*/
 

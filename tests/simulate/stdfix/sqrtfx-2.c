@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /* Test all 8-bit square roots of 16-bit unsigned integers */
-extern unsigned int __sqrthi(unsigned int);
+extern unsigned char __sqrthi (unsigned arg);
 
 int main()
 {
@@ -14,17 +14,20 @@ int main()
 	
 	if (UINT8_MAX != 255) exit(UINT8_MAX);
 
-	for (i = 0; i < UINT8_MAX; i++) {
+	for (i = 0; i < UINT8_MAX; i++)
+	{
 		sqr = i * i;
 		next_sqr = (i + 1) * (i + 1);
 		/* All square root values for an argument between two consecutive squares
 		   must be equal to the integer part of the square root. */
-		for (j = sqr; j < next_sqr; j++) {
+		for (j = sqr; j < next_sqr; j++)
+		{
 			res = __sqrthi(j);
 			if (res != i) exit(j);
 		}
 	}
-	for (j = UINT8_MAX * UINT8_MAX; j < UINT16_MAX; j++){
+	for (j = UINT8_MAX * UINT8_MAX; j < UINT16_MAX; j++)
+	{
 		res = __sqrthi(j);
 		if (res != UINT8_MAX) exit(j);
 	}

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
-/* Test selected values. */
-extern int __sqrthi(int arg);
+extern unsigned char __sqrthi (unsigned arg);
 
 int main()
 {

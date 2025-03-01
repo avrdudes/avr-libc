@@ -14,6 +14,7 @@
 #define prod_hi __zero_reg__
 #define prod_lo __tmp_reg__
 
+;;; return (uint8_t) sqrt (uint16_t R24);
 ENTRY   __sqrthi
 	ldi  cbit, 0x80      ; set initial msb bit
 	clr  res_lo          ; load the initial guess
@@ -42,7 +43,6 @@ ENTRY   __sqrthi
 1:	lsr  cbit            ; shift bit for the next iteration
 	brne .Lnextbit
 	mov  arg_lo, res_lo
-	clr  arg_hi          ; msb of the result is always zero
 	clr  __zero_reg__
 	ret
 ENDFUNC
