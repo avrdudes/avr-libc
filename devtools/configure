@@ -2158,12 +2158,14 @@ printf "%s\n" "$am_cv_python_pyexecdir" >&6; }
       pkgpyexecdir=\${pyexecdir}/$PACKAGE
 
 
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: using $PYTHON to run mlib-gen.py" >&5
-printf "%s\n" "$as_me: using $PYTHON to run mlib-gen.py" >&6;}
+    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: using $PYTHON to run mlib-gen.py and update-news" >&5
+printf "%s\n" "$as_me: using $PYTHON to run mlib-gen.py and update-news" >&6;}
   fi
 
 
 ac_config_files="$ac_config_files gen-avr-lib-tree.sh"
+
+ac_config_files="$ac_config_files update-news"
 
 
 cat >confcache <<\_ACEOF
@@ -2867,6 +2869,7 @@ for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
     "gen-avr-lib-tree.sh") CONFIG_FILES="$CONFIG_FILES gen-avr-lib-tree.sh" ;;
+    "update-news") CONFIG_FILES="$CONFIG_FILES update-news" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
@@ -3283,6 +3286,7 @@ which seems to be undefined.  Please make sure it is defined" >&2;}
 
   case $ac_file$ac_mode in
     "gen-avr-lib-tree.sh":F) chmod +x gen-avr-lib-tree.sh ;;
+    "update-news":F) chmod +x update-news ;;
 
   esac
 done # for ac_tag

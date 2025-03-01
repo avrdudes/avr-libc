@@ -27,6 +27,7 @@ depcomp
 stamp-h1
 
 devtools/gen-avr-lib-tree.sh
+devtools/update-news
 
 *.bin
 *.elf
