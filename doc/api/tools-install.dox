@@ -572,7 +572,7 @@ GCC top source.  GCC will configure and build these libs during
     - Version 9.00
     - <https://www.ghostscript.com>
     - Download and install.
-    - In the \\bin subdirectory of the installaion, copy gswin32c.exe to gs.exe.
+    - In the \\bin subdirectory of the installation, copy gswin32c.exe to gs.exe.
 
 - Set the \c TEMP and \c TMP environment variables to <b><tt>c:\\\\temp</tt></b>
   or to the
@@ -618,7 +618,7 @@ make all html install install-html 2>&1 | tee binutils-make.log
 
 
 - <b>GCC</b><br>
-    - Open source code pacakge and patch as necessary.
+    - Open source code package and patch as necessary.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>
@@ -725,7 +725,7 @@ make -k all install 2>&1 | tee $package-make.log
     - Delete backup copy of avrdude config file in install directory if exists.
 
 - <b>Insight/GDB</b><br>
-    - Open source code pacakge and patch as necessary.
+    - Open source code package and patch as necessary.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>

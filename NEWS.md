@@ -38,7 +38,7 @@
   `strspn`, `strspn_P`, `strcspn`, `strcspn_P`, `strlcat_P`, `strsep`,
   `strsep_P`, `strpbrk_P`, `strtok_rP`, `ltoa`, `ultoa`.
 
-- Support has beed added for the ISO/IEC TR 18037 fixed-point arithmetic
+- Support has been added for the ISO/IEC TR 18037 fixed-point arithmetic
   functions `rdivi`, `urdivi`, `lrdivi`, `ulrdivi` (#999),
   `sqrthr`, `sqrtuhr` (#1024).
 

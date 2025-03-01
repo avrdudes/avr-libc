@@ -220,7 +220,7 @@ class Makefile (object):
         path = "/".join(dirs) + "/Makefile"
         clazz.files += [ Makefile(path) ]
 
-        # Try to mkdir the directory in in which Makefile.am will live.
+        # Try to mkdir the directory in which Makefile.am will live.
         path = os.path.join(*dirs)
         try:
             os.mkdir (path)
