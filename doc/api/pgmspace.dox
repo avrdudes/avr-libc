@@ -54,13 +54,13 @@ types. This keyword is followed by an attribute specification in double
 parentheses. In AVR GCC, there is a special attribute called
 <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Variable-Attributes.html#index-progmem-variable-attribute_002c-AVR"
    ><tt>progmem</tt></a>.
-This attribute is use on data definitions, and tells the compiler to place
+This attribute is used on data definitions, and tells the compiler to place
 the data in the Program Memory (Flash).
 
 AVR-LibC provides a simple macro #PROGMEM that is defined as the attribute
 syntax of GCC with the \c __progmem__ attribute. The PROGMEM macro is
 defined in the \ref avr_pgmspace "<avr/pgmspace.h>" system header
-which also provides macros and inline functions to access auch data.
+which also provides macros and inline functions to access such data.
 
 An alternative approach is taken by named address-spaces like #__flash
 and #__flashx

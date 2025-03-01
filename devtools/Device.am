@@ -31,7 +31,7 @@
 AVR_TARGET          = <<dev>>
 if HAS_DEV_LIB
 if HAS_GCC_5_1
-# avr-gcc 5.1.0 expects crt file as crt1.o and 
+# avr-gcc 5.1.0 expects crt file as crt1.o and
 # device library in dev directory
 AVR_TARGET_CRT      = crt1.o
 AVR_TARGET_CVT      = crt1-cvt.o
