@@ -760,10 +760,15 @@ extern unsigned char sqrtu16_floor(unsigned) __asm("__sqrthi");
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 unsigned char sqrtu16_floor(unsigned __r)
 {
-  if (__builtin_constant_p ((unsigned char) __builtin_sqrtf ((float) __r)))
-    return (unsigned char) __builtin_sqrtf ((float) __r);
-  extern unsigned char __sqrthi (unsigned);
-  return __sqrthi (__r);
+  if (__builtin_constant_p (__r))
+    {
+      return (unsigned char) __builtin_sqrtf ((float) __r);
+    }
+  else
+    {
+      extern unsigned char __sqrthi (unsigned);
+      return __sqrthi (__r);
+    }
 }
 #endif /* Doxygen */
 
