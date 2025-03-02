@@ -35,6 +35,7 @@
 #define __INTTYPES_H_
 
 #include <stdint.h>
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup avr_inttypes <inttypes.h>: Integer Type conversions
@@ -68,6 +69,48 @@
 	   smallval, longval);
     \endcode
 */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifndef __DOXYGEN__
+static __ATTR_ALWAYS_INLINE__
+long long llabs (long long __i)
+{
+    if (__builtin_constant_p (__builtin_llabs (__i)))
+    {
+        return __builtin_llabs (__i);
+    }
+    else
+    {
+        register long long __r18 __asm("18") = __i;
+        extern long long __negdi2 (long long); /* libgcc */
+        __asm (
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+            "tst %r0+7"     "\n\t"
+            "brpl 1f"       "\n\t"
+            "%~call %x1"    "\n"
+            "1:"
+#else
+            "sbrc %r0+7,7"  "\n\t"
+            "%~call %x1"
+#endif
+            : "+r" (__r18) : "s" (__negdi2));
+        return __r18;
+    }
+}
+#endif
+/**  \ingroup avr_inttypes
+     The llabs() function computes the absolute value of the
+     64-bit integer \c i.
+     \since AVR-LibC v2.3
+*/
+extern long long llabs(long long __i) __ATTR_CONST__;
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 /** \name Far pointers for memory access > 64K */
 

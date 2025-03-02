@@ -51,6 +51,9 @@
   functions `rdivi`, `urdivi`, `lrdivi`, `ulrdivi` ([#999][999]),
   `sqrthr`, `sqrtuhr` ([#1024][1024]).
 
+- Support for `llabs` has been added to
+  [<inttypes.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__inttypes.html).
+
 - Support a new header
   [<avr/flash.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__flash.html#details)
   for better support of avr-gcc's
