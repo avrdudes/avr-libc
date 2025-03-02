@@ -133,6 +133,8 @@
 .macro	ENTRY	name
   .ifndef .L__function
 FUNCTION \name
+  .else
+	.type	_U(\name), "function"
   .endif
 	.global	_U(\name)
 _U(\name):
