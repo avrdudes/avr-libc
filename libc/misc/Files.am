@@ -72,7 +72,10 @@ misc_a_asm_sources = \
 	ultoa.S \
 	ultoa_ncheck.S \
 	utoa.S \
-	utoa_ncheck.S
+	utoa_ncheck.S \
+	lltoa.S \
+	ulltoa.S \
+	ulltoa_base10.S
 
 misc_a_extra_dist = \
 	eedef.h \
