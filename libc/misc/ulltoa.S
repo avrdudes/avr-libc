@@ -12,7 +12,7 @@
 #define A6      A0+6
 #define A7      A0+7
 #define pBufArg r16
-#define Radix   14
+#define Radix   r14
 
 #define Sign    r27
 #define pBuf    r30
@@ -20,15 +20,22 @@
 #define Count   r26
 #define Tmp     __tmp_reg__
 
+#define RADIX_MAX 36
+#define RADIX_MIN  2
+
 ;;; char*  ulltoa (uint64_t val, char* s,   int radix)
 ;;; r24  = ulltoa (uint64_t R18, char* R16, int R14)
+;;;
+;;; Execution time is around  696*N - 623 + 3*(-1)^N for an
+;;; N-digit result irrespective of Radix.
+
 ENTRY __ulltoa
     clr     Sign
 ENTRY __ulltoa.sign
     ;; Radix in [2, 36] ?
     X_movw  ZL, Radix
-    sbiw    ZL, 2
-    sbiw    ZL, 36+1 - 2
+    sbiw    ZL, RADIX_MIN
+    sbiw    ZL, RADIX_MAX + 1 - RADIX_MIN
     X_movw  pBuf, pBufArg
     brlo 1f
     ;;  No
