@@ -52,11 +52,7 @@
 
 #if !defined(__DOXYGEN__)
 
-	.text
-	.global	_U(strncasecmp_PF)
-	.type	_U(strncasecmp_PF), @function
-
-_U(strncasecmp_PF):
+ENTRY _U(strncasecmp_PF)
 
 	X_movw	ZL, s2_b0
 	LPM_R0_ZPLUS_INIT s2_b2
@@ -97,9 +93,7 @@ _U(strncasecmp_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-.L_strncasecmp_PF_end:
-
-	.size	_U(strncasecmp_PF), .L_strncasecmp_PF_end - _U(strncasecmp_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

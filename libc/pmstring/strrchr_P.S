@@ -41,10 +41,7 @@
 #define ret_hi	r25
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strrchr_P)
-	.type	_U(strrchr_P), @function
-_U(strrchr_P):
+ENTRY _U(strrchr_P)
 	X_movw  ZL, src_lo
 	ldi	ret_lo, lo8(1)		; NULL + 1
 	ldi	ret_hi, hi8(1)
@@ -59,7 +56,7 @@ _U(strrchr_P):
 	sbiw	ret_lo, 1	; undo post-increment
 	ret
 
-	.size	_U(strrchr_P), . - _U(strrchr_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

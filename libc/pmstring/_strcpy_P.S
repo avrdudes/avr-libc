@@ -34,18 +34,14 @@
 
 #include "asmdef.h"
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(__strcpy_P)
-	.type	_U(__strcpy_P), @function
-_U(__strcpy_P):
+ENTRY _U(__strcpy_P)
 .Loop:
 	X_lpm	r0, Z+
 	st	X+, r0
 	tst	r0
 	brne	.Loop
 	ret
-
-	.size	_U(__strcpy_P), . - _U(__strcpy_P)
+ENDFUNC
 
 #endif /* ! __DOXYGEN__ */
 

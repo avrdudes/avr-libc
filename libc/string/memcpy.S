@@ -41,10 +41,7 @@ TINY_WEAK_ALIAS _U(memcpy_P) _U(memcpy)
 #define len_hi r21
 #define len_lo r20
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memcpy)
-	.type	_U(memcpy), @function
-_U(memcpy):
+ENTRY _U(memcpy)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 #if OPTIMIZE_SPEED
@@ -74,7 +71,6 @@ _U(memcpy):
 	brcc	.L_memcpy_loop
 ; return dest (unchanged)
 	ret
-.L_memcpy_end:
-	.size	_U(memcpy), .L_memcpy_end - _U(memcpy)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

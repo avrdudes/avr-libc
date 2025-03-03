@@ -44,11 +44,7 @@
 /* This realization is compact, but is not very fast: an accept string
    is not cashed.	*/
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strspn_P)
-	.type   _U(strspn_P), @function
-
-_U(strspn_P):
+ENTRY _U(strspn_P)
 	X_movw	XL, str_lo
   ; get next symbol from s[]
 1:	ld	chs, X+		; *s++
@@ -68,8 +64,8 @@ _U(strspn_P):
 	add	str_lo, XL
 	adc	str_hi, XH
 	ret
+ENDFUNC
 
-	.size _U(strspn_P), . - _U(strspn_P)
 #endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

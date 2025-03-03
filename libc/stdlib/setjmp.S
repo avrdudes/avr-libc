@@ -65,12 +65,7 @@
 #define ret_lo	r24
 #define ret_hi	r25
 
-	ASSEMBLY_CLIB_SECTION
-
-	.global _U(setjmp)
-	.type	_U(setjmp), @function
-
-_U(setjmp):
+ENTRY _U(setjmp)
 	X_movw	XL, jmpb_lo
   ; save call-saved registers and frame pointer
 #if !defined(__AVR_TINY__)
@@ -110,12 +105,10 @@ _U(setjmp):
 #else
 	ijmp
 #endif
-	.size	_U(setjmp), . - _U(setjmp)
+ENDFUNC
 
-	.global _U(longjmp)
-	.type	_U(longjmp), @function
 
-_U(longjmp):
+ENTRY _U(longjmp)
 	X_movw	XL, jmpb_lo
   ; return value
 	X_movw	ret_lo, val_lo
@@ -165,6 +158,7 @@ _U(longjmp):
 #else
 	ijmp
 #endif
+
 	.size	_U(longjmp), . - _U(longjmp)
 
 #endif	/* !__DOXYGEN__ */

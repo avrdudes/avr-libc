@@ -56,10 +56,7 @@
 #define	beg2   r21	/* begin of s2: s2[0]	*/
 #define chr2   r0
 
-ASSEMBLY_CLIB_SECTION
-.global _U(strstr_P)
-.type _U(strstr_P), @function
-_U(strstr_P):
+ENTRY _U(strstr_P)
 
 	X_movw	ZL, s2_lo
 	X_lpm	beg2, Z+
@@ -97,7 +94,7 @@ _U(strstr_P):
 .L_ret:
 	ret
 
-.size _U(strstr_P), . - _U(strstr_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

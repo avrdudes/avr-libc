@@ -39,10 +39,7 @@ TINY_WEAK_ALIAS _U(strcat_P) _U(strcat)
 #define src_hi r23
 #define src_lo r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcat)
-	.type	_U(strcat), @function
-_U(strcat):
+ENTRY _U(strcat)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 .L_strcat_skip:
@@ -62,7 +59,6 @@ _U(strcat):
 	brne	.L_strcat_loop
 ; return dest (unchanged)
 	ret
-.L_strcat_end:
-	.size	_U(strcat), .L_strcat_end - _U(strcat)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

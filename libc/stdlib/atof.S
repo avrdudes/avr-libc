@@ -31,18 +31,11 @@
 #ifndef	__DOXYGEN__
 
 #include "asmdef.h"
-#include "alias.h"
 
-	ASSEMBLY_CLIB_SECTION
-	.global	atoff
-	.type	atoff, "function"
-atoff:
-DALIAS atof
-LALIAS atofl
+ENTRY_FLOAT atoff atof atofl
 	clr	r22
 	clr	r23
-	XJMP	strtod
+	XJMP	_U(strtod)
+ENDFUNC
 
-	.size atoff, .-atoff
-	.end
 #endif	/* !__DOXYGEN__ */

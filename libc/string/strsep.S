@@ -42,10 +42,7 @@ TINY_WEAK_ALIAS _U(strsep_P) _U(strsep)
 
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strsep)
-	.type	_U(strsep),@function
-_U(strsep):
+ENTRY _U(strsep)
   ; check a NULL pointer
 	X_movw	ZL, strp_lo
 	ld	XL, Z+			; str address
@@ -83,6 +80,6 @@ _U(strsep):
 5:	X_movw	ret_lo, str_lo		; return original address
 	ret
 
-	.size	_U(strsep), . - _U(strsep)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

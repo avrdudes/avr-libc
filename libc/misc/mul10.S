@@ -50,11 +50,7 @@
    non-enhanced core, and not present in libgcc.a for enhanced core).
  */
 
-	ASSEMBLY_CLIB_SECTION
-	.type   _U(__mulhi_const_10), @function
-	.global _U(__mulhi_const_10)
-
-_U(__mulhi_const_10):
+ENTRY _U(__mulhi_const_10)
 #if defined(__AVR_HAVE_MUL__)
 	ldi r_tmp2,10
 	mul r_hi,r_tmp2
@@ -75,6 +71,6 @@ _U(__mulhi_const_10):
 	adc r_hi,r_hi
 #endif
 	ret
-	.size _U(__mulhi_const_10), .-_U(__mulhi_const_10)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

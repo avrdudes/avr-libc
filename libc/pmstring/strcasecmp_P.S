@@ -54,10 +54,7 @@
 
 #define tmp r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcasecmp_P)
-	.type	_U(strcasecmp_P), @function
-_U(strcasecmp_P):
+ENTRY _U(strcasecmp_P)
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
 
@@ -82,7 +79,7 @@ _U(strcasecmp_P):
 	sbc	ret_hi, ret_hi		; sign extension
 	ret
 
-	.size   _U(strcasecmp_P), . - _U(strcasecmp_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

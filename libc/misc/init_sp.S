@@ -1,5 +1,7 @@
 #ifndef __DOXYGEN__
 
+#define FUNC_SEGNAME ".init2"
+
 #include "asmdef.h"
 
 /* The purpose of this module is to initialize SP to the value
@@ -8,11 +10,7 @@
 /* Referenced by gcrt1.S.  This function must not be called
    because it is naked.  */
 
-.section ".init2", "ax", @progbits
-.global _U(__init_sp)
-.type   _U(__init_sp), @function
-
-_U(__init_sp):
+ENTRY _U(__init_sp)
 
     ldi r28, lo8(__stack)
 #ifdef __AVR_XMEGA__
@@ -31,6 +29,6 @@ _U(__init_sp):
 #endif  /* Have SPL */
 #endif  /* __AVR_XMEGA__ */
 
-.size _U(__init_sp), . - _U(__init_sp)
+ENDFUNC
 
 #endif  /* !__DOXYGEN__ */

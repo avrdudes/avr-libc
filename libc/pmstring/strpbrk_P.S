@@ -43,11 +43,7 @@
 /* This realization is compact, but is not very fast: an accept string
    is not cashed.	*/
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strpbrk_P)
-	.type   _U(strpbrk_P), @function
-
-_U(strpbrk_P):
+ENTRY _U(strpbrk_P)
 	X_movw	XL, str_lo
 	clr	ret_hi		; a trick to save 1 word
   ; get next symbol from s[]
@@ -65,8 +61,8 @@ _U(strpbrk_P):
 	sbiw	XL, 1
 	X_movw	ret_lo, XL
 3:	ret
+ENDFUNC
 
-	.size _U(strpbrk_P), . - _U(strpbrk_P)
 #endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

@@ -72,11 +72,7 @@
     /* Fixed	*/
 #define	rzero	r1
 
-	ASSEMBLY_CLIB_SECTION
-	.global	__ultoa_invert
-	.type	__ultoa_invert, "function"
-
-__ultoa_invert:
+ENTRY __ultoa_invert
 	X_movw	ZL, str_lo
 	clr	v_fifth			; needed for all (ultoa_lsr)
 	cpi	base, 8
@@ -212,8 +208,7 @@ __ultoa_invert:
 	adc	v_fifth, r0		; here r0 == 0
 	ret
 
-	.size	__ultoa_invert, . - __ultoa_invert
-	.end
+ENDFUNC
 
 #endif	/* !__DOXYGEN__ */
 

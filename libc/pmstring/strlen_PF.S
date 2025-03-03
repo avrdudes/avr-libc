@@ -43,11 +43,7 @@
 
 #if !defined(__DOXYGEN__)
 
-	.text
-	.global	_U(strlen_PF)
-	.type	_U(strlen_PF), @function
-
-_U(strlen_PF):
+ENTRY _U(strlen_PF)
 
 #ifndef __AVR_HAVE_ELPM__
 	X_movw	src_b2, src_b0
@@ -74,7 +70,7 @@ _U(strlen_PF):
 	ret
 #endif /* Have ELPM */
 
-	.size	_U(strlen_PF), . - _U(strlen_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

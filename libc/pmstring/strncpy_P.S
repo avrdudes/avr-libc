@@ -42,10 +42,7 @@
 #define len_hi r21
 #define len_lo r20
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strncpy_P)
-	.type	_U(strncpy_P), @function
-_U(strncpy_P):
+ENTRY _U(strncpy_P)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 .L_strncpy_P_loop:
@@ -69,8 +66,7 @@ _U(strncpy_P):
 .L_strncpy_P_done:
 ; return dest (unchanged)
 	ret
-.L_strncpy_P_end:
-	.size	_U(strncpy_P), .L_strncpy_P_end - _U(strncpy_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

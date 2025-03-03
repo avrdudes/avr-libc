@@ -41,11 +41,7 @@ TINY_WEAK_ALIAS _U(strcspn_P) _U(strcspn)
 
 #define chs	r21	/* char from s[]	*/
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strcspn)
-	.type   _U(strcspn), @function
-
-_U(strcspn):
+ENTRY _U(strcspn)
 	X_movw	XL, str_lo
   ; get next symbol from s[]
 1:	ld	chs, X+		; *s++
@@ -66,6 +62,6 @@ _U(strcspn):
 	adc	str_hi, XH
 	ret
 
-	.size _U(strcspn), . - _U(strcspn)
+ENDFUNC
 
 #endif	/* !__DOXYGEN__ */

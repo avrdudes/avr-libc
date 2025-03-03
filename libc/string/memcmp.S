@@ -44,10 +44,7 @@ TINY_WEAK_ALIAS _U(memcmp_P) _U(memcmp)
 #define ret_hi r25
 #define ret_lo r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memcmp)
-	.type	_U(memcmp), @function
-_U(memcmp):
+ENTRY _U(memcmp)
 	X_movw	ZL, s2_lo
 	X_movw  XL, s1_lo
 	rjmp	.L_memcmp_start
@@ -66,7 +63,6 @@ _U(memcmp):
 ; ret_hi = SREG.C ? 0xFF : 0
 	sbc	ret_hi, ret_hi
 	ret
-.L_memcmp_end:
-	.size	_U(memcmp), .L_memcmp_end - _U(memcmp)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

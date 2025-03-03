@@ -41,10 +41,7 @@ TINY_WEAK_ALIAS _U(strncat_P) _U(strncat)
 #define len_hi r21
 #define len_lo r20
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strncat)
-	.type	_U(strncat), @function
-_U(strncat):
+ENTRY _U(strncat)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 .L_strncat_skip:
@@ -66,7 +63,6 @@ _U(strncat):
 	st	X, __zero_reg__
 ; return dest (unchanged)
 	ret
-.L_strncat_end:
-	.size	_U(strncat), .L_strncat_end - _U(strncat)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

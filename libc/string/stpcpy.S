@@ -39,10 +39,7 @@ TINY_WEAK_ALIAS _U(stpcpy_P) _U(stpcpy)
 #define src_hi r23
 #define src_lo r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(stpcpy)
-	.type	_U(stpcpy), @function
-_U(stpcpy):
+ENTRY _U(stpcpy)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 	XCALL	_U(__strcpy)
@@ -54,6 +51,6 @@ _U(stpcpy):
 	X_movw	dest_lo, XL
 	ret
 
-	.size	_U(stpcpy), . - _U(stpcpy)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

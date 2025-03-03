@@ -39,10 +39,7 @@
 
 ; 11 words, (14 + strlen_P(src) * 8) cycles
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strlen_P)
-	.type	_U(strlen_P), @function
-_U(strlen_P):
+ENTRY _U(strlen_P)
 	X_movw	ZL, src_lo
 .L_strlen_P_loop:
 	X_lpm	r0, Z+
@@ -54,8 +51,7 @@ _U(strlen_P):
 	add	src_lo, ZL
 	adc	src_hi, ZH
 	ret
-
-	.size	_U(strlen_P), . - _U(strlen_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

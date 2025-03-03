@@ -55,11 +55,7 @@
 #define rWord_b1	r25
 #define rWord_b0	r24
 
-	.text
-	.global _U(strlcat_PF)
-	.type	_U(strlcat_PF),@function
-
-_U(strlcat_PF):
+ENTRY _U(strlcat_PF)
 
 	push	src_b2
 	mov	src_b2, src_b20
@@ -128,9 +124,7 @@ _U(strlcat_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-.L_strlcat_PF_end:
-
-	.size	_U(strlcat_PF), .L_strlcat_PF_end - _U(strlcat_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

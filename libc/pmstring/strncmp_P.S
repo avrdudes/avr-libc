@@ -44,10 +44,7 @@
 #define ret_hi r25
 #define ret_lo r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strncmp_P)
-	.type	_U(strncmp_P), @function
-_U(strncmp_P):
+ENTRY _U(strncmp_P)
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
 .L_strncmp_P_loop:
@@ -66,8 +63,7 @@ _U(strncmp_P):
 ; ret_hi = SREG.C ? 0xFF : 0
 	sbc	ret_hi, ret_hi
 	ret
-.L_strncmp_P_end:
-	.size	_U(strncmp_P), .L_strncmp_P_end - _U(strncmp_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

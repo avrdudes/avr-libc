@@ -53,11 +53,7 @@
 
  */
 
-	ASSEMBLY_CLIB_SECTION
-	.type   _U(__mulsi_const_10), @function
-	.global _U(__mulsi_const_10)
-
-_U(__mulsi_const_10):
+ENTRY _U(__mulsi_const_10)
 	mov r_tmp_hi_hi, r_hi_hi
 	mov r_tmp_hi_lo, r_hi_lo
 	mov r_tmp_lo_hi, r_lo_hi
@@ -80,6 +76,6 @@ _U(__mulsi_const_10):
 	adc	r_hi_hi, r_hi_hi			; d *= 10
 
 	ret
-	.size _U(__mulsi_const_10), .-_U(__mulsi_const_10)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

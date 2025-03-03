@@ -43,16 +43,13 @@
 #define len_hi r21
 #define len_lo r20
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memcpy_P)
-	.type	_U(memcpy_P), @function
-_U(memcpy_P):
+ENTRY _U(memcpy_P)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 	XJMP	_U(__memcpy_P)
 ; return dest (unchanged)
 
-	.size	_U(memcpy_P), . - _U(memcpy_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

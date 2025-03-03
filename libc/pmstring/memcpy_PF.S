@@ -47,11 +47,7 @@
 
 #if !defined(__DOXYGEN__)
 
-	.text
-	.global	_U(memcpy_PF)
-	.type	_U(memcpy_PF), @function
-
-_U(memcpy_PF):
+ENTRY _U(memcpy_PF)
 
 	LPM_R0_ZPLUS_INIT src_b2
 	X_movw	ZL, src_b0
@@ -101,9 +97,7 @@ _U(memcpy_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-.L_memcpy_PF_end:
-
-	.size	_U(memcpy_PF), .L_memcpy_PF_end - _U(memcpy_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

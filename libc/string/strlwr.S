@@ -45,11 +45,7 @@
 #define str_lo r24
 #define temp   r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strlwr)
-	.type	_U(strlwr), @function
-
-_U(strlwr):
+ENTRY _U(strlwr)
 	X_movw	XL, str_lo
 
 1:	ld	temp, X
@@ -62,6 +58,6 @@ _U(strlwr):
 	brne	1b		; Z for temp
 	ret
 
-	.size	_U(strlwr), . - _U(strlwr)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

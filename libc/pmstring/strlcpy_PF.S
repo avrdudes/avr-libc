@@ -52,11 +52,7 @@
 #define rWord_b1	r25
 #define rWord_b0	r24
 
-	.text
-	.global	_U(strlcpy_PF)
-	.type	_U(strlcpy_PF), @function
-
-_U(strlcpy_PF):
+ENTRY _U(strlcpy_PF)
 
 	X_movw	ZL, src_b0		; Z = src
 	LPM_R0_ZPLUS_INIT src_b2
@@ -92,9 +88,7 @@ _U(strlcpy_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-.L_strlcpy_PF_end:
-
-	.size	_U(strlcpy_PF), .L_strlcpy_PF_end - _U(strlcpy_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

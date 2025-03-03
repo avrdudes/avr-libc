@@ -46,10 +46,7 @@
 #define ret_hi  r23
 #define ret_lo  r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strchr_PF)
-	.type	_U(strchr_PF), @function
-_U(strchr_PF):
+ENTRY _U(strchr_PF)
 	X_movw	ZL, str_lo
 	LPM_R0_ZPLUS_INIT str_hh
 1:
@@ -71,7 +68,7 @@ _U(strchr_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-	.size	_U(strchr_PF), . - _U(strchr_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

@@ -32,16 +32,12 @@
 
 #include "asmdef.h"
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(abort)
-	.type	_U(abort), "function"
-
-_U(abort):
+ENTRY _U(abort)
 	ldi	r24, lo8(1)
 	ldi	r25, hi8(1)
 	cli
 	XJMP	_U(_exit)
 
-	.size	_U(abort), . - _U(abort)
+ENDFUNC
 
 #endif	/* !__DOXYGEN__	*/

@@ -46,11 +46,7 @@
 
 #if !defined(__DOXYGEN__)
 
-	.text
-	.global	_U(strcat_PF)
-	.type	_U(strcat_PF), @function
-
-_U(strcat_PF):
+ENTRY _U(strcat_PF)
 
 	X_movw	ZL, src_b0
 	LPM_R0_ZPLUS_INIT src_b2
@@ -75,9 +71,7 @@ _U(strcat_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-.L_strcat_PF_end:
-
-	.size	_U(strcat_PF), .L_strcat_PF_end - _U(strcat_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

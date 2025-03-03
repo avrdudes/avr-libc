@@ -44,10 +44,7 @@
 #define ret_hi	r25
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memchr_P)
-	.type	_U(memchr_P), @function
-_U(memchr_P):
+ENTRY _U(memchr_P)
 	X_movw	ZL, src_lo
 
 #if  __AVR_HAVE_LPMX__
@@ -82,7 +79,7 @@ _U(memchr_P):
 	ret
 #endif
 
-	.size	_U(memchr_P), . - _U(memchr_P)
+ENDFUNC
 #endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

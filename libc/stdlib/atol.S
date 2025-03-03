@@ -74,10 +74,6 @@
 #define tmp		r17
 #endif
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(atol)
-	.type   _U(atol), @function
-
 /*
    Skip leading spaces and tabs.  Process optional sign.  Stop conversion
    on detection of a non-numeric character.  Return 0 if string contains
@@ -89,7 +85,7 @@
   .err
 .endif
 
-_U(atol):
+ENTRY _U(atol)
 	PUSH	tmp
 	X_movw	ZL, str_lo		; set pointer to string
 	CLR	num_hi_hi
@@ -113,7 +109,7 @@ _U(atol):
 	SET				; remember number is negative
 	RJMP	.L_atol_loop2
 
-2:	XCALL	__mulsi_const_10	; r25:r24:r23:r22 *= 10
+2:	XCALL	_U(__mulsi_const_10)	; r25:r24:r23:r22 *= 10
 	ADD	num_lo_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_lo_hi, __zero_reg__
 	ADC	num_hi_lo, __zero_reg__
@@ -138,7 +134,6 @@ _U(atol):
 	POP	tmp
 	RET
 
-.L_atol_end:
-	.size _U(atol), .L_atol_end - _U(atol)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

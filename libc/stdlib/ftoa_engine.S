@@ -148,11 +148,7 @@
 .endm
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    ASSEMBLY_CLIB_SECTION
-
-    .global	__ftoa_engine
-    .type	__ftoa_engine, "function"
-__ftoa_engine:
+ENTRY __ftoa_engine
 
 /* --------------------------------------------------------------------
    Float value parse.
@@ -513,7 +509,7 @@ __ftoa_engine:
 	com	r25
 	ret
 
-    .size  __ftoa_engine, . - __ftoa_engine
+ENDFUNC
 
 /* --------------------------------------------------------------------
     Tables.  '.L_powr10' is placed first -- for subnormals stability.

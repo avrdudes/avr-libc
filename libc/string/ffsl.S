@@ -39,10 +39,7 @@
 
 #define	cntr	r30
 
-    ASSEMBLY_CLIB_SECTION
-    .global	_U(ffsl)
-    .type	_U(ffsl), @function
-_U(ffsl):
+ENTRY _U(ffsl)
 
 	ldi	cntr, 1
 	tst	val_lo
@@ -64,6 +61,6 @@ _U(ffsl):
 	clr	r25
 9:	ret
 
-    .size  _U(ffsl), . - _U(ffsl)
-    .end
+ENDFUNC
+
 #endif	/* not __DOXYGEN__ */

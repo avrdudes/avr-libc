@@ -39,10 +39,7 @@ TINY_WEAK_ALIAS _U(strnlen_P) _U(strnlen)
 #define len_hi r23
 #define len_lo r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strnlen)
-	.type	_U(strnlen), @function
-_U(strnlen):
+ENTRY _U(strnlen)
 	X_movw	ZL, src_lo
 .L_strnlen_loop:
 	subi	len_lo, lo8(1)
@@ -57,7 +54,6 @@ _U(strnlen):
 	add	src_lo, ZL
 	adc	src_hi, ZH
 	ret
-.L_strnlen_end:
-	.size	_U(strnlen), .L_strnlen_end - _U(strnlen)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

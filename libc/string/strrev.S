@@ -46,11 +46,7 @@
 #define ltemp  r23
 #define rtemp  r22
 
-    ASSEMBLY_CLIB_SECTION
-    .global _U(strrev)
-    .type   _U(strrev), @function
-
-_U(strrev):
+ENTRY _U(strrev)
 	X_movw	XL, str_lo	; X is start of string
 	X_movw	ZL, str_lo	; Z becomes end of string
   ; find end of string
@@ -71,6 +67,6 @@ _U(strrev):
 
 	ret
 
-    .size _U(strrev), . - _U(strrev)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

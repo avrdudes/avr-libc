@@ -44,10 +44,7 @@
 
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strsep_P)
-	.type	_U(strsep_P),@function
-_U(strsep_P):
+ENTRY _U(strsep_P)
   ; check a NULL pointer
 	X_movw	ZL, strp_lo
 	ld	XL, Z			; str address
@@ -79,7 +76,7 @@ _U(strsep_P):
 5:	X_movw	ret_lo, str_lo		; return original address
 	ret
 
-	.size	_U(strsep_P), . - _U(strsep_P)
+ENDFUNC
 #endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

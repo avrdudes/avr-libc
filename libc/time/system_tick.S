@@ -32,13 +32,9 @@
     Impoved system_tick Credit to Wouter van Gulik.
 */
 
-#include <avr/common.h>
-#include "sectionname.h"
+#include "asmdef.h"
 
-ASSEMBLY_CLIB_SECTION
-    .global	system_tick
-	.type	system_tick, @function
-system_tick:
+ENTRY system_tick
     push r24
     in r24,SREG_IO_ADDR
     push r24
@@ -59,4 +55,4 @@ system_tick:
     out SREG_IO_ADDR,r24
     pop r24
     ret
-	.size	system_tick, .-system_tick
+ENDFUNC

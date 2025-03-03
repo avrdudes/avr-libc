@@ -45,18 +45,14 @@
 
 #if !defined(__DOXYGEN__)
 
-	.text
-	.global	_U(stpcpy_PF)
-	.type	_U(stpcpy_PF), @function
-
-_U(stpcpy_PF):
+ENTRY _U(stpcpy_PF)
 
 	XCALL	_U(strcpy_PF)
 	X_sbiw	XL, 1
 	X_movw	dest_b0, XL
 	ret
 
-	.size	_U(stpcpy_PF), . - _U(stpcpy_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

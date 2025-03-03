@@ -31,8 +31,6 @@
 
 #include "asmdef.h"
 
-	ASSEMBLY_CLIB_SECTION
-	.global ldiv
-ldiv:
-	XJMP	__divmodsi4
-
+ENTRY ldiv
+	XJMP	_U(__divmodsi4)
+ENDFUNC

@@ -44,10 +44,7 @@ TINY_WEAK_ALIAS _U(memchr_P) _U(memchr)
 #define ret_hi r25
 #define ret_lo r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memchr)
-	.type	_U(memchr), @function
-_U(memchr):
+ENTRY _U(memchr)
 	X_movw	ZL, src_lo
 .L_memchr_loop:
 	subi	len_lo, lo8(1)
@@ -68,7 +65,6 @@ _U(memchr):
 	clr	ret_lo
 	clr	ret_hi
 	ret
-.L_memchr_end:
-	.size	_U(memchr), .L_memchr_end - _U(memchr)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

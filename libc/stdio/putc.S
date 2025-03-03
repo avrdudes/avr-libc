@@ -35,10 +35,6 @@
 int putc(int c, FILE *stream);
 */
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(putc)
-	.type	_U(putc), @function
-_U(putc):
+ENTRY _U(putc)
 	XJMP	fputc
-.L_putc_end:
-	.size	_U(putc), .L_putc_end - _U(putc)
+ENDFUNC

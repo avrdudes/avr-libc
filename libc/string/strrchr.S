@@ -42,10 +42,7 @@ TINY_WEAK_ALIAS _U(strrchr_P) _U(strrchr)
 #define ret_hi r25
 #define ret_lo r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strrchr)
-	.type	_U(strrchr), @function
-_U(strrchr):
+ENTRY _U(strrchr)
 	X_movw  ZL, src_lo
 	ldi	ret_lo, lo8(1)	; NULL + 1
 	ldi	ret_hi, hi8(1)
@@ -59,7 +56,6 @@ _U(strrchr):
 	brne	.L_strrchr_loop
 	X_sbiw	ret_lo, 1	; undo post-increment
 	ret
-.L_strrchr_end:
-	.size	_U(strrchr), .L_strrchr_end - _U(strrchr)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

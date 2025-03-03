@@ -42,10 +42,7 @@
 #define ret_hi	r25
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strchr_P)
-	.type	_U(strchr_P), @function
-_U(strchr_P):
+ENTRY _U(strchr_P)
 	X_movw	ZL, str_lo
 1:
 	X_lpm	r0, Z+
@@ -61,7 +58,7 @@ _U(strchr_P):
 	X_movw	ret_lo, ZL
 	ret
 
-	.size	_U(strchr_P), . - _U(strchr_P)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

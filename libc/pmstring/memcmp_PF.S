@@ -54,14 +54,7 @@
 #define ret_b0 r24
 
 /* the conditional caters for pre-1.6.8 libc and standalone use */
-#ifdef ASSEMBLY_CLIB_SECTION
-  ASSEMBLY_CLIB_SECTION
-#else
-  .text
-#endif
-  .global _U(memcmp_PF)
-  .type _U(memcmp_PF), @function
-_U(memcmp_PF):
+ENTRY _U(memcmp_PF)
   X_movw  ZL, s2_b0
   LPM_R0_ZPLUS_INIT s2_b2
   X_movw  XL, s1_b0
@@ -85,7 +78,7 @@ _U(memcmp_PF):
   LPM_R0_ZPLUS_FINI
   ret
 
-  .size _U(memcmp_PF), . - _U(memcmp_PF)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
 

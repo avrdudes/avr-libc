@@ -39,14 +39,10 @@ TINY_WEAK_ALIAS _U(strcmp_P) _U(strcmp)
 #define s2_hi r23
 #define s2_lo r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcmp)
-	.type	_U(strcmp), @function
-_U(strcmp):
+ENTRY _U(strcmp)
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
 	XJMP	_U(__strcmp)
-
-	.size	_U(strcmp), . - _U(strcmp)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */

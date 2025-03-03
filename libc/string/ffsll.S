@@ -47,10 +47,7 @@
 #define	wrd_hi	r31
 #define	cntr	r18
 
-    ASSEMBLY_CLIB_SECTION
-    .global	_U(ffsll)
-    .type	_U(ffsll), @function
-_U(ffsll):
+ENTRY _U(ffsll)
 
 	X_movw	wrd_lo, val_0
 	ldi	cntr, 1
@@ -81,8 +78,7 @@ _U(ffsll):
 	clr	r25
 9:	ret
 
-    .size  _U(ffsll), . - _U(ffsll)
-    .end
+ENDFUNC
 
 #endif	/* not __DOXYGEN__ */
 

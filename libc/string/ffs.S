@@ -36,10 +36,7 @@
 #define	val_hi	r25
 #define	cntr	r30
 
-    ASSEMBLY_CLIB_SECTION
-    .global	_U(ffs)
-    .type	_U(ffs), @function
-_U(ffs):
+ENTRY _U(ffs)
 
 	ldi	cntr, 1
 	tst	val_lo
@@ -54,6 +51,6 @@ _U(ffs):
 	clr	r25
 9:	ret
 
-    .size  _U(ffs), . - _U(ffs)
-    .end
+ENDFUNC
+
 #endif	/* not __DOXYGEN__ */

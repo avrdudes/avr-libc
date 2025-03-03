@@ -52,10 +52,7 @@ TINY_WEAK_ALIAS _U(strstr_P) _U(strstr)
 #define	beg2   r21	/* begin of s2: s2[0]	*/
 #define chr2   __tmp_reg__
 
-ASSEMBLY_CLIB_SECTION
-.global _U(strstr)
-.type _U(strstr), @function
-_U(strstr):
+ENTRY _U(strstr)
 
 	X_movw	ZL, s2_lo
 	ld	beg2, Z+
@@ -93,6 +90,6 @@ _U(strstr):
 .L_ret:
 	ret
 
-.size _U(strstr), . - _U(strstr)
+ENDFUNC
 
 #endif /* not __DOXYGEN__ */
