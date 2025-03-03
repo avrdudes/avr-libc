@@ -17,8 +17,7 @@
 #define Sign    r27
 #define pBuf    r30
 #define Digit   r27
-#define C_Bytes r26
-#define C_Bits  r28
+#define Count   r26
 #define Tmp     __tmp_reg__
 
 ;;; char*  ulltoa (uint64_t val, char* s,   int radix)
@@ -26,8 +25,6 @@
 ENTRY __ulltoa
     clr     Sign
 ENTRY __ulltoa.sign
-    push    C_Bits
-
     ;; Radix in [2, 36] ?
     X_movw  ZL, Radix
     sbiw    ZL, 2
@@ -39,12 +36,11 @@ ENTRY __ulltoa.sign
     rjmp .Lsign
 1:  ;; Yes
 
-    clr     C_Bits
+    ldi     Count, 0xfe
     push    Sign
 .Loop_digits:
     ;; If A[] < Radix we can use A[0] as Digit.
     mov     Digit, A0
-#ifdef __AVR_HAVE_JMP_CALL__
     cp      A0, Radix
     cpc     A1, __zero_reg__
     cpc     A2, __zero_reg__
@@ -53,16 +49,12 @@ ENTRY __ulltoa.sign
     cpc     A5, __zero_reg__
     cpc     A6, __zero_reg__
     cpc     A7, __zero_reg__
-#else
-    mov     r26, Radix
-    XCALL   _U(__cmpdi2_s8)     ; libgcc
-#endif
-    ;; Now C is set iff A[] < Radix
-    sbc     C_Bytes, C_Bytes
-    bst     C_Bytes, 0
+    ;; Now C is set iff A[] < Radix.
+    ;; Set T = C.
+    sbc     Tmp, Tmp
+    bst     Tmp, 0
     ;; T = 1: This is the last digit.
     brts .Lwrite_digit
-    ;; C_Bytes == 0 here.
 
     ;; Compute Digit with 64:8 division with remainder.
     clr     Digit
@@ -85,12 +77,18 @@ ENTRY __ulltoa.sign
     rol     A0
     sbrs    A0, 0
     sub     Digit, Radix
-    subi    C_Bits, 32        ; 256 / 32 = 8 loops
-    brne .Loop_bits
+
+    ;; Low nibble -= 2 until H underflows (8 loops).
+    subi    Count, 2
+    brhc .Loop_bits
 
     com     A0
-    subi    C_Bytes, 32       ; 256 / 32 = 8 loops
-    brne .Loop_bytes
+    ;; High nibble -= 1 until C underflows (8 loops).
+    ;; Notice that the SUBI above also decrements the
+    ;; high nibble by 1 every 8 loops.
+    subi    Count, 0x10
+    brcc .Loop_bytes
+    ;; Now we have Count = 0xfe again.
 
 .Lwrite_digit:
     ;; Convert Digit to ASCII...
@@ -123,7 +121,6 @@ ENTRY __ulltoa.sign
     ;; Return address of the final '\0'.
     pop     r25
     pop     r24
-    pop     C_Bits
     ret
 ENDFUNC
 
