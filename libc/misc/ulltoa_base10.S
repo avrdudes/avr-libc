@@ -256,7 +256,6 @@ ENTRY __ulltoa_base10.X
     ;; The terminating '\0'.
     st      X, __zero_reg__
     ;; Return a pointer to the string termination for swift concat.
-    X_movw  r24, pBuf
     pop     r29
     pop     r28
     pop     r17
@@ -266,6 +265,7 @@ ENTRY __ulltoa_base10.X
     pop     r13
     pop     r12
     pop     r11
+    X_movw  r24, pBufArg
     ret
 ENDFUNC
 

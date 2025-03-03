@@ -112,16 +112,9 @@ ENTRY __ulltoa.sign
     ;; Terminate the string with '\0'
     st      Z, __zero_reg__
 
-    push    ZL
-    push    ZH
-    ; Reverse the string.
+    ;; Reverse the string and return R24.
     X_movw  r24, pBufArg
-    XCALL   _U(strrev)
-
-    ;; Return address of the final '\0'.
-    pop     r25
-    pop     r24
-    ret
+    XJMP    _U(strrev)
 ENDFUNC
 
 #endif /* __AVR_TINY__ */

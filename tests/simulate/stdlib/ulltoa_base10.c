@@ -50,7 +50,7 @@ void test_u64 (void)
       char *s2 = ulltoa_base10 (num, buf2);
       if (strcmp (buf1, buf2))
         __builtin_abort();
-      if (s1 - buf1 != s2 - buf2)
+      if (s1 != buf1 || s2 != buf2)
         __builtin_abort();
     }
 }

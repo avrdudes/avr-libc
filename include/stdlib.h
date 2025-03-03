@@ -641,7 +641,7 @@ char *ultoa (unsigned long __val, char *__s, int __radix)
    between 2 (binary conversion) and up to 36.  If \c radix is greater than 10,
    the next digit after \c '9' will be the letter \c 'a'.
 
-   \return The ulltoa() function returns the address of the terminating '\\0'.
+   \return The ulltoa() function returns the pointer passed as \c s.
 
    \since AVR-LibC v2.3
 */
@@ -673,8 +673,7 @@ extern char* ulltoa(unsigned long long, char*, int) __asm("__ulltoa");
    The function will write at most 21 characters (including the
    terminating '\\0').
 
-   \return The ulltoa_base10() function returns the address of the
-   terminating '\\0'.
+   \return The ulltoa_base10() function returns the pointer passed as \c s.
 
    \since AVR-LibC v2.3
 */
@@ -708,7 +707,7 @@ extern char* ulltoa_base10(unsigned long long, char*) __asm("__ulltoa_base10");
    between 2 (binary conversion) and up to 36.  If \c radix is greater than 10,
    the next digit after \c '9' will be the letter \c 'a'.
 
-   \return The lltoa() function returns the address of the terminating '\\0'.
+   \return The lltoa() function returns the pointer passed as \c s.
 
    \since AVR-LibC v2.3
 */
