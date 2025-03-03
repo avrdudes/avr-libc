@@ -625,6 +625,11 @@ char *ultoa (unsigned long __val, char *__s, int __radix)
    The function ulltoa() writes the ASCII representation of
    the unsigned 64-bit integer \c val to a string starting at \c s.
 
+   The execution time is around 700&middot;<i>N</i>&nbsp;&minus;&nbsp;600
+   cycles for an <i>N</i>-digit result irrespective of \p radix.
+   This means a decimal conversion can take up to 13500 cycles,
+   and a binary conversion can take up to 44000 cycles.
+
    \param val
    An unsigned 64-bit integral value for which the ASCII representation
    is computed.
@@ -654,14 +659,14 @@ extern char* ulltoa(unsigned long long, char*, int) __asm("__ulltoa");
 /** \ingroup avr_stdlib
    \brief Convert an unsigned 64-bit integer to a decimal string.
 
-   The function ulltoa_baase10() writes the decmial ASCII representation of
+   The function ulltoa_base10() writes the decmial ASCII representation of
    the unsigned 64-bit integer \c val to a string starting at \c s.
    The effect is the same like for <tt>ulltoa(val, s, 10)</tt>.
 
    This function can be used for decimal ASCII conversions when
    ulltoa() is not fast enough.  It consumes no more than 3300 cycles
    (no more than 2800 cycles with \c MUL),
-   where ulltoa() may consume more than 25000 cycles.
+   where ulltoa() may consume up to 13500 cycles for a decimal conversion.
 
    \param val
    An unsigned 64-bit integral value for which the decimal ASCII
