@@ -58,6 +58,7 @@
   - \ref faq_assign_chain
   - \ref faq_use_bv
   - \ref faq_tinyavr_c
+  - \ref faq_AVRrc
 
 - <b>(Inline) Assembly</b>
 
@@ -1197,6 +1198,18 @@ Bruce D. Lightner wrote an excellent description of how to do this,
 and offers this together with a toolkit on his web page:
 
 http://lightner.net/avr/ATtinyAvrGcc.html
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_AVRrc What features are (not) supported on AVRrc Reduced Core devices?
+
+On the Reduced Core with only 16 general purpose registers, the following
+features are not supported:
+
+- The printf and scanf families of functions
+- Floating-point arithmetic
+- Arithmetic involving 64-bit computations
+- Named address-spaces like \c #__flash.
 
 <small>Back to \ref faq_index.</small>
 
