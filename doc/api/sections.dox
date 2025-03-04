@@ -622,6 +622,13 @@ empty ones, that are valid in a section name.
     <td>\c __init_cvt<sup>v2.3</sup>
   </tr>
   <tr>
+    <td><tt>.init3</tt>
+    <td>Paints the RAM from #__heap_start up to RAMEND in
+      preparation for _get_ram_unused().
+    <td>AVR-LibC
+    <td>\c __init_ram_color<sup>v2.3</sup>
+  </tr>
+  <tr>
     <td><tt>.init4</tt>
     <td>Initializes data in static storage: Initializes
       <tt>\ref sec_dot_data ".data"</tt> and clears

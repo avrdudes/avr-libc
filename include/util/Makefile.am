@@ -34,6 +34,7 @@ avr_HEADERS = \
     atomic.h \
     crc16.h \
     delay_basic.h \
+    ram-usage.h \
     setbaud.h \
     parity.h \
     twi.h \

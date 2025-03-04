@@ -54,6 +54,8 @@ dev_c_sources =
 dev_asm_sources = \
 	init_sp.S \
 	init_cvt.S \
+	init_ram_color.S \
+	ram_unused.S \
 	flmap_init.S \
 	call_main.S \
 	ccp_write_spm.S \

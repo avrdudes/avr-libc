@@ -78,6 +78,11 @@
   defined in a C++ namespace as an ISR.   It also allows to define ISR
   aliases without the penalty of an additional JMP/RJMP instruction ([#765][765]).
 
+- Support for a new non-standard header
+  [<util/ram-usage.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__util__ram__usage)
+  has been added.  It can be used to get estimates of how much stack is
+  used by a running program.
+
 - The C/C++ register footprint of some common simple functions has
   been improved by implementing them as extern inline assembly stubs:
   `strlen`, `strlen_P`, `strcpy`, `strcpy_P`, `strcmp`, `strcmp_P`,
