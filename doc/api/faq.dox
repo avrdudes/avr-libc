@@ -274,7 +274,8 @@ effects of the C++ calling conventions like implied copy constructors
 that could be called upon function invocation etc.  These things could
 easily add up into a considerable amount of time and program memory
 wasted.  Thus, casual inspection of the generated assembler code
-(using the \c -S compiler option) seems to be warranted.
+(using the \ref opt_save_temps "-save-temps" compiler option)
+seems to be warranted.
 
 <small>Back to \ref faq_index.</small>
 
@@ -1177,12 +1178,28 @@ cannot be determined that easily. For example, if
 you recursively call a function and forget to break
 that recursion, the amount of stack required is
 infinite. :-) You can look at the generated assembler
-code (<tt>avr-gcc ... -S</tt>), there's a comment in each
+code (<tt>avr-gcc ... \ref opt_save_temps "-save-temps"</tt>),
+there's a comment in each
 generated assembler file that tells you the frame
-size for each generated function. That's the amount
-of stack required for this function, you have to add
-up that for all functions where you know that the
-calls could be nested.
+size for each generated function.
+
+GCC also supports \c -fstack-usage that generates an \c \.su text
+file for each compilation unit:
+
+\code
+int main (void)
+{
+    return 0;
+}
+
+$ avr-gcc -c main.c -Os -fstack-usage
+$ cat main.su
+
+main.c:3:5:main	2	static
+\endcode
+
+That's the amount of stack required for this function, you have to add
+up that for all functions where you know that the calls could be nested.
 
 <small>Back to \ref faq_index.</small>
 
