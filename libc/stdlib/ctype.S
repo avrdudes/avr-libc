@@ -346,14 +346,9 @@ ENDFUNC
 #if defined (Ltolower)
 
 ENTRY tolower
-#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
-	tst	rHigh
-	breq	0f
-#else
 	cpse	rHigh, __zero_reg__
-#endif
 	ret				; return as is
-0:	subi	rLow, 'A'
+	subi	rLow, 'A'
 	subi	rLow, 'Z'-'A'+1
 	brsh	1f			; return as is
 	subi	rLow, lo8('A'-'a')	; conversion
@@ -368,14 +363,9 @@ ENDFUNC
 #if defined (Ltoupper)
 
 ENTRY toupper
-#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
-	tst	rHigh
-	breq	0f
-#else
 	cpse	rHigh, __zero_reg__
-#endif
 	ret				; return as is
-0:	subi	rLow, 'a'
+	subi	rLow, 'a'
 	subi	rLow, 'z'-'a'+1
 	brsh	1f			; return as is
 	subi	rLow, lo8('a'-'A')	; conversion
