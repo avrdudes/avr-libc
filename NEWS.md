@@ -25,7 +25,8 @@
 
 ## Improvements and Additions
 
-- Support has been added for: ATxmega16E5, ATA5791, ATA8210, ATA8510 ([#876][876]),
+- Support has been added for: ATxmega16E5, ATA5791, ATA8210, ATA8510
+  ([#876][876]),
   ATA5835, ATA5787, ATA5700M322, ATtiny416auto,
   AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32,
   AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32.
@@ -67,7 +68,8 @@
   It is provided by `crt<mcu>-cvt.o`.  One way to use that variant
   of the startup code is by means of avr-gcc
   [-mcvt](https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt)
-  which is supported since GCC v15.
+  which is supported since
+  [GCC v15](https://gcc.gnu.org/gcc-15/changes.html#avr).
 
 - Support the `ISR_N` macro in
   [<avr/interrupt.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__interrupts.html#details).
@@ -76,7 +78,8 @@
   since GCC v15 [PR116056](https://gcc.gnu.org/PR116056).
   It allows to use static functions or functions
   defined in a C++ namespace as an ISR.   It also allows to define ISR
-  aliases without the penalty of an additional JMP/RJMP instruction ([#765][765]).
+  aliases without the penalty of an additional JMP/RJMP instruction
+  ([#765][765]).
 
 - Support for a new non-standard header
   [<util/ram-usage.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__util__ram__usage)
