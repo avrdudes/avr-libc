@@ -34,8 +34,8 @@
 * Bootstrap, configure and build AVR-LibC as usual.
   `configure` will say something like:
   ```
-  checking if avr-gcc has support for ata5791... yes, in avr5
-  checking if ata5791 supports a compact vector table... no
+  checking if avr-gcc supports ata5791... yes, in avr5
+  checking compact vector table support for ata5791... no
   config.status: creating avr/devices/ata5791/Makefile
   ```
   Outcome of the build will be startup code and device library
