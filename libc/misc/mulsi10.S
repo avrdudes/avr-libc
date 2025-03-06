@@ -54,26 +54,24 @@
  */
 
 ENTRY _U(__mulsi_const_10)
-	mov r_tmp_hi_hi, r_hi_hi
-	mov r_tmp_hi_lo, r_hi_lo
-	mov r_tmp_lo_hi, r_lo_hi
-	mov r_tmp_lo_lo, r_lo_lo
-	add r_lo_lo, r_lo_lo
-	adc	r_lo_hi, r_lo_hi
-	adc	r_hi_lo, r_hi_lo
-	adc	r_hi_hi, r_hi_hi			; d *= 2
-	add r_lo_lo, r_lo_lo
-	adc	r_lo_hi, r_lo_hi
-	adc	r_hi_lo, r_hi_lo
-	adc	r_hi_hi, r_hi_hi			; d *= 4
-	add r_lo_lo, r_tmp_lo_lo
+	X_movw	r_tmp_hi_lo, r_hi_lo
+	X_movw	r_tmp_lo_lo, r_lo_lo
+	LSL	r_lo_lo
+	rol	r_lo_hi
+	rol	r_hi_lo
+	rol	r_hi_hi				; d *= 2
+	LSL	r_lo_lo
+	rol	r_lo_hi
+	rol	r_hi_lo
+	rol	r_hi_hi				; d *= 4
+	ADD	r_lo_lo, r_tmp_lo_lo
 	adc	r_lo_hi, r_tmp_lo_hi
 	adc	r_hi_lo, r_tmp_hi_lo
 	adc	r_hi_hi, r_tmp_hi_hi		; d *= 5
-	add r_lo_lo, r_lo_lo
-	adc	r_lo_hi, r_lo_hi
-	adc	r_hi_lo, r_hi_lo
-	adc	r_hi_hi, r_hi_hi			; d *= 10
+	LSL	r_lo_lo
+	rol	r_lo_hi
+	rol	r_hi_lo
+	rol	r_hi_hi				; d *= 10
 
 	ret
 ENDFUNC
