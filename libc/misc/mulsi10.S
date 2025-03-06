@@ -52,10 +52,13 @@
 
 ;;; A3:A2:A1:A0 *= 10
 ;;; Clobbers: R26 (only non-MUL), R27, R20, R21
+;;; uint32_t __mulsi_const_10 (uint32_t);
+;;; uint32_t __mulsi_u8 (uint32_t, uint8_t);  MUL only
 
 ENTRY _U(__mulsi_const_10)
 #ifdef __AVR_HAVE_MUL__
     ldi     Ten, 10
+ENTRY _U(__mulsi_u8)
     mov     Tmp1, A1
     mov     Tmp3, A3
 
