@@ -40,6 +40,8 @@
 #ifndef __CTYPE_H_
 #define __CTYPE_H_ 1
 
+#include <bits/attribs.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -69,12 +71,32 @@ extern "C" {
 
 extern int isalnum(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isalnum(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isalnum" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Checks for an alphabetic character. It is equivalent to <tt>(isupper(c) ||
     islower(c))</tt>. */
 
 extern int isalpha(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isalpha(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isalpha" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /** \ingroup ctype
 
@@ -83,11 +105,31 @@ extern int isalpha(int __c);
 
 extern int isascii(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isascii(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isascii" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Checks for a blank character, that is, a space or a tab. */
 
 extern int isblank(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isblank(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isblank" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /** \ingroup ctype
 
@@ -95,11 +137,31 @@ extern int isblank(int __c);
 
 extern int iscntrl(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int iscntrl(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call iscntrl" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Checks for a digit (0 through 9). */
 
 extern int isdigit(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isdigit(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isdigit" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /** \ingroup ctype
 
@@ -107,11 +169,31 @@ extern int isdigit(int __c);
 
 extern int isgraph(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isgraph(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isgraph" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Checks for a lower-case character. */
 
 extern int islower(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int islower(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call islower" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /** \ingroup ctype
 
@@ -119,12 +201,32 @@ extern int islower(int __c);
 
 extern int isprint(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isprint(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isprint" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Checks for any printable character which is not a space or an alphanumeric
     character. */
 
 extern int ispunct(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int ispunct(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call ispunct" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /** \ingroup ctype
 
@@ -134,11 +236,31 @@ extern int ispunct(int __c);
 
 extern int isspace(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isspace(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isspace" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Checks for an uppercase letter. */
 
 extern int isupper(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isupper(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isupper" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /** \ingroup ctype
 
@@ -146,6 +268,16 @@ extern int isupper(int __c);
     f A B C D E F. */
 
 extern int isxdigit(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int isxdigit(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call isxdigit" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /**@}*/
 
@@ -168,17 +300,47 @@ extern int isxdigit(int __c);
 
 extern int toascii(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int toascii(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call toascii" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Converts the letter \c c to lower case, if possible. */
 
 extern int tolower(int __c);
 
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int tolower(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call tolower" : "+r" (__r24));
+  return __r24;
+}
+#endif
+
 /** \ingroup ctype
 
     Converts the letter \c c to upper case, if possible. */
 
 extern int toupper(int __c);
+
+#ifndef __DOXYGEN__
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int toupper(int __c)
+{
+  register int __r24 __asm("r24") = __c;
+  __asm ("%~call toupper" : "+r" (__r24));
+  return __r24;
+}
+#endif
 
 /**@}*/
 

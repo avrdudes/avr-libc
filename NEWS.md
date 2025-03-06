@@ -89,7 +89,8 @@
 - The C/C++ register footprint of some common simple functions has
   been improved by implementing them as extern inline assembly stubs:
   `strlen`, `strlen_P`, `strcpy`, `strcpy_P`, `strcmp`, `strcmp_P`,
-  `memcpy_P` ([#1013][1013]).
+  `memcpy_P` ([#1013][1013]), and the functions from
+   [<ctype.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__ctype).
 
 - `common/asmdef.h` used a sub-optimal definition of XJMP and XCALL ([#993][993]).
   Outcome was a sub-optimal code generation for some devices like the
