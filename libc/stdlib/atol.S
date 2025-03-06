@@ -68,9 +68,13 @@
 #define num_hi_lo	r24
 #define num_lo_hi	r23
 #define num_lo_lo	r22
-#ifdef __AVR_TINY__
+
+#ifdef __AVR_HAVE_MUL__
+#define tmp		r26
+#elif defined(__AVR_TINY__)
 #define tmp		__tmp_reg__
 #else
+#define PUSH_TMP
 #define tmp		r17
 #endif
 
@@ -86,7 +90,9 @@
 .endif
 
 ENTRY _U(atol)
+#ifdef PUSH_TMP
 	PUSH	tmp
+#endif
 	X_movw	ZL, str_lo		; set pointer to string
 	CLR	num_hi_hi
 	CLR	num_hi_lo
@@ -109,7 +115,9 @@ ENTRY _U(atol)
 	SET				; remember number is negative
 	RJMP	.L_atol_loop2
 
-2:	XCALL	_U(__mulsi_const_10)	; r25:r24:r23:r22 *= 10
+2:
+	;; r25:r24:r23:r22 *= 10  clobbers: r26 (only non-MUL), r27, r20, r21
+	XCALL	_U(__mulsi_const_10)
 	ADD	num_lo_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_lo_hi, __zero_reg__
 	ADC	num_hi_lo, __zero_reg__
@@ -121,17 +129,12 @@ ENTRY _U(atol)
 	CPI	tmp, 10
 	BRLO	2b
 
-	BRTC	.L_atol_done		; positive number? -> return
-	COM	num_hi_hi
-	COM	num_hi_lo
-	COM	num_lo_hi
-	NEG	num_lo_lo
-	SBCI	num_lo_hi, 0xff
-	SBCI	num_hi_lo, 0xff
-	SBCI	num_hi_hi, 0xff		; make number negative
-
-.L_atol_done:
+#ifdef PUSH_TMP
 	POP	tmp
+#endif
+	BRTC	.L_atol_done		; positive number? -> return
+	XJMP	_U(__negsi2)		; libgcc: make number negative
+.L_atol_done:
 	RET
 
 ENDFUNC

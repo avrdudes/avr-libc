@@ -38,42 +38,62 @@
 
 #include "asmdef.h"
 
-#define r_hi_hi 		r25
-#define r_hi_lo 		r24
-#define r_lo_hi 		r23
-#define r_lo_lo 		r22
+#define A0      r22
+#define A1      r23
+#define A2      r24
+#define A3      r25
 
-#define r_tmp_hi_hi		r21
-#define r_tmp_hi_lo		r20
-#define r_tmp_lo_hi		r19
-#define r_tmp_lo_lo		r18
+#define Tmp0    r26
+#define Tmp1    r27
+#define Tmp2    r20
+#define Tmp3    r21
 
-/*
-   r_hi_hi:r_hi_lo:r_lo_hi:r_lo_lo *= 10
+#define Ten     r20
 
- */
+;;; A3:A2:A1:A0 *= 10
+;;; Clobbers: R26 (only non-MUL), R27, R20, R21
 
 ENTRY _U(__mulsi_const_10)
-	X_movw	r_tmp_hi_lo, r_hi_lo
-	X_movw	r_tmp_lo_lo, r_lo_lo
-	LSL	r_lo_lo
-	rol	r_lo_hi
-	rol	r_hi_lo
-	rol	r_hi_hi				; d *= 2
-	LSL	r_lo_lo
-	rol	r_lo_hi
-	rol	r_hi_lo
-	rol	r_hi_hi				; d *= 4
-	ADD	r_lo_lo, r_tmp_lo_lo
-	adc	r_lo_hi, r_tmp_lo_hi
-	adc	r_hi_lo, r_tmp_hi_lo
-	adc	r_hi_hi, r_tmp_hi_hi		; d *= 5
-	LSL	r_lo_lo
-	rol	r_lo_hi
-	rol	r_hi_lo
-	rol	r_hi_hi				; d *= 10
+#ifdef __AVR_HAVE_MUL__
+    ldi     Ten, 10
+    mov     Tmp1, A1
+    mov     Tmp3, A3
 
-	ret
+    mul     A0, Ten
+    movw    A0, r0
+
+    mul     A2, Ten
+    movw    A2, r0
+
+    mul     Tmp3, Ten
+    add     A3, r0
+
+    mul     Tmp1, Ten
+    add     A1, r0
+    adc     A2, r1
+    clr     __zero_reg__
+    adc     A3, __zero_reg__
+#else
+    X_movw  Tmp2, A2
+    X_movw  Tmp0, A0
+    LSL A0
+    rol A1
+    rol A2
+    rol A3              ; d *= 2
+    LSL A0
+    rol A1
+    rol A2
+    rol A3              ; d *= 4
+    ADD A0, Tmp0
+    adc A1, Tmp1
+    adc A2, Tmp2
+    adc A3, Tmp3        ; d *= 5
+    LSL A0
+    rol A1
+    rol A2
+    rol A3              ; d *= 10
+#endif /* Have MUL */
+    ret
 ENDFUNC
 
 #endif /* not __DOXYGEN__ */
