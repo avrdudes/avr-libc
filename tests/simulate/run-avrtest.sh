@@ -404,6 +404,8 @@ Compile ()
 	;;
     esac
 
+    libs="-Wl,--start-group $libs -Wl,--end-group"
+
     # The GCC 4.1 (and older) does not define __ASSEMBLER__ with
     # '-std=gnu99' option for *.S sources.
     case `basename $1` in
