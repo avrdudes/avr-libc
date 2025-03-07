@@ -1,18 +1,47 @@
+/* Copyright (c) 2025  Georg-Johann Lay
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+   * Neither the name of the copyright holders nor the names of
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGE.	*/
+
+/* $Id$	*/
+
 #ifndef __AVR_TINY__
 
 #include "asmdef.h"
 
-;;; This module implements conversion from 64-bit integers to
-;;; decimal ASCII string.  The functions
-;;; comply to the avr-gcc ABI and can be used from C code by
+;;; This module implements conversion from 64-bit a integer
+;;; to a decimal ASCII string.  The function comply to the
+;;; avr-gcc ABI and can be used from C code by
 ;;;
 ;;;     #include <stdint.h>
 ;;;
 ;;;     extern char* __ulltoa_base10 (uint64_t value, char *buf);
 ;;;
-;;; or with extern "C" declarations to be used from C++.  The functions
-;;; write at most 21 chars to buf[] and return the address of the
-;;; string-terminating '\0' for easy concatenation of other strings.
+;;; or with an extern "C" declaration to be used from C++.  The function
+;;; writes at most 21 chars to buf[] and returns buf.
 ;;;
 ;;; The function is small (less than 200 bytes) and fast:
 ;;;     -  Less than 3300 cycles maximum in all variations.
@@ -21,14 +50,14 @@
 ;;; The disadvantage is that it's not much faster for small inputs.
 ;;;
 ;;; During conversion, 1E18 is subtract as often as possible
-;;; without causing an underflow.  As pseude code:
+;;; without causing an underflow.  As pseudo code:
 ;;;
 ;;;     Digit = 0
 ;;;     WHILE  Number >= Value
 ;;;         Number -= Value
 ;;;         Digit++
 ;;;
-;;; The algorithms however implement this as
+;;; The algorithm however implements this as
 ;;;
 ;;;     Digit = -1
 ;;;     DO
@@ -36,10 +65,10 @@
 ;;;     WHILE  (Number -= Value) >= 0
 ;;;     Number += Value
 ;;;
-;;; and perform one subtraction too much.  The underflow is undone after
-;;; the loop by adding Value.  This needs  2 * Digit + 1  operations
-;;; on Number (with Digit's value after the loop).
-;;;
+;;; and performs one subtraction too much.  The underflow is undone after
+;;; the loop by adding Value.  This needs  Digit + 2  operations on
+;;; Number (with Digit's value after the loop), whereas the original
+;;; formulation of the while loop needs  2 * Digit + 1  operations.
 
 ;; The argument registers as of avr-gcc ABI.
 #define A0      18
@@ -255,7 +284,7 @@ ENTRY __ulltoa_base10.X
 
     ;; The terminating '\0'.
     st      X, __zero_reg__
-    ;; Return a pointer to the string termination for swift concat.
+
     pop     r29
     pop     r28
     pop     r17
