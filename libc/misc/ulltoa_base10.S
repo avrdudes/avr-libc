@@ -162,7 +162,7 @@
 
 ;; extern char* ulltoa_base10 (uint64_t value, char *buf);
 
-;; Returns the address of the terminating '\0'.
+;; Returns buf.
 ;; Writes at most 21 characters to *buf (including the final '\0').
 ;;
 ;;                   |   with MUL   | no MUL, no MOVW
