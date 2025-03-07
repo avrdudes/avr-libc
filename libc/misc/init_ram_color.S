@@ -36,7 +36,7 @@
 
 #include "asmdef.h"
 
-.global __heap_stat
+.global __heap_start            ; ldscript
 
 ;;; A naked function that colorizes the RAM area
 ;;; from __ram_color_start to __ram_color_end - 1.
