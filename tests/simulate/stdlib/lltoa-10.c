@@ -4,16 +4,11 @@
 
 static char buf[30];
 
-#include "/home/john/gnu/source/avrtest/avrtest.h"
 #include <string.h>
 
 __attribute__((__noreturn__,noipa))
 void bad (const __flash char *soll, const char *ist)
 {
-    LOG_PFMT_U16 (FSTR ("Soll #=%u,"), strlen_F (soll));
-    LOG_PFMT_U16 (FSTR (" ist #=%d\n"), strlen (ist));
-    LOG_PFMT_PSTR (FSTR ("Soll ='%S'\n"), soll);
-    LOG_PFMT_STR  (FSTR ("Ist  ='%s'\n"), ist);
   (void) soll;
   (void) ist;
   __builtin_abort();
