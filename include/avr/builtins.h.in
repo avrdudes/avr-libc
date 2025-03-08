@@ -38,9 +38,11 @@
 #ifndef _AVR_BUILTINS_H_
 #define _AVR_BUILTINS_H_
 
+#ifndef __DOXYGEN__
 #ifndef __HAS_DELAY_CYCLES
 #define __HAS_DELAY_CYCLES @HAS_DELAY_CYCLES@
 #endif
+#endif /* __DOXYGEN__ */
 
 /* For GCC built-ins, we should not define prototypes,
    hence only document that stuff.  */
