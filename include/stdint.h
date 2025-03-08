@@ -600,22 +600,21 @@ typedef uint64_t uintmax_t;
 #define SIZE_MAX UINT16_MAX
 
 
+#ifndef __DOXYGEN__
 /* Limits of wchar_t */
-/* wchar.h is currently not implemented */
-/* #define WCHAR_MAX */
-/* #define WCHAR_MIN */
-
-
-/* Limits of wint_t */
 /* wchar.h is currently not implemented */
 #ifndef WCHAR_MAX
 #define WCHAR_MAX __WCHAR_MAX__
 #define WCHAR_MIN __WCHAR_MIN__
 #endif
+
+/* Limits of wint_t */
+/* wchar.h is currently not implemented */
 #ifndef WINT_MAX
 #define WINT_MAX __WINT_MAX__
 #define WINT_MIN __WINT_MIN__
 #endif
+#endif /* !__DOXYGEN__ */
 
 
 #endif /* !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS) */
