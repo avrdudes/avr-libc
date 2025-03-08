@@ -40,6 +40,8 @@
 ; 11 words, (14 + strlen_P(src) * 8) cycles
 
 ENTRY _U(strlen_P)
+;;; For backwards compatibility: Used by avr-gcc's __builtin_avr_strlen_flash.
+ENTRY _U(__strlen_P)
 	X_movw	ZL, src_lo
 .L_strlen_P_loop:
 	X_lpm	r0, Z+
