@@ -13,8 +13,8 @@ int main()
 	uint16_t next_sqr;
 	
 	if (UINT8_MAX != 255) exit(UINT8_MAX);
-
-	for (i = 0; i < UINT8_MAX; i++)
+	/* Start from i = 1 to avoid exit(0) on error. */
+	for (i = 1; i < UINT8_MAX; i++)
 	{
 		sqr = i * i;
 		next_sqr = (i + 1) * (i + 1);
