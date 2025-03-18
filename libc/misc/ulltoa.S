@@ -44,6 +44,146 @@
 #define pBufArg r16
 #define Radix   r14
 
+/*  The algorithm works for all radices and also doesn't require divmod
+    (not even the 64/8 divmod like used in the previous implementation).
+    It works as follows:  The value is shifted to the left, and as the
+    bits are appearing at the high end, the expansion is also shifted
+    to the left, but taking care that the expanded digits remain in the
+    range [ 0, Radix-1 ].  Larger digits will produce a carry to the
+    next higher digit.  For example, converting 20 = 0x14 to decimal will
+    expand the digits like:
+    ...                ...
+    0                  * 2 + bit6=0  no bits yet
+    0                  * 2 + bit5=0  no bits yet
+    1                  * 2 + bit4=1
+    2                  * 2 + bit3=0
+    5                  * 2 + bit2=1
+    01                 * 2 + bit1=0  digit0 overflowed: append one more digit
+    02  = strrev(20)   * 2 + bit0=0
+
+    The code consumes 4 instructions more than the old 64/8 divmod method.  */
+
+#define Sign        r27           /* Passed down from lltoa. */
+#define Len         r27           /* Length of the expansion so far.  */
+#define Digit       r26
+#define Zero        __zero_reg__
+#define n_Digits    Zero          /* Loop counter Len ... 0   */
+#define n_Bits      __tmp_reg__   /* Loop counter 64+1 ... 0  */
+
+#define RADIX_MAX 36
+#define RADIX_MIN  2
+
+/*
+    * Overall invocation costs ca 35 cycles.
+    * The 64-bit loop runs 64 times for all values. One costs 13 cycles.
+    * The digit loop is invoked B times where B is the number of bits.
+      Invoking (without running) the digit loop costs 6 cycles.
+    * One digit loop costs 11.5 cycles.  It runs
+      D*(D+1)/2 * ln(Radix)/ln(2)  times where D is the number of digits.
+    * Increasing the length costs 5 and is invoked D times.
+    * One ASCII loop costs 11 cycles and runs D times.
+    * Reverting the string costs 6 * D + 12 * D/2 cycles.
+
+    D = 1 + floor (ln(X) / ln(Radix))
+
+    = 13 * 64 + 35 + 11.5 * D^2 * ln(Radix) / (2*ln2) + 22 * D
+    = 870 + 8.3 * D^2 * ln(Radix) + 34 * D.  */
+
+ENTRY _U(__ulltoa)
+    clr     Sign
+ENTRY _U(__ulltoa.sign)
+    ;; Radix in [2, 36] ?
+    X_movw  ZL, Radix
+    sbiw    ZL, RADIX_MIN
+    sbiw    ZL, RADIX_MAX + 1 - RADIX_MIN
+    X_movw  ZL, pBufArg
+    brlo 1f
+    ;;  No
+    ldi     Sign, '?'
+    rjmp .Lsign
+1:
+    ;; Yes
+    push    Sign
+    ;; Work wih Radix-1 so that Carry = compare (Radix-1, Digit).
+    dec     Radix
+    ldi     Len, 64 + 1
+    mov     n_Bits, Len
+
+    ldi     Len, 1
+    clt                         ; Non-zero ?
+
+.Lnext_bit_stZero:
+    st      Z, Zero             ; Store 1 when we come from below.
+.Lnext_bit:
+    mov     n_Digits, Len
+    X_movw  ZL, pBufArg
+.Loop_bits:
+    dec     n_Bits
+    breq .Loop_to_ascii
+    lsl     A0
+    rol     A1
+    rol     A2
+    rol     A3
+    rol     A4
+    rol     A5
+    rol     A6
+    rol     A7
+    brts .Loop_digits
+    brcc .Loop_bits
+    ;; C = 1: Value is non-0.
+    set
+
+    ;; A loop to compule 2 * buf[] + C.
+.Loop_digits:
+    ld      Digit, Z
+    ;; Carry survived from the previous CP below.
+    rol     Digit
+    ;; C = Radix - 1 < Digit  <=>  Digit >= Radix
+    cp      Radix, Digit
+    brcc 1f
+    sbc     Digit, Radix        ; Digit -= (Radix - 1) + 1
+    sec
+1:  st      Z+, Digit
+    dec     n_Digits
+    brne .Loop_digits
+    ;; Zero == 0 again.
+    brcc .Lnext_bit
+    ;; C = 1 drops out of LSL'ing the digits: One more digit, which is 1.
+    inc     Len
+    inc     Zero                ; Zero = 1
+    rjmp .Lnext_bit_stZero
+
+    ;; Convert the digits to ASCII.
+.Loop_to_ascii:
+    ld      Digit, Z
+    subi    Digit, -'0'
+    cpi     Digit, '9' + 1
+    brlo 1f
+    ;; Digits after '9' are: 'a', 'b', c', ...
+    subi    Digit, '0' + 10 - 'a'
+1:  st      Z+, Digit
+    dec     n_Digits
+    brne .Loop_to_ascii
+    ;; Zero == 0 again.
+
+    ;; Restore Radix (R14 is callee-saved).
+    inc     Radix
+
+    ;; Output the sign (if any) and the terminating '\0'.
+    pop     Sign
+    cpse    Sign, Zero
+.Lsign:
+    st      Z+, Sign
+    st      Z, Zero
+
+    ;; Reverse string and return its address.
+    X_movw  R24, pBufArg
+    XJMP    _U(strrev)
+ENDFUNC
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#if 0
+
 #define Sign    r27
 #define pBuf    r30
 #define Digit   r27
@@ -153,5 +293,7 @@ ENTRY __ulltoa.sign
     X_movw  r24, pBufArg
     XJMP    _U(strrev)
 ENDFUNC
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#endif /* 0 */
 
 #endif /* __AVR_TINY__ */
