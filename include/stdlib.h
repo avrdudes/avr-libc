@@ -627,7 +627,7 @@ char *ultoa (unsigned long __val, char *__s, int __radix)
 
    A very rough estimation of the execution time is
 
-   &nbsp;&nbsp;&nbsp;&nbsp;<i>Cycles</i> &asymp; 870 + 35&middot;<i>N</i> + 8.3&middot;<i>N</i><sup>2</sup>&middot;log(<i>radix</i>)
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Cycles</i> &asymp; 950 + 23&middot;<i>N</i> + 8.3&middot;<i>N</i><sup>2</sup>&middot;log(<i>radix</i>) &plusmn; 400
 
    where <i>N</i> denotes the number of digits in the result,
    and log stands for the Natural Logarithm.
