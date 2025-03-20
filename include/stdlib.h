@@ -664,7 +664,7 @@ extern char* ulltoa(unsigned long long, char*, int) __asm("__ulltoa");
 /** \ingroup avr_stdlib
    \brief Convert an unsigned 64-bit integer to a decimal string.
 
-   The function ulltoa_base10() writes the decmial ASCII representation of
+   The function ulltoa_base10() writes the decimal ASCII representation of
    the unsigned 64-bit integer \c val to a string starting at \c s.
    The effect is the same like for <tt>ulltoa(val, s, 10)</tt>.
 
