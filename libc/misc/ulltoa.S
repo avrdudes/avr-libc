@@ -122,7 +122,7 @@ ENTRY _U(__ulltoa.sign)
     ;; C = 1: Value is non-0.
     set
 
-    ;; A loop to compule 2 * buf[] + C.
+    ;; A loop to compute 2 * buf[] + C.
 .Loop_digits:
     ld      Digit, Z
     ;; Carry survived from the previous CP below.
