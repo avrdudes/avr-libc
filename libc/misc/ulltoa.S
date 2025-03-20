@@ -104,7 +104,7 @@ ENTRY _U(__ulltoa.sign)
 1:
     ;; Yes
     push    Sign
-    ;; Work wih Radix-1 so that Carry = compare (Radix-1, Digit).
+    ;; Work with Radix-1 so that Carry = compare (Radix-1, Digit).
     dec     Radix
     ldi     Len, 64 + 1
     mov     n_Bits, Len
@@ -133,7 +133,7 @@ ENTRY _U(__ulltoa.sign)
     ;; C = 1: Value is non-0.
     set
 
-    ;; A loop to compule 2 * buf[] + C.
+    ;; A loop to compute 2 * buf[] + C.
 .Loop_digits:
     ld      Digit, Z
     ;; Carry survived from the previous CP below.
