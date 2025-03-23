@@ -562,6 +562,7 @@ dnl Same replacements as performed by mlib-gen.py::to_ident().
       AS_CASE([$1],
 	      [[avr*[0-9]d*]], [COND_DEFINED_Dx="${COND_DEFINED_Dx} || ${defd}"],
 	      [[avr*[0-9]e*]], [COND_DEFINED_Ex="${COND_DEFINED_Ex} || ${defd}"],
+	      [[avr*[0-9]sd*]], [COND_DEFINED_SD="${COND_DEFINED_SD} || ${defd}"],
 	      [])
     else
       MULTIDIR_$1=
@@ -677,6 +678,7 @@ AC_SUBST(DIR_avr1)
 
 COND_DEFINED_Dx="0"
 COND_DEFINED_Ex="0"
+COND_DEFINED_SD="0"
 SUPPORTED_MCUS=""
 
 m4_include([devices.m4])
@@ -684,6 +686,7 @@ m4_include([devices.m4])
 AC_SUBST(SUPPORTED_MCUS)
 AC_SUBST(COND_DEFINED_Dx)
 AC_SUBST(COND_DEFINED_Ex)
+AC_SUBST(COND_DEFINED_SD)
 
 dnl The following include must precede multilib.m4 and is only
 dnl needed with avr-gcc v4.9 or older, namely if !HAS_DEV_LIB.

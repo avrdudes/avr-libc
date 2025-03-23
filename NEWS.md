@@ -29,7 +29,8 @@
   ([#876][876]),
   ATA5835, ATA5787, ATA5700M322, ATtiny416auto,
   AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32,
-  AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32.
+  AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32,
+  AVR32SD20, AVR32SD28, AVR32SD32.
 
 - Support has been added for the `stpcpy`, `stpcpy_P`, `stpcpy_F`,
   `stpcpy_PF`, `stpcpy_FX` functions ([#1015][1015]).

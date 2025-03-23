@@ -500,6 +500,12 @@ compile-time.
   AVR64EA32,
   AVR64EA48
 </dd>
+<dt>AVR-SD Functional Safety Devices:</dt>
+<dd>
+  AVR32SD20,
+  AVR32SD28,
+  AVR32SD32
+</dd>
 <dt>Wireless AVR Devices:</dt>
 <dd>
   ATmega644RFR2,

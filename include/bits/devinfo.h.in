@@ -9,4 +9,8 @@
 #define __AVR_Ex__
 #endif
 
+#if @COND_DEFINED_SD@
+#define __AVR_SD__
+#endif
+
 #endif /* __BITS_DEVINFO_H_ */
