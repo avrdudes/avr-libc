@@ -71,6 +71,7 @@ misc_a_asm_sources = \
 	mulsi10.S \
 	mul10.S \
 	sqrthi.S \
+	sqrtsi.S \
 	ultoa.S \
 	ultoa_ncheck.S \
 	utoa.S \
