@@ -38,7 +38,8 @@
 - Support for some non-standard functions has been added to
   [<stdlib.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdlib.html):
    - 64-bit integer to ASCII conversions: `lltoa`, `ulltoa`, `ulltoa_base10`.
-   - 16-bit square root: `sqrtu16_floor`.
+   - 16-bit integer square root: `sqrtu16_floor`.
+   - 32-bit integer square root: `sqrtu32_floor`.
 
 - Support has been added for some functions on Reduced Tiny (AVRrc):
   `memmem`, `memmem_P`, `strlcpy`, `strlcpy_P`, `strcasestr`, `strcasestr_P`,

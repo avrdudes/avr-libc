@@ -781,6 +781,16 @@ unsigned char sqrtu16_floor(unsigned __r)
 }
 #endif /* Doxygen */
 
+/** \ingroup avr_stdlib
+    \return Returns the square root of the 32-bit value \p radic,
+    rounded down to the next integral value.
+ */
+#ifdef __DOXYGEN__
+extern unsigned int sqrtu32_floor(unsigned long radic);
+#else
+extern unsigned int sqrtu32_floor(unsigned long radic) __asm("__sqrtsi");
+#endif /* Doxygen */
+
 
 #endif /* __ASSEMBLER */
 /**@}*/
