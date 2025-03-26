@@ -4,7 +4,7 @@
 
 * When the name of the device header is *not* like `io<mcu>.h`
   (which is currently the case for all devices except for the
-  AVR-Dx and AVR-Ex ones), then add a line in `include/avr/io.h` like:
+  AVR-xx ones), then add a line in `include/avr/io.h` like:
   ```
   #elif defined (__AVR_ATA5791__)
   #  include <avr/ioa5791.h>
