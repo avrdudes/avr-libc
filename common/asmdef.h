@@ -82,17 +82,12 @@
 #define	_U(name)	name
 
 #if defined(__AVR_TINY__)
-    #define __tmp_reg__ r16
-#else
-    #define __tmp_reg__ r0
-#endif
-
-#if defined(__AVR_TINY__)
+    #define __tmp_reg__  r16
     #define __zero_reg__ r17
 #else
+    #define __tmp_reg__  r0
     #define __zero_reg__ r1
 #endif
-
 
 #if	defined(__AVR_HAVE_JMP_CALL__)
 # define XJMP	jmp
@@ -147,16 +142,18 @@ _U(\name):
    __asm__ in the declaration to specify the symbol to reference,
    it is preferable to provide actual symbols in the library, so
    that code that expects to be able to use them directly -
-   like gcc/gcc/testsuite/gcc.dg/pr41963.c using sqrtf - will work.  */
+   like gcc/testsuite/gcc.dg/pr41963.c using sqrtf - will work.  */
 
 .macro	ENTRY_FLOAT  fname  dname  lname
 ENTRY \fname
 #if (__SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__)
 	.weak	_U(\dname)
+	.type	_U(\dname), "function"
 _U(\dname):
 #endif /* double = float */
 #if (__SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__)
 	.weak	_U(\lname)
+	.type	_U(\lname), "function"
 _U(\lname):
 #endif /* long double = float */
 .endm
@@ -273,7 +270,7 @@ _U(\lname):
     .exitm
   .endif
 
-    subi	.L__adiw_dst,     lo8(-(\val))
+	subi	.L__adiw_dst,     lo8(-(\val))
 	sbci	.L__adiw_dst + 1, hi8(-(\val))
 #endif /* AVR_TINY */
 .endm
