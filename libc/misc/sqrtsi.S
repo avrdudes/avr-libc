@@ -8,9 +8,9 @@
 ;;; Developing square root in R21:R20.
 #define res_hi r21
 #define res_lo r20
-;;; Rotation mask in R19:R18.
-#define msk_hi r19
-#define msk_lo r18
+;;; Rotation mask in R27:R26.
+#define msk_hi r27
+#define msk_lo r26
 
 /* sqrt32_floor: https://www.mikrocontroller.net/articles/AVR_Arithmetik */
 
