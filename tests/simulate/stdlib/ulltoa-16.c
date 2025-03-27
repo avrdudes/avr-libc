@@ -1,3 +1,10 @@
+#ifdef __AVR_TINY__
+int main (void)
+{
+  return 0;
+}
+#else
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <avr/flash.h>
@@ -78,3 +85,4 @@ int main (void)
   test_u64();
   return 0;
 }
+#endif /* !AVR_TINY */
