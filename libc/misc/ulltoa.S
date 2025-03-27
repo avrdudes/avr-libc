@@ -64,7 +64,7 @@
     01                 * 2 + bit1=0  digit0 overflowed: append one more digit
     02  = strrev(20)   * 2 + bit0=0
 
-    The code consumes 4 instructions more than the old 64/8 divmod method.
+    The code consumes 2 instructions more than the old 64/8 divmod method.
     Runtime is around  950 + 23 * D + 8.3 * D^2 * ln(Radix) +/- 400 Cycles  */
 
 #define Sign        r27           /* Passed down from lltoa. */
@@ -86,11 +86,8 @@ ENTRY _U(__ulltoa.sign)
     sbiw    ZL, RADIX_MIN
     sbiw    ZL, RADIX_MAX + 1 - RADIX_MIN
     X_movw  ZL, pBufArg
-    brlo 1f
-    ;;  No
-    ldi     Sign, '?'
-    rjmp .Lsign
-1:
+    brsh .Lend
+
     ;; Yes
     push    Sign
     ;; Work with Radix-1 so that Carry = compare (Radix-1, Digit).
@@ -161,8 +158,8 @@ ENTRY _U(__ulltoa.sign)
     ;; Output the sign (if any) and the terminating '\0'.
     pop     Sign
     cpse    Sign, Zero
-.Lsign:
     st      Z+, Sign
+.Lend:
     st      Z, Zero
 
     ;; Reverse string and return its address.
