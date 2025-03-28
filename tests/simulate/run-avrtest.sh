@@ -277,7 +277,7 @@ set_extra_options ()
 	    exit 1
 	;;
     esac
-    o_gcc="$o_gcc ${AVRTEST_HOME}/exit-$1.o -DUSE_AVRTEST"
+    o_gcc="$o_gcc ${AVRTEST_HOME}/exit-$1.o -I${AVRTEST_HOME} -DUSE_AVRTEST"
 }
 
 
