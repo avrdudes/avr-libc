@@ -30,8 +30,6 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-/* $Id: io90pwm3b.h 2225 2011-03-02 16:27:26Z arcanum $ */
-
 /* avr/io90pwm3b.h - definitions for AT90PWM3B */
 
 /* This file should only be included from <avr/io.h>, never directly. */

@@ -24,8 +24,6 @@
  # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  # POSSIBILITY OF SUCH DAMAGE.
 
- # $Id$
-
 time_a_c_sources = \
 	asc_store.c \
 	asctime.c \

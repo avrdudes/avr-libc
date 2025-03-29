@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.  */
 
-/* $Id$ */
-
 /* Without MUL we could use the same algorithm, but the guess is that it would
    be worse than log2f -- at least as far as the runtime is concerned.  */
 

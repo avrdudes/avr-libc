@@ -24,13 +24,10 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Test of round() function.
-   NaN-argument is tested at another place: xxx-nan.c
-   $Id$
- */
+   NaN-argument is tested at another place: xxx-nan.c */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

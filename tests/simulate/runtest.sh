@@ -28,8 +28,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# $Id$
-
 # Script for testing AVR-LibC fuctions, mainly, by simulating. An installed
 # simulavr is needed. The simulavr-0.1.2.1 is suitable, only the correction
 # of divide_by_zero error is needed. The script is tuned to run after 'make'

@@ -24,12 +24,10 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Test of _SFR's macros.  Old style ASM program, where the ports are
-   values, suitable to use with LDS/STS instruction.
-   $Id$	*/
+   values, suitable to use with LDS/STS instruction. */
 
 /* XXX: Seems, the _SFR_MEM_ADDR() is worse.  In this case it works only
    with ports, which have the address higher then SREG.  There is no

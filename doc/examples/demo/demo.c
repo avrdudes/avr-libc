@@ -10,8 +10,6 @@
  * connected from OC1/OC1A to GND.  The brightness of the LED is
  * controlled with the PWM.  After each period of the PWM, the PWM
  * value is either incremented or decremented, that's all.
- *
- * $Id$
  */
 
 #include <inttypes.h>

@@ -7,8 +7,6 @@
 #
 # Created by Knut Schwichtenberg
 # DWARF-2 templates by Joerg Wunsch
-#
-# $Id$
 
 
 # ----------------------------------------------------------------------------
@@ -77,8 +75,6 @@ $StaticContent = <<'EOST';
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
-
-/* $Id$ */
 
 #include <avr/version.h>
 

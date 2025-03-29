@@ -22,8 +22,6 @@
  * ATtiny25/45/85, where timer 1 can be used to evaluate the incoming
  * PWM signal, and timer 0 to generate the outgoing PWM.  In that
  * case, no additional assembly code is needed.
- *
- * $Id$
  */
 
 /*

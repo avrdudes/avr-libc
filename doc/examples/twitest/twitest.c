@@ -13,8 +13,6 @@
  * ----------------------------------------------------------------------------
  */
 
-/* $Id$ */
-
 /*
  * Simple demo program that talks to a 24Cxx I�C EEPROM using the
  * builtin TWI interface of an ATmega device.

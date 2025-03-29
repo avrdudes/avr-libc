@@ -1,9 +1,6 @@
 #! /bin/sh
 #
-# $Id$
-#
 # bootstrap script to build all the *.in files and configure script.
-#
 
 : ${AUTOHEADER="autoheader${AC_VER}"}
 : ${AUTOCONF="autoconf${AC_VER}"}

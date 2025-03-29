@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iom644rfr2.h - definitions for ATmega644RFR2 */
 
 #ifndef _AVR_IOM644RFR2_H_

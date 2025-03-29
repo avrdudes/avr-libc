@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* float atan2f (float A, float B);	// A is y coord, B is x coord.
      The atan2f() function calculates the arc tangent of the two variables
      A and B. It is similar to calculating the arc tangent of A/B, except

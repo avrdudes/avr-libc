@@ -9,8 +9,6 @@
  * More advanced AVR demonstration.  Controls a LED attached to OCR1A.
  * The brightness of the LED is controlled with the PWM.  A number of
  * methods are implemented to control that PWM.
- *
- * $Id$
  */
 
 #include <stdint.h>

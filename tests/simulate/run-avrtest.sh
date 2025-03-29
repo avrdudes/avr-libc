@@ -28,8 +28,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# $Id$
-
 # Script for testing AVR-LibC functions, mainly, by simulating.
 # AVRtest is needed. The script is tuned to run after 'make'
 # without any options, at this place.  Use

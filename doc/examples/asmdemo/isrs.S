@@ -7,8 +7,6 @@
  * ----------------------------------------------------------------------------
  *
  * Demo combining C and assembly source files.
- *
- * $Id$
  */
 /*
  * This file contains the interrupt service routine implementations

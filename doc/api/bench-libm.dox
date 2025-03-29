@@ -1,8 +1,6 @@
 /* Note: this file has been automatically generated.
    DO NOT EDIT, or your changes WILL BE LOST!	*/
 
-/* $Id$ */
-
 /** \page benchmarks
 
 \section bench_libm Math functions.

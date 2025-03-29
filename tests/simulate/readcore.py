@@ -40,8 +40,6 @@
 # simulavr core dump file to read.  Otherwise, the simulavr default
 # name "core_avr_dump.core" is used.
 
-# $Id$
-
 # Enum implementation, from Python recipe:
 # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/413486
 # Author: Zoran Isailovski

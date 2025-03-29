@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iom16hvbrevb.h - definitions for ATmega16HVB revision B */
 
 /* This file should only be included from <avr/io.h>, never directly. */

@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iom32hvbrevb.h - definitions for ATmega32HVB revision B. */
 
 /* This file should only be included from <avr/io.h>, never directly. */

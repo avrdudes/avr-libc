@@ -29,8 +29,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iopwm1.h - definitions for AT90PWM1 device */
 
 #ifndef _AVR_IOPWM1_H_

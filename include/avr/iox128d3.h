@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iox128d3.h - definitions for ATxmega128D3 */
 
 /* This file should only be included from <avr/io.h>, never directly. */

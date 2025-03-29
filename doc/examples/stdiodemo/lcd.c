@@ -7,8 +7,6 @@
  * ----------------------------------------------------------------------------
  *
  * Stdio demo, upper layer of LCD driver.
- *
- * $Id$
  */
 
 #include "defines.h"

@@ -24,12 +24,10 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Test of _SFR's macros.  Semi-old style C program, where the ports are
-   the numbers, suitable to use with LDS/STS instruction.
-   $Id$	*/
+   the numbers, suitable to use with LDS/STS instruction. */
 
 #define	_SFR_ASM_COMPAT  1
 #define	__SFR_OFFSET	 0x20

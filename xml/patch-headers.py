@@ -29,9 +29,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
+
 
 import os, sys, time, types, re
 
@@ -390,9 +388,6 @@ print """/* Note: this file has been automatically generated. */
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 """ % (time.localtime()[0], user)
-
-# avoid CVS munging with this here in the script
-print '/* $Id' + '$ */\n'
 
 print '''
 /** \\addtogroup avr_interrupts

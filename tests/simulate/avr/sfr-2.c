@@ -24,11 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of _SFR's macros.  Old style C program.
-   $Id$	*/
+/* Test of _SFR's macros.  Old style C program. */
 
 /* XXX: Seems, the _SFR_MEM_ADDR() is worse.  In case of _SFR_ASM_COMPAT
    with __SFR_OFFSET == 0 it returns the same value, as _SFR_IO_ADDR().

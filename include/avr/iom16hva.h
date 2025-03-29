@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* iom16hva.h - definitions for ATmega16HVA.  */
 
 #ifndef _AVR_IOM16HVA_H_

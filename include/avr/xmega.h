@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
  * This file is included by <avr/io.h> whenever compiling for an Xmega
  * device.  It abstracts certain features common to the Xmega device

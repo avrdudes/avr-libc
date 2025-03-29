@@ -7,8 +7,6 @@
  * ----------------------------------------------------------------------------
  *
  * IO feature compatibility definitions for various AVRs.
- *
- * $Id$
  */
 
 #if !defined(IOCOMPAT_H)

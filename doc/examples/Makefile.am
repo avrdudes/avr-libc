@@ -25,11 +25,6 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # Author: Theodore A. Roth <troth@verinet.com>
-#
-# Contributors:
-#
-# $Id$
-#
 
 MAINTAINERCLEANFILES = Makefile.in
 

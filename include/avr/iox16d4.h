@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iox16d4.h - definitions for ATxmega16D4 */
 
 /* This file should only be included from <avr/io.h>, never directly. */

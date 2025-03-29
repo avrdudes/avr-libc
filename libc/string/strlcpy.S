@@ -33,8 +33,6 @@
 
 */
 
-/* $Id$ */
-
 #if !defined(__DOXYGEN__)
 
 #include "asmdef.h"

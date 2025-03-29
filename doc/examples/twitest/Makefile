@@ -1,6 +1,3 @@
-#
-# $Id$
-#
 CC= avr-gcc
 #MCU=atmega8
 #MCU=atmega16

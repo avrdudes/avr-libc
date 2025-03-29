@@ -25,8 +25,6 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-# $Id$
-
 include $(top_srcdir)/libc/time/Files.am
 
 EXTRA_DIST = \

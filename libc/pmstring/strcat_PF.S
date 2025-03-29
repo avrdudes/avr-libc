@@ -31,8 +31,6 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "asmdef.h"

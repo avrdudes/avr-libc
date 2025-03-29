@@ -30,10 +30,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-# $Id$
-#
 # Process this file with autoconf to produce a configure script.
-#
+
 
 dnl library versioning -- modify these on releases
 dnl        macro name           value            description

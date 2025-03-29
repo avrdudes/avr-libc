@@ -26,8 +26,7 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-/* Test of float EEPROM functions.
-   $Id$	*/
+/* Test of float EEPROM functions. */
 
 #include <avr/eeprom.h>
 #include <stdlib.h>

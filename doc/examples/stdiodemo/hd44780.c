@@ -10,8 +10,6 @@
  *
  * The LCD controller is used in 4-bit mode with a full bi-directional
  * interface (i.e. R/~W is connected) so the busy flag can be read.
- *
- * $Id$
  */
 
 #include "defines.h"

@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iom168p.h - definitions for ATmega168P. */
 
 /* This file should only be included from <avr/io.h>, never directly. */

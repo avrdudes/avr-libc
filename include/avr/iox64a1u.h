@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iox64a1u.h - definitions for ATxmega64A1U */
 
 /* This file should only be included from <avr/io.h>, never directly. */
