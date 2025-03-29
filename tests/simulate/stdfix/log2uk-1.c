@@ -23,8 +23,8 @@ void test_log2 (void)
 
       float d = avrtest_subf (f2, f1);
 
-      if (d > +0.000031) exit (__LINE__);
-      if (d < -0.000031) exit (__LINE__);
+      if (d > +0.000031f) exit (__LINE__);
+      if (d < -0.000031f) exit (__LINE__);
     }
 }
 
