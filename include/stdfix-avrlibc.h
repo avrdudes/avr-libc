@@ -625,6 +625,14 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
 accum log2uk(unsigned accum x);
 
 /** \ingroup avr_stdfix
+    Logarithm to base 2 of the value \p x. The returned value for \p x = 0 is -128.
+
+    The absolute error is bounded by 5.3&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7.5</sup>.
+    The worst code execution time (WCET) is around 210 cycles.
+    \since AVR-LibC v2.3  */
+short accum log2uhk(unsigned short accum x);
+
+/** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
     \since AVR-LibC v2.3  */
 short fract sqrthr(short fract radic);
@@ -664,6 +672,7 @@ type roundfx (type val, int bit);
 extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
 extern accum log2uk(unsigned accum x) __ATTR_CONST__;
+extern short accum log2uhk(unsigned short accum x) __ATTR_CONST__;
 #endif /* Doxygen */
 
 #ifdef __cplusplus

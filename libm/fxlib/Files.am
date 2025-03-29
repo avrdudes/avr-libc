@@ -5,6 +5,7 @@ fxlib_a_asm_sources = \
 	rdivi.S \
 	ulrdivi.S \
 	urdivi.S \
+	log2uhk.S \
 	log2uk.S \
 	sqrthr.S \
 	sqrtuhr.S
