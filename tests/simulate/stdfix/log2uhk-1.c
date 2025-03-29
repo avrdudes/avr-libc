@@ -18,7 +18,7 @@ void test_log2 (void)
       unsigned short accum ua = uhkbits (i);
       short accum la = log2uhk (ua);
 
-      float f1 = avrtest_log2f (ldexp (i, -8));
+      float f1 = avrtest_log2f (avrtest_ldexpf (i, -8));
       float f2 = la;
 
       float d = avrtest_subf (f2, f1);
