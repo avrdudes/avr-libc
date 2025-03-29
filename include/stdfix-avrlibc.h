@@ -612,13 +612,13 @@ long long accum roundllk (long long accum val, int bit);
 unsigned long long accum roundullk (unsigned long long accum val, int bit);
 
 
-/** \name Square Root and Logarithm */
+/** \name Square Root and Transcendental Functions */
 
 /** \ingroup avr_stdfix
     Logarithm to base 2 of the value \p x. The returned value for \p x = 0 is -32768.
 
     The absolute error is bounded by 3&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;15</sup>.
-    The worst code execution time (WCET) is around 700 cycles.
+    The worst case execution time (WCET) is around 700 cycles.
     \since AVR-LibC v2.3  */
 accum log2uk(unsigned accum x);
 
@@ -626,9 +626,29 @@ accum log2uk(unsigned accum x);
     Logarithm to base 2 of the value \p x. The returned value for \p x = 0 is -128.
 
     The absolute error is bounded by 5.3&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7.5</sup>.
-    The worst code execution time (WCET) is around 210 cycles.
+    The worst case execution time (WCET) is around 210 cycles.
     \since AVR-LibC v2.3  */
 short accum log2uhk(unsigned short accum x);
+
+/** \ingroup avr_stdfix
+    Sine of the angle \a deg where \a deg is specified in degrees, i.e.
+    in the range [0&deg;, 256&deg;).
+    The returned value is in the range (&minus;1, +1), i.e. is never &minus;1.
+
+    The absolute error is bounded by 6.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;13.9</sup>.
+    The worst case execution time (WCET) is around 70 cycles.
+    \since AVR-LibC v2.3  */
+fract sinuhk_deg(unsigned short accum deg);
+
+/** \ingroup avr_stdfix
+    Cosine of the angle \a deg where \a deg is specified in degrees, i.e.
+    in the range [0&deg;, 256&deg;).
+    The returned value is in the range (&minus;1, +1), i.e. is never &minus;1.
+
+    The absolute error is bounded by 6.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;13.9</sup>.
+    The worst case execution time (WCET) is around 90 cycles.
+    \since AVR-LibC v2.3  */
+fract cosuhk_deg(unsigned short accum deg);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
@@ -671,6 +691,9 @@ extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
 extern accum log2uk(unsigned accum x) __ATTR_CONST__;
 extern short accum log2uhk(unsigned short accum x) __ATTR_CONST__;
+
+extern fract sinuhk_deg(unsigned short accum x) __ATTR_CONST__;
+extern fract cosuhk_deg(unsigned short accum x) __ATTR_CONST__;
 #endif /* Doxygen */
 
 #ifdef __cplusplus

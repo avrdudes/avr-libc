@@ -1,4 +1,6 @@
-fxlib_a_c_sources =
+fxlib_a_c_sources = \
+	cosuhk_deg.c \
+	sinuhk_deg.c
 
 fxlib_a_asm_sources = \
 	lrdivi.S \
