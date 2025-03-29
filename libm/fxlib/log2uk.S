@@ -51,11 +51,12 @@ ENTRY log2uk
     sbiw    Arg2, 0
     brne .Lge1
 
-    ;; No: Is fractional part == 0 ?
+    ;; Yes: Is fractional part == 0 ?
     cp      Arg0, __zero_reg__
     cpc     Arg1, __zero_reg__
     brne .Loop_lt1
-    ldi     Arg3, 0x80          ; log2(0) = -32878.
+    ;; Yes: Return log2(0) = -32768.
+    ldi     Arg3, 0x80
     ret
 .Loop_lt1:
     ;; No: Shift left until >= 1.0, i.e. until in [1, 2).
