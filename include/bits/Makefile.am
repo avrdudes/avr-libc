@@ -27,8 +27,13 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 avrdir = $(prefix)/avr/include/bits
+
 avr_HEADERS = \
-    attribs.h
+    attribs.h \
+    def-flash-read.h \
+    def-pgm-read.h \
+    def-pgm-read-far.h \
+    lpm-elpm.h
 
 nodist_avr_HEADERS = \
     devinfo.h

@@ -1378,23 +1378,8 @@ extern size_t strlen_FX(const __flashx char*) __asm("strlen_PF") __ATTR_CONST__;
 #ifdef __FLASH
 
 #include <stdint.h>
-#include <avr/lpm-elpm.h>
-
-#define _Avrlibc_Def_F_4(Name, Typ)                 \
-  static __ATTR_ALWAYS_INLINE__                     \
-  Typ flash_read_##Name (const __flash Typ *__addr) \
-  {                                                 \
-    return *__addr;                                 \
-  }
-
-#define _Avrlibc_Def_F_8(Name, Typ)                 \
-  static __ATTR_ALWAYS_INLINE__                     \
-  Typ flash_read_##Name (const __flash Typ *__addr) \
-  {                                                 \
-    Typ __res;                                      \
-    __LPM__8 (__res, __addr);                       \
-    return __res;                                   \
-  }
+#include <bits/lpm-elpm.h>
+#include <bits/def-flash-read.h>
 
 #if __SIZEOF_LONG_LONG__ == 8
 _Avrlibc_Def_F_8 (u64, uint64_t)
@@ -1417,8 +1402,7 @@ _Avrlibc_Def_F_4 (long_double, long double)
 
 #ifdef __FLASHX
 
-#include <avr/lpm-elpm.h>
-#include <avr/io.h> /* RAMPZ */
+#include <bits/lpm-elpm.h>
 
 #if defined(__AVR_HAVE_ELPM__)
 #define __ELPM__8fx(r,a,T) __ELPM__8(r,a,T)
