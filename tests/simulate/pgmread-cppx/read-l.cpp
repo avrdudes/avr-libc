@@ -1,4 +1,6 @@
 #include <stdlib.h>
+
+#define __pgm_read_template__
 #include <avr/pgmspace.h>
 
 #if __SIZEOF_LONG__ == 4
