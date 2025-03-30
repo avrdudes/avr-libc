@@ -34,7 +34,12 @@
 
 // Q-format 0.16 values that represent f(x) = 2^x - 1 in [0, 1] as
 // a cubic Bézier.
-static const uint16_t PROGMEM
+#ifdef __AVR_HAVE_ELPMX__
+    PROGMEM_FAR
+#else
+    PROGMEM
+#endif
+static const uint16_t
 exp2_tab[2 * ((1u << LOG2_N_INTERVALS) + 1)] =
   {
     0x0000, 0x0ec9, // x=0.00:  0.000000, 0.057755
@@ -50,6 +55,15 @@ exp2_tab[2 * ((1u << LOG2_N_INTERVALS) + 1)] =
 // This is better than pgm_read_word (addr++).
 #ifdef __AVR_TINY__
 #define pgm_read_inc(addr) urbits (*addr++)
+#elif defined (__AVR_HAVE_ELPMX__)
+#define pgm_read_inc(addr)                              \
+  (__extension__({                                      \
+      T result;                                         \
+      __asm volatile ("elpm %A0, Z+"  "\n\t"            \
+                      "elpm %B0, Z+"                    \
+                      : "=r" (result), "+z" (addr));    \
+      result;                                           \
+    }))
 #elif defined (__AVR_HAVE_LPMX__)
 #define pgm_read_inc(addr)                      \
   (__extension__({                              \
@@ -89,8 +103,22 @@ T exp2m1ur (T x)
   const T t = urbits (ux);
 #endif
 
+#ifdef __AVR_HAVE_ELPMX__
+  const uint16_t *pi;
+  uint8_t i0 = 4 * int_num;
+  uint8_t hi8;
+  __asm volatile ("clr %B0"               "\n\t"
+                  "clr %1"                "\n\t"
+                  "subi %A0,lo8(-(%3))"   "\n\t"
+                  "sbci %B0,hi8(-(%3))"   "\n\t"
+                  "sbci %1, hh8(-(%3))"   "\n\t"
+                  "out __RAMPZ__,%1"
+                  : "=d" (pi), "=d" (hi8)
+                  : "0" (i0), "i" (exp2_tab) : "memory");
+#else
   const uint8_t i0 = 2 * int_num;
   const uint16_t *pi = &exp2_tab [i0];
+#endif
 
   const T y0 = pgm_read_inc (pi);
   const T d0 = pgm_read_inc (pi);
@@ -98,6 +126,10 @@ T exp2m1ur (T x)
   const T y3 = pgm_read_inc (pi);
   const T d3 = pgm_read_inc (pi);
   const T y2 = y3 - d3;
+
+#if defined(__AVR_HAVE_ELPMX__) && defined(__AVR_HAVE_RAMPD__)
+  __asm volatile ("out __RAMPZ__,__zero_reg__" ::: "memory");
+#endif
 
   // Linear
   const T w0 = line1 (t, y0, y1);
@@ -109,7 +141,5 @@ T exp2m1ur (T x)
   const T v1 = line1 (t, w1, w2);
 
   // Cubic
-  T f0 = line1 (t, v0, v1);
-
-  return f0;
+  return line1 (t, v0, v1);
 }
