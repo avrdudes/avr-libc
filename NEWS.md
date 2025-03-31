@@ -53,7 +53,7 @@
 - Support has been added for the fixed-point arithmetic
   functions `rdivi`, `urdivi`, `lrdivi`, `ulrdivi` ([#999][999]),
   `sqrthr`, `sqrtuhr` ([#1024][1024]), `log2uhk`, `log2uk`,
-  `exp2uk`, `exp2m1ur`.
+  `exp2k`, `exp2uk`, `exp2m1ur`.
 
 - Support for `llabs` has been added to
   [<inttypes.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__inttypes.html).
