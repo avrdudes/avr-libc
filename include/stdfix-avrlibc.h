@@ -615,6 +615,13 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
 /** \name Square Root and Transcendental Functions */
 
 /** \ingroup avr_stdfix
+    Compute 2<sup>x</sup> with saturation.
+
+    The WCET is at least the one of exp2m1ur().
+    \since AVR-LibC v2.3  */
+unsigned accum exp2uk (unsigned accum x);
+
+/** \ingroup avr_stdfix
     Compute 2<sup>x</sup>&nbsp;&minus;&nbsp;1.
     The returned value is in the range [0, 1).
 
@@ -706,6 +713,7 @@ extern short accum log2uhk(unsigned short accum x) __ATTR_CONST__;
 extern fract sinuhk_deg(unsigned short accum x) __ATTR_CONST__;
 extern fract cosuhk_deg(unsigned short accum x) __ATTR_CONST__;
 
+extern unsigned accum exp2uk (unsigned accum x) __ATTR_CONST__;
 extern unsigned fract exp2m1ur (unsigned fract x) __ATTR_CONST__;
 #endif /* Doxygen */
 

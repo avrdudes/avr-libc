@@ -1,6 +1,7 @@
 fxlib_a_c_sources = \
 	cosuhk_deg.c \
 	sinuhk_deg.c \
+	exp2uk.c \
 	exp2m1ur.c
 
 fxlib_a_asm_sources = \
