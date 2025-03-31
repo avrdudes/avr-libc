@@ -1223,6 +1223,7 @@ features are not supported:
 
 - The printf and scanf families of functions
 - Floating-point arithmetic
+- Fixed-point arithmetic
 - Arithmetic involving 64-bit computations
 - Named address-spaces like \c #__flash.
 
