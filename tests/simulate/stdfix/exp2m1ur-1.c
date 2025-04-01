@@ -41,7 +41,7 @@ void test_exp2m1ur (void)
       if (d > d_ma) d_ma = d;
       if (d < d_mi) d_mi = d;
       if (d_ma > +0.00004f) exit (__LINE__);
-      if (d_ma < -0.00004f) exit (__LINE__);
+      if (d_mi < -0.00004f) exit (__LINE__);
     }
   while (++i);
 

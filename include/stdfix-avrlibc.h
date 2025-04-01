@@ -633,8 +633,8 @@ unsigned accum exp2uk (unsigned accum x);
     The returned value is in the range [0, 1).
 
     The absolute error is bounded by 4&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.5</sup>.
-    The worst case execution time (WCET) is around 440 cycles when MUL is
-    available, and around  1900 cycles when MUL is not available
+    The worst case execution time (WCET) is around 280 cycles when MUL is
+    available, and around  1100 cycles when MUL is not available
     (measured with avr-gcc v15).
     \since AVR-LibC v2.3  */
 unsigned fract exp2m1ur (unsigned fract x);
