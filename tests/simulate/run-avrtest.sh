@@ -237,6 +237,10 @@ set_extra_options ()
     # To test the pgm_read_far functions.
     local o_pgmx="-include high-progmemx.h"
     case $1 in
+	atmega8)
+	    o_sim="-mmcu=avr4"
+	    o_gcc="$(o_mem 0 0x2000 0xffff)"
+	    ;;
 	atmega128 | atmega103)
 	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_pgmx"
 	    ;;
