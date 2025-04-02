@@ -31,10 +31,11 @@ void test_log21pur (void)
       unsigned fract x = urbits (i);
 
       avrtest_reset_cycles ();
-      float y2 = log21pur (x);
+      unsigned fract ur = log21pur (x);
       uint32_t c = avrtest_cycles ();
       if (c > cyc) cyc = c;
 
+      float y2 = ur;
       float y1 = func (x);
       float d = avrtest_subf (y2, y1);
 

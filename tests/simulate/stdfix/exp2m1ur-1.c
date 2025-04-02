@@ -31,10 +31,11 @@ void test_exp2m1ur (void)
       unsigned fract x = urbits (i);
 
       avrtest_reset_cycles ();
-      float y2 = exp2m1ur (x);
+      unsigned fract ur = exp2m1ur (x);
       uint32_t c = avrtest_cycles ();
       if (c > cyc) cyc = c;
 
+      float y2 = ur;
       float y1 = func (x);
       float d = avrtest_subf (y2, y1);
 

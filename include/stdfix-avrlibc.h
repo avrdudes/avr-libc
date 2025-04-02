@@ -633,7 +633,7 @@ unsigned accum exp2uk (unsigned accum x);
     The returned value is in the range [0, 1).
 
     The absolute error is bounded by 4&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.5</sup>.
-    The worst case execution time (WCET) is around 280 cycles when MUL is
+    The worst case execution time (WCET) is around 200 cycles when MUL is
     available, and around  1100 cycles when MUL is not available
     (measured with avr-gcc v15).
     \since AVR-LibC v2.3  */
@@ -650,7 +650,8 @@ unsigned fract exp2m1ur (unsigned fract x);
 accum log2uk(unsigned accum x);
 
 /** \ingroup avr_stdfix
-    Logarithm to base 2 of the value \p x. The returned value for \p x = 0 is -128.
+    Return log<sub>2</sub>(\p x), the logarithm to base 2 of the value \p x.
+    The returned value for \p x = 0 is &minus;128.
 
     The absolute error is bounded by 5.3&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7.5</sup>.
     The worst case execution time (WCET) is around 210 cycles.
@@ -658,10 +659,12 @@ accum log2uk(unsigned accum x);
 short accum log2uhk(unsigned short accum x);
 
 /** \ingroup avr_stdfix
-    Logarithm to base 2 of the value 1 + \p x.
+    Return log<sub>2</sub>(1 + \p x),
+    the logarithm to base 2 of the value 1 + \p x.
+    The result is in the range [0, 1).
 
     The absolute error is bounded by 4.4&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.5</sup>.
-    The worst case execution time (WCET) is around 440 cycles when MUL is
+    The worst case execution time (WCET) is around 250 cycles when MUL is
     available, and around 1400 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
 unsigned fract log21pur(unsigned fract x);
