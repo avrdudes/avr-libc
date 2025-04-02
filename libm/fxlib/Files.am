@@ -3,7 +3,8 @@ fxlib_a_c_sources = \
 	sinuhk_deg.c \
 	exp2k.c \
 	exp2uk.c \
-	exp2m1ur.c
+	exp2m1ur.c \
+	log21pur.c
 
 fxlib_a_asm_sources = \
 	lrdivi.S \

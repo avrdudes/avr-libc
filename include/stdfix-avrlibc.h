@@ -656,6 +656,15 @@ accum log2uk(unsigned accum x);
 short accum log2uhk(unsigned short accum x);
 
 /** \ingroup avr_stdfix
+    Logarithm to base 2 of the value 1 + \p x.
+
+    The absolute error is bounded by 4.4&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.5</sup>.
+    The worst case execution time (WCET) is around 440 cycles when MUL is
+    available, and around 1400 cycles when MUL is not available.
+    \since AVR-LibC v2.3  */
+unsigned fract log21pur(unsigned fract x);
+
+/** \ingroup avr_stdfix
     Sine of the angle \a deg where \a deg is specified in degrees, i.e.
     in the range [0&deg;, 256&deg;).
     The returned value is in the range (&minus;1, +1), i.e. is never &minus;1.
@@ -714,6 +723,7 @@ type roundfx (type val, int bit);
 #else /* Doxygen */
 extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
+extern unsigned fract log21pur(unsigned fract x) __ATTR_CONST__;
 extern accum log2uk(unsigned accum x) __ATTR_CONST__;
 extern short accum log2uhk(unsigned short accum x) __ATTR_CONST__;
 
