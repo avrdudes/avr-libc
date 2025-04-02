@@ -29,7 +29,7 @@
 /* Without MUL we could use the same algorithm, but the guess is that it would
    be worse than log2f -- at least as far as the runtime is concerned.  */
 
-#ifdef __AVR_HAVE_MUL__
+#ifndef __AVR_TINY__
 
 #include "asmdef.h"
 
@@ -80,71 +80,17 @@ ENTRY log2uk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Calculate    log_2 (1 + A) with A in [0, 1).
-;;; ufract R22 = log_2 (1 + ufract R22)
+;;; ufract R24 = log_2 (1 + ufract R24)
 
-#define     A0      r22
-#define     A1      r23
-
-#define     P0      r21
-#define     P1      r18
-#define     P2      r19
-#define     P3      r20
-
-#define     Zero    r24
-
-#define     Mask0   r25
-#define     Mask1   r26
-#define     Res0    r30
-#define     Res1    r31
-
-    clr     Res0
-    clr     Res1
-    X_movw  Zero, Res0          ; Clear Zero and Mask0
-    ldi     Mask1, hi8(1 << 15) ; 0.5
-.Loop:
-    ;; (1 + A)^2 = 1 + 2A + A^2
-    ldi     P3, 1
-    mul     A1, A1
-    X_movw  P1, r0
-    mov     P0, A0              ; Proxy for A0^2
-
-    fmul    A0, A1
-    adc     P2, Zero
-    adc     P3, Zero
-    add     P0, r0
-    adc     P1, r1
-    adc     P2, Zero
-    adc     P3, Zero
-
-    add     P1, A0
-    adc     P2, A1
-    adc     P3, Zero
-    add     P1, A0
-    adc     P2, A1
-    adc     P3, Zero
-
-    cpi     P3, 2               ; P[] >= 2 ?  i.e.  P[] in [2, 4) ?
-    brlo 1f
-    lsr     P3                  ; Yes =>  P[] >> 1 in [1, 2) again.
-    ror     P2
-    ror     P1
-    adc     P1, Zero
-    adc     P2, Zero
-    or      Res0, Mask0
-    or      Res1, Mask1
-1:
-    X_movw  A0, P1
-    lsr     Mask1
-    ror     Mask0
-    brcc .Loop
-
-    clr     __zero_reg__
-    X_movw  A0, Res0
+    push    Int
+    X_movw  R24, Arg0
+    XCALL   _U(log21pur)
+    X_movw  Arg0, R24
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Final roundup: Combine log2 with the integral part to accum Arg[].
     ;; Sign-extend integral part to Arg2/3.
-    mov     Arg2, Int
+    pop     Arg2
     clr     Arg3
     sbrc    Arg2, 7
     dec     Arg3
@@ -153,13 +99,8 @@ ENTRY log2uk
     ror     Arg2
     ror     Arg1
     ror     Arg0
-    ;; Round.
-    adc     Arg0, __zero_reg__
-    adc     Arg1, __zero_reg__
-    adc     Arg2, __zero_reg__
-    adc     Arg3, __zero_reg__
     ret
 
 ENDFUNC
 
-#endif /* Have MUL */
+#endif /* AVR_TINY */
