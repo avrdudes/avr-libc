@@ -21,7 +21,7 @@ void test_log2 (void)
       // Run for all ua in [1, 2).  
       unsigned accum ua = ukbits (i);
 
-      avrtest_reset_cycles ();
+      avrtest_cycles_call ();
       accum la = log2uk (ua);
       uint32_t c = avrtest_cycles ();
       if (c > cyc) cyc = c;
