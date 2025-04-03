@@ -4,6 +4,7 @@ fxlib_a_c_sources = \
 	exp2k.c \
 	exp2uk.c \
 	exp2m1ur.c \
+	log21puhr.c \
 	log21pur.c
 
 fxlib_a_asm_sources = \

@@ -26,60 +26,27 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.  */
 
-#include "asmdef.h"
+#include <stdfix.h>
 
-;;; short accum R24 = log2 (unsigned short accum R24)
+#define T unsigned short fract
 
-#define     Arg0    r24
-#define     Arg1    r25
+// log2 (1 + x) over [0, 1).
 
-;; Integral part of log2, determined by counting leading zeros of Arg[].
-#define     Int     r27
+T log21puhr (T x)
+{
+  // Coefficients are prone to rounding, hence rectify them.
+  T a0 = 0.0006371173uhr;
+  T a1 = 0.4188802113uhr + uhrbits (2);
+  T a2 = 0.5771289139uhr + uhrbits (1);
+  T a3 = 0.1582487026uhr;
 
-ENTRY log2uhk
-    clr     Int
-    ;; Arg[] < 1.0 ?
-    tst     Arg1
-    brne .Lge1
+  // Reformulate the MiniMax polynomial such that the coefficients
+  // and intermediate values are all in [0, 1).
 
-    ;; Yes: Is fractional part == 0 ?
-    tst     Arg0
-    brne .Loop_lt1
-    ;; Yes: log2(0) = -128.
-    ldi     Arg1, 0x80
-    ret
+  T y = a3;
+  y = a2 - x * y;
+  y = a1 - x * y;
+  y = a0 + x * y + x;
 
-.Loop_lt1:
-    ;; No: Shift left until >= 1.0, i.e. until in [1, 2).
-    dec     Int
-    lsl     Arg0
-    brcc .Loop_lt1
-    rjmp .Log2_1p_uhr
-
-;; Arg[] >= 1: Shift right until < 2.0, i.e. until in [1, 2).
-.Loop_ge1:
-    inc     Int
-    lsr     Arg1
-    ror     Arg0
-.Lge1:
-    cpi     Arg1, 2
-    brsh .Loop_ge1
-
-.Log2_1p_uhr:
-    push    Int
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Calculate     log_2 (1 + A) with A in [0, 1).
-;;; uhfract R24 = log_2 (1 + uhfract R24)
-
-    XCALL   _U(log21puhr)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Finally combine log2 with the integral part to short accum Arg[].
-    pop     Arg1
-    ;; Convert to signed accum:  Q-format 8.8 -> s8.7
-    asr     Arg1
-    ror     Arg0
-    ret
-
-ENDFUNC
+  return y;
+}

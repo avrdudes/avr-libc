@@ -653,10 +653,22 @@ accum log2uk(unsigned accum x);
     Return log<sub>2</sub>(\p x), the logarithm to base 2 of the value \p x.
     The returned value for \p x = 0 is &minus;128.
 
-    The absolute error is bounded by 5.3&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7.5</sup>.
-    The worst case execution time (WCET) is around 210 cycles.
+    The absolute error is bounded by 8&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7</sup>.
+    The worst case execution time (WCET) is around 60 cycles plus
+    the WCET of log21puhr().
     \since AVR-LibC v2.3  */
 short accum log2uhk(unsigned short accum x);
+
+/** \ingroup avr_stdfix
+    Return log<sub>2</sub>(1 + \p x),
+    the logarithm to base 2 of the value 1 + \p x.
+    The result is in the range [0, 1).
+
+    The absolute error is bounded by 4.3&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7.5</sup>.
+    The worst case execution time (WCET) is around 25 cycles when MUL is
+    available, and around 340 cycles when MUL is not available.
+    \since AVR-LibC v2.3  */
+unsigned short fract log21puhr(unsigned short fract x);
 
 /** \ingroup avr_stdfix
     Return log<sub>2</sub>(1 + \p x),
@@ -728,6 +740,7 @@ type roundfx (type val, int bit);
 #else /* Doxygen */
 extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
+extern unsigned short fract log21puhr(unsigned short fract x) __ATTR_CONST__;
 extern unsigned fract log21pur(unsigned fract x) __ATTR_CONST__;
 extern accum log2uk(unsigned accum x) __ATTR_CONST__;
 extern short accum log2uhk(unsigned short accum x) __ATTR_CONST__;
