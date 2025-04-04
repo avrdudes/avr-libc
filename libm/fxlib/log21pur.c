@@ -34,12 +34,12 @@
 
 T log21pur (T x)
 {
-  T a0 = 0.0000125387ur + urbits(2);
-  T a1 = 0.4416845570ur;
-  T a2 = 0.7079926512ur;
-  T a3 = 0.4136301195ur;
-  T a4 = 0.1921956355ur;
-  T a5 = 0.0448736102ur;
+  T a0 = 0x0.0000p0ur; // 0.0000000
+  T a1 = 0x0.7114p0ur; // 0.4417114
+  T a2 = 0x0.b53fp0ur; // 0.7079926
+  T a3 = 0x0.69e5p0ur; // 0.4136505
+  T a4 = 0x0.3131p0ur; // 0.1921539
+  T a5 = 0x0.0b77p0ur; // 0.0447845
 
   // Reformulate the MiniMax polynomial such that the coefficients
   // and intermediate values are all in [0, 1).

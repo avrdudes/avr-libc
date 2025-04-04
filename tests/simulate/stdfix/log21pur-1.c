@@ -41,8 +41,8 @@ void test_log21pur (void)
 
       if (d > d_ma) d_ma = d;
       if (d < d_mi) d_mi = d;
-      if (d_ma > +4.4e-5f) exit (__LINE__);
-      if (d_mi < -4.4e-5f) exit (__LINE__);
+      if (d_ma > +4e-5f) exit (__LINE__);
+      if (d_mi < -4e-5f) exit (__LINE__);
     }
   while (++i);
 
