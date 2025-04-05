@@ -54,6 +54,7 @@
     \code
     #include <stdint.h>
     #include <avr/interrupt.h>
+    #include <avr/eeprom.h>
     #include <avr/pgmspace.h>
 
     void boot_program_page (uint32_t page, uint8_t *buf)

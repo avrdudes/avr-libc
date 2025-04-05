@@ -48,6 +48,7 @@
 #include <stddef.h>	/* size_t */
 #include <stdint.h>
 
+/** \file */
 /** \defgroup avr_eeprom <avr/eeprom.h>: EEPROM handling
     \code #include <avr/eeprom.h> \endcode
 
