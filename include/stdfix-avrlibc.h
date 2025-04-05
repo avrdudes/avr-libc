@@ -749,21 +749,21 @@ int countlsfx (type val);
 type roundfx (type val, int bit);
 
 #else /* Doxygen */
-extern unsigned fract atanur(unsigned fract x) __ATTR_CONST__;
+extern unsigned fract atanur(unsigned fract) __ATTR_CONST__;
 
 extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
-extern unsigned short fract log21puhr(unsigned short fract x) __ATTR_CONST__;
-extern unsigned fract log21pur(unsigned fract x) __ATTR_CONST__;
-extern accum log2uk(unsigned accum x) __ATTR_CONST__;
-extern short accum log2uhk(unsigned short accum x) __ATTR_CONST__;
+extern unsigned short fract log21puhr(unsigned short fract) __ATTR_CONST__;
+extern unsigned fract log21pur(unsigned fract) __ATTR_CONST__;
+extern accum log2uk(unsigned accum) __ATTR_CONST__;
+extern short accum log2uhk(unsigned short accum) __ATTR_CONST__;
 
-extern fract sinuhk_deg(unsigned short accum x) __ATTR_CONST__;
-extern fract cosuhk_deg(unsigned short accum x) __ATTR_CONST__;
+extern fract sinuhk_deg(unsigned short accum) __ATTR_CONST__;
+extern fract cosuhk_deg(unsigned short accum) __ATTR_CONST__;
 
-extern accum exp2k (accum x) __ATTR_CONST__;
-extern unsigned accum exp2uk (unsigned accum x) __ATTR_CONST__;
-extern unsigned fract exp2m1ur (unsigned fract x) __ATTR_CONST__;
+extern accum exp2k (accum) __ATTR_CONST__;
+extern unsigned accum exp2uk (unsigned accum) __ATTR_CONST__;
+extern unsigned fract exp2m1ur (unsigned fract) __ATTR_CONST__;
 #endif /* Doxygen */
 
 #ifdef __cplusplus
