@@ -615,6 +615,17 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
 /** \name Square Root and Transcendental Functions */
 
 /** \ingroup avr_stdfix
+    Compute the arcus tangent of \p x.
+    The returned value is in the range [0, &pi;/4&asymp;0.7854].
+
+    The absolute error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
+    The worst case execution time (WCET) is around 250 cycles when MUL is
+    available, and around  1400 cycles when MUL is not available
+    (measured with avr-gcc v15).
+    \since AVR-LibC v2.3  */
+unsigned fract atanur (unsigned fract x);
+
+/** \ingroup avr_stdfix
     Compute 2<sup>x</sup> with saturation.
 
     The WCET is at least the one of exp2m1ur().
@@ -738,6 +749,8 @@ int countlsfx (type val);
 type roundfx (type val, int bit);
 
 #else /* Doxygen */
+extern unsigned fract atanur(unsigned fract x) __ATTR_CONST__;
+
 extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
 extern unsigned short fract log21puhr(unsigned short fract x) __ATTR_CONST__;

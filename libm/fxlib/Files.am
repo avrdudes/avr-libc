@@ -1,4 +1,5 @@
 fxlib_a_c_sources = \
+	atanur.c \
 	cosuhk_deg.c \
 	sinuhk_deg.c \
 	exp2k.c \
