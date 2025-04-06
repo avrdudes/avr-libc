@@ -1218,14 +1218,15 @@ http://lightner.net/avr/ATtinyAvrGcc.html
 
 \section faq_AVRrc What features are (not) supported on AVRrc Reduced Core devices?
 
-On the Reduced Core with only 16 general purpose registers, the following
+On the reduced AVRrc core with only 16 general purpose registers, the following
 features are not supported:
 
 - The printf and scanf families of functions
 - Floating-point arithmetic
-- Fixed-point arithmetic
+- Fixed-point arithmetic (though 8-bit and 16-bit arithmetic should work
+  with GCC v15+)
 - Arithmetic involving 64-bit computations
-- Named address-spaces like \c #__flash.
+- Named address-spaces like \c #__flash
 
 <small>Back to \ref faq_index.</small>
 
