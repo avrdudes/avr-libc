@@ -269,7 +269,7 @@ cat is a rat? no!
     For example code and usage, see the #FLIT macro.  */
 #define FXLIT(str) ((const __flashx char[]) { str })
 
-/** \name Functions from string.h, but one argument is in addrsss-space __flash */
+/** \name Functions from string.h, but one argument is in address-space __flash */
 
 /** \ingroup avr_flash
     \fn const __flash void * memchr_F(const __flash void *s, int val, size_t len)
@@ -671,7 +671,7 @@ extern char *strtok_F(char *s, const __flash char * delim);
 extern char *strtok_rF(char *s, const __flash char * delim, char **last);
 
 
-/** \name Functions from string.h, but one argument is in 24-bit addrsss-space __flashx */
+/** \name Functions from string.h, but one argument is in 24-bit address-space __flashx */
 
 /** \ingroup avr_flash
     \fn void *memcpy_FX(void *dest, const __flashx void *src, size_t n)
