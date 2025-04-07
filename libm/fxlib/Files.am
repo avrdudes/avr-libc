@@ -2,6 +2,7 @@ fxlib_a_c_sources = \
 	atanur.c \
 	cosuhk_deg.c \
 	sinuhk_deg.c \
+	sinpi2ur.c \
 	exp2k.c \
 	exp2uk.c \
 	exp2m1ur.c \

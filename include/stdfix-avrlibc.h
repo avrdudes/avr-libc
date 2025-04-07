@@ -713,6 +713,16 @@ fract sinuhk_deg(unsigned short accum deg);
 fract cosuhk_deg(unsigned short accum deg);
 
 /** \ingroup avr_stdfix
+    Sine of \p x&middot;&pi;/2 radians.
+    The returned value is in the range [0, 1).
+
+    The absolute error is bounded by 5.4&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
+    The worst case execution time (WCET) is around 260 cycles when MUL is
+    available, and around 1400 cycles when MUL is not available.
+    \since AVR-LibC v2.3  */
+unsigned fract sinpi2ur(unsigned fract x);
+
+/** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
     \since AVR-LibC v2.3  */
 short fract sqrthr(short fract radic);
@@ -760,6 +770,7 @@ extern short accum log2uhk(unsigned short accum) __ATTR_CONST__;
 
 extern fract sinuhk_deg(unsigned short accum) __ATTR_CONST__;
 extern fract cosuhk_deg(unsigned short accum) __ATTR_CONST__;
+extern unsigned fract sinpi2ur(unsigned fract) __ATTR_CONST__;
 
 extern accum exp2k (accum) __ATTR_CONST__;
 extern unsigned accum exp2uk (unsigned accum) __ATTR_CONST__;
