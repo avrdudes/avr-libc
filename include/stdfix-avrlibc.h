@@ -693,6 +693,24 @@ unsigned short fract log21puhr(unsigned short fract x);
 unsigned fract log21pur(unsigned fract x);
 
 /** \ingroup avr_stdfix
+    Cosine of \p x&middot;&pi;/2 radians.
+
+    The absolute error is bounded by 5.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
+    The worst case execution time (WCET) is around 300 cycles when MUL is
+    available, and around 1400 cycles when MUL is not available.
+    \since AVR-LibC v2.3  */
+accum cospi2k(accum deg);
+
+/** \ingroup avr_stdfix
+    Sine of \p x&middot;&pi;/2 radians.
+
+    The absolute error is bounded by 5.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
+    The worst case execution time (WCET) is around 300 cycles when MUL is
+    available, and around 1400 cycles when MUL is not available.
+    \since AVR-LibC v2.3  */
+accum sinpi2k(accum deg);
+
+/** \ingroup avr_stdfix
     Sine of the angle \a deg where \a deg is specified in degrees, i.e.
     in the range [0&deg;, 256&deg;).
     The returned value is in the range (&minus;1, +1), i.e. is never &minus;1.
@@ -771,6 +789,8 @@ extern short accum log2uhk(unsigned short accum) __ATTR_CONST__;
 extern fract sinuhk_deg(unsigned short accum) __ATTR_CONST__;
 extern fract cosuhk_deg(unsigned short accum) __ATTR_CONST__;
 extern unsigned fract sinpi2ur(unsigned fract) __ATTR_CONST__;
+extern accum sinpi2k(accum) __ATTR_CONST__;
+extern accum cospi2k(accum) __ATTR_CONST__;
 
 extern accum exp2k (accum) __ATTR_CONST__;
 extern unsigned accum exp2uk (unsigned accum) __ATTR_CONST__;

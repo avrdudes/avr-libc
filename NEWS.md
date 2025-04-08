@@ -55,7 +55,8 @@
   `sqrthr`, `sqrtuhr` ([#1024][1024]), `atanur`,
   `log2uhk`, `log2uk`, `log21puhr`, `log21pur`,
   `exp2k`, `exp2uk`, `exp2m1ur`,
-  `cosuhk_deg`, `sinuhk_deg`, `sinpi2ur`.
+  `sinpi2k`, `sinuhk_deg`, `sinpi2ur`,
+  `cospi2k`, `cosuhk_deg`.
 
 - Support for `llabs` has been added to
   [<inttypes.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__inttypes.html).

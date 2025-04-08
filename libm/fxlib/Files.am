@@ -16,6 +16,7 @@ fxlib_a_asm_sources = \
 	urdivi.S \
 	log2uhk.S \
 	log2uk.S \
+	sincospi2k.S \
 	sqrthr.S \
 	sqrtuhr.S
 
