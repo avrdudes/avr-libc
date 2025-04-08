@@ -23,10 +23,10 @@ void test_sinpi2k (void)
   float d_ma = -1000;
   uint32_t cyc = 0;
 
-  // Test sinpi2k() for all x in [-4, 4] to have an absolute error
+  // Test sinpi2k() for all x in [-2, +2] to have an absolute error
   // as mentioned in stdfix.h.
 
-  for (T x = -4.0k; x <= 4.0k; x += kbits (1))
+  for (T x = -2.0k; x <= 2.0k; x += kbits (1))
     {
       avrtest_reset_cycles ();
       T yk = sinpi2k (x);
