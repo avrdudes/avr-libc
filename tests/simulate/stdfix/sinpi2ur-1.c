@@ -42,8 +42,8 @@ void test_sinpi2ur (void)
 
       d_ma = avrtest_fmaxf (d, d_ma);
       d_mi = avrtest_fminf (d, d_mi);
-      if (avrtest_cmpf (d_ma, +5.4e-5f) > 0) exit (__LINE__);
-      if (avrtest_cmpf (d_mi, -5.4e-5f) < 0) exit (__LINE__);
+      if (avrtest_cmpf (d_ma, +3.9e-5f) > 0) exit (__LINE__);
+      if (avrtest_cmpf (d_mi, -3.9e-5f) < 0) exit (__LINE__);
     }
   while (++i);
 

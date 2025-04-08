@@ -39,8 +39,8 @@ void test_sinpi2k (void)
 
       d_ma = avrtest_fmaxf (d, d_ma);
       d_mi = avrtest_fminf (d, d_mi);
-      if (avrtest_cmpf (d_ma, +5.6e-5f) > 0) exit (__LINE__);
-      if (avrtest_cmpf (d_mi, -5.6e-5f) < 0) exit (__LINE__);
+      if (avrtest_cmpf (d_ma, +5e-5f) > 0) exit (__LINE__);
+      if (avrtest_cmpf (d_mi, -5e-5f) < 0) exit (__LINE__);
     }
 
   LOG_FMT_FLOAT ("d_min = % f\n", d_mi);

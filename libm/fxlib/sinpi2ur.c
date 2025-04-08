@@ -44,14 +44,14 @@ T lsr2 (T x)
 
 T sinpi2ur (T x)
 {
-  T a0 = 0.0000070685 + urbits(1);
+  T a0 = 0.0000070685 + urbits(2);
   T a1 = 0.5703086853;
   T a2 = 0.25 - 0.0054127797;
   T a3 = 0.6675605774;
   T a4 = 0.0371212959;
   T a5 = 0.0547174811;
 
-  if (bitsur (x) >= 0xff40)
+  if (bitsur (x) >= 0xfeca)
     return urbits (0xffff);
 
   // Reformulate the MiniMax polynomial such that the coefficients
@@ -62,7 +62,14 @@ T sinpi2ur (T x)
   y = a3 - x * y;
   y = a2 + x * y;
   y = a1 - x * y + lsr2 (x);
-  y = a0 + x * y + x;
+  y =      x * y + x;
 
-  return y;
+  // Finally, nudge absolute error 1 ULP up for large inputs.
+
+  __asm ("cpi %B1, 211"           "\n\t"
+         "sbc %A0, __zero_reg__"  "\n\t"
+         "sbc %B0, __zero_reg__"
+         : "+r" (y) : "r" (x));
+
+  return a0 + y;
 }

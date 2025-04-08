@@ -45,7 +45,7 @@ ENTRY sinpi2k
     ;; Convert from Q-format s16.15 to 0.16.
     lsl     A0
     rol     A1
-    ;; sin(x) = sin(pi/2 - x)
+    ;; sin(x) = sin(pi - x)
     sbc     r24, r24
     sbc     r25, r25
     eor     r24, A0
