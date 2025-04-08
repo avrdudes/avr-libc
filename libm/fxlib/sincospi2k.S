@@ -37,7 +37,7 @@
 #define A3  r25
 
 ENTRY cospi2k
-    ;; cos(x + pi/2) = sin(x)
+    ;; cos(x) = sin(x + pi/2)
     subi    A1, hi8(-(1<<15))
     sbci    A2, hh8(-(1<<15))
 ENTRY sinpi2k
@@ -45,7 +45,7 @@ ENTRY sinpi2k
     ;; Convert from Q-format s16.15 to 0.16.
     lsl     A0
     rol     A1
-    ;; sin(pi/2 - x) = sin(x)
+    ;; sin(x) = sin(pi/2 - x)
     sbc     r24, r24
     sbc     r25, r25
     eor     r24, A0
@@ -60,7 +60,7 @@ ENTRY sinpi2k
     ;; Round
     adc     A0, __zero_reg__
     adc     A1, __zero_reg__
-    ;; sin(x +- pi) = -sin(x)
+    ;; sin(x) = -sin(x +- pi)
     pop     __tmp_reg__
     sbrs    __tmp_reg__, 0
     ret
