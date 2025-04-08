@@ -31,45 +31,41 @@
 #define T unsigned fract
 
 static inline __attribute__((always_inline))
-T lsr2 (T x)
+T not (T x)
 {
-  __asm ("lsr %B0 $ ror %A0"     "\n\t"
-         "lsr %B0 $ ror %A0"     "\n\t"
-         "adc %A0,__zero_reg__"  "\n\t"
-         "adc %B0,__zero_reg__"
-         : "+r" (x));
+  __asm ("com %A0 $ com %B0" : "+r" (x));
   return x;
 }
 
 
 T sinpi2ur (T x)
 {
-  T a0 = 0.0000070685 + urbits(2);
-  T a1 = 0.5703086853;
-  T a2 = 0.25 - 0.0054127797;
-  T a3 = 0.6675605774;
-  T a4 = 0.0371212959;
-  T a5 = 0.0547174811;
-
-  if (bitsur (x) >= 0xfeca)
-    return urbits (0xffff);
+  // sinpi2(x) - x has 2 zeros instead of just one.  Factor them out and
+  // mulitply them back in below.  Just like MiniMax for sinpi2 this
+  // costs 5 MULs, but the zeros are taming the errors at both ends.
+  T a0 = 0.5706834793;
+  T a1 = 0.5741653442;
+  T a2 = 0.0906479359;
+  T a3 = 0.0543137789;
 
   // Reformulate the MiniMax polynomial such that the coefficients
   // and intermediate values are all in [0, 1).
 
-  T y = a5;
-  y = a4 + x * y;
-  y = a3 - x * y;
+  T y = a3;
   y = a2 + x * y;
-  y = a1 - x * y + lsr2 (x);
-  y =      x * y + x;
+  y = a1 - x * y;
+  y = a0 + x * y;
 
-  // Finally, nudge absolute error 1 ULP up for large inputs.
+  // y = y * x * (1 - x) + x
+  y *= x;   x = not (x);
+  y *= x;   x = not (x);
+  y += x;
 
-  __asm ("cpi %B1, 211"           "\n\t"
-         "sbc %A0, __zero_reg__"  "\n\t"
-         "sbc %B0, __zero_reg__"
-         : "+r" (y) : "r" (x));
+  // Finally, nudge the absolute error for some inputs.
 
-  return a0 + y;
+  unsigned char hi = bitsur (x) >> 8;
+  if (hi >= 0x5e && hi <= 0xab)
+    y += urbits (2);
+
+  return y;
 }
