@@ -26,15 +26,15 @@ void test_log2 (void)
       uint32_t c = avrtest_cycles ();
       if (c > cyc) cyc = c;
 
-      float f1 = avrtest_log2f (avrtest_ldexpf (i, -16));
-      float f2 = la;
+      float f1 = avrtest_log2f (avrtest_uktof (ua));
+      float f2 = avrtest_ktof (la);
 
       float d = avrtest_subf (f2, f1);
 
-      if (d > d_ma) d_ma = d;
-      if (d < d_mi) d_mi = d;
-      if (d_ma > +6e-5) exit (__LINE__);
-      if (d_mi < -6e-5) exit (__LINE__);
+      d_ma = avrtest_fmaxf (d, d_ma);
+      d_mi = avrtest_fminf (d, d_mi);
+      if (avrtest_cmpf (d_ma, +0.000045f) > 0) exit (__LINE__);
+      if (avrtest_cmpf (d_mi, -0.000045f) < 0) exit (__LINE__);
     }
 
   LOG_FMT_FLOAT ("d_min = % f\n", d_mi);

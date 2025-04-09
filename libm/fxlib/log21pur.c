@@ -30,26 +30,37 @@
 
 #define T unsigned fract
 
+static inline __attribute__((always_inline))
+T not (T x)
+{
+  __asm ("com %A0 $ com %B0" : "+r" (x));
+  return x;
+}
+
+
 // log2 (1 + x) over [0, 1).
 
 T log21pur (T x)
 {
-  T a0 = 0x0.0000p0ur; // 0.0000000
-  T a1 = 0x0.7114p0ur; // 0.4417114
-  T a2 = 0x0.b53fp0ur; // 0.7079926
-  T a3 = 0x0.69e5p0ur; // 0.4136505
-  T a4 = 0x0.3131p0ur; // 0.1921539
-  T a5 = 0x0.0b77p0ur; // 0.0447845
+  // Post-processed MiniMax polynomial adjusted for the reconstructor
+  // f(x) = x + a(x) * x * (1 - x) used below.
+  T a0 = 0x0.7126p0ur; //  0.4419861
+  T a1 = 0x0.448ap0ur; //  0.2677307
+  T a2 = 0x0.2655p0ur; //  0.1497345
+  T a3 = 0x0.0bc7p0ur; //  0.0460052
 
   // Reformulate the MiniMax polynomial such that the coefficients
   // and intermediate values are all in [0, 1).
 
-  T y = a5;
-  y = a4 - x * y;
-  y = a3 - x * y;
+  T y = a3;
   y = a2 - x * y;
   y = a1 - x * y;
-  y = a0 + x * y + x;
+  y = a0 - x * y;
+
+  // y := y * x * (1 - x) + x
+  y *= x;   x = not (x);
+  y *= x;   x = not (x);
+  y += x;
 
   return y;
 }

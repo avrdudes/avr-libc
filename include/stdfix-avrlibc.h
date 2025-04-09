@@ -654,7 +654,7 @@ unsigned fract exp2m1ur (unsigned fract x);
     Returns log<sub>2</sub>(\p x), the logarithm to base 2 of the value \p x.
     The returned value for \p x = 0 is &minus;32768.
 
-    The absolute error is bounded by 6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
+    The absolute error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.5</sup>.
     The worst case execution time (WCET) is around 150 cycles more
     than the WCET of log21pur().
     \since AVR-LibC v2.3  */
@@ -686,9 +686,9 @@ unsigned short fract log21puhr(unsigned short fract x);
     the logarithm to base 2 of the value 1 + \p x.
     The result is in the range [0, 1).
 
-    The absolute error is bounded by 4&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.5</sup>.
+    The absolute error is bounded by 3&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;15</sup>.
     The worst case execution time (WCET) is around 250 cycles when MUL is
-    available, and around 1400 cycles when MUL is not available.
+    available, and around 1300 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
 unsigned fract log21pur(unsigned fract x);
 
