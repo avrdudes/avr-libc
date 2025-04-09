@@ -1,6 +1,6 @@
 // exp2m1ur is available on AVRrc, but __muluhq3 is not.
 
-#if defined (USE_AVRTEST) && !defined (__AVR_TINY__)
+#if defined (USE_AVRTEST) && (!defined (__AVR_TINY__) || __GNUC__ >= 15)
 
 #include <stdfix.h>
 #include <stdlib.h>
@@ -30,19 +30,19 @@ void test_exp2m1ur (void)
     {
       unsigned fract x = urbits (i);
 
-      avrtest_reset_cycles ();
+      avrtest_cycles_call ();
       unsigned fract ur = exp2m1ur (x);
       uint32_t c = avrtest_cycles ();
       if (c > cyc) cyc = c;
 
-      float y2 = ur;
-      float y1 = func (x);
+      float y2 = avrtest_urtof (ur);
+      float y1 = func (avrtest_urtof (x));
       float d = avrtest_subf (y2, y1);
 
-      if (d > d_ma) d_ma = d;
-      if (d < d_mi) d_mi = d;
-      if (d_ma > +0.00004f) exit (__LINE__);
-      if (d_mi < -0.00004f) exit (__LINE__);
+      d_ma = avrtest_fmaxf (d, d_ma);
+      d_mi = avrtest_fminf (d, d_mi);
+      if (avrtest_cmpf (d_ma, +0.000022f) > 0) exit (__LINE__);
+      if (avrtest_cmpf (d_mi, -0.000022f) < 0) exit (__LINE__);
     }
   while (++i);
 

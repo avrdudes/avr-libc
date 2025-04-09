@@ -30,25 +30,38 @@
 
 #define T unsigned fract
 
+static inline __attribute__((always_inline))
+T not (T x)
+{
+  __asm ("com %A0 $ com %B0" : "+r" (x));
+  return x;
+}
+
+
 // 2^x - 1 over [0, 1).
 
 T exp2m1ur (T x)
 {
-  // As it turns out, the MiniMax polynomial for 2^x - 1 has coefficients
-  // and intermediate values in [0, 1), hence use the MiniMax polynomial.
+  // MiniMax polynomial to reconstruct the target function according
+  // to  f(x) = x - a(x) * x * (1 - x)
+  T a0 = 0.3069119453;
+  T a1 = 0.0655977726;
+  T a2 = 0.0137250423;
 
-  T a0 = 0.0000037045ur;
-  T a1 = 0.6929661227ur;
-  T a2 = 0.2416384457ur;
-  T a3 = 0.0516903582ur;
-  T a4 = 0.0136976645ur;
-  a0 = urbits (1); // Tweak
-
-  T y = a4;
-  y = a3 + x * y;
-  y = a2 + x * y;
+  T y = a2;
   y = a1 + x * y;
   y = a0 + x * y;
+
+  // y := x - y * x * (1 - x)
+  y *= x;   x = not (x);
+  y *= x;   x = not (x);
+  y = x - y;
+
+  // Finally, nudge the residual error.
+
+  unsigned char hi = bitsur (x) >> 8;
+  if (hi >= 0x28 && hi <= 0x78)
+    y -= urbits (1);
 
   return y;
 }
