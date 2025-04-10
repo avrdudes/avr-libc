@@ -20,7 +20,7 @@
 /* AVR specific */
 
 #ifdef __clang__
-#define __ATTR_PROGMEM__ __attribute__((__section__(".progmem1.data")))
+#define __ATTR_PROGMEM__ __attribute__((__section__(".progmem.data")))
 #else
 #define __ATTR_PROGMEM__ __attribute__((__progmem__))
 #endif
