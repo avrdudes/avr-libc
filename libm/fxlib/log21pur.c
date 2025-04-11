@@ -31,7 +31,7 @@
 #define T unsigned fract
 
 static inline __attribute__((always_inline))
-T not (T x)
+T rsub1 (T x)
 {
   __asm ("com %A0 $ com %B0" : "+r" (x));
   return x;
@@ -58,8 +58,8 @@ T log21pur (T x)
   y = a0 - x * y;
 
   // y := y * x * (1 - x) + x
-  y *= x;   x = not (x);
-  y *= x;   x = not (x);
+  y *= x;   x = rsub1 (x);
+  y *= x;   x = rsub1 (x);
   y += x;
 
   return y;
