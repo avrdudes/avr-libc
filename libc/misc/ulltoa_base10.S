@@ -30,8 +30,8 @@
 
 #include "asmdef.h"
 
-;;; This module implements conversion from 64-bit a integer
-;;; to a decimal ASCII string.  The function comply to the
+;;; This module implements conversion from a 64-bit integer
+;;; to a decimal ASCII string.  The function complies to the
 ;;; avr-gcc ABI and can be used from C code by
 ;;;
 ;;;     #include <stdint.h>
