@@ -95,10 +95,280 @@ Two groups of fixed-point data types are added:
 extern "C" {
 #endif
 
+/** \ingroup avr_stdfix
+    Include all significant digits in the result of a
+    fixed-point to decimal ASCII conversion.
+    The result has no trailing zeros.
 
-/** \name Absolute Value */
+    To be used in the \a mode parameter of such a conversion.
+    For details and examples, see uktoa().
+    \since AVR-LibC v2.3  */
+#define FXTOA_ALL   0x1f
+
+/** \ingroup avr_stdfix
+    A flag to select rounding to nearest in a fixed-point to
+    decimal ASCII conversion.
+
+    To be used in the \a mode parameter of such a conversion.
+    For details and examples, see uktoa().
+    \since AVR-LibC v2.3  */
+#define FXTOA_ROUND 0x00
+
+/** \ingroup avr_stdfix
+    A flag to select truncation (rounding to zero) in a fixed-point to
+    decimal ASCII conversion.
+
+    To be used in the \a mode parameter of such a conversion.
+    For details and examples, see uktoa().
+    \since AVR-LibC v2.3  */
+#define FXTOA_TRUNC 0x80
+
+/** \ingroup avr_stdfix
+    A flag to select that the result of a fixed-point to
+    decimal ASCII conversion has no trailing zeros.
+
+    To be used in the \a mode parameter of such a conversion.
+    For details and examples, see uktoa().
+    \since AVR-LibC v2.3  */
+#define FXTOA_NTZ 0x40
+
+/** \ingroup avr_stdfix
+    The fixed-point to decimal ASCII conversion routines use a
+    dot (<tt>.</tt>) for the decimal point.  This is the default, i.e.
+    FXTOA_DOT can be omitted.
+
+    For details, and examples, see uktoa().
+    \since AVR-LibC v2.3  */
+#define FXTOA_DOT 0x00
+
+/** \ingroup avr_stdfix
+    The fixed-point to decimal ASCII conversion routines use a
+    comma (<tt>,</tt>) for the decimal point.
+
+    For details and examples, see uktoa().
+    \since AVR-LibC v2.3  */
+#define FXTOA_COMMA 0x20
+
 
 #ifdef __DOXYGEN__
+
+/** \name ASCII Conversions (not in ISO/IEC TR18037) */
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    For the meaning of \p mode, and for the (maximal) number of
+    character written by this function, see uktoa().
+    \since AVR-Libc v2.3 */
+char* hktoa (short accum x, char *buf, unsigned char mode);
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    For the meaning of \p mode, and for the (maximal) number of
+    character written by this function, see uktoa().
+    \since AVR-Libc v2.3 */
+char* hrtoa (short fract x, char *buf, unsigned char mode);
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    For the meaning of \p mode, and for the (maximal) number of
+    character written by this function, see uktoa().
+    \since AVR-Libc v2.3 */
+char* ktoa (accum x, char *buf, unsigned char mode);
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    For the meaning of \p mode, and for the (maximal) number of
+    character written by this function, see uktoa().
+    \since AVR-Libc v2.3 */
+char* rtoa (fract x, char *buf, unsigned char mode);
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    For the meaning of \p mode, and for the (maximal) number of
+    character written by this function, see uktoa().
+    \since AVR-Libc v2.3 */
+char* uhktoa (unsigned short accum x, char *buf, unsigned char mode);
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    For the meaning of \p mode, and for the (maximal) number of
+    character written by this function, see uktoa().
+    \since AVR-Libc v2.3 */
+char* uhrtoa (unsigned short fract x, char *buf, unsigned char mode);
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    The format of the output is controlled by the \a mode parameter.
+    It is composed from the format flags below together with \a Digs,
+    the number of fractional digits.
+    The \p mode is the ORed result from \a Digs and a combination of
+    #FXTOA_ALL, #FXTOA_ROUND or #FXTOA_TRUNC, #FXTOA_DOT or #FXTOA_COMMA,
+    and #FXTOA_NTZ, like in:
+    \code
+        uktoa (x, buf, FXTOA_ROUND | FXTOA_NTZ | Digs);
+    \endcode
+
+    - Supported values for \a Digs are in the range 0...30.
+
+<dl>
+  <dt>#FXTOA_ALL
+  <dd>Include all significant digits. \a Digs will be ignored.
+
+  <dt>#FXTOA_ROUND
+  <dd>Round to nearest for \a Digs fractional digits.
+    Rounding for \a Digs &ge; 5 has no effect, i.e. for such \a Digs values
+    the rounded result will be the same like the truncated result.
+
+  <dt>#FXTOA_TRUNC
+  <dd>Like FXTOA_ALL, but truncate the result (round to zero)
+      after \a Digs fractional digits.
+
+  <dt>#FXTOA_NTZ
+  <dd>
+    &bull;&nbsp;With FXTOA_NTZ the result has
+      <b>n</b>o <b>t</b>railing <b>z</b>eros.
+      When the result represents an integral value,
+      then no decimal point and no fractional digits are present.<br>
+    &bull;&nbsp;Without FXTOA_NTZ and with FXTOA_ROUND or FXTOA_TRUNC,
+      the result has the specified number of fractional digits.<br>
+    &bull;&nbsp;FXTOA_NTZ has no effect with FXTOA_ALL.<br>
+    &bull;&nbsp;FXTOA_NTZ has no effect on the required buffer size.
+  <dt>#FXTOA_DOT
+  <dd>The decimal point is a dot (\c .). This is the default, i.e. FXTOA_DOT
+      can be omitted.
+
+  <dt>#FXTOA_COMMA
+  <dd>The decimal point is a comma (\c ,).
+</dl>
+
+<table>
+<caption>Examples</caption>
+<tr>
+  <th>Value
+  <th>Mode
+  <th>Result
+</tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | 0</tt><td><tt>"2"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | 1</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | 2</tt><td><tt>"1.80"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | 3</tt><td><tt>"1.800"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 0</tt><td><tt>"2"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 1</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 2</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 3</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_TRUNC | FXTOA_COMMA | 0</tt><td><tt>"1"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_TRUNC | FXTOA_COMMA | 1</tt><td><tt>"1,7"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_TRUNC | FXTOA_COMMA | 2</tt><td><tt>"1,79"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_TRUNC | FXTOA_COMMA | 3</tt><td><tt>"1,799"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_ALL</tt> <td><tt>"1.79998779296875"</tt></tr>
+</table>
+
+The following table helps with providing enough memory in \a buf.
+
+<table>
+  <caption>Maximum Number of Bytes written to buf</caption>
+  <tr>
+    <th>Type
+    <th>Function
+    <th>FXTOA_ALL
+    <th>All other Modes
+    <th colspan="2">Exact Maximal Value
+  </tr>
+  <tr>
+    <td align="right"><tt>unsigned accum</tt>
+    <td align="right">#uktoa
+    <td align="center">23
+    <td align="center">7 + \a Digs
+    <td align="center">2<sup>16</sup>&minus;2<sup>&minus;16</sup>
+    <td>65535.9999847412109375
+  <tr>
+    <td align="right"><tt>accum</tt>
+    <td align="right">#ktoa
+    <td align="center">23
+    <td align="center">8 + \a Digs
+    <td align="center">2<sup>16</sup>&minus;2<sup>&minus;15</sup>
+    <td>65535.999969482421875
+  <tr>
+    <td align="right"><tt>unsigned short accum</tt>
+    <td align="right">#uhktoa
+    <td align="center">13
+    <td align="center">5 + \a Digs
+    <td align="center">2<sup>8</sup>&minus;2<sup>&minus;8</sup>
+    <td>255.99609375
+  <tr>
+    <td align="right"><tt>short accum</tt>
+    <td align="right">#hktoa
+    <td align="center">13
+    <td align="center">6 + \a Digs
+    <td align="center">2<sup>8</sup>&minus;2<sup>&minus;7</sup>
+    <td>255.9921875
+  <tr>
+    <td align="right"><tt>unsigned fract</tt>
+    <td align="right">#urtoa
+    <td align="center">19
+    <td align="center">3 + \a Digs
+    <td align="center">1&minus;2<sup>&minus;16</sup>
+    <td>0.9999847412109375
+  <tr>
+    <td align="right"><tt>fract</tt>
+    <td align="right">#rtoa
+    <td align="center">19
+    <td align="center">4 + \a Digs
+    <td align="center">1&minus;2<sup>&minus;15</sup>
+    <td>0.999969482421875
+  <tr>
+    <td align="right"><tt>unsigned short fract</tt>
+    <td align="right">#uhrtoa
+    <td align="center">11
+    <td align="center">3 + \a Digs
+    <td align="center">1&minus;2<sup>&minus;8</sup>
+    <td>0.99609375
+  <tr>
+    <td align="right"><tt>short fract</tt>
+    <td align="right">#hrtoa
+    <td align="center">11
+    <td align="center">4 + \a Digs
+    <td align="center">1&minus;2<sup>&minus;7</sup>
+    <td>0.9921875
+  </tr>
+</table>
+
+    \since AVR-Libc v2.3 */
+char* uktoa (unsigned accum x, char *buf, unsigned char mode);
+
+/** \ingroup avr_stdfix
+    Convert fixed-point value \p x to a decimal ASCII representation.
+    The result is written to \p buf, and the user is responsible for
+    providing enough memory in \p buf.  Returns \p buf.
+
+    For the meaning of \p mode, and for the (maximal) number of
+    character written by this function, see uktoa().
+    \since AVR-Libc v2.3 */
+char* urtoa (unsigned fract x, char *buf, unsigned char mode);
+
+
+/** \name Absolute Value */
 
 /** \ingroup avr_stdfix
     Computes the absolute value of \p val.  When the result does not
@@ -795,6 +1065,15 @@ extern accum cospi2k(accum) __ATTR_CONST__;
 extern accum exp2k (accum) __ATTR_CONST__;
 extern unsigned accum exp2uk (unsigned accum) __ATTR_CONST__;
 extern unsigned fract exp2m1ur (unsigned fract) __ATTR_CONST__;
+
+extern char* uktoa (unsigned accum, char*, unsigned char);
+extern char* urtoa (unsigned fract, char*, unsigned char);
+extern char* ktoa (accum, char*, unsigned char);
+extern char* rtoa (fract, char*, unsigned char);
+extern char* uhktoa (unsigned short accum, char*, unsigned char);
+extern char* uhrtoa (unsigned short fract, char*, unsigned char);
+extern char* hktoa (short accum, char*, unsigned char);
+extern char* hrtoa (short fract, char*, unsigned char);
 #endif /* Doxygen */
 
 #ifdef __cplusplus

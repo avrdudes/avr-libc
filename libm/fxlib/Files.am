@@ -18,6 +18,10 @@ fxlib_a_asm_sources = \
 	log2uk.S \
 	sincospi2k.S \
 	sqrthr.S \
-	sqrtuhr.S
+	sqrtuhr.S \
+	uktoa.S   ktoa.S \
+	urtoa.S   rtoa.S \
+	uhktoa.S  hktoa.S \
+	uhrtoa.S  hrtoa.S
 
 fxlib_a_extra_dist =

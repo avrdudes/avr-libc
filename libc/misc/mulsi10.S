@@ -51,7 +51,7 @@
 #define Ten     r20
 
 ;;; A3:A2:A1:A0 *= 10
-;;; Clobbers: R26 (only non-MUL), R27, R20, R21
+;;; Clobbers: R0 (only MUL), R26 (only non-MUL), R27, R20, R21.  T is preserved.
 ;;; uint32_t __mulsi_const_10 (uint32_t);
 ;;; uint32_t __mulsi_u8 (uint32_t, uint8_t);  MUL only
 

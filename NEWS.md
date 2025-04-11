@@ -58,6 +58,9 @@
   `sinpi2k`, `sinuhk_deg`, `sinpi2ur`,
   `cospi2k`, `cosuhk_deg`.
 
+- Support has been added for fixed-point to decimal ASCII conversions:
+  `ktoa`, `uktoa`, `hktoa`, `uhktoa`, `rtoa`, `urtoa`, `hrtoa`, `uhrtoa`.
+
 - Support for `llabs` has been added to
   [<inttypes.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__inttypes.html).
 
