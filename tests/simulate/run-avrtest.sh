@@ -48,6 +48,11 @@
 # In order to replace the CFLAGS below entirely, use
 #
 #     CFLAGS="..." ./run-avrtest.sh ...
+# Use
+#
+#     EXTRA_AFLAGS="..." ./run-avrtest.sh ...
+#
+# in order to pass additional flags to AVRtest.
 
 
 ##########################################################################
@@ -317,7 +322,7 @@ Simulate_avrtest ()
     esac
 
     msg=$(${AVRTEST_HOME}/${avrtest}${suff} \
-	      -q -no-stdin $1 $o_sim -m 60000000000 2>&1)
+	      -q -no-stdin $1 $o_sim -m 60000000000 ${EXTRA_AFLAGS} 2>&1)
     RETVAL=$?
     #echo "MSG = $msg"
     #echo " - $AVRTEST_HOME/$avrtest$suff -q $1 $o_sim -m 60000000000"
