@@ -209,9 +209,6 @@ _U(\lname):
 /* Macro 'X_movw' extends enhanced movw instruction for classic chips.
  */
 .macro	X_movw	dst,src
-#if  __AVR_HAVE_MOVW__
-	movw	\dst,\src
-#else
   REGNO	.L__movw_dst, \dst
   .if	.L__movw_dst < 0
     .exitm
@@ -229,9 +226,14 @@ _U(\lname):
     .err	; Invalid src arg in X_movw macro.
     .exitm
   .endif
+  .if	.L__movw_dst != .L__movw_src
+#if  __AVR_HAVE_MOVW__
+	movw	\dst,\src
+#else
 	mov	.L__movw_dst, .L__movw_src
 	mov	.L__movw_dst + 1, .L__movw_src + 1
 #endif
+  .endif
 .endm
 
 /* Macro 'X_sbiw' extends SBIW instruction for AVR_TINY chips. */
