@@ -586,12 +586,12 @@ AC_DEFUN(
       CFLAGS="-mmcu=$1 -I${srcdir}/include"
       AC_MSG_CHECKING(compact vector table support for $1)
       AC_COMPILE_IFELSE(
-        [AC_LANG_SOURCE([
+        [AC_LANG_SOURCE([[
 	  #include <avr/io.h>
 	  #ifndef CPUINT_CVT_bm
 	  int a[-1];
 	  #endif
-	  ],[])],
+	  ]],[])],
           [has_$1_cvt=yes],
           [has_$1_cvt=no]
         )
