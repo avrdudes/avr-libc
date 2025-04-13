@@ -555,7 +555,7 @@ dnl Same replacements as performed by mlib-gen.py::to_ident().
 		`
       eval "DEVLIST_${ident}=\"\${DEVLIST_${ident}} $1\""
       SUPPORTED_MCUS="${SUPPORTED_MCUS} $1"
-      upper=$(echo "$1" | tr a-z A-Z)
+      upper=$(echo "$1" | ${srcdir}/devtools/mcu-to-avr-name.sh)
       defd="defined(__AVR_${upper}__)"
       AS_CASE([$1],
 	      [[avr*[0-9]d*]], [COND_DEFINED_Dx="${COND_DEFINED_Dx} || ${defd}"],

@@ -69,8 +69,7 @@ fi
 
 for dev in $devs
 do
-    xmldev=$(echo $dev | tr '[a-z]' '[A-Z]' |\
-        sed -e s/XMEGA/xmega/ -e s/MEGA/mega/ -e s/TINY/tiny/ -e s/AUTO/auto/)
+    xmldev=$(echo $dev | ./mcu-to-avr-name.sh)
     if [ -f "${ATDFDIR}/${xmldev}.atdf" ]
     then
         echo "Generating ${dev}.S"
