@@ -377,9 +377,6 @@ _U(\lname):
   #if __AVR_HAVE_ELPM__
 	;; ELPM with RAMPZ:Z post-increment, load RAMPZ only once.
 	elpm	.L__elpm_dst, Z+
-  #elif defined (__AVR_TINY__)
-	;; AVRrc: Program is visible in the RAM address-space at offset 0x4000.
-	ld	.L__elpm_dst, Z+
   #else
 	;; LPM with Z+, max 64K, no RAMPZ (ATmega83/161/163/32).
 	lpm	.L__elpm_dst, Z+
@@ -394,6 +391,9 @@ _U(\lname):
 	.if .L__elpm_dst > 0
 		mov	.L__elpm_dst, r0
 	.endif
+  #elif defined (__AVR_TINY__)
+	;; AVRrc: Program is visible in the RAM address-space at offset 0x4000.
+	ld	.L__elpm_dst, Z+
   #else
 	;; LPM without post-increment, max 64K, no RAMPZ (AT90S*).
 	lpm
