@@ -13,4 +13,13 @@
 #define __AVR_SD__
 #endif
 
+/* util/setbaud.h uses BAUD to specify the baud rate.
+   This clashes with BAUD as used in many avr/io*.h headers.
+   The following macro is used by avr/io.h for improved
+   diagnostice when BAUD is defined in such a context.  */
+
+#if @COND_BAUD_RESERVED@
+#define __AVR_IO_H_USES_BAUD__
+#endif
+
 #endif /* __BITS_DEVINFO_H_ */

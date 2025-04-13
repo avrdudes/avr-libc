@@ -604,6 +604,44 @@ AC_DEFUN(
   ]
 )
 
+dnl avr/io.h may define BAUD, hence BAUD is reserved and shuold not be
+dnl #defined by the user.
+AC_DEFUN(
+  CHECK_AVR_RESERVED,
+  [
+    if test "x${MULTIDIR_$1}" != "x"
+    then
+      old_CFLAGS=${CFLAGS}
+      CFLAGS="-mmcu=$1 -I${srcdir}/include -Werror"
+      AC_MSG_CHECKING([if BAUD is reserved for $1])
+      dnl #define __BITS_DEVINFO_H_ so then <avr/io.h>'s
+      dnl #include <bits/devinfo.h> is void.
+      AC_COMPILE_IFELSE(
+        [AC_LANG_SOURCE([[
+          #define BAUD 123
+	  #define __BITS_DEVINFO_H_
+	  #include <avr/io.h>
+	  int a[BAUD == 123 ? 1 : -1];
+	  ]],[])],
+          [has_$1_baud=no],
+          [has_$1_baud=yes]
+        )
+      AS_CASE([$1],
+	  [[at90s1200|attiny11|attiny12|attiny15|attiny28]], [has_$1_baud=no],
+	  [])
+      AC_MSG_RESULT([${has_$1_baud}])
+    else
+      has_$1_baud=no
+    fi
+    CFLAGS=${old_CFLAGS}
+    upper=$(echo "$1" | ${srcdir}/devtools/mcu-to-avr-name.sh)
+    defd="defined(__AVR_${upper}__)"
+    AS_IF([test x${has_$1_baud} = xyes],
+        [COND_BAUD_RESERVED="${COND_BAUD_RESERVED} || ${defd}"],
+        [])
+  ]
+)
+
 
 dnl Check whether options like -mdouble=64 act as a multilib selector,
 dnl i.e. $CC will mention it like @mdouble64 with $CC -print-multi-lib.
@@ -677,6 +715,7 @@ AC_SUBST(DIR_avr1)
 COND_DEFINED_Dx="0"
 COND_DEFINED_Ex="0"
 COND_DEFINED_SD="0"
+COND_BAUD_RESERVED="0"
 SUPPORTED_MCUS=""
 
 m4_include([devices.m4])
@@ -685,6 +724,7 @@ AC_SUBST(SUPPORTED_MCUS)
 AC_SUBST(COND_DEFINED_Dx)
 AC_SUBST(COND_DEFINED_Ex)
 AC_SUBST(COND_DEFINED_SD)
+AC_SUBST(COND_BAUD_RESERVED)
 
 dnl The following include must precede multilib.m4 and is only
 dnl needed with avr-gcc v4.9 or older, namely if !HAS_DEV_LIB.
