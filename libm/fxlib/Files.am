@@ -1,5 +1,4 @@
 fxlib_a_c_sources = \
-	atanur.c \
 	cosuhk_deg.c \
 	sinuhk_deg.c \
 	sinpi2ur.c \
@@ -10,6 +9,8 @@ fxlib_a_c_sources = \
 	log21pur.c
 
 fxlib_a_asm_sources = \
+	atanur.S \
+	horner-ur.S \
 	lrdivi.S \
 	rdivi.S \
 	ulrdivi.S \

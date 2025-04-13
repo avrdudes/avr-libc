@@ -27,7 +27,7 @@ void test_atanur (void)
     {
       unsigned fract x = urbits (i);
 
-      avrtest_reset_cycles ();
+      avrtest_cycles_call ();
       unsigned fract ur = atanur (x);
       uint32_t c = avrtest_cycles ();
       if (c > cyc) cyc = c;
@@ -38,8 +38,8 @@ void test_atanur (void)
 
       d_ma = avrtest_fmaxf (d, d_ma);
       d_mi = avrtest_fminf (d, d_mi);
-      if (avrtest_cmpf (d_ma, +4.5e-5f) > 0) exit (__LINE__);
-      if (avrtest_cmpf (d_mi, -4.5e-5f) < 0) exit (__LINE__);
+      if (avrtest_cmpf (d_ma, +2.7e-5f) > 0) exit (__LINE__);
+      if (avrtest_cmpf (d_mi, -2.7e-5f) < 0) exit (__LINE__);
     }
   while (++i);
 

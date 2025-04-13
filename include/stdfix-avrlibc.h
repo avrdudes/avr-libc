@@ -888,9 +888,9 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
     Compute the arcus tangent of \p x.
     The returned value is in the range [0, &pi;/4&asymp;0.7854].
 
-    The absolute error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
-    The worst case execution time (WCET) is around 250 cycles when MUL is
-    available, and around  1400 cycles when MUL is not available
+    The absolute error is bounded by 2.7&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;15</sup>.
+    The worst case execution time (WCET) is around 210 cycles when MUL is
+    available, and around  1000 cycles when MUL is not available
     (measured with avr-gcc v15).
     \since AVR-LibC v2.3  */
 unsigned fract atanur (unsigned fract x);
