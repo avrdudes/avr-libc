@@ -427,7 +427,7 @@ def make_lib_tree():
 # devices.m4 will be lines of:
 devices_m4 = ("CHECK_AVR_DEVICE(%s)\n",
               "CHECK_AVR_CVT(%s)\n",
-              "CHECK_AVR_RESERVED(%s)")
+              "CHECK_AVR_RESERVED(%s)\n")
 
 # multilib.m4 will be lines of:
 check_multi_variant = "CHECK_MULTI_VARIANT([%s], [%s])\n"
