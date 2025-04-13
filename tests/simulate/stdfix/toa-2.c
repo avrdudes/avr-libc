@@ -1,4 +1,4 @@
-#if defined(USE_AVRTEST) && !defined(__AVR_TINY__)
+#if !defined(__AVR_TINY__)
 
 #include <stdfix.h>
 #include <stdlib.h>
