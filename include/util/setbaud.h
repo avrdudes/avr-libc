@@ -75,12 +75,12 @@
    {
    #define BAUD 9600
    #include <util/setbaud.h>
-   UBRRH = UBRRH_VALUE;
-   UBRRL = UBRRL_VALUE;
+       UBRRH = UBRRH_VALUE;
+       UBRRL = UBRRL_VALUE;
    #if USE_2X
-   UCSRA |= (1 << U2X);
+       UCSRA |= (1 << U2X);
    #else
-   UCSRA &= ~(1 << U2X);
+       UCSRA &= ~(1 << U2X);
    #endif
    }
 
@@ -90,12 +90,12 @@
    #undef BAUD  // avoid compiler warning
    #define BAUD 38400
    #include <util/setbaud.h>
-   UBRRH = UBRRH_VALUE;
-   UBRRL = UBRRL_VALUE;
+       UBRRH = UBRRH_VALUE;
+       UBRRL = UBRRL_VALUE;
    #if USE_2X
-   UCSRA |= (1 << U2X);
+       UCSRA |= (1 << U2X);
    #else
-   UCSRA &= ~(1 << U2X);
+       UCSRA &= ~(1 << U2X);
    #endif
    }
    \endcode
