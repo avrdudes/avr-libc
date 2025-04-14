@@ -47,8 +47,8 @@
         unsigned fract a_N, ..., a_2, a_1, a_0;
     } polynomial_t;
 
-    The bits of signs encode the degree N and the signs of the a_i's:
-    - Bit 8-N+i stores the sign of a_i for i = 0..N-1.
+    signs encodes the degree N and the signs after the a_i's:
+    - Bit 8-N+i stores the sign after a_i for i = 0..N-1.
     - Bit 7-N is always 1 (stop bit).
     - Bits below 7-N are always 0.
 */
