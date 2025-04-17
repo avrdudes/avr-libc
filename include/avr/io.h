@@ -93,11 +93,13 @@
 #include <avr/sfr_defs.h>
 
 #if defined(BAUD)
+#if !defined(__BITS_DEVINFO_H_)
 #include <bits/devinfo.h>
+#endif
 #if defined (__AVR_IO_H_USES_BAUD__)
 #error BAUD is a reserved identifier in <avr/io.h>
 #endif
-#endif
+#endif /* defined BAUD? */
 
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
