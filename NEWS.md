@@ -151,7 +151,9 @@
   fixed so that they comply to POSIX.1-2008 ([#1009][1009]).
 
 - `fflush()` is now implemented as a proper (non-inline) function so that
-  features like `-wrap` will work as expected ([#1017][1017], [#1003][1003]).
+  features like `-wrap` will work as expected.  For the same reason,
+  `clearerr`(), `ferror()` and `feof()` are no more implemented as macros
+  but are proper (non-inline) functions, too. ([#1017][1017], [#1003][1003]).
 
 - Distribution is missing `dox_latex_header.tex`, `filter-dox.sh`,
   `avr-libc-logo-large.png` from `doc/api/` ([#1023][1023]).

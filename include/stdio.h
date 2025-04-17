@@ -860,10 +860,6 @@ extern size_t	fread(void *__ptr, size_t __size, size_t __nmemb,
  */
 extern void	clearerr(FILE *__stream);
 
-#if !defined(__DOXYGEN__)
-/* fast inlined version of clearerr() */
-#define clearerror(s) do { (s)->flags &= ~(__SERR | __SEOF); } while(0)
-#endif /* !defined(__DOXYGEN__) */
 
 /**
    Test the end-of-file flag of \c stream.  This flag can only be cleared
@@ -871,10 +867,6 @@ extern void	clearerr(FILE *__stream);
  */
 extern int	feof(FILE *__stream);
 
-#if !defined(__DOXYGEN__)
-/* fast inlined version of feof() */
-#define feof(s) ((s)->flags & __SEOF)
-#endif /* !defined(__DOXYGEN__) */
 
 /**
    Test the error flag of \c stream.  This flag can only be cleared
@@ -882,10 +874,6 @@ extern int	feof(FILE *__stream);
  */
 extern int	ferror(FILE *__stream);
 
-#if !defined(__DOXYGEN__)
-/* fast inlined version of ferror() */
-#define ferror(s) ((s)->flags & __SERR)
-#endif /* !defined(__DOXYGEN__) */
 
 extern int	vfscanf(FILE *__stream, const char *__fmt, va_list __ap);
 
