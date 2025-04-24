@@ -1033,13 +1033,17 @@ short fract sqrthr(short fract radic);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
+    The result is in the range [0, 1).
+
+    The absolute error is in the range [&minus;3.9&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;8</sup>, 0].
+    The worst case execution time (WCET) is around 120 cycles.
     \since AVR-LibC v2.3  */
 unsigned short fract sqrtuhr(unsigned short fract radic);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic.  The result is in the range [0, 1).
 
-    The absolute error is in the range [&minus;1.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;16</sup>.
+    The absolute error is in the range [&minus;1.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;16</sup>, 0].
     The worst case execution time (WCET) is around 320 cycles.
     \since AVR-LibC v2.3  */
 unsigned fract sqrtur(unsigned fract radic);
