@@ -60,13 +60,14 @@ ENTRY ktoa
     ;; representable as unsigned accum.
     X_movw  r30, pBufArg
     st      Z+, Sign
-    ldi     Sign, '6'
-    st      Z+,  Sign
     X_movw  pBufArg, r30
+    ldi     Sign, '6'
     ;; A0 and A1 are already 0.
     ldi     A2, hlo8(5536 << 16)
     ldi     A3, hhi8(5536 << 16)
-    XJMP    _U(uktoa)
+    XCALL   _U(uktoa.sign)
+    X_sbiw  r24, 1
+    ret
 
 .Lpos:
     clr     Sign
