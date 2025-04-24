@@ -9,6 +9,7 @@ fxlib_a_c_sources = \
 	log21pur.c
 
 fxlib_a_asm_sources = \
+	atank.S \
 	atanuk.S \
 	atanur.S \
 	horner-ur.S \

@@ -888,6 +888,13 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
 
 /** \ingroup avr_stdfix
     Compute the arcus tangent of \p x.
+    The returned value is in the range (&minus;&pi;/2, &pi;/2&asymp;1.5708).
+
+    \since AVR-LibC v2.3  */
+accum atank (accum x);
+
+/** \ingroup avr_stdfix
+    Compute the arcus tangent of \p x.
     The returned value is in the range [0, &pi;/2&asymp;1.5708).
 
     \since AVR-LibC v2.3  */
@@ -1056,6 +1063,7 @@ int countlsfx (type val);
 type roundfx (type val, int bit);
 
 #else /* Doxygen */
+extern accum atank(accum) __ATTR_CONST__;
 extern unsigned accum atanuk(unsigned accum) __ATTR_CONST__;
 extern unsigned fract atanur(unsigned fract) __ATTR_CONST__;
 
