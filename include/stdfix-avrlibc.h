@@ -271,14 +271,14 @@ char* uhrtoa (unsigned short fract x, char *buf, unsigned char mode);
   <th>Mode
   <th>Result
 </tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | 0</tt><td><tt>"2"</tt></tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | 1</tt><td><tt>"1.8"</tt></tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | 2</tt><td><tt>"1.80"</tt></tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | 3</tt><td><tt>"1.800"</tt></tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 0</tt><td><tt>"2"</tt></tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 1</tt><td><tt>"1.8"</tt></tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 2</tt><td><tt>"1.8"</tt></tr>
-<tr><td>1.8uk<td><tt>FXTOA_ROUND | FXTOA_NTZ | 3</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>0</tt><td><tt>"2"</tt></tr>
+<tr><td>1.8uk<td><tt>1</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>2</tt><td><tt>"1.80"</tt></tr>
+<tr><td>1.8uk<td><tt>3</tt><td><tt>"1.800"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_NTZ | 0</tt><td><tt>"2"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_NTZ | 1</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_NTZ | 2</tt><td><tt>"1.8"</tt></tr>
+<tr><td>1.8uk<td><tt>FXTOA_NTZ | 3</tt><td><tt>"1.8"</tt></tr>
 <tr><td>1.8uk<td><tt>FXTOA_TRUNC | FXTOA_COMMA | 0</tt><td><tt>"1"</tt></tr>
 <tr><td>1.8uk<td><tt>FXTOA_TRUNC | FXTOA_COMMA | 1</tt><td><tt>"1,7"</tt></tr>
 <tr><td>1.8uk<td><tt>FXTOA_TRUNC | FXTOA_COMMA | 2</tt><td><tt>"1,79"</tt></tr>
