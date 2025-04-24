@@ -107,7 +107,8 @@ extern "C" {
 
 /** \ingroup avr_stdfix
     A flag to select rounding to nearest in a fixed-point to
-    decimal ASCII conversion.
+    decimal ASCII conversion. Rounding mode is the default,
+    i.e. FXTOA_ROUND can be omitted.
 
     To be used in the \a mode parameter of such a conversion.
     For details and examples, see uktoa().
@@ -161,7 +162,7 @@ extern "C" {
 
     For the meaning of \p mode, and for the (maximal) number of
     character written by this function, see uktoa().
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* hktoa (short accum x, char *buf, unsigned char mode);
 
 /** \ingroup avr_stdfix
@@ -171,7 +172,7 @@ char* hktoa (short accum x, char *buf, unsigned char mode);
 
     For the meaning of \p mode, and for the (maximal) number of
     character written by this function, see uktoa().
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* hrtoa (short fract x, char *buf, unsigned char mode);
 
 /** \ingroup avr_stdfix
@@ -181,7 +182,7 @@ char* hrtoa (short fract x, char *buf, unsigned char mode);
 
     For the meaning of \p mode, and for the (maximal) number of
     character written by this function, see uktoa().
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* ktoa (accum x, char *buf, unsigned char mode);
 
 /** \ingroup avr_stdfix
@@ -191,7 +192,7 @@ char* ktoa (accum x, char *buf, unsigned char mode);
 
     For the meaning of \p mode, and for the (maximal) number of
     character written by this function, see uktoa().
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* rtoa (fract x, char *buf, unsigned char mode);
 
 /** \ingroup avr_stdfix
@@ -201,7 +202,7 @@ char* rtoa (fract x, char *buf, unsigned char mode);
 
     For the meaning of \p mode, and for the (maximal) number of
     character written by this function, see uktoa().
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* uhktoa (unsigned short accum x, char *buf, unsigned char mode);
 
 /** \ingroup avr_stdfix
@@ -211,7 +212,7 @@ char* uhktoa (unsigned short accum x, char *buf, unsigned char mode);
 
     For the meaning of \p mode, and for the (maximal) number of
     character written by this function, see uktoa().
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* uhrtoa (unsigned short fract x, char *buf, unsigned char mode);
 
 /** \ingroup avr_stdfix
@@ -239,6 +240,7 @@ char* uhrtoa (unsigned short fract x, char *buf, unsigned char mode);
   <dd>Round to nearest for \a Digs fractional digits.
     Rounding for \a Digs &ge; 5 has no effect, i.e. for such \a Digs values
     the rounded result will be the same like the truncated result.
+    Rounding mode is the default, i.e. FXTOA_ROUND can be omitted.
 
   <dt>#FXTOA_TRUNC
   <dd>Like FXTOA_ALL, but truncate the result (round to zero)
@@ -354,7 +356,7 @@ The following table helps with providing enough memory in \a buf.
   </tr>
 </table>
 
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* uktoa (unsigned accum x, char *buf, unsigned char mode);
 
 /** \ingroup avr_stdfix
@@ -364,7 +366,7 @@ char* uktoa (unsigned accum x, char *buf, unsigned char mode);
 
     For the meaning of \p mode, and for the (maximal) number of
     character written by this function, see uktoa().
-    \since AVR-Libc v2.3 */
+    \since AVR-LibC v2.3 */
 char* urtoa (unsigned fract x, char *buf, unsigned char mode);
 
 
