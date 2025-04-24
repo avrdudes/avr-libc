@@ -1036,6 +1036,14 @@ short fract sqrthr(short fract radic);
     \since AVR-LibC v2.3  */
 unsigned short fract sqrtuhr(unsigned short fract radic);
 
+/** \ingroup avr_stdfix
+    Square root of the value \p radic.  The result is in the range [0, 1).
+
+    The absolute error is in the range [&minus;1.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;16</sup>.
+    The worst case execution time (WCET) is around 320 cycles.
+    \since AVR-LibC v2.3  */
+unsigned fract sqrtur(unsigned fract radic);
+
 
 /** \name Type-Generic Functions */
 
@@ -1069,6 +1077,8 @@ extern unsigned fract atanur(unsigned fract) __ATTR_CONST__;
 
 extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
+unsigned fract sqrtur(unsigned fract) __ATTR_CONST__;
+
 extern unsigned short fract log21puhr(unsigned short fract) __ATTR_CONST__;
 extern unsigned fract log21pur(unsigned fract) __ATTR_CONST__;
 extern accum log2uk(unsigned accum) __ATTR_CONST__;
