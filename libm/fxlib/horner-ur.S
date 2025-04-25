@@ -123,7 +123,9 @@ ENTRY __horner_ur
     push        Signs
     push        X0
     push        X1
-#ifndef __AVR_TINY__
+#ifdef __AVR_TINY__
+    push        r19
+#else
     push        Tab0
     push        Tab1
 #endif
@@ -184,7 +186,9 @@ ENTRY __horner_ur
 #ifdef __AVR_HAVE_ELPM__
     pop         Tab2
 #endif
-#ifndef __AVR_TINY__
+#ifdef __AVR_TINY__
+    pop         r19
+#else
     pop         Tab1
     pop         Tab0
 #endif
