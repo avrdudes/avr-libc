@@ -887,6 +887,26 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
 /** \name Square Root and Transcendental Functions */
 
 /** \ingroup avr_stdfix
+    Compute the arcus cosine of \p x.
+    The returned value is in the range [0, &pi;/2].
+    For invalid values of \p x the returned value is &minus;65536.
+
+    The absolut error is bounded by 4.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+
+    \since AVR-LibC v2.3  */
+unsigned accum acosuk (unsigned accum x);
+
+/** \ingroup avr_stdfix
+    Compute the arcus sine of \p x.
+    The returned value is in the range [0, &pi;/2].
+    For invalid values of \p x the returned value is &minus;65536.
+
+    The absolut error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+
+    \since AVR-LibC v2.3  */
+unsigned accum asinuk (unsigned accum x);
+
+/** \ingroup avr_stdfix
     Compute the arcus tangent of \p x.
     The returned value is in the range (&minus;&pi;/2, &pi;/2&asymp;1.5708).
 
@@ -1075,6 +1095,8 @@ int countlsfx (type val);
 type roundfx (type val, int bit);
 
 #else /* Doxygen */
+extern unsigned accum acosuk(unsigned accum) __ATTR_CONST__;
+extern unsigned accum asinuk(unsigned accum) __ATTR_CONST__;
 extern accum atank(accum) __ATTR_CONST__;
 extern unsigned accum atanuk(unsigned accum) __ATTR_CONST__;
 extern unsigned fract atanur(unsigned fract) __ATTR_CONST__;
