@@ -55,7 +55,7 @@
 
 #define Pi2 0x1921f
 
-FUNCTION __asinuk_acosuk
+ENTRY __asinuk_acosuk_NaN_or_0
 .LNaN_or_0:
     clr     Res0
     clr     Res1

@@ -888,20 +888,44 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
 
 /** \ingroup avr_stdfix
     Compute the arcus cosine of \p x.
-    The returned value is in the range [0, &pi;/2].
-    For invalid values of \p x the returned value is &minus;65536.
+    The returned value is in the range [0, &pi;].
+    For invalid values of \p x the returned value
+    is &minus;65536 = #kbits (0x80000000).
 
-    The absolut error is bounded by 4.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+    The absolute error is bounded by 5.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.1</sup>.
+
+    \since AVR-LibC v2.3  */
+accum acosk (accum x);
+
+/** \ingroup avr_stdfix
+    Compute the arcus cosine of \p x.
+    The returned value is in the range [0, &pi;/2].
+    For invalid values of \p x the returned value
+    is 32768 = #ukbits (0x80000000).
+
+    The absolute error is bounded by 4.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
 
     \since AVR-LibC v2.3  */
 unsigned accum acosuk (unsigned accum x);
 
 /** \ingroup avr_stdfix
     Compute the arcus sine of \p x.
-    The returned value is in the range [0, &pi;/2].
-    For invalid values of \p x the returned value is &minus;65536.
+    The returned value is in the range [&minus;&pi;/2, &pi;/2].
+    For invalid values of \p x the returned value
+    is &minus;65536 = #kbits (0x80000000).
 
-    The absolut error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+    The absolute error is bounded by 5.1&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
+
+    \since AVR-LibC v2.3  */
+accum asink (accum x);
+
+/** \ingroup avr_stdfix
+    Compute the arcus sine of \p x.
+    The returned value is in the range [0, &pi;/2].
+    For invalid values of \p x the returned value
+    is 32768 = #ukbits (0x80000000).
+
+    The absolute error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
 
     \since AVR-LibC v2.3  */
 unsigned accum asinuk (unsigned accum x);
@@ -1097,8 +1121,10 @@ type roundfx (type val, int bit);
 #else /* Doxygen */
 extern unsigned accum acosuk(unsigned accum) __ATTR_CONST__;
 extern unsigned accum asinuk(unsigned accum) __ATTR_CONST__;
-extern accum atank(accum) __ATTR_CONST__;
 extern unsigned accum atanuk(unsigned accum) __ATTR_CONST__;
+extern accum acosk(accum) __ATTR_CONST__;
+extern accum asink(accum) __ATTR_CONST__;
+extern accum atank(accum) __ATTR_CONST__;
 extern unsigned fract atanur(unsigned fract) __ATTR_CONST__;
 
 extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
