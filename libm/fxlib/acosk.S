@@ -40,28 +40,24 @@ ENTRY acosk
     lsl     Arg0
     rol     Arg1
     rol     Arg2
-    rol     Arg3
     brcs 2f
     XCALL   _U(acosuk)
 0:  ;; USA -> SA
-    asr     Arg3
-    ror     Arg2
+    lsr     Arg2
     ror     Arg1
     ror     Arg0
     adc     Arg0, __zero_reg__
     adc     Arg1, __zero_reg__
     adc     Arg2, __zero_reg__
-    adc     Arg3, __zero_reg__
     ret
 2:  ;; x < 0: acos(x) = pi - acos(-x)
     XCALL   _U(__negsi2)
     XCALL   _U(acosuk)
     X_movw  XL, Arg0
-    X_movw  ZL, Arg2
+    mov     ZL, Arg2
     ldi     Arg0, lo8(Pi)    $  sub  Arg0, XL
     ldi     Arg1, hi8(Pi)    $  sbc  Arg1, XH
     ldi     Arg2, hlo8(Pi)   $  sbc  Arg2, ZL
-    ldi     Arg3, hhi8(Pi)   $  sbc  Arg3, ZH
     tst     Arg3
     breq 0b
     ;; Return -65536 for invalid inputs.

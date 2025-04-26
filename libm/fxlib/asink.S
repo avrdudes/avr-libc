@@ -38,16 +38,13 @@ ENTRY asink
     lsl     Arg0
     rol     Arg1
     rol     Arg2
-    rol     Arg3
     brcs 2f
     XCALL   _U(asinuk)
     subi    Arg0, lo8(-1)
     sbci    Arg1, hi8(-1)
     sbci    Arg2, hlo8(-1)
-    sbci    Arg3, hhi8(-1)
 0:  ;; USA -> SA
-    asr     Arg3
-    ror     Arg2
+    asr     Arg2
     ror     Arg1
     ror     Arg0
 1:  ret

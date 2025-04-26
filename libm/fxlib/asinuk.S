@@ -179,12 +179,11 @@ ENTRY asinuk
     ;; 0b10: Want asin but have acos.
     ;; Use asin(x) + acos(x) = pi/2
     X_movw  XL, Res0
-    X_movw  ZL, Res2
+    mov     ZL, Res2
     RCALL   .Load_pi2
     sub     Res0, XL
     sbc     Res1, XH
     sbc     Res2, ZL
-    sbc     Res3, ZH
 
 .Ldone:
     ;; Epilogue
