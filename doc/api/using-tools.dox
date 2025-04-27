@@ -50,12 +50,18 @@ options of the respective release series:
 
 - <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html"
      >Current development</a> (work in progress)
-- <a href="https://gcc.gnu.org/onlinedocs/gcc-14.1.0/gcc/AVR-Options.html"
-     >v14</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-15.1.0/gcc/AVR-Options.html"
+     >v15</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/AVR-Options.html"
+     >v14.2</a>,
+  <a href="https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/AVR-Options.html"
+     >v14.3</a>
 - <a href="https://gcc.gnu.org/onlinedocs/gcc-13.2.0/gcc/AVR-Options.html"
      >v13.2</a>,
   <a href="https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/AVR-Options.html"
-     >v13.3</a>
+     >v13.3</a>,
+  <a href="https://gcc.gnu.org/onlinedocs/gcc-13.4.0/gcc/AVR-Options.html"
+     >v13.4</a>
 - <a href="https://gcc.gnu.org/onlinedocs/gcc-12.3.0/gcc/AVR-Options.html"
      >v12.3</a>,
   <a href="https://gcc.gnu.org/onlinedocs/gcc-12.4.0/gcc/AVR-Options.html"
