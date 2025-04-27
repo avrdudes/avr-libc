@@ -6,7 +6,7 @@
 
 - **Parts of the startup code are now optional and have been moved
   from `crt<mcu>.o` to the device support library `lib<mcu>.a`.**\
-  When a specific part of the startup code are not wanted,
+  When specific parts of the startup code are not wanted,
   a respective symbol can be defined so that the associated code
   is no more pulled in:
   - Define `__init_sp` to skip the setting of SP in `.init2` ([#1011][1011]).
