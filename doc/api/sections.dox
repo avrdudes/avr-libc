@@ -516,7 +516,7 @@ empty ones, that are valid in a section name.
   in the lower 64 KiB block, then the program reads garbage except
   address-space #__flashx or
   \ref avr_pgmspace "pgm_read_*_far" is used. In that case however,
-  code can be located in the \ref sec_dot_progmemx ".progmemx.data"
+  data can be located in the \ref sec_dot_progmemx ".progmemx.data"
   section which does not require to be located in the lower program memory.
 </dd>
 <dt>\anchor sec_dot_trampolines .trampolines</dt>
