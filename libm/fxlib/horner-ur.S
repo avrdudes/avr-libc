@@ -39,7 +39,7 @@
        y_1     = a_1 ± x * y_2,
        y_0     = a_0 ± x * y_1,
 
-    The memory layout of a polynmoial of degree N is
+    The memory layout of a polynomial of degree N is
 
     typedef struct
     {
