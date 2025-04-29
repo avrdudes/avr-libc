@@ -63,7 +63,7 @@ ENTRY __fp_sinus
 	XJMP	_U(__fp_powsodd)
 ENDFUNC
 
-	PGMX_SECTION(.sinus)
+	PGMX_SECTION(fplib.sinus)
 .L_table:
 	.byte	5
 	.byte	     0xa8,0x4c,0xcd,0xb2	; -0.0000000239

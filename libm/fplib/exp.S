@@ -109,7 +109,7 @@ ENTRY_FLOAT expf exp expl
 	XJMP	_U(__inversef)
 ENDFUNC
 
-	PGMX_SECTION(.exp)
+	PGMX_SECTION(fplib.exp)
 .L_table:
 	.byte	7
 	.byte	     0x63,0x42,0x36,0xb7	; -0.0000108635

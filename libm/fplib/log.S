@@ -134,7 +134,7 @@ ENTRY_FLOAT logf log logl
 	XJMP	_U(__fp_round)
 ENDFUNC
 
-	PGMX_SECTION(.log)
+	PGMX_SECTION(fplib.log)
 
 .L_tlow:		; __fp_powser() table for small values
 	.byte	8

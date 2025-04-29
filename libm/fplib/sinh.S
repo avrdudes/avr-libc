@@ -90,7 +90,7 @@ ENTRY_FLOAT sinhf sinh sinhl
 	ret
 ENDFUNC
 
-	PGMX_SECTION(.sinh)
+	PGMX_SECTION(fplib.sinh)
 .L_table:
 	.byte	2
 	.byte	     0x89,0x88,0x08,0x3c	; 1/120

@@ -125,7 +125,7 @@ ENTRY __fp_arccos
 #endif
 ENDFUNC
 
-	PGMX_SECTION(.arccos)
+	PGMX_SECTION(fplib.arccos)
 .L_table:
 	.byte	7
 	.byte	     0x2c,0x7a,0xa5,0xba	; -0.0012624911

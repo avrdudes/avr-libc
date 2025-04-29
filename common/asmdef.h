@@ -43,6 +43,8 @@
 
    FUNCTION                   ; Just for #ifdef
 
+   PGMX_SECTION               ; formerly in libm/fplib/fp32def.h
+
    Provided asm .macros
    ====================
 
@@ -72,6 +74,12 @@
 #include <avr/common.h>
 
 #include "sectionname.h"
+
+
+/* Put constant tables in .progmemx in program memory, so they
+   don't nibble on the lower 64K PROGMEM.  */
+#define PGMX_SECTION(x)	.section .progmemx.gcc_##x, "a", "progbits"
+
 
 /* Macros in this header use local symbols with `.L__' prefix. */
 

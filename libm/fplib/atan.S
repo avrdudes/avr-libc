@@ -101,7 +101,7 @@ ENTRY_FLOAT atanf atan atanl
 	XJMP	_U(__fp_round)
 ENDFUNC
 
-	PGMX_SECTION(.atan)
+	PGMX_SECTION(fplib.atan)
 .L_table:
 	.byte	8
 	.byte	     0x4a,0xd7,0x3b,0x3b	;  0.0028662257

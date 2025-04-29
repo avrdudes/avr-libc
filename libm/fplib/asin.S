@@ -75,7 +75,7 @@ ENTRY_FLOAT asinf asin asinl
 	ret
 ENDFUNC
 
-	PGMX_SECTION(.asin)
+	PGMX_SECTION(fplib.asin)
 .L_table:
 	.byte	3
 	.byte	     0x6e,0xdb,0x36,0x3d	; 15/336

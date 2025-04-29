@@ -24,10 +24,6 @@
 #endif
 #define FUNC_SEGNAME	MLIB_SECTION
 
-/* Put constant tables in .progmemx in program memory, so they
-   don't nibble on the lower 64K PROGMEM.  */
-#define PGMX_SECTION(x)	.section .progmemx.gcc_fplib##x, "a", @progbits
-
 #ifdef __AVR_HAVE_ELPM__
 #  define LDI_XH_hh8(sym)	ldi XH, hh8(sym)
 #else /* ELPM ? */

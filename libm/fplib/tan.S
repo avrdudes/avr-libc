@@ -97,7 +97,7 @@ ENTRY_FLOAT tanf tan tanl
 	ret
 ENDFUNC
 
-	PGMX_SECTION(.tan)
+	PGMX_SECTION(fplib.tan)
 .L_table:
 	.byte	6
 	.byte	     0x64,0xec,0x1b,0x3c	;  0.0095168091

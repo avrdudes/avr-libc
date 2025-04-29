@@ -109,7 +109,7 @@ ENTRY_FLOAT tanhf tanh tanhl
 	ret
 ENDFUNC
 
-	PGMX_SECTION(.tanh)
+	PGMX_SECTION(fplib.tanh)
 .L_table:
 	.byte	2
 	.byte	     0x89,0x88,0x08,0x3e	; 2/15
