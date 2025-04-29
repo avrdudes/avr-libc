@@ -128,7 +128,8 @@ ENDFUNC
     $ .byte (s << 5) | (1 << 4)    \
     $ .2byte a3, a2, a1, a0
 
-.section .progmemx.data.TABL, "a", "progbits"
+PGMX_SECTION(fxlib.atanur)
+
 .type TABL, "object"
 .size TABL, 4 * SIZEOF_POLY(3)
 TABL:

@@ -512,7 +512,7 @@ ENDFUNC
 /* --------------------------------------------------------------------
     Tables.  '.L_powr10' is placed first -- for subnormals stability.
 */
-    .section .progmemx.data.ftoa_engine,"a",@progbits
+PGMX_SECTION(stdlib.ftoa_engine)
 
     .type .L_powr10, "object"
 .L_powr10:

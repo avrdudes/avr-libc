@@ -199,7 +199,8 @@ ENDFUNC
     $ .byte (s << 6) | (1 << 5)    \
     $ .2byte a2, a1, a0
 
-.section .progmemx.data.TABL, "a", "progbits"
+PGMX_SECTION(fxlib.asinuk)
+
 .type TABL, "object"
 .size TABL, 1 * SIZEOF_POLY(2)
 TABL:
