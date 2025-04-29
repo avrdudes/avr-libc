@@ -204,3 +204,6 @@ ENDFUNC
 .size TABL, 1 * SIZEOF_POLY(2)
 TABL:
     PARAB (0b00, 0x0002, 0x150e, 0x0626)
+/* The following polynomial has the potential for a smaller error,
+   but asin and acos need different tweeks for minimal error.
+    PARAB (0b00, 0x0004, 0x1501, 0x0638) */
