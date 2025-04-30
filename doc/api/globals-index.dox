@@ -1,0 +1,105 @@
+/* Copyright (c) 2002-2007 Joerg Wunsch
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+   * Neither the name of the copyright holders nor the names of
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE. */
+
+/* While Doxygen generates the files linked below automatically,
+   they are linked from nowhere.  Until a proper solution is found,
+   link them by hand with this file. */
+
+/**
+\page "Global Index"
+
+\htmlonly
+
+<h2>All Globals</h2>
+<a href="globals.html">_</a>
+<a href="globals_a.html">A</a>
+<a href="globals_b.html">B</a>
+<a href="globals_c.html">C</a>
+<a href="globals_d.html">D</a>
+<a href="globals_e.html">E</a>
+<a href="globals_f.html">F</a>
+<a href="globals_g.html">G</a>
+<a href="globals_h.html">H</a>
+<a href="globals_i.html">I</a>
+<!-- a href="globals_j.html">J</a -->
+<a href="globals_k.html">K</a>
+<a href="globals_l.html">L</a>
+<a href="globals_m.html">M</a>
+<a href="globals_n.html">N</a>
+<a href="globals_o.html">O</a>
+<a href="globals_p.html">P</a>
+<a href="globals_q.html">Q</a>
+<a href="globals_r.html">R</a>
+<a href="globals_s.html">S</a>
+<a href="globals_t.html">T</a>
+<a href="globals_u.html">U</a>
+<a href="globals_v.html">V</a>
+<a href="globals_w.html">W</a>
+<!-- a href="globals_x.html">X</a -->
+<!-- a href="globals_y.html">Y</a -->
+<!-- a href="globals_z.html">Z</a -->
+
+<a href="globals_enum.html"><h2>Enums</h2></a>
+
+<a href="globals_type.html"><h2>Types</h2></a>
+
+<a href="globals_vars.html"><h2>Variables</h2></a>
+
+<h2>Functions</h2>
+
+<a href="globals_func.html">_</a>
+<a href="globals_func_a.html">A</a>
+<a href="globals_func_b.html">B</a>
+<a href="globals_func_c.html">C</a>
+<a href="globals_func_d.html">D</a>
+<a href="globals_func_e.html">E</a>
+<a href="globals_func_f.html">F</a>
+<a href="globals_func_g.html">G</a>
+<a href="globals_func_h.html">H</a>
+<a href="globals_func_i.html">I</a>
+<!-- a href="globals_func_j.html">J</a -->
+<a href="globals_func_k.html">K</a>
+<a href="globals_func_l.html">L</a>
+<a href="globals_func_m.html">M</a>
+<!-- a href="globals_func_n.html">N</a -->
+<!-- a href="globals_func_o.html">O</a -->
+<a href="globals_func_p.html">P</a>
+<a href="globals_func_q.html">Q</a>
+<a href="globals_func_r.html">R</a>
+<a href="globals_func_s.html">S</a>
+<a href="globals_func_t.html">T</a>
+<a href="globals_func_u.html">U</a>
+<a href="globals_func_v.html">V</a>
+<a href="globals_func_w.html">W</a>
+<!-- a href="globals_func_x.html">X</a -->
+<!-- a href="globals_func_y.html">Y</a -->
+<!-- a href="globals_func_z.html">Z</a -->
+
+\endhtmlonly
+
+*/
