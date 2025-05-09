@@ -360,7 +360,8 @@ __ATTR_CONST__ extern long double tanhl (long double x);
 
 /** The acosf() function computes the principal value of the arc cosine of
     \a x.  The returned value is in the range [0, pi] radians. A domain
-    error occurs for arguments not in the range [&minus;1, +1]. */
+    error occurs for arguments not in the range [&minus;1, +1].
+    The relative error is bounded by 2.4&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float acosf (float x);
 /** The acos() function computes the principal value of the arc cosine of
     \a x.  The returned value is in the range [0, pi] radians or NaN. */
@@ -371,7 +372,8 @@ __ATTR_CONST__ extern long double acosl (long double x);
 
 /** The asinf() function computes the principal value of the arc sine of
     \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. A
-    domain error occurs for arguments not in the range [&minus;1, +1]. */
+    domain error occurs for arguments not in the range [&minus;1, +1].
+    The relative error is bounded by 3.4&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float asinf (float x);
 /** The asin() function computes the principal value of the arc sine of
     \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians or NaN. */

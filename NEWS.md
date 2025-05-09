@@ -106,6 +106,8 @@
   Outcome was a sub-optimal code generation for some devices like the
   ones in `avrxmega3/short-calls`.
 
+- The error of `asinf` has been improved from 8 ULPs to 3 ULPs.
+
 - avr-gcc v15 and up issues a diagnostic for `__int24` and `__uint24` when
   `-pedantic` or similar options are on.  Hence `__extension__` was
   added when using these types in `avr/pgmspace.h`.

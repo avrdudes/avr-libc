@@ -570,7 +570,7 @@ int main ()
 	z1 = (z.lo < 0) ? (unsigned long)~(z.lo) : z.lo + 0x80000000;
 	r = (v1 >= z1) ? v1 - z1 : z1 - v1;
 	
-	if (r > 7) x_exit (i+1);
+	if (r > 3) x_exit (i+1);
     }
     return 0;
 }

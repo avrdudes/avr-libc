@@ -91,7 +91,9 @@ int main ()
 	z.lo = pgm_read_dword (& t[i].z);
 	v.fl = asin (x.fl);
 	/* Comparison is integer to verify the zero sign.	*/
-	if (v.lo != z.lo)
+	// Allow deviation of 1 ULP.
+	long d = v.lo - z.lo;
+	if (d < -1 || d > 1)
 	    x_exit (i+1);
     }
     return 0;
