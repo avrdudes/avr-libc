@@ -383,7 +383,8 @@ __ATTR_CONST__ extern double asin (double x);
 __ATTR_CONST__ extern long double asinl (long double x);
 
 /** The atanf() function computes the principal value of the arc tangent
-    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians.
+    The relative error is bounded by 1.2&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float atanf (float x);
 /** The atan() function computes the principal value of the arc tangent
     of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
