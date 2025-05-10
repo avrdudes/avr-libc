@@ -98,22 +98,22 @@ extern "C" {
 /** The constant natural logarithm of 10.	*/
 #define M_LN10		2.30258509299404568402
 
-/** The constant \a pi.	*/
+/** The constant &pi;.	*/
 #define M_PI		3.14159265358979323846
 
-/** The constant \a pi/2.	*/
+/** The constant &pi;/2.	*/
 #define M_PI_2		1.57079632679489661923
 
-/** The constant \a pi/4.	*/
+/** The constant &pi;/4.	*/
 #define M_PI_4		0.78539816339744830962
 
-/** The constant \a 1/pi.	*/
+/** The constant 1/&pi;.	*/
 #define M_1_PI		0.31830988618379067154
 
-/** The constant \a 2/pi.	*/
+/** The constant 2/&pi;.	*/
 #define M_2_PI		0.63661977236758134308
 
-/** The constant \a 2/sqrt(pi).	*/
+/** The constant 2/sqrt(&pi;).	*/
 #define M_2_SQRTPI	1.12837916709551257390
 
 /** The square root of 2.	*/
@@ -359,54 +359,54 @@ __ATTR_CONST__ extern double tanh (double x);
 __ATTR_CONST__ extern long double tanhl (long double x);
 
 /** The acosf() function computes the principal value of the arc cosine of
-    \a x.  The returned value is in the range [0, pi] radians. A domain
+    \a x.  The returned value is in the range [0, &pi;] radians. A domain
     error occurs for arguments not in the range [&minus;1, +1].
     The relative error is bounded by 2.4&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float acosf (float x);
 /** The acos() function computes the principal value of the arc cosine of
-    \a x.  The returned value is in the range [0, pi] radians or NaN. */
+    \a x.  The returned value is in the range [0, &pi;] radians or NaN. */
 __ATTR_CONST__ extern double acos (double x);
 /** The acosl() function computes the principal value of the arc cosine of
-    \a x.  The returned value is in the range [0, pi] radians or NaN. */
+    \a x.  The returned value is in the range [0, &pi;] radians or NaN. */
 __ATTR_CONST__ extern long double acosl (long double x);
 
 /** The asinf() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. A
+    \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. A
     domain error occurs for arguments not in the range [&minus;1, +1].
     The relative error is bounded by 3.4&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float asinf (float x);
 /** The asin() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians or NaN. */
+    \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians or NaN. */
 __ATTR_CONST__ extern double asin (double x);
 /** The asinl() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians or NaN. */
+    \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians or NaN. */
 __ATTR_CONST__ extern long double asinl (long double x);
 
 /** The atanf() function computes the principal value of the arc tangent
-    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians.
+    of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians.
     The relative error is bounded by 1.2&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float atanf (float x);
 /** The atan() function computes the principal value of the arc tangent
-    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+    of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. */
 __ATTR_CONST__ extern double atan (double x);
 /** The atanl() function computes the principal value of the arc tangent
-    of \a x.  The returned value is in the range [&minus;pi/2, pi/2] radians. */
+    of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. */
 __ATTR_CONST__ extern long double atanl (long double x);
 
 /** The atan2f() function computes the principal value of the arc tangent
     of <em>y / x</em>, using the signs of both arguments to determine
     the quadrant of the return value.  The returned value is in the range
-    [&minus;pi, +pi] radians. */
+    [&minus;&pi;, +&pi;] radians. */
 __ATTR_CONST__ extern float atan2f (float y, float x);
 /** The atan2() function computes the principal value of the arc tangent
     of <em>y / x</em>, using the signs of both arguments to determine
     the quadrant of the return value.  The returned value is in the range
-    [&minus;pi, +pi] radians. */
+    [&minus;&pi;, +&pi;] radians. */
 __ATTR_CONST__ extern double atan2 (double y, double x);
 /** The atan2l() function computes the principal value of the arc tangent
     of <em>y / x</em>, using the signs of both arguments to determine
     the quadrant of the return value.  The returned value is in the range
-    [&minus;pi, +pi] radians. */
+    [&minus;&pi;, +&pi;] radians. */
 __ATTR_CONST__ extern long double atan2l (long double y, long double x);
 
 /** The logf() function returns the natural logarithm of argument \a x. */
