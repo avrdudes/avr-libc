@@ -455,6 +455,13 @@ extern int rand_r(unsigned long *__ctx);
     If radix is 10 and val is negative, a minus sign will be prepended.
 
    The itoa() function returns the pointer passed as \c s.
+
+   \note Decimal conversions can be sped up by using the ktoa() function
+   from \ref avr_stdfix "<stdfix.h>" that converts fixed-point values to
+   decimal ASCII, like in <code>ktoa((accum) val, s, FXTOA_TRUNC)</code>
+   that converts \c val to a decimal ASCII representation with zero
+   fractional digits.  For example, converting 1000 using itoa() takes
+   around 700 cycles whereas ktoa() does the job in less than 300 cycles.
 */
 #ifdef  __DOXYGEN__
 extern char *itoa(int val, char *s, int radix);
@@ -548,6 +555,13 @@ char *ltoa (long __val, char *__s, int __radix)
    \c 'a'.
 
    The utoa() function returns the pointer passed as \c s.
+
+   \note Decimal conversions can be sped up by using the uktoa() function from
+   \ref avr_stdfix "<stdfix.h>" that converts fixed-point values to decimal
+   ASCII, like in <code>uktoa((unsigned accum) val, s, FXTOA_TRUNC)</code>
+   that converts \c val to a decimal ASCII representation with zero
+   fractional digits.  For example, converting 1000 using utoa() takes
+   around 700 cycles whereas uktoa() does the job in less than 300 cycles.
 */
 #ifdef  __DOXYGEN__
 extern char *utoa(unsigned int val, char *s, int radix);
