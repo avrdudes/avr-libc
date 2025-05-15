@@ -104,7 +104,7 @@
    the static storage object in section
    <tt>\ref sec_dot_progmemx ".progmemx.data"</tt>.
    In order to access the object,
-   the <tt>pgm_read_*_far</tt> and \c _PF functions declare in this header
+   the <tt>pgm_read_*_far</tt> and \c _PF functions declared in this header
    can be used.  In order to get its address, see pgm_get_far_address().
 
    It only makes sense to put read-only objects in this section,
@@ -125,7 +125,7 @@
    \def PROGMEM
 
    Attribute to use in order to declare an object being located in
-   flash ROM.  */
+   the lower 64 KiB of flash ROM.  */
 #define PROGMEM __attribute__((__progmem__))
 
 /** \ingroup avr_pgmspace
@@ -1003,7 +1003,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
     The memchr_P() function scans the first \p len bytes of the flash
     memory area pointed to by \p s for the character \p val.  The first
     byte to match \p val (interpreted as an unsigned character) stops
-    the operation.
+    the operation. \p s is located in the lower 64 KiB of program memory.
 
     \return The memchr_P() function returns a pointer to the matching
     byte or \c NULL if the character does not occur in the given memory
@@ -1016,7 +1016,7 @@ extern const void * memchr_P(const void *, int __val, size_t __len) __ATTR_CONST
 
     The memcmp_P() function compares the first \p len bytes of the memory
     areas \p s1 and flash \p s2. The comparision is performed using unsigned
-    char operations.
+    char operations. \p s2 is located in the lower 64 KiB of program memory.
 
     \returns The memcmp_P() function returns an integer less than, equal
     to, or greater than zero if the first \p len bytes of \p s1 is found,
@@ -1027,15 +1027,15 @@ extern int memcmp_P(const void *, const void *, size_t) __ATTR_PURE__;
 /** \ingroup avr_pgmspace
     \fn void *memccpy_P (void *dest, const void *src, int val, size_t len)
 
-    This function is similar to memccpy() except that \p src is pointer
-    to a string in program space.	*/
+    This function is similar to memccpy() except that \p src points
+    to a string in the lower 64 KiB of program space.	*/
 extern void *memccpy_P(void *, const void *, int __val, size_t);
 
 /** \ingroup avr_pgmspace
     \fn void *memcpy_P(void *dest, const void *src, size_t n)
 
     The memcpy_P() function is similar to memcpy(), except the src string
-    resides in program space.
+    resides in the lower 64 KiB of program space.
 
     \returns The memcpy_P() function returns a pointer to dest.  */
 extern void *memcpy_P(void *, const void *, size_t);
@@ -1044,7 +1044,7 @@ extern void *memcpy_P(void *, const void *, size_t);
     \fn void *memmem_P(const void *s1, size_t len1, const void *s2, size_t len2)
 
     The memmem_P() function is similar to memmem() except that \p s2 is
-    pointer to a string in program space.	*/
+    pointer to a string in the lower 64 KiB of program space.	*/
 extern void *memmem_P(const void *, size_t, const void *, size_t) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
@@ -1053,6 +1053,7 @@ extern void *memmem_P(const void *, size_t, const void *, size_t) __ATTR_PURE__;
     The memrchr_P() function is like the memchr_P() function, except
     that it searches backwards from the end of the \p len bytes pointed
     to by \p src instead of forwards from the front. (Glibc, GNU extension.)
+    \p src is located in the lower 64 KiB of program memory.
 
     \return The memrchr_P() function returns a pointer to the matching
     byte or \c NULL if the character does not occur in the given memory
@@ -1063,7 +1064,7 @@ extern const void * memrchr_P(const void *, int __val, size_t __len) __ATTR_CONS
     \fn char *strcat_P(char *dest, const char *src)
 
     The strcat_P() function is similar to strcat() except that the \e src
-    string must be located in program space (flash).
+    string must be located in the lower 64 KiB of program space (flash).
 
     \returns The strcat() function returns a pointer to the resulting string
     \e dest. */
@@ -1074,9 +1075,9 @@ extern char *strcat_P(char *, const char *);
     \brief Locate character in program space string.
 
     The strchr_P() function locates the first occurrence of \p val
-    (converted to a char) in the string pointed to by \p s in program
-    space. The terminating null character is considered to be part of
-    the string.
+    (converted to a char) in the string pointed to by \p s in the lower
+    64 KiB of program space. The terminating null character is considered
+    to be part of the string.
 
     The strchr_P() function is similar to strchr() except that \p s is
     pointer to a string in program space.
@@ -1101,7 +1102,7 @@ extern const char * strchrnul_P(const char *, int __val) __ATTR_CONST__;
     \fn int strcmp_P(const char *s1, const char *s2)
 
     The strcmp_P() function is similar to strcmp() except that \p s2 is
-    pointer to a string in program space.
+    pointer to a string in the lower 64 KiB of program space.
 
     \returns The strcmp_P() function returns an integer less than, equal
     to, or greater than zero if \p s1 is found, respectively, to be less
@@ -1113,8 +1114,8 @@ extern int strcmp_P(const char *, const char *) __ATTR_PURE__;
 /** \ingroup avr_pgmspace
     \fn char *strcpy_P(char *dest, const char *src)
 
-    The strcpy_P() function is similar to strcpy() except that src is a
-    pointer to a string in program space.
+    The strcpy_P() function is similar to strcpy() except that \p src
+    points to a string in the lower 64 KiB of program space.
 
     \returns The strcpy_P() function returns a pointer to the destination
     string dest. */
@@ -1125,8 +1126,8 @@ extern inline char *strcpy_P(char *, const char *);
 /** \ingroup avr_pgmspace
     \fn char *stpcpy_P(char *dest, const char *src)
 
-    The stpcpy_P() function is similar to stpcpy() except that \p src is a
-    pointer to a string in program space.
+    The stpcpy_P() function is similar to stpcpy() except that \p src
+    points to a string in the lower 64 KiB of program space.
 
     \returns The stpcpy_P() function returns a pointer to the
     terminating '\\0' character of destination string \p dest.
@@ -1141,8 +1142,8 @@ extern char *stpcpy_P(char *, const char *);
     The strcasecmp_P() function compares the two strings \p s1 and \p s2,
     ignoring the case of the characters.
 
-    \param s1 A pointer to a string in the devices SRAM.
-    \param s2 A pointer to a string in the devices Flash.
+    \param s1 A pointer to a string in the device's SRAM.
+    \param s2 A pointer to a string in the lower 64 KiB of the device's Flash.
 
     \returns The strcasecmp_P() function returns an integer less than,
     equal to, or greater than zero if \p s1 is found, respectively, to
@@ -1154,8 +1155,8 @@ extern int strcasecmp_P(const char *, const char *) __ATTR_PURE__;
 /** \ingroup avr_pgmspace
     \fn char *strcasestr_P(const char *s1, const char *s2)
 
-    This function is similar to strcasestr() except that \p s2 is pointer
-    to a string in program space.	*/
+    This function is similar to strcasestr() except that \p s2 points
+    to a string in the lower 64 KiB of program space.	*/
 extern char *strcasestr_P(const char *, const char *) __ATTR_PURE__;
 
 /** \ingroup avr_pgmspace
@@ -1163,8 +1164,8 @@ extern char *strcasestr_P(const char *, const char *) __ATTR_PURE__;
 
     The strcspn_P() function calculates the length of the initial segment
     of \p s which consists entirely of characters not in \p reject. This
-    function is similar to strcspn() except that \p reject is a pointer
-    to a string in program space.
+    function is similar to strcspn() except that \p reject points
+    to a string in the lower 64 KiB of program space.
 
     \return The strcspn_P() function returns the number of characters in
     the initial segment of \p s which are not in the string \p reject.
@@ -1176,7 +1177,7 @@ extern size_t strcspn_P(const char *__s, const char * __reject) __ATTR_PURE__;
     \brief Concatenate two strings.
 
     The strlcat_P() function is similar to strlcat(), except that the \p src
-    string must be located in program space (flash).
+    string must be located in the lower 64 KiB of program space (flash).
 
     Appends \p src to string \p dst of size \p siz (unlike strncat(),
     \p siz is the full size of \p dst, not space left).  At most \p siz-1
@@ -1193,8 +1194,8 @@ extern size_t strlcat_P (char *, const char *, size_t );
 
     Copy \p src to string \p dst of size \p siz.  At most \p siz-1
     characters will be copied.  Always NULL terminates (unless \p siz == 0).
-    The strlcpy_P() function is similar to strlcpy() except that the
-    \p src is pointer to a string in memory space.
+    The strlcpy_P() function is similar to strlcpy() except that
+    \p src points to a string in the lower 64 KiB of program memory.
 
     \returns The strlcpy_P() function returns strlen(src). If
     retval >= siz, truncation occurred.  */
@@ -1204,8 +1205,8 @@ extern size_t strlcpy_P (char *, const char *, size_t );
     \fn size_t strnlen_P(const char *src, size_t len)
     \brief Determine the length of a fixed-size string.
 
-    The strnlen_P() function is similar to strnlen(), except that \c src is a
-    pointer to a string in program space.
+    The strnlen_P() function is similar to strnlen(), except that \c src
+    points to a string in the lower 64 KiB of program space.
 
     \returns The strnlen_P function returns strlen_P(src), if that is less than
     \c len, or \c len if there is no '\\0' character among the first \c len
@@ -1217,6 +1218,7 @@ extern size_t strnlen_P(const char *, size_t) __ATTR_CONST__; /* program memory 
 
     The strncmp_P() function is similar to strcmp_P() except it only compares
     the first (at most) n characters of s1 and s2.
+    \p s2 is located in the lower 64 KiB of program memory.
 
     \returns The strncmp_P() function returns an integer less than, equal to,
     or greater than zero if s1 (or the first n bytes thereof) is found,
@@ -1230,8 +1232,8 @@ extern int strncmp_P(const char *, const char *, size_t) __ATTR_PURE__;
     The strncasecmp_P() function is similar to strcasecmp_P(), except it
     only compares the first \p n characters of \p s1.
 
-    \param s1 A pointer to a string in the devices SRAM.
-    \param s2 A pointer to a string in the devices Flash.
+    \param s1 A pointer to a string in the device's SRAM.
+    \param s2 A pointer to a string in the thwer 64 KiB of the device's Flash.
     \param n The maximum number of bytes to compare.
 
     \returns The strncasecmp_P() function returns an integer less than,
@@ -1246,11 +1248,11 @@ extern int strncasecmp_P(const char *, const char *, size_t) __ATTR_PURE__;
     \fn char *strncat_P(char *dest, const char *src, size_t len)
     \brief Concatenate two strings.
 
-    The strncat_P() function is similar to strncat(), except that the \e src
-    string must be located in program space (flash).
+    The strncat_P() function is similar to strncat(), except that the \p src
+    string must be located in the lower 64 KiB of program space (flash).
 
     \returns The strncat_P() function returns a pointer to the resulting string
-    dest.  */
+    \p dest.  */
 extern char *strncat_P(char *, const char *, size_t);
 
 /** \ingroup avr_pgmspace
@@ -1259,12 +1261,13 @@ extern char *strncat_P(char *, const char *, size_t);
     The strncpy_P() function is similar to strcpy_P() except that not more
     than n bytes of src are copied.  Thus, if there is no null byte among the
     first n bytes of src, the result will not be null-terminated.
+    \p src is located in the lower 64 KiB of program memory.
 
     In the case where the length of src is less than that of n, the remainder
     of dest will be padded with nulls.
 
     \returns The strncpy_P() function returns a pointer to the destination
-    string dest.  */
+    string \p dest.  */
 extern char *strncpy_P(char *, const char *, size_t);
 
 /** \ingroup avr_pgmspace
@@ -1272,8 +1275,8 @@ extern char *strncpy_P(char *, const char *, size_t);
 
     The strpbrk_P() function locates the first occurrence in the string
     \p s of any of the characters in the flash string \p accept. This
-    function is similar to strpbrk() except that \p accept is a pointer
-    to a string in program space.
+    function is similar to strpbrk() except that \p accept points
+    to a string in the lower 64 KiB of program space.
 
     \return  The strpbrk_P() function returns a pointer to the character
     in \p s that matches one of the characters in \p accept, or \c NULL
@@ -1287,7 +1290,8 @@ extern char *strpbrk_P(const char *__s, const char * __accept) __ATTR_PURE__;
     \brief Locate character in string.
 
     The strrchr_P() function returns a pointer to the last occurrence of
-    the character \p val in the flash string \p s.
+    the character \p val in the string \p s.
+    \p s is located in the lower 64 KiB of program memory.
 
     \return The strrchr_P() function returns a pointer to the matched
     character or \c NULL if the character is not found. */
@@ -1305,8 +1309,8 @@ extern const char * strrchr_P(const char *, int __val) __ATTR_CONST__;
     ``empty'' field, i.e. one caused by two adjacent delimiter
     characters, can be detected by comparing the location referenced by
     the pointer returned in \p *sp to '\\0'. This function is similar to
-    strsep() except that \p delim is a pointer to a string in program
-    space.
+    strsep() except that \p delim points to a string in the lower
+    64 KiB of program space.
 
     \return The strsep_P() function returns a pointer to the original
     value of \p *sp. If \p *sp is initially \c NULL, strsep_P() returns
@@ -1318,8 +1322,8 @@ extern char *strsep_P(char **__sp, const char * __delim);
 
     The strspn_P() function calculates the length of the initial segment
     of \p s which consists entirely of characters in \p accept. This
-    function is similar to strspn() except that \p accept is a pointer
-    to a string in program space.
+    function is similar to strspn() except that \p accept points
+    to a string in the lower 64 KiB of program space.
 
     \return  The strspn_P() function returns the number of characters in
     the initial segment of \p s which consist only of characters from \p
@@ -1333,7 +1337,7 @@ extern size_t strspn_P(const char *__s, const char * __accept) __ATTR_PURE__;
     The strstr_P() function finds the first occurrence of the substring
     \p s2 in the string \p s1.  The terminating '\\0' characters are not
     compared. The strstr_P() function is similar to strstr() except that
-    \p s2 is pointer to a string in program space.
+    \p s2 points to a string in the lower 64 KiB of program space.
 
     \returns The strstr_P() function returns a pointer to the beginning
     of the substring, or NULL if the substring is not found. If \p s2
@@ -1352,7 +1356,7 @@ extern char *strstr_P(const char *, const char *) __ATTR_PURE__;
     The delimiter string \p delim may be different for each call.
 
     The strtok_P() function is similar to strtok() except that \p delim
-    is pointer to a string in program space.
+    points to a string in the lower 64 KiB of program space.
 
     \returns The strtok_P() function returns a pointer to the next token or
     NULL when no more tokens are found.
@@ -1376,7 +1380,7 @@ extern char *strtok_P(char *__s, const char * __delim);
     same string. strtok_rP() is a reentrant version of strtok_P().
 
     The strtok_rP() function is similar to strtok_r() except that \p delim
-    is pointer to a string in program space.
+    points to a string in the lower 64 KiB of program space.
 
     \returns The strtok_rP() function returns a pointer to the next token or
     NULL when no more tokens are found. */
