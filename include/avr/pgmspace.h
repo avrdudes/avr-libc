@@ -1079,12 +1079,25 @@ extern char *strcat_P(char *, const char *);
     64 KiB of program space. The terminating null character is considered
     to be part of the string.
 
-    The strchr_P() function is similar to strchr() except that \p s is
-    pointer to a string in program space.
+    The strchr_P() function is similar to strchr() except that \p s
+    points to a string in the lower 64 KiB of program space.
 
     \returns The strchr_P() function returns a pointer to the matched
     character or \c NULL if the character is not found. */
+#ifdef __DOXYGEN__
 extern const char * strchr_P(const char *, int __val) __ATTR_CONST__;
+#else
+/* strchr_P is used in variants of printf, so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+const char * strchr_P(const char *__hay, int __val)
+{
+  register const char *__r24 __asm("24") = __hay;
+  register int __r22 __asm("22") = __val;
+  __asm ("%~call strchr_P"
+         : "+r" (__r24) : "r" (__r22) : "30", "31");
+  return __r24;
+}
+#endif /* DOXYGEN */
 
 /** \ingroup avr_pgmspace
     \fn const char *strchrnul_P(const char *s, int c)

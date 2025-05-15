@@ -249,7 +249,19 @@ extern char *strcat(char *, const char *);
     <br><br>
     Here "character" means "byte" -- these functions do not work with
     wide or multi-byte characters.  */
+#ifdef __DOXYGEN__
 extern char *strchr(const char *, int) __ATTR_PURE__;
+#else
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char * strchr(const char *__hay, int __val)
+{
+  register char *__r24 __asm("24");
+  register int __r22 __asm("22") = __val;
+  __asm ("%~call strchr"
+         : "=r" (__r24) : "0" (__hay), "r" (__r22) : "30", "31");
+  return __r24;
+}
+#endif /* DOXYGEN */
 
 /** \ingroup avr_string
     \fn char *strchrnul(const char *s, int c)

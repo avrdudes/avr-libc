@@ -1237,7 +1237,18 @@ extern void *memmem_F(const void *, size_t, const __flash void *, size_t) __asm(
 extern const __flash void * memrchr_F(const __flash void *, int __val, size_t __len) __asm("memrchr_P") __ATTR_CONST__;
 
 extern char *strcat_F(char *, const __flash char *) __asm("strcat_P");
+
 extern const __flash char * strchr_F(const __flash char *, int __val) __asm("strchr_P") __ATTR_CONST__;
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+const __flash char * strchr_F(const __flash char *__hay, int __val)
+{
+  register const __flash char *__r24 __asm("24") = __hay;
+  register int __r22 __asm("22") = __val;
+  __asm ("%~call strchr_P"
+         : "+r" (__r24) : "r" (__r22) : "0", "30", "31");
+  return __r24;
+}
+
 extern const __flash char * strchrnul_F(const __flash char *, int __val) __asm("strchrnul_P") __ATTR_CONST__;
 extern int strcasecmp_F(const char *, const __flash char *) __asm("strcasecmp_P") __ATTR_PURE__;
 extern char *strcasestr_F(const char *, const __flash char *) __asm("strcasestr_P") __ATTR_PURE__;
