@@ -424,6 +424,17 @@ __ATTR_CONST__ extern double log10 (double x);
 /** The log10l() function returns the logarithm of argument \a x to base 10. */
 __ATTR_CONST__ extern long double log10l (long double x);
 
+/** The log2f() function returns the logarithm of argument \a x to base 2.
+    The relative error is bounded by 2.4&middot;10<sup>&minus;7</sup>.
+    \since AVR-LibC v2.3 */
+__ATTR_CONST__ extern float log2f (float x);
+/** The log2() function returns the logarithm of argument \a x to base 2.
+    \since AVR-LibC v2.3 */
+__ATTR_CONST__ extern double log2 (double x);
+/** The log2l() function returns the logarithm of argument \a x to base 2.
+    \since AVR-LibC v2.3 */
+__ATTR_CONST__ extern long double log2l (long double x);
+
 /** The function powf() returns the value of \a x to the exponent \a y.
     \n Notice that for integer exponents, there is the more efficient
     <code>float __builtin_powif(float x, int y)</code>. */
