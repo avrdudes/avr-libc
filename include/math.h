@@ -417,7 +417,8 @@ __ATTR_CONST__ extern double log (double x);
 /** The logl() function returns the natural logarithm of argument \a x. */
 __ATTR_CONST__ extern long double logl (long double x);
 
-/** The log10f() function returns the logarithm of argument \a x to base 10. */
+/** The log10f() function returns the logarithm of argument \a x to base 10.
+    The relative error is bounded by 3.1&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float log10f (float x);
 /** The log10() function returns the logarithm of argument \a x to base 10. */
 __ATTR_CONST__ extern double log10 (double x);
