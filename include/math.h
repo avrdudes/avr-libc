@@ -410,7 +410,7 @@ __ATTR_CONST__ extern double atan2 (double y, double x);
 __ATTR_CONST__ extern long double atan2l (long double y, long double x);
 
 /** The logf() function returns the natural logarithm of argument \a x.
-    The relative error is bounded by 3.4&middot;10<sup>&minus;7</sup>. */
+    The relative error is bounded by 2.6&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float logf (float x);
 /** The log() function returns the natural logarithm of argument \a x. */
 __ATTR_CONST__ extern double log (double x);

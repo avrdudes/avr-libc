@@ -1,5 +1,6 @@
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
    Copyright (c) 2006  Dmitry Xmelkov
+   Copyright (c) 2025  Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -32,139 +33,18 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float logf (float A)
-   The logf() function returns the natural logarithm of A.
- */
+;; float logf (float A)
+;; The logf() function returns the natural logarithm of A.
 
-#define	FL_M1	0xbf800000	/* -1.0	*/
 #define	LN_2	0x3f317218	/* ln(2.0) = 0.69314718	*/
 
-#define	rC3	YH
-#define	rC2	YL		/* adiw,sbiw are used	*/
-#define	rC1	r17
-#define	rC0	r16
-#define	rCE	r15
-
-FUNCTION logf
-
-.L_nf:	brts	.L_nan		; branch, if -Inf
-	XJMP	_U(__fp_mpack)	; pass as is: NaN --> NaN, +Inf --> +Inf
-.L_nan:	XJMP	_U(__fp_nan)
-.L_min:	set
-	XJMP	_U(__fp_inf)
-
 ENTRY_FLOAT logf log logl
-	XCALL	_U(__fp_splitA)
-	brcs	.L_nf		; !isfinite(A)
-	tst	rA3
-	breq	.L_min		; -Inf
-	brts	.L_nan		; log(negative)
-
-	push	rC3
-	push	rC2
-	push	rC1
-	push	rC0
-	push	rCE
-  ; normalize (if Subnormal)
-	mov	rC2, rA3	; place exponent to pair rC3.rC2
-	clr	rC3
-	tst	rA2
-	brmi	2f
-1:	sbiw	rC2, 1
-	lsl	rA0
-	rol	rA1
-	rol	rA2
-	brpl	1b
-2:
-  ; calculate log(1+x) for x:  -0x0.20p+0 <= x < 0.E0p+0
-	/* Different tables are used:
-	     .L_tlow  - for small values: -0x0.20p+0 <= x < + 0x0.18p+0
-	     .L_thigh - for others	*/
-	ldi	rB0,  lo8(FL_M1)
-	ldi	rB1,  hi8(FL_M1)
-	ldi	rB2, hlo8(FL_M1)
-	ldi	rB3, hhi8(FL_M1)
-	ldi	rA3, 0x3f
-	cpi	rA2, 0x98
-	brlo	3f
-	cpi	rA2, 0xE0
-	brlo	4f
-	adiw	rC2, 1
-	andi	rA2, ~0x80
-3:	XCALL	_U(__addsf3)
-	ldi	ZL, lo8(.L_tlow)
-	ldi	ZH, hi8(.L_tlow)
-	LDI_XH_hh8(.L_tlow)
-	rjmp	5f
-4:	XCALL	_U(__addsf3)
-	ldi	ZL, lo8(.L_thigh)
-	ldi	ZH, hi8(.L_thigh)
-	LDI_XH_hh8(.L_thigh)
-5:	XCALL	_U(__fp_powser)
-
-	X_movw	rC0, rA0
-	X_movw	rA0, rC2	; rA1.rA0 = exponent (possible negative)
-	X_movw	rC2, rA2
-	mov	rCE, rAE
-  ; calculate log() of exponent
-	subi	rA0, 127	; 127 is exponent field of 1.0
-	sbc	rA1, r1
-	asr	rA1
-	rol	rA1		; C = rA1 sign bit
-	sbc	rA2, rA2
-	sbc	rA3, rA3
-	XCALL	_U(__floatsisf)
-	ldi	rB0,  lo8(LN_2)
-	ldi	rB1,  hi8(LN_2)
-	ldi	rB2, hlo8(LN_2)
-	ldi	rB3, hhi8(LN_2)
-	XCALL	_U(__mulsf3x)
-
-	mov	rBE, rCE
-	X_movw	rB0, rC0
-	X_movw	rB2, rC2
-
-	pop	rCE
-	pop	rC0
-	pop	rC1
-	pop	rC2
-	pop	rC3
-
-	XCALL	_U(__addsf3x)
-	XJMP	_U(__fp_round)
+    XCALL   _U(log2f)
+    ldi     rB0,  lo8(LN_2)
+    ldi     rB1,  hi8(LN_2)
+    ldi     rB2, hlo8(LN_2)
+    ldi     rB3, hhi8(LN_2)
+    XJMP    _U(__mulsf3)
 ENDFUNC
-
-	PGMX_SECTION(fplib.log)
-
-.L_tlow:		; __fp_powser() table for small values
-	.byte	8
-	.byte        0x00,0x00,0x00,0xbe        ; -0.1250000000
-	.byte   0x92,0x24,0x49,0x12,0x3e        ;  0.1428571429
-	.byte   0xab,0xaa,0xaa,0x2a,0xbe        ; -0.1666666667
-	.byte   0xcd,0xcc,0xcc,0x4c,0x3e        ;  0.2000000000
-	.byte   0x00,0x00,0x00,0x80,0xbe        ; -0.2500000000
-	.byte   0xab,0xaa,0xaa,0xaa,0x3e        ;  0.3333333333
-	.byte   0x00,0x00,0x00,0x00,0xbf        ; -0.5000000000
-	.byte   0x00,0x00,0x00,0x80,0x3f        ;  1.0000000000
-	.byte   0x00,0x00,0x00,0x00,0x00        ;  0.0000000000
-
-.L_thigh:		; __fp_powser() table for other values
-	;; log(1+x) for 0x0.18 = 0.09375 <= x <= 0.95
-	;; This MiniMax polynomial is only used for 0x0.18 <= x <= 0.75.
-	;; The upper bound has been bumped in order to decrease the error
-	;; for larger values.  This reduces the error to 3 ULPs.
-	;; The old implementation has an error of 5 ULPs one interval left
-	;; of the main interval.
-	.byte	8
-	.byte	     0x96,0xcb,0xbf,0xbb	; -0.0058531265
-	.byte	0x9e,0x2a,0xa0,0x07,0x3d	;  0.0331117310
-	.byte	0x64,0x7f,0xf8,0xb6,0xbd	; -0.0893411591
-	.byte	0x62,0xd6,0x2c,0x25,0x3e	;  0.1613038537
-	.byte	0x2c,0x49,0x93,0x72,0xbe	; -0.2368899758
-	.byte	0xa8,0x04,0x32,0xa9,0x3e	;  0.3304597334
-	.byte	0x6a,0xda,0xcd,0xff,0xbe	; -0.4996174100
-	.byte	0x5a,0x30,0xfe,0x7f,0x3f	;  0.9999723642
-	.byte	0xb2,0x38,0xe3,0x5b,0x35	;  0.0000008191
-	.end
 
 #endif /* !defined(__AVR_TINY__) */
