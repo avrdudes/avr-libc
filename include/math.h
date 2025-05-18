@@ -127,7 +127,7 @@ extern "C" {
 
 /** The \c float representation of a constant quiet NaN.
     \p __tag is a string constant like \c "" or \c "123". */
-#define nanf(__tagp)	__builtin_nanf(__tag)
+#define nanf(__tag)	__builtin_nanf(__tag)
 
 /** The \c double representation of a constant quiet NaN.
     \p __tag is a string constant like \c "" or \c "123". */
