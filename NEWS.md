@@ -167,6 +167,8 @@
 - Distribution is missing `dox_latex_header.tex`, `filter-dox.sh`,
   `avr-libc-logo-large.png` from `doc/api/` ([#1023][1023]).
 
+- Fixed a typo in the parameter name of `nanf` ([#1033][1033]).
+
 ## Pull Requests
 
 - Improve runtime performance of `free()` ([#991][991]).
@@ -199,3 +201,4 @@
 [1023]: https://github.com/avrdudes/avr-libc/issues/1023
 [1024]: https://github.com/avrdudes/avr-libc/issues/1024
 [1032]: https://github.com/avrdudes/avr-libc/issues/1032
+[1033]: https://github.com/avrdudes/avr-libc/issues/1033
