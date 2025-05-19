@@ -373,7 +373,7 @@ __ATTR_CONST__ extern long double acosl (long double x);
 /** The asinf() function computes the principal value of the arc sine of
     \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. A
     domain error occurs for arguments not in the range [&minus;1, +1].
-    The relative error is bounded by 3.4&middot;10<sup>&minus;7</sup>. */
+    The relative error is bounded by 3.5&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float asinf (float x);
 /** The asin() function computes the principal value of the arc sine of
     \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians or NaN. */
@@ -384,7 +384,7 @@ __ATTR_CONST__ extern long double asinl (long double x);
 
 /** The atanf() function computes the principal value of the arc tangent
     of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians.
-    The relative error is bounded by 1.2&middot;10<sup>&minus;7</sup>. */
+    The relative error is bounded by 1.5&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float atanf (float x);
 /** The atan() function computes the principal value of the arc tangent
     of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. */
