@@ -115,7 +115,7 @@ CPPFLAGS="-Wundef -I."
 CFLAGS="-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds"
 CORE=core_avr_dump.core
 HOST_CC=gcc
-HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
+HOST_CFLAGS="-m32 -W -Wall -std=gnu99 -pipe -O2 -I."
 
 Err_echo ()
 {

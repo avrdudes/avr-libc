@@ -42,7 +42,9 @@ t_strtoul (const char *s, int base, unsigned long ret, int err, int len)
     char * endptr;
     
     errno = 0;
-    endptr = (char *)s - 1;		/* invalid value	*/
+    endptr = (char *)s;
+    __asm ("" : "+r" (endptr));
+    endptr--;		/* invalid value	*/
     if (strtoul (s, & endptr, base) != ret
 	|| errno != err
 #ifdef	__AVR__
@@ -52,7 +54,7 @@ t_strtoul (const char *s, int base, unsigned long ret, int err, int len)
 #endif
     {
 #ifndef	__AVR__
-	printf ("strtoul(\"%s\",,%d): %lu, errno: %d, len: %d\n",
+	printf ("strtoul(\"%s\",,%d): %lu, errno: %d, len: %zd\n",
 	    s, base, strtoul(s, & endptr, base), errno, endptr - s);
 #endif
 	return 1;

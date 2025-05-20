@@ -42,7 +42,9 @@ static int t_strtol (const char *s, int base, long ret, int err, int len)
     char * endptr;
     
     errno = 0;
-    endptr = (char *)s - 1;		/* invalid value	*/
+    endptr = (char *)s;
+    __asm ("" : "+r" (endptr));
+    endptr--;		/* invalid value	*/
     if (strtol (s, & endptr, base) != ret
 	|| errno != err
 #ifdef	__AVR__
@@ -52,8 +54,8 @@ static int t_strtol (const char *s, int base, long ret, int err, int len)
 #endif
     {
 #ifndef	__AVR__
-	printf ("strtol(\"%s\",,%d): %ld, errno: %d, len: %d\n",
-	    s, base, strtol(s, & endptr, base), errno, endptr - s);
+	printf ("strtol(\"%s\",,%d): %ld, errno: %d, len: %zd\n",
+                s, base, strtol(s, & endptr, base), errno, endptr - s);
 #endif
 	return 1;
     }
