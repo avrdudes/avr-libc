@@ -280,6 +280,7 @@ ENTRY isspace
 1:
           XJMP  _U(__ctype_isfalse)
 0:
+ENTRY __isspace.ignore_r25
           CPI   rLow,' '           ; blank
           BREQ  2f
 	  SUBI	rLow, '\t'
@@ -346,6 +347,7 @@ ENDFUNC
 ENTRY tolower
 	cpse	rHigh, __zero_reg__
 	ret				; return as is
+ENTRY __tolower.ignore_r25
 	subi	rLow, 'A'
 	subi	rLow, 'Z'-'A'+1
 	brsh	1f			; return as is

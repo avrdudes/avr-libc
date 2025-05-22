@@ -37,6 +37,10 @@
    __zero_reg__
    XJMP
    XCALL
+   XIJMP
+   XICALL
+   do_prologue_saves
+   do_epilogue_restores
    XL, XH                     ; Via avr/common.h
    YL, YH                     ; Via avr/common.h
    ZL, ZH                     ; Via avr/common.h
@@ -102,6 +106,54 @@
 # define XJMP	rjmp
 # define XCALL	rcall
 #endif
+
+#if defined(__AVR_HAVE_EIJMP_EICALL__)
+# define XIJMP  eijmp
+# define XICALL eicall
+#else
+# define XIJMP  ijmp
+# define XICALL icall
+#endif
+
+#ifndef __AVR_TINY__
+
+;; Prologue stuff
+;; do_prologue_saves  costs 12 bytes.
+;; __prologue_saves__ costs 56 bytes.
+.macro do_prologue_saves n_pushed n_frame=0
+    ldi r26, lo8(\n_frame)
+    ldi r27, hi8(\n_frame)
+    ldi r30, lo8(gs(.L_prologue_saves.\@))
+    ldi r31, hi8(gs(.L_prologue_saves.\@))
+    XJMP __prologue_saves__ + ((18 - (\n_pushed)) * 2)
+.L_prologue_saves.\@:
+.endm
+
+;; Epilogue stuff
+;; do_epilogue_restores  costs 12 bytes.
+;; __epilogue_restores__ costs 54 bytes.
+.macro do_epilogue_restores n_pushed n_frame=0
+    in      r28, SPL_IO_ADDR
+#ifdef SPH
+    in      r29, SPH_IO_ADDR
+.if \n_frame > 63
+    subi    r28, lo8(-\n_frame)
+    sbci    r29, hi8(-\n_frame)
+.elseif \n_frame > 0
+    adiw    r28, \n_frame
+.endif
+#else
+    clr     r29
+.if \n_frame > 0
+    subi    r28, lo8(-\n_frame)
+.endif
+#endif /* HAVE SPH */
+    ldi     r30, \n_pushed
+    XJMP __epilogue_restores__ + ((18 - (\n_pushed)) * 2)
+.endm
+
+#endif /* AVR_TINY */
+
 
 /* Macro FUNCTION is intended to start a function body without an entry.
    It is needed where an entry is at the middle of function, like in

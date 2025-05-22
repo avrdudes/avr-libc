@@ -57,7 +57,9 @@ extern "C" {
     between the call which sets \c error and when the task examines \c
     errno. If another task changes \c errno during this time, the result will
     be incorrect for the interrupted task. */
+#ifndef __ASSEMBLER__
 extern int errno;
+#endif
 
 #ifdef __cplusplus
 }
@@ -75,13 +77,17 @@ extern int errno;
     Range error. */
 #define ERANGE     34
 
+/** \ingroup avr_errno
+    \def EINVAL
+
+    Invalid value error. */
+#define EINVAL     35
+
 #ifndef __DOXYGEN__
 
-/* ((((('E'-64)*26+('N'-64))*26+('O'-64))*26+('S'-64))*26+('Y'-64))*26+'S'-64 */
-#define ENOSYS ((int)(66081697 & 0x7fff))
-
-/* (((('E'-64)*26+('I'-64))*26+('N'-64))*26+('T'-64))*26+('R'-64) */
-#define EINTR ((int)(2453066 & 0x7fff))
+#define ENOSYS 36
+#define EINTR  37
+#define ENOERR 38
 
 #define E2BIG ENOERR
 #define EACCES ENOERR
@@ -104,7 +110,6 @@ extern int errno;
 #define EHOSTUNREACH ENOERR
 #define EILSEQ ENOERR
 #define EINPROGRESS ENOERR
-#define EINVAL ENOERR
 #define EIO ENOERR
 #define EISCONN ENOERR
 #define EISDIR ENOERR
@@ -143,9 +148,6 @@ extern int errno;
 #define ETIMEDOUT ENOERR
 #define EWOULDBLOCK ENOERR
 #define EXDEV ENOERR
-
-/* ((((('E'-64)*26+('N'-64))*26+('O'-64))*26+('E'-64))*26+('R'-64))*26+'R'-64 */
-#define ENOERR ((int)(66072050 & 0xffff))
 
 #endif	/* !__DOXYGEN__ */
 

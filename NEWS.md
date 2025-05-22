@@ -35,6 +35,9 @@
 - Support has been added for the `stpcpy`, `stpcpy_P`, `stpcpy_F`,
   `stpcpy_PF`, `stpcpy_FX` functions ([#1015][1015]).
 
+- Support for the `strtoll` and `strtoull` functions has been added to
+  [<stdlib.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdlib.html).
+
 - Support for some non-standard functions has been added to
   [<stdlib.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdlib.html):
    - 64-bit integer to ASCII conversions: `lltoa`, `ulltoa`, `ulltoa_base10`.

@@ -72,6 +72,10 @@ stdlib_a_asm_sources = \
 	isspace.S \
 	isblank.S \
 	ispunct.S \
+	strtoll.S \
+	strtoull.S \
+	strtoxx.S \
+	strto64.S \
 	tolower.S \
 	toupper.S
 
@@ -79,7 +83,9 @@ stdlib_a_extra_dist = \
 	ctype.S \
 	abort.c \
 	atoi.c \
-	atol.c
+	atol.c \
+	strto64.h \
+	strtoxx.h
 
 malloc.o: AVRLIB_CFLAGS += -Wno-maybe-uninitialized
 
