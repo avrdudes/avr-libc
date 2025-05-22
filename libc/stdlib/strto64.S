@@ -35,6 +35,7 @@
 #include "strtoxx.h"
 #include "strto64.h"
 
+#ifndef __AVR_HAVE_MUL__
 ;;; A[] := 0
 ENTRY __strto64.clr_result
     clr         A0
@@ -43,11 +44,51 @@ ENTRY __strto64.clr_result
     X_movw      A4, A0
     X_movw      A6, A0
     ret
+#endif /* ! Have MUL */
 
 ;;; Shift in Digit R21 from the low end for Radix R27.
 ;;; A[] := A[] * Radix + Digit  using B[] and Tmp as temporaries.
 ;;; Set T = 1 on unsigned overflow.
 ENTRY __strto64.madd
+
+#ifdef __AVR_HAVE_MUL__
+
+    mul         A7, Radix
+    tst         r1              ; 8
+    brne .Loverflow
+    mov         Tmp, r0         ; 7
+
+    mov         B7, A5
+    mov         B6, A3
+    mov         B5, A1
+
+    mul         A0, Radix
+    movw        A0, r0
+    mul         A2, Radix
+    movw        A2, r0
+    mul         A4, Radix
+    movw        A4, r0
+    mul         A6, Radix
+    movw        A6, r0
+
+    mul         B5, Radix
+    movw        B2, r0          ; 1, 2
+    mul         B6, Radix
+    movw        B4, r0          ; 3, 4
+    mul         B7, Radix       ; 5, 6  in R0, R1
+
+    ADD         A0, Digit       ; 0
+    adc         A1, B2
+    adc         A2, B3
+    adc         A3, B4
+    adc         A4, B5
+    adc         A5, r0
+    adc         A6, r1
+    adc         A7, Tmp
+    brcc 9f
+
+#else /* !Have MUL */
+
     X_movw      B0, A0
     X_movw      B2, A2
     X_movw      B4, A4
@@ -92,6 +133,8 @@ ENTRY __strto64.madd
     adc         A6, __zero_reg__
     adc         A7, __zero_reg__
     brcc 9f
+
+#endif /* HAve MUL */
 
 .Loverflow:
     set                         ; T = Overflow

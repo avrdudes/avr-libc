@@ -50,7 +50,15 @@ ENTRY strtoll
     ldi         r25, hi8(gs(__strto64.madd))
 
     ;; A[] := 0
+#ifdef __AVR_HAVE_MUL__
+    clr         A0
+    clr         A1
+    X_movw      A2, A0
+    X_movw      A4, A0
+    X_movw      A6, A0
+#else
     XCALL       _U(__strto64.clr_result)
+#endif /* Have MUL */
 
     ;; A[] = strtoxx.worker (const char *Z, char **Y, R20 ibase, R26 Flags,
     ;;                       R24 & madd())
