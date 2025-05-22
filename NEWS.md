@@ -37,6 +37,8 @@
 
 - Support for the `strtoll` and `strtoull` functions has been added to
   [<stdlib.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdlib.html).
+  The `strtol` and `strtoul` functions have been rewritten to increase
+  performance.
 
 - Support for some non-standard functions has been added to
   [<stdlib.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdlib.html):

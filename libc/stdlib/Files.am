@@ -44,8 +44,6 @@ stdlib_a_c_sources = \
 	random.c \
 	realloc.c \
 	strtod.c \
-	strtol.c \
-	strtoul.c \
 	system.c \
 	dtoa_conv.h \
 	stdlib_private.h
@@ -72,9 +70,12 @@ stdlib_a_asm_sources = \
 	isspace.S \
 	isblank.S \
 	ispunct.S \
+	strtol.S \
 	strtoll.S \
+	strtoul.S \
 	strtoull.S \
 	strtoxx.S \
+	strto32.S \
 	strto64.S \
 	tolower.S \
 	toupper.S
@@ -84,6 +85,7 @@ stdlib_a_extra_dist = \
 	abort.c \
 	atoi.c \
 	atol.c \
+	strto32.h \
 	strto64.h \
 	strtoxx.h
 

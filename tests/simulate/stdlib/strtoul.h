@@ -1,4 +1,5 @@
 /* Copyright (c) 2007  Dmitry Xmelkov
+   Copyright (c) 2025  Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -32,8 +33,9 @@
 #ifndef	__AVR__
 # include <stdio.h>
 #endif
-#ifndef	EINVAL		/* Addition for errno.h in AVR-LibC-1.2.0	*/
-# define EINVAL	22	/* Invalid argument	*/
+
+#if __SIZEOF_LONG__ != 4
+#error expecting sizeof(long) == 4
 #endif
 
 static int

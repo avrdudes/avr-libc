@@ -32,9 +32,10 @@
 #include "progmem.h"
 #include "strtol.h"
 
-int main ()
+int main (void)
 {
-    PROGMEM static const struct t_s {
+    PROGMEM static const struct t_s
+    {
 	char s[34];		/* string to convert	*/
 	int base;
 	long ret;		/* result must	*/
@@ -54,12 +55,11 @@ int main ()
 	{ "-10000000000000000000000000000000", 2, 0x80000000, 0, 33 },
 	{ "-10000000000000000000000000000001", 2, 0x80000000, ERANGE, 33 },
 	{ "-10000000000000000000000000000010", 2, 0x80000000, ERANGE, 33 },
-	
     };
     struct t_s tt;
-    int i;
-    
-    for (i = 0; i != (int)(sizeof(t)/sizeof(t[0])); i++) {
+
+    for (int i = 0; i != (int)(sizeof(t)/sizeof(t[0])); i++)
+    {
 	struct t_s *p;
 	memcpy_P (&tt, t + i, sizeof(tt));
 	p = &tt;

@@ -1,4 +1,4 @@
-/* Copyright (c) 2007  Dmitry Xmelkov
+/* Copyright (c) 2025  Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -24,41 +24,63 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. */
+   POSSIBILITY OF SUCH DAMAGE.  */
 
-#include <ctype.h>
+#ifndef __AVR_TINY__
+
 #include <errno.h>
-#include <limits.h>
-#include <stdlib.h>
-#ifndef	__AVR__
-# include <stdio.h>
+#include "asmdef.h"
+#include "strtoxx.h"
+#include "strto32.h"
+
+;;; unsigned long strtoul (const char *nptr, char **endptr, int ibase);
+;;;         R18 = strtoul (const char *R24,  char **R22,    int R20);
+
+ENTRY strtoul
+    push        r16
+    push        r17
+    push        r28
+    push        r29
+
+    X_movw      Nptr, r24
+    X_movw      ENDptr, r22
+    ldi         r24, lo8(gs(__strto32.madd))
+    ldi         r25, hi8(gs(__strto32.madd))
+
+    ;; A[] := 0
+#ifdef __AVR_HAVE_MUL__
+    clr         A0
+    clr         A1
+    X_movw      A2, A0
+#else
+    XCALL       _U(__strto32.clr_result)
 #endif
 
-#if __SIZEOF_LONG__ != 4
-#error expecting sizeof(long) == 4
-#endif
+    ;; A[] = strtoxx.worker (const char *Z, char **Y, R20 ibase, R26 Flags,
+    ;;                       R24 & madd())
+    XCALL       _U(__strtoxx.worker)
+    X_movw      RET2, A2
+    X_movw      RET0, A0
+    pop         r29
+    pop         r28
+    pop         r17
+    pop         r16
+    brts .Large                     ; Overflowed
 
-static int t_strtol (const char *s, int base, long ret, int err, int len)
-{
-    char * endptr;
-    
-    errno = 0;
-    endptr = (char *)s;
-    __asm ("" : "+r" (endptr));
-    endptr--;		/* invalid value	*/
-    if (strtol (s, & endptr, base) != ret
-	|| errno != err
-#ifdef	__AVR__
-	|| endptr - s != len)
-#else		/* Glibc 2.3.1 is not set endptr in the case of EINVAL	*/
-	|| (errno != EINVAL && (endptr - s) != len) )
-#endif
-    {
-#ifndef	__AVR__
-	printf ("strtol(\"%s\",,%d): %ld, errno: %d, len: %zd\n",
-                s, base, strtol(s, & endptr, base), errno, endptr - s);
-#endif
-	return 1;
-    }
-    return 0;
-}
+    ;; Apply sign.
+    sbrs        Flags, B_SIGN
+    ret
+    XJMP        _U(__negsi2)
+
+.Large:
+    ;; RET[] := UINT32_MAX
+    ldi         RET0, 0xff
+    ldi         RET1, 0xff
+    X_movw      RET2, RET0
+    ldi         XL, lo8(ERANGE)
+    ldi         XH, hi8(ERANGE)
+    XJMP        _U(__strtoxx.set_errno)
+
+ENDFUNC
+
+#endif /* !AVR_TINY */

@@ -178,9 +178,12 @@ extern void qsort(void *__base, size_t __nmemb, size_t __size,
     The string may begin with an arbitrary amount of white space (as
     determined by isspace()) followed by a single optional \c '+' or \c '-'
     sign.  If \c base is zero or 16, the string may then include a
-    \c "0x" prefix, and the number will be read in base 16; otherwise,
-    a zero base is taken as 10 (decimal) unless the next character is
-    \c '0', in which case it is taken as 8 (octal).
+    \c "0x" or \c "0X" prefix, and the number will be read in base 16;
+    otherwise, a zero base is taken as 10 (decimal) unless the next
+    character is \c '0', in which case it is taken as 8 (octal).
+
+    Similarly, prefixes \c "0b" and \c "0B" signify base 2,
+    and \c "0o" and \c "0O" signify base 8.
 
     The remainder of the string is converted to a long value in the
     obvious manner, stopping at the first character which is not a
@@ -247,9 +250,12 @@ extern long long strtoll(const char *__nptr, char **__endptr, int __base);
     The string may begin with an arbitrary amount of white space (as
     determined by isspace()) followed by a single optional \c '+' or \c '-'
     sign.  If \c base is zero or 16, the string may then include a
-    \c "0x" prefix, and the number will be read in base 16; otherwise,
-    a zero base is taken as 10 (decimal) unless the next character is
-    \c '0', in which case it is taken as 8 (octal).
+    \c "0x" or \c "0X" prefix, and the number will be read in base 16;
+    otherwise, a zero base is taken as 10 (decimal) unless the next
+    character is \c '0', in which case it is taken as 8 (octal).
+
+    Similarly, prefixes \c "0b" and \c "0B" signify base 2,
+    and \c "0o" and \c "0O" signify base 8.
 
     The remainder of the string is converted to an unsigned long value
     in the obvious manner, stopping at the first character which is
@@ -263,7 +269,7 @@ extern long long strtoll(const char *__nptr, char **__endptr, int __base);
     *endptr.  (Thus, if \c *nptr is not \c '\\0' but \c **endptr is \c '\\0'
     on return, the entire string was valid.)
 
-    The strtoul() function return either the result of the conversion
+    The strtoul() function returns either the result of the conversion
     or, if there was a leading minus sign, the negation of the result
     of the conversion, unless the original (non-negated) value would
     overflow; in the latter case, strtoul() returns ULONG_MAX, and \c

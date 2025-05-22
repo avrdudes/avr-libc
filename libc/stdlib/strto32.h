@@ -1,4 +1,4 @@
-/* Copyright (c) 2007  Dmitry Xmelkov
+/* Copyright (c) 2025  Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -24,41 +24,27 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. */
+   POSSIBILITY OF SUCH DAMAGE.  */
 
-#include <ctype.h>
-#include <errno.h>
-#include <limits.h>
-#include <stdlib.h>
-#ifndef	__AVR__
-# include <stdio.h>
-#endif
+;;; Return the result in RET[]
+#define RET0    r22
+#define RET1    r23
+#define RET2    r24
+#define RET3    r25
 
-#if __SIZEOF_LONG__ != 4
-#error expecting sizeof(long) == 4
-#endif
+;;; During madd, the following regs contain porcelaine: R22, R23, R26...R29.
 
-static int t_strtol (const char *s, int base, long ret, int err, int len)
-{
-    char * endptr;
-    
-    errno = 0;
-    endptr = (char *)s;
-    __asm ("" : "+r" (endptr));
-    endptr--;		/* invalid value	*/
-    if (strtol (s, & endptr, base) != ret
-	|| errno != err
-#ifdef	__AVR__
-	|| endptr - s != len)
-#else		/* Glibc 2.3.1 is not set endptr in the case of EINVAL	*/
-	|| (errno != EINVAL && (endptr - s) != len) )
-#endif
-    {
-#ifndef	__AVR__
-	printf ("strtol(\"%s\",,%d): %ld, errno: %d, len: %zd\n",
-                s, base, strtol(s, & endptr, base), errno, endptr - s);
-#endif
-	return 1;
-    }
-    return 0;
-}
+;;; Expand the result in A[]
+#define A3      r19
+#define A2      r18
+#define A1      r17
+#define A0      r16
+
+;;; Used in __strto32.madd
+
+#define Tmp     r20
+
+#define B3      r31
+#define B2      r30
+#define B1      r25
+#define B0      r24

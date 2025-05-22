@@ -26,7 +26,7 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.  */
 
-;;; This file contains worker and helper functions for strtoll and strtoull.
+;;; This file contains worker and helper functions for strto[u][l]l.
 ;;; The caller is responsible for saving all GPRs to please the ABI.
 
 #ifndef __AVR_TINY__
