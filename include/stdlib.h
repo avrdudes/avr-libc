@@ -413,12 +413,14 @@ extern void *calloc(size_t __nele, size_t __size) __ATTR_MALLOC__;
 extern void *realloc(void *__ptr, size_t __size) __ATTR_MALLOC__;
 
 extern float strtof(const char *__nptr, char **__endptr);
+
 /** \ingroup avr_stdlib
     The strtod() function is similar to strtof(), except that the conversion
     result is of type \c double instead of \c float.
 
     strtod() is currently only supported when \c double is a 32-bit type. */
 extern double strtod(const char *__nptr, char **__endptr);
+
 /** \ingroup avr_stdlib
     The strtold() function is similar to strtof(), except that the conversion
     result is of type \c long \c double instead of \c float.
@@ -444,6 +446,7 @@ extern int atexit(void (*func)(void));
     It is equivalent to calling
 	\code strtof(nptr, (char**) 0); \endcode */
 extern float atoff(const char *__nptr);
+
 /** \ingroup avr_stdlib
     \fn  double atof (const char *nptr)
 
@@ -453,6 +456,7 @@ extern float atoff(const char *__nptr);
     It is equivalent to calling
 	\code strtod(nptr, (char**) 0); \endcode */
 extern double atof(const char *__nptr);
+
 /** \ingroup avr_stdlib
     \fn long double atofl (const char *nptr)
 

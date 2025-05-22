@@ -5,15 +5,15 @@
 
 \section bench_libm Math functions
 
-The table contains the number of MCU clocks to calculate a function
-with a given argument(s). The main reason of a big difference between Avr2
+The table contains the number of MCU cycles to calculate a function
+with the given argument(s). The main reason for a big difference between Avr2
 and Avr4 is a hardware multiplication.
 
 <table>
   <tr>
-    <td width="50%"><strong>Function</strong></td>
-    <td width="25%"><strong>Avr2</strong></td>
-    <td width="25%"><strong>Avr4</strong></td>
+    <th>Function</th>
+    <th>Avr2</th>
+    <th>Avr4</th>
   </tr>
   <tr>
     <td>\c __addsf3 (1.234, 5.678)</td>
@@ -31,142 +31,142 @@ and Avr4 is a hardware multiplication.
     <td>465</td>
   </tr>
   <tr>
-    <td>\c acosf (0.54321)</td>
+    <td>\c #acosf (0.54321)</td>
     <td>4411</td>
     <td>2455</td>
   </tr>
   <tr>
-    <td>\c asinf (0.54321)</td>
+    <td>\c #asinf (0.54321)</td>
     <td>4517</td>
     <td>2556</td>
   </tr>
   <tr>
-    <td>\c atanf (0.54321)</td>
+    <td>\c #atanf (0.54321)</td>
     <td>4710</td>
     <td>2271</td>
   </tr>
   <tr>
-    <td>\c atan2f (1.234, 5.678)</td>
+    <td>\c #atan2f (1.234, 5.678)</td>
     <td>5270</td>
     <td>2857</td>
   </tr>
   <tr>
-    <td>\c cbrtf (1.2345)</td>
+    <td>\c #cbrtf (1.2345)</td>
     <td>2684</td>
     <td>2555</td>
   </tr>
   <tr>
-    <td>\c ceilf (1.2345)</td>
+    <td>\c #ceilf (1.2345)</td>
     <td>177</td>
     <td>177</td>
   </tr>
   <tr>
-    <td>cosf (1.2345)</td>
+    <td>\c #cosf (1.2345)</td>
     <td>3387</td>
     <td>1671</td>
   </tr>
   <tr>
-    <td>\c coshf (1.2345)</td>
+    <td>\c #coshf (1.2345)</td>
     <td>4922</td>
     <td>2979</td>
   </tr>
   <tr>
-    <td>\c expf (1.2345)</td>
+    <td>\c #expf (1.2345)</td>
     <td>4708</td>
     <td>2765</td>
   </tr>
   <tr>
-    <td>\c fdimf (5.678, 1.234)</td>
+    <td>\c #fdimf (5.678, 1.234)</td>
     <td>111</td>
     <td>111</td>
   </tr>
   <tr>
-    <td>\c floorf (1.2345)</td>
+    <td>\c #floorf (1.2345)</td>
     <td>180</td>
     <td>180</td>
   </tr>
   <tr>
-    <td>\c fmaxf (1.234, 5.678)</td>
+    <td>\c #fmaxf (1.234, 5.678)</td>
     <td>39</td>
     <td>37</td>
   </tr>
   <tr>
-    <td>\c fminf (1.234, 5.678)</td>
+    <td>\c #fminf (1.234, 5.678)</td>
     <td>35</td>
     <td>35</td>
   </tr>
   <tr>
-    <td>\c fmodf (5.678, 1.234)</td>
+    <td>\c #fmodf (5.678, 1.234)</td>
     <td>131</td>
     <td>131</td>
   </tr>
   <tr>
-    <td>\c frexpf (1.2345, 0)</td>
+    <td>\c #frexpf (1.2345, 0)</td>
     <td>42</td>
     <td>41</td>
   </tr>
   <tr>
-    <td>hypotf (1.234, 5.678)</td>
+    <td>\c #hypotf (1.234, 5.678)</td>
     <td>1341</td>
     <td>866</td>
   </tr>
   <tr>
-    <td>\c ldexpf (1.2345, 6)</td>
+    <td>\c #ldexpf (1.2345, 6)</td>
     <td>42</td>
     <td>42</td>
   </tr>
   <tr>
-    <td>\c logf (1.2345)</td>
+    <td>\c #logf (1.2345)</td>
     <td>4142</td>
     <td>2134</td>
   </tr>
   <tr>
-    <td>\c log10f (1.2345)</td>
+    <td>\c #log10f (1.2345)</td>
     <td>4498</td>
     <td>2260</td>
   </tr>
   <tr>
-    <td>\c modff (1.2345, 0)</td>
+    <td>\c #modff (1.2345, 0)</td>
     <td>433</td>
     <td>429</td>
   </tr>
   <tr>
-    <td>\c powf (1.234, 5.678)</td>
+    <td>\c #powf (1.234, 5.678)</td>
     <td>9293</td>
     <td>5047</td>
   </tr>
   <tr>
-    <td>\c roundf (1.2345)</td>
+    <td>\c #roundf (1.2345)</td>
     <td>150</td>
     <td>150</td>
   </tr>
   <tr>
-    <td>\c sinf (1.2345)</td>
+    <td>\c #sinf (1.2345)</td>
     <td>3353</td>
     <td>1653</td>
   </tr>
   <tr>
-    <td>\c sinhf (1.2345)</td>
+    <td>\c #sinhf (1.2345)</td>
     <td>4946</td>
     <td>3003</td>
   </tr>
   <tr>
-    <td>\c sqrtf (1.2345)</td>
+    <td>\c #sqrtf (1.2345)</td>
     <td>494</td>
     <td>492</td>
   </tr>
   <tr>
-    <td>\c tanf (1.2345)</td>
+    <td>\c #tanf (1.2345)</td>
     <td>4381</td>
     <td>2426</td>
   </tr>
   <tr>
-    <td>\c tanhf (1.2345)</td>
+    <td>\c #tanhf (1.2345)</td>
     <td>5126</td>
     <td>3173</td>
   </tr>
   <tr>
-    <td>\c truncf (1.2345)</td>
+    <td>\c #truncf (1.2345)</td>
     <td>178</td>
     <td>178</td>
   </tr>
