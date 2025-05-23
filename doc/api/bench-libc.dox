@@ -65,6 +65,13 @@ are present.
     <td>126 (126)<br>2<br>1593</td>
   </tr>
   <tr>
+    <td> \c #lltoa (12345LL, s, 10)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>206 (206)<br>3<br>1447</td>
+    <td>194 (194)<br>3<br>1427</td>
+    <td>194 (194)<br>3<br>1427</td>
+  </tr>
+  <tr>
     <td> \c #malloc (1)</td>
     <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
     <td>768 (712)<br>6<br>215</td>
@@ -147,6 +154,13 @@ are present.
     <td>384 (384)<br>14<br>606</td>
     <td>362 (362)<br>14<br>583</td>
     <td>344 (344)<br>12<br>351</td>
+  </tr>
+  <tr>
+    <td> \c #strtoll ("12345", &p, 0)</td>
+    <td>Flash bytes<br>Stack bytes<br>MCU clocks</td>
+    <td>572 (460)<br>20<br>832</td>
+    <td>534 (424)<br>20<br>785</td>
+    <td>510 (400)<br>18<br>488</td>
   </tr>
 </table>
 </small>
