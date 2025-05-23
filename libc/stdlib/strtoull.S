@@ -37,8 +37,8 @@
 ;;;              R18 = strtoull (const char *R24,  char **R22,    int R20);
 
 ENTRY strtoull
-    ;; Push Y, R17...R10
-    do_prologue_saves 10
+    ;; Push Y, R17...R8
+    do_prologue_saves 12
 
     X_movw      Nptr, r24
     X_movw      ENDptr, r22
@@ -56,8 +56,8 @@ ENTRY strtoull
     XCALL       _U(__strto64.clr_result)
 #endif /* Have MUL */
 
-    ;; A[] = strtoxx.worker (const char *Z, char **Y, R20 ibase, R26 Flags,
-    ;;                       R24 & madd())
+    ;; A[] = strtoxx.worker (const char *Y, char **Z, R20 ibase, R24 & madd())
+    ;; Sets Flags.B_SIGN.
     XCALL       _U(__strtoxx.worker)
     X_movw      RET6, A6
     X_movw      RET4, A4
@@ -83,7 +83,7 @@ ENTRY strtoull
     XCALL       _U(__strtoxx.set_errno)
 
 .Lret:
-    do_epilogue_restores 10
+    do_epilogue_restores 12
 
 ENDFUNC
 

@@ -41,6 +41,8 @@
 ;;; R18 = strtol (const char *R24,  char **R22,    int R20);
 
 ENTRY strtol
+    push        r14
+    push        r15
     push        r16
     push        r17
     push        r28
@@ -60,8 +62,8 @@ ENTRY strtol
     XCALL       _U(__strto32.clr_result)
 #endif
 
-    ;; A[] = strtoxx.worker (const char *Z, char **Y, R20 ibase, R26 Flags,
-    ;;                       R24 & madd())
+    ;; A[] = strtoxx.worker (const char *Y, char **Z, R20 ibase, R24 & madd())
+    ;; Sets Flags.B_SIGN.
     XCALL       _U(__strtoxx.worker)
     X_movw      RET2, A2
     X_movw      RET0, A0
@@ -69,12 +71,15 @@ ENTRY strtol
     pop         r28
     pop         r17
     pop         r16
+    pop         r15
+    pop         r14
 
     brts .Large                     ; Overflowed
+
     ;; T only handles the cases where |A| >= 2^32, hence check for s32 bounds.
     ;; Compare against 0x80000000 (Sign = 0).
     ;; Compare against 0x80000001 (Sign = 1).
-    andi        Flags, 1        ; B_SIGN is bit 0.
+    andi        Flags, 1 << B_SIGN  ; B_SIGN is bit 0.
     ldi         r27, 0x80
     cp          RET0, Flags
     cpc         RET1, __zero_reg__

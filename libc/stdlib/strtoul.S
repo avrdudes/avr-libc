@@ -37,6 +37,8 @@
 ;;;         R18 = strtoul (const char *R24,  char **R22,    int R20);
 
 ENTRY strtoul
+    push        r14
+    push        r15
     push        r16
     push        r17
     push        r28
@@ -56,8 +58,8 @@ ENTRY strtoul
     XCALL       _U(__strto32.clr_result)
 #endif
 
-    ;; A[] = strtoxx.worker (const char *Z, char **Y, R20 ibase, R26 Flags,
-    ;;                       R24 & madd())
+    ;; A[] = strtoxx.worker (const char *Y, char **Z, R20 ibase, R24 & madd())
+    ;; Sets Flags.B_SIGN.
     XCALL       _U(__strtoxx.worker)
     X_movw      RET2, A2
     X_movw      RET0, A0
@@ -65,6 +67,9 @@ ENTRY strtoul
     pop         r28
     pop         r17
     pop         r16
+    pop         r15
+    pop         r14
+
     brts .Large                     ; Overflowed
 
     ;; Apply sign.

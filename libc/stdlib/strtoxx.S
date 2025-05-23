@@ -35,7 +35,7 @@
 #include "asmdef.h"
 #include "strtoxx.h"
 
-;; A[] = strtoxx.worker (const char *Z, char **Y, int R20 ibase,
+;; A[] = strtoxx.worker (const char *Y, char **Z, int R20 ibase,
 ;;                       uint8_t R26 Flags, r24 (*madd)())
 FUNCTION __strtoxx.worker
 .Leinval:
@@ -50,7 +50,7 @@ ENTRY __strtoxx.set_errno
 
 ENTRY __strtoxx.worker
     clt                         ; Clear unsigned overflow.
-    clr         Flags
+    ldi         Flags, 1 << B_NO_DIGITS
     rcall       .Lstore_nptr
 
     ;; Check ibase.
@@ -62,11 +62,12 @@ ENTRY __strtoxx.worker
     cpi         Radix, 1
     breq .Leinval
 
+    X_movw      ENDptr2, ENDptr
     X_movw      PFmadd, r24
 
     ;; Consume initial white-spaces.
 .Loop_space:
-    ld          Digit, Z+
+    ld          Digit, Y+
     mov         r24, Digit
     XCALL       _U(__isspace.ignore_r25)
     tst         r24             ; true ?
@@ -78,7 +79,7 @@ ENTRY __strtoxx.worker
     cpi         Digit, '-'
     brne 1f
     ori         Flags, 1 << B_SIGN
-0:  ld          Digit, Z+
+0:  ld          Digit, Y+
 1:
     ;; Consume optional radix determinator.
     cpi         Digit, '0'
@@ -89,8 +90,8 @@ ENTRY __strtoxx.worker
     rjmp .Lno_prefix
 
 0:  ;; Payload starts with '0': May be octal, or 0x (hex), 0b (bin), 0o (oct).
-    ori         Flags, 1 << B_PAYLOAD
-    ld          r24, Z
+    cbr         Flags, 1 << B_NO_DIGITS
+    ld          r24, Y
     cpi         r24, 'a'
     brsh 1f
     subi        r24, 'A' - 'a'
@@ -118,10 +119,10 @@ ENTRY __strtoxx.worker
     mov         Radix, Prefix
     ;; Consume
     ori         Flags, 1 << B_PREFIXED
-    adiw        ZL, 1
+    adiw        YL, 1
 
 .Lnext_digit:
-    ld          Digit, Z+
+    ld          Digit, Y+
 
 .Lno_prefix:
     ;; Convert Digit to its value.
@@ -137,37 +138,31 @@ ENTRY __strtoxx.worker
 5:  subi        Digit, '0'
     cp          Digit, Radix
     brsh .Lstop1
-    cbr         Flags, 1 << B_PREFIXED
-    ori         Flags, 1 << B_PAYLOAD
+    cbr         Flags, (1 << B_PREFIXED) | (1 << B_NO_DIGITS)
     ;; Overflowed: Just consume remaining valid digits.
     brts .Lnext_digit
 
     ;; A[] := A[] * Radix + Digit
-    push        r30
-    push        r31
-    X_movw      r30, PFmadd
-
     XICALL
 
-    pop         r31
-    pop         r30
     rjmp .Lnext_digit
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.Lstop1:                        ; Z points 1 past an unrecognized char.
-    sbrs        Flags, B_PAYLOAD
+.Lstop1:                        ; Y points 1 past an unrecognized char.
+    sbrc        Flags, B_NO_DIGITS
     ret
     sbrc        Flags, B_PREFIXED
     ;; When the 1st digit is not valid, then the 'x' in "0x" is invalid, too.
     sbiw        Nptr, 1
     sbiw        Nptr, 1
-.Lstop0:                        ; Z points to an unrecognized char.
+.Lstop0:                        ; Y points to an unrecognized char.
+    X_movw      ENDptr, ENDptr2
 .Lstore_nptr:
     sbiw        ENDptr, 0
     breq 9f
-    std         Y+0, Nptr+0
-    std         Y+1, Nptr+1
+    std         Z+0, Nptr+0
+    std         Z+1, Nptr+1
 9:  ret
 
 ENDFUNC

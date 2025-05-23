@@ -52,11 +52,11 @@
 
 #define Tmp     r20
 
-#define B7      r31
-#define B6      r30
-#define B5      r25
-#define B4      r24
-#define B3      r11
-#define B2      r10
+#define B7      r25
+#define B6      r24
+#define B5      r11
+#define B4      r10
+#define B3      r9
+#define B2      r8
 #define B1      r1
 #define B0      r0

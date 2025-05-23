@@ -26,15 +26,16 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.  */
 
-#define Nptr    30
-#define ENDptr  YL
+#define Nptr    28
+#define ENDptr  ZL
+#define ENDptr2 r22
 #define Radix   r27
 #define Flags   r26
 #define Prefix  r25
-#define PFmadd  r22
+#define PFmadd  r30
 #define Digit   r21
 
 ;;; Bits positions for Flags
 #define B_SIGN      0   /* Must be bit 0 */
 #define B_PREFIXED  1   /* Has 0x or similar prefix */
-#define B_PAYLOAD   2   /* Has a payload, i.e. *endptr != nptr */
+#define B_NO_DIGITS 2   /* No digits yet, i.e. *endptr == nptr */

@@ -44,7 +44,7 @@
 
 #define Tmp     r20
 
-#define B3      r31
-#define B2      r30
+#define B3      r15
+#define B2      r14
 #define B1      r25
 #define B0      r24

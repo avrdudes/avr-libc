@@ -41,8 +41,8 @@
 ;;;     R18 = strtoll (const char *R24,  char **R22,    int R20);
 
 ENTRY strtoll
-    ;; Push Y, R17...R10
-    do_prologue_saves 10
+    ;; Push Y, R17...R8
+    do_prologue_saves 12
 
     X_movw      Nptr, r24
     X_movw      ENDptr, r22
@@ -60,18 +60,19 @@ ENTRY strtoll
     XCALL       _U(__strto64.clr_result)
 #endif /* Have MUL */
 
-    ;; A[] = strtoxx.worker (const char *Z, char **Y, R20 ibase, R26 Flags,
-    ;;                       R24 & madd())
+    ;; A[] = strtoxx.worker (const char *Y, char **Z, R20 ibase, R24 & madd())
+    ;; Sets Flags.B_SIGN.
     XCALL       _U(__strtoxx.worker)
     brts .Large                     ; Overflowed
     X_movw      RET6, A6
     X_movw      RET4, A4
     X_movw      RET2, A2
     ;X_movw     RET0, A0  ; RET0 === A0
+
     ;; T only handles the cases where |A| >= 2^64, hence check for s64 bounds.
     ;; Compare against 0x8000000000000000 (Sign = 0).
     ;; Compare against 0x8000000000000001 (Sign = 1).
-    andi        Flags, 1        ; B_SIGN is bit 0.
+    andi        Flags, 1 << B_SIGN  ; B_SIGN is bit 0.
     ldi         r27, 0x80
     cp          RET0, Flags
     cpc         RET1, __zero_reg__
@@ -93,7 +94,7 @@ ENTRY strtoll
     XCALL       _U(__negdi2)
 
 .Lret:
-    do_epilogue_restores 10
+    do_epilogue_restores 12
 
 .Large:
     ;; Handle overflow
