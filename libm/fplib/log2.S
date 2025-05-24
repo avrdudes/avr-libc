@@ -37,8 +37,6 @@
 ;; The log2f() function returns the base 2 logarithm of A.
 
 #define FL_M1   0xbf800000  /* -1.0 */
-#define D_0_50  0x7e810000  /* 0.50 (decoded) */
-#define D_0_75  0x7ec00000  /* 0.75 (decoded) */
 
 #define rC3 YH
 #define rC2 YL      /* adiw, sbiw can be used   */
@@ -59,14 +57,6 @@ ENTRY_FLOAT log2f log2 log2l
     tst     rA3
     breq .L_min         ; 0 -> -Inf
     brts .L_nan         ; log(negative)
-
-    ;; For A in (0.5, 0.75) we adjust the result by -1 ULP at the end.
-    X_movw  XL, rA2
-    subi    XL, hlo8(D_0_50)
-    sbci    XH, hhi8(D_0_50)
-    sbiw    XL, (D_0_75 - D_0_50) >> 16
-    sbc     XL, XL      ; XL = A in (0.5, 0.75) ? -1 : 0.
-    push    XL
 
     push    rC3
     push    rC2
@@ -113,6 +103,7 @@ ENTRY_FLOAT log2f log2 log2l
     LDI_XH_hh8     (.L_thigh)
 5:  XCALL   _U(__fp_powser)
 
+    push    rAE
     push    rA1
     push    rA0
     X_movw  rA0, rC2        ; rA1.rA0 = exponent (possibly negative)
@@ -130,23 +121,15 @@ ENTRY_FLOAT log2f log2 log2l
 
     pop     rB0
     pop     rB1
+    pop     rBE
     X_movw  rB2, rC2
 
     pop     rC2
     pop     rC3
-
+    clr     rAE
     ;; log2(Mant * 2^expo) = log2(Mant) + expo.
-    XCALL   _U(__addsf3)
-
-    ;; Finally, tweak the result for inputs in (0.5, 0.75) by -1 ULP
-    ;; in order to get an overall error limited by 3 ULPs.
-    ;; XL = A in (0.5, 0.75) ? -1 : 0.
-    pop     XL
-    add     rA0, XL
-    adc     rA1, XL
-    adc     rA2, XL
-    adc     rA3, XL
-    ret
+    XCALL   _U(__addsf3x)
+    XJMP    _U(__fp_round)
 ENDFUNC
 
     PGMX_SECTION(fplib.log2)

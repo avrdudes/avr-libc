@@ -410,7 +410,7 @@ __ATTR_CONST__ extern double atan2 (double y, double x);
 __ATTR_CONST__ extern long double atan2l (long double y, long double x);
 
 /** The logf() function returns the natural logarithm of argument \a x.
-    The relative error is bounded by 2.6&middot;10<sup>&minus;7</sup>. */
+    The relative error is bounded by 2.3&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float logf (float x);
 /** The log() function returns the natural logarithm of argument \a x. */
 __ATTR_CONST__ extern double log (double x);
@@ -418,7 +418,7 @@ __ATTR_CONST__ extern double log (double x);
 __ATTR_CONST__ extern long double logl (long double x);
 
 /** The log10f() function returns the logarithm of argument \a x to base 10.
-    The relative error is bounded by 3.6&middot;10<sup>&minus;7</sup>. */
+    The relative error is bounded by 2.8&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float log10f (float x);
 /** The log10() function returns the logarithm of argument \a x to base 10. */
 __ATTR_CONST__ extern double log10 (double x);
@@ -426,7 +426,7 @@ __ATTR_CONST__ extern double log10 (double x);
 __ATTR_CONST__ extern long double log10l (long double x);
 
 /** The log2f() function returns the logarithm of argument \a x to base 2.
-    The relative error is bounded by 2.4&middot;10<sup>&minus;7</sup>.
+    The relative error is bounded by 1.8&middot;10<sup>&minus;7</sup>.
     \since AVR-LibC v2.3 */
 __ATTR_CONST__ extern float log2f (float x);
 /** The log2() function returns the logarithm of argument \a x to base 2.
