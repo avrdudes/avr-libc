@@ -1,0 +1,30 @@
+1  <tr>
+1  <th>Function
+1  <th>x<sub>0</sub>
+1  <th>x<sub>1</sub>
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+1  <th>log<sub>10</sub>(Err<sub>max</sub>)
+acosf	1  100,-1,1
+asinf	1  100,-1,1
+atanf	1  100,-10,10
+cbrtf	1  100,-1e6,1e6
+ceilf	1  100,-1e5,1e5
+cosf	1  100,-1.57,1.57  10,1.57,1.58
+coshf	1  100,-20,20
+expf	1  100,-20,20
+floorf	1  100,-1e5,1e5
+frexpf	11 100,-1e5,1e5
+logf	1  100,0,100  10,0.5,1
+log10f	1  100,0,100  10,0.5,1
+log2f	1  100,0,100  10,0.5,1
+modff	12 100,-1e5,1e5
+roundf	1  100,-1e5,1e5
+sinf	1  100,0,3.14  10,3.14,3.15
+sinhf	1  100,-20,20
+sqrtf	1  100,0,1e6
+tanf	1  50,0,1.57  10,1.57,1.58  50,1.58,3.14  10,3.14,3.15
+tanhf	1  100,-20,20
+truncf  1  100,-1000,1000
+
+2</table>
