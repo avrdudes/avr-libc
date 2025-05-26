@@ -114,7 +114,7 @@ do_func_txt ()
     echo "== $margs =="
     cat $margs
 
-    [ -n "$texts" ] && (make clean ; make -j$JOBS $texts)
+    [ -n "$texts" ] && (make clean ; nice -10 make -j$JOBS $texts)
 }
 
 #set -x
