@@ -62,7 +62,7 @@ extern "C" {
       \c errno variable. Therefore the majority of them are declared
       with \c const attribute, for better optimization by GCC.
     - 64-bit floating-point arithmetic is only available in
-      <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">avr-gcc v10</a>
+      <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>
       and up.
       The size of the \c double and \c long \c double type can be selected
       at compile-time with options like <tt>-mdouble=64</tt> and
@@ -77,6 +77,9 @@ extern "C" {
       in avr-gcc v4.6 and older it is usually
       also required to link with \c -lm. In avr-gcc v4.7 and up, \c -lm
       is added automatically to all linker invocations.
+
+  See also sone benchmarks for \ref bench_libm "IEEE single"
+  and \ref bench_libf7 "IEEE double".
 */
 
 
@@ -572,7 +575,8 @@ __ATTR_CONST__ extern float fdimf (float x, float y);
     \a y or both are NaN, NaN is returned. */
 __ATTR_CONST__ extern double fdim (double x, double y);
 /** The fdiml() function returns <em>max(x &minus; y, 0)</em>. If \a x or
-    \a y or both are NaN, NaN is returned. */
+    \a y or both are NaN, NaN is returned.
+    \since GCC v15.2 */
 __ATTR_CONST__ extern long double fdiml (long double x, long double y);
 
 /** The fmaf() function performs floating-point multiply-add. This is the
