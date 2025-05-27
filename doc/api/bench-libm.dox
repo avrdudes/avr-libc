@@ -31,10 +31,10 @@ that are close to the poles (if any) or close to the non-zero zeros.
   <th>log<sub>10</sub>(Err<sub>max</sub>)
   <tr><td> \c #acosf <td> -1 <td> 1 <td align="right"> 1957 <td align="right"> 2464 <td align="center"> -6.76
   <tr><td> \c #asinf <td> -1 <td> 1 <td align="right"> 1896 <td align="right"> 2454 <td align="center"> -6.51
-  <tr><td> \c #atanf <td> -10 <td> 10 <td align="right"> 2879 <td align="right"> 3073 <td align="center"> -6.99
+  <tr><td> \c #atanf <td> -10 <td> 10 <td align="right"> 2879 <td align="right"> 3073 <td align="center"> -6.97
   <tr><td> \c #cbrtf <td> -1e+06 <td> 1e+06 <td align="right"> 2573 <td align="right"> 2665 <td align="center"> -6.93
   <tr><td> \c #ceilf <td> -1e+05 <td> 1e+05 <td align="right"> 108 <td align="right"> 177 <td align="center"> -7.22
-  <tr><td> \c #cosf <td> -1.57 <td> 1.58 <td align="right"> 1775 <td align="right"> 2126 <td align="center"> -2.86
+  <tr><td> \c #cosf <td> -1.57 <td> 1.58 <td align="right"> 1775 <td align="right"> 2126 <td align="center"> <b>-2.86</b>
   <tr><td> \c #coshf <td> -20 <td> 20 <td align="right"> 3053 <td align="right"> 3439 <td align="center"> -5.79
   <tr><td> \c #expf <td> -20 <td> 20 <td align="right"> 2588 <td align="right"> 3247 <td align="center"> -5.79
   <tr><td> \c #floorf <td> -1e+05 <td> 1e+05 <td align="right"> 108 <td align="right"> 180 <td align="center"> -7.22
@@ -44,10 +44,10 @@ that are close to the poles (if any) or close to the non-zero zeros.
   <tr><td> \c #log2f <td> 0 <td> 100 <td align="right"> 2252 <td align="right"> 2723 <td align="center"> -6.80
   <tr><td> \c #modff <td> -1e+05 <td> 1e+05 <td align="right"> 365 <td align="right"> 456 <td align="center"> -7.22
   <tr><td> \c #roundf <td> -1e+05 <td> 1e+05 <td align="right"> 111 <td align="right"> 156 <td align="center"> -7.22
-  <tr><td> \c #sinf <td> 0 <td> 3.15 <td align="right"> 1744 <td align="right"> 2146 <td align="center"> -3.67
+  <tr><td> \c #sinf <td> 0 <td> 3.15 <td align="right"> 1744 <td align="right"> 2146 <td align="center"> <b>-3.67</b>
   <tr><td> \c #sinhf <td> -20 <td> 20 <td align="right"> 3043 <td align="right"> 3461 <td align="center"> -5.79
   <tr><td> \c #sqrtf <td> 0 <td> 1e+06 <td align="right"> 474 <td align="right"> 510 <td align="center"> -7.22
-  <tr><td> \c #tanf <td> 0 <td> 3.15 <td align="right"> 2161 <td align="right"> 2943 <td align="center"> -2.86
+  <tr><td> \c #tanf <td> 0 <td> 3.15 <td align="right"> 2178 <td align="right"> 2946 <td align="center"> <b>-2.86</b>
   <tr><td> \c #tanhf <td> -20 <td> 20 <td align="right"> 3148 <td align="right"> 3620 <td align="center"> -6.40
   <tr><td> \c #truncf <td> -1000 <td> 1000 <td align="right"> 140 <td align="right"> 178 <td align="center"> -7.22
 </table>
@@ -64,17 +64,17 @@ that are close to the poles (if any) or close to the non-zero zeros.
   <th>Cycles<sub>avr</sub>
   <th>Cycles<sub>max</sub>
   <th>log<sub>10</sub>(Err<sub>max</sub>)
-  <tr><td> \c __addsf3 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 102 <td align="right"> 256 <td align="center"> -7.22
-  <tr><td> \c __mulsf3 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 129 <td align="right"> 139 <td align="center"> -7.22
-  <tr><td> \c __divsf3 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 469 <td align="right"> 501 <td align="center"> -7.22
+  <tr><td> \c + <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 102 <td align="right"> 256 <td align="center"> -7.22
+  <tr><td> \c * <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 129 <td align="right"> 139 <td align="center"> -7.22
+  <tr><td> \c / <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 469 <td align="right"> 501 <td align="center"> -7.22
   <tr><td> \c #atan2f <td> -10 <td> 10 <td> -10 <td> 10 <td align="right"> 2882 <td align="right"> 3455 <td align="center"> -6.76
   <tr><td> \c #fdimf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 75 <td align="right"> 218 <td align="center"> -7.22
-  <tr><td> \c #fmaxf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 30 <td align="right"> 34 <td align="center"> -7.22
-  <tr><td> \c #fminf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 30 <td align="right"> 34 <td align="center"> -7.22
+  <tr><td> \c #fmaxf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 30 <td align="right"> 34 <td align="center"> -&infin;
+  <tr><td> \c #fminf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 30 <td align="right"> 34 <td align="center"> -&infin;
   <tr><td> \c #fmodf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 88 <td align="right"> 324 <td align="center"> -7.22
   <tr><td> \c #hypotf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 850 <td align="right"> 927 <td align="center"> -7.08
   <tr><td> \c #ldexpf <td> -1e+10 <td> 1e+10 <td> -10 <td> 10 <td align="right"> 40 <td align="right"> 40 <td align="center"> -7.22
-  <tr><td> \c #powf <td> 0 <td> 1e+10 <td> -100 <td> 100 <td align="right"> 2751 <td align="right"> 6172 <td align="center"> -4.18
+  <tr><td> \c #powf <td> 0 <td> 1e+05 <td> -20 <td> 20 <td align="right"> 4169 <td align="right"> 6174 <td align="center"> <b>-3.36</b>
 </table>
 
 For devices wihout MUL instruction the following applies:
@@ -94,10 +94,10 @@ For devices wihout MUL instruction the following applies:
   <th>log<sub>10</sub>(Err<sub>max</sub>)
   <tr><td> \c #acosf <td> -1 <td> 1 <td align="right"> 3513 <td align="right"> 3888 <td align="center"> -6.76
   <tr><td> \c #asinf <td> -1 <td> 1 <td align="right"> 3452 <td align="right"> 3879 <td align="center"> -6.51
-  <tr><td> \c #atanf <td> -10 <td> 10 <td align="right"> 5280 <td align="right"> 5541 <td align="center"> -6.99
+  <tr><td> \c #atanf <td> -10 <td> 10 <td align="right"> 5280 <td align="right"> 5541 <td align="center"> -6.97
   <tr><td> \c #cbrtf <td> -1e+06 <td> 1e+06 <td align="right"> 2702 <td align="right"> 2795 <td align="center"> -6.93
   <tr><td> \c #ceilf <td> -1e+05 <td> 1e+05 <td align="right"> 105 <td align="right"> 174 <td align="center"> -7.22
-  <tr><td> \c #cosf <td> -1.57 <td> 1.58 <td align="right"> 3441 <td align="right"> 3798 <td align="center"> -2.86
+  <tr><td> \c #cosf <td> -1.57 <td> 1.58 <td align="right"> 3441 <td align="right"> 3798 <td align="center"> <b>-2.86</b>
   <tr><td> \c #coshf <td> -20 <td> 20 <td align="right"> 4966 <td align="right"> 5346 <td align="center"> -5.79
   <tr><td> \c #expf <td> -20 <td> 20 <td align="right"> 4512 <td align="right"> 5140 <td align="center"> -5.79
   <tr><td> \c #floorf <td> -1e+05 <td> 1e+05 <td align="right"> 105 <td align="right"> 177 <td align="center"> -7.22
@@ -107,10 +107,10 @@ For devices wihout MUL instruction the following applies:
   <tr><td> \c #log2f <td> 0 <td> 100 <td align="right"> 4205 <td align="right"> 4632 <td align="center"> -6.80
   <tr><td> \c #modff <td> -1e+05 <td> 1e+05 <td align="right"> 365 <td align="right"> 456 <td align="center"> -7.22
   <tr><td> \c #roundf <td> -1e+05 <td> 1e+05 <td align="right"> 109 <td align="right"> 154 <td align="center"> -7.22
-  <tr><td> \c #sinf <td> 0 <td> 3.15 <td align="right"> 3408 <td align="right"> 3818 <td align="center"> -3.67
+  <tr><td> \c #sinf <td> 0 <td> 3.15 <td align="right"> 3408 <td align="right"> 3818 <td align="center"> <b>-3.67</b>
   <tr><td> \c #sinhf <td> -20 <td> 20 <td align="right"> 4941 <td align="right"> 5358 <td align="center"> -5.79
   <tr><td> \c #sqrtf <td> 0 <td> 1e+06 <td align="right"> 474 <td align="right"> 510 <td align="center"> -7.22
-  <tr><td> \c #tanf <td> 0 <td> 3.15 <td align="right"> 4063 <td align="right"> 4785 <td align="center"> -2.86
+  <tr><td> \c #tanf <td> 0 <td> 3.15 <td align="right"> 4080 <td align="right"> 4785 <td align="center"> <b>-2.86</b>
   <tr><td> \c #tanhf <td> -20 <td> 20 <td align="right"> 5055 <td align="right"> 5544 <td align="center"> -6.40
   <tr><td> \c #truncf <td> -1000 <td> 1000 <td align="right"> 137 <td align="right"> 175 <td align="center"> -7.22
 </table>
@@ -127,16 +127,16 @@ For devices wihout MUL instruction the following applies:
   <th>Cycles<sub>avr</sub>
   <th>Cycles<sub>max</sub>
   <th>log<sub>10</sub>(Err<sub>max</sub>)
-  <tr><td> \c __addsf3 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 102 <td align="right"> 253 <td align="center"> -7.22
-  <tr><td> \c __mulsf3 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 346 <td align="right"> 386 <td align="center"> -7.22
-  <tr><td> \c __divsf3 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 467 <td align="right"> 499 <td align="center"> -7.22
+  <tr><td> \c + <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 102 <td align="right"> 253 <td align="center"> -7.22
+  <tr><td> \c * <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 346 <td align="right"> 386 <td align="center"> -7.22
+  <tr><td> \c / <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 467 <td align="right"> 499 <td align="center"> -7.22
   <tr><td> \c #atan2f <td> -10 <td> 10 <td> -10 <td> 10 <td align="right"> 5287 <td align="right"> 5844 <td align="center"> -6.76
   <tr><td> \c #fdimf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 74 <td align="right"> 219 <td align="center"> -7.22
-  <tr><td> \c #fmaxf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 31 <td align="right"> 36 <td align="center"> -7.22
-  <tr><td> \c #fminf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 30 <td align="right"> 36 <td align="center"> -7.22
+  <tr><td> \c #fmaxf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 31 <td align="right"> 36 <td align="center"> -&infin;
+  <tr><td> \c #fminf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 30 <td align="right"> 36 <td align="center"> -&infin;
   <tr><td> \c #fmodf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 86 <td align="right"> 322 <td align="center"> -7.22
   <tr><td> \c #hypotf <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 1297 <td align="right"> 1387 <td align="center"> -7.08
   <tr><td> \c #ldexpf <td> -1e+10 <td> 1e+10 <td> -10 <td> 10 <td align="right"> 39 <td align="right"> 39 <td align="center"> -7.22
-  <tr><td> \c #powf <td> 0 <td> 1e+10 <td> -100 <td> 100 <td align="right"> 5247 <td align="right"> 10497 <td align="center"> -4.18
+  <tr><td> \c #powf <td> 0 <td> 1e+05 <td> -20 <td> 20 <td align="right"> 7738 <td align="right"> 10459 <td align="center"> <b>-3.36</b>
 </table>
 */

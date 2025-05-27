@@ -85,10 +85,10 @@ static const char* fname (void)
 {
     const char *s = STRY (FUNC);
     return 0?""
-        : !strcmp_P (s, PSTR("addf")) ? "__addsf3"
-        : !strcmp_P (s, PSTR("subf")) ? "__subsf3"
-        : !strcmp_P (s, PSTR("mulf")) ? "__mulsf3"
-        : !strcmp_P (s, PSTR("divf")) ? "__divsf3"
+        : !strcmp_P (s, PSTR("addf")) ? "+"
+        : !strcmp_P (s, PSTR("subf")) ? "&ndash;"
+        : !strcmp_P (s, PSTR("mulf")) ? "*"
+        : !strcmp_P (s, PSTR("divf")) ? "/"
         : "#" STRY (FUNC);
 }
 
@@ -112,10 +112,20 @@ void print_result (const result_t *r, const args_t *a)
 #endif
     LOG_PFMT_U32 (PSTR(" <td align=\"right\"> %u"), r->cycles_avr);
     LOG_PFMT_U32 (PSTR(" <td align=\"right\"> %u"), r->cycles_max);
+#ifdef EXACT
+    if (avrtest_cmpf (r->d_max, 0) == 0)
+    {
+        LOG_PSTR (PSTR(" <td align=\"center\"> -&infin;\n"));
+        return;
+    }
+#endif
     float pe = avrtest_log10f (r->d_max);
     float p0 = avrtest_log10f (0x1.0p-24f);
     pe = avrtest_fmaxf (pe, p0);
-    LOG_PFMT_FLOAT (PSTR(" <td align=\"center\"> %.2f"), pe);
+    if (avrtest_cmpf (pe, -5.0f) <= 0)
+        LOG_PFMT_FLOAT (PSTR(" <td align=\"center\"> %.2f"), pe);
+    else
+        LOG_PFMT_FLOAT (PSTR(" <td align=\"center\"> <b>%.2f</b>"), pe);
     LOG_PSTR (PSTR("\n"));
 }
 

@@ -7,7 +7,8 @@
 1The following tables contain benchmark values for some IEEE double
 1floating-point functions over the indicated range(s) of input values.
 1<a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">LibF7</a>
-1is a IEEE double implementation hosted by GCC's libgcc.
+1is a IEEE double implementation hosted by libgcc since
+1<a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>.
 1
 1Notice that the values for relative error and the Worst Case Execution Time
 1Cycles<sub>max</sub> are only <em>lower bounds</em>.
