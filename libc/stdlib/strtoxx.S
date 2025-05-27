@@ -44,8 +44,11 @@ FUNCTION __strtoxx.worker
 
 ;;; errno = X
 ENTRY __strtoxx.set_errno
+    in          __tmp_reg__, SREG_IO_ADDR
+    cli
     sts         errno+0, XL
     sts         errno+1, XH
+    out         SREG_IO_ADDR, __tmp_reg__
     ret
 
 ENTRY __strtoxx.worker
