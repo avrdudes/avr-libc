@@ -64,10 +64,14 @@ fun ()
     local x=_$1_${id}_
     id=$(( 1 + $id ))
 
+    local e=
+    case "$1" in
+	fmin* | fmax* | fabs* ) e=" -DEXACT" ;;
+    esac
     funcs="${funcs} $x"
     texts="${texts} text-$x.out"
     # Test FUNC=sinf against AFUNC=avrtest_sinl etc.
-    echo " -DFUNC=$1 -DNARGS=$2 -DAFUNC=avrtest_${1::-1}l -DID=$x" >> $cargs
+    echo " -DFUNC=$1 -DNARGS=$2 -DAFUNC=avrtest_${1::-1}l -DID=$x$e" >> $cargs
     shift
     shift
     local aargs=
@@ -105,6 +109,7 @@ do_func_txt ()
     set_libs $MCU
     echo "CC = ${CC-avr-gcc}" >> $margs
     echo "MCU = $MCU" >> $margs
+    echo "BASE = $BASE" >> $margs
     echo "LIBS = $LIBS" >> $margs
     echo "TIMES = $TIMES" >> $margs
 

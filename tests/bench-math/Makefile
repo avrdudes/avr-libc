@@ -9,22 +9,22 @@ help:
 
 AVRTEST_HOME=$(shell dirname `which avrtest`)
 
-prg = bench-float
-
 CC=avr-gcc
 MCU=atmega128
 
 # Defines CC, MCU, LIBS and AARGS_sinf etc.
 -include margs.txt
 
+PRG = bench-$(BASE)
+
 atest := -I$(AVRTEST_HOME) $(AVRTEST_HOME)/exit-$(MCU).o
 
 args  := -std=gnu99 -Os -mmcu=$(MCU) -fmax-errors=1 $(CFLAGS)
 args2 = $(shell grep "ID=$*" cargs.txt) -DTIMES=$(TIMES) $(LIBS)
 
-elf = $(prg)-$*.elf
+elf = $(PRG)-$*.elf
 
-text-%.out: $(prg).c cargs.txt
+text-%.out: $(PRG).c cargs.txt
 	@echo "== $* =="
 	$(CC) $< -o $(elf) $(atest) $(args) $(args2)
 	avrtest -q $(elf) -args $(AARGS_$*) | tee $@
