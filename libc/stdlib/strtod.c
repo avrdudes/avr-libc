@@ -33,6 +33,7 @@
 
 
 #include <avr/pgmspace.h>
+#include <bits/attribs.h>
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
@@ -62,10 +63,32 @@ extern float __floatunsisf (unsigned long);
 extern const float __avrlibc_pwr_p10 [6];
 extern const float __avrlibc_pwr_m10 [6];
 
+static __ATTR_ALWAYS_INLINE__ int
+mulhi10 (int i)
+{
+    register int r24 __asm("24") = i;
+    __asm ("%~call __mulhi_const_10"
+           : "+r" (r24) :: "22", "23");
+    return r24;
+}
+
+static __ATTR_ALWAYS_INLINE__ uint32_t
+mulsi10 (uint32_t i)
+{
+    register uint32_t r22 __asm("22") = i;
+    __asm ("%~call __mulsi_const_10"
+           : "+r" (r22) :: "20", "21", "27"
+#ifndef __AVR_HAVE_MUL__
+           , "26"
+#endif
+        );
+    return r22;
+}
+
 /* PSTR() is not used to save 1 byte per string: '\0' at the tail.	*/
-PROGMEM_FAR static const char pstr_inf[] = {'I','N','F'};
-PROGMEM_FAR static const char pstr_inity[] = {'I','N','I','T','Y'};
-PROGMEM_FAR static const char pstr_nan[] = {'N','A','N'};
+PROGMEM_FAR static const char pstr_inf[3] = { 'I','N','F' };
+PROGMEM_FAR static const char pstr_inity[5] = { 'I','N','I','T','Y' };
+PROGMEM_FAR static const char pstr_nan[3] = { 'N','A','N' };
 
 /**  The strtof() function converts the initial portion of the string pointed
      to by \a nptr to \c float representation.
@@ -97,7 +120,7 @@ float
 strtof (const char * nptr, char ** endptr)
 {
     union {
-	unsigned long u32;
+	uint32_t u32;
 	float flt;
     } x;
     unsigned char c;
@@ -157,7 +180,7 @@ strtof (const char * nptr, char ** endptr)
 		if (flag & FL_DOT)
 		    exp -= 1;
 		/* x.u32 = x.u32 * 10 + c	*/
-		x.u32 = (((x.u32 << 2) + x.u32) << 1) + c;
+		x.u32 = mulsi10 (x.u32) + c;
 		if (x.u32 >= (ULONG_MAX - 9) / 10)
 		    flag |= FL_OVFL;
 	    }
@@ -190,7 +213,7 @@ strtof (const char * nptr, char ** endptr)
 	    i = 0;
 	    do {
 		if (i < 3200)
-		    i = (((i << 2) + i) << 1) + c;	/* i = 10*i + c	*/
+		    i = mulhi10 (i) + c;	/* i = 10*i + c	*/
 		c = *nptr++ - '0';
 	    } while (c <= 9);
 	    if (flag & FL_MEXP)
