@@ -6,7 +6,7 @@
 /**
 \page benchmarks
 
-\section bench_libm Math functions from libm
+\section bench_libm Math Functions from libm
 
 The following tables contain benchmark values for some
 floating-point functions over the indicated range(s) of input values.

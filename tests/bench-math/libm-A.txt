@@ -2,7 +2,7 @@
 !MCU=atmega128
 1\page benchmarks
 1
-1\section bench_libm Math functions from libm
+1\section bench_libm Math Functions from libm
 1
 1The following tables contain benchmark values for some
 1floating-point functions over the indicated range(s) of input values.

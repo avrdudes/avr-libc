@@ -6,7 +6,7 @@
 /**
 \page benchmarks
 
-\section bench_libf7 Math functions for IEEE double from LibF7
+\section bench_libf7 Math Functions for IEEE double from LibF7
 
 The following tables contain benchmark values for some IEEE double
 floating-point functions over the indicated range(s) of input values.
