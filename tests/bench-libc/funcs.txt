@@ -1,0 +1,25 @@
+i= @ atoi ("12345") @ atoi @
+l= @ atol ("12345") @ atol @
+
+@ ftostre (1.2345f, s, 6, 0)  @ dtostre @
+@ ftostrf (1.2345f, 15, 6, s) @ dtostrf @
+@ itoa (12345, s, 10)    @ __itoa_ncheck @
+@ ltoa (12345L, s, 10)   @ __ltoa_ncheck @
+@ lltoa (12345LL, s, 10) @ lltoa @
+
+pv= @ malloc (1)                @ malloc  @ -Wl,--defsym=__heap_end=0x80ffff
+pv= @ realloc ((void*) 0, 1)    @ realloc @ -Wl,--defsym=__heap_end=0x80ffff
+
+@ qsort (s, sizeof(s), 1, cmp)  @ qsort @
+
+@ sprintf_min (s, "%d", 12345)        @ sprintf @ -Wl,-u,vfprintf -lprintf_min
+@ sprintf (s, "%d", 12345)            @ sprintf @
+@ sprintf_flt (s, "%e", 1.2345)       @ sprintf @ -Wl,-u,vfprintf -lprintf_flt
+@ sscanf_min ("12345", "%d", &i)      @ sscanf  @ -Wl,-u,vfprintf -lprintf_min
+@ sscanf ("12345", "%d", &i)          @ sscanf  @
+@ sscanf ("point,color", "%[a-z]", s) @ sscanf  @
+@ sscanf_flt ("1.2345", "%e", &x)     @ sscanf  @ -Wl,-u,vfprintf -lprintf_flt
+
+x=  @ strtof ("1.2345", &end)    @ strtof @
+l=  @ strtol ("12345", &end, 0)  @ strtol @
+ll= @ strtoll ("12345", &end, 0) @ strtoll @
