@@ -61,6 +61,8 @@ extern "C" {
 
     This file declares some basic C macros and functions as
     defined by the ISO standard, plus some AVR-specific extensions.
+
+    For some functions, \ref bench_libc "benchmarks" are available.
 */
 
 /** \ingroup avr_stdlib */
