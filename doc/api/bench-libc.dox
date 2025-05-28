@@ -48,6 +48,11 @@ are present, and then only one code size is shown.
     <td align="right">1524 (1414)<br>40<br>1469
     <td align="right">1524 (1414)<br>40<br>1469
     <td align="right">1548 (1438)<br>43<br>1486
+  <tr><td><tt>#ktoa (123.45k, s, 2)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
+    <td align="right">316<br>8<br>479
+    <td align="right">306<br>8<br>466
+    <td align="right">298<br>8<br>466
+    <td align="right">306<br>10<br>488
   <tr><td><tt>#itoa (12345, s, 10)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
     <td align="right">110<br>2<br>879
     <td align="right">102<br>2<br>875

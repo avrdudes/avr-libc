@@ -3,6 +3,7 @@ l= @ atol ("12345") @ atol @
 
 @ ftostre (1.2345f, s, 6, 0)  @ dtostre @
 @ ftostrf (1.2345f, 15, 6, s) @ dtostrf @
+@ ktoa (123.45k, s, 2)   @ ktoa @
 @ itoa (12345, s, 10)    @ __itoa_ncheck @
 @ ltoa (12345L, s, 10)   @ __ltoa_ncheck @
 @ lltoa (12345LL, s, 10) @ lltoa @
