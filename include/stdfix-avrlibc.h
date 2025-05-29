@@ -84,6 +84,8 @@ Two groups of fixed-point data types are added:
 \remark
   - Upper case constant suffixes are also supported.
   - The \c long \c long fixed-point types are avr-gcc extensions.
+
+See also some \ref bench_fxlib "benchmarks".
 */
 
 
