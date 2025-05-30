@@ -36,6 +36,7 @@ Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #cosuhk_deg <td align='right'>316 <td>0 <td>256- <td align='right'>72 <td align='right'>76 <td>1.95e-03
   <tr><td>\c #sqrthr <td align='right'>42 <td>0 <td>1- <td align='right'>100 <td align='right'>100 <td>7.78e-03
   <tr><td>\c #sqrtuhr <td align='right'>38 <td>0 <td>1- <td align='right'>98 <td align='right'>98 <td>3.90e-03
+  <tr><td colspan='7'>
   <tr><td>\c #acosk <td align='right'>404 <td>-1 <td>1 <td align='right'>416 <td align='right'>572 <td>5.39e-05
   <tr><td>\c #acosuk <td align='right'>328 <td>0 <td>1 <td align='right'>385 <td align='right'>526 <td>4.51e-05
   <tr><td>\c #asink <td align='right'>386 <td>-1 <td>1 <td align='right'>414 <td align='right'>589 <td>4.95e-05
@@ -70,6 +71,7 @@ Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #log21puhr <td align='right'>70 <td>0 <td>1- <td align='right'>312 <td align='right'>332 <td>4.28e-03
   <tr><td>\c #sqrthr <td align='right'>54 <td>0 <td>1- <td align='right'>102 <td align='right'>105 <td>7.78e-03
   <tr><td>\c #sqrtuhr <td align='right'>50 <td>0 <td>1- <td align='right'>100 <td align='right'>104 <td>3.90e-03
+  <tr><td colspan='7'>
   <tr><td>\c #acosk <td align='right'>446 <td>-1 <td>1 <td align='right'>1097 <td align='right'>1233 <td>5.39e-05
   <tr><td>\c #acosuk <td align='right'>378 <td>0 <td>1 <td align='right'>1070 <td align='right'>1197 <td>4.51e-05
   <tr><td>\c #asink <td align='right'>428 <td>-1 <td>1 <td align='right'>1095 <td align='right'>1249 <td>4.95e-05

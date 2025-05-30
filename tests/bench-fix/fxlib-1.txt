@@ -16,6 +16,8 @@ cos		uhk_deg	r	0	256-
 sqrt		hr	hr	0	1-
 sqrt		uhr	uhr	0	1-
 
+1  <tr><td colspan='7'>
+
 acos		k	k	-1	1
 acos		uk	uk	0	1
 asin		k	k	-1	1
@@ -38,4 +40,4 @@ sinpi2		ur	ur	0	1-
 
 sqrt		ur	ur	0	1-
 
-2</table>
+1</table>

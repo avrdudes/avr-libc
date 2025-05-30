@@ -120,13 +120,13 @@ do_func_txt ()
     # Line starts:
     # # -> Ignore (comment)
     # ! -> Eval
-    # 1 -> Head
-    # 2 -> Tail
+    # 1 -> Copy line to $out
     # None of these -> FUNCTION N_ARGS N_VALS*TIMES,X0,X1[,Y0,Y1]
-    while read -u 11 p; do
+    while read -r -u 11 p; do
 	case "$p" in
-	    "#"* | "" | [12=]* ) ;;
+	    "#"* | "" ) ;;
 	    !*) eval $(echo "$p" | cut -c 2-) || exit 2 ;;
+	    1* ) cut -c 2- <<< "$p" >> $out ;;
 	    *)
 		set_libs_crt $MCU
 		fun_line $p
@@ -155,11 +155,7 @@ for f in $*; do
     fil="$BASE-$f.txt"
     [ -f "$fil" ] || Err "$fil: not found"
 
-    grep ^1 "$fil" | cut -c 2- >> $out
-
     do_func_txt $fil
-
-    grep ^2 "$fil" | cut -c 2- >> $out
 done
 
 cat <<EOF >> $out
@@ -168,3 +164,5 @@ EOF
 
 echo "== $out =="
 cat $out
+
+rm -f -- *.lst *.elf
