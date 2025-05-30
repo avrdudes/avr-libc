@@ -123,6 +123,13 @@
   `-pedantic` or similar options are on.  Hence `__extension__` was
   added when using these types in `avr/pgmspace.h`.
 
+- The [benchmark page](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/benchmarks.html)
+  has been reworked.
+  It includes now fixed-point and IEEE double floating-point benchmarks.
+  The IEEE single floating-point benchmarks now include the code sizes,
+  precision data, average execution times, and (lower bounds for the)
+  worst case execution times.
+
 ## Issues closed
 
 - Since v2.2.0 ([#936][936]), `gcrt1.S` defines symbols `__DATA_REGION_ORIGIN__`
