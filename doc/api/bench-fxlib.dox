@@ -32,8 +32,8 @@ Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <th>Err<sub>max</sub>
   <tr><td>\c #log2uhk <td align='right'>78 <td>0+ <td>10 <td align='right'>52 <td align='right'>75 <td>1.25e-02
   <tr><td>\c #log21puhr <td align='right'>32 <td>0 <td>1- <td align='right'>22 <td align='right'>22 <td>4.28e-03
-  <tr><td>\c #sinuhk_deg <td align='right'>270 <td>0 <td>256- <td align='right'>52 <td align='right'>54 <td>1.95e-03
-  <tr><td>\c #cosuhk_deg <td align='right'>316 <td>0 <td>256- <td align='right'>72 <td align='right'>76 <td>1.95e-03
+  <tr><td>\c #sinuhk_deg <td align='right'>270 <td>0 <td>256- <td align='right'>52 <td align='right'>54 <td>6.44e-05
+  <tr><td>\c #cosuhk_deg <td align='right'>316 <td>0 <td>256- <td align='right'>72 <td align='right'>76 <td>6.44e-05
   <tr><td>\c #sqrthr <td align='right'>42 <td>0 <td>1- <td align='right'>100 <td align='right'>100 <td>7.78e-03
   <tr><td>\c #sqrtuhr <td align='right'>38 <td>0 <td>1- <td align='right'>98 <td align='right'>98 <td>3.90e-03
   <tr><td colspan='7'>

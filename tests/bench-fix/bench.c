@@ -128,12 +128,9 @@ float get_delta (fx_t x, uint32_t *cyc)
 
 void print_result (const result_t *r, const args_t *a)
 {
-    float lbound = avrtest_ldexpf (1, -FBIT - 1);
-    float d_max = avrtest_fmaxf (r->d_max, lbound);
-
     LOG_PFMT_U32 (PSTR("cyc_avr=%u\n"), r->cycles_avr);
     LOG_PFMT_U32 (PSTR("cyc_max=%u\n"), r->cycles_max);
-    LOG_PFMT_FLOAT (PSTR("d_max=%.2e\n"), d_max);
+    LOG_PFMT_FLOAT (PSTR("d_max=%.2e\n"), r->d_max);
 }
 
 
