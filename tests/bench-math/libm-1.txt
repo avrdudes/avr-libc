@@ -1,5 +1,6 @@
 1  <tr>
 1  <th>Function
+1  <th>Size
 1  <th>x<sub>0</sub>
 1  <th>x<sub>1</sub>
 1  <th>Cycles<sub>avr</sub>

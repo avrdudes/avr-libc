@@ -20,14 +20,22 @@ PRG = bench-$(BASE)
 atest := -I$(AVRTEST_HOME) $(AVRTEST_HOME)/exit-$(MCU).o
 
 args  := -std=gnu99 -Os -mmcu=$(MCU) -fmax-errors=1 $(CFLAGS)
-args2 = $(shell grep "ID=$*" cargs.txt) -DTIMES=$(TIMES) $(LIBS)
+args2 = $(shell grep "ID=$*" cargs.txt) -DTIMES=$(TIMES) $(CRT) $(LIBS)
+
+p=-Wl,--defsym,
+nosym = $(patsubst %, $(p)%=0, main errno __prologue_saves__ __epilogue_restores__)
 
 elf = $(PRG)-$*.elf
+self = $(PRG)-size-$*.elf
+size = size-$*.out
 
 text-%.out: $(PRG).c cargs.txt
 	@echo "== $* =="
-	$(CC) $< -o $(elf) $(atest) $(args) $(args2)
+	echo | $(CC) -xc - -xnone -o $(self) $(args) -Wl,-u,$(SYMBL_$*) $(nosym) $(LIBS)
+	avr-size $(self) | grep $(self) | awk '{ print "#define SIZE " $$1 }' \
+		> $(size)
+	$(CC) $< -o $(elf) $(atest) $(args) $(args2) -include $(size)
 	avrtest -q $(elf) -args $(AARGS_$*) | tee $@
 
 clean:
-	rm -f $(wildcard *.[iso] *.elf *.out)
+	rm -f -- $(wildcard *.[iso] *.elf *.out)

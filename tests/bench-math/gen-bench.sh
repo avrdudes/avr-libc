@@ -34,9 +34,10 @@ Err ()
     exit 1
 }
 
-set_libs ()
+set_libs_crt ()
 {
     LIBS=
+    CRT=
     if [ -n "$builddir" ] ; then
       local multilibdir=$($CC -mmcu=$1 -print-multi-directory)
       # Use the same replacements like in mlib-gen.py::to_ident() and
@@ -52,10 +53,10 @@ set_libs ()
 	  || Err "\$builddir/avr/devices = $builddir/avr/devices: not found"
       local incl="-I../../include -I $builddir/include"
       local flags="-nostdlib -nodevicelib -nostartfiles"
-      local crt=$(find $builddir/avr/devices -name $crt -print | head -1)
       local m="$builddir/avr/lib/$multilibdir"
-      local libs="$m/libc.a $m/libm.a $(dirname $crt)/lib$1.a -lgcc"
-      LIBS="$incl $flags $crt $libs"
+      CRT=$(find $builddir/avr/devices -name $crt -print | head -1)
+      local libs="$m/libc.a $m/libm.a $(dirname $CRT)/lib$1.a -lgcc"
+      LIBS="$incl $flags -Wl,--start-group $libs -Wl,--end-group"
     fi
 }
 
@@ -64,6 +65,7 @@ fun ()
     local x=_$1_${id}_
     id=$(( 1 + $id ))
 
+    local sym=$1
     local e=
     case "$1" in
 	fmin* | fmax* | fabs* ) e=" -DEXACT" ;;
@@ -80,6 +82,14 @@ fun ()
 	shift
     done
     echo "AARGS_$x = $aargs" >> $margs
+
+    [ $sym = addf ] && sym=__addsf3
+    [ $sym = mulf ] && sym=__mulsf3
+    [ $sym = divf ] && sym=__divsf3
+    [ $sym = addl ] && sym=__adddf3
+    [ $sym = mull ] && sym=__muldf3
+    [ $sym = divl ] && sym=__divdf3
+    echo "SYMBL_$x = $sym" >> $margs
 }
 
 do_func_txt ()
@@ -106,10 +116,11 @@ do_func_txt ()
 	esac
     done 11<$1
 
-    set_libs $MCU
+    set_libs_crt $MCU
     echo "CC = ${CC-avr-gcc}" >> $margs
     echo "MCU = $MCU" >> $margs
     echo "BASE = $BASE" >> $margs
+    echo "CRT  = $CRT"  >> $margs
     echo "LIBS = $LIBS" >> $margs
     echo "TIMES = $TIMES" >> $margs
 
@@ -158,4 +169,4 @@ echo "== $out =="
 cat $out
 
 make clean
-rm -f $cargs $margs
+rm -f -- $cargs $margs

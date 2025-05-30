@@ -123,6 +123,7 @@ static const char* fmt (FF x)
 void print_result (const result_t *r, const args_t *a)
 {
     LOG_PFMT_STR (PSTR("  <tr><td> \\c %s"), fname ());
+    LOG_PFMT_U32 (PSTR(" <td align='right'> %u"), SIZE);
     LOG_PFMT_LDOUBLE (fmt (a->lo), a->lo);
     LOG_PFMT_LDOUBLE (fmt (a->hi), a->hi);
 #if NARGS == 2 || NARGS == 22

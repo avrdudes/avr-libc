@@ -10,6 +10,10 @@
 1is a IEEE double implementation hosted by libgcc since
 1<a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>.
 1
+1The code sizes include all dependencies with the exception of potential
+1prologue and epilogue routines
+1(\c __prologue_saves__, \c __epilogue_restores__).
+1
 1Notice that the values for relative error and the Worst Case Execution Time
 1Cycles<sub>max</sub> are only <em>lower bounds</em>.
 1The best achievable accuracy for IEEE double with its 52 fractional bits in
