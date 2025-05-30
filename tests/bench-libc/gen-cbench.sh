@@ -16,7 +16,7 @@ avrtest="${AVRTEST_HOME}/avrtest_log -q -no-log"
 
 echo "avrtest=$avrtest"
 
-# cycles := Code size.
+# cycles := Execution time.
 # stack  := Stack usage.
 fun_run ()
 {

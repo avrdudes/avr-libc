@@ -58,16 +58,21 @@ are present, and then only one code size is shown.
     <td align="right">102<br>2<br>875
     <td align="right">102<br>2<br>875
     <td align="right">106<br>3<br>880
-  <tr><td><tt>#ltoa (12345L, s, 10)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">138<br>2<br>1597
-    <td align="right">130<br>2<br>1593
-    <td align="right">130<br>2<br>1593
-    <td align="right">136<br>3<br>1598
-  <tr><td><tt>#lltoa (12345LL, s, 10)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">0<br>3<br>1447
-    <td align="right">0<br>3<br>1427
-    <td align="right">0<br>3<br>1427
-    <td align="right">0<br>4<br>1432
+  <tr><td><tt>#ltoa (12345678L, s, 10)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
+    <td align="right">138<br>2<br>2766
+    <td align="right">130<br>2<br>2762
+    <td align="right">130<br>2<br>2762
+    <td align="right">136<br>3<br>2767
+  <tr><td><tt>#lltoa (12345678LL, s, 10)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
+    <td align="right">206<br>3<br>2239
+    <td align="right">194<br>3<br>2209
+    <td align="right">194<br>3<br>2209
+    <td align="right">202<br>4<br>2214
+  <tr><td><tt>#ulltoa_base10 (12345678ULL, s)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
+    <td align="right">182<br>11<br>1908
+    <td align="right">172<br>11<br>1852
+    <td align="right">168<br>11<br>1458
+    <td align="right">168<br>12<br>1461
   <tr><td><tt>#malloc (1)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
     <td align="right">664<br>6<br>103
     <td align="right">598<br>6<br>98
