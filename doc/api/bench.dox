@@ -28,22 +28,25 @@
 
 /** \page benchmarks Benchmarks
 
+- \ref bench_libc "Benchmarks for libc functions"
+- \ref bench_libm "Benchmarks for IEEE single floating-point functions" from \ref avr_math "<math.h>"
+- \ref bench_libf7 "Benchmarks for IEEE double floating-point functions" from \ref avr_math "<math.h>"
+- \ref bench_fxlib "Benchmarks for fixed-point functions" from \ref avr_stdfix "<stdfix.h>"
+
 The results below can only give a rough estimate of the resources 
 necessary for using certain library functions. There is a number 
 of factors which can both increase or reduce the effort required:
 
-\li Expenses for preparation of operands and their stack are not 
+- Expenses for preparation of operands and their stack are not 
 considered.
 
-\li In the table, the size includes all additional functions (for
-example, function to multiply two integers) but they are only linked
-from the library.
+- In the table, the size includes all dependent functions.
     
-\li Expenses of time of performance of some functions essentially depend
+- Expenses of time of performance of some functions essentially depend
 on parameters of a call, for example, qsort() is recursive, and sprintf() 
 receives parameters in a stack.
 
-\li Different versions of the compiler can give a significant difference in
+- Different versions of the compiler can give a significant difference in
 code size and execution time. For example, the dtostre() function, compiled
 with avr-gcc 3.4.6, requires 930 bytes. After transition to avr-gcc 4.2.3,
 the size become 1088 bytes.
