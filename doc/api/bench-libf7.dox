@@ -18,6 +18,11 @@ The code sizes include all dependencies with the exception of potential
 prologue and epilogue routines
 (\c __prologue_saves__, \c __epilogue_restores__).
 
+The sizes of functions don't add up.
+For example, #sinl, #cosl, #asinl, #acosl and #sqrtl together occupy
+only 4744 bytes of code \e including the prologue and epilogue routines.
+With \c -mrelax the code size reduces further to around 4400 bytes.
+
 Notice that the values for relative error and the Worst Case Execution Time
 Cycles<sub>max</sub> are only <em>lower bounds</em>.
 The best achievable accuracy for IEEE double with its 52 fractional bits in

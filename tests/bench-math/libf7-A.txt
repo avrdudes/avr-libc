@@ -14,6 +14,11 @@
 1prologue and epilogue routines
 1(\c __prologue_saves__, \c __epilogue_restores__).
 1
+1The sizes of functions don't add up.
+1For example, #sinl, #cosl, #asinl, #acosl and #sqrtl together occupy
+1only 4744 bytes of code \e including the prologue and epilogue routines.
+1With \c -mrelax the code size reduces further to around 4400 bytes.
+1
 1Notice that the values for relative error and the Worst Case Execution Time
 1Cycles<sub>max</sub> are only <em>lower bounds</em>.
 1The best achievable accuracy for IEEE double with its 52 fractional bits in
