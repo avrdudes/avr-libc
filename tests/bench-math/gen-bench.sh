@@ -89,6 +89,8 @@ fun ()
     [ $sym = addl ] && sym=__adddf3
     [ $sym = mull ] && sym=__muldf3
     [ $sym = divl ] && sym=__divdf3
+    [ $sym = __builtin_powif ] && sym=__powisf2
+    [ $sym = __builtin_powil ] && sym=__powidf2
     echo "SYMBL_$x = $sym" >> $margs
 }
 

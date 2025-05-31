@@ -29,6 +29,7 @@ extern float addf (float, float) __asm("__addsf3");
 extern float subf (float, float) __asm("__subsf3");
 extern float mulf (float, float) __asm("__mulsf3");
 extern float divf (float, float) __asm("__divsf3");
+#define avrtest___builtin_powil avrtest_powil
 
 #if NARGS == 2 || NARGS == 22
 float get_delta (float x, float y, uint32_t *cyc)
@@ -57,7 +58,7 @@ float get_delta (float x, uint32_t *cyc)
     float z = FUNC (x, &y);
     *cyc = avrtest_cycles ();
     long double z0 = AFUNC (avrtest_ftol (x), &ly);
-#elif NARGS == 22 // ldexp...
+#elif NARGS == 22 // ldexp, __builtin_powi...
     int ex = (int) y;
     avrtest_cycles_call ();
     float z = FUNC (x, ex);
@@ -67,12 +68,14 @@ float get_delta (float x, uint32_t *cyc)
 #error NARGS=?
 #endif
 
-    float ulp = avrtest_ulpf (z, avrtest_ltof (z0));
+    float f0 = avrtest_ltof (z0);
+    float ulp = avrtest_ulpf (z, f0);
     if (avrtest_cmpf (ulp, 0) == 0)
         return 0;
-    long double d = avrtest_subl (avrtest_ftol (z), z0);
-    d = avrtest_divl (d, z0);
-    return avrtest_ltof (d);
+    float d = avrtest_subf (z, f0);
+    d = avrtest_divf (d, f0);
+
+    return d;
 }
 
 __attribute__((const))
@@ -89,6 +92,7 @@ static const char* fname (void)
         : !strcmp_P (s, PSTR("subf")) ? "&ndash;"
         : !strcmp_P (s, PSTR("mulf")) ? "*"
         : !strcmp_P (s, PSTR("divf")) ? "/"
+        : !strcmp_P (s, PSTR("__builtin_powif")) ? s
         : "#" STRY (FUNC);
 }
 

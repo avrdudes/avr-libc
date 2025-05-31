@@ -84,6 +84,7 @@ log<sub>10</sub>(2<sup>&ndash;53</sup> &asymp; 1.1&middot;10<sup>&ndash;16</sup>
   <tr><td> \c #fmodl <td align='right'> 2794 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 5170 <td align="right"> 5940 <td align="center"> -15.95
   <tr><td> \c #hypotl <td align='right'> 2302 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 5004 <td align="right"> 5164 <td align="center"> -15.66
   <tr><td> \c #ldexpl <td align='right'> 1252 <td> -1e+10 <td> 1e+10 <td> -10 <td> 10 <td align="right"> 739 <td align="right"> 757 <td align="center"> -15.95
-  <tr><td> \c #powl <td align='right'> 4078 <td> 0 <td> 1e+05 <td> -20 <td> 20 <td align="right"> 32419 <td align="right"> 34109 <td align="center"> -14.20
+  <tr><td> \c #powl <td align='right'> 4078 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 32398 <td align="right"> 34023 <td align="center"> -14.46
+  <tr><td> \c __builtin_powil <td align='right'> 2220 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 3396 <td align="right"> 6173 <td align="center"> -15.12
 </table>
 */

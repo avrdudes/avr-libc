@@ -33,6 +33,7 @@ static NI FF addl (FF x, FF y) { return x + y; }
 static NI FF subl (FF x, FF y) { return x - y; }
 static NI FF mull (FF x, FF y) { return x * y; }
 static NI FF divl (FF x, FF y) { return x / y; }
+#define avrtest___builtin_powil avrtest_powil
 
 void show_delta (FF x, FF y, FF z, FF z0, FF d, FF d10)
 {
@@ -108,6 +109,7 @@ static const char* fname (void)
         : !strcmp_P (s, PSTR("subl")) ? "&ndash;"
         : !strcmp_P (s, PSTR("mull")) ? "*"
         : !strcmp_P (s, PSTR("divl")) ? "/"
+        : !strcmp_P (s, PSTR("__builtin_powil")) ? s
         : "#" STRY (FUNC);
 }
 
