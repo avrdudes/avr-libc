@@ -136,7 +136,7 @@ ENDFUNC
 
 ;; A [7/0] MiniMax for log2(1+x)/x over [0, 0.5]
 ;; with an appended 0.0 coefficient to yield log2(1+x).
-.L_tlow:
+OBJECT .L_tlow
     .byte   8
     .byte        0x9c,0x1a,0x22,0xbd    ; -0.0395761585
     .byte   0xa0,0x92,0x20,0x00,0x3e    ;  0.1251242551
@@ -147,10 +147,11 @@ ENDFUNC
     .byte   0x80,0x2a,0xaa,0x38,0xbf    ; -0.7213465273
     .byte   0x22,0x3b,0xaa,0xb8,0x3f    ;  1.4426950371
     .byte   0x00,0x00,0x00,0x00,0x00    ;  0.0000000000
+ENDOBJ .L_tlow
 
 ;; A [7/0] MiniMax for log2(1+x)/x over [-0.25, 0]
 ;; with an appended 0.0 coefficient to yield log2(1+x).
-.L_thigh:
+OBJECT .L_thigh
     .byte   8
     .byte        0x3c,0x5b,0xf7,0xbe    ; -0.4831179295
     .byte   0xda,0xd7,0xaa,0x71,0x3d    ;  0.0590008194
@@ -161,6 +162,6 @@ ENDFUNC
     .byte   0xfa,0x3c,0xaa,0x38,0xbf    ; -0.7213476285
     .byte   0x28,0x3b,0xaa,0xb8,0x3f    ;  1.4426950407
     .byte   0x00,0x00,0x00,0x00,0x00    ;  0.0000000000
-    .end
+ENDOBJ .L_thigh
 
 #endif /* AVR_TINY */

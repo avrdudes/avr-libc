@@ -118,8 +118,7 @@ ENDFUNC
 
 PGMX_SECTION(fplib.arccos)
 ;;; acosq1m(x) = acos(1-x) / sqrt(x) for 0 <= x <= 1/2.
-.type .L_acosq1m, "object"
-.L_acosq1m:
+OBJECT .L_acosq1m
         .byte   5                               ;  [5/0] MiniMax
         .byte        0xd6,0xf8,0xf6,0x3a        ;  0.0018842470
         .byte   0xec,0x86,0x33,0x0a,0x3b        ;  0.0021087841
@@ -127,11 +126,10 @@ PGMX_SECTION(fplib.arccos)
         .byte   0x52,0xe0,0x0f,0xd9,0x3c        ;  0.0264968282
         .byte   0x18,0x64,0x5c,0xf1,0x3d        ;  0.1178520031
         .byte   0x26,0xf3,0x04,0xb5,0x3f        ;  1.4142135561
-.size .L_acosq1m, . - .L_acosq1m
+ENDOBJ .L_acosq1m
 
 ;;; asinq(x) = asin(sqrt(x)) / sqrt(x) for 0 <= x <= (1/2)^2.
-.type .L_asinq, "object"
-.L_asinq:
+OBJECT .L_asinq
         .byte   5                               ;  [5/0] MiniMax
         .byte        0xb6,0xa2,0x2e,0x3d        ;  0.0426356426
         .byte   0xfa,0x34,0x72,0xc3,0x3c        ;  0.0238581691
@@ -139,6 +137,6 @@ PGMX_SECTION(fplib.arccos)
         .byte   0x10,0x6c,0x7c,0x99,0x3d        ;  0.0749443476
         .byte   0x82,0xfd,0xaa,0x2a,0x3e        ;  0.1666679011
         .byte   0xee,0xff,0xff,0x7f,0x3f        ;  0.9999999956
-.size .L_asinq, . - .L_asinq
-        .end
+ENDOBJ .L_asinq
+
 #endif /* __AVR_TINY__ */

@@ -56,6 +56,8 @@
    ENTRY
    ENTRY_FLOAT
    ENDFUNC
+   OBJECT
+   ENDOBJ
 
    REGNO                      ; Helper for the X_ macros.
    X_movw
@@ -181,6 +183,7 @@
 .endm
 #define	FUNCTION  FUNCTION	/* for CPP conditional expressions	*/
 
+
 /* Macro ENTRY is intended to start a function with entry point at the
    head of body. It is not needed to use a FUNCTION macro in this case.
    It is possible to place additional ENTRY-s below.  */
@@ -220,6 +223,23 @@ _U(\lname):
 .macro	ENDFUNC
 .L__END:
 .endm
+
+
+.macro OBJECT arg1 arg2
+    .ifc \arg2,
+        .type \arg1, "object"
+        \arg1:
+    .else
+        \arg1 \arg2
+        .type \arg2, "object"
+        \arg2:
+    .endif
+.endm
+
+.macro ENDOBJ name
+    .size \name, . - \name
+.endm
+
 
 /* Macro REGNO set the symbol name 'name' to integer which is a 'reg'
    number (0..31). If 'reg' is not a valid register, compilation error.

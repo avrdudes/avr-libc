@@ -514,8 +514,7 @@ ENDFUNC
 */
 PGMX_SECTION(stdlib.ftoa_engine)
 
-    .type .L_powr10, "object"
-.L_powr10:
+OBJECT .L_powr10
 	.byte	0, 64, 122, 16, 243, 90	; 100000000000000
 	.byte	0, 160, 114, 78, 24, 9	; 10000000000000
 	.byte	0, 16, 165, 212, 232, 0	; 1000000000000
@@ -531,10 +530,9 @@ PGMX_SECTION(stdlib.ftoa_engine)
 	.byte	100, 0, 0, 0, 0, 0	; 100
 	.byte	10, 0, 0, 0, 0, 0	; 10
 	.byte	1, 0, 0, 0, 0, 0	; 1
-    .size .L_powr10, . - .L_powr10
+ENDOBJ .L_powr10
 
-    .type	.L_base10, "object"
-.L_base10:
+OBJECT .L_base10
 	.byte	44, 118, 216, 136, -36	; 2295887404
 	.byte	103, 79, 8, 35, -33	; 587747175
 	.byte	193, 223, 174, 89, -31	; 1504632769
@@ -567,9 +565,8 @@ PGMX_SECTION(stdlib.ftoa_engine)
 	.byte	50, 132, 114, 94, 34	; 1584563250
 	.byte	129, 0, 201, 241, 36	; 4056481921
 	.byte	236, 161, 229, 61, 39	; 1038459372
-    .size .L_base10, . - .L_base10
+ENDOBJ .L_base10
 
-	.end
 #endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */
