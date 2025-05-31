@@ -31,7 +31,7 @@ size = size-$*.out
 
 text-%.out: $(PRG).c cargs.txt
 	@echo "== $* =="
-	echo | $(CC) -xc - -xnone -o $(self) $(args) -Wl,-u,$(SYMBL_$*) $(nosym) $(LIBS)
+	echo | $(CC) -xc - -xnone -o $(self) $(args) -Wl,-u,$(SYMBL_$*) $(nosym) $(LIBS) -nostartfiles
 	avr-size $(self) | grep $(self) | awk '{ print "#define SIZE " $$1 }' \
 		> $(size)
 	$(CC) $< -o $(elf) $(atest) $(args) $(args2) -include $(size)
