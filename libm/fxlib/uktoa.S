@@ -145,7 +145,7 @@ ENTRY uktoa.sign
 
     ldi     NonZero, '0'
 
-    ;; A[] -= 10000  as often as poassible.
+    ;; A[] -= 10000  as often as possible.
     ;; Digit will hold the net number of subtractions (plus '0').
     ldi     Digit, '0' - 1
 .Loop_sub_E4:

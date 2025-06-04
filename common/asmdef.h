@@ -1,5 +1,6 @@
 /* Copyright (c) 2002, 2005, 2006, 2007 Marek Michalkiewicz
    Copyright (c) 2006-2007 Dmitry Xmelkov
+   Copyright (c) 2025 Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -225,6 +226,10 @@ _U(\lname):
 .endm
 
 
+/* Defines an object and sets .size, .type and the label.  Use like:
+   OBJECT [.global] my_data
+   ...
+   ENDOBJ my_data  */
 .macro OBJECT arg1 arg2
     .ifc \arg2,
         .type \arg1, "object"
@@ -438,8 +443,7 @@ _U(\lname):
    r0, r1 (__zero_reg__ - assumed to always contain 0), r30, r31.
 
    LPM_R0_ZPLUS_FINI is used atfer all reads to restore RAMPZ
-   in the case a restoration is required.
- */
+   in the case a restoration is required.  */
 
 .macro	LPM_R0_ZPLUS_INIT hhi
 #if __AVR_ENHANCED__
