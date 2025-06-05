@@ -10,10 +10,10 @@
 1- \c V+ denotes the smallest value that is larger than \c V for the
 1  considered fixed-point type.  Similarly, \c V- denotes the largest value
 1  that is smaller than \c V for the considered type.
-1- The code sizes in clude all dependencies.
+1- The code sizes include all dependencies.
 1
-1Notice that the values for absolute error and the Worst Case Execution Time
-1Cycles<sub>max</sub> are only <em>lower bounds</em>.
+1Notice that the values for absolute error Err<sub>max</sub>, and the Worst
+1Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
 1
 1<table>
 1<caption>Fixed-Point Benchmarks for ATmega128 (avr51, with MUL)</caption>
