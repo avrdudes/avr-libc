@@ -290,6 +290,10 @@ char* uhrtoa (unsigned short fract x, char *buf, unsigned char mode);
 
 The following table helps with providing enough memory in \a buf.
 
+Notice that the required size of \a buf is independent of #FXTOA_NTZ.
+This is the case since with #FXTOA_NTZ the required buffer size may
+be larger that the size of the returned string.
+
 <table>
   <caption>Maximum Number of Bytes written to buf</caption>
   <tr>
