@@ -68,7 +68,8 @@ TABLE_START = r"""
   HTML version of the documentation.
 \endlatexonly
 \htmlonly
-  Vector Names defined with <tt>#include &lt;avr/io.h&gt;</tt>
+  Vector Names defined with <tt>#include &lt;avr/io.h&gt;</tt><br/>
+  Append <tt>_num</tt> to get the vector number
 \endhtmlonly
   </caption>
   <tr>
@@ -119,7 +120,8 @@ TABLE2_START = r"""
 \endlatexonly
 \htmlonly
   Vector Names defined with <tt>#include &lt;avr/io.h&gt;</tt><br/>
-  Append <tt>_vect</tt> to get the full vector name
+  Append <tt>_vect</tt> to get the full vector name<br/>
+  Append <tt>_vect_num</tt> to get the vector number
 \endhtmlonly
   </caption>
   <tr>

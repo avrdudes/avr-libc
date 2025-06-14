@@ -50,7 +50,8 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.<br>
   HTML version of the documentation.
 \endlatexonly
 \htmlonly
-  Vector Names defined with <tt>#include &lt;avr/io.h&gt;</tt>
+  Vector Names defined with <tt>#include &lt;avr/io.h&gt;</tt><br/>
+  Append <tt>_num</tt> to get the vector number
 \endhtmlonly
   </caption>
   <tr>
@@ -3101,7 +3102,8 @@ Go up to the \ref avr_signames "Vector Name &rarr; MCUs" table.<br>
 \endlatexonly
 \htmlonly
   Vector Names defined with <tt>#include &lt;avr/io.h&gt;</tt><br/>
-  Append <tt>_vect</tt> to get the full vector name
+  Append <tt>_vect</tt> to get the full vector name<br/>
+  Append <tt>_vect_num</tt> to get the vector number
 \endhtmlonly
   </caption>
   <tr>

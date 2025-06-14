@@ -149,7 +149,7 @@
     upon servicing the IRQ.)
 
     \c vector_num must be a positive interrupt vector number that is
-    valid for the particular MCU type. For available vector number, see
+    valid for the particular MCU type. For available vector numbers, see
     for example the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.
 
     Contrary to the #ISR macro, #ISR_N does not provide a declarator for
