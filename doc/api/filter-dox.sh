@@ -6,6 +6,7 @@
 
 sed -e 's:__ATTR_ALWAYS_INLINE__:inline:g' \
     -e 's:__ATTR_CONST__::g' \
+    -e 's:__ATTR_GNU_INLINE__::g' \
     -e 's:__ATTR_PURE__::g' \
     -e 's:__ATTR_NORETURN__::g' \
     -e 's:__ATTR_MALLOC__::g' \

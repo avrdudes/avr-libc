@@ -1,4 +1,5 @@
 /* Copyright (c) 2002,2007-2009 Michael Stumpf
+   Copyright (c) 2023-2025  Georg-Johann Lay
 
    Portions of documentation Copyright (c) 1990 - 1994
    The Regents of the University of California.
@@ -176,19 +177,22 @@ __ATTR_CONST__ extern double tan (double x);
 __ATTR_CONST__ extern long double tanl (long double x);
 
 /** The fabsf() function computes the absolute value of a floating-point number \a x. */
-static __ATTR_ALWAYS_INLINE__ float fabsf (float __x)
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+float fabsf (float __x)
 {
     return __builtin_fabsf (__x);
 }
 
 /** The fabs() function computes the absolute value of a floating-point number \a x. */
-static __ATTR_ALWAYS_INLINE__ double fabs (double __x)
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+double fabs (double __x)
 {
     return __builtin_fabs (__x);
 }
 
 /** The fabsl() function computes the absolute value of a floating-point number \a x. */
-static __ATTR_ALWAYS_INLINE__ long double fabsl (long double __x)
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+long double fabsl (long double __x)
 {
     return __builtin_fabsl (__x);
 }
