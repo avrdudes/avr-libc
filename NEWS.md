@@ -115,9 +115,6 @@
   has been added to
   [<math.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__math) ([#1032][1032]).
 
-- `INFINITY` from `math.h` has been turned from `double` to
-  `float` ([#1036][1036]).
-
 - The error of `asinf` has been improved from 8 ULPs to 3 ULPs.
 
 - The error of `logf` has been improved from 5 ULPs to 3 ULPs.
@@ -187,6 +184,9 @@
   `avr-libc-logo-large.png` from `doc/api/` ([#1023][1023]).
 
 - Fixed a typo in the parameter name of `nanf` ([#1033][1033]).
+
+- `INFINITY` from `math.h` has been turned from `double` to
+  `float` ([#1036][1036]).
 
 ## Pull Requests
 
