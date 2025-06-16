@@ -36,6 +36,7 @@
 \htmlonly
 
 <h2>All Globals</h2>
+<tt>
 <a href="globals.html">_</a>
 <a href="globals_a.html">A</a>
 <a href="globals_b.html">B</a>
@@ -46,7 +47,7 @@
 <a href="globals_g.html">G</a>
 <a href="globals_h.html">H</a>
 <a href="globals_i.html">I</a>
-<!-- a href="globals_j.html">J</a -->
+J<!-- a href="globals_j.html">J</a -->
 <a href="globals_k.html">K</a>
 <a href="globals_l.html">L</a>
 <a href="globals_m.html">M</a>
@@ -60,9 +61,10 @@
 <a href="globals_u.html">U</a>
 <a href="globals_v.html">V</a>
 <a href="globals_w.html">W</a>
-<!-- a href="globals_x.html">X</a -->
-<!-- a href="globals_y.html">Y</a -->
-<!-- a href="globals_z.html">Z</a -->
+X<!-- a href="globals_x.html">X</a -->
+Y<!-- a href="globals_y.html">Y</a -->
+Z<!-- a href="globals_z.html">Z</a -->
+</tt>
 
 <a href="globals_enum.html"><h2>Enums</h2></a>
 
@@ -71,7 +73,7 @@
 <a href="globals_vars.html"><h2>Variables</h2></a>
 
 <h2>Functions</h2>
-
+<tt>
 <a href="globals_func.html">_</a>
 <a href="globals_func_a.html">A</a>
 <a href="globals_func_b.html">B</a>
@@ -82,12 +84,12 @@
 <a href="globals_func_g.html">G</a>
 <a href="globals_func_h.html">H</a>
 <a href="globals_func_i.html">I</a>
-<!-- a href="globals_func_j.html">J</a -->
+J<!-- a href="globals_func_j.html">J</a -->
 <a href="globals_func_k.html">K</a>
 <a href="globals_func_l.html">L</a>
 <a href="globals_func_m.html">M</a>
-<!-- a href="globals_func_n.html">N</a -->
-<!-- a href="globals_func_o.html">O</a -->
+N<!-- a href="globals_func_n.html">N</a -->
+O<!-- a href="globals_func_o.html">O</a -->
 <a href="globals_func_p.html">P</a>
 <a href="globals_func_q.html">Q</a>
 <a href="globals_func_r.html">R</a>
@@ -96,9 +98,10 @@
 <a href="globals_func_u.html">U</a>
 <a href="globals_func_v.html">V</a>
 <a href="globals_func_w.html">W</a>
-<!-- a href="globals_func_x.html">X</a -->
-<!-- a href="globals_func_y.html">Y</a -->
-<!-- a href="globals_func_z.html">Z</a -->
+X<!-- a href="globals_func_x.html">X</a -->
+Y<!-- a href="globals_func_y.html">Y</a -->
+Z<!-- a href="globals_func_z.html">Z</a -->
+</tt>
 
 \endhtmlonly
 
