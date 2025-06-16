@@ -188,6 +188,8 @@
 - `INFINITY` from `math.h` has been turned from `double` to
   `float` ([#1036][1036]).
 
+- `XRAMEND` for ATmega128A is now defined to 0xffff ([#629][629]).
+
 ## Pull Requests
 
 - Improve runtime performance of `free()` ([#991][991]).
@@ -197,6 +199,7 @@
 - New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
 
 [496]: https://github.com/avrdudes/avr-libc/issues/496
+[629]: https://github.com/avrdudes/avr-libc/issues/629
 [765]: https://github.com/avrdudes/avr-libc/issues/765
 [876]: https://github.com/avrdudes/avr-libc/issues/876
 [936]: https://github.com/avrdudes/avr-libc/issues/936

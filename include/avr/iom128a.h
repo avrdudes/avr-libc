@@ -900,7 +900,7 @@
 #define E2SIZE      4096
 #define E2PAGESIZE  8
 #define E2END       0x0FFF
-#define XRAMEND      RAMEND
+#define XRAMEND     0xFFFF
 
 
 /* Fuses */
