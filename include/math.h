@@ -141,8 +141,8 @@ extern "C" {
     \p __tag is a string constant like \c "" or \c "123". */
 #define nanl(__tag)	__builtin_nanl(__tag)
 
-/** \c double infinity constant.	*/
-#define INFINITY __builtin_inf()
+/** \c float infinity constant.	*/
+#define INFINITY __builtin_inff()
 
 /** \c float infinity constant.	*/
 #define HUGE_VALF __builtin_huge_valf()

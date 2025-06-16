@@ -115,6 +115,9 @@
   has been added to
   [<math.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__math) ([#1032][1032]).
 
+- `INFINITY` from `math.h` has been turned from `double` to
+  `float` ([#1036][1036]).
+
 - The error of `asinf` has been improved from 8 ULPs to 3 ULPs.
 
 - The error of `logf` has been improved from 5 ULPs to 3 ULPs.
@@ -218,3 +221,4 @@
 [1024]: https://github.com/avrdudes/avr-libc/issues/1024
 [1032]: https://github.com/avrdudes/avr-libc/issues/1032
 [1033]: https://github.com/avrdudes/avr-libc/issues/1033
+[1036]: https://github.com/avrdudes/avr-libc/issues/1036
