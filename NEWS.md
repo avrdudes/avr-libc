@@ -153,6 +153,11 @@
   A similar test has been added for [PR31177](https://sourceware.org/PR31177)
   which is a similar feature for the `.text` region.
 
+- Due to several problem reports concerning the I/O headers for ATxmega64A1U
+  and ATxmega128A1U
+  ([#391][391], [#635][635], [#643][643], [#663][663], [#875][875]),
+  these headers have been updated to a more recent revision.
+
 - On AVRrc Reduced Tiny, add 0x4000 to the symbol address when
   `pgm_get_far_address()` takes the address of an object in `PROGMEM_FAR`.
   This works similar to how the compiler implements the &-operator
@@ -198,9 +203,14 @@
 
 - New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
 
+[391]: https://github.com/avrdudes/avr-libc/issues/391
 [496]: https://github.com/avrdudes/avr-libc/issues/496
 [629]: https://github.com/avrdudes/avr-libc/issues/629
+[635]: https://github.com/avrdudes/avr-libc/issues/635
+[643]: https://github.com/avrdudes/avr-libc/issues/643
+[663]: https://github.com/avrdudes/avr-libc/issues/663
 [765]: https://github.com/avrdudes/avr-libc/issues/765
+[875]: https://github.com/avrdudes/avr-libc/issues/875
 [876]: https://github.com/avrdudes/avr-libc/issues/876
 [936]: https://github.com/avrdudes/avr-libc/issues/936
 [970]: https://github.com/avrdudes/avr-libc/issues/970
