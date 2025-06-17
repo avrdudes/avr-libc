@@ -155,7 +155,7 @@
 
 - Due to several problem reports concerning the I/O headers for ATxmega64A1U
   and ATxmega128A1U
-  ([#391][391], [#635][635], [#643][643], [#663][663], [#875][875]),
+  ([#391][391], [#635][635], [#643][643], [#663][663], [#875][875], [#959][959], [#960][960], [#961][961]),
   these headers have been updated to a more recent revision.
 
 - On AVRrc Reduced Tiny, add 0x4000 to the symbol address when
@@ -213,6 +213,9 @@
 [875]: https://github.com/avrdudes/avr-libc/issues/875
 [876]: https://github.com/avrdudes/avr-libc/issues/876
 [936]: https://github.com/avrdudes/avr-libc/issues/936
+[959]: https://github.com/avrdudes/avr-libc/issues/959
+[960]: https://github.com/avrdudes/avr-libc/issues/960
+[961]: https://github.com/avrdudes/avr-libc/issues/961
 [970]: https://github.com/avrdudes/avr-libc/issues/970
 [971]: https://github.com/avrdudes/avr-libc/issues/971
 [973]: https://github.com/avrdudes/avr-libc/issues/973
