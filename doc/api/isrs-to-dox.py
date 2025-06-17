@@ -283,6 +283,9 @@ class Isr (object):
         self.text = canonicalize_comment (text)
         self.text = self.fixup()
 
+    def __lt__ (self, other):
+        return self.isr < other.isr
+
     def fixup (self):
         """ Some descriptions are obviously wrong.  Reconstruct them. """
         # 0 Arguments
@@ -343,7 +346,7 @@ pat_mcu = re.compile(r"::(.*)::")
 
 #############################################################################
 # Step 1: Read stdin and build Isr objects from the pre-processed avr/io*.h
-# Outcome is to set  mcu_to_isrs  which maps MCU names to array of IRQs.
+# Outcome is to set  mcu_to_isrs  which maps MCU names to a list of IRQs.
 
 # Map mcu to array of Isr's.
 mcu_to_isrs = {}
@@ -358,7 +361,7 @@ for line in sys.stdin.readlines():
     m = re.match (pat_mcu, line)
     if m:
         mcu = m.group(1)
-        mcu_to_isrs[mcu] = []
+        mcu_to_isrs[mcu] = list()
         cmt = ""
         continue
 
@@ -394,10 +397,7 @@ for line in sys.stdin.readlines():
         isr_names |= set([isr.text])
 
         isrs = mcu_to_isrs[mcu]
-        num = int(isr.num)
-        while len(isrs) < 1 + num:
-            isrs.append (None)
-        mcu_to_isrs[mcu][num] = isr
+        mcu_to_isrs[mcu].append (isr)
 
         continue
 
@@ -499,11 +499,7 @@ def sorted_vecs (vs):
 key_to_mcus = {}
 
 for mcu in mcu_to_isrs:
-    for isr in mcu_to_isrs[mcu]:
-        if not isr:
-            # Some ISRs are void, e.g. in avr/ioa5272.h (ATA5272)
-            continue
-
+    for isr in sorted (mcu_to_isrs[mcu]):
         key = isr.isr + ":" + isr.text
 
         if not key in key_to_mcus:
@@ -548,7 +544,7 @@ vecs_to_mcus = {}
 
 for mcu in mcu_to_isrs.keys():
     vecs = set()
-    for vec in mcu_to_isrs[mcu]:
+    for vec in sorted (mcu_to_isrs[mcu]):
         if vec:
             #print (vec.isr)
             vecs |= set ([vec.isr])
