@@ -365,13 +365,6 @@ compile-time.
 </dd>
 <dt>USB AVR Devices:</dt>
 <dd>
-  AT76C711 \ref supp_dev_footnote_three "[3]",
-  AT90USB82,
-  AT90USB162,
-  AT90USB646,
-  AT90USB647,
-  AT90USB1286,
-  AT90USB1287,
   ATmega8U2,
   ATmega16U2,
   ATmega16U4,
@@ -379,7 +372,15 @@ compile-time.
   ATmega32U4,
   ATmega32U6,
   AT43USB320,
-  AT43USB355
+  AT43USB355,
+  AT76C711 \ref supp_dev_footnote_three "[3]",
+  AT90SCR100,
+  AT90USB82,
+  AT90USB162,
+  AT90USB646,
+  AT90USB647,
+  AT90USB1286,
+  AT90USB1287
 </dd>
 <dt>XMEGA Devices:</dt>
 <dd>
@@ -518,7 +519,6 @@ compile-time.
 <dd>
   AT94K \ref supp_dev_footnote_two "[2]",
   AT86RF401,
-  AT90SCR100,
   M3000 \ref supp_dev_footnote_four "[4]"
 </dd>
 <dt>Classic AVR Devices:</dt>
