@@ -56,6 +56,9 @@ avr64da64 avr64db28 avr64db32 avr64db48 avr64db64 avr64dd14 avr64dd20 \
 avr64dd28 avr64dd32 avr128da28 avr128da32 avr128da48 avr128da64 avr128db28 \
 avr128db32 avr128db48 avr128db64 avr16ea28 avr16ea32 avr16ea48 avr16eb14 \
 avr16eb20 avr16eb28 avr16eb32 avr32ea28 avr32ea32 avr32ea48 avr64ea28 avr64ea32 avr64ea48 \
+avr32da28s avr32da32s avr32da48s \
+avr64da28s avr64da32s avr64da48s avr64da64s \
+avr128da28s avr128da32s avr128da48s avr128da64s \
 avr16du14 avr16du20 avr16du28 avr16du32 \
 avr32du14 avr32du20 avr32du28 avr32du32 avr64du28 avr64du32 \
 avr32sd20 avr32sd28 avr32sd32 \
