@@ -93,7 +93,7 @@
 #include <avr/sfr_defs.h>
 
 #if defined(BAUD)
-#if !defined(__BITS_DEVINFO_H_)
+#if !defined (__CONFIGURING_AVR_LIBC__)
 #include <bits/devinfo.h>
 #endif
 #if defined (__AVR_IO_H_USES_BAUD__)
@@ -724,18 +724,8 @@
 
 #include <avr/common.h>
 
-/* There are configure tests that use avr/io.h which includes avr/version.h,
-   but avr/version.h doesn't necessarily exist at that time since that header
-   is generated only during build from version.h.in.  Using __has_include
-   works for recent GCC versions at least.  */
-#if defined __has_include
-#if __has_include (<avr/version.h>)
-#include <avr/version.h>
-#endif /* Has <avr/version.h> */
-#else
-/* When the following include fails, then some configure tests will report
-   wrong results (false instead of true in some cases).  See the places where
-   configure.ac is using #include <avr/io.h>.  */
+/* version.h may not be generated yet when configure is running.  */
+#if !defined (__CONFIGURING_AVR_LIBC__)
 #include <avr/version.h>
 #endif
 

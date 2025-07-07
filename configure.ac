@@ -587,6 +587,7 @@ AC_DEFUN(
       AC_MSG_CHECKING(compact vector table support for $1)
       AC_COMPILE_IFELSE(
         [AC_LANG_SOURCE([[
+	  #define __CONFIGURING_AVR_LIBC__
 	  #include <avr/io.h>
 	  #ifndef CPUINT_CVT_bm
 	  int a[-1];
@@ -614,12 +615,12 @@ AC_DEFUN(
       old_CFLAGS=${CFLAGS}
       CFLAGS="-mmcu=$1 -I${srcdir}/include -Werror"
       AC_MSG_CHECKING([if BAUD is reserved for $1])
-      dnl #define __BITS_DEVINFO_H_ so then <avr/io.h>'s
-      dnl #include <bits/devinfo.h> is void.
+      dnl #define __CONFIGURING_AVR_LIBC__ so that avr/io.h
+      dnl doesn't #include <bits/devinfo.h>.
       AC_COMPILE_IFELSE(
         [AC_LANG_SOURCE([[
           #define BAUD 123
-	  #define __BITS_DEVINFO_H_
+	  #define __CONFIGURING_AVR_LIBC__
 	  #include <avr/io.h>
 	  int a[BAUD == 123 ? 1 : -1];
 	  ]],[])],
