@@ -724,7 +724,20 @@
 
 #include <avr/common.h>
 
+/* There are configure tests that use avr/io.h which includes avr/version.h,
+   but avr/version.h doesn't necessarily exist at that time since that header
+   is generated only during build from version.h.in.  Using __has_include
+   works for recent GCC versions at least.  */
+#if defined __has_include
+#if __has_include (<avr/version.h>)
 #include <avr/version.h>
+#endif /* Has <avr/version.h> */
+#else
+/* When the following include fails, then some configure tests will report
+   wrong results (false instead of true in some cases).  See the places where
+   configure.ac is using #include <avr/io.h>.  */
+#include <avr/version.h>
+#endif
 
 #if __AVR_ARCH__ >= 100
 #  include <avr/xmega.h>
