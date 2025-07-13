@@ -204,6 +204,10 @@
 
 ## Other Changes
 
+- The missing sources of the demo projects have been added to the
+  HTML online documentations for AVR-LibC documentations that are
+  hosted on GitHub, which is the case since AVR-LibC v1.8.1 ([#1021][1021]).
+
 - New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
 
 [391]: https://github.com/avrdudes/avr-libc/issues/391
@@ -236,6 +240,7 @@
 [1017]: https://github.com/avrdudes/avr-libc/issues/1017
 [1018]: https://github.com/avrdudes/avr-libc/issues/1018
 [1019]: https://github.com/avrdudes/avr-libc/issues/1019
+[1021]: https://github.com/avrdudes/avr-libc/issues/1021
 [1023]: https://github.com/avrdudes/avr-libc/issues/1023
 [1024]: https://github.com/avrdudes/avr-libc/issues/1024
 [1032]: https://github.com/avrdudes/avr-libc/issues/1032
