@@ -46,6 +46,10 @@ TIM0_OVF_vect:
 ;;; one 16-bit word to store our rising edge's timestamp
 .lcomm	starttime.0, 2
 
+;;; Pull in startup code from libgcc that clears .bss so that
+;;; starttime.0 is initialized to 0.
+.global __do_clear_bss
+
 .extern	pwm_incoming
 .extern	intbits
 
