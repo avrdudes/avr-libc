@@ -39,4 +39,6 @@ doc/api/malloc-x1.png
 doc/api/malloc-std.png
 doc/api/malloc-x2.png
 
+!docs/examples/*/Makefile
+
 __pycache__
