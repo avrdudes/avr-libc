@@ -420,7 +420,8 @@ can be found in the
   <tr><td>\c n</td><td>Integer constant</td><td></td></tr>
   <tr><td>\c i</td><td>Immediate value known at link-time, like the
     address of a variable in static storage</td><td></td></tr>
-  <tr><td>\c EF</td><td>Floating-point constant</td><td></td></tr>
+  <tr><td>\c E</td><td>32-bit floating-point constant</td><td></td></tr>
+  <tr><td>\c F</td><td>64-bit floating-point constant</td><td></td></tr>
   <tr><td>\c Ynn</td><td>Fixed-point or integer constant</td><td></td></tr>
   <tr>
     <th>Constraint
