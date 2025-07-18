@@ -1318,7 +1318,7 @@ TIFR = _BV(TOV0);
 Some devices support a Compact Vector Table:
 
 - Devices from the 0-series, 1-series, 2-series
-- AVR-Dx and AVR-Ex devices
+- AVR-Dx, AVR-Ex and AVR-SD devices
 
 A CVT consists of only four vectors: 0=Reset, 1=NMI, 2=Prio1 IRQ, 3=Prio0 IRQs.
 The easiest way is to link and compile with
