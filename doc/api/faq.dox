@@ -1355,13 +1355,34 @@ ATtiny202.
   with <tt>$(avr-gcc -mmcu=<i>mcu</i> -print-multi-directory)</tt> like
   <tt>avrxmega3/short-calls</tt> for <tt>-mmcu=attiny202</tt>.
 
-When you are using AVR-LibC older than v2.3, then you will have to build
+<dl>
+<dt>Building <tt>crt<i>mcu</i>-cvt.o</tt></dt>
+<dd>When you are using AVR-LibC older than v2.3, then you can build
 <tt>crt<i>mcu</i>-cvt.o</tt> yourself from the current
 <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
    ><tt>gcrt1.S</tt></a>
 source with <tt>-D USE_COMPACT_VECTOR_TABLE</tt>, and you have to activate
-the CVT by hand (or you can implement <tt>__do_cvt_init</tt> as, say,
+the CVT by hand (or you can implement <tt>__init_cvt</tt> as, say,
 a static constructor or as a naked function in section <tt>.init3</tt>).
+</dd>
+<dt>Downloading <tt>crt<i>mcu</i>-cvt.o</tt></dt>
+<dd>An alternative to building <tt>crt<i>mcu</i>-cvt.o</tt> yourself is to
+download a pre-built toolchain like avr-gcc-15.1 from the
+<a href="https://sourceforge.net/projects/winavr/files/avr-gcc"
+   >WinAVR repo</a>.
+Notice that you can use that tarball on any operating system since you are
+only going to use target-specific files.  Unpack the downloaded archive as
+explained there to some folder <tt><i>prefix</i></tt> on your machine.
+
+Then link with
+<tt>-nostartfiles <i>path</i>/crt<i>mcu</i>-cvt.o -L <i>path</i></tt>
+where <tt><i>path</i></tt> is like above.
+The &quot;-L <tt><i>path</i></tt>&quot; is needed so that
+<tt>lib<i>mcu</i>.a</tt> from the downloaded toolchain is used.
+It contains parts of the startup code like <tt>__init_cvt</tt>
+and <tt>__call_main</tt>.
+</dd>
+</dl>
 
 <small>Back to \ref faq_index.</small>
 
