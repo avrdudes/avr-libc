@@ -40,6 +40,7 @@
   - \ref faq_spman
   - \ref faq_intbits
   - \ref faq_cvt
+  - \ref faq_local_isr
 
 - <b>C/C++</b>
   - \ref faq_cplusplus
@@ -1383,6 +1384,37 @@ It contains parts of the startup code like <tt>__init_cvt</tt>
 and <tt>__call_main</tt>.
 </dd>
 </dl>
+
+<small>Back to \ref faq_index.</small>
+
+\section faq_local_isr How to use a local (static, namespace) function as ISR?
+
+In order to use a non-global function as an ISR. there is #ISR_N from
+<tt>avr/interrupts.h</tt>:
+
+\code
+#include <avr/interrupt.h>
+
+ISR_N (INT0_vect_num)
+static void int0_isr ()
+{
+    // Code
+}
+
+namespace
+{
+    ISR_N (ADC_vect_num)
+    void adc0_isr ()
+    {
+        // Code
+    }
+};
+\endcode
+
+#ISR_N was added in AVR-LibC v2.3.  It uses the
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html#index-signal_0028num_0029-function-attribute_002c-AVR"
+   ><tt>signal(N)</tt></a> function attribute added in
+<a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>.
 
 <small>Back to \ref faq_index.</small>
 
