@@ -92,7 +92,7 @@ EEPROM that carries the RAM configuration information.
 \section twi_demo_src The Source Code
 
 \htmlonly
-Source file: <a href="../examples/twitest/twitest.c">twitest.c</a>
+Source file: <a href="examples/twitest/twitest.c">twitest.c</a>
 \endhtmlonly
 
 \latexonly

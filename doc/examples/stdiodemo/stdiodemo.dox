@@ -426,14 +426,14 @@ again.)
 
 \htmlonly
 <ul>
-  <li><a href="../examples/stdiodemo/stdiodemo.c">stdiodemo.c</a></li>
-  <li><a href="../examples/stdiodemo/defines.h">defines.h</a></li>
-  <li><a href="../examples/stdiodemo/hd44780.h">hd44780.h</a></li>
-  <li><a href="../examples/stdiodemo/hd44780.c">hd44780.c</a></li>
-  <li><a href="../examples/stdiodemo/lcd.h">lcd.h</a></li>
-  <li><a href="../examples/stdiodemo/lcd.c">lcd.c</a></li>
-  <li><a href="../examples/stdiodemo/uart.h">uart.h</a></li>
-  <li><a href="../examples/stdiodemo/uart.c">uart.c</a></li>
+  <li><a href="examples/stdiodemo/stdiodemo.c">stdiodemo.c</a></li>
+  <li><a href="examples/stdiodemo/defines.h">defines.h</a></li>
+  <li><a href="examples/stdiodemo/hd44780.h">hd44780.h</a></li>
+  <li><a href="examples/stdiodemo/hd44780.c">hd44780.c</a></li>
+  <li><a href="examples/stdiodemo/lcd.h">lcd.h</a></li>
+  <li><a href="examples/stdiodemo/lcd.c">lcd.c</a></li>
+  <li><a href="examples/stdiodemo/uart.h">uart.h</a></li>
+  <li><a href="examples/stdiodemo/uart.c">uart.c</a></li>
 </li>
 \endhtmlonly
 

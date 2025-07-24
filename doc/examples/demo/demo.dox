@@ -298,9 +298,9 @@ make.
 
 \htmlonly
 <ul>
-  <li><a href="../examples/demo/demo.c">demo.c</a></li>
-  <li><a href="../examples/demo/iocompat.h">iocompat.h</a></li>
-  <li><a href="../examples/demo/Makefile">Makefile</a></li>
+  <li><a href="examples/demo/demo.c">demo.c</a></li>
+  <li><a href="examples/demo/iocompat.h">iocompat.h</a></li>
+  <li><a href="examples/demo/Makefile">Makefile</a></li>
 </ul>
 \endhtmlonly
 

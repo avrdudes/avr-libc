@@ -339,7 +339,7 @@ and passing the string to \c printstr_p().
 \section largedemo_src The source code
 
 \htmlonly
-Source file: <a href="../examples/largedemo/largedemo.c">largedemo.c</a>
+Source file: <a href="examples/largedemo/largedemo.c">largedemo.c</a>
 \endhtmlonly
 
 \latexonly
