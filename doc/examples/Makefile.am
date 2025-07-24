@@ -69,7 +69,7 @@ EXTRA_DIST           = ${DEMO_SRCS} \
                        stdiodemo/stdiodemo.dox \
                        twitest/twitest.dox
 
-dir_examples = $(DOC_INST_DIR)/examples
+dir_examples = $(DOC_INST_DIR)/$(AVR_LIBC_USER_MANUAL)/examples
 
 # Install demo source files.
 install-data-local:
