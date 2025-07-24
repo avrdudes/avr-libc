@@ -1389,7 +1389,7 @@ and <tt>__call_main</tt>.
 
 \section faq_local_isr How to use a local (static, namespace) function as ISR?
 
-In order to use a non-global function as an ISR. there is #ISR_N from
+In order to use a non-global function as an ISR, there is #ISR_N from
 <tt>avr/interrupts.h</tt>:
 
 \code
