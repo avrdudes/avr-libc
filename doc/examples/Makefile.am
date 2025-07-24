@@ -69,26 +69,28 @@ EXTRA_DIST           = ${DEMO_SRCS} \
                        stdiodemo/stdiodemo.dox \
                        twitest/twitest.dox
 
+dir_examples = $(DOC_INST_DIR)/examples
+
 # Install demo source files.
 install-data-local:
-	$(mkinstalldirs) $(DOC_INST_DIR)/examples
+	$(mkinstalldirs) $(dir_examples)
 	for dir in $(DEMO_DIRS) ; do \
-	  $(mkinstalldirs) $(DOC_INST_DIR)/examples/$$dir; \
+	  $(mkinstalldirs) $(dir_examples)/$$dir; \
 	done
 	for file in $(DEMO_SRCS) ; do \
-	  echo "Installing $$file into $(DOC_INST_DIR)/examples/$$file"; \
+	  echo "Installing $$file into $(dir_examples)/$$file"; \
 	  $(INSTALL_DATA) $(top_srcdir)/doc/examples/$$file \
-	    $(DOC_INST_DIR)/examples/$$file; \
+	    $(dir_examples)/$$file; \
 	done
 
 uninstall-local:
 	for file in $(DEMO_SRCS) ; do \
-	  echo "Removing $(DOC_INST_DIR)/examples/$$file"; \
-	  rm -f $(DOC_INST_DIR)/examples/$$file; \
+	  echo "Removing $(dir_examples)/$$file"; \
+	  rm -f $(dir_examples)/$$file; \
 	done
 	for dir in $(DEMO_DIRS) ; do \
-	  rmdir $(DOC_INST_DIR)/examples/$$dir || \
-	  echo "rmdir $(DOC_INST_DIR)/examples/$$dir failed."; \
+	  rmdir $(dir_examples)/$$dir || \
+	  echo "rmdir $(dir_examples)/$$dir failed."; \
 	done
-	rmdir $(DOC_INST_DIR)/examples ||\
-	  echo "rmdir $(DOC_INST_DIR)/examples failed."
+	rmdir $(dir_examples) ||\
+	  echo "rmdir $(dir_examples) failed."
