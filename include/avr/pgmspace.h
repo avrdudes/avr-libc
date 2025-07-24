@@ -99,7 +99,7 @@
    \ingroup avr_pgmspace
    \def PROGMEM_FAR
 
-   Attribute to use in order to declare an object being located in
+   Attribute to use in order to declare a read-only object being located in
    far flash ROM.  This is similar to #PROGMEM, except that it puts
    the static storage object in section
    <tt>\ref sec_dot_progmemx ".progmemx.data"</tt>.
@@ -124,8 +124,25 @@
    \ingroup avr_pgmspace
    \def PROGMEM
 
-   Attribute to use in order to declare an object being located in
-   the lower 64 KiB of flash ROM.  */
+   Attribute to use in order to declare a read-only object in static storage
+   being located in the lower 64 KiB of flash ROM.
+
+   Objects in this section will be located in the
+   <tt>\ref sec_dot_progmem ".progmem.data"</tt> section.
+   In order to access PROGMEM objects:
+   <dl>
+   <dt>Reduced Tiny (AVRrc) devices</dt>
+   <dd>No extra code is needed. Use vanilla C/C++ code to access.</dd>
+   <dt>All other devices (non-AVRrc)</dt>
+   <dd>(Inline) assembly must be used in order to read from <tt>PROGMEM</tt>
+     objects, like for example by means of the <tt>pgm_read_xxx</tt> functions
+     and macros as declared in this header.</dd>
+   </dl>
+
+   For an alternative, see the \c #__flash named address-space which is
+   supported since
+   <a href="https://gcc.gnu.org/gcc-4.7/changes.html#avr">avr-gcc v4.7</a>,
+   and \ref avr_flash "<avr/flash.h>" which exists since AVR-LibC v2.3.  */
 #define PROGMEM __attribute__((__progmem__))
 
 /** \ingroup avr_pgmspace
