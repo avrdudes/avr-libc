@@ -37,4 +37,5 @@ EXTRA_DIST = \
     gen-avr-lib-tree.sh.in \
     update-news.in \
     mlib-gen.py \
+    mcu-to-avr-name.sh \
     make-binary-dist.sh
