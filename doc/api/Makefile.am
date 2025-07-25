@@ -76,7 +76,7 @@ DEMO_LIBS            += $(abs_top_builddir)/avr/devices/atmega8/crtatmega8.o
 # As avr-gcc must have been installed already, we can reference its
 # library by a -l option.
 DEMO_LIBS            += -lgcc
-DEMO_INC             = -I$(abs_top_srcdir)/include
+DEMO_INC             = -I$(abs_top_srcdir)/include -I$(abs_top_builddir)/include
 
 # All demo projects where we need to run "make dox" beforehand.
 DEMOS                = demo largedemo stdiodemo
