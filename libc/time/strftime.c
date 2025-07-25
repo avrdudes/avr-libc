@@ -29,6 +29,7 @@
     Standard strftime(). This is a memory hungry monster.
 */
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -36,24 +37,30 @@
 
 extern long __utc_offset;
 
-#ifndef __MEMX
-#define __memx /* empty */
+#if defined(__AVR_HAVE_ELPM__) && defined(__FLASHX)
+#define AS __flashx
+#elif defined(__AVR_HAVE_ELPM__) && defined(__MEMX)
+#define AS __memx
+#elif !defined(__AVR_HAVE_ELPM__) && defined(__FLASH)
+#define AS __flash
+#else
+#define AS /* empty */
 #endif
 
-const __memx char strfwkdays[] =
+static const AS char strfwkdays[] =
     "Sunday Monday Tuesday Wednesday Thursday Friday Saturday ";
 
-const __memx char strfmonths[] =
+static const AS char strfmonths[] =
     "January February March April May June July August September October"
     " November December ";
 
 ATTRIBUTE_CLIB_SECTION
-unsigned char
-pgm_copystring(const char __memx * p, unsigned char i, char *b, unsigned char l)
+static uint8_t
+pgm_copystring(const char AS *p, uint8_t i, char *b, uint8_t l)
 {
-    unsigned char ret, c;
+    char c;
+    uint8_t ret = 0;
 
-    ret = 0;
     while (i)
     {
         c = *p++;
