@@ -29,5 +29,6 @@
 include $(top_srcdir)/libm/fplib/Files.am
 
 EXTRA_DIST = \
+	$(libm_a_c_sources) \
 	$(libm_a_asm_sources) \
 	$(libm_a_extra_dist)
