@@ -101,6 +101,10 @@ demodox:
 	  ${MAKE} dox ); \
 	done
 
+demo-examples:
+	( cd $(top_builddir)/doc/examples \
+	  && ${MAKE} demo-examples )
+
 # images for inclusion in HTML and LaTeX documents
 
 FIG2DEV= fig2dev
@@ -119,7 +123,7 @@ IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating html output.
-html: demo demodox $(TARGET_DOX_HTML)
+html: demo demodox demo-examples $(TARGET_DOX_HTML)
 
 # Rule for generating PDF output
 pdf: demo demodox $(TARGET_DOX_PDF)
@@ -195,7 +199,7 @@ $(USER_MANUAL).pdf: latex_src/refman.tex
 	cd latex_src && ${MAKE} refman.pdf
 	cp latex_src/refman.pdf $(USER_MANUAL).pdf
 
-$(USER_MANUAL).tar.bz2: $(USER_MANUAL)/index.html
+$(USER_MANUAL).tar.bz2: demo-examples $(USER_MANUAL)/index.html
 	tar -cjf $(USER_MANUAL).tar.bz2 $(USER_MANUAL)
 
 # Install rules for the various documentation parts.  The actual
@@ -219,7 +223,7 @@ install-dox-man: dox-html
 	$(mkinstalldirs) $(DESTDIR)$(mandir)/man3
 	$(INSTALL_DATA) man/man3/*.3 $(DESTDIR)$(mandir)/man3
 
-.PHONY: html latex pdf demo demodox \
+.PHONY: html latex pdf demo demodox demo-examples \
 	dox-html dox-pdf install-pdf install-html \
 	install-dox-html install-dox-pdf \
 	install-dox-man

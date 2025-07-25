@@ -70,6 +70,7 @@ EXTRA_DIST           = ${DEMO_SRCS} \
                        twitest/twitest.dox
 
 dir_examples = $(DOC_INST_DIR)/$(AVR_LIBC_USER_MANUAL)/examples
+obj_examples = $(top_builddir)/doc/api/$(AVR_LIBC_USER_MANUAL)/examples
 
 # Install demo source files.
 install-data-local:
@@ -94,3 +95,19 @@ uninstall-local:
 	done
 	rmdir $(dir_examples) ||\
 	  echo "rmdir $(dir_examples) failed."
+
+# Copy the examples to builddir.  This is needed so that the
+# HTML tarball contains the examples.  Actions are the same like
+# for install-data-local above except that the target dir differs.
+demo-examples:
+	$(mkinstalldirs) $(obj_examples)
+	for dir in $(DEMO_DIRS) ; do \
+	  $(mkinstalldirs) $(obj_examples)/$$dir; \
+	done
+	for file in $(DEMO_SRCS) ; do \
+	  echo "Installing $$file into $(obj_examples)/$$file"; \
+	  $(INSTALL_DATA) $(top_srcdir)/doc/examples/$$file \
+	    $(obj_examples)/$$file; \
+	done
+
+.PHONY: demo-examples
