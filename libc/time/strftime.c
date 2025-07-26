@@ -33,7 +33,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <avr/pgmspace.h>
 #include "sectionname.h"
+
+#define SPRINT(s, fmt, ...) sprintf_P (s, PSTR (fmt), ##__VA_ARGS__)
 
 extern long __utc_offset;
 
@@ -137,26 +140,26 @@ strftime(char *buffer, size_t limit, const char *pattern,
             case 'C':
                 d = timeptr->tm_year + 1900;
                 d /= 100;
-                length = sprintf(_store, "%.2d", d);
+                length = SPRINT (_store, "%.2d", d);
                 break;
 
             case 'd':
-                length = sprintf(_store, "%.2u", timeptr->tm_mday);
+                length = SPRINT (_store, "%.2u", timeptr->tm_mday);
                 break;
 
             case 'D':
-                length = sprintf(_store, "%.2u/%.2u/%.2u",
+                length = SPRINT (_store, "%.2u/%.2u/%.2u",
                                  timeptr->tm_mon + 1,
                                  timeptr->tm_mday,
                                  timeptr->tm_year % 100);
                 break;
 
             case 'e':
-                length = sprintf(_store, "%2d", timeptr->tm_mday);
+                length = SPRINT (_store, "%2d", timeptr->tm_mday);
                 break;
 
             case 'F':
-                length = sprintf(_store, "%d-%.2d-%.2d",
+                length = SPRINT (_store, "%d-%.2d-%.2d",
                                  timeptr->tm_year + 1900,
                                  timeptr->tm_mon + 1,
                                  timeptr->tm_mday);
@@ -167,36 +170,36 @@ strftime(char *buffer, size_t limit, const char *pattern,
                 iso_week_date_r(timeptr->tm_year + 1900, timeptr->tm_yday, &wd);
                 if (c == 'g')
                 {
-                    length = sprintf(_store, "%.2d", wd.year % 100);
+                    length = SPRINT (_store, "%.2d", wd.year % 100);
                 }
                 else
                 {
-                    length = sprintf(_store, "%.4d", wd.year);
+                    length = SPRINT (_store, "%.4d", wd.year);
                 }
 
                 break;
 
             case 'H':
-                length = sprintf(_store, "%.2u", timeptr->tm_hour);
+                length = SPRINT (_store, "%.2u", timeptr->tm_hour);
                 break;
 
             case 'I':
                 d = timeptr->tm_hour % 12;
                 if (d == 0)
                     d = 12;
-                length = sprintf(_store, "%.2u", d);
+                length = SPRINT (_store, "%.2u", d);
                 break;
 
             case 'j':
-                length = sprintf(_store, "%.3u", timeptr->tm_yday + 1);
+                length = SPRINT (_store, "%.3u", timeptr->tm_yday + 1);
                 break;
 
             case 'm':
-                length = sprintf(_store, "%.2u", timeptr->tm_mon + 1);
+                length = SPRINT (_store, "%.2u", timeptr->tm_mon + 1);
                 break;
 
             case 'M':
-                length = sprintf(_store, "%.2u", timeptr->tm_min);
+                length = SPRINT (_store, "%.2u", timeptr->tm_min);
                 break;
 
             case 'n':
@@ -217,27 +220,27 @@ strftime(char *buffer, size_t limit, const char *pattern,
                 d = timeptr->tm_hour % 12;
                 if (d == 0)
                     d = 12;
-                length = sprintf (_store, "%2d:%.2d:%.2d AM",
-                                  d, timeptr->tm_min, timeptr->tm_sec);
+                length = SPRINT (_store, "%2d:%.2d:%.2d AM",
+                                 d, timeptr->tm_min, timeptr->tm_sec);
                 if (timeptr->tm_hour > 11)
                     _store[10] = 'P';
                 break;
 
             case 'R':
-                length = sprintf (_store, "%.2d:%.2d", timeptr->tm_hour,
-                                  timeptr->tm_min);
+                length = SPRINT (_store, "%.2d:%.2d", timeptr->tm_hour,
+                                 timeptr->tm_min);
                 break;
 
             case 'S':
-                length = sprintf(_store, "%.2u", timeptr->tm_sec);
+                length = SPRINT (_store, "%.2u", timeptr->tm_sec);
                 break;
 
             case 't':
-                length = sprintf(_store, "\t");
+                length = SPRINT (_store, "\t");
                 break;
 
             case 'T':
-                length = sprintf(_store, "%.2d:%.2d:%.2d",
+                length = SPRINT (_store, "%.2d:%.2d:%.2d",
                                  timeptr->tm_hour,
                                  timeptr->tm_min,
                                  timeptr->tm_sec);
@@ -247,43 +250,43 @@ strftime(char *buffer, size_t limit, const char *pattern,
                 w = timeptr->tm_wday;
                 if (w == 0)
                     w = 7;
-                length = sprintf(_store, "%d", w);
+                length = SPRINT (_store, "%d", w);
                 break;
 
             case 'U':
-                length = sprintf(_store, "%.2u", week_of_year(timeptr, 0));
+                length = SPRINT (_store, "%.2u", week_of_year(timeptr, 0));
                 break;
 
             case 'V':
                 iso_week_date_r(timeptr->tm_year + 1900, timeptr->tm_yday, &wd);
-                length = sprintf(_store, "%.2u", wd.week);
+                length = SPRINT (_store, "%.2u", wd.week);
                 break;
 
             case 'w':
-                length = sprintf(_store, "%u", timeptr->tm_wday);
+                length = SPRINT (_store, "%u", timeptr->tm_wday);
                 break;
 
             case 'W':
                 w = week_of_year(timeptr, 1);
-                length = sprintf(_store, "%.2u", w);
+                length = SPRINT (_store, "%.2u", w);
                 break;
 
             case 'x':
-                length = sprintf(_store, "%.2u/%.2u/%.2u", timeptr->tm_mon + 1,
+                length = SPRINT (_store, "%.2u/%.2u/%.2u", timeptr->tm_mon + 1,
                                  timeptr->tm_mday, timeptr->tm_year % 100);
                 break;
 
             case 'X':
-                length = sprintf(_store, "%.2u:%.2u:%.2u", timeptr->tm_hour,
+                length = SPRINT (_store, "%.2u:%.2u:%.2u", timeptr->tm_hour,
                                  timeptr->tm_min, timeptr->tm_sec);
                 break;
 
             case 'y':
-                length = sprintf(_store, "%.2u", timeptr->tm_year % 100);
+                length = SPRINT (_store, "%.2u", timeptr->tm_year % 100);
                 break;
 
             case 'Y':
-                length = sprintf(_store, "%u", timeptr->tm_year + 1900);
+                length = SPRINT (_store, "%u", timeptr->tm_year + 1900);
                 break;
 
             case 'z':
@@ -293,7 +296,7 @@ strftime(char *buffer, size_t limit, const char *pattern,
                     d += w;
                 w = abs(d % 60);
                 d = d / 60;
-                length = sprintf(_store, "%+.2d%.2d", d, w);
+                length = SPRINT (_store, "%+.2d%.2d", d, w);
                 break;
 
             default:
