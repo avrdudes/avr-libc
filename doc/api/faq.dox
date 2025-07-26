@@ -2128,19 +2128,17 @@ However, using the macro often makes the program better readable.
 
 "BV" stands for "bit value", in case someone might ask you. :-)
 
-<dl>
-<dt>Example</dt>
-<dd>Clock timer 2 with full IO clock
-(<tt>CS2</tt><em>x</em> = 0b001), toggle OC2 output on compare match
-(<tt>COM2</tt><em>x</em> = 0b01), and clear timer on compare match
-(<tt>CTC2</tt> = 1).  Make OC2 (<tt>PD7</tt>) an output.
+Example:
 
 \code
-	TCCR2 = _BV(COM20) | _BV(CTC2) | _BV(CS20);
-	DDRD = _BV(PD7);
+// Clock timer 2 with full IO clock (CS2x = 0b001).
+// Toggle OC2 output on compare match (COM2x = 0b01).
+// Clear timer on compare match (CTC2 = 1).
+TCCR2 = _BV(COM20) | _BV(CTC2) | _BV(CS20);
+
+// Make OC2 (PD7) an output.
+DDRD = _BV(PD7);
 \endcode
-</dd>
-</dl>
 
 <small>Back to \ref faq_index.</small>
 <!-- The _BV section is the very last since their unbalanced <<'s
