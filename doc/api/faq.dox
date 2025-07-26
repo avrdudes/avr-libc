@@ -50,7 +50,6 @@
   - \ref faq_flashstrings
   - \ref faq_rom_array
   - \ref faq_startup
-  - \ref faq_softreset
   - \ref faq_funcptr_gt128kib
   - \ref faq_reg_usage
   - \ref faq_regbind
@@ -79,6 +78,7 @@
   - \ref faq_asmstabs
 
 - <b>Hardware</b>
+  - \ref faq_softreset
   - \ref faq_eeprom_corruption
   - \ref faq_fuses
   - \ref faq_fuselow
@@ -93,24 +93,27 @@
 When using the optimizer, in a loop like the following one:
 
 \code
-uint8_t flag;
-...
-ISR(SOME_vect) {
+uint8_t flag; // volatile is missing
+
+ISR(SOME_vect)
+{
   flag = 1;
 }
 ...
 
-    while (flag == 0) {
+    while (flag == 0)
+    {
         ...
     }
 \endcode
 
-the compiler will typically access \c flag only once, and optimize further accesses completely
-away, since its code path analysis shows that nothing inside the loop
+the compiler will typically access \c flag only once, and optimize further
+accesses completely away,
+since its code path analysis shows that nothing inside the loop
 could change the value of \c flag anyway.  To tell the compiler that
 this variable could be changed outside the scope of its code path
 analysis (e. g. from within an interrupt routine), the variable needs
-to be declared like:
+to be qualified as volatile:
 
 \code
 volatile uint8_t flag;
@@ -134,7 +137,7 @@ compiler in case many or long arguments are being passed to callees.
 If this is not the case throughout the entire application, these
 registers could be used for register variables as well.
 
-Extreme care should be taken that the entire application is
+\warning Extreme care should be taken that the entire application is
 compiled with a consistent set of register-allocated variables
 including possibly used library functions.  This can be achieved
 by compiling each module with \c -ffixed-r3 or \c -ffixed-3.
@@ -145,7 +148,7 @@ Hence when you are using libraries from the distribution, you must
 make sure that none of the reserved registers is used in the generated
 binary.
 
-Also notice that global register variables can't be volatile,
+\warning Also notice that global register variables can't be volatile,
 because only variables in memory can be volatile, and register variables
 are not located in memory.
 
@@ -191,45 +194,6 @@ Note that in C code, any such function would
 preferably be placed into section <code>.init3</code> as the code in
 <code>.init2</code>
 ensures the internal register <tt>__zero_reg__</tt> is already cleared.
-
-<small>Back to \ref faq_index.</small>
-
-
-\section faq_use_bv What is all this _BV() stuff about?
-
-When performing low-level output work, which is a very central point
-in microcontroller programming, it is quite common that a particular
-bit needs to be set or cleared in some IO register.  While the device
-documentation provides mnemonic names for the various bits in the IO
-registers, and the \ref avr_io "AVR device-specific IO definitions" reflect these names in definitions for
-numerical constants, a way is needed to convert a bit number (usually
-within a byte register) into a byte value that can be assigned
-directly to the register.  However, sometimes the direct bit numbers
-are needed as well (e. g. in an <tt>SBI()</tt> instruction), so the
-definitions cannot usefully be made as byte values in the first place.
-
-So in order to access a particular bit number as a byte value, use the
-<tt>_BV()</tt> macro.  Of course, the implementation of this macro is
-just the usual bit shift (which is done by the compiler anyway, thus
-doesn't impose any run-time penalty), so the following applies:
-
-\code
-_BV(3) => 1 << 3 => 0x08
-\endcode
-
-However, using the macro often makes the program better readable.
-
-"BV" stands for "bit value", in case someone might ask you. :-)
-
-<b>Example:</b> clock timer 2 with full IO clock
-(<tt>CS2</tt><em>x</em> = 0b001), toggle OC2 output on compare match
-(<tt>COM2</tt><em>x</em> = 0b01), and clear timer on compare match
-(<tt>CTC2</tt> = 1).  Make OC2 (<tt>PD7</tt>) an output.
-
-\code
-	TCCR2 = _BV(COM20) | _BV(CTC2) | _BV(CS20);
-	DDRD = _BV(PD7);
-\endcode
 
 <small>Back to \ref faq_index.</small>
 
@@ -300,15 +264,49 @@ object file nor within flash memory.  (Of course, being a variable, it
 will consume space in the target's SRAM.)
 
 In contrast, global and static variables that have a non-zero initializer go
-into the \ref sec_dot_data ".data" output section of the file.  This will
-cause them to consume space in the object file (in order to record the
-initializing value), \e and in the flash ROM of the target device.
-The latter is needed to initialize the variables in RAM from the
-initializers kept in ROM during the startup code, so that all variables
-will have their expected initial values when \c main() is entered.
+into the \ref sec_dot_data ".data" output section or into the
+\ref sec_dot_rodata ".rodata" output section
+(or, depending on the code, may be optimized out entirely).
+Data in the \c \.data output section consumes space in the SRAM of the device,
+as well as space in the flash ROM of the device.  The latter is required so that the
+startup code can initialize the SRAM with the required values.
 
-<small>Back to \ref faq_index.
-</small>
+<table>
+<caption>Non-Zero Data in Static Storage</caption>
+<tr>
+  <th>Read-Only
+  <th>Input Section
+  <th>Output Section
+  <th>Memory Region(s)
+  <th>Case
+</tr>
+<tr>
+  <td>No  <td>.data   <td>.data  <td>text \e and data <td>All
+</tr><tr>
+  <td rowspan="3">Yes <td rowspan="3">.rodata
+           <td>.data <td>text \e and data <td>3
+</tr><tr>
+           <td>.rodata <td>text <td>1
+</tr><tr>
+           <td>.rodata <td>rodata <td>2
+</tr>
+</table>
+
+<b>Cases</b>
+-# Devices that see all of program memory in the RAM address space:
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a>
+  (AVRrc),
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a>
+  (AVR32 devices, 0-series, 1-series and 2-series).
+-# Devices that see only a part of program memory in the RAM address space:
+  AVR64 and AVR128 devices without
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
+     ><tt>-mrodata-in-ram</tt></a>.
+-# All other devices, i.e. devices that don't see program memory in the RAM address space,
+  or when \c -mrodata-in-ram is specified.
+
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
 
@@ -354,22 +352,22 @@ uint16_t read_timer1 (void)
 }
 \endcode
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_asmconst How do I use a \#define&apos;d constant in an asm statement?
 
 So you tried this:
 
 \code
-asm volatile ("sbi 0x18, 7");
+asm volatile ("sbi 0x18, 7" ::: "memory");
 \endcode
 
 Which works. When you do the same thing but replace the address of the port
 by its macro name, like this:
 
 \code
-asm volatile ("sbi PORTB, 7");
+asm volatile ("sbi PORTB, 7" ::: "memory");
 \endcode
 
 you get a syntax error from the assembler:
@@ -381,11 +379,11 @@ strings, and <tt>PORTB</tt> gets passed to the
 assembler instead of <tt>0x18</tt>. One way to avoid this problem is:
 
 \code
-asm volatile ("sbi %0, 7" :: "I" (_SFR_IO_ADDR(PORTB)));
+asm volatile ("sbi %0, 7" :: "I" (_SFR_IO_ADDR(PORTB)) : "memory");
 \endcode
 
 \note For C programs, rather use the standard C bit operators instead,
-so the above would be expressed as <tt>PORTB |= (1 << 7)</tt>.  The
+so the above would be expressed as <tt>PORTB |= (1 &lt;&lt; 7)</tt>.  The
 optimizer will take care to transform this into a single SBI
 instruction, assuming the operands allow for this.
 
@@ -394,7 +392,7 @@ There are situation though where the address of a special function register
 \c LDS and \c STS, one can use the RAM address of the SFR:
 
 \code
-asm volatile ("sts %0, __zero_reg__" :: "n" (& PORTB));
+asm volatile ("sts %0, __zero_reg__" :: "n" (& PORTB) : "memory");
 \endcode
 
 When the I/O address of the register is required, one way is to use
@@ -403,13 +401,13 @@ A different approach is to use inline asm \ref inline_asm_print_modifiers
 "print modifier" <tt>%i</tt> supported since avr-gcc v4.7:
 
 \code
-asm volatile ("out %i0, __zero_reg__" :: "n" (& PORTB));
+asm volatile ("out %i0, __zero_reg__" :: "n" (& PORTB) : "memory");
 \endcode
 
 The <tt>%i0</tt> will print the address of \c PORTB as an I/O address.
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_gdboptimize Why does the PC randomly jump around when single-stepping through my program in avr-gdb?
 
@@ -449,8 +447,8 @@ obvious, so it must be noted that turning off optimization can easily
 change the bug pattern. In most cases, you are better off leaving
 optimizations enabled while debugging.
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_asmstabs How do I trace an assembler file in avr-gdb?
 
@@ -536,8 +534,8 @@ myfunc:
     ret
 \endverbatim
 
-<small>Back to \ref faq_index.
-</small>
+<small>Back to \ref faq_index.</small>
+
 
 \section faq_port_pass How do I pass an IO port as a parameter to a function?
 
@@ -663,6 +661,7 @@ ports can be forced that way.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_reg_usage What registers are used by the C compiler?
 
 See also the
@@ -780,6 +779,7 @@ sections in the avr-gcc Wiki.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_rom_array How do I put an array of strings completely in ROM?
 
 There are times when you may need an array of strings which will never be
@@ -872,6 +872,7 @@ the string literals can be read directly by means of <tt>array[i]</tt>.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_ext_ram How to use external RAM?
 
 Well, there is no universal answer to this question; it depends on
@@ -917,6 +918,7 @@ errata of some AVR devices even prevent this configuration from
 working properly at all.
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_optflags Which -O flag to use?
 
@@ -981,6 +983,7 @@ get the last few percent of speed benefit from using \c -O3.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_reloc_code How do I relocate code to a fixed address?
 
 First, put the function into a new, orphan
@@ -1042,6 +1045,7 @@ is used by the compiler for variables in address-space \c __flash2.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_fuses My UART is generating nonsense!  My ATmega128 keeps crashing! Port F is completely broken!
 
 Well, certain odd problems arise out of the situation that the AVR
@@ -1066,6 +1070,7 @@ default.  This will make the respective port pins that are used for
 the JTAG interface unavailable for regular IO.
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_flashstrings Why do all my "foo...bar" strings eat up the SRAM?
 
@@ -1154,6 +1159,7 @@ int main (void)
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_ramoverlap How to detect RAM memory and variable overlap problems?
 
 You can simply run <tt>avr-nm</tt> on your output (ELF) file.
@@ -1202,6 +1208,7 @@ up that for all functions where you know that the calls could be nested.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_tinyavr_c Is it really impossible to program the ATtinyXX in C?
 
 While some small AVRs are not directly supported by the C compiler
@@ -1217,6 +1224,7 @@ http://lightner.net/avr/ATtinyAvrGcc.html
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_AVRrc What features are (not) supported on AVRrc Reduced Core devices?
 
 On the reduced AVRrc core with only 16 general purpose registers, the following
@@ -1230,6 +1238,7 @@ features are not supported:
 - Named address-spaces like \c #__flash
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_clockskew What is this "clock skew detected" message?
 
@@ -1260,6 +1269,7 @@ like NTP.  As a workaround, synchronize the client's clock frequently
 with the server's clock.
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_intbits Why are (many) interrupt flags cleared by writing a logical 1?
 
@@ -1313,6 +1323,7 @@ TIFR = _BV(TOV0);
 \endcode
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_cvt How to use a Compact Vector Table?
 
@@ -1387,6 +1398,7 @@ and <tt>__call_main</tt>.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_local_isr How to use a local (static, namespace) function as ISR?
 
 In order to use a non-global function as an ISR, there is #ISR_N from
@@ -1418,6 +1430,7 @@ namespace
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_fuselow Why have "programmed" fuses the bit value 0?
 
 Basically, fuses are just a bit in a special EEPROM area.  For
@@ -1427,11 +1440,13 @@ programmed fuse cells read out as bit value 0.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_asmops Which AVR-specific assembler operators are available?
 
 See \ref ass_pseudoops "Pseudo-Ops" and \ref assembly_operand_modifiers.
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_spman Why are interrupts re-enabled in the middle of writing the stack pointer?
 
@@ -1484,6 +1499,7 @@ A .xn script is for linking with -n flag (mix text and data on same page).
 A .xbn script is for linking with -N flag (mix text and data on same page).
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_binarydata How to add a raw binary image to linker output?
 
@@ -1580,6 +1596,7 @@ $(OBJDIR)/%.o : %.bin
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_softreset How do I perform a software reset of the AVR?
 
 The canonical way to perform a software reset of non-XMega AVR's is to use the
@@ -1655,6 +1672,7 @@ compiler does not throw the seemingly unused function away.
 The \c unused attributes avoids warnings about unused code.
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_reentrant What pitfalls exist when writing reentrant code?
 
@@ -1802,6 +1820,7 @@ new issues are discovered or introduced.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_eeprom_corruption  Why are some addresses of the EEPROM corrupted (usually address zero)?
 
 The two most common reason for EEPROM corruption is either writing to
@@ -1853,6 +1872,7 @@ the EEPROM's inability to hold a charge from the excessive write wear.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_wrong_baud_rate  Why is my baud rate wrong?
 
 Some AVR datasheets give the following formula for calculating baud rates:
@@ -1878,6 +1898,7 @@ This is also the way it is implemented in \ref util_setbaud.
 
 <small>Back to \ref faq_index.</small>
 
+
 \section faq_funcptr_gt128kib On a device with more than 128 KiB of flash, how to make function pointers work?
 
 Function pointers beyond the "magical" 128 KiB barrier(s) on larger
@@ -1895,6 +1916,7 @@ See also the avr-gcc online documentation on the
    >\c EIND special function register</a> and indirect calls.
 
 <small>Back to \ref faq_index.</small>
+
 
 \section faq_assign_chain Why is assigning ports in a "chain" a bad idea?
 
@@ -1989,7 +2011,7 @@ to the compiler options.  This saves the temporary files like the
 pre-processed source code in an \c \.i file (for C sources),
 an \c \.ii (for C++), or a \c \.s (for assembly).
 A debug level of DWARF3 or higher is required to include the macro
-definitions in the file, with lower debug levels, only the preprocessed
+definitions in the file. With lower debug levels, only the preprocessed
 source will be present.
 
 For a module with a simple <tt>\#include <avr/pgmspace.h></tt>, the
@@ -2000,14 +2022,14 @@ saved intermediate file might look something like:
 #define __STDC__ 1
 \endverbatim
 
-The \c __STDC__ macro is defined built-in in the compiler.
+&rArr; The \c __STDC__ macro is defined built-in in the compiler.
 
 \verbatim
 # 0 "<command-line>"
 #define __AVR_DEVICE_NAME__ atmega8
 \endverbatim
 
-The \c __AVR_DEVICE_NAME__ macro is defined on the command line by
+&rArr; The \c __AVR_DEVICE_NAME__ macro is defined on the command line by
 means of <tt>-D __AVR_DEVICE_NAME__=atmega8</tt>. In this special case,
 the \c -D option is added by the specs file <tt>specs-atmega8</tt>.
 
@@ -2019,10 +2041,10 @@ the \c -D option is added by the specs file <tt>specs-atmega8</tt>.
 #define __need_size_t
 \endverbatim
 
-The \c __PGMSPACE_H_ macro is defined in line 81 of that header file.
+&rArr; The \c __PGMSPACE_H_ macro is defined in line 81 of that header file.
 When there is no line note directly above the definition, go up until
-you find a line note.  For example,
-the \c __need_size_t macro is defined in line 84 of that file.
+you find a line note and add the respective number of lines.
+For example, the \c __need_size_t macro is defined in line 84 of that file.
 
 <small>Back to \ref faq_index.</small>
 
@@ -2079,4 +2101,48 @@ Explanation:
 
 <small>Back to \ref faq_index.</small>
 
+
+\section faq_use_bv What is all this _BV() stuff about?
+
+When performing low-level output work, which is a very central point
+in microcontroller programming, it is quite common that a particular
+bit needs to be set or cleared in some IO register.  While the device
+documentation provides mnemonic names for the various bits in the IO
+registers, and the \ref avr_io "AVR device-specific IO definitions" reflect these names in definitions for
+numerical constants, a way is needed to convert a bit number (usually
+within a byte register) into a byte value that can be assigned
+directly to the register.  However, sometimes the direct bit numbers
+are needed as well (e. g. in an <tt>SBI()</tt> instruction), so the
+definitions cannot usefully be made as byte values in the first place.
+
+So in order to access a particular bit number as a byte value, use the
+<tt>_BV()</tt> macro.  Of course, the implementation of this macro is
+just the usual bit shift (which is done by the compiler anyway, thus
+doesn't impose any run-time penalty), so the following applies:
+
+\code
+_BV(3) ⇒ 1 << 3 ⇒ 0x08
+\endcode
+
+However, using the macro often makes the program better readable.
+
+"BV" stands for "bit value", in case someone might ask you. :-)
+
+<dl>
+<dt>Example</dt>
+<dd>Clock timer 2 with full IO clock
+(<tt>CS2</tt><em>x</em> = 0b001), toggle OC2 output on compare match
+(<tt>COM2</tt><em>x</em> = 0b01), and clear timer on compare match
+(<tt>CTC2</tt> = 1).  Make OC2 (<tt>PD7</tt>) an output.
+
+\code
+	TCCR2 = _BV(COM20) | _BV(CTC2) | _BV(CS20);
+	DDRD = _BV(PD7);
+\endcode
+</dd>
+</dl>
+
+<small>Back to \ref faq_index.</small>
+<!-- The _BV section is the very last since their unbalanced <<'s
+     confuse the syntax highlighter. -->
 */
