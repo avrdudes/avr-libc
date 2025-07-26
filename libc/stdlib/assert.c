@@ -1,6 +1,7 @@
 /*-
  * Copyright (c) 1992, 1993
  *	The Regents of the University of California.  All rights reserved.
+ * Copyright (c) 2025 Georg-Johann Lay (rewrite from scratch avoiding fprintf)
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -30,27 +31,59 @@
 static char sccsid[] = "@(#)assert.c	8.1 (Berkeley) 6/4/93";
 #endif /* LIBC_SCCS and not lint */
 
-/* taken from:
-__FBSDID("$FreeBSD: src/lib/libc/gen/assert.c,v 1.7 2002/02/01 00:57:29 obrien Exp $");
-*/
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "sectionname.h"
 
+#if defined(__AVR_HAVE_ELPM__) && defined(__FLASHX)
+#define AS __flashx
+#elif defined(__AVR_HAVE_ELPM__) && defined(__MEMX)
+#define AS __memx
+#elif !defined(__AVR_HAVE_ELPM__) && defined(__FLASH)
+#define AS __flash
+#else
+#define AS /* empty */
+#endif
+
+/* Print a message with operands to stderr. */
+ATTRIBUTE_CLIB_SECTION
+static void
+err_msg (const AS char *fmt,
+         const char *v1, const char *v2, const char *v3, unsigned v4)
+{
+    while (1)
+    {
+        char c = *fmt++;
+
+        if (c == '\0')
+            return;
+        else if (c == '1')
+            fputs (v1, stderr);
+        else if (c == '2')
+            fputs (v2, stderr);
+        else if (c == '3')
+            fputs (v3, stderr);
+        else if (c == '4')
+        {
+            char s_num[6];
+            fputs (utoa (v4, s_num, 10), stderr);
+        }
+        else
+            fputc (c, stderr);
+    }
+}
+
 ATTRIBUTE_CLIB_SECTION
 void
 __assert (const char *func, const char *file, int line, const char *failedexpr)
 {
-	if (func == NULL)
-		(void)fprintf(stderr,
-		     "Assertion failed: (%s), file %s, line %d.\n", failedexpr,
-		     file, line);
-	else
-		(void)fprintf(stderr,
-		     "Assertion failed: (%s), function %s, file %s, line %d.\n",
-		     failedexpr, func, file, line);
-	abort();
-	/* NOTREACHED */
+    static const AS char s1[] = "Assertion failed: (1), file 3, line 4.\n";
+    static const AS char s2[] = ("Assertion failed: (1), function 2,"
+                                 " file 3, line 4.\n");
+
+    err_msg (func ? s2 : s1, failedexpr, func, file, (unsigned) line);
+
+    abort();
+    /* NOTREACHED */
 }

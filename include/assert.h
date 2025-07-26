@@ -63,19 +63,19 @@
 
 #if defined(__DOXYGEN__)
 /**
- * \def assert
- * \param expression Expression to test for.
- *
- * The assert() macro tests the given expression and if it is false,
- * the calling process is terminated.  A diagnostic message is written
- * to stderr and the function abort() is called, effectively
- * terminating the program.
- *
- * If expression is true, the assert() macro does nothing.
- *
- * The assert() macro may be removed at compile time by defining
- * NDEBUG as a macro (e.g., by using the compiler option -DNDEBUG).
- */
+   \def assert
+   \param expression Expression to test for.
+
+   The assert() macro tests the given expression and if it is false,
+   the calling process is terminated by calling abort().
+   When the macro \c __ASSERT_USE_STDERR was defined prior to including
+   \c <assert.h>, then a diagnostic message is written to \c stderr.
+
+   If expression is true, the assert() macro does nothing.
+
+   The assert() macro may be removed at compile time by defining
+   NDEBUG as a macro (e.g., by using the compiler option -DNDEBUG).
+*/
 #  define assert(expression)
 
 #else /* !DOXYGEN */

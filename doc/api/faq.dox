@@ -1780,11 +1780,6 @@ Below is a table of library calls with known issues.
   </td>
  </tr>
  <tr>
-  <td><tt>#assert</tt></td>
-  <td>Contains an embedded #fprintf.  See above for #fprintf.</td>
-  <td>See above for #fprintf.</td>
- </tr>
- <tr>
   <td><tt>#clearerr</tt></td>
   <td>Alters flags in the FILE argument.
   </td>
