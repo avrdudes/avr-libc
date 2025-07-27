@@ -402,7 +402,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
 <div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="group__avr__pgmspace.html#gab8873f0cfca49b15e1a0588c6f1dfeec">pgm_read_int_far</a> (pdata + idx * <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__inttypes_html_ga72b6692e3f3123903c1a0d9a960c59b1"><div class="ttname"><a href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a></div><div class="ttdeci">uint32_t uint_farptr_t</div><div class="ttdef"><b>Definition:</b> inttypes.h:124</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:956</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:973</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gab8873f0cfca49b15e1a0588c6f1dfeec"><div class="ttname"><a href="group__avr__pgmspace.html#gab8873f0cfca49b15e1a0588c6f1dfeec">pgm_read_int_far</a></div><div class="ttdeci">static int pgm_read_int_far(uint_farptr_t addr)</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gae59d3b5091405672ec394d3903ee60c5"><div class="ttname"><a href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a></div><div class="ttdeci">#define PROGMEM_FAR</div><div class="ttdef"><b>Definition:</b> pgmspace.h:119</div></div>
 <div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:81</div></div>
@@ -730,7 +730,14 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Attribute to use in order to declare an object being located in the lower 64 KiB of flash ROM. </p>
+<p>Attribute to use in order to declare a read-only object in static storage being located in the lower 64 KiB of flash ROM.</p>
+<p>Objects in this section will be located in the <code><a class="el" href="mem_sections.html#sec_dot_progmem">.progmem.data</a></code> section. In order to access PROGMEM objects: </p><dl>
+<dt>Reduced Tiny (AVRrc) devices </dt>
+<dd>No extra code is needed. Use vanilla C/C++ code to access. </dd>
+<dt>All other devices (non-AVRrc) </dt>
+<dd>(Inline) assembly must be used in order to read from <code>PROGMEM</code> objects, like for example by means of the <code>pgm_read_xxx</code> functions and macros as declared in this header. </dd>
+</dl>
+<p>For an alternative, see the <code><a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a></code> named address-space which is supported since <a href="https://gcc.gnu.org/gcc-4.7/changes.html#avr">avr-gcc v4.7</a>, and <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a> which exists since AVR-LibC v2.3. </p>
 
 </div>
 </div>
@@ -745,7 +752,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Attribute to use in order to declare an object being located in far flash ROM. This is similar to <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, except that it puts the static storage object in section <code><a class="el" href="mem_sections.html#sec_dot_progmemx">.progmemx.data</a></code>. In order to access the object, the <code>pgm_read_*_far</code> and <code>_PF</code> functions declared in this header can be used. In order to get its address, see <a class="el" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address()</a>.</p>
+<p>Attribute to use in order to declare a read-only object being located in far flash ROM. This is similar to <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, except that it puts the static storage object in section <code><a class="el" href="mem_sections.html#sec_dot_progmemx">.progmemx.data</a></code>. In order to access the object, the <code>pgm_read_*_far</code> and <code>_PF</code> functions declared in this header can be used. In order to get its address, see <a class="el" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address()</a>.</p>
 <p>It only makes sense to put read-only objects in this section, though the compiler does not diagnose when this is not the case.</p>
 <p>As an alternative available since AVR-LibC v2.3 and avr-gcc v15, you can use the 24-bit address-space <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> and functions from <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a> that work the same like the <code>_far</code> functions.</p>
 <dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
@@ -4021,7 +4028,7 @@ strlen(initial dst)). If retval &gt;= siz, truncation occurred. </dd></dl>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 24 2025 16:09:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 27 2025 18:32:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

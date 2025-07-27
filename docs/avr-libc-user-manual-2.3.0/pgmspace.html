@@ -158,7 +158,7 @@ Why is GCC putting const Data into RAM to begin with?</h1>
     r25 = LD(pc)
 else
     r25 = LPM(pc)</pre><p> The drawbacks are obvious: Such code is expensive, because it has to discriminate at run-time whether <code>pc</code> points to RAM or to flash. Plus, there must be some means to tell which kind of pointer <code>pc</code> actually is. For example, the high bit of the address could be used to encode the information.</p>
-<p class="endli">This approach is taken by <code>avr-gcc</code>'s named address-space __memx, which uses 24-bit pointers and encodes the information in the high byte.  </p>
+<p class="endli">This approach is taken by <code>avr-gcc</code>'s named address-space <a class="el" href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a>, which uses 24-bit pointers and encodes the information in the high byte.  </p>
 </li>
 </ul>
 <p>So when the compiler takes the first approach of always using <code>LD</code>, what will happen when we put <code>is_one</code> in <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>?</p>
@@ -205,7 +205,7 @@ With Attribute PROGMEM and pgm_read() Functions</h2>
 <div class="line">    { 2, 3, 5,  7, 11, 13, 17, 19 },</div>
 <div class="line">    { 1, 4, 9, 16, 25, 36, 49, 64 }</div>
 <div class="line">};</div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:129</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:146</div></div>
 </div><!-- fragment --><p>That's it! Now your data is in the Program Space. You can compile, link, and check the map file to verify that <code>mydata</code> is placed in the correct section.</p>
 <p>Now that your data resides in the Program Space, your code to access (read) the data will no longer work. The code that gets generated will retrieve the data that is located at the address of the <code>mydata</code> array, plus offsets indexed by the <code>i</code> and <code>j</code> variables. However, the final address that is calculated where to the retrieve the data points to the Data Space! Not the Program Space where the data is actually located. It is likely that you will be retrieving some garbage. The problem is that <code>avr-gcc</code> does not intrinsically know that the data resides in the Program Space.</p>
 <p>The solution is fairly simple. The "rule of thumb" for accessing data stored in the Program Space is to access the data as you normally would (as if the variable is stored in Data Space), like so:</p>
@@ -313,7 +313,7 @@ Storing and Retrieving Strings in the Program Space</h1>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__pgmspace_html_ga5749897c91c479d02054fc02128de482"><div class="ttname"><a href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a></div><div class="ttdeci">char * strcpy_P(char *, const char *)</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:921</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:938</div></div>
 </div><!-- fragment --><p>Here, the <code>string_table</code> array is stored in Program Space, so we access it normally, as if were stored in Data Space, then take the address of the location we want to access, and use the address as a parameter to <code>pgm_read_ptr</code>. We use the <code>pgm_read_ptr</code> macro to read the string pointer out of the <code>string_table</code> array. Remember that a pointer is 16-bits, or word size. The <a class="el" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a> macro will return a <code>void*</code>. This pointer is an address in Program Space pointing to the string that we want to copy. This pointer is then used as a parameter to the function <a class="el" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a>. The function <a class="el" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> is just like the regular <code>strcpy</code> function, except that it copies a string from Program Space (the second parameter) to a buffer in the Data Space (the first parameter).</p>
 <p>There are many string functions available that work with strings located in Program Space. All of these special string functions have a suffix of <code>_P</code> in the function name, and are declared in the &lt;<a class="el" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt; header file. </p>
 </div></div><!-- contents -->
@@ -321,7 +321,7 @@ Storing and Retrieving Strings in the Program Space</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 24 2025 16:09:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 27 2025 18:32:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

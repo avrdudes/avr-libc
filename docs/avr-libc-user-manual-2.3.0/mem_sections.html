@@ -233,7 +233,7 @@ Memory Regions</h2>
 <th>Region </th><th>Virtual<br  />
 Address<sup>1</sup> </th><th>Flags </th><th>Purpose  </th></tr>
 <tr>
-<td><code>text</code> </td><td><code>0</code><sup>2</sup> </td><td><code>rx</code> </td><td><a class="el" href="mem_sections.html#sec_text_text">Executable code</a>, <a class="el" href="mem_sections.html#sec_dot_vectors">vector table</a>, data in <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>, <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> and __memx, <a class="el" href="mem_sections.html#sec_dot_init">startup code</a>, <a class="el" href="mem_sections.html#sec_dot_trampolines">linker stubs</a>, initializers for <code>.data</code>  </td></tr>
+<td><code>text</code> </td><td><code>0</code><sup>2</sup> </td><td><code>rx</code> </td><td><a class="el" href="mem_sections.html#sec_text_text">Executable code</a>, <a class="el" href="mem_sections.html#sec_dot_vectors">vector table</a>, data in <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>, <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> and <a class="el" href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a>, <a class="el" href="mem_sections.html#sec_dot_init">startup code</a>, <a class="el" href="mem_sections.html#sec_dot_trampolines">linker stubs</a>, initializers for <code>.data</code>  </td></tr>
 <tr>
 <td><code>data</code> </td><td><code>0x800000</code><sup>2</sup> </td><td><code>rw</code> </td><td>Data in static storage  </td></tr>
 <tr>
@@ -393,9 +393,9 @@ The .text Output Section</h2>
 <p>It is unlikely that ordinary code uses the fini sections. When there are no static destructors and <code><a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a></code> is not used, then the respective code is not pulled in form the libraries, and the fini code just consumes four bytes: a <code>CLI</code> and a RJMP to itself. Common use cases of fini code is when running the GCC test suite where it reduces fallout, and in simulators to determine (un)orderly termination of a simulated program.  </p>
 </dd>
 <dt><a class="anchor" id="sec_dot_progmemx"></a><code>.progmemx.*</code> </dt>
-<dd>Read-only data in program memory without the requirement that it must reside in the lower 64 KiB. The compiler uses this section for data in the named address-spaces <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> and __memx. Data can be accessed with <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> when it is not in a named address-space: <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
+<dd>Read-only data in program memory without the requirement that it must reside in the lower 64 KiB. The compiler uses this section for data in the named address-spaces <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> and <a class="el" href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a>. Data can be accessed with <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> when it is not in a named address-space: <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">const</span> __memx <span class="keywordtype">int</span> array1[] = { 1, 4, 9, 16, 25, 36 };</div>
+<div class="line"><span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a> <span class="keywordtype">int</span> array1[] = { 1, 4, 9, 16, 25, 36 };</div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_define" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> array2[] = { 2, 3, 5, 7, 11, 13, 17 };</div>
@@ -407,8 +407,9 @@ The .text Output Section</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> val2 + array1[id1];</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__avr__flash_html_gad830b33caf116de308322d13e2a768d2"><div class="ttname"><a href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a></div><div class="ttdeci">__memx</div><div class="ttdef"><b>Definition:</b> flash.h:1019</div></div>
 <div class="ttc" id="agroup__avr__inttypes_html_ga72b6692e3f3123903c1a0d9a960c59b1"><div class="ttname"><a href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a></div><div class="ttdeci">uint32_t uint_farptr_t</div><div class="ttdef"><b>Definition:</b> inttypes.h:124</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:956</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:973</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gab8873f0cfca49b15e1a0588c6f1dfeec"><div class="ttname"><a href="group__avr__pgmspace.html#gab8873f0cfca49b15e1a0588c6f1dfeec">pgm_read_int_far</a></div><div class="ttdeci">static int pgm_read_int_far(uint_farptr_t addr)</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gae59d3b5091405672ec394d3903ee60c5"><div class="ttname"><a href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a></div><div class="ttdeci">#define PROGMEM_FAR</div><div class="ttdef"><b>Definition:</b> pgmspace.h:119</div></div>
 <div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:81</div></div>
@@ -598,7 +599,7 @@ In Assembly Code</h2>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 24 2025 16:09:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 27 2025 18:32:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
