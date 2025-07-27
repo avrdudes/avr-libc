@@ -74,4 +74,5 @@ time_a_asm_sources = \
 	system_tick.S
 
 time_a_extra_dist = \
+	time-private.h \
 	ephemera_common.h

@@ -29,38 +29,35 @@
    in ISO 8601 format.  */
 
 #include <stdlib.h>
+#include <stdint.h>
 #include <time.h>
-
-extern void __print_lz (int, char *, char);
+#include "time-private.h"
 
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION
 void
-isotime_r(const struct tm * tmptr, char *buffer)
+isotime_r(const struct tm *tmptr, char *buffer)
 {
-	int i = tmptr->tm_year + 1900;
-	__print_lz(i/100, buffer, '-');
-	buffer+=2;
-	__print_lz(i%100, buffer,'-');
-	buffer+=3;
+    __print_43210 (tmptr->tm_year + 1900, buffer);
+    buffer[0] = buffer[1];
+    buffer[1] = buffer[2];
+    buffer[2] = buffer[3];
+    buffer[3] = buffer[4];
+    buffer[4] = '-';
+    buffer += 5;
 
-	i = tmptr->tm_mon + 1;
-	__print_lz(i, buffer,'-');
-	buffer+=3;
+    __print_10 ((uint8_t) tmptr->tm_mon + 1, buffer, '-');
+    buffer += 3;
 
-	i = tmptr->tm_mday;
-	__print_lz(i, buffer,' ');
-	buffer+=3;
+    __print_10 ((uint8_t) tmptr->tm_mday, buffer, ' ');
+    buffer += 3;
 
-	i = tmptr->tm_hour;
-	__print_lz(i, buffer,':');
-	buffer+=3;
+    __print_10 ((uint8_t) tmptr->tm_hour, buffer, ':');
+    buffer += 3;
 
-	i = tmptr->tm_min;
-	__print_lz(i, buffer,':');
-	buffer+=3;
+    __print_10 ((uint8_t) tmptr->tm_min, buffer, ':');
+    buffer += 3;
 
-	i = tmptr->tm_sec;
-	__print_lz(i, buffer,0);
+    __print_10 ((uint8_t) tmptr->tm_sec, buffer, '\0');
 }

@@ -25,12 +25,14 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. */
 
-/*
-	Re-entrant version of asctime().
+/* Re-entrant version of asctime(). */
 
-*/
-#include <time.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <time.h>
+#include "time-private.h"
+
+#include "sectionname.h"
 
 #ifdef __MEMX
 const __memx char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
@@ -40,42 +42,38 @@ const char      ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
 const char      ascdays[] = "SunMonTueWedThuFriSat";
 #endif
 
-extern void __print_lz (int, char *, char);
-
-#include "sectionname.h"
-
 ATTRIBUTE_CLIB_SECTION
 void
-asctime_r(const struct tm * timeptr, char *buffer)
+asctime_r (const struct tm *timeptr, char *buffer)
 {
-	unsigned char   i, m, d;
-	div_t result;
+    // Start with the year, so we can use BUFFER as buffer.
+    __print_43210 (timeptr->tm_year + 1900, buffer);
+    char *const s_year = buffer + 8 + 3 + 3 + 3 + 3;
+    s_year[0] = buffer[1];
+    s_year[1] = buffer[2];
+    s_year[2] = buffer[3];
+    s_year[3] = buffer[4];
+    s_year[4] = '\0';
 
-	d = timeptr->tm_wday * 3;
-	m = timeptr->tm_mon * 3;
-	for (i = 0; i < 3; i++) {
-	    buffer[i] = ascdays[d++];
-	    buffer[i+4] = ascmonths[m++];
-	}
-	buffer[3]=buffer[7]=' ';
-	buffer += 8;
+    uint8_t d = timeptr->tm_wday * 3;
+    uint8_t m = timeptr->tm_mon * 3;
+    for (uint8_t i = 0; i < 3; i++)
+    {
+        buffer[i] = ascdays[d++];
+        buffer[i+4] = ascmonths[m++];
+    }
+    buffer[3] = buffer[7] = ' ';
+    buffer += 8;
 
-	__print_lz(timeptr->tm_mday,buffer,' ');
-	buffer += 3;
+    __print_10 ((uint8_t) timeptr->tm_mday, buffer, ' ');
+    buffer += 3;
 
-	__print_lz(timeptr->tm_hour,buffer,':');
-	buffer += 3;
+    __print_10 ((uint8_t) timeptr->tm_hour, buffer, ':');
+    buffer += 3;
 
-	__print_lz(timeptr->tm_min,buffer,':');
-	buffer += 3;
+    __print_10 ((uint8_t) timeptr->tm_min, buffer, ':');
+    buffer += 3;
 
-	__print_lz(timeptr->tm_sec,buffer,' ');
-	buffer += 3;
-
-	result = div(timeptr->tm_year + 1900 , 100);
-
-	__print_lz(result.quot,buffer,' ');
-	buffer += 2;
-
-	__print_lz(result.rem,buffer,0);
+    __print_10 ((uint8_t) timeptr->tm_sec, buffer, ' ');
+    buffer += 3;
 }

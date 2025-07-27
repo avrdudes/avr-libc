@@ -33,16 +33,15 @@
 #include <time.h>
 #include <string.h>
 
-char           *Y2K_isostring = "2000-01-01 00:00:00";
-char           *end_isostring = "2136-02-07 06:28:15";
+char *Y2K_isostring = "2000-01-01 00:00:00";
+char *end_isostring = "2136-02-07 06:28:15";
 
 int
 main()
 {
-
-	time_t          t;
-	struct tm * tmptr;
-	char           *cp;
+	time_t t;
+	struct tm *tmptr;
+	char *cp;
 
 	time(&t);
 	tmptr = localtime(&t);

@@ -25,22 +25,35 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. */
 
-/* Print 2-digit integer with leading zero: auxillary function for isotime
-   and asctime. */
+/* Auxillary functions for isotime and asctime. */
 
 #include <stdlib.h>
+#include <string.h>
+#include "time-private.h"
 
 #include "sectionname.h"
 
+/* Print U with leading zeros.  BUF has enough space.  */
 ATTRIBUTE_CLIB_SECTION
 void
-__print_lz(int i, char *buffer, char s)
+__print_43210 (uint16_t u, char *buf)
 {
-    div_t result;
+    utoa (u, buf, 10);
+    for (size_t len = strlen (buf); len < 5; ++len)
+    {
+        memmove (buf + 1, buf, len + 1);
+        buf[0] = '0';
+    }
+}
 
-    result = div(i, 10);
-
-	*buffer++ = result.quot + '0';
-	*buffer++ = result.rem + '0';
-	*buffer = s;
+/* Print digit 1 and digit 0 (in base 10) of U to *BUFFER and append C.  */
+ATTRIBUTE_CLIB_SECTION
+void
+__print_10 (uint16_t u, char *buffer, char c)
+{
+    char b[6];
+    __print_43210 (u, b);
+    *buffer++ = b[3];
+    *buffer++ = b[4];
+    *buffer = c;
 }
