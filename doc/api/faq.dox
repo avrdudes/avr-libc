@@ -1073,7 +1073,7 @@ the JTAG interface unavailable for regular IO.
 <small>Back to \ref faq_index.</small>
 
 
-\section faq_flashstrings Why do all my "foo...bar" strings eat up the SRAM?
+\section faq_flashstrings Why do all my string literals eat up the SRAM?
 
 By default, all strings are handled as all other initialized
 variables: they occupy RAM (even though the compiler might warn you
@@ -1085,6 +1085,24 @@ That way, any string literal will be a valid argument to any C
 function that expects a <tt>const char*</tt> argument.
 
 Of course, this is going to waste a lot of SRAM.
+
+\note What follows is only needed when the \c \.rodata
+\ref sec_input_output "input sections"
+are located in RAM, which is only the case for the "old" AVR devices.
+For recent devices (0-series, 1-series, 2-series, AVRrc, AVR32,
+AVR64 and AVR128) all the complications below are not required.
+This is because in
+\code
+printf ("Hallo %d\n", 123);
+\endcode
+the format string will \e always be located in a \c \.rodata input
+section. And only when the \c \.rodata input sections ends up in RAM,
+then special means like below are needed to avoid wasting RAM.
+For an overview where the \c \.rodata input sections go,
+see the table in \ref faq_varinit
+
+\subsection faq_flashstrings_progmem Use PROGMEM
+
 In \ref avr_pgmspace "Program Space String Utilities",
 a method is described how such
 constant data can be moved out to flash ROM.  However, a constant
@@ -1130,6 +1148,8 @@ int main (void)
 \note By convention, the suffix \b _P to the function name is used as
 an indication that this function is going to accept a "program-space
 string".  Note also the use of the PSTR() macro.
+
+\subsection faq_flashstrings_flash Use __flash
 
 As an alternative, the GNU-C named address-space #__flash can be used.
 Notice the proper address-space qualification of \c debug_F, the usage
