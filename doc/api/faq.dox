@@ -62,6 +62,7 @@
 
   - \ref faq_asmconst "How do I use a \#define'd constant in an asm statement?"<!-- The explicit text is necessary since doxygen stumbles on the #define otherwise. -->
   - \ref faq_asmops
+  - \ref faq_nonabi
 
 - <b>Linking and Binaries</b>
   - \ref faq_reloc_code
@@ -1444,6 +1445,94 @@ programmed fuse cells read out as bit value 0.
 \section faq_asmops Which AVR-specific assembler operators are available?
 
 See \ref ass_pseudoops "Pseudo-Ops" and \ref assembly_operand_modifiers.
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_nonabi How can I use a function that doesn't comply to the ABI?
+
+Suppose you have a function \c f_nonabi written in assembly that
+doesn't comply to the \ref faq_reg_usage "avr-gcc ABI".
+How can such a function be used from C/C++?
+
+For the matter of the discussion, suppose that the function \c f_nonabi
+
+- Takes a 16-bit integer value in R31:R30
+- Returns a 16-bit integer value in R23:R22
+- Clobbers R1 and R2
+- Changes memory contents
+
+There are basically two approaches:  Write an interface function in assembly,
+or write an interface in inline assembly.
+
+\subsection faq_nonabi_asm Interface in Assembly
+
+The iterface function would look something like this, assuming that the
+AVR device supports the \c MOVW and \c CALL instructions:
+
+\code{.asm}
+.global call_f_nonabi
+.type call_f_nonabi,"function"
+call_f_nonabi:
+    push r2         ; ABI: R2 is callee-saved
+    movw r30, r24   ; ABI: int is passed in R25:R24
+    call f_nonabi
+    movw r24, r22   ; ABI: Return result in R25:R24
+    clr r1          ; ABI: R1 (__zero_reg__) must hold 0.
+    pop r2          ; ABI: R2 is callee-saved
+    ret
+\endcode
+
+Then provide C/C++ with an interface to \c call_f_nonabi:
+
+\code
+extern     int call_f_nonabi (int);  // C
+extern "C" int call_f_nonabi (int);  // C++
+\endcode
+
+\subsection faq_nonabi_inline_asm Interface in Inline Assembly
+
+GCC supports
+<a href="ttps://gcc.gnu.org/onlinedocs/gcc/Local-Register-Variables.html"
+   >local register variables</a> as a GNU extension:
+\code
+static inline __attribute__((__always_inline__))
+int call_f_nonabi (int arg)
+{
+    register int r22 __asm("r22");
+    __asm volatile ("%~call f_nonabi"   "\n\t"
+                    "clr __zero_reg__"
+                    : "=r" (r22) : "z" (arg) : "r2", "memory");
+    return r22;
+}
+\endcode
+
+Notes:
+- Whether or not \c volatile and the <tt>"memory"</tt> clobber are
+  needed depend on what \c f_nonabi actually does.
+- There's no need for a local register variable for \c num since
+  the <tt>"z"</tt> \ref inline_asm_constraints "constraint"
+  is R30 and R31.
+- R1 is a fixed register, and therefore clobbering it has no effect.
+  The value of 0 in R1 has to be restored by hand.
+- For the meaning of <tt>"%~call"</tt> see \ref inline_asm_special_sequences
+  "inline asm special sequences".
+- GCC v16 introduces
+<a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html"
+   >hard-register constraints</a>
+as an alternative to local register variables. Using that feature,
+the function would look like this:
+\code
+static inline __attribute__((__always_inline__))
+int call_f_nonabi (int arg)
+{
+    int ret;
+    __asm volatile ("%~call f_nonabi"   "\n\t"
+                    "clr __zero_reg__"
+                    : "={r22}" (ret) : "z" (arg) : "r2", "memory");
+    return ret;
+}
+\endcode
 
 <small>Back to \ref faq_index.</small>
 
