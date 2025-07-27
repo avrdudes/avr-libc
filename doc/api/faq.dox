@@ -2116,7 +2116,7 @@ just the usual bit shift (which is done by the compiler anyway, thus
 doesn't impose any run-time penalty), so the following applies:
 
 \code
-_BV(3) ⇒ 1 << 3 ⇒ 0x08
+_BV(3) => 1 << 3 => 0x08
 \endcode
 
 However, using the macro often makes the program better readable.
