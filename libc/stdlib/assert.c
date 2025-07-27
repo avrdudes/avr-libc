@@ -34,22 +34,13 @@ static char sccsid[] = "@(#)assert.c	8.1 (Berkeley) 6/4/93";
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <bits/best_as.h>
 #include "sectionname.h"
-
-#if defined(__AVR_HAVE_ELPM__) && defined(__FLASHX)
-#define AS __flashx
-#elif defined(__AVR_HAVE_ELPM__) && defined(__MEMX)
-#define AS __memx
-#elif !defined(__AVR_HAVE_ELPM__) && defined(__FLASH)
-#define AS __flash
-#else
-#define AS /* empty */
-#endif
 
 /* Print a message with operands to stderr. */
 ATTRIBUTE_CLIB_SECTION
 static void
-err_msg (const AS char *fmt,
+err_msg (const __BEST_AS char *fmt,
          const char *v1, const char *v2, const char *v3, unsigned v4)
 {
     while (1)
@@ -78,9 +69,10 @@ ATTRIBUTE_CLIB_SECTION
 void
 __assert (const char *func, const char *file, int line, const char *failedexpr)
 {
-    static const AS char s1[] = "Assertion failed: (1), file 3, line 4.\n";
-    static const AS char s2[] = ("Assertion failed: (1), function 2,"
-                                 " file 3, line 4.\n");
+    static const __BEST_AS char s1[] = ("Assertion failed: (1),"
+                                        " file 3, line 4.\n");
+    static const __BEST_AS char s2[] = ("Assertion failed: (1), function 2,"
+                                        " file 3, line 4.\n");
 
     err_msg (func ? s2 : s1, failedexpr, func, file, (unsigned) line);
 

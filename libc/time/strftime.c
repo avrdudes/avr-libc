@@ -34,32 +34,23 @@
 #include <stdio.h>
 #include <time.h>
 #include <avr/pgmspace.h>
+#include <bits/best_as.h>
 #include "sectionname.h"
 
 #define SPRINT(s, fmt, ...) sprintf_P (s, PSTR (fmt), ##__VA_ARGS__)
 
 extern long __utc_offset;
 
-#if defined(__AVR_HAVE_ELPM__) && defined(__FLASHX)
-#define AS __flashx
-#elif defined(__AVR_HAVE_ELPM__) && defined(__MEMX)
-#define AS __memx
-#elif !defined(__AVR_HAVE_ELPM__) && defined(__FLASH)
-#define AS __flash
-#else
-#define AS /* empty */
-#endif
-
-static const AS char strfwkdays[] =
+static const __BEST_AS char strfwkdays[] =
     "Sunday Monday Tuesday Wednesday Thursday Friday Saturday ";
 
-static const AS char strfmonths[] =
+static const __BEST_AS char strfmonths[] =
     "January February March April May June July August September October"
     " November December ";
 
 ATTRIBUTE_CLIB_SECTION
 static uint8_t
-pgm_copystring(const char AS *p, uint8_t i, char *b, uint8_t l)
+pgm_copystring(const char __BEST_AS *p, uint8_t i, char *b, uint8_t l)
 {
     char c;
     uint8_t ret = 0;

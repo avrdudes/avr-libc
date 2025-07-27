@@ -30,17 +30,12 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <time.h>
+#include <bits/best_as.h>
 #include "time-private.h"
-
 #include "sectionname.h"
 
-#ifdef __MEMX
-const __memx char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-const __memx char ascdays[] = "SunMonTueWedThuFriSat";
-#else
-const char      ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-const char      ascdays[] = "SunMonTueWedThuFriSat";
-#endif
+const __BEST_AS char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
+const __BEST_AS char ascdays[] = "SunMonTueWedThuFriSat";
 
 ATTRIBUTE_CLIB_SECTION
 void

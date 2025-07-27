@@ -30,6 +30,7 @@ avrdir = $(prefix)/avr/include/bits
 
 avr_HEADERS = \
     attribs.h \
+    best_as.h \
     def-flash-read.h \
     def-pgm-read.h \
     def-pgm-read-far.h \
