@@ -211,10 +211,10 @@ strftime(char *buffer, size_t limit, const char *pattern,
                 d = timeptr->tm_hour % 12;
                 if (d == 0)
                     d = 12;
-                length = SPRINT (_store, "%2d:%.2d:%.2d AM",
+                length = SPRINT (_store, "%.2d:%.2d:%.2d AM",
                                  d, timeptr->tm_min, timeptr->tm_sec);
                 if (timeptr->tm_hour > 11)
-                    _store[10] = 'P';
+                    _store[9] = 'P';
                 break;
 
             case 'R':

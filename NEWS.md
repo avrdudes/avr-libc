@@ -201,6 +201,8 @@
 
 - `XRAMEND` for ATmega128A is now defined to 0xffff ([#629][629]).
 
+- Fixed `strftime("%r")` ([#1039][1039])
+
 ## Pull Requests
 
 - Improve runtime performance of `free()` ([#991][991]).
@@ -249,3 +251,4 @@
 [1032]: https://github.com/avrdudes/avr-libc/issues/1032
 [1033]: https://github.com/avrdudes/avr-libc/issues/1033
 [1036]: https://github.com/avrdudes/avr-libc/issues/1036
+[1039]: https://github.com/avrdudes/avr-libc/issues/1039
