@@ -35,11 +35,10 @@
 #include <time.h>
 #include <avr/pgmspace.h>
 #include <bits/best_as.h>
+#include "time-private.h"
 #include "sectionname.h"
 
 #define SPRINT(s, fmt, ...) sprintf_P (s, PSTR (fmt), ##__VA_ARGS__)
-
-extern long __utc_offset;
 
 static const __BEST_AS char strfwkdays[] =
     "Sunday Monday Tuesday Wednesday Thursday Friday Saturday ";

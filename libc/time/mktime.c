@@ -31,8 +31,7 @@
 */
 
 #include <time.h>
-
-extern long __utc_offset;
+#include "time-private.h"
 
 extern int (*__dst_ptr) (const time_t *, int32_t *);
 
@@ -42,9 +41,7 @@ ATTRIBUTE_CLIB_SECTION
 time_t
 mktime(struct tm * timeptr)
 {
-	time_t          ret;
-
-	ret = mk_gmtime(timeptr);
+	time_t ret = mk_gmtime(timeptr);
 
 	if (timeptr->tm_isdst < 0)
     {

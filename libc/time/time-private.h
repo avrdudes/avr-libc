@@ -30,5 +30,7 @@
 
 #include <stdint.h>
 
+extern long __utc_offset;
+
 extern void __print_10 (uint16_t, char*, char);
 extern void __print_43210 (uint16_t, char*);

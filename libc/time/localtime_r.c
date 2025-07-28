@@ -30,8 +30,7 @@
    into calendar time.  */
 
 #include <time.h>
-
-extern long __utc_offset;
+#include "time-private.h"
 
 extern int (*__dst_ptr) (const time_t *, int32_t *);
 

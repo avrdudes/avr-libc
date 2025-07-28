@@ -29,4 +29,6 @@
 	UTC offset in seconds East
 */
 
+#include "time-private.h"
+
 long            __utc_offset;
