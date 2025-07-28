@@ -31,9 +31,6 @@
 
 #include <time.h>
 #include "time-private.h"
-
-extern int (*__dst_ptr) (const time_t *, int32_t *);
-
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

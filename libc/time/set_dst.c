@@ -29,11 +29,9 @@
 	Set the dst function pointer.
 */
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <time.h>
-
-extern int (*__dst_ptr) (const time_t *, int32_t *);
-
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

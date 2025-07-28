@@ -29,8 +29,10 @@
 /* Function used locally in libc/time/ */
 
 #include <stdint.h>
+#include <time.h>
 
 extern long __utc_offset;
+extern int (*__dst_ptr) (const time_t*, int32_t*);
 
 extern void __print_10 (uint16_t, char*, char);
 extern void __print_43210 (uint16_t, char*);
