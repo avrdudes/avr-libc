@@ -32,13 +32,13 @@ const __flash res_t Res[] =
     { 'H', FLIT("06") },          // hour in 00..23
     { 'I', FLIT("06") },          // hour in 01..12
     { 'j', FLIT("038") },         // day of year in 001...366
-    // { 'k', FLIT("?") },        // hour in " 0".."23"
-    // { 'l', FLIT("?") },        // hour in " 1".."12"
+    { 'k', FLIT(" 6") },          // hour in " 0".."23"
+    { 'l', FLIT(" 6") },          // hour in " 1".."12"
     { 'm', FLIT("02") },          // month in 01..12
     { 'M', FLIT("28") },          // minute in 00..59
     { 'n', FLIT("\n") },          // newline
     { 'p', FLIT("AM") },          // AM or PM
-    // { 'P', FLIT("?") },        // am or pm
+    { 'P', FLIT("am") },          // am or pm
     { 'r', FLIT("06:28:15 AM") }, // "%I:%M:%S %p"
     { 'R', FLIT("06:28") },       // "%H:%M"
     // { 's', FLIT("?") },        // # seconds in the epoch
@@ -87,7 +87,7 @@ int main (void)
             exit (r->c);
         }
     }
-    
+
     return 0;
 }
 #endif

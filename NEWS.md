@@ -125,6 +125,9 @@
 - `assert` doesn't use `fprintf` anymore, but a custom, light-weight function
   instead in order to diagnose a failed assertion.
 
+- `strftime` doesn't use `sprintf` anymore but a more resource friendly
+  approach.  Support has been added for `%k`, `%l` and `%P`.
+
 - avr-gcc v15 and up issues a diagnostic for `__int24` and `__uint24` when
   `-pedantic` or similar options are on.  Hence `__extension__` was
   added when using these types in `avr/pgmspace.h`.
