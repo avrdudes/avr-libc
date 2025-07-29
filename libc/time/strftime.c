@@ -263,6 +263,7 @@ strftime (char *buffer, size_t limit, const char *pattern,
                     break;
 
                 case 'T':
+                case 'X':
                     alt = ASSTR ("%H:%M:%S");
                     length = 0;
                     break;
@@ -294,11 +295,6 @@ strftime (char *buffer, size_t limit, const char *pattern,
 
                 case 'x':
                     alt = ASSTR ("%m/%d/%y");
-                    length = 0;
-                    break;
-
-                case 'X':
-                    alt = ASSTR ("%H:%M:%S");
                     length = 0;
                     break;
 
