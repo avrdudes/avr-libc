@@ -44,7 +44,7 @@ void
 asctime_r (const struct tm *timeptr, char *buffer)
 {
     // Start with the year, so we can use BUFFER as buffer.
-    __print_43210 (timeptr->tm_year + 1900, buffer + 8 + 3 + 3 + 3 + 3 - 1);
+    __print_x3210 (timeptr->tm_year + 1900, buffer + 8 + 3 + 3 + 3 + 3 - 1);
 
     uint8_t d = timeptr->tm_wday * 3;
     uint8_t m = timeptr->tm_mon * 3;
@@ -56,15 +56,9 @@ asctime_r (const struct tm *timeptr, char *buffer)
     buffer[3] = buffer[7] = ' ';
     buffer += 8;
 
-    __print_10 ((uint8_t) timeptr->tm_mday, buffer, ' ');
-    buffer += 3;
-
-    __print_10 ((uint8_t) timeptr->tm_hour, buffer, ':');
-    buffer += 3;
-
-    __print_10 ((uint8_t) timeptr->tm_min, buffer, ':');
-    buffer += 3;
-
-    __print_10 ((uint8_t) timeptr->tm_sec, buffer, ' ');
-    buffer += 3;
+    buffer = __print_10 (timeptr->tm_mday, buffer, ' '); // +3
+    buffer = __print_10 (timeptr->tm_hour, buffer, ':'); // +3
+    buffer = __print_10 (timeptr->tm_min,  buffer, ':'); // +3
+    buffer = __print_10 (timeptr->tm_sec,  buffer, ' '); // +3
+    (void) buffer;
 }

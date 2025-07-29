@@ -33,27 +33,40 @@
 
 #include "sectionname.h"
 
-/* Print U with leading zeros.  BUF has enough space.  */
+/* Print U with 5 digits where the highest one is garbage.
+   BUF has enough space.  */
+
 ATTRIBUTE_CLIB_SECTION
 void
-__print_43210 (uint16_t u, char *buf)
+__print_x3210 (uint16_t u, char *buf)
 {
+    if (u < 10000)
+        u += 10000;
+
     utoa (u, buf, 10);
-    for (size_t len = strlen (buf); len < 5; ++len)
-    {
-        memmove (buf + 1, buf, len + 1);
-        buf[0] = '0';
-    }
 }
 
-/* Print digit 1 and digit 0 (in base 10) of U to *BUFFER and append C.  */
+
+/* Print digit 1 and digit 0 (in base 10) of U to *BUFFER and append C.
+   Returns buffer + 3.  */
+
 ATTRIBUTE_CLIB_SECTION
-void
-__print_10 (uint16_t u, char *buffer, char c)
+char*
+__print_10 (uint8_t u, char *buffer, char c)
 {
-    char b[6];
-    __print_43210 (u, b);
-    *buffer++ = b[3];
-    *buffer++ = b[4];
-    *buffer = c;
+    while (u >= 100)
+        u -= 100;
+
+    char d1 = '0';
+    while (u >= 10)
+    {
+        u -= 10;
+        ++d1;
+    }
+
+    *buffer++ = d1;
+    *buffer++ = '0' + u;
+    *buffer++ = c;
+
+    return buffer;
 }

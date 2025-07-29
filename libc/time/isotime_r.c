@@ -37,9 +37,9 @@
 
 ATTRIBUTE_CLIB_SECTION
 void
-isotime_r(const struct tm *tmptr, char *buffer)
+isotime_r (const struct tm *tmptr, char *buffer)
 {
-    __print_43210 (tmptr->tm_year + 1900, buffer);
+    __print_x3210 (tmptr->tm_year + 1900, buffer);
     buffer[0] = buffer[1];
     buffer[1] = buffer[2];
     buffer[2] = buffer[3];
@@ -47,17 +47,10 @@ isotime_r(const struct tm *tmptr, char *buffer)
     buffer[4] = '-';
     buffer += 5;
 
-    __print_10 ((uint8_t) tmptr->tm_mon + 1, buffer, '-');
-    buffer += 3;
-
-    __print_10 ((uint8_t) tmptr->tm_mday, buffer, ' ');
-    buffer += 3;
-
-    __print_10 ((uint8_t) tmptr->tm_hour, buffer, ':');
-    buffer += 3;
-
-    __print_10 ((uint8_t) tmptr->tm_min, buffer, ':');
-    buffer += 3;
-
-    __print_10 ((uint8_t) tmptr->tm_sec, buffer, '\0');
+    buffer = __print_10 (tmptr->tm_mon + 1, buffer, '-');
+    buffer = __print_10 (tmptr->tm_mday, buffer, ' ');
+    buffer = __print_10 (tmptr->tm_hour, buffer, ':');
+    buffer = __print_10 (tmptr->tm_min,  buffer, ':');
+    buffer = __print_10 (tmptr->tm_sec,  buffer, '\0');
+    (void) buffer;
 }
