@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Michael Duane Rice All rights reserved.
+ * Copyright (c) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -25,46 +25,31 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. */
 
-/* Re-entrant version of asctime(). */
-
-#include <stdlib.h>
-#include <stdint.h>
 #include <time.h>
-#include <bits/best_as.h>
-#include "time-private.h"
-#include "sectionname.h"
+#include <string.h>
 
-#define AS __BEST_AS
+char *Y2K_ascstring = "Sat Jan 01 00:00:00 2000";
+char *end_ascstring = "Tue Feb 07 06:28:15 2136";
 
-static const AS char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-static const AS char ascdays[] = "SunMonTueWedThuFriSat";
-
-ATTRIBUTE_CLIB_SECTION
-void
-asctime_r (const struct tm *timeptr, char *buffer)
+int main (void)
 {
-    // Start with the year, so we can use BUFFER as buffer.
-    __print_43210 (timeptr->tm_year + 1900, buffer + 8 + 3 + 3 + 3 + 3 - 1);
+    time_t t;
+    struct tm *tmptr;
+    char *cp;
 
-    uint8_t d = timeptr->tm_wday * 3;
-    uint8_t m = timeptr->tm_mon * 3;
-    for (uint8_t i = 0; i < 3; i++)
-    {
-        buffer[i] = ascdays[d++];
-        buffer[i+4] = ascmonths[m++];
-    }
-    buffer[3] = buffer[7] = ' ';
-    buffer += 8;
+    time (&t);
+    tmptr = localtime(&t);
+    cp = asctime(tmptr);
 
-    __print_10 ((uint8_t) timeptr->tm_mday, buffer, ' ');
-    buffer += 3;
+    if (strcmp (Y2K_ascstring, cp))
+        return (__LINE__);
 
-    __print_10 ((uint8_t) timeptr->tm_hour, buffer, ':');
-    buffer += 3;
+    t = 0xffffffff;
+    tmptr = localtime(&t);
+    cp = asctime(tmptr);
 
-    __print_10 ((uint8_t) timeptr->tm_min, buffer, ':');
-    buffer += 3;
+    if (strcmp (end_ascstring, cp))
+        return (__LINE__);
 
-    __print_10 ((uint8_t) timeptr->tm_sec, buffer, ' ');
-    buffer += 3;
+    return 0;
 }
