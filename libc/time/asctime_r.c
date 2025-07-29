@@ -34,8 +34,10 @@
 #include "time-private.h"
 #include "sectionname.h"
 
-const __BEST_AS char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-const __BEST_AS char ascdays[] = "SunMonTueWedThuFriSat";
+#define AS __BEST_AS
+
+static const AS char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
+static const AS char ascdays[] = "SunMonTueWedThuFriSat";
 
 ATTRIBUTE_CLIB_SECTION
 void
