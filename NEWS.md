@@ -204,7 +204,8 @@
 
 - `XRAMEND` for ATmega128A is now defined to 0xffff ([#629][629]).
 
-- Fixed `strftime("%r")` ([#1039][1039])
+- Fixed `strftime`'s return value ([#1040][1040])
+  and  `strftime("%r")` ([#1039][1039]).
 
 ## Pull Requests
 
@@ -255,3 +256,4 @@
 [1033]: https://github.com/avrdudes/avr-libc/issues/1033
 [1036]: https://github.com/avrdudes/avr-libc/issues/1036
 [1039]: https://github.com/avrdudes/avr-libc/issues/1039
+[1040]: https://github.com/avrdudes/avr-libc/issues/1040

@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2012 Michael Duane Rice All rights reserved.
- * Copyright (c) 2025 Georg-Johann Lay  # Get rid of sprintf.
+ * Copyright (c) 2025 Georg-Johann Lay  # Get rid of sprintf, fix return value.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -89,8 +89,7 @@ pgm_copystring (const char AS *p, uint8_t i, char *b, uint8_t len)
    BITS > 0: Fill with leading 0's.  */
 
 ATTRIBUTE_CLIB_SECTION
-//static
-uint8_t
+static uint8_t
 u2s (char *s, int8_t bits, uint16_t num)
 {
     uint8_t pos = strlen (utoa (num, s + 5, 10));
@@ -119,7 +118,7 @@ strftime (char *buffer, size_t limit, const char *pattern,
     char _store[32];
     struct week_date wd;
     const AS char *alt = AS_NULL;
-    uint16_t count = 0;
+    uint16_t count = 0; // chars written to buffer.
     uint8_t length = 0; // Length in _store[].
 
     while (count < limit)
@@ -138,14 +137,11 @@ strftime (char *buffer, size_t limit, const char *pattern,
 
             switch (c)
             {
+                case '\0':
                 case '%':
                     _store[0] = c;
                     length = 1;
                     break;
-
-                case '\0':
-                    *buffer = '\0';
-                    return count;
 
                 case 'a':
                     length = pgm_copystring (strfwkdays, timeptr->tm_wday,
@@ -329,31 +325,32 @@ strftime (char *buffer, size_t limit, const char *pattern,
                     _store[0] = '?';
                     length = 1;
                     break;
-            }
+            } // switch (c)
+        }
+        else // c != '%'
+        {
+            // Copy a plain character.
+            _store[0] = c;
+            length = 1;
+        }
 
-            if (length + count < limit)
-            {
-                count += length;
-                for (uint8_t d = 0; d < length; ++d)
-                    *buffer++ = _store[d];
-            }
-            else
-            {
-                *buffer = '\0';
-                return count;
-            }
+        if (count + length <= limit)
+        {
+            count += length;
+            for (uint8_t d = 0; d < length; ++d)
+                *buffer++ = _store[d];
 
+            if (c == '\0')
+                // Don't count the terminating '\0'.
+                return count - 1;
+
+            if (count == limit)
+                return 0;
         }
         else
-        {
-            /* copy a literal */
-            *buffer++ = c;
-            count++;
-            if (c == '\0')
-                return count;
-        }
-    }
+            break;
+    } // while (count < limit);
 
     *buffer = '\0';
-    return count;
+    return 0;
 }
