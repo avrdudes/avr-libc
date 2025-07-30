@@ -298,7 +298,7 @@ startup code can initialize the SRAM with the required values.
   <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a>
   (AVRrc),
   <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a>
-  (AVR32 devices, 0-series, 1-series and 2-series).
+  (AVR16 and AVR32 devices, 0-series, 1-series and 2-series).
 -# Devices that see only a part of program memory in the RAM address space:
   AVR64 and AVR128 devices without
   <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
@@ -1089,7 +1089,7 @@ Of course, this is going to waste a lot of SRAM.
 \note What follows is only needed when the \c \.rodata
 \ref sec_input_output "input sections"
 are located in RAM, which is only the case for the "old" AVR devices.
-For recent devices (0-series, 1-series, 2-series, AVRrc, AVR32,
+For recent devices (0-series, 1-series, 2-series, AVRrc, AVR16, AVR32,
 AVR64 and AVR128) all the complications below are not required.
 This is because in
 \code
