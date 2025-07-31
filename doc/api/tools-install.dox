@@ -41,6 +41,7 @@ systems, and another section for Windows.
 - \ref required_tools
 - \ref optional_tools
 - \ref install_unix
+  - \ref install_scripts "Build Scripts"
   - \ref install_preparations
     - \ref install_host_tools "Required Build Tools"
     - \ref install_dir_layout
@@ -149,10 +150,10 @@ have \c CC set at all.
 each of the tools.
 
 
-\subsection install_scripts Scripts
+\subsection install_scripts Build Scripts
 
-There are scripts that can simplify he process of building an AVR
-toolchain for Linux and/or for Windows in
+There are scripts that can simplify the process of building an AVR
+toolchain for Linux, and/or for Windows in
 \ref install_canadian "Canadia cross" configuration.
 
 - GitHub: <a href="https://github.com/ZakKemble/avr-gcc-build"
