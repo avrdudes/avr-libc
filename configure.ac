@@ -496,6 +496,38 @@ AC_DEFUN(
   ]
 )
 
+dnl GCC P6R3223: From avr-gcc v4.9.2 on, jump tables are accessed with
+dnl ELPM so that moving .text around is not an issue anymore.
+AC_DEFUN(
+  CHECK_JUMP_TABLES_ISSUE,
+  [
+    old_CC=${CC}
+    old_CFLAGS=${CFLAGS}
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(whether ${CC} can use -Ttext with jump-tables)
+    AC_COMPILE_IFELSE(
+      [AC_LANG_SOURCE([[
+      #if __GNUC__ >= 5
+      /* fine */
+      #elif __GNUC__ >= 4 && __GNUC_MINOR__ >= 9 && __GNUC_PATCHLEVEL__ >= 2
+      /* fine */
+      #else
+      #error Has PR63223
+      #endif
+      ]],[])],
+      [no_jump_tables_issue=yes],
+      [no_jump_tables_issue=no]
+    )
+    if test "x$no_jump_tables_issue" = "xyes"
+    then
+      FNO_JUMP_TABLES=""
+    fi
+    AC_MSG_RESULT($no_jump_tables_issue)
+    CC=${old_CC}
+    CFLAGS=${old_CFLAGS}
+  ]
+)
+
 AC_DEFUN(
   CHECK_BUILTIN_DELAY_CYCLES,
   [
@@ -519,6 +551,7 @@ AC_DEFUN(
 
 CHECK_MNO_TABLEJUMP
 CHECK_FNO_JUMP_TABLES
+CHECK_JUMP_TABLES_ISSUE
 CHECK_BUILTIN_DELAY_CYCLES
 
 asm_only="at90s1200 attiny11 attiny12 attiny15 attiny28"
