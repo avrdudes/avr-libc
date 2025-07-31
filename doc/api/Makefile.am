@@ -207,9 +207,12 @@ $(USER_MANUAL).tar.bz2: demo-examples $(USER_MANUAL)/index.html
 # where the toplevel configure decides which of them will become a
 # prerequisite of install-data-local.
 install-dox-html: dox-html
-	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)
+	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)/search
 	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css \
-	                  $(USER_MANUAL)/*.jpg $(USER_MANUAL)/*.png)'; \
+	                  $(USER_MANUAL)/*.jpg $(USER_MANUAL)/*.png \
+	                  $(USER_MANUAL)/search/*.js \
+	                  $(USER_MANUAL)/search/*.css \
+	                  $(USER_MANUAL)/search/*.svg)'; \
 	for file in $$list ; do \
 	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file"; \
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
