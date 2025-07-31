@@ -114,7 +114,6 @@ strftime (char *buffer, size_t limit, const char *pattern,
           const struct tm *timeptr)
 {
     int d, w;
-    char c;
     char _store[32];
     struct week_date wd;
     const AS char *alt = AS_NULL;
@@ -126,7 +125,7 @@ strftime (char *buffer, size_t limit, const char *pattern,
         if (alt && *alt == '\0')
             alt = AS_NULL;
 
-        c = alt ? *alt++ : *pattern++;
+        char c = alt ? *alt++ : *pattern++;
 
         if (c == '%')
         {
@@ -137,9 +136,10 @@ strftime (char *buffer, size_t limit, const char *pattern,
 
             switch (c)
             {
-                case '\0':
-                case '%':
-                    _store[0] = c;
+                default:
+                    // Handle % and \0 as part of the default so as to
+                    // reduce the size of the jump table.
+                    _store[0] = c == '\0' || c == '%' ? c : '?';
                     length = 1;
                     break;
 
@@ -315,11 +315,6 @@ strftime (char *buffer, size_t limit, const char *pattern,
                     u2s (_store + 1, 0x3, abs (d));
                     u2s (_store + 3, 0x3, w);
                     length = 5;
-                    break;
-
-                default:
-                    _store[0] = '?';
-                    length = 1;
                     break;
             } // switch (c)
         }
