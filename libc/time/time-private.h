@@ -31,8 +31,14 @@
 #include <stdint.h>
 #include <time.h>
 
+extern long __latitude;
+extern long __longitude;
 extern long __utc_offset;
+extern char *__asc_store;
+extern struct tm __tm_store;
 extern int (*__dst_ptr) (const time_t*, int32_t*);
+
+extern volatile time_t __system_time;
 
 extern char* __print_10 (uint8_t, char*, char);
 extern void __print_x3210 (uint16_t, char*);

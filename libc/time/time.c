@@ -26,14 +26,13 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 /*
-	Standard time() function. Copying from __system_time must be atomic, since it
-	may be incremented at interrupt time.
+  Standard time() function. Copying from __system_time must be atomic,
+  since it may be incremented at interrupt time.
 */
-#include <time.h>
+
 #include <avr/interrupt.h>
-
-extern volatile time_t __system_time;
-
+#include <time.h>
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

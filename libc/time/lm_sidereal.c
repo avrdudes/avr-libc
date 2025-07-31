@@ -28,10 +28,9 @@
 /*
     Local Mean Sidereal Time. See gm_sidereal() for info.
 */
+
 #include <time.h>
-
-extern long __longitude;
-
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

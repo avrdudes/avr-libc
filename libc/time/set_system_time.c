@@ -30,11 +30,9 @@
    integrated circuit. It is necessary for this to be atomic, as the value
    may be incremented at interrupt time.  */
 
-#include <time.h>
 #include <avr/interrupt.h>
-
-extern volatile time_t __system_time;
-
+#include <time.h>
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

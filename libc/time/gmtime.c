@@ -31,9 +31,7 @@
 */
 
 #include <time.h>
-
-extern struct tm __tm_store;
-
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

@@ -25,5 +25,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. */
 
-long            __latitude;
-long            __longitude;
+#include "time-private.h"
+
+long __latitude;
+long __longitude;

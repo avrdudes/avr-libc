@@ -30,9 +30,7 @@
 	private buffer, and return the buffer.
 */
 #include <time.h>
-
-extern char *__asc_store;
-
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

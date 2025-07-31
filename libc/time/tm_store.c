@@ -30,5 +30,6 @@
 */
 
 #include <time.h>
+#include "time-private.h"
 
-struct tm       __tm_store;
+struct tm __tm_store;

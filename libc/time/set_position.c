@@ -28,9 +28,7 @@
 /* Set the geographic position of the observer. Both parameters are in
    seconds, with North latitude and East longitude being positive values.  */
 
-extern long     __latitude;
-extern long     __longitude;
-
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

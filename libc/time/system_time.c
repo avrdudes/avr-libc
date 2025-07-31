@@ -28,6 +28,8 @@
 /*
 	The system time stamp.
 */
+
 #include <time.h>
+#include "time-private.h"
 
 volatile time_t __system_time;

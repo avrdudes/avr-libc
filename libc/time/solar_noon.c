@@ -30,9 +30,7 @@
 */
 
 #include <time.h>
-
-extern long __longitude;
-
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

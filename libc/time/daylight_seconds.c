@@ -31,11 +31,9 @@
 
 */
 
-#include <time.h>
 #include <math.h>
-
-extern long __latitude;
-
+#include <time.h>
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION
