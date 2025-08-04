@@ -46,10 +46,10 @@
   - \ref faq_cplusplus
   - \ref faq_optflags
   - \ref faq_varinit
-  - \ref faq_port_pass
   - \ref faq_flashstrings
   - \ref faq_rom_array
   - \ref faq_startup
+  - \ref faq_port_pass
   - \ref faq_funcptr_gt128kib
   - \ref faq_reg_usage
   - \ref faq_regbind
@@ -240,118 +240,6 @@ easily add up into a considerable amount of time and program memory
 wasted.  Thus, casual inspection of the generated assembler code
 (using the \ref opt_save_temps "-save-temps" compiler option)
 seems to be warranted.
-
-<small>Back to \ref faq_index.</small>
-
-
-\section faq_varinit Shouldn't I initialize all my variables?
-
-Variables in static storage are guaranteed to be initialized by the C standard.
-This includes global and static variables without explicit initializer,
-which are initialized to 0.
-\c avr-gcc does this by placing the appropriate code
-into section <tt>\ref sec_dot_init ".init4"</tt>.  With respect to the
-standard, this sentence is somewhat simplified (because the standard
-allows for machines where the actual bit pattern used differs
-from all bits being 0), but for the AVR target, in general, all integer-type
-variables are set to 0, all pointers to a NULL pointer, and all
-floating-point variables to 0.0.
-
-As long as these variables are not explicitly initialized, or their
-initializer is all zeros, they go into the \ref sec_dot_bss ".bss"
-output section.  This section simply records the size of the
-variable, but otherwise doesn't consume space, neither within the
-object file nor within flash memory.  (Of course, being a variable, it
-will consume space in the target's SRAM.)
-
-In contrast, global and static variables that have a non-zero initializer go
-into the \ref sec_dot_data ".data" output section or into the
-\ref sec_dot_rodata ".rodata" output section
-(or, depending on the code, may be optimized out entirely).
-Data in the \c \.data output section consumes space in the SRAM of the device,
-as well as space in the flash ROM of the device.  The latter is required so that the
-startup code can initialize the SRAM with the required values.
-
-<table>
-<caption>Non-Zero Data in Static Storage</caption>
-<tr>
-  <th>Read-Only
-  <th>Input Section
-  <th>Output Section
-  <th>Memory Region(s)
-  <th>Case
-</tr>
-<tr>
-  <td>No  <td>.data   <td>.data  <td>text \e and data <td>All
-</tr><tr>
-  <td rowspan="3">Yes <td rowspan="3">.rodata
-           <td>.data <td>text \e and data <td>3
-</tr><tr>
-           <td>.rodata <td>text <td>1
-</tr><tr>
-           <td>.rodata <td>rodata <td>2
-</tr>
-</table>
-
-<b>Cases</b>
--# Devices that see all of program memory in the RAM address space:
-  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a>
-  (AVRrc),
-  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a>
-  (AVR16 and AVR32 devices, 0-series, 1-series and 2-series).
--# Devices that see only a part of program memory in the RAM address space:
-  AVR64 and AVR128 devices without
-  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
-     ><tt>-mrodata-in-ram</tt></a>.
--# All other devices, i.e. devices that don't see program memory in the RAM address space,
-  or when \c -mrodata-in-ram is specified.
-
-<small>Back to \ref faq_index.</small>
-
-
-\section faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
-
-Some of the timer-related 16-bit IO registers use a temporary register
-(called TEMP in the AVR datasheet) to guarantee an atomic access to
-the register despite the fact that two separate 8-bit IO transfers are
-required to actually move the data.  Typically, this includes access
-to the current timer/counter value register (<tt>TCNT</tt><em>n</em>),
-the input capture register (<tt>ICR</tt><em>n</em>), and write access
-to the output compare registers (<tt>OCR</tt><em>nM</em>).  Refer to
-the actual datasheet for each device's set of registers that involves
-the TEMP register.
-
-When accessing one of the registers that use TEMP from the main
-application, and possibly any other one from within an interrupt
-routine, care must be taken that no access from within an interrupt
-context could clobber the TEMP register data of an in-progress
-transaction that has just started elsewhere.
-
-To protect interrupt routines against other interrupt routines, it's
-usually best to use the ISR() macro when declaring the interrupt
-function, and to ensure that interrupts are still disabled when
-accessing those 16-bit timer registers.
-
-Within the main program, access to those registers could be
-encapsulated in calls to the cli() and sei() macros.  If the status of
-the global interrupt flag before accessing one of those registers is
-uncertain, something like the following example code can be used.
-
-\code
-#include <avr/io.h>
-
-uint16_t read_timer1 (void)
-{
-    uint8_t sreg = SREG;
-    uint16_t val;
-
-    cli();
-    val = TCNT1;
-    SREG = sreg;
-
-    return val;
-}
-\endcode
 
 <small>Back to \ref faq_index.</small>
 
@@ -781,99 +669,6 @@ sections in the avr-gcc Wiki.
 <small>Back to \ref faq_index.</small>
 
 
-\section faq_rom_array How do I put an array of strings completely in ROM?
-
-There are times when you may need an array of strings which will never be
-modified. In this case, you don't want to waste ram storing the constant
-strings. The most obvious (and incorrect) thing to do is this:
-
-\code
-#include <avr/pgmspace.h>
-
-const char* const array[2] PROGMEM =
-{
-    "Foo", "Bar"
-};
-
-int main (void)
-{
-    char buf[32];
-    strcpy_P (buf, array[1]);
-    return 0;
-}
-\endcode
-
-The result is not what you want though. What you end up with is the array
-stored in ROM, while the individual strings end up in RAM (in some
-<code>.rodata</code> input section).
-
-To work around this, you need to do something like this:
-
-\code
-#include <avr/pgmspace.h>
-
-static const char s_foo[] PROGMEM = "Foo";
-static const char s_bar[] PROGMEM = "Bar";
-
-const char* const array[2] PROGMEM =
-{
-    s_foo, s_bar
-};
-
-void func (uint8_t i)
-{
-    char buf[32];
-
-    const char *p = pgm_read_ptr (&array[i]);
-    strcpy_P (buf, p);
-}
-\endcode
-
-Looking at the disassembly of the resulting object file we see that array is
-in flash as such:
-
-\verbatim
-00000026 <array>:
-  26:   2e 00 2a 00
-
-0000002a <bar>:
-  2a:   42 61 72 00          Bar.
-
-0000002e <foo>:
-  2e:   46 6f 6f 00          Foo.
-\endverbatim
-
-\c foo is at address 0x002e.<br>
-\c bar is at address 0x002a.<br>
-\c array is at address 0x0026.<br>
-
-
-\subsection faq_rom_array_as Using named address-spaces
-
-An alternative is to use the named address-space #__flash,
-which is supported since avr-gcc v4.7 and in GNU-C99 (\c -std=gnu99) and up:
-
-\code
-#include <avr/flash.h>
-
-const __flash char* const __flash array[] =
-{
-    FLIT("Foo"), FLIT("Bar")
-};
-
-int compare (const char *str, uint8_t i)
-{
-    return strcmp_F (str, array[i]);
-}
-\endcode
-
-Moreover, there is no more need for <tt>pgm_read_xxx()</tt>: The (addresses of)
-the string literals can be read directly by means of <tt>array[i]</tt>.
-
-
-<small>Back to \ref faq_index.</small>
-
-
 \section faq_ext_ram How to use external RAM?
 
 Well, there is no universal answer to this question; it depends on
@@ -1073,33 +868,177 @@ the JTAG interface unavailable for regular IO.
 <small>Back to \ref faq_index.</small>
 
 
+\section faq_16bitio Why do some 16-bit timer registers sometimes get trashed?
+
+Some of the timer-related 16-bit IO registers use a temporary register
+(called TEMP in the AVR datasheet) to guarantee an atomic access to
+the register despite the fact that two separate 8-bit IO transfers are
+required to actually move the data.  Typically, this includes access
+to the current timer/counter value register (<tt>TCNT</tt><em>n</em>),
+the input capture register (<tt>ICR</tt><em>n</em>), and write access
+to the output compare registers (<tt>OCR</tt><em>nM</em>).  Refer to
+the actual datasheet for each device's set of registers that involves
+the TEMP register.
+
+When accessing one of the registers that use TEMP from the main
+application, and possibly any other one from within an interrupt
+routine, care must be taken that no access from within an interrupt
+context could clobber the TEMP register data of an in-progress
+transaction that has just started elsewhere.
+
+To protect interrupt routines against other interrupt routines, it's
+usually best to use the ISR() macro when declaring the interrupt
+function, and to ensure that interrupts are still disabled when
+accessing those 16-bit timer registers.
+
+Within the main program, access to those registers could be
+encapsulated in calls to the cli() and sei() macros.  If the status of
+the global interrupt flag before accessing one of those registers is
+uncertain, something like the following example code can be used.
+
+\code
+#include <avr/io.h>
+
+uint16_t read_timer1 (void)
+{
+    uint8_t sreg = SREG;
+    uint16_t val;
+
+    cli();
+    val = TCNT1;
+    SREG = sreg;
+
+    return val;
+}
+\endcode
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_varinit Shouldn't I initialize all my variables?
+
+Variables in static storage are guaranteed to be initialized by the C standard.
+This includes global and static variables without explicit initializer,
+which are initialized to 0.
+\c avr-gcc does this by placing the appropriate code
+into section <tt>\ref sec_dot_init ".init4"</tt>.  With respect to the
+standard, this sentence is somewhat simplified (because the standard
+allows for machines where the actual bit pattern used differs
+from all bits being 0), but for the AVR target, in general, all integer-type
+variables are set to 0, all pointers to a NULL pointer, and all
+floating-point variables to 0.0.
+
+As long as these variables are not explicitly initialized, or their
+initializer is all zeros, they go into the \ref sec_dot_bss ".bss"
+output section.  This section simply records the size of the
+variable, but otherwise doesn't consume space, neither within the
+object file nor within flash memory.  (Of course, being a variable, it
+will consume space in the target's SRAM.)
+
+<small>Back to \ref faq_index.</small>
+
+
 \section faq_flashstrings Why do all my string literals eat up the SRAM?
 
-By default, all strings are handled as all other initialized
-variables: they occupy RAM (even though the compiler might warn you
-when it detects write attempts to these RAM locations), and occupy the
-same amount of flash ROM so they can be initialized to the actual
-string by startup code.
+By default, string literals are handled like all other initialized
+constants in static storage: They are put into a \c \.rodata
+\ref sec_input_output "input section".
 
-That way, any string literal will be a valid argument to any C
-function that expects a <tt>const char*</tt> argument.
+On old devices, the \c \.rodata input sections are allocated to the
+\ref sec_dot_data ".data" output section, which means that such objects
+occupy memory in the flash ROM \e and in the SRAM according to the
+following rules:
 
-Of course, this is going to waste a lot of SRAM.
+<table>
+<caption>Non-Zero Data in Static Storage</caption>
+<tr>
+  <th>Read-Only
+  <th>Input Section
+  <th>Output Section
+  <th>Memory Region(s)
+  <th>Case
+</tr>
+<tr>
+  <td>No  <td>.data   <td>.data  <td>text \e and data <td>All
+</tr><tr>
+  <td rowspan="3">Yes <td rowspan="3">.rodata
+           <td><b>.data</b> <td>text \e and data <td>3
+</tr><tr>
+           <td>.rodata <td>text <td>1
+</tr><tr>
+           <td>.rodata <td>rodata <td>2
+</tr>
+</table>
+
+<b>Cases</b>
+-# Devices that see all of program memory in the RAM address space:
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a>
+  (AVRrc),
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a>
+  (AVR16 and AVR32 devices, 0-series, 1-series and 2-series).
+-# Devices that see only a part of program memory in the RAM address space:
+  AVR64 and AVR128 devices without
+  <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
+     ><tt>-mrodata-in-ram</tt></a>.
+-# All other devices, i.e. devices that don't see (parts of) the program
+  memory in the RAM address space, or when \c -mrodata-in-ram is specified.
+  The place in the flash ROM (\c \.text) is occupied by the initializer
+  values that are used by the startup code to initialize the objects
+  in the \c .data output section.
+
+The question remains: Why is case 3. allocating constant variables into
+the SRAM?  For a better understanding, consider the following code:
+
+\code
+char get_first_char (const char *str)
+{
+    return str[0];
+}
+\endcode
+
+What code should the compiler generate for that function?
+Notice that it is perfectly fine to pass a string that is not constant
+through the <tt>const char *str</tt> parameter, which only states that
+\c get_first_char won't change \c str like in the following use cases:
+
+\code
+char func1 (int i)
+{
+    char str[10];
+    sprintf (str, "%d", i);
+    return get_first_char (str);
+}
+
+char func2 (void)
+{
+    return get_first_char ("Hello");
+}
+\endcode
+
+In any case the compiler will generate code like this:
+\code
+get_first_char:
+    movw r30, r24
+    ld   r24, Z
+    ret
+\endcode
+
+For the devices from 1. and 2. the <tt>"ld r24,Z"</tt> will read from flash
+or from SRAM depending on the address passed in R24.
+But on the old 3. devices only LPM can read from flash, and therefore
+the tools place \c "Hello" in RAM so that the code works for all
+possible string addresses.  The same applies to all other constants
+in static storage.
+
+Of course, this is going to waste a lot of SRAM on the old devices.
+
+For ways how to place string literals in flash ROM (and to access them),
+see also the next section \ref faq_rom_array.
 
 \note What follows is only needed when the \c \.rodata
 \ref sec_input_output "input sections"
 are located in RAM, which is only the case for the "old" AVR devices.
-For recent devices (0-series, 1-series, 2-series, AVRrc, AVR16, AVR32,
-AVR64 and AVR128) all the complications below are not required.
-This is because in
-\code
-printf ("Hallo %d\n", 123);
-\endcode
-the format string will \e always be located in a \c \.rodata input
-section. And only when the \c \.rodata input sections ends up in RAM,
-then special means like below are needed to avoid wasting RAM.
-For an overview where the \c \.rodata input sections go,
-see the table in \ref faq_varinit
+See the table above.
 
 \subsection faq_flashstrings_progmem Use PROGMEM
 
@@ -1108,7 +1047,7 @@ a method is described how such
 constant data can be moved out to flash ROM.  However, a constant
 string located in flash ROM is no longer a valid argument to pass to a
 function that expects a <tt>const char*</tt>-type string, since the
-AVR processor needs the special instruction \c LPM to access these
+old AVR devices need the special instruction \c LPM to access these
 strings.  Thus, separate functions are needed that take this into
 account.  Many of the standard C library functions have equivalents
 available where one of the string arguments can be located in flash
@@ -1123,10 +1062,10 @@ messages that will be sent through a UART:
 int uart_putchar (char c)
 {
   if (c == '\n')
-    uart_putchar('\r');
+    uart_putchar ('\r');
   loop_until_bit_is_set (USR, UDRE);
   UDR = c;
-  return 0; /* so it could be used for fdevopen(), too */
+  return 0; // So it could be used for fdevopen(), too.
 }
 
 void debug_P (const char *addr)
@@ -1139,28 +1078,26 @@ void debug_P (const char *addr)
 
 int main (void)
 {
-  ioinit(); /* initialize UART, ... */
-  debug_P (PSTR("foo was here\n"));
+  ioinit();  // Initialize UART, ...
+  debug_P (PSTR ("foo was here\n"));
   return 0;
 }
 \endcode
 
 \note By convention, the suffix \b _P to the function name is used as
 an indication that this function is going to accept a "program-space
-string".  Note also the use of the PSTR() macro.
+string".  Note also the use of the \c #PSTR macro.
 
 \subsection faq_flashstrings_flash Use __flash
 
-As an alternative, the GNU-C named address-space #__flash can be used.
+As an alternative, the GNU-C named address-space \c #__flash can be used.
 Notice the proper address-space qualification of \c debug_F, the usage
-of #FSTR instead of \c PSTR, and that reading from a #__flash address
+of #FSTR instead of \c PSTR, and that reading from a \c #__flash address
 can be accomplished by open-coded C code like in <tt>*addr++</tt>.
 
 \code
 #include <avr/io.h>
 #include <avr/flash.h>
-
-// ...
 
 void debug_F (const __flash char *addr)
 {
@@ -1172,11 +1109,109 @@ void debug_F (const __flash char *addr)
 
 int main (void)
 {
-  ioinit(); /* initialize UART, ... */
-  debug_F (FSTR("foo was here\n"));
+  ioinit(); // initialize UART, ...
+  debug_F (FSTR ("foo was here\n"));
   return 0;
 }
 \endcode
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_rom_array How do I put an array of strings completely in ROM?
+
+There are times when you may need an array of strings which will never be
+modified. In this case, you don't want to waste RAM storing the constant
+strings.  For the rationale behind storing constant strings in RAM,
+see the previos section \ref faq_flashstrings
+
+\subsection faq_rom_array_progmem With PROGMEM
+
+The most obvious (and incorrect) thing to do is this:
+
+\code
+#include <avr/pgmspace.h>
+
+// array[] will be in flash ROM, but "Foo" and "Bar" are still in RAM.
+const char* const array[2] PROGMEM =
+{
+    "Foo", "Bar"
+};
+
+int main (void)
+{
+    char buf[32];
+    strcpy_P (buf, array[1]);
+    return 0;
+}
+\endcode
+
+The result is not what you want though. What you end up with is the array
+stored in ROM, while the individual strings end up in RAM (in some
+<code>.rodata</code> input section).
+
+To work around this, you need to do something like this:
+
+\code
+#include <avr/pgmspace.h>
+
+static const char s_foo[] PROGMEM = "Foo";
+static const char s_bar[] PROGMEM = "Bar";
+
+const char* const array[2] PROGMEM =
+{
+    s_foo, s_bar
+};
+
+void func (uint8_t i)
+{
+    char buf[32];
+
+    const char *p = pgm_read_ptr (&array[i]);
+    strcpy_P (buf, p);
+}
+\endcode
+
+Looking at the disassembly of the resulting object file we see that array is
+in flash as such:
+
+\verbatim
+00000026 <array>:
+  26:   2e 00 2a 00
+
+0000002a <bar>:
+  2a:   42 61 72 00          Bar.
+
+0000002e <foo>:
+  2e:   46 6f 6f 00          Foo.
+\endverbatim
+
+\c foo is at address 0x002e.<br>
+\c bar is at address 0x002a.<br>
+\c array is at address 0x0026.<br>
+
+
+\subsection faq_rom_array_as With named address-spaces
+
+An alternative is to use the named address-space \c #__flash,
+which is supported since avr-gcc v4.7 and in GNU-C99 (\c -std=gnu99) and up:
+
+\code
+#include <avr/flash.h>
+
+const __flash char* const __flash array[] =
+{
+    FLIT("Foo"), FLIT("Bar")
+};
+
+int compare (const char *str, uint8_t i)
+{
+    return strcmp_F (str, array[i]);
+}
+\endcode
+
+Moreover, there is no more need for <tt>pgm_read_xxx()</tt>: The (addresses of)
+the string literals can be read directly by means of <tt>array[i]</tt>.
 
 <small>Back to \ref faq_index.</small>
 
