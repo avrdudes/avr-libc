@@ -67,6 +67,9 @@
 - <b>Linking and Binaries</b>
   - \ref faq_reloc_code
   - \ref faq_binarydata
+    - \ref faq_binarydata_embed "Using \#embed"
+    - \ref faq_binarydata_incbin
+    - \ref faq_binarydata_objcopy
   - \ref faq_linkerscripts
 
 - <b>Static Analysis</b>
@@ -1647,6 +1650,8 @@ A .xbn script is for linking with -N flag (mix text and data on same page).
 
 \section faq_binarydata How to add a raw binary image to linker output?
 
+\subsection faq_binarydata_embed Using #embed
+
 Before answering this question, lets mention the <tt>\#embed</tt>
 directive introduced in C23.  While <tt>\#embed</tt> doesn't strictly
 conform to the requirement of the question, it is so much more convenient
@@ -1656,37 +1661,110 @@ of a file into a compilation unit. Here is an example:
 #include <stdio.h>
 #include <avr/pgmspace.h>
 
-static const char foo_c[] PROGMEM =
+static const char abba_txt[] PROGMEM =
 {
-#embed "foo.c"
-    // Append \0 so that foo_c becomes a proper C string
-    // (assuming foo.c is a text file).
+#embed "abba.txt"
+    // Append \0 so that abba_txt becomes a proper C string
+    // (assuming abba.txt is a text file).
     , '\0'
 };
 
-int main ()
+int main (void)
 {
-    printf ("== foo.c has %d bytes ==\n%S\n",
-            (int) sizeof (foo_c) - 1, foo_c);
+    printf ("== abba.txt has %d bytes ==\n%S\n",
+            (int) sizeof (abba_txt) - 1, abba_txt);
 }
 \endcode
 
-Alternatively, GNU Binutils can be used.
+
+\subsection faq_binarydata_incbin Using .incbin
+
+The GNU assembler supports the
+<a href="https://sourceware.org/binutils/docs/as/Incbin.html"
+   ><tt>.incbin</tt></a> directive, which includes
+the content of a file verbatim as if it was specified by \c \.byte
+directives:
+\code
+.macro ARRAY_START name
+    .pushsection .progmem.data.\name,"a","progbits"
+    .global \name
+    .type \name,"object"
+    \name:
+.endm
+
+.macro ARRAY_END name
+    .global \name\()_size
+    \name\()_size = . - \name
+    .size \name, . - \name
+    .popsection
+.endm
+
+/* Defines abba_txt[] from the bytes of abba.txt. */
+ARRAY_START abba_txt
+    .incbin "abba.txt"
+    /* Append a \0 to the array. */
+    .byte 0
+ARRAY_END abba_txt
+\endcode
+
+The code defines the assembly macros \c ARRAY_START and \c ARRAY_END for
+convenience.  They define the array and a symbol for the array size.
+A C header file provides the symbols to a C program:
+
+\code
+#ifndef ABBA_H
+#define ABBA_H
+extern char abba_txt[];
+// Notice that abba_txt_size is just a symbol
+// that doesn't occupy memory.
+extern char abba_txt_size[];
+#endif /* ABBA_H */
+\endcode
+
+This header is then included in order to use the data:
+
+\code
+#include <stdio.h>
+#include <stdint.h>
+#include "abba.h"
+
+int main (void)
+{
+    printf ("start: 0x%x\n", (uintptr_t) abba_txt);
+    printf ("size:  %u\n", (uintptr_t) abba_txt_size);
+    printf ("array: \"%S\"\n", abba_txt);
+    return 0;
+}
+\endcode
+
+The simplest way to assemble the assembly module is by letting avr-gcc
+do the work:
+\verbatim
+$ avr-gcc -x assembler-with-cpp abba.asm -x none -o abba.o -mmcu=...
+\endverbatim
+The <tt>"-x assembler-with-cpp"</tt> and <tt>"-x none"</tt> are only
+needed when the file extension of the assembly file is neither \c \.S nor
+\c \.sx.  In such cases, avr-gcc must be provided with the
+\ref opt_x "input language".
+
+
+\subsection faq_binarydata_objcopy Using objcopy
 
 The GNU linker <tt>avr-ld</tt> cannot handle binary data
 directly. However, there's a companion tool called
-<tt>avr-objcopy</tt>. This is already known from the output side: it's
-used to extract the contents of the linked ELF file into an Intel Hex
-load file.
+<a href="https://sourceware.org/binutils/docs/binutils/objcopy.html"
+   ><tt>avr-objcopy</tt></a>.
+This is already known from the output side: it's used to extract
+the contents of the linked ELF file into an Intel Hex load file.
 
 <tt>avr-objcopy</tt> can create a relocatable object file from
 arbitrary binary input, like
 
 \verbatim
-avr-objcopy -I binary -O elf32-avr foo.bin foo.o
+$ avr-objcopy -I binary -O elf32-avr foo.bin foo.o
 \endverbatim
 
-This will create a file named <tt>foo.o</tt>, with the contents of
+This will create a file named <tt>foo.o</tt> with the contents of
 <tt>foo.bin</tt>.  The contents will default to section .data, and two
 symbols will be created named \c _binary_foo_bin_start and \c
 _binary_foo_bin_end. These symbols can be referred to inside a C
@@ -1697,7 +1775,7 @@ used the PROGMEM attribute in C source code), the sections have to be
 renamed while copying, and it's also useful to set the section flags:
 
 \verbatim
-avr-objcopy --rename-section .data=.progmem.data,contents,alloc,load,readonly,data -I binary -O elf32-avr foo.bin foo.o
+$ avr-objcopy --rename-section .data=.progmem.data,contents,alloc,load,readonly,data -I binary -O elf32-avr foo.bin foo.o
 \endverbatim
 
 Note that all this could be conveniently wired into a Makefile, so
