@@ -50,6 +50,7 @@ systems, and another section for Windows.
   - \ref install_avr_libc
   - \ref install_avrprog
   - \ref install_simulavr
+  - \ref install_avrtest
   - \ref install_avarice
 - \ref install_windows
   - \ref install_windows_tools "Required Tools"
@@ -121,6 +122,17 @@ or may not be of use for you.
 <dd>
   http://savannah.gnu.org/projects/simulavr <br>
   \ref install_simulavr "Installation"
+</dd>
+
+<dt>AVRtest</dt>
+<dd>
+  GitHub: https://github.com/sprintersb/atest<br>
+  \ref install_avrtest "Installation"<br>
+  AVRtest is an AVR core simulator that can be used to run the
+  avr-gcc testsuite.  It can also be used to run parts of the
+  AVR-LibC testsuite.  For details, see the
+  <a href="https://github.com/sprintersb/atest?tab=readme-ov-file#what-is-avrtest"
+  >README</a>.
 </dd>
 
 <dt>AVaRICE</dt>
@@ -444,7 +456,21 @@ $ make install
 \ref install_avr_libc "AVR-LibC"
 if you want to have the test programs built in the simulavr source.
 
+\subsection install_avrtest AVRtest
+\addindex installation, avrtest
 
+Building AVRtest is done by running its Makefile.  No configure script
+is required.  To get the sources and make:
+\verbatim
+$ git clone https://github.com/sprintersb/atest.git <folder>
+$ cd <folder>
+$ make
+\endverbatim
+The Makefile will build some object files like <tt>exit-atmega128.o</tt>
+which require an avr-gcc that supports such devices.
+There are also pre-built
+<a href="https://sourceforge.net/projects/winavr/files/AVRtest/"
+>AVRtest binaries for Windows</a>.
 
 \subsection install_avarice AVaRICE
 \addindex installation, avarice
