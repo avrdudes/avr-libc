@@ -217,6 +217,7 @@ install-dox-html: dox-html
 	  echo " $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file"; \
 	  $(INSTALL_DATA) $$file $(DOC_INST_DIR)/$$file; \
 	done
+	cd $(top_builddir)/doc/examples; make install-data-local
 
 install-dox-pdf: dox-pdf
 	$(mkinstalldirs) $(DOC_INST_DIR)
