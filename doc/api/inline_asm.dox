@@ -47,8 +47,9 @@ Inline Assembler Cookbook
   - \ref builtin_constant_p_in_inline_functions
          "Inline Functions and __builtin_constant_p"
   - \ref inline_asm_jumping
-- \ref inline_asm_local_vars
   - \ref inline_asm_abi_interface
+    - \ref inline_asm_local_vars
+    - \ref inline_asm_hrc
 - \ref c_names_in_asm
 - \ref inline_asm_fails
 
@@ -431,6 +432,12 @@ can be found in the
   <tr><td>\c X</td><td>Any valid operand</td><td></td></tr>
   <tr><td>\c 0 ... \c 9</td><td>Matches the respective operand number</td><td></td></tr>
 </table>
+
+GCC v16 also supports
+<a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html"
+   >hard-register constraints</a>.
+They allow to specify a register in a constraint.
+For example, <tt>"{r20}"</tt> specifies register(s) starting at R20.
 
 \anchor constraint_modifiers
 - Constraints without a modifier specify input operands.
@@ -1241,13 +1248,6 @@ Sequence <tt>"%~jmp"</tt> yields <tt>"rjmp"</tt> or <tt>"jmp"</tt> depending
 on the architecture.  Notice that a \c jmp can be relaxed to an \c rjmp
 with option \c -mrelax provided the jump offset fits.
 
-\section inline_asm_local_vars Binding local Variables to Registers
-
-One use of GCC's \c asm keyword is to bind local register variables to
-hardware registers.<br>
-<b>Such bindings of local variables to registers are only guaranteed
-during inline asm which has these variables as operands.</b>
-
 \subsection inline_asm_abi_interface Interfacing non-ABI Functions
 
 Suppose we want to interface a
@@ -1260,8 +1260,18 @@ copying and call to \c mul_8_16.  Such a function would destroy some of
 the performance gain obtained by using assembly for \c mul_8_16:  Additional
 copying back and forth and extra \c CALL and \c RET instructions.
 
+\subsubsection inline_asm_local_vars Binding local Variables to Registers
+
 The compiler comes to the rescue. We can bind local variables to the
-required registers:
+required registers.
+
+One use of GCC's \c asm keyword is to bind local register variables to
+hardware registers.<br>
+<b>Such bindings of local variables to registers are only guaranteed
+during inline asm which has these variables as operands.</b>
+
+Here is an example how interfacing \c mul_8_16 could look like:
+
 \code
 extern void mul_8_16 (void); // Non-ABI function. Don't call in C/C++!
 
@@ -1333,6 +1343,33 @@ use_mul_8_16_gccabi:
 \endcode
 
 No superfluous register moves. Great!
+
+\subsubsection inline_asm_hrc Hard-Register Constraints
+
+GCC v16 supports
+<a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html"
+   >hard-register constraints</a>
+that are easier to use than local register variables.
+With that feature, the code from above can be simplified to:
+
+\code
+extern void mul_8_16 (void); // Non-ABI function. Don't call in C/C++!
+
+static inline __attribute__((__always_inline__))
+__uint24 mul_8_16_gccabi (uint8_t val8, uint16_t val16)
+{
+    __uint24 result;
+
+    asm ("%~call %x[func]"  "\n\t"
+         "clr    __zero_reg__"
+         : "={r18}" (result)
+         : "{r24}" (val8), "{r26}" (val16), [func] "i" (mul_8_16)
+         : "r25", "r0");
+
+    return result;
+}
+\endcode
+
 
 \section c_names_in_asm Specifying the Assembly Name of Static Objects
 
