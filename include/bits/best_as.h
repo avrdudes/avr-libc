@@ -31,7 +31,9 @@
 
 /* Define __BEST_AS to the best[tm] named address-space.  */
 
-#if defined(__AVR_HAVE_ELPM__) && defined(__FLASHX)
+#if __AVR_ARCH__ == 100
+#define __BEST_AS /* empty */
+#elif defined(__AVR_HAVE_ELPM__) && defined(__FLASHX)
 #define __BEST_AS __flashx
 #elif defined(__AVR_HAVE_ELPM__) && defined(__MEMX)
 #define __BEST_AS __memx
