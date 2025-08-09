@@ -1987,7 +1987,7 @@ Below is a table of library calls with known issues.
       do not use the *_P versions.
       <br>Note: Formatting to a string output, e.g. #sprintf, #sprintf_P,
       #snprintf, #snprintf_P, #vsprintf, #vsprintf_P, #vsnprintf, #vsnprintf_P,
-      is thread safe.  The formatted string could then be followed by an 
+      is thread safe.  The formatted string could then be followed by an
       #fwrite which simply calls the lower layer to send the string.
   </td>
  </tr>

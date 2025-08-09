@@ -39,8 +39,8 @@
 
 \code #include <avr/power.h>\endcode
 
-Many AVRs contain a Power Reduction Register (PRR) or Registers (PRRx) that 
-allow you to reduce power consumption by disabling or enabling various on-board 
+Many AVRs contain a Power Reduction Register (PRR) or Registers (PRRx) that
+allow you to reduce power consumption by disabling or enabling various on-board
 peripherals as needed. Some devices have the XTAL Divide Control Register
 (XDIV) which offer similar functionality as System Clock Prescale
 Register (CLKPR).
@@ -53,8 +53,8 @@ the ATmega8). On those devices without a Power Reduction Register, the
 power reduction macros are not available..
 
 \note Not all AVR devices contain the same peripherals (for example, the LCD
-interface), or they will be named differently (for example, USART and 
-USART0). Please consult your device's datasheet, or the header file, to 
+interface), or they will be named differently (for example, USART and
+USART0). Please consult your device's datasheet, or the header file, to
 find out which macros are applicable to your device.
 
 \note For device using the XTAL Divide Control Register (XDIV), when prescaler
@@ -694,8 +694,8 @@ the clock below 131.072 kHz.
 #endif
 
 #if defined(__AVR_HAVE_PRR1_PRLFR)
-#define power_lfreceiver_enable()       (PRR1 &= (uint8_t)~(1 << PRLFR))            
-#define power_lfreceiver_disable()      (PRR1 |= (uint8_t)(1 << PRLFR))            
+#define power_lfreceiver_enable()       (PRR1 &= (uint8_t)~(1 << PRLFR))
+#define power_lfreceiver_disable()      (PRR1 |= (uint8_t)(1 << PRLFR))
 #endif
 
 #if defined(__AVR_HAVE_PRR1_PRLFTP)
@@ -1338,7 +1338,7 @@ XTAL Divide Control Register.
 without a Clock Prescale Register or XTAL Divide Control Register, these
 macros are not available.
 
-\code 
+\code
 typedef enum
 {
     clock_div_1 = 0,
@@ -1795,7 +1795,7 @@ clock_div_t clock_prescale_get(void)
         return (clock_div_t) (129 - (XDIV & 0x7F));
     }
 }
- 
+
 #elif defined(__AVR_ATtiny4__) \
 || defined(__AVR_ATtiny5__) \
 || defined(__AVR_ATtiny9__) \
@@ -1805,18 +1805,18 @@ clock_div_t clock_prescale_get(void)
 || defined(__AVR_ATtiny20__) \
 || defined(__AVR_ATtiny40__) \
 
-typedef enum 
-{ 
-    clock_div_1 = 0, 
-    clock_div_2 = 1, 
-    clock_div_4 = 2, 
-    clock_div_8 = 3, 
-    clock_div_16 = 4, 
-    clock_div_32 = 5, 
-    clock_div_64 = 6, 
-    clock_div_128 = 7, 
-    clock_div_256 = 8 
-} clock_div_t; 
+typedef enum
+{
+    clock_div_1 = 0,
+    clock_div_2 = 1,
+    clock_div_4 = 2,
+    clock_div_8 = 3,
+    clock_div_16 = 4,
+    clock_div_32 = 5,
+    clock_div_64 = 6,
+    clock_div_128 = 7,
+    clock_div_256 = 8
+} clock_div_t;
 
 static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
@@ -1838,7 +1838,7 @@ void clock_prescale_set(clock_div_t __x)
 }
 
 #define clock_prescale_get()  (clock_div_t)(CLKPSR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
- 
+
 #endif
 
 #endif /* _AVR_POWER_H_ */

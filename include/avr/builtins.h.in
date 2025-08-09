@@ -32,7 +32,7 @@
 /*
    avr/builtins.h - Intrinsic functions built into the compiler
  */
- 
+
 #ifndef _AVR_BUILTINS_H_
 #define _AVR_BUILTINS_H_
 

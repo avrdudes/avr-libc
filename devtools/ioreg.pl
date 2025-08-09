@@ -596,24 +596,24 @@ ioreg.pl  - Create debug information from Atmel XML files for IO-Ports and EEPro
 
 =head1 SYNOPSIS
 
-	perl ioreg.pl xxxxx.XML   
+	perl ioreg.pl xxxxx.XML
 
 =head1 DESCRIPTION
 
 Using GDB and AVaRICE to debug AVR code requires to know the addresses of
 IO registers! The GDB command "x PORTA" leads to an unknown address
-error. Beginning with Atmel Studio 5 well formed XML file are deliverd 
-as part of the installation. This script converts these XML-files using a 
+error. Beginning with Atmel Studio 5 well formed XML file are deliverd
+as part of the installation. This script converts these XML-files using a
 stylesheet into dwarf-2 debug information. To prevent Atmel's debugger from
 crashing only dwarf-2 can be used, while GDB could use debug information
 up to dwarf-4. Similar to the handling of the IO-addresses the eeprom
-start address can be accessed by the label __eeprom.  Its type is an CPU 
+start address can be accessed by the label __eeprom.  Its type is an CPU
 specific array of uint8_t.
 
-This debug information is added to the device specific start-up code of 
-avr-libc and now allows debugging symbolic 
-names. 
-It is possible to use dwarf-4 debug information for the 
+This debug information is added to the device specific start-up code of
+avr-libc and now allows debugging symbolic
+names.
+It is possible to use dwarf-4 debug information for the
 application and mix it with dwarf-2 of the start-up code.
 
 =head1 Preconditions
@@ -626,7 +626,7 @@ This script relies on
 Atmel's AVR XML files
 
 =item *
-Stylesheet file named "findreg.xsl". It has to be located in the same directory as ioreg.pl 
+Stylesheet file named "findreg.xsl". It has to be located in the same directory as ioreg.pl
 
 =item *
 XSLT processor, either xsltproc or saxon9
@@ -659,7 +659,7 @@ Sets the path to saxon9. Default: /usr/share/java
 
 =item o
 
-Set the output file otherwise STDOUT is used 
+Set the output file otherwise STDOUT is used
 
 =back
 

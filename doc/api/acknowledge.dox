@@ -50,7 +50,7 @@
 
 	- Brian Dean [ bsd@bsdhome.com ] for developing \b avrdude (an alternative
 	to <b>uisp</b>) and for contributing \ref using_avrprog "documentation"
-	which describes how to use it. \b Avrdude was previously called 
+	which describes how to use it. \b Avrdude was previously called
 	\b avrprog.
 
 	- Eric Weddington [ eweddington@cso.atmel.com ] for maintaining the \b WinAVR
