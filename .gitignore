@@ -25,6 +25,8 @@ missing
 compile
 depcomp
 stamp-h1
+loc.txt
+sig.txt
 
 !doc/examples/*/Makefile
 !tests/compile/
