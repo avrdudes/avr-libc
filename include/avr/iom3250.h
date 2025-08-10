@@ -934,8 +934,11 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x95
+#if defined (__AVR_ATmega3250P__)
+#define SIGNATURE_2 0x0E
+#else
 #define SIGNATURE_2 0x06
-
+#endif
 
 /* Deprecated items */
 #if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)

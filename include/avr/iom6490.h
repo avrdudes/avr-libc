@@ -1171,8 +1171,11 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x96
+#if defined (__AVR_ATmega6490P__)
+#define SIGNATURE_2 0x0C
+#else
 #define SIGNATURE_2 0x04
-
+#endif
 
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)
