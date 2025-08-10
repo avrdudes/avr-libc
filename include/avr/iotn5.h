@@ -396,7 +396,7 @@
 
 /* Signature */
 #define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x90
+#define SIGNATURE_1 0x8F
 #define SIGNATURE_2 0x09
 
 

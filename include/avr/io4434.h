@@ -575,8 +575,8 @@
 
 /* Signature */
 #define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x93
-#define SIGNATURE_2 0x03
+#define SIGNATURE_1 0x92
+#define SIGNATURE_2 0x02
 
 
 #define SLEEP_MODE_IDLE         0
