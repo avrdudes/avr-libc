@@ -27,6 +27,7 @@ depcomp
 stamp-h1
 
 !doc/examples/*/Makefile
+!tests/compile/
 
 devtools/gen-avr-lib-tree.sh
 devtools/update-news
