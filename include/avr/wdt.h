@@ -211,7 +211,7 @@ __asm__ __volatile__ (         \
       [ccp_reg]            "I" (_SFR_IO_ADDR(CCP)),        \
       [ioreg_cen_mask]     "r" ((uint8_t)CCP_IOREG_gc),     \
       [wdt_reg]            "n" (_SFR_MEM_ADDR(WDT_CTRL)),   \
-      [wdt_enable_timeout] "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | timeout)), \
+      [wdt_enable_timeout] "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm | ((timeout + 1) << 2))), \
       [wdt_status_reg]     "n" (_SFR_MEM_ADDR(WDT_STATUS)), \
       [wdt_syncbusy_bit]   "I" (WDT_SYNCBUSY_bm)            \
     : "r0" \
@@ -546,6 +546,10 @@ void wdt_disable (void)
    wdt_enable(WDTO_500MS);
    \endcode
 */
+#if defined(__DOXYGEN__) || defined(__AVR_XMEGA__)
+#define WDTO_8MS   -1
+#endif
+
 #define WDTO_15MS   0
 
 /** \ingroup avr_watchdog
@@ -576,7 +580,7 @@ void wdt_disable (void)
     See \c WDTO_15MS */
 #define WDTO_2S     7
 
-#if defined(__DOXYGEN__) || defined(WDP3)
+#if defined(__DOXYGEN__) || defined(WDP3) || defined(__AVR_XMEGA__)
 
 /** \ingroup avr_watchdog
     See \c WDTO_15MS

@@ -211,6 +211,8 @@
 
 ## Pull Requests
 
+- Fix support for ATxmega devices in avr/wdt.h ([#646][646]).
+
 - Improve runtime performance of `free()` ([#991][991]).
 
 ## Other Changes
@@ -226,6 +228,7 @@
 [629]: https://github.com/avrdudes/avr-libc/issues/629
 [635]: https://github.com/avrdudes/avr-libc/issues/635
 [643]: https://github.com/avrdudes/avr-libc/issues/643
+[646]: https://github.com/avrdudes/avr-libc/issues/646
 [663]: https://github.com/avrdudes/avr-libc/issues/663
 [765]: https://github.com/avrdudes/avr-libc/issues/765
 [875]: https://github.com/avrdudes/avr-libc/issues/875
