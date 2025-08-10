@@ -430,7 +430,8 @@ devices_m4 = ("CHECK_AVR_DEVICE(%s)\n",
               "CHECK_AVR_RESERVED(%s)\n")
 
 # multilib.m4 will be lines of:
-check_multi_variant = "CHECK_MULTI_VARIANT([%s], [%s])\n"
+multilib_m4 = ("CHECK_MULTI_VARIANT([%s], [%s])\n",
+               "CHECK_MULTI_LINK([%s], [%s])\n")
 
 # files.m4 will be lines of:
 ac_config_files = "AC_CONFIG_FILES([%s])\n"
@@ -454,8 +455,9 @@ def make_m4():
 
     Info ("Writing multilib.m4...")
     with open ("multilib.m4", "w") as f:
-        for mlib in mlibs:
-            f.write (check_multi_variant % (mlib.mdir, mlib.ident))
+        for line in multilib_m4:
+            for mlib in mlibs:
+                f.write (line % (mlib.mdir, mlib.ident))
 
     Info ("Writing files.m4...")
     with open ("files.m4", "w") as f:

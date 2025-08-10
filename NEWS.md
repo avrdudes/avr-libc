@@ -209,6 +209,8 @@
 - Fixed `strftime`'s return value ([#1040][1040])
   and  `strftime("%r")` ([#1039][1039]).
 
+- Fixed a build failure when used with some older avr-gcc distro ([#1042][1042])
+
 ## Pull Requests
 
 - Fix support for ATxmega devices in avr/wdt.h ([#646][646]).
@@ -262,3 +264,4 @@
 [1036]: https://github.com/avrdudes/avr-libc/issues/1036
 [1039]: https://github.com/avrdudes/avr-libc/issues/1039
 [1040]: https://github.com/avrdudes/avr-libc/issues/1040
+[1042]: https://github.com/avrdudes/avr-libc/issues/1042
