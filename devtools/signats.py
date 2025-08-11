@@ -31,7 +31,7 @@ class Signature:
         self.val = int (s_val, base=0)
         self.loc_in_i = int(iloc)
         self.loc_in_h = 0
-        print ("sig[%d] = 0x%02x @ %s" % (self.id, self.val, self.loc_in_i))
+        #print ("sig[%d] = 0x%02x @ %s" % (self.id, self.val, self.loc_in_i))
 
     def __eq__ (self, other):
         return self.val == other.val

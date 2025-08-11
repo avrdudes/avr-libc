@@ -28,7 +28,7 @@ CC="${CC:-avr-gcc}"
 
 # As it turns out, AVRDUDE is much more complete w.r.t. signatures
 # than AtmoChips' own ATDF files.  Go after avrdude.conf thusly.
-conf=${CONF:-$HOME/xgnu/source/avrdude/avrdude.conf.in}
+conf=${CONF:-$HOME/xgnu/source/avrdude/src/avrdude.conf.in}
 
 echo "mcus=$mcus"
 
