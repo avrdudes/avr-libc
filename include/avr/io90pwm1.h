@@ -1154,4 +1154,8 @@
 #define SLEEP_MODE_STANDBY (0x06<<1)
 
 
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x83
+
 #endif /* _AVR_IOPWM1_H_ */
