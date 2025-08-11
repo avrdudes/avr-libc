@@ -92,4 +92,8 @@
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
 
 
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x82
+
 #endif /* _AVR_AT90USB82_H_ */

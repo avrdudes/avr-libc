@@ -457,4 +457,8 @@
 #define SLEEP_MODE_PWR_DOWN     _BV(SM)
 
 
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x91
+#define SIGNATURE_2 0x05
+
 #endif /* _AVR_IO2333_H_ */
