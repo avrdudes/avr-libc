@@ -840,7 +840,7 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
-#define SIGNATURE_2 0x05
+#define SIGNATURE_2 0x07
 
 
 /* Deprecated items */
