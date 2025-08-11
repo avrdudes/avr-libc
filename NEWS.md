@@ -169,7 +169,8 @@
   ([#391][391], [#635][635], [#643][643], [#663][663], [#875][875], [#959][959], [#960][960], [#961][961]),
   these headers have been updated to a more recent revision.
 
-- Fixed signature definitions in avr/io.h for several devices. ([#877][877])
+- Fixed signature definitions in avr/io.h for several devices ([#877][877])
+  and add some missing signatures ([#878][878]).
 
 - On AVRrc Reduced Tiny, add 0x4000 to the symbol address when
   `pgm_get_far_address()` takes the address of an object in `PROGMEM_FAR`.
@@ -238,6 +239,7 @@
 [875]: https://github.com/avrdudes/avr-libc/issues/875
 [876]: https://github.com/avrdudes/avr-libc/issues/876
 [877]: https://github.com/avrdudes/avr-libc/issues/877
+[878]: https://github.com/avrdudes/avr-libc/issues/878
 [936]: https://github.com/avrdudes/avr-libc/issues/936
 [959]: https://github.com/avrdudes/avr-libc/issues/959
 [960]: https://github.com/avrdudes/avr-libc/issues/960
