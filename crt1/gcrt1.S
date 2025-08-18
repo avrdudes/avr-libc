@@ -80,7 +80,7 @@
        https://gcc.gnu.org/PR112944  and also libc/misc/flmap.init.S
        which implements __do_flmap_init.
    [5] Always[6] pulled in by the code below.  Calls main() and then
-       jumps to exit().  With -mon-call-main, the compiler will put
+       jumps to exit().  With -mno-call-main, the compiler will put
        main itself into .init9 any satisfy __call_main.
    [6] When CRT_SELF_CONTAINED if off, the respective parts will be pulled in.
        When CRT_SELF_CONTAINED is on, the code is inserted inline below.
@@ -107,7 +107,7 @@
       achieved by asm code like
           .global <symbol>
           <symbol> = 0
-      or by menas of linking with  -Wl,--defsym,<symbol>=0
+      or by means of linking with  -Wl,--defsym,<symbol>=0
 
       The following parts are affected by CRT_SELF_CONTAINED:
 
