@@ -33,6 +33,7 @@ sig.txt
 
 devtools/gen-avr-lib-tree.sh
 devtools/update-news
+devtools/filter-mcus.py
 
 *.bin
 *.elf

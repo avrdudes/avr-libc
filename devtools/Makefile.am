@@ -34,6 +34,7 @@ EXTRA_DIST = \
     Device.am \
     cr_check.py \
     compare-libc.sh \
+    filter-mcus.py.in \
     gen-avr-lib-tree.sh.in \
     update-news.in \
     mlib-gen.py \

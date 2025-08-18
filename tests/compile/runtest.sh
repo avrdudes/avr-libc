@@ -61,8 +61,10 @@ Options:
   -v          Verbose mode
   -v -v       Very verbose mode
 If FILE is not specified, then the full \$test_list is used.
-Set MCUS in order to restrict the tests to only some devices:
-\$ MCUS="atmega16 atmega8* !atmega8*a" $me ...
+- Set MCUS in order to restrict the tests to only some devices:
+  \$ MCUS="atmega16 atmega8* !atmega8*a" $me ...
+- Set ARGS in order to set the options for the compiler:
+  \$ ARGS="-Og,-O3" $me...
 EOF
 }
 
@@ -120,6 +122,7 @@ AllMcus ()
 }
 
 rex='^[a-z0-9 ]+$'
+Filter=../../devtools/filter-mcus.py
 
 if [ -z "${MCUS}" ]; then
     # No MCUS given: Use supported-mcus.txt.
@@ -131,7 +134,7 @@ else
     # MCUS has special chars like * or . or !
     # Use filter.py to filter MCUS.  In order to resolve *'s etc we need
     # a list of available MCUs.
-    given_mcus=$(./filter.py "$(AllMcus)" "${MCUS}")
+    given_mcus=$(${Filter} "$(AllMcus)" "${MCUS}")
 fi
 
 MCUS=
@@ -179,7 +182,7 @@ for src in ${test_list}; do
     fi
     # FIXME: When cut doesn't find a delimiter, then it prints the
     #        entire string.  Hence append a "," for the cut to come.
-    args="$args,"
+    args="${ARGS:-$args},"
 
     # Iterate over MCUs.
     for mcu in ${MCUS}; do
