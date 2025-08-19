@@ -212,4 +212,8 @@
 #define E2END		0x1FF
 #define FLASHEND	0x1FFF
 
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x04
+
 #endif /* _AVR_IO8534_H_ */
