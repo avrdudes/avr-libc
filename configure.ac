@@ -496,7 +496,7 @@ AC_DEFUN(
   ]
 )
 
-dnl GCC P6R3223: From avr-gcc v4.9.2 on, jump tables are accessed with
+dnl GCC PR63223: From avr-gcc v4.9.2 on, jump tables are accessed with
 dnl ELPM so that moving .text around is not an issue anymore.
 AC_DEFUN(
   CHECK_JUMP_TABLES_ISSUE,
