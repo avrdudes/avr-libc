@@ -44,6 +44,7 @@ avr4;@mmcu=avr4
 avr5;@mmcu=avr5
 avr51;@mmcu=avr51
 avr6;@mmcu=avr6
+avr7;@mmcu=avr7
 avrxmega2;@mmcu=avrxmega2
 avrxmega3;@mmcu=avrxmega3
 avrxmega4;@mmcu=avrxmega4
