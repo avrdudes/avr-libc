@@ -430,8 +430,7 @@ devices_m4 = ("CHECK_AVR_DEVICE(%s)\n",
               "CHECK_AVR_RESERVED(%s)\n")
 
 # multilib.m4 will be lines of:
-multilib_m4 = ("CHECK_MULTI_VARIANT([%s], [%s])\n",
-               "CHECK_MULTI_LINK([%s], [%s])\n")
+multilib_m4 = ("CHECK_MULTI_VARIANT([%s], [%s])\n",)
 
 # files.m4 will be lines of:
 ac_config_files = "AC_CONFIG_FILES([%s])\n"
