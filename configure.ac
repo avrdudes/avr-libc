@@ -266,6 +266,101 @@ AC_ARG_ENABLE(device-lib,
 dnl define HAS_DEV_LIB if device library enabled
 AM_CONDITIONAL(HAS_DEV_LIB, [test x$enable_device_lib = xtrue])
 
+AC_DEFUN(
+  CHECK_MNO_TABLEJUMP,
+  [
+    old_CC=${CC}
+    old_CFLAGS=${CFLAGS}
+    CFLAGS="-mno-tablejump"
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(whether ${CC} supports -mno-tablejump)
+    AC_COMPILE_IFELSE(
+      [AC_LANG_SOURCE([],[])],
+      [has_mno_tablejump=yes],
+      [has_mno_tablejump=no]
+    )
+    if test "x$has_mno_tablejump" = "xyes"
+    then
+      FNO_JUMP_TABLES="-mno-tablejump"
+    fi
+    AC_MSG_RESULT($has_mno_tablejump)
+    CC=${old_CC}
+    CFLAGS=${old_CFLAGS}
+  ]
+)
+
+AC_DEFUN(
+  CHECK_FNO_JUMP_TABLES,
+  [
+    old_CC=${CC}
+    old_CFLAGS=${CFLAGS}
+    CFLAGS="-fno-jump-tables"
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(whether ${CC} supports -fno-jump-tables)
+    AC_COMPILE_IFELSE(
+      [AC_LANG_SOURCE([],[])],
+      [has_fno_jump_tables=yes],
+      [has_fno_jump_tables=no]
+    )
+    if test "x$has_fno_jump_tables" = "xyes"
+    then
+      FNO_JUMP_TABLES="-fno-jump-tables"
+    fi
+    AC_MSG_RESULT($has_fno_jump_tables)
+    CC=${old_CC}
+    CFLAGS=${old_CFLAGS}
+  ]
+)
+
+dnl GCC PR63223: From avr-gcc v4.9.2 on, jump tables are accessed with
+dnl ELPM so that moving .text around is not an issue anymore.
+AC_DEFUN(
+  CHECK_JUMP_TABLES_ISSUE,
+  [
+    AC_MSG_CHECKING(whether ${CC} can use -Ttext with jump-tables)
+    AS_VERSION_COMPARE(${GCC_VER}, [4.9.2],
+      [no_jump_tables_issue=no],
+      [no_jump_tables_issue=yes],
+      [no_jump_tables_issue=yes])
+    AC_MSG_RESULT($no_jump_tables_issue)
+    FNO_JUMP_TABLES=""
+    dnl Only work out how to turn off jump-tables when actually needed.
+    AS_IF([test x$no_jump_tables_issue = xno], [
+      CHECK_MNO_TABLEJUMP
+      CHECK_FNO_JUMP_TABLES
+      AS_IF([test "x$FNO_JUMP_TABLES" != "x"],
+        [ AC_MSG_NOTICE([Using $FNO_JUMP_TABLES to turn off jump tables]) ],
+        [ AC_MSG_NOTICE([Found no option to turn off jump tables]) ])
+      ],[])
+  ]
+)
+
+AC_DEFUN(
+  CHECK_BUILTIN_DELAY_CYCLES,
+  [
+    old_CC=${CC}
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING(whether ${CC} supports __builtin_avr_delay_cycles)
+    echo "extern void __builtin_avr_delay_cycles(unsigned long);\
+    int main(void) { __builtin_avr_delay_cycles(42); return 0; }" |\
+    ${CC} -S -xc -o - - |\
+    grep __builtin_avr_delay_cycles >/dev/null
+    if test "$?" != "0"
+    then
+      HAS_DELAY_CYCLES=1
+      has_delay_cycles="yes"
+    else
+      has_delay_cycles="no"
+    fi
+    AC_MSG_RESULT($has_delay_cycles)
+    CC=${old_CC}
+  ]
+)
+
+CHECK_JUMP_TABLES_ISSUE
+CHECK_BUILTIN_DELAY_CYCLES
+
+
 dnl TODO: Check for various tools used to build the documentation. If anything
 dnl is missing, don't build the docs by default.
 
@@ -461,109 +556,6 @@ AC_SUBST(FNO_JUMP_TABLES)
 HAS_DELAY_CYCLES=0
 AC_SUBST(HAS_DELAY_CYCLES)
 
-AC_DEFUN(
-  CHECK_MNO_TABLEJUMP,
-  [
-    old_CC=${CC}
-    old_CFLAGS=${CFLAGS}
-    CFLAGS="-mno-tablejump"
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
-    AC_MSG_CHECKING(whether ${CC} supports -mno-tablejump)
-    AC_COMPILE_IFELSE(
-      [AC_LANG_SOURCE([],[])],
-      [has_mno_tablejump=yes],
-      [has_mno_tablejump=no]
-    )
-    if test "x$has_mno_tablejump" = "xyes"
-    then
-      FNO_JUMP_TABLES="-mno-tablejump"
-    fi
-    AC_MSG_RESULT($has_mno_tablejump)
-    CC=${old_CC}
-    CFLAGS=${old_CFLAGS}
-  ]
-)
-
-AC_DEFUN(
-  CHECK_FNO_JUMP_TABLES,
-  [
-    old_CC=${CC}
-    old_CFLAGS=${CFLAGS}
-    CFLAGS="-fno-jump-tables"
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
-    AC_MSG_CHECKING(whether ${CC} supports -fno-jump-tables)
-    AC_COMPILE_IFELSE(
-      [AC_LANG_SOURCE([],[])],
-      [has_fno_jump_tables=yes],
-      [has_fno_jump_tables=no]
-    )
-    if test "x$has_fno_jump_tables" = "xyes"
-    then
-      FNO_JUMP_TABLES="-fno-jump-tables"
-    fi
-    AC_MSG_RESULT($has_fno_jump_tables)
-    CC=${old_CC}
-    CFLAGS=${old_CFLAGS}
-  ]
-)
-
-dnl GCC PR63223: From avr-gcc v4.9.2 on, jump tables are accessed with
-dnl ELPM so that moving .text around is not an issue anymore.
-AC_DEFUN(
-  CHECK_JUMP_TABLES_ISSUE,
-  [
-    old_CC=${CC}
-    old_CFLAGS=${CFLAGS}
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
-    AC_MSG_CHECKING(whether ${CC} can use -Ttext with jump-tables)
-    AC_COMPILE_IFELSE(
-      [AC_LANG_SOURCE([[
-      #if __GNUC__ >= 5
-      /* fine */
-      #elif __GNUC__ >= 4 && __GNUC_MINOR__ >= 9 && __GNUC_PATCHLEVEL__ >= 2
-      /* fine */
-      #else
-      #error Has PR63223
-      #endif
-      ]],[])],
-      [no_jump_tables_issue=yes],
-      [no_jump_tables_issue=no]
-    )
-    if test "x$no_jump_tables_issue" = "xyes"
-    then
-      FNO_JUMP_TABLES=""
-    fi
-    AC_MSG_RESULT($no_jump_tables_issue)
-    CC=${old_CC}
-    CFLAGS=${old_CFLAGS}
-  ]
-)
-
-AC_DEFUN(
-  CHECK_BUILTIN_DELAY_CYCLES,
-  [
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
-    AC_MSG_CHECKING(whether ${CC} supports __builtin_avr_delay_cycles)
-    echo "extern void __builtin_avr_delay_cycles(unsigned long);\
-    int main(void) { __builtin_avr_delay_cycles(42); return 0; }" |\
-    ${CC} -S -xc -o - - |\
-    grep __builtin_avr_delay_cycles >/dev/null
-    if test "$?" != "0"
-    then
-      HAS_DELAY_CYCLES=1
-      has_delay_cycles="yes"
-    else
-      has_delay_cycles="no"
-    fi
-    AC_MSG_RESULT($has_delay_cycles)
-    CC=${old_CC}
-  ]
-)
-
-CHECK_MNO_TABLEJUMP
-CHECK_FNO_JUMP_TABLES
-CHECK_JUMP_TABLES_ISSUE
-CHECK_BUILTIN_DELAY_CYCLES
 
 asm_only="at90s1200 attiny11 attiny12 attiny15 attiny28"
 
