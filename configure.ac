@@ -332,6 +332,7 @@ AC_DEFUN(
         [ AC_MSG_NOTICE([Using $FNO_JUMP_TABLES to turn off jump tables]) ],
         [ AC_MSG_NOTICE([Found no option to turn off jump tables]) ])
       ],[])
+    AC_SUBST(FNO_JUMP_TABLES)
   ]
 )
 
@@ -350,9 +351,11 @@ AC_DEFUN(
       HAS_DELAY_CYCLES=1
       has_delay_cycles="yes"
     else
+      HAS_DELAY_CYCLES=0
       has_delay_cycles="no"
     fi
     AC_MSG_RESULT($has_delay_cycles)
+    AC_SUBST(HAS_DELAY_CYCLES)
     CC=${old_CC}
   ]
 )
@@ -549,12 +552,6 @@ esac
 
 AC_SUBST(CDEBUG)
 AC_SUBST(ASDEBUG)
-
-FNO_JUMP_TABLES=""
-AC_SUBST(FNO_JUMP_TABLES)
-
-HAS_DELAY_CYCLES=0
-AC_SUBST(HAS_DELAY_CYCLES)
 
 
 asm_only="at90s1200 attiny11 attiny12 attiny15 attiny28"
