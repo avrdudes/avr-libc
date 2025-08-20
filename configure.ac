@@ -174,6 +174,16 @@ case "${RANLIB}" in
    *) AC_MSG_ERROR(Wrong ranlib found; check the PATH!) ;;
 esac
 
+dnl Show the --version of program $1 and label $2.
+AC_DEFUN([SHOW_VERSION],[dnl
+  dnl 'head' has no uniform interface: use sed instead.
+  my_ver=`$1 --version | sed '1p;d'`
+  AC_MSG_NOTICE([Using $2: $my_ver])])
+
+SHOW_VERSION([$CC], [CC])
+SHOW_VERSION([$AS], [AS])
+SHOW_VERSION([$LD], [LD])
+
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
@@ -327,6 +337,7 @@ if test "x$dox_ver" = "x"; then
 else
 	# FIXME: should also check for dox_ver >= 1.4.1
 	AC_MSG_RESULT(yes)
+	SHOW_VERSION([doxygen], [Doxygen])
 	if test "$pdf_doc" = "yes"; then
 		AC_MSG_NOTICE([Enabling PDF docs])
 		TARGET_DOX_PDF=dox-pdf
