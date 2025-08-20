@@ -33,6 +33,7 @@ Inline Assembler Cookbook
 - \ref inline_asm_about
 - \ref inline_asm_building_blocks "Building Blocks"
   - \ref inline_asm_anatomy
+  - \ref inline_asm_size
   - \ref inline_asm_special_sequences
   - \ref inline_asm_constraints
     - \ref constraint_modifiers "Constraint Modifiers"
@@ -251,19 +252,6 @@ Notes on the various parts:
   a \c MUL instruction, then the code must restore the register at
   the end by means of <tt>"clr __zero_reg__"</tt>
 </dd>
-
-<dt>The size of an asm\anchor inline_asm_size</dt>
-<dd>
-  The code size of an asm statement is the number of lines multiplied by
-  4&nbsp;bytes, the maximal possible AVR instruction length.
-  The length is needed when (conditional) jumps cross the
-  asm statement in order to compute (upper bounds for) jump offsets
-  of PC-relative jumps.
-
-  The number of lines is one plus the number of line breaks in
-  \c code-string.  These may be physical line breaks from \c \\n characters
-  and logical line breaks from \c \$ characters.
-</dd>
 </dl>
 
 Before we start with the first examples, we list all the bells and
@@ -271,8 +259,23 @@ whistles that can be used to compose an inline assembly statement:
 \ref special_sequences "special sequences",
 \ref constraints,
 \ref constraint_modifiers "constraint modifiers",
-\ref print_modifiers "print modifiers" and
-\ref operand_modifiers "operand modifiers".
+\ref print_modifiers "print modifiers"
+\ref operand_modifiers "operand modifiers" and the
+\ref inline_asm_size "size of an asm".
+
+
+\section inline_asm_size The Size of an asm
+
+The code size of an asm statement is the number of lines multiplied by
+4&nbsp;bytes, the maximal possible AVR instruction length.
+The length is needed when (conditional) jumps cross the
+asm statement in order to compute (upper bounds for) jump offsets
+of PC-relative jumps.
+
+The number of lines is one plus the number of line breaks in
+\c code-string.  These may be physical line breaks from \c \\n characters
+and logical line breaks from \c \$ characters.
+
 
 \section inline_asm_special_sequences Special Sequences
 
