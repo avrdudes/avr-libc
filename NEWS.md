@@ -129,6 +129,7 @@
   The code size of `strftime` (including all dependencies) has been
   reduced by more than the code size of `sprintf`.
   Support has been added for the `%k`, `%l` and `%P` formats.
+  String literals have been moved to `.progmemx`.
 
 - avr-gcc v15 and up issues a diagnostic for `__int24` and `__uint24` when
   `-pedantic` or similar options are on.  Hence `__extension__` was
