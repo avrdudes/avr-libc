@@ -1,8 +1,5 @@
 /aclocal.m4
-/devices.m4
-/devlist.m4
-/files.m4
-/multilib.m4
+m4-gen/
 /tmp-core-info
 /tmp-device-info
 /configure

@@ -442,25 +442,39 @@ ac_subst_devlist = "AC_SUBST(DEVLIST_%s)\n"
 def make_m4():
     """Auto-generated files to be included by configure.ac."""
 
-    Info ("Writing devices.m4...")
-    with open ("devices.m4", "w") as f:
+    # Place the auto-generated m4 files in m4-gen
+    m4_gen = "m4-gen"
+
+    Info ("MakeDir %s..." % m4_gen)
+    try:
+        os.mkdir (m4_gen)
+    except OSError:
+        # If we come here, the assumption is that m4_gen already existed.
+        pass
+
+    m4_name = os.path.join (m4_gen, "devices.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
         for line in devices_m4:
             for device in devices:
                 f.write (line % device.mcu)
 
-    Info ("Writing devlist.m4...")
-    with open ("devlist.m4", "w") as f:
+    m4_name = os.path.join (m4_gen, "devlist.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
         for mlib in mlibs:
             f.write (ac_subst_devlist % mlib.ident)
 
-    Info ("Writing multilib.m4...")
-    with open ("multilib.m4", "w") as f:
+    m4_name = os.path.join (m4_gen, "multilib.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
         for line in multilib_m4:
             for mlib in mlibs:
                 f.write (line % (mlib.mdir, mlib.ident))
 
-    Info ("Writing files.m4...")
-    with open ("files.m4", "w") as f:
+    m4_name = os.path.join (m4_gen, "files.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
         for mk in Makefile.files:
             f.write (ac_config_files % mk)
 

@@ -22,6 +22,7 @@ set -x
 
 rm -rf avr/lib
 rm -rf avr/devices
+rm -rf m4-gen
 ./devtools/gen-avr-lib-tree.sh || exit 1
 
 rm -rf autom4te.cache
