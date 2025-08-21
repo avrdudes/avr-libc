@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,16 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+dnl Substitute $1 with the basenames of all files in glob $2.
+dnl We use this to avoid $(echo $(basename -a $2)) which is not POSIX,
+dnl hence we need a loop over all files in $2.
+AC_DEFUN([SUBST_BASENAME_FILES],[dnl
+    fils=
+    for fil in $2; do
+        fils="$fils $(basename $fil)"
+    done
+    AC_SUBST($1,[$fils])
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

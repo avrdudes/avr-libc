@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,12 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+dnl When $1 is an asm-only device then run $2, else run $3.
+AC_DEFUN([DO_IF_ASM_ONLY],[dnl
+    AS_CASE([$1],
+	[[at90s1200|attiny11|attiny12|attiny15|attiny28]], [$2],
+	[$3])
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

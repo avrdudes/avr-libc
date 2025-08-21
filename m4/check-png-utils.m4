@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,44 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+dnl @synopsis CHECK_PNG_UTILS
+dnl
+dnl This macro checks if pngtopnm and pnmtopng are installed. If they are not
+dnl installed we just fake it with "cat".
+dnl
+dnl We use these in the dox to insert transparency into the png images as such:
+dnl
+dnl   $ pngtopnm foo.png > tmp.pnm
+dnl   $ pnmtopng -transparent white tmp.pnm > foo.png
+dnl
+dnl @version
+dnl @author Theodore A. Roth <troth@openavr.org> and Eric B. Weddington <eweddington@cso.atmel.com>
+dnl
+AC_DEFUN([CHECK_PNG_UTILS],[dnl
+dnl
+AC_MSG_CHECKING([for pngtopnm])
+has_pngtopnm=`pngtopnm --version 2>&1 | grep -c -i Version`
+if test "$has_pngtopnm" = "1"; then
+	AC_MSG_RESULT(yes)
+	PNGTOPNM="pngtopnm"
+else
+	AC_MSG_RESULT(no)
+	PNGTOPNM="cat"
+fi
+dnl
+AC_MSG_CHECKING([for pnmtopng])
+has_pnmtopng=`pnmtopng --version 2>&1 | grep -c -i Version`
+if test "$has_pnmtopng" = "1"; then
+	AC_MSG_RESULT(yes)
+	PNMTOPNG="pnmtopng"
+else
+	AC_MSG_RESULT(no)
+	PNMTOPNG="cat"
+	PNGTOPNM="cat"
+fi
+AC_SUBST(PNGTOPNM)
+AC_SUBST(PNMTOPNG)
+])dnl
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

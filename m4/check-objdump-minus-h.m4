@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,24 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+dnl $1 = MSG_CHECKING
+dnl Assemble and link assembly source $2 with extra $AS options $3
+dnl and extra $LD options $4.  When pattern $5 is found in `objdump -h`,
+dnl then run $6, else run $7.
+AC_DEFUN([CHECK_OBJDUMP_MINUS_H],[dnl
+  AC_MSG_CHECKING([$1])
+  rm -f conftest.s conftest.o conftest.elf conftest.lst
+  cat > conftest.s <<EOF
+$2
+EOF
+  AC_TRY_COMMAND([$AS conftest.s $3 -o conftest.o])
+  AC_TRY_COMMAND([$LD conftest.o $4 -o conftest.elf])
+  AC_TRY_COMMAND([$OBJDUMP -h conftest.elf > conftest.lst])
+  AS_IF([grep $5 conftest.lst > /dev/null], [has_pat=yes], [has_pat=no])
+  AC_MSG_RESULT([$has_pat])
+  AS_IF([test "x$has_pat" = "xyes"], [$6], [$7])
+  rm -f conftest.s conftest.o conftest.elf conftest.lst
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

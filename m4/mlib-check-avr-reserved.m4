@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,35 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+dnl avr/io.h may define BAUD, hence BAUD is reserved and should not be
+dnl #defined by the user.
+AC_DEFUN([CHECK_AVR_RESERVED],[dnl
+    if test "x${MULTIDIR_$1}" != "x"
+    then
+      old_CFLAGS=${CFLAGS}
+      CFLAGS="-mmcu=$1 -I${srcdir}/include -Werror"
+      AC_MSG_CHECKING([if BAUD is reserved for $1])
+      dnl #define __CONFIGURING_AVR_LIBC__ so that avr/io.h
+      dnl doesn't #include <bits/devinfo.h>.
+      AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
+		#define BAUD 123
+		#define __CONFIGURING_AVR_LIBC__
+		#include <avr/io.h>
+		int a[BAUD == 123 ? 1 : -1];  ]],[])],
+        [has_$1_baud=no],
+        [has_$1_baud=yes])
+      DO_IF_ASM_ONLY([$1], [has_$1_baud=no], [])
+      AC_MSG_RESULT([${has_$1_baud}])
+    else
+      has_$1_baud=no
+    fi
+    CFLAGS=${old_CFLAGS}
+    upper=$(echo "$1" | ${srcdir}/devtools/mcu-to-avr-name.sh)
+    defd="defined(__AVR_${upper}__)"
+    AS_IF([test x${has_$1_baud} = xyes],
+        [COND_BAUD_RESERVED="${COND_BAUD_RESERVED} || ${defd}"],
+        [])
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

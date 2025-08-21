@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,26 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+AC_DEFUN([CHECK_MULTI_VARIANT],[dnl
+    old_CC=${CC}
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING([if ${CC} supports multilib $1])
+    mdir=`echo "$1" | sed -e 's/\\./\\\\./g'`
+    pml=`${CC} -print-multi-lib | grep -e "^${mdir};"`
+    if test "x$pml" != "x"; then
+       MULTIDIR_$2=$1
+       MULTIOPT_$2=`echo "${pml}" | cut -d ';' -f 2 | sed 's/@/ -/g'`
+       AC_MSG_RESULT([yes, with options:${MULTIOPT_$2}])
+    else
+       MULTIDIR_$2=
+       MULTIOPT_$2=
+       AC_MSG_RESULT(no)
+    fi
+    CC=${old_CC}
+    AC_SUBST(MULTIDIR_$2)
+    AC_SUBST(MULTIOPT_$2)
+    AM_CONDITIONAL(HAS_MULTI_$2, [test "x${MULTIDIR_$2}" != "x"])
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

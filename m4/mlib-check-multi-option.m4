@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,31 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
+dnl Check whether options like -mdouble=64 act as a multilib selector,
+dnl i.e. $CC will mention it like @mdouble64 with $CC -print-multi-lib.
+dnl If so, set DIR_$2=$3 and DIR_$2=<empty>, otherwise.  $3 is the
+dnl multi-subdirectory associated to option $1.  In addition, set automake
+dnl variable HAS_MULTIOPT_$2 to 0 or 1 depending on the result.
+dnl The only consumer of this test is Device.am which mlib-gen.py uses to
+dnl produce ./avr/devices/<device>/Makefile.am.
+AC_DEFUN([CHECK_MULTI_OPTION],[dnl
+    old_CC=${CC}
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING([if ${CC} supports multilib option $1])
 
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+    pml=`${CC} -print-multi-lib | sed 's/@/ -/g'`
+    opt=`echo "$1" | sed 's/-/\\\\-/g'`
+    if echo "$pml" | grep -e "$opt" > /dev/null 2>&1; then
+       AC_MSG_RESULT([yes, in $3])
+       DIR_$2=$3
+    else
+       AC_MSG_RESULT(no)
+       DIR_$2=
+    fi
+    CC=${old_CC}
+    AC_SUBST(DIR_$2)
+    AM_CONDITIONAL(HAS_MULTIOPT_$2, [test "x${DIR_$2}" != "x"])
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

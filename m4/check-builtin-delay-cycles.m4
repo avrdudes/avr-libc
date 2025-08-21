@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,15 +29,25 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+AC_DEFUN([CHECK_BUILTIN_DELAY_CYCLES],[dnl
+    old_CC=${CC}
+    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
+    AC_MSG_CHECKING([whether ${CC} supports __builtin_avr_delay_cycles])
+    echo "extern void __builtin_avr_delay_cycles(unsigned long); \
+          int main(void) { __builtin_avr_delay_cycles(42); return 0; }" \
+      | ${CC} -S -xc - -o - \
+      | grep __builtin_avr_delay_cycles > /dev/null
+    if test "$?" != "0"
+    then
+      HAS_DELAY_CYCLES=1
+      AC_MSG_RESULT([yes])
+    else
+      HAS_DELAY_CYCLES=0
+      AC_MSG_RESULT([no])
+    fi
+    AC_SUBST(HAS_DELAY_CYCLES)
+    CC=${old_CC}
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

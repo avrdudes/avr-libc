@@ -1,4 +1,7 @@
-# Copyright (c) 2004,2005  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,16 +28,33 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-
-EXTRA_DIST = \
-	LICENSE \
-	NEWS.md \
-	bootstrap
-
-DISTCHECK_CONFIGURE_FLAGS=--host=avr
-
-SUBDIRS = common include crt1 libc libm avr doc scripts
-DIST_SUBDIRS = common include crt1 libc libm avr doc scripts devtools m4
-
-dist-hook:
-	cp avr-libc.spec $(distdir)/avr-libc.spec
+dnl Some devices support a compact vector table (CVT), which requires
+dnl its own crt<mcu>-cvt.o.  avr-gcc supports -mcvt since v15, which
+dnl makes using crt<mcu>-cvt.o more convenient.
+AC_DEFUN([CHECK_AVR_CVT],[dnl
+    if test "x${MULTIDIR_$1}" != "x"
+    then
+      old_CFLAGS=${CFLAGS}
+      CFLAGS="-mmcu=$1 -I${srcdir}/include"
+      AC_MSG_CHECKING([compact vector table support for $1])
+      AC_COMPILE_IFELSE(
+        [AC_LANG_SOURCE([[
+	  #define __CONFIGURING_AVR_LIBC__
+	  #include <avr/io.h>
+	  #ifndef CPUINT_CVT_bm
+	  int a[-1];
+	  #endif
+	  ]],[])],
+        [has_$1_cvt=yes],
+        [has_$1_cvt=no]
+      )
+      AC_MSG_RESULT([${has_$1_cvt}])
+    else
+      has_$1_cvt=no
+    fi
+    CFLAGS=${old_CFLAGS}
+    AM_CONDITIONAL(HAS_$1_CVT, [test "x${has_$1_cvt}" = "xyes"])
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:
