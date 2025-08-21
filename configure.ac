@@ -571,9 +571,10 @@ AC_DEFUN(
     AC_MSG_CHECKING(if ${CC} supports $1)
     AC_COMPILE_IFELSE(
       [AC_LANG_SOURCE([],[])],
-      [has_dev_support=yes],
-      [has_dev_support=no]
+      [has_c_support=yes],
+      [has_c_support=no]
     )
+    has_dev_support=${has_c_support}
     for d in ${asm_only}; do
         if test "$1" = "$d"; then
             has_dev_support=yes
@@ -602,6 +603,24 @@ dnl Same replacements as performed by mlib-gen.py::to_ident().
       MULTIDIR_$1=
       AC_MSG_RESULT(no)
     fi
+    dnl Make sure we can compile <avr/io.h> for at least one MCU.
+    dnl If not, early abort configure.  Purpose is to detect very old
+    dnl compiler versions early, which otherwise would produce confusing
+    dnl configure results and cannot build the library.
+    AS_IF([test $has_c_support = yes && test x$done_compile_avrioh = x],[
+      done_compile_avrioh=yes
+      AC_MSG_CHECKING([if $CC can compile <avr/io.h> for at least one device])
+      CFLAGS="-mmcu=$1 -I${srcdir}/include -Werror"
+      AC_COMPILE_IFELSE(
+        [AC_LANG_SOURCE([[
+		#define __CONFIGURING_AVR_LIBC__
+		#include <avr/io.h>
+		int main (void) { return 0; } ]],[])],
+	[AC_MSG_RESULT(yes)],
+	[AC_MSG_RESULT(no)
+	 AC_MSG_FAILURE([$CC cannot compile <avr/io.h> for $1]) ])
+      ],[])
+    dnl Done compiling <avr/io.h> for at least one device.
     AC_SUBST(MULTIDIR_$1)
     CC=${old_CC}
     CFLAGS=${old_CFLAGS}
