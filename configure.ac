@@ -49,9 +49,10 @@ m4_define([avr_libc_version_numeric],
                     100 * avr_libc_minor + dnl
                           avr_libc_revision))dnl
 
-AC_INIT(avr-libc, avr_libc_version, https://github.com/avrdudes/avr-libc/issues)
+AC_INIT([avr-libc], [avr_libc_version],
+	[https://github.com/avrdudes/avr-libc/issues])
 
-AC_PREREQ(2.59)
+AC_PREREQ([2.59])
 AC_REVISION($Revision$)
 
 AC_CONFIG_SRCDIR([doc/examples/demo/demo.c])
