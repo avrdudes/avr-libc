@@ -1424,8 +1424,8 @@ void clock_prescale_set(clock_div_t __x)
         : /* no outputs */
         : "d" (__tmp),
           "M" (_SFR_MEM_ADDR(CLKPR)),
-          "d" (__x)
-        : "r0");
+          "d" ((uint8_t) __x)
+        : "r0", "memory");
 }
 
 /** \ingroup avr_power
@@ -1466,8 +1466,8 @@ void clock_prescale_set(clock_div_t __x)
         : /* no outputs */
         : "d" (__tmp),
           "M" (_SFR_MEM_ADDR(CLKPR)),
-          "d" (__x)
-        : "r0");
+          "d" ((uint8_t) __x)
+        : "r0", "memory");
 }
 
 #define clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)))
@@ -1502,7 +1502,7 @@ void system_clock_prescale_set(clock_div_t __x)
         : "d" (__tmp),
           "I" (_SFR_IO_ADDR(CLKPR)),
           "d" ((uint8_t) __x)
-        : "r0");
+        : "r0", "memory");
 }
 
 #define system_clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)))
@@ -1538,7 +1538,7 @@ void timer_clock_prescale_set(timer_clock_div_t __x)
           [enable] "r" ((uint8_t) _BV(CLKPCE)),
           [not_CLTPS] "M" ((1 << CLTPS2) | (1 << CLTPS1) | (1 << CLTPS0)),
           [set_value] "r" ((uint8_t) ((__x & 7) << 3))
-        : "r0");
+        : "r0", "memory");
 }
 
 #define timer_clock_prescale_get()  (timer_clock_div_t)(CLKPR & (uint8_t)((1<<CLTPS0)|(1<<CLTPS1)|(1<<CLTPS2)))
@@ -1577,7 +1577,7 @@ void system_clock_prescale_set(clock_div_t __x)
           [enable] "r" ((uint8_t) (1 << CLPCE)),
           [not_CLKPS] "M" ((1 << CLKPS2) | (1 << CLKPS1) | (1 << CLKPS0)),
           [set_value] "r" ((uint8_t) (__x & 7))
-        : "r0");
+        : "r0", "memory");
 }
 
 #define system_clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)))
@@ -1613,7 +1613,7 @@ void timer_clock_prescale_set(timer_clock_div_t __x)
           [enable] "r" ((uint8_t) (1 << CLPCE)),
           [not_CLTPS] "M" ((1 << CLTPS2) | (1 << CLTPS1) | (1 << CLTPS0)),
           [set_value] "r" ((uint8_t) ((__x & 7) << 3))
-        : "r0");
+        : "r0", "memory");
 }
 
 #define timer_clock_prescale_get()  (timer_clock_div_t)(CLKPR & (uint8_t)((1<<CLTPS0)|(1<<CLTPS1)|(1<<CLTPS2)))
@@ -1667,7 +1667,7 @@ void clock_prescale_set(clock_div_t __x)
         : "d" ((uint8_t) (1 << CLKPCE)),
           "I" (_SFR_IO_ADDR(CLKPR)),
           "d" ((uint8_t) __x)
-        : "r0");
+        : "r0", "memory");
 }
 
 
@@ -1704,7 +1704,7 @@ void clock_prescale_set (clock_div_t __x)
           "n" (_SFR_MEM_ADDR(CLKPR)),
           "n" (_SFR_MEM_ADDR(CCP)),
           "r" ((uint8_t) 0xD8)
-        : "r0");
+        : "r0", "memory");
 }
 
 #define clock_prescale_get()  (clock_div_t) (CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
@@ -1777,7 +1777,7 @@ void clock_prescale_set(clock_div_t __x)
             : "=d" (__tmp)
             : "d" ((uint8_t) __x),
               "I" (_SFR_IO_ADDR(XDIV))
-            : "r0");
+            : "r0", "memory");
     }
 }
 
@@ -1832,7 +1832,7 @@ void clock_prescale_set(clock_div_t __x)
           "I" (_SFR_IO_ADDR(CCP)),
           "I" (_SFR_IO_ADDR(CLKPSR)),
           "d" ((uint8_t) __x)
-        : "r16");
+        : "r16", "memory");
 }
 
 #define clock_prescale_get()  (clock_div_t)(CLKPSR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
