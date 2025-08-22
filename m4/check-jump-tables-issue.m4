@@ -33,31 +33,37 @@ dnl GCC PR63223: From avr-gcc v4.9.2 on, jump tables are accessed with
 dnl ELPM so that moving .text around is not an issue anymore.
 AC_DEFUN([CHECK_JUMP_TABLES_ISSUE],[dnl
     AC_MSG_CHECKING([whether ${CC} can use -Ttext with jump-tables])
-    AS_VERSION_COMPARE([${GCC_VER}], [4.9.2],
-        [no_jump_tables_issue=no],
-        [no_jump_tables_issue=yes],
-        [no_jump_tables_issue=yes])
-    AC_MSG_RESULT([$no_jump_tables_issue])
     FNO_JUMP_TABLES=
-    dnl Only work out how to turn off jump-tables when actually needed.
-    AS_IF([test x$no_jump_tables_issue = xno], [
-        opt=-mno-tablejump
-        AC_MSG_CHECKING([whether ${CC} supports $opt])
-        DO_IF_CC_OPTION([$opt],
-	    [ AC_MSG_RESULT([yes])
-	      FNO_JUMP_TABLES=$opt ],
-	    [ AC_MSG_RESULT([no]) ])
-	dnl
-        opt=-fno-jump-tables
-        AC_MSG_CHECKING([whether ${CC} supports $opt])
-        DO_IF_CC_OPTION([$opt],
-	    [ AC_MSG_RESULT([yes])
-	      FNO_JUMP_TABLES=$opt ],
-	    [ AC_MSG_RESULT([no]) ])
-        AS_IF([test "x$FNO_JUMP_TABLES" != "x"],
-            [ AC_MSG_NOTICE([Using $FNO_JUMP_TABLES to turn off jump tables]) ],
-            [ AC_MSG_NOTICE([Found no option to turn off jump tables]) ])
-    ],[])
+    dnl The relevant code is in libgcc's __tablejump2__, which on ATmega128...
+    rm -f conftest.elf
+    mcu="-mmcu=avr51"
+    opt="-xassembler - -xnone -o conftest.elf -nostdlib -nostartfiles"
+    echo ".global __tablejump2__" \
+	| $CC $mcu $opt $($CC $mcu -print-libgcc-file-name) 2> /dev/null
+    dnl ...should use ELPM to read from the jump table.
+    AS_IF([$OBJDUMP -d conftest.elf 2> /dev/null | grep -i elpm > /dev/null],
+	[ AC_MSG_RESULT([yes]) ],
+	[ AC_MSG_RESULT([no])
+	  dnl Only work out how to turn off jump-tables when actually needed.
+	  opt=-mno-tablejump
+	  AC_MSG_CHECKING([whether ${CC} supports $opt])
+	  DO_IF_CC_OPTION([$opt],
+	      [ AC_MSG_RESULT([yes])
+		FNO_JUMP_TABLES=$opt ],
+	      [ AC_MSG_RESULT([no]) ])
+	  dnl
+	  opt=-fno-jump-tables
+	  AC_MSG_CHECKING([whether ${CC} supports $opt])
+	  DO_IF_CC_OPTION([$opt],
+	      [ AC_MSG_RESULT([yes])
+		FNO_JUMP_TABLES=$opt ],
+	      [ AC_MSG_RESULT([no]) ])
+	  AS_IF([test "x$FNO_JUMP_TABLES" != "x"],
+	      [AC_MSG_NOTICE([Using $FNO_JUMP_TABLES to turn off jump-tables])],
+	      [AC_MSG_NOTICE([Found no option to turn off jump-tables])])
+	]
+    )
+    rm -f conftest.elf
     AC_SUBST(FNO_JUMP_TABLES)
 ])
 dnl Local Variables:

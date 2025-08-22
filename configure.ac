@@ -153,9 +153,6 @@ SHOW_VERSION([$CC], [CC])
 SHOW_VERSION([$AS], [AS])
 SHOW_VERSION([$LD], [LD])
 
-# Compiler version is used below and by CHECK_JUMP_TABLES_ISSUE.
-GCC_VER=`${CC} -dumpversion`
-
 # Make sure that we found the right avr cross-compiler.
 
 case "${CC}" in
@@ -224,6 +221,7 @@ dnl Used by m4/Makefile.am::EXTRA_DIST.
 SUBST_BASENAME_FILES(AVRLIBC_M4_M4FILES, [$srcdir/m4/*.m4])
 
 dnl Check if avr-gcc >= 5.1.0 as they expect device library.
+GCC_VER=`${CC} -dumpversion`
 AS_VERSION_COMPARE([${GCC_VER}], [5.1.0],
     [DEV_LIB="no"],
     [DEV_LIB="yes"],
