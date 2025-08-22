@@ -29,36 +29,14 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-dnl GCC PR63223: From avr-gcc v4.9.2 on, jump tables are accessed with
-dnl ELPM so that moving .text around is not an issue anymore.
-AC_DEFUN([CHECK_JUMP_TABLES_ISSUE],[dnl
-    AC_MSG_CHECKING([whether ${CC} can use -Ttext with jump-tables])
-    AS_VERSION_COMPARE([${GCC_VER}], [4.9.2],
-        [no_jump_tables_issue=no],
-        [no_jump_tables_issue=yes],
-        [no_jump_tables_issue=yes])
-    AC_MSG_RESULT([$no_jump_tables_issue])
-    FNO_JUMP_TABLES=
-    dnl Only work out how to turn off jump-tables when actually needed.
-    AS_IF([test x$no_jump_tables_issue = xno], [
-        opt=-mno-tablejump
-        AC_MSG_CHECKING([whether ${CC} supports $opt])
-        DO_IF_CC_OPTION([$opt],
-	    [ AC_MSG_RESULT([yes])
-	      FNO_JUMP_TABLES=$opt ],
-	    [ AC_MSG_RESULT([no]) ])
-	dnl
-        opt=-fno-jump-tables
-        AC_MSG_CHECKING([whether ${CC} supports $opt])
-        DO_IF_CC_OPTION([$opt],
-	    [ AC_MSG_RESULT([yes])
-	      FNO_JUMP_TABLES=$opt ],
-	    [ AC_MSG_RESULT([no]) ])
-        AS_IF([test "x$FNO_JUMP_TABLES" != "x"],
-            [ AC_MSG_NOTICE([Using $FNO_JUMP_TABLES to turn off jump tables]) ],
-            [ AC_MSG_NOTICE([Found no option to turn off jump tables]) ])
-    ],[])
-    AC_SUBST(FNO_JUMP_TABLES)
+dnl When CC supports option $1 then run $2, else run $3.
+AC_DEFUN([DO_IF_CC_OPTION],[dnl
+    old_do_if_cc_option_CFLAGS=${CFLAGS}
+    CFLAGS="$1"
+    AC_COMPILE_IFELSE([AC_LANG_SOURCE([],[])],
+        [$2],
+        [$3])
+    CFLAGS=${old_do_if_cc_option_CFLAGS}
 ])
 dnl Local Variables:
 dnl mode: autoconf
