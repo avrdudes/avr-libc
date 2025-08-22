@@ -1,5 +1,7 @@
 #!@PYTHON@
 
+## @configure_input@
+
 ## Filter MCUs specified in $1 with a filter given as $2.
 ## The filter is like "atmega16 atmega8* !atmega8*a" and is evaluated from
 ## left to right.  When an MCU matches, then it is added to the set of MCUS.

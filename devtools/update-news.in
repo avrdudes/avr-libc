@@ -1,6 +1,8 @@
 #!@PYTHON@
 # -*- mode: python -*-
 
+# @configure_input@
+
 # Run this script like
 #
 #   python devtools/update-news NEWS.md

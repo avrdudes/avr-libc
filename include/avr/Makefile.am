@@ -45,7 +45,8 @@ do_subst = sed \
 	-e 's,[@]AVR_LIBC_REVISION[@],$(AVR_LIBC_REVISION),g' \
 	-e 's,[@]AVR_LIBC_RELDATE[@],$(AVR_LIBC_RELDATE),g' \
 	-e 's,[@]AVR_LIBC_VERSION[@],$(AVR_LIBC_VERSION),g' \
-	-e 's,[@]AVR_LIBC_VERSION_NUMERIC[@],$(AVR_LIBC_VERSION_NUMERIC),g'
+	-e 's,[@]AVR_LIBC_VERSION_NUMERIC[@],$(AVR_LIBC_VERSION_NUMERIC),g' \
+	-e 's,[@]configure_input[@],include/avr/version.h.  Generated from version.h.in by Makefile.am.,g'
 
 version.h: version.h.in $(top_builddir)/config.h
 	$(do_subst) < $(srcdir)/version.h.in > version.h

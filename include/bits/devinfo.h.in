@@ -1,3 +1,5 @@
+/* @configure_input@ */
+
 #ifndef __BITS_DEVINFO_H_
 #define __BITS_DEVINFO_H_
 
