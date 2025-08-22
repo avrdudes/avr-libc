@@ -34,7 +34,7 @@ static char sccsid[] = "@(#)assert.c	8.1 (Berkeley) 6/4/93";
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <bits/best_as.h>
+#include "best_as.h"
 #include "sectionname.h"
 
 /* Print a message with operands to stderr. */

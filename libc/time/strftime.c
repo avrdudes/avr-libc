@@ -34,7 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <bits/best_as.h>
+#include "best_as.h"
 #include "time-private.h"
 #include "sectionname.h"
 
