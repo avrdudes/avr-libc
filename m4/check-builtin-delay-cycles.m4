@@ -30,8 +30,6 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 AC_DEFUN([CHECK_BUILTIN_DELAY_CYCLES],[dnl
-    old_CC=${CC}
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
     AC_MSG_CHECKING([whether ${CC} supports __builtin_avr_delay_cycles])
     echo "extern void __builtin_avr_delay_cycles(unsigned long); \
           int main(void) { __builtin_avr_delay_cycles(42); return 0; }" \
@@ -46,7 +44,6 @@ AC_DEFUN([CHECK_BUILTIN_DELAY_CYCLES],[dnl
       AC_MSG_RESULT([no])
     fi
     AC_SUBST(HAS_DELAY_CYCLES)
-    CC=${old_CC}
 ])
 dnl Local Variables:
 dnl mode: autoconf

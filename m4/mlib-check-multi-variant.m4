@@ -30,8 +30,6 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 AC_DEFUN([CHECK_MULTI_VARIANT],[dnl
-    old_CC=${CC}
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
     AC_MSG_CHECKING([if ${CC} supports multilib $1])
     mdir=`echo "$1" | sed -e 's/\\./\\\\./g'`
     pml=`${CC} -print-multi-lib | grep -e "^${mdir};"`
@@ -44,7 +42,6 @@ AC_DEFUN([CHECK_MULTI_VARIANT],[dnl
        MULTIOPT_$2=
        AC_MSG_RESULT(no)
     fi
-    CC=${old_CC}
     AC_SUBST(MULTIDIR_$2)
     AC_SUBST(MULTIOPT_$2)
     AM_CONDITIONAL(HAS_MULTI_$2, [test "x${MULTIDIR_$2}" != "x"])

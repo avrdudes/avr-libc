@@ -32,10 +32,8 @@
 dnl Some devices are only handled by newer version of gcc. This macro lets us
 dnl probe whether the installed avr-gcc supports a device.
 AC_DEFUN([CHECK_AVR_DEVICE],[dnl
-    old_CC=${CC}
     old_CFLAGS=${CFLAGS}
     CFLAGS="-mmcu=$1"
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
     AC_MSG_CHECKING([if ${CC} supports $1])
     AC_COMPILE_IFELSE(
         [AC_LANG_SOURCE([],[])],
@@ -86,7 +84,6 @@ AC_DEFUN([CHECK_AVR_DEVICE],[dnl
     ],[])
     dnl Done compiling <avr/io.h> for at least one device.
     AC_SUBST(MULTIDIR_$1)
-    CC=${old_CC}
     CFLAGS=${old_CFLAGS}
     AM_CONDITIONAL(HAS_$1, [test "x${MULTIDIR_$1}" != "x"])
 ])

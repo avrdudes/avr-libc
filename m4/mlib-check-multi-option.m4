@@ -37,8 +37,6 @@ dnl variable HAS_MULTIOPT_$2 to 0 or 1 depending on the result.
 dnl The only consumer of this test is Device.am which mlib-gen.py uses to
 dnl produce ./avr/devices/<device>/Makefile.am.
 AC_DEFUN([CHECK_MULTI_OPTION],[dnl
-    old_CC=${CC}
-    CC=`echo "${CC}" | sed 's/-mmcu=avr.//'`
     AC_MSG_CHECKING([if ${CC} supports multilib option $1])
 
     pml=`${CC} -print-multi-lib | sed 's/@/ -/g'`
@@ -50,7 +48,6 @@ AC_DEFUN([CHECK_MULTI_OPTION],[dnl
        AC_MSG_RESULT(no)
        DIR_$2=
     fi
-    CC=${old_CC}
     AC_SUBST(DIR_$2)
     AM_CONDITIONAL(HAS_MULTIOPT_$2, [test "x${DIR_$2}" != "x"])
 ])
