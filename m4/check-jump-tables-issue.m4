@@ -39,7 +39,7 @@ AC_DEFUN([CHECK_JUMP_TABLES_ISSUE],[dnl
     mcu="-mmcu=avr51"
     opt="-xassembler - -xnone -o conftest.elf -nostdlib -nostartfiles"
     echo ".global __tablejump2__" \
-	| $CC $mcu $opt $($CC $mcu -print-libgcc-file-name) 2> /dev/null
+	| $CC $mcu $opt `$CC $mcu -print-libgcc-file-name` 2> /dev/null
     dnl ...should use ELPM to read from the jump table.
     AS_IF([$OBJDUMP -d conftest.elf 2> /dev/null | grep -i elpm > /dev/null],
 	[ AC_MSG_RESULT([yes]) ],

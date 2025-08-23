@@ -31,8 +31,8 @@
 
 dnl Check the version of LD against the version of the linker used by CC.
 AC_DEFUN([WARN_LINKER_MISMATCH],[dnl
-    vld=$($LD --version | sed '1p;d')
-    vcc=$(echo "" | $CC -xassembler - -Wl,--version 2> /dev/null | sed '1p;d')
+    vld=`$LD --version | sed '1p;d'`
+    vcc=`echo "" | $CC -xassembler - -Wl,--version 2> /dev/null | sed '1p;d'`
     AS_IF([test "x$vld" != "x$vcc"],[
 	dnl LD's version has already been displayed with SHOW_VERSION.
 	AC_MSG_NOTICE([Using CC linker: $vcc])

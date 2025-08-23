@@ -52,7 +52,7 @@ AC_DEFUN([CHECK_AVR_RESERVED],[dnl
       has_$1_baud=no
     fi
     CFLAGS=${old_CFLAGS}
-    upper=$(echo "$1" | ${srcdir}/devtools/mcu-to-avr-name.sh)
+    upper=`echo "$1" | ${srcdir}/devtools/mcu-to-avr-name.sh`
     defd="defined(__AVR_${upper}__)"
     AS_IF([test x${has_$1_baud} = xyes],
         [COND_BAUD_RESERVED="${COND_BAUD_RESERVED} || ${defd}"],

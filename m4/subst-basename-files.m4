@@ -35,7 +35,7 @@ dnl hence we need a loop over all files in $2.
 AC_DEFUN([SUBST_BASENAME_FILES],[dnl
     fils=
     for fil in $2; do
-        fils="$fils $(basename $fil)"
+        fils="$fils `basename $fil`"
     done
     AC_SUBST($1,[$fils])
 ])
