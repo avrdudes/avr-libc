@@ -29,31 +29,13 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-dnl GCC PR63223: From avr-gcc v4.9.2 on, jump tables are accessed with
-dnl ELPM so that moving .text around is not an issue anymore.
-AC_DEFUN([CHECK_JUMP_TABLES_ISSUE],[dnl
-    AC_MSG_CHECKING([whether ${CC} can use -Ttext with jump-tables])
-    FNO_JUMP_TABLES=
-    dnl The relevant code is in libgcc's __tablejump2__, which on ATmega128...
-    rm -f conftest.elf
-    mcu="-mmcu=avr51"
-    opt="-xassembler - -xnone -o conftest.elf -nostdlib -nostartfiles"
-    echo ".global __tablejump2__" \
-	| $CC $mcu $opt $($CC $mcu -print-libgcc-file-name) 2> /dev/null
-    dnl ...should use ELPM to read from the jump table.
-    AS_IF([$OBJDUMP -d conftest.elf 2> /dev/null | grep -i elpm > /dev/null],
-	[ AC_MSG_RESULT([yes]) ],
-	[ AC_MSG_RESULT([no])
-	  dnl Only work out how to turn off jump-tables when actually needed.
-	  CHECK_CC_OPTION_AND_SET([-mno-tablejump],   [FNO_JUMP_TABLES])
-	  CHECK_CC_OPTION_AND_SET([-fno-jump-tables], [FNO_JUMP_TABLES])
-	  AS_IF([test "x$FNO_JUMP_TABLES" != "x"],
-	      [AC_MSG_NOTICE([Using $FNO_JUMP_TABLES to turn off jump-tables])],
-	      [AC_MSG_NOTICE([Found no option to turn off jump-tables])])
-	]
-    )
-    rm -f conftest.elf
-    AC_SUBST(FNO_JUMP_TABLES)
+dnl When CC supports option $1 then set $2=$1, else $2 is unchanged.
+AC_DEFUN([CHECK_CC_OPTION_AND_SET],[dnl
+    AC_MSG_CHECKING([whether ${CC} supports $1])
+    DO_IF_CC_OPTION([$1],
+	[ AC_MSG_RESULT([yes])
+	  $2=$1 ],
+	[ AC_MSG_RESULT([no])])
 ])
 dnl Local Variables:
 dnl mode: autoconf
