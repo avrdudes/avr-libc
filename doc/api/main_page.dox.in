@@ -27,6 +27,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* @configure_input@ */
+
 /** \mainpage AVR-LibC
 
 \section avr_libc_intro Introduction
@@ -585,3 +587,6 @@ AVR-LibC can be freely used and redistributed, provided the following
 license conditions are met.
 
 \verbatim
+@LICENSE_FILE@
+\endverbatim
+*/

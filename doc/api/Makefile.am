@@ -168,13 +168,6 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 	cp $(top_srcdir)/doc/api/avr-libc-logo-inverted.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
 
-# Add contents of toplevel LICENSE to main page
-main_page.dox: main_page.dox.in
-	cat $(srcdir)/main_page.dox.in > main_page.dox
-	cat $(top_srcdir)/LICENSE >> main_page.dox
-	echo '\endverbatim' >> main_page.dox
-	echo '*/' >> main_page.dox
-
 #doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
 doxygen.config: doxygen.config.in
 	sed \
