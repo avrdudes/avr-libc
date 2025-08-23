@@ -89,7 +89,7 @@ stdlib_a_extra_dist = \
 	strto64.h \
 	strtoxx.h
 
-malloc.o: AVRLIB_CFLAGS += -Wno-maybe-uninitialized
+malloc.o: AVRLIB_CFLAGS += @WNO_MAYBE_UNINITIALIZED@
 
 dtoa_prf.o dtostre.o strtod.o: AVRLIB_CFLAGS += -mcall-prologues
 

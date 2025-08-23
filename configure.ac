@@ -252,6 +252,8 @@ CHECK_JUMP_TABLES_ISSUE
 dnl Does AC_SUBST(HAS_DELAY_CYCLES).
 CHECK_BUILTIN_DELAY_CYCLES
 
+CHECK_CC_OPTION_AND_SET([-Wno-maybe-uninitialized], [WNO_MAYBE_UNINITIALIZED])
+AC_SUBST(WNO_MAYBE_UNINITIALIZED)
 
 dnl == Documentation =========================================================
 
