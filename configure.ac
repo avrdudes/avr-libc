@@ -154,6 +154,9 @@ SHOW_VERSION([$CC], [CC])
 SHOW_VERSION([$AS], [AS])
 SHOW_VERSION([$LD], [LD])
 
+dnl Issue a warning when CC's linker is not LD.
+WARN_LINKER_MISMATCH
+
 # Make sure that we found the right avr cross-compiler.
 
 case "${CC}" in
