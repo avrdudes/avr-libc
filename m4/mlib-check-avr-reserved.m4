@@ -35,15 +35,15 @@ AC_DEFUN([CHECK_AVR_RESERVED],[dnl
     if test "x${MULTIDIR_$1}" != "x"
     then
       old_CFLAGS=${CFLAGS}
-      CFLAGS="-mmcu=$1 -I${srcdir}/include -Werror"
+      CFLAGS="-mmcu=$1 -I${srcdir}/include"
       AC_MSG_CHECKING([if BAUD is reserved for $1])
       dnl #define __CONFIGURING_AVR_LIBC__ so that avr/io.h
       dnl doesn't #include <bits/devinfo.h>.
       AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
-		#define BAUD 123
+		#define BAUD ???
 		#define __CONFIGURING_AVR_LIBC__
 		#include <avr/io.h>
-		int a[BAUD == 123 ? 1 : -1];  ]],[])],
+		]],[])],
         [has_$1_baud=no],
         [has_$1_baud=yes])
       DO_IF_ASM_ONLY([$1], [has_$1_baud=no], [])
