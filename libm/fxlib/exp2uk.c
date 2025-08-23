@@ -27,6 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.  */
 
 #include <stdfix.h>
+#include <stdfix-avrlibc.h>
 #include <stdint.h>
 
 unsigned accum exp2uk (unsigned accum x)

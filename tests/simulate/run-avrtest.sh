@@ -371,6 +371,9 @@ Compile ()
       crt=crt$2.o
       flags="-I../../include -I $AVRDIR/include -nostdlib"
       crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
+      if [ -z "$crt" ]; then
+	  crt=`find $AVRDIR/avr/devices/$2 -name 'crt*.o' -print | head -1`
+      fi
       libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
             $AVRDIR/avr/lib/$multilibdir/libm.a \
             $AVRDIR/avr/devices/$2/lib$2.a -lgcc"

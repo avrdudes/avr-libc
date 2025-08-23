@@ -76,6 +76,10 @@
 #ifndef _ASMDEF_H
 #define _ASMDEF_H
 
+#ifndef __ASSEMBLER__
+#define __ASSEMBLER__
+#endif
+
 /* Defines such as SPL, SPH, XL, XH,
    SREG, EIND, RAMPZ, ...  */
 #include <avr/common.h>

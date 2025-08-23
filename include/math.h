@@ -47,6 +47,19 @@
 #ifndef __MATH_H
 #define __MATH_H
 
+#ifndef __DOXYGEN__
+/* If persue of old GCC versions... */
+#ifndef __SIZEOF_FLOAT__
+#define __SIZEOF_FLOAT__ 4
+#endif
+#ifndef __SIZEOF_DOUBLE__
+#define __SIZEOF_DOUBLE__ 4
+#endif
+#ifndef __SIZEOF_LONG_DOUBLE__
+#define __SIZEOF_LONG_DOUBLE__ 4
+#endif
+#endif /* !Doxygen */
+
 #ifdef __cplusplus
 extern "C" {
 #endif

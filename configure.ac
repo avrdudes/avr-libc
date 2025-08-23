@@ -259,6 +259,10 @@ CHECK_BUILTIN_DELAY_CYCLES
 CHECK_CC_OPTION_AND_SET([-Wno-maybe-uninitialized], [WNO_MAYBE_UNINITIALIZED])
 AC_SUBST(WNO_MAYBE_UNINITIALIZED)
 
+dnl Does AM_CONDITIONAL(BUILD_FXLIB, ...)
+CHECK_FIXED_POINT
+
+
 dnl == Documentation =========================================================
 
 dnl TODO: Check for various tools used to build the documentation. If anything

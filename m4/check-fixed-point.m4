@@ -1,4 +1,7 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2004  Theodore A. Roth
+# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
+# Copyright (c) 2005,2008  Joerg Wunsch
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,10 +29,40 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-if BUILD_FXLIB
-SUBDIRS = fplib fxlib
-else
-SUBDIRS = fplib
-endif
-
-DIST_SUBDIRS = fplib fxlib
+AC_DEFUN([CHECK_FIXED_POINT],[dnl
+    AC_MSG_CHECKING([whether ${CC} supports fixed-point])
+    AC_COMPILE_IFELSE(
+	[ AC_LANG_SOURCE([[
+		_Fract x1;
+		_Accum x2;
+		#include <stdfix.h>
+		fract x3;
+		accum x4;
+		]],[])],
+	[has_fixed_point=yes],
+	[has_fixed_point=no])
+    AC_MSG_RESULT([$has_fixed_point])
+    AM_CONDITIONAL(BUILD_FXLIB, [test $has_fixed_point = yes])
+    dnl
+    old_check_fixed_point_CFLAGS=${CFLAGS}
+    CFLAGS="-I${srcdir}/include"
+    AS_IF([test $has_fixed_point = yes],[
+	AC_MSG_CHECKING([whether <stdfix.h> includes <stdfix-avrlibc.h>])
+	AC_COMPILE_IFELSE(
+	    [ AC_LANG_SOURCE([[
+		  #include <stdfix.h>
+		  #ifndef _STDFIX_AVRLIBC_H
+		  ???
+		  #endif
+		  ]],[])],
+	    [ AC_MSG_RESULT([yes]) ],
+	    [ AC_MSG_RESULT([no])
+	      AC_MSG_WARN([users must include <stdfix-avrlibc.h> by])
+	      AC_MSG_WARN([hand for full AVR-LibC fixed-point support])]
+	)
+    ])
+    CFLAGS=${old_check_fixed_point_CFLAGS}
+])
+dnl Local Variables:
+dnl mode: autoconf
+dnl End:

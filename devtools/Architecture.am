@@ -73,7 +73,10 @@ include $(top_srcdir)/libc/stdio/Rules.am
 include $(top_srcdir)/libc/time/Rules.am
 
 include $(top_srcdir)/libm/fplib/Rules.am
+
+if BUILD_FXLIB
 include $(top_srcdir)/libm/fxlib/Rules.am
+endif
 
 nodist_libc_a_SOURCES = \
 	$(stdlib_a_c_sources) \

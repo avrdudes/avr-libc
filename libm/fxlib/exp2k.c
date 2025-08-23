@@ -27,6 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE.  */
 
 #include <stdfix.h>
+#include <stdfix-avrlibc.h>
 #include <stdint.h>
 
 accum exp2k (accum x)

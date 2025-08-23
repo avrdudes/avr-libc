@@ -65,24 +65,14 @@ AC_DEFUN([CHECK_AVR_DEVICE],[dnl
       MULTIDIR_$1=
       AC_MSG_RESULT(no)
     fi
-    dnl Make sure we can compile <avr/io.h> for at least one MCU.
+    dnl Make sure we can compile essential headers for at least one MCU.
     dnl If not, early abort configure.  Purpose is to detect very old
     dnl compiler versions early, which otherwise would produce confusing
     dnl configure results and cannot build the library.
     AS_IF([test $has_c_support = yes && test x$done_compile_avrioh = x],[
-      done_compile_avrioh=yes
-      AC_MSG_CHECKING([if $CC can compile <avr/io.h> for at least one device])
-      CFLAGS="-mmcu=$1 -I${srcdir}/include -Werror"
-      AC_COMPILE_IFELSE(
-        [AC_LANG_SOURCE([[
-		#define __CONFIGURING_AVR_LIBC__
-		#include <avr/io.h>
-		int main (void) { return 0; } ]],[])],
-	[AC_MSG_RESULT(yes)],
-	[AC_MSG_RESULT(no)
-	 AC_MSG_FAILURE([$CC cannot compile <avr/io.h> for $1]) ])
-    ],[])
-    dnl Done compiling <avr/io.h> for at least one device.
+	done_compile_avrioh=yes
+	COMPILE_HEADER_OR_ABORT([$1])], [])
+    dnl
     AC_SUBST(MULTIDIR_$1)
     CFLAGS=${old_CFLAGS}
     AM_CONDITIONAL(HAS_$1, [test "x${MULTIDIR_$1}" != "x"])

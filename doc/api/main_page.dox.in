@@ -581,6 +581,17 @@ compile-time.
 </dd>
 </dl>
 
+
+\section supp_compilers Supported Compilers
+\addindex supported compilers
+
+AVR-LibC can be used with the most recent avr-gcc back to
+avr-gcc v4.8 at least.  Older versions may still work but are untested.
+
+Always use AVR-LibC with a compiler version for which the
+library has been configured and built.
+
+
 \section license AVR-LibC License
 
 AVR-LibC can be freely used and redistributed, provided the following
