@@ -417,12 +417,12 @@ m4_include([m4-gen/multilib.m4])
 
 dnl == Generate all files from *.in sources  =================================
 
-dnl include/avr/version.h.in is transformed by the respective Makefile[.am].
 dnl The *.in scripts in devtools are transformed by the local configure.
 AC_CONFIG_FILES([
 	avr-libc.spec
 	supported-mcus.txt
 	include/avr/builtins.h
+	include/avr/version.h
 	include/util/delay.h
 	doc/api/main_page.dox
 ])
