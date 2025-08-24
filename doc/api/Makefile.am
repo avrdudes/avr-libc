@@ -203,6 +203,7 @@ install-dox-html: dox-html
 	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)/search
 	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css \
 	                  $(USER_MANUAL)/*.jpg $(USER_MANUAL)/*.png \
+	                  $(USER_MANUAL)/*.js \
 	                  $(USER_MANUAL)/search/*.js \
 	                  $(USER_MANUAL)/search/*.css \
 	                  $(USER_MANUAL)/search/*.svg)'; \
