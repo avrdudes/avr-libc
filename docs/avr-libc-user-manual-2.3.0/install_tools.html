@@ -106,6 +106,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li><a class="el" href="install_tools.html#required_tools">Required AVR Tools</a></li>
 <li><a class="el" href="install_tools.html#optional_tools">Optional AVR Tools</a></li>
 <li><a class="el" href="install_tools.html#install_unix">Building and Installing under Linux, FreeBSD, and Others</a><ul>
+<li><a class="el" href="install_tools.html#install_scripts">Build Scripts</a></li>
 <li><a class="el" href="install_tools.html#install_preparations">Preparations</a><ul>
 <li><a class="el" href="install_tools.html#install_host_tools">Required Build Tools</a></li>
 <li><a class="el" href="install_tools.html#install_dir_layout">Directory Layout</a></li>
@@ -116,6 +117,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li><a class="el" href="install_tools.html#install_avr_libc">AVR-LibC</a></li>
 <li><a class="el" href="install_tools.html#install_avrprog">AVRDUDE</a></li>
 <li><a class="el" href="install_tools.html#install_simulavr">SimulAVR</a></li>
+<li><a class="el" href="install_tools.html#install_avrtest">AVRtest</a></li>
 <li><a class="el" href="install_tools.html#install_avarice">AVaRICE</a></li>
 </ul>
 </li>
@@ -181,6 +183,12 @@ Optional AVR Tools</h1>
  <a class="el" href="install_tools.html#install_simulavr">Installation</a> </p>
 <p class="enddd"></p>
 </dd>
+<dt>AVRtest </dt>
+<dd><p class="startdd">GitHub: <a href="https://github.com/sprintersb/atest">https://github.com/sprintersb/atest</a><br  />
+ <a class="el" href="install_tools.html#install_avrtest">Installation</a><br  />
+ AVRtest is an AVR core simulator that can be used to run the avr-gcc testsuite. It can also be used to run parts of the AVR-LibC testsuite. For details, see the <a href="https://github.com/sprintersb/atest?tab=readme-ov-file#what-is-avrtest">README</a>. </p>
+<p class="enddd"></p>
+</dd>
 <dt>AVaRICE </dt>
 <dd>GitHub: <a href="https://github.com/avrdudes/avarice">https://github.com/avrdudes/avarice</a> <br  />
  <a class="el" href="install_tools.html#install_avarice">Installation</a><br  />
@@ -191,6 +199,13 @@ Building and Installing under Linux, FreeBSD, and Others</h1>
 <p>The default behaviour for most of these tools is to install every thing under the <code>/usr/local</code> directory. In order to keep the AVR tools separate from the base system, it is usually better to install everything into <code>/usr/local/avr</code>. If the <code>/usr/local/avr</code> directory does not exist, you should create it before trying to install anything. You will need <code>root</code> access to install there. If you don't have or want root access to the system, you can alternatively install in your home directory, for example, in <code>$HOME/local/avr</code>. Where you install is a completely arbitrary decision, but should be consistent for all the tools.</p>
 <dl class="section warning"><dt>Warning</dt><dd>If you have <code>CC</code> set to anything other than <code>avr-gcc</code> in your environment, this will cause the configure script to fail. It is best to not have <code>CC</code> set at all.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>It is usually the best to use the latest released version of each of the tools.</dd></dl>
+<h2><a class="anchor" id="install_scripts"></a>
+Build Scripts</h2>
+<p>There are scripts that can simplify the process of building an AVR toolchain for Linux, and/or for Windows in <a class="el" href="install_tools.html#install_canadian">Canadia cross</a> configuration.</p>
+<ul>
+<li>GitHub: <a href="https://github.com/ZakKemble/avr-gcc-build">avr-gcc-build</a> from Zak Kemble.</li>
+<li>GitHub: <a href="https://github.com/sprintersb/make-avr-gcc">make-avr-gcc</a></li>
+</ul>
 <h2><a class="anchor" id="install_preparations"></a>
 Preparations</h2>
 <h3><a class="anchor" id="install_host_tools"></a>
@@ -315,9 +330,16 @@ $ ../configure --prefix=$PREFIX
 $ make
 $ make install
 </pre><dl class="section note"><dt>Note</dt><dd>You might want to have already installed <a class="el" href="install_tools.html#install_avr_binutils">avr-binutils</a>, <a class="el" href="install_tools.html#install_avr_gcc">avr-gcc</a> and <a class="el" href="install_tools.html#install_avr_libc">AVR-LibC</a> if you want to have the test programs built in the simulavr source.</dd></dl>
+<h2><a class="anchor" id="install_avrtest"></a>
+AVRtest</h2>
+<p><a id="a13_installation:2C:20avrtest" name="a13_installation:2C:20avrtest"></a></p>
+<p>Building AVRtest is done by running its Makefile. No configure script is required. To get the sources and make: </p><pre class="fragment">$ git clone https://github.com/sprintersb/atest.git &lt;folder&gt;
+$ cd &lt;folder&gt;
+$ make
+</pre><p> The Makefile will build some object files like <code>exit-atmega128.o</code> which require an avr-gcc that supports such devices. There are also pre-built <a href="https://sourceforge.net/projects/winavr/files/AVRtest/">AVRtest binaries for Windows</a>.</p>
 <h2><a class="anchor" id="install_avarice"></a>
 AVaRICE</h2>
-<p><a id="a13_installation:2C:20avarice" name="a13_installation:2C:20avarice"></a></p>
+<p><a id="a14_installation:2C:20avarice" name="a14_installation:2C:20avarice"></a></p>
 <dl class="section note"><dt>Note</dt><dd>These install notes are not applicable to avarice-1.5 or older. You probably don't want to use anything that old anyways since there have been many improvements and bug fixes since the 1.5 release.</dd></dl>
 <p>AVaRICE also uses the <code>configure</code> system, so to build and install:</p>
 <pre class="fragment">$ gunzip -c avarice-&lt;version&gt;.tar.gz | tar xf -
@@ -686,7 +708,7 @@ Using Git</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2025 18:32:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

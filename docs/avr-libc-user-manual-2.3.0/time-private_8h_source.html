@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
-<title>AVR-LibC: strto64.h Source File</title>
+<title>AVR-LibC: time-private.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -97,11 +97,11 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_9b49c6c2d2dfe7219f88b16666fc0be4.html">john</a></li><li class="navelem"><a class="el" href="dir_a05e76e2dc0d4100e4bd8f30115bdb66.html">gnu</a></li><li class="navelem"><a class="el" href="dir_6d25185a6a505494af8507b862feaaa0.html">source</a></li><li class="navelem"><a class="el" href="dir_2c8c9ed937fd2e49795790ca176638eb.html">avr-libc</a></li><li class="navelem"><a class="el" href="dir_02aa6b46639b9bc397a92b7cd55dbbec.html">libc</a></li><li class="navelem"><a class="el" href="dir_855bff84596471b15d2d2005a095d749.html">stdlib</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_9b49c6c2d2dfe7219f88b16666fc0be4.html">john</a></li><li class="navelem"><a class="el" href="dir_a05e76e2dc0d4100e4bd8f30115bdb66.html">gnu</a></li><li class="navelem"><a class="el" href="dir_6d25185a6a505494af8507b862feaaa0.html">source</a></li><li class="navelem"><a class="el" href="dir_2c8c9ed937fd2e49795790ca176638eb.html">avr-libc</a></li><li class="navelem"><a class="el" href="dir_02aa6b46639b9bc397a92b7cd55dbbec.html">libc</a></li><li class="navelem"><a class="el" href="dir_c229ec0b5bf9b354dfbbed9549828e95.html">time</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">strto64.h</div></div>
+  <div class="headertitle"><div class="title">time-private.h</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* Copyright (c) 2025  Georg-Johann Lay</span></div>
@@ -132,40 +132,29 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">   POSSIBILITY OF SUCH DAMAGE.  */</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>;;; Return the result in RET[]</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define RET0    r18</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#define RET1    r19</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#define RET2    r20</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define RET3    r21</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#define RET4    r22</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#define RET5    r23</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define RET6    r24</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#define RET7    r25</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>;;; During madd, the following regs contain porcelaine: R22, R23, R26...R29.</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/* Function used locally in libc/time/ */</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;<a class="code" href="stdint_8h.html">stdint.h</a>&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;<a class="code" href="time_8h.html">time.h</a>&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">extern</span> <span class="keywordtype">long</span> __latitude;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">extern</span> <span class="keywordtype">long</span> __longitude;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">extern</span> <span class="keywordtype">long</span> __utc_offset;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">extern</span> <span class="keywordtype">char</span> *__asc_store;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">extern</span> <span class="keyword">struct </span><a class="code hl_struct" href="structtm.html">tm</a> __tm_store;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">extern</span> int (*__dst_ptr) (<span class="keyword">const</span> <a class="code hl_typedef" href="group__avr__time.html#ga3346b04b0420b32ccf6b706551b70762">time_t</a>*, <a class="code hl_typedef" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a>*);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>;;; Expand the result in A[]</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#define A7      r17</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#define A6      r16</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define A5      r15</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#define A4      r14</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#define A3      r13</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#define A2      r12</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#define A1      r19</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define A0      r18</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>;;; Used in __strto64.madd</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#define Tmp     r20</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#define B7      r25</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#define B6      r24</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#define B5      r11</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#define B4      r10</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#define B3      r9</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#define B2      r8</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#define B1      r1</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#define B0      r0</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">extern</span> <span class="keyword">volatile</span> <a class="code hl_typedef" href="group__avr__time.html#ga3346b04b0420b32ccf6b706551b70762">time_t</a> __system_time;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">extern</span> <span class="keywordtype">char</span>* __print_10 (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>, <span class="keywordtype">char</span>*, <span class="keywordtype">char</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">extern</span> <span class="keywordtype">void</span> __print_x3210 (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>, <span class="keywordtype">char</span>*);</div>
+<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:91</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:81</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gadb828ef50c2dbb783109824e94cf6c47"><div class="ttname"><a href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a></div><div class="ttdeci">signed long int int32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:96</div></div>
+<div class="ttc" id="agroup__avr__time_html_ga3346b04b0420b32ccf6b706551b70762"><div class="ttname"><a href="group__avr__time.html#ga3346b04b0420b32ccf6b706551b70762">time_t</a></div><div class="ttdeci">uint32_t time_t</div><div class="ttdef"><b>Definition:</b> time.h:111</div></div>
+<div class="ttc" id="astdint_8h_html"><div class="ttname"><a href="stdint_8h.html">stdint.h</a></div></div>
+<div class="ttc" id="astructtm_html"><div class="ttname"><a href="structtm.html">tm</a></div><div class="ttdef"><b>Definition:</b> time.h:138</div></div>
+<div class="ttc" id="atime_8h_html"><div class="ttname"><a href="time_8h.html">time.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->

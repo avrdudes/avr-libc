@@ -279,7 +279,7 @@ Functions</h2></td></tr>
 <div class="line"> </div>
 <div class="line">y2k = <a class="code hl_function" href="group__avr__time.html#ga26c7d1dbf93fa8c23c5effbacec91f8c">time</a>(NULL);</div>
 <div class="line">ntp = y2k + <a class="code hl_define" href="group__avr__time.html#gaa7c3e93bff90674e9e74de6bdec85613">NTP_OFFSET</a>;</div>
-<div class="ttc" id="agroup__avr__time_html_ga26c7d1dbf93fa8c23c5effbacec91f8c"><div class="ttname"><a href="group__avr__time.html#ga26c7d1dbf93fa8c23c5effbacec91f8c">time</a></div><div class="ttdeci">time_t time(time_t *timer)</div><div class="ttdef"><b>Definition:</b> time.c:41</div></div>
+<div class="ttc" id="agroup__avr__time_html_ga26c7d1dbf93fa8c23c5effbacec91f8c"><div class="ttname"><a href="group__avr__time.html#ga26c7d1dbf93fa8c23c5effbacec91f8c">time</a></div><div class="ttdeci">time_t time(time_t *timer)</div><div class="ttdef"><b>Definition:</b> time.c:40</div></div>
 <div class="ttc" id="agroup__avr__time_html_ga3346b04b0420b32ccf6b706551b70762"><div class="ttname"><a href="group__avr__time.html#ga3346b04b0420b32ccf6b706551b70762">time_t</a></div><div class="ttdeci">uint32_t time_t</div><div class="ttdef"><b>Definition:</b> time.h:111</div></div>
 <div class="ttc" id="agroup__avr__time_html_gaa7c3e93bff90674e9e74de6bdec85613"><div class="ttname"><a href="group__avr__time.html#gaa7c3e93bff90674e9e74de6bdec85613">NTP_OFFSET</a></div><div class="ttdeci">#define NTP_OFFSET</div><div class="ttdef"><b>Definition:</b> time.h:433</div></div>
 </div><!-- fragment --> 
@@ -1019,8 +1019,8 @@ Functions</h2></td></tr>
 <div class="line">read_rtc(&amp;rtc_time);</div>
 <div class="line">rtc_time.tm_isdst = 0;</div>
 <div class="line"><a class="code hl_function" href="group__avr__time.html#ga02663b926feab893c0e0ec1f29b3c315">set_system_time</a>( <a class="code hl_function" href="group__avr__time.html#gae114b9ba0fce4e2d6297e0e66768bb75">mktime</a>(&amp;rtc_time) );</div>
-<div class="ttc" id="agroup__avr__time_html_ga02663b926feab893c0e0ec1f29b3c315"><div class="ttname"><a href="group__avr__time.html#ga02663b926feab893c0e0ec1f29b3c315">set_system_time</a></div><div class="ttdeci">void set_system_time(time_t timestamp)</div><div class="ttdef"><b>Definition:</b> set_system_time.c:42</div></div>
-<div class="ttc" id="agroup__avr__time_html_gae114b9ba0fce4e2d6297e0e66768bb75"><div class="ttname"><a href="group__avr__time.html#gae114b9ba0fce4e2d6297e0e66768bb75">mktime</a></div><div class="ttdeci">time_t mktime(struct tm *timeptr)</div><div class="ttdef"><b>Definition:</b> mktime.c:43</div></div>
+<div class="ttc" id="agroup__avr__time_html_ga02663b926feab893c0e0ec1f29b3c315"><div class="ttname"><a href="group__avr__time.html#ga02663b926feab893c0e0ec1f29b3c315">set_system_time</a></div><div class="ttdeci">void set_system_time(time_t timestamp)</div><div class="ttdef"><b>Definition:</b> set_system_time.c:40</div></div>
+<div class="ttc" id="agroup__avr__time_html_gae114b9ba0fce4e2d6297e0e66768bb75"><div class="ttname"><a href="group__avr__time.html#gae114b9ba0fce4e2d6297e0e66768bb75">mktime</a></div><div class="ttdeci">time_t mktime(struct tm *timeptr)</div><div class="ttdef"><b>Definition:</b> mktime.c:39</div></div>
 <div class="ttc" id="astructtm_html"><div class="ttname"><a href="structtm.html">tm</a></div><div class="ttdef"><b>Definition:</b> time.h:138</div></div>
 </div><!-- fragment --><p>From a Network Time Protocol time stamp: </p><div class="fragment"><div class="line"><a class="code hl_function" href="group__avr__time.html#ga02663b926feab893c0e0ec1f29b3c315">set_system_time</a>(ntp_timestamp - <a class="code hl_define" href="group__avr__time.html#gaa7c3e93bff90674e9e74de6bdec85613">NTP_OFFSET</a>);</div>
 </div><!-- fragment --><p>From a UNIX time stamp: </p><div class="fragment"><div class="line"><a class="code hl_function" href="group__avr__time.html#ga02663b926feab893c0e0ec1f29b3c315">set_system_time</a>(unix_timestamp - <a class="code hl_define" href="group__avr__time.html#ga0643a5b723dde6420363401dffc2e67e">UNIX_OFFSET</a>);</div>
@@ -1229,8 +1229,8 @@ Functions</h2></td></tr>
 <div class="line">    <a class="code hl_function" href="group__avr__time.html#ga15aea81a8985a4c3cc9c8b00a06f5d31">system_tick</a>();</div>
 <div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:324</div></div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga8b4c7e44627db0a60d676213add42d64"><div class="ttname"><a href="group__avr__interrupts.html#ga8b4c7e44627db0a60d676213add42d64">ISR_NAKED</a></div><div class="ttdeci">#define ISR_NAKED</div><div class="ttdef"><b>Definition:</b> interrupt.h:389</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:325</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga8b4c7e44627db0a60d676213add42d64"><div class="ttname"><a href="group__avr__interrupts.html#ga8b4c7e44627db0a60d676213add42d64">ISR_NAKED</a></div><div class="ttdeci">#define ISR_NAKED</div><div class="ttdef"><b>Definition:</b> interrupt.h:390</div></div>
 <div class="ttc" id="agroup__avr__interrupts_html_gad28590624d422cdf30d626e0a506255f"><div class="ttname"><a href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></div><div class="ttdeci">#define ISR(vector, attributes)</div><div class="ttdef"><b>Definition:</b> interrupt.h:118</div></div>
 <div class="ttc" id="agroup__avr__time_html_ga15aea81a8985a4c3cc9c8b00a06f5d31"><div class="ttname"><a href="group__avr__time.html#ga15aea81a8985a4c3cc9c8b00a06f5d31">system_tick</a></div><div class="ttdeci">void system_tick(void)</div></div>
 </div><!-- fragment --> 
@@ -1317,7 +1317,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2025 18:32:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

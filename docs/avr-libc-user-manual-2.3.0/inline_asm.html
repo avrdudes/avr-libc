@@ -106,6 +106,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li><a class="el" href="inline_asm.html#inline_asm_about">About this Document</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_building_blocks">Building Blocks</a><ul>
 <li><a class="el" href="inline_asm.html#inline_asm_anatomy">The Anatomy of a GCC asm Statement</a></li>
+<li><a class="el" href="inline_asm.html#inline_asm_size">The Size of an asm</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_special_sequences">Special Sequences</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_constraints">Constraints</a><ul>
 <li><a class="el" href="inline_asm.html#constraint_modifiers">Constraint Modifiers</a></li>
@@ -123,10 +124,11 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li><a class="el" href="inline_asm.html#inline_asm_bytes">Accessing Bytes of wider Expressions</a></li>
 <li><a class="el" href="inline_asm.html#builtin_constant_p_in_inline_functions">Inline Functions and __builtin_constant_p</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_jumping">Jumping and Branching</a></li>
+<li><a class="el" href="inline_asm.html#inline_asm_abi_interface">Interfacing non-ABI Functions</a><ul>
+<li><a class="el" href="inline_asm.html#inline_asm_local_vars">Binding local Variables to Registers</a></li>
+<li><a class="el" href="inline_asm.html#inline_asm_hrc">Hard-Register Constraints</a></li>
 </ul>
 </li>
-<li><a class="el" href="inline_asm.html#inline_asm_local_vars">Binding local Variables to Registers</a><ul>
-<li><a class="el" href="inline_asm.html#inline_asm_abi_interface">Interfacing non-ABI Functions</a></li>
 </ul>
 </li>
 <li><a class="el" href="inline_asm.html#c_names_in_asm">Specifying the Assembly Name of Static Objects</a></li>
@@ -202,15 +204,14 @@ The Anatomy of a GCC asm Statement</h1>
 <p class="interdd">The first two clobbers mean that the asm destroys register R16. Only the lower-case form is allowed, and register names like Z are not recognized. A register that's clobbered will not be used as (part of) an input or output operand.</p>
 <p class="interdd"><code>"memory"</code> means that the asm touches memory in some way. When the asm writes to some RAM location for example, the compiler must not optimize RAM accesses across the asm because the memory may change.</p>
 <p class="interdd">Clobbering <code><a class="el" href="FAQ.html#tmp_reg">__tmp_reg__</a></code> by means of <code>"r0"</code> has no effect, but such a clobber may be added to indicate to the reader that the asm clobbers R0.</p>
-<p class="interdd">Clobbering <code><a class="el" href="FAQ.html#zero_reg">__zero_reg__</a></code> by means of <code>"r1"</code> has no effect. When the asm destroys the zero register, for example by means of a <code>MUL</code> instruction, then the code must restore the register at the end by means of <code>"clr __zero_reg__"</code> </p>
-<p class="enddd"></p>
-</dd>
-<dt>The size of an asm<a class="anchor" id="inline_asm_size"></a> </dt>
-<dd><p class="startdd">The code size of an asm statement is the number of lines multiplied by 4&#160;bytes, the maximal possible AVR instruction length. The length is needed when (conditional) jumps cross the asm statement in order to compute (upper bounds for) jump offsets of PC-relative jumps.</p>
-<p class="enddd">The number of lines is one plus the number of line breaks in <code>code-string</code>. These may be physical line breaks from <code>\n</code> characters and logical line breaks from <code>$</code> characters.  </p>
+<p class="enddd">Clobbering <code><a class="el" href="FAQ.html#zero_reg">__zero_reg__</a></code> by means of <code>"r1"</code> has no effect. When the asm destroys the zero register, for example by means of a <code>MUL</code> instruction, then the code must restore the register at the end by means of <code>"clr __zero_reg__"</code>  </p>
 </dd>
 </dl>
-<p>Before we start with the first examples, we list all the bells and whistles that can be used to compose an inline assembly statement: <a class="el" href="inline_asm.html#special_sequences">special sequences</a>, <a class="el" href="inline_asm.html#constraints">constraints</a>, <a class="el" href="inline_asm.html#constraint_modifiers">constraint modifiers</a>, <a class="el" href="inline_asm.html#print_modifiers">print modifiers</a> and <a class="el" href="inline_asm.html#operand_modifiers">operand modifiers</a>.</p>
+<p>Before we start with the first examples, we list all the bells and whistles that can be used to compose an inline assembly statement: <a class="el" href="inline_asm.html#special_sequences">special sequences</a>, <a class="el" href="inline_asm.html#constraints">constraints</a>, <a class="el" href="inline_asm.html#constraint_modifiers">constraint modifiers</a>, <a class="el" href="inline_asm.html#print_modifiers">print modifiers</a> <a class="el" href="inline_asm.html#operand_modifiers">operand modifiers</a> and the <a class="el" href="inline_asm.html#inline_asm_size">size of an asm</a>.</p>
+<h1><a class="anchor" id="inline_asm_size"></a>
+The Size of an asm</h1>
+<p>The code size of an asm statement is the number of lines multiplied by 4&#160;bytes, the maximal possible AVR instruction length. The length is needed when (conditional) jumps cross the asm statement in order to compute (upper bounds for) jump offsets of PC-relative jumps.</p>
+<p>The number of lines is one plus the number of line breaks in <code>code-string</code>. These may be physical line breaks from <code>\n</code> characters and logical line breaks from <code>$</code> characters.</p>
 <h1><a class="anchor" id="inline_asm_special_sequences"></a>
 Special Sequences</h1>
 <p>There are special sequences that can be used in the assembly template.</p>
@@ -311,6 +312,7 @@ Constraints</h1>
 <tr>
 <td><code>0</code> ... <code>9</code> </td><td>Matches the respective operand number</td><td></td></tr>
 </table>
+<p>GCC v16 also supports <a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html">hard-register constraints</a>. They allow to specify a register in a constraint. For example, <code>"{r20}"</code> specifies register(s) starting at R20.</p>
 <p><a class="anchor" id="constraint_modifiers"></a></p><ul>
 <li>Constraints without a modifier specify input operands.</li>
 <li>Constraints with a modifier specify output operands.</li>
@@ -710,14 +712,16 @@ Jumping and Branching</h2>
 <div class="line">          <span class="stringliteral">&quot;1: ;; all fine&quot;</span></div>
 <div class="line">          :::: panic);</div>
 </div><!-- fragment --><p>Sequence <code>"%~jmp"</code> yields <code>"rjmp"</code> or <code>"jmp"</code> depending on the architecture. Notice that a <code>jmp</code> can be relaxed to an <code>rjmp</code> with option <code>-mrelax</code> provided the jump offset fits.</p>
-<h1><a class="anchor" id="inline_asm_local_vars"></a>
-Binding local Variables to Registers</h1>
-<p>One use of GCC's <code>asm</code> keyword is to bind local register variables to hardware registers.<br  />
- <b>Such bindings of local variables to registers are only guaranteed during inline asm which has these variables as operands.</b></p>
 <h2><a class="anchor" id="inline_asm_abi_interface"></a>
 Interfacing non-ABI Functions</h2>
 <p>Suppose we want to interface a non-<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">ABI</a> assembly function <code>mul_8_16</code> that multiplies R24 with R27:R26, clobbers R0, R1 and R25, and returns the 24-bit result in R20:R19:R18. One way to implement such an interface would be to provide an assembly function that performs the required copying and call to <code>mul_8_16</code>. Such a function would destroy some of the performance gain obtained by using assembly for <code>mul_8_16:</code> Additional copying back and forth and extra <code>CALL</code> and <code>RET</code> instructions.</p>
-<p>The compiler comes to the rescue. We can bind local variables to the required registers: </p><div class="fragment"><div class="line"><span class="keyword">extern</span> <span class="keywordtype">void</span> mul_8_16 (<span class="keywordtype">void</span>); <span class="comment">// Non-ABI function. Don&#39;t call in C/C++!</span></div>
+<h3><a class="anchor" id="inline_asm_local_vars"></a>
+Binding local Variables to Registers</h3>
+<p>The compiler comes to the rescue. We can bind local variables to the required registers.</p>
+<p>One use of GCC's <code>asm</code> keyword is to bind local register variables to hardware registers.<br  />
+ <b>Such bindings of local variables to registers are only guaranteed during inline asm which has these variables as operands.</b></p>
+<p>Here is an example how interfacing <code>mul_8_16</code> could look like:</p>
+<div class="fragment"><div class="line"><span class="keyword">extern</span> <span class="keywordtype">void</span> mul_8_16 (<span class="keywordtype">void</span>); <span class="comment">// Non-ABI function. Don&#39;t call in C/C++!</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> __attribute__((__always_inline__))</div>
 <div class="line">__uint24 mul_8_16_gccabi (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> val8, <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> val16)</div>
@@ -764,7 +768,25 @@ Interfacing non-ABI Functions</h2>
 <div class="line">    ret</div>
 <div class="ttc" id="agroup__avr__stdlib_html_ga8dec7c95227ff149687066cf04029191"><div class="ttname"><a href="group__avr__stdlib.html#ga8dec7c95227ff149687066cf04029191">abort</a></div><div class="ttdeci">void abort(void)</div><div class="ttdef"><b>Definition:</b> abort.c:34</div></div>
 </div><!-- fragment --><p>No superfluous register moves. Great!</p>
-<h1><a class="anchor" id="c_names_in_asm"></a>
+<h3><a class="anchor" id="inline_asm_hrc"></a>
+Hard-Register Constraints</h3>
+<p>GCC v16 supports <a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html">hard-register constraints</a> that are easier to use than local register variables. With that feature, the code from above can be simplified to:</p>
+<div class="fragment"><div class="line"><span class="keyword">extern</span> <span class="keywordtype">void</span> mul_8_16 (<span class="keywordtype">void</span>); <span class="comment">// Non-ABI function. Don&#39;t call in C/C++!</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> __attribute__((__always_inline__))</div>
+<div class="line">__uint24 mul_8_16_gccabi (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> val8, <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> val16)</div>
+<div class="line">{</div>
+<div class="line">    __uint24 result;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">asm</span> (<span class="stringliteral">&quot;%~call %x[func]&quot;</span>  <span class="stringliteral">&quot;\n\t&quot;</span></div>
+<div class="line">         <span class="stringliteral">&quot;clr    __zero_reg__&quot;</span></div>
+<div class="line">         : <span class="stringliteral">&quot;={r18}&quot;</span> (result)</div>
+<div class="line">         : <span class="stringliteral">&quot;{r24}&quot;</span> (val8), <span class="stringliteral">&quot;{r26}&quot;</span> (val16), [func] <span class="stringliteral">&quot;i&quot;</span> (mul_8_16)</div>
+<div class="line">         : <span class="stringliteral">&quot;r25&quot;</span>, <span class="stringliteral">&quot;r0&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> result;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="c_names_in_asm"></a>
 Specifying the Assembly Name of Static Objects</h1>
 <p>Sometimes, it is desirable to use a different name for an object or function rather than the (mangled) name from the C/C++ implementation. Just add an asm specifier with the desired name as a string literal at the end of the declaration.</p>
 <p>For example, this is how <code><a class="el" href="eeprom_8h.html">avr/eeprom.h</a></code> implements the <code><a class="el" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double()</a></code> function: </p><div class="fragment"><div class="line"><span class="preprocessor">#if __SIZEOF_DOUBLE__ == 4</span></div>
@@ -823,7 +845,7 @@ Using Matching Constraints "=0"..."=9" with Output Operands</h2>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2025 18:32:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

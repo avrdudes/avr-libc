@@ -176,7 +176,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">    <span class="comment">// user code here</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga1f6459a85cda682b2163a20af03ac744"><div class="ttname"><a href="group__avr__interrupts.html#ga1f6459a85cda682b2163a20af03ac744">BADISR_vect</a></div><div class="ttdeci">#define BADISR_vect</div><div class="ttdef"><b>Definition:</b> interrupt.h:337</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga1f6459a85cda682b2163a20af03ac744"><div class="ttname"><a href="group__avr__interrupts.html#ga1f6459a85cda682b2163a20af03ac744">BADISR_vect</a></div><div class="ttdeci">#define BADISR_vect</div><div class="ttdef"><b>Definition:</b> interrupt.h:338</div></div>
 </div><!-- fragment --><h3>Nested interrupts</h3>
 <p>The AVR hardware clears the global interrupt flag in SREG when an interrupt request is serviced. Thus, normally interrupts will remain disabled inside the handler until the handler exits, where the RETI instruction (that is emitted by the compiler as part of the normal function epilogue for an ISR) will eventually re-enable further interrupts. For that reason, interrupt handlers normally do not nest. For most interrupt handlers, this is the desired behaviour, for some it is even required in order to prevent infinitely recursive interrupts (like UART interrupts, or level-triggered external interrupts). In rare circumstances though it might be desired to re-enable the global interrupt flag as early as possible in the interrupt handler, in order to not defer any other interrupt more than absolutely needed. This could be done using an <code><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a></code> instruction right at the beginning of the interrupt handler, but this still leaves few instructions inside the compiler-generated function prologue to run with global interrupts disabled. The compiler can be instructed to insert a <code>SEI</code> instruction right at the beginning of an interrupt handler by declaring the handler the following way:</p>
 <p><a class="anchor" id="attr_interrupt"></a></p><div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> (XXX_vect, <a class="code hl_define" href="group__avr__interrupts.html#ga44569cb914d2aaf8fbb436f8f7c4ca68">ISR_NOBLOCK</a>)</div>
@@ -191,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">  ...</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga44569cb914d2aaf8fbb436f8f7c4ca68"><div class="ttname"><a href="group__avr__interrupts.html#ga44569cb914d2aaf8fbb436f8f7c4ca68">ISR_NOBLOCK</a></div><div class="ttdeci">#define ISR_NOBLOCK</div><div class="ttdef"><b>Definition:</b> interrupt.h:373</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga44569cb914d2aaf8fbb436f8f7c4ca68"><div class="ttname"><a href="group__avr__interrupts.html#ga44569cb914d2aaf8fbb436f8f7c4ca68">ISR_NOBLOCK</a></div><div class="ttdeci">#define ISR_NOBLOCK</div><div class="ttdef"><b>Definition:</b> interrupt.h:374</div></div>
 </div><!-- fragment --><p>where <code>XXX_vect</code> is the name of a valid interrupt vector for the MCU type in question, as explained below.</p>
 <h3>Two vectors sharing the same code</h3>
 <p>In some circumstances, the actions to be taken upon two different interrupts might be completely identical so a single implementation for the ISR would suffice. For example, pin-change interrupts arriving from two different ports could logically signal an event that is independent from the actual port (and thus interrupt vector) where it happened. Sharing interrupt vector code can be accomplished using the <a class="el" href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF()</a> attribute to the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> macro:</p>
@@ -222,14 +222,14 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">  <span class="comment">// Code to handle the event.</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_gaa87c0c624b62f40a17539be6946c3e26"><div class="ttname"><a href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF</a></div><div class="ttdeci">#define ISR_ALIASOF(target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:450</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_gaa87c0c624b62f40a17539be6946c3e26"><div class="ttname"><a href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF</a></div><div class="ttdeci">#define ISR_ALIASOF(target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:451</div></div>
 </div><!-- fragment --><p>Note that the <a class="el" href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF()</a> feature requires GCC 4.2 or above (or a patched version of GCC 4.1.x). See the documentation of the <a class="el" href="group__avr__interrupts.html#gade46eb4e42cc9d56c19b1f91448f1b76">ISR_ALIAS()</a> macro for an implementation which is less elegant but could be applied to all compiler versions. The <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N()</a> macro requires GCC v15 or higher.</p>
 <h3>Empty interrupt service routines</h3>
 <p>In rare circumstances, in interrupt vector does not need any code to be implemented at all. The vector must be declared anyway, so when the interrupt triggers it won't execute the BADISR_vect code (which by default restarts the application).</p>
 <p>This could for example be the case for interrupts that are solely enabled for the purpose of getting the controller out of <a class="el" href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode()</a>.</p>
 <p>A handler for such an interrupt vector can be declared using the <a class="el" href="group__avr__interrupts.html#ga751c22101f7e8f2fbe792c64a81f8dba">EMPTY_INTERRUPT()</a> macro:</p>
 <div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__interrupts.html#ga751c22101f7e8f2fbe792c64a81f8dba">EMPTY_INTERRUPT</a>(ADC_vect);</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga751c22101f7e8f2fbe792c64a81f8dba"><div class="ttname"><a href="group__avr__interrupts.html#ga751c22101f7e8f2fbe792c64a81f8dba">EMPTY_INTERRUPT</a></div><div class="ttdeci">#define EMPTY_INTERRUPT(vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:234</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga751c22101f7e8f2fbe792c64a81f8dba"><div class="ttname"><a href="group__avr__interrupts.html#ga751c22101f7e8f2fbe792c64a81f8dba">EMPTY_INTERRUPT</a></div><div class="ttdeci">#define EMPTY_INTERRUPT(vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:235</div></div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>There is no body to this macro.</dd></dl>
 <h3>Manually defined ISRs</h3>
 <p>In some circumstances, the compiler-generated prologue and epilogue of the ISR might not be optimal for the job, and a manually defined ISR could be considered particularly to speedup the interrupt handling.</p>
@@ -250,8 +250,8 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">  PORTB |= <a class="code hl_define" href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a>(0);  <span class="comment">// results in SBI which does not affect SREG</span></div>
 <div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:324</div></div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga8b4c7e44627db0a60d676213add42d64"><div class="ttname"><a href="group__avr__interrupts.html#ga8b4c7e44627db0a60d676213add42d64">ISR_NAKED</a></div><div class="ttdeci">#define ISR_NAKED</div><div class="ttdef"><b>Definition:</b> interrupt.h:389</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:325</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga8b4c7e44627db0a60d676213add42d64"><div class="ttname"><a href="group__avr__interrupts.html#ga8b4c7e44627db0a60d676213add42d64">ISR_NAKED</a></div><div class="ttdeci">#define ISR_NAKED</div><div class="ttdef"><b>Definition:</b> interrupt.h:390</div></div>
 <div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:206</div></div>
 </div><!-- fragment --><h3>Choosing the vector: Interrupt vector names</h3>
 <p>The interrupt is chosen by supplying one of the vector names in the following table. Apart from the <code><em>NAME</em>_vect</code> macros listed below, for each such ISR name there is also a macro <code><em>NAME</em>_vect_num</code> defined which resolves to the IRQ number and that can be used in the <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> macro.</p>
@@ -4037,7 +4037,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">    PORTB = 42;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_gade46eb4e42cc9d56c19b1f91448f1b76"><div class="ttname"><a href="group__avr__interrupts.html#gade46eb4e42cc9d56c19b1f91448f1b76">ISR_ALIAS</a></div><div class="ttdeci">#define ISR_ALIAS(vector, target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:296</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_gade46eb4e42cc9d56c19b1f91448f1b76"><div class="ttname"><a href="group__avr__interrupts.html#gade46eb4e42cc9d56c19b1f91448f1b76">ISR_ALIAS</a></div><div class="ttdeci">#define ISR_ALIAS(vector, target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:297</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -4267,7 +4267,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2025 18:32:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

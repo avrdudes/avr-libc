@@ -109,8 +109,8 @@ Macros</h2></td></tr>
 <tr class="separator:ga9e52c54d10b6a6a7ce04aaaa4abea51f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9d1aeb2823c79936e980fabba10ac75e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a>(timeout)</td></tr>
 <tr class="separator:ga9d1aeb2823c79936e980fabba10ac75e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad45893280f49113ffc2e67e1d741f29d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__watchdog.html#gad45893280f49113ffc2e67e1d741f29d">WDTO_15MS</a>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:gad45893280f49113ffc2e67e1d741f29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b047548bcbc6d14d48d79a94d96fb1e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__watchdog.html#ga8b047548bcbc6d14d48d79a94d96fb1e">WDTO_8MS</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:ga8b047548bcbc6d14d48d79a94d96fb1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga057dd21dc54e71de0e20d8bd5734915d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__watchdog.html#ga057dd21dc54e71de0e20d8bd5734915d">WDTO_30MS</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ga057dd21dc54e71de0e20d8bd5734915d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7a5b072c51c05a34cc38111f0e6724e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__watchdog.html#ga7a5b072c51c05a34cc38111f0e6724e5">WDTO_60MS</a>&#160;&#160;&#160;2</td></tr>
@@ -205,25 +205,6 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <p>See <code>WDTO_15MS</code> </p>
 
-</div>
-</div>
-<a id="gad45893280f49113ffc2e67e1d741f29d" name="gad45893280f49113ffc2e67e1d741f29d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad45893280f49113ffc2e67e1d741f29d">&#9670;&#160;</a></span>WDTO_15MS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define WDTO_15MS&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Symbolic constants for the watchdog timeout. Since the watchdog timer is based on a free-running RC oscillator, the times are approximate only and apply to a supply voltage of 5 V. At lower supply voltages, the times will increase. For older devices, the times will be as large as three times when operating at Vcc = 3 V, while the newer devices (e. g. ATmega128, ATmega8) only experience a negligible change.</p>
-<p>Possible timeout values are: 15 ms, 30 ms, 60 ms, 120 ms, 250 ms, 500 ms, 1 s, 2 s. (Some devices also allow for 4 s and 8 s.) Symbolic constants are formed by the prefix <code>WDTO_</code>, followed by the time.</p>
-<p>Example that would select a watchdog timer expiry of approximately 500 ms: </p><div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a>(<a class="code hl_define" href="group__avr__watchdog.html#gacf89fc5fb6c8aa9efaadb86872cfbcdf">WDTO_500MS</a>);</div>
-<div class="ttc" id="agroup__avr__watchdog_html_ga9d1aeb2823c79936e980fabba10ac75e"><div class="ttname"><a href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a></div><div class="ttdeci">#define wdt_enable(timeout)</div><div class="ttdef"><b>Definition:</b> wdt.h:136</div></div>
-<div class="ttc" id="agroup__avr__watchdog_html_gacf89fc5fb6c8aa9efaadb86872cfbcdf"><div class="ttname"><a href="group__avr__watchdog.html#gacf89fc5fb6c8aa9efaadb86872cfbcdf">WDTO_500MS</a></div><div class="ttdeci">#define WDTO_500MS</div><div class="ttdef"><b>Definition:</b> wdt.h:569</div></div>
-</div><!-- fragment --> 
 </div>
 </div>
 <a id="ga36302e15f38a4eeb8a328724bb8165e9" name="ga36302e15f38a4eeb8a328724bb8165e9"></a>
@@ -332,6 +313,25 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="ga8b047548bcbc6d14d48d79a94d96fb1e" name="ga8b047548bcbc6d14d48d79a94d96fb1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8b047548bcbc6d14d48d79a94d96fb1e">&#9670;&#160;</a></span>WDTO_8MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WDTO_8MS&#160;&#160;&#160;-1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Symbolic constants for the watchdog timeout. Since the watchdog timer is based on a free-running RC oscillator, the times are approximate only and apply to a supply voltage of 5 V. At lower supply voltages, the times will increase. For older devices, the times will be as large as three times when operating at Vcc = 3 V, while the newer devices (e. g. ATmega128, ATmega8) only experience a negligible change.</p>
+<p>Possible timeout values are: 15 ms, 30 ms, 60 ms, 120 ms, 250 ms, 500 ms, 1 s, 2 s. (Some devices also allow for 4 s and 8 s.) Symbolic constants are formed by the prefix <code>WDTO_</code>, followed by the time.</p>
+<p>Example that would select a watchdog timer expiry of approximately 500 ms: </p><div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a>(<a class="code hl_define" href="group__avr__watchdog.html#gacf89fc5fb6c8aa9efaadb86872cfbcdf">WDTO_500MS</a>);</div>
+<div class="ttc" id="agroup__avr__watchdog_html_ga9d1aeb2823c79936e980fabba10ac75e"><div class="ttname"><a href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a></div><div class="ttdeci">#define wdt_enable(timeout)</div><div class="ttdef"><b>Definition:</b> wdt.h:136</div></div>
+<div class="ttc" id="agroup__avr__watchdog_html_gacf89fc5fb6c8aa9efaadb86872cfbcdf"><div class="ttname"><a href="group__avr__watchdog.html#gacf89fc5fb6c8aa9efaadb86872cfbcdf">WDTO_500MS</a></div><div class="ttdeci">#define WDTO_500MS</div><div class="ttdef"><b>Definition:</b> wdt.h:573</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a id="gaf074e538b2a1d5031931530f29a09fce" name="gaf074e538b2a1d5031931530f29a09fce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf074e538b2a1d5031931530f29a09fce">&#9670;&#160;</a></span>WDTO_8S</h2>
 
@@ -352,7 +352,7 @@ Macros</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2025 18:32:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2025 20:40:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

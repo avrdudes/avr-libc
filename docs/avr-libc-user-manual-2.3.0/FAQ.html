@@ -119,10 +119,10 @@ FAQ Index</h1>
 <li><a class="el" href="FAQ.html#faq_cplusplus">Can I use C++ on the AVR?</a></li>
 <li><a class="el" href="FAQ.html#faq_optflags">Which -O flag to use?</a></li>
 <li><a class="el" href="FAQ.html#faq_varinit">Shouldn't I initialize all my variables?</a></li>
-<li><a class="el" href="FAQ.html#faq_port_pass">How do I pass an IO port as a parameter to a function?</a></li>
 <li><a class="el" href="FAQ.html#faq_flashstrings">Why do all my string literals eat up the SRAM?</a></li>
 <li><a class="el" href="FAQ.html#faq_rom_array">How do I put an array of strings completely in ROM?</a></li>
 <li><a class="el" href="FAQ.html#faq_startup">How to modify MCUCR or WDTCR early?</a></li>
+<li><a class="el" href="FAQ.html#faq_port_pass">How do I pass an IO port as a parameter to a function?</a></li>
 <li><a class="el" href="FAQ.html#faq_funcptr_gt128kib">On a device with more than 128 KiB of flash, how to make function pointers work?</a></li>
 <li><a class="el" href="FAQ.html#faq_reg_usage">What registers are used by the C compiler?</a></li>
 <li><a class="el" href="FAQ.html#faq_regbind">How to permanently bind a variable to a register?</a></li>
@@ -140,7 +140,12 @@ FAQ Index</h1>
 </li>
 <li><b>Linking and Binaries</b><ul>
 <li><a class="el" href="FAQ.html#faq_reloc_code">How do I relocate code to a fixed address?</a></li>
-<li><a class="el" href="FAQ.html#faq_binarydata">How to add a raw binary image to linker output?</a></li>
+<li><a class="el" href="FAQ.html#faq_binarydata">How to add a raw binary image to linker output?</a><ul>
+<li><a class="el" href="FAQ.html#faq_binarydata_embed">Using #embed</a></li>
+<li><a class="el" href="FAQ.html#faq_binarydata_incbin">Using .incbin</a></li>
+<li><a class="el" href="FAQ.html#faq_binarydata_objcopy">Using objcopy</a></li>
+</ul>
+</li>
 <li><a class="el" href="FAQ.html#faq_linkerscripts">Why are there five different linker scripts?</a></li>
 </ul>
 </li>
@@ -232,52 +237,6 @@ Can I use C++ on the AVR?</h1>
 <p>Constructors and destructors <em>are</em> supported though, including global ones.</p>
 <p>When programming C++ in space- and runtime-sensitive environments like microcontrollers, extra care should be taken to avoid unwanted side effects of the C++ calling conventions like implied copy constructors that could be called upon function invocation etc. These things could easily add up into a considerable amount of time and program memory wasted. Thus, casual inspection of the generated assembler code (using the <a class="el" href="using_tools.html#opt_save_temps">-save-temps</a> compiler option) seems to be warranted.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
-<h1><a class="anchor" id="faq_varinit"></a>
-Shouldn't I initialize all my variables?</h1>
-<p>Variables in static storage are guaranteed to be initialized by the C standard. This includes global and static variables without explicit initializer, which are initialized to 0. <code>avr-gcc</code> does this by placing the appropriate code into section <code><a class="el" href="mem_sections.html#sec_dot_init">.init4</a></code>. With respect to the standard, this sentence is somewhat simplified (because the standard allows for machines where the actual bit pattern used differs from all bits being 0), but for the AVR target, in general, all integer-type variables are set to 0, all pointers to a NULL pointer, and all floating-point variables to 0.0.</p>
-<p>As long as these variables are not explicitly initialized, or their initializer is all zeros, they go into the <a class="el" href="mem_sections.html#sec_dot_bss">.bss</a> output section. This section simply records the size of the variable, but otherwise doesn't consume space, neither within the object file nor within flash memory. (Of course, being a variable, it will consume space in the target's SRAM.)</p>
-<p>In contrast, global and static variables that have a non-zero initializer go into the <a class="el" href="mem_sections.html#sec_dot_data">.data</a> output section or into the <a class="el" href="mem_sections.html#sec_dot_rodata">.rodata</a> output section (or, depending on the code, may be optimized out entirely). Data in the <code>.data</code> output section consumes space in the SRAM of the device, as well as space in the flash ROM of the device. The latter is required so that the startup code can initialize the SRAM with the required values.</p>
-<table class="doxtable">
-<caption>Non-Zero Data in Static Storage</caption>
-<tr>
-<th>Read-Only </th><th>Input Section </th><th>Output Section </th><th>Memory Region(s) </th><th>Case  </th></tr>
-<tr>
-<td>No </td><td>.data </td><td>.data </td><td>text <em>and</em> data </td><td>All </td></tr>
-<tr>
-<td rowspan="3">Yes </td><td rowspan="3">.rodata </td><td>.data </td><td>text <em>and</em> data </td><td>3 </td></tr>
-<tr>
-<td>.rodata </td><td>text </td><td>1 </td></tr>
-<tr>
-<td>.rodata </td><td>rodata </td><td>2  </td></tr>
-</table>
-<p><b>Cases</b></p><ol type="1">
-<li>Devices that see all of program memory in the RAM address space: <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a> (AVRrc), <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a> (AVR32 devices, 0-series, 1-series and 2-series).</li>
-<li>Devices that see only a part of program memory in the RAM address space: AVR64 and AVR128 devices without <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a>.</li>
-<li>All other devices, i.e. devices that don't see program memory in the RAM address space, or when <code>-mrodata-in-ram</code> is specified.</li>
-</ol>
-<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
-<h1><a class="anchor" id="faq_16bitio"></a>
-Why do some 16-bit timer registers sometimes get trashed?</h1>
-<p>Some of the timer-related 16-bit IO registers use a temporary register (called TEMP in the AVR datasheet) to guarantee an atomic access to the register despite the fact that two separate 8-bit IO transfers are required to actually move the data. Typically, this includes access to the current timer/counter value register (<code>TCNT</code><em>n</em>), the input capture register (<code>ICR</code><em>n</em>), and write access to the output compare registers (<code>OCR</code><em>nM</em>). Refer to the actual datasheet for each device's set of registers that involves the TEMP register.</p>
-<p>When accessing one of the registers that use TEMP from the main application, and possibly any other one from within an interrupt routine, care must be taken that no access from within an interrupt context could clobber the TEMP register data of an in-progress transaction that has just started elsewhere.</p>
-<p>To protect interrupt routines against other interrupt routines, it's usually best to use the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR()</a> macro when declaring the interrupt function, and to ensure that interrupts are still disabled when accessing those 16-bit timer registers.</p>
-<p>Within the main program, access to those registers could be encapsulated in calls to the <a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli()</a> and <a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a> macros. If the status of the global interrupt flag before accessing one of those registers is uncertain, something like the following example code can be used.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> read_timer1 (<span class="keywordtype">void</span>)</div>
-<div class="line">{</div>
-<div class="line">    <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> sreg = SREG;</div>
-<div class="line">    <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> val;</div>
-<div class="line"> </div>
-<div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>();</div>
-<div class="line">    val = TCNT1;</div>
-<div class="line">    SREG = sreg;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> val;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:88</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:91</div></div>
-</div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_asmconst"></a>
 How do I use a #define'd constant in an asm statement?</h1>
 <p>So you tried this:</p>
@@ -451,78 +410,6 @@ What registers are used by the C compiler?</h1>
 </dd>
 </dl>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
-<h1><a class="anchor" id="faq_rom_array"></a>
-How do I put an array of strings completely in ROM?</h1>
-<p>There are times when you may need an array of strings which will never be modified. In this case, you don't want to waste ram storing the constant strings. The most obvious (and incorrect) thing to do is this:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> array[2] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> =</div>
-<div class="line">{</div>
-<div class="line">    <span class="stringliteral">&quot;Foo&quot;</span>, <span class="stringliteral">&quot;Bar&quot;</span></div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordtype">char</span> buf[32];</div>
-<div class="line">    <a class="code hl_function" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> (buf, array[1]);</div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga5749897c91c479d02054fc02128de482"><div class="ttname"><a href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a></div><div class="ttdeci">char * strcpy_P(char *, const char *)</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:146</div></div>
-<div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
-</div><!-- fragment --><p>The result is not what you want though. What you end up with is the array stored in ROM, while the individual strings end up in RAM (in some <code>.rodata</code> input section).</p>
-<p>To work around this, you need to do something like this:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> s_foo[] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> = <span class="stringliteral">&quot;Foo&quot;</span>;</div>
-<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> s_bar[] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> = <span class="stringliteral">&quot;Bar&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> array[2] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> =</div>
-<div class="line">{</div>
-<div class="line">    s_foo, s_bar</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> func (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> i)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordtype">char</span> buf[32];</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span> *p = <a class="code hl_define" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a> (&amp;array[i]);</div>
-<div class="line">    <a class="code hl_function" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> (buf, p);</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:938</div></div>
-</div><!-- fragment --><p>Looking at the disassembly of the resulting object file we see that array is in flash as such:</p>
-<pre class="fragment">00000026 &lt;array&gt;:
-  26:   2e 00 2a 00
-
-0000002a &lt;bar&gt;:
-  2a:   42 61 72 00          Bar.
-
-0000002e &lt;foo&gt;:
-  2e:   46 6f 6f 00          Foo.
-</pre><p><code>foo</code> is at address 0x002e.<br  />
- <code>bar</code> is at address 0x002a.<br  />
- <code>array</code> is at address 0x0026.<br  />
-</p>
-<h2><a class="anchor" id="faq_rom_array_as"></a>
-Using named address-spaces</h2>
-<p>An alternative is to use the named address-space <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>, which is supported since avr-gcc v4.7 and in GNU-C99 (<code>-std=gnu99</code>) and up:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="flash_8h.html">avr/flash.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> array[] =</div>
-<div class="line">{</div>
-<div class="line">    <a class="code hl_define" href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a>(<span class="stringliteral">&quot;Foo&quot;</span>), <a class="code hl_define" href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a>(<span class="stringliteral">&quot;Bar&quot;</span>)</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> compare (<span class="keyword">const</span> <span class="keywordtype">char</span> *str, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> i)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="group__avr__flash.html#ga18da52c839c7307578123e8c021b4474">strcmp_F</a> (str, array[i]);</div>
-<div class="line">}</div>
-<div class="ttc" id="aflash_8h_html"><div class="ttname"><a href="flash_8h.html">flash.h</a></div></div>
-<div class="ttc" id="agroup__avr__flash_html_ga18da52c839c7307578123e8c021b4474"><div class="ttname"><a href="group__avr__flash.html#ga18da52c839c7307578123e8c021b4474">strcmp_F</a></div><div class="ttdeci">int strcmp_F(const char *, const __flash char *)</div></div>
-<div class="ttc" id="agroup__avr__flash_html_ga80fd1c204ef50d9959ddcfd122dd3816"><div class="ttname"><a href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a></div><div class="ttdeci">#define FLIT(str)</div><div class="ttdef"><b>Definition:</b> flash.h:263</div></div>
-<div class="ttc" id="agroup__avr__flash_html_ga9640f3080a04903165ca21f35da81a38"><div class="ttname"><a href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a></div><div class="ttdeci">__flash</div><div class="ttdef"><b>Definition:</b> flash.h:960</div></div>
-</div><!-- fragment --><p>Moreover, there is no more need for <code>pgm_read_xxx()</code>: The (addresses of) the string literals can be read directly by means of <code>array[i]</code>.</p>
-<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_ext_ram"></a>
 How to use external RAM?</h1>
 <p>Well, there is no universal answer to this question; it depends on what the external RAM is going to be used for.</p>
@@ -582,27 +469,94 @@ My UART is generating nonsense!  My ATmega128 keeps crashing! Port F is complete
 <li>Devices with a JTAG interface have the <code>JTAGEN</code> fuse programmed by default. This will make the respective port pins that are used for the JTAG interface unavailable for regular IO.</li>
 </ul>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_16bitio"></a>
+Why do some 16-bit timer registers sometimes get trashed?</h1>
+<p>Some of the timer-related 16-bit IO registers use a temporary register (called TEMP in the AVR datasheet) to guarantee an atomic access to the register despite the fact that two separate 8-bit IO transfers are required to actually move the data. Typically, this includes access to the current timer/counter value register (<code>TCNT</code><em>n</em>), the input capture register (<code>ICR</code><em>n</em>), and write access to the output compare registers (<code>OCR</code><em>nM</em>). Refer to the actual datasheet for each device's set of registers that involves the TEMP register.</p>
+<p>When accessing one of the registers that use TEMP from the main application, and possibly any other one from within an interrupt routine, care must be taken that no access from within an interrupt context could clobber the TEMP register data of an in-progress transaction that has just started elsewhere.</p>
+<p>To protect interrupt routines against other interrupt routines, it's usually best to use the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR()</a> macro when declaring the interrupt function, and to ensure that interrupts are still disabled when accessing those 16-bit timer registers.</p>
+<p>Within the main program, access to those registers could be encapsulated in calls to the <a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli()</a> and <a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a> macros. If the status of the global interrupt flag before accessing one of those registers is uncertain, something like the following example code can be used.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> read_timer1 (<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> sreg = SREG;</div>
+<div class="line">    <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> val;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>();</div>
+<div class="line">    val = TCNT1;</div>
+<div class="line">    SREG = sreg;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> val;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:88</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:91</div></div>
+</div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_varinit"></a>
+Shouldn't I initialize all my variables?</h1>
+<p>Variables in static storage are guaranteed to be initialized by the C standard. This includes global and static variables without explicit initializer, which are initialized to 0. <code>avr-gcc</code> does this by placing the appropriate code into section <code><a class="el" href="mem_sections.html#sec_dot_init">.init4</a></code>. With respect to the standard, this sentence is somewhat simplified (because the standard allows for machines where the actual bit pattern used differs from all bits being 0), but for the AVR target, in general, all integer-type variables are set to 0, all pointers to a NULL pointer, and all floating-point variables to 0.0.</p>
+<p>As long as these variables are not explicitly initialized, or their initializer is all zeros, they go into the <a class="el" href="mem_sections.html#sec_dot_bss">.bss</a> output section. This section simply records the size of the variable, but otherwise doesn't consume space, neither within the object file nor within flash memory. (Of course, being a variable, it will consume space in the target's SRAM.)</p>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_flashstrings"></a>
 Why do all my string literals eat up the SRAM?</h1>
-<p>By default, all strings are handled as all other initialized variables: they occupy RAM (even though the compiler might warn you when it detects write attempts to these RAM locations), and occupy the same amount of flash ROM so they can be initialized to the actual string by startup code.</p>
-<p>That way, any string literal will be a valid argument to any C function that expects a <code>const char*</code> argument.</p>
-<p>Of course, this is going to waste a lot of SRAM.</p>
-<dl class="section note"><dt>Note</dt><dd>What follows is only needed when the <code>.rodata</code> <a class="el" href="mem_sections.html#sec_input_output">input sections</a> are located in RAM, which is only the case for the "old" AVR devices. For recent devices (0-series, 1-series, 2-series, AVRrc, AVR32, AVR64 and AVR128) all the complications below are not required. This is because in <div class="fragment"><div class="line"><a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;Hallo %d\n&quot;</span>, 123);</div>
-<div class="ttc" id="agroup__avr__stdio_html_ga4c04da4953607fa5fa4d3908fecde449"><div class="ttname"><a href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a></div><div class="ttdeci">int printf(const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> printf.c:35</div></div>
-</div><!-- fragment --> the format string will <em>always</em> be located in a <code>.rodata</code> input section. And only when the <code>.rodata</code> input sections ends up in RAM, then special means like below are needed to avoid wasting RAM. For an overview where the <code>.rodata</code> input sections go, see the table in <a class="el" href="FAQ.html#faq_varinit">Shouldn't I initialize all my variables?</a></dd></dl>
+<p>By default, string literals are handled like all other initialized constants in static storage: They are put into a <code>.rodata</code> <a class="el" href="mem_sections.html#sec_input_output">input section</a>.</p>
+<p>On old devices, the <code>.rodata</code> input sections are allocated to the <a class="el" href="mem_sections.html#sec_dot_data">.data</a> output section, which means that such objects occupy memory in the flash ROM <em>and</em> in the SRAM according to the following rules:</p>
+<table class="doxtable">
+<caption>Non-Zero Data in Static Storage</caption>
+<tr>
+<th>Read-Only </th><th>Input Section </th><th>Output Section </th><th>Memory Region(s) </th><th>Case  </th></tr>
+<tr>
+<td>No </td><td>.data </td><td>.data </td><td>text <em>and</em> data </td><td>All </td></tr>
+<tr>
+<td rowspan="3">Yes </td><td rowspan="3">.rodata </td><td><b>.data</b> </td><td>text <em>and</em> data </td><td>3 </td></tr>
+<tr>
+<td>.rodata </td><td>text </td><td>1 </td></tr>
+<tr>
+<td>.rodata </td><td>rodata </td><td>2  </td></tr>
+</table>
+<p><b>Cases</b></p><ol type="1">
+<li>Devices that see all of program memory in the RAM address space: <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a> (AVRrc), <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a> (AVR16 and AVR32 devices, 0-series, 1-series and 2-series).</li>
+<li>Devices that see only a part of program memory in the RAM address space: AVR64 and AVR128 devices without <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a>.</li>
+<li>All other devices, i.e. devices that don't see (parts of) the program memory in the RAM address space, or when <code>-mrodata-in-ram</code> is specified. The place in the flash ROM (<code>.text</code>) is occupied by the initializer values that are used by the startup code to initialize the objects in the <code></code>.data output section.</li>
+</ol>
+<p>The question remains: Why is case 3. allocating constant variables into the SRAM? For a better understanding, consider the following code:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">char</span> get_first_char (<span class="keyword">const</span> <span class="keywordtype">char</span> *str)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> str[0];</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>What code should the compiler generate for that function? Notice that it is perfectly fine to pass a string that is not constant through the <code>const char *str</code> parameter, which only states that <code>get_first_char</code> won't change <code>str</code> like in the following use cases:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">char</span> func1 (<span class="keywordtype">int</span> i)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">char</span> str[10];</div>
+<div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf</a> (str, <span class="stringliteral">&quot;%d&quot;</span>, i);</div>
+<div class="line">    <span class="keywordflow">return</span> get_first_char (str);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">char</span> func2 (<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> get_first_char (<span class="stringliteral">&quot;Hello&quot;</span>);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__avr__stdio_html_ga6017094d9fd800fa02600d35399f2a2a"><div class="ttname"><a href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf</a></div><div class="ttdeci">int sprintf(char *__s, const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> sprintf.c:37</div></div>
+</div><!-- fragment --><p>In any case the compiler will generate code like this: </p><div class="fragment"><div class="line">get_first_char:</div>
+<div class="line">    movw r30, r24</div>
+<div class="line">    ld   r24, Z</div>
+<div class="line">    ret</div>
+</div><!-- fragment --><p>For the devices from 1. and 2. the <code>"ld r24,Z"</code> will read from flash or from SRAM depending on the address passed in R24. But on the old 3. devices only LPM can read from flash, and therefore the tools place <code>"Hello"</code> in RAM so that the code works for all possible string addresses. The same applies to all other constants in static storage.</p>
+<p>Of course, this is going to waste a lot of SRAM on the old devices.</p>
+<p>For ways how to place string literals in flash ROM (and to access them), see also the next section <a class="el" href="FAQ.html#faq_rom_array">How do I put an array of strings completely in ROM?</a>.</p>
+<dl class="section note"><dt>Note</dt><dd>What follows is only needed when the <code>.rodata</code> <a class="el" href="mem_sections.html#sec_input_output">input sections</a> are located in RAM, which is only the case for the "old" AVR devices. See the table above.</dd></dl>
 <h2><a class="anchor" id="faq_flashstrings_progmem"></a>
 Use PROGMEM</h2>
-<p>In <a class="el" href="group__avr__pgmspace.html">Program Space String Utilities</a>, a method is described how such constant data can be moved out to flash ROM. However, a constant string located in flash ROM is no longer a valid argument to pass to a function that expects a <code>const char*</code>-type string, since the AVR processor needs the special instruction <code>LPM</code> to access these strings. Thus, separate functions are needed that take this into account. Many of the standard C library functions have equivalents available where one of the string arguments can be located in flash ROM. Private functions in the applications need to handle this, too. For example, the following can be used to implement simple debugging messages that will be sent through a UART:</p>
+<p>In <a class="el" href="group__avr__pgmspace.html">Program Space String Utilities</a>, a method is described how such constant data can be moved out to flash ROM. However, a constant string located in flash ROM is no longer a valid argument to pass to a function that expects a <code>const char*</code>-type string, since the old AVR devices need the special instruction <code>LPM</code> to access these strings. Thus, separate functions are needed that take this into account. Many of the standard C library functions have equivalents available where one of the string arguments can be located in flash ROM. Private functions in the applications need to handle this, too. For example, the following can be used to implement simple debugging messages that will be sent through a UART:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> uart_putchar (<span class="keywordtype">char</span> c)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>)</div>
-<div class="line">    uart_putchar(<span class="charliteral">&#39;\r&#39;</span>);</div>
+<div class="line">    uart_putchar (<span class="charliteral">&#39;\r&#39;</span>);</div>
 <div class="line">  <a class="code hl_define" href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a> (USR, UDRE);</div>
 <div class="line">  UDR = c;</div>
-<div class="line">  <span class="keywordflow">return</span> 0; <span class="comment">/* so it could be used for fdevopen(), too */</span></div>
+<div class="line">  <span class="keywordflow">return</span> 0; <span class="comment">// So it could be used for fdevopen(), too.</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> debug_P (<span class="keyword">const</span> <span class="keywordtype">char</span> *addr)</div>
@@ -615,22 +569,21 @@ Use PROGMEM</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
-<div class="line">  ioinit(); <span class="comment">/* initialize UART, ... */</span></div>
-<div class="line">  debug_P (<a class="code hl_define" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a>(<span class="stringliteral">&quot;foo was here\n&quot;</span>));</div>
+<div class="line">  ioinit();  <span class="comment">// Initialize UART, ...</span></div>
+<div class="line">  debug_P (<a class="code hl_define" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a> (<span class="stringliteral">&quot;foo was here\n&quot;</span>));</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__pgmspace_html_ga73809107539df84eaf01f6a4dea4fbff"><div class="ttname"><a href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a></div><div class="ttdeci">#define PSTR(str)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:742</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gae89a4ff0b5a887888fcf83c4701b310b"><div class="ttname"><a href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte</a></div><div class="ttdeci">#define pgm_read_byte(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:916</div></div>
 <div class="ttc" id="agroup__avr__sfr_html_gaaf6857fa882da35f8685e2001e5c3bbe"><div class="ttname"><a href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a></div><div class="ttdeci">#define loop_until_bit_is_set(sfr, bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:252</div></div>
+<div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>By convention, the suffix <b>_P</b> to the function name is used as an indication that this function is going to accept a "program-space
-string". Note also the use of the <a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR()</a> macro.</dd></dl>
+string". Note also the use of the <code><a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a></code> macro.</dd></dl>
 <h2><a class="anchor" id="faq_flashstrings_flash"></a>
 Use __flash</h2>
-<p>As an alternative, the GNU-C named address-space <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> can be used. Notice the proper address-space qualification of <code>debug_F</code>, the usage of <a class="el" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> instead of <code>PSTR</code>, and that reading from a <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> address can be accomplished by open-coded C code like in <code>*addr++</code>.</p>
+<p>As an alternative, the GNU-C named address-space <code><a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a></code> can be used. Notice the proper address-space qualification of <code>debug_F</code>, the usage of <a class="el" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> instead of <code>PSTR</code>, and that reading from a <code><a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a></code> address can be accomplished by open-coded C code like in <code>*addr++</code>.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="flash_8h.html">avr/flash.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// ...</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> debug_F (<span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> <span class="keywordtype">char</span> *addr)</div>
 <div class="line">{</div>
@@ -642,12 +595,87 @@ Use __flash</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
-<div class="line">  ioinit(); <span class="comment">/* initialize UART, ... */</span></div>
-<div class="line">  debug_F (<a class="code hl_define" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a>(<span class="stringliteral">&quot;foo was here\n&quot;</span>));</div>
+<div class="line">  ioinit(); <span class="comment">// initialize UART, ...</span></div>
+<div class="line">  debug_F (<a class="code hl_define" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> (<span class="stringliteral">&quot;foo was here\n&quot;</span>));</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="aflash_8h_html"><div class="ttname"><a href="flash_8h.html">flash.h</a></div></div>
+<div class="ttc" id="agroup__avr__flash_html_ga9640f3080a04903165ca21f35da81a38"><div class="ttname"><a href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a></div><div class="ttdeci">__flash</div><div class="ttdef"><b>Definition:</b> flash.h:960</div></div>
 <div class="ttc" id="agroup__avr__flash_html_gabec036cb18588b3891217d4e0be515ee"><div class="ttname"><a href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a></div><div class="ttdeci">#define FSTR(str)</div><div class="ttdef"><b>Definition:</b> flash.h:180</div></div>
 </div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_rom_array"></a>
+How do I put an array of strings completely in ROM?</h1>
+<p>There are times when you may need an array of strings which will never be modified. In this case, you don't want to waste RAM storing the constant strings. For the rationale behind storing constant strings in RAM, see the previos section <a class="el" href="FAQ.html#faq_flashstrings">Why do all my string literals eat up the SRAM?</a></p>
+<h2><a class="anchor" id="faq_rom_array_progmem"></a>
+With PROGMEM</h2>
+<p>The most obvious (and incorrect) thing to do is this:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// array[] will be in flash ROM, but &quot;Foo&quot; and &quot;Bar&quot; are still in RAM.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> array[2] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> =</div>
+<div class="line">{</div>
+<div class="line">    <span class="stringliteral">&quot;Foo&quot;</span>, <span class="stringliteral">&quot;Bar&quot;</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">char</span> buf[32];</div>
+<div class="line">    <a class="code hl_function" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> (buf, array[1]);</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga5749897c91c479d02054fc02128de482"><div class="ttname"><a href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a></div><div class="ttdeci">char * strcpy_P(char *, const char *)</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:146</div></div>
+</div><!-- fragment --><p>The result is not what you want though. What you end up with is the array stored in ROM, while the individual strings end up in RAM (in some <code>.rodata</code> input section).</p>
+<p>To work around this, you need to do something like this:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> s_foo[] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> = <span class="stringliteral">&quot;Foo&quot;</span>;</div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> s_bar[] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> = <span class="stringliteral">&quot;Bar&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> array[2] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> =</div>
+<div class="line">{</div>
+<div class="line">    s_foo, s_bar</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> func (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> i)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">char</span> buf[32];</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span> *p = <a class="code hl_define" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a> (&amp;array[i]);</div>
+<div class="line">    <a class="code hl_function" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> (buf, p);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:938</div></div>
+</div><!-- fragment --><p>Looking at the disassembly of the resulting object file we see that array is in flash as such:</p>
+<pre class="fragment">00000026 &lt;array&gt;:
+  26:   2e 00 2a 00
+
+0000002a &lt;bar&gt;:
+  2a:   42 61 72 00          Bar.
+
+0000002e &lt;foo&gt;:
+  2e:   46 6f 6f 00          Foo.
+</pre><p><code>foo</code> is at address 0x002e.<br  />
+ <code>bar</code> is at address 0x002a.<br  />
+ <code>array</code> is at address 0x0026.<br  />
+</p>
+<h2><a class="anchor" id="faq_rom_array_as"></a>
+With named address-spaces</h2>
+<p>An alternative is to use the named address-space <code><a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a></code>, which is supported since avr-gcc v4.7 and in GNU-C99 (<code>-std=gnu99</code>) and up:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="flash_8h.html">avr/flash.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> array[] =</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_define" href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a>(<span class="stringliteral">&quot;Foo&quot;</span>), <a class="code hl_define" href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a>(<span class="stringliteral">&quot;Bar&quot;</span>)</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> compare (<span class="keyword">const</span> <span class="keywordtype">char</span> *str, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> i)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="group__avr__flash.html#ga18da52c839c7307578123e8c021b4474">strcmp_F</a> (str, array[i]);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__avr__flash_html_ga18da52c839c7307578123e8c021b4474"><div class="ttname"><a href="group__avr__flash.html#ga18da52c839c7307578123e8c021b4474">strcmp_F</a></div><div class="ttdeci">int strcmp_F(const char *, const __flash char *)</div></div>
+<div class="ttc" id="agroup__avr__flash_html_ga80fd1c204ef50d9959ddcfd122dd3816"><div class="ttname"><a href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a></div><div class="ttdeci">#define FLIT(str)</div><div class="ttdef"><b>Definition:</b> flash.h:263</div></div>
+</div><!-- fragment --><p>Moreover, there is no more need for <code>pgm_read_xxx()</code>: The (addresses of) the string literals can be read directly by means of <code>array[i]</code>.</p>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_ramoverlap"></a>
 How to detect RAM memory and variable overlap problems?</h1>
 <p>You can simply run <code>avr-nm</code> on your output (ELF) file. Run it with the <code>-n</code> option, and it will sort the symbols numerically (by default, they are sorted alphabetically).</p>
@@ -849,30 +877,79 @@ Why are there five different linker scripts?</h1>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_binarydata"></a>
 How to add a raw binary image to linker output?</h1>
+<h2><a class="anchor" id="faq_binarydata_embed"></a>
+Using #embed</h2>
 <p>Before answering this question, lets mention the <code>#embed</code> directive introduced in C23. While <code>#embed</code> doesn't strictly conform to the requirement of the question, it is so much more convenient that you still may want to use it. <code>#embed</code> embeds the contents of a file into a compilation unit. Here is an example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="stdio_8h.html">stdio.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> foo_c[] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> =</div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> abba_txt[] <a class="code hl_define" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> =</div>
 <div class="line">{</div>
-<div class="line"><span class="preprocessor">#embed &quot;foo.c&quot;</span></div>
-<div class="line">    <span class="comment">// Append \0 so that foo_c becomes a proper C string</span></div>
-<div class="line">    <span class="comment">// (assuming foo.c is a text file).</span></div>
+<div class="line"><span class="preprocessor">#embed &quot;abba.txt&quot;</span></div>
+<div class="line">    <span class="comment">// Append \0 so that abba_txt becomes a proper C string</span></div>
+<div class="line">    <span class="comment">// (assuming abba.txt is a text file).</span></div>
 <div class="line">    , <span class="charliteral">&#39;\0&#39;</span></div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main ()</div>
+<div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
-<div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;== foo.c has %d bytes ==\n%S\n&quot;</span>,</div>
-<div class="line">            (<span class="keywordtype">int</span>) <span class="keyword">sizeof</span> (foo_c) - 1, foo_c);</div>
+<div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;== abba.txt has %d bytes ==\n%S\n&quot;</span>,</div>
+<div class="line">            (<span class="keywordtype">int</span>) <span class="keyword">sizeof</span> (abba_txt) - 1, abba_txt);</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__avr__stdio_html_ga4c04da4953607fa5fa4d3908fecde449"><div class="ttname"><a href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a></div><div class="ttdeci">int printf(const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> printf.c:35</div></div>
 <div class="ttc" id="astdio_8h_html"><div class="ttname"><a href="stdio_8h.html">stdio.h</a></div></div>
-</div><!-- fragment --><p>Alternatively, GNU Binutils can be used.</p>
-<p>The GNU linker <code>avr-ld</code> cannot handle binary data directly. However, there's a companion tool called <code>avr-objcopy</code>. This is already known from the output side: it's used to extract the contents of the linked ELF file into an Intel Hex load file.</p>
+</div><!-- fragment --><h2><a class="anchor" id="faq_binarydata_incbin"></a>
+Using .incbin</h2>
+<p>The GNU assembler supports the <a href="https://sourceware.org/binutils/docs/as/Incbin.html"><code>.incbin</code></a> directive, which includes the content of a file verbatim as if it was specified by <code>.byte</code> directives: </p><div class="fragment"><div class="line">.macro ARRAY_START name</div>
+<div class="line">    .pushsection .progmem.data.\name,<span class="stringliteral">&quot;a&quot;</span>,<span class="stringliteral">&quot;progbits&quot;</span></div>
+<div class="line">    .global \name</div>
+<div class="line">    .type \name,<span class="stringliteral">&quot;object&quot;</span></div>
+<div class="line">    \name:</div>
+<div class="line">.endm</div>
+<div class="line"> </div>
+<div class="line">.macro ARRAY_END name</div>
+<div class="line">    .global \name\&zwj;()_size</div>
+<div class="line">    \name\()_size = . - \name</div>
+<div class="line">    .size \name, . - \name</div>
+<div class="line">    .popsection</div>
+<div class="line">.endm</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/* Defines abba_txt[] from the bytes of abba.txt. */</span></div>
+<div class="line">ARRAY_START abba_txt</div>
+<div class="line">    .incbin <span class="stringliteral">&quot;abba.txt&quot;</span></div>
+<div class="line">    <span class="comment">/* Append a \0 to the array. */</span></div>
+<div class="line">    .byte 0</div>
+<div class="line">ARRAY_END abba_txt</div>
+</div><!-- fragment --><p>The code defines the assembly macros <code>ARRAY_START</code> and <code>ARRAY_END</code> for convenience. They define the array and a symbol for the array size. A C header file provides the symbols to a C program:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#ifndef ABBA_H</span></div>
+<div class="line"><span class="preprocessor">#define ABBA_H</span></div>
+<div class="line"><span class="keyword">extern</span> <span class="keywordtype">char</span> abba_txt[];</div>
+<div class="line"><span class="comment">// Notice that abba_txt_size is just a symbol</span></div>
+<div class="line"><span class="comment">// that doesn&#39;t occupy memory.</span></div>
+<div class="line"><span class="keyword">extern</span> <span class="keywordtype">char</span> abba_txt_size[];</div>
+<div class="line"><span class="preprocessor">#endif </span><span class="comment">/* ABBA_H */</span><span class="preprocessor"></span></div>
+</div><!-- fragment --><p>This header is then included in order to use the data:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="stdio_8h.html">stdio.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="stdint_8h.html">stdint.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;abba.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;start: 0x%x\n&quot;</span>, (<a class="code hl_typedef" href="group__avr__stdint.html#ga2c8c1b9f53772a86b0827ce7399b68aa">uintptr_t</a>) abba_txt);</div>
+<div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;size:  %u\n&quot;</span>, (<a class="code hl_typedef" href="group__avr__stdint.html#ga2c8c1b9f53772a86b0827ce7399b68aa">uintptr_t</a>) abba_txt_size);</div>
+<div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;array: \&quot;%S\&quot;\n&quot;</span>, abba_txt);</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__avr__stdint_html_ga2c8c1b9f53772a86b0827ce7399b68aa"><div class="ttname"><a href="group__avr__stdint.html#ga2c8c1b9f53772a86b0827ce7399b68aa">uintptr_t</a></div><div class="ttdeci">uint16_t uintptr_t</div><div class="ttdef"><b>Definition:</b> stdint.h:160</div></div>
+</div><!-- fragment --><p>The simplest way to assemble the assembly module is by letting avr-gcc do the work: </p><pre class="fragment">$ avr-gcc -x assembler-with-cpp abba.asm -x none -o abba.o -mmcu=...
+</pre><p> The <code>"-x assembler-with-cpp"</code> and <code>"-x none"</code> are only needed when the file extension of the assembly file is neither <code>.S</code> nor <code>.sx</code>. In such cases, avr-gcc must be provided with the <a class="el" href="using_tools.html#opt_x">input language</a>.</p>
+<h2><a class="anchor" id="faq_binarydata_objcopy"></a>
+Using objcopy</h2>
+<p>The GNU linker <code>avr-ld</code> cannot handle binary data directly. However, there's a companion tool called <a href="https://sourceware.org/binutils/docs/binutils/objcopy.html"><code>avr-objcopy</code></a>. This is already known from the output side: it's used to extract the contents of the linked ELF file into an Intel Hex load file.</p>
 <p><code>avr-objcopy</code> can create a relocatable object file from arbitrary binary input, like</p>
-<pre class="fragment">avr-objcopy -I binary -O elf32-avr foo.bin foo.o
-</pre><p>This will create a file named <code>foo.o</code>, with the contents of <code>foo.bin</code>. The contents will default to section .data, and two symbols will be created named <code>_binary_foo_bin_start</code> and <code>_binary_foo_bin_end</code>. These symbols can be referred to inside a C source to access these data.</p>
+<pre class="fragment">$ avr-objcopy -I binary -O elf32-avr foo.bin foo.o
+</pre><p>This will create a file named <code>foo.o</code> with the contents of <code>foo.bin</code>. The contents will default to section .data, and two symbols will be created named <code>_binary_foo_bin_start</code> and <code>_binary_foo_bin_end</code>. These symbols can be referred to inside a C source to access these data.</p>
 <p>If the goal is to have those data go to flash ROM (similar to having used the PROGMEM attribute in C source code), the sections have to be renamed while copying, and it's also useful to set the section flags:</p>
-<pre class="fragment">avr-objcopy --rename-section .data=.progmem.data,contents,alloc,load,readonly,data -I binary -O elf32-avr foo.bin foo.o
+<pre class="fragment">$ avr-objcopy --rename-section .data=.progmem.data,contents,alloc,load,readonly,data -I binary -O elf32-avr foo.bin foo.o
 </pre><p>Note that all this could be conveniently wired into a Makefile, so whenever <code>foo.bin</code> changes, it will trigger the recreation of <code>foo.o</code>, and a subsequent relink of the final ELF file.</p>
 <p>Below are two Makefile fragments that provide rules to convert a .txt file to an object file, and to convert a .bin file to an object file:</p>
 <pre class="fragment">$(OBJDIR)/%.o : %.txt
@@ -919,11 +996,10 @@ How do I perform a software reset of the AVR?</h1>
 <div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> __attribute__((__always_inline__))</div>
 <div class="line"><span class="keywordtype">void</span> soft_reset (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
-<div class="line">    <a class="code hl_define" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a> (<a class="code hl_define" href="group__avr__watchdog.html#gad45893280f49113ffc2e67e1d741f29d">WDTO_15MS</a>);</div>
+<div class="line">    <a class="code hl_define" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a> (WDTO_15MS);</div>
 <div class="line">    <span class="keywordflow">for</span>(;;) {}</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__watchdog_html_ga9d1aeb2823c79936e980fabba10ac75e"><div class="ttname"><a href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a></div><div class="ttdeci">#define wdt_enable(timeout)</div><div class="ttdef"><b>Definition:</b> wdt.h:136</div></div>
-<div class="ttc" id="agroup__avr__watchdog_html_gad45893280f49113ffc2e67e1d741f29d"><div class="ttname"><a href="group__avr__watchdog.html#gad45893280f49113ffc2e67e1d741f29d">WDTO_15MS</a></div><div class="ttdeci">#define WDTO_15MS</div><div class="ttdef"><b>Definition:</b> wdt.h:549</div></div>
 <div class="ttc" id="awdt_8h_html"><div class="ttname"><a href="wdt_8h.html">wdt.h</a></div></div>
 </div><!-- fragment --><p>For newer AVRs (such as the ATmega1281) also add this function to your code to then disable the watchdog after a reset (e.g., after a soft reset):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="wdt_8h.html">avr/wdt.h</a>&gt;</span></div>
@@ -999,7 +1075,7 @@ value" section for the EEPROM Address Register. If EEAR shows the initial value 
 Why is my baud rate wrong?</h1>
 <p>Some AVR datasheets give the following formula for calculating baud rates:</p>
 <div class="fragment"><div class="line">(<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> / (UART_BAUD_RATE * 16L) - 1)</div>
-<div class="ttc" id="agroup__util__delay_html_ga43bafb28b29491ec7f871319b5a3b2f8"><div class="ttname"><a href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></div><div class="ttdeci">#define F_CPU</div><div class="ttdoc">CPU frequency in Hz.</div><div class="ttdef"><b>Definition:</b> delay.h:102</div></div>
+<div class="ttc" id="agroup__util__delay_html_ga43bafb28b29491ec7f871319b5a3b2f8"><div class="ttname"><a href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></div><div class="ttdeci">#define F_CPU</div><div class="ttdoc">CPU frequency in Hz.</div><div class="ttdef"><b>Definition:</b> delay.h:104</div></div>
 </div><!-- fragment --><p>Unfortunately that formula does not work with all combinations of clock speeds and baud rates due to integer truncation during the division operator.</p>
 <p>When doing integer division it is usually better to round to the nearest integer, rather than to the lowest. To do this add 0.5 (i. e. half the value of the denominator) to the numerator before the division, resulting in the formula:</p>
 <div class="fragment"><div class="line">((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> + UART_BAUD_RATE * 8L) / (UART_BAUD_RATE * 16L) - 1)</div>
@@ -1115,7 +1191,7 @@ What is all this _BV() stuff about?</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2025 18:32:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

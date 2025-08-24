@@ -114,7 +114,7 @@ General Information about this Library</h1>
 <p>Unless otherwise noted, functions of this library are <em>not</em> guaranteed to be reentrant. In particular, any functions that store local state are known to be non-reentrant, as well as functions that manipulate I/O registers like the <a class="el" href="group__avr__eeprom.html">EEPROM</a> access routines. If these functions are used within both standard and interrupt contexts undefined behaviour will result. See the <a class="el" href="FAQ.html#faq_reentrant">FAQ</a> for a more detailed discussion.</p>
 <h1><a class="anchor" id="supp_devices"></a>
 Supported Devices</h1>
-<p><a id="a17_supported:20devices" name="a17_supported:20devices"></a></p>
+<p><a id="a18_supported:20devices" name="a18_supported:20devices"></a></p>
 <p>The following is a list of AVR devices currently supported by the library. Note that actual support for some newer devices depends on the ability of the compiler to support these devices at library compile-time.</p>
 <p></p>
 <dl>
@@ -181,6 +181,11 @@ Supported Devices</h1>
 <dt><a class="anchor" id="supp_dev_footnote_four"></a>Note [4] </dt>
 <dd>The M3000 is a motor controller AVR ASIC from Intelligent Motion Systems (IMS) / Schneider Electric.  </dd>
 </dl>
+<h1><a class="anchor" id="supp_compilers"></a>
+Supported Compilers</h1>
+<p><a id="a19_supported:20compilers" name="a19_supported:20compilers"></a></p>
+<p>AVR-LibC can be used with the most recent avr-gcc back to avr-gcc v4.8 at least. Older versions may still work but are untested.</p>
+<p>Always use AVR-LibC with a compiler version for which the library has been configured and built.</p>
 <h1><a class="anchor" id="license"></a>
 AVR-LibC License</h1>
 <p>AVR-LibC can be freely used and redistributed, provided the following license conditions are met.</p>
@@ -269,7 +274,7 @@ All rights reserved.
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2025 18:32:09 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2025 20:40:18 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
