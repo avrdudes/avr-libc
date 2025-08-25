@@ -88,6 +88,9 @@
   - \ref faq_fuselow
   - \ref faq_ext_ram
 
+- <b>Toolchain</b>
+  - \ref faq_toolchain_version
+
 - <b>Other</b>
   - \ref faq_wrong_baud_rate
   - \ref faq_clockskew
@@ -2315,6 +2318,52 @@ Explanation:
   instead.
 </dd>
 </dl>
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_toolchain_version What are the Versions of the Tools in my Toolchain?
+
+The versions of the tools can be obtained by running the following
+commands and taking the first line of the standard output:
+
+<table>
+<caption>Commands to obtain Tool Versions</caption>
+<tr><th>Version of            <th>Command
+<tr><td>Compiler              <td><tt>avr-gcc \--version</tt>
+<tr><td>Assembler             <td><tt>avr-as \--version</tt>
+<tr><td>LD Linker<sup>1</sup> <td><tt>avr-ld \--version</tt>
+<tr><td>CC Linker<sup>2</sup>
+    <td><tt>echo "" | avr-gcc -xc - -Wl,\--version 2&gt; /dev/null</tt>
+<tr><td>AVR-LibC
+    <td><tt>echo "#include <avr/version.h>" | avr-gcc -xc - -E -dM | grep AVR_LIBC_VERSION_STRING</tt>
+</table>
+
+Linker<sup>1</sup> is the linker as called directly (<tt>avr-ld</tt>)
+whereas Linker<sup>2</sup> is the linker as called though the compiler
+driver <tt>avr-gcc</tt>.  The latter is the usual way to invoke the linker.
+When these two versions are not the same, then the resulting toolchain may
+have inconsistencies.
+
+When you have more then one toolchain installed, then make sure you are
+calling the command from the intended toolchain, e.g. by specifying
+the absolute path to the tool.
+
+Also notice that software may come with vendor specific patches,
+so that the tool behaves differently than the stock version.
+
+The FAQ document you are reading right now is part of an AVR-LibC
+that has been configured for the following tool versions:
+
+<table>
+<caption>Tool Versions</caption>
+<tr><th>Software   <th>Version
+<tr><td>Compiler   <td><tt>@CC_VERSION_STRING@</tt>
+<tr><td>Assembler  <td><tt>@AS_VERSION_STRING@</tt>
+<tr><td>LD Linker  <td><tt>@LD_VERSION_STRING@</tt>
+<tr><td>CC Linker  <td><tt>@CCLD_VERSION_STRING@</tt>
+<tr><td>AVR-LibC   <td><tt>@AVR_LIBC_VERSION@</tt>
+</table>
 
 <small>Back to \ref faq_index.</small>
 

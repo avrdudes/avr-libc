@@ -1,6 +1,3 @@
-# Copyright (c) 2004  Theodore A. Roth
-# Copyright (c) 2005,2006,2007,2009  Anatoly Sokolov
-# Copyright (c) 2005,2008  Joerg Wunsch
 # Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
@@ -29,15 +26,11 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-dnl Check the version of LD against the version of the linker used by CC.
-AC_DEFUN([WARN_LINKER_MISMATCH],[dnl
-    vld=`$LD --version | sed '1p;d'`
-    vcc=`echo "" | $CC -xassembler - -Wl,--version 2> /dev/null | sed '1p;d'`
-    AS_IF([test "x$vld" != "x$vcc"],[
-	dnl LD's version has already been displayed with SHOW_VERSION.
-	AC_MSG_NOTICE([Using CC linker: $vcc])
-	AC_MSG_WARN([different linkers used in CC and LD])
-    ],[])
+dnl Set $1 to $2--version.  Mind spaces after $2!
+AC_DEFUN([SUBST_VERSION_STRING],[dnl
+    dnl 'head' has no uniform interface: use 'sed' instead.
+    $1=`$2--version 2> /dev/null | sed '1p;d'`
+    AC_SUBST($1)
 ])
 dnl Local Variables:
 dnl mode: autoconf

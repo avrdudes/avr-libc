@@ -270,6 +270,8 @@ or by a more shortened name, "distros".
 AVR toolchain distros are available on FreeBSD, Windows, Mac OS X, and
 certain flavors of Linux.
 
+For details on the present distribution, see
+the \ref faq_toolchain_version "FAQ".
 
 \section overview_open_source Open Source
 

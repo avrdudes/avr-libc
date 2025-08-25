@@ -49,7 +49,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        tools-install.dox \
                        using-avrprog.dox \
                        using-tools.dox \
-                       faq.dox \
+                       faq.dox.in \
                        bench.dox \
                        bench-libc.dox \
                        bench-libm.dox \

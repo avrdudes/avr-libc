@@ -154,12 +154,23 @@ AC_PROG_RANLIB
 AC_CHECK_TOOL(AR, ar, ar)
 AC_CHECK_TOOL(OBJDUMP, objdump, objdump)
 
-SHOW_VERSION([$CC], [CC])
-SHOW_VERSION([$AS], [AS])
-SHOW_VERSION([$LD], [LD])
+# Show the tool versions in the configure log and in the FAQ.
+
+SUBST_VERSION_STRING([CC_VERSION_STRING], [$CC ])
+SUBST_VERSION_STRING([AS_VERSION_STRING], [$AS ])
+SUBST_VERSION_STRING([LD_VERSION_STRING], [$LD ])
+SUBST_VERSION_STRING([CCLD_VERSION_STRING], [echo "" | $CC -xassembler - -Wl,])
+
+AC_MSG_NOTICE([Using CC=$CC: $CC_VERSION_STRING])
+AC_MSG_NOTICE([Using AS=$AS: $AS_VERSION_STRING])
+AC_MSG_NOTICE([Using LD=$LD: $LD_VERSION_STRING])
 
 dnl Issue a warning when CC's linker is not LD.
-WARN_LINKER_MISMATCH
+AS_IF([test "x$LD_VERSION_STRING" != "x$CCLD_VERSION_STRING"],[dnl
+    AC_MSG_NOTICE([Using CC linker: $CCLD_VERSION_STRING])
+    AC_MSG_WARN([different linkers used in CC and LD])
+],[])
+
 
 # Make sure that we found the right avr cross-compiler.
 
@@ -425,6 +436,7 @@ AC_CONFIG_FILES([
 	include/avr/version.h
 	include/util/delay.h
 	doc/api/main_page.dox
+	doc/api/faq.dox
 ])
 
 dnl Makefile.in's made by automake from Makefile.am's.
