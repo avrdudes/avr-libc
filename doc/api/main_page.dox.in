@@ -47,7 +47,7 @@ startup code needed by most applications.
 There is a wealth of information in this document which goes beyond simply
 describing the interfaces and routines provided by the library. We hope that
 this document provides enough information to get a new AVR developer up to
-speed quickly using the freely available development tools: binutils, gcc,
+speed quickly using the freely available development tools: Binutils, GCC,
 AVR-LibC and many others.
 
 If you find yourself stuck on a problem which this document doesn't quite
@@ -88,9 +88,8 @@ See the \ref faq_reentrant "FAQ" for a more detailed discussion.
 \addindex supported devices
 
 The following is a list of AVR devices currently supported by the library.
-Note that actual support for some newer devices depends on the ability
-of the compiler to support these devices at library
-compile-time.
+Note that the actual support for a particular device depends on whether
+it is supported by the compiler at library compile-time.
 
 \latexonly
 { \raggedright
