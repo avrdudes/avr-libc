@@ -351,6 +351,17 @@ AC_SUBST(DOCSDIR)
 AC_SUBST(AVR_LIBC_USER_MANUAL)
 AC_SUBST(DOC_INST_DIR)
 
+dnl Consumed by doc/api/doxygen.config.in::ENABLED_SECTIONS.
+AC_MSG_CHECKING([for git branch])
+the_git_branch=`(cd ${srcdir}; git rev-parse --abbrev-ref HEAD 2> /dev/null)`
+AS_IF([test "x$the_git_branch" != "x"],
+      [AC_MSG_RESULT([$the_git_branch])],
+      [AC_MSG_RESULT([--none--])])
+AS_IF([test "x$the_git_branch" = "xonlinedocs"],
+      [GIT_BRANCH_IS_ONLINEDOCS=GIT_BRANCH_IS_ONLINEDOCS],
+      [GIT_BRANCH_IS_ONLINEDOCS=])
+AC_SUBST(GIT_BRANCH_IS_ONLINEDOCS)
+
 
 dnl == Debug Info ============================================================
 

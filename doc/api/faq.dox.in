@@ -2352,6 +2352,8 @@ the absolute path to the tool.
 Also notice that software may come with vendor specific patches,
 so that the tool behaves differently than the stock version.
 
+\ifnot GIT_BRANCH_IS_ONLINEDOCS
+
 The FAQ document you are reading right now is part of an AVR-LibC
 that has been configured for the following tool versions:
 
@@ -2364,6 +2366,8 @@ that has been configured for the following tool versions:
 <tr><td>CC Linker  <td><tt>@CCLD_VERSION_STRING@</tt>
 <tr><td>AVR-LibC   <td><tt>@AVR_LIBC_VERSION@</tt>
 </table>
+
+\endif
 
 <small>Back to \ref faq_index.</small>
 
