@@ -235,6 +235,11 @@ In-Circuit Emulator (ICE), to provide emulation capabilities.
 SimulAVR is an AVR simulator used as a back-end with AVR GDB.
 
 
+\section overview_avrtest AVRtest
+
+AVRtest is a fast AVR core simulator used to test AVR GCC and AVR-LibC.
+
+
 \section overview_utilities Utilities
 
 There are also other optional utilities available that may be useful to add
