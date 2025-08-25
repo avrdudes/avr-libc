@@ -435,6 +435,7 @@ AC_CONFIG_FILES([
 	include/avr/builtins.h
 	include/avr/version.h
 	include/util/delay.h
+	doc/api/doxygen.config
 	doc/api/main_page.dox
 	doc/api/faq.dox
 ])

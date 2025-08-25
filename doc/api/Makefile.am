@@ -168,17 +168,6 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 	cp $(top_srcdir)/doc/api/avr-libc-logo-inverted.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
 
-#doxygen.config: doxygen.config.in $(top_srcdir)/stamp-h1
-doxygen.config: doxygen.config.in
-	sed \
-	-e 's,[@]VERSION[@],$(VERSION),g' \
-	-e 's,[@]top_srcdir[@],$(top_srcdir),g' \
-	-e 's,[@]top_builddir[@],$(top_builddir),g' \
-	-e 's,[@]AVR_LIBC_USER_MANUAL[@],$(AVR_LIBC_USER_MANUAL),g' \
-	-e 's,[@]srcdir[@],$(srcdir),g' \
-	< $(srcdir)/doxygen.config.in > doxygen.config ||\
-	{ rm -f doxygen.config; exit 1; }
-
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only
 # a prerequisite for ps.
