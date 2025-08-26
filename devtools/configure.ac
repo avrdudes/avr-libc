@@ -1,4 +1,4 @@
-AC_INIT(find-python, [0.1], avr-libc-dev@nongnu.org)
+AC_INIT([find-python],[0.1],[https://github.com/avrdudes/avr-libc/issues])
 
 AC_CONFIG_SRCDIR([gen-avr-lib-tree.sh.in])
 
