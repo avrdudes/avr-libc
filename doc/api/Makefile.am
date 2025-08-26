@@ -72,11 +72,25 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-DEMO_LIBS            = $(abs_top_builddir)/avr/lib/avr4/exit.o
-DEMO_LIBS            += $(abs_top_builddir)/avr/devices/atmega8/crtatmega8.o
+MCUDIR = $(abs_top_builddir)/avr/devices/atmega8
+ARHDIR = $(abs_top_builddir)/avr/lib/avr4
+
+EXIT_O = $(ARHDIR)/exit.o
+
+if HAS_DEV_LIB
+CRT_O  = $(MCUDIR)/crtatmega8.o
+# From v2.3 on, the device lib contains startup code essentials.
+MCU_A  = $(MCUDIR)/libatmega8.a
+L_MCU  = -L $(MCUDIR) -latmega8
+else
+CRT_O  = $(MCUDIR)/crtm8.o
+LMCU_A =
+L_MCU  =
+endif
+
 # As avr-gcc must have been installed already, we can reference its
-# library by a -l option.
-DEMO_LIBS            += -lgcc
+# library by -lgcc.  As an alternative, consider -print-libgcc-file-name.
+DEMO_LIBS            = $(EXIT_O) $(CRT_O) $(L_MCU) -lgcc
 DEMO_INC             = -I$(abs_top_srcdir)/include -I$(abs_top_builddir)/include
 
 # All demo projects where we need to run "make dox" beforehand.
@@ -87,6 +101,8 @@ all-local: html pdf
 # Before we can build the dox, we need to build the demo project so that some
 # included files get generated.
 demo:
+	cd $(ARHDIR); make exit.o
+	cd $(MCUDIR); make
 	if test -n "$(DEMO_LIBS)" ; then \
 		NODEFLIBS="-nostartfiles -nodefaultlibs" ; \
 	fi; \
