@@ -353,7 +353,7 @@ def makedir_avr_devices_device(device):
 
     replacements = {
         "<<dev>>" : device.mcu,
-        "<<crt>>" : device.crt_o,
+        "<<crt>>" : device.crt_o.replace (".o", ""),
         # Remove any multilib options.  In order to pick the multilib "base",
         # option -mmcu=<device> is enough.  In the case where fancy variants
         # like "double64" are supported, the assumption is that no object for

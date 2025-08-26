@@ -44,8 +44,8 @@ AVR_TARGET_CVT      = crt<<dev>>-cvt.o
 AVR_INSTALL_DIR     = $(MULTIDIR_<<dev>>)
 endif
 else
-AVR_TARGET_CRT      = <<crt>>
-AVR_TARGET_CVT      = <<crt>>-cvt
+AVR_TARGET_CRT      = <<crt>>.o
+AVR_TARGET_CVT      = <<crt>>-cvt.o
 AVR_INSTALL_DIR     = $(MULTIDIR_<<dev>>)
 endif
 
