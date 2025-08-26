@@ -1,5 +1,6 @@
 /* Copyright (c) 2007  Cliff Lawson
    Copyright (c) 2007  Carlos Lamas
+   Copyright (c) 2025  Ian Gregg
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
