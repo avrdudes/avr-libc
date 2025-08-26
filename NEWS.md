@@ -213,6 +213,8 @@
 - Fixed `strftime`'s return value ([#1040][1040])
   and  `strftime("%r")` ([#1039][1039]).
 
+- Fixed *"Calculations in util/setbaud.h are incorrect"* [#657][657].
+
 ## Pull Requests
 
 - Fix support for ATxmega devices in avr/wdt.h ([#646][646]).
@@ -233,6 +235,7 @@
 [635]: https://github.com/avrdudes/avr-libc/issues/635
 [643]: https://github.com/avrdudes/avr-libc/issues/643
 [646]: https://github.com/avrdudes/avr-libc/issues/646
+[657]: https://github.com/avrdudes/avr-libc/issues/657
 [663]: https://github.com/avrdudes/avr-libc/issues/663
 [765]: https://github.com/avrdudes/avr-libc/issues/765
 [875]: https://github.com/avrdudes/avr-libc/issues/875
