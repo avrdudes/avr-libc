@@ -57,10 +57,12 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 		  ]],[])],
 	    [ AC_MSG_RESULT([yes]) ],
 	    [ AC_MSG_RESULT([no])
+	      STDFIX_AVRLIBC_H_NOT_INCLUDED=STDFIX_AVRLIBC_H_NOT_INCLUDED
 	      AC_MSG_WARN([users must include <stdfix-avrlibc.h> by])
 	      AC_MSG_WARN([hand for full AVR-LibC fixed-point support])]
 	)
     ])
+    AC_SUBST([STDFIX_AVRLIBC_H_NOT_INCLUDED])
     CFLAGS=${old_check_fixed_point_CFLAGS}
 ])
 dnl Local Variables:

@@ -46,7 +46,16 @@
 
 /** \file */
 /** \defgroup avr_stdfix <stdfix.h>: ISO/IEC TR 18037 Fixed-Point Arithmetic
-    \code #include <stdfix.h> \endcode
+\if STDFIX_AVRLIBC_H_NOT_INCLUDED
+    \code
+        #include <stdfix.h>
+        #include <stdfix-avrlibc.h>
+    \endcode
+\else
+    \code
+        #include <stdfix.h>
+    \endcode
+\endif
 
 As an extension, GNU C supports fixed-point types as defined in the
 N1169 draft of ISO/IEC DTR 18037.
