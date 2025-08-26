@@ -59,6 +59,8 @@ if HAS_<<dev>>
 
 if HAS_DEV_LIB
 include $(top_srcdir)/libc/misc/Rules.am
+else
+AVR_TARGET_ASFLAGS += -DCRT_SELF_CONTAINED
 endif
 
 AM_CPPFLAGS = -I$(top_srcdir)/common -I$(top_srcdir)/include -I$(top_builddir)/include
