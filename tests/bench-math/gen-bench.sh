@@ -2,9 +2,9 @@
 
 # Recognized variables:
 #
-# CC=[avr-gcc]		Used to compile bench-float.c.
+# CC=[avr-gcc]		Used to compile bench-libm.c and bench-libf7.c.
 # JOBS=[1]              Number of parallel Jobs for make.
-# TMIES=[1]             Multiplicator for N_VALS from the input files.
+# TIMES=[1]             Multiplicator for N_VALS from the input files.
 # builddir=             Use AVR-LibC from builddir instead of CC's.
 #
 # ./gen-banch.sh A B ... will read files $BASE-A.txt $BASE-B.txt etc.
