@@ -8,7 +8,7 @@ MCU_TARGET     = atmega16
 #MCU_TARGET     = attiny2313
 OPTIMIZE       = -Os
 
-DEFS           =
+DEFS           = -DMCU_NAME='"$(MCU_TARGET)"'
 LIBS           =
 
 # You should not have to change anything below here.

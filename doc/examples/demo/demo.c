@@ -12,7 +12,7 @@
  * value is either incremented or decremented, that's all.
  */
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
@@ -47,16 +47,13 @@ ioinit (void)			/* Note [6] */
 {
     /* Timer 1 is 10-bit PWM (8-bit PWM on some ATtinys). */
     TCCR1A = TIMER1_PWM_INIT;
-    /*
-     * Start timer 1.
-     *
-     * NB: TCCR1A and TCCR1B could actually be the same register, so
-     * take care to not clobber it.
-     */
+
+    /* Start timer 1.
+       NB: TCCR1A and TCCR1B could actually be the same register,
+       so take care to not clobber it.  */
     TCCR1B |= TIMER1_CLOCKSOURCE;
-    /*
-     * Run any device-dependent timer 1 setup hook if present.
-     */
+
+    /* Run any device-dependent timer 1 setup hook if present.  */
 #if defined(TIMER1_SETUP_HOOK)
     TIMER1_SETUP_HOOK();
 #endif
@@ -75,13 +72,12 @@ ioinit (void)			/* Note [6] */
 int
 main (void)
 {
-
     ioinit ();
 
-    /* loop forever, the interrupts are doing the rest */
+    /* Loop forever, the interrupts are doing the rest.  */
 
     for (;;)			/* Note [7] */
         sleep_mode();
 
-    return (0);
+    return 0;
 }

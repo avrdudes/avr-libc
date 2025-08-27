@@ -127,7 +127,7 @@ volatile uint16_t adcval;
  * Where to store the PWM value in EEPROM.  This is used in order
  * to remember the value across a RESET or power cycle.
  */
-uint16_t ee_pwm __attribute__((section(".eeprom"))) = 42;
+uint16_t ee_pwm EEMEM = 42;
 
 /*
  * Current value of the PWM.
@@ -192,11 +192,11 @@ ISR(USART_RXC_vect)
 
 /*
  * Read out and reset MCUCSR early during startup.
+ * This function is run by the startup code and
+ * never called explicitly.
  */
-void handle_mcucsr(void)
-  __attribute__((section(".init3")))
-  __attribute__((naked));
-void handle_mcucsr(void)
+__attribute__((used, unused, naked, section(".init3")))
+static void handle_mcucsr(void)
 {
   mcucsr = MCUCSR;
   MCUCSR = 0;
@@ -374,7 +374,7 @@ main(void)
     MODE_UPDOWN,
     MODE_ADC,
     MODE_SERIAL
-  } __attribute__((packed)) mode = MODE_UPDOWN;
+  } mode = MODE_UPDOWN;
   uint8_t flash = 0;
 
   ioinit();
@@ -383,23 +383,10 @@ main(void)
     printstr_p(PSTR("\nOoops, the watchdog bit me!"));
 
   printstr_p(PSTR("\nHello, this is the avr-gcc/libc "
-		  "demo running on an "
-#if defined(__AVR_ATmega16__)
-		  "ATmega16"
-#elif defined(__AVR_ATmega8__)
-		  "ATmega8"
-#elif defined(__AVR_ATmega48__)
-		  "ATmega48"
-#elif defined(__AVR_ATmega88__)
-		  "ATmega88"
-#elif defined(__AVR_ATmega168__)
-		  "ATmega168"
-#elif defined(__AVR_ATtiny2313__)
-		  "ATtiny2313"
-#else
-		  "unknown AVR"
-#endif
-		  "\n"));
+		  "demo running on an "));
+  /* The MCU_NAME is defined in the Makefile.  */
+  printstr_p(PSTR(MCU_NAME));
+  printstr_p(PSTR("\n"));
 
   for (;;)
     {
@@ -413,12 +400,16 @@ main(void)
 	   */
 	  intflags.tmr_int = 0;
 	  /*
-	   * toggle PD6, just to show the internal clock; should
-	   * yield ~ 48 Hz on PD6
+	   * Toggle PD6, just to show the internal clock; should
+	   * yield ~ 48 Hz on PD6.  Since the operation is not
+	   * atomic, we wrap it it CLI / SEI so that it still works
+	   * when some ISR changes a different bit of the port.
 	   */
+	  cli();
 	  CONTROL_PORT ^= _BV(CLOCKOUT);
+	  sei();
 	  /*
-	   * flash LED on PD7, approximately once per second
+	   * Flash LED on PD7, approximately once per second
 	   */
 	  flash++;
 	  if (flash == 5)

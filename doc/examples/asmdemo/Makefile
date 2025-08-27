@@ -120,8 +120,8 @@ LST = $(ASRC:.S=.lst) $(SRC:.c=.lst)
 
 # Combine all necessary flags and optional flags.
 # Add target processor to flags.
-ALL_CFLAGS = -mmcu=$(MCU) -I. $(CFLAGS)
-ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
+ALL_CFLAGS = -mmcu=$(MCU) $(CFLAGS)
+ALL_ASFLAGS = -mmcu=$(MCU) -x assembler-with-cpp $(ASFLAGS)
 
 
 # Default target.
@@ -177,10 +177,9 @@ extcoff: $(TARGET).elf
 	$(NM) -n $< > $@
 
 
-
 # Link: create ELF output file from object files.
 $(TARGET).elf: $(OBJ)
-	$(CC) $(ALL_CFLAGS) $(OBJ) --output $@ $(LDFLAGS) $(LIBS)
+	$(CC) $(ALL_CFLAGS) $(OBJ) -o $@ $(LDFLAGS) $(LIBS)
 
 
 # Compile: create object files from C source files.

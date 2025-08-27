@@ -61,17 +61,17 @@ Alternatively, the "squid" cable from the JTAG ICE kit can be used if
 available.
 
 <table>
- <tr><td><b>Port</b></td><td><b>Header</b></td><td><b>Color</b></td><td><b>Function</b></td><td><b>Connect to</b></td></tr>
- <tr><td>D0</td> <td>1</td> <td>brown</td>  <td>RxD</td>           <td>RXD of the RS-232 header</td></tr>
- <tr><td>D1</td> <td>2</td> <td>grey</td>   <td>TxD</td>           <td>TXD of the RS-232 header</td></tr>
- <tr><td>D2</td> <td>3</td> <td>black</td>  <td>button "down"</td> <td>SW0 (pin 1 switches header)</td></tr>
- <tr><td>D3</td> <td>4</td> <td>red</td>    <td>button "up"</td>   <td>SW1 (pin 2 switches header)</td></tr>
- <tr><td>D4</td> <td>5</td> <td>green</td>  <td>button "ADC"</td>  <td>SW2 (pin 3 switches header)</td></tr>
- <tr><td>D5</td> <td>6</td> <td>blue</td>   <td>LED</td>           <td>LED0 (pin 1 LEDs header)</td></tr>
- <tr><td>D6</td> <td>7</td> <td>(green)</td><td>clock out</td>     <td>LED1 (pin 2 LEDs header)</td></tr>
- <tr><td>D7</td> <td>8</td> <td>white</td>  <td>1-second flash</td><td>LED2 (pin 3 LEDs header)</td></tr>
- <tr><td>GND</td><td>9</td> <td></td>   <td>unused</td></tr>
- <tr><td>VCC</td><td>10</td><td></td> <td>unused</td></tr>
+ <tr><th>Port <th>Header <th>Color <th>Function <th>Connect to
+ <tr><td>D0 <td>1 <td>brown  <td>RxD           <td>RXD of the RS-232 header
+ <tr><td>D1 <td>2 <td>grey   <td>TxD           <td>TXD of the RS-232 header
+ <tr><td>D2 <td>3 <td>black  <td>button "down" <td>SW0 (pin 1 switches header)
+ <tr><td>D3 <td>4 <td>red    <td>button "up"   <td>SW1 (pin 2 switches header)
+ <tr><td>D4 <td>5 <td>green  <td>button "ADC"  <td>SW2 (pin 3 switches header)
+ <tr><td>D5 <td>6 <td>blue   <td>LED           <td>LED0 (pin 1 LEDs header)
+ <tr><td>D6 <td>7 <td>(green)<td>clock out     <td>LED1 (pin 2 LEDs header)
+ <tr><td>D7 <td>8 <td>white  <td>1-second flash<td>LED2 (pin 3 LEDs header)
+ <tr><td>GND<td>9 <td>   <td>unused
+ <tr><td>VCC<td>10<td> <td>unused
 </table>
 
 \image html largedemo-wiring.jpg "Wiring of the STK500"
@@ -211,7 +211,7 @@ The variable \c ee_pwm is not a variable in the classical C sense that
 could be used as an lvalue or within an expression to obtain its
 value.  Instead, the
 
-\code __attribute__((section(".eeprom"))) \endcode
+\code uint16_t ee_pwm EEMEM ... \endcode
 
 marks it as belonging to the \ref sec_dot_eeprom "EEPROM section".
 This section is merely used as a placeholder so the compiler can
@@ -247,31 +247,57 @@ this application).
 
 \subsection largedemo_code_p4 Part 4: Auxiliary functions
 
-The function \c handle_mcucsr() uses two \c __attribute__ declarators
-to achieve specific goals.  First, it will instruct the compiler to
+\subsubsection largedemo_handle_mcucsr handle_mcucsr()
+
+The function \c handle_mcucsr() uses \c __attribute__ declarators
+to achieve specific goals:
+
+<dl>
+<dt><tt>section(".init3")</tt>
+<dd>
+First, it will instruct the compiler to
 place the generated code into the \ref sec_dot_init ".init3" section
 of the output.  Thus, it will become part of the application
 initialization sequence.  This is done in order to fetch (and clear)
 the reason of the last hardware reset from \c MCUCSR as early as
-possible.  There is a short period of time where the next reset could
-already trigger before the current reason has been evaluated.  This
-also explains why the variable \c mcucsr that mirrors the register's
-value needs to be placed into the .noinit section, because otherwise
-the default initialization (which happens after .init3) would blank
-the value again.
-
+possible.
+<dt><tt>naked</tt>
+<dd>
 As the initialization code is not called using CALL/RET instructions
 but rather concatenated together, the compiler needs to be instructed
 to omit the entire function prologue and epilogue.  This is performed
 by the \e naked attribute.  So while syntactically, \c handle_mcucsr()
 is a function to the compiler, the compiler will just emit the
-instructions for it without setting up any stack frame, and not even a RET instruction
-at the end.
+instructions for it without setting up any stack frame,
+and not even a RET instruction at the end.
+
+Notice that this code is not strictly conforming to GCC, which
+documents that \c naked functions only contain inline asm statements.
+Though the code is simple enough so it doesn't require a stack frame
+as the project is compiled with optimizations turned on.
+
+<dt><tt>used</tt>
+<dd>
+Tell the compiler that handle_mcucsr() is used by the code,
+even though the function is never called. This keeps the compiler
+from optimizing out a seemingly unused function.
+</dl>
+
+There is a short period of time where the next reset could
+already trigger before the current reason has been evaluated.  This
+also explains why the variable \c mcucsr that mirrors the register's
+value needs to be placed into the .noinit section, because otherwise
+the default initialization (which happens after \c \.init3) would blank
+the value again.
+
+\subsubsection largedemo_ioinit ioinit()
 
 Function \c ioinit() centralizes all hardware setup.  The very last
-part of that function demonstrates the use of the EEPROM variable \c
-ee_pwm to obtain an EEPROM address that can in turn be applied as an
+part of that function demonstrates the use of the EEPROM variable
+\c ee_pwm to obtain an EEPROM address that can in turn be applied as an
 argument to \c eeprom_read_word().
+
+\subsubsection largedemo_output_functions UART Output
 
 The following functions handle UART character and string output.
 (UART input is handled by an ISR.)  There are two string output
@@ -280,6 +306,8 @@ fetches the string from \ref avr_pgmspace "program memory".  Both
 functions translate a newline character into a carriage return/newline
 sequence, so a simple \c \\n can be used in the source
 code.
+
+\subsubsection largedemo_set_pwm set_pwm()
 
 The function \c set_pwm() propagates the new PWM value to the PWM,
 performing range checking.  When the value has been changed, the new

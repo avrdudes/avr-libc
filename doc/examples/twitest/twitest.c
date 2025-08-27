@@ -143,7 +143,6 @@ ioinit(void)
 int
 uart_putchar(char c, FILE *unused)
 {
-
   if (c == '\n')
     uart_putchar('\r', 0);
   loop_until_bit_is_set(UCSRA, UDRE);
@@ -361,7 +360,7 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
  * re-invoke it in order to write further data.
  */
 int
-ee24xx_write_page(uint16_t eeaddr, int len, uint8_t *buf)
+ee24xx_write_page(uint16_t eeaddr, int len, const uint8_t *buf)
 {
   uint8_t sla, n = 0;
   int rv = 0;
@@ -494,7 +493,7 @@ ee24xx_write_page(uint16_t eeaddr, int len, uint8_t *buf)
  * have been written.
  */
 int
-ee24xx_write_bytes(uint16_t eeaddr, int len, uint8_t *buf)
+ee24xx_write_bytes(uint16_t eeaddr, int len, const uint8_t *buf)
 {
   int rv, total;
 
@@ -524,14 +523,13 @@ ee24xx_write_bytes(uint16_t eeaddr, int len, uint8_t *buf)
 void
 error(void)
 {
-
   printf("error: TWI status %#x\n", twst);
   exit(0);
 }
 
 FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
-void
+int
 main(void)
 {
   uint16_t a;
@@ -556,7 +554,8 @@ main(void)
 	printf("%02x ", b[x]);
       putchar('\n');
     }
-#define EE_WRITE(addr, str) ee24xx_write_bytes(addr, sizeof(str)-1, str)
+#define EE_WRITE(addr, str) ee24xx_write_bytes(addr, sizeof(str)-1,\
+                                               (const uint8_t*) (str))
   rv = EE_WRITE(55, "The quick brown fox jumps over the lazy dog.");
   if (rv < 0)
     error();
@@ -577,4 +576,5 @@ main(void)
 
   printf("done.\n");
 
+  return 0;
 }
