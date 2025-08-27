@@ -215,6 +215,10 @@
 
 - Fixed *"Calculations in util/setbaud.h are incorrect"* [#657][657].
 
+- Saturate the value that `_delay_us` / `delay_ms` are passing down to
+  `__builtin_avr_delay_cycles` in order to avoid UB ([#681][681])
+  for large values.
+
 ## Pull Requests
 
 - Fix support for ATxmega devices in avr/wdt.h ([#646][646]).
@@ -237,6 +241,7 @@
 [646]: https://github.com/avrdudes/avr-libc/issues/646
 [657]: https://github.com/avrdudes/avr-libc/issues/657
 [663]: https://github.com/avrdudes/avr-libc/issues/663
+[681]: https://github.com/avrdudes/avr-libc/issues/681
 [765]: https://github.com/avrdudes/avr-libc/issues/765
 [875]: https://github.com/avrdudes/avr-libc/issues/875
 [876]: https://github.com/avrdudes/avr-libc/issues/876
