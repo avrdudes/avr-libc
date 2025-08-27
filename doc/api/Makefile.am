@@ -72,54 +72,42 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-MCUDIR = $(abs_top_builddir)/avr/devices/atmega8
-ARHDIR = $(abs_top_builddir)/avr/lib/avr4
-
-EXIT_O = $(ARHDIR)/exit.o
-
-if HAS_DEV_LIB
-CRT_O  = $(MCUDIR)/crtatmega8.o
-# From v2.3 on, the device lib contains startup code essentials.
-MCU_A  = $(MCUDIR)/libatmega8.a
-L_MCU  = -L $(MCUDIR) -latmega8
-else
-CRT_O  = $(MCUDIR)/crtm8.o
-LMCU_A =
-L_MCU  =
-endif
-
-# As avr-gcc must have been installed already, we can reference its
-# library by -lgcc.  As an alternative, consider -print-libgcc-file-name.
-DEMO_LIBS            = $(EXIT_O) $(CRT_O) $(L_MCU) -lgcc
-DEMO_INC             = -I$(abs_top_srcdir)/include -I$(abs_top_builddir)/include
-
 # All demo projects where we need to run "make dox" beforehand.
-DEMOS                = demo largedemo stdiodemo
+DOX_DEMOS            = demo largedemo stdiodemo
 
 all-local: html pdf
 
 # Before we can build the dox, we need to build the demo project so that some
 # included files get generated.
-demo:
-	cd $(ARHDIR); make exit.o
-	cd $(MCUDIR); make
-	if test -n "$(DEMO_LIBS)" ; then \
-		NODEFLIBS="-nostartfiles -nodefaultlibs" ; \
-	fi; \
-	cd $(top_srcdir)/doc/examples/demo && \
-		${MAKE} DEFS="$(DEMO_INC)"  \
-			LIBS="$$NODEFLIBS $(DEMO_LIBS)" all
+demo: example-demo
 
 # Generate EPS files from JPG for demos.
 demodox:
-	for demo in $(DEMOS); do \
+	for demo in $(DOX_DEMOS); do \
 	  ( cd $(top_srcdir)/doc/examples/$$demo && \
 	  ${MAKE} dox ); \
 	done
 
+# Copy examples to builddir.
 demo-examples:
 	( cd $(top_builddir)/doc/examples \
 	  && ${MAKE} demo-examples )
+
+
+# Forward to building the very ../examples.  Just run
+#
+#   make all-examples
+#   make example-asmdemo
+#
+# by hand to check that the examples can be built.
+
+ALL_EXAMPLES = demo asmdemo largedemo stdiodemo twitest
+
+.PHONY: all-examples $(ALL_EXAMPLES:%=example-%)
+
+all-examples $(ALL_EXAMPLES:%=example-%):
+	cd ../examples; $(MAKE) $@
+
 
 # images for inclusion in HTML and LaTeX documents
 
@@ -153,7 +141,7 @@ uninstall-local:
 
 clean-local:
 	rm -rf $(USER_MANUAL) latex_src man
-	for demo in $(DEMOS); do \
+	for demo in $(DOX_DEMOS); do \
 	  ( cd $(top_srcdir)/doc/examples/$$demo && \
 	  ${MAKE} clean ) ; \
 	done

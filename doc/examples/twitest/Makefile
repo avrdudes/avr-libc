@@ -32,7 +32,7 @@ all:	twitest.bin
 
 OBJS=twitest.o
 twitest.out: $(OBJS)
-	$(CC) -o twitest.out $(CFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS)
+	$(CC) -o twitest.out $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
 
 clean:
 	rm -f *~ *.out *.bin *.hex *.srec *.s *.o *.pdf *core

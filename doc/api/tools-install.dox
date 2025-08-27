@@ -369,7 +369,7 @@ can save you some space.
 \warning You \b must install
 \ref install_avr_binutils "avr-binutils",
 \ref install_avr_gcc "avr-gcc" and make sure your
-\ref path "path is set" properly before installing AVR-LibC.
+\ref path "path is set" properly before configuring abd building AVR-LibC.
 
 \note If you have obtained the latest AVR-LibC from \ref using_git "git",
 you will have to run the \c \./bootstrap script before using either of the
@@ -400,6 +400,25 @@ When you want to build and install with extra options, you can for example:
 $ make CFLAGS=-Werror CCASFLAGS=-Werror
 $ make install prefix=/home/me/install/my-avr-gcc
 \endverbatim
+
+In order to build the examples:
+\verbatim
+$ # in ./build/doc/examples
+$ make all-examples
+$ make example-largedemo # etc.
+\endverbatim
+
+In order to build the HTML and PDF documentation:
+\verbatim
+$ # in ./build/doc/api
+$ make html
+$ make pdf
+$ make install-dox-html
+\endverbatim
+Note that Doxygen doesn't care about dependencies, thus when you
+made changes to the sources and want to re-build the documentation,
+better run <tt>make clean</tt> in <tt>build/doc/api</tt> before
+building the doc.
 
 
 \subsection install_avrprog AVRDUDE

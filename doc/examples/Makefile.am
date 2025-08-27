@@ -111,3 +111,73 @@ demo-examples:
 	done
 
 .PHONY: demo-examples
+
+#############################################################################
+## Make sure that the provided examples can be built.
+## Except for example-demo used by doc/api/Makefile.am, the targets
+## are used from nowhere, but can be run by hand like:
+##
+##    make all-examples
+##    make example-asmdemo
+##
+## The requirement is that the respective demo Makefiles all compile
+## and link with CC, and have $(LIBS) at the end of the link command.
+##
+## All the required prerequisites are build by hand below so that you
+## can build an example without building the entire avr-libc first.
+
+.PHOMNY: all-examples $(DEMO_DIRS:%=example-%)
+
+all-examples: $(DEMO_DIRS:%=example-%)
+
+# We must know the MCUs so we can build the prerequisite crt and multilib.
+MCU_demo = atmega8
+MCU_asmdemo = attiny13
+MCU_twitest = atmega128
+MCU_stdiodemo = atmega16
+MCU_largedemo = atmega16
+
+# The relative multilib path for mcu $1.
+Pml = $(shell $(CC) -print-multi-directory -mmcu=$1)
+
+# Map multilib directory to ident: avr2/tiny-stack => avr2_tiny_stack.
+Mdir2Id = $(subst -,_,$(subst /,_,$(subst .,avr2,$1)))
+
+# The absolute path to the multilib for mcu $1 in $builddir/avr/lib.
+McuMlib = $(abs_top_builddir)/avr/lib/$(call Mdir2Id,$(call Pml,$1))
+
+# The absolute path to mcu $1 in $builddir/avr/devices.
+McuDevi = $(abs_top_builddir)/avr/devices/$1
+
+# Filter out elements containing "cvt" from list $1.
+FiltCvt = $(foreach w,$1,$(if $(findstring cvt,$w),,$w))
+
+# The absolut path to crt*.o for mcu $1.
+McuCrto = $(call FiltCvt,$(wildcard $(call McuDevi,$1)/crt*.o))
+
+# The device library for $1 as -l<mcu>, if any.
+if HAS_DEV_LIB
+lMcuLib = -l$1
+endif
+
+# CC to build the demos.
+CCdemo = $(CC) -I$(abs_top_srcdir)/include -I$(abs_top_builddir)/include
+
+# LIBS passed to Makefiles.
+LIBSdemo = -nostartfiles -nodefaultlibs \
+	   $(call McuCrto,$1) \
+	   -L$(call McuMlib,$1) \
+	   -L$(call McuDevi,$1) \
+	   -Wl,--start-group -lm -lc -lgcc $(call lMcuLib,$1) -Wl,--end-group
+
+$(DEMO_DIRS:%=example-%) : example-%:
+	@echo ""
+	@echo "== $@: $(MCU_$*): prerequisites =="
+	cd $(call McuMlib,$(MCU_$*)); $(MAKE)
+	cd $(call McuDevi,$(MCU_$*)); $(MAKE)
+	@echo ""
+	@echo "== $@: $(MCU_$*) =="
+	cd $(top_srcdir)/doc/examples/$*; $(MAKE) clean
+	cd $(top_srcdir)/doc/examples/$*; $(MAKE) \
+		CC="$(call CCdemo,$(MCU_$*))" \
+		LIBS="$(call LIBSdemo,$(MCU_$*))"

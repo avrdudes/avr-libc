@@ -58,7 +58,7 @@ SCANF_LIB_FLOAT = -Wl,-u,vfscanf -lscanf_flt
 
 SCANF_LIB =
 
-MATH_LIB = -lm
+LIBS = $(PRINTF_LIB) $(SCANF_LIB) -lm
 
 # External memory options
 
@@ -73,7 +73,7 @@ MATH_LIB = -lm
 EXTMEMOPTS =
 
 #LDMAP = $(LDFLAGS) -Wl,-Map=$(TARGET).map,--cref
-LDFLAGS = $(EXTMEMOPTS) $(LDMAP) $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
+LDFLAGS = $(EXTMEMOPTS) $(LDMAP)
 
 
 # Programming support using avrdude. Settings and variables.
@@ -180,7 +180,7 @@ extcoff: $(TARGET).elf
 
 # Link: create ELF output file from object files.
 $(TARGET).elf: $(OBJ)
-	$(CC) $(ALL_CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
+	$(CC) $(ALL_CFLAGS) $(OBJ) --output $@ $(LDFLAGS) $(LIBS)
 
 
 # Compile: create object files from C source files.
