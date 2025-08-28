@@ -38,12 +38,14 @@ AC_DEFUN([CHECK_BUILTIN_DELAY_CYCLES],[dnl
     if test "$?" != "0"
     then
       HAS_DELAY_CYCLES=1
-      AC_MSG_RESULT([yes])
+      HAS_DELAY_CYCLES_yesno=yes
     else
       HAS_DELAY_CYCLES=0
-      AC_MSG_RESULT([no])
+      HAS_DELAY_CYCLES_yesno=no
     fi
+    AC_MSG_RESULT([$HAS_DELAY_CYCLES_yesno])
     AC_SUBST(HAS_DELAY_CYCLES)
+    AC_SUBST(HAS_DELAY_CYCLES_yesno)
 ])
 dnl Local Variables:
 dnl mode: autoconf

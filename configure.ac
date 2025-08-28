@@ -213,19 +213,24 @@ CHECK_OBJDUMP_MINUS_H([whether data region starts at __DATA_REGION_ORIGIN__],dnl
     [.data],dnl
     [-mmcu=avr2], [-mavr2 --defsym __DATA_REGION_ORIGIN__=0x800066],
     ['\.data.*00800066'],
-    AC_DEFINE([HAVE_LDSCRIPT_PR29741], 1,
-        [Define if the ld script uses __DATA_REGION_ORIGIN__ as data start.]),
+    [ HAVE_LDSCRIPT_PR29741_yesno=yes
+      AC_DEFINE([HAVE_LDSCRIPT_PR29741], 1,
+        [Define if the ld script uses __DATA_REGION_ORIGIN__ as data start.]) ],
+    [ HAVE_LDSCRIPT_PR29741_yesno=no ]
 )
+AC_SUBST(HAVE_LDSCRIPT_PR29741_yesno)
 
 dnl Outcome is consumed by crt1/gcrt1.S
 CHECK_OBJDUMP_MINUS_H([whether text region starts at __TEXT_REGION_ORIGIN__],dnl
     [.data],dnl
     [-mmcu=avr2], [-mavr2 --defsym __TEXT_REGION_ORIGIN__=0x22],
     ['\.text.*00000022'],
-    AC_DEFINE([HAVE_LDSCRIPT_PR31177], 1,
-        [Define if the ld script uses __TEXT_REGION_ORIGIN__ as text start.]),
+    [ HAVE_LDSCRIPT_PR31177_yesno=yes
+      AC_DEFINE([HAVE_LDSCRIPT_PR31177], 1,
+        [Define if the ld script uses __TEXT_REGION_ORIGIN__ as text start.]) ],
+    [ HAVE_LDSCRIPT_PR31177_yesno=no ]
 )
-
+AC_SUBST(HAVE_LDSCRIPT_PR31177_yesno)
 
 dnl Build a list of all .h files in  $srcdir/include/avr.
 dnl Used by include/avr/Makefile.am::avr_HEADERS.
@@ -404,6 +409,10 @@ CHECK_MULTI_OPTION([-mdouble=32], [double32], [double32])
 CHECK_MULTI_OPTION([-mdouble=64], [double64], [double64])
 CHECK_MULTI_OPTION([-mlong-double=32], [long_double32], [long-double32])
 CHECK_MULTI_OPTION([-mlong-double=64], [long_double64], [long-double64])
+AS_IF([test "x$DOX_MULTI_OPT" = "x"],
+      [DOX_MULTI_OPT=no],
+      [DOX_MULTI_OPT=`echo "$DOX_MULTI_OPT" | sed 's:,:<br>:g'`])
+AC_SUBST(DOX_MULTI_OPT)
 
 # avr1
 AM_CONDITIONAL(HAS_avr1, true)

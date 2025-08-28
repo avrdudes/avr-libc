@@ -116,17 +116,23 @@
    The macro #F_CPU is supposed to be defined to a
    constant defining the CPU clock frequency (in Hertz).
 
-   The maximal possible delay is 262.14 ms / F_CPU in MHz.
+-  If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
+\if GIT_BRANCH_IS_ONLINEDOCS
+   support,
+\else
+   \ref faq_toolchain_support "support",
+\endif
+   the maximal possible delay is 4294967.04 ms&nbsp;/&nbsp;F_CPU in MHz.
+   Values greater than that are saturated to this value.
+
+-  Otherwise, the maximal possible delay is 262.14 ms / F_CPU in MHz.
 
    When the user request delay which exceed the maximum possible one,
    _delay_ms() provides a decreased resolution functionality. In this
    mode _delay_ms() will work with a resolution of 1/10&nbsp;ms, providing
    delays up to 6.5535 seconds (independent from CPU frequency).  The
    user will not be informed about decreased resolution.
-
-   If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
-   support, maximal possible delay is 4294967.04 ms&nbsp;/&nbsp;F_CPU in MHz.
-   Values greater than that are saturated to this value.
+.
 
    Conversion of \c __ms into clock cycles may not always result in
    an integral value.  By default, the clock cycles are rounded up to the next
@@ -200,15 +206,21 @@ _delay_ms(double __ms)
    The macro #F_CPU is supposed to be defined to a
    constant defining the CPU clock frequency (in Hertz).
 
-   The maximal possible delay is 768 &mu;s / F_CPU in MHz.
+-  If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
+\if GIT_BRANCH_IS_ONLINEDOCS
+   support,
+\else
+   \ref faq_toolchain_support "support",
+\endif
+   maximal possible delay is 4294967040 &mu;s&nbsp;/&nbsp;F_CPU in MHz.
+   Values greater than that are saturated to this value.
+
+-  Otherwise, the maximal possible delay is 768 &mu;s / F_CPU in MHz.
 
    If the user requests a delay greater than the maximal possible one,
    _delay_us() will automatically call _delay_ms() instead.  The user
    will not be informed about this case.
-
-   If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
-   support, maximal possible delay is 4294967040 &mu;s&nbsp;/&nbsp;F_CPU in MHz.
-   Values greater than that are saturated to this value.
+.
 
    Conversion of \c __us into clock cycles may not always result in
    integer.  By default, the clock cycles are rounded up to next

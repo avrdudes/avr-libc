@@ -2367,6 +2367,31 @@ that has been configured for the following tool versions:
 <tr><td>AVR-LibC   <td><tt>@AVR_LIBC_VERSION@</tt>
 </table>
 
+\anchor faq_toolchain_support
+
+The following features have been detected when building AVR-LibC.
+They influence how pars of the library behave.
+
+<table>
+<tr><th>Feature <th>Supported <th>Affects
+<tr>
+  <td>\c __builtin_avr_delay_cycles()
+  <td> @HAS_DELAY_CYCLES_yesno@
+  <td> \c <util/delay.h>
+<tr>
+  <td> \ref sec_memory_regions "text" starts at \c __TEXT_REGION_ORIGIN__
+  <td> @HAVE_LDSCRIPT_PR31177_yesno@
+  <td> Starup code
+<tr>
+  <td> \ref sec_memory_regions "data" starts at \c __DATA_REGION_ORIGIN__
+  <td> @HAVE_LDSCRIPT_PR29741_yesno@
+  <td> Starup code
+<tr>
+  <td> 64-bit floating-point
+  <td> @DOX_MULTI_OPT@
+  <td> Libraries
+</table>
+
 \endif
 
 <small>Back to \ref faq_index.</small>
