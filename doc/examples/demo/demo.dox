@@ -292,7 +292,9 @@ save the following in a file called \c Makefile.
 \note This \c Makefile can only be used as input for the GNU version of \c
 make.
 
-\include demo/Makefile
+\dontinclude demo/Makefile
+
+\until eeprom ehex ebin esrec
 
 \section demo_sourceref Reference to the source code
 

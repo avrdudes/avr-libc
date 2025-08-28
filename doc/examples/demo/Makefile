@@ -12,12 +12,10 @@ LIBS =
 
 # You should not have to change anything below here.
 
-CC             = avr-gcc
+CC      = avr-gcc
 
-# "override" is only needed by the AVR-LibC build system.
-
-override CFLAGS  = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
-override LDFLAGS = -Wl,-Map,$(PRG).map
+CFLAGS  = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
+LDFLAGS = -Wl,-Map,$(PRG).map
 
 OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
@@ -39,6 +37,8 @@ lst:  $(PRG).lst
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
 
+.PHONY: all clean lst
+
 # Rules for building the .text rom images
 
 text: hex bin srec
@@ -55,6 +55,8 @@ srec: $(PRG).srec
 
 %.bin: %.elf
 	$(OBJCOPY) -j .text -j .data -O binary $< $@
+
+.PHONY: hex bin srec
 
 # Rules for building the .eeprom rom images
 
@@ -76,11 +78,16 @@ esrec: $(PRG)_eeprom.srec
 	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O binary $< $@ \
 	|| { echo empty $@ not generated; exit 0; }
 
-# Every thing below here is used by avr-libc's build system and can be ignored
+.PHONY: eeprom ehex ebin esrec
+# The line above is used as an \until marker in demo.dox.
+
+# Everything below here is used by AVR-LibC's build system and can be ignored
 # by the casual user.
 
 FIG2DEV                 = fig2dev
 EXTRA_CLEAN_FILES       = *.hex *.bin *.srec
+
+.PHONY: dox eps png pdf
 
 dox: eps png pdf
 
