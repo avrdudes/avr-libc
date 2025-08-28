@@ -218,29 +218,31 @@ Some points of interest in the \c demo.map file are:
 \skip .rela.plt
 \until __ctors_start
 
-The \c .text segment (where program instructions are stored) starts at
-location 0x0.
+The \ref sec_dot_text "\c \.text segment" (where program instructions
+are stored) starts at location 0x0 and occupies
+\htmlinclude textsize.txt
+\latexinclude textsize.txt
+bytes.
 
 \skipline *(.fini2)
 \until __eeprom_end
 
-The last address in the \c .text segment is location \c 0x114 ( denoted by \c
-_etext ), so the instructions use up 276 bytes of FLASH.
+The last address in the \c .text segment is denoted by \c _etext.
 
-The \c .data segment (where initialized static variables are stored) starts
-at location \c 0x60, which is the first address after the register bank on an
+The \c \.data segment (where initialized static variables are stored) starts
+at location 0x60, which is the first address after the register bank on an
 ATmega8 processor.
 
-The next available address in the \c .data segment is also location \c 0x60,
+The next available address in the \c \.data segment is also location 0x60,
 so the application has no initialized data.
 
-The \c .bss segment (where uninitialized data is stored) starts at location
-\c 0x60.
+The \c \.bss segment (where uninitialized data is stored) starts at
+location 0x60.
 
 The next available address in the \c .bss segment is location 0x63, so the
 application uses 3 bytes of uninitialized data.
 
-The \c .eeprom segment (where EEPROM variables are stored) starts at
+The \c \.eeprom segment (where EEPROM variables are stored) starts at
 location 0x0.
 
 The next available address in the \c .eeprom segment is also location 0x0,
