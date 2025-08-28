@@ -31,7 +31,7 @@ MAINTAINERCLEANFILES = Makefile.in stamp-vti
 CLEANFILES           = *.html *.pdf *.ma *.mas \
                        malloc-std.png malloc-x1.png malloc-x2.png \
                        *.eps fix_png \
-                       doxygen.config main_page.dox doxygen-pdf.config
+                       doxygen.config main_page.dox faq.dox doxygen-pdf.config
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        dox_latex_header.tex \
