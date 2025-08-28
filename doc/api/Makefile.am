@@ -166,6 +166,10 @@ clean-local:
 # This version is further color-inverted, and exported to
 # avr-libc-logo-inverted.png, to be used for "dark mode" HTML display.
 
+# Let config.status rebuild headers and dox from .in.
+doxygen.config:	$(top_builddir)/include/util/delay.h \
+		main_page.dox faq.dox
+
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 	doxygen doxygen.config
 	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
