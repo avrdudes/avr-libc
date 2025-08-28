@@ -44,9 +44,9 @@ AC_DEFUN([CHECK_MULTI_OPTION],[dnl
     if echo "$pml" | grep -e "$opt" > /dev/null 2>&1; then
        AC_MSG_RESULT([yes, in $3])
        DIR_$2=$3
-       AS_IF([test "x$DOX_MULTI_OPT" != "x"],
-         [DOX_MULTI_OPT="${DOX_MULTI_OPT},"])
-       DOX_MULTI_OPT="${DOX_MULTI_OPT}@c @$1"
+       AS_IF([test "x$DOX_MULTI_OPT" = "x"],
+         [DOX_MULTI_OPT=yes],)
+       DOX_MULTI_OPT="${DOX_MULTI_OPT}, @c @$1"
     else
        AC_MSG_RESULT(no)
        DIR_$2=

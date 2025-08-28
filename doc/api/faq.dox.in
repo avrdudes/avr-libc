@@ -2392,7 +2392,7 @@ They influence how pars of the library behave.
 <tr>
   <td> 64-bit floating-point
   <td> @DOX_MULTI_OPT@
-  <td> Libraries
+  <td> \c <math.h>, Libraries
 <tr>
   <td>
 \if STDFIX_AVRLIBC_H_NOT_INCLUDED

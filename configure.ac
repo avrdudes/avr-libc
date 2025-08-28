@@ -408,14 +408,22 @@ dnl The rest of the file deals with the files as geerated by mlib-gen.py
 dnl during bootstrap.  Macros are defined that are used by the m4 files
 dnl located in m4-gen.
 
+AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
+	#if !defined(__SIZEOF_LONG_DOUBLE__) || __SIZEOF_LONG_DOUBLE__ != 8
+	int a[-1];
+	#endif
+	]],[])],
+	[DOX_MULTI_OPT=yes],)
+
 # Used by Device.am i.e. avr/devices/<device>/Makefile.am.
 CHECK_MULTI_OPTION([-mdouble=32], [double32], [double32])
 CHECK_MULTI_OPTION([-mdouble=64], [double64], [double64])
 CHECK_MULTI_OPTION([-mlong-double=32], [long_double32], [long-double32])
 CHECK_MULTI_OPTION([-mlong-double=64], [long_double64], [long-double64])
+
 AS_IF([test "x$DOX_MULTI_OPT" = "x"],
       [DOX_MULTI_OPT=no],
-      [DOX_MULTI_OPT=`echo "$DOX_MULTI_OPT" | sed 's:,:<br>:g'`])
+      [DOX_MULTI_OPT=`echo "$DOX_MULTI_OPT" | sed 's/, /: /'`])
 AC_SUBST(DOX_MULTI_OPT)
 
 # avr1
