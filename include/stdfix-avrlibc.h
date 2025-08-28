@@ -45,7 +45,8 @@
 #include <bits/attribs.h>
 
 /** \file */
-/** \defgroup avr_stdfix <stdfix.h>: ISO/IEC TR 18037 Fixed-Point Arithmetic
+/** \anchor stdfix_h
+    \defgroup avr_stdfix <stdfix.h>: ISO/IEC TR 18037 Fixed-Point Arithmetic
 \if STDFIX_AVRLIBC_H_NOT_INCLUDED
     \code
         #include <stdfix.h>

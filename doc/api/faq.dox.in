@@ -2393,7 +2393,21 @@ They influence how pars of the library behave.
   <td> 64-bit floating-point
   <td> @DOX_MULTI_OPT@
   <td> Libraries
+<tr>
+  <td>
+\if STDFIX_AVRLIBC_H_NOT_INCLUDED
+    Fixed-point<sup>1</sup>
+\else
+    Fixed-point
+\endif
+  <td> @HAS_FIXED_POINT_yesno@
+  <td> <tt>&lt;\ref stdfix_h "stdfix.h"&gt;</tt>, libraries
 </table>
+
+\if STDFIX_AVRLIBC_H_NOT_INCLUDED
+<sup>1</sup>You must include \c <stdfix-avrlibc.h> by hand after
+\c <stdfix.h> for AVR-LibC fixed-point support.
+\endif
 
 \endif
 

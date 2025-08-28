@@ -39,14 +39,14 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 		fract x3;
 		accum x4;
 		]],[])],
-	[has_fixed_point=yes],
-	[has_fixed_point=no])
-    AC_MSG_RESULT([$has_fixed_point])
-    AM_CONDITIONAL(BUILD_FXLIB, [test $has_fixed_point = yes])
+	[HAS_FIXED_POINT_yesno=yes],
+	[HAS_FIXED_POINT_yesno=no])
+    AC_MSG_RESULT([$HAS_FIXED_POINT_yesno])
+    AM_CONDITIONAL(BUILD_FXLIB, [test $HAS_FIXED_POINT_yesno = yes])
     dnl
     old_check_fixed_point_CFLAGS=${CFLAGS}
     CFLAGS="-I${srcdir}/include"
-    AS_IF([test $has_fixed_point = yes],[
+    AS_IF([test $HAS_FIXED_POINT_yesno = yes],[
 	AC_MSG_CHECKING([whether <stdfix.h> includes <stdfix-avrlibc.h>])
 	AC_COMPILE_IFELSE(
 	    [ AC_LANG_SOURCE([[
@@ -63,6 +63,7 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 	)
     ])
     AC_SUBST([STDFIX_AVRLIBC_H_NOT_INCLUDED])
+    AC_SUBST([HAS_FIXED_POINT_yesno])
     CFLAGS=${old_check_fixed_point_CFLAGS}
 ])
 dnl Local Variables:
