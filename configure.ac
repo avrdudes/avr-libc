@@ -265,6 +265,10 @@ AC_ARG_ENABLE(device-lib,
 
 dnl define HAS_DEV_LIB if device library enabled
 AM_CONDITIONAL(HAS_DEV_LIB, [test x$enable_device_lib = xtrue])
+AS_IF([test x$enable_device_lib = xtrue],
+      [HAS_DEV_LIB_yesno=yes],
+      [HAS_DEV_LIB_yesno=no])
+AC_SUBST(HAS_DEV_LIB_yesno)
 
 dnl Does AC_SUBST(FNO_JUMP_TABLES).
 CHECK_JUMP_TABLES_ISSUE

@@ -2401,7 +2401,11 @@ They influence how pars of the library behave.
     Fixed-point
 \endif
   <td> @HAS_FIXED_POINT_yesno@
-  <td> <tt>&lt;\ref stdfix_h "stdfix.h"&gt;</tt>, libraries
+  <td> <tt>&lt;\ref stdfix_h "stdfix.h"&gt;</tt>, Libraries
+<tr>
+  <td> Device library <tt>lib<i>mcu</i>.a</tt>
+  <td> @HAS_DEV_LIB_yesno@
+  <td> Startup code, Libraries
 </table>
 
 \if STDFIX_AVRLIBC_H_NOT_INCLUDED
