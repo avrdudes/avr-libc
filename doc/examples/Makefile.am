@@ -178,6 +178,6 @@ $(DEMO_DIRS:%=example-%) : example-%:
 	@echo ""
 	@echo "== $@: $(MCU_$*) =="
 	cd $(top_srcdir)/doc/examples/$*; $(MAKE) clean
-	cd $(top_srcdir)/doc/examples/$*; $(MAKE) \
+	cd $(top_srcdir)/doc/examples/$*; $(MAKE) AWK=$(AWK) \
 		CC="$(call CCdemo,$(MCU_$*))" \
 		LIBS="$(call LIBSdemo,$(MCU_$*))"

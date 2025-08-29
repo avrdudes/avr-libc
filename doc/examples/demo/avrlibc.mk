@@ -23,7 +23,9 @@ pdf: $(PRG).pdf
 
 all: textsize.txt
 
-S = cat demo.map | grep '^\.text *0x' | awk '{ print $$3 }'
+AWK = awk
+
+S = cat demo.map | grep '^\.text *0x' | $(AWK) '{ print $$3 }'
 
 textsize.txt: $(PRG).elf
 	echo "$(shell $S) = $(shell echo $$((`$S`)))" > $@
