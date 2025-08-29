@@ -39,8 +39,8 @@ dnl produce ./avr/devices/<device>/Makefile.am.
 AC_DEFUN([CHECK_MULTI_OPTION],[dnl
     AC_MSG_CHECKING([if ${CC} supports multilib option $1])
 
-    pml=`${CC} -print-multi-lib | sed 's/@/ -/g'`
-    opt=`echo "$1" | sed 's/-/\\\\-/g'`
+    pml=`${CC} -print-multi-lib | $SED 's/@/ -/g'`
+    opt=`echo "$1" | $SED 's/-/\\\\-/g'`
     if echo "$pml" | $GREP -e "$opt" > /dev/null 2>&1; then
        AC_MSG_RESULT([yes, in $3])
        DIR_$2=$3

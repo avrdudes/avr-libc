@@ -29,7 +29,7 @@
 dnl Set $1 to $2--version.  Mind spaces after $2!
 AC_DEFUN([SUBST_VERSION_STRING],[dnl
     dnl 'head' has no uniform interface: use 'sed' instead.
-    $1=`$2--version 2> /dev/null | sed '1p;d'`
+    $1=`$2--version 2> /dev/null | $SED '1p;d'`
     AC_SUBST($1)
 ])
 dnl Local Variables:

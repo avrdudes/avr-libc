@@ -209,6 +209,7 @@ AC_PROG_GREP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
+AC_PROG_SED
 
 dnl Outcome is consumed by crt1/gcrt1.S
 CHECK_OBJDUMP_MINUS_H([whether data region starts at __DATA_REGION_ORIGIN__],dnl
@@ -425,7 +426,7 @@ CHECK_MULTI_OPTION([-mlong-double=64], [long_double64], [long-double64])
 
 AS_IF([test "x$DOX_MULTI_OPT" = "x"],
       [DOX_MULTI_OPT=no],
-      [DOX_MULTI_OPT=`echo "$DOX_MULTI_OPT" | sed 's/, /: /'`])
+      [DOX_MULTI_OPT=`echo "$DOX_MULTI_OPT" | $SED 's/, /: /'`])
 AC_SUBST(DOX_MULTI_OPT)
 
 # avr1

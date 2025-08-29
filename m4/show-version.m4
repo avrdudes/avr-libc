@@ -32,7 +32,7 @@
 dnl Show the --version of program $1 with label $2.
 AC_DEFUN([SHOW_VERSION],[dnl
     dnl 'head' has no uniform interface: use 'sed' instead.
-    my_ver=`$1 --version | sed '1p;d'`
+    my_ver=`$1 --version | $SED '1p;d'`
     AC_MSG_NOTICE([Using $2=$1: $my_ver])
 ])
 dnl Local Variables:

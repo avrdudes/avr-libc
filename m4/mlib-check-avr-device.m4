@@ -48,9 +48,9 @@ AC_DEFUN([CHECK_AVR_DEVICE],[dnl
       AC_MSG_RESULT([yes, in ${MULTIDIR_$1}])
       dnl Same replacements as performed by mlib-gen.py::to_ident().
       ident=`echo "${MULTIDIR_$1}" \
-		| sed -e 's:^\.$:avr2:' \
-		| sed -e 's:/:_:g' \
-		| sed -e 's:-:_:g' \
+		| $SED -e 's:^\.$:avr2:' \
+		| $SED -e 's:/:_:g' \
+		| $SED -e 's:-:_:g' \
 		`
       eval "DEVLIST_${ident}=\"\${DEVLIST_${ident}} $1\""
       SUPPORTED_MCUS="${SUPPORTED_MCUS} $1"
