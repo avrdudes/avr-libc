@@ -1,4 +1,4 @@
-/* Copyright (c) 2002,2005,2006 Theodore Roth
+/* Copyright (c) 2025 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -33,104 +33,75 @@ feel as to how the tools are used and how a \c Makefile can be configured.
 
 \section demo_project_desc The Project
 
-This project will use the pulse-width modulator (\c PWM) to ramp an LED on
-and off every two seconds.  An AT90S2313 processor will be used as the
-controller.  The circuit for this demonstration is shown in the
-\ref demo_project_schematic "schematic diagram". If you have a development
-kit, you should be able to use it, rather than build the circuit, for this
-project.
+This project will use pulse-width modulation (\c PWM) to ramp an
+LED on and off every two seconds.  This project once used to start out
+with a simple homemade AVR circuit.  Meanwhile, in particular the
+Arduino project has provided a large boost to the use of AVR
+microcontrollers, and Arduino compatible hardware is ubiquitous.  We
+thus concentrate on something compatible to an Arduino Nano with an
+ATmega328P (or PB) MCU.
 
-\note Meanwhile, the AT90S2313 became obsolete.  Either use its
-successor, the (pin-compatible) ATtiny2313 for the project, or perhaps
-the ATmega8 or one of its successors (ATmega48/88/168) which have
-become quite popular since the original demo project had been
-established.  For all these more modern devices, it is no longer
-necessary to use an external crystal for clocking as they ship with
-the internal 1 MHz oscillator enabled, so C1, C2, and Q1 can be
-omitted.  Normally, for this experiment, the external circuitry on
-/RESET (R1, C3) can be omitted as well, leaving only the AVR, the LED,
-the bypass capacitor C4, and perhaps R2.  For the ATmega8/48/88/168,
-use PB1 (pin 15 at the DIP-28 package) to connect the LED to.
-Additionally, this demo has been ported to many different other AVRs.
-The location of the respective OC pin varies between different AVRs,
-and it is mandated by the AVR hardware.
-
-\anchor demo_project_schematic
-\image html demo.png "Schematic of circuit for demo project"
-\image latex demo.eps "Schematic of circuit for demo project" width=4in
+Alas, the only user LED on these Arduino devices is not attached to a
+GPIO pin that can be directly controlled by the timer hardware to
+generate the PWM signal. We thus toggle the LED in software.
 
 The source code is given in \ref demo_project_src "demo.c".  For the sake of
 this example, create a file called \c demo.c containing this source code.
 Some of the more important parts of the code are:
 
 \par Note [1]:
-As the AVR microcontroller series has been developed during the past
-years, new features have been added over time.  Even though the basic
-concepts of the timer/counter1 are still the same as they used to be
-back in early 2001 when this simple demo was written initially, the
-names of registers and bits have been changed slightly to reflect the
-new features.  Also, the port and pin mapping of the output compare
-match 1A (or 1 for older devices) pin which is used to control the LED
-varies between different AVRs.  The file <tt>iocompat.h</tt> tries to
-abstract between all this differences using some preprocessor \c \#ifdef
-statements, so the actual program itself can operate on a common set of
-symbolic names.  The macros defined by that file are:
-
-- \c OCR the name of the OCR register used to control the PWM (usually
-either OCR1 or OCR1A)
-- \c DDROC the name of the DDR (data direction register) for the OC
-output
-- \c OC1 the pin number of the OC1[A] output within its port
-- \c TIMER1_TOP the TOP value of the timer used for the PWM (1023
-for 10-bit PWMs, 255 for devices that can only handle an 8-bit
-PWM)
-- \c TIMER1_PWM_INIT the initialization bits to be set into control
-register 1A in order to setup 10-bit (or 8-bit) phase and frequency
-correct PWM mode
-- \c TIMER1_CLOCKSOURCE the clock bits to set in the respective
-control register to start the PWM timer; usually the timer runs at
-full CPU clock for 10-bit PWMs, while it runs on a prescaled clock
-for 8-bit PWMs
+It is always a good idea to avoid "magic numbers", and define macros
+for certain constants at the top of the project (or, in a separate
+header file). Note the use of the \c _BV macro: it turns a bit number
+into the respective bit mask.
 
 \par Note [2]:
-ISR() is a macro that marks the function as an interrupt routine. In this
-case, the function will get called when timer 1 overflows. Setting up
-interrupts is explained in greater detail in \ref avr_interrupts.
+ISR() is a macro that marks the function as an interrupt routine. In
+this case, the function will get called when timer 1 reaches its top
+value. Setting up interrupts is explained in greater detail in \ref
+avr_interrupts.
+<br>
+As the 16-bit timer 1 is configured to run with a reduced 10 bit
+resolution, the top value is configured through the "input capture"
+register \c ICP, thus the input capture interrupt triggers when the timer
+reaches its top value.
 
 \par Note [3]:
+Immediately at the start of the interrupt service, handle toggling the
+LED.  As the Arduino Nano LED is attached from PB5 to GND, turn it on
+here.  While the construct of reading the port register, ORing a bit
+mask into it, and writing it back might look cumbersome -- the compiler
+will actually turn this into an \c SBI instruction by recognizing that
+the arguments to the operation are suitable for this optimization.
+
+\par Note [4]:
 The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
 remember the current value.
 
-\par Note [4]:
+\par Note [5]:
 This section determines the new value of the \c PWM.
 
-\par Note [5]:
-Here's where the newly computed value is loaded into the \c PWM register.
+\par Note [6]:
+Here's where the newly computed value is loaded into the compare register.
 Since we are in an interrupt routine, it is safe to use a 16-bit assignment
 to the register.  Outside of an interrupt, the assignment should only be
 performed with interrupts disabled if there's a chance that an interrupt
 routine could also access this register (or another register that uses
 \c TEMP), see the appropriate \ref faq_16bitio "FAQ entry".
 
-\par Note [6]:
-This routine gets called after a reset. It initializes the \c PWM and enables
-interrupts.
-
 \par Note [7]:
+This interrupt service routine gets called every time the counter reaches
+its compare/match value.  Turn off the LED here.
+
+\par Note [8]:
+This routine configures all the hardware after a reset.
+
+\par Note [9]:
 The main loop of the program does nothing -- all the work is done by the
 interrupt routine! The <tt>sleep_mode()</tt> puts the processor on sleep
 until the next interrupt, to conserve power.  Of course, that probably
 won't be noticeable as we are still driving a LED, it is merely mentioned
 here to demonstrate the basic principle.
-
-\par Note [8]:
-Early AVR devices saturate their outputs at rather low currents when
-sourcing current, so the LED can be connected directly, the resulting
-current through the LED will be about 15 mA.  For modern parts (at
-least for the ATmega 128), however Atmel has drastically increased the
-IO source capability, so when operating at 5 V Vcc, R2 is needed.  Its
-value should be about 150 Ohms.  When operating the circuit at 3 V, it
-can still be omitted though.
 
 \section demo_project_src The Source Code
 
@@ -150,14 +121,14 @@ projects will have several modules and will typically need to break up the
 building of the project into several compiles and one link.
 
 \verbatim
-    $ avr-gcc -g -Os -mmcu=atmega8 -c demo.c
+    $ avr-gcc -g -Os -mmcu=atmega328p -c demo.c
 \endverbatim
 
 The compilation will create a \c demo.o file. Next we link it into a binary
 called \c demo.elf.
 
 \verbatim
-    $ avr-gcc -g -mmcu=atmega8 -o demo.elf demo.o
+    $ avr-gcc -g -mmcu=atmega328p -o demo.elf demo.o
 \endverbatim
 
 It is important to specify the MCU type when linking. The compiler uses the \c
@@ -208,7 +179,7 @@ application using the following command to generate \c demo.map (a portion of
 which is shown below).
 
 \verbatim
-    $ avr-gcc -g -mmcu=atmega8 -Wl,-Map,demo.map -o demo.elf demo.o
+    $ avr-gcc -g -mmcu=atmega328p -Wl,-Map,demo.map -o demo.elf demo.o
 \endverbatim
 
 \dontinclude demo.map
@@ -224,24 +195,24 @@ location 0x0.
 \skipline *(.fini2)
 \until __eeprom_end
 
-The last address in the \c .text segment is location \c 0x114 ( denoted by \c
-_etext ), so the instructions use up 276 bytes of FLASH.
+The last address in the \c .text segment is location \c 0x104 ( denoted by \c
+_etext ), so the instructions use up 260 bytes of FLASH.
 
 The \c .data segment (where initialized static variables are stored) starts
-at location \c 0x60, which is the first address after the register bank on an
-ATmega8 processor.
+at location \c 0x100, which is the first address after the IO registers on an
+ATmega328P processor.
 
-The next available address in the \c .data segment is also location \c 0x60,
+The next available address in the \c .data segment is also location \c 0x100,
 so the application has no initialized data.
 
 The \c .bss segment (where uninitialized data is stored) starts at location
-\c 0x60.
+\c 0x100.
 
-The next available address in the \c .bss segment is location 0x63, so the
+The next available address in the \c .bss segment is location 0x103, so the
 application uses 3 bytes of uninitialized data.
 
 The \c .eeprom segment (where EEPROM variables are stored) starts at
-location 0x0.
+location 0x0, mapped to 0x810000 to simulate a flat address space.
 
 The next available address in the \c .eeprom segment is also location 0x0,
 so there aren't any EEPROM variables.
@@ -249,10 +220,14 @@ so there aren't any EEPROM variables.
 \section demo_ihex Generating Intel Hex Files
 
 We have a binary of the application, but how do we get it into the processor?
-Most (if not all) programmers will not accept a GNU executable as an input
-file, so we need to do a little more processing. The next step is to extract
-portions of the binary and save the information into \c .hex files. The GNU
-utility that does this is called \c avr-objcopy.
+
+Many programming applications now accept the final ELF file as input,
+so no further step is needed there.
+
+Some programmers require a specific kind of load file, like "Intel
+Hex" or "Motorola SRecord" format. For them, portions of the binary
+need to be extracted. The GNU utility that does this is called \c
+avr-objcopy.
 
 The ROM contents can be pulled from our project's binary and put into the file
 demo.hex using the following command:
@@ -266,7 +241,12 @@ The resulting \c demo.hex file contains:
 \verbinclude demo.hex
 
 The \c -j option indicates that we want the information from the \c .text and \c .data
-segment extracted. If we specify the EEPROM segment, we can generate a \c .hex
+segment extracted. Note that the \c .data segment must be included as it contains
+the initialization values for the data segment, which the startup code expects to
+be placed immediately behind the instruction code (the \c .text segment) in flash.
+The startup code then copies them over to RAM before calling \c main().
+
+If we specify the EEPROM segment, we can generate a \c .hex
 file that can be used to program the EEPROM:
 
 \verbatim
@@ -275,13 +255,6 @@ file that can be used to program the EEPROM:
 
 There is no \c demo_eeprom.hex file written, as that file would be
 empty.
-
-Starting with version 2.17 of the GNU binutils, the \c avr-objcopy
-command that used to generate the empty EEPROM files now aborts
-because of the empty input section \c .eeprom, so these empty files
-are not generated.  It also signals an error to the Makefile which
-will be caught there, and makes it print a message about the empty
-file not being generated.
 
 \section demo_make Letting Make Build the Project
 
@@ -299,7 +272,6 @@ make.
 \htmlonly
 <ul>
   <li><a href="examples/demo/demo.c">demo.c</a></li>
-  <li><a href="examples/demo/iocompat.h">iocompat.h</a></li>
   <li><a href="examples/demo/Makefile">Makefile</a></li>
 </ul>
 \endhtmlonly

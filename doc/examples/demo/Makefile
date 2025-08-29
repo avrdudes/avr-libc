@@ -1,11 +1,11 @@
 PRG            = demo
 OBJ            = demo.o
 
-MCU_TARGET     = atmega8
+MCU_TARGET     = atmega328p
 #MCU_TARGET     = atmega88
 #MCU_TARGET     = attiny2313
 
-OPTIMIZE = -O2
+OPTIMIZE = -Os
 
 DEFS =
 LIBS =
@@ -28,7 +28,7 @@ $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # dependency:
-demo.o: demo.c iocompat.h
+demo.o: demo.c
 
 clean:
 	rm -f -- *.o $(PRG).elf *.eps *.png *.pdf *.bak
