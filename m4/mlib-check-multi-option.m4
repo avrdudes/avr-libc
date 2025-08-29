@@ -41,7 +41,7 @@ AC_DEFUN([CHECK_MULTI_OPTION],[dnl
 
     pml=`${CC} -print-multi-lib | sed 's/@/ -/g'`
     opt=`echo "$1" | sed 's/-/\\\\-/g'`
-    if echo "$pml" | grep -e "$opt" > /dev/null 2>&1; then
+    if echo "$pml" | $GREP -e "$opt" > /dev/null 2>&1; then
        AC_MSG_RESULT([yes, in $3])
        DIR_$2=$3
        AS_IF([test "x$DOX_MULTI_OPT" = "x"],

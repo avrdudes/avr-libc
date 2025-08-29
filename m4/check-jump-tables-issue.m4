@@ -41,7 +41,7 @@ AC_DEFUN([CHECK_JUMP_TABLES_ISSUE],[dnl
     echo ".global __tablejump2__" \
 	| $CC $mcu $opt `$CC $mcu -print-libgcc-file-name` 2> /dev/null
     dnl ...should use ELPM to read from the jump table.
-    AS_IF([$OBJDUMP -d conftest.elf 2> /dev/null | grep -i elpm > /dev/null],
+    AS_IF([$OBJDUMP -d conftest.elf 2> /dev/null | $GREP -i elpm > /dev/null],
 	[ AC_MSG_RESULT([yes]) ],
 	[ AC_MSG_RESULT([no])
 	  dnl Only work out how to turn off jump-tables when actually needed.

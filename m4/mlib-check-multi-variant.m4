@@ -32,7 +32,7 @@
 AC_DEFUN([CHECK_MULTI_VARIANT],[dnl
     AC_MSG_CHECKING([if ${CC} supports multilib $1])
     mdir=`echo "$1" | sed -e 's/\\./\\\\./g'`
-    pml=`${CC} -print-multi-lib | grep -e "^${mdir};"`
+    pml=`${CC} -print-multi-lib | $GREP -e "^${mdir};"`
     if test "x$pml" != "x"; then
        MULTIDIR_$2=$1
        MULTIOPT_$2=`echo "${pml}" | cut -d ';' -f 2 | sed 's/@/ -/g'`

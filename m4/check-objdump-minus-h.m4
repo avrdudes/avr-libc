@@ -42,7 +42,7 @@ EOF
   AC_TRY_COMMAND([$AS conftest.s $3 -o conftest.o])
   AC_TRY_COMMAND([$LD conftest.o $4 -o conftest.elf])
   AC_TRY_COMMAND([$OBJDUMP -h conftest.elf > conftest.lst])
-  AS_IF([grep $5 conftest.lst > /dev/null], [has_pat=yes], [has_pat=no])
+  AS_IF([$GREP $5 conftest.lst > /dev/null], [has_pat=yes], [has_pat=no])
   AC_MSG_RESULT([$has_pat])
   AS_IF([test "x$has_pat" = "xyes"], [$6], [$7])
   rm -f conftest.s conftest.o conftest.elf conftest.lst

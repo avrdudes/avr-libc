@@ -45,7 +45,7 @@ dnl
 AC_DEFUN([CHECK_PNG_UTILS],[dnl
 dnl
 AC_MSG_CHECKING([for pngtopnm])
-has_pngtopnm=`pngtopnm --version 2>&1 | grep -c -i Version`
+has_pngtopnm=`pngtopnm --version 2>&1 | $GREP -c -i Version`
 if test "$has_pngtopnm" = "1"; then
 	AC_MSG_RESULT(yes)
 	PNGTOPNM="pngtopnm"
@@ -55,7 +55,7 @@ else
 fi
 dnl
 AC_MSG_CHECKING([for pnmtopng])
-has_pnmtopng=`pnmtopng --version 2>&1 | grep -c -i Version`
+has_pnmtopng=`pnmtopng --version 2>&1 | $GREP -c -i Version`
 if test "$has_pnmtopng" = "1"; then
 	AC_MSG_RESULT(yes)
 	PNMTOPNG="pnmtopng"

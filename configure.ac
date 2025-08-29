@@ -207,6 +207,7 @@ esac
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
+AC_PROG_GREP
 
 dnl Outcome is consumed by crt1/gcrt1.S
 CHECK_OBJDUMP_MINUS_H([whether data region starts at __DATA_REGION_ORIGIN__],dnl
