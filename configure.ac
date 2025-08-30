@@ -475,6 +475,8 @@ AC_CONFIG_FILES([
 	doc/api/faq.dox
 ])
 
+AC_CONFIG_FILES([scripts/avr-man], [chmod +x scripts/avr-man])
+
 dnl Makefile.in's made by automake from Makefile.am's.
 AC_CONFIG_FILES([
 	Makefile
