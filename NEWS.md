@@ -221,6 +221,11 @@
 
 ## Pull Requests
 
+- Modernized the
+  [A simple project](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__demo__project.html)
+  demo example project: It now uses the ATmega328P device that is widely
+  used, for example on the Arduino Nano boards ([#1044][1044]).
+
 - Fix support for ATxmega devices in avr/wdt.h ([#646][646]).
 
 - Improve runtime performance of `free()` ([#991][991]).
@@ -276,3 +281,4 @@
 [1036]: https://github.com/avrdudes/avr-libc/issues/1036
 [1039]: https://github.com/avrdudes/avr-libc/issues/1039
 [1040]: https://github.com/avrdudes/avr-libc/issues/1040
+[1044]: https://github.com/avrdudes/avr-libc/issues/1044

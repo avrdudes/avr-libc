@@ -131,7 +131,7 @@ demo-examples:
 all-examples: $(DEMO_DIRS:%=example-%)
 
 # We must know the MCUs so we can build the prerequisite crt and multilib.
-MCU_demo = atmega8
+MCU_demo = atmega328p
 MCU_asmdemo = attiny13
 MCU_twitest = atmega128
 MCU_stdiodemo = atmega16
