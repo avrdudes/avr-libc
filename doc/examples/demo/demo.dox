@@ -262,6 +262,18 @@ Rather than type these commands over and over, they can all be placed in a
 make file. To build the demo project using \c make,
 save the following in a file called \c Makefile.
 
+This also adds a "program" target, so in order to download the image to
+the device's flash, it can simply called as
+
+\verbatim
+    $ make program
+\endverbatim
+
+The actual port (serial device) to talk to when programming can be specified
+in the environment variable \c AVRDUDE_PORT. There is some guesswork about
+possible ports (OS dependant) inside the Makefile if this variable does not
+exist.
+
 \note This \c Makefile can only be used as input for the GNU version of \c
 make.
 
