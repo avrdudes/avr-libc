@@ -309,6 +309,8 @@ Simulate_avrtest ()
     # - 20  Out of memory.
     # - 21  Wrong avrtest usage: Unknown options, etc.
     # - 22  Program file could not be found / read.
+    # - 23  IEEE single emulation failed (e.g. on big-endian host)
+    # - 24  IEEE double emulation failed (e.g. on big-endian host)
     # - 42  Fatal error in avrtest.
 
     # -no-stdin keeps AVRtest from hanging in rare situations of bogus
@@ -501,8 +503,22 @@ for test_file in $test_list ; do
 			elif [ -z $MAKE_ONLY ] \
 				 && ! Simulate_avrtest $elf_file $mcu
 			then
-			    Err_echo "simulate avrtest failed: $RETVAL"
-			    n_esimul=$(($n_esimul + 1))
+			    case $RETVAL in
+				23)
+				    echo "SKIP (no IEEE single emulation)"
+				    n_skips=$(($n_skips + 1))
+				    break
+				    ;;
+				24)
+				    echo "SKIP (no IEEE double emulation)"
+				    n_skips=$(($n_skips + 1))
+				    break
+				    ;;
+				*)
+				    Err_echo "simulate avrtest failed: $RETVAL"
+				    n_esimul=$(($n_esimul + 1))
+				    ;;
+			    esac
 			else
 			    echo "OK"
 			fi
@@ -542,6 +558,8 @@ for test_file in $test_list ; do
 		    then
 			Err_echo "simulate failed: $RETVAL"
 			n_esimul=$(($n_esimul + 1))
+				;;
+			esac
 		    else
 			echo "OK"
 		    fi
