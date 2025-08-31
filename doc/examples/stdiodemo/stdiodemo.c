@@ -50,6 +50,9 @@ main(void)
 {
   uint8_t i;
   char buf[20], s[20];
+#ifdef LED_PORT
+  int v;
+#endif
 
   ioinit();
 
@@ -95,6 +98,23 @@ main(void)
 	      printf("sscanf() failed\n");
 	    }
 	  break;
+
+#ifdef LED_PORT
+	case 'd':
+	  if (sscanf(buf, "%*s %d", &v) > 0)
+	    {
+	      if (v == 0)
+		LED_PORT &= ~LED_PIN; // turn off LED
+	      else
+		LED_PORT |= LED_PIN; // turn on LED
+	      printf("OK\n");
+	    }
+	  else
+	    {
+	      printf("sscanf() failed\n");
+	    }
+	  break;
+#endif
 	}
     }
   fprintf(stderr, "Bye-bye");

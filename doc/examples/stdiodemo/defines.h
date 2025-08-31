@@ -28,3 +28,8 @@
 /* Whether to read the busy flag, or fall back to
    worst-time delays. */
 #define USE_BUSY_BIT 1
+
+/* Arduino Nano onboard LED */
+#define LED_PORT PORTB
+#define LED_DDR  DDRB
+#define LED_PIN  _BV(5)
