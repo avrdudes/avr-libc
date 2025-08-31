@@ -195,8 +195,8 @@ location 0x0.
 \skipline *(.fini2)
 \until __eeprom_end
 
-The last address in the \c .text segment is location \c 0x148 ( denoted by \c
-_etext ), so the instructions use up 328 bytes of FLASH.  104 bytes of that
+The last address in the \c .text segment is location \c 0x14e ( denoted by \c
+_etext ), so the instructions use up 334 bytes of FLASH.  104 bytes of that
 are allocated to interrupt vectors, which is basically defined by the MCU
 hardware.
 
