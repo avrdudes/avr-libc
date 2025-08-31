@@ -558,8 +558,6 @@ for test_file in $test_list ; do
 		    then
 			Err_echo "simulate failed: $RETVAL"
 			n_esimul=$(($n_esimul + 1))
-				;;
-			esac
 		    else
 			echo "OK"
 		    fi
