@@ -106,14 +106,5 @@ esrec: $(PRG)_eeprom.srec
 
 JPEGFILES               = stdiodemo-setup.jpg
 
-JPEG2PNM                = jpegtopnm
-PNM2EPS                 = pnmtops
-JPEGRESOLUTION          = 180
-EXTRA_CLEAN_FILES       = *.hex *.bin *.srec *.eps
+dox: ${JPEGFILES}
 
-dox: ${JPEGFILES:.jpg=.eps}
-
-%.eps: %.jpg
-	$(JPEG2PNM) $< |\
-	$(PNM2EPS) -noturn -dpi $(JPEGRESOLUTION) -equalpixels \
-	> $@

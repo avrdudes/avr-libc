@@ -43,34 +43,33 @@ not to replace it.
 
 \section stdiodemo_hw Hardware setup
 
-The demo is set up in a way so it can be run on the ATmega16 that
-ships with the STK500 development kit.  The UART port needs to be
-connected to the RS-232 "spare" port by a jumper cable
-that connects PD0 to RxD and PD1 to TxD.  The RS-232 channel is set up
+The demo is set up in a way so it can be run on an Arduino Nano
+compatible board. This board contains a USB-to-serial bridge that
+attaches to USART0 of the ATmega328P MCU, so it can easily communicate
+with a standard terminal program on the host PC. This channel is used
 as standard input (\c stdin) and standard output (\c stdout),
 respectively.
 
 In order to have a different device available for a standard error
 channel (\c stderr), an industry-standard LCD display with an
 HD44780-compatible LCD controller has been chosen.  This display needs
-to be connected to port A of the STK500 in the following way:
+to be connected to the Arduino Nano in the following way:
 
 <table>
  <tr><td><b>Port</b></td><td><b>Header</b></td><td><b>Function</b></td></tr>
- <tr><td>A0</td> <td>1</td> <td>LCD D4</td></tr>
- <tr><td>A1</td> <td>2</td> <td>LCD D5</td></tr>
- <tr><td>A2</td> <td>3</td> <td>LCD D6</td></tr>
- <tr><td>A3</td> <td>4</td> <td>LCD D7</td></tr>
- <tr><td>A4</td> <td>5</td> <td>LCD R/~W</td></tr>
- <tr><td>A5</td> <td>6</td> <td>LCD E</td></tr>
- <tr><td>A6</td> <td>7</td> <td>LCD RS</td></tr>
- <tr><td>A7</td> <td>8</td> <td>unused</td></tr>
- <tr><td>GND</td><td>9</td> <td>GND</td></tr>
- <tr><td>VCC</td><td>10</td><td>Vcc</td></tr>
+ <tr><td>D2</td> <td>D2</td> <td>LCD D4</td></tr>
+ <tr><td>D3</td> <td>D3</td> <td>LCD D5</td></tr>
+ <tr><td>D4</td> <td>D4</td> <td>LCD D6</td></tr>
+ <tr><td>D5</td> <td>D5</td> <td>LCD D7</td></tr>
+ <tr><td>D6</td> <td>D6</td> <td>LCD E</td></tr>
+ <tr><td>D7</td> <td>D7</td> <td>LCD RS</td></tr>
+ <tr><td>B0</td> <td>D8</td> <td>LCD R/~W</td></tr>
+ <tr><td>GND</td><td>GND</td> <td>GND, V5</td></tr>
+ <tr><td>VCC</td><td>5V</td><td>Vcc</td></tr>
 </table>
 
-\image html stdiodemo-setup.jpg "Wiring of the STK500"
-\image latex stdiodemo-setup.eps "Wiring of the STK500" width=12cm
+\image html stdiodemo-setup.jpg "Wiring of the Arduino Nano"
+\image latex stdiodemo-setup.jpg "Wiring of the Arduino Nano" width=12cm
 
 The LCD controller is used in 4-bit mode, including polling the
 "busy" flag so the R/~W line from the LCD controller needs
@@ -80,11 +79,11 @@ pin connects to a potentiometer between Vcc and GND.  Often, it might
 work to just connect that pin to GND, while leaving it unconnected
 usually yields an unreadable display.
 
-Port A has been chosen as 7 pins are needed to
-connect the LCD, yet all other ports are already partially in use:
-port B has the pins for in-system programming (ISP), port C has the
-ports for JTAG (can be used for debugging), and port D is used for the
-UART connection.
+These pins have been chosen as they are all in a single row on the
+Arduino Nano, normally designated as "digital IO" in the Arduino
+Framework.  The only important consideration is that the HD44780
+data connections D4 through D7 must be in consecutive order on a
+single AVR MCU port.
 
 \section stdiodemo_overview Functional overview
 
@@ -130,7 +129,7 @@ required by the specified intent (like the input function for
 be given as \c NULL.
 
 The stream \c uart_str corresponds to input and output operations
-performed over the RS-232 connection to a terminal (e.g. from/to a PC
+performed over the USB-serial connection to a terminal (e.g. from/to a PC
 running a terminal program), while the \c lcd_str stream provides a
 method to display character data on the LCD text display.
 
@@ -160,7 +159,7 @@ to a stream that will perform UART IO, while \c stderr is arranged to
 output its data to the LCD text display.
 
 Finally, a main loop follows that accepts simple
-"commands" entered via the RS-232 connection, and performs
+"commands" entered via the serial connection, and performs
 a few simple actions based on the commands.
 
 First, a prompt is sent out using \c printf_P() (which takes a
@@ -210,7 +209,7 @@ This file just contains a few peripheral definitions.
 The \c F_CPU macro defines the CPU clock frequency, to be used in
 delay loops, as well as in the UART baud rate calculation.
 
-The macro \c UART_BAUD defines the RS-232 baud rate.  Depending on the
+The macro \c UART_BAUD defines the USART baud rate.  Depending on the
 actual CPU frequency, only a limited range of baud rates can be
 supported.
 
@@ -349,17 +348,17 @@ be accessed inside \c lcd_putchar() using fdev_get_udata().
 
 \subsection stdiodemo_uart_h uart.h
 
-Public interface definition for the RS-232 UART driver, much like in
+Public interface definition for the serial UART driver, much like in
 \ref stdiodemo_lcd_h "lcd.h" except there is now also a character
 input function available.
 
-As the RS-232 input is line-buffered in this example, the macro
+As the serial input is line-buffered in this example, the macro
 \c RX_BUFSIZE determines the size of that buffer.
 
 
 \subsection stdiodemo_uart_c uart.c
 
-This implements an stdio-compatible RS-232 driver using an AVR's
+This implements an stdio-compatible serial driver using an AVR's
 standard UART (or USART in asynchronous operation mode).  Both,
 character output as well as character input operations are
 implemented.  Character output takes care of converting the internal
