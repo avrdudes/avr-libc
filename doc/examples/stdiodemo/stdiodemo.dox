@@ -187,7 +187,7 @@ spacing, followed by a sequence that will clear the LCD.  Finally,
 \c main() will be terminated, and the library will add an infinite
 loop, so only a CPU reset will be able to restart the application.
 
-There are three "commands" recognized, each determined
+There are four "commands" recognized, each determined
 by the first letter of the line entered (converted to lower case):
 
 - The 'q' (quit) command has the same effect of
@@ -196,6 +196,10 @@ leaving the main loop.
 and sends it to the LCD.
 - The 'u' (UART) command takes its second argument,
 and sends it back to the UART connection.
+- The 'd' (LED) command takes an integer number as
+its second argument. If the number is 0, the onboard
+LED is turned off, with all other values, it is turned
+on.
 
 Command recognition is done using \c sscanf() where the first format
 in the format string just skips over the command itself (as the
@@ -220,6 +224,9 @@ attached to, and a respective bit number.  For accessing the data
 lines, only the first data line gets its own macro (line D4 on the
 HD44780, lines D0 through D3 are not used in 4-bit mode), all other
 data lines are expected to be in ascending order next to D4.
+
+Finally, the LED port definitions are similar to those from the
+\ref demo_project "simple demo".
 
 \subsection stdiodemo_hd44780_h hd44780.h
 
