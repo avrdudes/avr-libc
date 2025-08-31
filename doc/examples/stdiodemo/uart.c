@@ -25,12 +25,12 @@ void
 uart_init(void)
 {
 #if F_CPU < 2000000UL && defined(U2X)
-  UCSRA = _BV(U2X);             /* improve baud rate error by using 2x clk */
-  UBRRL = (F_CPU / (8UL * UART_BAUD)) - 1;
+  UCSR0A = _BV(U2X0);             /* improve baud rate error by using 2x clk */
+  UBRR0L = (F_CPU / (8UL * UART_BAUD)) - 1;
 #else
-  UBRRL = (F_CPU / (16UL * UART_BAUD)) - 1;
+  UBRR0L = (F_CPU / (16UL * UART_BAUD)) - 1;
 #endif
-  UCSRB = _BV(TXEN) | _BV(RXEN); /* tx/rx enable */
+  UCSR0B = _BV(TXEN0) | _BV(RXEN0); /* tx/rx enable */
 }
 
 /*
@@ -49,8 +49,8 @@ uart_putchar(char c, FILE *stream)
 
   if (c == '\n')
     uart_putchar('\r', stream);
-  loop_until_bit_is_set(UCSRA, UDRE);
-  UDR = c;
+  loop_until_bit_is_set(UCSR0A, UDRE0);
+  UDR0 = c;
 
   return 0;
 }
@@ -99,12 +99,12 @@ uart_getchar(FILE *stream)
   if (rxp == 0)
     for (cp = b;;)
       {
-	loop_until_bit_is_set(UCSRA, RXC);
-	if (UCSRA & _BV(FE))
+	loop_until_bit_is_set(UCSR0A, RXC0);
+	if (UCSR0A & _BV(FE0))
 	  return _FDEV_EOF;
-	if (UCSRA & _BV(DOR))
+	if (UCSR0A & _BV(DOR0))
 	  return _FDEV_ERR;
-	c = UDR;
+	c = UDR0;
 	/* behaviour similar to Unix stty ICRNL */
 	if (c == '\r')
 	  c = '\n';
