@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Copyright (c) 2007, Dmitry Xmelkov
 # All rights reserved.
