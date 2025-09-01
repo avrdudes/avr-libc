@@ -10,13 +10,15 @@ int main (void)
 }
 #else
 
+__extension__ typedef __uint24 uint24_t;
+
 #define VAL 0x010507
 
-const __uint24 data[] PROGMEM = { VAL, 2 * VAL, 7 * VAL };
+const uint24_t data[] PROGMEM = { VAL, 2 * VAL, 7 * VAL };
 
-__uint24 get_val (uint8_t i)
+uint24_t get_val (uint8_t i)
 {
-  __uint24 v = VAL;
+  uint24_t v = VAL;
   if (i == 1) v *= 2;
   if (i == 2) v *= 7;
   return v;
@@ -25,10 +27,10 @@ __uint24 get_val (uint8_t i)
 __attribute__((noinline,noclone))
 void test (uint8_t i)
 {
-  if (pgm_read<__uint24> (&data[0]) != get_val (0))
+  if (pgm_read<uint24_t> (&data[0]) != get_val (0))
     exit (__LINE__);
 
-  if (pgm_read<__uint24> (&data[i]) != get_val (i))
+  if (pgm_read<uint24_t> (&data[i]) != get_val (i))
     exit (__LINE__);
 }
 
