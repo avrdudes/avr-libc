@@ -42,6 +42,19 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 	[HAS_FIXED_POINT_yesno=yes],
 	[HAS_FIXED_POINT_yesno=no])
     AC_MSG_RESULT([$HAS_FIXED_POINT_yesno])
+    dnl
+    AS_IF([test $HAS_FIXED_POINT_yesno = yes],[
+	AC_MSG_CHECKING([whether $CC fixed-point is GNU compatible])
+	AC_COMPILE_IFELSE(
+	    [ AC_LANG_SOURCE([[
+		  #if __ACCUM_FBIT__ != 15
+		  int a[-1];
+		  #endif
+		  ]],[])],
+	    [HAS_FIXED_POINT_yesno=yes],
+	    [HAS_FIXED_POINT_yesno=no])
+	AC_MSG_RESULT([$HAS_FIXED_POINT_yesno])],)
+    dnl
     AM_CONDITIONAL(BUILD_FXLIB, [test $HAS_FIXED_POINT_yesno = yes])
     dnl
     old_check_fixed_point_CFLAGS=${CFLAGS}
@@ -52,7 +65,7 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 	    [ AC_LANG_SOURCE([[
 		  #include <stdfix.h>
 		  #ifndef _STDFIX_AVRLIBC_H
-		  ???
+		  int a[-1];
 		  #endif
 		  ]],[])],
 	    [ AC_MSG_RESULT([yes]) ],
