@@ -166,6 +166,7 @@ Compile ()
     local crt=
     local libs=
     local flags=
+    local devlib="$AVRDIR/avr/devices/$2/lib$2.a"
 
     if [ -z "$AVRDIR" ] ; then
 	  libs="-lm"
@@ -182,9 +183,15 @@ Compile ()
       crt=crt$2.o
       flags="-I../../include -I $AVRDIR/include -nostdlib"
       crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
-      libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
+      if [ -z "$crt" ]; then
+	  crt=`find $AVRDIR/avr/devices/$2 -name 'crt*.o' -print | head -1`
+      fi
+      if [ ! -f "$devlib" ]; then
+	  devlib=
+      fi
+      libs="$AVRDIR/avr/lib/$multilibdir/libc.a \
             $AVRDIR/avr/lib/$multilibdir/libm.a \
-            $AVRDIR/avr/devices/$2/lib$2.a -lgcc"
+            $devlib -lgcc"
     fi
 
     case $4 in
@@ -242,7 +249,7 @@ n_esimul=0	# number of simulation errors
 for test_file in $test_list ; do
     case `basename $test_file` in
 
-	*.c)
+	*.c | *.cpp)
 	    n_files=$(($n_files + 1))
 
 	    rootname=`basename $test_file .c`

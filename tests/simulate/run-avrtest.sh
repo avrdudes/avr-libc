@@ -357,6 +357,7 @@ Compile ()
     local crt=
     local libs=
     local flags=
+    local devlib="$AVRDIR/avr/devices/$2/lib$2.a"
 
     if [ -z "$AVRDIR" ] ; then
 	  libs="-lm"
@@ -376,9 +377,12 @@ Compile ()
       if [ -z "$crt" ]; then
 	  crt=`find $AVRDIR/avr/devices/$2 -name 'crt*.o' -print | head -1`
       fi
-      libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
+      if [ ! -f "$devlib" ]; then
+	  devlib=
+      fi
+      libs="$AVRDIR/avr/lib/$multilibdir/libc.a \
             $AVRDIR/avr/lib/$multilibdir/libm.a \
-            $AVRDIR/avr/devices/$2/lib$2.a -lgcc"
+            $devlib -lgcc"
     fi
 
     case $4 in
