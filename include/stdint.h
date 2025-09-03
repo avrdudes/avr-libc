@@ -72,46 +72,38 @@
 
 /** \ingroup avr_stdint
     8-bit signed type. */
-
 typedef signed char int8_t;
 
 /** \ingroup avr_stdint
     8-bit unsigned type. */
-
 typedef unsigned char uint8_t;
 
 /** \ingroup avr_stdint
     16-bit signed type. */
-
 typedef signed int int16_t;
 
 /** \ingroup avr_stdint
     16-bit unsigned type. */
-
 typedef unsigned int uint16_t;
 
 /** \ingroup avr_stdint
     32-bit signed type. */
-
 typedef signed long int int32_t;
 
 /** \ingroup avr_stdint
     32-bit unsigned type. */
-
 typedef unsigned long int uint32_t;
 
 /** \ingroup avr_stdint
     64-bit signed type.
     \note This type is not available when the compiler
     option \c -mint8 is in effect. */
-
 typedef signed long long int int64_t;
 
 /** \ingroup avr_stdint
     64-bit unsigned type.
     \note This type is not available when the compiler
     option \c -mint8 is in effect. */
-
 typedef unsigned long long int uint64_t;
 
 /**@}*/
@@ -151,12 +143,10 @@ typedef long long unsigned int uint32_t;
 
 /** \ingroup avr_stdint
     Signed pointer compatible type. */
-
 typedef int16_t intptr_t;
 
 /** \ingroup avr_stdint
     Unsigned pointer compatible type. */
-
 typedef uint16_t uintptr_t;
 
 /**@}*/
@@ -168,32 +158,26 @@ typedef uint16_t uintptr_t;
 
 /** \ingroup avr_stdint
     signed int with at least 8 bits. */
-
 typedef int8_t   int_least8_t;
 
 /** \ingroup avr_stdint
     unsigned int with at least 8 bits. */
-
 typedef uint8_t  uint_least8_t;
 
 /** \ingroup avr_stdint
     signed int with at least 16 bits. */
-
 typedef int16_t  int_least16_t;
 
 /** \ingroup avr_stdint
     unsigned int with at least 16 bits. */
-
 typedef uint16_t uint_least16_t;
 
 /** \ingroup avr_stdint
     signed int with at least 32 bits. */
-
 typedef int32_t  int_least32_t;
 
 /** \ingroup avr_stdint
     unsigned int with at least 32 bits. */
-
 typedef uint32_t uint_least32_t;
 
 #if !__USING_MINT8 || defined(__DOXYGEN__)
@@ -201,15 +185,14 @@ typedef uint32_t uint_least32_t;
     signed int with at least 64 bits.
     \note This type is not available when the compiler
     option -mint8 is in effect. */
-
 typedef int64_t  int_least64_t;
 
 /** \ingroup avr_stdint
     unsigned int with at least 64 bits.
     \note This type is not available when the compiler
     option -mint8 is in effect. */
-
 typedef uint64_t uint_least64_t;
+
 #endif
 
 /**@}*/
@@ -222,32 +205,26 @@ typedef uint64_t uint_least64_t;
 
 /** \ingroup avr_stdint
     fastest signed int with at least 8 bits. */
-
 typedef int8_t int_fast8_t;
 
 /** \ingroup avr_stdint
     fastest unsigned int with at least 8 bits. */
-
 typedef uint8_t uint_fast8_t;
 
 /** \ingroup avr_stdint
     fastest signed int with at least 16 bits. */
-
 typedef int16_t int_fast16_t;
 
 /** \ingroup avr_stdint
     fastest unsigned int with at least 16 bits. */
-
 typedef uint16_t uint_fast16_t;
 
 /** \ingroup avr_stdint
     fastest signed int with at least 32 bits. */
-
 typedef int32_t int_fast32_t;
 
 /** \ingroup avr_stdint
     fastest unsigned int with at least 32 bits. */
-
 typedef uint32_t uint_fast32_t;
 
 #if !__USING_MINT8 || defined(__DOXYGEN__)
@@ -255,14 +232,12 @@ typedef uint32_t uint_fast32_t;
     fastest signed int with at least 64 bits.
     \note This type is not available when the compiler
     option -mint8 is in effect. */
-
 typedef int64_t int_fast64_t;
 
 /** \ingroup avr_stdint
     fastest unsigned int with at least 64 bits.
     \note This type is not available when the compiler
     option -mint8 is in effect. */
-
 typedef uint64_t uint_fast64_t;
 #endif
 
@@ -276,19 +251,20 @@ typedef uint64_t uint_fast64_t;
 /**@{*/
 
 #if __USING_MINT8
-typedef int32_t intmax_t;
 
+typedef int32_t intmax_t;
 typedef uint32_t uintmax_t;
+
 #else  /* !__USING_MINT8 */
+
 /** \ingroup avr_stdint
     largest signed int available. */
-
 typedef int64_t intmax_t;
 
 /** \ingroup avr_stdint
     largest unsigned int available. */
-
 typedef uint64_t uintmax_t;
+
 #endif /* __USING_MINT8 */
 
 /**@}*/
@@ -312,12 +288,10 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest positive value an int8_t can hold. */
-
 #define INT8_MAX 0x7f
 
 /** \ingroup avr_stdint
     smallest negative value an int8_t can hold. */
-
 #define INT8_MIN (-INT8_MAX - 1)
 
 #if __USING_MINT8
@@ -336,54 +310,44 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest value an uint8_t can hold. */
-
 #define UINT8_MAX (__CONCAT(INT8_MAX, U) * 2U + 1U)
 
 /** \ingroup avr_stdint
     largest positive value an int16_t can hold. */
-
 #define INT16_MAX 0x7fff
 
 /** \ingroup avr_stdint
     smallest negative value an int16_t can hold. */
-
 #define INT16_MIN (-INT16_MAX - 1)
 
 /** \ingroup avr_stdint
     largest value an uint16_t can hold. */
-
 #define UINT16_MAX (__CONCAT(INT16_MAX, U) * 2U + 1U)
 
 /** \ingroup avr_stdint
     largest positive value an int32_t can hold. */
-
 #define INT32_MAX 0x7fffffffL
 
 /** \ingroup avr_stdint
     smallest negative value an int32_t can hold. */
-
 #define INT32_MIN (-INT32_MAX - 1L)
 
 /** \ingroup avr_stdint
     largest value an uint32_t can hold. */
-
 #define UINT32_MAX (__CONCAT(INT32_MAX, U) * 2UL + 1UL)
 
 #endif /* __USING_MINT8 */
 
 /** \ingroup avr_stdint
     largest positive value an int64_t can hold. */
-
 #define INT64_MAX 0x7fffffffffffffffLL
 
 /** \ingroup avr_stdint
     smallest negative value an int64_t can hold. */
-
 #define INT64_MIN (-INT64_MAX - 1LL)
 
 /** \ingroup avr_stdint
     largest value an uint64_t can hold. */
-
 #define UINT64_MAX (__CONCAT(INT64_MAX, U) * 2ULL + 1ULL)
 
 /**@}*/
@@ -393,62 +357,50 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest positive value an int_least8_t can hold. */
-
 #define INT_LEAST8_MAX INT8_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_least8_t can hold. */
-
 #define INT_LEAST8_MIN INT8_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_least8_t can hold. */
-
 #define UINT_LEAST8_MAX UINT8_MAX
 
 /** \ingroup avr_stdint
     largest positive value an int_least16_t can hold. */
-
 #define INT_LEAST16_MAX INT16_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_least16_t can hold. */
-
 #define INT_LEAST16_MIN INT16_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_least16_t can hold. */
-
 #define UINT_LEAST16_MAX UINT16_MAX
 
 /** \ingroup avr_stdint
     largest positive value an int_least32_t can hold. */
-
 #define INT_LEAST32_MAX INT32_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_least32_t can hold. */
-
 #define INT_LEAST32_MIN INT32_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_least32_t can hold. */
-
 #define UINT_LEAST32_MAX UINT32_MAX
 
 /** \ingroup avr_stdint
     largest positive value an int_least64_t can hold. */
-
 #define INT_LEAST64_MAX INT64_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_least64_t can hold. */
-
 #define INT_LEAST64_MIN INT64_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_least64_t can hold. */
-
 #define UINT_LEAST64_MAX UINT64_MAX
 
 /**@}*/
@@ -459,62 +411,50 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest positive value an int_fast8_t can hold. */
-
 #define INT_FAST8_MAX INT8_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_fast8_t can hold. */
-
 #define INT_FAST8_MIN INT8_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_fast8_t can hold. */
-
 #define UINT_FAST8_MAX UINT8_MAX
 
 /** \ingroup avr_stdint
     largest positive value an int_fast16_t can hold. */
-
 #define INT_FAST16_MAX INT16_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_fast16_t can hold. */
-
 #define INT_FAST16_MIN INT16_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_fast16_t can hold. */
-
 #define UINT_FAST16_MAX UINT16_MAX
 
 /** \ingroup avr_stdint
     largest positive value an int_fast32_t can hold. */
-
 #define INT_FAST32_MAX INT32_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_fast32_t can hold. */
-
 #define INT_FAST32_MIN INT32_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_fast32_t can hold. */
-
 #define UINT_FAST32_MAX UINT32_MAX
 
 /** \ingroup avr_stdint
     largest positive value an int_fast64_t can hold. */
-
 #define INT_FAST64_MAX INT64_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an int_fast64_t can hold. */
-
 #define INT_FAST64_MIN INT64_MIN
 
 /** \ingroup avr_stdint
     largest value an uint_fast64_t can hold. */
-
 #define UINT_FAST64_MAX UINT64_MAX
 
 /**@}*/
@@ -525,17 +465,14 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest positive value an intptr_t can hold. */
-
 #define INTPTR_MAX INT16_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an intptr_t can hold. */
-
 #define INTPTR_MIN INT16_MIN
 
 /** \ingroup avr_stdint
     largest value an uintptr_t can hold. */
-
 #define UINTPTR_MAX UINT16_MAX
 
 /**@}*/
@@ -546,17 +483,14 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest positive value an intmax_t can hold. */
-
 #define INTMAX_MAX INT64_MAX
 
 /** \ingroup avr_stdint
     smallest negative value an intmax_t can hold. */
-
 #define INTMAX_MIN INT64_MIN
 
 /** \ingroup avr_stdint
     largest value an uintmax_t can hold. */
-
 #define UINTMAX_MAX UINT64_MAX
 
 /**@}*/
@@ -569,12 +503,10 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest positive value a ptrdiff_t can hold. */
-
 #define PTRDIFF_MAX INT16_MAX
 
 /** \ingroup avr_stdint
     smallest negative value a ptrdiff_t can hold. */
-
 #define PTRDIFF_MIN INT16_MIN
 
 
@@ -583,18 +515,15 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     largest positive value a sig_atomic_t can hold. */
-
 #define SIG_ATOMIC_MAX INT8_MAX
 
 /** \ingroup avr_stdint
     smallest negative value a sig_atomic_t can hold. */
-
 #define SIG_ATOMIC_MIN INT8_MIN
 
 
 /** \ingroup avr_stdint
     largest value a size_t can hold. */
-
 #define SIZE_MAX UINT16_MAX
 
 
@@ -663,44 +592,36 @@ typedef uint64_t uintmax_t;
 
 /** \ingroup avr_stdint
     define a constant of type int16_t */
-
 #define INT16_C(value) value
 
 /** \ingroup avr_stdint
     define a constant of type uint16_t */
-
 #define UINT16_C(value) __CONCAT(value, U)
 
 /** \ingroup avr_stdint
     define a constant of type int32_t */
-
 #define INT32_C(value) __CONCAT(value, L)
 
 /** \ingroup avr_stdint
     define a constant of type uint32_t */
-
 #define UINT32_C(value) __CONCAT(value, UL)
 
 #endif /* __USING_MINT8 */
 
 /** \ingroup avr_stdint
     define a constant of type int64_t */
-
 #define INT64_C(value) __CONCAT(value, LL)
 
 /** \ingroup avr_stdint
     define a constant of type uint64_t */
-
 #define UINT64_C(value) __CONCAT(value, ULL)
 
 /** \ingroup avr_stdint
     define a constant of type intmax_t */
-
 #define INTMAX_C(value) __CONCAT(value, LL)
 
 /** \ingroup avr_stdint
     define a constant of type uintmax_t */
-
 #define UINTMAX_C(value) __CONCAT(value, ULL)
 
 #endif /* !__INT8_C */
