@@ -170,6 +170,9 @@
   ([#391][391], [#635][635], [#643][643], [#663][663], [#875][875], [#959][959], [#960][960], [#961][961]),
   these headers have been updated to a more recent revision.
 
+- Added defines to `avr/io.h` that match the names in the
+  ATmega324PA data sheet ([#443][443]).
+
 - Fixed signature definitions in avr/io.h for several devices ([#877][877])
   and add some missing signatures ([#878][878]).
 
@@ -239,6 +242,7 @@
 - New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
 
 [391]: https://github.com/avrdudes/avr-libc/issues/391
+[443]: https://github.com/avrdudes/avr-libc/issues/443
 [496]: https://github.com/avrdudes/avr-libc/issues/496
 [629]: https://github.com/avrdudes/avr-libc/issues/629
 [635]: https://github.com/avrdudes/avr-libc/issues/635
