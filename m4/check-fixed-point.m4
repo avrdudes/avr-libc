@@ -52,7 +52,7 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 		  #endif
 		  ]],[])],
 	    [HAS_FIXED_POINT_yesno=yes],
-	    [HAS_FIXED_POINT_yesno=no])
+	    [HAS_FIXED_POINT_yesno=non-GNU])
 	AC_MSG_RESULT([$HAS_FIXED_POINT_yesno])],)
     dnl
     AM_CONDITIONAL(BUILD_FXLIB, [test $HAS_FIXED_POINT_yesno = yes])
