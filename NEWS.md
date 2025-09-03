@@ -104,6 +104,9 @@
   has been added.  It can be used to get estimates of how much stack is
   used by a running program.
 
+- The `uint24_t`, `int24_t` and associated types and macros have been added
+  to [<stdint.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdint.html) ([#1045][1045]).
+
 - The C/C++ register footprint of some common simple functions has
   been improved by implementing them as extern inline assembly stubs:
   `strlen`, `strlen_P`, `strcpy`, `strcpy_P`, `strcmp`, `strcmp_P`,
@@ -286,3 +289,4 @@
 [1039]: https://github.com/avrdudes/avr-libc/issues/1039
 [1040]: https://github.com/avrdudes/avr-libc/issues/1040
 [1044]: https://github.com/avrdudes/avr-libc/issues/1044
+[1045]: https://github.com/avrdudes/avr-libc/issues/1045

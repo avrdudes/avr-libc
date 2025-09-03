@@ -45,7 +45,16 @@
     Use [u]intN_t if you need exactly N bits.
 
     Since these typedefs are mandated by the C99 standard, they are preferred
-    over rolling your own typedefs.  */
+    over rolling your own typedefs.
+
+\anchor int24
+    \note The 24-bit types and constants are supported since AVR-LibC v2.3.
+    In older versions, they can still be used by means of the compiler
+    built-in types and macros \c __int24, \c __uint24, \c __INT24_MIN__,
+    \c __INT24_MAX__ and \c __UINT24_MAX__ supported since
+    <a href="https://gcc.gnu.org/gcc-4.7/changes.html#avr">GCC v4.7</a>.
+*/
+
 
 #ifndef __DOXYGEN__
 /*
@@ -85,6 +94,16 @@ typedef signed int int16_t;
 /** \ingroup avr_stdint
     16-bit unsigned type. */
 typedef unsigned int uint16_t;
+
+/** \ingroup avr_stdint
+    24-bit signed type.
+    \since AVR-LibC v2.3, \ref int24 */
+typedef __int24 int24_t;
+
+/** \ingroup avr_stdint
+    24-bit unsigned type.
+    \since AVR-LibC v2.3, \ref int24 */
+typedef __uint24 uint24_t;
 
 /** \ingroup avr_stdint
     32-bit signed type. */
@@ -134,6 +153,20 @@ typedef long long unsigned int uint32_t;
 
 #endif /* __USING_MINT8 */
 
+#ifdef __INT24_MAX__
+__extension__ typedef __int24 int24_t;
+__extension__ typedef __uint24 uint24_t;
+typedef int24_t  int_least24_t;
+typedef uint24_t uint_least24_t;
+typedef int24_t  int_fast24_t;
+typedef uint24_t uint_fast24_t;
+#else
+typedef int32_t  int_least24_t;
+typedef uint32_t uint_least24_t;
+typedef int32_t  int_fast24_t;
+typedef uint32_t uint_fast24_t;
+#endif /* Have int24 */
+
 #endif /* defined(__DOXYGEN__) */
 
 /** \name Integer types capable of holding object pointers
@@ -148,6 +181,16 @@ typedef int16_t intptr_t;
 /** \ingroup avr_stdint
     Unsigned pointer compatible type. */
 typedef uint16_t uintptr_t;
+
+/** \ingroup avr_stdint
+    Signed 24-bit pointer compatible type.
+    \since AVR-LibC v2.3, \ref int24  */
+typedef int_least24_t intptr24_t;
+
+/** \ingroup avr_stdint
+    Unsigned 24-bit pointer compatible type.
+    \since AVR-LibC v2.3, \ref int24  */
+typedef uint_least24_t uintptr24_t;
 
 /**@}*/
 
@@ -171,6 +214,18 @@ typedef int16_t  int_least16_t;
 /** \ingroup avr_stdint
     unsigned int with at least 16 bits. */
 typedef uint16_t uint_least16_t;
+
+#ifdef __DOXYGEN__
+/** \ingroup avr_stdint
+    signed int with at least 24 bits.
+    \since AVR-LibC v2.3, \ref int24  */
+typedef int24_t  int_least24_t;
+
+/** \ingroup avr_stdint
+    unsigned int with at least 24 bits.
+    \since AVR-LibC v2.3, \ref int24  */
+typedef uint24_t uint_least24_t;
+#endif /* Doxygen */
 
 /** \ingroup avr_stdint
     signed int with at least 32 bits. */
@@ -218,6 +273,18 @@ typedef int16_t int_fast16_t;
 /** \ingroup avr_stdint
     fastest unsigned int with at least 16 bits. */
 typedef uint16_t uint_fast16_t;
+
+#ifdef __DOXYGEN__
+/** \ingroup avr_stdint
+    fastest signed int with at least 24 bits.
+    \since AVR-LibC v2.3, \ref int24  */
+typedef int24_t  int_fast24_t;
+
+/** \ingroup avr_stdint
+    fastest unsigned int with at least 24 bits.
+    \since AVR-LibC v2.3, \ref int24  */
+typedef uint24_t uint_fast24_t;
+#endif /* Doxygen */
 
 /** \ingroup avr_stdint
     fastest signed int with at least 32 bits. */
@@ -325,6 +392,21 @@ typedef uint64_t uintmax_t;
 #define UINT16_MAX (__CONCAT(INT16_MAX, U) * 2U + 1U)
 
 /** \ingroup avr_stdint
+    largest positive value an \c #int24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INT24_MAX __INT24_MAX__
+
+/** \ingroup avr_stdint
+    smallest negative value an \c #int24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INT24_MIN __INT24_MIN__
+
+/** \ingroup avr_stdint
+    largest value an \c #uint24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define UINT24_MAX __UINT24_MAX__
+
+/** \ingroup avr_stdint
     largest positive value an int32_t can hold. */
 #define INT32_MAX 0x7fffffffL
 
@@ -378,6 +460,21 @@ typedef uint64_t uintmax_t;
 /** \ingroup avr_stdint
     largest value an uint_least16_t can hold. */
 #define UINT_LEAST16_MAX UINT16_MAX
+
+/** \ingroup avr_stdint
+    largest positive value an \c #int_least24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INT_LEAST24_MAX INT24_MAX
+
+/** \ingroup avr_stdint
+    smallest negative value an \c #int_least24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INT_LEAST24_MIN INT24_MIN
+
+/** \ingroup avr_stdint
+    largest value an \c #uint_least24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define UINT_LEAST24_MAX UINT24_MAX
 
 /** \ingroup avr_stdint
     largest positive value an int_least32_t can hold. */
@@ -434,6 +531,21 @@ typedef uint64_t uintmax_t;
 #define UINT_FAST16_MAX UINT16_MAX
 
 /** \ingroup avr_stdint
+    largest positive value an \c #int_fast24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INT_FAST24_MAX INT24_MAX
+
+/** \ingroup avr_stdint
+    smallest negative value an \c #int_fast24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INT_FAST24_MIN INT24_MIN
+
+/** \ingroup avr_stdint
+    largest value an \c #uint_fast24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define UINT_FAST24_MAX UINT24_MAX
+
+/** \ingroup avr_stdint
     largest positive value an int_fast32_t can hold. */
 #define INT_FAST32_MAX INT32_MAX
 
@@ -474,6 +586,21 @@ typedef uint64_t uintmax_t;
 /** \ingroup avr_stdint
     largest value an uintptr_t can hold. */
 #define UINTPTR_MAX UINT16_MAX
+
+/** \ingroup avr_stdint
+    largest positive value an \c #intptr24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INTPTR24_MAX INT24_MAX
+
+/** \ingroup avr_stdint
+    smallest negative value an \c #intptr24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define INTPTR24_MIN INT24_MIN
+
+/** \ingroup avr_stdint
+    largest value an \c #uintptr24_t can hold.
+    \since AVR-LibC v2.3, \ref int24 */
+#define UINTPTR24_MAX UINT24_MAX
 
 /**@}*/
 
@@ -569,6 +696,15 @@ typedef uint64_t uintmax_t;
 #define UINT64_C(c) __UINT64_C(c)
 #define INTMAX_C(c) __INTMAX_C(c)
 #define UINTMAX_C(c) __UINTMAX_C(c)
+
+#if __USING_MINT8
+#define INT24_C(value) ((int24_t) __CONCAT(value, LL))
+#define UINT24_C(value) ((uint24_t) __CONCAT(value, ULL))
+#else
+#define INT24_C(value) ((int24_t) __CONCAT(value, L))
+#define UINT24_C(value) ((uint24_t) __CONCAT(value, UL))
+#endif
+
 #else
 /** \ingroup avr_stdint
     define a constant of type int8_t */
@@ -597,6 +733,16 @@ typedef uint64_t uintmax_t;
 /** \ingroup avr_stdint
     define a constant of type uint16_t */
 #define UINT16_C(value) __CONCAT(value, U)
+
+/** \ingroup avr_stdint
+    define a constant of type \c #int24_t
+    \since AVR-LibC v2.3, \ref int24 */
+#define INT24_C(value) ((int24_t) __CONCAT(value, L))
+
+/** \ingroup avr_stdint
+    define a constant of type \c #uint24_t
+    \since AVR-LibC v2.3, \ref int24 */
+#define UINT24_C(value) ((uint24_t) __CONCAT(value, UL))
 
 /** \ingroup avr_stdint
     define a constant of type int32_t */
