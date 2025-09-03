@@ -221,7 +221,7 @@
 
 - Fixed *"Calculations in util/setbaud.h are incorrect"* [#657][657].
 
-- Saturate the value that `_delay_us` / `delay_ms` are passing down to
+- Saturate the value that `_delay_us` / `_delay_ms` are passing down to
   `__builtin_avr_delay_cycles` in order to avoid UB ([#681][681])
   for large values.
 
