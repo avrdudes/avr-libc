@@ -587,8 +587,13 @@ it is supported by the compiler at library compile-time.
 AVR-LibC can be used with the most recent avr-gcc back to
 avr-gcc v4.8 at least.  Older versions may still work but are untested.
 
-Always use AVR-LibC with a compiler version for which the
-library has been configured and built.
+Always use AVR-LibC with a
+\if GIT_BRANCH_IS_ONLINEDOCS
+GCC and Binutils version
+\else
+\ref faq_toolchain_version "GCC and Binutils version"
+\endif
+for which the library has been configured and built.
 
 
 \section license AVR-LibC License
