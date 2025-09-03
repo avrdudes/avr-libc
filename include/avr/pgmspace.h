@@ -244,18 +244,18 @@ static inline signed int pgm_read_signed_int (const signed int *addr);
 static inline unsigned int pgm_read_unsigned_int (const unsigned int *addr);
 
 /** \ingroup avr_pgmspace
-    \fn __int24 pgm_read_i24 (const __int24 *addr)
-    Read an <tt>__int24</tt> from 16-bit (near) byte-address \p addr.
+    \fn int24_t pgm_read_i24 (const int24_t *addr)
+    Read an \c #int24_t from 16-bit (near) byte-address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
-static inline __int24 pgm_read_i24 (const __int24 *addr);
+static inline int24_t pgm_read_i24 (const int24_t *addr);
 
 /** \ingroup avr_pgmspace
-    \fn __uint24 pgm_read_u24 (const __uint24 *addr)
-    Read an <tt>__uint24</tt> from 16-bit (near) byte-address \p addr.
+    \fn uint24_t pgm_read_u24 (const uint24_t *addr)
+    Read an \c #uint24_t from 16-bit (near) byte-address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
-static inline __uint24 pgm_read_u24 (const __uint24 *addr);
+static inline uint24_t pgm_read_u24 (const uint24_t *addr);
 
 /** \ingroup avr_pgmspace
     \fn uint32_t pgm_read_u32 (const uint32_t *addr)
@@ -373,10 +373,8 @@ _Avrlibc_Def_Pgm_2 (unsigned_long, unsigned long)
 #endif
 
 #if defined(__INT24_MAX__)
-__extension__ typedef __int24 __i24_t;
-__extension__ typedef __uint24 __u24_t;
-_Avrlibc_Def_Pgm_3 (i24, __i24_t)
-_Avrlibc_Def_Pgm_3 (u24, __u24_t)
+_Avrlibc_Def_Pgm_3 (i24, int24_t)
+_Avrlibc_Def_Pgm_3 (u24, uint24_t)
 #endif /* Have __int24 */
 
 _Avrlibc_Def_Pgm_4 (u32, uint32_t)
@@ -527,18 +525,18 @@ static inline long pgm_read_long_far (uint_farptr_t addr);
 static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    \fn __int24 pgm_read_i24_far (uint_farptr_t addr)
-    Read an <tt>__int24</tt> from far byte-address \p addr.
+    \fn int24_t pgm_read_i24_far (uint_farptr_t addr)
+    Read an \c #int24_t from far byte-address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
-static inline __int24 pgm_read_i24_far (uint_farptr_t addr);
+static inline int24_t pgm_read_i24_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    \fn __uint24 pgm_read_u24_far (uint_farptr_t addr)
-    Read an <tt>__uint24</tt> from far byte-address \p addr.
+    \fn uint24_t pgm_read_u24_far (uint_farptr_t addr)
+    Read an \c #uint24_t from far byte-address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
-static inline __uint24 pgm_read_u24_far (uint_farptr_t addr);
+static inline uint24_t pgm_read_u24_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
     \fn uint32_t pgm_read_u32_far (uint_farptr_t addr)
@@ -642,8 +640,8 @@ _Avrlibc_Def_Pgm_Far_2 (unsigned_long, unsigned long)
 #endif
 
 #if defined(__INT24_MAX__)
-_Avrlibc_Def_Pgm_Far_3 (i24, __i24_t)
-_Avrlibc_Def_Pgm_Far_3 (u24, __u24_t)
+_Avrlibc_Def_Pgm_Far_3 (i24, int24_t)
+_Avrlibc_Def_Pgm_Far_3 (u24, uint24_t)
 #endif /* Have __int24 */
 
 _Avrlibc_Def_Pgm_Far_4 (u32, uint32_t)
