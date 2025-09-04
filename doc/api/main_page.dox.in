@@ -519,18 +519,18 @@ it is supported by the compiler at library compile-time.
 </dd>
 <dt>Wireless AVR Devices:</dt>
 <dd>
-  ATmega644RFR2,
   ATmega64RFR2,
+  ATmega644RFR2,
   ATmega128RFA1,
-  ATmega1284RFR2,
   ATmega128RFR2,
+  ATmega1284RFR2,
+  ATmega256RFR2,
   ATmega2564RFR2,
-  ATmega256RFR2
+  AT86RF401
 </dd>
 <dt>Miscellaneous Devices:</dt>
 <dd>
   AT94K \ref supp_dev_footnote_two "[2]",
-  AT86RF401,
   M3000 \ref supp_dev_footnote_four "[4]"
 </dd>
 <dt>Classic AVR Devices:</dt>
