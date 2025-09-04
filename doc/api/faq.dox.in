@@ -52,8 +52,6 @@
   - \ref faq_rom_array
   - \ref faq_startup
   - \ref faq_port_pass
-  - \ref faq_funcptr_gt128kib
-  - \ref faq_reg_usage
   - \ref faq_regbind
   - \ref faq_assign_chain
   - \ref faq_use_bv
@@ -65,6 +63,12 @@
   - \ref faq_asmconst "How do I use a \#define'd constant in an asm statement?"<!-- The explicit text is necessary since doxygen stumbles on the #define otherwise. -->
   - \ref faq_asmops
   - \ref faq_nonabi
+
+- <b>Binary Interface</b>
+  - \ref faq_reg_usage
+  - \ref faq_funcptr_gt128kib
+  - \ref faq_eind
+  - \ref faq_rampx
 
 - <b>Linking and Binaries</b>
   - \ref faq_reloc_code
@@ -559,7 +563,7 @@ ports can be forced that way.
 <small>Back to \ref faq_index.</small>
 
 
-\section faq_reg_usage What registers are used by the C compiler?
+\section faq_reg_usage What registers are used by the compiler?
 
 See also the
 <a href="https://gcc.gnu.org/wiki/avr-gcc#Type_Layout">Type Layout</a>,
@@ -673,6 +677,24 @@ sections in the avr-gcc Wiki.
 .
 </dd>
 </dl>
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_rampx How are the RAMPX, RAMPY, RAMPZ and RAMPD registers handled?
+
+See <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#ramp"
+       >The RAMPX, RAMPY, RAMPZ and RAMPD special function registers</a>
+in the GCC documentation.
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_eind How is the EIND special function register handled?
+
+See <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
+       >The EIND special function register</a>
+in the GCC documentation.
 
 <small>Back to \ref faq_index.</small>
 
@@ -992,7 +1014,7 @@ following rules:
   memory in the RAM address space, or when \c -mrodata-in-ram is specified.
   The place in the flash ROM (\c \.text) is occupied by the initializer
   values that are used by the startup code to initialize the objects
-  in the \c .data output section.
+  in the \c \.data output section.
 
 The question remains: Why is case 3. allocating constant variables into
 the SRAM?  For a better understanding, consider the following code:
@@ -2130,8 +2152,6 @@ the code can remain 16 bits wide.
 
 In order for this to work, the option <tt>-mrelax</tt> must be given
 on the compiler command-line that is used to link the final ELF file.
-(Older compilers did not implement this option for the AVR, use
-<tt>-Wl,\--relax</tt> instead.)
 
 See also the avr-gcc online documentation on the
 <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
@@ -2227,7 +2247,11 @@ the last directory becomes<br>
 
 \section faq_macros Which macros are defined in my program? Where are they defined, and to what value?
 
-One way is to add
+For a documentation of compiler built-in macros see
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#AVR-Built-in-Macros"
+   >AVR built-in macros</a> in the GCC online documentation.
+
+One way to find all the defined macros is to add
 <tt>\ref opt_save_temps "-save-temps"</tt> and <tt>\ref opt_g "-g3"</tt>
 to the compiler options.  This saves the temporary files like the
 pre-processed source code in an \c \.i file (for C sources),
