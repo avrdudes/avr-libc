@@ -43,82 +43,16 @@ hardware concepts of an AVR microcontroller.
 
 \section largedemo_hw Hardware setup
 
-The demo is set up in a way so it can be run on the ATmega16 that
-ships with the STK500 development kit.  The only external part needed
-is a potentiometer attached to the ADC.  It is connected to a 10-pin
-ribbon cable for port A, both ends of the potentiometer to pins 9
-(GND) and 10 (VCC), and the wiper to pin 1 (port A0).
-A bypass capacitor from pin 1 to pin 9 (like 47 nF) is recommendable.
+The demo is again arranged around an Arduino Nano compatible board.
+This time, the hardware PWM of the ATmega328P is used, so a LED (with
+resistor) needs to be attached to Arduino D8 (= PB1 = OC1A on the
+ATmega328P).  Further, a potentiometer needs to be connected to ADC0
+(Arduino A0), with GND and +5V at the outer terminals.  Finally, three
+push buttons are connected to Arduino D2, D3, and D4, respectively (=
+PD2, PD3, PD4).
 
-\image html largedemo-setup.jpg "Setup of the STK500"
-\image latex largedemo-setup.eps "Setup of the STK500" width=12cm
-
-The coloured patch cables are used to provide various
-interconnections.  As there are only four of them in the STK500, there
-are two options to connect them for this demo.  The second option for
-the yellow-green cable is shown in parenthesis in the table.
-Alternatively, the "squid" cable from the JTAG ICE kit can be used if
-available.
-
-<table>
- <tr><th>Port <th>Header <th>Color <th>Function <th>Connect to
- <tr><td>D0 <td>1 <td>brown  <td>RxD           <td>RXD of the RS-232 header
- <tr><td>D1 <td>2 <td>grey   <td>TxD           <td>TXD of the RS-232 header
- <tr><td>D2 <td>3 <td>black  <td>button "down" <td>SW0 (pin 1 switches header)
- <tr><td>D3 <td>4 <td>red    <td>button "up"   <td>SW1 (pin 2 switches header)
- <tr><td>D4 <td>5 <td>green  <td>button "ADC"  <td>SW2 (pin 3 switches header)
- <tr><td>D5 <td>6 <td>blue   <td>LED           <td>LED0 (pin 1 LEDs header)
- <tr><td>D6 <td>7 <td>(green)<td>clock out     <td>LED1 (pin 2 LEDs header)
- <tr><td>D7 <td>8 <td>white  <td>1-second flash<td>LED2 (pin 3 LEDs header)
- <tr><td>GND<td>9 <td>   <td>unused
- <tr><td>VCC<td>10<td> <td>unused
-</table>
-
-\image html largedemo-wiring.jpg "Wiring of the STK500"
-\image latex largedemo-wiring.eps "Wiring of the STK500" width=12cm
-
-The following picture shows the alternate wiring where LED1 is
-connected but SW2 is not:
-
-\image html largedemo-wiring2.jpg "Wiring option #2 of the STK500"
-\image latex largedemo-wiring2.eps "Wiring option #2 of the STK500" width=12cm
-
-As an alternative, this demo can also be run on the popular ATmega8
-controller, or its successor ATmega88 as well as the ATmega48 and
-ATmega168 variants of the latter.  These controllers do not have a
-port named "A", so their ADC inputs are located on port C instead,
-thus the potentiometer needs to be attached to port C.  Likewise, the
-OC1A output is not on port D pin 5 but on port B pin 1 (PB1).  Thus,
-the above cabling scheme needs to be changed so that PB1 connects to
-the LED0 pin.  (PD6 remains unconnected.)  When using the STK500, use
-one of the jumper cables for this connection.  All other port D pins
-should be connected the same way as described for the ATmega16 above.
-
-When not using an STK500 starter kit, attach the LEDs through some
-resistor to Vcc (low-active LEDs), and attach pushbuttons from the
-respective input pins to GND.  The internal pull-up resistors are
-enabled for the pushbutton pins, so no external resistors are needed.
-
-Finally, the demo has been ported to the ATtiny2313 as well.  As this
-AVR does not offer an ADC, everything related to handling the ADC is
-disabled in the code for that MCU type.  Also, port D of this
-controller type only features 6 pins, so the 1-second flash LED had to
-be moved from PD6 to PD4.  (PD4 is used as the ADC control button on
-the other MCU types, but that is not needed here.)  OC1A is located at
-PB3 on this device.
-
-The \c MCU_TARGET macro in the Makefile needs to be adjusted
-appropriately for the alternative controller types.
-
-The flash ROM and RAM consumption of this demo are way below the
-resources of even an ATmega48, and still well within the capabilities
-of an ATtiny2313.
-The major advantage of experimenting
-with the ATmega16 (in addition that it ships together with an STK500
-anyway) is that it can be debugged online via JTAG.
-Likewise, the ATmega48/88/168 and ATtiny2313 devices can be debugged
-through debugWire, using the Atmel JTAG ICE mkII or the low-cost
-AVR Dragon.
+\image html largedemo-setup.jpg "Setup of the Arduino Nano"
+\image latex largedemo-setup.jpg "Setup of the Arduino Nano" width=12cm
 
 Note that in the explanation below, all port/pin names are applicable
 to the ATmega16 setup.
