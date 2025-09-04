@@ -79,8 +79,6 @@ options of the respective release series:
      >v4.9</a>
 - <a href="https://gcc.gnu.org/onlinedocs/gcc-4.8.5/gcc/AVR-Options.html"
      >v4.8</a>
-- <a href="https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/AVR-Options.html"
-     >v4.7</a>
 
 Apart from the documentation of command line options, the linked pages also
 contain:
@@ -210,7 +208,7 @@ $ echo '#include <avr/io.h>' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR
   \endverbatim
   pre-processes the C file <tt>\#include \<avr/io.h\></tt> and writes all
   macro definitions to stdout.  The output is then filtered by \c grep to
-  show all possible #ISR vector names for ATmega8.
+  show all possible ISR \ref avr_mcu_signames "vector names" for ATmega8.
 
   <tt>-x none</tt> returns to the default for the following inputs, i.e.
   infer the respective source languages from the file extensions.
@@ -382,10 +380,10 @@ $ echo '#include <avr/io.h>' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR
   cases, \c main() won't even return anyway, and hence using a return type
   of \c int has no downsides at all).
 
-  However, this option also
+  <b>This option
   turns off all optimizations normally done by the compiler which
   assume that functions known by a certain name behave as described
-  by the standard.  For example, applying the function strlen() to a
+  by the standard.</b>  For example, applying the function \c strlen() to a
   literal string will normally cause the compiler to immediately
   replace that call by the actual length of the string, while with
   \c -ffreestanding, it will always call strlen() at run-time.
@@ -538,12 +536,6 @@ A number of the standard options might be of interest to AVR users.
 
 <dt><tt>\--section-start <em>sectionname=org</em></tt></dt>
 <dd>Start section \e sectionname at absolute address \e org.</dd>
-
-<dt><tt>\--relax</tt></dt>
-<dd>
-  Don't use this option directly or per <tt>-Wl,\--relax</tt>.
-  Instead, link with <tt>avr-gcc ... -mrelax</tt>.
-</dd>
 </dl>
 
 \subsection using_pass_ld_opts Passing linker options from the C compiler
@@ -558,14 +550,13 @@ System libraries are usually not passed by their explicit filename but
 rather using the \c -l option which uses an abbreviated form of the
 archive filename (see above).  AVR-LibC ships system libraries,
 \c libc.a, \c libm.a and <tt>lib<em>mcu</em>.a</tt>.
-While the standard library \c libc.a will
-always be searched for unresolved references when the linker is started
-using the C compiler frontend (i. e., there's always at least one
-implied \c -lc option), the mathematics library \c libm.a
-is only automatically added in GCC v4.7 and above.  On older versions, it
-needs to be explicitly requested using \c -lm.
+All these standard libraries will always be searched for unresolved
+references when the linker is started using the C/C++ compiler frontend,
+i. e., there are always implied options \c -lc and \c -lm.
+When a device library exists, which is the case since GCC v5,
+then <tt>-l<i>mcu</i></tt> will be automatically added, too.
 
-Conventionally, Makefiles use the \c make macro \c LDLIBS to keep
+Conventionally, Makefiles use the \c make macro \c LIBS to keep
 track of \c -l (and possibly \c -L) options that should only be
 appended to the C compiler command-line when linking the final binary.
 In contrast, the macro \c LDFLAGS is used to store other command-line
@@ -620,7 +611,9 @@ like
 \endcode
 
 The above will make the code use stack space from RAM address 0x3ff
-downwards.  The amount of stack space available then depends on the
+downwards.  Symbol \c __stack is picked up by the startup code to
+initialize the \c SP register.
+The amount of stack space available then depends on the
 bottom address of internal RAM for a particular device.  It is the
 responsibility of the application to ensure the stack does not grow
 out of bounds, as well as to arrange for the stack to not collide
