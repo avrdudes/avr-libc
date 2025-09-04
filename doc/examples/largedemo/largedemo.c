@@ -20,6 +20,7 @@
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
+#include <avr/power.h>
 
 /* Part 1: Macro definitions */
 
@@ -44,7 +45,8 @@
 #  define PWMDDR     DDRD
 #  define PWMOUT     PD5
 #elif defined(__AVR_ATmega8__) || defined(__AVR_ATmega48__) ||\
-      defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
+      defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) ||\
+      defined(__AVR_ATmega328P__)
 #  define PWMDDR     DDRB
 #  define PWMOUT     PB1
 #elif defined(__AVR_ATtiny2313__)
@@ -58,7 +60,7 @@
 #endif
 
 #if defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) ||\
-    defined(__AVR_ATmega168__)
+    defined(__AVR_ATmega168__)|| defined(__AVR_ATmega328P__)
 /* map ATmega8/16 names to ATmegaX8 names */
 #  define USART_RXC_vect USART_RX_vect
 #  define UDR     UDR0
@@ -210,6 +212,11 @@ ioinit(void)
 {
   uint16_t pwm_from_eeprom;
 
+#if defined(__AVR_ATmega328P__)	// Arduino Nano
+  // pre-scale clock from 16 MHz to 1 MHz
+  clock_prescale_set(clock_div_16);
+#endif
+
   /*
    * Set up the 16-bit timer 1.
    *
@@ -257,6 +264,12 @@ ioinit(void)
    */
   ADCSRA = _BV(ADEN) | _BV(ADPS1) | _BV(ADPS0);
 #endif
+#if defined(__AVR_ATmega328P__)
+  /* Arduino Nano uses AVcc as reference rather than AREF input */
+  ADMUX = _BV(REFS0);
+#endif
+
+
 
   TIMSK = _BV(TOIE1);
   sei();			/* enable interrupts */
