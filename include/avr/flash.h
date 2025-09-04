@@ -1418,7 +1418,9 @@ _Avrlibc_Def_F_4 (long_double, long double)
 #if defined(__AVR_HAVE_ELPM__)
 #define __ELPM__8fx(r,a,T) __ELPM__8(r,a,T)
 #else
-#define __ELPM__8fx(r,a,T) uint16_t __a = (uint16_t)(__uint24) a; __LPM__8(r,__a)
+#define __ELPM__8fx(r,a,T)                      \
+  uintptr_t __a = (uintptr_t)(uintptr24_t) a;   \
+  __LPM__8(r,__a)
 #endif
 
 
