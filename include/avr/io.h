@@ -33,16 +33,16 @@
 /** \defgroup avr_io <avr/io.h>: AVR device-specific IO definitions
     \code #include <avr/io.h> \endcode
 
-    This header file includes the apropriate IO definitions for the
+    This header file includes the appropriate IO definitions for the
     device that has been specified by the <tt>-mmcu=</tt> compiler
-    command-line switch.  This is done by diverting to the appropriate
+    command-line option.  This is done by diverting to the appropriate
     file <tt>&lt;avr/io</tt><em>XXXX</em><tt>.h&gt;</tt> which should
     never be included directly.  Some register names common to all
     AVR devices are defined directly within <tt>&lt;avr/common.h&gt;</tt>,
     which is included in <tt>&lt;avr/io.h&gt;</tt>,
     but most of the details come from the respective include file.
 
-    Note that this file always includes the following files:
+    Note that this header always includes the following ones:
     \code
     #include <avr/sfr_defs.h>
     #include <avr/portpins.h>
@@ -52,14 +52,14 @@
     See \ref avr_sfr for more details about that header file.
 
     Included are definitions of the IO register set and their
-    respective bit values as specified in the Atmel documentation.
-    Note that inconsistencies in naming conventions,
+    respective bit values as specified in the device manual.
+    Note that due to inconsistencies in naming conventions,
     so even identical functions sometimes get different names on
     different devices.
 
     Also included are the specific names useable for interrupt
-    function definitions as documented
-    \ref avr_signames "here".
+    service routines as documented
+    \ref avr_mcu_signames "here".
 
     Finally, the following macros are defined:
 
