@@ -30,6 +30,17 @@
 
 \page pgmspace Data in Program Space
 
+- \ref pgmspace_introduction
+- \ref pgmspace_const "Why is GCC putting const Data into RAM?"
+- \ref pgmspace_data
+  - \ref pgmspace_data_progmem
+  - \ref pgmspace_data_flash
+- \ref pgmspace_progmem_vs_flash
+- \ref pgmspace_strings
+  - \ref pgmspace_strings_flash
+  - \ref pgmspace_strings_progmem
+
+
 \section pgmspace_introduction Introduction
 
 So you have some constant data and you're running out of room to store it?
@@ -421,9 +432,13 @@ const __flash char* const __flash string_table[] =
 
 \section pgmspace_strings Storing and Retrieving Strings in the Program Space
 
+\subsection pgmspace_strings_flash With __flash
+
 \note For a solution with the #__flash address-space, see the section above
 or have a look at
 \ref faq_rom_array_as "FAQ: How to put an array of strings completely in ROM?"
+
+\subsection pgmspace_strings_progmem With PROGMEM
 
 Now that you can successfully store and retrieve simple data from Program Space
 you want to store and retrieve strings from Program Space. And specifically
