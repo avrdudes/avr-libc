@@ -1279,10 +1279,10 @@ Here is an example how interfacing \c mul_8_16 could look like:
 extern void mul_8_16 (void); // Non-ABI function. Don't call in C/C++!
 
 static inline __attribute__((__always_inline__))
-__uint24 mul_8_16_gccabi (uint8_t val8, uint16_t val16)
+uint24_t mul_8_16_gccabi (uint8_t val8, uint16_t val16)
 {
     register uint8_t r24 __asm("r24") = val8;
-    register __uint24 r18 __asm("r18");
+    register uint24_t r18 __asm("r18");
 
     asm ("%~call %x[func]"  "\n\t"
          "clr    __zero_reg__"
@@ -1359,9 +1359,9 @@ With that feature, the code from above can be simplified to:
 extern void mul_8_16 (void); // Non-ABI function. Don't call in C/C++!
 
 static inline __attribute__((__always_inline__))
-__uint24 mul_8_16_gccabi (uint8_t val8, uint16_t val16)
+uint24_t mul_8_16_gccabi (uint8_t val8, uint16_t val16)
 {
-    __uint24 result;
+    uint24_t result;
 
     asm ("%~call %x[func]"  "\n\t"
          "clr    __zero_reg__"
