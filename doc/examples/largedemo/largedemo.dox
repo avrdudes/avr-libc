@@ -55,17 +55,19 @@ PD2, PD3, PD4).
 \image latex largedemo-setup.jpg "Setup of the Arduino Nano" width=12cm
 
 Note that in the explanation below, all port/pin names are applicable
-to the ATmega16 setup.
+to the ATmega328P setup.
 
 \section largedemo_overview Functional overview
 
-PD6 will be toggled with each internal clock tick (approx. 10
-ms).  PD7 will flash once per second.
+PD6 (Arduino D6) will be toggled with each internal clock tick (approx. 10
+ms).  PD7 (Arduino D7) will flash (short low pulse) once per second.
 
 PD0 and PD1 are configured as UART IO, and can be used to connect the
 demo kit to a PC (9600 Bd, 8N1 frame format).  The demo application
 talks to the serial port, and it can be controlled from the serial
 port.
+On an Arduino Nano compatible board, this serial connection is routed
+to a USB-to-serial interface, so a PC can communicate through USB.
 
 PD2 through PD4 are configured as inputs, and control the
 application unless control has been taken over by the serial
@@ -75,8 +77,10 @@ shorting PD3 to GND will increase it.
 While PD4 is shorted to GND, one ADC conversion for channel 0 (ADC
 input is on PA0) will be triggered each internal clock tick, and
 the resulting value will be used as the PWM value.  So the
-brightness of the LED follows the analog input value on PC0.  VAREF
-on the STK500 should be set to the same value as VCC.
+brightness of the LED follows the analog input value on PC0.
+On the Arduino Nano, the ADC uses VCC internally as reference;
+all other setups require the reference voltage to be attached to
+the AREF pin.
 
 When running in serial control mode, the function of the
 watchdog timer can be demonstrated by typing an `r'.  This will
