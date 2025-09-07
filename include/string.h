@@ -57,8 +57,17 @@ extern "C" {
     The string functions perform string operations on \c NULL terminated
     strings.
 
-    \note If the strings you are working on resident in program space (flash),
-    you will need to use the string functions described in \ref avr_pgmspace. */
+    \note
+    If the strings you are working on reside in program memory (flash),
+    then you will need to use the string functions provided by one
+    of the following headers:
+    - \ref avr_pgmspace
+    - \ref avr_flash
+    \note
+    When the strings are defined with #PROGMEM or #PROGMEM_FAR,
+    then use the first header.   When they are defined with #__flash
+    or #__flashx, then use the second one.
+*/
 
 
 /** \ingroup avr_string
