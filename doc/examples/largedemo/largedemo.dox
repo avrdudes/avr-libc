@@ -113,14 +113,19 @@ connected to.  This provides some kind of mini-HAL (hardware
 abstraction layer) so should some of the connections be changed, they
 don't need to be changed inside the code but only on top.  Note that
 the location of the PWM output itself is mandated by the hardware, so
-it cannot be easily changed.  As the ATmega48/88/168 controllers
+it cannot be easily changed.  As the ATmega48/88/168/328P controllers
 belong to a more recent generation of AVRs, a number of register and
 bit names have been changed there, so they are mapped back to their
 ATmega8/16 equivalents to keep the actual program code portable.
 
 The name \c F_CPU is the conventional name to describe the CPU clock
-frequency of the controller.  This demo project just uses the internal
-calibrated 1 MHz RC oscillator that is enabled by default.  Note that
+frequency of the controller.  This demo project just uses a 1 MHz
+CPU clock.  On many AVR devices, this is the default startup frequency
+from the internal RC oscillator.  On the Arduino Nano, the MCU is
+clocked by an external 16 MHz crystal though.  Therefore, during
+device initialization, a 1:16 prescaler is configured at startup so
+the remaining code could remain the same.
+Note that
 when using the <tt>&lt;util/delay.h&gt;</tt> functions, \c F_CPU needs
 to be defined before including that file.
 
@@ -209,9 +214,9 @@ is a function to the compiler, the compiler will just emit the
 instructions for it without setting up any stack frame,
 and not even a RET instruction at the end.
 
-Notice that this code is not strictly conforming to GCC, which
-documents that \c naked functions only contain inline asm statements.
-Though the code is simple enough so it doesn't require a stack frame
+Notice that this code is not strictly conforming to GCC requirements, which
+documents that \c naked functions should only contain inline asm statements.
+However, the code is simple enough so it doesn't require a stack frame
 as the project is compiled with optimizations turned on.
 
 <dt><tt>used</tt>
