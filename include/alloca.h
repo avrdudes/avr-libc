@@ -31,7 +31,8 @@
 
 #include <stddef.h>
 
-/** \defgroup alloca <alloca.h>: Allocate space in the stack	*/
+/** \defgroup alloca <alloca.h>: Allocate space in the stack
+    \code #include <alloca.h> \endcode */
 
 /** \ingroup alloca
     \brief Allocate \a __size bytes of space in the stack frame of the caller.
