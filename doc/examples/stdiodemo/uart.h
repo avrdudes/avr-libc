@@ -12,12 +12,12 @@
 /*
  * Perform UART startup initialization.
  */
-void	uart_init(void);
+void    uart_init(void);
 
 /*
  * Send one character to the UART.
  */
-int	uart_putchar(char c, FILE *stream);
+int     uart_putchar(char c, FILE *stream);
 
 /*
  * Size of internal line buffer used by uart_getchar().
@@ -29,4 +29,4 @@ int	uart_putchar(char c, FILE *stream);
  * line-buffered, and one character is returned from the buffer at
  * each invocation.
  */
-int	uart_getchar(FILE *stream);
+int     uart_getchar(FILE *stream);
