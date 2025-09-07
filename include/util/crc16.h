@@ -71,12 +71,16 @@
     Embedded \e Systems \e Programming. This may be difficult to find, but it
     explains CRC's in very clear and concise terms. Well worth the effort to
     obtain a copy.
+
+The hexadecimal values shown beneath the polynomials may be in
+little-endian or big-endian notation.  The leading term is implicit.
+For details, see the respective implementation and the references.
 */
 
 /** \ingroup util_crc
     Optimized CRC-16 calculation.
 
-    Polynomial: x<sup>16</sup> + x<sup>15</sup> + x<sup>2</sup> + 1 (0xa001)<br>
+    Polynomial: x<sup>16</sup> + x<sup>15</sup> + x<sup>2</sup> + 1 (0xa001, big-endian)<br>
     Initial value: \c 0xffff
 
     This CRC is normally used in disk-drive controllers.
@@ -140,7 +144,7 @@ _crc16_update(uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-XMODEM calculation.
 
-    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x1021)<br>
+    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x1021, little-endian)<br>
     Initial value: \c 0x0
 
     This is the CRC used by the Xmodem-CRC protocol.
@@ -201,7 +205,7 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-CCITT calculation.
 
-    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x8408)<br>
+    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x8408, big-endian)<br>
     Initial value: \c 0xffff
 
     This is the CRC used by PPP and IrDA.
@@ -267,7 +271,7 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized Dallas (now Maxim) iButton 8-bit CRC calculation.
 
-    Polynomial: x<sup>8</sup> + x<sup>5</sup> + x<sup>4</sup> + 1 (0x8C)<br>
+    Polynomial: x<sup>8</sup> + x<sup>5</sup> + x<sup>4</sup> + 1 (0x8C, big-endian)<br>
     Initial value: \c 0x0
 
     See http://www.maxim-ic.com/appnotes.cfm/appnote_number/27
@@ -313,7 +317,7 @@ _crc_ibutton_update (uint8_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-8-CCITT calculation.
 
-    Polynomial: x<sup>8</sup> + x<sup>2</sup> + x + 1 (0xE0)<br>
+    Polynomial: x<sup>8</sup> + x<sup>2</sup> + x + 1 (0xE0, big-endian)<br>
 
     For use with simple CRC-8<br>
     Initial value: 0x0
