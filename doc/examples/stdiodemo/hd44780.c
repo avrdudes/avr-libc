@@ -34,11 +34,11 @@
 
 /* nibble macros, used for data path */
 #define ASSIGN_(what, p, m, v) GLUE(what, p) = (GLUE(what, p) & \
-						~((1 << (m)) | (1 << ((m) + 1)) | \
-						  (1 << ((m) + 2)) | (1 << ((m) + 3)))) | \
-					        ((v) << (m))
+                                                ~((1 << (m)) | (1 << ((m) + 1)) | \
+                                                  (1 << ((m) + 2)) | (1 << ((m) + 3)))) | \
+                                                ((v) << (m))
 #define READ_(what, p, m) (GLUE(what, p) & ((1 << (m)) | (1 << ((m) + 1)) | \
-					    (1 << ((m) + 2)) | (1 << ((m) + 3)))) >> (m)
+                                            (1 << ((m) + 2)) | (1 << ((m) + 3)))) >> (m)
 #define ASSIGN(what, x, v) ASSIGN_(what, x, v)
 #define READ(what, x) READ_(what, x)
 
@@ -185,7 +185,7 @@ hd44780_init(void)
   SET(DDR, HD44780_E);
   ASSIGN(DDR, HD44780_D4, 0x0F);
 
-  _delay_ms(15);		/* 40 ms needed for Vcc = 2.7 V */
+  _delay_ms(15);                /* 40 ms needed for Vcc = 2.7 V */
   hd44780_outnibble(HD44780_FNSET(1, 0, 0) >> 4, 0);
   _delay_ms(4.1);
   hd44780_outnibble(HD44780_FNSET(1, 0, 0) >> 4, 0);

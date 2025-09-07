@@ -65,57 +65,57 @@ main(void)
     {
       printf_P(PSTR("Enter command: "));
       if (fgets(buf, sizeof buf - 1, stdin) == NULL)
-	break;
+        break;
       if (tolower(buf[0]) == 'q')
-	break;
+        break;
 
       switch (tolower(buf[0]))
-	{
-	default:
-	  printf("Unknown command: %s\n", buf);
-	  break;
+        {
+        default:
+          printf("Unknown command: %s\n", buf);
+          break;
 
-	case 'l':
-	  if (sscanf(buf, "%*s %s", s) > 0)
-	    {
-	      fprintf(&lcd_str, "Got %s\n", s);
-	      printf("OK\n");
-	    }
-	  else
-	    {
-	      printf("sscanf() failed\n");
-	    }
-	  break;
+        case 'l':
+          if (sscanf(buf, "%*s %s", s) > 0)
+            {
+              fprintf(&lcd_str, "Got %s\n", s);
+              printf("OK\n");
+            }
+          else
+            {
+              printf("sscanf() failed\n");
+            }
+          break;
 
-	case 'u':
-	  if (sscanf(buf, "%*s %s", s) > 0)
-	    {
-	      fprintf(&uart_str, "Got %s\n", s);
-	      printf("OK\n");
-	    }
-	  else
-	    {
-	      printf("sscanf() failed\n");
-	    }
-	  break;
+        case 'u':
+          if (sscanf(buf, "%*s %s", s) > 0)
+            {
+              fprintf(&uart_str, "Got %s\n", s);
+              printf("OK\n");
+            }
+          else
+            {
+              printf("sscanf() failed\n");
+            }
+          break;
 
 #ifdef LED_PORT
-	case 'd':
-	  if (sscanf(buf, "%*s %d", &v) > 0)
-	    {
-	      if (v == 0)
-		LED_PORT &= ~LED_PIN; // turn off LED
-	      else
-		LED_PORT |= LED_PIN; // turn on LED
-	      printf("OK\n");
-	    }
-	  else
-	    {
-	      printf("sscanf() failed\n");
-	    }
-	  break;
+        case 'd':
+          if (sscanf(buf, "%*s %d", &v) > 0)
+            {
+              if (v == 0)
+                LED_PORT &= ~LED_PIN; // turn off LED
+              else
+                LED_PORT |= LED_PIN; // turn on LED
+              printf("OK\n");
+            }
+          else
+            {
+              printf("sscanf() failed\n");
+            }
+          break;
 #endif
-	}
+        }
     }
   fprintf(stderr, "Bye-bye");
   delay_1s();
