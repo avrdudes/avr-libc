@@ -58,7 +58,7 @@ $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 clean:
-	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak
+	rm -rf *.o $(PRG).elf *.png *.pdf *.bak
 	rm -rf *.lst *.map $(EXTRA_CLEAN_FILES)
 
 lst:  $(PRG).lst
@@ -108,20 +108,3 @@ esrec: $(PRG)_eeprom.srec
 %_eeprom.bin: %.elf
 	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O binary $< $@
 
-# Every thing below here is used by avr-libc's build system and can be ignored
-# by the casual user.
-
-JPEGFILES               = largedemo-setup.jpg largedemo-wiring.jpg \
-                          largedemo-wiring2.jpg
-
-JPEG2PNM                = jpegtopnm
-PNM2EPS                 = pnmtops
-JPEGRESOLUTION          = 180
-EXTRA_CLEAN_FILES       = *.hex *.bin *.srec *.eps
-
-dox: ${JPEGFILES:.jpg=.eps}
-
-%.eps: %.jpg
-	$(JPEG2PNM) $< |\
-	$(PNM2EPS) -noturn -dpi $(JPEGRESOLUTION) -equalpixels \
-	> $@
