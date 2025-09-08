@@ -35,7 +35,6 @@ DEMO_SRCS            = \
                        asmdemo/project.h \
                        demo/Makefile \
                        demo/demo.c \
-                       demo/iocompat.h \
                        largedemo/Makefile \
                        largedemo/largedemo.c \
                        stdiodemo/Makefile \
@@ -59,11 +58,8 @@ DEMO_DIRS            = asmdemo \
 EXTRA_DIST           = ${DEMO_SRCS} \
                        all-demos.dox \
                        asmdemo/asmdemo.dox \
-                       demo/demo.fig \
                        demo/demo.dox \
                        largedemo/largedemo-setup.jpg \
-                       largedemo/largedemo-wiring.jpg \
-                       largedemo/largedemo-wiring2.jpg \
                        largedemo/largedemo.dox \
                        stdiodemo/stdiodemo-setup.jpg \
                        stdiodemo/stdiodemo.dox \
