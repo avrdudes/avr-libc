@@ -73,7 +73,7 @@
 
 /** \ingroup avr_version
     Numerical representation of the release date. */
-#define __AVR_LIBC_DATE_            @AVR_LIBC_RELDATE@UL
+#define __AVR_LIBC_DATE__           @AVR_LIBC_RELDATE@UL
 
 /** \ingroup avr_version
     Library major version number. */

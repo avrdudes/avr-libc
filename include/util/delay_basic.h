@@ -33,10 +33,11 @@
 #define _UTIL_DELAY_BASIC_H_ 1
 
 #include <inttypes.h>
+#include <bits/attribs.h>
 
 #if !defined(__DOXYGEN__)
-static __inline__ void _delay_loop_1(uint8_t __count) __attribute__((__always_inline__));
-static __inline__ void _delay_loop_2(uint16_t __count) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void _delay_loop_1(uint8_t __count);
+static __ATTR_ALWAYS_INLINE__ void _delay_loop_2(uint16_t __count);
 #endif
 
 /** \file */
@@ -61,7 +62,6 @@ static __inline__ void _delay_loop_2(uint16_t __count) __attribute__((__always_i
     to the overall delay time.
 
     Two inline functions are provided for the actual delay algorithms.
-
 */
 
 /** \ingroup util_delay_basic

@@ -104,6 +104,9 @@
   has been added.  It can be used to get estimates of how much stack is
   used by a running program.
 
+- The `uint24_t`, `int24_t` and associated types and macros have been added
+  to [<stdint.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdint.html) ([#1045][1045]).
+
 - The C/C++ register footprint of some common simple functions has
   been improved by implementing them as extern inline assembly stubs:
   `strlen`, `strlen_P`, `strcpy`, `strcpy_P`, `strcmp`, `strcmp_P`,
@@ -170,6 +173,9 @@
   ([#391][391], [#635][635], [#643][643], [#663][663], [#875][875], [#959][959], [#960][960], [#961][961]),
   these headers have been updated to a more recent revision.
 
+- Added defines to `avr/io.h` that match the names in the
+  ATmega324PA data sheet ([#443][443]).
+
 - Fixed signature definitions in avr/io.h for several devices ([#877][877])
   and add some missing signatures ([#878][878]).
 
@@ -215,7 +221,7 @@
 
 - Fixed *"Calculations in util/setbaud.h are incorrect"* [#657][657].
 
-- Saturate the value that `_delay_us` / `delay_ms` are passing down to
+- Saturate the value that `_delay_us` / `_delay_ms` are passing down to
   `__builtin_avr_delay_cycles` in order to avoid UB ([#681][681])
   for large values.
 
@@ -239,6 +245,7 @@
 - New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
 
 [391]: https://github.com/avrdudes/avr-libc/issues/391
+[443]: https://github.com/avrdudes/avr-libc/issues/443
 [496]: https://github.com/avrdudes/avr-libc/issues/496
 [629]: https://github.com/avrdudes/avr-libc/issues/629
 [635]: https://github.com/avrdudes/avr-libc/issues/635
@@ -282,3 +289,4 @@
 [1039]: https://github.com/avrdudes/avr-libc/issues/1039
 [1040]: https://github.com/avrdudes/avr-libc/issues/1040
 [1044]: https://github.com/avrdudes/avr-libc/issues/1044
+[1045]: https://github.com/avrdudes/avr-libc/issues/1045

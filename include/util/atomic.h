@@ -33,39 +33,37 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <bits/attribs.h>
 
 #if !defined(__DOXYGEN__)
 /* Internal helper functions. */
-static __inline__ uint8_t __iSeiRetVal(void)
+static __ATTR_ALWAYS_INLINE__ uint8_t __iSeiRetVal(void)
 {
     sei();
     return 1;
 }
 
-static __inline__ uint8_t __iCliRetVal(void)
+static __ATTR_ALWAYS_INLINE__ uint8_t __iCliRetVal(void)
 {
     cli();
     return 1;
 }
 
-static __inline__ void __iSeiParam(const uint8_t *__s)
+static __ATTR_ALWAYS_INLINE__ void __iSeiParam(const uint8_t *__s)
 {
     sei();
-    __asm__ volatile ("" ::: "memory");
     (void)__s;
 }
 
-static __inline__ void __iCliParam(const uint8_t *__s)
+static __ATTR_ALWAYS_INLINE__ void __iCliParam(const uint8_t *__s)
 {
     cli();
-    __asm__ volatile ("" ::: "memory");
     (void)__s;
 }
 
-static __inline__ void __iRestore(const  uint8_t *__s)
+static __ATTR_ALWAYS_INLINE__ void __iRestore(const  uint8_t *__s)
 {
     SREG = *__s;
-    __asm__ volatile ("" ::: "memory");
 }
 #endif	/* !__DOXYGEN__ */
 

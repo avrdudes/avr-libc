@@ -83,6 +83,23 @@ If these functions are used within both standard and interrupt contexts
 undefined behaviour will result.
 See the \ref faq_reentrant "FAQ" for a more detailed discussion.
 
+
+\section supp_compilers Supported Compilers
+\addindex supported compilers
+
+AVR-LibC can be used with the most recent AVR GCC back to
+<a href="https://gcc.gnu.org/gcc-4.8">v4.8</a>.
+Older versions may still work but are untested and not recommended.
+
+Always use AVR-LibC with the
+\if GIT_BRANCH_IS_ONLINEDOCS
+GCC and Binutils version
+\else
+\ref faq_toolchain_version "GCC and Binutils version"
+\endif
+for which the library has been configured and built.
+
+
 \section supp_devices Supported Devices
 
 \addindex supported devices
@@ -519,18 +536,18 @@ it is supported by the compiler at library compile-time.
 </dd>
 <dt>Wireless AVR Devices:</dt>
 <dd>
-  ATmega644RFR2,
   ATmega64RFR2,
+  ATmega644RFR2,
   ATmega128RFA1,
-  ATmega1284RFR2,
   ATmega128RFR2,
+  ATmega1284RFR2,
+  ATmega256RFR2,
   ATmega2564RFR2,
-  ATmega256RFR2
+  AT86RF401
 </dd>
 <dt>Miscellaneous Devices:</dt>
 <dd>
   AT94K \ref supp_dev_footnote_two "[2]",
-  AT86RF401,
   M3000 \ref supp_dev_footnote_four "[4]"
 </dd>
 <dt>Classic AVR Devices:</dt>
@@ -579,16 +596,6 @@ it is supported by the compiler at library compile-time.
   Motion Systems (IMS) / Schneider Electric.
 </dd>
 </dl>
-
-
-\section supp_compilers Supported Compilers
-\addindex supported compilers
-
-AVR-LibC can be used with the most recent avr-gcc back to
-avr-gcc v4.8 at least.  Older versions may still work but are untested.
-
-Always use AVR-LibC with a compiler version for which the
-library has been configured and built.
 
 
 \section license AVR-LibC License

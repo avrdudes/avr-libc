@@ -76,7 +76,7 @@ all copies. Permission is granted to copy and distribute modified versions of
 this manual provided that the entire resulting derived work is distributed
 under the terms of a permission notice identical to this one.
 
-This document describes version 4.7 of the compiler or newer.
+This document describes version 4.8 of the compiler or newer.
 
 Herne, 17th of May 2002
 Harald Kipp
@@ -111,6 +111,11 @@ forms:
   This type of asm statement may occur at top level, outside any function
   as global asm.  When its placement relative to functions is important,
   consider \c -fno-toplevel-reorder.
+
+  In <a href="https://gcc.gnu.org/gcc-15/changes.html#c-family">GCC v15</a>
+  and up, <a href="https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html"
+    >extended inline asm</a> can be used with some limitations outside
+  of functions as well.
 </dd>
 
 <dt>An asm with operands</dt>
@@ -160,7 +165,7 @@ Notes on the various parts:
   A non-volatile asm statement with output operands that are all unused
   may be optimized away when all output operands are unused.
 
-  Instead of \c volatile, \c __volatile or \c __volatile__ can be used.
+  Instead of \c volatile, \c __volatile or \c __volatile__ can be used as well.
 </dd>
 
 <dt><tt>code-string</tt></dt>
@@ -1279,10 +1284,10 @@ Here is an example how interfacing \c mul_8_16 could look like:
 extern void mul_8_16 (void); // Non-ABI function. Don't call in C/C++!
 
 static inline __attribute__((__always_inline__))
-__uint24 mul_8_16_gccabi (uint8_t val8, uint16_t val16)
+uint24_t mul_8_16_gccabi (uint8_t val8, uint16_t val16)
 {
     register uint8_t r24 __asm("r24") = val8;
-    register __uint24 r18 __asm("r18");
+    register uint24_t r18 __asm("r18");
 
     asm ("%~call %x[func]"  "\n\t"
          "clr    __zero_reg__"
@@ -1359,9 +1364,9 @@ With that feature, the code from above can be simplified to:
 extern void mul_8_16 (void); // Non-ABI function. Don't call in C/C++!
 
 static inline __attribute__((__always_inline__))
-__uint24 mul_8_16_gccabi (uint8_t val8, uint16_t val16)
+uint24_t mul_8_16_gccabi (uint8_t val8, uint16_t val16)
 {
-    __uint24 result;
+    uint24_t result;
 
     asm ("%~call %x[func]"  "\n\t"
          "clr    __zero_reg__"
