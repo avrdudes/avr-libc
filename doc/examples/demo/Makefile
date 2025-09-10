@@ -90,7 +90,7 @@ srec: $(PRG).srec
 %.bin: %.elf
 	$(OBJCOPY) -j .text -j .data -O binary $< $@
 
-.PHONY: hex bin srec
+.PHONY: text hex bin srec
 
 # Rules for building the .eeprom rom images
 
