@@ -131,7 +131,7 @@ MCU_demo = atmega328p
 MCU_asmdemo = attiny13
 MCU_twitest = atmega128
 MCU_stdiodemo = atmega328p
-MCU_largedemo = atmega16
+MCU_largedemo = atmega328p
 
 # The relative multilib path for mcu $1.
 Pml = $(shell $(CC) -print-multi-directory -mmcu=$1)
