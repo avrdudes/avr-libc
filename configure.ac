@@ -320,7 +320,6 @@ AC_ARG_ENABLE(versioned-doc,
 
 
 CHECK_DOXYGEN
-CHECK_PNG_UTILS
 
 if test "$versioned_doc" = "yes"; then
 	DOC_INST_DIR='${DESTDIR}${datadir}/doc/avr-libc-$(VERSION)'
