@@ -205,15 +205,15 @@ The address one byte past the last address in the \c \.text segment
 is denoted by \c _etext.
 
 The \c \.data segment (where initialized static variables are stored) starts
-at location \c 0x100, which is the first address after the IO registers on an
+at location 0x100, which is the first address after the IO registers on an
 ATmega328P processor.
 The segment is mapped to 0x800000 to simulate a flat address space.
 
-The next available address in the \c \.data segment is also location \c 0x100,
+The next available address in the \c \.data segment is also location 0x100,
 so the application has no initialized data.
 
 The \c \.bss segment (where uninitialized data is stored) starts at location
-\c 0x100.
+0x100.
 
 The next available address in the \c \.bss segment is location 0x103, so the
 application uses a total of 3 bytes of zero-initialized data,
