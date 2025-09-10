@@ -72,21 +72,11 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
-# All demo projects where we need to run "make dox" beforehand.
-DOX_DEMOS            = largedemo stdiodemo
-
 all-local: html pdf
 
 # Before we can build the dox, we need to build the demo project so that some
 # included files get generated.
 demo: example-demo
-
-# Generate EPS files from JPG for demos.
-demodox:
-	for demo in $(DOX_DEMOS); do \
-	  ( cd $(top_srcdir)/doc/examples/$$demo && \
-	  ${MAKE} dox ); \
-	done
 
 # Copy examples to builddir.
 demo-examples:
@@ -127,10 +117,10 @@ IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
 # Rule for generating html output.
-html: demo demodox demo-examples $(TARGET_DOX_HTML)
+html: demo demo-examples $(TARGET_DOX_HTML)
 
 # Rule for generating PDF output
-pdf: demo demodox $(TARGET_DOX_PDF)
+pdf: demo $(TARGET_DOX_PDF)
 
 # General rule for installing documentation
 install-data-local: $(INSTALL_DOX_HTML) $(INSTALL_DOX_PDF) \
@@ -179,7 +169,7 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only
 # a prerequisite for ps.
-dox-html: demo demodox $(USER_MANUAL)/index.html $(USER_MANUAL).tar.bz2
+dox-html: demo $(USER_MANUAL)/index.html $(USER_MANUAL).tar.bz2
 
 $(USER_MANUAL)/index.html: latex_src/refman.tex
 
@@ -218,7 +208,7 @@ install-dox-man: dox-html
 	$(mkinstalldirs) $(DESTDIR)$(mandir)/man3
 	$(INSTALL_DATA) man/man3/*.3 $(DESTDIR)$(mandir)/man3
 
-.PHONY: html latex pdf demo demodox demo-examples \
+.PHONY: html latex pdf demo demo-examples \
 	dox-html dox-pdf install-pdf install-html \
 	install-dox-html install-dox-pdf \
 	install-dox-man
