@@ -73,7 +73,7 @@ DOC_INST_DIR         = @DOC_INST_DIR@
 USER_MANUAL          = @AVR_LIBC_USER_MANUAL@
 
 # All demo projects where we need to run "make dox" beforehand.
-DOX_DEMOS            = demo largedemo stdiodemo
+DOX_DEMOS            = largedemo stdiodemo
 
 all-local: html pdf
 
