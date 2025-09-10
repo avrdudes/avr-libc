@@ -230,7 +230,7 @@
 - Modernized the
   [A simple project](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__demo__project.html)
   demo example project: It now uses the ATmega328P device that is widely
-  used, for example on the Arduino Nano boards ([#1044][1044]).
+  used, for example on the Arduino Nano boards ([#1044][1044], [#1048][1048]).
 
 - Fix support for ATxmega devices in avr/wdt.h ([#646][646]).
 
@@ -290,3 +290,4 @@
 [1040]: https://github.com/avrdudes/avr-libc/issues/1040
 [1044]: https://github.com/avrdudes/avr-libc/issues/1044
 [1045]: https://github.com/avrdudes/avr-libc/issues/1045
+[1048]: https://github.com/avrdudes/avr-libc/issues/1048
