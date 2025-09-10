@@ -56,7 +56,8 @@ HD44780-compatible LCD controller has been chosen.  This display needs
 to be connected to the Arduino Nano in the following way:
 
 <table>
- <tr><td><b>Port</b></td><td><b>Header</b></td><td><b>Function</b></td></tr>
+ <caption>Arduino Nano &harr; HD44780 LCD Wiring</caption>
+ <tr><th>Port <th>Header <th>Function
  <tr><td>D2</td> <td>D2</td> <td>LCD D4</td></tr>
  <tr><td>D3</td> <td>D3</td> <td>LCD D5</td></tr>
  <tr><td>D4</td> <td>D4</td> <td>LCD D6</td></tr>
