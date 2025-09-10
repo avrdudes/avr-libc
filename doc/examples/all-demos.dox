@@ -85,9 +85,5 @@
 
   For the \ref stdiodemo "stdio" demo, an industry-standard
   HD44780-compatible LCD display of at least 16x1 characters
-  will be needed.  Among other things, the
-  <a href="http://ssl.bulix.org/projects/lcd4linux/">LCD4Linux</a>
-  project page describes many things around these displays,
-  including common pinouts.
-
+  will be needed.
 */
