@@ -112,6 +112,8 @@ esrec: $(PRG)_eeprom.srec
 	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O binary $< $@ \
 	|| { echo empty $@ not generated; exit 0; }
 
+EXTRA_CLEAN_FILES += *.hex *.bin *.srec
+
 .PHONY: eeprom ehex ebin esrec
 # The line above is used as an \until marker in demo.dox.
 
