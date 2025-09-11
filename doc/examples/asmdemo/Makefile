@@ -45,7 +45,7 @@ CFLAGS = $(CDEBUG) $(CDEFS) $(CINCS) -O$(OPT) $(CWARN) $(CSTANDARD) $(CEXTRA)
 # Minimalistic printf version
 PRINTF_LIB_MIN = -Wl,-u,vfprintf -lprintf_min
 
-# Floating point printf version (requires MATH_LIB = -lm below)
+# Floating point printf version
 PRINTF_LIB_FLOAT = -Wl,-u,vfprintf -lprintf_flt
 
 PRINTF_LIB =
@@ -53,12 +53,13 @@ PRINTF_LIB =
 # Minimalistic scanf version
 SCANF_LIB_MIN = -Wl,-u,vfscanf -lscanf_min
 
-# Floating point + %[ scanf version (requires MATH_LIB = -lm below)
+# Floating point + %[ scanf version
 SCANF_LIB_FLOAT = -Wl,-u,vfscanf -lscanf_flt
 
 SCANF_LIB =
 
-LIBS = $(PRINTF_LIB) $(SCANF_LIB) -lm
+# No need to add -lm (the compiler driver adds -lm automatically).
+LIBS = $(PRINTF_LIB) $(SCANF_LIB)
 
 # External memory options
 
