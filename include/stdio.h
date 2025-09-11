@@ -585,19 +585,45 @@ extern int	fclose(FILE *__stream);
    the very basic integer and string conversion facilities, but only
    the \c # additional option can be specified using conversion
    flags (these flags are parsed correctly from the format
-   specification, but then simply ignored).  This version can be
-   requested using the following \ref gcc_minusW "compiler options":
+   specification, but then simply ignored).  The respective version can
+   be requested using the following \ref gcc_minusW "compiler options":
 
+   <dl>
+   <dt>Classic approach</dt>
+   <dd>
+   - The minimal version can be requested with the following options:
    \code
    -Wl,-u,vfprintf -lprintf_min
    \endcode
 
-   If the full functionality including the floating point conversions
+   - If the full functionality including the floating point conversions
    is required, the following options should be used:
-
    \code
-   -Wl,-u,vfprintf -lprintf_flt -lm
+   -Wl,-u,vfprintf -lprintf_flt
    \endcode
+
+   This approach will always link the selected printf code,
+   even when the application doesn't use printf.
+   </dd>
+   <dt>Since AVR-LibC v2.3</dt>
+   <dd>
+   - The minimal version can be requested with the following options:
+   \code
+   -Wl,--defsym,vfprintf=vfprintf_min
+   \endcode
+   - The full functionality including the floating point conversions
+   can be requested with:
+   \code
+   -Wl,--defsym,vfprintf=vfprintf_flt
+   \endcode
+
+   The difference to the "classic" approach is that when no printf
+   is used in the application and <tt>-Wl,\--gc-sections</tt> is added to
+   the linker options, then the printf code will not be pulled in.  See
+   <a href="https://github.com/avrdudes/avr-libc/issues/654">issue \#654</a>
+   for an example.
+   </dd>
+   </dl>
 
    \par Limitations:
    - The specified width and precision can be at most 255.

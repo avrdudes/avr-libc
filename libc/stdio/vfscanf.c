@@ -43,6 +43,10 @@
 #include "sectionname.h"
 #include "stdio_private.h"
 
+#ifndef VFSCANF_NAME
+#define VFSCANF_NAME vfscanf
+#endif
+
 #if	!defined (SCANF_LEVEL)
 # ifndef SCANF_WWIDTH		/* use word for width variable	*/
 #  define SCANF_WWIDTH 0
@@ -704,6 +708,7 @@ static int skip_spaces (FILE *stream)
      thus far from the input is stored through the next pointer, which
      must be a pointer to \c int.  This is not a conversion, although it
      can be suppressed with the \c * flag.
+.
 
      These functions return the number of input items assigned, which can
      be fewer than provided for, or even zero, in the event of a matching
@@ -717,28 +722,58 @@ static int skip_spaces (FILE *stream)
 
      By default, all the conversions described above are available except
      the floating-point conversions and the width is limited to 255
-     characters.  The float-point conversion will be available in the
-     extended version provided by the library \c libscanf_flt.a.  Also in
+     characters.  The floating-point conversion will be available in the
+     extended version.  Also in
      this case the width is not limited (exactly, it is limited to 65535
-     characters).  To link a program against the extended version, use the
-     following compiler flags in the link stage:
-
-     \code
-     -Wl,-u,vfscanf -lscanf_flt -lm
-     \endcode
+     characters).
 
      A third version is available for environments that are tight on
      space.  In addition to the restrictions of the standard one, this
-     version implements no <tt>%[</tt> specification.  This version is
-     provided in the library \c libscanf_min.a, and can be requested using
-     the following options in the link stage:
+     version implements no <tt>%[</tt> specification.
 
+     To link a program against the respective version, use the
+     following \ref gcc_minusW "compiler flags" in the link stage:
+
+     <dl>
+     <dt>Classic approach</dt>
+     <dd>
+     - In order to use the extended version, link with:
      \code
-     -Wl,-u,vfscanf -lscanf_min -lm
+     -Wl,-u,vfscanf -lscanf_flt
      \endcode
+
+     - In order to use the minimal version, link with:
+     \code
+     -Wl,-u,vfscanf -lscanf_min
+     \endcode
+
+     This approach will always link the requested scanf implementation,
+     even when the application doesn't use scanf.
+     </dd>
+     <dt>Since AVR-LibC v2.3</dt>
+     <dd>
+     - In order to use the extended version, link with:
+     \code
+     -Wl,--defsym,vfscanf=vfscanf_flt
+     \endcode
+
+     - In order to use the minimal version, link with:
+     \code
+     -Wl,--defsym,vfscanf=vfscanf_min
+     \endcode
+
+     This approach will not link the requested scanf implementation
+     provided the application doesn't use scanf,
+     and <tt>-Wl,\--gc-sections</tt> is added to the link options.
+     </dd>
+     </dl>
 */
 ATTRIBUTE_CLIB_SECTION
+#ifdef __DOXYGEN__
 int vfscanf (FILE * stream, const char *fmt, va_list ap)
+#else
+int VFSCANF_NAME (FILE * stream, const char *fmt, va_list ap)
+#endif
 {
     unsigned char nconvs;
     unsigned char stream_flags;

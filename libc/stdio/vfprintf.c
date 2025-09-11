@@ -51,6 +51,10 @@
  * intended for floating point support.
  */
 
+#ifndef VFPRINTF_NAME
+#define VFPRINTF_NAME vfprintf
+#endif
+
 #ifndef PRINTF_LEVEL
 # define PRINTF_LEVEL PRINTF_STD
 #endif
@@ -123,7 +127,7 @@
 
 ATTRIBUTE_CLIB_SECTION
 int
-vfprintf (FILE * stream, const char *fmt, va_list ap)
+VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 {
     unsigned char c;		/* holds a char from the format string */
     unsigned char flags;
@@ -291,7 +295,7 @@ vfprintf (FILE * stream, const char *fmt, va_list ap)
 
 
 ATTRIBUTE_CLIB_SECTION
-int vfprintf (FILE * stream, const char *fmt, va_list ap)
+int VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 {
     unsigned char c;		/* holds a char from the format string */
     unsigned char flags;

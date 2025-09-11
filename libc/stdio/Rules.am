@@ -29,6 +29,8 @@
 include $(top_srcdir)/libc/stdio/Files.am
 
 stdio_a_libadd = vfprintf_std.o vfscanf_std.o
+stdio_a_libadd += vfprintf_name_min.o vfprintf_name_flt.o
+stdio_a_libadd += vfscanf_name_min.o vfscanf_name_flt.o
 
 nodist_libprintf_min_a_SOURCES=
 
@@ -70,5 +72,20 @@ vfscanf_std.o: vfscanf.c
 
 vfscanf_flt.o: vfscanf.c
 	$(COMPILE) $(PRINTF_FLT_CFLAGS) -DSCANF_LEVEL=SCANF_FLT -c -o $@ $<
+
+################################
+
+vfprintf_name_min.o: vfprintf.c
+	$(COMPILE) -DVFPRINTF_NAME=vfprintf_min $(PRINTF_CFLAGS) -DPRINTF_LEVEL=PRINTF_MIN -c -o $@ $<
+
+vfprintf_name_flt.o: vfprintf.c
+	$(COMPILE) -DVFPRINTF_NAME=vfprintf_flt $(PRINTF_FLT_CFLAGS) -DPRINTF_LEVEL=PRINTF_FLT -c -o $@ $<
+
+vfscanf_name_min.o: vfscanf.c
+	$(COMPILE) -DVFSCANF_NAME=vfscanf_min $(PRINTF_CFLAGS) -DSCANF_LEVEL=SCANF_MIN -c -o $@ $<
+
+vfscanf_name_flt.o: vfscanf.c
+	$(COMPILE) -DVFSCANF_NAME=vfscanf_flt $(PRINTF_FLT_CFLAGS) -DSCANF_LEVEL=SCANF_FLT -c -o $@ $<
+
 
 # vim: set ft=make:
