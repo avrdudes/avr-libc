@@ -104,7 +104,6 @@ or may not be of use for you.
 <dl>
 <dt>AVRDUDE</dt>
 <dd>
-  Project Home: http://savannah.nongnu.org/projects/avrdude <br>
   Git: %https://github.com/avrdudes/avrdude.git <br>
   GitHub: https://github.com/avrdudes/avrdude <br>
   \ref install_avrprog "Installation"

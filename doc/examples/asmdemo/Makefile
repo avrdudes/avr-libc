@@ -94,9 +94,7 @@ AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 # performed after programming the device.
 #AVRDUDE_NO_VERIFY = -V
 
-# Increase verbosity level.  Please use this when submitting bug
-# reports about avrdude. See <http://savannah.nongnu.org/projects/avrdude>
-# to submit bug reports.
+# Increase verbosity level.
 #AVRDUDE_VERBOSE = -v -v
 
 AVRDUDE_BASIC = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER)
