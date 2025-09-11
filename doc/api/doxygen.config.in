@@ -805,7 +805,6 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/bench-libm.dox \
                          @top_srcdir@/doc/api/bench-libf7.dox \
                          @top_srcdir@/doc/api/bench-fxlib.dox \
-                         @top_srcdir@/doc/api/porting.dox \
                          @top_builddir@/doc/api/faq.dox \
                          @top_srcdir@/doc/api/globals-index.dox \
                          @top_srcdir@/doc/api/tools-install.dox \
