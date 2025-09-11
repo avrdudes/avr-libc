@@ -145,6 +145,14 @@
   precision data, average execution times, and (lower bounds for the)
   worst case execution times.
 
+- Apart from `-Wl,-u,vfprintf -lprintf_flt` there is now the alternative
+  `-Wl,--defsym,vfprintf=vfprintf_flt` which doesn't link the printf
+  code when the application doesn't use printf, and when linked with
+  `-Wl,--gc-sections`. Similar applies to the minimal variants and
+  to the scanf functions like `-Wl,--defsym,vfscanf=vfscanf_min`.
+  See [vfprintf](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1)
+  and [#654][654].
+  
 ## Issues closed
 
 - See also the list of
@@ -251,6 +259,7 @@
 [635]: https://github.com/avrdudes/avr-libc/issues/635
 [643]: https://github.com/avrdudes/avr-libc/issues/643
 [646]: https://github.com/avrdudes/avr-libc/issues/646
+[654]: https://github.com/avrdudes/avr-libc/issues/654
 [657]: https://github.com/avrdudes/avr-libc/issues/657
 [663]: https://github.com/avrdudes/avr-libc/issues/663
 [681]: https://github.com/avrdudes/avr-libc/issues/681
