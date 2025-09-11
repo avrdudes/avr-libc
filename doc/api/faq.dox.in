@@ -1102,7 +1102,7 @@ void debug_P (const char *addr)
 {
   char c;
 
-  while ((c = pgm_read_byte(addr++)))
+  while ((c = pgm_read_char(addr++)))
     uart_putchar (c);
 }
 
