@@ -809,7 +809,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/globals-index.dox \
                          @top_srcdir@/doc/api/tools-install.dox \
                          @top_srcdir@/doc/api/using-tools.dox \
-                         @top_srcdir@/doc/api/optimize.dox \
+                         @top_srcdir@/doc/api/reordering-code.dox \
                          @top_srcdir@/doc/api/acknowledge.dox \
                          @top_builddir@/doc/api/main_page.dox \
                          @top_srcdir@/doc/examples \

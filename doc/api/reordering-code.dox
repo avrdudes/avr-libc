@@ -24,10 +24,12 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/** \page optimization Compiler optimization
+/** \page optimization Problems with Reordering Code
 
-\section optim_code_reorder Problems with reordering code
+\section optim_code_reorder Problems with Reordering Code
 \author Jan Waclawek
+
+This is an essay about <a href="https://gcc.gnu.org/PR53049">PR53049</a>.
 
 Programs contain sequences of statements, and a naive compiler would
 execute them exactly in the order as they are written. But an

@@ -54,7 +54,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        bench-libm.dox \
                        bench-libf7.dox \
                        bench-fxlib.dox \
-                       optimize.dox \
+                       reordering-code.dox \
                        overview.dox \
                        pgmspace.dox \
                        library.dox \
