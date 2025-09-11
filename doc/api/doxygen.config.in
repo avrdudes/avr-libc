@@ -793,10 +793,14 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/util/ram-usage.h \
                          @top_srcdir@/include/util \
                          @top_srcdir@/include/compat \
+			 \
+                         @top_builddir@/doc/api/faq.dox \
                          @top_srcdir@/doc/api/overview.dox \
-                         @top_srcdir@/doc/api/malloc.dox \
-                         @top_srcdir@/doc/api/sections.dox \
+                         @top_srcdir@/doc/api/using-tools.dox \
+                         @top_srcdir@/doc/api/tools-install.dox \
                          @top_srcdir@/doc/api/pgmspace.dox \
+                         @top_srcdir@/doc/api/sections.dox \
+                         @top_srcdir@/doc/api/malloc.dox \
                          @top_srcdir@/doc/api/assembler.dox \
                          @top_srcdir@/doc/api/inline_asm.dox \
                          @top_srcdir@/doc/api/library.dox \
@@ -805,12 +809,10 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/bench-libm.dox \
                          @top_srcdir@/doc/api/bench-libf7.dox \
                          @top_srcdir@/doc/api/bench-fxlib.dox \
-                         @top_builddir@/doc/api/faq.dox \
-                         @top_srcdir@/doc/api/globals-index.dox \
-                         @top_srcdir@/doc/api/tools-install.dox \
-                         @top_srcdir@/doc/api/using-tools.dox \
                          @top_srcdir@/doc/api/reordering-code.dox \
                          @top_srcdir@/doc/api/acknowledge.dox \
+                         @top_srcdir@/doc/api/globals-index.dox \
+			 \
                          @top_builddir@/doc/api/main_page.dox \
                          @top_srcdir@/doc/examples \
                          @top_srcdir@/doc/examples/demo \
