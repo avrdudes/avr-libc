@@ -44,9 +44,9 @@
 #if defined(__AVR_ATmega16__)
 #  define PWMDDR     DDRD
 #  define PWMOUT     PD5
-#elif defined(__AVR_ATmega8__) || defined(__AVR_ATmega48__) ||\
-      defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) ||\
-      defined(__AVR_ATmega328P__)
+#elif defined(__AVR_ATmega8__) || defined(__AVR_ATmega48__) \
+      || defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) \
+      || defined(__AVR_ATmega328P__)
 #  define PWMDDR     DDRB
 #  define PWMOUT     PB1
 #elif defined(__AVR_ATtiny2313__)
@@ -59,8 +59,8 @@
 #  error "Unsupported MCU type"
 #endif
 
-#if defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) ||\
-    defined(__AVR_ATmega168__)|| defined(__AVR_ATmega328P__)
+#if defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
+    || defined(__AVR_ATmega168__)|| defined(__AVR_ATmega328P__)
 /* map ATmega8/16 names to ATmegaX8 names */
 #  define USART_RXC_vect USART_RX_vect
 #  define UDR     UDR0
@@ -326,9 +326,7 @@ printstr(const char *s)
 static void
 printstr_p(const char *s)
 {
-  char c;
-
-  for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s))
+  for (char c = pgm_read_char(s); c; ++s, c = pgm_read_char(s))
     {
       if (c == '\n')
         putchr('\r');
