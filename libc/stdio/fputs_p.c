@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if !defined(__AVR_TINY__)
-
 #include <stdio.h>
 #include <avr/pgmspace.h>
 #include "sectionname.h"
@@ -37,23 +35,18 @@ ATTRIBUTE_CLIB_SECTION
 int
 fputs_P(const char *str, FILE *stream)
 {
-	char c;
-	int rv = 0;
+    char c;
+    int rv = 0;
 
-	if ((stream->flags & __SWR) == 0)
-		return EOF;
+    if ((stream->flags & __SWR) == 0)
+        return EOF;
 
-	/*
-	 * Do not use str++ in the next line.  pgm_read_byte() is a
-	 * macro, so it could evaluate its argument more than once.
-	 */
-	while ((c = pgm_read_byte(str)) != '\0') {
-		if (stream->put(c, stream) != 0)
-			rv = EOF;
-		str++;
-	}
+    while ((c = pgm_read_char(str)) != '\0')
+    {
+        if (stream->put(c, stream) != 0)
+            rv = EOF;
+        str++;
+    }
 
-	return rv;
+    return rv;
 }
-
-#endif /* !defined(__AVR_TINY__) */
