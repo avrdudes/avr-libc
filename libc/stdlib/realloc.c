@@ -46,9 +46,12 @@ realloc(void *ptr, size_t len)
 	size_t s, incr;
 
 	/* Trivial cases, required by C standard. */
-	if (ptr == 0) {
+	if (ptr == 0)
+	{
 		return malloc(len);
-	} else if (len == 0) {
+	}
+	else if (len == 0)
+	{
 		free(ptr);
 		return NULL;
 	}
@@ -77,16 +80,19 @@ realloc(void *ptr, size_t len)
 	 * size is at least sizeof(struct __freelist) smaller than the
 	 * previous size.
 	 */
-	if (len <= fp1->sz) {
+	if (len <= fp1->sz)
+	{
 		/* The first test catches a possible unsigned int
 		 * rollover condition. */
-		if (fp1->sz <= sizeof(struct __freelist) ||
-		    len > fp1->sz - sizeof(struct __freelist))
+		if (fp1->sz <= sizeof(struct __freelist)
+		    || len > fp1->sz - sizeof(struct __freelist))
+		{
 			return ptr;
+		}
 		fp2 = (struct __freelist *)cp;
 		fp2->sz = fp1->sz - len - sizeof(size_t);
 		fp1->sz = len;
-		free(&(fp2->nx));
+		free (&(fp2->nx));
 		return ptr;
 	}
 
@@ -98,18 +104,23 @@ realloc(void *ptr, size_t len)
 	cp = (char *)ptr + fp1->sz;
 	fp2 = (struct __freelist *)cp;
 	for (s = 0, ofp3 = 0, fp3 = __flp;
-	     fp3;
-	     ofp3 = fp3, fp3 = fp3->nx) {
-		if (fp3 == fp2 && fp3->sz + sizeof(size_t) >= incr) {
+		 fp3;
+		 ofp3 = fp3, fp3 = fp3->nx)
+	{
+		if (fp3 == fp2 && fp3->sz + sizeof(size_t) >= incr)
+		{
 			/* found something that fits */
-			if (fp3->sz + sizeof(size_t) - incr > sizeof(struct __freelist)) {
+			if (fp3->sz + sizeof(size_t) - incr > sizeof(struct __freelist))
+			{
 				/* split off a new freelist entry */
 				cp = (char *)ptr + len;
 				fp2 = (struct __freelist *)cp;
 				fp2->nx = fp3->nx;
 				fp2->sz = fp3->sz - incr;
 				fp1->sz = len;
-			} else {
+			}
+			else
+			{
 				/* it just fits, so use it entirely */
 				fp1->sz += fp3->sz + sizeof(size_t);
 				fp2 = fp3->nx;
@@ -134,12 +145,14 @@ realloc(void *ptr, size_t len)
 	 * allocation area if possible, without need to copy the old
 	 * data.
 	 */
-	if (__brkval == (char *)ptr + fp1->sz && len > s) {
+	if (__brkval == (char *)ptr + fp1->sz && len > s)
+	{
 		cp1 = __malloc_heap_end;
 		cp = (char *)ptr + len;
 		if (cp1 == 0)
 			cp1 = STACK_POINTER() - __malloc_margin;
-		if (cp < cp1) {
+		if (cp < cp1)
+		{
 			__brkval = cp;
 			fp1->sz = len;
 			return ptr;
@@ -158,4 +171,3 @@ realloc(void *ptr, size_t len)
 	free(ptr);
 	return memp;
 }
-
