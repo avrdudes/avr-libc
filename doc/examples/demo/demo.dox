@@ -190,9 +190,11 @@ Some points of interest in the \c demo.map file are:
 
 The \ref sec_dot_text "\c \.text segment" (where program instructions
 are stored) starts at location 0x0 and occupies
+\maninclude textsize.txt
 \htmlinclude textsize.txt
 \latexinclude textsize.txt
 bytes.
+\maninclude vectorssize.txt
 \htmlinclude vectorssize.txt
 \latexinclude vectorssize.txt
 bytes of that are allocated to interrupt vectors in \c \.vectors,
