@@ -28,6 +28,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 #include "sectionname.h"
 
@@ -35,10 +36,16 @@ ATTRIBUTE_CLIB_SECTION
 void *
 calloc(size_t nele, size_t size)
 {
-	void *p;
+    const uint32_t n_bytes = (uint32_t) nele * size;
 
-	if ((p = malloc(nele * size)) == 0)
-		return 0;
-	memset(p, 0, nele * size);
-	return p;
+    if (n_bytes > 0x7fff)
+        return 0;
+
+    const uint16_t n_alloc = (uint16_t) n_bytes;
+
+    void *p = malloc (n_alloc);
+    if (p)
+        memset (p, 0, n_alloc);
+
+    return p;
 }

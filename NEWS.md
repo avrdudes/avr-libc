@@ -236,6 +236,8 @@
   `__builtin_avr_delay_cycles` in order to avoid UB ([#681][681])
   for large values.
 
+- Let `calloc` return NULL when the alloc size overflows ([#1007][1007]).
+
 ## Pull Requests
 
 - Modernized the
@@ -284,6 +286,7 @@
 [994]: https://github.com/avrdudes/avr-libc/issues/994
 [999]: https://github.com/avrdudes/avr-libc/issues/999
 [1003]: https://github.com/avrdudes/avr-libc/issues/1003
+[1007]: https://github.com/avrdudes/avr-libc/issues/1007
 [1009]: https://github.com/avrdudes/avr-libc/issues/1009
 [1010]: https://github.com/avrdudes/avr-libc/issues/1010
 [1011]: https://github.com/avrdudes/avr-libc/issues/1011
