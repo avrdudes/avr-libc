@@ -45,13 +45,25 @@ realloc(void *ptr, size_t len)
 	void *memp;
 	size_t s, incr;
 
-	/* Trivial case, required by C standard. */
-	if (ptr == 0)
+	/* Trivial cases, required by C standard. */
+	if (ptr == 0) {
 		return malloc(len);
+	} else if (len == 0) {
+		free(ptr);
+		return NULL;
+	}
 
 	cp1 = (char *)ptr;
 	cp1 -= sizeof(size_t);
 	fp1 = (struct __freelist *)cp1;
+
+	/*
+	 * Our minimum chunk size is the size of a pointer plus the
+	 * size of the "sz" field, otherwise we could not possibly
+	 * fit a freelist entry into the chunk later.
+	 */
+	if (len < sizeof(struct __freelist) - sizeof(size_t))
+		len = sizeof(struct __freelist) - sizeof(size_t);
 
 	cp = (char *)ptr + len; /* new next pointer */
 	if (cp < cp1)
