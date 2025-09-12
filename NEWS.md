@@ -187,6 +187,9 @@
 - Fixed signature definitions in avr/io.h for several devices ([#877][877])
   and add some missing signatures ([#878][878]).
 
+- Add missing ATmega328PB power reduction switches `PRPTC` and `PRSPI1`
+  to `avr/power.h` ([#668][668]).
+
 - On AVRrc Reduced Tiny, add 0x4000 to the symbol address when
   `pgm_get_far_address()` takes the address of an object in `PROGMEM_FAR`.
   This works similar to how the compiler implements the &-operator
@@ -262,6 +265,7 @@
 [654]: https://github.com/avrdudes/avr-libc/issues/654
 [657]: https://github.com/avrdudes/avr-libc/issues/657
 [663]: https://github.com/avrdudes/avr-libc/issues/663
+[668]: https://github.com/avrdudes/avr-libc/issues/668
 [681]: https://github.com/avrdudes/avr-libc/issues/681
 [765]: https://github.com/avrdudes/avr-libc/issues/765
 [875]: https://github.com/avrdudes/avr-libc/issues/875

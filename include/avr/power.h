@@ -633,6 +633,15 @@ the clock below 131.072 kHz.
 #define power_twi_disable()             (PRR0 |= (uint8_t)(1 << PRTWI))
 #endif
 
+#if defined(__AVR_HAVE_PRR0_PRTWI0)
+#define power_twi0_enable()             (PRR0 &= (uint8_t)~(1 << PRTWI0))
+#define power_twi0_disable()            (PRR0 |= (uint8_t)(1 << PRTWI0))
+#if !defined(__AVR_HAVE_PRR0_PRTWI)
+#define power_twi_enable()              power_twi0_enable()
+#define power_twi_disable()             power_twi0_disable()
+#endif
+#endif
+
 #if defined(__AVR_HAVE_PRR0_PRTWI1)
 #define power_twi1_enable()             (PRR0 &= (uint8_t)~(1 << PRTWI1))
 #define power_twi1_disable()            (PRR0 |= (uint8_t)(1 << PRTWI1))
@@ -781,6 +790,21 @@ the clock below 131.072 kHz.
 #if defined(__AVR_HAVE_PRR1_PRUSBH)
 #define power_usbh_enable()             (PRR1 &= (uint8_t)~(1 << PRUSBH))
 #define power_usbh_disable()            (PRR1 |= (uint8_t)(1 << PRUSBH))
+#endif
+
+#if defined(__AVR_HAVE_PRR1_PRSPI1)
+#define power_spi1_enable()             (PRR1 &= (uint8_t)~(1 << PRSPI1))
+#define power_spi1_disable()            (PRR1 |= (uint8_t)(1 << PRSPI1))
+#endif
+
+#if defined(__AVR_HAVE_PRR1_PRPTC)
+#define power_ptc_enable()              (PRR1 &= (uint8_t)~(1 << PRPTC))
+#define power_ptc_disable()             (PRR1 |= (uint8_t)(1 << PRPTC))
+#endif
+
+#if defined(__AVR_HAVE_PRR1_PRTWI1)
+#define power_twi1_enable()             (PRR1 &= (uint8_t)~(1 << PRTWI1))
+#define power_twi1_disable()            (PRR1 |= (uint8_t)(1 << PRTWI1))
 #endif
 
 #if defined(__AVR_HAVE_PRR2_PRDF)
