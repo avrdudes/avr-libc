@@ -52,6 +52,7 @@
   - \ref faq_rom_array
   - \ref faq_startup
   - \ref faq_port_pass
+  - \ref faq_call_asm
   - \ref faq_regbind
   - \ref faq_assign_chain
   - \ref faq_use_bv
@@ -62,6 +63,7 @@
 
   - \ref faq_asmconst "How do I use a \#define'd constant in an asm statement?"<!-- The explicit text is necessary since doxygen stumbles on the #define otherwise. -->
   - \ref faq_asmops
+  - \ref faq_call_asm
   - \ref faq_nonabi
 
 - <b>Binary Interface</b>
@@ -1530,6 +1532,56 @@ programmed fuse cells read out as bit value 0.
 \section faq_asmops Which AVR-specific assembler operators are available?
 
 See \ref ass_pseudoops "Pseudo-Ops" and \ref assembly_operand_modifiers.
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_call_asm How to call an assembly function from C/C++?
+
+Just declare the function like you would in C/C++:
+\code
+extern     uint16_t asm_add (uint16_t a, uint8_t b); // in C
+extern "C" uint16_t asm_add (uint16_t a, uint8_t b); // in C++
+\endcode
+
+and then call it like any ordinary C/C++ function:
+\code
+uint16_t use_asm_func (uint16_t a)
+{
+    return asm_add (a, 42);
+}
+\endcode
+
+An example implementation of an assembly function that returns \a a + \a b
+would read something like:
+\code
+#ifdef __AVR_TINY__
+#define zero_reg r17
+#else
+#define zero_reg r1
+#endif
+.text
+/* According to the AVR GCC ABI:
+   - Param a is passed in R25:R24.
+   - Param b is passed in R22.
+   - Return value is in R25:R24.
+   - zero_reg always contains a value of zero.  */
+.global asm_add
+.type asm_add, @function
+asm_add:
+    add r24, r22
+    adc r24, zero_reg
+    ret
+.size asm_add, . - asm_add
+\endcode
+
+Notice that the assemnbly function complies to the
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention"
+   >avr-gcc calling convention</a>.
+
+See also
+- \ref faq_reg_usage
+- \ref faq_nonabi
 
 <small>Back to \ref faq_index.</small>
 
