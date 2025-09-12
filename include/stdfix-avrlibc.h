@@ -67,7 +67,7 @@ N1169 draft of ISO/IEC DTR 18037.
 Two groups of fixed-point data types are added:
 - The <em>fract types</em> and the <em>accum types</em>.
   The data value of a \e fract type has no integral part,
-  hence values of a \e fract type are between &minus;1.0 and +1.0.
+  hence values of a \e fract type are between -1.0 and +1.0.
 - The value range of an \e accum type depends on the number of integral bits
   in the data type.
 
@@ -318,56 +318,56 @@ be larger that the size of the returned string.
     <td align="right">#uktoa
     <td align="center">23
     <td align="center">7 + \a Digs
-    <td align="center">2<sup>16</sup>&minus;2<sup>&minus;16</sup>
+    <td align="center">2<sup>16</sup>-2<sup>-16</sup>
     <td>65535.9999847412109375
   <tr>
     <td align="right"><tt>accum</tt>
     <td align="right">#ktoa
     <td align="center">23
     <td align="center">8 + \a Digs
-    <td align="center">2<sup>16</sup>&minus;2<sup>&minus;15</sup>
+    <td align="center">2<sup>16</sup>-2<sup>-15</sup>
     <td>65535.999969482421875
   <tr>
     <td align="right"><tt>unsigned short accum</tt>
     <td align="right">#uhktoa
     <td align="center">13
     <td align="center">5 + \a Digs
-    <td align="center">2<sup>8</sup>&minus;2<sup>&minus;8</sup>
+    <td align="center">2<sup>8</sup>-2<sup>-8</sup>
     <td>255.99609375
   <tr>
     <td align="right"><tt>short accum</tt>
     <td align="right">#hktoa
     <td align="center">13
     <td align="center">6 + \a Digs
-    <td align="center">2<sup>8</sup>&minus;2<sup>&minus;7</sup>
+    <td align="center">2<sup>8</sup>-2<sup>-7</sup>
     <td>255.9921875
   <tr>
     <td align="right"><tt>unsigned fract</tt>
     <td align="right">#urtoa
     <td align="center">19
     <td align="center">3 + \a Digs
-    <td align="center">1&minus;2<sup>&minus;16</sup>
+    <td align="center">1-2<sup>-16</sup>
     <td>0.9999847412109375
   <tr>
     <td align="right"><tt>fract</tt>
     <td align="right">#rtoa
     <td align="center">19
     <td align="center">4 + \a Digs
-    <td align="center">1&minus;2<sup>&minus;15</sup>
+    <td align="center">1-2<sup>-15</sup>
     <td>0.999969482421875
   <tr>
     <td align="right"><tt>unsigned short fract</tt>
     <td align="right">#uhrtoa
     <td align="center">11
     <td align="center">3 + \a Digs
-    <td align="center">1&minus;2<sup>&minus;8</sup>
+    <td align="center">1-2<sup>-8</sup>
     <td>0.99609375
   <tr>
     <td align="right"><tt>short fract</tt>
     <td align="right">#hrtoa
     <td align="center">11
     <td align="center">4 + \a Digs
-    <td align="center">1&minus;2<sup>&minus;7</sup>
+    <td align="center">1-2<sup>-7</sup>
     <td>0.9921875
   </tr>
 </table>
@@ -832,8 +832,8 @@ unsigned long long fract roundullr (unsigned long long fract val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 short accum roundhk (short accum val, int bit);
 
 /** \ingroup avr_stdfix
@@ -841,8 +841,8 @@ short accum roundhk (short accum val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 unsigned short accum rounduhk (unsigned short accum val, int bit);
 
 /** \ingroup avr_stdfix
@@ -850,8 +850,8 @@ unsigned short accum rounduhk (unsigned short accum val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 accum roundk (accum val, int bit);
 
 /** \ingroup avr_stdfix
@@ -859,8 +859,8 @@ accum roundk (accum val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 unsigned accum rounduk (unsigned accum val, int bit);
 
 /** \ingroup avr_stdfix
@@ -868,8 +868,8 @@ unsigned accum rounduk (unsigned accum val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 long accum roundlk (long accum val, int bit);
 
 /** \ingroup avr_stdfix
@@ -877,8 +877,8 @@ long accum roundlk (long accum val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 unsigned long accum roundulk (unsigned long accum val, int bit);
 
 /** \ingroup avr_stdfix
@@ -886,8 +886,8 @@ unsigned long accum roundulk (unsigned long accum val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 long long accum roundllk (long long accum val, int bit);
 
 /** \ingroup avr_stdfix
@@ -895,8 +895,8 @@ long long accum roundllk (long long accum val, int bit);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 unsigned long long accum roundullk (unsigned long long accum val, int bit);
 
 
@@ -904,67 +904,79 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
 
 /** \ingroup avr_stdfix
     Compute the arcus cosine of \p x.
-    The returned value is in the range [0, &pi;].
+    The returned value is in the range
+    {{{[0, &pi;]}}}.
     For invalid values of \p x the returned value
-    is &minus;65536 = #kbits (0x80000000).
+    is -65536 = #kbits (0x80000000).
 
-    The absolute error is bounded by 5.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.1</sup>.
+    The absolute error is bounded by
+    {{{5.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.1</sup>}}}.
 
     \since AVR-LibC v2.3  */
 accum acosk (accum x);
 
 /** \ingroup avr_stdfix
     Compute the arcus cosine of \p x.
-    The returned value is in the range [0, &pi;/2].
+    The returned value is in the range
+    {{{[0, &pi;/2]}}}.
     For invalid values of \p x the returned value
     is 32768 = #ukbits (0x80000000).
 
-    The absolute error is bounded by 4.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+    The absolute error is bounded by
+    {{{4.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
 
     \since AVR-LibC v2.3  */
 unsigned accum acosuk (unsigned accum x);
 
 /** \ingroup avr_stdfix
     Compute the arcus sine of \p x.
-    The returned value is in the range [&minus;&pi;/2, &pi;/2].
+    The returned value is in the range
+    {{{[-&pi;/2, &pi;/2]}}}.
     For invalid values of \p x the returned value
-    is &minus;65536 = #kbits (0x80000000).
+    is -65536 = #kbits (0x80000000).
 
-    The absolute error is bounded by 5.1&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14</sup>.
+    The absolute error is bounded by
+    {{{5.1*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14</sup>}}}.
 
     \since AVR-LibC v2.3  */
 accum asink (accum x);
 
 /** \ingroup avr_stdfix
     Compute the arcus sine of \p x.
-    The returned value is in the range [0, &pi;/2].
+    The returned value is in the range
+    {{{[0, &pi;/2]}}}.
     For invalid values of \p x the returned value
     is 32768 = #ukbits (0x80000000).
 
-    The absolute error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+    The absolute error is bounded by
+    {{{4.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
 
     \since AVR-LibC v2.3  */
 unsigned accum asinuk (unsigned accum x);
 
 /** \ingroup avr_stdfix
     Compute the arcus tangent of \p x.
-    The returned value is in the range (&minus;&pi;/2, &pi;/2&asymp;1.5708).
+    The returned value is in the range
+    {{{(-&pi;/2, &pi;/2&asymp;1.5708)}}}.
 
     \since AVR-LibC v2.3  */
 accum atank (accum x);
 
 /** \ingroup avr_stdfix
     Compute the arcus tangent of \p x.
-    The returned value is in the range [0, &pi;/2&asymp;1.5708).
+    The returned value is in the range
+    {{{[0, &pi;/2&asymp;1.5708)}}}.
 
     \since AVR-LibC v2.3  */
 unsigned accum atanuk (unsigned accum x);
 
 /** \ingroup avr_stdfix
     Compute the arcus tangent of \p x.
-    The returned value is in the range [0, &pi;/4&asymp;0.7854].
+    The returned value is in the range
+    {{{[0, &pi;/4&asymp;0.7854]}}}.
 
-    The absolute error is bounded by 2.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;15</sup>.
+    The absolute error is bounded by
+    {{{2.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
     The worst case execution time (WCET) is around 210 cycles when MUL is
     available, and around  1000 cycles when MUL is not available
     (measured with avr-gcc v15).
@@ -972,24 +984,30 @@ unsigned accum atanuk (unsigned accum x);
 unsigned fract atanur (unsigned fract x);
 
 /** \ingroup avr_stdfix
-    Compute 2<sup>x</sup> with saturation.
+    Compute
+    {{{2<sup>x</sup>}}}
+    with saturation.
 
     The WCET is at least the one of exp2m1ur().
     \since AVR-LibC v2.3  */
 accum exp2k (accum x);
 
 /** \ingroup avr_stdfix
-    Compute 2<sup>x</sup> with saturation.
+    Compute
+    {{{2<sup>x</sup>}}}
+    with saturation.
 
     The WCET is at least the one of exp2m1ur().
     \since AVR-LibC v2.3  */
 unsigned accum exp2uk (unsigned accum x);
 
 /** \ingroup avr_stdfix
-    Compute 2<sup>x</sup>&nbsp;&minus;&nbsp;1.
+    Compute
+    {{{2<sup>x</sup>&nbsp;-&nbsp;1}}}.
     The returned value is in the range [0, 1).
 
-    The absolute error is bounded by 2.2&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;15.4</sup>.
+    The absolute error is bounded by
+    {{{2.2*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15.4</sup>}}}.
     The worst case execution time (WCET) is around 200 cycles when MUL is
     available, and around  1000 cycles when MUL is not available
     (measured with avr-gcc v15).
@@ -997,60 +1015,76 @@ unsigned accum exp2uk (unsigned accum x);
 unsigned fract exp2m1ur (unsigned fract x);
 
 /** \ingroup avr_stdfix
-    Returns log<sub>2</sub>(\p x), the logarithm to base 2 of the value \p x.
-    The returned value for \p x = 0 is &minus;32768.
+    Returns
+    {{{log<sub>2</sub>(x)}}},
+    the logarithm to base 2 of the value \p x.
+    The returned value for \p x = 0 is -32768.
 
-    The absolute error is bounded by 4.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.5</sup>.
+    The absolute error is bounded by
+    {{{4.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.5</sup>}}}.
     The worst case execution time (WCET) is around 150 cycles more
     than the WCET of log21pur().
     \since AVR-LibC v2.3  */
 accum log2uk(unsigned accum x);
 
 /** \ingroup avr_stdfix
-    Return log<sub>2</sub>(\p x), the logarithm to base 2 of the value \p x.
-    The returned value for \p x = 0 is &minus;128.
+    Return
+    {{{log<sub>2</sub>(x)}}},
+    the logarithm to base 2 of the value \p x.
+    The returned value for \p x = 0 is -128.
 
-    The absolute error is bounded by 8&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7</sup>.
+    The absolute error is bounded by
+    {{{8*10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-7</sup>}}}.
     The worst case execution time (WCET) is around 60 cycles plus
     the WCET of log21puhr().
     \since AVR-LibC v2.3  */
 short accum log2uhk(unsigned short accum x);
 
 /** \ingroup avr_stdfix
-    Return log<sub>2</sub>(1 + \p x),
+    Return
+    {{{log<sub>2</sub>(1 + x)}}},
     the logarithm to base 2 of the value 1 + \p x.
     The result is in the range [0, 1).
 
-    The absolute error is bounded by 4.3&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;7.5</sup>.
+    The absolute error is bounded by
+    {{{4.3*10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-7.5</sup>}}}.
     The worst case execution time (WCET) is around 25 cycles when MUL is
     available, and around 340 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
 unsigned short fract log21puhr(unsigned short fract x);
 
 /** \ingroup avr_stdfix
-    Return log<sub>2</sub>(1 + \p x),
+    Return
+    {{{log<sub>2</sub>(1 + x)}}},
     the logarithm to base 2 of the value 1 + \p x.
     The result is in the range [0, 1).
 
-    The absolute error is bounded by 3&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;15</sup>.
+    The absolute error is bounded by
+    {{{3*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
     The worst case execution time (WCET) is around 250 cycles when MUL is
     available, and around 1300 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
 unsigned fract log21pur(unsigned fract x);
 
 /** \ingroup avr_stdfix
-    Cosine of \p x&middot;&pi;/2 radians.
+    Cosine of
+    {{{x*&pi;/2}}}
+    radians.
 
-    The absolute error is bounded by 4.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+    The absolute error is bounded by
+    {{{4.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
     The worst case execution time (WCET) is around 300 cycles when MUL is
     available, and around 1400 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
 accum cospi2k(accum deg);
 
 /** \ingroup avr_stdfix
-    Sine of \p x&middot;&pi;/2 radians.
+    Sine of
+    {{{x*&pi;/2}}}
+    radians.
 
-    The absolute error is bounded by 4.6&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;14.4</sup>.
+    The absolute error is bounded by
+    {{{4.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
     The worst case execution time (WCET) is around 300 cycles when MUL is
     available, and around 1400 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
@@ -1058,29 +1092,36 @@ accum sinpi2k(accum deg);
 
 /** \ingroup avr_stdfix
     Sine of the angle \a deg where \a deg is specified in degrees, i.e.
-    in the range [0&deg;, 256&deg;).
-    The returned value is in the range (&minus;1, +1), i.e. is never &minus;1.
+    in the range
+    {{{[0&deg;, 256&deg;)}}}.
+    The returned value is in the range (-1, +1), i.e. is never -1.
 
-    The absolute error is bounded by 6.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;13.9</sup>.
+    The absolute error is bounded by
+    {{{6.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-13.9</sup>}}}.
     The worst case execution time (WCET) is around 70 cycles.
     \since AVR-LibC v2.3  */
 fract sinuhk_deg(unsigned short accum deg);
 
 /** \ingroup avr_stdfix
     Cosine of the angle \a deg where \a deg is specified in degrees, i.e.
-    in the range [0&deg;, 256&deg;).
-    The returned value is in the range (&minus;1, +1), i.e. is never &minus;1.
+    in the range
+    {{{[0&deg;, 256&deg;)}}}.
+    The returned value is in the range (-1, +1), i.e. is never -1.
 
-    The absolute error is bounded by 6.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;13.9</sup>.
+    The absolute error is bounded by
+    {{{6.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-13.9</sup>}}}.
     The worst case execution time (WCET) is around 90 cycles.
     \since AVR-LibC v2.3  */
 fract cosuhk_deg(unsigned short accum deg);
 
 /** \ingroup avr_stdfix
-    Sine of \p x&middot;&pi;/2 radians.
+    Sine of
+    {{{x*&pi;/2}}}
+    redians.
     The returned value is in the range [0, 1).
 
-    The absolute error is bounded by 2.9&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;15</sup>.
+    The absolute error is bounded by
+    {{{2.9*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
     The worst case execution time (WCET) is around 260 cycles when MUL is
     available, and around 1400 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
@@ -1095,7 +1136,8 @@ short fract sqrthr(short fract radic);
     Square root of the value \p radic rounded down.
     The result is in the range [0, 1).
 
-    The absolute error is in the range [&minus;3.9&middot;10<sup>&minus;3</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;8</sup>, 0].
+    The absolute error is in the range
+    {{{[-3.9*10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-8</sup>, 0]}}}.
     The worst case execution time (WCET) is around 120 cycles.
     \since AVR-LibC v2.3  */
 unsigned short fract sqrtuhr(unsigned short fract radic);
@@ -1103,7 +1145,8 @@ unsigned short fract sqrtuhr(unsigned short fract radic);
 /** \ingroup avr_stdfix
     Square root of the value \p radic.  The result is in the range [0, 1).
 
-    The absolute error is in the range [&minus;1.5&middot;10<sup>&minus;5</sup>&nbsp;&asymp;&nbsp;2<sup>&minus;16</sup>, 0].
+    The absolute error is in the range
+    {{{[-1.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-16</sup>, 0]}}}.
     The worst case execution time (WCET) is around 320 cycles.
     \since AVR-LibC v2.3  */
 unsigned fract sqrtur(unsigned fract radic);
@@ -1130,8 +1173,8 @@ int countlsfx (type val);
     fit into the range of the return type, the result is saturated.
 
     As an extension, \p bit may be in the range
-    <tt>&minus;IBIT &lt; bit &lt; FBIT</tt>.
-    For example, <tt>bit = &minus;1</tt> rounds to an even value.  */
+    <tt>-IBIT &lt; bit &lt; FBIT</tt>.
+    For example, <tt>bit = -1</tt> rounds to an even value.  */
 type roundfx (type val, int bit);
 
 #else /* Doxygen */

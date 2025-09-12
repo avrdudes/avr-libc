@@ -28,7 +28,7 @@
 
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
-CLEANFILES           = *.html *.pdf *.ma *.mas \
+CLEANFILES           = *.html *.pdf *.ma *.mas stdfix-avrlibc.h \
                        malloc-std.png malloc-x1.png malloc-x2.png \
                        *.eps fix_png \
                        doxygen.config main_page.dox faq.dox doxygen-pdf.config
@@ -156,13 +156,23 @@ clean-local:
 
 # Let config.status rebuild headers and dox from .in.
 doxygen.config:	$(top_builddir)/include/util/delay.h \
-		main_page.dox faq.dox
+		main_page.dox faq.dox stdfix-avrlibc.h
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 	doxygen doxygen.config
 	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-inverted.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
+
+# stdfix-avrlibc.h has some simple formulae that are mistreated by Doxygen,
+# in particular for the man pages.  Invoke a simple math -> dox processor.
+stdfix-avrlibc.h: $(top_srcdir)/include/stdfix-avrlibc.h \
+		  $(top_srcdir)/devtools/math2dox
+	cat $< | $(top_srcdir)/devtools/math2dox > $@
+
+# math2dox is a filter from STDIN to STDOUT.
+$(top_srcdir)/devtools/math2dox: $(top_srcdir)/devtools/math2dox.in
+	cd $(top_srcdir)/devtools; ./config.status --file=math2dox
 
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only

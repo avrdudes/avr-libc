@@ -2169,6 +2169,8 @@ ac_config_files="$ac_config_files update-news"
 
 ac_config_files="$ac_config_files filter-mcus.py"
 
+ac_config_files="$ac_config_files math2dox"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -2873,6 +2875,7 @@ do
     "gen-avr-lib-tree.sh") CONFIG_FILES="$CONFIG_FILES gen-avr-lib-tree.sh" ;;
     "update-news") CONFIG_FILES="$CONFIG_FILES update-news" ;;
     "filter-mcus.py") CONFIG_FILES="$CONFIG_FILES filter-mcus.py" ;;
+    "math2dox") CONFIG_FILES="$CONFIG_FILES math2dox" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
@@ -3291,6 +3294,7 @@ which seems to be undefined.  Please make sure it is defined" >&2;}
     "gen-avr-lib-tree.sh":F) chmod +x gen-avr-lib-tree.sh ;;
     "update-news":F) chmod +x update-news ;;
     "filter-mcus.py":F) chmod +x filter-mcus.py ;;
+    "math2dox":F) chmod +x math2dox ;;
 
   esac
 done # for ac_tag
