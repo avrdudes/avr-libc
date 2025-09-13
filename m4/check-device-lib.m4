@@ -45,7 +45,7 @@ AS_VERSION_COMPARE([${GCC_VER}], [5.1.0],
 AM_CONDITIONAL(HAS_GCC_5_1, [test "x${GCC_VER}" = "x5.1.0"])
 
 AC_ARG_ENABLE(device-lib,
-    [  --enable-device-lib     build separate device library],
+    [AS_HELP_STRING([--enable-device-lib],[build separate device library])],
     [HAS_DEV_LIB_yesno=yes],)
 
 AC_MSG_RESULT([$HAS_DEV_LIB_yesno])

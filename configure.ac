@@ -275,7 +275,7 @@ dnl all systems. This isn't optimal, but how do we work around the user not
 dnl having fig2dev and still build all the formats?
 
 AC_ARG_ENABLE(doc,
-[  --enable-doc            build all doc formats (disabled is default)],
+[AS_HELP_STRING([--enable-doc],[build all doc formats (disabled is default)])],
 [case "${enableval}" in
   yes) enable_doc=yes ;;
   no)  enable_doc=no ;;
@@ -284,7 +284,7 @@ AC_ARG_ENABLE(doc,
 dnl Various documentation options.  By default, we enable all of them,
 dnl i. e. HTML, Postscript, PDF, and Unix-style man pages.
 AC_ARG_ENABLE(html-doc,
-[  --enable-html-doc       build HTML documentation (default)],
+[AS_HELP_STRING([--enable-html-doc],[build HTML documentation (default)])],
 [case "${enableval}" in
   yes) html_doc=yes ;;
   no)  html_doc=no ;;
@@ -292,7 +292,7 @@ AC_ARG_ENABLE(html-doc,
  esac], [html_doc=yes])dnl
 
 AC_ARG_ENABLE(pdf-doc,
-[  --enable-pdf-doc        build PDF documentation (default)],
+[AS_HELP_STRING([--enable-pdf-doc],[build PDF documentation (default)])],
 [case "${enableval}" in
   yes) pdf_doc=yes ;;
   no)  pdf_doc=no ;;
@@ -303,7 +303,7 @@ dnl Man pages are currently not tunable; they'll be built whenever
 dnl the HTML documentation is built.  However, it can be configured
 dnl whether the result is about to be installed or not.
 AC_ARG_ENABLE(man-doc,
-[  --enable-man-doc        build Unix-style manual pages (default)],
+[AS_HELP_STRING([--enable-man-doc],[build Unix-style manual pages (default)])],
 [case "${enableval}" in
   yes) man_doc=yes ;;
   no)  man_doc=no ;;
@@ -311,7 +311,8 @@ AC_ARG_ENABLE(man-doc,
  esac], [man_doc=yes])dnl
 
 AC_ARG_ENABLE(versioned-doc,
-[  --enable-versioned-doc  install docs in directory with version name (default)],
+[AS_HELP_STRING([--enable-versioned-doc],
+		[install docs in directory with version name (default)])],
 [case "${enableval}" in
   yes) versioned_doc=yes ;;
   no)  versioned_doc=no ;;
@@ -360,7 +361,8 @@ dnl Default is nothing, suitable for binary distributions of the
 dnl compiled library.  Alternative options include stabs, dwarf-2,
 dnl dwarf-4 or [compiler's default version] dwarf.
 AC_ARG_ENABLE(debug-info,
-[  --enable-debug-info=stabs|dwarf-2|dwarf-4  Enable generation of debugging information],
+[AS_HELP_STRING([--enable-debug-info=stabs|dwarf-2|dwarf-4],
+		[Enable generation of debugging information])],
 [case "${enableval}" in
   yes|dwarf2|dwarf-2) debuginfo=dwarf2 ;;
   no)                 debuginfo="" ;;
