@@ -44,7 +44,17 @@
     written for previous library versions could easily be maintained
     until its end-of-life.  Use of any of these items in new code is
     strongly discouraged.
-  */
+
+    Some device headers provide deprecated vector names starting
+    with \c SIG_, followed by a relatively verbose but arbitrarily
+    chosen name describing the interrupt vector.
+    This has been the only available style in AVR-LibC up to version 1.2.x.
+    This historical naming style is not recommended for new projects,
+    and some headers require that the macro \c __AVR_LIBC_DEPRECATED_ENABLE__
+    is defined so that the \c SIG_ names ISR names are available.
+    For available #ISR vector names and #ISR_N vector numbers, see
+    \ref faq_isr_names in the FAQ.
+*/
 
 /** \name Allowing specific system-wide interrupts
 
