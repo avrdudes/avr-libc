@@ -152,7 +152,10 @@
   to the scanf functions like `-Wl,--defsym,vfscanf=vfscanf_min`.
   See [vfprintf](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1)
   and [#654][654].
-  
+
+- Added configure option `--with-doxygen=` to select the doxygen executable
+  for generating the documentation.
+
 ## Issues closed
 
 - See also the list of

@@ -159,7 +159,7 @@ doxygen.config:	$(top_builddir)/include/util/delay.h \
 		main_page.dox faq.dox stdfix-avrlibc.h
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
-	doxygen doxygen.config
+	@DOXYGEN@ doxygen.config
 	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-inverted.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/

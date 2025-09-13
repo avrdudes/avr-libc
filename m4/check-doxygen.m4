@@ -35,7 +35,8 @@ dnl dir. I put it here until I figure out how to integrate the config dir.
 dnl
 dnl @synopsis CHECK_DOXYGEN
 dnl
-dnl This macro checks if doxygen is installed on the build system
+dnl This macro checks if doxygen is installed on the build system.
+dnl The doxygen command can be set with configure --with-doxygen=[doxygen].
 dnl
 dnl @version Id: check_doxygen.m4,v 1.2 2002/02/10 23:22:40 troth Exp
 dnl @author Theodore A. Roth <troth@openavr.org>
@@ -43,13 +44,19 @@ dnl
 AC_DEFUN([CHECK_DOXYGEN],[dnl
 dnl
 AC_MSG_CHECKING([for doxygen])
-dox_ver=`doxygen --version 2>/dev/null`
+
+AC_ARG_WITH([doxygen],
+  [AS_HELP_STRING([--with-doxygen=],[set Doxygen command (default: doxygen)])],
+  [DOXYGEN=$withval],
+  [DOXYGEN=doxygen])
+
+dox_ver=`$DOXYGEN --version 2>/dev/null`
 if test "x$dox_ver" = "x"; then
-	AC_MSG_RESULT(no)
+	AC_MSG_RESULT(no: $DOXYGEN not found)
 else
 	# FIXME: should also check for dox_ver >= 1.4.1
-	AC_MSG_RESULT(yes)
-	SHOW_VERSION([doxygen], [Doxygen])
+	AC_MSG_RESULT(yes: $DOXYGEN)
+	SHOW_VERSION([$DOXYGEN], [Doxygen])
 	if test "$pdf_doc" = "yes"; then
 		AC_MSG_NOTICE([Enabling PDF docs])
 		TARGET_DOX_PDF=dox-pdf
@@ -69,6 +76,7 @@ dnl generation, so a different target is only needed for installation.
 	fi
 fi
 dnl
+AC_SUBST(DOXYGEN)
 AC_SUBST(TARGET_DOX_PDF)
 AC_SUBST(TARGET_DOX_HTML)
 AC_SUBST(INSTALL_DOX_PDF)
