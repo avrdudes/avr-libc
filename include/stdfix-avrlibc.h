@@ -910,7 +910,7 @@ unsigned long long accum roundullk (unsigned long long accum val, int bit);
     is -65536 = #kbits (0x80000000).
 
     The absolute error is bounded by
-    {{{5.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.1</sup>}}}.
+    {{{5.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.1</sup>}}}.
 
     \since AVR-LibC v2.3  */
 accum acosk (accum x);
@@ -923,7 +923,7 @@ accum acosk (accum x);
     is 32768 = #ukbits (0x80000000).
 
     The absolute error is bounded by
-    {{{4.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
+    {{{4.6&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
 
     \since AVR-LibC v2.3  */
 unsigned accum acosuk (unsigned accum x);
@@ -936,7 +936,7 @@ unsigned accum acosuk (unsigned accum x);
     is -65536 = #kbits (0x80000000).
 
     The absolute error is bounded by
-    {{{5.1*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14</sup>}}}.
+    {{{5.1&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14</sup>}}}.
 
     \since AVR-LibC v2.3  */
 accum asink (accum x);
@@ -949,7 +949,7 @@ accum asink (accum x);
     is 32768 = #ukbits (0x80000000).
 
     The absolute error is bounded by
-    {{{4.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
+    {{{4.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
 
     \since AVR-LibC v2.3  */
 unsigned accum asinuk (unsigned accum x);
@@ -976,7 +976,7 @@ unsigned accum atanuk (unsigned accum x);
     {{{[0, &pi;/4&asymp;0.7854]}}}.
 
     The absolute error is bounded by
-    {{{2.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
+    {{{2.6&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
     The worst case execution time (WCET) is around 210 cycles when MUL is
     available, and around  1000 cycles when MUL is not available
     (measured with avr-gcc v15).
@@ -1007,7 +1007,7 @@ unsigned accum exp2uk (unsigned accum x);
     The returned value is in the range [0, 1).
 
     The absolute error is bounded by
-    {{{2.2*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15.4</sup>}}}.
+    {{{2.2&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15.4</sup>}}}.
     The worst case execution time (WCET) is around 200 cycles when MUL is
     available, and around  1000 cycles when MUL is not available
     (measured with avr-gcc v15).
@@ -1021,7 +1021,7 @@ unsigned fract exp2m1ur (unsigned fract x);
     The returned value for \p x = 0 is -32768.
 
     The absolute error is bounded by
-    {{{4.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.5</sup>}}}.
+    {{{4.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.5</sup>}}}.
     The worst case execution time (WCET) is around 150 cycles more
     than the WCET of log21pur().
     \since AVR-LibC v2.3  */
@@ -1034,7 +1034,7 @@ accum log2uk(unsigned accum x);
     The returned value for \p x = 0 is -128.
 
     The absolute error is bounded by
-    {{{8*10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-7</sup>}}}.
+    {{{8&middot;10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-7</sup>}}}.
     The worst case execution time (WCET) is around 60 cycles plus
     the WCET of log21puhr().
     \since AVR-LibC v2.3  */
@@ -1047,7 +1047,7 @@ short accum log2uhk(unsigned short accum x);
     The result is in the range [0, 1).
 
     The absolute error is bounded by
-    {{{4.3*10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-7.5</sup>}}}.
+    {{{4.3&middot;10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-7.5</sup>}}}.
     The worst case execution time (WCET) is around 25 cycles when MUL is
     available, and around 340 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
@@ -1060,7 +1060,7 @@ unsigned short fract log21puhr(unsigned short fract x);
     The result is in the range [0, 1).
 
     The absolute error is bounded by
-    {{{3*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
+    {{{3&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
     The worst case execution time (WCET) is around 250 cycles when MUL is
     available, and around 1300 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
@@ -1068,11 +1068,11 @@ unsigned fract log21pur(unsigned fract x);
 
 /** \ingroup avr_stdfix
     Cosine of
-    {{{x*&pi;/2}}}
+    {{{x&middot;&pi;/2}}}
     radians.
 
     The absolute error is bounded by
-    {{{4.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
+    {{{4.6&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
     The worst case execution time (WCET) is around 300 cycles when MUL is
     available, and around 1400 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
@@ -1080,11 +1080,11 @@ accum cospi2k(accum deg);
 
 /** \ingroup avr_stdfix
     Sine of
-    {{{x*&pi;/2}}}
+    {{{x&middot;&pi;/2}}}
     radians.
 
     The absolute error is bounded by
-    {{{4.6*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
+    {{{4.6&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-14.4</sup>}}}.
     The worst case execution time (WCET) is around 300 cycles when MUL is
     available, and around 1400 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
@@ -1097,7 +1097,7 @@ accum sinpi2k(accum deg);
     The returned value is in the range (-1, +1), i.e. is never -1.
 
     The absolute error is bounded by
-    {{{6.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-13.9</sup>}}}.
+    {{{6.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-13.9</sup>}}}.
     The worst case execution time (WCET) is around 70 cycles.
     \since AVR-LibC v2.3  */
 fract sinuhk_deg(unsigned short accum deg);
@@ -1109,19 +1109,19 @@ fract sinuhk_deg(unsigned short accum deg);
     The returned value is in the range (-1, +1), i.e. is never -1.
 
     The absolute error is bounded by
-    {{{6.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-13.9</sup>}}}.
+    {{{6.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-13.9</sup>}}}.
     The worst case execution time (WCET) is around 90 cycles.
     \since AVR-LibC v2.3  */
 fract cosuhk_deg(unsigned short accum deg);
 
 /** \ingroup avr_stdfix
     Sine of
-    {{{x*&pi;/2}}}
+    {{{x&middot;&pi;/2}}}
     redians.
     The returned value is in the range [0, 1).
 
     The absolute error is bounded by
-    {{{2.9*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
+    {{{2.9&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-15</sup>}}}.
     The worst case execution time (WCET) is around 260 cycles when MUL is
     available, and around 1400 cycles when MUL is not available.
     \since AVR-LibC v2.3  */
@@ -1137,7 +1137,7 @@ short fract sqrthr(short fract radic);
     The result is in the range [0, 1).
 
     The absolute error is in the range
-    {{{[-3.9*10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-8</sup>, 0]}}}.
+    {{{[-3.9&middot;10<sup>-3</sup>&nbsp;&asymp;&nbsp;2<sup>-8</sup>, 0]}}}.
     The worst case execution time (WCET) is around 120 cycles.
     \since AVR-LibC v2.3  */
 unsigned short fract sqrtuhr(unsigned short fract radic);
@@ -1146,7 +1146,7 @@ unsigned short fract sqrtuhr(unsigned short fract radic);
     Square root of the value \p radic.  The result is in the range [0, 1).
 
     The absolute error is in the range
-    {{{[-1.5*10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-16</sup>, 0]}}}.
+    {{{[-1.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-16</sup>, 0]}}}.
     The worst case execution time (WCET) is around 320 cycles.
     \since AVR-LibC v2.3  */
 unsigned fract sqrtur(unsigned fract radic);
