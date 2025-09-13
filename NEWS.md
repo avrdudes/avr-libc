@@ -243,6 +243,8 @@
 
 - Let `calloc` return NULL when the alloc size overflows ([#1007][1007]).
 
+- Fixed fuse defines for ATA5790 ([#909][909]).
+
 ## Pull Requests
 
 - Modernized the
@@ -282,6 +284,7 @@
 [876]: https://github.com/avrdudes/avr-libc/issues/876
 [877]: https://github.com/avrdudes/avr-libc/issues/877
 [878]: https://github.com/avrdudes/avr-libc/issues/878
+[909]: https://github.com/avrdudes/avr-libc/issues/909
 [936]: https://github.com/avrdudes/avr-libc/issues/936
 [959]: https://github.com/avrdudes/avr-libc/issues/959
 [960]: https://github.com/avrdudes/avr-libc/issues/960
