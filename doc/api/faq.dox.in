@@ -2105,6 +2105,15 @@ Below is a table of library calls with known issues.
       are thread safe.
   </td>
  </tr>
+
+ <tr>
+   <td><tt>time.h</tt>
+   <td>Uses global state in \c __latitude, \c __longitude, \c __utc_offset,
+       \c __asc_store, \c __tm_store, \c __dst_ptr, \c __system_time.
+   <td>Some functions have reentrant versions, like:
+        \c #asctime_r, \c #ctime_r, \c #gmtime_r, \c #iso_week_date_r,
+        \c #isotime_r, \c #localtime_r.
+ </tr>
 </table>
 
 \note It's not clear one would ever want to do character
