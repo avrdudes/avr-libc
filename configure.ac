@@ -159,11 +159,10 @@ dnl We cannot use devtools' configure since that one runs at bootstrap time,
 dnl whereas here we need Python at build time.
 AM_PATH_PYTHON([2.6],
     [AC_MSG_NOTICE([using $PYTHON])],
-    dnl Python is only needed for the documentation, so
-    dnl when no Python is found, then only run into an
-    dnl error later, when actually building the docs.
-    [AC_MSG_WARN([python not found, building the documentation will fail])
-     PYTHON=python])
+    dnl Python is only needed for the documentation, so relax
+    dnl when no Python is found.
+    [:])
+AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
 
 AC_PROG_AWK
 AC_PROG_GREP
