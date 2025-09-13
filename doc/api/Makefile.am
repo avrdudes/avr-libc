@@ -167,12 +167,12 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
 # stdfix-avrlibc.h has some simple formulae that are mistreated by Doxygen,
 # in particular for the man pages.  Invoke a simple math -> dox processor.
 stdfix-avrlibc.h: $(top_srcdir)/include/stdfix-avrlibc.h \
-		  $(top_srcdir)/devtools/math2dox
-	cat $< | $(top_srcdir)/devtools/math2dox > $@
+		  $(top_builddir)/devtools/math2dox
+	cat $< | $(top_builddir)/devtools/math2dox > $@
 
 # math2dox is a filter from STDIN to STDOUT.
-$(top_srcdir)/devtools/math2dox: $(top_srcdir)/devtools/math2dox.in
-	cd $(top_srcdir)/devtools; ./config.status --file=math2dox
+$(top_builddir)/devtools/math2dox: $(top_srcdir)/devtools/math2dox.in
+	cd $(top_builddir) && $(SHELL) ./config.status --file=devtools/math2dox
 
 # XXX currently, HTML and LaTeX documentation will always be built
 # together.  HTML doesn't need any postprocessing, while latex is only

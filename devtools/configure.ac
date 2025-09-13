@@ -12,6 +12,5 @@ AM_PATH_PYTHON([2.6], [AC_MSG_NOTICE([using $PYTHON to run mlib-gen.py and updat
 AC_CONFIG_FILES([gen-avr-lib-tree.sh], [chmod +x gen-avr-lib-tree.sh])
 AC_CONFIG_FILES([update-news], [chmod +x update-news])
 AC_CONFIG_FILES([filter-mcus.py], [chmod +x filter-mcus.py])
-AC_CONFIG_FILES([math2dox], [chmod +x math2dox])
 
 AC_OUTPUT

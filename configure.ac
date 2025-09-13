@@ -154,6 +154,17 @@ AC_PROG_RANLIB
 AC_CHECK_TOOL(AR, ar, ar)
 AC_CHECK_TOOL(OBJDUMP, objdump, objdump)
 
+dnl Parts of the documentaton like in doc/api require Python, e.g. math2dox.
+dnl We cannot use devtools' configure since that one runs at bootstrap time,
+dnl whereas here we need Python at build time.
+AM_PATH_PYTHON([2.6],
+    [AC_MSG_NOTICE([using $PYTHON])],
+    dnl Python is only needed for the documentation, so
+    dnl when no Python is found, then only run into an
+    dnl error later, when actually building the docs.
+    [AC_MSG_WARN([python not found, building the documentation will fail])
+     PYTHON=python])
+
 AC_PROG_AWK
 AC_PROG_GREP
 AC_PROG_INSTALL
@@ -456,6 +467,7 @@ AC_CONFIG_FILES([
 ])
 
 AC_CONFIG_FILES([scripts/avr-man], [chmod +x scripts/avr-man])
+AC_CONFIG_FILES([devtools/math2dox], [chmod +x devtools/math2dox])
 
 dnl Makefile.in's made by automake from Makefile.am's.
 AC_CONFIG_FILES([

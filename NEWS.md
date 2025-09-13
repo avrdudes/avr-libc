@@ -262,6 +262,8 @@
 
 - New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
 
+- Building the documentation now requires Python.
+
 [391]: https://github.com/avrdudes/avr-libc/issues/391
 [443]: https://github.com/avrdudes/avr-libc/issues/443
 [496]: https://github.com/avrdudes/avr-libc/issues/496
