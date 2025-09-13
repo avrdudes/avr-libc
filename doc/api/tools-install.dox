@@ -417,7 +417,8 @@ Note that Doxygen doesn't care about dependencies, thus when you
 made changes to the sources and want to re-build the documentation,
 better run <tt>make clean</tt> in <tt>build/doc/api</tt> before
 building the doc.
-
+Moreover, the Doxygen version is highly critical,
+and the exact version of Doxygen v1.9.6 is recommended.
 
 \subsection install_avrprog AVRDUDE
 \addindex installation, avrprog
