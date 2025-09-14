@@ -33,6 +33,12 @@
 # of divide_by_zero error is needed. The script is tuned to run after 'make'
 # without any options, at this place.
 
+# Run
+#
+#     MCUS="..." ./runtest.sh ...
+#
+# in order to override the predefined list of MCUs.
+
 set -e
 
 myname="$0"
@@ -286,8 +292,8 @@ for test_file in $test_list ; do
 		esac
 
 		case `dirname $test_file` in
-		    avr)  mcu_list="$MCU_LIST_FULL" ;;
-		    *)    mcu_list="$MCU_LIST" ;;
+		    avr)  mcu_list="${MCUS:-$MCU_LIST_FULL}" ;;
+		    *)    mcu_list="${MCUS:-$MCU_LIST}" ;;
 		esac
 
 	        elf_file=$rootname.elf
@@ -330,8 +336,8 @@ for test_file in $test_list ; do
 
 	    if [ -z $HOST_ONLY ] ; then
 		case `dirname $test_file` in
-		    avr)  mcu_list="$MCU_LIST_FULL" ;;
-		    *)    mcu_list="$MCU_LIST" ;;
+		    avr)  mcu_list="${MCUS:-$MCU_LIST_FULL}" ;;
+		    *)    mcu_list="${MCUS:-MCU_LIST}" ;;
 		esac
 
 	        elf_file=$rootname.elf
