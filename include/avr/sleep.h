@@ -283,7 +283,7 @@ extern void sleep_cpu (void);
 
 #define sleep_cpu()                              \
 do {                                             \
-  __asm__ __volatile__ ( "sleep" "\n\t" :: );    \
+  __asm__ __volatile__ ( "sleep" ::: "memory" ); \
 } while(0)
 
 #endif
@@ -343,7 +343,8 @@ do { \
                        : [tempreg] "=&d" (tempreg) \
                        : [mcucr] "I" _SFR_IO_ADDR(BOD_CONTROL_REG), \
                          [bods_bodse] "i" (_BV(BODS) | _BV(BODSE)), \
-                         [not_bodse] "i" (~_BV(BODSE))); \
+                         [not_bodse] "i" (~_BV(BODSE)) \
+                       : "memory"); \
 } while (0)
 
 #endif
