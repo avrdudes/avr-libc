@@ -26,8 +26,9 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 /*
-	Standard mktime(). The provided broken down Local 'calendar' time is converted into
-	a binary time stamp. The process is then reversed to 'normalize' timeptr.
+	Standard mktime(). The provided broken down Local 'calendar' time
+    is converted into a binary time stamp. The process is then reversed
+    to 'normalize' timeptr.
 */
 
 #include <time.h>

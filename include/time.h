@@ -56,7 +56,9 @@ extern  "C" {
     Section 7.23.2.3 \c mktime()<br>
     The standard specifies that \c mktime() should return <tt>(time_t) - 1</tt>
     if the time cannot be represented.
-    This implementation always returns a 'best effort' representation.
+    This implementation always returns a 'best effort' representation, which
+    means that there are corner cases where non-representable times are not
+    mapped to <tt>-1</tt>.  The purpose is to avoid 64-bit arithmetic.
 
     Section 7.23.2.4 \c time()<br>
     The standard specifies that \c time() should return <tt>(time_t) - 1</tt>
