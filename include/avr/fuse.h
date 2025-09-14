@@ -112,6 +112,11 @@
     (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN)
     \endcode
 
+    \warning Many device headers define fuse macros for <b>not inverted</b>
+    fuse bits, like for example devices from the 0-series, 1-series and
+    2-series.  Make sure you are using the right logic operations when
+    using fuse values, or otherwise you can damage a device.
+
     Each device I/O header file also defines macros that provide default values
     for each fuse byte that is available. \c LFUSE_DEFAULT is defined for a Low
     Fuse byte. \c HFUSE_DEFAULT is defined for a High Fuse byte.
