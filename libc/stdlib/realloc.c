@@ -70,8 +70,8 @@ realloc(void *ptr, size_t len)
 
 	cp = (char *)ptr + len; /* new next pointer */
 	if (cp < cp1)
-		/* Pointer wrapped across top of RAM, fail. */
-		return 0;
+		/* Pointer wrapped across top of RAM, try malloc. */
+		goto try_malloc;
 
 	/*
 	 * See whether we are growing or shrinking.  When shrinking,
@@ -165,6 +165,7 @@ realloc(void *ptr, size_t len)
 	 * Call malloc() for a new chunk, then copy over the data, and
 	 * release the old region.
 	 */
+try_malloc:;
 	if ((memp = malloc(len)) == 0)
 		return 0;
 	memcpy(memp, ptr, fp1->sz);
