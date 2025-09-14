@@ -244,6 +244,7 @@ Compile ()
     esac
 
     fix_simulavr="-Wl,--wrap,eeprom_read_block -Wl,--wrap,eeprom_read_blraw"
+    fix_simulavr="-include fix-simulavr-66044.h $fix_simulavr"
     [ $2 = attiny2313 ] && libs="$fix_simulavr $libs"
 
     $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 $crt $1 $libs -o $3

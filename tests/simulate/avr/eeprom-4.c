@@ -1,5 +1,3 @@
-#include "fix-simulavr-66044.h"
-
 #include <stdlib.h>
 #include <avr/eeprom.h>
 

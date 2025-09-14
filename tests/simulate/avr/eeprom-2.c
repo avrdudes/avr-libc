@@ -28,8 +28,6 @@
 
 /* Test of float EEPROM functions. */
 
-#include "fix-simulavr-66044.h"
-
 #include <avr/eeprom.h>
 #include <stdlib.h>
 
