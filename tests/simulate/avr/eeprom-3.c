@@ -28,6 +28,8 @@
 
 /* Test of update EEPROM functions. */
 
+#include "fix-simulavr-66044.h"
+
 #include <avr/eeprom.h>
 #include <avr/pgmspace.h>
 #include <stdlib.h>
