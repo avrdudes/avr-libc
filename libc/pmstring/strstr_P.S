@@ -1,6 +1,6 @@
 /* Copyright (c) 2002, Philip Soeberg
    Copyright (c) 2005, 2006, 2007 Werner Boellmann
-   Copyright (c) 2007  Dmirty Xmelkov
+   Copyright (c) 2007  Dmitry Xmelkov
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
