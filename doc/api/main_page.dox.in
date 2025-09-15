@@ -524,6 +524,10 @@ it is supported by the compiler at library compile-time.
   AVR32EA28,
   AVR32EA32,
   AVR32EA48,
+  AVR32EB14,
+  AVR32EB20,
+  AVR32EB28,
+  AVR32EB32,
   AVR64EA28,
   AVR64EA32,
   AVR64EA48
