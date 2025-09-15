@@ -250,6 +250,8 @@
 
 - Fixed the `ADC_CH_MUXNEG_enum` values for ATxmega256D3 ([#661][661]).
 
+- Fixed FUSE4_DEFAULT etc. defines in Xmega I/O headers ([#523][523]).
+
 ## Pull Requests
 
 - Modernized the
@@ -274,6 +276,7 @@
 [391]: https://github.com/avrdudes/avr-libc/issues/391
 [443]: https://github.com/avrdudes/avr-libc/issues/443
 [496]: https://github.com/avrdudes/avr-libc/issues/496
+[523]: https://github.com/avrdudes/avr-libc/issues/523
 [629]: https://github.com/avrdudes/avr-libc/issues/629
 [635]: https://github.com/avrdudes/avr-libc/issues/635
 [643]: https://github.com/avrdudes/avr-libc/issues/643
