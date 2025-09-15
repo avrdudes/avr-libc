@@ -8,9 +8,14 @@ to malloc/free to reduce the heap when the topmost chunk had been
 freed.  Several testscripts assumed the final freelist would
 consist of a single large entry which is no longer the case now.)
 
+The following test only fail with old verions of the compiler, so old
+that the current AVR-LibC no more supports them (older than GCC v4.8).
+
 Simulate: math/isinf-01.c atmega128 ... *** simulate failed: 22
 Simulate: math/isinf-01.c at90s8515 ... *** simulate failed: 22
 Simulate: math/modf-np.c atmega128 ... *** simulate failed: 47
 Simulate: math/modf-np.c at90s8515 ... *** simulate failed: 47
 Simulate: math/signbit-01.c atmega128 ... *** simulate failed: 2
 Simulate: math/signbit-01.c at90s8515 ... *** simulate failed: 2
+
+List: math/isinf-01.c math/modf-np.c math/signbit-01.c
