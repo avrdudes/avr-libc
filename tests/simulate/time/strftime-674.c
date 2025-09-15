@@ -39,7 +39,7 @@ void runTest_F (size_t testNum, size_t bufSize, size_t expectedLen,
         if (buf[expectedLen] != '\0')
             exit (testNum);
 
-        if (strcmp_F (expectedOutput, buf) != 0)
+        if (strcmp_F (buf, expectedOutput) != 0)
             exit (testNum);
     }
 }
