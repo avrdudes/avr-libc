@@ -248,6 +248,8 @@
 
 - Fixed fuse defines for ATA5790 ([#909][909]).
 
+- Fixed the `ADC_CH_MUXNEG_enum` values for ATxmega256D3 ([#661][661]).
+
 ## Pull Requests
 
 - Modernized the
@@ -279,6 +281,7 @@
 [654]: https://github.com/avrdudes/avr-libc/issues/654
 [657]: https://github.com/avrdudes/avr-libc/issues/657
 [660]: https://github.com/avrdudes/avr-libc/issues/660
+[661]: https://github.com/avrdudes/avr-libc/issues/661
 [663]: https://github.com/avrdudes/avr-libc/issues/663
 [668]: https://github.com/avrdudes/avr-libc/issues/668
 [681]: https://github.com/avrdudes/avr-libc/issues/681

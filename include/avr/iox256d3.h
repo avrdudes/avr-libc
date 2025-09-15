@@ -1069,13 +1069,13 @@ typedef enum ADC_CH_MUXPOS_enum
 typedef enum ADC_CH_MUXNEG_enum
 {
     ADC_CH_MUXNEG_PIN0_gc = (0x00<<0),  /* Input pin 0 */
+    ADC_CH_MUXNEG_PIN4_gc = (0x00<<0),  /* Input pin 4 */
     ADC_CH_MUXNEG_PIN1_gc = (0x01<<0),  /* Input pin 1 */
+    ADC_CH_MUXNEG_PIN5_gc = (0x01<<0),  /* Input pin 5 */
     ADC_CH_MUXNEG_PIN2_gc = (0x02<<0),  /* Input pin 2 */
+    ADC_CH_MUXNEG_PIN6_gc = (0x02<<0),  /* Input pin 6 */
     ADC_CH_MUXNEG_PIN3_gc = (0x03<<0),  /* Input pin 3 */
-    ADC_CH_MUXNEG_PIN4_gc = (0x04<<0),  /* Input pin 4 */
-    ADC_CH_MUXNEG_PIN5_gc = (0x05<<0),  /* Input pin 5 */
-    ADC_CH_MUXNEG_PIN6_gc = (0x06<<0),  /* Input pin 6 */
-    ADC_CH_MUXNEG_PIN7_gc = (0x07<<0),  /* Input pin 7 */
+    ADC_CH_MUXNEG_PIN7_gc = (0x03<<0),  /* Input pin 7 */
 } ADC_CH_MUXNEG_t;
 
 /* Input mode */
