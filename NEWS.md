@@ -135,10 +135,6 @@
   Support has been added for the `%k`, `%l` and `%P` formats.
   String literals have been moved to `.progmemx`.
 
-- avr-gcc v15 and up issues a diagnostic for `__int24` and `__uint24` when
-  `-pedantic` or similar options are on.  Hence `__extension__` was
-  added when using these types in `avr/pgmspace.h`.
-
 - The [benchmark page](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/benchmarks.html)
   has been reworked.
   It includes now fixed-point and IEEE double floating-point benchmarks.
@@ -154,7 +150,7 @@
   See [vfprintf](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1)
   and [#654][654].
 
-- Added configure option `--with-doxygen=` to select the doxygen executable
+- Added configure option `--with-doxygen=` to select the Doxygen executable
   for generating the documentation.
 
 ## Issues closed
@@ -217,8 +213,8 @@
   fixed so that they comply to POSIX.1-2008 ([#1009][1009]).
 
 - `fflush()` is now implemented as a proper (non-inline) function so that
-  features like `-wrap` will work as expected.  For the same reason,
-  `clearerr`(), `ferror()` and `feof()` are no more implemented as macros
+  features like `--wrap` will work as expected.  For the same reason,
+  `clearerr()`, `ferror()` and `feof()` are no more implemented as macros
   but are proper (non-inline) functions, too. ([#1017][1017], [#1003][1003]).
 
 - Distribution is missing `dox_latex_header.tex`, `filter-dox.sh`,
@@ -271,8 +267,6 @@
   hosted on GitHub, which is the case since AVR-LibC v1.8.1 ([#1021][1021]).
 
 - New news are now in `NEWS.md` and no more in [`NEWS`](NEWS).
-
-- Building the documentation now requires Python.
 
 [391]: https://github.com/avrdudes/avr-libc/issues/391
 [443]: https://github.com/avrdudes/avr-libc/issues/443
