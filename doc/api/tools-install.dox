@@ -454,7 +454,7 @@ documentation by hand:
 \verbatim
 $ # in ./build/avr-libc-<version>/doc/api
 $ make html
-$ make pdf
+$ make dox-pdf
 $ make install-dox-html
 \endverbatim
 Note that Doxygen doesn't care about dependencies, thus when you
