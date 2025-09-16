@@ -34,9 +34,7 @@ devtools/math2dox
 devtools/filter-mcus.py
 
 *.pdf
-doc/api/malloc-x1.png
-doc/api/malloc-std.png
-doc/api/malloc-x2.png
+doc/api/malloc-*.svg
 doc/api/stdfix-avrlibc.h
 
 __pycache__

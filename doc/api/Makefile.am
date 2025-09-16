@@ -29,8 +29,7 @@
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
 CLEANFILES           = *.html *.pdf *.ma *.mas stdfix-avrlibc.h \
-                       malloc-std.png malloc-x1.png malloc-x2.png \
-                       *.eps fix_png \
+                       malloc-*.svg malloc-*.eps \
                        doxygen.config main_page.dox faq.dox doxygen-pdf.config
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
@@ -64,7 +63,7 @@ EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        mcus-to-isrs.sh \
                        vectortable.dox
 
-SUFFIXES             = .pdf .fig .png .eps
+SUFFIXES             = .pdf .fig .svg .eps
 
 DOC_INST_DIR         = @DOC_INST_DIR@
 
@@ -104,13 +103,13 @@ FIG2DEV= fig2dev
 .fig.eps:
 	$(FIG2DEV) -L eps $< $@
 
-.fig.png:
-	$(FIG2DEV) -L png $< $@
+.fig.svg:
+	$(FIG2DEV) -L svg $< $@
 
 IMAGE_SRC=	malloc-std.fig malloc-x1.fig malloc-x2.fig \
 		avr-libc-logo.png avr-libc-logo.png avr-libc-logo-inverted.png
 
-IMAGE_PNG=	$(IMAGE_SRC:.fig=.png)
+IMAGE_SVG=	$(IMAGE_SRC:.fig=.svg)
 
 IMAGE_EPS=	$(IMAGE_SRC:.fig=.eps)
 
@@ -158,7 +157,7 @@ clean-local:
 doxygen.config:	$(top_builddir)/include/util/delay.h \
 		main_page.dox faq.dox stdfix-avrlibc.h
 
-latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_PNG) main_page.dox
+latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_SVG) main_page.dox
 	@DOXYGEN@ doxygen.config
 	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-inverted.png $(AVR_LIBC_USER_MANUAL)/
@@ -203,7 +202,9 @@ $(USER_MANUAL).tar.bz2: demo-examples $(USER_MANUAL)/index.html
 install-dox-html: dox-html
 	$(mkinstalldirs) $(DOC_INST_DIR)/$(USER_MANUAL)/search
 	@list='$(wildcard $(USER_MANUAL)/*.html $(USER_MANUAL)/*.css \
-	                  $(USER_MANUAL)/*.jpg $(USER_MANUAL)/*.png \
+	                  $(USER_MANUAL)/*.jpg \
+	                  $(USER_MANUAL)/*.png \
+	                  $(USER_MANUAL)/*.svg \
 	                  $(USER_MANUAL)/*.js \
 	                  $(USER_MANUAL)/search/*.js \
 	                  $(USER_MANUAL)/search/*.css \

@@ -61,7 +61,7 @@ The pictures shown in this document represent typical situations where the
 RAM locations refer to an ATmega128.
 The memory addresses used are not displayed in a linear scale.
 
-\image html malloc-std.png "RAM map of a device with internal RAM"
+\image html malloc-std.svg "RAM map of a device with internal RAM"
 \image latex malloc-std.eps "RAM map of a device with internal RAM" width=7.5cm
 
 On a simple device like a microcontroller it is a challenge to implement a
@@ -140,7 +140,7 @@ changed the preference, and picks the "wrong" option in this situation.
 Symbols like \c __DATA_REGION_ORIGIN__ and \c __DATA_REGION_LENGTH__
 should also be adjusted, see \ref sec_symbols.
 
-\image html malloc-x1.png "Internal RAM: stack only, external RAM: variables and heap"
+\image html malloc-x1.svg "Internal RAM: stack only, external RAM: variables and heap"
 \image latex malloc-x1.eps "Internal RAM: stack only, external RAM: variables and heap" width=12cm
 
 If dynamic memory should be placed in external RAM, while keeping
@@ -155,7 +155,7 @@ allocations (shown in light bisque color in the picture below).
 avr-gcc ... -Wl,--defsym=__heap_start=0x802000,--defsym=__heap_end=0x803fff ...
 \endcode
 
-\image html malloc-x2.png "Internal RAM: variables and stack, external RAM: heap"
+\image html malloc-x2.svg "Internal RAM: variables and stack, external RAM: heap"
 \image latex malloc-x2.eps "Internal RAM: variables and stack, external RAM: heap" width=12cm
 
 If \c __malloc_heap_end is 0, the allocator attempts to detect the
