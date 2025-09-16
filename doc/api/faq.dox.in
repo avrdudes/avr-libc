@@ -52,7 +52,8 @@
   - \ref faq_rom_array
   - \ref faq_startup
   - \ref faq_port_pass
-  - \ref faq_call_asm
+  - \ref faq_call_asm_from_c
+  - \ref faq_call_c_from_asm
   - \ref faq_regbind
   - \ref faq_assign_chain
   - \ref faq_use_bv
@@ -63,7 +64,8 @@
 
   - \ref faq_asmconst "How do I use a \#define'd constant in an asm statement?"<!-- The explicit text is necessary since doxygen stumbles on the #define otherwise. -->
   - \ref faq_asmops
-  - \ref faq_call_asm
+  - \ref faq_call_asm_from_c
+  - \ref faq_call_c_from_asm
   - \ref faq_nonabi
 
 - <b>Binary Interface</b>
@@ -1536,7 +1538,7 @@ See \ref ass_pseudoops "Pseudo-Ops" and \ref assembly_operand_modifiers.
 <small>Back to \ref faq_index.</small>
 
 
-\section faq_call_asm How to call an assembly function from C/C++?
+\section faq_call_asm_from_c How to call an assembly function from C/C++?
 
 Just declare the function like you would in C/C++:
 \code
@@ -1582,6 +1584,59 @@ Notice that the assemnbly function complies to the
 See also
 - \ref faq_reg_usage
 - \ref faq_nonabi
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_call_c_from_asm How to call a C/C++ function from assembly?
+
+The actual call is simple:
+\code
+#ifdef __AVR_HAVE_JMP_CALL__
+#define XCALL call
+#define XJMP  jmp
+#else
+#define XCALL rcall
+#define XJMP  rjmp
+#endif
+
+.text
+   ...
+   XCALL c_func  /* Ordinary call */
+   ...
+   XJMP c_func   /* Tail-call */
+\endcode
+
+Since \c __AVR_HAVE_JMP_CALL__ is a macro built-in defined by the C
+preprocessor, you have to \ref ass_tools "invoke the assembler" by means
+of the avr-gcc driver program.
+On the C/C++ side, you have to make sure that the \c c_func function
+is actually present:
+
+- In C/C++, \c c_func must be declared as \c extern.
+- C++ will provide the mangled name like \c _Z4funci for
+  <tt>int c_func(int)</tt>.  When you want a plain \c c_func symbol,
+  then define the function as <tt>extern "C"</tt>.
+- Make sure that the function is not optimized away: When you are using
+  global optimizations, then function attributes like \c externally_visible
+  and \c used may be needed.
+
+The passed arguments and the return value must comply to the
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">avr-gcc ABI</a>,
+see also \ref faq_reg_usage
+In particular C/C++ functions expect that register R1 (on AVRrc: R17)
+contains the value 0.
+
+When calling a function in
+<a href="https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libgcc/config/avr/lib1funcs.S"
+   >libgcc</a>, GCC's runtime support library, then you'll have to check
+which calling convention is actually in use.  These function are implemented
+in assembly, and some of them don't use the C/C++ calling convention.
+An example is the 32 = 16 &times; 16 multiplication routine
+<a href="https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libgcc/config/avr/lib1funcs.S;h=dfe99b1ea06f5b45e0a19942c42fe92f46e497ac;hb=HEAD#l547"
+   ><tt>__umulhisi3</tt></a>.  For an (incomplete) list, see the
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Exceptions_to_the_Calling_Convention"
+   >avr-gcc Wiki</a>.
 
 <small>Back to \ref faq_index.</small>
 
