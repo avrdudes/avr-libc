@@ -48,6 +48,7 @@ systems, and another section for Windows.
   - \ref install_avr_binutils "GNU Binutils"
   - \ref install_avr_gcc "GCC"
   - \ref install_avr_libc
+    - \ref install_avr_libc_docs
   - \ref install_avrprog
   - \ref install_simulavr
   - \ref install_avrtest
@@ -395,7 +396,7 @@ $ ./source/avr-libc-<version>/config.guess
 
 When you want to build and install with extra options, you can for example:
 \verbatim
-$ make CFLAGS=-Werror CCASFLAGS=-Werror
+$ make CFLAGS="-Werror" CCASFLAGS="-Werror"
 $ make install prefix=/home/me/install/my-avr-gcc
 \endverbatim
 
@@ -406,17 +407,60 @@ $ make all-examples
 $ make example-largedemo # etc.
 \endverbatim
 
-In order to build the HTML and PDF documentation:
+\subsubsection install_avr_libc_docs AVR-LibC Documentation
+
+Additional prerequisites:
+- Doxygen v1.9.6
+- \c fig2dev
+- A LaTeX installation like "TeX Live" with \c pdflatex
+- Python can improve the rendering of some man pages, though Python is
+  not strictly required to build the documentation.
+
+For building the documentation, Doxygen v1.9.6 is required.
+Here are the steps for building and installing it in a non-system
+location (so that no root permissions are needed).
+The first step is to get the required Doxygen source version:
+
 \verbatim
-$ # in ./build/doc/api
+$ # in ./source
+$ git clone --branch Release_1_9_6 --depth 1 https://github.com/doxygen/doxygen.git doxygen-1.9.6
+\endverbatim
+
+Then configure and build it.  The installation is in some folder
+\c /someplace which you can adjust as you like:
+
+\verbatim
+$ # in ./build
+$ mkdir doxygen-1.9.6
+$ cd doxygen-1.9.6
+$ cmake -DCMAKE_PREFIX_PATH=/someplace/doxygen-1.9.6 ../../source/doxygen-1.9.6
+$ make
+$ make install
+\endverbatim
+
+There are several ways to provide Doxygen 1.9.6 to AVR-LibC:
+- Configure AVR-LibC with
+  \code --with-doxygen=/someplace/doxygen-1.9.6/bin/doxygen \endcode
+- or add <tt>/someplace/doxygen-1.9.6/bin</tt> to \c PATH prior to
+  configuring AVR-LibC.
+
+The AVR-LibC configure script will print the used Doxygen version.
+Make sure it is actually Doxygen 1.9.6!
+
+In order to build the documentation, you can add <tt>\--enable-doc</tt>
+to the AVR-LibC configure options, or you can invoke building the
+documentation by hand:
+
+\verbatim
+$ # in ./build/avr-libc-<version>/doc/api
 $ make html
 $ make pdf
 $ make install-dox-html
 \endverbatim
 Note that Doxygen doesn't care about dependencies, thus when you
 made changes to the sources and want to re-build the documentation,
-better run <tt>make clean</tt> in <tt>build/doc/api</tt> before
-building the doc.
+better run <tt>make clean</tt> in <tt>build/avr-libc-\<version\>/doc/api</tt>
+before building the doc.
 Moreover, the Doxygen version is highly critical,
 and the exact version of Doxygen v1.9.6 is recommended.
 
