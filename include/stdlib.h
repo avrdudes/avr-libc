@@ -725,21 +725,10 @@ char *ultoa (unsigned long __val, char *__s, int __radix)
 
    A very rough estimation of the execution time is
 
-\htmlonly
-   &nbsp;&nbsp;&nbsp;&nbsp;<i>Cycles</i> &asymp; 950 + 23&middot;<i>N</i> + 8.3&middot;<i>N</i><sup>2</sup>&middot;log(<i>radix</i>) &plusmn; 400
-\endhtmlonly
-\latexonly
-\begin{displaymath}
-   \mathit{Cycles} \approx
-   950 + 23\cdot N + 8.3\cdot N^2\cdot \log(\mathit{radix}) \pm 400
-\end{displaymath}
-\endlatexonly
-\manonly
-    Cycles = 950 + 23 * N  + 8.3 * N^2 * log(radix) +/- 400
-\endmanonly
+   {{{<i>Cycles</i> &asymp; 950 + 23*<i>N</i> + 8.3*<i>N</i><sup>2</sup>*log(<i>radix</i>) +/- 400}}}
 
    where <i>N</i> denotes the number of digits in the result,
-   and log stands for the Natural Logarithm.
+   and \e log stands for the Natural Logarithm.
    This means a decimal conversion can take up to 9000 cycles,
    a hexadecimal conversions can take up to 7800 cycles,
    and a binary conversion can take more than 27000 cycles.

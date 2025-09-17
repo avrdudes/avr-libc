@@ -762,7 +762,7 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/setjmp.h \
                          @top_srcdir@/include/stdint.h \
                          @top_srcdir@/include/stdio.h \
-                         @top_srcdir@/include/stdlib.h \
+                         @top_builddir@/doc/api/stdlib.h \
                          @top_builddir@/doc/api/stdfix-avrlibc.h \
                          @top_srcdir@/include/string.h \
                          @top_srcdir@/include/time.h \

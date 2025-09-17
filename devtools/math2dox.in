@@ -14,30 +14,36 @@ import sys, re
 # \htmlonly, \latexonly and \manonly.
 pat_math = re.compile(r"\s*{{{(.*)}}}(.*)")
 
-repl_html = (("-", "&minus;"),
-             ("*", "&middot;"))
+repl_html = (("+/-", "&plusmn;"),
+             ("-",   "&minus;"),
+             ("*",   "&middot;"))
 
 repl_tex = (("*",        r"\cdot "),
             ("&asymp;",  r"\approx "),
             ("&middot;", r"\cdot "),
-            ("&deg;" ,   r"^\circ"),
-            ("&pi;" ,    r"\pi "),
-            ("log" ,     r"\log"),
-            ("<sup>" ,   "^{"),
-            ("</sup>" ,  "}"),
-            ("<sub>" ,   "_{"),
-            ("</sub>" ,  "}"),
-            ("&nbsp;" ,  " "))
+            ("&deg;",    r"^\circ "),
+            ("&pi;",     r"\pi "),
+            ("+/-",      r"\pm "),
+            ("log",      r"\log "),
+            ("<i>",      r"\mathit{"),
+            ("</i>",     "}"),
+            ("<sup>",    "^{"),
+            ("</sup>",   "}"),
+            ("<sub>",    "_{"),
+            ("</sub>",   "}"),
+            ("&nbsp;",   " "))
 
-repl_man = (("&asymp;" , "="),
+repl_man = (("&asymp;",  "="),
             ("&middot;", " * "),
-            ("&deg;" ,   " degree"),
-            ("&nbsp;" ,  " "),
-            ("&pi;" ,    " pi "),
-            ("<sup>" ,   "^{"),
-            ("</sup>" ,  "}"),
-            ("<sub>" ,   "_"),
-            ("</sub>" ,  ""),
+            ("&deg;",    " degree"),
+            ("&nbsp;",   " "),
+            ("&pi;",     " pi "),
+            ("<i>",      ""),
+            ("</i>",     ""),
+            ("<sup>",    "^{"),
+            ("</sup>",   "}"),
+            ("<sub>",    "_"),
+            ("</sub>",   ""),
             ("pi /",     "pi/"),
             ("{x}",      "x"),
             ("  ",       " "))

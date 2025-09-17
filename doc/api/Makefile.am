@@ -26,9 +26,11 @@
 #
 # Author: Theodore A. Roth <troth@verinet.com>
 
+MATH2DOX_H = stdfix-avrlibc.h stdlib.h
+
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
-CLEANFILES           = *.html *.pdf *.ma *.mas stdfix-avrlibc.h \
+CLEANFILES           = *.html *.pdf *.ma *.mas $(MATH2DOX_H) \
                        malloc-*.svg malloc-*.eps \
                        doxygen.config main_page.dox faq.dox doxygen-pdf.config
 
@@ -155,7 +157,7 @@ clean-local:
 
 # Let config.status rebuild headers and dox from .in.
 doxygen.config:	$(top_builddir)/include/util/delay.h \
-		main_page.dox faq.dox stdfix-avrlibc.h
+		main_page.dox faq.dox $(MATH2DOX_H)
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_SVG) main_page.dox
 	@DOXYGEN@ doxygen.config
@@ -166,7 +168,7 @@ latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_SVG) main_page.dox
 if HAVE_PYTHON
 # stdfix-avrlibc.h has some simple formulae that are mistreated by Doxygen,
 # in particular for the man pages.  Invoke a simple math -> dox processor.
-stdfix-avrlibc.h: $(top_srcdir)/include/stdfix-avrlibc.h \
+$(MATH2DOX_H) : % : $(top_srcdir)/include/% \
 		  $(top_builddir)/devtools/math2dox
 	cat $< | $(top_builddir)/devtools/math2dox > $@
 
@@ -175,7 +177,7 @@ $(top_builddir)/devtools/math2dox: $(top_srcdir)/devtools/math2dox.in
 	cd $(top_builddir) && $(SHELL) ./config.status --file=devtools/math2dox
 else
 # Without Python, just remove the {{{ ... }}} markers.
-stdfix-avrlibc.h: $(top_srcdir)/include/stdfix-avrlibc.h
+$(MATH2DOX_H) : % : $(top_srcdir)/include/%
 	cat $< | $(SED) -e 's:{{{::g' -e 's:}}}::g' > $@
 endif
 

@@ -35,6 +35,6 @@ devtools/filter-mcus.py
 
 *.pdf
 doc/api/malloc-*.svg
-doc/api/stdfix-avrlibc.h
+doc/api/*.h
 
 __pycache__
