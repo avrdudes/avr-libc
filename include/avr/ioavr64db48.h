@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2025, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -43,7 +43,6 @@
 
 /* Ungrouped common registers */
 #define CCP  _SFR_MEM8(0x0034)  /* Configuration Change Protection */
-#define RAMPZ  _SFR_MEM8(0x003B)  /* Extended Z-pointer Register */
 #define SP  _SFR_MEM16(0x003D)  /* Stack Pointer */
 #define SPL  _SFR_MEM8(0x003D)  /* Stack Pointer Low */
 #define SPH  _SFR_MEM8(0x003E)  /* Stack Pointer High */
@@ -657,7 +656,7 @@ typedef struct CLKCTRL_struct
     register8_t reserved_4[3];
     register8_t XOSC32KCTRLA;  /* XOSC32K Control A */
     register8_t reserved_5[3];
-    register8_t XOSCHFCTRLA;  /*  */
+    register8_t XOSCHFCTRLA;  /* XOSC High-Frequency Control A */
     register8_t reserved_6[31];
 } CLKCTRL_t;
 
@@ -806,7 +805,7 @@ typedef struct CRCSCAN_struct
     register8_t CTRLA;  /* Control A */
     register8_t CTRLB;  /* Control B */
     register8_t STATUS;  /* Status */
-    register8_t reserved_1[1];
+    register8_t reserved_1[13];
 } CRCSCAN_t;
 
 /* CRC Source select */
@@ -2586,7 +2585,7 @@ typedef struct SPI_struct
     register8_t INTCTRL;  /* Interrupt Control */
     register8_t INTFLAGS;  /* Interrupt Flags */
     register8_t DATA;  /* Data */
-    register8_t reserved_1[3];
+    register8_t reserved_1[11];
 } SPI_t;
 
 /* SPI Mode select */
@@ -2776,7 +2775,6 @@ typedef enum TCA_SPLIT_CLKSEL_enum
 typedef enum TCA_SPLIT_CMD_enum
 {
     TCA_SPLIT_CMD_NONE_gc = (0x00<<2),  /* No Command */
-    TCA_SPLIT_CMD_UPDATE_gc = (0x01<<2),  /* Force Update */
     TCA_SPLIT_CMD_RESTART_gc = (0x02<<2),  /* Force Restart */
     TCA_SPLIT_CMD_RESET_gc = (0x03<<2)  /* Force Hard Reset */
 } TCA_SPLIT_CMD_t;
@@ -3290,6 +3288,7 @@ typedef struct WDT_struct
 {
     register8_t CTRLA;  /* Control A */
     register8_t STATUS;  /* Status */
+    register8_t reserved_1[14];
 } WDT_t;
 
 /* Period select */
@@ -3478,7 +3477,6 @@ IO Module Instances. Mapped to memory.
 
 /* CPU - CPU */
 #define CPU_CCP  _SFR_MEM8(0x0034)
-#define CPU_RAMPZ  _SFR_MEM8(0x003B)
 #define CPU_SP  _SFR_MEM16(0x003D)
 #define CPU_SPL  _SFR_MEM8(0x003D)
 #define CPU_SPH  _SFR_MEM8(0x003E)
@@ -4774,7 +4772,7 @@ IO Module Instances. Mapped to memory.
 #define CCL_RUNSTDBY_bp  6  /* Run in Standby bit position. */
 
 /* CCL.SEQCTRL0  bit masks and bit positions */
-#define CCL_SEQSEL_gm  0x07  /* Sequential Selection group mask. */
+#define CCL_SEQSEL_gm  0x0F  /* Sequential Selection group mask. */
 #define CCL_SEQSEL_gp  0  /* Sequential Selection group position. */
 #define CCL_SEQSEL_0_bm  (1<<0)  /* Sequential Selection bit 0 mask. */
 #define CCL_SEQSEL_0_bp  0  /* Sequential Selection bit 0 position. */
@@ -4782,6 +4780,8 @@ IO Module Instances. Mapped to memory.
 #define CCL_SEQSEL_1_bp  1  /* Sequential Selection bit 1 position. */
 #define CCL_SEQSEL_2_bm  (1<<2)  /* Sequential Selection bit 2 mask. */
 #define CCL_SEQSEL_2_bp  2  /* Sequential Selection bit 2 position. */
+#define CCL_SEQSEL_3_bm  (1<<3)  /* Sequential Selection bit 3 mask. */
+#define CCL_SEQSEL_3_bp  3  /* Sequential Selection bit 3 position. */
 
 /* CCL.SEQCTRL1  bit masks and bit positions */
 /* CCL_SEQSEL  is already defined. */
@@ -7215,6 +7215,174 @@ IO Module Instances. Mapped to memory.
 #define TCD_FAULTDET_bm  0x04  /* Fault detection bit mask. */
 #define TCD_FAULTDET_bp  2  /* Fault detection bit position. */
 
+/* TCD.CAPTUREA  bit masks and bit positions */
+#define TCD_CAPTUREA_gm  0xFFF  /* Capture A group mask. */
+#define TCD_CAPTUREA_gp  0  /* Capture A group position. */
+#define TCD_CAPTUREA_0_bm  (1<<0)  /* Capture A bit 0 mask. */
+#define TCD_CAPTUREA_0_bp  0  /* Capture A bit 0 position. */
+#define TCD_CAPTUREA_1_bm  (1<<1)  /* Capture A bit 1 mask. */
+#define TCD_CAPTUREA_1_bp  1  /* Capture A bit 1 position. */
+#define TCD_CAPTUREA_2_bm  (1<<2)  /* Capture A bit 2 mask. */
+#define TCD_CAPTUREA_2_bp  2  /* Capture A bit 2 position. */
+#define TCD_CAPTUREA_3_bm  (1<<3)  /* Capture A bit 3 mask. */
+#define TCD_CAPTUREA_3_bp  3  /* Capture A bit 3 position. */
+#define TCD_CAPTUREA_4_bm  (1<<4)  /* Capture A bit 4 mask. */
+#define TCD_CAPTUREA_4_bp  4  /* Capture A bit 4 position. */
+#define TCD_CAPTUREA_5_bm  (1<<5)  /* Capture A bit 5 mask. */
+#define TCD_CAPTUREA_5_bp  5  /* Capture A bit 5 position. */
+#define TCD_CAPTUREA_6_bm  (1<<6)  /* Capture A bit 6 mask. */
+#define TCD_CAPTUREA_6_bp  6  /* Capture A bit 6 position. */
+#define TCD_CAPTUREA_7_bm  (1<<7)  /* Capture A bit 7 mask. */
+#define TCD_CAPTUREA_7_bp  7  /* Capture A bit 7 position. */
+#define TCD_CAPTUREA_8_bm  (1<<8)  /* Capture A bit 8 mask. */
+#define TCD_CAPTUREA_8_bp  8  /* Capture A bit 8 position. */
+#define TCD_CAPTUREA_9_bm  (1<<9)  /* Capture A bit 9 mask. */
+#define TCD_CAPTUREA_9_bp  9  /* Capture A bit 9 position. */
+#define TCD_CAPTUREA_10_bm  (1<<10)  /* Capture A bit 10 mask. */
+#define TCD_CAPTUREA_10_bp  10  /* Capture A bit 10 position. */
+#define TCD_CAPTUREA_11_bm  (1<<11)  /* Capture A bit 11 mask. */
+#define TCD_CAPTUREA_11_bp  11  /* Capture A bit 11 position. */
+
+/* TCD.CAPTUREB  bit masks and bit positions */
+#define TCD_CAPTUREB_gm  0xFFF  /* Capture B group mask. */
+#define TCD_CAPTUREB_gp  0  /* Capture B group position. */
+#define TCD_CAPTUREB_0_bm  (1<<0)  /* Capture B bit 0 mask. */
+#define TCD_CAPTUREB_0_bp  0  /* Capture B bit 0 position. */
+#define TCD_CAPTUREB_1_bm  (1<<1)  /* Capture B bit 1 mask. */
+#define TCD_CAPTUREB_1_bp  1  /* Capture B bit 1 position. */
+#define TCD_CAPTUREB_2_bm  (1<<2)  /* Capture B bit 2 mask. */
+#define TCD_CAPTUREB_2_bp  2  /* Capture B bit 2 position. */
+#define TCD_CAPTUREB_3_bm  (1<<3)  /* Capture B bit 3 mask. */
+#define TCD_CAPTUREB_3_bp  3  /* Capture B bit 3 position. */
+#define TCD_CAPTUREB_4_bm  (1<<4)  /* Capture B bit 4 mask. */
+#define TCD_CAPTUREB_4_bp  4  /* Capture B bit 4 position. */
+#define TCD_CAPTUREB_5_bm  (1<<5)  /* Capture B bit 5 mask. */
+#define TCD_CAPTUREB_5_bp  5  /* Capture B bit 5 position. */
+#define TCD_CAPTUREB_6_bm  (1<<6)  /* Capture B bit 6 mask. */
+#define TCD_CAPTUREB_6_bp  6  /* Capture B bit 6 position. */
+#define TCD_CAPTUREB_7_bm  (1<<7)  /* Capture B bit 7 mask. */
+#define TCD_CAPTUREB_7_bp  7  /* Capture B bit 7 position. */
+#define TCD_CAPTUREB_8_bm  (1<<8)  /* Capture B bit 8 mask. */
+#define TCD_CAPTUREB_8_bp  8  /* Capture B bit 8 position. */
+#define TCD_CAPTUREB_9_bm  (1<<9)  /* Capture B bit 9 mask. */
+#define TCD_CAPTUREB_9_bp  9  /* Capture B bit 9 position. */
+#define TCD_CAPTUREB_10_bm  (1<<10)  /* Capture B bit 10 mask. */
+#define TCD_CAPTUREB_10_bp  10  /* Capture B bit 10 position. */
+#define TCD_CAPTUREB_11_bm  (1<<11)  /* Capture B bit 11 mask. */
+#define TCD_CAPTUREB_11_bp  11  /* Capture B bit 11 position. */
+
+/* TCD.CMPASET  bit masks and bit positions */
+#define TCD_CMPASET_gm  0xFFF  /* Compare A Set group mask. */
+#define TCD_CMPASET_gp  0  /* Compare A Set group position. */
+#define TCD_CMPASET_0_bm  (1<<0)  /* Compare A Set bit 0 mask. */
+#define TCD_CMPASET_0_bp  0  /* Compare A Set bit 0 position. */
+#define TCD_CMPASET_1_bm  (1<<1)  /* Compare A Set bit 1 mask. */
+#define TCD_CMPASET_1_bp  1  /* Compare A Set bit 1 position. */
+#define TCD_CMPASET_2_bm  (1<<2)  /* Compare A Set bit 2 mask. */
+#define TCD_CMPASET_2_bp  2  /* Compare A Set bit 2 position. */
+#define TCD_CMPASET_3_bm  (1<<3)  /* Compare A Set bit 3 mask. */
+#define TCD_CMPASET_3_bp  3  /* Compare A Set bit 3 position. */
+#define TCD_CMPASET_4_bm  (1<<4)  /* Compare A Set bit 4 mask. */
+#define TCD_CMPASET_4_bp  4  /* Compare A Set bit 4 position. */
+#define TCD_CMPASET_5_bm  (1<<5)  /* Compare A Set bit 5 mask. */
+#define TCD_CMPASET_5_bp  5  /* Compare A Set bit 5 position. */
+#define TCD_CMPASET_6_bm  (1<<6)  /* Compare A Set bit 6 mask. */
+#define TCD_CMPASET_6_bp  6  /* Compare A Set bit 6 position. */
+#define TCD_CMPASET_7_bm  (1<<7)  /* Compare A Set bit 7 mask. */
+#define TCD_CMPASET_7_bp  7  /* Compare A Set bit 7 position. */
+#define TCD_CMPASET_8_bm  (1<<8)  /* Compare A Set bit 8 mask. */
+#define TCD_CMPASET_8_bp  8  /* Compare A Set bit 8 position. */
+#define TCD_CMPASET_9_bm  (1<<9)  /* Compare A Set bit 9 mask. */
+#define TCD_CMPASET_9_bp  9  /* Compare A Set bit 9 position. */
+#define TCD_CMPASET_10_bm  (1<<10)  /* Compare A Set bit 10 mask. */
+#define TCD_CMPASET_10_bp  10  /* Compare A Set bit 10 position. */
+#define TCD_CMPASET_11_bm  (1<<11)  /* Compare A Set bit 11 mask. */
+#define TCD_CMPASET_11_bp  11  /* Compare A Set bit 11 position. */
+
+/* TCD.CMPACLR  bit masks and bit positions */
+#define TCD_CMPACLR_gm  0xFFF  /* Compare A Clear group mask. */
+#define TCD_CMPACLR_gp  0  /* Compare A Clear group position. */
+#define TCD_CMPACLR_0_bm  (1<<0)  /* Compare A Clear bit 0 mask. */
+#define TCD_CMPACLR_0_bp  0  /* Compare A Clear bit 0 position. */
+#define TCD_CMPACLR_1_bm  (1<<1)  /* Compare A Clear bit 1 mask. */
+#define TCD_CMPACLR_1_bp  1  /* Compare A Clear bit 1 position. */
+#define TCD_CMPACLR_2_bm  (1<<2)  /* Compare A Clear bit 2 mask. */
+#define TCD_CMPACLR_2_bp  2  /* Compare A Clear bit 2 position. */
+#define TCD_CMPACLR_3_bm  (1<<3)  /* Compare A Clear bit 3 mask. */
+#define TCD_CMPACLR_3_bp  3  /* Compare A Clear bit 3 position. */
+#define TCD_CMPACLR_4_bm  (1<<4)  /* Compare A Clear bit 4 mask. */
+#define TCD_CMPACLR_4_bp  4  /* Compare A Clear bit 4 position. */
+#define TCD_CMPACLR_5_bm  (1<<5)  /* Compare A Clear bit 5 mask. */
+#define TCD_CMPACLR_5_bp  5  /* Compare A Clear bit 5 position. */
+#define TCD_CMPACLR_6_bm  (1<<6)  /* Compare A Clear bit 6 mask. */
+#define TCD_CMPACLR_6_bp  6  /* Compare A Clear bit 6 position. */
+#define TCD_CMPACLR_7_bm  (1<<7)  /* Compare A Clear bit 7 mask. */
+#define TCD_CMPACLR_7_bp  7  /* Compare A Clear bit 7 position. */
+#define TCD_CMPACLR_8_bm  (1<<8)  /* Compare A Clear bit 8 mask. */
+#define TCD_CMPACLR_8_bp  8  /* Compare A Clear bit 8 position. */
+#define TCD_CMPACLR_9_bm  (1<<9)  /* Compare A Clear bit 9 mask. */
+#define TCD_CMPACLR_9_bp  9  /* Compare A Clear bit 9 position. */
+#define TCD_CMPACLR_10_bm  (1<<10)  /* Compare A Clear bit 10 mask. */
+#define TCD_CMPACLR_10_bp  10  /* Compare A Clear bit 10 position. */
+#define TCD_CMPACLR_11_bm  (1<<11)  /* Compare A Clear bit 11 mask. */
+#define TCD_CMPACLR_11_bp  11  /* Compare A Clear bit 11 position. */
+
+/* TCD.CMPBSET  bit masks and bit positions */
+#define TCD_CMPBSET_gm  0xFFF  /* Compare B Set group mask. */
+#define TCD_CMPBSET_gp  0  /* Compare B Set group position. */
+#define TCD_CMPBSET_0_bm  (1<<0)  /* Compare B Set bit 0 mask. */
+#define TCD_CMPBSET_0_bp  0  /* Compare B Set bit 0 position. */
+#define TCD_CMPBSET_1_bm  (1<<1)  /* Compare B Set bit 1 mask. */
+#define TCD_CMPBSET_1_bp  1  /* Compare B Set bit 1 position. */
+#define TCD_CMPBSET_2_bm  (1<<2)  /* Compare B Set bit 2 mask. */
+#define TCD_CMPBSET_2_bp  2  /* Compare B Set bit 2 position. */
+#define TCD_CMPBSET_3_bm  (1<<3)  /* Compare B Set bit 3 mask. */
+#define TCD_CMPBSET_3_bp  3  /* Compare B Set bit 3 position. */
+#define TCD_CMPBSET_4_bm  (1<<4)  /* Compare B Set bit 4 mask. */
+#define TCD_CMPBSET_4_bp  4  /* Compare B Set bit 4 position. */
+#define TCD_CMPBSET_5_bm  (1<<5)  /* Compare B Set bit 5 mask. */
+#define TCD_CMPBSET_5_bp  5  /* Compare B Set bit 5 position. */
+#define TCD_CMPBSET_6_bm  (1<<6)  /* Compare B Set bit 6 mask. */
+#define TCD_CMPBSET_6_bp  6  /* Compare B Set bit 6 position. */
+#define TCD_CMPBSET_7_bm  (1<<7)  /* Compare B Set bit 7 mask. */
+#define TCD_CMPBSET_7_bp  7  /* Compare B Set bit 7 position. */
+#define TCD_CMPBSET_8_bm  (1<<8)  /* Compare B Set bit 8 mask. */
+#define TCD_CMPBSET_8_bp  8  /* Compare B Set bit 8 position. */
+#define TCD_CMPBSET_9_bm  (1<<9)  /* Compare B Set bit 9 mask. */
+#define TCD_CMPBSET_9_bp  9  /* Compare B Set bit 9 position. */
+#define TCD_CMPBSET_10_bm  (1<<10)  /* Compare B Set bit 10 mask. */
+#define TCD_CMPBSET_10_bp  10  /* Compare B Set bit 10 position. */
+#define TCD_CMPBSET_11_bm  (1<<11)  /* Compare B Set bit 11 mask. */
+#define TCD_CMPBSET_11_bp  11  /* Compare B Set bit 11 position. */
+
+/* TCD.CMPBCLR  bit masks and bit positions */
+#define TCD_COMPBCLR_gm  0xFFF  /* Compare B Clear group mask. */
+#define TCD_COMPBCLR_gp  0  /* Compare B Clear group position. */
+#define TCD_COMPBCLR_0_bm  (1<<0)  /* Compare B Clear bit 0 mask. */
+#define TCD_COMPBCLR_0_bp  0  /* Compare B Clear bit 0 position. */
+#define TCD_COMPBCLR_1_bm  (1<<1)  /* Compare B Clear bit 1 mask. */
+#define TCD_COMPBCLR_1_bp  1  /* Compare B Clear bit 1 position. */
+#define TCD_COMPBCLR_2_bm  (1<<2)  /* Compare B Clear bit 2 mask. */
+#define TCD_COMPBCLR_2_bp  2  /* Compare B Clear bit 2 position. */
+#define TCD_COMPBCLR_3_bm  (1<<3)  /* Compare B Clear bit 3 mask. */
+#define TCD_COMPBCLR_3_bp  3  /* Compare B Clear bit 3 position. */
+#define TCD_COMPBCLR_4_bm  (1<<4)  /* Compare B Clear bit 4 mask. */
+#define TCD_COMPBCLR_4_bp  4  /* Compare B Clear bit 4 position. */
+#define TCD_COMPBCLR_5_bm  (1<<5)  /* Compare B Clear bit 5 mask. */
+#define TCD_COMPBCLR_5_bp  5  /* Compare B Clear bit 5 position. */
+#define TCD_COMPBCLR_6_bm  (1<<6)  /* Compare B Clear bit 6 mask. */
+#define TCD_COMPBCLR_6_bp  6  /* Compare B Clear bit 6 position. */
+#define TCD_COMPBCLR_7_bm  (1<<7)  /* Compare B Clear bit 7 mask. */
+#define TCD_COMPBCLR_7_bp  7  /* Compare B Clear bit 7 position. */
+#define TCD_COMPBCLR_8_bm  (1<<8)  /* Compare B Clear bit 8 mask. */
+#define TCD_COMPBCLR_8_bp  8  /* Compare B Clear bit 8 position. */
+#define TCD_COMPBCLR_9_bm  (1<<9)  /* Compare B Clear bit 9 mask. */
+#define TCD_COMPBCLR_9_bp  9  /* Compare B Clear bit 9 position. */
+#define TCD_COMPBCLR_10_bm  (1<<10)  /* Compare B Clear bit 10 mask. */
+#define TCD_COMPBCLR_10_bp  10  /* Compare B Clear bit 10 position. */
+#define TCD_COMPBCLR_11_bm  (1<<11)  /* Compare B Clear bit 11 mask. */
+#define TCD_COMPBCLR_11_bp  11  /* Compare B Clear bit 11 position. */
+
 
 /* TWI - Two-Wire Interface */
 /* TWI.CTRLA  bit masks and bit positions */
@@ -7291,6 +7459,66 @@ IO Module Instances. Mapped to memory.
 #define TWI_RIF_bm  0x80  /* Read Interrupt Flag bit mask. */
 #define TWI_RIF_bp  7  /* Read Interrupt Flag bit position. */
 
+/* TWI.MBAUD  bit masks and bit positions */
+#define TWI_BAUD_gm  0xFF  /* Baud group mask. */
+#define TWI_BAUD_gp  0  /* Baud group position. */
+#define TWI_BAUD_0_bm  (1<<0)  /* Baud bit 0 mask. */
+#define TWI_BAUD_0_bp  0  /* Baud bit 0 position. */
+#define TWI_BAUD_1_bm  (1<<1)  /* Baud bit 1 mask. */
+#define TWI_BAUD_1_bp  1  /* Baud bit 1 position. */
+#define TWI_BAUD_2_bm  (1<<2)  /* Baud bit 2 mask. */
+#define TWI_BAUD_2_bp  2  /* Baud bit 2 position. */
+#define TWI_BAUD_3_bm  (1<<3)  /* Baud bit 3 mask. */
+#define TWI_BAUD_3_bp  3  /* Baud bit 3 position. */
+#define TWI_BAUD_4_bm  (1<<4)  /* Baud bit 4 mask. */
+#define TWI_BAUD_4_bp  4  /* Baud bit 4 position. */
+#define TWI_BAUD_5_bm  (1<<5)  /* Baud bit 5 mask. */
+#define TWI_BAUD_5_bp  5  /* Baud bit 5 position. */
+#define TWI_BAUD_6_bm  (1<<6)  /* Baud bit 6 mask. */
+#define TWI_BAUD_6_bp  6  /* Baud bit 6 position. */
+#define TWI_BAUD_7_bm  (1<<7)  /* Baud bit 7 mask. */
+#define TWI_BAUD_7_bp  7  /* Baud bit 7 position. */
+
+/* TWI.MADDR  bit masks and bit positions */
+#define TWI_ADDR_gm  0xFF  /* Address group mask. */
+#define TWI_ADDR_gp  0  /* Address group position. */
+#define TWI_ADDR_0_bm  (1<<0)  /* Address bit 0 mask. */
+#define TWI_ADDR_0_bp  0  /* Address bit 0 position. */
+#define TWI_ADDR_1_bm  (1<<1)  /* Address bit 1 mask. */
+#define TWI_ADDR_1_bp  1  /* Address bit 1 position. */
+#define TWI_ADDR_2_bm  (1<<2)  /* Address bit 2 mask. */
+#define TWI_ADDR_2_bp  2  /* Address bit 2 position. */
+#define TWI_ADDR_3_bm  (1<<3)  /* Address bit 3 mask. */
+#define TWI_ADDR_3_bp  3  /* Address bit 3 position. */
+#define TWI_ADDR_4_bm  (1<<4)  /* Address bit 4 mask. */
+#define TWI_ADDR_4_bp  4  /* Address bit 4 position. */
+#define TWI_ADDR_5_bm  (1<<5)  /* Address bit 5 mask. */
+#define TWI_ADDR_5_bp  5  /* Address bit 5 position. */
+#define TWI_ADDR_6_bm  (1<<6)  /* Address bit 6 mask. */
+#define TWI_ADDR_6_bp  6  /* Address bit 6 position. */
+#define TWI_ADDR_7_bm  (1<<7)  /* Address bit 7 mask. */
+#define TWI_ADDR_7_bp  7  /* Address bit 7 position. */
+
+/* TWI.MDATA  bit masks and bit positions */
+#define TWI_DATA_gm  0xFF  /* Data group mask. */
+#define TWI_DATA_gp  0  /* Data group position. */
+#define TWI_DATA_0_bm  (1<<0)  /* Data bit 0 mask. */
+#define TWI_DATA_0_bp  0  /* Data bit 0 position. */
+#define TWI_DATA_1_bm  (1<<1)  /* Data bit 1 mask. */
+#define TWI_DATA_1_bp  1  /* Data bit 1 position. */
+#define TWI_DATA_2_bm  (1<<2)  /* Data bit 2 mask. */
+#define TWI_DATA_2_bp  2  /* Data bit 2 position. */
+#define TWI_DATA_3_bm  (1<<3)  /* Data bit 3 mask. */
+#define TWI_DATA_3_bp  3  /* Data bit 3 position. */
+#define TWI_DATA_4_bm  (1<<4)  /* Data bit 4 mask. */
+#define TWI_DATA_4_bp  4  /* Data bit 4 position. */
+#define TWI_DATA_5_bm  (1<<5)  /* Data bit 5 mask. */
+#define TWI_DATA_5_bp  5  /* Data bit 5 position. */
+#define TWI_DATA_6_bm  (1<<6)  /* Data bit 6 mask. */
+#define TWI_DATA_6_bp  6  /* Data bit 6 position. */
+#define TWI_DATA_7_bm  (1<<7)  /* Data bit 7 mask. */
+#define TWI_DATA_7_bp  7  /* Data bit 7 position. */
+
 /* TWI.SCTRLA  bit masks and bit positions */
 /* TWI_ENABLE  is already defined. */
 /* TWI_SMEN  is already defined. */
@@ -7326,6 +7554,12 @@ IO Module Instances. Mapped to memory.
 #define TWI_APIF_bp  6  /* Address/Stop Interrupt Flag bit position. */
 #define TWI_DIF_bm  0x80  /* Data Interrupt Flag bit mask. */
 #define TWI_DIF_bp  7  /* Data Interrupt Flag bit position. */
+
+/* TWI.SADDR  bit masks and bit positions */
+/* TWI_ADDR  is already defined. */
+
+/* TWI.SDATA  bit masks and bit positions */
+/* TWI_DATA  is already defined. */
 
 /* TWI.SADDRMASK  bit masks and bit positions */
 #define TWI_ADDREN_bm  0x01  /* Address Enable bit mask. */

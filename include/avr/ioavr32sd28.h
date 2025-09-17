@@ -845,6 +845,7 @@ typedef struct CPUINT_struct
     register8_t STATUS;  /* Status */
     register8_t LVL0PRI;  /* Interrupt Level 0 Priority */
     register8_t LVL1VEC;  /* Interrupt Level 1 Priority Vector */
+    register8_t reserved_1[12];
 } CPUINT_t;
 
 
@@ -1062,7 +1063,7 @@ typedef struct EVSYS_struct
     register8_t USEREVSYSEVOUTA;  /* User 14 - EVOUTA */
     register8_t USEREVSYSEVOUTC;  /* User 15 - EVOUTC */
     register8_t USEREVSYSEVOUTD;  /* User 16 - EVOUTD */
-    register8_t USEREVSYSEVOUTF;  /* User 17 - EVOUTF */
+    register8_t reserved_3[1];
     register8_t USERUSART0IRDA;  /* User 18 - USART0 */
     register8_t USERUSART1IRDA;  /* User 19 - USART1 */
     register8_t USERUSART2IRDA;  /* User 20 - USART2 */
@@ -1082,9 +1083,7 @@ typedef struct EVSYS_struct
     register8_t USERERRCTRLEVENT1;  /* User 34 - ERRCTRL Event 1 */
     register8_t USERCLKCTRLCFD;  /* User 35 - CLKCTRL CFD */
     register8_t USERCLKCTRLCFM;  /* User 36 - CLKCTRL CFM */
-    register8_t USEREVSYSEVOUTB;  /* User 37 - EVOUTB */
-    register8_t USEREVSYSEVOUTE;  /* User 38 - EVOUTE */
-    register8_t reserved_3[57];
+    register8_t reserved_4[59];
 } EVSYS_t;
 
 /* Channel Generator Select */
@@ -1118,14 +1117,10 @@ typedef enum EVSYS_CHANNEL_enum
     EVSYS_CHANNEL_ZCD3_OUT_gc = (0x33<<0),  /* Zero Cross Detect 3 out */
     EVSYS_CHANNEL_PORTA_EVGEN0_gc = (0x40<<0),  /* Port A Event 0 */
     EVSYS_CHANNEL_PORTA_EVGEN1_gc = (0x41<<0),  /* Port A Event 1 */
-    EVSYS_CHANNEL_PORTB_EVGEN0_gc = (0x42<<0),  /* Port B Event 0 */
-    EVSYS_CHANNEL_PORTB_EVGEN1_gc = (0x43<<0),  /* Port B Event 1 */
     EVSYS_CHANNEL_PORTC_EVGEN0_gc = (0x44<<0),  /* Port C Event 0 */
     EVSYS_CHANNEL_PORTC_EVGEN1_gc = (0x45<<0),  /* Port C Event 1 */
     EVSYS_CHANNEL_PORTD_EVGEN0_gc = (0x46<<0),  /* Port D Event 0 */
     EVSYS_CHANNEL_PORTD_EVGEN1_gc = (0x47<<0),  /* Port D Event 1 */
-    EVSYS_CHANNEL_PORTE_EVGEN0_gc = (0x48<<0),  /* Port E Event 0 */
-    EVSYS_CHANNEL_PORTE_EVGEN1_gc = (0x49<<0),  /* Port E Event 1 */
     EVSYS_CHANNEL_PORTF_EVGEN0_gc = (0x4A<<0),  /* Port F Event 0 */
     EVSYS_CHANNEL_PORTF_EVGEN1_gc = (0x4B<<0),  /* Port F Event 1 */
     EVSYS_CHANNEL_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
@@ -3086,7 +3081,6 @@ IO Module Instances. Mapped to memory.
 #define EVSYS_USEREVSYSEVOUTA  _SFR_MEM8(0x022E)
 #define EVSYS_USEREVSYSEVOUTC  _SFR_MEM8(0x022F)
 #define EVSYS_USEREVSYSEVOUTD  _SFR_MEM8(0x0230)
-#define EVSYS_USEREVSYSEVOUTF  _SFR_MEM8(0x0231)
 #define EVSYS_USERUSART0IRDA  _SFR_MEM8(0x0232)
 #define EVSYS_USERUSART1IRDA  _SFR_MEM8(0x0233)
 #define EVSYS_USERUSART2IRDA  _SFR_MEM8(0x0234)
@@ -3106,8 +3100,6 @@ IO Module Instances. Mapped to memory.
 #define EVSYS_USERERRCTRLEVENT1  _SFR_MEM8(0x0242)
 #define EVSYS_USERCLKCTRLCFD  _SFR_MEM8(0x0243)
 #define EVSYS_USERCLKCTRLCFM  _SFR_MEM8(0x0244)
-#define EVSYS_USEREVSYSEVOUTB  _SFR_MEM8(0x0245)
-#define EVSYS_USEREVSYSEVOUTE  _SFR_MEM8(0x0246)
 
 
 /* PORT (PORTA) - I/O Ports */
@@ -5412,9 +5404,6 @@ IO Module Instances. Mapped to memory.
 /* EVSYS.USEREVSYSEVOUTD  bit masks and bit positions */
 /* EVSYS_USER  is already defined. */
 
-/* EVSYS.USEREVSYSEVOUTF  bit masks and bit positions */
-/* EVSYS_USER  is already defined. */
-
 /* EVSYS.USERUSART0IRDA  bit masks and bit positions */
 /* EVSYS_USER  is already defined. */
 
@@ -5470,12 +5459,6 @@ IO Module Instances. Mapped to memory.
 /* EVSYS_USER  is already defined. */
 
 /* EVSYS.USERCLKCTRLCFM  bit masks and bit positions */
-/* EVSYS_USER  is already defined. */
-
-/* EVSYS.USEREVSYSEVOUTB  bit masks and bit positions */
-/* EVSYS_USER  is already defined. */
-
-/* EVSYS.USEREVSYSEVOUTE  bit masks and bit positions */
 /* EVSYS_USER  is already defined. */
 
 

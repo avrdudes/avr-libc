@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2025, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -1220,7 +1220,7 @@ typedef struct PORT_struct
     register8_t PIN5CTRL;  /* Pin 5 Control */
     register8_t PIN6CTRL;  /* Pin 6 Control */
     register8_t PIN7CTRL;  /* Pin 7 Control */
-    register8_t EVGENCTRL;  /* Event Generation Control */
+    register8_t EVGENCTRLA;  /* Event Generation Control A */
     register8_t reserved_2[7];
 } PORT_t;
 
@@ -1624,7 +1624,7 @@ SLPCTRL - Sleep Controller
 typedef struct SLPCTRL_struct
 {
     register8_t CTRLA;  /* Control A */
-    register8_t reserved_1[1];
+    register8_t reserved_1[15];
 } SLPCTRL_t;
 
 /* Sleep mode select */
@@ -1652,7 +1652,7 @@ typedef struct SPI_struct
     register8_t INTCTRL;  /* Interrupt Control */
     register8_t INTFLAGS;  /* Interrupt Flags */
     register8_t DATA;  /* Data */
-    register8_t reserved_1[3];
+    register8_t reserved_1[11];
 } SPI_t;
 
 /* SPI Mode select */
@@ -1842,7 +1842,6 @@ typedef enum TCA_SPLIT_CLKSEL_enum
 typedef enum TCA_SPLIT_CMD_enum
 {
     TCA_SPLIT_CMD_NONE_gc = (0x00<<2),  /* No Command */
-    TCA_SPLIT_CMD_UPDATE_gc = (0x01<<2),  /* Force Update */
     TCA_SPLIT_CMD_RESTART_gc = (0x02<<2),  /* Force Restart */
     TCA_SPLIT_CMD_RESET_gc = (0x03<<2)  /* Force Hard Reset */
 } TCA_SPLIT_CMD_t;
@@ -2308,9 +2307,11 @@ IO Module Instances. Mapped to memory.
 #define TWI0                  (*(TWI_t *) 0x0900) /* Two-Wire Interface */
 #define SPI0                  (*(SPI_t *) 0x0940) /* Serial Peripheral Interface */
 #define TCA0                  (*(TCA_t *) 0x0A00) /* 16-bit Timer/Counter Type A */
+#define TCA1                  (*(TCA_t *) 0x0A40) /* 16-bit Timer/Counter Type A */
 #define TCB0                  (*(TCB_t *) 0x0B00) /* 16-bit Timer Type B */
 #define TCB1                  (*(TCB_t *) 0x0B10) /* 16-bit Timer Type B */
 #define TCB2                  (*(TCB_t *) 0x0B20) /* 16-bit Timer Type B */
+#define TCB3                  (*(TCB_t *) 0x0B30) /* 16-bit Timer Type B */
 #define SYSCFG             (*(SYSCFG_t *) 0x0F00) /* System Configuration Registers */
 #define NVMCTRL           (*(NVMCTRL_t *) 0x1000) /* Non-volatile Memory Controller */
 #define LOCK                 (*(LOCK_t *) 0x1040) /* Lockbits */
@@ -2535,7 +2536,7 @@ IO Module Instances. Mapped to memory.
 #define PORTA_PIN5CTRL  _SFR_MEM8(0x0415)
 #define PORTA_PIN6CTRL  _SFR_MEM8(0x0416)
 #define PORTA_PIN7CTRL  _SFR_MEM8(0x0417)
-#define PORTA_EVGENCTRL  _SFR_MEM8(0x0418)
+#define PORTA_EVGENCTRLA  _SFR_MEM8(0x0418)
 
 
 /* PORT (PORTC) - I/O Ports */
@@ -2562,7 +2563,7 @@ IO Module Instances. Mapped to memory.
 #define PORTC_PIN5CTRL  _SFR_MEM8(0x0455)
 #define PORTC_PIN6CTRL  _SFR_MEM8(0x0456)
 #define PORTC_PIN7CTRL  _SFR_MEM8(0x0457)
-#define PORTC_EVGENCTRL  _SFR_MEM8(0x0458)
+#define PORTC_EVGENCTRLA  _SFR_MEM8(0x0458)
 
 
 /* PORT (PORTD) - I/O Ports */
@@ -2589,7 +2590,7 @@ IO Module Instances. Mapped to memory.
 #define PORTD_PIN5CTRL  _SFR_MEM8(0x0475)
 #define PORTD_PIN6CTRL  _SFR_MEM8(0x0476)
 #define PORTD_PIN7CTRL  _SFR_MEM8(0x0477)
-#define PORTD_EVGENCTRL  _SFR_MEM8(0x0478)
+#define PORTD_EVGENCTRLA  _SFR_MEM8(0x0478)
 
 
 /* PORT (PORTF) - I/O Ports */
@@ -2616,7 +2617,7 @@ IO Module Instances. Mapped to memory.
 #define PORTF_PIN5CTRL  _SFR_MEM8(0x04B5)
 #define PORTF_PIN6CTRL  _SFR_MEM8(0x04B6)
 #define PORTF_PIN7CTRL  _SFR_MEM8(0x04B7)
-#define PORTF_EVGENCTRL  _SFR_MEM8(0x04B8)
+#define PORTF_EVGENCTRLA  _SFR_MEM8(0x04B8)
 
 
 /* PORTMUX - Port Multiplexer */
@@ -2838,6 +2839,71 @@ IO Module Instances. Mapped to memory.
 #define TCA0_SPLIT_HCMP2  _SFR_MEM8(0x0A2D)
 
 
+/* TCA (TCA1) - 16-bit Timer/Counter Type A - Single Mode */
+#define TCA1_SINGLE_CTRLA  _SFR_MEM8(0x0A40)
+#define TCA1_SINGLE_CTRLB  _SFR_MEM8(0x0A41)
+#define TCA1_SINGLE_CTRLC  _SFR_MEM8(0x0A42)
+#define TCA1_SINGLE_CTRLD  _SFR_MEM8(0x0A43)
+#define TCA1_SINGLE_CTRLECLR  _SFR_MEM8(0x0A44)
+#define TCA1_SINGLE_CTRLESET  _SFR_MEM8(0x0A45)
+#define TCA1_SINGLE_CTRLFCLR  _SFR_MEM8(0x0A46)
+#define TCA1_SINGLE_CTRLFSET  _SFR_MEM8(0x0A47)
+#define TCA1_SINGLE_EVCTRL  _SFR_MEM8(0x0A49)
+#define TCA1_SINGLE_INTCTRL  _SFR_MEM8(0x0A4A)
+#define TCA1_SINGLE_INTFLAGS  _SFR_MEM8(0x0A4B)
+#define TCA1_SINGLE_DBGCTRL  _SFR_MEM8(0x0A4E)
+#define TCA1_SINGLE_TEMP  _SFR_MEM8(0x0A4F)
+#define TCA1_SINGLE_CNT  _SFR_MEM16(0x0A60)
+#define TCA1_SINGLE_CNTL  _SFR_MEM8(0x0A60)
+#define TCA1_SINGLE_CNTH  _SFR_MEM8(0x0A61)
+#define TCA1_SINGLE_PER  _SFR_MEM16(0x0A66)
+#define TCA1_SINGLE_PERL  _SFR_MEM8(0x0A66)
+#define TCA1_SINGLE_PERH  _SFR_MEM8(0x0A67)
+#define TCA1_SINGLE_CMP0  _SFR_MEM16(0x0A68)
+#define TCA1_SINGLE_CMP0L  _SFR_MEM8(0x0A68)
+#define TCA1_SINGLE_CMP0H  _SFR_MEM8(0x0A69)
+#define TCA1_SINGLE_CMP1  _SFR_MEM16(0x0A6A)
+#define TCA1_SINGLE_CMP1L  _SFR_MEM8(0x0A6A)
+#define TCA1_SINGLE_CMP1H  _SFR_MEM8(0x0A6B)
+#define TCA1_SINGLE_CMP2  _SFR_MEM16(0x0A6C)
+#define TCA1_SINGLE_CMP2L  _SFR_MEM8(0x0A6C)
+#define TCA1_SINGLE_CMP2H  _SFR_MEM8(0x0A6D)
+#define TCA1_SINGLE_PERBUF  _SFR_MEM16(0x0A76)
+#define TCA1_SINGLE_PERBUFL  _SFR_MEM8(0x0A76)
+#define TCA1_SINGLE_PERBUFH  _SFR_MEM8(0x0A77)
+#define TCA1_SINGLE_CMP0BUF  _SFR_MEM16(0x0A78)
+#define TCA1_SINGLE_CMP0BUFL  _SFR_MEM8(0x0A78)
+#define TCA1_SINGLE_CMP0BUFH  _SFR_MEM8(0x0A79)
+#define TCA1_SINGLE_CMP1BUF  _SFR_MEM16(0x0A7A)
+#define TCA1_SINGLE_CMP1BUFL  _SFR_MEM8(0x0A7A)
+#define TCA1_SINGLE_CMP1BUFH  _SFR_MEM8(0x0A7B)
+#define TCA1_SINGLE_CMP2BUF  _SFR_MEM16(0x0A7C)
+#define TCA1_SINGLE_CMP2BUFL  _SFR_MEM8(0x0A7C)
+#define TCA1_SINGLE_CMP2BUFH  _SFR_MEM8(0x0A7D)
+
+
+/* TCA (TCA1) - 16-bit Timer/Counter Type A - Split Mode */
+#define TCA1_SPLIT_CTRLA  _SFR_MEM8(0x0A40)
+#define TCA1_SPLIT_CTRLB  _SFR_MEM8(0x0A41)
+#define TCA1_SPLIT_CTRLC  _SFR_MEM8(0x0A42)
+#define TCA1_SPLIT_CTRLD  _SFR_MEM8(0x0A43)
+#define TCA1_SPLIT_CTRLECLR  _SFR_MEM8(0x0A44)
+#define TCA1_SPLIT_CTRLESET  _SFR_MEM8(0x0A45)
+#define TCA1_SPLIT_INTCTRL  _SFR_MEM8(0x0A4A)
+#define TCA1_SPLIT_INTFLAGS  _SFR_MEM8(0x0A4B)
+#define TCA1_SPLIT_DBGCTRL  _SFR_MEM8(0x0A4E)
+#define TCA1_SPLIT_LCNT  _SFR_MEM8(0x0A60)
+#define TCA1_SPLIT_HCNT  _SFR_MEM8(0x0A61)
+#define TCA1_SPLIT_LPER  _SFR_MEM8(0x0A66)
+#define TCA1_SPLIT_HPER  _SFR_MEM8(0x0A67)
+#define TCA1_SPLIT_LCMP0  _SFR_MEM8(0x0A68)
+#define TCA1_SPLIT_HCMP0  _SFR_MEM8(0x0A69)
+#define TCA1_SPLIT_LCMP1  _SFR_MEM8(0x0A6A)
+#define TCA1_SPLIT_HCMP1  _SFR_MEM8(0x0A6B)
+#define TCA1_SPLIT_LCMP2  _SFR_MEM8(0x0A6C)
+#define TCA1_SPLIT_HCMP2  _SFR_MEM8(0x0A6D)
+
+
 /* TCB (TCB0) - 16-bit Timer Type B */
 #define TCB0_CTRLA  _SFR_MEM8(0x0B00)
 #define TCB0_CTRLB  _SFR_MEM8(0x0B01)
@@ -2887,6 +2953,23 @@ IO Module Instances. Mapped to memory.
 #define TCB2_CCMP  _SFR_MEM16(0x0B2C)
 #define TCB2_CCMPL  _SFR_MEM8(0x0B2C)
 #define TCB2_CCMPH  _SFR_MEM8(0x0B2D)
+
+
+/* TCB (TCB3) - 16-bit Timer Type B */
+#define TCB3_CTRLA  _SFR_MEM8(0x0B30)
+#define TCB3_CTRLB  _SFR_MEM8(0x0B31)
+#define TCB3_EVCTRL  _SFR_MEM8(0x0B34)
+#define TCB3_INTCTRL  _SFR_MEM8(0x0B35)
+#define TCB3_INTFLAGS  _SFR_MEM8(0x0B36)
+#define TCB3_STATUS  _SFR_MEM8(0x0B37)
+#define TCB3_DBGCTRL  _SFR_MEM8(0x0B38)
+#define TCB3_TEMP  _SFR_MEM8(0x0B39)
+#define TCB3_CNT  _SFR_MEM16(0x0B3A)
+#define TCB3_CNTL  _SFR_MEM8(0x0B3A)
+#define TCB3_CNTH  _SFR_MEM8(0x0B3B)
+#define TCB3_CCMP  _SFR_MEM16(0x0B3C)
+#define TCB3_CCMPL  _SFR_MEM8(0x0B3C)
+#define TCB3_CCMPH  _SFR_MEM8(0x0B3D)
 
 
 /* SYSCFG - System Configuration Registers */
@@ -3378,7 +3461,7 @@ IO Module Instances. Mapped to memory.
 #define CCL_RUNSTDBY_bp  6  /* Run in Standby bit position. */
 
 /* CCL.SEQCTRL0  bit masks and bit positions */
-#define CCL_SEQSEL_gm  0x07  /* Sequential Selection group mask. */
+#define CCL_SEQSEL_gm  0x0F  /* Sequential Selection group mask. */
 #define CCL_SEQSEL_gp  0  /* Sequential Selection group position. */
 #define CCL_SEQSEL_0_bm  (1<<0)  /* Sequential Selection bit 0 mask. */
 #define CCL_SEQSEL_0_bp  0  /* Sequential Selection bit 0 position. */
@@ -3386,6 +3469,8 @@ IO Module Instances. Mapped to memory.
 #define CCL_SEQSEL_1_bp  1  /* Sequential Selection bit 1 position. */
 #define CCL_SEQSEL_2_bm  (1<<2)  /* Sequential Selection bit 2 mask. */
 #define CCL_SEQSEL_2_bp  2  /* Sequential Selection bit 2 position. */
+#define CCL_SEQSEL_3_bm  (1<<3)  /* Sequential Selection bit 3 mask. */
+#define CCL_SEQSEL_3_bp  3  /* Sequential Selection bit 3 position. */
 
 /* CCL.SEQCTRL1  bit masks and bit positions */
 /* CCL_SEQSEL  is already defined. */
@@ -4228,6 +4313,58 @@ IO Module Instances. Mapped to memory.
 #define NVMCTRL_ERROR_2_bm  (1<<6)  /* Write error bit 2 mask. */
 #define NVMCTRL_ERROR_2_bp  6  /* Write error bit 2 position. */
 
+/* NVMCTRL.ADDR  bit masks and bit positions */
+#define NVMCTRL_ADDR_gm  0xFFFFFF  /* Address group mask. */
+#define NVMCTRL_ADDR_gp  0  /* Address group position. */
+#define NVMCTRL_ADDR_0_bm  (1<<0)  /* Address bit 0 mask. */
+#define NVMCTRL_ADDR_0_bp  0  /* Address bit 0 position. */
+#define NVMCTRL_ADDR_1_bm  (1<<1)  /* Address bit 1 mask. */
+#define NVMCTRL_ADDR_1_bp  1  /* Address bit 1 position. */
+#define NVMCTRL_ADDR_2_bm  (1<<2)  /* Address bit 2 mask. */
+#define NVMCTRL_ADDR_2_bp  2  /* Address bit 2 position. */
+#define NVMCTRL_ADDR_3_bm  (1<<3)  /* Address bit 3 mask. */
+#define NVMCTRL_ADDR_3_bp  3  /* Address bit 3 position. */
+#define NVMCTRL_ADDR_4_bm  (1<<4)  /* Address bit 4 mask. */
+#define NVMCTRL_ADDR_4_bp  4  /* Address bit 4 position. */
+#define NVMCTRL_ADDR_5_bm  (1<<5)  /* Address bit 5 mask. */
+#define NVMCTRL_ADDR_5_bp  5  /* Address bit 5 position. */
+#define NVMCTRL_ADDR_6_bm  (1<<6)  /* Address bit 6 mask. */
+#define NVMCTRL_ADDR_6_bp  6  /* Address bit 6 position. */
+#define NVMCTRL_ADDR_7_bm  (1<<7)  /* Address bit 7 mask. */
+#define NVMCTRL_ADDR_7_bp  7  /* Address bit 7 position. */
+#define NVMCTRL_ADDR_8_bm  (1<<8)  /* Address bit 8 mask. */
+#define NVMCTRL_ADDR_8_bp  8  /* Address bit 8 position. */
+#define NVMCTRL_ADDR_9_bm  (1<<9)  /* Address bit 9 mask. */
+#define NVMCTRL_ADDR_9_bp  9  /* Address bit 9 position. */
+#define NVMCTRL_ADDR_10_bm  (1<<10)  /* Address bit 10 mask. */
+#define NVMCTRL_ADDR_10_bp  10  /* Address bit 10 position. */
+#define NVMCTRL_ADDR_11_bm  (1<<11)  /* Address bit 11 mask. */
+#define NVMCTRL_ADDR_11_bp  11  /* Address bit 11 position. */
+#define NVMCTRL_ADDR_12_bm  (1<<12)  /* Address bit 12 mask. */
+#define NVMCTRL_ADDR_12_bp  12  /* Address bit 12 position. */
+#define NVMCTRL_ADDR_13_bm  (1<<13)  /* Address bit 13 mask. */
+#define NVMCTRL_ADDR_13_bp  13  /* Address bit 13 position. */
+#define NVMCTRL_ADDR_14_bm  (1<<14)  /* Address bit 14 mask. */
+#define NVMCTRL_ADDR_14_bp  14  /* Address bit 14 position. */
+#define NVMCTRL_ADDR_15_bm  (1<<15)  /* Address bit 15 mask. */
+#define NVMCTRL_ADDR_15_bp  15  /* Address bit 15 position. */
+#define NVMCTRL_ADDR_16_bm  (1<<16)  /* Address bit 16 mask. */
+#define NVMCTRL_ADDR_16_bp  16  /* Address bit 16 position. */
+#define NVMCTRL_ADDR_17_bm  (1<<17)  /* Address bit 17 mask. */
+#define NVMCTRL_ADDR_17_bp  17  /* Address bit 17 position. */
+#define NVMCTRL_ADDR_18_bm  (1<<18)  /* Address bit 18 mask. */
+#define NVMCTRL_ADDR_18_bp  18  /* Address bit 18 position. */
+#define NVMCTRL_ADDR_19_bm  (1<<19)  /* Address bit 19 mask. */
+#define NVMCTRL_ADDR_19_bp  19  /* Address bit 19 position. */
+#define NVMCTRL_ADDR_20_bm  (1<<20)  /* Address bit 20 mask. */
+#define NVMCTRL_ADDR_20_bp  20  /* Address bit 20 position. */
+#define NVMCTRL_ADDR_21_bm  (1<<21)  /* Address bit 21 mask. */
+#define NVMCTRL_ADDR_21_bp  21  /* Address bit 21 position. */
+#define NVMCTRL_ADDR_22_bm  (1<<22)  /* Address bit 22 mask. */
+#define NVMCTRL_ADDR_22_bp  22  /* Address bit 22 position. */
+#define NVMCTRL_ADDR_23_bm  (1<<23)  /* Address bit 23 mask. */
+#define NVMCTRL_ADDR_23_bp  23  /* Address bit 23 position. */
+
 
 /* PORT - I/O Ports */
 /* PORT.INTFLAGS  bit masks and bit positions */
@@ -4334,7 +4471,7 @@ IO Module Instances. Mapped to memory.
 /* PORT_INLVL  is already defined. */
 /* PORT_INVEN  is already defined. */
 
-/* PORT.EVGENCTRL  bit masks and bit positions */
+/* PORT.EVGENCTRLA  bit masks and bit positions */
 #define PORT_EVGEN0SEL_gm  0x07  /* Event Generator 0 Select group mask. */
 #define PORT_EVGEN0SEL_gp  0  /* Event Generator 0 Select group position. */
 #define PORT_EVGEN0SEL_0_bm  (1<<0)  /* Event Generator 0 Select bit 0 mask. */
@@ -5573,8 +5710,32 @@ IO Module Instances. Mapped to memory.
 #define USART2_TXC_vect_num  36
 #define USART2_TXC_vect      _VECTOR(36)  /*  */
 
+/* TCB3 interrupt vectors */
+#define TCB3_INT_vect_num  37
+#define TCB3_INT_vect      _VECTOR(37)  /*  */
+
+/* TCA1 interrupt vectors */
+#define TCA1_LUNF_vect_num  38
+#define TCA1_LUNF_vect      _VECTOR(38)  /*  */
+#define TCA1_OVF_vect_num  38
+#define TCA1_OVF_vect      _VECTOR(38)  /*  */
+#define TCA1_HUNF_vect_num  39
+#define TCA1_HUNF_vect      _VECTOR(39)  /*  */
+#define TCA1_CMP0_vect_num  40
+#define TCA1_CMP0_vect      _VECTOR(40)  /*  */
+#define TCA1_LCMP0_vect_num  40
+#define TCA1_LCMP0_vect      _VECTOR(40)  /*  */
+#define TCA1_CMP1_vect_num  41
+#define TCA1_CMP1_vect      _VECTOR(41)  /*  */
+#define TCA1_LCMP1_vect_num  41
+#define TCA1_LCMP1_vect      _VECTOR(41)  /*  */
+#define TCA1_CMP2_vect_num  42
+#define TCA1_CMP2_vect      _VECTOR(42)  /*  */
+#define TCA1_LCMP2_vect_num  42
+#define TCA1_LCMP2_vect      _VECTOR(42)  /*  */
+
 #define _VECTOR_SIZE 4 /* Size of individual vector. */
-#define _VECTORS_SIZE (37 * _VECTOR_SIZE)
+#define _VECTORS_SIZE (43 * _VECTOR_SIZE)
 
 
 /* ========== Constants ========== */

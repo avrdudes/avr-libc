@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2025, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -43,7 +43,6 @@
 
 /* Ungrouped common registers */
 #define CCP  _SFR_MEM8(0x0034)  /* Configuration Change Protection */
-#define RAMPZ  _SFR_MEM8(0x003B)  /* Extended Z-pointer Register */
 #define SP  _SFR_MEM16(0x003D)  /* Stack Pointer */
 #define SPL  _SFR_MEM8(0x003D)  /* Stack Pointer Low */
 #define SPH  _SFR_MEM8(0x003E)  /* Stack Pointer High */
@@ -2526,7 +2525,6 @@ IO Module Instances. Mapped to memory.
 
 /* CPU - CPU */
 #define CPU_CCP  _SFR_MEM8(0x0034)
-#define CPU_RAMPZ  _SFR_MEM8(0x003B)
 #define CPU_SP  _SFR_MEM16(0x003D)
 #define CPU_SPL  _SFR_MEM8(0x003D)
 #define CPU_SPH  _SFR_MEM8(0x003E)

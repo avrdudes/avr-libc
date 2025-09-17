@@ -8862,7 +8862,7 @@
 	.uleb128	0
 
 ;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	;; DIE #168: variable EVGENCTRL
+	;; DIE #168: variable EVGENCTRLA
 	.section	.debug_info
 	.uleb128	168	; ref to abbrev 168
 	.section	.debug_abbrev
@@ -8874,7 +8874,7 @@
 	.uleb128	DW_FORM_strp
 	.section	.debug_str
 .Lname168:
-	.string		"EVGENCTRL"
+	.string		"EVGENCTRLA"
 	.section	.debug_info
 	.long		.Lname168
 
@@ -10134,7 +10134,7 @@
 	.uleb128	0
 
 ;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	;; DIE #192: variable EVGENCTRL
+	;; DIE #192: variable EVGENCTRLA
 	.section	.debug_info
 	.uleb128	192	; ref to abbrev 192
 	.section	.debug_abbrev
@@ -10146,7 +10146,7 @@
 	.uleb128	DW_FORM_strp
 	.section	.debug_str
 .Lname192:
-	.string		"EVGENCTRL"
+	.string		"EVGENCTRLA"
 	.section	.debug_info
 	.long		.Lname192
 
@@ -11406,7 +11406,7 @@
 	.uleb128	0
 
 ;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	;; DIE #216: variable EVGENCTRL
+	;; DIE #216: variable EVGENCTRLA
 	.section	.debug_info
 	.uleb128	216	; ref to abbrev 216
 	.section	.debug_abbrev
@@ -11418,7 +11418,7 @@
 	.uleb128	DW_FORM_strp
 	.section	.debug_str
 .Lname216:
-	.string		"EVGENCTRL"
+	.string		"EVGENCTRLA"
 	.section	.debug_info
 	.long		.Lname216
 
@@ -12678,7 +12678,7 @@
 	.uleb128	0
 
 ;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	;; DIE #240: variable EVGENCTRL
+	;; DIE #240: variable EVGENCTRLA
 	.section	.debug_info
 	.uleb128	240	; ref to abbrev 240
 	.section	.debug_abbrev
@@ -12690,7 +12690,7 @@
 	.uleb128	DW_FORM_strp
 	.section	.debug_str
 .Lname240:
-	.string		"EVGENCTRL"
+	.string		"EVGENCTRLA"
 	.section	.debug_info
 	.long		.Lname240
 
@@ -13950,7 +13950,7 @@
 	.uleb128	0
 
 ;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	;; DIE #264: variable EVGENCTRL
+	;; DIE #264: variable EVGENCTRLA
 	.section	.debug_info
 	.uleb128	264	; ref to abbrev 264
 	.section	.debug_abbrev
@@ -13962,7 +13962,7 @@
 	.uleb128	DW_FORM_strp
 	.section	.debug_str
 .Lname264:
-	.string		"EVGENCTRL"
+	.string		"EVGENCTRLA"
 	.section	.debug_info
 	.long		.Lname264
 
@@ -15222,7 +15222,7 @@
 	.uleb128	0
 
 ;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	;; DIE #288: variable EVGENCTRL
+	;; DIE #288: variable EVGENCTRLA
 	.section	.debug_info
 	.uleb128	288	; ref to abbrev 288
 	.section	.debug_abbrev
@@ -15234,7 +15234,7 @@
 	.uleb128	DW_FORM_strp
 	.section	.debug_str
 .Lname288:
-	.string		"EVGENCTRL"
+	.string		"EVGENCTRLA"
 	.section	.debug_info
 	.long		.Lname288
 

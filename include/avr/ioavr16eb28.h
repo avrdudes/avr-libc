@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2025, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -43,7 +43,6 @@
 
 /* Ungrouped common registers */
 #define CCP  _SFR_MEM8(0x0034)  /* Configuration Change Protection */
-#define RAMPZ  _SFR_MEM8(0x003B)  /* Extended Z-pointer Register */
 #define SP  _SFR_MEM16(0x003D)  /* Stack Pointer */
 #define SPL  _SFR_MEM8(0x003D)  /* Stack Pointer Low */
 #define SPH  _SFR_MEM8(0x003E)  /* Stack Pointer High */
@@ -1286,24 +1285,10 @@ typedef struct PORTMUX_struct
     register8_t TWIROUTEA;  /* TWI route A */
     register8_t TCEROUTEA;  /* TCE route A */
     register8_t TCBROUTEA;  /* TCB route A */
-    register8_t reserved_2[1];
-    register8_t ACROUTEA;  /* AC route A */
-    register8_t reserved_3[1];
+    register8_t reserved_2[3];
     register8_t TCFROUTEA;  /* TCF Route A */
-    register8_t reserved_4[19];
+    register8_t reserved_3[19];
 } PORTMUX_t;
-
-/* Analog Comparator 0 Output select */
-typedef enum PORTMUX_AC0_enum
-{
-    PORTMUX_AC0_DEFAULT_gc = (0x00<<0)  /* OUT: PA7 */
-} PORTMUX_AC0_t;
-
-/* Analog Comparator 1 Output select */
-typedef enum PORTMUX_AC1_enum
-{
-    PORTMUX_AC1_DEFAULT_gc = (0x00<<1)  /* OUT: PA7 */
-} PORTMUX_AC1_t;
 
 /* Event Output A select */
 typedef enum PORTMUX_EVOUTA_enum
@@ -2596,7 +2581,6 @@ IO Module Instances. Mapped to memory.
 
 /* CPU - CPU */
 #define CPU_CCP  _SFR_MEM8(0x0034)
-#define CPU_RAMPZ  _SFR_MEM8(0x003B)
 #define CPU_SP  _SFR_MEM16(0x003D)
 #define CPU_SPL  _SFR_MEM8(0x003D)
 #define CPU_SPH  _SFR_MEM8(0x003E)
@@ -2858,7 +2842,6 @@ IO Module Instances. Mapped to memory.
 #define PORTMUX_TWIROUTEA  _SFR_MEM8(0x05E6)
 #define PORTMUX_TCEROUTEA  _SFR_MEM8(0x05E7)
 #define PORTMUX_TCBROUTEA  _SFR_MEM8(0x05E8)
-#define PORTMUX_ACROUTEA  _SFR_MEM8(0x05EA)
 #define PORTMUX_TCFROUTEA  _SFR_MEM8(0x05EC)
 
 
@@ -4684,12 +4667,6 @@ IO Module Instances. Mapped to memory.
 #define PORTMUX_TCB0_bp  0  /* TCB0 Output bit position. */
 #define PORTMUX_TCB1_bm  0x02  /* TCB1 Output bit mask. */
 #define PORTMUX_TCB1_bp  1  /* TCB1 Output bit position. */
-
-/* PORTMUX.ACROUTEA  bit masks and bit positions */
-#define PORTMUX_AC0_bm  0x01  /* Analog Comparator 0 Output bit mask. */
-#define PORTMUX_AC0_bp  0  /* Analog Comparator 0 Output bit position. */
-#define PORTMUX_AC1_bm  0x02  /* Analog Comparator 1 Output bit mask. */
-#define PORTMUX_AC1_bp  1  /* Analog Comparator 1 Output bit position. */
 
 /* PORTMUX.TCFROUTEA  bit masks and bit positions */
 #define PORTMUX_TCF0_gm  0x03  /* TCF0 Output group mask. */
