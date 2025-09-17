@@ -252,9 +252,7 @@
     \ingroup avr_interrupts
 
     Aliases a given vector to another one in the same manner as the
-    ISR_ALIASOF attribute for the ISR() macro. Unlike the ISR_ALIASOF
-    attribute macro however, this is compatible for all versions of
-    GCC rather than just GCC version 4.2 onwards.
+    ISR_ALIASOF attribute for the ISR() macro.
 
     \note This macro creates a trampoline function for the aliased
     macro.  This will result in a two cycle penalty for the aliased
@@ -393,7 +391,6 @@
     \ingroup avr_interrupts
 
     The compiler will try to inline all called function into the ISR.
-    This has an effect with GCC 4.6 and newer only.
 
     Use this attribute in the \c attributes parameter of the #ISR and
     #ISR_N macros.
@@ -430,7 +427,6 @@
     \ingroup avr_interrupts
 
     The ISR is linked to another ISR, specified by the vect parameter.
-    This is compatible with GCC 4.2 and greater only.
 
     Use this attribute in the \c attributes parameter of the #ISR macro.
     Example:
