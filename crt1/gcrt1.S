@@ -138,8 +138,8 @@
         less precise size reports.
  */
 
-#if (__GNUC__ < 3) || (__GNUC__ == 3 && __GNUC_MINOR__ < 3)
-#error "GCC version >= 3.3 required"
+#if (__GNUC__ < 4) || (__GNUC__ == 4 && __GNUC_MINOR__ < 8)
+#error "GCC version >= 4.8 required"
 #endif
 
 #include IOSYMFILE
@@ -399,60 +399,6 @@ __init:
 	out	RAMPY_IO_ADDR, __zero_reg__
 	out	RAMPZ_IO_ADDR, __zero_reg__
 #endif
-
-#if defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3))
-#if defined(__AVR_HAVE_ELPM__) || FLASHEND > 0x10000  /* ATmega103 */
-  #define BIG_CODE 1
-#else
-  #define BIG_CODE 0
-#endif
-
-#if BIG_CODE
-	/* Only for >64K devices with RAMPZ, replaces the default code
-	   provided by libgcc.S which is only linked in if necessary.  */
-
-	.section .init4,"ax",@progbits
-	.global __do_copy_data
-__do_copy_data:
-	ldi	r17, hi8(__data_end)
-	ldi	r26, lo8(__data_start)
-	ldi	r27, hi8(__data_start)
-	ldi	r30, lo8(__data_load_start)
-	ldi	r31, hi8(__data_load_start)
-
-	/* On the enhanced core, "elpm" with post-increment updates RAMPZ
-	   automatically.  Otherwise we have to handle it ourselves.  */
-
-#ifdef __AVR_ENHANCED__
-	ldi	r16, hh8(__data_load_start)
-#else
-	ldi	r16, hh8(__data_load_start - 0x10000)
-.L__do_copy_data_carry:
-	inc	r16
-#endif
-	out	RAMPZ_IO_ADDR, r16
-	rjmp	.L__do_copy_data_start
-.L__do_copy_data_loop:
-#ifdef __AVR_ENHANCED__
-	elpm	r0, Z+
-#else
-	elpm
-#endif
-	st	X+, r0
-#ifndef __AVR_ENHANCED__
-	adiw	r30, 1
-	brcs	.L__do_copy_data_carry
-#endif
-.L__do_copy_data_start:
-	cpi	r26, lo8(__data_end)
-	cpc	r27, r17
-	brne	.L__do_copy_data_loop
-#ifdef __AVR_HAVE_RAMPD__
-	out	RAMPZ_IO_ADDR, __zero_reg__
-#endif /* __AVR_HAVE_RAMPD__*/
-
-#endif /* BIG_CODE */
-#endif /* defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3)) */
 
 	.set	__stack, RAMEND
 #endif /* !__AVR_ASM_ONLY__ */

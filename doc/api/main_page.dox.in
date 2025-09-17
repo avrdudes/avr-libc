@@ -87,9 +87,8 @@ See the \ref faq_reentrant "FAQ" for a more detailed discussion.
 \section supp_compilers Supported Compilers
 \addindex supported compilers
 
-AVR-LibC can be used with the most recent AVR GCC back to
-<a href="https://gcc.gnu.org/gcc-4.8">v4.8</a>.
-Older versions may still work but are untested and not recommended.
+The current AVR-LibC can be used with the most recent AVR GCC back to
+<a href="https://gcc.gnu.org/gcc-4.8">GCC 4.8</a>.
 
 Always use AVR-LibC with the
 \if GIT_BRANCH_IS_ONLINEDOCS
