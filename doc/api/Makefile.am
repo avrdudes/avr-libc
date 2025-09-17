@@ -28,9 +28,12 @@
 
 MATH2DOX_H = stdfix-avrlibc.h stdlib.h
 
+MATH2DOX_DOX = bench-libm.dox bench-libf7.dox
+MATH2DOX_GEN_DOX = $(MATH2DOX_DOX:.dox=.gen.dox)
+
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
-CLEANFILES           = *.html *.pdf *.ma *.mas $(MATH2DOX_H) \
+CLEANFILES           = *.html *.pdf $(MATH2DOX_H) $(MATH2DOX_GEN_DOX) \
                        malloc-*.svg malloc-*.eps \
                        doxygen.config main_page.dox faq.dox doxygen-pdf.config
 
@@ -157,7 +160,7 @@ clean-local:
 
 # Let config.status rebuild headers and dox from .in.
 doxygen.config:	$(top_builddir)/include/util/delay.h \
-		main_page.dox faq.dox $(MATH2DOX_H)
+		main_page.dox faq.dox $(MATH2DOX_H) $(MATH2DOX_GEN_DOX)
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_SVG) main_page.dox
 	@DOXYGEN@ doxygen.config
@@ -172,12 +175,19 @@ $(MATH2DOX_H) : % : $(top_srcdir)/include/% \
 		  $(top_builddir)/devtools/math2dox
 	cat $< | $(top_builddir)/devtools/math2dox > $@
 
+$(MATH2DOX_GEN_DOX) : %.gen.dox : $(top_srcdir)/doc/api/%.dox \
+		  $(top_builddir)/devtools/math2dox
+	cat $< | $(top_builddir)/devtools/math2dox > $@
+
 # math2dox is a filter from STDIN to STDOUT.
 $(top_builddir)/devtools/math2dox: $(top_srcdir)/devtools/math2dox.in
 	cd $(top_builddir) && $(SHELL) ./config.status --file=devtools/math2dox
 else
 # Without Python, just remove the {{{ ... }}} markers.
 $(MATH2DOX_H) : % : $(top_srcdir)/include/%
+	cat $< | $(SED) -e 's:{{{::g' -e 's:}}}::g' > $@
+
+$(MATH2DOX_GEN_DOX) : %.gen.dox : $(top_srcdir)/doc/api/%.dox
 	cat $< | $(SED) -e 's:{{{::g' -e 's:}}}::g' > $@
 endif
 

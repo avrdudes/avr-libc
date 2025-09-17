@@ -36,5 +36,6 @@ devtools/filter-mcus.py
 *.pdf
 doc/api/malloc-*.svg
 doc/api/*.h
+doc/api/*.gen.dox
 
 __pycache__

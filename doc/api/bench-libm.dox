@@ -15,7 +15,7 @@ Notice that the values for relative error and the Worst Case Execution Time
 Cycles<sub>max</sub> are only <em>lower bounds</em>.
 The best achievable accuracy for IEEE single with its 23 fractional bits in
 the mantissa is
-log<sub>10</sub>(2<sup>&ndash;24</sup> &asymp; 6&middot;10<sup>&ndash;8</sup>) &asymp; -7.22.
+{{{log<sub>10</sub>(2<sup>-24</sup> &asymp; 6*10<sup>-8</sup>) &asymp; -7.22}}}.
 
 The poor performance of \c sinf, \c cosf and \c tanf occurs for values
 that are close to the poles (if any) or close to the non-zero zeros.

@@ -27,7 +27,7 @@ Notice that the values for relative error and the Worst Case Execution Time
 Cycles<sub>max</sub> are only <em>lower bounds</em>.
 The best achievable accuracy for IEEE double with its 52 fractional bits in
 the mantissa is
-log<sub>10</sub>(2<sup>&ndash;53</sup> &asymp; 1.1&middot;10<sup>&ndash;16</sup>) &asymp; -15.95.
+{{{log<sub>10</sub>(2<sup>-53</sup> &asymp; 1.1*10<sup>-16</sup>) &asymp; -15.95}}}.
 
 <table>
 <caption>LibF7 Benchmarks for ATmega128 (avr51, with MUL)</caption>

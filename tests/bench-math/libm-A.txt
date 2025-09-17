@@ -11,7 +11,7 @@
 1Cycles<sub>max</sub> are only <em>lower bounds</em>.
 1The best achievable accuracy for IEEE single with its 23 fractional bits in
 1the mantissa is
-1log<sub>10</sub>(2<sup>&ndash;24</sup> &asymp; 6&middot;10<sup>&ndash;8</sup>) &asymp; -7.22.
+1{{{log<sub>10</sub>(2<sup>-24</sup> &asymp; 6*10<sup>-8</sup>) &asymp; -7.22}}}.
 1
 1The poor performance of \c sinf, \c cosf and \c tanf occurs for values
 1that are close to the poles (if any) or close to the non-zero zeros.

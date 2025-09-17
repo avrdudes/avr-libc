@@ -807,8 +807,8 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/doc/api/library.dox \
                          @top_srcdir@/doc/api/bench.dox \
                          @top_srcdir@/doc/api/bench-libc.dox \
-                         @top_srcdir@/doc/api/bench-libm.dox \
-                         @top_srcdir@/doc/api/bench-libf7.dox \
+                         @top_builddir@/doc/api/bench-libm.gen.dox \
+                         @top_builddir@/doc/api/bench-libf7.gen.dox \
                          @top_srcdir@/doc/api/bench-fxlib.dox \
                          @top_srcdir@/doc/api/reordering-code.dox \
                          @top_srcdir@/doc/api/acknowledge.dox \

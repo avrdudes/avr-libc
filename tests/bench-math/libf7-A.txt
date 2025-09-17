@@ -23,7 +23,7 @@
 1Cycles<sub>max</sub> are only <em>lower bounds</em>.
 1The best achievable accuracy for IEEE double with its 52 fractional bits in
 1the mantissa is
-1log<sub>10</sub>(2<sup>&ndash;53</sup> &asymp; 1.1&middot;10<sup>&ndash;16</sup>) &asymp; -15.95.
+1{{{log<sub>10</sub>(2<sup>-53</sup> &asymp; 1.1*10<sup>-16</sup>) &asymp; -15.95}}}.
 1
 1<table>
 1<caption>LibF7 Benchmarks for ATmega128 (avr51, with MUL)</caption>
