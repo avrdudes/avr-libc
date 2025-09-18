@@ -303,13 +303,13 @@ asm volatile ("sts %0, __zero_reg__" :: "n" (& PORTB) : "memory");
 When the I/O address of the register is required, one way is to use
 \c _SFR_IO_ADDR to get the I/O address like in the example above.
 A different approach is to use inline asm \ref inline_asm_print_modifiers
-"print modifier" <tt>%i</tt> supported since avr-gcc v4.7:
+"print modifier" <tt>\%i</tt> supported since avr-gcc v4.7:
 
 \code
 asm volatile ("out %i0, __zero_reg__" :: "n" (& PORTB) : "memory");
 \endcode
 
-The <tt>%i0</tt> will print the address of \c PORTB as an I/O address.
+The <tt>\%i0</tt> will print the address of \c PORTB as an I/O address.
 
 <small>Back to \ref faq_index.</small>
 
