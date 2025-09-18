@@ -111,6 +111,13 @@ case "$host" in
 		;;
 esac
 
+AC_MSG_CHECKING([if the build compiler is GCC 4.8 or newer])
+AS_VERSION_COMPARE([`${CC} -dumpversion`], [4.8.0],
+    [AC_MSG_RESULT(no)
+     AC_MSG_ERROR(AVR-LibC must be built with GCC 4.8 or newer.)],
+    [AC_MSG_RESULT(yes)],
+    [AC_MSG_RESULT(yes)])
+
 ## TODO: Write a check for GNU Make
 
 dnl The default check whether the C compiler can create an executable

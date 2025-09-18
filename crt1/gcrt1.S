@@ -138,10 +138,6 @@
         less precise size reports.
  */
 
-#if (__GNUC__ < 4) || (__GNUC__ == 4 && __GNUC_MINOR__ < 8)
-#error "GCC version >= 4.8 required"
-#endif
-
 #include IOSYMFILE
 
 #include <avr/io.h>
