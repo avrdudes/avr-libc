@@ -164,7 +164,7 @@ doxygen.config:	$(top_builddir)/include/util/delay.h \
 
 # Some Doxygen styles / environments render very poorly.
 # Tweak that, e.g. by resorting to the original environment.
-TEX_FIXES = -e 's:begin{DoxyDescription}:begin{DoxyDescription}[style=nextline]:'
+TEX_FIXES = -e 's:begin{DoxyDescription}:begin{DoxyDescription}[labelwidth=\\linewidth, labelsep=0pt, noitemsep]:'
 
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_SVG) main_page.dox
 	@DOXYGEN@ doxygen.config
