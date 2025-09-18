@@ -40,7 +40,6 @@
   - \ref faq_isr_names
   - \ref faq_reentrant
   - \ref faq_spman
-  - \ref faq_intbits
   - \ref faq_cvt
   - \ref faq_local_isr
 
@@ -95,6 +94,7 @@
   - \ref faq_softreset
   - \ref faq_eeprom_corruption
   - \ref faq_fuses
+  - \ref faq_intbits
   - \ref faq_fuselow
   - \ref faq_ext_ram
 
@@ -462,15 +462,11 @@ set_bits_func_correct (volatile uint8_t *port, uint8_t mask)
     *port |= mask;
 }
 
-#define set_bits_macro(port, mask) ((port) |= (mask))
-
 int main (void)
 {
     set_bits_func_wrong (PORTB, 0xaa);
     set_bits_func_correct (&PORTB, 0x55);
-    set_bits_macro (PORTB, 0xf0);
-
-    return (0);
+    return 0;
 }
 \endcode
 
@@ -532,37 +528,14 @@ they can not be used inside the function when passing the port in this way.
 Readers interested in the details should consult the <em>Instruction Set</em>
 datasheet.
 
-Finally we come to the macro version of the operation. In this contrived
-example, the macro is the most efficient method with respect to both execution
-speed and code size:
+In this contrived example, the most efficient method with respect to
+both execution speed and code size is to inline the function:
 
-\verbatim
-    set_bits_macro (PORTB, 0xf0);
- 11c:   88 b3           in      r24, 0x18
- 11e:   80 6f           ori     r24, 0xF0
- 120:   88 bb           out     0x18, r24
-\endverbatim
-
-Of course, in a real application, you might be doing a lot more in your
-function which uses a passed by reference io port address and thus the use of
-a function over a macro could save you some code space, but still at a cost of
-execution speed.
-
-Care should be taken when such an indirect port access is going to one
-of the 16-bit IO registers where the order of write access is critical
-(like some timer registers).  All versions of avr-gcc up to 3.3 will
-generate instructions that use the wrong access order in this
-situation (since with normal memory operands where the order doesn't
-matter, this sometimes yields shorter code).
-
-See
-http://mail.gnu.org/archive/html/avr-libc-dev/2003-01/msg00044.html
-for a possible workaround.
-
-avr-gcc versions after 3.3 have been fixed in a way where this
-optimization will be disabled if the respective pointer variable is
-declared to be \c volatile, so the correct behaviour for 16-bit IO
-ports can be forced that way.
+static inline void
+set_bits_func_correct (volatile uint8_t *port, uint8_t mask)
+{
+    *port |= mask;
+}
 
 <small>Back to \ref faq_index.</small>
 
@@ -571,9 +544,10 @@ ports can be forced that way.
 
 See also the
 <a href="https://gcc.gnu.org/wiki/avr-gcc#Type_Layout">Type Layout</a>,
-<a href="https://gcc.gnu.org/wiki/avr-gcc#Register_Layout">Register Layout</a> and
-<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">Calling Convention</a>
-sections in the avr-gcc Wiki.
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Register_Layout">Register Layout</a>
+and
+<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention"
+   >Calling Convention</a> sections in the avr-gcc Wiki.
 
 <dl>
 <dt>Data types</dt>
@@ -598,7 +572,7 @@ sections in the avr-gcc Wiki.
   Calling C subroutines can clobber any of them -
   the caller is responsible for saving and restoring.
 
-   For the AVR_TINY architecture (ATtiny10 and relatives),
+   For the Reduced Core architecture (ATtiny10 and relatives),
    r20-r27 and r30-31 are call-clobbered.
 </dd>
 
@@ -615,7 +589,7 @@ sections in the avr-gcc Wiki.
   situations where the compiler assigns them for
   argument passing.
 
-  For the AVR_TINY architecture (ATtiny10 etc.),
+  For the Reduced Core architecture (ATtiny10 etc.),
   r18-r19 and  r28-r29 are call-saved.
   Registers r0 through r15 do not exist.
 </dd>
@@ -643,7 +617,7 @@ sections in the avr-gcc Wiki.
   - <strong>T flag</strong> --- the \c T flag in the status register (\c SREG)
   can be used the same way like \c __tmp_reg__.
 
-  For the AVR_TINY architecture (ATtiny10 etc.),
+  For the Reduced Core architecture (ATtiny10 etc.),
   \c __tmp_reg__ is r16, and \c __zero_reg__ is r17.
 </dd>
 
@@ -657,7 +631,7 @@ sections in the avr-gcc Wiki.
 
   If too many, those that don't fit are passed on the stack.
 
-  On AVR_TINY, r25 to r20 are used to pass values.
+  On AVRrc, r25 to r20 are used to pass values.
 
 - Return values: 8-bit in r24, 16-bit in r25:r24,
   up to 32 bits in r22-r25, up to 64 bits in r18-r25.
@@ -737,7 +711,7 @@ private data storage kept outside the domain of the C compiler
 (e. g. through a <tt>char *</tt> variable initialized directly to a
 particular address), it would be sufficient to defer the
 initialization of the external RAM interface to the beginning of
-<tt><b>main</b><b>()</b></tt>,
+<tt>main()</tt>,
 so no tweaking of the <code>.init3</code> section is necessary.  The
 same applies if only the heap is going to be located there, since the
 application start-up code does not affect the heap.
@@ -1157,7 +1131,7 @@ int main (void)
 There are times when you may need an array of strings which will never be
 modified. In this case, you don't want to waste RAM storing the constant
 strings.  For the rationale behind storing constant strings in RAM,
-see the previos section \ref faq_flashstrings
+see the previos section \ref faq_flashstrings and \ref pgmspace
 
 \subsection faq_rom_array_progmem With PROGMEM
 
@@ -1246,6 +1220,14 @@ int compare (const char *str, uint8_t i)
 
 Moreover, there is no more need for <tt>pgm_read_xxx()</tt>: The (addresses of)
 the string literals can be read directly by means of <tt>array[i]</tt>.
+Depending on the application, the string array can be defined as
+
+\code
+const __flash char array[][4] =
+{
+    "Foo", "Bar"
+};
+\endcode
 
 <small>Back to \ref faq_index.</small>
 
@@ -1577,7 +1559,7 @@ asm_add:
 .size asm_add, . - asm_add
 \endcode
 
-Notice that the assemnbly function complies to the
+Notice that the assembly function complies to the
 <a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention"
    >avr-gcc calling convention</a>.
 
