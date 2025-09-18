@@ -126,45 +126,46 @@ assembler is "as" (even though in documentation the GNU assembler is commonly
 referred to as "gas"). But when built for an AVR target, it becomes "avr-as".
 Below is a list of the programs that are included in Binutils:
 
-\par avr-as
-The Assembler.
+<dl>
+<dt><tt>par avr-as</tt></dt>
+<dd>The Assembler.</dd>
 
-\par avr-ld
-The Linker.
+<dt><tt>avr-ld</tt></dt>
+<dd>The Linker.</dd>
 
-\par avr-ar
-Create, modify, and extract from libraries (archives).
+<dt><tt>avr-ar</tt></dt>
+<dd>Create, modify, and extract from libraries (archives).</dd>
 
-\par avr-ranlib
-Generate index to library (archive) contents.
+<dt><tt>avr-ranlib</tt></dt>
+<dd>Generate index to library (archive) contents.</dd>
 
-\par avr-objcopy
-Copy and translate object files to different formats.
+<dt><tt>avr-objcopy</tt></dt>
+<dd>Copy and translate object files to different formats.</dd>
 
-\par avr-objdump
-Display information from object files including disassembly.
+<dt><tt>avr-objdump</tt></dt>
+<dd>Display information from object files including disassembly.</dd>
 
-\par avr-size
-List section sizes and total size.
+<dt><tt>avr-size</tt></dt>
+<dd>List section sizes and total size.</dd>
 
-\par avr-nm
-List symbols from object files.
+<dt><tt>avr-nm</tt></dt>
+<dd>List symbols from object files.</dd>
 
-\par avr-strings
-List printable strings from files.
+<dt><tt>avr-strings</tt></dt>
+<dd>List printable strings from files.</dd>
 
-\par avr-strip
-Discard symbols from files.
+<dt><tt>avr-strip</tt></dt>
+<dd>Discard symbols from files.</dd>
 
-\par avr-readelf
-Display the contents of ELF format files.
+<dt><tt>avr-readelf</tt></dt>
+<dd>Display the contents of ELF format files.</dd>
 
-\par avr-addr2line
-Convert addresses to file and line.
+<dt><tt>avr-addr2line</tt></dt>
+<dd>Convert addresses to file and line.</dd>
 
-\par avr-c++filt
-Filter to demangle encoded C++ symbols.
-
+<dt><tt>avr-c++filt</tt></dt>
+<dd>Filter to demangle encoded C++ symbols.</dd>
+</dl>
 
 \section overview_avr-libc AVR-LibC
 
