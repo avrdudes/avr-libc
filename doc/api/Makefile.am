@@ -162,11 +162,18 @@ clean-local:
 doxygen.config:	$(top_builddir)/include/util/delay.h \
 		main_page.dox faq.dox $(MATH2DOX_H) $(MATH2DOX_GEN_DOX)
 
+# Some Doxygen styles / environments render very poorly.
+# Tweak that, e.g. by resorting to the original environment.
+TEX_FIXES = -e 's:begin{DoxyDescription}:begin{DoxyDescription}[style=nextline]:'
+
 latex_src/refman.tex: doxygen.config $(IMAGE_EPS) $(IMAGE_SVG) main_page.dox
 	@DOXYGEN@ doxygen.config
 	cp $(top_srcdir)/doc/api/avr-libc-logo.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-inverted.png $(AVR_LIBC_USER_MANUAL)/
 	cp $(top_srcdir)/doc/api/avr-libc-logo-large.png latex_src/
+	for t in latex_src/*.tex; do \
+	   $(SED) -i $(TEX_FIXES) $$t; \
+	   done
 
 if HAVE_PYTHON
 # stdfix-avrlibc.h has some simple formulae that are mistreated by Doxygen,
