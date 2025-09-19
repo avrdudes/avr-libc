@@ -91,7 +91,7 @@ systems, and another section for Windows.
   Git: %https://github.com/avrdudes/avr-libc.git <br>
   GitHub: https://github.com/avrdudes/avr-libc <br>
   Old Project Home: http://savannah.gnu.org/projects/avr-libc <br>
-  Old Source Downloads (&le; v2.1): https://download-mirror.savannah.gnu.org/releases/avr-libc <br>
+  Old Source Downloads (&le; v2.1): https://download-mirror.savannah.gnu.org/releases/avr-libc
   \ref install_avr_libc "Installation"
 </dd>
 </dl>
@@ -153,12 +153,12 @@ system, you can alternatively install in your home directory, for example, in
 <tt>$HOME/local/avr</tt>.  Where you install is a completely arbitrary
 decision, but should be consistent for all the tools.
 
+It is usually the best to use the latest released version of
+each of the tools.
+
 \warning If you have \c CC set to anything other than \c avr-gcc in your
 environment, this will cause the configure script to fail. It is best to not
 have \c CC set at all.
-
-\note It is usually the best to use the latest released version of
-each of the tools.
 
 
 \subsection install_scripts Build Scripts
@@ -295,7 +295,7 @@ platform and that are run with the \c make command.
 $ make
 \endverbatim
 
-\note BSD users should note that the project's <tt>Makefile</tt> uses GNU
+BSD users should note that the project's <tt>Makefile</tt> uses GNU
 make syntax. This means FreeBSD users may need to build the tools by
 using <tt>gmake</tt>.
 
@@ -370,7 +370,7 @@ can save you some space.
 \ref install_avr_gcc "avr-gcc" and make sure your
 \ref path "path is set" properly before configuring abd building AVR-LibC.
 
-\note If you have obtained the latest AVR-LibC from \ref using_git "git",
+If you have obtained the latest AVR-LibC from \ref using_git "git",
 you will have to run the \c \./bootstrap script before using either of the
 build methods described below.
 
@@ -468,10 +468,10 @@ and the exact version of Doxygen v1.9.6 is recommended.
 \addindex installation, avrprog
 \addindex installation, avrdude
 
-\note It has been ported to windows (via MinGW or cygwin), Linux and Solaris. Other Unix systems
-should be trivial to port to.
+AVRDUDE has been ported to Windows (via MinGW or Cygwin), Linux and Solaris.
+Other Unix systems should be trivial to port to.
 
-<tt><b>avrdude</b></tt> is part of the FreeBSD ports system. To install it,
+AVRDUDE is part of the FreeBSD ports system. To install it,
 simply do the following:
 
 \verbatim
@@ -479,7 +479,7 @@ simply do the following:
 # make install
 \endverbatim
 
-\note Installation into the default location usually requires root
+Installation into the default location usually requires root
 permissions.  However, running the program only requires access
 permissions to the appropriate \c ppi(4) device.
 
@@ -537,7 +537,7 @@ There are also pre-built
 \subsection install_avarice AVaRICE
 \addindex installation, avarice
 
-\note These install notes are not applicable to avarice-1.5 or older. You
+These install notes are not applicable to avarice-1.5 or older. You
 probably don't want to use anything that old anyways since there have been
 many improvements and bug fixes since the 1.5 release.
 
@@ -553,7 +553,7 @@ $ make
 $ make install
 \endverbatim
 
-\note AVaRICE uses the BFD library for accessing various binary file formats.
+AVaRICE uses the BFD library for accessing various binary file formats.
 You may need to tell the configure script where to find the lib and headers
 for the link to work. This is usually done by invoking the configure script
 like this (Replace <tt>\<hdr_path\></tt> with the path to the \c bfd.h file on
@@ -633,7 +633,7 @@ as improvements are made.
 </dd>
 </dl>
 
-\note GMP, MPFR, MPC and ISL are required to build GCC. By far the easiest way
+GMP, MPFR, MPC and ISL are required to build GCC. By far the easiest way
 to use them is by letting GCC download the sources locally by means of
 running the \c \./contrib/download_prewrequisites script from the
 GCC top source.  GCC will configure and build these libs during
