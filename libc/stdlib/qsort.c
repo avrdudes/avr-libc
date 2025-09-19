@@ -27,6 +27,7 @@
  * SUCH DAMAGE. */
 
 #include <stdlib.h>
+#include <stdint.h>
 #include <bits/attribs.h>
 #include "sectionname.h"
 
@@ -65,10 +66,10 @@ void
 qsort(void *a, size_t n, size_t es, __compar_fn_t cmp)
 {
     char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
-    int d, r, swap_cnt;
+    int d, r;
 
 loop:
-    swap_cnt = 0;
+    uint8_t swap_cnt = 0;
     if (n < 7)
     {
         for (pm = (char *)a + es; pm < (char *)a + n * es; pm += es)
