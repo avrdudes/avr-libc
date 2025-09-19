@@ -143,6 +143,7 @@ uint32_t eeprom_read_dword (const uint32_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
     Read one 64-bit quad word (little endian) from EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 uint64_t eeprom_read_qword (const uint64_t *__p) __ATTR_PURE__;
@@ -155,6 +156,7 @@ float eeprom_read_float (const float *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
     Read one double value (little endian) from EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__)
 double eeprom_read_double (const double *__p);
@@ -166,6 +168,7 @@ double eeprom_read_double (const double *__p) __asm("eeprom_read_qword");
 
 /** \ingroup avr_eeprom
     Read one long double value (little endian) from EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__)
 long double eeprom_read_long_double (const long double *__p);
@@ -199,6 +202,7 @@ void eeprom_write_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
     Write a 64-bit quad word \a __value to EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 void eeprom_write_qword (uint64_t *__p, uint64_t __value);
@@ -211,6 +215,7 @@ void eeprom_write_float (float *__p, float __value);
 
 /** \ingroup avr_eeprom
     Write a double \a __value to EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__)
 void eeprom_write_double (double *__p, double __value);
@@ -222,6 +227,7 @@ void eeprom_write_double (double *__p, double __value) __asm("eeprom_write_qword
 
 /** \ingroup avr_eeprom
     Write a long double \a __value to EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__)
 void eeprom_write_long_double (long double *__p, long double __value);
@@ -255,6 +261,7 @@ void eeprom_update_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
     Update a 64-bit quad word \a __value at EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 void eeprom_update_qword (uint64_t *__p, uint64_t __value);
@@ -267,6 +274,7 @@ void eeprom_update_float (float *__p, float __value);
 
 /** \ingroup avr_eeprom
     Update a double \a __value at EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__)
 void eeprom_update_double (double *__p, double __value);
@@ -278,6 +286,7 @@ void eeprom_update_double (double *__p, double __value) __asm("eeprom_update_qwo
 
 /** \ingroup avr_eeprom
     Update a long double \a __value at EEPROM address \a __p.
+    \since AVR-LibC v2.2
  */
 #if defined(__DOXYGEN__)
 void eeprom_update_long_double (long double *__p, long double __value);
