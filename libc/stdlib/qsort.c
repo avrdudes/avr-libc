@@ -27,46 +27,40 @@
  * SUCH DAMAGE. */
 
 #include <stdlib.h>
+#include <bits/attribs.h>
 #include "sectionname.h"
 
 typedef int cmp_t(const void *, const void *);
 static char *med3(char *, char *, char *, cmp_t *);
-static void swapfunc(char *, char *, int);
 
 #define min(a, b)	((a) < (b) ? (a) : (b))
 
 /*
  * Qsort routine from Bentley & McIlroy's "Engineering a Sort Function".
  */
-#define swapcode(TYPE, parmi, parmj, n) { 		\
-	int i = (n) / sizeof (TYPE); 			\
-	register TYPE *pi = (TYPE *) (parmi); 		\
-	register TYPE *pj = (TYPE *) (parmj); 		\
-	do { 						\
-		register TYPE	t = *pi;		\
-		*pi++ = *pj;				\
-		*pj++ = t;				\
-        } while (--i > 0);				\
-}
 
-ATTRIBUTE_CLIB_SECTION
-static void
+/* Swap arrays a[n] and b[n].  */
+static __ATTR_ALWAYS_INLINE__ void
 swapfunc(char *a, char *b, int n)
 {
-	swapcode(char, a, b, n)
+    register int n_bytes __asm ("r24") = n;
+    __asm volatile ("%~call __qsort_swapfunc"
+                    : "+x" (a), "+z" (b), "+r" (n_bytes)
+                    :
+                    : "r23", "memory");
 }
 
 #define swap(a, b) swapfunc(a, b, es)
 
-#define vecswap(a, b, n) 	if ((n) > 0) swapfunc(a, b, n)
+#define vecswap(a, b, n) swapfunc(a, b, n)
 
 ATTRIBUTE_CLIB_SECTION
 static char *
 med3(char *a, char *b, char *c, cmp_t *cmp)
 {
-	return cmp(a, b) < 0 ?
-	       (cmp(b, c) < 0 ? b : (cmp(a, c) < 0 ? c : a ))
-              :(cmp(b, c) > 0 ? b : (cmp(a, c) < 0 ? a : c ));
+    return cmp(a, b) < 0
+        ? (cmp(b, c) < 0 ? b : (cmp(a, c) < 0 ? c : a ))
+        : (cmp(b, c) > 0 ? b : (cmp(a, c) < 0 ? a : c ));
 }
 
 ATTRIBUTE_CLIB_SECTION
