@@ -645,12 +645,6 @@ GCC top source.  GCC will configure and build these libs during
     - <https://www.doxygen.nl>
     - Download version 1.9.6 and install.
 
-\note NetPBM is required to build graphics in the AVR-LibC documentation.
-- <b>Install NetPBM</b><br>
-    - Version 10.27.0
-    - From the GNUWin32 project: <http://gnuwin32.sourceforge.net/packages.html>
-    - Download and install.
-
 \note fig2dev is required to build graphics in the AVR-LibC documentation.
 - <b>Install fig2dev</b><br>
     - Version 3.2 patchlevel 5c
@@ -666,13 +660,6 @@ GCC top source.  GCC will configure and build these libs during
     - Version 2.9
     - <https://miktex.org>
     - Download and install.
-
-\note Ghostscript is required to build various documentation.
-- <b>Install Ghostscript</b><br>
-    - Version 9.00
-    - <https://www.ghostscript.com>
-    - Download and install.
-    - In the \\bin subdirectory of the installation, copy gswin32c.exe to gs.exe.
 
 - Set the \c TEMP and \c TMP environment variables to <b><tt>c:\\\\temp</tt></b>
   or to the
@@ -692,7 +679,6 @@ Build the tools below in MinGW/MSYS.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>
-		- \<ghostscript executables\>
         - /usr/local/bin
         - /usr/bin
         - /bin
@@ -722,7 +708,6 @@ make all html install install-html 2>&1 | tee binutils-make.log
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>
-		- \<ghostscript executables\>
         - /usr/local/bin
         - /usr/bin
         - /bin
@@ -760,12 +745,10 @@ make all html install 2>&1 | tee $package-make.log
         - /usr/local/bin
         - /mingw/bin
         - /bin
-        - \<MikTex executables\>
+        - \<MikTex / TeX live executables\>
         - \<install directory\>/bin
         - \<Doxygen executables\>
-        - \<NetPBM executables\>
         - \<fig2dev executable\>
-        - \<Ghostscript executables\>
         - c:/cygwin/bin
     - Configure
         \verbatim
