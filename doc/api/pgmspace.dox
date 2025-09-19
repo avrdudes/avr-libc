@@ -81,7 +81,9 @@ GNU-C99 language dialect (\c -std=gnu99 and up), see the
 <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html"
    >avr-gcc documentation</a>.
 
-\note There are AVR devices that provide a linear address space where
+<b>AVRs with a linear address space</b>
+
+There are AVR devices that provide a linear address space where
 the program memory is seen in the RAM address space and can be accessed
 with \c LD instructions.  The respective device families are:
 - Devices from the AVRrc core in
@@ -98,7 +100,8 @@ with \c LD instructions.  The respective device families are:
 flash is visible in the RAM address space. And only <em>without</em>
 <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
    ><tt>-mrodata-in-ram</tt></a> will \c \.rodata be located in flash.
-\note In all of these cases, complications like #PROGMEM or #__flash
+
+In all of these cases, complications like #PROGMEM or #__flash
 are not needed, though they are working as usual.
 
 \section pgmspace_const Why is GCC putting const Data into RAM to begin with?
@@ -434,8 +437,8 @@ const __flash char* const __flash string_table[] =
 
 \subsection pgmspace_strings_flash With __flash
 
-\note For a solution with the #__flash address-space, see the section above
-or have a look at
+For a solution with the #__flash address-space, see the section above,
+the #FLIT examples, or have a look at the
 \ref faq_rom_array_as "FAQ: How to put an array of strings completely in ROM?"
 
 \subsection pgmspace_strings_progmem With PROGMEM
