@@ -92,7 +92,7 @@ stdlib_a_extra_dist = \
 
 malloc.o: AVRLIB_CFLAGS += @WNO_MAYBE_UNINITIALIZED@
 
-dtoa_prf.o dtostre.o strtod.o: AVRLIB_CFLAGS += -mcall-prologues
+qsort.o dtoa_prf.o dtostre.o strtod.o: AVRLIB_CFLAGS += -mcall-prologues
 
 
 # vim: set ft=make:
