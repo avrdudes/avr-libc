@@ -641,9 +641,9 @@ GCC top source.  GCC will configure and build these libs during
 
 \note Doxygen is required to build AVR-LibC documentation.
 - <b>Install Doxygen</b><br>
-    - Version 1.7.2
+    - Version 1.9.6
     - <https://www.doxygen.nl>
-    - Download and install.
+    - Download version 1.9.6 and install.
 
 \note NetPBM is required to build graphics in the AVR-LibC documentation.
 - <b>Install NetPBM</b><br>
