@@ -30,9 +30,6 @@
 #include <bits/attribs.h>
 #include "sectionname.h"
 
-typedef int cmp_t(const void *, const void *);
-static char *med3(char *, char *, char *, cmp_t *);
-
 #define min(a, b)  ((a) < (b) ? (a) : (b))
 
 /*
@@ -56,7 +53,7 @@ swapfunc(char *a, char *b, int n)
 
 ATTRIBUTE_CLIB_SECTION
 static char *
-med3(char *a, char *b, char *c, cmp_t *cmp)
+med3(char *a, char *b, char *c, __compar_fn_t cmp)
 {
     return cmp(a, b) < 0
         ? (cmp(b, c) < 0 ? b : (cmp(a, c) < 0 ? c : a ))
@@ -65,7 +62,7 @@ med3(char *a, char *b, char *c, cmp_t *cmp)
 
 ATTRIBUTE_CLIB_SECTION
 void
-qsort(void *a, size_t n, size_t es, cmp_t *cmp)
+qsort(void *a, size_t n, size_t es, __compar_fn_t cmp)
 {
     char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
     int d, r, swap_cnt;
