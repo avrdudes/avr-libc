@@ -512,7 +512,7 @@ $ make
 $ make install
 \endverbatim
 
-\note You might want to have already installed
+You might want to have already installed
 \ref install_avr_binutils "avr-binutils",
 \ref install_avr_gcc "avr-gcc" and
 \ref install_avr_libc "AVR-LibC"
@@ -639,13 +639,13 @@ running the \c \./contrib/download_prewrequisites script from the
 GCC top source.  GCC will configure and build these libs during
 \c configure and \c make.
 
-\note Doxygen is required to build AVR-LibC documentation.
+Doxygen is required to build AVR-LibC documentation.
 - <b>Install Doxygen</b><br>
     - Version 1.9.6
     - <https://www.doxygen.nl>
     - Download version 1.9.6 and install.
 
-\note fig2dev is required to build graphics in the AVR-LibC documentation.
+fig2dev is required to build graphics in the AVR-LibC documentation.
 - <b>Install fig2dev</b><br>
     - Version 3.2 patchlevel 5c
     - From WinFig 4.62: <http://winfig.com/downloads>
@@ -655,15 +655,15 @@ GCC top source.  GCC will configure and build these libs during
     - You may have to unzip and install related DLL files for fig2dev. In the
     version above, you have to install QtCore4.dll and QtGui4.dll.
 
-\note MikTeX is required to build various documentation.
+MikTeX is required to build various documentation.
 - <b>Install MiKTeX</b><br>
     - Version 2.9
     - <https://miktex.org>
     - Download and install.
 
-- Set the \c TEMP and \c TMP environment variables to <b><tt>c:\\\\temp</tt></b>
-  or to the
-  short filename version. This helps to avoid NTVDM errors during building.
+Set the \c TEMP and \c TMP environment variables to <b><tt>c:\\\\temp</tt></b>
+or to the
+short filename version. This helps to avoid NTVDM errors during building.
 
 
 \subsection install_windows_building Building the Toolchain for Windows
