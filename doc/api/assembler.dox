@@ -94,7 +94,7 @@ This approach has the following advantages:
 
 Note that the invocation of the C preprocessor will be automatic when
 the filename provided for the assembler file ends in \c \.S (the
-capital letter "s").  This would even apply to operating systems that
+capital letter "S").  This would even apply to operating systems that
 use case-insensitive filesystems since the actual decision is made
 based on the case of the filename suffix given on the command-line,
 not based on the actual filename from the file system.
@@ -108,7 +108,10 @@ filenames are case-insensitive (and, with some versions of \c make
 that could not distinguish between \c \.s and \c \.S on such systems).
 
 Alternatively, the language can explicitly be specified using the
-<tt>\ref opt_x "-x assembler-with-cpp"</tt> option.
+<tt>\ref opt_x "-x assembler-with-cpp"</tt> option before the assembly
+source files.  After the asm source file specifications a <tt>-x none</tt>
+must be added when non-assembly source files are following.  Otherwise,
+the driver program would assume that they contain assembly code, too.
 
 \section ass_example Example Program
 

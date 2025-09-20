@@ -249,7 +249,7 @@ Notes on the various parts:
   \c "r1" has no effect.
   When the asm destroys the zero register, for example by means of
   a \c MUL instruction, then the code must restore the register at
-  the end by means of <tt>"clr __zero_reg__"</tt>
+  the end by means of <tt>"clr __zero_reg__"</tt>.
 </dd>
 </dl>
 
@@ -796,7 +796,7 @@ name in named operands like in <tt>"%a[address]"</tt>.
 <tr>
   <td><tt>lo8()</tt>
   <td> 1<sup>st</sup> Byte of a link-time constant, bits 0...7
-  <td rowspan="5"> Getting parts<br>of a byte-address
+  <td rowspan="5"> Getting parts of a byte-address
 </tr>
 <tr>
   <td><tt>hi8()</tt>
@@ -817,7 +817,7 @@ name in named operands like in <tt>"%a[address]"</tt>.
 <tr>
   <td><tt>pm_lo8()</tt>
   <td> 1<sup>st</sup> Byte of a link-time constant divided by 2, bits 1...8
-    <td rowspan="3"> Getting parts<br>of a word-address
+    <td rowspan="3"> Getting parts of a word-address
 </tr>
 <tr>
   <td><tt>pm_hi8()</tt>
