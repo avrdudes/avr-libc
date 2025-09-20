@@ -1380,7 +1380,7 @@ function rather than the (mangled) name from the C/C++ implementation.
 Just add an asm specifier with the desired name as a string literal at the
 end of the declaration.
 
-For example, this is how <code>avr/eeprom.h</code> implements the
+For example, this is how <code>avr/eeprom.h</code> desclares the
 \c eeprom_read_double() function:
 \code
 #if __SIZEOF_DOUBLE__ == 4
