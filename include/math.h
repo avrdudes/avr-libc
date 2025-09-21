@@ -82,8 +82,7 @@ extern "C" {
       The size of the \c double and \c long \c double type can be selected
       at compile-time with options like <tt>-mdouble=64</tt> and
       <tt>-mlong-double=32</tt>.  Whether such options are available,
-      and their default values,
-      depend on how the compiler has been configured.
+      and their default values, depend on how the compiler has been configured.
     - The implementation of 64-bit floating-point arithmetic has some
       shortcomings and limitations, see the
       <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a>
@@ -169,38 +168,45 @@ extern "C" {
 __ATTR_CONST__ extern float cosf (float x);
 /** The cos() function returns the cosine of \a x, measured in radians. */
 __ATTR_CONST__ extern double cos (double x);
-/** The cosl() function returns the cosine of \a x, measured in radians. */
+/** The cosl() function returns the cosine of \a x, measured in radians.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double cosl (long double x);
 
 /** The sinf() function returns the sine of \a x, measured in radians. */
 __ATTR_CONST__ extern float sinf (float x);
 /** The sin() function returns the sine of \a x, measured in radians. */
 __ATTR_CONST__ extern double sin (double x);
-/** The sinl() function returns the sine of \a x, measured in radians. */
+/** The sinl() function returns the sine of \a x, measured in radians.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double sinl (long double x);
 
 /** The tanf() function returns the tangent of \a x, measured in radians. */
 __ATTR_CONST__ extern float tanf (float x);
 /** The tan() function returns the tangent of \a x, measured in radians. */
 __ATTR_CONST__ extern double tan (double x);
-/** The tanl() function returns the tangent of \a x, measured in radians. */
+/** The tanl() function returns the tangent of \a x, measured in radians.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double tanl (long double x);
 
-/** The fabsf() function computes the absolute value of a floating-point number \a x. */
+/** The fabsf() function computes the absolute value of a floating-point
+    number \a x. */
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 float fabsf (float __x)
 {
     return __builtin_fabsf (__x);
 }
 
-/** The fabs() function computes the absolute value of a floating-point number \a x. */
+/** The fabs() function computes the absolute value of a floating-point
+    number \a x. */
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 double fabs (double __x)
 {
     return __builtin_fabs (__x);
 }
 
-/** The fabsl() function computes the absolute value of a floating-point number \a x. */
+/** The fabsl() function computes the absolute value of a floating-point
+    number \a x.
+    \since AVR-LibC v2.2 */
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 long double fabsl (long double __x)
 {
@@ -211,7 +217,8 @@ long double fabsl (long double __x)
 __ATTR_CONST__ extern float fmodf (float x, float y);
 /** The function fmod() returns the floating-point remainder of <em>x / y</em>. */
 __ATTR_CONST__ extern double fmod (double x, double y);
-/** The function fmodl() returns the floating-point remainder of <em>x / y</em>. */
+/** The function fmodl() returns the floating-point remainder of <em>x / y</em>.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double fmodl (long double x, long double y);
 
 /** The modff() function breaks the argument \a x into integral and
@@ -237,21 +244,24 @@ extern double modf (double x, double *iptr);
     It stores the integral part as a \c long \c double in the object pointed to by
     \a iptr.
 
-    The modf() function returns the signed fractional part of \a x. */
+    The modf() function returns the signed fractional part of \a x.
+    \since AVR-LibC v2.2 */
 extern long double modfl (long double x, long double *iptr);
 
 /** The sqrtf() function returns the non-negative square root of \a x. */
 __ATTR_CONST__ extern float sqrtf (float x);
 /** The sqrt() function returns the non-negative square root of \a x. */
 __ATTR_CONST__ extern double sqrt (double x);
-/** The sqrtl() function returns the non-negative square root of \a x. */
+/** The sqrtl() function returns the non-negative square root of \a x.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double sqrtl (long double x);
 
 /** The cbrtf() function returns the cube root of \a x. */
 __ATTR_CONST__ extern float cbrtf (float x);
 /** The cbrt() function returns the cube root of \a x. */
 __ATTR_CONST__ extern double cbrt (double x);
-/** The cbrtl() function returns the cube root of \a x. */
+/** The cbrtl() function returns the cube root of \a x.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double cbrtl (long double x);
 
 /** The hypotf() function returns <em>sqrtf(x*x + y*y)</em>. This
@@ -273,7 +283,8 @@ __ATTR_CONST__ extern double hypot (double x, double y);
     length \a x and \a y, or the  distance of the point (\a x, \a
     y) from the origin. Using this function  instead of the direct
     formula is wise, since the error is much smaller. No underflow with
-    small \a x and \a y. No overflow if result is in range. */
+    small \a x and \a y. No overflow if result is in range.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double hypotl (long double x, long double y);
 
 /** The floorf() function returns the largest integral value less than or
@@ -283,7 +294,8 @@ __ATTR_CONST__ extern float floorf (float x);
     equal to \a x, expressed as a floating-point number. */
 __ATTR_CONST__ extern double floor (double x);
 /** The floorl() function returns the largest integral value less than or
-    equal to \a x, expressed as a floating-point number. */
+    equal to \a x, expressed as a floating-point number.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double floorl (long double x);
 
 /** The ceilf() function returns the smallest integral value greater than
@@ -293,7 +305,8 @@ __ATTR_CONST__ extern float ceilf (float x);
     or equal to \a x, expressed as a floating-point number. */
 __ATTR_CONST__ extern double ceil (double x);
 /** The ceill() function returns the smallest integral value greater than
-    or equal to \a x, expressed as a floating-point number. */
+    or equal to \a x, expressed as a floating-point number.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double ceill (long double x);
 
 /** The frexpf() function breaks a floating-point number into a normalized
@@ -331,7 +344,8 @@ extern double frexp (double x, int *pexp);
     interval [1/2, 1) or zero, and \a x equals \c v times 2 raised to
     the power \a pexp. If \a x is zero, both parts of the result are
     zero. If \a x is not a finite number, the frexpl() returns \a x as
-    is and stores 0 by \a pexp. */
+    is and stores 0 by \a pexp.
+    \since AVR-LibC v2.2 */
 extern long double frexpl (long double x, int *pexp);
 
 /** The ldexpf() function multiplies a floating-point number by an integral
@@ -344,21 +358,24 @@ __ATTR_CONST__ extern float ldexpf (float x, int iexp);
 __ATTR_CONST__ extern double ldexp (double x, int iexp);
 /** The ldexpl() function multiplies a floating-point number by an integral
     power of 2. It returns the value of \a x times 2 raised to the power
-    \a iexp. */
+    \a iexp.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double ldexpl (long double x, int iexp);
 
 /** The expf() function returns the exponential value of \a x. */
 __ATTR_CONST__ extern float expf (float x);
 /** The exp() function returns the exponential value of \a x. */
 __ATTR_CONST__ extern double exp (double x);
-/** The expl() function returns the exponential value of \a x. */
+/** The expl() function returns the exponential value of \a x.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double expl (long double x);
 
 /** The coshf() function returns the hyperbolic cosine of \a x. */
 __ATTR_CONST__ extern float coshf (float x);
 /** The cosh() function returns the hyperbolic cosine of \a x. */
 __ATTR_CONST__ extern double cosh (double x);
-/** The coshl() function returns the hyperbolic cosine of \a x. */
+/** The coshl() function returns the hyperbolic cosine of \a x.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double coshl (long double x);
 
 /** The sinhf() function returns the hyperbolic sine of \a x. */
@@ -372,7 +389,8 @@ __ATTR_CONST__ extern long double sinhl (long double x);
 __ATTR_CONST__ extern float tanhf (float x);
 /** The tanh() function returns the hyperbolic tangent of \a x. */
 __ATTR_CONST__ extern double tanh (double x);
-/** The tanhl() function returns the hyperbolic tangent of \a x. */
+/** The tanhl() function returns the hyperbolic tangent of \a x.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double tanhl (long double x);
 
 /** The acosf() function computes the principal value of the arc cosine of
@@ -384,30 +402,33 @@ __ATTR_CONST__ extern float acosf (float x);
     \a x.  The returned value is in the range [0, &pi;] radians or NaN. */
 __ATTR_CONST__ extern double acos (double x);
 /** The acosl() function computes the principal value of the arc cosine of
-    \a x.  The returned value is in the range [0, &pi;] radians or NaN. */
+    \a x.  The returned value is in the range [0, &pi;] radians or NaN.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double acosl (long double x);
 
-/** The asinf() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. A
+/** The asinf() function computes the principal value of the arc sine of \a x.
+    The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. A
     domain error occurs for arguments not in the range [&minus;1, +1].
     The relative error is bounded by 3.3&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float asinf (float x);
-/** The asin() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians or NaN. */
+/** The asin() function computes the principal value of the arc sine of \a x.
+    The returned value is in the range [&minus;&pi;/2, &pi;/2] radians or NaN.*/
 __ATTR_CONST__ extern double asin (double x);
-/** The asinl() function computes the principal value of the arc sine of
-    \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians or NaN. */
+/** The asinl() function computes the principal value of the arc sine of \a x.
+    The returned value is in the range [&minus;&pi;/2, &pi;/2] radians or NaN.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double asinl (long double x);
 
 /** The atanf() function computes the principal value of the arc tangent
     of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians.
     The relative error is bounded by 1.3&middot;10<sup>&minus;7</sup>. */
 __ATTR_CONST__ extern float atanf (float x);
-/** The atan() function computes the principal value of the arc tangent
-    of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. */
+/** The atan() function computes the principal value of the arc tangent of \a x.
+    The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. */
 __ATTR_CONST__ extern double atan (double x);
-/** The atanl() function computes the principal value of the arc tangent
-    of \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians. */
+/** The atanl() function computes the principal value of the arc tangent of
+    \a x.  The returned value is in the range [&minus;&pi;/2, &pi;/2] radians.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double atanl (long double x);
 
 /** The atan2f() function computes the principal value of the arc tangent
@@ -423,7 +444,8 @@ __ATTR_CONST__ extern double atan2 (double y, double x);
 /** The atan2l() function computes the principal value of the arc tangent
     of <em>y / x</em>, using the signs of both arguments to determine
     the quadrant of the return value.  The returned value is in the range
-    [&minus;&pi;, +&pi;] radians. */
+    [&minus;&pi;, +&pi;] radians.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double atan2l (long double y, long double x);
 
 /** The logf() function returns the natural logarithm of argument \a x.
@@ -431,7 +453,8 @@ __ATTR_CONST__ extern long double atan2l (long double y, long double x);
 __ATTR_CONST__ extern float logf (float x);
 /** The log() function returns the natural logarithm of argument \a x. */
 __ATTR_CONST__ extern double log (double x);
-/** The logl() function returns the natural logarithm of argument \a x. */
+/** The logl() function returns the natural logarithm of argument \a x.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double logl (long double x);
 
 /** The log10f() function returns the logarithm of argument \a x to base 10.
@@ -439,7 +462,8 @@ __ATTR_CONST__ extern long double logl (long double x);
 __ATTR_CONST__ extern float log10f (float x);
 /** The log10() function returns the logarithm of argument \a x to base 10. */
 __ATTR_CONST__ extern double log10 (double x);
-/** The log10l() function returns the logarithm of argument \a x to base 10. */
+/** The log10l() function returns the logarithm of argument \a x to base 10.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double log10l (long double x);
 
 /** The log2f() function returns the logarithm of argument \a x to base 2.
@@ -463,7 +487,8 @@ __ATTR_CONST__ extern float powf (float x, float y);
 __ATTR_CONST__ extern double pow (double x, double y);
 /** The function powl() returns the value of \a x to the exponent \a y.
     \n Notice that for integer exponents, there is the more efficient
-    <code>long double __builtin_powil(long double x, int y)</code>. */
+    <code>long double __builtin_powil(long double x, int y)</code>.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double powl (long double x, long double y);
 
 /** The function isnanf() returns 1 if the argument \a x represents a
@@ -473,7 +498,8 @@ __ATTR_CONST__ extern int isnanf (float x);
     "not-a-number" (NaN) object, otherwise 0. */
 __ATTR_CONST__ extern int isnan (double x);
 /** The function isnanl() returns 1 if the argument \a x represents a
-    "not-a-number" (NaN) object, otherwise 0. */
+    "not-a-number" (NaN) object, otherwise 0.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern int isnanl (long double x);
 
 /** The function isinff() returns 1 if the argument \a x is positive
@@ -483,7 +509,8 @@ __ATTR_CONST__ extern int isinff (float x);
     infinity, &minus;1 if \a x is negative infinity, and 0 otherwise. */
 __ATTR_CONST__ extern int isinf (double x);
 /** The function isinfl() returns 1 if the argument \a x is positive
-    infinity, &minus;1 if \a x is negative infinity, and 0 otherwise. */
+    infinity, &minus;1 if \a x is negative infinity, and 0 otherwise.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern int isinfl (long double x);
 
 /** The isfinitef() function returns a nonzero value if \a __x is finite:
@@ -514,8 +541,9 @@ static __ATTR_ALWAYS_INLINE__ int isfinite (double __x)
 int isfinite (double __x);
 #endif /* double = float */
 
-/** The isfinite() function returns a nonzero value if \a __x is finite:
-    not plus or minus infinity, and not NaN. */
+/** The isfinitel() function returns a nonzero value if \a __x is finite:
+    not plus or minus infinity, and not NaN.
+    \since AVR-LibC v2.2 */
 #ifdef __DOXYGEN__
 static __ATTR_ALWAYS_INLINE__ int isfinitel (long double __x);
 #elif __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
@@ -552,7 +580,8 @@ __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ double copysign (double __x, double
 }
 
 /** The copysignl() function returns \a __x but with the sign of \a __y.
-    They work even if \a __x or \a __y are NaN or zero. */
+    They work even if \a __x or \a __y are NaN or zero.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ long double copysignl (long double __x, long double __y)
 {
     __asm__ (
@@ -566,20 +595,21 @@ __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ long double copysignl (long double 
 /** The signbitf() function returns a nonzero value if the value of \a x
     has its sign bit set.  This is not the same as `\a x < 0.0',
     because IEEE 754 floating point allows zero to be signed. The
-    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)' will return a
-    nonzero value. */
+    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)'
+    will return a nonzero value. */
 __ATTR_CONST__ extern int signbitf (float x);
 /** The signbit() function returns a nonzero value if the value of \a x
     has its sign bit set.  This is not the same as `\a x < 0.0',
     because IEEE 754 floating point allows zero to be signed. The
-    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)' will return a
-    nonzero value. */
+    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)'
+    will return a nonzero value. */
 __ATTR_CONST__ extern int signbit (double x);
 /** The signbitl() function returns a nonzero value if the value of \a x
     has its sign bit set.  This is not the same as `\a x < 0.0',
     because IEEE 754 floating point allows zero to be signed. The
-    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)' will return a
-    nonzero value. */
+    comparison '&minus;0.0 < 0.0' is false, but `signbit (&minus;0.0)'
+    will return a nonzero value.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern int signbitl (long double x);
 
 /** The fdimf() function returns <em>max(x &minus; y, 0)</em>. If \a x or
@@ -590,7 +620,7 @@ __ATTR_CONST__ extern float fdimf (float x, float y);
 __ATTR_CONST__ extern double fdim (double x, double y);
 /** The fdiml() function returns <em>max(x &minus; y, 0)</em>. If \a x or
     \a y or both are NaN, NaN is returned.
-    \since GCC v15.2 */
+    \since AVR-LibC v2.2, GCC v15.2 */
 __ATTR_CONST__ extern long double fdiml (long double x, long double y);
 
 /** The fmaf() function performs floating-point multiply-add. This is the
@@ -606,7 +636,8 @@ __ATTR_CONST__ extern double fma (double x, double y, double z);
 /** The fmal() function performs floating-point multiply-add. This is the
     operation <em>(x * y) + z</em>, but the intermediate result is
     not rounded to the destination type.  This can sometimes improve the
-    precision of a calculation. */
+    precision of a calculation.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double fmal (long double x, long double y, long double z);
 
 /** The fmaxf() function returns the greater of the two values \a x and
@@ -619,7 +650,8 @@ __ATTR_CONST__ extern float fmaxf (float x, float y);
 __ATTR_CONST__ extern double fmax (double x, double y);
 /** The fmaxl() function returns the greater of the two values \a x and
     \a y. If an argument is NaN, the other argument is returned. If
-    both arguments are NaN, NaN is returned. */
+    both arguments are NaN, NaN is returned.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double fmaxl (long double x, long double y);
 
 /** The fminf() function returns the lesser of the two values \a x and
@@ -632,7 +664,8 @@ __ATTR_CONST__ extern float fminf (float x, float y);
 __ATTR_CONST__ extern double fmin (double x, double y);
 /** The fminl() function returns the lesser of the two values \a x and
     \a y. If an argument is NaN, the other argument is returned. If
-    both arguments are NaN, NaN is returned. */
+    both arguments are NaN, NaN is returned.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double fminl (long double x, long double y);
 
 /** The truncf() function rounds \a x to the nearest integer not larger
@@ -642,7 +675,8 @@ __ATTR_CONST__ extern float truncf (float x);
     in absolute value. */
 __ATTR_CONST__ extern double trunc (double x);
 /** The truncl() function rounds \a x to the nearest integer not larger
-    in absolute value. */
+    in absolute value.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double truncl (long double x);
 
 /** The roundf() function rounds \a x to the nearest integer, but rounds
@@ -664,7 +698,8 @@ __ATTR_CONST__ extern double round (double x);
     Overflow is impossible.
 
     \return The rounded value. If \a x is an integral or infinite, \a
-    x itself is returned. If \a x is \c NaN, then \c NaN is returned. */
+    x itself is returned. If \a x is \c NaN, then \c NaN is returned.
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double roundl (long double x);
 
 /** The lroundf() function rounds \a x to the nearest integer, but rounds
@@ -692,7 +727,8 @@ __ATTR_CONST__ extern long lround (double x);
 
     \return The rounded long integer value. If \a x is not a finite number
     or an overflow was, this realization returns the \c LONG_MIN value
-    (0x80000000). */
+    (0x80000000).
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long lroundl (long double x);
 
 /** The lrintf() function rounds \a x to the nearest integer, rounding the
@@ -723,7 +759,8 @@ __ATTR_CONST__ extern long lrint (double x);
 
     \return The rounded long integer value. If \a x is not a finite
     number or an overflow was, this realization returns the \c LONG_MIN
-    value (0x80000000). */
+    value (0x80000000).
+    \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long lrintl (long double x);
 
 /**@}*/
@@ -748,7 +785,8 @@ __ATTR_CONST__ extern double square (double x) __asm("__f7_square");
 #endif
 
 /** The function squarel() returns <em>x * x</em>.
-    \note This function does not belong to the C standard definition. */
+    \note This function does not belong to the C standard definition.
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
 __ATTR_CONST__ extern long double squarel (long double x);
 #elif defined(__WITH_LIBF7_MATH__)
