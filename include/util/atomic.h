@@ -64,6 +64,7 @@ static __ATTR_ALWAYS_INLINE__ void __iCliParam(const uint8_t *__s)
 static __ATTR_ALWAYS_INLINE__ void __iRestore(const  uint8_t *__s)
 {
     SREG = *__s;
+    __asm__ __volatile__ ("" ::: "memory");
 }
 #endif	/* !__DOXYGEN__ */
 
