@@ -156,8 +156,7 @@
 ## Issues closed
 
 - See also the list of
-  <a href="https://github.com/avrdudes/avr-libc/milestone/1?closed=1">
-  issues closed for v2.3</a>.
+  <a href="https://github.com/avrdudes/avr-libc/issues?q=state%3Aclosed%20milestone%3Av2.3">issues closed for v2.3</a>.
 
 - Since v2.2.0 ([#936][936]), `gcrt1.S` defines symbols `__DATA_REGION_ORIGIN__`
   and `__DATA_REGION_LENGTH__` to allow for more precise diagnostics from
