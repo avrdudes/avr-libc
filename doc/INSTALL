@@ -12,12 +12,13 @@ https://avrdudes.github.io/avr-libc/avr-libc-user-manual/install_tools.html
 
    See https://sourceware.org/binutils/
 
-2. Build and install the current released version of GCC for the AVR target.
+2. Build and install the desired version of GCC for the AVR target.
    Releases older than GCC 4.8 are not supported.
 
    $ .../configure --target=avr --enable-languages=c,c++
 
-   Note that configuring GCC anywhere in the source tree is not supported.
+   Note that configuring GCC anywhere in the source tree is not supported,
+   and that GCC needs some prerequisite host libraries like GMP, MPFR, etc.
    See https://gcc.gnu.org/install/
 
 3. Now you can build and install AVR-LibC:
@@ -34,7 +35,7 @@ https://avrdudes.github.io/avr-libc/avr-libc-user-manual/install_tools.html
    different name on your system (e.g. gmake), change that appropriately above.
 
 By default, everything is installed under /usr/local.
-You can change that if you cofigure with --prefix=/location or install with
+You can change that if you configure with --prefix=/location or install with
 
 $ make install prefix=/location
 
