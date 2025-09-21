@@ -111,13 +111,6 @@ case "$host" in
 		;;
 esac
 
-AC_MSG_CHECKING([if the build compiler is GCC 4.8 or newer])
-AS_VERSION_COMPARE([`${CC} -dumpversion`], [4.8.0],
-    [AC_MSG_RESULT(no)
-     AC_MSG_ERROR(AVR-LibC must be built with GCC 4.8 or newer.)],
-    [AC_MSG_RESULT(yes)],
-    [AC_MSG_RESULT(yes)])
-
 ## TODO: Write a check for GNU Make
 
 dnl The default check whether the C compiler can create an executable
@@ -160,6 +153,13 @@ AM_PROG_AS
 AC_PROG_RANLIB
 AC_CHECK_TOOL(AR, ar, ar)
 AC_CHECK_TOOL(OBJDUMP, objdump, objdump)
+
+AC_MSG_CHECKING([if the build compiler is GCC 4.8 or newer])
+AS_VERSION_COMPARE([`${CC} -dumpversion`], [4.8.0],
+    [AC_MSG_RESULT(no)
+     AC_MSG_ERROR(AVR-LibC must be built with GCC 4.8 or newer.)],
+    [AC_MSG_RESULT(yes)],
+    [AC_MSG_RESULT(yes)])
 
 dnl Parts of the documentaton like in doc/api require Python, e.g. math2dox.
 dnl We cannot use devtools' configure since that one runs at bootstrap time,
