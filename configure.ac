@@ -365,7 +365,7 @@ the_git_branch=`(cd ${srcdir}; git rev-parse --abbrev-ref HEAD 2> /dev/null)`
 AS_IF([test "x$the_git_branch" != "x"],
       [AC_MSG_RESULT([$the_git_branch])],
       [AC_MSG_RESULT([--none--])])
-AS_IF([test "x$the_git_branch" = "xonlinedocs"],
+AS_IF([echo "$the_git_branch" | $GREP onlinedocs > /dev/null 2>&1],
       [GIT_BRANCH_IS_ONLINEDOCS=GIT_BRANCH_IS_ONLINEDOCS],
       [GIT_BRANCH_IS_ONLINEDOCS=])
 AC_SUBST(GIT_BRANCH_IS_ONLINEDOCS)
