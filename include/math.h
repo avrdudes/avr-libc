@@ -71,7 +71,8 @@ extern "C" {
     This header file declares basic mathematics constants and
     functions.
 
-    \par Notes:
+    <b>Notes:</b>
+
     - Math functions do not raise exceptions and do not change the
       \c errno variable. Therefore the majority of them are declared
       with \c const attribute, for better optimization by GCC.
@@ -87,10 +88,6 @@ extern "C" {
       shortcomings and limitations, see the
       <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a>
       for details.
-    - In order to access the <tt>float</tt> functions,
-      in avr-gcc v4.6 and older it is usually
-      also required to link with \c -lm. In avr-gcc v4.7 and up, \c -lm
-      is added automatically to all linker invocations.
 
   See also sone benchmarks for \ref bench_libm "IEEE single"
   and \ref bench_libf7 "IEEE double".
