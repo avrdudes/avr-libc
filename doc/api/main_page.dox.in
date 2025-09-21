@@ -50,19 +50,14 @@ this document provides enough information to get a new AVR developer up to
 speed quickly using the freely available development tools: Binutils, GCC,
 AVR-LibC and many others.
 
-If you find yourself stuck on a problem which this document doesn't quite
-address, you may wish to post a message to the avr-gcc mailing list. Most of
-the developers of the AVR Binutils and GCC ports in addition to the developers
-of AVR-LibC subscribe to the list, so you will usually be able to get your
-problem resolved. You can subscribe to the list at
-http://lists.nongnu.org/mailman/listinfo/avr-gcc-list . Before posting to the
-list, you might want to try reading the \ref FAQ chapter of this document.
-
-\note If you think you've found a bug, or have a suggestion for an
+If you think you've found a bug, or have a suggestion for an
 improvement, either in this documentation or in the library itself,
 please use the
 <a href="https://github.com/avrdudes/avr-libc/issues">bug tracker</a>
 to ensure the issue won't be forgotten.
+Before reporting a new issue,
+you might want to try reading the \ref FAQ chapter of this document.
+
 
 \section avr_libc_general General Information about this Library
 
