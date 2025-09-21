@@ -64,7 +64,7 @@ uint8_t parity_even_bit (uint8_t __val)
          "sbrc %0, 3"            "\n\t"
          "inc  %0"
          /* parity is in [0] */
-         : "+d" (__val) :: "r0");
+         : "+d" (__val));
 
   return __val & 1;
 }
