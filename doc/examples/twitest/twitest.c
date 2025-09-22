@@ -14,7 +14,7 @@
  */
 
 /*
- * Simple demo program that talks to a 24Cxx I�C EEPROM using the
+ * Simple demo program that talks to a 24Cxx I2C EEPROM using the
  * builtin TWI interface of an ATmega device.
  */
 
@@ -79,7 +79,7 @@
  * complete, but low enough to properly abort an infinite loop in case
  * a slave is broken or not present at all.  With 100 kHz TWI clock,
  * transferring the start condition and SLA+R/W packet takes about 10
- * �s.  The longest write period is supposed to not exceed ~ 10 ms.
+ * microseconds.  The longest write period is supposed to not exceed ~ 10 ms.
  * Thus, normal operation should not require more than 100 iterations
  * to get the device to respond to a selection.
  */
