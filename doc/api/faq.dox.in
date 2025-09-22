@@ -2500,7 +2500,13 @@ They influence how pars of the library behave.
 <caption>Toolchain Features affecting AVR-LibC</caption>
 <tr><th>Feature <th>Supported <th>Affects
 <tr>
-  <td>\c __builtin_avr_delay_cycles()
+  <td>
+\if DOX_HAS_DELAY_CYCLES
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles"
+      ><tt>__builtin_avr_delay_cycles()</tt></a>
+\else
+      <tt>__builtin_avr_delay_cycles()</tt>
+\endif
   <td> @HAS_DELAY_CYCLES_yesno@
   <td> \c <util/delay.h>
 <tr>

@@ -616,6 +616,7 @@ GENERATE_DEPRECATEDLIST= YES
 # ... \endcond blocks.
 
 ENABLED_SECTIONS       = @GIT_BRANCH_IS_ONLINEDOCS@ \
+                         @DOX_HAS_DELAY_CYCLES@ \
                          @STDFIX_AVRLIBC_H_NOT_INCLUDED@
 
 # The MAX_INITIALIZER_LINES tag determines the maximum number of lines that the
