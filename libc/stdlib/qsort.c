@@ -68,7 +68,7 @@ qsort(void *a, size_t n, size_t es, __compar_fn_t cmp)
     char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
     int d, r;
 
-loop:
+loop:;
     uint8_t swap_cnt = 0;
     if (n < 7)
     {
