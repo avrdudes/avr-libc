@@ -5,9 +5,6 @@
  * can do whatever you want with this stuff. If we meet some day, and you think
  * this stuff is worth it, you can buy me a beer in return.        Joerg Wunsch
  * ----------------------------------------------------------------------------
- */
-/*
- * ----------------------------------------------------------------------------
  * Updated to handle larger devices having 16-bit addresses
  *                                                 (2007-09-05) Ruwan Jayanetti
  * ----------------------------------------------------------------------------
@@ -21,26 +18,27 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <avr/io.h>
-#include <util/twi.h>		/* Note [1] */
+#include <util/twi.h>           // Note [1]
 
 #define DEBUG 1
 
 /*
  * System clock in Hz.
  */
-#define F_CPU 14745600UL	/* Note [2] */
+#define F_CPU 14745600UL        // Note [2]
 
 /*
  * Compatibility defines.  This should work on ATmega8, ATmega16,
  * ATmega163, ATmega323 and ATmega128 (IOW: on all devices that
  * provide a builtin TWI interface).
  *
- * On the 128, it defaults to USART 1.
+ * On the ATmega128, it defaults to USART 1.
  */
 #ifndef UCSRB
-# ifdef UCSR1A		/* ATmega128 */
+# ifdef UCSR1A          /* ATmega128 */
 #  define UCSRA UCSR1A
 #  define UCSRB UCSR1B
 #  define UBRR UBRR1L
@@ -58,12 +56,12 @@
  * Note [3]
  * TWI address for 24Cxx EEPROM:
  *
- * 1 0 1 0 E2 E1 E0 R/~W	24C01/24C02
- * 1 0 1 0 E2 E1 A8 R/~W	24C04
- * 1 0 1 0 E2 A9 A8 R/~W	24C08
- * 1 0 1 0 A10 A9 A8 R/~W	24C16
+ * 1 0 1 0 E2 E1 E0 R/~W        24C01/24C02
+ * 1 0 1 0 E2 E1 A8 R/~W        24C04
+ * 1 0 1 0 E2 A9 A8 R/~W        24C08
+ * 1 0 1 0 A10 A9 A8 R/~W       24C16
  */
-#define TWI_SLA_24CXX	0xa0	/* E2 E1 E0 = 0 0 0 */
+#define TWI_SLA_24CXX   0xa0    /* E2 E1 E0 = 0 0 0 */
 
 /*
  * Note [3a]
@@ -83,7 +81,7 @@
  * Thus, normal operation should not require more than 100 iterations
  * to get the device to respond to a selection.
  */
-#define MAX_ITER	200
+#define MAX_ITER        200
 
 /*
  * Number of bytes that can be written in a row, see comments for
@@ -116,20 +114,25 @@ ioinit(void)
    * Slow system clock, double Baud rate to improve rate error.
    */
   UCSRA = _BV(U2X);
-  UBRR = (F_CPU / (8 * 9600UL)) - 1; /* 9600 Bd */
+  // 9600 Bd
+  UBRR = (F_CPU / (8 * 9600UL)) - 1;
 #else
-  UBRR = (F_CPU / (16 * 9600UL)) - 1; /* 9600 Bd */
+  // 9600 Bd
+  UBRR = (F_CPU / (16 * 9600UL)) - 1;
 #endif
-  UCSRB = _BV(TXEN);		/* tx enable */
 
-  /* initialize TWI clock: 100 kHz clock, TWPS = 0 => prescaler = 1 */
+  // Tx enable
+  UCSRB = _BV(TXEN);
+
+  // initialize TWI clock: 100 kHz clock, TWPS = 0 => prescaler = 1
 #if defined(TWPS0)
-  /* has prescaler (mega128 & newer) */
+  // has prescaler (mega128 & newer)
   TWSR = 0;
 #endif
 
 #if F_CPU < 3600000UL
-  TWBR = 10;			/* smallest TWBR value, see note [5] */
+  // smallest TWBR value, see note [5]
+  TWBR = 10;
 #else
   TWBR = (F_CPU / 100000UL - 16) / 2;
 #endif
@@ -141,14 +144,27 @@ ioinit(void)
  * is empty.
  */
 int
-uart_putchar(char c, FILE *unused)
+uart_putchar(char c, FILE *stream)
 {
+  (void) stream;
   if (c == '\n')
     uart_putchar('\r', 0);
   loop_until_bit_is_set(UCSRA, UDRE);
   UDR = c;
   return 0;
 }
+
+
+static inline void
+wait_for_transmission (void)
+{
+  while ((TWCR & _BV(TWINT)) == 0)
+    {
+      // wait for transmission
+    }
+}
+
+typedef uint16_t eeaddr_t;
 
 /*
  * Note [7]
@@ -171,16 +187,17 @@ uart_putchar(char c, FILE *unused)
  * initiate further transfers.
  */
 int
-ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
+ee24xx_read_bytes(eeaddr_t eeaddr, int len, void *vbuf)
 {
+  uint8_t *buf = (uint8_t*) vbuf;
   uint8_t sla, twcr, n = 0;
   int rv = 0;
 
 #ifndef WORD_ADDRESS_16BIT
-  /* patch high bits of EEPROM address into SLA */
+  // patch high bits of EEPROM address into SLA
   sla = TWI_SLA_24CXX | (((eeaddr >> 8) & 0x07) << 1);
 #else
-  /* 16-bit address devices need only TWI Device Address */
+  // 16-bit address devices need only TWI Device Address
   sla = TWI_SLA_24CXX;
 #endif
 
@@ -188,52 +205,68 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
    * Note [8]
    * First cycle: master transmitter mode
    */
-  restart:
+restart:
   if (n++ >= MAX_ITER)
     return -1;
-  begin:
 
-  TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN); /* send start condition */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+begin:
+
+  // send start condition
+  TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
-    case TW_REP_START:		/* OK, but should not happen */
+    case TW_REP_START:          // OK, but should not happen
     case TW_START:
       break;
 
-    case TW_MT_ARB_LOST:	/* Note [9] */
+    case TW_MT_ARB_LOST:
+      // Note [9]
       goto begin;
 
     default:
-      return -1;		/* error: not in start condition */
-				/* NB: do /not/ send stop condition */
+      // error: not in start condition
+      // NB: do /not/ send stop condition
+      return -1;
     }
 
-  /* Note [10] */
-  /* send SLA+W */
+  // Note [10]
+  // send SLA+W
   TWDR = sla | TW_WRITE;
-  TWCR = _BV(TWINT) | _BV(TWEN); /* clear interrupt to start transmission */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+  // clear interrupt to start transmission
+  TWCR = _BV(TWINT) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
     case TW_MT_SLA_ACK:
       break;
 
-    case TW_MT_SLA_NACK:	/* nack during select: device busy writing */
-				/* Note [11] */
+    case TW_MT_SLA_NACK:
+      // nack during select: device busy writing
+      // Note [11]
       goto restart;
 
-    case TW_MT_ARB_LOST:	/* re-arbitrate */
+    case TW_MT_ARB_LOST:
+      // re-arbitrate
       goto begin;
 
     default:
-      goto error;		/* must send stop condition */
+      // must send stop condition
+      goto error;
     }
 
 #ifdef WORD_ADDRESS_16BIT
-  TWDR = (eeaddr >> 8);		/* 16-bit word address device, send high 8 bits of addr */
-  TWCR = _BV(TWINT) | _BV(TWEN); /* clear interrupt to start transmission */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+  // 16-bit word address device, send high 8 bits of addr
+  TWDR = eeaddr >> 8;
+  // clear interrupt to start transmission
+  TWCR = _BV(TWINT) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
     case TW_MT_DATA_ACK:
@@ -246,13 +279,18 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
       goto begin;
 
     default:
-      goto error;		/* must send stop condition */
+      // must send stop condition
+      goto error;
     }
 #endif
 
-  TWDR = eeaddr;		/* low 8 bits of addr */
-  TWCR = _BV(TWINT) | _BV(TWEN); /* clear interrupt to start transmission */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+  // low 8 bits of addr
+  TWDR = eeaddr;
+  // clear interrupt to start transmission
+  TWCR = _BV(TWINT) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
     case TW_MT_DATA_ACK:
@@ -265,18 +303,22 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
       goto begin;
 
     default:
-      goto error;		/* must send stop condition */
+      // must send stop condition
+      goto error;
     }
 
   /*
    * Note [12]
    * Next cycle(s): master receiver mode
    */
-  TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN); /* send (rep.) start condition */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+  // send (rep.) start condition
+  TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
-    case TW_START:		/* OK, but should not happen */
+    case TW_START:              // OK, but should not happen
     case TW_REP_START:
       break;
 
@@ -287,10 +329,13 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
       goto error;
     }
 
-  /* send SLA+R */
+  // send SLA+R
   TWDR = sla | TW_READ;
-  TWCR = _BV(TWINT) | _BV(TWEN); /* clear interrupt to start transmission */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+  // clear interrupt to start transmission
+  TWCR = _BV(TWINT) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
     case TW_MR_SLA_ACK:
@@ -306,36 +351,44 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
       goto error;
     }
 
-  for (twcr = _BV(TWINT) | _BV(TWEN) | _BV(TWEA) /* Note [13] */;
-       len > 0;
-       len--)
+  // Note [13]
+  for (twcr = _BV(TWINT) | _BV(TWEN) | _BV(TWEA); len > 0; len--)
     {
       if (len == 1)
-	twcr = _BV(TWINT) | _BV(TWEN); /* send NAK this time */
-      TWCR = twcr;		/* clear int to start transmission */
-      while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
-      switch ((twst = TW_STATUS))
-	{
-	case TW_MR_DATA_NACK:
-	  len = 0;		/* force end of loop */
-	  /* FALLTHROUGH */
-	case TW_MR_DATA_ACK:
-	  *buf++ = TWDR;
-	  rv++;
-	  if(twst == TW_MR_DATA_NACK) goto quit;
-	  break;
+        // send NAK this time
+        twcr = _BV(TWINT) | _BV(TWEN);
 
-	default:
-	  goto error;
-	}
+      // clear int to start transmission
+      TWCR = twcr;
+
+      wait_for_transmission();
+
+      switch ((twst = TW_STATUS))
+        {
+        case TW_MR_DATA_NACK:
+          // force end of loop
+          len = 0;
+          // FALLTHROUGH
+
+        case TW_MR_DATA_ACK:
+          *buf++ = TWDR;
+          rv++;
+          if (twst == TW_MR_DATA_NACK)
+            goto quit;
+          break;
+
+        default:
+          goto error;
+        }
     }
-  quit:
-  /* Note [14] */
-  TWCR = _BV(TWINT) | _BV(TWSTO) | _BV(TWEN); /* send stop condition */
+quit:
+  // Note [14]
+  // send stop condition
+  TWCR = _BV(TWINT) | _BV(TWSTO) | _BV(TWEN);
 
   return rv;
 
-  error:
+error:
   rv = -1;
   goto quit;
 }
@@ -360,11 +413,12 @@ ee24xx_read_bytes(uint16_t eeaddr, int len, uint8_t *buf)
  * re-invoke it in order to write further data.
  */
 int
-ee24xx_write_page(uint16_t eeaddr, int len, const uint8_t *buf)
+ee24xx_write_page(eeaddr_t eeaddr, int len, const void *vbuf)
 {
+  const uint8_t *buf = (const uint8_t*) vbuf;
   uint8_t sla, n = 0;
   int rv = 0;
-  uint16_t endaddr;
+  eeaddr_t endaddr;
 
   if (eeaddr + len <= (eeaddr | (PAGE_SIZE - 1)))
     endaddr = eeaddr + len;
@@ -373,24 +427,28 @@ ee24xx_write_page(uint16_t eeaddr, int len, const uint8_t *buf)
   len = endaddr - eeaddr;
 
 #ifndef WORD_ADDRESS_16BIT
-  /* patch high bits of EEPROM address into SLA */
+  // patch high bits of EEPROM address into SLA
   sla = TWI_SLA_24CXX | (((eeaddr >> 8) & 0x07) << 1);
 #else
-  /* 16-bit address devices need only TWI Device Address */
+  // 16-bit address devices need only TWI Device Address
   sla = TWI_SLA_24CXX;
 #endif
 
-  restart:
+restart:
   if (n++ >= MAX_ITER)
     return -1;
-  begin:
 
-  /* Note [15] */
-  TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN); /* send start condition */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+begin:
+
+  // Note [15]
+  // send start condition */
+  TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
-    case TW_REP_START:		/* OK, but should not happen */
+    case TW_REP_START:          // OK, but should not happen
     case TW_START:
       break;
 
@@ -398,33 +456,42 @@ ee24xx_write_page(uint16_t eeaddr, int len, const uint8_t *buf)
       goto begin;
 
     default:
-      return -1;		/* error: not in start condition */
-				/* NB: do /not/ send stop condition */
+      // error: not in start condition
+      // NB: do /not/ send stop condition
+      return -1;
     }
 
-  /* send SLA+W */
+  // send SLA+W
   TWDR = sla | TW_WRITE;
-  TWCR = _BV(TWINT) | _BV(TWEN); /* clear interrupt to start transmission */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+  // clear interrupt to start transmission
+  TWCR = _BV(TWINT) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
     case TW_MT_SLA_ACK:
       break;
 
-    case TW_MT_SLA_NACK:	/* nack during select: device busy writing */
+    case TW_MT_SLA_NACK:        /* nack during select: device busy writing */
       goto restart;
 
-    case TW_MT_ARB_LOST:	/* re-arbitrate */
+    case TW_MT_ARB_LOST:        /* re-arbitrate */
       goto begin;
 
     default:
-      goto error;		/* must send stop condition */
+      goto error;               /* must send stop condition */
     }
 
 #ifdef WORD_ADDRESS_16BIT
-  TWDR = (eeaddr>>8);		/* 16 bit word address device, send high 8 bits of addr */
-  TWCR = _BV(TWINT) | _BV(TWEN); /* clear interrupt to start transmission */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+  // 16 bit word address device, send high 8 bits of addr.
+  TWDR = eeaddr >> 8;
+
+  // clear interrupt to start transmission.
+  TWCR = _BV(TWINT) | _BV(TWEN);
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
     case TW_MT_DATA_ACK:
@@ -437,13 +504,16 @@ ee24xx_write_page(uint16_t eeaddr, int len, const uint8_t *buf)
       goto begin;
 
     default:
-      goto error;		/* must send stop condition */
+      // must send stop condition
+      goto error;
     }
 #endif
 
-  TWDR = eeaddr;		/* low 8 bits of addr */
+  TWDR = eeaddr;                /* low 8 bits of addr */
   TWCR = _BV(TWINT) | _BV(TWEN); /* clear interrupt to start transmission */
-  while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+
+  wait_for_transmission();
+
   switch ((twst = TW_STATUS))
     {
     case TW_MT_DATA_ACK:
@@ -456,33 +526,38 @@ ee24xx_write_page(uint16_t eeaddr, int len, const uint8_t *buf)
       goto begin;
 
     default:
-      goto error;		/* must send stop condition */
+      goto error;               /* must send stop condition */
     }
 
   for (; len > 0; len--)
     {
       TWDR = *buf++;
-      TWCR = _BV(TWINT) | _BV(TWEN); /* start transmission */
-      while ((TWCR & _BV(TWINT)) == 0) ; /* wait for transmission */
+      // start transmission */
+      TWCR = _BV(TWINT) | _BV(TWEN);
+
+      wait_for_transmission();
+
       switch ((twst = TW_STATUS))
-	{
-	case TW_MT_DATA_NACK:
-	  goto error;		/* device write protected -- Note [16] */
+        {
+        case TW_MT_DATA_NACK:
+          // device write protected -- Note [16]
+          goto error;
 
-	case TW_MT_DATA_ACK:
-	  rv++;
-	  break;
+        case TW_MT_DATA_ACK:
+          rv++;
+          break;
 
-	default:
-	  goto error;
-	}
+        default:
+          goto error;
+        }
     }
-  quit:
-  TWCR = _BV(TWINT) | _BV(TWSTO) | _BV(TWEN); /* send stop condition */
+quit:
+  // send stop condition
+  TWCR = _BV(TWINT) | _BV(TWSTO) | _BV(TWEN);
 
   return rv;
 
-  error:
+error:
   rv = -1;
   goto quit;
 }
@@ -493,23 +568,21 @@ ee24xx_write_page(uint16_t eeaddr, int len, const uint8_t *buf)
  * have been written.
  */
 int
-ee24xx_write_bytes(uint16_t eeaddr, int len, const uint8_t *buf)
+ee24xx_write_bytes(eeaddr_t eeaddr, size_t len, const void *vbuf)
 {
-  int rv, total;
-
-  total = 0;
+  const uint8_t *buf = (const uint8_t*) vbuf;
+  int total = 0;
   do
     {
 #if DEBUG
-      printf("Calling ee24xx_write_page(%d, %d, %p)",
-	     eeaddr, len, buf);
+      printf("Calling ee24xx_write_page(%d, %d, %p)", eeaddr, len, buf);
 #endif
-      rv = ee24xx_write_page(eeaddr, len, buf);
+      int rv = ee24xx_write_page(eeaddr, len, buf);
 #if DEBUG
       printf(" => %d\n", rv);
 #endif
       if (rv == -1)
-	return -1;
+        return -1;
       eeaddr += rv;
       len -= rv;
       buf += rv;
@@ -527,50 +600,50 @@ error(void)
   exit(0);
 }
 
-FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
 int
 main(void)
 {
-  uint16_t a;
   int rv;
-  uint8_t b[16];
-  uint8_t x;
+  uint8_t buf[16];
 
   ioinit();
 
   stdout = &mystdout;
 
-  for (a = 0; a < 256;)
+  for (eeaddr_t a = 0; a < 256;)
     {
       printf("%#04x: ", a);
-      rv = ee24xx_read_bytes(a, 16, b);
+      rv = ee24xx_read_bytes(a, sizeof(buf), buf);
       if (rv <= 0)
-	error();
+        error();
       if (rv < 16)
-	printf("warning: short read %d\n", rv);
+        printf("warning: short read %d\n", rv);
       a += rv;
-      for (x = 0; x < rv; x++)
-	printf("%02x ", b[x]);
+      for (uint8_t x = 0; x < rv; x++)
+        printf("%02x ", buf[x]);
       putchar('\n');
     }
-#define EE_WRITE(addr, str) ee24xx_write_bytes(addr, sizeof(str)-1,\
-                                               (const uint8_t*) (str))
-  rv = EE_WRITE(55, "The quick brown fox jumps over the lazy dog.");
+
+#define EE_WRITE_STR(addr, str) \
+  ee24xx_write_bytes(addr, 1 + strlen(str), str)
+
+  rv = EE_WRITE_STR(55, "The quick brown fox jumps over the lazy dog.");
   if (rv < 0)
     error();
   printf("Wrote %d bytes.\n", rv);
-  for (a = 0; a < 256;)
+  for (eeaddr_t a = 0; a < 256;)
     {
       printf("%#04x: ", a);
-      rv = ee24xx_read_bytes(a, 16, b);
+      rv = ee24xx_read_bytes(a, sizeof(buf), buf);
       if (rv <= 0)
-	error();
+        error();
       if (rv < 16)
-	printf("warning: short read %d\n", rv);
+        printf("warning: short read %d\n", rv);
       a += rv;
-      for (x = 0; x < rv; x++)
-	printf("%02x ", b[x]);
+      for (uint8_t x = 0; x < rv; x++)
+        printf("%02x ", buf[x]);
       putchar('\n');
     }
 
