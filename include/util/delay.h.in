@@ -79,7 +79,7 @@
 
     The functions available allow the specification of microsecond, and
     millisecond delays directly, using the application-supplied macro
-    F_CPU as the CPU clock frequency (in Hertz).
+    F_CPU as the CPU clock frequency in Hertz.
 */
 
 
@@ -90,7 +90,7 @@
     \def F_CPU
     \brief CPU frequency in Hz
 
-    The macro F_CPU specifies the CPU frequency to be considered by
+    The macro F_CPU specifies the CPU frequency in Hertz to be considered by
     the delay macros.  This macro is normally supplied by the
     environment (e.g. from within a project header, or the project's
     Makefile).  The value 1 MHz here is only provided as a "vanilla"
@@ -111,10 +111,10 @@
 /**
    \ingroup util_delay
 
-   Perform a delay of \c __ms milliseconds, using _delay_loop_2().
+   Perform a delay of \c __ms milliseconds.
 
    The macro #F_CPU is supposed to be defined to a
-   constant defining the CPU clock frequency (in Hertz).
+   constant defining the CPU clock frequency in Hertz.
 
 -  If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
 \if GIT_BRANCH_IS_ONLINEDOCS
@@ -122,10 +122,12 @@
 \else
    \ref faq_toolchain_support "support",
 \endif
-   the maximal possible delay is 4294967.04 ms&nbsp;/&nbsp;F_CPU in MHz.
+   the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds
+   where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz.
    Values greater than that are saturated to this value.
 
--  Otherwise, the maximal possible delay is 262.14 ms / F_CPU in MHz.
+-  Otherwise, _delay_loop_2() is used as a fallback, and the maximal
+   possible delay is 262.14 / f<sub>CPU</sub> milliseconds.
 
    When the user request delay which exceed the maximum possible one,
    _delay_ms() provides a decreased resolution functionality. In this
@@ -201,10 +203,10 @@ _delay_ms(double __ms)
 /**
    \ingroup util_delay
 
-   Perform a delay of \c __us microseconds, using _delay_loop_1().
+   Perform a delay of \c __us microseconds.
 
    The macro #F_CPU is supposed to be defined to a
-   constant defining the CPU clock frequency (in Hertz).
+   constant defining the CPU clock frequency in Hertz.
 
 -  If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
 \if GIT_BRANCH_IS_ONLINEDOCS
@@ -212,10 +214,12 @@ _delay_ms(double __ms)
 \else
    \ref faq_toolchain_support "support",
 \endif
-   maximal possible delay is 4294967040 &mu;s&nbsp;/&nbsp;F_CPU in MHz.
+   maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds
+   where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz.
    Values greater than that are saturated to this value.
 
--  Otherwise, the maximal possible delay is 768 &mu;s / F_CPU in MHz.
+-  Otherwise, _delay_loop_1() is used as a fallback, and the maximal
+   possible delay is 768 / f<sub>CPU</sub> microseconds.
 
    If the user requests a delay greater than the maximal possible one,
    _delay_us() will automatically call _delay_ms() instead.  The user
