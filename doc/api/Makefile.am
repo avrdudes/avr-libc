@@ -162,6 +162,9 @@ clean-local:
 doxygen.config:	$(top_builddir)/include/util/delay.h \
 		main_page.dox faq.dox $(MATH2DOX_H) $(MATH2DOX_GEN_DOX)
 
+$(top_builddir)/include/util/delay.h: $(top_srcdir)/include/util/delay.h.in
+	cd $(top_builddir)/include/util && $(MAKE) delay.h
+
 # Some Doxygen styles / environments render very poorly.
 # Tweak that, e.g. by resorting to the original environment.
 TEX_FIXES = -e 's:begin{DoxyDescription}:begin{DoxyDescription}[labelwidth=\\linewidth, labelsep=0pt, noitemsep]:'
