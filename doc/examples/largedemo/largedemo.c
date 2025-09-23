@@ -388,9 +388,12 @@ main(void)
     printstr_p("\nOoops, the watchdog bit me!");
 
   printstr_p("\nHello, this is the avr-gcc/libc demo running on an ");
-  /* The MCU_NAME is defined in the Makefile.  */
+  /* The MCU_NAME is a macro defined in the Makefile as:
+     MCU_TARGET = atmega328p
+     DEFS       = -DMCU_NAME='"$(MCU_TARGET)"'
+  */
   printstr_p(MCU_NAME);
-  uart_putchar(' ', NULL);
+  printstr_p (" ");
 
   for (;;)
     {
