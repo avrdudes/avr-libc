@@ -126,7 +126,7 @@ clocked by an external 16 MHz crystal though.  Therefore, during
 device initialization, a 1:16 prescaler is configured at startup so
 the remaining code could remain the same.
 Note that
-when using the <tt>&lt;util/delay.h&gt;</tt> functions, \c F_CPU needs
+when using the <tt>&lt;util/delay.h&gt;</tt> functions, \c #F_CPU needs
 to be defined before including that file.
 
 The remaining macros have their own comments in the source code.  The
@@ -303,9 +303,10 @@ Finally, the UART Rx interrupt will dispatch on the last character
 received from the UART.
 
 All the string literals that are used as informational messages within
-\c main() are placed in \ref avr_pgmspace "program memory" so no SRAM
-needs to be allocated for them.  This is done by using the PSTR macro,
-and passing the string to \c printstr_p().
+\c main() are placed in \ref avr_pgmspace "program memory" so
+\ref faq_flashstrings "no SRAM needs to be allocated" for them.
+This is done by using the #PSTR macro for the string argument
+of \c printstr_p().
 
 \section largedemo_src The source code
 
