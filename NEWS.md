@@ -219,8 +219,6 @@
 - Distribution is missing `dox_latex_header.tex`, `filter-dox.sh`,
   `avr-libc-logo-large.png` from `doc/api/` ([#1023][1023]).
 
-- Added a missing memory barrier in `util/atomic.h` ([#1049][1049]).
-
 - Fixed a typo in the parameter name of `nanf` ([#1033][1033]).
 
 - `INFINITY` from `math.h` has been turned from `double` to
@@ -319,4 +317,3 @@
 [1044]: https://github.com/avrdudes/avr-libc/issues/1044
 [1045]: https://github.com/avrdudes/avr-libc/issues/1045
 [1048]: https://github.com/avrdudes/avr-libc/issues/1048
-[1049]: https://github.com/avrdudes/avr-libc/issues/1049
