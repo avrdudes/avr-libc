@@ -129,16 +129,16 @@ See \ref harvard_arch "explanation" for offset 0x800000.
 See the chapter about \ref gcc_minusW "using gcc" for the \c -Wl
 options.
 
-\note The ld (linker) user manual states that using <tt>-Tdata=&lt;x&gt;</tt>
-is equivalent to using <tt>\--section-start,.data=&lt;x&gt;</tt>.
-However, you have to use \c \--section-start
-as above because the GCC device-specs also sets the -Tdata option for
-all MCU types where the SRAM doesn't start at the core specific default,
-and when the user did not specify \c -Tdata. Thus, the linker
-is being faced with two -Tdata options. Starting with Binutils 2.16, the linker
-changed the preference, and picks the "wrong" option in this situation.
-Symbols like \c __DATA_REGION_ORIGIN__ and \c __DATA_REGION_LENGTH__
-should also be adjusted, see \ref sec_symbols.
+\note The linker manual states that <tt>-Tdata=&lt;x&gt;</tt>
+is equivalent to <tt>\--section-start,.data=&lt;x&gt;</tt>.
+However, you have to use the latter when the compiler is affected by
+<a href="https://gcc.gnu.org/PR30417">PR30417</a>. That PR is fixed in
+GCC v4.9.4, v5.5 and v6.2+.
+
+\note
+Symbols \c __DATA_REGION_ORIGIN__ and \c __DATA_REGION_LENGTH__
+should also be adjusted, see \ref sec_symbols.  For the given example,
+the symbol values would be 0x801100 and 0xef00, respectively.
 
 \image html malloc-x1.svg "Internal RAM: stack only, external RAM: variables and heap"
 \image latex malloc-x1.eps "Internal RAM: stack only, external RAM: variables and heap" width=12cm
