@@ -58,20 +58,13 @@ AC_REVISION($Revision$)
 AC_CONFIG_SRCDIR([doc/examples/demo/demo.c])
 AC_CONFIG_HEADER([config.h])
 
-dnl substitute M4 macros into shell variables
-AVR_LIBC_MAJOR=avr_libc_major
-AVR_LIBC_MINOR=avr_libc_minor
-AVR_LIBC_REVISION=avr_libc_revision
-AVR_LIBC_RELDATE=avr_libc_reldate
-AVR_LIBC_VERSION=avr_libc_version
-AVR_LIBC_VERSION_NUMERIC=avr_libc_version_numeric
-dnl ...and trigger Makefile.in substitutions
-AC_SUBST(AVR_LIBC_MAJOR)
-AC_SUBST(AVR_LIBC_MINOR)
-AC_SUBST(AVR_LIBC_REVISION)
-AC_SUBST(AVR_LIBC_RELDATE)
-AC_SUBST(AVR_LIBC_VERSION)
-AC_SUBST(AVR_LIBC_VERSION_NUMERIC)
+dnl Makefile.in substitutions for M4 macros.
+AC_SUBST(AVR_LIBC_MAJOR, [avr_libc_major])
+AC_SUBST(AVR_LIBC_MINOR, [avr_libc_minor])
+AC_SUBST(AVR_LIBC_REVISION, [avr_libc_revision])
+AC_SUBST(AVR_LIBC_RELDATE, [avr_libc_reldate])
+AC_SUBST(AVR_LIBC_VERSION, [avr_libc_version])
+AC_SUBST(AVR_LIBC_VERSION_NUMERIC, [avr_libc_version_numeric])
 
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
