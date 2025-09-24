@@ -22,6 +22,8 @@
 
 #include "hd44780.h"
 
+#define NOP __builtin_avr_nop()
+
 #define GLUE(a, b)     a##b
 
 /* single-bit macros, used for control bits */
@@ -33,12 +35,15 @@
 #define GET(/* PIN, */ x) GET_(x)
 
 /* nibble macros, used for data path */
-#define ASSIGN_(what, p, m, v) GLUE(what, p) = (GLUE(what, p) & \
-                                                ~((1 << (m)) | (1 << ((m) + 1)) | \
-                                                  (1 << ((m) + 2)) | (1 << ((m) + 3)))) | \
-                                                ((v) << (m))
-#define READ_(what, p, m) (GLUE(what, p) & ((1 << (m)) | (1 << ((m) + 1)) | \
-                                            (1 << ((m) + 2)) | (1 << ((m) + 3)))) >> (m)
+#define ASSIGN_(what, p, m, v)                                          \
+  GLUE(what, p) = ((GLUE(what, p) & ~((1 << (m)) | (1 << ((m) + 1))     \
+                                      | (1 << ((m) + 2)) | (1 << ((m) + 3)))) \
+                   | ((v) << (m)))
+
+#define READ_(what, p, m)                                               \
+  ((GLUE(what, p) & ((1 << (m)) | (1 << ((m) + 1))                      \
+                     | (1 << ((m) + 2)) | (1 << ((m) + 3)))) >> (m))
+
 #define ASSIGN(what, x, v) ASSIGN_(what, x, v)
 #define READ(what, x) READ_(what, x)
 
@@ -49,14 +54,9 @@
  * constraints.  If readback is set to true, read the HD44780 data
  * pins right before the falling edge of E, and return that value.
  */
-static inline uint8_t
-hd44780_pulse_e(bool readback) __attribute__((always_inline));
-
-static inline uint8_t
+static inline __attribute__((always_inline)) uint8_t
 hd44780_pulse_e(bool readback)
 {
-  uint8_t x;
-
   SET(PORT, HD44780_E);
   /*
    * Guarantee at least 500 ns of pulse width.  For high CPU
@@ -74,19 +74,22 @@ hd44780_pulse_e(bool readback)
    * generated towards the end of a CPU clock cycle.
    */
   if (readback)
-    __asm__ volatile("nop");
-#  if F_CPU > 1000000UL
-  __asm__ volatile("nop");
-#    if F_CPU > 2000000UL
-  __asm__ volatile("nop");
-  __asm__ volatile("nop");
-#    endif /* F_CPU > 2000000UL */
-#  endif /* F_CPU > 1000000UL */
+    NOP;
+
+  if (F_CPU > 1000000UL)
+    NOP;
+
+  if (F_CPU > 2000000UL)
+    {
+      NOP;
+      NOP;
+    }
 #endif
-  if (readback)
-    x = READ(PIN, HD44780_D4);
-  else
-    x = 0;
+
+  uint8_t x = readback
+    ? READ(PIN, HD44780_D4)
+    : 0;
+
   CLR(PORT, HD44780_E);
 
   return x;
@@ -104,7 +107,7 @@ hd44780_outnibble(uint8_t n, uint8_t rs)
   else
     CLR(PORT, HD44780_RS);
   ASSIGN(PORT, HD44780_D4, n);
-  (void)hd44780_pulse_e(false);
+  (void) hd44780_pulse_e(false);
 }
 
 /*
@@ -124,15 +127,13 @@ hd44780_outbyte(uint8_t b, uint8_t rs)
 static uint8_t
 hd44780_innibble(uint8_t rs)
 {
-  uint8_t x;
-
   SET(PORT, HD44780_RW);
   ASSIGN(DDR, HD44780_D4, 0x00);
   if (rs)
     SET(PORT, HD44780_RS);
   else
     CLR(PORT, HD44780_RS);
-  x = hd44780_pulse_e(true);
+  uint8_t x = hd44780_pulse_e(true);
   ASSIGN(DDR, HD44780_D4, 0x0F);
   CLR(PORT, HD44780_RW);
 
@@ -145,9 +146,7 @@ hd44780_innibble(uint8_t rs)
 uint8_t
 hd44780_inbyte(uint8_t rs)
 {
-  uint8_t x;
-
-  x = hd44780_innibble(rs) << 4;
+  uint8_t x = hd44780_innibble(rs) << 4;
   x |= hd44780_innibble(rs);
 
   return x;
