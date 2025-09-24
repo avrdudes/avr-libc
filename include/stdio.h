@@ -630,7 +630,7 @@ extern int	fclose(FILE *__stream);
 
    \par Notes:
    - For floating-point conversions, if you link default or minimized
-     version of vfprintf(), the symbol \c ? will be output and double
+     version of vfprintf(), the symbol <tt>?</tt> will be output and double
      argument will be skipped. So you output below will not be crashed.
      For default version the width field and the "pad to left" ( symbol
      minus ) option will work in this case.

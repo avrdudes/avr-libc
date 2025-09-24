@@ -203,7 +203,7 @@ users.
 <dd>
   Pass the listed options to the C preprocessor, the assembler or the linker,
   respectively. Several options can be passed at once when they are
-  separated by a \c , (comma).
+  separated by a <tt>,</tt> (comma).
 </dd>
 
 <dt>\anchor opt_g <tt>-g</tt></dt>

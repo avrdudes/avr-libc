@@ -269,11 +269,11 @@ char* uhrtoa (unsigned short fract x, char *buf, unsigned char mode);
     &bull;&nbsp;FXTOA_NTZ has no effect with FXTOA_ALL.<br>
     &bull;&nbsp;FXTOA_NTZ has no effect on the required buffer size.
   <dt>#FXTOA_DOT
-  <dd>The decimal point is a dot (\c .). This is the default, i.e. FXTOA_DOT
-      can be omitted.
+  <dd>The decimal point is a dot (<tt>.</tt>).
+      This is the default, i.e. FXTOA_DOT can be omitted.
 
   <dt>#FXTOA_COMMA
-  <dd>The decimal point is a comma (\c ,).
+  <dd>The decimal point is a comma (<tt>,</tt>).
 </dl>
 
 <table>

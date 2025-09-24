@@ -679,15 +679,15 @@ static int skip_spaces (FILE *stream)
      for all the characters (no terminating \c NUL is added).  The usual
      skip of leading white space is suppressed.  To skip white space
      first, use an explicit space in the format.
-   - \c [
+   - <tt>[</tt>
      Matches a nonempty sequence of characters from the specified set
      of accepted characters; the next pointer must be a pointer to \c
      char, and there must be enough room for all the characters in the
      string, plus a terminating \c NUL character.  The usual skip of
      leading white space is suppressed.  The string is to be made up
      of characters in (or not in) a particular set; the set is defined
-     by the characters between the open bracket \c [ character and a
-     close bracket \c ] character.  The set excludes those characters
+     by the characters between the open bracket <tt>[</tt> character and a
+     close bracket <tt>]</tt> character.  The set excludes those characters
      if the first character after the open bracket is a circumflex
      \c ^.  To include a close bracket in the set, make it the first
      character after the open bracket or the circumflex; any other

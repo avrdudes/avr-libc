@@ -124,9 +124,9 @@ forms:
 
   \c output-operands, \c input-operands and \c clobbers are comma-separated
   lists of operands resp. clobber specifications.  Any of them may be empty,
-  for example when the asm has no outputs.  At least one \c : (colon) must be
-  present, otherwise it will be a simple asm without operands and without
-  \c \% replacements.
+  for example when the asm has no outputs.  At least one <tt>:</tt> (colon)
+  must be present, otherwise it will be a simple asm without operands and
+  without \c \% replacements.
 </dd>
 
 <dt>__asm goto (code-string : : input-operands : clobbers : labels);</dt>
