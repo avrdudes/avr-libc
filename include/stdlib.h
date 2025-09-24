@@ -374,17 +374,20 @@ extern void *malloc(size_t __size) __ATTR_MALLOC__;
 extern void free(void *__ptr);
 
 /**
-   \c malloc() \ref malloc_tunables "tunable".
+   \c malloc() \ref malloc_tunables "tunable".  Default value is 32 bytes.
 */
 extern size_t __malloc_margin;
 
 /**
    \c malloc() \ref malloc_tunables "tunable".
+   Default value is \ref __heap_start "__heap_start".
 */
 extern char *__malloc_heap_start;
 
 /**
    \c malloc() \ref malloc_tunables "tunable".
+   Default value is __heap_end, which is weakly defined to 0 in
+   the startup code.
 */
 extern char *__malloc_heap_end;
 

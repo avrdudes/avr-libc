@@ -1003,13 +1003,18 @@ The application can read them to infer properties of the binary.
   output to the \c text region, which is the case for emulations
   \c avrxmega2_flmap and \c avrxmega4_flmap.
 </dd>
-<dt><tt>__heap_start</tt></dt>
+<dt>\anchor __heap_start<tt>__heap_start</tt></dt>
 <dd>
   One past the last object located in static storage.  Immediately
   follows the <tt>\ref sec_dot_noinit ".noinit"</tt> section
   (which immediately follows <tt>\ref sec_dot_bss ".bss"</tt>,
   which immediately follows <tt>\ref sec_dot_data ".data"</tt>).
-  Used by \ref malloc "malloc()" and friends.
+  Used by \ref malloc_tunables "malloc() tunables" to determine the
+  start of the heap.
+</dd>
+<dt><tt>_etext</tt></dt>
+<dd>
+  One byte past the last byte in the \c \.text output section.
 </dd>
 </dl>
 

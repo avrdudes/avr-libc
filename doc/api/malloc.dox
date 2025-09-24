@@ -103,7 +103,7 @@ functions might also use dynamic memory (notably those from the
 \ref avr_stdio), so make sure the changes will be done early enough in the
 startup sequence.
 
-The variables \c __malloc_heap_start and \c __malloc_heap_end can be
+The variables \c #__malloc_heap_start and \c #__malloc_heap_end can be
 used to restrict the malloc() function to a certain memory region.
 These variables are statically initialized to point to \c __heap_start
 and \c __heap_end, respectively, where \c __heap_start is filled in by
@@ -162,12 +162,12 @@ If \c __malloc_heap_end is 0, the allocator attempts to detect the
 bottom of stack in order to prevent a stack-heap collision when
 extending the actual size of the heap to gain more space for dynamic
 memory.  It will not try to go beyond the current stack limit,
-decreased by \c __malloc_margin bytes.  Thus, all possible stack
+decreased by \c #__malloc_margin bytes.  Thus, all possible stack
 frames of interrupt routines that could interrupt the current
 function, plus all further nested function calls must not require more
 stack space, or they will risk colliding with the data segment.
 
-The default value of \c __malloc_margin is set to 32.
+The default value of \c #__malloc_margin is set to 32.
 
 \section malloc_impl Implementation details
 
