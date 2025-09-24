@@ -6,7 +6,7 @@ CC= avr-gcc
 #MCU=atmega323
 MCU=atmega128
 
-CFLAGS = -mmcu=$(MCU) -std=c99 -Os -Wall
+CFLAGS = -mmcu=$(MCU) -std=c99 -Os -Wall -Wextra
 
 .SUFFIXES: .s .bin .elf .hex .srec
 

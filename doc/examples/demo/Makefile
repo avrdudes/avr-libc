@@ -40,7 +40,7 @@ endif
 
 CC      = avr-gcc
 
-CFLAGS  = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
+CFLAGS  = -g -Wall -Wextra $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
 LDFLAGS = -Wl,-Map,$(PRG).map
 
 OBJCOPY = avr-objcopy

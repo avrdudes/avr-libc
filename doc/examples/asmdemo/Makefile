@@ -31,7 +31,7 @@ CINCS =
 
 
 CDEBUG = -g
-CWARN = -Wall -Wstrict-prototypes
+CWARN = -Wall -Wextra -Wstrict-prototypes
 CTUNING = -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 #CEXTRA = -Wa,-adhlns=$(<:.c=.lst)
 CFLAGS = $(CDEBUG) $(CDEFS) $(CINCS) -O$(OPT) $(CWARN) $(CSTANDARD) $(CEXTRA)

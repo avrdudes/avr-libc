@@ -160,7 +160,9 @@ void
 hd44780_wait_ready(bool longwait)
 {
 #if USE_BUSY_BIT
-  while (hd44780_incmd() & HD44780_BUSYFLAG) ;
+  (void) longwait;
+  while (hd44780_incmd() & HD44780_BUSYFLAG)
+    {}
 #else
   if (longwait)
     _delay_ms(1.52);
