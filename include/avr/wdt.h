@@ -141,7 +141,7 @@
         uint8_t __temp;                                                 \
         __asm__ __volatile__ (                                          \
             "wdr"                                   "\n\t"              \
-            "out %[ccp_reg], %[ioreg_cen_mask]"     "\n\t"              \
+            "out %i[ccp_reg], %[ioreg_cen_mask]"    "\n\t"              \
             "lds %[tmp], %[wdt_reg]"                "\n\t"              \
             "sbr %[tmp], %[wdt_enable_timeout]"     "\n\t"              \
             "sts %[wdt_reg], %[tmp]"                "\n\t"              \
@@ -149,11 +149,11 @@
             "sbrc %[tmp], %[wdt_syncbusy_bit]"      "\n\t"              \
             "rjmp 1b"                                                   \
             : [tmp]                 "=d" (__temp)                       \
-            : [ccp_reg]             "I"  (_SFR_IO_ADDR(CCP)),           \
+            : [ccp_reg]             "n"  (& CCP),                       \
               [ioreg_cen_mask]      "r"  ((uint8_t)CCP_IOREG_gc),       \
-              [wdt_reg]             "n"  (_SFR_MEM_ADDR(WDT_CTRLA)),    \
+              [wdt_reg]             "n"  (& WDT_CTRLA),                 \
               [wdt_enable_timeout]  "M"  (timeout),                     \
-              [wdt_status_reg]      "n"  (_SFR_MEM_ADDR(WDT_STATUS)),   \
+              [wdt_status_reg]      "n"  (& WDT_STATUS),                \
               [wdt_syncbusy_bit]    "I"  (WDT_SYNCBUSY_bm)              \
             : "memory");                                                \
     } while(0)
@@ -163,15 +163,15 @@ void wdt_disable (void)
 {
     uint8_t __temp;
     __asm__ __volatile__ (
-        "wdr"                               "\n\t"
-        "out %[ccp_reg], %[ioreg_cen_mask]" "\n\t"
-        "lds %[tmp], %[wdt_reg]"            "\n\t"
-        "cbr %[tmp], %[timeout_mask]"       "\n\t"
+        "wdr"                                "\n\t"
+        "out %i[ccp_reg], %[ioreg_cen_mask]" "\n\t"
+        "lds %[tmp], %[wdt_reg]"             "\n\t"
+        "cbr %[tmp], %[timeout_mask]"        "\n\t"
         "sts %[wdt_reg], %[tmp]"
         : [tmp]            "=d" (__temp)
-        : [ccp_reg]        "I" (_SFR_IO_ADDR(CCP)),
+        : [ccp_reg]        "n" (& CCP),
           [ioreg_cen_mask] "r" ((uint8_t)CCP_IOREG_gc),
-          [wdt_reg]        "n" (_SFR_MEM_ADDR(WDT_CTRLA)),
+          [wdt_reg]        "n" (& WDT_CTRLA),
           [timeout_mask]   "I" (WDT_PERIOD_gm)
         : "memory");
 }
@@ -193,23 +193,23 @@ void wdt_disable (void)
     do {                                                                \
         uint8_t __temp;                                                 \
         __asm__ __volatile__ (                                          \
-            "in __tmp_reg__, %[rampd]"              "\n\t"              \
-            "out %[rampd], __zero_reg__"            "\n\t"              \
-            "out %[ccp_reg], %[ioreg_cen_mask]"     "\n\t"              \
+            "in __tmp_reg__, %i[rampd]"             "\n\t"              \
+            "out %i[rampd], __zero_reg__"           "\n\t"              \
+            "out %i[ccp_reg], %[ioreg_cen_mask]"    "\n\t"              \
             "sts %[wdt_reg], %[wdt_enable_timeout]" "\n\t"              \
             "1:lds %[tmp], %[wdt_status_reg]"       "\n\t"              \
             "sbrc %[tmp], %[wdt_syncbusy_bit]"      "\n\t"              \
             "rjmp 1b"                               "\n\t"              \
-            "out %[rampd], __tmp_reg__"                                 \
+            "out %i[rampd], __tmp_reg__"                                \
             : [tmp]                "=r" (__temp)                        \
-            : [rampd]              "I" (_SFR_IO_ADDR(RAMPD)),           \
-              [ccp_reg]            "I" (_SFR_IO_ADDR(CCP)),             \
+            : [rampd]              "n" (& RAMPD),                       \
+              [ccp_reg]            "n" (& CCP),                         \
               [ioreg_cen_mask]     "r" ((uint8_t)CCP_IOREG_gc),         \
-              [wdt_reg]            "n" (_SFR_MEM_ADDR(WDT_CTRL)),       \
+              [wdt_reg]            "n" (& WDT_CTRL),                    \
               [wdt_enable_timeout] "r" ((uint8_t)(WDT_CEN_bm            \
                                                   | WDT_ENABLE_bm       \
                                                   | ((timeout + 1) << 2))), \
-              [wdt_status_reg]     "n" (_SFR_MEM_ADDR(WDT_STATUS)),     \
+              [wdt_status_reg]     "n" (& WDT_STATUS),                  \
               [wdt_syncbusy_bit]   "I" (WDT_SYNCBUSY_bm)                \
             : "memory");                                                \
     } while(0)
@@ -218,16 +218,16 @@ static __ATTR_ALWAYS_INLINE__
 void wdt_disable (void)
 {
     __asm__ __volatile__ (
-        "in __tmp_reg__, %[rampd]"          "\n\t"
-        "out %[rampd], __zero_reg__"        "\n\t"
-        "out %[ccp_reg], %[ioreg_cen_mask]" "\n\t"
-        "sts %[wdt_reg], %[disable_mask]"   "\n\t"
-        "out %[rampd], __tmp_reg__"
+        "in __tmp_reg__, %i[rampd]"          "\n\t"
+        "out %i[rampd], __zero_reg__"        "\n\t"
+        "out %i[ccp_reg], %[ioreg_cen_mask]" "\n\t"
+        "sts %[wdt_reg], %[disable_mask]"    "\n\t"
+        "out %i[rampd], __tmp_reg__"
         : /* no outputs */
-        : [rampd]             "I" (_SFR_IO_ADDR(RAMPD)),
-          [ccp_reg]           "I" (_SFR_IO_ADDR(CCP)),
+        : [rampd]             "n" (& RAMPD),
+          [ccp_reg]           "n" (& CCP),
           [ioreg_cen_mask]    "r" ((uint8_t)CCP_IOREG_gc),
-          [wdt_reg]           "n" (_SFR_MEM_ADDR(WDT_CTRL)),
+          [wdt_reg]           "n" (& WDT_CTRL),
           [disable_mask]      "r" ((uint8_t)((~WDT_ENABLE_bm) | WDT_CEN_bm))
         : "memory");
 }
@@ -238,16 +238,16 @@ void wdt_disable (void)
 
 #define wdt_enable(value)                                               \
     __asm__ __volatile__ (                                              \
-        "in __tmp_reg__,__SREG__"        "\n\t"                         \
-        "cli"                            "\n\t"                         \
-        "wdr"                            "\n\t"                         \
-        "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"                         \
-        "out %[WDTREG],%[WDVALUE]"       "\n\t"                         \
+        "in __tmp_reg__,__SREG__"         "\n\t"                        \
+        "cli"                             "\n\t"                        \
+        "wdr"                             "\n\t"                        \
+        "out %i[CCPADDRESS],%[SIGNATURE]" "\n\t"                        \
+        "out %i[WDTREG],%[WDVALUE]"       "\n\t"                        \
         "out __SREG__,__tmp_reg__"                                      \
         : /* no outputs */                                              \
-        : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)),                         \
+        : [CCPADDRESS] "n" (& CCP),                                     \
           [SIGNATURE] "r" ((uint8_t)0xD8),                              \
-          [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),                 \
+          [WDTREG] "n" (& _WD_CONTROL_REG),                             \
           [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00) \
                                    | _BV(WDE) | (value & 0x07) ))       \
         : "memory")
@@ -257,18 +257,18 @@ void wdt_disable (void)
 {
     uint8_t __temp_wd;
     __asm__ __volatile__ (
-        "in __tmp_reg__,__SREG__"        "\n\t"
-        "cli"                            "\n\t"
-        "wdr"                            "\n\t"
-        "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-        "in  %[TEMP_WD],%[WDTREG]"       "\n\t"
-        "cbr %[TEMP_WD],%[WDVALUE]"      "\n\t"
-        "out %[WDTREG],%[TEMP_WD]"       "\n\t"
+        "in __tmp_reg__,__SREG__"         "\n\t"
+        "cli"                             "\n\t"
+        "wdr"                             "\n\t"
+        "out %i[CCPADDRESS],%[SIGNATURE]" "\n\t"
+        "in  %[TEMP_WD],%i[WDTREG]"       "\n\t"
+        "cbr %[TEMP_WD],%[WDVALUE]"       "\n\t"
+        "out %i[WDTREG],%[TEMP_WD]"       "\n\t"
         "out __SREG__,__tmp_reg__"
         : [TEMP_WD] "=d" (__temp_wd)
-        : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)),
+        : [CCPADDRESS] "n" (& CCP),
           [SIGNATURE] "r" ((uint8_t)0xD8),
-          [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+          [WDTREG] "n" (& _WD_CONTROL_REG),
           [WDVALUE] "n" (1 << WDE)
         : "memory");
 }
@@ -288,9 +288,9 @@ void wdt_enable (const uint8_t value)
             "sts %[WDTREG],%[WDVALUE]"       "\n\t"
             "out __SREG__,__tmp_reg__"
             : /* no outputs */
-            : [CCPADDRESS] "n" (_SFR_MEM_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00)
                                        | _BV(WDE) | (value & 0x07) ))
             : "memory");
@@ -298,16 +298,16 @@ void wdt_enable (const uint8_t value)
     else if (!_SFR_IO_REG_P (CCP) && _SFR_IO_REG_P (_WD_CONTROL_REG))
     {
         __asm__ __volatile__ (
-            "in __tmp_reg__,__SREG__" "\n\t"
-            "cli" "\n\t"
-            "wdr" "\n\t"
+            "in __tmp_reg__,__SREG__"        "\n\t"
+            "cli"                            "\n\t"
+            "wdr"                            "\n\t"
             "sts %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-            "out %[WDTREG],%[WDVALUE]" "\n\t"
+            "out %i[WDTREG],%[WDVALUE]"      "\n\t"
             "out __SREG__,__tmp_reg__"
             : /* no outputs */
-            : [CCPADDRESS] "n" (_SFR_MEM_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00)
                                        | _BV(WDE) | (value & 0x07) ))
             : "memory");
@@ -315,16 +315,16 @@ void wdt_enable (const uint8_t value)
     else if (_SFR_IO_REG_P (CCP) && !_SFR_IO_REG_P (_WD_CONTROL_REG))
     {
         __asm__ __volatile__ (
-            "in __tmp_reg__,__SREG__"        "\n\t"
-            "cli"                            "\n\t"
-            "wdr"                            "\n\t"
-            "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-            "sts %[WDTREG],%[WDVALUE]"       "\n\t"
+            "in __tmp_reg__,__SREG__"         "\n\t"
+            "cli"                             "\n\t"
+            "wdr"                             "\n\t"
+            "out %i[CCPADDRESS],%[SIGNATURE]" "\n\t"
+            "sts %[WDTREG],%[WDVALUE]"        "\n\t"
             "out __SREG__,__tmp_reg__"
             : /* no outputs */
-            : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00)
                                        | _BV(WDE) | (value & 0x07) ))
             : "memory");
@@ -332,16 +332,16 @@ void wdt_enable (const uint8_t value)
     else
     {
         __asm__ __volatile__ (
-            "in __tmp_reg__,__SREG__"        "\n\t"
-            "cli"                            "\n\t"
-            "wdr"                            "\n\t"
-            "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-            "out %[WDTREG],%[WDVALUE]"       "\n\t"
+            "in __tmp_reg__,__SREG__"         "\n\t"
+            "cli"                             "\n\t"
+            "wdr"                             "\n\t"
+            "out %i[CCPADDRESS],%[SIGNATURE]" "\n\t"
+            "out %i[WDTREG],%[WDVALUE]"       "\n\t"
             "out __SREG__,__tmp_reg__"
             : /* no outputs */
-            : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00)
                                        | _BV(WDE) | (value & 0x07) ))
             : "memory");
@@ -355,18 +355,18 @@ void wdt_disable (void)
     {
         uint8_t __temp_wd;
         __asm__ __volatile__ (
-            "in __tmp_reg__,__SREG__" "\n\t"
-            "cli" "\n\t"
-            "wdr" "\n\t"
+            "in __tmp_reg__,__SREG__"        "\n\t"
+            "cli"                            "\n\t"
+            "wdr"                            "\n\t"
             "sts %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-            "lds %[TEMP_WD],%[WDTREG]" "\n\t"
-            "cbr %[TEMP_WD],%[WDVALUE]" "\n\t"
-            "sts %[WDTREG],%[TEMP_WD]" "\n\t"
+            "lds %[TEMP_WD],%[WDTREG]"       "\n\t"
+            "cbr %[TEMP_WD],%[WDVALUE]"      "\n\t"
+            "sts %[WDTREG],%[TEMP_WD]"       "\n\t"
             "out __SREG__,__tmp_reg__"
             : [TEMP_WD] "=d" (__temp_wd)
-            : [CCPADDRESS] "n" (_SFR_MEM_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "n" (1 << WDE)
             : "memory");
     }
@@ -378,14 +378,14 @@ void wdt_disable (void)
             "cli"                            "\n\t"
             "wdr"                            "\n\t"
             "sts %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-            "in %[TEMP_WD],%[WDTREG]"        "\n\t"
+            "in %[TEMP_WD],%i[WDTREG]"       "\n\t"
             "cbr %[TEMP_WD],%[WDVALUE]"      "\n\t"
-            "out %[WDTREG],%[TEMP_WD]"       "\n\t"
+            "out %i[WDTREG],%[TEMP_WD]"      "\n\t"
             "out __SREG__,__tmp_reg__"
             : [TEMP_WD] "=d" (__temp_wd)
-            : [CCPADDRESS] "n" (_SFR_MEM_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "n" (1 << WDE)
             : "memory");
     }
@@ -393,38 +393,37 @@ void wdt_disable (void)
     {
         uint8_t __temp_wd;
         __asm__ __volatile__ (
-            "in __tmp_reg__,__SREG__" "\n\t"
-            "cli" "\n\t"
-            "wdr" "\n\t"
-            "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-            "lds %[TEMP_WD],%[WDTREG]" "\n\t"
-            "cbr %[TEMP_WD],%[WDVALUE]" "\n\t"
-            "sts %[WDTREG],%[TEMP_WD]" "\n\t"
+            "in __tmp_reg__,__SREG__"         "\n\t"
+            "cli"                             "\n\t"
+            "wdr"                             "\n\t"
+            "out %i[CCPADDRESS],%[SIGNATURE]" "\n\t"
+            "lds %[TEMP_WD],%[WDTREG]"        "\n\t"
+            "cbr %[TEMP_WD],%[WDVALUE]"       "\n\t"
+            "sts %[WDTREG],%[TEMP_WD]"        "\n\t"
             "out __SREG__,__tmp_reg__"
             : [TEMP_WD] "=d" (__temp_wd)
-            : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "n" (1 << WDE)
-            : "r0"
-            );
+            : "memory");
     }
     else
     {
         uint8_t __temp_wd;
         __asm__ __volatile__ (
-            "in __tmp_reg__,__SREG__" "\n\t"
-            "cli" "\n\t"
-            "wdr" "\n\t"
-            "out %[CCPADDRESS],%[SIGNATURE]" "\n\t"
-            "in %[TEMP_WD],%[WDTREG]" "\n\t"
-            "cbr %[TEMP_WD],%[WDVALUE]" "\n\t"
-            "out %[WDTREG],%[TEMP_WD]" "\n\t"
+            "in __tmp_reg__,__SREG__"         "\n\t"
+            "cli"                             "\n\t"
+            "wdr"                             "\n\t"
+            "out %i[CCPADDRESS],%[SIGNATURE]" "\n\t"
+            "in %[TEMP_WD],%i[WDTREG]"        "\n\t"
+            "cbr %[TEMP_WD],%[WDVALUE]"       "\n\t"
+            "out %i[WDTREG],%[TEMP_WD]"       "\n\t"
             "out __SREG__,__tmp_reg__"
             : [TEMP_WD] "=d" (__temp_wd)
-            : [CCPADDRESS] "I" (_SFR_IO_ADDR(CCP)),
+            : [CCPADDRESS] "n" (& CCP),
               [SIGNATURE] "r" ((uint8_t)0xD8),
-              [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+              [WDTREG] "n" (& _WD_CONTROL_REG),
               [WDVALUE] "n" (1 << WDE)
             : "memory");
     }
@@ -449,11 +448,11 @@ void wdt_enable(const uint8_t value)
             "in __tmp_reg__,__SREG__"  "\n\t"
             "cli"                      "\n\t"
             "wdr"                      "\n\t"
-            "out %0, %1"               "\n\t"
+            "out %i0, %1"              "\n\t"
             "out __SREG__,__tmp_reg__" "\n\t"
-            "out %0, %2"
+            "out %i0, %2"
             : /* no outputs */
-            : "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+            : "n" (& _WD_CONTROL_REG),
               "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),
               "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00)
                               | _BV(WDE) | (value & 0x07)) )
@@ -469,7 +468,7 @@ void wdt_enable(const uint8_t value)
             "out __SREG__,__tmp_reg__" "\n\t"
             "sts %0, %2"
             : /* no outputs */
-            : "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
+            : "n" (& _WD_CONTROL_REG),
               "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),
               "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00)
                               | _BV(WDE) | (value & 0x07)) )
@@ -487,17 +486,17 @@ void wdt_disable (void)
     {
         uint8_t __temp_reg;
         __asm__ __volatile__ (
-            "in __tmp_reg__,__SREG__"    "\n\t"
-            "cli"                        "\n\t"
-            "wdr"                        "\n\t"
-            "in  %[TEMPREG],%[WDTREG]"   "\n\t"
-            "ori %[TEMPREG],%[WDCE_WDE]" "\n\t"
-            "out %[WDTREG],%[TEMPREG]"   "\n\t"
-            "out %[WDTREG],__zero_reg__" "\n\t"
+            "in __tmp_reg__,__SREG__"     "\n\t"
+            "cli"                         "\n\t"
+            "wdr"                         "\n\t"
+            "in  %[TEMPREG],%i[WDTREG]"   "\n\t"
+            "ori %[TEMPREG],%[WDCE_WDE]"  "\n\t"
+            "out %i[WDTREG],%[TEMPREG]"   "\n\t"
+            "out %i[WDTREG],__zero_reg__" "\n\t"
             "out __SREG__,__tmp_reg__"
             : [TEMPREG] "=d" (__temp_reg)
-            : [WDTREG]  "I"  (_SFR_IO_ADDR(_WD_CONTROL_REG)),
-              [WDCE_WDE]  "n"  ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE)))
+            : [WDTREG]   "n" (& _WD_CONTROL_REG),
+              [WDCE_WDE] "n"  ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE)))
             : "memory");
     }
     else
@@ -513,7 +512,7 @@ void wdt_disable (void)
             "sts %[WDTREG],__zero_reg__" "\n\t"
             "out __SREG__,__tmp_reg__"
             : [TEMPREG] "=d" (__temp_reg)
-            : [WDTREG]  "n"  (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
+            : [WDTREG]  "n"  (& _WD_CONTROL_REG),
               [WDCE_WDE]  "n"  ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE)))
             : "memory");
     }
