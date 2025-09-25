@@ -773,6 +773,11 @@ empty ones, that are valid in a section name.
   \endcode
   For data in address-space #__flashx there are support functions
   in \ref avr_flash "<avr/flash.h>".
+
+  The <tt>.progmemx.*</tt> input section pattern was added in Binutils v2.30.
+  In older versions, there was a catch all <tt>.progmem*</tt> pattern
+  for all data in program space, which will cause problems when progmem
+  data pushes the \c \.trampolines out of the lower 128 KiB segment.
 </dd>
 <dt>\anchor sec_dot_jumptables <tt>.jumptables*</tt></dt>
 <dd>
