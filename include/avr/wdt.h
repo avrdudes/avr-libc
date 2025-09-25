@@ -68,16 +68,14 @@
     #include <stdint.h>
     #include <avr/wdt.h>
 
-    uint8_t mcusr_mirror __attribute__ ((section (".noinit")));
+    uint8_t mcusr_mirror __attribute__((section (".noinit")));
 
     __attribute__((used, unused, naked, section(".init3")))
-    static void get_mcusr (void);
-
-    void get_mcusr (void)
+    static void get_mcusr (void)
     {
-    mcusr_mirror = MCUSR;
-    MCUSR = 0;
-    wdt_disable();
+        mcusr_mirror = MCUSR;
+        MCUSR = 0;
+        wdt_disable();
     }
     \endcode
 
@@ -91,9 +89,7 @@
    \ingroup avr_watchdog
    Reset the watchdog timer.  When the watchdog timer is enabled,
    a call to this instruction is required before the timer expires,
-   otherwise a watchdog-initiated device reset will occur.
-*/
-
+   otherwise a watchdog-initiated device reset will occur. */
 #define wdt_reset() __asm__ __volatile__ ("wdr")
 
 #ifndef __DOXYGEN__
@@ -131,8 +127,7 @@
    that have a \c WDTCSR register, it uses the combination of the \c WDP0
    through \c WDP3 bits).
 
-   See also the symbolic constants \c WDTO_15MS et al.
-*/
+   See also the symbolic constants \c WDTO_15MS et al. */
 #define wdt_enable(timeout)
 #endif  /* __DOXYGEN__ */
 
@@ -185,16 +180,15 @@ void wdt_disable (void)
 
 /*
   wdt_enable(timeout) for xmega devices
-  ** write signature (CCP_IOREG_gc) that enables change of protected I/O
-  registers to the CCP register
-  ** At the same time,
-  1) set WDT change enable (WDT_CEN_bm)
-  2) enable WDT (WDT_ENABLE_bm)
-  3) set timeout (timeout)
-  ** Synchronization starts when ENABLE bit of WDT is set. So, wait till it
-  finishes (SYNCBUSY of STATUS register is automatically cleared after the
-  sync is finished).
-*/
+  - write signature (CCP_IOREG_gc) that enables change of protected I/O
+    registers to the CCP register
+  - At the same time,
+    1) set WDT change enable (WDT_CEN_bm)
+    2) enable WDT (WDT_ENABLE_bm)
+    3) set timeout (timeout)
+  - Synchronization starts when ENABLE bit of WDT is set. So, wait till it
+    finishes (SYNCBUSY of STATUS register is automatically cleared after the
+    sync is finished).  */
 #define wdt_enable(timeout)                                             \
     do {                                                                \
         uint8_t __temp;                                                 \
@@ -212,7 +206,8 @@ void wdt_disable (void)
               [ccp_reg]            "I" (_SFR_IO_ADDR(CCP)),             \
               [ioreg_cen_mask]     "r" ((uint8_t)CCP_IOREG_gc),         \
               [wdt_reg]            "n" (_SFR_MEM_ADDR(WDT_CTRL)),       \
-              [wdt_enable_timeout] "r" ((uint8_t)(WDT_CEN_bm | WDT_ENABLE_bm \
+              [wdt_enable_timeout] "r" ((uint8_t)(WDT_CEN_bm            \
+                                                  | WDT_ENABLE_bm       \
                                                   | ((timeout + 1) << 2))), \
               [wdt_status_reg]     "n" (_SFR_MEM_ADDR(WDT_STATUS)),     \
               [wdt_syncbusy_bit]   "I" (WDT_SYNCBUSY_bm)                \
@@ -255,8 +250,7 @@ void wdt_disable (void)
           [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),                 \
           [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00) \
                                    | _BV(WDE) | (value & 0x07) ))       \
-        : "memory"                                                      \
-        )
+        : "memory")
 
 static __ATTR_ALWAYS_INLINE__
 void wdt_disable (void)
@@ -299,8 +293,7 @@ void wdt_enable (const uint8_t value)
               [WDTREG] "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
               [WDVALUE] "r" ((uint8_t)((value & 0x08 ? _WD_PS3_MASK : 0x00)
                                        | _BV(WDE) | (value & 0x07) ))
-            : "r0"
-            );
+            : "memory");
     }
     else if (!_SFR_IO_REG_P (CCP) && _SFR_IO_REG_P (_WD_CONTROL_REG))
     {
@@ -433,8 +426,7 @@ void wdt_disable (void)
               [SIGNATURE] "r" ((uint8_t)0xD8),
               [WDTREG] "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
               [WDVALUE] "n" (1 << WDE)
-            : "r0"
-            );
+            : "memory");
     }
 }
 
@@ -447,8 +439,7 @@ void wdt_disable (void)
     that have a \c WDTCSR register, it uses the combination of the \c WDP0
     through \c WDP3 bits).
 
-    See also the symbolic constants \c WDTO_15MS et al.
-*/
+    See also the symbolic constants \c WDTO_15MS et al.  */
 static __ATTR_ALWAYS_INLINE__
 void wdt_enable(const uint8_t value)
 {
@@ -464,8 +455,8 @@ void wdt_enable(const uint8_t value)
             : /* no outputs */
             : "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
               "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),
-              "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) |
-                              _BV(WDE) | (value & 0x07)) )
+              "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00)
+                              | _BV(WDE) | (value & 0x07)) )
             : "memory");
     }
     else
@@ -480,8 +471,8 @@ void wdt_enable(const uint8_t value)
             : /* no outputs */
             : "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
               "r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),
-              "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) |
-                              _BV(WDE) | (value & 0x07)) )
+              "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00)
+                              | _BV(WDE) | (value & 0x07)) )
             : "memory");
     }
 }
