@@ -63,7 +63,7 @@ ISR(TIMER1_COMPA_vect)
     LED_PORT &= ~LED_PIN;       // Note [7]
 }
 
-void
+static void
 ioinit(void)                    // Note [8]
 {
     /* Timer 1 in CTC mode with 10 bits, CPU/8 speed */

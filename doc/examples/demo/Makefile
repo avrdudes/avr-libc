@@ -5,6 +5,8 @@ MCU_TARGET     = atmega328p
 
 OPTIMIZE = -Os
 
+WARN = -Wall -Wextra -Werror=missing-prototypes -Werror=strict-prototypes
+
 DEFS =
 LIBS =
 
@@ -40,8 +42,8 @@ endif
 
 CC      = avr-gcc
 
-CFLAGS  = -g -Wall -Wextra $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
-LDFLAGS = -Wl,-Map,$(PRG).map
+CFLAGS  = -g $(WARN) $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
+LDFLAGS = -Wl,-Map,$(PRG).map -mrelax
 
 OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
