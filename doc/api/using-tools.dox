@@ -626,7 +626,7 @@ remain in internal RAM, through the symbol \c __stack that is provided
 by the run-time startup code.  This is probably a good idea anyway
 (since internal RAM access is faster), and even required for some
 early devices that had hardware bugs preventing them from using a
-stack in external RAM.  Note also that the heap for \c malloc()
+stack in external RAM.  Note also that the heap for \ref a_malloc "malloc()"
 will still be placed after all the variables in the data section,
 so in this situation, no stack/heap collision can occur.
 

@@ -95,8 +95,8 @@ this is the safest way to avoid a stack-heap collision.
 
 \section malloc_tunables Tunables for malloc()
 
-There are a number of variables that can be tuned to adapt the
-behavior of malloc() to the expected requirements and constraints
+There are a number of variables that can be tuned to adapt the behavior
+of \ref a_malloc "malloc()" to the expected requirements and constraints
 of the application.  Any changes to these tunables should be made
 before the very first call to malloc().  Note that some library
 functions might also use dynamic memory (notably those from the
@@ -173,8 +173,9 @@ The default value of \c #__malloc_margin is set to 32.
 
 Dynamic memory allocation requests will be returned with a two-byte
 header prepended that records the size of the allocation.  This is
-later used by free().  The returned address points just beyond that
-header.  Thus, if the application accidentally writes before the
+later used by \ref a_free "free()".
+The returned address points just beyond that header.
+Thus, if the application accidentally writes before the
 returned memory region, the internal consistency of the memory
 allocator is compromised.
 
@@ -219,8 +220,8 @@ allocations.  That way, the potential for heap fragmentation is hopefully
 reduced.  When deallocating the topmost chunk of memory, the size of the
 heap is reduced.
 
-A call to realloc() first determines whether the operation is about to
-grow or shrink the current allocation.  When shrinking, the case is
+A call to \ref a_realloc "realloc()" first determines whether the operation is
+about to grow or shrink the current allocation.  When shrinking, the case is
 easy: the existing chunk is split, and the tail of the region that is
 no longer to be used is passed to the standard free() function for
 insertion into the freelist.  Checks are first made whether the tail

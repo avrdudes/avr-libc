@@ -140,7 +140,7 @@
     \anchor stdio_without_malloc
     <h3>Running stdio without malloc()</h3>
 
-    By default, fdevopen() requires malloc().  As this is often
+    By default, fdevopen() requires \ref a_malloc "malloc()".  As this is often
     not desired in the limited environment of a microcontroller, an
     alternative option is provided to run completely without malloc().
 
@@ -187,8 +187,9 @@
     destroyed by first calling the macro fdev_close(), and then
     destroying the object itself.  No call to fclose() should be
     issued for these streams.  While calling fclose() itself is
-    harmless, it will cause an undefined reference to free() and thus
-    cause the linker to link the malloc module into the application.
+    harmless, it will cause an undefined reference to \ref a_free "free()"
+    and thus cause the linker to pull in the \ref a_malloc "malloc"
+    module into the application.
 
     <h3>Notes</h3>
 

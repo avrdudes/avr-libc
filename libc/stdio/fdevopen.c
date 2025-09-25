@@ -68,8 +68,8 @@
    and the first one opened with write intent is assigned to both,
    \c stdout and \c stderr.
 
-   fdevopen() uses calloc() (und thus malloc()) in order to allocate
-   the storage for the new stream.
+   fdevopen() uses calloc() (und thus \ref a_malloc "malloc()")
+   in order to allocate the storage for the new stream.
 
    \note If the macro __STDIO_FDEVOPEN_COMPAT_12 is declared before
    including <stdio.h>, a function prototype for fdevopen() will be

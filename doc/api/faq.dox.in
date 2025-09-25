@@ -2059,7 +2059,10 @@ Below is a table of library calls with known issues.
   </td>
  </tr>
  <tr>
-  <td><tt>#malloc</tt>, <tt>#realloc</tt>, <tt>#calloc</tt>, <tt>#free</tt></td>
+  <td>
+    <tt>\ref a_malloc "malloc"</tt>,
+    <tt>\ref a_realloc "realloc"</tt>,
+    <tt>#calloc</tt>, <tt>#free</tt></td>
   <td>Uses the stack pointer and global variables to allocate and
       free memory.</td>
   <td>Protect calls with #cli/#sei or #ATOMIC_BLOCK if the application

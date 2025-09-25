@@ -355,11 +355,13 @@ extern int atoi(const char *__s) __ATTR_PURE__;
 extern void exit(int __status) __ATTR_NORETURN__;
 
 /**
+   \anchor a_malloc
+   \fn void *malloc(size_t size)
    The malloc() function allocates \c size bytes of memory.
    If malloc() fails, a NULL pointer is returned.
 
    Note that malloc() does \e not initialize the returned memory to
-   zero bytes.
+   zero bytes.  For that, see calloc().
 
    See the chapter about \ref malloc "malloc() usage" for implementation
    details.
@@ -367,25 +369,30 @@ extern void exit(int __status) __ATTR_NORETURN__;
 extern void *malloc(size_t __size) __ATTR_MALLOC__;
 
 /**
-   The free() function causes the allocated memory referenced by \c
-   ptr to be made available for future allocations.  If \c ptr is
-   NULL, no action occurs.
+   \anchor a_free
+   The free() function makes the memory referenced by \c ptr
+   available for future allocations.  The memory must have been
+   allocated by a call to \ref a_malloc "malloc()",
+   \ref a_realloc "realloc()", calloc() or other functions like strdup()
+   or fdevopen() that allocate dynamic memory on the heap.
+   If \c ptr is NULL, no action occurs.
 */
 extern void free(void *__ptr);
 
 /**
-   \c malloc() \ref malloc_tunables "tunable".  Default value is 32 bytes.
+   \ref malloc_tunables "tunable" for \ref a_malloc "malloc()".
+   Default value is 32 bytes.
 */
 extern size_t __malloc_margin;
 
 /**
-   \c malloc() \ref malloc_tunables "tunable".
+   \ref malloc_tunables "tunable" for \ref a_malloc "malloc()".
    Default value is \ref __heap_start "__heap_start".
 */
 extern char *__malloc_heap_start;
 
 /**
-   \c malloc() \ref malloc_tunables "tunable".
+   \ref malloc_tunables "tunable" for \ref a_malloc "malloc()".
    Default value is __heap_end, which is weakly defined to 0 in
    the startup code.
 */
@@ -393,12 +400,14 @@ extern char *__malloc_heap_end;
 
 /**
    Allocate \c nele elements of \c size each.  Identical to calling
-   \c malloc() using <tt>nele * size</tt> as argument, except the
-   allocated memory will be cleared to zero.
+   \ref a_malloc "malloc()" using <tt>nele * size</tt> as argument
+   (provided the product doesn't overflow),
+   except the allocated memory will be cleared to zero.
 */
 extern void *calloc(size_t __nele, size_t __size) __ATTR_MALLOC__;
 
 /**
+   \anchor a_realloc
    The realloc() function tries to change the size of the region
    allocated at \c ptr to the new \c size value.  It returns a
    pointer to the new region.  The returned pointer might be the
@@ -410,7 +419,7 @@ extern void *calloc(size_t __nele, size_t __size) __ATTR_MALLOC__;
    the old region, even in case a new region had to be allocated.
 
    It is acceptable to pass \c ptr as NULL, in which case realloc()
-   will behave identical to malloc().
+   will behave identical to \ref a_malloc "malloc()".
 
    If the new memory cannot be allocated, realloc() returns NULL, and
    the region at \c ptr will not be changed.
@@ -438,8 +447,7 @@ extern long double strtold(const char *__nptr, char **__endptr);
    \ingroup avr_stdlib
    The atexit() function registers function \a func to be run as part of
    the \c exit() function during \ref sec_dot_fini ".fini8".
-   atexit() calls malloc().
- */
+   atexit() calls \ref a_malloc "malloc()". */
 extern int atexit(void (*func)(void));
 
 /** \ingroup avr_stdlib

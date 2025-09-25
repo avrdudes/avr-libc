@@ -375,7 +375,8 @@ extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
     The strdup() function allocates memory and copies into it the string
     addressed by \p s1, including the terminating null character.
 
-    \warning The strdup() function calls malloc() to allocate the memory
+    \warning The strdup() function calls \ref a_malloc "malloc()" to allocate
+    the memory
     for the duplicated string! The user is responsible for freeing the
     memory by calling free().
 

@@ -811,8 +811,9 @@ in the SRAM memory segment. Thus, if you want the <tt>.data</tt> section
 to start at \c 0x1100, pass \c 0x801100 as the address to the linker.
 
 \note
-When using \c malloc() in the application (which could even happen inside
-library calls), \ref malloc_extram "additional adjustments" are required.
+When using \ref a_malloc "malloc()" in the application (which could
+even happen inside library calls),
+\ref malloc_extram "additional adjustments" are required.
 
 \subsection sec_dot_bss  The .bss Output Section
 
