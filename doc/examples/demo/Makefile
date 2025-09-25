@@ -55,7 +55,7 @@ $(PRG).elf: $(OBJ)
 demo.o: demo.c
 
 clean:
-	rm -f -- *.o $(PRG).elf *.eps *.png *.pdf *.bak
+	rm -f -- *.o $(PRG).elf
 	rm -f -- *.lst *.map $(EXTRA_CLEAN_FILES)
 
 lst:  $(PRG).lst
