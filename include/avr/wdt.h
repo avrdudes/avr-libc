@@ -442,8 +442,17 @@ void wdt_disable (void)
 
 #else
 
+/** \ingroup avr_watchdog
+    Enable the watchdog timer, configuring it for expiry after
+    \c timeout (which is a combination of the \c WDP0 through
+    \c WDP2 bits to write into the \c WDTCR register; For those devices
+    that have a \c WDTCSR register, it uses the combination of the \c WDP0
+    through \c WDP3 bits).
+
+    See also the symbolic constants \c WDTO_15MS et al.
+*/
 static __ATTR_ALWAYS_INLINE__
-void wdt_enable (const uint8_t value)
+void wdt_enable(const uint8_t value)
 {
 	if (_SFR_IO_REG_P (_WD_CONTROL_REG))
 	{
@@ -481,6 +490,9 @@ void wdt_enable (const uint8_t value)
 	}
 }
 
+/** \ingroup avr_watchdog
+    Disable the watchdog timer.
+*/
 static __ATTR_ALWAYS_INLINE__
 void wdt_disable (void)
 {
@@ -550,34 +562,37 @@ void wdt_disable (void)
 #define WDTO_8MS   -1
 #endif
 
+/** \ingroup avr_watchdog
+    A value to be passed to wdt_enable() for the specified watchdog
+    timeout duration. */
 #define WDTO_15MS   0
 
 /** \ingroup avr_watchdog
-    See \c WDTO_15MS */
+    See \c #WDTO_15MS */
 #define WDTO_30MS   1
 
 /** \ingroup avr_watchdog
-    See \c WDTO_15MS */
+    See \c #WDTO_15MS */
 #define WDTO_60MS   2
 
 /** \ingroup avr_watchdog
-    See \c WDTO_15MS */
+    See \c #WDTO_15MS */
 #define WDTO_120MS  3
 
 /** \ingroup avr_watchdog
-    See \c WDTO_15MS */
+    See \c #WDTO_15MS */
 #define WDTO_250MS  4
 
 /** \ingroup avr_watchdog
-    See \c WDTO_15MS */
+    See \c #WDTO_15MS */
 #define WDTO_500MS  5
 
 /** \ingroup avr_watchdog
-    See \c WDTO_15MS */
+    See \c #WDTO_15MS */
 #define WDTO_1S     6
 
 /** \ingroup avr_watchdog
-    See \c WDTO_15MS */
+    See \c #WDTO_15MS */
 #define WDTO_2S     7
 
 #if defined(__DOXYGEN__) || defined(WDP3) || defined(__AVR_XMEGA__)
