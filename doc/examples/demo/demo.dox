@@ -214,12 +214,20 @@ The segment is mapped to 0x800000 to simulate a flat address space.
 The next available address in the \c \.data segment is also location 0x100,
 so the application has no initialized data.
 
-The \c \.bss segment (where uninitialized data is stored) starts at location
-0x100.
+The \c \.bss segment (where \ref faq_varinit "zero-initialized data" is
+stored) starts at location 0x100.
 
 The next available address in the \c \.bss segment is location 0x103, so the
 application uses a total of 3 bytes of zero-initialized data,
-all from the <tt>demo.o</tt> module.
+all from the <tt>demo.o</tt> module.  These are the
+\c pwm (2 bytes) and \c direction (1 byte) static variables of the
+\c TIMER1_CAPT_vect ISR.
+
+The range from \c __data_load_start to \c __data_load_end holds the
+initialization data for the \c \.data segment, which is read by the
+\ref sec_dot_init "startup code" to initialize \c \.data before main()
+starts.  As the two symbols have the same value, there is nothing to
+copy to \c \.data (since there are no variables in \c \.data).
 
 The \c \.eeprom segment (where EEPROM variables are stored) starts at
 location 0x0, mapped to 0x810000 to simulate a flat address space.
