@@ -128,13 +128,16 @@ The compilation will create a \c demo.o file. Next we link it into a binary
 called \c demo.elf.
 
 \verbatim
-$ avr-gcc -g -mmcu=atmega328p -o demo.elf demo.o
+$ avr-gcc -g -mmcu=atmega328p -mrelax -o demo.elf demo.o
 \endverbatim
 
 It is important to specify the MCU type when linking. The compiler uses the \c
 -mmcu option to choose start-up files and run-time libraries that get linked
-together. If this option isn't specified, the compiler defaults to the 8515
-processor environment, which is most certainly what you didn't want.
+together. If this option isn't specified, the compiler defaults to the
+AT90S8515 processor environment, which is most certainly what you didn't want.
+
+The \c -mrelax option instructs the linker to replace \c CALL instruction
+with faster and smaller \c RCALL instructions if possible.
 
 \section demo_project_obj Examining the Object File
 
@@ -175,10 +178,12 @@ and data. It also shows where modules are loaded and which modules were loaded
 from libraries. It is yet another view of your application. To get a map file,
 I usually add <tt><b>-Wl,-Map,demo.map</b></tt> to my link command. Relink the
 application using the following command to generate \c demo.map (a portion of
-which is shown below).
+which is shown below).  The linker will create a map file even in the case
+when some memory region overflows and the linker fails with an error.
+So you can collect valuable information about the cause of the overflow.
 
 \verbatim
-$ avr-gcc -g -mmcu=atmega328p -Wl,-Map,demo.map -o demo.elf demo.o
+$ avr-gcc -g -mmcu=atmega328p -Wl,-Map,demo.map -mrelax -o demo.elf demo.o
 \endverbatim
 
 \dontinclude demo.map
@@ -239,8 +244,8 @@ so there aren't any EEPROM variables.
 
 We have a binary of the application, but how do we get it into the processor?
 
-Many programming applications now accept the final ELF file as input,
-so no further step is needed there.
+Many programming applications like AVRDUDE now accept the final ELF file
+as input, so no further step is needed there.
 
 Some programmers require a specific kind of load file, like "Intel
 Hex" or "Motorola SRecord" format. For them, portions of the binary
@@ -260,7 +265,8 @@ Note that the <tt>\ref sec_dot_data ".data"</tt> segment must be included
 as it contains the initialization values for the data segment,
 which the startup code expects to be placed immediately behind the instruction
 code (the <tt>\ref sec_dot_text ".text"</tt> segment) in flash.
-The startup code then copies them over to RAM before calling \c main().
+The \ref sec_dot_inie "startup code" then copies them over to RAM
+before calling \c main().
 
 On devices with a <tt>\ref sec_dot_rodata ".rodata"</tt> segment,
 <tt>-j .rodata</tt> must be added to the options.  (The ATmega328P
