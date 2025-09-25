@@ -265,7 +265,7 @@ Note that the <tt>\ref sec_dot_data ".data"</tt> segment must be included
 as it contains the initialization values for the data segment,
 which the startup code expects to be placed immediately behind the instruction
 code (the <tt>\ref sec_dot_text ".text"</tt> segment) in flash.
-The \ref sec_dot_inie "startup code" then copies them over to RAM
+The \ref sec_dot_init "startup code" then copies them over to RAM
 before calling \c main().
 
 On devices with a <tt>\ref sec_dot_rodata ".rodata"</tt> segment,
