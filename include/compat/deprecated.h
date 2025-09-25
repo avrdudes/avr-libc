@@ -119,8 +119,8 @@ static __inline__ void timer_enable_int (unsigned char ints)
 #endif
 }
 
-/** \def INTERRUPT(signame)
-    \ingroup deprecated_items
+/** \ingroup deprecated_items
+    \def INTERRUPT(signame)
     \deprecated
 
     Introduces an interrupt handler function that runs with global interrupts
@@ -134,11 +134,13 @@ static __inline__ void timer_enable_int (unsigned char ints)
     \ref attr_interrupt "above".
 */
 
+#ifndef __DOXYGEN__
 #if (__GNUC__ == 4 && __GNUC_MINOR__ >= 1) || (__GNUC__ > 4)
 #  define __INTR_ATTRS __used__, __externally_visible__
 #else /* GCC < 4.1 */
 #  define __INTR_ATTRS __used__
 #endif
+#endif /* Doxygen */
 
 #ifdef __cplusplus
 #define INTERRUPT(signame)				\
