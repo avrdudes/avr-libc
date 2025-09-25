@@ -24,8 +24,6 @@
 
 /* Note [1] */
 #define TIMER1_TOP 1023
-#define TIMER1_CTRLA (0)
-#define TIMER1_CTRLB (_BV(WGM13) | _BV(WGM12) | 2)
 
 #define LED_PORT PORTB
 #define LED_DDR  DDRB
@@ -68,8 +66,8 @@ ioinit(void)                    // Note [8]
 {
     /* Timer 1 in CTC mode with 10 bits, CPU/8 speed */
     ICR1 = TIMER1_TOP;
-    TCCR1A = TIMER1_CTRLA;
-    TCCR1B = TIMER1_CTRLB;
+    TCCR1A = 0;
+    TCCR1B = _BV(WGM13) | _BV(WGM12) | 2;
 
     /* Set PWM value to 0. */
     OCR1A = 1;
@@ -78,7 +76,7 @@ ioinit(void)                    // Note [8]
     LED_DDR |= LED_PIN;
 
     /* Enable timer 1 overflow and compare A interrupt. */
-    TIMSK1 = _BV (ICIE1) | _BV(OCIE1A);
+    TIMSK1 = _BV(ICIE1) | _BV(OCIE1A);
     sei ();
 }
 
