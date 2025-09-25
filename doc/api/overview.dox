@@ -127,7 +127,7 @@ referred to as "gas"). But when built for an AVR target, it becomes "avr-as".
 Below is a list of the programs that are included in Binutils:
 
 <dl>
-<dt><tt>par avr-as</tt></dt>
+<dt><tt>avr-as</tt></dt>
 <dd>The Assembler.</dd>
 
 <dt><tt>avr-ld</tt></dt>
