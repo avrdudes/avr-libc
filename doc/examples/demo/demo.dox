@@ -295,7 +295,7 @@ exist.
 \note This \c Makefile can only be used as input for the GNU version of \c
 make.
 
-\dontinclude demo/Makefile
+\dontinclude examples/demo/Makefile
 
 \until eeprom ehex ebin esrec
 
