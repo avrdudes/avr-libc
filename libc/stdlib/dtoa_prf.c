@@ -49,102 +49,125 @@ ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
 
     sign = 0;
     if ((vtype & (FTOA_MINUS | FTOA_NAN)) == FTOA_MINUS)
-	sign = '-';
+        sign = '-';
     else if (flags & DTOA_PLUS)
-	sign = '+';
+        sign = '+';
     else if (flags & DTOA_SPACE)
-	sign = ' ';
+        sign = ' ';
 
-    if (vtype & FTOA_NAN) {
-	ndigs = sign ? 4 : 3;
-	width = (width > ndigs) ? width - ndigs : 0;
-	if (!(flags & DTOA_LEFT)) {
-	    while (width) {
-		*s++ = ' ';
-		width--;
-	    }
-	}
-	if (sign) *s++ = sign;
-	if (flags & DTOA_UPPER) {
-	    *s++ = 'N';  *s++ = 'A';  *s++ = 'N';
-	} else {
-	    *s++ = 'n';  *s++ = 'a';  *s++ = 'n';
-	}
-	while (width) {
-	    *s++ = ' ';
-	    width--;
-	}
-	*s = 0;
-	return DTOA_NONFINITE;
+    if (vtype & FTOA_NAN)
+    {
+        ndigs = sign ? 4 : 3;
+        width = (width > ndigs) ? width - ndigs : 0;
+        if (!(flags & DTOA_LEFT))
+        {
+            while (width)
+            {
+                *s++ = ' ';
+                width--;
+            }
+        }
+        if (sign)
+            *s++ = sign;
+        if (flags & DTOA_UPPER)
+        {
+            *s++ = 'N';  *s++ = 'A';  *s++ = 'N';
+        }
+        else
+        {
+            *s++ = 'n';  *s++ = 'a';  *s++ = 'n';
+        }
+        while (width)
+        {
+            *s++ = ' ';
+            width--;
+        }
+        *s = '\0';
+        return DTOA_NONFINITE;
     }
 
-    if (vtype & FTOA_INF) {
-	ndigs = sign ? 4 : 3;
-	width = (width > ndigs) ? width - ndigs : 0;
-	if (!(flags & DTOA_LEFT)) {
-	    while (width) {
-		*s++ = ' ';
-		width--;
-	    }
-	}
-	if (sign) *s++ = sign;
-	if (flags & DTOA_UPPER) {
-	    *s++ = 'I';  *s++ = 'N';  *s++ = 'F';
-	} else {
-	    *s++ = 'i';  *s++ = 'n';  *s++ = 'f';
-	}
-	while (width) {
-	    *s++ = ' ';
-	    width--;
-	}
-	*s = 0;
-	return DTOA_NONFINITE;
+    if (vtype & FTOA_INF)
+    {
+        ndigs = sign ? 4 : 3;
+        width = (width > ndigs) ? width - ndigs : 0;
+        if (!(flags & DTOA_LEFT))
+        {
+            while (width)
+            {
+                *s++ = ' ';
+                width--;
+            }
+        }
+        if (sign)
+            *s++ = sign;
+        if (flags & DTOA_UPPER)
+        {
+            *s++ = 'I';  *s++ = 'N';  *s++ = 'F';
+        }
+        else
+        {
+            *s++ = 'i';  *s++ = 'n';  *s++ = 'f';
+        }
+        while (width)
+        {
+            *s++ = ' ';
+            width--;
+        }
+        *s = '\0';
+        return DTOA_NONFINITE;
     }
 
     n = (sign ? 1 : 0) + (exp>0 ? exp+1 : 1) + (prec ? prec+1 : 0);
     width = width > n ? width - n : 0;
 
-    if (!(flags & DTOA_LEFT) && !(flags & DTOA_ZFILL)) {
-	while (width) {
-	    *s++ = ' ';
-	    width--;
-	}
+    if (!(flags & DTOA_LEFT) && !(flags & DTOA_ZFILL))
+    {
+        while (width)
+        {
+            *s++ = ' ';
+            width--;
+        }
     }
-    if (sign) *s++ = sign;
-    if (!(flags & DTOA_LEFT)) {
-        while (width) {
-	    *s++ = '0';
-	    width--;
-	}
+    if (sign)
+        *s++ = sign;
+    if (!(flags & DTOA_LEFT))
+    {
+        while (width)
+        {
+            *s++ = '0';
+            width--;
+        }
     }
 
-    ndigs += exp;		/* exp is resticted approx. -40 .. +40	*/
+    ndigs += exp;               /* exp is resticted approx. -40 .. +40  */
     sign = buf[1];
     if ((vtype & FTOA_CARRY) && sign == '1')
-	ndigs -= 1;
+        ndigs -= 1;
     if ((signed char)ndigs < 1)
-	ndigs = 1;
+        ndigs = 1;
     else if (ndigs > 8)
-	ndigs = 8;
+        ndigs = 8;
 
     n = exp > 0 ? exp : 0;
-    do {
-	if (n == -1)
-	    *s++ = '.';
-	flags = (n <= exp && n > exp - ndigs) ? buf[exp - n + 1] : '0';
-	if (--n < -prec)
-	    break;
-	*s++ = flags;
-    } while (1);
+    for (;;)
+    {
+        if (n == -1)
+            *s++ = '.';
+        flags = (n <= exp && n > exp - ndigs) ? buf[exp - n + 1] : '0';
+        if (--n < -prec)
+            break;
+        *s++ = flags;
+    }
     if ( n == exp && (sign > '5' || (sign == '5' && !(vtype & FTOA_CARRY))) )
-	flags = '1';
+        flags = '1';
     *s++ = flags;
 
-    while (width) {
-	*s++ = ' ';
-	width--;
+    while (width)
+    {
+        *s++ = ' ';
+        width--;
     }
-    *s++ = 0;
+    *s = '\0';
 
     return 0;
 }
