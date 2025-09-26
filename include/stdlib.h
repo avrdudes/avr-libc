@@ -81,7 +81,8 @@ typedef struct
     long rem;                   /**< The Remainder. */
 } ldiv_t;
 
-/** Comparision function type for qsort(), just for convenience. */
+/** Comparision function type for qsort() and bsearch(),
+    just for convenience. */
 typedef int (*__compar_fn_t)(const void *, const void *);
 
 #ifndef __DOXYGEN__
@@ -162,7 +163,7 @@ long long llabs (long long __i)
      the array, or a null pointer if no match is found.  If two
      members compare as equal, which member is matched is unspecified.
 */
-extern void *bsearch(const void *__key, const void *__base, size_t __nmemb, size_t __size, int (*__compar)(const void *, const void *));
+extern void *bsearch(const void *__key, const void *__base, size_t __nmemb, size_t __size, __compar_fn_t __compar);
 
 /* __divmodhi4 and __divmodsi4 from libgcc.a */
 /**
