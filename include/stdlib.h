@@ -94,17 +94,14 @@ typedef int (*__compar_fn_t)(const void *, const void *);
     effectively halted by entering an infinite loop. */
 extern void abort(void) __ATTR_NORETURN__;
 
-#ifndef __DOXYGEN__
-static __ATTR_ALWAYS_INLINE__
+
+/** The abs() function computes the absolute value of the integer \c i.
+   \note The abs() and labs() functions are builtins of gcc.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int abs (int __i)
 {
     return __builtin_abs (__i);
 }
-#endif
-/** The abs() function computes the absolute value of the integer \c i.
-   \note The abs() and labs() functions are builtins of gcc.
-*/
-extern int abs(int __i) __ATTR_CONST__;
 
 
 /** The labs() function computes the absolute value of the long integer \c i.
