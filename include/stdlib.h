@@ -113,10 +113,9 @@ long labs(long __i)
 }
 
 
-/**  \ingroup avr_inttypes
-     The llabs() function computes the absolute value of the
-     64-bit integer \c i.
-     \since AVR-LibC v2.3 */
+/** The llabs() function computes the absolute value of the
+    64-bit integer \c i.
+    \since AVR-LibC v2.3 */
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 long long llabs (long long __i)
 {
