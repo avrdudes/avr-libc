@@ -112,6 +112,37 @@ long labs(long __i)
     return __builtin_labs (__i);
 }
 
+
+/**  \ingroup avr_inttypes
+     The llabs() function computes the absolute value of the
+     64-bit integer \c i.
+     \since AVR-LibC v2.3 */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+long long llabs (long long __i)
+{
+    if (__builtin_constant_p (__i))
+    {
+        return __builtin_llabs (__i);
+    }
+    else
+    {
+        register long long __r18 __asm("18") = __i;
+        __asm (
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+            "tst %r0+7"       "\n\t"
+            "brpl 1f"         "\n\t"
+            "%~call __negdi2" "\n"
+            "1:"
+#else
+            "sbrc %r0+7,7"    "\n\t"
+            "%~call __negdi2"
+#endif
+            : "+r" (__r18));
+        return __r18;
+    }
+}
+
+
 /**
      The bsearch() function searches an array of \c nmemb objects, the
      initial member of which is pointed to by \c base, for a member

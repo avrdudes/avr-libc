@@ -70,6 +70,7 @@ stdlib_a_asm_sources = \
 	isspace.S \
 	isblank.S \
 	ispunct.S \
+	llabs.S \
 	qsort_swapfunc.S \
 	strtol.S \
 	strtoll.S \

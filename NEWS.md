@@ -72,7 +72,7 @@
   `ktoa`, `uktoa`, `hktoa`, `uhktoa`, `rtoa`, `urtoa`, `hrtoa`, `uhrtoa`.
 
 - Support for `llabs` has been added to
-  [<inttypes.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__inttypes.html).
+  [<stdlib.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdlib.html).
 
 - Support a new header
   [<avr/flash.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__flash.html#details)
