@@ -106,18 +106,14 @@ int abs (int __i)
 */
 extern int abs(int __i) __ATTR_CONST__;
 
-#ifndef __DOXYGEN__
-static __ATTR_ALWAYS_INLINE__
-long labs (long __i)
+
+/** The labs() function computes the absolute value of the long integer \c i.
+   \note The abs() and labs() functions are builtins of gcc.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+long labs(long __i)
 {
     return __builtin_labs (__i);
 }
-#endif
-/** The labs() function computes the absolute value of the long integer
-    \c i.
-   \note The abs() and labs() functions are builtins of gcc.
-*/
-extern long labs(long __i) __ATTR_CONST__;
 
 /**
      The bsearch() function searches an array of \c nmemb objects, the
