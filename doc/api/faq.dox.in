@@ -2494,6 +2494,11 @@ that has been configured for the following tool versions:
 <tr><td>AVR-LibC   <td><tt>@AVR_LIBC_VERSION@</tt>
 </table>
 
+- <a href="https://gcc.gnu.org/gcc-@GCC_MAJOR@"
+     >GCC @GCC_MAJOR@ documentation</a>
+- <a href="https://gcc.gnu.org/gcc-@GCC_MAJOR@/changes.html#avr"
+     >GCC @GCC_MAJOR@ release notes</a>
+
 \anchor faq_toolchain_support
 
 The following features have been detected when building AVR-LibC.

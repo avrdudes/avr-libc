@@ -154,6 +154,13 @@ AS_VERSION_COMPARE([`${CC} -dumpversion`], [4.8.0],
     [AC_MSG_RESULT(yes)],
     [AC_MSG_RESULT(yes)])
 
+gcc_major1=`${CC} -dumpversion | cut -d '.' -f 1`
+gcc_major2=`${CC} -dumpversion | cut -d '.' -f 1,2`
+AS_VERSION_COMPARE([`${CC} -dumpversion`], [5.0.0],
+    [AC_SUBST(GCC_MAJOR, [$gcc_major2])],
+    [AC_SUBST(GCC_MAJOR, [$gcc_major1])],
+    [AC_SUBST(GCC_MAJOR, [$gcc_major1])])
+
 dnl Parts of the documentaton like in doc/api require Python, e.g. math2dox.
 dnl We cannot use devtools' configure since that one runs at bootstrap time,
 dnl whereas here we need Python at build time.
