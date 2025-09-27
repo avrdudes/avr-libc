@@ -1,4 +1,4 @@
-/* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
+/* Copyright (c) 2025  Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -24,16 +24,20 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE. */
+   POSSIBILITY OF SUCH DAMAGE.  */
 
-#ifndef	__DOXYGEN__
+#ifndef __DOXYGEN__
+#if __SIZEOF_LONG_DOUBLE__ == 8
 
 #include "asmdef.h"
+#include "alias.h"
 
-ENTRY_FLOAT atoff atof atofl
-	clr	r22
-	clr	r23
-	XJMP	_U(strtof)
+ENTRY atofl
+DALIAS_LD atof
+	clr     r22
+	clr     r23
+	XJMP    _U(strtold)
 ENDFUNC
 
-#endif	/* !__DOXYGEN__ */
+#endif /* long double is 64-bit */
+#endif /* !Doxygen */

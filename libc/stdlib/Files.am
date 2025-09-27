@@ -44,13 +44,15 @@ stdlib_a_c_sources = \
 	random.c \
 	realloc.c \
 	strtof.c \
+	strtold.c \
 	system.c \
 	dtoa_conv.h \
 	stdlib_private.h
 
 stdlib_a_asm_sources = \
 	abort.S \
-	atof.S \
+	atoff.S \
+	atofl.S \
 	atoi.S \
 	atol.S \
 	div.S \

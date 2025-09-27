@@ -44,6 +44,9 @@
   The `strtol` and `strtoul` functions have been rewritten to increase
   performance.
 
+- The `strtod`, `strtold`, `atof` and `atofl` functions have been
+  implemented to support IEEE double, i.e. they work with `-mdouble=64`.
+
 - Support for some non-standard functions has been added to
   [<stdlib.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdlib.html):
    - 64-bit integer to ASCII conversions: `lltoa`, `ulltoa`, `ulltoa_base10`.

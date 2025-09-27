@@ -65,6 +65,7 @@ misc_a_asm_sources = \
 	itoa_ncheck.S \
 	ltoa.S \
 	ltoa_ncheck.S \
+	madddi10.S \
 	mulsi10.S \
 	mul10.S \
 	sqrthi.S \

@@ -37,6 +37,12 @@
 #define LALIAS(X) /* empty */
 #endif
 
+#if __SIZEOF_DOUBLE__ == __SIZEOF_LONG_DOUBLE__
+#define DALIAS_LD(X) __attribute__((__weak__,__alias__(#X)))
+#else
+#define DALIAS_LD(X) /* empty */
+#endif
+
 #else /* Assembly */
 
 .macro DALIAS name
@@ -48,6 +54,13 @@
 
 .macro LALIAS name
 #if __SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__
+.weak \name
+\name:
+#endif
+.endm
+
+.macro DALIAS_LD name
+#if __SIZEOF_DOUBLE__ == __SIZEOF_LONG_DOUBLE__
 .weak \name
 \name:
 #endif

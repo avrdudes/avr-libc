@@ -30,6 +30,6 @@ include $(top_srcdir)/libc/stdlib/Files.am
 
 malloc.o: AVRLIB_CFLAGS += @WNO_MAYBE_UNINITIALIZED@
 
-qsort.o dtoa_prf.o dtostre.o strtof.o: AVRLIB_CFLAGS += -mcall-prologues
+qsort.o dtoa_prf.o dtostre.o strtof.o strtold.o: AVRLIB_CFLAGS += -mcall-prologues
 
 # vim: set ft=make:

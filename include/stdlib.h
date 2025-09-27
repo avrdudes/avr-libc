@@ -454,17 +454,12 @@ extern float strtof(const char *__nptr, char **__endptr);
 
 /** \ingroup avr_stdlib
     The strtod() function is similar to strtof(), except that the conversion
-    result is of type \c double instead of \c float.
-
-    strtod() is currently only supported when \c double is a 32-bit type. */
+    result is of type \c double instead of \c float. */
 extern double strtod(const char *__nptr, char **__endptr);
 
 /** \ingroup avr_stdlib
     The strtold() function is similar to strtof(), except that the conversion
-    result is of type \c long \c double instead of \c float.
-
-    strtold() is currently only supported when \c long \c double is a
-    32-bit type. */
+    result is of type \c long \c double instead of \c float. */
 extern long double strtold(const char *__nptr, char **__endptr);
 
 /**
