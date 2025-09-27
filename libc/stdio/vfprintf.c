@@ -386,11 +386,10 @@ int VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 # error
 #endif
 
-	/* We only support 32-bit floating point, hence if double is 64 bits
-	   wide, there is nothing to do here because ... will promote float
-	   to double.  */
-#if (PRINTF_LEVEL >= PRINTF_FLT) && (__SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__)
+#if (PRINTF_LEVEL >= PRINTF_FLT)
 
+#if __SIZEOF_LONG_DOUBLE__ > __SIZEOF_DOUBLE__
+	// With -mdouble=32, don't pull in 64-bit arithmetic.
 	if ((xflags & XFL_LONG)
 	    && ((c >= 'E' && c <= 'G') || (c >= 'e' && c <= 'g')))
 	{
@@ -398,6 +397,7 @@ int VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 	    buf[0] = '?';
 	    goto buf_addr;
 	}
+#endif // long double > double
 
 	if (c >= 'E' && c <= 'G') {
 	    flags |= FL_FLTUPP;
@@ -433,7 +433,12 @@ int VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 		vtype = prec;
 		ndigs = 0;
 	    }
-	    exp = __ftoa_engine (va_arg(ap,double), (char *)buf, vtype, ndigs);
+
+	    // The 'L' flag has already been handled above
+	    // if long double > double, so we can assume double here,
+	    // which we convert to float since that's all we have.
+	    const float yy = va_arg (ap, double);
+	    exp = __ftoa_engine (yy, (char *)buf, vtype, ndigs);
 	    vtype = buf[0];
 
 	    sign = 0;
@@ -571,7 +576,7 @@ int VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 # undef ndigs
 	}
 
-#else		/* to: PRINTF_LEVEL >= PRINTF_FLT && double == float */
+#else	// to: PRINTF_LEVEL >= PRINTF_FLT
 	if ((c >= 'E' && c <= 'G') || (c >= 'e' && c <= 'g')) {
 	    if (xflags & XFL_LONG)
 		(void) va_arg (ap, long double);

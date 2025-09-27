@@ -150,6 +150,10 @@
   See [vfprintf](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1)
   and [#654][654].
 
+- With `-mdouble=64`, functions from the printf family now perform
+  floating-point conversions instead of just printing a `?`.
+  The value is converted to IEEE single for conversion.
+
 - Added configure option `--with-doxygen=` to select the Doxygen executable
   for generating the documentation.
 

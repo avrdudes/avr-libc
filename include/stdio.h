@@ -580,14 +580,24 @@ extern int	fclose(FILE *__stream);
 
    Since the full implementation of all the mentioned features becomes
    fairly large, three different flavours of vfprintf() can be
-   selected using linker options.  The default vfprintf() implements
-   all the mentioned functionality except floating point conversions.
-   A minimized version of vfprintf() is available that only implements
-   the very basic integer and string conversion facilities, but only
-   the \c # additional option can be specified using conversion
-   flags (these flags are parsed correctly from the format
-   specification, but then simply ignored).  The respective version can
-   be requested using the following \ref gcc_minusW "compiler options":
+   selected using linker options:
+   - The default vfprintf() implements all the mentioned functionality
+     except floating point conversions.
+   - A minimized version of vfprintf() is available that only implements
+     the very basic integer and string conversion facilities, but only
+     the \c # additional option can be specified using conversion
+     flags (these flags are parsed correctly from the format
+     specification, but then simply ignored).
+   - A version with floating point-support, but with the following twists:
+     - The argument will be converted to IEEE single for output.
+     - When \c long \c double is a 64-bit type and \c double is a 32-bit
+       type, then the former will only be printed as a single '?'.
+       Rationale is to avoid 64-bit floating point arithmetic in printf
+       when the used selected <tt>-mdouble=32</tt>.  In order to print
+       IEEE double, it can be converted to IEEE single by hand.
+
+   The respective version can
+   be requested using the following \ref gcc_minusW "link options":
 
    <dl>
    <dt>Classic approach</dt>
@@ -630,9 +640,10 @@ extern int	fclose(FILE *__stream);
    - The specified width and precision can be at most 255.
 
    \par Notes:
-   - For floating-point conversions, if you link default or minimized
-     version of vfprintf(), the symbol <tt>?</tt> will be output and double
-     argument will be skipped. So you output below will not be crashed.
+   - For floating-point conversions, if you link the default or minimized
+     version of vfprintf(), the symbol <tt>?</tt> will be output.
+     The same applies for the float version with <tt>-mdouble=32</tt>
+     and when a IEEE double arguments is passed.
      For default version the width field and the "pad to left" ( symbol
      minus ) option will work in this case.
    - The \c hh length modifier is ignored (\c char argument is
