@@ -57,43 +57,43 @@ options of the respective release series:
        >Current</a> (work in progress)
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/AVR-Options.html">GCC v15</a>
+<td><a href="https://gcc.gnu.org/gcc-15">GCC v15</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-14/changes.html#avr">GCC v14</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/AVR-Options.html">GCC v14</a>
+<td><a href="https://gcc.gnu.org/gcc-14">GCC v14</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-13/changes.html#avr">GCC v13</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-13.4.0/gcc/AVR-Options.html">GCC v13</a>
+<td><a href="https://gcc.gnu.org/gcc-13">GCC v13</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-12/changes.html#avr">GCC v12</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-12.5.0/gcc/AVR-Options.html">GCC v12</a>
+<td><a href="https://gcc.gnu.org/gcc-12">GCC v12</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-11/changes.html#avr">GCC v11</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-11.4.0/gcc/AVR-Options.html">GCC v11</a>
+<td><a href="https://gcc.gnu.org/gcc-11">GCC v11</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-10.5.0/gcc/AVR-Options.html">GCC v10</a>
+<td><a href="https://gcc.gnu.org/gcc-10">GCC v10</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-9/changes.html#avr">GCC v9</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-9.5.0/gcc/AVR-Options.html">GCC v9</a>
+<td><a href="https://gcc.gnu.org/gcc-9">GCC v9</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-8/changes.html#avr">GCC v8</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-8.5.0/gcc/AVR-Options.html">GCC v8</a>
+<td><a href="https://gcc.gnu.org/gcc-8">GCC v8</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-7/changes.html#avr">GCC v7</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-7.5.0/gcc/AVR-Options.html">GCC v7</a>
+<td><a href="https://gcc.gnu.org/gcc-7">GCC v7</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-6/changes.html#avr">GCC v6</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-6.5.0/gcc/AVR-Options.html">GCC v6</a>
+<td><a href="https://gcc.gnu.org/gcc-6">GCC v6</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-5/changes.html#avr">GCC v5</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-5.5.0/gcc/AVR-Options.html">GCC v5</a>
+<td><a href="https://gcc.gnu.org/gcc-5">GCC v5</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-4.9/changes.html#avr">GCC v4.9</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-4.9.4/gcc/AVR-Options.html">GCC v4.9</a>
+<td><a href="https://gcc.gnu.org/gcc-4.9">GCC v4.9</a>
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-4.8/changes.html#avr">GCC v4.8</a>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc-4.8.5/gcc/AVR-Options.html">GCC v4.8</a>
+<td><a href="https://gcc.gnu.org/gcc-4.8">GCC v4.8</a>
 </table>
 
 GCC v4.8 is the oldest compiler version supported by AVR-LibC.
