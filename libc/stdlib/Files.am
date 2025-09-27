@@ -43,7 +43,7 @@ stdlib_a_c_sources = \
 	rand.c \
 	random.c \
 	realloc.c \
-	strtod.c \
+	strtof.c \
 	system.c \
 	dtoa_conv.h \
 	stdlib_private.h

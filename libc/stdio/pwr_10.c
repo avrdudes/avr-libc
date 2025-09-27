@@ -31,7 +31,7 @@
 
 /* Used by:
       libc/stdio/vfscanf.c
-      libc/stdlib/strtod.c
+      libc/stdlib/strtof.c
 */
 
 #if !defined(__AVR_TINY__)

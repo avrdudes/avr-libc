@@ -28,20 +28,20 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-
 #if !defined(__AVR_TINY__)
 
-
-#include <avr/pgmspace.h>
-#include <bits/attribs.h>
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdint.h>
+
+#include <avr/pgmspace.h>
+#include <bits/attribs.h>
+
 #include "sectionname.h"
 #include "alias.h"
-
 
 #define INFINITYf (__builtin_inff())
 #define NANf      (__builtin_nanf(""))
@@ -51,7 +51,7 @@ extern int isfinitef (float);
 /* Only GCC 4.2 calls the library function to convert an unsigned long
    to float.  Other GCC-es (including 4.3) use a signed long to float
    conversion along with a large inline code to correct the result.	*/
-extern float __floatunsisf (unsigned long);
+extern float __floatunsisf (uint32_t);
 
 #ifdef __AVR_HAVE_ELPM__
 #define STRNCASECMP_P(a, b, c) strncasecmp_PF (a, pgm_get_far_address(b), c)
@@ -119,14 +119,14 @@ ATTRIBUTE_CLIB_SECTION
 float
 strtof (const char * nptr, char ** endptr)
 {
-    union {
+    union
+    {
 	uint32_t u32;
 	float flt;
     } x;
-    unsigned char c;
-    int exp;
+    uint8_t c;
+    uint8_t flag = 0;
 
-    unsigned char flag;
 #define FL_MINUS    0x01	/* number is negative	*/
 #define FL_ANY	    0x02	/* any digit was read	*/
 #define FL_OVFL	    0x04	/* overflow was		*/
@@ -140,15 +140,16 @@ strtof (const char * nptr, char ** endptr)
 	c = *nptr++;
     } while (isspace (c));
 
-    flag = 0;
-    if (c == '-') {
+    if (c == '-')
+    {
 	flag = FL_MINUS;
 	c = *nptr++;
-    } else if (c == '+') {
-	c = *nptr++;
     }
+    else if (c == '+')
+	c = *nptr++;
 
-    if (!STRNCASECMP_P (nptr - 1, pstr_inf, 3)) {
+    if (!STRNCASECMP_P (nptr - 1, pstr_inf, 3))
+    {
 	nptr += 2;
 	if (!STRNCASECMP_P (nptr, pstr_inity, 5))
 	    nptr += 5;
@@ -158,25 +159,31 @@ strtof (const char * nptr, char ** endptr)
     }
 
     /* NAN() construction is not realised.
-       Length would be 3 characters only.	*/
-    if (!STRNCASECMP_P (nptr - 1, pstr_nan, 3)) {
+       Length would be 3 characters only. */
+    if (!STRNCASECMP_P (nptr - 1, pstr_nan, 3))
+    {
 	if (endptr)
 	    *endptr = (char *)nptr + 2;
 	return NANf;
     }
 
     x.u32 = 0;
-    exp = 0;
-    while (1)
+    int exp = 0;
+
+    for (;;)
     {
 	c -= '0';
 
-	if (c <= 9) {
+	if (c <= 9)
+	{
 	    flag |= FL_ANY;
-	    if (flag & FL_OVFL) {
+	    if (flag & FL_OVFL)
+	    {
 		if (!(flag & FL_DOT))
 		    exp += 1;
-	    } else {
+	    }
+	    else
+	    {
 		if (flag & FL_DOT)
 		    exp -= 1;
 		/* x.u32 = x.u32 * 10 + c	*/
@@ -184,34 +191,36 @@ strtof (const char * nptr, char ** endptr)
 		if (x.u32 >= (ULONG_MAX - 9) / 10)
 		    flag |= FL_OVFL;
 	    }
-
-	} else if (c == (('.'-'0') & 0xff)  &&  !(flag & FL_DOT)) {
-	    flag |= FL_DOT;
-	} else {
-	    break;
 	}
+	else if (c == (('.'-'0') & 0xff)  &&  !(flag & FL_DOT))
+	    flag |= FL_DOT;
+	else
+	    break;
+
 	c = *nptr++;
     }
 
     if (c == (('e'-'0') & 0xff) || c == (('E'-'0') & 0xff))
     {
-	int i;
 	c = *nptr++;
-	i = 2;
-	if (c == '-') {
+	int i = 2;
+	if (c == '-')
+	{
 	    flag |= FL_MEXP;
 	    c = *nptr++;
-	} else if (c == '+') {
-	    c = *nptr++;
-	} else {
-	    i = 1;
 	}
+	else if (c == '+')
+	    c = *nptr++;
+	else
+	    i = 1;
 	c -= '0';
-	if (c > 9) {
+	if (c > 9)
 	    nptr -= i;
-	} else {
+	else
+	{
 	    i = 0;
-	    do {
+	    do
+	    {
 		if (i < 3200)
 		    i = mulhi10 (i) + c;	/* i = 10*i + c	*/
 		c = *nptr++ - '0';
@@ -225,7 +234,7 @@ strtof (const char * nptr, char ** endptr)
     if ((flag & FL_ANY) && endptr)
 	*endptr = (char *)nptr - 1;
 
-    x.flt = __floatunsisf (x.u32);		/* manually	*/
+    x.flt = __floatunsisf (x.u32);		/* manually */
     if ((flag & FL_MINUS) && (flag & FL_ANY))
 	x.flt = -x.flt;
 
@@ -233,30 +242,35 @@ strtof (const char * nptr, char ** endptr)
     {
 #ifndef __AVR_HAVE_ELPM__
 	const float *f_pwr;
-	if (exp < 0) {
+	if (exp < 0)
+	{
 	    f_pwr = __avrlibc_pwr_m10 + 5;
 	    exp = -exp;
-	} else {
-	    f_pwr = __avrlibc_pwr_p10 + 5;
 	}
-	for (int pwr = 32; pwr; pwr >>= 1) {
-	    for (; exp >= pwr; exp -= pwr) {
+	else
+	    f_pwr = __avrlibc_pwr_p10 + 5;
+
+	for (int pwr = 32; pwr; pwr >>= 1)
+	{
+	    for (; exp >= pwr; exp -= pwr)
 		x.flt *= pgm_read_float (f_pwr);
-	    }
 	    --f_pwr;
 	}
 #else
 	uint_farptr_t f_pwr;
-	if (exp < 0) {
+	if (exp < 0)
+	{
 	    f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[5]);
 	    exp = -exp;
-	} else {
-	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[5]);
 	}
-	for (int pwr = 32; pwr; pwr >>= 1) {
-	    for (; exp >= pwr; exp -= pwr) {
+	else
+	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[5]);
+
+	for (int pwr = 32; pwr; pwr >>= 1)
+	{
+	    for (; exp >= pwr; exp -= pwr)
 		x.flt *= pgm_read_float_far (f_pwr);
-	    }
+
 	    f_pwr -= sizeof (float);
 	}
 #endif /* ELPM ? */
@@ -273,4 +287,4 @@ double strtod (const char*, char**);
 LALIAS (strtof)
 long double strtold (const char*, char**);
 
-#endif
+#endif // AVR_TINY
