@@ -42,8 +42,6 @@ m4_define([avr_libc_revision_suffix], [git])dnl  revision suffix (if any)
 m4_define([avr_libc_reldate],  [20240609])dnl    release date
 dnl end of library versioning data
 
-m4_define([avr_man_page], [3avr])dnl             AVR-LibC's manual page
-
 m4_define([avr_libc_version],
           avr_libc_major.avr_libc_minor.avr_libc_revision()avr_libc_revision_suffix)dnl
 m4_define([avr_libc_version_numeric],
@@ -362,9 +360,12 @@ AC_SUBST(AVR_LIBC_USER_MANUAL)
 AC_SUBST(DOC_INST_DIR)
 
 dnl Used in doc/api's doxygen.config.in::MAN_EXTENSION and Makefile.am.
-AC_MSG_CHECKING([for man page])
-MAN_PAGE=avr_man_page
-AC_MSG_RESULT([$MAN_PAGE])
+AC_ARG_WITH([man-page],
+  [AS_HELP_STRING([--with-man-page=],dnl
+                  [set man page for AVR-LibC documentation (default: 3avr)])],
+  [MAN_PAGE=$withval],
+  [MAN_PAGE=3avr])
+AC_MSG_NOTICE([Using man page $MAN_PAGE])
 AC_SUBST(MAN_PAGE)
 
 dnl Consumed by doc/api/doxygen.config.in::ENABLED_SECTIONS.
