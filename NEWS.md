@@ -252,6 +252,9 @@
 
 - Fixed FUSE4_DEFAULT etc. defines in Xmega I/O headers ([#523][523]).
 
+- Fixed `atoff` forwarding from wrong `strtod` to correct `strtof`
+  ([#1052][1052]).
+
 ## Pull Requests
 
 - Modernized the
@@ -321,3 +324,4 @@
 [1044]: https://github.com/avrdudes/avr-libc/issues/1044
 [1045]: https://github.com/avrdudes/avr-libc/issues/1045
 [1048]: https://github.com/avrdudes/avr-libc/issues/1048
+[1052]: https://github.com/avrdudes/avr-libc/issues/1052

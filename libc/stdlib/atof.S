@@ -33,7 +33,7 @@
 ENTRY_FLOAT atoff atof atofl
 	clr	r22
 	clr	r23
-	XJMP	_U(strtod)
+	XJMP	_U(strtof)
 ENDFUNC
 
 #endif	/* !__DOXYGEN__ */
