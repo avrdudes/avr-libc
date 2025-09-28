@@ -100,6 +100,7 @@
 
 - <b>Toolchain</b>
   - \ref faq_toolchain_version
+  - \ref faq_toolchain_sources
 
 - <b>Other</b>
   - \ref faq_wrong_baud_rate
@@ -2550,6 +2551,43 @@ They influence how pars of the library behave.
 \endif
 
 \endif
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_toolchain_sources Where can I find the source code of the tools?
+
+Here are web views of the GIT repos of the projects ans some points
+of interest.
+
+<a href="https://sourceware.org/binutils"><b>Binutils</b></a>
+- Top source:
+   <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=tree"
+      >https://sourceware.org/git/binutils-gdb.git</a>\n
+   The linker is located in \c ld/, the assembler in \c gas/ and the other
+   tools are in \c binutils/.
+-  Linker script:
+   <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=ld/scripttempl/avr.sc"
+      >ld/scripttempl/avr.sc</a>
+
+<a href="https://gcc.gnu.org"><b>GCC</b></a>
+- Top source:
+  <a href="https://gcc.gnu.org/git/?p=gcc.git;a=tree;hb=HEAD"
+     >https://gcc.gnu.org/git/gcc.git</a>
+-  AVR backend:
+   <a href="https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=gcc/config/avr"
+      >gcc/config/avr</a>
+-  libgcc (AVR part):
+   <a href="https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=libgcc/config/avr"
+      >libgcc/config/avr</a>
+
+<a href="https://avrdudes.github.io/avr-libc"><b>AVR-LibC</b></a>
+- Top source:
+  <a href="https://github.com/avrdudes/avr-libc"
+     >https://github.com/avrdudes/avr-libc.git</a>
+- Startup code:
+  <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
+     >crt1/gcrt1.S</a>
 
 <small>Back to \ref faq_index.</small>
 
