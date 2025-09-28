@@ -65,6 +65,8 @@ If FILE is not specified, then the full \$test_list is used.
   \$ MCUS="atmega16 atmega8* !atmega8*a" $me ...
 - Set ARGS in order to set the options for the compiler:
   \$ ARGS="-Og,-O3" $me...
+- Set WARN to override diagnostics, which is: -Wall -Werror:
+  \$ WARN=" " $me...
 EOF
 }
 
@@ -183,6 +185,7 @@ for src in ${test_list}; do
     # FIXME: When cut doesn't find a delimiter, then it prints the
     #        entire string.  Hence append a "," for the cut to come.
     args="${ARGS:-$args},"
+    warn=${WARN:--Wall -Werror}
 
     # Iterate over MCUs.
     for mcu in ${MCUS}; do
@@ -195,7 +198,7 @@ for src in ${test_list}; do
 	    [ $VERB -ge 2 ] && echo "arg.$i=$arg"
 	    [ "x$arg" = "x" ] && break
 
-	    if Compile "${src}" -mmcu=$mcu "$arg" ${CPPFLAGS}; then
+	    if Compile "${src}" -mmcu=$mcu "$arg" ${CPPFLAGS} $warn; then
 		n_passes=$(( 1 + $n_passes ))
 		[ $VERB -ge 1 ] && echo "PASS: $src -mmcu=$mcu $arg"
 	    else
