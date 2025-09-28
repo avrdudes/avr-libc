@@ -53,8 +53,8 @@ options of the respective release series:
 <tr><th>Release Notes <th>Online Documentation
 <tr>
 <td>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html"
-       >Current</a> (work in progress)
+<td><a href="https://gcc.gnu.org/onlinedocs/#current">Current</a>
+    (work in progress)
 <tr>
 <td><a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>
 <td><a href="https://gcc.gnu.org/gcc-15">GCC v15</a>
@@ -98,8 +98,9 @@ options of the respective release series:
 
 GCC v4.8 is the oldest compiler version supported by AVR-LibC.
 
-Apart from the documentation of command line options, the linked pages also
-contain:
+Apart from the documentation of
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html"
+   >command line options</a>, the linked pages also contain:
 
 - The documentation of
   <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avr-macros"
