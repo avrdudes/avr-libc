@@ -166,7 +166,7 @@ Since non-zero data in static storage consumes RAM, and also needs
 initialization values stored in non-volatile memory, the \c \.data
 \ref sec_ld_script "ouput section" contributes both to the
 text \ref sec_memory_regions "segment" (called \em Program below)
-and also to the data segment (called \am Data).
+and also to the data segment (called \em Data).
 For our program, the output reads:
 
 \verbinclude demo.size
