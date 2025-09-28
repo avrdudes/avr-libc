@@ -122,14 +122,13 @@
 \else
    \ref faq_toolchain_support "support",
 \endif
-   the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds
+   then the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds
    where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz.
    Values greater than that are saturated to this value.
 
 -  Otherwise, _delay_loop_2() is used as a fallback, and the maximal
    possible delay is 262.14 / f<sub>CPU</sub> milliseconds.
-
-   When the user request delay which exceed the maximum possible one,
+   When the user requests a delay which exceeds the maximum possible one,
    _delay_ms() provides a decreased resolution functionality. In this
    mode _delay_ms() will work with a resolution of 1/10&nbsp;ms, providing
    delays up to 6.5535 seconds (independent from CPU frequency).  The
@@ -148,55 +147,52 @@
 
    \note The implementation of _delay_ms() based on
    \c __builtin_avr_delay_cycles() is not backward compatible with older
-   implementations.  In order to get functionality backward compatible
+   implementations.  In order to get a functionality backward compatible
    with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__
    must be defined before including this header file.
  */
-static __ATTR_ALWAYS_INLINE__ void _delay_ms(double __ms);
-
-void
+static __ATTR_ALWAYS_INLINE__ void
 _delay_ms(double __ms)
 {
-	double __tmp ;
-#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) \
-  && !defined(__DELAY_BACKWARD_COMPATIBLE__)
-	uint32_t __ticks_dc;
-	__tmp = ((F_CPU) / 1e3) * __ms;
+#if (__HAS_DELAY_CYCLES \
+     && defined(__OPTIMIZE__) \
+     && !defined(__DELAY_BACKWARD_COMPATIBLE__))
+    uint32_t __ticks_dc;
+    double __tmp = ((F_CPU) / 1e3) * __ms;
 
-	#if defined(__DELAY_ROUND_DOWN__)
-		__tmp = __builtin_fabs (__tmp);
-	#elif defined(__DELAY_ROUND_CLOSEST__)
-		__tmp = __builtin_fabs (__tmp) + 0.5;
-	#else
-		/* Round up by default */
-		__tmp = __builtin_ceil (__builtin_fabs (__tmp));
-	#endif
+    #if defined(__DELAY_ROUND_DOWN__)
+        __tmp = __builtin_fabs (__tmp);
+    #elif defined(__DELAY_ROUND_CLOSEST__)
+        __tmp = __builtin_fabs (__tmp) + 0.5;
+    #else
+        /* Round up by default */
+        __tmp = __builtin_ceil (__builtin_fabs (__tmp));
+    #endif
 
-	/* Saturate.  Notice that the largest representable float
-	   in this context is 0xffffff00.   */
-	__ticks_dc = __tmp >= 4294967040.0 ? 0xffffff00 : (uint32_t) __tmp;
-	__builtin_avr_delay_cycles(__ticks_dc);
-
+    /* Saturate.  Notice that the largest representable float
+       in this context is 0xffffff00.   */
+    __ticks_dc = __tmp >= 4294967040.0 ? 0xffffff00 : (uint32_t) __tmp;
+    __builtin_avr_delay_cycles(__ticks_dc);
 #else
-	uint16_t __ticks;
-	__tmp = ((F_CPU) / 4e3) * __ms;
-	if (__tmp < 1.0)
-		__ticks = 1;
-	else if (__tmp > 65535)
-	{
-		//	__ticks = requested delay in 1/10 ms
-		__ticks = (uint16_t) (__ms * 10.0);
-		while(__ticks)
-		{
-			// wait 1/10 ms
-			_delay_loop_2(((F_CPU) / 4e3) / 10);
-			__ticks --;
-		}
-		return;
-	}
-	else
-		__ticks = (uint16_t)__tmp;
-	_delay_loop_2(__ticks);
+    uint16_t __ticks;
+    double __tmp = ((F_CPU) / 4e3) * __ms;
+    if (__tmp < 1.0)
+        __ticks = 1;
+    else if (__tmp > 65535)
+    {
+        //  __ticks = requested delay in 1/10 ms
+        __ticks = (uint16_t) (__ms * 10.0);
+        while(__ticks)
+        {
+            // wait 1/10 ms
+            _delay_loop_2(((F_CPU) / 4e3) / 10);
+            __ticks--;
+        }
+        return;
+    }
+    else
+        __ticks = (uint16_t)__tmp;
+    _delay_loop_2(__ticks);
 #endif
 }
 
@@ -214,20 +210,19 @@ _delay_ms(double __ms)
 \else
    \ref faq_toolchain_support "support",
 \endif
-   maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds
+   then the maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds
    where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz.
    Values greater than that are saturated to this value.
 
 -  Otherwise, _delay_loop_1() is used as a fallback, and the maximal
    possible delay is 768 / f<sub>CPU</sub> microseconds.
-
    If the user requests a delay greater than the maximal possible one,
    _delay_us() will automatically call _delay_ms() instead.  The user
    will not be informed about this case.
 .
 
-   Conversion of \c __us into clock cycles may not always result in
-   integer.  By default, the clock cycles are rounded up to next
+   Conversion of \c __us into clock cycles may not always result in an
+   integral value.  By default, the clock cycles are rounded up to next
    integer. This ensures that the user gets at least \c __us
    microseconds of delay.
 
@@ -238,58 +233,53 @@ _delay_ms(double __ms)
 
    \note The implementation of _delay_us() based on
    \c __builtin_avr_delay_cycles() is not backward compatible with older
-   implementations.  In order to get functionality backward compatible
+   implementations.  In order to get a functionality backward compatible
    with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__
    must be defined before including this header file.
  */
-static __ATTR_ALWAYS_INLINE__ void _delay_us(double __us);
-
-void
+static __ATTR_ALWAYS_INLINE__ void
 _delay_us(double __us)
 {
-	double __tmp ;
-#if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) \
-  && !defined(__DELAY_BACKWARD_COMPATIBLE__)
-	uint32_t __ticks_dc;
-	__tmp = ((F_CPU) / 1e6) * __us;
+#if (__HAS_DELAY_CYCLES \
+     && defined(__OPTIMIZE__) \
+     && !defined(__DELAY_BACKWARD_COMPATIBLE__))
+    uint32_t __ticks_dc;
+    double __tmp = ((F_CPU) / 1e6) * __us;
 
-	#if defined(__DELAY_ROUND_DOWN__)
-		__tmp = __builtin_fabs (__tmp);
-	#elif defined(__DELAY_ROUND_CLOSEST__)
-		__tmp = __builtin_fabs (__tmp) + 0.5;
-	#else
-		/* Round up by default */
-		__tmp = __builtin_ceil (__builtin_fabs (__tmp));
-	#endif
+    #if defined(__DELAY_ROUND_DOWN__)
+        __tmp = __builtin_fabs (__tmp);
+    #elif defined(__DELAY_ROUND_CLOSEST__)
+        __tmp = __builtin_fabs (__tmp) + 0.5;
+    #else
+        /* Round up by default */
+        __tmp = __builtin_ceil (__builtin_fabs (__tmp));
+    #endif
 
-	/* Saturate.  Notice that the largest representable float
-	   in this context is 0xffffff00.   */
-	__ticks_dc = __tmp >= 4294967040.0 ? 0xffffff00 : (uint32_t) __tmp;
-	__builtin_avr_delay_cycles(__ticks_dc);
-
+    /* Saturate.  Notice that the largest representable float
+       in this context is 0xffffff00.   */
+    __ticks_dc = __tmp >= 4294967040.0 ? 0xffffff00 : (uint32_t) __tmp;
+    __builtin_avr_delay_cycles(__ticks_dc);
 #else
-	uint8_t __ticks;
-	double __tmp2 ;
-	__tmp = ((F_CPU) / 3e6) * __us;
-	__tmp2 = ((F_CPU) / 4e6) * __us;
-	if (__tmp < 1.0)
-		__ticks = 1;
-	else if (__tmp2 > 65535)
-	{
-		_delay_ms(__us / 1000.0);
-		return;
-	}
-	else if (__tmp > 255)
-	{
-		uint16_t __ticks=(uint16_t)__tmp2;
-		_delay_loop_2(__ticks);
-		return;
-	}
-	else
-		__ticks = (uint8_t)__tmp;
-	_delay_loop_1(__ticks);
+    uint8_t __ticks;
+    double __tmp = ((F_CPU) / 3e6) * __us;
+    double __tmp2 = ((F_CPU) / 4e6) * __us;
+    if (__tmp < 1.0)
+        __ticks = 1;
+    else if (__tmp2 > 65535)
+    {
+        _delay_ms(__us / 1000.0);
+        return;
+    }
+    else if (__tmp > 255)
+    {
+        uint16_t __ticks=(uint16_t)__tmp2;
+        _delay_loop_2(__ticks);
+        return;
+    }
+    else
+        __ticks = (uint8_t)__tmp;
+    _delay_loop_1(__ticks);
 #endif
 }
-
 
 #endif /* _UTIL_DELAY_H_ */
