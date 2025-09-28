@@ -33,7 +33,7 @@ feel as to how the tools are used and how a \c Makefile can be configured.
 
 \section demo_project_desc The Project
 
-This project will use pulse-width modulation (\c PWM) to ramp an
+This project will use pulse-width modulation (PWM) to ramp an
 LED on and off every two seconds.  This project once used to start out
 with a simple homemade AVR circuit.  Meanwhile, in particular the
 Arduino project has provided a large boost to the use of AVR
@@ -75,11 +75,11 @@ will actually turn this into an \c SBI instruction by recognizing that
 the arguments to the operation are suitable for this optimization.
 
 \par Note [4]:
-The \c PWM is being used in 10-bit mode, so we need a 16-bit variable to
+The PWM is being used in 10-bit mode, so we need a 16-bit variable to
 remember the current value.
 
 \par Note [5]:
-This section determines the new value of the \c PWM.
+This section determines the new value of the PWM.
 
 \par Note [6]:
 Here's where the newly computed value is loaded into the compare register.
@@ -98,7 +98,7 @@ This routine configures all the hardware after a reset.
 
 \par Note [9]:
 The main loop of the program does nothing -- all the work is done by the
-interrupt routine! The <tt>sleep_mode()</tt> puts the processor on sleep
+interrupt routines! The <tt>sleep_mode()</tt> puts the processor on sleep
 until the next interrupt, to conserve power.  Of course, that probably
 won't be noticeable as we are still driving a LED, it is merely mentioned
 here to demonstrate the basic principle.
@@ -154,6 +154,22 @@ For instance, to get a feel of the application's size, the \c \-h option can be
 used. The output of this option shows how much space is used in each of the
 output sections.  The \c \.comment, \c \.note and \c \.debug sections hold
 additional (debug) information and won't make it into the ROM file.
+
+An overview of the program space and consumed by the program, and of the
+data in static storage, can be obtained with
+
+\verbatim
+$ avr-objdump -P mem-usage demo.elf
+\endverbatim
+
+Since non-zero data in static storage consumes RAM, and also needs
+initialization values stored in non-volatile memory, the \c \.data
+\ref sec_ld_script "ouput section" contributes both to the
+text \ref sec_memory_regions "segment" (called \em Program below)
+and also to the data segment (called \am Data).
+For our program, the output reads:
+
+\verbinclude demo.size
 
 An even more useful option is \c \-S. This option disassembles the binary file
 and intersperses the source code in the output! Such a listing
@@ -217,7 +233,7 @@ ATmega328P processor.
 The segment is mapped to 0x800000 to simulate a flat address space.
 
 The next available address in the \c \.data segment is also location 0x100,
-so the application has no initialized data.
+so the application has no non-zero initialized data.
 
 The \c \.bss segment (where \ref faq_varinit "zero-initialized data" is
 stored) starts at location 0x100.
@@ -231,8 +247,8 @@ all from the <tt>demo.o</tt> module.  These are the
 The range from \c __data_load_start to \c __data_load_end holds the
 initialization data for the \c \.data segment, which is read by the
 \ref sec_dot_init "startup code" to initialize \c \.data before main()
-starts.  As the two symbols have the same value, there is nothing to
-copy to \c \.data (since there are no variables in \c \.data).
+starts.  As the two symbols have the same value, there is nothing to copy
+to \c \.data (since there are no variables in the \c \.data input sections).
 
 The \c \.eeprom segment (where EEPROM variables are stored) starts at
 location 0x0, mapped to 0x810000 to simulate a flat address space.
@@ -291,7 +307,7 @@ empty.
 \section demo_make Letting Make Build the Project
 
 Rather than type these commands over and over, they can all be placed in a
-make file. To build the demo project using \c make,
+make file. To build the demo project using GNU make,
 save the following in a file called \c Makefile.
 
 This also adds a "program" target, so in order to download the image to
