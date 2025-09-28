@@ -43,6 +43,8 @@
 #include "sectionname.h"
 #include "alias.h"
 
+#define ARRAY_SIZE(X) (sizeof(X) / sizeof(*X))
+
 #define INFINITYf (__builtin_inff())
 #define NANf      (__builtin_nanf(""))
 
@@ -60,8 +62,10 @@ extern float __floatunsisf (uint32_t);
 #endif
 
 /* In libc/stdio/pwr_10.c */
-extern const float __avrlibc_pwr_p10 [6];
-extern const float __avrlibc_pwr_m10 [6];
+extern const float __avrlibc_pwr_p10[6];
+extern const float __avrlibc_pwr_m10[6];
+
+#define LAST_PWR (ARRAY_SIZE (__avrlibc_pwr_p10) - 1)
 
 static __ATTR_ALWAYS_INLINE__ int
 mulhi10 (int i)
@@ -117,7 +121,7 @@ PROGMEM_FAR static const char pstr_nan[3] = { 'N','A','N' };
  */
 ATTRIBUTE_CLIB_SECTION
 float
-strtof (const char * nptr, char ** endptr)
+strtof (const char *nptr, char **endptr)
 {
     union
     {
@@ -136,9 +140,9 @@ strtof (const char * nptr, char ** endptr)
     if (endptr)
 	*endptr = (char *)nptr;
 
-    do {
+    do
 	c = *nptr++;
-    } while (isspace (c));
+    while (isspace (c));
 
     if (c == '-')
     {
@@ -192,7 +196,7 @@ strtof (const char * nptr, char ** endptr)
 		    flag |= FL_OVFL;
 	    }
 	}
-	else if (c == (('.'-'0') & 0xff)  &&  !(flag & FL_DOT))
+	else if (c == (('.'-'0') & 0xff) && !(flag & FL_DOT))
 	    flag |= FL_DOT;
 	else
 	    break;
@@ -244,36 +248,30 @@ strtof (const char * nptr, char ** endptr)
 	const float *f_pwr;
 	if (exp < 0)
 	{
-	    f_pwr = __avrlibc_pwr_m10 + 5;
+	    f_pwr = __avrlibc_pwr_m10 + LAST_PWR;
 	    exp = -exp;
 	}
 	else
-	    f_pwr = __avrlibc_pwr_p10 + 5;
+	    f_pwr = __avrlibc_pwr_p10 + LAST_PWR;
 
-	for (int pwr = 32; pwr; pwr >>= 1)
-	{
-	    for (; exp >= pwr; exp -= pwr)
+	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1)
+	    for (; exp >= pwr; exp -= pwr, --f_pwr)
 		x.flt *= pgm_read_float (f_pwr);
-	    --f_pwr;
-	}
 #else
 	uint_farptr_t f_pwr;
 	if (exp < 0)
 	{
-	    f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[5]);
+	    f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[LAST_PWR]);
 	    exp = -exp;
 	}
 	else
-	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[5]);
+	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[LAST_PWR]);
 
-	for (int pwr = 32; pwr; pwr >>= 1)
-	{
-	    for (; exp >= pwr; exp -= pwr)
+	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1)
+	    for (; exp >= pwr; exp -= pwr, f_pwr -= sizeof (float))
 		x.flt *= pgm_read_float_far (f_pwr);
-
-	    f_pwr -= sizeof (float);
-	}
 #endif /* ELPM ? */
+
 	if (!isfinitef(x.flt) || x.flt == 0)
 	    errno = ERANGE;
     }
