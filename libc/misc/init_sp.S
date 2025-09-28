@@ -1,5 +1,3 @@
-#ifndef __DOXYGEN__
-
 #define FUNC_SEGNAME ".init2"
 
 #include "asmdef.h"
@@ -30,5 +28,3 @@ ENTRY _U(__init_sp)
 #endif  /* __AVR_XMEGA__ */
 
 ENDFUNC
-
-#endif  /* !__DOXYGEN__ */

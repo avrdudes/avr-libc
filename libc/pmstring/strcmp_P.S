@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define s1_hi r25
@@ -42,7 +40,5 @@ ENTRY _U(strcmp_P)
 	X_movw	XL, s1_lo
 	XJMP	_U(__strcmp_P)
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

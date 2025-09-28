@@ -35,8 +35,6 @@
      Created by Reiner Patommel
 */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define str_hi r25
@@ -66,5 +64,3 @@ ENTRY _U(strrev)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

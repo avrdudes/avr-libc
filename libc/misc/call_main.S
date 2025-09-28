@@ -1,5 +1,3 @@
-#ifndef __DOXYGEN__
-
 #define FUNC_SEGNAME ".init9"
 
 #include "asmdef.h"
@@ -18,5 +16,3 @@ ENTRY _U(__call_main)
 #endif  /* __AVR_ASM_ONLY__ */
 
 ENDFUNC
-
-#endif  /* !__DOXYGEN__ */

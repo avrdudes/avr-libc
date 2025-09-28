@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strtok_rP) _U(strtok_r)
@@ -144,5 +142,3 @@ ENTRY strtok_r
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

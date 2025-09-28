@@ -35,8 +35,6 @@
      Created by Reiner Patommel
 */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strncasecmp_P) _U(strncasecmp)
@@ -84,5 +82,3 @@ ENTRY _U(strncasecmp)
 	rjmp	4b
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

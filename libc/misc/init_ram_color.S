@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-#ifndef __DOXYGEN__
-
 #if __AVR_ARCH__ != 1
 
 #define FUNC_SEGNAME ".init3"
@@ -67,4 +65,3 @@ ENTRY __init_ram_color
 ENDFUNC
 
 #endif /* __AVR_ARCH__ */
-#endif /* __DOXYGEN__ */

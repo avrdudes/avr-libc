@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-#ifndef	__DOXYGEN__
-
 #include <avr/io.h>
 
 #if	E2END && __AVR_ARCH__ > 1
@@ -52,4 +50,3 @@ ENTRY	eeprom_write_float
 ENDFUNC
 
 #endif	/* E2END && __AVR_ARCH__ > 1 */
-#endif	/* !__DOXYGEN__ */

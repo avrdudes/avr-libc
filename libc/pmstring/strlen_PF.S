@@ -39,8 +39,6 @@
 #define src_b1 r23
 #define src_b0 r22
 
-#if !defined(__DOXYGEN__)
-
 ENTRY _U(strlen_PF)
 
 #ifndef __AVR_HAVE_ELPM__
@@ -69,7 +67,5 @@ ENTRY _U(strlen_PF)
 #endif /* Have ELPM */
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

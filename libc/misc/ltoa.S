@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if	!defined (__DOXYGEN__)
-
 #include "asmdef.h"
 
 /* char *ltoa (long val, char *s, int radix)	*/
@@ -66,5 +64,3 @@ ENTRY	__ltoa
 	ret
 
 ENDFUNC
-
-#endif	/* !__DOXYGEN__ */

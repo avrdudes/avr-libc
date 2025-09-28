@@ -1,5 +1,3 @@
-#ifndef __DOXYGEN__
-
 #include <avr/io.h>
 
 /* The purpose of this module is to set bit CPUINT_CTRLA.CPUINT_CVT.
@@ -30,5 +28,3 @@ ENTRY   _U(__init_cvt)
 #endif  /* Have CPUINT_CTRLA.CPUINT_CVT */
 
 ENDFUNC
-
-#endif  /* !__DOXYGEN__ */

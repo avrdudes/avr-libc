@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-#ifndef	__DOXYGEN__
-
 #include <avr/io.h>
 
 #if	E2END && __AVR_ARCH__ > 1
@@ -73,4 +71,3 @@ ENTRY	eeprom_write_block
 ENDFUNC
 #endif  /* All except __AVR_XMEGA__ && E2PAGESIZE */
 #endif	/* E2END && __AVR_ARCH__ > 1 */
-#endif	/* !__DOXYGEN__ */

@@ -46,8 +46,6 @@
 
 #define tmp s2_b1	/* copied to Z pointer */
 
-#if !defined(__DOXYGEN__)
-
 ENTRY _U(strcasecmp_PF)
 
 	X_movw	ZL, s2_b0
@@ -83,7 +81,5 @@ ENTRY _U(strcasecmp_PF)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

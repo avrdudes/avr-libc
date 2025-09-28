@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#ifndef	__DOXYGEN__
-
 #include "asmdef.h"
 #include "ntz.h"
 #include "xtoa_fast.h"
@@ -207,7 +205,5 @@ ENTRY __ultoa_invert
 	ret
 
 ENDFUNC
-
-#endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

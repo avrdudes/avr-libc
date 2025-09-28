@@ -44,8 +44,6 @@
 #define len_b1 r21
 #define len_b0 r20
 
-#if !defined(__DOXYGEN__)
-
 ENTRY _U(strnlen_PF)
 
 	LPM_R0_ZPLUS_INIT src_b2
@@ -71,7 +69,5 @@ ENTRY _U(strnlen_PF)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

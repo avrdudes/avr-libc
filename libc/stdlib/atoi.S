@@ -55,8 +55,6 @@
     stack) and works more quickly.
 */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define str_hi	r25
@@ -121,5 +119,3 @@ ENTRY _U(atoi)
 	RET
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

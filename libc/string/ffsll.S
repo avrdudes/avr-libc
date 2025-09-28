@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#ifndef	__DOXYGEN__
-
 #include "asmdef.h"
 
 #define	val_0	r18
@@ -77,7 +75,5 @@ ENTRY _U(ffsll)
 9:	ret
 
 ENDFUNC
-
-#endif	/* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

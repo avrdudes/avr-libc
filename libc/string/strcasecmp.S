@@ -35,8 +35,6 @@
      Created by Reiner Patommel
 */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strcasecmp_P) _U(strcasecmp)
@@ -77,5 +75,3 @@ ENTRY _U(strcasecmp)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

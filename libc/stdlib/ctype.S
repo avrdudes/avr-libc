@@ -26,8 +26,6 @@
 ;; ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 ;; POSSIBILITY OF SUCH DAMAGE.
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 ;================================================================================
@@ -374,5 +372,3 @@ ENTRY toupper
 ENDFUNC
 
 #endif
-
-#endif /* not __DOXYGEN__ */

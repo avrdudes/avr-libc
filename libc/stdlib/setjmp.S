@@ -51,8 +51,6 @@
    void longjmp(jmp_buf __jmpb, int __val) __attribute__((noreturn));
  */
 
-#ifndef	__DOXYGEN__
-
 #include "asmdef.h"
 
 #define jmpb_hi	r25
@@ -158,5 +156,3 @@ ENTRY _U(longjmp)
 #endif
 
 	.size	_U(longjmp), . - _U(longjmp)
-
-#endif	/* !__DOXYGEN__ */

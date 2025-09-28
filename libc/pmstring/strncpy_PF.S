@@ -44,8 +44,6 @@
 #define len_b0 r18
 
 
-#if !defined(__DOXYGEN__)
-
 ENTRY _U(strncpy_PF)
 
 	X_movw	ZL, src_b0
@@ -85,7 +83,5 @@ ENTRY _U(strncpy_PF)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

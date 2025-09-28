@@ -35,8 +35,6 @@
      Philip Soeberg <philip@soeberg.net>
 */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strstr_P) _U(strstr)
@@ -89,5 +87,3 @@ ENTRY _U(strstr)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

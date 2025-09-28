@@ -43,8 +43,6 @@
 #define len_b1 r19
 #define len_b0 r18
 
-#if !defined(__DOXYGEN__)
-
 ENTRY _U(memcpy_PF)
 
 	LPM_R0_ZPLUS_INIT src_b2
@@ -96,7 +94,5 @@ ENTRY _U(memcpy_PF)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

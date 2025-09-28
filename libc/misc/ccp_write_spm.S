@@ -1,5 +1,3 @@
-#ifndef __DOXYGEN__
-
 #include <avr/io.h>
 
 #if __AVR_XMEGA__
@@ -23,5 +21,4 @@ ENTRY   ccp_write_spm
 ENDFUNC
 
 #endif  /* __AVR_XMEGA__ */
-#endif  /* !__DOXYGEN__ */
 

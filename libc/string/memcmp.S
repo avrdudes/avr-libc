@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(memcmp_P) _U(memcmp)
@@ -62,5 +60,3 @@ ENTRY _U(memcmp)
 	sbc	ret_hi, ret_hi
 	ret
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

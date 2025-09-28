@@ -35,8 +35,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define dest_hi r25
@@ -60,7 +58,5 @@ ENTRY _U(strcat_P)
 ; return dest (unchanged)
 	ret
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

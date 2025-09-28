@@ -29,8 +29,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define str_hh	r24
@@ -67,7 +65,5 @@ ENTRY _U(strchr_PF)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

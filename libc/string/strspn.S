@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#ifndef	__DOXYGEN__
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strspn_P) _U(strspn)
@@ -64,5 +62,3 @@ ENTRY _U(strspn)
 	ret
 
 ENDFUNC
-
-#endif	/* !__DOXYGEN__ */

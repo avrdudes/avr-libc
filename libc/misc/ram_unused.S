@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-#ifndef __DOXYGEN__
-
 #include <avr/io.h>
 
 #if defined(RAMEND) && __AVR_ARCH__ != 1
@@ -68,4 +66,3 @@ ENTRY _get_ram_unused
 ENDFUNC
 
 #endif /* RAMEND && AVR_ARCH != 1 */
-#endif /* __DOXYGEN__ */

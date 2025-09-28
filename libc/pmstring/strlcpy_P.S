@@ -33,8 +33,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define dst_lo		r24
@@ -76,7 +74,5 @@ ENTRY strlcpy_P
 	rjmp	2b
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

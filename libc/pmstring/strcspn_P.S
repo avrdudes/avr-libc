@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#ifndef	__DOXYGEN__
-
 #include "asmdef.h"
 
 #define str_lo	r24
@@ -60,7 +58,5 @@ ENTRY _U(strcspn_P)
 	adc	str_hi, XH
 	ret
 ENDFUNC
-
-#endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strcmp_P) _U(strcmp)
@@ -42,5 +40,3 @@ ENTRY _U(strcmp)
 	X_movw	XL, s1_lo
 	XJMP	_U(__strcmp)
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

@@ -1,5 +1,3 @@
-#ifndef __DOXYGEN__
-
 #include <avr/io.h>
 
 #if __AVR_XMEGA__
@@ -23,5 +21,4 @@ ENTRY	ccp_write_io
 ENDFUNC
 
 #endif  /* __AVR_XMEGA__ && CCP_IOREG_gc */
-#endif  /* !__DOXYGEN__ */
 

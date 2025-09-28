@@ -33,8 +33,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 /*  size_t strlcat (char *dst, const char *src, size_t siz)
@@ -109,7 +107,5 @@ ENTRY strlcat_P
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

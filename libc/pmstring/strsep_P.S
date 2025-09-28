@@ -29,8 +29,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define strp_lo	r24
@@ -73,6 +71,5 @@ ENTRY _U(strsep_P)
 	ret
 
 ENDFUNC
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

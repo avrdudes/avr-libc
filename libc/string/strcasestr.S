@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strcasestr_P) _U(strcasestr)
@@ -113,5 +111,3 @@ ENTRY strcasestr
 1:	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

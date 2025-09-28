@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#ifndef	__DOXYGEN__
-
 #include "asmdef.h"
 
 #define	val_lo	r22
@@ -60,5 +58,3 @@ ENTRY _U(ffsl)
 9:	ret
 
 ENDFUNC
-
-#endif	/* not __DOXYGEN__ */

@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 ENTRY _U(__strcpy_P)
@@ -40,7 +38,5 @@ ENTRY _U(__strcpy_P)
 	brne	.Loop
 	ret
 ENDFUNC
-
-#endif /* ! __DOXYGEN__ */
 
 #endif /* ! AVR_TINY */

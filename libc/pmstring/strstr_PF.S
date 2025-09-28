@@ -35,8 +35,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #define s1_b1 r25
 #define s1_b0 r24
 #define s2_b3 r23
@@ -101,7 +99,5 @@ ENTRY _U(strstr_PF)
 	rjmp	.L_done
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

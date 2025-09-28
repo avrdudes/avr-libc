@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define src_hi r25
@@ -52,7 +50,5 @@ ENTRY _U(__strlen_P)
 	adc	src_hi, ZH
 	ret
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

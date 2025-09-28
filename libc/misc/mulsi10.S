@@ -34,8 +34,6 @@
 	 mul10.S by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define A0      r22
@@ -98,5 +96,3 @@ ENTRY _U(__mulsi_u8)
 #endif /* Have MUL */
     ret
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

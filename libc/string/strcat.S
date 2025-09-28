@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strcat_P) _U(strcat)
@@ -58,5 +56,3 @@ ENTRY _U(strcat)
 ; return dest (unchanged)
 	ret
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

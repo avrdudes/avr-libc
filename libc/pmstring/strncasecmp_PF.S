@@ -48,8 +48,6 @@
 #define ret_b1 r25
 #define ret_b0 r24
 
-#if !defined(__DOXYGEN__)
-
 ENTRY _U(strncasecmp_PF)
 
 	X_movw	ZL, s2_b0
@@ -92,7 +90,5 @@ ENTRY _U(strncasecmp_PF)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

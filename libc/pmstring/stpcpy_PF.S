@@ -41,8 +41,6 @@
 #define src_b1 r21
 #define src_b0 r20
 
-#if !defined(__DOXYGEN__)
-
 ENTRY _U(stpcpy_PF)
 
 	XCALL	_U(strcpy_PF)
@@ -51,7 +49,5 @@ ENTRY _U(stpcpy_PF)
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

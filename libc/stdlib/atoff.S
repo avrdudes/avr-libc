@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-#ifndef __DOXYGEN__
-
 #include "asmdef.h"
 
 ENTRY_FLOAT atoff atof atofl
@@ -35,5 +33,3 @@ ENTRY_FLOAT atoff atof atofl
 	clr	    r23
 	XJMP    _U(strtof)
 ENDFUNC
-
-#endif /* !Doxygen */

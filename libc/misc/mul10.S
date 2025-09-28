@@ -33,8 +33,6 @@
      Created by Marek Michalkiewicz <marekm@linux.org.pl>
  */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 #define r_hi r25
@@ -72,5 +70,3 @@ ENTRY _U(__mulhi_const_10)
 #endif
 	ret
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

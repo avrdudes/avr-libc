@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#ifndef	__DOXYGEN__
-
 #include "asmdef.h"
 #include "ftoa_engine.h"
 
@@ -566,7 +564,5 @@ OBJECT .L_base10
 	.byte	129, 0, 201, 241, 36	; 4056481921
 	.byte	236, 161, 229, 61, 39	; 1038459372
 ENDOBJ .L_base10
-
-#endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

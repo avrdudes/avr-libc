@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#if	!defined (__DOXYGEN__)
-
 #include "asmdef.h"
 
 /* char *__ltoa_ncheck (long val, char *s, unsigned char radix)	*/
@@ -66,5 +64,3 @@ ENTRY	__ltoa_ncheck
 1:	XJMP	_U(__ultoa_common)
 
 ENDFUNC
-
-#endif	/* !__DOXYGEN__ */

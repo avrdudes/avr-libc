@@ -33,8 +33,6 @@
 
 */
 
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strlcpy_P) _U(strlcpy)
@@ -78,5 +76,3 @@ ENTRY strlcpy
 	rjmp	2b
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

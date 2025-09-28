@@ -28,8 +28,6 @@
 
 #if !defined(__AVR_TINY__)
 
-#ifndef	__DOXYGEN
-
 #include <avr/io.h>
 
 #if	E2END && __AVR_ARCH__ > 1
@@ -105,7 +103,5 @@ ENTRY	eeprom_update_r18
 ENDFUNC
 
 #endif	/* E2END && __AVR_ARCH__ > 1 */
-
-#endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */
