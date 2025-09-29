@@ -101,21 +101,23 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0xffffffff },	1 },
 };
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int z;
     int i;
-    int (* volatile vp)(double);
+    int (* volatile vp)(float);
 
     /* Default implementation.	*/
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_word (& t[i].z);
-	v = signbit (x.fl);
+	v = signbitf (x.fl);
 	/* expect non-zero if sign bit is not set.
 	   AVR-LibC implementation returns 1 if signed. */
-	if (!(z ? v : v == 0)) {
+	if (!(z ? v : v == 0))
+	{
 	    PRINTFLN ("i= %d  v= %d", i, v);
 	    EXIT (i + 1);
 	}
@@ -123,12 +125,14 @@ int main ()
 
 #ifdef	__AVR__
     /* Force to use the library implementation.	*/
-    vp = & signbit;
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    vp = & signbitf;
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_word (& t[i].z);
 	v = vp (x.fl);
-	if (v != z) {
+	if (v != z)
+	{
 	    PRINTFLN ("i= %d  v= %d", i, v);
 	    EXIT (i + 101);
 	}

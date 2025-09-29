@@ -123,7 +123,7 @@ unsigned long fp_mpack (unsigned long x)
 }
 #endif
 
-int main ()
+int main (void)
 {
     int i;
 

@@ -163,19 +163,20 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x,y,z;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	y.lo = pgm_read_dword (& t[i].y);
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = hypot (x.fl, y.fl);
+	v.fl = hypotf (x.fl, y.fl);
 	
-	if (   v.lo == z.lo
-	    || (isnan(v.fl) && isnan(z.fl))	)
+	if (v.lo == z.lo
+	    || (isnanf(v.fl) && isnanf(z.fl)))
 	  continue;
 	x_exit (i+1);
     }

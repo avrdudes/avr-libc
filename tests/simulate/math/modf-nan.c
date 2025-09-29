@@ -38,7 +38,7 @@ union lofl_u {
 };
 
 volatile union lofl_u vf = { 1 };
-double vn = { 1 };
+float vn = { 1 };
 
 PROGMEM const struct {		/* Table of test cases.	*/
     union lofl_u x;	/* argument			*/
@@ -63,16 +63,18 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	vn = 0;
-	vf.fl = modf (x.fl, & vn);
-	if (!isnan (vf.fl) || !isnan (vn)) {
+	vf.fl = modff (x.fl, & vn);
+	if (!isnanf (vf.fl) || !isnanf (vn))
+	{
 	    x_exit (i+1);
 	}
     }

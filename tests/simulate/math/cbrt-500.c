@@ -562,16 +562,18 @@ PROGMEM const struct {
 
 };
 
-int main ()
+int main (void)
 {
     int i;
     union float_u tx, tz;
 
-    for (i = 0;  (size_t)i < sizeof(t) / sizeof(t[0]); i++) {
+    for (i = 0;  (size_t)i < sizeof(t) / sizeof(t[0]); i++)
+    {
 	tx.u32 = pgm_read_dword (& t[i].x);
 	tz.u32 = pgm_read_dword (& t[i].z);
-	v.flt = cbrt (tx.flt);
-	if ((v.u32 - tz.u32) > ULPMAX && (tz.u32 - v.u32) > ULPMAX) {
+	v.flt = cbrtf (tx.flt);
+	if ((v.u32 - tz.u32) > ULPMAX && (tz.u32 - v.u32) > ULPMAX)
+	{
 	    PRINTFLN ("t1[%d]={0x%08lx,0x%08lx} --> 0x%08lx\n",
 		      i, tx.u32, tz.u32, v.u32);
 	    EXIT (i + 1);

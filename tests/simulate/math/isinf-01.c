@@ -48,7 +48,8 @@
 # define EXIT	exit
 #endif
 
-union lofl_u {
+union lofl_u
+{
     long lo;
     float fl;
 };
@@ -57,11 +58,12 @@ union lofl_u {
    memory. This is convenient to debug: read a core dump.	*/
 volatile int v = 1;
 
-PROGMEM const struct {		/* Table of test cases.	*/
+PROGMEM const struct		/* Table of test cases.	*/
+{
     union lofl_u x;		/* argument	*/
     int z;			/* result	*/
-} t[] = {
-
+} t[] =
+{
     /* Zero	*/
     { { .fl= +0.0 },	0 },
     { { .fl= -0.0 },	0 },
@@ -101,19 +103,21 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0xffffffff },	0 },
 };
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int z;
     int i;
 
     /* Default implementation.	*/
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_word (& t[i].z);
-	v = isinf (x.fl);
+	v = isinff (x.fl);
     /* expect non-zero in case of infinite value.  */
-	if (!(z ? v : v == 0)) {
+	if (!(z ? v : v == 0))
+	{
 	    PRINTFLN ("i= %d  v= %d", i, v);
 	    EXIT (i + 1);
 	}
@@ -121,14 +125,16 @@ int main ()
 
 #ifdef	__AVR__
     {
-	int (* volatile vp)(double);
+	int (* volatile vp)(float);
 	/* Force to use the library implementation.	*/
-	vp = & isinf;
-	for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+	vp = & isinff;
+	for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+	{
 	    x.lo = pgm_read_dword (& t[i].x);
 	    z = pgm_read_word (& t[i].z);
 	    v = vp (x.fl);
-	    if (v != z) {
+	    if (v != z)
+	    {
 		PRINTFLN ("i= %d  v= %d", i, v);
 		EXIT (i + 101);
 	    }

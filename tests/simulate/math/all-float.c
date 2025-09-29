@@ -32,7 +32,7 @@
 
 #define CMP(fun) if ((void*) fun != (void*) fun##f) exit (__LINE__)
 
-int main ()
+int main (void)
 {
 #if defined(__AVR__) && __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
     volatile float x = 0.25, y, z;

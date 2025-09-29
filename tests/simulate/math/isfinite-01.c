@@ -93,33 +93,35 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int i;
-    int (* volatile vp) (double);
+    int (* volatile vp) (float);
     
     /* inline     */
     for (i = 0; i < (int) (sizeof(t0) / sizeof(t0[0])); i++) {
 	x.lo = pgm_read_dword (& t0[i]);
-	if (!isfinite(x.fl))
+	if (!isfinitef (x.fl))
 	    x_exit (i + 1);
     }
     for (i = 0; i < (int) (sizeof(t1) / sizeof(t1[0])); i++) {
 	x.lo = pgm_read_dword (& t1[i]);
-	if (isfinite(x.fl))
+	if (isfinitef (x.fl))
 	    x_exit (i + 0x101);
     }
 
 #ifdef	__AVR__
     /* library function     */
-    vp = isfinite;
-    for (i = 0; i < (int) (sizeof(t0) / sizeof(t0[0])); i++) {
+    vp = isfinitef;
+    for (i = 0; i < (int) (sizeof(t0) / sizeof(t0[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t0[i]);
 	if (! vp(x.fl))
 	    x_exit (i + 0x201);
     }
-    for (i = 0; i < (int) (sizeof(t1) / sizeof(t1[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t1) / sizeof(t1[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t1[i]);
 	if (vp(x.fl))
 	    x_exit (i + 0x301);

@@ -38,10 +38,12 @@ union lofl_u {
 
 volatile union lofl_u v = { 1 };
 
-PROGMEM const struct {		/* Table of test cases:  x, (float)x	*/
+PROGMEM const struct		/* Table of test cases:  x, (float)x	*/
+{
     unsigned long x;
     union lofl_u z;
-} t[] = {
+} t[] =
+{
 
     { 0, { .fl = 0.0 } },
     { 10,	  { .fl = 1e+1 } },
@@ -170,19 +172,20 @@ int main ()
     union lofl_u z;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x    = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
 #ifdef	__AVR__
 	/* Force library's convertion function usage. This is needed for
 	   GCC before 4.2	*/
-	extern double __floatunsisf (unsigned long);
+	extern float __floatunsisf (unsigned long);
 	v.fl = __floatunsisf (x);
 #else
 	v.fl = x;
 #endif
 	if (v.lo != z.lo)
-	    x_exit (i+1);
+	    x_exit (i + 1);
     }
     return 0;
 }

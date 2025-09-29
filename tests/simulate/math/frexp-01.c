@@ -96,28 +96,31 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0xff7fffff }, { .fl = -0x0.ffffffp+00 }, 128 },
 };
 
-int main ()
+int main (void)
 {
     union lofl_u x, zf;
     int ze;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo =  pgm_read_dword (& t[i].x);
 	zf.lo = pgm_read_dword (& t[i].f);
 	ze =    pgm_read_word (& t[i].e);
-	vf.fl = frexp (x.fl, & ve);
-	if (vf.lo != zf.lo || ve != ze) {
+	vf.fl = frexpf (x.fl, & ve);
+	if (vf.lo != zf.lo || ve != ze)
+	{
 	    PRINTFLN ("t[%d]: %#lx %d", i, vf.lo, ve);
 	    EXIT (i + 1);
 	}
     }
 
     /* Check all normal values with fractional 0.5	*/
-    for (i = 1; i < 255; i++) {
+    for (i = 1; i < 255; i++)
+    {
 	/* Positive.	*/
 	x.lo = (long)i << 23;
-	vf.fl = frexp (x.fl, & ve);
+	vf.fl = frexpf (x.fl, & ve);
 	if (vf.lo != 0x3f000000 || ve != i - 126) {
 	    PRINTFLN ("t[%d]: %#lx %d", i, vf.lo, ve);
 	    EXIT (i + 100);
@@ -125,7 +128,7 @@ int main ()
 
 	/* Negative.	*/
 	x.lo |= 0x80000000;
-	vf.fl = frexp (x.fl, & ve);
+	vf.fl = frexpf (x.fl, & ve);
 	if ((unsigned long)vf.lo != 0xbf000000 || ve != i - 126) {
 	    PRINTFLN ("t[%d]: %#lx %d", i, vf.lo, ve);
 	    EXIT (i + 100);
@@ -148,23 +151,30 @@ int main ()
 	    0xffc00000,
 	    0xffffffff,
 	};
-	for (i = 0; i < (int) (sizeof(tnf) / sizeof(tnf[0])); i++) {
+	for (i = 0; i < (int) (sizeof(tnf) / sizeof(tnf[0])); i++)
+	{
 	    x.lo = pgm_read_dword (& tnf[i]);
 	    ve = 1;
-	    vf.fl = frexp (x.fl, & ve);
+	    vf.fl = frexpf (x.fl, & ve);
 #ifdef	__AVR__
-	    if (vf.lo != x.lo || ve) {
+	    if (vf.lo != x.lo || ve)
+	    {
 		PRINTFLN ("tnf[%d]: %#lx %d", i, vf.lo, ve);
 		EXIT (i + 200);
 	    }
 #else
-	    if (isinf (x.fl)) {
-		if (vf.lo != x.lo || ve) {
+	    if (isinff (x.fl))
+	    {
+		if (vf.lo != x.lo || ve)
+		{
 		    PRINTFLN ("tnf[%d]: %#lx %d", i, vf.lo, ve);
 		    EXIT (i + 200);
 		}
-	    } else {
-		if (!isnan (vf.fl) || ve) {
+	    }
+	    else
+	    {
+		if (!isnanf (vf.fl) || ve)
+		{
 		    PRINTFLN ("tnf[%d]: %#lx %d", i, vf.lo, ve);
 		    EXIT (i + 200);
 		}
@@ -177,7 +187,7 @@ int main ()
     /* NULL is a legal address for AVR-LibC realization: skip writing.	*/
     {
 	unsigned char r1 = 1;
-        vf.fl = frexp (48, (int *)0);
+        vf.fl = frexpf (48, (int *)0);
 	/* Check __zero_reg__, as it is allocated by 0x0001 address. */
 	asm ("mov %0,r1 \n\t clr r1" : "=r"(r1));
 	if (r1) EXIT (300);

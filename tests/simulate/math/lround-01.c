@@ -200,7 +200,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     long z;
@@ -210,7 +210,7 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_dword (& t[i].z);
-	v = lround (x.fl);
+	v = lroundf (x.fl);
 	if (v != z)
 	    x_exit (i+1);
     }
@@ -221,7 +221,7 @@ int main ()
        ...
        0x0.800000p+31 --> 0x40000000	*/
     for (x.fl = 1.0, i = 0; i < 31; i++) {
-	v = lround (x.fl);
+	v = lroundf (x.fl);
 	if (v != (1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (100 + i);
@@ -229,7 +229,7 @@ int main ()
 
 	/* Change sign to minus.	*/
 	x.lo |= 0x80000000;
-	v = lround (x.fl);
+	v = lroundf (x.fl);
 	if (v != -(1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (200 + i);
@@ -249,7 +249,7 @@ int main ()
 	x.fl = 1.0;
 	x.lo += (0x800000 * (i-1));	/* exponent	*/
 	x.lo |= (0x800000 >> i);	/* += 0.5	*/
-	v = lround (x.fl);
+	v = lroundf (x.fl);
 	if (v != (1L << (i-1)) + 1) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (300 + i);
@@ -262,7 +262,7 @@ int main ()
        ...
        0x0.ffffffp+23 --> 0x800000	*/
     for (x.fl = 0x0.ffffffp+00, i = 0; i < 24; i++) {
-	v = lround (x.fl);
+	v = lroundf (x.fl);
 	if (v != (1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (400 + i);
@@ -270,7 +270,7 @@ int main ()
 
 	/* Change sign to minus.	*/
 	x.lo |= 0x80000000;
-	v = lround (x.fl);
+	v = lroundf (x.fl);
 	if (v != -(1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (500 + i);

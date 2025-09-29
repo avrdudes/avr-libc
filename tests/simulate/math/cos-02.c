@@ -64,17 +64,18 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { .u32 = 0x3fc90fdc }, -1.62920680e-7,  4276 },
 };
 
-int main ()
+int main (void)
 {
     union float_u tx, tz;	/* from table		*/
     union float_u r;		/* calculation result	*/
     int i;
 
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	unsigned long delta;
 	tx.u32 = pgm_read_dword (& t[i].x);
 	tz.flt = pgm_read_float (& t[i].z);
-	r.flt = cos (tx.flt);
+	r.flt = cosf (tx.flt);
 	delta = r.u32 - tz.u32;
 	if (delta > tz.u32 - r.u32)
 	    delta = tz.u32 - r.u32;
@@ -85,7 +86,8 @@ int main ()
 	/* To check the table.	*/
 	printf ("t[%d]: e= %lu\n", i, delta);
 #else
-	if (delta > pgm_read_dword (& t[i].maxerr)) {
+	if (delta > pgm_read_dword (& t[i].maxerr))
+	{
 	    vz = r.flt;
 	    ve = delta;
 	    PRINTFLN ("t[%d]:\n"

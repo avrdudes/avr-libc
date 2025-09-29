@@ -555,7 +555,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, z;
     int i;
@@ -563,7 +563,7 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = sqrt (x.fl);
+	v.fl = sqrtf (x.fl);
 	/* Comparison is integer to verify the zero sign.	*/
 	if (v.lo != z.lo)
 	    x_exit (i+1);

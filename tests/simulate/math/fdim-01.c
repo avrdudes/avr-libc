@@ -100,7 +100,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x,y,z;
     int i;
@@ -109,10 +109,10 @@ int main ()
 	y.lo = pgm_read_dword (& t[i].y);
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = fdim (x.fl, y.fl);
+	v.fl = fdimf (x.fl, y.fl);
 	
 	if (   v.lo == z.lo
-	    || (isnan(v.fl) && isnan(z.fl))	)
+	    || (isnanf (v.fl) && isnanf (z.fl))	)
 	  continue;
 	x_exit (i+1);
     }

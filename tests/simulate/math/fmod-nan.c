@@ -97,7 +97,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, y;
     int i;
@@ -105,8 +105,8 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	y.lo = pgm_read_dword (& t[i].y);
-	v.fl = fmod (x.fl, y.fl);
-	if (!isnan(v.fl))
+	v.fl = fmodf (x.fl, y.fl);
+	if (!isnanf (v.fl))
 	    x_exit (i+1);
     }
     return 0;

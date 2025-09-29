@@ -71,17 +71,18 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, y, z, res;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	y.lo = pgm_read_dword (& t[i].y);
 	z.lo = pgm_read_dword (& t[i].z);
 	res.lo = pgm_read_dword (& t[i].res);
-	v.fl = fma (x.fl, y.fl, z.fl);
+	v.fl = fmaf (x.fl, y.fl, z.fl);
 	if (v.lo != res.lo)
 	    x_exit (i+1);
     }

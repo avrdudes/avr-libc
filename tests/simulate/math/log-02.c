@@ -103,7 +103,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, z, v1;
     int i;
@@ -112,7 +112,7 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v1.fl = log (x.fl);
+	v1.fl = logf (x.fl);
 	if (   ((v1.lo ^ z.lo) & 0x80000000)	/* signbit(v1) != signbit(z) */
 	    || labs (v1.lo - z.lo) > ULPMAX
 	    || v1.fl < v.fl)

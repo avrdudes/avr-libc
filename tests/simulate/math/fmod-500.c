@@ -555,7 +555,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, y, z;
     int i;
@@ -564,7 +564,7 @@ int main ()
 	x.lo = pgm_read_dword (& t[i].x);
 	y.lo = pgm_read_dword (& t[i].y);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = fmod (x.fl, y.fl);
+	v.fl = fmodf (x.fl, y.fl);
 	/* Comparison is integer to verify the zero sign.	*/
 	if (v.lo != z.lo)
 	    x_exit (i+1);

@@ -32,18 +32,20 @@
 #include <stdlib.h>
 #include "progmem.h"
 
-union lofl_u {
+union lofl_u
+{
     long lo;
     float fl;
 };
 
 volatile union lofl_u v = { .lo = 1 };
 
-PROGMEM const struct {		/* Table of test cases.	*/
+PROGMEM const struct		/* Table of test cases.	*/
+{
     long x;		/* argument	*/
     long z;		/* cos(x)	*/
-} t[] = {
-
+} t[] =
+{
     /* x, cos(x)	*/
     { 0x3f5f4a23,0x3f24a3cc }, /*   1:  8.7222499e-01  6.4312434e-01 */
     { 0x1a517714,0x3f800000 }, /*   2:  4.3316378e-23  1.0000000e+00 */
@@ -555,16 +557,17 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, z;
     unsigned long v1, z1, r;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = cos (x.fl);
+	v.fl = cosf (x.fl);
 	
 	v1 = (v.lo < 0) ? (unsigned long)~(v.lo) : v.lo + 0x80000000;
 	z1 = (z.lo < 0) ? (unsigned long)~(z.lo) : z.lo + 0x80000000;
