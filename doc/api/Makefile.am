@@ -34,13 +34,14 @@ MATH2DOX_GEN_DOX = $(MATH2DOX_DOX:.dox=.gen.dox)
 MAINTAINERCLEANFILES = Makefile.in stamp-vti
 
 CLEANFILES           = *.html *.pdf $(MATH2DOX_H) $(MATH2DOX_GEN_DOX) \
-                       malloc-*.svg malloc-*.eps \
+                       malloc-*.svg malloc-*.eps filter-dox.sh \
                        doxygen.config main_page.dox faq.dox doxygen-pdf.config
 
 EXTRA_DIST           = dox.css dox_html_header dox_html_footer \
                        dox_latex_header.tex \
                        doxygen.config.in \
                        main_page.dox.in \
+                       filter-dox.sh.in \
                        assembler.dox \
                        inline_asm.dox \
                        interrupts.dox \
@@ -160,7 +161,8 @@ clean-local:
 
 # Let config.status rebuild headers and dox from .in.
 doxygen.config:	$(top_builddir)/include/util/delay.h \
-		main_page.dox faq.dox $(MATH2DOX_H) $(MATH2DOX_GEN_DOX)
+		main_page.dox faq.dox filter-dox.sh \
+		$(MATH2DOX_H) $(MATH2DOX_GEN_DOX)
 
 $(top_builddir)/include/util/delay.h: $(top_srcdir)/include/util/delay.h.in
 	cd $(top_builddir)/include/util && $(MAKE) delay.h

@@ -474,6 +474,7 @@ AC_CONFIG_FILES([
 
 AC_CONFIG_FILES([scripts/avr-man], [chmod +x scripts/avr-man])
 AC_CONFIG_FILES([devtools/math2dox], [chmod +x devtools/math2dox])
+AC_CONFIG_FILES([doc/api/filter-dox.sh], [chmod +x doc/api/filter-dox.sh])
 
 dnl Makefile.in's made by automake from Makefile.am's.
 AC_CONFIG_FILES([
