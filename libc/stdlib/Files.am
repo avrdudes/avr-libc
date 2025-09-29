@@ -46,7 +46,7 @@ stdlib_a_c_sources = \
 	strtof.c \
 	strtold.c \
 	system.c \
-	dtoa_conv.h \
+	ftoa_conv.h \
 	stdlib_private.h
 
 stdlib_a_asm_sources = \
