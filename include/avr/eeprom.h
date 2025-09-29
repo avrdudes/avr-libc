@@ -137,6 +137,20 @@ uint8_t eeprom_read_byte (const uint8_t *__p) __ATTR_PURE__;
 uint16_t eeprom_read_word (const uint16_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
+    Read an unsigned 24-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || defined(__INT24_MAX__)
+uint24_t eeprom_read_u24 (const uint24_t *__p) __ATTR_PURE__;
+#endif
+
+/** \ingroup avr_eeprom
+    Read a signed 24-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || defined(__INT24_MAX__)
+int24_t eeprom_read_i24 (const int24_t *__p) __ATTR_PURE__;
+#endif
+
+/** \ingroup avr_eeprom
     Read one 32-bit double word (little endian) from EEPROM address \a __p.
  */
 uint32_t eeprom_read_dword (const uint32_t *__p) __ATTR_PURE__;
@@ -193,7 +207,22 @@ void eeprom_write_byte (uint8_t *__p, uint8_t __value);
 /** \ingroup avr_eeprom
     Write a word \a __value to EEPROM address \a __p.
  */
+
 void eeprom_write_word (uint16_t *__p, uint16_t __value);
+
+/** \ingroup avr_eeprom
+    Write an unsigned 24-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || defined(__INT24_MAX__)
+void eeprom_write_u24 (uint24_t *__p, uint24_t __value);
+#endif
+
+/** \ingroup avr_eeprom
+    Write a signed 24-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || defined(__INT24_MAX__)
+void eeprom_write_i24 (int24_t *__p, int24_t __value);
+#endif
 
 /** \ingroup avr_eeprom
     Write a 32-bit double word \a __value to EEPROM address \a __p.
@@ -253,6 +282,20 @@ void eeprom_update_byte (uint8_t *__p, uint8_t __value);
     Update a word \a __value at EEPROM address \a __p.
  */
 void eeprom_update_word (uint16_t *__p, uint16_t __value);
+
+/** \ingroup avr_eeprom
+    Update an unsigned 24-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || defined(__INT24_MAX__)
+void eeprom_update_u24 (uint24_t *__p, uint24_t __value);
+#endif
+
+/** \ingroup avr_eeprom
+    Update a signed 24-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || defined(__INT24_MAX__)
+void eeprom_update_i24 (int24_t *__p, int24_t __value);
+#endif
 
 /** \ingroup avr_eeprom
     Update a 32-bit double word \a __value at EEPROM address \a __p.
