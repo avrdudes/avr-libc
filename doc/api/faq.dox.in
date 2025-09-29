@@ -2450,7 +2450,7 @@ Explanation:
 <small>Back to \ref faq_index.</small>
 
 
-\section faq_toolchain_version What are the Versions of the Tools in my Toolchain?
+\section faq_toolchain_version What are the versions of the tools in my toolchain?
 
 The versions of the tools can be obtained by running the following
 commands and taking the first line of the standard output:
