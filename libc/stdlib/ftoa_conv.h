@@ -26,8 +26,8 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#ifndef	_DTOA_CONV_H
-#define	_DTOA_CONV_H
+#ifndef	_FTOA_CONV_H
+#define	_FTOA_CONV_H
 
 #include <stdio.h>
 
@@ -46,4 +46,4 @@ int ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
 #define	DTOA_EWIDTH     (-1)	/* Width too small	*/
 #define	DTOA_NONFINITE  (-2)	/* Value is NaN or Inf	*/
 
-#endif	/* !_DTOA_CONV_H */
+#endif	/* _FTOA_CONV_H */
