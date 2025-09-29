@@ -26,7 +26,7 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of strtod() function. Base cases. */
+/* Test of strtof() function. Base cases. */
 #include <errno.h>
 #include <math.h>
 #include <stdio.h>
@@ -162,11 +162,11 @@ int main ()
 	
 	errno = 0;
 	p = 0;
-	v.fl = strtod (s, &p);
+	v.fl = strtof (s, &p);
 	
 	if (!p || (p - s) != len || errno != eno)
 	    x_exit (i+1);
-	if (isnan(mst.fl) && isnan(v.fl))
+	if (isnanf (mst.fl) && isnanf (v.fl))
 	    continue;
 	if (v.lo != mst.lo)
 	    x_exit (i+1);
