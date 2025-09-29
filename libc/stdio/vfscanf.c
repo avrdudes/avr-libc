@@ -33,7 +33,6 @@
 
 #include <avr/pgmspace.h>
 #include <ctype.h>
-#include <limits.h>
 #include <math.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -43,6 +42,8 @@
 #include <string.h>
 #include "sectionname.h"
 #include "stdio_private.h"
+
+#define ARRAY_SIZE(X) (sizeof(X) / sizeof(*X))
 
 #ifndef VFSCANF_NAME
 #define VFSCANF_NAME vfscanf
@@ -433,11 +434,13 @@ conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
    long to float.  Instead it uses a signed long to float conversion
    function along with a large inline code to correct the result.
    Seems, GCC 4.3 does not use it also.	*/
-extern float __floatunsisf (unsigned long);
+extern float __floatunsisf (uint32_t);
 
 /* In libc/stdio/pwr_10.c */
 extern const float __avrlibc_pwr_p10[6];
 extern const float __avrlibc_pwr_m10[6];
+
+#define LAST_PWR (ARRAY_SIZE (__avrlibc_pwr_p10) - 1)
 
 PROGMEM_FAR static const char pstr_nfinity[] = "nfinity";
 PROGMEM_FAR static const char pstr_an[] = "an";
@@ -448,27 +451,26 @@ static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 {
     union
     {
-	unsigned long u32;
+	uint32_t u32;
 	float flt;
     } x;
-    int i;
-    int exp;
+
 #ifndef __AVR_HAVE_ELPM__
     const char *p;
 #else
     uint_farptr_t pf;
 #endif
 
-    uint8_t flag;
 #define FL_MINUS    0x80	/* number is negative	*/
 #define FL_ANY	    0x02	/* any digit was read	*/
 #define FL_OVFL	    0x04	/* overflow was		*/
 #define FL_DOT	    0x08	/* decimal '.' was	*/
 #define FL_MEXP	    0x10	/* exponent 'e' is neg.	*/
 
-    i = getc (stream);		/* after ungetc()	*/
+    int i = getc (stream);	/* after ungetc()	*/
+    uint8_t flag = 0;
+    int exp;
 
-    flag = 0;
     switch ((uint8_t) i)
     {
 	case '-':
@@ -497,7 +499,7 @@ static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 		{
 		    if (!--width
 			|| (i = getc (stream)) < 0
-			|| ((uint8_t)tolower(i) != c
+			|| ((uint8_t) tolower(i) != c
 			    && (ungetc (i, stream), 1)))
 		    {
 			if (p == pstr_nfinity + 3)
@@ -533,7 +535,9 @@ static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 		    }
 		}
 	    }
-	    x.flt = (pf == pgm_get_far_address (pstr_an[3])) ? NAN : INFINITY;
+	    x.flt = pf == pgm_get_far_address (pstr_an[3])
+		? NAN
+		: INFINITY;
 	    break;
 #endif /* ELPM ? */
 
@@ -557,7 +561,7 @@ static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 			if (flag & FL_DOT)
 			    exp -= 1;
 			x.u32 = mulacc (x.u32, FL_DEC, c);
-			if (x.u32 >= (ULONG_MAX - 9) / 10)
+			if (x.u32 >= (UINT32_MAX - 9) / 10)
 			    flag |= FL_OVFL;
 		    }
 		}
@@ -571,13 +575,13 @@ static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 	    if (!(flag & FL_ANY))
 		goto err;
 
-	    if ((uint8_t)i == 'e' || (uint8_t)i == 'E')
+	    if ((uint8_t) i == 'e' || (uint8_t) i == 'E')
 	    {
 		int expacc;
 
 		if (!--width || (i = getc (stream)) < 0)
 		    goto err;
-		switch ((uint8_t)i)
+		switch ((uint8_t) i)
 		{
 		    case '-':
 			flag |= FL_MEXP;
@@ -610,38 +614,29 @@ static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 	    const float *f_pwr;
 	    if (exp < 0)
 	    {
-		f_pwr = __avrlibc_pwr_m10 + 5;
+		f_pwr = __avrlibc_pwr_m10 + LAST_PWR;
 		exp = -exp;
 	    }
 	    else
-	    {
-		f_pwr = __avrlibc_pwr_p10 + 5;
-	    }
-	    for (width = 32; width; width >>= 1)
-	    {
-		for (; (unsigned)exp >= width; exp -= width)
-		{
+		f_pwr = __avrlibc_pwr_p10 + LAST_PWR;
+
+	    for (width = 1 << LAST_PWR; width; width >>= 1, --f_pwr)
+		for (; (uint16_t) exp >= width; exp -= width)
 		    x.flt *= pgm_read_float (f_pwr);
-		}
-		--f_pwr;
-	    }
 #else
 	    uint_farptr_t f_pwr;
 	    if (exp < 0)
 	    {
-		f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[5]);
+		f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[LAST_PWR]);
 		exp = -exp;
 	    }
 	    else
-	    {
-		f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[5]);
-	    }
-	    for (width = 32; width; width >>= 1)
+		f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[LAST_PWR]);
+
+	    for (width = 1 << LAST_PWR; width; width >>= 1)
 	    {
 		for (; (uint16_t) exp >= width; exp -= width)
-		{
 		    x.flt *= pgm_read_float_far (f_pwr);
-		}
 		f_pwr -= sizeof (float);
 	    }
 #endif /* ELPM ? */
