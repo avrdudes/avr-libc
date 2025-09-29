@@ -111,9 +111,10 @@
 - The `uint24_t`, `int24_t` and associated types and macros have been added
   to [<stdint.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__stdint.html) ([#1045][1045]).
 
-- EEPROM routines to access signed and unsigned integer types from
-  `<stdint.h>` have been added to
-  [<avr/eeprom.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__eeprom) for: `uint24_t`, `int24_t`.
+- EEPROM routines to access signed and unsigned integer types have
+  been added to
+  [<avr/eeprom.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__eeprom) for: `char`, `uint8_t`, `int8_t`, `uint16_t`, `int16_t`,
+  `uint24_t`, `int24_t`, `uint32_t`, `int32_t`, `uint64_t`, `int64_t`.
 
 - The C/C++ register footprint of some common simple functions has
   been improved by implementing them as extern inline assembly stubs:

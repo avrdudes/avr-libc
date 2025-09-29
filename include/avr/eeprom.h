@@ -132,8 +132,33 @@ extern "C" {
 uint8_t eeprom_read_byte (const uint8_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
+    Read a char from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+char eeprom_read_char (const char *__p) __asm("eeprom_read_byte") __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
+    Read an unsigned 8-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+uint8_t eeprom_read_u8 (const uint8_t *__p) __asm("eeprom_read_byte") __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
+    Read a signed 8-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+int8_t eeprom_read_i8 (const int8_t *__p) __asm("eeprom_read_byte") __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
     Read one 16-bit word from EEPROM address \a __p. */
 uint16_t eeprom_read_word (const uint16_t *__p) __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
+    Read an unsigned 16-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+uint16_t eeprom_read_u16 (const uint16_t *__p) __asm("eeprom_read_word") __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
+    Read a signed 16-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+int16_t eeprom_read_i16 (const int16_t *__p) __asm("eeprom_read_word") __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
     Read an unsigned 24-bit integer from EEPROM address \a __p.
@@ -154,10 +179,34 @@ int24_t eeprom_read_i24 (const int24_t *__p) __ATTR_PURE__;
 uint32_t eeprom_read_dword (const uint32_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
+    Read an unsigned 32-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+uint32_t eeprom_read_u32 (const uint32_t *__p) __asm("eeprom_read_dword") __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
+    Read a signed 32-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+int32_t eeprom_read_i32 (const int32_t *__p) __asm("eeprom_read_dword") __ATTR_PURE__;
+
+/** \ingroup avr_eeprom
     Read one 64-bit quad word from EEPROM address \a __p.
     \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 uint64_t eeprom_read_qword (const uint64_t *__p) __ATTR_PURE__;
+#endif
+
+/** \ingroup avr_eeprom
+    Read an unsigned 64-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+uint64_t eeprom_read_u64 (const uint64_t *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
+#endif
+
+/** \ingroup avr_eeprom
+    Read a signed 64-bit integer from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+int64_t eeprom_read_i64 (const int64_t *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
 #endif
 
 /** \ingroup avr_eeprom
@@ -192,16 +241,41 @@ long double eeprom_read_long_double (const long double *__p) __asm("eeprom_read_
 void eeprom_read_block (void *__dst, const void *__src, size_t __n);
 
 
-/** \name EEPROM Write Function */
+/** \name EEPROM Write Functions */
 
 /** \ingroup avr_eeprom
     Write a byte \a __value to EEPROM address \a __p. */
 void eeprom_write_byte (uint8_t *__p, uint8_t __value);
 
 /** \ingroup avr_eeprom
+    Write a char to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_char (char *__p, char __value) __asm("eeprom_write_byte");
+
+/** \ingroup avr_eeprom
+    Write an unsigned 8-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_u8 (uint8_t *__p, uint8_t __value) __asm("eeprom_write_byte");
+
+/** \ingroup avr_eeprom
+    Write a signed 8-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_i8 (int8_t *__p, int8_t __value) __asm("eeprom_write_byte");
+
+/** \ingroup avr_eeprom
     Write a word \a __value to EEPROM address \a __p. */
 
 void eeprom_write_word (uint16_t *__p, uint16_t __value);
+
+/** \ingroup avr_eeprom
+    Write an unsigned 16-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_u16 (uint16_t *__p, uint16_t __value) __asm("eeprom_write_word");
+
+/** \ingroup avr_eeprom
+    Write a signed 16-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_i16 (int16_t *__p, int16_t __value) __asm("eeprom_write_word");
 
 /** \ingroup avr_eeprom
     Write an unsigned 24-bit integer to EEPROM address \a __p.
@@ -222,10 +296,34 @@ void eeprom_write_i24 (int24_t *__p, int24_t __value);
 void eeprom_write_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
+    Write an unsigned 32-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_u32 (uint32_t *__p, uint32_t __value) __asm("eeprom_write_dword");
+
+/** \ingroup avr_eeprom
+    Write a signed 32-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_i32 (int32_t *__p, int32_t __value) __asm("eeprom_write_dword");
+
+/** \ingroup avr_eeprom
     Write a 64-bit quad word \a __value to EEPROM address \a __p.
     \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 void eeprom_write_qword (uint64_t *__p, uint64_t __value);
+#endif
+
+/** \ingroup avr_eeprom
+    Write an unsigned 64-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+void eeprom_write_u64 (uint64_t *__p, uint64_t __value) __asm("eeprom_write_qword");
+#endif
+
+/** \ingroup avr_eeprom
+    Write a signed 64-bit integer to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+void eeprom_write_i64 (int64_t *__p, int64_t __value) __asm("eeprom_write_qword");
 #endif
 
 /** \ingroup avr_eeprom
@@ -260,15 +358,40 @@ void eeprom_write_long_double (long double *__p, long double __value) __asm("eep
 void eeprom_write_block (const void *__src, void *__dst, size_t __n);
 
 
-/** \name EEPROM Update Function */
+/** \name EEPROM Update Functions */
 
 /** \ingroup avr_eeprom
     Update a byte \a __value at EEPROM address \a __p. */
 void eeprom_update_byte (uint8_t *__p, uint8_t __value);
 
 /** \ingroup avr_eeprom
+    Update a char \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_char (char *__p, char __value) __asm("eeprom_update_byte");
+
+/** \ingroup avr_eeprom
+    Update an unsigned 8-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_u8 (uint8_t *__p, uint8_t __value) __asm("eeprom_update_byte");
+
+/** \ingroup avr_eeprom
+    Update a signed 8-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_i8 (int8_t *__p, int8_t __value) __asm("eeprom_update_byte");
+
+/** \ingroup avr_eeprom
     Update a word \a __value at EEPROM address \a __p. */
 void eeprom_update_word (uint16_t *__p, uint16_t __value);
+
+/** \ingroup avr_eeprom
+    Update an unsigned 16-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_u16 (uint16_t *__p, uint16_t __value) __asm("eeprom_update_word");
+
+/** \ingroup avr_eeprom
+    Update a signed 16-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_i16 (int16_t *__p, int16_t __value) __asm("eeprom_update_word");
 
 /** \ingroup avr_eeprom
     Update an unsigned 24-bit integer \a at EEPROM address \a __p.
@@ -289,10 +412,34 @@ void eeprom_update_i24 (int24_t *__p, int24_t __value);
 void eeprom_update_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
+    Update an unsigned 32-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_u32 (uint32_t *__p, uint32_t __value) __asm("eeprom_update_dword");
+
+/** \ingroup avr_eeprom
+    Update a signed 32-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_i32 (int32_t *__p, int32_t __value) __asm("eeprom_update_dword");
+
+/** \ingroup avr_eeprom
     Update a 64-bit quad word \a __value at EEPROM address \a __p.
     \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 void eeprom_update_qword (uint64_t *__p, uint64_t __value);
+#endif
+
+/** \ingroup avr_eeprom
+    Update an unsigned 64-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+void eeprom_update_u64 (uint64_t *__p, uint64_t __value) __asm("eeprom_update_qword");
+#endif
+
+/** \ingroup avr_eeprom
+    Update a signed 64-bit integer \a at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+#if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
+void eeprom_update_i64 (int64_t *__p, int64_t __value) __asm("eeprom_update_qword");
 #endif
 
 /** \ingroup avr_eeprom
