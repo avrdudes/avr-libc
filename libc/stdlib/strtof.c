@@ -254,8 +254,8 @@ strtof (const char *nptr, char **endptr)
 	else
 	    f_pwr = __avrlibc_pwr_p10 + LAST_PWR;
 
-	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1)
-	    for (; exp >= pwr; exp -= pwr, --f_pwr)
+	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1, --f_pwr)
+	    for (; exp >= pwr; exp -= pwr)
 		x.flt *= pgm_read_float (f_pwr);
 #else
 	uint_farptr_t f_pwr;
@@ -267,8 +267,8 @@ strtof (const char *nptr, char **endptr)
 	else
 	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[LAST_PWR]);
 
-	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1)
-	    for (; exp >= pwr; exp -= pwr, f_pwr -= sizeof (float))
+	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1, f_pwr -= sizeof (float))
+	    for (; exp >= pwr; exp -= pwr)
 		x.flt *= pgm_read_float_far (f_pwr);
 #endif /* ELPM ? */
 
