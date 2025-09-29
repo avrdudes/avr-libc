@@ -2557,7 +2557,7 @@ They influence how pars of the library behave.
 
 \section faq_toolchain_sources Where can I find the source code of the tools?
 
-Here are web views of the GIT repos of the projects ans some points
+Here are web views of the GIT repos of the projects and some points
 of interest.
 
 <a href="https://sourceware.org/binutils"><b>Binutils</b></a>
