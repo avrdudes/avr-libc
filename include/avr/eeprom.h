@@ -59,9 +59,12 @@
     EEPROM access to ensure that no time will be wasted in spinloops
     will have to deploy their own implementation.
 
-    \par Notes:
+    <b>Notes:</b>
 
-    - In addition to the write functions there is a set of update ones.
+    - Date is stores and retrieved in little endian format and with
+    no padding bytes or alignment requirements.
+
+    - In addition to the write functions there is a set of update functions.
     This functions read each byte first and skip the burning if the
     old value is the same with new.  The scanning direction is from
     high address to low, to obtain quick return in common cases.
@@ -93,8 +96,7 @@ extern "C" {
 
 #include <bits/attribs.h>
 
-/** \def EEMEM
-    \ingroup avr_eeprom
+/** \ingroup avr_eeprom
     Attribute expression causing a variable to be allocated within the
     .eeprom section.	*/
 #define EEMEM __attribute__((__section__(".eeprom")))
@@ -118,22 +120,19 @@ extern "C" {
 #endif
 
 
-/** \def eeprom_busy_wait
-    \ingroup avr_eeprom
+/** \ingroup avr_eeprom
     Loops until the eeprom is no longer busy.
-    \returns Nothing.
- */
+    \returns Nothing. */
 #define eeprom_busy_wait() do {} while (!eeprom_is_ready())
 
+/** \name EEPROM Read Functions */
 
 /** \ingroup avr_eeprom
-    Read one byte from EEPROM address \a __p.
- */
+    Read one byte from EEPROM address \a __p. */
 uint8_t eeprom_read_byte (const uint8_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
-    Read one 16-bit word (little endian) from EEPROM address \a __p.
- */
+    Read one 16-bit word from EEPROM address \a __p. */
 uint16_t eeprom_read_word (const uint16_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
@@ -151,27 +150,23 @@ int24_t eeprom_read_i24 (const int24_t *__p) __ATTR_PURE__;
 #endif
 
 /** \ingroup avr_eeprom
-    Read one 32-bit double word (little endian) from EEPROM address \a __p.
- */
+    Read one 32-bit double word from EEPROM address \a __p. */
 uint32_t eeprom_read_dword (const uint32_t *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
-    Read one 64-bit quad word (little endian) from EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    Read one 64-bit quad word from EEPROM address \a __p.
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 uint64_t eeprom_read_qword (const uint64_t *__p) __ATTR_PURE__;
 #endif
 
 /** \ingroup avr_eeprom
-    Read one float value (little endian) from EEPROM address \a __p.
- */
+    Read one float value from EEPROM address \a __p. */
 float eeprom_read_float (const float *__p) __ATTR_PURE__;
 
 /** \ingroup avr_eeprom
-    Read one double value (little endian) from EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    Read one double value from EEPROM address \a __p.
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__)
 double eeprom_read_double (const double *__p);
 #elif __SIZEOF_DOUBLE__ == 4
@@ -181,9 +176,8 @@ double eeprom_read_double (const double *__p) __asm("eeprom_read_qword");
 #endif
 
 /** \ingroup avr_eeprom
-    Read one long double value (little endian) from EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    Read one long double value from EEPROM address \a __p.
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__)
 long double eeprom_read_long_double (const long double *__p);
 #elif __SIZEOF_LONG_DOUBLE__ == 4
@@ -194,19 +188,18 @@ long double eeprom_read_long_double (const long double *__p) __asm("eeprom_read_
 
 /** \ingroup avr_eeprom
     Read a block of \a __n bytes from EEPROM address \a __src to SRAM
-    \a __dst.
- */
+    \a __dst. */
 void eeprom_read_block (void *__dst, const void *__src, size_t __n);
 
 
+/** \name EEPROM Write Function */
+
 /** \ingroup avr_eeprom
-    Write a byte \a __value to EEPROM address \a __p.
- */
+    Write a byte \a __value to EEPROM address \a __p. */
 void eeprom_write_byte (uint8_t *__p, uint8_t __value);
 
 /** \ingroup avr_eeprom
-    Write a word \a __value to EEPROM address \a __p.
- */
+    Write a word \a __value to EEPROM address \a __p. */
 
 void eeprom_write_word (uint16_t *__p, uint16_t __value);
 
@@ -225,27 +218,23 @@ void eeprom_write_i24 (int24_t *__p, int24_t __value);
 #endif
 
 /** \ingroup avr_eeprom
-    Write a 32-bit double word \a __value to EEPROM address \a __p.
- */
+    Write a 32-bit double word \a __value to EEPROM address \a __p. */
 void eeprom_write_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
     Write a 64-bit quad word \a __value to EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 void eeprom_write_qword (uint64_t *__p, uint64_t __value);
 #endif
 
 /** \ingroup avr_eeprom
-    Write a float \a __value to EEPROM address \a __p.
- */
+    Write a float \a __value to EEPROM address \a __p. */
 void eeprom_write_float (float *__p, float __value);
 
 /** \ingroup avr_eeprom
     Write a double \a __value to EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__)
 void eeprom_write_double (double *__p, double __value);
 #elif __SIZEOF_DOUBLE__ == 4
@@ -256,8 +245,7 @@ void eeprom_write_double (double *__p, double __value) __asm("eeprom_write_qword
 
 /** \ingroup avr_eeprom
     Write a long double \a __value to EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__)
 void eeprom_write_long_double (long double *__p, long double __value);
 #elif __SIZEOF_LONG_DOUBLE__ == 4
@@ -268,19 +256,18 @@ void eeprom_write_long_double (long double *__p, long double __value) __asm("eep
 
 /** \ingroup avr_eeprom
     Write a block of \a __n bytes to EEPROM address \a __dst from \a __src.
-    \note The argument order is mismatch with common functions like strcpy().
- */
+    \note The argument order is mismatch with common functions like strcpy(). */
 void eeprom_write_block (const void *__src, void *__dst, size_t __n);
 
 
+/** \name EEPROM Update Function */
+
 /** \ingroup avr_eeprom
-    Update a byte \a __value at EEPROM address \a __p.
- */
+    Update a byte \a __value at EEPROM address \a __p. */
 void eeprom_update_byte (uint8_t *__p, uint8_t __value);
 
 /** \ingroup avr_eeprom
-    Update a word \a __value at EEPROM address \a __p.
- */
+    Update a word \a __value at EEPROM address \a __p. */
 void eeprom_update_word (uint16_t *__p, uint16_t __value);
 
 /** \ingroup avr_eeprom
@@ -298,27 +285,23 @@ void eeprom_update_i24 (int24_t *__p, int24_t __value);
 #endif
 
 /** \ingroup avr_eeprom
-    Update a 32-bit double word \a __value at EEPROM address \a __p.
- */
+    Update a 32-bit double word \a __value at EEPROM address \a __p. */
 void eeprom_update_dword (uint32_t *__p, uint32_t __value);
 
 /** \ingroup avr_eeprom
     Update a 64-bit quad word \a __value at EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__) || __SIZEOF_LONG_LONG__ == 8
 void eeprom_update_qword (uint64_t *__p, uint64_t __value);
 #endif
 
 /** \ingroup avr_eeprom
-    Update a float \a __value at EEPROM address \a __p.
- */
+    Update a float \a __value at EEPROM address \a __p. */
 void eeprom_update_float (float *__p, float __value);
 
 /** \ingroup avr_eeprom
     Update a double \a __value at EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__)
 void eeprom_update_double (double *__p, double __value);
 #elif __SIZEOF_DOUBLE__ == 4
@@ -329,8 +312,7 @@ void eeprom_update_double (double *__p, double __value) __asm("eeprom_update_qwo
 
 /** \ingroup avr_eeprom
     Update a long double \a __value at EEPROM address \a __p.
-    \since AVR-LibC v2.2
- */
+    \since AVR-LibC v2.2 */
 #if defined(__DOXYGEN__)
 void eeprom_update_long_double (long double *__p, long double __value);
 #elif __SIZEOF_LONG_DOUBLE__ == 4
@@ -341,31 +323,26 @@ void eeprom_update_long_double (long double *__p, long double __value) __asm("ee
 
 /** \ingroup avr_eeprom
     Update a block of \a __n bytes at EEPROM address \a __dst from \a __src.
-    \note The argument order is mismatch with common functions like strcpy().
- */
+    \note The argument order is mismatch with common functions like strcpy(). */
 void eeprom_update_block (const void *__src, void *__dst, size_t __n);
 
 
-/** \name IAR C compatibility defines	*/
+/** \name IAR C Compatibility Defines	*/
 /**@{*/
 
-/** \def _EEPUT
-    \ingroup avr_eeprom
+/** \ingroup avr_eeprom
     Write a byte to EEPROM. Compatibility define for IAR C.	*/
 #define _EEPUT(addr, val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
 
-/** \def __EEPUT
-    \ingroup avr_eeprom
+/** \ingroup avr_eeprom
     Write a byte to EEPROM. Compatibility define for IAR C.	*/
 #define __EEPUT(addr, val) eeprom_write_byte ((uint8_t *)(addr), (uint8_t)(val))
 
-/** \def _EEGET
-    \ingroup avr_eeprom
+/** \ingroup avr_eeprom
     Read a byte from EEPROM. Compatibility define for IAR C.	*/
 #define _EEGET(var, addr) (var) = eeprom_read_byte ((const uint8_t *)(addr))
 
-/** \def __EEGET
-    \ingroup avr_eeprom
+/** \ingroup avr_eeprom
     Read a byte from EEPROM. Compatibility define for IAR C.	*/
 #define __EEGET(var, addr) (var) = eeprom_read_byte ((const uint8_t *)(addr))
 
