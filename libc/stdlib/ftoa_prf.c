@@ -26,6 +26,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+#include <stdint.h>
 #include "ftoa_engine.h"
 #include "dtoa_conv.h"
 #include "sectionname.h"
@@ -33,19 +34,14 @@
 
 ATTRIBUTE_CLIB_SECTION
 int
-ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
-          unsigned char flags)
+ftoa_prf (float val, char *s, uint8_t width, uint8_t prec, uint8_t flags)
 {
-    int exp;
-    int n;
-    unsigned char vtype;
-    unsigned char sign;
-    unsigned char ndigs;
-    unsigned char buf[9];
+    uint8_t sign;
+    uint8_t buf[9];
 
-    ndigs = prec < 60 ? prec + 1 : 60;
-    exp = __ftoa_engine (val, (char *)buf, 7, ndigs);
-    vtype = buf[0];
+    uint8_t ndigs = prec < 60 ? prec + 1 : 60;
+    int exp = __ftoa_engine (val, (char*) buf, 7, ndigs);
+    uint8_t vtype = buf[0];
 
     sign = 0;
     if ((vtype & (FTOA_MINUS | FTOA_NAN)) == FTOA_MINUS)
@@ -117,7 +113,7 @@ ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
         return DTOA_NONFINITE;
     }
 
-    n = (sign ? 1 : 0) + (exp>0 ? exp+1 : 1) + (prec ? prec+1 : 0);
+    int n = (sign ? 1 : 0) + (exp > 0 ? exp + 1 : 1) + (prec ? prec + 1 : 0);
     width = width > n ? width - n : 0;
 
     if (!(flags & DTOA_LEFT) && !(flags & DTOA_ZFILL))
@@ -158,7 +154,7 @@ ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
             break;
         *s++ = flags;
     }
-    if ( n == exp && (sign > '5' || (sign == '5' && !(vtype & FTOA_CARRY))) )
+    if (n == exp && (sign > '5' || (sign == '5' && !(vtype & FTOA_CARRY))))
         flags = '1';
     *s++ = flags;
 
@@ -173,7 +169,7 @@ ftoa_prf (float val, char *s, unsigned char width, unsigned char prec,
 }
 
 DALIAS (ftoa_prf)
-int dtoa_prf (double, char*, unsigned char, unsigned char, unsigned char);
+int dtoa_prf (double, char*, uint8_t, uint8_t, uint8_t);
 
 LALIAS (ftoa_prf)
-int ldtoa_prf (long double, char*, unsigned char, unsigned char, unsigned char);
+int ldtoa_prf (long double, char*, uint8_t, uint8_t, uint8_t);

@@ -33,9 +33,9 @@ stdlib_a_c_sources = \
 	bsearch.c \
 	calloc.c \
 	errno.c \
-	dtoa_prf.c \
-	dtostre.c \
-	dtostrf.c \
+	ftoa_prf.c \
+	ftostre.c \
+	ftostrf.c \
 	getenv.c \
 	labs.c \
 	malloc.c \

@@ -27,88 +27,38 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdlib.h>
-#include <avr/pgmspace.h>
+#include <stdint.h>
 #include "ftoa_engine.h"
+#include "dtoa_conv.h"
 #include "sectionname.h"
 #include "alias.h"
 
+/* ???  Is 'width' a signed value?
+   dtostrf.S comment:
+	If precision is < 0, the string is left adjusted with leading spaces.
+	If precision is > 0, the string is right adjusted with trailing spaces.
+   dtostrf.S code:
+	'p_width' is a register for left/right adjustment
+   AVR-LibC manual:
+	nothing about this
+
+   So, for compatibilty 'width' is signed value to left/right adjust.
+ */
+
 ATTRIBUTE_CLIB_SECTION
 char *
-ftostre (float val, char *sbeg, unsigned char prec, unsigned char flags)
+ftostrf (float val, int8_t width, uint8_t prec, char *sout)
 {
-    char *d;		/* dst	*/
-    const char *s;	/* src	*/
-    signed char exp;
-    unsigned char vtype;
-
-    if (prec > 7) prec = 7;
-
-    exp = __ftoa_engine (val, sbeg, prec, 0);
-    s = d = sbeg;
-    vtype = *s++;
-
-    if ((vtype & FTOA_MINUS) && !(vtype & FTOA_NAN))	/* like 'Glibc'	*/
-	*d++ = '-';
-    else if (flags & DTOSTR_PLUS_SIGN)
-	*d++ = '+';
-    else if (flags & DTOSTR_ALWAYS_SIGN)
-	*d++ = ' ';
-
-    if (vtype & FTOA_NAN) {
-	/* "NAN" or "nan" */
-	char c = (flags & DTOSTR_UPPERCASE) ? 'N' : 'n';
-	d[0] = c;
-	d[2] = c;
-	d[1] = c + 'a' - 'n';
-	d[3] = '\0';
-	return sbeg;
-    }
-
-    if (vtype & FTOA_INF) {
-	/* "INF" or "inf" */
-	char c = (flags & DTOSTR_UPPERCASE) ? 'I' : 'i';
-	d[0] = c;
-	d[1] = c + 'n' - 'i';
-	d[2] = c + 'f' - 'i';
-	d[3] = '\0';
-	return sbeg;
-    }
-
-    /* mantissa	*/
-    if ( (*d++ = *s++) != '1')
-	vtype &= ~FTOA_CARRY;		/* for possible exponent "-00"	*/
-    if (prec) {
-	unsigned char c1, c2;
-	c1 = '.';
-	do {
-	    c2 = *s++;
-	    *d++ = c1;
-	    c1 = c2;
-	} while (--prec);
-	*d++ = c1;
-    }
-
-    /* exponent	*/
-    *d++ = (flags & DTOSTR_UPPERCASE) ? 'E' : 'e';
-    if (exp < 0) {
-	*d++ = '-';
-	exp = -exp;
-    } else if (exp == 0 && (vtype & FTOA_CARRY) != 0) {
-	*d++ = '-';
-    } else {
-	*d++ = '+';
-    }
-    for (prec = '0';  exp >= 10;  exp -= 10)
-	prec += 1;
-    *d++ = prec;
-    *d++ = '0' + exp;
-    *d = 0;
-
-    return sbeg;
+    // DTOA_UPPER: for compatibility with AVR-LibC <= 1.4 with NaNs
+    uint8_t flags = width < 0
+	? DTOA_UPPER | DTOA_LEFT
+	: DTOA_UPPER;
+    ftoa_prf (val, sout, abs (width), prec, flags);
+    return sout;
 }
 
-DALIAS (ftostre)
-char* dtostre (double, char*, unsigned char, unsigned char);
+DALIAS (ftostrf)
+char* dtostrf (double, int8_t, uint8_t, char*);
 
-LALIAS (ftostre)
-char* ldtostre (long double, char*, unsigned char, unsigned char);
+LALIAS (ftostrf)
+char* ldtostrf (long double, int8_t, uint8_t, char*);
