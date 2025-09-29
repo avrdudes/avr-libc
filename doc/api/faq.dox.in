@@ -101,6 +101,7 @@
 - <b>Toolchain</b>
   - \ref faq_toolchain_version
   - \ref faq_toolchain_sources
+  - \ref faq_toolchain_bugs
 
 - <b>Other</b>
   - \ref faq_wrong_baud_rate
@@ -2588,6 +2589,23 @@ of interest.
 - Startup code:
   <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
      >crt1/gcrt1.S</a>
+
+<small>Back to \ref faq_index.</small>
+
+
+\section faq_toolchain_bugs Where can I report a problem?
+
+The projects have issue trackers:
+- <a href="https://gcc.gnu.org/bugzilla/">GCC Bugzilla</a> and the
+  <a href="https://gcc.gnu.org/bugs/#report">GCC bug-reporting guide</a>
+- <a href="https://sourceware.org/bugzilla/">Binutils Bugzilla</a> and the
+  <a href="https://sourceware.org/bugzilla/page.cgi?id=bug-writing.html"
+     >Binutils bug-reporting guide</a>
+- <a href="https://github.com/avrdudes/avr-libc/issues">AVR-LibC issues</a>
+
+Please make sure to use the most recent tool version before filing
+an issue.  When reporting a problem, please make sure that the
+report is self-contained and that the artifact can be reproduced by others.
 
 <small>Back to \ref faq_index.</small>
 
