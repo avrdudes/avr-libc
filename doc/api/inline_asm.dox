@@ -1382,11 +1382,12 @@ end of the declaration.
 
 For example, this is how <code>avr/eeprom.h</code> desclares the
 \c eeprom_read_double() function:
+<!-- Use 2 spaces before __asm so filter-dox.sh won't eat it. -->
 \code
 #if __SIZEOF_DOUBLE__ == 4
-double eeprom_read_double (const double*) __asm("eeprom_read_dword");
+double eeprom_read_double (const double*)  __asm("eeprom_read_dword");
 #elif __SIZEOF_DOUBLE__ == 8
-double eeprom_read_double (const double*) __asm("eeprom_read_qword");
+double eeprom_read_double (const double*)  __asm("eeprom_read_qword");
 #endif
 \endcode
 

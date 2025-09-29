@@ -12,4 +12,5 @@
     -e 's:__ATTR_MALLOC__::g' \
     -e 's:__extension__::g' \
     -e 's:__inline__:inline:g' \
+    -e 's:) __asm(".*"):):g' \
     $1
