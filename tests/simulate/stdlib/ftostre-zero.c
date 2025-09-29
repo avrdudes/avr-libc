@@ -26,39 +26,35 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test for subnormal numbers. */
 #include <stdlib.h>
 #include <string.h>
 #include "progmem.h"
-#include "dtostre.h"
+#include "ftostre.h"
 
-PROGMEM static const struct dtostre_s t[] = {
+PROGMEM static const struct ftostre_s t[] = {
+    
+    { { 0 }, 0, 0,		"0e+00" },
+    { { 0x80000000 }, 0, 0,	"-0e+00" },	/* 'minus 0'	*/
+    { { 0 }, 0, DTOSTR_PLUS_SIGN,	"+0e+00" },
+    { { 0 }, 0, DTOSTR_ALWAYS_SIGN,	" 0e+00" },
+    { { 0 }, 0, DTOSTR_ALWAYS_SIGN | DTOSTR_PLUS_SIGN,	"+0e+00" },
+    { { 0 }, 0, DTOSTR_UPPERCASE,	"0E+00" },
+    { { 0 }, 1, 0,		"0.0e+00" },
+    { { 0 }, 2, 0,		"0.00e+00" },
+    { { 0 }, 3, 0,		"0.000e+00" },
+    { { 0 }, 4, 0,		"0.0000e+00" },
+    { { 0 }, 5, 0,		"0.00000e+00" },
+    { { 0 }, 6, 0,		"0.000000e+00" },
+    { { 0 }, 7, 0,		"0.0000000e+00" },
+    { { 0 }, 8, 0,		"0.0000000e+00" },
+    { { 0 }, 255, 0,		"0.0000000e+00" },
 
-    { { 0x007fffff }, 7, 0,	"1.1754942e-38" },
-
-    { { 0x00000001 }, 0, 0,	"1e-45" },
-    { { 0x00000001 }, 1, 0,	"1.4e-45" },
-    { { 0x00000001 }, 2, 0,	"1.40e-45" },
-    { { 0x00000001 }, 3, 0,	"1.401e-45" },
-    { { 0x00000001 }, 4, 0,	"1.4013e-45" },
-    { { 0x00000001 }, 5, 0,	"1.40130e-45" },
-/*    { { 0x00000001 }, 6, 0,	"1.401298e-45" },	*/
-/*    { { 0x00000001 }, 7, 0,	"1.4012985e-45" },	*/
-
-    { { 0x00000002 }, 0, 0,	"3e-45" },
-    { { 0x00000002 }, 1, 0,	"2.8e-45" },
-    { { 0x00000002 }, 2, 0,	"2.80e-45" },
-    { { 0x00000002 }, 3, 0,	"2.803e-45" },
-    { { 0x00000002 }, 4, 0,	"2.8026e-45" },
-    { { 0x00000002 }, 5, 0,	"2.80260e-45" },
-/*    { { 0x00000002 }, 6, 0,	"2.802597e-45" },	*/
-/*    { { 0x00000002 }, 7, 0,	"2.8025969e-45" },	*/
 };
 
 int main ()
 {
     int i;
     for (i= 0; (size_t)i != sizeof(t)/sizeof(t[0]); i++)
-	run_dtostre (t+i, i+1);
+	run_ftostre (t+i, i+1);
     return 0;
 }

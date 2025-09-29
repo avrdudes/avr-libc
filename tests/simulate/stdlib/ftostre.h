@@ -26,13 +26,13 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* Header+source file to test the dtostre() function. */
+/* Header+source file to test the ftostre() function. */
 
 #ifndef	PATTERN_SIZE
 # define PATTERN_SIZE	15
 #endif
 
-struct dtostre_s {
+struct ftostre_s {
     union {
 	long lo;
 	float fl;
@@ -53,7 +53,7 @@ struct dtostre_s {
 
 /* This function is intended for run of test cases on the host computer.
  */
-char * dtostre (double val, char *s, unsigned char prec, unsigned char flags)
+char * ftostre (double val, char *s, unsigned char prec, unsigned char flags)
 {
     char fmt[8];
     char sign[2];
@@ -77,7 +77,7 @@ char * dtostre (double val, char *s, unsigned char prec, unsigned char flags)
 
 #define	PZLEN	5	/* protected zone length	*/
 
-void run_dtostre (const struct dtostre_s *pt, int testno)
+void run_ftostre (const struct ftostre_s *pt, int testno)
 {
     union {
 	long lo;
@@ -99,7 +99,7 @@ void run_dtostre (const struct dtostre_s *pt, int testno)
     prec   = pt->prec;
     flags  = pt->flags;
 #endif
-    ps = dtostre (val.fl, s + PZLEN, prec, flags);
+    ps = ftostre (val.fl, s + PZLEN, prec, flags);
 
     if (ps != s + PZLEN)
 	exit (testno + 0x1000);

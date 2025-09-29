@@ -31,9 +31,9 @@
 #include "progmem.h"
 
 #define PATTERN_SIZE	270
-#include "dtostrf.h"
+#include "ftostrf.h"
 
-PROGMEM static const struct dtostrf_s t[] = {
+PROGMEM static const struct ftostrf_s t[] = {
 
     { { .fl = 1.2345678 }, 127, 7,
 	"                                "	/* 32 */
@@ -97,6 +97,6 @@ int main ()
 {
     int i;
     for (i= 0; (size_t)i != sizeof(t)/sizeof(t[0]); i++)
-	run_dtostrf (t+i, i+1);
+	run_ftostrf (t+i, i+1);
     return 0;
 }

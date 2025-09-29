@@ -29,9 +29,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "progmem.h"
-#include "dtostre.h"
+#include "ftostre.h"
 
-PROGMEM static const struct dtostre_s t[] = {
+PROGMEM static const struct ftostre_s t[] = {
 
     { { .fl = 1.1e+00 }, 1, 0,	"1.1e+00" },
     { { .fl = 9.9e+00 }, 1, 0,	"9.9e+00" },
@@ -121,6 +121,6 @@ int main ()
 {
     int i;
     for (i= 0; (size_t)i != sizeof(t)/sizeof(t[0]); i++)
-	run_dtostre (t+i, i+1);
+	run_ftostre (t+i, i+1);
     return 0;
 }

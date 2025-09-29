@@ -26,37 +26,39 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* Case of negative zero exponent: 'e-00'. */
+/* Test for subnormal numbers. */
 #include <stdlib.h>
 #include <string.h>
 #include "progmem.h"
-#include "dtostre.h"
+#include "ftostre.h"
 
-PROGMEM static const struct dtostre_s t[] = {
+PROGMEM static const struct ftostre_s t[] = {
 
-    { { 0x3f7fffff }, 0, 0,	"1e-00" },
-    { { 0x3f7fffff }, 1, 0,	"1.0e-00" },
-    { { 0x3f7fffff }, 2, 0,	"1.00e-00" },
-    { { 0x3f7fffff }, 3, 0,	"1.000e-00" },
-    { { 0x3f7fffff }, 4, 0,	"1.0000e-00" },
-    { { 0x3f7fffff }, 5, 0,	"1.00000e-00" },
-    { { 0x3f7fffff }, 6, 0,	"9.999999e-01" },
-    { { 0x3f7fffff }, 7, 0,	"9.9999994e-01" },
+    { { 0x007fffff }, 7, 0,	"1.1754942e-38" },
 
-    { { 0xbf7fffff }, 0, 0,	"-1e-00" },
-    
-    { { .fl = 0.9500001 }, 0, 0,	"1e-00" },
-    { { .fl = 0.9950001 }, 1, 0,	"1.0e-00" },
-    { { .fl = 0.9995001 }, 2, 0,	"1.00e-00" },
-    { { .fl = 0.9999501 }, 3, 0,	"1.000e-00" },
-    { { .fl = 0.9999951 }, 4, 0,	"1.0000e-00" },
-    { { .fl = 0.9999996 }, 5, 0,	"1.00000e-00" },
+    { { 0x00000001 }, 0, 0,	"1e-45" },
+    { { 0x00000001 }, 1, 0,	"1.4e-45" },
+    { { 0x00000001 }, 2, 0,	"1.40e-45" },
+    { { 0x00000001 }, 3, 0,	"1.401e-45" },
+    { { 0x00000001 }, 4, 0,	"1.4013e-45" },
+    { { 0x00000001 }, 5, 0,	"1.40130e-45" },
+/*    { { 0x00000001 }, 6, 0,	"1.401298e-45" },	*/
+/*    { { 0x00000001 }, 7, 0,	"1.4012985e-45" },	*/
+
+    { { 0x00000002 }, 0, 0,	"3e-45" },
+    { { 0x00000002 }, 1, 0,	"2.8e-45" },
+    { { 0x00000002 }, 2, 0,	"2.80e-45" },
+    { { 0x00000002 }, 3, 0,	"2.803e-45" },
+    { { 0x00000002 }, 4, 0,	"2.8026e-45" },
+    { { 0x00000002 }, 5, 0,	"2.80260e-45" },
+/*    { { 0x00000002 }, 6, 0,	"2.802597e-45" },	*/
+/*    { { 0x00000002 }, 7, 0,	"2.8025969e-45" },	*/
 };
 
 int main ()
 {
     int i;
     for (i= 0; (size_t)i != sizeof(t)/sizeof(t[0]); i++)
-	run_dtostre (t+i, i+1);
+	run_ftostre (t+i, i+1);
     return 0;
 }

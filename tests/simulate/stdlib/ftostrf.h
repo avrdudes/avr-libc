@@ -26,13 +26,13 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* Header+source file to test the dtostrf() function. */
+/* Header+source file to test the ftostrf() function. */
 
 #ifndef	PATTERN_SIZE
 # define PATTERN_SIZE	15
 #endif
 
-struct dtostrf_s {
+struct ftostrf_s {
     union {
 	long lo;
 	float fl;
@@ -49,7 +49,7 @@ struct dtostrf_s {
 
 /* This function is intended for run of test cases on the host computer.
  */
-char * dtostrf (double val, signed char width, unsigned char prec, char *s)
+char * ftostrf (double val, signed char width, unsigned char prec, char *s)
 {
     char fmt[16];	/* "%-110.100F"	*/
     
@@ -61,7 +61,7 @@ char * dtostrf (double val, signed char width, unsigned char prec, char *s)
 
 #define	PZLEN	5	/* protected zone length	*/
 
-void run_dtostrf (const struct dtostrf_s *pt, int testno)
+void run_ftostrf (const struct ftostrf_s *pt, int testno)
 {
     union {
 	long lo;
@@ -84,7 +84,7 @@ void run_dtostrf (const struct dtostrf_s *pt, int testno)
     width  = pt->width;
     prec   = pt->prec;
 #endif
-    ps = dtostrf (val.fl, width, prec, s + PZLEN);
+    ps = ftostrf (val.fl, width, prec, s + PZLEN);
 
     if (ps != s + PZLEN)
 	exit (testno + 0x1000);
