@@ -1457,6 +1457,254 @@ _Avrlibc_Def_Pgm_Far_8 (llk, long long accum)
 _Avrlibc_Def_Pgm_Far_8 (ullk, unsigned long long accum)
 #endif /* Doxygen */
 
+/** \name EEPROM Read Functions */
+
+/** \ingroup avr_stdfix
+    Read a <tt>short fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+short fract eeprom_read_hr (const short fract *__p) __asm("eeprom_read_byte") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned short fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned short fract eeprom_read_uhr (const unsigned short fract *__p) __asm("eeprom_read_byte") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read a <tt>fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+fract eeprom_read_r (const fract *__p) __asm("eeprom_read_word") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned fract eeprom_read_ur (const unsigned fract *__p) __asm("eeprom_read_word") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read a <tt>long fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+long fract eeprom_read_lr (const long fract *__p) __asm("eeprom_read_dword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned long fract eeprom_read_ulr (const unsigned long fract *__p) __asm("eeprom_read_dword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read a <tt>long long fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+long long fract eeprom_read_llr (const long long fract *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long long fract</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned long long fract eeprom_read_ullr (const unsigned long long fract *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read a <tt>short accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+short accum eeprom_read_hk (const short accum *__p) __asm("eeprom_read_word") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned short accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned short accum eeprom_read_uhk (const unsigned short accum *__p) __asm("eeprom_read_word") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+accum eeprom_read_k (const accum *__p) __asm("eeprom_read_dword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned accum eeprom_read_uk (const unsigned accum *__p) __asm("eeprom_read_dword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read a <tt>long accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+long accum eeprom_read_lk (const long accum *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned long accum eeprom_read_ulk (const unsigned long accum *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read a <tt>long long accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+long long accum eeprom_read_llk (const long long accum *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long long accum</tt> from EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+unsigned long long accum eeprom_read_ullk (const unsigned long long accum *__p) __asm("eeprom_read_qword") __ATTR_PURE__;
+
+
+/** \name EEPROM Write Functions */
+
+/** \ingroup avr_stdfix
+    Write a <tt>short fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_hr (short fract *__p, short fract __value) __asm("eeprom_write_byte");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned short fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_uhr (unsigned short fract *__p, unsigned short fract __value) __asm("eeprom_write_byte");
+
+/** \ingroup avr_stdfix
+    Write a <tt>fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_r (fract *__p, fract __value) __asm("eeprom_write_word");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_ur (unsigned fract *__p, unsigned fract __value) __asm("eeprom_write_word");
+
+/** \ingroup avr_stdfix
+    Write a <tt>long fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_lr (long fract *__p, long fract __value) __asm("eeprom_write_dword");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned long fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_ulr (unsigned long fract *__p, unsigned long fract __value) __asm("eeprom_write_dword");
+
+/** \ingroup avr_stdfix
+    Write a <tt>long long fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_llr (long long fract *__p, long long fract __value) __asm("eeprom_write_qword");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned long long fract</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_ullr (unsigned long long fract *__p, unsigned long long fract __value) __asm("eeprom_write_qword");
+
+/** \ingroup avr_stdfix
+    Write a <tt>short accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_hk (short accum *__p, short accum __value) __asm("eeprom_write_word");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned short accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_uhk (unsigned short accum *__p, unsigned short accum __value) __asm("eeprom_write_word");
+
+/** \ingroup avr_stdfix
+    Write an <tt>accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_k (accum *__p, accum __value) __asm("eeprom_write_dword");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_uk (unsigned accum *__p, unsigned accum __value) __asm("eeprom_write_dword");
+
+/** \ingroup avr_stdfix
+    Write a <tt>long accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_lk (long accum *__p, long accum __value) __asm("eeprom_write_qword");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned long accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_ulk (unsigned long accum *__p, unsigned long accum __value) __asm("eeprom_write_qword");
+
+/** \ingroup avr_stdfix
+    Write a <tt>long long accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_llk (long long accum *__p, long long accum __value) __asm("eeprom_write_qword");
+
+/** \ingroup avr_stdfix
+    Write an <tt>unsigned long long accum</tt> to EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_write_ullk (unsigned long long accum *__p, unsigned long long accum __value) __asm("eeprom_write_qword");
+
+
+/** \name EEPROM Update Functions */
+
+/** \ingroup avr_stdfix
+    Update a <tt>short fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_hr (short fract *__p, short fract __value) __asm("eeprom_update_byte");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned short fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_uhr (unsigned short fract *__p, unsigned short fract __value) __asm("eeprom_update_byte");
+
+/** \ingroup avr_stdfix
+    Update a <tt>fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_r (fract *__p, fract __value) __asm("eeprom_update_word");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_ur (unsigned fract *__p, unsigned fract __value) __asm("eeprom_update_word");
+
+/** \ingroup avr_stdfix
+    Update a <tt>long fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_lr (long fract *__p, long fract __value) __asm("eeprom_update_dword");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned long fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_ulr (unsigned long fract *__p, unsigned long fract __value) __asm("eeprom_update_dword");
+
+/** \ingroup avr_stdfix
+    Update a <tt>long long fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_llr (long long fract *__p, long long fract __value) __asm("eeprom_update_qword");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned long long fract</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_ullr (unsigned long long fract *__p, unsigned long long fract __value) __asm("eeprom_update_qword");
+
+/** \ingroup avr_stdfix
+    Update a <tt>short accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_hk (short accum *__p, short accum __value) __asm("eeprom_update_word");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned short accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_uhk (unsigned short accum *__p, unsigned short accum __value) __asm("eeprom_update_word");
+
+/** \ingroup avr_stdfix
+    Update an <tt>accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_k (accum *__p, accum __value) __asm("eeprom_update_dword");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_uk (unsigned accum *__p, unsigned accum __value) __asm("eeprom_update_dword");
+
+/** \ingroup avr_stdfix
+    Update a <tt>long accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_lk (long accum *__p, long accum __value) __asm("eeprom_update_qword");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned long accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_ulk (unsigned long accum *__p, unsigned long accum __value) __asm("eeprom_update_qword");
+
+/** \ingroup avr_stdfix
+    Update a <tt>long long accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_llk (long long accum *__p, long long accum __value) __asm("eeprom_update_qword");
+
+/** \ingroup avr_stdfix
+    Update an <tt>unsigned long long accum</tt> at EEPROM address \a __p.
+    \since AVR-LibC v2.3 */
+void eeprom_update_ullk (unsigned long long accum *__p, unsigned long long accum __value) __asm("eeprom_update_qword");
+
 #ifdef __cplusplus
 }
 #endif

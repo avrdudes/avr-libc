@@ -75,6 +75,10 @@
   values from program space like `pgm_read_*` and `pgm_read_*_far`, where
   `*` stands for the fixed-point constant suffix.
 
+- Support has been added to <stdfix.h> for functions accessing the EEPROM
+  like `eeprom_read_*`, `eeprom_write_*` and `eeprom_update_*`, where
+  `*` stands for the fixed-point constant suffix.
+
 - Support has been added for fixed-point to decimal ASCII conversions:
   `ktoa`, `uktoa`, `hktoa`, `uhktoa`, `rtoa`, `urtoa`, `hrtoa`, `uhrtoa`.
 

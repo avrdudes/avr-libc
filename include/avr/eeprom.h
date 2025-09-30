@@ -69,6 +69,9 @@
     old value is the same with new.  The scanning direction is from
     high address to low, to obtain quick return in common cases.
 
+    - Similar functions for fixed-point types are supplied by
+    \ref avr_stdfix "<stdfix.h>".
+
     - All of the read/write functions first make sure the EEPROM is
     ready to be accessed.  Since this may cause long delays if a
     write operation is still pending, time-critical applications
