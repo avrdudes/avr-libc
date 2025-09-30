@@ -32,7 +32,6 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <limits.h>
 #include <math.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -192,7 +191,7 @@ strtof (const char *nptr, char **endptr)
 		    exp -= 1;
 		/* x.u32 = x.u32 * 10 + c	*/
 		x.u32 = mulsi10 (x.u32) + c;
-		if (x.u32 >= (ULONG_MAX - 9) / 10)
+		if (x.u32 >= (UINT32_MAX - 9) / 10)
 		    flag |= FL_OVFL;
 	    }
 	}

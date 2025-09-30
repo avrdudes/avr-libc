@@ -33,7 +33,6 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <limits.h>
 #include <math.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -57,10 +56,6 @@ extern int isfinitel (long double);
 extern long double __floatundidf (uint64_t);
 
 #define AS __BEST_AS
-
-// Like PSTR, but for AS.
-#define ASSTR(s) \
-    (__extension__({ static const AS char __c[] = (s); &__c[0]; }))
 
 #ifdef __AVR_HAVE_ELPM__
 // Don't assume we have __flashx.
@@ -205,7 +200,7 @@ strtold (const char *nptr, char **endptr)
 		    expo -= 1;
 		// x.u64 = 10 * x.u64 + c
 		x.u64 = madddi10 (x.u64, c);
-		if (x.u64 >= (ULLONG_MAX - 9) / 10)
+		if (x.u64 >= (UINT64_MAX - 9) / 10)
 		    flag |= FL_OVFL;
 	    }
 	}
