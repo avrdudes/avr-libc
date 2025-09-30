@@ -147,162 +147,162 @@
 /** \name Functions reading from PROGMEM */
 
 /** \ingroup avr_pgmspace
-    Read a <tt>char</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>char</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline char pgm_read_char (const char *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned char</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>unsigned char</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned char pgm_read_unsigned_char (const unsigned char *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>signed char</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>signed char</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline signed char pgm_read_signed_char (const signed char *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint8_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>uint8_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline uint8_t pgm_read_u8 (const uint8_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int8_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>int8_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline int8_t pgm_read_i8 (const int8_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>short</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>short</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline short pgm_read_short (const short *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned short</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>unsigned short</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned short pgm_read_unsigned_short (const unsigned short *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint16_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>uint16_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline uint16_t pgm_read_u16 (const uint16_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int16_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>int16_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline int16_t pgm_read_i16 (const int16_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>int</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline int pgm_read_int (const int *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>signed</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>signed</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline signed pgm_read_signed (const signed *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>unsigned</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned pgm_read_unsigned (const unsigned *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>signed int</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>signed int</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline signed int pgm_read_signed_int (const signed int *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned int</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>unsigned int</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned int pgm_read_unsigned_int (const unsigned int *addr);
 
 /** \ingroup avr_pgmspace
-    Read an \c #int24_t from 16-bit (near) byte-address \p addr.
+    Read an \c #int24_t from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline int24_t pgm_read_i24 (const int24_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read an \c #uint24_t from 16-bit (near) byte-address \p addr.
+    Read an \c #uint24_t from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline uint24_t pgm_read_u24 (const uint24_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint32_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>uint32_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline uint32_t pgm_read_u32 (const uint32_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int32_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>int32_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline int32_t pgm_read_i32 (const int32_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>long</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>long</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline long pgm_read_long (const long *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned long</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>unsigned long</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned long pgm_read_unsigned_long (const unsigned long *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>long long</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>long long</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline long long pgm_read_long_long (const long long *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned long long</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>unsigned long long</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned long long pgm_read_unsigned_long_long (const unsigned long long *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint64_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>uint64_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline uint64_t pgm_read_u64 (const uint64_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int64_t</tt> from 16-bit (near) byte-address \p addr.
+    Read an <tt>int64_t</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline int64_t pgm_read_i64 (const int64_t *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>float</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>float</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory. */
 static inline float pgm_read_float (const float *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>double</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>double</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline double pgm_read_double (const double *addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>long double</tt> from 16-bit (near) byte-address \p addr.
+    Read a <tt>long double</tt> from 16-bit address \p addr.
     The address is in the lower 64 KiB of program memory.
     \since AVR-LibC v2.2 */
 static inline long double pgm_read_long_double (const long double *addr);
@@ -389,162 +389,162 @@ _Avrlibc_Def_Pgm_8 (long_double, long double)
 /** \name Functions reading from PROGMEM_FAR */
 
 /** \ingroup avr_pgmspace
-    Read a <tt>char</tt> from far byte-address \p addr.
+    Read a <tt>char</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline char pgm_read_char_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned char</tt> from far byte-address \p addr.
+    Read an <tt>unsigned char</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned char pgm_read_unsigned_char_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>signed char</tt> from far byte-address \p addr.
+    Read a <tt>signed char</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline signed char pgm_read_signed_char_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint8_t</tt> from far byte-address \p addr.
+    Read an <tt>uint8_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline uint8_t pgm_read_u8_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int8_t</tt> from far byte-address \p addr.
+    Read an <tt>int8_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline int8_t pgm_read_i8_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>short</tt> from far byte-address \p addr.
+    Read a <tt>short</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline short pgm_read_short_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned short</tt> from far byte-address \p addr.
+    Read an <tt>unsigned short</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned short pgm_read_unsigned_short_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint16_t</tt> from far byte-address \p addr.
+    Read an <tt>uint16_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline uint16_t pgm_read_u16_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int16_t</tt> from far byte-address \p addr.
+    Read an <tt>int16_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline int16_t pgm_read_i16_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int</tt> from far byte-address \p addr.
+    Read an <tt>int</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline int pgm_read_int_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned</tt> from far byte-address \p addr.
+    Read an <tt>unsigned</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned pgm_read_unsigned_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned int</tt> from far byte-address \p addr.
+    Read an <tt>unsigned int</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned int pgm_read_unsigned_int_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>signed</tt> from far byte-address \p addr.
+    Read a <tt>signed</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline signed pgm_read_signed_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>signed int</tt> from far byte-address \p addr.
+    Read a <tt>signed int</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline signed int pgm_read_signed_int_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>long</tt> from far byte-address \p addr.
+    Read a <tt>long</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline long pgm_read_long_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned long</tt> from far byte-address \p addr.
+    Read an <tt>unsigned long</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned long pgm_read_unsigned_long_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an \c #int24_t from far byte-address \p addr.
+    Read an \c #int24_t from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline int24_t pgm_read_i24_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an \c #uint24_t from far byte-address \p addr.
+    Read an \c #uint24_t from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline uint24_t pgm_read_u24_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint32_t</tt> from far byte-address \p addr.
+    Read an <tt>uint32_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline uint32_t pgm_read_u32_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int32_t</tt> from far byte-address \p addr.
+    Read an <tt>int32_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline int32_t pgm_read_i32_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>long long</tt> from far byte-address \p addr.
+    Read a <tt>long long</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline long long pgm_read_long_long_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>unsigned long long</tt> from far byte-address \p addr.
+    Read an <tt>unsigned long long</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline unsigned long long pgm_read_unsigned_long_long_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>uint64_t</tt> from far byte-address \p addr.
+    Read an <tt>uint64_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline uint64_t pgm_read_u64_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read an <tt>int64_t</tt> from far byte-address \p addr.
+    Read an <tt>int64_t</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline int64_t pgm_read_i64_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>float</tt> from far byte-address \p addr.
+    Read a <tt>float</tt> from far address \p addr.
     The address is in the program memory. */
 static inline float pgm_read_float_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>double</tt> from far byte-address \p addr.
+    Read a <tt>double</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline double pgm_read_double_far (uint_farptr_t addr);
 
 /** \ingroup avr_pgmspace
-    Read a <tt>long double</tt> from far byte-address \p addr.
+    Read a <tt>long double</tt> from far address \p addr.
     The address is in the program memory.
     \since AVR-LibC v2.2 */
 static inline long double pgm_read_long_double_far (uint_farptr_t addr);
@@ -802,36 +802,34 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_near(__addr)
-    Read a byte from the program space with a 16-bit (near) byte-address. */
+    Read a byte from the program space with a 16-bit address. */
 #define pgm_read_byte_near(__addr) __LPM ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_near(__addr)
-    Read a word from the program space with a 16-bit (near) byte-address. */
+    Read a word from the program space with a 16-bit address. */
 #define pgm_read_word_near(__addr) __LPM_word ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword_near(__addr)
-    Read a double word from the program space with a 16-bit (near)
-    byte-address.  */
+    Read a double word from the program space with a 16-bit address.  */
 #define pgm_read_dword_near(__addr) \
     __LPM_dword ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_qword_near(__addr)
-    Read a quad-word from the program space with a 16-bit (near)
-    byte-address.
+    Read a quad-word from the program space with a 16-bit address.
     \since AVR-LibC v2.2  */
 #define pgm_read_qword_near(__addr) __LPM_qword ((uint16_t)(__addr))
 
 /** \ingroup avr_pgmspace
     \def pgm_read_float_near (const float *address)
-    Read a \c float from the program space with a 16-bit (near) byte-address.*/
+    Read a \c float from the program space with a 16-bit address.*/
 #define pgm_read_float_near(addr)  pgm_read_float (addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr_near(__addr)
-    Read a pointer from the program space with a 16-bit (near) byte-address. */
+    Read a pointer from the program space with a 16-bit address. */
 #define pgm_read_ptr_near(__addr) \
     ((void*) __LPM_word ((uint16_t)(__addr)))
 
@@ -839,58 +837,56 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte_far(__addr)
-    Read a byte from the program space with a 32-bit (far) byte-address. */
+    Read a byte from the program space with a 32-bit (far) address. */
 #define pgm_read_byte_far(__addr)  __ELPM (__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word_far(__addr)
-    Read a word from the program space with a 32-bit (far) byte-address. */
+    Read a word from the program space with a 32-bit (far) address. */
 #define pgm_read_word_far(__addr)  __ELPM_word (__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword_far(__addr)
-    Read a double word from the program space with a 32-bit (far)
-    byte-address. */
+    Read a double word from the program space with a 32-bit (far) address. */
 #define pgm_read_dword_far(__addr) __ELPM_dword (__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_qword_far(__addr)
-    Read a quad-word from the program space with a 32-bit (far) byte-address.
+    Read a quad-word from the program space with a 32-bit (far) address.
     \since AVR-LibC v2.2 */
 #define pgm_read_qword_far(__addr) __ELPM_qword (__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr_far(__addr)
-    Read a pointer from the program space with a 32-bit (far) byte-address. */
+    Read a pointer from the program space with a 32-bit (far) address. */
 #define pgm_read_ptr_far(__addr) ((void*) __ELPM_word (__addr))
 
 /** \name Macros reading from PROGMEM */
 
 /** \ingroup avr_pgmspace
     \def pgm_read_byte(__addr)
-    Read a byte from the program space with a 16-bit (near) nyte-address. */
+    Read a byte from the program space with a 16-bit address. */
 #define pgm_read_byte(__addr)    pgm_read_byte_near(__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_word(__addr)
-    Read a word from the program space with a 16-bit (near) byte-address. */
+    Read a word from the program space with a 16-bit address. */
 #define pgm_read_word(__addr)    pgm_read_word_near(__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_dword(__addr)
-    Read a double word from the program space with a 16-bit (near)
-    byte-address. */
+    Read a double word from the program space with a 16-bit address. */
 #define pgm_read_dword(__addr)   pgm_read_dword_near(__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_qword(__addr)
-    Read a quad-word from the program space with a 16-bit (near) byte-address.
+    Read a quad-word from the program space with a 16-bit address.
     \since AVR-LibC v2.2 */
 #define pgm_read_qword(__addr)   pgm_read_qword_near(__addr)
 
 /** \ingroup avr_pgmspace
     \def pgm_read_ptr(__addr)
-    Read a pointer from the program space with a 16-bit (near) byte-address. */
+    Read a pointer from the program space with a 16-bit address. */
 #define pgm_read_ptr(__addr)     pgm_read_ptr_near(__addr)
 
 /** \name Macros */
