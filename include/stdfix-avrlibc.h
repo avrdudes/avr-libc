@@ -1215,6 +1215,248 @@ extern char* hktoa (short accum, char*, unsigned char);
 extern char* hrtoa (short fract, char*, unsigned char);
 #endif /* Doxygen */
 
+#ifdef __DOXYGEN__
+/** \name Functions reading from PROGMEM */
+
+/** \ingroup avr_stdfix
+    Read a <tt>short fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline short fract pgm_read_hr (const short fract *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned short fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned short fract pgm_read_uhr (const unsigned short fract *addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline fract pgm_read_r (const fract *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned fract pgm_read_ur (const unsigned fract *addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline long fract pgm_read_lr (const long fract *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long fract pgm_read_ulr (const unsigned long fract *addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long long fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline long long fract pgm_read_llr (const long long fract *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long long fract</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long long fract pgm_read_ullr (const unsigned long long fract *addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>short accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline short accum pgm_read_hk (const short accum *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned short accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned short accum pgm_read_uhk (const unsigned short accum *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline accum pgm_read_k (const accum *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned accum pgm_read_uk (const unsigned accum *addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline long accum pgm_read_lk (const long accum *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long accum pgm_read_ulk (const unsigned long accum *addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long long accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline long long accum pgm_read_llk (const long long accum *addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long long accum</tt> from 16-bit address \p addr.
+    The address is in the lower 64 KiB of program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long long accum pgm_read_ullk (const unsigned long long accum *addr);
+
+#else /* Doxygen */
+
+#include <avr/pgmspace.h>
+
+_Avrlibc_Def_Pgm_1 (hr, short fract)
+_Avrlibc_Def_Pgm_1 (uhr, unsigned short fract)
+_Avrlibc_Def_Pgm_2 (r, fract)
+_Avrlibc_Def_Pgm_2 (ur, unsigned fract)
+_Avrlibc_Def_Pgm_4 (lr, long fract)
+_Avrlibc_Def_Pgm_4 (ulr, unsigned long fract)
+_Avrlibc_Def_Pgm_8 (llr, long long fract)
+_Avrlibc_Def_Pgm_8 (ullr, unsigned long long fract)
+
+_Avrlibc_Def_Pgm_2 (hk, short accum)
+_Avrlibc_Def_Pgm_2 (uhk, unsigned short accum)
+_Avrlibc_Def_Pgm_4 (k, accum)
+_Avrlibc_Def_Pgm_4 (uk, unsigned accum)
+_Avrlibc_Def_Pgm_8 (lk, long accum)
+_Avrlibc_Def_Pgm_8 (ulk, unsigned long accum)
+_Avrlibc_Def_Pgm_8 (llk, long long accum)
+_Avrlibc_Def_Pgm_8 (ullk, unsigned long long accum)
+#endif /* Doxygen */
+
+#ifdef __DOXYGEN__
+/** \name Functions reading from PROGMEM_FAR */
+
+/** \ingroup avr_stdfix
+    Read a <tt>short fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline short fract pgm_read_hr_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned short fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned short fract pgm_read_uhr_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline fract pgm_read_r_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned fract pgm_read_ur_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline long fract pgm_read_lr_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long fract pgm_read_ulr_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long long fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline long long fract pgm_read_llr_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long long fract</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long long fract pgm_read_ullr_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>short accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline short accum pgm_read_hk_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned short accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned short accum pgm_read_uhk_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline accum pgm_read_k_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned accum pgm_read_uk_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline long accum pgm_read_lk_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long accum pgm_read_ulk_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read a <tt>long long accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline long long accum pgm_read_llk_far (uint_farptr_t addr);
+
+/** \ingroup avr_stdfix
+    Read an <tt>unsigned long long accum</tt> from far address \p addr.
+    The address is in the program memory.
+    \since AVR-LibC v2.3 */
+static inline unsigned long long accum pgm_read_ullk_far (uint_farptr_t addr);
+
+#else /* Doxygen */
+
+_Avrlibc_Def_Pgm_Far_1 (hr, short fract)
+_Avrlibc_Def_Pgm_Far_1 (uhr, unsigned short fract)
+_Avrlibc_Def_Pgm_Far_2 (r, fract)
+_Avrlibc_Def_Pgm_Far_2 (ur, unsigned fract)
+_Avrlibc_Def_Pgm_Far_4 (lr, long fract)
+_Avrlibc_Def_Pgm_Far_4 (ulr, unsigned long fract)
+_Avrlibc_Def_Pgm_Far_8 (llr, long long fract)
+_Avrlibc_Def_Pgm_Far_8 (ullr, unsigned long long fract)
+
+_Avrlibc_Def_Pgm_Far_2 (hk, short accum)
+_Avrlibc_Def_Pgm_Far_2 (uhk, unsigned short accum)
+_Avrlibc_Def_Pgm_Far_4 (k, accum)
+_Avrlibc_Def_Pgm_Far_4 (uk, unsigned accum)
+_Avrlibc_Def_Pgm_Far_8 (lk, long accum)
+_Avrlibc_Def_Pgm_Far_8 (ulk, unsigned long accum)
+_Avrlibc_Def_Pgm_Far_8 (llk, long long accum)
+_Avrlibc_Def_Pgm_Far_8 (ullk, unsigned long long accum)
+#endif /* Doxygen */
+
 #ifdef __cplusplus
 }
 #endif

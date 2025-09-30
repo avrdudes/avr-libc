@@ -41,7 +41,6 @@
 /** \file */
 /** \defgroup avr_pgmspace <avr/pgmspace.h>: Program Space Utilities
     \code
-    #include <avr/io.h>
     #include <avr/pgmspace.h>
     \endcode
 
@@ -49,6 +48,8 @@
     data stored in program space (flash memory) of the device.<br>
     For a different approach using named address-spaces like #__flash,
     see \ref avr_flash "<avr/flash.h>".
+    For functions to read fixed-point values from program memory,
+    see \ref avr_stdfix "<stdfix.h>".
 
     \note These functions are an attempt to provide some compatibility with
     header files that come with IAR C, to make porting applications between
