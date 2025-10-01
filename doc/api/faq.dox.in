@@ -2528,6 +2528,12 @@ They influence how pars of the library behave.
   <td> @HAVE_LDSCRIPT_PR29741_yesno@
   <td> Starup code
 <tr>
+  <td> Compiler supports
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"
+       ><tt>-mcvt</tt></a>
+  <td> @HAS_MCVT_yesno@
+  <td> \ref faq_cvt "CVT" convenience
+<tr>
   <td> 64-bit floating-point
   <td> @DOX_MULTI_OPT@
   <td> \c <math.h>, Libraries
