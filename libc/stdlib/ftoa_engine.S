@@ -54,14 +54,15 @@
     buf[0]     - flags (FTOA_***)
     buf[1],... - decimal digits
     Number of digits:
-	maxdgs == 0 ? prec+1 :
-	(buf[0] & FTOA_CARRY) == 0 || buf[1] != '1' ?
-	    aver(1, maxdgs+exp, prec+1) :
-	    aver(1, masdgs+exp-1, prec+1)
+	maxdgs == 0
+          ? prec+1
+          : (buf[0] & FTOA_CARRY) == 0 || buf[1] != '1'
+	      ? aver(1, maxdgs+exp, prec+1)
+	      : aver(1, maxdgs+exp-1, prec+1);
 
  Notes:
     * Output string is not 0-terminated. For possibility of user's buffer
-    usage in any case.
+      usage in any case.
     * If used, 'maxdgs' is a number of digits for value with zero exponent.
 */
 
@@ -361,8 +362,8 @@ ENTRY __ftoa_engine
       pwr_7 .. pwr_2	- last powr10[] element
 
    Notes:
-     * It is possible to leave out powr10'x table with subnormal value.
-      Result: accuracy degrease on the rounding phase.  No matter: high
+    * It is possible to leave out powr10's table with subnormal value.
+      Result: accuracy decrease on the rounding phase.  No matter: high
       precision with subnormals is not needed. (Now 0x00000001 is converted
       exactly on prec = 5, i.e. 6 digits.)
 */
