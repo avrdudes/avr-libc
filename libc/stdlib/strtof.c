@@ -37,17 +37,19 @@
 #include <stdint.h>
 
 #include <avr/pgmspace.h>
+#include <avr/flash.h>
 #include <bits/attribs.h>
 
 #include "sectionname.h"
 #include "alias.h"
+#include "best_as.h"
 
 #define ARRAY_SIZE(X) (sizeof(X) / sizeof(*X))
 
+#define AS __BEST_AS
+
 #define INFINITYf (__builtin_inff())
 #define NANf      (__builtin_nanf(""))
-
-extern int isfinitef (float);
 
 /* Only GCC 4.2 calls the library function to convert an unsigned long
    to float.  Other GCC-es (including 4.3) use a signed long to float
@@ -55,14 +57,20 @@ extern int isfinitef (float);
 extern float __floatunsisf (uint32_t);
 
 #ifdef __AVR_HAVE_ELPM__
-#define STRNCASECMP_P(a, b, c) strncasecmp_PF (a, pgm_get_far_address(b), c)
+#define READ_FL(x) pgm_read_float_far ((uintptr24_t) x)
+#define S_STRNCASECMP "strncasecmp_PF"
 #else
-#define STRNCASECMP_P(a, b, c) strncasecmp_P (a, b, c)
+#define READ_FL(x) (*(x))
+#define S_STRNCASECMP "strncasecmp_P"
 #endif
 
+int strncasecmp_AS (const char*, const AS char*, size_t) __asm(S_STRNCASECMP);
+
+#define PROG_SECTION __attribute__((__section__(".progmemx.data.pwr_10L")))
+
 /* In libc/stdio/pwr_10.c */
-extern const float __avrlibc_pwr_p10[6];
-extern const float __avrlibc_pwr_m10[6];
+extern const AS float __avrlibc_pwr_p10[6];
+extern const AS float __avrlibc_pwr_m10[6];
 
 #define LAST_PWR (ARRAY_SIZE (__avrlibc_pwr_p10) - 1)
 
@@ -89,9 +97,9 @@ mulsi10 (uint32_t i)
 }
 
 /* PSTR() is not used to save 1 byte per string: '\0' at the tail.	*/
-PROGMEM_FAR static const char pstr_inf[3] = { 'I','N','F' };
-PROGMEM_FAR static const char pstr_inity[5] = { 'I','N','I','T','Y' };
-PROGMEM_FAR static const char pstr_nan[3] = { 'N','A','N' };
+PROG_SECTION static const AS char pstr_inf[3] = { 'I','N','F' };
+PROG_SECTION static const AS char pstr_inity[5] = { 'I','N','I','T','Y' };
+PROG_SECTION static const AS char pstr_nan[3] = { 'N','A','N' };
 
 /**  The strtof() function converts the initial portion of the string pointed
      to by \a nptr to \c float representation.
@@ -151,10 +159,10 @@ strtof (const char *nptr, char **endptr)
     else if (c == '+')
 	c = *nptr++;
 
-    if (!STRNCASECMP_P (nptr - 1, pstr_inf, 3))
+    if (!strncasecmp_AS (nptr - 1, pstr_inf, 3))
     {
 	nptr += 2;
-	if (!STRNCASECMP_P (nptr, pstr_inity, 5))
+	if (!strncasecmp_AS (nptr, pstr_inity, 5))
 	    nptr += 5;
 	if (endptr)
 	    *endptr = (char *)nptr;
@@ -163,7 +171,7 @@ strtof (const char *nptr, char **endptr)
 
     /* NAN() construction is not realised.
        Length would be 3 characters only. */
-    if (!STRNCASECMP_P (nptr - 1, pstr_nan, 3))
+    if (!strncasecmp_AS (nptr - 1, pstr_nan, 3))
     {
 	if (endptr)
 	    *endptr = (char *)nptr + 2;
@@ -243,8 +251,7 @@ strtof (const char *nptr, char **endptr)
 
     if (x.flt != 0)
     {
-#ifndef __AVR_HAVE_ELPM__
-	const float *f_pwr;
+	const AS float *f_pwr;
 	if (exp < 0)
 	{
 	    f_pwr = __avrlibc_pwr_m10 + LAST_PWR;
@@ -255,21 +262,7 @@ strtof (const char *nptr, char **endptr)
 
 	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1, --f_pwr)
 	    for (; exp >= pwr; exp -= pwr)
-		x.flt *= pgm_read_float (f_pwr);
-#else
-	uint_farptr_t f_pwr;
-	if (exp < 0)
-	{
-	    f_pwr = pgm_get_far_address (__avrlibc_pwr_m10[LAST_PWR]);
-	    exp = -exp;
-	}
-	else
-	    f_pwr = pgm_get_far_address (__avrlibc_pwr_p10[LAST_PWR]);
-
-	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1, f_pwr -= sizeof (float))
-	    for (; exp >= pwr; exp -= pwr)
-		x.flt *= pgm_read_float_far (f_pwr);
-#endif /* ELPM ? */
+		x.flt *= READ_FL (f_pwr);
 
 	if (!isfinitef(x.flt) || x.flt == 0)
 	    errno = ERANGE;
