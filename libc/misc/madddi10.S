@@ -49,6 +49,7 @@ ENTRY _U(__madddi_const_10)
     X_movw  R26, A2
     X_movw  R28, A4
     X_movw  R30, A6
+#ifdef __AVR_HAVRE_ELPM__
     lsl     A0 $ rol A1 $ rol A2 $ rol A3 $ rol A4 $ rol A5 $ rol A6 $ rol A7
     lsl     A0 $ rol A1 $ rol A2 $ rol A3 $ rol A4 $ rol A5 $ rol A6 $ rol A7
     add     A0, r0
@@ -60,6 +61,26 @@ ENTRY _U(__madddi_const_10)
     adc     A6, r30
     adc     A7, r31
     lsl     A0 $ rol A1 $ rol A2 $ rol A3 $ rol A4 $ rol A5 $ rol A6 $ rol A7
+#else
+    ;; On the "small" devices, roll a loop.
+    push    r17
+    ldi     r17, 2
+    rjmp .Loop
+0:  add     A0, r0
+    adc     A1, r1
+    adc     A2, r26
+    adc     A3, r27
+    adc     A4, r28
+    adc     A5, r29
+    adc     A6, r30
+    adc     A7, r31
+.Loop:
+    lsl     A0 $ rol A1 $ rol A2 $ rol A3 $ rol A4 $ rol A5 $ rol A6 $ rol A7
+    dec     r17
+    breq 0b
+    brpl .Loop
+    pop     r17
+#endif
     clr     __zero_reg__
     add     A0, R16
     adc     A1, __zero_reg__
