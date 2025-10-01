@@ -50,8 +50,6 @@
 #define INFINITYl (__builtin_infl())
 #define NANl      (__builtin_nanl(""))
 
-extern int isfinitel (long double);
-
 // libgcc / LibF7
 extern long double __floatundidf (uint64_t);
 
@@ -60,12 +58,13 @@ extern long double __floatundidf (uint64_t);
 #ifdef __AVR_HAVE_ELPM__
 // Don't assume we have __flashx.
 #define READ_LD(p) pgm_read_long_double_far ((uintptr24_t) (p))
-extern int strncasecmp_AS (const char*,
-			   const AS char*, size_t) __asm ("strncasecmp_PF");
+#define S_STRNCASECMP "strncasecmp_PF"
 #else
 #define READ_LD(p) flash_read_long_double (p)
-#define strncasecmp_AS(a, b, c) strncasecmp_F (a, b, c)
+#define S_STRNCASECMP "strncasecmp_P"
 #endif // ELPM?
+
+int strncasecmp_AS (const char*, const AS char*, size_t) __asm(S_STRNCASECMP);
 
 #define PROG_SECTION __attribute__((__section__(".progmemx.data.pwr_10L")))
 
@@ -79,8 +78,7 @@ PROG_SECTION static const AS long double pwr_m10L[] =
     1.0e-1L, 1e-2L, 1e-4L, 1e-8L, 1e-16L, 1e-32L, 1e-64L, 1e-128L, 1e-256L
 };
 
-
-#define N_PWR ARRAY_SIZE (pwr_p10L)
+#define LAST_PWR (ARRAY_SIZE (pwr_p10L) - 1)
 
 
 static __ATTR_ALWAYS_INLINE__ int
@@ -259,13 +257,13 @@ strtold (const char *nptr, char **endptr)
 
 	if (expo < 0)
 	{
-	    l_pwr = pwr_m10L + (N_PWR - 1);
+	    l_pwr = pwr_m10L + LAST_PWR;
 	    expo = -expo;
 	}
 	else
-	    l_pwr = pwr_p10L + (N_PWR - 1);
+	    l_pwr = pwr_p10L + LAST_PWR;
 
-	for (int pwr = 1 << (N_PWR - 1); pwr; pwr >>= 1, --l_pwr)
+	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1, --l_pwr)
 	    for (; expo >= pwr; expo -= pwr)
 		x.ldbl *= READ_LD (l_pwr);
 
