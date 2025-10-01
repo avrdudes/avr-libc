@@ -73,7 +73,21 @@ int strncasecmp_AS (const char*, const AS char*, size_t) __asm(S_STRNCASECMP);
 // internal representation back and forth.
 #include "f7/libf7.h"
 
-PROG_SECTION static const AS f7_t pwr_p10L[] =
+#if __AVR_ARCH__ == 103
+// No need to copy them constants from flash to RAM since avrxmega3
+// can access them directly.  Other devices with rodata-in-flash may
+// have -mrodata-in-ram, so we cannot do it there.
+#  define RODATA_IN_FLASH
+#  undef PROG_SECTION
+#  define PROG_SECTION __attribute__((__section__(".rodata.pwr_10L")))
+#  define AS_PWR // empty
+#  define copy_f7(dest, src, size) (src)
+#else
+#  define AS_PWR AS
+extern f7_t* copy_f7 (f7_t*, const AS f7_t*, size_t) __asm(S_MEMCPY);
+#endif
+
+PROG_SECTION static const AS_PWR f7_t pwr_p10L[] =
 {
     F7_CONST_DEF (X, 0, 0xa0,0x00,0x00,0x00,0x00,0x00,0x00, 3),   // 1e1
     F7_CONST_DEF (X, 0, 0xc8,0x00,0x00,0x00,0x00,0x00,0x00, 6),   // 1e2
@@ -86,7 +100,7 @@ PROG_SECTION static const AS f7_t pwr_p10L[] =
     F7_CONST_DEF (X, 0, 0xaa,0x7e,0xeb,0xfb,0x9d,0xf9,0xdf, 850)  // 1e256
 };
 
-PROG_SECTION static const AS f7_t pwr_m10L[] =
+PROG_SECTION static const AS_PWR f7_t pwr_m10L[] =
 {
     F7_CONST_DEF (X, 0, 0xcc,0xcc,0xcc,0xcc,0xcc,0xcc,0xcd, -4),   // 1e-1
     F7_CONST_DEF (X, 0, 0xa3,0xd7,0x0a,0x3d,0x70,0xa3,0xd7, -7),   // 1e-2
@@ -98,8 +112,6 @@ PROG_SECTION static const AS f7_t pwr_m10L[] =
     F7_CONST_DEF (X, 0, 0xdd,0xd0,0x46,0x7c,0x64,0xbc,0xe5, -426), // 1e-128
     F7_CONST_DEF (X, 0, 0xc0,0x31,0x43,0x25,0x63,0x7a,0x19, -851)  // 1e-256
 };
-
-extern f7_t* copy_f7 (f7_t*, const AS f7_t*, size_t) __asm(S_MEMCPY);
 
 #else
 
@@ -288,7 +300,7 @@ strtold (const char *nptr, char **endptr)
 
 #ifdef __WITH_LIBF7_MATH__
 
-    f7_t *xx = &x.f7, pp10;
+    f7_t *xx = &x.f7;
 
     // Convert mantissa and sign to f7_t.
     f7_set_u64 (xx, x.u64);
@@ -299,7 +311,10 @@ strtold (const char *nptr, char **endptr)
     // Apply the exponent using its binary expansion.
     if (f7_is_nonzero (xx))
     {
-	const AS f7_t *l_pwr;
+	const AS_PWR f7_t *l_pwr;
+#ifndef RODATA_IN_FLASH
+	f7_t pp10;
+#endif
 
 	if (expo < 0)
 	{
