@@ -50,23 +50,60 @@
 #define INFINITYl (__builtin_infl())
 #define NANl      (__builtin_nanl(""))
 
-// libgcc / LibF7
-extern long double __floatundidf (uint64_t);
-
 #define AS __BEST_AS
 
 #ifdef __AVR_HAVE_ELPM__
 // Don't assume we have __flashx.
 #define READ_LD(p) pgm_read_long_double_far ((uintptr24_t) (p))
 #define S_STRNCASECMP "strncasecmp_PF"
+#define S_MEMCPY      "memcpy_PF"
 #else
 #define READ_LD(p) flash_read_long_double (p)
 #define S_STRNCASECMP "strncasecmp_P"
+#define S_MEMCPY      "memcpy_P"
 #endif // ELPM?
 
 int strncasecmp_AS (const char*, const AS char*, size_t) __asm(S_STRNCASECMP);
 
 #define PROG_SECTION __attribute__((__section__(".progmemx.data.pwr_10L")))
+
+#ifdef __WITH_LIBF7_MATH__
+// Use libgcc's low level routines if we have them.  This is faster since
+// when expanding the exponent, we don't have to convert double to the
+// internal representation back and forth.
+#include "f7/libf7.h"
+
+PROG_SECTION static const AS f7_t pwr_p10L[] =
+{
+    F7_CONST_DEF (X, 0, 0xa0,0x00,0x00,0x00,0x00,0x00,0x00, 3),   // 1e1
+    F7_CONST_DEF (X, 0, 0xc8,0x00,0x00,0x00,0x00,0x00,0x00, 6),   // 1e2
+    F7_CONST_DEF (X, 0, 0x9c,0x40,0x00,0x00,0x00,0x00,0x00, 13),  // 1e4
+    F7_CONST_DEF (X, 0, 0xbe,0xbc,0x20,0x00,0x00,0x00,0x00, 26),  // 1e8
+    F7_CONST_DEF (X, 0, 0x8e,0x1b,0xc9,0xbf,0x04,0x00,0x00, 53),  // 1e16
+    F7_CONST_DEF (X, 0, 0x9d,0xc5,0xad,0xa8,0x2b,0x70,0xb6, 106), // 1e32
+    F7_CONST_DEF (X, 0, 0xc2,0x78,0x1f,0x49,0xff,0xcf,0xa7, 212), // 1e64
+    F7_CONST_DEF (X, 0, 0x93,0xba,0x47,0xc9,0x80,0xe9,0x8d, 425), // 1e128
+    F7_CONST_DEF (X, 0, 0xaa,0x7e,0xeb,0xfb,0x9d,0xf9,0xdf, 850)  // 1e256
+};
+
+PROG_SECTION static const AS f7_t pwr_m10L[] =
+{
+    F7_CONST_DEF (X, 0, 0xcc,0xcc,0xcc,0xcc,0xcc,0xcc,0xcd, -4),   // 1e-1
+    F7_CONST_DEF (X, 0, 0xa3,0xd7,0x0a,0x3d,0x70,0xa3,0xd7, -7),   // 1e-2
+    F7_CONST_DEF (X, 0, 0xd1,0xb7,0x17,0x58,0xe2,0x19,0x65, -14),  // 1e-4
+    F7_CONST_DEF (X, 0, 0xab,0xcc,0x77,0x11,0x84,0x61,0xcf, -27),  // 1e-8
+    F7_CONST_DEF (X, 0, 0xe6,0x95,0x94,0xbe,0xc4,0x4d,0xe1, -54),  // 1e-16
+    F7_CONST_DEF (X, 0, 0xcf,0xb1,0x1e,0xad,0x45,0x39,0x95, -107), // 1e-32
+    F7_CONST_DEF (X, 0, 0xa8,0x7f,0xea,0x27,0xa5,0x39,0xea, -213), // 1e-64
+    F7_CONST_DEF (X, 0, 0xdd,0xd0,0x46,0x7c,0x64,0xbc,0xe5, -426), // 1e-128
+    F7_CONST_DEF (X, 0, 0xc0,0x31,0x43,0x25,0x63,0x7a,0x19, -851)  // 1e-256
+};
+
+extern f7_t* copy_f7 (f7_t*, const AS f7_t*, size_t) __asm(S_MEMCPY);
+
+#else
+
+extern long double __floatundidf (uint64_t); // libgcc
 
 PROG_SECTION static const AS long double pwr_p10L[] =
 {
@@ -77,6 +114,8 @@ PROG_SECTION static const AS long double pwr_m10L[] =
 {
     1.0e-1L, 1e-2L, 1e-4L, 1e-8L, 1e-16L, 1e-32L, 1e-64L, 1e-128L, 1e-256L
 };
+
+#endif // Have LibF7
 
 #define LAST_PWR (ARRAY_SIZE (pwr_p10L) - 1)
 
@@ -132,6 +171,9 @@ strtold (const char *nptr, char **endptr)
     {
 	uint64_t u64;
 	long double ldbl;
+#ifdef __WITH_LIBF7_MATH__
+	f7_t f7;
+#endif
     } x;
     uint8_t c;
     uint8_t flag = 0;
@@ -245,6 +287,43 @@ strtold (const char *nptr, char **endptr)
     if ((flag & FL_ANY) && endptr)
 	*endptr = (char*) nptr - 1;
 
+#ifdef __WITH_LIBF7_MATH__
+
+    f7_t *xx = &x.f7, pp10;
+
+    // Convert mantissa and sign to f7_t.
+    f7_set_u64 (xx, x.u64);
+
+    if ((flag & FL_MINUS) && (flag & FL_ANY))
+	xx->sign ^= F7_FLAG_sign;
+
+    // Apply the exponent using its binary expansion.
+    if (f7_is_nonzero (xx))
+    {
+	const AS f7_t *l_pwr;
+
+	if (expo < 0)
+	{
+	    l_pwr = pwr_m10L + LAST_PWR;
+	    expo = -expo;
+	}
+	else
+	    l_pwr = pwr_p10L + LAST_PWR;
+
+	for (int pwr = 1 << LAST_PWR; pwr; pwr >>= 1, --l_pwr)
+	    for (; expo >= pwr; expo -= pwr)
+		f7_Imul (xx, copy_f7 (&pp10, l_pwr, sizeof (f7_t)));
+
+	uint8_t x_class = f7_classify (xx);
+	if (!f7_class_number (x_class) || f7_class_zero (x_class))
+	    errno = ERANGE;
+    }
+
+    // f7_get_double() returns double as uint64_t.
+    x.u64 = f7_get_double (xx);
+
+#else // Do vanilla double arithmetic
+
     // Convert mantissa and sign to long double.
     x.ldbl = __floatundidf (x.u64);
     if ((flag & FL_MINUS) && (flag & FL_ANY))
@@ -270,6 +349,7 @@ strtold (const char *nptr, char **endptr)
 	if (!isfinitel (x.ldbl) || x.ldbl == 0)
 	    errno = ERANGE;
     }
+#endif
 
     return x.ldbl;
 }
