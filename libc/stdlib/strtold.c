@@ -132,11 +132,10 @@ mulhi10 (int i)
 // misc/madddi10.S: return 10 * a + b;
 extern uint64_t madddi10 (uint64_t a, uint8_t b) __asm("__madddi_const_10");
 
-
-/* PSTR() is not used to save 1 byte per string: '\0' at the tail.	*/
-static const AS char pstr_inf[3] = { 'I','N','F' };
-static const AS char pstr_inity[5] = { 'I','N','I','T','Y' };
-static const AS char pstr_nan[3] = { 'N','A','N' };
+// libc/stdlib/pstr_inf.c
+extern const AS char __pstr_inf[3];
+extern const AS char __pstr_inity[5];
+extern const AS char __pstr_nan[3];
 
 /**  The strtold() function converts the initial portion of the string pointed
      to by \a nptr to \c long \c double representation.
@@ -199,11 +198,11 @@ strtold (const char *nptr, char **endptr)
     else if (c == '+')
 	c = *nptr++;
 
-    if (!strncasecmp_AS (nptr - 1, pstr_inf, 3))
+    if (!strncasecmp_AS (nptr - 1, __pstr_inf, sizeof (__pstr_inf)))
     {
-	nptr += 2;
-	if (!strncasecmp_AS (nptr, pstr_inity, 5))
-	    nptr += 5;
+	nptr += sizeof (__pstr_inf) - 1;
+	if (!strncasecmp_AS (nptr, __pstr_inity, sizeof (__pstr_inity)))
+	    nptr += sizeof (__pstr_inity);
 	if (endptr)
 	    *endptr = (char*) nptr;
 	return flag & FL_MINUS ? -INFINITYl : +INFINITYl;
@@ -211,10 +210,10 @@ strtold (const char *nptr, char **endptr)
 
     // NAN() construction is not realised.
     // Length would be 3 characters only.
-    if (!strncasecmp_AS (nptr - 1, pstr_nan, 3))
+    if (!strncasecmp_AS (nptr - 1, __pstr_nan, sizeof (__pstr_nan)))
     {
 	if (endptr)
-	    *endptr = (char*) nptr + 2;
+	    *endptr = (char*) nptr + sizeof (__pstr_nan) - 1;
 	return NANl;
     }
 

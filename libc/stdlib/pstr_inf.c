@@ -6,10 +6,12 @@
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
+
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
+
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
      from this software without specific prior written permission.
@@ -26,37 +28,15 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-#ifndef __BITS_ATTRIBS_H_
-#define __BITS_ATTRIBS_H_
+/*Used by:
+    libc/stdlib/strtof.c
+    libc/stdlib/strtold.c
+*/
 
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
+#include <bits/attribs.h>
 
-#ifdef  __GNUC_STDC_INLINE__
-#define __ATTR_GNU_INLINE__   __attribute__((__gnu_inline__))
-#else
-#define __ATTR_GNU_INLINE__
-#endif
+#define PROG_SECTION __attribute__((__section__(".progmemx.data.__pstr_inf")))
 
-#define __ATTR_CONST__ __attribute__((__const__))
-
-#define __ATTR_PURE__ __attribute__((__pure__))
-
-#define __ATTR_MALLOC__ __attribute__((__malloc__))
-
-#define __ATTR_NORETURN__ __attribute__((__noreturn__))
-
-#if __GNUC__ >= 8
-#define __ATTR_NONSTRING__ __attribute__((__nonstring__))
-#else
-#define __ATTR_NONSTRING__
-#endif
-
-/* AVR specific */
-
-#ifdef __clang__
-#define __ATTR_PROGMEM__ __attribute__((__section__(".progmem.data")))
-#else
-#define __ATTR_PROGMEM__ __attribute__((__progmem__))
-#endif
-
-#endif /* __BITS_ATTRIBS_H_ */
+PROG_SECTION __ATTR_NONSTRING__ const char __pstr_inf[3] = "INF";
+PROG_SECTION __ATTR_NONSTRING__ const char __pstr_inity[5] = "INITY";
+PROG_SECTION __ATTR_NONSTRING__ const char __pstr_nan[3] = "NAN";

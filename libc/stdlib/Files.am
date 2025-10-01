@@ -39,6 +39,7 @@ stdlib_a_c_sources = \
 	getenv.c \
 	labs.c \
 	malloc.c \
+	pstr_inf.c \
 	qsort.c \
 	rand.c \
 	random.c \

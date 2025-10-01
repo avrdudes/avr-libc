@@ -66,8 +66,6 @@ extern float __floatunsisf (uint32_t);
 
 int strncasecmp_AS (const char*, const AS char*, size_t) __asm(S_STRNCASECMP);
 
-#define PROG_SECTION __attribute__((__section__(".progmemx.data.pwr_10L")))
-
 /* In libc/stdio/pwr_10.c */
 extern const AS float __avrlibc_pwr_p10[6];
 extern const AS float __avrlibc_pwr_m10[6];
@@ -96,10 +94,10 @@ mulsi10 (uint32_t i)
     return r22;
 }
 
-/* PSTR() is not used to save 1 byte per string: '\0' at the tail.	*/
-PROG_SECTION static const AS char pstr_inf[3] = { 'I','N','F' };
-PROG_SECTION static const AS char pstr_inity[5] = { 'I','N','I','T','Y' };
-PROG_SECTION static const AS char pstr_nan[3] = { 'N','A','N' };
+// libc/stdlib/pstr_inf.c
+extern const AS char __pstr_inf[3];
+extern const AS char __pstr_inity[5];
+extern const AS char __pstr_nan[3];
 
 /**  The strtof() function converts the initial portion of the string pointed
      to by \a nptr to \c float representation.
@@ -159,22 +157,22 @@ strtof (const char *nptr, char **endptr)
     else if (c == '+')
 	c = *nptr++;
 
-    if (!strncasecmp_AS (nptr - 1, pstr_inf, 3))
+    if (!strncasecmp_AS (nptr - 1, __pstr_inf, sizeof (__pstr_inf)))
     {
-	nptr += 2;
-	if (!strncasecmp_AS (nptr, pstr_inity, 5))
-	    nptr += 5;
+	nptr += sizeof (__pstr_inf) - 1;
+	if (!strncasecmp_AS (nptr, __pstr_inity, sizeof (__pstr_inity)))
+	    nptr += sizeof (__pstr_inity);
 	if (endptr)
-	    *endptr = (char *)nptr;
+	    *endptr = (char*) nptr;
 	return flag & FL_MINUS ? -INFINITYf : +INFINITYf;
     }
 
     /* NAN() construction is not realised.
        Length would be 3 characters only. */
-    if (!strncasecmp_AS (nptr - 1, pstr_nan, 3))
+    if (!strncasecmp_AS (nptr - 1, __pstr_nan, sizeof (__pstr_nan)))
     {
 	if (endptr)
-	    *endptr = (char *)nptr + 2;
+	    *endptr = (char*) nptr + sizeof (__pstr_nan) - 1;
 	return NANf;
     }
 
