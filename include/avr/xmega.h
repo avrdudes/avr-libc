@@ -61,7 +61,7 @@
  \ingroup avr_io
 
  Write value \c value to register \c reg that is protected through
- the Xmega configuration change protection (CCP) key for self
+ the Xmega or ATtiny102/104 configuration change protection (CCP) key for self
  programming (SPM).  This implements the timed sequence that is
  required for CCP.
 
@@ -88,7 +88,8 @@
 			  "d" ((uint8_t) 0xd8),		\
 			  "n" (& (reg)),		\
 			  "r" ((uint8_t) (value)))
-#else /* to: AVR_TINY */
+
+#elif defined (__AVR_XMEGA__)
 
 #define _PROTECTED_WRITE(reg, value)			\
   __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
@@ -98,6 +99,20 @@
 			  "d" ((uint8_t) CCP_IOREG_gc),	\
 			  "n" (& (reg)),		\
 			  "r" ((uint8_t) (value)))
+#endif /* AVR_TINY || Xmega */
+
+#if defined(__AVR_TINY__) && defined(CCP_SPM_gc)
+
+#define _PROTECTED_WRITE_SPM(reg, value)		\
+  __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
+			"out %i2, %3"			\
+			:				\
+			: "n" (& CCP),			\
+			  "d" ((uint8_t) CCP_SPM_gc),	\
+			  "n" (& (reg)),		\
+			  "r" ((uint8_t) (value)))
+
+#elif defined(__AVR_XMEGA__)
 
 #define _PROTECTED_WRITE_SPM(reg, value)		\
   __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
@@ -107,7 +122,7 @@
 			  "d" ((uint8_t) CCP_SPM_gc),	\
 			  "n" (& (reg)),		\
 			  "r" ((uint8_t) (value)))
-#endif /* AVR_TINY */
+#endif /* ATtiny102/104 || Xmega */
 #endif /* DOXYGEN */
 
 #endif /* _AVR_XMEGA_H */

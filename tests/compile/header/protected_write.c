@@ -12,7 +12,7 @@ int main (void)
 #if __AVR_ARCH__ >= 100
     _PROTECTED_WRITE (SFR, 0xff);
 #endif
-#ifdef __AVR_XMEGA__
+#if defined(__AVR_XMEGA__) || defined(CCP_SPM_gc)
     _PROTECTED_WRITE_SPM (SFR, 0xff);
 #endif
 
@@ -26,7 +26,7 @@ void func (void)
 #if __AVR_ARCH__ >= 100
     ccp_write_io (&SFR, 0xff);
 #endif
-#ifdef __AVR_XMEGA__
+#if defined(__AVR_XMEGA__) || defined(CCP_SPM_gc)
     ccp_write_spm (&SFR, 0xff);
 #endif
 }

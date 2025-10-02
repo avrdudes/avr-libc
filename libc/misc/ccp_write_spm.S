@@ -1,6 +1,6 @@
 #include <avr/io.h>
 
-#if __AVR_XMEGA__
+#if defined(__AVR_XMEGA__) || defined(CCP_SPM_gc)
 
 # ifndef CCP_SPM_gc
 #  define CCP_SPM_gc	0x9D	/* SPM Instruction Protection  */
@@ -20,5 +20,5 @@ ENTRY   ccp_write_spm
     ret
 ENDFUNC
 
-#endif  /* __AVR_XMEGA__ */
+#endif  /* __AVR_XMEGA__ || ATtiny102/104 */
 
