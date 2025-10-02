@@ -100,14 +100,16 @@ shift $((OPTIND - 1))
 
 [ $VERB -ge 2 ] && set -x
 
+srcdir=../..
+
 test_list=${*:-"header/*.c"}
 
-if [ x$INSTALLED = x1 ]; then
-    CPPFLAGS="-I${AVRDIR}/include"
-else
-    CPPFLAGS="-I${AVRDIR}/include -I../../include"
+if [ x$INSTALLED = x ]; then
+    if [ ! -f $AVRDIR/config.status ]; then
+	echo "`basename $me`: -a $AVRDIR it not an AVR-LibC buiddir"
+	exit 1
+    fi
 fi
-[ $VERB -ge 1 ] && echo "CPPFLAGS=$CPPFLAGS"
 
 ### Get MCUs #########################################################
 
@@ -124,7 +126,7 @@ AllMcus ()
 }
 
 rex='^[a-z0-9 ]+$'
-Filter=../../devtools/filter-mcus.py
+Filter=${srcdir}/devtools/filter-mcus.py
 
 if [ -z "${MCUS}" ]; then
     # No MCUS given: Use supported-mcus.txt.
@@ -141,16 +143,54 @@ fi
 
 MCUS=
 
-echo "Filtering out MCUs not supported by ${AVR_GCC}..."
+echo "Filtering out MCUs that are not supported by ${AVR_GCC}..."
 
+# $1 = MCU
+# ... more avr-gcc args
 Compile ()
 {
-    LANG=C ${AVR_GCC} $* -o /dev/null > msg.txt 2>&1
+    local flags=
+    local mcu=$1
+    shift
+
+    if [ x$INSTALLED = x1 ]; then
+	true
+    else
+	local devlib="$AVRDIR/avr/devices/$mcu/lib$mcu.a"
+	local multilibdir=`$AVR_GCC -mmcu=$mcu -print-multi-directory`
+	local crt=crt$mcu.o
+	# Use the same replacements like in mlib-gen.py::to_ident() and
+	# configure.ac's CHECK_AVR_DEVICE.  This flattens out the multilib path.
+	# For example, "avr25/tiny-stack" becomes "avr25_tiny_stack",
+	# and "." becomes "avr2".
+	multilibdir=$(echo "$multilibdir"     \
+			  | sed -e 's:^\.$:avr2:' \
+			  | sed -e 's:/:_:g'      \
+			  | sed -e 's:-:_:g')
+	local cppflags="-I${AVRDIR}/include -I${srcdir}/include"
+
+	flags="$cppflags -nostdlib -nostartfiles"
+
+	crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
+	if [ -z "$crt" ]; then
+	    crt=`find $AVRDIR/avr/devices/$mcu -name 'crt*.o' -print | head -1`
+	fi
+	if [ ! -f "$devlib" ]; then
+	    devlib=
+	fi
+	libs="$AVRDIR/avr/lib/$multilibdir/libc.a \
+              $AVRDIR/avr/lib/$multilibdir/libm.a \
+              $devlib -lgcc"
+	libs="-Wl,--start-group $libs -Wl,--end-group"
+    fi
+
+    LANG=C ${AVR_GCC} -mmcu=$mcu $* $flags $crt $libs -o /dev/null \
+	> msg.txt 2>&1
     return $?
 }
 
 for mcu in ${given_mcus}; do
-    if Compile simple.c -mmcu=${mcu}; then
+    if Compile ${mcu} simple.c; then
 	MCUS="${MCUS} ${mcu}"
     else
 	echo "Unsupported: $mcu"
@@ -198,7 +238,7 @@ for src in ${test_list}; do
 	    [ $VERB -ge 2 ] && echo "arg.$i=$arg"
 	    [ "x$arg" = "x" ] && break
 
-	    if Compile "${src}" -mmcu=$mcu "$arg" ${CPPFLAGS} $warn; then
+	    if Compile $mcu "${src}" "$arg" $warn; then
 		n_passes=$(( 1 + $n_passes ))
 		[ $VERB -ge 1 ] && echo "PASS: $src -mmcu=$mcu $arg"
 	    else
