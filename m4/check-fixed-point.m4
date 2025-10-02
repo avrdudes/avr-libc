@@ -63,6 +63,7 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 	AC_MSG_CHECKING([whether <stdfix.h> includes <stdfix-avrlibc.h>])
 	AC_COMPILE_IFELSE(
 	    [ AC_LANG_SOURCE([[
+		  #define __CONFIGURING_AVR_LIBC__
 		  #include <stdfix.h>
 		  #ifndef _STDFIX_AVRLIBC_H
 		  int a[-1];
