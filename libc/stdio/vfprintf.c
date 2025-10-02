@@ -423,6 +423,8 @@ int VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 	    buf[0] = '?';
 	    goto buf_addr;
 	}
+#else
+	(void) xflags;
 #endif // long double > double
 
 	if (c >= 'E' && c <= 'G')
