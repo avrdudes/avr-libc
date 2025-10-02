@@ -485,6 +485,7 @@ dnl Makefile.in's made by automake from Makefile.am's.
 AC_CONFIG_FILES([
 	Makefile
 	common/Makefile
+	common/f7/Makefile
 	crt1/Makefile
 	crt1/iosym/Makefile
 	doc/Makefile

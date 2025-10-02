@@ -1,4 +1,4 @@
-# Copyright (c) 2004,  Theodore A. Roth
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,12 +26,4 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-EXTRA_DIST = \
-    alias.h \
-    asmdef.h \
-    best_as.h \
-    ftoa_engine.h \
-    ntz.h \
-    sectionname.h
-
-SUBDIRS = f7
+EXTRA_DIST = libf7.h f7-renames.h
