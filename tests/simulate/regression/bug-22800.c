@@ -38,6 +38,7 @@
 # define strcmp_P	strcmp
 # define PSTR(s)	(s)
 #else
+# include <avr/io.h>
 # include <avr/pgmspace.h>
 #endif
 
