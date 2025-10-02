@@ -85,7 +85,6 @@
 #endif
 #include <inttypes.h>
 #include <stddef.h>
-#include <avr/io.h>
 
 #ifndef __DOXYGEN__
 
