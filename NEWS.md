@@ -54,6 +54,7 @@
    - 32-bit integer square root: `sqrtu32_floor`.
 
 - Support has been added for some functions on Reduced Tiny (AVRrc):
+  `_PROTECTED_WRITE` and `ccp_write_io` ([#1053][1053]),
   `memmem`, `memmem_P`, `strlcpy`, `strlcpy_P`, `strcasestr`, `strcasestr_P`,
   `strspn`, `strspn_P`, `strcspn`, `strcspn_P`, `strlcat_P`, `strsep`,
   `strsep_P`, `strpbrk_P`, `strtok_rP`, `ltoa`, `ultoa`.
@@ -341,3 +342,4 @@
 [1045]: https://github.com/avrdudes/avr-libc/issues/1045
 [1048]: https://github.com/avrdudes/avr-libc/issues/1048
 [1052]: https://github.com/avrdudes/avr-libc/issues/1052
+[1053]: https://github.com/avrdudes/avr-libc/issues/1053

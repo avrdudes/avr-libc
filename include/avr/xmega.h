@@ -42,7 +42,7 @@
  \ingroup avr_io
 
  Write value \c value to IO register \c reg that is protected through
- the Xmega configuration change protection (CCP) mechanism.  This
+ the Xmega or AVRrc configuration change protection (CCP) mechanism.  This
  implements the timed sequence that is required for CCP.
 
  This macro requires that the address of \c reg is a compile-time constant.
@@ -78,6 +78,18 @@
 
 #else  /* !__DOXYGEN__ */
 
+#ifdef __AVR_TINY__
+
+#define _PROTECTED_WRITE(reg, value)			\
+  __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
+			"out %i2, %3"			\
+			:				\
+			: "n" (& CCP),			\
+			  "d" ((uint8_t) 0xd8),		\
+			  "n" (& (reg)),		\
+			  "r" ((uint8_t) (value)))
+#else /* to: AVR_TINY */
+
 #define _PROTECTED_WRITE(reg, value)			\
   __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
 			"sts %2, %3"			\
@@ -95,6 +107,7 @@
 			  "d" ((uint8_t) CCP_SPM_gc),	\
 			  "n" (& (reg)),		\
 			  "r" ((uint8_t) (value)))
+#endif /* AVR_TINY */
 #endif /* DOXYGEN */
 
 #endif /* _AVR_XMEGA_H */
