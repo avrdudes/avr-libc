@@ -31,4 +31,4 @@ MAINTAINERCLEANFILES = Makefile.in
 SUBDIRS              = examples @DOCSDIR@
 DIST_SUBDIRS         = examples api
 
-EXTRA_DIST           = INSTALL TODO
+EXTRA_DIST           = TODO
