@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2025, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -532,7 +532,7 @@
 
 /* Properties */
 #define CCP_IOREG_gc 0xD8 	 // IOREG signature for Change Protect
-#define   CCP_SPM_gc 0xE7 	 // SPM signature for Change Protect
+#define CCP_SPM_gc   0xE7 	 // SPM signature for Change Protect
 
 #endif /* #ifdef _AVR_ATTINY104_H_INCLUDED */
 

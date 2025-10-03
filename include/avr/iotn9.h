@@ -1,4 +1,4 @@
-/* Copyright (c) 2009 Atmel Corporation
+/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,8 @@
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
-     distribution.
+     distribution. Publication is not required when this file is used
+     in an embedded application.
 
    * Neither the name of the copyright holders nor the names of
      contributors may be used to endorse or promote products derived
@@ -27,6 +28,8 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
+
+/* $Id$ */
 
 /* avr/iotn9.h - definitions for ATtiny9 */
 
@@ -352,7 +355,7 @@
 
 
 /* Fuses */
-#define FUSE_MEMORY_SIZE 0
+#define FUSE_MEMORY_SIZE 1
 
 
 /* Lock Bits */
@@ -465,7 +468,6 @@
 #define PB3_PORT  PORTRESET
 #define PB3_PIN   PINRESET
 #define PB3_BIT   RESET
-
 
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)
