@@ -74,6 +74,8 @@
 */
 #define _MemoryBarrier() __asm__ __volatile__("" ::: "memory")
 
+#include <avr/io.h>
+#include <bits/attribs.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -84,14 +86,87 @@ extern "C" {
 
    Write \a __value to IO Register Protected (CCP) 8-bit IO register
    at \a __ioaddr. See also \c _PROTECTED_WRITE().  */
-void ccp_write_io (volatile void *__ioaddr, uint8_t __value);
+extern void ccp_write_io (volatile void *__ioaddr, uint8_t __value);
+
+#if __AVR_ARCH__ >= 100
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+void ccp_write_io (volatile void *__ioaddr, uint8_t __value)
+{
+  const uintptr_t __addr = (uintptr_t) __ioaddr;
+
+#ifdef __AVR_TINY__
+  if (__builtin_constant_p (__addr))
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "out %i2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) 0xd8),
+			    "n" (__addr),
+			    "r" ((uint8_t) __value));
+  else
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "st %a2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) 0xd8),
+			    "e" (__addr),
+			    "r" ((uint8_t) __value));
+#elif defined(__AVR_XMEGA__)
+  if (__builtin_constant_p (__addr))
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "sts %2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_IOREG_gc),
+			    "n" (__addr),
+			    "r" ((uint8_t) __value));
+  else
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "st %a2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_IOREG_gc),
+			    "e" (__addr),
+			    "r" ((uint8_t) __value));
+#endif
+}
+#endif /* ARCH >= 100 */
 
 /**
    \ingroup avr_cpufunc
 
    Write \a __value to SPM Instruction Protected (CCP) 8-bit IO register
    at \a __ioaddr. See also \c _PROTECTED_WRITE_SPM().  */
-void ccp_write_spm (volatile void *__ioaddr, uint8_t __value);
+extern void ccp_write_spm (volatile void *__ioaddr, uint8_t __value);
+
+#if defined(__AVR_XMEGA__) || defined(CCP_SPM_gc)
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+void ccp_write_spm (volatile void *__ioaddr, uint8_t __value)
+{
+  const uintptr_t __addr = (uintptr_t) __ioaddr;
+
+  if (__builtin_constant_p (__addr))
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+#ifdef __AVR_TINY__
+			  "out %i2, %3"
+#else
+			  "sts %2, %3"
+#endif
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_SPM_gc),
+			    "n" (__addr),
+			    "r" ((uint8_t) __value));
+  else
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "st %a2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_SPM_gc),
+			    "e" (__addr),
+			    "r" ((uint8_t) __value));
+}
+#endif /* AVR_XMEGA || ATtiny102/104 */
 
 #ifdef __cplusplus
 }

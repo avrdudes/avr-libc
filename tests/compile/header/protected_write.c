@@ -30,3 +30,24 @@ void func (void)
     ccp_write_spm (&SFR, 0xff);
 #endif
 }
+
+void func2 (volatile int8_t *addr, uint8_t val)
+{
+#if __AVR_ARCH__ >= 100
+    ccp_write_io (addr, val);
+#endif
+#if defined(__AVR_XMEGA__) || defined(CCP_SPM_gc)
+    ccp_write_spm (addr, val);
+#endif
+}
+
+void *p1, *p2;
+void func3 (void)
+{
+#if __AVR_ARCH__ >= 100
+    p1 = (void*) ccp_write_io;
+#endif
+#if defined(__AVR_XMEGA__) || defined(CCP_SPM_gc)
+    p2 = (void*) ccp_write_spm;
+#endif
+}
