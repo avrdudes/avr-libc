@@ -706,4 +706,3 @@ int strcmp(const char *__x, const char *__z)
 #endif
 
 #endif /* _STRING_H_ */
-

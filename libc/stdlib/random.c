@@ -87,4 +87,3 @@ srandom(unsigned long seed)
 {
 	next = seed;
 }
-

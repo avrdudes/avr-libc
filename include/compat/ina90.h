@@ -93,4 +93,3 @@
 #define output_block_dec(port, addr, cnt) __out_blk__(port, addr, cnt, --)
 
 #endif
-

@@ -58,4 +58,3 @@ fract cosuhk_deg (unsigned short accum deg)
   return rbits (res);
 }
 #endif /* Have MUL */
-

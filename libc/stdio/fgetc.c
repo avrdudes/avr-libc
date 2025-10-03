@@ -65,4 +65,3 @@ fgetc(FILE *stream)
 	stream->len++;
 	return (unsigned char)rv;
 }
-

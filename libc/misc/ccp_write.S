@@ -21,4 +21,3 @@ ENTRY ccp_write_io
 ENDFUNC
 
 #endif  /* __AVR_XMEGA__ || __AVR_TINY__ */
-

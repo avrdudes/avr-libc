@@ -97,4 +97,3 @@ srand(unsigned int seed)
 {
 	next = seed;
 }
-

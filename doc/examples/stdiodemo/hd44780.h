@@ -100,4 +100,3 @@ void    hd44780_powerdown(void);
  */
 #define HD44780_DDADDR(addr) \
         (0x80 | ((addr) & 0x7f))
-

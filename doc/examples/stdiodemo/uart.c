@@ -181,4 +181,3 @@ uart_getchar(FILE *stream)
 
   return c;
 }
-
