@@ -180,6 +180,23 @@ __ATTR_CONST__ extern double sin (double x);
     \since AVR-LibC v2.2 */
 __ATTR_CONST__ extern long double sinl (long double x);
 
+/** The sincosf() function returns the sine of \a x in \c *psin, and
+    the cosine of \a x in \c *pcos.  The angle \a x is measured in radians.
+    A sincosf() call is a bit faster than calling sinf() and cosf()
+    individually, but it consumes a bit more program memory.
+    \since AVR-LibC v2.3 */
+void sincosf (float x, float *psin, float *pcos);
+
+/** The sincos() function returns the sine of \a x in \c *psin, and
+    the cosine of \a x in \c *pcos.  The angle \a x is measured in radians.
+    \since AVR-LibC v2.3 */
+void sincos (double x, double *psin, double *pcos);
+
+/** The sincosl() function returns the sine of \a x in \c *psin, and
+    the cosine of \a x in \c *pcos.  The angle \a x is measured in radians.
+    \since AVR-LibC v2.3 */
+void sincosl (long double x, long double *psin, long double *pcos);
+
 /** The tanf() function returns the tangent of \a x, measured in radians. */
 __ATTR_CONST__ extern float tanf (float x);
 /** The tan() function returns the tangent of \a x, measured in radians. */

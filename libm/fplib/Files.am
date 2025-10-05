@@ -98,6 +98,7 @@ libm_a_asm_sources = \
 	signbit.S \
 	sinh.S \
 	sin.S \
+	sincos.S \
 	sqrt.S \
 	square.S \
 	tanh.S \

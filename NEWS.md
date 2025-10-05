@@ -136,9 +136,9 @@
   Outcome was a sub-optimal code generation for some devices like the
   ones in `avrxmega3/short-calls`.
 
-- Support for the floating-point functions `log2`, `log2f` and `log2l`
-  has been added to
-  [<math.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__math) ([#1032][1032]).
+- Support for the floating-point functions `log2`, `log2f`,
+  `log2l` ([#1032][1032]) and `sincosf` has been added to
+  [<math.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__avr__math).
 
 - The error of `asinf` has been improved from 8 ULPs to 3 ULPs.
 
