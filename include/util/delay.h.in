@@ -54,21 +54,27 @@
     #include <util/delay.h>
     \endcode
 
-    \note As an alternative method, it is possible to pass the
-    F_CPU macro down to the compiler from the Makefile.
-    Obviously, in that case, no \c \#define statement should be
-    used.
+    The functions in this header are meant as convenience functions where
+    actual time values can be specified as a delay time,
+    rather than a number of cycles to wait for.
+
+    This requires that the clock frequency of the device is provided
+    in the \c #F_CPU macro in units of Hertz.  The macro must be defined
+    before including the <util/delay.h> header.  It can be defined
+    in the source code like indicated above, or it can be defined on the
+    command line / in a Makefile by means of <tt>-D F_CPU=...</tt>
 
     The functions in this header file are wrappers around the basic
-    busy-wait functions from <tt>\<util/delay_basic.h\></tt>.  They are meant as
-    convenience functions where actual time values can be specified
-    rather than a number of cycles to wait for.  The idea behind is
-    that compile-time constant expressions will be eliminated by
-    compiler optimization so floating-point expressions can be used
-    to calculate the number of delay cycles needed based on the CPU
-    frequency passed by the macro F_CPU.
+    busy-wait functions from <tt>\<util/delay_basic.h\></tt>, or, when
+    supported by the compiler, then
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles"
+    >__builtin_avr_delay_cycles()</a> is used instead.
 
-    \note In order for these functions to work as intended, compiler
+    In any case, the delay functions provided by this header will not disable
+    interrupts, which means hat the delay time will be longer than
+    specified when interrupts occur while a delay function is running.
+
+    In order for these functions to work as intended, compiler
     optimizations <em>must</em> be enabled, and the delay time
     <em>must</em> be an expression that is a known constant at
     compile-time.  If these requirements are not met, the resulting
@@ -76,6 +82,11 @@
     applications that otherwise do not use floating-point calculations
     will experience severe code bloat by the floating-point library
     routines linked into the application.
+    The idea is
+    that compile-time constant expressions will be eliminated by
+    compiler optimization so floating-point expressions can be used
+    to calculate the number of delay cycles needed based on the CPU
+    frequency passed by the macro F_CPU.
 
     The functions available allow the specification of microsecond, and
     millisecond delays directly, using the application-supplied macro
@@ -91,10 +102,10 @@
     \brief CPU frequency in Hz
 
     The macro F_CPU specifies the CPU frequency in Hertz to be considered by
-    the delay macros.  This macro is normally supplied by the
+    the delay functions.  This macro is normally supplied by the
     environment (e.g. from within a project header, or the project's
-    Makefile).  The value 1 MHz here is only provided as a "vanilla"
-    fallback if no such user-provided definition could be found.
+    Makefile).  The value 1 MHz here is only provided as a
+    fallback default if no such user-provided definition could be found.
 
     In terms of the delay functions, the CPU frequency can be given as
     a floating-point constant (e.g. 3.6864e6 for 3.6864 MHz).
@@ -116,14 +127,16 @@
    The macro #F_CPU is supposed to be defined to a
    constant defining the CPU clock frequency in Hertz.
 
--  If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
+-  If \c __builtin_avr_delay_cycles() is
 \if GIT_BRANCH_IS_ONLINEDOCS
-   support,
+   supported
 \else
-   \ref faq_toolchain_support "support",
+   \ref faq_toolchain_support "supported"
 \endif
-   then the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds
+   by the compiler, then
+   the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds
    where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz.
+   This is around 71 minutes / f<sub>CPU</sub>.
    Values greater than that are saturated to this value.
 
 -  Otherwise, _delay_loop_2() is used as a fallback, and the maximal
@@ -139,7 +152,6 @@
    an integral value.  By default, the clock cycles are rounded up to the next
    integer. This ensures that the user gets at least \c __ms
    microseconds of delay.
-
    Alternatively, by defining the macro \c __DELAY_ROUND_DOWN__, or
    \c __DELAY_ROUND_CLOSEST__, before including this header file, the
    algorithm can be made to round down, or round to closest integer,
@@ -204,14 +216,16 @@ _delay_ms(double __ms)
    The macro #F_CPU is supposed to be defined to a
    constant defining the CPU clock frequency in Hertz.
 
--  If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()
+-  If \c __builtin_avr_delay_cycles() is
 \if GIT_BRANCH_IS_ONLINEDOCS
-   support,
+   supported
 \else
-   \ref faq_toolchain_support "support",
+   \ref faq_toolchain_support "supported"
 \endif
-   then the maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds
+   by the compiler, then
+   the maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds
    where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz.
+   This is around 71 minutes / f<sub>CPU</sub>.
    Values greater than that are saturated to this value.
 
 -  Otherwise, _delay_loop_1() is used as a fallback, and the maximal
@@ -225,7 +239,6 @@ _delay_ms(double __ms)
    integral value.  By default, the clock cycles are rounded up to next
    integer. This ensures that the user gets at least \c __us
    microseconds of delay.
-
    Alternatively, by defining the macro \c __DELAY_ROUND_DOWN__, or
    \c __DELAY_ROUND_CLOSEST__, before including this header file, the
    algorithm can be made to round down, or round to closest integer,
