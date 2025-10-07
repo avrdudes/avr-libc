@@ -111,7 +111,6 @@ static const char* fname (void)
         : !strcmp_P (s, PSTR("subf")) ? "&ndash;"
         : !strcmp_P (s, PSTR("mulf")) ? "*"
         : !strcmp_P (s, PSTR("divf")) ? "/"
-        : !strcmp_P (s, PSTR("__builtin_powif")) ? s
         : "#" STRY (FUNC);
 }
 

@@ -78,7 +78,7 @@ that are close to the poles (if any) or close to the non-zero zeros.
   <tr><td> \c #hypotf <td align='right'> 1092 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 850 <td align="right"> 927 <td align="center"> -6.92
   <tr><td> \c #ldexpf <td align='right'> 238 <td> -1e+10 <td> 1e+10 <td> -10 <td> 10 <td align="right"> 40 <td align="right"> 40 <td align="center"> -7.22
   <tr><td> \c #powf <td align='right'> 1858 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 5182 <td align="right"> 5833 <td align="center"> <b>-4.65</b>
-  <tr><td> \c __builtin_powif <td align='right'> 732 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 648 <td align="right"> 1223 <td align="center"> -6.39
+  <tr><td> \c #__builtin_powif <td align='right'> 732 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 648 <td align="right"> 1223 <td align="center"> -6.39
 </table>
 
 For devices wihout MUL instruction the following applies:
@@ -145,6 +145,6 @@ For devices wihout MUL instruction the following applies:
   <tr><td> \c #hypotf <td align='right'> 1068 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 1297 <td align="right"> 1387 <td align="center"> -6.92
   <tr><td> \c #ldexpf <td align='right'> 232 <td> -1e+10 <td> 1e+10 <td> -10 <td> 10 <td align="right"> 39 <td align="right"> 39 <td align="center"> -7.22
   <tr><td> \c #powf <td align='right'> 1820 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 9490 <td align="right"> 10180 <td align="center"> <b>-4.65</b>
-  <tr><td> \c __builtin_powif <td align='right'> 734 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 1143 <td align="right"> 2140 <td align="center"> -6.39
+  <tr><td> \c #__builtin_powif <td align='right'> 734 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 1143 <td align="right"> 2140 <td align="center"> -6.39
 </table>
 */

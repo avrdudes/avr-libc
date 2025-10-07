@@ -118,5 +118,23 @@ extern int16_t __builtin_avr_fmulsu(int8_t __a, uint8_t __b);
     \c __n cycles on it.  */
 extern void __builtin_avr_delay_cycles(uint32_t __n);
 #endif
+
+/** \ingroup avr_builtins
+    Returns \a base raised to the power of \a expo.
+    Since avr-gcc v15 this function is implemented in assembly.
+    See also the \ref bench_libm "benchmarks". */
+float __builtin_powif (float base, int expo);
+
+/** \ingroup avr_builtins
+    Returns \a base raised to the power of \a expo.
+    Since avr-gcc v15 this function is implemented in assembly. */
+double __builtin_powi (double base, int expo);
+
+/** \ingroup avr_builtins
+    Returns \a base raised to the power of \a expo.
+    Since avr-gcc v15 this function is implemented in assembly.
+    See also the \ref bench_libf7 "benchmarks". */
+long double __builtin_powil (long double base, int expo);
+
 #endif /* DOXYGEN */
 #endif /* _AVR_BUILTINS_H_ */

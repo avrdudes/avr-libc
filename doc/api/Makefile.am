@@ -161,11 +161,15 @@ clean-local:
 
 # Let config.status rebuild headers and dox from .in.
 doxygen.config:	$(top_builddir)/include/util/delay.h \
+		$(top_builddir)/include/avr/builtins.h \
 		main_page.dox faq.dox filter-dox.sh \
 		$(MATH2DOX_H) $(MATH2DOX_GEN_DOX)
 
 $(top_builddir)/include/util/delay.h: $(top_srcdir)/include/util/delay.h.in
 	cd $(top_builddir)/include/util && $(MAKE) delay.h
+
+$(top_builddir)/include/avr/builtins.h: $(top_srcdir)/include/avr/builtins.h.in
+	cd $(top_builddir)/include/avr && $(MAKE) builtins.h
 
 # Some Doxygen styles / environments render very poorly.
 # Tweak that, e.g. by resorting to the original environment.

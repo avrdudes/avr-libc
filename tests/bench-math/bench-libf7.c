@@ -127,7 +127,6 @@ static const char* fname (void)
         : !strcmp_P (s, PSTR("subl")) ? "&ndash;"
         : !strcmp_P (s, PSTR("mull")) ? "*"
         : !strcmp_P (s, PSTR("divl")) ? "/"
-        : !strcmp_P (s, PSTR("__builtin_powil")) ? s
         : "#" STRY (FUNC);
 }
 

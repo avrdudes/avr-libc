@@ -86,6 +86,6 @@ the mantissa is
   <tr><td> \c #hypotl <td align='right'> 2312 <td> -1e+10 <td> 1e+10 <td> -1e+10 <td> 1e+10 <td align="right"> 5006 <td align="right"> 5166 <td align="center"> -15.66
   <tr><td> \c #ldexpl <td align='right'> 1254 <td> -1e+10 <td> 1e+10 <td> -10 <td> 10 <td align="right"> 738 <td align="right"> 756 <td align="center"> -15.95
   <tr><td> \c #powl <td align='right'> 4080 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 32440 <td align="right"> 34066 <td align="center"> -14.46
-  <tr><td> \c __builtin_powil <td align='right'> 2224 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 3396 <td align="right"> 6173 <td align="center"> -15.12
+  <tr><td> \c #__builtin_powil <td align='right'> 2224 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 3396 <td align="right"> 6173 <td align="center"> -15.12
 </table>
 */
