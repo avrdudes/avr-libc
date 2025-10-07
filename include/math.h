@@ -88,7 +88,7 @@ extern "C" {
       <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a>
       for details.
 
-  See also sone benchmarks for \ref bench_libm "IEEE single"
+  See also some benchmarks for \ref bench_libm "IEEE single"
   and \ref bench_libf7 "IEEE double".
 */
 
@@ -190,14 +190,15 @@ void sincosf (float x, float *psin, float *pcos);
 /** The sincos() function returns the sine of \a x in \c *psin, and
     the cosine of \a x in \c *pcos.  The angle \a x is measured in radians.
     As an example, the performace gain of the IEEE double version of
-    sincos() compared to a sin() plus a cos() call is around 5000 cycles.
+    sincos() compared to a sin() plus a cos() call is around 5000 cycles
+    for \a x = 2.0.
     \since GCC v15.3 (IEEE double), AVR-LibC v2.3 */
 void sincos (double x, double *psin, double *pcos);
 
 /** The sincosl() function returns the sine of \a x in \c *psin, and
     the cosine of \a x in \c *pcos.  The angle \a x is measured in radians.
     As an example, the performace gain of the IEEE double version of
-    sincosl() compared to a sinl() plus a cosl() call is around 5000 cycles.
+    sincosl() compared to a sinl() plus a cosl() call is around 5000 cycles
     for \a x = 2.0.
     \since GCC v15.3 (IEEE double), AVR-LibC v2.3 */
 void sincosl (long double x, long double *psin, long double *pcos);
