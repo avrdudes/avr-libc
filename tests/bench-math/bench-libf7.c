@@ -49,6 +49,15 @@ void show_delta (FF x, FF y, FF z, FF z0, FF d, FF d10)
     LOG_PFMT_LDOUBLE (PSTR(", d10=%e -->"), d10);
 }
 
+static FF rel_err (FF z, FF z0)
+{
+    FF ulp = avrtest_ulpl (z, z0);
+    if (avrtest_cmpl (ulp, 0) == 0)
+        return 0;
+    FF d = avrtest_subl (z, z0);
+    d = avrtest_divl (d, z0);
+    return d;
+}
 
 #if NARGS == 2 || NARGS == 22
 FF get_delta (FF x, FF y, uint32_t *cyc)
@@ -83,16 +92,25 @@ FF get_delta (FF x, uint32_t *cyc)
     FF z = FUNC (x, ex);
     *cyc = avrtest_cycles ();
     long double z0 = AFUNC (x, ex);
+#elif NARGS == 3 // sincos...
+    {
+        FF ss, cc;
+        avrtest_cycles_call ();
+        FUNC (x, &ss, &cc);
+        *cyc = avrtest_cycles ();
+        __asm ("" : "+r" (x));
+        FF ss0 = avrtest_sinl (x);
+        FF cc0 = avrtest_cosl (x);
+        FF ds = rel_err (ss, ss0);
+        FF dc = rel_err (cc, cc0);
+        return avrtest_fabsl (ds) > avrtest_fabsl (dc) ? ds : dc;
+    }
+    FF z = 0, z0 = 0;
 #else
 #error NARGS=?
 #endif
 
-    FF ulp = avrtest_ulpl (z, z0);
-    if (avrtest_cmpl (ulp, 0) == 0)
-        return 0;
-    long double d = avrtest_subl (z, z0);
-    d = avrtest_divl (d, z0);
-    return d;
+    return rel_err (z, z0);
 }
 
 __attribute__((const))
