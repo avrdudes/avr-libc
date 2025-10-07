@@ -248,8 +248,8 @@ install-dox-pdf: dox-pdf
 	$(INSTALL_DATA) $(USER_MANUAL).pdf $(DOC_INST_DIR)/$(USER_MANUAL).pdf
 
 install-dox-man: dox-html
-	$(mkinstalldirs) $(DESTDIR)$(mandir)/man3
-	$(INSTALL_DATA) man/man3/*.3 $(DESTDIR)$(mandir)/man3
+	$(mkinstalldirs) $(DESTDIR)$(mandir)/man@MAN_PAGE@
+	$(INSTALL_DATA) man/man@MAN_PAGE@/*.@MAN_PAGE@ $(DESTDIR)$(mandir)/man@MAN_PAGE@
 
 .PHONY: html latex pdf demo demo-examples \
 	dox-html dox-pdf install-pdf install-html \
