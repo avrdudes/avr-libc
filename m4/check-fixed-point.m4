@@ -35,6 +35,7 @@ AC_DEFUN([CHECK_FIXED_POINT],[dnl
 	[ AC_LANG_SOURCE([[
 		_Fract x1;
 		_Accum x2;
+		#define __CONFIGURING_AVR_LIBC__
 		#include <stdfix.h>
 		fract x3;
 		accum x4;
