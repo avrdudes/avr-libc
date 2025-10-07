@@ -31,6 +31,18 @@ extern float mulf (float, float) __asm("__mulsf3");
 extern float divf (float, float) __asm("__divsf3");
 #define avrtest___builtin_powil avrtest_powil
 
+static float rel_err (float z, long double z0)
+{
+    float f0 = avrtest_ltof (z0);
+    float ulp = avrtest_ulpf (z, f0);
+    if (avrtest_cmpf (ulp, 0) == 0)
+        return 0;
+    float d = avrtest_subf (z, f0);
+    d = avrtest_divf (d, f0);
+
+    return d;
+}
+
 #if NARGS == 2 || NARGS == 22
 float get_delta (float x, float y, uint32_t *cyc)
 #else
@@ -64,18 +76,25 @@ float get_delta (float x, uint32_t *cyc)
     float z = FUNC (x, ex);
     *cyc = avrtest_cycles ();
     long double z0 = AFUNC (avrtest_ftol (x), ex);
+#elif NARGS == 3 // sincos...
+    {
+        float ss, cc;
+        avrtest_cycles_call ();
+        FUNC (x, &ss, &cc);
+        *cyc = avrtest_cycles ();
+        __asm ("" : "+r" (x));
+        long double ss0 = avrtest_sinl (avrtest_ftol (x));
+        long double cc0 = avrtest_cosl (avrtest_ftol (x));
+        float ds = rel_err (ss, ss0);
+        float dc = rel_err (cc, cc0);
+        return avrtest_fabsf (ds) > avrtest_fabsf (dc) ? ds : dc;
+    }
+    float z = 0, z0 = 0;
 #else
 #error NARGS=?
 #endif
 
-    float f0 = avrtest_ltof (z0);
-    float ulp = avrtest_ulpf (z, f0);
-    if (avrtest_cmpf (ulp, 0) == 0)
-        return 0;
-    float d = avrtest_subf (z, f0);
-    d = avrtest_divf (d, f0);
-
-    return d;
+    return rel_err (z, z0);
 }
 
 __attribute__((const))

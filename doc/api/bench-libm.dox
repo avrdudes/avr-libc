@@ -46,6 +46,7 @@ that are close to the poles (if any) or close to the non-zero zeros.
   <tr><td> \c #modff <td align='right'> 484 <td> -1e+05 <td> 1e+05 <td align="right"> 365 <td align="right"> 456 <td align="center"> -7.22
   <tr><td> \c #roundf <td align='right'> 236 <td> -1e+05 <td> 1e+05 <td align="right"> 111 <td align="right"> 156 <td align="center"> -7.22
   <tr><td> \c #sinf <td align='right'> 910 <td> 0 <td> 3.15 <td align="right"> 1744 <td align="right"> 2146 <td align="center"> <b>-3.67</b>
+  <tr><td> \c #sincosf <td align='right'> 976 <td> -1.57 <td> 3.15 <td align="right"> 3482 <td align="right"> 3883 <td align="center"> <b>-3.43</b>
   <tr><td> \c #sinhf <td align='right'> 1466 <td> -20 <td> 20 <td align="right"> 3043 <td align="right"> 3461 <td align="center"> -5.78
   <tr><td> \c #sqrtf <td align='right'> 256 <td> 0 <td> 1e+06 <td align="right"> 474 <td align="right"> 510 <td align="center"> -7.22
   <tr><td> \c #tanf <td align='right'> 1178 <td> 0 <td> 3.15 <td align="right"> 2178 <td align="right"> 2946 <td align="center"> <b>-2.86</b>
@@ -112,6 +113,7 @@ For devices wihout MUL instruction the following applies:
   <tr><td> \c #modff <td align='right'> 490 <td> -1e+05 <td> 1e+05 <td align="right"> 365 <td align="right"> 456 <td align="center"> -7.22
   <tr><td> \c #roundf <td align='right'> 230 <td> -1e+05 <td> 1e+05 <td align="right"> 109 <td align="right"> 154 <td align="center"> -7.22
   <tr><td> \c #sinf <td align='right'> 912 <td> 0 <td> 3.15 <td align="right"> 3408 <td align="right"> 3818 <td align="center"> <b>-3.67</b>
+  <tr><td> \c #sincosf <td align='right'> 978 <td> -1.57 <td> 3.15 <td align="right"> 6813 <td align="right"> 7225 <td align="center"> <b>-3.43</b>
   <tr><td> \c #sinhf <td align='right'> 1434 <td> -20 <td> 20 <td align="right"> 4941 <td align="right"> 5358 <td align="center"> -5.78
   <tr><td> \c #sqrtf <td align='right'> 252 <td> 0 <td> 1e+06 <td align="right"> 474 <td align="right"> 510 <td align="center"> -7.22
   <tr><td> \c #tanf <td align='right'> 1164 <td> 0 <td> 3.15 <td align="right"> 4080 <td align="right"> 4785 <td align="center"> <b>-2.86</b>
