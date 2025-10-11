@@ -283,6 +283,12 @@ DO_IF_CC_OPTION([-mcvt], [HAS_MCVT_yesno=yes], [HAS_MCVT_yesno=no])
 AC_MSG_RESULT([$HAS_MCVT_yesno])
 AC_SUBST(HAS_MCVT_yesno)
 
+AC_MSG_CHECKING([whether ${CC} supports attribute signal(n)])
+DO_IF_CC_BUILTIN_MACRO([], [__HAVE_SIGNAL_N__],
+	[HAS_SIGNAL_N_yesno=yes], [HAS_SIGNAL_N_yesno=no])
+AC_MSG_RESULT([$HAS_SIGNAL_N_yesno])
+AC_SUBST(HAS_SIGNAL_N_yesno)
+
 dnl Does AM_CONDITIONAL(BUILD_FXLIB, ...)
 CHECK_FIXED_POINT
 

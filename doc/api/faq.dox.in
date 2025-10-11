@@ -1476,7 +1476,7 @@ and <tt>__call_main</tt>.
 \section faq_local_isr How to use a local (static, namespace) function as ISR?
 
 In order to use a non-global function as an ISR, there is #ISR_N from
-<tt>avr/interrupts.h</tt>:
+<tt>avr/interrupt.h</tt>:
 
 \code
 #include <avr/interrupt.h>
@@ -2534,6 +2534,13 @@ They influence how pars of the library behave.
   <td> @HAS_MCVT_yesno@
   <td> \ref faq_cvt "CVT" convenience
 <tr>
+  <td> Compiler supports attribute
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html#index-signal_0028num_0029-function-attribute_002c-AVR"
+       ><tt>signal(n)</tt></a>
+  <td> @HAS_SIGNAL_N_yesno@
+  <td> \c <avr/interrupt.h>, #ISR_N,
+       \ref faq_local_isr "local functions as ISRs"
+<tr>
   <td> 64-bit floating-point
   <td> @DOX_MULTI_OPT@
   <td> \c <math.h>, Libraries
@@ -2577,7 +2584,7 @@ of interest.
    <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=ld/scripttempl/avr.sc"
       >ld/scripttempl/avr.sc</a>
 -  AVR opcodes:
-   <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=include/opcodes/avr.h"
+   <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=include/opcode/avr.h"
       >include/opcodes/avr.h</a>
 - Latest <a href="https://sourceware.org/binutils/docs/">manual</a>
 
