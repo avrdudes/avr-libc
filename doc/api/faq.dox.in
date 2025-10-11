@@ -2576,6 +2576,10 @@ of interest.
 -  Linker script:
    <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=ld/scripttempl/avr.sc"
       >ld/scripttempl/avr.sc</a>
+-  AVR opcodes:
+   <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=include/opcodes/avr.h"
+      >include/opcodes/avr.h</a>
+- Latest <a href="https://sourceware.org/binutils/docs/">manual</a>
 
 <a href="https://gcc.gnu.org"><b>GCC</b></a>
 - Top source:
@@ -2587,6 +2591,7 @@ of interest.
 -  libgcc (AVR part):
    <a href="https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=libgcc/config/avr"
       >libgcc/config/avr</a>
+- Online <a href="https://gcc.gnu.org/onlinedocs/">manuals</a>
 
 <a href="https://avrdudes.github.io/avr-libc"><b>AVR-LibC</b></a>
 - Top source:
@@ -2595,6 +2600,7 @@ of interest.
 - Startup code:
   <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
      >crt1/gcrt1.S</a>
+- Online <a href="https://avrdudes.github.io/avr-libc/">manuals</a>
 
 <small>Back to \ref faq_index.</small>
 
