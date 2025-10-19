@@ -27,7 +27,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 EXTRA_DIST = \
+	AUTHORS \
+	INSTALL \
 	LICENSE \
+	NEWS \
 	NEWS.md \
 	bootstrap
 
