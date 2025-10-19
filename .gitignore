@@ -4,7 +4,6 @@ m4-gen/
 /tmp-device-info
 /configure
 /avr/
-/avr-libc.spec
 /include/avr/builtins.h
 /include/util/delay.h
 

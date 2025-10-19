@@ -473,7 +473,6 @@ dnl == Generate all files from *.in sources  =================================
 
 dnl The *.in scripts in devtools are transformed by the local configure.
 AC_CONFIG_FILES([
-	avr-libc.spec
 	supported-mcus.txt
 	include/avr/builtins.h
 	include/avr/version.h
