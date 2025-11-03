@@ -36,7 +36,10 @@
 #include <time.h>
 #include "best_as.h"
 #include "time-private.h"
-#include "sectionname.h"
+
+/* In order to assist AVR-SD, don't use ATTRIBUTE_CLIB_SECTION so
+   that switch tables are not put in .subsection 1.
+   Instead, Rules.am adds -ffunction-sections. See #1055.  */
 
 #define AS __BEST_AS
 
@@ -55,7 +58,6 @@ static const AS char strfmonths[] =
     "January February March April May June July August September October"
     " November December ";
 
-ATTRIBUTE_CLIB_SECTION
 static uint8_t
 pgm_copystring (const char AS *p, uint8_t i, char *b, uint8_t len)
 {
@@ -88,7 +90,6 @@ pgm_copystring (const char AS *p, uint8_t i, char *b, uint8_t len)
    BITS < 0: Fill with leading blanks (only BITS = -0x3 is supported for now).
    BITS > 0: Fill with leading 0's.  */
 
-ATTRIBUTE_CLIB_SECTION
 static uint8_t
 u2s (char *s, int8_t bits, uint16_t num)
 {
@@ -108,7 +109,6 @@ u2s (char *s, int8_t bits, uint16_t num)
 }
 
 
-ATTRIBUTE_CLIB_SECTION
 size_t
 strftime (char *buffer, size_t limit, const char *pattern,
           const struct tm *timeptr)

@@ -50,7 +50,7 @@ libscanf_flt_a_LIBADD = vfscanf_flt.o
 
 # vfprintf is compiled best with -Os -g -fno-jump-tables (-mno-tablejump),
 # this gives the smallest code.
-PRINTF_CFLAGS = -Os @CDEBUG@ $(FNO_JUMP_TABLES)
+PRINTF_CFLAGS = -Os @CDEBUG@ $(FNO_JUMP_TABLES) -ffunction-sections
 
 # When float is involved, then -mcall-prologes is likely profitable.
 PRINTF_FLT_CFLAGS = $(PRINTF_CFLAGS) -mcall-prologues

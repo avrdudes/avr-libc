@@ -36,11 +36,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "sectionname.h"
 #include "stdio_private.h"
 #include "ftoa_engine.h"
 #include "ntz.h"
 #include "xtoa_fast.h"
+
+/* In order to assist AVR-SD, don't use ATTRIBUTE_CLIB_SECTION so
+   that switch tables are not put in .subsection 1.
+   Instead, Rules.am adds -ffunction-sections. See #1055.  */
 
 /*
  * This file can be compiled into more than one flavour.  The default
@@ -124,7 +127,6 @@
 #define FL_LONG 	0x80
 #define FL_LONG_DOUBLE 	(__SIZEOF_LONG_DOUBLE__ != __SIZEOF_DOUBLE__ ? 0x08 : 0)
 
-ATTRIBUTE_CLIB_SECTION
 int
 VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 {
@@ -308,7 +310,6 @@ ret:
 #define XFL_LONG	((__SIZEOF_LONG_DOUBLE__ != __SIZEOF_DOUBLE__) << 0)
 
 
-ATTRIBUTE_CLIB_SECTION
 int VFPRINTF_NAME (FILE * stream, const char *fmt, va_list ap)
 {
     unsigned char c;		/* holds a char from the format string */

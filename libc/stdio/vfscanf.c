@@ -40,8 +40,11 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include "sectionname.h"
 #include "stdio_private.h"
+
+/* In order to assist AVR-SD, don't use ATTRIBUTE_CLIB_SECTION so
+   that switch tables are not put in .subsection 1.
+   Instead, Rules.am adds -ffunction-sections. See #1055.  */
 
 #define ARRAY_SIZE(X) (sizeof(X) / sizeof(*X))
 
@@ -163,7 +166,6 @@ typedef uint8_t width_t;
 /* Add noinline attribute to avoid GCC 4.2 optimization.	*/
 
 __attribute__((noinline))
-ATTRIBUTE_CLIB_SECTION
 static void putval (void *addr, long val, uint8_t flags)
 {
     if (!(flags & FL_STAR))
@@ -195,7 +197,6 @@ static void putval (void *addr, long val, uint8_t flags)
 }
 
 __attribute__((noinline))
-ATTRIBUTE_CLIB_SECTION
 static unsigned long
 mulacc (unsigned long val, uint8_t flags, uint8_t c)
 {
@@ -245,7 +246,6 @@ mulacc (unsigned long val, uint8_t flags, uint8_t c)
 }
 
 __attribute__((noinline))
-ATTRIBUTE_CLIB_SECTION
 static uint8_t
 conv_int (FILE *stream, width_t width, void *addr, uint8_t flags)
 {
@@ -331,7 +331,6 @@ err:
 
 #if  SCANF_BRACKET
 __attribute__((noinline))
-ATTRIBUTE_CLIB_SECTION
 static const char *
 conv_brk (FILE *stream, width_t width, char *addr, const char *fmt)
 {
@@ -446,7 +445,6 @@ PROGMEM_FAR static const char pstr_nfinity[] = "nfinity";
 PROGMEM_FAR static const char pstr_an[] = "an";
 
 __attribute__((noinline))
-ATTRIBUTE_CLIB_SECTION
 static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 {
     union
@@ -654,7 +652,6 @@ static uint8_t conv_flt (FILE *stream, width_t width, float *addr)
 #endif	/* SCANF_FLOAT	*/
 
 __attribute__((noinline))
-ATTRIBUTE_CLIB_SECTION
 static int skip_spaces (FILE *stream)
 {
     int i;
@@ -826,7 +823,6 @@ static int skip_spaces (FILE *stream)
      </dd>
      </dl>
 */
-ATTRIBUTE_CLIB_SECTION
 #ifdef __DOXYGEN__
 int vfscanf (FILE * stream, const char *fmt, va_list ap)
 #else

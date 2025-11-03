@@ -26,3 +26,5 @@
 #
 
 include $(top_srcdir)/libc/time/Files.am
+
+strftime.o: AM_CFLAGS += -ffunction-sections
