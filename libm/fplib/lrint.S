@@ -116,13 +116,7 @@ ENTRY_FLOAT lrintf lrint lrintl
   ; restore the sign and return
 .L_sign:
 	brtc	6f
-	com	rA3
-	com	rA2
-	com	rA1
-	neg	rA0
-	sbci	rA1, -1
-	sbci	rA2, -1
-	sbci	rA3, -1
+	XJMP	_U(__negsi2)
 6:	ret
 
 .L_err:	set			; force return 0x80000000

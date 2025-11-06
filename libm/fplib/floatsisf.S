@@ -44,13 +44,7 @@ ENTRY   __floatsisf
 	bst	rA3, 7		; sign
 	brtc	1f
   ; negate A
-	com	rA3
-	com	rA2
-	com	rA1
-	neg	rA0
-	sbci	rA1, -1
-	sbci	rA2, -1
-	sbci	rA3, -1
+	XCALL	_U(__negsi2)
 1:
 	tst	rA3
 	breq	4f
