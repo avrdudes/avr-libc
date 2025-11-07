@@ -64,7 +64,6 @@ libm_a_asm_sources = \
 	fp_mintl.S \
 	fp_mpack.S \
 	fp_nan.S \
-	fp_negdi.S \
 	fp_norm2.S \
 	fp_powser.S \
 	fp_powsodd.S \

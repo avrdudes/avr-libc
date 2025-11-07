@@ -145,7 +145,7 @@ ENTRY	__fixunssfdi
 	brne	6b
 .L_sign:
 	brtc	7f
-	XCALL	_U(__fp_negdi)
+	XCALL	_U(__negdi2)
 7:	clc
 	ret
 
