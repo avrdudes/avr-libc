@@ -91,6 +91,7 @@ ENTRY __fixunssfsi
 
 .L_err:	XCALL	_U(__fp_zero)
 	ldi	rAE, 1		; error flag
+.L_ret:
 	ret
 
 .L_zr:	XJMP	_U(__fp_zero)	; return 0x00000000, clear rAE
@@ -115,8 +116,7 @@ ENTRY __fixunssfsi
 
   ; restore the sign and return
 .L_sign:
-	brtc	6f
+	brtc	.L_ret
 	XJMP	_U(__negsi2)
-6:	ret
 
 ENDFUNC
