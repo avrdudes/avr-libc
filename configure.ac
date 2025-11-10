@@ -370,6 +370,15 @@ AC_SUBST(DOCSDIR)
 AC_SUBST(AVR_LIBC_USER_MANUAL)
 AC_SUBST(DOC_INST_DIR)
 
+dnl Used in doc/api's doxygen.config.in::MAN_EXTENSION and Makefile.am.
+AC_ARG_WITH([man-page],
+  [AS_HELP_STRING([--with-man-page=],dnl
+                  [set man page for AVR-LibC documentation (default: 3avr)])],
+  [MAN_PAGE=$withval],
+  [MAN_PAGE=3avr])
+AC_MSG_NOTICE([Using man page $MAN_PAGE])
+AC_SUBST(MAN_PAGE)
+
 dnl Consumed by doc/api/doxygen.config.in::ENABLED_SECTIONS.
 AC_MSG_CHECKING([for git branch])
 the_git_branch=`(cd ${srcdir}; git rev-parse --abbrev-ref HEAD 2> /dev/null)`
