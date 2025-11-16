@@ -29,7 +29,7 @@
 #define FUNC_SEGNAME .fini4
 #include "asmdef.h"
 
-ENTRY _U(__abort)
+FUNCTION _U(__abort)
     .weak __abort
 __abort:
     ;; Next regular code is .fini0 from libgcc that executes CLI
