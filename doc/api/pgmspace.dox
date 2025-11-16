@@ -401,7 +401,7 @@ char read_c (const __flash char *c)
   whereas this is not possible for #PROGMEM, which is an attribute in GCC
   and not a qualifier.
 
--# The analogon to #PSTR for address-spaces is #FSTR or #FXSTR.  As of v14,
+-# The analog of #PSTR for address-spaces is #FSTR or #FXSTR.  As of v14,
   \c avr-gcc still rejects to put local static compound literals into an
   address-space (GCC PR84163).  While constructs like
   \code
@@ -506,7 +506,7 @@ macro or \c prgm_read_char() function.
 There are other functions declared in the <avr/pgmspace.h> header file
 that work with strings that are stored in the Program Space.
 
-For example if you want to copy the string from Program Space to a buffer in
+For example, if you want to copy the string from Program Space to a buffer in
 RAM (like an automatic variable inside a function, that is allocated on the
 stack), you can do this:
 
@@ -525,7 +525,7 @@ void foo (void)
 \endcode
 
 Here, the \c string_table array is stored in Program Space, so
-we access it normally, as if were stored in Data Space, then take the address
+we access it normally, as if it was stored in Data Space, then take the address
 of the location we want to access, and use the address as a parameter to
 \c pgm_read_ptr. We use the \c pgm_read_ptr macro to read the string pointer
 out of the \c string_table array. Remember that a pointer is 16-bits, or word

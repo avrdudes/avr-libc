@@ -851,7 +851,7 @@ When the argument of a modifier is not computable at assembler-time,
 then the assembler has to encode the expression in an abstract form using
 <a href="https://github.com/bminor/binutils-gdb/blob/master/include/elf/avr.h"
    >RELOCs</a>.
-Consequence is that only a very limited number of argument expressions is
+The consequence is that only a very limited number of argument expressions is
 supported when they are not computable at assembler-time.
 
 \section inline_asm_examples Examples
@@ -1314,7 +1314,7 @@ clr __zero_reg__
 \endcode
 
 - The asm is pure arithmetic and hence not volatile. (It might be
-advisable to make it volatile anyway, so that it won't be reorderd across
+advisable to make it volatile anyway, so that it won't be reordered across
 \c sei() or \c cli() instructions.)
 
 Let's have a look at how this performs in a test case:

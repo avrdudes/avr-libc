@@ -35,8 +35,8 @@
 Welcome to the open source software development toolset for the Microchip (formerly Atmel) AVR!
 
 There is not a single tool that provides everything needed to develop software
-for the AVR. It takes many tools working together. Collectively, the group of
-tools are called a toolset, or commonly a toolchain, as the tools are chained
+for the AVR. It takes many tools working together. Collectively, this group of
+tools is called a toolset, or commonly a toolchain, as the tools are chained
 together to produce the final executable application for the AVR
 microcontroller.
 
@@ -69,7 +69,7 @@ projects were designed to originally run on Unix-like systems.
 
 \section overview_gcc GCC
 
-GCC stands for GNU Compiler Collection. GCC is highly flexible compiler system.
+GCC stands for GNU Compiler Collection. GCC is a highly flexible compiler system.
 It has different compiler front-ends for different languages. It has many
 back-ends that generate assembly code for many different processors and host
 operating systems. All share a common "middle-end", containing the generic
@@ -96,8 +96,8 @@ compilers for the AVR: C language, C++, and Ada. The compiler itself does not
 assemble or link the final code.
 
 GCC is also known as a "driver" program, in that it knows about, and drives
-other programs seamlessly to create the final output. The assembler, and the
-linker are part of another open source project called GNU Binutils. GCC knows
+other programs seamlessly to create the final output. The assembler and the
+linker are parts of another open source project called GNU Binutils. GCC knows
 how to drive the GNU assembler (gas) to assemble the output of the compiler.
 GCC knows how to drive the GNU linker (ld) to link all of the object modules
 into a final executable.
@@ -178,7 +178,7 @@ for some other embedded system (Newlib), or for some versions of Linux (uCLibc).
 The open source AVR toolchain has its own Standard C Library project: AVR-LibC.
 
 AVR-LibC provides many of the same functions found in a regular Standard C
-Library and many additional library functions that is specific to an AVR. Some
+Library and many additional library functions that are specific to AVR. Some
 of the Standard C Library functions that are commonly used on a PC environment
 have limitations or additional issues that a user needs to be aware of when
 used on an embedded system.
@@ -261,7 +261,7 @@ are normally distributed as source code. It is left up to the user to build
 the tool application from its source code. This can be a very daunting task
 to any potential user of these tools.
 
-Luckily there are people who help out in this area. Volunteers take the time
+Luckily, there are people who help out in this area. Volunteers take the time
 to build the application from source code on particular host platforms and
 sometimes packaging the tools for convenient installation by the end user.
 These packages contain the binary executables of the tools, pre-made and ready

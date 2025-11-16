@@ -473,7 +473,7 @@ block of program memory, see the GCC
    >v14 release notes</a>.
 
 -# The \ref sec_lma "LMA" actually equals the \ref sec_vma "VMA", but is
-unused.  The flash loader like avrdude knows where to put the data,
+unused.  The flash loader like avrdude knows where to put the data.
 
 
 \subsection sec_dot_text The .text Output Section
@@ -742,7 +742,7 @@ empty ones, that are valid in a section name.
   </table>
   It is unlikely that ordinary code uses the fini sections.
   When there are no static destructors and \c atexit() is not used, then
-  the respective code is not pulled in form the libraries, and the
+  the respective code is not pulled in from the libraries, and the
   fini code just consumes four bytes: a \c CLI and a RJMP to itself.
   Common use cases of fini code is when running the GCC test suite where
   it reduces fallout, and in simulators to determine (un)orderly
@@ -823,7 +823,7 @@ even happen inside library calls),
 \subsection sec_dot_bss  The .bss Output Section
 
 Data in static storage that will be zeroed by the startup code.
-This are data objects without explicit initializer, and data objects
+These are data objects without explicit initializer, and data objects
 with initializers that are all zeroes.
 
 Input sections are <tt>.bss*</tt> and \c COMMON. Common symbols are

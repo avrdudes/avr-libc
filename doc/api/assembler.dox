@@ -226,7 +226,7 @@ __vector_default:
 <dd>
   External functions need to be declared to be <tt>.global</tt>.  \c main is
   the application entry point that will be jumped to from the
-  ininitalization routine in \c crts1200.o.
+  initialization routine in \c crts1200.o.
 </dd>
 <dt>Note [6]</dt>
 <dd>
@@ -363,7 +363,7 @@ Some common directives include:
     referred to in other modules.
     When a symbol is used without prior declaration or definition,
     the symbol is implicitly global. The <tt>.global</tt>
-    directive can also by used to refer to that symbol, so that the linker
+    directive can also be used to refer to that symbol, so that the linker
     pulls in code that defines the symbol (provided such a symbol definition
     exists).  For example, code that puts objects in the <tt>.data</tt>
     section and that assumes that the \ref sec_dot_init "startup code"
@@ -383,7 +383,7 @@ Some common directives include:
   <td>Set the type of symbol <em>sym</em> to <em>kind</em>.
     Commonly used symbol types are <tt>\@function</tt> for function
     symbols like \c main and <tt>\@object</tt> for data symbols.
-    This has an affect for disassemblers, debuggers and tools that
+    This has an effect for disassemblers, debuggers and tools that
     show function / object properties.
 </tr>
 <tr>
@@ -525,7 +525,7 @@ For some real-world examples, see the AVR-LibC source
 
 There are some AVR-specific operators available like \c lo8(), \c hi8(),
 \c pm(), \c gs() etc.
-For an overview see the documentation of the
+For an overview, see the documentation of the
 \ref assembly_operand_modifiers "operand modifiers"
 in the inline assembly Cookbook.
 
@@ -583,8 +583,8 @@ to the value of symbol \c __stack, and it sets \c __zero_reg__ (R1)
 to zero.  This code starts at \c __init which is jumped to from the
 reset vector via the very first entry in the vector table.
 \c __init label is located in section <tt>\ref sec_dot_init ".init0"</tt>,
-so that all the following init sections will also be executed an a
-fallthrough manner until section \c \.init9 with finally calls \c main.
+so that all the following init sections will also be executed in a
+fallthrough manner until section \c \.init9 which finally calls \c main.
 Thus, the following code will be executed without any further ado:
 \verbatim
 .text

@@ -64,8 +64,8 @@ The memory addresses used are not displayed in a linear scale.
 \image html malloc-std.svg "RAM map of a device with internal RAM"
 \image latex malloc-std.eps "RAM map of a device with internal RAM" width=7.5cm
 
-On a simple device like a microcontroller it is a challenge to implement a
-dynamic memory allocator that is simple enough so the code size requirements
+On a simple device like a microcontroller, it is a challenge to implement a
+dynamic memory allocator that is simple enough, so the code size requirements
 will remain low, yet powerful enough to avoid unnecessary memory fragmentation
 and to get it all done with reasonably few CPU cycles. Microcontrollers
 are often low on space and also run at much lower speeds than the typical PC
