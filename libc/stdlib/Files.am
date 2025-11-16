@@ -51,6 +51,7 @@ stdlib_a_c_sources = \
 	stdlib_private.h
 
 stdlib_a_asm_sources = \
+	_abort.S \
 	abort.S \
 	atoff.S \
 	atofl.S \

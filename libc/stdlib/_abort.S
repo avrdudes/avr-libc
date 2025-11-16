@@ -1,4 +1,4 @@
-/* Copyright (c) 2002, Marek Michalkiewicz
+/* Copyright (c) 2002  Marek Michalkiewicz
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -26,9 +26,12 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+#define FUNC_SEGNAME .fini4
 #include "asmdef.h"
 
-ENTRY _U(abort)
-    ;; Skips atexit() registered functions and (static) destructors.
-    XJMP    _U(__abort)
+ENTRY _U(__abort)
+    .weak __abort
+__abort:
+    ;; Next regular code is .fini0 from libgcc that executes CLI
+    ;; and then enters an infinite loop to __stop_program.
 ENDFUNC

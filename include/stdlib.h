@@ -92,9 +92,9 @@ typedef int (*__compar_fn_t)(const void *, const void *);
 #endif
 
 /** The abort() function causes abnormal program termination to occur.
-    This realization disables interrupts and jumps to _exit() function
-    with argument equal to 1. In the limited AVR environment, execution is
-    effectively halted by entering an infinite loop. */
+    This realization disables interrupts and execution is
+    effectively halted by entering an infinite loop. Static destructors
+    and atexit() registered functions are not executed.  */
 extern void abort(void) __ATTR_NORETURN__;
 
 

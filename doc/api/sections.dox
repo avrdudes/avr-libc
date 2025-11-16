@@ -728,10 +728,20 @@ empty ones, that are valid in a section name.
     <td>\c __do_global_dtors
   </tr>
   <tr>
-    <td><tt>.fini5...1</tt>
+    <td><tt>.fini5</tt>
     <td>Unused
     <td>---
-    <td rowspan="2">
+    <td rowspan="4">
+  </tr>
+  <tr>
+    <td><tt>.fini4</tt>
+    <td>Weakly defines <tt>__abort</tt>, used by abort()
+    <td>AVR-LibC
+  </tr>
+  <tr>
+    <td><tt>.fini3...1</tt>
+    <td>Unused
+    <td>---
   </tr>
   <tr>
     <td><tt>.fini0</tt>

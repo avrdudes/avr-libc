@@ -273,6 +273,10 @@
 - Fixed `atoff` forwarding from wrong `strtod` to correct `strtof`
   ([#1052][1052]).
 
+- `abort` no more calls atexit functions or static destructors ([#1056][1056]).
+  `abort` doesn't forward to `_exit(1)` any more but to a new, weak
+  label `__abort` located in section `.fini4`.
+
 ## Pull Requests
 
 - Modernized the
@@ -344,3 +348,4 @@
 [1048]: https://github.com/avrdudes/avr-libc/issues/1048
 [1052]: https://github.com/avrdudes/avr-libc/issues/1052
 [1053]: https://github.com/avrdudes/avr-libc/issues/1053
+[1056]: https://github.com/avrdudes/avr-libc/issues/1056
