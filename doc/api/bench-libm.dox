@@ -81,7 +81,7 @@ that are close to the poles (if any) or close to the non-zero zeros.
   <tr><td> \c #__builtin_powif <td align='right'> 732 <td> 0 <td> 1e+04 <td> -10 <td> 10 <td align="right"> 648 <td align="right"> 1223 <td align="center"> -6.39
 </table>
 
-For devices wihout MUL instruction the following applies:
+For devices without MUL instruction, the following applies:
 - The execution times for multiplication and for the transcendental functions
   are roughly twice the time for devices that have MUL.
 - The execution times for the remaining functions are roughly the same.
