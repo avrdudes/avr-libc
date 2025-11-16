@@ -28,7 +28,9 @@
 
 #include "asmdef.h"
 
-ENTRY _U(abort)
+FUNCTION _U(abort)
+    .weak abort
+abort:
     ;; Skips atexit() registered functions and (static) destructors.
     XJMP    _U(__abort)
 ENDFUNC
