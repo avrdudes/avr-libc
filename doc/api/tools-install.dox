@@ -165,7 +165,7 @@ have \c CC set at all.
 
 There are scripts that can simplify the process of building an AVR
 toolchain for Linux, and/or for Windows in
-\ref install_canadian "Canadia cross" configuration.
+\ref install_canadian "Canadian cross" configuration.
 
 - GitHub: <a href="https://github.com/ZakKemble/avr-gcc-build"
 	     >avr-gcc-build</a> from Zak Kemble.
@@ -191,7 +191,7 @@ tcl flex texinfo git diffutils patch git-email
 
 You specify the installation directory by using the <tt>\--prefix=dir</tt>
 option with the \c configure script.  It is important to install all the AVR
-tools in the same directory or some of the tools will not work correctly.  To
+tools in the same directory, or some of the tools will not work correctly.  To
 ensure consistency and simplify the discussion, we will use \c $PREFIX to
 refer to whatever directory you wish to install in.  You can set this as an
 environment variable if you wish as such (using a Bourne-like shell):
@@ -538,7 +538,7 @@ There are also pre-built
 \addindex installation, avarice
 
 These install notes are not applicable to avarice-1.5 or older. You
-probably don't want to use anything that old anyways since there have been
+probably don't want to use anything that old anyway since there have been
 many improvements and bug fixes since the 1.5 release.
 
 AVaRICE also uses the \c configure system, so to build and install:
@@ -578,12 +578,12 @@ MinGW. There are advantages and disadvantages to both. Cygwin provides a
 very complete POSIX environment that allows one to build many Linux based tools
 from source with very little or no source modifications. However, POSIX
 functionality is provided in the form of a DLL that is linked to the application.
-This DLL has to be redistributed with your application and there are issues if
+This DLL has to be redistributed with your application, and there are issues if
 the Cygwin DLL already exists on the installation system and different versions
 of the DLL. On the other hand, MinGW can compile code as native Win32
 applications. However, this means that programs designed for Unix and Linux (i.e.
 that use POSIX functionality) will not compile as MinGW does not provide
-that POSIX layer for you. Therefore most programs that compile on both types of
+that POSIX layer for you. Therefore, most programs that compile on both types of
 host systems, usually must provide some sort of abstraction layer to allow an
 application to be built cross-platform.
 
