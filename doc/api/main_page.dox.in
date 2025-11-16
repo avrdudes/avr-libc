@@ -74,7 +74,7 @@ Unless otherwise noted, functions of this library are <em>not</em>
 guaranteed to be reentrant.  In particular, any functions that store
 local state are known to be non-reentrant, as well as functions that
 manipulate I/O registers like the \ref avr_eeprom "EEPROM" access routines.
-If these functions are used within both standard and interrupt contexts
+If these functions are used within both standard and interrupt contexts,
 undefined behaviour will result.
 See the \ref faq_reentrant "FAQ" for a more detailed discussion.
 
@@ -179,7 +179,7 @@ it is supported by the compiler at library compile-time.
   ATmega1284,
   ATmega1284P,
   ATmega2560,
-  ATmega2561,
+  ATmega2561
 </dd>
 <dt>megaAVR 0-Series Devices:</dt>
 <dd>
