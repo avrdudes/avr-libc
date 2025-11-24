@@ -597,7 +597,9 @@ empty ones, that are valid in a section name.
     <td><tt>.init2</tt>
     <td>
       Initializes the stack pointer to the value of weak symbol \c __stack,
-      which has a default value of \c RAMEND as defined in <code>avr/io.h</code>
+      which has a default value of \c RAMEND as defined in
+      <code>avr/io.h</code>.  On devices that have it, set \c SPLIM to
+      one less than the value of symbol \ref __heap_start
     <td>AVR-LibC
     <td>\c __init_sp<sup>3</sup>
   </tr>
@@ -621,7 +623,7 @@ empty ones, that are valid in a section name.
   </tr>
   <tr>
     <td><tt>.init3</tt>
-    <td>Paints the RAM from #__heap_start up to RAMEND in
+    <td>Paints the RAM from \ref __heap_start up to RAMEND in
       preparation for _get_ram_unused().
     <td>AVR-LibC
     <td>\c __init_ram_color<sup>v2.3</sup>
@@ -1027,6 +1029,8 @@ The application can read them to infer properties of the binary.
   which immediately follows <tt>\ref sec_dot_data ".data"</tt>).
   Used by \ref malloc_tunables "malloc() tunables" to determine the
   start of the heap.
+  On devices that have it, the startup code sets \c SPLIM to the value
+  of <tt>__heap_start-1</tt>.
 </dd>
 <dt><tt>_etext</tt></dt>
 <dd>

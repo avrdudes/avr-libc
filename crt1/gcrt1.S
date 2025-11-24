@@ -383,6 +383,14 @@ __init:
 	out	SREG_IO_ADDR, __zero_reg__
 
 #ifdef CRT_SELF_CONTAINED
+#if defined(CPU_SPLIM)
+	;; Setting SPLIM is a bit tricky, since we don't know the value
+	;; of __heap_start, and we don't know the current value of SP
+	;; in the case of a soft reset.	 Hence, set SPLIM = 0 first.
+	out _SFR_IO_ADDR(CPU_SPLIML), __zero_reg__
+	out _SFR_IO_ADDR(CPU_SPLIMH), __zero_reg__
+#endif /* Have SPLIM */
+
 	ldi	r28, lo8(__stack)
 #ifdef __AVR_XMEGA__
 	out	SPL_IO_ADDR, r28
@@ -399,6 +407,13 @@ __init:
 	out	SPL_IO_ADDR, r28
 #endif  /* Have SPL */
 #endif  /* __AVR_XMEGA__ */
+
+#if defined(CPU_SPLIM)
+	ldi r24, lo8(__heap_start - 1)
+	ldi r25, hi8(__heap_start - 1)
+	out _SFR_IO_ADDR(CPU_SPLIML), r24
+	out _SFR_IO_ADDR(CPU_SPLIMH), r25
+#endif /* Have SPLIM */
 #else
 	;; Pull in __init_sp from the device lib to .init2
 	.global __init_sp
