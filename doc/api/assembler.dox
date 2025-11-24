@@ -336,6 +336,8 @@ Some common directives include:
     index within their input section.
     The default after switching to a new section by means of
     <tt>.section</tt> or <tt>.pushsection</tt> is subsection 0.
+    Subsections only exist on the assembly level, i.e. subsection ordering
+    doesn't work across different modules.
 </tr>
 <tr>
   <td><tt>.text</tt><br><tt>.data</tt><br><tt>.bss</tt>
