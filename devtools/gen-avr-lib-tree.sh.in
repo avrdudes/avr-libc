@@ -513,6 +513,17 @@ avr32sd28:crtavr32sd28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 avr32sd32:crtavr32sd32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "
 
+AVRLX_DEV_INFO="\
+avr16la14:crtavr16la14.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16la20:crtavr16la20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16la28:crtavr16la28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr16la32:crtavr16la32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32la14:crtavr32la14.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32la20:crtavr32la20.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32la28:crtavr32la28.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avr32la32:crtavr32la32.o:${DEV_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+"
+
 # The "architectures" or "cores".  The second column only serves as a pointer
 # to all the supported devices as we iterate over AVR_ARH_INFO below.
 # Mentioning AVR25_DEV_INFO after avr25 only serves the purpose to include
@@ -543,6 +554,7 @@ avrxmega6:AVRXMEGA6_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrxmega7:AVRXMEGA7_DEV_INFO:${LIB_DEFS}:${CFLAGS_BIG_MEMORY}:${DEV_ASFLAGS};\
 avrtiny:AVRTINY_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 avrsd:AVRSD_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
+avrlx:AVRLX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 avrdx:AVRDX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS};\
 avrex:AVREX_DEV_INFO:${LIB_DEFS}:${CFLAGS_SPACE}:${DEV_ASFLAGS}\
 "

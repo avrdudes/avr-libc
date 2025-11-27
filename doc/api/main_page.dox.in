@@ -526,6 +526,17 @@ it is supported by the compiler at library compile-time.
   AVR64EA32,
   AVR64EA48
 </dd>
+<dt>AVR-Lx Devices:</dt>
+<dd>
+  AVR16LA14,
+  AVR16LA20,
+  AVR16LA28,
+  AVR16LA32,
+  AVR32LA14,
+  AVR32LA20,
+  AVR32LA28,
+  AVR32LA32
+</dd>
 <dt>AVR-SD Functional Safety Devices:</dt>
 <dd>
   AVR32SD20,

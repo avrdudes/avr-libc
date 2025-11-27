@@ -141,7 +141,6 @@
 #include IOSYMFILE
 
 #include <avr/io.h>
-#include <bits/devinfo.h>
 #include "asmdef.h"
 #include "config.h"
 
@@ -324,7 +323,7 @@ __vectors:
 	vector	__vector_125
 	vector	__vector_126
 	vector	__vector_127
-#ifdef __AVR_SD__  /* From <bits/devinfo.h> */
+#ifdef CPU_OPC_bm  /* Has illegal opcode detection */
 	;; On the AVR-SD devices, instructions must not be followed by an
 	;; illegal opcode.  This is since illegal opcode detection runs at
 	;; instruction fetch of the NEXT instruction, which is being run while
@@ -332,10 +331,10 @@ __vectors:
 	;; Any valid opcode will do, so use CLH which disassembles more
 	;; nicely than NOP = 0x0000.
 	clh
-#endif /* __AVR_SD__ */
+#endif /* Has illegal opcode detection */
 	.endfunc
 
-#ifdef __AVR_SD__
+#ifdef CPU_OPC_bm  /* Has illegal opcode detection */
 	;; For the same reason, put a valid opcode after the last location that
 	;; holds valid code, which is the .hightext section of the default
 	;; linker script.  Notice that .hightext is usually unused.
@@ -343,7 +342,7 @@ __vectors:
 	.pushsection .hightext.zzz, "axR", @progbits
 	clh
 	.popsection
-#endif /* __AVR_SD__ */
+#endif /* Has illegal opcode detection */
 
 	/* Handle unexpected interrupts (enabled and no handler), which
 	   usually indicate a bug.  Jump to the __vector_default function

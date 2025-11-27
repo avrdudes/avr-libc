@@ -62,6 +62,8 @@ avr64da28s avr64da32s avr64da48s avr64da64s \
 avr128da28s avr128da32s avr128da48s avr128da64s \
 avr16du14 avr16du20 avr16du28 avr16du32 \
 avr32du14 avr32du20 avr32du28 avr32du32 avr64du28 avr64du32 \
+avr16la14 avr16la20 avr16la28 avr16la32 \
+avr32la14 avr32la20 avr32la28 avr32la32 \
 avr32sd20 avr32sd28 avr32sd32 \
 "}
 

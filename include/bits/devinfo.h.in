@@ -39,6 +39,10 @@
 #define __AVR_Ex__
 #endif
 
+#if @COND_DEFINED_Lx@
+#define __AVR_Lx__
+#endif
+
 #if @COND_DEFINED_SD@
 #define __AVR_SD__
 #endif
