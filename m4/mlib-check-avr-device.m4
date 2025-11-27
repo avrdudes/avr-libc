@@ -60,7 +60,7 @@ AC_DEFUN([CHECK_AVR_DEVICE],[dnl
 	  [[avr*[0-9]d*]],  [COND_DEFINED_Dx="${COND_DEFINED_Dx} || ${defd}"],
 	  [[avr*[0-9]e*]],  [COND_DEFINED_Ex="${COND_DEFINED_Ex} || ${defd}"],
 	  [[avr*[0-9]l*]],  [COND_DEFINED_Lx="${COND_DEFINED_Lx} || ${defd}"],
-	  [[avr*[0-9]sd*]], [COND_DEFINED_SD="${COND_DEFINED_SD} || ${defd}"],
+	  [[avr*[0-9]sd*]], [COND_DEFINED_Sx="${COND_DEFINED_Sx} || ${defd}"],
 	  [])
     else
       MULTIDIR_$1=

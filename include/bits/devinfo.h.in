@@ -43,8 +43,8 @@
 #define __AVR_Lx__
 #endif
 
-#if @COND_DEFINED_SD@
-#define __AVR_SD__
+#if @COND_DEFINED_Sx@
+#define __AVR_Sx__
 #endif
 
 /* util/setbaud.h uses BAUD to specify the baud rate.
