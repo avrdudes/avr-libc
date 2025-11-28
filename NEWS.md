@@ -54,6 +54,7 @@
    - 64-bit integer to ASCII conversions: `lltoa`, `ulltoa`, `ulltoa_base10`.
    - 16-bit integer square root: `sqrtu16_floor`.
    - 32-bit integer square root: `sqrtu32_floor`.
+   - 64-bit integer square root: `sqrtu64_floor` ([#1058][1058]).
 
 - Support has been added for some functions on Reduced Tiny (AVRrc):
   `_PROTECTED_WRITE_SPM` and `ccp_write_spm` (ATtiny102/104 only),
@@ -351,3 +352,4 @@
 [1052]: https://github.com/avrdudes/avr-libc/issues/1052
 [1053]: https://github.com/avrdudes/avr-libc/issues/1053
 [1056]: https://github.com/avrdudes/avr-libc/issues/1056
+[1058]: https://github.com/avrdudes/avr-libc/issues/1058

@@ -929,6 +929,16 @@ extern unsigned int sqrtu32_floor(unsigned long radic);
 extern unsigned int sqrtu32_floor(unsigned long radic) __asm("__sqrtsi");
 #endif /* Doxygen */
 
+/** \ingroup avr_stdlib
+    \return Returns the square root of the 64-bit value \p radic,
+    rounded down to the next integral value.
+ */
+#ifdef __DOXYGEN__
+extern unsigned long sqrtu64_floor(unsigned long long radic);
+#else
+__extension__ extern unsigned long sqrtu64_floor(unsigned long long radic) __asm("__sqrtdi");
+#endif /* Doxygen */
+
 
 #endif /* __ASSEMBLER */
 /**@}*/
