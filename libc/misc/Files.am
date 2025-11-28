@@ -83,6 +83,7 @@ misc_a_asm_sources = \
 
 misc_a_extra_dist = \
 	eedef.h \
+	sqrtdef.h \
 	readme_eeprom.txt
 
 # vim: set ft=make:
