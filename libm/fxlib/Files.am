@@ -25,6 +25,7 @@ fxlib_a_asm_sources = \
 	sincospi2k.S \
 	sqrthr.S \
 	sqrtuhr.S \
+	sqrtulr.S \
 	sqrtur.S \
 	uktoa.S   ktoa.S \
 	urtoa.S   rtoa.S \
