@@ -1153,6 +1153,7 @@ unsigned fract sqrtur(unsigned fract radic);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic. The result is in the range [0, 1).
+    The worst case execution time (WCET) is around 950 cycles.
     \since AVR-LibC v2.3  */
 unsigned long fract sqrtulr(unsigned long fract radic);
 
