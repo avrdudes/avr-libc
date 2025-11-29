@@ -139,7 +139,12 @@
 .macro sqrtengine _rarg _rres _mask _size
 	;; Set initial values and carry flag, C = 0.
 	initval    \_mask, \_size, 0xc0      ; Rotation mask
+.if \_size <= 2
 	initval    \_rres, \_size, 0x40      ; Expanding square root
+.else
+	X_movw     \_rres, \_mask            ; Copy 0x0000 from _mask
+	initval    \_rres+2, \_size-2, 0x40  ; Expanding square root
+.endif
 .if \_size == 1
 	clc
 .endif
