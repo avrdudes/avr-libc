@@ -1153,13 +1153,13 @@ unsigned fract sqrtur(unsigned fract radic);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic. The result is in the range [0, 1).
-    The worst case execution time (WCET) is around 950 cycles.
+    The worst case execution time (WCET) is around 1060 cycles.
     \since AVR-LibC v2.3  */
 unsigned long fract sqrtulr(unsigned long fract radic);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic.
-    The worst case execution time (WCET) is around 610 cycles.
+    The worst case execution time (WCET) is around 620 cycles.
     \since AVR-LibC v2.3  */
 unsigned accum sqrtuk(unsigned accum radic);
 
