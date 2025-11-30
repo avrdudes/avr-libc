@@ -1,7 +1,5 @@
 ;;; Square root of unsigned accum.
 
-#ifndef __AVR_TINY__
-
 #include "asmdef.h"
 
 ;;; unsigned accum R22 = sqrtuk (unsigned accum R22);
@@ -15,5 +13,3 @@ ENTRY sqrtuk
     clr     r21
     XJMP    _U(__sqrtpdi)
 ENDFUNC
-
-#endif /* !__AVR_TINY__ */
