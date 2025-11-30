@@ -1139,6 +1139,18 @@ short fract sqrthr(short fract radic);
 accum sqrtk(accum radic);
 
 /** \ingroup avr_stdfix
+    Square root of the value \p radic.  Negative values are returned unchanged.
+    The worst case execution time (WCET) is around 310 cycles.
+    \since AVR-LibC v2.3  */
+short accum sqrthk(short accum radic);
+
+/** \ingroup avr_stdfix
+    Square root of the value \p radic rounded down.
+    The worst case execution time (WCET) is around 300 cycles.
+    \since AVR-LibC v2.3  */
+unsigned short accum sqrtuhk(unsigned short accum radic);
+
+/** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
     The result is in the range [0, 1).
 
@@ -1210,6 +1222,8 @@ unsigned fract sqrtur(unsigned fract) __ATTR_CONST__;
 unsigned long fract sqrtulr(unsigned long fract) __ATTR_CONST__;
 unsigned accum sqrtuk(unsigned accum) __ATTR_CONST__;
 accum sqrtk(accum) __ATTR_CONST__;
+short accum sqrthk(short accum) __ATTR_CONST__;
+unsigned short accum sqrtuhk(unsigned short accum) __ATTR_CONST__;
 
 extern unsigned short fract log21puhr(unsigned short fract) __ATTR_CONST__;
 extern unsigned fract log21pur(unsigned fract) __ATTR_CONST__;

@@ -23,6 +23,7 @@ fxlib_a_asm_sources = \
 	log2uhk.S \
 	log2uk.S \
 	sincospi2k.S \
+	sqrtuhk.S sqrthk.S \
 	sqrtuhr.S sqrthr.S \
 	sqrtuk.S  sqrtk.S \
 	sqrtulr.S \
