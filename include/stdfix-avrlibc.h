@@ -73,23 +73,23 @@ Two groups of fixed-point data types are added:
 
 <table>
 <caption>Fixed-Point Type Layout</caption>
-<tr><th>Const Suffix <th>Type <th>Size <th>Q-Format
-<tr><td align="right"><tt>hr</tt>  <td align="right"><tt>short fract</tt> <td>1<td>s.7
-<tr><td align="right"><tt>r</tt>   <td align="right"><tt>fract</tt>       <td>2<td>s.15
-<tr><td align="right"><tt>lr</tt>  <td align="right"><tt>long fract</tt>  <td>4<td>s.31
-<tr><td align="right"><tt>llr</tt> <td align="right"><tt>long long fract</tt> <td>8<td>s.63
-<tr><td align="right"><tt>hk</tt>  <td align="right"><tt>short accum</tt> <td>2<td>s8.7
-<tr><td align="right"><tt>k</tt>   <td align="right"><tt>accum</tt>       <td>4<td>s16.15
-<tr><td align="right"><tt>lk</tt>  <td align="right"><tt>long accum</tt>  <td>8<td>s32.31
-<tr><td align="right"><tt>llk</tt> <td align="right"><tt>long long accum</tt> <td>8<td>s16.47
-<tr><td align="right"><tt>uhr</tt> <td align="right"><tt>unsigned short fract</tt> <td>1<td>0.8
-<tr><td align="right"><tt>ur</tt>  <td align="right"><tt>unsigned fract</tt>       <td>2<td>0.16
-<tr><td align="right"><tt>ulr</tt> <td align="right"><tt>unsigned long fract</tt>  <td>4<td>0.32
-<tr><td align="right"><tt>ullr</tt><td align="right"><tt>unsigned long long fract</tt><td>8<td>0.64
-<tr><td align="right"><tt>uhk</tt> <td align="right"><tt>unsigned short accum</tt> <td>2<td>8.8
-<tr><td align="right"><tt>uk</tt>  <td align="right"><tt>unsigned accum</tt>       <td>4<td>16.16
-<tr><td align="right"><tt>ulk</tt> <td align="right"><tt>unsigned long accum</tt>  <td>8<td>32.32
-<tr><td align="right"><tt>ullk</tt><td align="right"><tt>unsigned long long accum</tt> <td>8<td>16.48
+<tr><th>Const Suffix <th>Type <th>Size <th>Q-Format <th> Epsilon
+<tr><td align="right"><tt>hr</tt>  <td align="right"><tt>short fract</tt> <td>1<td>s.7     <td>7.81&middot;10<sup>-3</sup>
+<tr><td align="right"><tt>r</tt>   <td align="right"><tt>fract</tt>       <td>2<td>s.15    <td>3.05&middot;10<sup>-5</sup>
+<tr><td align="right"><tt>lr</tt>  <td align="right"><tt>long fract</tt>  <td>4<td>s.31    <td>4.66&middot;10<sup>-10</sup>
+<tr><td align="right"><tt>llr</tt> <td align="right"><tt>long long fract</tt> <td>8<td>s.63<td>1.08&middot;10<sup>-19</sup>
+<tr><td align="right"><tt>hk</tt>  <td align="right"><tt>short accum</tt> <td>2<td>s8.7    <td>7.81&middot;10<sup>-3</sup>
+<tr><td align="right"><tt>k</tt>   <td align="right"><tt>accum</tt>       <td>4<td>s16.15  <td>3.05&middot;10<sup>-5</sup>
+<tr><td align="right"><tt>lk</tt>  <td align="right"><tt>long accum</tt>  <td>8<td>s32.31  <td>4.66&middot;10<sup>-10</sup>
+<tr><td align="right"><tt>llk</tt> <td align="right"><tt>long long accum</tt> <td>8<td>s16.47    <td>7.11&middot;10<sup>-15</sup>
+<tr><td align="right"><tt>uhr</tt> <td align="right"><tt>unsigned short fract</tt> <td>1<td>0.8  <td>3.91&middot;10<sup>-3</sup>
+<tr><td align="right"><tt>ur</tt>  <td align="right"><tt>unsigned fract</tt>       <td>2<td>0.16 <td>1.53&middot;10<sup>-5</sup>
+<tr><td align="right"><tt>ulr</tt> <td align="right"><tt>unsigned long fract</tt>  <td>4<td>0.32 <td>2.33&middot;10<sup>-10</sup>
+<tr><td align="right"><tt>ullr</tt><td align="right"><tt>unsigned long long fract</tt><td>8<td>0.64 <td>5.42&middot;10<sup>-20</sup>
+<tr><td align="right"><tt>uhk</tt> <td align="right"><tt>unsigned short accum</tt> <td>2<td>8.8  <td>3.91&middot;10<sup>-3</sup>
+<tr><td align="right"><tt>uk</tt>  <td align="right"><tt>unsigned accum</tt>       <td>4<td>16.16<td>1.53&middot;10<sup>-5</sup>
+<tr><td align="right"><tt>ulk</tt> <td align="right"><tt>unsigned long accum</tt>  <td>8<td>32.32<td>2.33&middot;10<sup>-10</sup>
+<tr><td align="right"><tt>ullk</tt><td align="right"><tt>unsigned long long accum</tt> <td>8<td>16.48<td>3.55&middot;10<sup>-15</sup>
 </table>
 \remark
   - Upper case constant suffixes are also supported.
