@@ -15,6 +15,8 @@ log2		uhk	hk	0+	10
 log21p		uhr	uhr	0	1-
 #sin		uhk_deg	r	0	256-
 #cos		uhk_deg	r	0	256-
+sqrt		hk	hk	0	256-
+sqrt		uhk	uhk	0	256-
 sqrt		hr	hr	0	1-
 sqrt		uhr	uhr	0	1-
 
@@ -40,6 +42,8 @@ cospi2		k	k	-4	4
 sinpi2		k	k	-4	4
 sinpi2		ur	ur	0	1-
 
+sqrt		k	k	0	65536-
+sqrt		uk	uk	0	65536-
 sqrt		ur	ur	0	1-
 
 1</table>

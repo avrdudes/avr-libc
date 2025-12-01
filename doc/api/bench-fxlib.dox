@@ -32,8 +32,10 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <th>Err<sub>max</sub>
   <tr><td>\c #log2uhk <td align='right'>78 <td>0+ <td>10 <td align='right'>52 <td align='right'>75 <td>1.25e-02
   <tr><td>\c #log21puhr <td align='right'>32 <td>0 <td>1- <td align='right'>22 <td align='right'>22 <td>4.28e-03
-  <tr><td>\c #sinuhk_deg <td align='right'>270 <td>0 <td>256- <td align='right'>52 <td align='right'>54 <td>6.44e-05
-  <tr><td>\c #cosuhk_deg <td align='right'>316 <td>0 <td>256- <td align='right'>72 <td align='right'>76 <td>6.44e-05
+  <tr><td>\c #sinuhk_deg <td align='right'>272 <td>0 <td>256- <td align='right'>53 <td align='right'>55 <td>6.44e-05
+  <tr><td>\c #cosuhk_deg <td align='right'>318 <td>0 <td>256- <td align='right'>73 <td align='right'>77 <td>6.44e-05
+  <tr><td>\c #sqrthk <td align='right'>92 <td>0 <td>256- <td align='right'>293 <td align='right'>309 <td>3.91e-03
+  <tr><td>\c #sqrtuhk <td align='right'>70 <td>0 <td>256- <td align='right'>277 <td align='right'>293 <td>3.91e-03
   <tr><td>\c #sqrthr <td align='right'>42 <td>0 <td>1- <td align='right'>100 <td align='right'>100 <td>7.78e-03
   <tr><td>\c #sqrtuhr <td align='right'>38 <td>0 <td>1- <td align='right'>98 <td align='right'>98 <td>3.90e-03
   <tr><td colspan='7'>
@@ -45,7 +47,7 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #atank <td align='right'>368 <td>1 <td>10 <td align='right'>888 <td align='right'>913 <td>4.65e-05
   <tr><td>\c #atanuk <td align='right'>298 <td>0 <td>1 <td align='right'>203 <td align='right'>206 <td>2.52e-05
   <tr><td>\c #atanur <td align='right'>152 <td>0 <td>1- <td align='right'>188 <td align='right'>191 <td>2.46e-05
-  <tr><td>\c #exp2k <td align='right'>216 <td>-10 <td>10 <td align='right'>256 <td align='right'>318 <td>1.09e-02
+  <tr><td>\c #exp2k <td align='right'>214 <td>-10 <td>10 <td align='right'>255 <td align='right'>317 <td>1.09e-02
   <tr><td>\c #exp2uk <td align='right'>164 <td>0 <td>10 <td align='right'>245 <td align='right'>293 <td>1.06e-02
   <tr><td>\c #exp2m1ur <td align='right'>112 <td>0 <td>1- <td align='right'>177 <td align='right'>180 <td>2.13e-05
   <tr><td>\c #log2uk <td align='right'>184 <td>0+ <td>10 <td align='right'>257 <td align='right'>305 <td>6.03e-05
@@ -53,6 +55,8 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #cospi2k <td align='right'>182 <td>-4 <td>4 <td align='right'>249 <td align='right'>258 <td>4.52e-05
   <tr><td>\c #sinpi2k <td align='right'>182 <td>-4 <td>4 <td align='right'>247 <td align='right'>256 <td>4.54e-05
   <tr><td>\c #sinpi2ur <td align='right'>120 <td>0 <td>1- <td align='right'>215 <td align='right'>219 <td>2.80e-05
+  <tr><td>\c #sqrtk <td align='right'>128 <td>0 <td>65536- <td align='right'>572 <td align='right'>635 <td>1.53e-05
+  <tr><td>\c #sqrtuk <td align='right'>94 <td>0 <td>65536- <td align='right'>550 <td align='right'>613 <td>1.53e-05
   <tr><td>\c #sqrtur <td align='right'>66 <td>0 <td>1- <td align='right'>274 <td align='right'>297 <td>1.53e-05
 </table>
 
@@ -69,6 +73,8 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <th>Err<sub>max</sub>
   <tr><td>\c #log2uhk <td align='right'>114 <td>0+ <td>10 <td align='right'>339 <td align='right'>380 <td>1.25e-02
   <tr><td>\c #log21puhr <td align='right'>70 <td>0 <td>1- <td align='right'>312 <td align='right'>332 <td>4.28e-03
+  <tr><td>\c #sqrthk <td align='right'>88 <td>0 <td>256- <td align='right'>291 <td align='right'>307 <td>3.91e-03
+  <tr><td>\c #sqrtuhk <td align='right'>68 <td>0 <td>256- <td align='right'>276 <td align='right'>292 <td>3.91e-03
   <tr><td>\c #sqrthr <td align='right'>54 <td>0 <td>1- <td align='right'>102 <td align='right'>105 <td>7.78e-03
   <tr><td>\c #sqrtuhr <td align='right'>50 <td>0 <td>1- <td align='right'>100 <td align='right'>104 <td>3.90e-03
   <tr><td colspan='7'>
@@ -80,7 +86,7 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #atank <td align='right'>412 <td>1 <td>10 <td align='right'>1538 <td align='right'>1630 <td>4.65e-05
   <tr><td>\c #atanuk <td align='right'>352 <td>0 <td>1 <td align='right'>844 <td align='right'>924 <td>2.52e-05
   <tr><td>\c #atanur <td align='right'>212 <td>0 <td>1- <td align='right'>830 <td align='right'>910 <td>2.46e-05
-  <tr><td>\c #exp2k <td align='right'>236 <td>-10 <td>10 <td align='right'>994 <td align='right'>1075 <td>1.09e-02
+  <tr><td>\c #exp2k <td align='right'>234 <td>-10 <td>10 <td align='right'>993 <td align='right'>1074 <td>1.09e-02
   <tr><td>\c #exp2uk <td align='right'>184 <td>0 <td>10 <td align='right'>982 <td align='right'>1050 <td>1.06e-02
   <tr><td>\c #exp2m1ur <td align='right'>134 <td>0 <td>1- <td align='right'>916 <td align='right'>939 <td>2.13e-05
   <tr><td>\c #log2uk <td align='right'>214 <td>0+ <td>10 <td align='right'>1222 <td align='right'>1294 <td>6.03e-05
@@ -88,6 +94,8 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #cospi2k <td align='right'>204 <td>-4 <td>4 <td align='right'>1235 <td align='right'>1285 <td>4.52e-05
   <tr><td>\c #sinpi2k <td align='right'>204 <td>-4 <td>4 <td align='right'>1233 <td align='right'>1283 <td>4.54e-05
   <tr><td>\c #sinpi2ur <td align='right'>146 <td>0 <td>1- <td align='right'>1203 <td align='right'>1248 <td>2.80e-05
+  <tr><td>\c #sqrtk <td align='right'>124 <td>0 <td>65536- <td align='right'>570 <td align='right'>633 <td>1.53e-05
+  <tr><td>\c #sqrtuk <td align='right'>92 <td>0 <td>65536- <td align='right'>549 <td align='right'>612 <td>1.53e-05
   <tr><td>\c #sqrtur <td align='right'>64 <td>0 <td>1- <td align='right'>273 <td align='right'>296 <td>1.53e-05
 </table>
 */
