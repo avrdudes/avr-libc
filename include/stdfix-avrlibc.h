@@ -1128,6 +1128,12 @@ fract cosuhk_deg(unsigned short accum deg);
 unsigned fract sinpi2ur(unsigned fract x);
 
 /** \ingroup avr_stdfix
+    Square root of the value \p radic.  Negative values are returned unchanged.
+    The worst case execution time (WCET) is around 310 cycles.
+    \since AVR-LibC v2.3  */
+short accum sqrthk(short accum radic);
+
+/** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
     \since AVR-LibC v2.3  */
 short fract sqrthr(short fract radic);
@@ -1137,12 +1143,6 @@ short fract sqrthr(short fract radic);
     The worst case execution time (WCET) is around 640 cycles.
     \since AVR-LibC v2.3  */
 accum sqrtk(accum radic);
-
-/** \ingroup avr_stdfix
-    Square root of the value \p radic.  Negative values are returned unchanged.
-    The worst case execution time (WCET) is around 310 cycles.
-    \since AVR-LibC v2.3  */
-short accum sqrthk(short accum radic);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic rounded down.
@@ -1161,13 +1161,11 @@ unsigned short accum sqrtuhk(unsigned short accum radic);
 unsigned short fract sqrtuhr(unsigned short fract radic);
 
 /** \ingroup avr_stdfix
-    Square root of the value \p radic.  The result is in the range [0, 1).
-
-    The absolute error is in the range
-    {{{[-1.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-16</sup>, 0]}}}.
-    The worst case execution time (WCET) is around 320 cycles.
+    Square root of the value \p radic.
+    The worst case execution time (WCET) is around 620 cycles.
     \since AVR-LibC v2.3  */
-unsigned fract sqrtur(unsigned fract radic);
+unsigned accum sqrtuk(unsigned accum radic);
+
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic. The result is in the range [0, 1).
@@ -1176,10 +1174,13 @@ unsigned fract sqrtur(unsigned fract radic);
 unsigned long fract sqrtulr(unsigned long fract radic);
 
 /** \ingroup avr_stdfix
-    Square root of the value \p radic.
-    The worst case execution time (WCET) is around 620 cycles.
+    Square root of the value \p radic.  The result is in the range [0, 1).
+
+    The absolute error is in the range
+    {{{[-1.5&middot;10<sup>-5</sup>&nbsp;&asymp;&nbsp;2<sup>-16</sup>, 0]}}}.
+    The worst case execution time (WCET) is around 320 cycles.
     \since AVR-LibC v2.3  */
-unsigned accum sqrtuk(unsigned accum radic);
+unsigned fract sqrtur(unsigned fract radic);
 
 
 /** \name Type-Generic Functions */
