@@ -57,6 +57,7 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #sinpi2ur <td align='right'>120 <td>0 <td>1- <td align='right'>215 <td align='right'>219 <td>2.80e-05
   <tr><td>\c #sqrtk <td align='right'>128 <td>0 <td>65536- <td align='right'>572 <td align='right'>635 <td>1.53e-05
   <tr><td>\c #sqrtuk <td align='right'>94 <td>0 <td>65536- <td align='right'>550 <td align='right'>613 <td>1.53e-05
+  <tr><td>\c #sqrtr <td align='right'>88 <td>0 <td>1- <td align='right'>290 <td align='right'>313 <td>1.53e-05
   <tr><td>\c #sqrtur <td align='right'>66 <td>0 <td>1- <td align='right'>274 <td align='right'>297 <td>1.53e-05
 </table>
 
@@ -96,6 +97,7 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #sinpi2ur <td align='right'>146 <td>0 <td>1- <td align='right'>1203 <td align='right'>1248 <td>2.80e-05
   <tr><td>\c #sqrtk <td align='right'>124 <td>0 <td>65536- <td align='right'>570 <td align='right'>633 <td>1.53e-05
   <tr><td>\c #sqrtuk <td align='right'>92 <td>0 <td>65536- <td align='right'>549 <td align='right'>612 <td>1.53e-05
+  <tr><td>\c #sqrtr <td align='right'>84 <td>0 <td>1- <td align='right'>288 <td align='right'>311 <td>1.53e-05
   <tr><td>\c #sqrtur <td align='right'>64 <td>0 <td>1- <td align='right'>273 <td align='right'>296 <td>1.53e-05
 </table>
 */

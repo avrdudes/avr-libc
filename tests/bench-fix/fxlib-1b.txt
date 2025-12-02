@@ -44,6 +44,7 @@ sinpi2		ur	ur	0	1-
 
 sqrt		k	k	0	65536-
 sqrt		uk	uk	0	65536-
+sqrt		r	r	0	1-
 sqrt		ur	ur	0	1-
 
 1</table>
