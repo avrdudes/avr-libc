@@ -70,7 +70,7 @@
 - Support has been added for the fixed-point arithmetic
   functions `rdivi`, `urdivi`, `lrdivi`, `ulrdivi` ([#999][999]),
   `sqrthr`, `sqrtuhr` ([#1024][1024]), `sqrtur`, `sqrtulr` ([#1058][1058]),
-  `sqrtk`, `sqrtuk`, `sqrthk`, `sqrtuhk`,
+  `sqrtk`, `sqrtuk`, `sqrthk`, `sqrtuhk`, `sqrtr`,
   `atank`, `atanuk`, `atanur`,
   `acosk`, `acosuk`, `asink`, `asinuk`,
   `log2uhk`, `log2uk`, `log21puhr`, `log21pur`,
