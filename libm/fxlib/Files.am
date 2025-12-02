@@ -26,7 +26,7 @@ fxlib_a_asm_sources = \
 	sqrtuhk.S sqrthk.S \
 	sqrtuhr.S sqrthr.S \
 	sqrtuk.S  sqrtk.S \
-	sqrtulr.S \
+	sqrtulr.S sqrtlr.S \
 	sqrtur.S  sqrtr.S \
 	uktoa.S   ktoa.S \
 	urtoa.S   rtoa.S \

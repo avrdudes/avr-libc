@@ -1146,6 +1146,12 @@ accum sqrtk(accum radic);
 
 /** \ingroup avr_stdfix
     Square root of the value \p radic.  Negative values are returned unchanged.
+    The worst case execution time (WCET) is around 1080 cycles.
+    \since AVR-LibC v2.3  */
+long fract sqrtlr(long fract radic);
+
+/** \ingroup avr_stdfix
+    Square root of the value \p radic.  Negative values are returned unchanged.
     The worst case execution time (WCET) is around 320 cycles.
     \since AVR-LibC v2.3  */
 fract sqrtr(fract radic);
@@ -1227,6 +1233,7 @@ extern short fract sqrthr(short fract) __asm__("__sqrthr") __ATTR_CONST__;
 extern unsigned short fract sqrtuhr(unsigned short fract) __asm__("__sqrtuhr") __ATTR_CONST__;
 fract sqrtr(fract) __ATTR_CONST__;
 unsigned fract sqrtur(unsigned fract) __ATTR_CONST__;
+long fract sqrtlr(long fract) __ATTR_CONST__;
 unsigned long fract sqrtulr(unsigned long fract) __ATTR_CONST__;
 unsigned accum sqrtuk(unsigned accum) __ATTR_CONST__;
 accum sqrtk(accum) __ATTR_CONST__;
