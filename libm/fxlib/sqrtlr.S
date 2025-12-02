@@ -1,4 +1,4 @@
-;;; long fract R22 = sqrtlr (long fract radic);
+;;; long fract R22 = sqrtlr (long fract R22);
 
 #include "asmdef.h"
 
