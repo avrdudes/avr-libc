@@ -11,6 +11,6 @@ ENTRY   __sqrthr
 	clr  res_lo             ; clear low 8 bits
 	XCALL _U(__sqrthi)      ; take integer square root
 	lsr  res_lo             ; shift sign bit back for signed short fract
-	clr  res_hi             ; msb of the result is always zero
+	adc  res_lo,__zero_reg__; round without overflow
 	ret
 ENDFUNC

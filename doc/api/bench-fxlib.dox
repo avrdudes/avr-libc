@@ -36,7 +36,7 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #cosuhk_deg <td align='right'>318 <td>0 <td>256- <td align='right'>73 <td align='right'>77 <td>6.44e-05
   <tr><td>\c #sqrthk <td align='right'>92 <td>0 <td>256- <td align='right'>293 <td align='right'>309 <td>3.91e-03
   <tr><td>\c #sqrtuhk <td align='right'>70 <td>0 <td>256- <td align='right'>277 <td align='right'>293 <td>3.91e-03
-  <tr><td>\c #sqrthr <td align='right'>42 <td>0 <td>1- <td align='right'>100 <td align='right'>100 <td>7.78e-03
+  <tr><td>\c #sqrthr <td align='right'>42 <td>0 <td>1- <td align='right'>100 <td align='right'>100 <td>3.84e-03
   <tr><td>\c #sqrtuhr <td align='right'>38 <td>0 <td>1- <td align='right'>98 <td align='right'>98 <td>3.90e-03
   <tr><td colspan='7'>
   <tr><td>\c #acosk <td align='right'>404 <td>-1 <td>1 <td align='right'>416 <td align='right'>572 <td>5.39e-05
@@ -76,7 +76,7 @@ Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
   <tr><td>\c #log21puhr <td align='right'>70 <td>0 <td>1- <td align='right'>312 <td align='right'>332 <td>4.28e-03
   <tr><td>\c #sqrthk <td align='right'>88 <td>0 <td>256- <td align='right'>291 <td align='right'>307 <td>3.91e-03
   <tr><td>\c #sqrtuhk <td align='right'>68 <td>0 <td>256- <td align='right'>276 <td align='right'>292 <td>3.91e-03
-  <tr><td>\c #sqrthr <td align='right'>54 <td>0 <td>1- <td align='right'>102 <td align='right'>105 <td>7.78e-03
+  <tr><td>\c #sqrthr <td align='right'>54 <td>0 <td>1- <td align='right'>102 <td align='right'>105 <td>3.84e-03
   <tr><td>\c #sqrtuhr <td align='right'>50 <td>0 <td>1- <td align='right'>100 <td align='right'>104 <td>3.90e-03
   <tr><td colspan='7'>
   <tr><td>\c #acosk <td align='right'>446 <td>-1 <td>1 <td align='right'>1097 <td align='right'>1233 <td>5.39e-05
