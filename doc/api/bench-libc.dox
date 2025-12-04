@@ -7,7 +7,7 @@
 
 \section bench_libc A few of libc Functions
 
-avr-gcc version is 15.1.1
+avr-gcc version is 15.2.1
 
 The size of a function is given in view of all picked up functions. By default
 AVR-LibC is compiled with \c -mcall-prologues. In parenthesis the size
@@ -74,70 +74,80 @@ are present, and then only one code size is shown.
     <td align="right">168<br>11<br>1458
     <td align="right">168<br>12<br>1461
   <tr><td><tt>#malloc (1)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">664<br>6<br>103
-    <td align="right">598<br>6<br>98
-    <td align="right">598<br>6<br>98
-    <td align="right">602<br>7<br>101
+    <td align="right">668<br>6<br>101
+    <td align="right">606<br>6<br>97
+    <td align="right">606<br>6<br>97
+    <td align="right">610<br>7<br>100
   <tr><td><tt>#realloc ((void*) 0, 1)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">1194 (1082)<br>6<br>103
-    <td align="right">1072 (962)<br>6<br>98
-    <td align="right">1072 (962)<br>6<br>98
-    <td align="right">1050<br>7<br>101
+    <td align="right">1242 (1130)<br>6<br>101
+    <td align="right">1114 (1004)<br>6<br>97
+    <td align="right">1114 (1004)<br>6<br>97
+    <td align="right">1096<br>7<br>100
   <tr><td><tt>#qsort (s, sizeof(s), 1, cmp)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">1206 (1094)<br>160<br>58011
-    <td align="right">1004 (894)<br>160<br>51797
-    <td align="right">978 (868)<br>160<br>47899
-    <td align="right">1000<br>167<br>49671
+    <td align="right">1130 (1018)<br>146<br>54683
+    <td align="right">952 (842)<br>146<br>50635
+    <td align="right">938 (828)<br>146<br>45705
+    <td align="right">984 (874)<br>153<br>47930
+  <tr><td><tt>#rand ()</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
+    <td align="right">512 (400)<br>20<br>1425
+    <td align="right">484 (374)<br>20<br>1410
+    <td align="right">488 (378)<br>22<br>821
+    <td align="right">418<br>24<br>834
+  <tr><td><tt>#random ()</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
+    <td align="right">678 (566)<br>16<br>1410
+    <td align="right">634 (524)<br>16<br>1394
+    <td align="right">630 (520)<br>18<br>805
+    <td align="right">584<br>22<br>820
   <tr><td><tt>sprintf_min (s, "%d", 12345)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">1202 (1090)<br>57<br>1838
-    <td align="right">1078 (968)<br>57<br>1706
-    <td align="right">1074 (964)<br>57<br>1701
-    <td align="right">1078<br>60<br>1743
+    <td align="right">1218 (1106)<br>59<br>2077
+    <td align="right">1086 (976)<br>59<br>1940
+    <td align="right">1082 (972)<br>59<br>1935
+    <td align="right">1102<br>62<br>1887
   <tr><td><tt>#sprintf (s, "%d", 12345)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">1632 (1520)<br>57<br>1649
-    <td align="right">1492 (1382)<br>57<br>1564
-    <td align="right">1478 (1368)<br>58<br>1567
-    <td align="right">1496<br>61<br>1603
+    <td align="right">1636 (1524)<br>59<br>1885
+    <td align="right">1494 (1384)<br>59<br>1795
+    <td align="right">1478 (1368)<br>61<br>1796
+    <td align="right">1514<br>64<br>1734
   <tr><td><tt>sprintf_flt (s, "%e", 1.2345)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">3218 (3106)<br>68<br>2513
-    <td align="right">2970 (2860)<br>68<br>2302
-    <td align="right">2946 (2836)<br>69<br>2309
-    <td align="right">3048 (2938)<br>72<br>2347
+    <td align="right">3250 (3138)<br>68<br>3089
+    <td align="right">3000 (2890)<br>68<br>2866
+    <td align="right">2976 (2866)<br>69<br>2873
+    <td align="right">3088 (2978)<br>72<br>2695
   <tr><td><tt>sscanf_min ("12345", "%d", &i)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">2826 (2714)<br>56<br>1491
-    <td align="right">2502 (2392)<br>56<br>1366
-    <td align="right">2498 (2388)<br>56<br>1366
-    <td align="right">2746<br>60<br>1369
+    <td align="right">2804 (2692)<br>57<br>1380
+    <td align="right">2502 (2392)<br>57<br>1294
+    <td align="right">2498 (2388)<br>57<br>1294
+    <td align="right">2728<br>61<br>1311
   <tr><td><tt>#sscanf ("12345", "%d", &i)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">1836 (1724)<br>56<br>1491
-    <td align="right">1622 (1512)<br>56<br>1366
-    <td align="right">1622 (1512)<br>56<br>1366
-    <td align="right">1758<br>60<br>1369
+    <td align="right">1798 (1686)<br>57<br>1380
+    <td align="right">1614 (1504)<br>57<br>1294
+    <td align="right">1614 (1504)<br>57<br>1294
+    <td align="right">1716<br>61<br>1311
   <tr><td><tt>#sscanf ("point,color", "%[a-z]", s)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">1836 (1724)<br>90<br>2754
-    <td align="right">1622 (1512)<br>90<br>2607
-    <td align="right">1622 (1512)<br>90<br>2607
-    <td align="right">1758<br>94<br>2508
+    <td align="right">1798 (1686)<br>90<br>2748
+    <td align="right">1614 (1504)<br>90<br>2601
+    <td align="right">1614 (1504)<br>90<br>2601
+    <td align="right">1716<br>94<br>2502
   <tr><td><tt>sscanf_flt ("1.2345", "%e", &x)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">4872 (4760)<br>40<br>410
-    <td align="right">4416 (4306)<br>40<br>364
-    <td align="right">4392 (4282)<br>40<br>364
-    <td align="right">4716 (4606)<br>43<br>341
+    <td align="right">4866 (4754)<br>40<br>410
+    <td align="right">4438 (4328)<br>40<br>364
+    <td align="right">4414 (4304)<br>40<br>364
+    <td align="right">4714 (4604)<br>43<br>341
   <tr><td><tt>#strtof ("1.2345", &end)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">1682 (1570)<br>24<br>1550
-    <td align="right">1540 (1430)<br>24<br>1446
-    <td align="right">1480 (1370)<br>24<br>1074
-    <td align="right">1602 (1492)<br>30<br>1205
+    <td align="right">1648 (1536)<br>24<br>1289
+    <td align="right">1490 (1380)<br>24<br>1172
+    <td align="right">1462 (1352)<br>24<br>969
+    <td align="right">1698 (1588)<br>37<br>1282
   <tr><td><tt>#strtol ("12345", &end, 0)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">384<br>14<br>606
-    <td align="right">362<br>14<br>583
-    <td align="right">344<br>12<br>351
-    <td align="right">358<br>15<br>373
+    <td align="right">390<br>14<br>606
+    <td align="right">368<br>14<br>583
+    <td align="right">350<br>12<br>351
+    <td align="right">364<br>15<br>373
   <tr><td><tt>#strtoll ("12345", &end, 0)</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">572 (460)<br>20<br>832
-    <td align="right">534 (424)<br>20<br>785
-    <td align="right">510 (400)<br>18<br>488
-    <td align="right">534 (424)<br>21<br>513
+    <td align="right">578 (466)<br>20<br>832
+    <td align="right">540 (430)<br>20<br>785
+    <td align="right">516 (406)<br>18<br>488
+    <td align="right">540 (430)<br>21<br>513
 </table>
 </small>
 */

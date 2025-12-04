@@ -14,6 +14,9 @@ pv= @ realloc ((void*) 0, 1)    @ realloc @ -Wl,--defsym=__heap_end=0x80ffff
 
 @ qsort (s, sizeof(s), 1, cmp)  @ qsort @
 
+i= @ rand ()   @ rand   @
+l= @ random () @ random @
+
 @ sprintf_min (s, "%d", 12345)        @ sprintf @ -Wl,-u,vfprintf -lprintf_min
 @ sprintf (s, "%d", 12345)            @ sprintf @
 @ sprintf_flt (s, "%e", 1.2345)       @ sprintf @ -Wl,-u,vfprintf -lprintf_flt
