@@ -45,6 +45,8 @@ extern size_t __malloc_margin;	/* user-changeable before the first malloc() */
 extern char *__malloc_heap_start;
 extern char *__malloc_heap_end;
 
+extern __uint24 __seed;
+
 #ifndef __AVR__
 
 /*

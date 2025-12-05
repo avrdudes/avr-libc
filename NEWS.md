@@ -138,6 +138,8 @@
   `memcpy_P`, `strchr`, `strchr_P` ([#1013][1013]), and the functions from
    [<ctype.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__ctype).
 
+- `rand` and `rand_r` now use a less resource-hungry algorithm.
+
 - `common/asmdef.h` used a sub-optimal definition of XJMP and XCALL ([#993][993]).
   Outcome was a sub-optimal code generation for some devices like the
   ones in `avrxmega3/short-calls`.

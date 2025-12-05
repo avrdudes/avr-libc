@@ -41,7 +41,8 @@ stdlib_a_c_sources = \
 	malloc.c \
 	pstr_inf.c \
 	qsort.c \
-	rand.c \
+	seed.c \
+	srand.c \
 	random.c \
 	realloc.c \
 	strtof.c \
@@ -76,6 +77,7 @@ stdlib_a_asm_sources = \
 	ispunct.S \
 	llabs.S \
 	qsort_swapfunc.S \
+	rand.S \
 	strtol.S \
 	strtoll.S \
 	strtoul.S \
