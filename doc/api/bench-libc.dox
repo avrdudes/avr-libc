@@ -89,10 +89,10 @@ are present, and then only one code size is shown.
     <td align="right">938 (828)<br>146<br>45705
     <td align="right">984 (874)<br>153<br>47930
   <tr><td><tt>#rand ()</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
-    <td align="right">98<br>2<br>137
-    <td align="right">94<br>2<br>136
-    <td align="right">94<br>2<br>136
-    <td align="right">98<br>3<br>139
+    <td align="right">100<br>2<br>132
+    <td align="right">96<br>2<br>131
+    <td align="right">96<br>2<br>131
+    <td align="right">100<br>3<br>134
   <tr><td><tt>#random ()</tt> <td>Flash bytes<br>Stack bytes<br>Cycles
     <td align="right">678 (566)<br>16<br>1410
     <td align="right">634 (524)<br>16<br>1394

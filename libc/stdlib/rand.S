@@ -105,6 +105,7 @@ ENTRY rand_r
     st      -Z, C0
     ;; Result is in [0, RAND_MAX = 0x7fff].
     andi    C1, hi8(0x7fff)
+    eor     C0, C2
     clr     __zero_reg__
     ret
 ENDFUNC
