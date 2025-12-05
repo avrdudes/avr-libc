@@ -411,10 +411,18 @@ $ make example-largedemo # etc.
 
 Additional prerequisites:
 - Doxygen v1.9.6
-- \c fig2dev
+- \c fig2dev from the <a href="https://en.wikipedia.org/wiki/Xfig">Xfig</a> project
 - A LaTeX installation like "TeX Live" with \c pdflatex
 - Python can improve the rendering of some man pages, though Python is
   not strictly required to build the documentation.
+
+When <a href="https://sourceforge.net/projects/mcj/files">fig2dev</a>
+is not present on the system, one way is to build it from source:
+\verbatim
+$ wget https://sourceforge.net/projects/mcj/files/fig2dev-3.2.9a.tar.xz/download -O fig2dev-3.2.9a.tar.xz
+$ tar xfJ fig2dev-3.2.9a.tar.xz
+\endverbatim
+and then configure, make and install as usual.
 
 For building the documentation, Doxygen v1.9.6 is required.
 Here are the steps for building and installing it in a non-system
