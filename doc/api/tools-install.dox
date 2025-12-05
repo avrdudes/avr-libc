@@ -441,7 +441,7 @@ Then configure and build it.  The installation is in some folder
 $ # in ./build
 $ mkdir doxygen-1.9.6
 $ cd doxygen-1.9.6
-$ cmake -DCMAKE_PREFIX_PATH=/someplace/doxygen-1.9.6 ../../source/doxygen-1.9.6
+$ cmake -DCMAKE_INSTALL_PREFIX:PATH=/someplace/doxygen-1.9.6 ../../source/doxygen-1.9.6
 $ make
 $ make install
 \endverbatim
