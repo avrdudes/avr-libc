@@ -34,7 +34,7 @@ int main()
 	/* 8-bit representation of 1/sqrt(2) = 0.70710678... */
 	if (r != 0.70703125UHR) exit(__LINE__);
 	q = sqrthr(0.5HR);
-	if (q != 0.703125HR) exit(__LINE__); /* one bit of precision less */
+	if (q != 0.7109375HR) exit(__LINE__);
 
 	r = sqrtuhr(0.1UHR); /* 0.1UHR is 25/256=0.09765625HR */
 	if (r != 0.3125UHR) exit(__LINE__);
