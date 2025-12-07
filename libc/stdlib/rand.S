@@ -28,6 +28,14 @@
 
 #include "asmdef.h"
 
+/* Using the TestU01 suite from https://simul.iro.umontreal.ca/testu01/tu01.html
+   the RNG below achieves a rating of 73% in the bbattery_SmallCrush tests.
+   (Which expect a 32-bit resolution, so the upper 17 bits have been filled
+   with POSIX's lrand48.)  The previous implementation of rand() achieves
+   a score of 86% but utilized a multiple of resources.  The old rand()
+   implementation used basically the same code like random(), so the user can
+   resort to random() when they need a better RNG performance than rand()'s. */
+
 ;;; Realize  GF(2^24)  as  GF(2^24) ~ Z2[X] / (Poly24 * Z2[X])
 ;;; where  Z2 = Z / 2Z  and Poly24 is a polynomial of degree 24
 ;;; that's irreducible over Z2.
