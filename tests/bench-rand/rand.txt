@@ -1,0 +1,344 @@
+$ make test TESTU01_HOME=$HOME/gnu/install/TestU01-2009/ RNG=rand
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                 Starting SmallCrush
+                 Version: TestU01 1.2.3
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N =  1,  n = 5000000,  r =  0,    d = 1073741824,    t = 2,    p = 1
+
+
+      Number of cells = d^t = 1152921504606846976
+      Lambda = Poisson mean =      27.1051
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :      27.11
+Total observed number                 :      35
+p-value of test                       :    0.08
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.00
+
+Generator state:
+
+
+
+
+***********************************************************
+Test sknuth_Collision calling smultin_Multinomial
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+smultin_Multinomial test:
+-----------------------------------------------
+   N =  1,  n = 5000000,  r =  0,   d = 65536,   t =  2,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =         4294967296
+       Expected number per cell =  1 /  858.99346
+       EColl = n^2 / (2k) =  2910.383046
+       Hashing =   TRUE
+
+       Collision test,    Mu =      2909.2534,    Sigma =    53.8957
+
+-----------------------------------------------
+Test Results for Collisions
+
+Expected number of collisions = Mu    :     2909.25
+Observed number of collisions         :     2936
+p-value of test                       :    0.31
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :       4289970232
+  j =  1                              :          4994130
+  j =  2                              :             2932
+  j =  3                              :                2
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.83
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+sknuth_Gap test:
+-----------------------------------------------
+   N =  1,  n = 200000,  r = 22,   Alpha =        0,   Beta  = 0.00390625
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 1114
+Chi-square statistic                  : 3028.58
+p-value of test                       :   eps      *****
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.05
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+sknuth_SimpPoker test:
+-----------------------------------------------
+   N =  1,  n = 400000,  r = 24,   d =   64,   k =   64
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   19
+Chi-square statistic                  :   23.69
+p-value of test                       :    0.21
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.80
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 500000,  r = 26,   d =   16
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   44
+Chi-square statistic                  :   76.06
+p-value of test                       :  1.9e-3
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.73
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+sknuth_MaxOft test:
+-----------------------------------------------
+   N =  1,  n = 2000000,  r =  0,   d = 100000,   t =  6
+
+      Number of categories = 100000
+      Expected number per category  = 20.00
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 99999
+Chi-square statistic                  : 1.00e+5
+p-value of test                       :    0.44
+
+
+-----------------------------------------------
+Anderson-Darling statistic            :    0.71
+p-value of test                       :    0.29
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.26
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+svaria_WeightDistrib test:
+-----------------------------------------------
+   N =  1,  n = 200000,  r = 27,  k = 256,  Alpha =      0,  Beta =  0.125
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   41
+Chi-square statistic                  :  106.72
+p-value of test                       :  9.2e-8    *****
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.94
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 20000,  r = 20,    s = 10,    L = 60,    k = 60
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    3
+Chi-square statistic                  : 3.76e+6
+p-value of test                       :   eps      *****
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.83
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 500000,  r = 20,   s = 10,   L = 300,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          : 2209
+Chi-square statistic                  : 2205.82
+p-value of test                       :    0.52
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.21
+
+Generator state:
+
+
+
+
+***********************************************************
+HOST = Toto, Linux
+
+AVR-LibC rand
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 1000000,  r =  0,   s = 30,   L0 =  150,   L1 =  150
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   52
+ChiSquare statistic                   :   50.94
+p-value of test                       :    0.52
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   52
+ChiSquare statistic                   :   49.52
+p-value of test                       :    0.57
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :   75
+ChiSquare statistic                   :   82.90
+p-value of test                       :    0.25
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   44
+ChiSquare statistic                   :   43.17
+p-value of test                       :    0.51
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   26
+ChiSquare statistic                   :   23.55
+p-value of test                       :    0.60
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.25
+
+Generator state:
+
+
+
+
+
+========= Summary results of SmallCrush =========
+
+ Version:          TestU01 1.2.3
+ Generator:        AVR-LibC rand
+ Number of statistics:  15
+ Total CPU time:   00:00:18.96
+ The following tests gave p-values outside [0.001, 0.9990]:
+ (eps  means a value < 1.0e-300):
+ (eps1 means a value < 1.0e-15):
+
+       Test                          p-value
+ ----------------------------------------------
+  3  Gap                              eps  
+  7  WeightDistrib                   9.2e-8
+  8  MatrixRank                       eps  
+ ----------------------------------------------
+ All other tests were passed
+
+
+

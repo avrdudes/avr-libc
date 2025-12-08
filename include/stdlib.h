@@ -527,11 +527,10 @@ extern long double atofl(const char *__nptr);
      If no seed value is provided, the functions are automatically seeded with
      a value of 1.
 
-     rand() achieves a score of 73% in the \c bbattery_SmallCrush tests from the
+     rand() achieves a score of 80% in the \c bbattery_SmallCrush tests from the
      <a href="https://simul.iro.umontreal.ca/testu01/tu01.html">TestU01</a>
      suite.  For a better score consider random(), which achieves 100% in
-     that test. (Using only the lower 15 bits of random() achieves a
-     rating of 83%).
+     that test.
 
      For the resource consumptions, see the \ref bench_libc "libc benchmarks".
 */
