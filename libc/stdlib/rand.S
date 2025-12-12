@@ -26,95 +26,94 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.  */
 
+/* https://en.wikipedia.org/wiki/Xorshift
+   The period of xorshift32 is 2^32 - 1.
+
+   Using the TestU01 suite from https://simul.iro.umontreal.ca/testu01/tu01.html
+   the RNG below achieves a rating of 93% in the bbattery_SmallCrush tests.
+   (Which expect a 32-bit resolution, so the upper 17 bits have been filled
+   with "good" RNG bits.)  The v2.2.1 implementation of rand() achieved
+   a score of 100% but utilized a multiple of resources.  The old rand()
+   implementation used basically the same code like random(), so the user can
+   resort to random() when they need a better RNG performance than rand()'s.
+
+   For the tests, see ./tests/bench-rand.  */
+
 #include "asmdef.h"
 
-/* Using the TestU01 suite from https://simul.iro.umontreal.ca/testu01/tu01.html
-   the RNG below achieves a rating of 73% in the bbattery_SmallCrush tests.
-   (Which expect a 32-bit resolution, so the upper 17 bits have been filled
-   with POSIX's lrand48.)  The previous implementation of rand() achieves
-   a score of 86% but utilized a multiple of resources.  The old rand()
-   implementation used basically the same code like random(), so the user can
-   resort to random() when they need a better RNG performance than rand()'s. */
+#define C0  r24
+#define C1  r25
+#define C2  r26
+#define C3  r27
 
-;;; Realize  GF(2^24)  as  GF(2^24) ~ Z2[X] / (Poly24 * Z2[X])
-;;; where  Z2 = Z / 2Z  and Poly24 is a polynomial of degree 24
-;;; that's irreducible over Z2.
-#define Poly24 0x17a96e9 /* 1 + X^3 + X^5 + X^6 + X^7 + X^9 + X^10 + X^12 + X^15 + X^17 + X^19 + X^20 + X^21 + X^22 + X^24 */
+#define A0  r20
+#define A1  r21
+#define A2  r22
+#define A3  r23
 
-;;; A primitive root of unity in GF(2^24)*, i.e.  Root24^N = 1
-;;; and  N = 2^24 - 1  is the smallest N with that property.
-#define Root24 0x8b /* 1 + X + X^3 + X^7 */
+#ifdef __AVR_TINY__
+#define Cnt __tmp_reg__
+#else
+#define Cnt r18
+#endif /* AVR_TINY */
 
-#define C0 r24
-#define C1 r25
-#define C2 __zero_reg__
-#define A0 r26
-#define A1 r27
-#define A2 __tmp_reg__
 
-#define B0 r20
-#define P0 r21
-#define P1 r22
-#define P2 r23
-
-;;; int R24 = rand_r (uint32_t * seed R24);
-;;; *seed *= Root24  where the multiplikation is in GF(2^24)*  except
-;;; when   *seed == 0,  in which case we map 0 to something non-0.
-;;; Only the lower 24 bits of *seed are involved.
-;;; The period of rand / rand_r is 2^24 - 1.
 ENTRY rand
     ldi     r24, lo8(__seed)
     ldi     r25, hi8(__seed)
+
+;;; int16_t R24 = rand_r (uint32_t *R24);
 ENTRY rand_r
     X_movw  ZL, r24
-    ld      A0, Z+
-    ld      A1, Z+
-    ld      A2, Z+
-    ;; Map seed = 0 to something harmless.
-    X_sbiw  A0, 0
-    cpc     A2, __zero_reg__
+    ld      C0, Z+
+    ld      C1, Z+
+    ld      C2, Z+
+    ld      C3, Z+
+    ;; Map __seed = 0 to something harmless (non-0).
+    ;; Notice that all non-zero seeds map to non-zero seeds.
+    X_sbiw  C0, 0
+    sbci    C2, 0
+    sbci    C3, 0
     brne 0f
-    ldi     A1, 0xcc
+    ldi     C2, 42
 0:
-    ldi     B0, Root24    ; Notice that deg(Root24) < 8.
-    ;; Clear result C[].
-    clr     C0
-    clr     C1
-    ; clr     C2        ; C2 === zero_reg
-    ldi     P0, lo8(Poly24)
-    ldi     P1, hi8(Poly24)
-    ldi     P2, hlo8(Poly24)
-
-    ;; Calculate C = A * B mod Poly24, i.e. multiplication in GF(2^24).
-.Loop24:
-    sbrs    B0, 0
-    rjmp 1f
-    ;; C += A * X^i  but only if bit B.i is set.
+    ;; ^= << 13
+    X_movw  A0, C0
+    mov     A2, C2
+    ldi     Cnt, 13 - 8
+1:  lsl     A0
+    rol     A1
+    rol     A2
+    dec     Cnt
+    brne 1b
+    eor     C1, A0
+    eor     C2, A1
+    eor     C3, A2
+    ;; ^= >> 17
+    X_movw  A0, C2
+    lsr     A1
+    ror     A0
+    eor     C0, A0
+    eor     C1, A1
+    ;; ^= << 5
+    X_movw  A0, C0
+    X_movw  A2, C2
+    ldi     Cnt, 5
+2:  lsl     A0
+    rol     A1
+    rol     A2
+    rol     A3
+    dec     Cnt
+    brne 2b
     eor     C0, A0
     eor     C1, A1
     eor     C2, A2
-1:
-    ;; A *= X
-    lsl     A0
-    rol     A1
-    rol     A2
-    ;; A = A mod Poly. When the leading term of A is not X^24
-    ;; then nothing needs to be done.
-    brcc 2f
-    eor     A0, P0
-    eor     A1, P1
-    eor     A2, P2
-2:
-    ;; B >>= 1 : Move interesting bit i of B to B0.0.
-    lsr     B0
-    brne .Loop24
+    eor     C3, A3
+    st      -Z, C3
     st      -Z, C2
     st      -Z, C1
     st      -Z, C0
-    ;; Result is in [0, RAND_MAX = 0x7fff].
-    eor     C0, C2
-    add     C1, C2
+    ;; Result is in [0, 0x7fff].
     andi    C1, hi8(0x7fff)
-    clr     __zero_reg__
     ret
 ENDFUNC

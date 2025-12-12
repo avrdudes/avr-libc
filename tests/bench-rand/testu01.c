@@ -10,6 +10,7 @@
 uint32_t alibc_random (uint32_t*);
 
 // AVR-LibC v2.3's 15-bit do_rand().
+// https://de.wikipedia.org/wiki/Xorshift
 uint32_t alibc_rand (uint32_t*);
 
 // AVR-LibC's up to v2.2.1.
@@ -64,12 +65,11 @@ mix_t amix[] =
 {
     { 0x7fffffff, alibc_random, 1,   "AVR-LibC random" },
     // Notes on failing TestU01's:
-    // 3 Gap:
-    // 7 WeightDistrib:
     // 8 MatrixRank:  Computes ranks of 60 x 60 matrices over GF(2) that are
     //         comprised of 10-bit chunks (bits 0xffc).  Most of the expected
     //         ranks have a small deficit of 0..2, but the new rand() has more
-    //         linear dependencies and can only build matrices with ranks = 42.
+    //         linear dependencies and can only build matrices with much smaller
+    //         ranks.
     { 0x7fff,     alibc_rand, 1,     "AVR-LibC rand" },
     { 0x7fff,     alibc_old_rand, 1, "AVR-LibC old rand" },
 };
@@ -132,7 +132,7 @@ uint32_t alibc_random (uint32_t *ctx)
 	return *ctx = x;
 }
 
-
+#if 0
 /* 1 + X^3 + X^5 + X^6 + X^7 + X^9 + X^10 + X^12 + X^15 + X^17 + X^19 + X^20 + X^21 + X^22 + X^24 */
 #define POLY 0x17a96e9
 #define DEGREE 24
@@ -182,6 +182,7 @@ uint32_t alibc_rand (poly *ctx)
 
     return r & 0x7fff;
 }
+#endif
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -207,4 +208,16 @@ uint32_t alibc_old_rand (uint32_t *ctx)
     if (x < 0)
         x += 0x7fffffffL;
     return (*ctx = x) % 0x8000;
+}
+
+// https://en.wikipedia.org/wiki/Xorshift
+// The period of xorshift32 is 2^32 - 1.
+uint32_t alibc_rand (uint32_t *ctx)
+{
+    uint32_t x = *ctx ? *ctx : 42 << 16;
+    x ^= x << 13;
+    x ^= x >> 17;
+    x ^= x << 5;
+    *ctx = x;
+    return x & 0x7fff;
 }

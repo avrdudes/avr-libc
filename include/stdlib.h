@@ -521,13 +521,13 @@ extern long double atofl(const char *__nptr);
      The srand() function sets its argument \c seed as the seed for a new
      sequence of pseudo-random numbers to be returned by rand().
      These sequences have a period of
-     {{{2<sup>24</sup>-1}}}
+     {{{2<sup>32</sup>-1}}}
      and are repeatable by calling srand() with the same seed value.
 
      If no seed value is provided, the functions are automatically seeded with
      a value of 1.
 
-     rand() achieves a score of 80% in the \c bbattery_SmallCrush tests from the
+     rand() achieves a score of 93% in the \c bbattery_SmallCrush tests from the
      <a href="https://simul.iro.umontreal.ca/testu01/tu01.html">TestU01</a>
      suite.  For a better score consider random(), which achieves 100% in
      that test.
