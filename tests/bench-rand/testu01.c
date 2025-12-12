@@ -63,6 +63,13 @@ unsigned mix_rng (void)
 mix_t amix[] =
 {
     { 0x7fffffff, alibc_random, 1,   "AVR-LibC random" },
+    // Notes on failing TestU01's:
+    // 3 Gap:
+    // 7 WeightDistrib:
+    // 8 MatrixRank:  Computes ranks of 60 x 60 matrices over GF(2) that are
+    //         comprised of 10-bit chunks (bits 0xffc).  Most of the expected
+    //         ranks have a small deficit of 0..2, but the new rand() has more
+    //         linear dependencies and can only build matrices with ranks = 42.
     { 0x7fff,     alibc_rand, 1,     "AVR-LibC rand" },
     { 0x7fff,     alibc_old_rand, 1, "AVR-LibC old rand" },
 };
@@ -73,14 +80,19 @@ int main (int argc, char *argv[])
 
     if (argc > 1)
     {
+        const char *rng = argv[1];
         idx = 0?0
-            : !strcmp (argv[1], "0") ? 0
-            : !strcmp (argv[1], "1") ? 1
-            : !strcmp (argv[1], "2") ? 2
-            : !strcmp (argv[1], "random")  ? 0
-            : !strcmp (argv[1], "rand")    ? 1
-            : !strcmp (argv[1], "oldrand") ? 2
-            : 1;
+            : !strcmp (rng, "0") || !strcmp (rng, "random")  ? 0
+            : !strcmp (rng, "1") || !strcmp (rng, "rand")    ? 1
+            : !strcmp (rng, "2") || !strcmp (rng, "oldrand") ? 2
+            : -1;
+        if (idx < 0)
+        {
+            fprintf (stderr, "\nerror: unrecognized argv[1] = %s\n", rng);
+            fprintf (stderr, "usage: make test TESTU01_HOME=<dir>"
+                     " RNG=<rng> with <rng> in: random, rand, oldrand\n");
+            exit (1);
+        }
     }
 
     mix = &amix[idx];
