@@ -28,4 +28,4 @@
 
 #include "stdlib_private.h"
 
-uint32_t __seed;
+uint32_t __seed = 1;
