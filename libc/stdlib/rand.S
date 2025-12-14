@@ -1,4 +1,5 @@
 /* Copyright (c) 2025  Georg-Johann Lay
+   Copyright (c) 2025  David Sparks
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -30,12 +31,10 @@
    The period of xorshift32 is 2^32 - 1.
 
    Using the TestU01 suite from https://simul.iro.umontreal.ca/testu01/tu01.html
-   the RNG below achieves a rating of 93% in the bbattery_SmallCrush tests.
+   the RNG below achieves a rating of 100% in the bbattery_SmallCrush tests.
    (Which expect a 32-bit resolution, so the upper 17 bits have been filled
    with "good" RNG bits.)  The v2.2.1 implementation of rand() achieved
-   a score of 100% but utilized a multiple of resources.  The old rand()
-   implementation used basically the same code like random(), so the user can
-   resort to random() when they need a better RNG performance than rand()'s.
+   a score of 100% too, but utilized a multiple of resources.
 
    For the tests, see ./tests/bench-rand.  */
 
@@ -52,9 +51,9 @@
 #define A3  r23
 
 #ifdef __AVR_TINY__
-#define Cnt __tmp_reg__
+#define Ax  __tmp_reg__
 #else
-#define Cnt r18
+#define Ax  r18
 #endif /* AVR_TINY */
 
 
@@ -68,7 +67,7 @@ ENTRY rand_r
     ld      C0, Z+
     ld      C1, Z+
     ld      C2, Z+
-    ld      C3, Z+
+    ld      C3, Z
     ;; Map __seed = 0 to something harmless (non-0).
     ;; Notice that all non-zero seeds map to non-zero seeds.
     X_sbiw  C0, 0
@@ -77,42 +76,49 @@ ENTRY rand_r
     brne 0f
     ldi     C2, 42
 0:
-    ;; ^= << 13
+    ;; C[] ^= C[] << 13
     X_movw  A0, C0
     mov     A2, C2
-    ldi     Cnt, 13 - 8
+    ;; Set upper 5 bits of A2 to 0b00001 for loop control.
+    cbr     A2, 0xf8
+    ori     A2, 0x08
 1:  lsl     A0
     rol     A1
     rol     A2
-    dec     Cnt
-    brne 1b
+    brcc 1b
     eor     C1, A0
     eor     C2, A1
     eor     C3, A2
-    ;; ^= >> 17
+    ;; C[] ^= C[] >> 17
     X_movw  A0, C2
     lsr     A1
     ror     A0
     eor     C0, A0
     eor     C1, A1
-    ;; ^= << 5
+    ;; C[] ^= C[] << 5
     X_movw  A0, C0
     X_movw  A2, C2
-    ldi     Cnt, 5
-2:  lsl     A0
-    rol     A1
-    rol     A2
-    rol     A3
-    dec     Cnt
-    brne 2b
-    eor     C0, A0
-    eor     C1, A1
-    eor     C2, A2
-    eor     C3, A3
-    st      -Z, C3
+    ;; Perform << 5 as 40-bit >> 3 with Ax = 0b100 for loop control.
+    ldi     Ax, 0b100
+2:  lsr     A3
+    ror     A2
+    ror     A1
+    ror     A0
+    ror     Ax
+    brcc 2b
+    eor     C0, Ax
+    eor     C1, A0
+    eor     C2, A1
+    eor     C3, A2
+    st      Z, C3
     st      -Z, C2
     st      -Z, C1
     st      -Z, C0
+    ;; This addition to xorshift32 was proposed by David Sparks.
+    ;; Without it, the TestU01's MatrixRank test is failing.
+    ;; The addition has no effect on the period.
+    add     C0, C2
+    adc     C1, C3
     ;; Result is in [0, 0x7fff].
     andi    C1, hi8(0x7fff)
     ret

@@ -64,12 +64,6 @@ unsigned mix_rng (void)
 mix_t amix[] =
 {
     { 0x7fffffff, alibc_random, 1,   "AVR-LibC random" },
-    // Notes on failing TestU01's:
-    // 8 MatrixRank:  Computes ranks of 60 x 60 matrices over GF(2) that are
-    //                comprised of 10-bit chunks (bits 0xffc).  Most of the
-    //                expected ranks have a small deficit of 0..2, but the
-    //                new xorshift rand() has more linear dependencies and
-    //                can only build matrices with rank 32.
     { 0x7fff,     alibc_rand, 1,     "AVR-LibC rand" },
     { 0x7fff,     alibc_old_rand, 1, "AVR-LibC old rand" },
 };
@@ -219,5 +213,5 @@ uint32_t alibc_rand (uint32_t *ctx)
     x ^= x >> 17;
     x ^= x << 5;
     *ctx = x;
-    return x & 0x7fff;
+    return (x + (x >> 16)) & 0x7fff;
 }
