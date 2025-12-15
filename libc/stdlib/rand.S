@@ -79,16 +79,16 @@ ENTRY rand_r
     ;; C[] ^= C[] << 13
     X_movw  A0, C0
     mov     A2, C2
-    ;; Set upper 5 bits of A2 to 0b00001 for loop control.
-    cbr     A2, 0xf8
-    ori     A2, 0x08
-1:  lsl     A0
-    rol     A1
-    rol     A2
+    ;; Perform 24-bit << 5 as 32-bit >> 3 with Ax = 0b100 for loop control.
+    ldi     Ax, 0b100
+1:  lsr     A2
+    ror     A1
+    ror     A0
+    ror     Ax
     brcc 1b
-    eor     C1, A0
-    eor     C2, A1
-    eor     C3, A2
+    eor     C1, Ax
+    eor     C2, A0
+    eor     C3, A1
     ;; C[] ^= C[] >> 17
     X_movw  A0, C2
     lsr     A1
