@@ -139,6 +139,10 @@
    [<ctype.h>](https://avrdudes.github.io/avr-libc/avr-libc-user-manual/group__ctype).
 
 - `rand` and `rand_r` now use a less resource-hungry algorithm.
+  The runtime is less than 1/8 compared to the previous algorithm, and the
+  code size is less than 1/4 while maintaining reasonable pseudo-randomness.
+  The old implementation of `rand` was basically like `random() & 0x7fff`,
+  so that you can return to the old algorithm if desired.
 
 - `common/asmdef.h` used a sub-optimal definition of XJMP and XCALL ([#993][993]).
   Outcome was a sub-optimal code generation for some devices like the
