@@ -56,7 +56,7 @@ AC_PREREQ([2.59])
 AC_REVISION($Revision$)
 
 AC_CONFIG_SRCDIR([doc/examples/demo/demo.c])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 
 dnl Makefile.in substitutions for M4 macros.
 AC_SUBST(AVR_LIBC_MAJOR, [avr_libc_major])
