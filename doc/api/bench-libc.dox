@@ -16,8 +16,8 @@ is shown. Both sizes can coincide when no prologue and epilogue routines
 are present, and then only one code size is shown.
 
 - \c #qsort sorts an array of \c char with 100 elements.
-- \c double has a size of 4, which plays a role in the float type promotions
-   of arguments of varargs functions like \c #sprintf.
+- The used size of \c double is 4, which plays a role in the float type
+  promotions of arguments of varargs functions like \c #sprintf.
 - For an overview of the different AVR architectures,
   see <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html"
     >avr-gcc: Command Line Options</a>.
