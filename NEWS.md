@@ -187,6 +187,10 @@
 - Added configure option `--with-doxygen=` to select the Doxygen executable
   for generating the documentation.
 
+- Added configure option `--with-man-page=` to chose the page for the
+  man pages.  The default is `3avr`.  Previous versions of AVR-LibC used
+  the hard-coded page of `3` ([#1051][1051]).
+
 ## Issues closed
 
 - See also the list of
@@ -358,6 +362,7 @@
 [1044]: https://github.com/avrdudes/avr-libc/issues/1044
 [1045]: https://github.com/avrdudes/avr-libc/issues/1045
 [1048]: https://github.com/avrdudes/avr-libc/issues/1048
+[1051]: https://github.com/avrdudes/avr-libc/issues/1051
 [1052]: https://github.com/avrdudes/avr-libc/issues/1052
 [1053]: https://github.com/avrdudes/avr-libc/issues/1053
 [1056]: https://github.com/avrdudes/avr-libc/issues/1056
