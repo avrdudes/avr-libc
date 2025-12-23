@@ -1,4 +1,4 @@
-# Changes since AVR-LibC v2.2.0
+# Changes in AVR-LibC v2.3.0
 
 ## General
 
