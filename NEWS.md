@@ -1,8 +1,22 @@
+# Changes since AVR-LibC v2.3.0
+
+## General
+
+## ABI and API Changes
+
+## Improvements and Additions
+
+## Issues closed
+
+## Pull Requests
+
 # Changes in AVR-LibC v2.3.0
 
 ## General
 
 ## ABI and API Changes
+
+## Other Changes
 
 - **Parts of the startup code are now optional and have been moved
   from `crt<mcu>.o` to the device support library `lib<mcu>.a`.**\
