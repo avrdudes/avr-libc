@@ -24,12 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
-
-#if !defined(__AVR_TINY__)
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdio.h>
 #include <avr/pgmspace.h>
@@ -40,25 +35,20 @@ ATTRIBUTE_CLIB_SECTION
 int
 puts_P(const char *str)
 {
-	char c;
-	int rv = 0;
+    char c;
+    int rv = 0;
 
-	if ((stdout->flags & __SWR) == 0)
-		return EOF;
+    if ((stdout->flags & __SWR) == 0)
+        return EOF;
 
-	/*
-	 * Do not use str++ in the next line.  pgm_read_byte() is a
-	 * macro, so it could evaluate its argument more than once.
-	 */
-	while ((c = pgm_read_byte(str)) != '\0') {
-		if (stdout->put(c, stdout) != 0)
-			rv = EOF;
-		str++;
-	}
-	if (stdout->put('\n', stdout) != 0)
-		rv = EOF;
+    while ((c = pgm_read_char(str)) != '\0')
+    {
+        if (stdout->put(c, stdout) != 0)
+            rv = EOF;
+        str++;
+    }
+    if (stdout->put('\n', stdout) != 0)
+        rv = EOF;
 
-	return rv;
+    return rv;
 }
-
-#endif /* !defined(__AVR_TINY__) */

@@ -1,5 +1,6 @@
 /* Copyright (c) 2007  Cliff Lawson
    Copyright (c) 2007  Carlos Lamas
+   Copyright (c) 2025  Ian Gregg
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -28,8 +29,6 @@
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
-
-/* $Id$ */
 
 /**
    \file
@@ -77,12 +76,12 @@
    {
    #define BAUD 9600
    #include <util/setbaud.h>
-   UBRRH = UBRRH_VALUE;
-   UBRRL = UBRRL_VALUE;
+       UBRRH = UBRRH_VALUE;
+       UBRRL = UBRRL_VALUE;
    #if USE_2X
-   UCSRA |= (1 << U2X);
+       UCSRA |= (1 << U2X);
    #else
-   UCSRA &= ~(1 << U2X);
+       UCSRA &= ~(1 << U2X);
    #endif
    }
 
@@ -92,12 +91,12 @@
    #undef BAUD  // avoid compiler warning
    #define BAUD 38400
    #include <util/setbaud.h>
-   UBRRH = UBRRH_VALUE;
-   UBRRL = UBRRL_VALUE;
+       UBRRH = UBRRH_VALUE;
+       UBRRL = UBRRL_VALUE;
    #if USE_2X
-   UCSRA |= (1 << U2X);
+       UCSRA |= (1 << U2X);
    #else
-   UCSRA &= ~(1 << U2X);
+       UCSRA &= ~(1 << U2X);
    #endif
    }
    \endcode
@@ -192,16 +191,16 @@
 #endif
 
 #ifdef __ASSEMBLER__
-#define UBRR_VALUE (((F_CPU) + 8 * (BAUD)) / (16 * (BAUD)) -1)
+#define UBRR_VALUE ((((F_CPU) - 16 * (BAUD)) * 100 / (16 * (BAUD)) + 50) / 100)
 #else
-#define UBRR_VALUE (((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) -1UL)
+#define UBRR_VALUE ((((F_CPU) - 16UL * (BAUD)) * 100UL / (16UL * (BAUD)) + 50UL) / 100UL)
 #endif
 
 #if 100 * (F_CPU) > \
-  (16 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
+  (16 * ((UBRR_VALUE) + 1) * (100 + (BAUD_TOL)) * (BAUD))
 #  define USE_2X 1
 #elif 100 * (F_CPU) < \
-  (16 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL))
+  (16 * ((UBRR_VALUE) + 1) * (100 - (BAUD_TOL)) * (BAUD))
 #  define USE_2X 1
 #else
 #  define USE_2X 0
@@ -212,18 +211,18 @@
 #undef UBRR_VALUE
 
 #ifdef __ASSEMBLER__
-#define UBRR_VALUE (((F_CPU) + 4 * (BAUD)) / (8 * (BAUD)) -1)
+#define UBRR_VALUE ((((F_CPU) - 8 * (BAUD)) * 100 / (8 * (BAUD)) + 50) / 100)
 #else
-#define UBRR_VALUE (((F_CPU) + 4UL * (BAUD)) / (8UL * (BAUD)) -1UL)
+#define UBRR_VALUE ((((F_CPU) - 8UL * (BAUD)) * 100UL / (8UL * (BAUD)) + 50UL) / 100UL)
 #endif
 
 #if 100 * (F_CPU) > \
-  (8 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
+  (8 * ((UBRR_VALUE) + 1)) * (100 + (BAUD_TOL)) * (BAUD))
 #  warning "Baud rate achieved is higher than allowed"
 #endif
 
 #if 100 * (F_CPU) < \
-  (8 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL))
+  (8 * ((UBRR_VALUE) + 1)) * (100 - (BAUD_TOL)) * (BAUD))
 #  warning "Baud rate achieved is lower than allowed"
 #endif
 

@@ -25,15 +25,13 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 avrdir = $(prefix)/avr/include/util
 avr_HEADERS = \
     atomic.h \
     crc16.h \
     delay_basic.h \
+    ram-usage.h \
     setbaud.h \
     parity.h \
     twi.h \

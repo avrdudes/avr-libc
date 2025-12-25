@@ -30,8 +30,6 @@
 
 /* avr/iom324.h - definitions for ATmega324 */
 
-/* $Id$ */
-
 #ifndef _AVR_IOM324_H_
 #define _AVR_IOM324_H_ 1
 
@@ -89,7 +87,11 @@
 /* Signature (ATmega324P) */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x95
-#define SIGNATURE_2 0x08 
+#if defined(__AVR_ATmega324A__)
+#define SIGNATURE_2 0x15
+#else
+#define SIGNATURE_2 0x08
+#endif
 
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)

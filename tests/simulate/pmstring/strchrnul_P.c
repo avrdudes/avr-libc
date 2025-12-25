@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 #ifndef __AVR__
 # define _GNU_SOURCE	/* to include strchrnul()	*/
@@ -55,9 +52,9 @@
 void Check (int line, const char *s, int c, int expect)
 {
     const char *p;
-    
+
     p = strchrnul_P (s, c);
-    
+
     if (p != s + expect) {
 	PRINTFLN (line, "expect: %d, result: %d", expect, p - s);
 	EXIT (line);
@@ -74,7 +71,7 @@ int main ()
     CHECK ("", 1, 0);
     CHECK ("", 255, 0);
     CHECK ("ABCDEF", 'a', 6);
-    
+
     /* Found	*/
     CHECK ("\001", 1, 0);
     CHECK ("\377", 255, 0);
@@ -84,13 +81,13 @@ int main ()
     CHECK ("12345", 0, 5);
     CHECK ("", 0, 0);
 
-    /* First occurance	*/
+    /* First occurrence	*/
     CHECK ("abcdabcd", 'b', 1);
-    
+
     /* 'c' converted to a char	*/
     CHECK ("ABCDEF", 'A'+0x100, 0);
     CHECK ("ABCDE\377", ~0, 5);
-    
+
     /* Very long string	*/
     CHECK ("................................................................"
 	   "................................................................"

@@ -24,11 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of _SFR's macroses.  Implicit setting of default behaviour.
-   $Id$	*/
+/* Test of _SFR's macros.  Implicit setting of default behaviour. */
 
 #define __SFR_OFFSET	0x20
 #include "sfrasm-1.S"

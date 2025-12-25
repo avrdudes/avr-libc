@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * Copyright (C) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,31 +23,23 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
 /*
-	Standard mktime(). The provided broken down Local 'calendar' time is converted into
-	a binary time stamp. The process is then reversed to 'normalize' timeptr.
+	Standard mktime(). The provided broken down Local 'calendar' time
+    is converted into a binary time stamp. The process is then reversed
+    to 'normalize' timeptr.
 */
 
 #include <time.h>
-
-extern long __utc_offset;
-
-extern int (*__dst_ptr) (const time_t *, int32_t *);
-
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION
 time_t
 mktime(struct tm * timeptr)
 {
-	time_t          ret;
-
-	ret = mk_gmtime(timeptr);
+	time_t ret = mk_gmtime(timeptr);
 
 	if (timeptr->tm_isdst < 0)
     {

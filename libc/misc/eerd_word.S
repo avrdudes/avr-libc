@@ -26,10 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-/* $Id$	*/
-
-#ifndef	__DOXYGEN__
-
 #include <avr/io.h>
 
 #if	E2END && __AVR_ARCH__ > 1
@@ -69,4 +65,3 @@ ENTRY	eeprom_read_word
 ENDFUNC
 
 #endif	/* E2END && __AVR_ARCH__ > 1 */
-#endif	/* !__DOXYGEN__ */

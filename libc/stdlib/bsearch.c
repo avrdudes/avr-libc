@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
+ * Copyright (c) 2025  Georg-Johann Lay
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -24,8 +25,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- */
+ * SUCH DAMAGE. */
 
 #if defined(LIBC_SCCS) && !defined(lint)
 static char sccsid[] = "@(#)bsearch.c	8.1 (Berkeley) 6/4/93";
@@ -35,43 +35,70 @@ static char sccsid[] = "@(#)bsearch.c	8.1 (Berkeley) 6/4/93";
 #include <stdlib.h>
 #include "sectionname.h"
 
-/*
- * Perform a binary search.
- *
- * The code below is a bit sneaky.  After a comparison fails, we
- * divide the work in half by moving either left or right. If lim
- * is odd, moving left simply involves halving lim: e.g., when lim
- * is 5 we look at item 2, so we change lim to 2 so that we will
- * look at items 0 & 1.  If lim is even, the same applies.  If lim
- * is odd, moving right again involes halving lim, this time moving
- * the base up one item past p: e.g., when lim is 5 we change base
- * to item 3 and make lim 2 so that we will look at items 3 and 4.
- * If lim is even, however, we have to shrink it by one before
- * halving: e.g., when lim is 4, we still looked at item 2, so we
- * have to make lim 3, then halve, obtaining 1, so that we will only
- * look at item 3.
- */
+/* Perform a binary search.
+   The code below is a bit sneaky.  After a comparison fails, we divide the
+   work in half by moving either left or right. If N is odd, moving left simply
+   involves halving N: e.g., when N is 5 we look at item 2, so we change N
+   to 2 so that we will look at items 0 & 1.  If N is even, the same applies.
+   - If N is odd, moving right again involes halving N, this time moving the
+     base up one item past p: e.g., when N is 5 we change base to item 3 and
+     make N 2 so that we will look at items 3 and 4.
+   - If N is even, however, we have to shrink it by one before halving: e.g.,
+     when N is 4, we still looked at item 2, so we have to make N 3, then
+     halve, obtaining 1, so that we will only look at item 3.
+*/
 ATTRIBUTE_CLIB_SECTION
 void *
-bsearch (const void *key, const void *base0, size_t nmemb,
-         size_t size, int (*compar)(const void *, const void *))
+bsearch (const void *key, const void *base, size_t n,
+         size_t size, __compar_fn_t compar)
 {
-    const char *base = base0;
-    size_t lim;
+#ifdef __AVR_HAVE_MUL__
+    // The MUL timings of the two implementations are not very conclusive,
+    // with a small edge for doing the multiplication in the loop.
 
-    for (lim = nmemb; lim != 0; lim >>= 1)
+    for (; n != 0; n >>= 1)
     {
-        const void *p = base + (lim >> 1) * size;
-        int cmp = (*compar)(key, p);
+        const char *p = (const char*) base + (n >> 1) * size;
+        const int cmp = compar (key, p);
+
         if (cmp == 0)
-            return ((void *)p);
-        if (cmp > 0)
+            return (void*) p;
+        else if (cmp > 0)
         {
-            /* key > p: move right */
-            base = (char *)p + size;
-            lim--;
+            // key > p: use the chunk right of p.
+            base = p + size;
+            n--;
         }
-        /* else move left */
+        // else: use the chunk left of p.
     }
+#else
+    // Without MUL, we are clearly better off performing the
+    // multiplication before the loop.
+
+    for (size_t off = n * size; n != 0; n >>= 1)
+    {
+        // Calculate off = (n >> 1) * size, but without MUL.
+        if (n & 1)
+            off -= size;
+        off >>= 1;
+
+        const char *p = (const char*) base + off;
+        const int cmp = compar (key, p);
+
+        if (cmp == 0)
+            return (void*) p;
+        else if (cmp > 0)
+        {
+            // key > p: use the chunk right of p.
+            base = p + size;
+            n--;
+            // Additional adjust to off is required when n was even.
+            if (n & 1)
+                off -= size;
+        }
+        // else: use the chunk left of p.
+    }
+#endif
+
     return NULL;
 }

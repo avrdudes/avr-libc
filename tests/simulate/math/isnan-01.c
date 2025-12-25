@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of isnan().
-   $Id$
- */
+/* Test of isnanf (). */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -91,19 +88,19 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int i;
     
     for (i = 0; i < (int) (sizeof(t0) / sizeof(t0[0])); i++) {
 	x.lo = pgm_read_dword (& t0[i]);
-	if (isnan(x.fl))
+	if (isnanf (x.fl))
 	    x_exit (i + 1);
     }
     for (i = 0; i < (int) (sizeof(t1) / sizeof(t1[0])); i++) {
 	x.lo = pgm_read_dword (& t1[i]);
-	if (!isnan(x.fl))
+	if (!isnanf (x.fl))
 	    x_exit (i + 101);
     }
     return 0;

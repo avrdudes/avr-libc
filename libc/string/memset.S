@@ -26,11 +26,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dest_hi r25
 #define dest_lo r24
@@ -39,10 +35,7 @@
 #define len_hi r21
 #define len_lo r20
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memset)
-	.type	_U(memset), @function
-_U(memset):
+ENTRY _U(memset)
 	X_movw	XL, dest_lo
 #if OPTIMIZE_SPEED
 ; 11 words, (12 + len * 4 - (len & 1)) cycles
@@ -68,7 +61,4 @@ _U(memset):
 	brcc	.L_memset_loop
 ; return dest (unchanged)
 	ret
-.L_memset_end:
-	.size	_U(memset), .L_memset_end - _U(memset)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC

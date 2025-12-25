@@ -26,23 +26,31 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$	*/
-
-#if	!defined (__DOXYGEN__)
-#if	!defined (__AVR_TINY__)
-
 #include "asmdef.h"
 
 /* char *ultoa (unsigned long val, char *s, int radix)	*/
 
 #define val_lo	r22
 #define str_lo	r20
+#ifdef __AVR_TINY__
+#define rdx_lo	r26
+#define rdx_hi	r27
+#else
 #define rdx_lo	r18
 #define rdx_hi	r19
+#endif
 
 
 ENTRY	ultoa
 ENTRY	__ultoa
+#ifdef __AVR_TINY__
+        ;; Radix is passed on the stack
+	in	ZL, SPL_IO_ADDR
+	in	ZH, SPH_IO_ADDR
+	X_adiw 	ZL, 1 + 2	; 2 pushed (RET-address).
+	ld	rdx_lo, Z+
+	ld	rdx_hi, Z+
+#endif
 
     ; Check radix
 	cpi	rdx_lo, 37
@@ -58,6 +66,3 @@ ENTRY	__ultoa
 	ret
 
 ENDFUNC
-
-#endif	/* !__AVR_TINY__ */
-#endif	/* !__DOXYGEN__ */

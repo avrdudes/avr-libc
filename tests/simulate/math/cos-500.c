@@ -24,29 +24,28 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of cos() function. 500 random cases with fabs(x) < 10.
-   $Id$
- */
+/* Test of cos() function. 500 random cases with fabs(x) < 10. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "progmem.h"
 
-union lofl_u {
+union lofl_u
+{
     long lo;
     float fl;
 };
 
 volatile union lofl_u v = { .lo = 1 };
 
-PROGMEM const struct {		/* Table of test cases.	*/
+PROGMEM const struct		/* Table of test cases.	*/
+{
     long x;		/* argument	*/
     long z;		/* cos(x)	*/
-} t[] = {
-
+} t[] =
+{
     /* x, cos(x)	*/
     { 0x3f5f4a23,0x3f24a3cc }, /*   1:  8.7222499e-01  6.4312434e-01 */
     { 0x1a517714,0x3f800000 }, /*   2:  4.3316378e-23  1.0000000e+00 */
@@ -558,16 +557,17 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, z;
     unsigned long v1, z1, r;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = cos (x.fl);
+	v.fl = cosf (x.fl);
 	
 	v1 = (v.lo < 0) ? (unsigned long)~(v.lo) : v.lo + 0x80000000;
 	z1 = (z.lo < 0) ? (unsigned long)~(z.lo) : z.lo + 0x80000000;

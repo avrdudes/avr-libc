@@ -30,23 +30,16 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define src_hi r25
 #define src_lo r24
 #define len_hi r23
 #define len_lo r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strnlen_P)
-	.type	_U(strnlen_P), @function
-_U(strnlen_P):
+ENTRY _U(strnlen_P)
 	X_movw	ZL, src_lo
 .L_strnlen_P_loop:
 	X_lpm	r0, Z+
@@ -61,9 +54,6 @@ _U(strnlen_P):
 	add	src_lo, ZL
 	adc	src_hi, ZH
 	ret
-.L_strnlen_P_end:
-	.size	_U(strnlen_P), .L_strnlen_P_end - _U(strnlen_P)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

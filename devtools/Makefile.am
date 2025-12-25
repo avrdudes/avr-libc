@@ -25,9 +25,6 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 EXTRA_DIST = \
     aclocal.m4 \
@@ -36,6 +33,11 @@ EXTRA_DIST = \
     Architecture.am \
     Device.am \
     cr_check.py \
+    compare-libc.sh \
+    filter-mcus.py.in \
     gen-avr-lib-tree.sh.in \
+    math2dox.in \
+    update-news.in \
     mlib-gen.py \
+    mcu-to-avr-name.sh \
     make-binary-dist.sh

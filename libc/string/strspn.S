@@ -26,13 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+#include "asmdef.h"
 
-#if !defined(__AVR_TINY__)
-
-#ifndef	__DOXYGEN__
-
-#include "macros.inc"
+TINY_WEAK_ALIAS _U(strspn_P) _U(strspn)
 
 #define str_lo	r24
 #define str_hi	r25
@@ -44,21 +40,17 @@
 /* This realization is compact, but is not very fast: an accept string
    is not cashed.	*/
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strspn)
-	.type   _U(strspn), @function
-
-_U(strspn):
+ENTRY _U(strspn)
 	X_movw	XL, str_lo
   ; get next symbol from s[]
 1:	ld	chs, X+		; *s++
 	tst	chs
 	breq	3f
-  ; check an occurance
+  ; check an occurrence
 	X_movw	ZL, acc_lo
-2:	ld	r0, Z+
-	cp	r0, chs
-	cpse	r0, __zero_reg__
+2:	ld	__tmp_reg__, Z+
+	cp	__tmp_reg__, chs
+	cpse	__tmp_reg__, __zero_reg__
 	brne	2b
 	breq	1b		; branch if chs is present in accept[]
   ; end of scanning: chs is not found or end of s[] is reached
@@ -69,8 +61,4 @@ _U(strspn):
 	adc	str_hi, XH
 	ret
 
-	.size _U(strspn), . - _U(strspn)
-
-#endif	/* !__DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */
+ENDFUNC

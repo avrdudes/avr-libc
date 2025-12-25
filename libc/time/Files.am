@@ -1,4 +1,4 @@
- # (C)2012 Michael Duane Rice All rights reserved.
+ # Copyright (C) 2012 Michael Duane Rice All rights reserved.
  #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions are
@@ -23,8 +23,6 @@
  # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  # POSSIBILITY OF SUCH DAMAGE.
-
- # $Id$
 
 time_a_c_sources = \
 	asc_store.c \
@@ -76,4 +74,5 @@ time_a_asm_sources = \
 	system_tick.S
 
 time_a_extra_dist = \
+	time-private.h \
 	ephemera_common.h

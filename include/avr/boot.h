@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef _AVR_BOOT_H_
 #define _AVR_BOOT_H_    1
 
@@ -56,6 +54,7 @@
     \code
     #include <stdint.h>
     #include <avr/interrupt.h>
+    #include <avr/eeprom.h>
     #include <avr/pgmspace.h>
 
     void boot_program_page (uint32_t page, uint8_t *buf)

@@ -1,5 +1,6 @@
 /* Copyright (c) 2002  Michael Stumpf  <mistumpf@de.pepperl-fuchs.com>
    Copyright (c) 2006  Dmitry Xmelkov
+   Copyright (c) 2025  Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -27,22 +28,19 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float logf (float A);
-   The log10f() function returns the base 10 logarithm of A.
- */
+;; float log10f (float A);
+;; The log10f() function returns the base 10 logarithm of A.
 
-#define	INV_LN_10	0x3ede5bd9	/* 1.0/log(10.0)	*/
+#define	FL_LN2_LN10	0x3e9a209b	/* ln(2) / log(10) */
 
 ENTRY_FLOAT log10f log10 log10l
-	XCALL	_U(logf)
-	ldi	rB0,  lo8(INV_LN_10)
-	ldi	rB1,  hi8(INV_LN_10)
-	ldi	rB2, hlo8(INV_LN_10)
-	ldi	rB3, hhi8(INV_LN_10)
+	XCALL	_U(log2f)
+	ldi	rB0,  lo8(FL_LN2_LN10)
+	ldi	rB1,  hi8(FL_LN2_LN10)
+	ldi	rB2, hlo8(FL_LN2_LN10)
+	ldi	rB3, hhi8(FL_LN2_LN10)
 	XJMP	_U(__mulsf3)
 ENDFUNC

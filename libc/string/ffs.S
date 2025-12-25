@@ -26,20 +26,13 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#ifndef	__DOXYGEN__
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define	val_lo	r24
 #define	val_hi	r25
 #define	cntr	r30
 
-    ASSEMBLY_CLIB_SECTION
-    .global	_U(ffs)
-    .type	_U(ffs), @function
-_U(ffs):
+ENTRY _U(ffs)
 
 	ldi	cntr, 1
 	tst	val_lo
@@ -54,6 +47,4 @@ _U(ffs):
 	clr	r25
 9:	ret
 
-    .size  _U(ffs), . - _U(ffs)
-    .end
-#endif	/* not __DOXYGEN__ */
+ENDFUNC

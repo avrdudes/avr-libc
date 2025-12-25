@@ -27,11 +27,8 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
+  POSSIBILITY OF SUCH DAMAGE. */
 
-
-/* $Id$ */
 
 #include <stdlib.h>
 #include "sectionname.h"
@@ -88,11 +85,13 @@ malloc(size_t len)
 	 *
 	 */
 	for (s = 0, fp1 = __flp, fp2 = 0;
-	     fp1;
-	     fp2 = fp1, fp1 = fp1->nx) {
+		 fp1;
+		 fp2 = fp1, fp1 = fp1->nx)
+	{
 		if (fp1->sz < len)
 			continue;
-		if (fp1->sz == len) {
+		if (fp1->sz == len)
+		{
 			/*
 			 * Found it.  Disconnect the chunk from the
 			 * freelist, and return it.
@@ -103,8 +102,10 @@ malloc(size_t len)
 				__flp = fp1->nx;
 			return &(fp1->nx);
 		}
-		else {
-			if (s == 0 || fp1->sz < s) {
+		else
+		{
+			if (s == 0 || fp1->sz < s)
+			{
 				/* this is the smallest chunk found so far */
 				s = fp1->sz;
 				sfp1 = fp1;
@@ -122,8 +123,10 @@ malloc(size_t len)
 	 * not, just enlarge the request size to what we have found,
 	 * and use the entire chunk.
 	 */
-	if (s) {
-		if (s - len < sizeof(struct __freelist)) {
+	if (s)
+	{
+		if (s - len < sizeof(struct __freelist))
+		{
 			/* Disconnect it from freelist and return it. */
 			if (sfp2)
 				sfp2->nx = sfp1->nx;
@@ -172,7 +175,8 @@ malloc(size_t len)
 	/*
 	 * Both tests below are needed to catch the case len >= 0xfffe.
 	 */
-	if (avail >= len && avail >= len + sizeof(size_t)) {
+	if (avail >= len && avail >= len + sizeof(size_t))
+	{
 		fp1 = (struct __freelist *)__brkval;
 		__brkval += len + sizeof(size_t);
 		fp1->sz = len;
@@ -190,7 +194,7 @@ void
 free(void *p)
 {
 	struct __freelist *fp1, *fp2, *fpnew;
-	char *cp1, *cp2, *cpnew;
+	char *cp1, *cpnew;
 
 	/* ISO C says free(NULL) must be a no-op */
 	if (p == 0)
@@ -201,19 +205,42 @@ free(void *p)
 	fpnew = (struct __freelist *)cpnew;
 	fpnew->nx = 0;
 
-	/*
-	 * Trivial case first: if there's no freelist yet, our entry
-	 * will be the only one on it.  If this is the last entry, we
-	 * can reduce __brkval instead.
-	 */
-	if (__flp == 0) {
-		if ((char *)p + fpnew->sz == __brkval)
-			__brkval = cpnew;
-		else
-			__flp = fpnew;
+	/* First, check if we can reduce __brkval. */
+	if ((char *)p + fpnew->sz == __brkval)
+	{
+		__brkval = cpnew;
+		/* If there is no freelist, we are done. */
+		if (!__flp)
+			return;
+		/*
+		 * Otherwise, walk the entire list to see if there is a
+		 * new top-most chunk.
+		 */
+		for (fp1 = __flp, fp2 = 0;
+	             fp1->nx != 0;
+	             fp2 = fp1, fp1 = fp1->nx)
+		/* advance to entry just before end of list */
+		{}
+
+		cp1 = (char *)&(fp1->nx);
+		if (cp1 + fp1->sz == __brkval)
+		{
+			if (fp2 == NULL)
+				/* Freelist is empty now. */
+				__flp = NULL;
+			else
+				fp2->nx = NULL;
+			__brkval = cp1 - sizeof(size_t);
+		}
 		return;
 	}
-
+	/* __brkval can't be reduced */
+	/* If there is no freelist yet, create a new one. */
+	if (!__flp)
+	{
+		__flp = fpnew;
+		return;
+	}
 	/*
 	 * Now, find the position where our new entry belongs onto the
 	 * freelist.  Try to aggregate the chunk with adjacent chunks
@@ -221,17 +248,20 @@ free(void *p)
 	 */
 	for (fp1 = __flp, fp2 = 0;
 	     fp1;
-	     fp2 = fp1, fp1 = fp1->nx) {
+	     fp2 = fp1, fp1 = fp1->nx)
+	{
 		if (fp1 < fpnew)
 			continue;
 		cp1 = (char *)fp1;
 		fpnew->nx = fp1;
-		if ((char *)&(fpnew->nx) + fpnew->sz == cp1) {
+		if ((char *)&(fpnew->nx) + fpnew->sz == cp1)
+		{
 			/* upper chunk adjacent, assimilate it */
 			fpnew->sz += fp1->sz + sizeof(size_t);
 			fpnew->nx = fp1->nx;
 		}
-		if (fp2 == 0) {
+		if (fp2 == 0)
+		{
 			/* new head of freelist */
 			__flp = fpnew;
 			return;
@@ -245,27 +275,12 @@ free(void *p)
 	 * with the lower chunk if possible.
 	 */
 	fp2->nx = fpnew;
-	cp2 = (char *)&(fp2->nx);
-	if (cp2 + fp2->sz == cpnew) {
+	cp1 = (char *)&(fp2->nx);
+	if (cp1 + fp2->sz == cpnew)
+	{
 		/* lower junk adjacent, merge */
 		fp2->sz += fpnew->sz + sizeof(size_t);
 		fp2->nx = fpnew->nx;
-	}
-	/*
-	 * If there's a new topmost chunk, lower __brkval instead.
-	 */
-	for (fp1 = __flp, fp2 = 0;
-	     fp1->nx != 0;
-	     fp2 = fp1, fp1 = fp1->nx)
-		/* advance to entry just before end of list */;
-	cp2 = (char *)&(fp1->nx);
-	if (cp2 + fp1->sz == __brkval) {
-		if (fp2 == NULL)
-			/* Freelist is empty now. */
-			__flp = NULL;
-		else
-			fp2->nx = NULL;
-		__brkval = cp2 - sizeof(size_t);
 	}
 }
 
@@ -297,14 +312,16 @@ printfreelist(void)
 	struct __freelist *fp1;
 	int i;
 
-	if (!__flp) {
+	if (!__flp)
+	{
 		printf("no free list\n");
 		return;
 	}
 
-	for (i = 0, fp1 = __flp; fp1; i++, fp1 = fp1->nx) {
+	for (i = 0, fp1 = __flp; fp1; i++, fp1 = fp1->nx)
+	{
 		printf("entry %d @ %u: size %u, next ",
-		       i, (char *)fp1 - mymem, fp1->sz);
+			   i, (char *)fp1 - mymem, fp1->sz);
 		if (fp1->nx)
 			printf("%u\n", (char *)fp1->nx - mymem);
 		else
@@ -331,21 +348,26 @@ printalloc(void)
 	for (i = j = k = sum = sum2 = 0;
 	     i < sizeof handles / sizeof (void *);
 	     i++)
-		if (sizes[i]) {
+	{
+		if (sizes[i])
+		{
 			j++;
 			sum += sizes[i];
-			if (handles[i]) {
+			if (handles[i])
+			{
 				k++;
 				sum2 += sizes[i];
 			}
 		}
+	}
 	printf("brkval: %d, %d request%s => sum %u bytes "
-	       "(actually %d reqs => %u bytes)\n",
-	       (char *)__brkval - mymem, j, j == 1? "": "s", sum, k, sum2);
+		   "(actually %d reqs => %u bytes)\n",
+		   (char *)__brkval - mymem, j, j == 1? "": "s", sum, k, sum2);
 	memcpy(sortedhandles, handles, sizeof sortedhandles);
 	qsort(sortedhandles, 32, sizeof(void *), compare);
 	for (i = j = 0; i < sizeof sortedhandles / sizeof (void *); i++)
-		if ((cp = sortedhandles[i])) {
+		if ((cp = sortedhandles[i]))
+		{
 			cp -= sizeof(size_t);
 			fp = (struct __freelist *)cp;
 			printf("block %d @ %u: %u bytes\n",
@@ -364,38 +386,46 @@ main(void)
 
 	srand(time(0) ^ getpid());
 
-	for (k = 0; k < 100; k++) {
+	for (k = 0; k < 100; k++)
+	{
 		memset(handles, 0, sizeof handles);
 		memset(sizes, 0, sizeof sizes);
 
 		j = rand() % 16 + 15;
 		l = rand() % 80 + 7;
 
-		for (i = s = 0; i < j && s < 256; i++) {
+		for (i = s = 0; i < j && s < 256; i++)
+		{
 			sizes[i] = rand() % l + 1;
 			s += sizes[i];
 		}
 		j = i;
-		for (m = om = 1, p = 1, f = 0; m < 1000; m++) {
+		for (m = om = 1, p = 1, f = 0; m < 1000; m++)
+		{
 			for (i = s = 0; i < j; i++)
 				if (handles[i])
 					s++;
 			if (s == (unsigned)j)
 				break;
 
-			if (m / om > 10) {
+			if (m / om > 10)
+			{
 				p <<= 1;
 				p |= 1;
 			}
 
 			for (i = 0; i < j; i++)
-				if (rand() & p) {
-					if (!handles[i] &&
-					    (handles[i] = alloc(sizes[i])) == 0)
+				if (rand() & p)
+				{
+					if (!handles[i]
+						&& (handles[i] = alloc(sizes[i])) == 0)
+					{
 						f++;
+					}
 				}
 			for (i = 0; i < j; i++)
-				if (rand() & 1) {
+				if (rand() & 1)
+				{
 					free(handles[i]);
 					handles[i] = 0;
 				}
@@ -416,4 +446,3 @@ main(void)
 }
 
 #endif /* MALLOC_TEST */
-

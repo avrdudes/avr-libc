@@ -27,27 +27,20 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef _AVR_POWER_H_
 #define _AVR_POWER_H_   1
 
 #include <avr/io.h>
 #include <stdint.h>
-
-#ifndef __DOXYGEN__
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
-#endif /* ! DOXYGEN */
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup avr_power <avr/power.h>: Power Reduction Management
 
 \code #include <avr/power.h>\endcode
 
-Many AVRs contain a Power Reduction Register (PRR) or Registers (PRRx) that 
-allow you to reduce power consumption by disabling or enabling various on-board 
+Many AVRs contain a Power Reduction Register (PRR) or Registers (PRRx) that
+allow you to reduce power consumption by disabling or enabling various on-board
 peripherals as needed. Some devices have the XTAL Divide Control Register
 (XDIV) which offer similar functionality as System Clock Prescale
 Register (CLKPR).
@@ -60,8 +53,8 @@ the ATmega8). On those devices without a Power Reduction Register, the
 power reduction macros are not available..
 
 \note Not all AVR devices contain the same peripherals (for example, the LCD
-interface), or they will be named differently (for example, USART and 
-USART0). Please consult your device's datasheet, or the header file, to 
+interface), or they will be named differently (for example, USART and
+USART0). Please consult your device's datasheet, or the header file, to
 find out which macros are applicable to your device.
 
 \note For device using the XTAL Divide Control Register (XDIV), when prescaler
@@ -640,6 +633,15 @@ the clock below 131.072 kHz.
 #define power_twi_disable()             (PRR0 |= (uint8_t)(1 << PRTWI))
 #endif
 
+#if defined(__AVR_HAVE_PRR0_PRTWI0)
+#define power_twi0_enable()             (PRR0 &= (uint8_t)~(1 << PRTWI0))
+#define power_twi0_disable()            (PRR0 |= (uint8_t)(1 << PRTWI0))
+#if !defined(__AVR_HAVE_PRR0_PRTWI)
+#define power_twi_enable()              power_twi0_enable()
+#define power_twi_disable()             power_twi0_disable()
+#endif
+#endif
+
 #if defined(__AVR_HAVE_PRR0_PRTWI1)
 #define power_twi1_enable()             (PRR0 &= (uint8_t)~(1 << PRTWI1))
 #define power_twi1_disable()            (PRR0 |= (uint8_t)(1 << PRTWI1))
@@ -701,8 +703,8 @@ the clock below 131.072 kHz.
 #endif
 
 #if defined(__AVR_HAVE_PRR1_PRLFR)
-#define power_lfreceiver_enable()       (PRR1 &= (uint8_t)~(1 << PRLFR))            
-#define power_lfreceiver_disable()      (PRR1 |= (uint8_t)(1 << PRLFR))            
+#define power_lfreceiver_enable()       (PRR1 &= (uint8_t)~(1 << PRLFR))
+#define power_lfreceiver_disable()      (PRR1 |= (uint8_t)(1 << PRLFR))
 #endif
 
 #if defined(__AVR_HAVE_PRR1_PRLFTP)
@@ -788,6 +790,21 @@ the clock below 131.072 kHz.
 #if defined(__AVR_HAVE_PRR1_PRUSBH)
 #define power_usbh_enable()             (PRR1 &= (uint8_t)~(1 << PRUSBH))
 #define power_usbh_disable()            (PRR1 |= (uint8_t)(1 << PRUSBH))
+#endif
+
+#if defined(__AVR_HAVE_PRR1_PRSPI1)
+#define power_spi1_enable()             (PRR1 &= (uint8_t)~(1 << PRSPI1))
+#define power_spi1_disable()            (PRR1 |= (uint8_t)(1 << PRSPI1))
+#endif
+
+#if defined(__AVR_HAVE_PRR1_PRPTC)
+#define power_ptc_enable()              (PRR1 &= (uint8_t)~(1 << PRPTC))
+#define power_ptc_disable()             (PRR1 |= (uint8_t)(1 << PRPTC))
+#endif
+
+#if defined(__AVR_HAVE_PRR1_PRTWI1)
+#define power_twi1_enable()             (PRR1 &= (uint8_t)~(1 << PRTWI1))
+#define power_twi1_disable()            (PRR1 |= (uint8_t)(1 << PRTWI1))
 #endif
 
 #if defined(__AVR_HAVE_PRR2_PRDF)
@@ -1345,7 +1362,7 @@ XTAL Divide Control Register.
 without a Clock Prescale Register or XTAL Divide Control Register, these
 macros are not available.
 
-\code 
+\code
 typedef enum
 {
     clock_div_1 = 0,
@@ -1431,8 +1448,8 @@ void clock_prescale_set(clock_div_t __x)
         : /* no outputs */
         : "d" (__tmp),
           "M" (_SFR_MEM_ADDR(CLKPR)),
-          "d" (__x)
-        : "r0");
+          "d" ((uint8_t) __x)
+        : "r0", "memory");
 }
 
 /** \ingroup avr_power
@@ -1473,8 +1490,8 @@ void clock_prescale_set(clock_div_t __x)
         : /* no outputs */
         : "d" (__tmp),
           "M" (_SFR_MEM_ADDR(CLKPR)),
-          "d" (__x)
-        : "r0");
+          "d" ((uint8_t) __x)
+        : "r0", "memory");
 }
 
 #define clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)))
@@ -1508,8 +1525,8 @@ void system_clock_prescale_set(clock_div_t __x)
         : /* no outputs */
         : "d" (__tmp),
           "I" (_SFR_IO_ADDR(CLKPR)),
-          "d" (__x)
-        : "r0");
+          "d" ((uint8_t) __x)
+        : "r0", "memory");
 }
 
 #define system_clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)))
@@ -1536,16 +1553,16 @@ void timer_clock_prescale_set(timer_clock_div_t __x)
         "cli"                       "\n\t"
         "in %[temp],%[clkpr]"       "\n\t"
         "out %[clkpr],%[enable]"    "\n\t"
-        "andi %[temp],%[not_CLTPS]" "\n\t"
+        "cbr %[temp],%[not_CLTPS]"  "\n\t"
         "or %[temp], %[set_value]"  "\n\t"
         "out %[clkpr],%[temp]"      "\n\t"
         "out __SREG__,__tmp_reg__"
         : [temp] "=d" (__t)
         : [clkpr] "I" (_SFR_IO_ADDR(CLKPR)),
-          [enable] "r" (_BV(CLKPCE)),
-          [not_CLTPS] "M" (0xFF & (~ ((1 << CLTPS2) | (1 << CLTPS1) | (1 << CLTPS0)))),
-          [set_value] "r" ((__x & 7) << 3)
-        : "r0");
+          [enable] "r" ((uint8_t) _BV(CLKPCE)),
+          [not_CLTPS] "M" ((1 << CLTPS2) | (1 << CLTPS1) | (1 << CLTPS0)),
+          [set_value] "r" ((uint8_t) ((__x & 7) << 3))
+        : "r0", "memory");
 }
 
 #define timer_clock_prescale_get()  (timer_clock_div_t)(CLKPR & (uint8_t)((1<<CLTPS0)|(1<<CLTPS1)|(1<<CLTPS2)))
@@ -1575,16 +1592,16 @@ void system_clock_prescale_set(clock_div_t __x)
         "cli"                       "\n\t"
         "in %[temp],%[clpr]"        "\n\t"
         "out %[clpr],%[enable]"     "\n\t"
-        "andi %[temp],%[not_CLKPS]" "\n\t"
+        "cbr %[temp],%[not_CLKPS]"  "\n\t"
         "or %[temp], %[set_value]"  "\n\t"
         "out %[clpr],%[temp]"       "\n\t"
         "out __SREG__,__tmp_reg__"
         : [temp] "=d" (__t)
         : [clpr] "I" (_SFR_IO_ADDR(CLKPR)),
-          [enable] "r" _BV(CLPCE),
-          [not_CLKPS] "M" (0xFF & (~ ((1 << CLKPS2) | (1 << CLKPS1) | (1 << CLKPS0)))),
-          [set_value] "r" (__x & 7)
-        : "r0");
+          [enable] "r" ((uint8_t) (1 << CLPCE)),
+          [not_CLKPS] "M" ((1 << CLKPS2) | (1 << CLKPS1) | (1 << CLKPS0)),
+          [set_value] "r" ((uint8_t) (__x & 7))
+        : "r0", "memory");
 }
 
 #define system_clock_prescale_get()  (clock_div_t)(CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)))
@@ -1611,16 +1628,16 @@ void timer_clock_prescale_set(timer_clock_div_t __x)
         "cli"                       "\n\t"
         "in %[temp],%[clpr]"        "\n\t"
         "out %[clpr],%[enable]"     "\n\t"
-        "andi %[temp],%[not_CLTPS]" "\n\t"
+        "cbr %[temp],%[not_CLTPS]"  "\n\t"
         "or %[temp], %[set_value]"  "\n\t"
         "out %[clpr],%[temp]"       "\n\t"
         "out __SREG__,__tmp_reg__"
         : [temp] "=d" (__t)
         : [clpr] "I" (_SFR_IO_ADDR(CLKPR)),
-          [enable] "r" (_BV(CLPCE)),
-          [not_CLTPS] "M" (0xFF & (~ ((1 << CLTPS2) | (1 << CLTPS1) | (1 << CLTPS0)))),
-          [set_value] "r" ((__x & 7) << 3)
-        : "r0");
+          [enable] "r" ((uint8_t) (1 << CLPCE)),
+          [not_CLTPS] "M" ((1 << CLTPS2) | (1 << CLTPS1) | (1 << CLTPS0)),
+          [set_value] "r" ((uint8_t) ((__x & 7) << 3))
+        : "r0", "memory");
 }
 
 #define timer_clock_prescale_get()  (timer_clock_div_t)(CLKPR & (uint8_t)((1<<CLTPS0)|(1<<CLTPS1)|(1<<CLTPS2)))
@@ -1664,7 +1681,6 @@ static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
 void clock_prescale_set(clock_div_t __x)
 {
-    uint8_t __tmp = _BV(CLKPCE);
     __asm__ __volatile__ (
         "in __tmp_reg__,__SREG__" "\n\t"
         "cli"                     "\n\t"
@@ -1672,10 +1688,10 @@ void clock_prescale_set(clock_div_t __x)
         "out %1, %2"              "\n\t"
         "out __SREG__, __tmp_reg__"
         : /* no outputs */
-        : "d" (__tmp),
+        : "d" ((uint8_t) (1 << CLKPCE)),
           "I" (_SFR_IO_ADDR(CLKPR)),
-          "d" (__x)
-        : "r0");
+          "d" ((uint8_t) __x)
+        : "r0", "memory");
 }
 
 
@@ -1708,11 +1724,11 @@ void clock_prescale_set (clock_div_t __x)
         "sts %1, %0"              "\n\t"
         "out __SREG__, __tmp_reg__"
         : /* no outputs */
-        : "r" (__x),
+        : "r" ((uint8_t) __x),
           "n" (_SFR_MEM_ADDR(CLKPR)),
           "n" (_SFR_MEM_ADDR(CCP)),
           "r" ((uint8_t) 0xD8)
-        : "r0");
+        : "r0", "memory");
 }
 
 #define clock_prescale_get()  (clock_div_t) (CLKPR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
@@ -1738,7 +1754,7 @@ static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
 void clock_prescale_set(clock_div_t __x)
 {
-    if((__x <= 0) || (__x > 129))
+    if ((uint8_t) __x <= 0 || (uint8_t) __x > 129)
     {
         return;//Invalid value.
     }
@@ -1783,9 +1799,9 @@ void clock_prescale_set(clock_div_t __x)
             "nop" "\n\t"
             "L_%=: " "out __SREG__, __tmp_reg__"
             : "=d" (__tmp)
-            : "d" (__x),
+            : "d" ((uint8_t) __x),
               "I" (_SFR_IO_ADDR(XDIV))
-            : "r0");
+            : "r0", "memory");
     }
 }
 
@@ -1795,14 +1811,14 @@ clock_div_t clock_prescale_get(void)
 {
     if (bit_is_clear(XDIV, XDIVEN))
     {
-        return 1;
+        return (clock_div_t) 1;
     }
     else
     {
         return (clock_div_t) (129 - (XDIV & 0x7F));
     }
 }
- 
+
 #elif defined(__AVR_ATtiny4__) \
 || defined(__AVR_ATtiny5__) \
 || defined(__AVR_ATtiny9__) \
@@ -1812,24 +1828,23 @@ clock_div_t clock_prescale_get(void)
 || defined(__AVR_ATtiny20__) \
 || defined(__AVR_ATtiny40__) \
 
-typedef enum 
-{ 
-    clock_div_1 = 0, 
-    clock_div_2 = 1, 
-    clock_div_4 = 2, 
-    clock_div_8 = 3, 
-    clock_div_16 = 4, 
-    clock_div_32 = 5, 
-    clock_div_64 = 6, 
-    clock_div_128 = 7, 
-    clock_div_256 = 8 
-} clock_div_t; 
+typedef enum
+{
+    clock_div_1 = 0,
+    clock_div_2 = 1,
+    clock_div_4 = 2,
+    clock_div_8 = 3,
+    clock_div_16 = 4,
+    clock_div_32 = 5,
+    clock_div_64 = 6,
+    clock_div_128 = 7,
+    clock_div_256 = 8
+} clock_div_t;
 
 static __ATTR_ALWAYS_INLINE__ void clock_prescale_set(clock_div_t);
 
 void clock_prescale_set(clock_div_t __x)
 {
-    uint8_t __tmp = 0xD8;
     __asm__ __volatile__ (
         "in __tmp_reg__,__SREG__" "\n\t"
         "cli"                     "\n\t"
@@ -1837,15 +1852,15 @@ void clock_prescale_set(clock_div_t __x)
         "out %2, %3"              "\n\t"
         "out __SREG__, __tmp_reg__"
         : /* no outputs */
-        : "d" (__tmp),
+        : "d" ((uint8_t) 0xD8),
           "I" (_SFR_IO_ADDR(CCP)),
           "I" (_SFR_IO_ADDR(CLKPSR)),
-          "d" (__x)
-        : "r16");
+          "d" ((uint8_t) __x)
+        : "r16", "memory");
 }
 
 #define clock_prescale_get()  (clock_div_t)(CLKPSR & (uint8_t)((1<<CLKPS0)|(1<<CLKPS1)|(1<<CLKPS2)|(1<<CLKPS3)))
- 
+
 #endif
 
 #endif /* _AVR_POWER_H_ */

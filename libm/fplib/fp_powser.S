@@ -27,15 +27,13 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
 #include "asmdef.h"
 
 /* flt40_t __fp_powser (float x, [XH.]ZH.ZL);
-     The __fp_powser() function calculates the polynom.
+     The __fp_powser() function calculates the polynomial.
 
    Input:
      rA3.rA2.rA1.rA0	- an 'x' arg
@@ -47,7 +45,7 @@
    Table format:
      ; example for 3 power: C0 + x*(C1 + x*(C2 + x*C3))
      ; all floats are little-endian
-	.byte	3		; polynom power
+	.byte	3		; polynomial power
 	.byte	   C3,C3,C3,C3	; flt32_t C3
 	.byte	C2,C2,C2,C2,C2	; flt40_t C2
 	.byte	C1,C1,C1,C1,C1	; flt40_t C1
@@ -69,9 +67,9 @@
 	mov	\reg, r0
         adiw	r30, 1
         brcc    .Lnoinc.\@
-	in	r0, AVR_RAMPZ_ADDR
+	in	r0, RAMPZ_IO_ADDR
         inc	r0
-	out	AVR_RAMPZ_ADDR, r0
+	out	RAMPZ_IO_ADDR, r0
 .Lnoinc.\@:
 #else
 	X_lpm	\reg, Z+
@@ -88,7 +86,7 @@ ENTRY __fp_powser
 	push	rC0
 	push	rcntr
 #ifdef __AVR_HAVE_ELPM__
-	out	AVR_RAMPZ_ADDR, XH
+	out	RAMPZ_IO_ADDR, XH
 #endif
 	X_movw	rC0, rA0
 	X_movw	rC2, rA2
@@ -127,7 +125,7 @@ ENTRY __fp_powser
 	pop	YL
 	pop	YH
 #if defined(__AVR_HAVE_ELPM__) && defined (__AVR_HAVE_RAMPD__)
-	out	AVR_RAMPZ_ADDR, r1
+	out	RAMPZ_IO_ADDR, r1
 #endif
 	ret
 ENDFUNC

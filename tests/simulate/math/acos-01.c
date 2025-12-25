@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of acos() function.
-   $Id$
- */
+/* Test of acos() function. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -82,7 +79,7 @@ static inline unsigned long distance (long a, long b)
     return (a1 > b1) ? a1 - b1 : b1 - a1;
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, z;
     int i;
@@ -90,7 +87,7 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = acos (x.fl);
+	v.fl = acosf (x.fl);
 	if (v.lo < 0 || distance(v.lo, z.lo) > 1)
 	    x_exit (i+1);
     }

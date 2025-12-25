@@ -24,11 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of cbrt() function.
-   $Id$	*/
+/* Test of cbrt() function. */
 
 #include <math.h>
 #include <stdlib.h>
@@ -50,7 +48,7 @@ union float_u {
 };
 
 /* Result is placed into SRAM variable, allocated at the start of
-   memory. This is convinient to debug: read a core dump.	*/
+   memory. This is convenient to debug: read a core dump.	*/
 volatile union float_u v = {.u32 = 1};
 
 PROGMEM const struct {
@@ -77,27 +75,29 @@ PROGMEM const struct {
     { { 729 },	{ 9 } },
     { { 1000 },	{ 10 } },
     { {-1000 },	{-10 } },
-    
+
     { { 0.125 }, { 0.5 } },
     { { 0.015625 }, { 0.25 } },
     { {-0.001953125 }, {-0.125 } },
 };
 
-int main ()
+int main (void)
 {
     int i;
     union float_u tx, tz;
-    
-    for (i = 0;  (size_t)i < sizeof(t) / sizeof(t[0]); i++) {
+
+    for (i = 0; (size_t) i < sizeof(t) / sizeof(t[0]); i++)
+    {
 	tx.u32 = pgm_read_dword (& t[i].x);
 	tz.u32 = pgm_read_dword (& t[i].z);
-	v.flt = cbrt (tx.flt);
-	if (v.u32 != tz.u32) {
+	v.flt = cbrtf (tx.flt);
+	if (v.u32 != tz.u32)
+	{
 	    PRINTFLN ("t1[%d]={0x%08lx,0x%08lx} --> 0x%08lx\n",
 		      i, tx.u32, tz.u32, v.u32);
 	    EXIT (i + 1);
 	}
     }
-    
+
     return 0;
 }

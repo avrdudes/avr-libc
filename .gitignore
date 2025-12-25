@@ -1,13 +1,9 @@
 /aclocal.m4
-/devices.m4
-/devlist.m4
-/files.m4
-/multilib.m4
+m4-gen/
 /tmp-core-info
 /tmp-device-info
 /configure
 /avr/
-/avr-libc.spec
 /include/avr/builtins.h
 /include/util/delay.h
 
@@ -25,19 +21,21 @@ missing
 compile
 depcomp
 stamp-h1
+loc.txt
+sig.txt
+
+!doc/examples/*/Makefile
+!tests/compile/
 
 devtools/gen-avr-lib-tree.sh
+devtools/update-news
+devtools/math2dox
+devtools/filter-mcus.py
 
-*.bin
-*.elf
-*.hex
-*.map
-*.srec
-*.eps
 *.pdf
-doc/api/malloc-x1.png
-doc/api/malloc-std.png
-doc/api/malloc-x2.png
+doc/api/malloc-*.svg
+doc/api/*.h
+doc/api/*.gen.dox
 
 !docs/examples/*/Makefile
 

@@ -26,11 +26,7 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-/* $Id$	*/
-
 #if !defined(__AVR_TINY__)
-
-#ifndef	__DOXYGEN
 
 #include <avr/io.h>
 
@@ -107,7 +103,5 @@ ENTRY	eeprom_update_r18
 ENDFUNC
 
 #endif	/* E2END && __AVR_ARCH__ > 1 */
-
-#endif	/* !__DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

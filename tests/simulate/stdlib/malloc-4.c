@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Test heap in external memory, including correctly obeying the top
    limit. */
@@ -44,6 +41,10 @@ int main ()
 
 #include <stdint.h>
 #include <stdlib.h>
+
+/* Attribute "malloc" may spoil this test, hence hide malloc.  */
+void* hidden_malloc (size_t) __asm ("malloc");
+#define malloc(x) hidden_malloc(x)
 
 struct __freelist {
         size_t sz;

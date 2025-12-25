@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of copysign(). Both realizations are tested: inline and library.
-   $Id$
- */
+/* Test of copysign(). Both realizations are tested: inline and library. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,11 +39,12 @@ union lofl_u {
 
 volatile union lofl_u v = { .lo = 1 };
 
-PROGMEM const struct {		/* Table of test cases.	*/
+PROGMEM const struct		/* Table of test cases.	*/
+{
     union lofl_u x, y;		/* args		*/
     union lofl_u z;		/* result	*/
-} t[] = {
-
+} t[] =
+{
     { { .fl= +0.0 }, { .fl= +0.0 }, { .fl= +0.0 } },
     { { .fl= -0.0 }, { .fl= +0.0 }, { .fl= +0.0 } },
     { { .fl= +0.0 }, { .fl= -0.0 }, { .fl= -0.0 } },
@@ -70,25 +68,27 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, y, z;
     int i;
-    double (* volatile vp) (double, double);
+    float (* volatile vp) (float, float);
     
     /* inline     */
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	y.lo = pgm_read_dword (& t[i].y);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = copysign (x.fl, y.fl);
+	v.fl = copysignf (x.fl, y.fl);
 	if (v.lo != z.lo)
 	    x_exit (i + 1);
     }
 
     /* library function     */
-    vp = copysign;
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    vp = copysignf;
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	y.lo = pgm_read_dword (& t[i].y);
 	z.lo = pgm_read_dword (& t[i].z);

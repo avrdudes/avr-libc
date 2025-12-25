@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$	*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdlib.h>
 #include <string.h>
@@ -103,7 +100,7 @@ void Check (int line, const char *s1, const char *s2, int clr, int pnt)
 
 /* Args:
      s - string to parse
-     delim - delimeter list
+     delim - delimiter list
      clr   - if (clr >= 0) s[cln] must be cleared
      pnt   - if (pnt >= 0) s[pnt] must be pointed, else NULL
  */
@@ -114,7 +111,7 @@ void Check (int line, const char *s1, const char *s2, int clr, int pnt)
 int main ()
 {
     char *p;
-    
+
     /* NULL at first call	*/
     p = 0;
     if (strsep_P (&p, "") || p) exit (__LINE__);
@@ -123,15 +120,15 @@ int main ()
     /* Empty string	*/
     CHECK ("", "", -1, -1);
     CHECK ("", "abc", -1, -1);
-    
-    /* Empty delimeter list	*/
+
+    /* Empty delimiter list	*/
     CHECK ("a", "", -1, -1);
     CHECK ("12345678", "", -1, -1);
-    
-    /* No delimeter symbols are founded	*/
+
+    /* No delimiter symbols are found	*/
     CHECK ("\tabc", " ", -1, -1);
     CHECK ("THE QUICK BROWN FOX", "thequickbrownfox", -1, -1);
-    
+
     /* delim is 1 byte long	*/
     CHECK (".", ".", 0, 1);
     CHECK ("abc", "a", 0, 1);
@@ -145,7 +142,7 @@ int main ()
     CHECK ("B.", "AB", 0, 1);
     CHECK ("CAD", "AB", 1, 2);
     CHECK ("CDB", "AB", 2, 3);
-    
+
     /* delim length > 2 bytes	*/
     CHECK ("the quick", "0123456789 ", 3, 4);
 

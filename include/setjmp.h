@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef __SETJMP_H_
 #define __SETJMP_H_ 1
 
@@ -114,9 +112,9 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN]; } jmp_buf[1];
     \endcode */
 
 #ifndef __DOXYGEN__
-#ifndef __ATTR_NORETURN__
-#define __ATTR_NORETURN__ __attribute__((__noreturn__))
-#endif
+
+#include <bits/attribs.h>
+
 #endif /* ! DOXYGEN */
 
 /** \ingroup setjmp
@@ -131,7 +129,7 @@ typedef struct _jmp_buf { unsigned char _jb[_JBLEN]; } jmp_buf[1];
     \param __jmpb Variable of type \c jmp_buf which holds the stack
     information such that the environment can be restored.
 
-    \returns setjmp() returns 0 if returning directly, and
+    \returns Returns 0 if returning directly, and
     non-zero when returning from longjmp() using the saved context. */
 
 extern int setjmp(jmp_buf __jmpb);
@@ -152,7 +150,7 @@ extern int setjmp(jmp_buf __jmpb);
     \param __jmpb Information saved by a previous call to setjmp().
     \param __ret  Value to return to the caller of setjmp().
 
-    \returns This function never returns. */
+    This function never returns. */
 
 extern void longjmp(jmp_buf __jmpb, int __ret) __ATTR_NORETURN__;
 

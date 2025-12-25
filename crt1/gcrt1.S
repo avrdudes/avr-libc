@@ -29,19 +29,125 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* Introduction to the Startup Code
+   ================================
 
-#if (__GNUC__ < 3) || (__GNUC__ == 3 && __GNUC_MINOR__ < 3)
-#error "GCC version >= 3.3 required"
-#endif
+   The startup-code has been designed to provide maximal flexibility,
+   and to reduce overhead when possible.  To that end, the startup code
+   is being stiched together by the linker from a multitude of parts.
+   A part is pulled in when the respective symbol is undefined.
+
+   Notice that when a part is not available for some reason, e.g. you
+   are linking with -nodefaultlibs, then the linker WILL NOT complain
+   about an undefined reference, since these symbols are usually
+   referenced like  .global __init_sp   or  -Wl,-u,__do_flmap_init.
+
+   The startup code is composed of the following parts:
+
+   - Code in this file.
+
+   - Code hosted by GCC's libgcc:
+       o  __do_copy_data          Initialize .[ro]data from flash    [1]
+       o  __do_clear_bss          Clear .bss                         [1]
+       o  __do_global_ctors       Run static constructors            [1]
+       o  __do_global_dtors       Run static destructors             [1]
+
+   - Code hosted by AVR-LibC's lib<mcu>.a
+       o  __init_sp               Initialize SP with symbol __stack  [2]
+       o  __init_cvt              Activate a Compact Vector Table    [3]
+       o  __do_flmap_init         Set FLMAP according to __flmap     [4]
+       o  __call_main             Call main() and jump to exit().    [5]
+
+   [1] The compiler will pull in that code only when it is needed.
+       See  https://gcc.gnu.org/PR18145
+   [2] Always[6] pulled in by the code below.  The user may satisfy the
+       symbol when SP is initialized by hardware, and SP=RAMEND is fine.
+   [3] Always[6] pulled in by the USE_COMPACT_VECTOR_TABLE variant.
+   [4] Pulled in by the compiler (the device-specs file actually) when
+       the code is compiled for a device with FLMAP (AVR64, AVR128)
+       and -mrodata-in-ram is NOT selected (the default).  This part of
+       the startup code is the most complicated of all:
+       - With -mrodata-in-ram, the avrxmega2/4 emulation is selected.
+       - With rodata in flash (default) the avrxmega2/4_flmap emulation
+         is selected.
+       The default linker script for the respective emulation defines
+       symbols to augment the __do_flmap_init code, for example it
+       selects a label to (not) skip the initialization of FLMAP.
+       The NVMCTRL_CTRLB.FLMAP selects which 32 KiB portion of the
+       program flash memory is visible in the RAM address space, and
+       can be chosen by defining symbol __flmap.
+          For more technical details see  https://sourceware.org/PR31124
+       https://gcc.gnu.org/PR112944  and also libc/misc/flmap.init.S
+       which implements __do_flmap_init.
+   [5] Always[6] pulled in by the code below.  Calls main() and then
+       jumps to exit().  With -mno-call-main, the compiler will put
+       main itself into .init9 any satisfy __call_main.
+   [6] When CRT_SELF_CONTAINED if off, the respective parts will be pulled in.
+       When CRT_SELF_CONTAINED is on, the code is inserted inline below.
+
+   Customizing the Startup Code using C Macros
+   ===========================================
+
+   CRT_SELF_CONTAINED
+      If defined, include code that otherwise will be outsourced to the
+      device library lib<mcu>.a.  This is a choice when you are building
+      the startup code on your own, without the burden of also having to
+      build the device library.  AVR-LibC doesn't use CRT_SELF_CONTAINED.
+
+      If not defined (default), outsourced code will be pulled in from
+      the device library lib<mcu>.a.  The compiler can pull in respective
+      parts of the startup code as needed.  When some part of the code
+      is not needed or desired, the respective symbol can be satisfied
+      by the compiler or the user:
+
+      Pulling in can be achieved by asm code like  .global <symbol>
+      or by means of linking with  -Wl,-u,<symbol>
+
+      Defining a symbol so the respective code is not pulled in can be
+      achieved by asm code like
+          .global <symbol>
+          <symbol> = 0
+      or by means of linking with  -Wl,--defsym,<symbol>=0
+
+      The following parts are affected by CRT_SELF_CONTAINED:
+
+      - Initialize SP to the value of symbol __stack.
+        Section: .init2    Symbol: __init_sp
+
+      - Set bit CPUINT_CTRLA.CPUINT_CVT provided the build variant for a
+        compact vector table has been selected (USE_COMPACT_VECTOR_TABLE).
+        Section: .init3    Symbol: __init_cvt
+
+      - Call main() and jump to exit().
+        Section: .init9    Symbol: __call_main
+
+   USE_COMPACT_VECTOR_TABLE
+      Some devices support a CVT with only 4 entries: 0=Reset, 1=NMI,
+      2=Prio1 IRQ, 3=Prio0 IRQs.  This macro activates a build variant
+      with a CVT, and that adds code to .init3 which activates the CVT.
+
+   HAVE_LDSCRIPT_PR29741
+   HAVE_LDSCRIPT_PR31177
+      Defined if respective features from GNU Binutils are available.
+      You can:
+      - Goto https://sourceware.org/PR29741 and https://sourceware.org/PR31177
+        and find out whether your version of Binutils is supporting them.
+      - Reproduce how the toplevel configure.ac is determining them.
+      - Don't define them.  Drawback will be less precise diagnostics
+        from the linker when you are running out of RAM or Flash, and
+        less precise size reports.
+ */
 
 #include IOSYMFILE
 
-#include "macros.inc"
+#include <avr/io.h>
+#include "asmdef.h"
+#include "config.h"
+
 ;; Use _VECTOR_SIZE from the I/O header which might be more reliable than
-;; using macros.inc's XJMP according to __AVR_HAVE_JMP_CALL__.  As an example,
+;; using asmdef.h's XJMP according to __AVR_HAVE_JMP_CALL__.  As an example,
 ;; take ATmega808 which avr-gcc lists as short-calls and thus with a vector
-;; size of 2 bytes according to macros.inc, but ATmega808 has _VECTOR_SIZE = 4.
+;; size of 2 bytes according to asmdef.h, but ATmega808 has _VECTOR_SIZE = 4.
 #ifdef _VECTOR_SIZE
 #undef XJMP
 #if _VECTOR_SIZE == 2
@@ -52,6 +158,30 @@
 #error _VECTOR_SIZE must be 2 or 4 bytes
 #endif
 #endif /* _VECTOR_SIZE */
+
+;; Devices that support a CVT (Compact Vector Table) have only 4 vectors.
+;; This is a build variant for crt<mcu>-cvt.o realized by Device.am.
+#ifdef USE_COMPACT_VECTOR_TABLE
+#undef  _VECTORS_SIZE
+#define _VECTORS_SIZE (4 * _VECTOR_SIZE)
+
+#ifdef CRT_SELF_CONTAINED
+    .pushsection ".init3", "ax", @progbits
+    /* Definitions in avr/io*.h are neglecting assembly, so...  */
+#   ifndef CCP_IOREG_gc
+#   define CCP_IOREG_gc    0xD8    /* IO Register Protection */
+#   endif
+    lds     r18, CPUINT_CTRLA
+    ori     r18, CPUINT_CVT_bm
+    ldi     r19, CCP_IOREG_gc   ; Load I/O reg change protection signature.
+    out     CCP, r19
+    sts     CPUINT_CTRLA, r18
+    .popsection
+#else
+    ;; Pull in code from libmcu.a to set CPUINT_CTRLA.CPUINT_CVT in .init3.
+    .global __init_cvt
+#endif /* CRT self contained */
+#endif /* Use Compact Vector Table */
 
 	.macro	vector name
 	.if (. - __vectors < _VECTORS_SIZE)
@@ -193,7 +323,26 @@ __vectors:
 	vector	__vector_125
 	vector	__vector_126
 	vector	__vector_127
+#ifdef CPU_OPC_bm  /* Has illegal opcode detection */
+	;; On the AVR-SD devices, instructions must not be followed by an
+	;; illegal opcode.  This is since illegal opcode detection runs at
+	;; instruction fetch of the NEXT instruction, which is being run while
+	;; the 2-stage pipeline is executing the current instruction.
+	;; Any valid opcode will do, so use CLH which disassembles more
+	;; nicely than NOP = 0x0000.
+	clh
+#endif /* Has illegal opcode detection */
 	.endfunc
+
+#ifdef CPU_OPC_bm  /* Has illegal opcode detection */
+	;; For the same reason, put a valid opcode after the last location that
+	;; holds valid code, which is the .hightext section of the default
+	;; linker script.  Notice that .hightext is usually unused.
+	;; We assume Binutils 2.36+ so that we have section flag "R"etain.
+	.pushsection .hightext.zzz, "axR", @progbits
+	clh
+	.popsection
+#endif /* Has illegal opcode detection */
 
 	/* Handle unexpected interrupts (enabled and no handler), which
 	   usually indicate a bug.  Jump to the __vector_default function
@@ -230,85 +379,61 @@ __init:
 
 	.section .init2,"ax",@progbits
 	clr	__zero_reg__
-	out	AVR_STATUS_ADDR, __zero_reg__
-	ldi	r28,lo8(__stack)
+	out	SREG_IO_ADDR, __zero_reg__
+
+#ifdef CRT_SELF_CONTAINED
+#if defined(CPU_SPLIM)
+	;; Setting SPLIM is a bit tricky, since we don't know the value
+	;; of __heap_start, and we don't know the current value of SP
+	;; in the case of a soft reset.	 Hence, set SPLIM = 0 first.
+	out _SFR_IO_ADDR(CPU_SPLIML), __zero_reg__
+	out _SFR_IO_ADDR(CPU_SPLIMH), __zero_reg__
+#endif /* Have SPLIM */
+
+	ldi	r28, lo8(__stack)
 #ifdef __AVR_XMEGA__
-	out	AVR_STACK_POINTER_LO_ADDR, r28
-#ifdef _HAVE_AVR_STACK_POINTER_HI
-	ldi	r29,hi8(__stack)
-	out	AVR_STACK_POINTER_HI_ADDR, r29
-#endif	/* _HAVE_AVR_STACK_POINTER_HI */
+	out	SPL_IO_ADDR, r28
+#ifdef SPH_IO_ADDR
+	ldi	r29, hi8(__stack)
+	out	SPH_IO_ADDR, r29
+#endif  /* Have SPH */
 #else
-#ifdef _HAVE_AVR_STACK_POINTER_HI
-	ldi	r29,hi8(__stack)
-	out	AVR_STACK_POINTER_HI_ADDR, r29
-#endif	/* _HAVE_AVR_STACK_POINTER_HI */
-	out	AVR_STACK_POINTER_LO_ADDR, r28
+#ifdef SPH_IO_ADDR
+	ldi	r29, hi8(__stack)
+	out	SPH_IO_ADDR, r29
+#endif  /* Have SPH */
+#ifdef SPL_IO_ADDR
+	out	SPL_IO_ADDR, r28
+#endif  /* Have SPL */
 #endif  /* __AVR_XMEGA__ */
+
+#if defined(CPU_SPLIM)
+	ldi r24, lo8(__heap_start - 1)
+	ldi r25, hi8(__heap_start - 1)
+	out _SFR_IO_ADDR(CPU_SPLIML), r24
+	out _SFR_IO_ADDR(CPU_SPLIMH), r25
+#endif /* Have SPLIM */
+#else
+	;; Pull in __init_sp from the device lib to .init2
+	.global __init_sp
+#endif /* CRT self contained */
 
 #ifdef __AVR_3_BYTE_PC__
 	ldi	r16, hh8(pm(__vectors))
-	out	_SFR_IO_ADDR(EIND), r16
+	out	EIND_IO_ADDR, r16
 #endif	/* __AVR_3_BYTE_PC__ */
 
 #ifdef __AVR_HAVE_RAMPD__
-	out	AVR_RAMPD_ADDR, __zero_reg__
-	out	AVR_RAMPX_ADDR, __zero_reg__
-	out	AVR_RAMPY_ADDR, __zero_reg__
-	out	AVR_RAMPZ_ADDR, __zero_reg__
+	out	RAMPD_IO_ADDR, __zero_reg__
+	out	RAMPX_IO_ADDR, __zero_reg__
+	out	RAMPY_IO_ADDR, __zero_reg__
+	out	RAMPZ_IO_ADDR, __zero_reg__
 #endif
-
-#if defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3))
-#if BIG_CODE
-	/* Only for >64K devices with RAMPZ, replaces the default code
-	   provided by libgcc.S which is only linked in if necessary.  */
-
-	.section .init4,"ax",@progbits
-	.global __do_copy_data
-__do_copy_data:
-	ldi	r17, hi8(__data_end)
-	ldi	r26, lo8(__data_start)
-	ldi	r27, hi8(__data_start)
-	ldi	r30, lo8(__data_load_start)
-	ldi	r31, hi8(__data_load_start)
-
-	/* On the enhanced core, "elpm" with post-increment updates RAMPZ
-	   automatically.  Otherwise we have to handle it ourselves.  */
-
-#ifdef __AVR_ENHANCED__
-	ldi	r16, hh8(__data_load_start)
-#else
-	ldi	r16, hh8(__data_load_start - 0x10000)
-.L__do_copy_data_carry:
-	inc	r16
-#endif
-	out	AVR_RAMPZ_ADDR, r16
-	rjmp	.L__do_copy_data_start
-.L__do_copy_data_loop:
-#ifdef __AVR_ENHANCED__
-	elpm	r0, Z+
-#else
-	elpm
-#endif
-	st	X+, r0
-#ifndef __AVR_ENHANCED__
-	adiw	r30, 1
-	brcs	.L__do_copy_data_carry
-#endif
-.L__do_copy_data_start:
-	cpi	r26, lo8(__data_end)
-	cpc	r27, r17
-	brne	.L__do_copy_data_loop
-#ifdef __AVR_HAVE_RAMPD__
-	out	AVR_RAMPZ_ADDR, __zero_reg__
-#endif /* __AVR_HAVE_RAMPD__*/
-
-#endif /* BIG_CODE */
-#endif /* defined(__GNUC__) && ((__GNUC__ <= 3) || (__GNUC__ == 4 && __GNUC_MINOR__ <= 3)) */
 
 	.set	__stack, RAMEND
 #endif /* !__AVR_ASM_ONLY__ */
 
+#ifdef CRT_SELF_CONTAINED
 	.section .init9,"ax",@progbits
 #ifdef __AVR_ASM_ONLY__
 	XJMP	main
@@ -316,6 +441,11 @@ __do_copy_data:
 	XCALL	main
 	XJMP	exit
 #endif	/* __AVR_ASM_ONLY__ */
+#else
+	;; Pull in __call_main from the device lib to .init9
+	.global __call_main
+#endif /* CRT self contained */
+
 ;	.endfunc
 
     .section .note.gnu.avr.deviceinfo, "", @note
@@ -344,7 +474,7 @@ __do_copy_data:
 #elif FLASHEND > 0
     .long FLASHEND + 1
 #else
-    .long FLASHEND
+    .long 0
 #endif
     .long RAMSTART
 #ifdef RAMSIZE
@@ -364,7 +494,7 @@ __do_copy_data:
 #elif E2END > 0
     .long E2END + 1
 #else
-    .long E2END
+    .long 0
 #endif
     /* String offsets table.
     Index 0 - Size of offset table in bytes
@@ -403,7 +533,7 @@ __do_copy_data:
     ;; of Binutils have text region start hard coded as 0x0.
     ;; Therefore, only provide strict text region layout for devices
     ;; where program memory starts at 0x0.
-#if FLASHSTART == 0
+#if FLASHSTART == 0 || defined (HAVE_LDSCRIPT_PR31177)
     .weak __TEXT_REGION_ORIGIN__
     .set  __TEXT_REGION_ORIGIN__, (FLASHSTART)
     .weak __TEXT_REGION_LENGTH__
@@ -414,7 +544,13 @@ __do_copy_data:
 ;; The RAM virtual memory address used by Binutils to linearize memory.
 #define RAM_VMA 0x800000
 
-#if defined (RAMSTART) && defined (RAMEND)
+;; __DATA_REGION_ORIGIN__ is used since ld v2.40 / 2023-01-14 / PR29741.
+;; Prior to that, a core specific default value $DATA_ORIGIN was used.
+;; __DATA_REGION_LENGTH__ however is in use since 2015 / cb0728165e282b
+;; which means that with Binutils older than v2.40, we may get a
+;;    ld: address <X> of <FILE> section `.data' is not within region `data'
+;; error from the linker when $DATA_ORIGIN is not __DATA_REGION_ORIGIN__.
+#if defined (RAMSTART) && defined (RAMEND) && defined (HAVE_LDSCRIPT_PR29741)
     .weak __DATA_REGION_ORIGIN__
     .set  __DATA_REGION_ORIGIN__, (RAM_VMA) | (RAMSTART)
     .weak __DATA_REGION_LENGTH__

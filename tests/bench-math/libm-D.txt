@@ -1,0 +1,4 @@
+1
+1&nbsp;
+1<table>
+1<caption>libm benchmarks for AT90S8515 (avr2, no MUL)</caption>

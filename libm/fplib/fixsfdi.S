@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -64,7 +62,7 @@ ENTRY	__fixsfdi
      __fixunssfdi(0x1.fffffep+63)  --> 0xffffff0000000000LL
      __fixunssfdi(0x1.000000p+64)  --> 0LL
 
-   Note: Gcc+Glibc give the strange results for negative x in such convers.
+   Note: Gcc+Glibc give the strange results for negative x in such converts.
  */
 ENTRY	__fixunssfdi
 	ldi	rAE, 63
@@ -107,7 +105,7 @@ ENTRY	__fixunssfdi
 	subi	rAE, 8		; rAE= -8..+55
 	brpl	3f
   ; fabs(A) >= 1.0 * 2**56  Shift to left is needed.
-	/* Shift to 8 is not optimized specialy as an exotic.	*/
+	/* Shift to 8 is not optimized specially as an exotic.	*/
 2:	lsl	rA0
 	rol	rA1
 	rol	rA2
@@ -147,7 +145,7 @@ ENTRY	__fixunssfdi
 	brne	6b
 .L_sign:
 	brtc	7f
-	XCALL	_U(__fp_negdi)
+	XCALL	_U(__negdi2)
 7:	clc
 	ret
 

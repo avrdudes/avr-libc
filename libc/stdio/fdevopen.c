@@ -24,10 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
 #include <stdio.h>
@@ -71,8 +68,8 @@
    and the first one opened with write intent is assigned to both,
    \c stdout and \c stderr.
 
-   fdevopen() uses calloc() (und thus malloc()) in order to allocate
-   the storage for the new stream.
+   fdevopen() uses calloc() (und thus \ref a_malloc "malloc()")
+   in order to allocate the storage for the new stream.
 
    \note If the macro __STDIO_FDEVOPEN_COMPAT_12 is declared before
    including <stdio.h>, a function prototype for fdevopen() will be

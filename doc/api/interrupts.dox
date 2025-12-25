@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /** \defgroup avr_interrupts <avr/interrupt.h>: Interrupts
 
 \note This discussion of interrupts was originally taken from Rich Neswold's
@@ -52,14 +50,22 @@ status register, get saved and restored.
 
 These details seem to make interrupt routines a little messy, but all these
 details are handled by the Interrupt API. An interrupt routine is defined with
-ISR(). This macro register and mark
+ISR() or ISR_N(). These macros register and mark
 the routine as an interrupt handler for the specified peripheral. The
 following is an example definition of a handler for the ADC interrupt.
 
 \code
 #include <avr/interrupt.h>
 
-ISR(ADC_vect)
+ISR (ADC_vect)
+{
+    // user code here
+}
+
+// Alternative using the ISR_N macro with avr-gcc v15
+
+ISR_N (ADC_vect_num)
+[static] void my_adc_handler (void)
 {
     // user code here
 }
@@ -82,7 +88,7 @@ not included.
 \code
 #include <avr/interrupt.h>
 
-ISR(BADISR_vect)
+ISR (BADISR_vect)
 {
     // user code here
 }
@@ -111,7 +117,15 @@ handler by declaring the handler the following way:
 
 \anchor attr_interrupt
 \code
-ISR(XXX_vect, ISR_NOBLOCK)
+ISR (XXX_vect, ISR_NOBLOCK)
+{
+  ...
+}
+
+// or
+
+ISR_N (XXX_vect_num, ISR_NOBLOCK)
+[static] void my_XXX_handler (void)
 {
   ...
 }
@@ -131,21 +145,40 @@ it happened.  Sharing interrupt vector code can be accomplished using
 the #ISR_ALIASOF() attribute to the #ISR macro:
 
 \code
-ISR(PCINT0_vect)
+ISR (PCINT0_vect)
 {
-  ...
   // Code to handle the event.
 }
 
-ISR(PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
-\endcode
+ISR (PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
 
 \note There is no body to the aliased ISR.
+
+// Alternative using ISR_N
+
+ISR_N (PCINT0_vect_num)
+ISR_N (PCINT1_vect_num)
+[static] void my_pcint_handler (void)
+{
+  // Code to handle the event.
+}
+
+// or
+
+ISR (PCINT0_vect,
+     [attributes]
+     ISR_N (PCINT1_vect_num)
+     ISR_N (PCINT2_vect_num))
+{
+  // Code to handle the event.
+}
+\endcode
 
 Note that the ISR_ALIASOF() feature requires GCC 4.2 or above (or a
 patched version of GCC 4.1.x).  See the documentation of the
 ISR_ALIAS() macro for an implementation which is less elegant but
 could be applied to all compiler versions.
+The ISR_N() macro requires GCC v15 or higher.
 
 <h3>Empty interrupt service routines</h3>
 
@@ -178,8 +211,8 @@ an example of how to implement it that way.
 
 Another solution is to still implement the ISR in C language but take
 over the compiler's job of generating the prologue and epilogue.  This
-can be done using the #ISR_NAKED attribute to the ISR() macro.  Note
-that the compiler does not generate \e anything as prologue or
+can be done using the #ISR_NAKED attribute to the ISR() and ISR_N() macros.
+Note that the compiler does not generate \e anything as prologue or
 epilogue, so the final reti() must be provided by the actual
 implementation.  SREG must be manually saved if the ISR code modifies
 it, and the compiler-implied assumption of <tt>\ref zero_reg "__zero_reg__"</tt>
@@ -191,7 +224,16 @@ instruction).
 like with #ISR_NAKED.
 
 \code
-ISR(TIMER1_OVF_vect,  ISR_NAKED)
+ISR (TIMER1_OVF_vect, ISR_NAKED)
+{
+  PORTB |= _BV(0);  // results in SBI which does not affect SREG
+  reti();
+}
+
+// or
+
+ISR_N (TIMER1_OVF_vect_num, ISR_NAKED)
+[static] void my_ovf_handler (void)
 {
   PORTB |= _BV(0);  // results in SBI which does not affect SREG
   reti();
@@ -202,6 +244,10 @@ ISR(TIMER1_OVF_vect,  ISR_NAKED)
 
 The interrupt is chosen by supplying one of the vector names in the
 following table.
+Apart from the <tt><em>NAME</em>_vect</tt> macros listed below, for each
+such ISR name there is also a macro <tt><em>NAME</em>_vect_num</tt>
+defined which resolves to the IRQ number and that can be used in the
+#ISR_N macro.
 
 There are currently two different styles present for naming the
 vectors.
@@ -213,7 +259,7 @@ vector name as described in the datasheet of the respective device
 (and in the hardware manufacturer's XML/ATDF files),
 with spaces replaced by an underscore
 and other non-alphanumeric characters dropped.  Using the suffix
-\c _vect is intented to improve portability to other C compilers
+\c _vect is intended to improve portability to other C compilers
 available for the AVR that use a similar naming convention.
 
 - A \b deprecated form that uses names starting with \c SIG_, followed by
@@ -231,14 +277,9 @@ that, while possibly being usable as an interrupt function, is not
 actually wired into the interrupt vector table.  The compiler will
 generate a warning if it detects a suspiciously looking name of an
 ISR() function (i.e. one that after macro replacement does not
-start with <tt>"__vector_"</tt>).
+start with <tt>"__vector"</tt>).
 
-Apart from the <tt><em>NAME</em>_vect</tt> macros listed below, for each
-such ISR name there is also a macro <tt><em>NAME</em>_vect_num</tt>
-defined which resolves to the IRQ number.  This is the index into the
-vector table, where indices start at index 0 (the reset vector).
-
-See also \ref faq_isr_names in the FAQ for how find all the IRQ names for
-a specific device.
+See also \ref faq_isr_names in the FAQ for how find all the
+vector names for a specific device.
 
 */

@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/io90pwmx.h - definitions for AT90PWM2(B) and AT90PWM3(B) */
 
 #ifndef _AVR_IO90PWMX_H_
@@ -1413,5 +1411,14 @@
 #define SLEEP_MODE_PWR_DOWN     _BV(SM1)
 #define SLEEP_MODE_STANDBY      (_BV(SM1) | _BV(SM2))
 
+#if defined (__AVR_AT90PWM2__)
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x81
+#elif defined (__AVR_AT90PWM3__)
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x81
+#endif
 
 #endif /* _AVR_IO90PWMX_H_ */

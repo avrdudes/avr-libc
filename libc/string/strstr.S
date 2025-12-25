@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
    strstr.S
    Search string contained in a string
@@ -37,9 +35,7 @@
      Philip Soeberg <philip@soeberg.net>
 */
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strstr_P) _U(strstr)
 
@@ -52,10 +48,7 @@ TINY_WEAK_ALIAS _U(strstr_P) _U(strstr)
 #define	beg2   r21	/* begin of s2: s2[0]	*/
 #define chr2   __tmp_reg__
 
-ASSEMBLY_CLIB_SECTION
-.global _U(strstr)
-.type _U(strstr), @function
-_U(strstr):
+ENTRY _U(strstr)
 
 	X_movw	ZL, s2_lo
 	ld	beg2, Z+
@@ -93,6 +86,4 @@ _U(strstr):
 .L_ret:
 	ret
 
-.size _U(strstr), . - _U(strstr)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC

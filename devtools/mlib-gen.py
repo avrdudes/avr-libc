@@ -6,13 +6,13 @@ import re, argparse
 
 MMCU_DEFAULT = "avr2"
 
-parser = argparse.ArgumentParser('Generate multilib tree for avr-libc')
+parser = argparse.ArgumentParser('Generate multilib tree for AVR-LibC')
 
 parser.add_argument("-devices", dest="devices", required=True,
-                    help="Text file with devices supported by avr-libc")
+                    help="Text file with devices supported by AVR-LibC")
 
 parser.add_argument("-cores", dest="cores", required=True,
-                    help="Text file with cores supported by avr-libc")
+                    help="Text file with cores supported by AVR-LibC")
 
 args = parser.parse_args()
 
@@ -30,7 +30,7 @@ def leave(msg):
 # double variants provided avr-gcc supports -m[long-]double=32/64.
 #    The @-encoded options right of ; are not used by this script except for
 # removing potential multilib options from gen-avr-lib-tree.sh.  The very
-# multilib options are determinded by configure.ac's CHECK_MULTI_VARIANT
+# multilib options are determined by configure.ac's CHECK_MULTI_VARIANT
 # (by gcc -print-multi-lib for the C libraries) and CHECK_AVR_DEVICE
 # (by gcc -print-multi-directory -mmcu=<device> for the devices).
 
@@ -44,6 +44,7 @@ avr4;@mmcu=avr4
 avr5;@mmcu=avr5
 avr51;@mmcu=avr51
 avr6;@mmcu=avr6
+avr7;@mmcu=avr7
 avrxmega2;@mmcu=avrxmega2
 avrxmega3;@mmcu=avrxmega3
 avrxmega4;@mmcu=avrxmega4
@@ -220,7 +221,7 @@ class Makefile (object):
         path = "/".join(dirs) + "/Makefile"
         clazz.files += [ Makefile(path) ]
 
-        # Try to mkdir the directory in in which Makefile.am will live.
+        # Try to mkdir the directory in which Makefile.am will live.
         path = os.path.join(*dirs)
         try:
             os.mkdir (path)
@@ -233,7 +234,7 @@ class Makefile (object):
 
 def to_ident(var):
     """Turn a string (usually a (sub)folder) into some canonical
-       representation that can be used as (part of) an indentifier
+       representation that can be used as (part of) an identifier
        or a file name."""
 
     # This are the same replacements that are performed by CHECK_AVR_DEVICE
@@ -352,7 +353,7 @@ def makedir_avr_devices_device(device):
 
     replacements = {
         "<<dev>>" : device.mcu,
-        "<<crt>>" : device.crt_o,
+        "<<crt>>" : device.crt_o.replace (".o", ""),
         # Remove any multilib options.  In order to pick the multilib "base",
         # option -mmcu=<device> is enough.  In the case where fancy variants
         # like "double64" are supported, the assumption is that no object for
@@ -425,10 +426,12 @@ def make_lib_tree():
         makedir_avr_devices_device(d)
 
 # devices.m4 will be lines of:
-check_avr_device = "CHECK_AVR_DEVICE(%s)\n"
+devices_m4 = ("CHECK_AVR_DEVICE(%s)\n",
+              "CHECK_AVR_CVT(%s)\n",
+              "CHECK_AVR_RESERVED(%s)\n")
 
 # multilib.m4 will be lines of:
-check_multi_variant = "CHECK_MULTI_VARIANT([%s], [%s])\n"
+multilib_m4 = ("CHECK_MULTI_VARIANT([%s], [%s])\n",)
 
 # files.m4 will be lines of:
 ac_config_files = "AC_CONFIG_FILES([%s])\n"
@@ -439,23 +442,39 @@ ac_subst_devlist = "AC_SUBST(DEVLIST_%s)\n"
 def make_m4():
     """Auto-generated files to be included by configure.ac."""
 
-    Info ("Writing devices.m4...")
-    with open ("devices.m4", "w") as f:
-        for device in devices:
-            f.write (check_avr_device % device.mcu)
+    # Place the auto-generated m4 files in m4-gen
+    m4_gen = "m4-gen"
 
-    Info ("Writing devlist.m4...")
-    with open ("devlist.m4", "w") as f:
+    Info ("MakeDir %s..." % m4_gen)
+    try:
+        os.mkdir (m4_gen)
+    except OSError:
+        # If we come here, the assumption is that m4_gen already existed.
+        pass
+
+    m4_name = os.path.join (m4_gen, "devices.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
+        for line in devices_m4:
+            for device in devices:
+                f.write (line % device.mcu)
+
+    m4_name = os.path.join (m4_gen, "devlist.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
         for mlib in mlibs:
             f.write (ac_subst_devlist % mlib.ident)
 
-    Info ("Writing multilib.m4...")
-    with open ("multilib.m4", "w") as f:
-        for mlib in mlibs:
-            f.write (check_multi_variant % (mlib.mdir, mlib.ident))
+    m4_name = os.path.join (m4_gen, "multilib.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
+        for line in multilib_m4:
+            for mlib in mlibs:
+                f.write (line % (mlib.mdir, mlib.ident))
 
-    Info ("Writing files.m4...")
-    with open ("files.m4", "w") as f:
+    m4_name = os.path.join (m4_gen, "files.m4")
+    Info ("Writing %s..." % m4_name)
+    with open (m4_name, "w") as f:
         for mk in Makefile.files:
             f.write (ac_config_files % mk)
 

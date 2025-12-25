@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of atan2() function. 500 random cases.
-   $Id$
- */
+/* Test of atan2() function. 500 random cases. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -559,17 +556,18 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u y, x, z;
     unsigned long v1, z1, r;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	y.lo = pgm_read_dword (& t[i].y);
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = atan2 (y.fl, x.fl);
+	v.fl = atan2f (y.fl, x.fl);
 	
 	v1 = (v.lo < 0) ? (unsigned long)~(v.lo) : v.lo + 0x80000000;
 	z1 = (z.lo < 0) ? (unsigned long)~(z.lo) : z.lo + 0x80000000;

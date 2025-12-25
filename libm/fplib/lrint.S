@@ -26,8 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
@@ -84,7 +82,7 @@ ENTRY_FLOAT lrintf lrint lrintl
 2:	cpi	rA3, -7
 	brge	3f
   ; Quick shift to right by 8. The trick with rAE is needed to save info
-  ; about the lowerest bits. This will be used to compare fraction with
+  ; about the lowest bits. This will be used to compare fraction with
   ; 0.5 value.
 	cpse	rAE, r1
 	ldi	rAE, 1
@@ -101,7 +99,7 @@ ENTRY_FLOAT lrintf lrint lrintl
 	ror	rA0
 	ror	rAE
 	brcc	4f
-	ori	rAE, 1		; save flag that lowerst bits are not all 0
+	ori	rAE, 1		; save flag that lowest bits are not all 0
 4:	inc	rA3
 	brne	3b
   ; round
@@ -118,13 +116,7 @@ ENTRY_FLOAT lrintf lrint lrintl
   ; restore the sign and return
 .L_sign:
 	brtc	6f
-	com	rA3
-	com	rA2
-	com	rA1
-	neg	rA0
-	sbci	rA1, -1
-	sbci	rA2, -1
-	sbci	rA3, -1
+	XJMP	_U(__negsi2)
 6:	ret
 
 .L_err:	set			; force return 0x80000000

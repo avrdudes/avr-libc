@@ -1,5 +1,3 @@
-#ifndef __DOXYGEN__
-
 #include <avr/io.h>
 
 /* Only compile if the device has the NVMCTRL_CTRLB.FLMAP bit-field.
@@ -97,5 +95,3 @@ __flmap_noinit_start = .
 ENDFUNC
 
 #endif  /* Have NVMCTRL_CTRLB.FLMAP */
-
-#endif  /* !__DOXYGEN__ */

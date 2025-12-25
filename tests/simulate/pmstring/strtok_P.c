@@ -24,11 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of strtok_P().
-   $Id$	*/
+/* Test of strtok_P(). */
 
 #include <stdlib.h>
 #include <string.h>
@@ -85,7 +83,7 @@ Check (int line, const char *s, const char *delim, int rslt, const char *token)
 
 /* Args:
      s     - string to parse (is saved in static buffer)
-     delim - delimeter list
+     delim - delimiter list
      rslt  - expected return value: (rslt >= 0 ? s+rslt : NULL)
      token - expected pointed string (if rslt >= 0)
  */
@@ -105,7 +103,7 @@ int main ()
 
     CHECK ("", "123", -1, "");
 
-    /* Empty delimeter list.	*/
+    /* Empty delimiter list.	*/
 
     CHECK ("A", "", 0, "A");
     CHECK0 ("", -1, "");
@@ -116,7 +114,7 @@ int main ()
     CHECK ("dcba", "", 0, "dcba");
     CHECK0 ("", -1, "");
 
-    /* No delimeter symbols are founded.	*/
+    /* No delimiter symbols are found.	*/
 
     CHECK ("\t", " ", 0, "\t");
     CHECK0 (" ", -1, "");
@@ -124,7 +122,7 @@ int main ()
     CHECK ("THE QUICK BROWN FOX", "thequickbrownfox", 0, "THE QUICK BROWN FOX");
     CHECK0 ("thequickbrownfox", -1, "");
 
-    /* Delimeter list is 1 byte long.	*/
+    /* Delimiter list is 1 byte long.	*/
 
     CHECK ("1", ".", 0, "1");
     CHECK0 (".", -1, "");
@@ -134,7 +132,7 @@ int main ()
     CHECK0 (",", 5, "DEF");
     CHECK0 (",", -1, "");
 
-    /* Delimeter list is 2 bytes long.	*/
+    /* Delimiter list is 2 bytes long.	*/
 
     CHECK ("AB", "ab", 0, "AB");
     CHECK0 ("ab", -1, "");
@@ -144,7 +142,7 @@ int main ()
     CHECK0 ("+-", 7, "6");
     CHECK0 ("+-", -1, "");
 
-    /* Variable delimeter list.	*/
+    /* Variable delimiter list.	*/
 
     CHECK ("A:B*C:D", ":", 0, "A");
     CHECK0 ("*", 2, "B");

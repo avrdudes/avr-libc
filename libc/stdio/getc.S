@@ -24,21 +24,14 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
+  POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#include "macros.inc"
+#include "asmdef.h"
 
 /*
 int getc(FILE *stream);
 */
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(getc)
-	.type	_U(getc), @function
-_U(getc):
+ENTRY _U(getc)
 	XJMP	fgetc
-.L_getc_end:
-	.size	_U(getc), .L_getc_end - _U(getc)
+ENDFUNC

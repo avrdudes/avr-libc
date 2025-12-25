@@ -27,14 +27,12 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* <non_standart> __fp_split3 (float A, float B);
+/* <non_standard> __fp_split3 (float A, float B);
      It splits two float numbers.
 
    Return:
@@ -61,7 +59,7 @@ ENTRY   __fp_split3
 	breq	5f
 1:	ror	rB2		; restore rB2 and (possible) hidden bit
 
-/* <non_standart> __fp_splitA (float A);
+/* <non_standard> __fp_splitA (float A);
      It splits an A float number.
 
    Return:

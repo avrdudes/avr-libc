@@ -30,8 +30,6 @@
 
 /* avr/iom164.h - definitions for ATmega164 */
 
-/* $Id$ */
-
 #ifndef _AVR_IOM164_H_
 #define _AVR_IOM164_H_ 1
 
@@ -89,7 +87,11 @@
 /* Signature (ATmega164P) */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
-#define SIGNATURE_2 0x0A 
+#if defined(__AVR_ATmega164A__)
+#define SIGNATURE_2 0x0F
+#else
+#define SIGNATURE_2 0x0A
+#endif
 
 
 #define SLEEP_MODE_IDLE (0x00<<1)

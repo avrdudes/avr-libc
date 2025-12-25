@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iom1284p.h - definitions for ATmega1284P. */
 
 /* This file should only be included from <avr/io.h>, never directly. */

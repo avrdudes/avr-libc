@@ -27,9 +27,7 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-/* <non_standart> __divsf3x (float A, float B);
+/* <non_standard> __divsf3x (float A, float B);
    Output:
      T
      rA3
@@ -54,7 +52,12 @@ FUNCTION __divsf3x
 .L_inf:
 	XJMP	_U(__fp_inf)
 1:
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rB3		; 0/finite --> 0,  0/0 --> NaN
+	breq	.L_nan
+#else
 	cpse	rB3, r1		; 0/finite --> 0,  0/0 --> NaN
+#endif
 .L_zr:	XJMP	_U(__fp_szero)
 .L_nan:	XJMP	_U(__fp_nan)
 

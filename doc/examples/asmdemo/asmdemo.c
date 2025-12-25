@@ -14,7 +14,7 @@
  * neutral point).  Depending on the value of the decoded incoming
  * PWM, an outgoing PWM is controlled between 0 and 100 %.
  *
- * The project is intented to be run on an ATtiny13 that has only one
+ * The project is intended to be run on an ATtiny13 that has only one
  * timer channel (timer 0), so both the incoming signal discrimination
  * as well as the outgoing PWM need to run on the same timer.
  *
@@ -22,8 +22,6 @@
  * ATtiny25/45/85, where timer 1 can be used to evaluate the incoming
  * PWM signal, and timer 0 to generate the outgoing PWM.  In that
  * case, no additional assembly code is needed.
- *
- * $Id$
  */
 
 /*
@@ -65,9 +63,9 @@ ioinit(void)
   /* Maximal PWM pulse width is 2120 us */
 # define MAX_PWM_VAL ((2120ul * F_CPU) / 1000000ul)
 
-#elif defined(__AVR_ATtiny25__) ||\
-	defined(__AVR_ATtiny45__) ||\
-	defined(__AVR_ATtiny85__)
+#elif defined(__AVR_ATtiny25__) \
+      || defined(__AVR_ATtiny45__) \
+      || defined(__AVR_ATtiny85__)
 
 # define F_CPU 1000000ul
   /*
@@ -93,9 +91,10 @@ ioinit(void)
   sei();
 }
 
-#if defined(__AVR_ATtiny25__) ||\
-	defined(__AVR_ATtiny45__) ||\
-	defined(__AVR_ATtiny85__)
+#if defined(__AVR_ATtiny25__) \
+    || defined(__AVR_ATtiny45__) \
+    || defined(__AVR_ATtiny85__)
+
 ISR(PCINT0_vect)
 {
   uint8_t tcnt1;
@@ -121,7 +120,6 @@ ISR(PCINT0_vect)
 int
 main(void)
 {
-
   ioinit();
 
   for (;;)

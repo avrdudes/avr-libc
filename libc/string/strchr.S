@@ -26,11 +26,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strchr_P) _U(strchr)
 
@@ -42,10 +38,7 @@ TINY_WEAK_ALIAS _U(strchr_P) _U(strchr)
 #define ret_hi r25
 #define ret_lo r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strchr)
-	.type	_U(strchr), @function
-_U(strchr):
+ENTRY _U(strchr)
 	X_movw	ZL, src_lo
 .L_strchr_loop:
 	ld	ret_lo, Z+
@@ -65,7 +58,4 @@ _U(strchr):
 #endif /*!__AVR_TINY__*/
 	X_movw	ret_lo, ZL
 	ret
-.L_strchr_end:
-	.size	_U(strchr), .L_strchr_end - _U(strchr)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC

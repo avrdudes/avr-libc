@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /** \defgroup largedemo A more sophisticated project
     \ingroup demos
 
@@ -45,95 +43,31 @@ hardware concepts of an AVR microcontroller.
 
 \section largedemo_hw Hardware setup
 
-The demo is set up in a way so it can be run on the ATmega16 that
-ships with the STK500 development kit.  The only external part needed
-is a potentiometer attached to the ADC.  It is connected to a 10-pin
-ribbon cable for port A, both ends of the potentiometer to pins 9
-(GND) and 10 (VCC), and the wiper to pin 1 (port A0).
-A bypass capacitor from pin 1 to pin 9 (like 47 nF) is recommendable.
+The demo is again arranged around an Arduino Nano compatible board.
+This time, the hardware PWM of the ATmega328P is used, so a LED (with
+resistor) needs to be attached to Arduino D8 (= PB1 = OC1A on the
+ATmega328P).  Further, a potentiometer needs to be connected to ADC0
+(Arduino A0), with GND and +5V at the outer terminals.  Finally, three
+push buttons are connected to Arduino D2, D3, and D4, respectively (=
+PD2, PD3, PD4).
 
-\image html largedemo-setup.jpg "Setup of the STK500"
-\image latex largedemo-setup.eps "Setup of the STK500" width=12cm
-
-The coloured patch cables are used to provide various
-interconnections.  As there are only four of them in the STK500, there
-are two options to connect them for this demo.  The second option for
-the yellow-green cable is shown in parenthesis in the table.
-Alternatively, the "squid" cable from the JTAG ICE kit can be used if
-available.
-
-<table>
- <tr><td><b>Port</b></td><td><b>Header</b></td><td><b>Color</b></td><td><b>Function</b></td><td><b>Connect to</b></td></tr>
- <tr><td>D0</td> <td>1</td> <td>brown</td>  <td>RxD</td>           <td>RXD of the RS-232 header</td></tr>
- <tr><td>D1</td> <td>2</td> <td>grey</td>   <td>TxD</td>           <td>TXD of the RS-232 header</td></tr>
- <tr><td>D2</td> <td>3</td> <td>black</td>  <td>button "down"</td> <td>SW0 (pin 1 switches header)</td></tr>
- <tr><td>D3</td> <td>4</td> <td>red</td>    <td>button "up"</td>   <td>SW1 (pin 2 switches header)</td></tr>
- <tr><td>D4</td> <td>5</td> <td>green</td>  <td>button "ADC"</td>  <td>SW2 (pin 3 switches header)</td></tr>
- <tr><td>D5</td> <td>6</td> <td>blue</td>   <td>LED</td>           <td>LED0 (pin 1 LEDs header)</td></tr>
- <tr><td>D6</td> <td>7</td> <td>(green)</td><td>clock out</td>     <td>LED1 (pin 2 LEDs header)</td></tr>
- <tr><td>D7</td> <td>8</td> <td>white</td>  <td>1-second flash</td><td>LED2 (pin 3 LEDs header)</td></tr>
- <tr><td>GND</td><td>9</td> <td></td>   <td>unused</td></tr>
- <tr><td>VCC</td><td>10</td><td></td> <td>unused</td></tr>
-</table>
-
-\image html largedemo-wiring.jpg "Wiring of the STK500"
-\image latex largedemo-wiring.eps "Wiring of the STK500" width=12cm
-
-The following picture shows the alternate wiring where LED1 is
-connected but SW2 is not:
-
-\image html largedemo-wiring2.jpg "Wiring option #2 of the STK500"
-\image latex largedemo-wiring2.eps "Wiring option #2 of the STK500" width=12cm
-
-As an alternative, this demo can also be run on the popular ATmega8
-controller, or its successor ATmega88 as well as the ATmega48 and
-ATmega168 variants of the latter.  These controllers do not have a
-port named "A", so their ADC inputs are located on port C instead,
-thus the potentiometer needs to be attached to port C.  Likewise, the
-OC1A output is not on port D pin 5 but on port B pin 1 (PB1).  Thus,
-the above cabling scheme needs to be changed so that PB1 connects to
-the LED0 pin.  (PD6 remains unconnected.)  When using the STK500, use
-one of the jumper cables for this connection.  All other port D pins
-should be connected the same way as described for the ATmega16 above.
-
-When not using an STK500 starter kit, attach the LEDs through some
-resistor to Vcc (low-active LEDs), and attach pushbuttons from the
-respective input pins to GND.  The internal pull-up resistors are
-enabled for the pushbutton pins, so no external resistors are needed.
-
-Finally, the demo has been ported to the ATtiny2313 as well.  As this
-AVR does not offer an ADC, everything related to handling the ADC is
-disabled in the code for that MCU type.  Also, port D of this
-controller type only features 6 pins, so the 1-second flash LED had to
-be moved from PD6 to PD4.  (PD4 is used as the ADC control button on
-the other MCU types, but that is not needed here.)  OC1A is located at
-PB3 on this device.
-
-The \c MCU_TARGET macro in the Makefile needs to be adjusted
-appropriately for the alternative controller types.
-
-The flash ROM and RAM consumption of this demo are way below the
-resources of even an ATmega48, and still well within the capabilities
-of an ATtiny2313.
-The major advantage of experimenting
-with the ATmega16 (in addition that it ships together with an STK500
-anyway) is that it can be debugged online via JTAG.
-Likewise, the ATmega48/88/168 and ATtiny2313 devices can be debugged
-through debugWire, using the Atmel JTAG ICE mkII or the low-cost
-AVR Dragon.
+\image html largedemo-setup.jpg "Setup of the Arduino Nano"
+\image latex largedemo-setup.jpg "Setup of the Arduino Nano" width=12cm
 
 Note that in the explanation below, all port/pin names are applicable
-to the ATmega16 setup.
+to the ATmega328P setup.
 
 \section largedemo_overview Functional overview
 
-PD6 will be toggled with each internal clock tick (approx. 10
-ms).  PD7 will flash once per second.
+PD6 (Arduino D6) will be toggled with each internal clock tick (approx. 10
+ms).  PD7 (Arduino D7) will flash (short low pulse) once per second.
 
 PD0 and PD1 are configured as UART IO, and can be used to connect the
 demo kit to a PC (9600 Bd, 8N1 frame format).  The demo application
 talks to the serial port, and it can be controlled from the serial
 port.
+On an Arduino Nano compatible board, this serial connection is routed
+to a USB-to-serial interface, so a PC can communicate through USB.
 
 PD2 through PD4 are configured as inputs, and control the
 application unless control has been taken over by the serial
@@ -143,8 +77,10 @@ shorting PD3 to GND will increase it.
 While PD4 is shorted to GND, one ADC conversion for channel 0 (ADC
 input is on PA0) will be triggered each internal clock tick, and
 the resulting value will be used as the PWM value.  So the
-brightness of the LED follows the analog input value on PC0.  VAREF
-on the STK500 should be set to the same value as VCC.
+brightness of the LED follows the analog input value on PC0.
+On the Arduino Nano, the ADC uses VCC internally as reference;
+all other setups require the reference voltage to be attached to
+the AREF pin.
 
 When running in serial control mode, the function of the
 watchdog timer can be demonstrated by typing an `r'.  This will
@@ -158,7 +94,7 @@ about 3 seconds of idle time after the last change.  If that EEPROM
 cell contains a reasonable (i. e. non-erased) value at startup, it is
 taken as the initial value for the PWM.  This virtually preserves the
 last value across power cycles.  By not updating the EEPROM
-immmediately but only after a timeout, EEPROM wear is reduced
+immediately but only after a timeout, EEPROM wear is reduced
 considerably compared to immediately writing the value at each change.
 
 \section largedemo_code A code walkthrough
@@ -177,15 +113,20 @@ connected to.  This provides some kind of mini-HAL (hardware
 abstraction layer) so should some of the connections be changed, they
 don't need to be changed inside the code but only on top.  Note that
 the location of the PWM output itself is mandated by the hardware, so
-it cannot be easily changed.  As the ATmega48/88/168 controllers
+it cannot be easily changed.  As the ATmega48/88/168/328P controllers
 belong to a more recent generation of AVRs, a number of register and
 bit names have been changed there, so they are mapped back to their
 ATmega8/16 equivalents to keep the actual program code portable.
 
 The name \c F_CPU is the conventional name to describe the CPU clock
-frequency of the controller.  This demo project just uses the internal
-calibrated 1 MHz RC oscillator that is enabled by default.  Note that
-when using the <tt>&lt;util/delay.h&gt;</tt> functions, \c F_CPU needs
+frequency of the controller.  This demo project just uses a 1 MHz
+CPU clock.  On many AVR devices, this is the default startup frequency
+from the internal RC oscillator.  On the Arduino Nano, the MCU is
+clocked by an external 16 MHz crystal though.  Therefore, during
+device initialization, a 1:16 prescaler is configured at startup so
+the remaining code could remain the same.
+Note that
+when using the <tt>&lt;util/delay.h&gt;</tt> functions, \c #F_CPU needs
 to be defined before including that file.
 
 The remaining macros have their own comments in the source code.  The
@@ -213,7 +154,7 @@ The variable \c ee_pwm is not a variable in the classical C sense that
 could be used as an lvalue or within an expression to obtain its
 value.  Instead, the
 
-\code __attribute__((section(".eeprom"))) \endcode
+\code uint16_t ee_pwm EEMEM ... \endcode
 
 marks it as belonging to the \ref sec_dot_eeprom "EEPROM section".
 This section is merely used as a placeholder so the compiler can
@@ -249,31 +190,57 @@ this application).
 
 \subsection largedemo_code_p4 Part 4: Auxiliary functions
 
-The function \c handle_mcucsr() uses two \c __attribute__ declarators
-to achieve specific goals.  First, it will instruct the compiler to
+\subsubsection largedemo_handle_mcucsr handle_mcucsr()
+
+The function \c handle_mcucsr() uses \c __attribute__ declarators
+to achieve specific goals:
+
+<dl>
+<dt><tt>section(".init3")</tt>
+<dd>
+First, it will instruct the compiler to
 place the generated code into the \ref sec_dot_init ".init3" section
 of the output.  Thus, it will become part of the application
 initialization sequence.  This is done in order to fetch (and clear)
 the reason of the last hardware reset from \c MCUCSR as early as
-possible.  There is a short period of time where the next reset could
-already trigger before the current reason has been evaluated.  This
-also explains why the variable \c mcucsr that mirrors the register's
-value needs to be placed into the .noinit section, because otherwise
-the default initialization (which happens after .init3) would blank
-the value again.
-
+possible.
+<dt><tt>naked</tt>
+<dd>
 As the initialization code is not called using CALL/RET instructions
 but rather concatenated together, the compiler needs to be instructed
 to omit the entire function prologue and epilogue.  This is performed
 by the \e naked attribute.  So while syntactically, \c handle_mcucsr()
 is a function to the compiler, the compiler will just emit the
-instructions for it without setting up any stack frame, and not even a RET instruction
-at the end.
+instructions for it without setting up any stack frame,
+and not even a RET instruction at the end.
+
+Notice that this code is not strictly conforming to GCC requirements, which
+documents that \c naked functions should only contain inline asm statements.
+However, the code is simple enough so it doesn't require a stack frame
+as the project is compiled with optimizations turned on.
+
+<dt><tt>used</tt>
+<dd>
+Tell the compiler that handle_mcucsr() is used by the code,
+even though the function is never called. This keeps the compiler
+from optimizing out a seemingly unused function.
+</dl>
+
+There is a short period of time where the next reset could
+already trigger before the current reason has been evaluated.  This
+also explains why the variable \c mcucsr that mirrors the register's
+value needs to be placed into the .noinit section, because otherwise
+the default initialization (which happens after \c \.init3) would blank
+the value again.
+
+\subsubsection largedemo_ioinit ioinit()
 
 Function \c ioinit() centralizes all hardware setup.  The very last
-part of that function demonstrates the use of the EEPROM variable \c
-ee_pwm to obtain an EEPROM address that can in turn be applied as an
+part of that function demonstrates the use of the EEPROM variable
+\c ee_pwm to obtain an EEPROM address that can in turn be applied as an
 argument to \c eeprom_read_word().
+
+\subsubsection largedemo_output_functions UART Output
 
 The following functions handle UART character and string output.
 (UART input is handled by an ISR.)  There are two string output
@@ -283,6 +250,8 @@ functions translate a newline character into a carriage return/newline
 sequence, so a simple \c \\n can be used in the source
 code.
 
+\subsubsection largedemo_set_pwm set_pwm()
+
 The function \c set_pwm() propagates the new PWM value to the PWM,
 performing range checking.  When the value has been changed, the new
 percentage will be announced on the serial link.  The current value is
@@ -291,7 +260,7 @@ In order to allow for a simple calculation of a percentage value
 without requiring floating-point mathematics, the maximal value of the
 PWM is restricted to 1000 rather than 1023, so a simple division by 10
 can be used.  Due to the nature of the human eye, the difference in
-LED brightness between 1000 and 1023 is not noticable anyway.
+LED brightness between 1000 and 1023 is not noticeable anyway.
 
 \subsection largedemo_code_p5 Part 5: main()
 
@@ -334,14 +303,15 @@ Finally, the UART Rx interrupt will dispatch on the last character
 received from the UART.
 
 All the string literals that are used as informational messages within
-\c main() are placed in \ref avr_pgmspace "program memory" so no SRAM
-needs to be allocated for them.  This is done by using the PSTR macro,
-and passing the string to \c printstr_p().
+\c main() are placed in \ref avr_pgmspace "program memory" so
+\ref faq_flashstrings "no SRAM needs to be allocated" for them.
+This is done by using the #PSTR macro for the string argument
+of \c printstr_p().
 
 \section largedemo_src The source code
 
 \htmlonly
-Source file: <a href="../examples/largedemo/largedemo.c">largedemo.c</a>
+Source file: <a href="examples/largedemo/largedemo.c">largedemo.c</a>
 \endhtmlonly
 
 \latexonly

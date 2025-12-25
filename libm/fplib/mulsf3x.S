@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
  */
 
@@ -205,7 +203,7 @@ ENTRY   __mulsf3_pse			; post split entry
 
 #endif	/* not __AVR_ENHANCED__	*/
 
-  ; exponent -= 127	(Why not 126?  For compare conviniency.)
+  ; exponent -= 127	(Why not 126?  For compare convenience.)
 	subi	rA3, lo8(127)
 	sbci	rB3, hi8(127)
 	brmi	13f		; denormalization is needed

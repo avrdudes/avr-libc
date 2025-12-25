@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iom32u4.h - definitions for ATmega32U4. */
 
 /* This file should only be included from <avr/io.h>, never directly. */

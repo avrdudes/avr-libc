@@ -26,11 +26,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strncat_P) _U(strncat)
 
@@ -41,10 +37,7 @@ TINY_WEAK_ALIAS _U(strncat_P) _U(strncat)
 #define len_hi r21
 #define len_lo r20
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strncat)
-	.type	_U(strncat), @function
-_U(strncat):
+ENTRY _U(strncat)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 .L_strncat_skip:
@@ -66,7 +59,4 @@ _U(strncat):
 	st	X, __zero_reg__
 ; return dest (unchanged)
 	ret
-.L_strncat_end:
-	.size	_U(strncat), .L_strncat_end - _U(strncat)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC

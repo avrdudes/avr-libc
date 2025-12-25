@@ -1,0 +1,20 @@
+=CFLAGS =
+!MCU=atmega128
+1\page benchmarks
+1
+1\section bench_libm Math Functions from libm
+1
+1The following tables contain benchmark values for some
+1floating-point functions over the indicated range(s) of input values.
+1
+1Notice that the values for relative error and the Worst Case Execution Time
+1Cycles<sub>max</sub> are only <em>lower bounds</em>.
+1The best achievable accuracy for IEEE single with its 23 fractional bits in
+1the mantissa is
+1{{{log<sub>10</sub>(2<sup>-24</sup> &asymp; 6*10<sup>-8</sup>) &asymp; -7.22}}}.
+1
+1The poor performance of \c sinf, \c cosf and \c tanf occurs for values
+1that are close to the poles (if any) or close to the non-zero zeros.
+1
+1<table>
+1<caption>libm benchmarks for ATmega128 (avr51, with MUL)</caption>

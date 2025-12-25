@@ -1,0 +1,6 @@
+!Makefile
+
+*.dox
+*.out
+cargs.txt
+margs.txt

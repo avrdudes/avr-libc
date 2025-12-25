@@ -1,0 +1,36 @@
+fxlib_a_c_sources = \
+	cosuhk_deg.c \
+	sinuhk_deg.c \
+	sinpi2ur.c \
+	exp2k.c \
+	exp2uk.c \
+	exp2m1ur.c \
+	log21puhr.c \
+	log21pur.c
+
+fxlib_a_asm_sources = \
+	acosk.S \
+	asink.S \
+	asinuk.S \
+	atank.S \
+	atanuk.S \
+	atanur.S \
+	horner-ur.S \
+	lrdivi.S \
+	rdivi.S \
+	ulrdivi.S \
+	urdivi.S \
+	log2uhk.S \
+	log2uk.S \
+	sincospi2k.S \
+	sqrtuhk.S sqrthk.S \
+	sqrtuhr.S sqrthr.S \
+	sqrtuk.S  sqrtk.S \
+	sqrtulr.S sqrtlr.S \
+	sqrtur.S  sqrtr.S \
+	uktoa.S   ktoa.S \
+	urtoa.S   rtoa.S \
+	uhktoa.S  hktoa.S \
+	uhrtoa.S  hrtoa.S
+
+fxlib_a_extra_dist =

@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iox32a4.h - definitions for ATxmega32A4 */
 
 /* This file should only be included from <avr/io.h>, never directly. */
@@ -6676,8 +6674,8 @@ IO Module Instances. Mapped to memory.
 
 /* ========== Signature ========== */
 #define SIGNATURE_0 0x1E
-#define SIGNATURE_1 0x95
-#define SIGNATURE_2 0x41
+#define SIGNATURE_1 0x94
+#define SIGNATURE_2 0x45
 
 /* ========== Power Reduction Condition Definitions ========== */
 

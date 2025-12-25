@@ -30,24 +30,21 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define src_b3 r25	/* MSB, ignored */
 #define src_b2 r24
 #define src_b1 r23
 #define src_b0 r22
 
-#if !defined(__DOXYGEN__)
+ENTRY _U(strlen_PF)
 
-	.text
-	.global	_U(strlen_PF)
-	.type	_U(strlen_PF), @function
-
-_U(strlen_PF):
+#ifndef __AVR_HAVE_ELPM__
+	X_movw	src_b2, src_b0
+	XJMP	_U(strlen_P)
+#else /* Have ELPM */
 
 	LPM_R0_ZPLUS_INIT src_b2
 	X_movw	ZL, src_b0
@@ -67,11 +64,8 @@ _U(strlen_PF):
 	X_movw	src_b2, src_b0	; size_t is 16 bits
 	LPM_R0_ZPLUS_FINI
 	ret
+#endif /* Have ELPM */
 
-.L_strlen_PF_end:
-
-	.size	_U(strlen_PF), .L_strlen_PF_end - _U(strlen_PF)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

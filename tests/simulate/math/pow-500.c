@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of pow() function. 500 random cases.
-   $Id$
- */
+/* Test of pow() function. 500 random cases. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -561,7 +558,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, y, z;
     unsigned long v1, z1, r;
@@ -571,7 +568,7 @@ int main ()
 	x.lo = pgm_read_dword (& t[i].x);
 	y.lo = pgm_read_dword (& t[i].y);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = pow (x.fl, y.fl);
+	v.fl = powf (x.fl, y.fl);
 	
 	v1 = (v.lo < 0) ? (unsigned long)~(v.lo) : v.lo + 0x80000000;
 	z1 = (z.lo < 0) ? (unsigned long)~(z.lo) : z.lo + 0x80000000;

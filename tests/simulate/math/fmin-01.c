@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of fmin() function.
-   $Id$
- */
+/* Test of fmin() function. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -188,7 +185,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x,y,z;
     int i;
@@ -197,10 +194,10 @@ int main ()
 	y.lo = pgm_read_dword (& t[i].y);
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = fmin (x.fl, y.fl);
+	v.fl = fminf (x.fl, y.fl);
 	
 	if (   v.lo == z.lo
-	    || (isnan(v.fl) && isnan(z.fl))	)
+	    || (isnanf (v.fl) && isnanf (z.fl))	)
 	  continue;
 	x_exit (i+1);
     }

@@ -24,11 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of progmem types (this types are deprecated).
-   $Id$	*/
+/* Test of progmem types (this types are deprecated). */
 
 #if	__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 2)
 # pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -102,7 +100,7 @@ int main ()	{ return 0; }
      && sizeof (prefix##_uint64) == 8 * (nelems))
 
 
-/* With 64-bit values onle the little 4 bytes are checked.	*/
+/* With 64-bit values only the little 4 bytes are checked.	*/
 #define CHKVAL_SET(prefix, ch, uch, i8, u8, i16, u16, i32, u32, i64, u64) \
     (pgm_read_byte (& prefix##_char) == (ch)		\
      && pgm_read_byte (& prefix##_uchar) == (uch)	\

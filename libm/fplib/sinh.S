@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
@@ -92,12 +90,12 @@ ENTRY_FLOAT sinhf sinh sinhl
 	ret
 ENDFUNC
 
-	PGMX_SECTION(.sinh)
-.L_table:
+	PGMX_SECTION(fplib.sinh)
+OBJECT .L_table
 	.byte	2
 	.byte	     0x89,0x88,0x08,0x3c	; 1/120
 	.byte	0xab,0xaa,0xaa,0x2a,0x3e	; 1/6
 	.byte	0x00,0x00,0x00,0x80,0x3f	; 1
-	.end
+ENDOBJ .L_table
 
 #endif /* !defined(__AVR_TINY__) */

@@ -30,8 +30,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* iom169.h - definitions for ATmega169 */
 
 /* This should be up to date with data sheet version 2514J-AVR-12/03. */
@@ -1131,8 +1129,11 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
+#if defined(__AVR_ATmega169A__)
+#define SIGNATURE_2 0x11
+#else
 #define SIGNATURE_2 0x05
-
+#endif
 
 /* Deprecated items */
 #if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)

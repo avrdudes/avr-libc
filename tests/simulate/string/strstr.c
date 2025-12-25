@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$	*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 #ifndef __AVR__
 # include <stdio.h>
@@ -81,7 +78,7 @@ int main ()
     CHECK (".a", "a", 1);
     CHECK (".a.", "a", 1);
     CHECK ("ABCDEFGH", "H", 7);
-    
+
     /* 'needle' of 2 bytes long	*/
     CHECK ("", "12", -1);
     CHECK ("13", "12", -1);
@@ -90,21 +87,21 @@ int main ()
     CHECK ("123", "12", 0);
     CHECK ("012", "12", 1);
     CHECK ("01200", "12", 1);
-    
-    /* partially mathing	*/
+
+    /* partially matching	*/
     CHECK ("a_ab_abc_abcd_abcde", "abcdef", -1);
     CHECK ("a_ab_abc_abcd_abcde_abcdef", "abcdef", 20);
     CHECK ("aababcabcdabcde", "abcdef", -1);
     CHECK ("aababcabcdabcdeabcdef", "abcdef", 15);
-    
+
     /* repeated chars	*/
     CHECK ("abaabaaabaaaab", "aaaaab", -1);
     CHECK ("abaabaaabaaaabaaaaab", "aaaaab", 14);
-    
+
     /* A first match is returned.	*/
     CHECK ("_foo_foo", "foo", 1);
-    
-    /* Case is importent.	*/
+
+    /* Case is important.	*/
     CHECK ("A", "a", -1);
 
     return 0;

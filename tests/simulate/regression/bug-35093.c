@@ -24,15 +24,13 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* bug #35093: strlcat_P fails for some destinations
-   $Id$	*/
+/* bug #35093: strlcat_P fails for some destinations */
 
 #ifndef __AVR__
 
-/* Omit the test, as strlcat() is not a standart C function.	*/
+/* Omit the test, as strlcat() is not a standard C function.	*/
 int main ()	{ return 0; }
 
 #else

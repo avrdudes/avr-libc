@@ -24,11 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* bug #21955: pgm_read_xxxx() does not use enhanced LPM instruction
-   $Id$ */
+/* bug #21955: pgm_read_xxxx() does not use enhanced LPM instruction */
 
 #ifndef	__AVR__
 

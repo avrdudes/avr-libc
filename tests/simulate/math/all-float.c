@@ -24,18 +24,15 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of math function float aliases.
-   $Id$
- */
+/* Test of math function float aliases. */
 #include <math.h>
 #include <stdlib.h>
 
 #define CMP(fun) if ((void*) fun != (void*) fun##f) exit (__LINE__)
 
-int main ()
+int main (void)
 {
 #if defined(__AVR__) && __SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__
     volatile float x = 0.25, y, z;

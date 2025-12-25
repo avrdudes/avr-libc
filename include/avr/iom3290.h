@@ -31,8 +31,6 @@
 
 /* avr/iom3290.h - definitions for ATmega3290 and ATmega3290P.  */
 
-/* $Id$ */
-
 #ifndef _AVR_IOM3290_H_
 #define _AVR_IOM3290_H_ 1
 
@@ -1184,8 +1182,11 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x95
+#if defined (__AVR_ATmega3290P__)
+#define SIGNATURE_2 0x0C
+#else
 #define SIGNATURE_2 0x04
-
+#endif
 
 /* Deprecated items */
 #if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)

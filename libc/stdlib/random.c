@@ -27,8 +27,6 @@
  * SUCH DAMAGE.
  *
  * Posix rand_r function added May 1999 by Wes Peters <wes@softweyr.com>.
- *
- * $Id$
  */
 
 /*
@@ -89,4 +87,3 @@ srandom(unsigned long seed)
 {
 	next = seed;
 }
-

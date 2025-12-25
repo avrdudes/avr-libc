@@ -30,8 +30,6 @@
 
 /* avr/sfr_defs.h - macros for accessing AVR special function registers */
 
-/* $Id$ */
-
 #ifndef _AVR_SFR_DEFS_H_
 #define _AVR_SFR_DEFS_H_ 1
 
@@ -204,7 +202,7 @@
     \note The bit shift is performed by the compiler which then inserts the
     result into the code. Thus, there is no run-time overhead when using
     _BV(). */
-    
+
 #define _BV(bit) (1 << (bit))
 
 /**@}*/
@@ -227,7 +225,7 @@
 
     \code #include <avr/io.h>\endcode
 
-    Test whether bit \c bit in IO register \c sfr is set. 
+    Test whether bit \c bit in IO register \c sfr is set.
     This will return a 0 if the bit is clear, and non-zero
     if the bit is set. */
 
@@ -238,7 +236,7 @@
 
     \code #include <avr/io.h>\endcode
 
-    Test whether bit \c bit in IO register \c sfr is clear. 
+    Test whether bit \c bit in IO register \c sfr is clear.
     This will return non-zero if the bit is clear, and a 0
     if the bit is set. */
 

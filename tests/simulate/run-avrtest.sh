@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Copyright (c) 2007, Dmitry Xmelkov
 # All rights reserved.
@@ -28,16 +28,14 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# $Id$
-
-# Script for testing AVR-LibC fuctions, mainly, by simulating.
-# avrtest is needed. The script is tuned to run after 'make'
+# Script for testing AVR-LibC functions, mainly, by simulating.
+# AVRtest is needed. The script is tuned to run after 'make'
 # without any options, at this place.  Use
 #
 #     MCUS="..." ./run-avrtest.sh ...
 #
-# in order to override the predefined list of mcus.
-# Notice that this requires an  exit-<mcu>.o module  for each of the mcus.
+# in order to override the predefined list of MCUs.
+# Notice that this requires an  exit-<mcu>.o module  for each of the MCUs.
 # When it is not present, you can generate it with, say
 #
 #    (cd $AVRTEST_HOME; make exit-<mcu>.o)
@@ -50,19 +48,24 @@
 # In order to replace the CFLAGS below entirely, use
 #
 #     CFLAGS="..." ./run-avrtest.sh ...
+# Use
+#
+#     EXTRA_AFLAGS="..." ./run-avrtest.sh ...
+#
+# in order to pass additional flags to AVRtest.
 
 
 ##########################################################################
-# This script is similar to runtest.sh but uses avrtest for simulation.
+# This script is similar to runtest.sh but uses AVRtest for simulation.
 #
 #     https://github.com/sprintersb/atest
 #
-# There are ups and downs of using avrtest instead of simulavr:
+# There are ups and downs of using AVRtest instead of SimulAVR:
 #
-# + avrtest is order of magnitide(s) faster than simulavr.
+# + AVRtest is order of magnitude(s) faster than SimulAVR.
 #
-# + avrtest can simulate for much more devices than simulavr supports.
-#   But this comes at a cost:  avrtest only simulates the core, no I/O and
+# + AVRtest can simulate for much more devices than SimulAVR supports.
+#   But this comes at a cost:  AVRtest only simulates the core, no I/O and
 #   no SFRs or interrupts.  But it can simulate code for
 #   ATmega103, ATtiny3216, ATmega128, ATtiny40, ATtiny3216, AVR128DA32, ...
 #
@@ -74,13 +77,13 @@
 #   by the core arch).  For example we pretend ATtiny40 has a program size
 #   of 8 KiB.
 
-# When you want to skip a test with avrtest for whatever reason, add a
+# When you want to skip a test with AVRtest for whatever reason, add a
 # magic comment like
 #
 #     /* SKIP_AVRTEST: "This is the reason" */
 
-# When you want to run part of a code only with avrtest, e.g. because
-# simulavr is slow, then wrap the code in
+# When you want to run part of a code only with AVRtest, e.g. because
+# SimulAVR is slow, then wrap the code in
 #
 #     #ifdef USE_AVRTEST
 
@@ -170,15 +173,16 @@ while getopts $OPTS opt ; do
 done
 shift $((OPTIND - 1))
 test_list=${*:-"time/*.c regression/*.c stdlib/*.c string/*.c pmstring/*.c \
+		stdfix/*.c \
 		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c \
 		util/*.c"}
 
 CPPFLAGS="-Wundef -I."
 # -Wno-array-bounds: Ditch wrong warnings due to avr-gcc PR105523.
 # This works with more GCC versions than --param=min-pagesize=0.
-CFLAGS=${CFLAGS-"-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds ${CFLAGS_EXTRA}"}
+CFLAGS=${CFLAGS-"-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds ${EXTRA_CFLAGS}"}
 HOST_CC=gcc
-HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
+HOST_CFLAGS="-m32 -W -Wall -std=gnu99 -pipe -O2 -I."
 
 Err_echo ()
 {
@@ -198,7 +202,7 @@ Host_exe ()
 
 # Compose extra avr-gcc options for extended memory layout.
 # $1 = 0: Stack is below static storage
-# $1 = 1: Stack is at end of static storage
+# $1 = 1: Stack is at the end of static storage
 # $2 = RAM start
 # $3 = RAM end
 o_mem ()
@@ -212,7 +216,7 @@ o_mem ()
 	# Stack is located below static storage.
 	stack=$(printf "0x%x" $((${ramSTART} - 1 - ${ramVMA})))
     else
-	# Stack is located at end of static storage.
+	# Stack is located at the end of static storage.
 	stack=$(printf "0x%x" $((${ramEND} - ${ramVMA})))
     fi
 
@@ -225,19 +229,23 @@ o_mem ()
     echo "${ramstart} ${ramlen} ${stack} ${heap}"
 }
 
-# $1 = MCU as understood by ave-gcc.
+# $1 = MCU as understood by avr-gcc.
 # o_gcc: Extra options for avr-gcc
 # o_sim: Extra options for avrtext
 set_extra_options ()
 {
-    # As avrtest is just simulating cores, not exact hardware, we can
+    # As AVRtest is just simulating cores, not exact hardware, we can
     # add more RAM at will.
 
     o_gcc= # Extra options for gcc
-    o_sim= # Extra options for avrtest.  Default mmcu=avr51
+    o_sim= # Extra options for AVRtest.  Default mmcu=avr51
     # To test the pgm_read_far functions.
     local o_pgmx="-include high-progmemx.h"
     case $1 in
+	atmega8)
+	    o_sim="-mmcu=avr4"
+	    o_gcc="$(o_mem 0 0x2000 0xffff)"
+	    ;;
 	atmega128 | atmega103)
 	    o_gcc="$(o_mem 0 0x2000 0xffff) $o_pgmx"
 	    ;;
@@ -276,13 +284,13 @@ set_extra_options ()
 	    exit 1
 	;;
     esac
-    o_gcc="$o_gcc $AVRTEST/exit-$1.o -DUSE_AVRTEST"
+    o_gcc="$o_gcc ${AVRTEST_HOME}/exit-$1.o -I${AVRTEST_HOME} -DUSE_AVRTEST"
 }
 
 
 # $1 = ELF file
 # $2 = mcu as understood by avr-gcc
-# Extra options for avrtest are passed in o_sim.
+# Extra options for AVRtest are passed in o_sim.
 Simulate_avrtest ()
 {
     # The following exit stati will be returned with -q:
@@ -301,12 +309,14 @@ Simulate_avrtest ()
     # - 20  Out of memory.
     # - 21  Wrong avrtest usage: Unknown options, etc.
     # - 22  Program file could not be found / read.
+    # - 23  IEEE single emulation failed (e.g. on big-endian host)
+    # - 24  IEEE double emulation failed (e.g. on big-endian host)
     # - 42  Fatal error in avrtest.
 
-    # -no-stdin keepy avrtest from hanging in rare situations of bogus
+    # -no-stdin keeps AVRtest from hanging in rare situations of bogus
     # code that tries to read from stdin, but there is no input.
 
-    # avrtest has 3 flavours: avrtest, avrtest-xmega and avrtest-tiny.
+    # AVRtest has 3 flavours: avrtest, avrtest-xmega and avrtest-tiny.
     local suff=
     case "$o_sim" in
 	*avrxmega* ) suff="-xmega" ;;
@@ -314,7 +324,7 @@ Simulate_avrtest ()
     esac
 
     msg=$(${AVRTEST_HOME}/${avrtest}${suff} \
-	      -q -no-stdin $1 $o_sim -m 60000000000 2>&1)
+	      -q -no-stdin $1 $o_sim -m 60000000000 ${EXTRA_AFLAGS} 2>&1)
     RETVAL=$?
     #echo "MSG = $msg"
     #echo " - $AVRTEST_HOME/$avrtest$suff -q $1 $o_sim -m 60000000000"
@@ -323,7 +333,7 @@ Simulate_avrtest ()
 
 
 # $1 = relative file name of file to be simulated.
-# avrtest does not support SFR magic like EEPROM etc.
+# AVRtest does not support SFR magic like EEPROM etc.
 Skip_with_avrtest ()
 {
     local reason=
@@ -334,7 +344,7 @@ Skip_with_avrtest ()
     esac
 
     grep -i eeprom    $1 > /dev/null && skip_why="EEPROM"
-    grep -i sfr       $1 > /dev/null && skip_why="SFRs"
+    grep -i sfr_      $1 > /dev/null && skip_why="SFRs"
     reason=$(grep SKIP_AVRTEST $1) > /dev/null \
 	&& skip_why=$(echo "$reason" | awk -F\" '{ print $2 }' )
 
@@ -347,6 +357,7 @@ Compile ()
     local crt=
     local libs=
     local flags=
+    local devlib="$AVRDIR/avr/devices/$2/lib$2.a"
 
     if [ -z "$AVRDIR" ] ; then
 	  libs="-lm"
@@ -363,9 +374,15 @@ Compile ()
       crt=crt$2.o
       flags="-I../../include -I $AVRDIR/include -nostdlib"
       crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
-      libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
+      if [ -z "$crt" ]; then
+	  crt=`find $AVRDIR/avr/devices/$2 -name 'crt*.o' -print | head -1`
+      fi
+      if [ ! -f "$devlib" ]; then
+	  devlib=
+      fi
+      libs="$AVRDIR/avr/lib/$multilibdir/libc.a \
             $AVRDIR/avr/lib/$multilibdir/libm.a \
-            $AVRDIR/avr/devices/$2/lib$2.a -lgcc"
+            $devlib -lgcc"
     fi
 
     case $4 in
@@ -403,6 +420,8 @@ Compile ()
 	;;
     esac
 
+    libs="-Wl,--start-group $libs -Wl,--end-group"
+
     # The GCC 4.1 (and older) does not define __ASSEMBLER__ with
     # '-std=gnu99' option for *.S sources.
     case `basename $1` in
@@ -417,7 +436,7 @@ n_files=0	# number of operated files
 n_emake=0	# number of compile/link errors
 n_ehost=0	# number of 'run-at-host' errors
 n_esimul=0	# number of simulation errors
-n_skips=0	# number of skipped tests (avrtest can't EEPROM, SFRs or ISRs)
+n_skips=0	# number of skipped tests (AVRtest can't EEPROM, SFRs or ISRs)
 
 for test_file in $test_list ; do
     case `basename $test_file` in
@@ -488,8 +507,22 @@ for test_file in $test_list ; do
 			elif [ -z $MAKE_ONLY ] \
 				 && ! Simulate_avrtest $elf_file $mcu
 			then
-			    Err_echo "simulate avrtest failed: $RETVAL"
-			    n_esimul=$(($n_esimul + 1))
+			    case $RETVAL in
+				23)
+				    echo "SKIP (no IEEE single emulation)"
+				    n_skips=$(($n_skips + 1))
+				    break
+				    ;;
+				24)
+				    echo "SKIP (no IEEE double emulation)"
+				    n_skips=$(($n_skips + 1))
+				    break
+				    ;;
+				*)
+				    Err_echo "simulate avrtest failed: $RETVAL"
+				    n_esimul=$(($n_esimul + 1))
+				    ;;
+			    esac
 			else
 			    echo "OK"
 			fi

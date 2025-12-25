@@ -1,0 +1,10 @@
+*.bin
+*.elf
+*.eep
+*.hex
+*.map
+*.srec
+
+demo/demo.size
+demo/textsize.txt
+demo/vectorssize.txt

@@ -26,49 +26,45 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #ifndef _UTIL_ATOMIC_H_
 #define _UTIL_ATOMIC_H_ 1
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <bits/attribs.h>
 
 #if !defined(__DOXYGEN__)
 /* Internal helper functions. */
-static __inline__ uint8_t __iSeiRetVal(void)
+static __ATTR_ALWAYS_INLINE__ uint8_t __iSeiRetVal(void)
 {
     sei();
     return 1;
 }
 
-static __inline__ uint8_t __iCliRetVal(void)
+static __ATTR_ALWAYS_INLINE__ uint8_t __iCliRetVal(void)
 {
     cli();
     return 1;
 }
 
-static __inline__ void __iSeiParam(const uint8_t *__s)
+static __ATTR_ALWAYS_INLINE__ void __iSeiParam(const uint8_t *__s)
 {
     sei();
-    __asm__ volatile ("" ::: "memory");
     (void)__s;
 }
 
-static __inline__ void __iCliParam(const uint8_t *__s)
+static __ATTR_ALWAYS_INLINE__ void __iCliParam(const uint8_t *__s)
 {
     cli();
-    __asm__ volatile ("" ::: "memory");
     (void)__s;
 }
 
-static __inline__ void __iRestore(const  uint8_t *__s)
+static __ATTR_ALWAYS_INLINE__ void __iRestore(const  uint8_t *__s)
 {
     SREG = *__s;
-    __asm__ volatile ("" ::: "memory");
+    __asm__ __volatile__ ("" ::: "memory");
 }
 #endif	/* !__DOXYGEN__ */
 
@@ -295,7 +291,7 @@ main(void)
     This is a possible parameter for #NONATOMIC_BLOCK. When used, it
     will cause the NONATOMIC_BLOCK to force the state of the SREG
     register on exit, disabling the Global Interrupt Status flag
-    bit.  This saves a small amout of flash space, a register, and one
+    bit.  This saves a small amount of flash space, a register, and one
     or more processor cycles, since the previous value of the SREG
     register does not need to be saved at the start of the block.
 

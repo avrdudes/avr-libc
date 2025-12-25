@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iom32hvbrevb.h - definitions for ATmega32HVB revision B. */
 
 /* This file should only be included from <avr/io.h>, never directly. */
@@ -951,5 +949,9 @@
 #define SLEEP_MODE_PWR_SAVE (0x03<<1)
 #define SLEEP_MODE_PWR_OFF (0x04<<1)
 
+
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x95
+#define SIGNATURE_2 0x10
 
 #endif  /* _AVR_IOM32HVBREVB_H_ */

@@ -25,11 +25,6 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
-
-misc_a_c_sources =
 
 eeprom_c_sources = \
 	eewr_block_xmega.c
@@ -40,38 +35,57 @@ eeprom_asm_sources = \
 	eerd_qword.S \
 	eerd_dword.S \
 	eerd_word.S \
+	eerd_u24.S \
 	eeupd_block.S \
 	eeupd_byte.S \
 	eeupd_qword.S \
 	eeupd_dword.S \
 	eeupd_word.S \
+	eeupd_u24.S \
 	eewr_block.S \
 	eewr_byte.S \
 	eewr_qword.S \
 	eewr_dword.S \
-	eewr_word.S
+	eewr_word.S \
+	eewr_u24.S
 
 dev_c_sources =
 
 dev_asm_sources = \
+	init_sp.S \
+	init_cvt.S \
+	init_ram_color.S \
+	ram_unused.S \
 	flmap_init.S \
+	call_main.S \
 	ccp_write_spm.S \
 	ccp_write.S
+
+misc_a_c_sources =
 
 misc_a_asm_sources = \
 	itoa.S \
 	itoa_ncheck.S \
 	ltoa.S \
 	ltoa_ncheck.S \
+	madddi10.S \
 	mulsi10.S \
 	mul10.S \
+	sqrtpdi.S \
+	sqrtdi.S \
+	sqrthi.S \
+	sqrtsi.S \
 	ultoa.S \
 	ultoa_ncheck.S \
 	utoa.S \
-	utoa_ncheck.S
+	utoa_ncheck.S \
+	lltoa.S \
+	ulltoa.S \
+	ulltoa_base10.S
 
 misc_a_extra_dist = \
 	eedef.h \
+	sqrtdef.h \
 	readme_eeprom.txt
 
 # vim: set ft=make:

@@ -23,8 +23,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /** \defgroup demos Demo projects
 
   Various small demo projects are provided to illustrate several
@@ -46,8 +44,8 @@
 
   A \ref stdiodemo "comprehensive example on using the standard IO facilities"
   intends to explain that complex topic, using a
-  practical microcontroller peripheral setup with one RS-232
-  connection, and an HD44780-compatible industry-standard LCD
+  practical microcontroller peripheral setup with a serial
+  connection (usually attached to an USB bridge), and an HD44780-compatible industry-standard LCD
   display.
 
   The \ref twi_demo project explains the use of the two-wire hardware
@@ -67,29 +65,10 @@
   sophisticated (and thus more expensive) but pin-compatible
   controller.
 
-  While the simple demo is meant to run on about any AVR setup
-  possible where a LED could be connected to the OCR1[A] output,
-  the \ref largedemo "large" and \ref stdiodemo "stdio" demos are
-  mainly targeted to the Atmel STK500 starter kit, and the
-  \ref twi_demo "TWI" example requires a controller where some
-  24Cxx two-wire EEPPROM can be connected to.  For the STK500
-  demos, the default CPU (either an AT90S8515 or an ATmega8515)
-  should be removed from its socket, and the ATmega16 that ships
-  with the kit should be inserted into socket SCKT3100A3.  The
-  ATmega16 offers an on-board ADC that is used in the
-  \ref largedemo "large" demo, and all AVRs with an ADC feature
-  a different pinout than the industry-standard compatible
-  devices.
-
-  In order to fully utilize the \ref largedemo "large" demo, a
-  female 10-pin header with cable, connecting to a 10 kOhm
-  potentiometer will be useful.
-
-  For the \ref stdiodemo "stdio" demo, an industry-standard
-  HD44780-compatible LCD display of at least 16x1 characters
-  will be needed.  Among other things, the
-  <a href="http://ssl.bulix.org/projects/lcd4linux/">LCD4Linux</a>
-  project page describes many things around these displays,
-  including common pinouts.
-
+  Most of these projects have been primarily targeted to a board
+  compatible with the popular Arduino Nano device, using an
+  ATmega328P.  The \ref demo_project "simple project" can run
+  on that board without requiring any additional hardware, other
+  demos only make sense when attaching some additional components,
+  like an LCD, external buttons, or a potentiometer.
 */

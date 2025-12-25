@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$	*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 #ifndef __AVR__
 # include <stdio.h>
@@ -62,7 +59,7 @@ int main ()
     CHECK ("", 1, -1);
     CHECK ("", 255, -1);
     CHECK ("ABCDEF", 'a', -1);
-    
+
     /* Found	*/
     CHECK ("\001", 1, 0);
     CHECK ("\377", 255, 0);
@@ -72,16 +69,16 @@ int main ()
     CHECK ("12345", 0, 5);
     CHECK ("", 0, 0);
 
-    /* Last occurance	*/
+    /* Last occurrence	*/
     CHECK ("00", '0', 1);
     CHECK ("abcdabcd", 'b', 5);
     CHECK ("***********", '*', 10);
-    
+
     /* 'c' converted to a char	*/
     CHECK ("ABCDEF", 'A'+0x100, 0);
     CHECK ("ABCDE\377", ~0, 5);
     CHECK ("+", ~0xff, 1);
-    
+
     /* Very long string	*/
     CHECK ("................................................................"
 	   "................................................................"

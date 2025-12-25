@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/io2333.h - definitions for AT90S2333 */
 
 #ifndef _AVR_IO2333_H_
@@ -458,5 +456,9 @@
 #define SLEEP_MODE_IDLE         0
 #define SLEEP_MODE_PWR_DOWN     _BV(SM)
 
+
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x91
+#define SIGNATURE_2 0x05
 
 #endif /* _AVR_IO2333_H_ */

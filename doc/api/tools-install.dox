@@ -28,29 +28,30 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-/** 
+/**
 
 \page install_tools Building and Installing the GNU Tool Chain
 \addindex installation
 
-This chapter shows how to build and install, from source code, a complete 
-development environment for the AVR processors using the GNU toolset. There are 
+This chapter shows how to build and install, from source code, a complete
+development environment for the AVR processors using the GNU toolset. There are
 two main sections, one for Linux, FreeBSD, and other Unix-like operating
 systems, and another section for Windows.
 
 - \ref required_tools
 - \ref optional_tools
 - \ref install_unix
+  - \ref install_scripts "Build Scripts"
   - \ref install_preparations
-    - \ref install_location
+    - \ref install_host_tools "Required Build Tools"
     - \ref install_dir_layout
   - \ref install_avr_binutils "GNU Binutils"
   - \ref install_avr_gcc "GCC"
   - \ref install_avr_libc
+    - \ref install_avr_libc_docs
   - \ref install_avrprog
   - \ref install_simulavr
+  - \ref install_avrtest
   - \ref install_avarice
 - \ref install_windows
   - \ref install_windows_tools "Required Tools"
@@ -85,10 +86,12 @@ systems, and another section for Windows.
 
 <dt>AVR-LibC</dt>
 <dd>
-  Project Home: http://savannah.gnu.org/projects/avr-libc <br>
-  Source Downloads: https://download-mirror.savannah.gnu.org/releases/avr-libc <br>
+  New Project Home: https://avrdudes.github.io/avr-libc <br>
+  New Source Downloads (&ge; v2.2): https://github.com/avrdudes/avr-libc/releases <br>
   Git: %https://github.com/avrdudes/avr-libc.git <br>
   GitHub: https://github.com/avrdudes/avr-libc <br>
+  Old Project Home: http://savannah.gnu.org/projects/avr-libc <br>
+  Old Source Downloads (&le; v2.1): https://download-mirror.savannah.gnu.org/releases/avr-libc
   \ref install_avr_libc "Installation"
 </dd>
 </dl>
@@ -102,11 +105,9 @@ or may not be of use for you.
 <dl>
 <dt>AVRDUDE</dt>
 <dd>
-  Project Home: http://savannah.nongnu.org/projects/avrdude <br>
   Git: %https://github.com/avrdudes/avrdude.git <br>
   GitHub: https://github.com/avrdudes/avrdude <br>
-  \ref install_avrprog "Installation" <br>
-  \ref using_avrprog "Usage Notes"
+  \ref install_avrprog "Installation"
 </dd>
 
 <dt>GDB</dt>
@@ -120,6 +121,17 @@ or may not be of use for you.
 <dd>
   http://savannah.gnu.org/projects/simulavr <br>
   \ref install_simulavr "Installation"
+</dd>
+
+<dt>AVRtest</dt>
+<dd>
+  GitHub: https://github.com/sprintersb/atest<br>
+  \ref install_avrtest "Installation"<br>
+  AVRtest is an AVR core simulator that can be used to run the
+  avr-gcc testsuite.  It can also be used to run parts of the
+  AVR-LibC testsuite.  For details, see the
+  <a href="https://github.com/sprintersb/atest?tab=readme-ov-file#what-is-avrtest"
+  >README</a>.
 </dd>
 
 <dt>AVaRICE</dt>
@@ -141,21 +153,45 @@ system, you can alternatively install in your home directory, for example, in
 <tt>$HOME/local/avr</tt>.  Where you install is a completely arbitrary
 decision, but should be consistent for all the tools.
 
+It is usually the best to use the latest released version of
+each of the tools.
+
 \warning If you have \c CC set to anything other than \c avr-gcc in your
 environment, this will cause the configure script to fail. It is best to not
 have \c CC set at all.
 
-\note It is usually the best to use the latest released version of
-each of the tools.
+
+\subsection install_scripts Build Scripts
+
+There are scripts that can simplify the process of building an AVR
+toolchain for Linux, and/or for Windows in
+\ref install_canadian "Canadian cross" configuration.
+
+- GitHub: <a href="https://github.com/ZakKemble/avr-gcc-build"
+	     >avr-gcc-build</a> from Zak Kemble.
+
+- GitHub: <a href="https://github.com/sprintersb/make-avr-gcc"
+	     >make-avr-gcc</a>
 
 
 \subsection install_preparations Preparations
+
+\subsubsection install_host_tools Required Tools on the Build Machine
+
+In order to be able to build and install the compiler and other tools,
+the build machine requires some software packages.  The
+<a href="https://gcc.gnu.org/wiki/cauldron2023talks?action=AttachFile&do=view&target=2023-Cauldron-Getting-Started-session.pdf"
+   >Debian package list</a> is something like:
+
+- perl gawk binutils gcc-multilib python3 python3-pip gzip make tar zstd
+autoconf automake gettext gperf dejagnu autogen guile-3.0 expect
+tcl flex texinfo git diffutils patch git-email
 
 \subsubsection install_location Install Location
 
 You specify the installation directory by using the <tt>\--prefix=dir</tt>
 option with the \c configure script.  It is important to install all the AVR
-tools in the same directory or some of the tools will not work correctly.  To
+tools in the same directory, or some of the tools will not work correctly.  To
 ensure consistency and simplify the discussion, we will use \c $PREFIX to
 refer to whatever directory you wish to install in.  You can set this as an
 environment variable if you wish as such (using a Bourne-like shell):
@@ -220,7 +256,7 @@ AVR assembler (<tt>\ref using_avr_as "avr-as"</tt>),
 linker (<tt>\ref using_avr_ld "avr-ld"</tt>),
 and librarian (\c avr-ar and \c avr-ranlib).
 In addition, you get tools which extract data from object files
-(\c avr-objcopy), dissassemble object file information
+(\c avr-objcopy), disassemble object file information
 (\c avr-objdump), and strip information from object files
 (\c avr-strip).  Before we can build the C compiler, these tools need to
 be in place.
@@ -259,7 +295,7 @@ platform and that are run with the \c make command.
 $ make
 \endverbatim
 
-\note BSD users should note that the project's <tt>Makefile</tt> uses GNU
+BSD users should note that the project's <tt>Makefile</tt> uses GNU
 make syntax. This means FreeBSD users may need to build the tools by
 using <tt>gmake</tt>.
 
@@ -332,9 +368,9 @@ can save you some space.
 \warning You \b must install
 \ref install_avr_binutils "avr-binutils",
 \ref install_avr_gcc "avr-gcc" and make sure your
-\ref path "path is set" properly before installing AVR-LibC.
+\ref path "path is set" properly before configuring abd building AVR-LibC.
 
-\note If you have obtained the latest AVR-LibC from \ref using_git "git",
+If you have obtained the latest AVR-LibC from \ref using_git "git",
 you will have to run the \c \./bootstrap script before using either of the
 build methods described below.
 
@@ -358,15 +394,92 @@ Where the \c \--build platform can be guessed by running
 $ ./source/avr-libc-<version>/config.guess
 \endverbatim
 
+When you want to build and install with extra options, you can for example:
+\verbatim
+$ make CFLAGS="-Werror" CCASFLAGS="-Werror"
+$ make install prefix=/home/me/install/my-avr-gcc
+\endverbatim
+
+In order to build the examples:
+\verbatim
+$ # in ./build/doc/examples
+$ make all-examples
+$ make example-largedemo # etc.
+\endverbatim
+
+\subsubsection install_avr_libc_docs AVR-LibC Documentation
+
+Additional prerequisites:
+- Doxygen v1.9.6
+- \c fig2dev from the <a href="https://en.wikipedia.org/wiki/Xfig">Xfig</a> project
+- A LaTeX installation like "TeX Live" with \c pdflatex
+- Python can improve the rendering of some man pages, though Python is
+  not strictly required to build the documentation.
+
+When <a href="https://sourceforge.net/projects/mcj/files">fig2dev</a>
+is not present on the system, one way is to build it from source:
+\verbatim
+$ wget https://sourceforge.net/projects/mcj/files/fig2dev-3.2.9a.tar.xz/download -O fig2dev-3.2.9a.tar.xz
+$ tar xfJ fig2dev-3.2.9a.tar.xz
+\endverbatim
+and then configure, make and install as usual.
+
+For building the documentation, Doxygen v1.9.6 is required.
+Here are the steps for building and installing it in a non-system
+location (so that no root permissions are needed).
+The first step is to get the required Doxygen source version:
+
+\verbatim
+$ # in ./source
+$ git clone --branch Release_1_9_6 --depth 1 https://github.com/doxygen/doxygen.git doxygen-1.9.6
+\endverbatim
+
+Then configure and build it.  The installation is in some folder
+\c /someplace which you can adjust as you like:
+
+\verbatim
+$ # in ./build
+$ mkdir doxygen-1.9.6
+$ cd doxygen-1.9.6
+$ cmake -DCMAKE_INSTALL_PREFIX:PATH=/someplace/doxygen-1.9.6 ../../source/doxygen-1.9.6
+$ make
+$ make install
+\endverbatim
+
+There are several ways to provide Doxygen 1.9.6 to AVR-LibC:
+- Configure AVR-LibC with
+  \code --with-doxygen=/someplace/doxygen-1.9.6/bin/doxygen \endcode
+- or add <tt>/someplace/doxygen-1.9.6/bin</tt> to \c PATH prior to
+  configuring AVR-LibC.
+
+The AVR-LibC configure script will print the used Doxygen version.
+Make sure it is actually Doxygen 1.9.6!
+
+In order to build the documentation, you can add <tt>\--enable-doc</tt>
+to the AVR-LibC configure options, or you can invoke building the
+documentation by hand:
+
+\verbatim
+$ # in ./build/avr-libc-<version>/doc/api
+$ make html
+$ make dox-pdf
+$ make install-dox-html
+\endverbatim
+Note that Doxygen doesn't care about dependencies, thus when you
+made changes to the sources and want to re-build the documentation,
+better run <tt>make clean</tt> in <tt>build/avr-libc-\<version\>/doc/api</tt>
+before building the doc.
+Moreover, the Doxygen version is highly critical,
+and the exact version of Doxygen v1.9.6 is recommended.
 
 \subsection install_avrprog AVRDUDE
 \addindex installation, avrprog
 \addindex installation, avrdude
 
-\note It has been ported to windows (via MinGW or cygwin), Linux and Solaris. Other Unix systems
-should be trivial to port to.
+AVRDUDE has been ported to Windows (via MinGW or Cygwin), Linux and Solaris.
+Other Unix systems should be trivial to port to.
 
-<tt><b>avrdude</b></tt> is part of the FreeBSD ports system. To install it,
+AVRDUDE is part of the FreeBSD ports system. To install it,
 simply do the following:
 
 \verbatim
@@ -374,7 +487,7 @@ simply do the following:
 # make install
 \endverbatim
 
-\note Installation into the default location usually requires root
+Installation into the default location usually requires root
 permissions.  However, running the program only requires access
 permissions to the appropriate \c ppi(4) device.
 
@@ -407,19 +520,33 @@ $ make
 $ make install
 \endverbatim
 
-\note You might want to have already installed
+You might want to have already installed
 \ref install_avr_binutils "avr-binutils",
 \ref install_avr_gcc "avr-gcc" and
 \ref install_avr_libc "AVR-LibC"
 if you want to have the test programs built in the simulavr source.
 
+\subsection install_avrtest AVRtest
+\addindex installation, avrtest
 
+Building AVRtest is done by running its Makefile.  No configure script
+is required.  To get the sources and make:
+\verbatim
+$ git clone https://github.com/sprintersb/atest.git <folder>
+$ cd <folder>
+$ make
+\endverbatim
+The Makefile will build some object files like <tt>exit-atmega128.o</tt>
+which require an avr-gcc that supports such devices.
+There are also pre-built
+<a href="https://sourceforge.net/projects/winavr/files/AVRtest/"
+>AVRtest binaries for Windows</a>.
 
 \subsection install_avarice AVaRICE
 \addindex installation, avarice
 
-\note These install notes are not applicable to avarice-1.5 or older. You
-probably don't want to use anything that old anyways since there have been
+These install notes are not applicable to avarice-1.5 or older. You
+probably don't want to use anything that old anyway since there have been
 many improvements and bug fixes since the 1.5 release.
 
 AVaRICE also uses the \c configure system, so to build and install:
@@ -434,7 +561,7 @@ $ make
 $ make install
 \endverbatim
 
-\note AVaRICE uses the BFD library for accessing various binary file formats.
+AVaRICE uses the BFD library for accessing various binary file formats.
 You may need to tell the configure script where to find the lib and headers
 for the link to work. This is usually done by invoking the configure script
 like this (Replace <tt>\<hdr_path\></tt> with the path to the \c bfd.h file on
@@ -459,12 +586,12 @@ MinGW. There are advantages and disadvantages to both. Cygwin provides a
 very complete POSIX environment that allows one to build many Linux based tools
 from source with very little or no source modifications. However, POSIX
 functionality is provided in the form of a DLL that is linked to the application.
-This DLL has to be redistributed with your application and there are issues if
+This DLL has to be redistributed with your application, and there are issues if
 the Cygwin DLL already exists on the installation system and different versions
 of the DLL. On the other hand, MinGW can compile code as native Win32
 applications. However, this means that programs designed for Unix and Linux (i.e.
 that use POSIX functionality) will not compile as MinGW does not provide
-that POSIX layer for you. Therefore most programs that compile on both types of
+that POSIX layer for you. Therefore, most programs that compile on both types of
 host systems, usually must provide some sort of abstraction layer to allow an
 application to be built cross-platform.
 
@@ -514,25 +641,19 @@ as improvements are made.
 </dd>
 </dl>
 
-\note GMP, MPFR, MPC and ISL are required to build GCC. By far the easiest way
+GMP, MPFR, MPC and ISL are required to build GCC. By far the easiest way
 to use them is by letting GCC download the sources locally by means of
 running the \c \./contrib/download_prewrequisites script from the
 GCC top source.  GCC will configure and build these libs during
 \c configure and \c make.
 
-\note Doxygen is required to build AVR-LibC documentation.
+Doxygen is required to build AVR-LibC documentation.
 - <b>Install Doxygen</b><br>
-    - Version 1.7.2
+    - Version 1.9.6
     - <https://www.doxygen.nl>
-    - Download and install.
+    - Download version 1.9.6 and install.
 
-\note NetPBM is required to build graphics in the AVR-LibC documentation.
-- <b>Install NetPBM</b><br>
-    - Version 10.27.0
-    - From the GNUWin32 project: <http://gnuwin32.sourceforge.net/packages.html>
-    - Download and install.
-
-\note fig2dev is required to build graphics in the AVR-LibC documentation.
+fig2dev is required to build graphics in the AVR-LibC documentation.
 - <b>Install fig2dev</b><br>
     - Version 3.2 patchlevel 5c
     - From WinFig 4.62: <http://winfig.com/downloads>
@@ -542,22 +663,15 @@ GCC top source.  GCC will configure and build these libs during
     - You may have to unzip and install related DLL files for fig2dev. In the
     version above, you have to install QtCore4.dll and QtGui4.dll.
 
-\note MikTeX is required to build various documentation.
+MikTeX is required to build various documentation.
 - <b>Install MiKTeX</b><br>
     - Version 2.9
     - <https://miktex.org>
     - Download and install.
 
-\note Ghostscript is required to build various documentation.
-- <b>Install Ghostscript</b><br>
-    - Version 9.00
-    - <https://www.ghostscript.com>
-    - Download and install.
-    - In the \\bin subdirectory of the installaion, copy gswin32c.exe to gs.exe.
-
-- Set the \c TEMP and \c TMP environment variables to <b><tt>c:\\\\temp</tt></b>
-  or to the
-  short filename version. This helps to avoid NTVDM errors during building.
+Set the \c TEMP and \c TMP environment variables to <b><tt>c:\\\\temp</tt></b>
+or to the
+short filename version. This helps to avoid NTVDM errors during building.
 
 
 \subsection install_windows_building Building the Toolchain for Windows
@@ -573,7 +687,6 @@ Build the tools below in MinGW/MSYS.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>
-		- \<ghostscript executables\>
         - /usr/local/bin
         - /usr/bin
         - /bin
@@ -599,11 +712,10 @@ make all html install install-html 2>&1 | tee binutils-make.log
 
 
 - <b>GCC</b><br>
-    - Open source code pacakge and patch as necessary.
+    - Open source code package and patch as necessary.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>
-		- \<ghostscript executables\>
         - /usr/local/bin
         - /usr/bin
         - /bin
@@ -641,12 +753,10 @@ make all html install 2>&1 | tee $package-make.log
         - /usr/local/bin
         - /mingw/bin
         - /bin
-        - \<MikTex executables\>
+        - \<MikTex / TeX live executables\>
         - \<install directory\>/bin
         - \<Doxygen executables\>
-        - \<NetPBM executables\>
         - \<fig2dev executable\>
-        - \<Ghostscript executables\>
         - c:/cygwin/bin
     - Configure
         \verbatim
@@ -706,7 +816,7 @@ make -k all install 2>&1 | tee $package-make.log
     - Delete backup copy of avrdude config file in install directory if exists.
 
 - <b>Insight/GDB</b><br>
-    - Open source code pacakge and patch as necessary.
+    - Open source code package and patch as necessary.
     - Configure and build in a directory outside of the source code tree.
     - Set PATH, in order:
         - \<MikTex executables\>

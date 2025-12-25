@@ -24,15 +24,11 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* This is a copy of 'atol-1.c', but without <stdlib.h>.
    The purpose is to check a native atol() function, as today (2007-02-06)
-   the <stdlib.h> header substitutes an inlined version with strtol() usage.
-
-   $Id$
- */
+   the <stdlib.h> header substitutes an inlined version with strtol() usage. */
 
 #include <stdio.h>
 #include <string.h>

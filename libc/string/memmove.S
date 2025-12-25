@@ -26,11 +26,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dest_hi r25
 #define dest_lo r24
@@ -39,11 +35,9 @@
 #define len_hi r21
 #define len_lo r20
 
-	.extern _U(memcpy)
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memmove)
-	.type	_U(memmove), @function
-_U(memmove):
+.global _U(memcpy)
+
+ENTRY _U(memmove)
 ; if src < dest, we have to copy in reverse order
 ; otherwise memcpy will do the right thing
 	cp	src_lo, dest_lo
@@ -67,7 +61,5 @@ _U(memmove):
 	ret
 .L_memmove_fwd:
 	XJMP	_U(memcpy)
-.L_memmove_end:
-	.size	_U(memmove), .L_memmove_end - _U(memmove)
 
-#endif /* not __DOXYGEN__ */
+ENDFUNC

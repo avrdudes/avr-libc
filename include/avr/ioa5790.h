@@ -32,8 +32,6 @@
  ****************************************************************************/
 
 
-/* $Id$ */
-
 #ifndef _AVR_ATA5790_H_INCLUDED
 #define _AVR_ATA5790_H_INCLUDED
 
@@ -825,14 +823,14 @@
 #define FUSE_MEMORY_SIZE 1
 
 /* Fuse Byte */
-#define FUSE_CKDIV8 (unsigned char)~_BV(128)
-#define FUSE_DWEN (unsigned char)~_BV(64)
-#define FUSE_SPIEN (unsigned char)~_BV(32)
-#define FUSE_WDTON (unsigned char)~_BV(16)
-#define FUSE_EESAVE (unsigned char)~_BV(8)
-#define FUSE_Reserved (unsigned char)~_BV(4)
-#define FUSE__32OEN (unsigned char)~_BV(2)
-#define FUSE_EXTCLKEN (unsigned char)~_BV(1)
+#define FUSE_CKDIV8   ((uint8_t)~0x80)
+#define FUSE_DWEN     ((uint8_t)~0x40)
+#define FUSE_SPIEN    ((uint8_t)~0x20)
+#define FUSE_WDTON    ((uint8_t)~0x10)
+#define FUSE_EESAVE   ((uint8_t)~0x8)
+#define FUSE_Reserved ((uint8_t)~0x4)
+#define FUSE__32OEN   ((uint8_t)~0x2)
+#define FUSE_EXTCLKEN ((uint8_t)~0x1)
 
 /* Lock Bits */
 #define __LOCK_BITS_EXIST

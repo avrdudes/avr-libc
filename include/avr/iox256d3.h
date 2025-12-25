@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iox256d3.h - definitions for ATxmega256D3 */
 
 /* This file should only be included from <avr/io.h>, never directly. */
@@ -1071,13 +1069,13 @@ typedef enum ADC_CH_MUXPOS_enum
 typedef enum ADC_CH_MUXNEG_enum
 {
     ADC_CH_MUXNEG_PIN0_gc = (0x00<<0),  /* Input pin 0 */
+    ADC_CH_MUXNEG_PIN4_gc = (0x00<<0),  /* Input pin 4 */
     ADC_CH_MUXNEG_PIN1_gc = (0x01<<0),  /* Input pin 1 */
+    ADC_CH_MUXNEG_PIN5_gc = (0x01<<0),  /* Input pin 5 */
     ADC_CH_MUXNEG_PIN2_gc = (0x02<<0),  /* Input pin 2 */
+    ADC_CH_MUXNEG_PIN6_gc = (0x02<<0),  /* Input pin 6 */
     ADC_CH_MUXNEG_PIN3_gc = (0x03<<0),  /* Input pin 3 */
-    ADC_CH_MUXNEG_PIN4_gc = (0x04<<0),  /* Input pin 4 */
-    ADC_CH_MUXNEG_PIN5_gc = (0x05<<0),  /* Input pin 5 */
-    ADC_CH_MUXNEG_PIN6_gc = (0x06<<0),  /* Input pin 6 */
-    ADC_CH_MUXNEG_PIN7_gc = (0x07<<0),  /* Input pin 7 */
+    ADC_CH_MUXNEG_PIN7_gc = (0x03<<0),  /* Input pin 7 */
 } ADC_CH_MUXNEG_t;
 
 /* Input mode */
@@ -5625,7 +5623,7 @@ IO Module Instances. Mapped to memory.
 #define FUSE_WDWP1  (unsigned char)~_BV(5)  /* Watchdog Window Timeout Period Bit 1 */
 #define FUSE_WDWP2  (unsigned char)~_BV(6)  /* Watchdog Window Timeout Period Bit 2 */
 #define FUSE_WDWP3  (unsigned char)~_BV(7)  /* Watchdog Window Timeout Period Bit 3 */
-#define FUSE1_DEFAULT  (0xFF)
+#define FUSE1_DEFAULT  (0x0)
 
 /* Fuse Byte 2 */
 #define FUSE_BODPD0  (unsigned char)~_BV(0)  /* BOD Operation in Power-Down Mode Bit 0 */

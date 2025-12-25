@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
@@ -68,7 +66,7 @@ ENTRY_FLOAT fminf fmin fminl
 	cpc	rB1, rA1
 	cpc	rB2, rA2
 	cpc	rB3, rA3	; C is set, if B < A
-  ; analize
+  ; analyze
 	ror	rBE		; V = C ^ sign
 	brvc	.L_retA
 .L_retB:

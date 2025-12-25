@@ -7,16 +7,14 @@
  * ----------------------------------------------------------------------------
  *
  * Stdio demo, upper layer of LCD driver.
- *
- * $Id$
  */
 
 /*
  * Initialize LCD controller.  Performs a software reset.
  */
-void	lcd_init(void);
+void    lcd_init(void);
 
 /*
  * Send one character to the LCD.
  */
-int	lcd_putchar(char c, FILE *stream);
+int     lcd_putchar(char c, FILE *stream);

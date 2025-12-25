@@ -32,8 +32,6 @@
  ****************************************************************************/
 
 
-/* $Id$ */
-
 #ifndef _AVR_ATTINY828_H_INCLUDED
 #define _AVR_ATTINY828_H_INCLUDED
 

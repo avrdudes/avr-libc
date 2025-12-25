@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iom88p.h - definitions for ATmega88P. */
 
 /* This file should only be included from <avr/io.h>, never directly. */

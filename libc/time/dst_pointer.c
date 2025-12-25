@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * Copyright (C) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,12 +23,9 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#include <inttypes.h>
 #include <time.h>
+#include "time-private.h"
 
 int (*__dst_ptr) (const time_t *, int32_t *);

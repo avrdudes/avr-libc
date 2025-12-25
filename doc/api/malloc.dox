@@ -26,51 +26,49 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /** \page malloc Memory Areas and Using malloc()
 
 \section malloc_intro Introduction
 
 Many of the devices that are possible targets of AVR-LibC have a minimal
 amount of RAM.  The smallest parts supported by the C environment come
-with 128 bytes of RAM.  This needs to be shared between initialized
-and uninitialized variables (\ref mem_sections "sections" \c .data and
-\c .bss), the dynamic memory allocator, and the stack that is used for
+with 32 bytes of RAM.  This needs to be shared between initialized
+and uninitialized variables (\ref mem_sections "sections" \c \.data and
+\c \.bss), the dynamic memory allocator, and the stack that is used for
 calling subroutines and storing local (automatic) variables.
 
 Also, unlike larger architectures, there is no hardware-supported
 memory management which could help in separating the mentioned RAM
 regions from being overwritten by each other.
 
-The standard RAM layout is to place \c .data variables first, from the
-beginning of the internal RAM, followed by \c .bss.  The stack is
+The standard RAM layout is to place \c \.data variables first, from the
+beginning of the internal RAM, followed by \c \.bss.  The stack is
 started from the top of internal RAM, growing downwards.  The
 so-called "heap" available for the dynamic memory allocator will be
-placed beyond the end of \c .bss.  Thus, there's no risk that dynamic
+placed beyond the end of \c \.bss.  Thus, there's no risk that dynamic
 memory will ever collide with the RAM variables (unless there were
 bugs in the implementation of the allocator). There is still a risk that
-the heap and stack could collide if there are large requirements for 
+the heap and stack could collide if there are large requirements for
 either dynamic memory or stack space.  The former can
 even happen if the allocations aren't all that large but
 dynamic memory allocations get fragmented over time such that new requests
 don't quite fit into the "holes" of previously freed regions.  Large
 stack space requirements can arise in a C function containing large and/or
-numerous local variables or when recursively calling function.
+numerous local variables or when recursively calling functions.
 
 \note
 The pictures shown in this document represent typical situations where the
 RAM locations refer to an ATmega128.
 The memory addresses used are not displayed in a linear scale.
 
-\image html malloc-std.png "RAM map of a device with internal RAM"
+\image html malloc-std.svg "RAM map of a device with internal RAM"
 \image latex malloc-std.eps "RAM map of a device with internal RAM" width=7.5cm
 
-On a simple device like a microcontroller it is a challenge to implement a
-dynamic memory allocator that is simple enough so the code size requirements 
-will remain low, yet powerful enough to avoid unnecessary memory fragmentation 
+On a simple device like a microcontroller, it is a challenge to implement a
+dynamic memory allocator that is simple enough, so the code size requirements
+will remain low, yet powerful enough to avoid unnecessary memory fragmentation
 and to get it all done with reasonably few CPU cycles. Microcontrollers
-are often low on space and also run at much lower speeds than the typical PC 
+are often low on space and also run at much lower speeds than the typical PC
 these days.
 
 The memory allocator implemented in AVR-LibC tries to cope with all of
@@ -88,28 +86,28 @@ allocating too much dynamic memory.
 
 If external RAM is available, it is strongly recommended to move the
 heap into the external RAM, regardless of whether or not the variables from
-the \c .data and \c .bss sections are also going to be located there.
+the \c \.data and \c \.bss sections are also going to be located there.
 The stack should always be kept in internal RAM.  Some devices
 even require this, and in general, internal RAM can be accessed
 faster since no extra wait states are required.  When using dynamic memory
-allocation and stack and heap are separated in distinct memory areas, this is the safest way to avoid a
-stack-heap collision.
+allocation and stack and heap are separated in distinct memory areas,
+this is the safest way to avoid a stack-heap collision.
 
 \section malloc_tunables Tunables for malloc()
 
-There are a number of variables that can be tuned to adapt the
-behavior of malloc() to the expected requirements and constraints
+There are a number of variables that can be tuned to adapt the behavior
+of \ref a_malloc "malloc()" to the expected requirements and constraints
 of the application.  Any changes to these tunables should be made
 before the very first call to malloc().  Note that some library
 functions might also use dynamic memory (notably those from the
 \ref avr_stdio), so make sure the changes will be done early enough in the
 startup sequence.
 
-The variables \c __malloc_heap_start and \c __malloc_heap_end can be
+The variables \c #__malloc_heap_start and \c #__malloc_heap_end can be
 used to restrict the malloc() function to a certain memory region.
 These variables are statically initialized to point to \c __heap_start
 and \c __heap_end, respectively, where \c __heap_start is filled in by
-the linker to point just beyond \c .bss, and \c __heap_end is set to 0
+the linker to point just beyond \c \.bss, and \c __heap_end is set to 0
 which makes malloc() assume the heap is below the stack.
 
 If the heap is going to be moved to external RAM, \c __malloc_heap_end
@@ -118,8 +116,8 @@ by writing directly to this variable, or it can be done automatically at
 link-time, by adjusting the value of the symbol \c __heap_end.
 
 \anchor malloc_extram
-The following example shows a linker command to relocate the entire \c .data 
-and \c .bss segments, and the heap to location 0x1100 in external RAM.  The
+The following example shows a linker command to relocate the entire \c \.data
+and \c \.bss segments, and the heap to location 0x1100 in external RAM.  The
 heap will extend up to address 0xffff.
 
 \code
@@ -131,14 +129,18 @@ See \ref harvard_arch "explanation" for offset 0x800000.
 See the chapter about \ref gcc_minusW "using gcc" for the \c -Wl
 options.
 
-\note The ld (linker) user manual states that using -Tdata=&lt;x&gt; is equivalent
-to using --section-start,.data=&lt;x&gt;. However, you have to use --section-start
-as above because the GCC frontend also sets the -Tdata option for
-all MCU types where the SRAM doesn't start at 0x800060. Thus, the linker
-is being faced with two -Tdata options. Sarting with binutils 2.16, the linker 
-changed the preference, and picks the "wrong" option in this situation.
+\note The linker manual states that <tt>-Tdata=&lt;x&gt;</tt>
+is equivalent to <tt>\--section-start,.data=&lt;x&gt;</tt>.
+However, you have to use the latter when the compiler is affected by
+<a href="https://gcc.gnu.org/PR30417">PR30417</a>. That PR is fixed in
+GCC v4.9.4, v5.5 and v6.2+.
 
-\image html malloc-x1.png "Internal RAM: stack only, external RAM: variables and heap"
+\note
+Symbols \c __DATA_REGION_ORIGIN__ and \c __DATA_REGION_LENGTH__
+should also be adjusted, see \ref sec_symbols.  For the given example,
+the symbol values would be 0x801100 and 0xef00, respectively.
+
+\image html malloc-x1.svg "Internal RAM: stack only, external RAM: variables and heap"
 \image latex malloc-x1.eps "Internal RAM: stack only, external RAM: variables and heap" width=12cm
 
 If dynamic memory should be placed in external RAM, while keeping
@@ -153,26 +155,27 @@ allocations (shown in light bisque color in the picture below).
 avr-gcc ... -Wl,--defsym=__heap_start=0x802000,--defsym=__heap_end=0x803fff ...
 \endcode
 
-\image html malloc-x2.png "Internal RAM: variables and stack, external RAM: heap"
+\image html malloc-x2.svg "Internal RAM: variables and stack, external RAM: heap"
 \image latex malloc-x2.eps "Internal RAM: variables and stack, external RAM: heap" width=12cm
 
 If \c __malloc_heap_end is 0, the allocator attempts to detect the
 bottom of stack in order to prevent a stack-heap collision when
 extending the actual size of the heap to gain more space for dynamic
 memory.  It will not try to go beyond the current stack limit,
-decreased by \c __malloc_margin bytes.  Thus, all possible stack
+decreased by \c #__malloc_margin bytes.  Thus, all possible stack
 frames of interrupt routines that could interrupt the current
 function, plus all further nested function calls must not require more
 stack space, or they will risk colliding with the data segment.
 
-The default value of \c __malloc_margin is set to 32.
+The default value of \c #__malloc_margin is set to 32.
 
 \section malloc_impl Implementation details
 
 Dynamic memory allocation requests will be returned with a two-byte
 header prepended that records the size of the allocation.  This is
-later used by free().  The returned address points just beyond that
-header.  Thus, if the application accidentally writes before the
+later used by \ref a_free "free()".
+The returned address points just beyond that header.
+Thus, if the application accidentally writes before the
 returned memory region, the internal consistency of the memory
 allocator is compromised.
 
@@ -185,7 +188,7 @@ are done when recycling memory from the freelist.
 The freelist itself is not maintained as a separate data structure,
 but rather by modifying the contents of the freed memory to contain
 pointers chaining the pieces together.  That way, no additional memory
-is reqired to maintain this list except for a variable that keeps track
+is required to maintain this list except for a variable that keeps track
 of the lowest memory segment available for reallocation.  Since both,
 a chain pointer and the size of the chunk need to be recorded in each
 chunk, the minimum chunk size on the freelist is four bytes.
@@ -217,8 +220,8 @@ allocations.  That way, the potential for heap fragmentation is hopefully
 reduced.  When deallocating the topmost chunk of memory, the size of the
 heap is reduced.
 
-A call to realloc() first determines whether the operation is about to
-grow or shrink the current allocation.  When shrinking, the case is
+A call to \ref a_realloc "realloc()" first determines whether the operation is
+about to grow or shrink the current allocation.  When shrinking, the case is
 easy: the existing chunk is split, and the tail of the region that is
 no longer to be used is passed to the standard free() function for
 insertion into the freelist.  Checks are first made whether the tail

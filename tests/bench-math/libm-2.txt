@@ -1,0 +1,26 @@
+1  <tr>
+1  <th>Function
+1  <th>Size
+1  <th>x<sub>0</sub>
+1  <th>x<sub>1</sub>
+1  <th>y<sub>0</sub>
+1  <th>y<sub>1</sub>
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+1  <th>log<sub>10</sub>(Err<sub>max</sub>)
+
+addf   2 100,-1e10,1e10,-1e10,1e10
+mulf   2 100,-1e10,1e10,-1e10,1e10
+divf   2 100,-1e10,1e10,-1e10,1e10
+
+atan2f 2  100,-10,10,-10,10  10,-0.5,1,0.5,1
+fdimf  2  10,-1e10,1e10,-1e10,1e10
+fmaxf  2  10,-1e10,1e10,-1e10,1e10
+fminf  2  10,-1e10,1e10,-1e10,1e10
+fmodf  2  10,-1e10,1e10,-1e10,1e10
+hypotf 2  10,-1e10,1e10,-1e10,1e10
+ldexpf 22 10,-1e10,1e10,-10,10
+powf   2  100,0,1e4,-10,10
+__builtin_powif   22  100,0,1e4,-10,10
+
+2</table>

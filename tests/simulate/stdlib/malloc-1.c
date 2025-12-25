@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Allocate a bunch of things, and free them again.  At the end,
    the freelist is supposed to consist of a single entry. */
@@ -55,22 +52,11 @@ extern struct __freelist *__flp; /* freelist pointer (head of freelist) */
 extern char *__malloc_heap_start;
 extern char *__malloc_heap_end;
 
-#if defined(__AVR_ATmega128__)
-static const int sizes[8] =
-{
-    5, 8, 2, 122, 256, 1, 32, 25 /* 451 + 1 [padding] + 2 * 8 [ptrs] = 468 */
-};
-#define TARGETVAL 468
-#elif defined(__AVR_AT90S8515__)
 static const int sizes[8] =
 {
     5, 8, 2, 22, 256, 1, 12, 25 /* 331 + 1 [padding] + 2 * 8 [ptrs] = 348 */
 };
 #define TARGETVAL 348
-#else
-/* SKIP_AVRTEST "Unknown MCU type" */
-#  error "Unknown MCU type"
-#endif
 
 
 int main(void)

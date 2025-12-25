@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
@@ -36,7 +34,7 @@
 
 /* long __fixsfsi (float A);
      The __fixsfsi() function converts A to the integer value. No rounding,
-     the fractional is losted. The compiler calls this function to perform
+     the fractional is lost. The compiler calls this function to perform
      a cast operation from float (i.e. double) to long. No saturation.
 
    Return:
@@ -51,9 +49,14 @@
 ENTRY __fixsfsi
 	XCALL	_U(__fixunssfsi)
 	set
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	tst	rAE			; error flag
+	breq	0f
+#else
 	cpse	rAE, r1			; error flag
+#endif
 	XJMP	_U(__fp_szero)		; return 0x80000000
-	ret
+0:	ret
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

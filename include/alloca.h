@@ -26,14 +26,13 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$	*/
-
 #ifndef	_ALLOCA_H
 #define _ALLOCA_H  1
 
 #include <stddef.h>
 
-/** \defgroup alloca <alloca.h>: Allocate space in the stack	*/
+/** \defgroup alloca <alloca.h>: Allocate space in the stack
+    \code #include <alloca.h> \endcode */
 
 /** \ingroup alloca
     \brief Allocate \a __size bytes of space in the stack frame of the caller.

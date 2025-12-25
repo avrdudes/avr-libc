@@ -25,17 +25,11 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-
- */
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define strp_lo	r24
 #define dlm_lo	r22
@@ -44,10 +38,7 @@
 
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strsep_P)
-	.type	_U(strsep_P),@function
-_U(strsep_P):
+ENTRY _U(strsep_P)
   ; check a NULL pointer
 	X_movw	ZL, strp_lo
 	ld	XL, Z			; str address
@@ -64,12 +55,12 @@ _U(strsep_P):
 	cpse	r0, __zero_reg__
 	brne	2b	; if symbol is't match && no delim end
 	brne	1b	; if symbol is absent in delim[] && not a zero
-  ; chr is founded in delim[] (possible, it is a terminating zero of str)
+  ; chr is found in delim[] (possible, it is a terminating zero of str)
 	tst	r0			; the same, as chr
 	brne	3f
 	X_movw	XL, r0			; __zero_reg__ is r1
 	rjmp	4f
-  ; OK, delimeter symbol is founded
+  ; OK, delimiter symbol is found
 3:	st	-X, __zero_reg__	; replace by '\0'
 	adiw	XL, 1			; address of next token
   ; save result to *sp and return
@@ -79,7 +70,6 @@ _U(strsep_P):
 5:	X_movw	ret_lo, str_lo		; return original address
 	ret
 
-	.size	_U(strsep_P), . - _U(strsep_P)
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

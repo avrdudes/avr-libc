@@ -33,23 +33,16 @@
      Created by Reiner Patommel
 */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dest_hi r25
 #define dest_lo r24
 #define src_hi r23
 #define src_lo r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcat_P)
-	.type	_U(strcat_P), @function
-_U(strcat_P):
+ENTRY _U(strcat_P)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 .L_strcat_P_skip:
@@ -64,9 +57,6 @@ _U(strcat_P):
 	brne	.L_strcat_P_loop
 ; return dest (unchanged)
 	ret
-.L_strcat_P_end:
-	.size	_U(strcat_P), .L_strcat_P_end - _U(strcat_P)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

@@ -30,11 +30,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#include "macros.inc"
+#include "asmdef.h"
 
 #define s1_b1 r25
 #define s1_b0 r24
@@ -47,15 +45,8 @@
 #define ret_b0 r24
 
 #define tmp s2_b1	/* copied to Z pointer */
-#define cht s2_b0
 
-#if !defined(__DOXYGEN__)
-
-	.text
-	.global	_U(strcasecmp_PF)
-	.type	_U(strcasecmp_PF), @function
-
-_U(strcasecmp_PF):
+ENTRY _U(strcasecmp_PF)
 
 	X_movw	ZL, s2_b0
 	LPM_R0_ZPLUS_INIT s2_b2
@@ -64,20 +55,20 @@ _U(strcasecmp_PF):
 .L_strcasecmp_PF_loop:
 
 	ld	ret_b0, X+		; load *s1
-	LPM_R0_ZPLUS_NEXT s2_b2		; load *s2
+	cpi	ret_b0, 'A'		; if ret_b0 in [A-Z]...
+	brlt	1f
+	cpi	ret_b0, 'Z'+1
+	brge	1f
+	subi	ret_b0, 'A'-'a'		; ...then tolower().
+1:	LPM_R0_ZPLUS_NEXT s2_b2		; load *s2
 	mov	tmp, r0			; copy of *s2 to tmp
-	mov	cht, r0			; copy of *s2 to cht
-	ori	cht, 0x20		; make tmp lower case
-	cpi	cht, 'a'		; test on [a .. z]
-	brlt	.L_strcasecmp_PF_tst
-	cpi	cht, 'z'+1
-	brge	.L_strcasecmp_PF_tst
-	ori	tmp, 0x20		; we got an aplpha in s2
-	ori	ret_b0, 0x20
+	cpi	tmp, 'A'		; if tmp in [A-Z]...
+	brlt	2f
+	cpi	tmp, 'Z'+1
+	brge	2f
+	subi	tmp, 'A'-'a'		; ...then tolower().
 
-.L_strcasecmp_PF_tst:			; compare
-
-	sub	ret_b0, tmp
+2:	sub	ret_b0, tmp
 	brne	.L_strcasecmp_PF_done
 	tst	r0			; end of s2?
 	brne	.L_strcasecmp_PF_loop
@@ -89,10 +80,6 @@ _U(strcasecmp_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-.L_strcasecmp_PF_end:
-
-	.size   _U(strcasecmp_PF), .L_strcasecmp_PF_end - _U(strcasecmp_PF)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

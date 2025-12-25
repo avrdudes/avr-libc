@@ -24,13 +24,11 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* GCC bug #31644: [avr] can't find a register in class 'BASE_POINTER_REGS'
    while reloading 'asm'
-   This is compile-time bug.
-   $Id$	*/
+   This is compile-time bug. */
 
 #ifndef	__AVR__
 int main ()	{ return 0; }

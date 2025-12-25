@@ -8,9 +8,6 @@
 #
 # Parse the generated tree.js file, and insert a <noscript> tree into the
 # HTML source.
-#
-# $Id$
-#
 
 die "usage: unjs tree.js tree.html index.html" unless $#ARGV == 2;
 

@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/io90pwm2b.h - definitions for AT90PWM2B */
 
 /* This file should only be included from <avr/io.h>, never directly. */

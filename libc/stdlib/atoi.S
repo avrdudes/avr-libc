@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
  /*
    Contributors:
      Created by Reiner Patommel
@@ -38,7 +36,7 @@
    TODO: this implementation uses an inline isspace(). If AVR-LibC will
    use locales other than C/POSIX it is needed to call an external isspace().
 
-   ATTENTION: an external __mulhi_const_10() function is used: nonstandart
+   ATTENTION: an external __mulhi_const_10() function is used: nonstandard
    call conventions: some registers and bit T must be nochanged.
  */
 
@@ -57,19 +55,17 @@
     stack) and works more quickly.
 */
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define str_hi	r25
 #define str_lo	r24
 #define num_hi	r25
 #define num_lo	r24
+#ifdef __AVR_TINY__
+#define tmp	__tmp_reg__
+#else
 #define tmp	r18
-
-	ASSEMBLY_CLIB_SECTION
-	.global _U(atoi)
-	.type   _U(atoi), @function
+#endif
 
 /*
    Skip leading spaces and tabs.  Process optional sign.  Stop conversion
@@ -83,7 +79,7 @@
   .err
 .endif
 
-_U(atoi):
+ENTRY _U(atoi)
 	X_movw	ZL, str_lo		; set pointer to string
 	CLR	num_lo
 	CLR	num_hi			; clear number
@@ -105,7 +101,7 @@ _U(atoi):
 	SET				; remember number is negative
 	RJMP	.L_atoi_loop2
 
-2:	XCALL	__mulhi_const_10	; r25:r24 *= 10
+2:	XCALL	_U(__mulhi_const_10)	; r25:r24 *= 10
 	ADD	num_lo, tmp		; num = (num * 10) + (tmp - '0')
 	ADC	num_hi, __zero_reg__
 .L_atoi_loop2:
@@ -122,7 +118,4 @@ _U(atoi):
 .L_atoi_done:
 	RET
 
-.L_atoi_end:
-	.size _U(atoi), .L_atoi_end - _U(atoi)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC

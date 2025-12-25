@@ -26,15 +26,10 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dest_hi r25
 #define dest_lo r24
@@ -43,42 +38,12 @@
 #define len_hi r21
 #define len_lo r20
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memcpy_P)
-	.type	_U(memcpy_P), @function
-_U(memcpy_P):
+ENTRY _U(memcpy_P)
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
-#if OPTIMIZE_SPEED
-; 17 words, (14 + len * 9 - (len & 1)) cycles
-	sbrs	len_lo, 0
-	rjmp	.L_memcpy_P_start
-	rjmp	.L_memcpy_P_odd
-.L_memcpy_P_loop:
-	X_lpm	r0, Z+
-	st	X+, r0
-.L_memcpy_P_odd:
-	X_lpm	r0, Z+
-	st	X+, r0
-.L_memcpy_P_start:
-	subi	len_lo, lo8(2)
-	sbci	len_hi, hi8(2)
-#else
-; 12 words, (13 + len * 11) cycles
-	rjmp	.L_memcpy_P_start
-.L_memcpy_P_loop:
-	X_lpm	r0, Z+
-	st	X+, r0
-.L_memcpy_P_start:
-	subi	len_lo, lo8(1)
-	sbci	len_hi, hi8(1)
-#endif
-	brcc	.L_memcpy_P_loop
+	XJMP	_U(__memcpy_P)
 ; return dest (unchanged)
-	ret
-.L_memcpy_P_end:
-	.size	_U(memcpy_P), .L_memcpy_P_end - _U(memcpy_P)
 
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

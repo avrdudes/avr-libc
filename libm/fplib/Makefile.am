@@ -25,12 +25,10 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 include $(top_srcdir)/libm/fplib/Files.am
 
 EXTRA_DIST = \
+	$(libm_a_c_sources) \
 	$(libm_a_asm_sources) \
 	$(libm_a_extra_dist)

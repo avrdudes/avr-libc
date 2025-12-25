@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iom165.h - definitions for ATmega165 */
 
 #ifndef _AVR_IOM165_H_
@@ -842,7 +840,7 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
-#define SIGNATURE_2 0x05
+#define SIGNATURE_2 0x07
 
 
 /* Deprecated items */

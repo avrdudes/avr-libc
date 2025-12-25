@@ -26,11 +26,7 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
-
-#if !defined(__DOXYGEN__)
 
 #include "asmdef.h"
 
@@ -51,7 +47,5 @@ ENTRY strchrnul_P
 	X_movw	ret_lo, ZL
 	ret
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
 
 #endif /* !defined(__AVR_TINY__) */

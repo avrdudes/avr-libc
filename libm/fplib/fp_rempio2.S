@@ -28,12 +28,10 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* <non_standart> __fp_rempio2 (float x);
+/* <non_standard> __fp_rempio2 (float x);
      The __fp_rempio2() function computes the remainder of dividing
      absolute value of x by Pi/2. The return value is x - n*Pi/2, where
      n is the quotient of abs(x)/(Pi/2), rounded towards zero to an integer.
@@ -103,7 +101,7 @@ ENDFUNC
 
 #if 0
 /* This is a test program to find the smallest value of rA2.1.0.E after
-   division. The nonzero value gives a garanty that normalization loop
+   division. The nonzero value gives a guaranty that normalization loop
    is finite.	*/
 
 #include <stdio.h>

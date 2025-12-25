@@ -29,18 +29,11 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef _UTIL_PARITY_H_
 #define _UTIL_PARITY_H_
 
 #include <stdint.h>
-
-#ifndef __DOXYGEN__
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
-#endif /* !DOXYGEN */
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup util_parity <util/parity.h>: Parity bit generation
@@ -71,7 +64,7 @@ uint8_t parity_even_bit (uint8_t __val)
          "sbrc %0, 3"            "\n\t"
          "inc  %0"
          /* parity is in [0] */
-         : "+d" (__val) :: "r0");
+         : "+d" (__val));
 
   return __val & 1;
 }

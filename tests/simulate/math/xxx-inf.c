@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of a set of functions: func(Inf) --> NaN
-   $Id$
- */
+/* Test of a set of functions: func(Inf) --> NaN */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,11 +39,12 @@ union lofl_u {
 
 volatile union lofl_u v = { 1 };
 
-double (*tfun[]) (double) = {	/* Table of tested functions.	*/
-    asin,
-    cos,
-    sin,
-    tan,
+float (*tfun[]) (float) =	/* Table of tested functions.	*/
+{
+    asinf,
+    cosf,
+    sinf,
+    tanf,
 };
 
 void x_exit (int index)
@@ -57,20 +55,23 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int i;
     
-    for (i = 0; i < (int) (sizeof(tfun) / sizeof(tfun[0])); i++) {
+    for (i = 0; i < (int) (sizeof(tfun) / sizeof(tfun[0])); i++)
+    {
 	x.lo = 0x7f800000;		/* +Inf	*/
 	v.fl = (tfun[i]) (x.fl);
-	if (!isnan (v.fl)) {
+	if (!isnanf (v.fl))
+	{
 	    x_exit (i+1);
 	}
 	x.lo = 0xff800000;		/* -Inf	*/
 	v.fl = (tfun[i]) (x.fl);
-	if (!isnan (v.fl)) {
+	if (!isnanf (v.fl))
+	{
 	    x_exit (i+1);
 	}
     }

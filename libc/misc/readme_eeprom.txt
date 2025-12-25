@@ -26,7 +26,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.	*/
 
-# $Id$
 
 Register usage of internally-used functions, common archs:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,7 +55,7 @@ Register usage of internally-used functions, common archs:
 	    r25,r24	- decremented EEPROM address
 	Scratch:
 	    r18,r0
-    
+
     eeprom_write_r18:
 	Input:
 	    r18		- byte to write
@@ -65,7 +64,7 @@ Register usage of internally-used functions, common archs:
 	    r25,r24	- incremented EEPROM address
 	Scratch:
 	    r0
-    
+
     eeprom_write_byte:
 	Input:
 	    r22		- byte to write

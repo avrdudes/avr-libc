@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* iom8hva.h - definitions for ATmega8HVA.  */
 
 #ifndef _AVR_IOM8HVA_H_
@@ -72,6 +70,10 @@
 #define SLEEP_MODE_ADC (0x01<<1)
 #define SLEEP_MODE_PWR_SAVE (0x03<<1)
 #define SLEEP_MODE_PWR_OFF (0x04<<1)
+
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x10
 
 #endif /* _AVR_IOM8HVA_H_ */
 

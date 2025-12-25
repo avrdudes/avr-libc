@@ -26,10 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$	*/
-
-#if	!defined (__DOXYGEN__)
-
 #include "asmdef.h"
 
 /* char *itoa (int val, char *s, int radix)
@@ -58,5 +54,3 @@ ENTRY	__itoa
 	ret
 
 ENDFUNC
-
-#endif	/* !__DOXYGEN__ */

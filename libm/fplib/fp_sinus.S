@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
@@ -65,8 +63,9 @@ ENTRY __fp_sinus
 	XJMP	_U(__fp_powsodd)
 ENDFUNC
 
-	PGMX_SECTION(.sinus)
-.L_table:
+	PGMX_SECTION(fplib.sinus)
+
+OBJECT .L_table
 	.byte	5
 	.byte	     0xa8,0x4c,0xcd,0xb2	; -0.0000000239
 	.byte	0xd4,0x4e,0xb9,0x38,0x36	;  0.0000027526
@@ -74,6 +73,6 @@ ENDFUNC
 	.byte	0x91,0x86,0x88,0x08,0x3c	;  0.0083333315
 	.byte	0xa6,0xaa,0xaa,0x2a,0xbe	; -0.1666666664
 	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
-	.end
+ENDOBJ .L_table
 
 #endif /* !defined(__AVR_TINY__) */

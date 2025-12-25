@@ -32,8 +32,6 @@
  ****************************************************************************/
 
 
-/* $Id$ */
-
 #ifndef _AVR_ATMEGA128A_H_INCLUDED
 #define _AVR_ATMEGA128A_H_INCLUDED
 
@@ -902,7 +900,7 @@
 #define E2SIZE      4096
 #define E2PAGESIZE  8
 #define E2END       0x0FFF
-#define XRAMEND      RAMEND
+#define XRAMEND     0xFFFF
 
 
 /* Fuses */

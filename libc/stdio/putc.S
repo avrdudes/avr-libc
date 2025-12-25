@@ -24,21 +24,14 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
+  POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#include "macros.inc"
+#include "asmdef.h"
 
 /*
 int putc(int c, FILE *stream);
 */
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(putc)
-	.type	_U(putc), @function
-_U(putc):
+ENTRY _U(putc)
 	XJMP	fputc
-.L_putc_end:
-	.size	_U(putc), .L_putc_end - _U(putc)
+ENDFUNC

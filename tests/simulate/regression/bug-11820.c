@@ -24,18 +24,15 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* bug #11820: wrong output with precision = 3
-   $Id$
- */
+/* bug #11820: wrong output with precision = 3 */
 #include <stdlib.h>
 #include <string.h>
 
 int main ()
 {
-#ifdef	__AVR__		/* dtostre() is not a standart C function.	*/
+#ifdef	__AVR__		/* dtostre() is not a standard C function.	*/
     char s[20];
     dtostre (1e-15, s, 3, 0);
     if (strcmp (s, "1.000e-15")) exit (__LINE__);

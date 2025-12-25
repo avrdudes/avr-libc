@@ -1,5 +1,5 @@
 /*
- * (c)2012 Michael Duane Rice All rights reserved.
+ * Copyright (c) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,26 +23,19 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
 /*
     Impoved system_tick Credit to Wouter van Gulik.
 */
 
-#include <avr/common.h>
-#include "sectionname.h"
+#include "asmdef.h"
 
-ASSEMBLY_CLIB_SECTION
-    .global	system_tick
-	.type	system_tick, @function
-system_tick:
+ENTRY system_tick
     push r24
-    in r24,_SFR_IO_ADDR(SREG)
-	push r24
-	cli
+    in r24,SREG_IO_ADDR
+    push r24
+    cli
     lds r24,__system_time+0
     subi r24, (-1)
     sts __system_time+0,r24
@@ -56,7 +49,7 @@ system_tick:
     sbci r24, (-1)
     sts __system_time+3,r24
     pop r24
-    out _SFR_IO_ADDR(SREG),r24
+    out SREG_IO_ADDR,r24
     pop r24
     ret
-	.size	system_tick, .-system_tick
+ENDFUNC

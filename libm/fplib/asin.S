@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* float asinf (float A);
      The asinf() function returns the arc sine in radians and the value is
      mathematically defined to be between -PI/2 and PI/2 (inclusive).
@@ -40,50 +38,18 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-#define	X2SMALL     0x3e78ffff
-#define HI40_PI_2   0x3fc90fda		/* high 4 bytes of Pi/2	*/
-#define	LO40_PI_2   0xa2		/* lowest byte of Pi/2	*/
-
 ENTRY_FLOAT asinf asin asinl
-  ; save A sign
-	push	rA3
-  ; A = fabs(A)
-	andi	rA3, 0x7f
-  ; is A too small ?
-	ldi	ZL,  hhi8(X2SMALL + 1)
-	cpi	rA2, hlo8(X2SMALL + 1)
-	cpc	rA3, ZL
-	brsh	1f
-  ; for small x
-	ldi	ZL, lo8 (.L_table)
-	ldi	ZH, hi8 (.L_table)
-	LDI_XH_hh8(.L_table)
-	XCALL	_U(__fp_powsodd)
-	rjmp	2f
-  ; arcsin(x) = Pi/2 - arccos(x)
-1:	XCALL	_U(__fp_arccos)
-	subi	rA3, 0x80
-	ldi	rBE, LO40_PI_2
-	ldi	rB0,  lo8(HI40_PI_2)
-	ldi	rB1,  hi8(HI40_PI_2)
-	ldi	rB2, hlo8(HI40_PI_2)
-	ldi	rB3, hhi8(HI40_PI_2)
-	XCALL	_U(__addsf3x)
-	XCALL	_U(__fp_round)
-  ; restore sign
-2:	pop	r0
-	sbrc	r0, 7
-	subi	rA3, 0x80
-	ret
+        ;; Save A sign
+        push    rA3
+        ;; Finally reverse-subtract pi/2 for 1/2 <= x <= 1.
+        ldi     XL, 0
+        ;; A = arcsin(|A|)
+        XCALL   _U(__fp_asinf_acosf)
+        ;; Restore sign
+        pop     r0
+        bst     r0, 7
+        bld     rA3, 7
+        ret
 ENDFUNC
-
-	PGMX_SECTION(.asin)
-.L_table:
-	.byte	3
-	.byte	     0x6e,0xdb,0x36,0x3d	; 15/336
-	.byte	0x9a,0x99,0x99,0x99,0x3d	; 3/40
-	.byte	0xab,0xaa,0xaa,0x2a,0x3e	; 1/6
-	.byte	0x00,0x00,0x00,0x80,0x3f	; 1
-	.end
 
 #endif /* !defined(__AVR_TINY__) */

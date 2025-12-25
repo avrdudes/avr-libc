@@ -24,11 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of setjmp()/longjmp() functions: return value.
-   $Id$	*/
+/* Test of setjmp()/longjmp() functions: return value. */
 
 #include <stdlib.h>
 #include <setjmp.h>
@@ -78,7 +76,7 @@ int main ()
     }
 
     /* Repeat above with volatile function pointers: exclude
-       posible compiler optimization.	*/
+       possible compiler optimization.	*/
     v_setjmp = setjmp;
     v_longjmp = longjmp;
 
@@ -104,7 +102,7 @@ int main ()
 	default:
 	    exit (__LINE__);
     }
-    
+
     switch (v_setjmp (env)) {
 	case 0:
 	    v_longjmp (env, -1);

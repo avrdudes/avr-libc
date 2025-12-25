@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of tolower() function.
-   $Id$
- */
+/* Test of tolower() function. */
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -53,7 +50,7 @@
 int main ()
 {
     int i, v;
-    
+
     for (i = -1; i < 256; i++) {
 	v = tolower (i);
 	if (i >= 'A' && i <= 'Z') {
@@ -68,10 +65,11 @@ int main ()
 	    }
 	}
     }
-    
 
-/* Skip the host, as according to C standart it is not safety to use an
-   argument beyound -1..255 value. AVR-LibC's ctype functions permit
+
+
+/* Skip the host, as according to C standard it is not safe to use an
+   argument beyond -1..255 value. AVR-LibC's ctype functions permit
    this.	*/
 #ifdef	__AVR__
     {

@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
 #include "fp32def.h"
@@ -71,8 +69,14 @@ ENTRY_FLOAT frexpf frexp frexpl
 	subi	rA3, 126
 	sbc	rB3, rB3
 
+#ifdef __AVR_ERRATA_SKIP_JMP_CALL__
+	sbrc	rA2, 7
+	rjmp	0f
+#else
 	sbrs	rA2, 7
+#endif
 	XCALL	_U(__fp_norm2)
+0:
 
 #if  defined(__AVR_XMEGA__) && __AVR_XMEGA__
 	adiw	ZL, 0

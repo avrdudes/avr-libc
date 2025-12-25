@@ -31,13 +31,10 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-
-  $Id$
-*/
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #ifndef _STDIO_H_
-#define	_STDIO_H_ 1
+#define _STDIO_H_ 1
 
 #ifndef __ASSEMBLER__
 
@@ -48,7 +45,7 @@
 #define __need_NULL
 #define __need_size_t
 #include <stddef.h>
-#endif	/* !__DOXYGEN__ */
+#endif /* !__DOXYGEN__ */
 
 /** \file */
 /** \defgroup avr_stdio <stdio.h>: Standard IO facilities
@@ -132,17 +129,18 @@
 
     <h3>Format strings in flash ROM</h3>
 
-    All the \c printf and \c scanf family functions come in two flavours: the
-    standard name, where the format string is expected to be in
-    SRAM, as well as a version with the suffix "_P" where the format
-    string is expected to reside in the flash ROM.  The macro
-    #PSTR (explained in \ref avr_pgmspace) becomes very handy
-    for declaring these format strings.
+    All the \c printf and \c scanf family functions come in three flavours:
+    the standard name, where the format string is expected to be in
+    SRAM, as well as two versions with the suffix "_P" and "_F" where the
+    format string is expected to reside in the flash ROM.  The macros
+    #PSTR (explained in \ref avr_pgmspace) and #FSTR (explained in
+    \ref avr_flash "<avr/flash.h>") become very handy for declaring
+    these format strings.
 
     \anchor stdio_without_malloc
     <h3>Running stdio without malloc()</h3>
 
-    By default, fdevopen() requires malloc().  As this is often
+    By default, fdevopen() requires \ref a_malloc "malloc()".  As this is often
     not desired in the limited environment of a microcontroller, an
     alternative option is provided to run completely without malloc().
 
@@ -154,30 +152,24 @@
     \code
     #include <stdio.h>
 
-    static int uart_putchar(char c, FILE *stream);
-
-    static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,
-                                             _FDEV_SETUP_WRITE);
-
+    static FILE mystdout = FDEV_SETUP_STREAM (uart_putchar, NULL,
+                                              _FDEV_SETUP_WRITE);
     static int
-    uart_putchar(char c, FILE *stream)
+    uart_putchar (char c, FILE *stream)
     {
-
-      if (c == '\n')
-        uart_putchar('\r', stream);
-      loop_until_bit_is_set(UCSRA, UDRE);
-      UDR = c;
-      return 0;
+        if (c == '\n')
+            uart_putchar ('\r', stream);
+        loop_until_bit_is_set (UCSRA, UDRE);
+        UDR = c;
+        return 0;
     }
 
-    int
-    main(void)
+    int main (void)
     {
-      init_uart();
-      stdout = &mystdout;
-      printf("Hello, world!\n");
-
-      return 0;
+        init_uart();
+        stdout = &mystdout;
+        printf ("Hello, world!\n");
+        return 0;
     }
     \endcode
 
@@ -189,14 +181,13 @@
     destroyed by first calling the macro fdev_close(), and then
     destroying the object itself.  No call to fclose() should be
     issued for these streams.  While calling fclose() itself is
-    harmless, it will cause an undefined reference to free() and thus
-    cause the linker to link the malloc module into the application.
-
-    <h3>Notes</h3>
+    harmless, it will cause an undefined reference to \ref a_free "free()"
+    and thus cause the linker to pull in the \ref a_malloc "malloc"
+    module into the application.
 
 <dl>
 <dt>\anchor stdio_note1 Note 1:</dt>
-<dd>    
+<dd>
     It might have been possible to implement a device abstraction that
     is compatible with \c fopen() but since this would have required
     to parse a string, and to take all the information needed either
@@ -212,15 +203,13 @@
     to a UART interface might look like this:
 
     \code
-    int
-    uart_putchar(char c, FILE *stream)
+    int uart_putchar (char c, FILE *stream)
     {
-
-      if (c == '\n')
-        uart_putchar('\r', stream);
-      loop_until_bit_is_set(UCSRA, UDRE);
-      UDR = c;
-      return 0;
+        if (c == '\n')
+            uart_putchar ('\r', stream);
+        loop_until_bit_is_set (UCSRA, UDRE);
+        UDR = c;
+        return 0;
     }
     \endcode
 </dd>
@@ -317,7 +306,7 @@ typedef struct __file FILE;
    doesn't contain an abstraction for actual files, its origin as
    "end of file" is somewhat meaningless here.
 */
-#define EOF	(-1)
+#define EOF (-1)
 
 /** This macro inserts a pointer to user defined data into a FILE
     stream object.
@@ -354,30 +343,28 @@ typedef struct __file FILE;
 #define fdev_setup_stream(stream, put, get, rwflag)
 #else  /* !DOXYGEN */
 #define fdev_setup_stream(stream, p, g, f) \
-	do { \
-		(stream)->put = p; \
-		(stream)->get = g; \
-		(stream)->flags = f; \
-		(stream)->udata = 0; \
-	} while(0)
+    do {                                   \
+        (stream)->put = p;                 \
+        (stream)->get = g;                 \
+        (stream)->flags = f;               \
+        (stream)->udata = 0;               \
+    } while(0)
 #endif /* DOXYGEN */
 
-#define _FDEV_SETUP_READ  __SRD	/**< fdev_setup_stream() with read intent */
-#define _FDEV_SETUP_WRITE __SWR	/**< fdev_setup_stream() with write intent */
-#define _FDEV_SETUP_RW    (__SRD|__SWR)	/**< fdev_setup_stream() with read/write intent */
+#define _FDEV_SETUP_READ  __SRD /**< fdev_setup_stream() with read intent */
+#define _FDEV_SETUP_WRITE __SWR /**< fdev_setup_stream() with write intent */
+#define _FDEV_SETUP_RW    (__SRD|__SWR) /**< fdev_setup_stream() with read/write intent */
 
 /**
- * Return code for an error condition during device read.
- *
- * To be used in the get function of fdevopen().
- */
+   Return code for an error condition during device read.
+
+   To be used in the get function of fdevopen().  */
 #define _FDEV_ERR (-1)
 
 /**
- * Return code for an end-of-file condition during device read.
- *
- * To be used in the get function of fdevopen().
- */
+   Return code for an end-of-file condition during device read.
+
+   To be used in the get function of fdevopen().  */
 #define _FDEV_EOF (-2)
 
 #if defined(__DOXYGEN__)
@@ -426,7 +413,7 @@ extern struct __file *__iob[];
  * some backwards compatibility with the old version.
  */
 extern FILE *fdevopen(int (*__put)(char), int (*__get)(void),
-                      int __opts __attribute__((unused)));
+                      int __opts __attribute__((__unused__)));
 #else  /* !defined(__STDIO_FDEVOPEN_COMPAT_12) */
 /* New prototype for AVR-LibC 1.4 and above. */
 extern FILE *fdevopen(int (*__put)(char, FILE*), int (*__get)(FILE*));
@@ -446,7 +433,7 @@ extern FILE *fdevopen(int (*__put)(char, FILE*), int (*__get)(FILE*));
 
    It currently always returns 0 (for success).
 */
-extern int	fclose(FILE *__stream);
+extern int fclose(FILE *__stream);
 
 /**
    This macro frees up any library resources that might be associated
@@ -457,11 +444,8 @@ extern int	fclose(FILE *__stream);
    (Currently, this macro evaluates to nothing, but this might change
    in future versions of the library.)
 */
-#if defined(__DOXYGEN__)
-# define fdev_close()
-#else
-# define fdev_close() ((void)0)
-#endif
+#define fdev_close() ((void)0)
+
 
 /**
    \c vfprintf is the central facility of the \c printf family of
@@ -533,11 +517,11 @@ extern int	fclose(FILE *__stream);
            precision, if any, gives the minimum number of digits that
            must appear; if the converted value requires fewer digits,
            it is padded on the left with zeros.
-   - \c p  The <tt>void *</tt> argument is taken as an unsigned integer,
+   - \c p  The <tt>void*</tt> argument is taken as an unsigned integer,
            and converted similarly as a <tt>%\#x</tt> command would do.
    - \c c  The \c int argument is converted to an \c "unsigned char", and the
            resulting character is written.
-   - \c s  The \c "char *" argument is expected to be a pointer to an array
+   - \c s  The <tt>char*</tt> argument is expected to be a pointer to an array
            of character type (pointer to a string).  Characters from
            the array are written up to (but not including) a
            terminating NUL character; if a precision is specified, no
@@ -581,35 +565,72 @@ extern int	fclose(FILE *__stream);
 
    Since the full implementation of all the mentioned features becomes
    fairly large, three different flavours of vfprintf() can be
-   selected using linker options.  The default vfprintf() implements
-   all the mentioned functionality except floating point conversions.
-   A minimized version of vfprintf() is available that only implements
-   the very basic integer and string conversion facilities, but only
-   the \c # additional option can be specified using conversion
-   flags (these flags are parsed correctly from the format
-   specification, but then simply ignored).  This version can be
-   requested using the following \ref gcc_minusW "compiler options":
+   selected using linker options:
+   - The default vfprintf() implements all the mentioned functionality
+     except floating point conversions.
+   - A minimized version of vfprintf() that only implements
+     the very basic integer and string conversion facilities, but only
+     the \c # additional option can be specified using conversion
+     flags (these flags are parsed correctly from the format
+     specification, but then are simply ignored).
+   - A version with floating point-support, but with the following twists:
+     - The argument will be converted to IEEE single for output.
+     - When \c long \c double is a 64-bit type and \c double is a 32-bit
+       type, then the former will only be printed as a single '?'.
+       Rationale is to avoid 64-bit floating point arithmetic in printf
+       when the used selected <tt>-mdouble=32</tt>.  In order to print
+       IEEE double, it can be converted to IEEE single by hand.
 
+   The respective version can
+   be requested using the following \ref gcc_minusW "link options":
+
+   <dl>
+   <dt>Classic approach</dt>
+   <dd>
+   - The minimal version can be requested with the following options:
    \code
    -Wl,-u,vfprintf -lprintf_min
    \endcode
 
-   If the full functionality including the floating point conversions
+   - If the full functionality including the floating point conversions
    is required, the following options should be used:
-
    \code
-   -Wl,-u,vfprintf -lprintf_flt -lm
+   -Wl,-u,vfprintf -lprintf_flt
    \endcode
 
-   \par Limitations:
+   This approach will always link the selected printf code,
+   even when the application doesn't use printf.
+   </dd>
+   <dt>Since AVR-LibC v2.3</dt>
+   <dd>
+   - The minimal version can be requested with the following options:
+   \code
+   -Wl,--defsym,vfprintf=vfprintf_min
+   \endcode
+   - The full functionality including the floating point conversions
+   can be requested with:
+   \code
+   -Wl,--defsym,vfprintf=vfprintf_flt
+   \endcode
+
+   The difference to the "classic" approach is that when no printf
+   is used in the application and <tt>-Wl,\--gc-sections</tt> is added to
+   the linker options, then the printf code will not be pulled in.  See
+   <a href="https://github.com/avrdudes/avr-libc/issues/654">issue \#654</a>
+   for an example.
+   </dd>
+   </dl>
+
+   <b>Limitations:</b>
    - The specified width and precision can be at most 255.
 
-   \par Notes:
-   - For floating-point conversions, if you link default or minimized
-     version of vfprintf(), the symbol \c ? will be output and double
-     argument will be skipped. So you output below will not be crashed.
-     For default version the width field and the "pad to left" ( symbol
-     minus ) option will work in this case.
+   <b>Notes:</b>
+   - For floating-point conversions, if you link the default or minimized
+     version of vfprintf(), the symbol <tt>?</tt> will be output.
+     The same applies for the float version with <tt>-mdouble=32</tt>
+     and when an IEEE double arguments is passed.
+     For default version the width field and the "pad to left" (symbol
+     \em minus) option will work in this case.
    - The \c hh length modifier is ignored (\c char argument is
      promouted to \c int). More exactly, this realization does not check
      the number of \c h symbols.
@@ -617,31 +638,29 @@ extern int	fclose(FILE *__stream);
      realization does not operate \c long \c long arguments.
    - The variable width or precision field (an asterisk \c * symbol)
      is not realized and will to abort the output.
-
  */
-
-extern int	vfprintf(FILE *__stream, const char *__fmt, va_list __ap);
+extern int vfprintf(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vfprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #vfprintf_F.
 */
-extern int	vfprintf_P(FILE *__stream, const char *__fmt, va_list __ap);
+extern int vfprintf_P(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
    The function \c fputc sends the character \c c (though given as type
    \c int) to \c stream.  It returns the character, or \c EOF in case
    an error occurred.
 */
-extern int	fputc(int __c, FILE *__stream);
+extern int fputc(int __c, FILE *__stream);
 
 #if !defined(__DOXYGEN__)
 
 /* putc() function implementation, required by standard */
-extern int	putc(int __c, FILE *__stream);
+extern int putc(int __c, FILE *__stream);
 
 /* putchar() function implementation, required by standard */
-extern int	putchar(int __c);
+extern int putchar(int __c);
 
 #endif /* not __DOXYGEN__ */
 
@@ -661,13 +680,13 @@ extern int	putchar(int __c);
    The function \c printf performs formatted output to stream
    \c stdout.  See \c vfprintf() for details.
 */
-extern int	printf(const char *__fmt, ...);
+extern int printf(const char *__fmt, ...);
 
 /**
    Variant of \c printf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #printf_F.
 */
-extern int	printf_P(const char *__fmt, ...);
+extern int printf_P(const char *__fmt, ...);
 
 /**
    The function \c vprintf performs formatted output to stream
@@ -675,19 +694,19 @@ extern int	printf_P(const char *__fmt, ...);
 
    See vfprintf() for details.
 */
-extern int	vprintf(const char *__fmt, va_list __ap);
+extern int vprintf(const char *__fmt, va_list __ap);
 
 /**
    Variant of \c printf() that sends the formatted characters
    to string \c s.
 */
-extern int	sprintf(char *__s, const char *__fmt, ...);
+extern int sprintf(char *__s, const char *__fmt, ...);
 
 /**
    Variant of \c sprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #sprintf_F.
 */
-extern int	sprintf_P(char *__s, const char *__fmt, ...);
+extern int sprintf_P(char *__s, const char *__fmt, ...);
 
 /**
    Like \c sprintf(), but instead of assuming \c s to be of infinite
@@ -697,25 +716,25 @@ extern int	sprintf_P(char *__s, const char *__fmt, ...);
    Returns the number of characters that would have been written to
    \c s if there were enough space.
 */
-extern int	snprintf(char *__s, size_t __n, const char *__fmt, ...);
+extern int snprintf(char *__s, size_t __n, const char *__fmt, ...);
 
 /**
    Variant of \c snprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #snprintf_F.
 */
-extern int	snprintf_P(char *__s, size_t __n, const char *__fmt, ...);
+extern int snprintf_P(char *__s, size_t __n, const char *__fmt, ...);
 
 /**
    Like \c sprintf() but takes a variable argument list for the
    arguments.
 */
-extern int	vsprintf(char *__s, const char *__fmt, va_list ap);
+extern int vsprintf(char *__s, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vsprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #vsprintf_F.
 */
-extern int	vsprintf_P(char *__s, const char *__fmt, va_list ap);
+extern int vsprintf_P(char *__s, const char *__fmt, va_list __ap);
 
 /**
    Like \c vsprintf(), but instead of assuming \c s to be of infinite
@@ -725,57 +744,58 @@ extern int	vsprintf_P(char *__s, const char *__fmt, va_list ap);
    Returns the number of characters that would have been written to
    \c s if there were enough space.
 */
-extern int	vsnprintf(char *__s, size_t __n, const char *__fmt, va_list ap);
+extern int vsnprintf(char *__s, size_t __n, const char *__fmt, va_list __ap);
 
 /**
    Variant of \c vsnprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #vsnprintf_F.
 */
-extern int	vsnprintf_P(char *__s, size_t __n, const char *__fmt, va_list ap);
+extern int vsnprintf_P(char *__s, size_t __n, const char *__fmt, va_list __ap);
 /**
    The function \c fprintf performs formatted output to \c stream.
    See \c vfprintf() for details.
 */
-extern int	fprintf(FILE *__stream, const char *__fmt, ...);
+extern int fprintf(FILE *__stream, const char *__fmt, ...);
 
 /**
    Variant of \c fprintf() that uses a \c fmt string that resides
-   in program memory.
+   in program memory.  See also #fprintf_F.
 */
-extern int	fprintf_P(FILE *__stream, const char *__fmt, ...);
+extern int fprintf_P(FILE *__stream, const char *__fmt, ...);
 
 /**
    Write the string pointed to by \c str to stream \c stream.
 
    Returns 0 on success and EOF on error.
 */
-extern int	fputs(const char *__str, FILE *__stream);
+extern int fputs(const char *__str, FILE *__stream);
 
 /**
    Variant of fputs() where \c str resides in program memory.
+   See also #fputs_F.
 */
-extern int	fputs_P(const char *__str, FILE *__stream);
+extern int fputs_P(const char *__str, FILE *__stream);
 
 /**
    Write the string pointed to by \c str, and a trailing newline
    character, to \c stdout.
 */
-extern int	puts(const char *__str);
+extern int puts(const char *__str);
 
 /**
    Variant of puts() where \c str resides in program memory.
+   See also #puts_F.
 */
-extern int	puts_P(const char *__str);
+extern int puts_P(const char *__str);
 
 /**
    Write \c nmemb objects, \c size bytes each, to \c stream.
    The first byte of the first object is referenced by \c ptr.
 
    Returns the number of objects successfully written, i. e.
-   \c nmemb unless an output error occured.
+   \c nmemb unless an output error occurred.
  */
-extern size_t	fwrite(const void *__ptr, size_t __size, size_t __nmemb,
-		       FILE *__stream);
+extern size_t fwrite(const void *__ptr, size_t __size, size_t __nmemb, FILE *__stream);
 
 /**
    The function \c fgetc reads a character from \c stream.  It returns
@@ -783,15 +803,15 @@ extern size_t	fwrite(const void *__ptr, size_t __size, size_t __nmemb,
    error occurred.  The routines feof() or ferror() must be used to
    distinguish between both situations.
 */
-extern int	fgetc(FILE *__stream);
+extern int fgetc(FILE *__stream);
 
 #if !defined(__DOXYGEN__)
 
 /* getc() function implementation, required by standard */
-extern int	getc(FILE *__stream);
+extern int getc(FILE *__stream);
 
 /* getchar() function implementation, required by standard */
-extern int	getchar(void);
+extern int getchar(void);
 
 #endif /* not __DOXYGEN__ */
 
@@ -822,7 +842,7 @@ extern int	getchar(void);
    argument \c c character equals \c EOF, the operation will fail and
    the stream will remain unchanged.
 */
-extern int	ungetc(int __c, FILE *__stream);
+extern int ungetc(int __c, FILE *__stream);
 
 /**
    Read at most <tt>size - 1</tt> bytes from \c stream, until a
@@ -834,65 +854,53 @@ extern int	ungetc(int __c, FILE *__stream);
    If an error was encountered, the function returns NULL and sets the
    error flag of \c stream, which can be tested using ferror().
    Otherwise, a pointer to the string will be returned.  */
-extern char	*fgets(char *__str, int __size, FILE *__stream);
+extern char *fgets(char *__str, int __size, FILE *__stream);
 
 /**
    Similar to fgets() except that it will operate on stream \c stdin,
    and the trailing newline (if any) will not be stored in the string.
    It is the caller's responsibility to provide enough storage to hold
    the characters read.  */
-extern char	*gets(char *__str);
+extern char *gets(char *__str);
 
 /**
    Read \c nmemb objects, \c size bytes each, from \c stream,
    to the buffer pointed to by \c ptr.
 
    Returns the number of objects successfully read, i. e.
-   \c nmemb unless an input error occured or end-of-file was
+   \c nmemb unless an input error occurred or end-of-file was
    encountered.  feof() and ferror() must be used to distinguish
    between these two conditions.
  */
-extern size_t	fread(void *__ptr, size_t __size, size_t __nmemb,
-		      FILE *__stream);
+extern size_t fread(void *__ptr, size_t __size, size_t __nmemb, FILE *__stream);
 
 /**
    Clear the error and end-of-file flags of \c stream.
  */
-extern void	clearerr(FILE *__stream);
+extern void clearerr(FILE *__stream);
 
-#if !defined(__DOXYGEN__)
-/* fast inlined version of clearerr() */
-#define clearerror(s) do { (s)->flags &= ~(__SERR | __SEOF); } while(0)
-#endif /* !defined(__DOXYGEN__) */
 
 /**
    Test the end-of-file flag of \c stream.  This flag can only be cleared
    by a call to clearerr().
  */
-extern int	feof(FILE *__stream);
+extern int feof(FILE *__stream);
 
-#if !defined(__DOXYGEN__)
-/* fast inlined version of feof() */
-#define feof(s) ((s)->flags & __SEOF)
-#endif /* !defined(__DOXYGEN__) */
 
 /**
    Test the error flag of \c stream.  This flag can only be cleared
    by a call to clearerr().
  */
-extern int	ferror(FILE *__stream);
+extern int ferror(FILE *__stream);
 
-#if !defined(__DOXYGEN__)
-/* fast inlined version of ferror() */
-#define ferror(s) ((s)->flags & __SERR)
-#endif /* !defined(__DOXYGEN__) */
 
-extern int	vfscanf(FILE *__stream, const char *__fmt, va_list __ap);
+extern int vfscanf(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
    Variant of vfscanf() using a \c fmt string in program memory.
+   See also #vfscanf_F.
  */
-extern int	vfscanf_P(FILE *__stream, const char *__fmt, va_list __ap);
+extern int vfscanf_P(FILE *__stream, const char *__fmt, va_list __ap);
 
 /**
    The function \c fscanf performs formatted input, reading the
@@ -900,24 +908,26 @@ extern int	vfscanf_P(FILE *__stream, const char *__fmt, va_list __ap);
 
    See vfscanf() for details.
  */
-extern int	fscanf(FILE *__stream, const char *__fmt, ...);
+extern int fscanf(FILE *__stream, const char *__fmt, ...);
 
 /**
    Variant of fscanf() using a \c fmt string in program memory.
+   See also #fscanf_F.
  */
-extern int	fscanf_P(FILE *__stream, const char *__fmt, ...);
+extern int fscanf_P(FILE *__stream, const char *__fmt, ...);
 
 /**
    The function \c scanf performs formatted input from stream \c stdin.
 
    See vfscanf() for details.
  */
-extern int	scanf(const char *__fmt, ...);
+extern int scanf(const char *__fmt, ...);
 
 /**
    Variant of scanf() where \c fmt resides in program memory.
+   See also #scanf_F.
  */
-extern int	scanf_P(const char *__fmt, ...);
+extern int scanf_P(const char *__fmt, ...);
 
 /**
    The function \c vscanf performs formatted input from stream
@@ -925,7 +935,7 @@ extern int	scanf_P(const char *__fmt, ...);
 
    See vfscanf() for details.
 */
-extern int	vscanf(const char *__fmt, va_list __ap);
+extern int vscanf(const char *__fmt, va_list __ap);
 
 /**
    The function \c sscanf performs formatted input, reading the
@@ -933,14 +943,14 @@ extern int	vscanf(const char *__fmt, va_list __ap);
 
    See vfscanf() for details.
  */
-extern int	sscanf(const char *__buf, const char *__fmt, ...);
+extern int sscanf(const char *__buf, const char *__fmt, ...);
 
 /**
    Variant of sscanf() using a \c fmt string in program memory.
+   See also #sscanf_F.
  */
-extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
+extern int sscanf_P(const char *__buf, const char *__fmt, ...);
 
-#if defined(__DOXYGEN__)
 /**
    Flush \c stream.
 
@@ -948,13 +958,7 @@ extern int	sscanf_P(const char *__buf, const char *__fmt, ...);
    only, as the standard IO implementation currently does not perform
    any buffering.
  */
-extern int	fflush(FILE *stream);
-#else
-static __inline__ int fflush(FILE *stream __attribute__((unused)))
-{
-	return 0;
-}
-#endif
+extern int fflush(FILE *stream);
 
 #ifndef __DOXYGEN__
 /* only mentioned for libstdc++ support, not implemented in library */
@@ -977,7 +981,7 @@ extern void setbuf(FILE *stream, char *buf);
 extern int setvbuf(FILE *stream, char *buf, int mode, size_t size);
 extern FILE *tmpfile(void);
 extern char *tmpnam (char *s);
-#endif	/* !__DOXYGEN__ */
+#endif /* !__DOXYGEN__ */
 
 #ifdef __cplusplus
 }

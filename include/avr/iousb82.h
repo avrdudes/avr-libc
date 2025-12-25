@@ -29,8 +29,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iousb82.h - definitions for AT90USB82 */
 
 #ifndef _AVR_AT90USB82_H_
@@ -93,5 +91,9 @@
 #define SLEEP_MODE_STANDBY (0x06<<1)
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
 
+
+#define SIGNATURE_0 0x1E
+#define SIGNATURE_1 0x93
+#define SIGNATURE_2 0x82
 
 #endif /* _AVR_AT90USB82_H_ */

@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* iotn2313.h derived from io2313.h by Bob Paddock.
 
    The changes between the AT90S2313 and the ATtiny2313 are extensive.

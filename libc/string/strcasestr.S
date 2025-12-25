@@ -26,13 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__AVR_TINY__)
-
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
+
+TINY_WEAK_ALIAS _U(strcasestr_P) _U(strcasestr)
 
 #define s1_hi	r25
 #define s1_lo	r24
@@ -41,7 +37,7 @@
 
 #define	beg2	r21	/* begin of s2 (cashed): s2[0]		*/
 #define ctmp	r20	/* scratch arg of .Lcmp()		*/
-#define csvd	r0	/* second arg of .Lcmp(), nochanged	*/
+#define csvd __tmp_reg__ /* second arg of .Lcmp(), nochanged	*/
 
 #ifdef	Lprogmem
 # define strcasestr	strcasestr_P
@@ -90,7 +86,7 @@ ENTRY strcasestr
 	ldi	s1_lo, lo8(1)
 	ldi	s1_hi, hi8(1)
 .L_match:
-	sbiw	s1_lo, 1	; restore after post-increment
+	X_sbiw	s1_lo, 1	; restore after post-increment
 .L_ret:
 	ret
 
@@ -115,7 +111,3 @@ ENTRY strcasestr
 1:	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

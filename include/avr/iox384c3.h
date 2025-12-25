@@ -32,8 +32,6 @@
  ****************************************************************************/
 
 
-/* $Id$ */
-
 #ifndef _AVR_IO_H_
 #  error "Include <avr/io.h> instead of this file."
 #endif
@@ -6746,7 +6744,7 @@ IO Module Instances. Mapped to memory.
 #define FUSE_WDWP1  (unsigned char)~_BV(5)  /* Watchdog Window Timeout Period Bit 1 */
 #define FUSE_WDWP2  (unsigned char)~_BV(6)  /* Watchdog Window Timeout Period Bit 2 */
 #define FUSE_WDWP3  (unsigned char)~_BV(7)  /* Watchdog Window Timeout Period Bit 3 */
-#define FUSE1_DEFAULT  (0xFF)
+#define FUSE1_DEFAULT  (0x0)
 
 /* Fuse Byte 2 */
 #define FUSE_BODPD0  (unsigned char)~_BV(0)  /* BOD Operation in Power-Down Mode Bit 0 */

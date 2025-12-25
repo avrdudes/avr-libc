@@ -25,9 +25,6 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 pmstring_a_c_sources = \
 	strtok_P.c
@@ -36,14 +33,15 @@ pmstring_a_asm_sources = \
 	memchr_P.S \
 	memcmp_P.S \
 	memccpy_P.S \
-	memcpy_P.S \
+	memcpy_P.S _memcpy_P.S \
 	memrchr_P.S \
 	strcasecmp_P.S \
 	strcat_P.S \
 	strchr_P.S \
 	strchrnul_P.S \
-	strcmp_P.S \
-	strcpy_P.S \
+	strcmp_P.S _strcmp_P.S \
+	strcpy_P.S _strcpy_P.S \
+	stpcpy_P.S \
 	strcspn_P.S \
 	strlcat_P.S \
 	strlcpy_P.S \
@@ -64,6 +62,7 @@ pmstring_a_asm_sources = \
 	strcat_PF.S \
 	strcmp_PF.S \
 	strcpy_PF.S \
+	stpcpy_PF.S \
 	strlcat_PF.S \
 	strlcpy_PF.S \
 	strlen_PF.S \

@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$	*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 #include <ctype.h>
 #include <errno.h>
@@ -36,8 +33,9 @@
 #ifndef	__AVR__
 # include <stdio.h>
 #endif
-#ifndef	EINVAL		/* Addition for errno.h in AVR-LibC-1.2.0	*/
-# define EINVAL	22	/* Invalid argument	*/
+
+#if __SIZEOF_LONG__ != 4
+#error expecting sizeof(long) == 4
 #endif
 
 static int t_strtol (const char *s, int base, long ret, int err, int len)
@@ -45,7 +43,9 @@ static int t_strtol (const char *s, int base, long ret, int err, int len)
     char * endptr;
     
     errno = 0;
-    endptr = (char *)s - 1;		/* invalid value	*/
+    endptr = (char *)s;
+    __asm ("" : "+r" (endptr));
+    endptr--;		/* invalid value	*/
     if (strtol (s, & endptr, base) != ret
 	|| errno != err
 #ifdef	__AVR__
@@ -55,8 +55,8 @@ static int t_strtol (const char *s, int base, long ret, int err, int len)
 #endif
     {
 #ifndef	__AVR__
-	printf ("strtol(\"%s\",,%d): %ld, errno: %d, len: %d\n",
-	    s, base, strtol(s, & endptr, base), errno, endptr - s);
+	printf ("strtol(\"%s\",,%d): %ld, errno: %d, len: %zd\n",
+                s, base, strtol(s, & endptr, base), errno, endptr - s);
 #endif
 	return 1;
     }

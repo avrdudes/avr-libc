@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * Copyright (C) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,47 +23,34 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
 /* Re entrant version of isotime(),  which prints the date and time
    in ISO 8601 format.  */
 
 #include <stdlib.h>
+#include <stdint.h>
 #include <time.h>
-
-extern void __print_lz (int, char *, char);
+#include "time-private.h"
 
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION
 void
-isotime_r(const struct tm * tmptr, char *buffer)
+isotime_r (const struct tm *tmptr, char *buffer)
 {
-	int i = tmptr->tm_year + 1900;
-	__print_lz(i/100, buffer, '-');
-	buffer+=2;
-	__print_lz(i%100, buffer,'-');
-	buffer+=3;
+    __print_x3210 (tmptr->tm_year + 1900, buffer);
+    buffer[0] = buffer[1];
+    buffer[1] = buffer[2];
+    buffer[2] = buffer[3];
+    buffer[3] = buffer[4];
+    buffer[4] = '-';
+    buffer += 5;
 
-	i = tmptr->tm_mon + 1;
-	__print_lz(i, buffer,'-');
-	buffer+=3;
-
-	i = tmptr->tm_mday;
-	__print_lz(i, buffer,' ');
-	buffer+=3;
-
-	i = tmptr->tm_hour;
-	__print_lz(i, buffer,':');
-	buffer+=3;
-
-	i = tmptr->tm_min;
-	__print_lz(i, buffer,':');
-	buffer+=3;
-
-	i = tmptr->tm_sec;
-	__print_lz(i, buffer,0);
+    buffer = __print_10 (tmptr->tm_mon + 1, buffer, '-');
+    buffer = __print_10 (tmptr->tm_mday, buffer, ' ');
+    buffer = __print_10 (tmptr->tm_hour, buffer, ':');
+    buffer = __print_10 (tmptr->tm_min,  buffer, ':');
+    buffer = __print_10 (tmptr->tm_sec,  buffer, '\0');
+    (void) buffer;
 }

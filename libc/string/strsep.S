@@ -27,13 +27,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+#include "asmdef.h"
 
-#if !defined(__AVR_TINY__)
-
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+TINY_WEAK_ALIAS _U(strsep_P) _U(strsep)
 
 #define strp_lo	r24
 #define dlm_lo	r22
@@ -42,43 +38,42 @@
 
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strsep)
-	.type	_U(strsep),@function
-_U(strsep):
+ENTRY _U(strsep)
   ; check a NULL pointer
 	X_movw	ZL, strp_lo
-	ld	XL, Z			; str address
-	ldd	XH, Z+1
+	ld	XL, Z+			; str address
+	ld	XH, Z+
 	X_movw	str_lo, XL		; save for return
-	adiw	XL, 0
+	X_sbiw	XL, 0
 	breq	5f			; return NULL
+#ifdef __AVR_TINY__
+	push	chr
+#endif
   ; get a symbol from str
 1:	ld	chr, X+
   ; scan delim[]
 	X_movw	ZL, dlm_lo
-2:	ld	r0, Z+
-	cp	r0, chr
-	cpse	r0, __zero_reg__
+2:	ld	__tmp_reg__, Z+
+	cp	__tmp_reg__, chr
+	cpse	__tmp_reg__, __zero_reg__
 	brne	2b	; if symbol is't match && no delim end
 	brne	1b	; if symbol is absent in delim[] && not a zero
-  ; chr is founded in delim[] (possible, it is a terminating zero of str)
-	tst	r0			; the same, as chr
+  ; chr is found in delim[] (possible, it is a terminating zero of str)
+	tst	__tmp_reg__		; the same, as chr
 	brne	3f
-	X_movw	XL, r0			; __zero_reg__ is r1
+	X_movw	XL, __tmp_reg__		; __zero_reg__ follows __tmp_reg__
 	rjmp	4f
-  ; OK, delimeter symbol is founded
+  ; OK, delimiter symbol is found
 3:	st	-X, __zero_reg__	; replace by '\0'
-	adiw	XL, 1			; address of next token
+	X_adiw	XL, 1			; address of next token
   ; save result to *sp and return
 4:	X_movw	ZL, strp_lo
-	st	Z, XL
-	std	Z+1, XH
+	st	Z+, XL
+	st	Z+, XH
+#ifdef __AVR_TINY__
+	pop	chr
+#endif
 5:	X_movw	ret_lo, str_lo		; return original address
 	ret
 
-	.size	_U(strsep), . - _U(strsep)
-
-#endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */
+ENDFUNC

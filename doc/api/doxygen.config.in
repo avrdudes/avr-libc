@@ -1,5 +1,3 @@
-# $Id$
-
 # @configure_input@
 
 # Doxygen configuration file for the AVR-LibC project.
@@ -57,7 +55,7 @@ PROJECT_BRIEF          = "Standard C library for AVR-GCC"
 # and the maximum width should not exceed 200 pixels. Doxygen will copy the logo
 # to the output directory.
 
-PROJECT_LOGO           = 
+PROJECT_LOGO           =
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -617,7 +615,9 @@ GENERATE_DEPRECATEDLIST= YES
 # sections, marked by \if <section_label> ... \endif and \cond <section_label>
 # ... \endcond blocks.
 
-ENABLED_SECTIONS       =
+ENABLED_SECTIONS       = @GIT_BRANCH_IS_ONLINEDOCS@ \
+                         @DOX_HAS_DELAY_CYCLES@ \
+                         @STDFIX_AVRLIBC_H_NOT_INCLUDED@
 
 # The MAX_INITIALIZER_LINES tag determines the maximum number of lines that the
 # initial value of a variable or macro / define can have for it to appear in the
@@ -763,13 +763,15 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_srcdir@/include/setjmp.h \
                          @top_srcdir@/include/stdint.h \
                          @top_srcdir@/include/stdio.h \
-                         @top_srcdir@/include/stdlib.h \
+                         @top_builddir@/doc/api/stdlib.h \
+                         @top_builddir@/doc/api/stdfix-avrlibc.h \
                          @top_srcdir@/include/string.h \
                          @top_srcdir@/include/time.h \
                          @top_srcdir@/libc \
                          @top_srcdir@/include/avr/boot.h \
                          @top_srcdir@/include/avr/cpufunc.h \
                          @top_srcdir@/include/avr/eeprom.h \
+                         @top_srcdir@/include/avr/flash.h \
                          @top_srcdir@/include/avr/fuse.h \
                          @top_srcdir@/include/avr/interrupt.h \
                          @top_srcdir@/doc/api/interrupts.dox \
@@ -788,26 +790,31 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_builddir@/include/avr/builtins.h \
                          @top_srcdir@/include/avr/xmega.h \
                          @top_srcdir@/include/avr/wdt.h \
+                         @top_srcdir@/include/bits \
                          @top_builddir@/include/util/delay.h \
+                         @top_srcdir@/include/util/ram-usage.h \
                          @top_srcdir@/include/util \
                          @top_srcdir@/include/compat \
+			 \
+                         @top_builddir@/doc/api/faq.dox \
                          @top_srcdir@/doc/api/overview.dox \
-                         @top_srcdir@/doc/api/malloc.dox \
-                         @top_srcdir@/doc/api/sections.dox \
+                         @top_srcdir@/doc/api/using-tools.dox \
+                         @top_srcdir@/doc/api/tools-install.dox \
                          @top_srcdir@/doc/api/pgmspace.dox \
+                         @top_srcdir@/doc/api/sections.dox \
+                         @top_srcdir@/doc/api/malloc.dox \
                          @top_srcdir@/doc/api/assembler.dox \
                          @top_srcdir@/doc/api/inline_asm.dox \
                          @top_srcdir@/doc/api/library.dox \
                          @top_srcdir@/doc/api/bench.dox \
                          @top_srcdir@/doc/api/bench-libc.dox \
-                         @top_srcdir@/doc/api/bench-libm.dox \
-                         @top_srcdir@/doc/api/porting.dox \
-                         @top_srcdir@/doc/api/faq.dox \
-                         @top_srcdir@/doc/api/tools-install.dox \
-                         @top_srcdir@/doc/api/using-tools.dox \
-                         @top_srcdir@/doc/api/optimize.dox \
-                         @top_srcdir@/doc/api/using-avrprog.dox \
+                         @top_builddir@/doc/api/bench-libm.gen.dox \
+                         @top_builddir@/doc/api/bench-libf7.gen.dox \
+                         @top_srcdir@/doc/api/bench-fxlib.dox \
+                         @top_srcdir@/doc/api/reordering-code.dox \
                          @top_srcdir@/doc/api/acknowledge.dox \
+                         @top_srcdir@/doc/api/globals-index.dox \
+			 \
                          @top_builddir@/doc/api/main_page.dox \
                          @top_srcdir@/doc/examples \
                          @top_srcdir@/doc/examples/demo \
@@ -835,7 +842,6 @@ INPUT_ENCODING         = UTF-8
 
 FILE_PATTERNS          = *.c \
                          *.h \
-                         *.S \
                          *.dox
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
@@ -930,7 +936,7 @@ IMAGE_PATH             = @top_srcdir@/doc/examples/demo \
 # code is scanned, but not when the output code is generated. If lines are added
 # or removed, the anchors will not be placed correctly.
 
-INPUT_FILTER           = @top_srcdir@/doc/api/filter-dox.sh
+INPUT_FILTER           = @top_builddir@/doc/api/filter-dox.sh
 
 # The FILTER_PATTERNS tag can be used to specify filters on a per file pattern
 # basis. Doxygen will compare the file name with each pattern and apply the
@@ -1815,7 +1821,7 @@ MAN_OUTPUT             = man
 # The default value is: .3.
 # This tag requires that the tag GENERATE_MAN is set to YES.
 
-MAN_EXTENSION          = .3
+MAN_EXTENSION          = .@MAN_PAGE@
 
 # The MAN_SUBDIR tag determines the name of the directory created within
 # MAN_OUTPUT in which the man pages are placed. If defaults to man followed by

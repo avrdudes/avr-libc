@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* float acosf (float x);
      The acosf() function calculates the arc cosine of x; that is the value
      whose cosine is x.
@@ -40,29 +38,25 @@
 #include "fp32def.h"
 #include "asmdef.h"
 
-#define	HI40_PI	0x40490FDA	/* Pi	*/
-#define	LO40_PI	0xA2
+#define PI 0x40490FDA
 
 ENTRY_FLOAT acosf acos acosl
-  ; save A sign
-	push	rA3
-  ; A = arccos(fabs(A))
-	andi	rA3, 0x7f
-	XCALL	_U(__fp_arccos)
-  ; check sign
-	pop	r0
-	tst	r0
-	brpl	1f
-  ; for negative x: arccos(x) = Pi - arccos(-x)
-	subi	rA3, 0x80
-	ldi	rBE, LO40_PI
-	ldi	rB0,  lo8(HI40_PI)
-	ldi	rB1,  hi8(HI40_PI)
-	ldi	rB2, hlo8(HI40_PI)
-	ldi	rB3, hhi8(HI40_PI)
-	XCALL	_U(__addsf3x)
-  ; round
-1:	XJMP	_U(__fp_round)
+        ;; Save A sign
+        push    rA3
+        ;; Finally reverse-subtract pi/2 for 0 <= x < 1/2.
+        ldi     XL, -1
+        ;; A = arccos(|A|)
+        XCALL   _U(__fp_asinf_acosf)
+        ;; Check sign
+        pop     r0
+        sbrs    r0, 7
+        ret
+        ;; x < 0:  arccos(x) = pi - arccos(-x)
+        ldi     rB0,  lo8(PI)
+        ldi     rB1,  hi8(PI)
+        ldi     rB2, hlo8(PI)
+        ldi     rB3, hhi8(PI)
+        XJMP    _U(__rsubsf3.arccos)
 ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

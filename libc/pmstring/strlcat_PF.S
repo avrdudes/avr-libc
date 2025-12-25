@@ -32,13 +32,9 @@
 
 */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define dst_b1		r25
 #define dst_b0		r24
@@ -55,11 +51,7 @@
 #define rWord_b1	r25
 #define rWord_b0	r24
 
-	.text
-	.global _U(strlcat_PF)
-	.type	_U(strlcat_PF),@function
-
-_U(strlcat_PF):
+ENTRY _U(strlcat_PF)
 
 	push	src_b2
 	mov	src_b2, src_b20
@@ -103,9 +95,9 @@ _U(strlcat_PF):
 1:	st	X, __zero_reg__		; *X = '\0'
 	sbiw	ZL, 1			; undo post increment
 #ifdef RAMPZ
-	in	r0, _SFR_IO_ADDR(RAMPZ)
+	in	r0, RAMPZ_IO_ADDR
 	sbc	r0, __zero_reg__
-	out	_SFR_IO_ADDR(RAMPZ), r0
+	out	RAMPZ_IO_ADDR, r0
 #endif
 
 .L_strlcat_PF_slen:
@@ -115,9 +107,9 @@ _U(strlcat_PF):
 	brne	.L_strlcat_PF_slen	; --> next char
 	sbiw	ZL, 1			; undo post increment
 #ifdef RAMPZ
-	in	r0, _SFR_IO_ADDR(RAMPZ)
+	in	r0, RAMPZ_IO_ADDR
 	sbc	r0, __zero_reg__
-	out	_SFR_IO_ADDR(RAMPZ), r0
+	out	RAMPZ_IO_ADDR, r0
 #endif
 	X_movw	rWord_b0, dlen_b0
 	add	rWord_b0, ZL
@@ -128,10 +120,6 @@ _U(strlcat_PF):
 	LPM_R0_ZPLUS_FINI
 	ret
 
-.L_strlcat_PF_end:
-
-	.size	_U(strlcat_PF), .L_strlcat_PF_end - _U(strlcat_PF)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

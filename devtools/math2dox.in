@@ -1,0 +1,91 @@
+#!@PYTHON@
+# -*- mode: python -*-
+
+# @configure_input@
+
+# Used by doc/api/Makefile[.am] since Doxygen messes up
+# formulae in man pages.
+
+from __future__ import print_function
+
+import sys, re
+
+# For each {{{ formula }}} line we generate 3 versions:
+# \htmlonly, \latexonly and \manonly.
+pat_math = re.compile(r"\s*{{{(.*)}}}(.*)")
+
+repl_html = (("+/-", "&plusmn;"),
+             ("-",   "&minus;"),
+             ("*",   "&middot;"))
+
+repl_tex = (("*",        r"\cdot "),
+            ("&asymp;",  r"\approx "),
+            ("&middot;", r"\cdot "),
+            ("&deg;",    r"^\circ "),
+            ("&pi;",     r"\pi "),
+            ("+/-",      r"\pm "),
+            ("log",      r"\log "),
+            ("<i>",      r"\mathit{"),
+            ("</i>",     "}"),
+            ("<sup>",    "^{"),
+            ("</sup>",   "}"),
+            ("<sub>",    "_{"),
+            ("</sub>",   "}"),
+            ("&nbsp;",   " "))
+
+repl_man = (("&asymp;",  "="),
+            ("&middot;", " * "),
+            ("&deg;",    " degree"),
+            ("&nbsp;",   " "),
+            ("&pi;",     " pi "),
+            ("<i>",      ""),
+            ("</i>",     ""),
+            ("<sup>",    "^{"),
+            ("</sup>",   "}"),
+            ("<sub>",    "_{"),
+            ("</sub>",   "}"),
+            ("pi /",     "pi/"),
+            ("{x}",      "x"),
+            ("{2}",      "2"),
+            ("  ",       " "))
+
+def out (str):
+    print (str)
+
+
+for line in sys.stdin.readlines():
+    m = pat_math.match (line.strip())
+    if not m:
+        print (line, end="")
+        continue
+
+    math = m.group(1)
+    ende = m.group(2)
+
+    m_html = math
+    for (old,new) in repl_html:
+        m_html = m_html.replace (old, new)
+
+    m_tex = math
+    for (old,new) in repl_tex:
+        m_tex = m_tex.replace (old, new)
+
+    m_man = math
+    for (old,new) in repl_man:
+        m_man = m_man.replace (old, new)
+
+    out (r"\htmlonly");
+    out (m_html + ende);
+    out (r"\endhtmlonly");
+
+    out (r"\latexonly");
+    out (r"\begin{math} " + m_tex + r"\end{math} " + ende);
+    out (r"\endlatexonly");
+
+    out (r"\manonly");
+    out (".EQ");
+    out (m_man)
+    out (".EN");
+    if ende:
+        out (ende);
+    out (r"\endmanonly");

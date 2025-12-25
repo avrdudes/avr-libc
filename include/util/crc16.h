@@ -31,40 +31,18 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef _UTIL_CRC16_H_
 #define _UTIL_CRC16_H_
 
 #include <stdint.h>
-
-#ifndef __DOXYGEN__
-#ifndef __ATTR_ALWAYS_INLINE__
-#define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))
-#endif
-#endif /* ! DOXYGEN */
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup util_crc <util/crc16.h>: CRC Computations
     \code#include <util/crc16.h>\endcode
 
-    This header file provides a optimized inline functions for calculating
+    This header file provides optimized inline functions for calculating
     cyclic redundancy checks (CRC) using common polynomials.
-
-    \par References:
-
-    \par
-
-    See the Dallas Semiconductor app note 27 for 8051 assembler example and
-    general CRC optimization suggestions. The table on the last page of the
-    app note is the key to understanding these implementations.
-
-    \par
-
-    Jack Crenshaw's "Implementing CRCs" article in the January 1992 isue of \e
-    Embedded \e Systems \e Programming. This may be difficult to find, but it
-    explains CRC's in very clear and concise terms. Well worth the effort to
-    obtain a copy.
 
     A typical application would look like:
 
@@ -83,12 +61,26 @@
         return crc; // must be 0
     }
     \endcode
+
+    \par References:
+    See the Dallas Semiconductor app note 27 for 8051 assembler example and
+    general CRC optimization suggestions. The table on the last page of the
+    app note is the key to understanding these implementations.
+    \par
+    Jack Crenshaw's "Implementing CRCs" article in the January 1992 issue of \e
+    Embedded \e Systems \e Programming. This may be difficult to find, but it
+    explains CRC's in very clear and concise terms. Well worth the effort to
+    obtain a copy.
+
+The hexadecimal values shown beneath the polynomials may be in
+little-endian or big-endian notation.  The leading term is implicit.
+For details, see the respective implementation and the references.
 */
 
 /** \ingroup util_crc
     Optimized CRC-16 calculation.
 
-    Polynomial: x<sup>16</sup> + x<sup>15</sup> + x<sup>2</sup> + 1 (0xa001)<br>
+    Polynomial: x<sup>16</sup> + x<sup>15</sup> + x<sup>2</sup> + 1 (0xa001, big-endian)<br>
     Initial value: \c 0xffff
 
     This CRC is normally used in disk-drive controllers.
@@ -96,8 +88,8 @@
     The following is the equivalent functionality written in C.
 
     \code
-    uint16_t
-    crc16_update (uint16_t crc, uint8_t a)
+    static inline uint16_t
+    _crc16_update (uint16_t crc, uint8_t a)
     {
         crc ^= a;
         for (int i = 0; i < 8; ++i)
@@ -152,7 +144,7 @@ _crc16_update(uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-XMODEM calculation.
 
-    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x1021)<br>
+    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x1021, little-endian)<br>
     Initial value: \c 0x0
 
     This is the CRC used by the Xmodem-CRC protocol.
@@ -160,8 +152,8 @@ _crc16_update(uint16_t __crc, uint8_t __data)
     The following is the equivalent functionality written in C.
 
     \code
-    uint16_t
-    crc_xmodem_update (uint16_t crc, uint8_t data)
+    static inline uint16_t
+    _crc_xmodem_update (uint16_t crc, uint8_t data)
     {
         crc = crc ^ ((uint16_t)data << 8);
         for (int i = 0; i < 8; i++)
@@ -213,7 +205,7 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-CCITT calculation.
 
-    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x8408)<br>
+    Polynomial: x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1 (0x8408, big-endian)<br>
     Initial value: \c 0xffff
 
     This is the CRC used by PPP and IrDA.
@@ -222,14 +214,14 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
 
     \note Although the CCITT polynomial is the same as that used by the Xmodem
     protocol, they are quite different. The difference is in how the bits are
-    shifted through the alorgithm. Xmodem shifts the MSB of the CRC and the
+    shifted through the algorithm. Xmodem shifts the MSB of the CRC and the
     input first, while CCITT shifts the LSB of the CRC and the input first.
 
     The following is the equivalent functionality written in C.
 
     \code
-    uint16_t
-    crc_ccitt_update (uint16_t crc, uint8_t data)
+    static inline uint16_t
+    _crc_ccitt_update (uint16_t crc, uint8_t data)
     {
         data ^= lo8 (crc);
         data ^= data << 4;
@@ -279,7 +271,7 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized Dallas (now Maxim) iButton 8-bit CRC calculation.
 
-    Polynomial: x<sup>8</sup> + x<sup>5</sup> + x<sup>4</sup> + 1 (0x8C)<br>
+    Polynomial: x<sup>8</sup> + x<sup>5</sup> + x<sup>4</sup> + 1 (0x8C, big-endian)<br>
     Initial value: \c 0x0
 
     See http://www.maxim-ic.com/appnotes.cfm/appnote_number/27
@@ -287,7 +279,7 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
     The following is the equivalent functionality written in C.
 
     \code
-    uint8_t
+    static inline uint8_t
     _crc_ibutton_update (uint8_t crc, uint8_t data)
     {
         crc = crc ^ data;
@@ -325,7 +317,7 @@ _crc_ibutton_update (uint8_t __crc, uint8_t __data)
 /** \ingroup util_crc
     Optimized CRC-8-CCITT calculation.
 
-    Polynomial: x<sup>8</sup> + x<sup>2</sup> + x + 1 (0xE0)<br>
+    Polynomial: x<sup>8</sup> + x<sup>2</sup> + x + 1 (0xE0, big-endian)<br>
 
     For use with simple CRC-8<br>
     Initial value: 0x0
@@ -340,12 +332,12 @@ _crc_ibutton_update (uint8_t __crc, uint8_t __data)
     Reference: http://www.itu.int/rec/T-REC-I.432.1-199902-I/en
 
     The C equivalent has been originally written by Dave Hylands.
-    Assembly code is based on _crc_ibutton_update optimization.
+    Assembly code is based on \c _crc_ibutton_update optimization.
 
     The following is the equivalent functionality written in C.
 
     \code
-    uint8_t
+    static inline uint8_t
     _crc8_ccitt_update (uint8_t inCrc, uint8_t inData)
     {
         uint8_t data = inCrc ^ inData;

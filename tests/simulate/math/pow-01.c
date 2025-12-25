@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of pow() function.
-   $Id$
- */
+/* Test of pow() function. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -296,24 +293,25 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x,y,z;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	y.lo = pgm_read_dword (& t[i].y);
 	x.lo = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
-	v.fl = pow (x.fl, y.fl);
+	v.fl = powf (x.fl, y.fl);
 	/* Comparison is integer to verify the zero sign.	*/
-	if (   (v.lo == z.lo)
-	    || (isnan(v.fl) && isnan(z.fl)) )
+	if (v.lo == z.lo
+	    || (isnanf (v.fl) && isnanf (z.fl)))
 	  continue;
-	if (   isfinite(v.fl)
-	    && isfinite(z.fl)
+	if (isfinitef (v.fl)
+	    && isfinitef (z.fl)
 	    && !((v.lo ^ z.lo) & 0x80000000)	/* signbit(v) == signbit(z) */
-	    && labs(v.lo - z.lo) <= 4 )
+	    && labs (v.lo - z.lo) <= 4)
 	  continue;
 	x_exit (i+1);
     }

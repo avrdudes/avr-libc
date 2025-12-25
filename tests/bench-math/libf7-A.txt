@@ -1,0 +1,29 @@
+=CFLAGS =
+!MCU=atmega128
+1\page benchmarks
+1
+1\section bench_libf7 Math Functions for IEEE double from LibF7
+1
+1The following tables contain benchmark values for some IEEE double
+1floating-point functions over the indicated range(s) of input values.
+1<a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">LibF7</a>
+1is a IEEE double implementation hosted by libgcc since
+1<a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>.
+1
+1The code sizes include all dependencies with the exception of potential
+1prologue and epilogue routines
+1(\c __prologue_saves__, \c __epilogue_restores__).
+1
+1The sizes of functions don't add up.
+1For example, #sinl, #cosl, #asinl, #acosl and #sqrtl together occupy
+1only 4744 bytes of code \e including the prologue and epilogue routines.
+1With \c -mrelax the code size reduces further to around 4400 bytes.
+1
+1Notice that the values for relative error and the Worst Case Execution Time
+1Cycles<sub>max</sub> are only <em>lower bounds</em>.
+1The best achievable accuracy for IEEE double with its 52 fractional bits in
+1the mantissa is
+1{{{log<sub>10</sub>(2<sup>-53</sup> &asymp; 1.1*10<sup>-16</sup>) &asymp; -15.95}}}.
+1
+1<table>
+1<caption>LibF7 Benchmarks for ATmega128 (avr51, with MUL)</caption>

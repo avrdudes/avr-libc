@@ -29,12 +29,9 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 #
-# Use this script from the toplevel of the avr-libc tree to find files with
+# Use this script from the toplevel of the AVR-LibC tree to find files with
 # bogus carriage returns.
 #
 

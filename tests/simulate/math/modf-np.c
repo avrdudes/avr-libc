@@ -24,33 +24,30 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of modf() function. NULL pointer.
-   $Id$
- */
+/* Test of modf() function. NULL pointer. */
 #include <math.h>
 #include <stdlib.h>
 
-int main ()
+int main (void)
 {
-    double z;
-    double (* volatile vp)(double, double*);
+    float z;
+    float (* volatile vp)(float, float*);
 
     {
 #ifdef	__AVR__
 	/* Address of R1 is 0x0001	*/
 	unsigned char r1;
-	vp = &modf;
+	vp = &modff;
 	z = vp (257.5, 0);		/* 257 == 0x0101	*/
 	asm ("mov %0,r1 \n\t clr r1" : "=r"(r1));
 	if (r1)
 	    exit (__LINE__);
 #else
 	/* Skip NULL pointer testing.	*/
-	double v;
-	z = modf (257.5, & v);
+	float v;
+	z = modff (257.5, & v);
 #endif
     }
     if (z != 0.5)

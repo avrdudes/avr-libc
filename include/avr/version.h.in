@@ -28,13 +28,13 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* @configure_input@ */
 
-/** \defgroup avr_version <avr/version.h>: avr-libc version macros
+/** \defgroup avr_version <avr/version.h>: AVR-LibC version macros
     \code #include <avr/version.h> \endcode
 
     This header file defines macros that contain version numbers and
-    strings describing the current version of avr-libc.
+    strings describing the current version of AVR-LibC.
 
     The version number itself basically consists of three pieces that
     are separated by a dot: the major number, the minor number, and
@@ -62,7 +62,7 @@
 
     In the numerical representation, the major number is multiplied by
     10000, the minor number by 100, and all three parts are then
-    added.  It is intented to provide a monotonically increasing
+    added.  It is intended to provide a monotonically increasing
     numerical value that can easily be used in numerical checks.
  */
 #define __AVR_LIBC_VERSION__        @AVR_LIBC_VERSION_NUMERIC@UL
@@ -73,7 +73,7 @@
 
 /** \ingroup avr_version
     Numerical representation of the release date. */
-#define __AVR_LIBC_DATE_            @AVR_LIBC_RELDATE@UL
+#define __AVR_LIBC_DATE__           @AVR_LIBC_RELDATE@UL
 
 /** \ingroup avr_version
     Library major version number. */

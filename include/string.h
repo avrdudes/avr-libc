@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
    string.h
 
@@ -44,14 +42,8 @@
 #define	__need_NULL
 #define	__need_size_t
 #include <stddef.h>
+#include <bits/attribs.h>
 
-#ifndef __ATTR_PURE__
-#define __ATTR_PURE__ __attribute__((__pure__))
-#endif
-
-#ifndef __ATTR_CONST__
-# define __ATTR_CONST__	__attribute__((__const__))
-#endif
 #endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
@@ -65,8 +57,17 @@ extern "C" {
     The string functions perform string operations on \c NULL terminated
     strings.
 
-    \note If the strings you are working on resident in program space (flash),
-    you will need to use the string functions described in \ref avr_pgmspace. */
+    \note
+    If the strings you are working on reside in program memory (flash),
+    then you will need to use the string functions provided by one
+    of the following headers:
+    - \ref avr_pgmspace
+    - \ref avr_flash
+    \note
+    When the strings are defined with #PROGMEM or #PROGMEM_FAR,
+    then use the first header.   When they are defined with #__flash
+    or #__flashx, then use the second one.
+*/
 
 
 /** \ingroup avr_string
@@ -85,7 +86,7 @@ extern "C" {
     \returns The _FFS() macro returns the position of the first
     (least significant) bit set in the word val, or 0 if no bits are set.
     The least significant bit is position 1.  Only 16 bits of argument
-    are evaluted.
+    are evaluated.
 */
 #if defined(__DOXYGEN__)
 #define _FFS(x)
@@ -257,7 +258,19 @@ extern char *strcat(char *, const char *);
     <br><br>
     Here "character" means "byte" -- these functions do not work with
     wide or multi-byte characters.  */
+#ifdef __DOXYGEN__
 extern char *strchr(const char *, int) __ATTR_PURE__;
+#else
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char * strchr(const char *__hay, int __val)
+{
+  register char *__r24 __asm("24");
+  register int __r22 __asm("22") = __val;
+  __asm ("%~call strchr"
+         : "=r" (__r24) : "0" (__hay), "r" (__r22) : "30", "31");
+  return __r24;
+}
+#endif /* DOXYGEN */
 
 /** \ingroup avr_string
     \fn char *strchrnul(const char *s, int c)
@@ -296,11 +309,25 @@ extern int strcmp(const char *, const char *) __ATTR_PURE__;
     \returns The strcpy() function returns a pointer to the destination
     string dest.
 
-    \note If the destination string of a strcpy() is not large enough (that
-    is, if the programmer was stupid/lazy, and failed to check the size before
-    copying) then anything might happen.  Overflowing fixed length strings is
-    a favourite cracker technique. */
+    \see strncpy(), stpcpy(), strcpy_P(), strcpy_F().  */
 extern char *strcpy(char *, const char *);
+
+/** \ingroup avr_string
+    \fn char *stpcpy(char *dest, const char *src)
+    \brief Copy a string.
+
+    The stpcpy() function copies the string pointed to by \p src
+    (including the terminating '\\0' character) to the array pointed
+    to by \p dest.
+    The strings may not overlap, and the destination string \p dest must
+    be large enough to receive the copy.
+
+    \returns The stpcpy() function returns a pointer to the <b>end</b> of
+    the string \p dest (that is, the address of the terminating null byte)
+    rather than the beginning.
+
+    \since AVR-LibC v2.3  */
+extern char *stpcpy(char *, const char *);
 
 /** \ingroup avr_string
     \fn int strcasecmp(const char *s1, const char *s2)
@@ -348,7 +375,8 @@ extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
     The strdup() function allocates memory and copies into it the string
     addressed by \p s1, including the terminating null character.
 
-    \warning The strdup() function calls malloc() to allocate the memory
+    \warning The strdup() function calls \ref a_malloc "malloc()" to allocate
+    the memory
     for the duplicated string! The user is responsible for freeing the
     memory by calling free().
 
@@ -624,6 +652,53 @@ extern char *strupr(char *);
 extern int strcoll(const char *s1, const char *s2);
 extern char *strerror(int errnum);
 extern size_t strxfrm(char *dest, const char *src, size_t n);
+
+/* strlen is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+size_t strlen(const char *__s)
+{
+  if (__builtin_constant_p (__builtin_strlen (__s)))
+    {
+      return __builtin_strlen (__s);
+    }
+  else
+    {
+      register const char *__r24 __asm("24") = __s;
+      register size_t __res __asm("24");
+      __asm ("%~call %x2" : "=r" (__res) : "r" (__r24), "i" (strlen)
+             : "30", "31", "memory");
+      return __res;
+    }
+}
+
+/* strcpy is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char* strcpy(char *__x, const char *__z)
+{
+  char *__ret = __x;
+  __asm volatile ("%~call __strcpy"
+                  : "+x" (__x), "+z" (__z) :: "memory");
+  return __ret;
+}
+
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+char* stpcpy(char *__x, const char *__z)
+{
+  __asm volatile ("%~call __strcpy"
+                  : "+x" (__x), "+z" (__z) :: "memory");
+  return __x - 1;
+}
+
+/* strcmp is common so we model its GPR footprint.  */
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+int strcmp(const char *__x, const char *__z)
+{
+  register int __ret __asm("24");
+  __asm ("%~call __strcmp"
+         : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
+  return __ret;
+}
+
 #endif	/* !__DOXYGEN__ */
 
 #ifdef __cplusplus
@@ -631,4 +706,3 @@ extern size_t strxfrm(char *dest, const char *src, size_t n);
 #endif
 
 #endif /* _STRING_H_ */
-

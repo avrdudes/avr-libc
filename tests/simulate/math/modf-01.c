@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of modf() function.
-   $Id$
- */
+/* Test of modf() function. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,7 +38,7 @@ union lofl_u {
 };
 
 volatile union lofl_u vf = { 1 };
-double vn = { 1 };
+float vn = { 1 };
 
 PROGMEM const struct {		/* Table of test cases.	*/
     union lofl_u x;	/* argument			*/
@@ -166,16 +163,17 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x, zf, zn, vn1;
     int i;
     
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	zf.lo = pgm_read_dword (& t[i].f);
 	zn.lo = pgm_read_dword (& t[i].n);
-	vf.fl = modf (x.fl, & vn);
+	vf.fl = modff (x.fl, & vn);
 	vn1.fl = vn;
 	if ((vf.lo != zf.lo) || (vn1.lo != zn.lo))
 	    x_exit (i+1);

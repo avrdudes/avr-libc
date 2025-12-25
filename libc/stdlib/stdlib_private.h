@@ -24,10 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include <inttypes.h>
 #include <stdlib.h>
@@ -47,6 +44,8 @@ extern struct __freelist *__flp; /* freelist pointer (head of freelist) */
 extern size_t __malloc_margin;	/* user-changeable before the first malloc() */
 extern char *__malloc_heap_start;
 extern char *__malloc_heap_end;
+
+extern uint32_t __seed;
 
 #ifndef __AVR__
 
@@ -84,9 +83,6 @@ extern char mymem[];
 extern char __heap_start;
 extern char __heap_end;
 
-/* Needed for definition of AVR_STACK_POINTER_REG. */
-#include <avr/io.h>
-
-#define STACK_POINTER() ((char *)AVR_STACK_POINTER_REG)
+#define STACK_POINTER() ((char *) SP)
 
 #endif /* MALLOC_TEST */

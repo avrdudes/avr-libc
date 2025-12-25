@@ -26,13 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#ifndef	__DOXYGEN__
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define str_lo	r24
 #define acc_lo	r22
@@ -43,18 +39,14 @@
 /* This realization is compact, but is not very fast: an accept string
    is not cashed.	*/
 
-	ASSEMBLY_CLIB_SECTION
-	.global _U(strpbrk_P)
-	.type   _U(strpbrk_P), @function
-
-_U(strpbrk_P):
+ENTRY _U(strpbrk_P)
 	X_movw	XL, str_lo
 	clr	ret_hi		; a trick to save 1 word
   ; get next symbol from s[]
 1:	ld	ret_lo, X+	; *s++
 	tst	ret_lo
 	breq	3f
-  ; check an occurance
+  ; check an occurrence
 	X_movw	ZL, acc_lo
 2:	X_lpm	r0, Z+
 	cp	r0, ret_lo
@@ -65,8 +57,6 @@ _U(strpbrk_P):
 	sbiw	XL, 1
 	X_movw	ret_lo, XL
 3:	ret
-
-	.size _U(strpbrk_P), . - _U(strpbrk_P)
-#endif	/* !__DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

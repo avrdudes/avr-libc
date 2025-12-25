@@ -28,10 +28,8 @@
 
 /* div() is the same as __divmodhi4() in libgcc */
 
-#include "macros.inc"
+#include "asmdef.h"
 
-	ASSEMBLY_CLIB_SECTION
-	.global div
-div:
-	XJMP	__divmodhi4
-
+ENTRY div
+	XJMP	_U(__divmodhi4)
+ENDFUNC

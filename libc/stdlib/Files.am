@@ -25,9 +25,6 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 stdlib_a_c_sources = \
 	abs.c \
@@ -36,26 +33,29 @@ stdlib_a_c_sources = \
 	bsearch.c \
 	calloc.c \
 	errno.c \
-	dtoa_prf.c \
-	dtostre.c \
-	dtostrf.c \
+	ftoa_prf.c \
+	ftostre.c \
+	ftostrf.c \
 	getenv.c \
 	labs.c \
 	malloc.c \
+	pstr_inf.c \
 	qsort.c \
-	rand.c \
+	seed.c \
+	srand.c \
 	random.c \
 	realloc.c \
-	strtod.c \
-	strtol.c \
-	strtoul.c \
+	strtof.c \
+	strtold.c \
 	system.c \
-	dtoa_conv.h \
+	ftoa_conv.h \
 	stdlib_private.h
 
 stdlib_a_asm_sources = \
+	_abort.S \
 	abort.S \
-	atof.S \
+	atoff.S \
+	atofl.S \
 	atoi.S \
 	atol.S \
 	div.S \
@@ -75,16 +75,26 @@ stdlib_a_asm_sources = \
 	isspace.S \
 	isblank.S \
 	ispunct.S \
+	llabs.S \
+	qsort_swapfunc.S \
+	rand.S \
+	strtol.S \
+	strtoll.S \
+	strtoul.S \
+	strtoull.S \
+	strtoxx.S \
+	strto32.S \
+	strto64.S \
 	tolower.S \
 	toupper.S
-
 
 stdlib_a_extra_dist = \
 	ctype.S \
 	abort.c \
 	atoi.c \
-	atol.c
-
-malloc.o: AVRLIB_CFLAGS += -Wno-maybe-uninitialized
+	atol.c \
+	strto32.h \
+	strto64.h \
+	strtoxx.h
 
 # vim: set ft=make:

@@ -25,32 +25,19 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 avrdir = $(prefix)/avr/include/avr
 
-avr_HEADERS = version.h @AVRLIBC_INCLUDE_HFILES@
+avr_HEADERS = @AVRLIBC_INCLUDE_HFILES@
 
 EXTRA_HEADERS =
 
 nodist_avr_HEADERS = \
-    builtins.h
+    builtins.h \
+    version.h
 
 EXTRA_DIST = \
     builtins.h.in \
     version.h.in
-
-do_subst = sed \
-	-e 's,[@]AVR_LIBC_MAJOR[@],$(AVR_LIBC_MAJOR),g' \
-	-e 's,[@]AVR_LIBC_MINOR[@],$(AVR_LIBC_MINOR),g' \
-	-e 's,[@]AVR_LIBC_REVISION[@],$(AVR_LIBC_REVISION),g' \
-	-e 's,[@]AVR_LIBC_RELDATE[@],$(AVR_LIBC_RELDATE),g' \
-	-e 's,[@]AVR_LIBC_VERSION[@],$(AVR_LIBC_VERSION),g' \
-	-e 's,[@]AVR_LIBC_VERSION_NUMERIC[@],$(AVR_LIBC_VERSION_NUMERIC),g'
-
-version.h: version.h.in $(top_builddir)/config.h
-	$(do_subst) < $(srcdir)/version.h.in > version.h
 
 CLEANFILES = version.h

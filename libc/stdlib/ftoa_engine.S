@@ -26,13 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#ifndef	__DOXYGEN__
-
-#include "macros.inc"
+#include "asmdef.h"
 #include "ftoa_engine.h"
 
 #if defined(__AVR_HAVE_ELPM__) && !defined(__AVR_HAVE_ELPMX__)
@@ -58,14 +54,15 @@
     buf[0]     - flags (FTOA_***)
     buf[1],... - decimal digits
     Number of digits:
-	maxdgs == 0 ? prec+1 :
-	(buf[0] & FTOA_CARRY) == 0 || buf[1] != '1' ?
-	    aver(1, maxdgs+exp, prec+1) :
-	    aver(1, masdgs+exp-1, prec+1)
+	maxdgs == 0
+          ? prec+1
+          : (buf[0] & FTOA_CARRY) == 0 || buf[1] != '1'
+	      ? aver(1, maxdgs+exp, prec+1)
+	      : aver(1, maxdgs+exp-1, prec+1);
 
  Notes:
     * Output string is not 0-terminated. For possibility of user's buffer
-    usage in any case.
+      usage in any case.
     * If used, 'maxdgs' is a number of digits for value with zero exponent.
 */
 
@@ -82,7 +79,7 @@
     /* Float value parse	*/
 #define	flag	r19
 
-    /* Multiplication of mantisses	*/
+    /* Multiplication of mantissae	*/
 #define	exp_sv	r17
 #define	mlt_1	r19	/* lowest result byte	*/
 #define mlt_2	r14
@@ -120,7 +117,7 @@
 	adiw	r30, 1
 	brcc .Lnoinc.\@
 	inc	Z_HH8
-	out	AVR_RAMPZ_ADDR, Z_HH8
+	out	RAMPZ_IO_ADDR, Z_HH8
 .Lnoinc.\@:
 	.ifc \reg,r0
 	.else
@@ -148,11 +145,7 @@
 .endm
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    ASSEMBLY_CLIB_SECTION
-
-    .global	__ftoa_engine
-    .type	__ftoa_engine, "function"
-__ftoa_engine:
+ENTRY __ftoa_engine
 
 /* --------------------------------------------------------------------
    Float value parse.
@@ -217,9 +210,9 @@ __ftoa_engine:
 	PUSH_ZHH8
 
 /* --------------------------------------------------------------------
-   Multiplication of mantisses (val and table).
+   Multiplication of mantissae (val and table).
    At the begin:
-	val_hlo .. val_lo  - input value mantisse
+	val_hlo .. val_lo  - input value mantissa
 	val_hhi            - input value exponent
 	X                  - second byte address (string begin)
    At the end:
@@ -242,7 +235,7 @@ __ftoa_engine:
 #ifdef __AVR_HAVE_ELPM__
 	clr	val_hhi
 	sbci	val_hhi, hh8(-(.L_base10))
-	out	AVR_RAMPZ_ADDR, val_hhi
+	out	RAMPZ_IO_ADDR, val_hhi
 #ifdef Z_HH8
 	mov	Z_HH8, val_hhi
 #endif
@@ -369,8 +362,8 @@ __ftoa_engine:
       pwr_7 .. pwr_2	- last powr10[] element
 
    Notes:
-     * It is possible to leave out powr10'x table with subnormal value.
-      Result: accuracy degrease on the rounding phase.  No matter: high
+    * It is possible to leave out powr10's table with subnormal value.
+      Result: accuracy decrease on the rounding phase.  No matter: high
       precision with subnormals is not needed. (Now 0x00000001 is converted
       exactly on prec = 5, i.e. 6 digits.)
 */
@@ -378,7 +371,7 @@ __ftoa_engine:
   ; to find first digit
 #ifdef __AVR_HAVE_ELPM__
 	ldi	ZL, hh8(.L_powr10)
-	out	AVR_RAMPZ_ADDR, ZL
+	out	RAMPZ_IO_ADDR, ZL
 #ifdef Z_HH8
 	mov	Z_HH8, ZL
 #endif
@@ -412,10 +405,10 @@ __ftoa_engine:
 	adc	mlt_5, pwr_5
 	adc	mlt_6, pwr_6
 	adc	mlt_7, pwr_7
-  ; analisys
+  ; analysis
 	brtc	25f
 	cpi	digit, '0'
-	brne	21f		; this is the first digit finded
+	brne	21f		; this is the first digit found
 	dec	exp10
 	rjmp	.L_digit
   ; now is the first digit
@@ -498,7 +491,7 @@ __ftoa_engine:
 .L_rest:
 	clr	zero
 #ifdef __AVR_HAVE_RAMPD__
-	out AVR_RAMPZ_ADDR, zero
+	out RAMPZ_IO_ADDR, zero
 #endif
 	POP_ZHH8
 	pop	r14
@@ -513,15 +506,14 @@ __ftoa_engine:
 	com	r25
 	ret
 
-    .size  __ftoa_engine, . - __ftoa_engine
+ENDFUNC
 
 /* --------------------------------------------------------------------
     Tables.  '.L_powr10' is placed first -- for subnormals stability.
 */
-    .section .progmemx.data.ftoa_engine,"a",@progbits
+PGMX_SECTION(stdlib.ftoa_engine)
 
-    .type .L_powr10, "object"
-.L_powr10:
+OBJECT .L_powr10
 	.byte	0, 64, 122, 16, 243, 90	; 100000000000000
 	.byte	0, 160, 114, 78, 24, 9	; 10000000000000
 	.byte	0, 16, 165, 212, 232, 0	; 1000000000000
@@ -537,10 +529,9 @@ __ftoa_engine:
 	.byte	100, 0, 0, 0, 0, 0	; 100
 	.byte	10, 0, 0, 0, 0, 0	; 10
 	.byte	1, 0, 0, 0, 0, 0	; 1
-    .size .L_powr10, . - .L_powr10
+ENDOBJ .L_powr10
 
-    .type	.L_base10, "object"
-.L_base10:
+OBJECT .L_base10
 	.byte	44, 118, 216, 136, -36	; 2295887404
 	.byte	103, 79, 8, 35, -33	; 587747175
 	.byte	193, 223, 174, 89, -31	; 1504632769
@@ -573,9 +564,6 @@ __ftoa_engine:
 	.byte	50, 132, 114, 94, 34	; 1584563250
 	.byte	129, 0, 201, 241, 36	; 4056481921
 	.byte	236, 161, 229, 61, 39	; 1038459372
-    .size .L_base10, . - .L_base10
-
-	.end
-#endif	/* !__DOXYGEN__ */
+ENDOBJ .L_base10
 
 #endif /* !defined(__AVR_TINY__) */

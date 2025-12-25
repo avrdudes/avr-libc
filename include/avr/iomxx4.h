@@ -30,8 +30,6 @@
 
 /* avr/iomXX4.h - definitions for ATmega164P/324P/644P and ATmega644 */
 
-/* $Id$ */
-
 #ifndef _AVR_IOMXX4_H_
 #define _AVR_IOMXX4_H_ 1
 
@@ -263,6 +261,26 @@
 #define GPIOR1	_SFR_IO8(0x2A)
 
 #define GPIOR2	_SFR_IO8(0x2B)
+
+/* Due to inconsistencies in the manual vs. XML, provide two alternative
+   forms of the following macros: With and without trailing 0.  */
+
+#define SPCR0  _SFR_IO8(0x2C)
+#define SPIE0  7
+#define SPE0   6
+#define DORD0  5
+#define MSTR0  4
+#define CPOL0  3
+#define CPHA0  2
+#define SPR01  1
+#define SPR00  0
+
+#define SPSR0  _SFR_IO8(0x2D)
+#define SPIF0  7
+#define WCOL0  6
+#define SPI2X0 0
+
+#define SPDR0  _SFR_IO8(0X2E)
 
 #define SPCR	_SFR_IO8(0x2C)
 #define SPIE	7

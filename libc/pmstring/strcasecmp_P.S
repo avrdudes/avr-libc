@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
    strcasecmp_P.S
    Case insensitive compare
@@ -40,9 +38,7 @@
 
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define s1_hi r25
 #define s1_lo r24
@@ -54,10 +50,7 @@
 
 #define tmp r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcasecmp_P)
-	.type	_U(strcasecmp_P), @function
-_U(strcasecmp_P):
+ENTRY _U(strcasecmp_P)
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
 
@@ -82,8 +75,6 @@ _U(strcasecmp_P):
 	sbc	ret_hi, ret_hi		; sign extension
 	ret
 
-	.size   _U(strcasecmp_P), . - _U(strcasecmp_P)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

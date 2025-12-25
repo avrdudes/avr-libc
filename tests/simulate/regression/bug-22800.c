@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* bug #22800: sprintf() expands a 128char string parameter incorrectly
-   $Id$
-   
+/* bug #22800: sprintf() expands a 128char string parameter incorrectly.
    This bug is marked as INVALID.  It is take place with AVR-LibC 1.4 only,
    which is not supported now.  AVR-LibC 1.6 is correct.
  */
@@ -41,6 +38,7 @@
 # define strcmp_P	strcmp
 # define PSTR(s)	(s)
 #else
+# include <avr/io.h>
 # include <avr/pgmspace.h>
 #endif
 

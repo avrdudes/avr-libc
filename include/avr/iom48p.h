@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iom48p.h - definitions for ATmega48P. */
 
 /* This file should only be included from <avr/io.h>, never directly. */

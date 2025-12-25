@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/fuse.h - Fuse API */
 
 #ifndef _AVR_FUSE_H_
@@ -43,6 +41,9 @@
 
 /** \file */
 /** \defgroup avr_fuse <avr/fuse.h>: Fuse Support
+    \code #include <avr/io.h> \endcode
+
+    The <avr/fuse.h> header is included by <avr/io.h>.
 
     \par Introduction
 
@@ -63,67 +64,74 @@
 
     \par Fuse API
 
-    Each I/O header file must define the FUSE_MEMORY_SIZE macro which is
+    Each I/O header file must define the \c FUSE_MEMORY_SIZE macro which is
     defined to the number of fuse bytes that exist in the AVR device.
 
     A new type, __fuse_t, is defined as a structure. The number of fields in
     this structure are determined by the number of fuse bytes in the
-    FUSE_MEMORY_SIZE macro.
+    \c FUSE_MEMORY_SIZE macro:
 
-    If FUSE_MEMORY_SIZE == 1, there is only a single field: byte, of type
-    unsigned char.
+    - \c If FUSE_MEMORY_SIZE == 1, there is only a single field: byte, of type
+    #uint8_t.
 
-    If FUSE_MEMORY_SIZE == 2, there are two fields: low, and high, of type
-    unsigned char.
+    - If \c FUSE_MEMORY_SIZE == 2, there are two fields: low, and high, of type
+    #uint8_t.
 
-    If FUSE_MEMORY_SIZE == 3, there are three fields: low, high, and extended,
-    of type unsigned char.
+    - If FUSE_MEMORY_SIZE == 3, there are three fields: low, high, and extended,
+    of type #uint8_t.
 
-    If FUSE_MEMORY_SIZE > 3, there is a single field: byte, which is an array
-    of unsigned char with the size of the array being FUSE_MEMORY_SIZE.
+    - If \c FUSE_MEMORY_SIZE > 3, there is a single field: byte, which is an
+    array of #uint8_t with the size of the array being \c FUSE_MEMORY_SIZE.
 
-    A convenience macro, FUSEMEM, is defined as a GCC attribute for a
-    custom-named section of ".fuse".
+    A convenience macro, \c #FUSEMEM, is defined as a GCC attribute for a
+    custom-named section of \c ".fuse".
 
-    A convenience macro, FUSES, is defined that declares a variable, __fuse, of
-    type __fuse_t with the attribute defined by FUSEMEM. This variable
-    allows the end user to easily set the fuse data.
+    A convenience macro, \c #FUSES, is defined that declares a variable,
+    \c __fuse, of type \c __fuse_t with the attribute defined by \c #FUSEMEM.
+    This variable allows the end user to easily set the fuse data.
 
-    \note If a device-specific I/O header file has previously defined FUSEMEM,
-    then FUSEMEM is not redefined. If a device-specific I/O header file has
-    previously defined FUSES, then FUSES is not redefined.
+    \note If a device-specific I/O header file has previously defined
+    \c FUSEMEM, then \c FUSEMEM is not redefined. If a device-specific
+    I/O header file has previously defined \c FUSES, then
+    \c FUSES is not redefined.
 
-    Each AVR device I/O header file has a set of defined macros which specify the
-    actual fuse bits available on that device. The AVR fuses have inverted
+    Each AVR device I/O header file has a set of defined macros which specify
+    the actual fuse bits available on that device. The AVR fuses have inverted
     values, logical 1 for an unprogrammed (disabled) bit and logical 0 for a
     programmed (enabled) bit. The defined macros for each individual fuse
     bit represent this in their definition by a bit-wise inversion of a mask.
-    For example, the FUSE_EESAVE fuse in the ATmega128 is defined as:
+    For example, the \c FUSE_EESAVE fuse in the ATmega128 is defined as:
     \code
-    #define FUSE_EESAVE      ~_BV(3)
+    #define FUSE_EESAVE  ~_BV(3)
     \endcode
-    \note The _BV macro creates a bit mask from a bit number. It is then
+    The \c #_BV macro creates a bit mask from a bit number. It is then
     inverted to represent logical values for a fuse memory byte.
-
     To combine the fuse bits macros together to represent a whole fuse byte,
     use the bitwise AND operator, like so:
     \code
     (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN)
     \endcode
 
-    Each device I/O header file also defines macros that provide default values
-    for each fuse byte that is available. LFUSE_DEFAULT is defined for a Low
-    Fuse byte. HFUSE_DEFAULT is defined for a High Fuse byte. EFUSE_DEFAULT
-    is defined for an Extended Fuse byte.
+    \warning Many device headers define fuse macros for <b>not inverted</b>
+    fuse bits, like for example devices from the 0-series, 1-series and
+    2-series.  Make sure you are using the right logic operations when
+    using fuse values, or otherwise you can damage a device.
 
-    If FUSE_MEMORY_SIZE > 3, then the I/O header file defines macros that
+    Each device I/O header file also defines macros that provide default values
+    for each fuse byte that is available. \c LFUSE_DEFAULT is defined for a Low
+    Fuse byte. \c HFUSE_DEFAULT is defined for a High Fuse byte.
+    \c EFUSE_DEFAULT is defined for an Extended Fuse byte.
+
+    If \c FUSE_MEMORY_SIZE > 3, then the I/O header file defines macros that
     provide default values for each fuse byte like so:
+    \code
     FUSE0_DEFAULT
     FUSE1_DEFAULT
     FUSE2_DEFAULT
     FUSE3_DEFAULT
     FUSE4_DEFAULT
-    ....
+    ...
+    \endcode
 
     \par API Usage Example
 
@@ -135,14 +143,9 @@
     FUSES =
     {
         .low = LFUSE_DEFAULT,
-        .high = (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN),
-        .extended = EFUSE_DEFAULT,
+        .high = FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN,
+        .extended = EFUSE_DEFAULT
     };
-
-    int main(void)
-    {
-        return 0;
-    }
     \endcode
 
     Or, using the variable directly instead of the FUSES macro,
@@ -150,20 +153,15 @@
     \code
     #include <avr/io.h>
 
-    __fuse_t __fuse __attribute__((section (".fuse"))) =
+    __fuse_t __fuse FUSEMEM =
     {
         .low = LFUSE_DEFAULT,
-        .high = (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN),
-        .extended = EFUSE_DEFAULT,
+        .high = FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN,
+        .extended = EFUSE_DEFAULT
     };
-
-    int main(void)
-    {
-        return 0;
-    }
     \endcode
 
-    If you are compiling in C++, you cannot use the designated intializers so
+    If you are compiling in C++, you cannot use the designated initializers so
     you must do:
 
     \code
@@ -172,16 +170,10 @@
     FUSES =
     {
         LFUSE_DEFAULT, // .low
-        (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN), // .high
-        EFUSE_DEFAULT, // .extended
+        FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_EESAVE & FUSE_SPIEN & FUSE_JTAGEN, // .high
+        EFUSE_DEFAULT  // .extended
     };
-
-    int main(void)
-    {
-        return 0;
-    }
     \endcode
-
 
     However there are a number of caveats that you need to be aware of to
     use this API properly.
@@ -194,19 +186,20 @@
     The .fuse section in the ELF file will get its values from the initial
     variable assignment ONLY. This means that you can NOT assign values to
     this variable in functions and the new values will not be put into the
-    ELF .fuse section.
+    ELF \c \.fuse section.
 
-    The global variable is declared in the FUSES macro has two leading
+    The global variable is declared in the \c FUSES macro has two leading
     underscores, which means that it is reserved for the "implementation",
     meaning the library, so it will not conflict with a user-named variable.
 
-    You must initialize ALL fields in the __fuse_t structure. This is because
+    You must initialize ALL fields in the \c __fuse_t structure. This is because
     the fuse bits in all bytes default to a logical 1, meaning unprogrammed.
-    Normal uninitialized data defaults to all locgial zeros. So it is vital that
+    Normal uninitialized data defaults to all logical zeros. So it is vital that
     all fuse bytes are initialized, even with default data. If they are not,
     then the fuse bits may not programmed to the desired settings.
 
-    Be sure to have the -mmcu=<em>device</em> flag in your compile command line and
+    Be sure to have the <tt>-mmcu=<em>device</em></tt> flag in your
+    compile command line and
     your linker command line to have the correct device selected and to have
     the correct I/O header file included when you include <avr/io.h>.
 
@@ -220,17 +213,33 @@
 
 */
 
-#if !(defined(__ASSEMBLER__) || defined(__DOXYGEN__))
+#if !defined(__ASSEMBLER__)
 
+#include <stdint.h>
+
+/** \ingroup avr_fuse  */
 #ifndef FUSEMEM
 #define FUSEMEM  __attribute__((__used__, __section__ (".fuse")))
 #endif
+
+#ifdef __DOXYGEN__
+/** \ingroup avr_fuse
+    A convenience macro. On Xmega devices, it is defined as
+    \code
+    #define FUSES NVM_FUSES_t __fuse FUSEMEM
+    \endcode
+    Otherwise, the definition is:
+    \code
+    #define FUSES __fuse_t __fuse FUSEMEM
+    \endcode */
+#define FUSES
+#else /* Doxygen */
 
 #if FUSE_MEMORY_SIZE > 3
 
 typedef struct
 {
-    unsigned char byte[FUSE_MEMORY_SIZE];
+    uint8_t byte[FUSE_MEMORY_SIZE];
 } __fuse_t;
 
 
@@ -238,24 +247,24 @@ typedef struct
 
 typedef struct
 {
-    unsigned char low;
-    unsigned char high;
-    unsigned char extended;
+    uint8_t low;
+    uint8_t high;
+    uint8_t extended;
 } __fuse_t;
 
 #elif FUSE_MEMORY_SIZE == 2
 
 typedef struct
 {
-    unsigned char low;
-    unsigned char high;
+    uint8_t low;
+    uint8_t high;
 } __fuse_t;
 
 #elif FUSE_MEMORY_SIZE == 1
 
 typedef struct
 {
-    unsigned char byte;
+    uint8_t byte;
 } __fuse_t;
 
 #endif
@@ -269,6 +278,7 @@ typedef struct
 #endif
 
 
-#endif /* !(__ASSEMBLER__ || __DOXYGEN__) */
+#endif /* !Doxygen */
+#endif /* !__ASSEMBLER__ */
 
 #endif /* _AVR_FUSE_H_ */

@@ -29,9 +29,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-/* copied from: Id: avr/twi.h,v 1.4 2004/11/01 21:19:54 arcanum Exp */
-
 #ifndef _UTIL_TWI_H_
 #define _UTIL_TWI_H_ 1
 

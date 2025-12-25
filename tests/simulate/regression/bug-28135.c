@@ -26,16 +26,20 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdlib.h>
-#include <avr/cpufunc.h>
 
 #include "../../libc/stdlib/stdlib_private.h"
 
+/* malloc() and friends are attributed "malloc", which asserts that the
+   value returned by such a function won't alias any other variable.
+   For the tests below to work as expected, we have to "get rid" of that
+   attribute (or use some other means like inline asm to hide the result).  */
+void* my_realloc (void*, size_t) __asm("realloc");
+void* my_malloc (size_t) __asm("malloc");
+#define malloc(a) my_malloc (a)
+#define realloc(a, b) my_realloc (a, b)
 
 /* Test code from bug # */
 int main(void)
@@ -53,7 +57,6 @@ int main(void)
 	if (p != p1)
 		return 2;
 
-	_MemoryBarrier();
 	if (__flp)
 		return 3;
 
@@ -62,7 +65,6 @@ int main(void)
 	if (!p)
 		return 4;
 
-	_MemoryBarrier();
 	/* should be empty */
 	if (__flp)
 		return 5;
@@ -93,7 +95,6 @@ int main(void)
 	if (!p)
 		return 10;
 
-	_MemoryBarrier();
 	if (!__flp)
 		return 11;
 
@@ -101,7 +102,6 @@ int main(void)
 	if (p1 != p)
 		return 12;
 
-	_MemoryBarrier();
 	if (!__flp)
 		return 13;
 
@@ -112,7 +112,6 @@ int main(void)
 	if (!p)
 		return 15;
 
-	_MemoryBarrier();
 	if (!__flp)
 		return 16;
 
@@ -129,4 +128,3 @@ int main(void)
 
 	return 0;
 }
-

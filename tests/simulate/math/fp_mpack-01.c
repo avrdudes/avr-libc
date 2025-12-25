@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of __fp_mpack() function. This is an internal function of AVR-LibC.
-   $Id$
- */
+/* Test of __fp_mpack() function. This is an internal function of AVR-LibC. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,7 +42,7 @@
 #endif
 
 /* Result is placed into SRAM variable, allocated at the start of
-   memory. This is convinient to debug: read a core dump.	*/
+   memory. This is convenient to debug: read a core dump.	*/
 volatile unsigned long v = 1;
 
 PROGMEM const struct {		/* Table of test cases.	*/
@@ -55,7 +52,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
 
     /* zero	*/
     { 0x00000000, 0x00000000 },
-    
+
     /* subnormal, where shift to right is needed	*/
     { 0x00000001, 0x00000000 },
     { 0x00000002, 0x00000001 },
@@ -93,7 +90,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
 
     /* Inf	*/
     { 0xff000000, 0x7f800000 },
-    
+
     /* NaN	*/
     { 0xff000001, 0x7f800001 },
     { 0xff000100, 0x7f800100 },
@@ -113,7 +110,7 @@ unsigned long fp_mpack (unsigned long x)
 {
     int exp = x >> 24;
     unsigned long mnt = x & 0xffffff;
-    
+
     if (exp == 0) {
 	return mnt >> 1;
     } else if (exp == 1 && mnt < 0x800000) {
@@ -126,10 +123,10 @@ unsigned long fp_mpack (unsigned long x)
 }
 #endif
 
-int main ()
+int main (void)
 {
     int i;
-    
+
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	unsigned long tx = pgm_read_dword (& t[i].x);
 	unsigned long tz = pgm_read_dword (& t[i].z);

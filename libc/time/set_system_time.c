@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * Copyright (C) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,21 +23,16 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
 /* Set the system time. The values passed are assumed to represent local
    standard time, such as would be obtained from the typical Real Time Clock
    integrated circuit. It is necessary for this to be atomic, as the value
    may be incremented at interrupt time.  */
 
-#include <time.h>
 #include <avr/interrupt.h>
-
-extern volatile time_t __system_time;
-
+#include <time.h>
+#include "time-private.h"
 #include "sectionname.h"
 
 ATTRIBUTE_CLIB_SECTION

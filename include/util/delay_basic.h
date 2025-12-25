@@ -29,16 +29,15 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef _UTIL_DELAY_BASIC_H_
 #define _UTIL_DELAY_BASIC_H_ 1
 
 #include <inttypes.h>
+#include <bits/attribs.h>
 
 #if !defined(__DOXYGEN__)
-static __inline__ void _delay_loop_1(uint8_t __count) __attribute__((__always_inline__));
-static __inline__ void _delay_loop_2(uint16_t __count) __attribute__((__always_inline__));
+static __ATTR_ALWAYS_INLINE__ void _delay_loop_1(uint8_t __count);
+static __ATTR_ALWAYS_INLINE__ void _delay_loop_2(uint16_t __count);
 #endif
 
 /** \file */
@@ -56,14 +55,13 @@ static __inline__ void _delay_loop_2(uint16_t __count) __attribute__((__always_i
     functions described here do not disable interrupts.
 
     In general, for long delays, the use of hardware timers is
-    much preferrable, as they free the CPU, and allow for
+    much preferable, as they free the CPU, and allow for
     concurrent processing of other events while the timer is
     running.  However, in particular for very short delays, the
     overhead of setting up a hardware timer is too much compared
     to the overall delay time.
 
     Two inline functions are provided for the actual delay algorithms.
-
 */
 
 /** \ingroup util_delay_basic
@@ -74,8 +72,13 @@ static __inline__ void _delay_loop_2(uint16_t __count) __attribute__((__always_i
     including the overhead the compiler needs to setup the counter
     register.
 
-    Thus, at a CPU speed of 1 MHz, delays of up to 768 microseconds
-    can be achieved.
+    Thus, delays of up to 768 / f<sub>CPU</sub> microseconds can be achieved,
+    where f<sub>CPU</sub> denotes the CPU speed in units of 1 MHz.
+
+    As an alternative, consider <a
+    href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles"
+    ><tt>__builtin_avr_delay_cycles</tt></a> which allows to specify the cycle
+    count and can implement delays of up to 71.5 / f<sub>CPU</sub> seconds.
 */
 void
 _delay_loop_1(uint8_t __count)
@@ -96,8 +99,13 @@ _delay_loop_1(uint8_t __count)
     not including the overhead the compiler requires to setup the
     counter register pair.
 
-    Thus, at a CPU speed of 1 MHz, delays of up to about 262.1
-    milliseconds can be achieved.
+    Thus, delays of up to 262.1 / f<sub>CPU</sub> milliseconds can be achieved,
+    where f<sub>CPU</sub> denotes the CPU speed in units of 1 MHz.
+
+    As an alternative, consider <a
+    href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles"
+    ><tt>__builtin_avr_delay_cycles</tt></a> which allows to specify the cycle
+    count and can implement delays of up to 71.5 / f<sub>CPU</sub> seconds.
  */
 void
 _delay_loop_2(uint16_t __count)

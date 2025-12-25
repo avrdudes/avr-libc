@@ -26,13 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define s1_hi r25
 #define s1_lo r24
@@ -44,10 +40,7 @@
 #define ret_hi r25
 #define ret_lo r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strncmp_P)
-	.type	_U(strncmp_P), @function
-_U(strncmp_P):
+ENTRY _U(strncmp_P)
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
 .L_strncmp_P_loop:
@@ -66,9 +59,6 @@ _U(strncmp_P):
 ; ret_hi = SREG.C ? 0xFF : 0
 	sbc	ret_hi, ret_hi
 	ret
-.L_strncmp_P_end:
-	.size	_U(strncmp_P), .L_strncmp_P_end - _U(strncmp_P)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

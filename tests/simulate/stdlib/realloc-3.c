@@ -26,10 +26,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdlib.h>
 #include <stdbool.h>
@@ -39,6 +36,18 @@
 #ifdef __AVR__
 #include <avr/pgmspace.h>
 #include "../../libc/stdlib/stdlib_private.h"
+
+/* malloc() and friends are attributed "malloc", which asserts that the
+   value returned by such a function won't alias any other variable.
+   For the tests below to work as expected, we have to "get rid" of that
+   attribute (or use some other means like inline asm to hide the result).  */
+void* my_realloc (void*, size_t) __asm("realloc");
+void* my_malloc (size_t) __asm("malloc");
+void my_free (void*) __asm("free");
+#define malloc(a) my_malloc (a)
+#define realloc(a, b) my_realloc (a, b)
+#define free(a) my_free (a)
+
 #else
 #include "progmem.h"
 #endif
@@ -145,7 +154,9 @@ void fill_mem(void) __attribute__((section(".init3"),naked));
 void fill_mem(void)
 {
   extern uint8_t __bss_end;
-  uint8_t *p = &__bss_end;
+  /* Issue #987: Use "volatile" to defeat GCC from using memset which
+     would shred the stack frame.  */
+  uint8_t volatile *p = &__bss_end;
   do
     *p++ = 0xa5;
   while (p < (uint8_t *)RAMEND);
@@ -289,7 +300,7 @@ main(void)
   if (stats[0] != stats[1])
     exit(1);
 #ifdef __AVR__
-  if (__flp->nx != NULL)
+  if (__flp && __flp->nx != NULL)
     exit(2);
 #endif
   return 0;

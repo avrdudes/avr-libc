@@ -1,0 +1,98 @@
+#!@PYTHON@
+# -*- mode: python -*-
+
+# @configure_input@
+
+# Run this script like
+#
+#   python devtools/update-news NEWS.md
+#
+# from top srcdir in order to turn issue references like  #1000
+# into active links like  [#1000][1000]  together with a link:
+#
+# [1000]: https://github.com/avrdudes/avr-libc/issues/1000
+#
+# The links will be inserted at the end of the respective <h1> section.
+
+from __future__ import print_function
+
+import sys, re
+
+href_issue = "https://github.com/avrdudes/avr-libc/issues/"
+pat_hash = re.compile (r"(^|[^\[])#(\d+)")                #  #1000
+pat_link = re.compile (r"\[#(\d+)\]\[")                   #  [#1000][
+pat_href = re.compile (r"^\[(\d{3,})\]:\s+" + href_issue) #  [1000]: https:...
+pat_xref = re.compile (r"^\[\d+\]:\s+")                   #  [1000]:
+
+class News:
+    def __init__ (self, filename):
+        self.filename = filename
+        self.issues = set()
+        self.new_issues = set()
+        self.out_lines = []
+
+        if filename == "-":
+            self.lines = sys.stdin.readlines()
+        else:
+            with open (filename, "rt") as fin:
+                self.lines = fin.readlines()
+
+        for l in self.lines:
+            self.do_line (l)
+        self.purge (None)
+
+    def do_line (self, line):
+        """Handle one NEWS.md line."""
+
+        # New <h1> section starts: Output what we have so far.
+        if line.startswith ("# "):
+            self.purge (line)
+
+        # Replace: #100 -> [#100][100]
+        line2 = re.sub (pat_hash, r"\1[#\2][\2]", line, re.M)
+
+        # Find all issue links and record their numbers.
+        for m in re.findall (pat_link, line2):
+            self.new_issues |= set ([int(m)])
+        # Only add this line to the output when it is not an issue href,
+        # i.e. not managed by this script.
+        if not pat_href.match (line):
+            self.out_lines.append (line2)
+
+    def purge (self, line):
+        """Output links to the issues, but only if not already printed."""
+
+        self.new_issues -= self.issues
+        self.issues |= self.new_issues
+        if not self.new_issues:
+            return
+        # Remove trailing empty lines.
+        while self.out_lines and self.out_lines[-1].strip() == "":
+            del self.out_lines[-1]
+        if self.out_lines and not pat_xref.match (self.out_lines[-1]):
+            self.out_lines.append ("\n")
+        # Output links to new issues.
+        for i in sorted(self.new_issues):
+            self.out_lines.append ("[%d]: %s%d\n" % (i, href_issue, i))
+        self.new_issues = set()
+        # Emit empty lines when a new <h1> section follows.
+        if line:
+            self.out_lines.append ("\n")
+            self.out_lines.append ("\n")
+
+    def write (self, filename):
+        if filename == "-":
+            for l in self.out_lines:
+                print (l, end="")
+        else:
+            with open (filename, "wt") as fout:
+                for l in self.out_lines:
+                    fout.write (l)
+
+
+if len(sys.argv) == 1:
+    news = News ("-")
+    news.write ("-")
+elif len(sys.argv) == 2:
+    news = News (sys.argv[1])
+    news.write (sys.argv[1])

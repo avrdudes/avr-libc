@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (C) 2025, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  *
  * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
@@ -43,7 +43,6 @@
 
 /* Ungrouped common registers */
 #define CCP  _SFR_MEM8(0x0034)  /* Configuration Change Protection */
-#define RAMPZ  _SFR_MEM8(0x003B)  /* Extended Z-pointer Register */
 #define SP  _SFR_MEM16(0x003D)  /* Stack Pointer */
 #define SPL  _SFR_MEM8(0x003D)  /* Stack Pointer Low */
 #define SPH  _SFR_MEM8(0x003E)  /* Stack Pointer High */
@@ -284,7 +283,7 @@ typedef enum ADC_START_enum
     ADC_START_STOP_gc = (0x00<<0),  /* Stop/No ongoing conv */
     ADC_START_IMMEDIATE_gc = (0x01<<0),  /* Start Immediately */
     ADC_START_MUXPOS_WRITE_gc = (0x02<<0),  /* Start after a write to MUXPOS */
-    ADC_START_EVENT_TTRIGGER_gc = (0x03<<0)  /* Start upon event reception */
+    ADC_START_EVENT_TRIGGER_gc = (0x04<<0)  /* Start upon event reception */
 } ADC_START_t;
 
 /* Window Comparator Mode select */
@@ -640,9 +639,7 @@ typedef enum CLKCTRL_FRQSEL_enum
     CLKCTRL_FRQSEL_12M_gc = (0x06<<2),  /* 12 MHz system clock */
     CLKCTRL_FRQSEL_16M_gc = (0x07<<2),  /* 16 MHz system clock */
     CLKCTRL_FRQSEL_20M_gc = (0x08<<2),  /* 20 MHz system clock */
-    CLKCTRL_FRQSEL_24M_gc = (0x09<<2),  /* 24 MHz system clock */
-    CLKCTRL_FRQSEL_28M_gc = (0x0A<<2),  /* 28 MHz system clock */
-    CLKCTRL_FRQSEL_32M_gc = (0x0B<<2)  /* 32 MHz system clock */
+    CLKCTRL_FRQSEL_24M_gc = (0x09<<2)  /* 24 MHz system clock */
 } CLKCTRL_FRQSEL_t;
 
 /* Interrupt type select */
@@ -913,7 +910,7 @@ typedef enum KEY_enum
 /* Protection Level select */
 typedef enum LEVEL_enum
 {
-    LEVEL_NVMACCDIS_gc = (0x01<<0),  /* NVM Access through UPDI disabled */
+    LEVEL_NVMACCDIS_gc = (0x02<<0),  /* NVM Access through UPDI disabled */
     LEVEL_BASIC_gc = (0x03<<0)  /* UPDI and UPDI pins working normally */
 } LEVEL_t;
 
@@ -1290,6 +1287,7 @@ typedef enum PORTMUX_TCB1_enum
 typedef enum PORTMUX_TWI0_enum
 {
     PORTMUX_TWI0_DEFAULT_gc = (0x00<<0),  /* SDA: PA2, SCL: PA3 */
+    PORTMUX_TWI0_ALT1_gc = (0x01<<0),  /* SDA: PA2, SCL: PA3 */
     PORTMUX_TWI0_ALT3_gc = (0x03<<0)  /* SDA: PA0, SCL: PA1 */
 } PORTMUX_TWI0_t;
 
@@ -1729,7 +1727,6 @@ typedef enum TCA_SPLIT_CLKSEL_enum
 typedef enum TCA_SPLIT_CMD_enum
 {
     TCA_SPLIT_CMD_NONE_gc = (0x00<<2),  /* No Command */
-    TCA_SPLIT_CMD_UPDATE_gc = (0x01<<2),  /* Force Update */
     TCA_SPLIT_CMD_RESTART_gc = (0x02<<2),  /* Force Restart */
     TCA_SPLIT_CMD_RESET_gc = (0x03<<2)  /* Force Hard Reset */
 } TCA_SPLIT_CMD_t;
@@ -2278,7 +2275,6 @@ IO Module Instances. Mapped to memory.
 
 /* CPU - CPU */
 #define CPU_CCP  _SFR_MEM8(0x0034)
-#define CPU_RAMPZ  _SFR_MEM8(0x003B)
 #define CPU_SP  _SFR_MEM16(0x003D)
 #define CPU_SPL  _SFR_MEM8(0x003D)
 #define CPU_SPH  _SFR_MEM8(0x003E)
@@ -5356,17 +5352,177 @@ IO Module Instances. Mapped to memory.
 
 
 /* USB - USB Device Controller */
+/* USB.CTRLA  bit masks and bit positions */
+#define USB_MAXEP_gm  0x0F  /* Maximum Endpoint Address group mask. */
+#define USB_MAXEP_gp  0  /* Maximum Endpoint Address group position. */
+#define USB_MAXEP_0_bm  (1<<0)  /* Maximum Endpoint Address bit 0 mask. */
+#define USB_MAXEP_0_bp  0  /* Maximum Endpoint Address bit 0 position. */
+#define USB_MAXEP_1_bm  (1<<1)  /* Maximum Endpoint Address bit 1 mask. */
+#define USB_MAXEP_1_bp  1  /* Maximum Endpoint Address bit 1 position. */
+#define USB_MAXEP_2_bm  (1<<2)  /* Maximum Endpoint Address bit 2 mask. */
+#define USB_MAXEP_2_bp  2  /* Maximum Endpoint Address bit 2 position. */
+#define USB_MAXEP_3_bm  (1<<3)  /* Maximum Endpoint Address bit 3 mask. */
+#define USB_MAXEP_3_bp  3  /* Maximum Endpoint Address bit 3 position. */
+#define USB_STFRNUM_bm  0x10  /* Store Frame Number Enable bit mask. */
+#define USB_STFRNUM_bp  4  /* Store Frame Number Enable bit position. */
+#define USB_FIFOEN_bm  0x20  /* Transaction Complete FIFO Enable bit mask. */
+#define USB_FIFOEN_bp  5  /* Transaction Complete FIFO Enable bit position. */
+#define USB_ENABLE_bm  0x80  /* USB Enable bit mask. */
+#define USB_ENABLE_bp  7  /* USB Enable bit position. */
+
+/* USB.CTRLB  bit masks and bit positions */
+#define USB_ATTACH_bm  0x01  /* Attach bit mask. */
+#define USB_ATTACH_bp  0  /* Attach bit position. */
+#define USB_GNAK_bm  0x02  /* Respond with NAK on all Endpoints bit mask. */
+#define USB_GNAK_bp  1  /* Respond with NAK on all Endpoints bit position. */
+#define USB_GNAUTO_bm  0x04  /* Set GNAK Automatically after SETUP bit mask. */
+#define USB_GNAUTO_bp  2  /* Set GNAK Automatically after SETUP bit position. */
+#define USB_URESUME_bm  0x08  /* Send Upstream Resume bit mask. */
+#define USB_URESUME_bp  3  /* Send Upstream Resume bit position. */
+
+/* USB.BUSSTATE  bit masks and bit positions */
+#define USB_BUSRST_bm  0x01  /* Bus Reset bit mask. */
+#define USB_BUSRST_bp  0  /* Bus Reset bit position. */
+#define USB_SUSPENDED_bm  0x02  /* Bus Suspended bit mask. */
+#define USB_SUSPENDED_bp  1  /* Bus Suspended bit position. */
+#define USB_DRESUME_bm  0x04  /* Downstram Resume bit mask. */
+#define USB_DRESUME_bp  2  /* Downstram Resume bit position. */
+/* USB_URESUME  is already defined. */
+#define USB_WTRSM_bm  0x10  /* Wait Time Resume bit mask. */
+#define USB_WTRSM_bp  4  /* Wait Time Resume bit position. */
+
+/* USB.ADDR  bit masks and bit positions */
+#define USB_ADDR_gm  0x7F  /* Device Address group mask. */
+#define USB_ADDR_gp  0  /* Device Address group position. */
+#define USB_ADDR_0_bm  (1<<0)  /* Device Address bit 0 mask. */
+#define USB_ADDR_0_bp  0  /* Device Address bit 0 position. */
+#define USB_ADDR_1_bm  (1<<1)  /* Device Address bit 1 mask. */
+#define USB_ADDR_1_bp  1  /* Device Address bit 1 position. */
+#define USB_ADDR_2_bm  (1<<2)  /* Device Address bit 2 mask. */
+#define USB_ADDR_2_bp  2  /* Device Address bit 2 position. */
+#define USB_ADDR_3_bm  (1<<3)  /* Device Address bit 3 mask. */
+#define USB_ADDR_3_bp  3  /* Device Address bit 3 position. */
+#define USB_ADDR_4_bm  (1<<4)  /* Device Address bit 4 mask. */
+#define USB_ADDR_4_bp  4  /* Device Address bit 4 position. */
+#define USB_ADDR_5_bm  (1<<5)  /* Device Address bit 5 mask. */
+#define USB_ADDR_5_bp  5  /* Device Address bit 5 position. */
+#define USB_ADDR_6_bm  (1<<6)  /* Device Address bit 6 mask. */
+#define USB_ADDR_6_bp  6  /* Device Address bit 6 position. */
+
+/* USB.FIFOWP  bit masks and bit positions */
+#define USB_FIFOWP_gm  0x1F  /* FIFO Write Pointer group mask. */
+#define USB_FIFOWP_gp  0  /* FIFO Write Pointer group position. */
+#define USB_FIFOWP_0_bm  (1<<0)  /* FIFO Write Pointer bit 0 mask. */
+#define USB_FIFOWP_0_bp  0  /* FIFO Write Pointer bit 0 position. */
+#define USB_FIFOWP_1_bm  (1<<1)  /* FIFO Write Pointer bit 1 mask. */
+#define USB_FIFOWP_1_bp  1  /* FIFO Write Pointer bit 1 position. */
+#define USB_FIFOWP_2_bm  (1<<2)  /* FIFO Write Pointer bit 2 mask. */
+#define USB_FIFOWP_2_bp  2  /* FIFO Write Pointer bit 2 position. */
+#define USB_FIFOWP_3_bm  (1<<3)  /* FIFO Write Pointer bit 3 mask. */
+#define USB_FIFOWP_3_bp  3  /* FIFO Write Pointer bit 3 position. */
+#define USB_FIFOWP_4_bm  (1<<4)  /* FIFO Write Pointer bit 4 mask. */
+#define USB_FIFOWP_4_bp  4  /* FIFO Write Pointer bit 4 position. */
+
+/* USB.FIFORP  bit masks and bit positions */
+#define USB_FIFORP_gm  0x1F  /* FIFO Read Pointer group mask. */
+#define USB_FIFORP_gp  0  /* FIFO Read Pointer group position. */
+#define USB_FIFORP_0_bm  (1<<0)  /* FIFO Read Pointer bit 0 mask. */
+#define USB_FIFORP_0_bp  0  /* FIFO Read Pointer bit 0 position. */
+#define USB_FIFORP_1_bm  (1<<1)  /* FIFO Read Pointer bit 1 mask. */
+#define USB_FIFORP_1_bp  1  /* FIFO Read Pointer bit 1 position. */
+#define USB_FIFORP_2_bm  (1<<2)  /* FIFO Read Pointer bit 2 mask. */
+#define USB_FIFORP_2_bp  2  /* FIFO Read Pointer bit 2 position. */
+#define USB_FIFORP_3_bm  (1<<3)  /* FIFO Read Pointer bit 3 mask. */
+#define USB_FIFORP_3_bp  3  /* FIFO Read Pointer bit 3 position. */
+#define USB_FIFORP_4_bm  (1<<4)  /* FIFO Read Pointer bit 4 mask. */
+#define USB_FIFORP_4_bp  4  /* FIFO Read Pointer bit 4 position. */
+
+/* USB.EPPTR  bit masks and bit positions */
+#define USB_EPPTR_gm  0xFFFF  /* Endpoint Configuration Table Pointer group mask. */
+#define USB_EPPTR_gp  0  /* Endpoint Configuration Table Pointer group position. */
+#define USB_EPPTR_0_bm  (1<<0)  /* Endpoint Configuration Table Pointer bit 0 mask. */
+#define USB_EPPTR_0_bp  0  /* Endpoint Configuration Table Pointer bit 0 position. */
+#define USB_EPPTR_1_bm  (1<<1)  /* Endpoint Configuration Table Pointer bit 1 mask. */
+#define USB_EPPTR_1_bp  1  /* Endpoint Configuration Table Pointer bit 1 position. */
+#define USB_EPPTR_2_bm  (1<<2)  /* Endpoint Configuration Table Pointer bit 2 mask. */
+#define USB_EPPTR_2_bp  2  /* Endpoint Configuration Table Pointer bit 2 position. */
+#define USB_EPPTR_3_bm  (1<<3)  /* Endpoint Configuration Table Pointer bit 3 mask. */
+#define USB_EPPTR_3_bp  3  /* Endpoint Configuration Table Pointer bit 3 position. */
+#define USB_EPPTR_4_bm  (1<<4)  /* Endpoint Configuration Table Pointer bit 4 mask. */
+#define USB_EPPTR_4_bp  4  /* Endpoint Configuration Table Pointer bit 4 position. */
+#define USB_EPPTR_5_bm  (1<<5)  /* Endpoint Configuration Table Pointer bit 5 mask. */
+#define USB_EPPTR_5_bp  5  /* Endpoint Configuration Table Pointer bit 5 position. */
+#define USB_EPPTR_6_bm  (1<<6)  /* Endpoint Configuration Table Pointer bit 6 mask. */
+#define USB_EPPTR_6_bp  6  /* Endpoint Configuration Table Pointer bit 6 position. */
+#define USB_EPPTR_7_bm  (1<<7)  /* Endpoint Configuration Table Pointer bit 7 mask. */
+#define USB_EPPTR_7_bp  7  /* Endpoint Configuration Table Pointer bit 7 position. */
+#define USB_EPPTR_8_bm  (1<<8)  /* Endpoint Configuration Table Pointer bit 8 mask. */
+#define USB_EPPTR_8_bp  8  /* Endpoint Configuration Table Pointer bit 8 position. */
+#define USB_EPPTR_9_bm  (1<<9)  /* Endpoint Configuration Table Pointer bit 9 mask. */
+#define USB_EPPTR_9_bp  9  /* Endpoint Configuration Table Pointer bit 9 position. */
+#define USB_EPPTR_10_bm  (1<<10)  /* Endpoint Configuration Table Pointer bit 10 mask. */
+#define USB_EPPTR_10_bp  10  /* Endpoint Configuration Table Pointer bit 10 position. */
+#define USB_EPPTR_11_bm  (1<<11)  /* Endpoint Configuration Table Pointer bit 11 mask. */
+#define USB_EPPTR_11_bp  11  /* Endpoint Configuration Table Pointer bit 11 position. */
+#define USB_EPPTR_12_bm  (1<<12)  /* Endpoint Configuration Table Pointer bit 12 mask. */
+#define USB_EPPTR_12_bp  12  /* Endpoint Configuration Table Pointer bit 12 position. */
+#define USB_EPPTR_13_bm  (1<<13)  /* Endpoint Configuration Table Pointer bit 13 mask. */
+#define USB_EPPTR_13_bp  13  /* Endpoint Configuration Table Pointer bit 13 position. */
+#define USB_EPPTR_14_bm  (1<<14)  /* Endpoint Configuration Table Pointer bit 14 mask. */
+#define USB_EPPTR_14_bp  14  /* Endpoint Configuration Table Pointer bit 14 position. */
+#define USB_EPPTR_15_bm  (1<<15)  /* Endpoint Configuration Table Pointer bit 15 mask. */
+#define USB_EPPTR_15_bp  15  /* Endpoint Configuration Table Pointer bit 15 position. */
+
+/* USB.INTCTRLA  bit masks and bit positions */
+#define USB_OVF_bm  0x02  /* Overflow Interrupt Enable bit mask. */
+#define USB_OVF_bp  1  /* Overflow Interrupt Enable bit position. */
+#define USB_UNF_bm  0x04  /* Underflow Interrupt Enable bit mask. */
+#define USB_UNF_bp  2  /* Underflow Interrupt Enable bit position. */
+#define USB_STALLED_bm  0x08  /* STALL Interrupt Enable bit mask. */
+#define USB_STALLED_bp  3  /* STALL Interrupt Enable bit position. */
+#define USB_RESET_bm  0x10  /* Reset Interrupt Enable bit mask. */
+#define USB_RESET_bp  4  /* Reset Interrupt Enable bit position. */
+#define USB_RESUME_bm  0x20  /* Resume Interrupt Enable bit mask. */
+#define USB_RESUME_bp  5  /* Resume Interrupt Enable bit position. */
+#define USB_SUSPEND_bm  0x40  /* Suspend Interrupt Enable bit mask. */
+#define USB_SUSPEND_bp  6  /* Suspend Interrupt Enable bit position. */
+#define USB_SOF_bm  0x80  /* Start Of Frame Interrupt Enable bit mask. */
+#define USB_SOF_bp  7  /* Start Of Frame Interrupt Enable bit position. */
+
+/* USB.INTCTRLB  bit masks and bit positions */
+#define USB_SETUP_bm  0x01  /* SETUP Transaction Complete Interrupt Enable bit mask. */
+#define USB_SETUP_bp  0  /* SETUP Transaction Complete Interrupt Enable bit position. */
+#define USB_GNDONE_bm  0x02  /* GNAK Operation Done Interrupt Enable bit mask. */
+#define USB_GNDONE_bp  1  /* GNAK Operation Done Interrupt Enable bit position. */
+#define USB_TRNCOMPL_bm  0x20  /* Transaction Complete Interrupt Enable bit mask. */
+#define USB_TRNCOMPL_bp  5  /* Transaction Complete Interrupt Enable bit position. */
+
+/* USB.INTFLAGSA  bit masks and bit positions */
+/* USB_OVF  is already defined. */
+/* USB_UNF  is already defined. */
+/* USB_STALLED  is already defined. */
+/* USB_RESET  is already defined. */
+/* USB_RESUME  is already defined. */
+/* USB_SUSPEND  is already defined. */
+/* USB_SOF  is already defined. */
+
+/* USB.INTFLAGSB  bit masks and bit positions */
+/* USB_SETUP  is already defined. */
+/* USB_GNDONE  is already defined. */
+#define USB_RMWBUSY_bm  0x04  /* RMW Busy Flag bit mask. */
+#define USB_RMWBUSY_bp  2  /* RMW Busy Flag bit position. */
+/* USB_TRNCOMPL  is already defined. */
+
+
 /* USB.STATUS  bit masks and bit positions */
 #define USB_TOGGLE_bm  0x01  /* Data Toggle bit mask. */
 #define USB_TOGGLE_bp  0  /* Data Toggle bit position. */
 #define USB_BUSNAK_bm  0x02  /* Data Buffer NAK bit mask. */
 #define USB_BUSNAK_bp  1  /* Data Buffer NAK bit position. */
-#define USB_STALLED_bm  0x08  /* EP Stalled bit mask. */
-#define USB_STALLED_bp  3  /* EP Stalled bit position. */
+/* USB_STALLED  is already defined. */
 #define USB_EPSETUP_bm  0x10  /* EP Setup Complete bit mask. */
 #define USB_EPSETUP_bp  4  /* EP Setup Complete bit position. */
-#define USB_TRNCOMPL_bm  0x20  /* Transaction Complete bit mask. */
-#define USB_TRNCOMPL_bp  5  /* Transaction Complete bit position. */
+/* USB_TRNCOMPL  is already defined. */
 #define USB_UNFOVF_bm  0x40  /* Underflow/Overflow EP bit mask. */
 #define USB_UNFOVF_bp  6  /* Underflow/Overflow EP bit position. */
 #define USB_CRC_bm  0x80  /* CRC Error bit mask. */
@@ -5583,166 +5739,6 @@ IO Module Instances. Mapped to memory.
 
 /* USB.INSET  bit masks and bit positions */
 /* USB_RMWSTATUS  is already defined. */
-
-
-/* USB.CTRLA  bit masks and bit positions */
-#define USB_MAXEP_gm  0x0F  /* Maximum Endpoint Address group mask. */
-#define USB_MAXEP_gp  0  /* Maximum Endpoint Address group position. */
-#define USB_MAXEP_0_bm  (1<<0)  /* Maximum Endpoint Address bit 0 mask. */
-#define USB_MAXEP_0_bp  0  /* Maximum Endpoint Address bit 0 position. */
-#define USB_MAXEP_1_bm  (1<<1)  /* Maximum Endpoint Address bit 1 mask. */
-#define USB_MAXEP_1_bp  1  /* Maximum Endpoint Address bit 1 position. */
-#define USB_MAXEP_2_bm  (1<<2)  /* Maximum Endpoint Address bit 2 mask. */
-#define USB_MAXEP_2_bp  2  /* Maximum Endpoint Address bit 2 position. */
-#define USB_MAXEP_3_bm  (1<<3)  /* Maximum Endpoint Address bit 3 mask. */
-#define USB_MAXEP_3_bp  3  /* Maximum Endpoint Address bit 3 position. */
-#define USB_STFRNUM_bm  0x10  /* Store Frame Number Enable bit mask. */
-#define USB_STFRNUM_bp  4  /* Store Frame Number Enable bit position. */
-#define USB_FIFOEN_bm  0x20  /* Transaction Complete FIFO Enable bit mask. */
-#define USB_FIFOEN_bp  5  /* Transaction Complete FIFO Enable bit position. */
-#define USB_ENABLE_bm  0x80  /* USB Enable bit mask. */
-#define USB_ENABLE_bp  7  /* USB Enable bit position. */
-
-/* USB.CTRLB  bit masks and bit positions */
-#define USB_ATTACH_bm  0x01  /* Attach bit mask. */
-#define USB_ATTACH_bp  0  /* Attach bit position. */
-#define USB_GNAK_bm  0x02  /* Respond with NAK on all Endpoints bit mask. */
-#define USB_GNAK_bp  1  /* Respond with NAK on all Endpoints bit position. */
-#define USB_GNAUTO_bm  0x04  /* Set GNAK Automatically after SETUP bit mask. */
-#define USB_GNAUTO_bp  2  /* Set GNAK Automatically after SETUP bit position. */
-#define USB_URESUME_bm  0x08  /* Send Upstream Resume bit mask. */
-#define USB_URESUME_bp  3  /* Send Upstream Resume bit position. */
-
-/* USB.BUSSTATE  bit masks and bit positions */
-#define USB_BUSRST_bm  0x01  /* Bus Reset bit mask. */
-#define USB_BUSRST_bp  0  /* Bus Reset bit position. */
-#define USB_SUSPENDED_bm  0x02  /* Bus Suspended bit mask. */
-#define USB_SUSPENDED_bp  1  /* Bus Suspended bit position. */
-#define USB_DRESUME_bm  0x04  /* Downstram Resume bit mask. */
-#define USB_DRESUME_bp  2  /* Downstram Resume bit position. */
-/* USB_URESUME  is already defined. */
-#define USB_WTRSM_bm  0x10  /* Wait Time Resume bit mask. */
-#define USB_WTRSM_bp  4  /* Wait Time Resume bit position. */
-
-/* USB.ADDR  bit masks and bit positions */
-#define USB_ADDR_gm  0x7F  /* Device Address group mask. */
-#define USB_ADDR_gp  0  /* Device Address group position. */
-#define USB_ADDR_0_bm  (1<<0)  /* Device Address bit 0 mask. */
-#define USB_ADDR_0_bp  0  /* Device Address bit 0 position. */
-#define USB_ADDR_1_bm  (1<<1)  /* Device Address bit 1 mask. */
-#define USB_ADDR_1_bp  1  /* Device Address bit 1 position. */
-#define USB_ADDR_2_bm  (1<<2)  /* Device Address bit 2 mask. */
-#define USB_ADDR_2_bp  2  /* Device Address bit 2 position. */
-#define USB_ADDR_3_bm  (1<<3)  /* Device Address bit 3 mask. */
-#define USB_ADDR_3_bp  3  /* Device Address bit 3 position. */
-#define USB_ADDR_4_bm  (1<<4)  /* Device Address bit 4 mask. */
-#define USB_ADDR_4_bp  4  /* Device Address bit 4 position. */
-#define USB_ADDR_5_bm  (1<<5)  /* Device Address bit 5 mask. */
-#define USB_ADDR_5_bp  5  /* Device Address bit 5 position. */
-#define USB_ADDR_6_bm  (1<<6)  /* Device Address bit 6 mask. */
-#define USB_ADDR_6_bp  6  /* Device Address bit 6 position. */
-
-/* USB.FIFOWP  bit masks and bit positions */
-#define USB_FIFOWP_gm  0x1F  /* FIFO Write Pointer group mask. */
-#define USB_FIFOWP_gp  0  /* FIFO Write Pointer group position. */
-#define USB_FIFOWP_0_bm  (1<<0)  /* FIFO Write Pointer bit 0 mask. */
-#define USB_FIFOWP_0_bp  0  /* FIFO Write Pointer bit 0 position. */
-#define USB_FIFOWP_1_bm  (1<<1)  /* FIFO Write Pointer bit 1 mask. */
-#define USB_FIFOWP_1_bp  1  /* FIFO Write Pointer bit 1 position. */
-#define USB_FIFOWP_2_bm  (1<<2)  /* FIFO Write Pointer bit 2 mask. */
-#define USB_FIFOWP_2_bp  2  /* FIFO Write Pointer bit 2 position. */
-#define USB_FIFOWP_3_bm  (1<<3)  /* FIFO Write Pointer bit 3 mask. */
-#define USB_FIFOWP_3_bp  3  /* FIFO Write Pointer bit 3 position. */
-#define USB_FIFOWP_4_bm  (1<<4)  /* FIFO Write Pointer bit 4 mask. */
-#define USB_FIFOWP_4_bp  4  /* FIFO Write Pointer bit 4 position. */
-
-/* USB.FIFORP  bit masks and bit positions */
-#define USB_FIFORP_gm  0x1F  /* FIFO Read Pointer group mask. */
-#define USB_FIFORP_gp  0  /* FIFO Read Pointer group position. */
-#define USB_FIFORP_0_bm  (1<<0)  /* FIFO Read Pointer bit 0 mask. */
-#define USB_FIFORP_0_bp  0  /* FIFO Read Pointer bit 0 position. */
-#define USB_FIFORP_1_bm  (1<<1)  /* FIFO Read Pointer bit 1 mask. */
-#define USB_FIFORP_1_bp  1  /* FIFO Read Pointer bit 1 position. */
-#define USB_FIFORP_2_bm  (1<<2)  /* FIFO Read Pointer bit 2 mask. */
-#define USB_FIFORP_2_bp  2  /* FIFO Read Pointer bit 2 position. */
-#define USB_FIFORP_3_bm  (1<<3)  /* FIFO Read Pointer bit 3 mask. */
-#define USB_FIFORP_3_bp  3  /* FIFO Read Pointer bit 3 position. */
-#define USB_FIFORP_4_bm  (1<<4)  /* FIFO Read Pointer bit 4 mask. */
-#define USB_FIFORP_4_bp  4  /* FIFO Read Pointer bit 4 position. */
-
-/* USB.EPPTR  bit masks and bit positions */
-#define USB_EPPTR_gm  0xFFFF  /* Endpoint Configuration Table Pointer group mask. */
-#define USB_EPPTR_gp  0  /* Endpoint Configuration Table Pointer group position. */
-#define USB_EPPTR_0_bm  (1<<0)  /* Endpoint Configuration Table Pointer bit 0 mask. */
-#define USB_EPPTR_0_bp  0  /* Endpoint Configuration Table Pointer bit 0 position. */
-#define USB_EPPTR_1_bm  (1<<1)  /* Endpoint Configuration Table Pointer bit 1 mask. */
-#define USB_EPPTR_1_bp  1  /* Endpoint Configuration Table Pointer bit 1 position. */
-#define USB_EPPTR_2_bm  (1<<2)  /* Endpoint Configuration Table Pointer bit 2 mask. */
-#define USB_EPPTR_2_bp  2  /* Endpoint Configuration Table Pointer bit 2 position. */
-#define USB_EPPTR_3_bm  (1<<3)  /* Endpoint Configuration Table Pointer bit 3 mask. */
-#define USB_EPPTR_3_bp  3  /* Endpoint Configuration Table Pointer bit 3 position. */
-#define USB_EPPTR_4_bm  (1<<4)  /* Endpoint Configuration Table Pointer bit 4 mask. */
-#define USB_EPPTR_4_bp  4  /* Endpoint Configuration Table Pointer bit 4 position. */
-#define USB_EPPTR_5_bm  (1<<5)  /* Endpoint Configuration Table Pointer bit 5 mask. */
-#define USB_EPPTR_5_bp  5  /* Endpoint Configuration Table Pointer bit 5 position. */
-#define USB_EPPTR_6_bm  (1<<6)  /* Endpoint Configuration Table Pointer bit 6 mask. */
-#define USB_EPPTR_6_bp  6  /* Endpoint Configuration Table Pointer bit 6 position. */
-#define USB_EPPTR_7_bm  (1<<7)  /* Endpoint Configuration Table Pointer bit 7 mask. */
-#define USB_EPPTR_7_bp  7  /* Endpoint Configuration Table Pointer bit 7 position. */
-#define USB_EPPTR_8_bm  (1<<8)  /* Endpoint Configuration Table Pointer bit 8 mask. */
-#define USB_EPPTR_8_bp  8  /* Endpoint Configuration Table Pointer bit 8 position. */
-#define USB_EPPTR_9_bm  (1<<9)  /* Endpoint Configuration Table Pointer bit 9 mask. */
-#define USB_EPPTR_9_bp  9  /* Endpoint Configuration Table Pointer bit 9 position. */
-#define USB_EPPTR_10_bm  (1<<10)  /* Endpoint Configuration Table Pointer bit 10 mask. */
-#define USB_EPPTR_10_bp  10  /* Endpoint Configuration Table Pointer bit 10 position. */
-#define USB_EPPTR_11_bm  (1<<11)  /* Endpoint Configuration Table Pointer bit 11 mask. */
-#define USB_EPPTR_11_bp  11  /* Endpoint Configuration Table Pointer bit 11 position. */
-#define USB_EPPTR_12_bm  (1<<12)  /* Endpoint Configuration Table Pointer bit 12 mask. */
-#define USB_EPPTR_12_bp  12  /* Endpoint Configuration Table Pointer bit 12 position. */
-#define USB_EPPTR_13_bm  (1<<13)  /* Endpoint Configuration Table Pointer bit 13 mask. */
-#define USB_EPPTR_13_bp  13  /* Endpoint Configuration Table Pointer bit 13 position. */
-#define USB_EPPTR_14_bm  (1<<14)  /* Endpoint Configuration Table Pointer bit 14 mask. */
-#define USB_EPPTR_14_bp  14  /* Endpoint Configuration Table Pointer bit 14 position. */
-#define USB_EPPTR_15_bm  (1<<15)  /* Endpoint Configuration Table Pointer bit 15 mask. */
-#define USB_EPPTR_15_bp  15  /* Endpoint Configuration Table Pointer bit 15 position. */
-
-/* USB.INTCTRLA  bit masks and bit positions */
-#define USB_OVF_bm  0x02  /* Overflow Interrupt Enable bit mask. */
-#define USB_OVF_bp  1  /* Overflow Interrupt Enable bit position. */
-#define USB_UNF_bm  0x04  /* Underflow Interrupt Enable bit mask. */
-#define USB_UNF_bp  2  /* Underflow Interrupt Enable bit position. */
-/* USB_STALLED  is already defined. */
-#define USB_RESET_bm  0x10  /* Reset Interrupt Enable bit mask. */
-#define USB_RESET_bp  4  /* Reset Interrupt Enable bit position. */
-#define USB_RESUME_bm  0x20  /* Resume Interrupt Enable bit mask. */
-#define USB_RESUME_bp  5  /* Resume Interrupt Enable bit position. */
-#define USB_SUSPEND_bm  0x40  /* Suspend Interrupt Enable bit mask. */
-#define USB_SUSPEND_bp  6  /* Suspend Interrupt Enable bit position. */
-#define USB_SOF_bm  0x80  /* Start Of Frame Interrupt Enable bit mask. */
-#define USB_SOF_bp  7  /* Start Of Frame Interrupt Enable bit position. */
-
-/* USB.INTCTRLB  bit masks and bit positions */
-#define USB_SETUP_bm  0x01  /* SETUP Transaction Complete Interrupt Enable bit mask. */
-#define USB_SETUP_bp  0  /* SETUP Transaction Complete Interrupt Enable bit position. */
-#define USB_GNDONE_bm  0x02  /* GNAK Operation Done Interrupt Enable bit mask. */
-#define USB_GNDONE_bp  1  /* GNAK Operation Done Interrupt Enable bit position. */
-/* USB_TRNCOMPL  is already defined. */
-
-/* USB.INTFLAGSA  bit masks and bit positions */
-/* USB_OVF  is already defined. */
-/* USB_UNF  is already defined. */
-/* USB_STALLED  is already defined. */
-/* USB_RESET  is already defined. */
-/* USB_RESUME  is already defined. */
-/* USB_SUSPEND  is already defined. */
-/* USB_SOF  is already defined. */
-
-/* USB.INTFLAGSB  bit masks and bit positions */
-/* USB_SETUP  is already defined. */
-/* USB_GNDONE  is already defined. */
-#define USB_RMWBUSY_bm  0x04  /* RMW Busy Flag bit mask. */
-#define USB_RMWBUSY_bp  2  /* RMW Busy Flag bit position. */
-/* USB_TRNCOMPL  is already defined. */
 
 
 

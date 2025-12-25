@@ -24,20 +24,18 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Binary conversion.
-   $Id$
- */
+/* Binary conversion. */
 #include <stdlib.h>
 #include <string.h>
 #include "progmem.h"
 #include "strtol.h"
 
-int main ()
+int main (void)
 {
-    PROGMEM static const struct t_s {
+    PROGMEM static const struct t_s
+    {
 	char s[34];		/* string to convert	*/
 	int base;
 	long ret;		/* result must	*/
@@ -57,12 +55,11 @@ int main ()
 	{ "-10000000000000000000000000000000", 2, 0x80000000, 0, 33 },
 	{ "-10000000000000000000000000000001", 2, 0x80000000, ERANGE, 33 },
 	{ "-10000000000000000000000000000010", 2, 0x80000000, ERANGE, 33 },
-	
     };
     struct t_s tt;
-    int i;
-    
-    for (i = 0; i != (int)(sizeof(t)/sizeof(t[0])); i++) {
+
+    for (int i = 0; i != (int)(sizeof(t)/sizeof(t[0])); i++)
+    {
 	struct t_s *p;
 	memcpy_P (&tt, t + i, sizeof(tt));
 	p = &tt;

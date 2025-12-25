@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* This file is based largely on:
    - iom128.h by Peter Jansen (bit defines)
    - iom169.h by Juergen Schilling <juergen.schilling@honeywell.com>
@@ -53,7 +51,7 @@
 #  define _AVR_IOXXX_H_ "iocanxx.h"
 #else
 #  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
+#endif
 
 /* I/O registers and bit definitions. */
 
@@ -171,7 +169,7 @@
 /* RegDef:  MCU Status Register */
 #define MCUSR  _SFR_IO8(0x34)
 
-/* RegDef:  MCU Control Rgeister */
+/* RegDef:  MCU Control Register */
 #define MCUCR  _SFR_IO8(0x35)
 
 /* RegDef:  Store Program Memory Control and Status Register */
@@ -378,7 +376,7 @@
 #define CANGIE _SFR_MEM8(0xDB)
 
 /* Word Definition:  CAN Enable MOb Register*/
-#define CANEN _SFR_MEM16(0xDC) 
+#define CANEN _SFR_MEM16(0xDC)
 
 /* RegDef:  CAN Enable MOb Register*/
 #define CANEN2 _SFR_MEM8(0xDC)
@@ -387,7 +385,7 @@
 #define CANEN1 _SFR_MEM8(0xDD)
 
 /* Word Definition:  CAN Enable Interrupt MOb Register*/
-#define CANIE _SFR_MEM16(0xDE) 
+#define CANIE _SFR_MEM16(0xDE)
 
 /* RegDef:  CAN Enable Interrupt MOb Register*/
 #define CANIE2 _SFR_MEM8(0xDE)
@@ -994,9 +992,9 @@
 #define    ADPS0        0
 /* End Register Bits */
 
-/* 
-   The ADHSM bit has been removed from all documentation, 
-   as being not needed at all since the comparator has proven 
+/*
+   The ADHSM bit has been removed from all documentation,
+   as being not needed at all since the comparator has proven
    to be fast enough even without feeding it more power.
 */
 

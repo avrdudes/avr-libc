@@ -1,4 +1,5 @@
 # Copyright (c) 2004,2008,2009  Theodore A. Roth
+# Copyright (c) 2025  Georg-Johann Lay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,11 +26,8 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
-libm_a_c_sources = 
+libm_a_c_sources =
 
 libm_a_asm_sources = \
 	acos.S \
@@ -53,6 +51,7 @@ libm_a_asm_sources = \
 	floatdisf.S \
 	floatsisf.S \
 	floatundisf.S \
+	fabs.S \
 	fdim.S \
 	floor.S \
 	fma.S \
@@ -65,7 +64,6 @@ libm_a_asm_sources = \
 	fp_mintl.S \
 	fp_mpack.S \
 	fp_nan.S \
-	fp_negdi.S \
 	fp_norm2.S \
 	fp_powser.S \
 	fp_powsodd.S \
@@ -86,6 +84,7 @@ libm_a_asm_sources = \
 	isnan.S \
 	ldexp.S \
 	log10.S \
+	log2.S \
 	log.S \
 	lrint.S \
 	lround.S \
@@ -98,6 +97,7 @@ libm_a_asm_sources = \
 	signbit.S \
 	sinh.S \
 	sin.S \
+	sincos.S \
 	sqrt.S \
 	square.S \
 	tanh.S \
@@ -106,8 +106,6 @@ libm_a_asm_sources = \
 	unordsf2.S
 
 libm_a_extra_dist = \
-	asmdef.h \
-	fp32def.h \
-	ntz.h
+	fp32def.h
 
 # vim: set ft=make:

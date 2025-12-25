@@ -24,13 +24,10 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Test of addition.  Infs (without NaNs).
-   'Inf - Inf' is not included into this file.
-   $Id$
- */
+   'Inf - Inf' is not included into this file. */
 #include <stdio.h>
 #include <stdlib.h>
 #include "progmem.h"

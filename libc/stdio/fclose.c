@@ -24,10 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
 #include <stdio.h>
@@ -50,7 +47,7 @@ fclose(FILE *stream)
 
 	/*
 	 * The standard streams are only aliases.  So if the stream to
-	 * be closed is also refered to by a standard stream name,
+	 * be closed is also referred to by a standard stream name,
 	 * mark its slot as empty.
 	 */
 	for (i = 0; i < 3; i++)

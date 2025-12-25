@@ -26,20 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+#include "asmdef.h"
 
-#ifndef	__DOXYGEN__
-
-#include "macros.inc"
-
-	ASSEMBLY_CLIB_SECTION
-	.global _U(exit)
-	.type	_U(exit), "function"
-
-_U(exit):
+ENTRY _U(exit)
 	cli
 	XJMP	_U(_exit)
-
-	.size	_U(exit), . - _U(exit)
-
-#endif	/* !__DOXYGEN__	*/
+ENDFUNC

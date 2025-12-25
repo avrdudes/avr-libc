@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
    strcasecmp.S
    Case insensitive compare
@@ -37,9 +35,7 @@
      Created by Reiner Patommel
 */
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(strcasecmp_P) _U(strcasecmp)
 
@@ -53,11 +49,7 @@ TINY_WEAK_ALIAS _U(strcasecmp_P) _U(strcasecmp)
 
 #define tmp r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strcasecmp)
-	.type	_U(strcasecmp), @function
-
-_U(strcasecmp):
+ENTRY _U(strcasecmp)
 	X_movw	ZL, s2_lo
 	X_movw	XL, s1_lo
 
@@ -82,6 +74,4 @@ _U(strcasecmp):
 	sbc	ret_hi, ret_hi		; sign extension
 	ret
 
-	.size	_U(strcasecmp), . - _U(strcasecmp)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC

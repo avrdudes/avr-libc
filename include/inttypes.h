@@ -29,12 +29,11 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef __INTTYPES_H_
 #define __INTTYPES_H_
 
 #include <stdint.h>
+#include <bits/attribs.h>
 
 /** \file */
 /** \defgroup avr_inttypes <inttypes.h>: Integer Type conversions
@@ -68,6 +67,7 @@
 	   smallval, longval);
     \endcode
 */
+
 
 /** \name Far pointers for memory access > 64K */
 

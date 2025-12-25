@@ -1,0 +1,19 @@
+!MCU=atmega128
+1\page benchmarks
+1
+1\section bench_fxlib Fixed-Point Functions from <stdfix.h>
+1
+1The following tables contain benchmark values for some
+1\ref avr_stdfix "fixed-point" functions
+1over the indicated range of input values.
+1
+1- \c V+ denotes the smallest value that is larger than \c V for the
+1  considered fixed-point type.  Similarly, \c V- denotes the largest value
+1  that is smaller than \c V for the considered type.
+1- The code sizes include all dependencies.
+1
+1Notice that the values for absolute error Err<sub>max</sub>, and the Worst
+1Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
+1
+1<table>
+1<caption>Fixed-Point Benchmarks for ATmega128 (avr51, with MUL)</caption>

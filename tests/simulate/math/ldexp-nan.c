@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of ldexp function.  NaNs.
-   $Id$
- */
+/* Test of ldexp function.  NaNs. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -71,7 +68,7 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int y;
@@ -80,8 +77,8 @@ int main ()
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	y    = pgm_read_word  (& t[i].y);
-	v.fl = ldexp (x.fl, y);
-	if (!isnan(v.fl))
+	v.fl = ldexpf (x.fl, y);
+	if (!isnanf (v.fl))
 	    x_exit (i+1);
     }
     return 0;

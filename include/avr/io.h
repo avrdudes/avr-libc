@@ -29,22 +29,20 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /** \file */
 /** \defgroup avr_io <avr/io.h>: AVR device-specific IO definitions
     \code #include <avr/io.h> \endcode
 
-    This header file includes the apropriate IO definitions for the
+    This header file includes the appropriate IO definitions for the
     device that has been specified by the <tt>-mmcu=</tt> compiler
-    command-line switch.  This is done by diverting to the appropriate
+    command-line option.  This is done by diverting to the appropriate
     file <tt>&lt;avr/io</tt><em>XXXX</em><tt>.h&gt;</tt> which should
     never be included directly.  Some register names common to all
     AVR devices are defined directly within <tt>&lt;avr/common.h&gt;</tt>,
     which is included in <tt>&lt;avr/io.h&gt;</tt>,
     but most of the details come from the respective include file.
 
-    Note that this file always includes the following files:
+    Note that this header always includes the following ones:
     \code
     #include <avr/sfr_defs.h>
     #include <avr/portpins.h>
@@ -54,49 +52,54 @@
     See \ref avr_sfr for more details about that header file.
 
     Included are definitions of the IO register set and their
-    respective bit values as specified in the Atmel documentation.
-    Note that inconsistencies in naming conventions,
+    respective bit values as specified in the device manual.
+    Note that due to inconsistencies in naming conventions,
     so even identical functions sometimes get different names on
     different devices.
 
     Also included are the specific names useable for interrupt
-    function definitions as documented
-    \ref avr_signames "here".
+    service routines as documented
+    \ref avr_mcu_signames "here".
 
     Finally, the following macros are defined:
 
-    - \b RAMEND
-    <br>
-    The last on-chip RAM address.
-    <br>
-    - \b XRAMEND
-    <br>
-    The last possible RAM location that is addressable. This is equal to
+    <dl>
+    <dt>RAMEND
+    <dd>The last on-chip RAM address.
+
+    <dt>XRAMEND
+    <dd>The last possible RAM location that is addressable. This is equal to
     RAMEND for devices that do not allow for external RAM. For devices
     that allow external RAM, this will be larger than RAMEND.
-    <br>
-    - \b E2END
-    <br>
-    The last EEPROM address.
-    <br>
-    - \b FLASHEND
-    <br>
-    The last byte address in the Flash program space.
-    <br>
-    - \b SPM_PAGESIZE
-    <br>
-    For devices with bootloader support, the flash pagesize
-    (in bytes) to be used for the \c SPM instruction.
-    - \b E2PAGESIZE
-    <br>
-    The size of the EEPROM page.
 
+    <dt>E2END
+    <dd>The last EEPROM address.
+
+    <dt>FLASHEND
+    <dd>The last byte address in the Flash program space.
+
+    <dt>SPM_PAGESIZE
+    <dd>For devices with bootloader support, the flash pagesize
+    (in bytes) to be used for the \c SPM instruction.
+
+    <dt>E2PAGESIZE
+    <dd>The size of the EEPROM page.
+    </dl>
 */
 
 #ifndef _AVR_IO_H_
 #define _AVR_IO_H_
 
 #include <avr/sfr_defs.h>
+
+#if defined(BAUD)
+#if !defined (__CONFIGURING_AVR_LIBC__)
+#include <bits/devinfo.h>
+#endif
+#if defined (__AVR_IO_H_USES_BAUD__)
+#error BAUD is a reserved identifier in <avr/io.h>
+#endif
+#endif /* defined BAUD? */
 
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
@@ -464,6 +467,8 @@
 #  include <avr/iotn414.h>
 #elif defined (__AVR_ATtiny416__)
 #  include <avr/iotn416.h>
+#elif defined (__AVR_ATtiny416AUTO__)
+#  include <avr/iotn416auto.h>
 #elif defined (__AVR_ATtiny417__)
 #  include <avr/iotn417.h>
 #elif defined (__AVR_ATtiny424__)
@@ -549,6 +554,8 @@
 #elif defined (__AVR_ATxmega16D4__)
 #  include <avr/iox16d4.h>
 #elif defined (__AVR_ATxmega32A4__)
+#  include <avr/iox16e5.h>
+#elif defined (__AVR_ATxmega16E5__)
 #  include <avr/iox32a4.h>
 #elif defined (__AVR_ATxmega32A4U__)
 #  include <avr/iox32a4u.h>
@@ -626,16 +633,24 @@
 #  include <avr/iox384c3.h>
 #elif defined (__AVR_ATxmega384D3__)
 #  include <avr/iox384d3.h>
+#elif defined (__AVR_ATA5700M322__)
+#  include <avr/ioa5700m322.h>
 #elif defined (__AVR_ATA5702M322__)
 #  include <avr/ioa5702m322.h>
+#elif defined (__AVR_ATA5787__)
+#  include <avr/ioa5787.h>
 #elif defined (__AVR_ATA5782__)
 #  include <avr/ioa5782.h>
 #elif defined (__AVR_ATA5790__)
 #  include <avr/ioa5790.h>
 #elif defined (__AVR_ATA5790N__)
 #  include <avr/ioa5790n.h>
+#elif defined (__AVR_ATA5791__)
+#  include <avr/ioa5791.h>
 #elif defined (__AVR_ATA5831__)
 #  include <avr/ioa5831.h>
+#elif defined (__AVR_ATA5835__)
+#  include <avr/ioa5835.h>
 #elif defined (__AVR_ATA5272__)
 #  include <avr/ioa5272.h>
 #elif defined (__AVR_ATA5505__)
@@ -660,6 +675,10 @@
 #  include <avr/ioa6617c.h>
 #elif defined (__AVR_ATA664251__)
 #  include <avr/ioa664251.h>
+#elif defined (__AVR_ATA8210__)
+#  include <avr/ioa8210.h>
+#elif defined (__AVR_ATA8510__)
+#  include <avr/ioa8510.h>
 /* avr1: the following only supported for assembler programs */
 #elif defined (__AVR_ATtiny28__)
 #  include <avr/iotn28.h>
@@ -673,109 +692,28 @@
 #  include <avr/iotn11.h>
 #elif defined (__AVR_M3000__)
 #  include <avr/iom3000.h>
-#elif defined (__AVR_AVR32DA28__)
-#  include <avr/ioavr32da28.h>
-#elif defined (__AVR_AVR32DA32__)
-#  include <avr/ioavr32da32.h>
-#elif defined (__AVR_AVR32DA48__)
-#  include <avr/ioavr32da48.h>
-#elif defined (__AVR_AVR64DA28__)
-#  include <avr/ioavr64da28.h>
-#elif defined (__AVR_AVR64DA32__)
-#  include <avr/ioavr64da32.h>
-#elif defined (__AVR_AVR64DA48__)
-#  include <avr/ioavr64da48.h>
-#elif defined (__AVR_AVR64DA64__)
-#  include <avr/ioavr64da64.h>
-#elif defined (__AVR_AVR128DA28__)
-#  include <avr/ioavr128da28.h>
-#elif defined (__AVR_AVR128DA32__)
-#  include <avr/ioavr128da32.h>
-#elif defined (__AVR_AVR128DA48__)
-#  include <avr/ioavr128da48.h>
-#elif defined (__AVR_AVR128DA64__)
-#  include <avr/ioavr128da64.h>
-#elif defined (__AVR_AVR32DB28__)
-#  include <avr/ioavr32db28.h>
-#elif defined (__AVR_AVR32DB32__)
-#  include <avr/ioavr32db32.h>
-#elif defined (__AVR_AVR32DB48__)
-#  include <avr/ioavr32db48.h>
-#elif defined (__AVR_AVR64DB28__)
-#  include <avr/ioavr64db28.h>
-#elif defined (__AVR_AVR64DB32__)
-#  include <avr/ioavr64db32.h>
-#elif defined (__AVR_AVR64DB48__)
-#  include <avr/ioavr64db48.h>
-#elif defined (__AVR_AVR64DB64__)
-#  include <avr/ioavr64db64.h>
-#elif defined (__AVR_AVR128DB28__)
-#  include <avr/ioavr128db28.h>
-#elif defined (__AVR_AVR128DB32__)
-#  include <avr/ioavr128db32.h>
-#elif defined (__AVR_AVR128DB48__)
-#  include <avr/ioavr128db48.h>
-#elif defined (__AVR_AVR128DB64__)
-#  include <avr/ioavr128db64.h>
-#elif defined (__AVR_AVR16DD14__)
-#  include <avr/ioavr16dd14.h>
-#elif defined (__AVR_AVR16DD20__)
-#  include <avr/ioavr16dd20.h>
-#elif defined (__AVR_AVR16DD28__)
-#  include <avr/ioavr16dd28.h>
-#elif defined (__AVR_AVR16DD32__)
-#  include <avr/ioavr16dd32.h>
-#elif defined (__AVR_AVR32DD14__)
-#  include <avr/ioavr32dd14.h>
-#elif defined (__AVR_AVR32DD20__)
-#  include <avr/ioavr32dd20.h>
-#elif defined (__AVR_AVR32DD28__)
-#  include <avr/ioavr32dd28.h>
-#elif defined (__AVR_AVR32DD32__)
-#  include <avr/ioavr32dd32.h>
-#elif defined (__AVR_AVR64DD14__)
-#  include <avr/ioavr64dd14.h>
-#elif defined (__AVR_AVR64DD20__)
-#  include <avr/ioavr64dd20.h>
-#elif defined (__AVR_AVR64DD28__)
-#  include <avr/ioavr64dd28.h>
-#elif defined (__AVR_AVR64DD32__)
-#  include <avr/ioavr64dd32.h>
-#elif defined (__AVR_AVR64DU28__)
-#  include <avr/ioavr64du28.h>
-#elif defined (__AVR_AVR64DU32__)
-#  include <avr/ioavr64du32.h>
-#elif defined (__AVR_AVR16EA28__)
-#  include <avr/ioavr16ea28.h>
-#elif defined (__AVR_AVR16EA32__)
-#  include <avr/ioavr16ea32.h>
-#elif defined (__AVR_AVR16EA48__)
-#  include <avr/ioavr16ea48.h>
-#elif defined (__AVR_AVR16EB14__)
-#  include <avr/ioavr16eb14.h>
-#elif defined (__AVR_AVR16EB20__)
-#  include <avr/ioavr16eb20.h>
-#elif defined (__AVR_AVR16EB28__)
-#  include <avr/ioavr16eb28.h>
-#elif defined (__AVR_AVR16EB32__)
-#  include <avr/ioavr16eb32.h>
-#elif defined (__AVR_AVR32EA28__)
-#  include <avr/ioavr32ea28.h>
-#elif defined (__AVR_AVR32EA32__)
-#  include <avr/ioavr32ea32.h>
-#elif defined (__AVR_AVR32EA48__)
-#  include <avr/ioavr32ea48.h>
-#elif defined (__AVR_AVR64EA28__)
-#  include <avr/ioavr64ea28.h>
-#elif defined (__AVR_AVR64EA32__)
-#  include <avr/ioavr64ea32.h>
-#elif defined (__AVR_AVR64EA48__)
-#  include <avr/ioavr64ea48.h>
+/* The headers for the AVR-Dx and AVR-Ex devices follow the uniform
+   naming convention of io<mcu>.h.  Thus there is no need to list them
+   all since they are covered by the __AVR_DEVICE_NAME__ case below.  */
+
 #elif defined (__AVR_DEV_LIB_NAME__)
+/* This case is used for devices that are not supported by AVR-LibC but by
+   means of an ATPACK device support pack.  For details see the avr-gcc Wiki.
+   The macro is here due to the dreaded AVR-LibC naming for device headers
+   like listed above, and that are impossible to predict by the compiler.  */
 #  define __concat__(a,b) a##b
 #  define __header1__(a,b) __concat__(a,b)
 #  define __AVR_DEVICE_HEADER__ <avr/__header1__(io,__AVR_DEV_LIB_NAME__).h>
 #  include __AVR_DEVICE_HEADER__
+
+#elif defined (__AVR_DEVICE_NAME__)
+/* Since GCC v5:  __AVR_DEVICE_NAME__ is defined in the device-specs file
+   to <mcu> qua  avr-gcc -mmcu=<mcu>  (except for cores like avr2).  */
+#  define __concat__(a,b) a##b
+#  define __header1__(a,b) __concat__(a,b)
+#  define __AVR_DEVICE_HEADER__ <avr/__header1__(io,__AVR_DEVICE_NAME__).h>
+#  include __AVR_DEVICE_HEADER__
+
 #else
 #  if !defined(__COMPILING_AVR_LIBC__)
 #    warning "device type not defined"
@@ -786,7 +724,10 @@
 
 #include <avr/common.h>
 
+/* version.h may not be generated yet when configure is running.  */
+#if !defined (__CONFIGURING_AVR_LIBC__)
 #include <avr/version.h>
+#endif
 
 #if __AVR_ARCH__ >= 100
 #  include <avr/xmega.h>

@@ -26,10 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__AVR_TINY__)
-
 #include <avr/pgmspace.h>
 #include "sectionname.h"
 
@@ -40,5 +36,3 @@ strtok_P (char *s, PGM_P delim)
     static char *p;
     return strtok_rP (s, delim, &p);
 }
-
-#endif /* !defined(__AVR_TINY__) */

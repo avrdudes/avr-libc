@@ -7,13 +7,10 @@
  * ----------------------------------------------------------------------------
  *
  * Demo combining C and assembly source files.
- *
- * $Id$
  */
-/*
- * This file contains the interrupt service routine implementations
- * when compiling the project for the ATtiny13 target.
- */
+
+;;; This file contains the interrupt service routine implementations
+;;; when compiling the project for the ATtiny13 target.
 
 #include <avr/io.h>
 
@@ -21,10 +18,8 @@
 
 #if defined(__AVR_ATtiny13__)
 
-/*
- * Timer 0 hit TOP (0xff), i.e. it turns from up-counting
- * into down-counting direction.
- */
+;;; Timer 0 hit TOP (0xff), i.e. it turns from up-counting
+;;; into down-counting direction.
 .global TIM0_COMPA_vect
 TIM0_COMPA_vect:
 	in	sreg_save, _SFR_IO_ADDR(SREG)
@@ -33,10 +28,8 @@ TIM0_COMPA_vect:
 	out	_SFR_IO_ADDR(SREG), sreg_save
 	reti
 
-/*
- * Timer 0 hit BOTTOM (0x00), i.e. it turns from down-counting
- * into up-counting direction.
- */
+;;; Timer 0 hit BOTTOM (0x00), i.e. it turns from down-counting
+;;; into up-counting direction.
 .global	TIM0_OVF_vect
 TIM0_OVF_vect:
 	in	sreg_save, _SFR_IO_ADDR(SREG)
@@ -45,11 +38,15 @@ TIM0_OVF_vect:
 	out	_SFR_IO_ADDR(SREG), sreg_save
 	reti
 
-;;; one 16-bit word to store our rising edge's timestamp
+;;; One 16-bit word to store our rising edge's timestamp.
 .lcomm	starttime.0, 2
 
-.extern	pwm_incoming
-.extern	intbits
+;;; Pull in startup code from libgcc that clears .bss so that
+;;; starttime.0 is initialized to 0.
+.global __do_clear_bss
+
+.global	pwm_incoming
+.global	intbits
 
 .global PCINT0_vect
 PCINT0_vect:
@@ -80,19 +77,18 @@ PCINT0_vect:
 	mov	r19, flags
 	sei
 
-	;; what direction were we counting?
+	;; What direction were we counting?
 	sbrs	r19, 0
-	;; we are down-counting, invert TCNT0
+	;; We are down-counting, invert TCNT0.
 	com	r20
-	;; at this point, r21:20 has our current
-	;; 16-bit time
+	;; At this point, r21:20 has our current 16-bit time.
 
-	;; now, look which of the edges triggered
-	;; our pin-change interrupt
+	;; Now, look which of the edges triggered
+	;; our pin-change interrupt.
 	sbis	_SFR_IO_ADDR(PINB), 4
 	rjmp	10f
-	;; rising edge detected, just record starttime
-	sts	(starttime.0) + 1, r21
+	;; Rising edge detected, just record starttime.
+	sts	starttime.0 + 1, r21
 	sts	starttime.0, r20
 	rjmp	99f		; we are done here
 
@@ -106,14 +102,14 @@ PCINT0_vect:
 	out	_SFR_IO_ADDR(GIMSK), r18
 
 	;; pwm_incoming = current_time - starttime
-	lds	r19, (starttime.0) + 1
+	lds	r19, starttime.0 + 1
 	lds	r18, starttime.0
 	sub	r20, r18
 	sbc	r21, r19
-	sts	(pwm_incoming) + 1, r21
+	sts	pwm_incoming + 1, r21
 	sts	pwm_incoming, r20
 
-	;; signal upper layer
+	;; Signal upper layer
 	lds	r18, intbits
 	ori	r18, 1
 	sts	intbits, r18

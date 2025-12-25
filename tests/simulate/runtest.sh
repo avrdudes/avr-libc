@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Copyright (c) 2007, Dmitry Xmelkov
 # All rights reserved.
@@ -28,12 +28,16 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# $Id$
-
 # Script for testing AVR-LibC fuctions, mainly, by simulating. An installed
 # simulavr is needed. The simulavr-0.1.2.1 is suitable, only the correction
 # of divide_by_zero error is needed. The script is tuned to run after 'make'
 # without any options, at this place.
+
+# Run
+#
+#     MCUS="..." ./runtest.sh ...
+#
+# in order to override the predefined list of MCUs.
 
 set -e
 
@@ -107,6 +111,7 @@ while getopts $OPTS opt ; do
 done
 shift $((OPTIND - 1))
 test_list=${*:-"time/*.c regression/*.c stdlib/*.c string/*.c pmstring/*.c \
+		stdfix/*.c \
 		printf/*.c scanf/*.c fplib/*.c math/*.c other/*.c \
 		avr/*.[cS]"}
 
@@ -116,7 +121,7 @@ CPPFLAGS="-Wundef -I."
 CFLAGS="-gdwarf-4 -W -Wall -pipe -Os -Wno-array-bounds"
 CORE=core_avr_dump.core
 HOST_CC=gcc
-HOST_CFLAGS="-W -Wall -std=gnu99 -pipe -O2 -I."
+HOST_CFLAGS="-m32 -W -Wall -std=gnu99 -pipe -O2 -I."
 
 Err_echo ()
 {
@@ -167,6 +172,7 @@ Compile ()
     local crt=
     local libs=
     local flags=
+    local devlib="$AVRDIR/avr/devices/$2/lib$2.a"
 
     if [ -z "$AVRDIR" ] ; then
 	  libs="-lm"
@@ -183,9 +189,15 @@ Compile ()
       crt=crt$2.o
       flags="-I../../include -I $AVRDIR/include -nostdlib"
       crt=`find $AVRDIR/avr/devices -name $crt -print | head -1`
-      libs="$AVRDIR/avr/lib/$multilibdir/libc.a	\
+      if [ -z "$crt" ]; then
+	  crt=`find $AVRDIR/avr/devices/$2 -name 'crt*.o' -print | head -1`
+      fi
+      if [ ! -f "$devlib" ]; then
+	  devlib=
+      fi
+      libs="$AVRDIR/avr/lib/$multilibdir/libc.a \
             $AVRDIR/avr/lib/$multilibdir/libm.a \
-            $AVRDIR/avr/devices/$2/lib$2.a -lgcc"
+            $devlib -lgcc"
     fi
 
     case $4 in
@@ -223,11 +235,17 @@ Compile ()
 	;;
     esac
 
+    libs="-Wl,--start-group $libs -Wl,--end-group"
+
     # The GCC 4.1 (and older) does not define __ASSEMBLER__ with
     # '-std=gnu99' option for *.S sources.
     case `basename $1` in
 	*.c)	flags="$flags -std=gnu99" ;;
     esac
+
+    fix_simulavr="-Wl,--wrap,eeprom_read_block -Wl,--wrap,eeprom_read_blraw"
+    fix_simulavr="-include fix-simulavr-66044.h $fix_simulavr"
+    [ $2 = attiny2313 ] && libs="$fix_simulavr $libs"
 
     $AVR_GCC $CPPFLAGS $CFLAGS $flags -mmcu=$2 $crt $1 $libs -o $3
 }
@@ -241,7 +259,7 @@ n_esimul=0	# number of simulation errors
 for test_file in $test_list ; do
     case `basename $test_file` in
 
-	*.c)
+	*.c | *.cpp)
 	    n_files=$(($n_files + 1))
 
 	    rootname=`basename $test_file .c`
@@ -278,8 +296,8 @@ for test_file in $test_list ; do
 		esac
 
 		case `dirname $test_file` in
-		    avr)  mcu_list="$MCU_LIST_FULL" ;;
-		    *)    mcu_list="$MCU_LIST" ;;
+		    avr)  mcu_list="${MCUS:-$MCU_LIST_FULL}" ;;
+		    *)    mcu_list="${MCUS:-$MCU_LIST}" ;;
 		esac
 
 	        elf_file=$rootname.elf
@@ -322,8 +340,8 @@ for test_file in $test_list ; do
 
 	    if [ -z $HOST_ONLY ] ; then
 		case `dirname $test_file` in
-		    avr)  mcu_list="$MCU_LIST_FULL" ;;
-		    *)    mcu_list="$MCU_LIST" ;;
+		    avr)  mcu_list="${MCUS:-$MCU_LIST_FULL}" ;;
+		    *)    mcu_list="${MCUS:-MCU_LIST}" ;;
 		esac
 
 	        elf_file=$rootname.elf

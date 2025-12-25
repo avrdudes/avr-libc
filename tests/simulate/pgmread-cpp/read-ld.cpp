@@ -1,4 +1,6 @@
 #include <stdlib.h>
+
+#define __pgm_read_template__
 #include <avr/pgmspace.h>
 
 #ifdef __AVR_TINY__

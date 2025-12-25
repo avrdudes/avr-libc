@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
    strlwr.S
    convert a string to lower case
@@ -37,19 +35,13 @@
      Created by Reiner Patommel
 */
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define str_hi r25
 #define str_lo r24
 #define temp   r22
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strlwr)
-	.type	_U(strlwr), @function
-
-_U(strlwr):
+ENTRY _U(strlwr)
 	X_movw	XL, str_lo
 
 1:	ld	temp, X
@@ -62,6 +54,4 @@ _U(strlwr):
 	brne	1b		; Z for temp
 	ret
 
-	.size	_U(strlwr), . - _U(strlwr)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC

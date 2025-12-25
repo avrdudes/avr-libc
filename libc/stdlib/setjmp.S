@@ -26,8 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 
 
 /*
@@ -41,7 +39,7 @@
    jmp_buf:
 	offset	size	description
 	 0	16/2	call-saved registers (r2-r17)
-				(AVR_TINY arch has only 2 call saved registers (r18,r19))
+			(AVR_TINY arch has only 2 call saved registers (r18,r19))
 	16/2	 2	frame pointer (r29:r28)
 	18/4	 2	stack pointer (SPH:SPL)
 	20/6	 1	status register (SREG)
@@ -53,17 +51,7 @@
    void longjmp(jmp_buf __jmpb, int __val) __attribute__((noreturn));
  */
 
-#ifndef	__DOXYGEN__
-
-#include <avr/io.h>
-#include "macros.inc"
-
-/* ???: What was a reason to use aliases for common registers?
-   Check the address: is it a port number (value for IN/OUT)?	*/
-#if	AVR_STACK_POINTER_LO_ADDR != 0x3D	\
-     || AVR_STATUS_ADDR != 0x3F
-# error  "Strange address of common registers SPL, SREG"
-#endif
+#include "asmdef.h"
 
 #define jmpb_hi	r25
 #define jmpb_lo	r24
@@ -73,12 +61,7 @@
 #define ret_lo	r24
 #define ret_hi	r25
 
-	ASSEMBLY_CLIB_SECTION
-
-	.global _U(setjmp)
-	.type	_U(setjmp), @function
-
-_U(setjmp):
+ENTRY _U(setjmp)
 	X_movw	XL, jmpb_lo
   ; save call-saved registers and frame pointer
 #if !defined(__AVR_TINY__)
@@ -95,16 +78,16 @@ _U(setjmp):
 	pop	ZH
 	pop	ZL
   ; save stack pointer (after poping)
-	in	ret_lo, AVR_STACK_POINTER_LO_ADDR
+	in	ret_lo, SPL_IO_ADDR
 	st	X+, ret_lo
-#ifdef _HAVE_AVR_STACK_POINTER_HI
-	in	ret_lo, AVR_STACK_POINTER_HI_ADDR
+#ifdef SPH_IO_ADDR
+	in	ret_lo, SPH_IO_ADDR
 	st	X+, ret_lo
 #else
 	st	X+, __zero_reg__
 #endif
   ; save status register (I flag)
-	in	ret_lo, AVR_STATUS_ADDR
+	in	ret_lo, SREG_IO_ADDR
 	st	X+, ret_lo
   ; save return address
 	st	X+, ZL
@@ -118,12 +101,10 @@ _U(setjmp):
 #else
 	ijmp
 #endif
-	.size	_U(setjmp), . - _U(setjmp)
+ENDFUNC
 
-	.global _U(longjmp)
-	.type	_U(longjmp), @function
 
-_U(longjmp):
+ENTRY _U(longjmp)
 	X_movw	XL, jmpb_lo
   ; return value
 	X_movw	ret_lo, val_lo
@@ -146,19 +127,19 @@ _U(longjmp):
 #if  defined (__AVR_XMEGA__) && __AVR_XMEGA__
 	/* A write to SPL will automatically disable interrupts for up to 4
 	   instructions or until the next I/O memory write.	*/
-	out	AVR_STATUS_ADDR, __tmp_reg__
-	out	AVR_STACK_POINTER_LO_ADDR, ZL
-	out	AVR_STACK_POINTER_HI_ADDR, ZH
+	out	SREG_IO_ADDR, __tmp_reg__
+	out	SPL_IO_ADDR, ZL
+	out	SPH_IO_ADDR, ZH
 #else
-# ifdef _HAVE_AVR_STACK_POINTER_HI
+# ifdef SPH_IO_ADDR
 	/* interrupts disabled for shortest possible time (3 cycles) */
 	cli
-	out	AVR_STACK_POINTER_HI_ADDR, ZH
+	out	SPH_IO_ADDR, ZH
 # endif
 	/* Restore status register (including the interrupt enable flag).
 	   Interrupts are re-enabled only after the next instruction.  */
-	out	AVR_STATUS_ADDR, __tmp_reg__
-	out	AVR_STACK_POINTER_LO_ADDR, ZL
+	out	SREG_IO_ADDR, __tmp_reg__
+	out	SPL_IO_ADDR, ZL
 #endif
   ; get return address and jump
 	ld	ZL, X+
@@ -173,6 +154,5 @@ _U(longjmp):
 #else
 	ijmp
 #endif
-	.size	_U(longjmp), . - _U(longjmp)
 
-#endif	/* !__DOXYGEN__ */
+	.size	_U(longjmp), . - _U(longjmp)

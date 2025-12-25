@@ -27,12 +27,10 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #include "fp32def.h"
 #include "asmdef.h"
 
-/* float __fp_mintl (<non-standart>);
+/* float __fp_mintl (<non-standard>);
      Normalize value by shifting to left (only left) and merge parts of
      float value. Mainly, this function is intended for integral values,
      as a last stage of functions floor(), floatsisf(). Its functionality

@@ -26,13 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__AVR_TINY__)
-
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
+
+TINY_WEAK_ALIAS _U(memmem_P) _U(memmem)
 
 #define s1_hi	r25
 #define s1_lo	r24
@@ -43,9 +39,13 @@
 #define	len2_hi	r19
 #define	len2_lo	r18
 
-#define beg2	r17	/* begin of s2: s2[0]	*/
-#define c1	r16	/* char from s1[]	*/
-#define	c2	r0	/* char from s2[]: tuned for classic lpm instr.	*/
+#ifdef __AVR_TINY__
+#define c1    r28           /* char from s1[] */
+#else
+#define c1    r17           /* char from s1[] */
+#endif
+#define c2    __tmp_reg__   /* char from s2[]: tuned for classic lpm instr. */
+#define beg2  __zero_reg__  /* begin of s2: s2[0] */
 
 #ifdef	Lprogmem
 # define memmem  memmem_P
@@ -55,11 +55,22 @@
 #endif
 
 ENTRY memmem
-	cp	len2_lo, __zero_reg__
-	cpc	len2_hi, __zero_reg__
+#ifdef __AVR_TINY__
+	;; r18/r19 are callee-saved.
+	push	len2_lo
+	push	len2_hi
+	;; len is passed on the stack.
+	in	ZL, SPL_IO_ADDR
+	in	ZH, SPH_IO_ADDR
+	X_adiw 	ZL, 1 + 4	; 4 pushed (RET-address and r18/r19).
+	ld	len2_lo, Z+     ; r18
+	ld	len2_hi, Z+     ; r19
+#endif /* AVRrc */
+
+	cpi	len2_lo, 0
+	cpc	len2_hi, len2_lo
 	breq	.L_ret			; s2[] is empty
 
-	push	beg2
 	push	c1
 
 	add	len2_lo, s2_lo		; len2 = &(s2[len2])
@@ -99,14 +110,15 @@ ENTRY memmem
 	ldi	s1_lo, lo8(1)
 	ldi	s1_hi, hi8(1)
 .L_match:
-	sbiw	s1_lo, 1		; restore after post-increment
+	X_sbiw	s1_lo, 1		; restore after post-increment
 	pop	c1
-	pop	beg2
+	clr	__zero_reg__
+
 .L_ret:
+#ifdef __AVR_TINY__
+	pop	len2_hi
+	pop	len2_lo
+#endif /* AVRrc */
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */
-
-#endif /* !defined(__AVR_TINY__) */

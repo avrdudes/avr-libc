@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of signbit() function.
-   $Id$
- */
+/* Test of signbit() function. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,7 +54,7 @@ union lofl_u {
 };
 
 /* Result is placed into SRAM variable, allocated at the start of
-   memory. This is convinient to debug: read a core dump.	*/
+   memory. This is convenient to debug: read a core dump.	*/
 volatile int v = 1;
 
 PROGMEM const struct {		/* Table of test cases.	*/
@@ -68,7 +65,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     /* Zero	*/
     { { .fl= +0.0 },	0 },
     { { .fl= -0.0 },	1 },
-    
+
     /* A few of normal values	*/
     { { 0x00800000 },	0 },
     { { 0x00800001 },	0 },
@@ -80,7 +77,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0x80ffffff },	1 },
     { { 0xdf800000 },	1 },
     { { 0xff7fffff },	1 },
-    
+
     /* Subnormal	*/
     { { 0x00000001 }, 0 },
     { { 0x00000100 }, 0 },
@@ -93,7 +90,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
 
     /* Inf	*/
     { { 0x7f800000 },	0 },
-    { { 0xff800000 },	1 },    
+    { { 0xff800000 },	1 },
 
     /* NaN	*/
     { { 0x7f800001 },	0 },
@@ -104,21 +101,23 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0xffffffff },	1 },
 };
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int z;
     int i;
-    int (* volatile vp)(double);
+    int (* volatile vp)(float);
 
-    /* Default implementation.	*/    
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    /* Default implementation.	*/
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_word (& t[i].z);
-	v = signbit (x.fl);
+	v = signbitf (x.fl);
 	/* expect non-zero if sign bit is not set.
 	   AVR-LibC implementation returns 1 if signed. */
-	if (!(z ? v : v == 0)) {
+	if (!(z ? v : v == 0))
+	{
 	    PRINTFLN ("i= %d  v= %d", i, v);
 	    EXIT (i + 1);
 	}
@@ -126,12 +125,14 @@ int main ()
 
 #ifdef	__AVR__
     /* Force to use the library implementation.	*/
-    vp = & signbit;
-    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
+    vp = & signbitf;
+    for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++)
+    {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_word (& t[i].z);
 	v = vp (x.fl);
-	if (v != z) {
+	if (v != z)
+	{
 	    PRINTFLN ("i= %d  v= %d", i, v);
 	    EXIT (i + 101);
 	}

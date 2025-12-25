@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Basic realloc() test: ensure the realloc'ed area's initial
    contents matches the previously malloc'ed one. */
@@ -44,6 +41,12 @@ int main ()
 
 #include <stdint.h>
 #include <stdlib.h>
+
+/* Attribute "malloc" may spoil this test, hence hide malloc and realloc.  */
+void* hidden_malloc (size_t) __asm ("malloc");
+void* hidden_realloc (void*, size_t) __asm ("realloc");
+#define malloc(x)     hidden_malloc (x)
+#define realloc(x, y) hidden_realloc (x, y)
 
 struct __freelist {
         size_t sz;

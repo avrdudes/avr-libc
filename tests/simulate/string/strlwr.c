@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$	*/
+   POSSIBILITY OF SUCH DAMAGE. */
 
 #ifndef __AVR__
 # include <ctype.h>
@@ -37,7 +34,7 @@
 #include <string.h>
 #include "progmem.h"
 
-#ifndef	__AVR__			/* strlwr() is't a standart function	*/
+#ifndef	__AVR__			/* strlwr() is't a standard function	*/
 char * strlwr (char *s)
 {
     char *p = s;
@@ -84,7 +81,7 @@ int main ()
 {
     /* Empty string.	*/
     CHECK ("", "");
-    
+
     CHECK ("A", "a");
     CHECK ("Z", "z");
     CHECK ("@[", "@[");		/* '@'=='A'-1, '['=='Z'+1	*/
@@ -92,7 +89,7 @@ int main ()
 
     CHECK ("QWERTYUIOPASDFGHJKLZXCVBNM", "qwertyuiopasdfghjklzxcvbnm");
     CHECK ("FoO", "foo");
-    
+
     /* non-ASCII	*/
     CHECK ("\001A\177\200\201B\377", "\001a\177\200\201b\377");
 

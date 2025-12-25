@@ -7,7 +7,7 @@
 
    * Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
-   
+
    * Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
@@ -29,21 +29,19 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /** \defgroup avr_sfr <avr/sfr_defs.h>: Special function registers
 
 When working with microcontrollers, many tasks usually consist
-of controlling internal peripherals, or external peripherals that are connected 
-to the device. The entire IO address space is made available as 
-<em>memory-mapped IO</em>, i.e. it can be accessed using all the MCU 
-instructions that are applicable to normal data memory.  For most AVR devices, 
-the IO register space is mapped into the data memory address space with an 
-offset of 0x20 since the bottom of this space is reserved for direct access to 
+of controlling internal peripherals, or external peripherals that are connected
+to the device. The entire IO address space is made available as
+<em>memory-mapped IO</em>, i.e. it can be accessed using all the MCU
+instructions that are applicable to normal data memory.  For most AVR devices,
+the IO register space is mapped into the data memory address space with an
+offset of 0x20 since the bottom of this space is reserved for direct access to
 the MCU registers.  (Actual SRAM is available only behind the IO register
 area, starting at some specific address depending on the device.)
 
-For example the user can access memory-mapped IO registers as if they were 
+For example the user can access memory-mapped IO registers as if they were
 globally defined variables like this:
 
 \code
@@ -66,14 +64,14 @@ an interrupt context can happen.  See \ref faq_16bitio.
 
 Access to the AVR single bit set and clear instructions
 are provided via the standard C bit manipulation commands. The sbi and cbi
-macros are no longer directly supported. 
+macros are no longer directly supported.
 sbi (sfr,bit) can be replaced by  sfr |= _BV(bit) .
 
 i.e.: sbi(PORTB, PB1);  is now PORTB |= _BV(PB1);
 
-This actually is more flexible than having sbi directly, as the optimizer 
-will use a hardware sbi if appropriate, or a read/or/write operation if not 
-appropriate. You do not need to keep track of which registers sbi/cbi will 
+This actually is more flexible than having sbi directly, as the optimizer
+will use a hardware sbi if appropriate, or a read/or/write operation if not
+appropriate. You do not need to keep track of which registers sbi/cbi will
 operate on.
 
 Likewise, cbi (sfr,bit) is now   sfr &= ~(_BV(bit));

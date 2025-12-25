@@ -27,8 +27,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* float atanf (float A);
      The atanf() function calculates the arc tangent of A; that is
      the value whose tangent is A.
@@ -103,8 +101,8 @@ ENTRY_FLOAT atanf atan atanl
 	XJMP	_U(__fp_round)
 ENDFUNC
 
-	PGMX_SECTION(.atan)
-.L_table:
+	PGMX_SECTION(fplib.atan)
+OBJECT .L_table
 	.byte	8
 	.byte	     0x4a,0xd7,0x3b,0x3b	;  0.0028662257
 	.byte	0xce,0x01,0x6e,0x84,0xbc	; -0.0161657367
@@ -115,6 +113,6 @@ ENDFUNC
 	.byte	0xd9,0xe4,0xbb,0x4c,0x3e	;  0.1999355085
 	.byte	0x91,0x6b,0xaa,0xaa,0xbe	; -0.3333314528
 	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
-	.end
+ENDOBJ .L_table
 
 #endif /* !defined(__AVR_TINY__) */

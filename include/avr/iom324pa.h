@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iom324pa.h - definitions for ATmega324PA */
 
 /* This file should only be included from <avr/io.h>, never directly. */
@@ -336,6 +334,26 @@
 #define SPIF0 7
 
 #define SPDR0 _SFR_IO8(0x2E)
+
+/* Issue #443: Names differ from the data sheet. */
+#define SPCR _SFR_IO8(0x2C)
+#define SPR0 0
+#define SPR1 1
+#define CPHA 2
+#define CPOL 3
+#define MSTR 4
+#define DORD 5
+#define SPE 6
+#define SPIE 7
+
+#define SPSR _SFR_IO8(0x2D)
+#define SPI2X 0
+#define WCOL 6
+#define SPIF 7
+
+#define SPDR _SFR_IO8(0x2E)
+/* End Issue #443 */
+
 #define SPDRB0 0
 #define SPDRB1 1
 #define SPDRB2 2

@@ -7,5 +7,3 @@
  * by applying devtools/ioreg.pl on the respective Atmel XML
  * file.
  */
-
-/* $Id$ */

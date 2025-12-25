@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/cpufunc.h - Special CPU functions */
 
 #ifndef _AVR_CPUFUNC_H_
@@ -46,7 +44,7 @@
 
 */
 
-#if defined(__DOXYGEN__)
+
 /**
    \ingroup avr_cpufunc
    \def _NOP
@@ -58,12 +56,9 @@
    is guaranteed to be not optimized away by the compiler, so it can
    always become a breakpoint in the debugger.
 */
-#define _NOP()
-#else  /* real code */
 #define _NOP() __asm__ __volatile__("nop")
-#endif  /* __DOXYGEN__ */
 
-#if defined(__DOXYGEN__)
+
 /**
    \ingroup avr_cpufunc
    \def _MemoryBarrier
@@ -77,10 +72,10 @@
    See \ref optim_code_reorder for things to be taken into account
    with respect to compiler optimizations.
 */
-#define _MemoryBarrier()
-#else  /* real code */
-#define _MemoryBarrier() __asm__ __volatile__("":::"memory")
-#endif  /* __DOXYGEN__ */
+#define _MemoryBarrier() __asm__ __volatile__("" ::: "memory")
+
+#include <avr/io.h>
+#include <bits/attribs.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -89,16 +84,89 @@ extern "C" {
 /**
    \ingroup avr_cpufunc
 
-   Write \a __value to IO Register Protected (CCP) IO register
-   at \a __ioaddr.  . See also \c _PROTECTED_WRITE().  */
-void ccp_write_io (volatile uint8_t *__ioaddr, uint8_t __value);
+   Write \a __value to IO Register Protected (CCP) 8-bit IO register
+   at \a __ioaddr. See also \c _PROTECTED_WRITE().  */
+extern void ccp_write_io (volatile void *__ioaddr, uint8_t __value);
+
+#if __AVR_ARCH__ >= 100
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+void ccp_write_io (volatile void *__ioaddr, uint8_t __value)
+{
+  const uintptr_t __addr = (uintptr_t) __ioaddr;
+
+#ifdef __AVR_TINY__
+  if (__builtin_constant_p (__addr))
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "out %i2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) 0xd8),
+			    "n" (__addr),
+			    "r" ((uint8_t) __value));
+  else
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "st %a2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) 0xd8),
+			    "e" (__addr),
+			    "r" ((uint8_t) __value));
+#elif defined(__AVR_XMEGA__)
+  if (__builtin_constant_p (__addr))
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "sts %2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_IOREG_gc),
+			    "n" (__addr),
+			    "r" ((uint8_t) __value));
+  else
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "st %a2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_IOREG_gc),
+			    "e" (__addr),
+			    "r" ((uint8_t) __value));
+#endif
+}
+#endif /* ARCH >= 100 */
 
 /**
    \ingroup avr_cpufunc
 
-   Write \a __value to SPM Instruction Protected (CCP) IO register
+   Write \a __value to SPM Instruction Protected (CCP) 8-bit IO register
    at \a __ioaddr. See also \c _PROTECTED_WRITE_SPM().  */
-void ccp_write_spm (volatile uint8_t *__ioaddr, uint8_t __value);
+extern void ccp_write_spm (volatile void *__ioaddr, uint8_t __value);
+
+#if defined(__AVR_XMEGA__) || defined(CCP_SPM_gc)
+extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
+void ccp_write_spm (volatile void *__ioaddr, uint8_t __value)
+{
+  const uintptr_t __addr = (uintptr_t) __ioaddr;
+
+  if (__builtin_constant_p (__addr))
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+#ifdef __AVR_TINY__
+			  "out %i2, %3"
+#else
+			  "sts %2, %3"
+#endif
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_SPM_gc),
+			    "n" (__addr),
+			    "r" ((uint8_t) __value));
+  else
+    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+			  "st %a2, %3"
+			  :
+			  : "n" (& CCP),
+			    "d" ((uint8_t) CCP_SPM_gc),
+			    "e" (__addr),
+			    "r" ((uint8_t) __value));
+}
+#endif /* AVR_XMEGA || ATtiny102/104 */
 
 #ifdef __cplusplus
 }

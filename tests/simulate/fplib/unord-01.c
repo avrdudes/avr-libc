@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of __unordsf2() function (used by GCC 4.3.0), finite values.
-   $Id$
- */
+/* Test of __unordsf2() function (used by GCC 4.3.0), finite values. */
 #include <stdio.h>
 #include <stdlib.h>
 #include "progmem.h"

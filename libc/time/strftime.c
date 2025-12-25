@@ -1,5 +1,6 @@
 /*
- * (c)2012 Michael Duane Rice All rights reserved.
+ * Copyright (c) 2012 Michael Duane Rice All rights reserved.
+ * Copyright (c) 2025 Georg-Johann Lay  # Get rid of sprintf, fix return value.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,40 +24,46 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
 /*
     Standard strftime(). This is a memory hungry monster.
 */
 
+#include <stdint.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
 #include <time.h>
-#include "sectionname.h"
+#include "best_as.h"
+#include "time-private.h"
 
-extern long __utc_offset;
+/* In order to assist AVR-SD, don't use ATTRIBUTE_CLIB_SECTION so
+   that switch tables are not put in .subsection 1.
+   Instead, Rules.am adds -ffunction-sections. See #1055.  */
 
-#ifndef __MEMX
-#define __memx /* empty */
-#endif
+#define AS __BEST_AS
 
-const __memx char strfwkdays[] =
+// Like PSTR, but for AS.
+#define ASSTR(s) \
+    (__extension__({ static const AS char __c[] = (s); &__c[0]; }))
+
+// We want AS_NULL to be 0x000000 literally, not something
+// like 0x800000 for __memx (or for __flashx due to PR121277).
+#define AS_NULL ((const AS char*) 0)
+
+static const AS char strfwkdays[] =
     "Sunday Monday Tuesday Wednesday Thursday Friday Saturday ";
 
-const __memx char strfmonths[] =
+static const AS char strfmonths[] =
     "January February March April May June July August September October"
     " November December ";
 
-ATTRIBUTE_CLIB_SECTION
-unsigned char
-pgm_copystring(const char __memx * p, unsigned char i, char *b, unsigned char l)
+static uint8_t
+pgm_copystring (const char AS *p, uint8_t i, char *b, uint8_t len)
 {
-    unsigned char ret, c;
+    char c;
+    uint8_t ret = 0;
 
-    ret = 0;
     while (i)
     {
         c = *p++;
@@ -65,7 +72,7 @@ pgm_copystring(const char __memx * p, unsigned char i, char *b, unsigned char l)
     }
 
     c = *p++;
-    while (c != ' ' && l--)
+    while (c != ' ' && len--)
     {
         *b++ = c;
         ret++;
@@ -75,256 +82,266 @@ pgm_copystring(const char __memx * p, unsigned char i, char *b, unsigned char l)
     return ret;
 }
 
-ATTRIBUTE_CLIB_SECTION
-size_t
-strftime(char *buffer, size_t limit, const char *pattern,
-         const struct tm * timeptr)
+
+/* Convert unsigned NUM to a string in S, where we are only interested in
+   the digits as specified by BITS.  S is *NOT* NULL-terminated and has
+   enough space for what we are doing.
+   The number of stored chars equals popcount(|BITS|).
+   BITS < 0: Fill with leading blanks (only BITS = -0x3 is supported for now).
+   BITS > 0: Fill with leading 0's.  */
+
+static uint8_t
+u2s (char *s, int8_t bits, uint16_t num)
 {
-    unsigned int count, length;
-    int d, w;
-    char c;
-    char _store[26];
-    struct week_date wd;
+    uint8_t pos = strlen (utoa (num, s + 5, 10));
+    uint8_t n_digs = 0;
 
-    count = length = 0;
-    while (count < limit)
+    for (uint8_t b = abs (bits); b & 0x1f; b <<= 1, ++pos)
     {
-        c = *pattern++;
-        if (c == '%')
-        {
-            c = *pattern++;
-            if (c == 'E' || c == 'O')
-                c = *pattern++;
-            switch (c)
-            {
-            case '%':
-                _store[0] = c;
-                length = 1;
-                break;
-
-            case 'a':
-                length = pgm_copystring(strfwkdays, timeptr->tm_wday,
-                                        _store, 3);
-                break;
-
-            case 'A':
-                length = pgm_copystring(strfwkdays, timeptr->tm_wday,
-                                        _store, 255);
-                break;
-
-            case 'b':
-            case 'h':
-                length = pgm_copystring(strfmonths, timeptr->tm_mon,
-                                        _store, 3);
-                break;
-
-            case 'B':
-                length = pgm_copystring(strfmonths, timeptr->tm_mon,
-                                        _store, 255);
-                break;
-
-            case 'c':
-                asctime_r(timeptr, _store);
-                length = 0;
-                while (_store[length])
-                    length++;
-                break;
-
-            case 'C':
-                d = timeptr->tm_year + 1900;
-                d /= 100;
-                length = sprintf(_store, "%.2d", d);
-                break;
-
-            case 'd':
-                length = sprintf(_store, "%.2u", timeptr->tm_mday);
-                break;
-
-            case 'D':
-                length = sprintf(_store, "%.2u/%.2u/%.2u",
-                                 timeptr->tm_mon + 1,
-                                 timeptr->tm_mday,
-                                 timeptr->tm_year % 100);
-                break;
-
-            case 'e':
-                length = sprintf(_store, "%2d", timeptr->tm_mday);
-                break;
-
-            case 'F':
-                length = sprintf(_store, "%d-%.2d-%.2d",
-                                 timeptr->tm_year + 1900,
-                                 timeptr->tm_mon + 1,
-                                 timeptr->tm_mday);
-                break;
-
-            case 'g':
-            case 'G':
-                iso_week_date_r(timeptr->tm_year + 1900, timeptr->tm_yday, &wd);
-                if (c == 'g')
-                {
-                    length = sprintf(_store, "%.2d", wd.year % 100);
-                }
-                else
-                {
-                    length = sprintf(_store, "%.4d", wd.year);
-                }
-
-                break;
-
-            case 'H':
-                length = sprintf(_store, "%.2u", timeptr->tm_hour);
-                break;
-
-            case 'I':
-                d = timeptr->tm_hour % 12;
-                if (d == 0)
-                    d = 12;
-                length = sprintf(_store, "%.2u", d);
-                break;
-
-            case 'j':
-                length = sprintf(_store, "%.3u", timeptr->tm_yday + 1);
-                break;
-
-            case 'm':
-                length = sprintf(_store, "%.2u", timeptr->tm_mon + 1);
-                break;
-
-            case 'M':
-                length = sprintf(_store, "%.2u", timeptr->tm_min);
-                break;
-
-            case 'n':
-                _store[0] = 10;
-                length = 1;
-                break;
-
-            case 'p':
-                length = 2;
-                _store[0] = 'A';
-                if (timeptr->tm_hour > 11)
-                    _store[0] = 'P';
-                _store[1] = 'M';
-                _store[2] = 0;
-                break;
-
-            case 'r':
-                d = timeptr->tm_hour % 12;
-                if (d == 0)
-                    d = 12;
-                length = sprintf (_store, "%2d:%.2d:%.2d AM",
-                                  d, timeptr->tm_min, timeptr->tm_sec);
-                if (timeptr->tm_hour > 11)
-                    _store[10] = 'P';
-                break;
-
-            case 'R':
-                length = sprintf (_store, "%.2d:%.2d", timeptr->tm_hour,
-                                  timeptr->tm_min);
-                break;
-
-            case 'S':
-                length = sprintf(_store, "%.2u", timeptr->tm_sec);
-                break;
-
-            case 't':
-                length = sprintf(_store, "\t");
-                break;
-
-            case 'T':
-                length = sprintf(_store, "%.2d:%.2d:%.2d",
-                                 timeptr->tm_hour,
-                                 timeptr->tm_min,
-                                 timeptr->tm_sec);
-                break;
-
-            case 'u':
-                w = timeptr->tm_wday;
-                if (w == 0)
-                    w = 7;
-                length = sprintf(_store, "%d", w);
-                break;
-
-            case 'U':
-                length = sprintf(_store, "%.2u", week_of_year(timeptr, 0));
-                break;
-
-            case 'V':
-                iso_week_date_r(timeptr->tm_year + 1900, timeptr->tm_yday, &wd);
-                length = sprintf(_store, "%.2u", wd.week);
-                break;
-
-            case 'w':
-                length = sprintf(_store, "%u", timeptr->tm_wday);
-                break;
-
-            case 'W':
-                w = week_of_year(timeptr, 1);
-                length = sprintf(_store, "%.2u", w);
-                break;
-
-            case 'x':
-                length = sprintf(_store, "%.2u/%.2u/%.2u", timeptr->tm_mon + 1,
-                                 timeptr->tm_mday, timeptr->tm_year % 100);
-                break;
-
-            case 'X':
-                length = sprintf(_store, "%.2u:%.2u:%.2u", timeptr->tm_hour,
-                                 timeptr->tm_min, timeptr->tm_sec);
-                break;
-
-            case 'y':
-                length = sprintf(_store, "%.2u", timeptr->tm_year % 100);
-                break;
-
-            case 'Y':
-                length = sprintf(_store, "%u", timeptr->tm_year + 1900);
-                break;
-
-            case 'z':
-                d = __utc_offset / 60;
-                w = timeptr->tm_isdst / 60;
-                if (w > 0)
-                    d += w;
-                w = abs(d % 60);
-                d = d / 60;
-                length = sprintf(_store, "%+.2d%.2d", d, w);
-                break;
-
-            default:
-                length = 1;
-                _store[0] = '?';
-                _store[1] = 0;
-                break;
-            }
-
-            if ((length + count) < limit)
-            {
-                count += length;
-                for (d = 0; d < (int) length; d++)
-                {
-                    *buffer++ = _store[d];
-                }
-            }
-            else
-            {
-                *buffer = 0;
-                return count;
-            }
-
-        }
-        else
-        {
-            /* copy a literal */
-            *buffer = c;
-            buffer++;
-            count++;
-            if (c == 0)
-                return count;
-        }
+        if (b & 0x10)
+            s[n_digs++] = pos < 5 ? '0' : s[pos];
     }
 
-    *buffer = 0;
-    return count;
+    if (bits == -0x3 && s[0] == '0')
+        s[0] = ' ';
+
+    return n_digs;
+}
+
+
+size_t
+strftime (char *buffer, size_t limit, const char *pattern,
+          const struct tm *timeptr)
+{
+    int d, w;
+    char _store[32];
+    struct week_date wd;
+    const AS char *alt = AS_NULL;
+    uint16_t count = 0; // chars written to buffer.
+    uint8_t length = 0; // Length in _store[].
+
+    while (count < limit)
+    {
+        if (alt && *alt == '\0')
+            alt = AS_NULL;
+
+        char c = alt ? *alt++ : *pattern++;
+
+        if (c == '%')
+        {
+            c = alt ? *alt++ : *pattern++;
+
+            if (c == 'E' || c == 'O')
+                c = alt ? *alt++ : *pattern++;
+
+            switch (c)
+            {
+                default:
+                    // Handle % and \0 as part of the default so as to
+                    // reduce the size of the jump table.
+                    _store[0] = c == '\0' || c == '%' ? c : '?';
+                    length = 1;
+                    break;
+
+                case 'a':
+                    length = pgm_copystring (strfwkdays, timeptr->tm_wday,
+                                             _store, 3);
+                    break;
+
+                case 'A':
+                    length = pgm_copystring (strfwkdays, timeptr->tm_wday,
+                                             _store, 255);
+                    break;
+
+                case 'b':
+                case 'h':
+                    length = pgm_copystring (strfmonths, timeptr->tm_mon,
+                                             _store, 3);
+                    break;
+
+                case 'B':
+                    length = pgm_copystring (strfmonths, timeptr->tm_mon,
+                                             _store, 255);
+                    break;
+
+                case 'c':
+                    alt = ASSTR ("%a %b %d %H:%M:%S %Y");
+                    length = 0;
+                    break;
+
+                case 'C':
+                    length = u2s (_store, 0xc, timeptr->tm_year + 1900);
+                    break;
+
+                case 'd':
+                    length = u2s (_store, 0x3, (uint8_t) timeptr->tm_mday);
+                    break;
+
+                case 'D':
+                    alt = ASSTR ("%m/%d/%y");
+                    length = 0;
+                    break;
+
+                case 'e':
+                    length = u2s (_store, -0x3, (uint8_t) timeptr->tm_mday);
+                    break;
+
+                case 'F':
+                    alt = ASSTR ("%Y-%m-%d");
+                    length = 0;
+                    break;
+
+                case 'g':
+                case 'G':
+                    iso_week_date_r (timeptr->tm_year + 1900,
+                                     timeptr->tm_yday, &wd);
+                    length = u2s (_store, c == 'g' ? 0x3 : 0xf, wd.year);
+                    break;
+
+                case 'H':
+                case 'k':
+                    length = u2s (_store, c == 'H' ? 0x3 : -0x3,
+                                  (uint8_t) timeptr->tm_hour);
+                    break;
+
+                case 'I':
+                case 'l':
+                {
+                    uint8_t d = timeptr->tm_hour;
+                    d = d > 11 ? d - 12 : d;
+                    length = u2s (_store, c == 'I' ? 0x3 : -0x3,
+                                  d == 0 ? 12 : d);
+                }
+                break;
+
+                case 'j':
+                    length = u2s (_store, 0x7, timeptr->tm_yday + 1);
+                    break;
+
+                case 'm':
+                    length = u2s (_store, 0x3, (uint8_t) timeptr->tm_mon + 1);
+                    break;
+
+                case 'M':
+                    length = u2s (_store, 0x3, (uint8_t) timeptr->tm_min);
+                    break;
+
+                case 'n':
+                    _store[0] = '\n';
+                    length = 1;
+                    break;
+
+                case 'p':
+                    _store[0] = timeptr->tm_hour > 11 ? 'P' : 'A';
+                    _store[1] = 'M';
+                    length = 2;
+                    break;
+
+                case 'P':
+                    _store[0] = timeptr->tm_hour > 11 ? 'p' : 'a';
+                    _store[1] = 'm';
+                    length = 2;
+                    break;
+
+                case 'r':
+                    alt = ASSTR ("%I:%M:%S %p");
+                    length = 0;
+                    break;
+
+                case 'R':
+                    alt = ASSTR ("%H:%M");
+                    length = 0;
+                    break;
+
+                case 'S':
+                    length = u2s (_store, 0x3, (uint8_t) timeptr->tm_sec);
+                    break;
+
+                case 't':
+                    _store[0] = '\t';
+                    length = 1;
+                    break;
+
+                case 'T':
+                case 'X':
+                    alt = ASSTR ("%H:%M:%S");
+                    length = 0;
+                    break;
+
+                case 'u':
+                    w = timeptr->tm_wday;
+                    _store[0] = w == 0 ? '7' : '0' + w;
+                    length = 1;
+                    break;
+
+                case 'U':
+                    length = u2s (_store, 0x3, week_of_year (timeptr, 0));
+                    break;
+
+                case 'V':
+                    iso_week_date_r (timeptr->tm_year + 1900,
+                                     timeptr->tm_yday, &wd);
+                    length = u2s (_store, 0x3, wd.week);
+                    break;
+
+                case 'w':
+                    _store[0] = '0' + (uint8_t) timeptr->tm_wday;
+                    length = 1;
+                    break;
+
+                case 'W':
+                    length = u2s (_store, 0x3, week_of_year (timeptr, 1));
+                    break;
+
+                case 'x':
+                    alt = ASSTR ("%m/%d/%y");
+                    length = 0;
+                    break;
+
+                case 'y':
+                case 'Y':
+                    length = u2s (_store, c == 'Y' ? 0xf : 0x3,
+                                  timeptr->tm_year + 1900);
+                    break;
+
+                case 'z':
+                    d = __utc_offset / 60;
+                    w = timeptr->tm_isdst / 60;
+                    if (w > 0)
+                        d += w;
+                    w = abs (d % 60);
+                    d = d / 60;
+                    _store[0] = d < 0 ? '-' : '+';
+                    u2s (_store + 1, 0x3, abs (d));
+                    u2s (_store + 3, 0x3, w);
+                    length = 5;
+                    break;
+            } // switch (c)
+        }
+        else // c != '%'
+        {
+            // Copy a plain character.
+            _store[0] = c;
+            length = 1;
+        }
+
+        if (count + length <= limit)
+        {
+            count += length;
+            for (uint8_t d = 0; d < length; ++d)
+                *buffer++ = _store[d];
+
+            if (c == '\0')
+                // Don't count the terminating '\0'.
+                return count - 1;
+
+            if (count == limit)
+                return 0;
+        }
+        else
+            break;
+    } // while (count < limit);
+
+    *buffer = '\0';
+    return 0;
 }

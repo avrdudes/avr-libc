@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* avr/iom6450.h - definitions for ATmega6450 */
 
 #ifndef _AVR_IOM6450_H_
@@ -932,8 +930,11 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x96
+#if defined (__AVR_ATmega6450P__)
+#define SIGNATURE_2 0x0E
+#else
 #define SIGNATURE_2 0x06
-
+#endif
 
 /* Deprecated items */
 #if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)

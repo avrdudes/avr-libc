@@ -26,11 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$	*/
-
-#if	!defined (__DOXYGEN__)
-#if	!defined (__AVR_TINY__)
-
 #include "asmdef.h"
 
 /* char *__ltoa_ncheck (long val, char *s, unsigned char radix)	*/
@@ -40,11 +35,22 @@
 #define val_hlo	r24
 #define val_hhi	r25
 #define str_lo	r20
+#ifdef __AVR_TINY__
+#define rdx_lo	__tmp_reg__
+#else
 #define rdx_lo	r18
+#endif
 
 #define sign	r27	/* Argument for __ultoa_common()	*/
 
 ENTRY	__ltoa_ncheck
+#ifdef __AVR_TINY__
+        ;; Radix is passed on the stack
+	in	ZL, SPL_IO_ADDR
+	in	ZH, SPH_IO_ADDR
+	X_adiw 	ZL, 1 + 2	; 2 pushed (RET-address)
+	ld	rdx_lo, Z
+#endif
 
 	clr	sign
 	cpi	rdx_lo, 10
@@ -54,16 +60,7 @@ ENTRY	__ltoa_ncheck
 
     ; radix == 10 && val < 0: sign = '-' and val = -val
 	ldi	sign, '-'
-	com	val_hhi
-	com	val_hlo
-	com	val_hi
-	neg	val_lo
-	sbci	val_hi, -1
-	sbci	val_hlo, -1
-	sbci	val_hhi, -1
+	XCALL	_U(__negsi2)
 1:	XJMP	_U(__ultoa_common)
 
 ENDFUNC
-
-#endif	/* !__AVR_TINY__ */
-#endif	/* !__DOXYGEN__ */

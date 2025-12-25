@@ -25,14 +25,11 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
-
-#if !defined(__DOXYGEN__)
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include "asmdef.h"
+
+TINY_WEAK_ALIAS _U(strtok_rP) _U(strtok_r)
 
 /*  char *strtok_r (char *s, const char *delim, char **last)
     {
@@ -46,7 +43,7 @@
 	}
 
 	p = s;
-	for (;;) {			// skip delimeters
+	for (;;) {			// skip delimiters
 	    s = p;			// space optimization (vs. s = p-1)
 	    if (!(c = *p++)) {
 		s = 0;
@@ -98,7 +95,7 @@ ENTRY strtok_r
 	breq	.Lret			; end of string
 	X_movw	str_lo, XL		; continue parsing
 
-  ; skip delimeters
+  ; skip delimiters
 1:	X_movw	XL, str_lo		; p = str
 2:	X_movw	str_lo, XL
 	ld	__tmp_reg__, X+
@@ -145,5 +142,3 @@ ENTRY strtok_r
 	ret
 
 ENDFUNC
-
-#endif /* not __DOXYGEN__ */

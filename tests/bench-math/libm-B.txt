@@ -1,0 +1,4 @@
+1
+1&nbsp;
+1<table>
+1<caption>libm benchmarks for ATmega128 (avr51, with MUL)</caption>

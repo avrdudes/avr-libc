@@ -24,12 +24,10 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* bug #22593: vfscanf improperly scans string parameters with a width
-   option by 1 character
-   $Id$	*/
+   option by 1 character */
 
 /* Seems, this is duplication of bug #19079: sscanf %s eats 1 char too much
  */

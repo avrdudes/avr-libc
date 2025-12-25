@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef _COMPAT_DEPRECATED_H_
 #define _COMPAT_DEPRECATED_H_
 
@@ -46,7 +44,17 @@
     written for previous library versions could easily be maintained
     until its end-of-life.  Use of any of these items in new code is
     strongly discouraged.
-  */
+
+    Some device headers provide deprecated vector names starting
+    with \c SIG_, followed by a relatively verbose but arbitrarily
+    chosen name describing the interrupt vector.
+    This has been the only available style in AVR-LibC up to version 1.2.x.
+    This historical naming style is not recommended for new projects,
+    and some headers require that the macro \c __AVR_LIBC_DEPRECATED_ENABLE__
+    is defined so that the \c SIG_ names ISR names are available.
+    For available #ISR vector names and #ISR_N vector numbers, see
+    \ref faq_isr_names in the FAQ.
+*/
 
 /** \name Allowing specific system-wide interrupts
 
@@ -54,7 +62,7 @@
     interrupt needs to be enabled separately if interrupts for this device are
     desired.  While some devices maintain their interrupt enable bit inside
     the device's register set, external and timer interrupts have system-wide
-    configuration registers. 
+    configuration registers.
 
     Example:
 
@@ -69,8 +77,8 @@
     \endcode
 
     \note Be careful when you use these functions. If you already have a
-    different interrupt enabled, you could inadvertantly disable it by
-    enabling another intterupt. */
+    different interrupt enabled, you could inadvertently disable it by
+    enabling another interrupt. */
 
 /**@{*/
 
@@ -81,7 +89,7 @@
     This macro gives access to the \c GIMSK register (or \c EIMSK register
     if using an AVR Mega device or \c GICR register for others). Although this
     macro is essentially the same as assigning to the register, it does
-    adapt slightly to the type of device being used. This macro is 
+    adapt slightly to the type of device being used. This macro is
     unavailable if none of the registers listed above are defined. */
 
 /* Define common register definition if available. */
@@ -111,8 +119,8 @@ static __inline__ void timer_enable_int (unsigned char ints)
 #endif
 }
 
-/** \def INTERRUPT(signame)
-    \ingroup deprecated_items
+/** \ingroup deprecated_items
+    \def INTERRUPT(signame)
     \deprecated
 
     Introduces an interrupt handler function that runs with global interrupts
@@ -126,11 +134,13 @@ static __inline__ void timer_enable_int (unsigned char ints)
     \ref attr_interrupt "above".
 */
 
+#ifndef __DOXYGEN__
 #if (__GNUC__ == 4 && __GNUC_MINOR__ >= 1) || (__GNUC__ > 4)
 #  define __INTR_ATTRS __used__, __externally_visible__
 #else /* GCC < 4.1 */
 #  define __INTR_ATTRS __used__
 #endif
+#endif /* Doxygen */
 
 #ifdef __cplusplus
 #define INTERRUPT(signame)				\

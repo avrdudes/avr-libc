@@ -31,8 +31,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
 
-/* $Id$ */
-
 #ifndef _AVR_ATMEGA644A_H_INCLUDED
 #define _AVR_ATMEGA644A_H_INCLUDED
 

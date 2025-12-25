@@ -26,13 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define src_hi	r25
 #define src_lo	r24
@@ -41,10 +37,7 @@
 #define ret_hi	r25
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(strrchr_P)
-	.type	_U(strrchr_P), @function
-_U(strrchr_P):
+ENTRY _U(strrchr_P)
 	X_movw  ZL, src_lo
 	ldi	ret_lo, lo8(1)		; NULL + 1
 	ldi	ret_hi, hi8(1)
@@ -59,8 +52,6 @@ _U(strrchr_P):
 	sbiw	ret_lo, 1	; undo post-increment
 	ret
 
-	.size	_U(strrchr_P), . - _U(strrchr_P)
-
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

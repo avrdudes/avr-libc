@@ -24,10 +24,7 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+   POSSIBILITY OF SUCH DAMAGE. */
 
 /* Freelist test #3: aggregation test. */
 
@@ -46,6 +43,17 @@ int main ()
 #include <avr/cpufunc.h>
 
 #include "../../libc/stdlib/stdlib_private.h"
+
+/* malloc() and friends are attributed "malloc", which asserts that the
+   value returned by such a function won't alias any other variable.
+   For the tests below to work as expected, we have to "get rid" of that
+   attribute (or use some other means like inline asm to hide the result).  */
+void* my_realloc (void*, size_t) __asm("realloc");
+void* my_malloc (size_t) __asm("malloc");
+void my_free (void*) __asm("free");
+#define malloc(a) my_malloc (a)
+#define realloc(a, b) my_realloc (a, b)
+#define free(a) my_free (a)
 
 int main(void)
 {
@@ -89,7 +97,7 @@ int main(void)
     free(ptrs[2]);
     _MemoryBarrier();
     /* ...and again. */
-    if (__flp->nx != NULL) return __LINE__;
+    if (__flp != NULL) return __LINE__;
     if ((char *)(ptrs[1]) - 2 != __brkval) return __LINE__;
 
     return 0;

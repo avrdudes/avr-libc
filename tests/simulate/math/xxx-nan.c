@@ -24,40 +24,39 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of a set of functions: func(NaN) --> NaN
-   $Id$
- */
+/* Test of a set of functions: func(NaN) --> NaN */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "progmem.h"
 
 /* Table of tested functions.	*/
-double (*tfun[]) (double) = {
-    acos,
-    asin,
-    atan,
-    cbrt,
-    ceil,
-    cos,
-    cosh,
-    exp,
-    floor,
-    log,
-    log10,
-    sin,
-    sinh,
-    sqrt,
-    tan,
-    tanh,
-    trunc,
-    round
+float (*tfun[]) (float) =
+{
+    acosf,
+    asinf,
+    atanf,
+    cbrtf,
+    ceilf,
+    cosf,
+    coshf,
+    expf,
+    floorf,
+    logf,
+    log10f,
+    sinf,
+    sinhf,
+    sqrtf,
+    tanf,
+    tanhf,
+    truncf,
+    roundf
 };
 
-union lofl_u {
+union lofl_u
+{
     long lo;
     float fl;
 };
@@ -86,16 +85,18 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     int f, n;
     
-    for (f = 0; f < (int) (sizeof(tfun)/sizeof(tfun[0])); f++) {
-	for (n = 0; n < (int) (sizeof(tnan)/sizeof(tnan[0])); n++) {
+    for (f = 0; f < (int) (sizeof(tfun)/sizeof(tfun[0])); f++)
+    {
+	for (n = 0; n < (int) (sizeof(tnan)/sizeof(tnan[0])); n++)
+	{
 	    x.lo = pgm_read_dword (& tnan[n]);
 	    v.fl = (tfun[f]) (x.fl);
-	    if (!isnan (v.fl)) {
+	    if (!isnanf (v.fl)) {
 		x_exit (f+1);
 	    }
 	}

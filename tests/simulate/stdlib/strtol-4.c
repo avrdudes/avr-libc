@@ -24,23 +24,21 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* With printf.
-   $Id$
- */
+/* With printf. */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "strtol.h"
 
-int main ()
+int main (void)
 {
     char s[16];
     long x;
-    
-    for (x = 0; x <= 100; x++) {
+
+    for (x = 0; x <= 100; x++)
+    {
 	sprintf(s, "%ld", x);
 	if (t_strtol(s, 0, x, 0, strlen(s)))
 	    exit(__LINE__);
@@ -51,8 +49,9 @@ int main ()
 	if (t_strtol(s, 8, x, 0, strlen(s)))
 	    exit(__LINE__);
     }
-    
-    for (x = 0; x >= -100; x--) {
+
+    for (x = 0; x >= -100; x--)
+    {
 	sprintf(s, "%ld", x);
 	if (t_strtol(s, 0, x, 0, strlen(s)))
 	    exit(__LINE__);
@@ -63,8 +62,9 @@ int main ()
 	if (t_strtol(s, 8, x, 0, strlen(s)))
 	    exit(__LINE__);
     }
-    
-    for (x = LONG_MAX; x >= LONG_MAX - 100; x--) {
+
+    for (x = LONG_MAX; x >= LONG_MAX - 100; x--)
+    {
 	sprintf(s, "%ld", x);
 	if (t_strtol(s, 0, x, 0, strlen(s)))
 	    exit(__LINE__);
@@ -75,8 +75,9 @@ int main ()
 	if (t_strtol(s, 8, x, 0, strlen(s)))
 	    exit(__LINE__);
     }
-    
-    for (x = LONG_MIN; x <= LONG_MIN + 100; x++) {
+
+    for (x = LONG_MIN; x <= LONG_MIN + 100; x++)
+    {
 	sprintf(s, "%ld", x);
 	if (t_strtol(s, 0, x, 0, strlen(s)))
 	    exit(__LINE__);
@@ -89,8 +90,9 @@ int main ()
 		exit(__LINE__);
 	}
     }
-    
-    for (x = 1; x <= 300; x++) {
+
+    for (x = 1; x <= 300; x++)
+    {
 	sprintf(s, "8%07lx", x);
 	if (t_strtol(s, 16, 0x7fffffff, ERANGE, strlen(s)))
 	    exit(__LINE__);

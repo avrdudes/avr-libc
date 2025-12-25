@@ -110,19 +110,19 @@
   % Headers & footers
   \usepackage{fancyhdr}
   \pagestyle{fancyplain}
-  \renewcommand{\footrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.0pt}
 
   \fancypagestyle{fancyplain}{
     \fancyhf{}
     \fancyhead[LE, RO]{\bfseries\thepage}
     \fancyhead[LO]{\bfseries\rightmark}
     \fancyhead[RE]{\bfseries\leftmark}
-    \fancyfoot[LO, RE]{\bfseries\scriptsize $generatedby Doxygen }
+    %\fancyfoot[LO, RE]{\bfseries\scriptsize $generatedby Doxygen }
   }
 
   \fancypagestyle{plain}{
     \fancyhf{}
-    \fancyfoot[LO, RE]{\bfseries\scriptsize $generatedby Doxygen }
+    %\fancyfoot[LO, RE]{\bfseries\scriptsize $generatedby Doxygen }
     \renewcommand{\headrulewidth}{0pt}
   }
 
@@ -197,6 +197,50 @@
 
   % prevent numbers overlap the titles in toc
   \renewcommand{\numberline}[1]{#1~}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% This overrides DoxyCode from doxygen.sty
+
+% Used by @code ... @endcode
+\renewenvironment{DoxyCode}[1]{%
+  \par%
+%%% Added this \vspace to get a litle headroom above @code.
+  \vspace{1ex}%
+%%%  \scriptsize%
+  \footnotesize% ...instead of scriptsize
+  \normalfont\ttfamily%
+  \rightskip0pt plus 1fil%
+  \settowidth{\DoxyCodeWidth}{000000}%
+  \settowidth{\CodeWidthChar}{?}%
+  \settoheight{\CodeHeightChar}{?}%
+  \setlength{\parskip}{0ex plus 0ex minus 0ex}%
+  \ifthenelse{\equal{#1}{0}}
+  {
+    {\lccode`~32 \lowercase{\global\let~}\NiceSpace}\obeyspaces%
+  }
+  {
+    {\lccode`~32 \lowercase{\global\let~}}\obeyspaces%
+  }
+
+}{%
+  \normalfont%
+  \normalsize%
+  \settowidth{\CodeWidthChar}{?}%
+  \settoheight{\CodeHeightChar}{?}%
+}
+
+%%% This overrides \doxyparagraph from latex_src/doxygen.sty
+%%% so that the text in the paragraph starts in a new line
+%%% (instead of putting the text right after the paragraph title))).
+\makeatletter
+\renewcommand\doxyparagraph{\@startsection{paragraph}{4}{\z@}%
+         {-\baselineskip}%
+         {.1\baselineskip}%
+         {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % End of preamble, now comes the document contents
 %===== C O N T E N T S =====

@@ -1,0 +1,10 @@
+!MCU=at90s8515
+1
+1For devices wihout MUL instruction the following applies:
+1- The execution times for multiplication and for the transcendental functions
+1  are roughly twice the time for devices that have MUL.
+1- The execution times for the remaining functions are roughly the same.
+1- The maximal relative errors are the same, i.e. independent of MUL.
+1
+1<table>
+1<caption>libm benchmarks for AT90S8515 (avr2, no MUL)</caption>

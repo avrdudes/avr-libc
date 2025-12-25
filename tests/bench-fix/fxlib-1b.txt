@@ -1,0 +1,50 @@
+# Same like fxlib-1.txt, but without sin/cosuhk_deg.
+
+1  <tr>
+1  <th>Function
+1  <th>Size
+1  <th>x<sub>0</sub>
+1  <th>x<sub>1</sub>
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+1  <th>Err<sub>max</sub>
+
+# Func		Suff	Ret	lo	hi
+
+log2		uhk	hk	0+	10
+log21p		uhr	uhr	0	1-
+#sin		uhk_deg	r	0	256-
+#cos		uhk_deg	r	0	256-
+sqrt		hk	hk	0	256-
+sqrt		uhk	uhk	0	256-
+sqrt		hr	hr	0	1-
+sqrt		uhr	uhr	0	1-
+
+1  <tr><td colspan='7'>
+
+acos		k	k	-1	1
+acos		uk	uk	0	1
+asin		k	k	-1	1
+asin		uk	uk	0	1
+atan		k	k	-1	1
+atan		k	k	1	10
+atan		uk	uk	0	1
+atan		ur	ur	0	1-
+
+exp2		k	k	-10	10
+exp2		uk	uk	0	10
+exp2m1		ur	ur	0	1-
+
+log2	 	uk	k	0+	10
+log21p		ur	ur	0	1-
+
+cospi2		k	k	-4	4
+sinpi2		k	k	-4	4
+sinpi2		ur	ur	0	1-
+
+sqrt		k	k	0	65536-
+sqrt		uk	uk	0	65536-
+sqrt		r	r	0	1-
+sqrt		ur	ur	0	1-
+
+1</table>

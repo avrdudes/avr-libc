@@ -1,5 +1,5 @@
 /*
- * (c)2012 Michael Duane Rice All rights reserved.
+ * Copyright (c) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,10 +23,7 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* $Id$ */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
 /*
     This test ensures that the process of breaking down time is correct as well as
@@ -36,16 +33,15 @@
 #include <time.h>
 #include <string.h>
 
-char           *Y2K_isostring = "2000-01-01 00:00:00";
-char           *end_isostring = "2136-02-07 06:28:15";
+char *Y2K_isostring = "2000-01-01 00:00:00";
+char *end_isostring = "2136-02-07 06:28:15";
 
 int
 main()
 {
-
-	time_t          t;
-	struct tm * tmptr;
-	char           *cp;
+	time_t t;
+	struct tm *tmptr;
+	char *cp;
 
 	time(&t);
 	tmptr = localtime(&t);

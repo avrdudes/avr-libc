@@ -30,8 +30,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #ifndef _AVR_SLEEP_H_
 #define _AVR_SLEEP_H_ 1
 
@@ -40,14 +38,11 @@
 
 
 /** \file */
-
-/** \defgroup avr_sleep <avr/sleep.h>: Power Management and Sleep Modes */
-/**@{*/
-/**
+/** \defgroup avr_sleep <avr/sleep.h>: Power Management and Sleep Modes
     \code #include <avr/sleep.h>\endcode
 
     Use of the \c SLEEP instruction can allow an application to reduce its
-    power comsumption considerably. AVR devices can be put into different
+    power consumption considerably. AVR devices can be put into different
     sleep modes. Refer to the datasheet for the details relating to the device
     you are using.
 
@@ -56,9 +51,9 @@
     set the desired sleep mode using \c set_sleep_mode() (it usually
     defaults to idle mode where the CPU is put on sleep but all
     peripheral clocks are still running), and then call
-    \c sleep_mode(). This macro automatically sets the sleep enable bit, goes 
+    \c sleep_mode(). This macro automatically sets the sleep enable bit, goes
     to sleep, and clears the sleep enable bit.
-    
+
     Example:
     \code
     #include <avr/sleep.h>
@@ -67,8 +62,8 @@
       set_sleep_mode(<mode>);
       sleep_mode();
     \endcode
-    
-    Note that unless your purpose is to completely lock the CPU (until a 
+
+    Note that unless your purpose is to completely lock the CPU (until a
     hardware reset), interrupts need to be enabled before going to sleep.
 
     As the \c sleep_mode() macro might cause race conditions in some
@@ -100,11 +95,11 @@
     This sequence ensures an atomic test of \c some_condition with
     interrupts being disabled.  If the condition is met, sleep mode
     will be prepared, and the \c SLEEP instruction will be scheduled
-    immediately after an \c SEI instruction.  As the intruction right
+    immediately after an \c SEI instruction.  As the instruction right
     after the \c SEI is guaranteed to be executed before an interrupt
     could trigger, it is sure the device will really be put to sleep.
 
-    Some devices have the ability to disable the Brown Out Detector (BOD) before 
+    Some devices have the ability to disable the Brown Out Detector (BOD) before
     going to sleep. This will also reduce power while sleeping. If the
     specific AVR device has this ability then an additional macro is defined:
     \c sleep_bod_disable(). This macro generates inlined assembly code
@@ -167,6 +162,17 @@
 
 #endif
 
+#ifdef __DOXYGEN__
+/** \ingroup avr_sleep
+    Set the sleep mode control register to the specified sleep mode \a mode.
+    The name of the sleep mode register depends on the device, see
+    the data sheet for details.
+    \param mode The sleep mode to be set.  The available sleep modes like
+    \c SLEEP_MODE_PWR_SAVE, \c SLEEP_MODE_PWR_DOWN, \c SLEEP_MODE_PWR_OFF etc.
+    depend on the device and are defined in avr/io.h.
+*/
+void set_sleep_mode (uint8_t mode);
+#endif /* Doxygen */
 
 /* Special casing these three devices - they are the
    only ones that need to write to more than one register. */
@@ -235,7 +241,6 @@
     depends on the specific mode selected with the set_sleep_mode() function.
     See the data sheet for your device for more details. */
 
-
 #if defined(__DOXYGEN__)
 
 /** \ingroup avr_sleep
@@ -285,7 +290,7 @@ extern void sleep_cpu (void);
 
 #define sleep_cpu()                              \
 do {                                             \
-  __asm__ __volatile__ ( "sleep" "\n\t" :: );    \
+  __asm__ __volatile__ ( "sleep" ::: "memory" ); \
 } while(0)
 
 #endif
@@ -296,7 +301,13 @@ do {                                             \
 /** \ingroup avr_sleep
 
     Put the device into sleep mode, taking care of setting
-    the SE bit before, and clearing it afterwards. */
+    the SE bit before, and clearing it afterwards.
+    All this command does is to run
+    \code
+    sleep_enable()
+    sleep_cpu()
+    sleep_disable()
+    \endcode  */
 extern void sleep_mode (void);
 
 #else
@@ -345,14 +356,12 @@ do { \
                        : [tempreg] "=&d" (tempreg) \
                        : [mcucr] "I" _SFR_IO_ADDR(BOD_CONTROL_REG), \
                          [bods_bodse] "i" (_BV(BODS) | _BV(BODSE)), \
-                         [not_bodse] "i" (~_BV(BODSE))); \
+                         [not_bodse] "i" (~_BV(BODSE)) \
+                       : "memory"); \
 } while (0)
 
 #endif
 
 #endif
-
-
-/**@}*/
 
 #endif /* _AVR_SLEEP_H_ */

@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /* float __floatdisf (long long x)
    Input:
      rA3.rA2.rA1.rA0.rB3.rB2.rB1.rB0	- an 'x' arg
@@ -42,6 +40,6 @@
 ENTRY   __floatdisf
 	bst	rA3, 7		; sign
 	brtc	1f
-	XCALL	_U(__fp_negdi)
+	XCALL	_U(__negdi2)
 1:	XJMP	_U(__fp_di2sf)
 ENDFUNC

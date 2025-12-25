@@ -27,13 +27,11 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #include "fp32def.h"
 #include "asmdef.h"
 
 /* float __fp_powsodd (float A, [XH.]ZH.ZL);
-     The __fp_powsodd() function calculates a polynom with only odd
+     The __fp_powsodd() function calculates a polynomial with only odd
      powers of x.  Result is rounded.
 
    Input:

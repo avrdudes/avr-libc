@@ -26,6 +26,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
+/* This file is just part of the distribution but not in libc.a.
+ * For the actual implementation, see atol.S */
+
 #include <stdlib.h>
 #include "sectionname.h"
 

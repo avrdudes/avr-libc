@@ -30,8 +30,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id: ioreg.pl 2376 2013-04-30 14:49:25Z joerg_wunsch $ */
-
 #include <avr/version.h>
 
 #define DW_TAG_array_type               0x01

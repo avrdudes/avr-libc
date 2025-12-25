@@ -26,10 +26,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
-#if !defined(__DOXYGEN__)
-
 #include "asmdef.h"
 
 TINY_WEAK_ALIAS _U(memccpy_P) _U(memccpy)
@@ -53,6 +49,18 @@ TINY_WEAK_ALIAS _U(memccpy_P) _U(memccpy)
 #endif
 
 ENTRY memccpy
+#ifdef __AVR_TINY__
+        ;; r18/r19 are callee-saved.
+	push	r18
+	push	r19
+	;; len is passed on the stack.
+	in	ZL, SPL_IO_ADDR
+	in	ZH, SPH_IO_ADDR
+	X_adiw 	ZL, 1 + 4	; 4 pushed (RET-address and r18/19).
+	ld	r18, Z+
+	ld	r19, Z+
+#endif /* AVRrc */
+
 	X_movw	ZL, src_lo
 	X_movw	XL, dest_lo
 .L_memccpy_loop:
@@ -64,10 +72,21 @@ ENTRY memccpy
 	cp	__tmp_reg__, val_lo
 	brne	.L_memccpy_loop
 	X_movw	ret_lo, XL
+#ifndef __AVR_TINY__
 	ret
 .L_memccpy_notfound:
 	clr	ret_lo
 	clr	ret_hi
 	ret
+#else /* AVRrc */
+	rjmp	.L_epilogue
+.L_memccpy_notfound:
+	clr	ret_lo
+	clr	ret_hi
+.L_epilogue:
+	pop	r19
+	pop	r18
+	ret
+#endif /* AVRrc */
+
 ENDFUNC
-#endif /* not __DOXYGEN__ */

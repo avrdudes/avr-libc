@@ -31,8 +31,6 @@
 
 /* avr/iom329.h - definitions for ATmega329 and ATmega329P.  */
 
-/* $Id$ */
-
 #ifndef _AVR_IOM329_H_
 #define _AVR_IOM329_H_ 1
 
@@ -1029,8 +1027,13 @@
 /* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x95
+#if defined (__AVR_ATmega329P__)
+#define SIGNATURE_2 0x0B
+#elif defined (__AVR_ATmega329PA__)
+#define SIGNATURE_2 0x0B
+#else
 #define SIGNATURE_2 0x03
-
+#endif
 
 /* Deprecated items */
 #if !defined(__AVR_LIBC_DEPRECATED_ENABLE__)

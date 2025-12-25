@@ -24,10 +24,7 @@
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* $Id$ */
+  POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdio.h>
 #include "sectionname.h"
@@ -35,22 +32,23 @@
 
 ATTRIBUTE_CLIB_SECTION
 int
-fputc(int c, FILE *stream)
+fputc (int c, FILE *stream)
 {
+    if ((stream->flags & __SWR) == 0)
+        return EOF;
 
-	if ((stream->flags & __SWR) == 0)
-		return EOF;
-
-	if (stream->flags & __SSTR) {
-		if (stream->len < stream->size)
-			*stream->buf++ = c;
-		stream->len++;
-		return c;
-	} else {
-		if (stream->put(c, stream) == 0) {
-			stream->len++;
-			return c;
-		} else
-			return EOF;
-	}
+    if (stream->flags & __SSTR)
+    {
+        if (stream->len < stream->size)
+            *stream->buf++ = c;
+        stream->len++;
+        return c;
+    }
+    else if (stream->put (c, stream) == 0)
+    {
+        stream->len++;
+        return c;
+    }
+    else
+        return EOF;
 }

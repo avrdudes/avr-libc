@@ -27,13 +27,9 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #if !defined(__AVR_TINY__)
 
-#if !defined(__DOXYGEN__)
-
-#include "macros.inc"
+#include "asmdef.h"
 
 #define src_hi	r25
 #define src_lo	r24
@@ -44,10 +40,7 @@
 #define ret_hi	r25
 #define ret_lo	r24
 
-	ASSEMBLY_CLIB_SECTION
-	.global	_U(memchr_P)
-	.type	_U(memchr_P), @function
-_U(memchr_P):
+ENTRY _U(memchr_P)
 	X_movw	ZL, src_lo
 
 #if  __AVR_HAVE_LPMX__
@@ -57,11 +50,11 @@ _U(memchr_P):
 	lpm	r0, Z+
 	cp	r0, val
 	brne	1b
-  ; OK, val is founded
+  ; OK, val is found
 	sbiw	ZL, 1
 	X_movw	ret_lo, ZL
 	ret
-  ; fault, val is't founded
+  ; fault, val is't found
 2:	clr	ret_lo
 	clr	ret_hi
 	ret
@@ -82,7 +75,6 @@ _U(memchr_P):
 	ret
 #endif
 
-	.size	_U(memchr_P), . - _U(memchr_P)
-#endif /* not __DOXYGEN__ */
+ENDFUNC
 
 #endif /* !defined(__AVR_TINY__) */

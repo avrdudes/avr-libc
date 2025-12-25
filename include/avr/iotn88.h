@@ -29,8 +29,6 @@
   POSSIBILITY OF SUCH DAMAGE. 
 */
 
-/* $Id$ */
-
 /* avr/iotn88.h - definitions for ATtiny88 */
 
 /* This file should only be included from <avr/io.h>, never directly. */

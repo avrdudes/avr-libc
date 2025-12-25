@@ -23,8 +23,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /** \page mem_sections Memory Sections
 
 Section are used to organize code and data of a program on
@@ -64,6 +62,7 @@ and rules to locate them or to assign them to
 
 - \ref sec_ld_script
   - \ref sec_dot_text ".text"
+    - \ref sec_dot_init ".initN: startup code"
   - \ref sec_dot_data ".data"
   - \ref sec_dot_bss ".bss"
   - \ref sec_dot_noinit ".noinit"
@@ -152,7 +151,7 @@ of output sections from the various input section that go into it.
 
 The last three flags are listed for completeness.  They are used by the
 compiler, for example for header-only C++ modules and to ensure that
-multiplle instanciations of the same template in different compilaton
+multiple instantiations of the same template in different compilation
 units does occur at most once in the executable file.
 
 \subsubsection sec_type Section Type
@@ -237,7 +236,7 @@ The VMA is the address of an object as used by the running program.
 
 VMA and LMA may be different: Suppose a small ATmega8 program with
 executable code that extends from byte address 0x0 to 0x20f,
-and one variable \c my_var in static strorage.
+and one variable \c my_var in static storage.
 The default linker script puts the content of the <code>.data</code> output
 section after the <code>.text</code> output section and into
 the <code>text</code> \ref sec_memory_regions "segment". The startup code
@@ -271,9 +270,9 @@ information are assigned to different input sections by means of
 The linker takes all these sections and assigns them to output sections
 as specified in the linker script.
 
-<em>Output sections</em> are defind in the linker description file.
+<em>Output sections</em> are defined in the linker description file.
 Contrary to the unlimited number of input sections a program can come up
-with, there is only a handfull of output sections like \c \.text and
+with, there is only a handful of output sections like \c \.text and
 \c \.data, that roughly correspond to the memory spaces of the target device.
 
 One step in the final link is to <em>locate</em> the sections, that is
@@ -301,7 +300,7 @@ code can initialize that data so that the variables have their expected
 initial values when \c main() is entered.
 
 The <tt>SECTIONS{}</tt> portion of a linker script models the
-input and output section, and it assignes the output section to
+input and output section, and it assigns the output section to
 the memory regions defined in the <tt>MEMORY{}</tt> part.
 
 \subsection sec_memory_regions Memory Regions
@@ -323,7 +322,7 @@ model and correspond to the different kinds of memories of a device.
   <td>\c rx
   <td>\ref sec_text_text "Executable code",
     \ref sec_dot_vectors "vector table",
-    data in #PROGMEM, \c __flash and \c __memx,
+    data in #PROGMEM, #__flash, #__flashx and #__memx,
     \ref sec_dot_init "startup code",
     \ref sec_dot_trampolines "linker stubs",
     initializers for <tt>.data</tt>
@@ -474,7 +473,7 @@ block of program memory, see the GCC
    >v14 release notes</a>.
 
 -# The \ref sec_lma "LMA" actually equals the \ref sec_vma "VMA", but is
-unused.  The flash loader like avrdude knows where to put the data,
+unused.  The flash loader like avrdude knows where to put the data.
 
 
 \subsection sec_dot_text The .text Output Section
@@ -502,7 +501,7 @@ empty ones, that are valid in a section name.
   <code>__vector_default</code>, which jumps to
   \c __vectors, which is the start of the <code>.vectors</code> section.
 
-  Implementing an interrupt service ruotine (ISR) is performed with the
+  Implementing an interrupt service routine (ISR) is performed with the
   help of the \c #ISR macro in C/C++ code.
 </dd>
 <dt>\anchor sec_dot_progmem <code>.progmem.data</code></dt>
@@ -510,15 +509,14 @@ empty ones, that are valid in a section name.
 <dt><code>.progmem.gcc.*</code></dt>
 <dd>
   This section is used for read-only data declared with attribute
-  #PROGMEM, and for data in address-space
-  <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html">
-    __flash</a>.
+  #PROGMEM, and for data in address-space #__flash.
 
-  The compiler assumes that the <code>.progmem</code> sectons are located
-  in the lower 64 KiB of program memory.  When it does not fit in the
-  lower 64 KiB block, then the program reads garbage except
+  The compiler assumes that the <code>.progmem.data</code> sections are
+  located in the lower 64 KiB of program memory.  When it does not fit
+  in the lower 64 KiB block, then the program reads garbage except
+  address-space #__flashx or
   \ref avr_pgmspace "pgm_read_*_far" is used. In that case however,
-  code can be located in the \ref sec_dot_progmemx ".progmemx"
+  data can be located in the \ref sec_dot_progmemx ".progmemx.data"
   section which does not require to be located in the lower program memory.
 </dd>
 <dt>\anchor sec_dot_trampolines .trampolines</dt>
@@ -556,7 +554,7 @@ empty ones, that are valid in a section name.
   and why code in these sections must never be called explicitly.
 
   When several modules put code in the same init section, the order
-  of execuation is not specified.
+  of execution is not specified.
 
   <table>
   <caption>The <tt>.init<em>N</em></tt> Sections</caption>
@@ -585,8 +583,6 @@ empty ones, that are valid in a section name.
     <td><tt>.init2</tt>
     <td>
       - Clears \ref zero_reg "\c __zero_reg__"
-      - Initializes the stack pointer to the value of weak symbol \c __stack,
-      which has a default value of \c RAMEND as defined in <code>avr/io.h</code>
       - Initializes
       <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
 	 ><code>EIND</code></a> to <code>hh8(pm(__vectors))</code>
@@ -598,13 +594,39 @@ empty ones, that are valid in a section name.
     <td>AVR-LibC
   </tr>
   <tr>
+    <td><tt>.init2</tt>
+    <td>
+      Initializes the stack pointer to the value of weak symbol \c __stack,
+      which has a default value of \c RAMEND as defined in
+      <code>avr/io.h</code>.  On devices that have it, set \c SPLIM to
+      one less than the value of symbol \ref __heap_start
+    <td>AVR-LibC
+    <td>\c __init_sp<sup>3</sup>
+  </tr>
+  <tr>
     <td><tt>.init3</tt>
     <td>Initializes the <code>NVMCTRLB.FLMAP</code> bit-field on devices that
       have it, except when
       <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
 	 ><code>-mrodata-in-ram</code></a> is specified
     <td>AVR-LibC
-    <td>\c __do_flmap_init
+    <td>\c __do_flmap_init<sup>v2.2</sup>
+  </tr>
+  <tr>
+    <td><tt>.init3</tt>
+    <td>Sets the \c CPUINT_CTRLA.CPUINT_CVT bit provided a compact
+      vector table is in effect
+      (<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"
+	 ><code>-mcvt</code></a>).
+    <td>AVR-LibC
+    <td>\c __init_cvt<sup>v2.3</sup>
+  </tr>
+  <tr>
+    <td><tt>.init3</tt>
+    <td>Paints the RAM from \ref __heap_start up to RAMEND in
+      preparation for _get_ram_unused().
+    <td>AVR-LibC
+    <td>\c __init_ram_color<sup>v2.3</sup>
   </tr>
   <tr>
     <td><tt>.init4</tt>
@@ -631,7 +653,7 @@ empty ones, that are valid in a section name.
     <td><tt>.init7</tt>
     <td>Unused
     <td>---
-    <td rowspan="3">
+    <td rowspan="2">
   </tr>
   <tr>
     <td><tt>.init8</tt>
@@ -642,6 +664,7 @@ empty ones, that are valid in a section name.
     <td><tt>.init9</tt>
     <td>Calls \c main and then jumps to \c #exit
     <td>AVR-LibC
+    <td>\c __call_main<sup>3</sup>
   </tr>
   </table>
 
@@ -662,6 +685,9 @@ empty ones, that are valid in a section name.
   -# The code is provided by
   <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"
      ><tt>gcrt1.S</tt></a>.
+  -# Since AVR-LibC v2.3, the startup code pulls in the respective code
+  from <tt>lib<i>mcu</i>.a</tt>. Prior to that, the code was located
+  in <tt>gcrt1.S</tt>.
 </dd>
 <dt>\anchor sec_dot_fini The <code>.fini<em>N</em></code> Sections</dt>
 <dd>
@@ -704,10 +730,20 @@ empty ones, that are valid in a section name.
     <td>\c __do_global_dtors
   </tr>
   <tr>
-    <td><tt>.fini5...1</tt>
+    <td><tt>.fini5</tt>
     <td>Unused
     <td>---
-    <td rowspan="2">
+    <td rowspan="4">
+  </tr>
+  <tr>
+    <td><tt>.fini4</tt>
+    <td>Weakly defines <tt>__abort</tt>, used by abort()
+    <td>AVR-LibC
+  </tr>
+  <tr>
+    <td><tt>.fini3...1</tt>
+    <td>Unused
+    <td>---
   </tr>
   <tr>
     <td><tt>.fini0</tt>
@@ -718,7 +754,7 @@ empty ones, that are valid in a section name.
   </table>
   It is unlikely that ordinary code uses the fini sections.
   When there are no static destructors and \c atexit() is not used, then
-  the respective code is not pulled in form the libraries, and the
+  the respective code is not pulled in from the libraries, and the
   fini code just consumes four bytes: a \c CLI and a RJMP to itself.
   Common use cases of fini code is when running the GCC test suite where
   it reduces fallout, and in simulators to determine (un)orderly
@@ -728,7 +764,7 @@ empty ones, that are valid in a section name.
 <dd>
   Read-only data in program memory without the requirement that it
   must reside in the lower 64 KiB. The compiler uses this section
-  for data in the named address-space \c __memx.
+  for data in the named address-spaces #__flashx and #__memx.
   Data can be accessed with \ref avr_pgmspace "pgm_read_*_far" when it is
   not in a named address-space:
   \code
@@ -747,6 +783,13 @@ empty ones, that are valid in a section name.
       return val2 + array1[id1];
   }
   \endcode
+  For data in address-space #__flashx there are support functions
+  in \ref avr_flash "<avr/flash.h>".
+
+  The <tt>.progmemx.*</tt> input section pattern was added in Binutils v2.30.
+  In older versions, there was a catch all <tt>.progmem*</tt> pattern
+  for all data in program space, which will cause problems when progmem
+  data pushes the \c \.trampolines out of the lower 128 KiB segment.
 </dd>
 <dt>\anchor sec_dot_jumptables <tt>.jumptables*</tt></dt>
 <dd>
@@ -780,18 +823,19 @@ avr-gcc ... -Tdata addr -Wl,--defsym,__DATA_REGION_START__=addr
 \endcode
 
 Note that <tt>addr</tt> must be \ref harvard_arch "offset" by adding
-0x800000 the to real SRAM address so that the linker knows that the address is
+0x800000 to the real SRAM address so that the linker knows that the address is
 in the SRAM memory segment. Thus, if you want the <tt>.data</tt> section
 to start at \c 0x1100, pass \c 0x801100 as the address to the linker.
 
 \note
-When using \c malloc() in the application (which could even happen inside
-library calls), \ref malloc_extram "additional adjustments" are required.
+When using \ref a_malloc "malloc()" in the application (which could
+even happen inside library calls),
+\ref malloc_extram "additional adjustments" are required.
 
 \subsection sec_dot_bss  The .bss Output Section
 
 Data in static storage that will be zeroed by the startup code.
-This are data objects without explicit initializer, and data objects
+These are data objects without explicit initializer, and data objects
 with initializers that are all zeroes.
 
 Input sections are <tt>.bss*</tt> and \c COMMON. Common symbols are
@@ -898,14 +942,20 @@ Binutils v2.43.
 \section sec_symbols Symbols in the Default Linker Script
 
 Most of the symbols like \c main are defined in the code of the
-application, but some symbols are defined in the default linker script:
+application, but some symbols are defined in the default linker script.
+
+The following two groups of symbols have architecture specific default
+values and can be adjusted by defining the respective symbol.
+One use case is to adjust the <code>.data</code> region when external
+RAM should be used.  Most of the symbols get their default value from
+the startup code according to the memory layout of the respective device.
 
 <dl>
 <dt><tt>__<em>name</em>_REGION_ORIGIN__</tt></dt>
 <dd>
   Describes the physical properties of memory region <tt><em>name</em></tt>,
   where <tt><em>name</em></tt> is one of \c TEXT or  \c DATA.
-  The address is a VMA and offset at explained above.
+  The address is a VMA and offset as explained above.
   <br>
   The linker script only supplies a default for the symbol values when
   they have not been defined by other means, like for example
@@ -915,6 +965,11 @@ application, but some symbols are defined in the default linker script:
   \verbatim
 avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100
   \endverbatim
+
+  Notice that <tt>__DATA_REGION_ORIGIN__</tt> was only introduced since
+  Binutils <a href="https://sourceware.org/PR29741">v2.40</a>. Prior
+  to that, a core specific default value was used for the beginning
+  of the data region, and thus defining this symbol had no effect.
 </dd>
 <dt><tt>__<em>name</em>_REGION_LENGTH__</tt></dt>
 <dd>
@@ -927,6 +982,12 @@ avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100
   other means. Most of these symbols are
   \ref dot_weak "weakly" defined in the startup code.
 </dd>
+</dl>
+
+The following symbols are provided by the default linker script.
+The application can read them to infer properties of the binary.
+
+<dl>
 <dt><tt>__data_start</tt></dt>
 <dt><tt>__data_end</tt></dt>
 <dd>
@@ -960,13 +1021,20 @@ avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100
   output to the \c text region, which is the case for emulations
   \c avrxmega2_flmap and \c avrxmega4_flmap.
 </dd>
-<dt><tt>__heap_start</tt></dt>
+<dt>\anchor __heap_start<tt>__heap_start</tt></dt>
 <dd>
   One past the last object located in static storage.  Immediately
   follows the <tt>\ref sec_dot_noinit ".noinit"</tt> section
   (which immediately follows <tt>\ref sec_dot_bss ".bss"</tt>,
   which immediately follows <tt>\ref sec_dot_data ".data"</tt>).
-  Used by \ref malloc "malloc()" and friends.
+  Used by \ref malloc_tunables "malloc() tunables" to determine the
+  start of the heap.
+  On devices that have it, the startup code sets \c SPLIM to the value
+  of <tt>__heap_start-1</tt>.
+</dd>
+<dt><tt>_etext</tt></dt>
+<dd>
+  One byte past the last byte in the \c \.text output section.
 </dd>
 </dl>
 
@@ -1078,7 +1146,7 @@ e<b>x</b>ecutable.
 tells that the section contains bits that have to be uploaded to the
 target hardware.
 
-For more detais, see the see the gas user manual on the
+For more details, see the gas user manual on the
 <a href="https://sourceware.org/binutils/docs/as/Section.html#ELF-Version"
    ><tt>.section</tt></a> directive.
 

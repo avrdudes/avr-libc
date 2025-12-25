@@ -32,6 +32,7 @@
 
 : ${DESTDIR:-}
 prefix=@prefix@
+datarootdir=@datarootdir@
 datadir=@datadir@
 
 exec man -M @DOC_INST_DIR@/man "$@"

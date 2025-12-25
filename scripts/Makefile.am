@@ -25,9 +25,6 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-# $Id$
-#
 
 avrdir = $(prefix)/bin
 
@@ -38,12 +35,3 @@ EXTRA_DIST = \
 	avr-man.in
 
 CLEANFILES = $(avr_SCRIPTS)
-
-do_subst = sed \
-	-e 's,[@]prefix[@],$(prefix),g' \
-	-e 's,[@]datadir[@],$(datadir),g' \
-	-e 's,[@]DOC_INST_DIR[@],$(DOC_INST_DIR),g'
-
-avr-man: avr-man.in $(top_builddir)/stamp-h1
-	$(do_subst) < $(srcdir)/avr-man.in > avr-man
-	chmod +x avr-man

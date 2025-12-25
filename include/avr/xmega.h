@@ -28,8 +28,6 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 /*
  * This file is included by <avr/io.h> whenever compiling for an Xmega
  * device.  It abstracts certain features common to the Xmega device
@@ -41,60 +39,90 @@
 
 #ifdef __DOXYGEN__
 /**
- \def _PROTECTED_WRITE
  \ingroup avr_io
 
  Write value \c value to IO register \c reg that is protected through
- the Xmega configuration change protection (CCP) mechanism.  This
+ the Xmega or AVRrc configuration change protection (CCP) mechanism.  This
  implements the timed sequence that is required for CCP.
+
+ This macro requires that the address of \c reg is a compile-time constant.
+ When that is not the case, the \c ccp_write_io() function can be used.
 
  Example to modify the CPU clock:
  \code
  #include <avr/io.h>
 
- _PROTECTED_WRITE(CLK_PSCTRL, CLK_PSADIV0_bm);
- _PROTECTED_WRITE(CLK_CTRL, CLK_SCLKSEL0_bm);
- \endcode
- */
+ _PROTECTED_WRITE (CLK_PSCTRL, CLK_PSADIV0_bm);
+ _PROTECTED_WRITE (CLK_CTRL, CLK_SCLKSEL0_bm);
+ \endcode */
 #define _PROTECTED_WRITE(reg, value)
 
 /**
- \def _PROTECTED_WRITE_SPM
  \ingroup avr_io
 
  Write value \c value to register \c reg that is protected through
- the Xmega configuration change protection (CCP) key for self
+ the Xmega or ATtiny102/104 configuration change protection (CCP) key for self
  programming (SPM).  This implements the timed sequence that is
  required for CCP.
+
+ This macro requires that the address of \c reg is a compile-time constant.
+ When that is not the case, the \c ccp_write_spm() function can be used.
 
  Example to modify the CPU clock:
  \code
  #include <avr/io.h>
 
- _PROTECTED_WRITE_SPM(NVMCTRL_CTRLA, NVMCTRL_CMD_PAGEERASEWRITE_gc);
- \endcode
- */
+ _PROTECTED_WRITE_SPM (NVMCTRL_CTRLA, NVMCTRL_CMD_PAGEERASEWRITE_gc);
+ \endcode  */
 #define _PROTECTED_WRITE_SPM(reg, value)
 
 #else  /* !__DOXYGEN__ */
 
-#define _PROTECTED_WRITE(reg, value)				\
-  __asm__ __volatile__("out %[ccp], %[ccp_ioreg]" "\n\t"	\
-		       "sts %[ioreg], %[val]"			\
-		       :					\
-		       : [ccp] "I" (_SFR_IO_ADDR(CCP)),		\
-			 [ccp_ioreg] "d" ((uint8_t)CCP_IOREG_gc),	\
-			 [ioreg] "n" (_SFR_MEM_ADDR(reg)),	\
-			 [val] "r" ((uint8_t)value))
+#ifdef __AVR_TINY__
 
-#define _PROTECTED_WRITE_SPM(reg, value) \
-  __asm__ __volatile__("out %[ccp], %[ccp_spm_mask]" "\n\t" \
-                       "sts %[ioreg], %[val]"               \
-                       :                                    \
-                       : [ccp]          "I" (_SFR_IO_ADDR(CCP)), \
-                         [ccp_spm_mask] "d" ((uint8_t)CCP_SPM_gc), \
-                         [ioreg]        "n" (_SFR_MEM_ADDR(reg)), \
-                         [val]          "r" ((uint8_t)value))
+#define _PROTECTED_WRITE(reg, value)			\
+  __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
+			"out %i2, %3"			\
+			:				\
+			: "n" (& CCP),			\
+			  "d" ((uint8_t) 0xd8),		\
+			  "n" (& (reg)),		\
+			  "r" ((uint8_t) (value)))
+
+#elif defined (__AVR_XMEGA__)
+
+#define _PROTECTED_WRITE(reg, value)			\
+  __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
+			"sts %2, %3"			\
+			:				\
+			: "n" (& CCP),			\
+			  "d" ((uint8_t) CCP_IOREG_gc),	\
+			  "n" (& (reg)),		\
+			  "r" ((uint8_t) (value)))
+#endif /* AVR_TINY || Xmega */
+
+#if defined(__AVR_TINY__) && defined(CCP_SPM_gc)
+
+#define _PROTECTED_WRITE_SPM(reg, value)		\
+  __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
+			"out %i2, %3"			\
+			:				\
+			: "n" (& CCP),			\
+			  "d" ((uint8_t) CCP_SPM_gc),	\
+			  "n" (& (reg)),		\
+			  "r" ((uint8_t) (value)))
+
+#elif defined(__AVR_XMEGA__)
+
+#define _PROTECTED_WRITE_SPM(reg, value)		\
+  __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
+			"sts %2, %3"			\
+			:				\
+			: "n" (& CCP),			\
+			  "d" ((uint8_t) CCP_SPM_gc),	\
+			  "n" (& (reg)),		\
+			  "r" ((uint8_t) (value)))
+#endif /* ATtiny102/104 || Xmega */
 #endif /* DOXYGEN */
 
 #endif /* _AVR_XMEGA_H */

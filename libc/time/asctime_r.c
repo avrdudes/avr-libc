@@ -1,5 +1,5 @@
 /*
- * (C)2012 Michael Duane Rice All rights reserved.
+ * Copyright (C) 2012 Michael Duane Rice All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -23,62 +23,42 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
+ * POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
+/* Re-entrant version of asctime(). */
 
-/*
-	Re-entrant version of asctime().
-
-*/
-#include <time.h>
 #include <stdlib.h>
-
-#ifdef __MEMX
-const __memx char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-const __memx char ascdays[] = "SunMonTueWedThuFriSat";
-#else
-const char      ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
-const char      ascdays[] = "SunMonTueWedThuFriSat";
-#endif
-
-extern void __print_lz (int, char *, char);
-
+#include <stdint.h>
+#include <time.h>
+#include "best_as.h"
+#include "time-private.h"
 #include "sectionname.h"
+
+#define AS __BEST_AS
+
+static const AS char ascmonths[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
+static const AS char ascdays[] = "SunMonTueWedThuFriSat";
 
 ATTRIBUTE_CLIB_SECTION
 void
-asctime_r(const struct tm * timeptr, char *buffer)
+asctime_r (const struct tm *timeptr, char *buffer)
 {
-	unsigned char   i, m, d;
-	div_t result;
+    // Start with the year, so we can use BUFFER as buffer.
+    __print_x3210 (timeptr->tm_year + 1900, buffer + 8 + 3 + 3 + 3 + 3 - 1);
 
-	d = timeptr->tm_wday * 3;
-	m = timeptr->tm_mon * 3;
-	for (i = 0; i < 3; i++) {
-	    buffer[i] = ascdays[d++];
-	    buffer[i+4] = ascmonths[m++];
-	}
-	buffer[3]=buffer[7]=' ';
-	buffer += 8;
+    uint8_t d = timeptr->tm_wday * 3;
+    uint8_t m = timeptr->tm_mon * 3;
+    for (uint8_t i = 0; i < 3; i++)
+    {
+        buffer[i] = ascdays[d++];
+        buffer[i+4] = ascmonths[m++];
+    }
+    buffer[3] = buffer[7] = ' ';
+    buffer += 8;
 
-	__print_lz(timeptr->tm_mday,buffer,' ');
-	buffer += 3;
-
-	__print_lz(timeptr->tm_hour,buffer,':');
-	buffer += 3;
-
-	__print_lz(timeptr->tm_min,buffer,':');
-	buffer += 3;
-
-	__print_lz(timeptr->tm_sec,buffer,' ');
-	buffer += 3;
-
-	result = div(timeptr->tm_year + 1900 , 100);
-
-	__print_lz(result.quot,buffer,' ');
-	buffer += 2;
-
-	__print_lz(result.rem,buffer,0);
+    buffer = __print_10 (timeptr->tm_mday, buffer, ' '); // +3
+    buffer = __print_10 (timeptr->tm_hour, buffer, ':'); // +3
+    buffer = __print_10 (timeptr->tm_min,  buffer, ':'); // +3
+    buffer = __print_10 (timeptr->tm_sec,  buffer, ' '); // +3
+    (void) buffer;
 }

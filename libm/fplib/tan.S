@@ -27,8 +27,6 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE. */
 
-/* $Id$ */
-
 #include "fp32def.h"
 #include "asmdef.h"
 
@@ -99,8 +97,8 @@ ENTRY_FLOAT tanf tan tanl
 	ret
 ENDFUNC
 
-	PGMX_SECTION(.tan)
-.L_table:
+	PGMX_SECTION(fplib.tan)
+OBJECT .L_table
 	.byte	6
 	.byte	     0x64,0xec,0x1b,0x3c	;  0.0095168091
 	.byte	0x04,0xbc,0x16,0x3e,0x3b	;  0.0029005250
@@ -109,4 +107,4 @@ ENDFUNC
 	.byte	0x66,0x04,0x98,0x08,0x3e	;  0.1333923995
 	.byte	0xea,0x69,0xaa,0xaa,0x3e	;  0.3333314036
 	.byte	0x00,0x00,0x00,0x80,0x3f	;  1.0000000000
-	.end
+ENDOBJ .L_table

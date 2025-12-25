@@ -24,12 +24,9 @@
    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
- */
+   POSSIBILITY OF SUCH DAMAGE. */
 
-/* Test of lrint() function.
-   $Id$
- */
+/* Test of lrint() function. */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,7 +54,7 @@ union lofl_u {
 };
 
 /* Result is placed into SRAM variable, allocated at the start of
-   memory. This is convinient to debug: read a core dump.	*/
+   memory. This is convenient to debug: read a core dump.	*/
 volatile long v = 1;
 
 PROGMEM const struct {		/* Table of test cases.	*/
@@ -68,7 +65,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     /* Zero	*/
     { { .fl= +0.0 },	0 },
     { { .fl= -0.0 },	0 },
-    
+
     /* A few of normal values	*/
     { { .fl= 0.1 },		0 },
     { { .fl= 0.5 },		0 },
@@ -98,7 +95,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0x80000100 }, 0 },
     { { 0x80010000 }, 0 },
     { { 0x807fffff }, 0 },
-    
+
     /* Margin values (positive).	*/
     { { 0x00800000 }, 0 },		/* the smallest nonzero normal	*/
 
@@ -218,17 +215,17 @@ void x_exit (int index)
     exit (index ? index : -1);
 }
 
-int main ()
+int main (void)
 {
     union lofl_u x;
     long z;
     int i;
 
-    /* Table.	*/    
+    /* Table.	*/
     for (i = 0; i < (int) (sizeof(t) / sizeof(t[0])); i++) {
 	x.lo = pgm_read_dword (& t[i].x);
 	z = pgm_read_dword (& t[i].z);
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != z)
 	    x_exit (i+1);
     }
@@ -239,7 +236,7 @@ int main ()
        ...
        0x0.800000p+31 --> 0x40000000	*/
     for (x.fl = 1.0, i = 0; i < 31; i++) {
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != (1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (100 + i);
@@ -247,7 +244,7 @@ int main ()
 
 	/* Change sign to minus.	*/
 	x.lo |= 0x80000000;
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != -(1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (200 + i);
@@ -266,7 +263,7 @@ int main ()
 	x.fl = 1.0;
 	x.lo += (0x800000 * (i-1));	/* exponent	*/
 	x.lo |= (0x800000 >> i);	/* += 0.5	*/
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != (1L << (i-1))) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (300 + i);
@@ -279,7 +276,7 @@ int main ()
        ...
        0x0.ffffffp+23 --> 0x800000	*/
     for (x.fl = 0x0.ffffffp+00, i = 0; i < 24; i++) {
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != (1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (400 + i);
@@ -287,7 +284,7 @@ int main ()
 
 	/* Change sign to minus.	*/
 	x.lo |= 0x80000000;
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != -(1L << i)) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (500 + i);
@@ -296,13 +293,13 @@ int main ()
 	/* Change sign again and increment exponent.	*/
 	x.lo += 0x80800000;
     }
-    
+
     /* Rounding to up. Check a few values between 0.5 to 1.0 (as lrint(0.5)
        is 0, but lrint(0.5+delta) is 1).	*/
     for (i = 0; i < 22; i++) {
 	x.fl = 0.5;
 	x.lo += 1L<<i;
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != 1) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (600 + i);
@@ -310,7 +307,7 @@ int main ()
 
 	x.fl = 0.5;
 	x.lo += ~(1L<<i) & 0x3fffff;
-	v = lrint (x.fl);
+	v = lrintf (x.fl);
 	if (v != 1) {
 	    PRINTFLN (__LINE__, "i= %d  v= %#lx", i, v);
 	    EXIT (700 + i);
