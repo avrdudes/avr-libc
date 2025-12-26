@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['vfprintf_0',['vfprintf',['../group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1',1,'vfprintf(FILE *stream, const char *fmt, va_list ap):&#160;vfprintf.c'],['../group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1',1,'vfprintf(FILE *__stream, const char *__fmt, va_list __ap):&#160;vfprintf.c']]],
+  ['vfprintf_0',['vfprintf',['../group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1',1,'stdio.h']]],
   ['vfprintf_5ff_1',['vfprintf_F',['../group__avr__flash.html#ga7bcb371c72e6c4bdd1f1f60e051f3dec',1,'flash.h']]],
   ['vfprintf_5fp_2',['vfprintf_P',['../group__avr__stdio.html#ga55b25ecbfd3811ea4495d1f235e2e186',1,'vfprintf_P(FILE *__stream, const char *__fmt, va_list __ap):&#160;vfprintf_p.c'],['../group__avr__stdio.html#ga55b25ecbfd3811ea4495d1f235e2e186',1,'vfprintf_P(FILE *stream, const char *fmt, va_list ap):&#160;vfprintf_p.c']]],
   ['vfscanf_3',['vfscanf',['../group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21',1,'vfscanf(FILE *__stream, const char *__fmt, va_list __ap):&#160;vfscanf.c'],['../group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21',1,'vfscanf(FILE *stream, const char *fmt, va_list ap):&#160;vfscanf.c']]],

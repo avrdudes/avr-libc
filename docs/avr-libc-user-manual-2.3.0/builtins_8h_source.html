@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -97,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_46119a71de0139e4c96e101e6268c875.html">include</a></li><li class="navelem"><a class="el" href="dir_9d2bba45a3605bbd02735a5db6300c59.html">avr</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_8f2980731aba7ec7b9fcae5764f196e3.html">include</a></li><li class="navelem"><a class="el" href="dir_e3824b246ff4e1644d43a6d4f9a2882b.html">avr</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -224,8 +223,27 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">    \c __n cycles on it.  */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">extern</span> <span class="keywordtype">void</span> __builtin_avr_delay_cycles(<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __n);</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#endif </span><span class="comment">/* _AVR_BUILTINS_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment"></span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">/** \ingroup avr_builtins</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">    Returns \a base raised to the power of \a expo.</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">    Since avr-gcc v15 this function is implemented in assembly.</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">    See also the \ref bench_libm &quot;benchmarks&quot;. */</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="group__avr__builtins.html#gaf42c104c8b9448937a3971c1d036b538">  126</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="group__avr__builtins.html#gaf42c104c8b9448937a3971c1d036b538">__builtin_powif</a> (<span class="keywordtype">float</span> base, <span class="keywordtype">int</span> expo);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"></span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">/** \ingroup avr_builtins</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">    Returns \a base raised to the power of \a expo.</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">    Since avr-gcc v15 this function is implemented in assembly. */</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="group__avr__builtins.html#gab3992c1c62ecbddca116a2ce4a89f688">  131</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="group__avr__builtins.html#gab3992c1c62ecbddca116a2ce4a89f688">__builtin_powi</a> (<span class="keywordtype">double</span> base, <span class="keywordtype">int</span> expo);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment"></span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">/** \ingroup avr_builtins</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">    Returns \a base raised to the power of \a expo.</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">    Since avr-gcc v15 this function is implemented in assembly.</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">    See also the \ref bench_libf7 &quot;benchmarks&quot;. */</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="group__avr__builtins.html#ga0a5b0d3090f941af35df28a5c9072924">  137</a></span><span class="keywordtype">long</span> <span class="keywordtype">double</span> <a class="code hl_function" href="group__avr__builtins.html#ga0a5b0d3090f941af35df28a5c9072924">__builtin_powil</a> (<span class="keywordtype">long</span> <span class="keywordtype">double</span> base, <span class="keywordtype">int</span> expo);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">#endif </span><span class="comment">/* _AVR_BUILTINS_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="agroup__avr__builtins_html_ga0a5b0d3090f941af35df28a5c9072924"><div class="ttname"><a href="group__avr__builtins.html#ga0a5b0d3090f941af35df28a5c9072924">__builtin_powil</a></div><div class="ttdeci">long double __builtin_powil(long double base, int expo)</div></div>
 <div class="ttc" id="agroup__avr__builtins_html_ga1debee209b46d4af61064738e9241614"><div class="ttname"><a href="group__avr__builtins.html#ga1debee209b46d4af61064738e9241614">__builtin_avr_fmulsu</a></div><div class="ttdeci">int16_t __builtin_avr_fmulsu(int8_t __a, uint8_t __b)</div></div>
 <div class="ttc" id="agroup__avr__builtins_html_ga2cd06238f90285dbf08e052a501139ce"><div class="ttname"><a href="group__avr__builtins.html#ga2cd06238f90285dbf08e052a501139ce">__builtin_avr_fmuls</a></div><div class="ttdeci">int16_t __builtin_avr_fmuls(int8_t __a, int8_t __b)</div></div>
 <div class="ttc" id="agroup__avr__builtins_html_ga41590bd57be6a89c1b9bcafe523207f2"><div class="ttname"><a href="group__avr__builtins.html#ga41590bd57be6a89c1b9bcafe523207f2">__builtin_avr_cli</a></div><div class="ttdeci">void __builtin_avr_cli(void)</div></div>
@@ -233,17 +251,19 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="ttc" id="agroup__avr__builtins_html_ga7d79142f6b67d445882ee147f58005c3"><div class="ttname"><a href="group__avr__builtins.html#ga7d79142f6b67d445882ee147f58005c3">__builtin_avr_wdr</a></div><div class="ttdeci">void __builtin_avr_wdr(void)</div></div>
 <div class="ttc" id="agroup__avr__builtins_html_ga8ac2309f3bc9cde7d0043d39a6dac0be"><div class="ttname"><a href="group__avr__builtins.html#ga8ac2309f3bc9cde7d0043d39a6dac0be">__builtin_avr_fmul</a></div><div class="ttdeci">uint16_t __builtin_avr_fmul(uint8_t __a, uint8_t __b)</div></div>
 <div class="ttc" id="agroup__avr__builtins_html_gaa9fc5c6054d97fa1b7901789a7f69636"><div class="ttname"><a href="group__avr__builtins.html#gaa9fc5c6054d97fa1b7901789a7f69636">__builtin_avr_sei</a></div><div class="ttdeci">void __builtin_avr_sei(void)</div></div>
+<div class="ttc" id="agroup__avr__builtins_html_gab3992c1c62ecbddca116a2ce4a89f688"><div class="ttname"><a href="group__avr__builtins.html#gab3992c1c62ecbddca116a2ce4a89f688">__builtin_powi</a></div><div class="ttdeci">double __builtin_powi(double base, int expo)</div></div>
 <div class="ttc" id="agroup__avr__builtins_html_gaefc3f29795d2fe18c118e72477ca0e50"><div class="ttname"><a href="group__avr__builtins.html#gaefc3f29795d2fe18c118e72477ca0e50">__builtin_avr_sleep</a></div><div class="ttdeci">void __builtin_avr_sleep(void)</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:91</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:101</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga932e6ccc3d54c58f761c1aead83bd6d7"><div class="ttname"><a href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a></div><div class="ttdeci">signed int int16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:86</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:81</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gaef44329758059c91c76d334e8fc09700"><div class="ttname"><a href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a></div><div class="ttdeci">signed char int8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:76</div></div>
+<div class="ttc" id="agroup__avr__builtins_html_gaf42c104c8b9448937a3971c1d036b538"><div class="ttname"><a href="group__avr__builtins.html#gaf42c104c8b9448937a3971c1d036b538">__builtin_powif</a></div><div class="ttdeci">float __builtin_powif(float base, int expo)</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:96</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:114</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga932e6ccc3d54c58f761c1aead83bd6d7"><div class="ttname"><a href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a></div><div class="ttdeci">signed int int16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:92</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaef44329758059c91c76d334e8fc09700"><div class="ttname"><a href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a></div><div class="ttdeci">signed char int8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:84</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:09 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

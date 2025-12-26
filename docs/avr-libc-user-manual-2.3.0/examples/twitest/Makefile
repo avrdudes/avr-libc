@@ -6,9 +6,9 @@ CC= avr-gcc
 #MCU=atmega323
 MCU=atmega128
 
-CFLAGS=  -O -g -Wall -ffreestanding -mmcu=$(MCU)
+CFLAGS = -mmcu=$(MCU) -std=c99 -Os -Wall -Wextra
 
-.SUFFIXES: .s .bin .out .hex .srec
+.SUFFIXES: .s .bin .elf .hex .srec
 
 .c.s:
 	$(CC) $(CFLAGS) -S $<
@@ -16,23 +16,23 @@ CFLAGS=  -O -g -Wall -ffreestanding -mmcu=$(MCU)
 .S.o:
 	$(CC) $(ASFLAGS) -c $<
 
-.o.out:
+.o.elf:
 	$(CC) $(CFLAGS) -o $@ $<
 
-.out.bin:
+.elf.bin:
 	avr-objcopy -O binary $< $@
 
-.out.hex:
+.elf.hex:
 	avr-objcopy -O ihex $< $@
 
-.out.srec:
+.elf.srec:
 	avr-objcopy -O srec $< $@
 
 all:	twitest.bin
 
 OBJS=twitest.o
-twitest.out: $(OBJS)
-	$(CC) -o twitest.out $(CFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS)
+twitest.elf: $(OBJS)
+	$(CC) -o twitest.elf $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
 
 clean:
-	rm -f *~ *.out *.bin *.hex *.srec *.s *.o *.pdf *core
+	rm -f *~ *.elf *.bin *.hex *.srec *.s *.o *.pdf *core

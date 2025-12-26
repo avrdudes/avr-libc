@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -110,7 +109,6 @@ FAQ Index</h1>
 <li><a class="el" href="FAQ.html#faq_isr_names">What ISR names are available for my device?</a></li>
 <li><a class="el" href="FAQ.html#faq_reentrant">What pitfalls exist when writing reentrant code?</a></li>
 <li><a class="el" href="FAQ.html#faq_spman">Why are interrupts re-enabled in the middle of writing the stack pointer?</a></li>
-<li><a class="el" href="FAQ.html#faq_intbits">Why are (many) interrupt flags cleared by writing a logical 1?</a></li>
 <li><a class="el" href="FAQ.html#faq_cvt">How to use a Compact Vector Table?</a></li>
 <li><a class="el" href="FAQ.html#faq_local_isr">How to use a local (static, namespace) function as ISR?</a></li>
 </ul>
@@ -123,8 +121,8 @@ FAQ Index</h1>
 <li><a class="el" href="FAQ.html#faq_rom_array">How do I put an array of strings completely in ROM?</a></li>
 <li><a class="el" href="FAQ.html#faq_startup">How to modify MCUCR or WDTCR early?</a></li>
 <li><a class="el" href="FAQ.html#faq_port_pass">How do I pass an IO port as a parameter to a function?</a></li>
-<li><a class="el" href="FAQ.html#faq_funcptr_gt128kib">On a device with more than 128 KiB of flash, how to make function pointers work?</a></li>
-<li><a class="el" href="FAQ.html#faq_reg_usage">What registers are used by the C compiler?</a></li>
+<li><a class="el" href="FAQ.html#faq_call_asm_from_c">How to call an assembly function from C/C++?</a></li>
+<li><a class="el" href="FAQ.html#faq_call_c_from_asm">How to call a C/C++ function from assembly?</a></li>
 <li><a class="el" href="FAQ.html#faq_regbind">How to permanently bind a variable to a register?</a></li>
 <li><a class="el" href="FAQ.html#faq_assign_chain">Why is assigning ports in a "chain" a bad idea?</a></li>
 <li><a class="el" href="FAQ.html#faq_use_bv">What is all this _BV() stuff about?</a></li>
@@ -135,7 +133,16 @@ FAQ Index</h1>
 <li><b>(Inline) Assembly</b><ul>
 <li><a class="el" href="FAQ.html#faq_asmconst">How do I use a #define'd constant in an asm statement?</a></li>
 <li><a class="el" href="FAQ.html#faq_asmops">Which AVR-specific assembler operators are available?</a></li>
+<li><a class="el" href="FAQ.html#faq_call_asm_from_c">How to call an assembly function from C/C++?</a></li>
+<li><a class="el" href="FAQ.html#faq_call_c_from_asm">How to call a C/C++ function from assembly?</a></li>
 <li><a class="el" href="FAQ.html#faq_nonabi">How can I use a function that doesn't comply to the ABI?</a></li>
+</ul>
+</li>
+<li><b>Binary Interface</b><ul>
+<li><a class="el" href="FAQ.html#faq_reg_usage">What registers are used by the compiler?</a></li>
+<li><a class="el" href="FAQ.html#faq_funcptr_gt128kib">On a device with more than 128 KiB of flash, how to make function pointers work?</a></li>
+<li><a class="el" href="FAQ.html#faq_eind">How is the EIND special function register handled?</a></li>
+<li><a class="el" href="FAQ.html#faq_rampx">How are the RAMPX, RAMPY, RAMPZ and RAMPD registers handled?</a></li>
 </ul>
 </li>
 <li><b>Linking and Binaries</b><ul>
@@ -164,8 +171,15 @@ FAQ Index</h1>
 <li><a class="el" href="FAQ.html#faq_softreset">How do I perform a software reset of the AVR?</a></li>
 <li><a class="el" href="FAQ.html#faq_eeprom_corruption">Why are some addresses of the EEPROM corrupted (usually address zero)?</a></li>
 <li><a class="el" href="FAQ.html#faq_fuses">My UART is generating nonsense! My ATmega128 keeps crashing! Port F is completely broken!</a></li>
+<li><a class="el" href="FAQ.html#faq_intbits">Why are (many) interrupt flags cleared by writing a logical 1?</a></li>
 <li><a class="el" href="FAQ.html#faq_fuselow">Why have "programmed" fuses the bit value 0?</a></li>
 <li><a class="el" href="FAQ.html#faq_ext_ram">How to use external RAM?</a></li>
+</ul>
+</li>
+<li><b>Toolchain</b><ul>
+<li><a class="el" href="FAQ.html#faq_toolchain_version">What are the versions of the tools in my toolchain?</a></li>
+<li><a class="el" href="FAQ.html#faq_toolchain_sources">Where can I find the source code of the tools?</a></li>
+<li><a class="el" href="FAQ.html#faq_toolchain_bugs">Where can I report a problem?</a></li>
 </ul>
 </li>
 <li><b>Other</b><ul>
@@ -190,7 +204,7 @@ Why doesn't my program recognize a variable updated in an interrupt routine?</h1
 <div class="line">        ...</div>
 <div class="line">    }</div>
 <div class="ttc" id="agroup__avr__interrupts_html_gad28590624d422cdf30d626e0a506255f"><div class="ttname"><a href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></div><div class="ttdeci">#define ISR(vector, attributes)</div><div class="ttdef"><b>Definition:</b> interrupt.h:118</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:81</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 </div><!-- fragment --><p>the compiler will typically access <code>flag</code> only once, and optimize further accesses completely away, since its code path analysis shows that nothing inside the loop could change the value of <code>flag</code> anyway. To tell the compiler that this variable could be changed outside the scope of its code path analysis (e. g. from within an interrupt routine), the variable needs to be qualified as volatile:</p>
 <div class="fragment"><div class="line"><span class="keyword">volatile</span> <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> flag;</div>
 </div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
@@ -249,9 +263,9 @@ How do I use a #define'd constant in an asm statement?</h1>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>For C programs, rather use the standard C bit operators instead, so the above would be expressed as <code>PORTB |= (1 &lt;&lt; 7)</code>. The optimizer will take care to transform this into a single SBI instruction, assuming the operands allow for this.</dd></dl>
 <p>There are situation though where the address of a special function register (SFR) is required in inline assembly. When the register can be accessed by <code>LDS</code> and <code>STS</code>, one can use the RAM address of the SFR:</p>
 <div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;sts %0, __zero_reg__&quot;</span> :: <span class="stringliteral">&quot;n&quot;</span> (&amp; PORTB) : <span class="stringliteral">&quot;memory&quot;</span>);</div>
-</div><!-- fragment --><p>When the I/O address of the register is required, one way is to use <code>_SFR_IO_ADDR</code> to get the I/O address like in the example above. A different approach is to use inline asm <a class="el" href="inline_asm.html#inline_asm_print_modifiers">print modifier</a> <code>i</code> supported since avr-gcc v4.7:</p>
+</div><!-- fragment --><p>When the I/O address of the register is required, one way is to use <code>_SFR_IO_ADDR</code> to get the I/O address like in the example above. A different approach is to use inline asm <a class="el" href="inline_asm.html#inline_asm_print_modifiers">print modifier</a> <code>%i</code> supported since avr-gcc v4.7:</p>
 <div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;out %i0, __zero_reg__&quot;</span> :: <span class="stringliteral">&quot;n&quot;</span> (&amp; PORTB) : <span class="stringliteral">&quot;memory&quot;</span>);</div>
-</div><!-- fragment --><p>The <code>i0</code> will print the address of <code>PORTB</code> as an I/O address.</p>
+</div><!-- fragment --><p>The <code>%i0</code> will print the address of <code>PORTB</code> as an I/O address.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_gdboptimize"></a>
 Why does the PC randomly jump around when single-stepping through my program in avr-gdb?</h1>
@@ -317,15 +331,11 @@ How do I pass an IO port as a parameter to a function?</h1>
 <div class="line">    *port |= mask;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#define set_bits_macro(port, mask) ((port) |= (mask))</span></div>
-<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">    set_bits_func_wrong (PORTB, 0xaa);</div>
 <div class="line">    set_bits_func_correct (&amp;PORTB, 0x55);</div>
-<div class="line">    set_bits_macro (PORTB, 0xf0);</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> (0);</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="astdint_8h_html"><div class="ttname"><a href="stdint_8h.html">stdint.h</a></div></div>
 </div><!-- fragment --><p>The first function will generate object code which is not even close to what is intended. The major problem arises when the function is called. When the compiler sees this call, it will actually pass the value of the <code>PORTB</code> register (using an <code>IN</code> instruction), instead of passing the address of <code>PORTB</code> (e.g. memory mapped io addr of <code>0x38</code>, io port <code>0x18</code> for the mega128). This is seen clearly when looking at the disassembly of the call:</p>
@@ -354,18 +364,11 @@ set_bits_func_correct (volatile uint8_t *port, uint8_t mask)
 </pre><p>Notice that we are accessing the io port via the <code>LD</code> and <code>ST</code> instructions.</p>
 <p>The <code>port</code> parameter must be volatile to avoid a compiler warning.</p>
 <dl class="section note"><dt>Note</dt><dd>Because of the nature of the <code>IN</code> and <code>OUT</code> assembly instructions, they can not be used inside the function when passing the port in this way. Readers interested in the details should consult the <em>Instruction Set</em> datasheet.</dd></dl>
-<p>Finally we come to the macro version of the operation. In this contrived example, the macro is the most efficient method with respect to both execution speed and code size:</p>
-<pre class="fragment">    set_bits_macro (PORTB, 0xf0);
- 11c:   88 b3           in      r24, 0x18
- 11e:   80 6f           ori     r24, 0xF0
- 120:   88 bb           out     0x18, r24
-</pre><p>Of course, in a real application, you might be doing a lot more in your function which uses a passed by reference io port address and thus the use of a function over a macro could save you some code space, but still at a cost of execution speed.</p>
-<p>Care should be taken when such an indirect port access is going to one of the 16-bit IO registers where the order of write access is critical (like some timer registers). All versions of avr-gcc up to 3.3 will generate instructions that use the wrong access order in this situation (since with normal memory operands where the order doesn't matter, this sometimes yields shorter code).</p>
-<p>See <a href="http://mail.gnu.org/archive/html/avr-libc-dev/2003-01/msg00044.html">http://mail.gnu.org/archive/html/avr-libc-dev/2003-01/msg00044.html</a> for a possible workaround.</p>
-<p>avr-gcc versions after 3.3 have been fixed in a way where this optimization will be disabled if the respective pointer variable is declared to be <code>volatile</code>, so the correct behaviour for 16-bit IO ports can be forced that way.</p>
+<p>In this contrived example, the most efficient method with respect to both execution speed and code size is to inline the function:</p>
+<p>static inline void set_bits_func_correct (volatile uint8_t *port, uint8_t mask) { port |= mask; }</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_reg_usage"></a>
-What registers are used by the C compiler?</h1>
+What registers are used by the compiler?</h1>
 <p>See also the <a href="https://gcc.gnu.org/wiki/avr-gcc#Type_Layout">Type Layout</a>, <a href="https://gcc.gnu.org/wiki/avr-gcc#Register_Layout">Register Layout</a> and <a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">Calling Convention</a> sections in the avr-gcc Wiki.</p>
 <dl>
 <dt>Data types </dt>
@@ -377,12 +380,12 @@ What registers are used by the C compiler?</h1>
 </dd>
 <dt>Call-used registers (r18-r27, r30-r31) </dt>
 <dd><p class="startdd">May be allocated by gcc for local data. You <em>may</em> use them freely in assembly subroutines. Calling C subroutines can clobber any of them - the caller is responsible for saving and restoring.</p>
-<p class="interdd">For the AVR_TINY architecture (ATtiny10 and relatives), r20-r27 and r30-31 are call-clobbered. </p>
+<p class="interdd">For the Reduced Core architecture (ATtiny10 and relatives), r20-r27 and r30-31 are call-clobbered. </p>
 <p class="enddd"></p>
 </dd>
 <dt>Call-saved registers (r2-r17, r28-r29) </dt>
 <dd><p class="startdd">May be allocated by gcc for local data. Calling C subroutines leaves them unchanged. Assembly subroutines are responsible for saving and restoring these registers, if changed. r29:r28 (Y pointer) is used as a frame pointer (points to local data on stack) if necessary. The requirement for the callee to save/preserve the contents of these registers even applies in situations where the compiler assigns them for argument passing.</p>
-<p class="interdd">For the AVR_TINY architecture (ATtiny10 etc.), r18-r19 and r28-r29 are call-saved. Registers r0 through r15 do not exist. </p>
+<p class="interdd">For the Reduced Core architecture (ATtiny10 etc.), r18-r19 and r28-r29 are call-saved. Registers r0 through r15 do not exist. </p>
 <p class="enddd"></p>
 </dd>
 <dt><a class="anchor" id="zero_reg"></a><a class="anchor" id="tmp_reg"></a>Fixed registers (r0, r1) </dt>
@@ -392,13 +395,13 @@ What registers are used by the C compiler?</h1>
 <li><b>r1</b> (<code>__zero_reg__</code>) &mdash; assumed to be always zero in any C code, <em>may</em> be used to remember something for a while within one piece of assembler code, but <em>must</em> then be cleared after use (<code>clr __zero_reg__</code>). This includes any use of the <code>[f]mul[s[u]]</code> instructions, which return their result in r1:r0. Interrupt handlers save and clear <code>__zero_reg__</code> on entry, and restore it on exit (in case it was non-zero).</li>
 <li><b>T flag</b> &mdash; the <code>T</code> flag in the status register (<code>SREG</code>) can be used the same way like <code>__tmp_reg__</code>.</li>
 </ul>
-<p class="interdd">For the AVR_TINY architecture (ATtiny10 etc.), <code>__tmp_reg__</code> is r16, and <code>__zero_reg__</code> is r17. </p>
+<p class="interdd">For the Reduced Core architecture (ATtiny10 etc.), <code>__tmp_reg__</code> is r16, and <code>__zero_reg__</code> is r17. </p>
 <p class="enddd"></p>
 </dd>
 <dt>Function call conventions </dt>
 <dd><p class="startdd">Arguments - allocated left to right, r25 to r8. All arguments are aligned to start in even-numbered registers (odd-sized arguments, including <code>char</code>, have one free register above them). This allows making better use of the <code>movw</code> instruction on the enhanced core.</p>
 <p class="interdd">If too many, those that don't fit are passed on the stack.</p>
-<p class="interdd">On AVR_TINY, r25 to r20 are used to pass values.</p>
+<p class="interdd">On AVRrc, r25 to r20 are used to pass values.</p>
 <ul>
 <li>Return values: 8-bit in r24, 16-bit in r25:r24, up to 32 bits in r22-r25, up to 64 bits in r18-r25.</li>
 <li>Arguments to functions with a variable number of lists like <code>printf</code> get all their values on the stack. <code>char</code> is extended to <code>int</code>, and <code>float</code> is extended to <code>double</code>.</li>
@@ -410,13 +413,21 @@ What registers are used by the C compiler?</h1>
 </dd>
 </dl>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_rampx"></a>
+How are the RAMPX, RAMPY, RAMPZ and RAMPD registers handled?</h1>
+<p>See <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#ramp">The RAMPX, RAMPY, RAMPZ and RAMPD special function registers</a> in the GCC documentation.</p>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_eind"></a>
+How is the EIND special function register handled?</h1>
+<p>See <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind">The EIND special function register</a> in the GCC documentation.</p>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_ext_ram"></a>
 How to use external RAM?</h1>
 <p>Well, there is no universal answer to this question; it depends on what the external RAM is going to be used for.</p>
 <p>Basically, the bit <code>SRE</code> (SRAM enable) in the <code>MCUCR</code> register needs to be set in order to enable the external memory interface. Depending on the device to be used, and the application details, further registers affecting the external memory operation like <code>XMCRA</code> and <code>XMCRB</code>, and/or further bits in <code>MCUCR</code> might be configured. Refer to the datasheet for details.</p>
 <p>If the external RAM is going to be used to store the variables from the C program (i. e., the <code>.data</code> and/or <code>.bss</code> segment) in that memory area, it is essential to set up the external memory interface early during the <a class="el" href="mem_sections.html#sec_dot_init">device initialization</a> so the initialization of these variable will take place. Refer to <a class="el" href="FAQ.html#faq_startup">How to modify MCUCR or WDTCR early?</a> for a description how to do this using few lines of assembler code, or to the chapter about memory sections for an <a class="el" href="mem_sections.html#c_sections">example written in C</a>.</p>
 <p>The explanation of malloc() contains a <a class="el" href="malloc.html#malloc_where">discussion</a> about the use of internal RAM vs. external RAM in particular with respect to the various possible locations of the <em>heap</em> (area reserved for malloc()). It also explains the linker command-line options that are required to move the memory regions away from their respective standard locations in internal RAM.</p>
-<p>Finally, if the application simply wants to use the additional RAM for private data storage kept outside the domain of the C compiler (e. g. through a <code>char *</code> variable initialized directly to a particular address), it would be sufficient to defer the initialization of the external RAM interface to the beginning of <code><b>main</b><b>()</b></code>, so no tweaking of the <code>.init3</code> section is necessary. The same applies if only the heap is going to be located there, since the application start-up code does not affect the heap.</p>
+<p>Finally, if the application simply wants to use the additional RAM for private data storage kept outside the domain of the C compiler (e. g. through a <code>char *</code> variable initialized directly to a particular address), it would be sufficient to defer the initialization of the external RAM interface to the beginning of <code>main()</code>, so no tweaking of the <code>.init3</code> section is necessary. The same applies if only the heap is going to be located there, since the application start-up code does not affect the heap.</p>
 <p>It is not recommended to locate the stack in external RAM. In general, accessing external RAM is slower than internal RAM, and errata of some AVR devices even prevent this configuration from working properly at all.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_optflags"></a>
@@ -489,7 +500,7 @@ Why do some 16-bit timer registers sometimes get trashed?</h1>
 <div class="line">    <span class="keywordflow">return</span> val;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:88</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:91</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:96</div></div>
 </div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_varinit"></a>
 Shouldn't I initialize all my variables?</h1>
@@ -516,7 +527,7 @@ Why do all my string literals eat up the SRAM?</h1>
 <p><b>Cases</b></p><ol type="1">
 <li>Devices that see all of program memory in the RAM address space: <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a> (AVRrc), <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a> (AVR16 and AVR32 devices, 0-series, 1-series and 2-series).</li>
 <li>Devices that see only a part of program memory in the RAM address space: AVR64 and AVR128 devices without <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a>.</li>
-<li>All other devices, i.e. devices that don't see (parts of) the program memory in the RAM address space, or when <code>-mrodata-in-ram</code> is specified. The place in the flash ROM (<code>.text</code>) is occupied by the initializer values that are used by the startup code to initialize the objects in the <code></code>.data output section.</li>
+<li>All other devices, i.e. devices that don't see (parts of) the program memory in the RAM address space, or when <code>-mrodata-in-ram</code> is specified. The place in the flash ROM (<code>.text</code>) is occupied by the initializer values that are used by the startup code to initialize the objects in the <code>.data</code> output section.</li>
 </ol>
 <p>The question remains: Why is case 3. allocating constant variables into the SRAM? For a better understanding, consider the following code:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">char</span> get_first_char (<span class="keyword">const</span> <span class="keywordtype">char</span> *str)</div>
@@ -563,7 +574,7 @@ Use PROGMEM</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keywordtype">char</span> c;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">while</span> ((c = <a class="code hl_define" href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte</a>(addr++)))</div>
+<div class="line">  <span class="keywordflow">while</span> ((c = <a class="code hl_function" href="group__avr__pgmspace.html#ga9e71104956e1361499586162104975e7">pgm_read_char</a>(addr++)))</div>
 <div class="line">    uart_putchar (c);</div>
 <div class="line">}</div>
 <div class="line"> </div>
@@ -573,8 +584,8 @@ Use PROGMEM</h2>
 <div class="line">  debug_P (<a class="code hl_define" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a> (<span class="stringliteral">&quot;foo was here\n&quot;</span>));</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga73809107539df84eaf01f6a4dea4fbff"><div class="ttname"><a href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a></div><div class="ttdeci">#define PSTR(str)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:742</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_gae89a4ff0b5a887888fcf83c4701b310b"><div class="ttname"><a href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte</a></div><div class="ttdeci">#define pgm_read_byte(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:916</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga73809107539df84eaf01f6a4dea4fbff"><div class="ttname"><a href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a></div><div class="ttdeci">#define PSTR(str)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:691</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga9e71104956e1361499586162104975e7"><div class="ttname"><a href="group__avr__pgmspace.html#ga9e71104956e1361499586162104975e7">pgm_read_char</a></div><div class="ttdeci">static char pgm_read_char(const char *addr)</div></div>
 <div class="ttc" id="agroup__avr__sfr_html_gaaf6857fa882da35f8685e2001e5c3bbe"><div class="ttname"><a href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a></div><div class="ttdeci">#define loop_until_bit_is_set(sfr, bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:252</div></div>
 <div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>By convention, the suffix <b>_P</b> to the function name is used as an indication that this function is going to accept a "program-space
@@ -605,7 +616,7 @@ Use __flash</h2>
 </div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_rom_array"></a>
 How do I put an array of strings completely in ROM?</h1>
-<p>There are times when you may need an array of strings which will never be modified. In this case, you don't want to waste RAM storing the constant strings. For the rationale behind storing constant strings in RAM, see the previos section <a class="el" href="FAQ.html#faq_flashstrings">Why do all my string literals eat up the SRAM?</a></p>
+<p>There are times when you may need an array of strings which will never be modified. In this case, you don't want to waste RAM storing the constant strings. For the rationale behind storing constant strings in RAM, see the previos section <a class="el" href="FAQ.html#faq_flashstrings">Why do all my string literals eat up the SRAM?</a> and <a class="el" href="pgmspace.html">Data in Program Space</a></p>
 <h2><a class="anchor" id="faq_rom_array_progmem"></a>
 With PROGMEM</h2>
 <p>The most obvious (and incorrect) thing to do is this:</p>
@@ -624,7 +635,7 @@ With PROGMEM</h2>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__pgmspace_html_ga5749897c91c479d02054fc02128de482"><div class="ttname"><a href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a></div><div class="ttdeci">char * strcpy_P(char *, const char *)</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:146</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:144</div></div>
 </div><!-- fragment --><p>The result is not what you want though. What you end up with is the array stored in ROM, while the individual strings end up in RAM (in some <code>.rodata</code> input section).</p>
 <p>To work around this, you need to do something like this:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
@@ -644,7 +655,7 @@ With PROGMEM</h2>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span> *p = <a class="code hl_define" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a> (&amp;array[i]);</div>
 <div class="line">    <a class="code hl_function" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> (buf, p);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:938</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:889</div></div>
 </div><!-- fragment --><p>Looking at the disassembly of the resulting object file we see that array is in flash as such:</p>
 <pre class="fragment">00000026 &lt;array&gt;:
   26:   2e 00 2a 00
@@ -674,8 +685,12 @@ With named address-spaces</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__flash_html_ga18da52c839c7307578123e8c021b4474"><div class="ttname"><a href="group__avr__flash.html#ga18da52c839c7307578123e8c021b4474">strcmp_F</a></div><div class="ttdeci">int strcmp_F(const char *, const __flash char *)</div></div>
 <div class="ttc" id="agroup__avr__flash_html_ga80fd1c204ef50d9959ddcfd122dd3816"><div class="ttname"><a href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a></div><div class="ttdeci">#define FLIT(str)</div><div class="ttdef"><b>Definition:</b> flash.h:263</div></div>
-</div><!-- fragment --><p>Moreover, there is no more need for <code>pgm_read_xxx()</code>: The (addresses of) the string literals can be read directly by means of <code>array[i]</code>.</p>
-<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+</div><!-- fragment --><p>Moreover, there is no more need for <code>pgm_read_xxx()</code>: The (addresses of) the string literals can be read directly by means of <code>array[i]</code>. Depending on the application, the string array can be defined as</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> <span class="keywordtype">char</span> array[][4] =</div>
+<div class="line">{</div>
+<div class="line">    <span class="stringliteral">&quot;Foo&quot;</span>, <span class="stringliteral">&quot;Bar&quot;</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_ramoverlap"></a>
 How to detect RAM memory and variable overlap problems?</h1>
 <p>You can simply run <code>avr-nm</code> on your output (ELF) file. Run it with the <code>-n</code> option, and it will sort the symbols numerically (by default, they are sorted alphabetically).</p>
@@ -769,7 +784,7 @@ How to use a Compact Vector Table?</h1>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_local_isr"></a>
 How to use a local (static, namespace) function as ISR?</h1>
-<p>In order to use a non-global function as an ISR, there is <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> from <code>avr/interrupts.h</code>:</p>
+<p>In order to use a non-global function as an ISR, there is <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> from <code><a class="el" href="interrupt_8h.html">avr/interrupt.h</a></code>:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_define" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> (INT0_vect_num)</div>
@@ -795,6 +810,62 @@ Why have "programmed" fuses the bit value 0?</h1>
 <h1><a class="anchor" id="faq_asmops"></a>
 Which AVR-specific assembler operators are available?</h1>
 <p>See <a class="el" href="assembler.html#ass_pseudoops">Pseudo-Ops</a> and <a class="el" href="inline_asm.html#assembly_operand_modifiers">Operand Modifiers</a>.</p>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_call_asm_from_c"></a>
+How to call an assembly function from C/C++?</h1>
+<p>Just declare the function like you would in C/C++: </p><div class="fragment"><div class="line"><span class="keyword">extern</span>     <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> asm_add (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> a, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> b); <span class="comment">// in C</span></div>
+<div class="line"><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> asm_add (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> a, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> b); <span class="comment">// in C++</span></div>
+</div><!-- fragment --><p>and then call it like any ordinary C/C++ function: </p><div class="fragment"><div class="line"><a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> use_asm_func (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> a)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> asm_add (a, 42);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>An example implementation of an assembly function that returns <em>a</em> + <em>b</em> would read something like: </p><div class="fragment"><div class="line"><span class="preprocessor">#ifdef __AVR_TINY__</span></div>
+<div class="line"><span class="preprocessor">#define zero_reg r17</span></div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="preprocessor">#define zero_reg r1</span></div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">.text</div>
+<div class="line"><span class="comment">/* According to the AVR GCC ABI:</span></div>
+<div class="line"><span class="comment">   - Param a is passed in R25:R24.</span></div>
+<div class="line"><span class="comment">   - Param b is passed in R22.</span></div>
+<div class="line"><span class="comment">   - Return value is in R25:R24.</span></div>
+<div class="line"><span class="comment">   - zero_reg always contains a value of zero.  */</span></div>
+<div class="line">.global asm_add</div>
+<div class="line">.type asm_add, @function</div>
+<div class="line">asm_add:</div>
+<div class="line">    add r24, r22</div>
+<div class="line">    adc r24, zero_reg</div>
+<div class="line">    ret</div>
+<div class="line">.size asm_add, . - asm_add</div>
+</div><!-- fragment --><p>Notice that the assembly function complies to the <a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">avr-gcc calling convention</a>.</p>
+<p>See also</p><ul>
+<li><a class="el" href="FAQ.html#faq_reg_usage">What registers are used by the compiler?</a></li>
+<li><a class="el" href="FAQ.html#faq_nonabi">How can I use a function that doesn't comply to the ABI?</a></li>
+</ul>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_call_c_from_asm"></a>
+How to call a C/C++ function from assembly?</h1>
+<p>The actual call is simple: </p><div class="fragment"><div class="line"><span class="preprocessor">#ifdef __AVR_HAVE_JMP_CALL__</span></div>
+<div class="line"><span class="preprocessor">#define XCALL call</span></div>
+<div class="line"><span class="preprocessor">#define XJMP  jmp</span></div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="preprocessor">#define XCALL rcall</span></div>
+<div class="line"><span class="preprocessor">#define XJMP  rjmp</span></div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">.text</div>
+<div class="line">   ...</div>
+<div class="line">   XCALL c_func  <span class="comment">/* Ordinary call */</span></div>
+<div class="line">   ...</div>
+<div class="line">   XJMP c_func   <span class="comment">/* Tail-call */</span></div>
+</div><!-- fragment --><p>Since <code>__AVR_HAVE_JMP_CALL__</code> is a macro built-in defined by the C preprocessor, you have to <a class="el" href="assembler.html#ass_tools">invoke the assembler</a> by means of the avr-gcc driver program. On the C/C++ side, you have to make sure that the <code>c_func</code> function is actually present:</p>
+<ul>
+<li>In C/C++, <code>c_func</code> must be declared as <code>extern</code>.</li>
+<li>C++ will provide the mangled name like <code>_Z4funci</code> for <code>int c_func(int)</code>. When you want a plain <code>c_func</code> symbol, then define the function as <code>extern "C"</code>.</li>
+<li>Make sure that the function is not optimized away: When you are using global optimizations, then function attributes like <code>externally_visible</code> and <code>used</code> may be needed.</li>
+</ul>
+<p>The passed arguments and the return value must comply to the <a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">avr-gcc ABI</a>, see also <a class="el" href="FAQ.html#faq_reg_usage">What registers are used by the compiler?</a> In particular C/C++ functions expect that register R1 (on AVRrc: R17) contains the value 0.</p>
+<p>When calling a function in <a href="https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libgcc/config/avr/lib1funcs.S">libgcc</a>, GCC's runtime support library, then you'll have to check which calling convention is actually in use. These function are implemented in assembly, and some of them don't use the C/C++ calling convention. An example is the 32 = 16 &times; 16 multiplication routine <a href="https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libgcc/config/avr/lib1funcs.S;h=dfe99b1ea06f5b45e0a19942c42fe92f46e497ac;hb=HEAD#l547"><code>__umulhisi3</code></a>. For an (incomplete) list, see the <a href="https://gcc.gnu.org/wiki/avr-gcc#Exceptions_to_the_Calling_Convention">avr-gcc Wiki</a>.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_nonabi"></a>
 How can I use a function that doesn't comply to the ABI?</h1>
@@ -939,7 +1010,7 @@ Using .incbin</h2>
 <div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;array: \&quot;%S\&quot;\n&quot;</span>, abba_txt);</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__stdint_html_ga2c8c1b9f53772a86b0827ce7399b68aa"><div class="ttname"><a href="group__avr__stdint.html#ga2c8c1b9f53772a86b0827ce7399b68aa">uintptr_t</a></div><div class="ttdeci">uint16_t uintptr_t</div><div class="ttdef"><b>Definition:</b> stdint.h:160</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga2c8c1b9f53772a86b0827ce7399b68aa"><div class="ttname"><a href="group__avr__stdint.html#ga2c8c1b9f53772a86b0827ce7399b68aa">uintptr_t</a></div><div class="ttdeci">uint16_t uintptr_t</div><div class="ttdef"><b>Definition:</b> stdint.h:183</div></div>
 </div><!-- fragment --><p>The simplest way to assemble the assembly module is by letting avr-gcc do the work: </p><pre class="fragment">$ avr-gcc -x assembler-with-cpp abba.asm -x none -o abba.o -mmcu=...
 </pre><p> The <code>"-x assembler-with-cpp"</code> and <code>"-x none"</code> are only needed when the file extension of the assembly file is neither <code>.S</code> nor <code>.sx</code>. In such cases, avr-gcc must be provided with the <a class="el" href="using_tools.html#opt_x">input language</a>.</p>
 <h2><a class="anchor" id="faq_binarydata_objcopy"></a>
@@ -996,10 +1067,11 @@ How do I perform a software reset of the AVR?</h1>
 <div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> __attribute__((__always_inline__))</div>
 <div class="line"><span class="keywordtype">void</span> soft_reset (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
-<div class="line">    <a class="code hl_define" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a> (WDTO_15MS);</div>
+<div class="line">    <a class="code hl_define" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a> (<a class="code hl_define" href="group__avr__watchdog.html#gad45893280f49113ffc2e67e1d741f29d">WDTO_15MS</a>);</div>
 <div class="line">    <span class="keywordflow">for</span>(;;) {}</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__watchdog_html_ga9d1aeb2823c79936e980fabba10ac75e"><div class="ttname"><a href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a></div><div class="ttdeci">#define wdt_enable(timeout)</div><div class="ttdef"><b>Definition:</b> wdt.h:136</div></div>
+<div class="ttc" id="agroup__avr__watchdog_html_ga9d1aeb2823c79936e980fabba10ac75e"><div class="ttname"><a href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a></div><div class="ttdeci">#define wdt_enable(timeout)</div><div class="ttdef"><b>Definition:</b> wdt.h:131</div></div>
+<div class="ttc" id="agroup__avr__watchdog_html_gad45893280f49113ffc2e67e1d741f29d"><div class="ttname"><a href="group__avr__watchdog.html#gad45893280f49113ffc2e67e1d741f29d">WDTO_15MS</a></div><div class="ttdeci">#define WDTO_15MS</div><div class="ttdef"><b>Definition:</b> wdt.h:552</div></div>
 <div class="ttc" id="awdt_8h_html"><div class="ttname"><a href="wdt_8h.html">wdt.h</a></div></div>
 </div><!-- fragment --><p>For newer AVRs (such as the ATmega1281) also add this function to your code to then disable the watchdog after a reset (e.g., after a soft reset):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="wdt_8h.html">avr/wdt.h</a>&gt;</span></div>
@@ -1012,8 +1084,9 @@ How do I perform a software reset of the AVR?</h1>
 <div class="line"><span class="keywordtype">void</span> wdt_init (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">    MCUSR = 0;</div>
-<div class="line">    wdt_disable();</div>
+<div class="line">    <a class="code hl_function" href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a>();</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__avr__watchdog_html_ga4bf8d96fb29e5735ae2a560e7b8cfd15"><div class="ttname"><a href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a></div><div class="ttdeci">static void wdt_disable(void)</div><div class="ttdef"><b>Definition:</b> wdt.h:483</div></div>
 </div><!-- fragment --><p> The code is placed in section <code><a class="el" href="mem_sections.html#sec_dot_init">.init3</a></code> so that it is executed as part of the normal startup procedure. The <code>naked</code> attribute is required so that the code does not <code>ret</code>urn (Code in init sections is executed as it is located; the code is not called, and code from one init section falls through to the code in the next one). The <code>used</code> attribute makes sure that the compiler does not throw the seemingly unused function away. The <code>unused</code> attributes avoids warnings about unused code.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_reentrant"></a>
@@ -1030,7 +1103,7 @@ What pitfalls exist when writing reentrant code?</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof</a></code>, <code><a class="el" href="group__avr__stdlib.html#ga5ee4d110a3bb55d2eadda05e3ebedf8a">strtod</a></code>, <code><a class="el" href="group__avr__stdlib.html#gaf8ce3b8dae3d45c34c3b172de503f7b3">strtol</a></code>, <code><a class="el" href="group__avr__stdlib.html#gaea44aa48bda8261f794dcb2d1e7ab2b2">strtoul</a></code> </td><td>Uses the global variable <code>errno</code> to return success/failure. </td><td>Ignore <code>errno</code>, or protect calls with <a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>/<a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a> or <a class="el" href="group__util__atomic.html#gaaaea265b31dabcfb3098bec7685c39e4">ATOMIC_BLOCK</a> if the application can tolerate it. Or use <a class="el" href="group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102">scanf</a> or <a class="el" href="group__avr__stdio.html#ga0fb7fd70cd7618f27d8219c97e61bcf3">scanf_P</a> if possible.   </td></tr>
 <tr>
-<td><code>malloc</code>, <code>realloc</code>, <code><a class="el" href="group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963">calloc</a></code>, <code>free</code> </td><td>Uses the stack pointer and global variables to allocate and free memory. </td><td>Protect calls with <a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>/<a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a> or <a class="el" href="group__util__atomic.html#gaaaea265b31dabcfb3098bec7685c39e4">ATOMIC_BLOCK</a> if the application can tolerate it. If using an OS, use the OS provided memory allocator since the OS is likely modifying the stack pointer anyway.   </td></tr>
+<td><code><a class="el" href="group__avr__stdlib.html#a_malloc">malloc</a></code>, <code><a class="el" href="group__avr__stdlib.html#a_realloc">realloc</a></code>, <code><a class="el" href="group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963">calloc</a></code>, <code>free</code> </td><td>Uses the stack pointer and global variables to allocate and free memory. </td><td>Protect calls with <a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>/<a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a> or <a class="el" href="group__util__atomic.html#gaaaea265b31dabcfb3098bec7685c39e4">ATOMIC_BLOCK</a> if the application can tolerate it. If using an OS, use the OS provided memory allocator since the OS is likely modifying the stack pointer anyway.   </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen</a></code>, <code><a class="el" href="group__avr__stdio.html#gad3d27a6dcc225237171196dd0739bb10">fclose</a></code> </td><td>Uses <a class="el" href="group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963">calloc</a> and free. </td><td>Protect calls with <a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>/<a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a> or <a class="el" href="group__util__atomic.html#gaaaea265b31dabcfb3098bec7685c39e4">ATOMIC_BLOCK</a> if the application can tolerate it. Or use <a class="el" href="group__avr__stdio.html#gaf41f158c022cbb6203ccd87d27301226" title="Setup a user-supplied buffer as an stdio stream.">fdev_setup_stream</a> or <a class="el" href="group__avr__stdio.html#gaea2b6be92ead4673bc487b271b7227fb" title="Initializer for a user-supplied stdio stream.">FDEV_SETUP_STREAM</a>. <br  />
  Note: <a class="el" href="group__avr__stdio.html#gad3d27a6dcc225237171196dd0739bb10">fclose</a> will only call free if the stream has been opened with <a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen</a>.   </td></tr>
@@ -1054,8 +1127,12 @@ Note: Formatting to a string output, e.g. <a class="el" href="group__avr__stdio.
 <p class="endtd"></p>
 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__stdio.html#ga818d63019adc9d518a13f9c36ed04f35">fgetc</a></code>, <code><a class="el" href="group__avr__stdio.html#gab4f9b130166e5811519513d6178c1ae3">ungetc</a></code>, <code><a class="el" href="group__avr__stdio.html#gadc840142f71fe24306b4c249d0c749bf">fgets</a></code>, <code><a class="el" href="group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102">scanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga0fb7fd70cd7618f27d8219c97e61bcf3">scanf_P</a></code>, <code><a class="el" href="group__avr__stdio.html#ga0beb4fd9ff6833a364e3ce60370de058">fscanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga7aec94e711ad64724076666586a26839">fscanf_P</a></code>, <code><a class="el" href="group__avr__stdio.html#ga8bd4b760f67791a54e73111734caa82f">vscanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga6c6b5b881ce8f4739777ff3a615e988a">vfscanf_P</a></code>, <code><a class="el" href="group__avr__stdio.html#ga54fa47156a34c1659a29ed96e46e3518">fread</a></code> </td><td>Alters flags, character count, and unget buffer in the FILE argument. </td><td>Assign each thread its own FILE for input. *** <br  />
-Note: Scanning from a string, e.g. <a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf</a> and <a class="el" href="group__avr__stdio.html#gaeca11dc4b3757ed4ff2f2a4950eba117">sscanf_P</a>, are thread safe.   </td></tr>
+<td><code><a class="el" href="group__avr__stdio.html#ga818d63019adc9d518a13f9c36ed04f35">fgetc</a></code>, <code><a class="el" href="group__avr__stdio.html#gab4f9b130166e5811519513d6178c1ae3">ungetc</a></code>, <code><a class="el" href="group__avr__stdio.html#gadc840142f71fe24306b4c249d0c749bf">fgets</a></code>, <code><a class="el" href="group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102">scanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga0fb7fd70cd7618f27d8219c97e61bcf3">scanf_P</a></code>, <code><a class="el" href="group__avr__stdio.html#ga0beb4fd9ff6833a364e3ce60370de058">fscanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga7aec94e711ad64724076666586a26839">fscanf_P</a></code>, <code><a class="el" href="group__avr__stdio.html#ga8bd4b760f67791a54e73111734caa82f">vscanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a></code>, <code><a class="el" href="group__avr__stdio.html#ga6c6b5b881ce8f4739777ff3a615e988a">vfscanf_P</a></code>, <code><a class="el" href="group__avr__stdio.html#ga54fa47156a34c1659a29ed96e46e3518">fread</a></code> </td><td>Alters flags, character count, and unget buffer in the FILE argument. </td><td><p class="starttd">Assign each thread its own FILE for input. *** <br  />
+Note: Scanning from a string, e.g. <a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf</a> and <a class="el" href="group__avr__stdio.html#gaeca11dc4b3757ed4ff2f2a4950eba117">sscanf_P</a>, are thread safe.  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td><code><a class="el" href="time_8h.html">time.h</a></code> </td><td>Uses global state in <code>__latitude</code>, <code>__longitude</code>, <code>__utc_offset</code>, <code>__asc_store</code>, <code>__tm_store</code>, <code>__dst_ptr</code>, <code>__system_time</code>. </td><td>Some functions have reentrant versions, like: <code><a class="el" href="group__avr__time.html#gaa1128e048925e3b208213febb8573b88">asctime_r</a></code>, <code><a class="el" href="group__avr__time.html#ga34fa7766f6b0a8a74a41683693eabad9">ctime_r</a></code>, <code><a class="el" href="group__avr__time.html#ga7cb461118a6aeebeaacd48ee127b952a">gmtime_r</a></code>, <code><a class="el" href="group__avr__time.html#ga8a4fd6a03c19f96f656316eba80b9c9a">iso_week_date_r</a></code>, <code><a class="el" href="group__avr__time.html#gae200cfc8cc7309d0ce5fef3ee490dc47">isotime_r</a></code>, <code><a class="el" href="group__avr__time.html#gacd9715002deaf28b432a8f2b54dd9aa5">localtime_r</a></code>.  </td></tr>
 </table>
 <dl class="section note"><dt>Note</dt><dd>It's not clear one would ever want to do character input simultaneously from more than one thread anyway, but these entries are included for completeness.</dd></dl>
 <p>An effort will be made to keep this table up to date if any new issues are discovered or introduced.</p>
@@ -1075,7 +1152,7 @@ value" section for the EEPROM Address Register. If EEAR shows the initial value 
 Why is my baud rate wrong?</h1>
 <p>Some AVR datasheets give the following formula for calculating baud rates:</p>
 <div class="fragment"><div class="line">(<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> / (UART_BAUD_RATE * 16L) - 1)</div>
-<div class="ttc" id="agroup__util__delay_html_ga43bafb28b29491ec7f871319b5a3b2f8"><div class="ttname"><a href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></div><div class="ttdeci">#define F_CPU</div><div class="ttdoc">CPU frequency in Hz.</div><div class="ttdef"><b>Definition:</b> delay.h:104</div></div>
+<div class="ttc" id="agroup__util__delay_html_ga43bafb28b29491ec7f871319b5a3b2f8"><div class="ttname"><a href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></div><div class="ttdeci">#define F_CPU</div><div class="ttdoc">CPU frequency in Hz.</div><div class="ttdef"><b>Definition:</b> delay.h:115</div></div>
 </div><!-- fragment --><p>Unfortunately that formula does not work with all combinations of clock speeds and baud rates due to integer truncation during the division operator.</p>
 <p>When doing integer division it is usually better to round to the nearest integer, rather than to the lowest. To do this add 0.5 (i. e. half the value of the denominator) to the numerator before the division, resulting in the formula:</p>
 <div class="fragment"><div class="line">((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> + UART_BAUD_RATE * 8L) / (UART_BAUD_RATE * 16L) - 1)</div>
@@ -1084,7 +1161,7 @@ Why is my baud rate wrong?</h1>
 <h1><a class="anchor" id="faq_funcptr_gt128kib"></a>
 On a device with more than 128 KiB of flash, how to make function pointers work?</h1>
 <p>Function pointers beyond the "magical" 128 KiB barrier(s) on larger devices are supposed to be resolved through so-called <em>trampolines</em> by the linker, so the actual pointers used in the code can remain 16 bits wide.</p>
-<p>In order for this to work, the option <code>-mrelax</code> must be given on the compiler command-line that is used to link the final ELF file. (Older compilers did not implement this option for the AVR, use <code>-Wl,--relax</code> instead.)</p>
+<p>In order for this to work, the option <code>-mrelax</code> must be given on the compiler command-line that is used to link the final ELF file.</p>
 <p>See also the avr-gcc online documentation on the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"><code>EIND</code> special function register</a> and indirect calls.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_assign_chain"></a>
@@ -1128,7 +1205,8 @@ End of search list.
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_macros"></a>
 Which macros are defined in my program? Where are they defined, and to what value?</h1>
-<p>One way is to add <code><a class="el" href="using_tools.html#opt_save_temps">-save-temps</a></code> and <code><a class="el" href="using_tools.html#opt_g">-g3</a></code> to the compiler options. This saves the temporary files like the pre-processed source code in an <code>.i</code> file (for C sources), an <code>.ii</code> (for C++), or a <code>.s</code> (for assembly). A debug level of DWARF3 or higher is required to include the macro definitions in the file. With lower debug levels, only the preprocessed source will be present.</p>
+<p>For a documentation of compiler built-in macros see <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#AVR-Built-in-Macros">AVR built-in macros</a> in the GCC online documentation.</p>
+<p>One way to find all the defined macros is to add <code><a class="el" href="using_tools.html#opt_save_temps">-save-temps</a></code> and <code><a class="el" href="using_tools.html#opt_g">-g3</a></code> to the compiler options. This saves the temporary files like the pre-processed source code in an <code>.i</code> file (for C sources), an <code>.ii</code> (for C++), or a <code>.s</code> (for assembly). A debug level of DWARF3 or higher is required to include the macro definitions in the file. With lower debug levels, only the preprocessed source will be present.</p>
 <p>For a module with a simple <code>#include &lt;<a class="el" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</code>, the saved intermediate file might look something like:</p>
 <pre class="fragment"># 0 "&lt;built-in&gt;"
 #define __STDC__ 1
@@ -1170,6 +1248,101 @@ What ISR names are available for my device?</h1>
 </dd>
 </dl>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_toolchain_version"></a>
+What are the versions of the tools in my toolchain?</h1>
+<p>The versions of the tools can be obtained by running the following commands and taking the first line of the standard output:</p>
+<table class="doxtable">
+<caption>Commands to obtain Tool Versions</caption>
+<tr>
+<th>Version of </th><th>Command </th></tr>
+<tr>
+<td>Compiler </td><td><code>avr-gcc --version</code> </td></tr>
+<tr>
+<td>Assembler </td><td><code>avr-as --version</code> </td></tr>
+<tr>
+<td>LD Linker<sup>1</sup> </td><td><code>avr-ld --version</code> </td></tr>
+<tr>
+<td>CC Linker<sup>2</sup> </td><td><code>echo "" | avr-gcc -xc - -Wl,--version 2&gt; /dev/null</code> </td></tr>
+<tr>
+<td>AVR-LibC </td><td><code>echo "#include &lt;avr/version.h&gt;" | avr-gcc -xc - -E -dM | grep AVR_LIBC_VERSION_STRING</code> </td></tr>
+</table>
+<p>Linker<sup>1</sup> is the linker as called directly (<code>avr-ld</code>) whereas Linker<sup>2</sup> is the linker as called though the compiler driver <code>avr-gcc</code>. The latter is the usual way to invoke the linker. When these two versions are not the same, then the resulting toolchain may have inconsistencies.</p>
+<p>When you have more then one toolchain installed, then make sure you are calling the command from the intended toolchain, e.g. by specifying the absolute path to the tool.</p>
+<p>Also notice that software may come with vendor specific patches, so that the tool behaves differently than the stock version.</p>
+<p>The FAQ document you are reading right now is part of an AVR-LibC that has been configured for the following tool versions:</p>
+<table class="doxtable">
+<caption>Tool Versions</caption>
+<tr>
+<th>Software </th><th>Version </th></tr>
+<tr>
+<td>Compiler </td><td><code>avr-gcc (GCC) 14.2.0</code> </td></tr>
+<tr>
+<td>Assembler </td><td><code>GNU assembler (GNU Binutils) 2.43.1</code> </td></tr>
+<tr>
+<td>LD Linker </td><td><code>GNU ld (GNU Binutils) 2.43.1</code> </td></tr>
+<tr>
+<td>CC Linker </td><td><code>GNU ld (GNU Binutils) 2.43.1</code> </td></tr>
+<tr>
+<td>AVR-LibC </td><td><code>2.3.0</code> </td></tr>
+</table>
+<ul>
+<li><a href="https://gcc.gnu.org/gcc-14">GCC 14 documentation</a></li>
+<li><a href="https://gcc.gnu.org/gcc-14/changes.html#avr">GCC 14 release notes</a></li>
+</ul>
+<p><a class="anchor" id="faq_toolchain_support"></a> The following features have been detected when building AVR-LibC. They influence how pars of the library behave.</p>
+<table class="doxtable">
+<caption>Toolchain Features affecting AVR-LibC</caption>
+<tr>
+<th>Feature </th><th>Supported </th><th>Affects </th></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles"><code>__builtin_avr_delay_cycles()</code></a>  </td><td>yes </td><td><code>&lt;<a class="el" href="delay_8h.html">util/delay.h</a>&gt;</code> </td></tr>
+<tr>
+<td><a class="el" href="mem_sections.html#sec_memory_regions">text</a> starts at <code>__TEXT_REGION_ORIGIN__</code> </td><td>yes </td><td>Starup code </td></tr>
+<tr>
+<td><a class="el" href="mem_sections.html#sec_memory_regions">data</a> starts at <code>__DATA_REGION_ORIGIN__</code> </td><td>yes </td><td>Starup code </td></tr>
+<tr>
+<td>Compiler supports <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"><code>-mcvt</code></a> </td><td>no </td><td><a class="el" href="FAQ.html#faq_cvt">CVT</a> convenience </td></tr>
+<tr>
+<td>Compiler supports attribute <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html#index-signal_0028num_0029-function-attribute_002c-AVR"><code>signal(n)</code></a> </td><td>no </td><td><code>&lt;<a class="el" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</code>, <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a>, <a class="el" href="FAQ.html#faq_local_isr">local functions as ISRs</a> </td></tr>
+<tr>
+<td>64-bit floating-point </td><td>yes: <code>-mdouble=64</code>, <code>-mlong-double=32</code> </td><td><code>&lt;<a class="el" href="math_8h.html">math.h</a>&gt;</code>, Libraries </td></tr>
+<tr>
+<td>Fixed-point  </td><td>yes </td><td><code>&lt;<a class="el" href="group__avr__stdfix.html#stdfix_h">stdfix.h</a>&gt;</code>, Libraries </td></tr>
+<tr>
+<td>Device library <code>lib<em>mcu</em>.a</code> </td><td>yes </td><td>Startup code, Libraries </td></tr>
+</table>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_toolchain_sources"></a>
+Where can I find the source code of the tools?</h1>
+<p>Here are web views of the GIT repos of the projects and some points of interest.</p>
+<p><a href="https://sourceware.org/binutils"><b>Binutils</b></a></p><ul>
+<li>Top source: <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=tree">https://sourceware.org/git/binutils-gdb.git</a><br  />
+ The linker is located in <code>ld/</code>, the assembler in <code>gas/</code> and the other tools are in <code>binutils/</code>.</li>
+<li>Linker script: <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=ld/scripttempl/avr.sc">ld/scripttempl/avr.sc</a></li>
+<li>AVR opcodes: <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=include/opcode/avr.h">include/opcodes/avr.h</a></li>
+<li>Latest <a href="https://sourceware.org/binutils/docs/">manual</a></li>
+</ul>
+<p><a href="https://gcc.gnu.org"><b>GCC</b></a></p><ul>
+<li>Top source: <a href="https://gcc.gnu.org/git/?p=gcc.git;a=tree;hb=HEAD">https://gcc.gnu.org/git/gcc.git</a></li>
+<li>AVR backend: <a href="https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=gcc/config/avr">gcc/config/avr</a></li>
+<li>libgcc (AVR part): <a href="https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=libgcc/config/avr">libgcc/config/avr</a></li>
+<li>Online <a href="https://gcc.gnu.org/onlinedocs/">manuals</a></li>
+</ul>
+<p><a href="https://avrdudes.github.io/avr-libc"><b>AVR-LibC</b></a></p><ul>
+<li>Top source: <a href="https://github.com/avrdudes/avr-libc">https://github.com/avrdudes/avr-libc.git</a></li>
+<li>Startup code: <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S">crt1/gcrt1.S</a></li>
+<li>Online <a href="https://avrdudes.github.io/avr-libc/">manuals</a></li>
+</ul>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
+<h1><a class="anchor" id="faq_toolchain_bugs"></a>
+Where can I report a problem?</h1>
+<p>The projects have issue trackers:</p><ul>
+<li><a href="https://gcc.gnu.org/bugzilla/">GCC Bugzilla</a> and the <a href="https://gcc.gnu.org/bugs/#report">GCC bug-reporting guide</a></li>
+<li><a href="https://sourceware.org/bugzilla/">Binutils Bugzilla</a> and the <a href="https://sourceware.org/bugzilla/page.cgi?id=bug-writing.html">Binutils bug-reporting guide</a></li>
+<li><a href="https://github.com/avrdudes/avr-libc/issues">AVR-LibC issues</a></li>
+</ul>
+<p>Please make sure to use the most recent tool version before filing an issue. When reporting a problem, please make sure that the report is self-contained and that the artifact can be reproduced by others.</p>
+<p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_use_bv"></a>
 What is all this _BV() stuff about?</h1>
 <p>When performing low-level output work, which is a very central point in microcontroller programming, it is quite common that a particular bit needs to be set or cleared in some IO register. While the device documentation provides mnemonic names for the various bits in the IO registers, and the <a class="el" href="group__avr__io.html">AVR device-specific IO definitions</a> reflect these names in definitions for numerical constants, a way is needed to convert a bit number (usually within a byte register) into a byte value that can be assigned directly to the register. However, sometimes the direct bit numbers are needed as well (e. g. in an <code>SBI()</code> instruction), so the definitions cannot usefully be made as byte values in the first place.</p>
@@ -1191,7 +1364,7 @@ What is all this _BV() stuff about?</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

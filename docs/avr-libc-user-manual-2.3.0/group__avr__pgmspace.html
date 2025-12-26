@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -97,168 +96,128 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">&lt;avr/pgmspace.h&gt;: Program Space Utilities</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gae59d3b5091405672ec394d3903ee60c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a>&#160;&#160;&#160;__attribute__((__section__(&quot;.progmemx.data&quot;)))</td></tr>
-<tr class="separator:gae59d3b5091405672ec394d3903ee60c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga75acaba9e781937468d0911423bc0c35"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>&#160;&#160;&#160;__attribute__((__progmem__))</td></tr>
-<tr class="separator:ga75acaba9e781937468d0911423bc0c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga73809107539df84eaf01f6a4dea4fbff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a>(str)&#160;&#160;&#160;({ static const <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> char c[] = (str); &amp;c[0]; })</td></tr>
-<tr class="separator:ga73809107539df84eaf01f6a4dea4fbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga22972d0aa51e8b8dd64ce1a2b9c78edb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga22972d0aa51e8b8dd64ce1a2b9c78edb">PSTR_FAR</a>(str)&#160;&#160;&#160;({ static const <a class="el" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a> char c[] = (str); <a class="el" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a>(c[0]); })</td></tr>
-<tr class="separator:ga22972d0aa51e8b8dd64ce1a2b9c78edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga296eb4a3e03c26b13e6207ccd15dcb1e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga296eb4a3e03c26b13e6207ccd15dcb1e">pgm_read_byte_near</a>(__addr)&#160;&#160;&#160;__LPM ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
-<tr class="separator:ga296eb4a3e03c26b13e6207ccd15dcb1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5a46ba5b6638df8c254964424f10c0fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5a46ba5b6638df8c254964424f10c0fb">pgm_read_word_near</a>(__addr)&#160;&#160;&#160;__LPM_word ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
-<tr class="separator:ga5a46ba5b6638df8c254964424f10c0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga289488b882ba92d0364a9bf65f5dc472"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga289488b882ba92d0364a9bf65f5dc472">pgm_read_dword_near</a>(__addr)&#160;&#160;&#160;    __LPM_dword ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
-<tr class="separator:ga289488b882ba92d0364a9bf65f5dc472"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga22f9d07729cb6af716ec449a129756c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga22f9d07729cb6af716ec449a129756c3">pgm_read_qword_near</a>(__addr)&#160;&#160;&#160;__LPM_qword ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
-<tr class="separator:ga22f9d07729cb6af716ec449a129756c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga93b33ee6ceaf1dd3ebcfa6f4c96f8b27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga93b33ee6ceaf1dd3ebcfa6f4c96f8b27">pgm_read_float_near</a>(addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga91e512f5d577a041714fe01edfa80667">pgm_read_float</a> (addr)</td></tr>
-<tr class="separator:ga93b33ee6ceaf1dd3ebcfa6f4c96f8b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga59f916fc92569eed66b43f3b55286fdf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga59f916fc92569eed66b43f3b55286fdf">pgm_read_ptr_near</a>(__addr)&#160;&#160;&#160;    ((void*) __LPM_word ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr)))</td></tr>
-<tr class="separator:ga59f916fc92569eed66b43f3b55286fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7e89771ca773d9a2eb7bd1696a23af8d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga7e89771ca773d9a2eb7bd1696a23af8d">pgm_read_byte_far</a>(__addr)&#160;&#160;&#160;__ELPM (__addr)</td></tr>
-<tr class="separator:ga7e89771ca773d9a2eb7bd1696a23af8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa77cd8c6f7c2a4c32c62b69463009700"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaa77cd8c6f7c2a4c32c62b69463009700">pgm_read_word_far</a>(__addr)&#160;&#160;&#160;__ELPM_word (__addr)</td></tr>
-<tr class="separator:gaa77cd8c6f7c2a4c32c62b69463009700"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2ce625d37bbc5280d7cd316e8b273a4d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga2ce625d37bbc5280d7cd316e8b273a4d">pgm_read_dword_far</a>(__addr)&#160;&#160;&#160;__ELPM_dword (__addr)</td></tr>
-<tr class="separator:ga2ce625d37bbc5280d7cd316e8b273a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8f304a81b2123b85026c72960c81c51c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8f304a81b2123b85026c72960c81c51c">pgm_read_qword_far</a>(__addr)&#160;&#160;&#160;__ELPM_qword (__addr)</td></tr>
-<tr class="separator:ga8f304a81b2123b85026c72960c81c51c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d88a95758ece5f8805cf7c2d04b03cf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5d88a95758ece5f8805cf7c2d04b03cf">pgm_read_ptr_far</a>(__addr)&#160;&#160;&#160;((void*) __ELPM_word (__addr))</td></tr>
-<tr class="separator:ga5d88a95758ece5f8805cf7c2d04b03cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae89a4ff0b5a887888fcf83c4701b310b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga296eb4a3e03c26b13e6207ccd15dcb1e">pgm_read_byte_near</a>(__addr)</td></tr>
-<tr class="separator:gae89a4ff0b5a887888fcf83c4701b310b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5336313575dfe47dd73f0847fcd21fed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5336313575dfe47dd73f0847fcd21fed">pgm_read_word</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga5a46ba5b6638df8c254964424f10c0fb">pgm_read_word_near</a>(__addr)</td></tr>
-<tr class="separator:ga5336313575dfe47dd73f0847fcd21fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7d4e9a766022085445c2d5c7f83606c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga7d4e9a766022085445c2d5c7f83606c8">pgm_read_dword</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga289488b882ba92d0364a9bf65f5dc472">pgm_read_dword_near</a>(__addr)</td></tr>
-<tr class="separator:ga7d4e9a766022085445c2d5c7f83606c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4a8ba8129bb0d60d76e04e003bbcf6c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga4a8ba8129bb0d60d76e04e003bbcf6c5">pgm_read_qword</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga22f9d07729cb6af716ec449a129756c3">pgm_read_qword_near</a>(__addr)</td></tr>
-<tr class="separator:ga4a8ba8129bb0d60d76e04e003bbcf6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga59f916fc92569eed66b43f3b55286fdf">pgm_read_ptr_near</a>(__addr)</td></tr>
-<tr class="separator:ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8ddf0e398bde8078aa9395ac77c83f0a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a>(var)</td></tr>
-<tr class="separator:ga8ddf0e398bde8078aa9395ac77c83f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Functions reading from PROGMEM</h2></td></tr>
+<tr class="memitem:ga9e71104956e1361499586162104975e7"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga9e71104956e1361499586162104975e7">pgm_read_char</a> (const char *addr)</td></tr>
+<tr class="separator:ga9e71104956e1361499586162104975e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga200d1d22c378d3f6f3b6a6b1f0947cf6"><td class="memItemLeft" align="right" valign="top">static unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga200d1d22c378d3f6f3b6a6b1f0947cf6">pgm_read_unsigned_char</a> (const unsigned char *addr)</td></tr>
+<tr class="separator:ga200d1d22c378d3f6f3b6a6b1f0947cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaebf21279eec6e3a1ff7d7138ddfd64f6"><td class="memItemLeft" align="right" valign="top">static signed char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaebf21279eec6e3a1ff7d7138ddfd64f6">pgm_read_signed_char</a> (const signed char *addr)</td></tr>
+<tr class="separator:gaebf21279eec6e3a1ff7d7138ddfd64f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0f2d3ec622fe7155367c2c1d505124c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gac0f2d3ec622fe7155367c2c1d505124c">pgm_read_u8</a> (const <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *addr)</td></tr>
+<tr class="separator:gac0f2d3ec622fe7155367c2c1d505124c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga54669f72dee495a8980dea41bb7ebf33"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga54669f72dee495a8980dea41bb7ebf33">pgm_read_i8</a> (const <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> *addr)</td></tr>
+<tr class="separator:ga54669f72dee495a8980dea41bb7ebf33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga80639810e38e06f55345f059ff4f5db5"><td class="memItemLeft" align="right" valign="top">static short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga80639810e38e06f55345f059ff4f5db5">pgm_read_short</a> (const short *addr)</td></tr>
+<tr class="separator:ga80639810e38e06f55345f059ff4f5db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac1049e52d701a6197c1a953f357ef28e"><td class="memItemLeft" align="right" valign="top">static unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gac1049e52d701a6197c1a953f357ef28e">pgm_read_unsigned_short</a> (const unsigned short *addr)</td></tr>
+<tr class="separator:gac1049e52d701a6197c1a953f357ef28e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73ad80774f8b89e9bd69e1a5f4db6f94"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga73ad80774f8b89e9bd69e1a5f4db6f94">pgm_read_u16</a> (const <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *addr)</td></tr>
+<tr class="separator:ga73ad80774f8b89e9bd69e1a5f4db6f94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadef6c7ead381160127a277ef8db6f6c0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gadef6c7ead381160127a277ef8db6f6c0">pgm_read_i16</a> (const <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> *addr)</td></tr>
+<tr class="separator:gadef6c7ead381160127a277ef8db6f6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e1f0c76e5c9d3e02684c55e93b31cac"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga1e1f0c76e5c9d3e02684c55e93b31cac">pgm_read_int</a> (const int *addr)</td></tr>
+<tr class="separator:ga1e1f0c76e5c9d3e02684c55e93b31cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga452da1b004e71380daf3427647d51495"><td class="memItemLeft" align="right" valign="top">static signed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga452da1b004e71380daf3427647d51495">pgm_read_signed</a> (const signed *addr)</td></tr>
+<tr class="separator:ga452da1b004e71380daf3427647d51495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga55442c9657b93e284cb0998c39e8c1c2"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga55442c9657b93e284cb0998c39e8c1c2">pgm_read_unsigned</a> (const unsigned *addr)</td></tr>
+<tr class="separator:ga55442c9657b93e284cb0998c39e8c1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0840ee688cde7d1555133f567618e895"><td class="memItemLeft" align="right" valign="top">static signed int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga0840ee688cde7d1555133f567618e895">pgm_read_signed_int</a> (const signed int *addr)</td></tr>
+<tr class="separator:ga0840ee688cde7d1555133f567618e895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5546e8616a8cef5898fd8b2bd9f520e4"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5546e8616a8cef5898fd8b2bd9f520e4">pgm_read_unsigned_int</a> (const unsigned int *addr)</td></tr>
+<tr class="separator:ga5546e8616a8cef5898fd8b2bd9f520e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb706ee4649add114a1f92807dbd8f77"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gabb706ee4649add114a1f92807dbd8f77">pgm_read_i24</a> (const <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> *addr)</td></tr>
+<tr class="separator:gabb706ee4649add114a1f92807dbd8f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cd0a9945ec794653398da2392b2f6fe"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga0cd0a9945ec794653398da2392b2f6fe">pgm_read_u24</a> (const <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> *addr)</td></tr>
+<tr class="separator:ga0cd0a9945ec794653398da2392b2f6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa2b121deb87ea5eb532425d68e0a1a1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gafa2b121deb87ea5eb532425d68e0a1a1">pgm_read_u32</a> (const <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *addr)</td></tr>
+<tr class="separator:gafa2b121deb87ea5eb532425d68e0a1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa80195618e042cc0bd955893445f371"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gafa80195618e042cc0bd955893445f371">pgm_read_i32</a> (const <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *addr)</td></tr>
+<tr class="separator:gafa80195618e042cc0bd955893445f371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga719e61f7998b764ad31b02bbaeb59f1b"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga719e61f7998b764ad31b02bbaeb59f1b">pgm_read_long</a> (const long *addr)</td></tr>
+<tr class="separator:ga719e61f7998b764ad31b02bbaeb59f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1731885d100d3d92abffdbb175b1677b"><td class="memItemLeft" align="right" valign="top">static unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga1731885d100d3d92abffdbb175b1677b">pgm_read_unsigned_long</a> (const unsigned long *addr)</td></tr>
+<tr class="separator:ga1731885d100d3d92abffdbb175b1677b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga291547f4b4e7f89decda2a9cc932c663"><td class="memItemLeft" align="right" valign="top">static long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga291547f4b4e7f89decda2a9cc932c663">pgm_read_long_long</a> (const long long *addr)</td></tr>
+<tr class="separator:ga291547f4b4e7f89decda2a9cc932c663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac083746fbbaac838ad46c3d39ce794be"><td class="memItemLeft" align="right" valign="top">static unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gac083746fbbaac838ad46c3d39ce794be">pgm_read_unsigned_long_long</a> (const unsigned long long *addr)</td></tr>
+<tr class="separator:gac083746fbbaac838ad46c3d39ce794be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga327b41edffa0f796b6f5ad592e5ee158"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga327b41edffa0f796b6f5ad592e5ee158">pgm_read_u64</a> (const <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *addr)</td></tr>
+<tr class="separator:ga327b41edffa0f796b6f5ad592e5ee158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf2fc4c6cc44764d8709b9c81cedeb8c7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaf2fc4c6cc44764d8709b9c81cedeb8c7">pgm_read_i64</a> (const <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> *addr)</td></tr>
+<tr class="separator:gaf2fc4c6cc44764d8709b9c81cedeb8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac1554e0c81e26a0228a9e7f654d5366b"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gac1554e0c81e26a0228a9e7f654d5366b">pgm_read_float</a> (const float *addr)</td></tr>
+<tr class="separator:gac1554e0c81e26a0228a9e7f654d5366b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga39b7df5678d0988d99dd15d3eb646e50"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga39b7df5678d0988d99dd15d3eb646e50">pgm_read_double</a> (const double *addr)</td></tr>
+<tr class="separator:ga39b7df5678d0988d99dd15d3eb646e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab389e7d13faba605dc409be779d0882b"><td class="memItemLeft" align="right" valign="top">static long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gab389e7d13faba605dc409be779d0882b">pgm_read_long_double</a> (const long double *addr)</td></tr>
+<tr class="separator:gab389e7d13faba605dc409be779d0882b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga31fde89bb6d08399d0469dfc9244187b"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga31fde89bb6d08399d0469dfc9244187b">pgm_read_char</a> (const char *addr)</td></tr>
-<tr class="separator:ga31fde89bb6d08399d0469dfc9244187b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacaa2ead776db14c9bebd65c96539f353"><td class="memItemLeft" align="right" valign="top">static unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gacaa2ead776db14c9bebd65c96539f353">pgm_read_unsigned_char</a> (const unsigned char *addr)</td></tr>
-<tr class="separator:gacaa2ead776db14c9bebd65c96539f353"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad8602e7dd2e084efb15bd39ceff67bf9"><td class="memItemLeft" align="right" valign="top">static signed char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gad8602e7dd2e084efb15bd39ceff67bf9">pgm_read_signed_char</a> (const signed char *addr)</td></tr>
-<tr class="separator:gad8602e7dd2e084efb15bd39ceff67bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaa510d505ef6b91d32b6d877cbf28624"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaaa510d505ef6b91d32b6d877cbf28624">pgm_read_u8</a> (const <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *addr)</td></tr>
-<tr class="separator:gaaa510d505ef6b91d32b6d877cbf28624"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7c620c9696b7b520208c4fa9798c2aa5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga7c620c9696b7b520208c4fa9798c2aa5">pgm_read_i8</a> (const <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> *addr)</td></tr>
-<tr class="separator:ga7c620c9696b7b520208c4fa9798c2aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2146a772a87a08ddec36d9b24cdf33e0"><td class="memItemLeft" align="right" valign="top">static short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga2146a772a87a08ddec36d9b24cdf33e0">pgm_read_short</a> (const short *addr)</td></tr>
-<tr class="separator:ga2146a772a87a08ddec36d9b24cdf33e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9417451d42f8ade83b85bd034be7048b"><td class="memItemLeft" align="right" valign="top">static unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga9417451d42f8ade83b85bd034be7048b">pgm_read_unsigned_short</a> (const unsigned short *addr)</td></tr>
-<tr class="separator:ga9417451d42f8ade83b85bd034be7048b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gace9f54e4eb0c2f0d69479f4fe16d7373"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gace9f54e4eb0c2f0d69479f4fe16d7373">pgm_read_u16</a> (const <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *addr)</td></tr>
-<tr class="separator:gace9f54e4eb0c2f0d69479f4fe16d7373"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f761afc90dc401fce4850cef98973eb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga0f761afc90dc401fce4850cef98973eb">pgm_read_i16</a> (const <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> *addr)</td></tr>
-<tr class="separator:ga0f761afc90dc401fce4850cef98973eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga84834d8da9988d3199b99117f20cd197"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga84834d8da9988d3199b99117f20cd197">pgm_read_int</a> (const int *addr)</td></tr>
-<tr class="separator:ga84834d8da9988d3199b99117f20cd197"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f4647aab4b04e3d154159b74240e12b"><td class="memItemLeft" align="right" valign="top">static signed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga0f4647aab4b04e3d154159b74240e12b">pgm_read_signed</a> (const signed *addr)</td></tr>
-<tr class="separator:ga0f4647aab4b04e3d154159b74240e12b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5b7512e172929cec47945b73cc28b423"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5b7512e172929cec47945b73cc28b423">pgm_read_unsigned</a> (const unsigned *addr)</td></tr>
-<tr class="separator:ga5b7512e172929cec47945b73cc28b423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga401f039b356e2ba6df89782c63baa759"><td class="memItemLeft" align="right" valign="top">static signed int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga401f039b356e2ba6df89782c63baa759">pgm_read_signed_int</a> (const signed int *addr)</td></tr>
-<tr class="separator:ga401f039b356e2ba6df89782c63baa759"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadd1bf95f558f92288d0f4645be0850e0"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gadd1bf95f558f92288d0f4645be0850e0">pgm_read_unsigned_int</a> (const unsigned int *addr)</td></tr>
-<tr class="separator:gadd1bf95f558f92288d0f4645be0850e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaf7d9859ffdf0494e6122803aa870d0c"><td class="memItemLeft" align="right" valign="top">static __int24&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaaf7d9859ffdf0494e6122803aa870d0c">pgm_read_i24</a> (const __int24 *addr)</td></tr>
-<tr class="separator:gaaf7d9859ffdf0494e6122803aa870d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4d12ec20548e8346d852ac0dc35becc0"><td class="memItemLeft" align="right" valign="top">static __uint24&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga4d12ec20548e8346d852ac0dc35becc0">pgm_read_u24</a> (const __uint24 *addr)</td></tr>
-<tr class="separator:ga4d12ec20548e8346d852ac0dc35becc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac20aed5830150e2efb0d714b494cb288"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gac20aed5830150e2efb0d714b494cb288">pgm_read_u32</a> (const <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *addr)</td></tr>
-<tr class="separator:gac20aed5830150e2efb0d714b494cb288"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaec21acc32b0245980953e08296e9963c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaec21acc32b0245980953e08296e9963c">pgm_read_i32</a> (const <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *addr)</td></tr>
-<tr class="separator:gaec21acc32b0245980953e08296e9963c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga329dbb96dd7281e92b04c42ddf8a17f4"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga329dbb96dd7281e92b04c42ddf8a17f4">pgm_read_long</a> (const long *addr)</td></tr>
-<tr class="separator:ga329dbb96dd7281e92b04c42ddf8a17f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac20368b1c989d5e262b69f71cd162a9c"><td class="memItemLeft" align="right" valign="top">static unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gac20368b1c989d5e262b69f71cd162a9c">pgm_read_unsigned_long</a> (const unsigned long *addr)</td></tr>
-<tr class="separator:gac20368b1c989d5e262b69f71cd162a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8808ddfed7258ee83a27dfceb4707744"><td class="memItemLeft" align="right" valign="top">static long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8808ddfed7258ee83a27dfceb4707744">pgm_read_long_long</a> (const long long *addr)</td></tr>
-<tr class="separator:ga8808ddfed7258ee83a27dfceb4707744"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3ea9290bb730bf2de86dab8abe97009d"><td class="memItemLeft" align="right" valign="top">static unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga3ea9290bb730bf2de86dab8abe97009d">pgm_read_unsigned_long_long</a> (const unsigned long long *addr)</td></tr>
-<tr class="separator:ga3ea9290bb730bf2de86dab8abe97009d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga266c87f35aa451f4e65c3757344e9d54"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga266c87f35aa451f4e65c3757344e9d54">pgm_read_u64</a> (const <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *addr)</td></tr>
-<tr class="separator:ga266c87f35aa451f4e65c3757344e9d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga69db6479254cd1b3a9a9fa8bf7e66f42"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga69db6479254cd1b3a9a9fa8bf7e66f42">pgm_read_i64</a> (const <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> *addr)</td></tr>
-<tr class="separator:ga69db6479254cd1b3a9a9fa8bf7e66f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga91e512f5d577a041714fe01edfa80667"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga91e512f5d577a041714fe01edfa80667">pgm_read_float</a> (const float *addr)</td></tr>
-<tr class="separator:ga91e512f5d577a041714fe01edfa80667"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga28c1eabd613be071d371eff7c11f1dc4"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga28c1eabd613be071d371eff7c11f1dc4">pgm_read_double</a> (const double *addr)</td></tr>
-<tr class="separator:ga28c1eabd613be071d371eff7c11f1dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaea5ced6e2c58f379c61b6a8ac4059d90"><td class="memItemLeft" align="right" valign="top">static long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaea5ced6e2c58f379c61b6a8ac4059d90">pgm_read_long_double</a> (const long double *addr)</td></tr>
-<tr class="separator:gaea5ced6e2c58f379c61b6a8ac4059d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacb5d8e590404c75eac6ec9efc1bae865"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gacb5d8e590404c75eac6ec9efc1bae865">pgm_read_char_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gacb5d8e590404c75eac6ec9efc1bae865"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga75abe6d0b06bb2f9846ca6f77b347a80"><td class="memItemLeft" align="right" valign="top">static unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga75abe6d0b06bb2f9846ca6f77b347a80">pgm_read_unsigned_char_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga75abe6d0b06bb2f9846ca6f77b347a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf097d6dbbbebb84a83ef795718800951"><td class="memItemLeft" align="right" valign="top">static signed char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaf097d6dbbbebb84a83ef795718800951">pgm_read_signed_char_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gaf097d6dbbbebb84a83ef795718800951"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7fe97181cb0ed4a0bf9397a26586e696"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga7fe97181cb0ed4a0bf9397a26586e696">pgm_read_u8_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga7fe97181cb0ed4a0bf9397a26586e696"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacd143f111506c4ef7135d7c559c14210"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gacd143f111506c4ef7135d7c559c14210">pgm_read_i8_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gacd143f111506c4ef7135d7c559c14210"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacd5f071b6cdc5ae3964178ebcb6e65d1"><td class="memItemLeft" align="right" valign="top">static short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gacd5f071b6cdc5ae3964178ebcb6e65d1">pgm_read_short_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gacd5f071b6cdc5ae3964178ebcb6e65d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1911905b30dcfaf46a64605cc32a96a5"><td class="memItemLeft" align="right" valign="top">static unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga1911905b30dcfaf46a64605cc32a96a5">pgm_read_unsigned_short_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga1911905b30dcfaf46a64605cc32a96a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga61aca1303652deacc2e9f4e30960b16c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga61aca1303652deacc2e9f4e30960b16c">pgm_read_u16_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga61aca1303652deacc2e9f4e30960b16c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5b28baf178d197f677cc8281d3eea166"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5b28baf178d197f677cc8281d3eea166">pgm_read_i16_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga5b28baf178d197f677cc8281d3eea166"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab8873f0cfca49b15e1a0588c6f1dfeec"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gab8873f0cfca49b15e1a0588c6f1dfeec">pgm_read_int_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gab8873f0cfca49b15e1a0588c6f1dfeec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaab8ff0f301e1bb298ecaf34a15de5994"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaab8ff0f301e1bb298ecaf34a15de5994">pgm_read_unsigned_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gaab8ff0f301e1bb298ecaf34a15de5994"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6553db2f08b513377f1539a38f54ac32"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga6553db2f08b513377f1539a38f54ac32">pgm_read_unsigned_int_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga6553db2f08b513377f1539a38f54ac32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga60aea646649ca771c76307e8852219f0"><td class="memItemLeft" align="right" valign="top">static signed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga60aea646649ca771c76307e8852219f0">pgm_read_signed_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga60aea646649ca771c76307e8852219f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacec1cac0e60789b314ce9899c37f343d"><td class="memItemLeft" align="right" valign="top">static signed int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gacec1cac0e60789b314ce9899c37f343d">pgm_read_signed_int_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gacec1cac0e60789b314ce9899c37f343d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf6d4ea30196e004dedc0a6fafd3378ce"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaf6d4ea30196e004dedc0a6fafd3378ce">pgm_read_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gaf6d4ea30196e004dedc0a6fafd3378ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga10d918adc2ebef62a88fc8985e074cb3"><td class="memItemLeft" align="right" valign="top">static unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga10d918adc2ebef62a88fc8985e074cb3">pgm_read_unsigned_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga10d918adc2ebef62a88fc8985e074cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4b0924878f2ef36e8b44668dc424f5b1"><td class="memItemLeft" align="right" valign="top">static __int24&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga4b0924878f2ef36e8b44668dc424f5b1">pgm_read_i24_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga4b0924878f2ef36e8b44668dc424f5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad5c49b40e637b623c111018cdc54f2d2"><td class="memItemLeft" align="right" valign="top">static __uint24&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gad5c49b40e637b623c111018cdc54f2d2">pgm_read_u24_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gad5c49b40e637b623c111018cdc54f2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabf7c50d5cacdc66881ee70e97b7f29e8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gabf7c50d5cacdc66881ee70e97b7f29e8">pgm_read_u32_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gabf7c50d5cacdc66881ee70e97b7f29e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5819b738b3713b203a8f7d0a272d2b00"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5819b738b3713b203a8f7d0a272d2b00">pgm_read_i32_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga5819b738b3713b203a8f7d0a272d2b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabe1601c8b0e2acd6a9ea18669eb433bb"><td class="memItemLeft" align="right" valign="top">static long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gabe1601c8b0e2acd6a9ea18669eb433bb">pgm_read_long_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:gabe1601c8b0e2acd6a9ea18669eb433bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga59f1d57ed313917ff01618cc1bac0900"><td class="memItemLeft" align="right" valign="top">static unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga59f1d57ed313917ff01618cc1bac0900">pgm_read_unsigned_long_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga59f1d57ed313917ff01618cc1bac0900"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga14b6087ac5f43a55bc8d830778e649ac"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga14b6087ac5f43a55bc8d830778e649ac">pgm_read_u64_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga14b6087ac5f43a55bc8d830778e649ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga378f587a486568b253fa72b267501ada"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga378f587a486568b253fa72b267501ada">pgm_read_i64_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga378f587a486568b253fa72b267501ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2316f28ca5f2a5c9e0e69a33912ae07e"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga2316f28ca5f2a5c9e0e69a33912ae07e">pgm_read_float_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga2316f28ca5f2a5c9e0e69a33912ae07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga67ad7392ef85ae9ca11d2d127ca84ab8"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga67ad7392ef85ae9ca11d2d127ca84ab8">pgm_read_double_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga67ad7392ef85ae9ca11d2d127ca84ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga601f6d30b1be9d2d8efce3fabd01cafe"><td class="memItemLeft" align="right" valign="top">static long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga601f6d30b1be9d2d8efce3fabd01cafe">pgm_read_long_double_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
-<tr class="separator:ga601f6d30b1be9d2d8efce3fabd01cafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Functions reading from PROGMEM_FAR</h2></td></tr>
+<tr class="memitem:gaf66de898636297d393e6fe63fd6313d4"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaf66de898636297d393e6fe63fd6313d4">pgm_read_char_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gaf66de898636297d393e6fe63fd6313d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga99530f9bed568c2f0936930b5e3ec1c4"><td class="memItemLeft" align="right" valign="top">static unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga99530f9bed568c2f0936930b5e3ec1c4">pgm_read_unsigned_char_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga99530f9bed568c2f0936930b5e3ec1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga46d63b9b4c077ec69a8b5195de0dcf9f"><td class="memItemLeft" align="right" valign="top">static signed char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga46d63b9b4c077ec69a8b5195de0dcf9f">pgm_read_signed_char_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga46d63b9b4c077ec69a8b5195de0dcf9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4adbfc372bbc9901232847e91326684e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga4adbfc372bbc9901232847e91326684e">pgm_read_u8_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga4adbfc372bbc9901232847e91326684e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga24c3d1ab9033dd39b28a7f5c704300b3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga24c3d1ab9033dd39b28a7f5c704300b3">pgm_read_i8_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga24c3d1ab9033dd39b28a7f5c704300b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3c4fa8f76823710a44ebe107587e0fe4"><td class="memItemLeft" align="right" valign="top">static short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga3c4fa8f76823710a44ebe107587e0fe4">pgm_read_short_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga3c4fa8f76823710a44ebe107587e0fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga43bc8cae02edd632fc220dc53c9959e0"><td class="memItemLeft" align="right" valign="top">static unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga43bc8cae02edd632fc220dc53c9959e0">pgm_read_unsigned_short_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga43bc8cae02edd632fc220dc53c9959e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ac83fad7eebe4a4527fc4ed7b453e51"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8ac83fad7eebe4a4527fc4ed7b453e51">pgm_read_u16_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga8ac83fad7eebe4a4527fc4ed7b453e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5aa244d61d2f760e5c5f9c09f9c1d0ac"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5aa244d61d2f760e5c5f9c09f9c1d0ac">pgm_read_i16_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga5aa244d61d2f760e5c5f9c09f9c1d0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga648b8a8d347731d6fef81929255a04c6"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga648b8a8d347731d6fef81929255a04c6">pgm_read_int_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga648b8a8d347731d6fef81929255a04c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa6538508e19643bb4fa4e64fe8404340"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaa6538508e19643bb4fa4e64fe8404340">pgm_read_unsigned_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gaa6538508e19643bb4fa4e64fe8404340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab9bd48e577d2fa44a74a43e7bbaa5213"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gab9bd48e577d2fa44a74a43e7bbaa5213">pgm_read_unsigned_int_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gab9bd48e577d2fa44a74a43e7bbaa5213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga961050faea69c1ead94731dda5e6c20e"><td class="memItemLeft" align="right" valign="top">static signed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga961050faea69c1ead94731dda5e6c20e">pgm_read_signed_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga961050faea69c1ead94731dda5e6c20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafd8634868b08b66a2291c19a519c3da4"><td class="memItemLeft" align="right" valign="top">static signed int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gafd8634868b08b66a2291c19a519c3da4">pgm_read_signed_int_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gafd8634868b08b66a2291c19a519c3da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae1b69ad065e72ab66b41b15d290d91ad"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae1b69ad065e72ab66b41b15d290d91ad">pgm_read_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gae1b69ad065e72ab66b41b15d290d91ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga35667e81bf08b9ace20f1290b27e4c23"><td class="memItemLeft" align="right" valign="top">static unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga35667e81bf08b9ace20f1290b27e4c23">pgm_read_unsigned_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga35667e81bf08b9ace20f1290b27e4c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1f910591354f4ab24eb7dd3d1fa04e22"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga1f910591354f4ab24eb7dd3d1fa04e22">pgm_read_i24_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga1f910591354f4ab24eb7dd3d1fa04e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3feb4534b407e8a9e02e85e3caab8ee3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga3feb4534b407e8a9e02e85e3caab8ee3">pgm_read_u24_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga3feb4534b407e8a9e02e85e3caab8ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae68fbf482aa4baebb72ff144e6c1b290"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae68fbf482aa4baebb72ff144e6c1b290">pgm_read_u32_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gae68fbf482aa4baebb72ff144e6c1b290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaacce3683685715e54531c62d79766242"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaacce3683685715e54531c62d79766242">pgm_read_i32_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gaacce3683685715e54531c62d79766242"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga399f63ced0fdf1a31979c6a9ffd49cbf"><td class="memItemLeft" align="right" valign="top">static long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga399f63ced0fdf1a31979c6a9ffd49cbf">pgm_read_long_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga399f63ced0fdf1a31979c6a9ffd49cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb9b2f07fdcfc9a046b6d8cdc59ba1f6"><td class="memItemLeft" align="right" valign="top">static unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gabb9b2f07fdcfc9a046b6d8cdc59ba1f6">pgm_read_unsigned_long_long_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gabb9b2f07fdcfc9a046b6d8cdc59ba1f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9049ea7c08b26e4db3ae7c8af9b87158"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga9049ea7c08b26e4db3ae7c8af9b87158">pgm_read_u64_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga9049ea7c08b26e4db3ae7c8af9b87158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1edc26d633a2cd8d9bb9b74f4bcf53bf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga1edc26d633a2cd8d9bb9b74f4bcf53bf">pgm_read_i64_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga1edc26d633a2cd8d9bb9b74f4bcf53bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5c2d01a01e2e813a51be914ab41da78e"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5c2d01a01e2e813a51be914ab41da78e">pgm_read_float_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga5c2d01a01e2e813a51be914ab41da78e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaff7b8f133008dfc3395b0e13e177d170"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaff7b8f133008dfc3395b0e13e177d170">pgm_read_double_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:gaff7b8f133008dfc3395b0e13e177d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9e2d2f6aa5d0abee045a84aad88eff1c"><td class="memItemLeft" align="right" valign="top">static long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga9e2d2f6aa5d0abee045a84aad88eff1c">pgm_read_long_double_far</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
+<tr class="separator:ga9e2d2f6aa5d0abee045a84aad88eff1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Functions with a PROGMEM argument</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>Similar to the functions from &lt;<a class="el" href="string_8h.html">string.h</a>&gt;, but with one string argument located in the lower 64 KiB segment of program memory.<br  />
+ For similar functions with address-space <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>, see <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a> </p>
+</td></tr>
+<tr class="memitem:gae2fb71ebed915074ec815d9d8f876c52"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae2fb71ebed915074ec815d9d8f876c52">strlen_P</a> (const char *s)</td></tr>
+<tr class="separator:gae2fb71ebed915074ec815d9d8f876c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga44f0b73a84e00da51ae135affc706b34"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga44f0b73a84e00da51ae135affc706b34">memchr_P</a> (const void *, int __val, size_t __len)</td></tr>
 <tr class="separator:ga44f0b73a84e00da51ae135affc706b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad6ef1bae7b79248b407bd5386144f5a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaad6ef1bae7b79248b407bd5386144f5a">memcmp_P</a> (const void *, const void *, size_t)</td></tr>
@@ -317,6 +276,11 @@ Functions</h2></td></tr>
 <tr class="separator:ga9c3f78c82b898b95834b7f1d695eb95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga48e69ae320350218ad89b18f01df120d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga48e69ae320350218ad89b18f01df120d">strtok_rP</a> (char *__s, const char *__delim, char **__last)</td></tr>
 <tr class="separator:ga48e69ae320350218ad89b18f01df120d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Functions with a PROGMEM_FAR argument</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>Similar to the functions from &lt;<a class="el" href="string_8h.html">string.h</a>&gt;, but with one string argument located in program memory.<br  />
+ For similar functions with address-space <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a>, see <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a> </p>
+</td></tr>
 <tr class="memitem:ga4ce249cbcdb9ff968c76a2d917072da9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga4ce249cbcdb9ff968c76a2d917072da9">strlen_PF</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> src)</td></tr>
 <tr class="separator:ga4ce249cbcdb9ff968c76a2d917072da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga80d8784b274a123972f1b99a4a0a6a0f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga80d8784b274a123972f1b99a4a0a6a0f">strnlen_PF</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> src, size_t len)</td></tr>
@@ -351,27 +315,73 @@ Functions</h2></td></tr>
 <tr class="separator:ga6674a08f95d5daedce3079b96be63008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6f94c167fb27d0969a08e21f664ec067"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga6f94c167fb27d0969a08e21f664ec067">memcmp_PF</a> (const void *, <a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>, size_t)</td></tr>
 <tr class="separator:ga6f94c167fb27d0969a08e21f664ec067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae2fb71ebed915074ec815d9d8f876c52"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae2fb71ebed915074ec815d9d8f876c52">strlen_P</a> (const char *s)</td></tr>
-<tr class="separator:gae2fb71ebed915074ec815d9d8f876c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Templates</h2></td></tr>
 <tr class="memitem:ga4b5aef1b070b61c565d3576482c20c6f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga4b5aef1b070b61c565d3576482c20c6f"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga4b5aef1b070b61c565d3576482c20c6f">pgm_read&lt; T &gt;</a> (const T *addr)</td></tr>
 <tr class="separator:ga4b5aef1b070b61c565d3576482c20c6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9533143f6be341f476071a8523470a44"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga9533143f6be341f476071a8523470a44"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga9533143f6be341f476071a8523470a44">pgm_read_far&lt; T &gt;</a> (<a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr)</td></tr>
 <tr class="separator:ga9533143f6be341f476071a8523470a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Macros</h2></td></tr>
+<tr class="memitem:gae59d3b5091405672ec394d3903ee60c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a>&#160;&#160;&#160;__attribute__((__section__(&quot;.progmemx.data&quot;)))</td></tr>
+<tr class="separator:gae59d3b5091405672ec394d3903ee60c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga75acaba9e781937468d0911423bc0c35"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>&#160;&#160;&#160;__attribute__((__progmem__))</td></tr>
+<tr class="separator:ga75acaba9e781937468d0911423bc0c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73809107539df84eaf01f6a4dea4fbff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a>(str)&#160;&#160;&#160;({ static const <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> char c[] = (str); &amp;c[0]; })</td></tr>
+<tr class="separator:ga73809107539df84eaf01f6a4dea4fbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga22972d0aa51e8b8dd64ce1a2b9c78edb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga22972d0aa51e8b8dd64ce1a2b9c78edb">PSTR_FAR</a>(str)&#160;&#160;&#160;({ static const <a class="el" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a> char c[] = (str); <a class="el" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a>(c[0]); })</td></tr>
+<tr class="separator:ga22972d0aa51e8b8dd64ce1a2b9c78edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ddf0e398bde8078aa9395ac77c83f0a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a>(var)</td></tr>
+<tr class="separator:ga8ddf0e398bde8078aa9395ac77c83f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Macros reading from PROGMEM</h2></td></tr>
+<tr class="memitem:ga296eb4a3e03c26b13e6207ccd15dcb1e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga296eb4a3e03c26b13e6207ccd15dcb1e">pgm_read_byte_near</a>(__addr)&#160;&#160;&#160;__LPM ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
+<tr class="separator:ga296eb4a3e03c26b13e6207ccd15dcb1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5a46ba5b6638df8c254964424f10c0fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5a46ba5b6638df8c254964424f10c0fb">pgm_read_word_near</a>(__addr)&#160;&#160;&#160;__LPM_word ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
+<tr class="separator:ga5a46ba5b6638df8c254964424f10c0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga289488b882ba92d0364a9bf65f5dc472"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga289488b882ba92d0364a9bf65f5dc472">pgm_read_dword_near</a>(__addr)&#160;&#160;&#160;    __LPM_dword ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
+<tr class="separator:ga289488b882ba92d0364a9bf65f5dc472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga22f9d07729cb6af716ec449a129756c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga22f9d07729cb6af716ec449a129756c3">pgm_read_qword_near</a>(__addr)&#160;&#160;&#160;__LPM_qword ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr))</td></tr>
+<tr class="separator:ga22f9d07729cb6af716ec449a129756c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga93b33ee6ceaf1dd3ebcfa6f4c96f8b27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga93b33ee6ceaf1dd3ebcfa6f4c96f8b27">pgm_read_float_near</a>(addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#gac1554e0c81e26a0228a9e7f654d5366b">pgm_read_float</a> (addr)</td></tr>
+<tr class="separator:ga93b33ee6ceaf1dd3ebcfa6f4c96f8b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga59f916fc92569eed66b43f3b55286fdf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga59f916fc92569eed66b43f3b55286fdf">pgm_read_ptr_near</a>(__addr)&#160;&#160;&#160;    ((void*) __LPM_word ((<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)(__addr)))</td></tr>
+<tr class="separator:ga59f916fc92569eed66b43f3b55286fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae89a4ff0b5a887888fcf83c4701b310b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga296eb4a3e03c26b13e6207ccd15dcb1e">pgm_read_byte_near</a>(__addr)</td></tr>
+<tr class="separator:gae89a4ff0b5a887888fcf83c4701b310b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5336313575dfe47dd73f0847fcd21fed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5336313575dfe47dd73f0847fcd21fed">pgm_read_word</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga5a46ba5b6638df8c254964424f10c0fb">pgm_read_word_near</a>(__addr)</td></tr>
+<tr class="separator:ga5336313575dfe47dd73f0847fcd21fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7d4e9a766022085445c2d5c7f83606c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga7d4e9a766022085445c2d5c7f83606c8">pgm_read_dword</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga289488b882ba92d0364a9bf65f5dc472">pgm_read_dword_near</a>(__addr)</td></tr>
+<tr class="separator:ga7d4e9a766022085445c2d5c7f83606c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4a8ba8129bb0d60d76e04e003bbcf6c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga4a8ba8129bb0d60d76e04e003bbcf6c5">pgm_read_qword</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga22f9d07729cb6af716ec449a129756c3">pgm_read_qword_near</a>(__addr)</td></tr>
+<tr class="separator:ga4a8ba8129bb0d60d76e04e003bbcf6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a>(__addr)&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga59f916fc92569eed66b43f3b55286fdf">pgm_read_ptr_near</a>(__addr)</td></tr>
+<tr class="separator:ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Macros reading from PROGMEM_FAR</h2></td></tr>
+<tr class="memitem:ga7e89771ca773d9a2eb7bd1696a23af8d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga7e89771ca773d9a2eb7bd1696a23af8d">pgm_read_byte_far</a>(__addr)&#160;&#160;&#160;__ELPM (__addr)</td></tr>
+<tr class="separator:ga7e89771ca773d9a2eb7bd1696a23af8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa77cd8c6f7c2a4c32c62b69463009700"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#gaa77cd8c6f7c2a4c32c62b69463009700">pgm_read_word_far</a>(__addr)&#160;&#160;&#160;__ELPM_word (__addr)</td></tr>
+<tr class="separator:gaa77cd8c6f7c2a4c32c62b69463009700"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2ce625d37bbc5280d7cd316e8b273a4d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga2ce625d37bbc5280d7cd316e8b273a4d">pgm_read_dword_far</a>(__addr)&#160;&#160;&#160;__ELPM_dword (__addr)</td></tr>
+<tr class="separator:ga2ce625d37bbc5280d7cd316e8b273a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8f304a81b2123b85026c72960c81c51c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga8f304a81b2123b85026c72960c81c51c">pgm_read_qword_far</a>(__addr)&#160;&#160;&#160;__ELPM_qword (__addr)</td></tr>
+<tr class="separator:ga8f304a81b2123b85026c72960c81c51c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5d88a95758ece5f8805cf7c2d04b03cf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__pgmspace.html#ga5d88a95758ece5f8805cf7c2d04b03cf">pgm_read_ptr_far</a>(__addr)&#160;&#160;&#160;((void*) __ELPM_word (__addr))</td></tr>
+<tr class="separator:ga5d88a95758ece5f8805cf7c2d04b03cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
-<div class="ttc" id="aio_8h_html"><div class="ttname"><a href="io_8h.html">io.h</a></div></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
 <div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
 </div><!-- fragment --><p>The functions in this module provide interfaces for a program to access data stored in program space (flash memory) of the device.<br  />
- For a different approach using named address-spaces like <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>, see <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a>.</p>
+ For a different approach using named address-spaces like <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>, see <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a>. For functions to read fixed-point values from program memory, see <a class="el" href="group__avr__stdfix.html">&lt;stdfix.h&gt;</a>.</p>
 <dl class="section note"><dt>Note</dt><dd>These functions are an attempt to provide some compatibility with header files that come with IAR C, to make porting applications between different compilers easier. This is not 100% compatibility though.</dd>
 <dd>
 If you are working with strings which are completely based in RAM, use the standard string functions described in <a class="el" href="group__avr__string.html">&lt;string.h&gt;: Strings</a>.</dd>
 <dd>
-If possible, put your constant tables in the lower 64 KiB and use <a class="el" href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte</a>, <a class="el" href="group__avr__pgmspace.html#ga31fde89bb6d08399d0469dfc9244187b">pgm_read_char</a> or <a class="el" href="group__avr__pgmspace.html#gaaa510d505ef6b91d32b6d877cbf28624">pgm_read_u8</a> etc. instead of <a class="el" href="group__avr__pgmspace.html#ga7e89771ca773d9a2eb7bd1696a23af8d">pgm_read_byte_far</a> since it is more efficient that way, and you can still use the upper 64 KiB for executable code. All functions that are suffixed with a <code>_P</code> <em>require</em> their arguments to be in the lower 64 KiB of the flash ROM, as they do not use <code>ELPM</code> instructions. This is normally not a big concern as the linker setup arranges any program space constants declared using <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> to be placed right after the interrupt vectors, and in front of any executable code. However, it can become a problem if there are too many of these constants, or for bootloaders on devices with more than 64 KiB of ROM. <em>All these functions will not work in that situation.</em></dd>
+If possible, put your constant tables in the lower 64 KiB and use <a class="el" href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte</a>, <a class="el" href="group__avr__pgmspace.html#ga9e71104956e1361499586162104975e7">pgm_read_char</a> or <a class="el" href="group__avr__pgmspace.html#gac0f2d3ec622fe7155367c2c1d505124c">pgm_read_u8</a> etc. instead of <a class="el" href="group__avr__pgmspace.html#ga7e89771ca773d9a2eb7bd1696a23af8d">pgm_read_byte_far</a> since it is more efficient that way, and you can still use the upper 64 KiB for executable code. All functions that are suffixed with a <code>_P</code> <em>require</em> their arguments to be in the lower 64 KiB of the flash ROM, as they do not use <code>ELPM</code> instructions. This is normally not a big concern as the linker setup arranges any program space constants declared using <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> to be placed right after the interrupt vectors, and in front of any executable code. However, it can become a problem if there are too many of these constants, or for bootloaders on devices with more than 64 KiB of ROM. <em>All these functions will not work in that situation.</em></dd>
 <dd>
 For <b>Xmega</b> devices, make sure the NVM controller command register (<code>NVM.CMD</code> or <code>NVM_CMD</code>) is set to 0x00 (NOP) before using any of these functions. </dd></dl>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -399,13 +409,13 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
 <div class="line"><span class="keywordtype">int</span> get_data (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> idx)</div>
 <div class="line">{</div>
 <div class="line">    <a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> pdata = <a class="code hl_define" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a> (data[0]);</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="group__avr__pgmspace.html#gab8873f0cfca49b15e1a0588c6f1dfeec">pgm_read_int_far</a> (pdata + idx * <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="group__avr__pgmspace.html#ga648b8a8d347731d6fef81929255a04c6">pgm_read_int_far</a> (pdata + idx * <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__inttypes_html_ga72b6692e3f3123903c1a0d9a960c59b1"><div class="ttname"><a href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a></div><div class="ttdeci">uint32_t uint_farptr_t</div><div class="ttdef"><b>Definition:</b> inttypes.h:124</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:973</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_gab8873f0cfca49b15e1a0588c6f1dfeec"><div class="ttname"><a href="group__avr__pgmspace.html#gab8873f0cfca49b15e1a0588c6f1dfeec">pgm_read_int_far</a></div><div class="ttdeci">static int pgm_read_int_far(uint_farptr_t addr)</div></div>
+<div class="ttc" id="agroup__avr__inttypes_html_ga72b6692e3f3123903c1a0d9a960c59b1"><div class="ttname"><a href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a></div><div class="ttdeci">uint32_t uint_farptr_t</div><div class="ttdef"><b>Definition:</b> inttypes.h:83</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga648b8a8d347731d6fef81929255a04c6"><div class="ttname"><a href="group__avr__pgmspace.html#ga648b8a8d347731d6fef81929255a04c6">pgm_read_int_far</a></div><div class="ttdeci">static int pgm_read_int_far(uint_farptr_t addr)</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:926</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gae59d3b5091405672ec394d3903ee60c5"><div class="ttname"><a href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a></div><div class="ttdeci">#define PROGMEM_FAR</div><div class="ttdef"><b>Definition:</b> pgmspace.h:119</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:81</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 </div><!-- fragment --><p>Comments:</p>
 <ul>
 <li>The overhead is minimal and it's mainly due to the 32-bit size operation.</li>
@@ -430,7 +440,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a byte from the program space with a 16-bit (near) nyte-address. </p>
+<p>Read a byte from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -449,7 +459,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a byte from the program space with a 32-bit (far) byte-address. </p>
+<p>Read a byte from the program space with a 32-bit (far) address. </p>
 
 </div>
 </div>
@@ -468,7 +478,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a byte from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a byte from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -487,7 +497,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a double word from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a double word from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -506,7 +516,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a double word from the program space with a 32-bit (far) byte-address. </p>
+<p>Read a double word from the program space with a 32-bit (far) address. </p>
 
 </div>
 </div>
@@ -525,7 +535,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a double word from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a double word from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -540,11 +550,11 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">addr</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#ga91e512f5d577a041714fe01edfa80667">pgm_read_float</a> (addr)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="group__avr__pgmspace.html#gac1554e0c81e26a0228a9e7f654d5366b">pgm_read_float</a> (addr)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a <code>float</code> from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a <code>float</code> from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -563,7 +573,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a pointer from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a pointer from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -582,7 +592,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a pointer from the program space with a 32-bit (far) byte-address. </p>
+<p>Read a pointer from the program space with a 32-bit (far) address. </p>
 
 </div>
 </div>
@@ -601,7 +611,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a pointer from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a pointer from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -620,7 +630,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a quad-word from the program space with a 16-bit (near) byte-address. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a quad-word from the program space with a 16-bit address. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
@@ -639,7 +649,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a quad-word from the program space with a 32-bit (far) byte-address. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a quad-word from the program space with a 32-bit (far) address. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
@@ -658,7 +668,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a quad-word from the program space with a 16-bit (near) byte-address. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a quad-word from the program space with a 16-bit address. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
@@ -677,7 +687,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a word from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a word from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -696,7 +706,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a word from the program space with a 32-bit (far) byte-address. </p>
+<p>Read a word from the program space with a 32-bit (far) address. </p>
 
 </div>
 </div>
@@ -715,7 +725,7 @@ For <b>Xmega</b> devices, make sure the NVM controller command register (<code>N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a word from the program space with a 16-bit (near) byte-address. </p>
+<p>Read a word from the program space with a 16-bit address. </p>
 
 </div>
 </div>
@@ -1133,8 +1143,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ga31fde89bb6d08399d0469dfc9244187b" name="ga31fde89bb6d08399d0469dfc9244187b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31fde89bb6d08399d0469dfc9244187b">&#9670;&#160;</a></span>pgm_read_char()</h2>
+<a id="ga9e71104956e1361499586162104975e7" name="ga9e71104956e1361499586162104975e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9e71104956e1361499586162104975e7">&#9670;&#160;</a></span>pgm_read_char()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1143,7 +1153,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char pgm_read_char </td>
+          <td class="memname">static char pgm_read_char </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1156,12 +1166,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>char</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>char</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gacb5d8e590404c75eac6ec9efc1bae865" name="gacb5d8e590404c75eac6ec9efc1bae865"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacb5d8e590404c75eac6ec9efc1bae865">&#9670;&#160;</a></span>pgm_read_char_far()</h2>
+<a id="gaf66de898636297d393e6fe63fd6313d4" name="gaf66de898636297d393e6fe63fd6313d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf66de898636297d393e6fe63fd6313d4">&#9670;&#160;</a></span>pgm_read_char_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1170,7 +1180,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char pgm_read_char_far </td>
+          <td class="memname">static char pgm_read_char_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1183,12 +1193,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>char</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>char</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga28c1eabd613be071d371eff7c11f1dc4" name="ga28c1eabd613be071d371eff7c11f1dc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga28c1eabd613be071d371eff7c11f1dc4">&#9670;&#160;</a></span>pgm_read_double()</h2>
+<a id="ga39b7df5678d0988d99dd15d3eb646e50" name="ga39b7df5678d0988d99dd15d3eb646e50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga39b7df5678d0988d99dd15d3eb646e50">&#9670;&#160;</a></span>pgm_read_double()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1197,7 +1207,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double pgm_read_double </td>
+          <td class="memname">static double pgm_read_double </td>
           <td>(</td>
           <td class="paramtype">const double *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1210,12 +1220,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>double</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>double</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga67ad7392ef85ae9ca11d2d127ca84ab8" name="ga67ad7392ef85ae9ca11d2d127ca84ab8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga67ad7392ef85ae9ca11d2d127ca84ab8">&#9670;&#160;</a></span>pgm_read_double_far()</h2>
+<a id="gaff7b8f133008dfc3395b0e13e177d170" name="gaff7b8f133008dfc3395b0e13e177d170"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaff7b8f133008dfc3395b0e13e177d170">&#9670;&#160;</a></span>pgm_read_double_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1224,7 +1234,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double pgm_read_double_far </td>
+          <td class="memname">static double pgm_read_double_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1237,7 +1247,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>double</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>double</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
@@ -1262,8 +1272,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ga91e512f5d577a041714fe01edfa80667" name="ga91e512f5d577a041714fe01edfa80667"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga91e512f5d577a041714fe01edfa80667">&#9670;&#160;</a></span>pgm_read_float()</h2>
+<a id="gac1554e0c81e26a0228a9e7f654d5366b" name="gac1554e0c81e26a0228a9e7f654d5366b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1554e0c81e26a0228a9e7f654d5366b">&#9670;&#160;</a></span>pgm_read_float()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1272,7 +1282,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float pgm_read_float </td>
+          <td class="memname">static float pgm_read_float </td>
           <td>(</td>
           <td class="paramtype">const float *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1285,12 +1295,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>float</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p>
+<p>Read a <code>float</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p>
 
 </div>
 </div>
-<a id="ga2316f28ca5f2a5c9e0e69a33912ae07e" name="ga2316f28ca5f2a5c9e0e69a33912ae07e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2316f28ca5f2a5c9e0e69a33912ae07e">&#9670;&#160;</a></span>pgm_read_float_far()</h2>
+<a id="ga5c2d01a01e2e813a51be914ab41da78e" name="ga5c2d01a01e2e813a51be914ab41da78e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5c2d01a01e2e813a51be914ab41da78e">&#9670;&#160;</a></span>pgm_read_float_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1299,7 +1309,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float pgm_read_float_far </td>
+          <td class="memname">static float pgm_read_float_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1312,12 +1322,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>float</code> from far byte-address <code>addr</code>. The address is in the program memory. </p>
+<p>Read a <code>float</code> from far address <code>addr</code>. The address is in the program memory. </p>
 
 </div>
 </div>
-<a id="ga0f761afc90dc401fce4850cef98973eb" name="ga0f761afc90dc401fce4850cef98973eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0f761afc90dc401fce4850cef98973eb">&#9670;&#160;</a></span>pgm_read_i16()</h2>
+<a id="gadef6c7ead381160127a277ef8db6f6c0" name="gadef6c7ead381160127a277ef8db6f6c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadef6c7ead381160127a277ef8db6f6c0">&#9670;&#160;</a></span>pgm_read_i16()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1326,7 +1336,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> pgm_read_i16 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> pgm_read_i16 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1339,12 +1349,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int16_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int16_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga5b28baf178d197f677cc8281d3eea166" name="ga5b28baf178d197f677cc8281d3eea166"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5b28baf178d197f677cc8281d3eea166">&#9670;&#160;</a></span>pgm_read_i16_far()</h2>
+<a id="ga5aa244d61d2f760e5c5f9c09f9c1d0ac" name="ga5aa244d61d2f760e5c5f9c09f9c1d0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5aa244d61d2f760e5c5f9c09f9c1d0ac">&#9670;&#160;</a></span>pgm_read_i16_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1353,7 +1363,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> pgm_read_i16_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> pgm_read_i16_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1366,12 +1376,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int16_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int16_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gaaf7d9859ffdf0494e6122803aa870d0c" name="gaaf7d9859ffdf0494e6122803aa870d0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaf7d9859ffdf0494e6122803aa870d0c">&#9670;&#160;</a></span>pgm_read_i24()</h2>
+<a id="gabb706ee4649add114a1f92807dbd8f77" name="gabb706ee4649add114a1f92807dbd8f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabb706ee4649add114a1f92807dbd8f77">&#9670;&#160;</a></span>pgm_read_i24()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1380,9 +1390,9 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">__int24 pgm_read_i24 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> pgm_read_i24 </td>
           <td>(</td>
-          <td class="paramtype">const __int24 *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1393,12 +1403,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>__int24</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code><a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a></code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga4b0924878f2ef36e8b44668dc424f5b1" name="ga4b0924878f2ef36e8b44668dc424f5b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4b0924878f2ef36e8b44668dc424f5b1">&#9670;&#160;</a></span>pgm_read_i24_far()</h2>
+<a id="ga1f910591354f4ab24eb7dd3d1fa04e22" name="ga1f910591354f4ab24eb7dd3d1fa04e22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1f910591354f4ab24eb7dd3d1fa04e22">&#9670;&#160;</a></span>pgm_read_i24_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1407,7 +1417,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">__int24 pgm_read_i24_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> pgm_read_i24_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1420,12 +1430,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>__int24</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code><a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a></code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gaec21acc32b0245980953e08296e9963c" name="gaec21acc32b0245980953e08296e9963c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaec21acc32b0245980953e08296e9963c">&#9670;&#160;</a></span>pgm_read_i32()</h2>
+<a id="gafa80195618e042cc0bd955893445f371" name="gafa80195618e042cc0bd955893445f371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa80195618e042cc0bd955893445f371">&#9670;&#160;</a></span>pgm_read_i32()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1434,7 +1444,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> pgm_read_i32 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> pgm_read_i32 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1447,12 +1457,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int32_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int32_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga5819b738b3713b203a8f7d0a272d2b00" name="ga5819b738b3713b203a8f7d0a272d2b00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5819b738b3713b203a8f7d0a272d2b00">&#9670;&#160;</a></span>pgm_read_i32_far()</h2>
+<a id="gaacce3683685715e54531c62d79766242" name="gaacce3683685715e54531c62d79766242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaacce3683685715e54531c62d79766242">&#9670;&#160;</a></span>pgm_read_i32_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1461,7 +1471,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> pgm_read_i32_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> pgm_read_i32_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1474,12 +1484,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int32_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int32_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga69db6479254cd1b3a9a9fa8bf7e66f42" name="ga69db6479254cd1b3a9a9fa8bf7e66f42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga69db6479254cd1b3a9a9fa8bf7e66f42">&#9670;&#160;</a></span>pgm_read_i64()</h2>
+<a id="gaf2fc4c6cc44764d8709b9c81cedeb8c7" name="gaf2fc4c6cc44764d8709b9c81cedeb8c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf2fc4c6cc44764d8709b9c81cedeb8c7">&#9670;&#160;</a></span>pgm_read_i64()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1488,7 +1498,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> pgm_read_i64 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> pgm_read_i64 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1501,12 +1511,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int64_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int64_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga378f587a486568b253fa72b267501ada" name="ga378f587a486568b253fa72b267501ada"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga378f587a486568b253fa72b267501ada">&#9670;&#160;</a></span>pgm_read_i64_far()</h2>
+<a id="ga1edc26d633a2cd8d9bb9b74f4bcf53bf" name="ga1edc26d633a2cd8d9bb9b74f4bcf53bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1edc26d633a2cd8d9bb9b74f4bcf53bf">&#9670;&#160;</a></span>pgm_read_i64_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1515,7 +1525,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> pgm_read_i64_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> pgm_read_i64_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1528,12 +1538,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int64_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int64_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga7c620c9696b7b520208c4fa9798c2aa5" name="ga7c620c9696b7b520208c4fa9798c2aa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7c620c9696b7b520208c4fa9798c2aa5">&#9670;&#160;</a></span>pgm_read_i8()</h2>
+<a id="ga54669f72dee495a8980dea41bb7ebf33" name="ga54669f72dee495a8980dea41bb7ebf33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54669f72dee495a8980dea41bb7ebf33">&#9670;&#160;</a></span>pgm_read_i8()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1542,7 +1552,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> pgm_read_i8 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> pgm_read_i8 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1555,12 +1565,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int8_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int8_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gacd143f111506c4ef7135d7c559c14210" name="gacd143f111506c4ef7135d7c559c14210"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacd143f111506c4ef7135d7c559c14210">&#9670;&#160;</a></span>pgm_read_i8_far()</h2>
+<a id="ga24c3d1ab9033dd39b28a7f5c704300b3" name="ga24c3d1ab9033dd39b28a7f5c704300b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga24c3d1ab9033dd39b28a7f5c704300b3">&#9670;&#160;</a></span>pgm_read_i8_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1569,7 +1579,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> pgm_read_i8_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> pgm_read_i8_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1582,12 +1592,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int8_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int8_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga84834d8da9988d3199b99117f20cd197" name="ga84834d8da9988d3199b99117f20cd197"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga84834d8da9988d3199b99117f20cd197">&#9670;&#160;</a></span>pgm_read_int()</h2>
+<a id="ga1e1f0c76e5c9d3e02684c55e93b31cac" name="ga1e1f0c76e5c9d3e02684c55e93b31cac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1e1f0c76e5c9d3e02684c55e93b31cac">&#9670;&#160;</a></span>pgm_read_int()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1596,7 +1606,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int pgm_read_int </td>
+          <td class="memname">static int pgm_read_int </td>
           <td>(</td>
           <td class="paramtype">const int *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1609,12 +1619,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gab8873f0cfca49b15e1a0588c6f1dfeec" name="gab8873f0cfca49b15e1a0588c6f1dfeec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab8873f0cfca49b15e1a0588c6f1dfeec">&#9670;&#160;</a></span>pgm_read_int_far()</h2>
+<a id="ga648b8a8d347731d6fef81929255a04c6" name="ga648b8a8d347731d6fef81929255a04c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga648b8a8d347731d6fef81929255a04c6">&#9670;&#160;</a></span>pgm_read_int_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1623,7 +1633,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int pgm_read_int_far </td>
+          <td class="memname">static int pgm_read_int_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1636,12 +1646,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>int</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>int</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga329dbb96dd7281e92b04c42ddf8a17f4" name="ga329dbb96dd7281e92b04c42ddf8a17f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga329dbb96dd7281e92b04c42ddf8a17f4">&#9670;&#160;</a></span>pgm_read_long()</h2>
+<a id="ga719e61f7998b764ad31b02bbaeb59f1b" name="ga719e61f7998b764ad31b02bbaeb59f1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga719e61f7998b764ad31b02bbaeb59f1b">&#9670;&#160;</a></span>pgm_read_long()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1650,7 +1660,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long pgm_read_long </td>
+          <td class="memname">static long pgm_read_long </td>
           <td>(</td>
           <td class="paramtype">const long *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1663,12 +1673,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>long</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>long</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gaea5ced6e2c58f379c61b6a8ac4059d90" name="gaea5ced6e2c58f379c61b6a8ac4059d90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaea5ced6e2c58f379c61b6a8ac4059d90">&#9670;&#160;</a></span>pgm_read_long_double()</h2>
+<a id="gab389e7d13faba605dc409be779d0882b" name="gab389e7d13faba605dc409be779d0882b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab389e7d13faba605dc409be779d0882b">&#9670;&#160;</a></span>pgm_read_long_double()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1677,7 +1687,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long double pgm_read_long_double </td>
+          <td class="memname">static long double pgm_read_long_double </td>
           <td>(</td>
           <td class="paramtype">const long double *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1690,12 +1700,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>long double</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>long double</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga601f6d30b1be9d2d8efce3fabd01cafe" name="ga601f6d30b1be9d2d8efce3fabd01cafe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga601f6d30b1be9d2d8efce3fabd01cafe">&#9670;&#160;</a></span>pgm_read_long_double_far()</h2>
+<a id="ga9e2d2f6aa5d0abee045a84aad88eff1c" name="ga9e2d2f6aa5d0abee045a84aad88eff1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9e2d2f6aa5d0abee045a84aad88eff1c">&#9670;&#160;</a></span>pgm_read_long_double_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1704,7 +1714,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long double pgm_read_long_double_far </td>
+          <td class="memname">static long double pgm_read_long_double_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1717,12 +1727,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>long double</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>long double</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gaf6d4ea30196e004dedc0a6fafd3378ce" name="gaf6d4ea30196e004dedc0a6fafd3378ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf6d4ea30196e004dedc0a6fafd3378ce">&#9670;&#160;</a></span>pgm_read_long_far()</h2>
+<a id="gae1b69ad065e72ab66b41b15d290d91ad" name="gae1b69ad065e72ab66b41b15d290d91ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae1b69ad065e72ab66b41b15d290d91ad">&#9670;&#160;</a></span>pgm_read_long_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1731,7 +1741,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long pgm_read_long_far </td>
+          <td class="memname">static long pgm_read_long_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1744,12 +1754,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>long</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>long</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga8808ddfed7258ee83a27dfceb4707744" name="ga8808ddfed7258ee83a27dfceb4707744"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8808ddfed7258ee83a27dfceb4707744">&#9670;&#160;</a></span>pgm_read_long_long()</h2>
+<a id="ga291547f4b4e7f89decda2a9cc932c663" name="ga291547f4b4e7f89decda2a9cc932c663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga291547f4b4e7f89decda2a9cc932c663">&#9670;&#160;</a></span>pgm_read_long_long()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1758,7 +1768,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long long pgm_read_long_long </td>
+          <td class="memname">static long long pgm_read_long_long </td>
           <td>(</td>
           <td class="paramtype">const long long *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1771,12 +1781,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>long long</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>long long</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gabe1601c8b0e2acd6a9ea18669eb433bb" name="gabe1601c8b0e2acd6a9ea18669eb433bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabe1601c8b0e2acd6a9ea18669eb433bb">&#9670;&#160;</a></span>pgm_read_long_long_far()</h2>
+<a id="ga399f63ced0fdf1a31979c6a9ffd49cbf" name="ga399f63ced0fdf1a31979c6a9ffd49cbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga399f63ced0fdf1a31979c6a9ffd49cbf">&#9670;&#160;</a></span>pgm_read_long_long_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1785,7 +1795,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long long pgm_read_long_long_far </td>
+          <td class="memname">static long long pgm_read_long_long_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1798,12 +1808,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>long long</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>long long</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga2146a772a87a08ddec36d9b24cdf33e0" name="ga2146a772a87a08ddec36d9b24cdf33e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2146a772a87a08ddec36d9b24cdf33e0">&#9670;&#160;</a></span>pgm_read_short()</h2>
+<a id="ga80639810e38e06f55345f059ff4f5db5" name="ga80639810e38e06f55345f059ff4f5db5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga80639810e38e06f55345f059ff4f5db5">&#9670;&#160;</a></span>pgm_read_short()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1812,7 +1822,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">short pgm_read_short </td>
+          <td class="memname">static short pgm_read_short </td>
           <td>(</td>
           <td class="paramtype">const short *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1825,12 +1835,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>short</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>short</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gacd5f071b6cdc5ae3964178ebcb6e65d1" name="gacd5f071b6cdc5ae3964178ebcb6e65d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacd5f071b6cdc5ae3964178ebcb6e65d1">&#9670;&#160;</a></span>pgm_read_short_far()</h2>
+<a id="ga3c4fa8f76823710a44ebe107587e0fe4" name="ga3c4fa8f76823710a44ebe107587e0fe4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3c4fa8f76823710a44ebe107587e0fe4">&#9670;&#160;</a></span>pgm_read_short_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1839,7 +1849,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">short pgm_read_short_far </td>
+          <td class="memname">static short pgm_read_short_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1852,12 +1862,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>short</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>short</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga0f4647aab4b04e3d154159b74240e12b" name="ga0f4647aab4b04e3d154159b74240e12b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0f4647aab4b04e3d154159b74240e12b">&#9670;&#160;</a></span>pgm_read_signed()</h2>
+<a id="ga452da1b004e71380daf3427647d51495" name="ga452da1b004e71380daf3427647d51495"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga452da1b004e71380daf3427647d51495">&#9670;&#160;</a></span>pgm_read_signed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1866,7 +1876,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">signed pgm_read_signed </td>
+          <td class="memname">static signed pgm_read_signed </td>
           <td>(</td>
           <td class="paramtype">const signed *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1879,12 +1889,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>signed</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>signed</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gad8602e7dd2e084efb15bd39ceff67bf9" name="gad8602e7dd2e084efb15bd39ceff67bf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad8602e7dd2e084efb15bd39ceff67bf9">&#9670;&#160;</a></span>pgm_read_signed_char()</h2>
+<a id="gaebf21279eec6e3a1ff7d7138ddfd64f6" name="gaebf21279eec6e3a1ff7d7138ddfd64f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaebf21279eec6e3a1ff7d7138ddfd64f6">&#9670;&#160;</a></span>pgm_read_signed_char()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1893,7 +1903,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">signed char pgm_read_signed_char </td>
+          <td class="memname">static signed char pgm_read_signed_char </td>
           <td>(</td>
           <td class="paramtype">const signed char *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1906,12 +1916,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>signed char</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>signed char</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gaf097d6dbbbebb84a83ef795718800951" name="gaf097d6dbbbebb84a83ef795718800951"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf097d6dbbbebb84a83ef795718800951">&#9670;&#160;</a></span>pgm_read_signed_char_far()</h2>
+<a id="ga46d63b9b4c077ec69a8b5195de0dcf9f" name="ga46d63b9b4c077ec69a8b5195de0dcf9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga46d63b9b4c077ec69a8b5195de0dcf9f">&#9670;&#160;</a></span>pgm_read_signed_char_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1920,7 +1930,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">signed char pgm_read_signed_char_far </td>
+          <td class="memname">static signed char pgm_read_signed_char_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1933,12 +1943,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>signed char</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>signed char</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga60aea646649ca771c76307e8852219f0" name="ga60aea646649ca771c76307e8852219f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga60aea646649ca771c76307e8852219f0">&#9670;&#160;</a></span>pgm_read_signed_far()</h2>
+<a id="ga961050faea69c1ead94731dda5e6c20e" name="ga961050faea69c1ead94731dda5e6c20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga961050faea69c1ead94731dda5e6c20e">&#9670;&#160;</a></span>pgm_read_signed_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1947,7 +1957,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">signed pgm_read_signed_far </td>
+          <td class="memname">static signed pgm_read_signed_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1960,12 +1970,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>signed</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>signed</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga401f039b356e2ba6df89782c63baa759" name="ga401f039b356e2ba6df89782c63baa759"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga401f039b356e2ba6df89782c63baa759">&#9670;&#160;</a></span>pgm_read_signed_int()</h2>
+<a id="ga0840ee688cde7d1555133f567618e895" name="ga0840ee688cde7d1555133f567618e895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0840ee688cde7d1555133f567618e895">&#9670;&#160;</a></span>pgm_read_signed_int()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1974,7 +1984,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">signed int pgm_read_signed_int </td>
+          <td class="memname">static signed int pgm_read_signed_int </td>
           <td>(</td>
           <td class="paramtype">const signed int *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -1987,12 +1997,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>signed int</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>signed int</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gacec1cac0e60789b314ce9899c37f343d" name="gacec1cac0e60789b314ce9899c37f343d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacec1cac0e60789b314ce9899c37f343d">&#9670;&#160;</a></span>pgm_read_signed_int_far()</h2>
+<a id="gafd8634868b08b66a2291c19a519c3da4" name="gafd8634868b08b66a2291c19a519c3da4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafd8634868b08b66a2291c19a519c3da4">&#9670;&#160;</a></span>pgm_read_signed_int_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2001,7 +2011,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">signed int pgm_read_signed_int_far </td>
+          <td class="memname">static signed int pgm_read_signed_int_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2014,12 +2024,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read a <code>signed int</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read a <code>signed int</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gace9f54e4eb0c2f0d69479f4fe16d7373" name="gace9f54e4eb0c2f0d69479f4fe16d7373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gace9f54e4eb0c2f0d69479f4fe16d7373">&#9670;&#160;</a></span>pgm_read_u16()</h2>
+<a id="ga73ad80774f8b89e9bd69e1a5f4db6f94" name="ga73ad80774f8b89e9bd69e1a5f4db6f94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga73ad80774f8b89e9bd69e1a5f4db6f94">&#9670;&#160;</a></span>pgm_read_u16()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2028,7 +2038,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> pgm_read_u16 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> pgm_read_u16 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2041,12 +2051,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint16_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint16_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga61aca1303652deacc2e9f4e30960b16c" name="ga61aca1303652deacc2e9f4e30960b16c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga61aca1303652deacc2e9f4e30960b16c">&#9670;&#160;</a></span>pgm_read_u16_far()</h2>
+<a id="ga8ac83fad7eebe4a4527fc4ed7b453e51" name="ga8ac83fad7eebe4a4527fc4ed7b453e51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ac83fad7eebe4a4527fc4ed7b453e51">&#9670;&#160;</a></span>pgm_read_u16_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2055,7 +2065,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> pgm_read_u16_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> pgm_read_u16_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2068,12 +2078,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint16_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint16_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga4d12ec20548e8346d852ac0dc35becc0" name="ga4d12ec20548e8346d852ac0dc35becc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4d12ec20548e8346d852ac0dc35becc0">&#9670;&#160;</a></span>pgm_read_u24()</h2>
+<a id="ga0cd0a9945ec794653398da2392b2f6fe" name="ga0cd0a9945ec794653398da2392b2f6fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0cd0a9945ec794653398da2392b2f6fe">&#9670;&#160;</a></span>pgm_read_u24()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2082,9 +2092,9 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">__uint24 pgm_read_u24 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> pgm_read_u24 </td>
           <td>(</td>
-          <td class="paramtype">const __uint24 *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2095,12 +2105,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>__uint24</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code><a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a></code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gad5c49b40e637b623c111018cdc54f2d2" name="gad5c49b40e637b623c111018cdc54f2d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad5c49b40e637b623c111018cdc54f2d2">&#9670;&#160;</a></span>pgm_read_u24_far()</h2>
+<a id="ga3feb4534b407e8a9e02e85e3caab8ee3" name="ga3feb4534b407e8a9e02e85e3caab8ee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3feb4534b407e8a9e02e85e3caab8ee3">&#9670;&#160;</a></span>pgm_read_u24_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2109,7 +2119,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">__uint24 pgm_read_u24_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> pgm_read_u24_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2122,12 +2132,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>__uint24</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code><a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a></code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gac20aed5830150e2efb0d714b494cb288" name="gac20aed5830150e2efb0d714b494cb288"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac20aed5830150e2efb0d714b494cb288">&#9670;&#160;</a></span>pgm_read_u32()</h2>
+<a id="gafa2b121deb87ea5eb532425d68e0a1a1" name="gafa2b121deb87ea5eb532425d68e0a1a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa2b121deb87ea5eb532425d68e0a1a1">&#9670;&#160;</a></span>pgm_read_u32()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2136,7 +2146,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> pgm_read_u32 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> pgm_read_u32 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2149,12 +2159,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint32_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint32_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gabf7c50d5cacdc66881ee70e97b7f29e8" name="gabf7c50d5cacdc66881ee70e97b7f29e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabf7c50d5cacdc66881ee70e97b7f29e8">&#9670;&#160;</a></span>pgm_read_u32_far()</h2>
+<a id="gae68fbf482aa4baebb72ff144e6c1b290" name="gae68fbf482aa4baebb72ff144e6c1b290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae68fbf482aa4baebb72ff144e6c1b290">&#9670;&#160;</a></span>pgm_read_u32_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2163,7 +2173,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> pgm_read_u32_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> pgm_read_u32_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2176,12 +2186,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint32_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint32_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga266c87f35aa451f4e65c3757344e9d54" name="ga266c87f35aa451f4e65c3757344e9d54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga266c87f35aa451f4e65c3757344e9d54">&#9670;&#160;</a></span>pgm_read_u64()</h2>
+<a id="ga327b41edffa0f796b6f5ad592e5ee158" name="ga327b41edffa0f796b6f5ad592e5ee158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga327b41edffa0f796b6f5ad592e5ee158">&#9670;&#160;</a></span>pgm_read_u64()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2190,7 +2200,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> pgm_read_u64 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> pgm_read_u64 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2203,12 +2213,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint64_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint64_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga14b6087ac5f43a55bc8d830778e649ac" name="ga14b6087ac5f43a55bc8d830778e649ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga14b6087ac5f43a55bc8d830778e649ac">&#9670;&#160;</a></span>pgm_read_u64_far()</h2>
+<a id="ga9049ea7c08b26e4db3ae7c8af9b87158" name="ga9049ea7c08b26e4db3ae7c8af9b87158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9049ea7c08b26e4db3ae7c8af9b87158">&#9670;&#160;</a></span>pgm_read_u64_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2217,7 +2227,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> pgm_read_u64_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> pgm_read_u64_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2230,12 +2240,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint64_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint64_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gaaa510d505ef6b91d32b6d877cbf28624" name="gaaa510d505ef6b91d32b6d877cbf28624"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaa510d505ef6b91d32b6d877cbf28624">&#9670;&#160;</a></span>pgm_read_u8()</h2>
+<a id="gac0f2d3ec622fe7155367c2c1d505124c" name="gac0f2d3ec622fe7155367c2c1d505124c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac0f2d3ec622fe7155367c2c1d505124c">&#9670;&#160;</a></span>pgm_read_u8()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2244,7 +2254,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> pgm_read_u8 </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> pgm_read_u8 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2257,12 +2267,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint8_t</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint8_t</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga7fe97181cb0ed4a0bf9397a26586e696" name="ga7fe97181cb0ed4a0bf9397a26586e696"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7fe97181cb0ed4a0bf9397a26586e696">&#9670;&#160;</a></span>pgm_read_u8_far()</h2>
+<a id="ga4adbfc372bbc9901232847e91326684e" name="ga4adbfc372bbc9901232847e91326684e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4adbfc372bbc9901232847e91326684e">&#9670;&#160;</a></span>pgm_read_u8_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2271,7 +2281,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> pgm_read_u8_far </td>
+          <td class="memname">static <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> pgm_read_u8_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2284,12 +2294,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>uint8_t</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>uint8_t</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga5b7512e172929cec47945b73cc28b423" name="ga5b7512e172929cec47945b73cc28b423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5b7512e172929cec47945b73cc28b423">&#9670;&#160;</a></span>pgm_read_unsigned()</h2>
+<a id="ga55442c9657b93e284cb0998c39e8c1c2" name="ga55442c9657b93e284cb0998c39e8c1c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga55442c9657b93e284cb0998c39e8c1c2">&#9670;&#160;</a></span>pgm_read_unsigned()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2298,7 +2308,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned pgm_read_unsigned </td>
+          <td class="memname">static unsigned pgm_read_unsigned </td>
           <td>(</td>
           <td class="paramtype">const unsigned *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2311,12 +2321,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gacaa2ead776db14c9bebd65c96539f353" name="gacaa2ead776db14c9bebd65c96539f353"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacaa2ead776db14c9bebd65c96539f353">&#9670;&#160;</a></span>pgm_read_unsigned_char()</h2>
+<a id="ga200d1d22c378d3f6f3b6a6b1f0947cf6" name="ga200d1d22c378d3f6f3b6a6b1f0947cf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga200d1d22c378d3f6f3b6a6b1f0947cf6">&#9670;&#160;</a></span>pgm_read_unsigned_char()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2325,7 +2335,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char pgm_read_unsigned_char </td>
+          <td class="memname">static unsigned char pgm_read_unsigned_char </td>
           <td>(</td>
           <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2338,12 +2348,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned char</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned char</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga75abe6d0b06bb2f9846ca6f77b347a80" name="ga75abe6d0b06bb2f9846ca6f77b347a80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga75abe6d0b06bb2f9846ca6f77b347a80">&#9670;&#160;</a></span>pgm_read_unsigned_char_far()</h2>
+<a id="ga99530f9bed568c2f0936930b5e3ec1c4" name="ga99530f9bed568c2f0936930b5e3ec1c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga99530f9bed568c2f0936930b5e3ec1c4">&#9670;&#160;</a></span>pgm_read_unsigned_char_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2352,7 +2362,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char pgm_read_unsigned_char_far </td>
+          <td class="memname">static unsigned char pgm_read_unsigned_char_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2365,12 +2375,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned char</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned char</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gaab8ff0f301e1bb298ecaf34a15de5994" name="gaab8ff0f301e1bb298ecaf34a15de5994"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaab8ff0f301e1bb298ecaf34a15de5994">&#9670;&#160;</a></span>pgm_read_unsigned_far()</h2>
+<a id="gaa6538508e19643bb4fa4e64fe8404340" name="gaa6538508e19643bb4fa4e64fe8404340"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa6538508e19643bb4fa4e64fe8404340">&#9670;&#160;</a></span>pgm_read_unsigned_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2379,7 +2389,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned pgm_read_unsigned_far </td>
+          <td class="memname">static unsigned pgm_read_unsigned_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2392,12 +2402,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gadd1bf95f558f92288d0f4645be0850e0" name="gadd1bf95f558f92288d0f4645be0850e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gadd1bf95f558f92288d0f4645be0850e0">&#9670;&#160;</a></span>pgm_read_unsigned_int()</h2>
+<a id="ga5546e8616a8cef5898fd8b2bd9f520e4" name="ga5546e8616a8cef5898fd8b2bd9f520e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5546e8616a8cef5898fd8b2bd9f520e4">&#9670;&#160;</a></span>pgm_read_unsigned_int()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2406,7 +2416,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int pgm_read_unsigned_int </td>
+          <td class="memname">static unsigned int pgm_read_unsigned_int </td>
           <td>(</td>
           <td class="paramtype">const unsigned int *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2419,12 +2429,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned int</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned int</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga6553db2f08b513377f1539a38f54ac32" name="ga6553db2f08b513377f1539a38f54ac32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6553db2f08b513377f1539a38f54ac32">&#9670;&#160;</a></span>pgm_read_unsigned_int_far()</h2>
+<a id="gab9bd48e577d2fa44a74a43e7bbaa5213" name="gab9bd48e577d2fa44a74a43e7bbaa5213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab9bd48e577d2fa44a74a43e7bbaa5213">&#9670;&#160;</a></span>pgm_read_unsigned_int_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2433,7 +2443,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int pgm_read_unsigned_int_far </td>
+          <td class="memname">static unsigned int pgm_read_unsigned_int_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2446,12 +2456,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned int</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned int</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="gac20368b1c989d5e262b69f71cd162a9c" name="gac20368b1c989d5e262b69f71cd162a9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac20368b1c989d5e262b69f71cd162a9c">&#9670;&#160;</a></span>pgm_read_unsigned_long()</h2>
+<a id="ga1731885d100d3d92abffdbb175b1677b" name="ga1731885d100d3d92abffdbb175b1677b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1731885d100d3d92abffdbb175b1677b">&#9670;&#160;</a></span>pgm_read_unsigned_long()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2460,7 +2470,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long pgm_read_unsigned_long </td>
+          <td class="memname">static unsigned long pgm_read_unsigned_long </td>
           <td>(</td>
           <td class="paramtype">const unsigned long *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2473,12 +2483,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned long</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned long</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga10d918adc2ebef62a88fc8985e074cb3" name="ga10d918adc2ebef62a88fc8985e074cb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga10d918adc2ebef62a88fc8985e074cb3">&#9670;&#160;</a></span>pgm_read_unsigned_long_far()</h2>
+<a id="ga35667e81bf08b9ace20f1290b27e4c23" name="ga35667e81bf08b9ace20f1290b27e4c23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga35667e81bf08b9ace20f1290b27e4c23">&#9670;&#160;</a></span>pgm_read_unsigned_long_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2487,7 +2497,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long pgm_read_unsigned_long_far </td>
+          <td class="memname">static unsigned long pgm_read_unsigned_long_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2500,12 +2510,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned long</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned long</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga3ea9290bb730bf2de86dab8abe97009d" name="ga3ea9290bb730bf2de86dab8abe97009d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3ea9290bb730bf2de86dab8abe97009d">&#9670;&#160;</a></span>pgm_read_unsigned_long_long()</h2>
+<a id="gac083746fbbaac838ad46c3d39ce794be" name="gac083746fbbaac838ad46c3d39ce794be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac083746fbbaac838ad46c3d39ce794be">&#9670;&#160;</a></span>pgm_read_unsigned_long_long()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2514,7 +2524,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long long pgm_read_unsigned_long_long </td>
+          <td class="memname">static unsigned long long pgm_read_unsigned_long_long </td>
           <td>(</td>
           <td class="paramtype">const unsigned long long *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2527,12 +2537,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned long long</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned long long</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga59f1d57ed313917ff01618cc1bac0900" name="ga59f1d57ed313917ff01618cc1bac0900"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga59f1d57ed313917ff01618cc1bac0900">&#9670;&#160;</a></span>pgm_read_unsigned_long_long_far()</h2>
+<a id="gabb9b2f07fdcfc9a046b6d8cdc59ba1f6" name="gabb9b2f07fdcfc9a046b6d8cdc59ba1f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabb9b2f07fdcfc9a046b6d8cdc59ba1f6">&#9670;&#160;</a></span>pgm_read_unsigned_long_long_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2541,7 +2551,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long long pgm_read_unsigned_long_long_far </td>
+          <td class="memname">static unsigned long long pgm_read_unsigned_long_long_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2554,12 +2564,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned long long</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned long long</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga9417451d42f8ade83b85bd034be7048b" name="ga9417451d42f8ade83b85bd034be7048b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9417451d42f8ade83b85bd034be7048b">&#9670;&#160;</a></span>pgm_read_unsigned_short()</h2>
+<a id="gac1049e52d701a6197c1a953f357ef28e" name="gac1049e52d701a6197c1a953f357ef28e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1049e52d701a6197c1a953f357ef28e">&#9670;&#160;</a></span>pgm_read_unsigned_short()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2568,7 +2578,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned short pgm_read_unsigned_short </td>
+          <td class="memname">static unsigned short pgm_read_unsigned_short </td>
           <td>(</td>
           <td class="paramtype">const unsigned short *&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2581,12 +2591,12 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned short</code> from 16-bit (near) byte-address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned short</code> from 16-bit address <code>addr</code>. The address is in the lower 64 KiB of program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
-<a id="ga1911905b30dcfaf46a64605cc32a96a5" name="ga1911905b30dcfaf46a64605cc32a96a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1911905b30dcfaf46a64605cc32a96a5">&#9670;&#160;</a></span>pgm_read_unsigned_short_far()</h2>
+<a id="ga43bc8cae02edd632fc220dc53c9959e0" name="ga43bc8cae02edd632fc220dc53c9959e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga43bc8cae02edd632fc220dc53c9959e0">&#9670;&#160;</a></span>pgm_read_unsigned_short_far()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2595,7 +2605,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned short pgm_read_unsigned_short_far </td>
+          <td class="memname">static unsigned short pgm_read_unsigned_short_far </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a>&#160;</td>
           <td class="paramname"><em>addr</em></td><td>)</td>
@@ -2608,7 +2618,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an <code>unsigned short</code> from far byte-address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
+<p>Read an <code>unsigned short</code> from far address <code>addr</code>. The address is in the program memory. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.2 </dd></dl>
 
 </div>
 </div>
@@ -4028,7 +4038,7 @@ strlen(initial dst)). If retval &gt;= siz, truncation occurred. </dd></dl>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

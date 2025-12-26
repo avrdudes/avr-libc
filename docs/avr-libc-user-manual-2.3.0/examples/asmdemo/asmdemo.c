@@ -63,9 +63,9 @@ ioinit(void)
   /* Maximal PWM pulse width is 2120 us */
 # define MAX_PWM_VAL ((2120ul * F_CPU) / 1000000ul)
 
-#elif defined(__AVR_ATtiny25__) ||\
-	defined(__AVR_ATtiny45__) ||\
-	defined(__AVR_ATtiny85__)
+#elif defined(__AVR_ATtiny25__) \
+      || defined(__AVR_ATtiny45__) \
+      || defined(__AVR_ATtiny85__)
 
 # define F_CPU 1000000ul
   /*
@@ -91,9 +91,10 @@ ioinit(void)
   sei();
 }
 
-#if defined(__AVR_ATtiny25__) ||\
-	defined(__AVR_ATtiny45__) ||\
-	defined(__AVR_ATtiny85__)
+#if defined(__AVR_ATtiny25__) \
+    || defined(__AVR_ATtiny45__) \
+    || defined(__AVR_ATtiny85__)
+
 ISR(PCINT0_vect)
 {
   uint8_t tcnt1;
@@ -119,7 +120,6 @@ ISR(PCINT0_vect)
 int
 main(void)
 {
-
   ioinit();
 
   for (;;)

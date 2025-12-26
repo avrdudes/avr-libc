@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['how_20to_20build_20a_20library_0',['How to Build a Library',['../library.html',1,'']]]
+  ['inline_20assembler_20cookbook_0',['Inline Assembler Cookbook',['../inline_asm.html',1,'']]]
 ];

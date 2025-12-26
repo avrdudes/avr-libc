@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -105,6 +104,8 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:gae7515dc39b1de053e6ea9ef6fc519b9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">set_sleep_mode</a> (<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> mode)</td></tr>
+<tr class="separator:gae7515dc39b1de053e6ea9ef6fc519b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga475174a7aa4eda03dfa7a4483e400a9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a> (void)</td></tr>
 <tr class="separator:ga475174a7aa4eda03dfa7a4483e400a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeae22433a78fd8d50f915fb68c416efd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a> (void)</td></tr>
@@ -117,7 +118,82 @@ Functions</h2></td></tr>
 <tr class="separator:gabf889562cc5ea768ee80cfc8a5bb0312"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<h2 class="groupheader">Function Documentation</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
+<div class="ttc" id="asleep_8h_html"><div class="ttname"><a href="sleep_8h.html">sleep.h</a></div></div>
+</div><!-- fragment --><p>Use of the <code>SLEEP</code> instruction can allow an application to reduce its power consumption considerably. AVR devices can be put into different sleep modes. Refer to the datasheet for the details relating to the device you are using.</p>
+<p>There are several macros provided in this header file to actually put the device into sleep mode. The simplest way is to optionally set the desired sleep mode using <code><a class="el" href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">set_sleep_mode()</a></code> (it usually defaults to idle mode where the CPU is put on sleep but all peripheral clocks are still running), and then call <code><a class="el" href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode()</a></code>. This macro automatically sets the sleep enable bit, goes to sleep, and clears the sleep enable bit.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line">...</div>
+<div class="line">  <a class="code hl_function" href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">set_sleep_mode</a>(&lt;mode&gt;);</div>
+<div class="line">  <a class="code hl_function" href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode</a>();</div>
+<div class="ttc" id="agroup__avr__sleep_html_ga3775b21f297187752bcfc434a541209a"><div class="ttname"><a href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode</a></div><div class="ttdeci">void sleep_mode(void)</div></div>
+<div class="ttc" id="agroup__avr__sleep_html_gae7515dc39b1de053e6ea9ef6fc519b9b"><div class="ttname"><a href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">set_sleep_mode</a></div><div class="ttdeci">void set_sleep_mode(uint8_t mode)</div></div>
+</div><!-- fragment --><p>Note that unless your purpose is to completely lock the CPU (until a hardware reset), interrupts need to be enabled before going to sleep.</p>
+<p>As the <code><a class="el" href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode()</a></code> macro might cause race conditions in some situations, the individual steps of manipulating the sleep enable (SE) bit, and actually issuing the <code>SLEEP</code> instruction, are provided in the macros <code><a class="el" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable()</a></code>, <code><a class="el" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable()</a></code>, and <code><a class="el" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu()</a></code>. This also allows for test-and-sleep scenarios that take care of not missing the interrupt that will awake the device from sleep.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line">...</div>
+<div class="line">  <a class="code hl_function" href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">set_sleep_mode</a>(&lt;mode&gt;);</div>
+<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>();</div>
+<div class="line">  <span class="keywordflow">if</span> (some_condition)</div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a>();</div>
+<div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
+<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu</a>();</div>
+<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a>();</div>
+<div class="line">  }</div>
+<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:88</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_gaad5ebd34cb344c26ac87594f79b06b73"><div class="ttname"><a href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a></div><div class="ttdeci">#define sei()</div><div class="ttdef"><b>Definition:</b> interrupt.h:74</div></div>
+<div class="ttc" id="agroup__avr__sleep_html_ga157b2578d95309c197b739f812938d94"><div class="ttname"><a href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu</a></div><div class="ttdeci">void sleep_cpu(void)</div></div>
+<div class="ttc" id="agroup__avr__sleep_html_ga475174a7aa4eda03dfa7a4483e400a9e"><div class="ttname"><a href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a></div><div class="ttdeci">void sleep_enable(void)</div></div>
+<div class="ttc" id="agroup__avr__sleep_html_gaeae22433a78fd8d50f915fb68c416efd"><div class="ttname"><a href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a></div><div class="ttdeci">void sleep_disable(void)</div></div>
+<div class="ttc" id="ainterrupt_8h_html"><div class="ttname"><a href="interrupt_8h.html">interrupt.h</a></div></div>
+</div><!-- fragment --><p>This sequence ensures an atomic test of <code>some_condition</code> with interrupts being disabled. If the condition is met, sleep mode will be prepared, and the <code>SLEEP</code> instruction will be scheduled immediately after an <code>SEI</code> instruction. As the instruction right after the <code>SEI</code> is guaranteed to be executed before an interrupt could trigger, it is sure the device will really be put to sleep.</p>
+<p>Some devices have the ability to disable the Brown Out Detector (BOD) before going to sleep. This will also reduce power while sleeping. If the specific AVR device has this ability then an additional macro is defined: <code><a class="el" href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable()</a></code>. This macro generates inlined assembly code that will correctly implement the timed sequence for disabling the BOD before sleeping. However, there is a limited number of cycles after the BOD has been disabled that the device can be put into sleep mode, otherwise the BOD will not truly be disabled. Recommended practice is to disable the BOD (<code><a class="el" href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable()</a></code>), set the interrupts (<code><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a></code>), and then put the device to sleep (<code><a class="el" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu()</a></code>), like so:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line">...</div>
+<div class="line">  <a class="code hl_function" href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">set_sleep_mode</a>(&lt;mode&gt;);</div>
+<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>();</div>
+<div class="line">  <span class="keywordflow">if</span> (some_condition)</div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a>();</div>
+<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable</a>();</div>
+<div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
+<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu</a>();</div>
+<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a>();</div>
+<div class="line">  }</div>
+<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
+<div class="ttc" id="agroup__avr__sleep_html_gabf889562cc5ea768ee80cfc8a5bb0312"><div class="ttname"><a href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable</a></div><div class="ttdeci">void sleep_bod_disable(void)</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<a id="gae7515dc39b1de053e6ea9ef6fc519b9b" name="gae7515dc39b1de053e6ea9ef6fc519b9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae7515dc39b1de053e6ea9ef6fc519b9b">&#9670;&#160;</a></span>set_sleep_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_sleep_mode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the sleep mode control register to the specified sleep mode <em>mode</em>. The name of the sleep mode register depends on the device, see the data sheet for details. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>The sleep mode to be set. The available sleep modes like <code>SLEEP_MODE_PWR_SAVE</code>, <code>SLEEP_MODE_PWR_DOWN</code>, <code>SLEEP_MODE_PWR_OFF</code> etc. depend on the device and are defined in <a class="el" href="io_8h.html">avr/io.h</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="gabf889562cc5ea768ee80cfc8a5bb0312" name="gabf889562cc5ea768ee80cfc8a5bb0312"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabf889562cc5ea768ee80cfc8a5bb0312">&#9670;&#160;</a></span>sleep_bod_disable()</h2>
 
@@ -190,57 +266,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
-<div class="ttc" id="asleep_8h_html"><div class="ttname"><a href="sleep_8h.html">sleep.h</a></div></div>
-</div><!-- fragment --><p>Use of the <code>SLEEP</code> instruction can allow an application to reduce its power consumption considerably. AVR devices can be put into different sleep modes. Refer to the datasheet for the details relating to the device you are using.</p>
-<p>There are several macros provided in this header file to actually put the device into sleep mode. The simplest way is to optionally set the desired sleep mode using <code>set_sleep_mode()</code> (it usually defaults to idle mode where the CPU is put on sleep but all peripheral clocks are still running), and then call <code><a class="el" href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode()</a></code>. This macro automatically sets the sleep enable bit, goes to sleep, and clears the sleep enable bit.</p>
-<p>Example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line">...</div>
-<div class="line">  set_sleep_mode(&lt;mode&gt;);</div>
-<div class="line">  <a class="code hl_function" href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode</a>();</div>
-<div class="ttc" id="agroup__avr__sleep_html_ga3775b21f297187752bcfc434a541209a"><div class="ttname"><a href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode</a></div><div class="ttdeci">void sleep_mode(void)</div></div>
-</div><!-- fragment --><p>Note that unless your purpose is to completely lock the CPU (until a hardware reset), interrupts need to be enabled before going to sleep.</p>
-<p>As the <code><a class="el" href="group__avr__sleep.html#ga3775b21f297187752bcfc434a541209a">sleep_mode()</a></code> macro might cause race conditions in some situations, the individual steps of manipulating the sleep enable (SE) bit, and actually issuing the <code>SLEEP</code> instruction, are provided in the macros <code><a class="el" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable()</a></code>, <code><a class="el" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable()</a></code>, and <code><a class="el" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu()</a></code>. This also allows for test-and-sleep scenarios that take care of not missing the interrupt that will awake the device from sleep.</p>
-<p>Example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line">...</div>
-<div class="line">  set_sleep_mode(&lt;mode&gt;);</div>
-<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>();</div>
-<div class="line">  <span class="keywordflow">if</span> (some_condition)</div>
-<div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a>();</div>
-<div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
-<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu</a>();</div>
-<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a>();</div>
-<div class="line">  }</div>
-<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:88</div></div>
-<div class="ttc" id="agroup__avr__interrupts_html_gaad5ebd34cb344c26ac87594f79b06b73"><div class="ttname"><a href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a></div><div class="ttdeci">#define sei()</div><div class="ttdef"><b>Definition:</b> interrupt.h:74</div></div>
-<div class="ttc" id="agroup__avr__sleep_html_ga157b2578d95309c197b739f812938d94"><div class="ttname"><a href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu</a></div><div class="ttdeci">void sleep_cpu(void)</div></div>
-<div class="ttc" id="agroup__avr__sleep_html_ga475174a7aa4eda03dfa7a4483e400a9e"><div class="ttname"><a href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a></div><div class="ttdeci">void sleep_enable(void)</div></div>
-<div class="ttc" id="agroup__avr__sleep_html_gaeae22433a78fd8d50f915fb68c416efd"><div class="ttname"><a href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a></div><div class="ttdeci">void sleep_disable(void)</div></div>
-<div class="ttc" id="ainterrupt_8h_html"><div class="ttname"><a href="interrupt_8h.html">interrupt.h</a></div></div>
-</div><!-- fragment --><p>This sequence ensures an atomic test of <code>some_condition</code> with interrupts being disabled. If the condition is met, sleep mode will be prepared, and the <code>SLEEP</code> instruction will be scheduled immediately after an <code>SEI</code> instruction. As the instruction right after the <code>SEI</code> is guaranteed to be executed before an interrupt could trigger, it is sure the device will really be put to sleep.</p>
-<p>Some devices have the ability to disable the Brown Out Detector (BOD) before going to sleep. This will also reduce power while sleeping. If the specific AVR device has this ability then an additional macro is defined: <code><a class="el" href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable()</a></code>. This macro generates inlined assembly code that will correctly implement the timed sequence for disabling the BOD before sleeping. However, there is a limited number of cycles after the BOD has been disabled that the device can be put into sleep mode, otherwise the BOD will not truly be disabled. Recommended practice is to disable the BOD (<code><a class="el" href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable()</a></code>), set the interrupts (<code><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a></code>), and then put the device to sleep (<code><a class="el" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu()</a></code>), like so:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sleep_8h.html">avr/sleep.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line">...</div>
-<div class="line">  set_sleep_mode(&lt;mode&gt;);</div>
-<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a>();</div>
-<div class="line">  <span class="keywordflow">if</span> (some_condition)</div>
-<div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a>();</div>
-<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable</a>();</div>
-<div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
-<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu</a>();</div>
-<div class="line">    <a class="code hl_function" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a>();</div>
-<div class="line">  }</div>
-<div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>();</div>
-<div class="ttc" id="agroup__avr__sleep_html_gabf889562cc5ea768ee80cfc8a5bb0312"><div class="ttname"><a href="group__avr__sleep.html#gabf889562cc5ea768ee80cfc8a5bb0312">sleep_bod_disable</a></div><div class="ttdeci">void sleep_bod_disable(void)</div></div>
-</div><!-- fragment --><p>Put the device in sleep mode. How the device is brought out of sleep mode depends on the specific mode selected with the set_sleep_mode() function. See the data sheet for your device for more details.</p>
+<p>Put the device in sleep mode. How the device is brought out of sleep mode depends on the specific mode selected with the <a class="el" href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">set_sleep_mode()</a> function. See the data sheet for your device for more details.</p>
 <p>Set the SE (sleep enable) bit. </p>
 
 </div>
@@ -260,15 +286,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Put the device into sleep mode, taking care of setting the SE bit before, and clearing it afterwards. </p>
-
+<p>Put the device into sleep mode, taking care of setting the SE bit before, and clearing it afterwards. All this command does is to run </p><div class="fragment"><div class="line"><a class="code hl_function" href="group__avr__sleep.html#ga475174a7aa4eda03dfa7a4483e400a9e">sleep_enable</a>()</div>
+<div class="line"><a class="code hl_function" href="group__avr__sleep.html#ga157b2578d95309c197b739f812938d94">sleep_cpu</a>()</div>
+<div class="line"><a class="code hl_function" href="group__avr__sleep.html#gaeae22433a78fd8d50f915fb68c416efd">sleep_disable</a>()</div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

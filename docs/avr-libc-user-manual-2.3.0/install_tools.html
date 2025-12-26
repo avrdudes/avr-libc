@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -114,7 +113,10 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </li>
 <li><a class="el" href="install_tools.html#install_avr_binutils">GNU Binutils</a></li>
 <li><a class="el" href="install_tools.html#install_avr_gcc">GCC</a></li>
-<li><a class="el" href="install_tools.html#install_avr_libc">AVR-LibC</a></li>
+<li><a class="el" href="install_tools.html#install_avr_libc">AVR-LibC</a><ul>
+<li><a class="el" href="install_tools.html#install_avr_libc_docs">AVR-LibC Documentation</a></li>
+</ul>
+</li>
 <li><a class="el" href="install_tools.html#install_avrprog">AVRDUDE</a></li>
 <li><a class="el" href="install_tools.html#install_simulavr">SimulAVR</a></li>
 <li><a class="el" href="install_tools.html#install_avrtest">AVRtest</a></li>
@@ -158,8 +160,7 @@ Required AVR Tools</h1>
  Git: https://github.com/avrdudes/avr-libc.git <br  />
  GitHub: <a href="https://github.com/avrdudes/avr-libc">https://github.com/avrdudes/avr-libc</a> <br  />
  Old Project Home: <a href="http://savannah.gnu.org/projects/avr-libc">http://savannah.gnu.org/projects/avr-libc</a> <br  />
- Old Source Downloads (&le; v2.1): <a href="https://download-mirror.savannah.gnu.org/releases/avr-libc">https://download-mirror.savannah.gnu.org/releases/avr-libc</a> <br  />
- <a class="el" href="install_tools.html#install_avr_libc">Installation</a>  </dd>
+ Old Source Downloads (&le; v2.1): <a href="https://download-mirror.savannah.gnu.org/releases/avr-libc">https://download-mirror.savannah.gnu.org/releases/avr-libc</a> <a class="el" href="install_tools.html#install_avr_libc">Installation</a>  </dd>
 </dl>
 <h1><a class="anchor" id="optional_tools"></a>
 Optional AVR Tools</h1>
@@ -167,11 +168,9 @@ Optional AVR Tools</h1>
 <p>You can develop programs for AVR devices without the following tools. They may or may not be of use for you.</p>
 <dl>
 <dt>AVRDUDE </dt>
-<dd><p class="startdd">Project Home: <a href="http://savannah.nongnu.org/projects/avrdude">http://savannah.nongnu.org/projects/avrdude</a> <br  />
- Git: https://github.com/avrdudes/avrdude.git <br  />
+<dd><p class="startdd">Git: https://github.com/avrdudes/avrdude.git <br  />
  GitHub: <a href="https://github.com/avrdudes/avrdude">https://github.com/avrdudes/avrdude</a> <br  />
- <a class="el" href="install_tools.html#install_avrprog">Installation</a> <br  />
- <a class="el" href="using_avrprog.html">Usage Notes</a> </p>
+ <a class="el" href="install_tools.html#install_avrprog">Installation</a> </p>
 <p class="enddd"></p>
 </dd>
 <dt>GDB </dt>
@@ -197,11 +196,11 @@ Optional AVR Tools</h1>
 <h1><a class="anchor" id="install_unix"></a>
 Building and Installing under Linux, FreeBSD, and Others</h1>
 <p>The default behaviour for most of these tools is to install every thing under the <code>/usr/local</code> directory. In order to keep the AVR tools separate from the base system, it is usually better to install everything into <code>/usr/local/avr</code>. If the <code>/usr/local/avr</code> directory does not exist, you should create it before trying to install anything. You will need <code>root</code> access to install there. If you don't have or want root access to the system, you can alternatively install in your home directory, for example, in <code>$HOME/local/avr</code>. Where you install is a completely arbitrary decision, but should be consistent for all the tools.</p>
+<p>It is usually the best to use the latest released version of each of the tools.</p>
 <dl class="section warning"><dt>Warning</dt><dd>If you have <code>CC</code> set to anything other than <code>avr-gcc</code> in your environment, this will cause the configure script to fail. It is best to not have <code>CC</code> set at all.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>It is usually the best to use the latest released version of each of the tools.</dd></dl>
 <h2><a class="anchor" id="install_scripts"></a>
 Build Scripts</h2>
-<p>There are scripts that can simplify the process of building an AVR toolchain for Linux, and/or for Windows in <a class="el" href="install_tools.html#install_canadian">Canadia cross</a> configuration.</p>
+<p>There are scripts that can simplify the process of building an AVR toolchain for Linux, and/or for Windows in <a class="el" href="install_tools.html#install_canadian">Canadian cross</a> configuration.</p>
 <ul>
 <li>GitHub: <a href="https://github.com/ZakKemble/avr-gcc-build">avr-gcc-build</a> from Zak Kemble.</li>
 <li>GitHub: <a href="https://github.com/sprintersb/make-avr-gcc">make-avr-gcc</a></li>
@@ -216,7 +215,7 @@ Required Tools on the Build Machine</h3>
 </ul>
 <h3><a class="anchor" id="install_location"></a>
 Install Location</h3>
-<p>You specify the installation directory by using the <code>--prefix=dir</code> option with the <code>configure</code> script. It is important to install all the AVR tools in the same directory or some of the tools will not work correctly. To ensure consistency and simplify the discussion, we will use <code>$PREFIX</code> to refer to whatever directory you wish to install in. You can set this as an environment variable if you wish as such (using a Bourne-like shell):</p>
+<p>You specify the installation directory by using the <code>--prefix=dir</code> option with the <code>configure</code> script. It is important to install all the AVR tools in the same directory, or some of the tools will not work correctly. To ensure consistency and simplify the discussion, we will use <code>$PREFIX</code> to refer to whatever directory you wish to install in. You can set this as an environment variable if you wish as such (using a Bourne-like shell):</p>
 <p><a id="a4_:24PREFIX" name="a4_:24PREFIX"></a> <a id="a5_--prefix" name="a5_--prefix"></a> </p><pre class="fragment">$ PREFIX=$HOME/local/avr
 $ export PREFIX
 </pre><p><a id="a6_:24PATH" name="a6_:24PATH"></a> <a class="anchor" id="path"></a></p><dl class="section note"><dt>Note</dt><dd>Be sure that you have your <code>PATH</code> environment variable set to search the directory you install everything in <em>before</em> you start installing anything. For example, if you use <code>--prefix=$PREFIX</code>, you must have <code>$PREFIX/bin</code> in your exported <code>PATH</code>. As such:</dd></dl>
@@ -258,7 +257,7 @@ $ ../../source/binutils-&lt;version&gt;/configure --prefix=$PREFIX --target=avr 
     --disable-nls --disable-sim --disable-gdb --disable-werror
 </pre><p>When <code>configure</code> is run, it generates a lot of messages while it determines what is available on your operating system. When it finishes, it will have created several <code>Makefile</code>s that are custom tailored to your platform and that are run with the <code>make</code> command.</p>
 <pre class="fragment">$ make
-</pre><dl class="section note"><dt>Note</dt><dd>BSD users should note that the project's <code>Makefile</code> uses GNU make syntax. This means FreeBSD users may need to build the tools by using <code>gmake</code>.</dd></dl>
+</pre><p>BSD users should note that the project's <code>Makefile</code> uses GNU make syntax. This means FreeBSD users may need to build the tools by using <code>gmake</code>.</p>
 <p>If the tools compiled cleanly, you're ready to install them. If you specified a destination that isn't owned by your account, you'll need <code>root</code> access to install them. To install:</p>
 <pre class="fragment">$ make install
 </pre><p>You should now have the programs from Binutils installed into <code>$PREFIX/bin</code>. Don't forget to <a class="el" href="install_tools.html#path">set your PATH</a> environment variable before going to build avr-gcc. To check that the correct assembler is found, run </p><pre class="fragment">$ avr-as --version
@@ -286,8 +285,8 @@ $ make install # or make install-strip
 <h2><a class="anchor" id="install_avr_libc"></a>
 AVR-LibC</h2>
 <p><a id="a9_installation:2C:20avr-libc" name="a9_installation:2C:20avr-libc"></a></p>
-<dl class="section warning"><dt>Warning</dt><dd>You <b>must</b> install <a class="el" href="install_tools.html#install_avr_binutils">avr-binutils</a>, <a class="el" href="install_tools.html#install_avr_gcc">avr-gcc</a> and make sure your <a class="el" href="install_tools.html#path">path is set</a> properly before installing AVR-LibC.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>If you have obtained the latest AVR-LibC from <a class="el" href="install_tools.html#using_git">git</a>, you will have to run the <code>./bootstrap</code> script before using either of the build methods described below.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>You <b>must</b> install <a class="el" href="install_tools.html#install_avr_binutils">avr-binutils</a>, <a class="el" href="install_tools.html#install_avr_gcc">avr-gcc</a> and make sure your <a class="el" href="install_tools.html#path">path is set</a> properly before configuring abd building AVR-LibC.</dd></dl>
+<p>If you have obtained the latest AVR-LibC from <a class="el" href="install_tools.html#using_git">git</a>, you will have to run the <code>./bootstrap</code> script before using either of the build methods described below.</p>
 <p>To build and install AVR-LibC:</p>
 <pre class="fragment">$ # in ./source
 $ tar xfz avr-libc-&lt;version&gt;.tar.gz
@@ -300,16 +299,52 @@ $ ../../source/avr-libc-&lt;version&gt;/configure --prefix=$PREFIX \
 $ make
 $ make install
 </pre><p>Where the <code>--build</code> platform can be guessed by running </p><pre class="fragment">$ ./source/avr-libc-&lt;version&gt;/config.guess
-</pre><p>When you want to build and install with extra options, you can for example: </p><pre class="fragment">$ make CFLAGS=-Werror CCASFLAGS=-Werror
+</pre><p>When you want to build and install with extra options, you can for example: </p><pre class="fragment">$ make CFLAGS="-Werror" CCASFLAGS="-Werror"
 $ make install prefix=/home/me/install/my-avr-gcc
-</pre><h2><a class="anchor" id="install_avrprog"></a>
+</pre><p>In order to build the examples: </p><pre class="fragment">$ # in ./build/doc/examples
+$ make all-examples
+$ make example-largedemo # etc.
+</pre><h3><a class="anchor" id="install_avr_libc_docs"></a>
+AVR-LibC Documentation</h3>
+<p>Additional prerequisites:</p><ul>
+<li>Doxygen v1.9.6</li>
+<li><code>fig2dev</code> from the <a href="https://en.wikipedia.org/wiki/Xfig">Xfig</a> project</li>
+<li>A LaTeX installation like "TeX Live" with <code>pdflatex</code> </li>
+<li>Python can improve the rendering of some man pages, though Python is not strictly required to build the documentation.</li>
+</ul>
+<p>When <a href="https://sourceforge.net/projects/mcj/files">fig2dev</a> is not present on the system, one way is to build it from source: </p><pre class="fragment">$ wget https://sourceforge.net/projects/mcj/files/fig2dev-3.2.9a.tar.xz/download -O fig2dev-3.2.9a.tar.xz
+$ tar xfJ fig2dev-3.2.9a.tar.xz
+</pre><p> and then configure, make and install as usual.</p>
+<p>For building the documentation, Doxygen v1.9.6 is required. Here are the steps for building and installing it in a non-system location (so that no root permissions are needed). The first step is to get the required Doxygen source version:</p>
+<pre class="fragment">$ # in ./source
+$ git clone --branch Release_1_9_6 --depth 1 https://github.com/doxygen/doxygen.git doxygen-1.9.6
+</pre><p>Then configure and build it. The installation is in some folder <code>/someplace</code> which you can adjust as you like:</p>
+<pre class="fragment">$ # in ./build
+$ mkdir doxygen-1.9.6
+$ cd doxygen-1.9.6
+$ cmake -DCMAKE_INSTALL_PREFIX:PATH=/someplace/doxygen-1.9.6 ../../source/doxygen-1.9.6
+$ make
+$ make install
+</pre><p>There are several ways to provide Doxygen 1.9.6 to AVR-LibC:</p><ul>
+<li>Configure AVR-LibC with <div class="fragment"><div class="line">--with-doxygen=/someplace/doxygen-1.9.6/bin/doxygen </div>
+</div><!-- fragment --></li>
+<li>or add <code>/someplace/doxygen-1.9.6/bin</code> to <code>PATH</code> prior to configuring AVR-LibC.</li>
+</ul>
+<p>The AVR-LibC configure script will print the used Doxygen version. Make sure it is actually Doxygen 1.9.6!</p>
+<p>In order to build the documentation, you can add <code>--enable-doc</code> to the AVR-LibC configure options, or you can invoke building the documentation by hand:</p>
+<pre class="fragment">$ # in ./build/avr-libc-&lt;version&gt;/doc/api
+$ make html
+$ make dox-pdf
+$ make install-dox-html
+</pre><p> Note that Doxygen doesn't care about dependencies, thus when you made changes to the sources and want to re-build the documentation, better run <code>make clean</code> in <code>build/avr-libc-&lt;version&gt;/doc/api</code> before building the doc. Moreover, the Doxygen version is highly critical, and the exact version of Doxygen v1.9.6 is recommended.</p>
+<h2><a class="anchor" id="install_avrprog"></a>
 AVRDUDE</h2>
 <p><a id="a10_installation:2C:20avrprog" name="a10_installation:2C:20avrprog"></a> <a id="a11_installation:2C:20avrdude" name="a11_installation:2C:20avrdude"></a></p>
-<dl class="section note"><dt>Note</dt><dd>It has been ported to windows (via MinGW or cygwin), Linux and Solaris. Other Unix systems should be trivial to port to.</dd></dl>
-<p><code><b>avrdude</b></code> is part of the FreeBSD ports system. To install it, simply do the following:</p>
+<p>AVRDUDE has been ported to Windows (via MinGW or Cygwin), Linux and Solaris. Other Unix systems should be trivial to port to.</p>
+<p>AVRDUDE is part of the FreeBSD ports system. To install it, simply do the following:</p>
 <pre class="fragment"># cd /usr/ports/devel/avrdude
 # make install
-</pre><dl class="section note"><dt>Note</dt><dd>Installation into the default location usually requires root permissions. However, running the program only requires access permissions to the appropriate <code>ppi(4)</code> device.</dd></dl>
+</pre><p>Installation into the default location usually requires root permissions. However, running the program only requires access permissions to the appropriate <code>ppi(4)</code> device.</p>
 <p>Building and installing on other systems should use the <code>configure</code> system, as such:</p>
 <pre class="fragment">$ gunzip -c avrdude-&lt;version&gt;.tar.gz | tar xf -
 $ cd avrdude-&lt;version&gt;
@@ -329,7 +364,7 @@ $ cd obj-avr
 $ ../configure --prefix=$PREFIX
 $ make
 $ make install
-</pre><dl class="section note"><dt>Note</dt><dd>You might want to have already installed <a class="el" href="install_tools.html#install_avr_binutils">avr-binutils</a>, <a class="el" href="install_tools.html#install_avr_gcc">avr-gcc</a> and <a class="el" href="install_tools.html#install_avr_libc">AVR-LibC</a> if you want to have the test programs built in the simulavr source.</dd></dl>
+</pre><p>You might want to have already installed <a class="el" href="install_tools.html#install_avr_binutils">avr-binutils</a>, <a class="el" href="install_tools.html#install_avr_gcc">avr-gcc</a> and <a class="el" href="install_tools.html#install_avr_libc">AVR-LibC</a> if you want to have the test programs built in the simulavr source.</p>
 <h2><a class="anchor" id="install_avrtest"></a>
 AVRtest</h2>
 <p><a id="a13_installation:2C:20avrtest" name="a13_installation:2C:20avrtest"></a></p>
@@ -340,7 +375,7 @@ $ make
 <h2><a class="anchor" id="install_avarice"></a>
 AVaRICE</h2>
 <p><a id="a14_installation:2C:20avarice" name="a14_installation:2C:20avarice"></a></p>
-<dl class="section note"><dt>Note</dt><dd>These install notes are not applicable to avarice-1.5 or older. You probably don't want to use anything that old anyways since there have been many improvements and bug fixes since the 1.5 release.</dd></dl>
+<p>These install notes are not applicable to avarice-1.5 or older. You probably don't want to use anything that old anyway since there have been many improvements and bug fixes since the 1.5 release.</p>
 <p>AVaRICE also uses the <code>configure</code> system, so to build and install:</p>
 <pre class="fragment">$ gunzip -c avarice-&lt;version&gt;.tar.gz | tar xf -
 $ cd avarice-&lt;version&gt;
@@ -349,12 +384,12 @@ $ cd obj-avr
 $ ../configure --prefix=$PREFIX
 $ make
 $ make install
-</pre><dl class="section note"><dt>Note</dt><dd>AVaRICE uses the BFD library for accessing various binary file formats. You may need to tell the configure script where to find the lib and headers for the link to work. This is usually done by invoking the configure script like this (Replace <code>&lt;hdr_path&gt;</code> with the path to the <code>bfd.h</code> file on your system. Replace <code>&lt;lib_path&gt;</code> with the path to <code>libbfd.a</code> on your system.):</dd></dl>
+</pre><p>AVaRICE uses the BFD library for accessing various binary file formats. You may need to tell the configure script where to find the lib and headers for the link to work. This is usually done by invoking the configure script like this (Replace <code>&lt;hdr_path&gt;</code> with the path to the <code>bfd.h</code> file on your system. Replace <code>&lt;lib_path&gt;</code> with the path to <code>libbfd.a</code> on your system.):</p>
 <pre class="fragment">$ CPPFLAGS=-I&lt;hdr_path&gt; LDFLAGS=-L&lt;lib_path&gt; ../configure --prefix=$PREFIX
 </pre><h1><a class="anchor" id="install_windows"></a>
 Building and Installing under Windows</h1>
 <p>Building and installing the toolchain under Windows requires more effort because all of the tools required for building, and the programs themselves, are mainly designed for running under a POSIX environment such as Unix and Linux. Windows does not natively provide such an environment.</p>
-<p>There are two projects available that provide such an environment, Cygwin and MinGW. There are advantages and disadvantages to both. Cygwin provides a very complete POSIX environment that allows one to build many Linux based tools from source with very little or no source modifications. However, POSIX functionality is provided in the form of a DLL that is linked to the application. This DLL has to be redistributed with your application and there are issues if the Cygwin DLL already exists on the installation system and different versions of the DLL. On the other hand, MinGW can compile code as native Win32 applications. However, this means that programs designed for Unix and Linux (i.e. that use POSIX functionality) will not compile as MinGW does not provide that POSIX layer for you. Therefore most programs that compile on both types of host systems, usually must provide some sort of abstraction layer to allow an application to be built cross-platform.</p>
+<p>There are two projects available that provide such an environment, Cygwin and MinGW. There are advantages and disadvantages to both. Cygwin provides a very complete POSIX environment that allows one to build many Linux based tools from source with very little or no source modifications. However, POSIX functionality is provided in the form of a DLL that is linked to the application. This DLL has to be redistributed with your application, and there are issues if the Cygwin DLL already exists on the installation system and different versions of the DLL. On the other hand, MinGW can compile code as native Win32 applications. However, this means that programs designed for Unix and Linux (i.e. that use POSIX functionality) will not compile as MinGW does not provide that POSIX layer for you. Therefore, most programs that compile on both types of host systems, usually must provide some sort of abstraction layer to allow an application to be built cross-platform.</p>
 <p>MinGW does provide somewhat of a POSIX environment, called MSYS, that allows you to build Unix and Linux applications as they would normally do, with a <code>configure</code> step and a <code>make</code> step. Cygwin also provides such an environment. This means that building the AVR toolchain is very similar to how it is built in Linux, described above. The main differences are in what the PATH environment variable gets set to, pathname differences, and the tools that are required to build the projects under Windows. We'll take a look at the tools next.</p>
 <h2><a class="anchor" id="install_windows_tools"></a>
 Tools Required for Building the Toolchain for Windows</h2>
@@ -382,31 +417,17 @@ Tools Required for Building the Toolchain for Windows</h2>
 <dt>Install Cygwin </dt>
 <dd>Install everything, all users, UNIX line endings. This will take a <em>long</em> time. A fat internet pipe is highly recommended. It is also recommended that you download all to a directory first, and then install from that directory to your machine.  </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>GMP, MPFR, MPC and ISL are required to build GCC. By far the easiest way to use them is by letting GCC download the sources locally by means of running the <code>./contrib/download_prewrequisites</code> script from the GCC top source. GCC will configure and build these libs during <code>configure</code> and <code>make</code>.</dd>
-<dd>
-Doxygen is required to build AVR-LibC documentation.<ul>
+<p>GMP, MPFR, MPC and ISL are required to build GCC. By far the easiest way to use them is by letting GCC download the sources locally by means of running the <code>./contrib/download_prewrequisites</code> script from the GCC top source. GCC will configure and build these libs during <code>configure</code> and <code>make</code>.</p>
+<p>Doxygen is required to build AVR-LibC documentation.</p><ul>
 <li><b>Install Doxygen</b><br  />
 <ul>
-<li>Version 1.7.2</li>
+<li>Version 1.9.6</li>
 <li><a href="https://www.doxygen.nl">https://www.doxygen.nl</a></li>
-<li>Download and install.</li>
+<li>Download version 1.9.6 and install.</li>
 </ul>
 </li>
 </ul>
-</dd>
-<dd>
-NetPBM is required to build graphics in the AVR-LibC documentation.<ul>
-<li><b>Install NetPBM</b><br  />
-<ul>
-<li>Version 10.27.0</li>
-<li>From the GNUWin32 project: <a href="http://gnuwin32.sourceforge.net/packages.html">http://gnuwin32.sourceforge.net/packages.html</a></li>
-<li>Download and install.</li>
-</ul>
-</li>
-</ul>
-</dd>
-<dd>
-fig2dev is required to build graphics in the AVR-LibC documentation.<ul>
+<p>fig2dev is required to build graphics in the AVR-LibC documentation.</p><ul>
 <li><b>Install fig2dev</b><br  />
 <ul>
 <li>Version 3.2 patchlevel 5c</li>
@@ -417,9 +438,7 @@ fig2dev is required to build graphics in the AVR-LibC documentation.<ul>
 </ul>
 </li>
 </ul>
-</dd>
-<dd>
-MikTeX is required to build various documentation.<ul>
+<p>MikTeX is required to build various documentation.</p><ul>
 <li><b>Install MiKTeX</b><br  />
 <ul>
 <li>Version 2.9</li>
@@ -428,20 +447,7 @@ MikTeX is required to build various documentation.<ul>
 </ul>
 </li>
 </ul>
-</dd>
-<dd>
-Ghostscript is required to build various documentation.<ul>
-<li><b>Install Ghostscript</b><br  />
-<ul>
-<li>Version 9.00</li>
-<li><a href="https://www.ghostscript.com">https://www.ghostscript.com</a></li>
-<li>Download and install.</li>
-<li>In the \bin subdirectory of the installation, copy gswin32c.exe to gs.exe.</li>
-</ul>
-</li>
-<li>Set the <code>TEMP</code> and <code>TMP</code> environment variables to <b><code>c:\\temp</code></b> or to the short filename version. This helps to avoid NTVDM errors during building.</li>
-</ul>
-</dd></dl>
+<p>Set the <code>TEMP</code> and <code>TMP</code> environment variables to <b><code>c:\\temp</code></b> or to the short filename version. This helps to avoid NTVDM errors during building.</p>
 <h2><a class="anchor" id="install_windows_building"></a>
 Building the Toolchain for Windows</h2>
 <p>All directories in the PATH environment variable should be specified using their short filename (8.3) version. This will also help to avoid NTVDM errors during building. These short filenames can be specific to each machine.</p>
@@ -453,7 +459,6 @@ Building the Toolchain for Windows</h2>
 <li>Configure and build in a directory outside of the source code tree.</li>
 <li>Set PATH, in order:<ul>
 <li>&lt;MikTex executables&gt;</li>
-<li>&lt;ghostscript executables&gt;</li>
 <li>/usr/local/bin</li>
 <li>/usr/bin</li>
 <li>/bin</li>
@@ -480,7 +485,6 @@ Building the Toolchain for Windows</h2>
 <li>Configure and build in a directory outside of the source code tree.</li>
 <li>Set PATH, in order:<ul>
 <li>&lt;MikTex executables&gt;</li>
-<li>&lt;ghostscript executables&gt;</li>
 <li>/usr/local/bin</li>
 <li>/usr/bin</li>
 <li>/bin</li>
@@ -515,12 +519,10 @@ CFLAGS='-D__USE_MINGW_ACCESS'  \
 <li>/usr/local/bin</li>
 <li>/mingw/bin</li>
 <li>/bin</li>
-<li>&lt;MikTex executables&gt;</li>
+<li>&lt;MikTex / TeX live executables&gt;</li>
 <li>&lt;install directory&gt;/bin</li>
 <li>&lt;Doxygen executables&gt;</li>
-<li>&lt;NetPBM executables&gt;</li>
 <li>&lt;fig2dev executable&gt;</li>
-<li>&lt;Ghostscript executables&gt;</li>
 <li>c:/cygwin/bin</li>
 </ul>
 </li>
@@ -708,7 +710,7 @@ Using Git</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

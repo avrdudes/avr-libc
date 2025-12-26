@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -157,6 +156,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li>sei&#160;:&#160;<a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">interrupt.h</a></li>
 <li>set_dst()&#160;:&#160;<a class="el" href="group__avr__time.html#ga3b0c7666163850cc95f0f231f388eb2c">time.h</a></li>
 <li>set_position()&#160;:&#160;<a class="el" href="group__avr__time.html#ga90f87ccc97456fe3dcd867ccf71538ee">time.h</a></li>
+<li>set_sleep_mode()&#160;:&#160;<a class="el" href="group__avr__sleep.html#gae7515dc39b1de053e6ea9ef6fc519b9b">sleep.h</a></li>
 <li>set_system_time()&#160;:&#160;<a class="el" href="group__avr__time.html#ga02663b926feab893c0e0ec1f29b3c315">time.h</a></li>
 <li>set_zone()&#160;:&#160;<a class="el" href="group__avr__time.html#gab4c127c1405b775b6d25a610d3fc26c3">time.h</a></li>
 <li>setjmp()&#160;:&#160;<a class="el" href="group__setjmp.html#ga2687c5ef7a3f376db90908999a9a7fc6">setjmp.h</a></li>
@@ -167,6 +167,9 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li>signbitf()&#160;:&#160;<a class="el" href="group__avr__math.html#ga1844394b47854dd22180d712459616e6">math.h</a></li>
 <li>signbitl()&#160;:&#160;<a class="el" href="group__avr__math.html#ga77df6d5cef7105450ced6bd06f9842c5">math.h</a></li>
 <li>sin()&#160;:&#160;<a class="el" href="group__avr__math.html#gaad4af25633b071b0e2cdb8ebd87eca77">math.h</a></li>
+<li>sincos()&#160;:&#160;<a class="el" href="group__avr__math.html#gaf7b3e98d3151afcd9583998ee1d8d386">math.h</a></li>
+<li>sincosf()&#160;:&#160;<a class="el" href="group__avr__math.html#gafd3b66c913581f94690b9048a63324e9">math.h</a></li>
+<li>sincosl()&#160;:&#160;<a class="el" href="group__avr__math.html#ga342b5fac99b2c8ea46ed260640c7ec39">math.h</a></li>
 <li>sinf()&#160;:&#160;<a class="el" href="group__avr__math.html#ga8a7dc2a88e109f4e15b661247665709a">math.h</a></li>
 <li>sinh()&#160;:&#160;<a class="el" href="group__avr__math.html#ga862012e970c977c482507064e2793b45">math.h</a></li>
 <li>sinhf()&#160;:&#160;<a class="el" href="group__avr__math.html#ga1976c7577fb97800f4b926bd042b64ac">math.h</a></li>
@@ -195,11 +198,19 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li>sprintf_P()&#160;:&#160;<a class="el" href="group__avr__stdio.html#ga2b829d696b17dedbf181cd5dc4d7a31d">stdio.h</a></li>
 <li>sqrt()&#160;:&#160;<a class="el" href="group__avr__math.html#gab87521a75ef827a85807f89a6c10629a">math.h</a></li>
 <li>sqrtf()&#160;:&#160;<a class="el" href="group__avr__math.html#ga46c9a8d40cde7c4d5ab40a67e55316bb">math.h</a></li>
+<li>sqrthk()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#gaa20273916358cc5a63841caf127a401c">stdfix-avrlibc.h</a></li>
 <li>sqrthr()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#ga578c81e880163ccc0ce18c827a61d34a">stdfix-avrlibc.h</a></li>
+<li>sqrtk()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#gabb9e929246f36d7d52285723cf8a8153">stdfix-avrlibc.h</a></li>
 <li>sqrtl()&#160;:&#160;<a class="el" href="group__avr__math.html#ga9c028a87917b3bb9bba9e75f66cdbd43">math.h</a></li>
+<li>sqrtlr()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#ga6db3a88d85501d46cb5793f77b4f0888">stdfix-avrlibc.h</a></li>
+<li>sqrtr()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#ga87ebbdabfa4763879cbaa12aad279f6b">stdfix-avrlibc.h</a></li>
 <li>sqrtu16_floor()&#160;:&#160;<a class="el" href="group__avr__stdlib.html#gacfa0628fac4940c39a8a81947a6c116f">stdlib.h</a></li>
 <li>sqrtu32_floor()&#160;:&#160;<a class="el" href="group__avr__stdlib.html#ga5a277fdc08e38ae3a42938db099298f7">stdlib.h</a></li>
+<li>sqrtu64_floor()&#160;:&#160;<a class="el" href="group__avr__stdlib.html#gaf1a74f28fd530dd6e0fe62c655c8a515">stdlib.h</a></li>
+<li>sqrtuhk()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#gad4bb40a96089a0bdd0bf4bec95f69657">stdfix-avrlibc.h</a></li>
 <li>sqrtuhr()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#gaa0f318048cbb81596a2046b3e3fad90e">stdfix-avrlibc.h</a></li>
+<li>sqrtuk()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#ga60c044763ec1bc6cb6635cec517baa42">stdfix-avrlibc.h</a></li>
+<li>sqrtulr()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#ga2105459805f98bfc57b312b84b3dee43">stdfix-avrlibc.h</a></li>
 <li>sqrtur()&#160;:&#160;<a class="el" href="group__avr__stdfix.html#ga405c2c665dab63429adb0165848a1fd3">stdfix-avrlibc.h</a></li>
 <li>square()&#160;:&#160;<a class="el" href="group__avr__math.html#ga435ef393d7d5394df67d5da81c108c7d">math.h</a></li>
 <li>squaref()&#160;:&#160;<a class="el" href="group__avr__math.html#ga4667cb93defa1bd4c757544429f77075">math.h</a></li>
@@ -336,7 +347,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:18 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:03 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

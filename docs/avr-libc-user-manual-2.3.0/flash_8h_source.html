@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -97,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_9b49c6c2d2dfe7219f88b16666fc0be4.html">john</a></li><li class="navelem"><a class="el" href="dir_a05e76e2dc0d4100e4bd8f30115bdb66.html">gnu</a></li><li class="navelem"><a class="el" href="dir_6d25185a6a505494af8507b862feaaa0.html">source</a></li><li class="navelem"><a class="el" href="dir_2c8c9ed937fd2e49795790ca176638eb.html">avr-libc</a></li><li class="navelem"><a class="el" href="dir_02d7229a0ecae76c083123a782ac913c.html">include</a></li><li class="navelem"><a class="el" href="dir_ed25929bcbaa84769903222301a32285.html">avr</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_74edb07caae428933d09e0931d8b44f5.html">avr</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -1524,50 +1523,52 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l01418" name="l01418"></a><span class="lineno"> 1418</span><span class="preprocessor">#if defined(__AVR_HAVE_ELPM__)</span></div>
 <div class="line"><a id="l01419" name="l01419"></a><span class="lineno"> 1419</span><span class="preprocessor">#define __ELPM__8fx(r,a,T) __ELPM__8(r,a,T)</span></div>
 <div class="line"><a id="l01420" name="l01420"></a><span class="lineno"> 1420</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l01421" name="l01421"></a><span class="lineno"> 1421</span><span class="preprocessor">#define __ELPM__8fx(r,a,T) uint16_t __a = (uint16_t)(__uint24) a; __LPM__8(r,__a)</span></div>
-<div class="line"><a id="l01422" name="l01422"></a><span class="lineno"> 1422</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l01423" name="l01423"></a><span class="lineno"> 1423</span> </div>
-<div class="line"><a id="l01424" name="l01424"></a><span class="lineno"> 1424</span> </div>
-<div class="line"><a id="l01425" name="l01425"></a><span class="lineno"> 1425</span><span class="preprocessor">#define _Avrlibc_Def_FX_4(Name, Typ)                    \</span></div>
-<div class="line"><a id="l01426" name="l01426"></a><span class="lineno"> 1426</span><span class="preprocessor">  static __ATTR_ALWAYS_INLINE__                         \</span></div>
-<div class="line"><a id="l01427" name="l01427"></a><span class="lineno"> 1427</span><span class="preprocessor">  Typ flashx_read_##Name (const __flashx Typ *__addr)   \</span></div>
-<div class="line"><a id="l01428" name="l01428"></a><span class="lineno"> 1428</span><span class="preprocessor">  {                                                     \</span></div>
-<div class="line"><a id="l01429" name="l01429"></a><span class="lineno"> 1429</span><span class="preprocessor">    return *__addr;                                     \</span></div>
-<div class="line"><a id="l01430" name="l01430"></a><span class="lineno"> 1430</span><span class="preprocessor">  }</span></div>
-<div class="line"><a id="l01431" name="l01431"></a><span class="lineno"> 1431</span> </div>
-<div class="line"><a id="l01432" name="l01432"></a><span class="lineno"> 1432</span><span class="preprocessor">#define _Avrlibc_Def_FX_8(Name, Typ)                    \</span></div>
-<div class="line"><a id="l01433" name="l01433"></a><span class="lineno"> 1433</span><span class="preprocessor">  static __ATTR_ALWAYS_INLINE__                         \</span></div>
-<div class="line"><a id="l01434" name="l01434"></a><span class="lineno"> 1434</span><span class="preprocessor">  Typ flashx_read_##Name (const __flashx Typ *__addr)   \</span></div>
-<div class="line"><a id="l01435" name="l01435"></a><span class="lineno"> 1435</span><span class="preprocessor">  {                                                     \</span></div>
-<div class="line"><a id="l01436" name="l01436"></a><span class="lineno"> 1436</span><span class="preprocessor">    Typ __res;                                          \</span></div>
-<div class="line"><a id="l01437" name="l01437"></a><span class="lineno"> 1437</span><span class="preprocessor">    __ELPM__8fx (__res, __addr, Typ);                   \</span></div>
-<div class="line"><a id="l01438" name="l01438"></a><span class="lineno"> 1438</span><span class="preprocessor">    return __res;                                       \</span></div>
-<div class="line"><a id="l01439" name="l01439"></a><span class="lineno"> 1439</span><span class="preprocessor">  }</span></div>
-<div class="line"><a id="l01440" name="l01440"></a><span class="lineno"> 1440</span> </div>
-<div class="line"><a id="l01441" name="l01441"></a><span class="lineno"> 1441</span><span class="preprocessor">#if __SIZEOF_LONG_LONG__ == 8</span></div>
-<div class="line"><a id="l01442" name="l01442"></a><span class="lineno"> 1442</span>_Avrlibc_Def_FX_8 (u64, <a class="code hl_typedef" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>)</div>
-<div class="line"><a id="l01443" name="l01443"></a><span class="lineno"> 1443</span>_Avrlibc_Def_FX_8 (i64, <a class="code hl_typedef" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a>)</div>
-<div class="line"><a id="l01444" name="l01444"></a><span class="lineno"> 1444</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l01445" name="l01445"></a><span class="lineno"> 1445</span> </div>
-<div class="line"><a id="l01446" name="l01446"></a><span class="lineno"> 1446</span><span class="preprocessor">#if __SIZEOF_DOUBLE__ == 8</span></div>
-<div class="line"><a id="l01447" name="l01447"></a><span class="lineno"> 1447</span>_Avrlibc_Def_FX_8 (<span class="keywordtype">double</span>, <span class="keywordtype">double</span>)</div>
-<div class="line"><a id="l01448" name="l01448"></a><span class="lineno"> 1448</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l01449" name="l01449"></a><span class="lineno"> 1449</span>_Avrlibc_Def_FX_4 (<span class="keywordtype">double</span>, <span class="keywordtype">double</span>)</div>
-<div class="line"><a id="l01450" name="l01450"></a><span class="lineno"> 1450</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l01451" name="l01451"></a><span class="lineno"> 1451</span> </div>
-<div class="line"><a id="l01452" name="l01452"></a><span class="lineno"> 1452</span><span class="preprocessor">#if __SIZEOF_LONG_DOUBLE__ == 8</span></div>
-<div class="line"><a id="l01453" name="l01453"></a><span class="lineno"> 1453</span>_Avrlibc_Def_FX_8 (long_double, <span class="keywordtype">long</span> <span class="keywordtype">double</span>)</div>
-<div class="line"><a id="l01454" name="l01454"></a><span class="lineno"> 1454</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l01455" name="l01455"></a><span class="lineno"> 1455</span>_Avrlibc_Def_FX_4 (long_double, <span class="keywordtype">long</span> <span class="keywordtype">double</span>)</div>
-<div class="line"><a id="l01456" name="l01456"></a><span class="lineno"> 1456</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l01457" name="l01457"></a><span class="lineno"> 1457</span> </div>
-<div class="line"><a id="l01458" name="l01458"></a><span class="lineno"> 1458</span><span class="preprocessor">#endif </span><span class="comment">/* Have __flashx */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01421" name="l01421"></a><span class="lineno"> 1421</span><span class="preprocessor">#define __ELPM__8fx(r,a,T)                      \</span></div>
+<div class="line"><a id="l01422" name="l01422"></a><span class="lineno"> 1422</span><span class="preprocessor">  uintptr_t __a = (uintptr_t)(uintptr24_t) a;   \</span></div>
+<div class="line"><a id="l01423" name="l01423"></a><span class="lineno"> 1423</span><span class="preprocessor">  __LPM__8(r,__a)</span></div>
+<div class="line"><a id="l01424" name="l01424"></a><span class="lineno"> 1424</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l01425" name="l01425"></a><span class="lineno"> 1425</span> </div>
+<div class="line"><a id="l01426" name="l01426"></a><span class="lineno"> 1426</span> </div>
+<div class="line"><a id="l01427" name="l01427"></a><span class="lineno"> 1427</span><span class="preprocessor">#define _Avrlibc_Def_FX_4(Name, Typ)                    \</span></div>
+<div class="line"><a id="l01428" name="l01428"></a><span class="lineno"> 1428</span><span class="preprocessor">  static __ATTR_ALWAYS_INLINE__                         \</span></div>
+<div class="line"><a id="l01429" name="l01429"></a><span class="lineno"> 1429</span><span class="preprocessor">  Typ flashx_read_##Name (const __flashx Typ *__addr)   \</span></div>
+<div class="line"><a id="l01430" name="l01430"></a><span class="lineno"> 1430</span><span class="preprocessor">  {                                                     \</span></div>
+<div class="line"><a id="l01431" name="l01431"></a><span class="lineno"> 1431</span><span class="preprocessor">    return *__addr;                                     \</span></div>
+<div class="line"><a id="l01432" name="l01432"></a><span class="lineno"> 1432</span><span class="preprocessor">  }</span></div>
+<div class="line"><a id="l01433" name="l01433"></a><span class="lineno"> 1433</span> </div>
+<div class="line"><a id="l01434" name="l01434"></a><span class="lineno"> 1434</span><span class="preprocessor">#define _Avrlibc_Def_FX_8(Name, Typ)                    \</span></div>
+<div class="line"><a id="l01435" name="l01435"></a><span class="lineno"> 1435</span><span class="preprocessor">  static __ATTR_ALWAYS_INLINE__                         \</span></div>
+<div class="line"><a id="l01436" name="l01436"></a><span class="lineno"> 1436</span><span class="preprocessor">  Typ flashx_read_##Name (const __flashx Typ *__addr)   \</span></div>
+<div class="line"><a id="l01437" name="l01437"></a><span class="lineno"> 1437</span><span class="preprocessor">  {                                                     \</span></div>
+<div class="line"><a id="l01438" name="l01438"></a><span class="lineno"> 1438</span><span class="preprocessor">    Typ __res;                                          \</span></div>
+<div class="line"><a id="l01439" name="l01439"></a><span class="lineno"> 1439</span><span class="preprocessor">    __ELPM__8fx (__res, __addr, Typ);                   \</span></div>
+<div class="line"><a id="l01440" name="l01440"></a><span class="lineno"> 1440</span><span class="preprocessor">    return __res;                                       \</span></div>
+<div class="line"><a id="l01441" name="l01441"></a><span class="lineno"> 1441</span><span class="preprocessor">  }</span></div>
+<div class="line"><a id="l01442" name="l01442"></a><span class="lineno"> 1442</span> </div>
+<div class="line"><a id="l01443" name="l01443"></a><span class="lineno"> 1443</span><span class="preprocessor">#if __SIZEOF_LONG_LONG__ == 8</span></div>
+<div class="line"><a id="l01444" name="l01444"></a><span class="lineno"> 1444</span>_Avrlibc_Def_FX_8 (u64, <a class="code hl_typedef" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>)</div>
+<div class="line"><a id="l01445" name="l01445"></a><span class="lineno"> 1445</span>_Avrlibc_Def_FX_8 (i64, <a class="code hl_typedef" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a>)</div>
+<div class="line"><a id="l01446" name="l01446"></a><span class="lineno"> 1446</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l01447" name="l01447"></a><span class="lineno"> 1447</span> </div>
+<div class="line"><a id="l01448" name="l01448"></a><span class="lineno"> 1448</span><span class="preprocessor">#if __SIZEOF_DOUBLE__ == 8</span></div>
+<div class="line"><a id="l01449" name="l01449"></a><span class="lineno"> 1449</span>_Avrlibc_Def_FX_8 (<span class="keywordtype">double</span>, <span class="keywordtype">double</span>)</div>
+<div class="line"><a id="l01450" name="l01450"></a><span class="lineno"> 1450</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l01451" name="l01451"></a><span class="lineno"> 1451</span>_Avrlibc_Def_FX_4 (<span class="keywordtype">double</span>, <span class="keywordtype">double</span>)</div>
+<div class="line"><a id="l01452" name="l01452"></a><span class="lineno"> 1452</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l01453" name="l01453"></a><span class="lineno"> 1453</span> </div>
+<div class="line"><a id="l01454" name="l01454"></a><span class="lineno"> 1454</span><span class="preprocessor">#if __SIZEOF_LONG_DOUBLE__ == 8</span></div>
+<div class="line"><a id="l01455" name="l01455"></a><span class="lineno"> 1455</span>_Avrlibc_Def_FX_8 (long_double, <span class="keywordtype">long</span> <span class="keywordtype">double</span>)</div>
+<div class="line"><a id="l01456" name="l01456"></a><span class="lineno"> 1456</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l01457" name="l01457"></a><span class="lineno"> 1457</span>_Avrlibc_Def_FX_4 (long_double, <span class="keywordtype">long</span> <span class="keywordtype">double</span>)</div>
+<div class="line"><a id="l01458" name="l01458"></a><span class="lineno"> 1458</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l01459" name="l01459"></a><span class="lineno"> 1459</span> </div>
-<div class="line"><a id="l01460" name="l01460"></a><span class="lineno"> 1460</span><span class="preprocessor">#endif </span><span class="comment">/* !DOXYGEN */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01460" name="l01460"></a><span class="lineno"> 1460</span><span class="preprocessor">#endif </span><span class="comment">/* Have __flashx */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l01461" name="l01461"></a><span class="lineno"> 1461</span> </div>
-<div class="line"><a id="l01462" name="l01462"></a><span class="lineno"> 1462</span><span class="preprocessor">#endif </span><span class="comment">/* !__AVR_TINY__ &amp;&amp; !C++ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01462" name="l01462"></a><span class="lineno"> 1462</span><span class="preprocessor">#endif </span><span class="comment">/* !DOXYGEN */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l01463" name="l01463"></a><span class="lineno"> 1463</span> </div>
-<div class="line"><a id="l01464" name="l01464"></a><span class="lineno"> 1464</span><span class="preprocessor">#endif </span><span class="comment">/* _AVR_FLASH_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01464" name="l01464"></a><span class="lineno"> 1464</span><span class="preprocessor">#endif </span><span class="comment">/* !__AVR_TINY__ &amp;&amp; !C++ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01465" name="l01465"></a><span class="lineno"> 1465</span> </div>
+<div class="line"><a id="l01466" name="l01466"></a><span class="lineno"> 1466</span><span class="preprocessor">#endif </span><span class="comment">/* _AVR_FLASH_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="agroup__avr__flash_html_ga01d8b25046979e233adb5a92809e0964"><div class="ttname"><a href="group__avr__flash.html#ga01d8b25046979e233adb5a92809e0964">strcspn_F</a></div><div class="ttdeci">size_t strcspn_F(const char *s, const __flash char *reject)</div></div>
 <div class="ttc" id="agroup__avr__flash_html_ga03bd322895cf6a678a9ddffcbbe58f50"><div class="ttname"><a href="group__avr__flash.html#ga03bd322895cf6a678a9ddffcbbe58f50">strcat_F</a></div><div class="ttdeci">char * strcat_F(char *, const __flash char *)</div></div>
 <div class="ttc" id="agroup__avr__flash_html_ga03d1ee0b10498d7e184aec07df6bc98d"><div class="ttname"><a href="group__avr__flash.html#ga03d1ee0b10498d7e184aec07df6bc98d">strlen_FX</a></div><div class="ttdeci">size_t strlen_FX(const __flashx char *src)</div><div class="ttdoc">Obtain the length of a string located in address-space __flashx.</div></div>
@@ -1675,28 +1676,28 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="ttc" id="agroup__avr__pgmspace_html_gad92fa2ebe26e65fa424051047d21a0eb"><div class="ttname"><a href="group__avr__pgmspace.html#gad92fa2ebe26e65fa424051047d21a0eb">memcpy_P</a></div><div class="ttdeci">void * memcpy_P(void *, const void *, size_t)</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gae90f8c9f2c3433f0031a7dd5c449527d"><div class="ttname"><a href="group__avr__pgmspace.html#gae90f8c9f2c3433f0031a7dd5c449527d">strchr_PF</a></div><div class="ttdeci">uint_farptr_t strchr_PF(uint_farptr_t, int __val)</div><div class="ttdoc">Locate character in far program space string.</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_gaf632b479b04d0c98caf94de85dc11f3e"><div class="ttname"><a href="group__avr__pgmspace.html#gaf632b479b04d0c98caf94de85dc11f3e">strlcat_PF</a></div><div class="ttdeci">size_t strlcat_PF(char *dst, uint_farptr_t src, size_t siz)</div><div class="ttdoc">Concatenate two strings.</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga831d6234342279926bb11bad3a37add9"><div class="ttname"><a href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a></div><div class="ttdeci">signed long long int int64_t</div><div class="ttdef"><b>Definition:</b> stdint.h:108</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gad27ed092432b64ff558d2254c278720f"><div class="ttname"><a href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a></div><div class="ttdeci">unsigned long long int uint64_t</div><div class="ttdef"><b>Definition:</b> stdint.h:115</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga831d6234342279926bb11bad3a37add9"><div class="ttname"><a href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a></div><div class="ttdeci">signed long long int int64_t</div><div class="ttdef"><b>Definition:</b> stdint.h:120</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gad27ed092432b64ff558d2254c278720f"><div class="ttname"><a href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a></div><div class="ttdeci">unsigned long long int uint64_t</div><div class="ttdef"><b>Definition:</b> stdint.h:126</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_ga0fb7fd70cd7618f27d8219c97e61bcf3"><div class="ttname"><a href="group__avr__stdio.html#ga0fb7fd70cd7618f27d8219c97e61bcf3">scanf_P</a></div><div class="ttdeci">int scanf_P(const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> scanf_p.c:36</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_ga2b829d696b17dedbf181cd5dc4d7a31d"><div class="ttname"><a href="group__avr__stdio.html#ga2b829d696b17dedbf181cd5dc4d7a31d">sprintf_P</a></div><div class="ttdeci">int sprintf_P(char *__s, const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> sprintf_p.c:37</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_ga36173b4a8551b61811089198beec69d9"><div class="ttname"><a href="group__avr__stdio.html#ga36173b4a8551b61811089198beec69d9">fprintf_P</a></div><div class="ttdeci">int fprintf_P(FILE *__stream, const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> fprintf_p.c:36</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_ga3d25813cb225ca410518a3f48eb00caa"><div class="ttname"><a href="group__avr__stdio.html#ga3d25813cb225ca410518a3f48eb00caa">fputs_P</a></div><div class="ttdeci">int fputs_P(const char *__str, FILE *__stream)</div><div class="ttdef"><b>Definition:</b> fputs_p.c:38</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_ga3d25813cb225ca410518a3f48eb00caa"><div class="ttname"><a href="group__avr__stdio.html#ga3d25813cb225ca410518a3f48eb00caa">fputs_P</a></div><div class="ttdeci">int fputs_P(const char *__str, FILE *__stream)</div><div class="ttdef"><b>Definition:</b> fputs_p.c:36</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_ga418e63921ed6259e873cd21b6c5c8e6e"><div class="ttname"><a href="group__avr__stdio.html#ga418e63921ed6259e873cd21b6c5c8e6e">printf_P</a></div><div class="ttdeci">int printf_P(const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> printf_p.c:36</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_ga53ff61856759709eeceae10aaa10a0a3"><div class="ttname"><a href="group__avr__stdio.html#ga53ff61856759709eeceae10aaa10a0a3">snprintf_P</a></div><div class="ttdeci">int snprintf_P(char *__s, size_t __n, const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> snprintf_p.c:36</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_ga6c6b5b881ce8f4739777ff3a615e988a"><div class="ttname"><a href="group__avr__stdio.html#ga6c6b5b881ce8f4739777ff3a615e988a">vfscanf_P</a></div><div class="ttdeci">int vfscanf_P(FILE *__stream, const char *__fmt, va_list __ap)</div><div class="ttdef"><b>Definition:</b> vfscanf_p.c:36</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_ga7aec94e711ad64724076666586a26839"><div class="ttname"><a href="group__avr__stdio.html#ga7aec94e711ad64724076666586a26839">fscanf_P</a></div><div class="ttdeci">int fscanf_P(FILE *__stream, const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> fscanf_p.c:36</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_gab4de83c560c79bf880fa39b997d61610"><div class="ttname"><a href="group__avr__stdio.html#gab4de83c560c79bf880fa39b997d61610">puts_P</a></div><div class="ttdeci">int puts_P(const char *__str)</div><div class="ttdef"><b>Definition:</b> puts_p.c:38</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_gab4de83c560c79bf880fa39b997d61610"><div class="ttname"><a href="group__avr__stdio.html#gab4de83c560c79bf880fa39b997d61610">puts_P</a></div><div class="ttdeci">int puts_P(const char *__str)</div><div class="ttdef"><b>Definition:</b> puts_p.c:36</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_gab5cb9ba918b3c3f80399e1164a8b28d2"><div class="ttname"><a href="group__avr__stdio.html#gab5cb9ba918b3c3f80399e1164a8b28d2">vsprintf_P</a></div><div class="ttdeci">int vsprintf_P(char *__s, const char *__fmt, va_list __ap)</div><div class="ttdef"><b>Definition:</b> vsprintf_p.c:37</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_gac0902d91baba413dedb08474f2ae4383"><div class="ttname"><a href="group__avr__stdio.html#gac0902d91baba413dedb08474f2ae4383">vsnprintf_P</a></div><div class="ttdeci">int vsnprintf_P(char *__s, size_t __n, const char *__fmt, va_list __ap)</div><div class="ttdef"><b>Definition:</b> vsnprintf_p.c:36</div></div>
 <div class="ttc" id="agroup__avr__stdio_html_gaeca11dc4b3757ed4ff2f2a4950eba117"><div class="ttname"><a href="group__avr__stdio.html#gaeca11dc4b3757ed4ff2f2a4950eba117">sscanf_P</a></div><div class="ttdeci">int sscanf_P(const char *__buf, const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> sscanf_p.c:37</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_gaed4dabeb9f7c518ded42f930a04abce8"><div class="ttname"><a href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a></div><div class="ttdeci">struct __file FILE</div><div class="ttdef"><b>Definition:</b> stdio.h:281</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_gaed4dabeb9f7c518ded42f930a04abce8"><div class="ttname"><a href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a></div><div class="ttdeci">struct __file FILE</div><div class="ttdef"><b>Definition:</b> stdio.h:272</div></div>
 <div class="ttc" id="astdint_8h_html"><div class="ttname"><a href="stdint_8h.html">stdint.h</a></div></div>
 <div class="ttc" id="astdio_8h_html"><div class="ttname"><a href="stdio_8h.html">stdio.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:09 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

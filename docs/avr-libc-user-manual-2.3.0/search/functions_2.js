@@ -16,5 +16,5 @@ var searchData=
   ['bitsullr_13',['bitsullr',['../group__avr__stdfix.html#ga14b1d83f96f367e2f2886f565cc89a70',1,'stdfix-avrlibc.h']]],
   ['bitsulr_14',['bitsulr',['../group__avr__stdfix.html#ga6a811982153a9afd3ea46bf1525c07e0',1,'stdfix-avrlibc.h']]],
   ['bitsur_15',['bitsur',['../group__avr__stdfix.html#ga26499db61d34073b4a4848b376406b23',1,'stdfix-avrlibc.h']]],
-  ['bsearch_16',['bsearch',['../group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5',1,'bsearch(const void *__key, const void *__base, size_t __nmemb, size_t __size, int(*__compar)(const void *, const void *)):&#160;bsearch.c'],['../group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5',1,'bsearch(const void *key, const void *base0, size_t nmemb, size_t size, int(*compar)(const void *, const void *)):&#160;bsearch.c']]]
+  ['bsearch_16',['bsearch',['../group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035',1,'bsearch(const void *__key, const void *__base, size_t __nmemb, size_t __size, __compar_fn_t __compar):&#160;bsearch.c'],['../group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035',1,'bsearch(const void *key, const void *base, size_t n, size_t size, __compar_fn_t compar):&#160;bsearch.c']]]
 ];

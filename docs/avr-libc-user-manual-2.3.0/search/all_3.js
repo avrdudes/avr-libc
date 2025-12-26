@@ -41,7 +41,7 @@ var searchData=
   ['boot_5fspm_5finterrupt_5fdisable_38',['boot_spm_interrupt_disable',['../group__avr__boot.html#gaf1e01d09c839793a6c0c990b1c5ae8b3',1,'boot.h']]],
   ['boot_5fspm_5finterrupt_5fenable_39',['boot_spm_interrupt_enable',['../group__avr__boot.html#ga072040fce54f112355cb9ebf9ce41dd7',1,'boot.h']]],
   ['bootloader_5fsection_40',['BOOTLOADER_SECTION',['../group__avr__boot.html#ga8a60eb0985d40ff71c42bb18f0f5789e',1,'boot.h']]],
-  ['bsearch_41',['bsearch',['../group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5',1,'bsearch(const void *__key, const void *__base, size_t __nmemb, size_t __size, int(*__compar)(const void *, const void *)):&#160;bsearch.c'],['../group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5',1,'bsearch(const void *key, const void *base0, size_t nmemb, size_t size, int(*compar)(const void *, const void *)):&#160;bsearch.c']]],
+  ['bsearch_41',['bsearch',['../group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035',1,'bsearch(const void *__key, const void *__base, size_t __nmemb, size_t __size, __compar_fn_t __compar):&#160;bsearch.c'],['../group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035',1,'bsearch(const void *key, const void *base, size_t n, size_t size, __compar_fn_t compar):&#160;bsearch.c']]],
   ['building_20and_20installing_20the_20gnu_20tool_20chain_42',['Building and Installing the GNU Tool Chain',['../install_tools.html',1,'']]],
   ['builtins_2eh_43',['builtins.h',['../builtins_8h.html',1,'']]]
 ];

@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -113,14 +112,14 @@ Macros</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span> </div>
 <div class="ttc" id="aio_8h_html"><div class="ttname"><a href="io_8h.html">io.h</a></div></div>
-</div><!-- fragment --><p>This header file includes the apropriate IO definitions for the device that has been specified by the <code>-mmcu=</code> compiler command-line switch. This is done by diverting to the appropriate file <code>&lt;avr/io</code><em>XXXX</em><code>.h&gt;</code> which should never be included directly. Some register names common to all AVR devices are defined directly within <code>&lt;avr/common.h&gt;</code>, which is included in <code>&lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;</code>, but most of the details come from the respective include file.</p>
-<p>Note that this file always includes the following files: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;avr/sfr_defs.h&gt;</span></div>
+</div><!-- fragment --><p>This header file includes the appropriate IO definitions for the device that has been specified by the <code>-mmcu=</code> compiler command-line option. This is done by diverting to the appropriate file <code>&lt;avr/io</code><em>XXXX</em><code>.h&gt;</code> which should never be included directly. Some register names common to all AVR devices are defined directly within <code>&lt;avr/common.h&gt;</code>, which is included in <code>&lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;</code>, but most of the details come from the respective include file.</p>
+<p>Note that this header always includes the following ones: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;avr/sfr_defs.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;avr/portpins.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;avr/common.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;avr/version.h&gt;</span></div>
 </div><!-- fragment --><p> See <a class="el" href="group__avr__sfr.html">&lt;avr/sfr_defs.h&gt;: Special function registers</a> for more details about that header file.</p>
-<p>Included are definitions of the IO register set and their respective bit values as specified in the Atmel documentation. Note that inconsistencies in naming conventions, so even identical functions sometimes get different names on different devices.</p>
-<p>Also included are the specific names useable for interrupt function definitions as documented <a class="el" href="group__avr__interrupts.html#avr_signames">here</a>.</p>
+<p>Included are definitions of the IO register set and their respective bit values as specified in the device manual. Note that due to inconsistencies in naming conventions, so even identical functions sometimes get different names on different devices.</p>
+<p>Also included are the specific names useable for interrupt service routines as documented <a class="el" href="group__avr__interrupts.html#avr_mcu_signames">here</a>.</p>
 <p>Finally, the following macros are defined:</p>
 <dl>
 <dt>RAMEND </dt>
@@ -172,12 +171,13 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Write value <code>value</code> to IO register <code>reg</code> that is protected through the Xmega configuration change protection (CCP) mechanism. This implements the timed sequence that is required for CCP.</p>
+<p>Write value <code>value</code> to IO register <code>reg</code> that is protected through the Xmega or AVRrc configuration change protection (CCP) mechanism. This implements the timed sequence that is required for CCP.</p>
+<p>This macro requires that the address of <code>reg</code> is a compile-time constant. When that is not the case, the <code><a class="el" href="group__avr__cpufunc.html#ga1bf33088bafcf47c11ad8f51ca2c9da2">ccp_write_io()</a></code> function can be used.</p>
 <p>Example to modify the CPU clock: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_define" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE</a>(CLK_PSCTRL, CLK_PSADIV0_bm);</div>
-<div class="line"><a class="code hl_define" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE</a>(CLK_CTRL, CLK_SCLKSEL0_bm);</div>
-<div class="ttc" id="agroup__avr__io_html_gaaaa396e67cc85f68fa0474d70edf3d4c"><div class="ttname"><a href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE</a></div><div class="ttdeci">#define _PROTECTED_WRITE(reg, value)</div><div class="ttdef"><b>Definition:</b> xmega.h:57</div></div>
+<div class="line"><a class="code hl_define" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE</a> (CLK_PSCTRL, CLK_PSADIV0_bm);</div>
+<div class="line"><a class="code hl_define" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE</a> (CLK_CTRL, CLK_SCLKSEL0_bm);</div>
+<div class="ttc" id="agroup__avr__io_html_gaaaa396e67cc85f68fa0474d70edf3d4c"><div class="ttname"><a href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE</a></div><div class="ttdeci">#define _PROTECTED_WRITE(reg, value)</div><div class="ttdef"><b>Definition:</b> xmega.h:58</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -206,11 +206,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Write value <code>value</code> to register <code>reg</code> that is protected through the Xmega configuration change protection (CCP) key for self programming (SPM). This implements the timed sequence that is required for CCP.</p>
+<p>Write value <code>value</code> to register <code>reg</code> that is protected through the Xmega or ATtiny102/104 configuration change protection (CCP) key for self programming (SPM). This implements the timed sequence that is required for CCP.</p>
+<p>This macro requires that the address of <code>reg</code> is a compile-time constant. When that is not the case, the <code><a class="el" href="group__avr__cpufunc.html#ga8e11eac249a90fc2cbaa6dc30e1eb589">ccp_write_spm()</a></code> function can be used.</p>
 <p>Example to modify the CPU clock: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_define" href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">_PROTECTED_WRITE_SPM</a>(NVMCTRL_CTRLA, NVMCTRL_CMD_PAGEERASEWRITE_gc);</div>
-<div class="ttc" id="agroup__avr__io_html_gaa908245395513b1c44d76b8feab3c4a4"><div class="ttname"><a href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">_PROTECTED_WRITE_SPM</a></div><div class="ttdeci">#define _PROTECTED_WRITE_SPM(reg, value)</div><div class="ttdef"><b>Definition:</b> xmega.h:75</div></div>
+<div class="line"><a class="code hl_define" href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">_PROTECTED_WRITE_SPM</a> (NVMCTRL_CTRLA, NVMCTRL_CMD_PAGEERASEWRITE_gc);</div>
+<div class="ttc" id="agroup__avr__io_html_gaa908245395513b1c44d76b8feab3c4a4"><div class="ttname"><a href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">_PROTECTED_WRITE_SPM</a></div><div class="ttdeci">#define _PROTECTED_WRITE_SPM(reg, value)</div><div class="ttdef"><b>Definition:</b> xmega.h:77</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -218,7 +219,7 @@ Macros</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

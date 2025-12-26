@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -196,7 +195,13 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="string_8h.html">string.h</a>&gt;</span> </div>
 <div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div></div>
 </div><!-- fragment --><p>The string functions perform string operations on <code>NULL</code> terminated strings.</p>
-<dl class="section note"><dt>Note</dt><dd>If the strings you are working on resident in program space (flash), you will need to use the string functions described in <a class="el" href="group__avr__pgmspace.html">&lt;avr/pgmspace.h&gt;: Program Space Utilities</a>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the strings you are working on reside in program memory (flash), then you will need to use the string functions provided by one of the following headers:<ul>
+<li><a class="el" href="group__avr__pgmspace.html">&lt;avr/pgmspace.h&gt;: Program Space Utilities</a></li>
+<li><a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;: Utilities for named address-spaces __flash and __flashx</a> </li>
+</ul>
+</dd>
+<dd>
+When the strings are defined with <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> or <a class="el" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a>, then use the first header. When they are defined with <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> or <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a>, then use the second one. </dd></dl>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="gaedb0e7bb7333d6122472acddb5df20ac" name="gaedb0e7bb7333d6122472acddb5df20ac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaedb0e7bb7333d6122472acddb5df20ac">&#9670;&#160;</a></span>_FFS</h2>
@@ -899,7 +904,7 @@ Functions</h2></td></tr>
 
 <p>Duplicate a string. </p>
 <p>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function allocates memory and copies into it the string addressed by <code>s1</code>, including the terminating null character.</p>
-<dl class="section warning"><dt>Warning</dt><dd>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function calls malloc() to allocate the memory for the duplicated string! The user is responsible for freeing the memory by calling free().</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function calls <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a> to allocate the memory for the duplicated string! The user is responsible for freeing the memory by calling free().</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function returns a pointer to the resulting string dest. If malloc() cannot allocate enough storage for the string, <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> will return <code>NULL</code>.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Be sure to check the return value of the <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function to make sure that the function has succeeded in allocating the memory! </dd></dl>
 
@@ -1525,7 +1530,7 @@ strlen(initial dst)). If retval &gt;= siz, truncation occurred. </dd></dl>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

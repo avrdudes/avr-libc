@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -97,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_9b49c6c2d2dfe7219f88b16666fc0be4.html">john</a></li><li class="navelem"><a class="el" href="dir_a05e76e2dc0d4100e4bd8f30115bdb66.html">gnu</a></li><li class="navelem"><a class="el" href="dir_6d25185a6a505494af8507b862feaaa0.html">source</a></li><li class="navelem"><a class="el" href="dir_2c8c9ed937fd2e49795790ca176638eb.html">avr-libc</a></li><li class="navelem"><a class="el" href="dir_02d7229a0ecae76c083123a782ac913c.html">include</a></li><li class="navelem"><a class="el" href="dir_ed25929bcbaa84769903222301a32285.html">avr</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_74edb07caae428933d09e0931d8b44f5.html">avr</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -145,68 +144,98 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#ifdef __DOXYGEN__</span><span class="comment"></span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> \def _PROTECTED_WRITE</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> \ingroup avr_io</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> Write value \c value to IO register \c reg that is protected through</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> the Xmega configuration change protection (CCP) mechanism.  This</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> implements the timed sequence that is required for CCP.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> Example to modify the CPU clock:</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"> \code</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> #include &lt;avr/io.h&gt;</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> _PROTECTED_WRITE(CLK_PSCTRL, CLK_PSADIV0_bm);</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> _PROTECTED_WRITE(CLK_CTRL, CLK_SCLKSEL0_bm);</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> \endcode</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">   57</a></span><span class="preprocessor">#define _PROTECTED_WRITE(reg, value)</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"></span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"> \def _PROTECTED_WRITE_SPM</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> \ingroup avr_io</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> Write value \c value to IO register \c reg that is protected through</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> the Xmega or AVRrc configuration change protection (CCP) mechanism.  This</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> implements the timed sequence that is required for CCP.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> This macro requires that the address of \c reg is a compile-time constant.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> When that is not the case, the \c ccp_write_io() function can be used.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"></span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> Example to modify the CPU clock:</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> \code</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> #include &lt;avr/io.h&gt;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> _PROTECTED_WRITE (CLK_PSCTRL, CLK_PSADIV0_bm);</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> _PROTECTED_WRITE (CLK_CTRL, CLK_SCLKSEL0_bm);</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> \endcode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">   58</a></span><span class="preprocessor">#define _PROTECTED_WRITE(reg, value)</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"> \ingroup avr_io</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"></span> </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"> Write value \c value to register \c reg that is protected through</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> the Xmega configuration change protection (CCP) key for self</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> the Xmega or ATtiny102/104 configuration change protection (CCP) key for self</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> programming (SPM).  This implements the timed sequence that is</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> required for CCP.</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> Example to modify the CPU clock:</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> \code</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"> #include &lt;avr/io.h&gt;</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> _PROTECTED_WRITE_SPM(NVMCTRL_CTRLA, NVMCTRL_CMD_PAGEERASEWRITE_gc);</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> \endcode</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">   75</a></span><span class="preprocessor">#define _PROTECTED_WRITE_SPM(reg, value)</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#else  </span><span class="comment">/* !__DOXYGEN__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> This macro requires that the address of \c reg is a compile-time constant.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> When that is not the case, the \c ccp_write_spm() function can be used.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> Example to modify the CPU clock:</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> \code</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> #include &lt;avr/io.h&gt;</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"> _PROTECTED_WRITE_SPM (NVMCTRL_CTRLA, NVMCTRL_CMD_PAGEERASEWRITE_gc);</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"> \endcode  */</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">   77</a></span><span class="preprocessor">#define _PROTECTED_WRITE_SPM(reg, value)</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#define _PROTECTED_WRITE(reg, value)                \</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">  __asm__ __volatile__(&quot;out %[ccp], %[ccp_ioreg]&quot;</span> &quot;\n\t&quot;    \</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>               &quot;sts %[ioreg], %[val]&quot;           \</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>               :                    \</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>               : [ccp] &quot;I&quot; (_SFR_IO_ADDR(CCP)),     \</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>             [ccp_ioreg] &quot;d&quot; ((uint8_t)CCP_IOREG_gc),   \</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>             [ioreg] &quot;n&quot; (_SFR_MEM_ADDR(reg)),  \</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>             [val] &quot;r&quot; ((uint8_t)value))</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#define _PROTECTED_WRITE_SPM(reg, value) \</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">  __asm__ __volatile__(&quot;out %[ccp], %[ccp_spm_mask]&quot;</span> &quot;\n\t&quot; \</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                       &quot;sts %[ioreg], %[val]&quot;               \</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                       :                                    \</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                       : [ccp]          &quot;I&quot; (_SFR_IO_ADDR(CCP)), \</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                         [ccp_spm_mask] &quot;d&quot; ((uint8_t)CCP_SPM_gc), \</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                         [ioreg]        &quot;n&quot; (_SFR_MEM_ADDR(reg)), \</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                         [val]          &quot;r&quot; ((uint8_t)value))</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#endif </span><span class="comment">/* _AVR_XMEGA_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#else  </span><span class="comment">/* !__DOXYGEN__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#ifdef __AVR_TINY__</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#define _PROTECTED_WRITE(reg, value)            \</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">  __asm__ __volatile__ (&quot;out %i0, %1&quot;</span> &quot;\n\t&quot;        \</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            &quot;out %i2, %3&quot;           \</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            :               \</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            : &quot;n&quot; (&amp; CCP),          \</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>              &quot;d&quot; ((uint8_t) 0xd8),     \</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>              &quot;n&quot; (&amp; (reg)),        \</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>              &quot;r&quot; ((uint8_t) (value)))</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#elif defined (__AVR_XMEGA__)</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#define _PROTECTED_WRITE(reg, value)            \</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">  __asm__ __volatile__ (&quot;out %i0, %1&quot;</span> &quot;\n\t&quot;        \</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            &quot;sts %2, %3&quot;            \</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            :               \</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            : &quot;n&quot; (&amp; CCP),          \</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>              &quot;d&quot; ((uint8_t) CCP_IOREG_gc), \</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>              &quot;n&quot; (&amp; (reg)),        \</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>              &quot;r&quot; ((uint8_t) (value)))</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#endif </span><span class="comment">/* AVR_TINY || Xmega */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#if defined(__AVR_TINY__) &amp;&amp; defined(CCP_SPM_gc)</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">#define _PROTECTED_WRITE_SPM(reg, value)        \</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">  __asm__ __volatile__ (&quot;out %i0, %1&quot;</span> &quot;\n\t&quot;        \</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            &quot;out %i2, %3&quot;           \</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            :               \</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            : &quot;n&quot; (&amp; CCP),          \</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>              &quot;d&quot; ((uint8_t) CCP_SPM_gc),   \</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>              &quot;n&quot; (&amp; (reg)),        \</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>              &quot;r&quot; ((uint8_t) (value)))</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="preprocessor">#elif defined(__AVR_XMEGA__)</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#define _PROTECTED_WRITE_SPM(reg, value)        \</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">  __asm__ __volatile__ (&quot;out %i0, %1&quot;</span> &quot;\n\t&quot;        \</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            &quot;sts %2, %3&quot;            \</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            :               \</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            : &quot;n&quot; (&amp; CCP),          \</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>              &quot;d&quot; ((uint8_t) CCP_SPM_gc),   \</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>              &quot;n&quot; (&amp; (reg)),        \</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>              &quot;r&quot; ((uint8_t) (value)))</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#endif </span><span class="comment">/* ATtiny102/104 || Xmega */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif </span><span class="comment">/* _AVR_XMEGA_H */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:09 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

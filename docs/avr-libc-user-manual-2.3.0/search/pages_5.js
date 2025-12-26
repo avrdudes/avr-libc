@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['global_20index_0',['Global Index',['../Global_01Index.html',1,'']]]
+  ['how_20to_20build_20a_20library_0',['How to Build a Library',['../library.html',1,'']]]
 ];

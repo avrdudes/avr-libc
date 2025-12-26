@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -100,21 +99,35 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <div class="headertitle"><div class="title">Data in Program Space </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="pgmspace_introduction"></a>
+<div class="textblock"><ul>
+<li><a class="el" href="pgmspace.html#pgmspace_introduction">Introduction</a></li>
+<li><a class="el" href="pgmspace.html#pgmspace_const">Why is GCC putting const Data into RAM?</a></li>
+<li><a class="el" href="pgmspace.html#pgmspace_data">Storing and Retrieving Data in the Program Space</a><ul>
+<li><a class="el" href="pgmspace.html#pgmspace_data_progmem">With Attribute PROGMEM and pgm_read() Functions</a></li>
+<li><a class="el" href="pgmspace.html#pgmspace_data_flash">With Named Address-Space __flash</a></li>
+</ul>
+</li>
+<li><a class="el" href="pgmspace.html#pgmspace_progmem_vs_flash">PROGMEM and __flash: The Differences</a></li>
+<li><a class="el" href="pgmspace.html#pgmspace_strings">Storing and Retrieving Strings in the Program Space</a><ul>
+<li><a class="el" href="pgmspace.html#pgmspace_strings_flash">With __flash</a></li>
+<li><a class="el" href="pgmspace.html#pgmspace_strings_progmem">With PROGMEM</a></li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="pgmspace_introduction"></a>
 Introduction</h1>
 <p>So you have some constant data and you're running out of room to store it? Many AVRs have limited amount of RAM in which to store data, but may have more Flash space available. The AVR is a Harvard architecture processor, where Flash is used for the program, RAM is used for data, and they each have separate address spaces. It is a challenge to get constant data to be stored in the Program Space, and to retrieve that data to use it in the AVR application.</p>
 <p>The problem is exacerbated by the fact that the C Language was not designed for Harvard architectures, it was designed for Von Neumann architectures where code and data exist in the same address space. This means that any compiler for a Harvard architecture processor, like the AVR, has to use other means to operate with separate address spaces.</p>
 <p>GCC has a special keyword, <code>__attribute__</code> that is used to attach different attributes to things such as function declarations, variables, and types. This keyword is followed by an attribute specification in double parentheses. In AVR GCC, there is a special attribute called <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Variable-Attributes.html#index-progmem-variable-attribute_002c-AVR"><code>progmem</code></a>. This attribute is used on data definitions, and tells the compiler to place the data in the Program Memory (Flash).</p>
 <p>AVR-LibC provides a simple macro <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> that is defined as the attribute syntax of GCC with the <code>__progmem__</code> attribute. The PROGMEM macro is defined in the <a class="el" href="group__avr__pgmspace.html">&lt;avr/pgmspace.h&gt;</a> system header which also provides macros and inline functions to access such data.</p>
 <p>An alternative approach is taken by named address-spaces like <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> and <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> as proposed by the N1275 draft to the ISO/IEC DTR 18037 "Embedded C" specification. Named address-spaces are supported in <code>avr-gcc</code> since v4.7 (<a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> since <code>avr-gcc</code> v15) as part of the GNU-C99 language dialect (<code>-std=gnu99</code> and up), see the <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html">avr-gcc documentation</a>.</p>
-<dl class="section note"><dt>Note</dt><dd>There are AVR devices that provide a linear address space where the program memory is seen in the RAM address space and can be accessed with <code>LD</code> instructions. The respective device families are:<ul>
+<p><b>AVRs with a linear address space</b></p>
+<p>There are AVR devices that provide a linear address space where the program memory is seen in the RAM address space and can be accessed with <code>LD</code> instructions. The respective device families are:</p><ul>
 <li>Devices from the AVRrc core in <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrtiny">avrtiny</a>.</li>
 <li>AVR16 and AVR32 devices, and devices from the 0-series, 1-series, 2-series in <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega3">avrxmega3</a>.</li>
-<li>AVR64 devices in <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega2">avrxmega2</a> and AVR128 devices in <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega4">avrxmega4</a>. For these devices, only a 32 KiB portion of the program flash is visible in the RAM address space. And only <em>without</em> <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a> will <code>.rodata</code> be located in flash. </li>
+<li>AVR64 devices in <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega2">avrxmega2</a> and AVR128 devices in <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega4">avrxmega4</a>. For these devices, only a 32 KiB portion of the program flash is visible in the RAM address space. And only <em>without</em> <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a> will <code>.rodata</code> be located in flash.</li>
 </ul>
-</dd>
-<dd>
-In all of these cases, complications like <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> or <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> are not needed, though they are working as usual.</dd></dl>
+<p>In all of these cases, complications like <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> or <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> are not needed, though they are working as usual.</p>
 <h1><a class="anchor" id="pgmspace_const"></a>
 Why is GCC putting const Data into RAM to begin with?</h1>
 <p>From a technical point of view, GCC is putting constant data in static storage<sup><a class="el" href="pgmspace.html#foot_cpp_const">1</a></sup> into the <a class="el" href="mem_sections.html#sec_input">.rodata input section</a>, as opposed to non-const data which is put into <code>.data</code> or <code>.bss</code>. But the question is then: Why is the <a class="el" href="mem_sections.html#sec_ld_script_blocks">linker (script)</a> putting the <code>.rodata</code> sections into RAM? In order to better understand this, take the following code: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
@@ -169,12 +182,12 @@ else
 <div class="line"><span class="keywordtype">bool</span> is_one (<span class="keyword">const</span> <span class="keywordtype">char</span> *pc, <span class="keywordtype">bool</span> is_ram_addr)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordtype">char</span> c = is_ram_addr</div>
-<div class="line">        ? <a class="code hl_function" href="group__avr__pgmspace.html#ga31fde89bb6d08399d0469dfc9244187b">pgm_read_char</a> (pc)</div>
+<div class="line">        ? <a class="code hl_function" href="group__avr__pgmspace.html#ga9e71104956e1361499586162104975e7">pgm_read_char</a> (pc)</div>
 <div class="line">        : *pc;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> c == <span class="charliteral">&#39;1&#39;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga31fde89bb6d08399d0469dfc9244187b"><div class="ttname"><a href="group__avr__pgmspace.html#ga31fde89bb6d08399d0469dfc9244187b">pgm_read_char</a></div><div class="ttdeci">static char pgm_read_char(const char *addr)</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga9e71104956e1361499586162104975e7"><div class="ttname"><a href="group__avr__pgmspace.html#ga9e71104956e1361499586162104975e7">pgm_read_char</a></div><div class="ttdeci">static char pgm_read_char(const char *addr)</div></div>
 <div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
 </div><!-- fragment --><p>Notes</p>
 <ol type="1">
@@ -205,7 +218,7 @@ With Attribute PROGMEM and pgm_read() Functions</h2>
 <div class="line">    { 2, 3, 5,  7, 11, 13, 17, 19 },</div>
 <div class="line">    { 1, 4, 9, 16, 25, 36, 49, 64 }</div>
 <div class="line">};</div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:146</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga75acaba9e781937468d0911423bc0c35"><div class="ttname"><a href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a></div><div class="ttdeci">#define PROGMEM</div><div class="ttdef"><b>Definition:</b> pgmspace.h:144</div></div>
 </div><!-- fragment --><p>That's it! Now your data is in the Program Space. You can compile, link, and check the map file to verify that <code>mydata</code> is placed in the correct section.</p>
 <p>Now that your data resides in the Program Space, your code to access (read) the data will no longer work. The code that gets generated will retrieve the data that is located at the address of the <code>mydata</code> array, plus offsets indexed by the <code>i</code> and <code>j</code> variables. However, the final address that is calculated where to the retrieve the data points to the Data Space! Not the Program Space where the data is actually located. It is likely that you will be retrieving some garbage. The problem is that <code>avr-gcc</code> does not intrinsically know that the data resides in the Program Space.</p>
 <p>The solution is fairly simple. The "rule of thumb" for accessing data stored in the Program Space is to access the data as you normally would (as if the variable is stored in Data Space), like so:</p>
@@ -213,7 +226,7 @@ With Attribute PROGMEM and pgm_read() Functions</h2>
 </div><!-- fragment --><p>then take the address of the data:</p>
 <div class="fragment"><div class="line">... &amp;(mydata[i][j]);</div>
 </div><!-- fragment --><p>then use the appropriate <code>pgm_read_*</code> function, and the address of your data becomes the parameter to that function:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">char</span> value = <a class="code hl_function" href="group__avr__pgmspace.html#ga31fde89bb6d08399d0469dfc9244187b">pgm_read_char</a> (&amp;(mydata[i][j]));</div>
+<div class="fragment"><div class="line"><span class="keywordtype">char</span> value = <a class="code hl_function" href="group__avr__pgmspace.html#ga9e71104956e1361499586162104975e7">pgm_read_char</a> (&amp;(mydata[i][j]));</div>
 </div><!-- fragment --><p>The <code>pgm_read_*</code> functions take an address that points to the Program Space, and retrieves the data that is stored at that address. This is why you take the address of the offset into the array. This address becomes the parameter to the function so it can generate the correct code to retrieve the data from the Program Space. There are different <code>pgm_read_*</code> functions to read different types of data at the address given.</p>
 <h2><a class="anchor" id="pgmspace_data_flash"></a>
 With Named Address-Space __flash</h2>
@@ -234,7 +247,7 @@ With Named Address-Space __flash</h2>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">return</span> get_first (mydata[n]);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:81</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="pgmspace_progmem_vs_flash"></a>
 PROGMEM and __flash: The Differences</h1>
 <p>So what's are the ups and down of using <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> or <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> ?</p>
@@ -252,7 +265,7 @@ PROGMEM and __flash: The Differences</h1>
 <div class="line">    <span class="keywordflow">return</span> *c; <span class="comment">// Compiles to LPM</span></div>
 <div class="line">}</div>
 </div><!-- fragment --> whereas this is not possible for <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, which is an attribute in GCC and not a qualifier.</li>
-<li>The analogon to <a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a> for address-spaces is <a class="el" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> or <a class="el" href="group__avr__flash.html#ga63582dc1de52de7622e3b010b4213bd2">FXSTR</a>. As of v14, <code>avr-gcc</code> still rejects to put local static compound literals into an address-space (GCC PR84163). While constructs like <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> <span class="keywordtype">char</span> *ptext = <a class="code hl_define" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> (<span class="stringliteral">&quot;Text&quot;</span>);</div>
+<li>The analog of <a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a> for address-spaces is <a class="el" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> or <a class="el" href="group__avr__flash.html#ga63582dc1de52de7622e3b010b4213bd2">FXSTR</a>. As of v14, <code>avr-gcc</code> still rejects to put local static compound literals into an address-space (GCC PR84163). While constructs like <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> <span class="keywordtype">char</span> *ptext = <a class="code hl_define" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> (<span class="stringliteral">&quot;Text&quot;</span>);</div>
 <div class="ttc" id="agroup__avr__flash_html_gabec036cb18588b3891217d4e0be515ee"><div class="ttname"><a href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a></div><div class="ttdeci">#define FSTR(str)</div><div class="ttdef"><b>Definition:</b> flash.h:180</div></div>
 </div><!-- fragment --> will work and are qualifier-correct, i.e. <code>avr-gcc</code> will not raise a diagnostic with <code>-Waddr-space-convert</code>.</li>
 <li><a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a> cannot be used on global scope, whereas a similar construct with address-spaces is possible: Take for example the code discussed in the next section that declares an array to string literals. With address-space we can write: <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="flash_8h.html">avr/flash.h</a>&gt;</span></div>
@@ -270,7 +283,11 @@ PROGMEM and __flash: The Differences</h1>
 </ol>
 <h1><a class="anchor" id="pgmspace_strings"></a>
 Storing and Retrieving Strings in the Program Space</h1>
-<dl class="section note"><dt>Note</dt><dd>For a solution with the <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> address-space, see the section above or have a look at <a class="el" href="FAQ.html#faq_rom_array_as">FAQ: How to put an array of strings completely in ROM?</a></dd></dl>
+<h2><a class="anchor" id="pgmspace_strings_flash"></a>
+With __flash</h2>
+<p>For a solution with the <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> address-space, see the section above, the <a class="el" href="group__avr__flash.html#ga80fd1c204ef50d9959ddcfd122dd3816">FLIT</a> examples, or have a look at the <a class="el" href="FAQ.html#faq_rom_array_as">FAQ: How to put an array of strings completely in ROM?</a></p>
+<h2><a class="anchor" id="pgmspace_strings_progmem"></a>
+With PROGMEM</h2>
 <p>Now that you can successfully store and retrieve simple data from Program Space you want to store and retrieve strings from Program Space. And specifically you want to store and array of strings to Program Space. So you start off with your array, like so:</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> string_table[] =</div>
 <div class="line">{</div>
@@ -300,7 +317,7 @@ Storing and Retrieving Strings in the Program Space</h1>
 <div class="line">};</div>
 </div><!-- fragment --><p>Now this has the effect of putting <code>string_table</code> in Program Space, where <code>string_table</code> is an array of pointers to characters (strings), where each pointer is a pointer to the Program Space, where each string is also stored.</p>
 <p>Retrieving the strings are a different matter. You probably don't want to pull the string out of Program Space, byte by byte, using the <code><a class="el" href="group__avr__pgmspace.html#gae89a4ff0b5a887888fcf83c4701b310b">pgm_read_byte()</a></code> macro or <code>prgm_read_char()</code> function. There are other functions declared in the &lt;<a class="el" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt; header file that work with strings that are stored in the Program Space.</p>
-<p>For example if you want to copy the string from Program Space to a buffer in RAM (like an automatic variable inside a function, that is allocated on the stack), you can do this:</p>
+<p>For example, if you want to copy the string from Program Space to a buffer in RAM (like an automatic variable inside a function, that is allocated on the stack), you can do this:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> foo (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordtype">char</span> buffer[10];</div>
@@ -313,15 +330,15 @@ Storing and Retrieving Strings in the Program Space</h1>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__pgmspace_html_ga5749897c91c479d02054fc02128de482"><div class="ttname"><a href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a></div><div class="ttdeci">char * strcpy_P(char *, const char *)</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:938</div></div>
-</div><!-- fragment --><p>Here, the <code>string_table</code> array is stored in Program Space, so we access it normally, as if were stored in Data Space, then take the address of the location we want to access, and use the address as a parameter to <code>pgm_read_ptr</code>. We use the <code>pgm_read_ptr</code> macro to read the string pointer out of the <code>string_table</code> array. Remember that a pointer is 16-bits, or word size. The <a class="el" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a> macro will return a <code>void*</code>. This pointer is an address in Program Space pointing to the string that we want to copy. This pointer is then used as a parameter to the function <a class="el" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a>. The function <a class="el" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> is just like the regular <code>strcpy</code> function, except that it copies a string from Program Space (the second parameter) to a buffer in the Data Space (the first parameter).</p>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8e93d1e5bf48f30fd1e30adeb4b7cc0f"><div class="ttname"><a href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a></div><div class="ttdeci">#define pgm_read_ptr(__addr)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:889</div></div>
+</div><!-- fragment --><p>Here, the <code>string_table</code> array is stored in Program Space, so we access it normally, as if it was stored in Data Space, then take the address of the location we want to access, and use the address as a parameter to <code>pgm_read_ptr</code>. We use the <code>pgm_read_ptr</code> macro to read the string pointer out of the <code>string_table</code> array. Remember that a pointer is 16-bits, or word size. The <a class="el" href="group__avr__pgmspace.html#ga8e93d1e5bf48f30fd1e30adeb4b7cc0f">pgm_read_ptr</a> macro will return a <code>void*</code>. This pointer is an address in Program Space pointing to the string that we want to copy. This pointer is then used as a parameter to the function <a class="el" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a>. The function <a class="el" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a> is just like the regular <code>strcpy</code> function, except that it copies a string from Program Space (the second parameter) to a buffer in the Data Space (the first parameter).</p>
 <p>There are many string functions available that work with strings located in Program Space. All of these special string functions have a suffix of <code>_P</code> in the function name, and are declared in the &lt;<a class="el" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt; header file. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

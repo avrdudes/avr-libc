@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -348,7 +347,7 @@ bat is a bat? yes!
 cat is a rat? no!
 </pre><p> provided stdout has been set up appropriately.</p>
 <h3>Efficiency</h3>
-<p>The internal handling of 64-bit values in avr-gcc is such that it splits them into single byte operations for the purpose of moving them around. This can lead to quite some overhead when reading such values from named address-spaces. To that end, <code><a class="el" href="flash_8h.html">avr/flash.h</a></code> provides some inline functions like <a class="el" href="group__avr__flash.html#ga368f51c58ca62b924e33046666512d92">flash_read_u64</a> and <a class="el" href="group__avr__flash.html#ga24f4372febe2c5dbb177b63978f8dff5">flashx_read_double</a> that work similar to the <a class="el" href="group__avr__pgmspace.html#ga266c87f35aa451f4e65c3757344e9d54">pgm_read_u64</a> and <a class="el" href="group__avr__pgmspace.html#ga67ad7392ef85ae9ca11d2d127ca84ab8">pgm_read_double_far</a> functions, but are coming with proper address-space qualification.</p>
+<p>The internal handling of 64-bit values in avr-gcc is such that it splits them into single byte operations for the purpose of moving them around. This can lead to quite some overhead when reading such values from named address-spaces. To that end, <code><a class="el" href="flash_8h.html">avr/flash.h</a></code> provides some inline functions like <a class="el" href="group__avr__flash.html#ga368f51c58ca62b924e33046666512d92">flash_read_u64</a> and <a class="el" href="group__avr__flash.html#ga24f4372febe2c5dbb177b63978f8dff5">flashx_read_double</a> that work similar to the <a class="el" href="group__avr__pgmspace.html#ga327b41edffa0f796b6f5ad592e5ee158">pgm_read_u64</a> and <a class="el" href="group__avr__pgmspace.html#gaff7b8f133008dfc3395b0e13e177d170">pgm_read_double_far</a> functions, but are coming with proper address-space qualification.</p>
 <h3>Limitations</h3>
 <ul>
 <li>Named address-spaces are supported by avr-gcc as part of GNU-C (e.g. <code>-std=gnu99</code>). They are not available in Standard C, and are not supported in C++.</li>
@@ -3375,7 +3374,7 @@ strlen(initial dst)). If retval &gt;= siz, truncation occurred. </dd></dl>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

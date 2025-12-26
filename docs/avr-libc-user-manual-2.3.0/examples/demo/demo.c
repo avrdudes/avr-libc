@@ -7,26 +7,39 @@
  * ----------------------------------------------------------------------------
  *
  * Simple AVR demonstration.  Controls a LED that can be directly
- * connected from OC1/OC1A to GND.  The brightness of the LED is
+ * connected from a pin to GND.  The brightness of the LED is
  * controlled with the PWM.  After each period of the PWM, the PWM
  * value is either incremented or decremented, that's all.
+ *
+ * Configured to run on an Arduino Nano compatible device with an
+ * ATmega328P.  The board has a LED, which is connected to PB5.  Since
+ * PB5 is not a hardware waveform output from a timer on the
+ * ATmega328P, the LED is toggled within the timer interrupts.
  */
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 
-#include "iocompat.h"		/* Note [1] */
+/* Note [1] */
+#define TIMER1_TOP 1023
+
+#define LED_PORT PORTB
+#define LED_DDR  DDRB
+#define LED_PIN  _BV(5)
 
 enum { UP, DOWN };
 
-ISR (TIMER1_OVF_vect)		/* Note [2] */
+ISR(TIMER1_CAPT_vect)           // Note [2]
 {
-    static uint16_t pwm;	/* Note [3] */
+    // turn on LED
+    LED_PORT |= LED_PIN;        // Note [3]
+
+    static uint16_t pwm;        // Note [4]
     static uint8_t direction;
 
-    switch (direction)		/* Note [4] */
+    switch (direction)          // Note [5]
     {
         case UP:
             if (++pwm == TIMER1_TOP)
@@ -39,49 +52,43 @@ ISR (TIMER1_OVF_vect)		/* Note [2] */
             break;
     }
 
-    OCR = pwm;			/* Note [5] */
+    OCR1A = pwm;                // Note [6]
 }
 
-void
-ioinit (void)			/* Note [6] */
+ISR(TIMER1_COMPA_vect)
 {
-    /* Timer 1 is 10-bit PWM (8-bit PWM on some ATtinys). */
-    TCCR1A = TIMER1_PWM_INIT;
-    /*
-     * Start timer 1.
-     *
-     * NB: TCCR1A and TCCR1B could actually be the same register, so
-     * take care to not clobber it.
-     */
-    TCCR1B |= TIMER1_CLOCKSOURCE;
-    /*
-     * Run any device-dependent timer 1 setup hook if present.
-     */
-#if defined(TIMER1_SETUP_HOOK)
-    TIMER1_SETUP_HOOK();
-#endif
+    // turn off LED
+    LED_PORT &= ~LED_PIN;       // Note [7]
+}
+
+static void
+ioinit(void)                    // Note [8]
+{
+    /* Timer 1 in CTC mode with 10 bits, CPU/8 speed */
+    ICR1 = TIMER1_TOP;
+    TCCR1A = 0;
+    TCCR1B = _BV(WGM13) | _BV(WGM12) | 2;
 
     /* Set PWM value to 0. */
-    OCR = 0;
+    OCR1A = 1;
 
     /* Enable OC1 as output. */
-    DDROC = _BV (OC1);
+    LED_DDR |= LED_PIN;
 
-    /* Enable timer 1 overflow interrupt. */
-    TIMSK = _BV (TOIE1);
+    /* Enable timer 1 overflow and compare A interrupt. */
+    TIMSK1 = _BV(ICIE1) | _BV(OCIE1A);
     sei ();
 }
 
 int
-main (void)
+main(void)
 {
-
     ioinit ();
 
-    /* loop forever, the interrupts are doing the rest */
+    /* Loop forever, the interrupts are doing the rest.  */
 
-    for (;;)			/* Note [7] */
+    for (;;)                    // Note [9]
         sleep_mode();
 
-    return (0);
+    return 0;
 }

@@ -16,7 +16,6 @@
 #include <stdio.h>
 
 #include <avr/io.h>
-
 #include <util/delay.h>
 
 #include "hd44780.h"
@@ -60,6 +59,7 @@ int
 lcd_putchar(char c, FILE *unused)
 {
   static bool nl_seen;
+  (void) unused;
 
   if (nl_seen && c != '\n')
     {

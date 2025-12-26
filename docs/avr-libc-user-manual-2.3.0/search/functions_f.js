@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['rand_0',['rand',['../group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1',1,'rand(void):&#160;rand.c'],['../group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1',1,'rand(void):&#160;rand.c']]],
-  ['rand_5fr_1',['rand_r',['../group__avr__stdlib.html#gaf5085001be836a0f2a5d3269a7c9fd04',1,'rand_r(unsigned long *__ctx):&#160;rand.c'],['../group__avr__stdlib.html#gaf5085001be836a0f2a5d3269a7c9fd04',1,'rand_r(unsigned long *ctx):&#160;rand.c']]],
+  ['rand_0',['rand',['../group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1',1,'stdlib.h']]],
+  ['rand_5fr_1',['rand_r',['../group__avr__stdlib.html#gaf5085001be836a0f2a5d3269a7c9fd04',1,'stdlib.h']]],
   ['random_2',['random',['../group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd',1,'random(void):&#160;random.c'],['../group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd',1,'random(void):&#160;random.c']]],
   ['random_5fr_3',['random_r',['../group__avr__stdlib.html#gaa99a0733f06d2b9960a1401c2721af1e',1,'random_r(unsigned long *__ctx):&#160;random.c'],['../group__avr__stdlib.html#gaa99a0733f06d2b9960a1401c2721af1e',1,'random_r(unsigned long *ctx):&#160;random.c']]],
   ['rbits_4',['rbits',['../group__avr__stdfix.html#ga992a7284a99c3442440c456f217dcb27',1,'stdfix-avrlibc.h']]],

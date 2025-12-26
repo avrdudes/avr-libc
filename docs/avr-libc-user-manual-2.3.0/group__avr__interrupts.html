@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -104,7 +103,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Global manipulation of the interrupt flag</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>The global interrupt flag is maintained in the I bit of the status register (SREG).</p>
 <p>Handling interrupts frequently requires attention regarding atomic access to objects that could be altered by code running within an interrupt context, see &lt;<a class="el" href="atomic_8h.html">util/atomic.h</a>&gt;.</p>
-<p>Frequently, interrupts are being disabled for periods of time in order to perform certain operations without being disturbed; see <a class="el" href="optimization.html#optim_code_reorder">Problems with reordering code</a> for things to be taken into account with respect to compiler optimizations. </p>
+<p>Frequently, interrupts are being disabled for periods of time in order to perform certain operations without being disturbed; see <a class="el" href="optimization.html#optim_code_reorder">Problems with Reordering Code</a> for things to be taken into account with respect to compiler optimizations. </p>
 </td></tr>
 <tr class="memitem:gaad5ebd34cb344c26ac87594f79b06b73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>()&#160;&#160;&#160;__asm__ __volatile__ (&quot;sei&quot; ::: &quot;memory&quot;)</td></tr>
 <tr class="separator:gaad5ebd34cb344c26ac87594f79b06b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,7 +175,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">    <span class="comment">// user code here</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga1f6459a85cda682b2163a20af03ac744"><div class="ttname"><a href="group__avr__interrupts.html#ga1f6459a85cda682b2163a20af03ac744">BADISR_vect</a></div><div class="ttdeci">#define BADISR_vect</div><div class="ttdef"><b>Definition:</b> interrupt.h:338</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga1f6459a85cda682b2163a20af03ac744"><div class="ttname"><a href="group__avr__interrupts.html#ga1f6459a85cda682b2163a20af03ac744">BADISR_vect</a></div><div class="ttdeci">#define BADISR_vect</div><div class="ttdef"><b>Definition:</b> interrupt.h:336</div></div>
 </div><!-- fragment --><h3>Nested interrupts</h3>
 <p>The AVR hardware clears the global interrupt flag in SREG when an interrupt request is serviced. Thus, normally interrupts will remain disabled inside the handler until the handler exits, where the RETI instruction (that is emitted by the compiler as part of the normal function epilogue for an ISR) will eventually re-enable further interrupts. For that reason, interrupt handlers normally do not nest. For most interrupt handlers, this is the desired behaviour, for some it is even required in order to prevent infinitely recursive interrupts (like UART interrupts, or level-triggered external interrupts). In rare circumstances though it might be desired to re-enable the global interrupt flag as early as possible in the interrupt handler, in order to not defer any other interrupt more than absolutely needed. This could be done using an <code><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a></code> instruction right at the beginning of the interrupt handler, but this still leaves few instructions inside the compiler-generated function prologue to run with global interrupts disabled. The compiler can be instructed to insert a <code>SEI</code> instruction right at the beginning of an interrupt handler by declaring the handler the following way:</p>
 <p><a class="anchor" id="attr_interrupt"></a></p><div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> (XXX_vect, <a class="code hl_define" href="group__avr__interrupts.html#ga44569cb914d2aaf8fbb436f8f7c4ca68">ISR_NOBLOCK</a>)</div>
@@ -191,7 +190,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">  ...</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga44569cb914d2aaf8fbb436f8f7c4ca68"><div class="ttname"><a href="group__avr__interrupts.html#ga44569cb914d2aaf8fbb436f8f7c4ca68">ISR_NOBLOCK</a></div><div class="ttdeci">#define ISR_NOBLOCK</div><div class="ttdef"><b>Definition:</b> interrupt.h:374</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga44569cb914d2aaf8fbb436f8f7c4ca68"><div class="ttname"><a href="group__avr__interrupts.html#ga44569cb914d2aaf8fbb436f8f7c4ca68">ISR_NOBLOCK</a></div><div class="ttdeci">#define ISR_NOBLOCK</div><div class="ttdef"><b>Definition:</b> interrupt.h:372</div></div>
 </div><!-- fragment --><p>where <code>XXX_vect</code> is the name of a valid interrupt vector for the MCU type in question, as explained below.</p>
 <h3>Two vectors sharing the same code</h3>
 <p>In some circumstances, the actions to be taken upon two different interrupts might be completely identical so a single implementation for the ISR would suffice. For example, pin-change interrupts arriving from two different ports could logically signal an event that is independent from the actual port (and thus interrupt vector) where it happened. Sharing interrupt vector code can be accomplished using the <a class="el" href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF()</a> attribute to the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> macro:</p>
@@ -222,7 +221,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">  <span class="comment">// Code to handle the event.</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_gaa87c0c624b62f40a17539be6946c3e26"><div class="ttname"><a href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF</a></div><div class="ttdeci">#define ISR_ALIASOF(target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:451</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_gaa87c0c624b62f40a17539be6946c3e26"><div class="ttname"><a href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF</a></div><div class="ttdeci">#define ISR_ALIASOF(target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:447</div></div>
 </div><!-- fragment --><p>Note that the <a class="el" href="group__avr__interrupts.html#gaa87c0c624b62f40a17539be6946c3e26">ISR_ALIASOF()</a> feature requires GCC 4.2 or above (or a patched version of GCC 4.1.x). See the documentation of the <a class="el" href="group__avr__interrupts.html#gade46eb4e42cc9d56c19b1f91448f1b76">ISR_ALIAS()</a> macro for an implementation which is less elegant but could be applied to all compiler versions. The <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N()</a> macro requires GCC v15 or higher.</p>
 <h3>Empty interrupt service routines</h3>
 <p>In rare circumstances, in interrupt vector does not need any code to be implemented at all. The vector must be declared anyway, so when the interrupt triggers it won't execute the BADISR_vect code (which by default restarts the application).</p>
@@ -250,8 +249,8 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">  PORTB |= <a class="code hl_define" href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a>(0);  <span class="comment">// results in SBI which does not affect SREG</span></div>
 <div class="line">  <a class="code hl_define" href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:325</div></div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga8b4c7e44627db0a60d676213add42d64"><div class="ttname"><a href="group__avr__interrupts.html#ga8b4c7e44627db0a60d676213add42d64">ISR_NAKED</a></div><div class="ttdeci">#define ISR_NAKED</div><div class="ttdef"><b>Definition:</b> interrupt.h:390</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:323</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga8b4c7e44627db0a60d676213add42d64"><div class="ttname"><a href="group__avr__interrupts.html#ga8b4c7e44627db0a60d676213add42d64">ISR_NAKED</a></div><div class="ttdeci">#define ISR_NAKED</div><div class="ttdef"><b>Definition:</b> interrupt.h:388</div></div>
 <div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:206</div></div>
 </div><!-- fragment --><h3>Choosing the vector: Interrupt vector names</h3>
 <p>The interrupt is chosen by supplying one of the vector names in the following table. Apart from the <code><em>NAME</em>_vect</code> macros listed below, for each such ISR name there is also a macro <code><em>NAME</em>_vect_num</code> defined which resolves to the IRQ number and that can be used in the <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> macro.</p>
@@ -274,12 +273,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>AC0_AC_vect</td>
     <td>AC0 IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+  </tr>
+  <tr>
+    <td>AC0_INT_vect</td>
+    <td>AC0 IRQs</td>
+    <td>AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32</td>
   </tr>
   <tr>
     <td>AC1_AC_vect</td>
     <td>AC1 IRQs</td>
-    <td>ATtiny1614, ATtiny1616, ATtiny1617, ATtiny3214, ATtiny3216, ATtiny3217, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny1614, ATtiny1616, ATtiny1617, ATtiny3214, ATtiny3216, ATtiny3217, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>AC2_AC_vect</td>
@@ -319,17 +323,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>ADC0_ERROR_vect</td>
     <td>ADC0 IRQs</td>
-    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3224, ATtiny3226, ATtiny3227, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48</td>
+    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3224, ATtiny3226, ATtiny3227, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48</td>
   </tr>
   <tr>
     <td>ADC0_RESRDY_vect</td>
     <td>ADC0 IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>ADC0_SAMPRDY_vect</td>
     <td>ADC0 IRQs</td>
-    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3224, ATtiny3226, ATtiny3227, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48</td>
+    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3224, ATtiny3226, ATtiny3227, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48</td>
   </tr>
   <tr>
     <td>ADC0_WCMP_vect</td>
@@ -529,7 +533,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>BOD_VLM_vect</td>
     <td>BOD IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>BPINT_vect</td>
@@ -584,7 +588,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>CCL_CCL_vect</td>
     <td>CCL IRQs</td>
-    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>CFD_vect</td>
@@ -614,7 +618,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>CRCSCAN_INT_vect</td>
     <td>CRCSCAN IRQs</td>
-    <td>AVR32SD20, AVR32SD28, AVR32SD32</td>
+    <td>AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32</td>
   </tr>
   <tr>
     <td>CRCSCAN_NMI_vect</td>
@@ -959,7 +963,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>NMI_vect</td>
     <td>NMI IRQs</td>
-    <td>AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>NVMCTRL_EE_vect</td>
@@ -969,7 +973,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>NVMCTRL_EEREADY_vect</td>
     <td>NVMCTRL IRQs</td>
-    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EA28, AVR32EA32, AVR32EA48, AVR64EA28, AVR64EA32, AVR64EA48</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR64EA28, AVR64EA32, AVR64EA48</td>
   </tr>
   <tr>
     <td>NVMCTRL_ERROR_vect</td>
@@ -979,12 +983,12 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>NVMCTRL_FLREADY_vect</td>
     <td>NVMCTRL IRQs</td>
-    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EA28, AVR32EA32, AVR32EA48, AVR64EA28, AVR64EA32, AVR64EA48</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR64EA28, AVR64EA32, AVR64EA48</td>
   </tr>
   <tr>
     <td>NVMCTRL_NVMREADY_vect</td>
     <td>NVMCTRL IRQs</td>
-    <td>AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48</td>
+    <td>AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48</td>
   </tr>
   <tr>
     <td>NVMCTRL_READY_vect</td>
@@ -1079,7 +1083,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>PORTA_PORT_vect</td>
     <td>PORTA IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>PORTB_INT0_vect</td>
@@ -1114,7 +1118,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>PORTC_PORT_vect</td>
     <td>PORTC IRQs</td>
-    <td>ATtiny406, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny406, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>PORTD_INT0_vect</td>
@@ -1134,7 +1138,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>PORTD_PORT_vect</td>
     <td>PORTD IRQs</td>
-    <td>ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>PORTE_INT0_vect</td>
@@ -1164,7 +1168,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>PORTF_PORT_vect</td>
     <td>PORTF IRQs</td>
-    <td>ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>PORTG_INT0_vect</td>
@@ -1344,7 +1348,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>RTC_CNT_vect</td>
     <td>RTC IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>RTC_COMP_vect</td>
@@ -1359,7 +1363,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>RTC_PIT_vect</td>
     <td>RTC IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>SCIB_vect</td>
@@ -1414,7 +1418,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>SPI0_INT_vect</td>
     <td>SPI0 IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>SPI0_STC_vect</td>
@@ -1749,72 +1753,72 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>TCA1_CMP0_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_CMP1_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_CMP2_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_HUNF_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_LCMP0_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_LCMP1_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_LCMP2_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_LUNF_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCA1_OVF_vect</td>
     <td>TCA1 IRQs</td>
-    <td>AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCB0_INT_vect</td>
     <td>TCB0 IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCB1_INT_vect</td>
     <td>TCB1 IRQs</td>
-    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny424, ATtiny426, ATtiny427, ATtiny824, ATtiny826, ATtiny827, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCB2_INT_vect</td>
     <td>TCB2 IRQs</td>
-    <td>ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD28, AVR16DD32, AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD28, AVR32DD32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD28, AVR64DD32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCB3_INT_vect</td>
     <td>TCB3 IRQs</td>
-    <td>ATmega809, ATmega1609, ATmega3209, ATmega4809, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
+    <td>ATmega809, ATmega1609, ATmega3209, ATmega4809, AVR16EA28, AVR16EA32, AVR16EA48, AVR32DA48, AVR32DA48S, AVR32DB48, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB48, AVR64DB64, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCB4_INT_vect</td>
     <td>TCB4 IRQs</td>
-    <td>AVR32DA48S, AVR64DA64, AVR64DA64S, AVR64DB64, AVR128DA64, AVR128DA64S, AVR128DB64</td>
+    <td>AVR32DA48, AVR32DA48S, AVR64DA64, AVR64DA64S, AVR64DB64, AVR128DA64, AVR128DA64S, AVR128DB64</td>
   </tr>
   <tr>
     <td>TCC0_CCA_vect</td>
@@ -2079,22 +2083,22 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>TCE0_CMP0_vect</td>
     <td>TCE0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32</td>
   </tr>
   <tr>
     <td>TCE0_CMP1_vect</td>
     <td>TCE0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32</td>
   </tr>
   <tr>
     <td>TCE0_CMP2_vect</td>
     <td>TCE0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32</td>
   </tr>
   <tr>
     <td>TCE0_CMP3_vect</td>
     <td>TCE0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32</td>
   </tr>
   <tr>
     <td>TCE0_ERR_vect</td>
@@ -2109,7 +2113,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>TCE0_OVF_vect</td>
     <td>TCE0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32</td>
   </tr>
   <tr>
     <td>TCE1_CCA_vect</td>
@@ -2189,7 +2193,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>TCF0_INT_vect</td>
     <td>TCF0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32</td>
   </tr>
   <tr>
     <td>TCF0_OVF_vect</td>
@@ -2614,12 +2618,12 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>TWI0_TWIM_vect</td>
     <td>TWI0 IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TWI0_TWIS_vect</td>
     <td>TWI0 IRQs</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>TWI1_vect</td>
@@ -2799,7 +2803,12 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>USART0_DRE_vect</td>
     <td>USART0 Data Register Empty</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny1634, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny1634, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+  </tr>
+  <tr>
+    <td>USART0_ERROR_vect</td>
+    <td>USART0 IRQs</td>
+    <td>AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32</td>
   </tr>
   <tr>
     <td>USART0_RX_vect</td>
@@ -2809,7 +2818,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>USART0_RXC_vect</td>
     <td>USART0 Rx Complete</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny1634, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega162, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny1634, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega162, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>USART0_RXS_vect</td>
@@ -2834,7 +2843,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>USART0_TXC_vect</td>
     <td>USART0 Tx Complete</td>
-    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny1634, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega162, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
+    <td>ATtiny202, ATtiny204, ATtiny212, ATtiny214, ATtiny402, ATtiny404, ATtiny406, ATtiny412, ATtiny414, ATtiny416, ATtiny416auto, ATtiny417, ATtiny424, ATtiny426, ATtiny427, ATtiny804, ATtiny806, ATtiny807, ATtiny814, ATtiny816, ATtiny817, ATtiny824, ATtiny826, ATtiny827, ATtiny1604, ATtiny1606, ATtiny1607, ATtiny1614, ATtiny1616, ATtiny1617, ATtiny1624, ATtiny1626, ATtiny1627, ATtiny1634, ATtiny3214, ATtiny3216, ATtiny3217, ATtiny3224, ATtiny3226, ATtiny3227, ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega162, ATmega3208, ATmega3209, ATmega4808, ATmega4809, AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32, AVR32SD20, AVR32SD28, AVR32SD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR64DU28, AVR64DU32, AVR64EA28, AVR64EA32, AVR64EA48, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64</td>
   </tr>
   <tr>
     <td>USART0_UDRE_vect</td>
@@ -3309,22 +3318,22 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>WEX0_FAULTDET_vect</td>
     <td>WEX0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32</td>
   </tr>
   <tr>
     <td>WEX0_FDFEVA_vect</td>
     <td>WEX0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32</td>
   </tr>
   <tr>
     <td>WEX0_FDFEVB_vect</td>
     <td>WEX0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32</td>
   </tr>
   <tr>
     <td>WEX0_FDFEVC_vect</td>
     <td>WEX0 IRQs</td>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32</td>
   </tr>
   <tr>
     <td>XCL_CC_vect</td>
@@ -3748,7 +3757,11 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
     <td>ACA_AC0, ACA_AC1, ACA_ACW, ADCA_CH0, NVM_EE, NVM_SPM, OSC_OSCF, PORTA_INT0, PORTA_INT1, PORTB_INT0, PORTB_INT1, PORTC_INT0, PORTC_INT1, PORTD_INT0, PORTD_INT1, PORTE_INT0, PORTE_INT1, PORTF_INT0, PORTF_INT1, PORTR_INT0, PORTR_INT1, RTC_COMP, RTC_OVF, SPIC_INT, SPID_INT, TCC0_CCA, TCC0_CCB, TCC0_CCC, TCC0_CCD, TCC0_ERR, TCC0_OVF, TCC1_CCA, TCC1_CCB, TCC1_ERR, TCC1_OVF, TCC2_HUNF, TCC2_LCMPA, TCC2_LCMPB, TCC2_LCMPC, TCC2_LCMPD, TCC2_LUNF, TCD0_CCA, TCD0_CCB, TCD0_CCC, TCD0_CCD, TCD0_ERR, TCD0_OVF, TCD2_HUNF, TCD2_LCMPA, TCD2_LCMPB, TCD2_LCMPC, TCD2_LCMPD, TCD2_LUNF, TCE0_CCA, TCE0_CCB, TCE0_CCC, TCE0_CCD, TCE0_ERR, TCE0_OVF, TCE2_HUNF, TCE2_LCMPA, TCE2_LCMPB, TCE2_LCMPC, TCE2_LCMPD, TCE2_LUNF, TCF0_CCA, TCF0_CCB, TCF0_CCC, TCF0_CCD, TCF0_ERR, TCF0_OVF, TCF2_HUNF, TCF2_LCMPA, TCF2_LCMPB, TCF2_LCMPC, TCF2_LCMPD, TCF2_LUNF, TWIC_TWIM, TWIC_TWIS, TWIE_TWIM, TWIE_TWIS, USARTC0_DRE, USARTC0_RXC, USARTC0_TXC, USARTD0_DRE, USARTD0_RXC, USARTD0_TXC, USARTE0_DRE, USARTE0_RXC, USARTE0_TXC</td>
   </tr>
   <tr>
-    <td>AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32</td>
+    <td>AVR16DD14, AVR16DD20, AVR32DD14, AVR32DD20, AVR64DD14, AVR64DD20</td>
+    <td>AC0_AC, ADC0_RESRDY, ADC0_WCMP, BOD_VLM, CCL_CCL, CLKCTRL_CFD, MVIO_MVIO, NMI, NVMCTRL_EE, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, RTC_CNT, RTC_PIT, SPI0_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCB0_INT, TCB1_INT, TCD0_OVF, TCD0_TRIG, TWI0_TWIM, TWI0_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, ZCD3_ZCD</td>
+  </tr>
+  <tr>
+    <td>AVR16DD28, AVR16DD32, AVR32DD28, AVR32DD32, AVR64DD28, AVR64DD32</td>
     <td>AC0_AC, ADC0_RESRDY, ADC0_WCMP, BOD_VLM, CCL_CCL, CLKCTRL_CFD, MVIO_MVIO, NMI, NVMCTRL_EE, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, RTC_CNT, RTC_PIT, SPI0_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCD0_OVF, TCD0_TRIG, TWI0_TWIM, TWI0_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, ZCD3_ZCD</td>
   </tr>
   <tr>
@@ -3757,15 +3770,19 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   </tr>
   <tr>
     <td>AVR16EA28, AVR16EA32, AVR32EA28, AVR32EA32, AVR64EA28, AVR64EA32</td>
-    <td>AC0_AC, AC1_AC, ADC0_ERROR, ADC0_RESRDY, ADC0_SAMPRDY, BOD_VLM, CCL_CCL, CLKCTRL_CFD, NMI, NVMCTRL_EEREADY, NVMCTRL_FLREADY, NVMCTRL_NVMREADY, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, RTC_CNT, RTC_PIT, SPI0_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TWI0_TWIM, TWI0_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC</td>
+    <td>AC0_AC, AC1_AC, ADC0_ERROR, ADC0_RESRDY, ADC0_SAMPRDY, BOD_VLM, CCL_CCL, CLKCTRL_CFD, NMI, NVMCTRL_EEREADY, NVMCTRL_FLREADY, NVMCTRL_NVMREADY, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, RTC_CNT, RTC_PIT, SPI0_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCA1_CMP0, TCA1_CMP1, TCA1_CMP2, TCA1_HUNF, TCA1_LCMP0, TCA1_LCMP1, TCA1_LCMP2, TCA1_LUNF, TCA1_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCB3_INT, TWI0_TWIM, TWI0_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC</td>
   </tr>
   <tr>
     <td>AVR16EA48, AVR32EA48, AVR64EA48</td>
     <td>AC0_AC, AC1_AC, ADC0_ERROR, ADC0_RESRDY, ADC0_SAMPRDY, BOD_VLM, CCL_CCL, CLKCTRL_CFD, NMI, NVMCTRL_EEREADY, NVMCTRL_FLREADY, NVMCTRL_NVMREADY, PORTA_PORT, PORTB_PORT, PORTC_PORT, PORTD_PORT, PORTE_PORT, PORTF_PORT, RTC_CNT, RTC_PIT, SPI0_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCA1_CMP0, TCA1_CMP1, TCA1_CMP2, TCA1_HUNF, TCA1_LCMP0, TCA1_LCMP1, TCA1_LCMP2, TCA1_LUNF, TCA1_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCB3_INT, TWI0_TWIM, TWI0_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC</td>
   </tr>
   <tr>
-    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32</td>
+    <td>AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32</td>
     <td>AC0_AC, AC1_AC, ADC0_ERROR, ADC0_RESRDY, ADC0_SAMPRDY, BOD_VLM, CCL_CCL, NMI, NVMCTRL_EEREADY, NVMCTRL_FLREADY, NVMCTRL_NVMREADY, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, RTC_CNT, RTC_PIT, SPI0_INT, TCB0_INT, TCB1_INT, TCE0_CMP0, TCE0_CMP1, TCE0_CMP2, TCE0_CMP3, TCE0_OVF, TCF0_INT, TWI0_TWIM, TWI0_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, WEX0_FAULTDET, WEX0_FDFEVA, WEX0_FDFEVB, WEX0_FDFEVC</td>
+  </tr>
+  <tr>
+    <td>AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32</td>
+    <td>AC0_INT, ADC0_ERROR, ADC0_RESRDY, ADC0_SAMPRDY, BOD_VLM, CCL_CCL, CRCSCAN_INT, NMI, NVMCTRL_NVMREADY, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, RTC_CNT, RTC_PIT, SPI0_INT, TCB0_INT, TCB1_INT, TCE0_CMP0, TCE0_CMP1, TCE0_CMP2, TCE0_OVF, TWI0_TWIM, TWI0_TWIS, USART0_DRE, USART0_ERROR, USART0_RXC, USART0_TXC</td>
   </tr>
   <tr>
     <td>AVR32DA28, AVR32DA28S, AVR64DA28, AVR64DA28S, AVR128DA28, AVR128DA28S</td>
@@ -3776,11 +3793,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
     <td>AC0_AC, AC1_AC, AC2_AC, ADC0_RESRDY, ADC0_WCMP, BOD_VLM, CCL_CCL, NMI, NVMCTRL_EE, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, PTC_PTC, RTC_CNT, RTC_PIT, SPI0_INT, SPI1_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCD0_OVF, TCD0_TRIG, TWI0_TWIM, TWI0_TWIS, TWI1_TWIM, TWI1_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC, ZCD0_ZCD</td>
   </tr>
   <tr>
-    <td>AVR32DA48, AVR64DA48, AVR64DA48S, AVR128DA48, AVR128DA48S</td>
-    <td>AC0_AC, AC1_AC, AC2_AC, ADC0_RESRDY, ADC0_WCMP, BOD_VLM, CCL_CCL, NMI, NVMCTRL_EE, PORTA_PORT, PORTB_PORT, PORTC_PORT, PORTD_PORT, PORTE_PORT, PORTF_PORT, PTC_PTC, RTC_CNT, RTC_PIT, SPI0_INT, SPI1_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCA1_CMP0, TCA1_CMP1, TCA1_CMP2, TCA1_HUNF, TCA1_LCMP0, TCA1_LCMP1, TCA1_LCMP2, TCA1_LUNF, TCA1_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCB3_INT, TCD0_OVF, TCD0_TRIG, TWI0_TWIM, TWI0_TWIS, TWI1_TWIM, TWI1_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC, USART3_DRE, USART3_RXC, USART3_TXC, USART4_DRE, USART4_RXC, USART4_TXC, ZCD0_ZCD, ZCD1_ZCD</td>
-  </tr>
-  <tr>
-    <td>AVR32DA48S</td>
+    <td>AVR32DA48, AVR32DA48S</td>
     <td>AC0_AC, AC1_AC, AC2_AC, ADC0_RESRDY, ADC0_WCMP, BOD_VLM, CCL_CCL, NMI, NVMCTRL_EE, PORTA_PORT, PORTB_PORT, PORTC_PORT, PORTD_PORT, PORTE_PORT, PORTF_PORT, PTC_PTC, RTC_CNT, RTC_PIT, SPI0_INT, SPI1_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCA1_CMP0, TCA1_CMP1, TCA1_CMP2, TCA1_HUNF, TCA1_LCMP0, TCA1_LCMP1, TCA1_LCMP2, TCA1_LUNF, TCA1_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCB3_INT, TCB4_INT, TCD0_OVF, TCD0_TRIG, TWI0_TWIM, TWI0_TWIS, TWI1_TWIM, TWI1_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC, USART3_DRE, USART3_RXC, USART3_TXC, USART4_DRE, USART4_RXC, USART4_TXC, ZCD0_ZCD, ZCD1_ZCD</td>
   </tr>
   <tr>
@@ -3806,6 +3819,10 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <tr>
     <td>AVR32SD32</td>
     <td>AC0_AC, AC1_AC, AC2_AC, ADC0_ERROR, ADC0_RESRDY, ADC0_SAMPRDY, ADC1_ERROR, ADC1_RESRDY, ADC1_SAMPRDY, BOD_VLM, CCL_CCL, CLKCTRL_INT, CRCSCAN_INT, ERRCTRL_INT, MVIO_MVIO, NMI, NVMCTRL_ERROR, NVMCTRL_READY, PORTA_PORT, PORTC_PORT, PORTD_PORT, PORTF_PORT, RAMCTRL_INT, RTC_CNT, RTC_PIT, SLPCTRL_INT, SPI0_INT, SPI1_INT, SWDT_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCB3_INT, TCD0_OVF, TCD0_TRIG, TWI0_TWIM, TWI0_TWIS, TWI1_TWIM, TWI1_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC, ZCD0_ZCD, ZCD3_ZCD</td>
+  </tr>
+  <tr>
+    <td>AVR64DA48, AVR64DA48S, AVR128DA48, AVR128DA48S</td>
+    <td>AC0_AC, AC1_AC, AC2_AC, ADC0_RESRDY, ADC0_WCMP, BOD_VLM, CCL_CCL, NMI, NVMCTRL_EE, PORTA_PORT, PORTB_PORT, PORTC_PORT, PORTD_PORT, PORTE_PORT, PORTF_PORT, PTC_PTC, RTC_CNT, RTC_PIT, SPI0_INT, SPI1_INT, TCA0_CMP0, TCA0_CMP1, TCA0_CMP2, TCA0_HUNF, TCA0_LCMP0, TCA0_LCMP1, TCA0_LCMP2, TCA0_LUNF, TCA0_OVF, TCA1_CMP0, TCA1_CMP1, TCA1_CMP2, TCA1_HUNF, TCA1_LCMP0, TCA1_LCMP1, TCA1_LCMP2, TCA1_LUNF, TCA1_OVF, TCB0_INT, TCB1_INT, TCB2_INT, TCB3_INT, TCD0_OVF, TCD0_TRIG, TWI0_TWIM, TWI0_TWIS, TWI1_TWIM, TWI1_TWIS, USART0_DRE, USART0_RXC, USART0_TXC, USART1_DRE, USART1_RXC, USART1_TXC, USART2_DRE, USART2_RXC, USART2_TXC, USART3_DRE, USART3_RXC, USART3_TXC, USART4_DRE, USART4_RXC, USART4_TXC, ZCD0_ZCD, ZCD1_ZCD</td>
   </tr>
   <tr>
     <td>AVR64DA64, AVR64DA64S, AVR128DA64, AVR128DA64S</td>
@@ -4010,7 +4027,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Aliases a given vector to another one in the same manner as the ISR_ALIASOF attribute for the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR()</a> macro. Unlike the ISR_ALIASOF attribute macro however, this is compatible for all versions of GCC rather than just GCC version 4.2 onwards.</p>
+<p>Aliases a given vector to another one in the same manner as the ISR_ALIASOF attribute for the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR()</a> macro.</p>
 <dl class="section note"><dt>Note</dt><dd>This macro creates a trampoline function for the aliased macro. This will result in a two cycle penalty for the aliased vector compared to the ISR the vector is aliased to, due to the JMP/RJMP opcode used.</dd></dl>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>For new code, the use of <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR(..., ISR_ALIASOF(...))</a> or <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> is recommended. Notice that using <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> does <em>not</em> impose a JMP/RJMP overhead.</dd></dl>
 <p>Example: </p><div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> (INT0_vect)</div>
@@ -4037,7 +4054,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line">{</div>
 <div class="line">    PORTB = 42;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_gade46eb4e42cc9d56c19b1f91448f1b76"><div class="ttname"><a href="group__avr__interrupts.html#gade46eb4e42cc9d56c19b1f91448f1b76">ISR_ALIAS</a></div><div class="ttdeci">#define ISR_ALIAS(vector, target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:297</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_gade46eb4e42cc9d56c19b1f91448f1b76"><div class="ttname"><a href="group__avr__interrupts.html#gade46eb4e42cc9d56c19b1f91448f1b76">ISR_ALIAS</a></div><div class="ttdeci">#define ISR_ALIAS(vector, target_vector)</div><div class="ttdef"><b>Definition:</b> interrupt.h:295</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -4056,7 +4073,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The ISR is linked to another ISR, specified by the vect parameter. This is compatible with GCC 4.2 and greater only.</p>
+<p>The ISR is linked to another ISR, specified by the vect parameter.</p>
 <p>Use this attribute in the <code>attributes</code> parameter of the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> macro. Example: </p><div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> (INT0_vect)</div>
 <div class="line">{</div>
 <div class="line">    PORTB = 42;</div>
@@ -4094,7 +4111,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The compiler will try to inline all called function into the ISR. This has an effect with GCC 4.6 and newer only.</p>
+<p>The compiler will try to inline all called function into the ISR.</p>
 <p>Use this attribute in the <code>attributes</code> parameter of the <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> and <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> macros. </p>
 
 </div>
@@ -4267,7 +4284,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

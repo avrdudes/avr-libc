@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -115,11 +114,11 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </ul>
 <h1><a class="anchor" id="bench_libc"></a>
 A few of libc Functions</h1>
-<p>avr-gcc version is 15.1.1</p>
+<p>avr-gcc version is 15.2.1</p>
 <p>The size of a function is given in view of all picked up functions. By default AVR-LibC is compiled with <code>-mcall-prologues</code>. In parenthesis the size without taking into account the code for the prologue and epilogue routines is shown. Both sizes can coincide when no prologue and epilogue routines are present, and then only one code size is shown.</p>
 <ul>
 <li><code><a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort</a></code> sorts an array of <code>char</code> with 100 elements.</li>
-<li><code>double</code> has a size of 4, which plays a role in the float type promotions of arguments of varargs functions like <code><a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf</a></code>.</li>
+<li>The used size of <code>double</code> is 4, which plays a role in the float type promotions of arguments of varargs functions like <code><a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf</a></code>.</li>
 <li>For an overview of the different AVR architectures, see <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html">avr-gcc: Command Line Options</a>. <small> <table class="doxtable">
 <tr>
 <th>Function </th><th>Units </th><th>avr2 </th><th>avr25 </th><th>avr4 </th><th>avr6 </th></tr>
@@ -234,157 +233,181 @@ Cycles </td><td align="right">182<br  />
 <tr>
 <td><code>malloc (1)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">664<br  />
+Cycles </td><td align="right">668<br  />
 6<br  />
-103 </td><td align="right">598<br  />
+101 </td><td align="right">606<br  />
 6<br  />
-98 </td><td align="right">598<br  />
+97 </td><td align="right">606<br  />
 6<br  />
-98 </td><td align="right">602<br  />
+97 </td><td align="right">610<br  />
 7<br  />
-101 </td></tr>
+100 </td></tr>
 <tr>
 <td><code>realloc ((void*) 0, 1)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">1194 (1082)<br  />
+Cycles </td><td align="right">1242 (1130)<br  />
 6<br  />
-103 </td><td align="right">1072 (962)<br  />
+101 </td><td align="right">1114 (1004)<br  />
 6<br  />
-98 </td><td align="right">1072 (962)<br  />
+97 </td><td align="right">1114 (1004)<br  />
 6<br  />
-98 </td><td align="right">1050<br  />
+97 </td><td align="right">1096<br  />
 7<br  />
-101 </td></tr>
+100 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort</a> (s, sizeof(s), 1, cmp)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">1206 (1094)<br  />
-160<br  />
-58011 </td><td align="right">1004 (894)<br  />
-160<br  />
-51797 </td><td align="right">978 (868)<br  />
-160<br  />
-47899 </td><td align="right">1000<br  />
-167<br  />
-49671 </td></tr>
+Cycles </td><td align="right">1130 (1018)<br  />
+146<br  />
+54683 </td><td align="right">952 (842)<br  />
+146<br  />
+50635 </td><td align="right">938 (828)<br  />
+146<br  />
+45705 </td><td align="right">984 (874)<br  />
+153<br  />
+47930 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand</a> ()</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">132<br  />
+2<br  />
+95 </td><td align="right">120<br  />
+2<br  />
+90 </td><td align="right">120<br  />
+2<br  />
+90 </td><td align="right">124<br  />
+3<br  />
+93 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd">random</a> ()</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">678 (566)<br  />
+16<br  />
+1410 </td><td align="right">634 (524)<br  />
+16<br  />
+1394 </td><td align="right">630 (520)<br  />
+18<br  />
+805 </td><td align="right">584<br  />
+22<br  />
+820 </td></tr>
 <tr>
 <td><code>sprintf_min (s, "%d", 12345)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">1202 (1090)<br  />
-57<br  />
-1838 </td><td align="right">1078 (968)<br  />
-57<br  />
-1706 </td><td align="right">1074 (964)<br  />
-57<br  />
-1701 </td><td align="right">1078<br  />
-60<br  />
-1743 </td></tr>
+Cycles </td><td align="right">1218 (1106)<br  />
+59<br  />
+2077 </td><td align="right">1086 (976)<br  />
+59<br  />
+1940 </td><td align="right">1082 (972)<br  />
+59<br  />
+1935 </td><td align="right">1102<br  />
+62<br  />
+1887 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf</a> (s, "%d", 12345)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">1632 (1520)<br  />
-57<br  />
-1649 </td><td align="right">1492 (1382)<br  />
-57<br  />
-1564 </td><td align="right">1478 (1368)<br  />
-58<br  />
-1567 </td><td align="right">1496<br  />
+Cycles </td><td align="right">1636 (1524)<br  />
+59<br  />
+1885 </td><td align="right">1494 (1384)<br  />
+59<br  />
+1795 </td><td align="right">1478 (1368)<br  />
 61<br  />
-1603 </td></tr>
+1796 </td><td align="right">1514<br  />
+64<br  />
+1734 </td></tr>
 <tr>
 <td><code>sprintf_flt (s, "%e", 1.2345)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">3218 (3106)<br  />
+Cycles </td><td align="right">3250 (3138)<br  />
 68<br  />
-2513 </td><td align="right">2970 (2860)<br  />
+3089 </td><td align="right">3000 (2890)<br  />
 68<br  />
-2302 </td><td align="right">2946 (2836)<br  />
+2866 </td><td align="right">2976 (2866)<br  />
 69<br  />
-2309 </td><td align="right">3048 (2938)<br  />
+2873 </td><td align="right">3088 (2978)<br  />
 72<br  />
-2347 </td></tr>
+2695 </td></tr>
 <tr>
 <td><code>sscanf_min ("12345", "%d", &amp;i)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">2826 (2714)<br  />
-56<br  />
-1491 </td><td align="right">2502 (2392)<br  />
-56<br  />
-1366 </td><td align="right">2498 (2388)<br  />
-56<br  />
-1366 </td><td align="right">2746<br  />
-60<br  />
-1369 </td></tr>
+Cycles </td><td align="right">2804 (2692)<br  />
+57<br  />
+1380 </td><td align="right">2502 (2392)<br  />
+57<br  />
+1294 </td><td align="right">2498 (2388)<br  />
+57<br  />
+1294 </td><td align="right">2728<br  />
+61<br  />
+1311 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf</a> ("12345", "%d", &amp;i)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">1836 (1724)<br  />
-56<br  />
-1491 </td><td align="right">1622 (1512)<br  />
-56<br  />
-1366 </td><td align="right">1622 (1512)<br  />
-56<br  />
-1366 </td><td align="right">1758<br  />
-60<br  />
-1369 </td></tr>
+Cycles </td><td align="right">1798 (1686)<br  />
+57<br  />
+1380 </td><td align="right">1614 (1504)<br  />
+57<br  />
+1294 </td><td align="right">1614 (1504)<br  />
+57<br  />
+1294 </td><td align="right">1716<br  />
+61<br  />
+1311 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf</a> ("point,color", "%[a-z]", s)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">1836 (1724)<br  />
+Cycles </td><td align="right">1798 (1686)<br  />
 90<br  />
-2754 </td><td align="right">1622 (1512)<br  />
+2748 </td><td align="right">1614 (1504)<br  />
 90<br  />
-2607 </td><td align="right">1622 (1512)<br  />
+2601 </td><td align="right">1614 (1504)<br  />
 90<br  />
-2607 </td><td align="right">1758<br  />
+2601 </td><td align="right">1716<br  />
 94<br  />
-2508 </td></tr>
+2502 </td></tr>
 <tr>
 <td><code>sscanf_flt ("1.2345", "%e", &amp;x)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">4872 (4760)<br  />
+Cycles </td><td align="right">4866 (4754)<br  />
 40<br  />
-410 </td><td align="right">4416 (4306)<br  />
+410 </td><td align="right">4438 (4328)<br  />
 40<br  />
-364 </td><td align="right">4392 (4282)<br  />
+364 </td><td align="right">4414 (4304)<br  />
 40<br  />
-364 </td><td align="right">4716 (4606)<br  />
+364 </td><td align="right">4714 (4604)<br  />
 43<br  />
 341 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof</a> ("1.2345", &amp;end)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">1682 (1570)<br  />
+Cycles </td><td align="right">1648 (1536)<br  />
 24<br  />
-1550 </td><td align="right">1540 (1430)<br  />
+1289 </td><td align="right">1490 (1380)<br  />
 24<br  />
-1446 </td><td align="right">1480 (1370)<br  />
+1172 </td><td align="right">1462 (1352)<br  />
 24<br  />
-1074 </td><td align="right">1602 (1492)<br  />
-30<br  />
-1205 </td></tr>
+969 </td><td align="right">1698 (1588)<br  />
+37<br  />
+1282 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdlib.html#gaf8ce3b8dae3d45c34c3b172de503f7b3">strtol</a> ("12345", &amp;end, 0)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">384<br  />
+Cycles </td><td align="right">390<br  />
 14<br  />
-606 </td><td align="right">362<br  />
+606 </td><td align="right">368<br  />
 14<br  />
-583 </td><td align="right">344<br  />
+583 </td><td align="right">350<br  />
 12<br  />
-351 </td><td align="right">358<br  />
+351 </td><td align="right">364<br  />
 15<br  />
 373 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdlib.html#ga5006f43088ee0321cf6191ce89eb78b7">strtoll</a> ("12345", &amp;end, 0)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-Cycles </td><td align="right">572 (460)<br  />
+Cycles </td><td align="right">578 (466)<br  />
 20<br  />
-832 </td><td align="right">534 (424)<br  />
+832 </td><td align="right">540 (430)<br  />
 20<br  />
-785 </td><td align="right">510 (400)<br  />
+785 </td><td align="right">516 (406)<br  />
 18<br  />
-488 </td><td align="right">534 (424)<br  />
+488 </td><td align="right">540 (430)<br  />
 21<br  />
 513 </td></tr>
 </table>
@@ -393,7 +416,9 @@ Cycles </td><td align="right">572 (460)<br  />
 <h1><a class="anchor" id="bench_libm"></a>
 Math Functions from libm</h1>
 <p>The following tables contain benchmark values for some floating-point functions over the indicated range(s) of input values.</p>
-<p>Notice that the values for relative error and the Worst Case Execution Time Cycles<sub>max</sub> are only <em>lower bounds</em>. The best achievable accuracy for IEEE single with its 23 fractional bits in the mantissa is log<sub>10</sub>(2<sup>&ndash;24</sup> &asymp; 6&middot;10<sup>&ndash;8</sup>) &asymp; -7.22.</p>
+<p>Notice that the values for relative error and the Worst Case Execution Time Cycles<sub>max</sub> are only <em>lower bounds</em>. The best achievable accuracy for IEEE single with its 23 fractional bits in the mantissa is  
+log<sub>10</sub>(2<sup>&minus;24</sup> &asymp; 6&middot;10<sup>&minus;8</sup>) &asymp; &minus;7.22.
+  </p>
 <p>The poor performance of <code>sinf</code>, <code>cosf</code> and <code>tanf</code> occurs for values that are close to the poles (if any) or close to the non-zero zeros.</p>
 <table class="doxtable">
 <caption>libm benchmarks for ATmega128 (avr51, with MUL)</caption>
@@ -432,6 +457,8 @@ Math Functions from libm</h1>
 <tr>
 <td><code><a class="el" href="group__avr__math.html#ga8a7dc2a88e109f4e15b661247665709a">sinf</a></code> </td><td align="right">910 </td><td>0 </td><td>3.15 </td><td align="right">1744 </td><td align="right">2146 </td><td align="center"><b>-3.67</b> </td></tr>
 <tr>
+<td><code><a class="el" href="group__avr__math.html#gafd3b66c913581f94690b9048a63324e9">sincosf</a></code> </td><td align="right">976 </td><td>-1.57 </td><td>3.15 </td><td align="right">3482 </td><td align="right">3883 </td><td align="center"><b>-3.43</b> </td></tr>
+<tr>
 <td><code><a class="el" href="group__avr__math.html#ga1976c7577fb97800f4b926bd042b64ac">sinhf</a></code> </td><td align="right">1466 </td><td>-20 </td><td>20 </td><td align="right">3043 </td><td align="right">3461 </td><td align="center">-5.78 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__math.html#ga46c9a8d40cde7c4d5ab40a67e55316bb">sqrtf</a></code> </td><td align="right">256 </td><td>0 </td><td>1e+06 </td><td align="right">474 </td><td align="right">510 </td><td align="center">-7.22 </td></tr>
@@ -469,9 +496,9 @@ Math Functions from libm</h1>
 <tr>
 <td><code><a class="el" href="group__avr__math.html#gac6b287549be087f6f0bf03b6fe30499e">powf</a></code> </td><td align="right">1858 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">5182 </td><td align="right">5833 </td><td align="center"><b>-4.65</b> </td></tr>
 <tr>
-<td><code>__builtin_powif</code> </td><td align="right">732 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">648 </td><td align="right">1223 </td><td align="center">-6.39 </td></tr>
+<td><code><a class="el" href="group__avr__builtins.html#gaf42c104c8b9448937a3971c1d036b538">__builtin_powif</a></code> </td><td align="right">732 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">648 </td><td align="right">1223 </td><td align="center">-6.39 </td></tr>
 </table>
-<p>For devices wihout MUL instruction the following applies:</p><ul>
+<p>For devices without MUL instruction, the following applies:</p><ul>
 <li>The execution times for multiplication and for the transcendental functions are roughly twice the time for devices that have MUL.</li>
 <li>The execution times for the remaining functions are roughly the same.</li>
 <li>The maximal relative errors are the same, i.e. independent of MUL.</li>
@@ -513,6 +540,8 @@ Math Functions from libm</h1>
 <tr>
 <td><code><a class="el" href="group__avr__math.html#ga8a7dc2a88e109f4e15b661247665709a">sinf</a></code> </td><td align="right">912 </td><td>0 </td><td>3.15 </td><td align="right">3408 </td><td align="right">3818 </td><td align="center"><b>-3.67</b> </td></tr>
 <tr>
+<td><code><a class="el" href="group__avr__math.html#gafd3b66c913581f94690b9048a63324e9">sincosf</a></code> </td><td align="right">978 </td><td>-1.57 </td><td>3.15 </td><td align="right">6813 </td><td align="right">7225 </td><td align="center"><b>-3.43</b> </td></tr>
+<tr>
 <td><code><a class="el" href="group__avr__math.html#ga1976c7577fb97800f4b926bd042b64ac">sinhf</a></code> </td><td align="right">1434 </td><td>-20 </td><td>20 </td><td align="right">4941 </td><td align="right">5358 </td><td align="center">-5.78 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__math.html#ga46c9a8d40cde7c4d5ab40a67e55316bb">sqrtf</a></code> </td><td align="right">252 </td><td>0 </td><td>1e+06 </td><td align="right">474 </td><td align="right">510 </td><td align="center">-7.22 </td></tr>
@@ -550,87 +579,91 @@ Math Functions from libm</h1>
 <tr>
 <td><code><a class="el" href="group__avr__math.html#gac6b287549be087f6f0bf03b6fe30499e">powf</a></code> </td><td align="right">1820 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">9490 </td><td align="right">10180 </td><td align="center"><b>-4.65</b> </td></tr>
 <tr>
-<td><code>__builtin_powif</code> </td><td align="right">734 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">1143 </td><td align="right">2140 </td><td align="center">-6.39 </td></tr>
+<td><code><a class="el" href="group__avr__builtins.html#gaf42c104c8b9448937a3971c1d036b538">__builtin_powif</a></code> </td><td align="right">734 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">1143 </td><td align="right">2140 </td><td align="center">-6.39 </td></tr>
 </table>
 <h1><a class="anchor" id="bench_libf7"></a>
 Math Functions for IEEE double from LibF7</h1>
 <p>The following tables contain benchmark values for some IEEE double floating-point functions over the indicated range(s) of input values. <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">LibF7</a> is a IEEE double implementation hosted by libgcc since <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>.</p>
 <p>The code sizes include all dependencies with the exception of potential prologue and epilogue routines (<code>__prologue_saves__</code>, <code>__epilogue_restores__</code>).</p>
 <p>The sizes of functions don't add up. For example, <a class="el" href="group__avr__math.html#gaeb537bfea71fa91192234a666f3a6a25">sinl</a>, <a class="el" href="group__avr__math.html#ga659287f7399efa8d6bc66dc37c8e35f4">cosl</a>, <a class="el" href="group__avr__math.html#ga3ace56b4f2a4a9364993a5af676793c5">asinl</a>, <a class="el" href="group__avr__math.html#gae84dc6cff92b3417098f16a1811635e4">acosl</a> and <a class="el" href="group__avr__math.html#ga9c028a87917b3bb9bba9e75f66cdbd43">sqrtl</a> together occupy only 4744 bytes of code <em>including</em> the prologue and epilogue routines. With <code>-mrelax</code> the code size reduces further to around 4400 bytes.</p>
-<p>Notice that the values for relative error and the Worst Case Execution Time Cycles<sub>max</sub> are only <em>lower bounds</em>. The best achievable accuracy for IEEE double with its 52 fractional bits in the mantissa is log<sub>10</sub>(2<sup>&ndash;53</sup> &asymp; 1.1&middot;10<sup>&ndash;16</sup>) &asymp; -15.95.</p>
+<p>Notice that the values for relative error and the Worst Case Execution Time Cycles<sub>max</sub> are only <em>lower bounds</em>. The best achievable accuracy for IEEE double with its 52 fractional bits in the mantissa is  
+log<sub>10</sub>(2<sup>&minus;53</sup> &asymp; 1.1&middot;10<sup>&minus;16</sup>) &asymp; &minus;15.95.
+  </p>
 <table class="doxtable">
 <caption>LibF7 Benchmarks for ATmega128 (avr51, with MUL)</caption>
 <tr>
 <th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gae84dc6cff92b3417098f16a1811635e4">acosl</a></code> </td><td align="right">3330 </td><td>-1 </td><td>1 </td><td align="right">16214 </td><td align="right">17974 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gae84dc6cff92b3417098f16a1811635e4">acosl</a></code> </td><td align="right">3342 </td><td>-1 </td><td>1 </td><td align="right">16235 </td><td align="right">17997 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga3ace56b4f2a4a9364993a5af676793c5">asinl</a></code> </td><td align="right">3330 </td><td>-1 </td><td>1 </td><td align="right">16103 </td><td align="right">17985 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga3ace56b4f2a4a9364993a5af676793c5">asinl</a></code> </td><td align="right">3342 </td><td>-1 </td><td>1 </td><td align="right">16124 </td><td align="right">18008 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga650d8dd23c16c6699d84651a18827d37">atanl</a></code> </td><td align="right">2810 </td><td>-10 </td><td>10 </td><td align="right">20337 </td><td align="right">21229 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga650d8dd23c16c6699d84651a18827d37">atanl</a></code> </td><td align="right">2820 </td><td>-10 </td><td>10 </td><td align="right">20363 </td><td align="right">21255 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga521c2f4c10b7bb5363bad058ef56794c">cbrtl</a></code> </td><td align="right">4100 </td><td>-1e+06 </td><td>1e+06 </td><td align="right">32326 </td><td align="right">33372 </td><td align="center">-15.33 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga521c2f4c10b7bb5363bad058ef56794c">cbrtl</a></code> </td><td align="right">4102 </td><td>-1e+06 </td><td>1e+06 </td><td align="right">32368 </td><td align="right">33415 </td><td align="center">-15.33 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gae11b7781f057eb7ba5d7ed95be7fdbee">ceill</a></code> </td><td align="right">1760 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1429 </td><td align="right">1766 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gae11b7781f057eb7ba5d7ed95be7fdbee">ceill</a></code> </td><td align="right">1772 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1430 </td><td align="right">1768 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga659287f7399efa8d6bc66dc37c8e35f4">cosl</a></code> </td><td align="right">3886 </td><td>-1.57 </td><td>1.58 </td><td align="right">11222 </td><td align="right">13623 </td><td align="center">-15.66 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga659287f7399efa8d6bc66dc37c8e35f4">cosl</a></code> </td><td align="right">3900 </td><td>-1.57 </td><td>1.58 </td><td align="right">11241 </td><td align="right">13649 </td><td align="center">-15.66 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga57602cd20f8de2dceea4f05ffb516d82">coshl</a></code> </td><td align="right">3642 </td><td>-20 </td><td>20 </td><td align="right">20006 </td><td align="right">21436 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga57602cd20f8de2dceea4f05ffb516d82">coshl</a></code> </td><td align="right">3654 </td><td>-20 </td><td>20 </td><td align="right">20036 </td><td align="right">21466 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gaed4eb11ef1397c751334311ce5b43920">expl</a></code> </td><td align="right">3550 </td><td>-20 </td><td>20 </td><td align="right">16937 </td><td align="right">18389 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaed4eb11ef1397c751334311ce5b43920">expl</a></code> </td><td align="right">3562 </td><td>-20 </td><td>20 </td><td align="right">16965 </td><td align="right">18417 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga211df53cdf5208b9bbfa92e2d9aef97f">floorl</a></code> </td><td align="right">1696 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1352 </td><td align="right">1687 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga211df53cdf5208b9bbfa92e2d9aef97f">floorl</a></code> </td><td align="right">1710 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1354 </td><td align="right">1690 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga4caa878fa965baea202b7246b430487f">frexpl</a></code> </td><td align="right">1252 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">748 </td><td align="right">765 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga4caa878fa965baea202b7246b430487f">frexpl</a></code> </td><td align="right">1256 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">748 </td><td align="right">765 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gaf67da1c28ce33b403f955103f201dfb8">logl</a></code> </td><td align="right">2944 </td><td>0 </td><td>100 </td><td align="right">15085 </td><td align="right">15810 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaf67da1c28ce33b403f955103f201dfb8">logl</a></code> </td><td align="right">2944 </td><td>0 </td><td>100 </td><td align="right">15099 </td><td align="right">15825 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gae824e49a04221dcf66b9791c5df8d6b6">log10l</a></code> </td><td align="right">2954 </td><td>0 </td><td>100 </td><td align="right">15732 </td><td align="right">16422 </td><td align="center">-15.59 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gae824e49a04221dcf66b9791c5df8d6b6">log10l</a></code> </td><td align="right">2954 </td><td>0 </td><td>100 </td><td align="right">15746 </td><td align="right">16437 </td><td align="center">-15.59 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gaa383ae0cab6c24f1bcba661dee0fbd70">log2l</a></code> </td><td align="right">2954 </td><td>0 </td><td>100 </td><td align="right">15737 </td><td align="right">16403 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaa383ae0cab6c24f1bcba661dee0fbd70">log2l</a></code> </td><td align="right">2954 </td><td>0 </td><td>100 </td><td align="right">15751 </td><td align="right">16418 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga6565127c023ae8f392ce69e3b3f30aa1">roundl</a></code> </td><td align="right">1782 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1661 </td><td align="right">1757 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga6565127c023ae8f392ce69e3b3f30aa1">roundl</a></code> </td><td align="right">1796 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1664 </td><td align="right">1760 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gaeb537bfea71fa91192234a666f3a6a25">sinl</a></code> </td><td align="right">3884 </td><td>0 </td><td>3.15 </td><td align="right">11953 </td><td align="right">14000 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaeb537bfea71fa91192234a666f3a6a25">sinl</a></code> </td><td align="right">3898 </td><td>0 </td><td>3.15 </td><td align="right">11976 </td><td align="right">14028 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gad160d5d1bb3f113e96135a4bebe76abe">sinhl</a></code> </td><td align="right">3850 </td><td>-20 </td><td>20 </td><td align="right">19812 </td><td align="right">21506 </td><td align="center">-15.51 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga342b5fac99b2c8ea46ed260640c7ec39">sincosl</a></code> </td><td align="right">3880 </td><td>-1.57 </td><td>3.15 </td><td align="right">19913 </td><td align="right">22412 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga9c028a87917b3bb9bba9e75f66cdbd43">sqrtl</a></code> </td><td align="right">1406 </td><td>0 </td><td>1e+06 </td><td align="right">3009 </td><td align="right">3087 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gad160d5d1bb3f113e96135a4bebe76abe">sinhl</a></code> </td><td align="right">3862 </td><td>-20 </td><td>20 </td><td align="right">19842 </td><td align="right">21536 </td><td align="center">-15.51 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga2151fba6c1e9b4fa5d2af2dcb5c68b17">tanl</a></code> </td><td align="right">3932 </td><td>0 </td><td>3.15 </td><td align="right">22413 </td><td align="right">24830 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga9c028a87917b3bb9bba9e75f66cdbd43">sqrtl</a></code> </td><td align="right">1410 </td><td>0 </td><td>1e+06 </td><td align="right">3009 </td><td align="right">3087 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga94ee8c57b6b2d0bc5466c75bea2bffcf">tanhl</a></code> </td><td align="right">3662 </td><td>-20 </td><td>20 </td><td align="right">20611 </td><td align="right">22312 </td><td align="center">-14.70 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga2151fba6c1e9b4fa5d2af2dcb5c68b17">tanl</a></code> </td><td align="right">3946 </td><td>0 </td><td>3.15 </td><td align="right">22448 </td><td align="right">24870 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga8f9695496a9bb839eb5f728b6bf0c856">truncl</a></code> </td><td align="right">1696 </td><td>-1000 </td><td>1000 </td><td align="right">1117 </td><td align="right">1172 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga94ee8c57b6b2d0bc5466c75bea2bffcf">tanhl</a></code> </td><td align="right">3678 </td><td>-20 </td><td>20 </td><td align="right">20646 </td><td align="right">22347 </td><td align="center">-14.70 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga8f9695496a9bb839eb5f728b6bf0c856">truncl</a></code> </td><td align="right">1710 </td><td>-1000 </td><td>1000 </td><td align="right">1118 </td><td align="right">1173 </td><td align="center">-15.95 </td></tr>
 </table>
 <p>&#160; </p><table class="doxtable">
 <caption>LibF7 Benchmarks for ATmega128 (avr51, with MUL)</caption>
 <tr>
 <th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>y<sub>0</sub> </th><th>y<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
 <tr>
-<td><code>+</code> </td><td align="right">1460 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1528 </td><td align="right">1664 </td><td align="center">-15.95 </td></tr>
+<td><code>+</code> </td><td align="right">1470 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1531 </td><td align="right">1667 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code>*</code> </td><td align="right">1596 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1620 </td><td align="right">1661 </td><td align="center">-15.65 </td></tr>
+<td><code>*</code> </td><td align="right">1600 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1620 </td><td align="right">1661 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code>/</code> </td><td align="right">1568 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">3563 </td><td align="right">3756 </td><td align="center">-15.65 </td></tr>
+<td><code>/</code> </td><td align="right">1572 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">3563 </td><td align="right">3756 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gaa983bf34c931b97d66be8b7bfd03dc48">atan2l</a></code> </td><td align="right">3198 </td><td>-10 </td><td>10 </td><td>-10 </td><td>10 </td><td align="right">21089 </td><td align="right">21984 </td><td align="center">-15.65 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaa983bf34c931b97d66be8b7bfd03dc48">atan2l</a></code> </td><td align="right">3208 </td><td>-10 </td><td>10 </td><td>-10 </td><td>10 </td><td align="right">21115 </td><td align="right">22010 </td><td align="center">-15.65 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gab88ba65d1861deddbbc5cb5384d6a02e">fdiml</a></code> </td><td align="right">1720 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1370 </td><td align="right">1799 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gab88ba65d1861deddbbc5cb5384d6a02e">fdiml</a></code> </td><td align="right">1730 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1371 </td><td align="right">1802 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga0e31e170115494fdc03b6556844232f3">fmaxl</a></code> </td><td align="right">1448 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1249 </td><td align="right">1353 </td><td align="center">-&infin; </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga0e31e170115494fdc03b6556844232f3">fmaxl</a></code> </td><td align="right">234 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">169 </td><td align="right">188 </td><td align="center">-&infin; </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga8a301190384886aa4e327db265fb5c9f">fminl</a></code> </td><td align="right">1448 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1252 </td><td align="right">1353 </td><td align="center">-&infin; </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga8a301190384886aa4e327db265fb5c9f">fminl</a></code> </td><td align="right">234 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">170 </td><td align="right">189 </td><td align="center">-&infin; </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#gaa927d9996fb40db42bd3a6cbe57da9a7">fmodl</a></code> </td><td align="right">2794 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">5170 </td><td align="right">5940 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaa927d9996fb40db42bd3a6cbe57da9a7">fmodl</a></code> </td><td align="right">2808 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">5175 </td><td align="right">5947 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga92a0e76d17c34fc1b3b2e7c0868aea6e">hypotl</a></code> </td><td align="right">2302 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">5004 </td><td align="right">5164 </td><td align="center">-15.66 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga92a0e76d17c34fc1b3b2e7c0868aea6e">hypotl</a></code> </td><td align="right">2312 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">5006 </td><td align="right">5166 </td><td align="center">-15.66 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga117ef260a3978efe149ab9f3ec3184e1">ldexpl</a></code> </td><td align="right">1252 </td><td>-1e+10 </td><td>1e+10 </td><td>-10 </td><td>10 </td><td align="right">739 </td><td align="right">757 </td><td align="center">-15.95 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga117ef260a3978efe149ab9f3ec3184e1">ldexpl</a></code> </td><td align="right">1254 </td><td>-1e+10 </td><td>1e+10 </td><td>-10 </td><td>10 </td><td align="right">738 </td><td align="right">756 </td><td align="center">-15.95 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__math.html#ga2f4830e468138e1513b55ca6a92a0f9a">powl</a></code> </td><td align="right">4078 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">32398 </td><td align="right">34023 </td><td align="center">-14.46 </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga2f4830e468138e1513b55ca6a92a0f9a">powl</a></code> </td><td align="right">4080 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">32440 </td><td align="right">34066 </td><td align="center">-14.46 </td></tr>
 <tr>
-<td><code>__builtin_powil</code> </td><td align="right">2220 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">3396 </td><td align="right">6173 </td><td align="center">-15.12 </td></tr>
+<td><code><a class="el" href="group__avr__builtins.html#ga0a5b0d3090f941af35df28a5c9072924">__builtin_powil</a></code> </td><td align="right">2224 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">3396 </td><td align="right">6173 </td><td align="center">-15.12 </td></tr>
 </table>
 <h1><a class="anchor" id="bench_fxlib"></a>
 Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
@@ -649,11 +682,15 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#ga211974619dda522de151c54ea7e338a0">log21puhr</a></code> </td><td align="right">32 </td><td>0 </td><td>1- </td><td align="right">22 </td><td align="right">22 </td><td>4.28e-03 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__stdfix.html#ga695b880125c9e9a101d3414e92309bae">sinuhk_deg</a></code> </td><td align="right">270 </td><td>0 </td><td>256- </td><td align="right">52 </td><td align="right">54 </td><td>6.44e-05 </td></tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga695b880125c9e9a101d3414e92309bae">sinuhk_deg</a></code> </td><td align="right">272 </td><td>0 </td><td>256- </td><td align="right">53 </td><td align="right">55 </td><td>6.44e-05 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__stdfix.html#gac6423e61bb8f5b78fb174a20212c4455">cosuhk_deg</a></code> </td><td align="right">316 </td><td>0 </td><td>256- </td><td align="right">72 </td><td align="right">76 </td><td>6.44e-05 </td></tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gac6423e61bb8f5b78fb174a20212c4455">cosuhk_deg</a></code> </td><td align="right">318 </td><td>0 </td><td>256- </td><td align="right">73 </td><td align="right">77 </td><td>6.44e-05 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__stdfix.html#ga578c81e880163ccc0ce18c827a61d34a">sqrthr</a></code> </td><td align="right">42 </td><td>0 </td><td>1- </td><td align="right">100 </td><td align="right">100 </td><td>7.78e-03 </td></tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaa20273916358cc5a63841caf127a401c">sqrthk</a></code> </td><td align="right">92 </td><td>0 </td><td>256- </td><td align="right">293 </td><td align="right">309 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad4bb40a96089a0bdd0bf4bec95f69657">sqrtuhk</a></code> </td><td align="right">70 </td><td>0 </td><td>256- </td><td align="right">277 </td><td align="right">293 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga578c81e880163ccc0ce18c827a61d34a">sqrthr</a></code> </td><td align="right">42 </td><td>0 </td><td>1- </td><td align="right">100 </td><td align="right">100 </td><td>3.84e-03 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gaa0f318048cbb81596a2046b3e3fad90e">sqrtuhr</a></code> </td><td align="right">38 </td><td>0 </td><td>1- </td><td align="right">98 </td><td align="right">98 </td><td>3.90e-03 </td></tr>
 <tr>
@@ -675,7 +712,7 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gac44202bf8260616f01ac270080608064">atanur</a></code> </td><td align="right">152 </td><td>0 </td><td>1- </td><td align="right">188 </td><td align="right">191 </td><td>2.46e-05 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__stdfix.html#ga6738fad7e09e7f44671012b2ad0a5303">exp2k</a></code> </td><td align="right">216 </td><td>-10 </td><td>10 </td><td align="right">256 </td><td align="right">318 </td><td>1.09e-02 </td></tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga6738fad7e09e7f44671012b2ad0a5303">exp2k</a></code> </td><td align="right">214 </td><td>-10 </td><td>10 </td><td align="right">255 </td><td align="right">317 </td><td>1.09e-02 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gac5c8391e087f6aed24ad0a3f0330904e">exp2uk</a></code> </td><td align="right">164 </td><td>0 </td><td>10 </td><td align="right">245 </td><td align="right">293 </td><td>1.06e-02 </td></tr>
 <tr>
@@ -691,6 +728,12 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gad952cbb91d0897722a247a830c4deae2">sinpi2ur</a></code> </td><td align="right">120 </td><td>0 </td><td>1- </td><td align="right">215 </td><td align="right">219 </td><td>2.80e-05 </td></tr>
 <tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gabb9e929246f36d7d52285723cf8a8153">sqrtk</a></code> </td><td align="right">128 </td><td>0 </td><td>65536- </td><td align="right">572 </td><td align="right">635 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga60c044763ec1bc6cb6635cec517baa42">sqrtuk</a></code> </td><td align="right">94 </td><td>0 </td><td>65536- </td><td align="right">550 </td><td align="right">613 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga87ebbdabfa4763879cbaa12aad279f6b">sqrtr</a></code> </td><td align="right">88 </td><td>0 </td><td>1- </td><td align="right">290 </td><td align="right">313 </td><td>1.53e-05 </td></tr>
+<tr>
 <td><code><a class="el" href="group__avr__stdfix.html#ga405c2c665dab63429adb0165848a1fd3">sqrtur</a></code> </td><td align="right">66 </td><td>0 </td><td>1- </td><td align="right">274 </td><td align="right">297 </td><td>1.53e-05 </td></tr>
 </table>
 <p>&#160; </p><table class="doxtable">
@@ -702,7 +745,11 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#ga211974619dda522de151c54ea7e338a0">log21puhr</a></code> </td><td align="right">70 </td><td>0 </td><td>1- </td><td align="right">312 </td><td align="right">332 </td><td>4.28e-03 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__stdfix.html#ga578c81e880163ccc0ce18c827a61d34a">sqrthr</a></code> </td><td align="right">54 </td><td>0 </td><td>1- </td><td align="right">102 </td><td align="right">105 </td><td>7.78e-03 </td></tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaa20273916358cc5a63841caf127a401c">sqrthk</a></code> </td><td align="right">88 </td><td>0 </td><td>256- </td><td align="right">291 </td><td align="right">307 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad4bb40a96089a0bdd0bf4bec95f69657">sqrtuhk</a></code> </td><td align="right">68 </td><td>0 </td><td>256- </td><td align="right">276 </td><td align="right">292 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga578c81e880163ccc0ce18c827a61d34a">sqrthr</a></code> </td><td align="right">54 </td><td>0 </td><td>1- </td><td align="right">102 </td><td align="right">105 </td><td>3.84e-03 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gaa0f318048cbb81596a2046b3e3fad90e">sqrtuhr</a></code> </td><td align="right">50 </td><td>0 </td><td>1- </td><td align="right">100 </td><td align="right">104 </td><td>3.90e-03 </td></tr>
 <tr>
@@ -724,7 +771,7 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gac44202bf8260616f01ac270080608064">atanur</a></code> </td><td align="right">212 </td><td>0 </td><td>1- </td><td align="right">830 </td><td align="right">910 </td><td>2.46e-05 </td></tr>
 <tr>
-<td><code><a class="el" href="group__avr__stdfix.html#ga6738fad7e09e7f44671012b2ad0a5303">exp2k</a></code> </td><td align="right">236 </td><td>-10 </td><td>10 </td><td align="right">994 </td><td align="right">1075 </td><td>1.09e-02 </td></tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga6738fad7e09e7f44671012b2ad0a5303">exp2k</a></code> </td><td align="right">234 </td><td>-10 </td><td>10 </td><td align="right">993 </td><td align="right">1074 </td><td>1.09e-02 </td></tr>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gac5c8391e087f6aed24ad0a3f0330904e">exp2uk</a></code> </td><td align="right">184 </td><td>0 </td><td>10 </td><td align="right">982 </td><td align="right">1050 </td><td>1.06e-02 </td></tr>
 <tr>
@@ -740,6 +787,12 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#gad952cbb91d0897722a247a830c4deae2">sinpi2ur</a></code> </td><td align="right">146 </td><td>0 </td><td>1- </td><td align="right">1203 </td><td align="right">1248 </td><td>2.80e-05 </td></tr>
 <tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gabb9e929246f36d7d52285723cf8a8153">sqrtk</a></code> </td><td align="right">124 </td><td>0 </td><td>65536- </td><td align="right">570 </td><td align="right">633 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga60c044763ec1bc6cb6635cec517baa42">sqrtuk</a></code> </td><td align="right">92 </td><td>0 </td><td>65536- </td><td align="right">549 </td><td align="right">612 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga87ebbdabfa4763879cbaa12aad279f6b">sqrtr</a></code> </td><td align="right">84 </td><td>0 </td><td>1- </td><td align="right">288 </td><td align="right">311 </td><td>1.53e-05 </td></tr>
+<tr>
 <td><code><a class="el" href="group__avr__stdfix.html#ga405c2c665dab63429adb0165848a1fd3">sqrtur</a></code> </td><td align="right">64 </td><td>0 </td><td>1- </td><td align="right">273 </td><td align="right">296 </td><td>1.53e-05 </td></tr>
 </table>
 </div></div><!-- contents -->
@@ -747,7 +800,7 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

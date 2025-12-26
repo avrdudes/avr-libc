@@ -8,7 +8,7 @@ var indexSectionsWithContent =
   5: "_fitu",
   6: "_",
   7: "<acdeu",
-  8: "abcdfghimptu"
+  8: "abdfghimptu"
 };
 
 var indexSectionNames =

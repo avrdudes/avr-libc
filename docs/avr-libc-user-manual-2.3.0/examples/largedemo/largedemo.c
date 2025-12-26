@@ -13,6 +13,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <avr/eeprom.h>
 #include <avr/interrupt.h>
@@ -20,31 +21,36 @@
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
+#include <avr/power.h>
+#include <util/atomic.h>
 
 /* Part 1: Macro definitions */
 
 #define CONTROL_PORT PORTD
 #define CONTROL_DDR  DDRD
+#define CONTROL_PIN  PIND
 
 #if defined(__AVR_ATtiny2313__)
 /* no PD7 and no ADC available on ATtiny2313 */
 #  define TRIGGER_DOWN PD2
 #  define TRIGGER_UP   PD3
-#  define FLASH	       PD4
+#  define FLASH        PD4
 #  define CLOCKOUT     PD6
+#  define PIN_TOGGLES_PORT
 #else
 #  define TRIGGER_DOWN PD2
 #  define TRIGGER_UP   PD3
 #  define TRIGGER_ADC  PD4
 #  define CLOCKOUT     PD6
-#  define FLASH	       PD7
+#  define FLASH        PD7
 #endif
 
 #if defined(__AVR_ATmega16__)
 #  define PWMDDR     DDRD
 #  define PWMOUT     PD5
-#elif defined(__AVR_ATmega8__) || defined(__AVR_ATmega48__) ||\
-      defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__)
+#elif defined(__AVR_ATmega8__) || defined(__AVR_ATmega48__) \
+      || defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) \
+      || defined(__AVR_ATmega328P__)
 #  define PWMDDR     DDRB
 #  define PWMOUT     PB1
 #elif defined(__AVR_ATtiny2313__)
@@ -57,8 +63,8 @@
 #  error "Unsupported MCU type"
 #endif
 
-#if defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) ||\
-    defined(__AVR_ATmega168__)
+#if defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) \
+    || defined(__AVR_ATmega168__)|| defined(__AVR_ATmega328P__)
 /* map ATmega8/16 names to ATmegaX8 names */
 #  define USART_RXC_vect USART_RX_vect
 #  define UDR     UDR0
@@ -74,15 +80,16 @@
 
 #  define TIMSK   TIMSK1
 #  define MCUCSR  MCUSR
+#  define PIN_TOGGLES_PORT
 #endif
 
 #if !defined(HAVE_ADC)
 #  define HAVE_ADC 1
 #endif
 
-#define F_CPU 1000000UL	/* CPU clock in Hertz */
+#define F_CPU 1000000UL /* CPU clock in Hertz */
 
-#define SOFTCLOCK_FREQ 100	/* internal software clock */
+#define SOFTCLOCK_FREQ 100      /* internal software clock */
 
 /*
  * Timeout to wait after last PWM change till updating the EEPROM.
@@ -127,7 +134,7 @@ volatile uint16_t adcval;
  * Where to store the PWM value in EEPROM.  This is used in order
  * to remember the value across a RESET or power cycle.
  */
-uint16_t ee_pwm __attribute__((section(".eeprom"))) = 42;
+uint16_t ee_pwm EEMEM = 42;
 
 /*
  * Current value of the PWM.
@@ -166,7 +173,7 @@ ISR(TIMER1_OVF_vect)
 ISR(ADC_vect)
 {
   adcval = ADCW;
-  ADCSRA &= ~_BV(ADIE);		/* disable ADC interrupt */
+  ADCSRA &= ~_BV(ADIE);         /* disable ADC interrupt */
   intflags.adc_int = 1;
 }
 #endif /* HAVE_ADC */
@@ -192,11 +199,11 @@ ISR(USART_RXC_vect)
 
 /*
  * Read out and reset MCUCSR early during startup.
+ * This function is run by the startup code and
+ * never called explicitly.
  */
-void handle_mcucsr(void)
-  __attribute__((section(".init3")))
-  __attribute__((naked));
-void handle_mcucsr(void)
+__attribute__((used, unused, naked, section(".init3")))
+static void handle_mcucsr(void)
 {
   mcucsr = MCUCSR;
   MCUCSR = 0;
@@ -208,7 +215,10 @@ void handle_mcucsr(void)
 static void
 ioinit(void)
 {
-  uint16_t pwm_from_eeprom;
+#if defined(__AVR_ATmega328P__) // Arduino Nano
+  // pre-scale clock from 16 MHz to 1 MHz
+  clock_prescale_set(clock_div_16);
+#endif
 
   /*
    * Set up the 16-bit timer 1.
@@ -222,7 +232,7 @@ ioinit(void)
   TCCR1A = _BV(WGM10) | _BV(WGM11) | _BV(COM1A1) | _BV(COM1A0);
   TCCR1B = _BV(CS10);
 
-  OCR1A = 0;			/* set PWM value to 0 */
+  OCR1A = 0;                    /* set PWM value to 0 */
 
   /* enable pull-ups for pushbuttons */
 #if HAVE_ADC
@@ -247,7 +257,7 @@ ioinit(void)
    */
   PWMDDR |= _BV(PWMOUT);
 
-  UCSRA = _BV(U2X);		/* improves baud rate error @ F_CPU = 1 MHz */
+  UCSRA = _BV(U2X);             /* improves baud rate error @ F_CPU = 1 MHz */
   UCSRB = _BV(TXEN)|_BV(RXEN)|_BV(RXCIE); /* tx/rx enable, rx complete intr */
   UBRRL = (F_CPU / (8 * 9600UL)) - 1;  /* 9600 Bd */
 
@@ -257,9 +267,14 @@ ioinit(void)
    */
   ADCSRA = _BV(ADEN) | _BV(ADPS1) | _BV(ADPS0);
 #endif
+#if defined(__AVR_ATmega328P__)
+  /* Arduino Nano uses AVcc as reference rather than AREF input */
+  ADMUX = _BV(REFS0);
+#endif
+
 
   TIMSK = _BV(TOIE1);
-  sei();			/* enable interrupts */
+  sei();                        /* enable interrupts */
 
   /*
    * Enable the watchdog with the largest prescaler.  Will cause a
@@ -271,7 +286,8 @@ ioinit(void)
    * Read the value from EEPROM.  If it is not 0xffff (erased cells),
    * use it as the starting value for the PWM.
    */
-  if ((pwm_from_eeprom = eeprom_read_word(&ee_pwm)) != 0xffff)
+  uint16_t pwm_from_eeprom = eeprom_read_word(&ee_pwm);
+  if (pwm_from_eeprom != 0xffff)
     OCR1A = (pwm = pwm_from_eeprom);
 }
 
@@ -280,48 +296,38 @@ ioinit(void)
  */
 
 /*
- * Send character c down the UART Tx, wait until tx holding register
- * is empty.
+ * Send character c down the UART Tx, wait until Tx holding register is empty.
+ * The prototype is such that it can be used in FDEV_SETUP_STREAM.
  */
-static void
-putchr(char c)
+static int
+uart_putchar(char c, FILE *stream)
 {
-
+  (void) stream;
+  if (c == '\n')
+    uart_putchar('\r', NULL);
   loop_until_bit_is_set(UCSRA, UDRE);
   UDR = c;
+  return 0;
 }
+
+/*
+ * A stream writing its characters to the UART.
+ */
+static FILE uartout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+
 
 /*
  * Send a C (NUL-terminated) string down the UART Tx.
  */
-static void
-printstr(const char *s)
-{
+#define printstr(S) fputs(S, &uartout)
 
-  while (*s)
-    {
-      if (*s == '\n')
-	putchr('\r');
-      putchr(*s++);
-    }
-}
 
 /*
  * Same as above, but the string is located in program memory,
  * so "lpm" instructions are needed to fetch it.
  */
-static void
-printstr_p(const char *s)
-{
-  char c;
+#define printstr_p(S) fputs_P(PSTR(S), &uartout)
 
-  for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s))
-    {
-      if (c == '\n')
-	putchr('\r');
-      putchr(c);
-    }
-}
 
 /*
  * Update the PWM value.  If it has changed, send the new value down
@@ -330,8 +336,6 @@ printstr_p(const char *s)
 static void
 set_pwm(int16_t new)
 {
-  char s[8];
-
   if (new < 0)
     new = 0;
   else if (new > 1000)
@@ -339,8 +343,9 @@ set_pwm(int16_t new)
 
   if (new != pwm)
     {
-      OCR1A = (pwm = new);
+      char s[8];
 
+      OCR1A = (pwm = new);
       /*
        * Calculate a "percentage".  We just divide by 10, as we
        * limited the max value of the PWM to 1000 above.
@@ -348,7 +353,7 @@ set_pwm(int16_t new)
       new /= 10;
       itoa(new, s, 10);
       printstr(s);
-      putchr(' ');
+      printstr_p(" ");
 
       pwm_backup_tmr = EE_UPDATE_TIME;
     }
@@ -374,170 +379,186 @@ main(void)
     MODE_UPDOWN,
     MODE_ADC,
     MODE_SERIAL
-  } __attribute__((packed)) mode = MODE_UPDOWN;
+  } mode = MODE_UPDOWN;
   uint8_t flash = 0;
 
   ioinit();
 
   if ((mcucsr & _BV(WDRF)) == _BV(WDRF))
-    printstr_p(PSTR("\nOoops, the watchdog bit me!"));
+    printstr_p("\nOoops, the watchdog bit me!");
 
-  printstr_p(PSTR("\nHello, this is the avr-gcc/libc "
-		  "demo running on an "
-#if defined(__AVR_ATmega16__)
-		  "ATmega16"
-#elif defined(__AVR_ATmega8__)
-		  "ATmega8"
-#elif defined(__AVR_ATmega48__)
-		  "ATmega48"
-#elif defined(__AVR_ATmega88__)
-		  "ATmega88"
-#elif defined(__AVR_ATmega168__)
-		  "ATmega168"
-#elif defined(__AVR_ATtiny2313__)
-		  "ATtiny2313"
-#else
-		  "unknown AVR"
-#endif
-		  "\n"));
+  printstr_p("\nHello, this is the avr-gcc/libc demo running on an ");
+  /* The MCU_NAME is a macro defined in the Makefile as:
+     MCU_TARGET = atmega328p
+     DEFS       = -DMCU_NAME='"$(MCU_TARGET)"'
+  */
+  printstr_p(MCU_NAME);
+  printstr_p (" ");
 
   for (;;)
     {
       wdt_reset();
 
       if (intflags.tmr_int)
-	{
-	  /*
-	   * Our periodic 10 ms interrupt happened.  See what we can
-	   * do about it.
-	   */
-	  intflags.tmr_int = 0;
-	  /*
-	   * toggle PD6, just to show the internal clock; should
-	   * yield ~ 48 Hz on PD6
-	   */
-	  CONTROL_PORT ^= _BV(CLOCKOUT);
-	  /*
-	   * flash LED on PD7, approximately once per second
-	   */
-	  flash++;
-	  if (flash == 5)
-	    CONTROL_PORT |= _BV(FLASH);
-	  else if (flash == 100)
-	    {
-	      flash = 0;
-	      CONTROL_PORT &= ~_BV(FLASH);
-	    }
+        {
+          /*
+           * Our periodic 10 ms interrupt happened.  See what we can
+           * do about it.  As .tmr_int is just one bit in intflags, the
+           * following is a read-modify-write operation, and hence it must
+           * be made atomic.  The same applies to similar accesses below.
+           */
+          ATOMIC_BLOCK (ATOMIC_FORCEON)
+            {
+              intflags.tmr_int = 0;
+            }
 
-	  switch (mode)
-	    {
-	    case MODE_SERIAL:
-	      /*
-	       * In serial mode, there's nothing to do anymore here.
-	       */
-	      break;
+#ifdef PIN_TOGGLES_PORT
+          /* Toggling a PORT pin on ATmega328 / ATtiny2313 can be achieved
+           * by writing a '1' to the respective bit in the PIN register.
+           * See "I/O-Ports -> Toggling the Pin" in the device manual.
+           * A single bit can be toggled with a SBI instruction.
+           */
+          CONTROL_PIN |= _BV(CLOCKOUT);
+#else
+          /*
+           * Toggle PD6, just to show the internal clock; should
+           * yield ~ 48 Hz on PD6.  Since the operation itself is not
+           * atomic, we wrap it it an atomic block so that it still
+           * works when some ISR changes a different bit of the port.
+           */
+          ATOMIC_BLOCK (ATOMIC_FORCEON)
+            {
+              CONTROL_PORT ^= _BV(CLOCKOUT);
+            }
+#endif /* PIN_TOGGLES_PORT */
 
-	    case MODE_UPDOWN:
-	      /*
-	       * Query the pushbuttons.
-	       *
-	       * NB: watch out to use PINx for reading, as opposed
-	       * to using PORTx which would be the mirror of the
-	       * _output_ latch register (resp. pullup configuration
-	       * bit for input pins)!
-	       */
-	      if (bit_is_clear(PIND, TRIGGER_DOWN))
-		set_pwm(pwm - 10);
-	      else if (bit_is_clear(PIND, TRIGGER_UP))
-		set_pwm(pwm + 10);
+          /*
+           * Flash LED on PD7, approximately once per second
+           */
+          flash++;
+          if (flash == 5)
+            CONTROL_PORT |= _BV(FLASH);
+          else if (flash == 100)
+            {
+              flash = 0;
+              CONTROL_PORT &= ~_BV(FLASH);
+            }
+
+          switch (mode)
+            {
+            case MODE_SERIAL:
+              /*
+               * In serial mode, there's nothing to do anymore here.
+               */
+              break;
+
+            case MODE_UPDOWN:
+              /*
+               * Query the pushbuttons.
+               *
+               * NB: watch out to use PINx for reading, as opposed
+               * to using PORTx which would be the mirror of the
+               * _output_ latch register (resp. pullup configuration
+               * bit for input pins)!
+               */
+              if (bit_is_clear(PIND, TRIGGER_DOWN))
+                set_pwm(pwm - 10);
+              else if (bit_is_clear(PIND, TRIGGER_UP))
+                set_pwm(pwm + 10);
 #if HAVE_ADC
-	      else if (bit_is_clear(PIND, TRIGGER_ADC))
-		mode = MODE_ADC;
+              else if (bit_is_clear(PIND, TRIGGER_ADC))
+                mode = MODE_ADC;
 #endif
-	      break;
+              break;
 
-	    case MODE_ADC:
+            case MODE_ADC:
 #if HAVE_ADC
-	      if (bit_is_set(PIND, TRIGGER_ADC))
-		mode = MODE_UPDOWN;
-	      else
-		{
-		  /*
-		   * Start one conversion.
-		   */
-		  ADCSRA |= _BV(ADIE);
-		  ADCSRA |= _BV(ADSC);
-		}
+              if (bit_is_set(PIND, TRIGGER_ADC))
+                mode = MODE_UPDOWN;
+              else
+                {
+                  /*
+                   * Start one conversion.
+                   */
+                  ADCSRA |= _BV(ADIE);
+                  ADCSRA |= _BV(ADSC);
+                }
 #endif /* HAVE_ADC */
-	      break;
-	    }
+              break;
+            }
 
-	  if (pwm_backup_tmr && --pwm_backup_tmr == 0)
-	    {
-	      /*
-	       * The EEPROM backup timer expired.  Save the current
-	       * PWM value in EEPROM.  Note that this function might
-	       * block for a few milliseconds (after writing the
-	       * first byte).
-	       */
-	      eeprom_write_word(&ee_pwm, pwm);
-	      printstr_p(PSTR("[EEPROM updated] "));
-	    }
-	}
+          if (pwm_backup_tmr && --pwm_backup_tmr == 0)
+            {
+              /*
+               * The EEPROM backup timer expired.  Save the current
+               * PWM value in EEPROM.  Note that this function might
+               * block for a few milliseconds (after writing the
+               * first byte).
+               */
+              eeprom_write_word(&ee_pwm, pwm);
+              printstr_p("[EEPROM updated] ");
+            }
+        }
 
 #if HAVE_ADC
       if (intflags.adc_int)
-	{
-	  intflags.adc_int = 0;
-	  set_pwm(adcval);
-	}
+        {
+          ATOMIC_BLOCK (ATOMIC_FORCEON)
+            {
+              intflags.adc_int = 0;
+            }
+          set_pwm(adcval);
+        }
 #endif /* HAVE_ADC */
 
       if (intflags.rx_int)
-	{
-	  intflags.rx_int = 0;
+        {
+          ATOMIC_BLOCK (ATOMIC_FORCEON)
+            {
+              intflags.rx_int = 0;
+            }
 
-	  if (rxbuff == 'q')
-	    {
-	      printstr_p(PSTR("\nThank you for using serial mode."
-			      "  Good-bye!\n"));
-	      mode = MODE_UPDOWN;
-	    }
-	  else
-	    {
-	      if (mode != MODE_SERIAL)
-		{
-		  printstr_p(PSTR("\nWelcome at serial control, "
-				  "type +/- to adjust, or 0/1 to turn on/off\n"
-				  "the LED, q to quit serial mode, "
-				  "r to demonstrate a watchdog reset\n"));
-		  mode = MODE_SERIAL;
-		}
-	      switch (rxbuff)
-		{
-		case '+':
-		  set_pwm(pwm + 10);
-		  break;
+          if (rxbuff == 'q')
+            {
+              printstr_p("\nThank you for using serial mode."
+                         "  Good-bye!\n");
+              mode = MODE_UPDOWN;
+            }
+          else
+            {
+              if (mode != MODE_SERIAL)
+                {
+                  printstr_p("\nWelcome at serial control, "
+                             "type +/- to adjust, or 0/1 to turn on/off\n"
+                             "the LED, q to quit serial mode, "
+                             "r to demonstrate a watchdog reset\n");
+                  mode = MODE_SERIAL;
+                }
+              switch (rxbuff)
+                {
+                case '+':
+                  set_pwm(pwm + 10);
+                  break;
 
-		case '-':
-		  set_pwm(pwm - 10);
-		  break;
+                case '-':
+                  set_pwm(pwm - 10);
+                  break;
 
-		case '0':
-		  set_pwm(0);
-		  break;
+                case '0':
+                  set_pwm(0);
+                  break;
 
-		case '1':
-		  set_pwm(1000);
-		  break;
+                case '1':
+                  set_pwm(1000);
+                  break;
 
-		case 'r':
-		  printstr_p(PSTR("\nzzzz... zzz..."));
-		  for (;;)
-		    ;
-		}
-	    }
-	}
+                case 'r':
+                  printstr_p("\nzzzz... zzz...");
+                  for (;;)
+                    ;
+                }
+            }
+        }
       sleep_mode();
     }
 }

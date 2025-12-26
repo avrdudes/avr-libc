@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -97,13 +96,12 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_9b49c6c2d2dfe7219f88b16666fc0be4.html">john</a></li><li class="navelem"><a class="el" href="dir_a05e76e2dc0d4100e4bd8f30115bdb66.html">gnu</a></li><li class="navelem"><a class="el" href="dir_6d25185a6a505494af8507b862feaaa0.html">source</a></li><li class="navelem"><a class="el" href="dir_2c8c9ed937fd2e49795790ca176638eb.html">avr-libc</a></li><li class="navelem"><a class="el" href="dir_02d7229a0ecae76c083123a782ac913c.html">include</a></li><li class="navelem"><a class="el" href="dir_ed25929bcbaa84769903222301a32285.html">avr</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_74edb07caae428933d09e0931d8b44f5.html">avr</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">eeprom.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -118,7 +116,7 @@ Macros</h2></td></tr>
 <tr class="separator:ga7ccd65b76bb9ed5ee03855779bae28de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga44c64ebb425fcb34b8d4dc19c4079869"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga44c64ebb425fcb34b8d4dc19c4079869">eeprom_busy_wait</a>()&#160;&#160;&#160;do {} while (!<a class="el" href="group__avr__eeprom.html#ga7ccd65b76bb9ed5ee03855779bae28de">eeprom_is_ready</a>())</td></tr>
 <tr class="separator:ga44c64ebb425fcb34b8d4dc19c4079869"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">IAR C compatibility defines</div></td></tr>
+<tr><td colspan="2"><div class="groupHeader">IAR C Compatibility Defines</div></td></tr>
 <tr class="memitem:gae63647a896a731935077dbeb0a1b52ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gae63647a896a731935077dbeb0a1b52ef">_EEPUT</a>(addr,  val)&#160;&#160;&#160;<a class="el" href="group__avr__eeprom.html#ga682e0b2ca0badd47e1e30e61617e1361">eeprom_write_byte</a> ((<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *)(addr), (<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>)(val))</td></tr>
 <tr class="separator:gae63647a896a731935077dbeb0a1b52ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae436d1b201970ad3836f663982d81dbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gae436d1b201970ad3836f663982d81dbf">__EEPUT</a>(addr,  val)&#160;&#160;&#160;<a class="el" href="group__avr__eeprom.html#ga682e0b2ca0badd47e1e30e61617e1361">eeprom_write_byte</a> ((<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *)(addr), (<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>)(val))</td></tr>
@@ -130,14 +128,37 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">EEPROM Read Functions</div></td></tr>
 <tr class="memitem:ga4ebdd6972a451fb93013b9cd552edbd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga4ebdd6972a451fb93013b9cd552edbd5">eeprom_read_byte</a> (const <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__p)</td></tr>
 <tr class="separator:ga4ebdd6972a451fb93013b9cd552edbd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga41d4678ab01bcdb2ee9c785a50eca5b8"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga41d4678ab01bcdb2ee9c785a50eca5b8">eeprom_read_char</a> (const char *__p)</td></tr>
+<tr class="separator:ga41d4678ab01bcdb2ee9c785a50eca5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac855bee8a5f44a0c7e5a34ba371764db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gac855bee8a5f44a0c7e5a34ba371764db">eeprom_read_u8</a> (const <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__p)</td></tr>
+<tr class="separator:gac855bee8a5f44a0c7e5a34ba371764db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0715e94306a4c36e2f9f757ddf984ca1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga0715e94306a4c36e2f9f757ddf984ca1">eeprom_read_i8</a> (const <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> *__p)</td></tr>
+<tr class="separator:ga0715e94306a4c36e2f9f757ddf984ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6311011b27c7f37b6d8be9dab0a95e03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga6311011b27c7f37b6d8be9dab0a95e03">eeprom_read_word</a> (const <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *__p)</td></tr>
 <tr class="separator:ga6311011b27c7f37b6d8be9dab0a95e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f712c5ac1c0eca64adf31a9e6336e65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga6f712c5ac1c0eca64adf31a9e6336e65">eeprom_read_u16</a> (const <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *__p)</td></tr>
+<tr class="separator:ga6f712c5ac1c0eca64adf31a9e6336e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga084994f50771e72f97cbae08405d02b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga084994f50771e72f97cbae08405d02b6">eeprom_read_i16</a> (const <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> *__p)</td></tr>
+<tr class="separator:ga084994f50771e72f97cbae08405d02b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8eea5977de1aece2fca59503cb69e278"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga8eea5977de1aece2fca59503cb69e278">eeprom_read_u24</a> (const <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> *__p)</td></tr>
+<tr class="separator:ga8eea5977de1aece2fca59503cb69e278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf8497f1ac2fe0f0b0e2c74a8da6cdc29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaf8497f1ac2fe0f0b0e2c74a8da6cdc29">eeprom_read_i24</a> (const <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> *__p)</td></tr>
+<tr class="separator:gaf8497f1ac2fe0f0b0e2c74a8da6cdc29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadcc46750573191a907fc14732db2dc73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gadcc46750573191a907fc14732db2dc73">eeprom_read_dword</a> (const <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *__p)</td></tr>
 <tr class="separator:gadcc46750573191a907fc14732db2dc73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadfc8a078b29560ad5c92d8fb36fe1d96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gadfc8a078b29560ad5c92d8fb36fe1d96">eeprom_read_u32</a> (const <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *__p)</td></tr>
+<tr class="separator:gadfc8a078b29560ad5c92d8fb36fe1d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa23472de7a18929ece6e3b9ddb697c9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaa23472de7a18929ece6e3b9ddb697c9f">eeprom_read_i32</a> (const <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *__p)</td></tr>
+<tr class="separator:gaa23472de7a18929ece6e3b9ddb697c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaca1f61a5fbd50b53a424692ae6e5a572"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaca1f61a5fbd50b53a424692ae6e5a572">eeprom_read_qword</a> (const <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *__p)</td></tr>
 <tr class="separator:gaca1f61a5fbd50b53a424692ae6e5a572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8722a9602d0fc38bd1f8711b3ea76f70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga8722a9602d0fc38bd1f8711b3ea76f70">eeprom_read_u64</a> (const <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *__p)</td></tr>
+<tr class="separator:ga8722a9602d0fc38bd1f8711b3ea76f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae929f18c45fe1ea044c7d602fbf79d9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gae929f18c45fe1ea044c7d602fbf79d9d">eeprom_read_i64</a> (const <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> *__p)</td></tr>
+<tr class="separator:gae929f18c45fe1ea044c7d602fbf79d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac484dd60aed363b604588b731e48a2b1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gac484dd60aed363b604588b731e48a2b1">eeprom_read_float</a> (const float *__p)</td></tr>
 <tr class="separator:gac484dd60aed363b604588b731e48a2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5c995e0556de15665502891c4f08076a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double</a> (const double *__p)</td></tr>
@@ -146,14 +167,37 @@ Functions</h2></td></tr>
 <tr class="separator:ga6022692549ebaa4a84910fb4838e340a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ebd0e867b6f4a03d053801d3508f8de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga0ebd0e867b6f4a03d053801d3508f8de">eeprom_read_block</a> (void *__dst, const void *__src, size_t __n)</td></tr>
 <tr class="separator:ga0ebd0e867b6f4a03d053801d3508f8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">EEPROM Write Functions</div></td></tr>
 <tr class="memitem:ga682e0b2ca0badd47e1e30e61617e1361"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga682e0b2ca0badd47e1e30e61617e1361">eeprom_write_byte</a> (<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__p, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
 <tr class="separator:ga682e0b2ca0badd47e1e30e61617e1361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9d9db2958930fe713d37ca93e81d1a26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga9d9db2958930fe713d37ca93e81d1a26">eeprom_write_char</a> (char *__p, char __value)</td></tr>
+<tr class="separator:ga9d9db2958930fe713d37ca93e81d1a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3e01f80415a69f42a298870f89b9eab6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga3e01f80415a69f42a298870f89b9eab6">eeprom_write_u8</a> (<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__p, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
+<tr class="separator:ga3e01f80415a69f42a298870f89b9eab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga85999bcf1f99797efd714375f37fd1c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga85999bcf1f99797efd714375f37fd1c3">eeprom_write_i8</a> (<a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> *__p, <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> __value)</td></tr>
+<tr class="separator:ga85999bcf1f99797efd714375f37fd1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga38e4426e45512adb5e33bf8eff20ab41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga38e4426e45512adb5e33bf8eff20ab41">eeprom_write_word</a> (<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __value)</td></tr>
 <tr class="separator:ga38e4426e45512adb5e33bf8eff20ab41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2efa330cf6f1c0b77982c7b8bb9c8f0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga2efa330cf6f1c0b77982c7b8bb9c8f0f">eeprom_write_u16</a> (<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __value)</td></tr>
+<tr class="separator:ga2efa330cf6f1c0b77982c7b8bb9c8f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0fbeeaba45e85e086c5cc3531e9a7729"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga0fbeeaba45e85e086c5cc3531e9a7729">eeprom_write_i16</a> (<a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> __value)</td></tr>
+<tr class="separator:ga0fbeeaba45e85e086c5cc3531e9a7729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf7226c2673332d1f19e6819d160f5acf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaf7226c2673332d1f19e6819d160f5acf">eeprom_write_u24</a> (<a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> *__p, <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> __value)</td></tr>
+<tr class="separator:gaf7226c2673332d1f19e6819d160f5acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6a33c9469d6afe56e94d3341e04fed59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga6a33c9469d6afe56e94d3341e04fed59">eeprom_write_i24</a> (<a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> __value)</td></tr>
+<tr class="separator:ga6a33c9469d6afe56e94d3341e04fed59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga012c7fa61d9695b7f0f5187d2560e598"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga012c7fa61d9695b7f0f5187d2560e598">eeprom_write_dword</a> (<a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __value)</td></tr>
 <tr class="separator:ga012c7fa61d9695b7f0f5187d2560e598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa92abce0831fa829d370d2b3f7b0ff4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaa92abce0831fa829d370d2b3f7b0ff4e">eeprom_write_u32</a> (<a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __value)</td></tr>
+<tr class="separator:gaa92abce0831fa829d370d2b3f7b0ff4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafbb06ee999dfe61151b1eb86cef437b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gafbb06ee999dfe61151b1eb86cef437b8">eeprom_write_i32</a> (<a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *__p, <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> __value)</td></tr>
+<tr class="separator:gafbb06ee999dfe61151b1eb86cef437b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaae0d34a627c90f9dd73ef9348c259ba7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaae0d34a627c90f9dd73ef9348c259ba7">eeprom_write_qword</a> (<a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *__p, <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> __value)</td></tr>
 <tr class="separator:gaae0d34a627c90f9dd73ef9348c259ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf2fa1cd90fb9fa972e9168eed15adf56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaf2fa1cd90fb9fa972e9168eed15adf56">eeprom_write_u64</a> (<a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *__p, <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> __value)</td></tr>
+<tr class="separator:gaf2fa1cd90fb9fa972e9168eed15adf56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7663866bdf08175f0868783e573e305b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga7663866bdf08175f0868783e573e305b">eeprom_write_i64</a> (<a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> __value)</td></tr>
+<tr class="separator:ga7663866bdf08175f0868783e573e305b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac738db5e12a0369d332ca43563755095"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gac738db5e12a0369d332ca43563755095">eeprom_write_float</a> (float *__p, float __value)</td></tr>
 <tr class="separator:gac738db5e12a0369d332ca43563755095"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac96be7325e83787d29fc00662903a36f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gac96be7325e83787d29fc00662903a36f">eeprom_write_double</a> (double *__p, double __value)</td></tr>
@@ -162,14 +206,37 @@ Functions</h2></td></tr>
 <tr class="separator:ga1917d497995866918fa8dfccd9f29271"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac5c2be42eb170be7a26fe8b7cce4bc4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gac5c2be42eb170be7a26fe8b7cce4bc4d">eeprom_write_block</a> (const void *__src, void *__dst, size_t __n)</td></tr>
 <tr class="separator:gac5c2be42eb170be7a26fe8b7cce4bc4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">EEPROM Update Functions</div></td></tr>
 <tr class="memitem:ga63aee2719099e8435e8584d4b3e51991"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga63aee2719099e8435e8584d4b3e51991">eeprom_update_byte</a> (<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__p, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
 <tr class="separator:ga63aee2719099e8435e8584d4b3e51991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa10ccca51630596dc08098a3ac96c267"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaa10ccca51630596dc08098a3ac96c267">eeprom_update_char</a> (char *__p, char __value)</td></tr>
+<tr class="separator:gaa10ccca51630596dc08098a3ac96c267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga60bafaf44c4c8333eb27302b817d1005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga60bafaf44c4c8333eb27302b817d1005">eeprom_update_u8</a> (<a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__p, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
+<tr class="separator:ga60bafaf44c4c8333eb27302b817d1005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2c7dc9eae10a6c53405e407bd1621415"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga2c7dc9eae10a6c53405e407bd1621415">eeprom_update_i8</a> (<a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> *__p, <a class="el" href="group__avr__stdint.html#gaef44329758059c91c76d334e8fc09700">int8_t</a> __value)</td></tr>
+<tr class="separator:ga2c7dc9eae10a6c53405e407bd1621415"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga131cff4e1ae5fcdf5685cab524ea4553"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga131cff4e1ae5fcdf5685cab524ea4553">eeprom_update_word</a> (<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __value)</td></tr>
 <tr class="separator:ga131cff4e1ae5fcdf5685cab524ea4553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4688ea331f2456c4d119666b387e3fb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga4688ea331f2456c4d119666b387e3fb1">eeprom_update_u16</a> (<a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __value)</td></tr>
+<tr class="separator:ga4688ea331f2456c4d119666b387e3fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad1d31fdb8980b5a3e48363d1f04b582d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gad1d31fdb8980b5a3e48363d1f04b582d">eeprom_update_i16</a> (<a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga932e6ccc3d54c58f761c1aead83bd6d7">int16_t</a> __value)</td></tr>
+<tr class="separator:gad1d31fdb8980b5a3e48363d1f04b582d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab73b4b253362fd2a15605663ebf1067f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gab73b4b253362fd2a15605663ebf1067f">eeprom_update_u24</a> (<a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> *__p, <a class="el" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> __value)</td></tr>
+<tr class="separator:gab73b4b253362fd2a15605663ebf1067f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5033416ebbec7843a64b7035a09db2c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga5033416ebbec7843a64b7035a09db2c7">eeprom_update_i24</a> (<a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga421614a760dfd909372e432a20473b21">int24_t</a> __value)</td></tr>
+<tr class="separator:ga5033416ebbec7843a64b7035a09db2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaab79c4b2b5e8159d5f37d26d11d3f954"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaab79c4b2b5e8159d5f37d26d11d3f954">eeprom_update_dword</a> (<a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __value)</td></tr>
 <tr class="separator:gaab79c4b2b5e8159d5f37d26d11d3f954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab95e56f2ac5e50c896ca3049aa30cf33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gab95e56f2ac5e50c896ca3049aa30cf33">eeprom_update_u32</a> (<a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __value)</td></tr>
+<tr class="separator:gab95e56f2ac5e50c896ca3049aa30cf33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga327093837d2ecfb75e7e40f1029780db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga327093837d2ecfb75e7e40f1029780db">eeprom_update_i32</a> (<a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *__p, <a class="el" href="group__avr__stdint.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> __value)</td></tr>
+<tr class="separator:ga327093837d2ecfb75e7e40f1029780db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga991e7689174d7baaadc542ba17881a94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga991e7689174d7baaadc542ba17881a94">eeprom_update_qword</a> (<a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *__p, <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> __value)</td></tr>
 <tr class="separator:ga991e7689174d7baaadc542ba17881a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaad70d58af04b2f664bf797c80b46fd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#gaaad70d58af04b2f664bf797c80b46fd6">eeprom_update_u64</a> (<a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> *__p, <a class="el" href="group__avr__stdint.html#gad27ed092432b64ff558d2254c278720f">uint64_t</a> __value)</td></tr>
+<tr class="separator:gaaad70d58af04b2f664bf797c80b46fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga404fcdac263d945c1d8eb550a049508c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga404fcdac263d945c1d8eb550a049508c">eeprom_update_i64</a> (<a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> *__p, <a class="el" href="group__avr__stdint.html#ga831d6234342279926bb11bad3a37add9">int64_t</a> __value)</td></tr>
+<tr class="separator:ga404fcdac263d945c1d8eb550a049508c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga106a2e703b12cad4d35380b1a69ac586"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga106a2e703b12cad4d35380b1a69ac586">eeprom_update_float</a> (float *__p, float __value)</td></tr>
 <tr class="separator:ga106a2e703b12cad4d35380b1a69ac586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga887119d049844da60dc41c1f4c50ad21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__eeprom.html#ga887119d049844da60dc41c1f4c50ad21">eeprom_update_double</a> (double *__p, double __value)</td></tr>
@@ -183,7 +250,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:09 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

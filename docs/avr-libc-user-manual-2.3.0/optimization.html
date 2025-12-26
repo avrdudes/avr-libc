@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
-<title>AVR-LibC: Compiler optimization</title>
+<title>AVR-LibC: Problems with Reordering Code</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -97,12 +96,13 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">Compiler optimization </div></div>
+  <div class="headertitle"><div class="title">Problems with Reordering Code </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="optim_code_reorder"></a>
-Problems with reordering code</h1>
+Problems with Reordering Code</h1>
 <dl class="section author"><dt>Author</dt><dd>Jan Waclawek</dd></dl>
+<p>This is an essay about <a href="https://gcc.gnu.org/PR53049">PR53049</a>.</p>
 <p>Programs contain sequences of statements, and a naive compiler would execute them exactly in the order as they are written. But an optimizing compiler is free to <em>reorder</em> the statements &mdash; or even parts of them &mdash; if the resulting "net effect" is the same. The "measure" of the "net effect" is what the standard calls "side
 effects", and is accomplished exclusively through accesses (reads and writes) to variables qualified as <code>volatile</code>. So, as long as all volatile reads and writes are to the same addresses and in the same order (and writes write the same values), the program is correct, regardless of other operations in it. One important point to note here is, that time duration between consecutive volatile accesses is not considered at all.</p>
 <p>Unfortunately, there are also operations which are not covered by volatile accesses. An example of this in AVR-GCC/AVR-LibC are the <code><a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli()</a></code> and <code><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a></code> macros defined in &lt;<a class="el" href="interrupt_8h.html">avr/interrupt.h</a>&gt;, which convert directly to the respective assembler mnemonics through the <code>__asm__()</code> statement. They constitute a variable access by means of their memory clobber, and they are (implicitly) volatile because they don't have an output operand. So the compiler may not reorder these <a class="el" href="inline_asm.html">inline asm</a> statements with respect to other memory accesses or volatile actions. However, such asm statement may still be reordered with other statement that are neither volatile nor access memory.</p>
@@ -164,7 +164,7 @@ effects", and is accomplished exclusively through accesses (reads and writes) to
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

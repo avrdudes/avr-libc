@@ -1,16 +1,44 @@
 PRG            = stdiodemo
 OBJ            = stdiodemo.o hd44780.o lcd.o uart.o
-MCU_TARGET     = atmega16
+MCU_TARGET     = atmega328p
 OPTIMIZE       = -Os
 
 DEFS           =
 LIBS           =
 
+# AVRDUDE configuration
+# override that from the environment if needed
+ifndef AVRDUDE_PORT
+  ifeq ($(OS),Windows_NT)
+    AVRDUDE_PORT = COM3
+  else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        AVRDUDE_PORT = /dev/ttyUSB0
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        AVRDUDE_PORT = /dev/cu.usbserial-10
+    endif
+    ifeq ($(UNAME_S),FreeBSD)
+        AVRDUDE_PORT = /dev/cuaU0
+    endif
+  endif
+endif
+ifndef AVRDUDE_PROGRAMMER
+  AVRDUDE_PROGRAMMER = arduino
+endif
+ifndef AVRDUDE_ADDITIONAL
+  AVRDUDE_ADDITIONAL = -b 57600 # for Arduino Nano compat device
+endif
+ifndef AVRDUDE
+  AVRDUDE = avrdude # search along $PATH
+endif
+
 # You should not have to change anything below here.
 
 CC             = avr-gcc
 
-CFLAGS        = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
+CFLAGS        = -g -Wall -Wextra $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
 LDFLAGS       = -Wl,-Map,$(PRG).map
 
 OBJCOPY        = avr-objcopy
@@ -23,13 +51,21 @@ $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 clean:
-	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak
+	rm -rf *.o $(PRG).elf *.png *.pdf *.bak
 	rm -rf *.lst *.map $(EXTRA_CLEAN_FILES)
 
 lst:  $(PRG).lst
 
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
+
+# device programming
+
+program: $(PRG).elf
+	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) \
+	  -p $(MCU_TARGET) -P $(AVRDUDE_PORT) \
+	  $(AVRDUDE_ADDITIONAL) \
+	  -U $(PRG).elf
 
 # Rules for building the .text rom images
 
@@ -64,20 +100,3 @@ esrec: $(PRG)_eeprom.srec
 
 %_eeprom.bin: %.elf
 	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O binary $< $@
-
-# Every thing below here is used by avr-libc's build system and can be ignored
-# by the casual user.
-
-JPEGFILES               = stdiodemo-setup.jpg
-
-JPEG2PNM                = jpegtopnm
-PNM2EPS                 = pnmtops
-JPEGRESOLUTION          = 180
-EXTRA_CLEAN_FILES       = *.hex *.bin *.srec *.eps
-
-dox: ${JPEGFILES:.jpg=.eps}
-
-%.eps: %.jpg
-	$(JPEG2PNM) $< |\
-	$(PNM2EPS) -noturn -dpi $(JPEGRESOLUTION) -equalpixels \
-	> $@

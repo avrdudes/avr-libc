@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -136,8 +135,10 @@ Functions</h2></td></tr>
 <tr class="separator:gadb8c83badc195efc1229799391fececc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae017047d6d0a688ccb622ff062dcd230"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gae017047d6d0a688ccb622ff062dcd230">labs</a> (long __i)</td></tr>
 <tr class="separator:gae017047d6d0a688ccb622ff062dcd230"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf6f6b867ea6ce0dc4de2b01e949ac3d5"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5">bsearch</a> (const void *__key, const void *__base, size_t __nmemb, size_t __size, int(*__compar)(const void *, const void *))</td></tr>
-<tr class="separator:gaf6f6b867ea6ce0dc4de2b01e949ac3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dade76e115188d17eac92d2fef7f8d1"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga5dade76e115188d17eac92d2fef7f8d1">llabs</a> (long long __i)</td></tr>
+<tr class="separator:ga5dade76e115188d17eac92d2fef7f8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9accd4525ec4c3f0484c87302ff56035"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035">bsearch</a> (const void *__key, const void *__base, size_t __nmemb, size_t __size, <a class="el" href="group__avr__stdlib.html#ga35e28bfcc8d641e0eebd66f4dc559a3f">__compar_fn_t</a> __compar)</td></tr>
+<tr class="separator:ga9accd4525ec4c3f0484c87302ff56035"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7486ea9a8a90ac6b93bed37d08ebbd9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structdiv__t.html">div_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga7486ea9a8a90ac6b93bed37d08ebbd9e">div</a> (int __num, int __denom) __asm__(&quot;__divmodhi4&quot;)</td></tr>
 <tr class="separator:ga7486ea9a8a90ac6b93bed37d08ebbd9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5b688b463f9faaa82f31ac7587e06849"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structldiv__t.html">ldiv_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga5b688b463f9faaa82f31ac7587e06849">ldiv</a> (long __num, long __denom) __asm__(&quot;__divmodsi4&quot;)</td></tr>
@@ -219,6 +220,8 @@ Variables</h2></td></tr>
 <tr class="separator:gacfa0628fac4940c39a8a81947a6c116f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5a277fdc08e38ae3a42938db099298f7"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga5a277fdc08e38ae3a42938db099298f7">sqrtu32_floor</a> (unsigned long radic)</td></tr>
 <tr class="separator:ga5a277fdc08e38ae3a42938db099298f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf1a74f28fd530dd6e0fe62c655c8a515"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaf1a74f28fd530dd6e0fe62c655c8a515">sqrtu64_floor</a> (unsigned long long radic)</td></tr>
+<tr class="separator:gaf1a74f28fd530dd6e0fe62c655c8a515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa9396cd11c895591e6bb051d121a6db0"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaa9396cd11c895591e6bb051d121a6db0">itoa</a> (int val, char *s, int radix)</td></tr>
 <tr class="separator:gaa9396cd11c895591e6bb051d121a6db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3bd31f0d9a9127548b734e7ca03cc6df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga3bd31f0d9a9127548b734e7ca03cc6df">RANDOM_MAX</a>&#160;&#160;&#160;0x7FFFFFFF</td></tr>
@@ -367,7 +370,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Comparision function type for <a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort()</a>, just for convenience. </p>
+<p>Comparision function type for <a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort()</a> and <a class="el" href="group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035">bsearch()</a>, just for convenience. </p>
 
 </div>
 </div>
@@ -387,7 +390,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="group__avr__stdlib.html#ga8dec7c95227ff149687066cf04029191">abort()</a> function causes abnormal program termination to occur. This realization disables interrupts and jumps to _exit() function with argument equal to 1. In the limited AVR environment, execution is effectively halted by entering an infinite loop. </p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga8dec7c95227ff149687066cf04029191">abort()</a> function causes abnormal program termination to occur. This realization disables interrupts and execution is effectively halted by entering an infinite loop. Static destructors and <a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a> registered functions are not executed. </p>
 
 </div>
 </div>
@@ -396,6 +399,9 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int abs </td>
@@ -405,6 +411,11 @@ Variables</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>The <a class="el" href="group__avr__stdlib.html#gadb8c83badc195efc1229799391fececc">abs()</a> function computes the absolute value of the integer <code>i</code>. </p><dl class="section note"><dt>Note</dt><dd>The <a class="el" href="group__avr__stdlib.html#gadb8c83badc195efc1229799391fececc">abs()</a> and <a class="el" href="group__avr__stdlib.html#gae017047d6d0a688ccb622ff062dcd230">labs()</a> functions are builtins of gcc. </dd></dl>
 
@@ -425,7 +436,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a> function registers function <em>func</em> to be run as part of the <code><a class="el" href="group__avr__stdlib.html#ga037e1211798125c945a26bfbfdf26b8f">exit()</a></code> function during <a class="el" href="mem_sections.html#sec_dot_fini">.fini8</a>. <a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a> calls malloc(). </p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a> function registers function <em>func</em> to be run as part of the <code><a class="el" href="group__avr__stdlib.html#ga037e1211798125c945a26bfbfdf26b8f">exit()</a></code> function during <a class="el" href="mem_sections.html#sec_dot_fini">.fini8</a>. <a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a> calls <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>. </p>
 
 </div>
 </div>
@@ -467,7 +478,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>The <a class="el" href="group__avr__stdlib.html#gae4ac57d05ab8e485c697da461745fb64">atoff()</a> function converts the initial portion of the string pointed to by <em>nptr</em> to <code>float</code> representation.</p>
 <p>It is equivalent to calling </p><div class="fragment"><div class="line"><a class="code hl_function" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof</a>(nptr, (<span class="keywordtype">char</span>**) 0); </div>
-<div class="ttc" id="agroup__avr__stdlib_html_ga699a1d102f9ea32765752559f978a590"><div class="ttname"><a href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof</a></div><div class="ttdeci">float strtof(const char *__nptr, char **__endptr)</div><div class="ttdef"><b>Definition:</b> strtod.c:120</div></div>
+<div class="ttc" id="agroup__avr__stdlib_html_ga699a1d102f9ea32765752559f978a590"><div class="ttname"><a href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof</a></div><div class="ttdeci">float strtof(const char *__nptr, char **__endptr)</div><div class="ttdef"><b>Definition:</b> strtof.c:129</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -535,8 +546,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="gaf6f6b867ea6ce0dc4de2b01e949ac3d5" name="gaf6f6b867ea6ce0dc4de2b01e949ac3d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf6f6b867ea6ce0dc4de2b01e949ac3d5">&#9670;&#160;</a></span>bsearch()</h2>
+<a id="ga9accd4525ec4c3f0484c87302ff56035" name="ga9accd4525ec4c3f0484c87302ff56035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9accd4525ec4c3f0484c87302ff56035">&#9670;&#160;</a></span>bsearch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -568,7 +579,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int(*)(const void *, const void *)&#160;</td>
+          <td class="paramtype"><a class="el" href="group__avr__stdlib.html#ga35e28bfcc8d641e0eebd66f4dc559a3f">__compar_fn_t</a>&#160;</td>
           <td class="paramname"><em>__compar</em>&#160;</td>
         </tr>
         <tr>
@@ -578,9 +589,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5">bsearch()</a> function searches an array of <code>nmemb</code> objects, the initial member of which is pointed to by <code>base</code>, for a member that matches the object pointed to by <code>key</code>. The size of each member of the array is specified by <code>size</code>.</p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035">bsearch()</a> function searches an array of <code>nmemb</code> objects, the initial member of which is pointed to by <code>base</code>, for a member that matches the object pointed to by <code>key</code>. The size of each member of the array is specified by <code>size</code>.</p>
 <p>The contents of the array should be in ascending sorted order according to the comparison function referenced by <code>compar</code>. The <code>compar</code> routine is expected to have two arguments which point to the key object and to an array member, in that order, and should return an integer less than, equal to, or greater than zero if the key object is found, respectively, to be less than, to match, or be greater than the array member.</p>
-<p>The <a class="el" href="group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5">bsearch()</a> function returns a pointer to a matching member of the array, or a null pointer if no match is found. If two members compare as equal, which member is matched is unspecified. </p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035">bsearch()</a> function returns a pointer to a matching member of the array, or a null pointer if no match is found. If two members compare as equal, which member is matched is unspecified. </p>
 
 </div>
 </div>
@@ -609,7 +620,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Allocate <code>nele</code> elements of <code>size</code> each. Identical to calling <code>malloc()</code> using <code>nele * size</code> as argument, except the allocated memory will be cleared to zero. </p>
+<p>Allocate <code>nele</code> elements of <code>size</code> each. Identical to calling <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a> using <code>nele * size</code> as argument (provided the product doesn't overflow), except the allocated memory will be cleared to zero. </p>
 
 </div>
 </div>
@@ -761,7 +772,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The free() function causes the allocated memory referenced by <code>ptr</code> to be made available for future allocations. If <code>ptr</code> is NULL, no action occurs. </p>
+<p><a class="anchor" id="a_free"></a>The free() function makes the memory referenced by <code>ptr</code> available for future allocations. The memory must have been allocated by a call to <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>, <a class="el" href="group__avr__stdlib.html#a_realloc">realloc()</a>, <a class="el" href="group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963">calloc()</a> or other functions like <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> or <a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a> that allocate dynamic memory on the heap. If <code>ptr</code> is NULL, no action occurs. </p>
 
 </div>
 </div>
@@ -901,6 +912,9 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">long labs </td>
@@ -910,6 +924,11 @@ Variables</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>The <a class="el" href="group__avr__stdlib.html#gae017047d6d0a688ccb622ff062dcd230">labs()</a> function computes the absolute value of the long integer <code>i</code>. </p><dl class="section note"><dt>Note</dt><dd>The <a class="el" href="group__avr__stdlib.html#gadb8c83badc195efc1229799391fececc">abs()</a> and <a class="el" href="group__avr__stdlib.html#gae017047d6d0a688ccb622ff062dcd230">labs()</a> functions are builtins of gcc. </dd></dl>
 
@@ -1028,6 +1047,33 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ga5dade76e115188d17eac92d2fef7f8d1" name="ga5dade76e115188d17eac92d2fef7f8d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5dade76e115188d17eac92d2fef7f8d1">&#9670;&#160;</a></span>llabs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long long llabs </td>
+          <td>(</td>
+          <td class="paramtype">long long&#160;</td>
+          <td class="paramname"><em>__i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The <a class="el" href="group__avr__stdlib.html#ga5dade76e115188d17eac92d2fef7f8d1">llabs()</a> function computes the absolute value of the 64-bit integer <code>i</code>. </p><dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.3 </dd></dl>
+
+</div>
+</div>
 <a id="gab3f54f0f4d5418ac640eb53d9fc067e6" name="gab3f54f0f4d5418ac640eb53d9fc067e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab3f54f0f4d5418ac640eb53d9fc067e6">&#9670;&#160;</a></span>lltoa()</h2>
 
@@ -1127,13 +1173,13 @@ Variables</h2></td></tr>
           <td class="memname">void * malloc </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>__size</em></td><td>)</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The malloc() function allocates <code>size</code> bytes of memory. If malloc() fails, a NULL pointer is returned.</p>
-<p>Note that malloc() does <em>not</em> initialize the returned memory to zero bytes.</p>
+<p><a class="anchor" id="a_malloc"></a> The malloc() function allocates <code>size</code> bytes of memory. If malloc() fails, a NULL pointer is returned.</p>
+<p>Note that malloc() does <em>not</em> initialize the returned memory to zero bytes. For that, see <a class="el" href="group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963">calloc()</a>.</p>
 <p>See the chapter about <a class="el" href="malloc.html">malloc() usage</a> for implementation details. </p>
 
 </div>
@@ -1196,10 +1242,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand()</a> function computes a sequence of pseudo-random integers in the range of 0 to <code>RAND_MAX</code> (as defined by the header file &lt;<a class="el" href="stdlib_8h.html">stdlib.h</a>&gt;).</p>
-<p>The <a class="el" href="group__avr__stdlib.html#gacceff9dc95bb3c5562dc9e61fc3d9075">srand()</a> function sets its argument <code>seed</code> as the seed for a new sequence of pseudo-random numbers to be returned by <a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand()</a>. These sequences are repeatable by calling <a class="el" href="group__avr__stdlib.html#gacceff9dc95bb3c5562dc9e61fc3d9075">srand()</a> with the same seed value.</p>
+<p>The <a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand()</a> function computes a sequence of pseudo-random integers in the range of 0 to <a class="el" href="group__avr__stdlib.html#ga690f251553b39fd4f31894826141b61a">RAND_MAX</a> (as defined by the header file &lt;<a class="el" href="stdlib_8h.html">stdlib.h</a>&gt;).</p>
+<p>The <a class="el" href="group__avr__stdlib.html#gacceff9dc95bb3c5562dc9e61fc3d9075">srand()</a> function sets its argument <code>seed</code> as the seed for a new sequence of pseudo-random numbers to be returned by <a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand()</a>. These sequences have a period of  
+2<sup>32</sup>&minus;1
+   and are repeatable by calling <a class="el" href="group__avr__stdlib.html#gacceff9dc95bb3c5562dc9e61fc3d9075">srand()</a> with the same seed value.</p>
 <p>If no seed value is provided, the functions are automatically seeded with a value of 1.</p>
-<p>In compliance with the C standard, these functions operate on <code>int</code> arguments. Since the underlying algorithm already uses 32-bit calculations, this causes a loss of precision. See <code><a class="el" href="group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd">random()</a></code> for an alternate set of functions that retains full 32-bit precision. </p>
+<p><a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand()</a> achieves a score of 100% in the <code>bbattery_SmallCrush</code> tests from the <a href="https://simul.iro.umontreal.ca/testu01/tu01.html">TestU01</a> suite.</p>
+<p>For the resource consumptions, see the <a class="el" href="benchmarks.html#bench_libc">libc benchmarks</a>. </p>
 
 </div>
 </div>
@@ -1237,9 +1286,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd">random()</a> function computes a sequence of pseudo-random integers in the range of 0 to <code>RANDOM_MAX</code> (as defined by the header file &lt;<a class="el" href="stdlib_8h.html">stdlib.h</a>&gt;).</p>
-<p>The <a class="el" href="group__avr__stdlib.html#ga4fca27496ca29c0a723d197696641eff">srandom()</a> function sets its argument <code>seed</code> as the seed for a new sequence of pseudo-random numbers to be returned by <a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand()</a>. These sequences are repeatable by calling <a class="el" href="group__avr__stdlib.html#ga4fca27496ca29c0a723d197696641eff">srandom()</a> with the same seed value.</p>
-<p>If no seed value is provided, the functions are automatically seeded with a value of 1. </p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd">random()</a> function computes a sequence of pseudo-random integers in the range of 0 to <a class="el" href="group__avr__stdlib.html#ga3bd31f0d9a9127548b734e7ca03cc6df">RANDOM_MAX</a> (as defined by the header file &lt;<a class="el" href="stdlib_8h.html">stdlib.h</a>&gt;).</p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga4fca27496ca29c0a723d197696641eff">srandom()</a> function sets its argument <code>seed</code> as the seed for a new sequence of pseudo-random numbers to be returned by <a class="el" href="group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd">random()</a>. These sequences have a period of  
+2<sup>31</sup>&minus;2
+   and are repeatable by calling <a class="el" href="group__avr__stdlib.html#ga4fca27496ca29c0a723d197696641eff">srandom()</a> with the same seed value.</p>
+<p>If no seed value is provided, the functions are automatically seeded with a value of 1.</p>
+<p>For the resource consumptions, see the <a class="el" href="benchmarks.html#bench_libc">libc benchmarks</a>. </p>
 
 </div>
 </div>
@@ -1287,9 +1339,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The realloc() function tries to change the size of the region allocated at <code>ptr</code> to the new <code>size</code> value. It returns a pointer to the new region. The returned pointer might be the same as the old pointer, or a pointer to a completely different region.</p>
+<p><a class="anchor" id="a_realloc"></a>The realloc() function tries to change the size of the region allocated at <code>ptr</code> to the new <code>size</code> value. It returns a pointer to the new region. The returned pointer might be the same as the old pointer, or a pointer to a completely different region.</p>
 <p>The contents of the returned region up to either the old or the new size value (whatever is less) will be identical to the contents of the old region, even in case a new region had to be allocated.</p>
-<p>It is acceptable to pass <code>ptr</code> as NULL, in which case realloc() will behave identical to malloc().</p>
+<p>It is acceptable to pass <code>ptr</code> as NULL, in which case realloc() will behave identical to <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>.</p>
 <p>If the new memory cannot be allocated, realloc() returns NULL, and the region at <code>ptr</code> will not be changed. </p>
 
 </div>
@@ -1329,6 +1381,25 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Returns the square root of the 32-bit value <code>radic</code>, rounded down to the next integral value. </dd></dl>
+
+</div>
+</div>
+<a id="gaf1a74f28fd530dd6e0fe62c655c8a515" name="gaf1a74f28fd530dd6e0fe62c655c8a515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf1a74f28fd530dd6e0fe62c655c8a515">&#9670;&#160;</a></span>sqrtu64_floor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long sqrtu64_floor </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramname"><em>radic</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Returns the square root of the 64-bit value <code>radic</code>, rounded down to the next integral value. </dd></dl>
 
 </div>
 </div>
@@ -1395,8 +1466,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="group__avr__stdlib.html#ga5ee4d110a3bb55d2eadda05e3ebedf8a">strtod()</a> function is similar to <a class="el" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof()</a>, except that the conversion result is of type <code>double</code> instead of <code>float</code>.</p>
-<p><a class="el" href="group__avr__stdlib.html#ga5ee4d110a3bb55d2eadda05e3ebedf8a">strtod()</a> is currently only supported when <code>double</code> is a 32-bit type. </p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga5ee4d110a3bb55d2eadda05e3ebedf8a">strtod()</a> function is similar to <a class="el" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof()</a>, except that the conversion result is of type <code>double</code> instead of <code>float</code>. </p>
 
 </div>
 </div>
@@ -1500,8 +1570,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="group__avr__stdlib.html#ga61043ae34c33c61780a2d9c52f065782">strtold()</a> function is similar to <a class="el" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof()</a>, except that the conversion result is of type <code>long</code> <code>double</code> instead of <code>float</code>.</p>
-<p><a class="el" href="group__avr__stdlib.html#ga61043ae34c33c61780a2d9c52f065782">strtold()</a> is currently only supported when <code>long</code> <code>double</code> is a 32-bit type. </p>
+<p>The <a class="el" href="group__avr__stdlib.html#ga61043ae34c33c61780a2d9c52f065782">strtold()</a> function is similar to <a class="el" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof()</a>, except that the conversion result is of type <code>long</code> <code>double</code> instead of <code>float</code>. </p>
 
 </div>
 </div>
@@ -1660,8 +1729,10 @@ Variables</h2></td></tr>
 <p>Convert an unsigned 64-bit integer to a string. </p>
 <p>The function <a class="el" href="group__avr__stdlib.html#gab47b5d70f2429fb71c84dac6743f1819" title="Convert an unsigned 64-bit integer to a string.">ulltoa()</a> writes the ASCII representation of the unsigned 64-bit integer <code>val</code> to a string starting at <code>s</code>.</p>
 <p>A very rough estimation of the execution time is</p>
-<p>&#160;&#160;&#160;&#160;<em>Cycles</em> &asymp; 950 + 23&middot;<em>N</em> + 8.3&middot;<em>N</em><sup>2</sup>&middot;log(<em>radix</em>) &plusmn; 400</p>
-<p>where <em>N</em> denotes the number of digits in the result, and log stands for the Natural Logarithm. This means a decimal conversion can take up to 9000 cycles, a hexadecimal conversions can take up to 7800 cycles, and a binary conversion can take more than 27000 cycles.</p>
+<p> 
+<i>Cycles</i> &asymp; 950 + 23&middot;<i>N</i> + 8.3&middot;<i>N</i><sup>2</sup>&middot;log(<i>radix</i>) &plusmn; 400
+  </p>
+<p>where <em>N</em> denotes the number of digits in the result, and <em>log</em> stands for the Natural Logarithm. This means a decimal conversion can take up to 9000 cycles, a hexadecimal conversions can take up to 7800 cycles, and a binary conversion can take more than 27000 cycles.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">val</td><td>An unsigned 64-bit integral value for which the ASCII representation is computed.</td></tr>
@@ -1819,7 +1890,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><code>malloc()</code> <a class="el" href="malloc.html#malloc_tunables">tunable</a>. </p>
+<p><a class="el" href="malloc.html#malloc_tunables">tunable</a> for <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>. Default value is __heap_end, which is weakly defined to 0 in the startup code. </p>
 
 </div>
 </div>
@@ -1842,7 +1913,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><code>malloc()</code> <a class="el" href="malloc.html#malloc_tunables">tunable</a>. </p>
+<p><a class="el" href="malloc.html#malloc_tunables">tunable</a> for <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>. Default value is <a class="el" href="mem_sections.html#__heap_start">__heap_start</a>. </p>
 
 </div>
 </div>
@@ -1865,7 +1936,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><code>malloc()</code> <a class="el" href="malloc.html#malloc_tunables">tunable</a>. </p>
+<p><a class="el" href="malloc.html#malloc_tunables">tunable</a> for <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>. Default value is 32 bytes. </p>
 
 </div>
 </div>
@@ -1873,7 +1944,7 @@ Variables</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:10 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

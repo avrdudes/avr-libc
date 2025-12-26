@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.3.0git</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,21 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documen&shy;tation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
     </td>
-    <td align="right" colspan=2><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="15%"><a href="index.html"><h2>Main Page</h2></a></td>
-    <td align="center" width="15%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="15%"><a href="modules.html"><h2>Library Refe&shy;rence</h2></a></td>
-    <td align="center" width="8%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="15%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="8%"><a href="files.html"><h2>File List</h2></a></td>
-    <td align="center" width="8%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -103,7 +102,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="textblock"><h1><a class="anchor" id="overview_introduction"></a>
 Introduction</h1>
 <p>Welcome to the open source software development toolset for the Microchip (formerly Atmel) AVR!</p>
-<p>There is not a single tool that provides everything needed to develop software for the AVR. It takes many tools working together. Collectively, the group of tools are called a toolset, or commonly a toolchain, as the tools are chained together to produce the final executable application for the AVR microcontroller.</p>
+<p>There is not a single tool that provides everything needed to develop software for the AVR. It takes many tools working together. Collectively, this group of tools is called a toolset, or commonly a toolchain, as the tools are chained together to produce the final executable application for the AVR microcontroller.</p>
 <p>The following sections provide an overview of all of these tools. You may be used to cross-compilers that provide everything with a GUI front-end, and not know what goes on "underneath the hood". You may be coming from a desktop or server computer background and not used to embedded systems. Or you may be just learning about the most common software development toolchain available on Unix and Linux systems. Hopefully the following overview will be helpful in putting everything in perspective.</p>
 <h1><a class="anchor" id="overview_fsf_and_gnu"></a>
 FSF and GNU</h1>
@@ -116,10 +115,10 @@ its GNU/Linux variant." The FSF remains the primary sponsor of the GNU project.<
 <p>One of the main projects of the GNU system is the GNU Compiler Collection, or GCC, and its sister project, GNU Binutils. These two open source projects provide a foundation for a software development toolchain. Note that these projects were designed to originally run on Unix-like systems.</p>
 <h1><a class="anchor" id="overview_gcc"></a>
 GCC</h1>
-<p>GCC stands for GNU Compiler Collection. GCC is highly flexible compiler system. It has different compiler front-ends for different languages. It has many back-ends that generate assembly code for many different processors and host operating systems. All share a common "middle-end", containing the generic parts of the compiler, including a lot of optimizations.</p>
+<p>GCC stands for GNU Compiler Collection. GCC is a highly flexible compiler system. It has different compiler front-ends for different languages. It has many back-ends that generate assembly code for many different processors and host operating systems. All share a common "middle-end", containing the generic parts of the compiler, including a lot of optimizations.</p>
 <p>In GCC, a <em>host</em> system is the system (processor/OS) that the compiler runs on. A <em>target</em> system is the system that the compiler compiles code for. And, a <em>build</em> system is the system that the compiler is built (from source code) on. If a compiler has the same system for <em>host</em> and for <em>target</em>, it is known as a <em>native</em> compiler. If a compiler has different systems for <em>host</em> and <em>target</em>, it is known as a cross-compiler. (And if all three, <em>build</em>, <em>host</em>, and <em>target</em> systems are different, it is known as a Canadian cross compiler, but we won't discuss that here.) When GCC is built to execute on a <em>host</em> system such as FreeBSD, Linux, or Windows, and it is built to generate code for the AVR microcontroller <em>target</em>, then it is a cross compiler, and this version of GCC is commonly known as "AVR GCC". In documentation, or discussion, AVR GCC is used when referring to GCC targeting specifically the AVR, or something that is AVR specific about GCC. The term "GCC" is usually used to refer to something generic about GCC, or about GCC as a whole.</p>
 <p>GCC is different from most other compilers. GCC focuses on translating a high-level language to the target assembly only. AVR GCC has three available compilers for the AVR: C language, C++, and Ada. The compiler itself does not assemble or link the final code.</p>
-<p>GCC is also known as a "driver" program, in that it knows about, and drives other programs seamlessly to create the final output. The assembler, and the linker are part of another open source project called GNU Binutils. GCC knows how to drive the GNU assembler (gas) to assemble the output of the compiler. GCC knows how to drive the GNU linker (ld) to link all of the object modules into a final executable.</p>
+<p>GCC is also known as a "driver" program, in that it knows about, and drives other programs seamlessly to create the final output. The assembler and the linker are parts of another open source project called GNU Binutils. GCC knows how to drive the GNU assembler (gas) to assemble the output of the compiler. GCC knows how to drive the GNU linker (ld) to link all of the object modules into a final executable.</p>
 <p>The two projects, GCC and Binutils, are very much interrelated and many of the same volunteers work on both open source projects.</p>
 <p>When GCC is built for the AVR target, the actual program names are prefixed with "avr-". So the actual executable name for AVR GCC is: avr-gcc. The name "avr-gcc" is used in documentation and discussion when referring to the program itself and not just the whole AVR GCC system.</p>
 <p>See the GCC Web Site and GCC User Manual for more information about GCC.</p>
@@ -127,24 +126,63 @@ GCC</h1>
 GNU Binutils</h1>
 <p>The name GNU Binutils stands for "Binary Utilities". It contains the GNU assembler (gas), and the GNU linker (ld), but also contains many other utilities that work with binary files that are created as part of the software development toolchain.</p>
 <p>Again, when these tools are built for the AVR target, the actual program names are prefixed with "avr-". For example, the assembler program name, for a native assembler is "as" (even though in documentation the GNU assembler is commonly referred to as "gas"). But when built for an AVR target, it becomes "avr-as". Below is a list of the programs that are included in Binutils:</p>
-<dl class="section user"><dt>avr-as</dt><dd>The Assembler.</dd></dl>
-<dl class="section user"><dt>avr-ld</dt><dd>The Linker.</dd></dl>
-<dl class="section user"><dt>avr-ar</dt><dd>Create, modify, and extract from libraries (archives).</dd></dl>
-<dl class="section user"><dt>avr-ranlib</dt><dd>Generate index to library (archive) contents.</dd></dl>
-<dl class="section user"><dt>avr-objcopy</dt><dd>Copy and translate object files to different formats.</dd></dl>
-<dl class="section user"><dt>avr-objdump</dt><dd>Display information from object files including disassembly.</dd></dl>
-<dl class="section user"><dt>avr-size</dt><dd>List section sizes and total size.</dd></dl>
-<dl class="section user"><dt>avr-nm</dt><dd>List symbols from object files.</dd></dl>
-<dl class="section user"><dt>avr-strings</dt><dd>List printable strings from files.</dd></dl>
-<dl class="section user"><dt>avr-strip</dt><dd>Discard symbols from files.</dd></dl>
-<dl class="section user"><dt>avr-readelf</dt><dd>Display the contents of ELF format files.</dd></dl>
-<dl class="section user"><dt>avr-addr2line</dt><dd>Convert addresses to file and line.</dd></dl>
-<dl class="section user"><dt>avr-c++filt</dt><dd>Filter to demangle encoded C++ symbols.</dd></dl>
+<dl>
+<dt><code>avr-as</code> </dt>
+<dd><p class="startdd">The Assembler.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-ld</code> </dt>
+<dd><p class="startdd">The Linker.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-ar</code> </dt>
+<dd><p class="startdd">Create, modify, and extract from libraries (archives).</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-ranlib</code> </dt>
+<dd><p class="startdd">Generate index to library (archive) contents.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-objcopy</code> </dt>
+<dd><p class="startdd">Copy and translate object files to different formats.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-objdump</code> </dt>
+<dd><p class="startdd">Display information from object files including disassembly.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-size</code> </dt>
+<dd><p class="startdd">List section sizes and total size.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-nm</code> </dt>
+<dd><p class="startdd">List symbols from object files.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-strings</code> </dt>
+<dd><p class="startdd">List printable strings from files.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-strip</code> </dt>
+<dd><p class="startdd">Discard symbols from files.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-readelf</code> </dt>
+<dd><p class="startdd">Display the contents of ELF format files.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-addr2line</code> </dt>
+<dd><p class="startdd">Convert addresses to file and line.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>avr-c++filt</code> </dt>
+<dd>Filter to demangle encoded C++ symbols. </dd>
+</dl>
 <h1><a class="anchor" id="overview_avr-libc"></a>
 AVR-LibC</h1>
 <p>GCC and Binutils provides a lot of the tools to develop software, but there is one critical component that they do not provide: a Standard C Library.</p>
 <p>There are different open source projects that provide a Standard C Library depending upon your system time, whether for a native compiler (GNU Libc), for some other embedded system (Newlib), or for some versions of Linux (uCLibc). The open source AVR toolchain has its own Standard C Library project: AVR-LibC.</p>
-<p>AVR-LibC provides many of the same functions found in a regular Standard C Library and many additional library functions that is specific to an AVR. Some of the Standard C Library functions that are commonly used on a PC environment have limitations or additional issues that a user needs to be aware of when used on an embedded system.</p>
+<p>AVR-LibC provides many of the same functions found in a regular Standard C Library and many additional library functions that are specific to AVR. Some of the Standard C Library functions that are commonly used on a PC environment have limitations or additional issues that a user needs to be aware of when used on an embedded system.</p>
 <p>AVR-LibC also contains the most documentation about the whole AVR toolchain.</p>
 <h1><a class="anchor" id="overview_building_software"></a>
 Building Software</h1>
@@ -164,6 +202,9 @@ AVaRICE</h1>
 <h1><a class="anchor" id="overview_simulavr"></a>
 SimulAVR</h1>
 <p>SimulAVR is an AVR simulator used as a back-end with AVR GDB.</p>
+<h1><a class="anchor" id="overview_avrtest"></a>
+AVRtest</h1>
+<p>AVRtest is a fast AVR core simulator used to test AVR GCC and AVR-LibC.</p>
 <h1><a class="anchor" id="overview_utilities"></a>
 Utilities</h1>
 <p>There are also other optional utilities available that may be useful to add to your toolset.</p>
@@ -172,8 +213,9 @@ Utilities</h1>
 <h1><a class="anchor" id="overview_distros"></a>
 Toolchain Distributions (Distros)</h1>
 <p>All of the various open source projects that comprise the entire toolchain are normally distributed as source code. It is left up to the user to build the tool application from its source code. This can be a very daunting task to any potential user of these tools.</p>
-<p>Luckily there are people who help out in this area. Volunteers take the time to build the application from source code on particular host platforms and sometimes packaging the tools for convenient installation by the end user. These packages contain the binary executables of the tools, pre-made and ready to use. These packages are known as "distributions" of the AVR toolchain, or by a more shortened name, "distros".</p>
+<p>Luckily, there are people who help out in this area. Volunteers take the time to build the application from source code on particular host platforms and sometimes packaging the tools for convenient installation by the end user. These packages contain the binary executables of the tools, pre-made and ready to use. These packages are known as "distributions" of the AVR toolchain, or by a more shortened name, "distros".</p>
 <p>AVR toolchain distros are available on FreeBSD, Windows, Mac OS X, and certain flavors of Linux.</p>
+<p>For details on the present distribution, see the <a class="el" href="FAQ.html#faq_toolchain_version">FAQ</a>.</p>
 <h1><a class="anchor" id="overview_open_source"></a>
 Open Source</h1>
 <p>All of these tools, from the original source code in the multitude of projects, to the various distros, are put together by many, many volunteers. All of these projects could always use more help from other people who are willing to volunteer some of their time. There are many different ways to help, for people with varying skill levels, abilities, and available time.</p>
@@ -186,7 +228,7 @@ Open Source</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2025 20:40:09 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
