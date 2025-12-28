@@ -444,6 +444,20 @@ __init:
 #else
 	;; Pull in __call_main from the device lib to .init9
 	.global __call_main
+	;; Issue #1060: Since AVR-LibC v2.3.0 we have the call of main() in
+	;; lib<mcu>.a's __call_main which moved referencing main() from crt<mcu>.o
+	;; to lib<mcu>.a.  This can cause problems with environments which assert
+	;; that main() in referenced by the startup-code and not in a library.
+	;; This is the case for Arduino which defines main() in the core.a lib.
+	;; As the linker sees modules + archives provided something like
+	;;    crt<mcu>.o -lcore --start-group -lgcc -lm -lc -l<mcu> --end-group
+	;; main() is referenced /after/ core.a.  The proper solution to such
+	;; back-and-forth dependencies is to wrap core.a and the libs that are
+	;; referencing it in a group.  What also works for non-LTO builds is to
+	;; reference main() here in crt<mcu>.o.  For LTO builds it is not clear
+	;; what the very problem is, but a fix / work-around is to build the
+	;; main() module with -fno-lto or with -ffat-lto-objects.
+	.global main
 #endif /* CRT self contained */
 
 ;	.endfunc

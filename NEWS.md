@@ -8,9 +8,19 @@
 
 ## Issues closed
 
+- Arduino assumes that main() is referenced from the startup code, which
+  is no more true since calling main() happens in lib<mcu>.a since v.2.3.0.
+  The fix adds a reference to main() in crt<mcu>.o, though there may still be
+  problems in LTO builds.  Building the main() module with -ffat-lto-objects
+  might mitigate the problem, but to date it's unknown whether there is a
+  better approach ([#1060][1060]).
+
 ## Pull Requests
 
 ## Other Changes
+
+[1060]: https://github.com/avrdudes/avr-libc/issues/1060
+
 
 # Changes in AVR-LibC v2.3.0
 
